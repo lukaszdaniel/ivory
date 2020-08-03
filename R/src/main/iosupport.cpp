@@ -75,7 +75,7 @@ static bool NextReadBufferListItem(IoBuffer *iob)
 HIDDEN bool R_IoBufferWriteReset(IoBuffer *iob)
 {
     if (iob == nullptr || iob->start_buf == nullptr)
-	return false;
+        return false;
     iob->write_buf = iob->start_buf;
     iob->write_ptr = iob->write_buf->buf;
     iob->write_offset = 0;
@@ -195,7 +195,7 @@ static void transferChars(unsigned char *p, const char *q)
 /* respect encoding override from parser invocation - do_parse */
 static const char *translateCharWithOverride(SEXP x)
 {
-    if (!IS_LATIN1(x) && !mbcslocale && known_to_be_utf8)
+    if (!x->isLatin1() && !mbcslocale && known_to_be_utf8)
         /* A hack to allow UTF-8 string literals, comments when
 	   parsing on Windows. Note that the parser cannot handle
 	   invalid characters when running in UTF-8 locale. */
@@ -255,20 +255,24 @@ HIDDEN bool R_TextBufferFree(TextBuffer *txtb)
 HIDDEN int R_TextBufferGetc(TextBuffer *txtb)
 {
     if (txtb->buf == nullptr)
-	return EOF;
-    if (*(txtb->bufp) == '\0') {
-	if (txtb->offset == txtb->ntext) {
-	    txtb->buf = nullptr;
-	    return EOF;
-	} else {
-	    const void *vmax = vmaxget();
-	    transferChars(txtb->buf,
-			  translateCharWithOverride(STRING_ELT(txtb->text,
-			                                       txtb->offset)));
-	    txtb->bufp = txtb->buf;
-	    txtb->offset++;
-	    vmaxset(vmax);
-	}
+        return EOF;
+    if (*(txtb->bufp) == '\0')
+    {
+        if (txtb->offset == txtb->ntext)
+        {
+            txtb->buf = nullptr;
+            return EOF;
+        }
+        else
+        {
+            const void *vmax = vmaxget();
+            transferChars(txtb->buf,
+                          translateCharWithOverride(STRING_ELT(txtb->text,
+                                                               txtb->offset)));
+            txtb->bufp = txtb->buf;
+            txtb->offset++;
+            vmaxset(vmax);
+        }
     }
     return *txtb->bufp++;
 }

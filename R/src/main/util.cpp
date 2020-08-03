@@ -118,7 +118,7 @@ SEXP Rf_asChar(SEXP x)
 	    int w, d, e, wi, di, ei;
 	    char buf[MAXELTSIZE];  /* Probably 100 would suffice */
 
-	    switch (TYPEOF(x)) {
+	    switch (x->sexptype()) {
 	    case LGLSXP:
 		if (LOGICAL(x)[0] == NA_LOGICAL)
 		    return NA_STRING;
@@ -145,9 +145,9 @@ SEXP Rf_asChar(SEXP x)
 	    default:
 		return NA_STRING;
 	    }
-	} else if(TYPEOF(x) == CHARSXP) {
+	} else if(x->sexptype() == CHARSXP) {
 	    return x;
-	} else if(TYPEOF(x) == SYMSXP)
+	} else if(x->sexptype() == SYMSXP)
 	    return PRINTNAME(x);
     return NA_STRING;
 }
@@ -318,7 +318,7 @@ NORET SEXP Rf_type2symbol(SEXPTYPE t)
 }
 #endif
 
-HIDDEN NORET void UNIMPLEMENTED_TYPEt(const char *s, SEXPTYPE t)
+HIDDEN NORET void UNIMPLEMENTED_TYPE(const char *s, const SEXPTYPE t)
 {
     for (int i = 0; TypeTable[i].str; i++) {
 	if (TypeTable[i].type == t)
@@ -329,7 +329,7 @@ HIDDEN NORET void UNIMPLEMENTED_TYPEt(const char *s, SEXPTYPE t)
 
 NORET void UNIMPLEMENTED_TYPE(const char *s, const SEXP x)
 {
-    UNIMPLEMENTED_TYPEt(s, TYPEOF(x));
+    UNIMPLEMENTED_TYPE(s, x->sexptype());
 }
 
 #include <R_ext/Riconv.h>
@@ -438,7 +438,7 @@ Rboolean Rf_StringFalse(const char* name)
 /* used in bind.cpp and options.cpp */
 HIDDEN SEXP Rf_EnsureString(SEXP s)
 {
-    switch(TYPEOF(s)) {
+    switch(s->sexptype()) {
     case SYMSXP:
 	s = PRINTNAME(s);
 	break;
@@ -1153,9 +1153,9 @@ HIDDEN SEXP do_encoding(SEXP call, SEXP op, SEXP args, SEXP rho)
     n = XLENGTH(x);
     PROTECT(ans = allocVector(STRSXP, n));
     for (i = 0; i < n; i++) {
-	if(IS_BYTES(STRING_ELT(x, i))) tmp = "bytes";
-	else if(IS_LATIN1(STRING_ELT(x, i))) tmp = "latin1";
-	else if(IS_UTF8(STRING_ELT(x, i))) tmp = "UTF-8";
+	if(STRING_ELT(x, i)->isBytes()) tmp = "bytes";
+	else if(STRING_ELT(x, i)->isLatin1()) tmp = "latin1";
+	else if(STRING_ELT(x, i)->isUTF8()) tmp = "UTF-8";
 	else tmp = "unknown";
 	SET_STRING_ELT(ans, i, mkChar(tmp));
     }
@@ -1189,10 +1189,10 @@ HIDDEN SEXP do_setencoding(SEXP call, SEXP op, SEXP args, SEXP rho)
 	else if(streql(this_, "bytes")) ienc = CE_BYTES;
 	tmp = STRING_ELT(x, i);
 	if(tmp == NA_STRING) continue;
-	if (! ((ienc == CE_LATIN1 && IS_LATIN1(tmp)) ||
-	       (ienc == CE_UTF8 && IS_UTF8(tmp)) ||
-	       (ienc == CE_BYTES && IS_BYTES(tmp)) ||
-	       (ienc == CE_NATIVE && ! IS_LATIN1(tmp) && ! IS_UTF8(tmp))))
+	if (! ((ienc == CE_LATIN1 && tmp->isLatin1()) ||
+	       (ienc == CE_UTF8 && tmp->isUTF8()) ||
+	       (ienc == CE_BYTES && tmp->isBytes()) ||
+	       (ienc == CE_NATIVE && ! tmp->isLatin1() && ! tmp->isUTF8())))
 	    SET_STRING_ELT(x, i, mkCharLenCE(CHAR(tmp), LENGTH(tmp), ienc));
     }
     UNPROTECT(1);
@@ -1510,8 +1510,8 @@ HIDDEN SEXP do_validEnc(SEXP call, SEXP op, SEXP args, SEXP rho)
     int *lans = LOGICAL(ans);
     for (R_xlen_t i = 0; i < n; i++) {
 	SEXP p = STRING_ELT(x, i);
-	if (IS_BYTES(p) || IS_LATIN1(p)) lans[i] = 1;
-	else if (IS_UTF8(p) || utf8locale) lans[i] = utf8Valid(CHAR(p));
+	if (p->isBytes() || p->isLatin1()) lans[i] = 1;
+	else if (p->isUTF8() || utf8locale) lans[i] = utf8Valid(CHAR(p));
 	else if(mbcslocale) lans[i] = mbcsValid(CHAR(p));
 	else lans[i] = 1;
     }
@@ -1787,7 +1787,7 @@ int Rf_utf8toAdobeSymbol(char *out, const char *in) {
     symbolint = (int *) R_alloc(nc, sizeof(int));
     for (i = 0, j = 0; i < nc; i++, j++) {
 	/* Convert UTF8 to int */
-	used = mbrtoint(&tmp, s);
+	used = mbrtoint(tmp, s);
 	if (used < 0)
 	    error(_("invalid UTF-8 string"));
 	symbolint[j] = tmp;
@@ -1819,7 +1819,7 @@ const char* Rf_utf8Toutf8NoPUA(const char *in)
     char *p = result;
     for (i = 0; i < nChar; i++) {
 	/* Convert UTF8 char to int */
-	used = mbrtoint(&tmp, s);
+	used = mbrtoint(tmp, s);
 	/* Only re-encode if necessary
 	 * This is more efficient AND protects against input that is
 	 * NOT from Rf_AdobeSymbol2utf8(), e.g., plotmath on Windows
@@ -2062,7 +2062,7 @@ HIDDEN SEXP do_enc2(SEXP call, SEXP op, SEXP args, SEXP env)
 			   mkCharCE(translateCharUTF8(el), CE_UTF8));
 	} else if (ENC_KNOWN(el)) { /* enc2native */
 	    if (IS_ASCII(el) || IS_BYTES(el)) continue;
-	    if (known_to_be_latin1 && IS_LATIN1(el)) continue;
+	    if (known_to_be_latin1 && el->isLatin1()) continue;
 	    if (!duped) { PROTECT(ans = duplicate(ans)); duped = TRUE; }
 	    if (known_to_be_latin1)
 		SET_STRING_ELT(ans, i, mkCharCE(translateChar(el), CE_LATIN1));
@@ -2543,7 +2543,7 @@ HIDDEN SEXP do_findinterval(SEXP call, SEXP op, SEXP args, SEXP rho)
     right = CAR(args); args = CDR(args);
     inside = CAR(args);args = CDR(args);
     leftOp = CAR(args);
-    if(TYPEOF(xt) != REALSXP || TYPEOF(x) != REALSXP) error(_("invalid input"));
+    if(TYPEOF(xt) != REALSXP || x->sexptype() != REALSXP) error(_("invalid input"));
 #ifdef LONG_VECTOR_SUPPORT
     if (IS_LONG_VEC(xt))
 	error(_("long vector '%s' is not supported"), "vec");
@@ -2783,10 +2783,10 @@ static void str_signif(void *x, R_xlen_t n, const char *type, int width, int dig
 			*/
 			double xxx = fabs(xx), X;
 			iex = (int)floor(log10(xxx) + 1e-12);
-			X = fround(xxx/Rexp10((double)iex) + 1e-12,
+			X = fround(xxx/Rexp10(iex) + 1e-12,
 				   (double)(dig-1));
 			if(iex > 0 &&  X >= 10) {
-			    xx = X * Rexp10((double)iex);
+			    xx = X * Rexp10(iex);
 			    iex++;
 			}
 			if(iex == -4 && fabs(xx)< 1e-4) {/* VERY rare case */
@@ -2844,13 +2844,13 @@ static void str_signif_sexp(SEXP x, const char *type, int width, int digits,
 		     const char *format, const char *flag, char **result)
 {
     /* result + idx is the overall position of the chunk we're populating */
-    if(TYPEOF(x) == INTSXP) {
+    if(x->sexptype() == INTSXP) {
 	ITERATE_BY_REGION(x, px, idx, nb, int, INTEGER,
 			  {
 			      str_signif((void *) px, nb, type, width, digits,
 					 format, flag, result + idx);
 			  });
-    } else if (TYPEOF(x) == REALSXP) {
+    } else if (x->sexptype() == REALSXP) {
 	ITERATE_BY_REGION(x, px, idx, nb, double, REAL,
 			  {
 			      str_signif((void *) px, nb, type, width, digits,

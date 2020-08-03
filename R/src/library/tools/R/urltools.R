@@ -452,7 +452,9 @@ function(db, remote = TRUE, verbose = FALSE)
             msg <- table_of_HTTP_status_codes[s]
         }
         ## Look for redirected URLs
-        if (any(grepl("301 Moved Permanently", h, useBytes = TRUE))) {
+        if (any(grepl("301 Moved Permanently", h, useBytes = TRUE)) &&
+            !startsWith(u, "https://doi.org/") &&
+            !startsWith(u, "http://dx.doi.org/")) {
             ind <- grep("^[Ll]ocation: ", h, useBytes = TRUE)
             if (length(ind))
                 newLoc <- sub("^[Ll]ocation: ([^\r]*)\r\n", "\\1", h[max(ind)])
@@ -562,6 +564,7 @@ function(db, remote = TRUE, verbose = FALSE)
         ## 405 is HTTP not allowing HEAD requests
         ## maybe also skip 500, 503, 504 as likely to be temporary issues
         ind <- is.na(match(status, c(200L, 405L, NA))) |
+            nzchar(results[, 3L]) |
             nzchar(results[, 4L]) |
             nzchar(results[, 5L]) |
             nzchar(results[, 6L])

@@ -26,8 +26,8 @@
   and periodic interrupt checks.
  */
 
-#ifndef  R_EXT_ITERMACROS_H_
-#define  R_EXT_ITERMACROS_H_
+#ifndef R_EXT_ITERMACROS_H_
+#define R_EXT_ITERMACROS_H_
 
 #define LOOP_WITH_INTERRUPT_CHECK(LOOP, ncheck, n, ...)                              \
 	do                                                                               \

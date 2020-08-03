@@ -996,7 +996,7 @@ HIDDEN SEXP do_formatPOSIXlt(SEXP call, SEXP op, SEXP args, SEXP env)
 		if(ns > 6) ns = 6;
 		if(ns > 0) {
 		    /* truncate to avoid nuisances such as PR#14579 */
-		    double s = secs, t = Rexp10((double) ns);
+		    double s = secs, t = Rexp10(ns);
 		    s = ((int) (s*t))/t;
 		    sprintf(p2, "%0*.*f", ns+3, ns, s);
 		    strcat(buf2, p+nused);

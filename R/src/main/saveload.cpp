@@ -470,15 +470,16 @@ static SEXP OffsetToNode(int offset, NodeInfo &node)
 
     l = 0;
     r = node.NTotal - 1;
-    do {
-	m = (l + r) / 2;
-	if (offset < node.OldOffset[m])
-	    r = m - 1;
-	else
-	    l = m + 1;
-    }
-    while (offset != node.OldOffset[m] && l <= r);
-    if (offset == node.OldOffset[m]) return VECTOR_ELT(node.NewAddress, m);
+    do
+    {
+        m = (l + r) / 2;
+        if (offset < node.OldOffset[m])
+            r = m - 1;
+        else
+            l = m + 1;
+    } while (offset != node.OldOffset[m] && l <= r);
+    if (offset == node.OldOffset[m])
+        return VECTOR_ELT(node.NewAddress, m);
 
     /* Not supposed to happen: */
     warning(_("unresolved node during restore"));
@@ -1199,35 +1200,35 @@ static SEXP InCHARSXP(FILE *fp, InputRoutines *m, SaveLoadData *d)
 
 static SEXP NewReadVec(SEXPTYPE type, SEXP sym_table, SEXP env_table, FILE *fp, InputRoutines *m, SaveLoadData *d)
 {
-    int length, count;
+    int length_, count;
     SEXP my_vec;
 
-    length = m->InInteger(fp, d);
-    PROTECT(my_vec = allocVector(type, length));
+    length_ = m->InInteger(fp, d);
+    PROTECT(my_vec = allocVector(type, length_));
     switch(type) {
     case CHARSXP:
 	my_vec = InCHARSXP(fp, m, d);
 	break;
     case LGLSXP:
     case INTSXP:
-	InVec(fp, my_vec, SET_INTEGER_ELT, m->InInteger, length, d);
+	InVec(fp, my_vec, SET_INTEGER_ELT, m->InInteger, length_, d);
 	break;
     case REALSXP:
-	InVec(fp, my_vec, SET_REAL_ELT, m->InReal, length, d);
+	InVec(fp, my_vec, SET_REAL_ELT, m->InReal, length_, d);
 	break;
     case CPLXSXP:
-	InVec(fp, my_vec, SET_COMPLEX_ELT, m->InComplex, length, d);
+	InVec(fp, my_vec, SET_COMPLEX_ELT, m->InComplex, length_, d);
 	break;
     case STRSXP:
 	do {
 	    int cnt;
-	    for (cnt = 0; cnt < length(my_vec); ++cnt)
+	    for (cnt = 0; cnt < Rf_length(my_vec); ++cnt)
 		SET_STRING_ELT(my_vec, cnt, InCHARSXP(fp, m, d));
 	} while (0);
 	break;
     case VECSXP:
     case EXPRSXP:
-	for (count = 0; count < length; ++count)
+	for (count = 0; count < length_; ++count)
 	    SET_VECTOR_ELT(my_vec, count, NewReadItem(sym_table, env_table, fp, m, d));
 	break;
     default:
@@ -1892,7 +1893,7 @@ inline static int defaultSaveVersion()
 
 HIDDEN void R_SaveToFileV(SEXP obj, FILE *fp, int ascii, int version)
 {
-    SaveLoadData data = {{nullptr, 0, MAXELTSIZE}};
+    SaveLoadData data = {R_StringBuffer()};
 
     if (version == 1) {
 	if (ascii) {
@@ -1933,12 +1934,12 @@ HIDDEN void R_SaveToFile(SEXP obj, FILE *fp, int ascii)
 
     /* different handling of errors */
 
-#define return_and_free(X) {r = X; R_FreeStringBuffer(data.buffer); return r;}
+#define return_and_free(X) {r = X; data.buffer.R_FreeStringBuffer(); return r;}
 HIDDEN SEXP R_LoadFromFile(FILE *fp, int startup)
 {
     struct R_inpstream_st in;
     int magic;
-    SaveLoadData data = {{nullptr, 0, MAXELTSIZE}};
+    SaveLoadData data = {R_StringBuffer()};
     SEXP r;
 
     magic = R_ReadMagic(fp);
@@ -1972,7 +1973,7 @@ HIDDEN SEXP R_LoadFromFile(FILE *fp, int startup)
 	R_InitFileInPStream(&in, fp, R_pstream_xdr_format, nullptr, nullptr);
 	return_and_free(R_Unserialize(&in));
     default:
-	R_FreeStringBuffer(data.buffer);
+	data.buffer.R_FreeStringBuffer();
 	switch (magic) {
 	case R_MAGIC_EMPTY:
 	    error(_("restore file may be empty -- no data loaded"));

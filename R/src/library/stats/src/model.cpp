@@ -28,18 +28,14 @@
 #include "localization.h"
 
 /* inline-able versions, used just once! */
-R_INLINE static bool isUnordered_int(SEXP s)
+inline static bool isUnordered_int(SEXP s)
 {
-    return (TYPEOF(s) == INTSXP
-	    && inherits(s, "factor")
-	    && !inherits(s, "ordered"));
+	return (TYPEOF(s) == INTSXP && inherits(s, "factor") && !inherits(s, "ordered"));
 }
 
-R_INLINE static bool isOrdered_int(SEXP s)
+inline static bool isOrdered_int(SEXP s)
 {
-    return (TYPEOF(s) == INTSXP
-	    && inherits(s, "factor")
-	    && inherits(s, "ordered"));
+	return (TYPEOF(s) == INTSXP && inherits(s, "factor") && inherits(s, "ordered"));
 }
 
 /*
@@ -298,21 +294,22 @@ static void addvar(double *x, int nrx, int ncx, double *c, int nrc, int ncc)
     }
 }
 
-#define BUFSIZE 4096
+constexpr size_t BUFSIZE = 4096;
 
 static char *AppendString(char *buf, const char *str)
 {
-    while (*str)
-	*buf++ = *str++;
-    *buf = '\0';
-    return buf;
+	while (*str)
+		*buf++ = *str++;
+	*buf = '\0';
+	return buf;
 }
 
 static char *AppendInteger(char *buf, int i)
 {
-    sprintf(buf, "%d", i);
-    while(*buf) buf++;
-    return buf;
+	sprintf(buf, "%d", i);
+	while (*buf)
+		buf++;
+	return buf;
 }
 
 static SEXP ColumnNames(SEXP x)
@@ -987,7 +984,7 @@ static int n_xVars; // nesting level: use for indentation
 #endif
 
 // word size in *bits* :
-#define WORDSIZE (8*sizeof(int))
+constexpr size_t WORDSIZE = (8 * sizeof(int));
 
 //  Global "State" Variables for terms() computation :
 //  -------------------------------------------------
@@ -1030,7 +1027,7 @@ static int isOne(SEXP x)
 static int Seql2(SEXP a, SEXP b)
 {
     if (a == b) return 1;
-    if (IS_CACHED(a) && IS_CACHED(b) && ENC_KNOWN(a) == ENC_KNOWN(b))
+    if (a->isCached() && b->isCached() && a->encKnown() == b->encKnown())
 	return 0;
     else {
     	const void *vmax = vmaxget();
@@ -1298,7 +1295,7 @@ static void SetBit(SEXP term, int whichBit, int value)
  */
 static SEXP AllocTermSetBit1(SEXP var) { // NB: caller must PROTECT
     int whichBit = InstallVar(var);
-    if (nwords < (whichBit - 1)/WORDSIZE + 1)
+    if (nwords < int((whichBit - 1)/WORDSIZE) + 1)
 	error("AllocT..Bit1(%s): Need to increment nwords to %d. Should not happen!\n",
 		CHAR(STRING_ELT(deparse1line(var, FALSE), 0)),
 		nwords+1);

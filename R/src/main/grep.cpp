@@ -1441,9 +1441,9 @@ HIDDEN SEXP do_grepraw(SEXP call, SEXP op, SEXP args, SEXP env)
     /* currently we support only offset >= 1 */
     if (offset < 1)
 	error(_("invalid '%s' argument"), "offset");
-    if (!isRaw(pat))
+    if (!pat->isRaw_())
 	error(_("invalid '%s' argument"), "pattern");
-    if (!isRaw(text))
+    if (!text->isRaw_())
 	error(_("invalid '%s' argument"), "text");
     if (offset > (R_size_t) LENGTH(text))
 	return allocVector(INTSXP, 0);

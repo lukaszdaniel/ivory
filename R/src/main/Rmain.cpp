@@ -19,7 +19,7 @@
  */
 
 extern "C"
-int Rf_initialize_R(int ac, char **av); /* in ../unix/system.cpp */
+int Rf_initialize_R(int ac, char *av[]); /* in ../unix/system.cpp */
 
 #include <Rinterface.h>
 
@@ -31,8 +31,8 @@ int main(int ac, char **av)
     return 0;
 }
 
-	/* Declarations to keep f77 happy */
+    /* Declarations to keep f77 happy */
 
-int MAIN_(int ac, char **av)  {return 0;}
-int MAIN__(int ac, char **av) {return 0;}
-int __main(int ac, char **av) {return 0;}
+int MAIN_(int ac, char **av) { return 0; }
+int MAIN__(int ac, char **av) { return 0; }
+int __main(int ac, char **av) { return 0; }

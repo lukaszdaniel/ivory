@@ -529,8 +529,7 @@ HIDDEN
 DL_FUNC Rf_lookupCachedSymbol(const char *name, const char *pkg, int all)
 {
 #ifdef CACHE_DLL_SYM
-    int i;
-    for (i = 0; i < nCPFun; i++)
+    for (int i = 0; i < nCPFun; i++)
 	if (streql(name, CPFun[i].name) &&
 	    (all || streql(pkg, CPFun[i].pkg)))
 	    return CPFun[i].func;
@@ -681,40 +680,44 @@ static int addDLL(char *dpath, const char *DLLname, HINSTANCE handle)
 
 static Rf_DotCSymbol *Rf_lookupRegisteredCSymbol(DllInfo *info, const char *name)
 {
-    for(int i = 0; i < info->numCSymbols; i++) {
-	if(streql(name, info->CSymbols[i].name))
-	    return(&(info->CSymbols[i]));
+    for (int i = 0; i < info->numCSymbols; i++)
+    {
+        if (streql(name, info->CSymbols[i].name))
+            return (&(info->CSymbols[i]));
     }
     return nullptr;
 }
 
 static Rf_DotFortranSymbol *Rf_lookupRegisteredFortranSymbol(DllInfo *info, const char *name)
 {
-    for(int i = 0; i < info->numFortranSymbols; i++) {
-	if(streql(name, info->FortranSymbols[i].name))
-	    return(&(info->FortranSymbols[i]));
+    for (int i = 0; i < info->numFortranSymbols; i++)
+    {
+        if (streql(name, info->FortranSymbols[i].name))
+            return (&(info->FortranSymbols[i]));
     }
 
-    return (Rf_DotFortranSymbol*) nullptr;
+    return (Rf_DotFortranSymbol *)nullptr;
 }
 
 static Rf_DotCallSymbol *Rf_lookupRegisteredCallSymbol(DllInfo *info, const char *name)
 {
 
-    for(int i = 0; i < info->numCallSymbols; i++) {
-	if(streql(name, info->CallSymbols[i].name))
-	    return(&(info->CallSymbols[i]));
+    for (int i = 0; i < info->numCallSymbols; i++)
+    {
+        if (streql(name, info->CallSymbols[i].name))
+            return (&(info->CallSymbols[i]));
     }
-    return (Rf_DotCallSymbol*) nullptr;
+    return (Rf_DotCallSymbol *)nullptr;
 }
 
 static Rf_DotExternalSymbol *Rf_lookupRegisteredExternalSymbol(DllInfo *info, const char *name)
 {
-    for(int i = 0; i < info->numExternalSymbols; i++) {
-	if(streql(name, info->ExternalSymbols[i].name))
-	    return(&(info->ExternalSymbols[i]));
+    for (int i = 0; i < info->numExternalSymbols; i++)
+    {
+        if (streql(name, info->ExternalSymbols[i].name))
+            return (&(info->ExternalSymbols[i]));
     }
-    return (Rf_DotExternalSymbol*) nullptr;
+    return (Rf_DotExternalSymbol *)nullptr;
 }
 
 static DL_FUNC R_getDLLRegisteredSymbol(DllInfo *info, const char *name,
@@ -929,12 +932,12 @@ HIDDEN SEXP do_dynunload(SEXP call, SEXP op, SEXP args, SEXP env)
     return R_NilValue;
 }
 
-int R_moduleCdynload(const char *module, int local, int now)
+bool R_moduleCdynload(const char *module, int local, int now)
 {
     char dllpath[PATH_MAX], *p = getenv("R_HOME");
     DllInfo *res;
 
-    if(!p) return 0;
+    if(!p) return false;
 #ifdef R_ARCH
     snprintf(dllpath, PATH_MAX, "%s%smodules%s%s%s%s%s", p, FILESEP, FILESEP,
 	     R_ARCH, FILESEP, module, SHLIB_EXT);
@@ -946,16 +949,16 @@ int R_moduleCdynload(const char *module, int local, int now)
     if(!res)
 	warning(_("unable to load shared object '%s':\n  %s"),
 		dllpath, DLLerror);
-    return res ? 1 : 0;
+    return (res != nullptr);
 }
 
-int R_cairoCdynload(int local, int now)
+bool R_cairoCdynload(int local, int now)
 {
     char dllpath[PATH_MAX];
     const char *p = getenv("R_HOME"), *module = "cairo";
     DllInfo *res;
 
-    if(!p) return 0;
+    if(!p) return false;
 #ifdef R_ARCH
     snprintf(dllpath, PATH_MAX, "%s/library/grDevices/libs/%s/%s%s",
 	     p, R_ARCH, module, SHLIB_EXT);
@@ -967,7 +970,7 @@ int R_cairoCdynload(int local, int now)
     if(!res)
 	warning(_("unable to load shared object '%s':\n  %s"),
 		dllpath, DLLerror);
-    return res ? 1 : 0;
+    return (res != nullptr);
 }
 
 /**
@@ -1140,21 +1143,22 @@ HIDDEN SEXP R_getDllTable()
     int i;
     SEXP ans;
 
- again:
-    PROTECT(ans = allocVector(VECSXP, CountDLL));
-    for(i = 0; i < CountDLL; i++) {
-	SET_VECTOR_ELT(ans, i, Rf_MakeDLLInfo(&(LoadedDLL[i])));
-    }
-    setAttrib(ans, R_ClassSymbol, mkString("DLLInfoList"));
-    UNPROTECT(1);
+    do
+    {
+        PROTECT(ans = allocVector(VECSXP, CountDLL));
+        for (i = 0; i < CountDLL; i++)
+        {
+            SET_VECTOR_ELT(ans, i, Rf_MakeDLLInfo(&(LoadedDLL[i])));
+        }
+        setAttrib(ans, R_ClassSymbol, mkString("DLLInfoList"));
+        UNPROTECT(1);
 
-    /* There is a problem here: The allocations can cause gc, and gc
+        /* There is a problem here: The allocations can cause gc, and gc
        may result in no longer referenced DLLs being unloaded.  So
        CountDLL can be reduced during this loop.  A simple work-around
        is to just try again until CountDLL at the end is the same as
        it was at the beginning.  LT */
-    if (CountDLL != LENGTH(ans))
-	goto again;
+    } while (CountDLL != LENGTH(ans));
 
     return(ans);
 }

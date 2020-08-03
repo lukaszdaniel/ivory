@@ -93,14 +93,16 @@ SEXP Rdownload(SEXP args)
     }
 }
 
-HIDDEN Rconnection R_newurl(const char *description, const char * const mode, SEXP headers, int type)
+HIDDEN Rconnection R_newurl(const char *description, const char *const mode, SEXP headers, int type)
 {
-    if(!initialized) internet_Init();
-    if(initialized > 0)
-	return (*ptr->newurl)(description, mode, headers, type);
-    else {
-	error(_("internet routines cannot be loaded"));
-	return (Rconnection)0;
+    if (!initialized)
+        internet_Init();
+    if (initialized > 0)
+        return (*ptr->newurl)(description, mode, headers, type);
+    else
+    {
+        error(_("internet routines cannot be loaded"));
+        return (Rconnection)0;
     }
 }
 

@@ -177,63 +177,67 @@ static Rboolean url_open(Rconnection con)
 
 static void url_close(Rconnection con)
 {
-    UrlScheme type = ((Rurlconn)(con->connprivate))->type;
-    struct urlconn *uc = (urlconn*) con->connprivate;
-    switch(type) {
-    case HTTPsh:
-    case HTTPSsh:
-	if (uc && uc->headers) free(uc->headers);
-	in_R_HTTPClose(uc->ctxt);
-	break;
-    case FTPsh:
-	in_R_FTPClose(uc->ctxt);
-	break;
-    default:
-	break;
-    }
-    con->isopen = FALSE;
+	UrlScheme type = ((Rurlconn)(con->connprivate))->type;
+	struct urlconn *uc = (urlconn *)con->connprivate;
+	switch (type)
+	{
+	case HTTPsh:
+	case HTTPSsh:
+		if (uc && uc->headers)
+			free(uc->headers);
+		in_R_HTTPClose(uc->ctxt);
+		break;
+	case FTPsh:
+		in_R_FTPClose(uc->ctxt);
+		break;
+	default:
+		break;
+	}
+	con->isopen = FALSE;
 }
 
 static int url_fgetc_internal(Rconnection con)
 {
-    UrlScheme type = ((Rurlconn)(con->connprivate))->type;
-    void * ctxt = ((Rurlconn)(con->connprivate))->ctxt;
-    unsigned char c;
-    size_t n = 0; /* -Wall */
+	UrlScheme type = ((Rurlconn)(con->connprivate))->type;
+	void *ctxt = ((Rurlconn)(con->connprivate))->ctxt;
+	unsigned char c;
+	size_t n = 0; /* -Wall */
 
-    switch(type) {
-    case HTTPsh:
-    case HTTPSsh:
-	n = in_R_HTTPRead(ctxt, (char *)&c, 1);
-	break;
-    case FTPsh:
-	n = in_R_FTPRead(ctxt, (char *)&c, 1);
-	break;
-    default:
-	break;
-    }
-    return (n == 1) ? c : R_EOF;
+	switch (type)
+	{
+	case HTTPsh:
+	case HTTPSsh:
+		n = in_R_HTTPRead(ctxt, (char *)&c, 1);
+		break;
+	case FTPsh:
+		n = in_R_FTPRead(ctxt, (char *)&c, 1);
+		break;
+	default:
+		break;
+	}
+	return (n == 1) ? c : R_EOF;
 }
 
 static size_t url_read(void *ptr, size_t size, size_t nitems,
-		       Rconnection con)
+					   Rconnection con)
 {
-    UrlScheme type = ((Rurlconn)(con->connprivate))->type;
-    void * ctxt = ((Rurlconn)(con->connprivate))->ctxt;
-    size_t n = 0; /* -Wall */
+	UrlScheme type = ((Rurlconn)(con->connprivate))->type;
+	void *ctxt = ((Rurlconn)(con->connprivate))->ctxt;
+	size_t n = 0; /* -Wall */
 
-    switch(type) {
-    case HTTPsh:
-    case HTTPSsh:
-	n = in_R_HTTPRead(ctxt, static_cast<char *>(ptr), (int)(size*nitems));
-	break;
-    case FTPsh:
-	n = in_R_FTPRead(ctxt, static_cast<char *>(ptr), (int)(size*nitems));
-	break;
-    default:
-	break;
-    }
-    return n/size;
+	switch (type)
+	{
+	case HTTPsh:
+	case HTTPSsh:
+		n = in_R_HTTPRead(ctxt, static_cast<char *>(ptr), (int)(size * nitems));
+		break;
+	case FTPsh:
+		n = in_R_FTPRead(ctxt, static_cast<char *>(ptr), (int)(size * nitems));
+		break;
+	default:
+		break;
+	}
+	return n / size;
 }
 
 #ifdef _WIN32
@@ -303,55 +307,58 @@ static Rboolean url_open2(Rconnection con)
 
 static void url_close2(Rconnection con)
 {
-    UrlScheme type = ((Rurlconn)(con->connprivate))->type;
-    switch(type) {
-    case HTTPsh:
-    case HTTPSsh:
-    case FTPsh:
-	in_R_HTTPClose2(((Rurlconn)(con->connprivate))->ctxt);
-	break;
-    default:
-	break;
-    }
-    con->isopen = FALSE;
+	UrlScheme type = ((Rurlconn)(con->connprivate))->type;
+	switch (type)
+	{
+	case HTTPsh:
+	case HTTPSsh:
+	case FTPsh:
+		in_R_HTTPClose2(((Rurlconn)(con->connprivate))->ctxt);
+		break;
+	default:
+		break;
+	}
+	con->isopen = FALSE;
 }
 
 static int url_fgetc_internal2(Rconnection con)
 {
-    UrlScheme type = ((Rurlconn)(con->connprivate))->type;
-    void * ctxt = ((Rurlconn)(con->connprivate))->ctxt;
-    unsigned char c;
-    size_t n = 0; /* -Wall */
+	UrlScheme type = ((Rurlconn)(con->connprivate))->type;
+	void *ctxt = ((Rurlconn)(con->connprivate))->ctxt;
+	unsigned char c;
+	size_t n = 0; /* -Wall */
 
-    switch(type) {
-    case HTTPsh:
-    case HTTPSsh:
-    case FTPsh:
-	n = in_R_HTTPRead2(ctxt, (char *)&c, 1);
-	break;
-    default:
-	break;
-    }
-    return (n == 1) ? c : R_EOF;
+	switch (type)
+	{
+	case HTTPsh:
+	case HTTPSsh:
+	case FTPsh:
+		n = in_R_HTTPRead2(ctxt, (char *)&c, 1);
+		break;
+	default:
+		break;
+	}
+	return (n == 1) ? c : R_EOF;
 }
 
 static size_t url_read2(void *ptr, size_t size, size_t nitems,
-			Rconnection con)
+						Rconnection con)
 {
-    UrlScheme type = ((Rurlconn)(con->connprivate))->type;
-    void * ctxt = ((Rurlconn)(con->connprivate))->ctxt;
-    size_t n = 0; /* -Wall */
+	UrlScheme type = ((Rurlconn)(con->connprivate))->type;
+	void *ctxt = ((Rurlconn)(con->connprivate))->ctxt;
+	size_t n = 0; /* -Wall */
 
-    switch(type) {
-    case HTTPsh:
-    case HTTPSsh:
-    case FTPsh:
-	n = in_R_HTTPRead2(ctxt, ptr, (int)(size*nitems));
-	break;
-    default:
-	break;
-    }
-    return n/size;
+	switch (type)
+	{
+	case HTTPsh:
+	case HTTPSsh:
+	case FTPsh:
+		n = in_R_HTTPRead2(ctxt, ptr, (int)(size * nitems));
+		break;
+	default:
+		break;
+	}
+	return n / size;
 }
 #endif
 
@@ -411,24 +418,24 @@ static Rconnection in_R_newurl(const char *description, const char * const mode,
     return newconn;
 }
 
-
-
 static void putdots(DLsize_t *pold, DLsize_t newt)
 {
-    DLsize_t i, old = *pold;
-    *pold = newt;
-    for(i = old; i < newt; i++) {
-	REprintf(".");
-	if ((i + 1) % 50 == 0)
+	DLsize_t i, old = *pold;
+	*pold = newt;
+	for (i = old; i < newt; i++)
 	{
-		REprintf("\n");
+		REprintf(".");
+		if ((i + 1) % 50 == 0)
+		{
+			REprintf("\n");
+		}
+		else if ((i + 1) % 10 == 0)
+		{
+			REprintf(" ");
+		}
 	}
-	else if ((i + 1) % 10 == 0)
-	{
-		REprintf(" ");
-	}
-	}
-    if(R_Consolefile) fflush(R_Consolefile);
+	if (R_Consolefile)
+		fflush(R_Consolefile);
 }
 
 static void putdashes(int *pold, int newi)
@@ -463,8 +470,8 @@ static winprogressbar pbar = {nullptr, nullptr, nullptr};
 
 static void doneprogressbar(void *data)
 {
-    winprogressbar *pbar = data;
-    hide(pbar->wprog);
+	winprogressbar *pbar = data;
+	hide(pbar->wprog);
 }
 #endif
 

@@ -528,13 +528,13 @@ HIDDEN SEXP do_summary(SEXP call, SEXP op, SEXP args, SEXP env)
     checkArity(op, args);
     if(PRIMVAL(op) == 1) { /* mean */
 	SEXP x = CAR(args);
-	switch(TYPEOF(x)) {
+	switch(x->sexptype()) {
 	case LGLSXP:  return logical_mean(x);
 	case INTSXP:  return integer_mean(x);
 	case REALSXP: return real_mean(x);
 	case CPLXSXP: return complex_mean(x);
 	default:
-	    error(_("invalid 'type' (%s) of argument"), type2char(TYPEOF(x)));
+	    error(_("invalid 'type' (%s) of argument"), type2char(x->sexptype()));
 	    return R_NilValue; // -Wall on clang 4.2
 	}
     }
@@ -559,27 +559,27 @@ HIDDEN SEXP do_summary(SEXP call, SEXP op, SEXP args, SEXP env)
     ans = matchArgExact(R_NaRmSymbol, &args);
     Rboolean narm = (Rboolean) asLogical(ans);
 
-    if (ALTREP(CAR(args)) && CDDR(args) == R_NilValue &&
+    if (CAR(args)->altrep() && CDDR(args) == R_NilValue &&
 	(CDR(args) == R_NilValue || TAG(CDR(args)) == R_NaRmSymbol)) {
 	SEXP toret = nullptr;
 	SEXP vec = CAR(args);
 	switch(PRIMVAL(op)) {
 	case 0:
-	    if(TYPEOF(vec) == INTSXP) 
+	    if(vec->sexptypeEqual(INTSXP)) 
 		toret = ALTINTEGER_SUM(vec, narm);
-	    else if (TYPEOF(vec) == REALSXP)
+	    else if (vec->sexptypeEqual(REALSXP))
 		toret = ALTREAL_SUM(vec, narm);
 	    break; 
 	case 2:
-	    if(TYPEOF(vec) == INTSXP) 
+	    if(vec->sexptypeEqual(INTSXP)) 
 		toret = ALTINTEGER_MIN(vec, narm);
-	    else if (TYPEOF(vec) == REALSXP)
+	    else if (vec->sexptypeEqual(REALSXP))
 		toret = ALTREAL_MIN(vec, narm);
 	    break;
 	case 3:
-	    if(TYPEOF(vec) == INTSXP) 
+	    if(vec->sexptypeEqual(INTSXP))
 		toret = ALTINTEGER_MAX(vec, narm);
-	    else if (TYPEOF(vec) == REALSXP)
+	    else if (vec->sexptypeEqual(REALSXP))
 		toret = ALTREAL_MAX(vec, narm);
 	    break;
 	default:
@@ -705,11 +705,11 @@ HIDDEN SEXP do_summary(SEXP call, SEXP op, SEXP args, SEXP env)
 		    break;
 		case STRSXP:
 		    if(!empty && ans_type == INTSXP) {
-			scum = StringFromInteger(icum, &warn);
+			scum = StringFromInteger(icum, warn);
 			UNPROTECT(1); /* scum */
 			PROTECT(scum);
 		    } else if(!empty && ans_type == REALSXP) {
-			scum = StringFromReal(zcum.r, &warn);
+			scum = StringFromReal(zcum.r, warn);
 			UNPROTECT(1); /* scum */
 			PROTECT(scum);
 		    }
@@ -743,9 +743,9 @@ HIDDEN SEXP do_summary(SEXP call, SEXP op, SEXP args, SEXP env)
 			    (iop == 3 && tmp > zcum.r))	zcum.r = tmp;
 		    } else if(ans_type == STRSXP) {
 			if(int_a)
-			   stmp = StringFromInteger(itmp, &warn);
+			   stmp = StringFromInteger(itmp, warn);
 			else if(real_a)
-			   stmp = StringFromReal(tmp, &warn);
+			   stmp = StringFromReal(tmp, warn);
 
 			if(empty)
 			    scum = stmp;
@@ -915,11 +915,11 @@ HIDDEN SEXP do_summary(SEXP call, SEXP op, SEXP args, SEXP env)
 		case STRSXP:
 		if (iop == 2 || iop == 3) {
 		    if(!empty && ans_type == INTSXP) {
-			scum = StringFromInteger(icum, &warn);
+			scum = StringFromInteger(icum, warn);
 			UNPROTECT(1); /* scum */
 			PROTECT(scum);
 		    } else if(!empty && ans_type == REALSXP) {
-			scum = StringFromReal(zcum.r, &warn);
+			scum = StringFromReal(zcum.r, warn);
 			UNPROTECT(1); /* scum */
 			PROTECT(scum);
 		    }
@@ -1188,7 +1188,7 @@ HIDDEN SEXP do_pmin(SEXP call, SEXP op, SEXP args, SEXP rho)
     if(args == R_NilValue) error(_("no arguments"));
     SEXP x = CAR(args);
 
-    SEXPTYPE anstype = TYPEOF(x);
+    SEXPTYPE anstype = x->sexptype();
     switch(anstype) {
     case NILSXP:
     case LGLSXP:
@@ -1206,7 +1206,7 @@ HIDDEN SEXP do_pmin(SEXP call, SEXP op, SEXP args, SEXP rho)
 	i, i1; 
     for(; a != R_NilValue; a = CDR(a)) {
 	x = CAR(a);
-	SEXPTYPE type = TYPEOF(x);
+	SEXPTYPE type = x->sexptype();
 	switch(type) {
 	case NILSXP:
 	case LGLSXP:

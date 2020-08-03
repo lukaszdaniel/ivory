@@ -24,7 +24,7 @@ PKG_CFLAGS = $(C_VISIBILITY)
 SHLIB = $(pkg)@SHLIB_EXT@
 
 # need Defn.h etc, and config.h
-PKG_CPPFLAGS =-I../../../include -I$(top_srcdir)/src/include -DHAVE_CONFIG_H \
+PKG_CPPFLAGS =-I../../../include -I$(top_srcdir)/src/include -DCOMPILING_IVORY -DHAVE_CONFIG_H \
   -I$(top_srcdir)/src/main
 
 

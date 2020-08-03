@@ -21,7 +21,7 @@ CFLAGS = @CFLAGS@ $(LTO)
 CPICFLAGS = @CPICFLAGS@
 CPPFLAGS = @CPPFLAGS@
 CXX = @CXX@ @CXXSTD@
-CXXFLAGS = @CXXFLAGS@ -Wno-attributes $(LTO)
+CXXFLAGS = @CXXFLAGS@ -Wall -Werror -Wno-error=switch -Wno-error=sign-compare -Wno-error=attributes $(LTO)
 CXXPICFLAGS = @CXXPICFLAGS@
 CXX11 = @CXX11@
 CXX11FLAGS = @CXX11FLAGS@ $(LTO)
@@ -88,6 +88,7 @@ LTO_FC = @LTOALL_FC@
 LTO_LD = @LTO_LD@
 ## set for --enable-lto=R, used in INSTALL
 LTO_OPT = @LTO@
+LTO_FC_OPT = @LTO_FC@
 ## needed to build applications linking to static libR
 MAIN_LD = @MAIN_LD@
 MAIN_LDFLAGS = @MAIN_LDFLAGS@

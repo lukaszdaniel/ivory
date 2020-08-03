@@ -37,9 +37,9 @@
 
 /* These are used in ../gnuwin32/system.cpp, ../unix/sys-std.cpp */
 SA_TYPE SaveAction = SA_SAVEASK;
-SA_TYPE	RestoreAction = SA_RESTORE;
+SA_TYPE RestoreAction = SA_RESTORE;
 static Rboolean LoadSiteFile = TRUE;
-HIDDEN bool LoadInitFile = true;  /* Used in R_OpenInitFile */
+HIDDEN bool LoadInitFile = true; /* Used in R_OpenInitFile */
 static Rboolean DebugInitFile = FALSE;
 
 /*
@@ -50,7 +50,6 @@ HIDDEN void R_InitialData(void)
 {
     R_RestoreGlobalEnv();
 }
-
 
 HIDDEN
 FILE *R_OpenLibraryFile(const char *file)
@@ -67,7 +66,7 @@ HIDDEN
 char *R_LibraryFileName(const char *file, char *buf, size_t bsize)
 {
     if (snprintf(buf, bsize, "%s/library/base/R/%s", R_Home, file) < 0)
-	error(_("R_LibraryFileName: buffer too small"));
+        error(_("R_LibraryFileName: buffer too small"));
     return buf;
 }
 
@@ -126,15 +125,16 @@ void set_workspace_name(const char *fn)
 #endif
 
 HIDDEN
-const char* get_workspace_name()
+const char *get_workspace_name()
 {
     return workspace_name;
 }
 
 void R_RestoreGlobalEnv(void)
 {
-    if(RestoreAction == SA_RESTORE) {
-	R_RestoreGlobalEnvFromFile(workspace_name, R_Quiet);
+    if (RestoreAction == SA_RESTORE)
+    {
+        R_RestoreGlobalEnvFromFile(workspace_name, R_Quiet);
     }
 }
 
@@ -142,7 +142,6 @@ void R_SaveGlobalEnv(void)
 {
     R_SaveGlobalEnvToFile(".RData");
 }
-
 
 /*
  *  INITIALIZATION HELPER CODE
@@ -168,8 +167,8 @@ void R_DefParams(Rstart Rp)
     R_SizeFromEnv(Rp);
 }
 
-constexpr R_size_t Max_Nsize = 50000000;	/* about 1.4Gb 32-bit, 2.8Gb 64-bit */
-constexpr R_size_t Max_Vsize = R_SIZE_T_MAX;	/* unlimited */
+constexpr R_size_t Max_Nsize = 50000000;     /* about 1.4Gb 32-bit, 2.8Gb 64-bit */
+constexpr R_size_t Max_Vsize = R_SIZE_T_MAX; /* unlimited */
 
 // small values ok for R_DEFAULT_PACKAGES=NULL (= 'base' only)
 constexpr R_size_t Min_Nsize = 50000;
@@ -271,7 +270,6 @@ static void SetSize(R_size_t vsize, R_size_t nsize)
     } else
 	R_NSize = nsize;
 }
-
 
 void R_SetParams(Rstart Rp)
 {

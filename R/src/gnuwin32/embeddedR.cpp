@@ -48,12 +48,14 @@ extern int R_ReplDLLdo1();
    a separate thread for input.
 */
 static int myReadConsole(const char *prompt, char *buf, int len,
-			 int addtohistory)
+                         int addtohistory)
 {
     fputs(prompt, stdout);
     fflush(stdout);
-    if(fgets(buf, len, stdin)) return 1;
-    else return 0;
+    if (fgets(buf, len, stdin))
+        return 1;
+    else
+        return 0;
 }
 
 static void myWriteConsole(const char *buf, int len)

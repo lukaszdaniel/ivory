@@ -147,7 +147,7 @@ static void R_de_Init(void)
 	warning(_("X11 is not available"));
 	return;
     }
-    int res = R_moduleCdynload("R_de", 1, 1);
+    bool res = R_moduleCdynload("R_de", 1, 1);
     if(!res) error(_("X11 dataentry cannot be loaded"));
     de_ptr->de = (R_X11DataEntryRoutine) 
 	R_FindSymbol("in_RX11_dataentry", "R_de", nullptr);

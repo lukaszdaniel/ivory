@@ -33,7 +33,7 @@
 #include "localization.h"
 
 /* interval at which to check interrupts */
-constexpr R_xlen_t NINTERRUPT = 1000000;
+//constexpr R_xlen_t NINTERRUPT = 1000000;
 
 typedef double (*ran1) (double);
 typedef double (*ran2) (double, double);
@@ -143,15 +143,17 @@ R_INLINE static SEXP random1(SEXP sn, SEXP sa, ran1 fn, SEXPTYPE type)
     return x;
 }
 
-#define DEFRAND1_REAL(name) \
-    SEXP do_##name(SEXP sn, SEXP sa) { \
-        return random1(sn, sa, name, REALSXP); \
-    }
+#define DEFRAND1_REAL(name)                    \
+	SEXP do_##name(SEXP sn, SEXP sa)           \
+	{                                          \
+		return random1(sn, sa, name, REALSXP); \
+	}
 
-#define DEFRAND1_INT(name) \
-    SEXP do_##name(SEXP sn, SEXP sa) { \
-        return random1(sn, sa, name, INTSXP); \
-    }
+#define DEFRAND1_INT(name)                    \
+	SEXP do_##name(SEXP sn, SEXP sa)          \
+	{                                         \
+		return random1(sn, sa, name, INTSXP); \
+	}
 
 DEFRAND1_REAL(rchisq)
 DEFRAND1_REAL(rexp)
@@ -223,15 +225,17 @@ R_INLINE static SEXP random2(SEXP sn, SEXP sa, SEXP sb, ran2 fn, SEXPTYPE type)
     return x;
 }
 
-#define DEFRAND2_REAL(name) \
-    SEXP do_##name(SEXP sn, SEXP sa, SEXP sb) { \
-        return random2(sn, sa, sb, name, REALSXP); \
-    }
+#define DEFRAND2_REAL(name)                        \
+	SEXP do_##name(SEXP sn, SEXP sa, SEXP sb)      \
+	{                                              \
+		return random2(sn, sa, sb, name, REALSXP); \
+	}
 
-#define DEFRAND2_INT(name) \
-    SEXP do_##name(SEXP sn, SEXP sa, SEXP sb) { \
-        return random2(sn, sa, sb, name, INTSXP); \
-    }
+#define DEFRAND2_INT(name)                        \
+	SEXP do_##name(SEXP sn, SEXP sa, SEXP sb)     \
+	{                                             \
+		return random2(sn, sa, sb, name, INTSXP); \
+	}
 
 DEFRAND2_REAL(rbeta)
 DEFRAND2_INT(rbinom)
@@ -313,34 +317,40 @@ R_INLINE static SEXP random3(SEXP sn, SEXP sa, SEXP sb, SEXP sc, ran3 fn,
     return x;
 }
 
-#define DEFRAND3_REAL(name) \
-    SEXP do_##name(SEXP sn, SEXP sa, SEXP sb, SEXP sc) { \
-        return random3(sn, sa, sb, sc, name, REALSXP); \
-    }
+#define DEFRAND3_REAL(name)                            \
+	SEXP do_##name(SEXP sn, SEXP sa, SEXP sb, SEXP sc) \
+	{                                                  \
+		return random3(sn, sa, sb, sc, name, REALSXP); \
+	}
 
-#define DEFRAND3_INT(name) \
-    SEXP do_##name(SEXP sn, SEXP sa, SEXP sb, SEXP sc) { \
-        return random3(sn, sa, sb, sc, name, INTSXP); \
-    }
+#define DEFRAND3_INT(name)                             \
+	SEXP do_##name(SEXP sn, SEXP sa, SEXP sb, SEXP sc) \
+	{                                                  \
+		return random3(sn, sa, sb, sc, name, INTSXP);  \
+	}
 
 DEFRAND3_INT(rhyper)
 
 static void FixupProb(double *p, int n)
 {
-    double sum = 0.0;
-    int npos = 0;
-    for (int i = 0; i < n; i++) {
-	if (!R_FINITE(p[i]))
-	    error(_("NA value in probability vector"));
-	if (p[i] < 0.0)
-	    error(_("negative probability"));
-	if (p[i] > 0.0) {
-	    npos++;
-	    sum += p[i];
+	double sum = 0.0;
+	int npos = 0;
+	for (int i = 0; i < n; i++)
+	{
+		if (!R_FINITE(p[i]))
+			error(_("NA value in probability vector"));
+		if (p[i] < 0.0)
+			error(_("negative probability"));
+		if (p[i] > 0.0)
+		{
+			npos++;
+			sum += p[i];
+		}
 	}
-    }
-    if (npos == 0) error(_("no positive probabilities"));
-    for (int i = 0; i < n; i++) p[i] /= sum;
+	if (npos == 0)
+		error(_("no positive probabilities"));
+	for (int i = 0; i < n; i++)
+		p[i] /= sum;
 }
 
 SEXP do_rmultinom(SEXP sn, SEXP ssize, SEXP prob)
@@ -381,14 +391,9 @@ SEXP do_rmultinom(SEXP sn, SEXP ssize, SEXP prob)
 
 SEXP r2dtable(SEXP n, SEXP r, SEXP c)
 {
-    int nr, nc, *row_sums, *col_sums, i, *jwork;
-    int n_of_samples, n_of_cases;
-    double *fact;
-    SEXP ans, tmp;
     const void *vmax = vmaxget();
-
-    nr = length(r);
-    nc = length(c);
+    int nr = length(r),
+	nc = length(c);
 
     /* Note that the R code in r2dtable() also checks for missing and
        negative values.
@@ -399,37 +404,35 @@ SEXP r2dtable(SEXP n, SEXP r, SEXP c)
        !isInteger(c) || (nc <= 1))
 	error(_("invalid arguments"));
 
-    n_of_samples = INTEGER(n)[0];
-    row_sums = INTEGER(r);
-    col_sums = INTEGER(c);
+    int n_of_samples = INTEGER(n)[0];
+    int *row_sums = INTEGER(r), *jwork = row_sums,
+	*col_sums = INTEGER(c);
 
     /* Compute total number of cases as the sum of the row sums.
        Note that the R code in r2dtable() also checks whether this is
        the same as the sum of the col sums.
        Should maybe do the same here ...
     */
-    n_of_cases = 0;
-    jwork = row_sums;
-    for(i = 0; i < nr; i++)
+    int n_of_cases = 0;
+    for(int i = 0; i < nr; i++)
 	n_of_cases += *jwork++;
 
     /* Log-factorials from 0 to n_of_cases.
        (I.e., lgamma(1), ..., lgamma(n_of_cases + 1).)
     */
-    fact = (double *) R_alloc(n_of_cases + 1, sizeof(double));
+    double *fact = (double *) R_alloc(n_of_cases + 1, sizeof(double));
     fact[0] = 0.;
-    for(i = 1; i <= n_of_cases; i++)
+    for(int i = 1; i <= n_of_cases; i++)
 	fact[i] = lgammafn((double) (i + 1));
 
     jwork = (int *) R_alloc(nc, sizeof(int));
-
-    PROTECT(ans = allocVector(VECSXP, n_of_samples));
+    SEXP ans = PROTECT(allocVector(VECSXP, n_of_samples));
 
     GetRNGstate();
 
-    for(i = 0; i < n_of_samples; i++) {
-	PROTECT(tmp = allocMatrix(INTSXP, nr, nc));
-	rcont2(&nr, &nc, row_sums, col_sums, &n_of_cases, fact,
+    for(int i = 0; i < n_of_samples; i++) {
+	SEXP tmp = PROTECT(allocMatrix(INTSXP, nr, nc));
+	rcont2(nr, nc, row_sums, col_sums, n_of_cases, fact,
 	       jwork, INTEGER(tmp));
 	SET_VECTOR_ELT(ans, i, tmp);
 	UNPROTECT(1);

@@ -27,13 +27,12 @@
 #endif
 
 #define R_USE_SIGNALS 1
-#include <IOStuff.h>	/*-> Defn.h */
+#include <IOStuff.h> /*-> Defn.h */
 
 /* Public interface */
 
 #include <R_ext/Parse.h>
 // which includes SEXP R_ParseVector(SEXP, int, ParseStatus *, SEXP);
-
 
 /* Private interface */
 
@@ -62,9 +61,6 @@ struct SrcRefState
     SrcRefState *prevState;
 };
 
-
-extern "C" {
-
 void InitParser(void);
 
 void R_InitSrcRefState(RCNTXT *cntxt);
@@ -85,7 +81,5 @@ SEXP R_ParseConn(Rconnection con, int n, ParseStatus *status, SEXP srcfile);
 /* Report a parse error */
 
 NORET void parseError(SEXP call, int linenum);
-
-} //extern "C"
 
 #endif /* not R_PARSE_H */

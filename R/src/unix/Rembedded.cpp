@@ -25,14 +25,10 @@
 #endif
 #include <Defn.h>
 
-extern "C"
-int Rf_initialize_R(int ac, char **av); /* in ../unix/system.cpp */
-extern "C"
-void setup_Rmainloop(void); /* in main.cpp */
-extern "C"
-void fpu_setup(Rboolean start);  /* in ../unix/sys-std.cpp */
+extern "C" int Rf_initialize_R(int ac, char *av[]); /* in ../unix/system.cpp */
+extern "C" void setup_Rmainloop(void);             /* in main.cpp */
+extern "C" void fpu_setup(Rboolean start);         /* in ../unix/sys-std.cpp */
 extern void R_CleanTempDir(void);
-
 
 /*
  This is the routine that can be called to initialize the R environment
@@ -59,12 +55,12 @@ extern void R_CleanTempDir(void);
     Rf_initEmbeddedR(sizeof(argv)/sizeof(argv[0]), argv);
 */
 
-int Rf_initEmbeddedR(int argc, char **argv)
+int Rf_initEmbeddedR(int argc, char *argv[])
 {
     Rf_initialize_R(argc, argv);
-    R_Interactive = TRUE;  /* Rf_initialize_R set this based on isatty */
+    R_Interactive = TRUE; /* Rf_initialize_R set this based on isatty */
     setup_Rmainloop();
-    return(1);
+    return (1);
 }
 
 /* use fatal !=0 for emergency bail out */
@@ -72,9 +68,10 @@ void Rf_endEmbeddedR(int fatal)
 {
     R_RunExitFinalizers();
     CleanEd();
-    if(!fatal) KillAllDevices();
+    if (!fatal)
+        KillAllDevices();
     R_CleanTempDir();
-    if(!fatal && R_CollectWarnings)
-	PrintWarnings();	/* from device close and .Last */
+    if (!fatal && R_CollectWarnings)
+        PrintWarnings(); /* from device close and .Last */
     fpu_setup(FALSE);
 }

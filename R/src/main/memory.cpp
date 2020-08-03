@@ -174,7 +174,7 @@ inline void SETOLDTYPE(SEXP x, int v) { SETLEVELS(x, v); }
 R_INLINE static SEXP CHK(SEXP x)
 {
     /* **** NULL check because of R_CurrentExpr */
-    if (x && TYPEOF(x) == FREESXP)
+    if (x && x->sexptype() == FREESXP)
 	error(_("unprotected object (%p) encountered (was %s)"), x, sexptype2char(OLDTYPE(x)));
     return x;
 }
@@ -702,12 +702,12 @@ static R_size_t R_NodesInUse = 0;
    should always be either R_NilValue or a CHARSXP. */
 #ifdef PROTECTCHECK
 #define HAS_GENUINE_ATTRIB(x)                           \
-    (TYPEOF(x) != FREESXP && ATTRIB(x) != R_NilValue && \
-     (TYPEOF(x) != CHARSXP || TYPEOF(ATTRIB(x)) != CHARSXP))
+    (x->sexptype() != FREESXP && ATTRIB(x) != R_NilValue && \
+     (x->sexptype() != CHARSXP || TYPEOF(ATTRIB(x)) != CHARSXP))
 #else
 #define HAS_GENUINE_ATTRIB(x)   \
     (ATTRIB(x) != R_NilValue && \
-     (TYPEOF(x) != CHARSXP || TYPEOF(ATTRIB(x)) != CHARSXP))
+     (x->sexptype() != CHARSXP || TYPEOF(ATTRIB(x)) != CHARSXP))
 #endif
 
 #ifdef PROTECTCHECK
@@ -2101,13 +2101,13 @@ HIDDEN SEXP do_gcinfo(SEXP call, SEXP op, SEXP args, SEXP rho)
 
 /* reports memory use to profiler in eval.cpp */
 
-HIDDEN void get_current_mem(size_t *smallvsize,
-				      size_t *largevsize,
-				      size_t *nodes)
+HIDDEN void get_current_mem(size_t &smallvsize,
+				      size_t &largevsize,
+				      size_t &nodes)
 {
-    *smallvsize = R_SmallVallocSize;
-    *largevsize = R_LargeVallocSize;
-    *nodes = R_NodesInUse * sizeof(SEXPREC);
+    smallvsize = R_SmallVallocSize;
+    largevsize = R_LargeVallocSize;
+    nodes = R_NodesInUse * sizeof(SEXPREC);
     return;
 }
 
@@ -2175,12 +2175,11 @@ NORET static void mem_err_malloc(R_size_t size)
 /* InitMemory : Initialise the memory to be used in R. */
 /* This includes: stack space, node space and vector space */
 
-#define PP_REDZONE_SIZE 1000L
+constexpr int PP_REDZONE_SIZE = 1000L;
 static int R_StandardPPStackSize, R_RealPPStackSize;
 
-HIDDEN void InitMemory()
+HIDDEN void Rf_InitMemory()
 {
-    int i;
     int gen;
     char *arg;
 
@@ -2208,7 +2207,7 @@ HIDDEN void InitMemory()
 
     UNMARK_NODE(&UnmarkedNodeTemplate);
 
-    for (i = 0; i < NUM_NODE_CLASSES; i++) {
+    for (int i = 0; i < NUM_NODE_CLASSES; i++) {
       for (gen = 0; gen < NUM_OLD_GENERATIONS; gen++) {
 	R_GenHeap[i].Old[gen] = &R_GenHeap[i].OldPeg[gen];
 	SET_PREV_NODE(R_GenHeap[i].Old[gen], R_GenHeap[i].Old[gen]);
@@ -2227,7 +2226,7 @@ HIDDEN void InitMemory()
       SET_NEXT_NODE(R_GenHeap[i].New, R_GenHeap[i].New);
     }
 
-    for (i = 0; i < NUM_NODE_CLASSES; i++)
+    for (int i = 0; i < NUM_NODE_CLASSES; i++)
 	R_GenHeap[i].Free = NEXT_NODE(R_GenHeap[i].New);
 
     SET_NODE_CLASS(&UnmarkedNodeTemplate, 0);
@@ -2351,36 +2350,37 @@ long double *R_allocLD(size_t nelem)
 
 char *S_alloc(long nelem, int eltsize)
 {
-    R_size_t size  = nelem * eltsize;
+    R_size_t size = nelem * eltsize;
     char *p = R_alloc(nelem, eltsize);
 
-    if(p) memset(p, 0, size);
+    if (p)
+        memset(p, 0, size);
     return p;
 }
-
 
 char *S_realloc(char *p, long new_, long old, int size)
 {
     size_t nold;
     char *q;
     /* shrinking is a no-op */
-    if(new_ <= old) return p; // so nnew > 0 below
+    if (new_ <= old)
+        return p; // so nnew > 0 below
     q = R_alloc((size_t)new_, size);
     nold = (size_t)old * size;
     memcpy(q, p, nold);
-    memset(q + nold, 0, (size_t)new_*size - nold);
+    memset(q + nold, 0, (size_t)new_ * size - nold);
     return q;
 }
-
 
 /* Allocation functions that GC on initial failure */
 
 void *R_malloc_gc(size_t n)
 {
     void *np = malloc(n);
-    if (np == nullptr) {
-	R_gc();
-	np = malloc(n);
+    if (np == nullptr)
+    {
+        R_gc();
+        np = malloc(n);
     }
     return np;
 }
@@ -2388,9 +2388,10 @@ void *R_malloc_gc(size_t n)
 void *R_calloc_gc(size_t n, size_t s)
 {
     void *np = calloc(n, s);
-    if (np == nullptr) {
-	R_gc();
-	np = calloc(n, s);
+    if (np == nullptr)
+    {
+        R_gc();
+        np = calloc(n, s);
     }
     return np;
 }
@@ -2398,13 +2399,13 @@ void *R_calloc_gc(size_t n, size_t s)
 void *R_realloc_gc(void *p, size_t n)
 {
     void *np = realloc(p, n);
-    if (np == nullptr) {
-	R_gc();
-	np = realloc(p, n);
+    if (np == nullptr)
+    {
+        R_gc();
+        np = realloc(p, n);
     }
     return np;
 }
-
 
 /* "allocSExp" allocate a SEXPREC */
 /* call gc if necessary */
@@ -2637,10 +2638,12 @@ static void *custom_node_alloc(R_allocator_t *allocator, size_t size) {
     return nullptr;
 }
 
-static void custom_node_free(void *ptr) {
-    if (ptr) {
-	R_allocator_t *allocator = ((R_allocator_t*) ptr) - 1;
-	allocator->mem_free(allocator, (void*)allocator);
+static void custom_node_free(void *ptr)
+{
+    if (ptr)
+    {
+        R_allocator_t *allocator = ((R_allocator_t *)ptr) - 1;
+        allocator->mem_free(allocator, (void *)allocator);
     }
 }
 
@@ -2654,7 +2657,7 @@ static void custom_node_free(void *ptr) {
 */
 //#define intCHARSXP 73
 
-SEXP Rf_allocVector3(SEXPTYPE type, R_xlen_t length, R_allocator_t *allocator)
+SEXP Rf_allocVector3(SEXPTYPE type, R_xlen_t length = 1, R_allocator_t *allocator = nullptr)
 {
     SEXP s;     /* For the generational collector it would be safer to
 		   work in terms of a VECSEXP here, but that would
@@ -2908,7 +2911,7 @@ SEXP Rf_allocVector3(SEXPTYPE type, R_xlen_t length, R_allocator_t *allocator)
 	GC_PROT(s = allocSExpNonCons(type));
 	SET_STDVEC_LENGTH(s, (R_len_t) length);
     }
-    SETALTREP(s, 0);
+    s->unsetaltrep();
     SET_STDVEC_TRUELENGTH(s, 0);
     INIT_REFCNT(s);
 
@@ -2956,15 +2959,14 @@ SEXP Rf_allocVector3(SEXPTYPE type, R_xlen_t length, R_allocator_t *allocator)
 /* For future hiding of allocVector(CHARSXP) */
 HIDDEN SEXP Rf_allocCharsxp(R_len_t len)
 {
-    return allocVector(SEXPTYPE(intCHARSXP), len);
+    return Rf_allocVector(intCHARSXP, len);
 }
 
-SEXP Rf_allocList(int n)
+SEXP Rf_allocList(const int n)
 {
-    int i;
     SEXP result;
     result = R_NilValue;
-    for (i = 0; i < n; i++)
+    for (int i = 0; i < n; i++)
         result = CONS(R_NilValue, result);
     return result;
 }
@@ -2977,30 +2979,30 @@ SEXP Rf_allocS4Object(void)
     return s;
 }
 
-static SEXP allocFormalsList(int nargs, ...)
+static SEXP allocFormalsList(const int nargs, ...)
 {
     SEXP res = R_NilValue;
     SEXP n;
-    int i;
     va_list syms;
     va_start(syms, nargs);
 
-    for(i = 0; i < nargs; i++) {
-	res = CONS(R_NilValue, res);
+    for (int i = 0; i < nargs; i++)
+    {
+        res = CONS(R_NilValue, res);
     }
     R_PreserveObject(res);
 
     n = res;
-    for(i = 0; i < nargs; i++) {
-	SET_TAG(n, (SEXP) va_arg(syms, SEXP));
-	MARK_NOT_MUTABLE(n);
-	n = CDR(n);
+    for (int i = 0; i < nargs; i++)
+    {
+        SET_TAG(n, (SEXP)va_arg(syms, SEXP));
+        MARK_NOT_MUTABLE(n);
+        n = CDR(n);
     }
     va_end(syms);
 
     return res;
 }
-
 
 SEXP Rf_allocFormalsList2(SEXP sym1, SEXP sym2)
 {
@@ -3879,7 +3881,7 @@ void (UNSET_MAYBEJIT)(SEXP x) { UNSET_MAYBEJIT(CHK(x)); }
 int (IS_GROWABLE)(SEXP x) { return IS_GROWABLE(CHK(x)); }
 void (SET_GROWABLE_BIT)(SEXP x) { SET_GROWABLE_BIT(CHK(x)); }
 
-static int nvec[32] = {
+static constexpr int nvec[32] = {
     1, 1, 1, 1, 1, 1, 1, 1,
     1, 0, 0, 1, 1, 0, 0, 0,
     0, 1, 1, 0, 0, 1, 1, 0,
@@ -3888,8 +3890,8 @@ static int nvec[32] = {
 R_INLINE static SEXP CHK2(SEXP x)
 {
     x = CHK(x);
-    if(nvec[TYPEOF(x)])
-	error(_("LENGTH or similar applied to %s object"), type2char(TYPEOF(x)));
+    if(nvec[x->sexptype()])
+	error(_("LENGTH or similar applied to %s object"), type2char(x->sexptype()));
     return x;
 }
 
@@ -3900,10 +3902,10 @@ R_xlen_t (TRUELENGTH)(SEXP x) { return TRUELENGTH(CHK2(x)); }
 
 void (SETLENGTH)(SEXP x, R_xlen_t v)
 {
-    if (ALTREP(x))
+    if (x->altrep())
 	error(_("SETLENGTH() cannot be applied to an ALTVEC object."));
     if (! isVector(x))
-	error(_("SETLENGTH() can only be applied to a standard vector, not a '%s'"), type2char(TYPEOF(x)));
+	error(_("SETLENGTH() can only be applied to a standard vector, not a '%s'"), type2char(x->sexptype()));
     SET_STDVEC_LENGTH(CHK2(x), v);
 }
 
@@ -3920,17 +3922,17 @@ R_xlen_t Rf_XLENGTH(SEXP x) { return XLENGTH(x); }
 
 extern "C"
 const char *(R_CHAR)(SEXP x) {
-    if(TYPEOF(x) != CHARSXP) // Han-Tak proposes to prepend  'x && '
+    if(x->sexptype() != CHARSXP) // Han-Tak proposes to prepend  'x && '
 	error(_("'%s' function can only be applied to a charecter, not a '%s'"), "CHAR()",
-	      type2char(TYPEOF(x)));
+	      type2char(x->sexptype()));
     return (const char *) CHAR(CHK(x));
 }
 
 SEXP (STRING_ELT)(SEXP x, R_xlen_t i) {
-    if(TYPEOF(x) != STRSXP)
+    if(x->sexptype() != STRSXP)
 	error(_("'%s' function can only be applied to a character vector, not a '%s'"), "STRING_ELT()",
-	      type2char(TYPEOF(x)));
-    if (ALTREP(x))
+	      type2char(x->sexptype()));
+    if (x->altrep())
 	return CHK(ALTSTRING_ELT(CHK(x), i));
     else {
 	SEXP *ps = (SEXP*) STDVEC_DATAPTR(CHK(x));
@@ -3940,11 +3942,11 @@ SEXP (STRING_ELT)(SEXP x, R_xlen_t i) {
 
 SEXP (VECTOR_ELT)(SEXP x, R_xlen_t i) {
     /* We need to allow vector-like types here */
-    if(TYPEOF(x) != VECSXP &&
-       TYPEOF(x) != EXPRSXP &&
-       TYPEOF(x) != WEAKREFSXP)
+    if(x->sexptype() != VECSXP &&
+       x->sexptype() != EXPRSXP &&
+       x->sexptype() != WEAKREFSXP)
 	error(_("'%s' function can only be applied to a list, not a '%s'"), "VECTOR_ELT()",
-	      type2char(TYPEOF(x)));
+	      type2char(x->sexptype()));
     return CHK(VECTOR_ELT(CHK(x), i));
 }
 
@@ -3959,7 +3961,7 @@ SEXP (VECTOR_ELT)(SEXP x, R_xlen_t i) {
     do                                                     \
     {                                                      \
         CHK(x);                                            \
-        if (STDVEC_LENGTH(x) == 0 && TYPEOF(x) != CHARSXP) \
+        if (STDVEC_LENGTH(x) == 0 && x->sexptype() != CHARSXP) \
             return (void *)1;                              \
     } while (0)
 #else
@@ -3968,108 +3970,108 @@ SEXP (VECTOR_ELT)(SEXP x, R_xlen_t i) {
 
 void *(STDVEC_DATAPTR)(SEXP x)
 {
-    if (ALTREP(x))
+    if (x->altrep())
 	error(_("cannot get STDVEC_DATAPTR from ALTREP object"));
-    if (! isVector(x) && TYPEOF(x) != WEAKREFSXP)
+    if (! isVector(x) && x->sexptype() != WEAKREFSXP)
 	error(_("STDVEC_DATAPTR can only be applied to a vector, not a '%s'"),
-	      type2char(TYPEOF(x)));
+	      type2char(x->sexptype()));
     CHKZLN(x);
     return STDVEC_DATAPTR(x);
 }
 
 int *(LOGICAL)(SEXP x) {
-    if(TYPEOF(x) != LGLSXP)
+    if(x->sexptype() != LGLSXP)
 	error(_("'%s' function can only be applied to a logical, not a '%s'"), "LOGICAL()",
-	      type2char(TYPEOF(x)));
+	      type2char(x->sexptype()));
     CHKZLN(x);
     return LOGICAL(x);
 }
 
 const int *(LOGICAL_RO)(SEXP x) {
-    if(TYPEOF(x) != LGLSXP)
+    if(x->sexptype() != LGLSXP)
 	error(_("'%s' function can only be applied to a logical, not a '%s'"),
-	      "LOGICAL()", type2char(TYPEOF(x)));
+	      "LOGICAL()", type2char(x->sexptype()));
     CHKZLN(x);
     return LOGICAL_RO(x);
 }
 
 /* Maybe this should exclude logicals, but it is widely used */
 int *(INTEGER)(SEXP x) {
-    if(TYPEOF(x) != INTSXP && TYPEOF(x) != LGLSXP)
+    if(x->sexptype() != INTSXP && x->sexptype() != LGLSXP)
 	error(_("'%s' function can only be applied to an integer, not a '%s'"), "INTEGER()",
-	      type2char(TYPEOF(x)));
+	      type2char(x->sexptype()));
     CHKZLN(x);
     return INTEGER(x);
 }
 
 const int *(INTEGER_RO)(SEXP x) {
-    if(TYPEOF(x) != INTSXP && TYPEOF(x) != LGLSXP)
+    if(x->sexptype() != INTSXP && x->sexptype() != LGLSXP)
 	error(_("'%s' function can only be applied to an integer, not a '%s'"),
-	      "INTEGER()", type2char(TYPEOF(x)));
+	      "INTEGER()", type2char(x->sexptype()));
     CHKZLN(x);
     return INTEGER_RO(x);
 }
 
 Rbyte *(RAW)(SEXP x) {
-    if(TYPEOF(x) != RAWSXP)
+    if(x->sexptype() != RAWSXP)
 	error(_("'%s' function can only be applied to a raw, not a '%s'"), "RAW()",
-	      type2char(TYPEOF(x)));
+	      type2char(x->sexptype()));
     CHKZLN(x);
     return RAW(x);
 }
 
 const Rbyte *(RAW_RO)(SEXP x) {
-    if(TYPEOF(x) != RAWSXP)
+    if(x->sexptype() != RAWSXP)
 	error(_("'%s' function can only be applied to a raw, not a '%s'"),
-	      "RAW()", type2char(TYPEOF(x)));
+	      "RAW()", type2char(x->sexptype()));
     CHKZLN(x);
     return RAW(x);
 }
 
 double *(REAL)(SEXP x) {
-    if(TYPEOF(x) != REALSXP)
+    if(x->sexptype() != REALSXP)
 	error(_("'%s' function can only be applied to a numeric, not a '%s'"), "REAL()",
-	      type2char(TYPEOF(x)));
+	      type2char(x->sexptype()));
     CHKZLN(x);
     return REAL(x);
 }
 
 const double *(REAL_RO)(SEXP x) {
-    if(TYPEOF(x) != REALSXP)
+    if(x->sexptype() != REALSXP)
 	error(_("'%s' function can only be applied to a numeric, not a '%s'"),
-	      "REAL()", type2char(TYPEOF(x)));
+	      "REAL()", type2char(x->sexptype()));
     CHKZLN(x);
     return REAL_RO(x);
 }
 
 Rcomplex *(COMPLEX)(SEXP x) {
-    if(TYPEOF(x) != CPLXSXP)
+    if(x->sexptype() != CPLXSXP)
 	error(_("'%s' function can only be applied to a complex, not a '%s'"), "COMPLEX()",
-	      type2char(TYPEOF(x)));
+	      type2char(x->sexptype()));
     CHKZLN(x);
     return COMPLEX(x);
 }
 
 const Rcomplex *(COMPLEX_RO)(SEXP x) {
-    if(TYPEOF(x) != CPLXSXP)
+    if(x->sexptype() != CPLXSXP)
 	error(_("'%s' function can only be applied to a complex, not a '%s'"),
-	      "COMPLEX()", "complex", type2char(TYPEOF(x)));
+	      "COMPLEX()", "complex", type2char(x->sexptype()));
     CHKZLN(x);
     return COMPLEX_RO(x);
 }
 
 SEXP *(STRING_PTR)(SEXP x) {
-    if(TYPEOF(x) != STRSXP)
+    if(x->sexptype() != STRSXP)
 	error(_("'%s' function can only be applied to a character, not a '%s'"),
-	      "STRING_PTR()", type2char(TYPEOF(x)));
+	      "STRING_PTR()", type2char(x->sexptype()));
     CHKZLN(x);
     return STRING_PTR(x);
 }
 
 const SEXP *(STRING_PTR_RO)(SEXP x) {
-    if(TYPEOF(x) != STRSXP)
+    if(x->sexptype() != STRSXP)
 	error(_("'%s' function can only be applied to a character, not a '%s'"),
-	      "STRING_PTR_RO()", type2char(TYPEOF(x)));
+	      "STRING_PTR_RO()", type2char(x->sexptype()));
     CHKZLN(x);
     return STRING_PTR_RO(x);
 }
@@ -4082,14 +4084,14 @@ NORET SEXP * (VECTOR_PTR)(SEXP x)
 void (SET_STRING_ELT)(SEXP x, R_xlen_t i, SEXP v) {
     if(TYPEOF(CHK(x)) != STRSXP)
 	error(_("'%s' function can only be applied to a character vector, not a '%s'"), "SET_STRING_ELT()",
-	      type2char(TYPEOF(x)));
+	      type2char(x->sexptype()));
     if(TYPEOF(CHK(v)) != CHARSXP)
        error(_("value of 'SET_STRING_ELT()' function must be a 'CHARSXP' not a '%s'"),
 	     type2char(TYPEOF(v)));
     if (i < 0 || i >= XLENGTH(x))
 	error(_("attempt to set index %ld/%ld in 'SET_STRING_ELT()' function"), (long long)i, (long long)XLENGTH(x));
     CHECK_OLD_TO_NEW(x, v);
-    if (ALTREP(x))
+    if (x->altrep())
 	ALTSTRING_SET_ELT(x, i, v);
     else {
 	SEXP *ps = (SEXP*) STDVEC_DATAPTR(x);
@@ -4100,11 +4102,11 @@ void (SET_STRING_ELT)(SEXP x, R_xlen_t i, SEXP v) {
 
 SEXP (SET_VECTOR_ELT)(SEXP x, R_xlen_t i, SEXP v) {
     /*  we need to allow vector-like types here */
-    if(TYPEOF(x) != VECSXP &&
-       TYPEOF(x) != EXPRSXP &&
-       TYPEOF(x) != WEAKREFSXP) {
+    if(x->sexptype() != VECSXP &&
+       x->sexptype() != EXPRSXP &&
+       x->sexptype() != WEAKREFSXP) {
 	error(_("'%s' function can only be applied to a list, not a '%s'"), "SET_VECTOR_ELT()",
-	      type2char(TYPEOF(x)));
+	      type2char(x->sexptype()));
     }
     if (i < 0 || i >= XLENGTH(x))
 	error(_("attempt to set index %ld/%ld in 'SET_VECTOR_ELT()' function"), (long long)i, (long long)XLENGTH(x));
@@ -4117,9 +4119,9 @@ SEXP (SET_VECTOR_ELT)(SEXP x, R_xlen_t i, SEXP v) {
 #ifdef TESTING_WRITE_BARRIER
 R_INLINE static SEXP CHKCONS(SEXP e)
 {
-    if (ALTREP(e))
+    if (e->altrep())
 	return CHK(e);
-    switch (TYPEOF(e)) {
+    switch (e->sexptype()) {
     case LISTSXP:
     case LANGSXP:
     case NILSXP:
@@ -4247,7 +4249,7 @@ int (MISSING)(SEXP x) { return MISSING(CHKCONS(x)); }
 void (SET_TAG)(SEXP x, SEXP v)
 {
     if (CHKCONS(x) == nullptr || x == R_NilValue)
-	error(_("incorrect value"));
+        error(_("incorrect value"));
     FIX_REFCNT(x, TAG(x), v);
     CHECK_OLD_TO_NEW(x, v);
     TAG(x) = v;
@@ -4439,16 +4441,17 @@ SEXP (SET_CXTAIL)(SEXP x, SEXP v) {
 }
 
 /* Test functions */
-extern "C" {
-Rboolean Rf_isNull(SEXP s) { return (Rboolean) isNull(CHK(s)); }
-Rboolean Rf_isSymbol(SEXP s) { return (Rboolean) isSymbol(CHK(s)); }
-Rboolean Rf_isLogical(SEXP s) { return (Rboolean) isLogical(CHK(s)); }
-Rboolean Rf_isReal(SEXP s) { return (Rboolean) isReal(CHK(s)); }
-Rboolean Rf_isComplex(SEXP s) { return (Rboolean) isComplex(CHK(s)); }
-Rboolean Rf_isExpression(SEXP s) { return (Rboolean) isExpression(CHK(s)); }
-Rboolean Rf_isEnvironment(SEXP s) { return (Rboolean) isEnvironment(CHK(s)); }
-Rboolean Rf_isString(SEXP s) { return (Rboolean) isString(CHK(s)); }
-Rboolean Rf_isObject(SEXP s) { return (Rboolean) isObject(CHK(s)); }
+extern "C"
+{
+    Rboolean Rf_isNull(SEXP s) { return (Rboolean)isNull(CHK(s)); }
+    Rboolean Rf_isSymbol(SEXP s) { return (Rboolean)isSymbol(CHK(s)); }
+    Rboolean Rf_isLogical(SEXP s) { return (Rboolean)isLogical(CHK(s)); }
+    Rboolean Rf_isReal(SEXP s) { return (Rboolean)isReal(CHK(s)); }
+    Rboolean Rf_isComplex(SEXP s) { return (Rboolean)isComplex(CHK(s)); }
+    Rboolean Rf_isExpression(SEXP s) { return (Rboolean)isExpression(CHK(s)); }
+    Rboolean Rf_isEnvironment(SEXP s) { return (Rboolean)isEnvironment(CHK(s)); }
+    Rboolean Rf_isString(SEXP s) { return (Rboolean)isString(CHK(s)); }
+    Rboolean Rf_isObject(SEXP s) { return (Rboolean)isObject(CHK(s)); }
 }
 
 /* Bindings accessors */
@@ -4524,58 +4527,63 @@ static void R_OutputStackTrace(FILE *file)
 {
     RCNTXT *cptr;
 
-    for (cptr = R_GlobalContext; cptr; cptr = cptr->nextContext()) {
-	if ((cptr->getCallFlag() & (CTXT_FUNCTION | CTXT_BUILTIN))
-	    && TYPEOF(cptr->getCall()) == LANGSXP) {
-	    SEXP fun = CAR(cptr->getCall());
-	    fprintf(file, "\"%s\" ",
-		    TYPEOF(fun) == SYMSXP ? CHAR(PRINTNAME(fun)) :
-		    "<Anonymous>");
-	}
+    for (cptr = R_GlobalContext; cptr; cptr = cptr->nextContext())
+    {
+        if ((cptr->getCallFlag() & (CTXT_FUNCTION | CTXT_BUILTIN)) && TYPEOF(cptr->getCall()) == LANGSXP)
+        {
+            SEXP fun = CAR(cptr->getCall());
+            fprintf(file, "\"%s\" ",
+                    TYPEOF(fun) == SYMSXP ? CHAR(PRINTNAME(fun)) : "<Anonymous>");
+        }
     }
 }
 
 static void R_ReportAllocation(R_size_t size)
 {
-    if (R_IsMemReporting) {
-	if(size > R_MemReportingThreshold) {
-	    fprintf(R_MemReportingOutfile, "%lu :", (unsigned long) size);
-	    R_OutputStackTrace(R_MemReportingOutfile);
-	    fprintf(R_MemReportingOutfile, "\n");
-	}
+    if (R_IsMemReporting)
+    {
+        if (size > R_MemReportingThreshold)
+        {
+            fprintf(R_MemReportingOutfile, "%lu :", (unsigned long)size);
+            R_OutputStackTrace(R_MemReportingOutfile);
+            fprintf(R_MemReportingOutfile, "\n");
+        }
     }
     return;
 }
 
 static void R_ReportNewPage(void)
 {
-    if (R_IsMemReporting) {
-	fprintf(R_MemReportingOutfile, "new page:");
-	R_OutputStackTrace(R_MemReportingOutfile);
-	fprintf(R_MemReportingOutfile, "\n");
+    if (R_IsMemReporting)
+    {
+        fprintf(R_MemReportingOutfile, "new page:");
+        R_OutputStackTrace(R_MemReportingOutfile);
+        fprintf(R_MemReportingOutfile, "\n");
     }
     return;
 }
 
 static void R_EndMemReporting()
 {
-    if(R_MemReportingOutfile) {
-	/* does not fclose always flush? */
-	fflush(R_MemReportingOutfile);
-	fclose(R_MemReportingOutfile);
-	R_MemReportingOutfile = nullptr;
+    if (R_MemReportingOutfile)
+    {
+        /* does not fclose always flush? */
+        fflush(R_MemReportingOutfile);
+        fclose(R_MemReportingOutfile);
+        R_MemReportingOutfile = nullptr;
     }
     R_IsMemReporting = 0;
     return;
 }
 
 static void R_InitMemReporting(SEXP filename, int append,
-			       R_size_t threshold)
+                               R_size_t threshold)
 {
-    if(R_MemReportingOutfile) R_EndMemReporting();
+    if (R_MemReportingOutfile)
+        R_EndMemReporting();
     R_MemReportingOutfile = RC_fopen(filename, append ? "a" : "w", TRUE);
     if (R_MemReportingOutfile == nullptr)
-	error(_("'Rprofmem()': cannot open output file '%s'"), filename);
+        error(_("'Rprofmem()': cannot open output file '%s'"), filename);
     R_MemReportingThreshold = threshold;
     R_IsMemReporting = 1;
     return;
@@ -4638,24 +4646,26 @@ void *R_AllocStringBuffer(size_t blen, R_StringBuffer &buf)
     }
     return buf.data;
 }
+void R_FreeStringBuffer(R_StringBuffer &buf) { buf.R_FreeStringBuffer(); }
 
-void R_FreeStringBuffer(R_StringBuffer &buf)
+void R_StringBuffer::R_FreeStringBuffer()
 {
-    if (buf.data)
+    if (this->data)
     {
-        free(buf.data);
-        buf.bufsize = 0;
-        buf.data = nullptr;
+        free(this->data);
+        this->bufsize = 0;
+        this->data = nullptr;
     }
 }
+HIDDEN void R_FreeStringBufferL(R_StringBuffer &buf) { buf.R_FreeStringBufferL(); }
 
-HIDDEN void R_FreeStringBufferL(R_StringBuffer &buf)
+void R_StringBuffer::R_FreeStringBufferL()
 {
-    if (buf.bufsize > buf.defaultSize)
+    if (this->bufsize > this->defaultSize)
     {
-        free(buf.data);
-        buf.bufsize = 0;
-        buf.data = nullptr;
+        free(this->data);
+        this->bufsize = 0;
+        this->data = nullptr;
     }
 }
 
@@ -4671,7 +4681,7 @@ HIDDEN bool Rf_Seql(SEXP a, SEXP b)
     if (a == b)
         return true;
     /* Leave this to compiler to optimize */
-    if (IS_CACHED(a) && IS_CACHED(b) && ENC_KNOWN(a) == ENC_KNOWN(b))
+    if (a->isCached() && b->isCached() && a->encKnown() == b->encKnown())
         return false;
     else
     {

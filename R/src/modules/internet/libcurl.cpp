@@ -537,7 +537,7 @@ HIDDEN SEXP in_do_curlDownload(SEXP call, SEXP op, SEXP args, SEXP rho)
 
     /* This comes mainly from curl --libcurl on the call used by
        download.file(method = "curl").
-       Also http://curl.haxx.se/libcurl/c/multi-single.html.
+       Also https://curl.haxx.se/libcurl/c/multi-single.html.
     */
 
     if (!cacheOK) {

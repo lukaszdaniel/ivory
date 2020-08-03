@@ -20,6 +20,10 @@
 #ifndef R_DYNPRIV_H
 #define R_DYNPRIV_H
 
+#ifndef __cplusplus
+#error Rdynpriv.h can only be included in C++ files
+#endif
+
 /*****************************************************
  These are internal routines and definitions subject
  to unannounced changes. Do not use for packages, etc.
@@ -45,19 +49,16 @@ typedef void *HINSTANCE;
 #include <Defn.h>
 #include <R_ext/Rdynload.h>
 
-#ifdef __cplusplus
-extern "C"
-#endif
-int R_moduleCdynload(const char *module, int local, int now);
+bool R_moduleCdynload(const char *module, int local, int now);
 
   /*
      A name-routine pair.
    */
-typedef struct
+struct CFunTabEntry
 {
   char *name;
   DL_FUNC func;
-} CFunTabEntry;
+};
 
   /*
      These three structures are the processed, internal information about
@@ -66,29 +67,27 @@ typedef struct
      library.
    */
 
-typedef struct
+struct Rf_DotCSymbol
 {
   char *name;
   DL_FUNC fun;
   int numArgs;
 
   R_NativePrimitiveArgType *types;
-} Rf_DotCSymbol;
+};
 
-typedef Rf_DotCSymbol Rf_DotFortranSymbol;
+using Rf_DotFortranSymbol = Rf_DotCSymbol;
 
-typedef struct
+struct Rf_DotCallSymbol
 {
   char *name;
   DL_FUNC fun;
   int numArgs;
-} Rf_DotCallSymbol;
+};
 
-typedef Rf_DotCallSymbol Rf_DotExternalSymbol;
+using Rf_DotExternalSymbol = Rf_DotCallSymbol;
 
-
-
-  /*
+/*
       This structure holds the information about a library that is 
       loaded into R and whose symbols are directly accessible to
       .C, .Call, .Fortran, .External, ...
@@ -124,7 +123,8 @@ struct _DllInfo
 struct Rf_RegisteredNativeSymbol
 {
   NativeSymbolType type;
-  union {
+  union
+  {
     Rf_DotCSymbol *c;
     Rf_DotCallSymbol *call;
     Rf_DotFortranSymbol *fortran;
@@ -145,13 +145,13 @@ struct Rf_RegisteredNativeSymbol
         handling the cached symbols,
         processing the library path. 
    */
-typedef struct
+struct OSDynSymbol
 {
-  HINSTANCE (*loadLibrary)
+  HINSTANCE(*loadLibrary)
   (const char *path, int asLocal, int now,
    const char *search);
   /* Load the dynamic library. */
-  DL_FUNC (*dlsym)
+  DL_FUNC(*dlsym)
   (DllInfo *info, const char *name);
   /* Low-level symbol lookup in library */
   void (*closeLibrary)(HINSTANCE handle);
@@ -160,13 +160,12 @@ typedef struct
   /* Put the current system error in DLLerror. */
 
   void (*deleteCachedSymbols)(DllInfo *dll); /* Discard cached symbols */
-  DL_FUNC (*lookupCachedSymbol)
+  DL_FUNC(*lookupCachedSymbol)
   (const char *name, const char *pkg, int all);
 
   void (*fixPath)(char *path);
   void (*getFullDLLPath)(SEXP call, char *buf, const char *const path);
-
-} OSDynSymbol;
+};
 
 extern OSDynSymbol Rf_osDynSymbol, *R_osDynSymbol;
 
@@ -178,25 +177,21 @@ extern OSDynSymbol Rf_osDynSymbol, *R_osDynSymbol;
      pool if CACHE_DLL_SYM is defined and repeated lookups check here first,
      before using the dynamic loader's lookup mechanism.
    */
-typedef struct
+struct R_CPFun
 {
   char pkg[21];
   char name[41];
   DL_FUNC func;
-} R_CPFun;
+};
 
 extern R_CPFun CPFun[];
 extern int nCPFun;
 
 #endif /* CACHE_DLL_SYM */
 
-#ifdef __cplusplus
-extern "C" {
-#endif
 DL_FUNC Rf_lookupCachedSymbol(const char *name, const char *pkg, int all);
 
-DL_FUNC R_dlsym(DllInfo *info, const char *name, 
-		R_RegisteredNativeSymbol *symbol);
+DL_FUNC R_dlsym(DllInfo *info, const char *name, R_RegisteredNativeSymbol *symbol);
 
 /* Moved to API in R 3.4.0
   SEXP R_MakeExternalPtrFn(DL_FUNC p, SEXP tag, SEXP prot);
@@ -205,8 +200,5 @@ DL_FUNC R_dlsym(DllInfo *info, const char *name,
 DL_FUNC R_dotCallFn(SEXP, SEXP, int);
 SEXP R_doDotCall(DL_FUNC, int, SEXP *, SEXP);
 
-#ifdef __cplusplus
-} //extern "C"
-#endif
 
 #endif /* R_DYNPRIV_H */

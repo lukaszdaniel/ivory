@@ -104,9 +104,8 @@ static void setFileTime(const char *fn, tm_unz tmu_date)
 }
 #endif
 
-#define BUF_SIZE 4096
-static int
-extract_one(unzFile uf, const char *const dest, const char * const filename,
+constexpr int BUF_SIZE = 4096;
+static int extract_one(unzFile uf, const char *const dest, const char * const filename,
 	    SEXP names, int *nnames, int overwrite, int junk, int setTime)
 {
     int err = UNZ_OK;
@@ -401,7 +400,7 @@ SEXP Runzip(SEXP args)
 typedef struct unzconn
 {
 	void *uf;
-} * Runzconn;
+} *Runzconn;
 
 static Rboolean unz_open(Rconnection con)
 {
@@ -560,8 +559,6 @@ extern int errno;
 #endif
 */
 
-#define local static
-
 #ifndef CASESENSITIVITYDEFAULT_NO
 #if !defined(unix) && !defined(CASESENSITIVITYDEFAULT_YES)
 #define CASESENSITIVITYDEFAULT_NO
@@ -569,11 +566,11 @@ extern int errno;
 #endif
 
 #ifndef UNZ_BUFSIZE
-#define UNZ_BUFSIZE (16384)
+constexpr size_t UNZ_BUFSIZE = (16384);
 #endif
 
 #ifndef UNZ_MAXFILENAMEINZIP
-#define UNZ_MAXFILENAMEINZIP (256)
+constexpr size_t UNZ_MAXFILENAMEINZIP = (256);
 #endif
 
 #ifndef ALLOC
@@ -590,7 +587,7 @@ extern int errno;
 #define SIZECENTRALDIRITEM (0x2e)
 #define SIZEZIPLOCALHEADER (0x1e)
 
-static const char unz_copyright[] =
+static constexpr char unz_copyright[] =
    " unzip 1.01 Copyright 1998-2004 Gilles Vollant - http://www.winimage.com/zLibDll";
 
 /* unz_file_info_interntal contain internal info about a file in zipfile*/
@@ -663,29 +660,28 @@ struct unz64_s
    IN assertion: the stream s has been sucessfully opened for reading.
 */
 
-local int unz64local_getByte(voidpf filestream, int *pi)
+static int unz64local_getByte(voidpf filestream, int *pi)
 {
-    unsigned char c;
-    int err = (int) fread_func(filestream, &c, 1);
-    if (err == 1)
-    {
-	*pi = (int)c;
-	return UNZ_OK;
-    }
-    else
-    {
-	if (ferror_func(filestream))
-	    return UNZ_ERRNO;
+	unsigned char c;
+	int err = (int)fread_func(filestream, &c, 1);
+	if (err == 1)
+	{
+		*pi = (int)c;
+		return UNZ_OK;
+	}
 	else
-	    return UNZ_EOF;
-    }
+	{
+		if (ferror_func(filestream))
+			return UNZ_ERRNO;
+		else
+			return UNZ_EOF;
+	}
 }
-
 
 /* ===========================================================================
    Reads a long in LSB order from the given gz_stream. Sets
 */
-local int unz64local_getShort (voidpf filestream, uLong *pX)
+static int unz64local_getShort (voidpf filestream, uLong *pX)
 {
     uLong x ;
     int i = 0;
@@ -705,7 +701,7 @@ local int unz64local_getShort (voidpf filestream, uLong *pX)
     return err;
 }
 
-local int unz64local_getLong (voidpf filestream, uLong *pX)
+static int unz64local_getLong (voidpf filestream, uLong *pX)
 {
     uLong x ;
     int i = 0;
@@ -733,52 +729,52 @@ local int unz64local_getLong (voidpf filestream, uLong *pX)
     return err;
 }
 
-local int unz64local_getLong64 (voidpf filestream, ZPOS64_T *pX)
+static int unz64local_getLong64(voidpf filestream, ZPOS64_T *pX)
 {
-    ZPOS64_T x ;
-    int i = 0;
-    int err;
+	ZPOS64_T x;
+	int i = 0;
+	int err;
 
-    err = unz64local_getByte(filestream,&i);
-    x = (ZPOS64_T)i;
+	err = unz64local_getByte(filestream, &i);
+	x = (ZPOS64_T)i;
 
-    if (err == UNZ_OK)
-	err = unz64local_getByte(filestream,&i);
-    x |= ((ZPOS64_T)i) << 8;
+	if (err == UNZ_OK)
+		err = unz64local_getByte(filestream, &i);
+	x |= ((ZPOS64_T)i) << 8;
 
-    if (err == UNZ_OK)
-	err = unz64local_getByte(filestream,&i);
-    x |= ((ZPOS64_T)i) << 16;
+	if (err == UNZ_OK)
+		err = unz64local_getByte(filestream, &i);
+	x |= ((ZPOS64_T)i) << 16;
 
-    if (err == UNZ_OK)
-	err = unz64local_getByte(filestream,&i);
-    x |= ((ZPOS64_T)i) << 24;
+	if (err == UNZ_OK)
+		err = unz64local_getByte(filestream, &i);
+	x |= ((ZPOS64_T)i) << 24;
 
-    if (err == UNZ_OK)
-	err = unz64local_getByte(filestream,&i);
-    x |= ((ZPOS64_T)i) << 32;
+	if (err == UNZ_OK)
+		err = unz64local_getByte(filestream, &i);
+	x |= ((ZPOS64_T)i) << 32;
 
-    if (err == UNZ_OK)
-	err = unz64local_getByte(filestream,&i);
-    x |= ((ZPOS64_T)i) << 40;
+	if (err == UNZ_OK)
+		err = unz64local_getByte(filestream, &i);
+	x |= ((ZPOS64_T)i) << 40;
 
-    if (err == UNZ_OK)
-	err = unz64local_getByte(filestream,&i);
-    x |= ((ZPOS64_T)i) << 48;
+	if (err == UNZ_OK)
+		err = unz64local_getByte(filestream, &i);
+	x |= ((ZPOS64_T)i) << 48;
 
-    if (err == UNZ_OK)
-	err = unz64local_getByte(filestream,&i);
-    x |= ((ZPOS64_T)i) << 56;
+	if (err == UNZ_OK)
+		err = unz64local_getByte(filestream, &i);
+	x |= ((ZPOS64_T)i) << 56;
 
-    if (err == UNZ_OK)
-	*pX = x;
-    else
-	*pX = 0;
-    return err;
+	if (err == UNZ_OK)
+		*pX = x;
+	else
+		*pX = 0;
+	return err;
 }
 
 /* My own strcmpi / strcasecmp */
-local int strcmpcasenosensitive_internal(const char *fileName1, const char *fileName2)
+static int strcmpcasenosensitive_internal(const char *fileName1, const char *fileName2)
 {
 	while (true)
 	{
@@ -840,7 +836,7 @@ extern int ZEXPORT unzStringFileNameCompare (const char*  fileName1,
   Locate the Central directory of a zipfile (at the end, just before
     the global comment)
 */
-local ZPOS64_T unz64local_SearchCentralDir(voidpf filestream)
+static ZPOS64_T unz64local_SearchCentralDir(voidpf filestream)
 {
     unsigned char* buf;
     ZPOS64_T uSizeFile;
@@ -901,7 +897,7 @@ local ZPOS64_T unz64local_SearchCentralDir(voidpf filestream)
   Locate the Central directory 64 of a zipfile (at the end, just before
     the global comment)
 */
-local ZPOS64_T unz64local_SearchCentralDir64(voidpf filestream)
+static ZPOS64_T unz64local_SearchCentralDir64(voidpf filestream)
 {
     unsigned char* buf;
     ZPOS64_T uSizeFile;
@@ -1006,7 +1002,7 @@ local ZPOS64_T unz64local_SearchCentralDir64(voidpf filestream)
      Else, the return value is a unzFile Handle, usable with other function
        of this unzip package.
 */
-local unzFile unzOpenInternal(const void *path, int is64bitOpenFunction)
+static unzFile unzOpenInternal(const void *path, int is64bitOpenFunction)
 {
     unz64_s us;
     unz64_s *s;
@@ -1226,7 +1222,7 @@ extern int ZEXPORT unzGetGlobalInfo64(unzFile file, unz_global_info64* pglobal_i
 /*
    Translate date/time from Dos format to tm_unz (readable more easily)
 */
-local void unz64local_DosDateToTmuDate(ZPOS64_T ulDosDate, tm_unz* ptm)
+static void unz64local_DosDateToTmuDate(ZPOS64_T ulDosDate, tm_unz* ptm)
 {
     ZPOS64_T uDate;
     uDate = (ZPOS64_T)(ulDosDate>>16);
@@ -1242,7 +1238,7 @@ local void unz64local_DosDateToTmuDate(ZPOS64_T ulDosDate, tm_unz* ptm)
 /*
   Get Info about the current file in the zipfile, with internal only info
 */
-local int unz64local_GetCurrentFileInfoInternal(unzFile file,
+static int unz64local_GetCurrentFileInfoInternal(unzFile file,
 						  unz_file_info64 *pfile_info,
 						  unz_file_info64_internal
 						  *pfile_info_internal,
@@ -1643,7 +1639,7 @@ extern int ZEXPORT unzLocateFile(unzFile file, const char *szFileName, int iCase
   store in *piSizeVar the size of extra info in local header
 	(filename and size of extra field data)
 */
-local int unz64local_CheckCurrentFileCoherencyHeader(unz64_s* s, uInt* piSizeVar,
+static int unz64local_CheckCurrentFileCoherencyHeader(unz64_s* s, uInt* piSizeVar,
 					    ZPOS64_T * poffset_local_extrafield,
 					    uInt  * psize_local_extrafield)
 {

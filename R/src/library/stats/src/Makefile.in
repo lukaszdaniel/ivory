@@ -36,7 +36,7 @@ DEPENDS = $(SOURCES_C:.c=.d) $(SOURCES_CXX:.cpp=.d)
 ## BUILD_LTO_CHECK_TRUE relies on using the internal BLAS and LAPACK
 OBJECTS = $(SOURCES_C:.c=.o) $(SOURCES_CXX:.cpp=.o) $(SOURCES_F:.f=.o)
 # need config.h
-PKG_CPPFLAGS = -I../../../include -I$(top_srcdir)/src/include -DHAVE_CONFIG_H
+PKG_CPPFLAGS = -I../../../include -I$(top_srcdir)/src/include -DCOMPILING_IVORY -DHAVE_CONFIG_H
 PKG_CFLAGS = @R_OPENMP_CFLAGS@ $(C_VISIBILITY)
 PKG_FFLAGS = $(F_VISIBILITY)
 
@@ -69,11 +69,11 @@ shlib: $(SHLIB)
 include $(R_HOME)/etc${R_ARCH}/Makeconf
 include $(top_srcdir)/share/make/shlib.mk
 ## override to use LTO for linking with --enable-lto=R
-LTO = @LTO@
+LTO_FC = @LTO_FC@
 
 ## Meeded with i386 gcc 4.5.0 -- PR#14427
 ## (SHLIB_FFLAGS is apparently currently unused)
-portsrc_FFLAGS=$(FPICFLAGS) $(SHLIB_FFLAGS) @SAFE_FFLAGS@ $(LTO)
+portsrc_FFLAGS=$(FPICFLAGS) $(SHLIB_FFLAGS) @SAFE_FFLAGS@ $(LTO_FC)
 portsrc.o: portsrc.f
 	$(FC) $(portsrc_FFLAGS) -c $< -o $@
 

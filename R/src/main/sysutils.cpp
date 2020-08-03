@@ -167,14 +167,14 @@ wchar_t *filenameToWchar(const SEXP fn, const Rboolean expand)
 	wcscpy(filename, L"");
 	return filename;
     }
-    if(IS_LATIN1(fn))
+    if(fn->isLatin1())
 #ifdef HAVE_ICONV_CP1252
 	from = "CP1252";
 #else
 	from = "latin1";
 #endif
-    if(IS_UTF8(fn)) from = "UTF-8";
-    if(IS_BYTES(fn)) error(_("encoding of a filename cannot be 'bytes'"));
+    if(fn->isUTF8()) from = "UTF-8";
+    if(fn->isBytes()) error(_("encoding of a filename cannot be 'bytes'"));
     obj = Riconv_open("UCS-2LE", from);
     if(obj == (void *)(-1))
 	error(_("unsupported conversion from '%s' in codepage %d"), from, localeCP);
@@ -586,7 +586,7 @@ HIDDEN SEXP do_iconv(SEXP call, SEXP op, SEXP args, SEXP env)
     char *outbuf;
     const char *sub;
     size_t inb, outb, res;
-    R_StringBuffer cbuff = {nullptr, 0, MAXELTSIZE};
+    R_StringBuffer cbuff = R_StringBuffer();
     Rboolean isRawlist = FALSE;
 
     checkArity(op, args);
@@ -644,7 +644,7 @@ HIDDEN SEXP do_iconv(SEXP call, SEXP op, SEXP args, SEXP env)
 #else
 	    error(_("unsupported conversion from '%s' to '%s'"), from, to);
 #endif
-	isRawlist = (Rboolean) (TYPEOF(x) == VECSXP);
+	isRawlist = (Rboolean) (x->sexptype() == VECSXP);
 	if(isRawlist) {
 	    if(toRaw)
 		PROTECT(ans = duplicate(x));
@@ -653,7 +653,7 @@ HIDDEN SEXP do_iconv(SEXP call, SEXP op, SEXP args, SEXP env)
 		SHALLOW_DUPLICATE_ATTRIB(ans, x);
 	    }
 	} else {
-	    if(TYPEOF(x) != STRSXP) {
+	    if(x->sexptype() != STRSXP) {
 		Riconv_close(obj);
 		error(_("'%s' argument must be a character vector"), "x");
 	    }
@@ -769,7 +769,7 @@ HIDDEN SEXP do_iconv(SEXP call, SEXP op, SEXP args, SEXP env)
 	    }
 	}
 	Riconv_close(obj);
-	R_FreeStringBuffer(cbuff);
+	cbuff.R_FreeStringBuffer();
     }
     UNPROTECT(1);
     return ans;
@@ -777,11 +777,11 @@ HIDDEN SEXP do_iconv(SEXP call, SEXP op, SEXP args, SEXP env)
 
 cetype_t Rf_getCharCE(SEXP x)
 {
-    if(TYPEOF(x) != CHARSXP)
+    if(x->sexptype() != CHARSXP)
 	error(_("'%s' must be called on a CHARSXP"), "getCharCE");
-    if(IS_UTF8(x)) return CE_UTF8;
-    else if(IS_LATIN1(x)) return CE_LATIN1;
-    else if(IS_BYTES(x)) return CE_BYTES;
+    if(x->isUTF8()) return CE_UTF8;
+    else if(x->isLatin1()) return CE_LATIN1;
+    else if(x->isBytes()) return CE_BYTES;
     else return CE_NATIVE;
 }
 
@@ -841,18 +841,18 @@ enum nttype_t
 };
 
 /* Decides whether translation to native encoding is needed. */
-R_INLINE static nttype_t needsTranslation(SEXP x) {
+inline static nttype_t needsTranslation(SEXP x) {
 
-    if (IS_ASCII(x)) return NT_NONE;
-    if (IS_UTF8(x)) {
+    if (x->isAscii()) return NT_NONE;
+    if (x->isUTF8()) {
 	if (utf8locale || x == NA_STRING) return NT_NONE;
 	return NT_FROM_UTF8;
     }
-    if (IS_LATIN1(x)) {
+    if (x->isLatin1()) {
 	if (x == NA_STRING || latin1locale) return NT_NONE;
 	return NT_FROM_LATIN1;
     }
-    if (IS_BYTES(x))
+    if (x->isBytes())
 	error(_("translating strings with \"bytes\" encoding is not allowed"));
     return NT_NONE;
 }
@@ -981,78 +981,78 @@ next_char:
    R_alloc stack */
 const char *Rf_translateChar(SEXP x)
 {
-    if(TYPEOF(x) != CHARSXP)
+    if(x->sexptype() != CHARSXP)
 	error(_("'%s' function must be called on a CHARSXP, but got '%s'"),
-	      "translateChar()", type2char(TYPEOF(x)));
+	      "translateChar()", type2char(x->sexptype()));
     nttype_t t = needsTranslation(x);
     const char *ans = CHAR(x);
     if (t == NT_NONE) return ans;
 
-    R_StringBuffer cbuff = {nullptr, 0, MAXELTSIZE};
+    R_StringBuffer cbuff = R_StringBuffer();
     translateToNative(ans, cbuff, t, 0);
 
     size_t res = strlen(cbuff.data) + 1;
     char *p = R_alloc(res, 1);
     memcpy(p, cbuff.data, res);
-    R_FreeStringBuffer(cbuff);
+    cbuff.R_FreeStringBuffer();
     return p;
 }
 
 /* Variant which must work, used for file paths, including devices */
 const char *Rf_translateCharFP(SEXP x)
 {
-    if(TYPEOF(x) != CHARSXP)
+    if(x->sexptype() != CHARSXP)
 	error(_("'%s' function must be called on a CHARSXP, but got '%s'"),
-	      "translateChar()", type2char(TYPEOF(x)));
+	      "translateChar()", type2char(x->sexptype()));
     nttype_t t = needsTranslation(x);
     const char *ans = CHAR(x);
     if (t == NT_NONE) return ans;
 
-    R_StringBuffer cbuff = {nullptr, 0, MAXELTSIZE};
+    R_StringBuffer cbuff = R_StringBuffer();
     translateToNative(ans, cbuff, t, 1);
 
     size_t res = strlen(cbuff.data) + 1;
     char *p = R_alloc(res, 1);
     memcpy(p, cbuff.data, res);
-    R_FreeStringBuffer(cbuff);
+    cbuff.R_FreeStringBuffer();
     return p;
 }
 
 /* Variant which may return nullptr, used for file paths */
 HIDDEN const char *Rf_translateCharFP2(SEXP x)
 {
-    if(TYPEOF(x) != CHARSXP)
+    if(x->sexptype() != CHARSXP)
 	error(_("'%s' function must be called on a CHARSXP, but got '%s'"),
-	      "translateChar()", type2char(TYPEOF(x)));
+	      "translateChar()", type2char(x->sexptype()));
     nttype_t t = needsTranslation(x);
     const char *ans = CHAR(x);
     if (t == NT_NONE) return ans;
 
-    R_StringBuffer cbuff = {nullptr, 0, MAXELTSIZE};
+    R_StringBuffer cbuff = R_StringBuffer();
     if (translateToNative(ans, cbuff, t, 2)) return nullptr;
 
     size_t res = strlen(cbuff.data) + 1;
     char *p = R_alloc(res, 1);
     memcpy(p, cbuff.data, res);
-    R_FreeStringBuffer(cbuff);
+    cbuff.R_FreeStringBuffer();
     return p;
 }
 
 SEXP Rf_installTrChar(SEXP x)
 {
-    if(TYPEOF(x) != CHARSXP)
+    if(x->sexptype() != CHARSXP)
 	error(_("'%s' function must be called on a CHARSXP, but got '%s'"),
-	      "installTrChar()", type2char(TYPEOF(x)));
+	      "installTrChar()", type2char(x->sexptype()));
     nttype_t t = needsTranslation(x);
     if (t == NT_NONE) return installNoTrChar(x);
 
-    R_StringBuffer cbuff = {nullptr, 0, MAXELTSIZE};
+    R_StringBuffer cbuff = R_StringBuffer();
     // For back-compatibility this allows installing
     // symbols with escapes, with a warning.
     translateToNative(CHAR(x), cbuff, t, 2);
 
     SEXP Sans = install(cbuff.data);
-    R_FreeStringBuffer(cbuff);
+    cbuff.R_FreeStringBuffer();
     return Sans;
 }
 
@@ -1073,32 +1073,34 @@ SEXP Rf_installChar(SEXP x)
 */
 const char *Rf_translateChar0(SEXP x)
 {
-    if(TYPEOF(x) != CHARSXP)
-	error(_("'%s' must be called on a CHARSXP"), "translateChar0");
-    if(IS_BYTES(x)) return CHAR(x);
+    if (x->sexptype() != CHARSXP)
+        error(_("'%s' must be called on a CHARSXP"), "translateChar0");
+    if (x->isBytes())
+        return CHAR(x);
     return translateChar(x);
 }
 
 /* This may return a R_alloc-ed result, so the caller has to manage the
    R_alloc stack */
-const char *Rf_translateCharUTF8(SEXP x)
+const char *Rf_translateCharUTF8(SEXP x) { return x->translateCharUTF8_(); }
+const char *SEXPREC::translateCharUTF8_() const
 {
     void *obj;
-    const char *inbuf, *ans = CHAR(x);
+    const char *inbuf, *ans = CHAR(this);
     char *outbuf, *p, *from = (char *) "";
     size_t inb, outb, res;
-    R_StringBuffer cbuff = {nullptr, 0, MAXELTSIZE};
+    R_StringBuffer cbuff = R_StringBuffer();
 
-    if(TYPEOF(x) != CHARSXP)
+    if(this->sexptypeNotEqual(CHARSXP))
 	error(_("'%s' must be called on a CHARSXP, but got '%s'"),
-	      "translateCharUTF8", type2char(TYPEOF(x)));
-    if(x == NA_STRING) return ans;
-    if(IS_UTF8(x)) return ans;
-    if(IS_ASCII(x)) return ans;
-    if(IS_BYTES(x))
+	      "translateCharUTF8", type2char(this->sexptype()));
+    if(this == NA_STRING) return ans;
+    if(this->isUTF8()) return ans;
+    if(this->isAscii()) return ans;
+    if(this->isBytes())
 	error(_("translating strings with \"bytes\" encoding is not allowed"));
 
-    if (IS_LATIN1(x))
+    if (this->isLatin1())
 #ifdef HAVE_ICONV_CP1252
 	from = (char *) "CP1252";
 #else
@@ -1118,7 +1120,7 @@ top_of_loop:
     inbuf = ans; inb = strlen(inbuf);
     outbuf = cbuff.data; outb = cbuff.bufsize - 1;
     /* First initialize output */
-    Riconv (obj, nullptr, nullptr, &outbuf, &outb);
+    Riconv(obj, nullptr, nullptr, &outbuf, &outb);
 next_char:
     /* Then convert input  */
     res = Riconv(obj, &inbuf , &inb, &outbuf, &outb);
@@ -1140,7 +1142,7 @@ next_char:
     res = strlen(cbuff.data) + 1;
     p = R_alloc(res, 1);
     memcpy(p, cbuff.data, res);
-    R_FreeStringBuffer(cbuff);
+    cbuff.R_FreeStringBuffer();
     return p;
 }
 
@@ -1151,19 +1153,19 @@ HIDDEN const char *Rf_trCharUTF8(SEXP x)
     const char *inbuf, *ans = CHAR(x);
     char *outbuf, *p, *from = (char *) "";
     size_t inb, outb, res;
-    R_StringBuffer cbuff = {nullptr, 0, MAXELTSIZE};
+    R_StringBuffer cbuff = R_StringBuffer();
     bool failed = false;
 
-    if(TYPEOF(x) != CHARSXP)
+    if(x->sexptype() != CHARSXP)
 	error(_("'%s' function must be called on a CHARSXP, but got '%s'"),
-	      "translateCharUTF8()", type2char(TYPEOF(x)));
+	      "translateCharUTF8()", type2char(x->sexptype()));
     if(x == NA_STRING) return ans;
     if(IS_UTF8(x)) return ans;
     if(IS_ASCII(x)) return ans;
-    if(IS_BYTES(x))
+    if(x->isBytes())
 	error(_("translating strings with \"bytes\" encoding is not allowed"));
 
-    if (IS_LATIN1(x))
+    if (x->isLatin1())
 #ifdef HAVE_ICONV_CP1252
 	from = (char *) "CP1252";
 #else
@@ -1208,7 +1210,7 @@ next_char:
     res = strlen(cbuff.data) + 1;
     p = R_alloc(res, 1);
     memcpy(p, cbuff.data, res);
-    R_FreeStringBuffer(cbuff);
+    cbuff.R_FreeStringBuffer();
     return p;
 }
 
@@ -1240,15 +1242,15 @@ const wchar_t *Rf_wtransChar(SEXP x)
     wchar_t *p;
     size_t inb, outb, res, top;
     Rboolean knownEnc = FALSE;
-    R_StringBuffer cbuff = {nullptr, 0, MAXELTSIZE};
+    R_StringBuffer cbuff = R_StringBuffer();
 
-    if(TYPEOF(x) != CHARSXP)
+    if(x->sexptype() != CHARSXP)
 	error(_("'%s' must be called on a CHARSXP"), "wtransChar");
 
-    if(IS_BYTES(x))
+    if(x->isBytes())
 	error(_("translating strings with \"bytes\" encoding is not allowed"));
 
-    if(IS_LATIN1(x)) {
+    if(x->isLatin1()) {
 	if(!latin1_wobj) {
 #ifdef HAVE_ICONV_CP1252
 	    from = "CP1252";
@@ -1314,7 +1316,7 @@ next_char:
     p = (wchar_t *) R_alloc(res+4, 1);
     memset(p, 0, res+4);
     memcpy(p, cbuff.data, res);
-    R_FreeStringBuffer(cbuff);
+    cbuff.R_FreeStringBuffer();
     return p;
 }
 
@@ -1324,7 +1326,7 @@ next_char:
    R_alloc stack */
 const char *Rf_reEnc(const char *x, cetype_t ce_in, cetype_t ce_out, int subst)
 {
-    void * obj;
+    void *obj;
     const char *inbuf;
     char *outbuf, *p;
     size_t inb, outb, res, top;
@@ -1332,7 +1334,7 @@ const char *Rf_reEnc(const char *x, cetype_t ce_in, cetype_t ce_out, int subst)
 #ifdef _WIN32
     char buf[20];
 #endif
-    R_StringBuffer cbuff = {nullptr, 0, MAXELTSIZE};
+    R_StringBuffer cbuff = R_StringBuffer();
 
     /* We can only encode from Symbol to UTF-8 */
     if(ce_in == ce_out || ce_out == CE_SYMBOL ||
@@ -1439,7 +1441,7 @@ next_char:
     res = (top-outb)+1; /* strlen(cbuff.data) + 1; */
     p = R_alloc(res, 1);
     memcpy(p, cbuff.data, res);
-    R_FreeStringBuffer(cbuff);
+    cbuff.R_FreeStringBuffer();
     return p;
 }
 
@@ -1454,7 +1456,7 @@ void reEnc2(const char *x, char *y, int ny,
     size_t inb, outb, res, top;
     char *tocode = nullptr, *fromcode = nullptr;
     char buf[20];
-    R_StringBuffer cbuff = {nullptr, 0, MAXELTSIZE};
+    R_StringBuffer cbuff = R_StringBuffer();
 
     strncpy(y, x, ny);
     y[ny - 1] = '\0';
@@ -1545,37 +1547,40 @@ next_char:
     res = (top-outb)+1; /* strlen(cbuff.data) + 1; */
     if (res > ny) error(_("converted string is too long for buffer"));
     memcpy(y, cbuff.data, res);
-    R_FreeStringBuffer(cbuff);
+    cbuff.R_FreeStringBuffer();
 }
 #endif
 
-HIDDEN void
-invalidate_cached_recodings(void)
+HIDDEN void invalidate_cached_recodings(void)
 {
-    if (latin1_obj) {
-	Riconv_close(latin1_obj);
-	latin1_obj = nullptr;
+    if (latin1_obj)
+    {
+        Riconv_close(latin1_obj);
+        latin1_obj = nullptr;
     }
-    if (utf8_obj) {
-	Riconv_close(utf8_obj);
-	utf8_obj = nullptr;
+    if (utf8_obj)
+    {
+        Riconv_close(utf8_obj);
+        utf8_obj = nullptr;
     }
-    if (ucsmb_obj) {
-	Riconv_close(ucsmb_obj);
-	ucsmb_obj = nullptr;
+    if (ucsmb_obj)
+    {
+        Riconv_close(ucsmb_obj);
+        ucsmb_obj = nullptr;
     }
 #ifdef _WIN32
-    if (latin1_wobj) {
-	Riconv_close(latin1_wobj);
-	latin1_wobj = nullptr;
+    if (latin1_wobj)
+    {
+        Riconv_close(latin1_wobj);
+        latin1_wobj = nullptr;
     }
-    if (utf8_wobj) {
-	Riconv_close(utf8_wobj);
-	utf8_wobj = nullptr;
+    if (utf8_wobj)
+    {
+        Riconv_close(utf8_wobj);
+        utf8_wobj = nullptr;
     }
 #endif
 }
-
 
 /* in C11 these could use char32_t */
 #ifdef WORDS_BIGENDIAN
@@ -1767,7 +1772,7 @@ static int isDir(char *path)
 #endif /* HAVE_STAT */
 
 #if !HAVE_DECL_MKDTEMP
-extern char * mkdtemp (char *template);
+extern char *mkdtemp(char *template);
 #endif
 
 #ifdef _WIN32
@@ -1783,11 +1788,11 @@ void R_reInitTempDir(int die_on_fail)
     int hasspace = 0;
 #endif
 
-#define ERROR_MAYBE_DIE(MSG_)			\
-    if(die_on_fail)				\
-	R_Suicide(MSG_);			\
-    else					\
-	errorcall(R_NilValue, MSG_)
+#define ERROR_MAYBE_DIE(MSG_) \
+    if (die_on_fail)          \
+        R_Suicide(MSG_);      \
+    else                      \
+        errorcall(R_NilValue, MSG_)
 
     if(R_TempDir) return; /* someone else set it */
     tmp = nullptr; /* getenv("R_SESSION_TMPDIR");   no longer set in R.sh */
@@ -2022,7 +2027,7 @@ HIDDEN SEXP do_glob(SEXP call, SEXP op, SEXP args, SEXP env)
     int res, dirmark; bool initialized = false;
     glob_t globbuf;
 #ifdef _WIN32
-    R_StringBuffer cbuff = {nullptr, 0, MAXELTSIZE};
+    R_StringBuffer cbuff = R_StringBuffer();
 #endif
 
     checkArity(op, args);
@@ -2082,7 +2087,7 @@ HIDDEN SEXP do_glob(SEXP call, SEXP op, SEXP args, SEXP env)
 #endif
     UNPROTECT(1);
 #ifdef _WIN32
-    R_FreeStringBufferL(cbuff);
+    cbuff.R_FreeStringBufferL();
 #endif
     if (initialized) globfree(&globbuf);
     return ans;

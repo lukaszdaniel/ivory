@@ -39,7 +39,7 @@
 #include <Defn.h>
 #include <cstdio>
 
-#define IOBSIZE 4096
+constexpr int IOBSIZE = 4096;
 
 struct BufferListItem
 {

@@ -180,12 +180,12 @@ struct parse_cleanup_info
 
 static void parse_cleanup(void *data)
 {
-    parse_cleanup_info *pci = (parse_cleanup_info *)data;
-    Rconnection con = pci->con;
-    if(con && con->isopen)
-	con->close(con);
-    known_to_be_latin1 = pci->old_latin1;
-    known_to_be_utf8 = pci->old_utf8;
+	parse_cleanup_info *pci = (parse_cleanup_info *)data;
+	Rconnection con = pci->con;
+	if (con && con->isopen)
+		con->close(con);
+	known_to_be_latin1 = pci->old_latin1;
+	known_to_be_utf8 = pci->old_utf8;
 }
 
 /* "do_parse" - the user interface input/output to files.

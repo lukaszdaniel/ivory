@@ -71,7 +71,7 @@ static SEXP lbinary(SEXP call, SEXP op, SEXP args)
 	x = CAR(args),
 	y = CADR(args);
 
-    if (isRaw(x) && isRaw(y)) {
+    if (x->isRaw_() && y->isRaw_()) {
     }
     else if ( !(isNull(x) || isNumber(x)) ||
 	      !(isNull(y) || isNumber(y)) )
@@ -135,7 +135,7 @@ static SEXP lbinary(SEXP call, SEXP op, SEXP args)
 	    warningcall(call,
 			_("longer object length is not a multiple of shorter object length"));
 
-	if (isRaw(x) && isRaw(y)) {
+	if (x->isRaw_() && y->isRaw_()) {
 	    x = binaryLogic2(PRIMVAL(op), x, y);
 	}
 	else {
@@ -150,7 +150,7 @@ static SEXP lbinary(SEXP call, SEXP op, SEXP args)
 	    x = binaryLogic(PRIMVAL(op), x, y);
 	}
     } else { // nx == 0 || ny == 0
-	x = allocVector((isRaw(x) && isRaw(y)) ? RAWSXP : LGLSXP, 0);
+	x = allocVector((x->isRaw_() && y->isRaw_()) ? RAWSXP : LGLSXP, 0);
     }
 
     PROTECT(x);
@@ -183,16 +183,16 @@ static SEXP lunary(SEXP call, SEXP op, SEXP arg)
     R_xlen_t i, len;
 
     len = XLENGTH(arg);
-    if (!isLogical(arg) && !isNumber(arg) && !isRaw(arg)) {
+    if (!isLogical(arg) && !isNumber(arg) && !arg->isRaw_()) {
 	/* For back-compatibility */
 	if (!len) return allocVector(LGLSXP, 0);
 	errorcall(call, _("invalid argument type"));
     }
-    if (isLogical(arg) || isRaw(arg))
+    if (isLogical(arg) || arg->isRaw_())
 	// copy all attributes in this case
 	x = PROTECT(shallow_duplicate(arg));
     else {
-	x = PROTECT(allocVector(isRaw(arg) ? RAWSXP : LGLSXP, len));
+	x = PROTECT(allocVector(arg->isRaw_() ? RAWSXP : LGLSXP, len));
 	PROTECT(names = getAttrib(arg, R_NamesSymbol));
 	PROTECT(dim = getAttrib(arg, R_DimSymbol));
 	PROTECT(dimnames = getAttrib(arg, R_DimNamesSymbol));

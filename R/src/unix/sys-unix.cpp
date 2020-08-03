@@ -286,17 +286,22 @@ HIDDEN double R_getClockIncrement(void)
    As follows from empirical observations, SIGTERM can sometimes terminate
    applications that cannot be terminated by SIGINT. */
 
-int kill_signals[] = { KILL_SIGNAL1, KILL_SIGNAL2, KILL_SIGNAL3 };
-static struct {
-    pid_t child_pid;
-    int timedout; /* set when the child has been timed out */
-    int kill_attempts; /* 1 after sending KILL_SIGNAL1, etc */
-    sigset_t oldset;
-    struct sigaction oldalrm, oldint, oldquit, oldhup, oldterm, oldttin,
-                     oldttou, oldchld;
-    RCNTXT cntxt; /* for popen/pclose */
-    FILE *fp;     /* for popen/pclose, sanity check */
-} tost;
+constexpr int kill_signals[] = { KILL_SIGNAL1, KILL_SIGNAL2, KILL_SIGNAL3 };
+
+namespace
+{
+    struct Tost
+    {
+        pid_t child_pid;
+        int timedout;      /* set when the child has been timed out */
+        int kill_attempts; /* 1 after sending KILL_SIGNAL1, etc */
+        sigset_t oldset;
+        struct sigaction oldalrm, oldint, oldquit, oldhup, oldterm, oldttin,
+            oldttou, oldchld;
+        RCNTXT cntxt; /* for popen/pclose */
+        FILE *fp;     /* for popen/pclose, sanity check */
+    } tost;
+} // namespace
 
 static void timeout_handler(int sig);
 static void timeout_init()
@@ -623,23 +628,23 @@ static int R_system_timeout(const char *cmd, int timeout)
 static void warn_status(const char *cmd, int res)
 {
     if (!res)
-	return;
+        return;
 
     if (errno)
-	/* FIXME: TK: non-zero errno is a sign of an error only when
+        /* FIXME: TK: non-zero errno is a sign of an error only when
 	   a function that modified it also signals an error by its
 	   return value, usually -1 or EOF. We should not be reporting
 	   an error here (CERT ERR30-C).*/
-	/* on Solaris, if the command ends with non-zero status and timeout
+        /* on Solaris, if the command ends with non-zero status and timeout
 	   is 0, "Illegal seek" error is reported; the timeout version
 	   works this around by using close(fileno) */
-	warning(_("running command '%s' had status %d and error message '%s'"),
-		cmd, res, strerror(errno));
+        warning(_("running command '%s' had status %d and error message '%s'"),
+                cmd, res, strerror(errno));
     else
-	warning(_("running command '%s' had status %d"), cmd, res);
+        warning(_("running command '%s' had status %d"), cmd, res);
 }
 
-#define INTERN_BUFSIZE 8096
+constexpr size_t INTERN_BUFSIZE = 8096;
 HIDDEN SEXP do_system(SEXP call, SEXP op, SEXP args, SEXP rho)
 {
     SEXP tlist = R_NilValue;
@@ -855,7 +860,7 @@ HIDDEN SEXP do_sysinfo(SEXP call, SEXP op, SEXP args, SEXP rho)
 SEXP do_sysinfo(SEXP call, SEXP op, SEXP args, SEXP rho)
 {
     warning(_("Sys.info() is not implemented on this system"));
-    return R_NilValue;		/* -Wall */
+    return R_NilValue; /* -Wall */
 }
 #endif /* not HAVE_SYS_UTSNAME_H */
 

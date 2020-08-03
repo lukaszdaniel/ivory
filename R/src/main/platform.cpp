@@ -2054,7 +2054,7 @@ HIDDEN SEXP do_pathexpand(SEXP call, SEXP op, SEXP args, SEXP rho)
 	       R (including R_ExpandFileNameUTF8) for now only supports R home
 	       directories representable in native encoding.
 	    */
-	    if (IS_UTF8(tmp) || (IS_LATIN1(tmp) && !latin1locale))
+	    if (tmp->isUTF8() || (tmp->isLatin1() && !latin1locale))
 		tmp = mkCharCE(R_ExpandFileNameUTF8(trCharUTF8(tmp)), CE_UTF8);
 	    else
 #endif

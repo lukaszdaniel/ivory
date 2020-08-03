@@ -339,7 +339,7 @@ HIDDEN SEXP Rf_matchArgs_NR(SEXP formals, SEXP supplied, SEXP call)
 
 	if (i) {
 	    a = allocList(i);
-	    SET_TYPEOF(a, DOTSXP);
+	    a->setsexptype(DOTSXP);
 	    f = a;
 	    for(b = supplied; b != R_NilValue; b = CDR(b))
 		if(!ARGUSED(b)) {

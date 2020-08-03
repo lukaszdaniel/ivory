@@ -101,14 +101,18 @@ static void deleteCachedSymbols(DllInfo *dll)
     /* Wouldn't a linked list be easier here?
        Potentially ruin the contiguity of the memory.
     */
-    for(int i = nCPFun - 1; i >= 0; i--)
-	if(!strcmp(CPFun[i].pkg, dll->name)) {
-	    if(i < nCPFun - 1) {
-		strcpy(CPFun[i].name, CPFun[--nCPFun].name);
-		strcpy(CPFun[i].pkg, CPFun[nCPFun].pkg);
-		CPFun[i].func = CPFun[nCPFun].func;
-	    } else nCPFun--;
-	}
+    for (int i = nCPFun - 1; i >= 0; i--)
+        if (streql(CPFun[i].pkg, dll->name))
+        {
+            if (i < nCPFun - 1)
+            {
+                strcpy(CPFun[i].name, CPFun[--nCPFun].name);
+                strcpy(CPFun[i].pkg, CPFun[nCPFun].pkg);
+                CPFun[i].func = CPFun[nCPFun].func;
+            }
+            else
+                nCPFun--;
+        }
 #endif /* CACHE_DLL_SYM */
 }
 
@@ -201,13 +205,13 @@ union fn_ptr
     void *p;
     DL_FUNC fn;
 };
+
 static DL_FUNC R_local_dlsym(DllInfo *info, char const *name)
 {
     fn_ptr tmp;
     tmp.p = dlsym(info->handle, name);
     return tmp.fn;
 }
-
 
 /*
   In the future, this will receive an additional argument
@@ -218,21 +222,21 @@ static DL_FUNC R_local_dlsym(DllInfo *info, char const *name)
   that registers its routines.
  */
 
-
-
 static void getFullDLLPath(SEXP call, char *buf, const char *path)
 {
-    if(path[0] == '~')
-	strcpy(buf, R_ExpandFileName(path));
-    else if(path[0] != '/') {
+    if (path[0] == '~')
+        strcpy(buf, R_ExpandFileName(path));
+    else if (path[0] != '/')
+    {
 #ifdef HAVE_GETCWD
-	if(!getcwd(buf, PATH_MAX))
+        if (!getcwd(buf, PATH_MAX))
 #endif
-	    errorcall(call, _("cannot get working directory"));
-	strcat(buf, "/");
-	strcat(buf, path);
+            errorcall(call, _("cannot get working directory"));
+        strcat(buf, "/");
+        strcat(buf, path);
     }
-    else strcpy(buf, path);
+    else
+        strcpy(buf, path);
 }
 
 #endif /* end of `ifdef HAVE_DYNAMIC_LOADING' */

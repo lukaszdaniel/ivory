@@ -31,8 +31,7 @@
 
 #include <cwchar>
 #include <cwctype>
-static void
-mbcsToSbcs(const char *in, char *out, const char *encoding, int enc);
+static void mbcsToSbcs(const char *in, char *out, const char *encoding, int enc);
 
 
 #include <R_ext/Riconv.h>
@@ -58,7 +57,7 @@ extern int errno;
 
 /* from connections.cpp */
 extern gzFile R_gzopen (const char *path, const char *mode);
-extern char *R_gzgets(gzFile file, char *buf, int len);
+extern const char *R_gzgets(gzFile file, char *buf, int len);
 extern int R_gzclose (gzFile file);
 
 #define INVALID_COL 0xff0a0b0c
@@ -116,16 +115,18 @@ static const char *CIDBoldFontStr2 =
 
 /* These are the basic entities in the AFM file */
 
-#define BUFSIZE 512
-#define NA_SHORT -30000
+constexpr int BUFSIZE = 512;
+constexpr int NA_SHORT = -30000;
 
-struct KP {
+struct KP
+{
     unsigned char c1;
     unsigned char c2;
     short kern;
 };
 
-struct FontMetricInfo {
+struct FontMetricInfo
+{
     short FontBBox[4];
     short CapHeight;
     short XHeight;
@@ -134,9 +135,10 @@ struct FontMetricInfo {
     short StemH;
     short StemV;
     short ItalicAngle;
-    struct CharInfo {
-	short WX;
-	short BBox[4];
+    struct CharInfo
+    {
+        short WX;
+        short BBox[4];
     } CharInfo[256];
     KP *KernPairs;
     short KPstart[256];
@@ -145,7 +147,8 @@ struct FontMetricInfo {
     short IsFixedPitch;
 };
 
-enum KeyWordCode {
+enum KeyWordCode
+{
     Empty,
     StartFontMetrics,
     Comment,
@@ -184,53 +187,54 @@ enum KeyWordCode {
     Unknown
 };
 
-static const struct KeyWordDictionary {
-    const char *keyword;
+static const struct KeyWordDictionary
+{
+    const char *const keyword;
     const KeyWordCode code;
-}
-KeyWordDictionary[] = {
-    { "StartFontMetrics",    StartFontMetrics },
-    { "Comment",	     Comment },
-    { "FontName",	     FontName },
-    { "EncodingScheme",	     EncodingScheme },
-    { "FullName",	     FullName },
-    { "FamilyName",	     FamilyName },
-    { "Weight",		     Weight },
-    { "ItalicAngle",	     ItalicAngle },
-    { "IsFixedPitch",	     IsFixedPitch },
-    { "UnderlinePosition",   UnderlinePosition },
-    { "UnderlineThickness",  UnderlineThickness },
-    { "Version",	     Version },
-    { "Notice",		     Notice },
-    { "FontBBox",	     FontBBox },
-    { "CapHeight",	     CapHeight },
-    { "XHeight",	     XHeight },
-    { "Descender",	     Descender },
-    { "Ascender",	     Ascender },
-    { "StartCharMetrics",    StartCharMetrics },
-    { "C ",		     C },
-    { "CH ",		     CH },
-    { "EndCharMetrics",	     EndCharMetrics },
-    { "StartKernData",	     StartKernData },
-    { "StartKernPairs",	     StartKernPairs },
-    { "KPX ",		     KPX },
-    { "EndKernPairs",	     EndKernPairs },
-    { "EndKernData",	     EndKernData },
-    { "StartComposites",     StartComposites },
-    { "CC ",		     CC },
-    { "EndComposites",	     EndComposites },
-    { "EndFontMetrics",	     EndFontMetrics },
-    { "StdHW",		     StdHW },
-    { "StdVW",		     StdVW },
-    { "CharacterSet",	     CharacterSet},
-    { nullptr,		     Unknown },
+} KeyWordDictionary[] = {
+    {"StartFontMetrics", StartFontMetrics},
+    {"Comment", Comment},
+    {"FontName", FontName},
+    {"EncodingScheme", EncodingScheme},
+    {"FullName", FullName},
+    {"FamilyName", FamilyName},
+    {"Weight", Weight},
+    {"ItalicAngle", ItalicAngle},
+    {"IsFixedPitch", IsFixedPitch},
+    {"UnderlinePosition", UnderlinePosition},
+    {"UnderlineThickness", UnderlineThickness},
+    {"Version", Version},
+    {"Notice", Notice},
+    {"FontBBox", FontBBox},
+    {"CapHeight", CapHeight},
+    {"XHeight", XHeight},
+    {"Descender", Descender},
+    {"Ascender", Ascender},
+    {"StartCharMetrics", StartCharMetrics},
+    {"C ", C},
+    {"CH ", CH},
+    {"EndCharMetrics", EndCharMetrics},
+    {"StartKernData", StartKernData},
+    {"StartKernPairs", StartKernPairs},
+    {"KPX ", KPX},
+    {"EndKernPairs", EndKernPairs},
+    {"EndKernData", EndKernData},
+    {"StartComposites", StartComposites},
+    {"CC ", CC},
+    {"EndComposites", EndComposites},
+    {"EndFontMetrics", EndFontMetrics},
+    {"StdHW", StdHW},
+    {"StdVW", StdVW},
+    {"CharacterSet", CharacterSet},
+    {nullptr, Unknown},
 };
 
-static int MatchKey(const char * l, const char * k)
+static bool MatchKey(const char *l, const char *k)
 {
     while (*k)
-	if (*k++ != *l++) return 0;
-    return 1;
+        if (*k++ != *l++)
+            return false;
+    return true;
 }
 
 static int KeyType(const char * const s)
@@ -260,13 +264,13 @@ static char *SkipToNextKey(char *p)
     return p;
 }
 
-static int GetFontBBox(const char *buf, FontMetricInfo *metrics)
+static bool GetFontBBox(const char *buf, FontMetricInfo *metrics)
 {
     if (sscanf(buf, "FontBBox %hd %hd %hd %hd",
 	      &(metrics->FontBBox[0]),
 	      &(metrics->FontBBox[1]),
 	      &(metrics->FontBBox[2]),
-	      &(metrics->FontBBox[3])) != 4) return 0;
+	      &(metrics->FontBBox[3])) != 4) return false;
 #ifdef DEBUG_PS2
     Rprintf("FontBBox %d %d %d %d\n",
 	    (metrics->FontBBox[0]),
@@ -274,16 +278,16 @@ static int GetFontBBox(const char *buf, FontMetricInfo *metrics)
 	    (metrics->FontBBox[2]),
 	    (metrics->FontBBox[3]));
 #endif
-    return 1;
+    return true;
 }
 
 /* The longest named Adobe glyph is 39 chars:
    whitediamondcontainingblacksmalldiamond
  */
-struct CNAME {
+struct CNAME
+{
     char cname[40];
 };
-
 
 /* If reencode > 0, remap to new encoding */
 static int GetCharInfo(char *buf, FontMetricInfo *metrics,
@@ -362,7 +366,7 @@ static int GetCharInfo(char *buf, FontMetricInfo *metrics,
     return 1;
 }
 
-static int GetKPX(char *buf, int nkp, FontMetricInfo *metrics,
+static bool GetKPX(char *buf, int nkp, FontMetricInfo *metrics,
 		  CNAME *charnames)
 {
     char *p = buf, c1[50], c2[50];
@@ -370,7 +374,7 @@ static int GetKPX(char *buf, int nkp, FontMetricInfo *metrics,
 
     p = SkipToNextItem(p);
     sscanf(p, "%49s %49s %hd", c1, c2, &(metrics->KernPairs[nkp].kern));
-    if (streql(c1, "space") || streql(c2, "space")) return 0;
+    if (streql(c1, "space") || streql(c2, "space")) return false;
     for(i = 0; i < 256; i++) {
 	if (streql(c1, charnames[i].cname)) {
 	    metrics->KernPairs[nkp].c1 = (unsigned char) i;
@@ -384,32 +388,33 @@ static int GetKPX(char *buf, int nkp, FontMetricInfo *metrics,
 	    done++;
 	    break;
 	}
-    return (done==2);
+    return (done == 2);
 }
 
 /* Encode File Parsing.  */
 /* Statics here are OK, as all the calls are in one initialization
    so no concurrency (until threads?) */
 
-struct EncodingInputState {
-  /* Probably can make buf and p0 local variables. Only p needs to be
+struct EncodingInputState
+{
+    /* Probably can make buf and p0 local variables. Only p needs to be
      stored across calls. Need to investigate this more closely. */
-  char buf[1000];
-  char *p;
-  char *p0;
+    char buf[1000];
+    char *p;
+    char *p0;
 };
 
 /* read in the next encoding item, separated by white space. */
-static int GetNextItem(FILE *fp, char *dest, int c, EncodingInputState *state)
+static bool GetNextItem(FILE *fp, char *dest, int c, EncodingInputState *state)
 {
     if (c < 0) state->p = nullptr;
     while (1) {
-	if (feof(fp)) { state->p = nullptr; return 1; }
+	if (feof(fp)) { state->p = nullptr; return true; }
 	if (!state->p || *state->p == '\n' || *state->p == '\0') {
 	    state->p = fgets(state->buf, 1000, fp);
 	}
 	/* check for incomplete encoding file */
-	if(!state->p) return 1;
+	if(!state->p) return true;
 	while (isspace((int)* state->p)) state->p++;
 	if (*state->p == '\0' || *state->p == '%'|| *state->p == '\n') { state->p = nullptr; continue; }
 	state->p0 = state->p;
@@ -418,7 +423,7 @@ static int GetNextItem(FILE *fp, char *dest, int c, EncodingInputState *state)
 	if(c == 45) strcpy(dest, "/minus"); else strcpy(dest, state->p0);
 	break;
     }
-    return 0;
+    return false;
 }
 
 /*
@@ -431,7 +436,8 @@ static int GetNextItem(FILE *fp, char *dest, int c, EncodingInputState *state)
  *         (not required by R interface)
  */
 
-static int pathcmp(const char *encpath, const char *comparison) {
+static int pathcmp(const char *encpath, const char *comparison)
+{
     char pathcopy[PATH_MAX];
     char *p1, *p2;
     strcpy(pathcopy, encpath);
@@ -439,15 +445,16 @@ static int pathcmp(const char *encpath, const char *comparison) {
      * Strip path/to/encfile/
      */
     p1 = &(pathcopy[0]);
-    while ((p2 = strchr(p1, FILESEP[0]))) {
-	p1 = p2 + sizeof(char);
+    while ((p2 = strchr(p1, FILESEP[0])))
+    {
+        p1 = p2 + sizeof(char);
     }
     /*
      * Strip suffix
      */
     p2 = (strchr(p1, '.'));
     if (p2)
-	*p2 = '\0';
+        *p2 = '\0';
     return strcmp(p1, comparison);
 }
 
@@ -458,23 +465,25 @@ static void seticonvName(const char *encpath, char *convname)
      */
     char *p;
     strcpy(convname, "latin1");
-    if(pathcmp(encpath, "ISOLatin1")==0)
-	strcpy(convname, "latin1");
-    else if(pathcmp(encpath, "ISOLatin2")==0)
-	strcpy(convname, "latin2");
-    else if(pathcmp(encpath, "ISOLatin7")==0)
-	strcpy(convname, "latin7");
-    else if(pathcmp(encpath, "ISOLatin9")==0)
-	strcpy(convname, "latin-9");
-    else if (pathcmp(encpath, "WinAnsi")==0)
-	strcpy(convname, "CP1252");
-    else {
-	/*
+    if (pathcmp(encpath, "ISOLatin1") == 0)
+        strcpy(convname, "latin1");
+    else if (pathcmp(encpath, "ISOLatin2") == 0)
+        strcpy(convname, "latin2");
+    else if (pathcmp(encpath, "ISOLatin7") == 0)
+        strcpy(convname, "latin7");
+    else if (pathcmp(encpath, "ISOLatin9") == 0)
+        strcpy(convname, "latin-9");
+    else if (pathcmp(encpath, "WinAnsi") == 0)
+        strcpy(convname, "CP1252");
+    else
+    {
+        /*
 	 * Last resort = trim .enc off encpath to produce convname
 	 */
-	strcpy(convname, encpath);
-	p = strrchr(convname, '.');
-	if(p) *p = '\0';
+        strcpy(convname, encpath);
+        p = strrchr(convname, '.');
+        if (p)
+            *p = '\0';
     }
 }
 
@@ -488,7 +497,7 @@ static void seticonvName(const char *encpath, char *convname)
  * encnames is filled with the character names from the file
  * enccode is filled with the raw source of the file
  */
-static int LoadEncoding(const char *encpath, char *encname,
+static bool LoadEncoding(const char *encpath, char *encname,
 	     char *encconvname, CNAME *encnames,
 	     char *enccode, Rboolean isPDF)
 {
@@ -508,25 +517,25 @@ static int LoadEncoding(const char *encpath, char *encname,
 #endif
     if (!(fp = R_fopen(R_ExpandFileName(buf), "r"))) {
 	strcat(buf, ".enc");
-	if (!(fp = R_fopen(R_ExpandFileName(buf), "r"))) return 0;
+	if (!(fp = R_fopen(R_ExpandFileName(buf), "r"))) return false;
     }
-    if (GetNextItem(fp, buf, -1, &state)) { fclose(fp); return 0;} /* encoding name */
+    if (GetNextItem(fp, buf, -1, &state)) { fclose(fp); return false;} /* encoding name */
     memcpy(encname, buf+1, 99); // was strncpy, deliberate truncation
     encname[99] = '\0';
     if (!isPDF) snprintf(enccode, 5000, "/%s [\n", encname);
     else enccode[0] = '\0';
-    if (GetNextItem(fp, buf, 0, &state)) { fclose(fp); return 0;} /* [ */
+    if (GetNextItem(fp, buf, 0, &state)) { fclose(fp); return false;} /* [ */
     for(i = 0; i < 256; i++) {
-	if (GetNextItem(fp, buf, i, &state)) { fclose(fp); return 0; }
+	if (GetNextItem(fp, buf, i, &state)) { fclose(fp); return false; }
 	memcpy(encnames[i].cname, buf+1, 39); // was strncpy, gcc10 warned
 	encnames[i].cname[39] = '\0';
 	strcat(enccode, " /"); strcat(enccode, encnames[i].cname);
 	if(i%8 == 7) strcat(enccode, "\n");
     }
-    if (GetNextItem(fp, buf, 0, &state)) { fclose(fp); return 0;} /* ] */
+    if (GetNextItem(fp, buf, 0, &state)) { fclose(fp); return false;} /* ] */
     fclose(fp);
     if (!isPDF) strcat(enccode,"]\n");
-    return 1;
+    return true;
 }
 
 /* Load font metrics from a file: defaults to the
@@ -706,8 +715,7 @@ pserror:
 #include <rlocale.h> /* for Ri18n_wcwidth */
 
 
-static double
-    PostScriptStringWidth(const unsigned char *str, int enc,
+static double PostScriptStringWidth(const unsigned char *str, int enc,
 			  FontMetricInfo *metrics,
 			  Rboolean useKerning,
 			  int face, const char *encoding)
@@ -730,7 +738,7 @@ static double
 	    R_ucs2_t ucs2s[ucslen];
 	    status = (int) mbcsToUcs2((char *)str, ucs2s, (int) ucslen, enc);
 	    if (status >= 0)
-		for(i = 0 ; i < ucslen ; i++) {
+		for(size_t i = 0 ; i < ucslen ; i++) {
 		    wx = (short)(500 * Ri18n_wcwidth(ucs2s[i]));
 		    /* printf("width for U+%04x is %d\n", ucs2s[i], wx); */
 		    sum += wx;
@@ -803,8 +811,7 @@ static const char UCS2ENC[] = "UCS-2BE";
 static const char UCS2ENC[] = "UCS-2LE";
 # endif
 
-static void
-PostScriptMetricInfo(int c, double *ascent, double *descent, double *width,
+static void PostScriptMetricInfo(int c, double *ascent, double *descent, double *width,
 		     FontMetricInfo *metrics,
 		     Rboolean isSymbol,
 		     const char *encoding)
@@ -870,8 +877,7 @@ PostScriptMetricInfo(int c, double *ascent, double *descent, double *width,
     }
 }
 
-static void
-PostScriptCIDMetricInfo(int c, double *ascent, double *descent, double *width)
+static void PostScriptCIDMetricInfo(int c, double *ascent, double *descent, double *width)
 {
     /* calling in a SBCS is probably not intentional, but we should try to
        cope sensibly. */
@@ -917,11 +923,13 @@ PostScriptCIDMetricInfo(int c, double *ascent, double *descent, double *width)
 /*
  * Information about one Type 1 font
  */
-typedef struct CIDFontInfo {
+typedef struct CIDFontInfo
+{
     char name[50];
 } CIDFontInfo, *cidfontinfo;
 
-typedef struct T1FontInfo {
+typedef struct T1FontInfo
+{
     char name[50];
     FontMetricInfo metrics;
     CNAME charnames[256];
@@ -930,9 +938,10 @@ typedef struct T1FontInfo {
 /*
  * Information about a font encoding
  */
-typedef struct EncInfo {
+typedef struct EncInfo
+{
     char encpath[PATH_MAX];
-    char name[100]; /* Name written to PostScript/PDF file */
+    char name[100];    /* Name written to PostScript/PDF file */
     char convname[50]; /* Name used in mbcsToSbcs() with iconv() */
     CNAME encnames[256];
     char enccode[5000];
@@ -945,7 +954,8 @@ typedef struct EncInfo {
  * The name is a graphics engine font family name
  * (distinct from the Type 1 font name)
  */
-typedef struct CIDFontFamily {
+typedef struct CIDFontFamily
+{
     char fxname[50];
     cidfontinfo cidfonts[4];
     type1fontinfo symfont;
@@ -953,7 +963,8 @@ typedef struct CIDFontFamily {
     char encoding[50];
 } CIDFontFamily, *cidfontfamily;
 
-typedef struct T1FontFamily {
+typedef struct T1FontFamily
+{
     char fxname[50];
     type1fontinfo fonts[5];
     encodinginfo encoding;
@@ -965,12 +976,14 @@ typedef struct T1FontFamily {
  * Used to keep track of fonts currently loaded in the session
  * AND by each device to keep track of fonts currently used on the device.
  */
-typedef struct CIDFontList {
+typedef struct CIDFontList
+{
     cidfontfamily cidfamily;
     struct CIDFontList *next;
 } CIDFontList, *cidfontlist;
 
-typedef struct T1FontList {
+typedef struct T1FontList
+{
     type1fontfamily family;
     struct T1FontList *next;
 } Type1FontList, *type1fontlist;
@@ -978,7 +991,8 @@ typedef struct T1FontList {
 /*
  * Same as type 1 font list, but for encodings.
  */
-typedef struct EncList {
+typedef struct EncList
+{
     encodinginfo encoding;
     struct EncList *next;
 } EncodingList, *encodinglist;
@@ -988,9 +1002,9 @@ typedef struct EncList {
  */
 static cidfontinfo makeCIDFont()
 {
-    cidfontinfo font = (CIDFontInfo *) malloc(sizeof(CIDFontInfo));
+    cidfontinfo font = (CIDFontInfo *)malloc(sizeof(CIDFontInfo));
     if (!font)
-	warning(_("failed to allocate CID font info"));
+        warning(_("failed to allocate CID font info"));
     return font;
 }
 
@@ -1037,27 +1051,29 @@ static void freeEncoding(encodinginfo encoding)
 
 static cidfontfamily makeCIDFontFamily()
 {
-    cidfontfamily family = (CIDFontFamily *) malloc(sizeof(CIDFontFamily));
-    if (family) {
-	int i;
-	for (i = 0; i < 4; i++)
-	    family->cidfonts[i] = nullptr;
-	family->symfont = nullptr;
-    } else
-	warning(_("failed to allocate CID font family"));
+    cidfontfamily family = (CIDFontFamily *)malloc(sizeof(CIDFontFamily));
+    if (family)
+    {
+        for (int i = 0; i < 4; i++)
+            family->cidfonts[i] = nullptr;
+        family->symfont = nullptr;
+    }
+    else
+        warning(_("failed to allocate CID font family"));
     return family;
 }
 
 static type1fontfamily makeFontFamily()
 {
-    type1fontfamily family = (Type1FontFamily *) malloc(sizeof(Type1FontFamily));
-    if (family) {
-	int i;
-	for (i = 0; i < 5; i++)
-	    family->fonts[i] = nullptr;
-	family->encoding = nullptr;
-    } else
-	warning(_("failed to allocate Type 1 font family"));
+    type1fontfamily family = (Type1FontFamily *)malloc(sizeof(Type1FontFamily));
+    if (family)
+    {
+        for (int i = 0; i < 5; i++)
+            family->fonts[i] = nullptr;
+        family->encoding = nullptr;
+    }
+    else
+        warning(_("failed to allocate Type 1 font family"));
     return family;
 }
 /*
@@ -1071,21 +1087,19 @@ static type1fontfamily makeFontFamily()
  */
 static void freeCIDFontFamily(cidfontfamily family)
 {
-    int i;
-    for (i = 0; i < 4; i++)
-	if (family->cidfonts[i])
-	    freeCIDFont(family->cidfonts[i]);
+    for (int i = 0; i < 4; i++)
+        if (family->cidfonts[i])
+            freeCIDFont(family->cidfonts[i]);
     if (family->symfont)
-	freeType1Font(family->symfont);
+        freeType1Font(family->symfont);
     free(family);
 }
 
 static void freeFontFamily(type1fontfamily family)
 {
-    int i;
-    for (i=0; i<5; i++)
-	if (family->fonts[i])
-	    freeType1Font(family->fonts[i]);
+    for (int i = 0; i < 5; i++)
+        if (family->fonts[i])
+            freeType1Font(family->fonts[i]);
     free(family);
 }
 
@@ -1117,7 +1131,8 @@ static type1fontlist makeFontList()
  * Used by both global font list and devices to free the font lists
  * (global font list separately takes care of the fonts pointed to)
  */
-static void freeCIDFontList(cidfontlist fontlist) {
+static void freeCIDFontList(cidfontlist fontlist)
+{
     /*
      * These will help to find any errors if attempt to
      * use freed font list.
@@ -1126,7 +1141,9 @@ static void freeCIDFontList(cidfontlist fontlist) {
     fontlist->next = nullptr;
     free(fontlist);
 }
-static void freeFontList(type1fontlist fontlist) {
+
+static void freeFontList(type1fontlist fontlist)
+{
     /*
      * These will help to find any errors if attempt to
      * use freed font list.
@@ -1136,18 +1153,22 @@ static void freeFontList(type1fontlist fontlist) {
     free(fontlist);
 }
 
-static void freeDeviceCIDFontList(cidfontlist fontlist) {
-    if (fontlist) {
-	if (fontlist->next)
-	    freeDeviceCIDFontList(fontlist->next);
-	freeCIDFontList(fontlist);
+static void freeDeviceCIDFontList(cidfontlist fontlist)
+{
+    if (fontlist)
+    {
+        if (fontlist->next)
+            freeDeviceCIDFontList(fontlist->next);
+        freeCIDFontList(fontlist);
     }
 }
-static void freeDeviceFontList(type1fontlist fontlist) {
-    if (fontlist) {
-	if (fontlist->next)
-	    freeDeviceFontList(fontlist->next);
-	freeFontList(fontlist);
+static void freeDeviceFontList(type1fontlist fontlist)
+{
+    if (fontlist)
+    {
+        if (fontlist->next)
+            freeDeviceFontList(fontlist->next);
+        freeFontList(fontlist);
     }
 }
 
@@ -1169,11 +1190,13 @@ static void freeEncList(encodinglist enclist)
     free(enclist);
 }
 
-static void freeDeviceEncList(encodinglist enclist) {
-    if (enclist) {
-	if (enclist->next)
-	    freeDeviceEncList(enclist->next);
-	freeEncList(enclist);
+static void freeDeviceEncList(encodinglist enclist)
+{
+    if (enclist)
+    {
+        if (enclist->next)
+            freeDeviceEncList(enclist->next);
+        freeEncList(enclist);
     }
 }
 
@@ -1255,8 +1278,7 @@ void freeType1Fonts()
  * Given a path to an encoding file,
  * find an EncodingInfo that corresponds
  */
-static encodinginfo
-findEncoding(const char *encpath, encodinglist deviceEncodings, Rboolean isPDF)
+static encodinginfo findEncoding(const char *encpath, encodinglist deviceEncodings, Rboolean isPDF)
 {
     encodinglist enclist = isPDF ? PDFloadedEncodings : loadedEncodings;
     encodinginfo encoding = nullptr;
@@ -1283,8 +1305,7 @@ findEncoding(const char *encpath, encodinglist deviceEncodings, Rboolean isPDF)
 /*
  * Find an encoding in device encoding list
  */
-static encodinginfo
-findDeviceEncoding(const char *encpath, encodinglist enclist, int *index)
+static encodinginfo findDeviceEncoding(const char *encpath, encodinglist enclist, int *index)
 {
     encodinginfo encoding = nullptr;
     int found = 0;
@@ -1304,7 +1325,7 @@ findDeviceEncoding(const char *encpath, encodinglist enclist, int *index)
  */
 static void safestrcpy(char *dest, const char *src, int maxlen)
 {
-    if (strlen(src) < maxlen)
+    if (strlen(src) < size_t(maxlen))
 	strcpy(dest, src);
     else {
 	warning(_("truncated string which was too long for copy"));
@@ -1611,8 +1632,7 @@ static SEXP getFont(const char *family, const char *fontdbname) {
  * Do this by looking up the font name in the PostScript
  * font database
  */
-static const char*
-fontMetricsFileName(const char *family, int faceIndex,
+static const char *fontMetricsFileName(const char *family, int faceIndex,
 		    const char *fontdbname)
 {
     int i, nfonts;
@@ -1779,8 +1799,7 @@ static const char *getFontCMap(const char *family, const char *fontdbname)
 /*
  * Get Encoding name from CID font in font database
  */
-static const char *
-getCIDFontEncoding(const char *family, const char *fontdbname)
+static const char *getCIDFontEncoding(const char *family, const char *fontdbname)
 {
     SEXP fontnames;
     int i, nfonts;
@@ -2071,8 +2090,7 @@ static type1fontfamily addFont(const char *name, Rboolean isPDF,
  * ... and return the new font
  */
 
-static type1fontfamily
-addDefaultFontFromAFMs(const char *encpath, const char **afmpaths,
+static type1fontfamily addDefaultFontFromAFMs(const char *encpath, const char **afmpaths,
 		       Rboolean isPDF,
 		       encodinglist deviceEncodings)
 {
@@ -2190,7 +2208,7 @@ static type1fontlist addDeviceFont(type1fontfamily font,
 
 /* Part 2.  Device Driver State. */
 
-typedef struct {
+struct PostScriptDesc {
     char filename[PATH_MAX];
     int open_type;
 
@@ -2247,8 +2265,7 @@ typedef struct {
      */
     type1fontfamily defaultFont;
     cidfontfamily   defaultCIDFont;
-}
-PostScriptDesc;
+};
 
 /*  Part 3.  Graphics Support Code.  */
 
@@ -3497,7 +3514,7 @@ static void CheckAlpha(int color, PostScriptDesc *pd)
 static void SetColor(int color, pDevDesc dd)
 {
     PostScriptDesc *pd = (PostScriptDesc *) dd->deviceSpecific;
-    if(color != pd->current.col) {
+    if(rcolor(color) != pd->current.col) {
 	PostScriptSetCol(pd->psfp,
 			 R_RED(color)/255.0,
 			 R_GREEN(color)/255.0,
@@ -3510,7 +3527,7 @@ static void SetColor(int color, pDevDesc dd)
 static void SetFill(int color, pDevDesc dd)
 {
     PostScriptDesc *pd = (PostScriptDesc *) dd->deviceSpecific;
-    if(color != pd->current.fill) {
+    if(rcolor(color) != pd->current.fill) {
 	PostScriptSetFill(pd->psfp,
 			  R_RED(color)/255.0,
 			  R_GREEN(color)/255.0,
@@ -5674,20 +5691,22 @@ static void initDefn(int i, int type, PDFDesc *pd)
     pd->definitions[i].str[0] = '\0';
 }
 
-static void catDefn(const char* buf, int i, PDFDesc *pd) 
+static void catDefn(const char *buf, int i, PDFDesc *pd)
 {
     size_t len = strlen(pd->definitions[i].str);
-    size_t buflen = strlen(buf); 
+    size_t buflen = strlen(buf);
     /* Grow definition string if necessary) */
-    if (len + buflen + 1 >= pd->definitions[i].nchar) {
-	void *tmp;
+    if (len + buflen + 1 >= size_t(pd->definitions[i].nchar))
+    {
+        void *tmp;
         pd->definitions[i].nchar = pd->definitions[i].nchar + DEFBUFSIZE;
-	tmp = realloc(pd->definitions[i].str, 
-                      (pd->definitions[i].nchar)*sizeof(char));
-	if (!tmp) error(_("failed to increase definition string (shut down PDF device)"));
-	pd->definitions[i].str = (char *) tmp;
+        tmp = realloc(pd->definitions[i].str,
+                      (pd->definitions[i].nchar) * sizeof(char));
+        if (!tmp)
+            error(_("failed to increase definition string (shut down PDF device)"));
+        pd->definitions[i].str = (char *)tmp;
     }
-    strncat(pd->definitions[i].str, buf, buflen);
+    strncat(pd->definitions[i].str, buf, strlen(buf));
 }
 
 static void copyDefn(int fromDefn, int toDefn, PDFDesc *pd)
@@ -5703,18 +5722,19 @@ static void trimDefn(int i, PDFDesc *pd)
     pd->definitions[i].str[len] = '\0';
 }
 
-static void killDefn(int i, PDFDesc *pd) 
+static void killDefn(int i, PDFDesc *pd)
 {
-    if (pd->definitions[i].str != nullptr) {
+    if (pd->definitions[i].str != nullptr)
+    {
         free(pd->definitions[i].str);
     }
 }
 
 static void initDefinitions(PDFDesc *pd)
 {
-    int i;
-    pd->definitions = (PDFdefn *) malloc(pd->maxDefns*sizeof(PDFdefn));
-    for (i = 0; i < pd->maxDefns; i++) {
+    pd->definitions = (PDFdefn *)malloc(pd->maxDefns * sizeof(PDFdefn));
+    for (int i = 0; i < pd->maxDefns; i++)
+    {
         pd->definitions[i].str = nullptr;
     }
 }
@@ -5743,8 +5763,7 @@ static void shrinkDefinitions(PDFDesc *pd)
 
 static void killDefinitions(PDFDesc *pd)
 {
-    int i;
-    for (i = 0; i < pd->numDefns; i++)
+    for (int i = 0; i < pd->numDefns; i++)
         killDefn(i, pd);
     free(pd->definitions);
 }
@@ -5752,8 +5771,7 @@ static void killDefinitions(PDFDesc *pd)
 /* For when end file and start a new one on new page */
 static void resetDefinitions(PDFDesc *pd)
 {
-    int i;
-    for (i = 0; i < pd->numDefns; i++)
+    for (int i = 0; i < pd->numDefns; i++)
         killDefn(i, pd);
     pd->numDefns = 0;
     /* Leave pd->maxDefns as is */
@@ -6737,7 +6755,7 @@ static void writeRasterXObject(rasterImage raster, int n,
 	size_t res = fwrite(buf, 1, outlen, pd->pdffp);
 	if(res != outlen) error(_("write failed"));
     } else {
-	for(int i = 0; i < outlen; i++)
+	for(uLong i = 0; i < outlen; i++)
 	    fprintf(pd->pdffp, "%02x", buf[i]);
 	fprintf(pd->pdffp, ">\n");
     }
@@ -6781,7 +6799,7 @@ static void writeMaskXObject(rasterImage raster, int n, PDFDesc *pd)
 	size_t res = fwrite(buf, 1, outlen, pd->pdffp);
 	if(res != outlen) error(_("write failed"));
     } else {
-	for(int i = 0; i < outlen; i++)
+	for(uLong i = 0; i < outlen; i++)
 	    fprintf(pd->pdffp, "%02x", buf[i]);
 	fprintf(pd->pdffp, ">\n");
     }
@@ -7384,7 +7402,7 @@ static void PDF_SetLineColor(int color, pDevDesc dd)
     PDFDesc *pd = (PDFDesc *) dd->deviceSpecific;
     char buf[100];
 
-    if(color != pd->current.col) {
+    if(rcolor(color) != pd->current.col) {
 	unsigned int alpha = R_ALPHA(color);
 	if (0 < alpha && alpha < 255) alphaVersion(pd);
 	if (pd->usedAlpha) {
@@ -7436,7 +7454,7 @@ static void PDF_SetFill(int color, pDevDesc dd)
 {
     PDFDesc *pd = (PDFDesc *) dd->deviceSpecific;
     char buf[100];
-    if(color != pd->current.fill) {
+    if(rcolor(color) != pd->current.fill) {
 	unsigned int alpha = R_ALPHA(color);
 	if (0 < alpha && alpha < 255) alphaVersion(pd);
 	if (pd->usedAlpha) {
@@ -7661,7 +7679,7 @@ static void PDF_Encodings(PDFDesc *pd)
 	    char buf[128];
 	    for(enc_first=0;encoding->enccode[enc_first]!='['   &&
 			    encoding->enccode[enc_first]!='\0' ;enc_first++);
-	    if (enc_first >= strlen(encoding->enccode))
+	    if (size_t(enc_first) >= strlen(encoding->enccode))
 		enc_first=0;
 	    fprintf(pd->pdffp, "/BaseEncoding /PDFDocEncoding\n");
 	    fprintf(pd->pdffp, "/Differences [\n");

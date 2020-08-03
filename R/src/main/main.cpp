@@ -198,8 +198,7 @@ struct R_ReplState
  The "cursor" for the input buffer is moved to the next starting
  point, i.e. the end of the first line or after the first ;.
  */
-int
-Rf_ReplIteration(SEXP rho, int savestack, int browselevel, R_ReplState *state)
+int Rf_ReplIteration(SEXP rho, int savestack, int browselevel, R_ReplState *state)
 {
     int c, browsevalue;
     SEXP value, thisExpr;
@@ -1115,7 +1114,7 @@ void run_Rmainloop(void)
     end_Rmainloop(); /* must go here */
 }
 
-void mainloop(void)
+void Rf_mainloop(void)
 {
     setup_Rmainloop();
     run_Rmainloop();
@@ -1124,37 +1123,39 @@ void mainloop(void)
 /*this functionality now appears in 3
   places-jump_to_toplevel/profile/here */
 
-HIDDEN void printwhere(void)
+HIDDEN void Rf_printwhere(void)
 {
-  RCNTXT *cptr;
-  int lct = 1;
+	RCNTXT *cptr;
+	int lct = 1;
 
-  for (cptr = R_GlobalContext; cptr; cptr = cptr->nextContext()) {
-    if ((cptr->getCallFlag() & (CTXT_FUNCTION | CTXT_BUILTIN)) &&
-	(TYPEOF(cptr->getCall()) == LANGSXP)) {
-	Rprintf(_("where %d"), lct++);
-	SEXP sref;
-	if (cptr->getSrcRef() == R_InBCInterpreter)
-	    sref = R_findBCInterpreterSrcref(cptr);
-	else
-	    sref = cptr->getSrcRef();
-	SrcrefPrompt("", sref);
-	PrintValue(cptr->getCall());
-    }
-  }
-  Rprintf("\n");
+	for (cptr = R_GlobalContext; cptr; cptr = cptr->nextContext())
+	{
+		if ((cptr->getCallFlag() & (CTXT_FUNCTION | CTXT_BUILTIN)) &&
+			(TYPEOF(cptr->getCall()) == LANGSXP))
+		{
+			Rprintf(_("where %d"), lct++);
+			SEXP sref;
+			if (cptr->getSrcRef() == R_InBCInterpreter)
+				sref = R_findBCInterpreterSrcref(cptr);
+			else
+				sref = cptr->getSrcRef();
+			SrcrefPrompt("", sref);
+			PrintValue(cptr->getCall());
+		}
+	}
+	Rprintf("\n");
 }
 
 static void printBrowserHelp(void)
 {
-    Rprintf("n          next\n");
-    Rprintf("s          step into\n");
-    Rprintf("f          finish\n");
-    Rprintf("c or cont  continue\n");
-    Rprintf("Q          quit\n");
-    Rprintf("where      show stack\n");
-    Rprintf("help       show help\n");
-    Rprintf("<expr>     evaluate expression\n");
+	Rprintf("n          next\n");
+	Rprintf("s          step into\n");
+	Rprintf("f          finish\n");
+	Rprintf("c or cont  continue\n");
+	Rprintf("Q          quit\n");
+	Rprintf("where      show stack\n");
+	Rprintf("help       show help\n");
+	Rprintf("<expr>     evaluate expression\n");
 }
 
 static int ParseBrowser(SEXP CExpr, SEXP rho)
@@ -1214,16 +1215,16 @@ static int ParseBrowser(SEXP CExpr, SEXP rho)
 /* There's another copy of this in eval.cpp */
 static void PrintCall(SEXP call, SEXP rho)
 {
-    int old_bl = R_BrowseLines,
-	blines = asInteger(GetOption1(install("deparse.max.lines")));
-    if(blines != NA_INTEGER && blines > 0)
-	R_BrowseLines = blines;
+	int old_bl = R_BrowseLines,
+		blines = asInteger(GetOption1(install("deparse.max.lines")));
+	if (blines != NA_INTEGER && blines > 0)
+		R_BrowseLines = blines;
 
-    R_PrintData pars;
-    PrintInit(pars, rho);
-    PrintValueRec(call, pars);
+	R_PrintData pars;
+	PrintInit(pars, rho);
+	PrintValueRec(call, pars);
 
-    R_BrowseLines = old_bl;
+	R_BrowseLines = old_bl;
 }
 
 /* browser(text = "", condition = nullptr, expr = TRUE, skipCalls = 0L)
@@ -1450,34 +1451,43 @@ R_ToplevelCallbackEl *Rf_addTaskCallback(R_ToplevelCallback cb, void *data,
 
 Rboolean Rf_removeTaskCallbackByName(const char *name)
 {
-    R_ToplevelCallbackEl *el = Rf_ToplevelTaskHandlers, *prev = nullptr;
-    Rboolean status = TRUE;
+	R_ToplevelCallbackEl *el = Rf_ToplevelTaskHandlers, *prev = nullptr;
+	Rboolean status = TRUE;
 
-    if(!Rf_ToplevelTaskHandlers) {
-	return(FALSE); /* error(_("there are no task callbacks registered")); */
-    }
-
-    while(el) {
-	if(streql(el->name, name)) {
-	    if(prev == nullptr) {
-		Rf_ToplevelTaskHandlers = el->next;
-	    } else {
-		prev->next = el->next;
-	    }
-	    break;
+	if (!Rf_ToplevelTaskHandlers)
+	{
+		return (FALSE); /* error(_("there are no task callbacks registered")); */
 	}
-	prev = el;
-	el = el->next;
-    }
-    if(el) {
-	if(el->finalizer)
-	    el->finalizer(el->data);
-	free(el->name);
-	free(el);
-    } else {
-	status = FALSE;
-    }
-    return(status);
+
+	while (el)
+	{
+		if (streql(el->name, name))
+		{
+			if (prev == nullptr)
+			{
+				Rf_ToplevelTaskHandlers = el->next;
+			}
+			else
+			{
+				prev->next = el->next;
+			}
+			break;
+		}
+		prev = el;
+		el = el->next;
+	}
+	if (el)
+	{
+		if (el->finalizer)
+			el->finalizer(el->data);
+		free(el->name);
+		free(el);
+	}
+	else
+	{
+		status = FALSE;
+	}
+	return (status);
 }
 
 /**

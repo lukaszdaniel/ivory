@@ -62,6 +62,11 @@
       \item Rudimentary support for vi-style tags in \code{rtags()} and
       \code{R CMD rtags}, based on patch from Neal Fultz in \PR{17214}.
 
+      \item \code{checkRdContents()} is now exported from \pkg{tools}; it
+      and also \code{checkDocFiles()} have a new option \code{chkInternal}
+      allowing to check Rd files marked with keyword \code{"internal"} as
+      well.  The latter can be activated for \command{R CMD check} via
+      experimental environment variable \env{_R_CHECK_RD_INTERNAL_TOO_}.
     }
   }
 
@@ -147,8 +152,9 @@
     \itemize{
       \item \command{R CMD INSTALL} and \command{R CMD SHLIB} make use
       of their flag \option{--use-LTO} when the \samp{LTO_OPT} make
-      macro is set in file \file{etc/$\{R_ARCH\}/Makeconf}.  (For
-      details see \sQuote{Writing R Extensions} §4.5.)
+      macro is set in file \file{etc/$\{R_ARCH\}/Makeconf} or in a
+      personal/site \file{Makevars} file.  (For details see
+      \sQuote{Writing R Extensions} §4.5.)
 
       This provides a valuable check on code consistency.  It does work
       with GCC 8.3 as in Rtools40, but that does not detect everything
@@ -172,6 +178,11 @@
 
       \item \code{parallel::detectCores()} drops support for Irix
       (retired in 2013).
+
+      \item The \code{LINPACK} argument to \code{chol.default()},
+      \code{chol2inv()}, \code{solve.default()} and \code{svd()} has been
+      defunct since \R 3.1.0.  It was silently ignored but now gives an
+      error (and packages were still calling it with \code{LINPACK = TRUE}).
     }
   }
 
@@ -268,8 +279,14 @@
       Bertram.
 
       \item \code{rank(x)} and hence \code{sort(x)} now work when \code{x}
-      is an object (per \code{is.object(x)}) and of type \code{"raw"},
-      e.g., for \code{gmp::as.bigz(.)} numbers.
+      is an object (as per \code{is.object(x)}) of type \code{"raw"}
+      \emph{and} provides a valid \code{`[`} method, e.g., for
+      \code{gmp::as.bigz(.)} numbers.
+
+      \item \code{chisq.test(*, simulate.p.value=TRUE)} and
+      \code{r2dtable()} now work correctly for large table entries (in the
+      millions).  Reported by Sebastian Meyer and investigated by more
+      helpers in \PR{16184}.
     }
   }
 }

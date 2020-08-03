@@ -478,13 +478,13 @@ SEXP countfields(SEXP args)
 }
 
 /* A struct used by typeconvert to keep track of possible types for the input */
-typedef struct typecvt_possible_types {
-    bool islogical;
-    bool isinteger;
-    bool isreal;
-    bool iscomplex;
+typedef struct typecvt_possible_types
+{
+	bool islogical;
+	bool isinteger;
+	bool isreal;
+	bool iscomplex;
 } Typecvt_Info;
-
 
 /* Sets fields of typeInfo, ruling out possible types based on s.
  *
@@ -920,7 +920,7 @@ SEXP readtablehead(SEXP args)
 	if(!empty || (c != R_EOF && !blskip)) { /* see previous comment */
 	    SET_STRING_ELT(ans, nread, mkChar(buf));
 	    nread++;
-	    if (strlen(buf) < nbuf) // PR#15625
+	    if (strlen(buf) < size_t(nbuf)) // PR#15625
 		warning(_("line %d appears to contain embedded nulls"), nread);
 	}
 	if(c == R_EOF) goto no_more_lines;
@@ -1037,7 +1037,7 @@ static void wt_cleanup(void *data)
 	        warning(_("Problem closing connection"));
 	}
     }	
-    R_FreeStringBuffer(*(ld->buf));
+    ld->buf->R_FreeStringBuffer();
     R_print.digits = ld->savedigits;
 }
 
@@ -1048,7 +1048,7 @@ SEXP writetable(SEXP call, SEXP op, SEXP args, SEXP env)
     Rconnection con;
     const char *csep, *ceol, *cna, *sdec, *tmp = nullptr /* -Wall */;
     SEXP *levels;
-    R_StringBuffer strBuf = {nullptr, 0, MAXELTSIZE};
+    R_StringBuffer strBuf = R_StringBuffer();
     wt_info wi;
     RCNTXT cntxt;
 

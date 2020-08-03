@@ -39,11 +39,15 @@
 #include <climits>
 #include <limits>
 #include <cstddef>
-extern "C" {
+#include <string>
 #else
 #include <stdio.h>
 #include <limits.h> /* for INT_MAX */
 #include <stddef.h> /* for ptrdiff_t, which is required by C99 */
+#endif
+
+#ifdef __cplusplus
+extern "C" {
 #endif
 
 #include <R_ext/Arith.h>
@@ -195,7 +199,7 @@ typedef unsigned int SEXPTYPE;
 #define REFSXP 255
 #else /* NOT YET */
 /*------ enum_SEXPTYPE ----- */
-typedef enum
+enum SEXPTYPE
 {
     NILSXP = 0,      /* nil = NULL */
     SYMSXP = 1,      /* symbols */
@@ -246,7 +250,7 @@ typedef enum
     GLOBALENV_SXP = 253,
     NILVALUE_SXP = 254,
     REFSXP = 255
-} SEXPTYPE;
+};
 #endif
 
 /* These are also used with the write barrier on, in attrib.cpp and util.cpp */
@@ -272,7 +276,7 @@ typedef struct SEXPREC *SEXP;
 #endif
 
 // ======================= USE_RINTERNALS section
-#ifdef USE_RINTERNALS
+#if defined(USE_RINTERNALS) && defined(COMPILING_IVORY)
 /* This is intended for use only within R itself.
  * It defines internal structures that are otherwise only accessible
  * via SEXP, and macros to replace many (but not all) of accessor functions
@@ -371,6 +375,79 @@ typedef struct SEXPREC
         struct closxp_struct closxp;
         struct promsxp_struct promsxp;
     } u;
+#ifdef COMPILING_IVORY
+    SEXPTYPE sexptype() const { return this->sxpinfo.type; }
+    void setsexptype(const SEXPTYPE& type) { this->sxpinfo.type = type; }
+    bool sexptypeEqual(const SEXPTYPE& type) const { return this->sxpinfo.type == type; }
+    bool sexptypeNotEqual(const SEXPTYPE& type) const { return !this->sexptypeEqual(type); }
+    auto altrep() const { return this->sxpinfo.alt; }
+    void setaltrep() { this->sxpinfo.alt = 1; }
+    void unsetaltrep() { this->sxpinfo.alt = 0; }
+    bool isPrimitive_() const { return this->sexptypeEqual(BUILTINSXP) || this->sexptypeEqual(SPECIALSXP); }
+    bool isFunction_() const { return this->sexptypeEqual(CLOSXP) || this->isPrimitive_(); }
+    bool isPairList_() const
+    {
+        switch (this->sexptype())
+        {
+        case NILSXP:
+        case LISTSXP:
+        case LANGSXP:
+        case DOTSXP:
+            return true;
+        default:
+            return false;
+        }
+    }
+    // bool isLanguage_() const { return this->sexptypeEqual(LANGSXP); }
+    // R_len_t length_() const { return this->sexptypeEqual(NILSXP) ? 0 : 1; }
+    bool isNull_() const { return this->sexptype() == SEXPTYPE::NILSXP; }
+    bool isSymbol_() const { return this->sexptype() == SEXPTYPE::SYMSXP; }
+    bool isLogical_() const { return this->sexptype() == SEXPTYPE::LGLSXP; }
+    bool isReal_() const { return this->sexptype() == SEXPTYPE::REALSXP; }
+    bool isComplex_() const { return this->sexptype() == SEXPTYPE::CPLXSXP; }
+    bool isExpression_() const { return this->sexptype() == SEXPTYPE::EXPRSXP; }
+    bool isEnvironment_() const { return this->sexptype() == SEXPTYPE::ENVSXP; }
+    bool isString_() const { return this->sexptype() == SEXPTYPE::STRSXP; }
+    bool isRaw_() const { return this->sexptypeEqual(RAWSXP); }
+    bool isScalar(const SEXPTYPE &t) const { return this->sexptypeEqual(t) && this->sxpinfo.scalar; }
+    bool isVector_() const
+    {
+        switch (this->sexptype())
+        {
+        case LGLSXP:
+        case INTSXP:
+        case REALSXP:
+        case CPLXSXP:
+        case STRSXP:
+        case RAWSXP:
+
+        case VECSXP:
+        case EXPRSXP:
+            return true;
+        default:
+            return false;
+        }
+    }
+    auto attrib_() const { return this->attrib; }
+    inline auto isBytes() const;
+    inline void setBytes();
+    inline auto isLatin1() const;
+    inline void setLatin1();
+    inline auto isAscii() const;
+    inline void setAscii();
+    inline auto isUTF8() const;
+    inline void setUTF8();
+    inline auto encKnown() const;
+    inline auto isCached() const;
+    inline void setCached();
+    auto printname() const { return this->u.symsxp.pname; }
+    auto symvalue() const { return this->u.symsxp.value; }
+    auto internal() const { return this->u.symsxp.internal; }
+    auto tag() const { return this->u.listsxp.tagval; }
+    auto car() const { return this->u.listsxp.carval; }
+    auto cdr() const { return this->u.listsxp.cdrval; }
+    const char *translateCharUTF8_() const;
+#endif
 } SEXPREC;
 
 /* The generational collector uses a reduced version of SEXPREC as a
@@ -730,6 +807,26 @@ typedef union
 
 #else /* not USE_RINTERNALS */
 // ======================= not USE_RINTERNALS section
+
+// =====
+// These are required by stringi and data.table packages
+// if we're disabling USE_RINTERNALS for them.
+#ifndef IS_BYTES
+#define IS_BYTES(x) (LEVELS(x) & 2)
+#endif
+#ifndef IS_LATIN1
+#define IS_LATIN1(x) (LEVELS(x) & 4)
+#endif
+#ifndef IS_ASCII
+#define IS_ASCII(x) (LEVELS(x) & 64)
+#endif
+#ifndef IS_UTF8
+#define IS_UTF8(x) (LEVELS(x) & 8)
+#endif
+#ifndef ENC_KNOWN
+#define ENC_KNOWN(x) (LEVELS(x) & 12)
+#endif
+// =====
 
 #define CHAR(x)		R_CHAR(x)
 const char *(R_CHAR)(SEXP x);
@@ -1286,6 +1383,12 @@ size_t Rf_GetOptionWidth(void);
 SEXP Rf_GetRowNames(SEXP);
 void Rf_gsetVar(SEXP, SEXP, SEXP);
 SEXP Rf_install(const char *);
+#ifdef __cplusplus
+namespace R
+{
+    SEXP install_(const std::string &name);
+}
+#endif
 SEXP Rf_installChar(SEXP);
 SEXP Rf_installNoTrChar(SEXP);
 SEXP Rf_installTrChar(SEXP);
@@ -1766,7 +1869,9 @@ void R_orderVector1(int *indx, int n, SEXP x,       Rboolean nalast, Rboolean de
 #define lastElt			Rf_lastElt
 #define lazy_duplicate		Rf_lazy_duplicate
 #define lcons			Rf_lcons
+#ifndef __cplusplus
 #define length(x)		Rf_length(x)
+#endif
 #define lengthgets		Rf_lengthgets
 #define list1			Rf_list1
 #define list2			Rf_list2
@@ -1977,6 +2082,16 @@ void R_BadValueInRCode(SEXP value, SEXP call, SEXP rho, const char *rawmsg,
         Rboolean warnByDefault);
 
 #ifdef __cplusplus
+}
+#endif
+
+#ifdef __cplusplus
+
+/** @brief Shorthand for Rf_length().
+ */
+inline auto length(SEXP s)
+{
+    return Rf_length(s);
 }
 #endif
 

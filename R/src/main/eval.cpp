@@ -231,7 +231,7 @@ static void doprof(int sig)  /* sig is ignored in Windows */
 #endif /* Win32 */
 
     if (R_Mem_Profiling){
-	    get_current_mem(&smallv, &bigv, &nodes);
+	    get_current_mem(smallv, bigv, nodes);
 	    if((len = strlen(buf)) < PROFLINEMAX)
 		snprintf(buf+len, PROFBUFSIZ - len,
 			 ":%lu:%lu:%lu:%lu:",
@@ -1232,8 +1232,8 @@ inline static bool R_CheckJIT(SEXP fun)
    recorded value. */
 inline static void cmpenv_enter_frame(SEXP frame, SEXP newenv)
 {
-    for (; frame != R_NilValue; frame = CDR(frame))
-	defineVar(TAG(frame), R_NilValue, newenv);
+    for (; frame != R_NilValue; frame = frame->cdr())
+	defineVar(frame->tag(), R_NilValue, newenv);
 }
 
 inline static SEXP make_cached_cmpenv(SEXP fun)
@@ -1338,8 +1338,8 @@ inline static bool cmpenv_exists_local(SEXP sym, SEXP cmpenv, SEXP top)
     if (cmpenv != top)
 	for (SEXP frame = FRAME(cmpenv);
 	     frame != R_NilValue;
-	     frame = CDR(frame))
-	    if (TAG(frame) == sym)
+	     frame = frame->cdr())
+	    if (frame->tag() == sym)
 		return true;
     return false;
 }
@@ -1370,8 +1370,8 @@ inline static Rboolean jit_env_match(SEXP cmpenv, SEXP fun)
 		   frames. */
 		for (SEXP frame = FRAME(env);
 		     frame != R_NilValue;
-		     frame = CDR(frame))
-		    if (! cmpenv_exists_local(TAG(frame), cmpenv, top))
+		     frame = frame->cdr())
+		    if (! cmpenv_exists_local(frame->tag(), cmpenv, top))
 			return FALSE;
 	    }
 	    else return FALSE;
@@ -1998,7 +1998,7 @@ SEXP R_execMethod(SEXP op, SEXP rho)
 	int missing;
 	loc = R_findVarLocInFrame(rho,symbol);
 	if(R_VARLOC_IS_NULL(loc))
-	    error(_("could not find symbol \"%s\" in environment of the generic function"), CHAR(PRINTNAME(symbol)));
+	    error(_("could not find symbol \"%s\" in environment of the generic function"), CHAR(symbol->printname()));
 	missing = R_GetVarLocMISSING(loc);
 	val = R_GetVarLocValue(loc);
 	SET_FRAME(newrho, CONS(val, FRAME(newrho)));
@@ -2016,7 +2016,7 @@ SEXP R_execMethod(SEXP op, SEXP rho)
 		}
 		if(deflt == R_NilValue)
 		    error(_("symbol \"%s\" is not in environment of method"),
-			  CHAR(PRINTNAME(symbol)));
+			  CHAR(symbol->printname()));
 		SET_PRCODE(val, CAR(deflt));
 	    }
 	}
@@ -2062,7 +2062,7 @@ SEXP R_execMethod(SEXP op, SEXP rho)
     return val;
 }
 
-static SEXP EnsureLocal(SEXP symbol, SEXP rho, R_varloc_t *ploc)
+static SEXP EnsureLocal(SEXP symbol, SEXP rho, R_varloc_t &ploc)
 {
     SEXP vl;
 
@@ -2080,18 +2080,18 @@ static SEXP EnsureLocal(SEXP symbol, SEXP rho, R_varloc_t *ploc)
 	    UNPROTECT(2);
 	}
 	PROTECT(vl); /* R_findVarLocInFrame allocates for user databases */
-	*ploc = R_findVarLocInFrame(rho, symbol);
+	ploc = R_findVarLocInFrame(rho, symbol);
 	UNPROTECT(1);
 	return vl;
     }
 
     vl = eval(symbol, ENCLOS(rho));
     if (vl == R_UnboundValue)
-	error(_("object '%s' was not found"), EncodeChar(PRINTNAME(symbol)));
+	error(_("object '%s' was not found"), EncodeChar(symbol->printname()));
 
     PROTECT(vl = shallow_duplicate(vl));
     defineVar(symbol, vl, rho);
-    *ploc = R_findVarLocInFrame(rho, symbol);
+    ploc = R_findVarLocInFrame(rho, symbol);
     INCREMENT_NAMED(vl);
     UNPROTECT(1);
     return vl;
@@ -2306,7 +2306,7 @@ HIDDEN SEXP do_for(SEXP call, SEXP op, SEXP args, SEXP rho)
     else
 	n = XLENGTH(val);
 
-    val_type = TYPEOF(val);
+    val_type = val->sexptype();
 
     defineVar(sym, R_NilValue, rho);
     PROTECT(cell = GET_BINDING_CELL(sym, rho));
@@ -2527,20 +2527,22 @@ HIDDEN NORET SEXP do_return(SEXP call, SEXP op, SEXP args, SEXP rho)
 /* Declared with a variable number of args in names.cpp */
 HIDDEN SEXP do_function(SEXP call, SEXP op, SEXP args, SEXP rho)
 {
-    SEXP rval, srcref;
+	SEXP rval, srcref;
 
-    if (TYPEOF(op) == PROMSXP) {
-	op = forcePromise(op);
-	ENSURE_NAMEDMAX(op);
-    }
-    if (length(args) < 2) WrongArgCount("function()");
-    CheckFormals(CAR(args));
-    rval = mkCLOSXP(CAR(args), CADR(args), rho);
-    srcref = CADDR(args);
-    if (!isNull(srcref)) setAttrib(rval, R_SrcrefSymbol, srcref);
-    return rval;
+	if (op->sexptype() == PROMSXP)
+	{
+		op = forcePromise(op);
+		ENSURE_NAMEDMAX(op);
+	}
+	if (length(args) < 2)
+		WrongArgCount("function()");
+	CheckFormals(CAR(args));
+	rval = mkCLOSXP(CAR(args), CADR(args), rho);
+	srcref = CADDR(args);
+	if (!isNull(srcref))
+		setAttrib(rval, R_SrcrefSymbol, srcref);
+	return rval;
 }
-
 
 /*
  *  Assignments for complex LVAL specifications. This is the stuff that
@@ -2562,7 +2564,7 @@ HIDDEN SEXP do_function(SEXP call, SEXP op, SEXP args, SEXP rho)
 */
 
 static SEXP evalseq(SEXP expr, SEXP rho, int forcelocal,  R_varloc_t tmploc,
-		    R_varloc_t *ploc)
+		    R_varloc_t &ploc)
 {
     SEXP val, nval, nexpr;
     if (isNull(expr))
@@ -2575,13 +2577,13 @@ static SEXP evalseq(SEXP expr, SEXP rho, int forcelocal,  R_varloc_t tmploc,
 	else {
 	    nval = eval(expr, ENCLOS(rho));
 	    PROTECT(nval); /* R_findVarLoc allocates for user databases */
-	    *ploc = R_findVarLoc(expr, ENCLOS(rho));
+	    ploc = R_findVarLoc(expr, ENCLOS(rho));
 	    UNPROTECT(1);
 	}
-	int maybe_in_assign = ploc->cell ?
-	    ASSIGNMENT_PENDING(ploc->cell) : FALSE;
-	if (ploc->cell)
-	    SET_ASSIGNMENT_PENDING(ploc->cell, TRUE);
+	int maybe_in_assign = ploc.cell ?
+	    ASSIGNMENT_PENDING(ploc.cell) : FALSE;
+	if (ploc.cell)
+	    SET_ASSIGNMENT_PENDING(ploc.cell, TRUE);
 	if (maybe_in_assign || MAYBE_SHARED(nval))
 	    nval = shallow_duplicate(nval);
 	UNPROTECT(1);
@@ -2614,8 +2616,8 @@ static SEXP evalseq(SEXP expr, SEXP rho, int forcelocal,  R_varloc_t tmploc,
 /* Main entry point for complex assignments */
 /* We have checked to see that CAR(args) is a LANGSXP */
 
-static const char *const asym[] = {":=", "<-", "<<-", "="};
-#define NUM_ASYM (sizeof(asym) / sizeof(char *))
+static const std::vector<const char *> asym = {":=", "<-", "<<-", "="};
+constexpr int NUM_ASYM = (sizeof(asym) / sizeof(const char *));
 static SEXP asymSymbol[NUM_ASYM];
 
 static SEXP R_ReplaceFunsTable = nullptr;
@@ -2628,7 +2630,7 @@ static SEXP R_AssignSym = nullptr;
 
 HIDDEN void R_initAssignSymbols(void)
 {
-    for (long unsigned int i = 0; i < NUM_ASYM; i++)
+    for (auto i = 0; i < NUM_ASYM; i++)
 	asymSymbol[i] = install(asym[i]);
 
     R_ReplaceFunsTable = R_NewHashedEnv(R_EmptyEnv, ScalarInteger(1099));
@@ -2684,6 +2686,7 @@ inline static void FIXUP_RHS_NAMED(SEXP rhs)
 	if (NAMED(rhs) && NAMED(rhs) <= 1)
 		SET_NAMED(rhs, 2);
 }
+
 constexpr size_t ASSIGNBUFSIZ = 32;
 static SEXP installAssignFcnSymbol(SEXP fun)
 {
@@ -2834,7 +2837,7 @@ static SEXP applydefine(SEXP call, SEXP op, SEXP args, SEXP rho)
     /*  Do a partial evaluation down through the LHS. */
     R_varloc_t lhsloc;
     lhs = evalseq(CADR(expr), rho,
-		  PRIMVAL(op)==1 || PRIMVAL(op)==3, tmploc, &lhsloc);
+		  PRIMVAL(op)==1 || PRIMVAL(op)==3, tmploc, lhsloc);
     if (lhsloc.cell == nullptr)
 	lhsloc.cell = R_NilValue;
     PROTECT(lhsloc.cell);
@@ -2898,7 +2901,7 @@ static SEXP applydefine(SEXP call, SEXP op, SEXP args, SEXP rho)
     if (PRIMVAL(op) == 2)                       /* <<- */
 	setVar(lhsSym, value, ENCLOS(rho));
     else {                                      /* <-, = */
-	if (ALTREP(value)) {
+	if (value->altrep()) {
 	    PROTECT(value);
 	    value = try_assign_unwrap(value, lhsSym, rho, nullptr);
 	    UNPROTECT(1);
@@ -4364,10 +4367,10 @@ inline static SEXP getPrimitive(SEXP symbol, SEXPTYPE type)
 	/* probably means a package redefined the base function so
 	   try to get the real thing from the internal table of
 	   primitives */
-	value = R_Primitive(CHAR(PRINTNAME(symbol)));
+	value = R_Primitive(CHAR(symbol->printname()));
 	if (TYPEOF(value) != type)
 	    /* if that doesn't work we signal an error */
-	    error(_("'%s' is not a '%s' function"), CHAR(PRINTNAME(symbol)), type == BUILTINSXP ? "BUILTIN" : "SPECIAL");
+	    error(_("'%s' is not a '%s' function"), CHAR(symbol->printname()), type == BUILTINSXP ? "BUILTIN" : "SPECIAL");
     }
     return value;
 }
@@ -5225,7 +5228,7 @@ inline static SEXP GET_BINDING_CELL_CACHE(SEXP symbol, SEXP rho,
 
 NORET static void MISSING_ARGUMENT_ERROR(SEXP symbol)
 {
-    const char *n = CHAR(PRINTNAME(symbol));
+    const char *n = CHAR(symbol->printname());
     if(*n) error(_("'%s' argument is missing, with no default"), n);
     else error(_("'%s' argument is missing, with no default"), "expr");
 }
@@ -5240,7 +5243,7 @@ inline static void MAYBE_MISSING_ARGUMENT_ERROR(SEXP symbol, Rboolean keepmiss) 
 
 NORET static void UNBOUND_VARIABLE_ERROR(SEXP symbol)
 {
-    error(_("object '%s' was not found"), EncodeChar(PRINTNAME(symbol)));
+    error(_("object '%s' was not found"), EncodeChar(symbol->printname()));
 }
 
 inline static SEXP FORCE_PROMISE(SEXP value, SEXP symbol, SEXP rho,
@@ -5483,10 +5486,11 @@ inline static void SETCALLARG_TAG(SEXP tag) {
 	    SET_TAG(__cell__, t);			\
     } while (0)
 */
-inline static void SETCALLARG_TAG_SYMBOL(SEXP tag) {
-        SEXP cell = GETSTACK(-1);
-        if (cell != R_NilValue)
-            SET_TAG(cell, tag);
+ inline static void SETCALLARG_TAG_SYMBOL(SEXP tag)
+ {
+	 SEXP cell = GETSTACK(-1);
+	 if (cell != R_NilValue)
+		 SET_TAG(cell, tag);
  }
 
 static int tryDispatch(const char *generic, SEXP call, SEXP x, SEXP rho, SEXP *pv)
@@ -7235,7 +7239,7 @@ static SEXP bcEval(SEXP body, SEXP rho, Rboolean useCache)
 	SEXP symbol = VECTOR_ELT(constants, GETOP());
 	SEXP value = INTERNAL(symbol);
 	if (TYPEOF(value) != BUILTINSXP)
-	  error(_("there is no '.Internal' function '%s'"), CHAR(PRINTNAME(symbol)));
+	  error(_("there is no '.Internal' function '%s'"), CHAR(symbol->printname()));
 	INIT_CALL_FRAME(value);
 	NEXT();
       }
@@ -7470,7 +7474,7 @@ static SEXP bcEval(SEXP body, SEXP rho, Rboolean useCache)
 	R_varloc_t loc;
 	if (value == R_UnboundValue ||
 	    TYPEOF(value) == PROMSXP) {
-	    value = EnsureLocal(symbol, rho, &loc);
+	    value = EnsureLocal(symbol, rho, loc);
 	    if (loc.cell == nullptr)
 		loc.cell = R_NilValue;
 	}
@@ -7498,7 +7502,7 @@ static SEXP bcEval(SEXP body, SEXP rho, Rboolean useCache)
 	SEXP symbol = VECTOR_ELT(constants, sidx);
 	SEXP cell = GET_BINDING_CELL_CACHE(symbol, rho, vcache, sidx);
 	SEXP value = GETSTACK(-1); /* leave on stack for GC protection */
-	if (ALTREP(value)) {
+	if (value->altrep()) {
 	    SEXP v = try_assign_unwrap(value, symbol, rho, cell);
 	    if (v != value) {
 		SETSTACK(-1, v);
@@ -7547,14 +7551,14 @@ static SEXP bcEval(SEXP body, SEXP rho, Rboolean useCache)
 	    SEXP ncall;
 	    PROTECT(ncall = duplicate(call));
 	    /**** hack to avoid evaluating the symbol */
-	    SETCAR(CDDR(ncall), ScalarString(PRINTNAME(symbol)));
+	    SETCAR(CDDR(ncall), ScalarString(symbol->printname()));
 	    dispatched = tryDispatch("$", ncall, x, rho, &value);
 	    UNPROTECT(1);
 	}
 	if (dispatched)
 	    SETSTACK(-1, value);
 	else
-	    SETSTACK(-1, R_subset3_dflt(x, PRINTNAME(symbol), R_NilValue));
+	    SETSTACK(-1, R_subset3_dflt(x, symbol->printname(), R_NilValue));
 	R_Visible = true;
 	NEXT();
       }
@@ -7576,7 +7580,7 @@ static SEXP bcEval(SEXP body, SEXP rho, Rboolean useCache)
 	    SEXP ncall, prom;
 	    PROTECT(ncall = duplicate(call));
 	    /**** hack to avoid evaluating the symbol */
-	    SETCAR(CDDR(ncall), ScalarString(PRINTNAME(symbol)));
+	    SETCAR(CDDR(ncall), ScalarString(symbol->printname()));
 	    prom = mkRHSPROMISE(CADDDR(ncall), rhs);
 	    SETCAR(CDDDR(ncall), prom);
 	    dispatched = tryDispatch("$<-", ncall, x, rho, &value);

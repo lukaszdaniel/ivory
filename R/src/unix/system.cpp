@@ -190,7 +190,7 @@ static char* unescape_arg(char *p, char* avp) {
 #include <csignal> /* thr_stksegment */
 
 extern "C"
-int Rf_initialize_R(int ac, char **av)
+int Rf_initialize_R(int ac, char *av[])
 {
     int i, ioff = 1, j;
     Rboolean useX11 = TRUE, useTk = FALSE;
@@ -208,7 +208,7 @@ int Rf_initialize_R(int ac, char **av)
 #if defined(HAVE_SYS_RESOURCE_H) && defined(HAVE_GETRLIMIT)
 {
     /* getrlimit is POSIX:
-       http://pubs.opengroup.org/onlinepubs/9699919799/functions/getrlimit.html
+       https://pubs.opengroup.org/onlinepubs/9699919799/functions/getrlimit.html
     */
     struct rlimit rlim;
 
@@ -410,20 +410,22 @@ int Rf_initialize_R(int ac, char **av)
 		UsingReadline = FALSE;
 	    } else if(!strcmp(*av, "-f")) {
 		ac--; av++;
-#define R_INIT_TREAT_F(_AV_)						\
-		Rp->R_Interactive = FALSE;				\
-		if(strcmp(_AV_, "-")) {					\
-		    char path[PATH_MAX], *p = path;			\
-		    p = unescape_arg(p, _AV_);				\
-		    *p = '\0';						\
-		    ifp = R_fopen(path, "r");				\
-		    if(!ifp) {						\
-			snprintf(msg, 1024,				\
-				 _("cannot open file '%s': %s"),	\
-				 path, strerror(errno));		\
-			R_Suicide(msg);					\
-		    }							\
-		}
+#define R_INIT_TREAT_F(_AV_)                         \
+	Rp->R_Interactive = FALSE;                       \
+	if (strcmp(_AV_, "-"))                           \
+	{                                                \
+		char path[PATH_MAX], *p = path;              \
+		p = unescape_arg(p, _AV_);                   \
+		*p = '\0';                                   \
+		ifp = R_fopen(path, "r");                    \
+		if (!ifp)                                    \
+		{                                            \
+			snprintf(msg, 1024,                      \
+					 _("cannot open file '%s': %s"), \
+					 path, strerror(errno));         \
+			R_Suicide(msg);                          \
+		}                                            \
+	}
 		R_INIT_TREAT_F(*av);
 
 	    } else if(!strncmp(*av, "--file=", 7)) {

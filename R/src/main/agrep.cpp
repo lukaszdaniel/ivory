@@ -57,7 +57,7 @@ static void amatch_regaparams(regaparams_t *params, int patlen,
 	params->max_cost = R_INT_MAX;
     } else {
 	if(bound < 1) bound *= (patlen * max_cost);
-	params->max_cost = IntegerFromReal(ceil(bound), &warn);
+	params->max_cost = IntegerFromReal(ceil(bound), warn);
 	CoercionWarning(warn);
     }
     bound = bounds[1];
@@ -65,7 +65,7 @@ static void amatch_regaparams(regaparams_t *params, int patlen,
 	params->max_del = R_INT_MAX;
     } else {
 	if(bound < 1) bound *= patlen;
-	params->max_del = IntegerFromReal(ceil(bound), &warn);
+	params->max_del = IntegerFromReal(ceil(bound), warn);
 	CoercionWarning(warn);
     }
     bound = bounds[2];
@@ -73,7 +73,7 @@ static void amatch_regaparams(regaparams_t *params, int patlen,
 	params->max_ins = R_INT_MAX;
     } else {
 	if(bound < 1) bound *= patlen;
-	params->max_ins = IntegerFromReal(ceil(bound), &warn);
+	params->max_ins = IntegerFromReal(ceil(bound), warn);
 	CoercionWarning(warn);
     }
     bound = bounds[3];
@@ -81,7 +81,7 @@ static void amatch_regaparams(regaparams_t *params, int patlen,
 	params->max_subst = R_INT_MAX;
     } else {
 	if(bound < 1) bound *= patlen;
-	params->max_subst = IntegerFromReal(ceil(bound), &warn);
+	params->max_subst = IntegerFromReal(ceil(bound), warn);
 	CoercionWarning(warn);
     }
     bound = bounds[4];
@@ -89,7 +89,7 @@ static void amatch_regaparams(regaparams_t *params, int patlen,
 	params->max_err = R_INT_MAX;
     } else {
 	if(bound < 1) bound *= patlen;
-	params->max_err = IntegerFromReal(ceil(bound), &warn);
+	params->max_err = IntegerFromReal(ceil(bound), warn);
 	CoercionWarning(warn);
     }
 }

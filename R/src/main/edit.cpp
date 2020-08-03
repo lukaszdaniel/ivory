@@ -104,7 +104,7 @@ SEXP do_edit(SEXP call, SEXP op, SEXP args, SEXP rho)
     vmaxsave = vmaxget();
 
     x = CAR(args); args = CDR(args);
-    if (TYPEOF(x) == CLOSXP) envir = CLOENV(x);
+    if (x->sexptype() == CLOSXP) envir = CLOENV(x);
     else envir = R_NilValue;
     PROTECT(envir);
 
@@ -207,7 +207,7 @@ SEXP do_edit(SEXP call, SEXP op, SEXP args, SEXP rho)
 	    tmp = eval(VECTOR_ELT(x, j), R_GlobalEnv);
 	x = tmp;
     }
-    if (TYPEOF(x) == CLOSXP && envir != R_NilValue)
+    if (x->sexptype() == CLOSXP && envir != R_NilValue)
 	SET_CLOENV(x, envir);
     UNPROTECT(3);
     vmaxset(vmaxsave);

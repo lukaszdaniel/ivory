@@ -91,6 +91,7 @@ DllInfo *R_getDllInfo(const char *name);
 DllInfo *R_getEmbeddingDllInfo(void);
 
 typedef struct Rf_RegisteredNativeSymbol R_RegisteredNativeSymbol;
+
 typedef enum
 {
   R_ANY_SYM = 0,
@@ -100,8 +101,7 @@ typedef enum
   R_EXTERNAL_SYM
 } NativeSymbolType;
 
-DL_FUNC R_FindSymbol(char const *, char const *,
-                     R_RegisteredNativeSymbol *symbol);
+DL_FUNC R_FindSymbol(char const *, char const *, R_RegisteredNativeSymbol *symbol);
 
 /* Interface for exporting and importing functions from one package
    for use from C code in a package.  The registration part probably

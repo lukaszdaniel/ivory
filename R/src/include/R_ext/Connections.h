@@ -87,6 +87,15 @@ struct Rconn
     int status; /* for pipes etc */
     unsigned char *buff;
     size_t buff_len, buff_stored_len, buff_pos;
+#ifdef __cplusplus
+    int ConnIndex() const;
+    static int NextConnection();
+    NORET void set_iconv_error(const char *from, const char *to) const;
+    size_t buff_set_len(size_t len);
+    void buff_init();
+    void set_buffer();
+    void checkClose();
+#endif
 };
 
 #ifdef  __cplusplus

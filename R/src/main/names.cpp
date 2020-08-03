@@ -34,6 +34,7 @@
 
 #include <Rinterface.h>
 #include <vector>
+#include <string>
 
 /* Table of  .Internal(.) and .Primitive(.)  R functions
  * =====     =========	      ==========
@@ -1014,7 +1015,7 @@ std::vector<FUNTAB> R_FunTab =
 
 namespace
 {
-    const std::vector<const char *> Spec_name = {
+    const std::vector<std::string> Spec_name = {
         "if", "while", "repeat", "for", "break", "next", "return", "function",
         "(", "{",
         "+", "-", "*", "/", "^", "%%", "%/%", "%*%", ":",
@@ -1022,8 +1023,7 @@ namespace
         "&", "|", "&&", "||", "!",
         "<-", "<<-", "=",
         "$", "[", "[[",
-        "$<-", "[<-", "[[<-",
-        0};
+        "$<-", "[<-", "[[<-"};
 }
 
 /* also used in eval.cpp */
@@ -1067,10 +1067,10 @@ static void installFunTab(int i)
     SEXP prim;
     /* mkPRIMSXP caches its results, thus prim does not need protection */
     prim = mkPRIMSXP(i, R_FunTab[i].eval % 10);
-    if ((R_FunTab[i].eval % 100 )/10)
-	SET_INTERNAL(install(R_FunTab[i].name), prim);
+    if ((R_FunTab[i].eval % 100) / 10)
+        SET_INTERNAL(install(R_FunTab[i].name), prim);
     else
-	SET_SYMVALUE(install(R_FunTab[i].name), prim);
+        SET_SYMVALUE(install(R_FunTab[i].name), prim);
 }
 
 static void SymbolShortcuts(void)
@@ -1150,9 +1150,8 @@ static SEXP DDVALSymbols[N_DDVAL_SYMBOLS];
 
 static SEXP createDDVALSymbol(int n)
 {
-    char buf[15];
-    snprintf(buf, 15, "..%d", n);
-    return install(buf);
+    const std::string ddval = ".." + std::to_string(n);
+    return install(ddval.c_str());
 }
 
 static void initializeDDVALSymbols()
@@ -1220,8 +1219,8 @@ HIDDEN void Rf_InitNames()
     for (int i = 0; R_FunTab[i].name; i++) installFunTab(i);
 
     /* Special base functions */
-    for (int i = 0; Spec_name[i]; i++)
-	SET_SPECIAL_SYMBOL(install(Spec_name[i]));
+    for (const auto &sname : Spec_name)
+        SET_SPECIAL_SYMBOL(install(sname.c_str()));
 
     R_initAssignSymbols();
     initializeDDVALSymbols();
@@ -1233,7 +1232,7 @@ HIDDEN void Rf_InitNames()
 /*  install - probe the symbol table */
 /*  If "name" is not found, it is installed in the symbol table.
     The symbol corresponding to the string "name" is returned. */
-
+SEXP R::install_(const std::string &name) { return Rf_install(name.c_str()); }
 SEXP Rf_install(const char *name)
 {
     SEXP sym;
@@ -1243,12 +1242,13 @@ SEXP Rf_install(const char *name)
     i = hashcode % HSIZE;
     /* Check to see if the symbol is already present;  if it is, return it. */
     for (sym = R_SymbolTable[i]; sym != R_NilValue; sym = CDR(sym))
-	if (strcmp(name, CHAR(PRINTNAME(CAR(sym)))) == 0) return (CAR(sym));
+        if (strcmp(name, CHAR(PRINTNAME(CAR(sym)))) == 0)
+            return (CAR(sym));
     /* Create a new symbol node and link it into the table. */
     if (*name == '\0')
-	error(_("attempt to use zero-length variable name"));
+        error(_("attempt to use zero-length variable name"));
     if (strlen(name) > MAXIDSIZE)
-	error(_("variable names are limited to %d bytes"), MAXIDSIZE);
+        error(_("variable names are limited to %d bytes"), MAXIDSIZE);
     sym = mkSYMSXP(mkChar(name), R_UnboundValue);
     SET_HASHVALUE(PRINTNAME(sym), hashcode);
     SET_HASHASH(PRINTNAME(sym), 1);
@@ -1283,8 +1283,8 @@ SEXP Rf_installNoTrChar(SEXP charSXP)
 	error(_("attempt to use zero-length variable name"));
     if (len > MAXIDSIZE)
 	error(_("variable names are limited to %d bytes"), MAXIDSIZE);
-    if (IS_ASCII(charSXP) || (IS_UTF8(charSXP) && utf8locale) ||
-					(IS_LATIN1(charSXP) && latin1locale) )
+    if (charSXP->isAscii() || (charSXP->isUTF8() && utf8locale) ||
+					(charSXP->isLatin1() && latin1locale) )
 	sym = mkSYMSXP(charSXP, R_UnboundValue);
     else {
 	/* This branch is to match behaviour of install (which is older):
@@ -1344,10 +1344,10 @@ HIDDEN SEXP do_internal(SEXP call, SEXP op, SEXP args, SEXP env)
 
     checkArity(op, args);
     s = CAR(args);
-    if (!isPairList(s))
+    if (!s->isPairList_())
 	errorcall(call, _("invalid '%s' argument"), ".Internal()");
     fun = CAR(s);
-    if (!isSymbol(fun))
+    if (!fun->isSymbol_())
 	errorcall(call, _("invalid '%s' argument"), ".Internal()");
     if (INTERNAL(fun) == R_NilValue)
 	errorcall(call, _("there is no '.Internal' function '%s'"),

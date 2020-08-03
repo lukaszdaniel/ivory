@@ -35,8 +35,9 @@
 #endif
 
 #include <Localization.h>
+#include <Defn.h>
 #include <Rinternals.h>
-#include "Print.h"
+#include <Print.h>
 #include <R_ext/Itermacros.h> /* for ITERATE_BY_REGION */
 
 #define DO_first_lab                  \
@@ -188,7 +189,7 @@ void printRealVectorS(SEXP x, R_xlen_t n, int indx)
     int w, d, e, labwidth=0, width;
     R_xlen_t i;
     DO_first_lab;
-    formatRealS(x, n, &w, &d, &e, 0);
+    formatRealS(x, n, w, d, e, 0);
     w += R_print.gap;
 
     ITERATE_BY_REGION_PARTIAL(x, px, idx, nb, double, REAL, 0, n,
@@ -245,9 +246,9 @@ void printComplexVectorS(SEXP x, R_xlen_t n, int indx)
 
 static void printStringVector(const SEXP *x, R_xlen_t n, int quote, int indx)
 {
-    int w, labwidth=0, width;
+	int w, labwidth = 0, width;
 
-    DO_first_lab;
+	DO_first_lab;
     formatString(x, n, &w, quote);
 
     for (R_xlen_t i = 0; i < n; i++) {
@@ -289,9 +290,6 @@ static void printStringVectorS(SEXP x, R_xlen_t n, int quote, int indx)
     }
     Rprintf("\n");
 }
-
-
-
 
 HIDDEN
 void printRawVector(const Rbyte *x, R_xlen_t n, int indx)
@@ -447,7 +445,7 @@ static void printNamedIntegerVectorS(SEXP x, int n, SEXP names)
 				R_print.gap,""))
 
 #undef INI_F_REAL_S
-#define INI_F_REAL_S	int d, e; formatRealS(x, n, &w, &d, &e, 0)
+#define INI_F_REAL_S	int d, e; formatRealS(x, n, w, d, e, 0)
 
 static void printNamedRealVectorS(SEXP x, int n, SEXP names)
     PRINT_N_VECTOR_SEXP(INI_F_REAL_S,
@@ -471,7 +469,7 @@ static void printNamedRealVectorS(SEXP x, int n, SEXP names)
 static void printNamedComplexVectorS(SEXP x, int n, SEXP names)
     PRINT_N_VECTOR_SEXP(INI_F_CPLX_S,
 	{ /* PRINT_1 */
-	    tmp = COMPLEX_ELT(x, j);
+	    tmp = COMPLEX_ELT(x, k);
 	    if(j) Rprintf("%*s", R_print.gap, "");
 	    if (ISNA(tmp.r) || ISNA(tmp.i)) {
 		Rprintf("%s", EncodeReal0(NA_REAL, w, 0, 0, OutDec));

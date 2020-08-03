@@ -559,7 +559,7 @@ static SEXP scanVector(SEXPTYPE type, R_xlen_t maxitems, R_xlen_t maxlines,
     int c, strip, bch;
     R_xlen_t i, blocksize, linesread, n, nprev;
     char *buffer;
-    R_StringBuffer strBuf = {nullptr, 0, MAXELTSIZE};
+    R_StringBuffer strBuf = R_StringBuffer();
 
     if (maxitems > 0) blocksize = maxitems;
     else blocksize = SCAN_BLOCKSIZE;
@@ -626,12 +626,12 @@ static SEXP scanVector(SEXPTYPE type, R_xlen_t maxitems, R_xlen_t maxlines,
 
     if (n == 0) {
 	UNPROTECT(1);
-	R_FreeStringBuffer(strBuf);
+	strBuf.R_FreeStringBuffer();
 	return allocVector(type,0);
     }
     if (n == maxitems) {
 	UNPROTECT(1);
-	R_FreeStringBuffer(strBuf);
+	strBuf.R_FreeStringBuffer();
 	return ans;
     }
 
@@ -659,10 +659,10 @@ static SEXP scanVector(SEXPTYPE type, R_xlen_t maxitems, R_xlen_t maxlines,
 	    RAW(bns)[i] = RAW(ans)[i];
 	break;
     default:
-	UNIMPLEMENTED_TYPEt("scanVector()", type);
+	UNIMPLEMENTED_TYPE("scanVector()", type);
     }
     UNPROTECT(1);
-    R_FreeStringBuffer(strBuf);
+    strBuf.R_FreeStringBuffer();
     return bns;
 }
 
@@ -676,7 +676,7 @@ static SEXP scanFrame(SEXP what, R_xlen_t maxitems, R_xlen_t maxlines,
     int c, strip, bch;
     R_xlen_t blksize, i, ii, j, n, nc, linesread, colsread;
     R_xlen_t badline, nstring = 0;
-    R_StringBuffer buf = {nullptr, 0, MAXELTSIZE};
+    R_StringBuffer buf = R_StringBuffer();
 
     nc = xlength(what);
     if (!nc) {
@@ -831,7 +831,7 @@ static SEXP scanFrame(SEXP what, R_xlen_t maxitems, R_xlen_t maxlines,
 	SET_VECTOR_ELT(ans, i, new_);
     }
     UNPROTECT(1);
-    R_FreeStringBuffer(buf);
+    buf.R_FreeStringBuffer();
     return ans;
 }
 

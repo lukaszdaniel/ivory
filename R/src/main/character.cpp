@@ -91,7 +91,7 @@ using namespace std;
  */
 
 #include "RBufferUtils.h"
-static R_StringBuffer cbuff = {nullptr, 0, MAXELTSIZE};
+static R_StringBuffer cbuff = R_StringBuffer();
 
 /* Functions to perform analogues of the standard C string library. */
 /* Most are vectorized */
@@ -159,7 +159,7 @@ int R_nchar(SEXP string, nchar_type type_,
 		for( ; *p; p += utf8clen(*p)) nc++;
 		return nc;
 	    }
-	} else if (IS_BYTES(string)) {
+	} else if (string->isBytes()) {
 	    if (!allowNA) /* could do chars 0 */
 		error(_("number of characters is not computable in \"bytes\" encoding, %s"),
 		      msg_name);
@@ -193,7 +193,7 @@ int R_nchar(SEXP string, nchar_type type_,
 		}
 		return nc;
 	    }
-	} else if (IS_BYTES(string)) {
+	} else if (string->isBytes()) {
 	    if (!allowNA) /* could do width 0 */
 		error(_("width is not computable for %s in \"bytes\" encoding"),
 		      msg_name);
@@ -270,7 +270,7 @@ HIDDEN SEXP do_nchar(SEXP call, SEXP op, SEXP args, SEXP env)
 	char msg_i[30]; sprintf(msg_i, _("element %ld"), (long)i+1);
 	s_[i] = R_nchar(sxi, type_, (Rboolean) allowNA, (Rboolean) keepNA, msg_i);
     }
-    R_FreeStringBufferL(cbuff);
+    cbuff.R_FreeStringBufferL();
     if ((d = getAttrib(x, R_NamesSymbol)) != R_NilValue)
 	setAttrib(s, R_NamesSymbol, d);
     if ((d = getAttrib(x, R_DimSymbol)) != R_NilValue)
@@ -611,7 +611,7 @@ HIDDEN SEXP do_substrgets(SEXP call, SEXP op, SEXP args, SEXP env)
 	    }
 	    vmaxset(vmax);
 	}
-	R_FreeStringBufferL(cbuff);
+	cbuff.R_FreeStringBufferL();
     }
     UNPROTECT(1);
     return s;
@@ -874,7 +874,7 @@ HIDDEN SEXP do_abbrev(SEXP call, SEXP op, SEXP args, SEXP env)
     if (usecl && warn) warning(_("abbreviate used with non-ASCII chars"));
     SHALLOW_DUPLICATE_ATTRIB(ans, x);
     /* This copied the class, if any */
-    R_FreeStringBufferL(cbuff);
+    cbuff.R_FreeStringBufferL();
     UNPROTECT(1);
     return ans;
 }
@@ -1047,7 +1047,7 @@ HIDDEN SEXP do_tolower(SEXP call, SEXP op, SEXP args, SEXP env)
 	    }
 	    vmaxset(vmax);
 	}
-	R_FreeStringBufferL(cbuff);
+	cbuff.R_FreeStringBufferL();
     } else {
 	char *xi;
 	vmax = vmaxget();
@@ -1496,7 +1496,7 @@ HIDDEN SEXP do_chartr(SEXP call, SEXP op, SEXP args, SEXP env)
 	    }
 	    vmaxset(vmax);
 	}
-	R_FreeStringBufferL(cbuff);
+	cbuff.R_FreeStringBufferL();
     } else {
 	unsigned char xtable[UCHAR_MAX + 1], *p, c_old, c_new;
 	struct tr_spec *trs_old, **trs_old_ptr;
@@ -1615,7 +1615,7 @@ HIDDEN SEXP do_strtrim(SEXP call, SEXP op, SEXP args, SEXP env)
 	    SET_STRING_ELT(s, i, markKnown(buf, STRING_ELT(x, i)));
 	    vmaxset(vmax);
 	}
-	R_FreeStringBufferL(cbuff);
+	cbuff.R_FreeStringBufferL();
 	UNPROTECT(1);
     }
     SHALLOW_DUPLICATE_ATTRIB(s, x);

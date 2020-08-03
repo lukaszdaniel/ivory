@@ -28,6 +28,11 @@ struct R_StringBuffer
    char *data;
    size_t bufsize;
    size_t defaultSize;
+   R_StringBuffer() : data(nullptr), bufsize(0), defaultSize(MAXELTSIZE) {};
+   R_StringBuffer(const size_t &defaultS) : data(nullptr), bufsize(0), defaultSize(defaultS) {}
+   ~R_StringBuffer() {};
+   void R_FreeStringBuffer();
+   void R_FreeStringBufferL();
 };
 
 /* code in ./memory.cpp : */

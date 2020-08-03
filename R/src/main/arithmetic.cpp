@@ -390,7 +390,7 @@ R_INLINE static SEXP ScalarValue1(SEXP x)
 	if (NO_REFERENCES(x))
 		return x;
 
-	return allocVector(TYPEOF(x), 1);
+	return allocVector(x->sexptype(), 1);
 }
 
 R_INLINE static SEXP ScalarValue2(SEXP x, SEXP y)
@@ -400,7 +400,7 @@ R_INLINE static SEXP ScalarValue2(SEXP x, SEXP y)
 	else if (NO_REFERENCES(y))
 		return y;
 
-	return allocVector(TYPEOF(x), 1);
+	return allocVector(x->sexptype(), 1);
 }
 
 /* Unary and Binary Operators */
@@ -688,15 +688,15 @@ HIDDEN SEXP R_binary(SEXP call, SEXP op, SEXP x, SEXP y)
 
     SEXP val;
     /* need to preserve object here, as *_binary copies class attributes */
-    if (TYPEOF(x) == CPLXSXP || TYPEOF(y) == CPLXSXP) {
+    if (x->sexptype() == CPLXSXP || TYPEOF(y) == CPLXSXP) {
 	COERCE_IF_NEEDED(x, CPLXSXP, xpi);
 	COERCE_IF_NEEDED(y, CPLXSXP, ypi);
 	val = complex_binary(oper, x, y);
     }
-    else if (TYPEOF(x) == REALSXP || TYPEOF(y) == REALSXP) {
+    else if (x->sexptype() == REALSXP || TYPEOF(y) == REALSXP) {
 	/* real_binary can handle REALSXP or INTSXP operand, but not LGLSXP. */
 	/* Can get a LGLSXP. In base-Ex.R on 24 Oct '06, got 8 of these. */
-	if (TYPEOF(x) != INTSXP) COERCE_IF_NEEDED(x, REALSXP, xpi);
+	if (x->sexptype() != INTSXP) COERCE_IF_NEEDED(x, REALSXP, xpi);
 	if (TYPEOF(y) != INTSXP) COERCE_IF_NEEDED(y, REALSXP, ypi);
 	val = real_binary(oper, x, y);
     }
@@ -1370,7 +1370,7 @@ HIDDEN SEXP do_abs(SEXP call, SEXP op, SEXP args, SEXP env)
 	/* integer or logical ==> return integer,
 	   factor was covered by Math.factor. */
 	R_xlen_t i, n = XLENGTH(x);
-	s = (NO_REFERENCES(x) && TYPEOF(x) == INTSXP) ?
+	s = (NO_REFERENCES(x) && x->sexptype() == INTSXP) ?
 	    x : allocVector(INTSXP, n);
 	PROTECT(s);
 	/* Note: relying on INTEGER(.) === LOGICAL(.) : */
@@ -1380,7 +1380,7 @@ HIDDEN SEXP do_abs(SEXP call, SEXP op, SEXP args, SEXP env)
 	    int xi = px[i];
 	    pa[i] = (xi == NA_INTEGER) ? xi : abs(xi);
 	}
-    } else if (TYPEOF(x) == REALSXP) {
+    } else if (x->sexptype() == REALSXP) {
 	R_xlen_t i, n = XLENGTH(x);
 	PROTECT(s = NO_REFERENCES(x) ? x : allocVector(REALSXP, n));
 	double *pa = REAL(s);

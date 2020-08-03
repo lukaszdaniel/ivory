@@ -656,7 +656,7 @@ R_INLINE static SEXP getPrimitive(SEXP symbol)
 	/* probably means a package redefined the base function so
 	   try to get the real thing from the internal table of
 	   primitives */
-	value = R_Primitive(CHAR(PRINTNAME(symbol)));
+	value = R_Primitive(CHAR(symbol->printname()));
     } else
 	value = R_NilValue;
 
@@ -739,7 +739,7 @@ HIDDEN SEXP do_nextmethod(SEXP call, SEXP op, SEXP args, SEXP env)
     if (s == R_DotsSymbol) {
 	t = findVarInFrame3(env, s, TRUE);
 	if (t != R_NilValue && t != R_MissingArg) {
-	    SET_TYPEOF(t, LISTSXP); /* a safe mutation */
+		t->setsexptype(LISTSXP); /* a safe mutation */
 	    s = matchmethargs(matchedarg, t);
 	    UNPROTECT(1);
 	    PROTECT(matchedarg = s);

@@ -310,7 +310,7 @@ static SEXP resolveNativeRoutine(SEXP args, DL_FUNC *fun,
     return args; /* -Wall */
 }
 
-static bool checkNativeType(int targetType, int actualType)
+static bool checkNativeType(const int &targetType, const int &actualType)
 {
 	if (targetType > 0)
 	{
@@ -324,9 +324,9 @@ static bool checkNativeType(int targetType, int actualType)
 	return true;
 }
 
-static bool comparePrimitiveTypes(R_NativePrimitiveArgType type, SEXP s)
+static bool comparePrimitiveTypes(const R_NativePrimitiveArgType &type, SEXP s)
 {
-	if (type == ANYSXP || TYPEOF(s) == type)
+	if (type == ANYSXP || s->sexptypeEqual(SEXPTYPE(type)))
 		return true;
 
 	if (type == SINGLESXP)
@@ -950,7 +950,7 @@ HIDDEN SEXP do_dotCode(SEXP call, SEXP op, SEXP args, SEXP env)
 	SET_VECTOR_ELT(ans, na, s);
 
 	if(checkNativeType(targetType, TYPEOF(s)) == FALSE &&
-	   targetType != SEXPTYPE(SINGLESXP)) {
+	   targetType != SINGLESXP) {
 	    /* Cannot be called if DUP = FALSE, so only needs to live
 	       until copied in the switch.
 	       But R_alloc allocates, so missed protection < R 2.15.0.
@@ -971,7 +971,7 @@ HIDDEN SEXP do_dotCode(SEXP call, SEXP op, SEXP args, SEXP env)
 	    error(_("long vectors (argument %d) are not supported in %s"),
 		  na + 1, Fort ? ".Fortran" : ".C");
 #endif
-	SEXPTYPE t = TYPEOF(s);
+	SEXPTYPE t = s->sexptype();
 	switch(t) {
 	case RAWSXP:
 	    if (copy) {
@@ -1154,7 +1154,7 @@ HIDDEN SEXP do_dotCode(SEXP call, SEXP op, SEXP args, SEXP env)
 	    /* Includes pairlists from R 2.15.0 */
 	    if (Fort) error(_("invalid mode (%s) to pass to Fortran (arg %d)"),
 			    type2char(t), na + 1);
-	    warning("passing an object of type '%s' to .C (arg %d) is deprecated",
+	    warning(_("passing an object of type '%s' to .C (arg %d) is deprecated"),
 		    type2char(t), na + 1);
 	    if (t == LISTSXP)
 		warning(_("pairlists are passed as SEXP as from R 2.15.0"));
@@ -1200,7 +1200,7 @@ HIDDEN SEXP do_dotCode(SEXP call, SEXP op, SEXP args, SEXP env)
 	SEXP arg = CAR(pa);
 	s = VECTOR_ELT(ans, na);
 	R_NativePrimitiveArgType type =
-	    checkTypes ? checkTypes[na] : TYPEOF(arg);
+	    checkTypes ? checkTypes[na] : arg->sexptype();
 	R_xlen_t n = xlength(arg);
 
 	switch(type) {
@@ -1421,7 +1421,7 @@ static void *RObjToCPtr2(SEXP s)
 {
     int n;
 
-    switch(TYPEOF(s)) {
+    switch(s->sexptype()) {
     case LGLSXP:
     case INTSXP:
 	{
@@ -1477,8 +1477,6 @@ static void *RObjToCPtr2(SEXP s)
     return nullptr;  // -Wall
 }
 
-
-
 void call_R(char *func, long nargs, void **arguments, char **modes,
 	    long *lengths, char **names, long nres, char **results)
 {
@@ -1532,7 +1530,7 @@ void call_R(char *func, long nargs, void **arguments, char **modes,
 	ENSURE_NAMEDMAX(CAR(pcall));
     }
     PROTECT(s = eval(call, R_GlobalEnv));
-    switch(TYPEOF(s)) {
+    switch(s->sexptype()) {
     case LGLSXP:
     case INTSXP:
     case REALSXP:
@@ -1544,13 +1542,13 @@ void call_R(char *func, long nargs, void **arguments, char **modes,
     case VECSXP:
 	n = length(s);
 	if (nres < n) n = (int) nres;
-	for (i = 0 ; i < n ; i++)
+	for (auto i = 0 ; i < n ; i++)
 	    results[i] = (char *) RObjToCPtr2(VECTOR_ELT(s, i));
 	break;
     case LISTSXP:
 	n = length(s);
 	if(nres < n) n = (int) nres;
-	for(i = 0 ; i < n ; i++) {
+	for(auto i = 0 ; i < n ; i++) {
 	    results[i] = (char *) RObjToCPtr2(s);
 	    s = CDR(s);
 	}

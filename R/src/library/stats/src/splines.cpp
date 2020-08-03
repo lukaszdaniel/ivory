@@ -47,6 +47,7 @@
 #include <cmath>
 #include "localization.h"
 
+#include <Defn.h>
 #include <R.h>
 #include <R_ext/Applic.h>
 #include <Rinternals.h> // for R_xlen_t

@@ -53,9 +53,9 @@
 #endif
 
 
-#define Z_BUFSIZE 16384
+constexpr int Z_BUFSIZE = 16384;
 
-typedef struct gz_stream {
+struct gz_stream {
     z_stream stream;
     int      z_err;   /* error code for last stream operation */
     int      z_eof;   /* set if end of input file */
@@ -67,7 +67,7 @@ typedef struct gz_stream {
     Rz_off_t  start;  /* start of compressed data in file (header skipped) */
     Rz_off_t  in;     /* bytes into deflate or inflate */
     Rz_off_t  out;    /* bytes out of deflate or inflate */
-} gz_stream;
+};
 
 
 static int get_byte(gz_stream *s)
@@ -87,17 +87,17 @@ static int get_byte(gz_stream *s)
     return *(s->stream.next_in)++;
 }
 
-static int destroy (gz_stream *s)
+static int destroy(gz_stream *s)
 {
     int err = Z_OK;
 
     if (!s) return Z_STREAM_ERROR;
 
-    if (s->stream.state != NULL) {
+    if (s->stream.state != nullptr) {
         if (s->mode == 'w') err = deflateEnd(&(s->stream));
         else if (s->mode == 'r') err = inflateEnd(&(s->stream));
     }
-    if (s->file != NULL && fclose(s->file)) {
+    if (s->file != nullptr && fclose(s->file)) {
 #ifdef ESPIPE
         if (errno != ESPIPE) /* fclose is broken for pipes in HP/UX */
 #endif
@@ -109,7 +109,7 @@ static int destroy (gz_stream *s)
     return err;
 }
 
-static int const gz_magic[2] = {0x1f, 0x8b}; /* gzip magic header */
+static constexpr int gz_magic[2] = {0x1f, 0x8b}; /* gzip magic header */
 
 /* gzip flag byte */
 #define ASCII_FLAG   0x01 /* bit 0 set: file probably ascii text, unused */
@@ -181,7 +181,7 @@ static void check_header(gz_stream *s)
     s->z_err = s->z_eof ? Z_DATA_ERROR : Z_OK;
 }
 
-gzFile R_gzopen (const char *path, const char *mode)
+gzFile R_gzopen(const char *path, const char *mode)
 {
     int err;
     int level = Z_DEFAULT_COMPRESSION; /* compression level */
@@ -202,7 +202,7 @@ gzFile R_gzopen (const char *path, const char *mode)
     s->stream.next_in = s->buffer;
     s->stream.next_out = s->buffer;
     s->stream.avail_in = s->stream.avail_out = 0;
-    s->file = NULL;
+    s->file = nullptr;
     s->z_err = Z_OK;
     s->z_eof = 0;
     s->in = 0;
@@ -240,7 +240,7 @@ gzFile R_gzopen (const char *path, const char *mode)
 
     errno = 0;
     s->file = fopen(path, fmode);
-    if (s->file == NULL) return destroy(s), (gzFile) Z_NULL;
+    if (s->file == nullptr) return destroy(s), (gzFile) Z_NULL;
 
     if (s->mode == 'w') {
         /* Write a very simple .gz header */
@@ -255,35 +255,36 @@ gzFile R_gzopen (const char *path, const char *mode)
     return (gzFile) s;
 }
 
-static void z_putLong (FILE *file, uLong x)
+static void z_putLong(FILE *file, uLong x)
 {
-    int n;
-    for (n = 0; n < 4; n++) {
-        fputc((int) (x & 0xff), file);
+    for (int n = 0; n < 4; n++)
+    {
+        fputc((int)(x & 0xff), file);
         x >>= 8;
     }
 }
 
-static uLong getLong (gz_stream *s)
+static uLong getLong(gz_stream *s)
 {
-    uLong x = (uLong) get_byte(s);
+    uLong x = (uLong)get_byte(s);
     int c;
 
-    x += ((uLong) get_byte(s)) << 8;
-    x += ((uLong) get_byte(s)) << 16;
+    x += ((uLong)get_byte(s)) << 8;
+    x += ((uLong)get_byte(s)) << 16;
     c = get_byte(s);
-    if (c == EOF) s->z_err = Z_DATA_ERROR;
-    x += ((uLong) c) << 24;
+    if (c == EOF)
+        s->z_err = Z_DATA_ERROR;
+    x += ((uLong)c) << 24;
     return x;
 }
 
-static int R_gzread (gzFile file, voidp buf, unsigned len)
+static int R_gzread(gzFile file, voidp buf, unsigned len)
 {
     gz_stream *s = (gz_stream*) file;
     Bytef *start = (Bytef*) buf; /* starting point for crc computation */
     Byte  *next_out; /* == stream.next_out but not forced far (for MSDOS) */
 
-    if (s == NULL || s->mode != 'r') return Z_STREAM_ERROR;
+    if (s == nullptr || s->mode != 'r') return Z_STREAM_ERROR;
 
     if (s->z_err == Z_DATA_ERROR) {
 	warning(_("invalid or incomplete compressed data"));
@@ -376,23 +377,23 @@ static int R_gzread (gzFile file, voidp buf, unsigned len)
     return (int)(len - s->stream.avail_out);
 }
 
-/* for devPS.cp */
-char *R_gzgets(gzFile file, char *buf, int len)
+/* for devPS.cpp */
+const char *R_gzgets(gzFile file, char *buf, int len)
 {
     char *b = buf;
-    if (buf == Z_NULL || len <= 0) return Z_NULL;
+    if (buf == Z_NULL || len <= 0)
+        return Z_NULL;
 
-    while (--len > 0 && R_gzread(file, buf, 1) == 1 && *buf++ != '\n') ;
+    while (--len > 0 && R_gzread(file, buf, 1) == 1 && *buf++ != '\n');
     *buf = '\0';
     return b == buf && len > 0 ? Z_NULL : b;
 }
 
-
-static int R_gzwrite (gzFile file, voidpc buf, unsigned len)
+static int R_gzwrite(gzFile file, voidpc buf, unsigned len)
 {
     gz_stream *s = (gz_stream*) file;
 
-    if (s == NULL || s->mode != 'w') return Z_STREAM_ERROR;
+    if (s == nullptr || s->mode != 'w') return Z_STREAM_ERROR;
 
     s->stream.next_in = (Bytef*) buf;
     s->stream.avail_in = len;
@@ -419,17 +420,17 @@ static int R_gzwrite (gzFile file, voidpc buf, unsigned len)
 }
 
 
-static int gz_flush (gzFile file, int flush)
+static int gz_flush(gzFile file, int flush)
 {
     uInt len;
     int done = 0;
     gz_stream *s = (gz_stream*) file;
 
-    if (s == NULL || s->mode != 'w') return Z_STREAM_ERROR;
+    if (s == nullptr || s->mode != 'w') return Z_STREAM_ERROR;
 
     s->stream.avail_in = 0; /* should be zero already anyway */
 
-    while(TRUE) {
+    while(true) {
         len = Z_BUFSIZE - s->stream.avail_out;
         if (len != 0) {
             if ((uInt)fwrite(s->buffer, 1, len, s->file) != len) {
@@ -458,11 +459,11 @@ static int gz_flush (gzFile file, int flush)
 }
 
 /* return value 0 for success, 1 for failure */
-static int int_gzrewind (gzFile file)
+static int int_gzrewind(gzFile file)
 {
     gz_stream *s = (gz_stream*) file;
 
-    if (s == NULL || s->mode != 'r') return -1;
+    if (s == nullptr || s->mode != 'r') return -1;
 
     s->z_err = Z_OK;
     s->z_eof = 0;
@@ -475,18 +476,21 @@ static int int_gzrewind (gzFile file)
     return f_seek(s->file, s->start, SEEK_SET);
 }
 
-static Rz_off_t R_gztell (gzFile file)
+static Rz_off_t R_gztell(gzFile file)
 {
-    gz_stream *s = (gz_stream*) file;
-    if (s->mode == 'w') return s->in; else return s->out;
+    gz_stream *s = (gz_stream *)file;
+    if (s->mode == 'w')
+        return s->in;
+    else
+        return s->out;
 }
 
 /* NB: return value is in line with fseeko, not gzseek */
-static int R_gzseek (gzFile file, Rz_off_t offset, int whence)
+static int R_gzseek(gzFile file, Rz_off_t offset, int whence)
 {
     gz_stream *s = (gz_stream*) file;
 
-    if (s == NULL || whence == SEEK_END ||
+    if (s == nullptr || whence == SEEK_END ||
         s->z_err == Z_ERRNO || s->z_err == Z_DATA_ERROR) return -1;
 
     if (s->mode == 'w') {
@@ -534,17 +538,19 @@ static int R_gzseek (gzFile file, Rz_off_t offset, int whence)
     return 0;
 }
 
-int R_gzclose (gzFile file)
+int R_gzclose(gzFile file)
 {
-    gz_stream *s = (gz_stream*) file;
-    if (s == NULL) return Z_STREAM_ERROR;
-    if (s->mode == 'w') {
-        if (gz_flush (file, Z_FINISH) != Z_OK) 
-	    return destroy((gz_stream*) file);
-        z_putLong (s->file, s->crc);
-        z_putLong (s->file, (uLong) (s->in & 0xffffffff));
+    gz_stream *s = (gz_stream *)file;
+    if (s == nullptr)
+        return Z_STREAM_ERROR;
+    if (s->mode == 'w')
+    {
+        if (gz_flush(file, Z_FINISH) != Z_OK)
+            return destroy((gz_stream *)file);
+        z_putLong(s->file, s->crc);
+        z_putLong(s->file, (uLong)(s->in & 0xffffffff));
     }
-    return destroy((gz_stream*) file);
+    return destroy((gz_stream *)file);
 }
 
 /*
@@ -559,7 +565,7 @@ R_zlib_free(voidpf ptr, voidpf addr) {}
 */
 
 /* added in 4.0.0, modified from uncompress[2] */
-static int R_uncompress(Bytef *dest, uLong *destLen, Bytef *source, uLong sourceLen,
+static int R_uncompress(Bytef *dest, uLong &destLen, Bytef *source, uLong sourceLen,
 	     int opt)
 {
     z_stream stream;
@@ -580,7 +586,7 @@ static int R_uncompress(Bytef *dest, uLong *destLen, Bytef *source, uLong source
     if(err != Z_OK) return err;
 
     const uInt max = (uInt)-1;  // could have used UINT_MAX
-    uLong len = sourceLen, left = *destLen;
+    uLong len = sourceLen, left = destLen;
     stream.next_out = dest;
     stream.avail_out = 0;
 
@@ -596,7 +602,7 @@ static int R_uncompress(Bytef *dest, uLong *destLen, Bytef *source, uLong source
         err = inflate(&stream, Z_NO_FLUSH);
     } while (err == Z_OK);
 
-    *destLen = stream.total_out;
+    destLen = stream.total_out;
     inflateEnd(&stream);
     return err;
 }

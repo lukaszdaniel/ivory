@@ -133,12 +133,13 @@ typedef int socklen_t;
 #define SA struct sockaddr
 #define SAIN struct sockaddr_in
 
-static struct sockaddr *build_sin(struct sockaddr_in *sa, const char *ip, int port) {
-    memset(sa, 0, sizeof(struct sockaddr_in));
-    sa->sin_family = AF_INET;
-    sa->sin_port = htons(port);
-    sa->sin_addr.s_addr = (ip) ? inet_addr(ip) : htonl(INADDR_ANY);
-    return (struct sockaddr*)sa;
+static struct sockaddr *build_sin(struct sockaddr_in *sa, const char *ip, int port)
+{
+	memset(sa, 0, sizeof(struct sockaddr_in));
+	sa->sin_family = AF_INET;
+	sa->sin_port = htons(port);
+	sa->sin_addr.s_addr = (ip) ? inet_addr(ip) : htonl(INADDR_ANY);
+	return (struct sockaddr *)sa;
 }
 
 /* --- END of sisock.h --- */
@@ -269,23 +270,27 @@ static struct buffer *alloc_buffer(int size, struct buffer *parent) {
 }
 
 /* convert doubly-linked buffers into one big raw vector */
-static SEXP collect_buffers(struct buffer *buf) {
-    SEXP res;
-    char *dst;
-    int len = 0;
-    if (!buf) return allocVector(RAWSXP, 0);
-    while (buf->prev) { /* count the total length and find the root */
-	len += buf->length;
-	buf = buf->prev;
-    }
-    res = allocVector(RAWSXP, len + buf->length);
-    dst = (char*) RAW(res);
-    while (buf) {
-	memcpy(dst, buf->data, buf->length);
-	dst += buf->length;
-	buf = buf->next;
-    }
-    return res;
+static SEXP collect_buffers(struct buffer *buf)
+{
+	SEXP res;
+	char *dst;
+	int len = 0;
+	if (!buf)
+		return allocVector(RAWSXP, 0);
+	while (buf->prev)
+	{ /* count the total length and find the root */
+		len += buf->length;
+		buf = buf->prev;
+	}
+	res = allocVector(RAWSXP, len + buf->length);
+	dst = (char *)RAW(res);
+	while (buf)
+	{
+		memcpy(dst, buf->data, buf->length);
+		dst += buf->length;
+		buf = buf->next;
+	}
+	return res;
 }
 
 static void finalize_worker(httpd_conn_t *c)
@@ -350,20 +355,22 @@ static int add_worker(httpd_conn_t *c) {
  * THREAD_DISPOSE flag is set instead. */
 static void remove_worker(httpd_conn_t *c)
 {
-    unsigned int i = 0;
-    if (!c) return;
-    if (c->attr & THREAD_OWNED) { /* if the worker is used by a
+	unsigned int i = 0;
+	if (!c)
+		return;
+	if (c->attr & THREAD_OWNED)
+	{ /* if the worker is used by a
 				   * thread, we can only signal for
 				   * its removal */
-	c->attr |= THREAD_DISPOSE;
-	return;
-    }
-    finalize_worker(c);
-    for (; i < MAX_WORKERS; i++)
-	if (workers[i] == c)
-	    workers[i] = nullptr;
-    DBG(printf("removing worker %p\n", (void*) c));
-    free(c);
+		c->attr |= THREAD_DISPOSE;
+		return;
+	}
+	finalize_worker(c);
+	for (; i < MAX_WORKERS; i++)
+		if (workers[i] == c)
+			workers[i] = nullptr;
+	DBG(printf("removing worker %p\n", (void *)c));
+	free(c);
 }
 
 #ifndef _WIN32
@@ -374,20 +381,22 @@ static int R_ignore_SIGPIPE; /* for simplicity of the code below */
 
 static int send_response(SOCKET s, const char *buf, size_t len)
 {
-    unsigned int i = 0;
-    /* we have to tell R to ignore SIGPIPE otherwise it can raise an error
+	unsigned int i = 0;
+	/* we have to tell R to ignore SIGPIPE otherwise it can raise an error
        and get us into deep trouble */
-    R_ignore_SIGPIPE = 1;
-    while (i < len) {
-	ssize_t n = send(s, buf + i, len - i, 0);
-	if (n < 1) {
-	    R_ignore_SIGPIPE = 0;
-	    return -1;
+	R_ignore_SIGPIPE = 1;
+	while (i < len)
+	{
+		ssize_t n = send(s, buf + i, len - i, 0);
+		if (n < 1)
+		{
+			R_ignore_SIGPIPE = 0;
+			return -1;
+		}
+		i += n;
 	}
-	i += n;
-    }
-    R_ignore_SIGPIPE = 0;
-    return 0;
+	R_ignore_SIGPIPE = 0;
+	return 0;
 }
 
 /* sends HTTP/x.x plus the text (which should be of the form " XXX ...") */
@@ -779,11 +788,11 @@ static void process_request_(void *ptr)
 static void process_request(httpd_conn_t *c)
 {
 #ifndef _WIN32
-    in_process = 1;
+	in_process = 1;
 #endif
-    R_ToplevelExec(process_request_, c);
+	R_ToplevelExec(process_request_, c);
 #ifndef _WIN32
-    in_process = 0;
+	in_process = 0;
 #endif
 }
 
@@ -1137,11 +1146,13 @@ static LRESULT CALLBACK RhttpdWindowProc(HWND hwnd, UINT uMsg, WPARAM wParam, LP
 /* server thread - accepts connections on the server socket and
    creates worker threads
  */
-static DWORD WINAPI ServerThreadProc(LPVOID lpParameter) {
-    while (srv_sock != INVALID_SOCKET) {
-	srv_input_handler(lpParameter);
-    }
-    return 0;
+static DWORD WINAPI ServerThreadProc(LPVOID lpParameter)
+{
+	while (srv_sock != INVALID_SOCKET)
+	{
+		srv_input_handler(lpParameter);
+	}
+	return 0;
 }
 
 /* worker thread - processes one client connection socket */
@@ -1292,10 +1303,10 @@ void in_R_HTTPDStop(void)
 */
 SEXP R_init_httpd(SEXP sIP, SEXP sPort)
 {
-    const char *ip = 0;
-    if (sIP != R_NilValue && (TYPEOF(sIP) != STRSXP || LENGTH(sIP) != 1))
-	Rf_error(_("invalid bind address specification"));
-    if (sIP != R_NilValue)
-	ip = CHAR(STRING_ELT(sIP, 0));
-    return ScalarInteger(in_R_HTTPDCreate(ip, asInteger(sPort)));
+	const char *ip = 0;
+	if (sIP != R_NilValue && (TYPEOF(sIP) != STRSXP || LENGTH(sIP) != 1))
+		Rf_error(_("invalid bind address specification"));
+	if (sIP != R_NilValue)
+		ip = CHAR(STRING_ELT(sIP, 0));
+	return ScalarInteger(in_R_HTTPDCreate(ip, asInteger(sPort)));
 }

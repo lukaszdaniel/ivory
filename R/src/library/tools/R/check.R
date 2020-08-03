@@ -551,7 +551,7 @@ add_dummies <- function(dir, Log)
             check_R_files(is_rec_pkg) # codetools etc
         }
 
-        check_Rd_files(haveR)
+        check_Rd_files(haveR, chkInternal = R_check_Rd_internal_too)
 
         check_data() # 'data' dir and sysdata.rda
 
@@ -2005,7 +2005,7 @@ add_dummies <- function(dir, Log)
         } else resultLog(Log, gettext("OK", domain = "R-tools"))
     }
 
-    check_Rd_files <- function(haveR)
+    check_Rd_files <- function(haveR, chkInternal = FALSE)
     {
         msg_writing_Rd <-
             gettext("See chapter 'Writing R documentation files' in the 'Writing R Extensions' manual.\n", domain = "R-tools")
@@ -2189,10 +2189,10 @@ add_dummies <- function(dir, Log)
                 gettext("Functions with \\usage entries need to have the appropriate \\alias entries, and all their arguments documented.\nThe \\usage entries must correspond to syntactically valid R code.\n", domain = "R-tools")
             any <- FALSE
             Rcmd <- paste(opWarn_string, "\n",
-                          if (do_install)
-                          sprintf("tools::checkDocFiles(package = \"%s\")\n", pkgname)
-                          else
-                          sprintf("tools::checkDocFiles(dir = \"%s\")\n", pkgdir))
+                          sprintf("tools::checkDocFiles(%s, chkInternal=%s)\n",
+                                  if(do_install)
+                                       sprintf("package = \"%s\"", pkgname)
+                                  else sprintf("dir = \"%s\"",     pkgdir), chkInternal))
             out <- R_runR2(Rcmd)
             if (length(out)) {
                 any <- TRUE
@@ -2228,10 +2228,11 @@ add_dummies <- function(dir, Log)
         if (dir.exists("man") && R_check_Rd_contents && !extra_arch) {
             checkingLog(Log, gettext("checking Rd contents ...", domain = "R-tools"))
             Rcmd <- paste(opWarn_string, "\n",
-                          if (do_install)
-                          sprintf("tools:::.check_Rd_contents(package = \"%s\")\n", pkgname)
-                          else
-                          sprintf("tools:::.check_Rd_contents(dir = \"%s\")\n", pkgdir))
+                          sprintf("tools::checkRdContents(%s, chkInternal=%s)\n",
+                                  if(do_install)
+                                       sprintf("package = \"%s\"", pkgname)
+                                  else sprintf("dir = \"%s\"",     pkgdir),
+                                  R_check_Rd_internal_too))
             out <- R_runR0(Rcmd, R_opts2, "R_DEFAULT_PACKAGES=NULL")
             if (length(out)) {
                 warningLog(Log)
@@ -5688,6 +5689,8 @@ add_dummies <- function(dir, Log)
         config_val_to_logical(Sys.getenv("_R_CHECK_RD_STYLE_", "TRUE"))
     R_check_Rd_xrefs <-
         config_val_to_logical(Sys.getenv("_R_CHECK_RD_XREFS_", "TRUE"))
+    R_check_Rd_internal_too <-
+        config_val_to_logical(Sys.getenv("_R_CHECK_RD_INTERNAL_TOO_", "FALSE"))
     R_check_use_codetools <-
         config_val_to_logical(Sys.getenv("_R_CHECK_USE_CODETOOLS_", "TRUE"))
     ## However, we cannot use this if we did not install the recommended

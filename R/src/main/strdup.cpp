@@ -30,13 +30,10 @@ char *strcpy ();
 /* Return a newly allocated copy of STR,
    or 0 if out of memory. */
 
-char *
-strdup (const char *str)
+char *strdup(const char *str)
 {
-  char *newstr;
-
-  newstr = (char *) malloc (strlen (str) + 1);
+  char *newstr = (char *)malloc(strlen(str) + 1);
   if (newstr)
-    strcpy (newstr, str);
+    strcpy(newstr, str);
   return newstr;
 }

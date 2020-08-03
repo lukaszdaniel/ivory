@@ -1031,7 +1031,7 @@ static void WriteItem (SEXP s, SEXP ref_table, R_outpstream_t stream)
 
  tailcall:
     R_CheckStack();
-    if (ALTREP(s) && stream->version >= 3) {
+    if (s->altrep() && stream->version >= 3) {
 	SEXP info = ALTREP_SERIALIZED_CLASS(s);
 	SEXP state = ALTREP_SERIALIZED_STATE(s);
 	if (info && state) {
@@ -2326,21 +2326,20 @@ static void InBytesFile(R_inpstream_t stream, void *buf, int length)
 }
 
 void R_InitFileOutPStream(R_outpstream_t stream, FILE *fp,
-			  R_pstream_format_t type, int version,
-			  SEXP (*phook)(SEXP, SEXP), SEXP pdata)
+						  R_pstream_format_t type, int version,
+						  SEXP (*phook)(SEXP, SEXP), SEXP pdata)
 {
-    R_InitOutPStream(stream, (R_pstream_data_t) fp, type, version,
-		     OutCharFile, OutBytesFile, phook, pdata);
+	R_InitOutPStream(stream, (R_pstream_data_t)fp, type, version,
+					 OutCharFile, OutBytesFile, phook, pdata);
 }
 
 void R_InitFileInPStream(R_inpstream_t stream, FILE *fp,
-			 R_pstream_format_t type,
-			 SEXP (*phook)(SEXP, SEXP), SEXP pdata)
+						 R_pstream_format_t type,
+						 SEXP (*phook)(SEXP, SEXP), SEXP pdata)
 {
-    R_InitInPStream(stream, (R_pstream_data_t) fp, type,
-		    InCharFile, InBytesFile, phook, pdata);
+	R_InitInPStream(stream, (R_pstream_data_t)fp, type,
+					InCharFile, InBytesFile, phook, pdata);
 }
-
 
 /*
  * Persistent Connection Streams
@@ -2350,18 +2349,18 @@ void R_InitFileInPStream(R_inpstream_t stream, FILE *fp,
 
 static void CheckInConn(Rconnection con)
 {
-    if (! con->isopen)
-	error(_("connection is not open"));
-    if (! con->canread || con->read == nullptr)
-	error(_("cannot read from this connection"));
+	if (!con->isopen)
+		error(_("connection is not open"));
+	if (!con->canread || con->read == nullptr)
+		error(_("cannot read from this connection"));
 }
 
 static void CheckOutConn(Rconnection con)
 {
-    if (! con->isopen)
-	error(_("connection is not open"));
-    if (! con->canwrite || con->write == nullptr)
-	error(_("cannot write to this connection"));
+	if (!con->isopen)
+		error(_("connection is not open"));
+	if (!con->canwrite || con->write == nullptr)
+		error(_("cannot write to this connection"));
 }
 
 static void InBytesConn(R_inpstream_t stream, void *buf, int length)
@@ -2397,16 +2396,17 @@ static void InBytesConn(R_inpstream_t stream, void *buf, int length)
 
 static int InCharConn(R_inpstream_t stream)
 {
-    char buf[1];
-    Rconnection con = (Rconnection) stream->data;
-    CheckInConn(con);
-    if (con->text)
-	return Rconn_fgetc(con);
-    else {
-	if (1 != con->read(buf, 1, 1, con))
-	    error(_("error reading from connection"));
-	return buf[0];
-    }
+	char buf[1];
+	Rconnection con = (Rconnection)stream->data;
+	CheckInConn(con);
+	if (con->text)
+		return Rconn_fgetc(con);
+	else
+	{
+		if (1 != con->read(buf, 1, 1, con))
+			error(_("error reading from connection"));
+		return buf[0];
+	}
 }
 
 static void OutBytesConn(R_outpstream_t stream, /*const*/ void *buf, int length)
@@ -2427,16 +2427,17 @@ static void OutBytesConn(R_outpstream_t stream, /*const*/ void *buf, int length)
 
 static void OutCharConn(R_outpstream_t stream, int c)
 {
-    Rconnection con = (Rconnection) stream->data;
-    CheckOutConn(con);
-    if (con->text)
-	Rconn_printf(con, "%c", c);
-    else {
-	char buf[1];
-	buf[0] = (char) c;
-	if (1 != con->write(buf, 1, 1, con))
-	    error(_("error writing to connection"));
-    }
+	Rconnection con = (Rconnection)stream->data;
+	CheckOutConn(con);
+	if (con->text)
+		Rconn_printf(con, "%c", c);
+	else
+	{
+		char buf[1];
+		buf[0] = (char)c;
+		if (1 != con->write(buf, 1, 1, con))
+			error(_("error writing to connection"));
+	}
 }
 
 void R_InitConnOutPStream(R_outpstream_t stream, Rconnection con,
@@ -2469,17 +2470,18 @@ void R_InitConnInPStream(R_inpstream_t stream,  Rconnection con,
 /* ought to quote the argument, but it should only be an ENVSXP or STRSXP */
 static SEXP CallHook(SEXP x, SEXP fun)
 {
-    SEXP val, call;
-    PROTECT(call = LCONS(fun, LCONS(x, R_NilValue)));
-    val = eval(call, R_GlobalEnv);
-    UNPROTECT(1);
-    return val;
+	SEXP val, call;
+	PROTECT(call = LCONS(fun, LCONS(x, R_NilValue)));
+	val = eval(call, R_GlobalEnv);
+	UNPROTECT(1);
+	return val;
 }
 
 static void con_cleanup(void *data)
 {
-    Rconnection con = (Rconnection) data;
-    if(con->isopen) con->close(con);
+	Rconnection con = (Rconnection)data;
+	if (con->isopen)
+		con->close(con);
 }
 
 /* Used from saveRDS().
@@ -2611,25 +2613,26 @@ size_t R_WriteConnection(Rconnection con, const void *buf, size_t n);
 
 constexpr size_t BCONBUFSIZ = 4096;
 
-typedef struct bconbuf_st {
-    Rconnection con;
-    size_t count;
-    unsigned char buf[BCONBUFSIZ];
-} *bconbuf_t;
+typedef struct bconbuf_st
+{
+	Rconnection con;
+	size_t count;
+	unsigned char buf[BCONBUFSIZ];
+} * bconbuf_t;
 
 static void flush_bcon_buffer(bconbuf_t bb)
 {
-    if (R_WriteConnection(bb->con, bb->buf, bb->count) != bb->count)
-	error(_("error writing to connection"));
-    bb->count = 0;
+	if (R_WriteConnection(bb->con, bb->buf, bb->count) != bb->count)
+		error(_("error writing to connection"));
+	bb->count = 0;
 }
 
 static void OutCharBB(R_outpstream_t stream, int c)
 {
-    bconbuf_t bb = (bconbuf_t) stream->data;
-    if (bb->count >= BCONBUFSIZ)
-	flush_bcon_buffer(bb);
-    bb->buf[bb->count++] = (char) c;
+	bconbuf_t bb = (bconbuf_t)stream->data;
+	if (bb->count >= BCONBUFSIZ)
+		flush_bcon_buffer(bb);
+	bb->buf[bb->count++] = (char)c;
 }
 
 static void OutBytesBB(R_outpstream_t stream, /*const*/ void *buf, int length)
@@ -2686,11 +2689,12 @@ static SEXP R_serializeb(SEXP object, SEXP icon, SEXP xdr, SEXP Sversion, SEXP f
  * Persistent Memory Streams
  */
 
-typedef struct membuf_st {
-    R_size_t size;
-    R_size_t count;
-    unsigned char *buf;
-} *membuf_t;
+typedef struct membuf_st
+{
+	R_size_t size;
+	R_size_t count;
+	unsigned char *buf;
+} * membuf_t;
 
 constexpr size_t INCR = MAXELTSIZE;
 
@@ -2721,10 +2725,10 @@ static void resize_buffer(membuf_t mb, R_size_t needed)
 
 static void OutCharMem(R_outpstream_t stream, int c)
 {
-    membuf_t mb = (membuf_t) stream->data;
-    if (mb->count >= mb->size)
-	resize_buffer(mb, mb->count + 1);
-    mb->buf[mb->count++] = (char) c;
+	membuf_t mb = (membuf_t)stream->data;
+	if (mb->count >= mb->size)
+		resize_buffer(mb, mb->count + 1);
+	mb->buf[mb->count++] = (char)c;
 }
 
 static void OutBytesMem(R_outpstream_t stream, /*const*/ void *buf, int length)
@@ -2743,19 +2747,19 @@ static void OutBytesMem(R_outpstream_t stream, /*const*/ void *buf, int length)
 
 static int InCharMem(R_inpstream_t stream)
 {
-    membuf_t mb = (membuf_t) stream->data;
-    if (mb->count >= mb->size)
-	error(_("read error"));
-    return mb->buf[mb->count++];
+	membuf_t mb = (membuf_t)stream->data;
+	if (mb->count >= mb->size)
+		error(_("read error"));
+	return mb->buf[mb->count++];
 }
 
 static void InBytesMem(R_inpstream_t stream, void *buf, int length)
 {
-    membuf_t mb = (membuf_t) stream->data;
-    if (mb->count + (R_size_t) length > mb->size)
-	error(_("read error"));
-    memcpy(buf, mb->buf + mb->count, length);
-    mb->count += length;
+	membuf_t mb = (membuf_t)stream->data;
+	if (mb->count + (R_size_t)length > mb->size)
+		error(_("read error"));
+	memcpy(buf, mb->buf + mb->count, length);
+	mb->count += length;
 }
 
 static void InitMemInPStream(R_inpstream_t stream, membuf_t mb,
@@ -2770,24 +2774,25 @@ static void InitMemInPStream(R_inpstream_t stream, membuf_t mb,
 }
 
 static void InitMemOutPStream(R_outpstream_t stream, membuf_t mb,
-			      R_pstream_format_t type, int version,
-			      SEXP (*phook)(SEXP, SEXP), SEXP pdata)
+							  R_pstream_format_t type, int version,
+							  SEXP (*phook)(SEXP, SEXP), SEXP pdata)
 {
-    mb->count = 0;
-    mb->size = 0;
-    mb->buf = nullptr;
-    R_InitOutPStream(stream, (R_pstream_data_t) mb, type, version,
-		     OutCharMem, OutBytesMem, phook, pdata);
+	mb->count = 0;
+	mb->size = 0;
+	mb->buf = nullptr;
+	R_InitOutPStream(stream, (R_pstream_data_t)mb, type, version,
+					 OutCharMem, OutBytesMem, phook, pdata);
 }
 
 static void free_mem_buffer(void *data)
 {
-    membuf_t mb = (membuf_t) data;
-    if (mb->buf) {
-	unsigned char *buf = mb->buf;
-	mb->buf = nullptr;
-	free(buf);
-    }
+	membuf_t mb = (membuf_t)data;
+	if (mb->buf)
+	{
+		unsigned char *buf = mb->buf;
+		mb->buf = nullptr;
+		free(buf);
+	}
 }
 
 static SEXP CloseMemOutPStream(R_outpstream_t stream)
@@ -2946,7 +2951,7 @@ static SEXP appendRawToFile(SEXP file, SEXP bytes)
 
 /* Interface to cache the pkg.rdb files */
 
-#define NC 100
+constexpr int NC = 100;
 static int used = 0;
 static char names[NC][PATH_MAX];
 static char *ptr[NC];
@@ -2976,7 +2981,7 @@ HIDDEN SEXP do_lazyLoadDBflush(SEXP call, SEXP op, SEXP args, SEXP env)
    position/length vector and returns them as raw vector. */
 
 /* There are some large lazy-data examples, e.g. 80Mb for SNPMaP.cdm */
-#define LEN_LIMIT 10 * 1048576
+constexpr int LEN_LIMIT = 10 * 1048576;
 static SEXP readRawFromFile(SEXP file, SEXP key)
 {
     FILE *fp;
@@ -3120,11 +3125,11 @@ static SEXP R_getVarsFromFrame(SEXP vars, SEXP env, SEXP forcesxp)
 
 /* from connections.cpp */
 SEXP R_compress1(SEXP in);
-SEXP R_decompress1(SEXP in, Rboolean *err);
+SEXP R_decompress1(SEXP in, bool &err);
 SEXP R_compress2(SEXP in);
-SEXP R_decompress2(SEXP in, Rboolean *err);
+SEXP R_decompress2(SEXP in, bool &err);
 SEXP R_compress3(SEXP in);
-SEXP R_decompress3(SEXP in, Rboolean *err);
+SEXP R_decompress3(SEXP in, bool &err);
 
 /* Serializes and, optionally, compresses a value and appends the
    result to a file.  Returns the key position/length key for
@@ -3160,7 +3165,7 @@ HIDDEN SEXP do_lazyLoadDBfetch(SEXP call, SEXP op, SEXP args, SEXP env)
     SEXP key, file, compsxp, hook;
     PROTECT_INDEX vpi;
     int compressed;
-    Rboolean err = (Rboolean) FALSE;
+    bool err = false;
     SEXP val;
 
     checkArity(op, args);
@@ -3172,11 +3177,11 @@ HIDDEN SEXP do_lazyLoadDBfetch(SEXP call, SEXP op, SEXP args, SEXP env)
 
     PROTECT_WITH_INDEX(val = readRawFromFile(file, key), &vpi);
     if (compressed == 3)
-	REPROTECT(val = R_decompress3(val, &err), vpi);
+	REPROTECT(val = R_decompress3(val, err), vpi);
     else if (compressed == 2)
-	REPROTECT(val = R_decompress2(val, &err), vpi);
+	REPROTECT(val = R_decompress2(val, err), vpi);
     else if (compressed)
-	REPROTECT(val = R_decompress1(val, &err), vpi);
+	REPROTECT(val = R_decompress1(val, err), vpi);
     if (err) error(_("lazy-load database '%s' is corrupt"), translateChar(STRING_ELT(file, 0)));
     val = R_unserialize(val, hook);
     if (TYPEOF(val) == PROMSXP) {

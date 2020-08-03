@@ -49,7 +49,7 @@ HIDDEN SEXP do_rawToChar(SEXP call, SEXP op, SEXP args, SEXP env)
     SEXP ans, x = CAR(args);
 
     checkArity(op, args);
-    if (!isRaw(x))
+    if (!x->isRaw_())
 	error(_("'%s' argument must be a raw vector"), "x");
     int multiple = asLogical(CADR(args));
     if (multiple == NA_LOGICAL)
@@ -86,7 +86,7 @@ HIDDEN SEXP do_rawShift(SEXP call, SEXP op, SEXP args, SEXP env)
     SEXP ans, x = CAR(args);
     int shift = asInteger(CADR(args));
 
-    if (!isRaw(x))
+    if (!x->isRaw_())
 	error(_("'%s' argument must be a raw vector"), "x");
     if (shift == NA_INTEGER || shift < -8 || shift > 8)
 	error(_("argument 'shift' must be a small integer"));
@@ -109,7 +109,7 @@ HIDDEN SEXP do_rawToBits(SEXP call, SEXP op, SEXP args, SEXP env)
     R_xlen_t i, j = 0;
     unsigned int tmp;
 
-    if (!isRaw(x))
+    if (!x->isRaw_())
 	error(_("'%s' argument must be a raw vector"), "x");
     PROTECT(ans = allocVector(RAWSXP, 8*XLENGTH(x)));
     for (i = 0; i < XLENGTH(x); i++) {
@@ -149,7 +149,7 @@ HIDDEN SEXP do_packBits(SEXP call, SEXP op, SEXP args, SEXP env)
     R_xlen_t i, len = XLENGTH(x), slen;
     int fac;
 
-    if (TYPEOF(x) != RAWSXP && TYPEOF(x) != LGLSXP && TYPEOF(x) != INTSXP)
+    if (x->sexptype() != RAWSXP && x->sexptype() != LGLSXP && x->sexptype() != INTSXP)
 	error(_("'%s' argument must be raw, integer or logical"), "x");
     if (!isString(stype)  || LENGTH(stype) != 1)
 	error(_("'%s' argument must be a character string"), "type");
@@ -164,7 +164,7 @@ HIDDEN SEXP do_packBits(SEXP call, SEXP op, SEXP args, SEXP env)
 	    Rbyte btmp = 0;
 	    for (int k = 7; k >= 0; k--) {
 		btmp <<= 1;
-		if (isRaw(x))
+		if (x->isRaw_())
 		    btmp |= RAW(x)[8*i + k] & 0x1;
 		else if (isLogical(x) || isInteger(x)) {
 		    int j = INTEGER(x)[8*i+k];
@@ -178,7 +178,7 @@ HIDDEN SEXP do_packBits(SEXP call, SEXP op, SEXP args, SEXP env)
 	    unsigned int itmp = 0;
 	    for (int k = 31; k >= 0; k--) {
 		itmp <<= 1;
-		if (isRaw(x))
+		if (x->isRaw_())
 		    itmp |= RAW(x)[32*i + k] & 0x1;
 		else if (isLogical(x) || isInteger(x)) {
 		    int j = INTEGER(x)[32*i+k];
@@ -194,29 +194,29 @@ HIDDEN SEXP do_packBits(SEXP call, SEXP op, SEXP args, SEXP env)
 }
 
 /* Simplified version for RFC3629 definition of UTF-8 */
-int mbrtoint(int *w, const char *s)
+int mbrtoint(int &w, const char *s)
 {
     unsigned int byte;
     byte = *((unsigned char *) s);
 
     if (byte == 0) {
-	*w = 0;
+	w = 0;
 	return 0;
     } else if (byte < 0xC0) {
-	*w = (int) byte;
+	w = (int) byte;
 	return 1;
     } else if (byte < 0xE0) {
 	if (!s[1]) return -2;
 	if ((s[1] & 0xC0) == 0x80) {
-	    *w = (int) (((byte & 0x1F) << 6) | (s[1] & 0x3F));
+	    w = (int) (((byte & 0x1F) << 6) | (s[1] & 0x3F));
 	    return 2;
 	} else return -1;
     } else if (byte < 0xF0) {
 	if (!s[1] || !s[2]) return -2;
 	if (((s[1] & 0xC0) == 0x80) && ((s[2] & 0xC0) == 0x80)) {
-	    *w = (int) (((byte & 0x0F) << 12)
+	    w = (int) (((byte & 0x0F) << 12)
 			| ((s[1] & 0x3F) << 6) | (s[2] & 0x3F));
-	    byte = *w;
+	    byte = w;
 	    if (byte >= 0xD800 && byte <= 0xDFFF) return -1; /* surrogate */
 	    // Following Corrigendum 9, these are valid in UTF-8
 //	    if (byte == 0xFFFE || byte == 0xFFFF) return -1;
@@ -227,11 +227,11 @@ int mbrtoint(int *w, const char *s)
 	if (((s[1] & 0xC0) == 0x80)
 	    && ((s[2] & 0xC0) == 0x80)
 	    && ((s[3] & 0xC0) == 0x80)) {
-	    *w = (int) (((byte & 0x07) << 18)
+	    w = (int) (((byte & 0x07) << 18)
 			| ((s[1] & 0x3F) << 12)
 			| ((s[2] & 0x3F) << 6)
 			| (s[3] & 0x3F));
-	    byte = *w;
+	    byte = w;
 	    return (byte <= 0x10FFFF) ? 4 : -1;
 	} else return -1;
     } else return -1;
@@ -255,7 +255,7 @@ HIDDEN SEXP do_utf8ToInt(SEXP call, SEXP op, SEXP args, SEXP env)
     nc = XLENGTH(STRING_ELT(x, 0)); /* ints will be shorter */
     int *ians = (int *) R_alloc(nc, sizeof(int));
     for (i = 0, j = 0; i < nc; i++) {
-	used = mbrtoint(&tmp, s);
+	used = mbrtoint(tmp, s);
 	if (used <= 0) break;
 	ians[j++] = tmp;
 	s += used;

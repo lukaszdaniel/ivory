@@ -126,7 +126,7 @@ static void inspect_tree(int pre, SEXP v, int deep, int pvec) {
     if (ATTRIB(v) && ATTRIB(v) != R_NilValue) { if (a) Rprintf(","); Rprintf("ATT"); a = 1; }
     Rprintf("] ");
 
-    if (ALTREP(v) && ALTREP_INSPECT(v, pre, deep, pvec, inspect_subtree)) {
+    if (v->altrep() && ALTREP_INSPECT(v, pre, deep, pvec, inspect_subtree)) {
 	if (ATTRIB(v) && ATTRIB(v) != R_NilValue && TYPEOF(v) != CHARSXP) {
 	    pp(pre);
 	    Rprintf("ATTRIB:\n");
@@ -135,7 +135,7 @@ static void inspect_tree(int pre, SEXP v, int deep, int pvec) {
 	return;
     }
 
-	switch (TYPEOF(v))
+	switch (v->sexptype())
 	{
 	case VECSXP:
 	case STRSXP:
@@ -153,12 +153,12 @@ static void inspect_tree(int pre, SEXP v, int deep, int pvec) {
 				in the environment, so for a low-level debugging we may want to
 				avoid it .. */
 	PrintEnvironment(v);
-    if (TYPEOF(v) == CHARSXP) {
-	if (IS_BYTES(v)) Rprintf("[bytes] ");
-	if (IS_LATIN1(v)) Rprintf("[latin1] ");
-	if (IS_UTF8(v)) Rprintf("[UTF8] ");
-	if (IS_ASCII(v)) Rprintf("[ASCII] ");
-	if (IS_CACHED(v)) Rprintf("[cached] ");
+    if (v->sexptypeEqual(CHARSXP)) {
+	if (v->isBytes()) Rprintf("[bytes] ");
+	if (v->isLatin1()) Rprintf("[latin1] ");
+	if (v->isUTF8()) Rprintf("[UTF8] ");
+	if (v->isAscii()) Rprintf("[ASCII] ");
+	if (v->isCached()) Rprintf("[cached] ");
 	Rprintf("\"%s\"", CHAR(v));
     }
     if (TYPEOF(v) == SYMSXP) {

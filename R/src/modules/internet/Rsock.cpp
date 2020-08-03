@@ -27,12 +27,12 @@
 
 extern "C" void R_ProcessEvents(void);
 #ifdef _WIN32
-#define R_SelectEx(n,rfd,wrd,efd,tv,ih) select(n,rfd,wrd,efd,tv)
+#define R_SelectEx(n, rfd, wrd, efd, tv, ih) select(n, rfd, wrd, efd, tv)
 #endif
 
 #ifdef HAVE_STRINGS_H
-   /* may be needed to define bzero in FD_ZERO (eg AIX) */
-  #include <strings.h>
+/* may be needed to define bzero in FD_ZERO (eg AIX) */
+#include <strings.h>
 #endif
 
 #include <cstdlib> /* for NULL */
@@ -54,53 +54,55 @@ static int sock_inited = 0;
 static int enter_sock(int fd)
 {
 #ifdef DEBUG
-    printf("enter_sock(%d)\n", fd);
+	printf("enter_sock(%d)\n", fd);
 #endif
-    if (fd == -1) return 0; else return fd;
+	return (fd == -1) ? 0 : fd;
 }
 
 static int close_sock(int fd)
 {
-    Sock_error_st perr;
-    perr.error = 0;
-    int res = Sock_close(fd, &perr);
-    if (res == -1) {
-	REprintf("socket error: %s\n", R_socket_strerror(perr.error));
-	return -1;
-    }
-    return 0;
+	Sock_error_st perr;
+	perr.error = 0;
+	int res = Sock_close(fd, &perr);
+	if (res == -1)
+	{
+		REprintf("socket error: %s\n", R_socket_strerror(perr.error));
+		return -1;
+	}
+	return 0;
 }
 
 static void check_init(void)
 {
-    if (! sock_inited) {
+	if (!sock_inited)
+	{
 #ifdef DEBUG
-	printf("initing\n");
+		printf("initing\n");
 #endif
-	Sock_init();
-	sock_inited = 1;
-    }
+		Sock_init();
+		sock_inited = 1;
+	}
 }
 
 void in_Rsockopen(int *port)
 {
-    Sock_error_st perr;
-    check_init();
-    perr.error = 0;
-    *port = enter_sock(Sock_open((Sock_port_t)*port, 1 /* blocking */,
-                                  &perr));
-    if(perr.error)
-	REprintf("socket error: %s\n", R_socket_strerror(perr.error));
+	Sock_error_st perr;
+	check_init();
+	perr.error = 0;
+	*port = enter_sock(Sock_open((Sock_port_t)*port, 1 /* blocking */,
+								 &perr));
+	if (perr.error)
+		REprintf("socket error: %s\n", R_socket_strerror(perr.error));
 }
 
 void in_Rsocklisten(int *sockp, char **buf, int *len)
 {
-    Sock_error_st perr;
-    check_init();
-    perr.error = 0;
-    *sockp = enter_sock(Sock_listen(*sockp, *buf , *len, &perr));
-    if(perr.error)
-	REprintf("socket error: %s\n", R_socket_strerror(perr.error));
+	Sock_error_st perr;
+	check_init();
+	perr.error = 0;
+	*sockp = enter_sock(Sock_listen(*sockp, *buf, *len, &perr));
+	if (perr.error)
+		REprintf("socket error: %s\n", R_socket_strerror(perr.error));
 }
 
 void in_Rsockconnect(int *port, char **host)
@@ -203,19 +205,21 @@ struct hostent *R_gethostbyname(const char *name);
 /* modified from src/unix/sys-std.cpp  */
 static int setSelectMask(InputHandler *handlers, fd_set *readMask)
 {
-    int maxfd = -1;
-    InputHandler *tmp = handlers;
-    FD_ZERO(readMask);
+	int maxfd = -1;
+	InputHandler *tmp = handlers;
+	FD_ZERO(readMask);
 
-    while(tmp) {
-	if(tmp->fileDescriptor > 0) {
-	    FD_SET(tmp->fileDescriptor, readMask);
-	    maxfd = maxfd < tmp->fileDescriptor ? tmp->fileDescriptor : maxfd;
+	while (tmp)
+	{
+		if (tmp->fileDescriptor > 0)
+		{
+			FD_SET(tmp->fileDescriptor, readMask);
+			maxfd = maxfd < tmp->fileDescriptor ? tmp->fileDescriptor : maxfd;
+		}
+		tmp = tmp->next;
 	}
-	tmp = tmp->next;
-    }
 
-    return(maxfd);
+	return (maxfd);
 }
 #endif
 

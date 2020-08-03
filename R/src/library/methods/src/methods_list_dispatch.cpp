@@ -233,10 +233,12 @@ static SEXP R_element_named(SEXP obj, const char * what)
 	    }
 	}
     }
-    if(offset < 0)
-	return R_NilValue;
+    if (offset < 0)
+    {
+        return R_NilValue;
+    }
 
-	return VECTOR_ELT(obj, offset);
+    return VECTOR_ELT(obj, offset);
 }
 
 static SEXP R_insert_element(SEXP mlist, const char * what, SEXP object)
@@ -599,7 +601,7 @@ static Rboolean is_missing_arg(SEXP symbol, SEXP ev)
     loc = R_findVarLocInFrame(ev, symbol);
     if (R_VARLOC_IS_NULL(loc))
 	error(_("could not find symbol '%s' in frame of call"),
-	      CHAR(PRINTNAME(symbol)));
+	      CHAR(symbol->printname()));
     return R_GetVarLocMISSING(loc);
 }
 
@@ -614,7 +616,7 @@ SEXP R_missingArg(SEXP symbol, SEXP ev)
     } else
     if(!isEnvironment(ev))
 	error(_("invalid environment in checking for missing argument, '%s', in methods dispatch: got an object of class \"%s\""),
-	     CHAR(PRINTNAME(symbol)), class_string(ev));
+	     CHAR(symbol->printname()), class_string(ev));
     if(is_missing_arg(symbol, ev))
 	return R_TRUE;
     else
@@ -903,10 +905,12 @@ static const char *check_single_string(SEXP obj, Rboolean nonEmpty, const char *
 static const char *check_symbol_or_string(SEXP obj, Rboolean nonEmpty,
                                           const char *what)
 {
-    if(isSymbol(obj))
-	return CHAR(PRINTNAME(obj));
+    if (isSymbol(obj))
+    {
+        return CHAR(PRINTNAME(obj));
+    }
 
-	return check_single_string(obj, nonEmpty, what);
+    return check_single_string(obj, nonEmpty, what);
 }
 
 static const char *class_string(SEXP obj)

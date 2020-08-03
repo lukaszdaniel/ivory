@@ -111,7 +111,7 @@ SEXP CreateAtVector(double *axp, double *usr, int nint, Rboolean logflag)
 	    if (ne < 1)
 		error(_("log - axis(), 'at' creation, _LARGE_ range: ne = %d <= 0 !!\n\t axp[0:1]=(%g,%g) ==> i = %d;	nint = %d"),
 		      ne, axp[0],axp[1], i, nint);
-	    rng = Rexp10((double)ne); /* >= 10 */
+	    rng = Rexp10(ne); /* >= 10 */
 	    n = 0;
 	    while (dn < umax) {
 		n++;

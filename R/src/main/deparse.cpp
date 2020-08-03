@@ -163,7 +163,7 @@ static void linebreak(bool &lbreak, LocalParseData *);
 static void deparse2(SEXP, SEXP, LocalParseData *);
 static size_t DEFAULT_Cutoff() {
 	size_t w;
-    w = Rf_asInteger(Rf_GetOption1(Rf_install("width")));
+    w = Rf_asInteger(Rf_GetOption1(R::install_("width")));
     return (w < R_MIN_WIDTH_OPT || w > R_MAX_WIDTH_OPT) ? 80 : w;
 }
 
@@ -196,7 +196,7 @@ SEXP Rf_deparse1m(SEXP call, bool abbrev, int opts)
 {
     bool backtick = true;
     int old_bl = R_BrowseLines,
-        blines = asInteger(GetOption1(install("deparse.max.lines")));
+        blines = asInteger(GetOption1(R::install_("deparse.max.lines")));
     if (blines != NA_INTEGER && blines > 0)
         R_BrowseLines = blines;
     SEXP result = deparse1WithCutoff(call, abbrev, DEFAULT_Cutoff(), backtick,
@@ -241,7 +241,7 @@ static SEXP deparse1WithCutoff(SEXP call, bool abbrev, int cutoff,
 	{/* linenumber */ 0,
 	 0, 0, 0, /*startline = */true, 0,
 	 nullptr,
-	 /* DeparseBuffer= */ {nullptr, 0, BUFSIZE},
+	 /* DeparseBuffer= */ DeparseBuffer(BUFSIZE),
 	 DEFAULT_Cutoff(), false, 0, true,
 #ifdef longstring_WARN
 	 false,
@@ -300,7 +300,7 @@ static SEXP deparse1WithCutoff(SEXP call, bool abbrev, int cutoff,
 	warning(_("deparse may be not be sourceable by 'source()' in R version less than 2.7.0"));
 #endif
     /* somewhere lower down might have allocated ... */
-    R_FreeStringBuffer(localData.buffer);
+    localData.buffer.R_FreeStringBuffer();
     UNPROTECT(1);
     return svec;
 }
@@ -375,14 +375,16 @@ HIDDEN SEXP do_dput(SEXP call, SEXP op, SEXP args, SEXP rho)
     SEXP tval = CAR(args);
     int opts = isNull(CADDR(args)) ? SHOWATTRIBUTES : asInteger(CADDR(args));
 
-    if (TYPEOF(tval) == CLOSXP) {
-	SEXP clo = PROTECT(duplicate(tval));
-	SET_CLOENV(clo, R_GlobalEnv);
-	tval = deparse1(clo, false, opts);
-	UNPROTECT(1);
-    } else
-	tval = deparse1(tval, false, opts);
-    PROTECT(tval); /* against Rconn_printf */
+	if (TYPEOF(tval) == CLOSXP)
+	{
+		SEXP clo = PROTECT(duplicate(tval));
+		SET_CLOENV(clo, R_GlobalEnv);
+		tval = deparse1(clo, false, opts);
+		UNPROTECT(1);
+	}
+	else
+		tval = deparse1(tval, false, opts);
+	PROTECT(tval); /* against Rconn_printf */
     if(!inherits(CADR(args), "connection"))
 	error(_("'%s' argument must be a character string or connection"), "file");
     int ifile = asInteger(CADR(args));
@@ -428,7 +430,7 @@ HIDDEN SEXP do_dump(SEXP call, SEXP op, SEXP args, SEXP rho)
 	 file = CADR(args);
     if(!inherits(file, "connection"))
 	error(_("'%s' must be a character string or connection"), "file");
-    if(!isString(names))
+    if(!names->isString_())
 	error( _("character arguments expected"));
     int nobjs = length(names);
     if(nobjs < 1 || length(file) < 1)
@@ -527,13 +529,15 @@ HIDDEN SEXP do_dump(SEXP call, SEXP op, SEXP args, SEXP rho)
 
 static void linebreak(bool &lbreak, LocalParseData *d)
 {
-    if (d->len > d->cutoff) {
-	if (!lbreak) {
-	    lbreak = true;
-	    d->indent++;
+	if (d->len > d->cutoff)
+	{
+		if (!lbreak)
+		{
+			lbreak = true;
+			d->indent++;
+		}
+		writeline(d);
 	}
-	writeline(d);
-    }
 }
 
 static void deparse2(SEXP what, SEXP svec, LocalParseData *d)
@@ -634,7 +638,7 @@ static bool needsparens(PPinfo mainop, SEXP arg, bool left)
  * or if(isAtomic) does it have one "recursive" or "use.names" ?  */
 static bool usable_nice_names(SEXP x, bool isAtomic)
 {
-    if(TYPEOF(x) == STRSXP) {
+    if(x->sexptype() == STRSXP) {
 	R_xlen_t i, n = xlength(x);
 	bool all_0 = true;
 	if(isAtomic) // c(*, recursive=, use.names=): cannot use these as nice_names

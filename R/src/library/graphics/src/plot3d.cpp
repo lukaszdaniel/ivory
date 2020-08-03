@@ -1428,7 +1428,8 @@ static SEXP contour(SEXP x, int nx, SEXP y, int ny, SEXP z,
     const void *vmax;
 
     double xend, yend;
-    int i, ii, j, jj, ns, dir;
+    int i, ii, j, jj, dir;
+	unsigned int ns;
     SEGP seglist, seg, s, start, end;
     double *xxx, *yyy;
 
@@ -1437,7 +1438,7 @@ static SEXP contour(SEXP x, int nx, SEXP y, int ny, SEXP z,
     int range=0, indx=0, n; /* -Wall */
     double lowestVariance;
     double squareSum;
-    int iii, jjj;
+    unsigned int iii, jjj;
     double distanceSum, labelDistance, avgGradient;
     char buffer[255];
     int result;
@@ -1631,7 +1632,7 @@ static SEXP contour(SEXP x, int nx, SEXP y, int ny, SEXP z,
 			indx = 0;
 			range = 0;
 			gotLabel = FALSE;
-			for (iii = 0; iii < ns; iii++) {
+			for (unsigned int iii = 0; iii < ns; iii++) {
 			    distanceSum = 0;
 			    avgGradient = 0;
 			    squareSum = 0;

@@ -364,25 +364,27 @@ HIDDEN SEXP do_rapply(SEXP call, SEXP op, SEXP args, SEXP rho)
  */
 static int islistfactor(SEXP X)
 {
-    switch(TYPEOF(X)) {
-    case VECSXP:
-    case EXPRSXP: {
-	int n = LENGTH(X), ans = NA_LOGICAL;
-	for(int i = 0; i < n; i++) {
-	    int isLF = islistfactor(VECTOR_ELT(X, i));
-	    if(!isLF)
-		return FALSE;
-	    else if(isLF == TRUE)
-		ans = TRUE;
-	    // else isLF is NA
+	switch (X->sexptype())
+	{
+	case VECSXP:
+	case EXPRSXP:
+	{
+		int n = LENGTH(X), ans = NA_LOGICAL;
+		for (int i = 0; i < n; i++)
+		{
+			int isLF = islistfactor(VECTOR_ELT(X, i));
+			if (!isLF)
+				return FALSE;
+			else if (isLF == TRUE)
+				ans = TRUE;
+			// else isLF is NA
+		}
+		return ans;
 	}
-	return ans;
-    }
-    default:
-	return isFactor(X);
-    }
+	default:
+		return isFactor(X);
+	}
 }
-
 
 /* is this a tree with only factor leaves? */
 // currently only called from unlist()

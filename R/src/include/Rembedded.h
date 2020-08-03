@@ -39,7 +39,7 @@ extern void Rf_endEmbeddedR(int fatal);
 # define LibExtern extern
 #endif
 
-int Rf_initialize_R(int ac, char **av);
+int Rf_initialize_R(int ac, char *av[]);
 void setup_Rmainloop(void);
 extern void R_ReplDLLinit(void);
 extern int R_ReplDLLdo1(void);

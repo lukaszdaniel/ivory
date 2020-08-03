@@ -143,8 +143,7 @@ static SEXP duplicate1(SEXP, Rboolean deep);
 #ifdef R_PROFILING
 static unsigned long duplicate_counter = (unsigned long)-1;
 
-HIDDEN unsigned long
-get_duplicate_counter(void)
+HIDDEN unsigned long get_duplicate_counter(void)
 {
     return duplicate_counter;
 }
@@ -308,7 +307,7 @@ static SEXP duplicate1(SEXP s, Rboolean deep)
     SEXP t;
     R_xlen_t i, n;
 
-    if (ALTREP(s)) {
+    if (s->altrep()) {
 	PROTECT(s); /* the methods should protect, but ... */
 	SEXP ans = ALTREP_DUPLICATE_EX(s, deep);
 	UNPROTECT(1);
@@ -316,7 +315,7 @@ static SEXP duplicate1(SEXP s, Rboolean deep)
 	    return ans;
     }
 
-    switch (TYPEOF(s)) {
+    switch (s->sexptype()) {
     case NILSXP:
     case SYMSXP:
     case ENVSXP:

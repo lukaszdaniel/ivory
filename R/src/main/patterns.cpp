@@ -186,11 +186,11 @@ int R_GE_radialGradientExtend(SEXP pattern)
 
 /* Tiling patterns */
 #define tiling_pattern_function 1
-#define tiling_pattern_x        2
-#define tiling_pattern_y        3
-#define tiling_pattern_width    4
-#define tiling_pattern_height   5
-#define tiling_pattern_extend   6
+#define tiling_pattern_x 2
+#define tiling_pattern_y 3
+#define tiling_pattern_width 4
+#define tiling_pattern_height 5
+#define tiling_pattern_extend 6
 
 inline void checkTilingPattern(SEXP pattern)
 {
@@ -198,40 +198,38 @@ inline void checkTilingPattern(SEXP pattern)
         error(_("pattern is not a tiling pattern"));
 }
 
-SEXP R_GE_tilingPatternFunction(SEXP pattern) 
+SEXP R_GE_tilingPatternFunction(SEXP pattern)
 {
     checkTilingPattern(pattern);
     return VECTOR_ELT(pattern, tiling_pattern_function);
 }
 
-double R_GE_tilingPatternX(SEXP pattern) 
+double R_GE_tilingPatternX(SEXP pattern)
 {
     checkTilingPattern(pattern);
     return REAL(VECTOR_ELT(pattern, tiling_pattern_x))[0];
 }
 
-double R_GE_tilingPatternY(SEXP pattern) 
+double R_GE_tilingPatternY(SEXP pattern)
 {
     checkTilingPattern(pattern);
     return REAL(VECTOR_ELT(pattern, tiling_pattern_y))[0];
 }
 
-double R_GE_tilingPatternWidth(SEXP pattern) 
+double R_GE_tilingPatternWidth(SEXP pattern)
 {
     checkTilingPattern(pattern);
     return REAL(VECTOR_ELT(pattern, tiling_pattern_width))[0];
 }
 
-double R_GE_tilingPatternHeight(SEXP pattern) 
+double R_GE_tilingPatternHeight(SEXP pattern)
 {
     checkTilingPattern(pattern);
     return REAL(VECTOR_ELT(pattern, tiling_pattern_height))[0];
 }
 
-int R_GE_tilingPatternExtend(SEXP pattern) 
+int R_GE_tilingPatternExtend(SEXP pattern)
 {
     checkTilingPattern(pattern);
     return INTEGER(VECTOR_ELT(pattern, tiling_pattern_extend))[0];
 }
-
-

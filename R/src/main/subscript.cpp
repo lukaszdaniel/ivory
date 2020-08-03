@@ -502,18 +502,17 @@ static SEXP nullSubscript(R_xlen_t n)
 }
 
 
-static SEXP
-logicalSubscript(SEXP s, R_xlen_t ns, R_xlen_t nx, R_xlen_t *stretch, SEXP call)
+static SEXP logicalSubscript(SEXP s, R_xlen_t ns, R_xlen_t nx, R_xlen_t &stretch, SEXP call)
 {
     R_xlen_t count, i, nmax, i1, i2;
     int canstretch;
     SEXP indx;
-    canstretch = *stretch > 0;
+    canstretch = stretch > 0;
     if (!canstretch && ns > nx) {
 	ECALL(call, _("(subscript) logical subscript too long"));
     }
     nmax = (ns > nx) ? ns : nx;
-    *stretch = (ns > nx) ? ns : 0;
+    stretch = (ns > nx) ? ns : 0;
     if (ns == 0) return(allocVector(INTSXP, 0));
     const int *ps = LOGICAL_RO(s);    /* Calling LOCICAL_RO here may force a
 					 large allocation, but no larger than
@@ -639,7 +638,7 @@ static SEXP negativeSubscript(SEXP s, R_xlen_t ns, R_xlen_t nx, SEXP call)
 	if (ix != 0 && ix != NA_INTEGER && -ix <= nx)
 	    pindx[-ix - 1] = 0;
     }
-    s = logicalSubscript(indx, nx, nx, &stretch, call);
+    s = logicalSubscript(indx, nx, nx, stretch, call);
     UNPROTECT(1);
     return s;
 }
@@ -661,14 +660,13 @@ static SEXP positiveSubscript(SEXP s, R_xlen_t ns, R_xlen_t nx)
     } else return s;
 }
 
-static SEXP
-integerSubscript(SEXP s, R_xlen_t ns, R_xlen_t nx, R_xlen_t *stretch, SEXP call)
+static SEXP integerSubscript(SEXP s, R_xlen_t ns, R_xlen_t nx, R_xlen_t &stretch, SEXP call)
 {
     R_xlen_t i;
     int ii, neg, max, canstretch;
     Rboolean isna = FALSE;
-    canstretch = *stretch > 0;
-    *stretch = 0;
+    canstretch = stretch > 0;
+    stretch = 0;
     neg = FALSE;
     max = 0;
     const int *ps = INTEGER_RO(s);
@@ -684,7 +682,7 @@ integerSubscript(SEXP s, R_xlen_t ns, R_xlen_t nx, R_xlen_t *stretch, SEXP call)
 	    max = ii;
     }
     if (max > nx) {
-	if(canstretch) *stretch = max;
+	if(canstretch) stretch = max;
 	else {
 	    ECALL(call, _("subscript is out of bounds"));
 	}
@@ -699,15 +697,14 @@ integerSubscript(SEXP s, R_xlen_t ns, R_xlen_t nx, R_xlen_t *stretch, SEXP call)
     return R_NilValue;
 }
 
-static SEXP
-realSubscript(SEXP s, R_xlen_t ns, R_xlen_t nx, R_xlen_t *stretch, SEXP call)
+static SEXP realSubscript(SEXP s, R_xlen_t ns, R_xlen_t nx, R_xlen_t &stretch, SEXP call)
 {
     R_xlen_t i;
     int canstretch;
     double ii, min, max;
     Rboolean isna = FALSE;
-    canstretch = *stretch > 0;
-    *stretch = 0;
+    canstretch = stretch > 0;
+    stretch = 0;
     min = 0;
     max = 0;
     const double *ps = REAL_RO(s);
@@ -724,7 +721,7 @@ realSubscript(SEXP s, R_xlen_t ns, R_xlen_t nx, R_xlen_t *stretch, SEXP call)
 	    ECALL(call, _("subscript too large for 32-bit R"));
 	}
 #endif
-	if(canstretch) *stretch = (R_xlen_t) max;
+	if(canstretch) stretch = (R_xlen_t) max;
 	else {
 	    ECALL(call, _("subscript is out of bounds"));
 	}
@@ -745,7 +742,7 @@ realSubscript(SEXP s, R_xlen_t ns, R_xlen_t nx, R_xlen_t *stretch, SEXP call)
 		    pindx[ix] = 0;
 		}
 	    }
-	    s = logicalSubscript(indx, nx, nx, &stretch, call);
+	    s = logicalSubscript(indx, nx, nx, stretch, call);
 	    UNPROTECT(1);
 	    return s;
 	} else {
@@ -809,11 +806,11 @@ realSubscript(SEXP s, R_xlen_t ns, R_xlen_t nx, R_xlen_t *stretch, SEXP call)
  */
 
 static SEXP stringSubscript(SEXP s, R_xlen_t ns, R_xlen_t nx, SEXP names,
-		R_xlen_t *stretch, SEXP call)
+		R_xlen_t &stretch, SEXP call)
 {
     SEXP indx, indexnames = R_NilValue;
     R_xlen_t i, j, nnames, extra, sub;
-    int canstretch = *stretch > 0;
+    int canstretch = stretch > 0;
     /* product may overflow, so check factors as well. */
     Rboolean usehashing = (Rboolean) ( ((ns > 1000 && nx) || (nx > 1000 && ns)) || (ns * nx > 15*nx + ns) );
     int nprotect = 0;
@@ -894,7 +891,7 @@ static SEXP stringSubscript(SEXP s, R_xlen_t ns, R_xlen_t nx, SEXP names,
     if (extra != nnames)
 	setAttrib(indx, R_UseNamesSymbol, indexnames);
     if (canstretch)
-	*stretch = extra;
+	stretch = extra;
     UNPROTECT(nprotect);
     return indx;
 }
@@ -919,13 +916,13 @@ HIDDEN SEXP int_arraySubscript(int dim, SEXP s, SEXP dims, SEXP x, SEXP call)
     case NILSXP:
 	return allocVector(INTSXP, 0);
     case LGLSXP:
-	return logicalSubscript(s, ns, nd, &stretch, call);
+	return logicalSubscript(s, ns, nd, stretch, call);
     case INTSXP:
-	return integerSubscript(s, ns, nd, &stretch, call);
+	return integerSubscript(s, ns, nd, stretch, call);
     case REALSXP:
 	/* We don't yet allow subscripts > R_SHORT_LEN_MAX */
 	PROTECT(tmp = coerceVector(s, INTSXP));
-	tmp = integerSubscript(tmp, ns, nd, &stretch, call);
+	tmp = integerSubscript(tmp, ns, nd, stretch, call);
 	UNPROTECT(1);
 	return tmp;
     case STRSXP:
@@ -934,7 +931,7 @@ HIDDEN SEXP int_arraySubscript(int dim, SEXP s, SEXP dims, SEXP x, SEXP call)
 	    ECALL(call, _("no 'dimnames' attribute for array"));
 	}
 	dnames = VECTOR_ELT(dnames, dim);
-	return stringSubscript(s, ns, nd, dnames, &stretch, call);
+	return stringSubscript(s, ns, nd, dnames, stretch, call);
     case SYMSXP:
 	if (s == R_MissingArg)
 	    return nullSubscript(nd);
@@ -962,7 +959,7 @@ SEXP Rf_arraySubscript(int dim, SEXP s, SEXP dims, AttrGetter dng,
    otherwise, stretch returns the new required length for x
 */
 
-HIDDEN SEXP Rf_makeSubscript(SEXP x, SEXP s, R_xlen_t *stretch, SEXP call)
+HIDDEN SEXP Rf_makeSubscript(SEXP x, SEXP s, R_xlen_t &stretch, SEXP call)
 {
     if (! (isVector(x) || isList(x) || isLanguage(x))) {
 	ECALL(call, _("subscripting on non-vector"));
@@ -974,14 +971,14 @@ HIDDEN SEXP Rf_makeSubscript(SEXP x, SEXP s, R_xlen_t *stretch, SEXP call)
     if (IS_SCALAR(s, INTSXP)) {
 	int i = SCALAR_IVAL(s);
 	if (0 < i && i <= nx) {
-	    *stretch = 0;
+	    stretch = 0;
 	    return s;
 	}
     }
     else if (IS_SCALAR(s, REALSXP)) {
 	double di = SCALAR_DVAL(s);
 	if (1 <= di && di <= nx) {
-	    *stretch = 0;
+	    stretch = 0;
 	    /* We could only return a REALSXP if the value is too
 	       large for an INTSXP, but, as the calling code can
 	       handle REALSXP indices, returning the REALSXP
@@ -994,7 +991,7 @@ HIDDEN SEXP Rf_makeSubscript(SEXP x, SEXP s, R_xlen_t *stretch, SEXP call)
     SEXP ans = R_NilValue;
     switch (TYPEOF(s)) {
     case NILSXP:
-	*stretch = 0;
+	stretch = 0;
 	ans = allocVector(INTSXP, 0);
 	break;
     case LGLSXP:
@@ -1015,7 +1012,7 @@ HIDDEN SEXP Rf_makeSubscript(SEXP x, SEXP s, R_xlen_t *stretch, SEXP call)
 	break;
     }
     case SYMSXP:
-	*stretch = 0;
+	stretch = 0;
 	if (s == R_MissingArg) {
 	    ans = nullSubscript(nx);
 	    break;

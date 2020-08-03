@@ -280,15 +280,15 @@ LDOUBLE private_nearbyintl(LDOUBLE x)
 #endif
 
 constexpr int NB = 1000;
-static void format_via_sprintf(double r, int d, int *kpower, int *nsig)
+static void format_via_sprintf(double r, int d, int &kpower, int &nsig)
 {
     static char buff[NB];
     int i;
     snprintf(buff, NB, "%#.*e", d - 1, r);
-    *kpower = (int) strtol(buff + (d + 2), nullptr, 10);
+    kpower = (int) strtol(buff + (d + 2), nullptr, 10);
     for (i = d; i >= 2; i--)
         if (buff[i] != '0') break;
-    *nsig = i;
+    nsig = i;
 }
 
 
@@ -313,7 +313,7 @@ static constexpr double tbl[] =
 constexpr int KP_MAX = 22;
 #endif
 
-static void scientific(const double *x, int *neg, int *kpower, int *nsig, Rboolean *roundingwidens)
+static void scientific(const double &x, int &neg, int &kpower, int &nsig, bool &roundingwidens)
 {
     /* for a number x , determine
      *	neg    = 1_{x < 0}  {0/1}
@@ -328,20 +328,20 @@ static void scientific(const double *x, int *neg, int *kpower, int *nsig, Rboole
     int kp;
     int j;
 
-    if (*x == 0.0) {
-	*kpower = 0;
-	*nsig = 1;
-	*neg = 0;
-	*roundingwidens = FALSE;
+    if (x == 0.0) {
+	kpower = 0;
+	nsig = 1;
+	neg = 0;
+	roundingwidens = false;
     } else {
-	if(*x < 0.0) {
-	    *neg = 1; r = -*x;
+	if(x < 0.0) {
+	    neg = 1; r = -x;
 	} else {
-	    *neg = 0; r = *x;
+	    neg = 0; r = x;
 	}
         if (R_print.digits >= DBL_DIG + 1) {
             format_via_sprintf(r, R_print.digits, kpower, nsig);
-	    *roundingwidens = FALSE;
+	    roundingwidens = false;
             return;
         }
         kp = (int) floor(log10(r)) - R_print.digits + 1;/* r = |x|; 10^(kp + digits - 1) <= r */
@@ -357,9 +357,9 @@ static void scientific(const double *x, int *neg, int *kpower, int *nsig, Rboole
             r_prec /= powl(10.0, (long double) kp);
 #else
         else if (kp <= R_dec_min_exponent)
-            r_prec = (r_prec * 1e+303)/Rexp10((double)(kp+303));
+            r_prec = (r_prec * 1e+303) / Rexp10(kp + 303);
         else
-            r_prec /= Rexp10((double) kp);
+            r_prec /= Rexp10(kp);
 #endif
         if (r_prec < tbl[R_print.digits]) {
             r_prec *= 10.0;
@@ -381,9 +381,9 @@ static void scientific(const double *x, int *neg, int *kpower, int *nsig, Rboole
            is in range. Representation of 1e+303 has low error.
          */
         else if (kp <= R_dec_min_exponent)
-            r_prec = (r_prec * 1e+303)/Rexp10((double)(kp+303));
+            r_prec = (r_prec * 1e+303) / Rexp10(kp + 303);
         else
-            r_prec /= Rexp10((double)kp);
+            r_prec /= Rexp10(kp);
         if (r_prec < tbl[R_print.digits]) {
             r_prec *= 10.0;
             kp--;
@@ -393,20 +393,20 @@ static void scientific(const double *x, int *neg, int *kpower, int *nsig, Rboole
 	   alpha already rounded to 53 bits */
         alpha = nearbyint(r_prec);
 #endif
-        *nsig = R_print.digits;
+        nsig = R_print.digits;
         for (j = 1; j <= R_print.digits; j++) {
             alpha /= 10.0;
             if (alpha == floor(alpha)) {
-                (*nsig)--;
+                (nsig)--;
             } else {
                 break;
             }
         }
-        if (*nsig == 0 && R_print.digits > 0) {
-            *nsig = 1;
+        if (nsig == 0 && R_print.digits > 0) {
+            nsig = 1;
             kp += 1;
         }
-        *kpower = kp + R_print.digits - 1;
+        kpower = kp + R_print.digits - 1;
 
 	/* Scientific format may do more rounding than fixed format, e.g.
 	   9996 with 3 digits is 1e+04 in scientific, but 9996 in fixed.
@@ -414,12 +414,12 @@ static void scientific(const double *x, int *neg, int *kpower, int *nsig, Rboole
 	   and would not round up to it in fixed format.
 	   Here rgt is the decimal place that will be cut off by rounding */
 
-	int rgt = R_print.digits - *kpower;
+	int rgt = R_print.digits - kpower;
 	/* bound rgt by 0 and KP_MAX */
 	rgt = rgt < 0 ? 0 : rgt > KP_MAX ? KP_MAX : rgt;
 	double fuzz = 0.5/(double)tbl[1 + rgt];
 	// kpower can be bigger than the table.
-	*roundingwidens = (Rboolean) (*kpower > 0 && *kpower <= KP_MAX && r < tbl[*kpower + 1] - fuzz);
+	roundingwidens = (kpower > 0 && kpower <= KP_MAX && r < tbl[kpower + 1] - fuzz);
     }
 }
 
@@ -437,7 +437,7 @@ void Rf_formatReal(const double *x, R_xlen_t n, int *w, int *d, int *e, int nsma
 {
     int left, right, sleft;
     int mnl, mxl, rgt, mxsl, mxns, wF;
-    Rboolean roundingwidens;
+    bool roundingwidens;
     int neg_i, neg, kpower, nsig;
     int naflag, nanflag, posinf, neginf;
 
@@ -456,7 +456,7 @@ void Rf_formatReal(const double *x, R_xlen_t n, int *w, int *d, int *e, int nsma
 	    else if(x[i] > 0) posinf = 1;
 	    else neginf = 1;
 	} else {
-	    scientific(&x[i], &neg_i, &kpower, &nsig, &roundingwidens);
+	    scientific(x[i], neg_i, kpower, nsig, roundingwidens);
 
 	    left = kpower + 1;
 	    if (roundingwidens) left--;
@@ -518,7 +518,7 @@ void Rf_formatReal(const double *x, R_xlen_t n, int *w, int *d, int *e, int nsma
     if (neginf && *w < 4) *w = 4;
 }
 
-void formatRealS(SEXP x, R_xlen_t n, int *w, int *d, int *e, int nsmall)
+void formatRealS(SEXP x, R_xlen_t n, int &w, int &d, int &e, int nsmall)
 {
     /*
      *  iterate by region and just take the most extreme
@@ -526,16 +526,16 @@ void formatRealS(SEXP x, R_xlen_t n, int *w, int *d, int *e, int nsmall)
      */
     int tmpw, tmpd, tmpe;
 
-    *w = 0;
-    *d = 0;
-    *e = 0;
+    w = 0;
+    d = 0;
+    e = 0;
 
     ITERATE_BY_REGION_PARTIAL(x, px, idx, nb, double, REAL, 0, n,
 		      {
 			  formatReal(px, nb, &tmpw, &tmpd, &tmpe, nsmall);
-			  if(tmpw > *w) *w = tmpw;
-			  if(!*d && tmpd) *d = tmpd;
-			  if(tmpe > *e) *e = tmpe;
+			  if(tmpw > w) w = tmpw;
+			  if(!d && tmpd) d = tmpd;
+			  if(tmpe > e) e = tmpe;
 		      });
 }
 
@@ -555,11 +555,11 @@ void Rf_formatComplex(const Rcomplex *x, R_xlen_t n,
     int left, right, sleft;
     int rt, mnl, mxl, mxsl, mxns, wF, i_wF;
     int i_rt, i_mnl, i_mxl, i_mxsl, i_mxns;
-    Rboolean roundingwidens;
+    bool roundingwidens;
     int neg_i, neg, kpower, nsig;
     int naflag, rnanflag, rposinf, rneginf, inanflag, iposinf;
     Rcomplex tmp;
-    Rboolean all_re_zero = TRUE, all_im_zero = TRUE;
+    bool all_re_zero = true, all_im_zero = true;
 
     naflag = 0;
     rnanflag = 0;
@@ -591,8 +591,8 @@ void Rf_formatComplex(const Rcomplex *x, R_xlen_t n,
 		else if (tmp.r > 0) rposinf = 1;
 		else rneginf = 1;
 	    } else {
-		if(x[i].r != 0) all_re_zero = FALSE;
-		scientific(&(tmp.r), &neg_i, &kpower, &nsig, &roundingwidens);
+		if(x[i].r != 0) all_re_zero = false;
+		scientific((tmp.r), neg_i, kpower, nsig, roundingwidens);
 
 		left = kpower + 1;
 		if (roundingwidens) left--;
@@ -616,8 +616,8 @@ void Rf_formatComplex(const Rcomplex *x, R_xlen_t n,
 		if (ISNAN(tmp.i)) inanflag = 1;
 		else iposinf = 1;
 	    } else {
-		if(x[i].i != 0) all_im_zero = FALSE;
-		scientific(&(tmp.i), &neg_i, &kpower, &nsig, &roundingwidens);
+		if(x[i].i != 0) all_im_zero = false;
+		scientific((tmp.i), neg_i, kpower, nsig, roundingwidens);
 
 		left = kpower + 1;
 		if (roundingwidens) left--;

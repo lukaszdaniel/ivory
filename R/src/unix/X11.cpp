@@ -36,7 +36,7 @@ static R_X11Routines routines, *ptr = &routines;
 
 static int initialized = 0;
 
-R_X11Routines * R_setX11Routines(R_X11Routines *routines)
+R_X11Routines *R_setX11Routines(R_X11Routines *routines)
 {
     R_X11Routines *tmp;
     tmp = ptr;
@@ -46,7 +46,7 @@ R_X11Routines * R_setX11Routines(R_X11Routines *routines)
 
 HIDDEN int R_X11_Init(void)
 {
-    int res;
+    bool res;
 
     if(initialized) return initialized;
 
@@ -66,18 +66,19 @@ HIDDEN int R_X11_Init(void)
 HIDDEN Rboolean R_access_X11(void)
 {
     R_X11_Init();
-    return (initialized > 0) ? (Rboolean) ((*ptr->access)() > 0) : FALSE;
+    return (initialized > 0) ? (Rboolean)((*ptr->access)() > 0) : FALSE;
 }
 
 // called from src/library/grDevices/src/stubs.cpp
 SEXP do_X11(SEXP call, SEXP op, SEXP args, SEXP rho)
 {
     R_X11_Init();
-    if(initialized > 0)
-	return (*ptr->X11)(call, op, args, rho);
-    else {
-	error(_("X11 module cannot be loaded"));
-	return R_NilValue;
+    if (initialized > 0)
+        return (*ptr->X11)(call, op, args, rho);
+    else
+    {
+        error(_("X11 module cannot be loaded"));
+        return R_NilValue;
     }
 }
 
@@ -85,11 +86,12 @@ SEXP do_X11(SEXP call, SEXP op, SEXP args, SEXP rho)
 SEXP do_saveplot(SEXP call, SEXP op, SEXP args, SEXP rho)
 {
     R_X11_Init();
-    if(initialized > 0)
-	return (*ptr->saveplot)(call, op, args, rho);
-    else {
-	error(_("X11 module cannot be loaded"));
-	return R_NilValue;
+    if (initialized > 0)
+        return (*ptr->saveplot)(call, op, args, rho);
+    else
+    {
+        error(_("X11 module cannot be loaded"));
+        return R_NilValue;
     }
 }
 
@@ -97,38 +99,41 @@ SEXP do_saveplot(SEXP call, SEXP op, SEXP args, SEXP rho)
 Rboolean R_GetX11Image(int d, void *pximage, int *pwidth, int *pheight)
 {
     R_X11_Init();
-    if(initialized > 0)
-	return (*ptr->image)(d, pximage, pwidth, pheight);
-    else {
-	error(_("X11 module cannot be loaded"));
-	return FALSE;
+    if (initialized > 0)
+        return (*ptr->image)(d, pximage, pwidth, pheight);
+    else
+    {
+        error(_("X11 module cannot be loaded"));
+        return FALSE;
     }
 }
 
 HIDDEN Rboolean R_ReadClipboard(Rclpconn clpcon, char *type)
 {
     R_X11_Init();
-    if(initialized > 0)
-	return (*ptr->readclp)(clpcon, type);
-    else {
-	error(_("X11 module cannot be loaded"));
-	return FALSE;
+    if (initialized > 0)
+        return (*ptr->readclp)(clpcon, type);
+    else
+    {
+        error(_("X11 module cannot be loaded"));
+        return FALSE;
     }
 }
 
 SEXP do_bmVersion(void)
 {
-   SEXP ans = PROTECT(allocVector(STRSXP, 3)),
-	nms = PROTECT(allocVector(STRSXP, 3));
+    SEXP ans = PROTECT(allocVector(STRSXP, 3)),
+         nms = PROTECT(allocVector(STRSXP, 3));
     setAttrib(ans, R_NamesSymbol, nms);
     SET_STRING_ELT(nms, 0, mkChar("libpng"));
     SET_STRING_ELT(nms, 1, mkChar("jpeg"));
     SET_STRING_ELT(nms, 2, mkChar("libtiff"));
     R_X11_Init();
-    if(initialized > 0) {
-	SET_STRING_ELT(ans, 0, mkChar((*ptr->R_pngVersion)()));
-	SET_STRING_ELT(ans, 1, mkChar((*ptr->R_jpegVersion)()));
-	SET_STRING_ELT(ans, 2, mkChar((*ptr->R_tiffVersion)()));
+    if (initialized > 0)
+    {
+        SET_STRING_ELT(ans, 0, mkChar((*ptr->R_pngVersion)()));
+        SET_STRING_ELT(ans, 1, mkChar((*ptr->R_jpegVersion)()));
+        SET_STRING_ELT(ans, 2, mkChar((*ptr->R_tiffVersion)()));
     }
     UNPROTECT(2);
     return ans;

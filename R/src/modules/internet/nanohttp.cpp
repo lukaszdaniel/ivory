@@ -293,14 +293,16 @@ static void RxmlNanoHTTPInit(void)
 
 void RxmlNanoHTTPCleanup(void)
 {
-    if (proxy != nullptr) xmlFree(proxy);
-    if (proxyUser != nullptr) xmlFree(proxyUser);
+	if (proxy != nullptr)
+		xmlFree(proxy);
+	if (proxyUser != nullptr)
+		xmlFree(proxyUser);
 #ifdef _WINSOCKAPI_
-    if (initialized)
-	WSACleanup();
+	if (initialized)
+		WSACleanup();
 #endif
-    initialized = 0;
-    return;
+	initialized = 0;
+	return;
 }
 
 /**
@@ -516,20 +518,20 @@ static RxmlNanoHTTPCtxtPtr RxmlNanoHTTPNewCtxt(const char *URL)
 static void RxmlNanoHTTPFreeCtxt(RxmlNanoHTTPCtxtPtr ctxt)
 {
     if (ctxt == nullptr) return;
-    if (ctxt->hostname != nullptr) xmlFree(ctxt->hostname);
-    if (ctxt->protocol != nullptr) xmlFree(ctxt->protocol);
-    if (ctxt->path != nullptr) xmlFree(ctxt->path);
-    if (ctxt->query != nullptr) xmlFree(ctxt->query);
-    if (ctxt->out != nullptr) xmlFree(ctxt->out);
-    if (ctxt->in != nullptr) xmlFree(ctxt->in);
-    if (ctxt->contentType != nullptr) xmlFree(ctxt->contentType);
-    if (ctxt->encoding != nullptr) xmlFree(ctxt->encoding);
-    if (ctxt->mimeType != nullptr) xmlFree(ctxt->mimeType);
-    if (ctxt->location != nullptr) xmlFree(ctxt->location);
-    if (ctxt->authHeader != nullptr) xmlFree(ctxt->authHeader);
-    if (ctxt->statusMsg != nullptr) xmlFree(ctxt->statusMsg);
+    if (ctxt->hostname) xmlFree(ctxt->hostname);
+    if (ctxt->protocol) xmlFree(ctxt->protocol);
+    if (ctxt->path) xmlFree(ctxt->path);
+    if (ctxt->query) xmlFree(ctxt->query);
+    if (ctxt->out) xmlFree(ctxt->out);
+    if (ctxt->in) xmlFree(ctxt->in);
+    if (ctxt->contentType) xmlFree(ctxt->contentType);
+    if (ctxt->encoding) xmlFree(ctxt->encoding);
+    if (ctxt->mimeType) xmlFree(ctxt->mimeType);
+    if (ctxt->location) xmlFree(ctxt->location);
+    if (ctxt->authHeader) xmlFree(ctxt->authHeader);
+    if (ctxt->statusMsg) xmlFree(ctxt->statusMsg);
 #ifdef HAVE_ZLIB_H
-    if (ctxt->strm != nullptr) {
+    if (ctxt->strm) {
 	inflateEnd(ctxt->strm);
 	xmlFree(ctxt->strm);
     }
@@ -550,16 +552,18 @@ static void RxmlNanoHTTPFreeCtxt(RxmlNanoHTTPCtxtPtr ctxt)
 
 static void RxmlNanoHTTPSend(RxmlNanoHTTPCtxtPtr ctxt)
 {
-    if (ctxt->state & XML_NANO_HTTP_WRITE) {
-        unsigned int total_sent = 0;
-        while (total_sent <strlen(ctxt->outptr)) {
-            DLsize_t nsent = send(ctxt->fd, ctxt->outptr+total_sent,
-				 strlen(ctxt->outptr)-total_sent, 0);
-            if (nsent > 0)
-                total_sent += nsent;
+	if (ctxt->state & XML_NANO_HTTP_WRITE)
+	{
+		unsigned int total_sent = 0;
+		while (total_sent < strlen(ctxt->outptr))
+		{
+			DLsize_t nsent = send(ctxt->fd, ctxt->outptr + total_sent,
+								  strlen(ctxt->outptr) - total_sent, 0);
+			if (nsent > 0)
+				total_sent += nsent;
+		}
+		ctxt->last = total_sent;
 	}
-        ctxt->last = total_sent;
-    }
 }
 
 /**
@@ -1161,11 +1165,12 @@ static int RxmlNanoHTTPConnectHost(const char *host, int port)
  *     The contentType, if provided must be freed by the caller
  */
 
-void* RxmlNanoHTTPOpen(const char *URL, char **contentType, const char *headers,
-                 int cacheOK)
+void *RxmlNanoHTTPOpen(const char *URL, char **contentType, const char *headers,
+					   int cacheOK)
 {
-    if (contentType != nullptr) *contentType = nullptr;
-    return RxmlNanoHTTPMethod(URL, nullptr, nullptr, contentType, headers, cacheOK);
+	if (contentType)
+		*contentType = nullptr;
+	return RxmlNanoHTTPMethod(URL, nullptr, nullptr, contentType, headers, cacheOK);
 }
 
 /**
@@ -1229,7 +1234,7 @@ int RxmlNanoHTTPRead(void *ctx, void *dest, int len)
 static void base64_encode(char *proxyUser, char *out)
 {
     /* Conversion table.  */
-    static char tbl[64] = {
+    static constexpr char tbl[64] = {
 	'A','B','C','D','E','F','G','H',
 	'I','J','K','L','M','N','O','P',
 	'Q','R','S','T','U','V','W','X',
@@ -1266,11 +1271,12 @@ static void base64_encode(char *proxyUser, char *out)
  */
 void RxmlNanoHTTPClose(void *ctx)
 {
-    RxmlNanoHTTPCtxtPtr ctxt = (RxmlNanoHTTPCtxtPtr) ctx;
+	RxmlNanoHTTPCtxtPtr ctxt = (RxmlNanoHTTPCtxtPtr)ctx;
 
-    if (ctx == nullptr) return;
+	if (ctx == nullptr)
+		return;
 
-    RxmlNanoHTTPFreeCtxt(ctxt);
+	RxmlNanoHTTPFreeCtxt(ctxt);
 }
 
 /**
@@ -1289,8 +1295,8 @@ void RxmlNanoHTTPClose(void *ctx)
  *     The contentType, if provided must be freed by the caller
  */
 
-void* RxmlNanoHTTPMethod(const char *URL, const char *method, const char *input,
-                  char **contentType, const char *headers, const int cacheOK)
+void *RxmlNanoHTTPMethod(const char *URL, const char *method, const char *input,
+						 char **contentType, const char *headers, const int cacheOK)
 {
     RxmlNanoHTTPCtxtPtr ctxt;
     char *bp, *p;

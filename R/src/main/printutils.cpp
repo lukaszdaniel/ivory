@@ -273,7 +273,7 @@ static const char *EncodeRealDrop0(double x, int w, int d, int e, const char *de
     return out;
 }
 
-HIDDEN SEXP Rf_StringFromReal(double x, int *warn)
+HIDDEN SEXP Rf_StringFromReal(double x, int &warn)
 {
     int w, d, e;
     formatReal(&x, 1, &w, &d, &e, 0);
@@ -537,7 +537,7 @@ const char *Rf_EncodeString(SEXP s, int w, int quote, Rprt_adj justify)
        passed on by EncodeElement -- so no way could be end user be
        responsible for freeing it.  However, this is not thread-safe. */
 
-    static R_StringBuffer gBuffer = {nullptr, 0, BUFSIZE};
+    static R_StringBuffer gBuffer = R_StringBuffer(BUFSIZE);
     R_StringBuffer &buffer = gBuffer;
 
     if (s == NA_STRING) {
@@ -798,7 +798,7 @@ const char *Rf_EncodeElement0(SEXP x, R_xlen_t indx, int quote, const char *dec)
 	int w, d, e, wi, di, ei;
 	const char *res;
 
-	switch (TYPEOF(x))
+	switch (x->sexptype())
 	{
 	case LGLSXP:
 		formatLogical(&LOGICAL_RO(x)[indx], 1, &w);

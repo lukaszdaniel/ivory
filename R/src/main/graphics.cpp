@@ -115,8 +115,8 @@ static void GLPretty(double *ul, double *uh, int *n)
     }
     else { /* extra tickmarks --> CreateAtVector() in ./plot.cpp */
 	/* round to nice "1e<N>" */
-	*ul = Rexp10((double)p1);
-	*uh = Rexp10((double)p2);
+	*ul = Rexp10(p1);
+	*uh = Rexp10(p2);
 	if (p2 - p1 <= LPR_SMALL)
 	    *n = 3; /* Small range :	Use 1,2,5,10 times 10^k tickmarks */
 	else if (p2 - p1 <= LPR_MEDIUM)

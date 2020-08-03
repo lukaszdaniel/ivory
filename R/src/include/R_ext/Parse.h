@@ -25,10 +25,6 @@
 #ifndef R_EXT_PARSE_H_
 #define R_EXT_PARSE_H_
 
-#ifdef __cplusplus
-extern "C" {
-#endif
-
 /* PARSE_NULL will not be returned by R_ParseVector */
 typedef enum {
     PARSE_NULL,
@@ -38,10 +34,9 @@ typedef enum {
     PARSE_EOF
 } ParseStatus;
 
-SEXP R_ParseVector(SEXP, int, ParseStatus *, SEXP);
-
 #ifdef __cplusplus
-} //extern "C"
+extern "C"
 #endif
+SEXP R_ParseVector(SEXP, int, ParseStatus *, SEXP);
 
 #endif /* R_EXT_PARSE_H_ */

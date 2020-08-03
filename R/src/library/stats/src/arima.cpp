@@ -173,8 +173,7 @@ SEXP KalmanLike(SEXP sy, SEXP mod, SEXP sUP, SEXP op, SEXP update)
     }
 }
 
-SEXP
-KalmanSmooth(SEXP sy, SEXP mod, SEXP sUP)
+SEXP KalmanSmooth(SEXP sy, SEXP mod, SEXP sUP)
 {
     SEXP sZ = getListElement(mod, "Z"), sa = getListElement(mod, "a"), 
 	sP = getListElement(mod, "P"), sT = getListElement(mod, "T"), 
@@ -358,8 +357,7 @@ KalmanSmooth(SEXP sy, SEXP mod, SEXP sUP)
 }
 
 
-SEXP
-KalmanFore(SEXP nahead, SEXP mod, SEXP update)
+SEXP KalmanFore(SEXP nahead, SEXP mod, SEXP update)
 {
     mod = PROTECT(duplicate(mod));
     SEXP sZ = getListElement(mod, "Z"), sa = getListElement(mod, "a"), 
@@ -550,7 +548,8 @@ SEXP ARIMA_Invtrans(SEXP in, SEXP sarma)
     return y;
 }
 
-#define eps 1e-3
+constexpr double eps = 1e-3;
+
 SEXP ARIMA_Gradtrans(SEXP in, SEXP sarma)
 {
     int *arma = INTEGER(sarma), mp = arma[0], mq = arma[1], msp = arma[2],
@@ -587,8 +586,7 @@ SEXP ARIMA_Gradtrans(SEXP in, SEXP sarma)
 }
 
 
-SEXP
-ARIMA_Like(SEXP sy, SEXP mod, SEXP sUP, SEXP giveResid)
+SEXP ARIMA_Like(SEXP sy, SEXP mod, SEXP sUP, SEXP giveResid)
 {
     SEXP sPhi = getListElement(mod, "phi"), 
 	sTheta = getListElement(mod, "theta"), 
@@ -744,8 +742,7 @@ ARIMA_Like(SEXP sy, SEXP mod, SEXP sUP, SEXP giveResid)
 
 /* do differencing here */
 /* arma is p, q, sp, sq, ns, d, sd */
-SEXP
-ARIMA_CSS(SEXP sy, SEXP sarma, SEXP sPhi, SEXP sTheta,
+SEXP ARIMA_CSS(SEXP sy, SEXP sarma, SEXP sPhi, SEXP sTheta,
 	  SEXP sncond, SEXP giveResid)
 {
     SEXP res, sResid = R_NilValue;
@@ -814,8 +811,7 @@ SEXP TSconv(SEXP a, SEXP b)
 
 /* based on code from AS154 */
 
-static void
-inclu2(size_t np, double *xnext, double *xrow, double ynext,
+static void inclu2(size_t np, double *xnext, double *xrow, double ynext,
        double *d, double *rbar, double *thetab)
 {
     double cbar, sbar, di, xi, xk, rbthis, dpi;
@@ -1015,10 +1011,10 @@ SEXP getQ0(SEXP sPhi, SEXP sTheta)
     rbar = (double *) R_alloc(nrbar, sizeof(double));
     thetab = (double *) R_alloc(np, sizeof(double));
     V = (double *) R_alloc(np, sizeof(double));
-    for (ind = 0, j = 0; j < r; j++) {
+    for (int ind = 0, j = 0; j < r; j++) {
 	double vj = 0.0;
 	if (j == 0) vj = 1.0; else if (j - 1 < q) vj = theta[j - 1];
-	for (i = j; i < r; i++) {
+	for (int i = j; i < r; i++) {
 	    double vi = 0.0;
 	    if (i == 0) vi = 1.0; else if (i - 1 < q) vi = theta[i - 1];
 	    V[ind++] = vi * vj;
@@ -1052,11 +1048,11 @@ SEXP getQ0(SEXP sPhi, SEXP sTheta)
 	npr1 = npr + 1;
 	indj = npr;
 	ind2 = npr - 1;
-	for (j = 0; j < r; j++) {
+	for (int j = 0; j < r; j++) {
 	    double phij = (j < p) ? phi[j] : 0.0;
 	    xnext[indj++] = 0.0;
 	    indi = npr1 + j;
-	    for (i = j; i < r; i++) {
+	    for (int i = j; i < r; i++) {
 		double ynext = V[ind++];
 		double phii = (i < p) ? phi[i] : 0.0;
 		if (j != r - 1) {
@@ -1090,19 +1086,19 @@ SEXP getQ0(SEXP sPhi, SEXP sTheta)
 /*        now re-order p. */
 
 	ind = npr;
-	for (i = 0; i < r; i++) xnext[i] = P[ind++];
+	for (int i = 0; i < r; i++) xnext[i] = P[ind++];
 	ind = np - 1;
 	ind1 = npr - 1;
-	for (i = 0; i < npr; i++) P[ind--] = P[ind1--];
-	for (i = 0; i < r; i++) P[i] = xnext[i];
+	for (size_t i = 0; i < npr; i++) P[ind--] = P[ind1--];
+	for (int i = 0; i < r; i++) P[i] = xnext[i];
     } else {
 
 /* P0 is obtained by backsubstitution for a moving average process. */
 
 	indn = np;
 	ind = np;
-	for (i = 0; i < r; i++)
-	    for (j = 0; j <= i; j++) {
+	for (int i = 0; i < r; i++)
+	    for (int j = 0; j <= i; j++) {
 		--ind;
 		P[ind] = V[ind];
 		if (j != 0) P[ind] += P[--indn];
@@ -1112,8 +1108,8 @@ SEXP getQ0(SEXP sPhi, SEXP sTheta)
     for (i = r - 1, ind = np; i > 0; i--)
 	for (j = r - 1; j >= i; j--)
 	    P[r * i + j] = P[--ind];
-    for (i = 0; i < r - 1; i++)
-	for (j = i + 1; j < r; j++)
+    for (int i = 0; i < r - 1; i++)
+	for (int j = i + 1; j < r; j++)
 	    P[i + r * j] = P[j + r * i];
     UNPROTECT(1);
     return res;

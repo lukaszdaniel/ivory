@@ -85,7 +85,7 @@ extern inline void CHKVEC(SEXP x)
 
 extern inline void *DATAPTR(SEXP x) {
     CHKVEC(x);
-    if (ALTREP(x))
+    if (x->altrep())
 	return ALTVEC_DATAPTR(x);
 #ifdef CATCH_ZERO_LENGTH_ACCESS
     /* Attempts to read or write elements of a zero length vector will
@@ -103,7 +103,7 @@ extern inline void *DATAPTR(SEXP x) {
 
 extern inline const void *DATAPTR_RO(SEXP x) {
     CHKVEC(x);
-    if (ALTREP(x))
+    if (x->altrep())
 	return ALTVEC_DATAPTR_RO(x);
     else
 	return STDVEC_DATAPTR(x);
@@ -111,7 +111,7 @@ extern inline const void *DATAPTR_RO(SEXP x) {
 
 extern inline const void *DATAPTR_OR_NULL(SEXP x) {
     CHKVEC(x);
-    if (ALTREP(x))
+    if (x->altrep())
 	return ALTVEC_DATAPTR_OR_NULL(x);
     else
 	return STDVEC_DATAPTR(x);
@@ -158,37 +158,37 @@ extern inline const void *DATAPTR_OR_NULL(SEXP x) {
 
 extern inline const int *LOGICAL_OR_NULL(SEXP x) {
     CHECK_VECTOR_LGL(x);
-    return (int *) (ALTREP(x) ? ALTVEC_DATAPTR_OR_NULL(x) : STDVEC_DATAPTR(x));
+    return (int *) (x->altrep() ? ALTVEC_DATAPTR_OR_NULL(x) : STDVEC_DATAPTR(x));
 }
 
 extern inline const int *INTEGER_OR_NULL(SEXP x) {
     CHECK_VECTOR_INT(x);
-    return (int *) (ALTREP(x) ? ALTVEC_DATAPTR_OR_NULL(x) : STDVEC_DATAPTR(x));
+    return (int *) (x->altrep() ? ALTVEC_DATAPTR_OR_NULL(x) : STDVEC_DATAPTR(x));
 }
 
 extern inline const double *REAL_OR_NULL(SEXP x) {
     CHECK_VECTOR_REAL(x);
-    return (double *) (ALTREP(x) ? ALTVEC_DATAPTR_OR_NULL(x) : STDVEC_DATAPTR(x));
+    return (double *) (x->altrep() ? ALTVEC_DATAPTR_OR_NULL(x) : STDVEC_DATAPTR(x));
 }
 
 extern inline const double *COMPLEX_OR_NULL(SEXP x) {
     CHECK_VECTOR_CPLX(x);
-    return (double *) (ALTREP(x) ? ALTVEC_DATAPTR_OR_NULL(x) : STDVEC_DATAPTR(x));
+    return (double *) (x->altrep() ? ALTVEC_DATAPTR_OR_NULL(x) : STDVEC_DATAPTR(x));
 }
 
 extern inline const double *RAW_OR_NULL(SEXP x) {
     CHECK_VECTOR_RAW(x);
-    return (double *) (ALTREP(x) ? ALTVEC_DATAPTR_OR_NULL(x) : STDVEC_DATAPTR(x));
+    return (double *) (x->altrep() ? ALTVEC_DATAPTR_OR_NULL(x) : STDVEC_DATAPTR(x));
 }
 
 extern inline R_xlen_t XLENGTH_EX(SEXP x)
 {
-    return ALTREP(x) ? ALTREP_LENGTH(x) : STDVEC_LENGTH(x);
+    return x->altrep() ? ALTREP_LENGTH(x) : STDVEC_LENGTH(x);
 }
 
 extern inline R_xlen_t XTRUELENGTH(SEXP x)
 {
-    return ALTREP(x) ? ALTREP_TRUELENGTH(x) : STDVEC_TRUELENGTH(x);
+    return x->altrep() ? ALTREP_TRUELENGTH(x) : STDVEC_TRUELENGTH(x);
 }
 
 extern inline int LENGTH_EX(SEXP x, const char *file, int line)
@@ -207,35 +207,35 @@ extern inline int LENGTH_EX(SEXP x, const char *file, int line)
     do                                                    \
     {                                                     \
         CHECK_VECTOR_LGL(x);                              \
-        if (ALTREP(x))                                    \
+        if (x->altrep())                                    \
             error(_("bad standard %s vector"), "LGLSXP"); \
     } while (0)
 #define CHECK_STDVEC_INT(x)                               \
     do                                                    \
     {                                                     \
         CHECK_VECTOR_INT(x);                              \
-        if (ALTREP(x))                                    \
+        if (x->altrep())                                    \
             error(_("bad standard %s vector"), "INTSXP"); \
     } while (0)
 #define CHECK_STDVEC_REAL(x)                               \
     do                                                     \
     {                                                      \
         CHECK_VECTOR_REAL(x);                              \
-        if (ALTREP(x))                                     \
+        if (x->altrep())                                     \
             error(_("bad standard %s vector"), "REALSXP"); \
     } while (0)
 #define CHECK_STDVEC_CPLX(x)                               \
     do                                                     \
     {                                                      \
         CHECK_VECTOR_CPLX(x);                              \
-        if (ALTREP(x))                                     \
+        if (x->altrep())                                     \
             error(_("bad standard %s vector"), "CPLXSXP"); \
     } while (0)
 #define CHECK_STDVEC_RAW(x)                               \
     do                                                    \
     {                                                     \
         CHECK_VECTOR_RAW(x);                              \
-        if (ALTREP(x))                                    \
+        if (x->altrep())                                    \
             error(_("bad standard %s vector"), "RAWSXP"); \
     } while (0)
 
@@ -407,75 +407,75 @@ extern inline void SET_SCALAR_BVAL(SEXP x, Rbyte v) {
     RAW0(x)[0] = v;
 }
 
-extern inline SEXP ALTREP_CLASS(SEXP x) { return TAG(x); }
+extern inline SEXP ALTREP_CLASS(SEXP x) { return x->tag(); }
 
-extern inline SEXP R_altrep_data1(SEXP x) { return CAR(x); }
-extern inline SEXP R_altrep_data2(SEXP x) { return CDR(x); }
+extern inline SEXP R_altrep_data1(SEXP x) { return x->car(); }
+extern inline SEXP R_altrep_data2(SEXP x) { return x->cdr(); }
 extern inline void R_set_altrep_data1(SEXP x, SEXP v) { SETCAR(x, v); }
 extern inline void R_set_altrep_data2(SEXP x, SEXP v) { SETCDR(x, v); }
 
 extern inline int INTEGER_ELT(SEXP x, R_xlen_t i)
 {
     CHECK_VECTOR_INT_ELT(x, i);
-    return ALTREP(x) ? ALTINTEGER_ELT(x, i) : INTEGER0(x)[i];
+    return x->altrep() ? ALTINTEGER_ELT(x, i) : INTEGER0(x)[i];
 }
 
 extern inline void SET_INTEGER_ELT(SEXP x, R_xlen_t i, int v)
 {
     CHECK_VECTOR_INT_ELT(x, i);
-    if (ALTREP(x)) ALTINTEGER_SET_ELT(x, i, v);
+    if (x->altrep()) ALTINTEGER_SET_ELT(x, i, v);
     else INTEGER0(x)[i] = v;
 }
 
 extern inline int LOGICAL_ELT(SEXP x, R_xlen_t i)
 {
     CHECK_VECTOR_LGL_ELT(x, i);
-    return ALTREP(x) ? ALTLOGICAL_ELT(x, i) : LOGICAL0(x)[i];
+    return x->altrep() ? ALTLOGICAL_ELT(x, i) : LOGICAL0(x)[i];
 }
 
 extern inline void SET_LOGICAL_ELT(SEXP x, R_xlen_t i, int v)
 {
     CHECK_VECTOR_LGL_ELT(x, i);
-    if (ALTREP(x)) ALTLOGICAL_SET_ELT(x, i, v);
+    if (x->altrep()) ALTLOGICAL_SET_ELT(x, i, v);
     else LOGICAL0(x)[i] = v;
 }
 
 extern inline double REAL_ELT(SEXP x, R_xlen_t i)
 {
     CHECK_VECTOR_REAL_ELT(x, i);
-    return ALTREP(x) ? ALTREAL_ELT(x, i) : REAL0(x)[i];
+    return x->altrep() ? ALTREAL_ELT(x, i) : REAL0(x)[i];
 }
 
 extern inline void SET_REAL_ELT(SEXP x, R_xlen_t i, double v)
 {
     CHECK_VECTOR_REAL_ELT(x, i);
-    if (ALTREP(x)) ALTREAL_SET_ELT(x, i, v);
+    if (x->altrep()) ALTREAL_SET_ELT(x, i, v);
     else REAL0(x)[i] = v;
 }
 
 extern inline Rcomplex COMPLEX_ELT(SEXP x, R_xlen_t i)
 {
     CHECK_VECTOR_CPLX_ELT(x, i);
-    return ALTREP(x) ? ALTCOMPLEX_ELT(x, i) : COMPLEX0(x)[i];
+    return x->altrep() ? ALTCOMPLEX_ELT(x, i) : COMPLEX0(x)[i];
 }
 
 extern inline void SET_COMPLEX_ELT(SEXP x, R_xlen_t i, Rcomplex v)
 {
     CHECK_VECTOR_CPLX_ELT(x, i);
-    if (ALTREP(x)) ALTCOMPLEX_SET_ELT(x, i, v);
+    if (x->altrep()) ALTCOMPLEX_SET_ELT(x, i, v);
     else COMPLEX0(x)[i] = v;
 }
 
 extern inline Rbyte RAW_ELT(SEXP x, R_xlen_t i)
 {
     CHECK_VECTOR_RAW_ELT(x, i);
-    return ALTREP(x) ? ALTRAW_ELT(x, i) : RAW0(x)[i];
+    return x->altrep() ? ALTRAW_ELT(x, i) : RAW0(x)[i];
 }
 
 extern inline void SET_RAW_ELT(SEXP x, R_xlen_t i, Rbyte v)
 {
     CHECK_VECTOR_RAW_ELT(x, i);
-    if (ALTREP(x)) ALTRAW_SET_ELT(x, i, v);
+    if (x->altrep()) ALTRAW_SET_ELT(x, i, v);
     else RAW0(x)[i] = v;
 }
 
@@ -483,7 +483,7 @@ extern inline void SET_RAW_ELT(SEXP x, R_xlen_t i, Rbyte v)
     !defined(TESTING_WRITE_BARRIER)
 /* if not inlining use version in memory.cpp with more error checking */
 extern inline SEXP STRING_ELT(SEXP x, R_xlen_t i) {
-    if (ALTREP(x))
+    if (x->altrep())
 	return ALTSTRING_ELT(x, i);
     else {
 	SEXP* ps = (SEXP*) STDVEC_DATAPTR(x);
@@ -546,7 +546,7 @@ int Rf_envlength(SEXP rho);
 */
 extern inline R_len_t Rf_length(SEXP s)
 {
-    switch (TYPEOF(s))
+    switch (s->sexptype())
     {
     case NILSXP:
         return 0;
@@ -565,7 +565,7 @@ extern inline R_len_t Rf_length(SEXP s)
     case DOTSXP:
     {
         R_len_t i = 0;
-        while (s != NULL && s != R_NilValue)
+        while (s && s != R_NilValue)
         {
             i++;
             s = CDR(s);
@@ -583,7 +583,7 @@ R_xlen_t Rf_envxlength(SEXP rho);
 
 extern inline R_xlen_t Rf_xlength(SEXP s)
 {
-    switch (TYPEOF(s))
+    switch (s->sexptype())
     {
     case NILSXP:
         return 0;
@@ -603,7 +603,7 @@ extern inline R_xlen_t Rf_xlength(SEXP s)
     {
         // it is implausible this would be >= 2^31 elements, but allow it
         R_xlen_t i = 0;
-        while (s != NULL && s != R_NilValue)
+        while (s && s != R_NilValue)
         {
             i++;
             s = CDR(s);
@@ -618,9 +618,9 @@ extern inline R_xlen_t Rf_xlength(SEXP s)
 }
 
 /* regular allocVector() as a special case of allocVector3() with no custom allocator */
-extern inline SEXP Rf_allocVector(SEXPTYPE type, R_xlen_t length)
+extern inline SEXP Rf_allocVector(SEXPTYPE type, R_xlen_t length = 1)
 {
-    return allocVector3(type, length, NULL);
+    return allocVector3(type, length, nullptr);
 }
 
 /* from list.cpp */
@@ -637,13 +637,12 @@ extern inline SEXP Rf_allocVector(SEXPTYPE type, R_xlen_t length)
      */
 extern inline SEXP Rf_elt(SEXP list, int i)
 {
-    int j;
     SEXP result = list;
 
-    if ((i < 0) || (i > length(list)))
+    if ((i < 0) || (i > Rf_length(list)))
         return R_NilValue;
 
-    for (j = 0; j < i; j++)
+    for (int j = 0; j < i; j++)
         result = CDR(result);
 
     return CAR(result);
@@ -792,7 +791,7 @@ extern inline Rboolean Rf_conformable(SEXP x, SEXP y)
     PROTECT(x = getAttrib(x, R_DimSymbol));
     y = getAttrib(y, R_DimSymbol);
     UNPROTECT(1);
-    if ((n = length(x)) != length(y))
+    if ((n = Rf_length(x)) != Rf_length(y))
 	return FALSE;
     for (i = 0; i < n; i++)
 	if (INTEGER(x)[i] != INTEGER(y)[i])
@@ -809,7 +808,7 @@ extern inline Rboolean Rf_inherits(SEXP s, const char *name)
     int i, nclass;
     if (OBJECT(s)) {
 	klass = getAttrib(s, R_ClassSymbol);
-	nclass = length(klass);
+	nclass = Rf_length(klass);
 	for (i = 0; i < nclass; i++) {
 	    if (!strcmp(CHAR(STRING_ELT(klass, i)), name))
 		return TRUE;
@@ -831,7 +830,7 @@ extern inline Rboolean Rf_isValidStringF(SEXP x)
 
 extern inline Rboolean Rf_isUserBinop(SEXP s)
 {
-    if (TYPEOF(s) == SYMSXP) {
+    if (s->sexptype() == SYMSXP) {
 	const char *str = CHAR(PRINTNAME(s));
 	if (strlen(str) >= 2 && str[0] == '%' && str[strlen(str)-1] == '%')
 	    return TRUE;
@@ -841,69 +840,73 @@ extern inline Rboolean Rf_isUserBinop(SEXP s)
 
 extern inline Rboolean Rf_isPrimitive(SEXP s)
 {
-    return Rboolean(TYPEOF(s) == BUILTINSXP ||
-	    TYPEOF(s) == SPECIALSXP);
+    return Rboolean(s->sexptype() == BUILTINSXP ||
+	    s->sexptype() == SPECIALSXP);
 }
 
 extern inline Rboolean Rf_isFunction(SEXP s)
 {
-    return Rboolean(TYPEOF(s) == CLOSXP ||
+    return Rboolean(s->sexptype() == CLOSXP ||
             isPrimitive(s));
 }
 
 extern inline Rboolean Rf_isList(SEXP s)
 {
-    return Rboolean(s == R_NilValue || TYPEOF(s) == LISTSXP);
+    return Rboolean(s == R_NilValue || s->sexptype() == LISTSXP);
 }
 
 
 extern inline Rboolean Rf_isNewList(SEXP s)
 {
-    return Rboolean(s == R_NilValue || TYPEOF(s) == VECSXP);
+    return Rboolean(s == R_NilValue || s->sexptype() == VECSXP);
 }
 
 extern inline Rboolean Rf_isPairList(SEXP s)
 {
-    switch (TYPEOF(s)) {
+    switch (s->sexptype())
+    {
     case NILSXP:
     case LISTSXP:
     case LANGSXP:
     case DOTSXP:
-	return TRUE;
+        return TRUE;
     default:
-	return FALSE;
+        return FALSE;
     }
 }
 
 extern inline Rboolean Rf_isVectorList(SEXP s)
 {
-    switch (TYPEOF(s)) {
+    switch (s->sexptype())
+    {
     case VECSXP:
     case EXPRSXP:
-	return TRUE;
+        return TRUE;
     default:
-	return FALSE;
+        return FALSE;
     }
 }
 
 extern inline Rboolean Rf_isVectorAtomic(SEXP s)
 {
-    switch (TYPEOF(s)) {
+    switch (s->sexptype())
+    {
     case LGLSXP:
     case INTSXP:
     case REALSXP:
     case CPLXSXP:
     case STRSXP:
     case RAWSXP:
-	return TRUE;
+        return TRUE;
     default: /* including NULL */
-	return FALSE;
+        return FALSE;
     }
 }
 
-extern inline Rboolean Rf_isVector(SEXP s)/* === isVectorList() or isVectorAtomic() */
+extern inline Rboolean Rf_isVector(SEXP s) /* === isVectorList() or isVectorAtomic() */
 {
-    switch(TYPEOF(s)) {
+    switch (s->sexptype())
+    {
     case LGLSXP:
     case INTSXP:
     case REALSXP:
@@ -913,9 +916,9 @@ extern inline Rboolean Rf_isVector(SEXP s)/* === isVectorList() or isVectorAtomi
 
     case VECSXP:
     case EXPRSXP:
-	return TRUE;
+        return TRUE;
     default:
-	return FALSE;
+        return FALSE;
     }
 }
 
@@ -923,10 +926,12 @@ extern inline Rboolean Rf_isFrame(SEXP s)
 {
     SEXP klass;
     int i;
-    if (OBJECT(s)) {
-	klass = getAttrib(s, R_ClassSymbol);
-	for (i = 0; i < length(klass); i++)
-	    if (!strcmp(CHAR(STRING_ELT(klass, i)), "data.frame")) return TRUE;
+    if (OBJECT(s))
+    {
+        klass = getAttrib(s, R_ClassSymbol);
+        for (i = 0; i < Rf_length(klass); i++)
+            if (!strcmp(CHAR(STRING_ELT(klass, i)), "data.frame"))
+                return TRUE;
     }
     return FALSE;
 }
@@ -935,18 +940,19 @@ extern inline Rboolean Rf_isFrame(SEXP s)
  *                                    which is   <=>  SYMSXP || LANGSXP || EXPRSXP */
 extern inline Rboolean Rf_isLanguage(SEXP s)
 {
-    return Rboolean(s == R_NilValue || TYPEOF(s) == LANGSXP);
+    return Rboolean(s == R_NilValue || s->sexptype() == LANGSXP);
 }
 
 extern inline Rboolean Rf_isMatrix(SEXP s)
 {
     SEXP t;
-    if (isVector(s)) {
-	t = getAttrib(s, R_DimSymbol);
-	/* You are not supposed to be able to assign a non-integer dim,
+    if (isVector(s))
+    {
+        t = getAttrib(s, R_DimSymbol);
+        /* You are not supposed to be able to assign a non-integer dim,
 	   although this might be possible by misuse of ATTRIB. */
-	if (TYPEOF(t) == INTSXP && LENGTH(t) == 2)
-	    return TRUE;
+        if (TYPEOF(t) == INTSXP && LENGTH(t) == 2)
+            return TRUE;
     }
     return FALSE;
 }
@@ -954,12 +960,13 @@ extern inline Rboolean Rf_isMatrix(SEXP s)
 extern inline Rboolean Rf_isArray(SEXP s)
 {
     SEXP t;
-    if (isVector(s)) {
-	t = getAttrib(s, R_DimSymbol);
-	/* You are not supposed to be able to assign a 0-length dim,
+    if (isVector(s))
+    {
+        t = getAttrib(s, R_DimSymbol);
+        /* You are not supposed to be able to assign a 0-length dim,
 	 nor a non-integer dim */
-	if (TYPEOF(t) == INTSXP && LENGTH(t) > 0)
-	    return TRUE;
+        if (t->sexptypeEqual(INTSXP) && LENGTH(t) > 0)
+            return TRUE;
     }
     return FALSE;
 }
@@ -969,15 +976,14 @@ extern inline Rboolean Rf_isTs(SEXP s)
     return Rboolean(isVector(s) && getAttrib(s, R_TspSymbol) != R_NilValue);
 }
 
-
 extern inline Rboolean Rf_isInteger(SEXP s)
 {
-    return Rboolean(TYPEOF(s) == INTSXP && !inherits(s, "factor"));
+    return Rboolean(s->sexptype() == INTSXP && !inherits(s, "factor"));
 }
 
 extern inline Rboolean Rf_isFactor(SEXP s)
 {
-    return Rboolean(TYPEOF(s) == INTSXP  && inherits(s, "factor"));
+    return Rboolean(s->sexptype() == INTSXP && inherits(s, "factor"));
 }
 
 extern inline int Rf_nlevels(SEXP f)
@@ -993,7 +999,7 @@ extern inline int Rf_nlevels(SEXP f)
 
 extern inline Rboolean Rf_isNumeric(SEXP s)
 {
-    switch (TYPEOF(s))
+    switch (s->sexptype())
     {
     case INTSXP:
         if (inherits(s, "factor"))
@@ -1009,7 +1015,7 @@ extern inline Rboolean Rf_isNumeric(SEXP s)
 /** Is an object "Numeric" or  complex */
 extern inline Rboolean Rf_isNumber(SEXP s)
 {
-    switch (TYPEOF(s))
+    switch (s->sexptype())
     {
     case INTSXP:
         if (inherits(s, "factor"))

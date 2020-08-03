@@ -573,12 +573,13 @@ HIDDEN SEXP do_setseed (SEXP call, SEXP op, SEXP args, SEXP env)
 
 /* The following entry points provide compatibility with S. */
 /* These entry points should not be used by new R code. */
-
+extern "C"
 void seed_in(long *ignored)
 {
     GetRNGstate();
 }
 
+extern "C"
 void seed_out(long *ignored)
 {
     PutRNGstate();

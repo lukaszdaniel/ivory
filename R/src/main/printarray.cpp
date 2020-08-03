@@ -375,7 +375,7 @@ void Rf_printMatrix(SEXP x, int offset, SEXP dim, int quote, int right,
     if(c > 0 && R_print.max / c < r) /* avoid integer overflow */
 	/* using floor(), not ceil(), since 'c' could be huge: */
 	r_pr = R_print.max / c;
-    switch (TYPEOF(x)) {
+    switch (x->sexptype()) {
     case LGLSXP:
 	printLogicalMatrix(x, offset, r_pr, r, c, rl, cl, rn, cn, TRUE);
 	break;
@@ -506,7 +506,7 @@ void Rf_printArray(SEXP x, SEXP dim, int quote, int right, SEXP dimnames)
 	    			cx += dx;
 	    		}
 	    	}
-		    switch (TYPEOF(x)) {
+		    switch (x->sexptype()) {
 		    case LGLSXP:
 		    	Rprintf(_("<logical array of size %s>"), buf);
 			break;
@@ -523,11 +523,11 @@ void Rf_printArray(SEXP x, SEXP dim, int quote, int right, SEXP dimnames)
 		    	Rprintf(_("<character array of size %s>"), buf);
 			break;
 		    default: //should never happen!
-		    	Rprintf("<%s array of size %s>", CHAR(type2str_nowarn(TYPEOF(x))), buf);
+		    	Rprintf("<%s array of size %s>", CHAR(type2str_nowarn(x->sexptype())), buf);
 		    }
 		    	Rprintf("\n");
 	    }
-	    switch (TYPEOF(x)) {
+	    switch (x->sexptype()) {
 	    case LGLSXP:
 		printLogicalMatrix(x, i * b, use_nr, nr, nc, dn0, dn1, rn, cn, do_ij);
 		break;

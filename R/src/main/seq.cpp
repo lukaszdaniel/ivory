@@ -34,7 +34,7 @@
 #include <R_ext/Itermacros.h>
 
 #include "RBufferUtils.h"
-static R_StringBuffer cbuff = {nullptr, 0, MAXELTSIZE};
+static R_StringBuffer cbuff = R_StringBuffer();
 
 #define _S4_rep_keepClass
 /* ==>  rep(<S4>, .) keeps class e.g., for list-like */
@@ -87,7 +87,7 @@ static SEXP cross_colon(SEXP call, SEXP s, SEXP t)
     PROTECT(la = mkString("factor"));
     setAttrib(a, R_ClassSymbol, la);
     UNPROTECT(2);
-    R_FreeStringBufferL(cbuff);
+    cbuff.R_FreeStringBufferL();
     vmaxset(vmax);
     return a;
 }
@@ -502,10 +502,10 @@ static SEXP rep4(SEXP x, SEXP times, R_xlen_t len, R_xlen_t each, R_xlen_t nt)
     // faster code for common special case
     if (each == 1 && nt == 1) return rep3(x, lx, len);
 
-    PROTECT(a = allocVector(TYPEOF(x), len));
+    PROTECT(a = allocVector(x->sexptype(), len));
 
 #define R4_SWITCH_LOOP(itimes)                                         \
-	switch (TYPEOF(x))                                                 \
+	switch (x->sexptype())                                                 \
 	{                                                                  \
 	case LGLSXP:                                                       \
 		for (i = 0, k = 0, k2 = 0; i < lx; i++)                        \
@@ -617,7 +617,7 @@ static SEXP rep4(SEXP x, SEXP times, R_xlen_t len, R_xlen_t each, R_xlen_t nt)
 	}
 
 	if(nt == 1)
-	switch (TYPEOF(x)) {
+	switch (x->sexptype()) {
 	case LGLSXP:
 	    for(i = 0; i < len; i++) {
 //		if ((i+1) % NINTERRUPT == 0) R_CheckUserInterrupt();
@@ -706,7 +706,7 @@ HIDDEN SEXP do_rep(SEXP call, SEXP op, SEXP args, SEXP rho)
 
     x = CAR(args);
     /* supported in R 2.15.x */
-    if (TYPEOF(x) == LISTSXP)
+    if (x->sexptype() == LISTSXP)
 	errorcall(call, _("replication of pairlists is defunct"));
 
     lx = xlength(x);
@@ -754,7 +754,7 @@ HIDDEN SEXP do_rep(SEXP call, SEXP op, SEXP args, SEXP rho)
 	return a;
     }
     if (!isVector(x))
-	errorcall(call, _("attempt to replicate an object of type '%s'"), type2char(TYPEOF(x)));
+	errorcall(call, _("attempt to replicate an object of type '%s'"), type2char(x->sexptype()));
 
     /* So now we know x is a vector of positive length.  We need to
        replicate it, and its names if it has them. */
@@ -1133,7 +1133,7 @@ HIDDEN SEXP do_seq_len(SEXP call, SEXP op, SEXP args, SEXP rho)
 HIDDEN SEXP do_sequence(SEXP call, SEXP op, SEXP args, SEXP rho)
 {
     R_xlen_t lengths_len, from_len, by_len, ans_len, i, i2, i3;
-    int from_elt, by_elt, length, j, k, *ans_elt;
+    int from_elt, by_elt, length_, j, k, *ans_elt;
     const int *lengths_elt;
     SEXP ans, lengths, from, by;
 
@@ -1161,10 +1161,10 @@ HIDDEN SEXP do_sequence(SEXP call, SEXP op, SEXP args, SEXP rho)
     ans_len = 0;
     lengths_elt = INTEGER(lengths);
     for (i = 0; i < lengths_len; i++, lengths_elt++) {
-	length = *lengths_elt;
-	if (length == NA_INTEGER || length < 0)
+	length_ = *lengths_elt;
+	if (length_ == NA_INTEGER || length_ < 0)
 	    error(_("'lengths' must be a vector of non-negative integers"));
-	ans_len += length;
+	ans_len += length_;
     }
     PROTECT(ans = allocVector(INTSXP, ans_len));
     ans_elt = INTEGER(ans);
@@ -1174,19 +1174,19 @@ HIDDEN SEXP do_sequence(SEXP call, SEXP op, SEXP args, SEXP rho)
 	    i2 = 0; /* recycle */
 	if (i3 >= by_len)
 	    i3 = 0; /* recycle */
-	length = *lengths_elt;
+	length_ = *lengths_elt;
 	from_elt = INTEGER(from)[i2];
-	if (length != 0 && from_elt == NA_INTEGER) {
+	if (length_ != 0 && from_elt == NA_INTEGER) {
 	    UNPROTECT(1);
 	    error(_("'from' contains NAs"));
 	}
 	by_elt = INTEGER(by)[i3];
-	if (length >= 2 && by_elt == NA_INTEGER) {
+	if (length_ >= 2 && by_elt == NA_INTEGER) {
 	    UNPROTECT(1);
 	    error(_("'by' contains NAs"));
 	}
-	// int to = from_elt + (length - 1) * by_elt;
-	for (k = 0, j = from_elt; k < length; j += by_elt, k++)
+	// int to = from_elt + (length_ - 1) * by_elt;
+	for (k = 0, j = from_elt; k < length_; j += by_elt, k++)
 	    *(ans_elt++) = j;
     }
     UNPROTECT(1);

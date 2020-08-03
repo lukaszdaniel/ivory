@@ -37,7 +37,7 @@ HIDDEN
 R_xlen_t Rf_asVecSize(SEXP x)
 {
     if (isVectorAtomic(x) && LENGTH(x) >= 1) {
-	switch (TYPEOF(x)) {
+	switch (x->sexptype()) {
 	case INTSXP:
 	{
 	    int res = INTEGER(x)[0];
@@ -658,10 +658,10 @@ HIDDEN SEXP do_cat(SEXP call, SEXP op, SEXP args, SEXP rho)
 		width += Rstrlen(STRING_ELT(labs, nlines % lablen), 0) + 1;
 		nlines++;
 	    }
-	    if (isString(s))
+	    if (s->isString_())
 		p = trChar(STRING_ELT(s, 0));
 	    else if (isSymbol(s)) /* length 1 */
-		p = CHAR(PRINTNAME(s));
+		p = CHAR(s->printname());
 	    else if (isVectorAtomic(s)) {
 		/* Not a string, as that is covered above.
 		   Thus the maximum size is about 60.
@@ -682,7 +682,7 @@ HIDDEN SEXP do_cat(SEXP call, SEXP op, SEXP args, SEXP rho)
 	    }
 #endif
 	    else
-		error(_("argument %d (type '%s') cannot be handled by 'cat()' function"), 1+iobj, type2char(TYPEOF(s)));
+		error(_("argument %d (type '%s') cannot be handled by 'cat()' function"), 1+iobj, type2char(s->sexptype()));
 	    /* FIXME : cat(...) should handle ANYTHING */
 	    size_t w = strlen(p);
 	    cat_sepwidth(sepr, sepw, ntot);
@@ -782,7 +782,7 @@ HIDDEN SEXP do_expression(SEXP call, SEXP op, SEXP args, SEXP rho)
 	a = args;
 	for (i = 0; i < n; i++) {
 	    if (TAG(a) != R_NilValue)
-		SET_STRING_ELT(nms, i, PRINTNAME(TAG(a)));
+		SET_STRING_ELT(nms, i, a->tag()->printname());
 	    else
 		SET_STRING_ELT(nms, i, R_BlankString);
 	    a = CDR(a);
@@ -858,12 +858,12 @@ SEXP Rf_xlengthgets(SEXP x, R_xlen_t len)
     lenx = xlength(x);
     if (lenx == len)
 	return (x);
-    PROTECT(rval = allocVector(TYPEOF(x), len));
+    PROTECT(rval = allocVector(x->sexptype(), len));
     PROTECT(xnames = getAttrib(x, R_NamesSymbol));
     if (xnames != R_NilValue)
 	names = allocVector(STRSXP, len);
     else names = R_NilValue;	/*- just for -Wall --- should we do this ? */
-    switch (TYPEOF(x)) {
+    switch (x->sexptype()) {
     case NILSXP:
 	break;
     case LGLSXP:

@@ -5271,6 +5271,14 @@ elif  test "x${want_lto}" = xcheck; then
 elif  test "x${want_lto}" != xno; then
   { $as_echo "$as_me:${as_lineno-$LINENO}: WARNING: Unknown value --enable-lto=${enableval}" >&5
 $as_echo "$as_me: WARNING: Unknown value --enable-lto=${enableval}" >&2;}
+  want_lto=no
+fi
+if test "x${want_lto}" = xno; then
+    LTO=
+  LTOALL=
+  LTO_FC=
+  LTOALL_FC=
+  LTO_LD=
 fi
 
 

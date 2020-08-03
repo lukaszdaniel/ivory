@@ -621,7 +621,7 @@ SEXP RTcl_RemoveArrayElem(SEXP args)
     return R_NilValue;
 }
 
-static void callback_closure(char * buf, int buflen, SEXP closure)
+static void callback_closure(char * buf, size_t buflen, SEXP closure)
 {
     static char tmp[21];
     SEXP formals;
@@ -654,7 +654,8 @@ static void callback_lang(char *buf, int buflen, SEXP call, SEXP env)
    assigning into the environment of the window with which the
    callback is associated */
 
-#define BUFFLEN 256
+constexpr size_t BUFFLEN = 256;
+
 SEXP dotTclcallback(SEXP args)
 {
     SEXP ans, callback = CADR(args), env;

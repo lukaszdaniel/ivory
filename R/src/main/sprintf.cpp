@@ -88,7 +88,7 @@ HIDDEN SEXP do_sprintf(SEXP call, SEXP op, SEXP args, SEXP env)
 
     SEXP format, _this, a[MAXNARGS], ans /* -Wall */ = R_NilValue;
     int ns, maxlen, lens[MAXNARGS], nthis, nstar, star_arg = 0;
-    static R_StringBuffer outbuff = {nullptr, 0, MAXELTSIZE};
+    static R_StringBuffer outbuff = R_StringBuffer();
     Rboolean has_star, use_UTF8;
 
 #define _my_sprintf(_X_)                                                               \
@@ -470,6 +470,6 @@ HIDDEN SEXP do_sprintf(SEXP call, SEXP op, SEXP args, SEXP env)
     } /* end for(ns ...) */
 
     UNPROTECT(nprotect);
-    R_FreeStringBufferL(outbuff);
+	outbuff.R_FreeStringBufferL();
     return ans;
 }

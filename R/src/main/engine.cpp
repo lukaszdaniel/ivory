@@ -1668,7 +1668,7 @@ struct VFontTab
     int maxface;
 };
 
-static VFontTab
+static constexpr VFontTab
     VFontTable[] = {
         {"HersheySerif", 1, 7},
         /*
@@ -3326,7 +3326,7 @@ int GEstring_to_pch(SEXP pch)
     if (CHAR(pch)[0] == 0) return NA_INTEGER;  /* pch = "" */
     if (pch == last_pch) return last_ipch;/* take advantage of CHARSXP cache */
     ipch = (unsigned char) CHAR(pch)[0];
-    if (IS_LATIN1(pch)) {
+    if (pch->isLatin1()) {
 	if (ipch > 127) ipch = -ipch;  /* record as Unicode */
     } else if (IS_UTF8(pch) || utf8locale) {
 	wchar_t wc = 0;

@@ -78,7 +78,7 @@ HIDDEN SEXP do_readDCF(SEXP call, SEXP op, SEXP args, SEXP env)
     regex_t blankline, contline, trailblank, regline, eblankline;
     regmatch_t regmatch[1];
     SEXP file, what, what2, retval, retval2, dims, dimnames;
-    Rconnection con = nullptr;
+    Rconn *con = nullptr;
     bool wasopen, is_eblankline;
     RCNTXT cntxt;
 
@@ -329,11 +329,10 @@ HIDDEN SEXP do_readDCF(SEXP call, SEXP op, SEXP args, SEXP env)
 
 static SEXP allocMatrixNA(SEXPTYPE mode, int nrow, int ncol)
 {
-	int k;
 	SEXP retval;
 
 	PROTECT(retval = allocMatrix(mode, nrow, ncol));
-	for (k = 0; k < LENGTH(retval); k++)
+	for (int k = 0; k < LENGTH(retval); k++)
 		SET_STRING_ELT(retval, k, NA_STRING);
 	UNPROTECT(1);
 	return (retval);
@@ -350,8 +349,7 @@ static void transferVector(SEXP s, SEXP t)
 
 static bool field_is_foldable_p(const char *field, SEXP excludes)
 {
-	int i, n = LENGTH(excludes);
-	for (i = 0; i < n; i++)
+	for (int i = 0; i < LENGTH(excludes); i++)
 	{
 		if (streql(field, CHAR(STRING_ELT(excludes, i))))
 			return false;

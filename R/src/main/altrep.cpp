@@ -50,7 +50,7 @@ static SEXP Registry = nullptr;
 static SEXP LookupClassEntry(SEXP csym, SEXP psym)
 {
     for (SEXP chain = CDR(Registry); chain != R_NilValue; chain = CDR(chain))
-	if (TAG(CAR(chain)) == csym && CADR(CAR(chain)) == psym)
+	if (chain->car()->tag() == csym && CADR(CAR(chain)) == psym)
 	    return CAR(chain);
     return nullptr;
 }
@@ -107,7 +107,7 @@ HIDDEN void R_reinit_altrep_classes(DllInfo *dll)
 
 static void SET_ALTREP_CLASS(SEXP x, SEXP class_)
 {
-    SETALTREP(x, 1);
+    x->setaltrep();
     SET_TAG(x, class_);
 }
 
@@ -256,7 +256,7 @@ static SEXP handle_namespace_error(SEXP cond, void *data) { return R_NilValue; }
 
 static SEXP ALTREP_UNSERIALIZE_CLASS(SEXP info)
 {
-    if (TYPEOF(info) == LISTSXP) {
+    if (info->sexptype() == LISTSXP) {
 	SEXP csym = ALTREP_SERIALIZED_CLASS_CLSSYM(info);
 	SEXP psym = ALTREP_SERIALIZED_CLASS_PKGSYM(info);
 	SEXP class_ = LookupClass(csym, psym);
@@ -385,12 +385,12 @@ R_xlen_t INTEGER_GET_REGION(SEXP sx, R_xlen_t i, R_xlen_t n, int *buf)
 
 int INTEGER_IS_SORTED(SEXP x)
 {
-    return ALTREP(x) ? ALTINTEGER_DISPATCH(Is_sorted, x) : UNKNOWN_SORTEDNESS;
+    return x->altrep() ? ALTINTEGER_DISPATCH(Is_sorted, x) : UNKNOWN_SORTEDNESS;
 }
 
 int INTEGER_NO_NA(SEXP x)
 {
-    return ALTREP(x) ? ALTINTEGER_DISPATCH(No_NA, x) : 0;
+    return x->altrep() ? ALTINTEGER_DISPATCH(No_NA, x) : 0;
 }
 
 HIDDEN double ALTREAL_ELT(SEXP x, R_xlen_t i)
@@ -416,12 +416,12 @@ R_xlen_t REAL_GET_REGION(SEXP sx, R_xlen_t i, R_xlen_t n, double *buf)
 
 int REAL_IS_SORTED(SEXP x)
 {
-    return ALTREP(x) ? ALTREAL_DISPATCH(Is_sorted, x) : UNKNOWN_SORTEDNESS;
+    return x->altrep() ? ALTREAL_DISPATCH(Is_sorted, x) : UNKNOWN_SORTEDNESS;
 }
 
 int REAL_NO_NA(SEXP x)
 {
-    return ALTREP(x) ? ALTREAL_DISPATCH(No_NA, x) : 0;
+    return x->altrep() ? ALTREAL_DISPATCH(No_NA, x) : 0;
 }
 
 R_xlen_t LOGICAL_GET_REGION(SEXP sx, R_xlen_t i, R_xlen_t n, int *buf)
@@ -442,13 +442,13 @@ R_xlen_t LOGICAL_GET_REGION(SEXP sx, R_xlen_t i, R_xlen_t n, int *buf)
 
 int LOGICAL_IS_SORTED(SEXP x)
 {
-    return ALTREP(x) ? ALTLOGICAL_DISPATCH(Is_sorted, x) : UNKNOWN_SORTEDNESS;
+    return x->altrep() ? ALTLOGICAL_DISPATCH(Is_sorted, x) : UNKNOWN_SORTEDNESS;
 }
 
 
 int LOGICAL_NO_NA(SEXP x)
 {
-    return ALTREP(x) ? ALTLOGICAL_DISPATCH(No_NA, x) : 0;
+    return x->altrep() ? ALTLOGICAL_DISPATCH(No_NA, x) : 0;
 }
 
 R_xlen_t RAW_GET_REGION(SEXP sx, R_xlen_t i, R_xlen_t n, Rbyte *buf)
@@ -516,12 +516,12 @@ HIDDEN void ALTSTRING_SET_ELT(SEXP x, R_xlen_t i, SEXP v)
 
 int STRING_IS_SORTED(SEXP x)
 {
-    return ALTREP(x) ? ALTSTRING_DISPATCH(Is_sorted, x) : UNKNOWN_SORTEDNESS;
+    return x->altrep() ? ALTSTRING_DISPATCH(Is_sorted, x) : UNKNOWN_SORTEDNESS;
 }
 
 int STRING_NO_NA(SEXP x)
 {
-    return ALTREP(x) ? ALTSTRING_DISPATCH(No_NA, x) : 0;
+    return x->altrep() ? ALTSTRING_DISPATCH(No_NA, x) : 0;
 }
 
 SEXP ALTINTEGER_SUM(SEXP x, Rboolean narm)
@@ -643,7 +643,7 @@ static SEXP altrep_DuplicateEX_default(SEXP x, Rboolean deep)
     if (ans &&
 	ans != x) { /* leave attributes alone if returning original */
 	/* handle attributes generically */
-	SEXP attr = ATTRIB(x);
+	SEXP attr = x->attrib_();
 	if (attr != R_NilValue) {
 	    PROTECT(ans);
 	    SET_ATTRIB(ans, deep ? duplicate(attr) : shallow_duplicate(attr));
@@ -1051,14 +1051,14 @@ SEXP R_new_altrep(R_altrep_class_t aclass, SEXP data1, SEXP data2)
 
 Rboolean R_altrep_inherits(SEXP x, R_altrep_class_t class_)
 {
-    return (Rboolean) (ALTREP(x) && ALTREP_CLASS(x) == R_SEXP(class_));
+    return Rboolean(x->altrep() && ALTREP_CLASS(x) == R_SEXP(class_));
 }
 
 extern "C" HIDDEN SEXP do_altrep_class(SEXP call, SEXP op, SEXP args, SEXP env)
 {
     checkArity(op, args);
     SEXP x = CAR(args);
-    if (ALTREP(x))
+    if (x->altrep())
     {
         SEXP info = ALTREP_SERIALIZED_CLASS(x);
         SEXP val = allocVector(STRSXP, 2);

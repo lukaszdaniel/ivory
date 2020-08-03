@@ -35,8 +35,7 @@ extern "C" {
   typedef struct R_altcls *R_altrep_class_t;
 #endif
 
-SEXP
-R_new_altrep(R_altrep_class_t aclass, SEXP data1, SEXP data2);
+SEXP R_new_altrep(R_altrep_class_t aclass, SEXP data1, SEXP data2);
 
 R_altrep_class_t
 R_make_altstring_class(const char *cname, const char *pname, DllInfo *info);
@@ -68,8 +67,7 @@ typedef const void *(*R_altvec_Dataptr_or_null_method_t)(SEXP);
 typedef SEXP (*R_altvec_Extract_subset_method_t)(SEXP, SEXP, SEXP);
 
 typedef int (*R_altinteger_Elt_method_t)(SEXP, R_xlen_t);
-typedef R_xlen_t
-(*R_altinteger_Get_region_method_t)(SEXP, R_xlen_t, R_xlen_t, int *);
+typedef R_xlen_t (*R_altinteger_Get_region_method_t)(SEXP, R_xlen_t, R_xlen_t, int *);
 typedef int (*R_altinteger_Is_sorted_method_t)(SEXP);
 typedef int (*R_altinteger_No_NA_method_t)(SEXP);
 typedef SEXP (*R_altinteger_Sum_method_t)(SEXP, Rboolean); 
@@ -77,8 +75,7 @@ typedef SEXP (*R_altinteger_Min_method_t)(SEXP, Rboolean);
 typedef SEXP (*R_altinteger_Max_method_t)(SEXP, Rboolean);
 
 typedef double (*R_altreal_Elt_method_t)(SEXP, R_xlen_t);
-typedef R_xlen_t
-(*R_altreal_Get_region_method_t)(SEXP, R_xlen_t, R_xlen_t, double *);
+typedef R_xlen_t (*R_altreal_Get_region_method_t)(SEXP, R_xlen_t, R_xlen_t, double *);
 typedef int (*R_altreal_Is_sorted_method_t)(SEXP);
 typedef int (*R_altreal_No_NA_method_t)(SEXP);
 typedef SEXP (*R_altreal_Sum_method_t)(SEXP, Rboolean); 
@@ -86,8 +83,7 @@ typedef SEXP (*R_altreal_Min_method_t)(SEXP, Rboolean);
 typedef SEXP (*R_altreal_Max_method_t)(SEXP, Rboolean);
 
 typedef int (*R_altlogical_Elt_method_t)(SEXP, R_xlen_t);
-typedef R_xlen_t
-(*R_altlogical_Get_region_method_t)(SEXP, R_xlen_t, R_xlen_t, int *);
+typedef R_xlen_t (*R_altlogical_Get_region_method_t)(SEXP, R_xlen_t, R_xlen_t, int *);
 typedef int (*R_altlogical_Is_sorted_method_t)(SEXP);
 typedef int (*R_altlogical_No_NA_method_t)(SEXP);
 typedef SEXP (*R_altlogical_Sum_method_t)(SEXP, Rboolean);
@@ -105,10 +101,9 @@ typedef void (*R_altstring_Set_elt_method_t)(SEXP, R_xlen_t, SEXP);
 typedef int (*R_altstring_Is_sorted_method_t)(SEXP);
 typedef int (*R_altstring_No_NA_method_t)(SEXP);
 
-#define DECLARE_METHOD_SETTER(CNAME, MNAME)				\
-    void								\
-    R_set_##CNAME##_##MNAME##_method(R_altrep_class_t cls,		\
-				     R_##CNAME##_##MNAME##_method_t fun);
+#define DECLARE_METHOD_SETTER(CNAME, MNAME)                   \
+  void R_set_##CNAME##_##MNAME##_method(R_altrep_class_t cls, \
+                                        R_##CNAME##_##MNAME##_method_t fun);
 
 DECLARE_METHOD_SETTER(altrep, UnserializeEX)
 DECLARE_METHOD_SETTER(altrep, Unserialize)

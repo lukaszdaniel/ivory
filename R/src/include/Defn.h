@@ -27,8 +27,6 @@
 #error Defn.h can only be included in C++ files
 #endif
 
-#define isRaw(x) (TYPEOF(x) == RAWSXP)
-
 /* To test the write barrier used by the generational collector,
    define TESTING_WRITE_BARRIER.  This makes the internal structure of
    SEXPRECs visible only inside of files that explicitly define
@@ -56,18 +54,18 @@ constexpr int MAXELTSIZE = 8192; /* Used as a default for string buffer sizes, \
 #include <R_ext/Complex.h>
 
 void Rf_CoercionWarning(int); /* warning code */
-int Rf_LogicalFromInteger(int, int*);
-int Rf_LogicalFromReal(double, int*);
-int Rf_LogicalFromComplex(Rcomplex, int*);
-int Rf_IntegerFromLogical(int, int*);
-int Rf_IntegerFromReal(double, int*);
-int Rf_IntegerFromComplex(Rcomplex, int*);
-double Rf_RealFromLogical(int, int*);
-double Rf_RealFromInteger(int, int*);
-double Rf_RealFromComplex(Rcomplex, int*);
-Rcomplex Rf_ComplexFromLogical(int, int*);
-Rcomplex Rf_ComplexFromInteger(int, int*);
-Rcomplex Rf_ComplexFromReal(double, int*);
+int Rf_LogicalFromInteger(int, int&);
+int Rf_LogicalFromReal(double, int&);
+int Rf_LogicalFromComplex(Rcomplex, int&);
+int Rf_IntegerFromLogical(int, int&);
+int Rf_IntegerFromReal(double, int&);
+int Rf_IntegerFromComplex(Rcomplex, int&);
+double Rf_RealFromLogical(int, int&);
+double Rf_RealFromInteger(int, int&);
+double Rf_RealFromComplex(Rcomplex, int&);
+Rcomplex Rf_ComplexFromLogical(int, int&);
+Rcomplex Rf_ComplexFromInteger(int, int&);
+Rcomplex Rf_ComplexFromReal(double, int&);
 
 #define CALLED_FROM_DEFN_H 1
 #include <Rinternals.h>		/*-> Arith.h, Boolean.h, Complex.h, Error.h,
@@ -117,6 +115,18 @@ enum CharsetBit
 #define HASHASH_MASK 1
 /**** HASHASH uses the first bit -- see HASHASH_MASK defined below */
 
+
+inline auto SEXPREC::isBytes() const { return this->sxpinfo.gp & BYTES_MASK; }
+inline void SEXPREC::setBytes() { this->sxpinfo.gp |= BYTES_MASK; }
+inline auto SEXPREC::isLatin1() const { return this->sxpinfo.gp & LATIN1_MASK; }
+inline void SEXPREC::setLatin1() { this->sxpinfo.gp |= LATIN1_MASK; }
+inline auto SEXPREC::isAscii() const { return this->sxpinfo.gp & ASCII_MASK; }
+inline void SEXPREC::setAscii() { this-> sxpinfo.gp |= ASCII_MASK; }
+inline auto SEXPREC::isUTF8() const { return this->sxpinfo.gp & UTF8_MASK; }
+inline void SEXPREC::setUTF8() { this->sxpinfo.gp |= UTF8_MASK; }
+inline auto SEXPREC::encKnown() const { return this->sxpinfo.gp & (LATIN1_MASK | UTF8_MASK); }
+inline auto SEXPREC::isCached() const { return this->sxpinfo.gp & CACHED_MASK; }
+inline void SEXPREC::setCached() { this->sxpinfo.gp |= CACHED_MASK; }
 
 #ifdef USE_RINTERNALS
 #define IS_BYTES(x) ((x)->sxpinfo.gp & BYTES_MASK)
@@ -438,8 +448,8 @@ inline size_t PTR2VEC(int n) { return (n > 0) ? (std::size_t(n)*sizeof(SEXP) - 1
 
 /* Bindings */
 /* use the same bits (15 and 14) in symbols and bindings */
-#define ACTIVE_BINDING_MASK (1 << 15)
-#define BINDING_LOCK_MASK (1 << 14)
+constexpr int ACTIVE_BINDING_MASK = (1 << 15);
+constexpr int BINDING_LOCK_MASK = (1 << 14);
 #define SPECIAL_BINDING_MASK (ACTIVE_BINDING_MASK | BINDING_LOCK_MASK)
 #define IS_ACTIVE_BINDING(b) ((b)->sxpinfo.gp & ACTIVE_BINDING_MASK)
 #define BINDING_IS_LOCKED(b) ((b)->sxpinfo.gp & BINDING_LOCK_MASK)
@@ -459,12 +469,12 @@ inline size_t PTR2VEC(int n) { return (n > 0) ? (std::size_t(n)*sizeof(SEXP) - 1
     } while (0)
 #define UNLOCK_BINDING(b) ((b)->sxpinfo.gp &= (~BINDING_LOCK_MASK))
 
-#define BASE_SYM_CACHED_MASK (1 << 13)
+constexpr int BASE_SYM_CACHED_MASK = (1 << 13);
 #define SET_BASE_SYM_CACHED(b) ((b)->sxpinfo.gp |= BASE_SYM_CACHED_MASK)
 #define UNSET_BASE_SYM_CACHED(b) ((b)->sxpinfo.gp &= (~BASE_SYM_CACHED_MASK))
 #define BASE_SYM_CACHED(b) ((b)->sxpinfo.gp & BASE_SYM_CACHED_MASK)
 
-#define SPECIAL_SYMBOL_MASK (1 << 12)
+constexpr int SPECIAL_SYMBOL_MASK = (1 << 12);
 #define SET_SPECIAL_SYMBOL(b) ((b)->sxpinfo.gp |= SPECIAL_SYMBOL_MASK)
 #define UNSET_SPECIAL_SYMBOL(b) ((b)->sxpinfo.gp &= (~SPECIAL_SYMBOL_MASK))
 #define IS_SPECIAL_SYMBOL(b) ((b)->sxpinfo.gp & SPECIAL_SYMBOL_MASK)
@@ -756,9 +766,6 @@ enum MATPROD_TYPE
 };
 
 /* File Handling */
-/*
-#define R_EOF	65535
-*/
 constexpr int R_EOF = -1;
 
 
@@ -908,7 +915,7 @@ extern0 Rboolean R_DisableNLinBrowser	INI_as(FALSE);
 extern0 char R_BrowserLastCommand	INI_as('n');
 
 /* Initialization of the R environment when it is embedded */
-extern int Rf_initEmbeddedR(int argc, char **argv);
+extern int Rf_initEmbeddedR(int argc, char *argv[]);
 
 /* GUI type */
 
@@ -937,7 +944,7 @@ extern SEXP R_cmpfun1(SEXP); /* unconditional fresh compilation */
 extern void R_init_jit_enabled(void);
 extern void R_initAssignSymbols(void);
 #ifdef R_USE_SIGNALS
-extern SEXP R_findBCInterpreterSrcref(RCNTXT*);
+extern SEXP R_findBCInterpreterSrcref(RCNTXT *);
 #endif
 extern SEXP R_getCurrentSrcref();
 extern SEXP R_getBCInterpreterExpression();
@@ -1174,8 +1181,7 @@ void R_ResetConsole(void);
 extern "C" void R_FlushConsole(void);
 extern "C" void R_ClearerrConsole(void);
 void R_Busy(int);
-int R_ShowFiles(int, const char **, const char **, const char *,
-                bool, const char *);
+int R_ShowFiles(int, const char **, const char **, const char *, bool, const char *);
 int R_EditFiles(int, const char **, const char **, const char *);
 size_t R_ChooseFile(int, char *, size_t);
 extern "C" char *R_HomeDir(void);
@@ -1220,14 +1226,14 @@ enum DeparseOptionBits
 };
 
 /* Coercion functions */
-int Rf_LogicalFromString(SEXP, int*);
-int Rf_IntegerFromString(SEXP, int*);
-double Rf_RealFromString(SEXP, int*);
-Rcomplex Rf_ComplexFromString(SEXP, int*);
-SEXP Rf_StringFromLogical(int, int*);
-SEXP Rf_StringFromInteger(int, int*);
-SEXP Rf_StringFromReal(double, int*);
-SEXP Rf_StringFromComplex(Rcomplex, int*);
+int Rf_LogicalFromString(SEXP, int&);
+int Rf_IntegerFromString(SEXP, int&);
+double Rf_RealFromString(SEXP, int&);
+Rcomplex Rf_ComplexFromString(SEXP, int&);
+SEXP Rf_StringFromLogical(int, int&);
+SEXP Rf_StringFromInteger(int, int&);
+SEXP Rf_StringFromReal(double, int&);
+SEXP Rf_StringFromComplex(Rcomplex, int&);
 SEXP Rf_EnsureString(SEXP);
 
 /* ../../main/print.cpp : */
@@ -1324,7 +1330,7 @@ extern "C" NORET void Rf_jump_to_toplevel(void);
 void Rf_KillAllDevices(void);
 SEXP Rf_levelsgets(SEXP, SEXP);
 extern "C" void Rf_mainloop(void);
-SEXP Rf_makeSubscript(SEXP, SEXP, R_xlen_t *, SEXP);
+SEXP Rf_makeSubscript(SEXP, SEXP, R_xlen_t &, SEXP);
 SEXP Rf_markKnown(const char *, SEXP);
 SEXP Rf_mat2indsub(SEXP, SEXP, SEXP);
 SEXP Rf_matchArg(SEXP, SEXP*);
@@ -1466,7 +1472,7 @@ const char *Rf_EncodeReal2(double, int, int, int);
 const char *Rf_EncodeChar(SEXP);
 
 /* main/raw.cpp */
-int mbrtoint(int *w, const char *s);
+int mbrtoint(int &w, const char *s);
 
 /* main/sort.cpp */
 void orderVector1(int *indx, int n, SEXP key, Rboolean nalast,
@@ -1482,12 +1488,11 @@ SEXP R_subassign3_dflt(SEXP, SEXP, SEXP, SEXP);
 
 /* main/util.cpp */
 NORET void UNIMPLEMENTED_TYPE(const char *s, SEXP x);
-NORET void UNIMPLEMENTED_TYPEt(const char *s, SEXPTYPE t);
+NORET void UNIMPLEMENTED_TYPE(const char *s, const SEXPTYPE t);
 bool Rf_strIsASCII(const char *str);
 int utf8clen(char c);
 int Rf_AdobeSymbol2ucs2(int n);
-double R_strtod5(const char *str, char **endptr, char dec,
-		 Rboolean NA, int exact);
+double R_strtod5(const char *str, char **endptr, char dec, Rboolean NA, int exact);
 
 using R_ucs2_t = unsigned short;
 size_t Rf_mbcsToUcs2(const char *in, R_ucs2_t *out, int nout, int enc);
@@ -1519,7 +1524,7 @@ void resetICUcollator(bool disable); /* from util.cpp */
 void dt_invalidate_locale(); /* from Rstrptime.h */
 extern int R_OutputCon; /* from connections.cpp */
 extern int R_InitReadItemDepth, R_ReadItemDepth; /* from serialize.cpp */
-void get_current_mem(size_t *,size_t *,size_t *); /* from memory.cpp */
+void get_current_mem(size_t &,size_t &, size_t &); /* from memory.cpp */
 unsigned long get_duplicate_counter(void);  /* from duplicate.cpp */
 void reset_duplicate_counter(void);  /* from duplicate.cpp */
 void Rf_BindDomain(char *); /* from main.cpp */
@@ -1617,8 +1622,8 @@ extern void *alloca(size_t);
 #endif
 
 // for reproducibility for now: use exp10 or pown later if accurate enough.
-#define Rexp10(x) pow(10.0, x)
-
+template <typename T>
+inline auto Rexp10(const T &x) { return std::pow(10.0, x); }
 
 #endif /* DEFN_H_ */
 /*
