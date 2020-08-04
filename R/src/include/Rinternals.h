@@ -290,15 +290,15 @@ typedef struct SEXPREC *SEXP;
 struct sxpinfo_struct
 {
     SEXPTYPE type : FULL_TYPE_BITS;
-    unsigned int scalar : 1;
-    unsigned int obj : 1;
-    unsigned int alt : 1;
+    bool scalar;
+    bool obj;
+    bool alt;
     unsigned int gp : 16;
-    unsigned int mark : 1;
-    unsigned int debug : 1;
-    unsigned int trace : 1; /* functions and memory tracing */
-    unsigned int spare : 1; /* used on closures and when REFCNT is defined */
-    unsigned int gcgen : 1; /* old generation number */
+    bool mark;
+    bool debug;
+    bool trace; /* functions and memory tracing */
+    bool spare; /* used on closures and when REFCNT is defined */
+    bool gcgen; /* old generation number */
     unsigned int gccls : 3; /* node class */
     unsigned int named : NAMED_BITS;
     unsigned int extra : 29 - NAMED_BITS; /* used for immediate bindings */
@@ -360,7 +360,7 @@ struct promsxp_struct
 
 /* The standard node structure consists of a header followed by the
    node data. */
-typedef struct SEXPREC
+struct SEXPREC
 {
     struct sxpinfo_struct sxpinfo;
     struct SEXPREC *attrib;
@@ -375,14 +375,14 @@ typedef struct SEXPREC
         struct closxp_struct closxp;
         struct promsxp_struct promsxp;
     } u;
-#ifdef COMPILING_IVORY
+
     SEXPTYPE sexptype() const { return this->sxpinfo.type; }
     void setsexptype(const SEXPTYPE& type) { this->sxpinfo.type = type; }
     bool sexptypeEqual(const SEXPTYPE& type) const { return this->sxpinfo.type == type; }
     bool sexptypeNotEqual(const SEXPTYPE& type) const { return !this->sexptypeEqual(type); }
     auto altrep() const { return this->sxpinfo.alt; }
-    void setaltrep() { this->sxpinfo.alt = 1; }
-    void unsetaltrep() { this->sxpinfo.alt = 0; }
+    void setaltrep() { this->sxpinfo.alt = true; }
+    void unsetaltrep() { this->sxpinfo.alt = false; }
     bool isPrimitive_() const { return this->sexptypeEqual(BUILTINSXP) || this->sexptypeEqual(SPECIALSXP); }
     bool isFunction_() const { return this->sexptypeEqual(CLOSXP) || this->isPrimitive_(); }
     bool isPairList_() const
@@ -447,29 +447,29 @@ typedef struct SEXPREC
     auto car() const { return this->u.listsxp.carval; }
     auto cdr() const { return this->u.listsxp.cdrval; }
     const char *translateCharUTF8_() const;
-#endif
-} SEXPREC;
+
+};
 
 /* The generational collector uses a reduced version of SEXPREC as a
    header in vector nodes.  The layout MUST be kept consistent with
    the SEXPREC definition. The standard SEXPREC takes up 7 words
    and the reduced version takes 6 words on most 64-bit systems. On most
    32-bit systems, SEXPREC takes 8 words and the reduced version 7 words. */
-typedef struct VECTOR_SEXPREC
+struct VECTOR_SEXPREC
 {
     struct sxpinfo_struct sxpinfo;
     struct SEXPREC *attrib;
     struct SEXPREC *gengc_next_node;
     struct SEXPREC *gengc_prev_node;
     struct vecsxp_struct vecsxp;
-} VECTOR_SEXPREC;
-typedef struct VECTOR_SEXPREC *VECSEXP;
+};
+using VECSEXP = struct VECTOR_SEXPREC *;
 
-typedef union
+union SEXPREC_ALIGN
 {
     VECTOR_SEXPREC s;
     double align;
-} SEXPREC_ALIGN;
+};
 
 /* General Cons Cell Attributes */
 #define ATTRIB(x)	((x)->attrib)

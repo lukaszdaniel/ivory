@@ -1811,12 +1811,14 @@ SEXP absoluteUnits(SEXP units) {
 	UNPROTECT(3);
 	return absolutes;
 }
+
 SEXP multUnit(SEXP unit, double value) {
 	SEXP mult = PROTECT(shallow_duplicate(unit));
 	SET_VECTOR_ELT(mult, 0, Rf_ScalarReal(value * uValue(mult)));
 	UNPROTECT(1);
 	return mult;
 }
+
 SEXP multUnits(SEXP units, SEXP values) {
     int nValues = LENGTH(values);
 	int n = LENGTH(units) < nValues ? nValues : LENGTH(units);
@@ -1848,6 +1850,7 @@ SEXP multUnits(SEXP units, SEXP values) {
 	UNPROTECT(2);
 	return multiplied;
 }
+
 SEXP addUnit(SEXP u1, SEXP u2) {
 	SEXP result = PROTECT(allocVector(VECSXP, 3));
 
@@ -1915,10 +1918,13 @@ SEXP addUnit(SEXP u1, SEXP u2) {
 	UNPROTECT(2);
 	return result;
 }
-SEXP addUnits(SEXP u1, SEXP u2) {
-    int n = LENGTH(u1) < LENGTH(u2) ? LENGTH(u2) : LENGTH(u1);
+
+SEXP addUnits(SEXP u1, SEXP u2)
+{
+	int n = std::max(LENGTH(u1), LENGTH(u2));
 	SEXP added = PROTECT(allocVector(VECSXP, n));
-	for (int i = 0; i < n; i++) {
+	for (int i = 0; i < n; i++)
+	{
 		SEXP unit1 = PROTECT(unitScalar(u1, i));
 		SEXP unit2 = PROTECT(unitScalar(u2, i));
 		SET_VECTOR_ELT(added, i, addUnit(unit1, unit2));
@@ -1931,18 +1937,21 @@ SEXP addUnits(SEXP u1, SEXP u2) {
 	UNPROTECT(2);
 	return added;
 }
-SEXP flipUnits(SEXP units) {
+
+SEXP flipUnits(SEXP units)
+{
 	SEXP mone = PROTECT(Rf_ScalarReal(-1.0));
 	SEXP ans = multUnits(units, mone);
 	UNPROTECT(1); /* mone */
 	return ans;
 }
+
 SEXP summaryUnits(SEXP units, SEXP op_type) {
 	int n = 0;
 	int m = LENGTH(units);
 	for (int i = 0; i < m; i++) {
 		int nTemp = LENGTH(VECTOR_ELT(units, i));
-		n = n < nTemp ? nTemp : n;
+		n = std::max(n, nTemp);
 	}
 	int type = INTEGER(op_type)[0];
 	SEXP out = PROTECT(allocVector(VECSXP, n));
@@ -1955,7 +1964,7 @@ SEXP summaryUnits(SEXP units, SEXP op_type) {
 
 	for (int i = 0; i < n; i++) {
 		int k = 0;
-		int first_type, current_type;
+		int first_type = 0, current_type = 0;
 		SEXP unit = SET_VECTOR_ELT(out, i, allocVector(VECSXP, 3));
 		SEXP first_data;
 		for (int j = 0; j < m; j++) {
