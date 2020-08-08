@@ -85,6 +85,7 @@
 #define R_USE_SIGNALS 1
 #include <Defn.h>
 #include <Localization.h>
+#include <Rinterface.h>
 #include <Internal.h>
 #include <R_ext/GraphicsEngine.h> /* GEDevDesc, GEgetDevice */
 #include <R_ext/Rdynload.h>
@@ -3024,8 +3025,7 @@ SEXP Rf_allocFormalsList5(SEXP sym1, SEXP sym2, SEXP sym3, SEXP sym4, SEXP sym5)
     return allocFormalsList(5, sym1, sym2, sym3, sym4, sym5);
 }
 
-SEXP Rf_allocFormalsList6(SEXP sym1, SEXP sym2, SEXP sym3, SEXP sym4,
-		       SEXP sym5, SEXP sym6)
+SEXP Rf_allocFormalsList6(SEXP sym1, SEXP sym2, SEXP sym3, SEXP sym4, SEXP sym5, SEXP sym6)
 {
     return allocFormalsList(6, sym1, sym2, sym3, sym4, sym5, sym6);
 }
@@ -4384,7 +4384,7 @@ void (SET_PRINTNAME)(SEXP x, SEXP v) { FIX_REFCNT(x, PRINTNAME(x), v); CHECK_OLD
 void (SET_SYMVALUE)(SEXP x, SEXP v)
 {
     if (SYMVALUE(x) == v)
-	return;
+        return;
     FIX_BINDING_REFCNT(x, SYMVALUE(x), v);
     CHECK_OLD_TO_NEW(x, v);
     SYMVALUE(x) = v;
@@ -4576,8 +4576,7 @@ static void R_EndMemReporting()
     return;
 }
 
-static void R_InitMemReporting(SEXP filename, int append,
-                               R_size_t threshold)
+static void R_InitMemReporting(SEXP filename, int append, R_size_t threshold)
 {
     if (R_MemReportingOutfile)
         R_EndMemReporting();
@@ -4596,14 +4595,14 @@ SEXP do_Rprofmem(SEXP args)
     int append_mode;
 
     if (!isString(CAR(args)) || (LENGTH(CAR(args))) != 1)
-	error(_("invalid '%s' argument"), "filename");
+        error(_("invalid '%s' argument"), "filename");
     append_mode = asLogical(CADR(args));
     filename = STRING_ELT(CAR(args), 0);
-    threshold = (R_size_t) REAL(CADDR(args))[0];
+    threshold = (R_size_t)REAL(CADDR(args))[0];
     if (strlen(CHAR(filename)))
-	R_InitMemReporting(filename, append_mode, threshold);
+        R_InitMemReporting(filename, append_mode, threshold);
     else
-	R_EndMemReporting();
+        R_EndMemReporting();
     return R_NilValue;
 }
 

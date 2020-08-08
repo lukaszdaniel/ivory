@@ -38,8 +38,8 @@
 #define ALTREP_CLASS_SERIALIZED_CLASS(x) ATTRIB(x)
 #define SET_ALTREP_CLASS_SERIALIZED_CLASS(x, csym, psym, stype) \
     SET_ATTRIB(x, list3(csym, psym, stype))
-#define ALTREP_SERIALIZED_CLASS_CLSSYM(x) CAR(x)
-#define ALTREP_SERIALIZED_CLASS_PKGSYM(x) CADR(x)
+#define ALTREP_SERIALIZED_CLASS_CLSSYM(x) (CAR(x))
+#define ALTREP_SERIALIZED_CLASS_PKGSYM(x) (CADR(x))
 #define ALTREP_SERIALIZED_CLASS_TYPE(x) INTEGER0(CADDR(x))[0]
 
 #define ALTREP_CLASS_BASE_TYPE(x) \
@@ -50,7 +50,7 @@ static SEXP Registry = nullptr;
 static SEXP LookupClassEntry(SEXP csym, SEXP psym)
 {
     for (SEXP chain = CDR(Registry); chain != R_NilValue; chain = CDR(chain))
-	if (chain->car()->tag() == csym && CADR(CAR(chain)) == psym)
+	if (TAG(CAR(chain)) == csym && CADR(CAR(chain)) == psym)
 	    return CAR(chain);
     return nullptr;
 }

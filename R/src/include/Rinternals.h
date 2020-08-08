@@ -260,6 +260,22 @@ enum SEXPTYPE
 #define MAX_NUM_SEXPTYPE (1 << FULL_TYPE_BITS)
 
 typedef struct SEXPREC *SEXP;
+typedef struct SEXPREC RObject;
+#if 0
+struct Symbol;
+struct BuiltInFunction;
+struct Environment;
+struct Closure;
+struct Promise;
+struct RList;
+#else
+typedef struct SEXPREC Symbol;
+typedef struct SEXPREC BuiltInFunction;
+typedef struct SEXPREC Environment;
+typedef struct SEXPREC Closure;
+typedef struct SEXPREC Promise;
+typedef struct SEXPREC RList;
+#endif
 
 
 /* Define SWITCH_TO_NAMED to use the 'NAMED' mechanism instead of
@@ -375,7 +391,7 @@ struct SEXPREC
         struct closxp_struct closxp;
         struct promsxp_struct promsxp;
     } u;
-
+    // virtual ~SEXPREC() = default;
     SEXPTYPE sexptype() const { return this->sxpinfo.type; }
     void setsexptype(const SEXPTYPE& type) { this->sxpinfo.type = type; }
     bool sexptypeEqual(const SEXPTYPE& type) const { return this->sxpinfo.type == type; }
@@ -449,7 +465,61 @@ struct SEXPREC
     const char *translateCharUTF8_() const;
 
 };
+#if 0
+struct Symbol : SEXPREC {
+    struct {
+        struct symsxp_struct symsxp;
+    } u;
+    auto printname() const {
+        return this->u.symsxp.pname;
+    }
+    auto symvalue() const {
+        return this->u.symsxp.value;
+    }
+    auto internal() const {
+        return this->u.symsxp.internal;
+    }
+};
 
+struct Environment : SEXPREC {
+    struct {
+        struct envsxp_struct envsxp;
+    } u;
+};
+
+struct BuiltInFunction : SEXPREC {
+    struct {
+        struct primsxp_struct primsxp;
+    } u;
+};
+
+struct Closure : SEXPREC {
+    struct {
+        struct closxp_struct closxp;
+    } u;
+};
+
+struct Promise : SEXPREC {
+    struct {
+        struct promsxp_struct promsxp;
+    } u;
+};
+
+struct RList : SEXPREC {
+    struct {
+        struct listsxp_struct listsxp;
+    } u;
+    auto tag() const {
+        return this->u.listsxp.tagval;
+    }
+    auto car() const {
+        return this->u.listsxp.carval;
+    }
+    auto cdr() const {
+        return this->u.listsxp.cdrval;
+    }
+};
+#endif
 /* The generational collector uses a reduced version of SEXPREC as a
    header in vector nodes.  The layout MUST be kept consistent with
    the SEXPREC definition. The standard SEXPREC takes up 7 words
@@ -695,11 +765,11 @@ union SEXPREC_ALIGN
 
 /* List Access Macros */
 /* These also work for ... objects */
-#define LISTVAL(x)	((x)->u.listsxp)
-#define TAG(e)		((e)->u.listsxp.tagval)
-#define CAR0(e)		((e)->u.listsxp.carval)
-#define EXTPTR_PTR(e)	((e)->u.listsxp.carval)
-#define CDR(e)		((e)->u.listsxp.cdrval)
+#define LISTVAL(x)	(((RList*)x)->u.listsxp)
+#define TAG(e)		(((RList*)e)->u.listsxp.tagval)
+#define CAR0(e)		(((RList*)e)->u.listsxp.carval)
+#define EXTPTR_PTR(e)	(((RList*)e)->u.listsxp.carval)
+#define CDR(e)		(((RList*)e)->u.listsxp.cdrval)
 #define CAAR(e)		CAR(CAR(e))
 #define CDAR(e)		CDR(CAR(e))
 #define CADR(e)		CAR(CDR(e))
@@ -780,18 +850,18 @@ typedef union
 #endif
 
 /* Closure Access Macros */
-#define FORMALS(x)	((x)->u.closxp.formals)
-#define BODY(x)		((x)->u.closxp.body)
-#define CLOENV(x)	((x)->u.closxp.env)
+#define FORMALS(x)	((dynamic_cast<Closure*>(x))->u.closxp.formals)
+#define BODY(x)		((dynamic_cast<Closure*>(x))->u.closxp.body)
+#define CLOENV(x)	((dynamic_cast<Closure*>(x))->u.closxp.env)
 #define RDEBUG(x)	((x)->sxpinfo.debug)
 #define SET_RDEBUG(x,v)	(((x)->sxpinfo.debug)=(v))
 #define RSTEP(x)	((x)->sxpinfo.spare)
 #define SET_RSTEP(x,v)	(((x)->sxpinfo.spare)=(v))
 
 /* Symbol Access Macros */
-#define PRINTNAME(x)	((x)->u.symsxp.pname)
-#define SYMVALUE(x)	((x)->u.symsxp.value)
-#define INTERNAL(x)	((x)->u.symsxp.internal)
+#define PRINTNAME(x)	((dynamic_cast<Symbol*>(x))->u.symsxp.pname)
+#define SYMVALUE(x)	((dynamic_cast<Symbol*>(x))->u.symsxp.value)
+#define INTERNAL(x)	((dynamic_cast<Symbol*>(x))->u.symsxp.internal)
 #define DDVAL_MASK	1
 #define DDVAL(x)	((x)->sxpinfo.gp & DDVAL_MASK) /* for ..1, ..2 etc */
 #define SET_DDVAL_BIT(x) (((x)->sxpinfo.gp) |= DDVAL_MASK)
@@ -799,9 +869,9 @@ typedef union
 #define SET_DDVAL(x,v) if(v) {SET_DDVAL_BIT(x);} else {UNSET_DDVAL_BIT(x);} /* for ..1, ..2 etc */
 
 /* Environment Access Macros */
-#define FRAME(x)	((x)->u.envsxp.frame)
-#define ENCLOS(x)	((x)->u.envsxp.enclos)
-#define HASHTAB(x)	((x)->u.envsxp.hashtab)
+#define FRAME(x)	((dynamic_cast<Environment*>(x))->u.envsxp.frame)
+#define ENCLOS(x)	((dynamic_cast<Environment*>(x))->u.envsxp.enclos)
+#define HASHTAB(x)	((dynamic_cast<Environment*>(x))->u.envsxp.hashtab)
 #define ENVFLAGS(x)	((x)->sxpinfo.gp)	/* for environments */
 #define SET_ENVFLAGS(x,v)	(((x)->sxpinfo.gp)=(v))
 
@@ -1216,21 +1286,21 @@ typedef int PROTECT_INDEX;
 #define PROTECT_WITH_INDEX(x,i) R_ProtectWithIndex(x,i)
 #define REPROTECT(x,i) R_Reprotect(x,i)
 
-/* Evaluation Environment */
-LibExtern SEXP	R_GlobalEnv;	    /* The "global" environment */
+/* Evaluation SEXP */
+LibExtern SEXP R_GlobalEnv;	    /* The "global" environment */
 
-LibExtern SEXP  R_EmptyEnv;	    /* An empty environment at the root of the
+LibExtern SEXP R_EmptyEnv;	    /* An empty environment at the root of the
 				    	environment tree */
-LibExtern SEXP  R_BaseEnv;	    /* The base environment; formerly R_NilValue */
-LibExtern SEXP	R_BaseNamespace;    /* The (fake) namespace for base */
+LibExtern SEXP R_BaseEnv;	    /* The base environment; formerly R_NilValue */
+LibExtern SEXP R_BaseNamespace;    /* The (fake) namespace for base */
 LibExtern SEXP	R_NamespaceRegistry;/* Registry for registered namespaces */
 
 LibExtern SEXP	R_Srcref;           /* Current srcref, for debuggers */
 
 /* Special Values */
 LibExtern SEXP	R_NilValue;	    /* The nil object */
-LibExtern SEXP	R_UnboundValue;	    /* Unbound marker */
-LibExtern SEXP	R_MissingArg;	    /* Missing argument marker */
+LibExtern SEXP R_UnboundValue;	    /* Unbound marker */
+LibExtern SEXP R_MissingArg;	    /* Missing argument marker */
 LibExtern SEXP	R_InBCInterpreter;  /* To be found in BC interp. state
 				       (marker) */
 LibExtern SEXP	R_CurrentExpression; /* Use current expression (marker) */
@@ -1242,44 +1312,44 @@ extern
 SEXP	R_RestartToken;     /* Marker for restarted function calls */
 
 /* Symbol Table Shortcuts */
-LibExtern SEXP	R_AsCharacterSymbol;/* "as.character" */
-LibExtern SEXP	R_baseSymbol; // <-- backcompatible version of:
-LibExtern SEXP	R_BaseSymbol;	// "base"
-LibExtern SEXP	R_BraceSymbol;	    /* "{" */
-LibExtern SEXP	R_Bracket2Symbol;   /* "[[" */
-LibExtern SEXP	R_BracketSymbol;    /* "[" */
-LibExtern SEXP	R_ClassSymbol;	    /* "class" */
-LibExtern SEXP	R_DeviceSymbol;	    /* ".Device" */
-LibExtern SEXP	R_DimNamesSymbol;   /* "dimnames" */
-LibExtern SEXP	R_DimSymbol;	    /* "dim" */
-LibExtern SEXP	R_DollarSymbol;	    /* "$" */
-LibExtern SEXP	R_DotsSymbol;	    /* "..." */
-LibExtern SEXP	R_DoubleColonSymbol;// "::"
-LibExtern SEXP	R_DropSymbol;	    /* "drop" */
-LibExtern SEXP	R_EvalSymbol;	    /* "eval" */
-LibExtern SEXP	R_LastvalueSymbol;  /* ".Last.value" */
-LibExtern SEXP	R_LevelsSymbol;	    /* "levels" */
-LibExtern SEXP	R_ModeSymbol;	    /* "mode" */
-LibExtern SEXP	R_NaRmSymbol;	    /* "na.rm" */
-LibExtern SEXP	R_NameSymbol;	    /* "name" */
-LibExtern SEXP	R_NamesSymbol;	    /* "names" */
-LibExtern SEXP	R_NamespaceEnvSymbol;// ".__NAMESPACE__."
-LibExtern SEXP	R_PackageSymbol;    /* "package" */
-LibExtern SEXP	R_PreviousSymbol;   /* "previous" */
-LibExtern SEXP	R_QuoteSymbol;	    /* "quote" */
-LibExtern SEXP	R_RowNamesSymbol;   /* "row.names" */
-LibExtern SEXP	R_SeedsSymbol;	    /* ".Random.seed" */
-LibExtern SEXP	R_SortListSymbol;   /* "sort.list" */
-LibExtern SEXP	R_SourceSymbol;	    /* "source" */
-LibExtern SEXP	R_SpecSymbol;	// "spec"
-LibExtern SEXP	R_TripleColonSymbol;// ":::"
-LibExtern SEXP	R_TspSymbol;	    /* "tsp" */
+LibExtern SEXP R_AsCharacterSymbol;/* "as.character" */
+LibExtern SEXP R_baseSymbol; // <-- backcompatible version of:
+LibExtern SEXP R_BaseSymbol;	// "base"
+LibExtern SEXP R_BraceSymbol;	    /* "{" */
+LibExtern SEXP R_Bracket2Symbol;   /* "[[" */
+LibExtern SEXP R_BracketSymbol;    /* "[" */
+LibExtern SEXP R_ClassSymbol;	    /* "class" */
+LibExtern SEXP R_DeviceSymbol;	    /* ".Device" */
+LibExtern SEXP R_DimNamesSymbol;   /* "dimnames" */
+LibExtern SEXP R_DimSymbol;	    /* "dim" */
+LibExtern SEXP R_DollarSymbol;	    /* "$" */
+LibExtern SEXP R_DotsSymbol;	    /* "..." */
+LibExtern SEXP R_DoubleColonSymbol;// "::"
+LibExtern SEXP R_DropSymbol;	    /* "drop" */
+LibExtern SEXP R_EvalSymbol;	    /* "eval" */
+LibExtern SEXP R_LastvalueSymbol;  /* ".Last.value" */
+LibExtern SEXP R_LevelsSymbol;	    /* "levels" */
+LibExtern SEXP R_ModeSymbol;	    /* "mode" */
+LibExtern SEXP R_NaRmSymbol;	    /* "na.rm" */
+LibExtern SEXP R_NameSymbol;	    /* "name" */
+LibExtern SEXP R_NamesSymbol;	    /* "names" */
+LibExtern SEXP R_NamespaceEnvSymbol;// ".__NAMESPACE__."
+LibExtern SEXP R_PackageSymbol;    /* "package" */
+LibExtern SEXP R_PreviousSymbol;   /* "previous" */
+LibExtern SEXP R_QuoteSymbol;	    /* "quote" */
+LibExtern SEXP R_RowNamesSymbol;   /* "row.names" */
+LibExtern SEXP R_SeedsSymbol;	    /* ".Random.seed" */
+LibExtern SEXP R_SortListSymbol;   /* "sort.list" */
+LibExtern SEXP R_SourceSymbol;	    /* "source" */
+LibExtern SEXP R_SpecSymbol;	// "spec"
+LibExtern SEXP R_TripleColonSymbol;// ":::"
+LibExtern SEXP R_TspSymbol;	    /* "tsp" */
 
-LibExtern SEXP  R_dot_defined;      /* ".defined" */
-LibExtern SEXP  R_dot_Method;       /* ".Method" */
-LibExtern SEXP	R_dot_packageName;// ".packageName"
-LibExtern SEXP  R_dot_target;       /* ".target" */
-LibExtern SEXP  R_dot_Generic;      /* ".Generic" */
+LibExtern SEXP R_dot_defined;      /* ".defined" */
+LibExtern SEXP R_dot_Method;       /* ".Method" */
+LibExtern SEXP R_dot_packageName;// ".packageName"
+LibExtern SEXP R_dot_target;       /* ".target" */
+LibExtern SEXP R_dot_Generic;      /* ".Generic" */
 
 /* Missing Values - others from Arith.h */
 #define NA_STRING	R_NaString
@@ -1373,34 +1443,34 @@ void R_removeVarFromFrame(SEXP name, SEXP env);
 SEXP Rf_getAttrib(SEXP vec, SEXP name);
 SEXP Rf_GetArrayDimnames(SEXP);
 SEXP Rf_GetColNames(SEXP);
-void Rf_GetMatrixDimnames(SEXP, SEXP *, SEXP *, const char **, const char **);
-SEXP Rf_GetOption(SEXP, SEXP); /* pre-2.13.0 compatibility */
-SEXP Rf_GetOption1(SEXP);
+void Rf_GetMatrixDimnames(SEXP x, SEXP *rl, SEXP *cl, const char **rn, const char **cn);
+SEXP Rf_GetOption(SEXP tag, SEXP rho); /* pre-2.13.0 compatibility */
+SEXP Rf_GetOption1(SEXP tag);
 int Rf_FixupDigits(SEXP, warn_type);
 size_t Rf_FixupWidth(SEXP, warn_type);
 int Rf_GetOptionDigits(void);
 size_t Rf_GetOptionWidth(void);
 SEXP Rf_GetRowNames(SEXP);
 void Rf_gsetVar(SEXP, SEXP, SEXP);
-SEXP Rf_install(const char *);
+SEXP Rf_install(const char *name);
 #ifdef __cplusplus
 namespace R
 {
     SEXP install_(const std::string &name);
 }
 #endif
-SEXP Rf_installChar(SEXP);
-SEXP Rf_installNoTrChar(SEXP);
-SEXP Rf_installTrChar(SEXP);
+SEXP Rf_installChar(SEXP x);
+SEXP Rf_installNoTrChar(SEXP charSXP);
+SEXP Rf_installTrChar(SEXP x);
 SEXP Rf_installDDVAL(int i);
 SEXP Rf_installS3Signature(const char *className, const char *methodName);
-Rboolean Rf_isFree(SEXP);
-Rboolean Rf_isOrdered(SEXP);
+Rboolean Rf_isFree(SEXP val);
+Rboolean Rf_isOrdered(SEXP s);
 Rboolean Rf_isUnmodifiedSpecSym(SEXP sym, SEXP env);
-Rboolean Rf_isUnordered(SEXP);
-Rboolean Rf_isUnsorted(SEXP, Rboolean);
-SEXP Rf_lengthgets(SEXP, R_len_t);
-SEXP Rf_xlengthgets(SEXP, R_xlen_t);
+Rboolean Rf_isUnordered(SEXP s);
+Rboolean Rf_isUnsorted(SEXP x, Rboolean strictly);
+SEXP Rf_lengthgets(SEXP x, R_len_t len);
+SEXP Rf_xlengthgets(SEXP x, R_xlen_t len);
 SEXP R_lsInternal(SEXP, Rboolean);
 SEXP R_lsInternal3(SEXP env, Rboolean all, Rboolean sorted);
 SEXP Rf_match(SEXP, SEXP, int);

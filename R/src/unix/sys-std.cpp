@@ -38,6 +38,7 @@
 #include <R_ext/Minmax.h>
 #include <Defn.h>
 #include <Localization.h>
+#include <Rinterface.h>
 #include <Internal.h>
 
 #ifdef HAVE_STRINGS_H

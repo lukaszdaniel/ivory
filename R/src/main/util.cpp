@@ -1199,7 +1199,7 @@ HIDDEN SEXP do_setencoding(SEXP call, SEXP op, SEXP args, SEXP rho)
     return x;
 }
 
-HIDDEN SEXP Rf_markKnown(const char * const s, SEXP ref)
+HIDDEN SEXP Rf_markKnown(const char *const s, SEXP ref)
 {
     cetype_t ienc = CE_NATIVE;
     if(ENC_KNOWN(ref)) {

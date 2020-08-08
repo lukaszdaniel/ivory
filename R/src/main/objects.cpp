@@ -656,7 +656,7 @@ R_INLINE static SEXP getPrimitive(SEXP symbol)
 	/* probably means a package redefined the base function so
 	   try to get the real thing from the internal table of
 	   primitives */
-	value = R_Primitive(CHAR(symbol->printname()));
+	value = R_Primitive(CHAR(PRINTNAME(symbol)));
     } else
 	value = R_NilValue;
 

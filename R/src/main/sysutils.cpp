@@ -77,7 +77,7 @@ HIDDEN double R_FileMtime(const char *path)
 bool R_FileExists(const char *path)
 {
     struct stat sb;
-    return (Rboolean) (stat(R_ExpandFileName(path), &sb) == 0);
+    return (stat(R_ExpandFileName(path), &sb) == 0);
 }
 
 HIDDEN double R_FileMtime(const char *path)
@@ -210,8 +210,8 @@ FILE *RC_fopen(const SEXP fn, const char *mode, const Rboolean expand)
 {
     const void *vmax = vmaxget();
     const char *filename = translateCharFP(fn), *res;
-    if(fn == NA_STRING || !filename) return nullptr;
-    if(expand) res = R_ExpandFileName(filename);
+    if (fn == NA_STRING || !filename) return nullptr;
+    if (expand) res = R_ExpandFileName(filename);
     else res = filename;
     vmaxset(vmax);
     return fopen(res, mode);
@@ -233,7 +233,7 @@ char *R_HomeDir(void)
 HIDDEN SEXP do_interactive(SEXP call, SEXP op, SEXP args, SEXP rho)
 {
     checkArity(op, args);
-    return ScalarLogical( (R_Interactive) ? 1 : 0 );
+    return ScalarLogical((R_Interactive) ? 1 : 0);
 }
 
 HIDDEN SEXP do_tempdir(SEXP call, SEXP op, SEXP args, SEXP env)
@@ -271,8 +271,8 @@ HIDDEN SEXP do_tempfile(SEXP call, SEXP op, SEXP args, SEXP env)
 	error(_("no '%s' argument"), "tempdir");
     if (n3 < 1)
 	error(_("no '%s' argument"), "fileext");
-    slen = (n1 > n2) ? n1 : n2;
-    slen = (n3 > slen) ? n3 : slen;
+    slen = std::max(n1, n2);
+    slen = std::max(n3, slen);
     PROTECT(ans = allocVector(STRSXP, slen));
     for(i = 0; i < slen; i++) {
 	tn = translateCharFP( STRING_ELT( pattern , i%n1 ) );
@@ -558,20 +558,20 @@ HIDDEN SEXP do_unsetenv(SEXP call, SEXP op, SEXP args, SEXP env)
 #ifdef HAVE_ICONVLIST
 static unsigned int cnt;
 
-static int count_one (unsigned int namescount, const char * const *names, void *data)
+static int count_one(unsigned int namescount, const char * const *names, void *data)
 {
     cnt += namescount;
     return 0;
 }
 
-static int write_one (unsigned int namescount, const char * const *names, void *data)
+static int write_one(unsigned int namescount, const char * const *names, void *data)
 {
-  unsigned int i;
-  SEXP ans = (SEXP) data;
+    unsigned int i;
+    SEXP ans = (SEXP)data;
 
-  for (i = 0; i < namescount; i++)
-      SET_STRING_ELT(ans, cnt++, mkChar(names[i]));
-  return 0;
+    for (i = 0; i < namescount; i++)
+        SET_STRING_ELT(ans, cnt++, mkChar(names[i]));
+    return 0;
 }
 #endif
 
@@ -777,16 +777,16 @@ HIDDEN SEXP do_iconv(SEXP call, SEXP op, SEXP args, SEXP env)
 
 cetype_t Rf_getCharCE(SEXP x)
 {
-    if(x->sexptype() != CHARSXP)
-	error(_("'%s' must be called on a CHARSXP"), "getCharCE");
-    if(x->isUTF8()) return CE_UTF8;
-    else if(x->isLatin1()) return CE_LATIN1;
-    else if(x->isBytes()) return CE_BYTES;
+    if (x->sexptype() != CHARSXP)
+        error(_("'%s' must be called on a CHARSXP"), "getCharCE");
+    if (x->isUTF8()) return CE_UTF8;
+    else if (x->isLatin1()) return CE_LATIN1;
+    else if (x->isBytes()) return CE_BYTES;
     else return CE_NATIVE;
 }
 
 
-void * Riconv_open (const char* tocode, const char* fromcode)
+void *Riconv_open(const char* tocode, const char* fromcode)
 {
 #if defined _WIN32 || __APPLE__
 // These two support "utf8"
@@ -820,17 +820,17 @@ void * Riconv_open (const char* tocode, const char* fromcode)
 #define ICONV_CONST
 #endif
 
-size_t Riconv (void *cd, const char **inbuf, size_t *inbytesleft,
-	       char **outbuf, size_t *outbytesleft)
+size_t Riconv(void *cd, const char **inbuf, size_t *inbytesleft,
+    char **outbuf, size_t *outbytesleft)
 {
     /* here libiconv has const char **, glibc has char ** for inbuf */
-    return iconv((iconv_t) cd, (ICONV_CONST char **) inbuf, inbytesleft,
-		 outbuf, outbytesleft);
+    return iconv((iconv_t)cd, (ICONV_CONST char **) inbuf, inbytesleft,
+        outbuf, outbytesleft);
 }
 
-int Riconv_close (void *cd)
+int Riconv_close(void *cd)
 {
-    return iconv_close((iconv_t) cd);
+    return iconv_close((iconv_t)cd);
 }
 
 enum nttype_t
@@ -1772,7 +1772,7 @@ static int isDir(char *path)
 #endif /* HAVE_STAT */
 
 #if !HAVE_DECL_MKDTEMP
-extern char *mkdtemp(char *template);
+extern const char *mkdtemp(const char *template);
 #endif
 
 #ifdef _WIN32
@@ -1781,7 +1781,8 @@ extern char *mkdtemp(char *template);
 
 void R_reInitTempDir(int die_on_fail)
 {
-    char *tmp, tmp1[PATH_MAX+11], *p;
+    const char *tmp;
+    char tmp1[PATH_MAX + 11], *p;
     const char* tm;
 #ifdef _WIN32
     char tmp2[PATH_MAX];

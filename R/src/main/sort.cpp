@@ -83,7 +83,7 @@ static int scmp(SEXP x, SEXP y, Rboolean nalast)
     return Scollate(x, y);
 }
 
-Rboolean isUnsorted(SEXP x, Rboolean strictly)
+Rboolean Rf_isUnsorted(SEXP x, Rboolean strictly)
 {
     R_xlen_t n, i;
     int itmp = INT_MIN; /* this is NA_INTEGER, < all valid nonNA R integer

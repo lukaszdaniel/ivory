@@ -138,12 +138,10 @@ static bool isDDName(SEXP name)
 
 HIDDEN SEXP Rf_mkSYMSXP(SEXP name, SEXP value)
 {
-    SEXP c;
-    unsigned int i;
     PROTECT(name);
     PROTECT(value);
-    i = isDDName(name);
-    c = allocSExp(SYMSXP);
+    bool i = isDDName(name);
+    SEXP c = allocSExp(SYMSXP);
     SET_PRINTNAME(c, name);
     SET_SYMVALUE(c, value);
     SET_DDVAL(c, i);

@@ -67,8 +67,7 @@ R_INLINE static int integerOneIndex(int i, R_xlen_t len, SEXP call)
 }
 
 /* Utility used (only in) do_subassign2_dflt(), i.e. "[[<-" in ./subassign.cpp : */
-HIDDEN R_xlen_t
-OneIndex(SEXP x, SEXP s, R_xlen_t nx, int partial, SEXP *newname,
+HIDDEN R_xlen_t Rf_OneIndex(SEXP x, SEXP s, R_xlen_t nx, int partial, SEXP *newname,
 	 int pos, SEXP call)
 {
     SEXP names;
@@ -154,8 +153,7 @@ OneIndex(SEXP x, SEXP s, R_xlen_t nx, int partial, SEXP *newname,
 }
 
 /* used here and in subset.cpp and subassign.cpp */
-HIDDEN R_xlen_t
-get1index(SEXP s, SEXP names, R_xlen_t len, int pok, int pos, SEXP call)
+HIDDEN R_xlen_t Rf_get1index(SEXP s, SEXP names, R_xlen_t len, int pok, int pos, SEXP call)
 {
 /* Get a single index for the [[ and [[<- operators.
    Checks that only one index is being selected.
@@ -355,7 +353,7 @@ HIDDEN SEXP Rf_vectorIndex(SEXP x, SEXP thesub, int start, int stop, int pok, SE
 */
 
 
-HIDDEN SEXP mat2indsub(SEXP dims, SEXP s, SEXP call)
+HIDDEN SEXP Rf_mat2indsub(SEXP dims, SEXP s, SEXP call)
 {
     int nrs = nrows(s);
     R_xlen_t NR = nrs;
@@ -451,7 +449,7 @@ to an integer matrix by matching against the dimnames of x. NA values
 in any row of i propagate to the result.  Unmatched entries result in
 a subscript is out of bounds error.  */
 
-HIDDEN SEXP strmat2intmat(SEXP s, SEXP dnamelist, SEXP call)
+HIDDEN SEXP Rf_strmat2intmat(SEXP s, SEXP dnamelist, SEXP call)
 {
     /* XXX: assumes all args are protected */
     int nr = nrows(s), i, j, v;

@@ -26,8 +26,9 @@
 #include <config.h>
 #endif
 
-#include <Localization.h>
 #include <Defn.h>
+#include <Localization.h>
+#include <Rinterface.h>
 #include <Fileio.h> /* for R_fopen */
 #include <Startup.h>
 

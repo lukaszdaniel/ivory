@@ -437,9 +437,9 @@ static SEXP coerceToSymbol(SEXP v)
     }
     PROTECT(ans);
     if (warn) CoercionWarning(warn);/*2000/10/23*/
-    ans = installTrChar(ans);
+    SEXP sym = installTrChar(ans);
     UNPROTECT(2); /* ans, v */
-    return ans;
+    return sym;
 }
 
 static SEXP coerceToLogical(SEXP v)
@@ -1152,7 +1152,7 @@ static SEXP coerceSymbol(SEXP v, SEXPTYPE type)
 	SET_VECTOR_ELT(rval, 0, v);
 	UNPROTECT(1);
     } else if (type == CHARSXP)
-	rval = v->printname();
+	rval = PRINTNAME(v);
     else if (type == STRSXP)
 	rval = ScalarString(PRINTNAME(v));
     else
@@ -1364,7 +1364,7 @@ static SEXP ascommon(SEXP call, SEXP u, SEXPTYPE type)
 	return v;
     }
     else if (u->isSymbol_() && type == STRSXP)
-	return ScalarString(u->printname());
+	return ScalarString(PRINTNAME(u));
     else if (u->isSymbol_() && type == SYMSXP)
 	return u;
     else if (u->isSymbol_() && type == VECSXP) {

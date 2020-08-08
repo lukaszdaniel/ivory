@@ -27,6 +27,7 @@
 #include <Localization.h>
 #include <R_ext/Minmax.h>
 #include <Defn.h>
+#include <Rinterface.h>
 #include <Internal.h>
 #include <cctype> /* for tolower */
 #include <cstring>

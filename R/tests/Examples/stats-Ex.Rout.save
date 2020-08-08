@@ -1,9 +1,9 @@
 
-Ivory Under development (unstable) (2020-06-29 r1244) -- "Internationalized Version of R"
+Ivory Under development (unstable) (2020-08-04 r1255) -- "Internationalized Version of R"
 Copyright (C) 2013-2020 Lukasz Daniel (lukasz.daniel@gmail.com)
 See README-IVORY file for details.
 
-R Under development (unstable) (2020-06-29 r78759) -- "Unsuffered Consequences"
+R Under development (unstable) (2020-08-04 r78979) -- "Unsuffered Consequences"
 Copyright (C) 2020 The R Foundation for Statistical Computing
 Platform: x86_64-pc-linux-gnu (64-bit)
 
@@ -2934,7 +2934,7 @@ data: rnorm(10) and rnorm(10, 0, 2)
 AB = 69, p-value = 0.03831
 alternative hypothesis: true ratio of scales is not equal to 1
 95 percent confidence interval:
- 0.18523240.9712857 
+ 0.1852324 0.9712857 
 sample estimates:
 ratio of scales 
       0.4007458 
@@ -2949,7 +2949,7 @@ data: rnorm(100) and rnorm(100, 0, 2)
 AB = 6180, p-value = 3.347e-08
 alternative hypothesis: true ratio of scales is not equal to 1
 95 percent confidence interval:
- 0.33305960.5693532 
+ 0.3330596 0.5693532 
 sample estimates:
 ratio of scales 
       0.4346784 
@@ -3918,7 +3918,7 @@ sigma^2 estimated as 0.4566:  log likelihood = -101.2,  aic = 212.4
 > 
 > asOneSidedFormula("age")
 ~age
-<environment: 0x562cf3dca9e0>
+<environment: 0x560386c999a8>
 > asOneSidedFormula(~ age)
 ~age
 > 
@@ -4067,7 +4067,7 @@ data: c(682, 243)
 number of successes = 682, number of trials = 925, p-value = 0.3825
 alternative hypothesis: true probability of success is not equal to 0.75
 95 percent confidence interval:
- 0.70766830.7654066 
+ 0.7076683 0.7654066 
 sample estimates:
 probability of success 
              0.7372973 
@@ -4080,7 +4080,7 @@ data: 682 and 682 + 243
 number of successes = 682, number of trials = 925, p-value = 0.3825
 alternative hypothesis: true probability of success is not equal to 0.75
 95 percent confidence interval:
- 0.70766830.7654066 
+ 0.7076683 0.7654066 
 sample estimates:
 probability of success 
              0.7372973 
@@ -4955,7 +4955,7 @@ function (V)
     r[cbind(seq_len(p), seq_len(p))] <- 1
     r
 }
-<bytecode: 0x562cf54b1638>
+<bytecode: 0x560387b872b8>
 <environment: namespace:stats>
 > stopifnot(all.equal(Cl, cov2cor(cov(longley))),
 +           all.equal(cor(longley, method = "kendall"),
@@ -5110,7 +5110,7 @@ data: x and y
 t = 1.8411, df = 7, p-value = 0.05409
 alternative hypothesis: true correlation is greater than 0
 95 percent confidence interval:
- -0.02223023 1.00000000 
+ -0.02223023  1.00000000 
 sample estimates:
       cor 
 0.5711816 
@@ -5127,7 +5127,7 @@ data: CONT and INTG
 t = -0.8605, df = 41, p-value = 0.3945
 alternative hypothesis: true correlation is not equal to 0
 95 percent confidence interval:
- -0.4168591 0.1741182 
+ -0.4168591  0.1741182 
 sample estimates:
        cor 
 -0.1331909 
@@ -7383,7 +7383,7 @@ data: TeaTasting
 p-value = 0.2429
 alternative hypothesis: true odds ratio is greater than 1
 95 percent confidence interval:
- 0.3135693      Inf 
+ 0.3135693       Inf 
 sample estimates:
 odds ratio 
   6.408309 
@@ -7407,7 +7407,7 @@ data: Convictions
 p-value = 0.0004652
 alternative hypothesis: true odds ratio is less than 1
 95 percent confidence interval:
- 0.00000000.2849601 
+ 0.0000000 0.2849601 
 sample estimates:
 odds ratio 
 0.04693661 
@@ -7580,7 +7580,7 @@ attr(,".Environment")
 > environment(as.formula("y ~ x"))
 <environment: R_GlobalEnv>
 > environment(as.formula("y ~ x", env = new.env()))
-<environment: 0x562cf5a2d848>
+<environment: 0x560388b39cd8>
 > 
 > 
 > ## Create a formula for a model with a large number of variables:
@@ -8976,7 +8976,7 @@ data: x and x2
 t = 5.6742, df = 96.85, p-value = 7.242e-08
 alternative hypothesis: true difference in means is greater than 0
 95 percent confidence interval:
- 0.7069751      Inf 
+ 0.7069751       Inf 
 sample estimates:
  mean of x  mean of y 
  0.1004483 -0.8990693 
@@ -9860,7 +9860,7 @@ data: Rabbits
 Mantel-Haenszel X-squared = 3.9286, df = 1, p-value = 0.04747
 alternative hypothesis: true common odds ratio is not equal to 1
 95 percent confidence interval:
-  1.02671347.725133 
+  1.026713 47.725133 
 sample estimates:
 common odds ratio 
                 7 
@@ -9876,7 +9876,7 @@ data: Rabbits
 S = 16, p-value = 0.03994
 alternative hypothesis: true common odds ratio is not equal to 1
 95 percent confidence interval:
-   1.077401529.837399 
+   1.077401 529.837399 
 sample estimates:
 common odds ratio 
          10.36102 
@@ -9892,7 +9892,7 @@ data: Rabbits
 S = 16, p-value = 0.01997
 alternative hypothesis: true common odds ratio is greater than 1
 95 percent confidence interval:
- 1.384239     Inf 
+ 1.384239      Inf 
 sample estimates:
 common odds ratio 
          10.36102 
@@ -9908,7 +9908,7 @@ data: UCBAdmissions
 Mantel-Haenszel X-squared = 1.4269, df = 1, p-value = 0.2323
 alternative hypothesis: true common odds ratio is not equal to 1
 95 percent confidence interval:
- 0.77190741.0603298 
+ 0.7719074 1.0603298 
 sample estimates:
 common odds ratio 
         0.9046968 
@@ -12101,7 +12101,7 @@ data: 137 time base: 24.19893
 number of events = 137, time base = 24.199, p-value < 2.2e-16
 alternative hypothesis: true event rate is not equal to 1
 95 percent confidence interval:
- 4.7531256.692709 
+ 4.753125 6.692709 
 sample estimates:
 event rate 
   5.661407 
@@ -12116,7 +12116,7 @@ data: c(11, 6 + 8 + 7) time base: c(800, 1083 + 1050 + 878)
 count1 = 11, expected count1 = 6.7174, p-value = 0.07967
 alternative hypothesis: true rate ratio is not equal to 1
 95 percent confidence interval:
- 0.85842644.2772659 
+ 0.8584264 4.2772659 
 sample estimates:
 rate ratio 
   1.971488 
@@ -12270,14 +12270,14 @@ attr(,"class")
 $linkfun
 function (mu) 
 mu^lambda
-<bytecode: 0x562cf5e18040>
-<environment: 0x562cf6016168>
+<bytecode: 0x560387db58b8>
+<environment: 0x560387dc27d8>
 
 $linkinv
 function (eta) 
 pmax(eta^(1/lambda), .Machine$double.eps)
-<bytecode: 0x562cf5e17ef0>
-<environment: 0x562cf6016168>
+<bytecode: 0x560387db5738>
+<environment: 0x560387dc27d8>
 
 > 
 > 
@@ -14162,7 +14162,7 @@ data: heads out of 100, null probability 0.5
 X-squared = 0.09, df = 1, p-value = 0.7642
 alternative hypothesis: true proportion is not equal to 0.5
 95 percent confidence interval:
- 0.41831830.6201278 
+ 0.4183183 0.6201278 
 sample estimates:
 proportion 
       0.52 
@@ -14175,7 +14175,7 @@ data: heads out of 100, null probability 0.5
 X-squared = 0.16, df = 1, p-value = 0.6892
 alternative hypothesis: true proportion is not equal to 0.5
 95 percent confidence interval:
- 0.42316580.6153545 
+ 0.4231658 0.6153545 
 sample estimates:
 proportion 
       0.52 
@@ -14370,7 +14370,8 @@ Quade F = 3.8293, num df = 4, denom df = 24, p-value = 0.01519
 > 
 > ### Compare different types
 > quantAll <- function(x, prob, ...)
-+   t(vapply(1:9, function(typ) quantile(x, prob=prob, type = typ, ...), quantile(x, prob, type=1)))
++   t(vapply(1:9, function(typ) quantile(x, prob=prob, type = typ, ...),
++            quantile(x, prob, type=1)))
 > p <- c(0.1, 0.5, 1, 2, 5, 10, 50)/100
 > signif(quantAll(x, p), 4)
         0.1%   0.5%     1%     2%     5%    10%      50%
@@ -14383,6 +14384,10 @@ Quade F = 3.8293, num df = 4, denom df = 24, p-value = 0.01519
  [7,] -2.997 -2.592 -2.424 -2.245 -1.727 -1.339 -0.03473
  [8,] -3.004 -2.595 -2.430 -2.258 -1.731 -1.342 -0.03473
  [9,] -3.004 -2.595 -2.429 -2.257 -1.730 -1.341 -0.03473
+> 
+> ## 0% and 100% are equal to min(), max() for all types:
+> stopifnot(t(quantAll(x, prob=0:1)) == range(x))
+> 
 > ## for complex numbers:
 > z <- complex(re=x, im = -10*x)
 > signif(quantAll(z, p), 4)
@@ -16522,8 +16527,8 @@ Step function with continuity 'f'=0.2, 3 knots at:
 > unclass(sfun0)
 function (v) 
 .approxfun(x, y, v, method, yleft, yright, f, na.rm)
-<bytecode: 0x562cf61c15c8>
-<environment: 0x562cf6cf7428>
+<bytecode: 0x560388a14738>
+<environment: 0x56038968c178>
 attr(,"call")
 stepfun(1:3, y0, f = 0)
 > ls(envir = environment(sfun0))
@@ -17198,7 +17203,7 @@ data: 1:10 and c(7:20)
 t = -5.4349, df = 21.982, p-value = 1.855e-05
 alternative hypothesis: true difference in means is not equal to 0
 95 percent confidence interval:
- -11.052802 -4.947198 
+ -11.052802  -4.947198 
 sample estimates:
 mean of x mean of y 
       5.5      13.5 
@@ -17211,7 +17216,7 @@ data: 1:10 and c(7:20, 200)
 t = -1.6329, df = 14.165, p-value = 0.1245
 alternative hypothesis: true difference in means is not equal to 0
 95 percent confidence interval:
- -47.242900  6.376233 
+ -47.242900   6.376233 
 sample estimates:
 mean of x mean of y 
   5.50000  25.93333 
@@ -17228,7 +17233,7 @@ data: extra[group == 1] and extra[group == 2]
 t = -1.8608, df = 17.776, p-value = 0.07939
 alternative hypothesis: true difference in means is not equal to 0
 95 percent confidence interval:
- -3.3654832 0.2054832 
+ -3.3654832  0.2054832 
 sample estimates:
 mean of x mean of y 
      0.75      2.33 
@@ -17243,7 +17248,7 @@ data: extra by group
 t = -1.8608, df = 17.776, p-value = 0.07939
 alternative hypothesis: true difference in means is not equal to 0
 95 percent confidence interval:
- -3.3654832 0.2054832 
+ -3.3654832  0.2054832 
 sample estimates:
 mean in group 1 mean in group 2 
            0.75            2.33 
@@ -17258,7 +17263,7 @@ data: extra
 t = 3.413, df = 19, p-value = 0.002918
 alternative hypothesis: true mean is not equal to 0
 95 percent confidence interval:
- 0.59558452.4844155 
+ 0.5955845 2.4844155 
 sample estimates:
 mean of x 
      1.54 
@@ -17276,7 +17281,7 @@ data: Pair(extra.1, extra.2)
 t = -4.0621, df = 9, p-value = 0.002833
 alternative hypothesis: true difference in means is not equal to 0
 95 percent confidence interval:
- -2.4598858-0.7001142 
+ -2.4598858 -0.7001142 
 sample estimates:
 mean of the differences 
                   -1.58 
@@ -18122,7 +18127,7 @@ data: x and y
 F = 2.6522, num df = 49, denom df = 29, p-value = 0.006232
 alternative hypothesis: true ratio of variances is not equal to 1
 95 percent confidence interval:
- 1.3325104.989832 
+ 1.332510 4.989832 
 sample estimates:
 ratio of variances 
           2.652168 
@@ -18135,7 +18140,7 @@ data: lm(x ~ 1) and lm(y ~ 1)
 F = 2.6522, num df = 49, denom df = 29, p-value = 0.006232
 alternative hypothesis: true ratio of variances is not equal to 1
 95 percent confidence interval:
- 1.3325104.989832 
+ 1.332510 4.989832 
 sample estimates:
 ratio of variances 
           2.652168 
@@ -18365,7 +18370,7 @@ data: rnorm(10) and rnorm(10, 2)
 W = 7, p-value = 0.0004871
 alternative hypothesis: true location shift is not equal to 0
 95 percent confidence interval:
- -3.024352-1.348555 
+ -3.024352 -1.348555 
 sample estimates:
 difference in location 
              -2.262424 
@@ -18950,7 +18955,7 @@ Number of Fisher Scoring iterations: 6
 > cleanEx()
 > options(digits = 7L)
 > base::cat(gettext("Time elapsed: ", domain = "R-base"), proc.time() - base::get("ptime", pos = 'CheckExEnv'),"\n")
-Time elapsed:  10.35 0.207 10.608 0 0 
+Time elapsed:  10.738 0.208 10.947 0 0 
 > grDevices::dev.off()
 null device 
           1 

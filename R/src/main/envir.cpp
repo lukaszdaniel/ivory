@@ -187,7 +187,7 @@ inline static void SET_SYMBOL_BINDING_VALUE(SEXP sym, SEXP val)
 
 /* Macro version of isNull for only the test against R_NilValue */
 inline static bool ISNULL(SEXP x) {
- return (x == R_NilValue);
+    return (x == R_NilValue);
 }
 
 /* Function to determine whethr an environment contains special symbols */
@@ -198,8 +198,8 @@ Rboolean R_envHasNoSpecialSymbols(SEXP env)
     if (HASHTAB(env) != R_NilValue)
 	return FALSE;
 
-    for (frame = FRAME(env); frame != R_NilValue; frame = frame->cdr())
-	if (IS_SPECIAL_SYMBOL(frame->tag()))
+    for (frame = FRAME(env); frame != R_NilValue; frame = CDR(frame))
+	if (IS_SPECIAL_SYMBOL(TAG(frame)))
 	    return FALSE;
 
     return TRUE;
@@ -548,17 +548,17 @@ static SEXP R_HashFrame(SEXP rho)
     table = HASHTAB(rho);
     frame = FRAME(rho);
     while (!ISNULL(frame)) {
-	if( !HASHASH(PRINTNAME(frame->tag())) ) {
-	    SET_HASHVALUE(PRINTNAME(frame->tag()),
-			  R_Newhashpjw(CHAR(PRINTNAME(frame->tag()))));
-	    SET_HASHASH(PRINTNAME(frame->tag()), 1);
+	if( !HASHASH(PRINTNAME(TAG(frame))) ) {
+	    SET_HASHVALUE(PRINTNAME(TAG(frame)),
+			  R_Newhashpjw(CHAR(PRINTNAME(TAG(frame)))));
+	    SET_HASHASH(PRINTNAME(TAG(frame)), 1);
 	}
-	hashcode = HASHVALUE(PRINTNAME(frame->tag())) % HASHSIZE(table);
+	hashcode = HASHVALUE(PRINTNAME(TAG(frame))) % HASHSIZE(table);
 	chain = VECTOR_ELT(table, hashcode);
 	/* If using a primary slot then increase HASHPRI */
 	if (ISNULL(chain)) SET_HASHPRI(table, HASHPRI(table) + 1);
 	tmp_chain = frame;
-	frame = frame->cdr();
+	frame = CDR(frame);
 	SETCDR(tmp_chain, chain);
 	SET_VECTOR_ELT(table, hashcode, tmp_chain);
     }
@@ -739,7 +739,7 @@ HIDDEN void Rf_InitGlobalEnv()
 #ifdef USE_GLOBAL_CACHE
 static int hashIndex(SEXP symbol, SEXP table)
 {
-    SEXP c = symbol->printname();
+    SEXP c = PRINTNAME(symbol);
     if( !HASHASH(c) ) {
 	SET_HASHVALUE(c, R_Newhashpjw(CHAR(c)));
 	SET_HASHASH(c, 1);
@@ -891,7 +891,7 @@ HIDDEN void Rf_unbindVar(SEXP symbol, SEXP rho)
     }
     else {
 	/* This branch is used e.g. via sys.source, utils::data */
-	c = symbol->printname();
+	c = PRINTNAME(symbol);
 	if( !HASHASH(c) ) {
 	    SET_HASHVALUE(c, R_Newhashpjw(CHAR(c)));
 	    SET_HASHASH(c, 1);
@@ -934,7 +934,7 @@ static SEXP findVarLocInFrame(SEXP rho, SEXP symbol, Rboolean *canCache)
 	SEXP val, tmp = R_NilValue;
 	table = (R_ObjectTable *) R_ExternalPtrAddr(HASHTAB(rho));
 	/* Better to use exists() here if we don't actually need the value! */
-	val = table->get(CHAR(symbol->printname()), canCache, table);
+	val = table->get(CHAR(PRINTNAME(symbol)), canCache, table);
 	if(val != R_UnboundValue) {
 	    /* The result should probably be identified as being from
 	       a user database, or maybe use an active binding
@@ -947,7 +947,7 @@ static SEXP findVarLocInFrame(SEXP rho, SEXP symbol, Rboolean *canCache)
 	       Otherwise, we believe the setting for canCache. */
 	    if(canCache && table->canCache) {
 		PROTECT(tmp);
-		*canCache = table->canCache(CHAR(symbol->printname()), table);
+		*canCache = table->canCache(CHAR(PRINTNAME(symbol)), table);
 		UNPROTECT(1);
 	    }
 	    MARK_NOT_MUTABLE(val); /* to keep complex assignment code sane */
@@ -957,12 +957,12 @@ static SEXP findVarLocInFrame(SEXP rho, SEXP symbol, Rboolean *canCache)
 
     if (HASHTAB(rho) == R_NilValue) {
 	frame = FRAME(rho);
-	while (frame != R_NilValue && frame->tag() != symbol)
-	    frame = frame->cdr();
+	while (frame != R_NilValue && TAG(frame) != symbol)
+	    frame = CDR(frame);
 	return frame;
     }
     else {
-	c = symbol->printname();
+	c = PRINTNAME(symbol);
 	if( !HASHASH(c) ) {
 	    SET_HASHVALUE(c, R_Newhashpjw(CHAR(c)));
 	    SET_HASHASH(c,  1);
@@ -1055,10 +1055,10 @@ SEXP Rf_findVarInFrame3(SEXP rho, SEXP symbol, Rboolean doGet)
 	table = (R_ObjectTable *) R_ExternalPtrAddr(HASHTAB(rho));
 	if(table->active) {
 	    if(doGet)
-		val = table->get(CHAR(symbol->printname()), nullptr, table);
+		val = table->get(CHAR(PRINTNAME(symbol)), nullptr, table);
 	    else {
-		if(table->exists(CHAR(symbol->printname()), nullptr, table))
-		    val = table->get(CHAR(symbol->printname()), nullptr, table);
+		if(table->exists(CHAR(PRINTNAME(symbol)), nullptr, table))
+		    val = table->get(CHAR(PRINTNAME(symbol)), nullptr, table);
 		else
 		    val = R_UnboundValue;
 	    }
@@ -1068,13 +1068,13 @@ SEXP Rf_findVarInFrame3(SEXP rho, SEXP symbol, Rboolean doGet)
     } else if (HASHTAB(rho) == R_NilValue) {
 	frame = FRAME(rho);
 	while (frame != R_NilValue) {
-	    if (frame->tag() == symbol)
+	    if (TAG(frame) == symbol)
 		return BINDING_VALUE(frame);
-	    frame = frame->cdr();
+	    frame = CDR(frame);
 	}
     }
     else {
-	c = symbol->printname();
+	c = PRINTNAME(symbol);
 	if( !HASHASH(c) ) {
 	    SET_HASHVALUE(c, R_Newhashpjw(CHAR(c)));
 	    SET_HASHASH(c, 1);
@@ -1108,7 +1108,7 @@ static bool existsVarInFrame(SEXP rho, SEXP symbol)
 	bool val = false;
 	table = (R_ObjectTable *) R_ExternalPtrAddr(HASHTAB(rho));
 	if(table->active) {
-	    if(table->exists(CHAR(symbol->printname()), nullptr, table))
+	    if(table->exists(CHAR(PRINTNAME(symbol)), nullptr, table))
 		val = true;
 	    else
 		val = false;
@@ -1117,13 +1117,13 @@ static bool existsVarInFrame(SEXP rho, SEXP symbol)
     } else if (HASHTAB(rho) == R_NilValue) {
 	frame = FRAME(rho);
 	while (frame != R_NilValue) {
-	    if (frame->tag() == symbol)
+	    if (TAG(frame) == symbol)
 		return true;
-	    frame = frame->cdr();
+	    frame = CDR(frame);
 	}
     }
     else {
-	c = symbol->printname();
+	c = PRINTNAME(symbol);
 	if( !HASHASH(c) ) {
 	    SET_HASHVALUE(c, R_Newhashpjw(CHAR(c)));
 	    SET_HASHASH(c, 1);
@@ -1171,28 +1171,28 @@ void Rf_readS3VarsFromFrame(SEXP rho,
     slow but still correct.
     */
 
-    for(;frame->tag() != R_dot_Generic; frame = frame->cdr())
+    for(;TAG(frame) != R_dot_Generic; frame = CDR(frame))
 	if (frame == R_NilValue) goto slowpath;
     *dotGeneric = BINDING_VALUE(frame);
-    frame = frame->cdr();
+    frame = CDR(frame);
 
-    if (frame->tag() != R_dot_Class) goto slowpath;
+    if (TAG(frame) != R_dot_Class) goto slowpath;
     *dotClass = BINDING_VALUE(frame);
-    frame = frame->cdr();
+    frame = CDR(frame);
 
-    if (frame->tag() != R_dot_Method) goto slowpath;
+    if (TAG(frame) != R_dot_Method) goto slowpath;
     *dotMethod = BINDING_VALUE(frame);
-    frame = frame->cdr();
+    frame = CDR(frame);
 
-    if (frame->tag() != R_dot_Group) goto slowpath;
+    if (TAG(frame) != R_dot_Group) goto slowpath;
     *dotGroup = BINDING_VALUE(frame);
-    frame = frame->cdr();
+    frame = CDR(frame);
 
-    if (frame->tag() != R_dot_GenericCallEnv) goto slowpath;
+    if (TAG(frame) != R_dot_GenericCallEnv) goto slowpath;
     *dotGenericCallEnv = BINDING_VALUE(frame);
-    frame = frame->cdr();
+    frame = CDR(frame);
 
-    if (frame->tag() != R_dot_GenericDefEnv) goto slowpath;
+    if (TAG(frame) != R_dot_GenericDefEnv) goto slowpath;
     *dotGenericDefEnv = BINDING_VALUE(frame);
 
     return;
@@ -1417,7 +1417,7 @@ static int ddVal(SEXP symbol)
     char *endp;
     int rval;
 
-    buf = CHAR(symbol->printname());
+    buf = CHAR(PRINTNAME(symbol));
     if (streqln(buf, "..", 2) && strlen(buf) > 2)
     {
         buf += 2;
@@ -1608,11 +1608,11 @@ SEXP Rf_findFun3(SEXP symbol, SEXP rho, SEXP call)
 		TYPEOF(vl) == SPECIALSXP)
 		return (vl);
 	    if (vl == R_MissingArg)
-		errorcall(call, _("'%s' argument is missing, with no default"), CHAR(symbol->printname()));
+		errorcall(call, _("'%s' argument is missing, with no default"), CHAR(PRINTNAME(symbol)));
 	}
 	rho = ENCLOS(rho);
     }
-    errorcall_cpy(call, _("could not find function '%s'"), EncodeChar(symbol->printname()));
+    errorcall_cpy(call, _("could not find function '%s'"), EncodeChar(PRINTNAME(symbol)));
     /* NOT REACHED */
     return R_UnboundValue;
 }
@@ -1649,7 +1649,7 @@ void Rf_defineVar(SEXP symbol, SEXP value, SEXP rho)
 	if(table->assign == nullptr)
 	    error(_("cannot assign variables to this database"));
 	PROTECT(value);
-	table->assign(CHAR(symbol->printname()), value, table);
+	table->assign(CHAR(PRINTNAME(symbol)), value, table);
 	UNPROTECT(1);
 #ifdef USE_GLOBAL_CACHE
 	if (IS_GLOBAL_FRAME(rho)) R_FlushGlobalCache(symbol);
@@ -1671,12 +1671,12 @@ void Rf_defineVar(SEXP symbol, SEXP value, SEXP rho)
 	    /* First check for an existing binding */
 	    frame = FRAME(rho);
 	    while (frame != R_NilValue) {
-		if (frame->tag() == symbol) {
+		if (TAG(frame) == symbol) {
 		    SET_BINDING_VALUE(frame, value);
 		    SET_MISSING(frame, 0);	/* Over-ride */
 		    return;
 		}
-		frame = frame->cdr();
+		frame = CDR(frame);
 	    }
 	    if (FRAME_IS_LOCKED(rho))
 		error(_("cannot add bindings to a locked environment"));
@@ -1684,7 +1684,7 @@ void Rf_defineVar(SEXP symbol, SEXP value, SEXP rho)
 	    SET_TAG(FRAME(rho), symbol);
 	}
 	else {
-	    c = symbol->printname();
+	    c = PRINTNAME(symbol);
 	    if( !HASHASH(c) ) {
 		SET_HASHVALUE(c, R_Newhashpjw(CHAR(c)));
 		SET_HASHASH(c, 1);
@@ -1778,7 +1778,7 @@ static SEXP setVarInFrame(SEXP rho, SEXP symbol, SEXP value)
 	if(table->assign == nullptr)
 	    error(_("cannot assign variables to this database"));
 	PROTECT(value);
-	SEXP result = table->assign(CHAR(symbol->printname()), value, table);
+	SEXP result = table->assign(CHAR(PRINTNAME(symbol)), value, table);
 	UNPROTECT(1);
 	return(result);
     }
@@ -1792,16 +1792,16 @@ static SEXP setVarInFrame(SEXP rho, SEXP symbol, SEXP value)
     if (HASHTAB(rho) == R_NilValue) {
 	frame = FRAME(rho);
 	while (frame != R_NilValue) {
-	    if (frame->tag() == symbol) {
+	    if (TAG(frame) == symbol) {
 		SET_BINDING_VALUE(frame, value);
 		SET_MISSING(frame, 0);	/* same as defineVar */
 		return symbol;
 	    }
-	    frame = frame->cdr();
+	    frame = CDR(frame);
 	}
     } else {
 	/* Do the hash table thing */
-	c = symbol->printname();
+	c = PRINTNAME(symbol);
 	if( !HASHASH(c) ) {
 	    SET_HASHVALUE(c, R_Newhashpjw(CHAR(c)));
 	    SET_HASHASH(c, 1);
@@ -1860,7 +1860,7 @@ void Rf_gsetVar(SEXP symbol, SEXP value, SEXP rho)
 {
     if (FRAME_IS_LOCKED(rho)) {
 	if(SYMVALUE(symbol) == R_UnboundValue)
-	    error(_("cannot add binding of '%s' to the base environment"), CHAR(symbol->printname()));
+	    error(_("cannot add binding of '%s' to the base environment"), CHAR(PRINTNAME(symbol)));
     }
 #ifdef USE_GLOBAL_CACHE
     R_FlushGlobalCache(symbol);
@@ -2708,13 +2708,13 @@ static int FrameSize(SEXP frame, int all)
     if (all) {
 	while (frame != R_NilValue) {
 	    count += 1;
-	    frame = frame->cdr();
+	    frame = CDR(frame);
 	}
     } else {
 	while (frame != R_NilValue) {
 	    if (NONEMPTY_(frame))
 		count += 1;
-	    frame = frame->cdr();
+	    frame = CDR(frame);
 	}
     }
     return count;
@@ -2724,17 +2724,17 @@ static void FrameNames(SEXP frame, int all, SEXP names, int *indx)
 {
     if (all) {
 	while (frame != R_NilValue) {
-	    SET_STRING_ELT(names, *indx, PRINTNAME(frame->tag()));
+	    SET_STRING_ELT(names, *indx, PRINTNAME(TAG(frame)));
 	    (*indx)++;
-	    frame = frame->cdr();
+	    frame = CDR(frame);
 	}
     } else {
 	while (frame != R_NilValue) {
 	    if (NONEMPTY_(frame)) {
-		SET_STRING_ELT(names, *indx, PRINTNAME(frame->tag()));
+		SET_STRING_ELT(names, *indx, PRINTNAME(TAG(frame)));
 		(*indx)++;
 	    }
-	    frame = frame->cdr();
+	    frame = CDR(frame);
 	}
     }
 }
@@ -2755,14 +2755,14 @@ static void FrameValues(SEXP frame, int all, SEXP values, int *indx)
     (*indx)++
 
         DO_FrameValues;
-	    frame = frame->cdr();
+	    frame = CDR(frame);
 	}
     } else {
 	while (frame != R_NilValue) {
 	    if (NONEMPTY_(frame)) {
 		DO_FrameValues;
 	    }
-	    frame = frame->cdr();
+	    frame = CDR(frame);
 	}
     }
 }
@@ -3343,7 +3343,7 @@ void R_LockEnvironment(SEXP env, Rboolean bindings)
 	}
 	else {
 	    SEXP frame;
-	    for (frame = FRAME(env); frame != R_NilValue; frame = frame->cdr())
+	    for (frame = FRAME(env); frame != R_NilValue; frame = CDR(frame))
 		LOCK_BINDING(frame);
 	}
     }
@@ -3514,7 +3514,7 @@ Rboolean R_HasFancyBindings(SEXP rho)
     else {
 	SEXP frame;
 
-	for (frame = FRAME(rho); frame != R_NilValue; frame = frame->cdr())
+	for (frame = FRAME(rho); frame != R_NilValue; frame = CDR(frame))
 	    if (IS_ACTIVE_BINDING(frame) || BINDING_IS_LOCKED(frame))
 		return TRUE;
 	return FALSE;
@@ -4290,8 +4290,8 @@ HIDDEN void Rf_findFunctionForBody(SEXP body) {
     for(i = 0; i < n; i++) {
 	SEXP frame = VECTOR_ELT(nstable, i);
 	while (frame != R_NilValue) {
-	    findFunctionForBodyInNamespace(body, CAR(frame), frame->tag());
-	    frame = frame->cdr();
+	    findFunctionForBodyInNamespace(body, CAR(frame), TAG(frame));
+	    frame = CDR(frame);
 	}
     }
 }

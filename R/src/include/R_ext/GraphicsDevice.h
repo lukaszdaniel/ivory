@@ -881,9 +881,7 @@ void Rf_doKeybd(pDevDesc dd, R_KeyName rkey,
 void Rf_doIdle(pDevDesc dd);
 Rboolean Rf_doesIdle(pDevDesc dd);
 
-/* For use in third-party devices when setting up a device:
- * duplicates Defn.h which is used internally.
- * (Tested in devNull.cpp)
+/* For use in third-party devices when setting up a device.
  */
 
 #ifndef BEGIN_SUSPEND_INTERRUPTS

@@ -107,8 +107,7 @@ static const char letters[] =
    __GT_DIR:            create a directory, which will be mode 0700.
 
    We use a clever algorithm to get hard-to-predict names. */
-static int
-gen_tempname (char *tmpl)
+static int gen_tempname(const char *tmpl)
 {
   int len;
   char *XXXXXX;
@@ -173,14 +172,13 @@ gen_tempname (char *tmpl)
    they are replaced with a string that makes the filename unique.
    The directory is created, mode 700, and its name is returned.
    (This function comes from OpenBSD.) */
-char *
-mkdtemp (char *Template)
+const char *mkdtemp(const char *Template)
 #ifdef __cplusplus
-	throw()
+throw()
 #endif
 {
-  if (gen_tempname (Template))
-    return nullptr;
-  else
-    return Template;
+    if (gen_tempname(Template))
+        return nullptr;
+    else
+        return Template;
 }

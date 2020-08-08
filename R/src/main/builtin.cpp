@@ -661,7 +661,7 @@ HIDDEN SEXP do_cat(SEXP call, SEXP op, SEXP args, SEXP rho)
 	    if (s->isString_())
 		p = trChar(STRING_ELT(s, 0));
 	    else if (isSymbol(s)) /* length 1 */
-		p = CHAR(s->printname());
+		p = CHAR(PRINTNAME(s));
 	    else if (isVectorAtomic(s)) {
 		/* Not a string, as that is covered above.
 		   Thus the maximum size is about 60.
@@ -782,7 +782,7 @@ HIDDEN SEXP do_expression(SEXP call, SEXP op, SEXP args, SEXP rho)
 	a = args;
 	for (i = 0; i < n; i++) {
 	    if (TAG(a) != R_NilValue)
-		SET_STRING_ELT(nms, i, a->tag()->printname());
+		SET_STRING_ELT(nms, i, PRINTNAME(TAG(a)));
 	    else
 		SET_STRING_ELT(nms, i, R_BlankString);
 	    a = CDR(a);

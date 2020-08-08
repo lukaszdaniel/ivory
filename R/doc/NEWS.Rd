@@ -67,6 +67,10 @@
       allowing to check Rd files marked with keyword \code{"internal"} as
       well.  The latter can be activated for \command{R CMD check} via
       experimental environment variable \env{_R_CHECK_RD_INTERNAL_TOO_}.
+
+      \item New functions \code{numToBits()} and \code{numToInts()}
+      extend the \code{raw} conversion utilities to (double precision)
+      \code{numeric}.
     }
   }
 
@@ -261,6 +265,16 @@
       \item There is a new \samp{LTO_LD} macro to set linker options for
       LTO compilation, for example to select an alternative linker or
       to parallelize thin LTO.
+    }
+  }
+
+    \subsection{DEPRECATED AND DEFUNCT}{
+    \itemize{
+
+      \item The \code{LINPACK} argument to \code{chol.default()},
+      \code{chol2inv()}, \code{solve.default()} and \code{svd()} has been
+      defunct since \R 3.1.0.  Using it now gives a warning which will
+      become an error in \R 4.1.0.
     }
   }
 

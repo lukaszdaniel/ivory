@@ -25,6 +25,7 @@
 
 #include <Localization.h>
 #include <Defn.h>
+#include <Rinterface.h>
 #include <R_ext/RStartup.h>
 #include <R_ext/RS.h> // for Calloc
 

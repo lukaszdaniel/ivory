@@ -392,7 +392,7 @@ HIDDEN SEXP RCNTXT::R_sysframe(int n)
         error(_("NA argument is invalid"));
 
     if (n > 0)
-        n = cptr->framedepth() - n;
+        n = cptr->Rf_framedepth() - n;
     else
         n = -n;
 
@@ -670,7 +670,7 @@ HIDDEN SEXP do_sys(SEXP call, SEXP op, SEXP args, SEXP rho)
     case 1: /* parent */
 	if(n == NA_INTEGER)
 	    error(_("invalid '%s' argument"), "n");
-	i = nframe = cptr->framedepth();
+	i = nframe = cptr->Rf_framedepth();
 	/* This is a pretty awful kludge, but the alternative would be
 	   a major redesign of everything... -pd */
 	while (n-- > 0)
@@ -685,9 +685,9 @@ HIDDEN SEXP do_sys(SEXP call, SEXP op, SEXP args, SEXP rho)
 	    error(_("invalid '%s' argument"), "which");
 	return cptr->R_sysframe(n);
     case 4: /* sys.nframe */
-	return ScalarInteger(cptr->framedepth());
+	return ScalarInteger(cptr->Rf_framedepth());
     case 5: /* sys.calls */
-	nframe = cptr->framedepth();
+	nframe = cptr->Rf_framedepth();
 	PROTECT(rval = allocList(nframe));
 	t=rval;
 	for(i = 1; i <= nframe; i++, t = CDR(t))
@@ -695,7 +695,7 @@ HIDDEN SEXP do_sys(SEXP call, SEXP op, SEXP args, SEXP rho)
 	UNPROTECT(1);
 	return rval;
     case 6: /* sys.frames */
-	nframe = cptr->framedepth();
+	nframe = cptr->Rf_framedepth();
 	PROTECT(rval = allocList(nframe));
 	t = rval;
 	for(i = 1; i <= nframe; i++, t = CDR(t))
@@ -713,7 +713,7 @@ HIDDEN SEXP do_sys(SEXP call, SEXP op, SEXP args, SEXP rho)
             return LCONS(R_BraceSymbol, conexit);
     }
     case 8: /* sys.parents */
-	nframe = cptr->framedepth();
+	nframe = cptr->Rf_framedepth();
 	rval = allocVector(INTSXP, nframe);
 	for(i = 0; i < nframe; i++)
 	    INTEGER(rval)[i] = cptr->R_sysparent(nframe - i);

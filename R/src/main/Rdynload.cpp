@@ -83,6 +83,7 @@
 
 #include <Localization.h>
 #include <Defn.h>
+#include <Rinterface.h>
 #include <Internal.h>
 
 #include <cstring>

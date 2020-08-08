@@ -147,10 +147,10 @@ HIDDEN SEXP do_relop_dflt(SEXP call, SEXP op, SEXP x, SEXP y)
     PROTECT_WITH_INDEX(x, &xpi);
     PROTECT_WITH_INDEX(y, &ypi);
 
-    Rboolean iS;
+    bool iS;
     /* That symbols and calls were allowed was undocumented prior to
        R 2.5.0.  We deparse them as deparse() would, minus attributes */
-    if ((iS = (Rboolean) isSymbol(x)) || x->sexptype() == LANGSXP) {
+    if ((iS = isSymbol(x)) || x->sexptype() == LANGSXP) {
 	SEXP tmp = allocVector(STRSXP, 1);
 	PROTECT(tmp);
 	SET_STRING_ELT(tmp, 0, (iS) ? PRINTNAME(x) :
@@ -158,7 +158,7 @@ HIDDEN SEXP do_relop_dflt(SEXP call, SEXP op, SEXP x, SEXP y)
 	REPROTECT(x = tmp, xpi);
 	UNPROTECT(1);
     }
-    if ((iS = (Rboolean) isSymbol(y)) || TYPEOF(y) == LANGSXP) {
+    if ((iS = isSymbol(y)) || TYPEOF(y) == LANGSXP) {
 	SEXP tmp = allocVector(STRSXP, 1);
 	PROTECT(tmp);
 	SET_STRING_ELT(tmp, 0, (iS) ? PRINTNAME(y) :

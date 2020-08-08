@@ -66,10 +66,11 @@ HIDDEN Rboolean UsingReadline = TRUE;  /* used in sys-std.cpp & ../main/platform
 
 /* call pointers to allow interface switching */
 
-NORET void R_Suicide(const char *s) {
-    ptr_R_Suicide(s);
-    // This should not have returned, but belt-and-braces
-    exit(2); // same status as Rstd_Suicide
+NORET void R_Suicide(const char *s)
+{
+	ptr_R_Suicide(s);
+	// This should not have returned, but belt-and-braces
+	exit(2); // same status as Rstd_Suicide
 }
 void R_ShowMessage(const char *s) { ptr_R_ShowMessage(s); }
 int R_ReadConsole(const char *prompt, unsigned char *buf, int len, int addtohistory)

@@ -52,12 +52,12 @@ extern Rboolean R_Interactive;	/* TRUE during interactive use*/
 extern Rboolean	R_NoEcho;	/* do not echo R code */
 
 extern void R_RestoreGlobalEnv(void);
-extern void R_RestoreGlobalEnvFromFile(const char *, Rboolean);
+extern void R_RestoreGlobalEnvFromFile(const char *name, Rboolean quiet);
 extern void R_SaveGlobalEnv(void);
-extern void R_SaveGlobalEnvToFile(const char *);
+extern void R_SaveGlobalEnvToFile(const char *name);
 extern void R_FlushConsole(void);
 extern void R_ClearerrConsole(void);
-extern NORET void R_Suicide(const char *);
+extern NORET void R_Suicide(const char *s);
 extern char *R_HomeDir(void);
 extern int R_DirtyImage;	/* Current image dirty */
 extern const char *R_GUIType;

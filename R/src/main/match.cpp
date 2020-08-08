@@ -49,65 +49,68 @@
 /* used in subscript.cpp and subassign.cpp */
 Rboolean Rf_NonNullStringMatch(SEXP s, SEXP t)
 {
-    /* "" or NA string matches nothing */
-    if (s == NA_STRING || t == NA_STRING) return FALSE;
-    if (CHAR(s)[0] && CHAR(t)[0] && Seql(s, t))
-	return TRUE;
-    else
-	return FALSE;
+	/* "" or NA string matches nothing */
+	if (s == NA_STRING || t == NA_STRING)
+		return FALSE;
+	if (CHAR(s)[0] && CHAR(t)[0] && Seql(s, t))
+		return TRUE;
+	else
+		return FALSE;
 }
 
 /* currently unused outside this file */
 Rboolean Rf_psmatch(const char *f, const char *t, Rboolean exact)
 {
-    if (exact)
-	return Rboolean(streql(f, t));
-    /* else */
-    while (*t) {
-	if (*t != *f) return FALSE;
-	t++;
-	f++;
-    }
-    return TRUE;
+	if (exact)
+		return Rboolean(streql(f, t));
+	/* else */
+	while (*t)
+	{
+		if (*t != *f)
+			return FALSE;
+		t++;
+		f++;
+	}
+	return TRUE;
 }
-
 
 /* Matching formals and arguments */
 
 R_INLINE static SEXP charFromSexp(SEXP s)
 {
-    switch (TYPEOF(s)) {
-    case SYMSXP:
-	return PRINTNAME(s);
-    case CHARSXP:
-	return s;
-    case STRSXP:
-	if (LENGTH(s) == 1)
-	    return STRING_ELT(s, 0);
+	switch (TYPEOF(s))
+	{
+	case SYMSXP:
+		return PRINTNAME(s);
+	case CHARSXP:
+		return s;
+	case STRSXP:
+		if (LENGTH(s) == 1)
+			return STRING_ELT(s, 0);
 	/* fall back to error */
-    default:
-	error(_("invalid partial string match"));
-    }
+	default:
+		error(_("invalid partial string match"));
+	}
 }
 
 Rboolean Rf_pmatch(SEXP formal, SEXP tag, Rboolean exact)
 {
-    SEXP f = charFromSexp(formal);
-    SEXP t = charFromSexp(tag);
-    cetype_t fenc = getCharCE(f);
-    cetype_t tenc = getCharCE(t);
+	SEXP f = charFromSexp(formal);
+	SEXP t = charFromSexp(tag);
+	cetype_t fenc = getCharCE(f);
+	cetype_t tenc = getCharCE(t);
 
-    if (fenc == tenc)
-	return psmatch(CHAR(f), CHAR(t), exact);
-    else {
-	const void *vmax = vmaxget();
-	Rboolean res = psmatch(translateCharUTF8(f), translateCharUTF8(t),
-	                       exact);
-	vmaxset(vmax);
-	return res;
-    }
+	if (fenc == tenc)
+		return psmatch(CHAR(f), CHAR(t), exact);
+	else
+	{
+		const void *vmax = vmaxget();
+		Rboolean res = psmatch(translateCharUTF8(f), translateCharUTF8(t),
+							   exact);
+		vmaxset(vmax);
+		return res;
+	}
 }
-
 
 /* Destructively Extract A Named List Element. */
 /* Returns the first partially matching tag found. */
@@ -142,32 +145,28 @@ static SEXP matchPar_int(const char *tag, SEXP *list, Rboolean exact)
 }
 
 /* unused outside this file */
-HIDDEN SEXP Rf_matchPar(const char *tag, SEXP * list)
+HIDDEN SEXP Rf_matchPar(const char *tag, SEXP *list)
 {
-    return matchPar_int(tag, list, FALSE);
+	return matchPar_int(tag, list, FALSE);
 }
-
-
 
 /* Destructively Extract A Named List Element. */
 /* Returns the first partially matching tag found. */
 /* Pattern is a symbol. */
 
-HIDDEN SEXP Rf_matchArg(SEXP tag, SEXP * list)
+HIDDEN SEXP Rf_matchArg(SEXP tag, SEXP *list)
 {
-    return matchPar(CHAR(PRINTNAME(tag)), list);
+	return matchPar(CHAR(PRINTNAME(tag)), list);
 }
-
 
 /* Destructively Extract A Named List Element. */
 /* Returns the first exactly matching tag found. */
 /* Pattern is a symbol. */
 
-HIDDEN SEXP Rf_matchArgExact(SEXP tag, SEXP * list)
+HIDDEN SEXP Rf_matchArgExact(SEXP tag, SEXP *list)
 {
-      return matchPar_int(CHAR(PRINTNAME(tag)), list, TRUE);
+	return matchPar_int(CHAR(PRINTNAME(tag)), list, TRUE);
 }
-
 
 /* Match the supplied arguments with the formals and */
 /* return the matched arguments in actuals. */

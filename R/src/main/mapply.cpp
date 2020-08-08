@@ -47,7 +47,7 @@ HIDDEN SEXP do_mapply(SEXP call, SEXP op, SEXP args, SEXP rho)
 	    if (length_op == nullptr) length_op = R_Primitive("length");
 	    // DispatchOrEval() needs 'args' to be a pairlist
 	    SEXP ans, tmp2 = PROTECT(list1(tmp1));
-	    if (DispatchOrEval(call, length_op, "length", tmp2, rho, &ans, 0, 1))
+	    if (Rf_DispatchOrEval(call, length_op, "length", tmp2, rho, &ans, 0, 1))
 		lengths[i] = (R_xlen_t) (TYPEOF(ans) == REALSXP ?
 					 REAL(ans)[0] : asInteger(ans));
 	    UNPROTECT(1);
@@ -87,7 +87,7 @@ HIDDEN SEXP do_mapply(SEXP call, SEXP op, SEXP args, SEXP rho)
 	REPROTECT(fcall = LCONS(tmp2, fcall), fi);
 	UNPROTECT(2);
 	if (named && CHAR(STRING_ELT(vnames, j))[0] != '\0')
-	    SET_TAG(fcall, installTrChar(STRING_ELT(vnames, j)));
+	    SET_TAG(fcall, Rf_installTrChar(STRING_ELT(vnames, j)));
     }
 
     REPROTECT(fcall = LCONS(f, fcall), fi);

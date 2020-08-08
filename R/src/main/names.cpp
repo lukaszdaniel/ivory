@@ -564,6 +564,8 @@ std::vector<FUNTAB> R_FunTab =
 {"rawToChar",	do_rawToChar,	1,	11,	2,	{PP_FUNCALL, PREC_FN,	0}},
 {"rawShift",	do_rawShift,	1,	11,	2,	{PP_FUNCALL, PREC_FN,	0}},
 {"intToBits",	do_intToBits,	1,	11,	1,	{PP_FUNCALL, PREC_FN,	0}},
+{"numToBits",	do_numToBits,	1,	11,	1,	{PP_FUNCALL, PREC_FN,	0}},
+{"numToInts",	do_numToInts,	1,	11,	1,	{PP_FUNCALL, PREC_FN,	0}},
 {"rawToBits",	do_rawToBits,	1,	11,	1,	{PP_FUNCALL, PREC_FN,	0}},
 {"packBits",	do_packBits,	1,	11,	2,	{PP_FUNCALL, PREC_FN,	0}},
 {"utf8ToInt",	do_utf8ToInt,	1,	11,	1,	{PP_FUNCALL, PREC_FN,	0}},
@@ -1309,24 +1311,24 @@ SEXP Rf_installS3Signature(const char *className, const char *methodName) {
     char signature[maxLength];
 
     int i = 0;
-    for(src = className; *src; src++) {
-	if (i == maxLength)
-	    error(_("class name is too long in '%s'"), className);
-	signature[i++] = *src;
+    for (src = className; *src; src++) {
+        if (i == maxLength)
+            error(_("class name is too long in '%s'"), className);
+        signature[i++] = *src;
     }
 
     if (i == maxLength)
-	error(_("class name is too long in '%s'"), className);
+        error(_("class name is too long in '%s'"), className);
     signature[i++] = '.';
 
-    for(src = methodName; *src; src++) {
-	if (i == maxLength)
-	    error(_("class name is too long in '%s'"), className);
-	signature[i++] = *src;
+    for (src = methodName; *src; src++) {
+        if (i == maxLength)
+            error(_("class name is too long in '%s'"), className);
+        signature[i++] = *src;
     }
 
     if (i == maxLength)
-	error(_("class name is too long in '%s'"), className);
+        error(_("class name is too long in '%s'"), className);
     signature[i] = 0;
 
     return install(signature);
@@ -1337,7 +1339,8 @@ SEXP Rf_installS3Signature(const char *className, const char *methodName) {
 
 HIDDEN SEXP do_internal(SEXP call, SEXP op, SEXP args, SEXP env)
 {
-    SEXP s, fun, ans;
+    SEXP s, ans;
+    SEXP fun;
     int save = R_PPStackTop;
     int flag;
     const void *vmax = vmaxget();

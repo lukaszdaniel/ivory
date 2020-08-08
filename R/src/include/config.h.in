@@ -4,11 +4,11 @@
 #define R_CONFIG_H
 
 /* Define to one of `_getb67', `GETB67', `getb67' for Cray-2 and Cray-YMP
-   systems. This function is required for `alloca.cpp' support on those systems.
+   systems. This function is required for `alloca.c' support on those systems.
    */
 #undef CRAY_STACKSEG_END
 
-/* Define to 1 if using `alloca.cpp'. */
+/* Define to 1 if using `alloca.c'. */
 #undef C_ALLOCA
 
 /* C stack direction: 1 (down) or -1 (up) */
@@ -164,9 +164,6 @@
 
 /* Define to 1 if you have the <curl/curl.h> header file. */
 #undef HAVE_CURL_CURL_H
-
-/* define if the compiler supports basic C++11 syntax */
-#undef HAVE_CXX11
 
 /* Define if the GNU dcgettext() function is already present or preinstalled.
    */

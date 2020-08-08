@@ -47,7 +47,7 @@ static int ShellGetPersonalDirectory(char *folder)
 
 static char RUser[MAX_PATH];
 #include <winbase.h>
-extern void R_Suicide(char *s);
+extern void R_Suicide(const char *s);
 
 char *getRUser()
 {
