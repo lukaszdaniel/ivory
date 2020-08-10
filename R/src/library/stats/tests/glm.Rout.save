@@ -1,9 +1,9 @@
 
-Ivory Under development (unstable) (2020-08-04 r1255) -- "Internationalized Version of R"
+Ivory Under development (unstable) (2020-08-08 r1256) -- "Internationalized Version of R"
 Copyright (C) 2013-2020 Lukasz Daniel (lukasz.daniel@gmail.com)
 See README-IVORY file for details.
 
-R Under development (unstable) (2020-08-04 r78979) -- "Unsuffered Consequences"
+R Under development (unstable) (2020-08-08 r78985) -- "Unsuffered Consequences"
 Copyright (C) 2020 The R Foundation for Statistical Computing
 Platform: x86_64-pc-linux-gnu (64-bit)
 
@@ -206,4 +206,4 @@ Number of Fisher Scoring iterations: 3
 > 
 > proc.time()
    user  system elapsed 
-  0.479   0.019   0.495 
+  0.555   0.011   0.559 

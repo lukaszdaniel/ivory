@@ -415,12 +415,15 @@ struct FUNTAB
 #define PRIMPRINT(x)    (((R_FunTab[((BuiltInFunction*)x)->u.primsxp.offset].eval) / 100) % 10)
 #define PRIMINTERNAL(x) (((R_FunTab[((BuiltInFunction*)x)->u.primsxp.offset].eval) % 100) / 10)
 
-/* Promise Access Macros */
-#define PRCODE(x)	(((Promise*)x)->u.promsxp.expr)
-#define PRENV(x)	(((Promise*)x)->u.promsxp.env)
-#define PRVALUE(x)	(((Promise*)x)->u.promsxp.value)
-#define PRSEEN(x)	((x)->sxpinfo.gp)
-#define SET_PRSEEN(x,v)	(((x)->sxpinfo.gp)=(v))
+/* Promise Access Methods */
+auto& SEXPREC::PRCODE(SEXP x) { return x->u.promsxp.expr; }
+void SEXPREC::SET_PRCODE(SEXP x, SEXP v) { x->u.promsxp.expr = v; }
+auto& SEXPREC::PRENV(SEXP x) { return x->u.promsxp.env; }
+void SEXPREC::SET_PRENV(SEXP x, SEXP v) { x->u.promsxp.env = v; }
+auto& SEXPREC::PRVALUE(SEXP x) { return x->u.promsxp.value; }
+void SEXPREC::SET_PRVALUE(SEXP x, SEXP v) { x->u.promsxp.value = v; }
+auto SEXPREC::PRSEEN(SEXP x) { return x->sxpinfo.gp; }
+void SEXPREC::SET_PRSEEN(SEXP x, int v) { x->sxpinfo.gp = v; }
 
 /* Hashing Macros */
 #define HASHASH(x)      ((x)->sxpinfo.gp & HASHASH_MASK)

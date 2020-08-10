@@ -417,7 +417,7 @@ static void HashTableSetup(SEXP x, HashData &d, const R_xlen_t &nmax)
 	UNIMPLEMENTED_TYPE("HashTableSetup()", x);
     }
 #ifdef LONG_VECTOR_SUPPORT
-    d.isLong = (bool) IS_LONG_VEC(x);
+    d.isLong = IS_LONG_VEC(x);
     if (d.isLong) {
 	d.HashTable = allocVector(REALSXP, (R_xlen_t) d.M);
 	for (hlen i = 0; i < d.M; i++) HTDATA_DBL(d)[i] = NIL;

@@ -163,8 +163,11 @@ function (formula, data, subset, na.action, ...)
             stop("grouping factor must have exactly 2 levels")
         DATA <- setNames(split(mf[[response]], g), c("x", "y"))
         y <- do.call("t.test", c(DATA, list(...)))
-        if (length(y$estimate) == 2L) 
+        if (length(y$estimate) == 2L) {
             names(y$estimate) <- gettextf("mean in group %s", levels(g))
+            names(y$null.value) <-
+                gettextf("difference in means between group %s and group %s", levels(g)[1], levels(g)[2])
+        }
     }
     else { # 1-sample and paired tests
         respVar <- mf[[response]]
