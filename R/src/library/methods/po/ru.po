@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.9.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-07-23 12:02+0200\n"
+"POT-Creation-Date: 2020-08-14 18:58+0200\n"
 "PO-Revision-Date: 2015-01-17 15:44+0100\n"
 "Last-Translator: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
 "Language-Team: Russian <dactylorhiza at gmail>\n"
@@ -48,7 +48,7 @@ msgstr ""
 "не могу найти основные вызовы для 'methods' (пакет отключен?): очевидно "
 "случилось что-то очень плохое"
 
-#: methods_list_dispatch.cpp:278
+#: methods_list_dispatch.cpp:280
 #, fuzzy, c-format
 msgid ""
 "no 'allMethods' slot found in object of class \"%s\" used as methods list "
@@ -57,7 +57,7 @@ msgstr ""
 "не найден \"allMethods\" слот в объекте класса \"%s\", использовавшийся как "
 "список методов для функции '%s'"
 
-#: methods_list_dispatch.cpp:401
+#: methods_list_dispatch.cpp:403
 #, fuzzy, c-format
 msgid ""
 "S language method selection did not return normally when called from "
@@ -66,39 +66,39 @@ msgstr ""
 "выбор метода языка S вызвал ошибку, когда был вызван из внутренней отправки "
 "для функции '%s'"
 
-#: methods_list_dispatch.cpp:403
+#: methods_list_dispatch.cpp:405
 msgid "Function name for method selection called internally"
 msgstr ""
 
-#: methods_list_dispatch.cpp:458 methods_list_dispatch.cpp:479
+#: methods_list_dispatch.cpp:460 methods_list_dispatch.cpp:481
 msgid "The 'package' slot in generic function object"
 msgstr ""
 
-#: methods_list_dispatch.cpp:491
+#: methods_list_dispatch.cpp:493
 msgid "The argument 'f' passed to getGeneric"
 msgstr ""
 
-#: methods_list_dispatch.cpp:492
+#: methods_list_dispatch.cpp:494
 msgid "The argument 'package' passed to getGeneric"
 msgstr ""
 
-#: methods_list_dispatch.cpp:497
+#: methods_list_dispatch.cpp:499
 #, c-format
 msgid "no generic function definition found for '%s'"
 msgstr "не найдено определения общей функции для '%s'"
 
-#: methods_list_dispatch.cpp:500
+#: methods_list_dispatch.cpp:502
 #, fuzzy, c-format
 msgid ""
 "no generic function definition found for '%s' in the supplied environment"
 msgstr ""
 "Не найдено определения общей функции для '%s' в предоставленном окружении"
 
-#: methods_list_dispatch.cpp:521
+#: methods_list_dispatch.cpp:523
 msgid "The function name in the call to standardGeneric"
 msgstr ""
 
-#: methods_list_dispatch.cpp:535
+#: methods_list_dispatch.cpp:537
 #, c-format
 msgid ""
 "invalid generic function object for method selection for function '%s': "
@@ -107,26 +107,26 @@ msgstr ""
 "не верный объект общей функции для выбора метода для функции '%s': ожидалась "
 "функция или примитив, получен объект класса \"%s\""
 
-#: methods_list_dispatch.cpp:550
+#: methods_list_dispatch.cpp:552
 #, c-format
 msgid "no direct or inherited method for function '%s' for this call"
 msgstr ""
 "нет прямого или наследованного метода для функции '%s' для данного вызова"
 
-#: methods_list_dispatch.cpp:580 methods_list_dispatch.cpp:1145
+#: methods_list_dispatch.cpp:581 methods_list_dispatch.cpp:1148
 msgid "invalid object (non-function) used as method"
 msgstr "не верный объект (не функция) использован как метод"
 
-#: methods_list_dispatch.cpp:598
+#: methods_list_dispatch.cpp:599
 msgid "'symbol' must be a SYMSXP expression"
 msgstr ""
 
-#: methods_list_dispatch.cpp:601
+#: methods_list_dispatch.cpp:602
 #, c-format
 msgid "could not find symbol '%s' in frame of call"
 msgstr "не найден символ '%s' в структуре вызова"
 
-#: methods_list_dispatch.cpp:609
+#: methods_list_dispatch.cpp:610
 #, c-format
 msgid ""
 "invalid symbol in checking for missing argument in method dispatch: expected "
@@ -135,11 +135,11 @@ msgstr ""
 "при проверки отсутствующего аргумента в отправке метода найден недопустимый "
 "символ: ожидалось имя, получен объект класса \"%s\""
 
-#: methods_list_dispatch.cpp:612
+#: methods_list_dispatch.cpp:613
 msgid "use of NULL environment is defunct"
 msgstr "использование NULL окружения более не поддерживается"
 
-#: methods_list_dispatch.cpp:616
+#: methods_list_dispatch.cpp:617
 #, c-format
 msgid ""
 "invalid environment in checking for missing argument, '%s', in methods "
@@ -148,7 +148,7 @@ msgstr ""
 "при проверке отсутствующего аргумента обнаружено неверное окружение, '%s', в "
 "методах отправки: получен объект класса \"%s\""
 
-#: methods_list_dispatch.cpp:640
+#: methods_list_dispatch.cpp:641
 #, c-format
 msgid ""
 "error in evaluating the argument '%s' in selecting a method for function "
@@ -156,7 +156,7 @@ msgid ""
 msgstr ""
 "ошибка при оценке аргумента '%s' при выборе метода для функции '%s': %s"
 
-#: methods_list_dispatch.cpp:657
+#: methods_list_dispatch.cpp:658
 #, c-format
 msgid ""
 "object of class \"%s\" used as methods list for function '%s' ( no "
@@ -165,7 +165,7 @@ msgstr ""
 "объект класса \"%s\" использован как список методов для функции '%s' ( нет "
 "слота 'argument' )"
 
-#: methods_list_dispatch.cpp:668
+#: methods_list_dispatch.cpp:669
 #, c-format
 msgid ""
 "(in selecting a method for function '%s') '...' and related variables cannot "
@@ -174,7 +174,7 @@ msgstr ""
 "(при выборе метода для функции '%s') '...' и родственные переменные не могут "
 "быть использованы для отправки методов"
 
-#: methods_list_dispatch.cpp:671
+#: methods_list_dispatch.cpp:672
 #, c-format
 msgid ""
 "(in selecting a method for function '%s') the 'environment' argument for "
@@ -183,14 +183,14 @@ msgstr ""
 "(при выборе метода для функции '%s') аргумент 'environment' для отправки "
 "должен быть R окружением; получен объект класса \"%s\""
 
-#: methods_list_dispatch.cpp:702
+#: methods_list_dispatch.cpp:703
 #, c-format
 msgid "no matching method for function '%s' (argument '%s', with class \"%s\")"
 msgstr ""
 "нет соответствующего метода для функции '%s' (аргумент '%s', с классом \"%s"
 "\")"
 
-#: methods_list_dispatch.cpp:709
+#: methods_list_dispatch.cpp:710
 #, c-format
 msgid ""
 "recursive use of function '%s' in method selection, with no default method"
@@ -198,12 +198,12 @@ msgstr ""
 "рекурсивное использование функции '%s' в выборе метода, с отсутствием метода "
 "по-умолчанию"
 
-#: methods_list_dispatch.cpp:734
+#: methods_list_dispatch.cpp:735
 #, c-format
 msgid "error in evaluating a 'primitive' next method: %s"
 msgstr "ошибка при оценке 'primitive' следующего метода: %s"
 
-#: methods_list_dispatch.cpp:757
+#: methods_list_dispatch.cpp:758
 msgid ""
 "internal error in 'callNextMethod': '.nextMethod' was not assigned in the "
 "frame of the method call"
@@ -211,48 +211,48 @@ msgstr ""
 "внутренняя ошибка в 'callNextMethod': '.nextMethod' не был назначен в  "
 "структуре вызова метода"
 
-#: methods_list_dispatch.cpp:889
+#: methods_list_dispatch.cpp:890
 #, c-format
 msgid "'%s' must be a single string (got a character vector of length %d)"
 msgstr ""
 "'%s' должна быть одиночной строкой (получен символьный вектор длины %d)"
 
-#: methods_list_dispatch.cpp:893
+#: methods_list_dispatch.cpp:894
 #, c-format
 msgid "'%s' must be a non-empty string; got an empty string"
 msgstr "'%s' должна быть не пустой строкой; получена пустая строка"
 
-#: methods_list_dispatch.cpp:897
+#: methods_list_dispatch.cpp:898
 #, c-format
 msgid "'%s' must be a single string (got an object of class \"%s\")"
 msgstr "'%s' должна быть одиночной строкой (получен объект класса \"%s\")"
 
-#: methods_list_dispatch.cpp:930
+#: methods_list_dispatch.cpp:933
 msgid "The internal prefix (e.g., \"C\") for a meta-data object"
 msgstr ""
 
-#: methods_list_dispatch.cpp:932
+#: methods_list_dispatch.cpp:935
 msgid ""
 "The name of the object (e.g,. a class or generic function) to find in the "
 "meta-data"
 msgstr ""
 
-#: methods_list_dispatch.cpp:934
+#: methods_list_dispatch.cpp:937
 msgid "The name of the package for a meta-data object"
 msgstr ""
 
-#: methods_list_dispatch.cpp:974
+#: methods_list_dispatch.cpp:977
 #, fuzzy
 msgid "class should be either a character-string name or a class definition"
 msgstr ""
 "Класс должен быть либо именем-текстовой строкой либо определением класса"
 
-#: methods_list_dispatch.cpp:1054
+#: methods_list_dispatch.cpp:1057
 #, fuzzy, c-format
 msgid "failed to get the generic for the primitive \"%s\""
 msgstr "не могу найти общую функцию для примитива \"%s\""
 
-#: methods_list_dispatch.cpp:1061
+#: methods_list_dispatch.cpp:1064
 #, fuzzy, c-format
 msgid ""
 "expected a generic function or a primitive for dispatch, got an object of "
@@ -261,7 +261,7 @@ msgstr ""
 "Ожидалась общая функция либо примитив для отправки, получен объект класса "
 "\"%s\""
 
-#: methods_list_dispatch.cpp:1073
+#: methods_list_dispatch.cpp:1076
 #, fuzzy, c-format
 msgid ""
 "generic \"%s\" seems not to have been initialized for table dispatch---need "
@@ -270,7 +270,7 @@ msgstr ""
 "Общая \"%s\", кажется, не была инициализирована для таблицы отправки---"
 "необходимо иметь .SigArgs и .AllMtable установленными в этом окружении"
 
-#: methods_list_dispatch.cpp:1077
+#: methods_list_dispatch.cpp:1080
 msgid "'.SigArgs' is shorter than '.SigLength' says it should be"
 msgstr ""
 

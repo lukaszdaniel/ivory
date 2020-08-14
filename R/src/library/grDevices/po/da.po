@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 3.0.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-07-23 12:02+0200\n"
+"POT-Creation-Date: 2020-08-14 18:58+0200\n"
 "PO-Revision-Date: 2016-01-09 18:50+0100\n"
 "Last-Translator: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
 "Language-Team: \n"
@@ -93,7 +93,7 @@ msgstr "ugyldigt 'fil'-argument"
 msgid "invalid gray level, must be in [0,1]."
 msgstr ""
 
-#: colors.cpp:551 devPS.cpp:9602 devPS.cpp:9765 devPS.cpp:9768
+#: colors.cpp:551 devPS.cpp:9620 devPS.cpp:9783 devPS.cpp:9786
 #: devWindows.cpp:3676 devWindows.cpp:3680 devWindows.cpp:3688
 #: devWindows.cpp:3699 devWindows.cpp:3705 devWindows.cpp:3712
 #: devWindows.cpp:3719 devWindows.cpp:3723
@@ -149,52 +149,52 @@ msgstr ""
 msgid "failed to load cairo DLL"
 msgstr "kunne ikke allokere rastere"
 
-#: devPS.cpp:559
+#: devPS.cpp:568
 #, c-format
 msgid "afm file '%s' could not be opened"
 msgstr "afm-fil '%s' kunne ikke åbnes"
 
-#: devPS.cpp:589
+#: devPS.cpp:598
 #, fuzzy
 msgid "'FontBBox' could not be parsed"
 msgstr "FontBBox kunne ikke fortolkes"
 
-#: devPS.cpp:597
+#: devPS.cpp:606
 #, fuzzy
 msgid "'CharInfo' could not be parsed"
 msgstr "Tegninfo kunne ikke fortolkes"
 
-#: devPS.cpp:627
+#: devPS.cpp:636
 msgid "unknown AFM entity encountered"
 msgstr "mødte ukendt AFM-entitet"
 
-#: devPS.cpp:739 devPS.cpp:742 devPS.cpp:4462 devPS.cpp:9227 devPicTeX.cpp:472
+#: devPS.cpp:747 devPS.cpp:750 devPS.cpp:4479 devPS.cpp:9245 devPicTeX.cpp:472
 #: devPicTeX.cpp:474
 #, fuzzy, c-format
 msgid "invalid string in '%s' function"
 msgstr "ugyldig streng i '%s'"
 
-#: devPS.cpp:773
+#: devPS.cpp:781
 #, c-format
 msgid "font width unknown for character 0x%x"
 msgstr "skriftbredde ukendt for tegn 0x%x"
 
-#: devPS.cpp:831 devPS.cpp:4342
+#: devPS.cpp:838 devPS.cpp:4359
 #, fuzzy, c-format
 msgid "unknown encoding '%s' in '%s' function"
 msgstr "ukendt kodning '%s' i 'mbcsToSbcs'"
 
-#: devPS.cpp:847 devPS.cpp:858
+#: devPS.cpp:854 devPS.cpp:865
 #, c-format
 msgid "font metrics unknown for Unicode character U+%04x"
 msgstr "måleenhed for skrifttype er ukendt for Unicodetegn U+%04x"
 
-#: devPS.cpp:866
+#: devPS.cpp:873
 #, c-format
 msgid "font metrics unknown for character 0x%x"
 msgstr "måleenhed for skrifttype er ukendt for tegn 0x%x"
 
-#: devPS.cpp:880
+#: devPS.cpp:886
 #, fuzzy, c-format
 msgid ""
 "invalid character (%04x) sent to 'PostScriptCIDMetricInfo()' function in a "
@@ -203,96 +203,96 @@ msgstr ""
 "ugyldigt tegn (%04x) sendt til PostScriptCIDMetricInfo i en enkelt-byte "
 "lokalitet"
 
-#: devPS.cpp:888
+#: devPS.cpp:894
 #, fuzzy
 msgid ""
 "invalid character sent to 'PostScriptCIDMetricInfo()' in a single-byte locale"
 msgstr ""
 "ugyldigt tegn sendt til PostScriptCIDMetricInfo i en enkelt-byte lokalitet"
 
-#: devPS.cpp:993
+#: devPS.cpp:1007
 msgid "failed to allocate CID font info"
 msgstr "kunne ikke allokere CID-skriftinfo"
 
-#: devPS.cpp:1009
+#: devPS.cpp:1023
 msgid "failed to allocate Type 1 font info"
 msgstr "kunne ikke allokere Type 1-skriftinfo"
 
-#: devPS.cpp:1029
+#: devPS.cpp:1043
 msgid "failed to allocate encoding info"
 msgstr "kunne ikke allokere kodningsinfo"
 
-#: devPS.cpp:1047
+#: devPS.cpp:1062
 msgid "failed to allocate CID font family"
 msgstr "kunne ikke allokere CID-skriftfamilie"
 
-#: devPS.cpp:1060
+#: devPS.cpp:1076
 msgid "failed to allocate Type 1 font family"
 msgstr "kunne ikke allokere Type 1-skriftfamilie"
 
-#: devPS.cpp:1099 devPS.cpp:1110
+#: devPS.cpp:1113 devPS.cpp:1124
 msgid "failed to allocate font list"
 msgstr "kunne ikke allokere skriftliste"
 
-#: devPS.cpp:1161
+#: devPS.cpp:1182
 msgid "failed to allocated encoding list"
 msgstr "kunne ikke allokere kodningsliste"
 
-#: devPS.cpp:1310
+#: devPS.cpp:1331
 msgid "truncated string which was too long for copy"
 msgstr "forkortet streng som var for lang for kopiering"
 
-#: devPS.cpp:1350
+#: devPS.cpp:1371
 #, c-format
 msgid "failed to load encoding file '%s'"
 msgstr "kunne ikke indlæse kodningsfil '%s'"
 
-#: devPS.cpp:1448 devPS.cpp:1481
+#: devPS.cpp:1469 devPS.cpp:1502
 #, fuzzy
 msgid "invalid font name or more than one font name"
 msgstr "Ugyldigt skriftnavn eller mere end et skriftnavn"
 
-#: devPS.cpp:1600 devPS.cpp:1635
+#: devPS.cpp:1621 devPS.cpp:1655
 #, fuzzy, c-format
 msgid "font family '%s' not found in PostScript font database"
 msgstr "skriftfamilie ikke fundet i PostScript-skriftdatabasen"
 
-#: devPS.cpp:1719 devPS.cpp:1801 devPS.cpp:1828
+#: devPS.cpp:1739 devPS.cpp:1820 devPS.cpp:1847
 #, fuzzy, c-format
 msgid "font encoding for family '%s' not found in font database"
 msgstr "skriftkodning ikke fundet i skriftdatabasen"
 
-#: devPS.cpp:1746 devPS.cpp:1773
+#: devPS.cpp:1766 devPS.cpp:1793
 #, fuzzy, c-format
 msgid "font CMap for family '%s' not found in font database"
 msgstr "skrift-CMAP ikke fundet i skriftdatabasen"
 
-#: devPS.cpp:1968 devPS.cpp:2048 devPS.cpp:2116
+#: devPS.cpp:1987 devPS.cpp:2067 devPS.cpp:2134
 #, c-format
 msgid "cannot load afm file '%s'"
 msgstr "kan ikke indlæse afm-fil '%s'"
 
-#: devPS.cpp:2404
+#: devPS.cpp:2421
 #, fuzzy
 msgid "corrupt loaded encodings;  encoding not recorded"
 msgstr "Ødelagte indlæste kodninger;  kodning ikke optaget"
 
-#: devPS.cpp:2415
+#: devPS.cpp:2432
 #, fuzzy
 msgid "failed to record device encoding"
 msgstr "Kunne ikke optage enhedskodning"
 
-#: devPS.cpp:2586
+#: devPS.cpp:2603
 #, fuzzy
 msgid "object '.ps.prolog' is not a character vector"
 msgstr "Object.ps.prolog er ikke en tegnvektor"
 
-#: devPS.cpp:2661 devPS.cpp:7528 devWindows.cpp:798
+#: devPS.cpp:2678 devPS.cpp:7546 devWindows.cpp:798
 #, fuzzy
 msgid "invalid line end"
 msgstr "Ugyldig linjeafslutning"
 
-#: devPS.cpp:2680 devPS.cpp:7548 devWindows.cpp:811
+#: devPS.cpp:2697 devPS.cpp:7566 devWindows.cpp:811
 #, fuzzy
 msgid "invalid line join"
 msgstr "Ugyldig linjeforbindelse"
@@ -300,73 +300,73 @@ msgstr "Ugyldig linjeforbindelse"
 # http://en.wikipedia.org/wiki/Miter_joint
 # må være gering på dansk
 # http://www.denstoredanske.dk/It,_teknik_og_naturvidenskab/Teknik/Boring,_s%C3%A6nkning_og_rivning/gering
-#: devPS.cpp:2688
+#: devPS.cpp:2705
 #, fuzzy
 msgid "invalid line mitre"
 msgstr "Ugyldig linjegering"
 
-#: devPS.cpp:2893 devPS.cpp:3812 devPS.cpp:4260 devPS.cpp:4287 devPS.cpp:5330
-#: devPS.cpp:9077 devPS.cpp:9122
+#: devPS.cpp:2910 devPS.cpp:3829 devPS.cpp:4277 devPS.cpp:4304 devPS.cpp:5347
+#: devPS.cpp:9095 devPS.cpp:9140
 #, c-format
 msgid "attempt to use invalid font %d replaced by font 1"
 msgstr "forsøg på at bruge ugyldig skrifttype %d erstattet af skrifttype 1"
 
 # 83%
-#: devPS.cpp:3120 devPS.cpp:4785 devPS.cpp:6914 devWindows.cpp:1812
+#: devPS.cpp:3137 devPS.cpp:4802 devPS.cpp:6932 devWindows.cpp:1812
 #: devWindows.cpp:1849 devWindows.cpp:1879 devWindows.cpp:1911
 #, fuzzy, c-format
 msgid "filename too long in '%s' call"
 msgstr "filnavn er for langt i %s()-kald"
 
-#: devPS.cpp:3126 devPS.cpp:4791 devPS.cpp:6920
+#: devPS.cpp:3143 devPS.cpp:4808 devPS.cpp:6938
 #, fuzzy, c-format
 msgid "memory allocation problem in '%s' function"
 msgstr "allokeringsproblem for hukommelsen i %s()"
 
-#: devPS.cpp:3144 devPS.cpp:6984
+#: devPS.cpp:3161 devPS.cpp:7002
 #, fuzzy, c-format
 msgid "encoding path is too long in '%s' function"
 msgstr "kodningssti er for lang i %s()"
 
-#: devPS.cpp:3158 devPS.cpp:4831
+#: devPS.cpp:3175 devPS.cpp:4848
 #, fuzzy, c-format
 msgid "failed to load encoding file in '%s' function"
 msgstr "kunne ikke indlæse kodningsfil '%s'"
 
-#: devPS.cpp:3203 devPS.cpp:3266 devPS.cpp:7043 devPS.cpp:7099 devPS.cpp:8957
+#: devPS.cpp:3220 devPS.cpp:3283 devPS.cpp:7061 devPS.cpp:7117 devPS.cpp:8975
 #, fuzzy
 msgid "invalid font type"
 msgstr "Ugyldig skrifttype"
 
-#: devPS.cpp:3227
+#: devPS.cpp:3244
 #, fuzzy
 msgid "failed to initialise default PostScript font"
 msgstr "Kunne ikke initialisere standardskriften for PostScript"
 
-#: devPS.cpp:3293
+#: devPS.cpp:3310
 #, fuzzy
 msgid "failed to initialise additional PostScript fonts"
 msgstr "Kunne ikke initialisere yderligere PostScript-skrifter"
 
-#: devPS.cpp:3309
+#: devPS.cpp:3326
 msgid "invalid foreground/background color (postscript)"
 msgstr "ugyldig forgrund- eller baggrundsfarve (postscript)"
 
-#: devPS.cpp:3314
+#: devPS.cpp:3331
 msgid "'command' is too long"
 msgstr "'kommando' er for lang"
 
-#: devPS.cpp:3319
+#: devPS.cpp:3336
 #, fuzzy
 msgid "'postscript(print.it=TRUE)' used with an empty 'print' command"
 msgstr "postscript(print.it=TRUE) brugt med en tom print-kommando"
 
-#: devPS.cpp:3370
+#: devPS.cpp:3387
 #, c-format
 msgid "invalid page type '%s' (postscript)"
 msgstr "ugyldig sidetype '%s' (postscript)"
 
-#: devPS.cpp:3492 devPS.cpp:4630 devWindows.cpp:2346
+#: devPS.cpp:3509 devPS.cpp:4647 devWindows.cpp:2346
 msgid ""
 "semi-transparency is not supported on this device: reported only once per "
 "page"
@@ -374,17 +374,17 @@ msgstr ""
 "semitransparens er ikke understøttet på denne enhed: kun rapporteret en gang "
 "per side"
 
-#: devPS.cpp:3603 devPS.cpp:3614
+#: devPS.cpp:3620 devPS.cpp:3631
 #, fuzzy, c-format
 msgid "cannot open 'postscript' pipe to '%s'"
 msgstr "kan ikke åbne postscript-datakanal til '%s'"
 
-#: devPS.cpp:3625 devPS.cpp:5048 devPS.cpp:5061 devPS.cpp:8251 qdPDF.cpp:98
+#: devPS.cpp:3642 devPS.cpp:5065 devPS.cpp:5078 devPS.cpp:8269 qdPDF.cpp:98
 #, c-format
 msgid "cannot open file '%s'"
 msgstr "kan ikke åbne fil '%s'"
 
-#: devPS.cpp:3753 devPS.cpp:3768
+#: devPS.cpp:3770 devPS.cpp:3785
 #, c-format
 msgid ""
 "error from postscript() in running:\n"
@@ -393,194 +393,194 @@ msgstr ""
 "fejl fra postscript() under kørsel af:\n"
 "    %s"
 
-#: devPS.cpp:3800
+#: devPS.cpp:3817
 #, fuzzy, c-format
 msgid "CID family '%s' not included in postscript() device"
 msgstr "CID-familie '%s' er ikke inkluderet i PostScript-enhed"
 
 # 91%
-#: devPS.cpp:3818 devPS.cpp:3829 devPS.cpp:4267 devPS.cpp:4297 devPS.cpp:4402
+#: devPS.cpp:3835 devPS.cpp:3846 devPS.cpp:4284 devPS.cpp:4314 devPS.cpp:4419
 #, fuzzy, c-format
 msgid "family '%s' not included in postscript() device"
 msgstr "familie '%s' er ikke inkluderet i PostScript-enhed"
 
-#: devPS.cpp:4352
+#: devPS.cpp:4369
 #, fuzzy, c-format
 msgid "conversion failure on '%s' in '%s' function: dot substituted for <%02x>"
 msgstr "konverteringsfejl på '%s' i 'mbcsToSbcs': punktum erstattet for <%02x>"
 
-#: devPS.cpp:4360
+#: devPS.cpp:4377
 #, fuzzy, c-format
 msgid "conversion failure from %s to %s on '%s' in '%s' function"
 msgstr "konverteringsfejl på '%s' i 'mbcsToSbcs': punktum erstattet for <%02x>"
 
-#: devPS.cpp:4430
+#: devPS.cpp:4447
 #, c-format
 msgid "failed open converter to encoding '%s'"
 msgstr "fejlede åbn af omdannelsesprogram for kodning af '%s'"
 
-#: devPS.cpp:4448 devPS.cpp:5375 devPS.cpp:9212
+#: devPS.cpp:4465 devPS.cpp:5392 devPS.cpp:9230
 #, c-format
 msgid "failed in text conversion to encoding '%s'"
 msgstr "fejlede i tekstomdannelse til kodning '%s'"
 
-#: devPS.cpp:4644
+#: devPS.cpp:4661
 #, fuzzy
 msgid "ran out of colors in 'xfig()' function"
 msgstr "løb ud af farver i xfig()"
 
-#: devPS.cpp:4673
+#: devPS.cpp:4690
 #, c-format
 msgid "unimplemented line texture %08x: using Dash-double-dotted"
 msgstr "uimplementeret linjetekstur %08x: bruger Bindestreg-dobbelt-prikket"
 
-#: devPS.cpp:4745
+#: devPS.cpp:4762
 #, c-format
 msgid "unknown postscript font family '%s', using Helvetica"
 msgstr "ukendt postscript-skriftfamilie '%s', bruger Helvetica"
 
 # 81%
-#: devPS.cpp:4816
+#: devPS.cpp:4833
 msgid "invalid foreground/background color (xfig)"
 msgstr "ugyldig forgrund- eller baggrundsfarve (xfig)"
 
-#: devPS.cpp:4849
+#: devPS.cpp:4866
 #, fuzzy
 msgid "only Type 1 fonts supported for XFig"
 msgstr "Kun Type 1-skrifter understøttet for XFig"
 
 # 79%
-#: devPS.cpp:4862
+#: devPS.cpp:4879
 #, fuzzy
 msgid "failed to initialise default XFig font"
 msgstr "Kunne ikke initialisere standardskriften for XFig"
 
-#: devPS.cpp:4899
+#: devPS.cpp:4916
 #, c-format
 msgid "invalid page type '%s' (xfig)"
 msgstr "ugyldig sidetype '%s' (xfig)"
 
-#: devPS.cpp:4907
+#: devPS.cpp:4924
 #, c-format
 msgid "xfig(%s, onefile=FALSE) will only return the last plot"
 msgstr "xfig(%s, onefile=FALSE) vil kun returnere det sidste plot"
 
-#: devPS.cpp:5040
+#: devPS.cpp:5057
 msgid "empty file name"
 msgstr "tomt filnavn"
 
-#: devPS.cpp:5107 devPS.cpp:5159 devPS.cpp:6738 devPS.cpp:6782 devPS.cpp:8312
+#: devPS.cpp:5124 devPS.cpp:5176 devPS.cpp:6756 devPS.cpp:6800 devPS.cpp:8330
 msgid "write failed"
 msgstr "skrivning fejlede"
 
-#: devPS.cpp:5364
+#: devPS.cpp:5381
 #, c-format
 msgid "unable to use encoding '%s'"
 msgstr "kan ikke bruge kodning '%s'"
 
-#: devPS.cpp:5687
+#: devPS.cpp:5706
 msgid "failed to increase definition string (shut down PDF device)"
 msgstr ""
 
-#: devPS.cpp:5729
+#: devPS.cpp:5749
 #, fuzzy
 msgid "failed to increase 'maxDefns'"
 msgstr "kan ikke øge 'maxRaster'"
 
-#: devPS.cpp:6626 devPS.cpp:6629
+#: devPS.cpp:6644 devPS.cpp:6647
 msgid "failed to increase 'maxRaster'"
 msgstr "kan ikke øge 'maxRaster'"
 
-#: devPS.cpp:6641
+#: devPS.cpp:6659
 #, fuzzy
 msgid "unable to allocate raster image"
 msgstr "Kan ikke allokere raster-billede"
 
 # 77%
-#: devPS.cpp:6842
+#: devPS.cpp:6860
 #, fuzzy
 msgid "corrupt loaded encodings;  font not added"
 msgstr "Ødelagte indlæste kodninger;  skrift ikke tilføjet"
 
-#: devPS.cpp:6852
+#: devPS.cpp:6870
 #, fuzzy
 msgid "failed to record device encoding; font not added"
 msgstr "Kunne ikke optage enhedskodning: skrifttype ikke tilføjet"
 
-#: devPS.cpp:6970 devPS.cpp:7377 devPS.cpp:8102
+#: devPS.cpp:6988 devPS.cpp:7395 devPS.cpp:8120
 #, fuzzy, c-format
 msgid "increasing the PDF version to %s"
 msgstr "øger PDF-versionen til 1.2"
 
-#: devPS.cpp:7000
+#: devPS.cpp:7018
 msgid "failed to load default encoding"
 msgstr "kunne ikke indlæse standardkodning"
 
 # 79%
-#: devPS.cpp:7067
+#: devPS.cpp:7085
 #, fuzzy
 msgid "failed to initialise default PDF font"
 msgstr "Kunne ikke initialisere standardskriften for PDF"
 
 # 81%
-#: devPS.cpp:7122
+#: devPS.cpp:7140
 #, fuzzy
 msgid "failed to initialise additional PDF fonts"
 msgstr "Kunne ikke initialisere yderligere PDF-skrifter"
 
 # 75%
-#: devPS.cpp:7135
+#: devPS.cpp:7153
 msgid "failed to allocate rasters"
 msgstr "kunne ikke allokere rastere"
 
-#: devPS.cpp:7142
+#: devPS.cpp:7160
 msgid "failed to allocate masks"
 msgstr "kunne ikke allokere masker"
 
-#: devPS.cpp:7151
+#: devPS.cpp:7169
 #, fuzzy
 msgid "failed to allocate definitions"
 msgstr "kunne ikke allokere skriftliste"
 
-#: devPS.cpp:7220
+#: devPS.cpp:7238
 #, c-format
 msgid "invalid paper type '%s' (pdf)"
 msgstr "ugyldig papirtype '%s' (pdf)"
 
 # 81%
-#: devPS.cpp:7244
+#: devPS.cpp:7262
 msgid "invalid foreground/background color (pdf)"
 msgstr "ugyldig forgrund- eller baggrundsfarve (pdf)"
 
-#: devPS.cpp:7352
+#: devPS.cpp:7370
 #, fuzzy
 msgid "invalid 'alpha' value in PDF"
 msgstr "Ugyldig alfaværdi i PDF"
 
-#: devPS.cpp:7421 devPS.cpp:7469
+#: devPS.cpp:7439 devPS.cpp:7487
 msgid "unknown 'colormodel', using 'srgb'"
 msgstr "ukendt 'colormodel', bruger 'srgb'"
 
-#: devPS.cpp:7714
+#: devPS.cpp:7732
 #, fuzzy
 msgid "failed to load sRGB colorspace file"
 msgstr "Kunne ikke indlæse sRGB-farverumsfil"
 
-#: devPS.cpp:8021
+#: devPS.cpp:8039
 #, fuzzy
 msgid "corrupt encodings in PDF device"
 msgstr "Ødelagte kodninger i PDF-enhed"
 
-#: devPS.cpp:8235
+#: devPS.cpp:8253
 #, fuzzy, c-format
 msgid "cannot open 'pdf' pipe to '%s'"
 msgstr "kan ikke åbne postscript-datakanal til '%s'"
 
-#: devPS.cpp:8241
+#: devPS.cpp:8259
 msgid "file = \"|cmd\" implies 'onefile = TRUE'"
 msgstr ""
 
-#: devPS.cpp:8385
+#: devPS.cpp:8403
 #, c-format
 msgid ""
 "cannot open 'pdf' file argument '%s'\n"
@@ -589,35 +589,35 @@ msgstr ""
 "kan ikke åbne 'pdf-filargument' '%s'\n"
 "  luk venligst PDF-enheden ned"
 
-#: devPS.cpp:8405
+#: devPS.cpp:8423
 #, c-format
 msgid ""
 "cannot open temporary file '%s' for compression (reason: %s); compression "
 "has been turned off for this device"
 msgstr ""
 
-#: devPS.cpp:8597
+#: devPS.cpp:8615
 msgid "Raster image within mask ignored"
 msgstr ""
 
-#: devPS.cpp:8982 devPS.cpp:9344 devPS.cpp:9391
+#: devPS.cpp:9000 devPS.cpp:9362 devPS.cpp:9409
 #, fuzzy
 msgid "failed to find or load PDF font"
 msgstr "Kunne ikke finde eller indlæse PDF-skrift"
 
-#: devPS.cpp:9166 devPS.cpp:9299
+#: devPS.cpp:9184 devPS.cpp:9317
 #, fuzzy
 msgid "failed to find or load PDF CID font"
 msgstr "Kunne ikke finde eller indlæse PDF CID-skrift"
 
-#: devPS.cpp:9574 devPS.cpp:9578 devPS.cpp:9596 devPS.cpp:9739 devPS.cpp:9743
-#: devPS.cpp:9755
+#: devPS.cpp:9592 devPS.cpp:9596 devPS.cpp:9614 devPS.cpp:9757 devPS.cpp:9761
+#: devPS.cpp:9773
 #, fuzzy, c-format
 msgid "invalid '%s' parameter in '%s'"
 msgstr "ugyldigt 'fonts'-parameter i %s"
 
 # 85%
-#: devPS.cpp:9615 devPS.cpp:9682 devPS.cpp:9782
+#: devPS.cpp:9633 devPS.cpp:9700 devPS.cpp:9800
 #, fuzzy, c-format
 msgid "unable to start '%s' device"
 msgstr "kan ikke starte %s()-enhed"

@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: stats 4.1.0\n"
-"POT-Creation-Date: 2020-07-23 12:02\n"
+"POT-Creation-Date: 2020-08-14 18:58\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -5162,6 +5162,13 @@ msgstr ""
 #. R/t.test.R: gettext("difference in means", domain = "R-stats")
 
 msgid "difference in means"
+msgstr ""
+
+
+#: R/t.test.R: 0
+#. R/t.test.R: gettextf("difference in means between group %s and group %s", levels(g)[1], levels(g)[2])
+
+msgid "difference in means between group %s and group %s"
 msgstr ""
 
 

@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.13.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-07-23 12:02+0200\n"
+"POT-Creation-Date: 2020-08-14 18:58+0200\n"
 "PO-Revision-Date: 2011-04-02 18:24+0200\n"
 "Last-Translator: Murat Alkan <muratalk@gmail.com>\n"
 "Language-Team: Turkish <muratalk@gmail.com>\n"
@@ -205,7 +205,7 @@ msgstr "geçersiz '%s' tanımlaması"
 
 #: plot.cpp:280 plot.cpp:294 plot.cpp:480 plot.cpp:485 plot.cpp:2146
 #: plot.cpp:2153 plot.cpp:3176 plot.cpp:3178 plot.cpp:3180 plot.cpp:3341
-#: plot3d.cpp:1164 plot3d.cpp:1168 plot3d.cpp:1170 plot3d.cpp:1896
+#: plot3d.cpp:1164 plot3d.cpp:1168 plot3d.cpp:1170 plot3d.cpp:1897
 #, c-format
 msgid "invalid '%s' value"
 msgstr "geçersiz '%s' değeri"
@@ -259,7 +259,7 @@ msgstr "eksen etiketleri için geçersiz yazım"
 #: plot.cpp:755 plot.cpp:1330 plot.cpp:1655 plot.cpp:1720 plot.cpp:1795
 #: plot.cpp:1861 plot.cpp:1935 plot.cpp:2030 plot.cpp:2106 plot.cpp:2384
 #: plot.cpp:2558 plot.cpp:2774 plot.cpp:3322 plot.cpp:3465 plot.cpp:3541
-#: plot.cpp:3706 plot.cpp:3986 plot3d.cpp:1865
+#: plot.cpp:3706 plot.cpp:3986 plot3d.cpp:1866
 msgid "too few arguments"
 msgstr "çok az argüman"
 
@@ -488,11 +488,11 @@ msgstr "'%s' argümanı için hatalı uzunluk"
 msgid "unable to allocate memory (in 'xspline()')"
 msgstr "bellek ayrılamadı (xspline içinde)"
 
-#: plot3d.cpp:182 plot3d.cpp:1922
+#: plot3d.cpp:182 plot3d.cpp:1923
 msgid "insufficient 'x' or 'y' values"
 msgstr "yetersiz 'x' veya 'y' değerleri"
 
-#: plot3d.cpp:186 plot3d.cpp:1925
+#: plot3d.cpp:186 plot3d.cpp:1926
 msgid "dimension mismatch"
 msgstr "boyut uyumsuzluğu"
 
@@ -530,36 +530,36 @@ msgstr "'xlab' 1 birim uzunluğunda bir karakter vektörü olmalıdır"
 msgid "invalid viewing parameters"
 msgstr "geçersiz görüntüleme parametreleri"
 
-#: plot3d.cpp:1519
+#: plot3d.cpp:1520
 #, fuzzy, c-format
 msgid "contour(): circular/long seglist -- set %s > %d?"
 msgstr "contour(): dairesel/uzun seglist -- bug.report()!"
 
-#: plot3d.cpp:1928
+#: plot3d.cpp:1929
 msgid "no 'levels'"
 msgstr ""
 
-#: plot3d.cpp:1932 plot3d.cpp:1939
+#: plot3d.cpp:1933 plot3d.cpp:1940
 #, fuzzy, c-format
 msgid "missing '%s' values"
 msgstr "eksik 'x' değerleri"
 
-#: plot3d.cpp:1934 plot3d.cpp:1941
+#: plot3d.cpp:1935 plot3d.cpp:1942
 #, fuzzy, c-format
 msgid "increasing '%s' values expected"
 msgstr "artan 'x' değerleri beklendi"
 
-#: plot3d.cpp:1946
+#: plot3d.cpp:1947
 #, c-format
 msgid "non-finite level values: levels[%d] = %g"
 msgstr ""
 
-#: plot3d.cpp:1959
+#: plot3d.cpp:1960
 #, fuzzy
 msgid "all 'z' values are equal"
 msgstr "tüm z değerleri eşit"
 
-#: plot3d.cpp:1961
+#: plot3d.cpp:1962
 #, fuzzy
 msgid "all 'z' values are NA"
 msgstr "tüm z değerleri NA"

@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.2.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-07-23 12:02+0200\n"
+"POT-Creation-Date: 2020-08-14 18:58+0200\n"
 "PO-Revision-Date: 2012-03-09 06:45+0200\n"
 "Last-Translator: Chel Hee Lee <chl948@mail.usask.ca>\n"
 "Language-Team: The Korean R Translation Council <gnustats@gmail.com>\n"
@@ -174,7 +174,7 @@ msgstr ""
 msgid "object is not a unit"
 msgstr ""
 
-#: unit.cpp:1841
+#: unit.cpp:1843
 msgid "units can only be multiplied with numerics and integers"
 msgstr ""
 

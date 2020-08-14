@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: grDevices 4.1.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-07-23 12:02+0200\n"
+"POT-Creation-Date: 2020-08-14 18:58+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -90,7 +90,7 @@ msgstr ""
 msgid "invalid gray level, must be in [0,1]."
 msgstr ""
 
-#: colors.cpp:551 devPS.cpp:9602 devPS.cpp:9765 devPS.cpp:9768
+#: colors.cpp:551 devPS.cpp:9620 devPS.cpp:9783 devPS.cpp:9786
 #: devWindows.cpp:3676 devWindows.cpp:3680 devWindows.cpp:3688
 #: devWindows.cpp:3699 devWindows.cpp:3705 devWindows.cpp:3712
 #: devWindows.cpp:3719 devWindows.cpp:3723
@@ -142,424 +142,424 @@ msgstr ""
 msgid "failed to load cairo DLL"
 msgstr ""
 
-#: devPS.cpp:559
+#: devPS.cpp:568
 #, c-format
 msgid "afm file '%s' could not be opened"
 msgstr ""
 
-#: devPS.cpp:589
+#: devPS.cpp:598
 msgid "'FontBBox' could not be parsed"
 msgstr ""
 
-#: devPS.cpp:597
+#: devPS.cpp:606
 msgid "'CharInfo' could not be parsed"
 msgstr ""
 
-#: devPS.cpp:627
+#: devPS.cpp:636
 msgid "unknown AFM entity encountered"
 msgstr ""
 
-#: devPS.cpp:739 devPS.cpp:742 devPS.cpp:4462 devPS.cpp:9227 devPicTeX.cpp:472
+#: devPS.cpp:747 devPS.cpp:750 devPS.cpp:4479 devPS.cpp:9245 devPicTeX.cpp:472
 #: devPicTeX.cpp:474
 #, c-format
 msgid "invalid string in '%s' function"
 msgstr ""
 
-#: devPS.cpp:773
+#: devPS.cpp:781
 #, c-format
 msgid "font width unknown for character 0x%x"
 msgstr ""
 
-#: devPS.cpp:831 devPS.cpp:4342
+#: devPS.cpp:838 devPS.cpp:4359
 #, c-format
 msgid "unknown encoding '%s' in '%s' function"
 msgstr ""
 
-#: devPS.cpp:847 devPS.cpp:858
+#: devPS.cpp:854 devPS.cpp:865
 #, c-format
 msgid "font metrics unknown for Unicode character U+%04x"
 msgstr ""
 
-#: devPS.cpp:866
+#: devPS.cpp:873
 #, c-format
 msgid "font metrics unknown for character 0x%x"
 msgstr ""
 
-#: devPS.cpp:880
+#: devPS.cpp:886
 #, c-format
 msgid ""
 "invalid character (%04x) sent to 'PostScriptCIDMetricInfo()' function in a "
 "single-byte locale"
 msgstr ""
 
-#: devPS.cpp:888
+#: devPS.cpp:894
 msgid ""
 "invalid character sent to 'PostScriptCIDMetricInfo()' in a single-byte locale"
 msgstr ""
 
-#: devPS.cpp:993
+#: devPS.cpp:1007
 msgid "failed to allocate CID font info"
 msgstr ""
 
-#: devPS.cpp:1009
+#: devPS.cpp:1023
 msgid "failed to allocate Type 1 font info"
 msgstr ""
 
-#: devPS.cpp:1029
+#: devPS.cpp:1043
 msgid "failed to allocate encoding info"
 msgstr ""
 
-#: devPS.cpp:1047
+#: devPS.cpp:1062
 msgid "failed to allocate CID font family"
 msgstr ""
 
-#: devPS.cpp:1060
+#: devPS.cpp:1076
 msgid "failed to allocate Type 1 font family"
 msgstr ""
 
-#: devPS.cpp:1099 devPS.cpp:1110
+#: devPS.cpp:1113 devPS.cpp:1124
 msgid "failed to allocate font list"
 msgstr ""
 
-#: devPS.cpp:1161
+#: devPS.cpp:1182
 msgid "failed to allocated encoding list"
 msgstr ""
 
-#: devPS.cpp:1310
+#: devPS.cpp:1331
 msgid "truncated string which was too long for copy"
 msgstr ""
 
-#: devPS.cpp:1350
+#: devPS.cpp:1371
 #, c-format
 msgid "failed to load encoding file '%s'"
 msgstr ""
 
-#: devPS.cpp:1448 devPS.cpp:1481
+#: devPS.cpp:1469 devPS.cpp:1502
 msgid "invalid font name or more than one font name"
 msgstr ""
 
-#: devPS.cpp:1600 devPS.cpp:1635
+#: devPS.cpp:1621 devPS.cpp:1655
 #, c-format
 msgid "font family '%s' not found in PostScript font database"
 msgstr ""
 
-#: devPS.cpp:1719 devPS.cpp:1801 devPS.cpp:1828
+#: devPS.cpp:1739 devPS.cpp:1820 devPS.cpp:1847
 #, c-format
 msgid "font encoding for family '%s' not found in font database"
 msgstr ""
 
-#: devPS.cpp:1746 devPS.cpp:1773
+#: devPS.cpp:1766 devPS.cpp:1793
 #, c-format
 msgid "font CMap for family '%s' not found in font database"
 msgstr ""
 
-#: devPS.cpp:1968 devPS.cpp:2048 devPS.cpp:2116
+#: devPS.cpp:1987 devPS.cpp:2067 devPS.cpp:2134
 #, c-format
 msgid "cannot load afm file '%s'"
 msgstr ""
 
-#: devPS.cpp:2404
+#: devPS.cpp:2421
 msgid "corrupt loaded encodings;  encoding not recorded"
 msgstr ""
 
-#: devPS.cpp:2415
+#: devPS.cpp:2432
 msgid "failed to record device encoding"
 msgstr ""
 
-#: devPS.cpp:2586
+#: devPS.cpp:2603
 msgid "object '.ps.prolog' is not a character vector"
 msgstr ""
 
-#: devPS.cpp:2661 devPS.cpp:7528 devWindows.cpp:798
+#: devPS.cpp:2678 devPS.cpp:7546 devWindows.cpp:798
 msgid "invalid line end"
 msgstr ""
 
-#: devPS.cpp:2680 devPS.cpp:7548 devWindows.cpp:811
+#: devPS.cpp:2697 devPS.cpp:7566 devWindows.cpp:811
 msgid "invalid line join"
 msgstr ""
 
-#: devPS.cpp:2688
+#: devPS.cpp:2705
 msgid "invalid line mitre"
 msgstr ""
 
-#: devPS.cpp:2893 devPS.cpp:3812 devPS.cpp:4260 devPS.cpp:4287 devPS.cpp:5330
-#: devPS.cpp:9077 devPS.cpp:9122
+#: devPS.cpp:2910 devPS.cpp:3829 devPS.cpp:4277 devPS.cpp:4304 devPS.cpp:5347
+#: devPS.cpp:9095 devPS.cpp:9140
 #, c-format
 msgid "attempt to use invalid font %d replaced by font 1"
 msgstr ""
 
-#: devPS.cpp:3120 devPS.cpp:4785 devPS.cpp:6914 devWindows.cpp:1812
+#: devPS.cpp:3137 devPS.cpp:4802 devPS.cpp:6932 devWindows.cpp:1812
 #: devWindows.cpp:1849 devWindows.cpp:1879 devWindows.cpp:1911
 #, c-format
 msgid "filename too long in '%s' call"
 msgstr ""
 
-#: devPS.cpp:3126 devPS.cpp:4791 devPS.cpp:6920
+#: devPS.cpp:3143 devPS.cpp:4808 devPS.cpp:6938
 #, c-format
 msgid "memory allocation problem in '%s' function"
 msgstr ""
 
-#: devPS.cpp:3144 devPS.cpp:6984
+#: devPS.cpp:3161 devPS.cpp:7002
 #, c-format
 msgid "encoding path is too long in '%s' function"
 msgstr ""
 
-#: devPS.cpp:3158 devPS.cpp:4831
+#: devPS.cpp:3175 devPS.cpp:4848
 #, c-format
 msgid "failed to load encoding file in '%s' function"
 msgstr ""
 
-#: devPS.cpp:3203 devPS.cpp:3266 devPS.cpp:7043 devPS.cpp:7099 devPS.cpp:8957
+#: devPS.cpp:3220 devPS.cpp:3283 devPS.cpp:7061 devPS.cpp:7117 devPS.cpp:8975
 msgid "invalid font type"
 msgstr ""
 
-#: devPS.cpp:3227
+#: devPS.cpp:3244
 msgid "failed to initialise default PostScript font"
 msgstr ""
 
-#: devPS.cpp:3293
+#: devPS.cpp:3310
 msgid "failed to initialise additional PostScript fonts"
 msgstr ""
 
-#: devPS.cpp:3309
+#: devPS.cpp:3326
 msgid "invalid foreground/background color (postscript)"
 msgstr ""
 
-#: devPS.cpp:3314
+#: devPS.cpp:3331
 msgid "'command' is too long"
 msgstr ""
 
-#: devPS.cpp:3319
+#: devPS.cpp:3336
 msgid "'postscript(print.it=TRUE)' used with an empty 'print' command"
 msgstr ""
 
-#: devPS.cpp:3370
+#: devPS.cpp:3387
 #, c-format
 msgid "invalid page type '%s' (postscript)"
 msgstr ""
 
-#: devPS.cpp:3492 devPS.cpp:4630 devWindows.cpp:2346
+#: devPS.cpp:3509 devPS.cpp:4647 devWindows.cpp:2346
 msgid ""
 "semi-transparency is not supported on this device: reported only once per "
 "page"
 msgstr ""
 
-#: devPS.cpp:3603 devPS.cpp:3614
+#: devPS.cpp:3620 devPS.cpp:3631
 #, c-format
 msgid "cannot open 'postscript' pipe to '%s'"
 msgstr ""
 
-#: devPS.cpp:3625 devPS.cpp:5048 devPS.cpp:5061 devPS.cpp:8251 qdPDF.cpp:98
+#: devPS.cpp:3642 devPS.cpp:5065 devPS.cpp:5078 devPS.cpp:8269 qdPDF.cpp:98
 #, c-format
 msgid "cannot open file '%s'"
 msgstr ""
 
-#: devPS.cpp:3753 devPS.cpp:3768
+#: devPS.cpp:3770 devPS.cpp:3785
 #, c-format
 msgid ""
 "error from postscript() in running:\n"
 "    %s"
 msgstr ""
 
-#: devPS.cpp:3800
+#: devPS.cpp:3817
 #, c-format
 msgid "CID family '%s' not included in postscript() device"
 msgstr ""
 
-#: devPS.cpp:3818 devPS.cpp:3829 devPS.cpp:4267 devPS.cpp:4297 devPS.cpp:4402
+#: devPS.cpp:3835 devPS.cpp:3846 devPS.cpp:4284 devPS.cpp:4314 devPS.cpp:4419
 #, c-format
 msgid "family '%s' not included in postscript() device"
 msgstr ""
 
-#: devPS.cpp:4352
+#: devPS.cpp:4369
 #, c-format
 msgid "conversion failure on '%s' in '%s' function: dot substituted for <%02x>"
 msgstr ""
 
-#: devPS.cpp:4360
+#: devPS.cpp:4377
 #, c-format
 msgid "conversion failure from %s to %s on '%s' in '%s' function"
 msgstr ""
 
-#: devPS.cpp:4430
+#: devPS.cpp:4447
 #, c-format
 msgid "failed open converter to encoding '%s'"
 msgstr ""
 
-#: devPS.cpp:4448 devPS.cpp:5375 devPS.cpp:9212
+#: devPS.cpp:4465 devPS.cpp:5392 devPS.cpp:9230
 #, c-format
 msgid "failed in text conversion to encoding '%s'"
 msgstr ""
 
-#: devPS.cpp:4644
+#: devPS.cpp:4661
 msgid "ran out of colors in 'xfig()' function"
 msgstr ""
 
-#: devPS.cpp:4673
+#: devPS.cpp:4690
 #, c-format
 msgid "unimplemented line texture %08x: using Dash-double-dotted"
 msgstr ""
 
-#: devPS.cpp:4745
+#: devPS.cpp:4762
 #, c-format
 msgid "unknown postscript font family '%s', using Helvetica"
 msgstr ""
 
-#: devPS.cpp:4816
+#: devPS.cpp:4833
 msgid "invalid foreground/background color (xfig)"
 msgstr ""
 
-#: devPS.cpp:4849
+#: devPS.cpp:4866
 msgid "only Type 1 fonts supported for XFig"
 msgstr ""
 
-#: devPS.cpp:4862
+#: devPS.cpp:4879
 msgid "failed to initialise default XFig font"
 msgstr ""
 
-#: devPS.cpp:4899
+#: devPS.cpp:4916
 #, c-format
 msgid "invalid page type '%s' (xfig)"
 msgstr ""
 
-#: devPS.cpp:4907
+#: devPS.cpp:4924
 #, c-format
 msgid "xfig(%s, onefile=FALSE) will only return the last plot"
 msgstr ""
 
-#: devPS.cpp:5040
+#: devPS.cpp:5057
 msgid "empty file name"
 msgstr ""
 
-#: devPS.cpp:5107 devPS.cpp:5159 devPS.cpp:6738 devPS.cpp:6782 devPS.cpp:8312
+#: devPS.cpp:5124 devPS.cpp:5176 devPS.cpp:6756 devPS.cpp:6800 devPS.cpp:8330
 msgid "write failed"
 msgstr ""
 
-#: devPS.cpp:5364
+#: devPS.cpp:5381
 #, c-format
 msgid "unable to use encoding '%s'"
 msgstr ""
 
-#: devPS.cpp:5687
+#: devPS.cpp:5706
 msgid "failed to increase definition string (shut down PDF device)"
 msgstr ""
 
-#: devPS.cpp:5729
+#: devPS.cpp:5749
 msgid "failed to increase 'maxDefns'"
 msgstr ""
 
-#: devPS.cpp:6626 devPS.cpp:6629
+#: devPS.cpp:6644 devPS.cpp:6647
 msgid "failed to increase 'maxRaster'"
 msgstr ""
 
-#: devPS.cpp:6641
+#: devPS.cpp:6659
 msgid "unable to allocate raster image"
 msgstr ""
 
-#: devPS.cpp:6842
+#: devPS.cpp:6860
 msgid "corrupt loaded encodings;  font not added"
 msgstr ""
 
-#: devPS.cpp:6852
+#: devPS.cpp:6870
 msgid "failed to record device encoding; font not added"
 msgstr ""
 
-#: devPS.cpp:6970 devPS.cpp:7377 devPS.cpp:8102
+#: devPS.cpp:6988 devPS.cpp:7395 devPS.cpp:8120
 #, c-format
 msgid "increasing the PDF version to %s"
 msgstr ""
 
-#: devPS.cpp:7000
+#: devPS.cpp:7018
 msgid "failed to load default encoding"
 msgstr ""
 
-#: devPS.cpp:7067
+#: devPS.cpp:7085
 msgid "failed to initialise default PDF font"
 msgstr ""
 
-#: devPS.cpp:7122
+#: devPS.cpp:7140
 msgid "failed to initialise additional PDF fonts"
 msgstr ""
 
-#: devPS.cpp:7135
+#: devPS.cpp:7153
 msgid "failed to allocate rasters"
 msgstr ""
 
-#: devPS.cpp:7142
+#: devPS.cpp:7160
 msgid "failed to allocate masks"
 msgstr ""
 
-#: devPS.cpp:7151
+#: devPS.cpp:7169
 msgid "failed to allocate definitions"
 msgstr ""
 
-#: devPS.cpp:7220
+#: devPS.cpp:7238
 #, c-format
 msgid "invalid paper type '%s' (pdf)"
 msgstr ""
 
-#: devPS.cpp:7244
+#: devPS.cpp:7262
 msgid "invalid foreground/background color (pdf)"
 msgstr ""
 
-#: devPS.cpp:7352
+#: devPS.cpp:7370
 msgid "invalid 'alpha' value in PDF"
 msgstr ""
 
-#: devPS.cpp:7421 devPS.cpp:7469
+#: devPS.cpp:7439 devPS.cpp:7487
 msgid "unknown 'colormodel', using 'srgb'"
 msgstr ""
 
-#: devPS.cpp:7714
+#: devPS.cpp:7732
 msgid "failed to load sRGB colorspace file"
 msgstr ""
 
-#: devPS.cpp:8021
+#: devPS.cpp:8039
 msgid "corrupt encodings in PDF device"
 msgstr ""
 
-#: devPS.cpp:8235
+#: devPS.cpp:8253
 #, c-format
 msgid "cannot open 'pdf' pipe to '%s'"
 msgstr ""
 
-#: devPS.cpp:8241
+#: devPS.cpp:8259
 msgid "file = \"|cmd\" implies 'onefile = TRUE'"
 msgstr ""
 
-#: devPS.cpp:8385
+#: devPS.cpp:8403
 #, c-format
 msgid ""
 "cannot open 'pdf' file argument '%s'\n"
 "  please shut down the PDF device"
 msgstr ""
 
-#: devPS.cpp:8405
+#: devPS.cpp:8423
 #, c-format
 msgid ""
 "cannot open temporary file '%s' for compression (reason: %s); compression "
 "has been turned off for this device"
 msgstr ""
 
-#: devPS.cpp:8597
+#: devPS.cpp:8615
 msgid "Raster image within mask ignored"
 msgstr ""
 
-#: devPS.cpp:8982 devPS.cpp:9344 devPS.cpp:9391
+#: devPS.cpp:9000 devPS.cpp:9362 devPS.cpp:9409
 msgid "failed to find or load PDF font"
 msgstr ""
 
-#: devPS.cpp:9166 devPS.cpp:9299
+#: devPS.cpp:9184 devPS.cpp:9317
 msgid "failed to find or load PDF CID font"
 msgstr ""
 
-#: devPS.cpp:9574 devPS.cpp:9578 devPS.cpp:9596 devPS.cpp:9739 devPS.cpp:9743
-#: devPS.cpp:9755
+#: devPS.cpp:9592 devPS.cpp:9596 devPS.cpp:9614 devPS.cpp:9757 devPS.cpp:9761
+#: devPS.cpp:9773
 #, c-format
 msgid "invalid '%s' parameter in '%s'"
 msgstr ""
 
-#: devPS.cpp:9615 devPS.cpp:9682 devPS.cpp:9782
+#: devPS.cpp:9633 devPS.cpp:9700 devPS.cpp:9800
 #, c-format
 msgid "unable to start '%s' device"
 msgstr ""

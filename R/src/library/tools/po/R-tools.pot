@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: tools 4.1.0\n"
-"POT-Creation-Date: 2020-07-23 12:00\n"
+"POT-Creation-Date: 2020-08-14 18:59\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -7997,6 +7997,13 @@ msgid "testing package %s failed"
 msgstr ""
 
 
+#: R/utils.R: 0
+#. R/utils.R: warning("texi2dvi script/program not available, using emulation")
+
+msgid "texi2dvi script/program not available, using emulation"
+msgstr ""
+
+
 #: R/makeLazyLoad.R: 0
 #. R/makeLazyLoad.R: stop("this cannot be used for package 'base'")
 
@@ -8986,10 +8993,10 @@ msgstr[1]    ""
 
 
 #: R/QC.R: 0
-#. R/QC.R: ngettext(length(bad), "Namespace dependency missing from DESCRIPTION Imports/Suggests/Depends entries:",     "Namespace dependencies missing from DESCRIPTION Imports/Suggests/Depends entries:")
+#. R/QC.R: ngettext(length(bad), "Namespace dependency missing from DESCRIPTION Imports/Depends entries:",     "Namespace dependencies missing from DESCRIPTION Imports/Depends entries:")
 
-msgid        "Namespace dependency missing from DESCRIPTION Imports/Suggests/Depends entries:"
-msgid_plural "Namespace dependencies missing from DESCRIPTION Imports/Suggests/Depends entries:"
+msgid        "Namespace dependency missing from DESCRIPTION Imports/Depends entries:"
+msgid_plural "Namespace dependencies missing from DESCRIPTION Imports/Depends entries:"
 msgstr[0]    ""
 msgstr[1]    ""
 

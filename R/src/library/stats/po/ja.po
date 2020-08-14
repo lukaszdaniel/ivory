@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.1.1\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-07-23 12:02+0200\n"
+"POT-Creation-Date: 2020-08-14 18:59+0200\n"
 "PO-Revision-Date: 2015-01-17 15:50+0100\n"
 "Last-Translator: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
 "Language-Team: RjpWiki Message Translation Team <mokada@md.tsukuba.ac.jp>\n"
@@ -66,15 +66,15 @@ msgstr " approx()：NA値を補間しようとしました "
 msgid "approx(x,y, .., na.rm=FALSE): NA values in x are not allowed"
 msgstr ""
 
-#: arima.cpp:76 arima.cpp:187 arima.cpp:372 arima.cpp:603 optim.cpp:33
+#: arima.cpp:76 arima.cpp:186 arima.cpp:370 arima.cpp:601 optim.cpp:33
 msgid "invalid argument type"
 msgstr " 不正な引数の型です "
 
-#: arima.cpp:439 arima.cpp:525 pacf.cpp:321 pacf.cpp:360
+#: arima.cpp:437 arima.cpp:523 pacf.cpp:321 pacf.cpp:360
 msgid "can only transform 100 pars in arima0"
 msgstr " arima0 では 100 個のパラメータまでしか変換出来ません "
 
-#: arima.cpp:1011
+#: arima.cpp:1007
 msgid "maximum supported lag is 350"
 msgstr " サポートされているラグの最大値は350です "
 
@@ -170,7 +170,7 @@ msgstr " 最初の要素だけが変数名として使われました "
 msgid "invalid expression in '%s'"
 msgstr " \"%s\" 中の式が不正です "
 
-#: deriv.cpp:1077 model.cpp:93
+#: deriv.cpp:1077 model.cpp:89
 msgid "invalid variable names"
 msgstr " 変数名が不正です "
 
@@ -646,7 +646,7 @@ msgstr ""
 msgid "Singular matrix in '%s' function"
 msgstr " ldet 中の特異行列です "
 
-#: mAR.cpp:700 massdist.cpp:42 model.cpp:373 model.cpp:381 optim.cpp:221
+#: mAR.cpp:700 massdist.cpp:42 model.cpp:370 model.cpp:378 optim.cpp:221
 #, c-format
 msgid "invalid '%s' argument"
 msgstr " '%s' 引数が不正です "
@@ -655,144 +655,144 @@ msgstr " '%s' 引数が不正です "
 msgid "Burg's algorithm failed to find partial correlation"
 msgstr " Burg のアルゴリズムが偏相関を見つけ損ないました "
 
-#: model.cpp:91
+#: model.cpp:87
 msgid "invalid variables"
 msgstr " 変数が不正です "
 
-#: model.cpp:95 model.cpp:100
+#: model.cpp:91 model.cpp:96
 msgid "number of variables != number of variable names"
 msgstr " 変数の個数が変数名の個数と一致していません "
 
-#: model.cpp:98
+#: model.cpp:94
 msgid "invalid extra variables"
 msgstr " 追加変数が不正です "
 
-#: model.cpp:102
+#: model.cpp:98
 msgid "invalid extra variable names"
 msgstr " 追加変数名が不正です "
 
-#: model.cpp:123
+#: model.cpp:119
 #, c-format
 msgid "overlong names in '%s'"
 msgstr " '%s' の名前が長すぎます "
 
-#: model.cpp:150
+#: model.cpp:146
 #, c-format
 msgid "invalid type (%s) for variable '%s'"
 msgstr " 型 (%s) は変数 '%s' に対しては不正です "
 
-#: model.cpp:155
+#: model.cpp:151
 #, c-format
 msgid "variable lengths differ (found for '%s')"
 msgstr " 変数('%s'に基づく)の長さが異なります "
 
-#: model.cpp:212
+#: model.cpp:208
 msgid "invalid result from na.action"
 msgstr " na.action の結果が不正です "
 
-#: model.cpp:392
+#: model.cpp:389
 msgid "invalid model frame"
 msgstr " モデルフレームが不正です "
 
-#: model.cpp:394
+#: model.cpp:391
 msgid "do not know how many cases"
 msgstr " ケースの数が幾つあるか分かりません "
 
-#: model.cpp:418
+#: model.cpp:415
 #, c-format
 msgid "variable lengths differ (found for variable %d)"
 msgstr " 変数(%d変数に基づく)の長さが異なります "
 
-#: model.cpp:422 model.cpp:429
+#: model.cpp:419 model.cpp:426
 #, c-format
 msgid "variable %d has no levels"
 msgstr " 変数 %d は水準を持ちません "
 
-#: model.cpp:541
+#: model.cpp:538
 msgid "the response appeared on the right-hand side and was dropped"
 msgstr " 目的変数が右辺にあるため、捨て去られました "
 
-#: model.cpp:561
+#: model.cpp:558
 #, c-format
 msgid "term %d would require %.0g columns"
 msgstr " 項 %d は %.0g 行を必要とするかもしれません "
 
-#: model.cpp:565
+#: model.cpp:562
 #, c-format
 msgid "matrix would require %.0g columns"
 msgstr " 行列は %.0g 行を必要とするかもしれません "
 
-#: model.cpp:576
+#: model.cpp:573
 #, fuzzy, c-format
 msgid "problem with term %d in model.matrix(): no columns are assigned"
 msgstr ""
 " model.matrix 中の項 %d に問題があります：いかなる列も指定されていません "
 
-#: model.cpp:624 model.cpp:629 model.cpp:635 model.cpp:646 model.cpp:652
-#: model.cpp:658
+#: model.cpp:621 model.cpp:626 model.cpp:632 model.cpp:643 model.cpp:649
+#: model.cpp:655
 msgid "term names will be truncated"
 msgstr " 項の名前は切りつめらられるでしょう "
 
-#: model.cpp:638
+#: model.cpp:635
 msgid "complex variables are not currently allowed in model matrices"
 msgstr " モデル行列中では複素数は現在許されていません "
 
-#: model.cpp:662
+#: model.cpp:659
 #, c-format
 msgid "variables of type '%s' are not allowed in model matrices"
 msgstr " タイプ '%s' の変数はモデル行列中では許されません "
 
-#: model.cpp:886
+#: model.cpp:883
 msgid "invalid formula in 'update'"
 msgstr " 'update' 中の式が不正です "
 
-#: model.cpp:920
+#: model.cpp:917
 msgid "formula expected"
 msgstr " 式が期待されています "
 
-#: model.cpp:1088
+#: model.cpp:1085
 msgid "invalid term in model formula"
 msgstr " モデル式に不正な項があります "
 
-#: model.cpp:1179 model.cpp:1260
+#: model.cpp:1176 model.cpp:1257
 #, fuzzy, c-format
 msgid "invalid model formula in '%s' function"
 msgstr " EncodeVars 中のモデル式が不正です "
 
-#: model.cpp:1211 model.cpp:1517
+#: model.cpp:1208 model.cpp:1514
 msgid "invalid power in formula"
 msgstr " モデル式中に不正なべき乗があります "
 
-#: model.cpp:1628
+#: model.cpp:1625
 #, c-format
 msgid "duplicated name '%s' in data frame using '.'"
 msgstr " データフレーム中の重複した名前 '%s' を '.' を使って複製しました "
 
-#: model.cpp:1695
+#: model.cpp:1692
 #, fuzzy
 msgid "invalid model formula in EncodeVars"
 msgstr " ExtractVars 中のモデル式が不正です "
 
-#: model.cpp:1772
+#: model.cpp:1769
 msgid "argument is not a valid model"
 msgstr " 引数は有効なモデルではありません "
 
-#: model.cpp:1782
+#: model.cpp:1779
 msgid "'specials' must be NULL or a character vector"
 msgstr " 'specials' はNULLまたは文字ベクタでなくてはなりません "
 
-#: model.cpp:1793
+#: model.cpp:1790
 msgid "'data' argument is of the wrong type"
 msgstr " 'data' 引数が誤った型です "
 
-#: model.cpp:1865
+#: model.cpp:1862
 #, c-format
 msgid ""
 "'varlist' has changed (from nvar=%d) to new %d after EncodeVars() -- should "
 "no longer happen!"
 msgstr ""
 
-#: model.cpp:2149
+#: model.cpp:2146
 msgid "'.' in formula and no 'data' argument"
 msgstr " '.' が式中にありますが, 'data' 引数がありません "
 
@@ -1203,34 +1203,34 @@ msgstr ""
 msgid "'scal' matrix is not positive-definite"
 msgstr ""
 
-#: random.cpp:54 random.cpp:138 random.cpp:218 random.cpp:308
+#: random.cpp:54 random.cpp:138 random.cpp:220 random.cpp:312
 #, fuzzy
 msgid "NA values produced"
 msgstr " NA が生成されました "
 
-#: random.cpp:61 random.cpp:67 random.cpp:73 random.cpp:88 random.cpp:168
-#: random.cpp:257 random.cpp:400
+#: random.cpp:61 random.cpp:67 random.cpp:73 random.cpp:88 random.cpp:170
+#: random.cpp:261 random.cpp:405
 msgid "invalid arguments"
 msgstr " 引数(複数)が不正です "
 
-#: random.cpp:334
+#: random.cpp:341
 #, fuzzy
 msgid "NA value in probability vector"
 msgstr " パラメータ中に不正な NA 値があります "
 
-#: random.cpp:336
+#: random.cpp:343
 msgid "negative probability"
 msgstr ""
 
-#: random.cpp:342
+#: random.cpp:351
 msgid "no positive probabilities"
 msgstr ""
 
-#: random.cpp:354
+#: random.cpp:364
 msgid "invalid first argument 'n'"
 msgstr " 一番目の引数 'n' が不正です "
 
-#: random.cpp:356
+#: random.cpp:366
 msgid "invalid second argument 'size'"
 msgstr " 二番目の引数 'size' が不正です "
 
@@ -1249,7 +1249,7 @@ msgstr ""
 msgid "invalid end-rule for running median of 3: %d"
 msgstr " 3点移動中央値計算の終了ルールが不正です: %d "
 
-#: splines.cpp:370
+#: splines.cpp:371
 msgid "inputs of different lengths"
 msgstr ""
 

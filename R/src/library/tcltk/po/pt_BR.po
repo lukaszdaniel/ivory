@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.11.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-07-23 12:02+0200\n"
+"POT-Creation-Date: 2020-08-14 18:59+0200\n"
 "PO-Revision-Date: 2015-01-17 15:53+0100\n"
 "Last-Translator: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
 "Language-Team: http://www.feferraz.net/br/P/Projeto_Traducao_R_Portugues\n"
@@ -27,7 +27,7 @@ msgid "tcl error.\n"
 msgstr "erro tcl.\n"
 
 #: tcltk.cpp:201 tcltk.cpp:276 tcltk.cpp:293 tcltk.cpp:313 tcltk.cpp:333
-#: tcltk.cpp:408 tcltk.cpp:473 tcltk.cpp:527 tcltk.cpp:766
+#: tcltk.cpp:408 tcltk.cpp:473 tcltk.cpp:527 tcltk.cpp:767
 msgid "invalid argument"
 msgstr "argumento inválido"
 
@@ -45,11 +45,11 @@ msgid "argument list is too long in tcltk internal function 'callback_closure'"
 msgstr ""
 "lista de argumentos muito longa na função tcltk interna: 'callback_closure'"
 
-#: tcltk.cpp:672
+#: tcltk.cpp:673
 msgid "argument is not of correct type"
 msgstr "argumento não é do tipo correto"
 
-#: tcltk.cpp:724
+#: tcltk.cpp:725
 msgid "no DISPLAY variable so Tk is not available"
 msgstr "sem variável DISPLAY então Tk não está disponível"
 

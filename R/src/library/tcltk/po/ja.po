@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.5.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-07-23 12:02+0200\n"
+"POT-Creation-Date: 2020-08-14 18:59+0200\n"
 "PO-Revision-Date: 2015-01-17 15:53+0100\n"
 "Last-Translator: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
 "Language-Team: Japanese <translation-team-ja@lists.sourceforge.net>\n"
@@ -29,7 +29,7 @@ msgid "tcl error.\n"
 msgstr " tcl エラー \n"
 
 #: tcltk.cpp:201 tcltk.cpp:276 tcltk.cpp:293 tcltk.cpp:313 tcltk.cpp:333
-#: tcltk.cpp:408 tcltk.cpp:473 tcltk.cpp:527 tcltk.cpp:766
+#: tcltk.cpp:408 tcltk.cpp:473 tcltk.cpp:527 tcltk.cpp:767
 msgid "invalid argument"
 msgstr " 不正な引数 "
 
@@ -46,11 +46,11 @@ msgstr " 不正な tclObj - おそらく、別のセッションから保存さ�
 msgid "argument list is too long in tcltk internal function 'callback_closure'"
 msgstr " 引数リストはtcltkの内部関数 `callback_closure' において長過ぎます "
 
-#: tcltk.cpp:672
+#: tcltk.cpp:673
 msgid "argument is not of correct type"
 msgstr " 引数は正しいタイプではありません "
 
-#: tcltk.cpp:724
+#: tcltk.cpp:725
 msgid "no DISPLAY variable so Tk is not available"
 msgstr " DISPLAY環境変数が無いのでTkは利用出来ません "
 

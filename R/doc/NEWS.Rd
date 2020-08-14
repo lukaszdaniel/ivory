@@ -71,6 +71,10 @@
       \item New functions \code{numToBits()} and \code{numToInts()}
       extend the \code{raw} conversion utilities to (double precision)
       \code{numeric}.
+
+      \item Functions \code{URLencode()} and \code{URLdecode()} in
+      package \pkg{utils} now work on vectors of URLs.
+      Based on patch from Bob Rudis submitted with \PR{17873}.
     }
   }
 
@@ -222,11 +226,6 @@
       \code{addNA} is setting \code{na.action = na.pass} among others;
       reported as \PR{17770} by Thomas Soeiro.
 
-      \item Low-level socket read/write operations have been fixed to
-      correctly signal communication errors. Previously, such errors could
-      lead to a segfault due to invalid memory access. Reported
-      and debugged by Dmitriy Selivanov in \PR{17850}.
-
       \item The \command{R CMD check <pkg>} gives a longer and more
       comprehensible message when \file{DESCRIPTION} misses dependencies,
       e.g., in \code{Imports:}; thanks to the contributors of \PR{17179}.
@@ -234,6 +233,10 @@
       \item \code{update.default()} now calls the generic \code{update()}
       on the formula to work correctly for models with extended formulas;
       as reported and suggested by Neal Fultz in \PR{17865}.
+
+      \item Horizontal position of leaves in a dendrogram is now correct
+      also with \code{center = FALSE}; \PR{14938}, patch from Sebastian
+      Meyer.
     }
   }
 }
@@ -301,6 +304,11 @@
       \code{r2dtable()} now work correctly for large table entries (in the
       millions).  Reported by Sebastian Meyer and investigated by more
       helpers in \PR{16184}.
+
+      \item Low-level socket read/write operations have been fixed to
+      correctly signal communication errors. Previously, such errors could
+      lead to a segfault due to invalid memory access. Reported
+      and debugged by Dmitriy Selivanov in \PR{17850}.
     }
   }
 }

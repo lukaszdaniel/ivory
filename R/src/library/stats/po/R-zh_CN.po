@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.2.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2020-07-23 12:02\n"
+"POT-Creation-Date: 2020-08-14 18:58\n"
 "PO-Revision-Date: 2015-01-17 15:50+0100\n"
 "Last-Translator: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
 "Language-Team: Chinese\n"
@@ -3929,6 +3929,11 @@ msgstr ""
 #. R/t.test.R: gettext("difference in means", domain = "R-stats")
 #: R/t.test.R:0
 msgid "difference in means"
+msgstr ""
+
+#. R/t.test.R: gettextf("difference in means between group %s and group %s", levels(g)[1], levels(g)[2])
+#: R/t.test.R:0
+msgid "difference in means between group %s and group %s"
 msgstr ""
 
 #. R/cancor.R: stop("dimension 0 in 'x' or 'y' argument")

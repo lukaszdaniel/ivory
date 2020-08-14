@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 2.13.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2020-07-23 12:02\n"
+"POT-Creation-Date: 2020-08-14 18:58\n"
 "PO-Revision-Date: 2011-03-26 08:57-0300\n"
 "Last-Translator: Fernando Henrique <pessoal@fernandohrosa.com.br>\n"
 "Language-Team: http://www.feferraz.net/br/P/Projeto_Traducao_R_Portugues\n"
@@ -3937,6 +3937,11 @@ msgstr ""
 #. R/t.test.R: gettext("difference in means", domain = "R-stats")
 #: R/t.test.R:0
 msgid "difference in means"
+msgstr ""
+
+#. R/t.test.R: gettextf("difference in means between group %s and group %s", levels(g)[1], levels(g)[2])
+#: R/t.test.R:0
+msgid "difference in means between group %s and group %s"
 msgstr ""
 
 #. R/cancor.R: stop("dimension 0 in 'x' or 'y' argument")

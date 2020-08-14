@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.3.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2020-07-23 12:00\n"
+"POT-Creation-Date: 2020-08-14 18:59\n"
 "PO-Revision-Date: 2005-04-17 16:57+0200\n"
 "Last-Translator: stefano iacus <>\n"
 "Language-Team: Italian <it@li.org>\n"
@@ -6434,6 +6434,11 @@ msgstr "il name space non deve essere caricato."
 msgid "testing package %s failed"
 msgstr "esecuzione di make fallita"
 
+#. R/utils.R: warning("texi2dvi script/program not available, using emulation")
+#: R/utils.R:0
+msgid "texi2dvi script/program not available, using emulation"
+msgstr ""
+
 #. R/makeLazyLoad.R: stop("this cannot be used for package 'base'")
 #: R/makeLazyLoad.R:0
 msgid "this cannot be used for package 'base'"
@@ -7303,14 +7308,11 @@ msgid_plural "Missing or unexported objects: %s"
 msgstr[0] ""
 msgstr[1] ""
 
-#. R/QC.R: ngettext(length(bad), "Namespace dependency missing from DESCRIPTION Imports/Suggests/Depends entries:",     "Namespace dependencies missing from DESCRIPTION Imports/Suggests/Depends entries:")
+#. R/QC.R: ngettext(length(bad), "Namespace dependency missing from DESCRIPTION Imports/Depends entries:",     "Namespace dependencies missing from DESCRIPTION Imports/Depends entries:")
 #: R/QC.R:0
-msgid ""
-"Namespace dependency missing from DESCRIPTION Imports/Suggests/Depends "
-"entries:"
+msgid "Namespace dependency missing from DESCRIPTION Imports/Depends entries:"
 msgid_plural ""
-"Namespace dependencies missing from DESCRIPTION Imports/Suggests/Depends "
-"entries:"
+"Namespace dependencies missing from DESCRIPTION Imports/Depends entries:"
 msgstr[0] ""
 msgstr[1] ""
 

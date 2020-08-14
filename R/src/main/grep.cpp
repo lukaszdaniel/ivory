@@ -145,7 +145,12 @@ NORET static void reg_report(int rc, regex_t *reg, const char *pat)
 	char errbuf[1001];
 	tre_regerror(rc, reg, errbuf, 1001);
 	if (pat)
+	{
+		/* PR#16600 - the regex may be so long that the TRE error description
+	   is truncated out from the message, so give also a warning */
+		warning(_("TRE pattern compilation error '%s'"), errbuf);
 		error(_("invalid regular expression '%s', reason '%s'"), pat, errbuf);
+	}
 	else
 		error(_("invalid regular expression, reason '%s'"), errbuf);
 }
