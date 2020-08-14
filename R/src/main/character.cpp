@@ -159,7 +159,7 @@ int R_nchar(SEXP string, nchar_type type_,
 		for( ; *p; p += utf8clen(*p)) nc++;
 		return nc;
 	    }
-	} else if (string->isBytes()) {
+	} else if (IS_BYTES(string)) {
 	    if (!allowNA) /* could do chars 0 */
 		error(_("number of characters is not computable in \"bytes\" encoding, %s"),
 		      msg_name);
@@ -193,7 +193,7 @@ int R_nchar(SEXP string, nchar_type type_,
 		}
 		return nc;
 	    }
-	} else if (string->isBytes()) {
+	} else if (IS_BYTES(string)) {
 	    if (!allowNA) /* could do width 0 */
 		error(_("width is not computable for %s in \"bytes\" encoding"),
 		      msg_name);

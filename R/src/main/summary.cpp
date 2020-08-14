@@ -528,13 +528,13 @@ HIDDEN SEXP do_summary(SEXP call, SEXP op, SEXP args, SEXP env)
     checkArity(op, args);
     if(PRIMVAL(op) == 1) { /* mean */
 	SEXP x = CAR(args);
-	switch(x->sexptype()) {
+	switch(TYPEOF(x)) {
 	case LGLSXP:  return logical_mean(x);
 	case INTSXP:  return integer_mean(x);
 	case REALSXP: return real_mean(x);
 	case CPLXSXP: return complex_mean(x);
 	default:
-	    error(_("invalid 'type' (%s) of argument"), type2char(x->sexptype()));
+	    error(_("invalid 'type' (%s) of argument"), type2char(TYPEOF(x)));
 	    return R_NilValue; // -Wall on clang 4.2
 	}
     }
@@ -559,27 +559,27 @@ HIDDEN SEXP do_summary(SEXP call, SEXP op, SEXP args, SEXP env)
     ans = matchArgExact(R_NaRmSymbol, &args);
     Rboolean narm = (Rboolean) asLogical(ans);
 
-    if (CAR(args)->altrep() && CDDR(args) == R_NilValue &&
+    if (ALTREP(CAR(args)) && CDDR(args) == R_NilValue &&
 	(CDR(args) == R_NilValue || TAG(CDR(args)) == R_NaRmSymbol)) {
 	SEXP toret = nullptr;
 	SEXP vec = CAR(args);
 	switch(PRIMVAL(op)) {
 	case 0:
-	    if(vec->sexptypeEqual(INTSXP)) 
+	    if(TYPEOF(vec) == INTSXP)
 		toret = ALTINTEGER_SUM(vec, narm);
-	    else if (vec->sexptypeEqual(REALSXP))
+	    else if (TYPEOF(vec) == REALSXP)
 		toret = ALTREAL_SUM(vec, narm);
 	    break; 
 	case 2:
-	    if(vec->sexptypeEqual(INTSXP)) 
+	    if(TYPEOF(vec) == INTSXP)
 		toret = ALTINTEGER_MIN(vec, narm);
-	    else if (vec->sexptypeEqual(REALSXP))
+	    else if (TYPEOF(vec) == REALSXP)
 		toret = ALTREAL_MIN(vec, narm);
 	    break;
 	case 3:
-	    if(vec->sexptypeEqual(INTSXP))
+	    if(TYPEOF(vec) == INTSXP)
 		toret = ALTINTEGER_MAX(vec, narm);
-	    else if (vec->sexptypeEqual(REALSXP))
+	    else if (TYPEOF(vec) == REALSXP)
 		toret = ALTREAL_MAX(vec, narm);
 	    break;
 	default:
@@ -1188,7 +1188,7 @@ HIDDEN SEXP do_pmin(SEXP call, SEXP op, SEXP args, SEXP rho)
     if(args == R_NilValue) error(_("no arguments"));
     SEXP x = CAR(args);
 
-    SEXPTYPE anstype = x->sexptype();
+    SEXPTYPE anstype = TYPEOF(x);
     switch(anstype) {
     case NILSXP:
     case LGLSXP:
@@ -1206,7 +1206,7 @@ HIDDEN SEXP do_pmin(SEXP call, SEXP op, SEXP args, SEXP rho)
 	i, i1; 
     for(; a != R_NilValue; a = CDR(a)) {
 	x = CAR(a);
-	SEXPTYPE type = x->sexptype();
+	SEXPTYPE type = TYPEOF(x);
 	switch(type) {
 	case NILSXP:
 	case LGLSXP:

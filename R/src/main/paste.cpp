@@ -108,9 +108,9 @@ HIDDEN SEXP do_paste(SEXP call, SEXP op, SEXP args, SEXP env)
 	csep = translateChar(sep);
 	u_sepw = sepw = (int) strlen(csep); // will be short
 	sepASCII = strIsASCII(csep);
-	sepKnown =  (sep->encKnown() > 0);
-	sepUTF8 =  sep->isUTF8();
-	sepBytes =  sep->isBytes();
+	sepKnown =  (ENC_KNOWN(sep) > 0);
+	sepUTF8 =  IS_UTF8(sep);
+	sepBytes =  IS_BYTES(sep);
 	collapse = CADDR(args);
 	if(correct_nargs)
 	    recycle_0 = asLogical(CADDDR(args));
@@ -390,7 +390,7 @@ HIDDEN SEXP do_filepath(SEXP call, SEXP op, SEXP args, SEXP env)
 		int k = LENGTH(VECTOR_ELT(x, j));
 		SEXP cs = STRING_ELT(VECTOR_ELT(x, j), i % k);
 		if(IS_UTF8(cs)) {use_UTF8 = TRUE; break;}
-		if(!latin1locale && cs->isLatin1()) {use_UTF8 = TRUE; break;}
+		if(!latin1locale && IS_LATIN1(cs)) {use_UTF8 = TRUE; break;}
 	    }
 	}
 	int pwidth = 0;
@@ -528,7 +528,7 @@ HIDDEN SEXP do_format(SEXP call, SEXP op, SEXP args, SEXP env)
     if ((n = XLENGTH(x)) <= 0) {
 	PROTECT(y = allocVector(STRSXP, 0));
     } else {
-	switch (x->sexptype()) {
+	switch (TYPEOF(x)) {
 
 	case LGLSXP:
 	    PROTECT(y = allocVector(STRSXP, n));
@@ -699,7 +699,7 @@ HIDDEN SEXP do_formatinfo(SEXP call, SEXP op, SEXP args, SEXP env)
     w = 0;
     d = 0;
     e = 0;
-    switch (x->sexptype()) {
+    switch (TYPEOF(x)) {
 
     case RAWSXP:
 	formatRaw(RAW(x), n, &w);

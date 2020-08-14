@@ -198,10 +198,10 @@ static SEXP EnlargeVector(SEXP x, R_xlen_t newlen)
     if (newtruelen > R_LEN_T_MAX) newtruelen = newlen;
 */
     PROTECT(x);
-    PROTECT(newx = allocVector(x->sexptype(), newtruelen));
+    PROTECT(newx = allocVector(TYPEOF(x), newtruelen));
 
     /* Copy the elements into place. */
-    switch(x->sexptype()) {
+    switch(TYPEOF(x)) {
     case LGLSXP:
     case INTSXP:
 	for (R_xlen_t i = 0; i < len; i++)
@@ -536,7 +536,7 @@ static SEXP DeleteListElements(SEXP x, SEXP which)
 	UNPROTECT(1);
 	return x;
     }
-    PROTECT(xnew = allocVector(x->sexptype(), ii));
+    PROTECT(xnew = allocVector(TYPEOF(x), ii));
     ii = 0;
     for (i = 0; i < len; i++) {
 	if (pinclude[i] == 1) {
@@ -613,8 +613,8 @@ static SEXP VectorAssign(SEXP call, SEXP rho, SEXP x, SEXP s, SEXP y)
 
     /* try for quick return for simple scalar case */
     if (ATTRIB(s) == R_NilValue) {
-	if (x->sexptype() == REALSXP && y->isScalar(REALSXP)) {
-	    if (s->isScalar(INTSXP)) {
+	if (TYPEOF(x) == REALSXP && IS_SCALAR(y, REALSXP)) {
+	    if (IS_SCALAR(s, INTSXP)) {
 		R_xlen_t ival = SCALAR_IVAL(s);
 		if (1 <= ival && ival <= XLENGTH(x)) {
 		    REAL(x)[ival - 1] = SCALAR_DVAL(y);
@@ -634,7 +634,7 @@ static SEXP VectorAssign(SEXP call, SEXP rho, SEXP x, SEXP s, SEXP y)
 	}
     }
 
-    if (x->isNull_() && y->isNull_()) {
+    if (isNull(x) && isNull(y)) {
 	return R_NilValue;
     }
 
@@ -671,7 +671,7 @@ static SEXP VectorAssign(SEXP call, SEXP rho, SEXP x, SEXP s, SEXP y)
     /* been coerced into a form which can */
     /* accept elements from the RHS. */
     which = SubassignTypeFix(&x, &y, stretch, 1, call, rho);
-    /* = 100 * x->sexptype() + TYPEOF(y);*/
+    /* = 100 * TYPEOF(x) + TYPEOF(y);*/
     if (n == 0) {
 	UNPROTECT(2);
 	return x;
@@ -681,7 +681,7 @@ static SEXP VectorAssign(SEXP call, SEXP rho, SEXP x, SEXP s, SEXP y)
 
     PROTECT(x);
 
-    if ((x->sexptype() != VECSXP && x->sexptype() != EXPRSXP) || y != R_NilValue) {
+    if ((TYPEOF(x) != VECSXP && TYPEOF(x) != EXPRSXP) || y != R_NilValue) {
 	if (n > 0 && ny == 0)
 	    error(_("replacement has length zero"));
 	if (n > 0 && n % ny)
@@ -1028,7 +1028,7 @@ static SEXP MatrixAssign(SEXP call, SEXP rho, SEXP x, SEXP s, SEXP y)
 
 	{
 	    int *px = INTEGER(x);
-	    if (y->altrep())
+	    if (ALTREP(y))
 		MATRIX_ASSIGN_LOOP(px[ij] = INTEGER_ELT(y, k););
 	    else {
 		int *py = INTEGER0(y);
@@ -1058,7 +1058,7 @@ static SEXP MatrixAssign(SEXP call, SEXP rho, SEXP x, SEXP s, SEXP y)
 
 	{
 	    double *px = REAL(x);
-	    if (y->altrep())
+	    if (ALTREP(y))
 		MATRIX_ASSIGN_LOOP(px[ij] = REAL_ELT(y, k););
 	    else {
 		double *py = REAL0(y);
@@ -1249,7 +1249,7 @@ static SEXP ArrayAssign(SEXP call, SEXP rho, SEXP x, SEXP s, SEXP y)
     /* Here we make sure that the LHS has been coerced into */
     /* a form which can accept elements from the RHS. */
 
-    int which = SubassignTypeFix(&x, &y, 0, 1, call, rho);/* = 100 * x->sexptype() + TYPEOF(y);*/
+    int which = SubassignTypeFix(&x, &y, 0, 1, call, rho);/* = 100 * TYPEOF(x) + TYPEOF(y);*/
 
     if (n == 0) {
 	UNPROTECT(1);
@@ -1642,12 +1642,12 @@ HIDDEN SEXP do_subassign_dflt(SEXP call, SEXP op, SEXP args, SEXP rho)
     S4 = (Rboolean) IS_S4_OBJECT(x);
 
     oldtype = 0;
-    if (x->sexptype() == LISTSXP || x->sexptype() == LANGSXP) {
-	oldtype = x->sexptype();
+    if (TYPEOF(x) == LISTSXP || TYPEOF(x) == LANGSXP) {
+	oldtype = TYPEOF(x);
 	PROTECT(x = PairToVectorList(x));
     }
     else if (xlength(x) == 0) {
-	if (xlength(y) == 0 && (isNull(x) || x->sexptype() == TYPEOF(y) ||
+	if (xlength(y) == 0 && (isNull(x) || TYPEOF(x) == TYPEOF(y) ||
 				// isVectorList(y):
 				TYPEOF(y) == VECSXP || TYPEOF(y) == EXPRSXP)) {
 	    UNPROTECT(2);  /* args, y */
@@ -1663,7 +1663,7 @@ HIDDEN SEXP do_subassign_dflt(SEXP call, SEXP op, SEXP args, SEXP rho)
 	PROTECT(x);
     }
 
-    switch (x->sexptype()) {
+    switch (TYPEOF(x)) {
     case LGLSXP:
     case INTSXP:
     case REALSXP:
@@ -1688,14 +1688,14 @@ HIDDEN SEXP do_subassign_dflt(SEXP call, SEXP op, SEXP args, SEXP rho)
 	}
 	break;
     default:
-	error(_("object of type '%s' is not subsettable"), type2char(x->sexptype()));
+	error(_("object of type '%s' is not subsettable"), type2char(TYPEOF(x)));
 	break;
     }
 
     if (oldtype == LANGSXP) {
 	if(Rf_length(x)) {
 	    x = VectorToPairList(x);
-		x->setsexptype(LANGSXP);
+		SET_TYPEOF(x, LANGSXP);
 	} else
 	    error(_("result is zero-length and so cannot be a language object"));
     }
@@ -1719,7 +1719,7 @@ static SEXP DeleteOneVectorListItem(SEXP x, R_xlen_t which)
     R_xlen_t i, k, n;
     n = xlength(x);
     if (0 <= which && which < n) {
-	PROTECT(y = allocVector(x->sexptype(), n - 1));
+	PROTECT(y = allocVector(TYPEOF(x), n - 1));
 	k = 0;
 	for (i = 0 ; i < n; i++) {
 	    if(i != which)
@@ -1799,10 +1799,10 @@ do_subassign2_dflt(SEXP call, SEXP op, SEXP args, SEXP rho)
 	SETCAR(args, x = shallow_duplicate(x));
 
     /* code to allow classes to extend ENVSXP */
-    if(x->sexptype() == S4SXP) {
+    if(TYPEOF(x) == S4SXP) {
 	xOrig = x; /* will be an S4 object */
 	x = R_getS4DataSlot(x, ANYSXP);
-	if(x->sexptype() != ENVSXP)
+	if(TYPEOF(x) != ENVSXP)
 	  errorcall(call, _("'[[<-' defined for objects of type \"S4\" only for subclasses of environment"));
     }
 
@@ -1821,7 +1821,7 @@ do_subassign2_dflt(SEXP call, SEXP op, SEXP args, SEXP rho)
     }
 
     /* ENVSXP special case first */
-    if( x->sexptype() == ENVSXP) {
+    if( TYPEOF(x) == ENVSXP) {
 	if( nsubs!=1 || !isString(CAR(subs)) || length(CAR(subs)) != 1 )
 	    error(_("wrong arguments for environment subassignment"));
 	defineVar(installTrChar(STRING_ELT(CAR(subs), 0)), y, x);
@@ -2089,7 +2089,7 @@ do_subassign2_dflt(SEXP call, SEXP op, SEXP args, SEXP rho)
 	PROTECT(x);
 	PROTECT(xup);
     }
-    else error(_("object of type '%s' is not subsettable"), type2char(x->sexptype()));
+    else error(_("object of type '%s' is not subsettable"), type2char(TYPEOF(x)));
 
     if(recursed) {
 	if (isVectorList(xup)) {
@@ -2152,7 +2152,7 @@ SEXP R_subassign3_dflt(SEXP call, SEXP x, SEXP nlist, SEXP val)
 	REPROTECT(x = shallow_duplicate(x), pxidx);
 
     /* code to allow classes to extend ENVSXP */
-    if(x->sexptype() == S4SXP) {
+    if(TYPEOF(x) == S4SXP) {
 	xS4 = x;
 	REPROTECT(x = R_getS4DataSlot(x, ANYSXP), pxidx);
 	if(x == R_NilValue)
@@ -2207,15 +2207,15 @@ SEXP R_subassign3_dflt(SEXP call, SEXP x, SEXP nlist, SEXP val)
 	}
     }
     /* cannot use isEnvironment since we do not want NULL here */
-    else if( x->sexptype() == ENVSXP ) {
+    else if( TYPEOF(x) == ENVSXP ) {
 	defineVar(nlist, val, x);
 	INCREMENT_NAMED(val);
     }
-    else if( x->sexptype() == SYMSXP || /* Used to 'work' in R < 2.8.0 */
-	     x->sexptype() == CLOSXP ||
-	     x->sexptype() == SPECIALSXP ||
-	     x->sexptype() == BUILTINSXP) {
-	error(_("object of type '%s' is not subsettable"), type2char(x->sexptype()));
+    else if( TYPEOF(x) == SYMSXP || /* Used to 'work' in R < 2.8.0 */
+	     TYPEOF(x) == CLOSXP ||
+	     TYPEOF(x) == SPECIALSXP ||
+	     TYPEOF(x) == BUILTINSXP) {
+	error(_("object of type '%s' is not subsettable"), type2char(TYPEOF(x)));
     }
     else {
 	R_xlen_t i, imatch, nx;

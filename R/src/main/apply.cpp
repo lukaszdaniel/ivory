@@ -364,7 +364,7 @@ HIDDEN SEXP do_rapply(SEXP call, SEXP op, SEXP args, SEXP rho)
  */
 static int islistfactor(SEXP X)
 {
-	switch (X->sexptype())
+	switch (TYPEOF(X))
 	{
 	case VECSXP:
 	case EXPRSXP:

@@ -739,7 +739,7 @@ HIDDEN SEXP do_nextmethod(SEXP call, SEXP op, SEXP args, SEXP env)
     if (s == R_DotsSymbol) {
 	t = findVarInFrame3(env, s, TRUE);
 	if (t != R_NilValue && t != R_MissingArg) {
-		t->setsexptype(LISTSXP); /* a safe mutation */
+		SET_TYPEOF(t, LISTSXP); /* a safe mutation */
 	    s = matchmethargs(matchedarg, t);
 	    UNPROTECT(1);
 	    PROTECT(matchedarg = s);

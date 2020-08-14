@@ -33,11 +33,11 @@
 #include <Internal.h>
 #include <R_ext/Print.h>
 
+using namespace R;
+
 /* FIXME: envir.cpp keeps this private - it should probably go to Defn.h */
-#define FRAME_LOCK_MASK (1 << 14)
-#define FRAME_IS_LOCKED(e) (ENVFLAGS(e) & FRAME_LOCK_MASK)
-#define GLOBAL_FRAME_MASK (1 << 15)
-#define IS_GLOBAL_FRAME(e) (ENVFLAGS(e) & GLOBAL_FRAME_MASK)
+#define FRAME_IS_LOCKED(e) (SEXPREC::FRAME_IS_LOCKED(e))
+#define IS_GLOBAL_FRAME(e) (SEXPREC::IS_GLOBAL_FRAME(e))
 
 /* based on EncodeEnvironment in  printutils.cpp */
 static void PrintEnvironment(SEXP x)
@@ -99,10 +99,10 @@ static void inspect_tree(int pre, SEXP v, int deep, int pvec) {
     */
 #ifdef _WIN64
     Rprintf("@%p %02d %s g%dc%d [", v, TYPEOF(v), typename_(v),
-	    v->sxpinfo.gcgen, v->sxpinfo.gccls);
+	    SEXPREC::GCGEN(v), SEXPREC::GCCLS(v));
 #else
     Rprintf("@%lx %02d %s g%dc%d [", (long) v, TYPEOF(v), typename_(v),
-	    v->sxpinfo.gcgen, v->sxpinfo.gccls);
+	    SEXPREC::GCGEN(v), SEXPREC::GCCLS(v));
 #endif
     if (OBJECT(v)) { a = 1; Rprintf("OBJ"); }
     if (MARK(v)) { if (a) Rprintf(","); Rprintf("MARK"); a = 1; }
@@ -126,7 +126,7 @@ static void inspect_tree(int pre, SEXP v, int deep, int pvec) {
     if (ATTRIB(v) && ATTRIB(v) != R_NilValue) { if (a) Rprintf(","); Rprintf("ATT"); a = 1; }
     Rprintf("] ");
 
-    if (v->altrep() && ALTREP_INSPECT(v, pre, deep, pvec, inspect_subtree)) {
+    if (ALTREP(v) && ALTREP_INSPECT(v, pre, deep, pvec, inspect_subtree)) {
 	if (ATTRIB(v) && ATTRIB(v) != R_NilValue && TYPEOF(v) != CHARSXP) {
 	    pp(pre);
 	    Rprintf("ATTRIB:\n");
@@ -135,7 +135,7 @@ static void inspect_tree(int pre, SEXP v, int deep, int pvec) {
 	return;
     }
 
-	switch (v->sexptype())
+	switch (TYPEOF(v))
 	{
 	case VECSXP:
 	case STRSXP:
@@ -153,12 +153,12 @@ static void inspect_tree(int pre, SEXP v, int deep, int pvec) {
 				in the environment, so for a low-level debugging we may want to
 				avoid it .. */
 	PrintEnvironment(v);
-    if (v->sexptypeEqual(CHARSXP)) {
-	if (v->isBytes()) Rprintf("[bytes] ");
-	if (v->isLatin1()) Rprintf("[latin1] ");
-	if (v->isUTF8()) Rprintf("[UTF8] ");
-	if (v->isAscii()) Rprintf("[ASCII] ");
-	if (v->isCached()) Rprintf("[cached] ");
+    if (TYPEOF(v) == CHARSXP) {
+	if (IS_BYTES(v)) Rprintf("[bytes] ");
+	if (IS_LATIN1(v)) Rprintf("[latin1] ");
+	if (IS_UTF8(v)) Rprintf("[UTF8] ");
+	if (IS_ASCII(v)) Rprintf("[ASCII] ");
+	if (IS_CACHED(v)) Rprintf("[cached] ");
 	Rprintf("\"%s\"", CHAR(v));
     }
     if (TYPEOF(v) == SYMSXP) {

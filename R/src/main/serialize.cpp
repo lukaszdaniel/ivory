@@ -41,6 +41,7 @@
 #endif
 
 using namespace std;
+using namespace R;
 
 /* From time to time changes in R, such as the addition of a new SXP,
  * may require changes in the save file format.  Here are some
@@ -749,7 +750,7 @@ static int PackFlags(int type, int levs, int isobj, int hasattr, int hastag)
        Also make sure the HASHASH bit is not written out.
     */
     int val;
-    if (type == CHARSXP) levs &= (~(CACHED_MASK | HASHASH_MASK));
+    if (type == CHARSXP) levs &= (~(CACHED_MASK | SEXPREC::HASHASH_MASK));
     val = type | ENCODE_LEVELS(levs);
     if (isobj) val |= IS_OBJECT_BIT_MASK;
     if (hasattr) val |= HAS_ATTR_BIT_MASK;
@@ -1031,7 +1032,7 @@ static void WriteItem (SEXP s, SEXP ref_table, R_outpstream_t stream)
 
  tailcall:
     R_CheckStack();
-    if (s->altrep() && stream->version >= 3) {
+    if (ALTREP(s) && stream->version >= 3) {
 	SEXP info = ALTREP_SERIALIZED_CLASS(s);
 	SEXP state = ALTREP_SERIALIZED_STATE(s);
 	if (info && state) {

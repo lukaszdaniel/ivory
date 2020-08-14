@@ -49,7 +49,7 @@ HIDDEN SEXP do_rawToChar(SEXP call, SEXP op, SEXP args, SEXP env)
     SEXP ans, x = CAR(args);
 
     checkArity(op, args);
-    if (!x->isRaw_())
+    if (!isRaw(x))
 	error(_("'%s' argument must be a raw vector"), "x");
     int multiple = asLogical(CADR(args));
     if (multiple == NA_LOGICAL)
@@ -86,7 +86,7 @@ HIDDEN SEXP do_rawShift(SEXP call, SEXP op, SEXP args, SEXP env)
     SEXP ans, x = CAR(args);
     int shift = asInteger(CADR(args));
 
-    if (!x->isRaw_())
+    if (!isRaw(x))
 	error(_("'%s' argument must be a raw vector"), "x");
     if (shift == NA_INTEGER || shift < -8 || shift > 8)
 	error(_("argument 'shift' must be a small integer"));
@@ -109,7 +109,7 @@ HIDDEN SEXP do_rawToBits(SEXP call, SEXP op, SEXP args, SEXP env)
     R_xlen_t i, j = 0;
     unsigned int tmp;
 
-    if (!x->isRaw_())
+    if (!isRaw(x))
 	error(_("'%s' argument must be a raw vector"), "x");
     PROTECT(ans = allocVector(RAWSXP, 8*XLENGTH(x)));
     for (i = 0; i < XLENGTH(x); i++) {
@@ -184,7 +184,7 @@ HIDDEN SEXP do_packBits(SEXP call, SEXP op, SEXP args, SEXP env)
     R_xlen_t i, len = XLENGTH(x), slen;
     int fac;
 
-    if (x->sexptype() != RAWSXP && x->sexptype() != LGLSXP && x->sexptype() != INTSXP)
+    if (TYPEOF(x) != RAWSXP && TYPEOF(x) != LGLSXP && TYPEOF(x) != INTSXP)
 	error(_("'%s' argument must be raw, integer or logical"), "x");
     if (!isString(stype)  || LENGTH(stype) != 1)
 	error(_("'%s' argument must be a character string"), "type");
@@ -199,7 +199,7 @@ HIDDEN SEXP do_packBits(SEXP call, SEXP op, SEXP args, SEXP env)
 	    Rbyte btmp = 0;
 	    for (int k = 7; k >= 0; k--) {
 		btmp <<= 1;
-		if (x->isRaw_())
+		if (isRaw(x))
 		    btmp |= RAW(x)[8*i + k] & 0x1;
 		else if (isLogical(x) || isInteger(x)) {
 		    int j = INTEGER(x)[8*i+k];
@@ -213,7 +213,7 @@ HIDDEN SEXP do_packBits(SEXP call, SEXP op, SEXP args, SEXP env)
 	    unsigned int itmp = 0;
 	    for (int k = 31; k >= 0; k--) {
 		itmp <<= 1;
-		if (x->isRaw_())
+		if (isRaw(x))
 		    itmp |= RAW(x)[32*i + k] & 0x1;
 		else if (isLogical(x) || isInteger(x)) {
 		    int j = INTEGER(x)[32*i+k];

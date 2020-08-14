@@ -195,7 +195,7 @@ static void transferChars(unsigned char *p, const char *q)
 /* respect encoding override from parser invocation - do_parse */
 static const char *translateCharWithOverride(SEXP x)
 {
-    if (!x->isLatin1() && !mbcslocale && known_to_be_utf8)
+    if (!IS_LATIN1(x) && !mbcslocale && known_to_be_utf8)
         /* A hack to allow UTF-8 string literals, comments when
 	   parsing on Windows. Note that the parser cannot handle
 	   invalid characters when running in UTF-8 locale. */

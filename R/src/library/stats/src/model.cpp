@@ -1027,7 +1027,7 @@ static int isOne(SEXP x)
 static int Seql2(SEXP a, SEXP b)
 {
     if (a == b) return 1;
-    if (a->isCached() && b->isCached() && a->encKnown() == b->encKnown())
+    if (IS_CACHED(a) && IS_CACHED(b) && ENC_KNOWN(a) == ENC_KNOWN(b))
 	return 0;
     else {
     	const void *vmax = vmaxget();

@@ -22,7 +22,7 @@
     PROTECT(vec = allocVector(VECSXP, nlevs));
     for (R_xlen_t i = 0;  i < nlevs; i++) {
 	SET_VECTOR_ELT(vec, i, 
-		       allocVector(x->sexptype(), (_L_int_)_L_INTEG_(counts)[i]));
+		       allocVector(TYPEOF(x), (_L_int_)_L_INTEG_(counts)[i]));
 	setAttrib(VECTOR_ELT(vec, i), R_LevelsSymbol,
 		  getAttrib(x, R_LevelsSymbol));
 	if(have_names)
@@ -34,7 +34,7 @@
 	int j = INTEGER(f)[i1];
 	if (j != NA_INTEGER) {
 	    _L_int_ k = (_L_int_)_L_INTEG_(counts)[j - 1];
-	    switch (x->sexptype()) {
+	    switch (TYPEOF(x)) {
 	    case LGLSXP:
 	    case INTSXP:
 		INTEGER(VECTOR_ELT(vec, j - 1))[k] = INTEGER(x)[i];

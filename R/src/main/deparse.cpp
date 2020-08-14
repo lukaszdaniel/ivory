@@ -430,7 +430,7 @@ HIDDEN SEXP do_dump(SEXP call, SEXP op, SEXP args, SEXP rho)
 	 file = CADR(args);
     if(!inherits(file, "connection"))
 	error(_("'%s' must be a character string or connection"), "file");
-    if(!names->isString_())
+    if(!isString(names))
 	error( _("character arguments expected"));
     int nobjs = length(names);
     if(nobjs < 1 || length(file) < 1)
@@ -638,7 +638,7 @@ static bool needsparens(PPinfo mainop, SEXP arg, bool left)
  * or if(isAtomic) does it have one "recursive" or "use.names" ?  */
 static bool usable_nice_names(SEXP x, bool isAtomic)
 {
-    if(x->sexptype() == STRSXP) {
+    if(TYPEOF(x) == STRSXP) {
 	R_xlen_t i, n = xlength(x);
 	bool all_0 = true;
 	if(isAtomic) // c(*, recursive=, use.names=): cannot use these as nice_names
@@ -1618,7 +1618,7 @@ static void vector2buff(SEXP vector, LocalParseData *d)
 		print2buff(strp, d);
 	} else {
 	    int *vec = INTEGER(vector);
-	    bool addL = (d->opts & KEEPINTEGER & !(d->opts & S_COMPAT));
+	    bool addL = (d->opts & KEEPINTEGER && !(d->opts & S_COMPAT));
 	    allNA = ((d->opts & KEEPNA) || addL);
 	    for(i = 0; i < tlen; i++)
 		if(vec[i] != NA_INTEGER) {

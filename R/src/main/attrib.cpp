@@ -99,7 +99,7 @@ static bool isOneDimensionalArray(SEXP vec)
 	if (isVector(vec) || isList(vec) || isLanguage(vec))
 	{
 		SEXP s = getAttrib(vec, R_DimSymbol);
-		if (s->sexptype() == INTSXP && LENGTH(s) == 1)
+		if (TYPEOF(s) == INTSXP && LENGTH(s) == 1)
 			return true;
 	}
 	return false;
@@ -163,14 +163,14 @@ HIDDEN SEXP getAttrib0(SEXP vec, SEXP name)
 
 SEXP Rf_getAttrib(SEXP vec, SEXP name)
 {
-    if(vec->sexptype() == CHARSXP)
+    if(TYPEOF(vec) == CHARSXP)
 	error(_("cannot have attributes on a 'CHARSXP'"));
     /* pre-test to avoid expensive operations if clearly not needed -- LT */
     if (ATTRIB(vec) == R_NilValue &&
-	! (vec->sexptype() == LISTSXP || vec->sexptype() == LANGSXP))
+	! (TYPEOF(vec) == LISTSXP || TYPEOF(vec) == LANGSXP))
 	return R_NilValue;
 
-    if (name->isString_()) name = installTrChar(STRING_ELT(name, 0));
+    if (isString(name)) name = installTrChar(STRING_ELT(name, 0));
 
     /* special test for c(NA, n) rownames of data frames: */
     if (name == R_RowNamesSymbol) {
@@ -227,6 +227,7 @@ SEXP do_copyDFattr(SEXP call, SEXP op, SEXP args, SEXP env)
 /* 'name' should be 1-element STRSXP or SYMSXP */
 SEXP Rf_setAttrib(SEXP vec, SEXP name, SEXP val)
 {
+	if(!vec) return nullptr;
     PROTECT(vec);
     PROTECT(name);
 
@@ -346,9 +347,9 @@ static SEXP installAttrib(SEXP vec, SEXP name, SEXP val)
 {
     SEXP t = R_NilValue; /* -Wall */
 
-    if(vec->sexptype() == CHARSXP)
+    if(TYPEOF(vec) == CHARSXP)
 	error(_("cannot set attribute on a 'CHARSXP'"));
-    if (vec->sexptype() == SYMSXP)
+    if (TYPEOF(vec) == SYMSXP)
 	error(_("cannot set attribute on a symbol"));
     /* this does no allocation */
     for (SEXP s = ATTRIB(vec); s != R_NilValue; s = CDR(s)) {
@@ -375,8 +376,10 @@ static SEXP installAttrib(SEXP vec, SEXP name, SEXP val)
 
 static SEXP removeAttrib(SEXP vec, SEXP name)
 {
+	if(!vec) return nullptr;
+
 	SEXP t;
-	if (vec->sexptype() == CHARSXP)
+	if (TYPEOF(vec) == CHARSXP)
 		error(_("cannot set attribute on a 'CHARSXP'"));
 	if (name == R_NamesSymbol && isPairList(vec)) {
 		for (t = vec; t != R_NilValue; t = CDR(t))
@@ -398,7 +401,7 @@ static void checkNames(SEXP x, SEXP s)
 	if (isVector(x) || isList(x) || isLanguage(x)) {
 		if (!isVector(s) && !isList(s))
 			error(_("invalid type (%s) for 'names': must be vector or NULL"),
-				type2char(s->sexptype()));
+				type2char(TYPEOF(s)));
 		if (xlength(x) != xlength(s))
 			error(_("'names' attribute [%d] must be the same length as the vector [%d]"), length(s), length(x));
 	}
@@ -528,7 +531,7 @@ SEXP Rf_classgets(SEXP vec, SEXP klass)
 		    isfactor = true;
 		    break;
 		}
-	    if(isfactor && vec->sexptype() != INTSXP) {
+	    if(isfactor && TYPEOF(vec) != INTSXP) {
 		/* we cannot coerce vec here, so just fail */
 		error(_("adding class \"factor\" to an invalid object"));
 	    }
@@ -615,7 +618,7 @@ static SEXP lang2str(SEXP obj, SEXPTYPE t)
     lbrace_sym = R::install_("{");
     call_sym = R::install_("call");
   }
-  if(symb->isSymbol_()) {
+  if(isSymbol(symb)) {
     if(symb == if_sym || symb == for_sym || symb == while_sym ||
        symb == lpar_sym || symb == lbrace_sym ||
        symb == eq_sym || symb == gets_sym)
@@ -654,7 +657,7 @@ SEXP R_data_class(SEXP obj, bool singleString)
 		klass = mkChar("array");
 	}
 	else {
-	  SEXPTYPE t = obj->sexptype();
+	  SEXPTYPE t = TYPEOF(obj);
 	  switch(t) {
 	  case CLOSXP: case SPECIALSXP: case BUILTINSXP:
 	    klass = mkChar("function");
@@ -834,7 +837,7 @@ HIDDEN SEXP R_data_class2(SEXP obj)
 
 	SEXP dim = getAttrib(obj, R_DimSymbol);
 	int n = length(dim);
-	SEXPTYPE t = obj->sexptype();
+	SEXPTYPE t = TYPEOF(obj);
 	SEXP defaultClass;
 
 	switch(n) {
@@ -1006,12 +1009,12 @@ SEXP Rf_namesgets(SEXP vec, SEXP val)
 	/* Normal case */
 	installAttrib(vec, R_NamesSymbol, val);
     else
-	error(_("invalid type (%s) to set 'names' attribute"), type2char(vec->sexptype()));
+	error(_("invalid type (%s) to set 'names' attribute"), type2char(TYPEOF(vec)));
     UNPROTECT(2);
     return vec;
 }
 
-inline static bool isS4Environment(SEXP x) { return (x->sexptype() == S4SXP && isEnvironment(R_getS4DataSlot(x, ENVSXP))); }
+inline static bool isS4Environment(SEXP x) { return (TYPEOF(x) == S4SXP && isEnvironment(R_getS4DataSlot(x, ENVSXP))); }
 
 HIDDEN SEXP do_names(SEXP call, SEXP op, SEXP args, SEXP env)
 {
@@ -1452,7 +1455,7 @@ HIDDEN SEXP do_attr(SEXP call, SEXP op, SEXP args, SEXP env)
     if (length(t) != 1)
 	errorcall(call, _("exactly one attribute 'which' must be given"));
 
-    if (s->sexptype() == ENVSXP)
+    if (TYPEOF(s) == ENVSXP)
 	R_CheckStack(); /* in case attributes might lead to a cycle */
 
     if(nargs == 3) {
@@ -1758,7 +1761,7 @@ int R_has_slot(SEXP obj, SEXP name) {
 	name = installTrChar(STRING_ELT(name, 0))
 
 	R_SLOT_INIT;
-    if(name == s_dot_Data && obj->sexptype() != S4SXP)
+    if(name == s_dot_Data && TYPEOF(obj) != S4SXP)
 	return(1);
     /* else */
     return(getAttrib(obj, name) != R_NilValue);
@@ -1779,7 +1782,7 @@ SEXP R_do_slot(SEXP obj, SEXP name) {
 	    if(name == s_dot_S3Class) /* defaults to class(obj) */
 		return R_data_class(obj, false);
 	    else if(name == R_NamesSymbol &&
-		    obj->sexptype() == VECSXP) /* needed for namedList class */
+		    TYPEOF(obj) == VECSXP) /* needed for namedList class */
 		return value;
 	    if(isSymbol(name) ) {
 		input = PROTECT(ScalarString(PRINTNAME(name)));
@@ -1788,7 +1791,7 @@ SEXP R_do_slot(SEXP obj, SEXP name) {
 		    UNPROTECT(1);
 		    error(_("cannot get a slot (\"%s\") from an object of type \"%s\""),
 			  translateChar(asChar(input)),
-			  CHAR(type2str(obj->sexptype())));
+			  CHAR(type2str(TYPEOF(obj))));
 		}
 		UNPROTECT(1);
 	    }
@@ -1902,7 +1905,7 @@ HIDDEN SEXP R_getS4DataSlot(SEXP obj, SEXPTYPE type)
     s_xData = install(".xData");
     s_dotData = install(".Data");
   }
-  if(obj->sexptype() != S4SXP || type == S4SXP) {
+  if(TYPEOF(obj) != S4SXP || type == S4SXP) {
     SEXP s3class = S3Class(obj);
     if(s3class == R_NilValue && type == S4SXP) {
       UNPROTECT(1); /* obj */

@@ -125,7 +125,7 @@ HIDDEN SEXP do_relop_dflt(SEXP call, SEXP op, SEXP x, SEXP y)
 	nx = xlength(x),
 	ny = xlength(y);
     SEXPTYPE
-	typex = x->sexptype(),
+	typex = TYPEOF(x),
 	typey = TYPEOF(y);
 
     /* handle the REALSXP/INTSXP simple vector/scalar case quickly. */
@@ -150,7 +150,7 @@ HIDDEN SEXP do_relop_dflt(SEXP call, SEXP op, SEXP x, SEXP y)
     bool iS;
     /* That symbols and calls were allowed was undocumented prior to
        R 2.5.0.  We deparse them as deparse() would, minus attributes */
-    if ((iS = isSymbol(x)) || x->sexptype() == LANGSXP) {
+    if ((iS = isSymbol(x)) || TYPEOF(x) == LANGSXP) {
 	SEXP tmp = allocVector(STRSXP, 1);
 	PROTECT(tmp);
 	SET_STRING_ELT(tmp, 0, (iS) ? PRINTNAME(x) :
@@ -174,7 +174,7 @@ HIDDEN SEXP do_relop_dflt(SEXP call, SEXP op, SEXP x, SEXP y)
 		  _("comparison (%d) is possible only for atomic and list types"),
 		  PRIMVAL(op));
 
-    if (x->sexptype() == EXPRSXP || TYPEOF(y) == EXPRSXP)
+    if (TYPEOF(x) == EXPRSXP || TYPEOF(y) == EXPRSXP)
 	errorcall(call, _("comparison is not allowed for expressions"));
 
     /* ELSE :  x and y are both atomic or list */
@@ -262,7 +262,7 @@ HIDDEN SEXP do_relop_dflt(SEXP call, SEXP op, SEXP x, SEXP y)
 	REPROTECT(y = coerceVector(y, LGLSXP), ypi);
 	x = numeric_relop((RELOP_TYPE) PRIMVAL(op), x, y);
     }
-    else if (x->sexptype() == RAWSXP || TYPEOF(y) == RAWSXP) {
+    else if (TYPEOF(x) == RAWSXP || TYPEOF(y) == RAWSXP) {
 	REPROTECT(x = coerceVector(x, RAWSXP), xpi);
 	REPROTECT(y = coerceVector(y, RAWSXP), ypi);
 	x = raw_relop((RELOP_TYPE) PRIMVAL(op), x, y);

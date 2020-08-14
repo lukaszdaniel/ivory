@@ -502,10 +502,10 @@ static SEXP rep4(SEXP x, SEXP times, R_xlen_t len, R_xlen_t each, R_xlen_t nt)
     // faster code for common special case
     if (each == 1 && nt == 1) return rep3(x, lx, len);
 
-    PROTECT(a = allocVector(x->sexptype(), len));
+    PROTECT(a = allocVector(TYPEOF(x), len));
 
 #define R4_SWITCH_LOOP(itimes)                                         \
-	switch (x->sexptype())                                                 \
+	switch (TYPEOF(x))                                                 \
 	{                                                                  \
 	case LGLSXP:                                                       \
 		for (i = 0, k = 0, k2 = 0; i < lx; i++)                        \
@@ -617,7 +617,7 @@ static SEXP rep4(SEXP x, SEXP times, R_xlen_t len, R_xlen_t each, R_xlen_t nt)
 	}
 
 	if(nt == 1)
-	switch (x->sexptype()) {
+	switch (TYPEOF(x)) {
 	case LGLSXP:
 	    for(i = 0; i < len; i++) {
 //		if ((i+1) % NINTERRUPT == 0) R_CheckUserInterrupt();
@@ -706,7 +706,7 @@ HIDDEN SEXP do_rep(SEXP call, SEXP op, SEXP args, SEXP rho)
 
     x = CAR(args);
     /* supported in R 2.15.x */
-    if (x->sexptype() == LISTSXP)
+    if (TYPEOF(x) == LISTSXP)
 	errorcall(call, _("replication of pairlists is defunct"));
 
     lx = xlength(x);
@@ -754,7 +754,7 @@ HIDDEN SEXP do_rep(SEXP call, SEXP op, SEXP args, SEXP rho)
 	return a;
     }
     if (!isVector(x))
-	errorcall(call, _("attempt to replicate an object of type '%s'"), type2char(x->sexptype()));
+	errorcall(call, _("attempt to replicate an object of type '%s'"), type2char(TYPEOF(x)));
 
     /* So now we know x is a vector of positive length.  We need to
        replicate it, and its names if it has them. */

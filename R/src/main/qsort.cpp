@@ -54,8 +54,8 @@ HIDDEN SEXP do_qsort(SEXP call, SEXP op, SEXP args, SEXP rho)
     x = CAR(args);
     if (!isNumeric(x))
 	error(_("'%s' argument is not a numeric vector"), "x");
-    x_real= (Rboolean) (x->sexptype() == REALSXP);
-    x_int = (Rboolean) (!x_real && (x->sexptype() == INTSXP || x->sexptype() == LGLSXP));
+    x_real= (Rboolean) (TYPEOF(x) == REALSXP);
+    x_int = (Rboolean) (!x_real && (TYPEOF(x) == INTSXP || TYPEOF(x) == LGLSXP));
     PROTECT(sx = (x_real || x_int) ? duplicate(x) : coerceVector(x, REALSXP));
     SET_ATTRIB(sx, R_NilValue);
     SET_OBJECT(sx, 0);

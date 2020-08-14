@@ -126,15 +126,14 @@ inline static bool IS_USER_DATABASE(SEXP rho)
 
 /* various definitions of macros/functions in Defn.h */
 
-#define FRAME_LOCK_MASK (1 << 14)
  inline static int FRAME_IS_LOCKED(SEXP e)
  {
-     return (ENVFLAGS(e) & FRAME_LOCK_MASK);
+     return (ENVFLAGS(e) & R::SEXPREC::FRAME_LOCK_MASK);
  }
 
  inline static void LOCK_FRAME(SEXP e)
  {
-     SET_ENVFLAGS(e, ENVFLAGS(e) | FRAME_LOCK_MASK);
+     SET_ENVFLAGS(e, ENVFLAGS(e) | R::SEXPREC::FRAME_LOCK_MASK);
  }
 /*#define UNLOCK_FRAME(e) SET_ENVFLAGS(e, ENVFLAGS(e) & (~ FRAME_LOCK_MASK))*/
 
@@ -186,7 +185,8 @@ inline static void SET_SYMBOL_BINDING_VALUE(SEXP sym, SEXP val)
 }
 
 /* Macro version of isNull for only the test against R_NilValue */
-inline static bool ISNULL(SEXP x) {
+inline static bool ISNULL(SEXP x)
+{
     return (x == R_NilValue);
 }
 
@@ -681,20 +681,19 @@ static SEXP R_HashProfile(SEXP table)
 
    L. T. */
 
-#define GLOBAL_FRAME_MASK (1<<15)
 inline static Rboolean IS_GLOBAL_FRAME(SEXP e)
 {
-    return (Rboolean)(ENVFLAGS(e) & GLOBAL_FRAME_MASK);
+    return (Rboolean)(ENVFLAGS(e) & R::SEXPREC::GLOBAL_FRAME_MASK);
 }
 
 inline static void MARK_AS_GLOBAL_FRAME(SEXP e)
 {
-    SET_ENVFLAGS(e, ENVFLAGS(e) | GLOBAL_FRAME_MASK);
+    SET_ENVFLAGS(e, ENVFLAGS(e) | R::SEXPREC::GLOBAL_FRAME_MASK);
 }
 
 inline static void MARK_AS_LOCAL_FRAME(SEXP e)
 {
-    SET_ENVFLAGS(e, ENVFLAGS(e) & (~GLOBAL_FRAME_MASK));
+    SET_ENVFLAGS(e, ENVFLAGS(e) & (~R::SEXPREC::GLOBAL_FRAME_MASK));
 }
 
 #define INITIAL_CACHE_SIZE 1000
@@ -1039,7 +1038,7 @@ SEXP Rf_findVarInFrame3(SEXP rho, SEXP symbol, Rboolean doGet)
     int hashcode;
     SEXP frame, c;
 
-    if (rho->sexptypeEqual(NILSXP))
+    if (TYPEOF(rho) == NILSXP)
 	error(_("use of NULL environment is defunct"));
 
     if (rho == R_BaseNamespace || rho == R_BaseEnv)
@@ -1093,7 +1092,7 @@ static bool existsVarInFrame(SEXP rho, SEXP symbol)
     int hashcode;
     SEXP frame, c;
 
-    if (rho->sexptypeEqual(NILSXP))
+    if (TYPEOF(rho) == NILSXP)
 	error(_("use of NULL environment is defunct"));
 
     if (rho == R_BaseNamespace || rho == R_BaseEnv)
@@ -1158,7 +1157,7 @@ void Rf_readS3VarsFromFrame(SEXP rho,
 
     SEXP frame = nullptr;
 
-    if (rho->sexptypeEqual(NILSXP) ||
+    if (TYPEOF(rho) == NILSXP ||
 	rho == R_BaseNamespace || rho == R_BaseEnv || rho == R_EmptyEnv ||
 	IS_USER_DATABASE(rho) || HASHTAB(rho) != R_NilValue) goto slowpath;
 
@@ -1248,7 +1247,7 @@ static SEXP findGlobalVarLoc(SEXP symbol)
 R_INLINE static SEXP findGlobalVar(SEXP symbol)
 {
     SEXP loc = findGlobalVarLoc(symbol);
-    switch (loc->sexptype()) {
+    switch (TYPEOF(loc)) {
     case NILSXP: return R_UnboundValue;
     case SYMSXP: return SYMBOL_BINDING_VALUE(symbol);
     default: return BINDING_VALUE(loc);
@@ -1260,7 +1259,7 @@ SEXP Rf_findVar(SEXP symbol, SEXP rho)
 {
     SEXP vl;
 
-    if (rho->sexptypeEqual(NILSXP))
+    if (TYPEOF(rho) == NILSXP)
 	error(_("use of NULL environment is defunct"));
 
     if (!isEnvironment(rho))
@@ -1293,7 +1292,7 @@ static SEXP findVarLoc(SEXP symbol, SEXP rho)
 {
     SEXP vl;
 
-    if (rho->sexptypeEqual(NILSXP))
+    if (TYPEOF(rho) == NILSXP)
 	error(_("use of NULL environment is defunct"));
 
     if (!isEnvironment(rho))
@@ -3693,7 +3692,7 @@ Rboolean R_IsNamespaceEnv(SEXP rho)
 	return TRUE;
     else if (TYPEOF(rho) == ENVSXP) {
 	SEXP info = findVarInFrame3(rho, R_NamespaceSymbol, TRUE);
-	if (info != R_UnboundValue && info->sexptype() == ENVSXP) {
+	if (info != R_UnboundValue && TYPEOF(info) == ENVSXP) {
 	    PROTECT(info);
 	    SEXP spec = findVarInFrame3(info, install("spec"), TRUE);
 	    UNPROTECT(1);
@@ -3724,7 +3723,7 @@ SEXP R_NamespaceEnvSpec(SEXP rho)
 	return R_BaseNamespaceName;
     else if (TYPEOF(rho) == ENVSXP) {
 	SEXP info = findVarInFrame3(rho, R_NamespaceSymbol, TRUE);
-	if (info != R_UnboundValue && info->sexptype() == ENVSXP) {
+	if (info != R_UnboundValue && TYPEOF(info) == ENVSXP) {
 	    PROTECT(info);
 	    SEXP spec = findVarInFrame3(info, install("spec"), TRUE);
 	    UNPROTECT(1);
@@ -4055,12 +4054,12 @@ SEXP Rf_mkCharLenCE(const char * const name, int len, cetype_t enc)
 	c = allocCharsxp(len);
 	memcpy(CHAR_RW(c), name, len);
 	switch(enc) {
-	case CE_UTF8: c->setUTF8(); break;
-	case CE_LATIN1: c->setLatin1(); break;
-	case CE_BYTES: c->setBytes(); break;
+	case CE_UTF8: SET_UTF8(c); break;
+	case CE_LATIN1: SET_LATIN1(c); break;
+	case CE_BYTES: SET_BYTES(c); break;
 	default: break;
 	}
-	if (is_ascii) c->setAscii();
+	if (is_ascii) SET_ASCII(c);
 	error(_("embedded nul in string: '%s'"), EncodeString(c, 0, 0, Rprt_adj_none));
     }
 
@@ -4080,7 +4079,7 @@ SEXP Rf_mkCharLenCE(const char * const name, int len, cetype_t enc)
     for (; !ISNULL(chain) ; chain = CXTAIL(chain)) {
 	SEXP val = CXHEAD(chain);
 	if (TYPEOF(val) != CHARSXP) break; /* sanity check */
-	if (need_enc == (val->encKnown() | val->isBytes()) &&
+	if (need_enc == (ENC_KNOWN(val) | IS_BYTES(val)) &&
 	    LENGTH(val) == len &&  /* quick pretest */
 	    (!len || (memcmp(CHAR(val), name, len) == 0))) { // called with len = 0
 	    cval = val;
@@ -4095,18 +4094,18 @@ SEXP Rf_mkCharLenCE(const char * const name, int len, cetype_t enc)
 	case CE_NATIVE:
 	    break;          /* don't set encoding */
 	case CE_UTF8:
-	    cval->setUTF8();
+	    SET_UTF8(cval);
 	    break;
 	case CE_LATIN1:
-	    cval->setLatin1();
+	    SET_LATIN1(cval);
 	    break;
 	case CE_BYTES:
-	    cval->setBytes();
+	    SET_BYTES(cval);
 	    break;
 	default:
 	    error(_("unknown encoding mask: %d"), enc);
 	}
-	if (is_ascii) cval->setAscii();
+	if (is_ascii) SET_ASCII(cval);
 	SET_CACHED(cval);  /* Mark it */
 	/* add the new value to the cache */
 	chain = VECTOR_ELT(R_StringHash, hashcode);
@@ -4149,9 +4148,9 @@ void do_show_cache(int n)
 	    do {
 		if (IS_UTF8(CXHEAD(chain)))
 		    Rprintf("U");
-		else if (CXHEAD(chain)->isLatin1())
+		else if (IS_LATIN1(CXHEAD(chain)))
 		    Rprintf("L");
-		else if (CXHEAD(chain)->isBytes())
+		else if (IS_BYTES(CXHEAD(chain)))
 		    Rprintf("B");
 		Rprintf("|%s| ", CHAR(CXHEAD(chain)));
 		chain = CXTAIL(chain);
@@ -4176,9 +4175,9 @@ void do_write_cache()
 		do {
 		    if (IS_UTF8(CXHEAD(chain)))
 			fprintf(f, "U");
-		    else if (CXHEAD(chain)->isLatin1())
+		    else if (IS_LATIN1(CXHEAD(chain)))
 			fprintf(f, "L");
-		    else if (CXHEAD(chain)->isBytes())
+		    else if (IS_BYTES(CXHEAD(chain)))
 			fprintf(f, "B");
 		    fprintf(f, "|%s| ", CHAR(CXHEAD(chain)));
 		    chain = CXTAIL(chain);

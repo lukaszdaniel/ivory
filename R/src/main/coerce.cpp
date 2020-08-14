@@ -411,9 +411,9 @@ static SEXP coerceToSymbol(SEXP v)
     SEXP ans = R_NilValue;
     int warn = 0;
     if (length(v) <= 0)
-	error(_("invalid data of mode '%s' (too short)"), type2char(v->sexptype()));
+	error(_("invalid data of mode '%s' (too short)"), type2char(TYPEOF(v)));
     PROTECT(v);
-    switch(v->sexptype()) {
+    switch(TYPEOF(v)) {
     case LGLSXP:
 	ans = StringFromLogical(LOGICAL_ELT(v, 0), warn);
 	break;
@@ -456,7 +456,7 @@ static SEXP coerceToLogical(SEXP v)
     }
 #endif
     SHALLOW_DUPLICATE_ATTRIB(ans, v);
-    switch (v->sexptype()) {
+    switch (TYPEOF(v)) {
     case INTSXP:
 	for (i = 0; i < n; i++) {
 //	    if ((i+1) % NINTERRUPT == 0) R_CheckUserInterrupt();
@@ -509,7 +509,7 @@ static SEXP coerceToInteger(SEXP v)
     }
 #endif
     SHALLOW_DUPLICATE_ATTRIB(ans, v);
-    switch (v->sexptype()) {
+    switch (TYPEOF(v)) {
     case LGLSXP:
 	for (i = 0; i < n; i++) {
 //	    if ((i+1) % NINTERRUPT == 0) R_CheckUserInterrupt();
@@ -562,7 +562,7 @@ static SEXP coerceToReal(SEXP v)
     }
 #endif
     SHALLOW_DUPLICATE_ATTRIB(ans, v);
-    switch (v->sexptype()) {
+    switch (TYPEOF(v)) {
     case LGLSXP:
 	for (i = 0; i < n; i++) {
 //	    if ((i+1) % NINTERRUPT == 0) R_CheckUserInterrupt();
@@ -615,7 +615,7 @@ static SEXP coerceToComplex(SEXP v)
     }
 #endif
     SHALLOW_DUPLICATE_ATTRIB(ans, v);
-    switch (v->sexptype()) {
+    switch (TYPEOF(v)) {
     case LGLSXP:
 	for (i = 0; i < n; i++) {
 //	if ((i+1) % NINTERRUPT == 0) R_CheckUserInterrupt();
@@ -669,7 +669,7 @@ static SEXP coerceToRaw(SEXP v)
     }
 #endif
     SHALLOW_DUPLICATE_ATTRIB(ans, v);
-    switch (v->sexptype()) {
+    switch (TYPEOF(v)) {
     case LGLSXP:
 	for (i = 0; i < n; i++) {
 //	    if ((i+1) % NINTERRUPT == 0) R_CheckUserInterrupt();
@@ -747,7 +747,7 @@ static SEXP coerceToString(SEXP v)
     }
 #endif
     SHALLOW_DUPLICATE_ATTRIB(ans, v);
-    switch (v->sexptype()) {
+    switch (TYPEOF(v)) {
     case LGLSXP:
 	for (i = 0; i < n; i++) {
 //	    if ((i+1) % NINTERRUPT == 0) R_CheckUserInterrupt();
@@ -805,7 +805,7 @@ static SEXP coerceToExpression(SEXP v)
        SET_RTRACE(ans,1);
     }
 #endif
-	switch (v->sexptype()) {
+	switch (TYPEOF(v)) {
 	case LGLSXP:
 	    for (i = 0; i < n; i++)
 		SET_VECTOR_ELT(ans, i, ScalarLogical(LOGICAL_ELT(v, i)));
@@ -854,7 +854,7 @@ static SEXP coerceToVectorList(SEXP v)
        SET_RTRACE(ans,1);
     }
 #endif
-    switch (v->sexptype()) {
+    switch (TYPEOF(v)) {
     case LGLSXP:
 	for (i = 0; i < n; i++) {
 //	    if ((i+1) % NINTERRUPT == 0) R_CheckUserInterrupt();
@@ -916,7 +916,7 @@ static SEXP coerceToPairList(SEXP v)
     n = LENGTH(v); /* limited to len */
     PROTECT(ansp = ans = allocList(n));
     for (i = 0; i < n; i++) {
-	switch (v->sexptype()) {
+	switch (TYPEOF(v)) {
 	case LGLSXP:
 	    SETCAR(ansp, allocVector(LGLSXP, 1));
 	    LOGICAL0(CAR(ansp))[0] = LOGICAL_ELT(v, i);
@@ -1012,7 +1012,7 @@ static SEXP coercePairList(SEXP v, SEXPTYPE type)
     }
     else
 	error(_("'%s' object cannot be coerced to type '%s'"),
-	      type2char(v->sexptype()), type2char(type));
+	      type2char(TYPEOF(v)), type2char(type));
 
     /* If any tags are non-null then we */
     /* need to add a names attribute. */
@@ -1046,16 +1046,16 @@ static SEXP coerceVectorList(SEXP v, SEXPTYPE type)
     rval = R_NilValue;	/* -Wall */
 
     /* expression -> list, new in R 2.4.0 */
-    if (type == VECSXP && v->sexptype() == EXPRSXP) {
+    if (type == VECSXP && TYPEOF(v) == EXPRSXP) {
 	/* This is sneaky but saves us rewriting a lot of the duplicate code */
 	rval = MAYBE_REFERENCED(v) ? duplicate(v) : v;
-	rval->setsexptype(VECSXP);
+	SET_TYPEOF(rval, VECSXP);
 	return rval;
     }
 
-    if (type == EXPRSXP && v->sexptype() == VECSXP) {
+    if (type == EXPRSXP && TYPEOF(v) == VECSXP) {
 	rval = MAYBE_REFERENCED(v) ? duplicate(v) : v;
-	rval->setsexptype(EXPRSXP);
+	SET_TYPEOF(rval, EXPRSXP);
 	return rval;
     }
 
@@ -1163,17 +1163,17 @@ static SEXP coerceSymbol(SEXP v, SEXPTYPE type)
 
 SEXP Rf_coerceVector(SEXP v, SEXPTYPE type)
 {
-    if (v->sexptype() == type)
+    if (TYPEOF(v) == type)
 	return v;
 
     SEXP ans = R_NilValue;	/* -Wall */
-    if (v->altrep()) {
+    if (ALTREP(v)) {
 	ans = ALTREP_COERCE(v, type);
 	if (ans) return ans;
     }
 
     /* code to allow classes to extend ENVSXP, SYMSXP, etc */
-    if(IS_S4_OBJECT(v) && v->sexptype() == S4SXP) {
+    if(IS_S4_OBJECT(v) && TYPEOF(v) == S4SXP) {
 	SEXP vv = R_getS4DataSlot(v, ANYSXP);
 	if(vv == R_NilValue)
 	  error(_("no method for coercing this S4 class to a vector"));
@@ -1182,7 +1182,7 @@ SEXP Rf_coerceVector(SEXP v, SEXPTYPE type)
 	v = vv;
     }
 
-    switch (v->sexptype()) {
+    switch (TYPEOF(v)) {
 #ifdef NOTYET
     case NILSXP:
 	ans = coerceNull(v, type);
@@ -1218,7 +1218,7 @@ SEXP Rf_coerceVector(SEXP v, SEXPTYPE type)
 	 * people tend to split using as.character(), modify, and
 	 * paste() back together. However, we might as well
 	 * special-case all symbolic operators here. */
-	if (op->sexptypeEqual(SYMSXP)) {
+	if (TYPEOF(op) == SYMSXP) {
 	    SET_STRING_ELT(ans, i, PRINTNAME(op));
 	    i++;
 	    v = CDR(v);
@@ -1265,7 +1265,7 @@ SEXP Rf_coerceVector(SEXP v, SEXPTYPE type)
 	    ans = coerceToRaw(v);	    break;
 	case STRSXP:
 	    if (ATTRIB(v) == R_NilValue)
-		switch(v->sexptype()) {
+		switch(TYPEOF(v)) {
 		case INTSXP:
 		case REALSXP:
 		    return R_deferred_coerceToString(v, nullptr);
@@ -1280,20 +1280,20 @@ SEXP Rf_coerceVector(SEXP v, SEXPTYPE type)
 	case LISTSXP:
 	    ans = coerceToPairList(v);	    break;
 	default:
-	    error(_("cannot coerce type '%s' to vector of type '%s'"), type2char(v->sexptype()), type2char(type));
+	    error(_("cannot coerce type '%s' to vector of type '%s'"), type2char(TYPEOF(v)), type2char(type));
 	}
 	break;
     default:
-	error(_("cannot coerce type '%s' to vector of type '%s'"), type2char(v->sexptype()), type2char(type));
+	error(_("cannot coerce type '%s' to vector of type '%s'"), type2char(TYPEOF(v)), type2char(type));
     }
     return ans;
 }
 
 SEXP Rf_CreateTag(SEXP x)
 {
-	if (x->isNull_() || x->isSymbol_())
+	if (isNull(x) || isSymbol(x))
 		return x;
-	if (x->isString_() && length(x) >= 1 && length(STRING_ELT(x, 0)) >= 1)
+	if (isString(x) && length(x) >= 1 && length(STRING_ELT(x, 0)) >= 1)
 	{
 		x = installTrChar(STRING_ELT(x, 0));
 	}
@@ -1349,31 +1349,31 @@ static SEXP ascommon(SEXP call, SEXP u, SEXPTYPE type)
     else if (isVector(u) || isList(u) || isLanguage(u)
 	     || (isSymbol(u) && type == EXPRSXP)) {
 	SEXP v;
-	if (type != ANYSXP && u->sexptype() != type) v = coerceVector(u, type);
+	if (type != ANYSXP && TYPEOF(u) != type) v = coerceVector(u, type);
 	else v = u;
 
 	/* drop attributes() and class() in some cases for as.pairlist:
 	   But why?  (And who actually coerces to pairlists?)
 	 */
 	if ((type == LISTSXP) &&
-	    !(u->sexptype() == LANGSXP || u->sexptype() == LISTSXP ||
-	      u->sexptype() == EXPRSXP || u->sexptype() == VECSXP)) {
+	    !(TYPEOF(u) == LANGSXP || TYPEOF(u) == LISTSXP ||
+	      TYPEOF(u) == EXPRSXP || TYPEOF(u) == VECSXP)) {
 	    if (MAYBE_REFERENCED(v)) v = shallow_duplicate(v);
 	    CLEAR_ATTRIB(v);
 	}
 	return v;
     }
-    else if (u->isSymbol_() && type == STRSXP)
+    else if (isSymbol(u) && type == STRSXP)
 	return ScalarString(PRINTNAME(u));
-    else if (u->isSymbol_() && type == SYMSXP)
+    else if (isSymbol(u) && type == SYMSXP)
 	return u;
-    else if (u->isSymbol_() && type == VECSXP) {
+    else if (isSymbol(u) && type == VECSXP) {
 	SEXP v = allocVector(VECSXP, 1);
 	SET_VECTOR_ELT(v, 0, u);
 	return v;
     }
     else errorcall(call, _("cannot coerce type '%s' to vector of type '%s'"),
-		   type2char(u->sexptype()), type2char(type));
+		   type2char(TYPEOF(u)), type2char(type));
     return u;/* -Wall */
 }
 
@@ -1452,7 +1452,7 @@ HIDDEN SEXP do_asatomic(SEXP call, SEXP op, SEXP args, SEXP rho)
 
     checkArity(op, args);
     x = CAR(args);
-    if(x->sexptype() == type) {
+    if(TYPEOF(x) == type) {
 	if(ATTRIB(x) == R_NilValue) return x;
 	ans = MAYBE_REFERENCED(x) ? duplicate(x) : x;
 	CLEAR_ATTRIB(ans);
@@ -1491,8 +1491,8 @@ HIDDEN SEXP do_asvector(SEXP call, SEXP op, SEXP args, SEXP rho)
 	type = str2type(CHAR(STRING_ELT(CADR(args), 0))); /* ASCII */
 
     /* "any" case added in 2.13.0 */
-    if(type == ANYSXP || x->sexptype() == type) {
-	switch(x->sexptype()) {
+    if(type == ANYSXP || TYPEOF(x) == type) {
+	switch(TYPEOF(x)) {
 	case LGLSXP:
 	case INTSXP:
 	case REALSXP:
@@ -1511,7 +1511,7 @@ HIDDEN SEXP do_asvector(SEXP call, SEXP op, SEXP args, SEXP rho)
 	}
     }
 
-    if(IS_S4_OBJECT(x) && x->sexptype() == S4SXP) {
+    if(IS_S4_OBJECT(x) && TYPEOF(x) == S4SXP) {
 	SEXP v = R_getS4DataSlot(x, ANYSXP);
 	if(v == R_NilValue)
 	    error(_("no method for coercing this S4 class to a vector"));
@@ -1654,8 +1654,8 @@ HIDDEN SEXP do_str2lang(SEXP call, SEXP op, SEXP args, SEXP rho) {
     known_to_be_latin1 = known_to_be_utf8 = FALSE;
     Rboolean allKnown = TRUE;
     for(int i = 0; i < LENGTH(args); i++)
-	if(!STRING_ELT(args, i)->encKnown() &&
-	   !STRING_ELT(args, i)->isAscii()) {
+	if(!ENC_KNOWN(STRING_ELT(args, i)) &&
+	   !IS_ASCII(STRING_ELT(args, i))) {
 	    allKnown = FALSE;
 	    break;
 	}
@@ -1694,7 +1694,7 @@ HIDDEN SEXP do_ascall(SEXP call, SEXP op, SEXP args, SEXP rho)
 	return(ans);
 
     args = CAR(args);
-    switch (args->sexptype()) {
+    switch (TYPEOF(args)) {
     case LANGSXP:
 	ans = args;
 	break;
@@ -1751,7 +1751,7 @@ int Rf_asLogical2(SEXP x, int checking, SEXP call, SEXP rho)
 		"_R_CHECK_LENGTH_1_LOGIC2_",
 		FALSE /* by default do nothing */);
 	}
-	switch (x->sexptype()) {
+	switch (TYPEOF(x)) {
 	case LGLSXP:
 	    return LOGICAL_ELT(x, 0);
 	case INTSXP:
@@ -1767,7 +1767,7 @@ int Rf_asLogical2(SEXP x, int checking, SEXP call, SEXP rho)
 	default:
 	    UNIMPLEMENTED_TYPE("asLogical()", x);
 	}
-    } else if(x->sexptype() == CHARSXP) {
+    } else if(TYPEOF(x) == CHARSXP) {
 	    return LogicalFromString(x, warn);
     }
     return NA_LOGICAL;
@@ -1784,7 +1784,7 @@ int Rf_asInteger(SEXP x)
     int warn = 0, res;
 
     if (isVectorAtomic(x) && XLENGTH(x) >= 1) {
-	switch (x->sexptype()) {
+	switch (TYPEOF(x)) {
 	case LGLSXP:
 	    return IntegerFromLogical(LOGICAL_ELT(x, 0), warn);
 	case INTSXP:
@@ -1804,7 +1804,7 @@ int Rf_asInteger(SEXP x)
 	default:
 	    UNIMPLEMENTED_TYPE("asInteger()", x);
 	}
-    } else if(x->sexptype() == CHARSXP) {
+    } else if(TYPEOF(x) == CHARSXP) {
 	res = IntegerFromString(x, warn);
 	CoercionWarning(warn);
 	return res;
@@ -1817,7 +1817,7 @@ R_xlen_t Rf_asXLength(SEXP x)
     const R_xlen_t na = -999; /* any negative number should do */
 
     if (isVectorAtomic(x) && XLENGTH(x) >= 1) {
-	switch (x->sexptype()) {
+	switch (TYPEOF(x)) {
 	case INTSXP:
 	{
 	    int res = INTEGER_ELT(x, 0);
@@ -1834,7 +1834,7 @@ R_xlen_t Rf_asXLength(SEXP x)
 	default:
 	    UNIMPLEMENTED_TYPE("asXLength", x);
 	}
-    } else if(x->sexptype() != CHARSXP)
+    } else if(TYPEOF(x) != CHARSXP)
 	return na;
 
     double d = asReal(x);
@@ -1850,7 +1850,7 @@ double Rf_asReal(SEXP x)
     double res;
 
     if (isVectorAtomic(x) && XLENGTH(x) >= 1) {
-	switch (x->sexptype()) {
+	switch (TYPEOF(x)) {
 	case LGLSXP:
 	    res = RealFromLogical(LOGICAL_ELT(x, 0), warn);
 	    CoercionWarning(warn);
@@ -1872,7 +1872,7 @@ double Rf_asReal(SEXP x)
 	default:
 	    UNIMPLEMENTED_TYPE("asReal()", x);
 	}
-    } else if(x->sexptype() == CHARSXP) {
+    } else if(TYPEOF(x) == CHARSXP) {
 	res = RealFromString(x, warn);
 	CoercionWarning(warn);
 	return res;
@@ -1886,7 +1886,7 @@ Rcomplex Rf_asComplex(SEXP x)
     Rcomplex z;
 
     if (isVectorAtomic(x) && XLENGTH(x) >= 1) {
-	switch (x->sexptype()) {
+	switch (TYPEOF(x)) {
 	case LGLSXP:
 	    z = ComplexFromLogical(LOGICAL_ELT(x, 0), warn);
 	    CoercionWarning(warn);
@@ -1908,7 +1908,7 @@ Rcomplex Rf_asComplex(SEXP x)
 	default:
 	    UNIMPLEMENTED_TYPE("asComplex()", x);
 	}
-    } else if(x->sexptype() == CHARSXP) {
+    } else if(TYPEOF(x) == CHARSXP) {
 	z = ComplexFromString(x, warn);
 	CoercionWarning(warn);
 	return z;
@@ -2129,7 +2129,7 @@ HIDDEN SEXP do_isvector(SEXP call, SEXP op, SEXP args, SEXP rho)
     }
     /* So this allows any type, including undocumented ones such as
        "closure", but not aliases such as "name" and "function". */
-    else if (streql(stype, type2char(x->sexptype()))) {
+    else if (streql(stype, type2char(TYPEOF(x)))) {
 	LOGICAL0(ans)[0] = 1;
     }
     else
@@ -2152,7 +2152,7 @@ HIDDEN SEXP do_isvector(SEXP call, SEXP op, SEXP args, SEXP rho)
 
 R_INLINE static void copyDimAndNames(SEXP x, SEXP ans)
 {
-    if (x->isVector_()) {
+    if (isVector(x)) {
 	/* PROTECT/UNPROTECT are probably not needed here */
 	SEXP dims, names;
 	PROTECT(dims = getAttrib(x, R_DimSymbol));
@@ -2197,7 +2197,7 @@ HIDDEN SEXP do_isna(SEXP call, SEXP op, SEXP args, SEXP rho)
     n = xlength(x);
     PROTECT(ans = allocVector(LGLSXP, n));
     int *pa = LOGICAL(ans);
-    switch (x->sexptype()) {
+    switch (TYPEOF(x)) {
     case LGLSXP:
        for (auto i = 0; i < n; i++)
 	   pa[i] = (LOGICAL_ELT(x, i) == NA_LOGICAL);
@@ -2227,7 +2227,7 @@ HIDDEN SEXP do_isna(SEXP call, SEXP op, SEXP args, SEXP rho)
 		pa[i] = 0;                                     \
 	else                                               \
 	{                                                  \
-		switch (s->sexptype())                         \
+		switch (TYPEOF(s))                         \
 		{                                              \
 		case LGLSXP:                                   \
 		case INTSXP:                                   \
@@ -2269,7 +2269,7 @@ HIDDEN SEXP do_isna(SEXP call, SEXP op, SEXP args, SEXP rho)
 	break;
     case NILSXP: break;
     default:
-	warningcall(call, _("'%s' function applied to non-(list or vector) of type '%s'"), "is.na()", type2char(x->sexptype()));
+	warningcall(call, _("'%s' function applied to non-(list or vector) of type '%s'"), "is.na()", type2char(TYPEOF(x)));
 	for (auto i = 0; i < n; i++)
 	    pa[i] = 0;
     }
@@ -2290,7 +2290,7 @@ static bool anyNA(SEXP call, SEXP op, SEXP args, SEXP env)
 */
 {
     SEXP x = CAR(args);
-    SEXPTYPE xT = x->sexptype();
+    SEXPTYPE xT = TYPEOF(x);
     Rboolean isList = (Rboolean) (xT == VECSXP || xT == LISTSXP), recursive = FALSE;
 
     if (isList && length(args) > 1) recursive = (Rboolean) asLogical(CADR(args));
@@ -2386,7 +2386,7 @@ static bool anyNA(SEXP call, SEXP op, SEXP args, SEXP env)
     }
 
     default:
-	error(_("'%s' function applied to non-(list or vector) of type '%s'"), "anyNA()", type2char(x->sexptype()));
+	error(_("'%s' function applied to non-(list or vector) of type '%s'"), "anyNA()", type2char(TYPEOF(x)));
     }
     return false;
 } // anyNA()
@@ -2446,7 +2446,7 @@ HIDDEN SEXP do_isnan(SEXP call, SEXP op, SEXP args, SEXP rho)
     n = xlength(x);
     PROTECT(ans = allocVector(LGLSXP, n));
     int *pa = LOGICAL(ans);
-    switch (x->sexptype()) {
+    switch (TYPEOF(x)) {
     case STRSXP:
     case RAWSXP:
     case NILSXP:
@@ -2467,7 +2467,7 @@ HIDDEN SEXP do_isnan(SEXP call, SEXP op, SEXP args, SEXP rho)
 	break;
     default:
 	errorcall(call, _("default method not implemented for type '%s'"),
-		  type2char(x->sexptype()));
+		  type2char(TYPEOF(x)));
     }
     copyDimAndNames(x, ans);
     UNPROTECT(2); /* args, ans*/
@@ -2507,7 +2507,7 @@ HIDDEN SEXP do_isfinite(SEXP call, SEXP op, SEXP args, SEXP rho)
 	nprotect++;
     }
     else dims = names = R_NilValue;
-    switch (x->sexptype()) {
+    switch (TYPEOF(x)) {
     case STRSXP:
     case RAWSXP:
     case NILSXP:
@@ -2531,7 +2531,7 @@ HIDDEN SEXP do_isfinite(SEXP call, SEXP op, SEXP args, SEXP rho)
 	break;
     default:
 	errorcall(call, _("default method not implemented for type '%s'"),
-		  type2char(x->sexptype()));
+		  type2char(TYPEOF(x)));
     }
     if (dims != R_NilValue)
 	setAttrib(ans, R_DimSymbol, dims);
@@ -2579,7 +2579,7 @@ HIDDEN SEXP do_isinfinite(SEXP call, SEXP op, SEXP args, SEXP rho)
 	nprotect++;
     }
     else	dims = names = R_NilValue;
-    switch (x->sexptype()) {
+    switch (TYPEOF(x)) {
     case STRSXP:
     case RAWSXP:
     case NILSXP:
@@ -2610,7 +2610,7 @@ HIDDEN SEXP do_isinfinite(SEXP call, SEXP op, SEXP args, SEXP rho)
 	break;
     default:
 	errorcall(call, _("default method not implemented for type '%s'"),
-		  type2char(x->sexptype()));
+		  type2char(TYPEOF(x)));
     }
     if (!isNull(dims))
 	setAttrib(ans, R_DimSymbol, dims);

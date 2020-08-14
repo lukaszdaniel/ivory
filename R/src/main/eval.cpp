@@ -2307,7 +2307,7 @@ HIDDEN SEXP do_for(SEXP call, SEXP op, SEXP args, SEXP rho)
     else
 	n = XLENGTH(val);
 
-    val_type = val->sexptype();
+    val_type = TYPEOF(val);
 
     defineVar(sym, R_NilValue, rho);
     PROTECT(cell = GET_BINDING_CELL(sym, rho));
@@ -2530,7 +2530,7 @@ HIDDEN SEXP do_function(SEXP call, SEXP op, SEXP args, SEXP rho)
 {
 	SEXP rval, srcref;
 
-	if (op->sexptype() == PROMSXP)
+	if (TYPEOF(op) == PROMSXP)
 	{
 		op = forcePromise(op);
 		ENSURE_NAMEDMAX(op);
@@ -2902,7 +2902,7 @@ static SEXP applydefine(SEXP call, SEXP op, SEXP args, SEXP rho)
     if (PRIMVAL(op) == 2)                       /* <<- */
 	setVar(lhsSym, value, ENCLOS(rho));
     else {                                      /* <-, = */
-	if (value->altrep()) {
+	if (ALTREP(value)) {
 	    PROTECT(value);
 	    value = try_assign_unwrap(value, lhsSym, rho, nullptr);
 	    UNPROTECT(1);
@@ -7153,7 +7153,7 @@ static SEXP bcEval(SEXP body, SEXP rho, Rboolean useCache)
 	R_bcstack_t *s = R_BCNodeStackTop - 1;
 	int tag = s->tag;
 
-	if ((size_t) tag == BNDCELL_TAG_WR(loc))
+	if ((unsigned int) tag == BNDCELL_TAG_WR(loc))
 	    switch (tag) {
 	    case REALSXP: SET_BNDCELL_DVAL(loc, s->u.dval); NEXT();
 	    case INTSXP: SET_BNDCELL_IVAL(loc, s->u.ival); NEXT();
@@ -7503,7 +7503,7 @@ static SEXP bcEval(SEXP body, SEXP rho, Rboolean useCache)
 	SEXP symbol = VECTOR_ELT(constants, sidx);
 	SEXP cell = GET_BINDING_CELL_CACHE(symbol, rho, vcache, sidx);
 	SEXP value = GETSTACK(-1); /* leave on stack for GC protection */
-	if (value->altrep()) {
+	if (ALTREP(value)) {
 	    SEXP v = try_assign_unwrap(value, symbol, rho, cell);
 	    if (v != value) {
 		SETSTACK(-1, v);

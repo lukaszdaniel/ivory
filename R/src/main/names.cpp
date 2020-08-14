@@ -1285,8 +1285,8 @@ SEXP Rf_installNoTrChar(SEXP charSXP)
 	error(_("attempt to use zero-length variable name"));
     if (len > MAXIDSIZE)
 	error(_("variable names are limited to %d bytes"), MAXIDSIZE);
-    if (charSXP->isAscii() || (charSXP->isUTF8() && utf8locale) ||
-					(charSXP->isLatin1() && latin1locale) )
+    if (IS_ASCII(charSXP) || (IS_UTF8(charSXP) && utf8locale) ||
+					(IS_LATIN1(charSXP) && latin1locale) )
 	sym = mkSYMSXP(charSXP, R_UnboundValue);
     else {
 	/* This branch is to match behaviour of install (which is older):
@@ -1347,10 +1347,10 @@ HIDDEN SEXP do_internal(SEXP call, SEXP op, SEXP args, SEXP env)
 
     checkArity(op, args);
     s = CAR(args);
-    if (!s->isPairList_())
+    if (!isPairList(s))
 	errorcall(call, _("invalid '%s' argument"), ".Internal()");
     fun = CAR(s);
-    if (!fun->isSymbol_())
+    if (!isSymbol(fun))
 	errorcall(call, _("invalid '%s' argument"), ".Internal()");
     if (INTERNAL(fun) == R_NilValue)
 	errorcall(call, _("there is no '.Internal' function '%s'"),

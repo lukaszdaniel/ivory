@@ -565,7 +565,6 @@ SEXP R_standardGeneric(SEXP fname, SEXP ev, SEXP fdef)
 	    if (inherits(f, "internalDispatchMethod")) {
                 val = R_deferred_default_method();
             } else {
-                SEXP R_execMethod(SEXP, SEXP);
                 PROTECT(f); nprotect++; /* is this needed?? */
                 val = R_execMethod(f, ev);
             }
@@ -601,7 +600,7 @@ static Rboolean is_missing_arg(SEXP symbol, SEXP ev)
     loc = R_findVarLocInFrame(ev, symbol);
     if (R_VARLOC_IS_NULL(loc))
 	error(_("could not find symbol '%s' in frame of call"),
-	      CHAR(symbol->printname()));
+	      CHAR(PRINTNAME(symbol)));
     return R_GetVarLocMISSING(loc);
 }
 
@@ -616,7 +615,7 @@ SEXP R_missingArg(SEXP symbol, SEXP ev)
     } else
     if(!isEnvironment(ev))
 	error(_("invalid environment in checking for missing argument, '%s', in methods dispatch: got an object of class \"%s\""),
-	     CHAR(symbol->printname()), class_string(ev));
+	     CHAR(PRINTNAME(symbol)), class_string(ev));
     if(is_missing_arg(symbol, ev))
 	return R_TRUE;
     else

@@ -529,7 +529,7 @@ HIDDEN SEXP do_lengths(SEXP call, SEXP op, SEXP args, SEXP rho)
       return(ans);
 
     Rboolean isList = (Rboolean) (isVectorList(x) || isS4(x));
-    if(!isList) switch(x->sexptype()) {
+    if(!isList) switch(TYPEOF(x)) {
 	case NILSXP:
 	case CHARSXP:
 	case LGLSXP:
@@ -1931,7 +1931,7 @@ HIDDEN SEXP do_colsum(SEXP call, SEXP op, SEXP args, SEXP rho)
     if (NaRm == NA_LOGICAL) error(_("invalid '%s' argument"), "na.rm");
     keepNA = (Rboolean) !NaRm;
 
-    switch (type = x->sexptype()) {
+    switch (type = TYPEOF(x)) {
     case LGLSXP:
     case INTSXP:
     case REALSXP: break;
@@ -2238,7 +2238,7 @@ HIDDEN SEXP do_diag(SEXP call, SEXP op, SEXP args, SEXP rho)
 		ra[i * (NR + 1)] = rx[i1];         \
 	});
 
-   switch(x->sexptype()) {
+   switch(TYPEOF(x)) {
 
    case REALSXP:
    {

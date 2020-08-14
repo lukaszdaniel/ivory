@@ -307,7 +307,7 @@ static SEXP duplicate1(SEXP s, Rboolean deep)
     SEXP t;
     R_xlen_t i, n;
 
-    if (s->altrep()) {
+    if (ALTREP(s)) {
 	PROTECT(s); /* the methods should protect, but ... */
 	SEXP ans = ALTREP_DUPLICATE_EX(s, deep);
 	UNPROTECT(1);
@@ -315,7 +315,7 @@ static SEXP duplicate1(SEXP s, Rboolean deep)
 	    return ans;
     }
 
-    switch (s->sexptype()) {
+    switch (TYPEOF(s)) {
     case NILSXP:
     case SYMSXP:
     case ENVSXP:

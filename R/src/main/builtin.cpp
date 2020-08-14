@@ -37,7 +37,7 @@ HIDDEN
 R_xlen_t Rf_asVecSize(SEXP x)
 {
     if (isVectorAtomic(x) && LENGTH(x) >= 1) {
-	switch (x->sexptype()) {
+	switch (TYPEOF(x)) {
 	case INTSXP:
 	{
 	    int res = INTEGER(x)[0];
@@ -658,7 +658,7 @@ HIDDEN SEXP do_cat(SEXP call, SEXP op, SEXP args, SEXP rho)
 		width += Rstrlen(STRING_ELT(labs, nlines % lablen), 0) + 1;
 		nlines++;
 	    }
-	    if (s->isString_())
+	    if (isString(s))
 		p = trChar(STRING_ELT(s, 0));
 	    else if (isSymbol(s)) /* length 1 */
 		p = CHAR(PRINTNAME(s));
@@ -682,7 +682,7 @@ HIDDEN SEXP do_cat(SEXP call, SEXP op, SEXP args, SEXP rho)
 	    }
 #endif
 	    else
-		error(_("argument %d (type '%s') cannot be handled by 'cat()' function"), 1+iobj, type2char(s->sexptype()));
+		error(_("argument %d (type '%s') cannot be handled by 'cat()' function"), 1+iobj, type2char(TYPEOF(s)));
 	    /* FIXME : cat(...) should handle ANYTHING */
 	    size_t w = strlen(p);
 	    cat_sepwidth(sepr, sepw, ntot);
@@ -858,12 +858,12 @@ SEXP Rf_xlengthgets(SEXP x, R_xlen_t len)
     lenx = xlength(x);
     if (lenx == len)
 	return (x);
-    PROTECT(rval = allocVector(x->sexptype(), len));
+    PROTECT(rval = allocVector(TYPEOF(x), len));
     PROTECT(xnames = getAttrib(x, R_NamesSymbol));
     if (xnames != R_NilValue)
 	names = allocVector(STRSXP, len);
     else names = R_NilValue;	/*- just for -Wall --- should we do this ? */
-    switch (x->sexptype()) {
+    switch (TYPEOF(x)) {
     case NILSXP:
 	break;
     case LGLSXP:

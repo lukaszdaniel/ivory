@@ -112,34 +112,21 @@ enum CharsetBit
     CACHED_MASK = (1 << 5),
     ASCII_MASK = (1 << 6)
 };
-#define HASHASH_MASK 1
+
 /**** HASHASH uses the first bit -- see HASHASH_MASK defined below */
 
-
-inline auto SEXPREC::isBytes() const { return this->sxpinfo.gp & BYTES_MASK; }
-inline void SEXPREC::setBytes() { this->sxpinfo.gp |= BYTES_MASK; }
-inline auto SEXPREC::isLatin1() const { return this->sxpinfo.gp & LATIN1_MASK; }
-inline void SEXPREC::setLatin1() { this->sxpinfo.gp |= LATIN1_MASK; }
-inline auto SEXPREC::isAscii() const { return this->sxpinfo.gp & ASCII_MASK; }
-inline void SEXPREC::setAscii() { this-> sxpinfo.gp |= ASCII_MASK; }
-inline auto SEXPREC::isUTF8() const { return this->sxpinfo.gp & UTF8_MASK; }
-inline void SEXPREC::setUTF8() { this->sxpinfo.gp |= UTF8_MASK; }
-inline auto SEXPREC::encKnown() const { return this->sxpinfo.gp & (LATIN1_MASK | UTF8_MASK); }
-inline auto SEXPREC::isCached() const { return this->sxpinfo.gp & CACHED_MASK; }
-inline void SEXPREC::setCached() { this->sxpinfo.gp |= CACHED_MASK; }
-
 #ifdef USE_RINTERNALS
-#define IS_BYTES(x) ((x)->sxpinfo.gp & BYTES_MASK)
-#define SET_BYTES(x) (((x)->sxpinfo.gp) |= BYTES_MASK)
-#define IS_LATIN1(x) ((x)->sxpinfo.gp & LATIN1_MASK)
-#define SET_LATIN1(x) (((x)->sxpinfo.gp) |= LATIN1_MASK)
-#define IS_ASCII(x) ((x)->sxpinfo.gp & ASCII_MASK)
-#define SET_ASCII(x) (((x)->sxpinfo.gp) |= ASCII_MASK)
-#define IS_UTF8(x) ((x)->sxpinfo.gp & UTF8_MASK)
-#define SET_UTF8(x) (((x)->sxpinfo.gp) |= UTF8_MASK)
-#define ENC_KNOWN(x) ((x)->sxpinfo.gp & (LATIN1_MASK | UTF8_MASK))
-#define SET_CACHED(x) (((x)->sxpinfo.gp) |= CACHED_MASK)
-#define IS_CACHED(x) (((x)->sxpinfo.gp) & CACHED_MASK)
+# define IS_BYTES(x) (R::SEXPREC::IS_BYTES(x))
+# define SET_BYTES(x) (R::SEXPREC::SET_BYTES(x))
+# define IS_LATIN1(x) (R::SEXPREC::IS_LATIN1(x))
+# define SET_LATIN1(x) (R::SEXPREC::SET_LATIN1(x))
+# define IS_ASCII(x) (R::SEXPREC::IS_ASCII(x))
+# define SET_ASCII(x) (R::SEXPREC::SET_ASCII(x))
+# define IS_UTF8(x) (R::SEXPREC::IS_UTF8(x))
+# define SET_UTF8(x) (R::SEXPREC::SET_UTF8(x))
+# define ENC_KNOWN(x) (R::SEXPREC::ENC_KNOWN(x))
+# define SET_CACHED(x) (R::SEXPREC::SET_CACHED(x))
+# define IS_CACHED(x) (R::SEXPREC::IS_CACHED(x))
 #else
 /* Needed only for write-barrier testing */
 int IS_BYTES(SEXP x);
@@ -151,7 +138,7 @@ void SET_ASCII(SEXP x);
 int IS_UTF8(SEXP x);
 void SET_UTF8(SEXP x);
 int ENC_KNOWN(SEXP x);
-int SET_CACHED(SEXP x);
+void SET_CACHED(SEXP x);
 int IS_CACHED(SEXP x);
 #endif
 /* macros and declarations for managing CHARSXP cache */
@@ -165,7 +152,6 @@ extern "C" void R_ProcessEvents(void);
 #ifdef _WIN32
 extern void R_WaitEvent(void);
 #endif
-
 
 #ifdef R_USE_SIGNALS
 #ifdef _WIN32
@@ -405,31 +391,27 @@ struct FUNTAB
  */
 
 /* Primitive Access Macros */
-#define PRIMOFFSET(x)	(((BuiltInFunction*)x)->u.primsxp.offset)
-#define SET_PRIMOFFSET(x,v)	((((BuiltInFunction*)x)->u.primsxp.offset)=(v))
-#define PRIMFUN(x)	(R_FunTab[((BuiltInFunction*)x)->u.primsxp.offset].cfun)
-#define PRIMNAME(x)	(R_FunTab[((BuiltInFunction*)x)->u.primsxp.offset].name)
-#define PRIMVAL(x)	(R_FunTab[((BuiltInFunction*)x)->u.primsxp.offset].code)
-#define PRIMARITY(x)	(R_FunTab[((BuiltInFunction*)x)->u.primsxp.offset].arity)
-#define PPINFO(x)	(R_FunTab[((BuiltInFunction*)x)->u.primsxp.offset].gram)
-#define PRIMPRINT(x)    (((R_FunTab[((BuiltInFunction*)x)->u.primsxp.offset].eval) / 100) % 10)
-#define PRIMINTERNAL(x) (((R_FunTab[((BuiltInFunction*)x)->u.primsxp.offset].eval) % 100) / 10)
+#define PRIMOFFSET(x)	(R::SEXPREC::PRIMOFFSET(x))
+#define SET_PRIMOFFSET(x,v)	(R::SEXPREC::SET_PRIMOFFSET(x, v))
+#define PRIMFUN(x)	(R_FunTab[PRIMOFFSET(x)].cfun)
+#define PRIMNAME(x)	(R_FunTab[PRIMOFFSET(x)].name)
+#define PRIMVAL(x)	(R_FunTab[PRIMOFFSET(x)].code)
+#define PRIMARITY(x)	(R_FunTab[PRIMOFFSET(x)].arity)
+#define PPINFO(x)	(R_FunTab[PRIMOFFSET(x)].gram)
+#define PRIMPRINT(x)	(((R_FunTab[PRIMOFFSET(x)].eval) / 100) % 10)
+#define PRIMINTERNAL(x)	(((R_FunTab[PRIMOFFSET(x)].eval) % 100) / 10)
 
-/* Promise Access Methods */
-auto& SEXPREC::PRCODE(SEXP x) { return x->u.promsxp.expr; }
-void SEXPREC::SET_PRCODE(SEXP x, SEXP v) { x->u.promsxp.expr = v; }
-auto& SEXPREC::PRENV(SEXP x) { return x->u.promsxp.env; }
-void SEXPREC::SET_PRENV(SEXP x, SEXP v) { x->u.promsxp.env = v; }
-auto& SEXPREC::PRVALUE(SEXP x) { return x->u.promsxp.value; }
-void SEXPREC::SET_PRVALUE(SEXP x, SEXP v) { x->u.promsxp.value = v; }
-auto SEXPREC::PRSEEN(SEXP x) { return x->sxpinfo.gp; }
-void SEXPREC::SET_PRSEEN(SEXP x, int v) { x->sxpinfo.gp = v; }
+/* Promise Access Macros */
+#define PRCODE(x)	(R::SEXPREC::PRCODE(x))
+#define PRENV(x)	(R::SEXPREC::PRENV(x))
+#define PRVALUE(x)	(R::SEXPREC::PRVALUE(x))
+#define PRSEEN(x)	(R::SEXPREC::PRSEEN(x))
+#define SET_PRSEEN(x,v)	(R::SEXPREC::SET_PRSEEN(x, v))
 
 /* Hashing Macros */
-#define HASHASH(x)      ((x)->sxpinfo.gp & HASHASH_MASK)
+#define HASHASH(x)      (R::SEXPREC::HASHASH(x))
 #define HASHVALUE(x)    ((int) TRUELENGTH(x))
-#define SET_HASHASH(x,v) ((v) ? (((x)->sxpinfo.gp) |= HASHASH_MASK) : \
-			  (((x)->sxpinfo.gp) &= (~HASHASH_MASK)))
+#define SET_HASHASH(x,v) (R::SEXPREC::SET_HASHASH(x, v))
 #define SET_HASHVALUE(x,v) SET_TRUELENGTH(x, ((int) (v)))
 
 /* Vector Heap Structure */
@@ -451,45 +433,39 @@ inline size_t PTR2VEC(int n) { return (n > 0) ? (std::size_t(n)*sizeof(SEXP) - 1
 
 /* Bindings */
 /* use the same bits (15 and 14) in symbols and bindings */
-constexpr int ACTIVE_BINDING_MASK = (1 << 15);
-constexpr int BINDING_LOCK_MASK = (1 << 14);
-#define SPECIAL_BINDING_MASK (ACTIVE_BINDING_MASK | BINDING_LOCK_MASK)
-#define IS_ACTIVE_BINDING(b) ((b)->sxpinfo.gp & ACTIVE_BINDING_MASK)
-#define BINDING_IS_LOCKED(b) ((b)->sxpinfo.gp & BINDING_LOCK_MASK)
-#define SET_ACTIVE_BINDING_BIT(b) ((b)->sxpinfo.gp |= ACTIVE_BINDING_MASK)
-#define LOCK_BINDING(b)                               \
-    do                                                \
-    {                                                 \
-        SEXP lb__b__ = b;                             \
-        if (!IS_ACTIVE_BINDING(lb__b__))              \
-        {                                             \
-            if (TYPEOF(lb__b__) == SYMSXP)            \
-                MARK_NOT_MUTABLE(SYMVALUE(lb__b__));  \
-            else                                      \
-                MARK_NOT_MUTABLE(CAR(lb__b__));       \
-        }                                             \
-        ((lb__b__))->sxpinfo.gp |= BINDING_LOCK_MASK; \
-    } while (0)
-#define UNLOCK_BINDING(b) ((b)->sxpinfo.gp &= (~BINDING_LOCK_MASK))
+#define IS_ACTIVE_BINDING(b) (R::SEXPREC::IS_ACTIVE_BINDING(b))
+#define BINDING_IS_LOCKED(b) (R::SEXPREC::BINDING_IS_LOCKED(b))
+#define SET_ACTIVE_BINDING_BIT(b) (R::SEXPREC::SET_ACTIVE_BINDING_BIT(b))
+#define LOCK_BINDING(b) (R::SEXPREC::LOCK_BINDING_(b))
+void R::SEXPREC::LOCK_BINDING_(SEXP b)
+    {                                                 
+        if (!IS_ACTIVE_BINDING(b))              
+        {                                             
+            if (TYPEOF(b) == SYMSXP)            
+                MARK_NOT_MUTABLE(SYMVALUE(b));  
+            else                                      
+                MARK_NOT_MUTABLE(CAR(b));       
+        }                                             
+        ((b))->sxpinfo.gp |= BINDING_LOCK_MASK; 
+    }
+#define UNLOCK_BINDING(b) (R::SEXPREC::UNLOCK_BINDING(b))
 
-constexpr int BASE_SYM_CACHED_MASK = (1 << 13);
-#define SET_BASE_SYM_CACHED(b) ((b)->sxpinfo.gp |= BASE_SYM_CACHED_MASK)
-#define UNSET_BASE_SYM_CACHED(b) ((b)->sxpinfo.gp &= (~BASE_SYM_CACHED_MASK))
-#define BASE_SYM_CACHED(b) ((b)->sxpinfo.gp & BASE_SYM_CACHED_MASK)
+#define SET_BASE_SYM_CACHED(b) (R::SEXPREC::SET_BASE_SYM_CACHED(b))
+#define UNSET_BASE_SYM_CACHED(b) (R::SEXPREC::UNSET_BASE_SYM_CACHED(b))
+#define BASE_SYM_CACHED(b) (R::SEXPREC::BASE_SYM_CACHED(b))
 
-constexpr int SPECIAL_SYMBOL_MASK = (1 << 12);
-#define SET_SPECIAL_SYMBOL(b) ((b)->sxpinfo.gp |= SPECIAL_SYMBOL_MASK)
-#define UNSET_SPECIAL_SYMBOL(b) ((b)->sxpinfo.gp &= (~SPECIAL_SYMBOL_MASK))
-#define IS_SPECIAL_SYMBOL(b) ((b)->sxpinfo.gp & SPECIAL_SYMBOL_MASK)
-#define SET_NO_SPECIAL_SYMBOLS(b) ((b)->sxpinfo.gp |= SPECIAL_SYMBOL_MASK)
-#define UNSET_NO_SPECIAL_SYMBOLS(b) ((b)->sxpinfo.gp &= (~SPECIAL_SYMBOL_MASK))
-#define NO_SPECIAL_SYMBOLS(b) ((b)->sxpinfo.gp & SPECIAL_SYMBOL_MASK)
+#define SET_SPECIAL_SYMBOL(b) (R::SEXPREC::SET_SPECIAL_SYMBOL(b))
+#define UNSET_SPECIAL_SYMBOL(b) (R::SEXPREC::UNSET_SPECIAL_SYMBOL(b))
+#define IS_SPECIAL_SYMBOL(b) (R::SEXPREC::IS_SPECIAL_SYMBOL(b))
+#define SET_NO_SPECIAL_SYMBOLS(b) (R::SEXPREC::SET_NO_SPECIAL_SYMBOLS(b))
+#define UNSET_NO_SPECIAL_SYMBOLS(b) (R::SEXPREC::UNSET_NO_SPECIAL_SYMBOLS(b))
+#define NO_SPECIAL_SYMBOLS(b) (R::SEXPREC::NO_SPECIAL_SYMBOLS(b))
 
 #else /* of USE_RINTERNALS */
 
 using VECP = VECREC *;
-int(PRIMOFFSET)(SEXP x);
-void(SET_PRIMOFFSET)(SEXP x, int v);
+int (PRIMOFFSET)(SEXP x);
+void (SET_PRIMOFFSET)(SEXP x, int v);
 
 #define PRIMFUN(x) (R_FunTab[PRIMOFFSET(x)].cfun)
 #define PRIMNAME(x) (R_FunTab[PRIMOFFSET(x)].name)
@@ -498,6 +474,7 @@ void(SET_PRIMOFFSET)(SEXP x, int v);
 #define PPINFO(x) (R_FunTab[PRIMOFFSET(x)].gram)
 #define PRIMPRINT(x) (((R_FunTab[PRIMOFFSET(x)].eval) / 100) % 10)
 #define PRIMINTERNAL(x) (((R_FunTab[PRIMOFFSET(x)].eval) % 100) / 10)
+
 
 Rboolean (IS_ACTIVE_BINDING)(SEXP b);
 Rboolean (BINDING_IS_LOCKED)(SEXP b);
@@ -818,7 +795,7 @@ LibExtern int	R_PPStackSize	INI_as(R_PPSSIZE); /* The stack size (elements) */
 LibExtern int	R_PPStackTop;	    /* The top of the stack */
 LibExtern SEXP*	R_PPStack;	    /* The pointer protection stack */
 
-/* Evaluation SEXP */
+/* Evaluation Environment */
 extern0 SEXP	R_CurrentExpr;	    /* Currently evaluating expression */
 extern0 SEXP	R_ReturnedValue;    /* Slot for return-ing values */
 extern0 SEXP*	R_SymbolTable;	    /* The symbol table */
@@ -1570,6 +1547,10 @@ extern void *alloca(size_t);
 # define LONG_INT int_fast64_t
 # define LONG_INT_MAX INT_FAST64_MAX
 #endif
+
+Rboolean R_access_X11(void);
+SEXP R_execMethod(SEXP op, SEXP rho);
+SEXP Rf_csduplicated(SEXP x);  /* from unique.cpp */
 
 // for reproducibility for now: use exp10 or pown later if accurate enough.
 template <typename T>

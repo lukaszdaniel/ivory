@@ -108,7 +108,7 @@ HIDDEN SEXP Rf_ExtractSubset(SEXP x, SEXP indx, SEXP call)
 
     SEXP result;
 
-    if (x->altrep()) {
+    if (ALTREP(x)) {
 	result = ALTVEC_EXTRACT_SUBSET(x, indx, call);
 	if (result)
 	    return result;
@@ -117,7 +117,7 @@ HIDDEN SEXP Rf_ExtractSubset(SEXP x, SEXP indx, SEXP call)
     R_xlen_t i, ii, n, nx;
     n = XLENGTH(indx);
     nx = xlength(x);
-    SEXPTYPE mode = x->sexptype();
+    SEXPTYPE mode = TYPEOF(x);
 
     /* protect allocation in case _ELT operations need to allocate */
     PROTECT(result = allocVector(mode, n));
@@ -202,7 +202,7 @@ static SEXP VectorSubset(SEXP x, SEXP s, SEXP call)
 
     /* Allocate the result. */
 
-    int mode = x->sexptype();
+    int mode = TYPEOF(x);
     PROTECT(result = ExtractSubset(x, indx, call));
     if (mode == VECSXP || mode == EXPRSXP)
 	/* we do not duplicate the values when extracting the subset,
@@ -302,11 +302,11 @@ static SEXP MatrixSubset(SEXP x, SEXP s, SEXP call, int drop)
 	error(_("dimensions would exceed maximum size of array"));
     PROTECT(sr);
     PROTECT(sc);
-    result = allocVector(x->sexptype(), (R_xlen_t) nrs * (R_xlen_t) ncs);
+    result = allocVector(TYPEOF(x), (R_xlen_t) nrs * (R_xlen_t) ncs);
     const int *psr = INTEGER_RO(sr);
     const int *psc = INTEGER_RO(sc);
     PROTECT(result);
-    switch(x->sexptype()) {
+    switch(TYPEOF(x)) {
     case LGLSXP:
 	MATRIX_SUBSET_LOOP(LOGICAL0(result)[ij] = LOGICAL_ELT(x, iijj),
 			   LOGICAL0(result)[ij] = NA_LOGICAL);
@@ -436,7 +436,7 @@ static SEXP ArraySubset(SEXP x, SEXP s, SEXP call, int drop)
     SEXP dimnames, dimnamesnames, p, q, r, result, xdims;
     const void *vmaxsave = vmaxget();
 
-    mode = x->sexptype();
+    mode = TYPEOF(x);
     xdims = getAttrib(x, R_DimSymbol);
     k = length(xdims);
     const int *pxdims = INTEGER_RO(xdims);
@@ -721,7 +721,7 @@ HIDDEN SEXP do_subset_dflt(SEXP call, SEXP op, SEXP args, SEXP rho)
 	if (ATTRIB(x) == R_NilValue) {
 	    SEXP s = CAR(cdrArgs);
 	    R_xlen_t i = scalarIndex(s);
-	    switch (x->sexptype()) {
+	    switch (TYPEOF(x)) {
 	    case REALSXP:
 		if (i >= 1 && i <= XLENGTH(x))
 		    return ScalarReal( REAL_ELT(x, i-1) );
@@ -766,7 +766,7 @@ HIDDEN SEXP do_subset_dflt(SEXP call, SEXP op, SEXP args, SEXP rho)
 		if (i > 0 && j > 0 && i <= nrow && j <= ncol) {
 		    /* indices are legal scalars */
 		    R_xlen_t k = i - 1 + nrow * (j - 1);
-		    switch (x->sexptype()) {
+		    switch (TYPEOF(x)) {
 		    case REALSXP:
 			if (k < XLENGTH(x))
 			    return ScalarReal( REAL_ELT(x, k) );
@@ -810,7 +810,7 @@ HIDDEN SEXP do_subset_dflt(SEXP call, SEXP op, SEXP args, SEXP rho)
     }
     subs = CDR(args);
     nsubs = length(subs); /* Will be short */
-    type = x->sexptype();
+    type = TYPEOF(x);
 
     /* Here coerce pair-based objects into generic vectors. */
     /* All subsetting takes place on the generic vector form. */
@@ -833,7 +833,7 @@ HIDDEN SEXP do_subset_dflt(SEXP call, SEXP op, SEXP args, SEXP rho)
 	for(px = x, i = 0 ; px != R_NilValue ; px = CDR(px))
 	    SET_VECTOR_ELT(ax, i++, CAR(px));
     }
-    else errorcall(call, _("object of type '%s' is not subsettable"), type2char(x->sexptype()));
+    else errorcall(call, _("object of type '%s' is not subsettable"), type2char(TYPEOF(x)));
 
     /* This is the actual subsetting code. */
     /* The separation of arrays and matrices is purely an optimization. */
@@ -885,7 +885,7 @@ HIDDEN SEXP do_subset_dflt(SEXP call, SEXP op, SEXP args, SEXP rho)
 	ax = ans;
 	PROTECT(ans = allocList(LENGTH(ax)));
 	if ( LENGTH(ax) > 0 ) {
-	    ans->setsexptype(LANGSXP);
+	    SET_TYPEOF(ans, LANGSXP);
 	    for(px = ans, i = 0 ; px != R_NilValue ; px = CDR(px))
 		SETCAR(px, VECTOR_ELT(ax, i++));
 	    setAttrib(ans, R_DimSymbol, getAttrib(ax, R_DimSymbol));
@@ -975,7 +975,7 @@ HIDDEN SEXP do_subset2_dflt(SEXP call, SEXP op, SEXP args, SEXP rho)
 	errorcall(call, _("incorrect number of subscripts"));
 
     /* code to allow classes to extend environment */
-    if(x->sexptype() == S4SXP) {
+    if(TYPEOF(x) == S4SXP) {
 	x = R_getS4DataSlot(x, ANYSXP);
 	if(x == R_NilValue)
 	  errorcall(call, _("this S4 class is not subsettable"));
@@ -983,7 +983,7 @@ HIDDEN SEXP do_subset2_dflt(SEXP call, SEXP op, SEXP args, SEXP rho)
     PROTECT(x);
 
     /* split out ENVSXP for now */
-    if( x->sexptype() == ENVSXP ) {
+    if( TYPEOF(x) == ENVSXP ) {
 	if( nsubs != 1 || !isString(CAR(subs)) || length(CAR(subs)) != 1 )
 	    errorcall(call, _("wrong arguments for subsetting an environment"));
 	ans = findVarInFrame(x, installTrChar(STRING_ELT(CAR(subs), 0)));
@@ -1003,7 +1003,7 @@ HIDDEN SEXP do_subset2_dflt(SEXP call, SEXP op, SEXP args, SEXP rho)
 
     /* back to the regular program */
     if (!(isVector(x) || isList(x) || isLanguage(x)))
-	errorcall(call, _("object of type '%s' is not subsettable"), type2char(x->sexptype()));
+	errorcall(call, _("object of type '%s' is not subsettable"), type2char(TYPEOF(x)));
 
 #ifndef SWITCH_TO_REFCNT
     int named_x;
@@ -1099,8 +1099,8 @@ HIDDEN SEXP do_subset2_dflt(SEXP call, SEXP op, SEXP args, SEXP rho)
 	RAISE_NAMED(ans, named_x);
 #endif
     } else {
-	ans = allocVector(x->sexptype(), 1);
-	switch (x->sexptype()) {
+	ans = allocVector(TYPEOF(x), 1);
+	switch (TYPEOF(x)) {
 	case LGLSXP:
 	    LOGICAL0(ans)[0] = LOGICAL_ELT(x, offset);
 	    break;
@@ -1263,7 +1263,7 @@ HIDDEN SEXP R_subset3_dflt(SEXP x, SEXP input, SEXP call)
     /* Optimisation to prevent repeated recalculation */
     slen = strlen(translateChar(input));
      /* The mechanism to allow a class extending "environment" */
-    if( IS_S4_OBJECT(x) && x->sexptype() == S4SXP ){
+    if( IS_S4_OBJECT(x) && TYPEOF(x) == S4SXP ){
 	x = R_getS4DataSlot(x, ANYSXP);
 	if(x == R_NilValue)
 	    errorcall(call, _("$ operator not defined for this S4 class"));
@@ -1403,7 +1403,7 @@ HIDDEN SEXP R_subset3_dflt(SEXP x, SEXP input, SEXP call)
 	errorcall(call, _("$ operator is invalid for atomic vectors"));
     }
     else /* e.g. a function */
-	errorcall(call, _("object of type '%s' is not subsettable"), type2char(x->sexptype()));
+	errorcall(call, _("object of type '%s' is not subsettable"), type2char(TYPEOF(x)));
     UNPROTECT(2); /* input, x */
     return R_NilValue;
 }

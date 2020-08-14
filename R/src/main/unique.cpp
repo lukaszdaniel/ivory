@@ -250,7 +250,7 @@ inline static bool sequal(SEXP x, const R_xlen_t &i, SEXP y, const R_xlen_t &j)
 	if (xi == NA_STRING || yj == NA_STRING)
 		return false;
 	/* another pre-test to avoid the call to Seql */
-	if (xi->isCached() && yj->isCached() && xi->encKnown() == yj->encKnown())
+	if (IS_CACHED(xi) && IS_CACHED(yj) && ENC_KNOWN(xi) == ENC_KNOWN(yj))
 		return false;
 	return Rf_Seql(xi, yj);
 }
@@ -367,7 +367,7 @@ static void HashTableSetup(SEXP x, HashData &d, const R_xlen_t &nmax)
 {
     d.useUTF8 = false;
     d.useCache = true;
-    switch (x->sexptype()) {
+    switch (TYPEOF(x)) {
     case LGLSXP:
 	d.hash = lhash;
 	d.equal = lequal;
@@ -466,7 +466,7 @@ static bool duplicatedInit(SEXP x, HashData &d)
 {
     bool stop = false;
 
-    if(x->sexptype() == STRSXP) {
+    if(TYPEOF(x) == STRSXP) {
 	R_xlen_t i, n = XLENGTH(x);
 	for(i = 0; i < n; i++) {
 	    if(IS_BYTES(STRING_ELT(x, i))) {
@@ -478,13 +478,13 @@ static bool duplicatedInit(SEXP x, HashData &d)
 		d.useUTF8 = true;
 	    }
 	    /* uncached strings are currently not properly supported */
-	    if(!STRING_ELT(x, i)->isCached()) {
+	    if(!IS_CACHED(STRING_ELT(x, i))) {
 		d.useCache = false;
 		stop = true;
 		break;
 	    }
 	}
-    } else if (x->sexptype() == VECSXP) {
+    } else if (TYPEOF(x) == VECSXP) {
 	R_xlen_t i, n = XLENGTH(x);
 	for(i = 0; i < n; i++)
 	    if (duplicatedInit(VECTOR_ELT(x, i), d)) {
@@ -640,7 +640,7 @@ static SEXP duplicated3(SEXP x, SEXP incomp, Rboolean from_last, int nmax)
 	}
 
     if(length(incomp)) {
-	PROTECT(incomp = coerceVector(incomp, x->sexptype()));
+	PROTECT(incomp = coerceVector(incomp, TYPEOF(x)));
 	m = length(incomp);
 	for (i = 0; i < n; i++)
 	    if(v[i]) {
@@ -665,7 +665,7 @@ R_xlen_t Rf_any_duplicated3(SEXP x, SEXP incomp, Rboolean from_last)
 
     if(!m) error(_("any_duplicated3(., <0-length incomp>)"));
 
-    PROTECT(incomp = coerceVector(incomp, x->sexptype()));
+    PROTECT(incomp = coerceVector(incomp, TYPEOF(x)));
     m = length(incomp);
 
     if(from_last)
@@ -727,7 +727,7 @@ HIDDEN SEXP do_duplicated(SEXP call, SEXP op, SEXP args, SEXP env)
     /* handle zero length vectors, and NULL */
     if ((n = xlength(x)) == 0)
 	return(PRIMVAL(op) <= 1
-	       ? allocVector(PRIMVAL(op) != 1 ? LGLSXP : x->sexptype(), 0)
+	       ? allocVector(PRIMVAL(op) != 1 ? LGLSXP : TYPEOF(x), 0)
 	       : ScalarInteger(0));
 
     if (!isVector(x)) {
@@ -772,10 +772,10 @@ HIDDEN SEXP do_duplicated(SEXP call, SEXP op, SEXP args, SEXP env)
 	    k++;
 
     PROTECT(dup);
-    PROTECT(ans = allocVector(x->sexptype(), k));
+    PROTECT(ans = allocVector(TYPEOF(x), k));
 
     k = 0;
-    switch (x->sexptype()) {
+    switch (TYPEOF(x)) {
     case LGLSXP:
 	for (i = 0; i < n; i++)
 	    if (LOGICAL_ELT(dup, i) == 0)
@@ -868,7 +868,7 @@ static SEXP HashLookup(SEXP table, SEXP x, HashData &d)
     PROTECT(ans = allocVector(INTSXP, n));
     int *pa = INTEGER0(ans);
 
-    switch (x->sexptype()) {
+    switch (TYPEOF(x)) {
     case INTSXP:
 	for (i = 0; i < n; i++)
 	    pa[i] = iLookup(table, x, i, d);
@@ -933,8 +933,8 @@ SEXP match5(SEXP itable, SEXP ix, int nmatch, SEXP incomp, SEXP env)
      * Note that above we coerce factors and "POSIXlt", only to character.
      * Hence, coerce to character or to `higher' type
      * (given that we have "Vector" or NULL) */
-    if(x->sexptype() >= STRSXP || TYPEOF(table) >= STRSXP) type = STRSXP;
-    else type = x->sexptype() < TYPEOF(table) ? TYPEOF(table) : x->sexptype();
+    if(TYPEOF(x) >= STRSXP || TYPEOF(table) >= STRSXP) type = STRSXP;
+    else type = TYPEOF(x) < TYPEOF(table) ? TYPEOF(table) : TYPEOF(x);
     PROTECT(x	  = coerceVector(x,	type)); nprot++;
     PROTECT(table = coerceVector(table, type)); nprot++;
 
@@ -1022,7 +1022,7 @@ SEXP match5(SEXP itable, SEXP ix, int nmatch, SEXP incomp, SEXP env)
 		if(ENC_KNOWN(s)) {
 		    useUTF8 = true;
 		}
-		if(!s->isCached()) {
+		if(!IS_CACHED(s)) {
 		    useCache = false;
 		    break;
 		}
@@ -1038,7 +1038,7 @@ SEXP match5(SEXP itable, SEXP ix, int nmatch, SEXP incomp, SEXP env)
 		    if(ENC_KNOWN(s)) {
 			useUTF8 = true;
 		    }
-		    if(!s->isCached()) {
+		    if(!IS_CACHED(s)) {
 			useCache = false;
 			break;
 		    }
@@ -1080,7 +1080,7 @@ HIDDEN SEXP do_match(SEXP call, SEXP op, SEXP args, SEXP env)
     int nomatch = asInteger(CADDR(args));
     SEXP incomp = CADDDR(args);
 
-    if (incomp->isNull_() || /* S has FALSE to mean empty */
+    if (isNull(incomp) || /* S has FALSE to mean empty */
 	(length(incomp) == 1 && isLogical(incomp) &&
 	 LOGICAL_ELT(incomp, 0) == 0))
 	return match5(CADR(args), CAR(args), nomatch, nullptr, env);
@@ -1545,9 +1545,9 @@ static SEXP rowsum(SEXP x, SEXP g, SEXP uniqueg, SEXP snarm, SEXP rn)
     PROTECT(matches = HashLookup(uniqueg, g, data));
     int *pmatches = INTEGER(matches);
 
-    PROTECT(ans = allocMatrix(x->sexptype(), ng, p));
+    PROTECT(ans = allocMatrix(TYPEOF(x), ng, p));
 
-    switch(x->sexptype()){
+    switch(TYPEOF(x)){
     case REALSXP:
 	Memzero(REAL0(ans), ng*p);
 	for(int i = 0; i < p; i++) {
@@ -1805,7 +1805,7 @@ static void HashTableSetup1(SEXP x, HashData &d)
 /* used in utils */
 SEXP Rf_csduplicated(SEXP x)
 {
-    if(x->sexptype() != STRSXP)
+    if(TYPEOF(x) != STRSXP)
 	error(_("'csduplicated()' function was not called on a STRSXP"));
     R_xlen_t n = XLENGTH(x);
     HashData data;

@@ -47,11 +47,11 @@
 
 /* needed for now for objects serialized with INTSXP state */
 #define COMPACT_INTSEQ_SERIALIZED_STATE_LENGTH(info) \
-    (info->sexptype() == INTSXP ? INTEGER0(info)[0] : (R_xlen_t) REAL0(info)[0])
+    (TYPEOF(info) == INTSXP ? INTEGER0(info)[0] : (R_xlen_t) REAL0(info)[0])
 #define COMPACT_INTSEQ_SERIALIZED_STATE_FIRST(info) \
-    (info->sexptype() == INTSXP ? INTEGER0(info)[1] : (int) REAL0(info)[1])
+    (TYPEOF(info) == INTSXP ? INTEGER0(info)[1] : (int) REAL0(info)[1])
 #define COMPACT_INTSEQ_SERIALIZED_STATE_INCR(info) \
-    (info->sexptype() == INTSXP ? INTEGER0(info)[2] : (int) REAL0(info)[2])
+    (TYPEOF(info) == INTSXP ? INTEGER0(info)[2] : (int) REAL0(info)[2])
 
 /* info is stored as REALSXP to allow for long vector length */
 #define COMPACT_INTSEQ_INFO_LENGTH(info) ((R_xlen_t) REAL0(info)[0])
@@ -1128,7 +1128,7 @@ Rboolean mmap_Inspect(SEXP x, int pre, int deep, int pvec,
     Rboolean ptrOK = (Rboolean) MMAP_PTROK(x);
     Rboolean wrtOK = (Rboolean) MMAP_WRTOK(x);
     Rboolean serOK = (Rboolean) MMAP_SEROK(x);
-    Rprintf(" mmaped %s", type2char(x->sexptype()));
+    Rprintf(" mmaped %s", type2char(TYPEOF(x)));
     Rprintf(" [ptr=%d,wrt=%d,ser=%d]\n", ptrOK, wrtOK, serOK);
     return TRUE;
 }
@@ -1868,7 +1868,7 @@ static SEXP make_wrapper(SEXP x, SEXP meta)
 {
     /* If x is itself a wrapper it might be a good idea to fuse */
     R_altrep_class_t cls;
-    switch(x->sexptype()) {
+    switch(TYPEOF(x)) {
     case INTSXP: cls = wrap_integer_class; break;
     case LGLSXP: cls = wrap_logical_class; break;
     case REALSXP: cls = wrap_real_class; break;
@@ -1903,8 +1903,8 @@ static SEXP make_wrapper(SEXP x, SEXP meta)
 
 inline static bool is_wrapper(SEXP x)
 {
-    if (x->altrep())
-	switch(x->sexptype()) {
+    if (ALTREP(x))
+	switch(TYPEOF(x)) {
 	case INTSXP: return R_altrep_inherits(x, wrap_integer_class);
 	case LGLSXP: return R_altrep_inherits(x, wrap_logical_class);
 	case REALSXP: return R_altrep_inherits(x, wrap_real_class);
@@ -1918,7 +1918,7 @@ inline static bool is_wrapper(SEXP x)
 
 static SEXP wrap_meta(SEXP x, int srt, int no_na)
 {
-    switch(x->sexptype()) {
+    switch(TYPEOF(x)) {
     case INTSXP:
     case REALSXP:
     case LGLSXP:

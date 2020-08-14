@@ -327,7 +327,7 @@ static bool checkNativeType(const int &targetType, const int &actualType)
 
 static bool comparePrimitiveTypes(const R_NativePrimitiveArgType &type, SEXP s)
 {
-	if (type == ANYSXP || s->sexptypeEqual(SEXPTYPE(type)))
+	if (type == ANYSXP || TYPEOF(s) == SEXPTYPE(type))
 		return true;
 
 	if (type == SINGLESXP)
@@ -972,7 +972,7 @@ HIDDEN SEXP do_dotCode(SEXP call, SEXP op, SEXP args, SEXP env)
 	    error(_("long vectors (argument %d) are not supported in %s"),
 		  na + 1, Fort ? ".Fortran" : ".C");
 #endif
-	SEXPTYPE t = s->sexptype();
+	SEXPTYPE t = TYPEOF(s);
 	switch(t) {
 	case RAWSXP:
 	    if (copy) {
@@ -1201,7 +1201,7 @@ HIDDEN SEXP do_dotCode(SEXP call, SEXP op, SEXP args, SEXP env)
 	SEXP arg = CAR(pa);
 	s = VECTOR_ELT(ans, na);
 	R_NativePrimitiveArgType type =
-	    checkTypes ? checkTypes[na] : arg->sexptype();
+	    checkTypes ? checkTypes[na] : TYPEOF(arg);
 	R_xlen_t n = xlength(arg);
 
 	switch(type) {
@@ -1422,7 +1422,7 @@ static void *RObjToCPtr2(SEXP s)
 {
     int n;
 
-    switch(s->sexptype()) {
+    switch(TYPEOF(s)) {
     case LGLSXP:
     case INTSXP:
 	{
@@ -1531,7 +1531,7 @@ void call_R(char *func, long nargs, void **arguments, char **modes,
 	ENSURE_NAMEDMAX(CAR(pcall));
     }
     PROTECT(s = eval(call, R_GlobalEnv));
-    switch(s->sexptype()) {
+    switch(TYPEOF(s)) {
     case LGLSXP:
     case INTSXP:
     case REALSXP:

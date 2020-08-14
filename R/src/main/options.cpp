@@ -118,7 +118,7 @@ static SEXP makeErrorCall(SEXP fun)
 {
   SEXP call;
   PROTECT(call = allocList(1));
-  call->setsexptype(LANGSXP);
+  SET_TYPEOF(call, LANGSXP);
   SETCAR(call, fun);
   UNPROTECT(1);
   return call;
@@ -749,7 +749,7 @@ HIDDEN SEXP do_options(SEXP call, SEXP op, SEXP args, SEXP rho)
 		error(_("\"par.ask.default\" has been replaced by \"device.ask.default\""));
 	    }
 	    else if (streql(CHAR(namei), "browserNLdisabled")) {
-		if (argi->sexptypeNotEqual(LGLSXP) || LENGTH(argi) != 1)
+		if (TYPEOF(argi) != LGLSXP || LENGTH(argi) != 1)
 		    error(_("invalid value for '%s'"), CHAR(namei));
 		int k = asLogical(argi);
 		if (k == NA_LOGICAL)

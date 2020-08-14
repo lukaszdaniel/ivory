@@ -99,18 +99,18 @@ Rboolean R_compute_identical(SEXP x, SEXP y, int flags)
     SEXP ax, ay, atrx, atry;
     if(x == y) /* same pointer */
 	return TRUE;
-    if(x->sexptype() != TYPEOF(y) ||
+    if(TYPEOF(x) != TYPEOF(y) ||
        OBJECT(x) != OBJECT(y) ||
        IS_S4_OBJECT(x) != IS_S4_OBJECT(y))
 	return FALSE;
 
     /* Skip attribute checks for CHARSXP
        -- such attributes are used for the cache.  */
-    if(x->sexptype() == CHARSXP) {
+    if(TYPEOF(x) == CHARSXP) {
 	/* This matches NAs */
 	return (Rboolean) Seql(x, y);
     }
-    if (IGNORE_SRCREF && x->sexptype() == CLOSXP) {
+    if (IGNORE_SRCREF && TYPEOF(x) == CLOSXP) {
 	/* Remove "srcref" attribute - and below, treat body(x), body(y) */
 	SEXP x_ = PROTECT(duplicate(x)), y_ = PROTECT(duplicate(y));
 	setAttrib(x_, R_SrcrefSymbol, R_NilValue);
@@ -182,7 +182,7 @@ Rboolean R_compute_identical(SEXP x, SEXP y, int flags)
 	    UNPROTECT(2); /* ax, ay */    
 	}
     }
-    switch (x->sexptype()) {
+    switch (TYPEOF(x)) {
     case NILSXP:
 	return TRUE;
     case LGLSXP:
@@ -316,7 +316,7 @@ Rboolean R_compute_identical(SEXP x, SEXP y, int flags)
     default:
 	/* these are all supposed to be types that represent constant
 	   entities, so no further testing required ?? */
-	printf(_("Unknown Type: %s (%x)\n"), type2char(x->sexptype()), x->sexptype());
+	printf(_("Unknown Type: %s (%x)\n"), type2char(TYPEOF(x)), TYPEOF(x));
 	return TRUE;
     }
 }

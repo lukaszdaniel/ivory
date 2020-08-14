@@ -5832,10 +5832,10 @@ static void modif_token( yyltype* loc, int tok ){
 /* this local version of lengthgets() always copies and doesn't fill with NA */
 static SEXP lengthgets2(SEXP x, int len) {
     SEXP result;
-    PROTECT(result = allocVector( x->sexptype(), len ));
+    PROTECT(result = allocVector( TYPEOF(x), len ));
 
     len = (len < length(x)) ? len : length(x);
-    switch(x->sexptype()) {
+    switch(TYPEOF(x)) {
     	case INTSXP: 
     	    for (int i = 0; i < len; i++)
     	    	INTEGER(result)[i] = INTEGER(x)[i];

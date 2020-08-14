@@ -1624,13 +1624,13 @@ HIDDEN SEXP do_radixsort(SEXP call, SEXP op, SEXP args, SEXP rho)
 
     stackgrps = (Rboolean) (narg > 1 || retGrp);
 
-    if (x->sexptype() == STRSXP) {
+    if (TYPEOF(x) == STRSXP) {
         checkEncodings(x);
     }
 
     savetl_init();   // from now on use Error not error.
 
-    switch (x->sexptype()) {
+    switch (TYPEOF(x)) {
     case INTSXP:
     case LGLSXP:
 	tmp = isorted((int*) xd, n);
@@ -1645,7 +1645,7 @@ HIDDEN SEXP do_radixsort(SEXP call, SEXP op, SEXP args, SEXP rho)
 	break;
     default :
         Error(_("First argument is type '%s', not yet supported"),
-              type2char(x->sexptype()));
+              type2char(TYPEOF(x)));
     }
     if (tmp) {
 	// -1 or 1. NEW: or -2 in case of nalast == 0 and all NAs
@@ -1669,7 +1669,7 @@ HIDDEN SEXP do_radixsort(SEXP call, SEXP op, SEXP args, SEXP rho)
 	}
     } else {
 	isSorted = FALSE;
-	switch (x->sexptype()) {
+	switch (TYPEOF(x)) {
 	case INTSXP:
 	case LGLSXP:
 	    isort((int*) xd, o, n);
@@ -1718,7 +1718,7 @@ HIDDEN SEXP do_radixsort(SEXP call, SEXP op, SEXP args, SEXP rho)
 	flipflop();
 	stackgrps = (Rboolean) (col != narg || retGrp);
 	order = LOGICAL(decreasing)[col - 1] ? -1 : 1;
-	switch (x->sexptype()) {
+	switch (TYPEOF(x)) {
 	case INTSXP:
 	case LGLSXP:
 	    f = reinterpret_cast<int(*)()>(isorted);
@@ -1744,7 +1744,7 @@ HIDDEN SEXP do_radixsort(SEXP call, SEXP op, SEXP args, SEXP rho)
 	    break;
 	default:
 	    Error(_("Arg %d is type '%s', not yet supported"),
-		  col, type2char(x->sexptype()));
+		  col, type2char(TYPEOF(x)));
 	}
 	int i = 0;
 	for (int grp = 0; grp < ngrp; grp++) {
@@ -1754,7 +1754,7 @@ HIDDEN SEXP do_radixsort(SEXP call, SEXP op, SEXP args, SEXP rho)
 		    // this edge case had to be taken care of
 		    // here.. (see the bottom of this file for
 		    // more explanation)
-		    switch (x->sexptype()) {
+		    switch (TYPEOF(x)) {
 		    case INTSXP:
 			if (INTEGER(x)[o[i] - 1] == NA_INTEGER) {
 			    isSorted = FALSE;
@@ -1792,10 +1792,10 @@ HIDDEN SEXP do_radixsort(SEXP call, SEXP op, SEXP args, SEXP rho)
             //        though, will have to copy x at that point
             //        When doing this, xsub could be allocated at
             //        that point for the first time.
-            if (x->sexptype() == STRSXP)
+            if (TYPEOF(x) == STRSXP)
                 for (int j = 0; j < thisgrpn; j++)
                     ((SEXP *) xsub)[j] = ((SEXP *) xd)[o[i++] - 1];
-            else if (x->sexptype() == REALSXP)
+            else if (TYPEOF(x) == REALSXP)
                 for (int j = 0; j < thisgrpn; j++)
                     ((double *) xsub)[j] = ((double *) xd)[o[i++] - 1];
             else

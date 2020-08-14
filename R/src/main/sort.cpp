@@ -95,7 +95,7 @@ Rboolean Rf_isUnsorted(SEXP x, Rboolean strictly)
 	error(_("only atomic vectors can be tested to be sorted"));
     n = XLENGTH(x);
     if(n >= 2)
-	switch (x->sexptype()) {
+	switch (TYPEOF(x)) {
 
 	    /* NOTE: x must have no NAs {is.na(.) in R};
 	       hence be faster than `rcmp()', `icmp()' for these two cases */
@@ -222,7 +222,7 @@ HIDDEN SEXP do_isunsorted(SEXP call, SEXP op, SEXP args, SEXP rho)
     PROTECT(args = ans); // args evaluated now
 
     int sorted = UNKNOWN_SORTEDNESS;
-    switch(x->sexptype()) {
+    switch(TYPEOF(x)) {
     case INTSXP:
 	sorted = INTEGER_IS_SORTED(x);
 	break;
@@ -417,7 +417,7 @@ Rboolean fastpass_sortcheck(SEXP x, int wanted) {
     int sorted = UNKNOWN_SORTEDNESS;
     Rboolean noNA = FALSE, done = FALSE;
 
-    switch(x->sexptype()) {
+    switch(TYPEOF(x)) {
     case INTSXP:
 	sorted = INTEGER_IS_SORTED(x);
 	noNA = (Rboolean) INTEGER_NO_NA(x);
@@ -446,7 +446,7 @@ Rboolean fastpass_sortcheck(SEXP x, int wanted) {
     /* Increasing, usually fairly short, sequences of integers often
        arise as levels in as.factor.  A quick check here allows a fast
        return in sort.int. */
-    if (! done && x->sexptype() == INTSXP && wanted > 0 && ! x->altrep()) {
+    if (! done && TYPEOF(x) == INTSXP && wanted > 0 && ! ALTREP(x)) {
 	R_xlen_t len = XLENGTH(x);
 	if (len > 0) {
 	    int *px = INTEGER(x);
@@ -724,7 +724,7 @@ void cPsort(Rcomplex *x, int n, int k)
 static void Psort(SEXP x, R_xlen_t lo, R_xlen_t hi, R_xlen_t k)
 {
     /* Rprintf("looking for index %d in (%d, %d)\n", k, lo, hi);*/
-    switch (x->sexptype()) {
+    switch (TYPEOF(x)) {
     case LGLSXP:
     case INTSXP:
 	iPsort2(INTEGER(x), lo, hi, k);
@@ -771,7 +771,7 @@ HIDDEN SEXP do_psort(SEXP call, SEXP op, SEXP args, SEXP rho)
 
     if (!isVectorAtomic(x))
 	error(_("only atomic vectors can be sorted"));
-    if(x->sexptype() == RAWSXP)
+    if(TYPEOF(x) == RAWSXP)
 	error(_("raw vectors cannot be sorted"));
     R_xlen_t n = XLENGTH(x);
 #ifdef LONG_VECTOR_SUPPORT
@@ -832,7 +832,7 @@ static int equal(R_xlen_t i, R_xlen_t j, SEXP x, Rboolean nalast, SEXP rho)
 	c = asInteger(eval(call, rho));
 	UNPROTECT(3);
     } else {
-	switch (x->sexptype()) {
+	switch (TYPEOF(x)) {
 	case LGLSXP:
 	case INTSXP:
 	    c = icmp(INTEGER(x)[i], INTEGER(x)[j], nalast);
@@ -870,7 +870,7 @@ static int greater(R_xlen_t i, R_xlen_t j, SEXP x, Rboolean nalast,
 	c = asInteger(eval(call, rho));
 	UNPROTECT(3);
     } else {
-	switch (x->sexptype()) {
+	switch (TYPEOF(x)) {
 	case LGLSXP:
 	case INTSXP:
 	    c = icmp(INTEGER(x)[i], INTEGER(x)[j], nalast);
@@ -902,7 +902,7 @@ static int listgreater(int i, int j, SEXP key, Rboolean nalast,
 
     while (key != R_NilValue) {
 	x = CAR(key);
-	switch (x->sexptype()) {
+	switch (TYPEOF(x)) {
 	case LGLSXP:
 	case INTSXP:
 	    c = icmp(INTEGER(x)[i], INTEGER(x)[j], nalast);
@@ -999,7 +999,7 @@ static int listgreaterl(R_xlen_t i, R_xlen_t j, SEXP key, Rboolean nalast,
 
     while (key != R_NilValue) {
 	x = CAR(key);
-	switch (x->sexptype()) {
+	switch (TYPEOF(x)) {
 	case LGLSXP:
 	case INTSXP:
 	    c = icmp(INTEGER(x)[i], INTEGER(x)[j], nalast);
@@ -1492,7 +1492,7 @@ HIDDEN SEXP do_rank(SEXP call, SEXP op, SEXP args, SEXP rho)
 
     checkArity(op, args);
     x = CAR(args);
-    if(x->sexptype() == RAWSXP && !isObject(x))
+    if(TYPEOF(x) == RAWSXP && !isObject(x))
 	error(_("raw vectors cannot be sorted"));
     // n := sn := length(x) :
 #ifdef LONG_VECTOR_SUPPORT

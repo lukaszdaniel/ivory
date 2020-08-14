@@ -83,7 +83,7 @@ static bool HasNames(SEXP x)
 
 static void AnswerType(SEXP x, bool recurse, bool usenames, struct BindData &data, SEXP call)
 {
-    switch (x->sexptype()) {
+    switch (TYPEOF(x)) {
     case NILSXP:
 	break;
     case RAWSXP:
@@ -133,7 +133,7 @@ static void AnswerType(SEXP x, bool recurse, bool usenames, struct BindData &dat
 	    }
 	}
 	else {
-	    if (x->sexptype() == EXPRSXP)
+	    if (TYPEOF(x) == EXPRSXP)
 		data.ans_flags |= 512;
 	    else
 		data.ans_flags |= 256;
@@ -184,7 +184,7 @@ static void ListAnswer(SEXP x, int recurse, struct BindData &data, SEXP call)
 {
     R_xlen_t i;
 
-    switch(x->sexptype()) {
+    switch(TYPEOF(x)) {
     case NILSXP:
 	break;
     case LGLSXP:
@@ -244,7 +244,7 @@ static void ListAnswer(SEXP x, int recurse, struct BindData &data, SEXP call)
 static void StringAnswer(SEXP x, struct BindData &data, SEXP call)
 {
     R_xlen_t i;
-    switch(x->sexptype()) {
+    switch(TYPEOF(x)) {
     case NILSXP:
 	break;
     case LISTSXP:
@@ -270,7 +270,7 @@ static void StringAnswer(SEXP x, struct BindData &data, SEXP call)
 static void LogicalAnswer(SEXP x, struct BindData &data, SEXP call)
 {
     R_xlen_t i;
-    switch(x->sexptype()) {
+    switch(TYPEOF(x)) {
     case NILSXP:
 	break;
     case LISTSXP:
@@ -300,14 +300,14 @@ static void LogicalAnswer(SEXP x, struct BindData &data, SEXP call)
 	break;
     default:
 	errorcall(call, _("type '%s' is unimplemented in '%s' function"),
-		  type2char(x->sexptype()), "LogicalAnswer()");
+		  type2char(TYPEOF(x)), "LogicalAnswer()");
     }
 }
 
 static void IntegerAnswer(SEXP x, struct BindData &data, SEXP call)
 {
     R_xlen_t i;
-    switch(x->sexptype()) {
+    switch(TYPEOF(x)) {
     case NILSXP:
 	break;
     case LISTSXP:
@@ -335,7 +335,7 @@ static void IntegerAnswer(SEXP x, struct BindData &data, SEXP call)
 	break;
     default:
 	errorcall(call, _("type '%s' is unimplemented in '%s' function"),
-		  type2char(x->sexptype()), "IntegerAnswer()");
+		  type2char(TYPEOF(x)), "IntegerAnswer()");
     }
 }
 
@@ -343,7 +343,7 @@ static void RealAnswer(SEXP x, struct BindData &data, SEXP call)
 {
     R_xlen_t i;
     int xi;
-    switch(x->sexptype()) {
+    switch(TYPEOF(x)) {
     case NILSXP:
 	break;
     case LISTSXP:
@@ -383,7 +383,7 @@ static void RealAnswer(SEXP x, struct BindData &data, SEXP call)
 	break;
     default:
 	errorcall(call, _("type '%s' is unimplemented in '%s' function"),
-		  type2char(x->sexptype()), "RealAnswer()");
+		  type2char(TYPEOF(x)), "RealAnswer()");
     }
 }
 
@@ -391,7 +391,7 @@ static void ComplexAnswer(SEXP x, struct BindData &data, SEXP call)
 {
     R_xlen_t i;
     int xi;
-    switch(x->sexptype()) {
+    switch(TYPEOF(x)) {
     case NILSXP:
 	break;
     case LISTSXP:
@@ -455,14 +455,14 @@ static void ComplexAnswer(SEXP x, struct BindData &data, SEXP call)
 
     default:
 	errorcall(call, _("type '%s' is unimplemented in '%s' function"),
-		  type2char(x->sexptype()), "ComplexAnswer()");
+		  type2char(TYPEOF(x)), "ComplexAnswer()");
     }
 }
 
 static void RawAnswer(SEXP x, struct BindData &data, SEXP call)
 {
     R_xlen_t i;
-    switch(x->sexptype()) {
+    switch(TYPEOF(x)) {
     case NILSXP:
 	break;
     case LISTSXP:
@@ -482,7 +482,7 @@ static void RawAnswer(SEXP x, struct BindData &data, SEXP call)
 	break;
     default:
 	errorcall(call, _("type '%s' is unimplemented in '%s' function"),
-		  type2char(x->sexptype()), "RawAnswer()");
+		  type2char(TYPEOF(x)), "RawAnswer()");
     }
 }
 
@@ -598,7 +598,7 @@ static void namesCount(SEXP v, int recurse, struct NameData &nameData)
        _and_ prevents ("almost surely") overflow of nameData->count.
        -->  PR#17284 and PR#17292, with thanks to Suharto Anggono.
     */
-    switch(v->sexptype()) {
+    switch(TYPEOF(v)) {
     case NILSXP:
 	break;
     case LISTSXP:
@@ -660,7 +660,7 @@ static void NewExtractNames(SEXP v, SEXP base, SEXP tag, int recurse,
     n = xlength(v);
     PROTECT(names = getAttrib(v, R_NamesSymbol));
 
-    switch(v->sexptype()) {
+    switch(TYPEOF(v)) {
     case NILSXP:
 	break;
     case LISTSXP:
@@ -1288,7 +1288,7 @@ static SEXP cbind(SEXP call, SEXP args, SEXPTYPE mode, SEXP rho,
 	    int umatrix = isMatrix(u); /* might be lost in coercion to VECSXP */
 	    if (umatrix || length(u) >= lenmin) {
 		/* we cannot assume here that coercion will work */
-		switch(u->sexptype()) {
+		switch(TYPEOF(u)) {
 		case NILSXP:
 		case LANGSXP:
 		case RAWSXP:

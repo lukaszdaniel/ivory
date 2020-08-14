@@ -798,7 +798,7 @@ const char *Rf_EncodeElement0(SEXP x, R_xlen_t indx, int quote, const char *dec)
 	int w, d, e, wi, di, ei;
 	const char *res;
 
-	switch (x->sexptype())
+	switch (TYPEOF(x))
 	{
 	case LGLSXP:
 		formatLogical(&LOGICAL_RO(x)[indx], 1, &w);

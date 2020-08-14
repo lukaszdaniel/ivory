@@ -3326,7 +3326,7 @@ int GEstring_to_pch(SEXP pch)
     if (CHAR(pch)[0] == 0) return NA_INTEGER;  /* pch = "" */
     if (pch == last_pch) return last_ipch;/* take advantage of CHARSXP cache */
     ipch = (unsigned char) CHAR(pch)[0];
-    if (pch->isLatin1()) {
+    if (IS_LATIN1(pch)) {
 	if (ipch > 127) ipch = -ipch;  /* record as Unicode */
     } else if (IS_UTF8(pch) || utf8locale) {
 	wchar_t wc = 0;
