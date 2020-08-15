@@ -165,7 +165,7 @@
 #define NEW_OBJECT(class_def)	R_do_new_object(class_def)
 #define NEW(class_def)		R_do_new_object(class_def)
 
-#define s_object                SEXPREC
+#define s_object                RObject
 #define S_EVALUATOR             /**/
 
 #include <R_ext/Boolean.h>

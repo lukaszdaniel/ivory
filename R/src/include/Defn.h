@@ -35,11 +35,11 @@
 /* To test the write barrier used by the generational collector,
    define TESTING_WRITE_BARRIER.  This makes the internal structure of
    SEXPRECs visible only inside of files that explicitly define
-   USE_RINTERNALS, and all uses of SEXPREC fields that do not go
+   USE_RINTERNALS, and all uses of RObject fields that do not go
    through the appropriate functions or macros will become compilation
    errors.  Since this does impose a small but noticable performance
    penalty, code that includes Defn.h (or code that explicitly defines
-   USE_RINTERNALS) can access a SEXPREC's fields directly. */
+   USE_RINTERNALS) can access a RObject's fields directly. */
 
 #ifndef TESTING_WRITE_BARRIER
 # define USE_RINTERNALS
@@ -106,32 +106,20 @@ extern0 SEXP	R_StringHash;       /* Global hash of CHARSXPs */
  /* writable char access for R internal use only */
 #define CHAR_RW(x) ((char *)CHAR(x))
 
-/* CHARSXP charset bits */
-enum CharsetBit
-{
-    NATIVE_MASK = 0,
-    BYTES_MASK = (1 << 1),
-    LATIN1_MASK = (1 << 2),
-    UTF8_MASK = (1 << 3),
-    /* (1 << 4) is taken by S4_OBJECT_MASK */
-    CACHED_MASK = (1 << 5),
-    ASCII_MASK = (1 << 6)
-};
-
 /**** HASHASH uses the first bit -- see HASHASH_MASK defined below */
 
 #ifdef USE_RINTERNALS
-# define IS_BYTES(x) (R::SEXPREC::IS_BYTES(x))
-# define SET_BYTES(x) (R::SEXPREC::SET_BYTES(x))
-# define IS_LATIN1(x) (R::SEXPREC::IS_LATIN1(x))
-# define SET_LATIN1(x) (R::SEXPREC::SET_LATIN1(x))
-# define IS_ASCII(x) (R::SEXPREC::IS_ASCII(x))
-# define SET_ASCII(x) (R::SEXPREC::SET_ASCII(x))
-# define IS_UTF8(x) (R::SEXPREC::IS_UTF8(x))
-# define SET_UTF8(x) (R::SEXPREC::SET_UTF8(x))
-# define ENC_KNOWN(x) (R::SEXPREC::ENC_KNOWN(x))
-# define SET_CACHED(x) (R::SEXPREC::SET_CACHED(x))
-# define IS_CACHED(x) (R::SEXPREC::IS_CACHED(x))
+# define IS_BYTES(x) (R::RObject::IS_BYTES(x))
+# define SET_BYTES(x) (R::RObject::SET_BYTES(x))
+# define IS_LATIN1(x) (R::RObject::IS_LATIN1(x))
+# define SET_LATIN1(x) (R::RObject::SET_LATIN1(x))
+# define IS_ASCII(x) (R::RObject::IS_ASCII(x))
+# define SET_ASCII(x) (R::RObject::SET_ASCII(x))
+# define IS_UTF8(x) (R::RObject::IS_UTF8(x))
+# define SET_UTF8(x) (R::RObject::SET_UTF8(x))
+# define ENC_KNOWN(x) (R::RObject::ENC_KNOWN(x))
+# define SET_CACHED(x) (R::RObject::SET_CACHED(x))
+# define IS_CACHED(x) (R::RObject::IS_CACHED(x))
 #else
 /* Needed only for write-barrier testing */
 int IS_BYTES(SEXP x);
@@ -396,8 +384,8 @@ struct FUNTAB
  */
 
 /* Primitive Access Macros */
-#define PRIMOFFSET(x)	(R::SEXPREC::PRIMOFFSET(x))
-#define SET_PRIMOFFSET(x,v)	(R::SEXPREC::SET_PRIMOFFSET(x, v))
+#define PRIMOFFSET(x)	(R::RObject::PRIMOFFSET(x))
+#define SET_PRIMOFFSET(x,v)	(R::RObject::SET_PRIMOFFSET(x, v))
 #define PRIMFUN(x)	(R_FunTab[PRIMOFFSET(x)].cfun)
 #define PRIMNAME(x)	(R_FunTab[PRIMOFFSET(x)].name)
 #define PRIMVAL(x)	(R_FunTab[PRIMOFFSET(x)].code)
@@ -407,16 +395,16 @@ struct FUNTAB
 #define PRIMINTERNAL(x)	(((R_FunTab[PRIMOFFSET(x)].eval) % 100) / 10)
 
 /* Promise Access Macros */
-#define PRCODE(x)	(R::SEXPREC::PRCODE(x))
-#define PRENV(x)	(R::SEXPREC::PRENV(x))
-#define PRVALUE(x)	(R::SEXPREC::PRVALUE(x))
-#define PRSEEN(x)	(R::SEXPREC::PRSEEN(x))
-#define SET_PRSEEN(x,v)	(R::SEXPREC::SET_PRSEEN(x, v))
+#define PRCODE(x)	(R::RObject::PRCODE(x))
+#define PRENV(x)	(R::RObject::PRENV(x))
+#define PRVALUE(x)	(R::RObject::PRVALUE(x))
+#define PRSEEN(x)	(R::RObject::PRSEEN(x))
+#define SET_PRSEEN(x,v)	(R::RObject::SET_PRSEEN(x, v))
 
 /* Hashing Macros */
-#define HASHASH(x)      (R::SEXPREC::HASHASH(x))
+#define HASHASH(x)      (R::RObject::HASHASH(x))
 #define HASHVALUE(x)    ((int) TRUELENGTH(x))
-#define SET_HASHASH(x,v) (R::SEXPREC::SET_HASHASH(x, v))
+#define SET_HASHASH(x,v) (R::RObject::SET_HASHASH(x, v))
 #define SET_HASHVALUE(x,v) SET_TRUELENGTH(x, ((int) (v)))
 
 /* Vector Heap Structure */
@@ -438,11 +426,11 @@ inline size_t PTR2VEC(int n) { return (n > 0) ? (std::size_t(n)*sizeof(SEXP) - 1
 
 /* Bindings */
 /* use the same bits (15 and 14) in symbols and bindings */
-#define IS_ACTIVE_BINDING(b) (R::SEXPREC::IS_ACTIVE_BINDING(b))
-#define BINDING_IS_LOCKED(b) (R::SEXPREC::BINDING_IS_LOCKED(b))
-#define SET_ACTIVE_BINDING_BIT(b) (R::SEXPREC::SET_ACTIVE_BINDING_BIT(b))
-#define LOCK_BINDING(b) (R::SEXPREC::LOCK_BINDING_(b))
-void R::SEXPREC::LOCK_BINDING_(SEXP b)
+#define IS_ACTIVE_BINDING(b) (R::RObject::IS_ACTIVE_BINDING(b))
+#define BINDING_IS_LOCKED(b) (R::RObject::BINDING_IS_LOCKED(b))
+#define SET_ACTIVE_BINDING_BIT(b) (R::RObject::SET_ACTIVE_BINDING_BIT(b))
+#define LOCK_BINDING(b) (R::RObject::LOCK_BINDING_(b))
+void R::RObject::LOCK_BINDING_(SEXP b)
     {                                                 
         if (!IS_ACTIVE_BINDING(b))              
         {                                             
@@ -453,18 +441,18 @@ void R::SEXPREC::LOCK_BINDING_(SEXP b)
         }                                             
         ((b))->sxpinfo.gp |= BINDING_LOCK_MASK; 
     }
-#define UNLOCK_BINDING(b) (R::SEXPREC::UNLOCK_BINDING(b))
+#define UNLOCK_BINDING(b) (R::RObject::UNLOCK_BINDING(b))
 
-#define SET_BASE_SYM_CACHED(b) (R::SEXPREC::SET_BASE_SYM_CACHED(b))
-#define UNSET_BASE_SYM_CACHED(b) (R::SEXPREC::UNSET_BASE_SYM_CACHED(b))
-#define BASE_SYM_CACHED(b) (R::SEXPREC::BASE_SYM_CACHED(b))
+#define SET_BASE_SYM_CACHED(b) (R::RObject::SET_BASE_SYM_CACHED(b))
+#define UNSET_BASE_SYM_CACHED(b) (R::RObject::UNSET_BASE_SYM_CACHED(b))
+#define BASE_SYM_CACHED(b) (R::RObject::BASE_SYM_CACHED(b))
 
-#define SET_SPECIAL_SYMBOL(b) (R::SEXPREC::SET_SPECIAL_SYMBOL(b))
-#define UNSET_SPECIAL_SYMBOL(b) (R::SEXPREC::UNSET_SPECIAL_SYMBOL(b))
-#define IS_SPECIAL_SYMBOL(b) (R::SEXPREC::IS_SPECIAL_SYMBOL(b))
-#define SET_NO_SPECIAL_SYMBOLS(b) (R::SEXPREC::SET_NO_SPECIAL_SYMBOLS(b))
-#define UNSET_NO_SPECIAL_SYMBOLS(b) (R::SEXPREC::UNSET_NO_SPECIAL_SYMBOLS(b))
-#define NO_SPECIAL_SYMBOLS(b) (R::SEXPREC::NO_SPECIAL_SYMBOLS(b))
+#define SET_SPECIAL_SYMBOL(b) (R::RObject::SET_SPECIAL_SYMBOL(b))
+#define UNSET_SPECIAL_SYMBOL(b) (R::RObject::UNSET_SPECIAL_SYMBOL(b))
+#define IS_SPECIAL_SYMBOL(b) (R::RObject::IS_SPECIAL_SYMBOL(b))
+#define SET_NO_SPECIAL_SYMBOLS(b) (R::RObject::SET_NO_SPECIAL_SYMBOLS(b))
+#define UNSET_NO_SPECIAL_SYMBOLS(b) (R::RObject::UNSET_NO_SPECIAL_SYMBOLS(b))
+#define NO_SPECIAL_SYMBOLS(b) (R::RObject::NO_SPECIAL_SYMBOLS(b))
 
 #else /* of USE_RINTERNALS */
 

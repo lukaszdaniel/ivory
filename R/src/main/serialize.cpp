@@ -750,7 +750,7 @@ static int PackFlags(int type, int levs, int isobj, int hasattr, int hastag)
        Also make sure the HASHASH bit is not written out.
     */
     int val;
-    if (type == CHARSXP) levs &= (~(CACHED_MASK | SEXPREC::HASHASH_MASK));
+    if (type == CHARSXP) levs &= (~(RObject::CharsetBit::CACHED_MASK | RObject::HASHASH_MASK));
     val = type | ENCODE_LEVELS(levs);
     if (isobj) val |= IS_OBJECT_BIT_MASK;
     if (hasattr) val |= HAS_ATTR_BIT_MASK;
@@ -1636,16 +1636,16 @@ static SEXP ReadChar(R_inpstream_t stream, char *buf, int length, int levs)
 { 
     InString(stream, buf, length);
     buf[length] = '\0';
-    if (levs & UTF8_MASK)
-	return mkCharLenCE(buf, length, CE_UTF8);
-    if (levs & LATIN1_MASK)
-	return mkCharLenCE(buf, length, CE_LATIN1);
-    if (levs & BYTES_MASK)
-	return mkCharLenCE(buf, length, CE_BYTES);
-    if (levs & ASCII_MASK)
-	return mkCharLenCE(buf, length, CE_NATIVE);
+	if (levs & R::RObject::CharsetBit::UTF8_MASK)
+		return mkCharLenCE(buf, length, CE_UTF8);
+	if (levs & R::RObject::CharsetBit::LATIN1_MASK)
+		return mkCharLenCE(buf, length, CE_LATIN1);
+	if (levs & R::RObject::CharsetBit::BYTES_MASK)
+		return mkCharLenCE(buf, length, CE_BYTES);
+	if (levs & R::RObject::CharsetBit::ASCII_MASK)
+		return mkCharLenCE(buf, length, CE_NATIVE);
 
-    /* native encoding, not ascii */
+	/* native encoding, not ascii */
     if (!stream->native_encoding[0] || /* original native encoding unknown */
         (stream->nat2nat_obj == (void *)-1 && /* translation impossible or disabled */
          stream->nat2utf8_obj == (void *)-1))

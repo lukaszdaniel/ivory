@@ -59,7 +59,7 @@ static R_size_t objectsize(SEXP s)
 	for (Rboolean done = FALSE; ! done; ) {
 	    cnt += objectsize(TAG(s));
 	    cnt += objectsize(CAR(s));
-	    cnt += sizeof(SEXPREC);
+	    cnt += sizeof(RObject);
 	    cnt += objectsize(ATTRIB(s));
 	    s = CDR(s);
 	    switch (TYPEOF(s)) {
@@ -157,7 +157,7 @@ static R_size_t objectsize(SEXP s)
 	else if (vcnt > 2) cnt += 32;
 	else if (vcnt > 1) cnt += 16;
 	else if (vcnt > 0) cnt += 8;
-    } else cnt += sizeof(SEXPREC);
+    } else cnt += sizeof(RObject);
     /* add in attributes: these are fake for CHARSXPs */
     if(TYPEOF(s) != CHARSXP) cnt += objectsize(ATTRIB(s));
     return(cnt);

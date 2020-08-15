@@ -145,11 +145,12 @@ typedef int R_xlen_t;
      * SEXPTYPE conversions.
      */
 #ifndef COMPILING_IVORY
-    typedef unsigned int SEXPTYPE;
+typedef unsigned int SEXPTYPE;
 #else
-    typedef
+typedef
 #endif
-    enum {
+enum
+{
     NILSXP = 0,      /* nil = NULL */
     SYMSXP = 1,      /* symbols */
     LISTSXP = 2,     /* lists of dotted pairs */
@@ -175,11 +176,11 @@ typedef int R_xlen_t;
     RAWSXP = 24,     /* raw bytes */
     S4SXP = 25,      /* S4 non-vector */
 
-    NEWSXP = 30,  /* fresh node created in new page */
-    FREESXP = 31, /* node released by GC */
+    NEWSXP = 30,    /* fresh node created in new page */
+    FREESXP = 31,   /* node released by GC */
     SINGLESXP = 47, /* For interfaces to objects created with as.single */
     intCHARSXP = 73,
-    FUNSXP = 99,    /* Closure or Builtin */
+    FUNSXP = 99, /* Closure or Builtin */
     ALTREP_SXP = 238,
     ATTRLISTSXP = 239,
     ATTRLANGSXP = 240,
@@ -199,41 +200,42 @@ typedef int R_xlen_t;
     GLOBALENV_SXP = 253,
     NILVALUE_SXP = 254,
     REFSXP = 255
-    }
+}
 #ifdef COMPILING_IVORY
-	SEXPTYPE
+SEXPTYPE
 #endif
-	;
-
-/* These are also used with the write barrier on, in attrib.cpp and util.cpp */
-#define BASIC_TYPE_BITS 5
-#define FULL_TYPE_BITS 8
-#define MAX_NUM_BASIC_SEXPTYPE (1 << BASIC_TYPE_BITS)
-#define MAX_NUM_SEXPTYPE (1 << FULL_TYPE_BITS)
+    ;
 
 #if defined(COMPILING_IVORY) && defined(__cplusplus)
+
+/* These are also used with the write barrier on, in attrib.cpp and util.cpp */
+constexpr int BASIC_TYPE_BITS = 5;
+constexpr int FULL_TYPE_BITS = 8;
+constexpr int MAX_NUM_BASIC_SEXPTYPE = (1 << BASIC_TYPE_BITS);
+constexpr int MAX_NUM_SEXPTYPE = (1 << FULL_TYPE_BITS);
+
     namespace R
     {
-        class SEXPREC;
+        class RObject;
     }
-    using SEXP = R::SEXPREC *;
+    using SEXP = R::RObject *;
 #if 0
-    struct Symbol;
-    struct BuiltInFunction;
-    struct Environment;
-    struct Closure;
-    struct Promise;
-    struct RList;
+    class R::Symbol;
+    class R::BuiltInFunction;
+    class R::Environment;
+    class R::Closure;
+    class R::Promise;
+    class R::RList;
 #else
-    typedef struct R::SEXPREC Symbol;
-    typedef struct R::SEXPREC BuiltInFunction;
-    typedef struct R::SEXPREC Environment;
-    typedef struct R::SEXPREC Closure;
-    typedef struct R::SEXPREC Promise;
-    typedef struct R::SEXPREC RList;
+    typedef class R::RObject Symbol;
+    typedef class R::RObject BuiltInFunction;
+    typedef class R::RObject Environment;
+    typedef class R::RObject Closure;
+    typedef class R::RObject Promise;
+    typedef class R::RObject RList;
 #endif
 #else
-    typedef struct SEXPREC *SEXP;
+    typedef struct RObject *SEXP;
 #endif
 
 /* Define SWITCH_TO_NAMED to use the 'NAMED' mechanism instead of
@@ -292,37 +294,37 @@ struct primsxp_struct
 
 struct symsxp_struct
 {
-    SEXPREC *pname;
-    SEXPREC *value;
-    SEXPREC *internal;
+    RObject *pname;
+    RObject *value;
+    RObject *internal;
 };
 
 struct listsxp_struct
 {
-    SEXPREC *carval;
-    SEXPREC *cdrval;
-    SEXPREC *tagval;
+    RObject *carval;
+    RObject *cdrval;
+    RObject *tagval;
 };
 
 struct envsxp_struct
 {
-    SEXPREC *frame;
-    SEXPREC *enclos;
-    SEXPREC *hashtab;
+    RObject *frame;
+    RObject *enclos;
+    RObject *hashtab;
 };
 
 struct closxp_struct
 {
-    SEXPREC *formals;
-    SEXPREC *body;
-    SEXPREC *env;
+    RObject *formals;
+    RObject *body;
+    RObject *env;
 };
 
 struct promsxp_struct
 {
-    SEXPREC *value;
-    SEXPREC *expr;
-    SEXPREC *env;
+    RObject *value;
+    RObject *expr;
+    RObject *env;
 };
 
 /* Every node must start with a set of sxpinfo flags and an attribute
@@ -336,13 +338,13 @@ namespace R {
 
 /* The standard node structure consists of a header followed by the
    node data. */
-class SEXPREC
+class RObject
 {
     private:
     sxpinfo_struct sxpinfo;
-    SEXPREC *attrib;
-    SEXPREC *gengc_next_node;
-    SEXPREC *gengc_prev_node;
+    RObject *attrib;
+    RObject *gengc_next_node;
+    RObject *gengc_prev_node;
     union
     {
         primsxp_struct primsxp;
@@ -352,7 +354,7 @@ class SEXPREC
         closxp_struct closxp;
         promsxp_struct promsxp;
     } u;
-    // virtual ~SEXPREC() = default;
+    // virtual ~RObject() = default;
 #if 0
     SEXPTYPE sexptype() const { return this->sxpinfo.type; }
     void setsexptype(const SEXPTYPE& type) { this->sxpinfo.type = type; }
@@ -436,7 +438,7 @@ class SEXPREC
     static inline auto PREV_NODE(SEXP s) { return s ? s->gengc_prev_node : nullptr; }
     static inline void SET_NEXT_NODE(SEXP s, SEXP t) { if (!s) return; s->gengc_next_node = t; }
     static inline void SET_PREV_NODE(SEXP s, SEXP t) { if (!s) return; s->gengc_prev_node = t; }
-    static inline void COPY_SXPINFO(SEXP x, SEXPREC &y) { if (!x) return; x->sxpinfo = y.sxpinfo; }
+    static inline void COPY_SXPINFO(SEXP x, RObject &y) { if (!x) return; x->sxpinfo = y.sxpinfo; }
     static constexpr int READY_TO_FINALIZE_MASK = 1;
     static constexpr int FINALIZE_ON_EXIT_MASK = 2;
     static constexpr int WEAKREF_SIZE = 4;
@@ -457,6 +459,7 @@ class SEXPREC
     static inline void SET_OBJECT(SEXP x, bool v) { if (!x) return; x->sxpinfo.obj = v; }
     static inline auto MARK(SEXP x) { return x ? x->sxpinfo.mark : false; }
     static inline void SET_MARK(SEXP x, int v) { if (!x) return; x->sxpinfo.mark = v; }
+    /* CHARSXP charset bits */
     enum CharsetBit
     {
         NATIVE_MASK = 0,
@@ -570,18 +573,21 @@ class SEXPREC
     static inline auto BNDCELL_TAG(SEXP e) { return e ? e->sxpinfo.extra : 0; }
     static inline void SET_BNDCELL_TAG(SEXP e, unsigned int v) { if (!e) return; e->sxpinfo.extra = v; }
     /* External pointer access methods */
-    static inline auto EXTPTR_PROT(SEXP x) { return SEXPREC::CDR(x); }
-    static inline auto EXTPTR_TAG(SEXP x) { return SEXPREC::TAG(x); }
-    static inline void SET_EXTPTR_TAG(SEXP x, SEXP v) { SEXPREC::SET_TAG(x, v); }
-    static inline void SET_EXTPTR_PROT(SEXP x, SEXP v) { SEXPREC::SET_CDR(x, v); }
+    static inline auto EXTPTR_PROT(SEXP x) { return RObject::CDR(x); }
+    static inline auto EXTPTR_TAG(SEXP x) { return RObject::TAG(x); }
+    static inline void SET_EXTPTR_TAG(SEXP x, SEXP v) { RObject::SET_TAG(x, v); }
+    static inline void SET_EXTPTR_PROT(SEXP x, SEXP v) { RObject::SET_CDR(x, v); }
     /* S4 object bit, set by R_do_new_object for all new() calls */
     static constexpr int S4_OBJECT_MASK = ((unsigned short)(1 << 4));
     static inline auto IS_S4_OBJECT(SEXP x) { return x && (x->sxpinfo.gp & S4_OBJECT_MASK); }
     static inline void SET_S4_OBJECT(SEXP x) { if (!x) return; x->sxpinfo.gp |= S4_OBJECT_MASK; }
     static inline void UNSET_S4_OBJECT(SEXP x) { if (!x) return; x->sxpinfo.gp &= ~S4_OBJECT_MASK; }
     /* JIT optimization support */
-    static constexpr int NOJIT_MASK = ((unsigned short)(1 << 5));
-    static constexpr int MAYBEJIT_MASK = ((unsigned short)(1 << 6));
+    enum JITBit
+    {
+        NOJIT_MASK = (1 << 5),
+        MAYBEJIT_MASK = (1 << 6)
+    };
     static inline auto NOJIT(SEXP x) { return x ? (x->sxpinfo.gp & NOJIT_MASK) : 0; }
     static inline void SET_NOJIT(SEXP x) { if (!x) return; x->sxpinfo.gp |= NOJIT_MASK; }
     static inline auto MAYBEJIT(SEXP x) { return x ? (x->sxpinfo.gp & MAYBEJIT_MASK) : 0; }
@@ -623,7 +629,7 @@ class SEXPREC
     static inline void SET_BNDCELL_LVAL(SEXP v, int x);
 };
 #if 0
-class Symbol : public SEXPREC {
+class Symbol : public RObject {
     struct {
         struct symsxp_struct symsxp;
     } u;
@@ -638,31 +644,31 @@ class Symbol : public SEXPREC {
     }
 };
 
-class Environment : public SEXPREC {
+class Environment : public RObject {
     struct {
         struct envsxp_struct envsxp;
     } u;
 };
 
-class BuiltInFunction : public SEXPREC {
+class BuiltInFunction : public RObject {
     struct {
         struct primsxp_struct primsxp;
     } u;
 };
 
-class Closure : public SEXPREC {
+class Closure : public RObject {
     struct {
         struct closxp_struct closxp;
     } u;
 };
 
-class Promise : public SEXPREC {
+class Promise : public RObject {
     struct {
         struct promsxp_struct promsxp;
     } u;
 };
 
-class RList : public SEXPREC {
+class RList : public RObject {
     struct {
         struct listsxp_struct listsxp;
     } u;
@@ -678,17 +684,17 @@ class RList : public SEXPREC {
 };
 #endif
 
-/* The generational collector uses a reduced version of SEXPREC as a
+/* The generational collector uses a reduced version of RObject as a
    header in vector nodes.  The layout MUST be kept consistent with
-   the SEXPREC definition. The standard SEXPREC takes up 7 words
+   the RObject definition. The standard RObject takes up 7 words
    and the reduced version takes 6 words on most 64-bit systems. On most
-   32-bit systems, SEXPREC takes 8 words and the reduced version 7 words. */
+   32-bit systems, RObject takes 8 words and the reduced version 7 words. */
 struct VECTOR_SEXPREC
 {
     sxpinfo_struct sxpinfo;
-    SEXPREC *attrib;
-    SEXPREC *gengc_next_node;
-    SEXPREC *gengc_prev_node;
+    RObject *attrib;
+    RObject *gengc_next_node;
+    RObject *gengc_prev_node;
     vecsxp_struct vecsxp;
 };
 
@@ -702,36 +708,36 @@ union SEXPREC_ALIGN
 } //namespace
 
 /* General Cons Cell Attributes */
-#define ATTRIB(x)	(R::SEXPREC::ATTRIB(x))
-#define OBJECT(x)	(R::SEXPREC::OBJECT(x))
-#define MARK(x)		(R::SEXPREC::MARK(x))
-#define TYPEOF(x)	(R::SEXPREC::TYPEOF(x))
-#define NAMED(x)	(R::SEXPREC::NAMED(x))
-#define RTRACE(x)	(R::SEXPREC::RTRACE(x))
-#define LEVELS(x)	(R::SEXPREC::LEVELS(x))
-#define SET_OBJECT(x,v)	(R::SEXPREC::SET_OBJECT(x, v))
-#define SET_TYPEOF(x,v)	(R::SEXPREC::SET_TYPEOF(x, v))
-#define SET_NAMED(x,v) (R::SEXPREC::SET_NAMED(x, v))
-#define SET_RTRACE(x,v)	(R::SEXPREC::SET_RTRACE(x, v))
-#define SETLEVELS(x,v)	(R::SEXPREC::SETLEVELS(x, v))
-#define ALTREP(x)       (R::SEXPREC::ALTREP(x))
-#define SETALTREP(x, v) (R::SEXPREC::SET_ALTREP(x, v))
-#define SETSCALAR(x, v) (R::SEXPREC::SETSCALAR(x, v))
+#define ATTRIB(x)	(R::RObject::ATTRIB(x))
+#define OBJECT(x)	(R::RObject::OBJECT(x))
+#define MARK(x)		(R::RObject::MARK(x))
+#define TYPEOF(x)	(R::RObject::TYPEOF(x))
+#define NAMED(x)	(R::RObject::NAMED(x))
+#define RTRACE(x)	(R::RObject::RTRACE(x))
+#define LEVELS(x)	(R::RObject::LEVELS(x))
+#define SET_OBJECT(x,v)	(R::RObject::SET_OBJECT(x, v))
+#define SET_TYPEOF(x,v)	(R::RObject::SET_TYPEOF(x, v))
+#define SET_NAMED(x,v) (R::RObject::SET_NAMED(x, v))
+#define SET_RTRACE(x,v)	(R::RObject::SET_RTRACE(x, v))
+#define SETLEVELS(x,v)	(R::RObject::SETLEVELS(x, v))
+#define ALTREP(x)       (R::RObject::ALTREP(x))
+#define SETALTREP(x, v) (R::RObject::SET_ALTREP(x, v))
+#define SETSCALAR(x, v) (R::RObject::SETSCALAR(x, v))
 
 #if defined(COMPUTE_REFCNT_VALUES)
-# define REFCNT(x) (R::SEXPREC::REFCNT(x))
-# define TRACKREFS(x) (R::SEXPREC::TRACKREFS(x))
+# define REFCNT(x) (R::RObject::REFCNT(x))
+# define TRACKREFS(x) (R::RObject::TRACKREFS(x))
 #else
 # define REFCNT(x) 0
 # define TRACKREFS(x) false
 #endif
 
 #if defined(COMPUTE_REFCNT_VALUES)
-# define SET_REFCNT(x,v) (R::SEXPREC::SET_REFCNT(x, v))
+# define SET_REFCNT(x,v) (R::RObject::SET_REFCNT(x, v))
 # if defined(EXTRA_REFCNT_FIELDS)
-#  define SET_TRACKREFS(x,v) (R::SEXPREC::SET_TRACKREFS(x, v))
+#  define SET_TRACKREFS(x,v) (R::RObject::SET_TRACKREFS(x, v))
 # else
-#  define SET_TRACKREFS(x,v) (R::SEXPREC::SET_TRACKREFS(x, !v))
+#  define SET_TRACKREFS(x,v) (R::RObject::SET_TRACKREFS(x, !v))
 # endif
 #define DECREMENT_REFCNT(x)                                       \
     do                                                            \
@@ -789,8 +795,8 @@ union SEXPREC_ALIGN
   LT
 */
 
-#define ASSIGNMENT_PENDING(x) (R::SEXPREC::ASSIGNMENT_PENDING(x))
-#define SET_ASSIGNMENT_PENDING(x, v) (R::SEXPREC::SET_ASSIGNMENT_PENDING(x, v))
+#define ASSIGNMENT_PENDING(x) (R::RObject::ASSIGNMENT_PENDING(x))
+#define SET_ASSIGNMENT_PENDING(x, v) (R::RObject::SET_ASSIGNMENT_PENDING(x, v))
 
 /* The same bit can be used to mark calls used in complex assignments
    to allow replacement functions to determine when they are being
@@ -839,20 +845,20 @@ union SEXPREC_ALIGN
 #endif
 
 /* S4 object bit, set by R_do_new_object for all new() calls */
-#define IS_S4_OBJECT(x) (R::SEXPREC::IS_S4_OBJECT(x))
-#define SET_S4_OBJECT(x) (R::SEXPREC::SET_S4_OBJECT(x))
-#define UNSET_S4_OBJECT(x) (R::SEXPREC::UNSET_S4_OBJECT(x))
+#define IS_S4_OBJECT(x) (R::RObject::IS_S4_OBJECT(x))
+#define SET_S4_OBJECT(x) (R::RObject::SET_S4_OBJECT(x))
+#define UNSET_S4_OBJECT(x) (R::RObject::UNSET_S4_OBJECT(x))
 
 /* JIT optimization support */
-#define NOJIT(x) (R::SEXPREC::NOJIT(x))
-#define SET_NOJIT(x) (R::SEXPREC::SET_NOJIT(x))
-#define MAYBEJIT(x) (R::SEXPREC::MAYBEJIT(x))
-#define SET_MAYBEJIT(x) (R::SEXPREC::SET_MAYBEJIT(x))
-#define UNSET_MAYBEJIT(x) (R::SEXPREC::UNSET_MAYBEJIT(x))
+#define NOJIT(x) (R::RObject::NOJIT(x))
+#define SET_NOJIT(x) (R::RObject::SET_NOJIT(x))
+#define MAYBEJIT(x) (R::RObject::MAYBEJIT(x))
+#define SET_MAYBEJIT(x) (R::RObject::SET_MAYBEJIT(x))
+#define UNSET_MAYBEJIT(x) (R::RObject::UNSET_MAYBEJIT(x))
 
 /* Growable vector support */
-#define GROWABLE_BIT_SET(x) (R::SEXPREC::GROWABLE_BIT_SET(x))
-#define SET_GROWABLE_BIT(x) (R::SEXPREC::SET_GROWABLE_BIT(x))
+#define GROWABLE_BIT_SET(x) (R::RObject::GROWABLE_BIT_SET(x))
+#define SET_GROWABLE_BIT(x) (R::RObject::SET_GROWABLE_BIT(x))
 #define IS_GROWABLE(x) (GROWABLE_BIT_SET(x) && XLENGTH(x) < XTRUELENGTH(x))
 
 /* Vector Access Macros */
@@ -874,7 +880,7 @@ union SEXPREC_ALIGN
         SET_STDVEC_TRUELENGTH(sl__x__, sl__v__);  \
     } while (0)
 
-#define IS_SCALAR(x, t) (R::SEXPREC::IS_SCALAR(x, t))
+#define IS_SCALAR(x, t) (R::RObject::IS_SCALAR(x, t))
 #define LENGTH(x) LENGTH_EX(x, __FILE__, __LINE__)
 #define TRUELENGTH(x) XTRUELENGTH(x)
 
@@ -913,10 +919,10 @@ union SEXPREC_ALIGN
 
 /* List Access Macros */
 /* These also work for ... objects */
-#define TAG(e)		(R::SEXPREC::TAG(e))
-#define CAR0(e)		(R::SEXPREC::CAR0(e))
-#define EXTPTR_PTR(e)	(R::SEXPREC::EXTPTR_PTR(e))
-#define CDR(e)		(R::SEXPREC::CDR(e))
+#define TAG(e)		(R::RObject::TAG(e))
+#define CAR0(e)		(R::RObject::CAR0(e))
+#define EXTPTR_PTR(e)	(R::RObject::EXTPTR_PTR(e))
+#define CDR(e)		(R::RObject::CDR(e))
 #define CAAR(e)		CAR(CAR(e))
 #define CDAR(e)		CDR(CAR(e))
 #define CADR(e)		CAR(CDR(e))
@@ -928,10 +934,10 @@ union SEXPREC_ALIGN
 #define CAD3R(e)	CAR(CDR(CDDR(e)))
 #define CAD4R(e)	CAR(CDDR(CDDR(e)))
 #define CAD5R(e)	CAR(CDR(CDR(CDR(CDR(CDR(e))))))
-#define MISSING(x)	(R::SEXPREC::MISSING(x))/* for closure calls */
-#define SET_MISSING(x,v) (R::SEXPREC::SET_MISSING(x, v))
-#define BNDCELL_TAG(e)	(R::SEXPREC::BNDCELL_TAG(e))
-#define SET_BNDCELL_TAG(e, v) (R::SEXPREC::SET_BNDCELL_TAG(e, v))
+#define MISSING(x)	(R::RObject::MISSING(x))/* for closure calls */
+#define SET_MISSING(x,v) (R::RObject::SET_MISSING(x, v))
+#define BNDCELL_TAG(e)	(R::RObject::BNDCELL_TAG(e))
+#define SET_BNDCELL_TAG(e, v) (R::RObject::SET_BNDCELL_TAG(e, v))
 
 #if ( SIZEOF_SIZE_T < SIZEOF_DOUBLE )
 # define BOXED_BINDING_CELLS 1
@@ -971,19 +977,19 @@ union R_bndval_t
     int ival;
 };
 
-auto R::SEXPREC::BNDCELL_DVAL(SEXP v) { return v ? ((R_bndval_t *) &(v->u.listsxp.carval))->dval: 0; }
-auto R::SEXPREC::BNDCELL_IVAL(SEXP v) { return v ? ((R_bndval_t *) &(v->u.listsxp.carval))->ival: 0; }
-auto R::SEXPREC::BNDCELL_LVAL(SEXP v) { return v ? ((R_bndval_t *) &(v->u.listsxp.carval))->ival: 0; }
-#define BNDCELL_DVAL(v) (R::SEXPREC::BNDCELL_DVAL(v))
-#define BNDCELL_IVAL(v) (R::SEXPREC::BNDCELL_IVAL(v))
-#define BNDCELL_LVAL(v) (R::SEXPREC::BNDCELL_LVAL(v))
+auto R::RObject::BNDCELL_DVAL(SEXP v) { return v ? ((R_bndval_t *) &(v->u.listsxp.carval))->dval: 0; }
+auto R::RObject::BNDCELL_IVAL(SEXP v) { return v ? ((R_bndval_t *) &(v->u.listsxp.carval))->ival: 0; }
+auto R::RObject::BNDCELL_LVAL(SEXP v) { return v ? ((R_bndval_t *) &(v->u.listsxp.carval))->ival: 0; }
+#define BNDCELL_DVAL(v) (R::RObject::BNDCELL_DVAL(v))
+#define BNDCELL_IVAL(v) (R::RObject::BNDCELL_IVAL(v))
+#define BNDCELL_LVAL(v) (R::RObject::BNDCELL_LVAL(v))
 
-void R::SEXPREC::SET_BNDCELL_DVAL(SEXP v, double x) { if (!v) return; ((R_bndval_t *) &(v->u.listsxp.carval))->dval = x; }
-void R::SEXPREC::SET_BNDCELL_IVAL(SEXP v, int x) { if (!v) return; ((R_bndval_t *) &(v->u.listsxp.carval))->ival = x; }
-void R::SEXPREC::SET_BNDCELL_LVAL(SEXP v, int x) { if (!v) return; ((R_bndval_t *) &(v->u.listsxp.carval))->ival = x; }
-#define SET_BNDCELL_DVAL(cell, dval_) (R::SEXPREC::SET_BNDCELL_DVAL(cell, dval_))
-#define SET_BNDCELL_IVAL(cell, ival_) (R::SEXPREC::SET_BNDCELL_IVAL(cell, ival_))
-#define SET_BNDCELL_LVAL(cell, lval_) (R::SEXPREC::SET_BNDCELL_LVAL(cell, lval_))
+void R::RObject::SET_BNDCELL_DVAL(SEXP v, double x) { if (!v) return; ((R_bndval_t *) &(v->u.listsxp.carval))->dval = x; }
+void R::RObject::SET_BNDCELL_IVAL(SEXP v, int x) { if (!v) return; ((R_bndval_t *) &(v->u.listsxp.carval))->ival = x; }
+void R::RObject::SET_BNDCELL_LVAL(SEXP v, int x) { if (!v) return; ((R_bndval_t *) &(v->u.listsxp.carval))->ival = x; }
+#define SET_BNDCELL_DVAL(cell, dval_) (R::RObject::SET_BNDCELL_DVAL(cell, dval_))
+#define SET_BNDCELL_IVAL(cell, ival_) (R::RObject::SET_BNDCELL_IVAL(cell, ival_))
+#define SET_BNDCELL_LVAL(cell, lval_) (R::RObject::SET_BNDCELL_LVAL(cell, lval_))
 
 #define INIT_BNDCELL(cell, type)      \
     do                                \
@@ -996,29 +1002,29 @@ void R::SEXPREC::SET_BNDCELL_LVAL(SEXP v, int x) { if (!v) return; ((R_bndval_t 
 #endif
 
 /* Closure Access Macros */
-#define FORMALS(x)	(R::SEXPREC::FORMALS(x))
-#define BODY(x)		(R::SEXPREC::BODY(x))
-#define CLOENV(x)	(R::SEXPREC::CLOENV(x))
-#define RDEBUG(x)	(R::SEXPREC::RDEBUG(x))
-#define SET_RDEBUG(x,v)	(R::SEXPREC::SET_RDEBUG(x, v))
-#define RSTEP(x)	(R::SEXPREC::RSTEP(x))
-#define SET_RSTEP(x,v)	(R::SEXPREC::SET_RSTEP(x, v))
+#define FORMALS(x)	(R::RObject::FORMALS(x))
+#define BODY(x)		(R::RObject::BODY(x))
+#define CLOENV(x)	(R::RObject::CLOENV(x))
+#define RDEBUG(x)	(R::RObject::RDEBUG(x))
+#define SET_RDEBUG(x,v)	(R::RObject::SET_RDEBUG(x, v))
+#define RSTEP(x)	(R::RObject::RSTEP(x))
+#define SET_RSTEP(x,v)	(R::RObject::SET_RSTEP(x, v))
 
 /* Symbol Access Macros */
-#define PRINTNAME(x)	(R::SEXPREC::PRINTNAME(x))
-#define SYMVALUE(x)	(R::SEXPREC::SYMVALUE(x))
-#define INTERNAL(x)	(R::SEXPREC::INTERNAL(x))
-#define DDVAL(x)	(R::SEXPREC::DDVAL(x))
-#define SET_DDVAL_BIT(x)	(R::SEXPREC::SET_DDVAL_BIT(x))
-#define UNSET_DDVAL_BIT(x)	(R::SEXPREC::UNSET_DDVAL_BIT(x))
-#define SET_DDVAL(x,v)	(R::SEXPREC::SET_DDVAL(x, v))
+#define PRINTNAME(x)	(R::RObject::PRINTNAME(x))
+#define SYMVALUE(x)	(R::RObject::SYMVALUE(x))
+#define INTERNAL(x)	(R::RObject::INTERNAL(x))
+#define DDVAL(x)	(R::RObject::DDVAL(x))
+#define SET_DDVAL_BIT(x)	(R::RObject::SET_DDVAL_BIT(x))
+#define UNSET_DDVAL_BIT(x)	(R::RObject::UNSET_DDVAL_BIT(x))
+#define SET_DDVAL(x,v)	(R::RObject::SET_DDVAL(x, v))
 
 /* Environment Access Macros */
-#define FRAME(x)	(R::SEXPREC::FRAME(x))
-#define ENCLOS(x)	(R::SEXPREC::ENCLOS(x))
-#define HASHTAB(x)	(R::SEXPREC::HASHTAB(x))
-#define ENVFLAGS(x)	(R::SEXPREC::ENVFLAGS(x))	/* for environments */
-#define SET_ENVFLAGS(x,v)	(R::SEXPREC::SET_ENVFLAGS(x, v))
+#define FRAME(x)	(R::RObject::FRAME(x))
+#define ENCLOS(x)	(R::RObject::ENCLOS(x))
+#define HASHTAB(x)	(R::RObject::HASHTAB(x))
+#define ENVFLAGS(x)	(R::RObject::ENVFLAGS(x))	/* for environments */
+#define SET_ENVFLAGS(x,v)	(R::RObject::SET_ENVFLAGS(x, v))
 
 #else /* not USE_RINTERNALS */
 // ======================= not USE_RINTERNALS section

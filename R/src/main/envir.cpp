@@ -128,12 +128,12 @@ inline static bool IS_USER_DATABASE(SEXP rho)
 
  inline static int FRAME_IS_LOCKED(SEXP e)
  {
-     return (ENVFLAGS(e) & R::SEXPREC::FRAME_LOCK_MASK);
+     return (ENVFLAGS(e) & R::RObject::FRAME_LOCK_MASK);
  }
 
  inline static void LOCK_FRAME(SEXP e)
  {
-     SET_ENVFLAGS(e, ENVFLAGS(e) | R::SEXPREC::FRAME_LOCK_MASK);
+     SET_ENVFLAGS(e, ENVFLAGS(e) | R::RObject::FRAME_LOCK_MASK);
  }
 /*#define UNLOCK_FRAME(e) SET_ENVFLAGS(e, ENVFLAGS(e) & (~ FRAME_LOCK_MASK))*/
 
@@ -683,17 +683,17 @@ static SEXP R_HashProfile(SEXP table)
 
 inline static Rboolean IS_GLOBAL_FRAME(SEXP e)
 {
-    return (Rboolean)(ENVFLAGS(e) & R::SEXPREC::GLOBAL_FRAME_MASK);
+    return (Rboolean)(ENVFLAGS(e) & R::RObject::GLOBAL_FRAME_MASK);
 }
 
 inline static void MARK_AS_GLOBAL_FRAME(SEXP e)
 {
-    SET_ENVFLAGS(e, ENVFLAGS(e) | R::SEXPREC::GLOBAL_FRAME_MASK);
+    SET_ENVFLAGS(e, ENVFLAGS(e) | R::RObject::GLOBAL_FRAME_MASK);
 }
 
 inline static void MARK_AS_LOCAL_FRAME(SEXP e)
 {
-    SET_ENVFLAGS(e, ENVFLAGS(e) & (~R::SEXPREC::GLOBAL_FRAME_MASK));
+    SET_ENVFLAGS(e, ENVFLAGS(e) & (~R::RObject::GLOBAL_FRAME_MASK));
 }
 
 #define INITIAL_CACHE_SIZE 1000
@@ -4027,7 +4027,7 @@ SEXP Rf_mkCharLenCE(const char * const name, int len, cetype_t enc)
 {
     SEXP cval, chain;
     unsigned int hashcode;
-    CharsetBit need_enc;
+    R::RObject::CharsetBit need_enc;
     bool embedNul = false, is_ascii = true;
 
     switch (enc)
@@ -4065,10 +4065,10 @@ SEXP Rf_mkCharLenCE(const char * const name, int len, cetype_t enc)
 
     if (enc && is_ascii) enc = CE_NATIVE;
     switch(enc) {
-    case CE_UTF8: need_enc = UTF8_MASK; break;
-    case CE_LATIN1: need_enc = LATIN1_MASK; break;
-    case CE_BYTES: need_enc = BYTES_MASK; break;
-    default: need_enc = NATIVE_MASK;
+    case CE_UTF8: need_enc = R::RObject::CharsetBit::UTF8_MASK; break;
+    case CE_LATIN1: need_enc = R::RObject::CharsetBit::LATIN1_MASK; break;
+    case CE_BYTES: need_enc = R::RObject::CharsetBit::BYTES_MASK; break;
+    default: need_enc = R::RObject::CharsetBit::NATIVE_MASK;
     }
 
     hashcode = char_hash(name, len) & char_hash_mask;
