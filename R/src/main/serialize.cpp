@@ -2607,11 +2607,6 @@ HIDDEN SEXP do_unserializeFromConn(SEXP call, SEXP op, SEXP args, SEXP env)
  * Persistent Buffered Binary Connection Streams
  */
 
-/**** should eventually come from a public header file */
-/* Prototyped in Rconnections.h
-size_t R_WriteConnection(Rconnection con, const void *buf, size_t n);
-*/
-
 constexpr size_t BCONBUFSIZ = 4096;
 
 typedef struct bconbuf_st

@@ -138,13 +138,9 @@ typedef int R_xlen_t;
      * @brief CR's object type identification.
      *
      * This enumeration is used within CR to identify different types
-     * of R object.  In rho the same purpose could be (and sometimes
-     * is) achieved by C++ run-time type information (RTTI), virtual
-     * function despatch etc.  However, a ::SEXPTYPE field is retained
-     * within each rho::RObject for backwards compatibility, and indeed
-     * efficiency.
-     *
-     * Note: when not compiling rho, SEXPTYPE is a typedef for unsigned int.
+     * of R object.
+     * 
+     * Note: when not compiling ivory, SEXPTYPE is a typedef for unsigned int.
      * This is done to support C++ packages that expect implicit int to
      * SEXPTYPE conversions.
      */
@@ -222,12 +218,12 @@ typedef int R_xlen_t;
     }
     using SEXP = R::SEXPREC *;
 #if 0
-struct Symbol;
-struct BuiltInFunction;
-struct Environment;
-struct Closure;
-struct Promise;
-struct RList;
+    struct Symbol;
+    struct BuiltInFunction;
+    struct Environment;
+    struct Closure;
+    struct Promise;
+    struct RList;
 #else
     typedef struct R::SEXPREC Symbol;
     typedef struct R::SEXPREC BuiltInFunction;
@@ -337,6 +333,7 @@ struct promsxp_struct
 constexpr int REFCNTMAX = ((1 << NAMED_BITS) - 1);
 #endif
 namespace R {
+
 /* The standard node structure consists of a header followed by the
    node data. */
 class SEXPREC
@@ -432,34 +429,34 @@ class SEXPREC
     public:
     /* General Cons Cell Attributes */
     static inline bool GCGEN(SEXP v) { return v ? v->sxpinfo.gcgen : false; }
-    static inline void SET_GCGEN(SEXP v, bool x) { if(!v) return; v->sxpinfo.gcgen = x; }
+    static inline void SET_GCGEN(SEXP v, bool x) { if (!v) return; v->sxpinfo.gcgen = x; }
     static inline unsigned int GCCLS(SEXP v) { return v ? v->sxpinfo.gccls : 0; }
-    static inline void SET_GCCLS(SEXP v, unsigned int x) { if(!v) return; v->sxpinfo.gccls = x; }
+    static inline void SET_GCCLS(SEXP v, unsigned int x) { if (!v) return; v->sxpinfo.gccls = x; }
     static inline auto NEXT_NODE(SEXP s) { return s ? s->gengc_next_node : nullptr; }
     static inline auto PREV_NODE(SEXP s) { return s ? s->gengc_prev_node : nullptr; }
-    static inline void SET_NEXT_NODE(SEXP s, SEXP t) { if(!s) return; s->gengc_next_node = t; }
-    static inline void SET_PREV_NODE(SEXP s, SEXP t) { if(!s) return; s->gengc_prev_node = t; }
-    static inline void COPY_SXPINFO(SEXP x, SEXPREC &y) { if(!x) return; x->sxpinfo = y.sxpinfo; }
+    static inline void SET_NEXT_NODE(SEXP s, SEXP t) { if (!s) return; s->gengc_next_node = t; }
+    static inline void SET_PREV_NODE(SEXP s, SEXP t) { if (!s) return; s->gengc_prev_node = t; }
+    static inline void COPY_SXPINFO(SEXP x, SEXPREC &y) { if (!x) return; x->sxpinfo = y.sxpinfo; }
     static constexpr int READY_TO_FINALIZE_MASK = 1;
     static constexpr int FINALIZE_ON_EXIT_MASK = 2;
     static constexpr int WEAKREF_SIZE = 4;
-    static inline void SET_READY_TO_FINALIZE(SEXP s) { if(!s) return; s->sxpinfo.gp |= READY_TO_FINALIZE_MASK; }
-    static inline void CLEAR_READY_TO_FINALIZE(SEXP s) { if(!s) return; s->sxpinfo.gp &= ~READY_TO_FINALIZE_MASK; }
+    static inline void SET_READY_TO_FINALIZE(SEXP s) { if (!s) return; s->sxpinfo.gp |= READY_TO_FINALIZE_MASK; }
+    static inline void CLEAR_READY_TO_FINALIZE(SEXP s) { if (!s) return; s->sxpinfo.gp &= ~READY_TO_FINALIZE_MASK; }
     static inline auto IS_READY_TO_FINALIZE(SEXP s) { return s ? s->sxpinfo.gp & READY_TO_FINALIZE_MASK : 0; }
-    static inline void SET_FINALIZE_ON_EXIT(SEXP s) { if(!s) return; s->sxpinfo.gp |= FINALIZE_ON_EXIT_MASK; }
-    static inline void CLEAR_FINALIZE_ON_EXIT(SEXP s) { if(!s) return; s->sxpinfo.gp &= ~FINALIZE_ON_EXIT_MASK; }
+    static inline void SET_FINALIZE_ON_EXIT(SEXP s) { if (!s) return; s->sxpinfo.gp |= FINALIZE_ON_EXIT_MASK; }
+    static inline void CLEAR_FINALIZE_ON_EXIT(SEXP s) { if (!s) return; s->sxpinfo.gp &= ~FINALIZE_ON_EXIT_MASK; }
     static inline auto FINALIZE_ON_EXIT(SEXP s) { return s ? (s->sxpinfo.gp & FINALIZE_ON_EXIT_MASK) : 0; }
-    static inline void SET_ATTRIB(SEXP x, SEXP v) { if(!x) return; x->attrib = v; }
+    static inline void SET_ATTRIB(SEXP x, SEXP v) { if (!x) return; x->attrib = v; }
     static inline SEXP ATTRIB(SEXP x) { return x ? x->attrib : nullptr; }
     static inline auto NAMED(SEXP x) { return x ? x->sxpinfo.named : 0; }
-    static inline void SET_NAMED(SEXP x, unsigned int v) { if(!x) return; x->sxpinfo.named = v; }
-    static inline void SET_TYPEOF(SEXP x, SEXPTYPE v) { if(!x) return; x->sxpinfo.type = v; }
+    static inline void SET_NAMED(SEXP x, unsigned int v) { if (!x) return; x->sxpinfo.named = v; }
+    static inline void SET_TYPEOF(SEXP x, SEXPTYPE v) { if (!x) return; x->sxpinfo.type = v; }
     static inline SEXPTYPE TYPEOF(SEXP x) { return x ? x->sxpinfo.type : NILSXP; }
     static inline auto LEVELS(SEXP x) { return x ? x->sxpinfo.gp : 0; }
     static inline auto OBJECT(SEXP x) { return x && x->sxpinfo.obj; }
-    static inline void SET_OBJECT(SEXP x, bool v) { if(!x) return; x->sxpinfo.obj = v; }
+    static inline void SET_OBJECT(SEXP x, bool v) { if (!x) return; x->sxpinfo.obj = v; }
     static inline auto MARK(SEXP x) { return x ? x->sxpinfo.mark : false; }
-    static inline void SET_MARK(SEXP x, int v) { if(!x) return; x->sxpinfo.mark = v; }
+    static inline void SET_MARK(SEXP x, int v) { if (!x) return; x->sxpinfo.mark = v; }
     enum CharsetBit
     {
         NATIVE_MASK = 0,
@@ -472,63 +469,64 @@ class SEXPREC
     };
     static inline bool SCALAR(SEXP x) { return x ? x->sxpinfo.scalar : false; }
     static inline auto IS_BYTES(SEXP x) { return x ? (x->sxpinfo.gp & BYTES_MASK) : 0; }
-    static inline void SET_BYTES(SEXP x) { if(!x) return; x->sxpinfo.gp |= BYTES_MASK; }
+    static inline void SET_BYTES(SEXP x) { if (!x) return; x->sxpinfo.gp |= BYTES_MASK; }
     static inline auto IS_LATIN1(SEXP x) { return x ? (x->sxpinfo.gp & LATIN1_MASK) : 0; }
-    static inline void SET_LATIN1(SEXP x) { if(!x) return; x->sxpinfo.gp |= LATIN1_MASK; }
+    static inline void SET_LATIN1(SEXP x) { if (!x) return; x->sxpinfo.gp |= LATIN1_MASK; }
     static inline auto IS_ASCII(SEXP x) { return x ? (x->sxpinfo.gp & ASCII_MASK) : 0; }
-    static inline void SET_ASCII(SEXP x) { if(!x) return; x->sxpinfo.gp |= ASCII_MASK; }
+    static inline void SET_ASCII(SEXP x) { if (!x) return; x->sxpinfo.gp |= ASCII_MASK; }
     static inline auto IS_UTF8(SEXP x) { return x ? (x->sxpinfo.gp & UTF8_MASK) : 0; }
-    static inline void SET_UTF8(SEXP x) { if(!x) return; x->sxpinfo.gp |= UTF8_MASK; }
+    static inline void SET_UTF8(SEXP x) { if (!x) return; x->sxpinfo.gp |= UTF8_MASK; }
     static inline auto ENC_KNOWN(SEXP x) { return x ? (x->sxpinfo.gp & (LATIN1_MASK | UTF8_MASK)) : 0; }
-    static inline void SET_CACHED(SEXP x) { if(!x) return; x->sxpinfo.gp |= CACHED_MASK; }
+    static inline void SET_CACHED(SEXP x) { if (!x) return; x->sxpinfo.gp |= CACHED_MASK; }
     static inline auto IS_CACHED(SEXP x) { return x ? (x->sxpinfo.gp & CACHED_MASK) : 0; }
     static inline auto ALTREP(SEXP x) { return x ? x->sxpinfo.alt : 0; }
-    static inline void SET_ALTREP(SEXP x, bool v) { if(!x) return; x->sxpinfo.alt = v; }
-    static inline void SETLEVELS(SEXP x, unsigned short int v) { if(!x) return; x->sxpinfo.gp = (unsigned short) v; }
-    static inline void SETSCALAR(SEXP x, bool v) { if(!x) return; x->sxpinfo.scalar = v; }
+    static inline void SET_ALTREP(SEXP x, bool v) { if (!x) return; x->sxpinfo.alt = v; }
+    static inline void SETLEVELS(SEXP x, unsigned short int v) { if (!x) return; x->sxpinfo.gp = (unsigned short) v; }
+    static inline void SETSCALAR(SEXP x, bool v) { if (!x) return; x->sxpinfo.scalar = v; }
     static inline bool IS_SCALAR(SEXP x, SEXPTYPE t) { return x && (x->sxpinfo.type == t) && x->sxpinfo.scalar; }
     static inline auto REFCNT(SEXP x) { return x ? x->sxpinfo.named : 0; }
-    static inline void SET_REFCNT(SEXP x, unsigned int v) { if(!x) return; x->sxpinfo.named = v; }
+    static inline void SET_REFCNT(SEXP x, unsigned int v) { if (!x) return; x->sxpinfo.named = v; }
     static inline bool TRACKREFS(SEXP x) { return x && (TYPEOF(x) == CLOSXP ? TRUE : ! x->sxpinfo.spare); }
-    static inline void SET_TRACKREFS(SEXP x, bool v) {  if(!x) return; x->sxpinfo.spare = v; };
+    static inline void SET_TRACKREFS(SEXP x, bool v) {  if (!x) return; x->sxpinfo.spare = v; };
     static constexpr int ASSIGNMENT_PENDING_MASK = (1 << 11);
     static inline auto ASSIGNMENT_PENDING(SEXP x) { return x ?  (x->sxpinfo.gp & ASSIGNMENT_PENDING_MASK) : 0; };
     static inline void SET_ASSIGNMENT_PENDING(SEXP x, bool v)
     {
-        if(!x) return;
+        if (!x)
+            return;
         if (v)
             (((x)->sxpinfo.gp) |= ASSIGNMENT_PENDING_MASK);
         else
             (((x)->sxpinfo.gp) &= ~ASSIGNMENT_PENDING_MASK);
     }
     static inline auto RTRACE(SEXP x) { return x ? x->sxpinfo.trace : false; }
-    static inline void SET_RTRACE(SEXP x, bool v) { if(!x) return; x->sxpinfo.trace = v; }
+    static inline void SET_RTRACE(SEXP x, bool v) { if (!x) return; x->sxpinfo.trace = v; }
     /* Primitive Access Methods */
     static inline auto PRIMOFFSET(SEXP x) { return x ? x->u.primsxp.offset : 0; }
-    static inline void SET_PRIMOFFSET(SEXP x, int v) { if(!x) return; x->u.primsxp.offset = v; }
+    static inline void SET_PRIMOFFSET(SEXP x, int v) { if (!x) return; x->u.primsxp.offset = v; }
     /* Closure Access Methods */
     static inline auto FORMALS(SEXP x) { return x ? x->u.closxp.formals : nullptr; }
-    static inline void SET_FORMALS(SEXP x, SEXP v) { if(!x) return; x->u.closxp.formals = v; }
+    static inline void SET_FORMALS(SEXP x, SEXP v) { if (!x) return; x->u.closxp.formals = v; }
     static inline auto BODY(SEXP x) { return x ? x->u.closxp.body : nullptr; }
-    static inline void SET_BODY(SEXP x, SEXP v) { if(!x) return; x->u.closxp.body = v; }
+    static inline void SET_BODY(SEXP x, SEXP v) { if (!x) return; x->u.closxp.body = v; }
     static inline auto CLOENV(SEXP x) { return x ? x->u.closxp.env : nullptr; }
-    static inline void SET_CLOENV(SEXP x, SEXP v) { if(!x) return; x->u.closxp.env = v; }
+    static inline void SET_CLOENV(SEXP x, SEXP v) { if (!x) return; x->u.closxp.env = v; }
     static inline auto RDEBUG(SEXP x) { return x && x->sxpinfo.debug; }
-    static inline void SET_RDEBUG(SEXP x, int v) { if(!x) return; x->sxpinfo.debug = v; }
+    static inline void SET_RDEBUG(SEXP x, int v) { if (!x) return; x->sxpinfo.debug = v; }
     static inline auto RSTEP(SEXP x) { return x && x->sxpinfo.spare; }
-    static inline void SET_RSTEP(SEXP x, int v) { if(!x) return; x->sxpinfo.spare = v; }
+    static inline void SET_RSTEP(SEXP x, int v) { if (!x) return; x->sxpinfo.spare = v; }
     /* Symbol Access Methods */
     static constexpr int DDVAL_MASK = 1;
     static inline auto PRINTNAME(SEXP x) { return x ? x->u.symsxp.pname : nullptr; }
     static inline auto SYMVALUE(SEXP x) { return x ? x->u.symsxp.value : nullptr; }
     static inline auto INTERNAL(SEXP x) { return x ? x->u.symsxp.internal : nullptr; }
     static inline auto DDVAL(SEXP x) { return x ? (x->sxpinfo.gp & DDVAL_MASK) : 0; } /* for ..1, ..2 etc */
-    static inline void SET_DDVAL_BIT(SEXP x) { if(!x) return; x->sxpinfo.gp |= DDVAL_MASK; }
-    static inline void UNSET_DDVAL_BIT(SEXP x) { if(!x) return; x->sxpinfo.gp &= ~DDVAL_MASK; }
+    static inline void SET_DDVAL_BIT(SEXP x) { if (!x) return; x->sxpinfo.gp |= DDVAL_MASK; }
+    static inline void UNSET_DDVAL_BIT(SEXP x) { if (!x) return; x->sxpinfo.gp &= ~DDVAL_MASK; }
     static inline void SET_DDVAL(SEXP x, int v) { if(v) { SET_DDVAL_BIT(x); } else { UNSET_DDVAL_BIT(x); } } /* for ..1, ..2 etc */
-    static inline void SET_PRINTNAME(SEXP x, SEXP v) { if(!x) return; x->u.symsxp.pname = v; }
-    static inline void SET_SYMVALUE(SEXP x, SEXP v) { if(!x) return; x->u.symsxp.value = v; }
-    static inline void SET_INTERNAL(SEXP x, SEXP v) { if(!x) return; x->u.symsxp.internal = v; }
+    static inline void SET_PRINTNAME(SEXP x, SEXP v) { if (!x) return; x->u.symsxp.pname = v; }
+    static inline void SET_SYMVALUE(SEXP x, SEXP v) { if (!x) return; x->u.symsxp.value = v; }
+    static inline void SET_INTERNAL(SEXP x, SEXP v) { if (!x) return; x->u.symsxp.internal = v; }
     /* Environment Access Methods */
     static constexpr int FRAME_LOCK_MASK = (1 << 14);
     static constexpr int GLOBAL_FRAME_MASK = (1 << 15);
@@ -536,30 +534,30 @@ class SEXPREC
     static inline auto ENCLOS(SEXP x) { return x ? x->u.envsxp.enclos : nullptr; }
     static inline auto HASHTAB(SEXP x) { return x ? x->u.envsxp.hashtab : nullptr; }
     static inline auto ENVFLAGS(SEXP x) { return x ? x->sxpinfo.gp : 0; }	/* for environments */
-    static inline void SET_ENVFLAGS(SEXP x, int v) { if(!x) return; x->sxpinfo.gp = v; }
-    static inline void SET_FRAME(SEXP x, SEXP v) { if(!x) return; x->u.envsxp.frame = v; }
-    static inline void SET_ENCLOS(SEXP x, SEXP v) { if(!x) return; x->u.envsxp.enclos = v; }
-    static inline void SET_HASHTAB(SEXP x, SEXP v) { if(!x) return; x->u.envsxp.hashtab = v; }
+    static inline void SET_ENVFLAGS(SEXP x, int v) { if (!x) return; x->sxpinfo.gp = v; }
+    static inline void SET_FRAME(SEXP x, SEXP v) { if (!x) return; x->u.envsxp.frame = v; }
+    static inline void SET_ENCLOS(SEXP x, SEXP v) { if (!x) return; x->u.envsxp.enclos = v; }
+    static inline void SET_HASHTAB(SEXP x, SEXP v) { if (!x) return; x->u.envsxp.hashtab = v; }
     static inline auto FRAME_IS_LOCKED(SEXP e) { return e ? (ENVFLAGS(e) & FRAME_LOCK_MASK) : 0; }
     static inline auto IS_GLOBAL_FRAME(SEXP e) { return e ? (ENVFLAGS(e) & GLOBAL_FRAME_MASK) : 0; }
     /* Promise Access Methods */
     static inline auto PRCODE(SEXP x) { return x ? x->u.promsxp.expr : nullptr; }
-    static inline void SET_PRCODE(SEXP x, SEXP v) { if(!x) return; x->u.promsxp.expr = v; }
+    static inline void SET_PRCODE(SEXP x, SEXP v) { if (!x) return; x->u.promsxp.expr = v; }
     static inline auto PRENV(SEXP x) { return x ? x->u.promsxp.env : nullptr; }
     static inline auto PRVALUE(SEXP x) { return x ? x->u.promsxp.value : nullptr; }
-    static inline void SET_PRVALUE(SEXP x, SEXP v) { if(!x) return; x->u.promsxp.value = v; }
+    static inline void SET_PRVALUE(SEXP x, SEXP v) { if (!x) return; x->u.promsxp.value = v; }
     static inline auto PRSEEN(SEXP x) { return x ? x->sxpinfo.gp : 0; }
-    static inline void SET_PRENV(SEXP x, SEXP v) { if(!x) return; x->u.promsxp.env = v; }
-    static inline void SET_PRSEEN(SEXP x, int v) { if(!x) return; x->sxpinfo.gp = v; }
+    static inline void SET_PRENV(SEXP x, SEXP v) { if (!x) return; x->u.promsxp.env = v; }
+    static inline void SET_PRSEEN(SEXP x, int v) { if (!x) return; x->sxpinfo.gp = v; }
     /* List Access Methods */
     static inline auto TAG(SEXP e) { return e ? e->u.listsxp.tagval : nullptr; }
-    static inline void SET_TAG(SEXP x, SEXP v) { if(!x) return; x->u.listsxp.tagval = v; }
+    static inline void SET_TAG(SEXP x, SEXP v) { if (!x) return; x->u.listsxp.tagval = v; }
     static inline auto CAR0(SEXP e) { return e ? e->u.listsxp.carval : nullptr; }
-    static inline void SET_CAR0(SEXP x, SEXP v) { if(!x) return; x->u.listsxp.carval = v; }
+    static inline void SET_CAR0(SEXP x, SEXP v) { if (!x) return; x->u.listsxp.carval = v; }
     static inline auto EXTPTR_PTR(SEXP e) { return e ? e->u.listsxp.carval : nullptr; }
-    static inline void SET_EXTPTR_PTR(SEXP x, SEXP v) { if(!x) return; x->u.listsxp.carval = v; }
+    static inline void SET_EXTPTR_PTR(SEXP x, SEXP v) { if (!x) return; x->u.listsxp.carval = v; }
     static inline auto CDR(SEXP e) { return e ? e->u.listsxp.cdrval : nullptr; }
-    static inline void SET_CDR(SEXP x, SEXP v) { if(!x) return; x->u.listsxp.cdrval = v; }
+    static inline void SET_CDR(SEXP x, SEXP v) { if (!x) return; x->u.listsxp.cdrval = v; }
     static constexpr int MISSING_MASK = ((1 << 4) - 1); // = 15 /* reserve 4 bits--only 2 uses now */
     static inline auto MISSING(SEXP x) { return x ? (x->sxpinfo.gp & MISSING_MASK) : 0; }/* for closure calls */
     static inline void SET_MISSING(SEXP x, int v)
@@ -570,7 +568,7 @@ class SEXPREC
         x->sxpinfo.gp = __other_flags__ | v;
     }
     static inline auto BNDCELL_TAG(SEXP e) { return e ? e->sxpinfo.extra : 0; }
-    static inline void SET_BNDCELL_TAG(SEXP e, unsigned int v) { if(!e) return; e->sxpinfo.extra = v; }
+    static inline void SET_BNDCELL_TAG(SEXP e, unsigned int v) { if (!e) return; e->sxpinfo.extra = v; }
     /* External pointer access methods */
     static inline auto EXTPTR_PROT(SEXP x) { return SEXPREC::CDR(x); }
     static inline auto EXTPTR_TAG(SEXP x) { return SEXPREC::TAG(x); }
@@ -579,44 +577,44 @@ class SEXPREC
     /* S4 object bit, set by R_do_new_object for all new() calls */
     static constexpr int S4_OBJECT_MASK = ((unsigned short)(1 << 4));
     static inline auto IS_S4_OBJECT(SEXP x) { return x && (x->sxpinfo.gp & S4_OBJECT_MASK); }
-    static inline void SET_S4_OBJECT(SEXP x) { if(!x) return; x->sxpinfo.gp |= S4_OBJECT_MASK; }
-    static inline void UNSET_S4_OBJECT(SEXP x) { if(!x) return; x->sxpinfo.gp &= ~S4_OBJECT_MASK; }
+    static inline void SET_S4_OBJECT(SEXP x) { if (!x) return; x->sxpinfo.gp |= S4_OBJECT_MASK; }
+    static inline void UNSET_S4_OBJECT(SEXP x) { if (!x) return; x->sxpinfo.gp &= ~S4_OBJECT_MASK; }
     /* JIT optimization support */
     static constexpr int NOJIT_MASK = ((unsigned short)(1 << 5));
     static constexpr int MAYBEJIT_MASK = ((unsigned short)(1 << 6));
     static inline auto NOJIT(SEXP x) { return x ? (x->sxpinfo.gp & NOJIT_MASK) : 0; }
-    static inline void SET_NOJIT(SEXP x) { if(!x) return; x->sxpinfo.gp |= NOJIT_MASK; }
+    static inline void SET_NOJIT(SEXP x) { if (!x) return; x->sxpinfo.gp |= NOJIT_MASK; }
     static inline auto MAYBEJIT(SEXP x) { return x ? (x->sxpinfo.gp & MAYBEJIT_MASK) : 0; }
-    static inline void SET_MAYBEJIT(SEXP x) { if(!x) return; x->sxpinfo.gp |= MAYBEJIT_MASK; }
-    static inline void UNSET_MAYBEJIT(SEXP x) { if(!x) return; x->sxpinfo.gp &= ~MAYBEJIT_MASK; }
+    static inline void SET_MAYBEJIT(SEXP x) { if (!x) return; x->sxpinfo.gp |= MAYBEJIT_MASK; }
+    static inline void UNSET_MAYBEJIT(SEXP x) { if (!x) return; x->sxpinfo.gp &= ~MAYBEJIT_MASK; }
     /* Growable vector support */
     static constexpr int GROWABLE_MASK = ((unsigned short)(1 << 5));
     static inline auto GROWABLE_BIT_SET(SEXP x) { return x ? (x->sxpinfo.gp & GROWABLE_MASK) : 0; }
-    static inline void SET_GROWABLE_BIT(SEXP x) { if(!x) return; x->sxpinfo.gp |= GROWABLE_MASK; }
+    static inline void SET_GROWABLE_BIT(SEXP x) { if (!x) return; x->sxpinfo.gp |= GROWABLE_MASK; }
     /* Hashing Methods */
     static constexpr int HASHASH_MASK = 1;
     static inline auto HASHASH(SEXP x) { return x ? (x->sxpinfo.gp & HASHASH_MASK) : 0; }
-    static inline void SET_HASHASH(SEXP x, bool v) { v ? (x->sxpinfo.gp |= HASHASH_MASK) : (x->sxpinfo.gp &= (~HASHASH_MASK)); }
+    static inline void SET_HASHASH(SEXP x, bool v) { if(v) { (x->sxpinfo.gp |= HASHASH_MASK); } else { (x->sxpinfo.gp &= (~HASHASH_MASK)); } }
 
     static constexpr int SPECIAL_SYMBOL_MASK = (1 << 12);
     static constexpr int BASE_SYM_CACHED_MASK = (1 << 13);
-    static inline void SET_BASE_SYM_CACHED(SEXP b) { if(!b) return; b->sxpinfo.gp |= BASE_SYM_CACHED_MASK; }
-    static inline void UNSET_BASE_SYM_CACHED(SEXP b) { if(!b) return; b->sxpinfo.gp &= (~BASE_SYM_CACHED_MASK); }
+    static inline void SET_BASE_SYM_CACHED(SEXP b) { if (!b) return; b->sxpinfo.gp |= BASE_SYM_CACHED_MASK; }
+    static inline void UNSET_BASE_SYM_CACHED(SEXP b) { if (!b) return; b->sxpinfo.gp &= (~BASE_SYM_CACHED_MASK); }
     static inline auto BASE_SYM_CACHED(SEXP b) { return b ? (b->sxpinfo.gp & BASE_SYM_CACHED_MASK) : 0; }
     static inline auto NO_SPECIAL_SYMBOLS(SEXP b) { return b ? (b->sxpinfo.gp & SPECIAL_SYMBOL_MASK) : 0; }
-    static inline void SET_NO_SPECIAL_SYMBOLS(SEXP b) { if(!b) return; b->sxpinfo.gp |= SPECIAL_SYMBOL_MASK; }
+    static inline void SET_NO_SPECIAL_SYMBOLS(SEXP b) { if (!b) return; b->sxpinfo.gp |= SPECIAL_SYMBOL_MASK; }
     static inline auto IS_SPECIAL_SYMBOL(SEXP b) { return b ? (b->sxpinfo.gp & SPECIAL_SYMBOL_MASK) : 0; }
-    static inline void SET_SPECIAL_SYMBOL(SEXP b) { if(!b) return; b->sxpinfo.gp |= SPECIAL_SYMBOL_MASK; }
-    static inline void UNSET_NO_SPECIAL_SYMBOLS(SEXP b) { if(!b) return; b->sxpinfo.gp &= (~SPECIAL_SYMBOL_MASK); }
-    static inline void UNSET_SPECIAL_SYMBOL(SEXP b) { if(!b) return; b->sxpinfo.gp &= (~SPECIAL_SYMBOL_MASK); }
+    static inline void SET_SPECIAL_SYMBOL(SEXP b) { if (!b) return; b->sxpinfo.gp |= SPECIAL_SYMBOL_MASK; }
+    static inline void UNSET_NO_SPECIAL_SYMBOLS(SEXP b) { if (!b) return; b->sxpinfo.gp &= (~SPECIAL_SYMBOL_MASK); }
+    static inline void UNSET_SPECIAL_SYMBOL(SEXP b) { if (!b) return; b->sxpinfo.gp &= (~SPECIAL_SYMBOL_MASK); }
     static constexpr int ACTIVE_BINDING_MASK = (1 << 15);
     static constexpr int BINDING_LOCK_MASK = (1 << 14);
     static constexpr int SPECIAL_BINDING_MASK = (ACTIVE_BINDING_MASK | BINDING_LOCK_MASK);
     static inline auto IS_ACTIVE_BINDING(SEXP b) { return b ? (b->sxpinfo.gp & ACTIVE_BINDING_MASK) : 0; }
     static inline auto BINDING_IS_LOCKED(SEXP b) { return b ? (b->sxpinfo.gp & BINDING_LOCK_MASK) : 0; }
     static inline void LOCK_BINDING_(SEXP b);
-    static inline void UNLOCK_BINDING(SEXP b) { if(!b) return; b->sxpinfo.gp &= (~BINDING_LOCK_MASK); }
-    static inline void SET_ACTIVE_BINDING_BIT(SEXP b) { if(!b) return; b->sxpinfo.gp |= ACTIVE_BINDING_MASK; }
+    static inline void UNLOCK_BINDING(SEXP b) { if (!b) return; b->sxpinfo.gp &= (~BINDING_LOCK_MASK); }
+    static inline void SET_ACTIVE_BINDING_BIT(SEXP b) { if (!b) return; b->sxpinfo.gp |= ACTIVE_BINDING_MASK; }
     static inline auto BNDCELL_DVAL(SEXP v);
     static inline auto BNDCELL_IVAL(SEXP v);
     static inline auto BNDCELL_LVAL(SEXP v);
@@ -693,14 +691,15 @@ struct VECTOR_SEXPREC
     SEXPREC *gengc_prev_node;
     vecsxp_struct vecsxp;
 };
-} //namespace
+
 using VECSEXP = struct R::VECTOR_SEXPREC *;
 
 union SEXPREC_ALIGN
 {
-    R::VECTOR_SEXPREC s;
+    VECTOR_SEXPREC s;
     double align;
 };
+} //namespace
 
 /* General Cons Cell Attributes */
 #define ATTRIB(x)	(R::SEXPREC::ATTRIB(x))
@@ -724,7 +723,7 @@ union SEXPREC_ALIGN
 # define TRACKREFS(x) (R::SEXPREC::TRACKREFS(x))
 #else
 # define REFCNT(x) 0
-# define TRACKREFS(x) FALSE
+# define TRACKREFS(x) false
 #endif
 
 #if defined(COMPUTE_REFCNT_VALUES)
@@ -862,8 +861,8 @@ union SEXPREC_ALIGN
 #else
 # define IS_LONG_VEC(x) false
 #endif
-#define STDVEC_LENGTH(x) (((VECSEXP) (x))->vecsxp.length)
-#define STDVEC_TRUELENGTH(x) (((VECSEXP) (x))->vecsxp.truelength)
+#define STDVEC_LENGTH(x) (((R::VECSEXP) (x))->vecsxp.length)
+#define STDVEC_TRUELENGTH(x) (((R::VECSEXP) (x))->vecsxp.truelength)
 #define SET_STDVEC_TRUELENGTH(x, v) (STDVEC_TRUELENGTH(x)=(v))
 #define SET_TRUELENGTH(x, v)                      \
     do                                            \
@@ -895,7 +894,7 @@ union SEXPREC_ALIGN
 /* Under the generational allocator the data for vector nodes comes
    immediately after the node structure, so the data address is a
    known offset from the node SEXP. */
-#define STDVEC_DATAPTR(x) ((void *) (((SEXPREC_ALIGN *) (x)) + 1))
+#define STDVEC_DATAPTR(x) ((void *) (((R::SEXPREC_ALIGN *) (x)) + 1))
 #define CHAR(x)		((const char *) STDVEC_DATAPTR(x))
 #define LOGICAL(x)	((int *) DATAPTR(x))
 #define INTEGER(x)	((int *) DATAPTR(x))
@@ -971,6 +970,7 @@ union R_bndval_t
     double dval;
     int ival;
 };
+
 auto R::SEXPREC::BNDCELL_DVAL(SEXP v) { return v ? ((R_bndval_t *) &(v->u.listsxp.carval))->dval: 0; }
 auto R::SEXPREC::BNDCELL_IVAL(SEXP v) { return v ? ((R_bndval_t *) &(v->u.listsxp.carval))->ival: 0; }
 auto R::SEXPREC::BNDCELL_LVAL(SEXP v) { return v ? ((R_bndval_t *) &(v->u.listsxp.carval))->ival: 0; }
@@ -978,9 +978,9 @@ auto R::SEXPREC::BNDCELL_LVAL(SEXP v) { return v ? ((R_bndval_t *) &(v->u.listsx
 #define BNDCELL_IVAL(v) (R::SEXPREC::BNDCELL_IVAL(v))
 #define BNDCELL_LVAL(v) (R::SEXPREC::BNDCELL_LVAL(v))
 
-void R::SEXPREC::SET_BNDCELL_DVAL(SEXP v, double x) { if(!v) return; ((R_bndval_t *) &(v->u.listsxp.carval))->dval = x; }
-void R::SEXPREC::SET_BNDCELL_IVAL(SEXP v, int x) { if(!v) return; ((R_bndval_t *) &(v->u.listsxp.carval))->ival = x; }
-void R::SEXPREC::SET_BNDCELL_LVAL(SEXP v, int x) { if(!v) return; ((R_bndval_t *) &(v->u.listsxp.carval))->ival = x; }
+void R::SEXPREC::SET_BNDCELL_DVAL(SEXP v, double x) { if (!v) return; ((R_bndval_t *) &(v->u.listsxp.carval))->dval = x; }
+void R::SEXPREC::SET_BNDCELL_IVAL(SEXP v, int x) { if (!v) return; ((R_bndval_t *) &(v->u.listsxp.carval))->ival = x; }
+void R::SEXPREC::SET_BNDCELL_LVAL(SEXP v, int x) { if (!v) return; ((R_bndval_t *) &(v->u.listsxp.carval))->ival = x; }
 #define SET_BNDCELL_DVAL(cell, dval_) (R::SEXPREC::SET_BNDCELL_DVAL(cell, dval_))
 #define SET_BNDCELL_IVAL(cell, ival_) (R::SEXPREC::SET_BNDCELL_IVAL(cell, ival_))
 #define SET_BNDCELL_LVAL(cell, lval_) (R::SEXPREC::SET_BNDCELL_LVAL(cell, lval_))

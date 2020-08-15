@@ -281,14 +281,13 @@ double R_pow_di(double x, int n)
 
 /* General Base Logarithms */
 
-extern "C" {
-SEXP R_unary(SEXP, SEXP, SEXP);
-SEXP R_binary(SEXP, SEXP, SEXP, SEXP);
-static SEXP logical_unary(ARITHOP_TYPE, SEXP, SEXP);
-static SEXP integer_unary(ARITHOP_TYPE, SEXP, SEXP);
-static SEXP real_unary(ARITHOP_TYPE, SEXP, SEXP);
-static SEXP real_binary(ARITHOP_TYPE, SEXP, SEXP);
-static SEXP integer_binary(ARITHOP_TYPE, SEXP, SEXP, SEXP);
+extern "C"
+{
+	static SEXP logical_unary(ARITHOP_TYPE, SEXP, SEXP);
+	static SEXP integer_unary(ARITHOP_TYPE, SEXP, SEXP);
+	static SEXP real_unary(ARITHOP_TYPE, SEXP, SEXP);
+	static SEXP real_binary(ARITHOP_TYPE, SEXP, SEXP);
+	static SEXP integer_binary(ARITHOP_TYPE, SEXP, SEXP, SEXP);
 } //extern "C"
 
 #if 0

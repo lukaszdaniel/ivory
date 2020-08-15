@@ -33,15 +33,24 @@ SEXP complex_math1(SEXP, SEXP, SEXP, SEXP);
 SEXP complex_math2(SEXP, SEXP, SEXP, SEXP);
 SEXP complex_unary(ARITHOP_TYPE, SEXP, SEXP);
 SEXP complex_binary(ARITHOP_TYPE, SEXP, SEXP);
+SEXP R_binary(SEXP, SEXP, SEXP, SEXP);
+SEXP R_unary(SEXP, SEXP, SEXP);
+SEXP do_relop_dflt(SEXP, SEXP, SEXP, SEXP);
+SEXP do_logic(SEXP, SEXP, SEXP, SEXP);
+SEXP do_subset_dflt(SEXP, SEXP, SEXP, SEXP);
+SEXP do_subassign_dflt(SEXP, SEXP, SEXP, SEXP);
+SEXP do_c_dflt(SEXP, SEXP, SEXP, SEXP);
+SEXP do_subset2_dflt(SEXP, SEXP, SEXP, SEXP);
+SEXP do_subassign2_dflt(SEXP, SEXP, SEXP, SEXP);
 
 double R_pow(double x, double y);
-R_INLINE static double R_POW(double x, double y) /* handle x ^ 2 inline */
+inline static double R_POW(double x, double y) /* handle x ^ 2 inline */
 {
     return y == 2.0 ? x * x : R_pow(x, y);
 }
 
 /* some systems get this wrong, possibly depend on what libs are loaded */
-R_INLINE static double R_log(double x) {
+inline static double R_log(double x) {
     return x > 0 ? log(x) : x == 0 ? R_NegInf : R_NaN;
 }
 
@@ -50,7 +59,7 @@ R_INLINE static double R_log(double x) {
    optional in C99.  Some systems return -Inf for log(x < 0), e.g.
    libsunmath on Solaris.
 */
-R_INLINE static double logbase(double x, double base)
+inline static double logbase(double x, double base)
 {
 #ifdef HAVE_LOG10
     if(base == 10) return x > 0 ? log10(x) : x == 0 ? R_NegInf : R_NaN;
@@ -65,7 +74,7 @@ SEXP do_log_builtin(SEXP call, SEXP op, SEXP args, SEXP env);
 
 /* for binary operations */
 /* adapted from Radford Neal's pqR */
-R_INLINE static SEXP R_allocOrReuseVector(SEXP s1, SEXP s2,
+inline static SEXP R_allocOrReuseVector(SEXP s1, SEXP s2,
 					  SEXPTYPE type , R_xlen_t n)
 {
     R_xlen_t n1 = XLENGTH(s1);

@@ -107,9 +107,6 @@ HIDDEN size_t R_ChooseFile(int _new, char *buf, size_t len)
 	return ptr_R_ChooseFile(_new, buf, len);
 }
 
-/* Use header files!
-void R_setStartTime(void); // in sys-unix.cpp
-*/
 
 #ifdef HAVE_AQUA
 /*  used here and in main/sysutils.cpp (for system). */

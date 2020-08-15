@@ -1,5 +1,10 @@
 /* Localization */
 
+/** @file Localization.h
+ *
+ * @brief Macro definitions relating to localization.
+ */
+
 #ifndef LOCALIZATION_H
 #define LOCALIZATION_H
 

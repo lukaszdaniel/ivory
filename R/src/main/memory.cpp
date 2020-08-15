@@ -2287,12 +2287,12 @@ char *R_alloc(size_t nelem, int eltsize)
 #ifdef LONG_VECTOR_SUPPORT
 	/* 64-bit platform: previous version used REALSXPs */
 	if(dsize > (double) R_XLEN_T_MAX)  /* currently 4096 TB */
-	    error(_("cannot allocate memory block of size %0.f Tb"),
+	    error(_("cannot allocate memory block of size %0.f TB"),
 		  dsize/R_pow_di(1024.0, 4));
 	s = allocVector(RAWSXP, size + 1);
 #else
 	if(dsize > R_LEN_T_MAX) /* must be in the Gb range */
-	    error(_("cannot allocate memory block of size %0.1f Gb"),
+	    error(_("cannot allocate memory block of size %0.1f GB"),
 		  dsize/R_pow_di(1024.0, 3));
 	s = allocVector(RAWSXP, size + 1);
 #endif
@@ -2875,15 +2875,15 @@ SEXP Rf_allocVector3(SEXPTYPE type, R_xlen_t length = 1, R_allocator_t *allocato
 		R_VSize = old_R_VSize;
 		if(dsize > 1024.0*1024.0)
 		    errorcall(R_NilValue,
-			      _("cannot allocate vector of size %0.1f Gb"),
+			      _("cannot allocate vector of size %0.1f GB"),
 			      dsize/1024.0/1024.0);
 		if(dsize > 1024.0)
 		    errorcall(R_NilValue,
-			      _("cannot allocate vector of size %0.1f Mb"),
+			      _("cannot allocate vector of size %0.1f MB"),
 			      dsize/1024.0);
 		else
 		    errorcall(R_NilValue,
-			      _("cannot allocate vector of size %0.f Kb"),
+			      _("cannot allocate vector of size %0.f KB"),
 			      dsize);
 	    }
 	    SEXPREC::COPY_SXPINFO(s, UnmarkedNodeTemplate);

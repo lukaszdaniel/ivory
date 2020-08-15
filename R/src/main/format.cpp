@@ -539,11 +539,6 @@ void formatRealS(SEXP x, R_xlen_t n, int &w, int &d, int &e, int nsmall)
 		      });
 }
 
-// #ifdef formatComplex_USING_signif
-// /*   From complex.cpp. */
-// void z_prec_r(Rcomplex *r, const Rcomplex *x, double digits);
-// #endif
-
 /* As from 2.2.0 the number of digits applies to real and imaginary parts
    together, not separately */
 void Rf_formatComplex(const Rcomplex *x, R_xlen_t n,

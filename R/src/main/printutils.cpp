@@ -314,10 +314,6 @@ const char *Rf_EncodeReal2(double x, int w, int d, int e)
     return buff;
 }
 
-// #ifdef formatComplex_USING_signif
-// void z_prec_r(Rcomplex *r, const Rcomplex *x, double digits);
-// #endif
-
 constexpr size_t NB3 = NB + 3;
 const char *Rf_EncodeComplex(Rcomplex x, int wr, int dr, int er, int wi, int di, int ei,
 	       const char *dec)

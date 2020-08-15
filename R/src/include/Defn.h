@@ -20,6 +20,11 @@
 
 /* Internal header, not installed */
 
+/** @file Defn.h
+ *
+ * @brief A ragbag.
+ */
+
 #ifndef DEFN_H_
 #define DEFN_H_
 

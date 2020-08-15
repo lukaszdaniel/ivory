@@ -2838,7 +2838,8 @@ HIDDEN SEXP do_filecopy(SEXP call, SEXP op, SEXP args, SEXP rho)
 	if(strlen(q) > PATH_MAX - 2) // allow for '/' and terminator
 	    error(_("invalid '%s' argument"), "to");
 	char dir[PATH_MAX];
-	strncpy(dir, q, PATH_MAX);
+	// gcc 10 with sanitizers objects to PATH_MAX here.
+	strncpy(dir, q, PATH_MAX - 1);
 	dir[PATH_MAX - 1] = '\0';
 	if (*(dir + (strlen(dir) - 1)) !=  '/')
 	    strcat(dir, "/");
