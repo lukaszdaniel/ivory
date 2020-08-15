@@ -50,14 +50,15 @@ void R_UTF8fixslash(char *s);
 static void R_wfixslash(wchar_t *s);
 #endif
 
-extern "C" {
+extern "C"
+{
 #if defined FC_LEN_T
 #include <cstddef>
-void F77_SYMBOL(rwarnc)(char *msg, int *nchar, FC_LEN_T msg_len);
-NORET void F77_SYMBOL(rexitc)(char *msg, int *nchar, FC_LEN_T msg_len);
+	void F77_SYMBOL(rwarnc)(char *msg, int *nchar, FC_LEN_T msg_len);
+	NORET void F77_SYMBOL(rexitc)(char *msg, int *nchar, FC_LEN_T msg_len);
 #else
-void F77_SYMBOL(rwarnc)(char *msg, int *nchar);
-NORET void F77_SYMBOL(rexitc)(char *msg, int *nchar);
+	void F77_SYMBOL(rwarnc)(char *msg, int *nchar);
+	NORET void F77_SYMBOL(rexitc)(char *msg, int *nchar);
 #endif
 }
 

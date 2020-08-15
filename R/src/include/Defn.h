@@ -379,80 +379,8 @@ struct FUNTAB
 };
 
 #ifdef USE_RINTERNALS
-/* There is much more in Rinternals.h, including function versions
- * of the Promise and Hashing groups.
- */
 
-/* Primitive Access Macros */
-#define PRIMOFFSET(x)	(R::RObject::primoffset(x))
-#define SET_PRIMOFFSET(x,v)	(R::RObject::set_primoffset(x, v))
-#define PRIMFUN(x)	(R_FunTab[PRIMOFFSET(x)].cfun)
-#define PRIMNAME(x)	(R_FunTab[PRIMOFFSET(x)].name)
-#define PRIMVAL(x)	(R_FunTab[PRIMOFFSET(x)].code)
-#define PRIMARITY(x)	(R_FunTab[PRIMOFFSET(x)].arity)
-#define PPINFO(x)	(R_FunTab[PRIMOFFSET(x)].gram)
-#define PRIMPRINT(x)	(((R_FunTab[PRIMOFFSET(x)].eval) / 100) % 10)
-#define PRIMINTERNAL(x)	(((R_FunTab[PRIMOFFSET(x)].eval) % 100) / 10)
-
-/* Promise Access Macros */
-#define PRCODE(x)	(R::RObject::prcode(x))
-#define PRENV(x)	(R::RObject::prenv(x))
-#define PRVALUE(x)	(R::RObject::prvalue(x))
-#define PRSEEN(x)	(R::RObject::prseen(x))
-#define SET_PRSEEN(x,v)	(R::RObject::set_prseen(x, v))
-
-/* Hashing Macros */
-#define HASHASH(x)      (R::RObject::hashash(x))
-#define HASHVALUE(x)    ((int) TRUELENGTH(x))
-#define SET_HASHASH(x,v) (R::RObject::set_hashash(x, v))
-#define SET_HASHVALUE(x,v) SET_TRUELENGTH(x, ((int) (v)))
-
-/* Vector Heap Structure */
-struct VECREC
-{
-    union {
-        SEXP backpointer;
-        double align;
-    } u;
-};
-
-/* Vector Heap Macros */
-//#define BACKPOINTER(v) ((v).u.backpointer)
-inline size_t BYTE2VEC(int n) { return (n > 0) ? (std::size_t(n) - 1)/sizeof(VECREC) + 1 : 0; }
-inline size_t INT2VEC(int n) { return (n > 0) ? (std::size_t(n)*sizeof(int) - 1)/sizeof(VECREC) + 1 : 0; }
-inline size_t FLOAT2VEC(int n) { return (n > 0) ? (std::size_t(n)*sizeof(double) - 1)/sizeof(VECREC) + 1 : 0; }
-inline size_t COMPLEX2VEC(int n) { return (n > 0) ? (std::size_t(n)*sizeof(Rcomplex) - 1)/sizeof(VECREC) + 1 : 0; }
-inline size_t PTR2VEC(int n) { return (n > 0) ? (std::size_t(n)*sizeof(SEXP) - 1)/sizeof(VECREC) + 1 : 0; }
-
-/* Bindings */
-/* use the same bits (15 and 14) in symbols and bindings */
-#define IS_ACTIVE_BINDING(b) (R::RObject::is_active_binding(b))
-#define BINDING_IS_LOCKED(b) (R::RObject::binding_is_locked(b))
-#define SET_ACTIVE_BINDING_BIT(b) (R::RObject::set_active_binding_bit(b))
-#define LOCK_BINDING(b) (R::RObject::lock_binding(b))
-void R::RObject::lock_binding(SEXP b)
-    {                                                 
-        if (!RObject::is_active_binding(b))              
-        {                                             
-            if (RObject::typeof_(b) == SYMSXP)            
-                MARK_NOT_MUTABLE(RObject::symvalue(b));  
-            else                                      
-                MARK_NOT_MUTABLE(CAR(b));       
-        }                                             
-        ((b))->sxpinfo.m_gp |= BINDING_LOCK_MASK; 
-    }
-#define UNLOCK_BINDING(b) (R::RObject::unlock_binding(b))
-
-#define SET_BASE_SYM_CACHED(b) (R::RObject::set_base_sym_cached(b))
-#define UNSET_BASE_SYM_CACHED(b) (R::RObject::unset_base_sym_cached(b))
-#define BASE_SYM_CACHED(b) (R::RObject::base_sym_cached(b))
-
-#define SET_SPECIAL_SYMBOL(b) (R::RObject::set_special_symbol(b))
-#define UNSET_SPECIAL_SYMBOL(b) (R::RObject::unset_special_symbol(b))
-#define IS_SPECIAL_SYMBOL(b) (R::RObject::is_special_symbol(b))
-#define SET_NO_SPECIAL_SYMBOLS(b) (R::RObject::set_no_special_symbols(b))
-#define UNSET_NO_SPECIAL_SYMBOLS(b) (R::RObject::unset_no_special_symbols(b))
-#define NO_SPECIAL_SYMBOLS(b) (R::RObject::no_special_symbols(b))
+// Content moved to RObject.hpp
 
 #else /* of USE_RINTERNALS */
 
@@ -618,7 +546,7 @@ class RCNTXT
     SEXP onExit() const { return this->conexit; }
     void setOnExit(SEXP x) { this->conexit = x; }
     SEXP workingEnvironment() const { return this->cloenv; }
-    void setWorkingEnvironment(SEXP x) {this->cloenv = dynamic_cast<Environment*>(x); }
+    void setWorkingEnvironment(SEXP x) {this->cloenv = x; }
     RCNTXT *nextContext() const { return this->nextcontext; }
     void setNextContext(RCNTXT *ctxt) { this->nextcontext = ctxt; }
     SEXP getReturnValue() const { return this->returnValue; }

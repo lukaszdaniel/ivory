@@ -36,7 +36,7 @@
 
 #include <Localization.h>
 #include <R_ext/Error.h>
-
+#include <RObject.hpp>
 
 #include <string.h> /* for strlen, strcmp */
 

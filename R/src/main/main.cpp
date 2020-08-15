@@ -33,6 +33,7 @@
 #define R_USE_SIGNALS 1
 #include <Localization.h>
 #include <Defn.h>
+#include <RObject.hpp>
 #include <Internal.h>
 #include "Rinterface.h"
 #include "IOStuff.h"
