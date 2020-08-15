@@ -16,7 +16,7 @@ SOURCES_C =
 
 SOURCES_CXX = \
 	CommandLineArgs.cpp \
-	Rdynload.cpp Renviron.cpp RNG.cpp \
+	Rdynload.cpp Renviron.cpp RNG.cpp RObject.cpp \
 	agrep.cpp altclasses.cpp altrep.cpp apply.cpp arithmetic.cpp array.cpp attrib.cpp \
 	bind.cpp builtin.cpp \
 	character.cpp coerce.cpp colors.cpp complex.cpp connections.cpp context.cpp cum.cpp \

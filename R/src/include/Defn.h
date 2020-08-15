@@ -109,17 +109,17 @@ extern0 SEXP	R_StringHash;       /* Global hash of CHARSXPs */
 /**** HASHASH uses the first bit -- see HASHASH_MASK defined below */
 
 #ifdef USE_RINTERNALS
-# define IS_BYTES(x) (R::RObject::IS_BYTES(x))
-# define SET_BYTES(x) (R::RObject::SET_BYTES(x))
-# define IS_LATIN1(x) (R::RObject::IS_LATIN1(x))
-# define SET_LATIN1(x) (R::RObject::SET_LATIN1(x))
-# define IS_ASCII(x) (R::RObject::IS_ASCII(x))
-# define SET_ASCII(x) (R::RObject::SET_ASCII(x))
-# define IS_UTF8(x) (R::RObject::IS_UTF8(x))
-# define SET_UTF8(x) (R::RObject::SET_UTF8(x))
-# define ENC_KNOWN(x) (R::RObject::ENC_KNOWN(x))
-# define SET_CACHED(x) (R::RObject::SET_CACHED(x))
-# define IS_CACHED(x) (R::RObject::IS_CACHED(x))
+# define IS_BYTES(x) (R::RObject::is_bytes(x))
+# define SET_BYTES(x) (R::RObject::set_bytes(x))
+# define IS_LATIN1(x) (R::RObject::is_latin1(x))
+# define SET_LATIN1(x) (R::RObject::set_latin1(x))
+# define IS_ASCII(x) (R::RObject::is_ascii(x))
+# define SET_ASCII(x) (R::RObject::set_ascii(x))
+# define IS_UTF8(x) (R::RObject::is_utf8(x))
+# define SET_UTF8(x) (R::RObject::set_utf8(x))
+# define ENC_KNOWN(x) (R::RObject::enc_known(x))
+# define SET_CACHED(x) (R::RObject::set_cached(x))
+# define IS_CACHED(x) (R::RObject::is_cached(x))
 #else
 /* Needed only for write-barrier testing */
 int IS_BYTES(SEXP x);
@@ -384,8 +384,8 @@ struct FUNTAB
  */
 
 /* Primitive Access Macros */
-#define PRIMOFFSET(x)	(R::RObject::PRIMOFFSET(x))
-#define SET_PRIMOFFSET(x,v)	(R::RObject::SET_PRIMOFFSET(x, v))
+#define PRIMOFFSET(x)	(R::RObject::primoffset(x))
+#define SET_PRIMOFFSET(x,v)	(R::RObject::set_primoffset(x, v))
 #define PRIMFUN(x)	(R_FunTab[PRIMOFFSET(x)].cfun)
 #define PRIMNAME(x)	(R_FunTab[PRIMOFFSET(x)].name)
 #define PRIMVAL(x)	(R_FunTab[PRIMOFFSET(x)].code)
@@ -395,16 +395,16 @@ struct FUNTAB
 #define PRIMINTERNAL(x)	(((R_FunTab[PRIMOFFSET(x)].eval) % 100) / 10)
 
 /* Promise Access Macros */
-#define PRCODE(x)	(R::RObject::PRCODE(x))
-#define PRENV(x)	(R::RObject::PRENV(x))
-#define PRVALUE(x)	(R::RObject::PRVALUE(x))
-#define PRSEEN(x)	(R::RObject::PRSEEN(x))
-#define SET_PRSEEN(x,v)	(R::RObject::SET_PRSEEN(x, v))
+#define PRCODE(x)	(R::RObject::prcode(x))
+#define PRENV(x)	(R::RObject::prenv(x))
+#define PRVALUE(x)	(R::RObject::prvalue(x))
+#define PRSEEN(x)	(R::RObject::prseen(x))
+#define SET_PRSEEN(x,v)	(R::RObject::set_prseen(x, v))
 
 /* Hashing Macros */
-#define HASHASH(x)      (R::RObject::HASHASH(x))
+#define HASHASH(x)      (R::RObject::hashash(x))
 #define HASHVALUE(x)    ((int) TRUELENGTH(x))
-#define SET_HASHASH(x,v) (R::RObject::SET_HASHASH(x, v))
+#define SET_HASHASH(x,v) (R::RObject::set_hashash(x, v))
 #define SET_HASHVALUE(x,v) SET_TRUELENGTH(x, ((int) (v)))
 
 /* Vector Heap Structure */
@@ -426,33 +426,33 @@ inline size_t PTR2VEC(int n) { return (n > 0) ? (std::size_t(n)*sizeof(SEXP) - 1
 
 /* Bindings */
 /* use the same bits (15 and 14) in symbols and bindings */
-#define IS_ACTIVE_BINDING(b) (R::RObject::IS_ACTIVE_BINDING(b))
-#define BINDING_IS_LOCKED(b) (R::RObject::BINDING_IS_LOCKED(b))
-#define SET_ACTIVE_BINDING_BIT(b) (R::RObject::SET_ACTIVE_BINDING_BIT(b))
-#define LOCK_BINDING(b) (R::RObject::LOCK_BINDING_(b))
-void R::RObject::LOCK_BINDING_(SEXP b)
+#define IS_ACTIVE_BINDING(b) (R::RObject::is_active_binding(b))
+#define BINDING_IS_LOCKED(b) (R::RObject::binding_is_locked(b))
+#define SET_ACTIVE_BINDING_BIT(b) (R::RObject::set_active_binding_bit(b))
+#define LOCK_BINDING(b) (R::RObject::lock_binding(b))
+void R::RObject::lock_binding(SEXP b)
     {                                                 
-        if (!IS_ACTIVE_BINDING(b))              
+        if (!RObject::is_active_binding(b))              
         {                                             
-            if (TYPEOF(b) == SYMSXP)            
-                MARK_NOT_MUTABLE(SYMVALUE(b));  
+            if (RObject::typeof_(b) == SYMSXP)            
+                MARK_NOT_MUTABLE(RObject::symvalue(b));  
             else                                      
                 MARK_NOT_MUTABLE(CAR(b));       
         }                                             
-        ((b))->sxpinfo.gp |= BINDING_LOCK_MASK; 
+        ((b))->sxpinfo.m_gp |= BINDING_LOCK_MASK; 
     }
-#define UNLOCK_BINDING(b) (R::RObject::UNLOCK_BINDING(b))
+#define UNLOCK_BINDING(b) (R::RObject::unlock_binding(b))
 
-#define SET_BASE_SYM_CACHED(b) (R::RObject::SET_BASE_SYM_CACHED(b))
-#define UNSET_BASE_SYM_CACHED(b) (R::RObject::UNSET_BASE_SYM_CACHED(b))
-#define BASE_SYM_CACHED(b) (R::RObject::BASE_SYM_CACHED(b))
+#define SET_BASE_SYM_CACHED(b) (R::RObject::set_base_sym_cached(b))
+#define UNSET_BASE_SYM_CACHED(b) (R::RObject::unset_base_sym_cached(b))
+#define BASE_SYM_CACHED(b) (R::RObject::base_sym_cached(b))
 
-#define SET_SPECIAL_SYMBOL(b) (R::RObject::SET_SPECIAL_SYMBOL(b))
-#define UNSET_SPECIAL_SYMBOL(b) (R::RObject::UNSET_SPECIAL_SYMBOL(b))
-#define IS_SPECIAL_SYMBOL(b) (R::RObject::IS_SPECIAL_SYMBOL(b))
-#define SET_NO_SPECIAL_SYMBOLS(b) (R::RObject::SET_NO_SPECIAL_SYMBOLS(b))
-#define UNSET_NO_SPECIAL_SYMBOLS(b) (R::RObject::UNSET_NO_SPECIAL_SYMBOLS(b))
-#define NO_SPECIAL_SYMBOLS(b) (R::RObject::NO_SPECIAL_SYMBOLS(b))
+#define SET_SPECIAL_SYMBOL(b) (R::RObject::set_special_symbol(b))
+#define UNSET_SPECIAL_SYMBOL(b) (R::RObject::unset_special_symbol(b))
+#define IS_SPECIAL_SYMBOL(b) (R::RObject::is_special_symbol(b))
+#define SET_NO_SPECIAL_SYMBOLS(b) (R::RObject::set_no_special_symbols(b))
+#define UNSET_NO_SPECIAL_SYMBOLS(b) (R::RObject::unset_no_special_symbols(b))
+#define NO_SPECIAL_SYMBOLS(b) (R::RObject::no_special_symbols(b))
 
 #else /* of USE_RINTERNALS */
 
