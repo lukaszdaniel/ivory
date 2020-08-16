@@ -290,9 +290,9 @@ namespace R
         static RObject *cloenv(SEXP x);
         static void set_cloenv(SEXP x, SEXP v);
         static bool rdebug(SEXP x);
-        static void set_rdebug(SEXP x, int v);
+        static void set_rdebug(SEXP x, bool v);
         static bool rstep(SEXP x);
-        static void set_rstep(SEXP x, int v);
+        static void set_rstep(SEXP x, bool v);
         /* Symbol Access Methods */
         static constexpr int DDVAL_MASK = 1;
         static RObject *printname(SEXP x);
@@ -301,7 +301,7 @@ namespace R
         static unsigned int ddval(SEXP x); /* for ..1, ..2 etc */
         static void set_ddval_bit(SEXP x);
         static void unset_ddval_bit(SEXP x);
-        static void set_ddval(SEXP x, int v); /* for ..1, ..2 etc */
+        static void set_ddval(SEXP x, bool v); /* for ..1, ..2 etc */
         static void set_printname(SEXP x, SEXP v);
         static void set_symvalue(SEXP x, SEXP v);
         static void set_internal(SEXP x, SEXP v);
@@ -312,7 +312,7 @@ namespace R
         static RObject *enclos(SEXP x);
         static RObject *hashtab(SEXP x);
         static unsigned int envflags(SEXP x); /* for environments */
-        static void set_envflags(SEXP x, int v);
+        static void set_envflags(SEXP x, unsigned int v);
         static void set_frame(SEXP x, SEXP v);
         static void set_enclos(SEXP x, SEXP v);
         static void set_hashtab(SEXP x, SEXP v);
@@ -326,7 +326,7 @@ namespace R
         static void set_prvalue(SEXP x, SEXP v);
         static unsigned int prseen(SEXP x);
         static void set_prenv(SEXP x, SEXP v);
-        static void set_prseen(SEXP x, int v);
+        static void set_prseen(SEXP x, unsigned int v);
         /* List Access Methods */
         static RObject *tag(SEXP e);
         static void set_tag(SEXP x, SEXP v);
@@ -805,52 +805,9 @@ union R_bndval_t
     } while (0)
 #endif
 
-/* Closure Access Macros */
-#define FORMALS(x) (R::RObject::formals(x))
-#define BODY(x) (R::RObject::body(x))
-#define CLOENV(x) (R::RObject::cloenv(x))
-#define RDEBUG(x) (R::RObject::rdebug(x))
-#define SET_RDEBUG(x, v) (R::RObject::set_rdebug(x, v))
-#define RSTEP(x) (R::RObject::rstep(x))
-#define SET_RSTEP(x, v) (R::RObject::set_rstep(x, v))
-
-/* Symbol Access Macros */
-#define PRINTNAME(x) (R::RObject::printname(x))
-#define SYMVALUE(x) (R::RObject::symvalue(x))
-#define INTERNAL(x) (R::RObject::internal(x))
-#define DDVAL(x) (R::RObject::ddval(x))
-#define SET_DDVAL_BIT(x) (R::RObject::set_ddval_bit(x))
-#define UNSET_DDVAL_BIT(x) (R::RObject::unset_ddval_bit(x))
-#define SET_DDVAL(x, v) (R::RObject::set_ddval(x, v))
-
-/* Environment Access Macros */
-#define FRAME(x) (R::RObject::frame(x))
-#define ENCLOS(x) (R::RObject::enclos(x))
-#define HASHTAB(x) (R::RObject::hashtab(x))
-#define ENVFLAGS(x) (R::RObject::envflags(x)) /* for environments */
-#define SET_ENVFLAGS(x, v) (R::RObject::set_envflags(x, v))
-
 /* There is much more in Rinternals.h, including function versions
  * of the Promise and Hashing groups.
  */
-
-/* Primitive Access Macros */
-#define PRIMOFFSET(x) (R::RObject::primoffset(x))
-#define SET_PRIMOFFSET(x, v) (R::RObject::set_primoffset(x, v))
-#define PRIMFUN(x) (R_FunTab[PRIMOFFSET(x)].cfun)
-#define PRIMNAME(x) (R_FunTab[PRIMOFFSET(x)].name)
-#define PRIMVAL(x) (R_FunTab[PRIMOFFSET(x)].code)
-#define PRIMARITY(x) (R_FunTab[PRIMOFFSET(x)].arity)
-#define PPINFO(x) (R_FunTab[PRIMOFFSET(x)].gram)
-#define PRIMPRINT(x) (((R_FunTab[PRIMOFFSET(x)].eval) / 100) % 10)
-#define PRIMINTERNAL(x) (((R_FunTab[PRIMOFFSET(x)].eval) % 100) / 10)
-
-/* Promise Access Macros */
-#define PRCODE(x) (R::RObject::prcode(x))
-#define PRENV(x) (R::RObject::prenv(x))
-#define PRVALUE(x) (R::RObject::prvalue(x))
-#define PRSEEN(x) (R::RObject::prseen(x))
-#define SET_PRSEEN(x, v) (R::RObject::set_prseen(x, v))
 
 /* Hashing Macros */
 #define HASHASH(x) (R::RObject::hashash(x))

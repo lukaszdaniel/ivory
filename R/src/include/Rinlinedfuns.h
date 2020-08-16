@@ -37,6 +37,11 @@
 #include <Localization.h>
 #include <R_ext/Error.h>
 #include <RObject.hpp>
+#include <BuiltInFunction.hpp>
+#include <Symbol.hpp>
+#include <Environment.hpp>
+#include <Promise.hpp>
+#include <Closure.hpp>
 
 #include <string.h> /* for strlen, strcmp */
 
@@ -171,14 +176,14 @@ extern inline const double *REAL_OR_NULL(SEXP x) {
     return (double *) (ALTREP(x) ? ALTVEC_DATAPTR_OR_NULL(x) : STDVEC_DATAPTR(x));
 }
 
-extern inline const double *COMPLEX_OR_NULL(SEXP x) {
+extern inline const Rcomplex *COMPLEX_OR_NULL(SEXP x) {
     CHECK_VECTOR_CPLX(x);
-    return (double *) (ALTREP(x) ? ALTVEC_DATAPTR_OR_NULL(x) : STDVEC_DATAPTR(x));
+    return (Rcomplex *) (ALTREP(x) ? ALTVEC_DATAPTR_OR_NULL(x) : STDVEC_DATAPTR(x));
 }
 
-extern inline const double *RAW_OR_NULL(SEXP x) {
+extern inline const Rbyte *RAW_OR_NULL(SEXP x) {
     CHECK_VECTOR_RAW(x);
-    return (double *) (ALTREP(x) ? ALTVEC_DATAPTR_OR_NULL(x) : STDVEC_DATAPTR(x));
+    return (Rbyte *) (ALTREP(x) ? ALTVEC_DATAPTR_OR_NULL(x) : STDVEC_DATAPTR(x));
 }
 
 extern inline R_xlen_t XLENGTH_EX(SEXP x)
@@ -346,7 +351,7 @@ extern inline int *LOGICAL0(SEXP x) {
     CHECK_STDVEC_LGL(x);
     return (int *) STDVEC_DATAPTR(x);
 }
-extern inline Rboolean SCALAR_LVAL(SEXP x) {
+extern inline int SCALAR_LVAL(SEXP x) {
     CHECK_SCALAR_LGL(x);
     return (Rboolean) LOGICAL0(x)[0];
 }

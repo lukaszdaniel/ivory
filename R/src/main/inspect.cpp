@@ -22,7 +22,7 @@
    but rather used as a debugging/inspection facility. It is not
    necessarily complete - feel free to add missing pieces. */
 
-#define USE_RINTERNALS
+// #define USE_RINTERNALS
 
 #ifdef HAVE_CONFIG_H
 #include <config.h>

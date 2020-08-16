@@ -11,7 +11,8 @@ CPPFLAGS = -I. -I../include -DHAVE_CONFIG_H -DR_DLL_BUILD $(WERROR_FLAGS) $(arch
 CSOURCES = 
 CXXSOURCES = \
 	CommandLineArgs.cpp \
-	Rdynload.cpp Renviron.cpp RNG.cpp RObject.cpp \
+	Rdynload.cpp Renviron.cpp RNG.cpp \
+	RObject.cpp BuiltInFunction.cpp Closure.cpp Environment.cpp Symbol.cpp Promise.cpp \
 	agrep.cpp altclasses.cpp altrep.cpp apply.cpp arithmetic.cpp array.cpp attrib.cpp \
 	bind.cpp builtin.cpp \
 	character.cpp coerce.cpp colors.cpp complex.cpp connections.cpp context.cpp cum.cpp \

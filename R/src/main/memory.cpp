@@ -27,7 +27,7 @@
  *	and reset the stack pointer.
  */
 
-#define USE_RINTERNALS
+// #define USE_RINTERNALS
 #define COMPILING_MEMORY_C
 
 #ifdef HAVE_CONFIG_H
