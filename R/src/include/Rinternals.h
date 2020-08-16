@@ -1501,6 +1501,8 @@ void SET_REAL_ELT(SEXP x, R_xlen_t i, double v);
 #ifdef USE_RINTERNALS
 
 /* Test macros with function versions above */
+// These macros are required by stringi package.
+
 #undef isNull
 #define isNull(s) (TYPEOF(s) == NILSXP)
 #undef isSymbol

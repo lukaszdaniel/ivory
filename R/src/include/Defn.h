@@ -109,17 +109,9 @@ extern0 SEXP	R_StringHash;       /* Global hash of CHARSXPs */
 /**** HASHASH uses the first bit -- see HASHASH_MASK defined below */
 
 #ifdef USE_RINTERNALS
-# define IS_BYTES(x) (R::RObject::is_bytes(x))
-# define SET_BYTES(x) (R::RObject::set_bytes(x))
-# define IS_LATIN1(x) (R::RObject::is_latin1(x))
-# define SET_LATIN1(x) (R::RObject::set_latin1(x))
-# define IS_ASCII(x) (R::RObject::is_ascii(x))
-# define SET_ASCII(x) (R::RObject::set_ascii(x))
-# define IS_UTF8(x) (R::RObject::is_utf8(x))
-# define SET_UTF8(x) (R::RObject::set_utf8(x))
-# define ENC_KNOWN(x) (R::RObject::enc_known(x))
-# define SET_CACHED(x) (R::RObject::set_cached(x))
-# define IS_CACHED(x) (R::RObject::is_cached(x))
+
+// Content moved to RObject.hpp
+
 #else
 /* Needed only for write-barrier testing */
 int IS_BYTES(SEXP x);

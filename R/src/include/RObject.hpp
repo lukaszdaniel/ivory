@@ -493,6 +493,18 @@ class RList : public RObject {
 #define SETALTREP(x, v) (R::RObject::set_altrep(x, v))
 #define SETSCALAR(x, v) (R::RObject::setscalar(x, v))
 
+#define IS_BYTES(x) (R::RObject::is_bytes(x))
+#define SET_BYTES(x) (R::RObject::set_bytes(x))
+#define IS_LATIN1(x) (R::RObject::is_latin1(x))
+#define SET_LATIN1(x) (R::RObject::set_latin1(x))
+#define IS_ASCII(x) (R::RObject::is_ascii(x))
+#define SET_ASCII(x) (R::RObject::set_ascii(x))
+#define IS_UTF8(x) (R::RObject::is_utf8(x))
+#define SET_UTF8(x) (R::RObject::set_utf8(x))
+#define ENC_KNOWN(x) (R::RObject::enc_known(x))
+#define SET_CACHED(x) (R::RObject::set_cached(x))
+#define IS_CACHED(x) (R::RObject::is_cached(x))
+
 #if defined(COMPUTE_REFCNT_VALUES)
 #define REFCNT(x) (R::RObject::refcnt(x))
 #define TRACKREFS(x) (R::RObject::trackrefs(x))
