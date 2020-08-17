@@ -268,10 +268,8 @@ namespace R
         static void set_refcnt(SEXP x, unsigned int v);
         static bool trackrefs(SEXP x);
         static void set_trackrefs(SEXP x, bool v);
-        ;
         static constexpr int ASSIGNMENT_PENDING_MASK = (1 << 11);
         static unsigned int assignment_pending(SEXP x);
-        ;
         static void set_assignment_pending(SEXP x, bool v);
         static bool rtrace(SEXP x);
         static void set_rtrace(SEXP x, bool v);
@@ -454,8 +452,9 @@ class RList : public RObject {
    the RObject definition. The standard RObject takes up 7 words
    and the reduced version takes 6 words on most 64-bit systems. On most
    32-bit systems, RObject takes 8 words and the reduced version 7 words. */
-    struct VECTOR_SEXPREC
+    class VECTOR_SEXPREC
     {
+    private:
         SEXPTYPE m_type : FULL_TYPE_BITS;
         bool m_scalar;
         bool m_has_class;
@@ -473,9 +472,26 @@ class RList : public RObject {
         RObject *gengc_next_node;
         RObject *gengc_prev_node;
         vecsxp_struct vecsxp;
+
+    public:
+        static inline R_xlen_t stdvec_length(RObject *x) { return x ? reinterpret_cast<VECTOR_SEXPREC *>(x)->vecsxp.length : 0; }
+        static inline R_xlen_t stdvec_truelength(RObject *x) { return x ? reinterpret_cast<VECTOR_SEXPREC *>(x)->vecsxp.truelength : 0; }
+        static inline void set_stdvec_truelength(RObject *x, R_xlen_t v)
+        {
+            if (!x)
+                return;
+            reinterpret_cast<VECTOR_SEXPREC *>(x)->vecsxp.truelength = v;
+        }
+        static inline void set_stdvec_length(RObject *x, R_xlen_t v)
+        {
+            if (!x)
+                return;
+            reinterpret_cast<VECTOR_SEXPREC *>(x)->vecsxp.length = v;
+            RObject::setscalar(x, v == 1);
+        }
     };
 
-    using VECSEXP = struct R::VECTOR_SEXPREC *;
+    using VECSEXP = class R::VECTOR_SEXPREC *;
 
     union SEXPREC_ALIGN
     {
@@ -685,9 +701,9 @@ class RList : public RObject {
 #else
 #define IS_LONG_VEC(x) false
 #endif
-#define STDVEC_LENGTH(x) (((R::VECSEXP)(x))->vecsxp.length)
-#define STDVEC_TRUELENGTH(x) (((R::VECSEXP)(x))->vecsxp.truelength)
-#define SET_STDVEC_TRUELENGTH(x, v) (STDVEC_TRUELENGTH(x) = (v))
+#define STDVEC_LENGTH(x) (R::VECTOR_SEXPREC::stdvec_length(x))
+#define STDVEC_TRUELENGTH(x) (R::VECTOR_SEXPREC::stdvec_truelength(x))
+#define SET_STDVEC_TRUELENGTH(x, v) (R::VECTOR_SEXPREC::set_stdvec_truelength(x, v))
 #define SET_TRUELENGTH(x, v)                      \
     do                                            \
     {                                             \
@@ -706,14 +722,7 @@ class RList : public RObject {
 #define XLENGTH(x) XLENGTH_EX(x)
 
 /* THIS ABSOLUTELY MUST NOT BE USED IN PACKAGES !!! */
-#define SET_STDVEC_LENGTH(x, v)               \
-    do                                        \
-    {                                         \
-        SEXP __x__ = (x);                     \
-        R_xlen_t __v__ = (v);                 \
-        STDVEC_LENGTH(__x__) = __v__;         \
-        SETSCALAR(__x__, __v__ == 1 ? 1 : 0); \
-    } while (0)
+#define SET_STDVEC_LENGTH(x, v) (R::VECTOR_SEXPREC::set_stdvec_length(x, v))
 
 /* Under the generational allocator the data for vector nodes comes
    immediately after the node structure, so the data address is a
