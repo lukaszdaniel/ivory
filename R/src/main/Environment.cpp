@@ -33,13 +33,13 @@ namespace R
 
     RObject *RObject::hashtab(SEXP x) { return x ? x->u.envsxp.hashtab : nullptr; }
 
-    unsigned int RObject::envflags(SEXP x) { return x ? x->sxpinfo.m_gp : 0; } /* for environments */
+    unsigned int RObject::envflags(SEXP x) { return x ? x->m_gpbits : 0; } /* for environments */
 
     void RObject::set_envflags(SEXP x, unsigned int v)
     {
         if (!x)
             return;
-        x->sxpinfo.m_gp = v;
+        x->m_gpbits = v;
     }
 
     void RObject::set_frame(SEXP x, SEXP v)

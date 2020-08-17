@@ -631,7 +631,8 @@ union PAGE_HEADER
    the execution time, though the difference is probably marginal on
    both counts.*/
 /*#define EXPEL_OLD_TO_NEW*/
-static struct {
+static struct
+{
     SEXP Old[NUM_OLD_GENERATIONS], New, Free;
     RObject OldPeg[NUM_OLD_GENERATIONS], NewPeg;
 #ifndef EXPEL_OLD_TO_NEW
@@ -643,17 +644,18 @@ static struct {
 } R_GenHeap[NUM_NODE_CLASSES];
 
 static R_size_t R_NodesInUse = 0;
-namespace {
+namespace
+{
     auto NEXT_NODE(SEXP s) { return RObject::next_node(s); }
     auto PREV_NODE(SEXP s) { return RObject::prev_node(s); }
     void SET_NEXT_NODE(SEXP s, SEXP t) { RObject::set_next_node(s, t); }
     void SET_PREV_NODE(SEXP s, SEXP t) { RObject::set_prev_node(s, t); }
-}
 
-/* Node List Manipulation */
-namespace {
-/* unsnap node s from its list */
-    void UNSNAP_NODE(SEXP s) {
+    /* Node List Manipulation */
+
+    /* unsnap node s from its list */
+    void UNSNAP_NODE(SEXP s)
+    {
 
         SEXP next = NEXT_NODE(s);
         SEXP prev = PREV_NODE(s);
@@ -661,32 +663,30 @@ namespace {
         SET_PREV_NODE(next, prev);
     }
 
-/* snap in node s before node t */
-    void SNAP_NODE(SEXP s, SEXP t) {
-        SEXP sn__n__ = (s);
-        SEXP next = (t);
-        SEXP prev = PREV_NODE(next);
-        SET_NEXT_NODE(sn__n__, next);
-        SET_PREV_NODE(next, sn__n__);
-        SET_NEXT_NODE(prev, sn__n__);
-        SET_PREV_NODE(sn__n__, prev);
+    /* snap in node s before node t */
+    void SNAP_NODE(SEXP s, SEXP t)
+    {
+        SEXP prev = PREV_NODE(t);
+        SET_NEXT_NODE(s, t);
+        SET_PREV_NODE(t, s);
+        SET_NEXT_NODE(prev, s);
+        SET_PREV_NODE(s, prev);
     }
 
-/* move all nodes on from_peg to to_peg */
-    void BULK_MOVE(SEXP from_peg, SEXP to_peg) {
-        SEXP __from__ = (from_peg);
-        SEXP __to__ = (to_peg);
-        SEXP first_old = NEXT_NODE(__from__);
-        SEXP last_old = PREV_NODE(__from__);
-        SEXP first_new = NEXT_NODE(__to__);
-        SET_PREV_NODE(first_old, __to__);
-        SET_NEXT_NODE(__to__, first_old);
+    /* move all nodes on from_peg to to_peg */
+    void BULK_MOVE(SEXP from_peg, SEXP to_peg)
+    {
+        SEXP first_old = NEXT_NODE(from_peg);
+        SEXP last_old = PREV_NODE(from_peg);
+        SEXP first_new = NEXT_NODE(to_peg);
+        SET_PREV_NODE(first_old, to_peg);
+        SET_NEXT_NODE(to_peg, first_old);
         SET_PREV_NODE(first_new, last_old);
         SET_NEXT_NODE(last_old, first_new);
-        SET_NEXT_NODE(__from__, __from__);
-        SET_PREV_NODE(__from__, __from__);
+        SET_NEXT_NODE(from_peg, from_peg);
+        SET_PREV_NODE(from_peg, from_peg);
     }
-}
+} // namespace
 /* Processing Node Children */
 
 /* This macro calls dc__action__ for each child of __n__, passing
@@ -1355,14 +1355,14 @@ static SEXP R_weak_refs = nullptr;
 #define FINALIZE_ON_EXIT(s) (RObject::finalize_on_exit(s))
 
 constexpr int WEAKREF_SIZE = 4;
-inline SEXP WEAKREF_KEY(SEXP w)  {return VECTOR_ELT(w, 0);}
-#define SET_WEAKREF_KEY(w, k) SET_VECTOR_ELT(w, 0, k)
-inline SEXP WEAKREF_VALUE(SEXP w)  {return VECTOR_ELT(w, 1);}
-#define SET_WEAKREF_VALUE(w, v) SET_VECTOR_ELT(w, 1, v)
-inline SEXP WEAKREF_FINALIZER(SEXP w)  {return VECTOR_ELT(w, 2);}
-#define SET_WEAKREF_FINALIZER(w, f) SET_VECTOR_ELT(w, 2, f)
-inline SEXP WEAKREF_NEXT(SEXP w)  {return VECTOR_ELT(w, 3);}
-#define SET_WEAKREF_NEXT(w, n) SET_VECTOR_ELT(w, 3, n)
+inline SEXP WEAKREF_KEY(SEXP w) { return VECTOR_ELT(w, 0); }
+inline void SET_WEAKREF_KEY(SEXP w, SEXP k) { SET_VECTOR_ELT(w, 0, k); }
+inline SEXP WEAKREF_VALUE(SEXP w) { return VECTOR_ELT(w, 1); }
+inline void SET_WEAKREF_VALUE(SEXP w, SEXP v) { SET_VECTOR_ELT(w, 1, v); }
+inline SEXP WEAKREF_FINALIZER(SEXP w) { return VECTOR_ELT(w, 2); }
+inline void SET_WEAKREF_FINALIZER(SEXP w, SEXP f) { SET_VECTOR_ELT(w, 2, f); }
+inline SEXP WEAKREF_NEXT(SEXP w) { return VECTOR_ELT(w, 3); }
+inline void SET_WEAKREF_NEXT(SEXP w, SEXP n) { SET_VECTOR_ELT(w, 3, n); }
 
 static SEXP MakeCFinalizer(R_CFinalizer_t cfun);
 
@@ -1485,28 +1485,30 @@ void R_RunWeakRefFinalizer(SEXP w)
 {
     SEXP key, fun, e;
     if (TYPEOF(w) != WEAKREFSXP)
-	error(_("not a weak reference"));
+        error(_("not a weak reference"));
     key = WEAKREF_KEY(w);
     fun = WEAKREF_FINALIZER(w);
     SET_WEAKREF_KEY(w, R_NilValue);
     SET_WEAKREF_VALUE(w, R_NilValue);
     SET_WEAKREF_FINALIZER(w, R_NilValue);
-    if (! IS_READY_TO_FINALIZE(w))
-	SET_READY_TO_FINALIZE(w); /* insures removal from list on next gc */
+    if (!IS_READY_TO_FINALIZE(w))
+        SET_READY_TO_FINALIZE(w); /* insures removal from list on next gc */
     PROTECT(key);
     PROTECT(fun);
     Rboolean oldintrsusp = R_interrupts_suspended;
     R_interrupts_suspended = TRUE;
-    if (isCFinalizer(fun)) {
-	/* Must be a C finalizer. */
-	R_CFinalizer_t cfun = GetCFinalizer(fun);
-	cfun(key);
+    if (isCFinalizer(fun))
+    {
+        /* Must be a C finalizer. */
+        R_CFinalizer_t cfun = GetCFinalizer(fun);
+        cfun(key);
     }
-    else if (fun != R_NilValue) {
-	/* An R finalizer. */
-	PROTECT(e = LCONS(fun, LCONS(key, R_NilValue)));
-	eval(e, R_GlobalEnv);
-	UNPROTECT(1);
+    else if (fun != R_NilValue)
+    {
+        /* An R finalizer. */
+        PROTECT(e = LCONS(fun, LCONS(key, R_NilValue)));
+        eval(e, R_GlobalEnv);
+        UNPROTECT(1);
     }
     R_interrupts_suspended = oldintrsusp;
     UNPROTECT(2);
@@ -1602,7 +1604,7 @@ void R_RunExitFinalizers(void)
 void R_RunPendingFinalizers(void)
 {
     if (R_finalizers_pending)
-	RunFinalizers();
+        RunFinalizers();
 }
 
 void R_RegisterFinalizerEx(SEXP s, SEXP fun, Rboolean onexit)
@@ -2080,15 +2082,15 @@ HIDDEN SEXP do_gcinfo(SEXP call, SEXP op, SEXP args, SEXP rho)
     checkArity(op, args);
     i = asLogical(CAR(args));
     if (i != NA_LOGICAL)
-	gc_reporting = i;
+        gc_reporting = i;
     return old;
 }
 
 /* reports memory use to profiler in eval.cpp */
 
 HIDDEN void get_current_mem(size_t &smallvsize,
-				      size_t &largevsize,
-				      size_t &nodes)
+                            size_t &largevsize,
+                            size_t &nodes)
 {
     smallvsize = R_SmallVallocSize;
     largevsize = R_LargeVallocSize;
@@ -2438,29 +2440,35 @@ static SEXP allocSExpNonCons(SEXPTYPE t)
 SEXP Rf_cons(SEXP car, SEXP cdr)
 {
     SEXP s;
-    if (FORCE_GC || NO_FREE_NODES()) {
-	PROTECT(car);
-	PROTECT(cdr);
-	R_gc_internal(0);
-	UNPROTECT(2);
-	if (NO_FREE_NODES())
-	    mem_err_cons();
+    if (FORCE_GC || NO_FREE_NODES())
+    {
+        PROTECT(car);
+        PROTECT(cdr);
+        R_gc_internal(0);
+        UNPROTECT(2);
+        if (NO_FREE_NODES())
+            mem_err_cons();
     }
 
-    if (NEED_NEW_PAGE()) {
-	PROTECT(car);
-	PROTECT(cdr);
-	GET_FREE_NODE(s);
-	UNPROTECT(2);
+    if (NEED_NEW_PAGE())
+    {
+        PROTECT(car);
+        PROTECT(cdr);
+        GET_FREE_NODE(s);
+        UNPROTECT(2);
     }
     else
-	QUICK_GET_FREE_NODE(s);
+        QUICK_GET_FREE_NODE(s);
 
     RObject::copy_sxpinfo(s, UnmarkedNodeTemplate);
     INIT_REFCNT(s);
     SET_TYPEOF(s, LISTSXP);
-    RObject::set_car0(s, CHK(car)); if (car) INCREMENT_REFCNT(car);
-    RObject::set_cdr(s, CHK(cdr)); if (cdr) INCREMENT_REFCNT(cdr);
+    RObject::set_car0(s, CHK(car));
+    if (car)
+        INCREMENT_REFCNT(car);
+    RObject::set_cdr(s, CHK(cdr));
+    if (cdr)
+        INCREMENT_REFCNT(cdr);
     RObject::set_tag(s, R_NilValue);
     RObject::set_attrib(s, R_NilValue);
     return s;
@@ -2469,23 +2477,25 @@ SEXP Rf_cons(SEXP car, SEXP cdr)
 HIDDEN SEXP CONS_NR(SEXP car, SEXP cdr)
 {
     SEXP s;
-    if (FORCE_GC || NO_FREE_NODES()) {
-	PROTECT(car);
-	PROTECT(cdr);
-	R_gc_internal(0);
-	UNPROTECT(2);
-	if (NO_FREE_NODES())
-	    mem_err_cons();
+    if (FORCE_GC || NO_FREE_NODES())
+    {
+        PROTECT(car);
+        PROTECT(cdr);
+        R_gc_internal(0);
+        UNPROTECT(2);
+        if (NO_FREE_NODES())
+            mem_err_cons();
     }
 
-    if (NEED_NEW_PAGE()) {
-	PROTECT(car);
-	PROTECT(cdr);
-	GET_FREE_NODE(s);
-	UNPROTECT(2);
+    if (NEED_NEW_PAGE())
+    {
+        PROTECT(car);
+        PROTECT(cdr);
+        GET_FREE_NODE(s);
+        UNPROTECT(2);
     }
     else
-	QUICK_GET_FREE_NODE(s);
+        QUICK_GET_FREE_NODE(s);
 
     RObject::copy_sxpinfo(s, UnmarkedNodeTemplate);
     INIT_REFCNT(s);
@@ -2520,40 +2530,46 @@ SEXP Rf_NewEnvironment(SEXP namelist, SEXP valuelist, SEXP rho)
 {
     SEXP v, n, newrho;
 
-    if (FORCE_GC || NO_FREE_NODES()) {
-	PROTECT(namelist);
-	PROTECT(valuelist);
-	PROTECT(rho);
-	R_gc_internal(0);
-	UNPROTECT(3);
-	if (NO_FREE_NODES())
-	    mem_err_cons();
+    if (FORCE_GC || NO_FREE_NODES())
+    {
+        PROTECT(namelist);
+        PROTECT(valuelist);
+        PROTECT(rho);
+        R_gc_internal(0);
+        UNPROTECT(3);
+        if (NO_FREE_NODES())
+            mem_err_cons();
     }
 
-    if (NEED_NEW_PAGE()) {
-	PROTECT(namelist);
-	PROTECT(valuelist);
-	PROTECT(rho);
-	GET_FREE_NODE(newrho);
-	UNPROTECT(3);
+    if (NEED_NEW_PAGE())
+    {
+        PROTECT(namelist);
+        PROTECT(valuelist);
+        PROTECT(rho);
+        GET_FREE_NODE(newrho);
+        UNPROTECT(3);
     }
     else
-	QUICK_GET_FREE_NODE(newrho);
+        QUICK_GET_FREE_NODE(newrho);
 
     RObject::copy_sxpinfo(newrho, UnmarkedNodeTemplate);
     INIT_REFCNT(newrho);
     SET_TYPEOF(newrho, ENVSXP);
-    RObject::set_frame(newrho, valuelist); INCREMENT_REFCNT(valuelist);
-    RObject::set_enclos(newrho, CHK(rho)); if (rho != NULL) INCREMENT_REFCNT(rho);
+    RObject::set_frame(newrho, valuelist);
+    INCREMENT_REFCNT(valuelist);
+    RObject::set_enclos(newrho, CHK(rho));
+    if (rho != NULL)
+        INCREMENT_REFCNT(rho);
     RObject::set_hashtab(newrho, R_NilValue);
     RObject::set_attrib(newrho, R_NilValue);
 
     v = CHK(valuelist);
     n = CHK(namelist);
-    while (v != R_NilValue && n != R_NilValue) {
-	SET_TAG(v, TAG(n));
-	v = CDR(v);
-	n = CDR(n);
+    while (v != R_NilValue && n != R_NilValue)
+    {
+        SET_TAG(v, TAG(n));
+        v = CDR(v);
+        n = CDR(n);
     }
     return (newrho);
 }
@@ -2563,23 +2579,25 @@ SEXP Rf_NewEnvironment(SEXP namelist, SEXP valuelist, SEXP rho)
 HIDDEN SEXP Rf_mkPROMISE(SEXP expr, SEXP rho)
 {
     SEXP s;
-    if (FORCE_GC || NO_FREE_NODES()) {
-	PROTECT(expr);
-	PROTECT(rho);
-	R_gc_internal(0);
-	UNPROTECT(2);
-	if (NO_FREE_NODES())
-	    mem_err_cons();
+    if (FORCE_GC || NO_FREE_NODES())
+    {
+        PROTECT(expr);
+        PROTECT(rho);
+        R_gc_internal(0);
+        UNPROTECT(2);
+        if (NO_FREE_NODES())
+            mem_err_cons();
     }
 
-    if (NEED_NEW_PAGE()) {
-	PROTECT(expr);
-	PROTECT(rho);
-	GET_FREE_NODE(s);
-	UNPROTECT(2);
+    if (NEED_NEW_PAGE())
+    {
+        PROTECT(expr);
+        PROTECT(rho);
+        GET_FREE_NODE(s);
+        UNPROTECT(2);
     }
     else
-	QUICK_GET_FREE_NODE(s);
+        QUICK_GET_FREE_NODE(s);
 
     /* precaution to ensure code does not get modified via
        substitute() and the like */
@@ -2588,8 +2606,10 @@ HIDDEN SEXP Rf_mkPROMISE(SEXP expr, SEXP rho)
     RObject::copy_sxpinfo(s, UnmarkedNodeTemplate);
     INIT_REFCNT(s);
     SET_TYPEOF(s, PROMSXP);
-    RObject::set_prcode(s, CHK(expr)); INCREMENT_REFCNT(expr);
-    RObject::set_prenv(s, CHK(rho)); INCREMENT_REFCNT(rho);
+    RObject::set_prcode(s, CHK(expr));
+    INCREMENT_REFCNT(expr);
+    RObject::set_prenv(s, CHK(rho));
+    INCREMENT_REFCNT(rho);
     RObject::set_prvalue(s, R_UnboundValue);
     SET_PRSEEN(s, 0);
     RObject::set_attrib(s, R_NilValue);
@@ -3070,7 +3090,7 @@ HIDDEN SEXP do_gctime(SEXP call, SEXP op, SEXP args, SEXP env)
 static void gc_start_timing(void)
 {
     if (gctime_enabled)
-	R_getProcTime(gcstarttimes);
+        R_getProcTime(gcstarttimes);
 }
 
 static void gc_end_timing(void)
@@ -4247,7 +4267,7 @@ void (SET_TAG)(SEXP x, SEXP v)
 SEXP (SETCAR)(SEXP x, SEXP y)
 {
     if (CHKCONS(x) == nullptr || x == R_NilValue)
-	error(_("bad value"));
+	error(_("incorrect value"));
     CLEAR_BNDCELL_TAG(x);
     if (y == CAR(x))
 	return y;
@@ -4260,7 +4280,7 @@ SEXP (SETCAR)(SEXP x, SEXP y)
 SEXP (SETCDR)(SEXP x, SEXP y)
 {
     if (CHKCONS(x) == nullptr || x == R_NilValue)
-	error(_("bad value"));
+        error(_("incorrect value"));
     FIX_REFCNT(x, CDR(x), y);
 #ifdef TESTING_WRITE_BARRIER
     /* this should not add a non-tracking CDR to a tracking cell */
@@ -4276,8 +4296,8 @@ SEXP (SETCADR)(SEXP x, SEXP y)
 {
     SEXP cell;
     if (CHKCONS(x) == nullptr || x == R_NilValue ||
-	CHKCONS(CDR(x)) == nullptr || CDR(x) == R_NilValue)
-	error(_("bad value"));
+        CHKCONS(CDR(x)) == nullptr || CDR(x) == R_NilValue)
+        error(_("incorrect value"));
     cell = CDR(x);
     CLEAR_BNDCELL_TAG(cell);
     FIX_REFCNT(cell, CAR(cell), y);
@@ -4290,9 +4310,9 @@ SEXP (SETCADDR)(SEXP x, SEXP y)
 {
     SEXP cell;
     if (CHKCONS(x) == nullptr || x == R_NilValue ||
-	CHKCONS(CDR(x)) == nullptr || CDR(x) == R_NilValue ||
-	CHKCONS(CDDR(x)) == nullptr || CDDR(x) == R_NilValue)
-	error(_("bad value"));
+        CHKCONS(CDR(x)) == nullptr || CDR(x) == R_NilValue ||
+        CHKCONS(CDDR(x)) == nullptr || CDDR(x) == R_NilValue)
+        error(_("incorrect value"));
     cell = CDDR(x);
     CLEAR_BNDCELL_TAG(cell);
     FIX_REFCNT(cell, CAR(cell), y);
@@ -4305,10 +4325,10 @@ SEXP (SETCADDDR)(SEXP x, SEXP y)
 {
     SEXP cell;
     if (CHKCONS(x) == nullptr || x == R_NilValue ||
-	CHKCONS(CDR(x)) == nullptr || CDR(x) == R_NilValue ||
-	CHKCONS(CDDR(x)) == nullptr || CDDR(x) == R_NilValue ||
-	CHKCONS(CDDDR(x)) == nullptr || CDDDR(x) == R_NilValue)
-	error(_("bad value"));
+        CHKCONS(CDR(x)) == nullptr || CDR(x) == R_NilValue ||
+        CHKCONS(CDDR(x)) == nullptr || CDDR(x) == R_NilValue ||
+        CHKCONS(CDDDR(x)) == nullptr || CDDDR(x) == R_NilValue)
+        error(_("incorrect value"));
     cell = CDDDR(x);
     CLEAR_BNDCELL_TAG(cell);
     FIX_REFCNT(cell, CAR(cell), y);
@@ -4322,11 +4342,11 @@ SEXP (SETCAD4R)(SEXP x, SEXP y)
 {
     SEXP cell;
     if (CHKCONS(x) == nullptr || x == R_NilValue ||
-	CHKCONS(CDR(x)) == nullptr || CDR(x) == R_NilValue ||
-	CHKCONS(CDDR(x)) == nullptr || CDDR(x) == R_NilValue ||
-	CHKCONS(CDDDR(x)) == nullptr || CDDDR(x) == R_NilValue ||
-	CHKCONS(CD4R(x)) == nullptr || CD4R(x) == R_NilValue)
-	error(_("bad value"));
+        CHKCONS(CDR(x)) == nullptr || CDR(x) == R_NilValue ||
+        CHKCONS(CDDR(x)) == nullptr || CDDR(x) == R_NilValue ||
+        CHKCONS(CDDDR(x)) == nullptr || CDDDR(x) == R_NilValue ||
+        CHKCONS(CD4R(x)) == nullptr || CD4R(x) == R_NilValue)
+        error(_("incorrect value"));
     cell = CD4R(x);
     CLEAR_BNDCELL_TAG(cell);
     FIX_REFCNT(cell, CAR(cell), y);

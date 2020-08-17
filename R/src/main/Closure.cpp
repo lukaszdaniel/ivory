@@ -54,21 +54,21 @@ namespace R
         x->u.closxp.env = v;
     }
 
-    bool RObject::rdebug(SEXP x) { return x && x->sxpinfo.m_debug; }
+    bool RObject::rdebug(SEXP x) { return x && x->m_debug; }
 
     void RObject::set_rdebug(SEXP x, bool v)
     {
         if (!x)
             return;
-        x->sxpinfo.m_debug = v;
+        x->m_debug = v;
     }
 
-    bool RObject::rstep(SEXP x) { return x && x->sxpinfo.m_spare; }
+    bool RObject::rstep(SEXP x) { return x && x->m_spare; }
 
     void RObject::set_rstep(SEXP x, bool v)
     {
         if (!x)
             return;
-        x->sxpinfo.m_spare = v;
+        x->m_spare = v;
     }
 } // namespace R

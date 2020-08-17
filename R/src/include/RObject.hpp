@@ -44,22 +44,6 @@ constexpr int NAMED_BITS = 16;
 /* Flags */
 namespace R
 {
-    struct sxpinfo_struct
-    {
-        SEXPTYPE m_type : FULL_TYPE_BITS;
-        bool m_scalar;
-        bool m_obj;
-        bool m_alt;
-        unsigned int m_gp : 16;
-        bool m_mark;
-        bool m_debug;
-        bool m_trace;             /* functions and memory tracing */
-        bool m_spare;             /* used on closures and when REFCNT is defined */
-        bool m_gcgen;             /* old generation number */
-        unsigned int m_gccls : 3; /* node class */
-        unsigned int m_named : NAMED_BITS;
-        unsigned int m_extra : 29 - NAMED_BITS; /* used for immediate bindings */
-    };                                          /*		    Tot: 64 */
 
     struct vecsxp_struct
     {
@@ -122,7 +106,19 @@ namespace R
     class RObject
     {
     private:
-        sxpinfo_struct sxpinfo;
+        SEXPTYPE m_type : FULL_TYPE_BITS;
+        bool m_scalar;
+        bool m_has_class;
+        bool m_alt;
+        unsigned int m_gpbits : 16;
+        bool m_marked;
+        bool m_debug;
+        bool m_trace;             /* functions and memory tracing */
+        bool m_spare;             /* used on closures and when REFCNT is defined */
+        bool m_gcgen;             /* old generation number */
+        unsigned int m_gccls : 3; /* node class */
+        unsigned int m_named : NAMED_BITS;
+        unsigned int m_extra : 29 - NAMED_BITS; /* used for immediate bindings */
         RObject *m_attrib;
         RObject *gengc_next_node;
         RObject *gengc_prev_node;
@@ -137,13 +133,13 @@ namespace R
         } u;
         // virtual ~RObject() = default;
 #if 0
-    SEXPTYPE sexptype() const { return this->sxpinfo.m_type; }
-    void setsexptype(const SEXPTYPE& type) { this->sxpinfo.m_type = type; }
-    bool sexptypeEqual(const SEXPTYPE& type) const { return this->sxpinfo.m_type == type; }
+    SEXPTYPE sexptype() const { return this->m_type; }
+    void setsexptype(const SEXPTYPE& type) { this->m_type = type; }
+    bool sexptypeEqual(const SEXPTYPE& type) const { return this->m_type == type; }
     bool sexptypeNotEqual(const SEXPTYPE& type) const { return !this->sexptypeEqual(type); }
-    bool altrep() const { return this->sxpinfo.m_alt; }
-    void setaltrep() { this->sxpinfo.m_alt = true; }
-    void unsetaltrep() { this->sxpinfo.m_alt = false; }
+    bool altrep() const { return this->m_alt; }
+    void setaltrep() { this->m_alt = true; }
+    void unsetaltrep() { this->m_alt = false; }
     bool isPrimitive_() const { return this->sexptypeEqual(BUILTINSXP) || this->sexptypeEqual(SPECIALSXP); }
     bool isFunction_() const { return this->sexptypeEqual(CLOSXP) || this->isPrimitive_(); }
     bool isPairList_() const
@@ -170,7 +166,7 @@ namespace R
     bool isEnvironment_() const { return this->sexptype() == SEXPTYPE::ENVSXP; }
     bool isString_() const { return this->sexptype() == SEXPTYPE::STRSXP; }
     bool isRaw_() const { return this->sexptypeEqual(RAWSXP); }
-    bool isScalar(const SEXPTYPE &t) const { return this->sexptypeEqual(t) && this->sxpinfo.m_scalar; }
+    bool isScalar(const SEXPTYPE &t) const { return this->sexptypeEqual(t) && this->m_scalar; }
     bool isVector_() const
     {
         switch (this->sexptype())
@@ -460,7 +456,19 @@ class RList : public RObject {
    32-bit systems, RObject takes 8 words and the reduced version 7 words. */
     struct VECTOR_SEXPREC
     {
-        sxpinfo_struct sxpinfo;
+        SEXPTYPE m_type : FULL_TYPE_BITS;
+        bool m_scalar;
+        bool m_has_class;
+        bool m_alt;
+        unsigned int m_gpbits : 16;
+        bool m_marked;
+        bool m_debug;
+        bool m_trace;             /* functions and memory tracing */
+        bool m_spare;             /* used on closures and when REFCNT is defined */
+        bool m_gcgen;             /* old generation number */
+        unsigned int m_gccls : 3; /* node class */
+        unsigned int m_named : NAMED_BITS;
+        unsigned int m_extra : 29 - NAMED_BITS; /* used for immediate bindings */
         RObject *attrib;
         RObject *gengc_next_node;
         RObject *gengc_prev_node;
@@ -852,6 +860,5 @@ inline size_t PTR2VEC(int n) { return (n > 0) ? (std::size_t(n) * sizeof(SEXP) -
 #define SET_NO_SPECIAL_SYMBOLS(b) (R::RObject::set_no_special_symbols(b))
 #define UNSET_NO_SPECIAL_SYMBOLS(b) (R::RObject::unset_no_special_symbols(b))
 #define NO_SPECIAL_SYMBOLS(b) (R::RObject::no_special_symbols(b))
-
 
 #endif /* ROBJECT_HPP */

@@ -47,7 +47,7 @@ namespace R
         x->u.promsxp.value = v;
     }
 
-    unsigned int RObject::prseen(SEXP x) { return x ? x->sxpinfo.m_gp : 0; }
+    unsigned int RObject::prseen(SEXP x) { return x ? x->m_gpbits : 0; }
 
     void RObject::set_prenv(SEXP x, SEXP v)
     {
@@ -60,6 +60,6 @@ namespace R
     {
         if (!x)
             return;
-        x->sxpinfo.m_gp = v;
+        x->m_gpbits = v;
     }
 } // namespace R

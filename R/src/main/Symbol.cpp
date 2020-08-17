@@ -33,20 +33,20 @@ namespace R
 
     RObject *RObject::internal(SEXP x) { return x ? x->u.symsxp.internal : nullptr; }
 
-    unsigned int RObject::ddval(SEXP x) { return x ? (x->sxpinfo.m_gp & DDVAL_MASK) : 0; } /* for ..1, ..2 etc */
+    unsigned int RObject::ddval(SEXP x) { return x ? (x->m_gpbits & DDVAL_MASK) : 0; } /* for ..1, ..2 etc */
 
     void RObject::set_ddval_bit(SEXP x)
     {
         if (!x)
             return;
-        x->sxpinfo.m_gp |= DDVAL_MASK;
+        x->m_gpbits |= DDVAL_MASK;
     }
 
     void RObject::unset_ddval_bit(SEXP x)
     {
         if (!x)
             return;
-        x->sxpinfo.m_gp &= ~DDVAL_MASK;
+        x->m_gpbits &= ~DDVAL_MASK;
     }
 
     void RObject::set_ddval(SEXP x, bool v)
