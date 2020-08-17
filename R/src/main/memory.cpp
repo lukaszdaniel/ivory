@@ -488,36 +488,37 @@ HIDDEN SEXP do_maxVSize(SEXP call, SEXP op, SEXP args, SEXP rho)
     constexpr double MB = 1048576.0;
     double newval = asReal(CAR(args));
 
-    if (newval > 0) {
-	if (newval == R_PosInf)
-	    R_MaxVSize = R_SIZE_T_MAX;
-	else
-	    R_SetMaxVSize((R_size_t) (newval * MB));
+    if (newval > 0)
+    {
+        if (newval == R_PosInf)
+            R_MaxVSize = R_SIZE_T_MAX;
+        else
+            R_SetMaxVSize((R_size_t)(newval * MB));
     }
 
     if (R_MaxVSize == R_SIZE_T_MAX)
-	return ScalarReal(R_PosInf);
+        return ScalarReal(R_PosInf);
     else
-	return ScalarReal(R_GetMaxVSize() / MB);
+        return ScalarReal(R_GetMaxVSize() / MB);
 }
 
 HIDDEN SEXP do_maxNSize(SEXP call, SEXP op, SEXP args, SEXP rho)
 {
     double newval = asReal(CAR(args));
 
-    if (newval > 0) {
-	if (newval == R_PosInf)
-	    R_MaxNSize = R_SIZE_T_MAX;
-	else
-	    R_SetMaxNSize((R_size_t) newval);
+    if (newval > 0)
+    {
+        if (newval == R_PosInf)
+            R_MaxNSize = R_SIZE_T_MAX;
+        else
+            R_SetMaxNSize((R_size_t)newval);
     }
 
     if (R_MaxNSize == R_SIZE_T_MAX)
-	return ScalarReal(R_PosInf);
+        return ScalarReal(R_PosInf);
     else
-	return ScalarReal(R_GetMaxNSize());
+        return ScalarReal(R_GetMaxNSize());
 }
-
 
 /* Miscellaneous Globals. */
 
@@ -859,8 +860,9 @@ namespace
 #ifdef DEBUG_GC
 static void CheckNodeGeneration(SEXP x, int g)
 {
-    if (x && NODE_GENERATION(x) < g) {
-	gc_error(_("untraced old-to-new reference\n"));
+    if (x && NODE_GENERATION(x) < g)
+    {
+        gc_error(_("untraced old-to-new reference\n"));
     }
 }
 
@@ -1022,12 +1024,13 @@ static void ReleasePage(PAGE_HEADER *page, int node_class)
 
     node_size = NODE_SIZE(node_class);
     page_count = (R_PAGE_SIZE - sizeof(PAGE_HEADER)) / node_size;
-    data = (char*) PAGE_DATA(page);
+    data = (char *)PAGE_DATA(page);
 
-    for (i = 0; i < page_count; i++, data += node_size) {
-	s = (SEXP) data;
-	UNSNAP_NODE(s);
-	R_GenHeap[node_class].AllocCount--;
+    for (i = 0; i < page_count; i++, data += node_size)
+    {
+        s = (SEXP)data;
+        UNSNAP_NODE(s);
+        R_GenHeap[node_class].AllocCount--;
     }
     R_GenHeap[node_class].PageCount--;
     free(page);
@@ -4698,7 +4701,6 @@ HIDDEN bool Rf_Seql(SEXP a, SEXP b)
         return result;
     }
 }
-
 
 #ifdef LONG_VECTOR_SUPPORT
 NORET R_len_t R_BadLongVector(SEXP x, const char *file, int line)

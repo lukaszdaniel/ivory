@@ -45,12 +45,6 @@ constexpr int NAMED_BITS = 16;
 namespace R
 {
 
-    struct vecsxp_struct
-    {
-        R_xlen_t length;
-        R_xlen_t truelength;
-    };
-
     struct primsxp_struct
     {
         int offset;
@@ -392,59 +386,87 @@ namespace R
         static void set_bndcell_lval(SEXP v, int x);
     };
 #if 0
-class Symbol : public RObject {
-    struct {
-        struct symsxp_struct symsxp;
-    } u;
-    RObject *printname() const {
-        return this->u.symsxp.pname;
-    }
-    RObject *symvalue() const {
-        return this->u.symsxp.value;
-    }
-    RObject *internal() const {
-        return this->u.symsxp.internal;
-    }
-};
+    class Symbol : public RObject
+    {
+    private:
+        RObject *pname;
+        RObject *value;
+        RObject *internal;
 
-class Environment : public RObject {
-    struct {
-        struct envsxp_struct envsxp;
-    } u;
-};
+    public:
+        RObject *printname() const
+        {
+            return this->pname;
+        }
+        RObject *symvalue() const
+        {
+            return this->value;
+        }
+        RObject *internal() const
+        {
+            return this->internal;
+        }
+    };
 
-class BuiltInFunction : public RObject {
-    struct {
-        struct primsxp_struct primsxp;
-    } u;
-};
+    class Environment : public RObject
+    {
+    private:
+        RObject *frame;
+        RObject *enclos;
+        RObject *hashtab;
 
-class Closure : public RObject {
-    struct {
-        struct closxp_struct closxp;
-    } u;
-};
+    public:
+    };
 
-class Promise : public RObject {
-    struct {
-        struct promsxp_struct promsxp;
-    } u;
-};
+    class BuiltInFunction : public RObject
+    {
+    private:
+        int offset;
 
-class RList : public RObject {
-    struct {
-        struct listsxp_struct listsxp;
-    } u;
-    RObject *tag() const {
-        return this->u.listsxp.tagval;
-    }
-    RObject *car() const {
-        return this->u.listsxp.carval;
-    }
-    RObject *cdr() const {
-        return this->u.listsxp.cdrval;
-    }
-};
+    public:
+    };
+
+    class Closure : public RObject
+    {
+    private:
+        RObject *formals;
+        RObject *body;
+        RObject *env;
+
+    public:
+    };
+
+    class Promise : public RObject
+    {
+    private:
+        RObject *value;
+        RObject *expr;
+        RObject *env;
+
+    public:
+    };
+
+    class RList : public RObject
+    {
+    private:
+        RObject *carval;
+        RObject *cdrval;
+        RObject *tagval;
+
+    public:
+        RObject *tag() const
+        {
+            return this->tagval;
+        }
+        RObject *car() const
+        {
+            return this->carval;
+        }
+        RObject *cdr() const
+        {
+            return this->cdrval;
+        }
+    };
 #endif
 
     /* The generational collector uses a reduced version of RObject as a
@@ -468,25 +490,26 @@ class RList : public RObject {
         unsigned int m_gccls : 3; /* node class */
         unsigned int m_named : NAMED_BITS;
         unsigned int m_extra : 29 - NAMED_BITS; /* used for immediate bindings */
-        RObject *attrib;
+        RObject *m_attrib;
         RObject *gengc_next_node;
         RObject *gengc_prev_node;
-        vecsxp_struct vecsxp;
+        R_xlen_t m_length;
+        R_xlen_t m_truelength;
 
     public:
-        static inline R_xlen_t stdvec_length(RObject *x) { return x ? reinterpret_cast<VECTOR_SEXPREC *>(x)->vecsxp.length : 0; }
-        static inline R_xlen_t stdvec_truelength(RObject *x) { return x ? reinterpret_cast<VECTOR_SEXPREC *>(x)->vecsxp.truelength : 0; }
+        static inline R_xlen_t stdvec_length(RObject *x) { return x ? reinterpret_cast<VECTOR_SEXPREC *>(x)->m_length : 0; }
+        static inline R_xlen_t stdvec_truelength(RObject *x) { return x ? reinterpret_cast<VECTOR_SEXPREC *>(x)->m_truelength : 0; }
         static inline void set_stdvec_truelength(RObject *x, R_xlen_t v)
         {
             if (!x)
                 return;
-            reinterpret_cast<VECTOR_SEXPREC *>(x)->vecsxp.truelength = v;
+            reinterpret_cast<VECTOR_SEXPREC *>(x)->m_truelength = v;
         }
         static inline void set_stdvec_length(RObject *x, R_xlen_t v)
         {
             if (!x)
                 return;
-            reinterpret_cast<VECTOR_SEXPREC *>(x)->vecsxp.length = v;
+            reinterpret_cast<VECTOR_SEXPREC *>(x)->m_length = v;
             RObject::setscalar(x, v == 1);
         }
     };
