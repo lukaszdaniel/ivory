@@ -12,7 +12,7 @@ CSOURCES =
 CXXSOURCES = \
 	CommandLineArgs.cpp \
 	Rdynload.cpp Renviron.cpp RNG.cpp \
-	RObject.cpp BuiltInFunction.cpp Closure.cpp Environment.cpp Symbol.cpp Promise.cpp \
+	RObject.cpp List.cpp BuiltInFunction.cpp Closure.cpp Environment.cpp Vector.cpp Symbol.cpp Promise.cpp \
 	agrep.cpp altclasses.cpp altrep.cpp apply.cpp arithmetic.cpp array.cpp attrib.cpp \
 	bind.cpp builtin.cpp \
 	character.cpp coerce.cpp colors.cpp complex.cpp connections.cpp context.cpp cum.cpp \

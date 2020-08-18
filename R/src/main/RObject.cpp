@@ -275,43 +275,6 @@ namespace R
         x->m_trace = v;
     }
 
-    /* List Access Methods */
-    RObject *RObject::tag(SEXP e) { return e ? e->u.listsxp.tagval : nullptr; }
-
-    void RObject::set_tag(SEXP x, SEXP v)
-    {
-        if (!x)
-            return;
-        x->u.listsxp.tagval = v;
-    }
-
-    RObject *RObject::car0(SEXP e) { return e ? e->u.listsxp.carval : nullptr; }
-
-    void RObject::set_car0(SEXP x, SEXP v)
-    {
-        if (!x)
-            return;
-        x->u.listsxp.carval = v;
-    }
-
-    RObject *RObject::extptr_ptr(SEXP e) { return e ? e->u.listsxp.carval : nullptr; }
-
-    void RObject::set_extptr_ptr(SEXP x, SEXP v)
-    {
-        if (!x)
-            return;
-        x->u.listsxp.carval = v;
-    }
-
-    RObject *RObject::cdr(SEXP e) { return e ? e->u.listsxp.cdrval : nullptr; }
-
-    void RObject::set_cdr(SEXP x, SEXP v)
-    {
-        if (!x)
-            return;
-        x->u.listsxp.cdrval = v;
-    }
-
     unsigned int RObject::missing(SEXP x) { return x ? (x->m_gpbits & MISSING_MASK) : 0; } /* for closure calls */
 
     void RObject::set_missing(SEXP x, int v)

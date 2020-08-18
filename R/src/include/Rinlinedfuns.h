@@ -37,8 +37,10 @@
 #include <Localization.h>
 #include <R_ext/Error.h>
 #include <RObject.hpp>
+#include <List.hpp>
 #include <BuiltInFunction.hpp>
 #include <Symbol.hpp>
+#include <Vector.hpp>
 #include <Environment.hpp>
 #include <Promise.hpp>
 #include <Closure.hpp>

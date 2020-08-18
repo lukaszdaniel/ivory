@@ -469,58 +469,6 @@ namespace R
     };
 #endif
 
-    /* The generational collector uses a reduced version of RObject as a
-   header in vector nodes.  The layout MUST be kept consistent with
-   the RObject definition. The standard RObject takes up 7 words
-   and the reduced version takes 6 words on most 64-bit systems. On most
-   32-bit systems, RObject takes 8 words and the reduced version 7 words. */
-    class VECTOR_SEXPREC
-    {
-    private:
-        SEXPTYPE m_type : FULL_TYPE_BITS;
-        bool m_scalar;
-        bool m_has_class;
-        bool m_alt;
-        unsigned int m_gpbits : 16;
-        bool m_marked;
-        bool m_debug;
-        bool m_trace;             /* functions and memory tracing */
-        bool m_spare;             /* used on closures and when REFCNT is defined */
-        bool m_gcgen;             /* old generation number */
-        unsigned int m_gccls : 3; /* node class */
-        unsigned int m_named : NAMED_BITS;
-        unsigned int m_extra : 29 - NAMED_BITS; /* used for immediate bindings */
-        RObject *m_attrib;
-        RObject *gengc_next_node;
-        RObject *gengc_prev_node;
-        R_xlen_t m_length;
-        R_xlen_t m_truelength;
-
-    public:
-        static inline R_xlen_t stdvec_length(RObject *x) { return x ? reinterpret_cast<VECTOR_SEXPREC *>(x)->m_length : 0; }
-        static inline R_xlen_t stdvec_truelength(RObject *x) { return x ? reinterpret_cast<VECTOR_SEXPREC *>(x)->m_truelength : 0; }
-        static inline void set_stdvec_truelength(RObject *x, R_xlen_t v)
-        {
-            if (!x)
-                return;
-            reinterpret_cast<VECTOR_SEXPREC *>(x)->m_truelength = v;
-        }
-        static inline void set_stdvec_length(RObject *x, R_xlen_t v)
-        {
-            if (!x)
-                return;
-            reinterpret_cast<VECTOR_SEXPREC *>(x)->m_length = v;
-            RObject::setscalar(x, v == 1);
-        }
-    };
-
-    using VECSEXP = class R::VECTOR_SEXPREC *;
-
-    union SEXPREC_ALIGN
-    {
-        VECTOR_SEXPREC s;
-        double align;
-    };
 } // namespace R
 
 /* General Cons Cell Attributes */
@@ -718,72 +666,6 @@ namespace R
 #define SET_GROWABLE_BIT(x) (R::RObject::set_growable_bit(x))
 #define IS_GROWABLE(x) (GROWABLE_BIT_SET(x) && XLENGTH(x) < XTRUELENGTH(x))
 
-/* Vector Access Macros */
-#ifdef LONG_VECTOR_SUPPORT
-#define IS_LONG_VEC(x) (XLENGTH(x) > R_SHORT_LEN_MAX)
-#else
-#define IS_LONG_VEC(x) false
-#endif
-#define STDVEC_LENGTH(x) (R::VECTOR_SEXPREC::stdvec_length(x))
-#define STDVEC_TRUELENGTH(x) (R::VECTOR_SEXPREC::stdvec_truelength(x))
-#define SET_STDVEC_TRUELENGTH(x, v) (R::VECTOR_SEXPREC::set_stdvec_truelength(x, v))
-#define SET_TRUELENGTH(x, v)                      \
-    do                                            \
-    {                                             \
-        SEXP sl__x__ = (x);                       \
-        R_xlen_t sl__v__ = (v);                   \
-        if (ALTREP(x))                            \
-            error("can't set ALTREP truelength"); \
-        SET_STDVEC_TRUELENGTH(sl__x__, sl__v__);  \
-    } while (0)
-
-#define IS_SCALAR(x, t) (R::RObject::is_scalar(x, t))
-#define LENGTH(x) LENGTH_EX(x, __FILE__, __LINE__)
-#define TRUELENGTH(x) XTRUELENGTH(x)
-
-/* defined as a macro since fastmatch packages tests for it */
-#define XLENGTH(x) XLENGTH_EX(x)
-
-/* THIS ABSOLUTELY MUST NOT BE USED IN PACKAGES !!! */
-#define SET_STDVEC_LENGTH(x, v) (R::VECTOR_SEXPREC::set_stdvec_length(x, v))
-
-/* Under the generational allocator the data for vector nodes comes
-   immediately after the node structure, so the data address is a
-   known offset from the node SEXP. */
-#define STDVEC_DATAPTR(x) ((void *)(((R::SEXPREC_ALIGN *)(x)) + 1))
-#define CHAR(x) ((const char *)STDVEC_DATAPTR(x))
-#define LOGICAL(x) ((int *)DATAPTR(x))
-#define INTEGER(x) ((int *)DATAPTR(x))
-#define RAW(x) ((Rbyte *)DATAPTR(x))
-#define COMPLEX(x) ((Rcomplex *)DATAPTR(x))
-#define REAL(x) ((double *)DATAPTR(x))
-#define VECTOR_ELT(x, i) ((SEXP *)DATAPTR(x))[i]
-#define STRING_PTR(x) ((SEXP *)DATAPTR(x))
-#define VECTOR_PTR(x) ((SEXP *)DATAPTR(x))
-#define LOGICAL_RO(x) ((const int *)DATAPTR_RO(x))
-#define INTEGER_RO(x) ((const int *)DATAPTR_RO(x))
-#define RAW_RO(x) ((const Rbyte *)DATAPTR_RO(x))
-#define COMPLEX_RO(x) ((const Rcomplex *)DATAPTR_RO(x))
-#define REAL_RO(x) ((const double *)DATAPTR_RO(x))
-#define STRING_PTR_RO(x) ((const SEXP *)DATAPTR_RO(x))
-
-/* List Access Macros */
-/* These also work for ... objects */
-#define TAG(e) (R::RObject::tag(e))
-#define CAR0(e) (R::RObject::car0(e))
-#define EXTPTR_PTR(e) (R::RObject::extptr_ptr(e))
-#define CDR(e) (R::RObject::cdr(e))
-#define CAAR(e) CAR(CAR(e))
-#define CDAR(e) CDR(CAR(e))
-#define CADR(e) CAR(CDR(e))
-#define CDDR(e) CDR(CDR(e))
-#define CDDDR(e) CDR(CDDR(e))
-#define CD4R(x) CDR(CDR(CDR(CDR(x))))
-#define CADDR(e) CAR(CDDR(e))
-#define CADDDR(e) CAR(CDR(CDDR(e)))
-#define CAD3R(e) CAR(CDR(CDDR(e)))
-#define CAD4R(e) CAR(CDDR(CDDR(e)))
-#define CAD5R(e) CAR(CDR(CDR(CDR(CDR(CDR(e))))))
 #define MISSING(x) (R::RObject::missing(x)) /* for closure calls */
 #define SET_MISSING(x, v) (R::RObject::set_missing(x, v))
 #define BNDCELL_TAG(e) (R::RObject::bndcell_tag(e))
