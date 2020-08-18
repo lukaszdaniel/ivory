@@ -27,36 +27,36 @@
 namespace R
 {
     /* List Access Methods */
-    RObject *RObject::tag(SEXP e) { return e ? e->u.listsxp.tagval : nullptr; }
+    RObject *RObject::tag(RObject *e) { return e ? e->u.listsxp.tagval : nullptr; }
 
-    void RObject::set_tag(SEXP x, SEXP v)
+    void RObject::set_tag(RObject *x, RObject *v)
     {
         if (!x)
             return;
         x->u.listsxp.tagval = v;
     }
 
-    RObject *RObject::car0(SEXP e) { return e ? e->u.listsxp.carval : nullptr; }
+    RObject *RObject::car0(RObject *e) { return e ? e->u.listsxp.carval : nullptr; }
 
-    void RObject::set_car0(SEXP x, SEXP v)
+    void RObject::set_car0(RObject *x, RObject *v)
     {
         if (!x)
             return;
         x->u.listsxp.carval = v;
     }
 
-    RObject *RObject::extptr_ptr(SEXP e) { return e ? e->u.listsxp.carval : nullptr; }
+    RObject *RObject::extptr_ptr(RObject *e) { return e ? e->u.listsxp.carval : nullptr; }
 
-    void RObject::set_extptr_ptr(SEXP x, SEXP v)
+    void RObject::set_extptr_ptr(RObject *x, RObject *v)
     {
         if (!x)
             return;
         x->u.listsxp.carval = v;
     }
 
-    RObject *RObject::cdr(SEXP e) { return e ? e->u.listsxp.cdrval : nullptr; }
+    RObject *RObject::cdr(RObject *e) { return e ? e->u.listsxp.cdrval : nullptr; }
 
-    void RObject::set_cdr(SEXP x, SEXP v)
+    void RObject::set_cdr(RObject *x, RObject *v)
     {
         if (!x)
             return;

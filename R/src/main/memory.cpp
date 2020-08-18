@@ -834,7 +834,7 @@ namespace
     } while (0)
 
 #define NO_FREE_NODES() (R_NodesInUse >= R_NSize)
-#define GET_FREE_NODE(s) CLASS_GET_FREE_NODE(0,s)
+#define GET_FREE_NODE(s) CLASS_GET_FREE_NODE(0, s)
 
 /* versions that assume nodes are avaialble without adding a new page */
 #define CLASS_QUICK_GET_FREE_NODE(c, s)                 \
@@ -1431,13 +1431,13 @@ SEXP R_MakeWeakRefC(SEXP key, SEXP val, R_CFinalizer_t fin, Rboolean onexit)
 static bool R_finalizers_pending = false;
 static void CheckFinalizers(void)
 {
-    SEXP s;
     R_finalizers_pending = false;
-    for (s = R_weak_refs; s != R_NilValue; s = WEAKREF_NEXT(s)) {
-	if (! NODE_IS_MARKED(WEAKREF_KEY(s)) && ! IS_READY_TO_FINALIZE(s))
-	    SET_READY_TO_FINALIZE(s);
-	if (IS_READY_TO_FINALIZE(s))
-	    R_finalizers_pending = true;
+    for (SEXP wr = R_weak_refs; wr != R_NilValue; wr = WEAKREF_NEXT(wr))
+    {
+        if (!NODE_IS_MARKED(WEAKREF_KEY(wr)) && !IS_READY_TO_FINALIZE(wr))
+            SET_READY_TO_FINALIZE(wr);
+        if (IS_READY_TO_FINALIZE(wr))
+            R_finalizers_pending = true;
     }
 }
 
@@ -1852,11 +1852,12 @@ static int RunGenCollect(R_size_t size_needed)
     CheckFinalizers();
 
     /* process the weak reference chain */
-    for (s = R_weak_refs; s != R_NilValue; s = WEAKREF_NEXT(s)) {
-	FORWARD_NODE(s);
-	FORWARD_NODE(WEAKREF_KEY(s));
-	FORWARD_NODE(WEAKREF_VALUE(s));
-	FORWARD_NODE(WEAKREF_FINALIZER(s));
+    for (SEXP wr = R_weak_refs; wr != R_NilValue; wr = WEAKREF_NEXT(wr))
+    {
+        FORWARD_NODE(wr);
+        FORWARD_NODE(WEAKREF_KEY(wr));
+        FORWARD_NODE(WEAKREF_VALUE(wr));
+        FORWARD_NODE(WEAKREF_FINALIZER(wr));
     }
     PROCESS_NODES();
 

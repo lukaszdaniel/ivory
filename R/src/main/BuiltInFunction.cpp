@@ -27,9 +27,9 @@
 namespace R
 {
     /* Primitive Access Methods */
-    int RObject::primoffset(SEXP x) { return x ? x->u.primsxp.offset : 0; }
+    int RObject::primoffset(RObject *x) { return x ? x->u.primsxp.offset : 0; }
 
-    void RObject::set_primoffset(SEXP x, int v)
+    void RObject::set_primoffset(RObject *x, int v)
     {
         if (!x)
             return;

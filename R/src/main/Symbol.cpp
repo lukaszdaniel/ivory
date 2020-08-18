@@ -27,29 +27,29 @@
 namespace R
 {
     /* Symbol Access Methods */
-    RObject *RObject::printname(SEXP x) { return x ? x->u.symsxp.pname : nullptr; }
+    RObject *RObject::printname(RObject *x) { return x ? x->u.symsxp.pname : nullptr; }
 
-    RObject *RObject::symvalue(SEXP x) { return x ? x->u.symsxp.value : nullptr; }
+    RObject *RObject::symvalue(RObject *x) { return x ? x->u.symsxp.value : nullptr; }
 
-    RObject *RObject::internal(SEXP x) { return x ? x->u.symsxp.internal : nullptr; }
+    RObject *RObject::internal(RObject *x) { return x ? x->u.symsxp.internal : nullptr; }
 
-    unsigned int RObject::ddval(SEXP x) { return x ? (x->m_gpbits & DDVAL_MASK) : 0; } /* for ..1, ..2 etc */
+    unsigned int RObject::ddval(RObject *x) { return x ? (x->m_gpbits & DDVAL_MASK) : 0; } /* for ..1, ..2 etc */
 
-    void RObject::set_ddval_bit(SEXP x)
+    void RObject::set_ddval_bit(RObject *x)
     {
         if (!x)
             return;
         x->m_gpbits |= DDVAL_MASK;
     }
 
-    void RObject::unset_ddval_bit(SEXP x)
+    void RObject::unset_ddval_bit(RObject *x)
     {
         if (!x)
             return;
         x->m_gpbits &= ~DDVAL_MASK;
     }
 
-    void RObject::set_ddval(SEXP x, bool v)
+    void RObject::set_ddval(RObject *x, bool v)
     {
         if (v)
         {
@@ -61,21 +61,21 @@ namespace R
         }
     } /* for ..1, ..2 etc */
 
-    void RObject::set_printname(SEXP x, SEXP v)
+    void RObject::set_printname(RObject *x, RObject *v)
     {
         if (!x)
             return;
         x->u.symsxp.pname = v;
     }
 
-    void RObject::set_symvalue(SEXP x, SEXP v)
+    void RObject::set_symvalue(RObject *x, RObject *v)
     {
         if (!x)
             return;
         x->u.symsxp.value = v;
     }
 
-    void RObject::set_internal(SEXP x, SEXP v)
+    void RObject::set_internal(RObject *x, RObject *v)
     {
         if (!x)
             return;

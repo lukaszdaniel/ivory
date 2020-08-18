@@ -27,43 +27,43 @@
 namespace R
 {
     /* Environment Access Methods */
-    RObject *RObject::frame(SEXP x) { return x ? x->u.envsxp.frame : nullptr; }
+    RObject *RObject::frame(RObject *x) { return x ? x->u.envsxp.frame : nullptr; }
 
-    RObject *RObject::enclos(SEXP x) { return x ? x->u.envsxp.enclos : nullptr; }
+    RObject *RObject::enclos(RObject *x) { return x ? x->u.envsxp.enclos : nullptr; }
 
-    RObject *RObject::hashtab(SEXP x) { return x ? x->u.envsxp.hashtab : nullptr; }
+    RObject *RObject::hashtab(RObject *x) { return x ? x->u.envsxp.hashtab : nullptr; }
 
-    unsigned int RObject::envflags(SEXP x) { return x ? x->m_gpbits : 0; } /* for environments */
+    unsigned int RObject::envflags(RObject *x) { return x ? x->m_gpbits : 0; } /* for environments */
 
-    void RObject::set_envflags(SEXP x, unsigned int v)
+    void RObject::set_envflags(RObject *x, unsigned int v)
     {
         if (!x)
             return;
         x->m_gpbits = v;
     }
 
-    void RObject::set_frame(SEXP x, SEXP v)
+    void RObject::set_frame(RObject *x, RObject *v)
     {
         if (!x)
             return;
         x->u.envsxp.frame = v;
     }
 
-    void RObject::set_enclos(SEXP x, SEXP v)
+    void RObject::set_enclos(RObject *x, RObject *v)
     {
         if (!x)
             return;
         x->u.envsxp.enclos = v;
     }
 
-    void RObject::set_hashtab(SEXP x, SEXP v)
+    void RObject::set_hashtab(RObject *x, RObject *v)
     {
         if (!x)
             return;
         x->u.envsxp.hashtab = v;
     }
 
-    unsigned int RObject::frame_is_locked(SEXP e) { return e ? (envflags(e) & FRAME_LOCK_MASK) : 0; }
+    unsigned int RObject::frame_is_locked(RObject *e) { return e ? (envflags(e) & FRAME_LOCK_MASK) : 0; }
 
-    unsigned int RObject::is_global_frame(SEXP e) { return e ? (envflags(e) & GLOBAL_FRAME_MASK) : 0; }
+    unsigned int RObject::is_global_frame(RObject *e) { return e ? (envflags(e) & GLOBAL_FRAME_MASK) : 0; }
 } // namespace R

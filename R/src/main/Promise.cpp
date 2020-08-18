@@ -27,36 +27,36 @@
 namespace R
 {
     /* Promise Access Methods */
-    RObject *RObject::prcode(SEXP x) { return x ? x->u.promsxp.expr : nullptr; }
+    RObject *RObject::prcode(RObject *x) { return x ? x->u.promsxp.expr : nullptr; }
 
-    void RObject::set_prcode(SEXP x, SEXP v)
+    void RObject::set_prcode(RObject *x, RObject *v)
     {
         if (!x)
             return;
         x->u.promsxp.expr = v;
     }
 
-    RObject *RObject::prenv(SEXP x) { return x ? x->u.promsxp.env : nullptr; }
+    RObject *RObject::prenv(RObject *x) { return x ? x->u.promsxp.env : nullptr; }
 
-    RObject *RObject::prvalue(SEXP x) { return x ? x->u.promsxp.value : nullptr; }
+    RObject *RObject::prvalue(RObject *x) { return x ? x->u.promsxp.value : nullptr; }
 
-    void RObject::set_prvalue(SEXP x, SEXP v)
+    void RObject::set_prvalue(RObject *x, RObject *v)
     {
         if (!x)
             return;
         x->u.promsxp.value = v;
     }
 
-    unsigned int RObject::prseen(SEXP x) { return x ? x->m_gpbits : 0; }
+    unsigned int RObject::prseen(RObject *x) { return x ? x->m_gpbits : 0; }
 
-    void RObject::set_prenv(SEXP x, SEXP v)
+    void RObject::set_prenv(RObject *x, RObject *v)
     {
         if (!x)
             return;
         x->u.promsxp.env = v;
     }
 
-    void RObject::set_prseen(SEXP x, unsigned int v)
+    void RObject::set_prseen(RObject *x, unsigned int v)
     {
         if (!x)
             return;

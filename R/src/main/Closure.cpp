@@ -27,45 +27,45 @@
 namespace R
 {
     /* Closure Access Methods */
-    RObject *RObject::formals(SEXP x) { return x ? x->u.closxp.formals : nullptr; }
+    RObject *RObject::formals(RObject *x) { return x ? x->u.closxp.formals : nullptr; }
 
-    void RObject::set_formals(SEXP x, SEXP v)
+    void RObject::set_formals(RObject *x, RObject *v)
     {
         if (!x)
             return;
         x->u.closxp.formals = v;
     }
 
-    RObject *RObject::body(SEXP x) { return x ? x->u.closxp.body : nullptr; }
+    RObject *RObject::body(RObject *x) { return x ? x->u.closxp.body : nullptr; }
 
-    void RObject::set_body(SEXP x, SEXP v)
+    void RObject::set_body(RObject *x, RObject *v)
     {
         if (!x)
             return;
         x->u.closxp.body = v;
     }
 
-    RObject *RObject::cloenv(SEXP x) { return x ? x->u.closxp.env : nullptr; }
+    RObject *RObject::cloenv(RObject *x) { return x ? x->u.closxp.env : nullptr; }
 
-    void RObject::set_cloenv(SEXP x, SEXP v)
+    void RObject::set_cloenv(RObject *x, RObject *v)
     {
         if (!x)
             return;
         x->u.closxp.env = v;
     }
 
-    bool RObject::rdebug(SEXP x) { return x && x->m_debug; }
+    bool RObject::rdebug(RObject *x) { return x && x->m_debug; }
 
-    void RObject::set_rdebug(SEXP x, bool v)
+    void RObject::set_rdebug(RObject *x, bool v)
     {
         if (!x)
             return;
         x->m_debug = v;
     }
 
-    bool RObject::rstep(SEXP x) { return x && x->m_spare; }
+    bool RObject::rstep(RObject *x) { return x && x->m_spare; }
 
-    void RObject::set_rstep(SEXP x, bool v)
+    void RObject::set_rstep(RObject *x, bool v)
     {
         if (!x)
             return;

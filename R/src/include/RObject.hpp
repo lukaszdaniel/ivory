@@ -30,7 +30,7 @@
 
 /* This is intended for use only within R itself.
  * It defines internal structures that are otherwise only accessible
- * via SEXP, and macros to replace many (but not all) of accessor functions
+ * via RObject*, and macros to replace many (but not all) of accessor functions
  * (which are always defined).
  */
 
@@ -201,35 +201,35 @@ namespace R
 #endif
     public:
         /* General Cons Cell Attributes */
-        static bool gcgen(SEXP v);
-        static void set_gcgen(SEXP v, bool x);
-        static unsigned int gccls(SEXP v);
-        static void set_gccls(SEXP v, unsigned int x);
-        static RObject *next_node(SEXP s);
-        static RObject *prev_node(SEXP s);
-        static void set_next_node(SEXP s, SEXP t);
-        static void set_prev_node(SEXP s, SEXP t);
-        static void copy_sxpinfo(SEXP x, RObject &y);
+        static bool gcgen(RObject *v);
+        static void set_gcgen(RObject *v, bool x);
+        static unsigned int gccls(RObject *v);
+        static void set_gccls(RObject *v, unsigned int x);
+        static RObject *next_node(RObject *s);
+        static RObject *prev_node(RObject *s);
+        static void set_next_node(RObject *s, RObject *t);
+        static void set_prev_node(RObject *s, RObject *t);
+        static void copy_sxpinfo(RObject *x, RObject &y);
         static constexpr int READY_TO_FINALIZE_MASK = 1;
         static constexpr int FINALIZE_ON_EXIT_MASK = 2;
         static constexpr int WEAKREF_SIZE = 4;
-        static void set_ready_to_finalize(SEXP s);
-        static void clear_ready_to_finalize(SEXP s);
-        static unsigned int is_ready_to_finalize(SEXP s);
-        static void set_finalize_on_exit(SEXP s);
-        static void clear_finalize_on_exit(SEXP s);
-        static unsigned int finalize_on_exit(SEXP s);
-        static void set_attrib(SEXP x, SEXP v);
-        static SEXP attrib(SEXP x);
-        static unsigned int named(SEXP x);
-        static void set_named(SEXP x, unsigned int v);
-        static void set_typeof(SEXP x, SEXPTYPE v);
-        static SEXPTYPE typeof_(SEXP x);
-        static unsigned int levels(SEXP x);
-        static bool object(SEXP x);
-        static void set_object(SEXP x, bool v);
-        static bool mark(SEXP x);
-        static void set_mark(SEXP x, int v);
+        static void set_ready_to_finalize(RObject *s);
+        static void clear_ready_to_finalize(RObject *s);
+        static unsigned int is_ready_to_finalize(RObject *s);
+        static void set_finalize_on_exit(RObject *s);
+        static void clear_finalize_on_exit(RObject *s);
+        static unsigned int finalize_on_exit(RObject *s);
+        static void set_attrib(RObject *x, RObject *v);
+        static RObject *attrib(RObject *x);
+        static unsigned int named(RObject *x);
+        static void set_named(RObject *x, unsigned int v);
+        static void set_typeof(RObject *x, SEXPTYPE v);
+        static SEXPTYPE typeof_(RObject *x);
+        static unsigned int levels(RObject *x);
+        static bool object(RObject *x);
+        static void set_object(RObject *x, bool v);
+        static bool mark(RObject *x);
+        static void set_mark(RObject *x, int v);
         /* CHARSXP charset bits */
         enum CharsetBit
         {
@@ -241,149 +241,149 @@ namespace R
             CACHED_MASK = (1 << 5),
             ASCII_MASK = (1 << 6)
         };
-        static bool scalar(SEXP x);
-        static unsigned int is_bytes(SEXP x);
-        static void set_bytes(SEXP x);
-        static unsigned int is_latin1(SEXP x);
-        static void set_latin1(SEXP x);
-        static unsigned int is_ascii(SEXP x);
-        static void set_ascii(SEXP x);
-        static unsigned int is_utf8(SEXP x);
-        static void set_utf8(SEXP x);
-        static unsigned int enc_known(SEXP x);
-        static void set_cached(SEXP x);
-        static unsigned int is_cached(SEXP x);
-        static bool altrep(SEXP x);
-        static void set_altrep(SEXP x, bool v);
-        static void setlevels(SEXP x, unsigned short int v);
-        static void setscalar(SEXP x, bool v);
-        static bool is_scalar(SEXP x, SEXPTYPE t);
-        static unsigned int refcnt(SEXP x);
-        static void set_refcnt(SEXP x, unsigned int v);
-        static bool trackrefs(SEXP x);
-        static void set_trackrefs(SEXP x, bool v);
+        static bool scalar(RObject *x);
+        static unsigned int is_bytes(RObject *x);
+        static void set_bytes(RObject *x);
+        static unsigned int is_latin1(RObject *x);
+        static void set_latin1(RObject *x);
+        static unsigned int is_ascii(RObject *x);
+        static void set_ascii(RObject *x);
+        static unsigned int is_utf8(RObject *x);
+        static void set_utf8(RObject *x);
+        static unsigned int enc_known(RObject *x);
+        static void set_cached(RObject *x);
+        static unsigned int is_cached(RObject *x);
+        static bool altrep(RObject *x);
+        static void set_altrep(RObject *x, bool v);
+        static void setlevels(RObject *x, unsigned short int v);
+        static void setscalar(RObject *x, bool v);
+        static bool is_scalar(RObject *x, SEXPTYPE t);
+        static unsigned int refcnt(RObject *x);
+        static void set_refcnt(RObject *x, unsigned int v);
+        static bool trackrefs(RObject *x);
+        static void set_trackrefs(RObject *x, bool v);
         static constexpr int ASSIGNMENT_PENDING_MASK = (1 << 11);
-        static unsigned int assignment_pending(SEXP x);
-        static void set_assignment_pending(SEXP x, bool v);
-        static bool rtrace(SEXP x);
-        static void set_rtrace(SEXP x, bool v);
+        static unsigned int assignment_pending(RObject *x);
+        static void set_assignment_pending(RObject *x, bool v);
+        static bool rtrace(RObject *x);
+        static void set_rtrace(RObject *x, bool v);
         /* Primitive Access Methods */
-        static int primoffset(SEXP x);
-        static void set_primoffset(SEXP x, int v);
+        static int primoffset(RObject *x);
+        static void set_primoffset(RObject *x, int v);
         /* Closure Access Methods */
-        static RObject *formals(SEXP x);
-        static void set_formals(SEXP x, SEXP v);
-        static RObject *body(SEXP x);
-        static void set_body(SEXP x, SEXP v);
-        static RObject *cloenv(SEXP x);
-        static void set_cloenv(SEXP x, SEXP v);
-        static bool rdebug(SEXP x);
-        static void set_rdebug(SEXP x, bool v);
-        static bool rstep(SEXP x);
-        static void set_rstep(SEXP x, bool v);
+        static RObject *formals(RObject *x);
+        static void set_formals(RObject *x, RObject *v);
+        static RObject *body(RObject *x);
+        static void set_body(RObject *x, RObject *v);
+        static RObject *cloenv(RObject *x);
+        static void set_cloenv(RObject *x, RObject *v);
+        static bool rdebug(RObject *x);
+        static void set_rdebug(RObject *x, bool v);
+        static bool rstep(RObject *x);
+        static void set_rstep(RObject *x, bool v);
         /* Symbol Access Methods */
         static constexpr int DDVAL_MASK = 1;
-        static RObject *printname(SEXP x);
-        static RObject *symvalue(SEXP x);
-        static RObject *internal(SEXP x);
-        static unsigned int ddval(SEXP x); /* for ..1, ..2 etc */
-        static void set_ddval_bit(SEXP x);
-        static void unset_ddval_bit(SEXP x);
-        static void set_ddval(SEXP x, bool v); /* for ..1, ..2 etc */
-        static void set_printname(SEXP x, SEXP v);
-        static void set_symvalue(SEXP x, SEXP v);
-        static void set_internal(SEXP x, SEXP v);
+        static RObject *printname(RObject *x);
+        static RObject *symvalue(RObject *x);
+        static RObject *internal(RObject *x);
+        static unsigned int ddval(RObject *x); /* for ..1, ..2 etc */
+        static void set_ddval_bit(RObject *x);
+        static void unset_ddval_bit(RObject *x);
+        static void set_ddval(RObject *x, bool v); /* for ..1, ..2 etc */
+        static void set_printname(RObject *x, RObject *v);
+        static void set_symvalue(RObject *x, RObject *v);
+        static void set_internal(RObject *x, RObject *v);
         /* Environment Access Methods */
         static constexpr int FRAME_LOCK_MASK = (1 << 14);
         static constexpr int GLOBAL_FRAME_MASK = (1 << 15);
-        static RObject *frame(SEXP x);
-        static RObject *enclos(SEXP x);
-        static RObject *hashtab(SEXP x);
-        static unsigned int envflags(SEXP x); /* for environments */
-        static void set_envflags(SEXP x, unsigned int v);
-        static void set_frame(SEXP x, SEXP v);
-        static void set_enclos(SEXP x, SEXP v);
-        static void set_hashtab(SEXP x, SEXP v);
-        static unsigned int frame_is_locked(SEXP e);
-        static unsigned int is_global_frame(SEXP e);
+        static RObject *frame(RObject *x);
+        static RObject *enclos(RObject *x);
+        static RObject *hashtab(RObject *x);
+        static unsigned int envflags(RObject *x); /* for environments */
+        static void set_envflags(RObject *x, unsigned int v);
+        static void set_frame(RObject *x, RObject *v);
+        static void set_enclos(RObject *x, RObject *v);
+        static void set_hashtab(RObject *x, RObject *v);
+        static unsigned int frame_is_locked(RObject *e);
+        static unsigned int is_global_frame(RObject *e);
         /* Promise Access Methods */
-        static RObject *prcode(SEXP x);
-        static void set_prcode(SEXP x, SEXP v);
-        static RObject *prenv(SEXP x);
-        static RObject *prvalue(SEXP x);
-        static void set_prvalue(SEXP x, SEXP v);
-        static unsigned int prseen(SEXP x);
-        static void set_prenv(SEXP x, SEXP v);
-        static void set_prseen(SEXP x, unsigned int v);
+        static RObject *prcode(RObject *x);
+        static void set_prcode(RObject *x, RObject *v);
+        static RObject *prenv(RObject *x);
+        static RObject *prvalue(RObject *x);
+        static void set_prvalue(RObject *x, RObject *v);
+        static unsigned int prseen(RObject *x);
+        static void set_prenv(RObject *x, RObject *v);
+        static void set_prseen(RObject *x, unsigned int v);
         /* List Access Methods */
-        static RObject *tag(SEXP e);
-        static void set_tag(SEXP x, SEXP v);
-        static RObject *car0(SEXP e);
-        static void set_car0(SEXP x, SEXP v);
-        static RObject *extptr_ptr(SEXP e);
-        static void set_extptr_ptr(SEXP x, SEXP v);
-        static RObject *cdr(SEXP e);
-        static void set_cdr(SEXP x, SEXP v);
+        static RObject *tag(RObject *e);
+        static void set_tag(RObject *x, RObject *v);
+        static RObject *car0(RObject *e);
+        static void set_car0(RObject *x, RObject *v);
+        static RObject *extptr_ptr(RObject *e);
+        static void set_extptr_ptr(RObject *x, RObject *v);
+        static RObject *cdr(RObject *e);
+        static void set_cdr(RObject *x, RObject *v);
         static constexpr int MISSING_MASK = ((1 << 4) - 1); // = 15 /* reserve 4 bits--only 2 uses now */
-        static unsigned int missing(SEXP x);                /* for closure calls */
-        static void set_missing(SEXP x, int v);
-        static unsigned int bndcell_tag(SEXP e);
-        static void set_bndcell_tag(SEXP e, unsigned int v);
+        static unsigned int missing(RObject *x);                /* for closure calls */
+        static void set_missing(RObject *x, int v);
+        static unsigned int bndcell_tag(RObject *e);
+        static void set_bndcell_tag(RObject *e, unsigned int v);
         /* External pointer access methods */
-        static RObject *extptr_prot(SEXP x);
-        static RObject *extptr_tag(SEXP x);
-        static void set_extptr_tag(SEXP x, SEXP v);
-        static void set_extptr_prot(SEXP x, SEXP v);
+        static RObject *extptr_prot(RObject *x);
+        static RObject *extptr_tag(RObject *x);
+        static void set_extptr_tag(RObject *x, RObject *v);
+        static void set_extptr_prot(RObject *x, RObject *v);
         /* S4 object bit, set by R_do_new_object for all new() calls */
         static constexpr int S4_OBJECT_MASK = ((unsigned short)(1 << 4));
-        static bool is_s4_object(SEXP x);
-        static void set_s4_object(SEXP x);
-        static void unset_s4_object(SEXP x);
+        static bool is_s4_object(RObject *x);
+        static void set_s4_object(RObject *x);
+        static void unset_s4_object(RObject *x);
         /* JIT optimization support */
         enum JITBit
         {
             NOJIT_MASK = (1 << 5),
             MAYBEJIT_MASK = (1 << 6)
         };
-        static unsigned int nojit(SEXP x);
-        static void set_nojit(SEXP x);
-        static unsigned int maybejit(SEXP x);
-        static void set_maybejit(SEXP x);
-        static void unset_maybejit(SEXP x);
+        static unsigned int nojit(RObject *x);
+        static void set_nojit(RObject *x);
+        static unsigned int maybejit(RObject *x);
+        static void set_maybejit(RObject *x);
+        static void unset_maybejit(RObject *x);
         /* Growable vector support */
         static constexpr int GROWABLE_MASK = ((unsigned short)(1 << 5));
-        static unsigned int growable_bit_set(SEXP x);
-        static void set_growable_bit(SEXP x);
+        static unsigned int growable_bit_set(RObject *x);
+        static void set_growable_bit(RObject *x);
         /* Hashing Methods */
         static constexpr int HASHASH_MASK = 1;
-        static unsigned int hashash(SEXP x);
-        static void set_hashash(SEXP x, bool v);
+        static unsigned int hashash(RObject *x);
+        static void set_hashash(RObject *x, bool v);
 
         static constexpr int SPECIAL_SYMBOL_MASK = (1 << 12);
         static constexpr int BASE_SYM_CACHED_MASK = (1 << 13);
-        static void set_base_sym_cached(SEXP b);
-        static void unset_base_sym_cached(SEXP b);
-        static unsigned int base_sym_cached(SEXP b);
-        static unsigned int no_special_symbols(SEXP b);
-        static void set_no_special_symbols(SEXP b);
-        static unsigned int is_special_symbol(SEXP b);
-        static void set_special_symbol(SEXP b);
-        static void unset_no_special_symbols(SEXP b);
-        static void unset_special_symbol(SEXP b);
+        static void set_base_sym_cached(RObject *b);
+        static void unset_base_sym_cached(RObject *b);
+        static unsigned int base_sym_cached(RObject *b);
+        static unsigned int no_special_symbols(RObject *b);
+        static void set_no_special_symbols(RObject *b);
+        static unsigned int is_special_symbol(RObject *b);
+        static void set_special_symbol(RObject *b);
+        static void unset_no_special_symbols(RObject *b);
+        static void unset_special_symbol(RObject *b);
         static constexpr int ACTIVE_BINDING_MASK = (1 << 15);
         static constexpr int BINDING_LOCK_MASK = (1 << 14);
         static constexpr int SPECIAL_BINDING_MASK = (ACTIVE_BINDING_MASK | BINDING_LOCK_MASK);
-        static unsigned int is_active_binding(SEXP b);
-        static unsigned int binding_is_locked(SEXP b);
-        static void lock_binding(SEXP b);
-        static void unlock_binding(SEXP b);
-        static void set_active_binding_bit(SEXP b);
-        static double bndcell_dval(SEXP v);
-        static int bndcell_ival(SEXP v);
-        static int bndcell_lval(SEXP v);
-        static void set_bndcell_dval(SEXP v, double x);
-        static void set_bndcell_ival(SEXP v, int x);
-        static void set_bndcell_lval(SEXP v, int x);
+        static unsigned int is_active_binding(RObject *b);
+        static unsigned int binding_is_locked(RObject *b);
+        static void lock_binding(RObject *b);
+        static void unlock_binding(RObject *b);
+        static void set_active_binding_bit(RObject *b);
+        static double bndcell_dval(RObject *v);
+        static int bndcell_ival(RObject *v);
+        static int bndcell_lval(RObject *v);
+        static void set_bndcell_dval(RObject *v, double x);
+        static void set_bndcell_ival(RObject *v, int x);
+        static void set_bndcell_lval(RObject *v, int x);
     };
 #if 0
     class Symbol : public RObject
@@ -518,14 +518,14 @@ namespace R
 #define DECREMENT_REFCNT(x)                                       \
     do                                                            \
     {                                                             \
-        SEXP drc__x__ = (x);                                      \
+        R::RObject *drc__x__ = (x);                               \
         if (REFCNT(drc__x__) > 0 && REFCNT(drc__x__) < REFCNTMAX) \
             SET_REFCNT(drc__x__, REFCNT(drc__x__) - 1);           \
     } while (0)
 #define INCREMENT_REFCNT(x)                             \
     do                                                  \
     {                                                   \
-        SEXP irc__x__ = (x);                            \
+        R::RObject *irc__x__ = (x);                     \
         if (REFCNT(irc__x__) < REFCNTMAX)               \
             SET_REFCNT(irc__x__, REFCNT(irc__x__) + 1); \
     } while (0)
@@ -610,7 +610,7 @@ namespace R
 #define ENSURE_NAMEDMAX(v)                  \
     do                                      \
     {                                       \
-        SEXP __enm_v__ = (v);               \
+        RObject *__enm_v__ = (v);               \
         if (NAMED(__enm_v__) < NAMEDMAX)    \
             SET_NAMED(__enm_v__, NAMEDMAX); \
     } while (0)
@@ -635,14 +635,14 @@ namespace R
 #define SETTER_CLEAR_NAMED(x)    \
     do                           \
     {                            \
-        SEXP __x__ = (x);        \
+        RObject *__x__ = (x);        \
         if (NAMED(__x__) == 1)   \
             SET_NAMED(__x__, 0); \
     } while (0)
 #define RAISE_NAMED(x, n)            \
     do                               \
     {                                \
-        SEXP __x__ = (x);            \
+        RObject *__x__ = (x);            \
         int __n__ = (n);             \
         if (NAMED(__x__) < __n__)    \
             SET_NAMED(__x__, __n__); \
@@ -691,20 +691,20 @@ namespace R
 #define INIT_BNDCELL(cell, type)         \
     do                                   \
     {                                    \
-        SEXP val = allocVector(type, 1); \
+        RObject *val = allocVector(type, 1); \
         SETCAR(cell, val);               \
         INCREMENT_NAMED(val);            \
         SET_BNDCELL_TAG(cell, type);     \
         SET_MISSING(cell, 0);            \
     } while (0)
 #else
-/* Use a union in the CAR field to represent an SEXP or an immediate
+/* Use a union in the CAR field to represent an RObject* or an immediate
    value.  More efficient, but changes the memory layout on 32 bit
    platforms since the size of the union is larger than the size of a
    pointer. The layout should not change on 64 bit platforms. */
 union R_bndval_t
 {
-    SEXP sxpval;
+    R::RObject *sxpval;
     double dval;
     int ival;
 };
@@ -742,7 +742,7 @@ struct VECREC
 {
     union
     {
-        SEXP backpointer;
+        R::RObject *backpointer;
         double align;
     } u;
 };
