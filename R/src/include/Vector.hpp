@@ -37,22 +37,22 @@ namespace R
     class VECTOR
     {
     private:
-        SEXPTYPE m_type : FULL_TYPE_BITS;
-        bool m_scalar;
-        bool m_has_class;
-        bool m_alt;
-        unsigned int m_gpbits : 16;
-        bool m_marked;
-        bool m_debug;
-        bool m_trace;             /* functions and memory tracing */
-        bool m_spare;             /* used on closures and when REFCNT is defined */
-        bool m_gcgen;             /* old generation number */
-        unsigned int m_gccls : 3; /* node class */
-        unsigned int m_named : NAMED_BITS;
-        unsigned int m_extra : 29 - NAMED_BITS; /* used for immediate bindings */
-        RObject *m_attrib;
-        RObject *gengc_next_node;
-        RObject *gengc_prev_node;
+        [[maybe_unused]] SEXPTYPE m_type : FULL_TYPE_BITS;
+        [[maybe_unused]] bool m_scalar;
+        [[maybe_unused]] bool m_has_class;
+        [[maybe_unused]] bool m_alt;
+        [[maybe_unused]] unsigned int m_gpbits : 16;
+        [[maybe_unused]] bool m_marked;
+        [[maybe_unused]] bool m_debug;
+        [[maybe_unused]] bool m_trace;             /* functions and memory tracing */
+        [[maybe_unused]] bool m_spare;             /* used on closures and when REFCNT is defined */
+        [[maybe_unused]] bool m_gcgen;             /* old generation number */
+        [[maybe_unused]] unsigned int m_gccls : 3; /* node class */
+        [[maybe_unused]] unsigned int m_named : NAMED_BITS;
+        [[maybe_unused]] unsigned int m_extra : 29 - NAMED_BITS; /* used for immediate bindings */
+        [[maybe_unused]] RObject *m_attrib;
+        [[maybe_unused]] RObject *gengc_next_node;
+        [[maybe_unused]] RObject *gengc_prev_node;
         R_xlen_t m_length;
         R_xlen_t m_truelength;
 
