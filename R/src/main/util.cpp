@@ -267,7 +267,7 @@ HIDDEN void Rf_InitTypeTables(void) {
 
 SEXP Rf_type2str_nowarn(const SEXPTYPE t) /* returns a CHARSXP */
 {
-    // if (t < MAX_NUM_BASIC_SEXPTYPE) { /* branch not really needed */
+    // if (t >= 0 && t < MAX_NUM_BASIC_SEXPTYPE) { /* branch not really needed */
 	SEXP res = Type2Table[t].rcharName;
 	if (res) return res;
     // }
@@ -298,7 +298,7 @@ SEXP Rf_type2rstr(const SEXPTYPE t) /* returns a STRSXP */
 
 const char *Rf_type2char(const SEXPTYPE t) /* returns a char* */
 {
-    // if (t < MAX_NUM_BASIC_SEXPTYPE) { /* branch not really needed */
+    // if (t >= 0 && t < MAX_NUM_BASIC_SEXPTYPE) { /* branch not really needed */
 	const char * res = Type2Table[t].cstrName;
 	if (res) return res;
     // }
@@ -877,8 +877,9 @@ HIDDEN SEXP do_dirname(SEXP call, SEXP op, SEXP args, SEXP rho)
 		wcscpy (buf, pp);
 		R_wfixslash(buf);
 		/* remove trailing file separator(s) */
-		while ( *(p = buf + wcslen(buf) - 1) == L'/'  && p > buf
-			&& (p > buf+2 || *(p-1) != L':')) *p = L'\0';
+		p = buf + wcslen(buf) - 1;
+		while (p > buf && *p == L'/'
+		       && (p > buf+2 || *(p-1) != L':')) *p-- = L'\0';
 		p = wcsrchr(buf, L'/');
 		if(p == nullptr) wcscpy(buf, L".");
 		else {

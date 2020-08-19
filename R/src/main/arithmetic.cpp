@@ -79,11 +79,11 @@ int matherr(struct exception *exc)
 #endif
 #endif
 
-typedef union
+union ieee_double
 {
-    double value;
-    unsigned int word[2];
-} ieee_double;
+	double value;
+	unsigned int word[2];
+};
 
 /* gcc had problems with static const on AIX and Solaris
    Solaris was for gcc 3.1 and 3.2 under -O2 32-bit on 64-bit kernel */
@@ -103,43 +103,43 @@ static CONST int hw = 1;
 static CONST int lw = 0;
 #endif /* WORDS_BIGENDIAN */
 
-
 static double R_ValueOfNA(void)
 {
-    /* The gcc shipping with Fedora 9 gets this wrong without
+	/* The gcc shipping with Fedora 9 gets this wrong without
      * the volatile declaration. Thanks to Marc Schwartz. */
-    volatile ieee_double x;
-    x.word[hw] = 0x7ff00000;
-    x.word[lw] = 1954;
-    return x.value;
+	volatile ieee_double x;
+	x.word[hw] = 0x7ff00000;
+	x.word[lw] = 1954;
+	return x.value;
 }
 
 int R_IsNA(double x)
 {
-    if (isnan(x)) {
-	ieee_double y;
-	y.value = x;
-	return (y.word[lw] == 1954);
-    }
-    return 0;
+	if (isnan(x))
+	{
+		ieee_double y;
+		y.value = x;
+		return (y.word[lw] == 1954);
+	}
+	return 0;
 }
 
 int R_IsNaN(double x)
 {
-    if (isnan(x)) {
-	ieee_double y;
-	y.value = x;
-	return (y.word[lw] != 1954);
-    }
-    return 0;
+	if (isnan(x))
+	{
+		ieee_double y;
+		y.value = x;
+		return (y.word[lw] != 1954);
+	}
+	return 0;
 }
 
 /* ISNAN uses isnan, which is undefined by C++ headers
    This workaround is called only when ISNAN() is used
    in a user code in a file with __cplusplus defined */
 
-extern "C"
-int R_isnancpp(double x)
+extern "C" int R_isnancpp(double x)
 {
 	return (isnan(x) != 0);
 }
@@ -214,47 +214,56 @@ static double myfloor(double x1, double x2)
 
 double R_pow(double x, double y) /* = x ^ y */
 {
-    /* squaring is the most common of the specially handled cases so
+	/* squaring is the most common of the specially handled cases so
        check for it first. */
-    if(y == 2.0)
-	return x * x;
-    if(x == 1. || y == 0.)
-	return(1.);
-    if(x == 0.) {
-	if(y > 0.) return(0.);
-	else if(y < 0) return(R_PosInf);
-	else return(y); /* NA or NaN, we assert */
-    }
-    if (R_FINITE(x) && R_FINITE(y)) {
-	/* There was a special case for y == 0.5 here, but
+	if (y == 2.0)
+		return x * x;
+	if (x == 1. || y == 0.)
+		return (1.);
+	if (x == 0.)
+	{
+		if (y > 0.)
+			return (0.);
+		else if (y < 0)
+			return (R_PosInf);
+		else
+			return (y); /* NA or NaN, we assert */
+	}
+	if (R_FINITE(x) && R_FINITE(y))
+	{
+		/* There was a special case for y == 0.5 here, but
 	   gcc 4.3.0 -g -O2 mis-compiled it.  Showed up with
 	   100^0.5 as 3.162278, example(pbirthday) failed. */
 #ifdef USE_POWL_IN_R_POW
-	// this is used only on 64-bit Windows (so has powl).
-	return powl(x, y);
+		// this is used only on 64-bit Windows (so has powl).
+		return powl(x, y);
 #else
-	return pow(x, y);
+		return pow(x, y);
 #endif
-    }
-    if (ISNAN(x) || ISNAN(y))
-	return(x + y);
-    if(!R_FINITE(x)) {
-	if(x > 0)		/* Inf ^ y */
-	    return (y < 0.)? 0. : R_PosInf;
-	else {			/* (-Inf) ^ y */
-	    if(R_FINITE(y) && y == floor(y)) /* (-Inf) ^ n */
-		return (y < 0.) ? 0. : (myfmod(y, 2.) != 0 ? x  : -x);
 	}
-    }
-    if(!R_FINITE(y)) {
-	if(x >= 0) {
-	    if(y > 0)		/* y == +Inf */
-		return (x >= 1) ? R_PosInf : 0.;
-	    else		/* y == -Inf */
-		return (x < 1) ? R_PosInf : 0.;
+	if (ISNAN(x) || ISNAN(y))
+		return (x + y);
+	if (!R_FINITE(x))
+	{
+		if (x > 0) /* Inf ^ y */
+			return (y < 0.) ? 0. : R_PosInf;
+		else
+		{									  /* (-Inf) ^ y */
+			if (R_FINITE(y) && y == floor(y)) /* (-Inf) ^ n */
+				return (y < 0.) ? 0. : (myfmod(y, 2.) != 0 ? x : -x);
+		}
 	}
-    }
-    return R_NaN; // all other cases: (-Inf)^{+-Inf, non-int}; (neg)^{+-Inf}
+	if (!R_FINITE(y))
+	{
+		if (x >= 0)
+		{
+			if (y > 0) /* y == +Inf */
+				return (x >= 1) ? R_PosInf : 0.;
+			else /* y == -Inf */
+				return (x < 1) ? R_PosInf : 0.;
+		}
+	}
+	return R_NaN; // all other cases: (-Inf)^{+-Inf, non-int}; (neg)^{+-Inf}
 }
 
 double R_pow_di(double x, int n)
@@ -792,48 +801,59 @@ static SEXP logical_unary(ARITHOP_TYPE code, SEXP s1, SEXP call)
 
 static SEXP integer_unary(ARITHOP_TYPE code, SEXP s1, SEXP call)
 {
-    R_xlen_t i, n;
-    SEXP ans;
+	R_xlen_t i, n;
+	SEXP ans;
 
-    switch (code) {
-    case PLUSOP:
-	{return s1;}
-    case MINUSOP:
-{	ans = NO_REFERENCES(s1) ? s1 : duplicate(s1);
-	int *pa = INTEGER(ans);
-	const int *px = INTEGER_RO(s1);
-	n = XLENGTH(s1);
-	for (i = 0; i < n; i++) {
-	    int x = px[i];
-	    pa[i] = (x == NA_INTEGER) ?
-		NA_INTEGER : ((x == 0.0) ? 0 : -x);
+	switch (code)
+	{
+	case PLUSOP:
+	{
+		return s1;
 	}
-	return ans;}
-    default:
-	errorcall(call, _("invalid unary operator"));
-    }
-    return s1;			/* never used; to keep -Wall happy */
+	case MINUSOP:
+	{
+		ans = NO_REFERENCES(s1) ? s1 : duplicate(s1);
+		int *pa = INTEGER(ans);
+		const int *px = INTEGER_RO(s1);
+		n = XLENGTH(s1);
+		for (i = 0; i < n; i++)
+		{
+			int x = px[i];
+			pa[i] = (x == NA_INTEGER) ? NA_INTEGER : ((x == 0.0) ? 0 : -x);
+		}
+		return ans;
+	}
+	default:
+		errorcall(call, _("invalid unary operator"));
+	}
+	return s1; /* never used; to keep -Wall happy */
 }
 
 static SEXP real_unary(ARITHOP_TYPE code, SEXP s1, SEXP lcall)
 {
-    R_xlen_t i, n;
-    SEXP ans;
+	R_xlen_t i, n;
+	SEXP ans;
 
-    switch (code) {
-    case PLUSOP: {return s1;}
-    case MINUSOP:
-	{ans = NO_REFERENCES(s1) ? s1 : duplicate(s1);
-	double *pa = REAL(ans);
-	const double *px = REAL_RO(s1);
-	n = XLENGTH(s1);
-	for (i = 0; i < n; i++)
-	    pa[i] = -px[i];
-	return ans;}
-    default:
-	errorcall(lcall, _("invalid unary operator"));
-    }
-    return s1;			/* never used; to keep -Wall happy */
+	switch (code)
+	{
+	case PLUSOP:
+	{
+		return s1;
+	}
+	case MINUSOP:
+	{
+		ans = NO_REFERENCES(s1) ? s1 : duplicate(s1);
+		double *pa = REAL(ans);
+		const double *px = REAL_RO(s1);
+		n = XLENGTH(s1);
+		for (i = 0; i < n; i++)
+			pa[i] = -px[i];
+		return ans;
+	}
+	default:
+		errorcall(lcall, _("invalid unary operator"));
+	}
+	return s1; /* never used; to keep -Wall happy */
 }
 
 static SEXP integer_binary(ARITHOP_TYPE code, SEXP s1, SEXP s2, SEXP lcall)
@@ -846,7 +866,7 @@ static SEXP integer_binary(ARITHOP_TYPE code, SEXP s1, SEXP s2, SEXP lcall)
     n1 = XLENGTH(s1);
     n2 = XLENGTH(s2);
     /* S4-compatibility change: if n1 or n2 is 0, result is of length 0 */
-    if (n1 == 0 || n2 == 0) n = 0; else n = (n1 > n2) ? n1 : n2;
+    if (n1 == 0 || n2 == 0) n = 0; else n = std::max(n1, n2);
 
     if (code == DIVOP || code == POWOP)
 	ans = allocVector(REALSXP, n);
@@ -994,7 +1014,7 @@ static SEXP real_binary(ARITHOP_TYPE code, SEXP s1, SEXP s2)
     /* S4-compatibility change: if n1 or n2 is 0, result is of length 0 */
     if (n1 == 0 || n2 == 0) return(allocVector(REALSXP, 0));
 
-    n = (n1 > n2) ? n1 : n2;
+    n = std::max(n1, n2);
     PROTECT(ans = R_allocOrReuseVector(s1, s2, REALSXP, n));
 
     switch (code) {
@@ -1339,14 +1359,14 @@ HIDDEN SEXP do_math1(SEXP call, SEXP op, SEXP args, SEXP env)
 /* methods are allowed to have more than one arg */
 HIDDEN SEXP do_trunc(SEXP call, SEXP op, SEXP args, SEXP env)
 {
-    SEXP s;
-    if (DispatchGroup("Math", call, op, args, env, &s))
-	return s;
-    // checkArity(op, args); /* is -1 in names.cpp */
-    check1arg(args, call, "x");
-    if (isComplex(CAR(args)))
-	errorcall(call, _("unimplemented complex function"));
-    return math1(CAR(args), trunc, call);
+	SEXP s;
+	if (DispatchGroup("Math", call, op, args, env, &s))
+		return s;
+	// checkArity(op, args); /* is -1 in names.cpp */
+	check1arg(args, call, "x");
+	if (isComplex(CAR(args)))
+		errorcall(call, _("unimplemented complex function"));
+	return math1(CAR(args), trunc, call);
 }
 
 /*
@@ -1457,13 +1477,13 @@ static SEXP math2(SEXP sa, SEXP sb, double (*f)(double, double),
 	}
     });
 
-#define FINISH_Math2                      \
-	if (naflag)                           \
-		warning(_("NaN values produced"));                \
-	if (n == na)                          \
-		SHALLOW_DUPLICATE_ATTRIB(sy, sa); \
-	else if (n == nb)                     \
-		SHALLOW_DUPLICATE_ATTRIB(sy, sb); \
+#define FINISH_Math2                       \
+	if (naflag)                            \
+		warning(_("NaN values produced")); \
+	if (n == na)                           \
+		SHALLOW_DUPLICATE_ATTRIB(sy, sa);  \
+	else if (n == nb)                      \
+		SHALLOW_DUPLICATE_ATTRIB(sy, sb);  \
 	UNPROTECT(3)
 
 	FINISH_Math2;

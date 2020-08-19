@@ -6,7 +6,7 @@
  *  This header file is designed to be platform-independent.
  *
  *  Copyright 2006-8	The R Foundation
- *  Copyright 2013-19	The R Core Team
+ *  Copyright 2013-20	The R Core Team
  *
  */
 
@@ -91,28 +91,29 @@ struct point
 
 struct rect
 {
-    int x, y;		/* top-left point inside rect */
-    int width, height;	/* width and height of rect */
+    int x, y;          /* top-left point inside rect */
+    int width, height; /* width and height of rect */
 };
 
 struct drawstruct
 {
-    drawing	dest;
-    rgb	hue;
-    int	mode;
-    point	p;
-    int	linewidth;
-    font	fnt;
-    cursor	crsr;
+    drawing dest;
+    rgb hue;
+    int mode;
+    point p;
+    int linewidth;
+    font fnt;
+    cursor crsr;
 };
 
-struct imagedata {
-    int     depth;
-    int     width;
-    int     height;
-    int     cmapsize;
-    rgb *   cmap;
-    GAbyte *  pixels;
+struct imagedata
+{
+    int depth;
+    int width;
+    int height;
+    int cmapsize;
+    rgb *cmap;
+    GAbyte *pixels;
 };
 
 /*
@@ -1104,63 +1105,62 @@ window	parentwindow(control c);
  *  Create buttons, scrollbars, controls etc on the current window.
  */
 
-control	  newcontrol(const char *text, rect r);
+control newcontrol(const char *text, rect r);
 
-drawing	  newdrawing(rect r, drawfn fn);
-drawing	  newpicture(image img, rect r);
+drawing newdrawing(rect r, drawfn fn);
+drawing newpicture(image img, rect r);
 
-button	  newbutton(const char *text, rect r, actionfn fn);
-button	  newimagebutton(image img, rect r, actionfn fn);
-void	  setimage(control c, image img);
+button newbutton(const char *text, rect r, actionfn fn);
+button newimagebutton(image img, rect r, actionfn fn);
+void setimage(control c, image img);
 
-checkbox  newcheckbox(const char *text, rect r, actionfn fn);
-checkbox  newimagecheckbox(image img, rect r, actionfn fn);
+checkbox newcheckbox(const char *text, rect r, actionfn fn);
+checkbox newimagecheckbox(image img, rect r, actionfn fn);
 
 radiobutton newradiobutton(const char *text, rect r, actionfn fn);
-radiogroup  newradiogroup(void);
+radiogroup newradiogroup(void);
 
 scrollbar newscrollbar(rect r, int max, int pagesize, scrollfn fn);
-void	  changescrollbar(scrollbar s, int where, int max, int size);
+void changescrollbar(scrollbar s, int where, int max, int size);
 
-label	  newlabel(const char *text, rect r, int alignment);
-field	  newfield(const char *text, rect r);
-field	  newpassword(const char *text, rect r);
-textbox	  newtextbox(const char *text, rect r);
-textbox	  newtextarea(const char *text, rect r);
-textbox	  newrichtextarea(const char *text, rect r);
+label newlabel(const char *text, rect r, int alignment);
+field newfield(const char *text, rect r);
+field newpassword(const char *text, rect r);
+textbox newtextbox(const char *text, rect r);
+textbox newtextarea(const char *text, rect r);
+textbox newrichtextarea(const char *text, rect r);
 
-listbox	  newlistbox(const char *list[], rect r, scrollfn fn, actionfn dble);
-listbox	  newdroplist(const char *list[], rect r, scrollfn fn);
-listbox	  newdropfield(const char *list[], rect r, scrollfn fn);
-listbox	  newmultilist(const char *list[], rect r, scrollfn fn, actionfn dble);
-int	  isselected(listbox b, int index);
-void	  setlistitem(listbox b, int index);
-int	  getlistitem(listbox b);
-void	  changelistbox(listbox b, const char *new_list[]);
+listbox newlistbox(const char *list[], rect r, scrollfn fn, actionfn dble);
+listbox newdroplist(const char *list[], rect r, scrollfn fn);
+listbox newdropfield(const char *list[], rect r, scrollfn fn);
+listbox newmultilist(const char *list[], rect r, scrollfn fn, actionfn dble);
+int isselected(listbox b, int index);
+void setlistitem(listbox b, int index);
+int getlistitem(listbox b);
+void changelistbox(listbox b, const char *new_list[]);
 
 progressbar newprogressbar(rect r, int pmin, int pmax, int incr, int smooth);
 void setprogressbar(progressbar obj, int n);
 void stepprogressbar(progressbar obj, int n);
 void setprogressbarrange(progressbar obj, int pbmin, int pbmax);
 
-
-menubar	  newmenubar(actionfn adjust_menus);
-menu	  newsubmenu(menu parent, const char *name);
-menu	  newmenu(const char *name);
-menuitem  newmenuitem(const char *name, int key, menufn fn);
+menubar newmenubar(actionfn adjust_menus);
+menu newsubmenu(menu parent, const char *name);
+menu newmenu(const char *name);
+menuitem newmenuitem(const char *name, int key, menufn fn);
 
 /*
  *  Text editing functions.
  */
 
-void  undotext(textbox t);
-void  cuttext(textbox t);
-void  copytext(textbox t);
-void  cleartext(textbox t);
-void  pastetext(textbox t);
-void  inserttext(textbox t, const char *text);
-void  selecttext(textbox t, long start, long end);
-void  textselection(textbox t, long *start, long *end);
+void undotext(textbox t);
+void cuttext(textbox t);
+void copytext(textbox t);
+void cleartext(textbox t);
+void pastetext(textbox t);
+void inserttext(textbox t, const char *text);
+void selecttext(textbox t, long start, long end);
+void textselection(textbox t, long *start, long *end);
 
 /*
  *  Dialogs.
@@ -1170,52 +1170,52 @@ void  textselection(textbox t, long *start, long *end);
 #define NO    -1
 #define CANCEL 0
 
-void	apperror(const char *errstr);
-void	askok(const char *info);
-int	askokcancel(const char *question);
-int	askyesno(const char *question);
-int	askyesnocancel(const char *question);
-char *	askstring(const char *question, const char *default_string);
-char *	askpassword(const char *question, const char *default_string);
-char *	askfilename(const char *title, const char *default_name);
-char *  askfilenamewithdir(const char *title, const char *default_name, const char *dir);
-char *	askfilesave(const char *title, const char *default_name);
-char *	askUserPass(const char *title);
+void apperror(const char *errstr);
+void askok(const char *info);
+int askokcancel(const char *question);
+int askyesno(const char *question);
+int askyesnocancel(const char *question);
+char *askstring(const char *question, const char *default_string);
+char *askpassword(const char *question, const char *default_string);
+char *askfilename(const char *title, const char *default_name);
+char *askfilenamewithdir(const char *title, const char *default_name, const char *dir);
+char *askfilesave(const char *title, const char *default_name);
+char *askUserPass(const char *title);
 
 /*
  *  Time functions.
  */
 
-int	settimer(unsigned millisec);
-void	settimerfn(timerfn timeout, void *data);
-int	setmousetimer(unsigned millisec);
-void	delay(unsigned millisec);
-long	currenttime(void);
+int settimer(unsigned millisec);
+void settimerfn(timerfn timeout, void *data);
+int setmousetimer(unsigned millisec);
+void delay(unsigned millisec);
+long currenttime(void);
 
 /*
  *  Cursors.
  */
 
-cursor	newcursor(point hotspot, image img);
-cursor	createcursor(point offset, GAbyte *white_mask, GAbyte *black_shape);
-cursor	loadcursor(const char *name);
-void	setcursor(cursor c);
+cursor newcursor(point hotspot, image img);
+cursor createcursor(point offset, GAbyte *white_mask, GAbyte *black_shape);
+cursor loadcursor(const char *name);
+void setcursor(cursor c);
 
 /*
  *  Change the drawing state.
  */
 
 drawstate copydrawstate(void);
-void	setdrawstate(drawstate saved_state);
-void	restoredrawstate(drawstate saved_state);
-void	resetdrawstate(void);
+void setdrawstate(drawstate saved_state);
+void restoredrawstate(drawstate saved_state);
+void resetdrawstate(void);
 
 /*
  *  Caret-related functions.
  */
 
-void 	setcaret(control c, int x, int y, int width, int height);
-void	showcaret(control c, int showing);
+void setcaret(control c, int x, int y, int width, int height);
+void showcaret(control c, int showing);
 
 /*
  *  Library supplied variables.
@@ -1224,7 +1224,7 @@ void	showcaret(control c, int showing);
 #include <R_ext/libextern.h>
 #undef LibExtern
 #ifdef GA_DLL_BUILD
-# define LibExtern LibExport
+# define LibExtern extern
 #else
 # define LibExtern extern LibImport
 #endif
