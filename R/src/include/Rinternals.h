@@ -222,13 +222,13 @@ SEXPTYPE
     class R::Promise;
     class R::List;
 #else
-    using GCNode = class R::RObject;
-    using Symbol = class R::RObject;
-    using BuiltInFunction = class R::RObject;
-    using Environment = class R::RObject;
-    using Closure = class R::RObject;
-    using Promise = class R::RObject;
-    using List = class R::RObject;
+    typedef class R::RObject GCNode;
+    typedef class R::RObject Symbol;
+    typedef class R::RObject BuiltInFunction;
+    typedef class R::RObject Environment;
+    typedef class R::RObject Closure;
+    typedef class R::RObject Promise;
+    typedef class R::RObject RList;
 #endif
 #else
     typedef struct RObject *SEXP;
