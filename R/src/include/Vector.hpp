@@ -115,7 +115,7 @@ namespace R
 /* Under the generational allocator the data for vector nodes comes
    immediately after the node structure, so the data address is a
    known offset from the node SEXP. */
-#define STDVEC_DATAPTR(x) ((void *)(((R::SEXPREC_ALIGN *)(x)) + 1))
+#define STDVEC_DATAPTR(x) (reinterpret_cast<void *>(reinterpret_cast<R::SEXPREC_ALIGN *>(x) + 1))
 #define CHAR(x) ((const char *)STDVEC_DATAPTR(x))
 #define LOGICAL(x) ((int *)DATAPTR(x))
 #define INTEGER(x) ((int *)DATAPTR(x))

@@ -214,19 +214,21 @@ SEXPTYPE
     }
     using SEXP = R::RObject *;
 #if 0
+    class R::GCNode;
     class R::Symbol;
     class R::BuiltInFunction;
     class R::Environment;
     class R::Closure;
     class R::Promise;
-    class R::RList;
+    class R::List;
 #else
-    typedef class R::RObject Symbol;
-    typedef class R::RObject BuiltInFunction;
-    typedef class R::RObject Environment;
-    typedef class R::RObject Closure;
-    typedef class R::RObject Promise;
-    typedef class R::RObject RList;
+    using GCNode = class R::RObject;
+    using Symbol = class R::RObject;
+    using BuiltInFunction = class R::RObject;
+    using Environment = class R::RObject;
+    using Closure = class R::RObject;
+    using Promise = class R::RObject;
+    using List = class R::RObject;
 #endif
 #else
     typedef struct RObject *SEXP;

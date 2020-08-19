@@ -196,13 +196,14 @@ static int bad_sexp_type_line = 0;
 
 R_INLINE static void register_bad_sexp_type(SEXP s, int line)
 {
-    if (bad_sexp_type_seen == 0) {
-	bad_sexp_type_seen = TYPEOF(s);
-	bad_sexp_type_sexp = s;
-	bad_sexp_type_line = line;
+    if (bad_sexp_type_seen == 0)
+    {
+        bad_sexp_type_seen = TYPEOF(s);
+        bad_sexp_type_sexp = s;
+        bad_sexp_type_line = line;
 #ifdef PROTECTCHECK
-	if (TYPEOF(s) == FREESXP)
-	    bad_sexp_type_old_type = OLDTYPE(s);
+        if (TYPEOF(s) == FREESXP)
+            bad_sexp_type_old_type = OLDTYPE(s);
 #endif
     }
 }
@@ -634,11 +635,11 @@ union PAGE_HEADER
 /*#define EXPEL_OLD_TO_NEW*/
 static struct
 {
-    SEXP Old[NUM_OLD_GENERATIONS], New, Free;
-    RObject OldPeg[NUM_OLD_GENERATIONS], NewPeg;
+    GCNode *Old[NUM_OLD_GENERATIONS], *New, *Free;
+    GCNode OldPeg[NUM_OLD_GENERATIONS], NewPeg;
 #ifndef EXPEL_OLD_TO_NEW
-    SEXP OldToNew[NUM_OLD_GENERATIONS];
-    RObject OldToNewPeg[NUM_OLD_GENERATIONS];
+    GCNode *OldToNew[NUM_OLD_GENERATIONS];
+    GCNode OldToNewPeg[NUM_OLD_GENERATIONS];
 #endif
     int OldCount[NUM_OLD_GENERATIONS], AllocCount, PageCount;
     PAGE_HEADER *pages;
@@ -647,27 +648,27 @@ static struct
 static R_size_t R_NodesInUse = 0;
 namespace
 {
-    auto NEXT_NODE(SEXP s) { return RObject::next_node(s); }
-    auto PREV_NODE(SEXP s) { return RObject::prev_node(s); }
-    void SET_NEXT_NODE(SEXP s, SEXP t) { RObject::set_next_node(s, t); }
-    void SET_PREV_NODE(SEXP s, SEXP t) { RObject::set_prev_node(s, t); }
+    auto NEXT_NODE(GCNode *s) { return RObject::next_node(s); }
+    auto PREV_NODE(GCNode *s) { return RObject::prev_node(s); }
+    void SET_NEXT_NODE(GCNode *s, GCNode *t) { RObject::set_next_node(s, t); }
+    void SET_PREV_NODE(GCNode *s, GCNode *t) { RObject::set_prev_node(s, t); }
 
     /* Node List Manipulation */
 
     /* unsnap node s from its list */
-    void UNSNAP_NODE(SEXP s)
+    void UNSNAP_NODE(GCNode *s)
     {
 
-        SEXP next = NEXT_NODE(s);
-        SEXP prev = PREV_NODE(s);
+        GCNode *next = NEXT_NODE(s);
+        GCNode *prev = PREV_NODE(s);
         SET_NEXT_NODE(prev, next);
         SET_PREV_NODE(next, prev);
     }
 
     /* snap in node s before node t */
-    void SNAP_NODE(SEXP s, SEXP t)
+    void SNAP_NODE(GCNode *s, GCNode *t)
     {
-        SEXP prev = PREV_NODE(t);
+        GCNode *prev = PREV_NODE(t);
         SET_NEXT_NODE(s, t);
         SET_PREV_NODE(t, s);
         SET_NEXT_NODE(prev, s);
@@ -675,11 +676,11 @@ namespace
     }
 
     /* move all nodes on from_peg to to_peg */
-    void BULK_MOVE(SEXP from_peg, SEXP to_peg)
+    void BULK_MOVE(GCNode *from_peg, GCNode *to_peg)
     {
-        SEXP first_old = NEXT_NODE(from_peg);
-        SEXP last_old = PREV_NODE(from_peg);
-        SEXP first_new = NEXT_NODE(to_peg);
+        GCNode *first_old = NEXT_NODE(from_peg);
+        GCNode *last_old = PREV_NODE(from_peg);
+        GCNode *first_new = NEXT_NODE(to_peg);
         SET_PREV_NODE(first_old, to_peg);
         SET_NEXT_NODE(to_peg, first_old);
         SET_PREV_NODE(first_new, last_old);
@@ -789,7 +790,7 @@ namespace
 #define FORWARD_NODE(s)                              \
     do                                               \
     {                                                \
-        SEXP fn__n__ = (s);                          \
+        GCNode *fn__n__ = (s);                          \
         if (fn__n__ && !NODE_IS_MARKED(fn__n__))     \
         {                                            \
             CHECK_FOR_FREE_NODE(fn__n__)             \
@@ -808,7 +809,7 @@ namespace
 #ifdef PROTECTCHECK
 #define CHECK_FOR_FREE_NODE(s)                                 \
     {                                                          \
-        SEXP cf__n__ = (s);                                    \
+        GCNode *cf__n__ = (s);                                    \
         if (TYPEOF(cf__n__) == FREESXP && !gc_inhibit_release) \
             register_bad_sexp_type(cf__n__, __LINE__);         \
     }
@@ -822,7 +823,7 @@ namespace
 #define CLASS_GET_FREE_NODE(c, s)             \
     do                                        \
     {                                         \
-        SEXP __n__ = R_GenHeap[c].Free;       \
+        GCNode *__n__ = R_GenHeap[c].Free;    \
         if (__n__ == R_GenHeap[c].New)        \
         {                                     \
             GetNewPage(c);                    \
@@ -840,7 +841,7 @@ namespace
 #define CLASS_QUICK_GET_FREE_NODE(c, s)                 \
     do                                                  \
     {                                                   \
-        SEXP __n__ = R_GenHeap[c].Free;                 \
+        GCNode *__n__ = R_GenHeap[c].Free;                 \
         if (__n__ == R_GenHeap[c].New)                  \
             error("need new page - should not happen"); \
         R_GenHeap[c].Free = NEXT_NODE(__n__);           \
@@ -869,11 +870,11 @@ static void CheckNodeGeneration(SEXP x, int g)
 static void DEBUG_CHECK_NODE_COUNTS(char *where)
 {
     int i, OldCount, NewCount, OldToNewCount, gen;
-    SEXP s;
+    GCNode *s;
 
     REprintf(_("Node counts %s:\n"), where);
     for (i = 0; i < NUM_NODE_CLASSES; i++) {
-	for (s = NEXT_NODE(R_GenHeap[i].New), NewCount = 0;
+	for (GCNode *s = NEXT_NODE(R_GenHeap[i].New), NewCount = 0;
 	     s != R_GenHeap[i].New;
 	     s = NEXT_NODE(s)) {
 	    NewCount++;
@@ -883,7 +884,7 @@ static void DEBUG_CHECK_NODE_COUNTS(char *where)
 	for (gen = 0, OldCount = 0, OldToNewCount = 0;
 	     gen < NUM_OLD_GENERATIONS;
 	     gen++) {
-	    for (s = NEXT_NODE(R_GenHeap[i].Old[gen]);
+	    for (GCNode *s = NEXT_NODE(R_GenHeap[i].Old[gen]);
 		 s != R_GenHeap[i].Old[gen];
 		 s = NEXT_NODE(s)) {
 		OldCount++;
@@ -893,7 +894,7 @@ static void DEBUG_CHECK_NODE_COUNTS(char *where)
 		    gc_error(_("Inconsistent node generation\n"));
 		DO_CHILDREN(s, CheckNodeGeneration, gen);
 	    }
-	    for (s = NEXT_NODE(R_GenHeap[i].OldToNew[gen]);
+	    for (GCNode *s = NEXT_NODE(R_GenHeap[i].OldToNew[gen]);
 		 s != R_GenHeap[i].OldToNew[gen];
 		 s = NEXT_NODE(s)) {
 		OldToNewCount++;
@@ -1132,9 +1133,9 @@ static void custom_node_free(void *ptr);
 static void ReleaseLargeFreeVectors()
 {
     for (int node_class = CUSTOM_NODE_CLASS; node_class <= LARGE_NODE_CLASS; node_class++) {
-	SEXP s = NEXT_NODE(R_GenHeap[node_class].New);
+	GCNode *s = NEXT_NODE(R_GenHeap[node_class].New);
 	while (s != R_GenHeap[node_class].New) {
-	    SEXP next = NEXT_NODE(s);
+	    GCNode *next = NEXT_NODE(s);
 	    if (CHAR(s)) {
 		R_size_t size;
 #ifdef PROTECTCHECK
@@ -1227,7 +1228,7 @@ static void AdjustHeapSize(R_size_t size_needed)
 #define AGE_NODE(s, g)                                                               \
     do                                                                               \
     {                                                                                \
-        SEXP an__n__ = (s);                                                          \
+        GCNode *an__n__ = (s);                                                          \
         int an__g__ = (g);                                                           \
         if (an__n__ && NODE_GEN_IS_YOUNGER(an__n__, an__g__))                        \
         {                                                                            \
@@ -1242,9 +1243,9 @@ static void AdjustHeapSize(R_size_t size_needed)
         }                                                                            \
     } while (0)
 
-static void AgeNodeAndChildren(SEXP s, int gen)
+static void AgeNodeAndChildren(GCNode *s, int gen)
 {
-    SEXP forwarded_nodes = nullptr;
+    GCNode *forwarded_nodes = nullptr;
     AGE_NODE(s, gen);
     while (forwarded_nodes) {
 	s = forwarded_nodes;
@@ -1671,8 +1672,8 @@ static int RunGenCollect(R_size_t size_needed)
 {
     int i, gen, gens_collected;
     RCNTXT *ctxt;
-    SEXP s;
-    SEXP forwarded_nodes;
+    GCNode *s;
+    GCNode *forwarded_nodes;
 
     bad_sexp_type_seen = NILSXP;
 
@@ -1700,7 +1701,7 @@ static int RunGenCollect(R_size_t size_needed)
 	for (i = 0; i < NUM_NODE_CLASSES; i++) {
 	    s = NEXT_NODE(R_GenHeap[i].OldToNew[gen]);
 	    while (s != R_GenHeap[i].OldToNew[gen]) {
-		SEXP next = NEXT_NODE(s);
+		GCNode *next = NEXT_NODE(s);
 		DO_CHILDREN(s, AgeNodeAndChildren, gen);
 		UNSNAP_NODE(s);
 		if (NODE_GENERATION(s) != gen)
@@ -1721,7 +1722,7 @@ static int RunGenCollect(R_size_t size_needed)
 	    R_GenHeap[i].OldCount[gen] = 0;
 	    s = NEXT_NODE(R_GenHeap[i].Old[gen]);
 	    while (s != R_GenHeap[i].Old[gen]) {
-		SEXP next = NEXT_NODE(s);
+		GCNode *next = NEXT_NODE(s);
 		if (gen < NUM_OLD_GENERATIONS - 1)
 		    SET_NODE_GENERATION(s, gen + 1);
 		UNMARK_NODE(s);
@@ -1896,7 +1897,7 @@ static int RunGenCollect(R_size_t size_needed)
     for(i=0; i< NUM_SMALL_NODE_CLASSES;i++){
 	s = NEXT_NODE(R_GenHeap[i].New);
 	while (s != R_GenHeap[i].New) {
-	    SEXP next = NEXT_NODE(s);
+	    GCNode *next = NEXT_NODE(s);
 	    if (TYPEOF(s) != NEWSXP) {
 		if (TYPEOF(s) != FREESXP) {
 		    SETOLDTYPE(s, TYPEOF(s));
@@ -1911,7 +1912,7 @@ static int RunGenCollect(R_size_t size_needed)
     for (i = CUSTOM_NODE_CLASS; i <= LARGE_NODE_CLASS; i++) {
 	s = NEXT_NODE(R_GenHeap[i].New);
 	while (s != R_GenHeap[i].New) {
-	    SEXP next = NEXT_NODE(s);
+	    GCNode *next = NEXT_NODE(s);
 	    if (TYPEOF(s) != NEWSXP) {
 		if (TYPEOF(s) != FREESXP) {
 		    /**** could also leave this alone and restore the old
@@ -3308,8 +3309,7 @@ HIDDEN SEXP do_memoryprofile(SEXP call, SEXP op, SEXP args, SEXP env)
       R_gc();
       for (gen = 0; gen < NUM_OLD_GENERATIONS; gen++) {
 	for (i = 0; i < NUM_NODE_CLASSES; i++) {
-	  SEXP s;
-	  for (s = NEXT_NODE(R_GenHeap[i].Old[gen]);
+	  for (GCNode *s = NEXT_NODE(R_GenHeap[i].Old[gen]);
 	       s != R_GenHeap[i].Old[gen];
 	       s = NEXT_NODE(s)) {
 	      tmp = TYPEOF(s);

@@ -114,8 +114,10 @@ namespace R
         unsigned int m_named : NAMED_BITS;
         unsigned int m_extra : 29 - NAMED_BITS; /* used for immediate bindings */
         RObject *m_attrib;
-        RObject *gengc_next_node;
-        RObject *gengc_prev_node;
+
+        GCNode *gengc_next_node;
+        GCNode *gengc_prev_node;
+
         union
         {
             primsxp_struct primsxp;
@@ -201,15 +203,21 @@ namespace R
 #endif
     public:
         /* General Cons Cell Attributes */
-        static bool gcgen(RObject *v);
-        static void set_gcgen(RObject *v, bool x);
+        static bool gcgen(GCNode *v);
+        static void set_gcgen(GCNode *v, bool x);
         static unsigned int gccls(RObject *v);
         static void set_gccls(RObject *v, unsigned int x);
-        static RObject *next_node(RObject *s);
-        static RObject *prev_node(RObject *s);
-        static void set_next_node(RObject *s, RObject *t);
-        static void set_prev_node(RObject *s, RObject *t);
+        static GCNode *next_node(GCNode *s);
+        static GCNode *prev_node(GCNode *s);
+        static void set_next_node(GCNode *s, GCNode *t);
+        static void set_prev_node(GCNode *s, GCNode *t);
         static void copy_sxpinfo(RObject *x, RObject &y);
+        // Make t the successor of s:
+        static inline void link(GCNode *s, GCNode *t)
+        {
+            s->gengc_next_node = t;
+            t->gengc_prev_node = s;
+        }
         static constexpr int READY_TO_FINALIZE_MASK = 1;
         static constexpr int FINALIZE_ON_EXIT_MASK = 2;
         static constexpr int WEAKREF_SIZE = 4;
