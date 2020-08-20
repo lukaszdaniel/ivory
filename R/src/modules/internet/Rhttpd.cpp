@@ -168,10 +168,11 @@ static struct sockaddr *build_sin(struct sockaddr_in *sa, const char *ip, int po
 #define CONTENT_TYPE      0x40 /* message has a specific content type set */
 #define CONTENT_FORM_UENC 0x80 /* message content type is application/x-www-form-urlencoded */
 
-struct buffer {
-    struct buffer *next, *prev;
-    size_t size, length;
-    char data[1];
+struct buffer
+{
+	struct buffer *next, *prev;
+	size_t size, length;
+	char data[1];
 };
 
 /* 
@@ -191,21 +192,22 @@ static int in_process;
 #endif
 
 /* --- connection/worker structure holding all data for an active connection --- */
-typedef struct httpd_conn {
-    SOCKET sock;         /* client socket */
-    struct in_addr peer; /* IP address of the peer */
+typedef struct httpd_conn
+{
+	SOCKET sock;		 /* client socket */
+	struct in_addr peer; /* IP address of the peer */
 #ifdef _WIN32
-    HANDLE thread;       /* worker thread */
+	HANDLE thread; /* worker thread */
 #else
-    InputHandler *ih;    /* worker input handler */
+	InputHandler *ih; /* worker input handler */
 #endif
-    char line_buf[LINE_BUF_SIZE];  /* line buffer (used for request and headers) */
-    char *url, *body;              /* URL and request body */
-    char *content_type;            /* content type (if set) */
-    size_t line_pos, body_pos; /* positions in the buffers */
-    long content_length;           /* desired content length */
-    char part, method, attr;       /* request part, method and connection attributes */
-    struct buffer *headers;        /* buffer holding header lines */
+	char line_buf[LINE_BUF_SIZE]; /* line buffer (used for request and headers) */
+	char *url, *body;			  /* URL and request body */
+	char *content_type;			  /* content type (if set) */
+	size_t line_pos, body_pos;	  /* positions in the buffers */
+	long content_length;		  /* desired content length */
+	char part, method, attr;	  /* request part, method and connection attributes */
+	struct buffer *headers;		  /* buffer holding header lines */
 } httpd_conn_t;
 
 #define IS_HTTP_1_1(C) (((C)->attr & HTTP_1_0) == 0)
@@ -251,22 +253,28 @@ static void first_init()
 }
 
 /* free buffers starting from the tail(!!) */
-static void free_buffer(struct buffer *buf) {
-    if (!buf) return;
-    if (buf->prev) free_buffer(buf->prev);
-    free(buf);
+static void free_buffer(struct buffer *buf)
+{
+	if (!buf)
+		return;
+	if (buf->prev)
+		free_buffer(buf->prev);
+	free(buf);
 }
 
 /* allocate a new buffer */
-static struct buffer *alloc_buffer(int size, struct buffer *parent) {
-    struct buffer *buf = (struct buffer*) malloc(sizeof(struct buffer) + size);
-    if (!buf) return buf;
-    buf->next = 0;
-    buf->prev = parent;
-    if (parent) parent->next = buf;
-    buf->size = size;
-    buf->length = 0;
-    return buf;
+static struct buffer *alloc_buffer(int size, struct buffer *parent)
+{
+	struct buffer *buf = (struct buffer *)malloc(sizeof(struct buffer) + size);
+	if (!buf)
+		return buf;
+	buf->next = 0;
+	buf->prev = parent;
+	if (parent)
+		parent->next = buf;
+	buf->size = size;
+	buf->length = 0;
+	return buf;
 }
 
 /* convert doubly-linked buffers into one big raw vector */
@@ -295,35 +303,41 @@ static SEXP collect_buffers(struct buffer *buf)
 
 static void finalize_worker(httpd_conn_t *c)
 {
-    DBG(printf("finalizing worker %p\n", (void*) c));
+	DBG(printf("finalizing worker %p\n", (void *)c));
 #ifndef _WIN32
-    if (c->ih) {
-	removeInputHandler(&R_InputHandlers, c->ih);
-	c->ih = nullptr;
-    }
+	if (c->ih)
+	{
+		removeInputHandler(&R_InputHandlers, c->ih);
+		c->ih = nullptr;
+	}
 #endif
-    if (c->url) {
-	free(c->url);
-	c->url = nullptr;
-    }
+	if (c->url)
+	{
+		free(c->url);
+		c->url = nullptr;
+	}
 
-    if (c->body) {
-	free(c->body);
-	c->body = nullptr;
-    }
+	if (c->body)
+	{
+		free(c->body);
+		c->body = nullptr;
+	}
 
-    if (c->content_type) {
-	free(c->content_type);
-	c->content_type = nullptr;
-    }
-    if (c->headers) {
-	free_buffer(c->headers);
-	c->headers = nullptr;
-    }
-    if (c->sock != INVALID_SOCKET) {
-	closesocket(c->sock);
-	c->sock = INVALID_SOCKET;
-    }
+	if (c->content_type)
+	{
+		free(c->content_type);
+		c->content_type = nullptr;
+	}
+	if (c->headers)
+	{
+		free_buffer(c->headers);
+		c->headers = nullptr;
+	}
+	if (c->sock != INVALID_SOCKET)
+	{
+		closesocket(c->sock);
+		c->sock = INVALID_SOCKET;
+	}
 }
 
 /* adds a worker to the worker list and returns 0. If the list is
@@ -501,23 +515,30 @@ static SEXP R_ContentTypeName, R_HandlersName;
 /* create an object representing the request body. It is NULL if the body is empty (or zero length).
  * In the case of a URL encoded form it will have the same shape as the query string (named string vector).
  * In all other cases it will be a raw vector with a "content-type" attribute (if specified in the headers) */
-static SEXP parse_request_body(httpd_conn_t *c) {
-    if (!c || !c->body) return R_NilValue;
+static SEXP parse_request_body(httpd_conn_t *c)
+{
+	if (!c || !c->body)
+		return R_NilValue;
 
-    if (c->attr & CONTENT_FORM_UENC) { /* URL encoded form - return parsed form */
-	c->body[c->content_length] = 0; /* the body is guaranteed to have an extra byte for the termination */
-	return parse_query(c->body);
-    } else { /* something else - pass it as a raw vector */
-	SEXP res = PROTECT(Rf_allocVector(RAWSXP, c->content_length));
-	if (c->content_length)
-	    memcpy(RAW(res), c->body, c->content_length);
-	if (c->content_type) { /* attach the content type so it can be interpreted */
-	    if (!R_ContentTypeName) R_ContentTypeName = install("content-type");
-	    setAttrib(res, R_ContentTypeName, mkString(c->content_type));
+	if (c->attr & CONTENT_FORM_UENC)
+	{									/* URL encoded form - return parsed form */
+		c->body[c->content_length] = 0; /* the body is guaranteed to have an extra byte for the termination */
+		return parse_query(c->body);
 	}
-	UNPROTECT(1);
-	return res;
-    }
+	else
+	{ /* something else - pass it as a raw vector */
+		SEXP res = PROTECT(Rf_allocVector(RAWSXP, c->content_length));
+		if (c->content_length)
+			memcpy(RAW(res), c->body, c->content_length);
+		if (c->content_type)
+		{ /* attach the content type so it can be interpreted */
+			if (!R_ContentTypeName)
+				R_ContentTypeName = install("content-type");
+			setAttrib(res, R_ContentTypeName, mkString(c->content_type));
+		}
+		UNPROTECT(1);
+		return res;
+	}
 }
 
 #ifdef _WIN32
@@ -560,7 +581,7 @@ static SEXP custom_handlers_env;
  * /custom/<name>[/.*] where <name> must less than 64 characters long
  * and is matched against closures in tools:::.httpd.handlers.env */
 static SEXP handler_for_path(const char *path) {
-    if (path && !strncmp(path, "/custom/", 8)) { /* starts with /custom/ ? */
+    if (path && streqln(path, "/custom/", 8)) { /* starts with /custom/ ? */
 	const char *c = path + 8, *e = c;
 	while (*c && *c != '/') c++; /* find out the name */
 	if (c - e > 0 && c - e < 64) { /* if it's 1..63 chars long, proceed */
@@ -690,9 +711,9 @@ static void process_request_(void *ptr)
 		}
 		/* special content - a file: either list(file="") or list(c("*FILE*", "")) - the latter will go away */
 		if (TYPEOF(xNames) == STRSXP && LENGTH(xNames) > 0 &&
-		    !strcmp(CHAR(STRING_ELT(xNames, 0)), "file"))
+		    streql(CHAR(STRING_ELT(xNames, 0)), "file"))
 		    fn = cs;
-		if (LENGTH(y) > 1 && !strcmp(cs, "*FILE*"))
+		if (LENGTH(y) > 1 && streql(cs, "*FILE*"))
 		    fn = CHAR(STRING_ELT(y, 1));
 		if (fn) {
 		    char *fbuf;
@@ -931,12 +952,12 @@ static void worker_input_handler(void *data) {
 			    return;
 			}
 			url++;
-			if (!strncmp(bol + rll - 3, "1.0", 3)) c->attr |= HTTP_1_0;
-			if (!strncmp(bol, "GET ", 4)) c->method = METHOD_GET;
-			if (!strncmp(bol, "POST ", 5)) c->method = METHOD_POST;
-			if (!strncmp(bol, "HEAD ", 5)) c->method = METHOD_HEAD;
+			if (streqln(bol + rll - 3, "1.0", 3)) c->attr |= HTTP_1_0;
+			if (streqln(bol, "GET ", 4)) c->method = METHOD_GET;
+			if (streqln(bol, "POST ", 5)) c->method = METHOD_POST;
+			if (streqln(bol, "HEAD ", 5)) c->method = METHOD_HEAD;
 			/* only custom handlers can use other methods */
-			if (!strncmp(url, "/custom/", 8)) {
+			if (streqln(url, "/custom/", 8)) {
 			    char *mend = url - 1;
 			    /* we generate a header with the method so it can be passed to the handler */
 			    if (!c->headers)
@@ -994,11 +1015,11 @@ static void worker_input_handler(void *data) {
 			    *(k++) = 0;
 			    while (*k == ' ' || *k == '\t') k++;
 			    DBG(printf("header '%s' => '%s'\n", bol, k));
-			    if (!strcmp(bol, "content-length")) {
+			    if (streql(bol, "content-length")) {
 				c->attr |= CONTENT_LENGTH;
 				c->content_length = atol(k);
 			    }
-			    if (!strcmp(bol, "content-type")) {
+			    if (streql(bol, "content-type")) {
 				char *l = k;
 				/* convert content-type to lowercase to facilitate comparison
 				   since MIME types are case-insensitive.
@@ -1008,15 +1029,15 @@ static void worker_input_handler(void *data) {
 				c->attr |= CONTENT_TYPE;
 				if (c->content_type) free(c->content_type);
 				c->content_type = Rstrdup(k);
-				if (!strncmp(k, "application/x-www-form-urlencoded", 33))
+				if (streqln(k, "application/x-www-form-urlencoded", 33))
 				    c->attr |= CONTENT_FORM_UENC;
 			    }
-			    if (!strcmp(bol, "host"))
+			    if (streql(bol, "host"))
 				c->attr |= HOST_HEADER;
-			    if (!strcmp(bol, "connection")) {
+			    if (streql(bol, "connection")) {
 				char *l = k;
 				while (*l) { if (*l >= 'A' && *l <= 'Z') *l |= 0x20; l++; }
-				if (!strncmp(k, "close", 5))
+				if (streqln(k, "close", 5))
 				    c->attr |= CONNECTION_CLOSE;
 			    }
 			}

@@ -384,7 +384,7 @@ static void editoropen(const char *default_name)
 	for (i = 0; i < neditors; ++i) {
 	    t = getdata(REditors[i]);
 	    p = getdata(t);
-	    if (!strcmp (name, p->filename)) {
+	    if (streql(name, p->filename)) {
 		editorclose(REditors[i]);
 		break;
 	    }

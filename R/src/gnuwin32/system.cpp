@@ -250,7 +250,7 @@ static int GuiReadConsole(const char *prompt, char *buf, int len, int addtohisto
 	R_is_running = 1;
 	Rconsolesetwidth(consolecols(RConsole));
     }
-    ConsoleAcceptCmd = !strcmp(prompt, NormalPrompt);
+    ConsoleAcceptCmd = streql(prompt, NormalPrompt);
     res = consolereads(RConsole, prompt, buf, len, addtohistory);
     ConsoleAcceptCmd = 0;
     return !res;
@@ -537,9 +537,9 @@ int R_ShowFiles(int nfile, const char **file, const char **headers,
 	    pager = "internal";
 	for (i = 0; i < nfile; i++) {
 	    if(!access(file[i], R_OK)) {
-		if (!strcmp(pager, "internal")) {
+		if (streql(pager, "internal")) {
 		    newpager(wtitle, file[i], CE_NATIVE, headers[i], del);
-		} else if (!strcmp(pager, "console")) {
+		} else if (streql(pager, "console")) {
 		    size_t len;
 		    FILE *f;
 		    f = R_fopen(file[i], "rt");
@@ -604,7 +604,7 @@ int R_EditFiles(int nfile, const char **file, const char **title,
 	if (editor == nullptr || strlen(editor) == 0)
 	    editor = "internal";
 	for (i = 0; i < nfile; i++) {
-	    if (!strcmp(editor, "internal")) {
+	    if (streql(editor, "internal")) {
 		Rgui_Edit(file[i], CE_UTF8, title[i], 0);
 	    } else {
 		/* Quote path if not quoted */
@@ -956,9 +956,9 @@ int cmdlineoptions(int ac, char **av)
     R_DefParams(Rp);
     Rp->CharacterMode = CharacterMode;
     for (i = 1; i < ac; i++)
-	if (!strcmp(av[i], "--no-environ") || !strcmp(av[i], "--vanilla"))
+	if (streql(av[i], "--no-environ") || streql(av[i], "--vanilla"))
 	    Rp->NoRenviron = TRUE;
-	else if (!strcmp(av[i], "--cd-to-userdocs")) {
+	else if (streql(av[i], "--cd-to-userdocs")) {
 	    /* This is used in shortcuts created by the installer. Previously, the
 	       installer resolved the user documents folder at installation time,
 	       but that is not good for installation under SCCM/system context where
@@ -1060,26 +1060,26 @@ int cmdlineoptions(int ac, char **av)
     cmdlines[0] = '\0';
     while (--ac) {
 	if (processing && **++av == '-') {
-	    if (!strcmp(*av, "--help") || !strcmp(*av, "-h")) {
+	    if (streql(*av, "--help") || streql(*av, "-h")) {
 		R_ShowMessage(PrintUsage());
 		exit(0);
-	    } else if (!strcmp(*av, "--cd-to-userdocs")) {
+	    } else if (streql(*av, "--cd-to-userdocs")) {
 		/* handled above before processing Renviron */
-	    } else if (!strcmp(*av, "--no-environ")) {
+	    } else if (streql(*av, "--no-environ")) {
 		Rp->NoRenviron = TRUE;
-	    } else if (!strcmp(*av, "--ess")) {
+	    } else if (streql(*av, "--ess")) {
 /* Assert that we are interactive even if input is from a file */
 		Rp->R_Interactive = TRUE;
 		Rp->ReadConsole = ThreadedReadConsole;
 		InThreadReadConsole = FileReadConsole;
 		setvbuf(stdout, nullptr, _IONBF, 0);
-	    } else if (!strcmp(*av, "--internet2")) {
+	    } else if (streql(*av, "--internet2")) {
 /*	        This is now the default */
-	    } else if (!strcmp(*av, "--mdi")) {
+	    } else if (streql(*av, "--mdi")) {
 		MDIset = 1;
-	    } else if (!strcmp(*av, "--sdi") || !strcmp(*av, "--no-mdi")) {
+	    } else if (streql(*av, "--sdi") || streql(*av, "--no-mdi")) {
 		MDIset = -1;
-	    } else if (!strncmp(*av, "--max-mem-size", 14)) {
+	    } else if (streqln(*av, "--max-mem-size", 14)) {
 		if(strlen(*av) < 16) {
 		    ac--; av++; p = *av;
 		}
@@ -1114,12 +1114,12 @@ int cmdlineoptions(int ac, char **av)
 		    R_ShowMessage(s);
 		} else
 		    R_max_memory = value;
-	    } else if(!strcmp(*av, "--debug")) {
+	    } else if(streql(*av, "--debug")) {
 		DebugMenuitem = TRUE;
 		breaktodebugger();
-	    } else if(!strcmp(*av, "--args")) {
+	    } else if(streql(*av, "--args")) {
 		break;
-	    } else if(CharacterMode == RTerm && !strcmp(*av, "-f")) {
+	    } else if(CharacterMode == RTerm && streql(*av, "-f")) {
 		ac--; av++;
 		if (!ac) {
 		    snprintf(s, 1024,
@@ -1138,7 +1138,7 @@ int cmdlineoptions(int ac, char **av)
 			R_Suicide(s);
 		    }
 		}
-	    } else if(CharacterMode == RTerm && !strncmp(*av, "--file=", 7)) {
+	    } else if(CharacterMode == RTerm && streqln(*av, "--file=", 7)) {
 		Rp->R_Interactive = FALSE;
 		Rp->ReadConsole = FileReadConsole;
 		if(strcmp((*av)+7, "-")) {
@@ -1150,9 +1150,9 @@ int cmdlineoptions(int ac, char **av)
 			R_Suicide(s);
 		    }
 		}
-	    } else if (!strncmp(*av, "--workspace=", 12)) {
+	    } else if (streqln(*av, "--workspace=", 12)) {
 		usedRdata = use_workspace(Rp, *av + 12, usedRdata);
-	    } else if(CharacterMode == RTerm && !strcmp(*av, "-e")) {
+	    } else if(CharacterMode == RTerm && streql(*av, "-e")) {
 		ac--; av++;
 		if (!ac || !strlen(*av)) {
 		    snprintf(s, 1024,

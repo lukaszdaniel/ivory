@@ -4364,7 +4364,7 @@ inline static SEXP getPrimitive(SEXP symbol, SEXPTYPE type)
     return value;
 }
 
-static SEXP cmp_relop(SEXP call, int opval, SEXP opsym, SEXP x, SEXP y,
+static SEXP cmp_relop(SEXP call, RELOP_TYPE opval, SEXP opsym, SEXP x, SEXP y,
 		      SEXP rho)
 {
     SEXP op = getPrimitive(opsym, BUILTINSXP);
@@ -4397,7 +4397,7 @@ static SEXP cmp_arith1(SEXP call, SEXP opsym, SEXP x, SEXP rho)
     return R_unary(call, op, x);
 }
 
-static SEXP cmp_arith2(SEXP call, int opval, SEXP opsym, SEXP x, SEXP y,
+static SEXP cmp_arith2(SEXP call, ARITHOP_TYPE opval, SEXP opsym, SEXP x, SEXP y,
 		       SEXP rho)
 {
     SEXP op = getPrimitive(opsym, BUILTINSXP);

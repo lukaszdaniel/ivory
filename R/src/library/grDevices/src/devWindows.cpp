@@ -491,13 +491,13 @@ static void SaveAsPDF(pDevDesc dd, const char *fn)
     if ((s != R_UnboundValue) && (s != R_NilValue)) {
 	SEXP names = getAttrib(s, R_NamesSymbol);
 	for (int i = 0; i < length(s) ; i++) {
-	    if(!strcmp("family", CHAR(STRING_ELT(names, i))))
+	    if(streql("family", CHAR(STRING_ELT(names, i))))
 		strncpy(family, CHAR(STRING_ELT(VECTOR_ELT(s, i), 0)),255);
-	    if(!strcmp("bg", CHAR(STRING_ELT(names, i))))
+	    if(streql("bg", CHAR(STRING_ELT(names, i))))
 		strncpy(bg, CHAR(STRING_ELT(VECTOR_ELT(s, i), 0)), 255);
-	    if(!strcmp("fg", CHAR(STRING_ELT(names, i))))
+	    if(streql("fg", CHAR(STRING_ELT(names, i))))
 		strncpy(fg, CHAR(STRING_ELT(VECTOR_ELT(s, i), 0)), 255);
-	    if(!strcmp("compress", CHAR(STRING_ELT(names, i))))
+	    if(streql("compress", CHAR(STRING_ELT(names, i))))
 		useCompression = LOGICAL(VECTOR_ELT(s, i))[0] != 0;
 	}
     }
@@ -1797,7 +1797,7 @@ static Rboolean GA_Open(pDevDesc dd, gadesc *xd, const char *dsp,
 	if (!setupScreenDevice(dd, xd, w, h, recording, resize, xpos, ypos))
 	    return FALSE;
 	xd->have_alpha = TRUE;
-    } else if (!strncmp(dsp, "win.print:", 10)) {
+    } else if (streqln(dsp, "win.print:", 10)) {
 	xd->kind = PRINTER;
 	xd->fast = 0; /* use scalable line widths */
 	xd->gawin = newprinter(MM_PER_INCH * w, MM_PER_INCH * h, &dsp[10]);
@@ -1805,7 +1805,7 @@ static Rboolean GA_Open(pDevDesc dd, gadesc *xd, const char *dsp,
 	    warning("unable to open printer");
 	    return FALSE;
 	}
-    } else if (!strncmp(dsp, "png:", 4) || !strncmp(dsp,"bmp:", 4)) {
+    } else if (streqln(dsp, "png:", 4) || streqln(dsp,"bmp:", 4)) {
 	xd->res_dpi = (xpos == NA_INTEGER) ? 0 : xpos;
 	xd->bg = dd->startfill = canvascolor;
 	xd->kind = (dsp[0]=='p') ? PNG : BMP;
@@ -1837,7 +1837,7 @@ static Rboolean GA_Open(pDevDesc dd, gadesc *xd, const char *dsp,
 	    return FALSE;
 	}
 	xd->have_alpha = TRUE;
-    } else if (!strncmp(dsp, "jpeg:", 5)) {
+    } else if (streqln(dsp, "jpeg:", 5)) {
 	char *p = strchr(&dsp[5], ':');
 	xd->res_dpi = (xpos == NA_INTEGER) ? 0 : xpos;
 	xd->bg = dd->startfill = canvascolor;
@@ -1867,7 +1867,7 @@ static Rboolean GA_Open(pDevDesc dd, gadesc *xd, const char *dsp,
 	    return FALSE;
 	}
 	xd->have_alpha = TRUE;
-    } else if (!strncmp(dsp, "tiff:", 5)) {
+    } else if (streqln(dsp, "tiff:", 5)) {
 	char *p = strchr(&dsp[5], ':');
 	xd->res_dpi = (xpos == NA_INTEGER) ? 0 : xpos;
 	xd->bg = dd->startfill = canvascolor;
@@ -3477,9 +3477,9 @@ SEXP savePlot(SEXP args)
 	}
 	snprintf(display, 550, "win.metafile:%s", fn);
 	SaveAsWin(dd, display, restoreConsole);
-    } else if (!strcmp(tp, "ps") || !strcmp(tp, "eps")) {
+    } else if (streql(tp, "ps") || streql(tp, "eps")) {
 	SaveAsPostscript(dd, fn);
-    } else if (!strcmp(tp, "pdf")) {
+    } else if (streql(tp, "pdf")) {
 	SaveAsPDF(dd, fn);
     } else
 	error(_("unknown type in savePlot"));

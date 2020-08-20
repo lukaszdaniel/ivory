@@ -997,23 +997,23 @@ static int nwords;		/* # of words (ints) to code a term */
 static SEXP varlist;		/* variables in the model */
 static PROTECT_INDEX vpi;
 static SEXP framenames;		/* variables names for specified frame */
-static Rboolean haveDot;	/* does RHS of formula contain `.'? */
+static bool haveDot;	/* does RHS of formula contain `.'? */
 
-static int isZeroOne(SEXP x)
+static bool isZeroOne(SEXP x)
 {
-    if (!isNumeric(x)) return 0;
+    if (!isNumeric(x)) return false;
     return (asReal(x) == 0.0 || asReal(x) == 1.0);
 }
 
-static int isZero(SEXP x)
+static bool isZero(SEXP x)
 {
-    if (!isNumeric(x)) return 0;
+    if (!isNumeric(x)) return false;
     return asReal(x) == 0.0;
 }
 
-static int isOne(SEXP x)
+static bool isOne(SEXP x)
 {
-    if (!isNumeric(x)) return 0;
+    if (!isNumeric(x)) return false;
     return asReal(x) == 1.0;
 }
 
@@ -1024,29 +1024,29 @@ static int isOne(SEXP x)
 /* This is just EQUAL from lisp. */
 
 /* See src/main/memory.cpp: probably could be simplified to pointer comparison */
-static int Seql2(SEXP a, SEXP b)
+static bool Seql2(SEXP a, SEXP b)
 {
-    if (a == b) return 1;
+    if (a == b) return true;
     if (IS_CACHED(a) && IS_CACHED(b) && ENC_KNOWN(a) == ENC_KNOWN(b))
-	return 0;
+	return false;
     else {
     	const void *vmax = vmaxget();
-    	int result = !strcmp(translateCharUTF8(a), translateCharUTF8(b));
+    	bool result = streql(translateCharUTF8(a), translateCharUTF8(b));
     	vmaxset(vmax); /* discard any memory used by translateCharUTF8 */
     	return result;
     }
 }
 
-static int MatchVar(SEXP var1, SEXP var2)
+static bool MatchVar(SEXP var1, SEXP var2)
 {
     /* For expedience, and sanity... */
     if ( var1 == var2 )
-	return 1;
+	return true;
     /* Handle Nulls */
     if (isNull(var1) && isNull(var2))
-	return 1;
+	return true;
     if (isNull(var1) || isNull(var2))
-	return 0;
+	return false;
     /* Non-atomic objects - compare CARs & CDRs (and TAGs:  PR#17235) */
     if ((isList(var1) || isLanguage(var1)) &&
 	(isList(var2) || isLanguage(var2)))
@@ -1063,7 +1063,7 @@ static int MatchVar(SEXP var1, SEXP var2)
     if (isString(var1) && isString(var2))
 	return Seql2(STRING_ELT(var1, 0), STRING_ELT(var2, 0));
     /* Nothing else matches */
-    return 0;
+    return false;
 }
 
 
@@ -1158,7 +1158,7 @@ static void ExtractVars(SEXP formula)
 	Return;
     }
     if (isSymbol(formula)) {
-	if (formula == dotSymbol) haveDot = TRUE;
+	if (formula == dotSymbol) haveDot = true;
 	Prt_xtrVars(haveDot ? "isSym(<Dot>)" : "isSymbol()");
 	    if (haveDot && framenames != R_NilValue) {
 		// install variables of the data frame:
@@ -1356,23 +1356,23 @@ static int BitCount(SEXP term, int nvar)
 
 /* TermZero tests whether a (bit string) term is zero */
 
-static int TermZero(SEXP term)
+static bool TermZero(SEXP term)
 {
     for (int i = 0; i < nwords; i++)
         if (INTEGER(term)[i] != 0)
-	    return 0;
-    return 1;
+	    return false;
+    return true;
 }
 
 
 /* TermEqual tests two (bit string) terms for equality. */
 
-static int TermEqual(SEXP term1, SEXP term2)
+static bool TermEqual(SEXP term1, SEXP term2)
 {
     for (int i = 0; i < nwords; i++)
         if (INTEGER(term1)[i] != INTEGER(term2)[i])
-            return 0;
-    return 1;
+            return false;
+    return true;
 }
 
 
@@ -1621,7 +1621,7 @@ static SEXP EncodeVars(SEXP formula)
 		/* change in 1.6.0 do not use duplicated names */
 		const char *c = translateChar(STRING_ELT(framenames, i));
 		for(int j = 0; j < i; j++)
-		    if(!strcmp(c, translateChar(STRING_ELT(framenames, j))))
+		    if(streql(c, translateChar(STRING_ELT(framenames, j))))
 			error(_("duplicated name '%s' in data frame using '.'"),
 			      c);
 		term = AllocTermSetBit1(install(c));
@@ -1768,7 +1768,7 @@ SEXP termsform(SEXP args)
 	(length(CAR(args)) != 2 && length(CAR(args)) != 3))
 	error(_("argument is not a valid model"));
 
-    haveDot = FALSE;
+    haveDot = false;
 
     SEXP ans = PROTECT(duplicate(CAR(args)));
 
@@ -1887,7 +1887,7 @@ SEXP termsform(SEXP args)
     /* first see if any of the variables are offsets */
     R_xlen_t k = 0;
     for (R_xlen_t l = response; l < nvar; l++)
-	if (!strncmp(CHAR(STRING_ELT(varnames, l)), "offset(", 7)) k++;
+	if (streqln(CHAR(STRING_ELT(varnames, l)), "offset(", 7)) k++;
     if (k > 0) {
 #ifdef DEBUG_terms
 	Rprintf(" step 2b: found k=%ld offset(.)s\n", k);
@@ -1896,7 +1896,7 @@ SEXP termsform(SEXP args)
 	/* allocate the "offsets" attribute */
 	SETCAR(a, v = allocVector(INTSXP, k));
 	for (int l = response, k = 0; l < nvar; l++)
-	    if (!strncmp(CHAR(STRING_ELT(varnames, l)), "offset(", 7))
+	    if (streqln(CHAR(STRING_ELT(varnames, l)), "offset(", 7))
 		INTEGER(v)[k++] = l + 1;
 	SET_TAG(a, install("offset"));
 	a = CDR(a);
@@ -1912,7 +1912,7 @@ SEXP termsform(SEXP args)
 	    if(length(thisterm) == 0) break;
 	    for (int i = 1; i <= nvar; i++)
 		if (GetBit(CAR(thisterm), i) &&
-		    !strncmp(CHAR(STRING_ELT(varnames, i-1)), "offset(", 7)) {
+		    streqln(CHAR(STRING_ELT(varnames, i-1)), "offset(", 7)) {
 		    have_offset = TRUE;
 #ifdef DEBUG_terms
 		    Rprintf(" i=%d: have_offset, ", i);
@@ -2099,7 +2099,7 @@ SEXP termsform(SEXP args)
 	    SETCAR(t, allocVector(INTSXP, 0));
 	    R_xlen_t k = 0;
 	    for (R_xlen_t l = 0; l < nvar; l++) {
-		if (!strncmp(CHAR(STRING_ELT(varnames, l)), ss, n))
+		if (streqln(CHAR(STRING_ELT(varnames, l)), ss, n))
 		    if (CHAR(STRING_ELT(varnames, l))[n] == '(')
 			k++;
 	    }
@@ -2107,7 +2107,7 @@ SEXP termsform(SEXP args)
 		SETCAR(t, allocVector(INTSXP, k));
 		k = 0;
 		for (int l = 0; l < nvar; l++) {
-		    if (!strncmp(CHAR(STRING_ELT(varnames, l)), ss, n))
+		    if (streqln(CHAR(STRING_ELT(varnames, l)), ss, n))
 			if (CHAR(STRING_ELT(varnames, l))[n] == '('){
 			    INTEGER(CAR(t))[k++] = l+1;
 			}

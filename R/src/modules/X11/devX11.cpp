@@ -967,7 +967,7 @@ static void *RLoadFont(pX11Desc xd, char* family, int face, int size)
     /* search fontcache */
     for ( i = nfonts ; i-- ; ) {
 	f = &fontcache[i];
-	if ( strcmp(f->family, family) == 0 &&
+	if ( streql(f->family, family) &&
 	     f->face == face &&
 	     f->size == size )
 	    return f->font;
@@ -1330,7 +1330,7 @@ X11_Open(pDevDesc dd, pX11Desc xd, const char *dsp,
 	warning(_("locale is not supported by Xlib: some X operations will operate in C locale"));
     if (!XSetLocaleModifiers ("")) warning(_("X cannot set locale modifiers"));
 
-    if (!strncmp(dsp, "png::", 5)) {
+    if (streqln(dsp, "png::", 5)) {
 #ifndef HAVE_PNG
 	warning(_("no png support in this version of R"));
 	return (Rboolean) FALSE;
@@ -1352,7 +1352,7 @@ X11_Open(pDevDesc dd, pX11Desc xd, const char *dsp,
 	dd->displayListOn = (Rboolean) FALSE;
 #endif
     }
-    else if (!strncmp(dsp, "jpeg::", 6)) {
+    else if (streqln(dsp, "jpeg::", 6)) {
 #ifndef HAVE_JPEG
 	warning(_("no jpeg support in this version of R"));
 	return (Rboolean) FALSE;
@@ -1378,7 +1378,7 @@ X11_Open(pDevDesc dd, pX11Desc xd, const char *dsp,
 	dd->displayListOn = (Rboolean) FALSE;
 #endif
     }
-    else if (!strncmp(dsp, "tiff::", 5)) {
+    else if (streqln(dsp, "tiff::", 5)) {
 #ifndef HAVE_TIFF
 	warning(_("no tiff support in this version of R"));
 	return (Rboolean) FALSE;
@@ -1396,7 +1396,7 @@ X11_Open(pDevDesc dd, pX11Desc xd, const char *dsp,
 	xd->res_dpi = res; /* place holder */
 	dd->displayListOn = (Rboolean) FALSE;
 #endif
-    } else if (!strncmp(dsp, "bmp::", 5)) {
+    } else if (streqln(dsp, "bmp::", 5)) {
 	char buf[PATH_MAX]; /* allow for pageno formats */
 	FILE *fp;
 	if(strlen(dsp+5) >= PATH_MAX)
@@ -1412,7 +1412,7 @@ X11_Open(pDevDesc dd, pX11Desc xd, const char *dsp,
 	p = "";
 	xd->res_dpi = res; /* place holder */
 	dd->displayListOn = (Rboolean) FALSE;
-    } else if (!strcmp(dsp, "XImage")) {
+    } else if (streql(dsp, "XImage")) {
 	type = XIMAGE;
 	xd->fp = nullptr;
 	p = "";
@@ -1789,7 +1789,7 @@ static char* translateFontFamily(char* family, pX11Desc xd)
 	Rboolean found = (Rboolean) FALSE;
 	for (i = 0; i < nfonts && !found; i++) {
 	    const char* fontFamily = CHAR(STRING_ELT(fontnames, i));
-	    if (strcmp(family, fontFamily) == 0) {
+	    if (streql(family, fontFamily)) {
 		found = (Rboolean) TRUE;
 		result = SaveFontSpec(VECTOR_ELT(fontdb, i), 0);
 	    }
@@ -3066,9 +3066,9 @@ static Rboolean in_R_GetX11Image(int d, void *pximage, int *pwidth, int *pheight
     SEXP dev = elt(findVar(install(".Devices"), R_BaseEnv), d);
 
     if (TYPEOF(dev) != STRSXP ||
-	!(strcmp(CHAR(STRING_ELT(dev, 0)), "XImage") == 0 ||
-	  strncmp(CHAR(STRING_ELT(dev, 0)), "PNG", 3) == 0 ||
-	  strncmp(CHAR(STRING_ELT(dev, 0)), "X11", 3) == 0))
+	!(streql(CHAR(STRING_ELT(dev, 0)), "XImage") ||
+	  streqln(CHAR(STRING_ELT(dev, 0)), "PNG", 3) ||
+	  streqln(CHAR(STRING_ELT(dev, 0)), "X11", 3)))
 	return (Rboolean) FALSE;
     else {
 	pX11Desc xd = (X11Desc*) GEgetDevice(d)->dev->deviceSpecific;
@@ -3202,15 +3202,15 @@ static SEXP in_do_X11(SEXP call, SEXP op, SEXP args, SEXP env)
     if (!isValidString(CAR(args)))
 	error(_("invalid 'colortype' argument passed to X11 driver"));
     cname = CHAR(STRING_ELT(CAR(args), 0));
-    if (strcmp(cname, "mono") == 0)
+    if (streql(cname, "mono"))
 	colormodel = 0;
-    else if (strcmp(cname, "gray") == 0 || strcmp(cname, "grey") == 0)
+    else if (streql(cname, "gray") || streql(cname, "grey"))
 	colormodel = 1;
-    else if (strcmp(cname, "pseudo.cube") == 0)
+    else if (streql(cname, "pseudo.cube"))
 	colormodel = 2;
-    else if (strcmp(cname, "pseudo") == 0)
+    else if (streql(cname, "pseudo"))
 	colormodel = 3;
-    else if (strcmp(cname, "true") == 0)
+    else if (streql(cname, "true"))
 	colormodel = 4;
     else {
 	warningcall(call, _("unknown X11 color/colour model -- using monochrome"));
@@ -3267,11 +3267,11 @@ static SEXP in_do_X11(SEXP call, SEXP op, SEXP args, SEXP env)
     scusePUA = getAttrib(scsymbol, install("usePUA"));
     usePUA = (Rboolean) LOGICAL(scusePUA)[0];
 
-    if (!strncmp(display, "png::", 5)) devname = "PNG";
-    else if (!strncmp(display, "jpeg::", 6)) devname = "JPEG";
-    else if (!strncmp(display, "tiff::", 6)) devname = "TIFF";
-    else if (!strncmp(display, "bmp::", 5)) devname = "BMP";
-    else if (!strcmp(display, "XImage")) devname = "XImage";
+    if (streqln(display, "png::", 5)) devname = "PNG";
+    else if (streqln(display, "jpeg::", 6)) devname = "JPEG";
+    else if (streqln(display, "tiff::", 6)) devname = "TIFF";
+    else if (streqln(display, "bmp::", 5)) devname = "BMP";
+    else if (streql(display, "XImage")) devname = "XImage";
     else if (useCairo) devname = "X11cairo";
     else devname = "X11";
 
@@ -3383,8 +3383,8 @@ static Rboolean in_R_X11readclp(Rclpconn this_, const char *type)
 	    return (Rboolean) FALSE;
 	}
     }
-    if(strcmp(type, "X11_secondary") == 0) sel = XA_SECONDARY;
-    if(strcmp(type, "X11_clipboard") == 0)
+    if(streql(type, "X11_secondary")) sel = XA_SECONDARY;
+    if(streql(type, "X11_clipboard"))
 #ifdef HAVE_X11_Xmu
       sel = XA_CLIPBOARD(display);
 #else

@@ -693,12 +693,12 @@ void lbfgsb(int n, int m, double *x, double *l, double *u, int *nbd,
 	setulb(n, m, x, l, u, nbd, &f, g, factr, &pgtol, wa, iwa, task,
 	       tr, isave);
 /*	Rprintf("in lbfgsb - %s\n", task);*/
-	if (strncmp(task, "FG", 2) == 0) {
+	if (streqln(task, "FG", 2)) {
 	    f = fminfn(n, x, ex);
 	    if (!R_FINITE(f))
 		error(_("L-BFGS-B needs finite values of 'fn'"));
 	    fmingr(n, x, g, ex);
-	} else if (strncmp(task, "NEW_X", 5) == 0) {
+	} else if (streqln(task, "NEW_X", 5)) {
 	    iter++;
 	    if(trace == 1 && (iter % nREPORT == 0)) {
 		Rprintf(_("iter %4d value %f"), iter, f);
@@ -708,12 +708,12 @@ void lbfgsb(int n, int m, double *x, double *l, double *u, int *nbd,
 		*fail = 1;
 		break;
 	    }
-	} else if (strncmp(task, "WARN", 4) == 0) {
+	} else if (streqln(task, "WARN", 4)) {
 	    *fail = 51;
 	    break;
-	} else if (strncmp(task, "CONV", 4) == 0) {
+	} else if (streqln(task, "CONV", 4)) {
 	    break;
-	} else if (strncmp(task, "ERROR", 5) == 0) {
+	} else if (streqln(task, "ERROR", 5)) {
 	    *fail = 52;
 	    break;
 	} else { /* some other condition that is not supposed to happen */

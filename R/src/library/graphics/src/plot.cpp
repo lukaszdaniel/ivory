@@ -371,20 +371,20 @@ static void GetTextArg(SEXP spec, SEXP *ptxt, rcolor *pcol, double *pcex, int *p
 	    } else {
 	       n = length(nms);
 	       for (i = 0; i < n; i++) {
-		if (!strcmp(CHAR(STRING_ELT(nms, i)), "cex")) {
+		if (streql(CHAR(STRING_ELT(nms, i)), "cex")) {
 		    cex = asReal(VECTOR_ELT(spec, i));
 		}
-		else if (!strcmp(CHAR(STRING_ELT(nms, i)), "col")) {
+		else if (streql(CHAR(STRING_ELT(nms, i)), "col")) {
 		    SEXP colsxp = VECTOR_ELT(spec, i);
 		    if (!isNAcol(colsxp, 0, LENGTH(colsxp))) {
 			col = asInteger(FixupCol(colsxp, R_TRANWHITE));
 			colspecd = 1;
 		    }
 		}
-		else if (!strcmp(CHAR(STRING_ELT(nms, i)), "font")) {
+		else if (streql(CHAR(STRING_ELT(nms, i)), "font")) {
 		    font = asInteger(FixupFont(VECTOR_ELT(spec, i), NA_INTEGER));
 		}
-		else if (!strcmp(CHAR(STRING_ELT(nms, i)), "")) {
+		else if (streql(CHAR(STRING_ELT(nms, i)), "")) {
 		    txt = VECTOR_ELT(spec, i);
 		    if (TYPEOF(txt) == LANGSXP || TYPEOF(txt) == SYMSXP)
 			REPROTECT(txt = coerceVector(txt, EXPRSXP), pi);

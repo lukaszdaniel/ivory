@@ -251,28 +251,35 @@ void process_system_Renviron()
 #endif
 
 /* try site Renviron: R_ENVIRON, then R_HOME/etc/Renviron.site. */
-void process_site_Renviron ()
+void process_site_Renviron()
 {
     char buf[PATH_MAX], *p = getenv("R_ENVIRON");
 
-    if(p) {
-	if(*p) process_Renviron(p);
-	return;
+    if (p)
+    {
+        if (*p)
+            process_Renviron(p);
+        return;
     }
 #ifdef R_ARCH
-    if(strlen(R_Home) + strlen("/etc/Renviron.site") + strlen(R_ARCH) > PATH_MAX - 2) {
-	R_ShowMessage(_("path to arch-specific Renviron.site is too long: skipping"));
-    } else {
-	snprintf(buf, PATH_MAX, "%s/etc/%s/Renviron.site", R_Home, R_ARCH);
-	if(access(buf, R_OK) == 0) {
-	    process_Renviron(buf);
-	    return;
-	}
+    if (strlen(R_Home) + strlen("/etc/Renviron.site") + strlen(R_ARCH) > PATH_MAX - 2)
+    {
+        R_ShowMessage(_("path to arch-specific Renviron.site is too long: skipping"));
+    }
+    else
+    {
+        snprintf(buf, PATH_MAX, "%s/etc/%s/Renviron.site", R_Home, R_ARCH);
+        if (access(buf, R_OK) == 0)
+        {
+            process_Renviron(buf);
+            return;
+        }
     }
 #endif
-    if(strlen(R_Home) + strlen("/etc/Renviron.site") > PATH_MAX - 1) {
-	R_ShowMessage(_("path to Renviron.site is too long: skipping"));
-	return;
+    if (strlen(R_Home) + strlen("/etc/Renviron.site") > PATH_MAX - 1)
+    {
+        R_ShowMessage(_("path to Renviron.site is too long: skipping"));
+        return;
     }
     snprintf(buf, PATH_MAX, "%s/etc/Renviron.site", R_Home);
     process_Renviron(buf);
@@ -283,49 +290,55 @@ void process_user_Renviron()
 {
     const char *s = getenv("R_ENVIRON_USER");
 
-    if(s) {
-	if (*s) process_Renviron(R_ExpandFileName(s));
-	return;
+    if (s)
+    {
+        if (*s)
+            process_Renviron(R_ExpandFileName(s));
+        return;
     }
 
 #ifdef R_ARCH
     char buff[100];
     snprintf(buff, 100, ".Renviron.%s", R_ARCH);
-    if( process_Renviron(buff)) return;
+    if (process_Renviron(buff))
+        return;
 #endif
-    if(process_Renviron(".Renviron")) return;
+    if (process_Renviron(".Renviron"))
+        return;
 #ifdef Unix
     s = R_ExpandFileName("~/.Renviron");
 #endif
 #ifdef _WIN32
     {
-	char buf[1024]; /* MAX_PATH is less than this */
-	/* R_USER is not necessarily set yet, so we have to work harder */
-	s = getenv("R_USER");
-	if(!s) s = getenv("HOME");
-	if(!s) return;
-	snprintf(buf, 1024, "%s/.Renviron", s);
-	s = buf;
+        char buf[1024]; /* MAX_PATH is less than this */
+        /* R_USER is not necessarily set yet, so we have to work harder */
+        s = getenv("R_USER");
+        if (!s)
+            s = getenv("HOME");
+        if (!s)
+            return;
+        snprintf(buf, 1024, "%s/.Renviron", s);
+        s = buf;
     }
 #endif
 #ifdef R_ARCH
     snprintf(buff, 100, "%s.%s", s, R_ARCH);
-    if( process_Renviron(buff)) return;
+    if (process_Renviron(buff))
+        return;
 #endif
     process_Renviron(s);
 }
 
-extern "C"
-HIDDEN SEXP do_readEnviron(SEXP call, SEXP op, SEXP args, SEXP env)
+extern "C" HIDDEN SEXP do_readEnviron(SEXP call, SEXP op, SEXP args, SEXP env)
 {
 
     checkArity(op, args);
     SEXP x = CAR(args);
     if (!isString(x) || LENGTH(x) != 1)
-	error(_("'%s' argument must be a character string"), "x");
+        error(_("'%s' argument must be a character string"), "x");
     const char *fn = R_ExpandFileName(translateChar(STRING_ELT(x, 0)));
     int res = process_Renviron(fn);
     if (!res)
-	warning(_("file '%s' cannot be opened for reading"), fn);
+        warning(_("file '%s' cannot be opened for reading"), fn);
     return ScalarLogical(res != 0);
 }

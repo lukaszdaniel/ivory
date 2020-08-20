@@ -74,14 +74,30 @@ NORET void R_Suicide(const char *s)
 }
 void R_ShowMessage(const char *s) { ptr_R_ShowMessage(s); }
 int R_ReadConsole(const char *prompt, unsigned char *buf, int len, int addtohistory)
-{ return ptr_R_ReadConsole(prompt, buf, len, addtohistory); }
-void R_WriteConsole(const char *buf, int len) {if (ptr_R_WriteConsole) ptr_R_WriteConsole(buf, len); else ptr_R_WriteConsoleEx(buf, len, 0); }
+{
+	return ptr_R_ReadConsole(prompt, buf, len, addtohistory);
+}
+void R_WriteConsole(const char *buf, int len)
+{
+	if (ptr_R_WriteConsole)
+	{
+		ptr_R_WriteConsole(buf, len);
+	}
+	else
+	{
+		ptr_R_WriteConsoleEx(buf, len, 0);
+	}
+}
 void R_WriteConsoleEx(const char *buf, int len, int otype)
 {
 	if (ptr_R_WriteConsole)
+	{
 		ptr_R_WriteConsole(buf, len);
+	}
 	else
+	{
 		ptr_R_WriteConsoleEx(buf, len, otype);
+	}
 }
 void R_ResetConsole(void) { ptr_R_ResetConsole(); }
 #ifndef HAVE_AQUA
@@ -166,19 +182,26 @@ extern uintptr_t dummy_ii(void);
 /* Protection against embedded misuse, PR#15420 */
 static int num_initialized = 0;
 
-static char* unescape_arg(char *p, char* avp) {
-    /* Undo the escaping done in the front end */
-    char *q;
-    for(q = avp; *q; q++) {
-	if(*q == '~' && *(q+1) == '+' && *(q+2) == '~') {
-	    q += 2;
-	    *p++ = ' ';
-	} else if(*q == '~' && *(q+1) == 'n' && *(q+2) == '~') {
-	    q += 2;
-	    *p++ = '\n';
-	} else *p++ = *q;
-    }
-    return p;
+static char *unescape_arg(char *p, char *avp)
+{
+	/* Undo the escaping done in the front end */
+	char *q;
+	for (q = avp; *q; q++)
+	{
+		if (*q == '~' && *(q + 1) == '+' && *(q + 2) == '~')
+		{
+			q += 2;
+			*p++ = ' ';
+		}
+		else if (*q == '~' && *(q + 1) == 'n' && *(q + 2) == '~')
+		{
+			q += 2;
+			*p++ = '\n';
+		}
+		else
+			*p++ = *q;
+	}
+	return p;
 }
 
 /* for thr_stksegment */
@@ -349,10 +372,10 @@ int Rf_initialize_R(int ac, char *av[])
        If run from the shell script, only Tk|tk|X11|x11 are allowed.
      */
     for(i = 0, avv = av; i < ac; i++, avv++) {
-	if (!strcmp(*avv, "--args"))
+	if (streql(*avv, "--args"))
 	    break;
-	if(!strncmp(*avv, "--gui", 5) || !strncmp(*avv, "-g", 2)) {
-	    if(!strncmp(*avv, "--gui", 5) && strlen(*avv) >= 7)
+	if(streqln(*avv, "--gui", 5) || streqln(*avv, "-g", 2)) {
+	    if(streqln(*avv, "--gui", 5) && strlen(*avv) >= 7)
 		p = &(*avv)[6];
 	    else {
 		if(i+1 < ac) {
@@ -363,15 +386,15 @@ int Rf_initialize_R(int ac, char *av[])
 		    p = (char *) "X11";
 		}
 	    }
-	    if(!strcmp(p, "none"))
+	    if(streql(p, "none"))
 		useX11 = FALSE; // not allowed from R.sh
 #ifdef HAVE_AQUA
-	    else if(!strcmp(p, "aqua"))
+	    else if(streql(p, "aqua"))
 		useaqua = TRUE; // not allowed from R.sh but used by R.app
 #endif
-	    else if(!strcmp(p, "X11") || !strcmp(p, "x11"))
+	    else if(streql(p, "X11") || streql(p, "x11"))
 		useX11 = TRUE;
-	    else if(!strcmp(p, "Tk") || !strcmp(p, "tk"))
+	    else if(streql(p, "Tk") || streql(p, "tk"))
 		useTk = TRUE;
 	    else {
 #ifdef HAVE_X11
@@ -404,9 +427,9 @@ int Rf_initialize_R(int ac, char *av[])
     R_common_command_line(&ac, av, Rp);
     while (--ac) {
 	if (**++av == '-') {
-	    if(!strcmp(*av, "--no-readline")) {
+	    if(streql(*av, "--no-readline")) {
 		UsingReadline = FALSE;
-	    } else if(!strcmp(*av, "-f")) {
+	    } else if(streql(*av, "-f")) {
 		ac--; av++;
 #define R_INIT_TREAT_F(_AV_)                         \
 	Rp->R_Interactive = FALSE;                       \
@@ -426,11 +449,11 @@ int Rf_initialize_R(int ac, char *av[])
 	}
 		R_INIT_TREAT_F(*av);
 
-	    } else if(!strncmp(*av, "--file=", 7)) {
+	    } else if(streqln(*av, "--file=", 7)) {
 
 		R_INIT_TREAT_F((*av)+7);
 
-	    } else if(!strcmp(*av, "-e")) {
+	    } else if(streql(*av, "-e")) {
 		ac--; av++;
 		Rp->R_Interactive = FALSE;
 		if(strlen(cmdlines) + strlen(*av) + 2 <= 10000) {
@@ -441,15 +464,15 @@ int Rf_initialize_R(int ac, char *av[])
 		    snprintf(msg, 1024, _("WARNING: '-e %s' omitted as input is too long\n"), *av);
 		    R_ShowMessage(msg);
 		}
-	    } else if(!strcmp(*av, "--args")) {
+	    } else if(streql(*av, "--args")) {
 		break;
-	    } else if(!strcmp(*av, "--interactive")) {
+	    } else if(streql(*av, "--interactive")) {
 		force_interactive = TRUE;
 		break;
 	    } else {
 #ifdef HAVE_AQUA
 		// r27492: in 2003 launching from 'Finder OSX' passed this
-		if(!strncmp(*av, "-psn", 4)) break; else
+		if(streqln(*av, "-psn", 4)) break; else
 #endif
 		snprintf(msg, 1024, _("WARNING: unknown option '%s'\n"), *av);
 		R_ShowMessage(msg);

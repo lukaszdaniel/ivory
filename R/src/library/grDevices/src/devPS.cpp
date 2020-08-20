@@ -5355,7 +5355,7 @@ static void XFig_Text(double x, double y, const char *str,
      * mapping multibyte(EUC only) string Times{Romani,Bold} font Only
      */
     if ( mbcslocale && style != 5 )
-	if (!strncmp("EUC", locale2charset(nullptr), 3))
+	if (streqln("EUC", locale2charset(nullptr), 3))
 	    fontnum = ((style & 1) ^ 1 ) << 1 ;
 
     XFconvert(&x, &y, pd);

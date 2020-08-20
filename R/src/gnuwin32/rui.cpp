@@ -176,7 +176,7 @@ static void menusaveimage(control m)
     fn = askfilesaveW(G_("Save image in"), ".RData");
     if (fn) {
 	quote_fn(fn, s);
-	if (!strcmp(&s[strlen(s) - 2], ".*")) s[strlen(s) - 2] = '\0';
+	if (streql(&s[strlen(s) - 2], ".*")) s[strlen(s) - 2] = '\0';
 	snprintf(cmd, 1024, "save.image(\"%s\")", s);
 	consolecmd(RConsole, cmd);
     } else show(RConsole);
@@ -810,9 +810,9 @@ void readconsolecfg()
     if (gui.statusbar) RguiMDI |= RW_STATUSBAR;
     else	       RguiMDI &= ~RW_STATUSBAR;
 
-    if (!strcmp(gui.style, "normal")) sty = Plain;
-    if (!strcmp(gui.style, "bold")) sty = Bold;
-    if (!strcmp(gui.style, "italic")) sty = Italic;
+    if (streql(gui.style, "normal")) sty = Plain;
+    if (streql(gui.style, "bold")) sty = Bold;
+    if (streql(gui.style, "italic")) sty = Italic;
 
     Rwin_graphicsx = gui.grx;
     Rwin_graphicsy = gui.gry;

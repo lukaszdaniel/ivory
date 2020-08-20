@@ -63,27 +63,28 @@ static SEXP raw_relop    (RELOP_TYPE code, SEXP s1, SEXP s2);
 
 HIDDEN SEXP do_relop(SEXP call, SEXP op, SEXP args, SEXP env)
 {
-    SEXP ans, arg1, arg2;
-    int argc;
+	SEXP ans, arg1, arg2;
+	int argc;
 
-    if (args != R_NilValue &&
-	CDR(args) != R_NilValue &&
-	CDDR(args) == R_NilValue)
-	argc = 2;
-    else
-	argc = length(args);
-    arg1 = CAR(args);
-    arg2 = CADR(args);
+	if (args != R_NilValue &&
+		CDR(args) != R_NilValue &&
+		CDDR(args) == R_NilValue)
+		argc = 2;
+	else
+		argc = length(args);
+	arg1 = CAR(args);
+	arg2 = CADR(args);
 
-    if (ATTRIB(arg1) != R_NilValue || ATTRIB(arg2) != R_NilValue) {
-	if (DispatchGroup("Ops", call, op, args, env, &ans))
-	    return ans;
-    }
+	if (ATTRIB(arg1) != R_NilValue || ATTRIB(arg2) != R_NilValue)
+	{
+		if (DispatchGroup("Ops", call, op, args, env, &ans))
+			return ans;
+	}
 
-    if (argc != 2)
-	error(_("operator needs two arguments"));
+	if (argc != 2)
+		error(_("operator needs two arguments"));
 
-    return do_relop_dflt(call, op, arg1, arg2);
+	return do_relop_dflt(call, op, arg1, arg2);
 }
 
 // also called from cmp_relop() in eval.cpp :

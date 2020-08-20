@@ -597,7 +597,7 @@ static Rboolean getFinalPathName(const char *orig, char *res)
 	return FALSE;
     }
 
-    if (len > 8 && !strncmp("UNC\\", res+4, 4)) {
+    if (len > 8 && streqln("UNC\\", res+4, 4)) {
 	/* UNC path \\?\UNC */
 	res[6] = '\\'; /* replace the "C" in "UNC" to get "\\" prefix */
 	strip = 6;

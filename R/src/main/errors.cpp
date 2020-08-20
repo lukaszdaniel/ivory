@@ -1829,8 +1829,8 @@ static SEXP findInterruptHandler(void)
 	for (SEXP list = R_HandlerStack; list != R_NilValue; list = CDR(list))
 	{
 		SEXP entry = CAR(list);
-		if (!strcmp(CHAR(ENTRY_CLASS(entry)), "interrupt") ||
-			!strcmp(CHAR(ENTRY_CLASS(entry)), "condition"))
+		if (streql(CHAR(ENTRY_CLASS(entry)), "interrupt") ||
+			streql(CHAR(ENTRY_CLASS(entry)), "condition"))
 			return list;
 	}
 	return R_NilValue;

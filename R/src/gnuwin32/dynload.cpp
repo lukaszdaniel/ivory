@@ -121,9 +121,8 @@ void Rf_InitFunctionHashing()
 #ifdef CACHE_DLL_SYM
 static void R_deleteCachedSymbols(DllInfo *dll)
 {
-    int i;
-    for(i = nCPFun - 1; i >= 0; i--)
-	if(!strcmp(CPFun[i].pkg, dll->name)) {
+    for(int i = nCPFun - 1; i >= 0; i--)
+	if(streql(CPFun[i].pkg, dll->name)) {
 	    if(i < nCPFun - 1) {
 		strcpy(CPFun[i].name, CPFun[--nCPFun].name);
 		strcpy(CPFun[i].pkg, CPFun[nCPFun].pkg);
