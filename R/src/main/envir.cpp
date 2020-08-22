@@ -3751,17 +3751,19 @@ SEXP R_FindNamespace(SEXP info)
 
 static SEXP checkNSname(SEXP call, SEXP name)
 {
-    switch (TYPEOF(name)) {
+    switch (TYPEOF(name))
+    {
     case SYMSXP:
-	break;
+        break;
     case STRSXP:
-	if (LENGTH(name) >= 1) {
-	    name = installTrChar(STRING_ELT(name, 0));
-	    break;
-	}
-	/* else fall through */
+        if (LENGTH(name) >= 1)
+        {
+            name = installTrChar(STRING_ELT(name, 0));
+            break;
+        }
+    /* else fall through */
     default:
-	errorcall(call, _("bad namespace name"));
+        errorcall(call, _("bad namespace name"));
     }
     return name;
 }
@@ -3773,7 +3775,7 @@ HIDDEN SEXP do_regNS(SEXP call, SEXP op, SEXP args, SEXP rho)
     name = checkNSname(call, CAR(args));
     val = CADR(args);
     if (findVarInFrame(R_NamespaceRegistry, name) != R_UnboundValue)
-	errorcall(call, _("namespace is already registered"));
+        errorcall(call, _("namespace is already registered"));
     defineVar(name, val, R_NamespaceRegistry);
     return R_NilValue;
 }
@@ -3802,16 +3804,18 @@ HIDDEN SEXP do_getRegNS(SEXP call, SEXP op, SEXP args, SEXP rho)
     UNPROTECT(1);
     val = findVarInFrame(R_NamespaceRegistry, name);
 
-    switch(PRIMVAL(op)) {
+    switch (PRIMVAL(op))
+    {
     case 0: // get..()
-	if (val == R_UnboundValue)
-	    return R_NilValue;
-	else
-	    return val;
+        if (val == R_UnboundValue)
+            return R_NilValue;
+        else
+            return val;
     case 1: // is..()
-	return ScalarLogical(val == R_UnboundValue ? FALSE : TRUE);
+        return ScalarLogical(val == R_UnboundValue ? FALSE : TRUE);
 
-    default: error(_("unknown op"));
+    default:
+        error(_("unknown op"));
     }
     return R_NilValue; // -Wall
 }
@@ -3829,7 +3833,7 @@ HIDDEN SEXP do_importIntoEnv(SEXP call, SEXP op, SEXP args, SEXP rho)
        Promises are not forced and active bindings are preserved. */
     SEXP impenv, impnames, expenv, expnames;
     SEXP impsym, expsym, val;
-    int i, n;
+    int n;
 
     checkArity(op, args);
 
@@ -3839,22 +3843,22 @@ HIDDEN SEXP do_importIntoEnv(SEXP call, SEXP op, SEXP args, SEXP rho)
     expnames = CAR(args); args = CDR(args);
 
     if (TYPEOF(impenv) == NILSXP)
-	error(_("use of NULL environment is defunct"));
+        error(_("use of NULL environment is defunct"));
     if (TYPEOF(impenv) != ENVSXP &&
-	TYPEOF((impenv = simple_as_environment(impenv))) != ENVSXP)
-	error(_("bad import environment argument"));
+        TYPEOF((impenv = simple_as_environment(impenv))) != ENVSXP)
+        error(_("bad import environment argument"));
     if (TYPEOF(expenv) == NILSXP)
-	error(_("use of NULL environment is defunct"));
+        error(_("use of NULL environment is defunct"));
     if (TYPEOF(expenv) != ENVSXP &&
-	TYPEOF((expenv = simple_as_environment(expenv))) != ENVSXP)
-	error(_("bad export environment argument"));
+        TYPEOF((expenv = simple_as_environment(expenv))) != ENVSXP)
+        error(_("bad export environment argument"));
     if (TYPEOF(impnames) != STRSXP || TYPEOF(expnames) != STRSXP)
-	error(_("invalid '%s' argument"), "names");
+        error(_("invalid '%s' argument"), "names");
     if (LENGTH(impnames) != LENGTH(expnames))
-	error(_("length of import and export names must match"));
+        error(_("length of import and export names must match"));
 
     n = LENGTH(impnames);
-    for (i = 0; i < n; i++) {
+    for (int i = 0; i < n; i++) {
 	impsym = installTrChar(STRING_ELT(impnames, i));
 	expsym = installTrChar(STRING_ELT(expnames, i));
 
@@ -3891,7 +3895,6 @@ HIDDEN SEXP do_importIntoEnv(SEXP call, SEXP op, SEXP args, SEXP rho)
     return R_NilValue;
 }
 
-
 HIDDEN SEXP do_envprofile(SEXP call, SEXP op, SEXP args, SEXP rho)
 {
     /* Return a list containing profiling information given a hashed
@@ -3902,20 +3905,22 @@ HIDDEN SEXP do_envprofile(SEXP call, SEXP op, SEXP args, SEXP rho)
     checkArity(op, args);
     SEXP env, ans = R_NilValue /* -Wall */;
     env = CAR(args);
-    if (isEnvironment(env)) {
-	if (IS_HASHED(env))
-	    ans = R_HashProfile(HASHTAB(env));
-    } else
-	error(_("'%s' argument must be a hashed environment"), "env");
+    if (isEnvironment(env))
+    {
+        if (IS_HASHED(env))
+            ans = R_HashProfile(HASHTAB(env));
+    }
+    else
+        error(_("'%s' argument must be a hashed environment"), "env");
     return ans;
 }
 
 SEXP Rf_mkCharCE(const char *name, cetype_t enc)
 {
-    size_t len =  strlen(name);
+    size_t len = strlen(name);
     if (len > R_INT_MAX)
-	error(_("R character strings are limited to 2^31-1 bytes"));
-   return Rf_mkCharLenCE(name, (int) len, enc);
+        error(_("R character strings are limited to 2^31-1 bytes"));
+    return Rf_mkCharLenCE(name, (int)len, enc);
 }
 
 /* no longer used in R but documented in 2.7.x */
@@ -3924,12 +3929,12 @@ SEXP Rf_mkCharLen(const char *name, int len)
     return mkCharLenCE(name, len, CE_NATIVE);
 }
 
-SEXP Rf_mkChar(const char * const name)
+SEXP Rf_mkChar(const char *const name)
 {
-    size_t len =  strlen(name);
+    size_t len = strlen(name);
     if (len > R_INT_MAX)
-	error(_("R character strings are limited to 2^31-1 bytes"));
-    return mkCharLenCE(name, (int) len, CE_NATIVE);
+        error(_("R character strings are limited to 2^31-1 bytes"));
+    return mkCharLenCE(name, (int)len, CE_NATIVE);
 }
 
 /* Global CHARSXP cache and code for char-based hash tables */
@@ -3954,8 +3959,8 @@ static unsigned int char_hash(const char *s, int len)
     char *p;
     int i;
     unsigned int h = 5381;
-    for (p = (char *) s, i = 0; i < len; p++, i++)
-	h = ((h << 5) + h) + (*p);
+    for (p = (char *)s, i = 0; i < len; p++, i++)
+        h = ((h << 5) + h) + (*p);
     return h;
 }
 

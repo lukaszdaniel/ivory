@@ -47,7 +47,7 @@ namespace R
         [[maybe_unused]] bool m_trace;             /* functions and memory tracing */
         [[maybe_unused]] bool m_spare;             /* used on closures and when REFCNT is defined */
         [[maybe_unused]] bool m_gcgen;             /* old generation number */
-        [[maybe_unused]] unsigned int m_gccls : 3; /* node class */
+        [[maybe_unused]] unsigned int m_gcclass : 3; /* node class */
         [[maybe_unused]] unsigned int m_named : NAMED_BITS;
         [[maybe_unused]] unsigned int m_extra : 29 - NAMED_BITS; /* used for immediate bindings */
         [[maybe_unused]] RObject *m_attrib;

@@ -110,7 +110,7 @@ namespace R
         bool m_trace;             /* functions and memory tracing */
         bool m_spare;             /* used on closures and when REFCNT is defined */
         bool m_gcgen;             /* old generation number */
-        unsigned int m_gccls : 3; /* node class */
+        unsigned int m_gcclass : 3; /* node class */
         unsigned int m_named : NAMED_BITS;
         unsigned int m_extra : 29 - NAMED_BITS; /* used for immediate bindings */
         RObject *m_attrib;
@@ -643,14 +643,14 @@ namespace R
 #define SETTER_CLEAR_NAMED(x)    \
     do                           \
     {                            \
-        RObject *__x__ = (x);        \
+        RObject *__x__ = (x);    \
         if (NAMED(__x__) == 1)   \
             SET_NAMED(__x__, 0); \
     } while (0)
 #define RAISE_NAMED(x, n)            \
     do                               \
     {                                \
-        RObject *__x__ = (x);            \
+        RObject *__x__ = (x);        \
         int __n__ = (n);             \
         if (NAMED(__x__) < __n__)    \
             SET_NAMED(__x__, __n__); \

@@ -90,10 +90,11 @@ extern inline void CHKVEC(SEXP x)
 # define CHKVEC(x) do {} while(0)
 #endif
 
-extern inline void *DATAPTR(SEXP x) {
+extern inline void *DATAPTR(SEXP x)
+{
     CHKVEC(x);
     if (ALTREP(x))
-	return ALTVEC_DATAPTR(x);
+        return ALTVEC_DATAPTR(x);
 #ifdef CATCH_ZERO_LENGTH_ACCESS
     /* Attempts to read or write elements of a zero length vector will
        result in a segfault, rather than read and write random memory.
@@ -102,26 +103,28 @@ extern inline void *DATAPTR(SEXP x) {
        return (void *) 1 instead. Zero-length CHARSXP objects still
        have a trailing zero byte so they are not handled. */
     else if (STDVEC_LENGTH(x) == 0 && TYPEOF(x) != CHARSXP)
-	return (void *) 1;
+        return (void *)1;
 #endif
     else
-	return STDVEC_DATAPTR(x);
+        return STDVEC_DATAPTR(x);
 }
 
-extern inline const void *DATAPTR_RO(SEXP x) {
+extern inline const void *DATAPTR_RO(SEXP x)
+{
     CHKVEC(x);
     if (ALTREP(x))
-	return ALTVEC_DATAPTR_RO(x);
+        return ALTVEC_DATAPTR_RO(x);
     else
-	return STDVEC_DATAPTR(x);
+        return STDVEC_DATAPTR(x);
 }
 
-extern inline const void *DATAPTR_OR_NULL(SEXP x) {
+extern inline const void *DATAPTR_OR_NULL(SEXP x)
+{
     CHKVEC(x);
     if (ALTREP(x))
-	return ALTVEC_DATAPTR_OR_NULL(x);
+        return ALTVEC_DATAPTR_OR_NULL(x);
     else
-	return STDVEC_DATAPTR(x);
+        return STDVEC_DATAPTR(x);
 }
 
 #ifdef STRICT_TYPECHECK
@@ -163,29 +166,34 @@ extern inline const void *DATAPTR_OR_NULL(SEXP x) {
 #define CHECK_VECTOR_RAW(x) do { } while(0)
 #endif
 
-extern inline const int *LOGICAL_OR_NULL(SEXP x) {
+extern inline const int *LOGICAL_OR_NULL(SEXP x)
+{
     CHECK_VECTOR_LGL(x);
-    return (int *) (ALTREP(x) ? ALTVEC_DATAPTR_OR_NULL(x) : STDVEC_DATAPTR(x));
+    return (int *)(ALTREP(x) ? ALTVEC_DATAPTR_OR_NULL(x) : STDVEC_DATAPTR(x));
 }
 
-extern inline const int *INTEGER_OR_NULL(SEXP x) {
+extern inline const int *INTEGER_OR_NULL(SEXP x)
+{
     CHECK_VECTOR_INT(x);
-    return (int *) (ALTREP(x) ? ALTVEC_DATAPTR_OR_NULL(x) : STDVEC_DATAPTR(x));
+    return (int *)(ALTREP(x) ? ALTVEC_DATAPTR_OR_NULL(x) : STDVEC_DATAPTR(x));
 }
 
-extern inline const double *REAL_OR_NULL(SEXP x) {
+extern inline const double *REAL_OR_NULL(SEXP x)
+{
     CHECK_VECTOR_REAL(x);
-    return (double *) (ALTREP(x) ? ALTVEC_DATAPTR_OR_NULL(x) : STDVEC_DATAPTR(x));
+    return (double *)(ALTREP(x) ? ALTVEC_DATAPTR_OR_NULL(x) : STDVEC_DATAPTR(x));
 }
 
-extern inline const Rcomplex *COMPLEX_OR_NULL(SEXP x) {
+extern inline const Rcomplex *COMPLEX_OR_NULL(SEXP x)
+{
     CHECK_VECTOR_CPLX(x);
-    return (Rcomplex *) (ALTREP(x) ? ALTVEC_DATAPTR_OR_NULL(x) : STDVEC_DATAPTR(x));
+    return (Rcomplex *)(ALTREP(x) ? ALTVEC_DATAPTR_OR_NULL(x) : STDVEC_DATAPTR(x));
 }
 
-extern inline const Rbyte *RAW_OR_NULL(SEXP x) {
+extern inline const Rbyte *RAW_OR_NULL(SEXP x)
+{
     CHECK_VECTOR_RAW(x);
-    return (Rbyte *) (ALTREP(x) ? ALTVEC_DATAPTR_OR_NULL(x) : STDVEC_DATAPTR(x));
+    return (Rbyte *)(ALTREP(x) ? ALTVEC_DATAPTR_OR_NULL(x) : STDVEC_DATAPTR(x));
 }
 
 extern inline R_xlen_t XLENGTH_EX(SEXP x)
@@ -200,13 +208,14 @@ extern inline R_xlen_t XTRUELENGTH(SEXP x)
 
 extern inline int LENGTH_EX(SEXP x, const char *file, int line)
 {
-    if (!x || x == R_NilValue) return 0;
+    if (!x || x == R_NilValue)
+        return 0;
     R_xlen_t len = XLENGTH(x);
 #ifdef LONG_VECTOR_SUPPORT
     if (len > R_SHORT_LEN_MAX)
-	R_BadLongVector(x, file, line);
+        R_BadLongVector(x, file, line);
 #endif
-    return (int) len;
+    return (int)len;
 }
 
 #ifdef STRICT_TYPECHECK
@@ -349,72 +358,87 @@ extern inline int LENGTH_EX(SEXP x, const char *file, int line)
 #define CHECK_VECTOR_RAW_ELT(x, i) do { } while(0)
 #endif
 
-extern inline int *LOGICAL0(SEXP x) {
+extern inline int *LOGICAL0(SEXP x)
+{
     CHECK_STDVEC_LGL(x);
-    return (int *) STDVEC_DATAPTR(x);
+    return (int *)STDVEC_DATAPTR(x);
 }
-extern inline int SCALAR_LVAL(SEXP x) {
+extern inline int SCALAR_LVAL(SEXP x)
+{
     CHECK_SCALAR_LGL(x);
-    return (Rboolean) LOGICAL0(x)[0];
+    return (Rboolean)LOGICAL0(x)[0];
 }
-extern inline void SET_SCALAR_LVAL(SEXP x, Rboolean v) {
+extern inline void SET_SCALAR_LVAL(SEXP x, Rboolean v)
+{
     CHECK_SCALAR_LGL(x);
     LOGICAL0(x)[0] = v;
 }
 
-extern inline int *INTEGER0(SEXP x) {
+extern inline int *INTEGER0(SEXP x)
+{
     CHECK_STDVEC_INT(x);
-    return (int *) STDVEC_DATAPTR(x);
+    return (int *)STDVEC_DATAPTR(x);
 }
-extern inline int SCALAR_IVAL(SEXP x) {
+extern inline int SCALAR_IVAL(SEXP x)
+{
     CHECK_SCALAR_INT(x);
     return INTEGER0(x)[0];
 }
-extern inline void SET_SCALAR_IVAL(SEXP x, int v) {
+extern inline void SET_SCALAR_IVAL(SEXP x, int v)
+{
     CHECK_SCALAR_INT(x);
     INTEGER0(x)[0] = v;
 }
 
-extern inline double *REAL0(SEXP x) {
+extern inline double *REAL0(SEXP x)
+{
     CHECK_STDVEC_REAL(x);
-    return (double *) STDVEC_DATAPTR(x);
+    return (double *)STDVEC_DATAPTR(x);
 }
-extern inline double SCALAR_DVAL(SEXP x) {
+extern inline double SCALAR_DVAL(SEXP x)
+{
     CHECK_SCALAR_REAL(x);
     return REAL0(x)[0];
 }
-extern inline void SET_SCALAR_DVAL(SEXP x, double v) {
+extern inline void SET_SCALAR_DVAL(SEXP x, double v)
+{
     CHECK_SCALAR_REAL(x);
     REAL0(x)[0] = v;
 }
 
-extern inline Rcomplex *COMPLEX0(SEXP x) {
+extern inline Rcomplex *COMPLEX0(SEXP x)
+{
     CHECK_STDVEC_CPLX(x);
-    return (Rcomplex *) STDVEC_DATAPTR(x);
+    return (Rcomplex *)STDVEC_DATAPTR(x);
 }
-extern inline Rcomplex SCALAR_CVAL(SEXP x) {
+extern inline Rcomplex SCALAR_CVAL(SEXP x)
+{
     CHECK_SCALAR_CPLX(x);
     return COMPLEX0(x)[0];
 }
-extern inline void SET_SCALAR_CVAL(SEXP x, Rcomplex v) {
+extern inline void SET_SCALAR_CVAL(SEXP x, Rcomplex v)
+{
     CHECK_SCALAR_CPLX(x);
     COMPLEX0(x)[0] = v;
 }
 
-extern inline Rbyte *RAW0(SEXP x) {
+extern inline Rbyte *RAW0(SEXP x)
+{
     CHECK_STDVEC_RAW(x);
-    return (Rbyte *) STDVEC_DATAPTR(x);
+    return (Rbyte *)STDVEC_DATAPTR(x);
 }
-extern inline Rbyte SCALAR_BVAL(SEXP x) {
+extern inline Rbyte SCALAR_BVAL(SEXP x)
+{
     CHECK_SCALAR_RAW(x);
     return RAW0(x)[0];
 }
-extern inline void SET_SCALAR_BVAL(SEXP x, Rbyte v) {
+extern inline void SET_SCALAR_BVAL(SEXP x, Rbyte v)
+{
     CHECK_SCALAR_RAW(x);
     RAW0(x)[0] = v;
 }
 
-extern inline SEXP ALTREP_CLASS(SEXP x) { return TAG(x);; }
+extern inline SEXP ALTREP_CLASS(SEXP x) { return TAG(x); }
 
 extern inline SEXP R_altrep_data1(SEXP x) { return CAR(x); }
 extern inline SEXP R_altrep_data2(SEXP x) { return CDR(x); }
@@ -430,8 +454,10 @@ extern inline int INTEGER_ELT(SEXP x, R_xlen_t i)
 extern inline void SET_INTEGER_ELT(SEXP x, R_xlen_t i, int v)
 {
     CHECK_VECTOR_INT_ELT(x, i);
-    if (ALTREP(x)) ALTINTEGER_SET_ELT(x, i, v);
-    else INTEGER0(x)[i] = v;
+    if (ALTREP(x))
+        ALTINTEGER_SET_ELT(x, i, v);
+    else
+        INTEGER0(x)[i] = v;
 }
 
 extern inline int LOGICAL_ELT(SEXP x, R_xlen_t i)
@@ -443,8 +469,10 @@ extern inline int LOGICAL_ELT(SEXP x, R_xlen_t i)
 extern inline void SET_LOGICAL_ELT(SEXP x, R_xlen_t i, int v)
 {
     CHECK_VECTOR_LGL_ELT(x, i);
-    if (ALTREP(x)) ALTLOGICAL_SET_ELT(x, i, v);
-    else LOGICAL0(x)[i] = v;
+    if (ALTREP(x))
+        ALTLOGICAL_SET_ELT(x, i, v);
+    else
+        LOGICAL0(x)[i] = v;
 }
 
 extern inline double REAL_ELT(SEXP x, R_xlen_t i)
@@ -456,8 +484,10 @@ extern inline double REAL_ELT(SEXP x, R_xlen_t i)
 extern inline void SET_REAL_ELT(SEXP x, R_xlen_t i, double v)
 {
     CHECK_VECTOR_REAL_ELT(x, i);
-    if (ALTREP(x)) ALTREAL_SET_ELT(x, i, v);
-    else REAL0(x)[i] = v;
+    if (ALTREP(x))
+        ALTREAL_SET_ELT(x, i, v);
+    else
+        REAL0(x)[i] = v;
 }
 
 extern inline Rcomplex COMPLEX_ELT(SEXP x, R_xlen_t i)
@@ -469,8 +499,10 @@ extern inline Rcomplex COMPLEX_ELT(SEXP x, R_xlen_t i)
 extern inline void SET_COMPLEX_ELT(SEXP x, R_xlen_t i, Rcomplex v)
 {
     CHECK_VECTOR_CPLX_ELT(x, i);
-    if (ALTREP(x)) ALTCOMPLEX_SET_ELT(x, i, v);
-    else COMPLEX0(x)[i] = v;
+    if (ALTREP(x))
+        ALTCOMPLEX_SET_ELT(x, i, v);
+    else
+        COMPLEX0(x)[i] = v;
 }
 
 extern inline Rbyte RAW_ELT(SEXP x, R_xlen_t i)
@@ -482,19 +514,23 @@ extern inline Rbyte RAW_ELT(SEXP x, R_xlen_t i)
 extern inline void SET_RAW_ELT(SEXP x, R_xlen_t i, Rbyte v)
 {
     CHECK_VECTOR_RAW_ELT(x, i);
-    if (ALTREP(x)) ALTRAW_SET_ELT(x, i, v);
-    else RAW0(x)[i] = v;
+    if (ALTREP(x))
+        ALTRAW_SET_ELT(x, i, v);
+    else
+        RAW0(x)[i] = v;
 }
 
-#if !defined(COMPILING_R) && !defined(COMPILING_MEMORY_C) &&	\
+#if !defined(COMPILING_R) && !defined(COMPILING_MEMORY_C) && \
     !defined(TESTING_WRITE_BARRIER)
 /* if not inlining use version in memory.cpp with more error checking */
-extern inline SEXP STRING_ELT(SEXP x, R_xlen_t i) {
+extern inline SEXP STRING_ELT(SEXP x, R_xlen_t i)
+{
     if (ALTREP(x))
-	return ALTSTRING_ELT(x, i);
-    else {
-	SEXP* ps = (SEXP*) STDVEC_DATAPTR(x);
-	return ps[i];
+        return ALTSTRING_ELT(x, i);
+    else
+    {
+        SEXP *ps = (SEXP *)STDVEC_DATAPTR(x);
+        return ps[i];
     }
 }
 #else
@@ -504,14 +540,15 @@ SEXP STRING_ELT(SEXP x, R_xlen_t i);
 #ifdef INLINE_PROTECT
 extern int R_PPStackSize;
 extern int R_PPStackTop;
-extern SEXP* R_PPStack;
+extern SEXP *R_PPStack;
 
 extern inline SEXP Rf_protect(SEXP s)
 {
     R_CHECK_THREAD;
     if (R_PPStackTop < R_PPStackSize)
-	R_PPStack[R_PPStackTop++] = s;
-    else R_signal_protect_error();
+        R_PPStack[R_PPStackTop++] = s;
+    else
+        R_signal_protect_error();
     return s;
 }
 
@@ -519,9 +556,10 @@ extern inline void Rf_unprotect(int l)
 {
     R_CHECK_THREAD;
 #ifdef PROTECT_PARANOID
-    if (R_PPStackTop >=  l)
-	R_PPStackTop -= l;
-    else R_signal_unprotect_error();
+    if (R_PPStackTop >= l)
+        R_PPStackTop -= l;
+    else
+        R_signal_unprotect_error();
 #else
     R_PPStackTop -= l;
 #endif
@@ -537,7 +575,7 @@ extern inline void R_Reprotect(SEXP s, PROTECT_INDEX i)
 {
     R_CHECK_THREAD;
     if (i >= R_PPStackTop || i < 0)
-	R_signal_reprotect_error(i);
+        R_signal_reprotect_error(i);
     R_PPStack[i] = s;
 }
 #endif /* INLINE_PROTECT */
@@ -674,7 +712,6 @@ extern inline SEXP Rf_list1(SEXP s)
     return CONS(s, R_NilValue);
 }
 
-
 extern inline SEXP Rf_list2(SEXP s, SEXP t)
 {
     PROTECT(s);
@@ -683,7 +720,6 @@ extern inline SEXP Rf_list2(SEXP s, SEXP t)
     return s;
 }
 
-
 extern inline SEXP Rf_list3(SEXP s, SEXP t, SEXP u)
 {
     PROTECT(s);
@@ -691,7 +727,6 @@ extern inline SEXP Rf_list3(SEXP s, SEXP t, SEXP u)
     UNPROTECT(1);
     return s;
 }
-
 
 extern inline SEXP Rf_list4(SEXP s, SEXP t, SEXP u, SEXP v)
 {
@@ -799,10 +834,10 @@ extern inline Rboolean Rf_conformable(SEXP x, SEXP y)
     y = getAttrib(y, R_DimSymbol);
     UNPROTECT(1);
     if ((n = Rf_length(x)) != Rf_length(y))
-	return FALSE;
+        return FALSE;
     for (i = 0; i < n; i++)
-	if (INTEGER(x)[i] != INTEGER(y)[i])
-	    return FALSE;
+        if (INTEGER(x)[i] != INTEGER(y)[i])
+            return FALSE;
     return TRUE;
 }
 
@@ -813,13 +848,15 @@ extern inline Rboolean Rf_inherits(SEXP s, const char *name)
 {
     SEXP klass;
     int i, nclass;
-    if (OBJECT(s)) {
-	klass = getAttrib(s, R_ClassSymbol);
-	nclass = Rf_length(klass);
-	for (i = 0; i < nclass; i++) {
-	    if (!strcmp(CHAR(STRING_ELT(klass, i)), name))
-		return TRUE;
-	}
+    if (OBJECT(s))
+    {
+        klass = getAttrib(s, R_ClassSymbol);
+        nclass = Rf_length(klass);
+        for (i = 0; i < nclass; i++)
+        {
+            if (!strcmp(CHAR(STRING_ELT(klass, i)), name))
+                return TRUE;
+        }
     }
     return FALSE;
 }
@@ -837,10 +874,11 @@ extern inline Rboolean Rf_isValidStringF(SEXP x)
 
 extern inline Rboolean Rf_isUserBinop(SEXP s)
 {
-    if (TYPEOF(s) == SYMSXP) {
-	const char *str = CHAR(PRINTNAME(s));
-	if (strlen(str) >= 2 && str[0] == '%' && str[strlen(str)-1] == '%')
-	    return TRUE;
+    if (TYPEOF(s) == SYMSXP)
+    {
+        const char *str = CHAR(PRINTNAME(s));
+        if (strlen(str) >= 2 && str[0] == '%' && str[strlen(str) - 1] == '%')
+            return TRUE;
     }
     return FALSE;
 }
@@ -848,20 +886,19 @@ extern inline Rboolean Rf_isUserBinop(SEXP s)
 extern inline Rboolean Rf_isPrimitive(SEXP s)
 {
     return Rboolean(TYPEOF(s) == BUILTINSXP ||
-	    TYPEOF(s) == SPECIALSXP);
+                    TYPEOF(s) == SPECIALSXP);
 }
 
 extern inline Rboolean Rf_isFunction(SEXP s)
 {
     return Rboolean(TYPEOF(s) == CLOSXP ||
-            isPrimitive(s));
+                    isPrimitive(s));
 }
 
 extern inline Rboolean Rf_isList(SEXP s)
 {
     return Rboolean(s == R_NilValue || TYPEOF(s) == LISTSXP);
 }
-
 
 extern inline Rboolean Rf_isNewList(SEXP s)
 {
@@ -1040,9 +1077,12 @@ extern inline Rboolean Rf_isNumber(SEXP s)
 extern inline SEXP Rf_ScalarLogical(int x)
 {
     extern SEXP R_LogicalNAValue, R_TrueValue, R_FalseValue;
-    if (x == NA_LOGICAL) return R_LogicalNAValue;
-    else if (x != 0) return R_TrueValue;
-    else return R_FalseValue;
+    if (x == NA_LOGICAL)
+        return R_LogicalNAValue;
+    else if (x != 0)
+        return R_TrueValue;
+    else
+        return R_FalseValue;
 }
 
 extern inline SEXP Rf_ScalarInteger(int x)
@@ -1089,24 +1129,28 @@ extern inline SEXP Rf_ScalarRaw(Rbyte x)
 
 extern inline Rboolean Rf_isVectorizable(SEXP s)
 {
-    if (s == R_NilValue) return TRUE;
-    else if (isNewList(s)) {
-	R_xlen_t i, n;
+    if (s == R_NilValue)
+        return TRUE;
+    else if (isNewList(s))
+    {
+        R_xlen_t i, n;
 
-	n = XLENGTH(s);
-	for (i = 0 ; i < n; i++)
-	    if (!isVector(VECTOR_ELT(s, i)) || XLENGTH(VECTOR_ELT(s, i)) > 1)
-		return FALSE;
-	return TRUE;
+        n = XLENGTH(s);
+        for (i = 0; i < n; i++)
+            if (!isVector(VECTOR_ELT(s, i)) || XLENGTH(VECTOR_ELT(s, i)) > 1)
+                return FALSE;
+        return TRUE;
     }
-    else if (isList(s)) {
-	for ( ; s != R_NilValue; s = CDR(s))
-	    if (!isVector(CAR(s)) || LENGTH(CAR(s)) > 1) return FALSE;
-	return TRUE;
+    else if (isList(s))
+    {
+        for (; s != R_NilValue; s = CDR(s))
+            if (!isVector(CAR(s)) || LENGTH(CAR(s)) > 1)
+                return FALSE;
+        return TRUE;
     }
-    else return FALSE;
+    else
+        return FALSE;
 }
-
 
 /** @fn SEXP Rf_mkNamed(SEXPTYPE TYP, const char **names)
  *
@@ -1129,7 +1173,7 @@ extern inline SEXP Rf_mkNamed(SEXPTYPE TYP, const char **names)
     ans = PROTECT(allocVector(TYP, n));
     nms = PROTECT(allocVector(STRSXP, n));
     for (i = 0; i < n; i++)
-	SET_STRING_ELT(nms, i, mkChar(names[i]));
+        SET_STRING_ELT(nms, i, mkChar(names[i]));
     setAttrib(ans, R_NamesSymbol, nms);
     UNPROTECT(2);
     return ans;
@@ -1149,16 +1193,18 @@ extern inline SEXP Rf_mkString(const char *s)
 }
 
 /* index of a given C string in (translated) R string vector  */
-extern inline int Rf_stringPositionTr(SEXP string, const char *translatedElement) {
+extern inline int Rf_stringPositionTr(SEXP string, const char *translatedElement)
+{
 
     int slen = LENGTH(string);
     int i;
 
     const void *vmax = vmaxget();
-    for (i = 0 ; i < slen; i++) {
-	Rboolean found = (Rboolean) (! strcmp(translateChar(STRING_ELT(string, i)),
-				  translatedElement));
-	vmaxset(vmax);
+    for (i = 0; i < slen; i++)
+    {
+        Rboolean found = (Rboolean)(!strcmp(translateChar(STRING_ELT(string, i)),
+                                            translatedElement));
+        vmaxset(vmax);
         if (found)
             return i;
     }
@@ -1168,18 +1214,20 @@ extern inline int Rf_stringPositionTr(SEXP string, const char *translatedElement
 /* duplicate RHS value of complex assignment if necessary to prevent cycles */
 extern inline SEXP R_FixupRHS(SEXP x, SEXP y)
 {
-    if( y != R_NilValue && MAYBE_REFERENCED(y) ) {
-	if (R_cycle_detected(x, y)) {
+    if (y != R_NilValue && MAYBE_REFERENCED(y))
+    {
+        if (R_cycle_detected(x, y))
+        {
 #ifdef WARNING_ON_CYCLE_DETECT
-	    warning(_("cycle detected"));
-	    R_cycle_detected(x, y);
+            warning(_("cycle detected"));
+            R_cycle_detected(x, y);
 #endif
-	    y = duplicate(y);
-	}
-	else ENSURE_NAMEDMAX(y);
+            y = duplicate(y);
+        }
+        else
+            ENSURE_NAMEDMAX(y);
     }
     return y;
 }
-
 
 #endif /* R_INLINES_H_ */

@@ -66,14 +66,14 @@ HIDDEN SEXP do_identical(SEXP call, SEXP op, SEXP args, SEXP env)
     num_eq = asLogical(CAR(args)); args = CDR(args);
     single_NA = asLogical(CAR(args)); args = CDR(args);
     attr_as_set = asLogical(CAR(args)); args = CDR(args);
-    if (nargs >= 6)
-	ignore_bytecode = asLogical(CAR(args));
-    if (nargs >= 7)
-	ignore_env = asLogical(CADR(args));
-    if (nargs >= 8)
-	ignore_srcref = asLogical(CADDR(args));
+	if (nargs >= 6)
+		ignore_bytecode = asLogical(CAR(args));
+	if (nargs >= 7)
+		ignore_env = asLogical(CADR(args));
+	if (nargs >= 8)
+		ignore_srcref = asLogical(CADDR(args));
 
-    if(num_eq          == NA_LOGICAL) error(_("invalid '%s' value"), "num.eq");
+	if(num_eq          == NA_LOGICAL) error(_("invalid '%s' value"), "num.eq");
     if(single_NA       == NA_LOGICAL) error(_("invalid '%s' value"), "single.NA");
     if(attr_as_set     == NA_LOGICAL) error(_("invalid '%s' value"), "attrib.as.set");
     if(ignore_bytecode == NA_LOGICAL) error(_("invalid '%s' value"), "ignore.bytecode");
@@ -346,11 +346,11 @@ static bool neWithNaN(double x, double y, ne_strictness_type str)
 	case single_NA__num_eq:
 	case single_NA__num_bit:
 		if (R_IsNA(x))
-			return (R_IsNA(y) ? false : true);
+			return !(R_IsNA(y));
 		if (R_IsNA(y))
-			return (R_IsNA(x) ? false : true);
+			return !(R_IsNA(x));
 		if (ISNAN(x))
-			return (ISNAN(y) ? false : true);
+			return !(ISNAN(y));
 
 	case bit_NA__num_eq:
 	case bit_NA__num_bit:; /* do nothing */
@@ -364,16 +364,12 @@ static bool neWithNaN(double x, double y, ne_strictness_type str)
 		if (!ISNAN(x) && !ISNAN(y))
 			return (x != y);
 		else /* bitwise check for NA/NaN's */
-			return memcmp((const void *)&x,
-						  (const void *)&y, sizeof(double))
-					   ? true
-					   : false;
+			return std::memcmp((const void *)&x,
+						  (const void *)&y, sizeof(double));
 	case bit_NA__num_bit:
 	case single_NA__num_bit:
-		return memcmp((const void *)&x,
-					  (const void *)&y, sizeof(double))
-				   ? true
-				   : false;
+		return std::memcmp((const void *)&x,
+					  (const void *)&y, sizeof(double));
 	default: /* Wall */
 		return false;
 	}

@@ -53,28 +53,42 @@ static const char *subterm(char *s)
     char *p, *q;
     int colon = 0;
 
-    if(strncmp(s, "${", 2)) return s;
-    if(s[strlen(s) - 1] != '}') return s;
+    if (strncmp(s, "${", 2))
+        return s;
+    if (s[strlen(s) - 1] != '}')
+        return s;
     /*  remove leading ${ and final } */
     s[strlen(s) - 1] = '\0';
     s += 2;
     s = rmspace(s);
-    if(!strlen(s)) return "";
+    if (!strlen(s))
+        return "";
     p = Rf_strchr(s, '-');
-    if(p) {
-	q = p + 1; /* start of value */
-	if(p - s > 1 && *(p-1) == ':') {
-	    colon = 1;
-	    *(p-1) = '\0';
-	} else *p = '\0';
-    } else q = nullptr;
-    p = getenv(s);
-    if(colon) {
-	if(p && strlen(p)) return p; /* variable was set and non-empty */
-    } else {
-	if(p) return p; /* variable was set */
+    if (p)
+    {
+        q = p + 1; /* start of value */
+        if (p - s > 1 && *(p - 1) == ':')
+        {
+            colon = 1;
+            *(p - 1) = '\0';
+        }
+        else
+            *p = '\0';
     }
-    return q ? subterm(q) : (char *) "";
+    else
+        q = nullptr;
+    p = getenv(s);
+    if (colon)
+    {
+        if (p && strlen(p))
+            return p; /* variable was set and non-empty */
+    }
+    else
+    {
+        if (p)
+            return p; /* variable was set */
+    }
+    return q ? subterm(q) : (char *)"";
 }
 
 /* skip along until we find an unmatched right brace */
@@ -83,15 +97,22 @@ static char *findRbrace(char *s)
     char *p = s, *pl, *pr;
     int nl = 0, nr = 0;
 
-    while(nr <= nl) {
-	pl = Rf_strchr(p, '{');
-	pr = Rf_strchr(p, '}');
-	if(!pr) return nullptr;
-	if(!pl || pr < pl) {
-	    p = pr+1; nr++;
-	} else {
-	    p = pl+1; nl++;
-	}
+    while (nr <= nl)
+    {
+        pl = Rf_strchr(p, '{');
+        pr = Rf_strchr(p, '}');
+        if (!pr)
+            return nullptr;
+        if (!pl || pr < pl)
+        {
+            p = pr + 1;
+            nr++;
+        }
+        else
+        {
+            p = pl + 1;
+            nl++;
+        }
     }
     return pr;
 }
@@ -101,29 +122,40 @@ constexpr size_t BUF_SIZE = 10000;
 static const char *findterm(const char *s)
 {
     char *p, *q;
-    const char *r2, *ss=s;
+    const char *r2, *ss = s;
     static char ans[BUF_SIZE];
 
-    if(!strlen(s)) return "";
+    if (!strlen(s))
+        return "";
     ans[0] = '\0';
-    while(true) {
-	/* Look for ${...}, taking care to look for inner matches */
-	p = Rf_strchr(s, '$');
-	if(!p || p[1] != '{') break;
-	q = findRbrace(p+2);
-	if(!q) break;
-	/* copy over leading part */
-	size_t nans = strlen(ans);
-	strncat(ans, s, (size_t) (p - s)); ans[nans + p - s] = '\0';
-	char r[q - p + 2];
-	strncpy(r, p, (size_t) (q - p + 1));
-	r[q - p + 1] = '\0';
-	r2 = subterm(r);
-	if(strlen(ans) + strlen(r2) < BUF_SIZE) strcat(ans, r2); else return ss;
-	/* now repeat on the tail */
-	s = q+1;
+    while (true)
+    {
+        /* Look for ${...}, taking care to look for inner matches */
+        p = Rf_strchr(s, '$');
+        if (!p || p[1] != '{')
+            break;
+        q = findRbrace(p + 2);
+        if (!q)
+            break;
+        /* copy over leading part */
+        size_t nans = strlen(ans);
+        strncat(ans, s, (size_t)(p - s));
+        ans[nans + p - s] = '\0';
+        char r[q - p + 2];
+        strncpy(r, p, (size_t)(q - p + 1));
+        r[q - p + 1] = '\0';
+        r2 = subterm(r);
+        if (strlen(ans) + strlen(r2) < BUF_SIZE)
+            strcat(ans, r2);
+        else
+            return ss;
+        /* now repeat on the tail */
+        s = q + 1;
     }
-    if(strlen(ans) + strlen(s) < BUF_SIZE) strcat(ans, s); else return ss;
+    if (strlen(ans) + strlen(s) < BUF_SIZE)
+        strcat(ans, s);
+    else
+        return ss;
     return ans;
 }
 

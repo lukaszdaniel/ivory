@@ -410,8 +410,9 @@ Rboolean Rf_isBlankString(const char *s)
 
 Rboolean Rf_StringBlank(SEXP x)
 {
-    if (x == R_NilValue) return TRUE;
-    return (Rboolean) (CHAR(x)[0] == '\0');
+	if (x == R_NilValue)
+		return TRUE;
+	return (Rboolean)(CHAR(x)[0] == '\0');
 }
 
 /* Function to test whether a string is a true value */
@@ -460,66 +461,73 @@ HIDDEN SEXP Rf_EnsureString(SEXP s)
 // NB: have  checkArity(a,b) :=  Rf_checkArityCall(a,b,call)
 void Rf_checkArityCall(SEXP op, SEXP args, SEXP call)
 {
-    if (PRIMARITY(op) >= 0 && PRIMARITY(op) != length(args)) {
-	/* FIXME: ngettext reguires unsigned long, but %u would seem appropriate */
-	if (PRIMINTERNAL(op)) {
-	   const char *primname = PRIMNAME(op);
-	   const int bufsize = strlen(".Internal()") + strlen(primname);
-	   char result [bufsize];
-	   snprintf(result, bufsize, ".Internal(%s)", primname);
-	    error(n_("%d argument passed to '%s' function which requires %d",
-		     "%d arguments passed to '%s' function which requires %d",
-			   (unsigned long) length(args)),
-		  length(args), result, PRIMARITY(op));
-	} else
-	    errorcall(call,
-		      n_("%d argument passed to '%s' function which requires %d",
-			       "%d arguments passed to '%s' function which requires %d",
-			       (unsigned long) length(args)),
-		      length(args), PRIMNAME(op), PRIMARITY(op));
-    }
+	if (PRIMARITY(op) >= 0 && PRIMARITY(op) != length(args))
+	{
+		/* FIXME: ngettext reguires unsigned long, but %u would seem appropriate */
+		if (PRIMINTERNAL(op))
+		{
+			const char *primname = PRIMNAME(op);
+			const int bufsize = strlen(".Internal()") + strlen(primname);
+			char result[bufsize];
+			snprintf(result, bufsize, ".Internal(%s)", primname);
+			error(n_("%d argument passed to '%s' function which requires %d",
+					 "%d arguments passed to '%s' function which requires %d",
+					 (unsigned long)length(args)),
+				  length(args), result, PRIMARITY(op));
+		}
+		else
+			errorcall(call,
+					  n_("%d argument passed to '%s' function which requires %d",
+						 "%d arguments passed to '%s' function which requires %d",
+						 (unsigned long)length(args)),
+					  length(args), PRIMNAME(op), PRIMARITY(op));
+	}
 }
 
 HIDDEN void Rf_check1arg(SEXP arg, SEXP call, const char *formal)
 {
-    SEXP tag = TAG(arg);
-    if (tag == R_NilValue) return;
-    const char *supplied = CHAR(PRINTNAME(tag));
-    size_t ns = strlen(supplied);
-    if (ns > strlen(formal) || strncmp(supplied, formal, ns))
-	errorcall(call, _("supplied argument name '%s' does not match '%s'"), supplied, formal);
+	SEXP tag = TAG(arg);
+	if (tag == R_NilValue)
+		return;
+	const char *supplied = CHAR(PRINTNAME(tag));
+	size_t ns = strlen(supplied);
+	if (ns > strlen(formal) || strncmp(supplied, formal, ns))
+		errorcall(call, _("supplied argument name '%s' does not match '%s'"), supplied, formal);
 }
-
 
 SEXP Rf_nthcdr(SEXP s, int n)
 {
-    if (isList(s) || isLanguage(s) || isFrame(s) || TYPEOF(s) == DOTSXP ) {
-	while( n-- > 0 ) {
-	    if (s == R_NilValue)
-		error(_("'nthcdr()' list is shorter than %d"), n);
-	    s = CDR(s);
+	if (isList(s) || isLanguage(s) || isFrame(s) || TYPEOF(s) == DOTSXP)
+	{
+		while (n-- > 0)
+		{
+			if (s == R_NilValue)
+				error(_("'nthcdr()' list is shorter than %d"), n);
+			s = CDR(s);
+		}
+		return s;
 	}
-	return s;
-    }
-    else error(_("'nthcdr' needs a list to CDR down"));
-    return R_NilValue;/* for -Wall */
+	else
+		error(_("'nthcdr' needs a list to CDR down"));
+	return R_NilValue; /* for -Wall */
 }
-
 
 /* This is a primitive (with no arguments) */
 HIDDEN SEXP do_nargs(SEXP call, SEXP op, SEXP args, SEXP rho)
 {
-    RCNTXT *cptr;
-    int nargs = NA_INTEGER;
+	RCNTXT *cptr;
+	int nargs = NA_INTEGER;
 
-    checkArity(op, args);
-    for (cptr = R_GlobalContext; cptr; cptr = cptr->nextContext()) {
-	if ((cptr->getCallFlag() & CTXT_FUNCTION) && cptr->workingEnvironment() == rho) {
-	    nargs = length(cptr->getPromiseArgs());
-	    break;
+	checkArity(op, args);
+	for (cptr = R_GlobalContext; cptr; cptr = cptr->nextContext())
+	{
+		if ((cptr->getCallFlag() & CTXT_FUNCTION) && cptr->workingEnvironment() == rho)
+		{
+			nargs = length(cptr->getPromiseArgs());
+			break;
+		}
 	}
-    }
-    return ScalarInteger(nargs);
+	return ScalarInteger(nargs);
 }
 
 template <typename T>
@@ -528,6 +536,7 @@ HIDDEN void setVector(T *vec, const int &len, const T &val)
 	for (int i = 0; i < len; i++)
 		vec[i] = val;
 }
+
 /* formerly used in subscript.cpp, in Utils.h */
 HIDDEN void Rf_setIVector(int *vec, int len, int val)
 {
@@ -549,8 +558,7 @@ void Rf_setSVector(SEXP *vec, int len, SEXP val)
 
 Rboolean Rf_isFree(SEXP val)
 {
-    SEXP t;
-    for (t = R_FreeSEXP; t != R_NilValue; t = CAR(t))
+    for (SEXP t = R_FreeSEXP; t != R_NilValue; t = CAR(t))
 	if (val == t)
 	    return TRUE;
     return FALSE;
@@ -595,15 +603,16 @@ static void isort_with_index(int *x, int *indx, int n)
 
 // body(x) without attributes "srcref", "srcfile", "wholeSrcref" :
 // NOTE: Callers typically need  PROTECT(R_body_no_src(.))
-SEXP R_body_no_src(SEXP x) {
-    SEXP b = PROTECT(duplicate(BODY_EXPR(x)));
-    /* R's removeSource() works *recursively* on the body()
+SEXP R_body_no_src(SEXP x)
+{
+	SEXP b = PROTECT(duplicate(BODY_EXPR(x)));
+	/* R's removeSource() works *recursively* on the body()
        in  ../library/utils/R/sourceutils.R  but that seems unneeded (?) */
-    setAttrib(b, R_SrcrefSymbol, R_NilValue);
-    setAttrib(b, R_SrcfileSymbol, R_NilValue);
-    setAttrib(b, R_WholeSrcrefSymbol, R_NilValue);
-    UNPROTECT(1);
-    return b;
+	Rf_setAttrib(b, R_SrcrefSymbol, R_NilValue);
+	Rf_setAttrib(b, R_SrcfileSymbol, R_NilValue);
+	Rf_setAttrib(b, R_WholeSrcrefSymbol, R_NilValue);
+	UNPROTECT(1);
+	return b;
 }
 
 /* merge(xinds, yinds, all.x, all.y) */

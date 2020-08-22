@@ -36,13 +36,13 @@ namespace R
             return;
         v->m_gcgen = x;
     }
-    unsigned int RObject::gccls(RObject *v) { return v ? v->m_gccls : 0; }
+    unsigned int RObject::gccls(RObject *v) { return v ? v->m_gcclass : 0; }
 
     void RObject::set_gccls(RObject *v, unsigned int x)
     {
         if (!v)
             return;
-        v->m_gccls = x;
+        v->m_gcclass = x;
     }
 
     RObject *RObject::next_node(RObject *s) { return s ? s->gengc_next_node : nullptr; }
@@ -78,7 +78,7 @@ namespace R
         x->m_trace = y.m_trace;
         x->m_spare = y.m_spare;
         x->m_gcgen = y.m_gcgen;
-        x->m_gccls = y.m_gccls;
+        x->m_gcclass = y.m_gcclass;
         x->m_named = y.m_named;
         x->m_extra = y.m_extra;
     }

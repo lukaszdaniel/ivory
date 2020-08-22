@@ -71,17 +71,17 @@ double Rf_rpois(double mu)
     double pois = -1.;
     int k, kflag, big_mu, new_big_mu = FALSE;
 
-    if (!R_FINITE(mu) || mu < 0)
-	ML_WARN_return_NAN;
+	if (!R_FINITE(mu) || mu < 0)
+		ML_WARN_return_NAN;
 
-    if (mu <= 0.)
-	return 0.;
+	if (mu <= 0.)
+		return 0.;
 
-    big_mu = mu >= 10.;
-    if(big_mu)
-	new_big_mu = FALSE;
+	big_mu = mu >= 10.;
+	if (big_mu)
+		new_big_mu = FALSE;
 
-    if (!(big_mu && mu == muprev)) {/* maybe compute new persistent par.s */
+	if (!(big_mu && mu == muprev)) {/* maybe compute new persistent par.s */
 
 	if (big_mu) {
 	    new_big_mu = TRUE;

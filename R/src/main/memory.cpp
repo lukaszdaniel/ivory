@@ -555,8 +555,7 @@ constexpr int NUM_SMALL_NODE_CLASSES = (NUM_NODE_CLASSES - 2);
 static int NodeClassSize[NUM_SMALL_NODE_CLASSES] = {0, 1, 2, 4, 8, 16};
 
 #define NODE_CLASS(s) (RObject::gccls(s))
-#define SET_NODE_CLASS(s,v) (RObject::set_gccls(s, v))
-
+#define SET_NODE_CLASS(s, v) (RObject::set_gccls(s, v))
 
 /* Node Generations. */
 
@@ -592,21 +591,21 @@ union PAGE_HEADER
     double align;
 };
 
-#if ( SIZEOF_SIZE_T > 4 )
-#define BASE_PAGE_SIZE 8000
-#else
-#define BASE_PAGE_SIZE 2000
-#endif
 namespace
 {
-#define R_PAGE_SIZE \
-    (((BASE_PAGE_SIZE - sizeof(PAGE_HEADER)) / sizeof(RObject)) * sizeof(RObject) + sizeof(PAGE_HEADER))
+#if (SIZEOF_SIZE_T > 4)
+    constexpr int BASE_PAGE_SIZE = 8000;
+#else
+    constexpr int BASE_PAGE_SIZE = 2000;
+#endif
+
+    constexpr int R_PAGE_SIZE = (((BASE_PAGE_SIZE - sizeof(PAGE_HEADER)) / sizeof(RObject)) * sizeof(RObject) + sizeof(PAGE_HEADER));
 
     inline int NODE_SIZE(int nclass)
     {
-    return nclass == 0 ? sizeof(RObject) : sizeof(SEXPREC_ALIGN) + NodeClassSize[nclass] * sizeof(VECREC);
+        return nclass == 0 ? sizeof(RObject) : sizeof(SEXPREC_ALIGN) + NodeClassSize[nclass] * sizeof(VECREC);
     }
-   
+
 } // namespace
 #define PAGE_DATA(p) ((void *)(p + 1))
 #define VHEAP_FREE() (R_VSize - R_LargeVallocSize - R_SmallVallocSize)

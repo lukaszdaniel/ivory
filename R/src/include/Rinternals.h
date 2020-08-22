@@ -852,8 +852,8 @@ SEXP R_lsInternal3(SEXP env, Rboolean all, Rboolean sorted);
 SEXP Rf_match(SEXP, SEXP, int);
 SEXP Rf_matchE(SEXP itable, SEXP ix, int nmatch, SEXP env);
 SEXP Rf_namesgets(SEXP vec, SEXP val);
-SEXP Rf_mkChar(const char *);
-SEXP Rf_mkCharLen(const char *, int);
+SEXP Rf_mkChar(const char *const name);
+SEXP Rf_mkCharLen(const char *name, int len);
 Rboolean Rf_NonNullStringMatch(SEXP, SEXP);
 int Rf_ncols(SEXP);
 int Rf_nrows(SEXP);
@@ -879,13 +879,13 @@ SEXP Rf_protect(SEXP);
 #endif
 void Rf_readS3VarsFromFrame(SEXP rho, SEXP *dotGeneric, SEXP *dotGroup, SEXP *dotClass, SEXP *dotMethod, SEXP *dotGenericCallEnv, SEXP *dotGenericDefEnv);
 SEXP Rf_setAttrib(SEXP vec, SEXP name, SEXP val);
-void Rf_setSVector(SEXP*, int, SEXP);
-void Rf_setVar(SEXP, SEXP, SEXP);
-SEXP Rf_stringSuffix(SEXP, int);
-SEXPTYPE Rf_str2type(const char *);
-Rboolean Rf_StringBlank(SEXP);
-SEXP Rf_substitute(SEXP,SEXP);
-SEXP Rf_topenv(SEXP, SEXP);
+void Rf_setSVector(SEXP *vec, int len, SEXP val);
+void Rf_setVar(SEXP symbol, SEXP value, SEXP rho);
+SEXP Rf_stringSuffix(SEXP string, int fromIndex);
+SEXPTYPE Rf_str2type(const char *const s);
+Rboolean Rf_StringBlank(SEXP x);
+SEXP Rf_substitute(SEXP lang, SEXP rho);
+SEXP Rf_topenv(SEXP target, SEXP envir);
 const char *Rf_translateChar(SEXP);
 const char *Rf_translateChar0(SEXP);
 const char *Rf_translateCharUTF8(SEXP);
@@ -906,8 +906,8 @@ NORET void R_signal_reprotect_error(PROTECT_INDEX i);
 void R_ProtectWithIndex(SEXP, PROTECT_INDEX *);
 void R_Reprotect(SEXP, PROTECT_INDEX);
 #endif
-SEXP R_tryEval(SEXP, SEXP, int *);
-SEXP R_tryEvalSilent(SEXP, SEXP, int *);
+SEXP R_tryEval(SEXP e, SEXP env, int *ErrorOccurred);
+SEXP R_tryEvalSilent(SEXP e, SEXP env, int *ErrorOccurred);
 SEXP R_GetCurrentEnv();
 const char *R_curErrorBuf();
 
@@ -1065,7 +1065,7 @@ struct R_outpstream_st
     int version;
     void (*OutChar)(R_outpstream_t, int);
     void (*OutBytes)(R_outpstream_t, /*const*/ void *, int);
-    SEXP (*OutPersistHookFunc)
+    SEXP(*OutPersistHookFunc)
     (SEXP, SEXP);
     SEXP OutPersistHookData;
 };
