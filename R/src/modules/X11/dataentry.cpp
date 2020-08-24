@@ -66,6 +66,7 @@
 # endif */
 
 using namespace std;
+using namespace R;
 
 #ifndef HAVE_KEYSYM
 #define KeySym int
