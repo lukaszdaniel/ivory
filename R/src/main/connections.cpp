@@ -87,6 +87,7 @@
 #include <R_ext/Minmax.h>
 
 using namespace std;
+using namespace R;
 
 #undef ERROR			/* for compilation on Windows */
 
@@ -94,7 +95,10 @@ using namespace std;
 #include <trioremap.h>
 #endif
 
-HIDDEN int R_OutputCon; /* used in printutils.cpp */
+namespace R
+{
+    HIDDEN int R_OutputCon; /* used in printutils.cpp */
+}
 
 static void con_destroy(int i);
 
@@ -667,7 +671,7 @@ void Rf_init_con(Rconnection newconn, const char *description, int enc,
 #endif
 
 #ifdef _WIN32
-size_t Rf_utf8towcs(wchar_t *wc, const char *s, size_t n);
+size_t R::Rf_utf8towcs(wchar_t *wc, const char *s, size_t n);
 #endif
 
 typedef struct fileconn
@@ -5240,7 +5244,7 @@ void WinCheckUTF8(void)
 
 /* ------------------- admin functions  --------------------- */
 
-HIDDEN void Rf_InitConnections()
+HIDDEN void R::Rf_InitConnections()
 {
     int i;
     Connections[0] = newterminal("stdin", "r");

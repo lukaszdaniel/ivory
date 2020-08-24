@@ -138,7 +138,7 @@ static char *expandcmd(const char *cmd, int whole)
    with the hThread handle closed.
 */
 
-extern size_t Rf_utf8towcs(wchar_t *wc, const char *s, size_t n);
+extern size_t R::Rf_utf8towcs(wchar_t *wc, const char *s, size_t n);
 
 static void pcreate(const char* cmd, cetype_t enc,
 		      int newconsole, int visible,

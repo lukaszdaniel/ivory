@@ -23,6 +23,10 @@
 #ifndef PRINT_H_
 #define PRINT_H_
 
+#ifndef __cplusplus
+#error Print.h can only be included in C++ files
+#endif
+
 #include <Defn.h>
 #include <R_ext/PrtUtil.h>
 #include <R_ext/Print.h>
@@ -41,41 +45,35 @@
 
 /* For backward compatibility */
 #define R_print_par_t R_PrintData
+namespace R
+{
+   extern R_print_par_t R_print;
 
-extern R_print_par_t R_print;
+   /* Computation of printing formats */
+   void Rf_formatRaw(const Rbyte *, R_xlen_t, int *);
+   void Rf_formatString(const SEXP *, R_xlen_t, int *, int);
+   void Rf_formatRawS(SEXP, R_xlen_t, int *);
+   void Rf_formatStringS(SEXP, R_xlen_t, int *, int);
 
-#ifdef __cplusplus
-extern "C" {
-#endif
+   /* Formating of values */
+   const char *Rf_EncodeElement0(SEXP, R_xlen_t, int, const char *);
+   const char *Rf_EncodeEnvironment(SEXP);
+   /* Legacy, for R.app */
+   const char *Rf_EncodeElement(SEXP, int, int, char);
 
-/* Computation of printing formats */
-void Rf_formatRaw(const Rbyte *, R_xlen_t, int *);
-void Rf_formatString(const SEXP *, R_xlen_t, int *, int);
-void Rf_formatRawS(SEXP, R_xlen_t, int *);
-void Rf_formatStringS(SEXP, R_xlen_t, int*, int);
-
-/* Formating of values */
-const char *Rf_EncodeElement0(SEXP, R_xlen_t, int, const char *);
-const char *Rf_EncodeEnvironment(SEXP);
-/* Legacy, for R.app */
-const char *Rf_EncodeElement(SEXP, int, int, char);
-
-/* In Rinternals.h (and MUST be there):
+   /* In Rinternals.h (and MUST be there):
    CustomPrintValue,  PrintValue, PrintValueRec */
-void Rf_printArray(SEXP, SEXP, int, int, SEXP);
-void Rf_printMatrix(SEXP, int, SEXP, int, int, SEXP, SEXP,
-		 const char*, const char*);
-void Rf_printNamedVector(SEXP, SEXP, int, const char*);
-void Rf_printVector(SEXP, int, int);
-// void PrintClosure(SEXP, Rboolean);
-// void PrintLanguage(SEXP, Rboolean);
+   void Rf_printArray(SEXP, SEXP, int, int, SEXP);
+   void Rf_printMatrix(SEXP, int, SEXP, int, int, SEXP, SEXP,
+                       const char *, const char *);
+   void Rf_printNamedVector(SEXP, SEXP, int, const char *);
+   void Rf_printVector(SEXP, int, int);
+   // void PrintClosure(SEXP, Rboolean);
+   // void PrintLanguage(SEXP, Rboolean);
 
-/* Utilities for S compatibility and debuggging */
-void R_PV(SEXP s);
-#ifdef __cplusplus
-} //extern "C"
-#endif
-
+   /* Utilities for S compatibility and debuggging */
+   void R_PV(SEXP s);
+} // namespace R
 /* Offset for rowlabels if there are named dimnames */
 #define R_MIN_LBLOFF 2
 

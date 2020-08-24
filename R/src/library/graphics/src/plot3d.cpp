@@ -32,6 +32,8 @@
 
 #include "graphics.h"
 
+using namespace R;
+
 static void TypeCheck(SEXP s, SEXPTYPE type)
 {
     if (TYPEOF(s) != type)

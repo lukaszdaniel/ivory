@@ -46,6 +46,8 @@
 #include <R_ext/Print.h>
 #include <R_ext/Error.h>
 
+using namespace R;
+
 #ifdef ENABLE_NLS
 HIDDEN void nl_Rdummy(void)
 {
@@ -728,7 +730,7 @@ int R_SignalHandlers = 1;  /* Exposed in R_interface.h */
 
 const char* get_workspace_name();  /* from startup.cpp */
 
-HIDDEN void BindDomain(char *R_Home)
+HIDDEN void R::Rf_BindDomain(char *R_Home)
 {
 #ifdef ENABLE_NLS
     char localedir[PATH_MAX+20];

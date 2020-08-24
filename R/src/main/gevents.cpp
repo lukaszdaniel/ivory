@@ -32,6 +32,8 @@
 #include <R_ext/GraphicsEngine.h>
 #include <R_ext/Print.h>
 
+using namespace R;
+
 static const char *const mouseHandlers[] =
 	{"onMouseDown", "onMouseUp", "onMouseMove"};
 

@@ -50,6 +50,8 @@ int Rgui_Edit(char *filename, int enc, char *title, int modal);
 #include <unistd.h>		/* for unlink() */
 #endif
 
+using namespace R;
+
 /*
  * ed, vi etc have 3 parameters. the data, a file and an editor
  *
@@ -70,7 +72,7 @@ int Rgui_Edit(char *filename, int enc, char *title, int modal);
 static char *DefaultFileName;
 static int  EdFileUsed = 0;
 
-HIDDEN void Rf_InitEd()
+HIDDEN void R::Rf_InitEd()
 {
 #ifdef _WIN32
     DefaultFileName = R_tmpnam2("Redit", R_TempDir, ".R");
@@ -79,7 +81,7 @@ HIDDEN void Rf_InitEd()
 #endif
 }
 
-void Rf_CleanEd()
+void R::Rf_CleanEd()
 {
     if (EdFileUsed)
         unlink(DefaultFileName);

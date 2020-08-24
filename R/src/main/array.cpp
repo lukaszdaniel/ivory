@@ -458,7 +458,7 @@ HIDDEN SEXP do_length(SEXP call, SEXP op, SEXP args, SEXP rho)
     return ScalarInteger(length(x));
 }
 
-HIDDEN R_len_t dispatch_length(SEXP x, SEXP call, SEXP rho)
+HIDDEN R_len_t R::dispatch_length(SEXP x, SEXP call, SEXP rho)
 {
 	R_xlen_t len = dispatch_xlength(x, call, rho);
 #ifdef LONG_VECTOR_SUPPORT
@@ -468,7 +468,7 @@ HIDDEN R_len_t dispatch_length(SEXP x, SEXP call, SEXP rho)
 	return (R_len_t)len;
 }
 
-HIDDEN R_xlen_t dispatch_xlength(SEXP x, SEXP call, SEXP rho) {
+HIDDEN R_xlen_t R::dispatch_xlength(SEXP x, SEXP call, SEXP rho) {
     static SEXP length_op = nullptr;
     if (isObject(x)) {
         SEXP len, args;

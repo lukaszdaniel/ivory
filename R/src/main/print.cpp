@@ -70,9 +70,13 @@
 #include <Rconnections.h>
 #include <R_ext/RS.h>
 
-/* Global print parameter struct: */
-R_PrintData R_print;
+using namespace R;
 
+/* Global print parameter struct: */
+namespace R
+{
+	R_PrintData R_print;
+}
 static void printAttributes(SEXP, R_PrintData &, Rboolean);
 static void PrintObject(SEXP, R_PrintData &);
 
@@ -81,7 +85,7 @@ constexpr int TAGBUFLEN = 256;
 constexpr int TAGBUFLEN0 = TAGBUFLEN + 6;
 static char tagbuf[TAGBUFLEN0 * 2]; /* over-allocate to allow overflow check */
 
-void Rf_PrintInit(R_PrintData &data, SEXP env)
+void R::Rf_PrintInit(R_PrintData &data, SEXP env)
 {
     data.na_string = NA_STRING;
     data.na_string_noquote = mkChar("<NA>");
@@ -106,7 +110,7 @@ void Rf_PrintInit(R_PrintData &data, SEXP env)
 /* Used in X11 module for dataentry */
 /* NB this is called by R.app even though it is in no public header, so
    alter there if you alter this */
-void Rf_PrintDefaults(void)
+void R::Rf_PrintDefaults(void)
 {
     PrintInit(R_print, R_GlobalEnv);
 }
@@ -820,7 +824,7 @@ static void print_cleanup(void *data)
 
  * This is the "dispatching" function for  print.default()
  */
-HIDDEN void Rf_PrintValueRec(SEXP s, R_PrintData &data)
+HIDDEN void R::Rf_PrintValueRec(SEXP s, R_PrintData &data)
 {
     SEXP t;
 
@@ -1058,7 +1062,7 @@ static void printAttributes(SEXP s, R_PrintData &data, Rboolean useSlots)
 /* Print an S-expression using (possibly) local options.
    This is used for auto-printing from main.cpp */
 
-HIDDEN void Rf_PrintValueEnv(SEXP s, SEXP env)
+HIDDEN void R::Rf_PrintValueEnv(SEXP s, SEXP env)
 {
 	PrintDefaults();
 	tagbuf[0] = '\0';
@@ -1085,13 +1089,13 @@ void Rf_PrintValue(SEXP s)
 
 /* Ditto, but only for objects, for use in debugging */
 
-void R_PV(SEXP s)
+void R::R_PV(SEXP s)
 {
 	if (isObject(s))
 		PrintValueEnv(s, R_GlobalEnv);
 }
 
-HIDDEN void Rf_CustomPrintValue(SEXP s, SEXP env)
+HIDDEN void R::Rf_CustomPrintValue(SEXP s, SEXP env)
 {
 	tagbuf[0] = '\0';
 

@@ -28,6 +28,7 @@
 #include <Print.h> /* for R_print */
 #include <R_ext/Itermacros.h>
 
+using namespace R;
 
 /***
  *** ALTREP Concrete Class Implementations

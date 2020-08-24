@@ -34,6 +34,7 @@
 #include "graphics.h"
 
 using namespace std;
+using namespace R;
 
 inline static void TypeCheck(SEXP s, SEXPTYPE type)
 {

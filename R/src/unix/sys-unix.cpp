@@ -61,6 +61,8 @@
 
 #include <cerrno>
 
+using namespace R;
+
 /*
  *  4) INITIALIZATION AND TERMINATION ACTIONS
  */
@@ -232,7 +234,7 @@ void R_setStartTime(void)
    clock ticks (which can overflow).  It is possible this version uses
    time() and so is in seconds.  But even Cygwin has gettimeofday.
  */
-HIDDEN void R_getProcTime(double *data)
+HIDDEN void R::R_getProcTime(double *data)
 {
     /* docs say this is rounded to the nearest ms */
     double et = currentTime() - StartTime;
@@ -263,7 +265,7 @@ HIDDEN void R_getProcTime(double *data)
 
 /* used in memory.cpp */
 /* FIXME: maybe should try to find the increment for getrusage */
-HIDDEN double R_getClockIncrement(void)
+HIDDEN double R::R_getClockIncrement(void)
 {
     return 1.0 / clk_tck;
 }

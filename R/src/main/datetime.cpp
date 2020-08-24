@@ -111,6 +111,8 @@ extern char *tzname[2];
 /* Substitute based on glibc code. */
 #include "Rstrptime.h"
 
+using namespace R;
+
 static constexpr int days_in_month[12] =
 	{31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31};
 

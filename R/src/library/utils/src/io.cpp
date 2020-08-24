@@ -43,6 +43,8 @@
 
 #include <rlocale.h> /* for btowc */
 
+using namespace R;
+
 /* The size of vector initially allocated by scan */
 #define SCAN_BLOCKSIZE		1000
 /* The size of the console buffer */

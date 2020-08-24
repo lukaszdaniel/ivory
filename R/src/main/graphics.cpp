@@ -35,6 +35,8 @@
 // --> R_ext/GraphicsEngine.h + Rgraphics.h
 #include <Rmath.h>		/* eg. fmax2() */
 
+using namespace R;
+
 static void GLPretty(double *ul, double *uh, int *n);
 
 /* used in GScale() (../library/graphics/src/graphics.cpp), but also in

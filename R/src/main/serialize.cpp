@@ -1410,7 +1410,10 @@ void R_Serialize(SEXP s, R_outpstream_t stream)
  */
 
 // used in saveload.cpp
-HIDDEN int R_ReadItemDepth = 0, R_InitReadItemDepth;
+namespace R
+{
+	HIDDEN int R_ReadItemDepth = 0, R_InitReadItemDepth;
+}
 
 static char lastname[8192] = "<unknown>";
 

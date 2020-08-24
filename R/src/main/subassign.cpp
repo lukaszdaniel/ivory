@@ -2135,7 +2135,7 @@ HIDDEN SEXP do_subassign3(SEXP call, SEXP op, SEXP args, SEXP env)
 }
 
 /* used in "$<-" (above) and methods_list_dispatch.cpp */
-SEXP R_subassign3_dflt(SEXP call, SEXP x, SEXP nlist, SEXP val)
+SEXP R::R_subassign3_dflt(SEXP call, SEXP x, SEXP nlist, SEXP val)
 {
     SEXP t;
     PROTECT_INDEX pvalidx, pxidx;

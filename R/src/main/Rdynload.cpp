@@ -124,6 +124,8 @@ static int CountDLL = 0;
 
 #include <R_ext/Rdynload.h>
 
+using namespace R;
+
 /* Allocated in initLoadedDLL at R session start. Never free'd */
 static DllInfo* LoadedDLL = nullptr;
 
@@ -143,7 +145,7 @@ void R_init_base(DllInfo *); /* In Registration.cpp */
 
 static void initLoadedDLL();
 
-HIDDEN void InitDynload()
+HIDDEN void R::InitDynload()
 {
     initLoadedDLL();
     int which = addDLL(Rstrdup("base"), "base", nullptr);

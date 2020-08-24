@@ -114,6 +114,8 @@
 #include <trioremap.h>
 #endif
 
+using namespace R;
+
 constexpr size_t BUFSIZE = 512;
 
 constexpr int MIN_Cutoff = 20;
@@ -192,7 +194,7 @@ HIDDEN SEXP do_deparse(SEXP call, SEXP op, SEXP args, SEXP rho)
 }
 
 // deparse1() version *looking* at getOption("deparse.max.lines")
-SEXP Rf_deparse1m(SEXP call, bool abbrev, int opts)
+SEXP R::Rf_deparse1m(SEXP call, bool abbrev, int opts)
 {
     bool backtick = true;
     int old_bl = R_BrowseLines,
@@ -206,7 +208,7 @@ SEXP Rf_deparse1m(SEXP call, bool abbrev, int opts)
 }
 
 // deparse1() version with R_BrowseLines := 0
-SEXP Rf_deparse1(SEXP call, bool abbrev, int opts)
+SEXP R::Rf_deparse1(SEXP call, bool abbrev, int opts)
 {
     bool backtick = true;
     int old_bl = R_BrowseLines;
@@ -220,7 +222,7 @@ SEXP Rf_deparse1(SEXP call, bool abbrev, int opts)
 
 /* used for language objects in print() */
 HIDDEN
-SEXP Rf_deparse1w(SEXP call, bool abbrev, int opts)
+SEXP R::Rf_deparse1w(SEXP call, bool abbrev, int opts)
 {
     bool backtick = true;
     return deparse1WithCutoff(call, abbrev, R_print.cutoff, backtick, opts, -1);
@@ -312,7 +314,7 @@ static SEXP deparse1WithCutoff(SEXP call, bool abbrev, int cutoff,
  * This is needed in terms.formula, where we must be able
  * to deparse a term label into a single line of text so
  * that it can be reparsed correctly */
-SEXP deparse1line_(SEXP call, bool abbrev, int opts)
+SEXP R::deparse1line_(SEXP call, bool abbrev, int opts)
 {
     bool backtick = true;
     int lines;
@@ -346,14 +348,14 @@ SEXP deparse1line_(SEXP call, bool abbrev, int opts)
     return(temp);
 }
 
-SEXP Rf_deparse1line(SEXP call, bool abbrev)
+SEXP R::Rf_deparse1line(SEXP call, bool abbrev)
 {
     return deparse1line_(call, abbrev, SIMPLEDEPARSE);
 }
 
 
 // called only from ./errors.cpp  for calls in warnings and errors :
-HIDDEN SEXP Rf_deparse1s(SEXP call)
+HIDDEN SEXP R::Rf_deparse1s(SEXP call)
 {
    bool backtick = true;
    return

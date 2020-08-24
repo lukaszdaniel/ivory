@@ -27,16 +27,21 @@
 #include "statsR.h"
 #include "localization.h"
 
-/* inline-able versions, used just once! */
-inline static bool isUnordered_int(SEXP s)
-{
-	return (TYPEOF(s) == INTSXP && inherits(s, "factor") && !inherits(s, "ordered"));
-}
+using namespace R;
 
-inline static bool isOrdered_int(SEXP s)
+namespace
 {
-	return (TYPEOF(s) == INTSXP && inherits(s, "factor") && inherits(s, "ordered"));
-}
+	/* inline-able versions, used just once! */
+	inline bool isUnordered_int(SEXP s)
+	{
+		return (TYPEOF(s) == INTSXP && inherits(s, "factor") && !inherits(s, "ordered"));
+	}
+
+	inline bool isOrdered_int(SEXP s)
+	{
+		return (TYPEOF(s) == INTSXP && inherits(s, "factor") && inherits(s, "ordered"));
+	}
+} // namespace
 
 /*
  *  model.frame

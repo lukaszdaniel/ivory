@@ -31,6 +31,7 @@
 
 #include <Defn.h>
 #include <Localization.h>
+using namespace R;
 /* rint is C99 */
 #ifdef HAVE_RINT
 #define R_rint(x) rint(x)
@@ -227,7 +228,7 @@ static double BlueGamma	 = 1.0;
 
 #if (defined(HAVE_CLOCK_GETTIME) && defined(CLOCK_REALTIME)) || defined(HAVE_GETTIMEOFDAY)
 /* We need to avoid this in the rare case that it is only in seconds */
-extern double currentTime(void); /* from datetime.cpp */
+extern double R::Rf_currentTime(void); /* from datetime.cpp */
 #else
 /* Alternatively, use times() which R >= 2.14.0 requires.  This could
   conceivably wrap around, but on the sort of system where this might
@@ -238,7 +239,7 @@ extern double currentTime(void); /* from datetime.cpp */
 # ifndef CLK_TCK
 #   define CLK_TCK 60
 # endif
-static double currentTime(void)
+static double R::Rf_currentTime(void)
 {
     struct tms ti;
     return ((double) times(&ti))/CLK_TCK;

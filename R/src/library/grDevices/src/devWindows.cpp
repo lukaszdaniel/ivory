@@ -56,7 +56,7 @@
 using namespace std;
 
 /* from extra.c */
-extern size_t Rf_utf8towcs(wchar_t *wc, const char *s, size_t n);
+extern size_t R::Rf_utf8towcs(wchar_t *wc, const char *s, size_t n);
 
 static
 Rboolean GADeviceDriver(pDevDesc dd, const char *display, double width,

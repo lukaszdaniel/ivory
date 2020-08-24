@@ -31,6 +31,8 @@
 #include <R_ext/Print.h>
 #include <Localization.h>
 
+using namespace R;
+
 #if !defined(__STDC_ISO_10646__) && (defined(__APPLE__) || defined(__FreeBSD__))
 /* This may not be 100% true (see the comment in rlocale.h),
    but it seems true in normal locales */
@@ -1989,10 +1991,10 @@ static int KeywordLookup(const char *s)
 			PRESERVE_SV(yylval = mkNA());
 			break;
 		    case 2:
-			PRESERVE_SV(yylval = mkTrue());
+			PRESERVE_SV(yylval = R::Rf_mkTrue());
 			break;
 		    case 3:
-			PRESERVE_SV(yylval = mkFalse());
+			PRESERVE_SV(yylval = R::Rf_mkFalse());
 			break;
 		    case 4:
 			PRESERVE_SV(yylval = allocVector(REALSXP, 1));
@@ -2073,14 +2075,14 @@ static SEXP mkNA(void)
     return t;
 }
 
-HIDDEN SEXP mkTrue(void)
+HIDDEN SEXP R::Rf_mkTrue(void)
 {
     SEXP s = allocVector(LGLSXP, 1);
     LOGICAL(s)[0] = 1;
     return s;
 }
 
-SEXP mkFalse(void)
+SEXP R::Rf_mkFalse(void)
 {
     SEXP s = allocVector(LGLSXP, 1);
     LOGICAL(s)[0] = 0;
@@ -2985,7 +2987,7 @@ static int SpecialValue(int c)
 }
 
 /* return 1 if name is a valid name 0 otherwise */
-HIDDEN bool Rf_isValidName(const char *name)
+HIDDEN bool R::Rf_isValidName(const char *name)
 {
     const char *p = name;
 

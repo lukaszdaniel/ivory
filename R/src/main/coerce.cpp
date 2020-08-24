@@ -37,6 +37,8 @@
 #include <trioremap.h> /* for %lld */
 #endif
 
+using namespace R;
+
 /* interval at which to check interrupts */
 // constexpr R_xlen_t NINTERRUPT = 10000000;
 
@@ -83,7 +85,7 @@ enum CoercionWarnings
 		}                                  \
 	} while (0)
 
-HIDDEN void Rf_CoercionWarning(int warn)
+HIDDEN void R::Rf_CoercionWarning(int warn)
 {
 /* FIXME: Use
    =====
@@ -99,22 +101,22 @@ HIDDEN void Rf_CoercionWarning(int warn)
 		warning(_("out-of-range values treated as 0 in coercion to raw"));
 }
 
-HIDDEN int Rf_LogicalFromInteger(int x, int &warn)
+HIDDEN int R::Rf_LogicalFromInteger(int x, int &warn)
 {
 	return (x == NA_INTEGER) ? NA_LOGICAL : (x != 0);
 }
 
-HIDDEN int Rf_LogicalFromReal(double x, int &warn)
+HIDDEN int R::Rf_LogicalFromReal(double x, int &warn)
 {
 	return ISNAN(x) ? NA_LOGICAL : (x != 0);
 }
 
-HIDDEN int Rf_LogicalFromComplex(Rcomplex x, int &warn)
+HIDDEN int R::Rf_LogicalFromComplex(Rcomplex x, int &warn)
 {
 	return (ISNAN(x.r) || ISNAN(x.i)) ? NA_LOGICAL : (x.r != 0 || x.i != 0);
 }
 
-HIDDEN int Rf_LogicalFromString(SEXP x, int &warn)
+HIDDEN int R::Rf_LogicalFromString(SEXP x, int &warn)
 {
 	if (x != R_NaString)
 	{
@@ -126,12 +128,12 @@ HIDDEN int Rf_LogicalFromString(SEXP x, int &warn)
 	return NA_LOGICAL;
 }
 
-HIDDEN int Rf_IntegerFromLogical(int x, int &warn)
+HIDDEN int R::Rf_IntegerFromLogical(int x, int &warn)
 {
 	return (x == NA_LOGICAL) ? NA_INTEGER : x;
 }
 
-HIDDEN int Rf_IntegerFromReal(double x, int &warn)
+HIDDEN int R::Rf_IntegerFromReal(double x, int &warn)
 {
 	if (ISNAN(x))
 		return NA_INTEGER;
@@ -143,7 +145,7 @@ HIDDEN int Rf_IntegerFromReal(double x, int &warn)
 	return (int)x;
 }
 
-HIDDEN int Rf_IntegerFromComplex(Rcomplex x, int &warn)
+HIDDEN int R::Rf_IntegerFromComplex(Rcomplex x, int &warn)
 {
 	if (ISNAN(x.r) || ISNAN(x.i))
 		return NA_INTEGER;
@@ -157,7 +159,7 @@ HIDDEN int Rf_IntegerFromComplex(Rcomplex x, int &warn)
 	return (int)x.r;
 }
 
-HIDDEN int Rf_IntegerFromString(SEXP x, int &warn)
+HIDDEN int R::Rf_IntegerFromString(SEXP x, int &warn)
 {
     double xdouble;
     char *endp;
@@ -188,17 +190,17 @@ HIDDEN int Rf_IntegerFromString(SEXP x, int &warn)
     return NA_INTEGER;
 }
 
-HIDDEN double Rf_RealFromLogical(int x, int &warn)
+HIDDEN double R::Rf_RealFromLogical(int x, int &warn)
 {
 	return (x == NA_LOGICAL) ? NA_REAL : x;
 }
 
-HIDDEN double Rf_RealFromInteger(int x, int &warn)
+HIDDEN double R::Rf_RealFromInteger(int x, int &warn)
 {
 	return (x == NA_INTEGER) ? NA_REAL : x;
 }
 
-HIDDEN double Rf_RealFromComplex(Rcomplex x, int &warn)
+HIDDEN double R::Rf_RealFromComplex(Rcomplex x, int &warn)
 {
 	if (ISNAN(x.r) || ISNAN(x.i))
 		return NA_REAL;
@@ -211,7 +213,7 @@ HIDDEN double Rf_RealFromComplex(Rcomplex x, int &warn)
 	return x.r;
 }
 
-HIDDEN double Rf_RealFromString(SEXP x, int &warn)
+HIDDEN double R::Rf_RealFromString(SEXP x, int &warn)
 {
 	double xdouble;
 	char *endp;
@@ -226,7 +228,7 @@ HIDDEN double Rf_RealFromString(SEXP x, int &warn)
 	return NA_REAL;
 }
 
-HIDDEN Rcomplex Rf_ComplexFromLogical(int x, int &warn)
+HIDDEN Rcomplex R::Rf_ComplexFromLogical(int x, int &warn)
 {
 	Rcomplex z;
 	if (x == NA_LOGICAL)
@@ -242,7 +244,7 @@ HIDDEN Rcomplex Rf_ComplexFromLogical(int x, int &warn)
 	return z;
 }
 
-HIDDEN Rcomplex Rf_ComplexFromInteger(int x, int &warn)
+HIDDEN Rcomplex R::Rf_ComplexFromInteger(int x, int &warn)
 {
 	Rcomplex z;
 	if (x == NA_INTEGER)
@@ -258,7 +260,7 @@ HIDDEN Rcomplex Rf_ComplexFromInteger(int x, int &warn)
 	return z;
 }
 
-HIDDEN Rcomplex Rf_ComplexFromReal(double x, int &warn)
+HIDDEN Rcomplex R::Rf_ComplexFromReal(double x, int &warn)
 {
 	Rcomplex z;
 	z.r = x;
@@ -266,7 +268,7 @@ HIDDEN Rcomplex Rf_ComplexFromReal(double x, int &warn)
 	return z;
 }
 
-HIDDEN Rcomplex Rf_ComplexFromString(SEXP x, int &warn)
+HIDDEN Rcomplex R::Rf_ComplexFromString(SEXP x, int &warn)
 {
     double xr, xi;
     Rcomplex z;
@@ -293,7 +295,7 @@ HIDDEN Rcomplex Rf_ComplexFromString(SEXP x, int &warn)
     return z;
 }
 
-HIDDEN SEXP Rf_StringFromLogical(int x, int &warn)
+HIDDEN SEXP R::Rf_StringFromLogical(int x, int &warn)
 {
 	int w;
 	formatLogical(&x, 1, &w);
@@ -306,7 +308,7 @@ HIDDEN SEXP Rf_StringFromLogical(int x, int &warn)
 constexpr int SFI_CACHE_SIZE = 512;
 static SEXP sficache = nullptr;
 
-HIDDEN SEXP Rf_StringFromInteger(int x, int &warn)
+HIDDEN SEXP R::Rf_StringFromInteger(int x, int &warn)
 {
     if (x == NA_INTEGER) return NA_STRING;
     else if (x >= 0 && x < SFI_CACHE_SIZE) {
@@ -332,7 +334,7 @@ HIDDEN SEXP Rf_StringFromInteger(int x, int &warn)
 
 // dropTrailing0 and StringFromReal moved to printutils.cpp
 
-HIDDEN SEXP Rf_StringFromComplex(Rcomplex x, int &warn)
+HIDDEN SEXP R::Rf_StringFromComplex(Rcomplex x, int &warn)
 {
 	int wr, dr, er, wi, di, ei;
 	formatComplex(&x, 1, &wr, &dr, &er, &wi, &di, &ei, 0);
@@ -1812,7 +1814,7 @@ int Rf_asInteger(SEXP x)
     return NA_INTEGER;
 }
 
-R_xlen_t Rf_asXLength(SEXP x)
+R_xlen_t R::Rf_asXLength(SEXP x)
 {
     const R_xlen_t na = -999; /* any negative number should do */
 
@@ -2765,7 +2767,7 @@ SEXP Rf_substitute(SEXP lang, SEXP rho)
 /* Work through a list doing substitute on the
    elements taking particular care to handle '...' */
 
-HIDDEN SEXP substituteList(SEXP el, SEXP rho)
+HIDDEN SEXP R::substituteList(SEXP el, SEXP rho)
 {
     SEXP h, p = R_NilValue, res = R_NilValue;
 

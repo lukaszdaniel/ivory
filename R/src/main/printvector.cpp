@@ -40,6 +40,8 @@
 #include <Print.h>
 #include <R_ext/Itermacros.h> /* for ITERATE_BY_REGION */
 
+using namespace R;
+
 #define DO_first_lab                  \
 	if (indx)                         \
 	{                                 \
@@ -324,7 +326,7 @@ static void printRawVectorS(SEXP x, R_xlen_t n, int indx)
 }
 
 
-void Rf_printVector(SEXP x, int indx, int quote)
+void R::Rf_printVector(SEXP x, int indx, int quote)
 {
 /* print R vector x[];	if(indx) print indices; if(quote) quote strings */
     R_xlen_t n;
@@ -497,7 +499,7 @@ static void printNamedRawVectorS(SEXP x, int n, SEXP names)
 			   EncodeRaw(RAW_ELT(x, k), ""), R_print.gap,""))
 
 HIDDEN
-void Rf_printNamedVector(SEXP x, SEXP names, int quote, const char *title)
+void R::Rf_printNamedVector(SEXP x, SEXP names, int quote, const char *title)
 {
     int n;
 

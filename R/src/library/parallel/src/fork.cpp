@@ -47,6 +47,8 @@
 #include <Rinterface.h> /* for R_Interactive */
 #include <R_ext/eventloop.h> /* for R_SelectEx */
 
+using namespace R;
+
 #ifdef MC_DEBUG
   /* NOTE: the logging is not safe to use in signal handler because printf is
      not async-signal-safe */

@@ -36,6 +36,8 @@
 #include <cerrno>
 #include <cctype>		/* for isspace */
 
+using namespace R;
+
 /* From time to time changes in R, such as the addition of a new SXP,
  * may require changes in the save file format.  Here are some
  * guidelines on handling format changes:
@@ -1891,7 +1893,7 @@ inline static int defaultSaveVersion()
 
 /* ----- E x t e r n a l -- I n t e r f a c e s ----- */
 
-HIDDEN void R_SaveToFileV(SEXP obj, FILE *fp, int ascii, int version)
+HIDDEN void R::R_SaveToFileV(SEXP obj, FILE *fp, int ascii, int version)
 {
     SaveLoadData data = {R_StringBuffer()};
 
@@ -1927,7 +1929,7 @@ HIDDEN void R_SaveToFileV(SEXP obj, FILE *fp, int ascii, int version)
     }
 }
 
-HIDDEN void R_SaveToFile(SEXP obj, FILE *fp, int ascii)
+HIDDEN void R::R_SaveToFile(SEXP obj, FILE *fp, int ascii)
 {
     R_SaveToFileV(obj, fp, ascii, defaultSaveVersion());
 }
@@ -1935,7 +1937,7 @@ HIDDEN void R_SaveToFile(SEXP obj, FILE *fp, int ascii)
     /* different handling of errors */
 
 #define return_and_free(X) {r = X; data.buffer.R_FreeStringBuffer(); return r;}
-HIDDEN SEXP R_LoadFromFile(FILE *fp, int startup)
+HIDDEN SEXP R::R_LoadFromFile(FILE *fp, int startup)
 {
     struct R_inpstream_st in;
     int magic;

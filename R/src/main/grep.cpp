@@ -65,6 +65,8 @@ constexpr int NWARN = 5;
 #include <cwctype>    /* for wctrans_t */
 
 using namespace std;
+using namespace R;
+
 /* As from TRE 0.8.0, tre.h replaces regex.h */
 #include <tre/tre.h>
 

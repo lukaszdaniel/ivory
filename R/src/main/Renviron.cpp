@@ -34,6 +34,8 @@
 #include <Fileio.h>
 #include <cctype>		/* for isspace */
 
+using namespace R;
+
 /* remove leading and trailing space */
 static char *rmspace(char *s)
 {

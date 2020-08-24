@@ -38,6 +38,8 @@
 
 #include <cstdlib> /* for div() */
 
+using namespace R;
+
 /* We need display width of a string.
    Used only for row/column names found by GetMatrixDimnames,
    so in native encoding.  (NULL ones from do_prmatrix are skipped.)
@@ -351,7 +353,7 @@ static void printRawMatrix(SEXP sx, int offset, int r_pr, int r, int c,
 
 /* rm and cn are found by GetMatrixDimnames so in native encoding */
 HIDDEN
-void Rf_printMatrix(SEXP x, int offset, SEXP dim, int quote, int right,
+void R::Rf_printMatrix(SEXP x, int offset, SEXP dim, int quote, int right,
 		 SEXP rl, SEXP cl, const char *rn, const char *cn)
 {
 /* 'rl' and 'cl' are dimnames(.)[[1]] and dimnames(.)[[2]]  whereas
@@ -415,7 +417,7 @@ void Rf_printMatrix(SEXP x, int offset, SEXP dim, int quote, int right,
 }
 
 HIDDEN
-void Rf_printArray(SEXP x, SEXP dim, int quote, int right, SEXP dimnames)
+void R::Rf_printArray(SEXP x, SEXP dim, int quote, int right, SEXP dimnames)
 {
 /* == printArray(.) */
     const void *vmax = vmaxget();

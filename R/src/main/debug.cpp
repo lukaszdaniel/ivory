@@ -27,6 +27,8 @@
 #include <Defn.h>
 #include <Internal.h>
 
+using namespace R;
+
 HIDDEN SEXP do_debug(SEXP call, SEXP op, SEXP args, SEXP rho)
 {
     SEXP ans = R_NilValue;
@@ -116,8 +118,8 @@ HIDDEN SEXP do_traceOnOff(SEXP call, SEXP op, SEXP args, SEXP rho)
 }
 
 // GUIs, packages, etc can query:
-bool R_current_debug_state() { return GET_DEBUG_STATE; }
-bool R_current_trace_state() { return GET_TRACE_STATE; }
+bool R::R_current_trace_state() { return GET_TRACE_STATE; }
+bool R::R_current_debug_state() { return GET_DEBUG_STATE; }
 
 
 /* memory tracing */
@@ -191,7 +193,7 @@ HIDDEN NORET SEXP do_untracemem(SEXP call, SEXP op, SEXP args, SEXP rho)
 #endif /* R_MEMORY_PROFILING */
 
 #ifndef R_MEMORY_PROFILING
-void Rf_memtrace_report(void* old, void *_new) {
+void R::Rf_memtrace_report(void* old, void *_new) {
     return;
 }
 #else
@@ -211,7 +213,7 @@ static void memtrace_stack_dump(void)
     Rprintf("\n");
 }
 
-void Rf_memtrace_report(void *old, void *_new)
+void R::Rf_memtrace_report(void *old, void *_new)
 {
     if (!R_current_trace_state())
         return;

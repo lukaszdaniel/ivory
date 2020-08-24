@@ -32,6 +32,8 @@
 #include <R_ext/Print.h>
 #include "arithmetic.h"
 
+using namespace R;
+
 static SEXP bcEval(SEXP, SEXP, bool);
 
 /* BC_PROFILING needs to be enabled at build time. It is not enabled
@@ -524,7 +526,7 @@ SEXP do_Rprof(SEXP args)
 /* NEEDED: A fixup is needed in browser, because it can trap errors,
  *	and currently does not reset the limit to the right value. */
 
-HIDDEN void Rf_check_stack_balance(SEXP op, int save)
+HIDDEN void R::Rf_check_stack_balance(SEXP op, int save)
 {
     if(save == R_PPStackTop) return;
     REprintf(_("Warning: stack imbalance in '%s', %d then %d\n"), PRIMNAME(op), save, R_PPStackTop);
@@ -871,7 +873,7 @@ SEXP Rf_eval(SEXP e, SEXP rho)
 }
 
 HIDDEN
-void Rf_SrcrefPrompt(const char *prefix, SEXP srcref)
+void R::Rf_SrcrefPrompt(const char *prefix, SEXP srcref)
 {
     /* If we have a valid srcref, use it */
     if (srcref && srcref != R_NilValue) {
@@ -1727,7 +1729,7 @@ inline static void R_CleanupEnvir(SEXP rho, SEXP val)
     }
 }
 
-HIDDEN void Rf_unpromiseArgs(SEXP pargs)
+HIDDEN void R::Rf_unpromiseArgs(SEXP pargs)
 {
     /* This assumes pargs will no longer be references. We could
        double check the refcounts on pargs as a sanity check. */
@@ -1741,7 +1743,7 @@ HIDDEN void Rf_unpromiseArgs(SEXP pargs)
     }
 }
 #else
-HIDDEN void Rf_unpromiseArgs(SEXP pargs) { }
+HIDDEN void R::Rf_unpromiseArgs(SEXP pargs) { }
 #endif
 
 /* Note: GCC will not inline execClosure because it calls setjmp */
@@ -1987,7 +1989,7 @@ HIDDEN SEXP do_forceAndCall(SEXP call, SEXP op, SEXP args, SEXP rho)
    **** preserves lexical scope. */
 
 /* called from methods_list_dispatch.cpp */
-SEXP R_execMethod(SEXP op, SEXP rho)
+SEXP R::R_execMethod(SEXP op, SEXP rho)
 {
     SEXP call, arglist, callerenv, newrho, next, val;
     RCNTXT *cptr;
@@ -2997,7 +2999,7 @@ inline static void COPY_TAG(SEXP to, SEXP from)
    'n' is the number of arguments already evaluated and hence not
    passed to evalArgs and hence to here.
  */
-HIDDEN SEXP Rf_evalList(SEXP el, SEXP rho, SEXP call, int n)
+HIDDEN SEXP R::Rf_evalList(SEXP el, SEXP rho, SEXP call, int n)
 {
     SEXP head, tail, ev, h, val;
 
@@ -3085,7 +3087,7 @@ HIDDEN SEXP Rf_evalList(SEXP el, SEXP rho, SEXP call, int n)
 /* A slight variation of evaluating each expression in "el" in "rho". */
 
 /* used in evalArgs, arithmetic.cpp, seq.cpp */
-HIDDEN SEXP Rf_evalListKeepMissing(SEXP el, SEXP rho)
+HIDDEN SEXP R::Rf_evalListKeepMissing(SEXP el, SEXP rho)
 {
     SEXP head, tail, ev, h, val;
 
@@ -3160,7 +3162,7 @@ HIDDEN SEXP Rf_evalListKeepMissing(SEXP el, SEXP rho)
 /* form below because it is does not cause growth of the pointer */
 /* protection stack, and because it is a little more efficient. */
 
-HIDDEN SEXP Rf_promiseArgs(SEXP el, SEXP rho)
+HIDDEN SEXP R::Rf_promiseArgs(SEXP el, SEXP rho)
 {
     SEXP ans, h, tail;
 
@@ -3220,7 +3222,7 @@ HIDDEN SEXP Rf_promiseArgs(SEXP el, SEXP rho)
 /* Check that each formal is a symbol */
 
 /* used in coerce.cpp */
-HIDDEN void Rf_CheckFormals(SEXP ls)
+HIDDEN void R::Rf_CheckFormals(SEXP ls)
 {
 	if (isList(ls))
 	{
@@ -3454,7 +3456,7 @@ static SEXP evalArgs(SEXP el, SEXP rho, int dropmissing, SEXP call, int n)
  * immediately, rather than after the call to R_possible_dispatch.
  */
 HIDDEN
-bool Rf_DispatchAnyOrEval(SEXP call, SEXP op, const char *generic, SEXP args,
+bool R::Rf_DispatchAnyOrEval(SEXP call, SEXP op, const char *generic, SEXP args,
 		      SEXP rho, SEXP *ans, int dropmissing, int argsevald)
 {
     if(R_has_methods(op)) {
@@ -3497,7 +3499,7 @@ bool Rf_DispatchAnyOrEval(SEXP call, SEXP op, const char *generic, SEXP args,
  * at large in the world.
  */
 HIDDEN
-bool Rf_DispatchOrEval(SEXP call, SEXP op, const char *generic, SEXP args,
+bool R::Rf_DispatchOrEval(SEXP call, SEXP op, const char *generic, SEXP args,
 		   SEXP rho, SEXP *ans, int dropmissing, int argsevald)
 {
 /* DispatchOrEval is called very frequently, most often in cases where
@@ -3706,7 +3708,7 @@ static SEXP classForGroupDispatch(SEXP obj)
 }
 
 HIDDEN
-bool Rf_DispatchGroup(const char* group, SEXP call, SEXP op, SEXP args, SEXP rho, SEXP *ans)
+bool R::Rf_DispatchGroup(const char* group, SEXP call, SEXP op, SEXP args, SEXP rho, SEXP *ans)
 {
     int i, nargs, lwhich, rwhich;
     SEXP lclass, s, t, m, lmeth, lsxp, lgr, newvars;

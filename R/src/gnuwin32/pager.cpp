@@ -42,7 +42,7 @@
 #include <Startup.h> /* for CharacterMode */
 
 #define CE_UTF8 1
-extern size_t Rf_utf8towcs(wchar_t *wc, const char *s, size_t n);
+extern size_t R::Rf_utf8towcs(wchar_t *wc, const char *s, size_t n);
 
 #define PAGERMAXKEPT 12
 #define PAGERMAXTITLE 128

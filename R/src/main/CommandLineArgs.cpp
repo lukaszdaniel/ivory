@@ -29,6 +29,7 @@
 #include <R_ext/RStartup.h>
 #include <R_ext/RS.h> // for Calloc
 
+using namespace R;
 
 /* Remove and process common command-line arguments
  *  Formally part of ../unix/sys-common.cpp.

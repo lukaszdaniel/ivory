@@ -32,6 +32,8 @@
 #include <sys/stat.h>
 #endif
 
+using namespace R;
+
 #if HAVE_DIRENT_H
 #include <dirent.h>
 #elif HAVE_SYS_NDIR_H

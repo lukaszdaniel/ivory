@@ -28,6 +28,8 @@
 #include <Print.h>
 #include <Rinternals.h>
 
+using namespace R;
+
 /* The global var. R_Expressions is in Defn.h */
 constexpr int R_MIN_EXPRESSIONS_OPT = 25;
 constexpr int R_MAX_EXPRESSIONS_OPT = 500000;
@@ -180,7 +182,7 @@ int Rf_GetOptionDigits(void)
 }
 
 HIDDEN
-int Rf_GetOptionCutoff(void)
+int R::Rf_GetOptionCutoff(void)
 {
     int w;
     w = asInteger(GetOption1(install("deparse.cutoff")));
@@ -246,7 +248,7 @@ static SEXP SetOption(SEXP tag, SEXP value)
 /* Set the width of lines for printing i.e. like options(width=...) */
 /* Returns the previous value for the options. */
 
-HIDDEN int R_SetOptionWidth(int w)
+HIDDEN int R::R_SetOptionWidth(int w)
 {
     SEXP t, v;
     if (w < R_MIN_WIDTH_OPT) w = R_MIN_WIDTH_OPT;
@@ -258,7 +260,7 @@ HIDDEN int R_SetOptionWidth(int w)
     return INTEGER(v)[0];
 }
 
-HIDDEN int R_SetOptionWarn(int w)
+HIDDEN int R::R_SetOptionWarn(int w)
 {
     SEXP t, v;
 
@@ -272,7 +274,7 @@ HIDDEN int R_SetOptionWarn(int w)
 /* Note that options are stored as a dotted pair list */
 /* This is barely historical, but is also useful. */
 
-HIDDEN void Rf_InitOptions(void)
+HIDDEN void R::Rf_InitOptions(void)
 {
     SEXP val, v;
     const char *p = nullptr;

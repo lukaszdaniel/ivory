@@ -36,24 +36,26 @@
 #include <unistd.h>
 #endif
 
+using namespace R;
+
 /* These are used in ../gnuwin32/system.cpp, ../unix/sys-std.cpp */
 SA_TYPE SaveAction = SA_SAVEASK;
 SA_TYPE RestoreAction = SA_RESTORE;
 static Rboolean LoadSiteFile = TRUE;
-HIDDEN bool LoadInitFile = true; /* Used in R_OpenInitFile */
+HIDDEN bool R::LoadInitFile = true; /* Used in R_OpenInitFile */
 static Rboolean DebugInitFile = FALSE;
 
 /*
  *  INITIALIZATION AND TERMINATION ACTIONS
  */
 
-HIDDEN void R_InitialData(void)
+HIDDEN void R::R_InitialData(void)
 {
     R_RestoreGlobalEnv();
 }
 
 HIDDEN
-FILE *R_OpenLibraryFile(const char *file)
+FILE *R::R_OpenLibraryFile(const char *file)
 {
     char buf[PATH_MAX];
     FILE *fp;
@@ -64,7 +66,7 @@ FILE *R_OpenLibraryFile(const char *file)
 }
 
 HIDDEN
-char *R_LibraryFileName(const char *file, char *buf, size_t bsize)
+char *R::R_LibraryFileName(const char *file, char *buf, size_t bsize)
 {
     if (snprintf(buf, bsize, "%s/library/base/R/%s", R_Home, file) < 0)
         error(_("R_LibraryFileName: buffer too small"));

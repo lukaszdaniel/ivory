@@ -41,6 +41,8 @@
 #include <cwchar>
 #include <tre/tre.h>
 
+using namespace R;
+
 static void amatch_regaparams(regaparams_t *params, int patlen,
 		  double *bounds, int *costs)
 {

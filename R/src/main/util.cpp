@@ -36,6 +36,7 @@
 #include <string>
 
 using namespace std;
+using namespace R;
 
 #undef COMPILING_R
 
@@ -102,7 +103,7 @@ int Rf_ncols(SEXP s) // ~== NCOL(.)  in R
 #ifdef UNUSED
 //const static char type_msg[] = "invalid type passed to internal function\n";
 
-void Rf_internalTypeCheck(SEXP call, SEXP s, SEXPTYPE type)
+void R::Rf_internalTypeCheck(SEXP call, SEXP s, SEXPTYPE type)
 {
     if (TYPEOF(s) != type) {
 	if (call)
@@ -237,7 +238,7 @@ namespace
 } // namespace
 
 // called from main.cpp
-HIDDEN void Rf_InitTypeTables(void) {
+HIDDEN void R::Rf_InitTypeTables(void) {
 
     /* Type2Table */
     for (int type = 0; type < MAX_NUM_BASIC_SEXPTYPE; type++) {
@@ -309,7 +310,7 @@ const char *Rf_type2char(const SEXPTYPE t) /* returns a char* */
 }
 
 #ifdef UNUSED
-NORET SEXP Rf_type2symbol(SEXPTYPE t)
+NORET SEXP R::Rf_type2symbol(SEXPTYPE t)
 {
     // if (t >= 0 && t < MAX_NUM_BASIC_SEXPTYPE) { /* branch not really needed */
 	SEXP res = Type2Table[t].rsymName;
@@ -319,7 +320,7 @@ NORET SEXP Rf_type2symbol(SEXPTYPE t)
 }
 #endif
 
-HIDDEN NORET void UNIMPLEMENTED_TYPE(const char *s, const SEXPTYPE t)
+HIDDEN NORET void R::UNIMPLEMENTED_TYPE(const char *s, const SEXPTYPE t)
 {
     for (int i = 0; TypeTable[i].str; i++) {
 	if (TypeTable[i].type == t)
@@ -328,7 +329,7 @@ HIDDEN NORET void UNIMPLEMENTED_TYPE(const char *s, const SEXPTYPE t)
     error(_("type %d is unimplemented in '%s' function"), t, s);
 }
 
-NORET void UNIMPLEMENTED_TYPE(const char *s, const SEXP x)
+NORET void R::UNIMPLEMENTED_TYPE(const char *s, const SEXP x)
 {
     UNIMPLEMENTED_TYPE(s, TYPEOF(x));
 }
@@ -353,7 +354,7 @@ static constexpr char UCS2ENC[] = "UCS-2LE";
 /* Note: this does not terminate out, as all current uses are to look
  * at 'out' a wchar at a time, and sometimes just one char.
  */
-size_t Rf_mbcsToUcs2(const char *in, R_ucs2_t *out, int nout, int enc)
+size_t R::Rf_mbcsToUcs2(const char *in, R_ucs2_t *out, int nout, int enc)
 {
     void   *cd = nullptr ;
     const char *i_buf;
@@ -438,7 +439,7 @@ Rboolean Rf_StringFalse(const char* name)
 }
 
 /* used in bind.cpp and options.cpp */
-HIDDEN SEXP Rf_EnsureString(SEXP s)
+HIDDEN SEXP R::Rf_EnsureString(SEXP s)
 {
     switch(TYPEOF(s)) {
     case SYMSXP:
@@ -459,7 +460,7 @@ HIDDEN SEXP Rf_EnsureString(SEXP s)
 }
 
 // NB: have  checkArity(a,b) :=  Rf_checkArityCall(a,b,call)
-void Rf_checkArityCall(SEXP op, SEXP args, SEXP call)
+void R::Rf_checkArityCall(SEXP op, SEXP args, SEXP call)
 {
 	if (PRIMARITY(op) >= 0 && PRIMARITY(op) != length(args))
 	{
@@ -484,7 +485,7 @@ void Rf_checkArityCall(SEXP op, SEXP args, SEXP call)
 	}
 }
 
-HIDDEN void Rf_check1arg(SEXP arg, SEXP call, const char *formal)
+HIDDEN void R::Rf_check1arg(SEXP arg, SEXP call, const char *formal)
 {
 	SEXP tag = TAG(arg);
 	if (tag == R_NilValue)
@@ -1210,7 +1211,7 @@ HIDDEN SEXP do_setencoding(SEXP call, SEXP op, SEXP args, SEXP rho)
     return x;
 }
 
-HIDDEN SEXP Rf_markKnown(const char *const s, SEXP ref)
+HIDDEN SEXP R::Rf_markKnown(const char *const s, SEXP ref)
 {
     cetype_t ienc = CE_NATIVE;
     if(ENC_KNOWN(ref)) {
@@ -1220,7 +1221,7 @@ HIDDEN SEXP Rf_markKnown(const char *const s, SEXP ref)
     return mkCharCE(s, ienc);
 }
 
-bool Rf_strIsASCII(const char *const str)
+bool R::Rf_strIsASCII(const char *const str)
 {
 	const char *p;
 	for (p = str; *p; p++)
@@ -1236,7 +1237,7 @@ constexpr unsigned char utf8_table4[] = {
 	2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2,
 	3, 3, 3, 3, 3, 3, 3, 3, 4, 4, 4, 4, 5, 5, 5, 5};
 
-HIDDEN int utf8clen(const char c)
+HIDDEN int R::utf8clen(const char c)
 {
     /* This allows through 8-bit chars 10xxxxxx, which are invalid */
     if ((c & 0xc0) != 0xc0) return 1;
@@ -1261,7 +1262,7 @@ HIDDEN R_wchar_t utf8toucs32(wchar_t high, const char * const s)
 
 /* These return the result in wchar_t.  If wchar_t is 16 bit (e.g. UTF-16LE on Windows)
    only the high surrogate is returned; call utf8toutf16low next. */
-HIDDEN size_t Rf_utf8toucs(wchar_t *wc, const char * const s)
+HIDDEN size_t R::Rf_utf8toucs(wchar_t *wc, const char * const s)
 {
     unsigned int byte;
     wchar_t local, *w;
@@ -1329,7 +1330,7 @@ HIDDEN size_t Rf_utf8toucs(wchar_t *wc, const char * const s)
     }
 }
 
-size_t Rf_utf8towcs(wchar_t *wc, const char * const s, size_t n)
+size_t R::Rf_utf8towcs(wchar_t *wc, const char * const s, size_t n)
 {
     ssize_t m, res = 0;
     const char *t;
@@ -1393,7 +1394,7 @@ static size_t Rwcrtomb32(char *s, R_wchar_t cvalue, size_t n)
    The return value is the number of chars including the terminating null.  If the
    buffer is not big enough, the result is truncated but still null-terminated */
 HIDDEN // but used in windlgs
-size_t Rf_wcstoutf8(char *s, const wchar_t *wc, size_t n)
+size_t R::Rf_wcstoutf8(char *s, const wchar_t *wc, size_t n)
 {
     size_t m, res=0;
     char *t;
@@ -1415,7 +1416,7 @@ size_t Rf_wcstoutf8(char *s, const wchar_t *wc, size_t n)
 }
 
 /* A version that reports failure as an error */
-size_t Rf_mbrtowc(wchar_t *wc, const char *s, size_t n, mbstate_t *ps)
+size_t R::Rf_mbrtowc(wchar_t *wc, const char *s, size_t n, mbstate_t *ps)
 {
     size_t used;
 
@@ -1451,7 +1452,7 @@ size_t Rf_mbrtowc(wchar_t *wc, const char *s, size_t n, mbstate_t *ps)
 
 /* Truncate a string in place (in native encoding) so that it only contains
    valid multi-byte characters. Has no effect in non-mbcs locales. */
-HIDDEN char *mbcsTruncateToValid(char *const s)
+HIDDEN char *R::mbcsTruncateToValid(char *const s)
 {
     if (!mbcslocale || *s == '\0')
 	return s;
@@ -1484,14 +1485,14 @@ HIDDEN char *mbcsTruncateToValid(char *const s)
     return s;
 }
 
-HIDDEN bool mbcsValid(const char *const str)
+HIDDEN bool R::mbcsValid(const char *const str)
 {
 	return ((int)mbstowcs(nullptr, str, 0) >= 0);
 }
 
 /* used in src/library/grDevices/src/cairo/cairoFns.cpp */
 #include "valid_utf8.h"
-bool utf8Valid(const char *const str)
+bool R::utf8Valid(const char *const str)
 {
 	return (valid_utf8(str, strlen(str)) == 0);
 }
@@ -1531,7 +1532,7 @@ HIDDEN SEXP do_validEnc(SEXP call, SEXP op, SEXP args, SEXP rho)
 
 
 /* MBCS-aware versions of common comparisons.  Only used for ASCII c */
-char *Rf_strchr(const char *s, int c)
+char *R::Rf_strchr(const char *s, int c)
 {
     char *p = (char *) s;
     mbstate_t mb_st;
@@ -1546,7 +1547,7 @@ char *Rf_strchr(const char *s, int c)
     return (char *)nullptr;
 }
 
-char *Rf_strrchr(const char *s, int c)
+char *R::Rf_strrchr(const char *s, int c)
 {
     char *p = (char *) s, *plast = nullptr;
     mbstate_t mb_st;
@@ -1562,7 +1563,7 @@ char *Rf_strrchr(const char *s, int c)
 }
 
 #ifdef _WIN32
-void R_fixslash(char *s)
+void R::R_fixslash(char *s)
 {
     char *p = s;
 
@@ -1598,7 +1599,7 @@ static void R_wfixslash(wchar_t *s)
 }
 
 
-void R_fixbackslash(char *s)
+void R::R_fixbackslash(char *s)
 {
     char *p = s;
 
@@ -1870,14 +1871,14 @@ const char *Rf_utf8ToLatin1AdobeSymbol2utf8(const char *in, Rboolean usePUA)
 	return utf8str;
 }
 
-HIDDEN int Rf_AdobeSymbol2ucs2(int n)
+HIDDEN int R::Rf_AdobeSymbol2ucs2(int n)
 {
 	if (n >= 32 && n < 256)
 		return s2u[n - 32];
 	return 0;
 }
 
-double R_strtod5(const char *str, char **endptr, char dec,
+double R::R_strtod5(const char *str, char **endptr, char dec,
 		 Rboolean NA, int exact)
 {
     LDOUBLE ans = 0.0;
@@ -2034,7 +2035,7 @@ done:
     return sign * (double) ans;
 }
 
-double R_strtod4(const char *str, char **endptr, char dec, Rboolean NA)
+double R::R_strtod4(const char *str, char **endptr, char dec, Rboolean NA)
 {
 	return R_strtod5(str, endptr, dec, NA, FALSE);
 }
@@ -2186,7 +2187,7 @@ static UCollator *collator = nullptr;
 static int collationLocaleSet = 0;
 
 /* called from platform.cpp */
-HIDDEN void resetICUcollator(bool disable)
+HIDDEN void R::resetICUcollator(bool disable)
 {
 	if (collator)
 		ucol_close(collator);
@@ -2335,7 +2336,7 @@ HIDDEN SEXP do_ICUget(SEXP call, SEXP op, SEXP args, SEXP rho)
 
 /* Caller has to manage the R_alloc stack */
 /* NB: strings can have equal collation weight without being identical */
-HIDDEN int Rf_Scollate(SEXP a, SEXP b)
+HIDDEN int R::Rf_Scollate(SEXP a, SEXP b)
 {
     if (!collationLocaleSet) {
 	int errsv = errno;      /* OSX may set errno in the operations below. */
@@ -2405,7 +2406,7 @@ HIDDEN SEXP do_ICUget(SEXP call, SEXP op, SEXP args, SEXP rho)
     return mkString(_("ICU not in use"));
 }
 
-HIDDEN void resetICUcollator(bool disable) {}
+HIDDEN void R::resetICUcollator(bool disable) {}
 
 # ifdef _WIN32
 
@@ -2418,7 +2419,7 @@ static int Rstrcoll(const char *s1, const char *s2)
     return wcscoll(w1, w2);
 }
 
-int Rf_Scollate(SEXP a, SEXP b)
+int R::Rf_Scollate(SEXP a, SEXP b)
 {
     if(getCharCE(a) == CE_UTF8 || getCharCE(b) == CE_UTF8)
 	return Rstrcoll(translateCharUTF8(a), translateCharUTF8(b));
@@ -2427,7 +2428,7 @@ int Rf_Scollate(SEXP a, SEXP b)
 }
 
 # else
-HIDDEN int Rf_Scollate(SEXP a, SEXP b)
+HIDDEN int R::Rf_Scollate(SEXP a, SEXP b)
 {
     return strcoll(translateChar(a), translateChar(b));
 }

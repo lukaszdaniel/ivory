@@ -28,6 +28,8 @@
 #include <Rmath.h>
 #include <assert.h>
 
+using namespace R;
+
 static SEXP installAttrib(SEXP, SEXP, SEXP);
 static SEXP removeAttrib(SEXP, SEXP);
 
@@ -298,7 +300,7 @@ void Rf_copyMostAttrib(SEXP inp, SEXP ans)
 }
 
 /* version that does not preserve ts information, for subsetting */
-void Rf_copyMostAttribNoTs(SEXP inp, SEXP ans)
+void R::Rf_copyMostAttribNoTs(SEXP inp, SEXP ans)
 {
     SEXP s;
 
@@ -420,7 +422,7 @@ NORET static void badtsp(void)
 }
 
 HIDDEN
-SEXP Rf_tspgets(SEXP vec, SEXP val)
+SEXP R::Rf_tspgets(SEXP vec, SEXP val)
 {
     double start, end, frequency;
     int n;
@@ -632,7 +634,7 @@ static SEXP lang2str(SEXP obj, SEXPTYPE t)
    if(!singleString) , keeps S3-style multiple classes.
    Called from the methods package, so exposed.
  */
-SEXP R_data_class(SEXP obj, bool singleString)
+SEXP R::R_data_class(SEXP obj, bool singleString)
 {
     SEXP value, klass = getAttrib(obj, R_ClassSymbol);
     int n = length(klass);
@@ -776,7 +778,7 @@ static SEXP createDefaultClass(SEXP part1, SEXP part2, SEXP part3, SEXP part4)
 
 // called when R's main loop is setup :
 HIDDEN
-void Rf_InitS3DefaultTypes()
+void R::Rf_InitS3DefaultTypes()
 {
     for(int type = 0; type < MAX_NUM_BASIC_SEXPTYPE; type++) {
 	SEXP part3 = R_NilValue;
@@ -824,7 +826,7 @@ void Rf_InitS3DefaultTypes()
 }
 
 /* Version for S3-dispatch */
-HIDDEN SEXP R_data_class2(SEXP obj)
+HIDDEN SEXP R::R_data_class2(SEXP obj)
 {
     SEXP klass = getAttrib(obj, R_ClassSymbol);
     if(length(klass) > 0) {

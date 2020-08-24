@@ -25,6 +25,8 @@
 #include <Internal.h>
 #include "localization.h"
 
+using namespace R;
+
 #ifdef _WIN32
 #include "Startup.h"
 #include "getline/getline.h"     /* for gl_load/savehistory */

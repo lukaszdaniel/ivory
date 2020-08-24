@@ -340,7 +340,7 @@ void RCNTXT::end()
 
 /* findcontext - find the correct context */
 
-HIDDEN NORET void Rf_findcontext(int mask, SEXP env, SEXP val)
+HIDDEN NORET void R::Rf_findcontext(int mask, SEXP env, SEXP val)
 {
     if (mask & CTXT_LOOP)
     { /* break/next */

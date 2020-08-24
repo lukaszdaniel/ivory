@@ -1114,7 +1114,7 @@ char *getDLLVersion(void)
 #define FAKE_UTF8 1
 
 
-size_t Rmbrtowc(wchar_t *wc, const char *s)
+size_t R::Rmbrtowc(wchar_t *wc, const char *s)
 {
 #ifdef FAKE_UTF8
     unsigned int byte;

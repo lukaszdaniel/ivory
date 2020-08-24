@@ -28,8 +28,14 @@
 
 #include <cstdlib> /* for MB_CUR_MAX */
 #include <cwchar>
+
+using namespace R;
+
 LibExtern Rboolean mbcslocale;
-size_t Rf_mbrtowc(wchar_t *wc, const char *s, size_t n, mbstate_t *ps);
+namespace R
+{
+	size_t Rf_mbrtowc(wchar_t *wc, const char *s, size_t n, mbstate_t *ps);
+}
 
 /* .Call, so manages R_alloc stack */
 SEXP delim_match(SEXP x, SEXP delims)

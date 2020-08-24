@@ -309,7 +309,7 @@ void R_csort(Rcomplex *x, int n)
 }
 
 /* used in platform.cpp */
-HIDDEN void Rf_ssort(SEXP *x, int n)
+HIDDEN void R::Rf_ssort(SEXP *x, int n)
 {
     SEXP v;
     sort_body(scmp,PROTECT,UNPROTECT(1))
@@ -611,7 +611,7 @@ static void ssort2(SEXP *x, R_xlen_t n, bool decreasing)
 }
 
 /* The meat of sort.int() */
-void Rf_sortVector(SEXP s, bool decreasing)
+void R::Rf_sortVector(SEXP s, bool decreasing)
 {
     R_xlen_t n = XLENGTH(s);
     if (n >= 2 && (decreasing || isUnsorted(s, FALSE)))
@@ -1132,7 +1132,7 @@ void R_orderVector1(int *indx, int n, SEXP x,
    Also used by do_options and  ../gnuwin32/extra.cpp
    Called with rho != R_NilValue only from do_rank, when NAs are not involved.
  */
-HIDDEN void orderVector1(int *indx, int n, SEXP key, Rboolean nalast, Rboolean decreasing,
+HIDDEN void R::orderVector1(int *indx, int n, SEXP key, Rboolean nalast, Rboolean decreasing,
 	     SEXP rho)
 {
     int c, i, j, h, t, lo = 0, hi = n-1;

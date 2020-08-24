@@ -32,6 +32,8 @@
 #include <Internal.h>
 #include <R_ext/RS.h> /* for Calloc, Realloc and for S4 object bit */
 
+using namespace R;
+
 static SEXP GetObject(RCNTXT *cptr)
 {
     SEXP s, b, formals, tag;
@@ -230,7 +232,7 @@ static SEXP findFunWithBaseEnvAfterGlobalEnv(SEXP symbol, SEXP rho)
  *	 generic matched to the formals of the method to be invoked */
 
 HIDDEN
-SEXP R_LookupMethod(SEXP method, SEXP rho, SEXP callrho, SEXP defrho)
+SEXP R::R_LookupMethod(SEXP method, SEXP rho, SEXP callrho, SEXP defrho)
 {
     SEXP val, top = R_NilValue;	/* -Wall */
     static SEXP s_S3MethodsTable = nullptr;
@@ -371,7 +373,7 @@ R_INLINE static SEXP addS3Var(SEXP vars, SEXP name, SEXP value) {
 }
 
 HIDDEN
-SEXP Rf_createS3Vars(SEXP dotGeneric, SEXP dotGroup, SEXP dotClass, SEXP dotMethod,
+SEXP R::Rf_createS3Vars(SEXP dotGeneric, SEXP dotGroup, SEXP dotClass, SEXP dotMethod,
 		  SEXP dotGenericCallEnv, SEXP dotGenericDefEnv) {
 
     SEXP v = R_NilValue;
@@ -440,7 +442,7 @@ static SEXP dispatchMethod(SEXP op, SEXP sxp, SEXP dotClass, RCNTXT *cptr, SEXP 
 }
 
 HIDDEN
-bool Rf_usemethod(const char *generic, SEXP obj, SEXP call, SEXP args,
+bool R::Rf_usemethod(const char *generic, SEXP obj, SEXP call, SEXP args,
 	      SEXP rho, SEXP callrho, SEXP defrho, SEXP *ans)
 {
     SEXP klass, method, sxp;
@@ -947,7 +949,7 @@ HIDDEN SEXP do_unclass(SEXP call, SEXP op, SEXP args, SEXP env)
     except there is no translation.
 */
 
-HIDDEN bool inherits2(SEXP x, const char *what) {
+HIDDEN bool R::inherits2(SEXP x, const char *what) {
     if (OBJECT(x)) {
 	SEXP klass;
 
@@ -1187,7 +1189,7 @@ static SEXP R_isMethodsDispatchOn(SEXP onOff)
 }
 
 /* simpler version for internal use, in attrib.cpp and print.cpp */
-HIDDEN bool isMethodsDispatchOn(void)
+HIDDEN bool R::isMethodsDispatchOn(void)
 {
     return (!NOT_METHODS_DISPATCH_PTR(R_standardGeneric_ptr));
 }
@@ -1507,7 +1509,7 @@ static SEXP get_this_generic(SEXP args)
 /* Could there be methods for this op?	Checks
    only whether methods are currently being dispatched and, if so,
    whether methods are currently defined for this op. */
-HIDDEN bool R_has_methods(SEXP op)
+HIDDEN bool R::R_has_methods(SEXP op)
 {
 	R_stdGen_ptr_t ptr = R_get_standardGeneric_ptr();
 	int offset;
@@ -1548,7 +1550,7 @@ void R_set_quick_method_check(R_stdGen_ptr_t value)
    promises, but not from the other two: there all the arguments have
    already been evaluated.
  */
-HIDDEN SEXP R_possible_dispatch(SEXP call, SEXP op, SEXP args, SEXP rho,
+HIDDEN SEXP R::R_possible_dispatch(SEXP call, SEXP op, SEXP args, SEXP rho,
 		    bool promisedArgs)
 {
     SEXP fundef, value, mlist=R_NilValue, s, a, b, suppliedvars;
@@ -1735,7 +1737,7 @@ SEXP R_do_new_object(SEXP class_def)
     return value;
 }
 
-HIDDEN bool R_seemsOldStyleS4Object(SEXP object)
+HIDDEN bool R::R_seemsOldStyleS4Object(SEXP object)
 {
 	SEXP klass;
 	if (!isObject(object) || IS_S4_OBJECT(object))

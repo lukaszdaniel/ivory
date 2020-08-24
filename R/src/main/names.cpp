@@ -36,6 +36,8 @@
 #include <vector>
 #include <string>
 
+using namespace R;
+
 /* Table of  .Internal(.) and .Primitive(.)  R functions
  * =====     =========	      ==========
  *
@@ -1029,7 +1031,7 @@ namespace
 }
 
 /* also used in eval.cpp */
-HIDDEN SEXP R_Primitive(const char *primname)
+HIDDEN SEXP R::R_Primitive(const char *primname)
 {
     for (int i = 0; R_FunTab[i].name; i++)
         if (streql(primname, R_FunTab[i].name))
@@ -1056,7 +1058,7 @@ HIDDEN SEXP do_primitive(SEXP call, SEXP op, SEXP args, SEXP env)
     return prim;
 }
 
-HIDDEN int Rf_StrToInternal(const char *s)
+HIDDEN int R::Rf_StrToInternal(const char *s)
 {
     for (int i = 0; R_FunTab[i].name; i++)
         if (streql(s, R_FunTab[i].name))
@@ -1184,7 +1186,7 @@ static SEXP mkSymMarker(SEXP pname)
 }
 
 /* initialize the symbol table */
-HIDDEN void Rf_InitNames()
+HIDDEN void R::Rf_InitNames()
 {
     /* allocate the symbol table */
     if (!(R_SymbolTable = (SEXP *) calloc(HSIZE, sizeof(SEXP))))

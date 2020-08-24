@@ -37,6 +37,7 @@
 #include <algorithm>
 
 using namespace std;
+using namespace R;
 
 /*
  *  TeX Math Styles

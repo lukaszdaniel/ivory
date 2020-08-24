@@ -210,7 +210,7 @@ inline static void register_bad_sexp_type(SEXP s, int line)
 
 /* also called from typename() in inspect.cpp */
 HIDDEN
-const char *Rf_sexptype2char(const SEXPTYPE type) {
+const char *R::Rf_sexptype2char(const SEXPTYPE type) {
     switch (type) {
     case NILSXP:	return "NILSXP";
     case SYMSXP:	return "SYMSXP";
@@ -457,29 +457,29 @@ static R_size_t R_MaxVSize = R_SIZE_T_MAX;
 static R_size_t R_MaxNSize = R_SIZE_T_MAX;
 static int vsfac = 1; /* current units for vsize: changes at initialization */
 
-HIDDEN R_size_t R_GetMaxVSize(void)
+HIDDEN R_size_t R::R_GetMaxVSize(void)
 {
     if (R_MaxVSize == R_SIZE_T_MAX) return R_SIZE_T_MAX;
     return R_MaxVSize * vsfac;
 }
 
-HIDDEN void R_SetMaxVSize(R_size_t size)
+HIDDEN void R::R_SetMaxVSize(R_size_t size)
 {
     if (size == R_SIZE_T_MAX) return;
     if (size / vsfac >= R_VSize) R_MaxVSize = (size + 1) / vsfac;
 }
 
-HIDDEN R_size_t R_GetMaxNSize(void)
+HIDDEN R_size_t R::R_GetMaxNSize(void)
 {
     return R_MaxNSize;
 }
 
-HIDDEN void R_SetMaxNSize(R_size_t size)
+HIDDEN void R::R_SetMaxNSize(R_size_t size)
 {
     if (size >= R_NSize) R_MaxNSize = size;
 }
 
-HIDDEN void R_SetPPSize(R_size_t size)
+HIDDEN void R::R_SetPPSize(R_size_t size)
 {
     R_PPStackSize = (int) size;
 }
@@ -2119,7 +2119,7 @@ HIDDEN SEXP do_gcinfo(SEXP call, SEXP op, SEXP args, SEXP rho)
 
 /* reports memory use to profiler in eval.cpp */
 
-HIDDEN void get_current_mem(size_t &smallvsize,
+HIDDEN void R::get_current_mem(size_t &smallvsize,
                             size_t &largevsize,
                             size_t &nodes)
 {
@@ -2196,7 +2196,7 @@ NORET static void mem_err_malloc(R_size_t size)
 constexpr int PP_REDZONE_SIZE = 1000L;
 static int R_StandardPPStackSize, R_RealPPStackSize;
 
-HIDDEN void Rf_InitMemory()
+HIDDEN void R::Rf_InitMemory()
 {
     int gen;
     char *arg;
@@ -2558,7 +2558,7 @@ HIDDEN SEXP CONS_NR(SEXP car, SEXP cdr)
   The valuelist is destructively modified and used as the
   environment's frame.
 */
-SEXP Rf_NewEnvironment(SEXP namelist, SEXP valuelist, SEXP rho)
+SEXP R::Rf_NewEnvironment(SEXP namelist, SEXP valuelist, SEXP rho)
 {
     SEXP v, n, newrho;
 
@@ -2608,7 +2608,7 @@ SEXP Rf_NewEnvironment(SEXP namelist, SEXP valuelist, SEXP rho)
 
 /* mkPROMISE is defined directly do avoid the need to protect its arguments
    unless a GC will actually occur. */
-HIDDEN SEXP Rf_mkPROMISE(SEXP expr, SEXP rho)
+HIDDEN SEXP R::Rf_mkPROMISE(SEXP expr, SEXP rho)
 {
     SEXP s;
     if (FORCE_GC || NO_FREE_NODES())
@@ -2648,14 +2648,14 @@ HIDDEN SEXP Rf_mkPROMISE(SEXP expr, SEXP rho)
     return s;
 }
 
-SEXP R_mkEVPROMISE(SEXP expr, SEXP val)
+SEXP R::R_mkEVPROMISE(SEXP expr, SEXP val)
 {
     SEXP prom = mkPROMISE(expr, R_NilValue);
     SET_PRVALUE(prom, val);
     return prom;
 }
 
-HIDDEN SEXP R_mkEVPROMISE_NR(SEXP expr, SEXP val)
+HIDDEN SEXP R::R_mkEVPROMISE_NR(SEXP expr, SEXP val)
 {
     SEXP prom = mkPROMISE(expr, R_NilValue);
     DISABLE_REFCNT(prom);
@@ -2999,7 +2999,7 @@ SEXP Rf_allocVector3(SEXPTYPE type, R_xlen_t length = 1, R_allocator_t *allocato
 }
 
 /* For future hiding of allocVector(CHARSXP) */
-HIDDEN SEXP Rf_allocCharsxp(R_len_t len)
+HIDDEN SEXP R::Rf_allocCharsxp(R_len_t len)
 {
     return Rf_allocVector(intCHARSXP, len);
 }
@@ -3497,7 +3497,7 @@ SEXP R_CollectFromIndex(PROTECT_INDEX i)
 #endif
 
 /* "initStack" initialize environment stack */
-HIDDEN void Rf_initStack(void)
+HIDDEN void R::Rf_initStack(void)
 {
     R_PPStackTop = 0;
 }
@@ -4217,7 +4217,7 @@ void SET_BNDCELL(SEXP cell, SEXP val)
     SETCAR(cell, val);
 }
 
-HIDDEN void R_expand_binding_value(SEXP b)
+HIDDEN void R::R_expand_binding_value(SEXP b)
 {
 #if BOXED_BINDING_CELLS
     SET_BNDCELL_TAG(b, 0);
@@ -4252,7 +4252,7 @@ HIDDEN void R_expand_binding_value(SEXP b)
 #endif
 }
 
-HIDDEN void R_args_enable_refcnt(SEXP args)
+HIDDEN void R::R_args_enable_refcnt(SEXP args)
 {
 #ifdef SWITCH_TO_REFCNT
     /* args is escaping into user C code and might get captured, so
@@ -4710,7 +4710,7 @@ void R_StringBuffer::R_FreeStringBufferL()
 /* ======== This needs direct access to gp field for efficiency ======== */
 
 /* this has NA_STRING = NA_STRING */
-HIDDEN bool Rf_Seql(SEXP a, SEXP b)
+HIDDEN bool R::Rf_Seql(SEXP a, SEXP b)
 {
     /* The only case where pointer comparisons do not suffice is where
       we have two strings in different encodings (which must be

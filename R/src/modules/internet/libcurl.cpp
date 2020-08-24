@@ -37,6 +37,7 @@
 #endif
 
 using namespace std;
+using namespace R;
 
 #ifdef HAVE_LIBCURL
 #include <curl/curl.h>

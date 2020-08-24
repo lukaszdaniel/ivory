@@ -63,7 +63,7 @@ HIDDEN int R_X11_Init(void)
     return initialized;
 }
 
-HIDDEN Rboolean R_access_X11(void)
+HIDDEN Rboolean R::R_access_X11(void)
 {
     R_X11_Init();
     return (initialized > 0) ? (Rboolean)((*ptr->access)() > 0) : FALSE;
@@ -140,7 +140,7 @@ SEXP do_bmVersion(void)
 }
 #else /* No HAVE_X11 */
 
-HIDDEN Rboolean R_access_X11(void)
+HIDDEN Rboolean R::R_access_X11(void)
 {
     return FALSE;
 }

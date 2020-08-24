@@ -582,7 +582,7 @@ static const char* name_value_search(const char *name, const name_value table[],
 }
 #endif
 
-const char *locale2charset(const char *locale)
+const char *R::locale2charset(const char *locale)
 {
     static char charset[128];
 

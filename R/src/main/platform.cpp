@@ -101,6 +101,8 @@ const char *formatError(DWORD res);  /* extra.c */
 # undef ABS
 #endif
 
+using namespace R;
+
 static void Init_R_Machine(SEXP rho)
 {
     machar(&R_AccuracyInfo.ibeta,
@@ -260,8 +262,8 @@ static void Init_R_Machine(SEXP rho)
  *  "Machine", but for strings rather than numerical values.  These
  *  two functions should probably be amalgamated.
  */
-static const char  * const R_OSType = OSTYPE;
-static const char  * const R_FileSep = FILESEP;
+static const char *const R_OSType = OSTYPE;
+static const char *const R_FileSep = FILESEP;
 
 static void Init_R_Platform(SEXP rho)
 {
@@ -309,7 +311,7 @@ static void Init_R_Platform(SEXP rho)
     UNPROTECT(2);
 }
 
-HIDDEN void Init_R_Variables(SEXP rho)
+HIDDEN void R::Init_R_Variables(SEXP rho)
 {
     Init_R_Machine(rho);
     Init_R_Platform(rho);
@@ -330,7 +332,7 @@ int static R_strieql(const char *a, const char *b)
 #endif
 
 static char native_enc[R_CODESET_MAX + 1];
-HIDDEN const char *R_nativeEncoding(void)
+HIDDEN const char *R::R_nativeEncoding(void)
 {
     return native_enc;
 }
@@ -338,7 +340,7 @@ HIDDEN const char *R_nativeEncoding(void)
 /* retrieves information about the current locale and
    sets the corresponding variables (known_to_be_utf8,
    known_to_be_latin1, utf8locale, latin1locale and mbcslocale) */
-HIDDEN void R_check_locale(void)
+HIDDEN void R::R_check_locale(void)
 {
     known_to_be_utf8 = utf8locale = false;
     known_to_be_latin1 = latin1locale = FALSE;
@@ -2072,8 +2074,6 @@ HIDDEN SEXP do_pathexpand(SEXP call, SEXP op, SEXP args, SEXP rho)
 
 #ifdef Unix
 static int var_R_can_use_X11 = -1;
-
-Rboolean R_access_X11(void); /* from src/unix/X11.cpp */
 
 static bool R_can_use_X11(void)
 {

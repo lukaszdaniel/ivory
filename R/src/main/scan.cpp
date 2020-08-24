@@ -48,6 +48,8 @@
 #include <trioremap.h> /* for %lld */
 #endif
 
+using namespace R;
+
 /* The size of vector initially allocated by scan */
 constexpr int SCAN_BLOCKSIZE = 1000;
 /* The size of the console buffer */

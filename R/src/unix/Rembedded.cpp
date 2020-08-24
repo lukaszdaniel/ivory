@@ -25,6 +25,8 @@
 #endif
 #include <Defn.h>
 
+using namespace R;
+
 extern "C" int Rf_initialize_R(int ac, char *av[]); /* in ../unix/system.cpp */
 extern "C" void setup_Rmainloop(void);             /* in main.cpp */
 extern "C" void fpu_setup(Rboolean start);         /* in ../unix/sys-std.cpp */

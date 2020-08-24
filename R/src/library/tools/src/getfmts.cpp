@@ -27,6 +27,8 @@
 #include "RBufferUtils.h"
 #include "localization.h"
 
+using namespace R;
+
 constexpr size_t MAXLINE = MAXELTSIZE;
 #define MAXNARGS 100
 /*               ^^^ not entirely arbitrary, but strongly linked to allowing %$1 to %$99 !*/

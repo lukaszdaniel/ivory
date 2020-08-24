@@ -54,6 +54,7 @@ extern int errno;
 #include "zlib.h"
 #include "localization.h"
 
+using namespace R;
 
 /* from connections.cpp */
 extern gzFile R_gzopen (const char *path, const char *mode);

@@ -33,6 +33,7 @@
 
 #include "localization.h"
 
+using namespace R;
 
 /* Formerly in src/appl/fmim.c */
 

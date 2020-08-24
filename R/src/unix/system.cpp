@@ -59,6 +59,8 @@
 
 #include "Runix.h"
 
+using namespace R;
+
 HIDDEN FILE *ifp = nullptr; /* used in sys-std.cpp */
 
 HIDDEN Rboolean UsingReadline = TRUE;  /* used in sys-std.cpp & ../main/platform.cpp
@@ -73,11 +75,11 @@ NORET void R_Suicide(const char *s)
 	exit(2); // same status as Rstd_Suicide
 }
 void R_ShowMessage(const char *s) { ptr_R_ShowMessage(s); }
-int R_ReadConsole(const char *prompt, unsigned char *buf, int len, int addtohistory)
+int R::R_ReadConsole(const char *prompt, unsigned char *buf, int len, int addtohistory)
 {
 	return ptr_R_ReadConsole(prompt, buf, len, addtohistory);
 }
-void R_WriteConsole(const char *buf, int len)
+void R::R_WriteConsole(const char *buf, int len)
 {
 	if (ptr_R_WriteConsole)
 	{
@@ -88,7 +90,7 @@ void R_WriteConsole(const char *buf, int len)
 		ptr_R_WriteConsoleEx(buf, len, 0);
 	}
 }
-void R_WriteConsoleEx(const char *buf, int len, int otype)
+void R::R_WriteConsoleEx(const char *buf, int len, int otype)
 {
 	if (ptr_R_WriteConsole)
 	{
@@ -99,12 +101,12 @@ void R_WriteConsoleEx(const char *buf, int len, int otype)
 		ptr_R_WriteConsoleEx(buf, len, otype);
 	}
 }
-void R_ResetConsole(void) { ptr_R_ResetConsole(); }
+void R::R_ResetConsole(void) { ptr_R_ResetConsole(); }
 #ifndef HAVE_AQUA
 void R_FlushConsole(void) { ptr_R_FlushConsole(); }
 #endif
 void R_ClearerrConsole(void) { ptr_R_ClearerrConsole(); }
-void R_Busy(int which) { ptr_R_Busy(which); }
+void R::R_Busy(int which) { ptr_R_Busy(which); }
 NORET void R_CleanUp(SA_TYPE saveact, int status, int runLast)
 {
     ptr_R_CleanUp(saveact, status, runLast);
@@ -112,13 +114,13 @@ NORET void R_CleanUp(SA_TYPE saveact, int status, int runLast)
     exit(status);
 }
 
-HIDDEN int R_ShowFiles(int nfile, const char **file, const char **headers,
+HIDDEN int R::R_ShowFiles(int nfile, const char **file, const char **headers,
 					   const char *wtitle, bool del, const char *pager)
 {
 	return ptr_R_ShowFiles(nfile, file, headers, wtitle, del, pager);
 }
 
-HIDDEN size_t R_ChooseFile(int _new, char *buf, size_t len)
+HIDDEN size_t R::R_ChooseFile(int _new, char *buf, size_t len)
 {
 	return ptr_R_ChooseFile(_new, buf, len);
 }
@@ -563,7 +565,7 @@ int Rf_initialize_R(int ac, char *av[])
      *     file    = array of filenames
      *     editor  = editor to be used.
      */
-int R_EditFiles(int nfile, const char **file, const char **title,
+int R::R_EditFiles(int nfile, const char **file, const char **title,
 		const char *editor)
 {
     char  buf[1024];
@@ -591,7 +593,7 @@ int R_EditFiles(int nfile, const char **file, const char **title,
 
 /* Returns the limit on the number of open files. On error or when no
    limit is known, returns a negative number. */
-int R_GetFDLimit() {
+int R::R_GetFDLimit() {
 
 #if defined(HAVE_SYS_RESOURCE_H) && defined(HAVE_GETRLIMIT)
     struct rlimit rlim;
@@ -621,7 +623,7 @@ int R_GetFDLimit() {
    as desired. Returns 'desired' if successful, otherwise a smaller positive
    number giving the current limit. On error (no limit known), a negative
    number is returned. */
-int R_EnsureFDLimit(int desired) {
+int R::R_EnsureFDLimit(int desired) {
 
 #if defined(HAVE_SYS_RESOURCE_H) && defined(HAVE_SETRLIMIT) && defined(HAVE_GETRLIMIT)
     struct rlimit rlim;

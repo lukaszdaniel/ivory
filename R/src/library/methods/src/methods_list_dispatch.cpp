@@ -30,6 +30,9 @@
 #include "RSMethods.h"
 #include "methods.h"
 #include <Rinternals.h>
+
+using namespace R;
+
 #define STRING_VALUE(x)		CHAR(asChar(x))
 
 #if !defined(snprintf) && defined(HAVE_DECL_SNPRINTF) && !HAVE_DECL_SNPRINTF
@@ -1129,7 +1132,6 @@ SEXP R_dispatchGeneric(SEXP fname, SEXP ev, SEXP fdef)
         if (inherits(f, "internalDispatchMethod")) {
             val = R_deferred_default_method();
         } else {
-            SEXP R_execMethod(SEXP, SEXP);
             if(isObject(f))
                 f = R_loadMethod(f, fname, ev);
             PROTECT(f); nprotect++; /* is this needed?? */

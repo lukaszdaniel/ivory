@@ -49,6 +49,8 @@
 
 #include "graphics.h"
 
+using namespace R;
+
 struct ParTab
 {
 	const char *name;

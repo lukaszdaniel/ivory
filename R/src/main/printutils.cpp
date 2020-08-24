@@ -69,6 +69,7 @@
 #include "RBufferUtils.h"
 
 using namespace std;
+using namespace R;
 
 #if !defined(__STDC_ISO_10646__) && (defined(__APPLE__) || defined(__FreeBSD__))
 /* This may not be 100% true (see the comment in rlocales.h),
@@ -83,7 +84,7 @@ using namespace std;
 constexpr int BUFSIZE = 8192;  /* used by Rprintf etc */
 
 HIDDEN
-R_size_t R_Decode2Long(char *p, int &ierr)
+R_size_t R::R_Decode2Long(char *p, int &ierr)
 {
     R_size_t v = strtol(p, &p, 10);
     ierr = 0;
@@ -137,7 +138,7 @@ const char *Rf_EncodeInteger(int x, int w)
 }
 
 HIDDEN
-const char *Rf_EncodeRaw(Rbyte x, const char *prefix)
+const char *R::Rf_EncodeRaw(Rbyte x, const char *prefix)
 {
 	static char buff[10];
 	sprintf(buff, "%s%02x", prefix, x);
@@ -145,7 +146,7 @@ const char *Rf_EncodeRaw(Rbyte x, const char *prefix)
 }
 
 HIDDEN
-const char *Rf_EncodeEnvironment(SEXP x)
+const char *R::Rf_EncodeEnvironment(SEXP x)
 {
     const void *vmax = vmaxget();
     static char ch[1000];
@@ -273,7 +274,7 @@ static const char *EncodeRealDrop0(double x, int w, int d, int e, const char *de
     return out;
 }
 
-HIDDEN SEXP Rf_StringFromReal(double x, int &warn)
+HIDDEN SEXP R::Rf_StringFromReal(double x, int &warn)
 {
     int w, d, e;
     formatReal(&x, 1, &w, &d, &e, 0);
@@ -283,7 +284,7 @@ HIDDEN SEXP Rf_StringFromReal(double x, int &warn)
 
 
 HIDDEN
-const char *Rf_EncodeReal2(double x, int w, int d, int e)
+const char *R::Rf_EncodeReal2(double x, int w, int d, int e)
 {
     static char buff[NB];
     char fmt[20];
@@ -496,7 +497,7 @@ int Rstrwid(const char *str, int slen, cetype_t ienc, int quote)
 
 /* Match what EncodeString does with encodings */
 HIDDEN
-int Rstrlen(SEXP s, int quote)
+int R::Rstrlen(SEXP s, int quote)
 {
 	cetype_t ienc = getCharCE(s);
 	if (ienc == CE_UTF8 || ienc == CE_BYTES)
@@ -519,7 +520,7 @@ int Rstrlen(SEXP s, int quote)
  */
 
 HIDDEN
-const char *Rf_EncodeString(SEXP s, int w, int quote, Rprt_adj justify)
+const char *R::Rf_EncodeString(SEXP s, int w, int quote, Rprt_adj justify)
 {
     int b, b0, i, j, cnt;
     const char *p; char *q, buf[11];
@@ -781,7 +782,7 @@ const char *Rf_EncodeString(SEXP s, int w, int quote, Rprt_adj justify)
 
 /* NB this is called by R.app even though it is in no public header, so
    alter there if you alter this */
-const char *Rf_EncodeElement(SEXP x, int indx, int quote, char cdec)
+const char *R::Rf_EncodeElement(SEXP x, int indx, int quote, char cdec)
 {
 	char dec[2];
 	dec[0] = cdec;
@@ -789,7 +790,7 @@ const char *Rf_EncodeElement(SEXP x, int indx, int quote, char cdec)
 	return EncodeElement0(x, indx, quote, dec);
 }
 
-const char *Rf_EncodeElement0(SEXP x, R_xlen_t indx, int quote, const char *dec)
+const char *R::Rf_EncodeElement0(SEXP x, R_xlen_t indx, int quote, const char *dec)
 {
 	int w, d, e, wi, di, ei;
 	const char *res;
@@ -836,7 +837,7 @@ const char *Rf_EncodeElement0(SEXP x, R_xlen_t indx, int quote, const char *dec)
    particularly it is NOT safe to pass the result of EncodeChar as 3rd
    argument to errorcall (errorcall_cpy can be used instead). */
 //HIDDEN
-const char *Rf_EncodeChar(SEXP x)
+const char *R::Rf_EncodeChar(SEXP x)
 {
     return EncodeString(x, 0, 0, Rprt_adj_left);
 }
@@ -874,7 +875,7 @@ int vasprintf(char **strp, const char *fmt, va_list ap)
 
 constexpr int R_BUFSIZE = BUFSIZE;
 HIDDEN
-void Rcons_vprintf(const char *format, va_list arg)
+void R::Rcons_vprintf(const char *format, va_list arg)
 {
     char buf[R_BUFSIZE], *p = buf;
     int res;

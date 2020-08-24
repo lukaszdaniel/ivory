@@ -40,7 +40,7 @@
 #include "rui.h"
 #include "preferences.h"
 #include <Fileio.h>
-void R_fixbackslash(char *s);
+void R::R_fixbackslash(char *s);
 
 #undef gettext
 #define gettext GA_gettext

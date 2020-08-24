@@ -53,6 +53,8 @@
 #include <R_ext/Print.h> // for REprintf
 #include <R_ext/RS.h> // for Calloc
 
+using namespace R;
+
 #define __SYSTEM__
 /* includes <sys/select.h> and <sys/time.h> */
 #include <R_ext/eventloop.h>
@@ -722,7 +724,7 @@ static SEXP
     RComp_getFileCompSym,
     RComp_retrieveCompsSym;
 
-HIDDEN void set_rl_word_breaks(const char *str)
+HIDDEN void R::set_rl_word_breaks(const char *str)
 {
     static char p1[201], p2[203];
     strncpy(p1, str, 200); p1[200]= '\0';
@@ -925,7 +927,7 @@ static char *R_completion_generator(const char *text, int state)
 
 /* ============================================================ */
 #else
-HIDDEN void set_rl_word_breaks(const char *str)
+HIDDEN void R::set_rl_word_breaks(const char *str)
 {
 }
 #endif /* HAVE_RL_COMPLETION_MATCHES */

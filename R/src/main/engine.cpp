@@ -33,6 +33,7 @@
 #include <rlocale.h>
 
 using namespace std;
+using namespace R;
 
 int R_GE_getVersion()
 {

@@ -35,6 +35,7 @@
 #include <cstdarg>
 
 using namespace std;
+using namespace R;
 
 /* eval() sets R_Visible = true. Thas may not be wanted when eval() is
    used in C code. This is a version that saves/restores R_Visible.
@@ -194,7 +195,7 @@ void Rf_onintrNoResume() { onintrEx(FALSE); }
    These do far more processing than is allowed in a signal handler ....
 */
 
-HIDDEN RETSIGTYPE Rf_onsigusr1(int dummy)
+HIDDEN RETSIGTYPE R::Rf_onsigusr1(int dummy)
 {
     if (R_interrupts_suspended) {
 	/**** ought to save signal and handle after suspend */
@@ -229,7 +230,7 @@ HIDDEN RETSIGTYPE Rf_onsigusr1(int dummy)
 }
 
 
-HIDDEN RETSIGTYPE Rf_onsigusr2(int dummy)
+HIDDEN RETSIGTYPE R::Rf_onsigusr2(int dummy)
 {
     inError = 1;
 
@@ -539,7 +540,7 @@ static void cleanup_PrintWarnings(void *data)
 }
 
 HIDDEN
-void Rf_PrintWarnings(const char *hdr)
+void R::Rf_PrintWarnings(const char *hdr)
 {
     int i;
 	const char *header = hdr ? hdr : n_("Warning message:", "Warning messages:", R_CollectWarnings);
@@ -885,7 +886,7 @@ NORET void Rf_errorcall(SEXP call, const char *format, ...)
 
 /* Like errorcall, but copies all data for the error message into a buffer
    before doing anything else. */
-HIDDEN NORET void Rf_errorcall_cpy(SEXP call, const char *format, ...)
+HIDDEN NORET void R::Rf_errorcall_cpy(SEXP call, const char *format, ...)
 {
 	char buf[BUFSIZE];
 
@@ -1345,7 +1346,7 @@ WarningDB[] = {
 };
 
 
-HIDDEN NORET void Rf_ErrorMessage(SEXP call, int which_error, ...)
+HIDDEN NORET void R::Rf_ErrorMessage(SEXP call, int which_error, ...)
 {
     int i;
     char buf[BUFSIZE];
@@ -1364,7 +1365,7 @@ HIDDEN NORET void Rf_ErrorMessage(SEXP call, int which_error, ...)
     errorcall(call, "%s", buf);
 }
 
-HIDDEN void Rf_WarningMessage(SEXP call, int which_warn, ...)
+HIDDEN void R::Rf_WarningMessage(SEXP call, int which_warn, ...)
 {
     int i;
     char buf[BUFSIZE];
@@ -1444,7 +1445,7 @@ static void R_PrintDeferredWarnings(void)
  * Return the traceback without deparsing the calls
  */
 HIDDEN
-SEXP R_GetTracebackOnly(int skip)
+SEXP R::R_GetTracebackOnly(int skip)
 {
     int nback = 0, ns = skip;
     SEXP s, t;
@@ -1487,7 +1488,7 @@ SEXP R_GetTracebackOnly(int skip)
  * Return the traceback with calls deparsed
  */
 HIDDEN
-SEXP R_GetTraceback(int skip)
+SEXP R::R_GetTraceback(int skip)
 {
     int nback = 0;
     SEXP s, t, u, v;

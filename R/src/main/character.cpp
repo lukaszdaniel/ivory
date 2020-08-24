@@ -80,6 +80,7 @@ abbreviate chartr make.names strtrim tolower toupper give error.
 #include <vector>
 
 using namespace std;
+using namespace R;
 
 /* We use a shared buffer here to avoid reallocing small buffers, and
    keep a standard-size (MAXELTSIZE = 8192) buffer allocated shared

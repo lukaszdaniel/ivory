@@ -56,22 +56,24 @@
 #include <R_ext/Itermacros.h> /* for ITERATE_BY_REGION */
 #include <Rcomplex.h>
 
+using namespace R;
+
 /* this is just for conformity with other types */
 HIDDEN
-void Rf_formatRaw(const Rbyte *x, R_xlen_t n, int *fieldwidth)
+void R::Rf_formatRaw(const Rbyte *x, R_xlen_t n, int *fieldwidth)
 {
     *fieldwidth = 2;
 }
 
 HIDDEN
-void Rf_formatRawS(SEXP x, R_xlen_t n, int *fieldwidth)
+void R::Rf_formatRawS(SEXP x, R_xlen_t n, int *fieldwidth)
 {
     *fieldwidth = 2;
 }
 
 
 HIDDEN
-void Rf_formatString(const SEXP *x, R_xlen_t n, int *fieldwidth, int quote)
+void R::Rf_formatString(const SEXP *x, R_xlen_t n, int *fieldwidth, int quote)
 {
     int xmax = 0;
     int l;
@@ -88,7 +90,7 @@ void Rf_formatString(const SEXP *x, R_xlen_t n, int *fieldwidth, int quote)
 /* currently there is no STRING_GET_REGION */
 
 HIDDEN
-void Rf_formatStringS(SEXP x, R_xlen_t n, int *fieldwidth, int quote)
+void R::Rf_formatStringS(SEXP x, R_xlen_t n, int *fieldwidth, int quote)
 {
     int xmax = 0;
     int l;

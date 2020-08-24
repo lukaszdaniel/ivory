@@ -31,7 +31,7 @@
 #include "duplicate.h"
 
 using namespace std;
-
+using namespace R;
 
 /* since INT_MIN is the NA_INTEGER value ! */
 namespace {
@@ -413,7 +413,7 @@ static Rboolean cprod(SEXP sx, Rcomplex *value, Rboolean narm)
 
 
 HIDDEN
-SEXP fixup_NaRm(SEXP args)
+SEXP R::fixup_NaRm(SEXP args)
 {
     SEXP t, na_value;
 

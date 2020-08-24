@@ -31,6 +31,8 @@
 /* for signal-handling code */
 #include <psignal.h>
 
+using namespace R;
+
 /* one way to allow user interrupts: called in ProcessEvents */
 extern int UserBreak;
 

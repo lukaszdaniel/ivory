@@ -29,6 +29,8 @@
 #include <Defn.h>
 #include "localization.h"
 
+using namespace R;
+
 static SEXP ParenSymbol;
 static SEXP PlusSymbol;
 static SEXP MinusSymbol;

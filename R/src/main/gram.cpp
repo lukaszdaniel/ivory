@@ -99,6 +99,8 @@
 #include <R_ext/Print.h>
 #include <Localization.h>
 
+using namespace R;
+
 #if !defined(__STDC_ISO_10646__) && (defined(__APPLE__) || defined(__FreeBSD__))
 /* This may not be 100% true (see the comment in rlocale.h),
    but it seems true in normal locales */
@@ -976,16 +978,16 @@ static const yytype_int8 yytranslate[] =
   /* YYRLINE[YYN] -- Source line where rule number YYN was defined.  */
 static const yytype_int16 yyrline[] =
 {
-       0,   415,   415,   416,   417,   418,   419,   422,   423,   424,
-     427,   428,   431,   432,   433,   434,   436,   437,   439,   440,
-     441,   442,   443,   445,   446,   447,   448,   449,   450,   451,
-     452,   453,   454,   455,   456,   457,   458,   459,   460,   461,
-     462,   463,   464,   465,   467,   468,   469,   470,   471,   472,
-     473,   474,   475,   476,   477,   478,   479,   480,   481,   482,
-     483,   484,   485,   486,   487,   488,   492,   495,   498,   502,
-     503,   504,   505,   506,   507,   510,   511,   514,   515,   516,
-     517,   518,   519,   520,   521,   524,   525,   526,   527,   528,
-     532
+       0,   417,   417,   418,   419,   420,   421,   424,   425,   426,
+     429,   430,   433,   434,   435,   436,   438,   439,   441,   442,
+     443,   444,   445,   447,   448,   449,   450,   451,   452,   453,
+     454,   455,   456,   457,   458,   459,   460,   461,   462,   463,
+     464,   465,   466,   467,   469,   470,   471,   472,   473,   474,
+     475,   476,   477,   478,   479,   480,   481,   482,   483,   484,
+     485,   486,   487,   488,   489,   490,   494,   497,   500,   504,
+     505,   506,   507,   508,   509,   512,   513,   516,   517,   518,
+     519,   520,   521,   522,   523,   526,   527,   528,   529,   530,
+     534
 };
 #endif
 
@@ -4099,10 +4101,10 @@ static int KeywordLookup(const char *s)
 			PRESERVE_SV(yylval = mkNA());
 			break;
 		    case 2:
-			PRESERVE_SV(yylval = mkTrue());
+			PRESERVE_SV(yylval = R::Rf_mkTrue());
 			break;
 		    case 3:
-			PRESERVE_SV(yylval = mkFalse());
+			PRESERVE_SV(yylval = R::Rf_mkFalse());
 			break;
 		    case 4:
 			PRESERVE_SV(yylval = allocVector(REALSXP, 1));
@@ -4183,14 +4185,14 @@ static SEXP mkNA(void)
     return t;
 }
 
-HIDDEN SEXP mkTrue(void)
+HIDDEN SEXP R::Rf_mkTrue(void)
 {
     SEXP s = allocVector(LGLSXP, 1);
     LOGICAL(s)[0] = 1;
     return s;
 }
 
-SEXP mkFalse(void)
+SEXP R::Rf_mkFalse(void)
 {
     SEXP s = allocVector(LGLSXP, 1);
     LOGICAL(s)[0] = 0;
@@ -5095,7 +5097,7 @@ static int SpecialValue(int c)
 }
 
 /* return 1 if name is a valid name 0 otherwise */
-HIDDEN bool Rf_isValidName(const char *name)
+HIDDEN bool R::Rf_isValidName(const char *name)
 {
     const char *p = name;
 

@@ -143,12 +143,12 @@ static SEXP duplicate1(SEXP, Rboolean deep);
 #ifdef R_PROFILING
 static unsigned long duplicate_counter = (unsigned long)-1;
 
-HIDDEN unsigned long get_duplicate_counter(void)
+HIDDEN unsigned long R::get_duplicate_counter(void)
 {
     return duplicate_counter;
 }
 
-HIDDEN void reset_duplicate_counter(void)
+HIDDEN void R::reset_duplicate_counter(void)
 {
     duplicate_counter = 0;
     return;

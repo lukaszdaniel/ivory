@@ -89,6 +89,8 @@
 
 #include "../localization.h"
 
+using namespace R;
+
 static void CairoCol(unsigned int col, double* R, double* G, double* B)
 {
     *R = R_RED(col)/255.0;

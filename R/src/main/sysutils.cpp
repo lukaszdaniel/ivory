@@ -34,6 +34,8 @@
 #include <rlocale.h>
 #include <cassert>
 
+using namespace R;
+
 /*
   See ../unix/system.txt for a description of some of these functions.
   Formally part of ../unix/sys-common.cpp.
@@ -61,13 +63,13 @@ int (*ptr_CocoaSystem)(const char*);
 #endif
 
 #ifdef _WIN32
-bool R_FileExists(const char *path)
+bool R::R_FileExists(const char *path)
 {
     struct _stati64 sb;
     return _stati64(R_ExpandFileName(path), &sb) == 0;
 }
 
-HIDDEN double R_FileMtime(const char *path)
+HIDDEN double R::R_FileMtime(const char *path)
 {
     struct _stati64 sb;
     if (_stati64(R_ExpandFileName(path), &sb) != 0)
@@ -75,13 +77,13 @@ HIDDEN double R_FileMtime(const char *path)
     return sb.st_mtime;
 }
 #else
-bool R_FileExists(const char *path)
+bool R::R_FileExists(const char *path)
 {
     struct stat sb;
     return (stat(R_ExpandFileName(path), &sb) == 0);
 }
 
-HIDDEN double R_FileMtime(const char *path)
+HIDDEN double R::R_FileMtime(const char *path)
 {
     struct stat sb;
     if (stat(R_ExpandFileName(path), &sb) != 0)
@@ -94,7 +96,7 @@ HIDDEN double R_FileMtime(const char *path)
      *  Unix file names which begin with "." are invisible.
      */
 
-HIDDEN bool R_HiddenFile(const char *name)
+HIDDEN bool R::R_HiddenFile(const char *name)
 {
     if (name && name[0] != '.') return false;
     return true;
@@ -156,7 +158,7 @@ FILE *R_fopen(const char *filename, const char *mode)
 #if defined(_WIN32)
 
 #define BSIZE 100000
-wchar_t *filenameToWchar(const SEXP fn, const Rboolean expand)
+wchar_t *R::filenameToWchar(const SEXP fn, const Rboolean expand)
 {
     static wchar_t filename[BSIZE+1];
     void *obj;
@@ -198,7 +200,7 @@ FILE *R_wfopen(const wchar_t *filename, const wchar_t *mode)
 }
 
 
-FILE *RC_fopen(const SEXP fn, const char *mode, const Rboolean expand)
+FILE *R::RC_fopen(const SEXP fn, const char *mode, const Rboolean expand)
 {
     wchar_t wmode[10];
 
@@ -207,7 +209,7 @@ FILE *RC_fopen(const SEXP fn, const char *mode, const Rboolean expand)
     return _wfopen(filenameToWchar(fn, expand), wmode);
 }
 #else
-FILE *RC_fopen(const SEXP fn, const char *mode, const Rboolean expand)
+FILE *R::RC_fopen(const SEXP fn, const char *mode, const Rboolean expand)
 {
     const void *vmax = vmaxget();
     const char *filename = translateCharFP(fn), *res;
@@ -1000,7 +1002,7 @@ const char *Rf_translateChar(SEXP x)
 }
 
 /* Variant which must work, used for file paths, including devices */
-const char *Rf_translateCharFP(SEXP x)
+const char *R::Rf_translateCharFP(SEXP x)
 {
     if(TYPEOF(x) != CHARSXP)
 	error(_("'%s' function must be called on a CHARSXP, but got '%s'"),
@@ -1020,7 +1022,7 @@ const char *Rf_translateCharFP(SEXP x)
 }
 
 /* Variant which may return nullptr, used for file paths */
-HIDDEN const char *Rf_translateCharFP2(SEXP x)
+HIDDEN const char *R::Rf_translateCharFP2(SEXP x)
 {
     if(TYPEOF(x) != CHARSXP)
 	error(_("'%s' function must be called on a CHARSXP, but got '%s'"),
@@ -1147,7 +1149,7 @@ next_char:
 }
 
 /* Variant which does not return escaped string */
-HIDDEN const char *Rf_trCharUTF8(SEXP x)
+HIDDEN const char *R::Rf_trCharUTF8(SEXP x)
 {
     void *obj;
     const char *inbuf, *ans = CHAR(x);
@@ -1234,7 +1236,7 @@ static void *latin1_wobj = nullptr, *utf8_wobj=nullptr;
 /* This may return a R_alloc-ed result, so the caller has to manage the
    R_alloc stack */
 HIDDEN /* but not hidden on Windows, where it was used in tcltk.cpp */
-const wchar_t *Rf_wtransChar(SEXP x)
+const wchar_t *R::Rf_wtransChar(SEXP x)
 {
     void * obj;
     const char *inbuf, *ans = CHAR(x), *from;
@@ -1551,7 +1553,7 @@ next_char:
 }
 #endif
 
-HIDDEN void invalidate_cached_recodings(void)
+HIDDEN void R::invalidate_cached_recodings(void)
 {
     if (latin1_obj)
     {
@@ -1590,7 +1592,7 @@ static constexpr char UNICODE[] = "UCS-4LE";
 #endif
 
 /* used in gram.cpp and devX11.cpp */
-size_t Rf_ucstomb(char *s, const unsigned int wc)
+size_t R::Rf_ucstomb(char *s, const unsigned int wc)
 {
     char     buf[MB_CUR_MAX+1];
     void    *cd = nullptr ;
@@ -1644,7 +1646,7 @@ size_t Rf_ucstomb(char *s, const unsigned int wc)
 }
 
 /* used in plot.cpp for non-UTF-8 MBCS */
-HIDDEN size_t Rf_mbtoucs(unsigned int *wc, const char *s, size_t n)
+HIDDEN size_t R::Rf_mbtoucs(unsigned int *wc, const char *s, size_t n)
 {
     unsigned int  wcs[2];
     char     buf[16];
@@ -1779,7 +1781,7 @@ extern const char *mkdtemp(const char *template);
 #include <cctype>
 #endif
 
-void R_reInitTempDir(int die_on_fail)
+void R::R_reInitTempDir(int die_on_fail)
 {
     const char *tmp;
     char tmp1[PATH_MAX + 11], *p;
@@ -1858,7 +1860,7 @@ void R_reInitTempDir(int die_on_fail)
     }
 }
 
-HIDDEN void Rf_InitTempDir() {
+HIDDEN void R::Rf_InitTempDir() {
     R_reInitTempDir(/* die_on_fail = */ TRUE);
 }
 

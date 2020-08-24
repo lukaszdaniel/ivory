@@ -35,6 +35,8 @@
 #include <R_ext/Print.h>
 #include <R_ext/Visibility.h>
 
+using namespace R;
+
 static void *in_R_HTTPOpen(const char *url, const char *agent, const char *headers,
 						   int cacheOK);
 static int in_R_HTTPRead(void *ctx, char *dest, int len);

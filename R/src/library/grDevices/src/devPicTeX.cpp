@@ -33,6 +33,8 @@
 #include "grDevices.h"
 #include "localization.h"
 
+using namespace R;
+
 	/* device-specific information per picTeX device */
 
 #define DOTSperIN	72.27

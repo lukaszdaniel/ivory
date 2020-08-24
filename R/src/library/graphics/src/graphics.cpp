@@ -36,6 +36,8 @@
 #include <GraphicsBase.h>       /* setBaseDevice */
 #include <Rmath.h>		/* eg. fmax2() */
 
+using namespace R;
+
 /*--->> Documentation now in  ../include/Rgraphics.h  "API" ----- */
 
 double R_Log10(double x)

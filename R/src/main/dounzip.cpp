@@ -38,6 +38,8 @@
 #include <io.h> /* for mkdir */
 #endif
 
+using namespace R;
+
 /* cf do_dircreate in platform.cpp */
 static int R_mkdir(char *path)
 {

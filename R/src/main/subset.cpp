@@ -1127,7 +1127,7 @@ HIDDEN SEXP do_subset2_dflt(SEXP call, SEXP op, SEXP args, SEXP rho)
     return ans;
 }
 
-HIDDEN SEXP dispatch_subset2(SEXP x, R_xlen_t i, SEXP call, SEXP rho)
+HIDDEN SEXP R::dispatch_subset2(SEXP x, R_xlen_t i, SEXP call, SEXP rho)
 {
     static SEXP bracket_op = nullptr;
     SEXP args, x_elt;
@@ -1252,7 +1252,7 @@ HIDDEN SEXP do_subset3(SEXP call, SEXP op, SEXP args, SEXP env)
 }
 
 /* used in eval.cpp */
-HIDDEN SEXP R_subset3_dflt(SEXP x, SEXP input, SEXP call)
+HIDDEN SEXP R::R_subset3_dflt(SEXP x, SEXP input, SEXP call)
 {
     SEXP y, nlist;
     size_t slen;

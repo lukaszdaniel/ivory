@@ -52,6 +52,8 @@
 
 #include <Localization.h>
 
+using namespace R;
+
 void R_CleanTempDir(void);		/* from platform.cpp */
 void editorcleanall(void);                  /* from editor.cpp */
 
@@ -214,7 +216,7 @@ R_ReadConsole(const char *prompt, unsigned char *buf, int len,
 	/* Write a text buffer to the console. */
 	/* All system output is filtered through this routine. */
 
-void R_WriteConsole(const char *buf, int len)
+void R::R_WriteConsole(const char *buf, int len)
 {
     R_ProcessEvents();
     if (TrueWriteConsole) TrueWriteConsole(buf, len);
@@ -222,7 +224,7 @@ void R_WriteConsole(const char *buf, int len)
 }
 
 
-void R_WriteConsoleEx(const char *buf, int len, int otype)
+void R::R_WriteConsoleEx(const char *buf, int len, int otype)
 {
     R_ProcessEvents();
     if (TrueWriteConsole) TrueWriteConsole(buf, len);
@@ -375,7 +377,7 @@ static void TermWriteConsole(const char *buf, int len)
 
 	/* Indicate that input is coming from the console */
 
-void R_ResetConsole(void)
+void R::R_ResetConsole(void)
 {
 }
 
@@ -411,7 +413,7 @@ static void CharBusy(int which)
 {
 }
 
-void R_Busy(int which)
+void R::R_Busy(int which)
 {
     my_R_Busy(which);
 }
@@ -524,9 +526,9 @@ void R_CleanUp(SA_TYPE saveact, int status, int runLast)
 
 
 extern FILE *R_wfopen(const wchar_t *filename, const wchar_t *mode);
-extern size_t Rf_utf8towcs(wchar_t *wc, const char *s, size_t n);
+extern size_t R::Rf_utf8towcs(wchar_t *wc, const char *s, size_t n);
 
-int R_ShowFiles(int nfile, const char **file, const char **headers,
+int R::R_ShowFiles(int nfile, const char **file, const char **headers,
 		const char *wtitle, bool del, const char *pager)
 {
     int   i, ll;
@@ -594,7 +596,7 @@ int R_ShowFiles(int nfile, const char **file, const char **headers,
      */
 
 /* As from R 2.7.0 we assume file, editor are in UTF-8 */
-int R_EditFiles(int nfile, const char **file, const char **title,
+int R::R_EditFiles(int nfile, const char **file, const char **title,
 		const char *editor)
 {
     int   i, ll;
@@ -629,7 +631,7 @@ int R_EditFiles(int nfile, const char **file, const char **title,
 
 extern int DialogSelectFile(char *buf, int len); /* from rui.cpp */
 
-size_t R_ChooseFile(int new, char *buf, size_t len)
+size_t R::R_ChooseFile(int new, char *buf, size_t len)
 {
     return DialogSelectFile(buf, len);
 }
@@ -1245,13 +1247,13 @@ void saveConsoleTitle(void)
  * This function returns 16,777,216 based on
  * https://blogs.technet.microsoft.com/markrussinovich/2009/09/29/pushing-the-limits-of-windows-handles
  */
-int R_GetFDLimit()
+int R::R_GetFDLimit()
 {
     long limit = 16L*1024L*1024L;
     return (limit > INT_MAX) ? INT_MAX : limit;
 }
 
-int R_EnsureFDLimit(int desired)
+int R::R_EnsureFDLimit(int desired)
 {
     long limit = 16L*1024L*1024L;
     return (desired <= limit) ? desired : (int)limit;

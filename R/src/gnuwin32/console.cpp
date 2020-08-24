@@ -252,7 +252,7 @@ void xbufaddxs(xbuf p, const wchar_t *s, int user)
 
 #define IN_CONSOLE
 #include "rgui_UTF8.h"
-extern size_t Rf_utf8towcs(wchar_t *wc, const char *s, size_t n);
+extern size_t R::Rf_utf8towcs(wchar_t *wc, const char *s, size_t n);
 static size_t enctowcs(wchar_t *wc, char *s, int n)
 {
     size_t nc = 0;
