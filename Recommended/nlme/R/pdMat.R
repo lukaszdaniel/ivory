@@ -1,6 +1,6 @@
 ###              Classes of positive-definite matrices
 ###
-### Copyright 2006-2017  The R Core team
+### Copyright 2006-2020  The R Core team
 ### Copyright 1997-2003  Jose C. Pinheiro,
 ###                      Douglas M. Bates <bates@stat.wisc.edu>
 #
@@ -35,7 +35,7 @@ pdMatrix <-
 
 pdMat <-
   function(value = numeric(0), form = NULL, nam = NULL,
-	   data = sys.frame(sys.parent()), pdClass = "pdSymm")
+	   data = parent.frame(), pdClass = "pdSymm")
 {
   if (inherits(value, "pdMat")) {	# nothing to construct
     pdClass <- class(value)
@@ -69,7 +69,7 @@ corMatrix.pdMat <-
 
 pdConstruct.pdMat <-
   function(object, value = numeric(0), form = formula(object),
-	   nam = Names(object), data = sys.frame(sys.parent()), ...)
+	   nam = Names(object), data = parent.frame(), ...)
 {
   if (inherits(value, "pdMat")) {	# constructing from another pdMat
     if (length(form) == 0) {
@@ -85,7 +85,7 @@ pdConstruct.pdMat <-
     }
   }
   if (length(value) > 0) {
-    if (inherits(value, "formula") || data.class(value) == "call") {
+    if (inherits(value, "formula") || is.call(value)) {
       ## constructing from a formula
       if (!is.null(form)) {
 	warning(gettextf("ignoring argument '%s'", "form"))
@@ -128,7 +128,7 @@ pdConstruct.pdMat <-
       value <- as.numeric(value)
       attributes(value) <- attributes(object)
       object <- value
-    } else if (data.class(value) == "list") {
+    } else if(is.list(value)) {
       ## constructing from a list of two-sided formulae - nlme case
       if (!is.null(form)) {
 	warning(gettextf("ignoring argument '%s'", "form"))
@@ -583,7 +583,7 @@ pdSymm <-
 
 pdConstruct.pdSymm <-
   function(object, value = numeric(0), form = formula(object),
-	   nam = Names(object), data = sys.frame(sys.parent()), ...)
+	   nam = Names(object), data = parent.frame(), ...)
 {
   val <- NextMethod()
   if (length(val) == 0) {               # uninitialized object
@@ -698,7 +698,7 @@ summary.pdSymm <-
 
 pdLogChol <-
   ## Constructor for the pdLogChol class
-  function(value = numeric(0), form = NULL, nam = NULL, data = sys.parent())
+  function(value = numeric(0), form = NULL, nam = NULL, data = parent.frame())
 {
   object <- numeric(0)
   class(object) <- c("pdLogChol", "pdMat")
@@ -709,7 +709,7 @@ pdLogChol <-
 
 pdConstruct.pdLogChol <-
   function(object, value = numeric(0), form = formula(object),
-	   nam = Names(object), data = sys.parent(), ...)
+	   nam = Names(object), data = parent.frame(), ...)
 {
   val <- pdConstruct.pdMat(object, value, form, nam, data)
   if (length(val) == 0) {               # uninitialized object
@@ -781,7 +781,7 @@ summary.pdLogChol <-
 
 #pdChol <-
 #  ## Constructor for the pdChol class
-#  function(value = numeric(0), form = NULL, nam = NULL, data = sys.parent())
+#  function(value = numeric(0), form = NULL, nam = NULL, data = parent.frame())
 #{
 #  object <- numeric(0)
 #  class(object) <- c("pdChol", "pdMat")
@@ -792,7 +792,7 @@ summary.pdLogChol <-
 
 #pdConstruct.pdChol <-
 #  function(object, value = numeric(0), form = formula(object),
-#	   nam = Names(object), data = sys.parent())
+#	   nam = Names(object), data = parent.frame())
 #{
 #  val <- pdConstruct.pdMat(object, value, form, nam, data)
 #  if (length(val) == 0) {               # uninitialized object
@@ -862,7 +862,7 @@ summary.pdLogChol <-
 
 #pdSpher <-
 #  ## Constructor for the pdSpher class
-#  function(value = numeric(0), form = NULL, nam = NULL, data = sys.parent())
+#  function(value = numeric(0), form = NULL, nam = NULL, data = parent.frame())
 #{
 #  object <- numeric(0)
 #  class(object) <- c("pdSpher", "pdMat")
@@ -873,7 +873,7 @@ summary.pdLogChol <-
 
 #pdConstruct.pdSpher <-
 #  function(object, value = numeric(0), form = formula(object),
-#	   nam = Names(object), data = sys.parent())
+#	   nam = Names(object), data = parent.frame())
 #{
 #  val <- pdConstruct.pdMat(object, value, form, nam, data)
 #  if (length(val) == 0) {			# uninitiliazed object
@@ -926,7 +926,7 @@ summary.pdLogChol <-
 
 #pdMatrixLog <-
 #  ## Constructor for the pdMatrixLog class
-#  function(value = numeric(0), form = NULL, nam = NULL, data = sys.parent())
+#  function(value = numeric(0), form = NULL, nam = NULL, data = parent.frame())
 #{
 #  object <- numeric(0)
 #  class(object) <- c("pdMatrixLog", "pdMat")
@@ -937,7 +937,7 @@ summary.pdLogChol <-
 
 #pdConstruct.pdMatrixLog <-
 #  function(object, value = numeric(0), form = formula(object),
-#	   nam = Names(object), data = sys.parent())
+#	   nam = Names(object), data = parent.frame())
 #{
 #  val <- pdConstruct.pdMat(object, value, form, nam, data)
 #  if (length(val) == 0) {               # uninitialized object
@@ -1002,7 +1002,7 @@ summary.pdLogChol <-
 
 #pdGivens <-
 #  ## Constructor for the pdGivens class
-#  function(value = numeric(0), form = NULL, nam = NULL, data = sys.parent())
+#  function(value = numeric(0), form = NULL, nam = NULL, data = parent.frame())
 #{
 #  object <- numeric(0)
 #  class(object) <- c("pdGivens", "pdMat")
@@ -1013,7 +1013,7 @@ summary.pdLogChol <-
 
 #pdConstruct.pdGivens <-
 #  function(object, value = numeric(0), form = formula(object),
-#	   nam = Names(object), data = sys.parent())
+#	   nam = Names(object), data = parent.frame())
 #{
 #  val <- pdConstruct.pdMat(object, value, form, nam, data)
 #  if (length(val) == 0) {               # uninitiliazed object
@@ -1094,7 +1094,7 @@ summary.pdLogChol <-
 
 pdNatural <-
   ## Constructor for the pdNatural class
-  function(value = numeric(0), form = NULL, nam = NULL, data = sys.frame(sys.parent()))
+  function(value = numeric(0), form = NULL, nam = NULL, data = parent.frame())
 {
   object <- numeric(0)
   class(object) <- c("pdNatural", "pdMat")
@@ -1105,7 +1105,7 @@ pdNatural <-
 
 pdConstruct.pdNatural <-
   function(object, value = numeric(0), form = formula(object),
-	   nam = Names(object), data = sys.frame(sys.parent()), ...)
+	   nam = Names(object), data = parent.frame(), ...)
 {
   val <- pdConstruct.pdMat(object, value, form, nam, data)
   if (length(val) == 0) {               # uninitiliazed object
@@ -1248,7 +1248,7 @@ summary.pdNatural <-
 
 pdDiag <-
   ## Constructor for the pdDiag class
-  function(value = numeric(0), form = NULL, nam = NULL, data = sys.frame(sys.parent()))
+  function(value = numeric(0), form = NULL, nam = NULL, data = parent.frame())
 {
   object <- numeric(0)
   class(object) <- c("pdDiag", "pdMat")
@@ -1273,7 +1273,7 @@ corMatrix.pdDiag <-
 
 pdConstruct.pdDiag <-
   function(object, value = numeric(0), form = formula(object),
-	   nam = Names(object), data = sys.frame(sys.parent()), ...)
+	   nam = Names(object), data = parent.frame(), ...)
 {
   val <- NextMethod()
   if (length(val) == 0) {               # uninitiliazed object
@@ -1377,7 +1377,7 @@ summary.pdDiag <-
 
 pdIdent <-
   ## Constructor for the pdIdent class
-  function(value = numeric(0), form = NULL, nam = NULL, data = sys.frame(sys.parent()))
+  function(value = numeric(0), form = NULL, nam = NULL, data = parent.frame())
 {
   object <- numeric(0)
   class(object) <- c("pdIdent", "pdMat")
@@ -1407,7 +1407,7 @@ corMatrix.pdIdent <-
 
 pdConstruct.pdIdent <-
   function(object, value = numeric(0), form = formula(object),
-	   nam = Names(object), data = sys.frame(sys.parent()), ...)
+	   nam = Names(object), data = parent.frame(), ...)
 {
   val <- NextMethod()
   if (length(val) == 0) {			# uninitialized object
@@ -1515,7 +1515,7 @@ summary.pdIdent <-
 
 pdCompSymm <-
   ## Constructor for the pdCompSymm class
-  function(value = numeric(0), form = NULL, nam = NULL, data = sys.frame(sys.parent()))
+  function(value = numeric(0), form = NULL, nam = NULL, data = parent.frame())
 {
   object <- numeric(0)
   class(object) <- c("pdCompSymm", "pdMat")
@@ -1549,7 +1549,7 @@ corMatrix.pdCompSymm <-
 
 pdConstruct.pdCompSymm <-
   function(object, value = numeric(0), form = formula(object),
-	   nam = Names(object), data = sys.frame(sys.parent()), ...)
+	   nam = Names(object), data = parent.frame(), ...)
 {
   val <- NextMethod()
   if (length(val) == 0) {                # uninitialized object
@@ -1672,7 +1672,7 @@ summary.pdCompSymm <-
 
 pdBlocked <-
   ## Constructor for the pdBlocked class
-  function(value = numeric(0), form = NULL, nam = NULL, data = sys.frame(sys.parent()),
+  function(value = numeric(0), form = NULL, nam = NULL, data = parent.frame(),
 	   pdClass = "pdSymm")
 {
   object <- numeric(0)
@@ -1708,14 +1708,15 @@ corMatrix.pdBlocked <-
 
 pdConstruct.pdBlocked <-
   function(object, value = numeric(0), form = formula(object, TRUE),
-	   nam = Names(object, TRUE), data = sys.frame(sys.parent()),
+	   nam = Names(object, TRUE), data = parent.frame(),
 	   pdClass = "pdSymm", ...)
 {
   if (inherits(value, "pdMat")) {	# constructing from another pdMat
     if (inherits(value, "pdBlocked")) {
       if (length(form) == 0) form <- formula(value, TRUE)
       if (length(nam) == 0) nam <- Names(value, TRUE)
-      if (missing(pdClass)) pdClass <- unlist(lapply(value, data.class))
+      if (missing(pdClass)) ## somewhat dubious (why keep all? / order?):
+          pdClass <- unlist(lapply(value, data.class))
     }
     if (isInitialized(value)) {
       return(pdConstruct(object, as.matrix(value), form, nam, data, pdClass))
@@ -1726,18 +1727,14 @@ pdConstruct.pdBlocked <-
   }
   ## checking validity and consistency of form, nam, and pdClass
   if (!is.null(form)) {
-    if (data.class(form) != "list") {
-      stop(gettextf("'%s' argument must be a list", "form"))
-    }
+    if(!is.list(form)) stop(gettextf("'%s' argument must be a list", "form"))
     nF <- length(form)
   } else {
     nF <- 0
   }
 
   if (!is.null(nam)) {
-    if (data.class(nam) != "list") {
-      stop(gettextf("'%s' argument must be a list", "nam"))
-    }
+    if(!is.list(nam)) stop(gettextf("'%s' argument must be a list", "nam"))
     nN <- length(nam)
     if ((nF > 0) && (nN != nF)) {
       stop(gettextf("'%s' and '%s' arguments have incompatible lengths", "form", "nam"))
@@ -1773,9 +1770,8 @@ pdConstruct.pdBlocked <-
     ## will first do a null initialization when value is a matrix or numeric
     value <- lapply(vector("list", nB), function(el) numeric(0))
   } else {
-    if (data.class(value) != "list") {
+    if (!is.list(value))
       stop("'object' must be a list when not missing, not a matrix, and not numeric")
-    }
     nO <- length(value)
     if ((nB > 1) && (nB != nO)) {
       stop("arguments imply different number of blocks")

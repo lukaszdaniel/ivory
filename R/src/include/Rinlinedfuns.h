@@ -665,7 +665,7 @@ extern inline R_xlen_t Rf_xlength(SEXP s)
 /* regular allocVector() as a special case of allocVector3() with no custom allocator */
 extern inline SEXP Rf_allocVector(SEXPTYPE type, R_xlen_t length = 1)
 {
-    return allocVector3(type, length, nullptr);
+    return Rf_allocVector3(type, length, nullptr);
 }
 
 /* from list.cpp */

@@ -2257,6 +2257,7 @@ HIDDEN void Rf_InitMemory()
     /* Field assignments for R_NilValue must not go through write barrier
        since the write barrier prevents assignments to R_NilValue's fields.
        because of checks for nil */
+#ifndef NOT_YET
     GET_FREE_NODE(R_NilValue);
     RObject::copy_sxpinfo(R_NilValue, UnmarkedNodeTemplate);
     INIT_REFCNT(R_NilValue);
@@ -2267,7 +2268,7 @@ HIDDEN void Rf_InitMemory()
     RObject::set_tag(R_NilValue, R_NilValue);
     RObject::set_attrib(R_NilValue, R_NilValue);
     MARK_NOT_MUTABLE(R_NilValue);
-
+#endif
     R_BCNodeStackBase =
 	(R_bcstack_t *) malloc(R_BCNODESTACKSIZE * sizeof(R_bcstack_t));
     if (R_BCNodeStackBase == nullptr)
@@ -2589,7 +2590,7 @@ SEXP Rf_NewEnvironment(SEXP namelist, SEXP valuelist, SEXP rho)
     RObject::set_frame(newrho, valuelist);
     INCREMENT_REFCNT(valuelist);
     RObject::set_enclos(newrho, CHK(rho));
-    if (rho != NULL)
+    if (rho)
         INCREMENT_REFCNT(rho);
     RObject::set_hashtab(newrho, R_NilValue);
     RObject::set_attrib(newrho, R_NilValue);

@@ -1390,30 +1390,30 @@ HIDDEN SEXP do_asCharacterFactor(SEXP call, SEXP op, SEXP args,
 /* used in attrib.cpp, eval.cpp and unique.cpp */
 SEXP Rf_asCharacterFactor(SEXP x)
 {
-    SEXP ans;
+	SEXP ans;
 
-    if( !inherits2(x, "factor") )
-	error(_("attempting to coerce non-factor"));
+	if (!inherits2(x, "factor"))
+		error(_("attempting to coerce non-factor"));
 
-    R_xlen_t i, n = XLENGTH(x);
-    SEXP labels = getAttrib(x, R_LevelsSymbol);
-    if (TYPEOF(labels) != STRSXP)
-	error(_("malformed factor"));
-    int nl = LENGTH(labels);
-    PROTECT(ans = allocVector(STRSXP, n));
-    for(i = 0; i < n; i++) {
-      int ii = INTEGER_ELT(x, i);
-      if (ii == NA_INTEGER)
-	  SET_STRING_ELT(ans, i, NA_STRING);
-      else if (ii >= 1 && ii <= nl)
-	  SET_STRING_ELT(ans, i, STRING_ELT(labels, ii - 1));
-      else
-	  error(_("malformed factor"));
-    }
-    UNPROTECT(1);
-    return ans;
+	R_xlen_t i, n = XLENGTH(x);
+	SEXP labels = getAttrib(x, R_LevelsSymbol);
+	if (TYPEOF(labels) != STRSXP)
+		error(_("malformed factor"));
+	int nl = LENGTH(labels);
+	PROTECT(ans = allocVector(STRSXP, n));
+	for (i = 0; i < n; i++)
+	{
+		int ii = INTEGER_ELT(x, i);
+		if (ii == NA_INTEGER)
+			SET_STRING_ELT(ans, i, NA_STRING);
+		else if (ii >= 1 && ii <= nl)
+			SET_STRING_ELT(ans, i, STRING_ELT(labels, ii - 1));
+		else
+			error(_("malformed factor"));
+	}
+	UNPROTECT(1);
+	return ans;
 }
-
 
 HIDDEN SEXP do_asatomic(SEXP call, SEXP op, SEXP args, SEXP rho)
 {

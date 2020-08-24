@@ -205,8 +205,8 @@ namespace R
         /* General Cons Cell Attributes */
         static bool gcgen(GCNode *v);
         static void set_gcgen(GCNode *v, bool x);
-        static unsigned int gccls(RObject *v);
-        static void set_gccls(RObject *v, unsigned int x);
+        static unsigned int gccls(RObject *x);
+        static void set_gccls(RObject *x, unsigned int v);
         static GCNode *next_node(GCNode *s);
         static GCNode *prev_node(GCNode *s);
         static void set_next_node(GCNode *s, GCNode *t);
@@ -221,12 +221,12 @@ namespace R
         static constexpr int READY_TO_FINALIZE_MASK = 1;
         static constexpr int FINALIZE_ON_EXIT_MASK = 2;
         static constexpr int WEAKREF_SIZE = 4;
-        static void set_ready_to_finalize(RObject *s);
-        static void clear_ready_to_finalize(RObject *s);
-        static unsigned int is_ready_to_finalize(RObject *s);
-        static void set_finalize_on_exit(RObject *s);
-        static void clear_finalize_on_exit(RObject *s);
-        static unsigned int finalize_on_exit(RObject *s);
+        static void set_ready_to_finalize(RObject *x);
+        static void clear_ready_to_finalize(RObject *x);
+        static unsigned int is_ready_to_finalize(RObject *x);
+        static void set_finalize_on_exit(RObject *x);
+        static void clear_finalize_on_exit(RObject *x);
+        static unsigned int finalize_on_exit(RObject *x);
         static void set_attrib(RObject *x, RObject *v);
         static RObject *attrib(RObject *x);
         static unsigned int named(RObject *x);
@@ -312,8 +312,8 @@ namespace R
         static void set_frame(RObject *x, RObject *v);
         static void set_enclos(RObject *x, RObject *v);
         static void set_hashtab(RObject *x, RObject *v);
-        static unsigned int frame_is_locked(RObject *e);
-        static unsigned int is_global_frame(RObject *e);
+        static unsigned int frame_is_locked(RObject *x);
+        static unsigned int is_global_frame(RObject *x);
         /* Promise Access Methods */
         static RObject *prcode(RObject *x);
         static void set_prcode(RObject *x, RObject *v);
@@ -324,18 +324,18 @@ namespace R
         static void set_prenv(RObject *x, RObject *v);
         static void set_prseen(RObject *x, unsigned int v);
         /* List Access Methods */
-        static RObject *tag(RObject *e);
+        static RObject *tag(RObject *x);
         static void set_tag(RObject *x, RObject *v);
-        static RObject *car0(RObject *e);
+        static RObject *car0(RObject *x);
         static void set_car0(RObject *x, RObject *v);
-        static RObject *extptr_ptr(RObject *e);
+        static RObject *extptr_ptr(RObject *x);
         static void set_extptr_ptr(RObject *x, RObject *v);
-        static RObject *cdr(RObject *e);
+        static RObject *cdr(RObject *x);
         static void set_cdr(RObject *x, RObject *v);
         static constexpr int MISSING_MASK = ((1 << 4) - 1); // = 15 /* reserve 4 bits--only 2 uses now */
         static unsigned int missing(RObject *x);                /* for closure calls */
         static void set_missing(RObject *x, int v);
-        static unsigned int bndcell_tag(RObject *e);
+        static unsigned int bndcell_tag(RObject *x);
         static void set_bndcell_tag(RObject *e, unsigned int v);
         /* External pointer access methods */
         static RObject *extptr_prot(RObject *x);
@@ -369,29 +369,29 @@ namespace R
 
         static constexpr int SPECIAL_SYMBOL_MASK = (1 << 12);
         static constexpr int BASE_SYM_CACHED_MASK = (1 << 13);
-        static void set_base_sym_cached(RObject *b);
-        static void unset_base_sym_cached(RObject *b);
-        static unsigned int base_sym_cached(RObject *b);
-        static unsigned int no_special_symbols(RObject *b);
-        static void set_no_special_symbols(RObject *b);
-        static unsigned int is_special_symbol(RObject *b);
-        static void set_special_symbol(RObject *b);
-        static void unset_no_special_symbols(RObject *b);
-        static void unset_special_symbol(RObject *b);
+        static void set_base_sym_cached(RObject *x);
+        static void unset_base_sym_cached(RObject *x);
+        static unsigned int base_sym_cached(RObject *x);
+        static unsigned int no_special_symbols(RObject *x);
+        static void set_no_special_symbols(RObject *x);
+        static unsigned int is_special_symbol(RObject *x);
+        static void set_special_symbol(RObject *x);
+        static void unset_no_special_symbols(RObject *x);
+        static void unset_special_symbol(RObject *x);
         static constexpr int ACTIVE_BINDING_MASK = (1 << 15);
         static constexpr int BINDING_LOCK_MASK = (1 << 14);
         static constexpr int SPECIAL_BINDING_MASK = (ACTIVE_BINDING_MASK | BINDING_LOCK_MASK);
-        static unsigned int is_active_binding(RObject *b);
-        static unsigned int binding_is_locked(RObject *b);
-        static void lock_binding(RObject *b);
-        static void unlock_binding(RObject *b);
-        static void set_active_binding_bit(RObject *b);
-        static double bndcell_dval(RObject *v);
-        static int bndcell_ival(RObject *v);
-        static int bndcell_lval(RObject *v);
-        static void set_bndcell_dval(RObject *v, double x);
-        static void set_bndcell_ival(RObject *v, int x);
-        static void set_bndcell_lval(RObject *v, int x);
+        static unsigned int is_active_binding(RObject *x);
+        static unsigned int binding_is_locked(RObject *x);
+        static void lock_binding(RObject *x);
+        static void unlock_binding(RObject *x);
+        static void set_active_binding_bit(RObject *x);
+        static double bndcell_dval(RObject *x);
+        static int bndcell_ival(RObject *x);
+        static int bndcell_lval(RObject *x);
+        static void set_bndcell_dval(RObject *x, double v);
+        static void set_bndcell_ival(RObject *x, int v);
+        static void set_bndcell_lval(RObject *x, int v);
     };
 #if 0
     class Symbol : public RObject

@@ -28,39 +28,39 @@ namespace R
 {
 
     /* General Cons Cell Attributes */
-    bool RObject::gcgen(RObject *v) { return v && v->m_gcgen; }
+    bool RObject::gcgen(RObject *x) { return x && x->m_gcgen; }
 
-    void RObject::set_gcgen(RObject *v, bool x)
+    void RObject::set_gcgen(RObject *x, bool v)
     {
-        if (!v)
+        if (!x)
             return;
-        v->m_gcgen = x;
+        x->m_gcgen = v;
     }
-    unsigned int RObject::gccls(RObject *v) { return v ? v->m_gcclass : 0; }
+    unsigned int RObject::gccls(RObject *x) { return x ? x->m_gcclass : 0; }
 
-    void RObject::set_gccls(RObject *v, unsigned int x)
+    void RObject::set_gccls(RObject *x, unsigned int v)
     {
-        if (!v)
+        if (!x)
             return;
-        v->m_gcclass = x;
-    }
-
-    RObject *RObject::next_node(RObject *s) { return s ? s->gengc_next_node : nullptr; }
-
-    RObject *RObject::prev_node(RObject *s) { return s ? s->gengc_prev_node : nullptr; }
-
-    void RObject::set_next_node(RObject *s, RObject *t)
-    {
-        if (!s)
-            return;
-        s->gengc_next_node = t;
+        x->m_gcclass = v;
     }
 
-    void RObject::set_prev_node(RObject *s, RObject *t)
+    RObject *RObject::next_node(RObject *x) { return x ? x->gengc_next_node : nullptr; }
+
+    RObject *RObject::prev_node(RObject *x) { return x ? x->gengc_prev_node : nullptr; }
+
+    void RObject::set_next_node(RObject *x, RObject *t)
     {
-        if (!s)
+        if (!x)
             return;
-        s->gengc_prev_node = t;
+        x->gengc_next_node = t;
+    }
+
+    void RObject::set_prev_node(RObject *x, RObject *t)
+    {
+        if (!x)
+            return;
+        x->gengc_prev_node = t;
     }
 
     void RObject::copy_sxpinfo(RObject *x, RObject &y)
@@ -83,37 +83,37 @@ namespace R
         x->m_extra = y.m_extra;
     }
 
-    void RObject::set_ready_to_finalize(RObject *s)
+    void RObject::set_ready_to_finalize(RObject *x)
     {
-        if (!s)
+        if (!x)
             return;
-        s->m_gpbits |= READY_TO_FINALIZE_MASK;
+        x->m_gpbits |= READY_TO_FINALIZE_MASK;
     }
 
-    void RObject::clear_ready_to_finalize(RObject *s)
+    void RObject::clear_ready_to_finalize(RObject *x)
     {
-        if (!s)
+        if (!x)
             return;
-        s->m_gpbits &= ~READY_TO_FINALIZE_MASK;
+        x->m_gpbits &= ~READY_TO_FINALIZE_MASK;
     }
 
-    unsigned int RObject::is_ready_to_finalize(RObject *s) { return s ? s->m_gpbits & READY_TO_FINALIZE_MASK : 0; }
+    unsigned int RObject::is_ready_to_finalize(RObject *x) { return x ? x->m_gpbits & READY_TO_FINALIZE_MASK : 0; }
 
-    void RObject::set_finalize_on_exit(RObject *s)
+    void RObject::set_finalize_on_exit(RObject *x)
     {
-        if (!s)
+        if (!x)
             return;
-        s->m_gpbits |= FINALIZE_ON_EXIT_MASK;
+        x->m_gpbits |= FINALIZE_ON_EXIT_MASK;
     }
 
-    void RObject::clear_finalize_on_exit(RObject *s)
+    void RObject::clear_finalize_on_exit(RObject *x)
     {
-        if (!s)
+        if (!x)
             return;
-        s->m_gpbits &= ~FINALIZE_ON_EXIT_MASK;
+        x->m_gpbits &= ~FINALIZE_ON_EXIT_MASK;
     }
 
-    unsigned int RObject::finalize_on_exit(RObject *s) { return s ? (s->m_gpbits & FINALIZE_ON_EXIT_MASK) : 0; }
+    unsigned int RObject::finalize_on_exit(RObject *x) { return x ? (x->m_gpbits & FINALIZE_ON_EXIT_MASK) : 0; }
 
     void RObject::set_attrib(RObject *x, RObject *v)
     {
@@ -372,108 +372,108 @@ namespace R
         }
     }
 
-    void RObject::set_base_sym_cached(RObject *b)
+    void RObject::set_base_sym_cached(RObject *x)
     {
-        if (!b)
+        if (!x)
             return;
-        b->m_gpbits |= BASE_SYM_CACHED_MASK;
+        x->m_gpbits |= BASE_SYM_CACHED_MASK;
     }
-    void RObject::unset_base_sym_cached(RObject *b)
+    void RObject::unset_base_sym_cached(RObject *x)
     {
-        if (!b)
+        if (!x)
             return;
-        b->m_gpbits &= (~BASE_SYM_CACHED_MASK);
-    }
-
-    unsigned int RObject::base_sym_cached(RObject *b) { return b ? (b->m_gpbits & BASE_SYM_CACHED_MASK) : 0; }
-
-    unsigned int RObject::no_special_symbols(RObject *b) { return b ? (b->m_gpbits & SPECIAL_SYMBOL_MASK) : 0; }
-
-    void RObject::set_no_special_symbols(RObject *b)
-    {
-        if (!b)
-            return;
-        b->m_gpbits |= SPECIAL_SYMBOL_MASK;
+        x->m_gpbits &= (~BASE_SYM_CACHED_MASK);
     }
 
-    unsigned int RObject::is_special_symbol(RObject *b) { return b ? (b->m_gpbits & SPECIAL_SYMBOL_MASK) : 0; }
+    unsigned int RObject::base_sym_cached(RObject *x) { return x ? (x->m_gpbits & BASE_SYM_CACHED_MASK) : 0; }
 
-    void RObject::set_special_symbol(RObject *b)
+    unsigned int RObject::no_special_symbols(RObject *x) { return x ? (x->m_gpbits & SPECIAL_SYMBOL_MASK) : 0; }
+
+    void RObject::set_no_special_symbols(RObject *x)
     {
-        if (!b)
+        if (!x)
             return;
-        b->m_gpbits |= SPECIAL_SYMBOL_MASK;
+        x->m_gpbits |= SPECIAL_SYMBOL_MASK;
     }
 
-    void RObject::unset_no_special_symbols(RObject *b)
+    unsigned int RObject::is_special_symbol(RObject *x) { return x ? (x->m_gpbits & SPECIAL_SYMBOL_MASK) : 0; }
+
+    void RObject::set_special_symbol(RObject *x)
     {
-        if (!b)
+        if (!x)
             return;
-        b->m_gpbits &= (~SPECIAL_SYMBOL_MASK);
+        x->m_gpbits |= SPECIAL_SYMBOL_MASK;
     }
 
-    void RObject::unset_special_symbol(RObject *b)
+    void RObject::unset_no_special_symbols(RObject *x)
     {
-        if (!b)
+        if (!x)
             return;
-        b->m_gpbits &= (~SPECIAL_SYMBOL_MASK);
+        x->m_gpbits &= (~SPECIAL_SYMBOL_MASK);
     }
 
-    unsigned int RObject::is_active_binding(RObject *b) { return b ? (b->m_gpbits & ACTIVE_BINDING_MASK) : 0; }
-
-    unsigned int RObject::binding_is_locked(RObject *b) { return b ? (b->m_gpbits & BINDING_LOCK_MASK) : 0; }
-
-    void RObject::lock_binding(RObject *b)
+    void RObject::unset_special_symbol(RObject *x)
     {
-        if (!RObject::is_active_binding(b))
+        if (!x)
+            return;
+        x->m_gpbits &= (~SPECIAL_SYMBOL_MASK);
+    }
+
+    unsigned int RObject::is_active_binding(RObject *x) { return x ? (x->m_gpbits & ACTIVE_BINDING_MASK) : 0; }
+
+    unsigned int RObject::binding_is_locked(RObject *x) { return x ? (x->m_gpbits & BINDING_LOCK_MASK) : 0; }
+
+    void RObject::lock_binding(RObject *x)
+    {
+        if (!RObject::is_active_binding(x))
         {
-            if (RObject::typeof_(b) == SYMSXP)
-                MARK_NOT_MUTABLE(RObject::symvalue(b));
+            if (RObject::typeof_(x) == SYMSXP)
+                MARK_NOT_MUTABLE(RObject::symvalue(x));
             else
-                MARK_NOT_MUTABLE(RObject::car0(b));
+                MARK_NOT_MUTABLE(RObject::car0(x));
         }
-        ((b))->m_gpbits |= BINDING_LOCK_MASK;
+        ((x))->m_gpbits |= BINDING_LOCK_MASK;
     }
 
-    void RObject::unlock_binding(RObject *b)
+    void RObject::unlock_binding(RObject *x)
     {
-        if (!b)
+        if (!x)
             return;
-        b->m_gpbits &= (~BINDING_LOCK_MASK);
+        x->m_gpbits &= (~BINDING_LOCK_MASK);
     }
 
-    void RObject::set_active_binding_bit(RObject *b)
+    void RObject::set_active_binding_bit(RObject *x)
     {
-        if (!b)
+        if (!x)
             return;
-        b->m_gpbits |= ACTIVE_BINDING_MASK;
+        x->m_gpbits |= ACTIVE_BINDING_MASK;
     }
 
-    double RObject::bndcell_dval(RObject *v) { return v ? ((R_bndval_t *)&(v->u.listsxp.carval))->dval : 0; }
+    double RObject::bndcell_dval(RObject *x) { return x ? ((R_bndval_t *)&(x->u.listsxp.carval))->dval : 0; }
 
-    int RObject::bndcell_ival(RObject *v) { return v ? ((R_bndval_t *)&(v->u.listsxp.carval))->ival : 0; }
+    int RObject::bndcell_ival(RObject *x) { return x ? ((R_bndval_t *)&(x->u.listsxp.carval))->ival : 0; }
 
-    int RObject::bndcell_lval(RObject *v) { return v ? ((R_bndval_t *)&(v->u.listsxp.carval))->ival : 0; }
+    int RObject::bndcell_lval(RObject *x) { return x ? ((R_bndval_t *)&(x->u.listsxp.carval))->ival : 0; }
 
-    void RObject::set_bndcell_dval(RObject *v, double x)
+    void RObject::set_bndcell_dval(RObject *x, double v)
     {
-        if (!v)
+        if (!x)
             return;
-        ((R_bndval_t *)&(v->u.listsxp.carval))->dval = x;
+        ((R_bndval_t *)&(x->u.listsxp.carval))->dval = v;
     }
 
-    void RObject::set_bndcell_ival(RObject *v, int x)
+    void RObject::set_bndcell_ival(RObject *x, int v)
     {
-        if (!v)
+        if (!x)
             return;
-        ((R_bndval_t *)&(v->u.listsxp.carval))->ival = x;
+        ((R_bndval_t *)&(x->u.listsxp.carval))->ival = v;
     }
 
-    void RObject::set_bndcell_lval(RObject *v, int x)
+    void RObject::set_bndcell_lval(RObject *x, int v)
     {
-        if (!v)
+        if (!x)
             return;
-        ((R_bndval_t *)&(v->u.listsxp.carval))->ival = x;
+        ((R_bndval_t *)&(x->u.listsxp.carval))->ival = v;
     }
 
 } // namespace R

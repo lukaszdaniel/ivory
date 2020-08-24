@@ -32,7 +32,7 @@
 #include <R_ext/Print.h>
 #include "arithmetic.h"
 
-static SEXP bcEval(SEXP, SEXP, Rboolean);
+static SEXP bcEval(SEXP, SEXP, bool);
 
 /* BC_PROFILING needs to be enabled at build time. It is not enabled
    by default as enabling it disables the more efficient threaded code
@@ -119,40 +119,45 @@ HANDLE ProfileEvent;
    this one is new, we try to add it.  FIXME:  if there are eventually
    too many files for an efficient linear search, do hashing. */
 
-static int getFilenum(const char* filename) {
-    int fnum;
+static int getFilenum(const char *filename)
+{
+	int fnum;
 
-    for (fnum = 0; fnum < R_Line_Profiling-1
-		   && strcmp(filename, R_Srcfiles[fnum]); fnum++);
+	for (fnum = 0; fnum < R_Line_Profiling - 1 && strcmp(filename, R_Srcfiles[fnum]); fnum++)
+		;
 
-    if (fnum == R_Line_Profiling-1) {
-	size_t len = strlen(filename);
-	if ((size_t) fnum >= R_Srcfile_bufcount) { /* too many files */
-	    R_Profiling_Error = 1;
-	    return 0;
+	if (fnum == R_Line_Profiling - 1)
+	{
+		size_t len = strlen(filename);
+		if ((size_t)fnum >= R_Srcfile_bufcount)
+		{ /* too many files */
+			R_Profiling_Error = 1;
+			return 0;
+		}
+		if ((R_len_t)(R_Srcfiles[fnum] - (char *)RAW(R_Srcfiles_buffer) + len + 1) > length(R_Srcfiles_buffer))
+		{
+			/* out of space in the buffer */
+			R_Profiling_Error = 2;
+			return 0;
+		}
+		strcpy(R_Srcfiles[fnum], filename);
+		R_Srcfiles[fnum + 1] = R_Srcfiles[fnum] + len + 1;
+		*(R_Srcfiles[fnum + 1]) = '\0';
+		R_Line_Profiling++;
 	}
-	if ((R_len_t) (R_Srcfiles[fnum] - (char*)RAW(R_Srcfiles_buffer) + len + 1) > length(R_Srcfiles_buffer)) {
-	      /* out of space in the buffer */
-	    R_Profiling_Error = 2;
-	    return 0;
-	}
-	strcpy(R_Srcfiles[fnum], filename);
-	R_Srcfiles[fnum+1] = R_Srcfiles[fnum] + len + 1;
-	*(R_Srcfiles[fnum+1]) = '\0';
-	R_Line_Profiling++;
-    }
 
-    return fnum + 1;
+	return fnum + 1;
 }
 
 /* These, together with sprintf/strcat, are not safe -- we should be
    using snprintf and such and computing needed sizes, but these
    settings are better than what we had. LT */
-
-#define PROFBUFSIZ 10500
-#define PROFITEMMAX  500
-#define PROFLINEMAX (PROFBUFSIZ - PROFITEMMAX)
-
+namespace
+{
+	constexpr size_t PROFBUFSIZ = 10500;
+	constexpr size_t PROFITEMMAX = 500;
+	constexpr size_t PROFLINEMAX = (PROFBUFSIZ - PROFITEMMAX);
+} // namespace
 /* It would also be better to flush the buffer when it gets full,
    even if the line isn't complete. But this isn't possible if we rely
    on writing all line profiling files first.  With these sizes
@@ -160,22 +165,25 @@ static int getFilenum(const char* filename) {
    file is wrong. Maybe writing an overflow marker of some sort would
    be better.  LT */
 
-static void lineprof(char* buf, SEXP srcref)
+static void lineprof(char *buf, SEXP srcref)
 {
-    size_t len;
-    if (srcref && !isNull(srcref) && (len = strlen(buf)) < PROFLINEMAX) {
-	int fnum, line = asInteger(srcref);
-	SEXP srcfile = getAttrib(srcref, R_SrcfileSymbol);
-	const char *filename;
+	size_t len;
+	if (srcref && !isNull(srcref) && (len = strlen(buf)) < PROFLINEMAX)
+	{
+		int fnum, line = asInteger(srcref);
+		SEXP srcfile = getAttrib(srcref, R_SrcfileSymbol);
+		const char *filename;
 
-	if (!srcfile || TYPEOF(srcfile) != ENVSXP) return;
-	srcfile = findVar(install("filename"), srcfile);
-	if (TYPEOF(srcfile) != STRSXP || !length(srcfile)) return;
-	filename = CHAR(STRING_ELT(srcfile, 0));
+		if (!srcfile || TYPEOF(srcfile) != ENVSXP)
+			return;
+		srcfile = findVar(install("filename"), srcfile);
+		if (TYPEOF(srcfile) != STRSXP || !length(srcfile))
+			return;
+		filename = CHAR(STRING_ELT(srcfile, 0));
 
-	if ((fnum = getFilenum(filename)))
-	    snprintf(buf+len, PROFBUFSIZ - len, "%d#%d ", fnum, line);
-    }
+		if ((fnum = getFilenum(filename)))
+			snprintf(buf + len, PROFBUFSIZ - len, "%d#%d ", fnum, line);
+	}
 }
 
 #if !defined(Win32) && defined(HAVE_PTHREAD)
@@ -4112,32 +4120,33 @@ static SEXP seq_int(int n1, int n2)
 
 inline static SEXP GETSTACK_PTR_TAG(R_bcstack_t *s)
 {
-    /* no error checking since only called with tag != 0 */
-    SEXP value;
-    switch (s->tag) {
-    case REALSXP:
-	value = ScalarReal(s->u.dval);
-	break;
-    case INTSXP:
-	value = ScalarInteger(s->u.ival);
-	break;
-    case LGLSXP:
-	value = ScalarLogical(s->u.ival);
-	break;
-#ifdef COMPACT_INTSEQ
-    case INTSEQSXP:
+	/* no error checking since only called with tag != 0 */
+	SEXP value;
+	switch (s->tag)
 	{
-	    int *seqinfo = INTEGER(s->u.sxpval);
-	    value = seq_int(seqinfo[0], seqinfo[1]);
+	case REALSXP:
+		value = ScalarReal(s->u.dval);
+		break;
+	case INTSXP:
+		value = ScalarInteger(s->u.ival);
+		break;
+	case LGLSXP:
+		value = ScalarLogical(s->u.ival);
+		break;
+#ifdef COMPACT_INTSEQ
+	case INTSEQSXP:
+	{
+		int *seqinfo = INTEGER(s->u.sxpval);
+		value = seq_int(seqinfo[0], seqinfo[1]);
 	}
 	break;
 #endif
-    default: /* not reached */
-	value = nullptr;
-    }
-    s->tag = 0;
-    s->u.sxpval = value;
-    return value;
+	default: /* not reached */
+		value = nullptr;
+	}
+	s->tag = 0;
+	s->u.sxpval = value;
+	return value;
 }
 #define GETSTACK_PTR(s) ((s)->tag ? GETSTACK_PTR_TAG(s) : (s)->u.sxpval)
 
@@ -4153,6 +4162,7 @@ inline static SEXP GETSTACK_PTR_TAG(R_bcstack_t *s)
 		__s__->tag = NLNKSXP;     \
 		__s__->u.sxpval = __v__;  \
 	} while (0)
+
 #define SETSTACK_NLNK(i, v) SETSTACK_NLNK_PTR(R_BCNodeStackTop + (i), v)
 
 #ifdef TESTING_WRITE_BARRIER
@@ -4872,16 +4882,16 @@ inline static double (*getMath1Fun(int i, SEXP call))(double) {
 		Builtin1(do_seq_len, install("seq_len"), rho);                   \
 	} while (0)
 
-inline static SEXP getForLoopSeq(int offset, Rboolean &iscompact)
+inline static SEXP getForLoopSeq(int offset, bool &iscompact)
 {
 #ifdef COMPACT_INTSEQ
     R_bcstack_t *s = R_BCNodeStackTop + offset;
     if (s->tag == INTSEQSXP) {
-	iscompact = TRUE;
+	iscompact = true;
 	return s->u.sxpval;
     }
 #endif
-    iscompact = FALSE;
+    iscompact = false;
     return GETSTACK(offset);
 }
 
@@ -6786,7 +6796,7 @@ HIDDEN Rboolean R_BCVersionOK(SEXP s)
 					  (version >= R_bcMinVersion && version <= R_bcVersion));
 }
 
-static SEXP bcEval(SEXP body, SEXP rho, Rboolean useCache)
+static SEXP bcEval(SEXP body, SEXP rho, bool useCache)
 {
   SEXP retvalue = R_NilValue, constants;
   BCODE *pc, *codebase;
@@ -6972,7 +6982,7 @@ static SEXP bcEval(SEXP body, SEXP rho, Rboolean useCache)
     OP(DOLOOPBREAK, 0): findcontext(CTXT_BREAK, rho, R_NilValue);
     OP(STARTFOR, 3):
       {
-	Rboolean iscompact = FALSE;
+	bool iscompact = false;
 	SEXP seq = getForLoopSeq(-1, iscompact);
 	int callidx = GETOP();
 	SEXP symbol = VECTOR_ELT(constants, GETOP());

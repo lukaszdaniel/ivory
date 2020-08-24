@@ -925,8 +925,8 @@ static SEXP findVarLocInFrame(SEXP rho, SEXP symbol, Rboolean *canCache)
     if (rho == R_BaseEnv || rho == R_BaseNamespace)
 	return (SYMVALUE(symbol) == R_UnboundValue) ? R_NilValue : symbol;
 
-    if (rho == R_EmptyEnv)
-	return R_NilValue;
+    if (!rho || rho == R_EmptyEnv)
+        return R_NilValue;
 
     if(IS_USER_DATABASE(rho)) {
 	R_ObjectTable *table;
@@ -1044,8 +1044,8 @@ SEXP Rf_findVarInFrame3(SEXP rho, SEXP symbol, Rboolean doGet)
     if (rho == R_BaseNamespace || rho == R_BaseEnv)
 	return SYMBOL_BINDING_VALUE(symbol);
 
-    if (rho == R_EmptyEnv)
-	return R_UnboundValue;
+    if (!rho || rho == R_EmptyEnv)
+        return R_UnboundValue;
 
     if(IS_USER_DATABASE(rho)) {
 	/* Use the objects function pointer for this symbol. */
@@ -1098,8 +1098,8 @@ static bool existsVarInFrame(SEXP rho, SEXP symbol)
     if (rho == R_BaseNamespace || rho == R_BaseEnv)
 	return SYMBOL_HAS_BINDING(symbol);
 
-    if (rho == R_EmptyEnv)
-	return false;
+    if (!rho || rho == R_EmptyEnv)
+        return false;
 
     if(IS_USER_DATABASE(rho)) {
 	/* Use the objects function pointer for this symbol. */
@@ -1639,8 +1639,8 @@ void Rf_defineVar(SEXP symbol, SEXP value, SEXP rho)
     /* R_DirtyImage should only be set if assigning to R_GlobalEnv. */
     if (rho == R_GlobalEnv) R_DirtyImage = 1;
 
-    if (rho == R_EmptyEnv)
-	error(_("cannot assign values in the empty environment"));
+    if (!rho || rho == R_EmptyEnv)
+        error(_("cannot assign values in the empty environment"));
 
     if(IS_USER_DATABASE(rho)) {
 	R_ObjectTable *table;
@@ -1768,7 +1768,7 @@ static SEXP setVarInFrame(SEXP rho, SEXP symbol, SEXP value)
 
     /* R_DirtyImage should only be set if assigning to R_GlobalEnv. */
     if (rho == R_GlobalEnv) R_DirtyImage = 1;
-    if (rho == R_EmptyEnv) return R_NilValue;
+    if (!rho || rho == R_EmptyEnv) return R_NilValue;
 
     if(IS_USER_DATABASE(rho)) {
 	/* FIXME: This does not behave as described */

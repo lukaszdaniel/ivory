@@ -7371,7 +7371,7 @@ Warning messages:
 > all.equal(x, as.POSIXlt(x))
 [1] TRUE
 > all.equal(x, as.POSIXlt(x, tz = "EST5EDT"))
-[1] "'tzone' attributes are inconsistent"
+[1] "'tzone' attributes are inconsistent ('' and 'EST5EDT')"
 > all.equal(x, x+1e-4)
 [1] TRUE
 > isTRUE(all.equal(x, x+0.002)) # message will depend on representation error
