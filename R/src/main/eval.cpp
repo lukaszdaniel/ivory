@@ -526,7 +526,7 @@ SEXP do_Rprof(SEXP args)
 /* NEEDED: A fixup is needed in browser, because it can trap errors,
  *	and currently does not reset the limit to the right value. */
 
-HIDDEN void R::Rf_check_stack_balance(SEXP op, int save)
+HIDDEN void R::check_stack_balance(SEXP op, int save)
 {
     if(save == R_PPStackTop) return;
     REprintf(_("Warning: stack imbalance in '%s', %d then %d\n"), PRIMNAME(op), save, R_PPStackTop);
@@ -873,7 +873,7 @@ SEXP Rf_eval(SEXP e, SEXP rho)
 }
 
 HIDDEN
-void R::Rf_SrcrefPrompt(const char *prefix, SEXP srcref)
+void R::SrcrefPrompt(const char *prefix, SEXP srcref)
 {
     /* If we have a valid srcref, use it */
     if (srcref && srcref != R_NilValue) {
@@ -1729,7 +1729,7 @@ inline static void R_CleanupEnvir(SEXP rho, SEXP val)
     }
 }
 
-HIDDEN void R::Rf_unpromiseArgs(SEXP pargs)
+HIDDEN void R::unpromiseArgs(SEXP pargs)
 {
     /* This assumes pargs will no longer be references. We could
        double check the refcounts on pargs as a sanity check. */
@@ -1743,7 +1743,7 @@ HIDDEN void R::Rf_unpromiseArgs(SEXP pargs)
     }
 }
 #else
-HIDDEN void R::Rf_unpromiseArgs(SEXP pargs) { }
+HIDDEN void R::unpromiseArgs(SEXP pargs) { }
 #endif
 
 /* Note: GCC will not inline execClosure because it calls setjmp */
@@ -1996,7 +1996,7 @@ SEXP R::R_execMethod(SEXP op, SEXP rho)
 
     /* create a new environment frame enclosed by the lexical
        environment of the method */
-    PROTECT(newrho = Rf_NewEnvironment(R_NilValue, R_NilValue, CLOENV(op)));
+    PROTECT(newrho = NewEnvironment(R_NilValue, R_NilValue, CLOENV(op)));
 
     /* copy the bindings for the formal environment from the top frame
        of the internal environment of the generic call to the new
@@ -2999,7 +2999,7 @@ inline static void COPY_TAG(SEXP to, SEXP from)
    'n' is the number of arguments already evaluated and hence not
    passed to evalArgs and hence to here.
  */
-HIDDEN SEXP R::Rf_evalList(SEXP el, SEXP rho, SEXP call, int n)
+HIDDEN SEXP R::evalList(SEXP el, SEXP rho, SEXP call, int n)
 {
     SEXP head, tail, ev, h, val;
 
@@ -3087,7 +3087,7 @@ HIDDEN SEXP R::Rf_evalList(SEXP el, SEXP rho, SEXP call, int n)
 /* A slight variation of evaluating each expression in "el" in "rho". */
 
 /* used in evalArgs, arithmetic.cpp, seq.cpp */
-HIDDEN SEXP R::Rf_evalListKeepMissing(SEXP el, SEXP rho)
+HIDDEN SEXP R::evalListKeepMissing(SEXP el, SEXP rho)
 {
     SEXP head, tail, ev, h, val;
 
@@ -3162,7 +3162,7 @@ HIDDEN SEXP R::Rf_evalListKeepMissing(SEXP el, SEXP rho)
 /* form below because it is does not cause growth of the pointer */
 /* protection stack, and because it is a little more efficient. */
 
-HIDDEN SEXP R::Rf_promiseArgs(SEXP el, SEXP rho)
+HIDDEN SEXP R::promiseArgs(SEXP el, SEXP rho)
 {
     SEXP ans, h, tail;
 
@@ -3222,7 +3222,7 @@ HIDDEN SEXP R::Rf_promiseArgs(SEXP el, SEXP rho)
 /* Check that each formal is a symbol */
 
 /* used in coerce.cpp */
-HIDDEN void R::Rf_CheckFormals(SEXP ls)
+HIDDEN void R::CheckFormals(SEXP ls)
 {
 	if (isList(ls))
 	{
@@ -3456,7 +3456,7 @@ static SEXP evalArgs(SEXP el, SEXP rho, int dropmissing, SEXP call, int n)
  * immediately, rather than after the call to R_possible_dispatch.
  */
 HIDDEN
-bool R::Rf_DispatchAnyOrEval(SEXP call, SEXP op, const char *generic, SEXP args,
+bool R::DispatchAnyOrEval(SEXP call, SEXP op, const char *generic, SEXP args,
 		      SEXP rho, SEXP *ans, int dropmissing, int argsevald)
 {
     if(R_has_methods(op)) {
@@ -3499,7 +3499,7 @@ bool R::Rf_DispatchAnyOrEval(SEXP call, SEXP op, const char *generic, SEXP args,
  * at large in the world.
  */
 HIDDEN
-bool R::Rf_DispatchOrEval(SEXP call, SEXP op, const char *generic, SEXP args,
+bool R::DispatchOrEval(SEXP call, SEXP op, const char *generic, SEXP args,
 		   SEXP rho, SEXP *ans, int dropmissing, int argsevald)
 {
 /* DispatchOrEval is called very frequently, most often in cases where
@@ -3708,7 +3708,7 @@ static SEXP classForGroupDispatch(SEXP obj)
 }
 
 HIDDEN
-bool R::Rf_DispatchGroup(const char* group, SEXP call, SEXP op, SEXP args, SEXP rho, SEXP *ans)
+bool R::DispatchGroup(const char* group, SEXP call, SEXP op, SEXP args, SEXP rho, SEXP *ans)
 {
     int i, nargs, lwhich, rwhich;
     SEXP lclass, s, t, m, lmeth, lsxp, lgr, newvars;
@@ -5313,7 +5313,7 @@ inline static SEXP getvar(SEXP symbol, SEXP rho,
 {
     SEXP value;
     if (dd)
-	value = Rf_ddfindVar(symbol, rho);
+	value = ddfindVar(symbol, rho);
     else if (vcache) {
 	SEXP cell = GET_BINDING_CELL_CACHE(symbol, rho, vcache, sidx);
 	value = BINDING_VALUE(cell);

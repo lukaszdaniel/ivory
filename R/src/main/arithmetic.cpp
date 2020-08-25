@@ -156,7 +156,7 @@ int R_finite(double x)
 
 /* Arithmetic Initialization */
 
-HIDDEN void R::Rf_InitArithmetic()
+HIDDEN void R::InitArithmetic()
 {
     R_NaInt = std::numeric_limits<int>::min();;
     R_NaReal = R_ValueOfNA();

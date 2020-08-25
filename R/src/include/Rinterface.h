@@ -67,14 +67,14 @@ extern int R_HistorySize;	/* Size of the history file */
 extern int R_RestoreHistory;	/* restore the history file? */
 extern char *R_Home;		    /* Root of the R tree */
 
-# define jump_to_toplevel	Rf_jump_to_toplevel
-# define mainloop		Rf_mainloop
+# define Rf_jump_to_toplevel	jump_to_toplevel
+# define Rf_mainloop		mainloop
 # define onintr			Rf_onintr
-# define onintrNoResume		Rf_onintrNoResume
-NORET void Rf_jump_to_toplevel(void);
-void Rf_mainloop(void);
+# define Rf_onintrNoResume		onintrNoResume
+NORET void jump_to_toplevel(void);
+void mainloop(void);
 void Rf_onintr(void);
-void Rf_onintrNoResume(void);
+void onintrNoResume(void);
 #ifndef DEFN_H_
 extern void* R_GlobalContext;    /* Need opaque pointer type for export */
 #endif

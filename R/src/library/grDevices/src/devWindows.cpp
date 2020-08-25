@@ -56,7 +56,7 @@
 using namespace std;
 
 /* from extra.c */
-extern size_t R::Rf_utf8towcs(wchar_t *wc, const char *s, size_t n);
+extern size_t R::utf8towcs(wchar_t *wc, const char *s, size_t n);
 
 static
 Rboolean GADeviceDriver(pDevDesc dd, const char *display, double width,
@@ -3047,7 +3047,7 @@ static void GA_Text0(double x, double y, const char *str, int enc,
 	    R_CheckStack2(sizeof(wchar_t)*(n+1));
 	    wchar_t wc[n+1];/* only need terminator to debug */
 	    cnt = (enc == CE_UTF8) ?
-		Rf_utf8towcs(wc, str, n+1): mbstowcs(wc, str, n);
+		utf8towcs(wc, str, n+1): mbstowcs(wc, str, n);
 	    /* These macros need to be wrapped in braces */
 	    DRAW(gwdrawstr1(_d, xd->font, xd->fgcolor, pt(x, y),
 			    wc, cnt, hadj));
@@ -3066,7 +3066,7 @@ static void GA_Text0(double x, double y, const char *str, int enc,
 		R_CheckStack2(sizeof(wchar_t)*(n+1));
 		wchar_t wc[n+1];
 		cnt = (enc == CE_UTF8) ?
-		    Rf_utf8towcs(wc, str, n+1): mbstowcs(wc, str, n);
+		    utf8towcs(wc, str, n+1): mbstowcs(wc, str, n);
 		gwdrawstr1(xd->bm2, xd->font, xd->fgcolor, pt(x, y),
 			   wc, cnt, hadj);
 	    } else

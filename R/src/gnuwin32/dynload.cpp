@@ -102,7 +102,7 @@ static void closeLibrary(HINSTANCE handle)
     FreeLibrary(handle);
 }
 
-void R::Rf_InitFunctionHashing()
+void R::InitFunctionHashing()
 {
     R_osDynSymbol->loadLibrary = R_loadLibrary;
     R_osDynSymbol->dlsym = getRoutine;

@@ -730,7 +730,7 @@ int R_SignalHandlers = 1;  /* Exposed in R_interface.h */
 
 const char* get_workspace_name();  /* from startup.cpp */
 
-HIDDEN void R::Rf_BindDomain(char *R_Home)
+HIDDEN void R::BindDomain(char *R_Home)
 {
 #ifdef ENABLE_NLS
     char localedir[PATH_MAX+20];
@@ -875,21 +875,21 @@ void setup_Rmainloop(void)
     /* make sure srand is called before R_tmpnam, PR#14381 */
     srand(TimeToSeed());
 
-    Rf_InitArithmetic();
-    Rf_InitTempDir(); /* must be before InitEd */
-    Rf_InitMemory();
-    Rf_InitStringHash(); /* must be before InitNames */
-    Rf_InitBaseEnv();
-    Rf_InitNames(); /* must be after InitBaseEnv to use R_EmptyEnv */
+    InitArithmetic();
+    InitTempDir(); /* must be before InitEd */
+    InitMemory();
+    InitStringHash(); /* must be before InitNames */
+    InitBaseEnv();
+    InitNames(); /* must be after InitBaseEnv to use R_EmptyEnv */
     InitParser();  /* must be after InitMemory, InitNames */
-    Rf_InitGlobalEnv();
+    InitGlobalEnv();
     InitDynload();
-    Rf_InitOptions();
-    Rf_InitEd();
-    Rf_InitGraphics();
-    Rf_InitTypeTables(); /* must be before InitS3DefaultTypes */
-    Rf_InitS3DefaultTypes();
-    Rf_PrintDefaults();
+    InitOptions();
+    InitEd();
+    InitGraphics();
+    InitTypeTables(); /* must be before InitS3DefaultTypes */
+    InitS3DefaultTypes();
+    PrintDefaults();
 
     R_Is_Running = 1;
     R_check_locale();
@@ -1118,7 +1118,7 @@ void run_Rmainloop(void)
     end_Rmainloop(); /* must go here */
 }
 
-void Rf_mainloop(void)
+void mainloop(void)
 {
     setup_Rmainloop();
     run_Rmainloop();

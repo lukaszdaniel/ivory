@@ -111,7 +111,7 @@ static void editor_load_file(editor c, const char *name, int enc)
 
     if(enc == CE_UTF8) {
 	wchar_t wname[MAX_PATH+1];
-	Rf_utf8towcs(wname, name, MAX_PATH+1);
+	utf8towcs(wname, name, MAX_PATH+1);
 	f = R_wfopen(wname, L"r");
 	reEnc2(name, tname, MAX_PATH+1, CE_UTF8, CE_NATIVE, 3);
 	sname = tname;
@@ -160,7 +160,7 @@ static void editor_save_file(editor c, const char *name, int enc)
     else {
 	if(enc == CE_UTF8) {
 	    wchar_t wname[MAX_PATH+1];
-	    Rf_utf8towcs(wname, name, MAX_PATH+1);
+	    utf8towcs(wname, name, MAX_PATH+1);
 	    reEnc2(name, tname, MAX_PATH+1, CE_UTF8, CE_NATIVE, 3);
 	    sname = tname;
 	    f = R_wfopen(wname, L"w");

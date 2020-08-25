@@ -72,7 +72,7 @@ using namespace R;
 static char *DefaultFileName;
 static int  EdFileUsed = 0;
 
-HIDDEN void R::Rf_InitEd()
+HIDDEN void R::InitEd()
 {
 #ifdef _WIN32
     DefaultFileName = R_tmpnam2("Redit", R_TempDir, ".R");
@@ -81,7 +81,7 @@ HIDDEN void R::Rf_InitEd()
 #endif
 }
 
-void R::Rf_CleanEd()
+void R::CleanEd()
 {
     if (EdFileUsed)
         unlink(DefaultFileName);

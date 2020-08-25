@@ -1089,7 +1089,7 @@ static BBOX RenderStr(const char *str, int draw, mathContext *mc,
 	    const char *p = str;
 	    mbstate_t mb_st;
 	    mbs_init(&mb_st);
-	    while ((used = Rf_mbrtowc(&wc, p, n, &mb_st)) > 0) {
+	    while ((used = Mbrtowc(&wc, p, n, &mb_st)) > 0) {
 		/* On Windows could have sign extension here */
 		glyphBBox = GlyphBBox((unsigned int) wc, gc, dd);
 		resultBBox = CombineBBoxes(resultBBox, glyphBBox);
@@ -1153,7 +1153,7 @@ static BBOX RenderNumber(SEXP expr, int draw, mathContext *mc,
 {
     BBOX bbox;
     FontType prevfont = SetFont(PlainFont, gc);
-    Rf_PrintDefaults();
+    PrintDefaults();
     bbox = RenderStr(CHAR(asChar(expr)), draw, mc, gc, dd);
     SetFont(prevfont, gc);
     return bbox;

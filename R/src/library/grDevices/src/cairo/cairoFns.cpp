@@ -1181,7 +1181,7 @@ static void PangoCairo_MetricInfo(int c, const pGEcontext gc,
 
     if (Unicode) {
         const char *textstr; 
-	Rf_ucstoutf8(str, (unsigned int) c);
+	ucstoutf8(str, (unsigned int) c);
         /* Unicode == 2 means we have a Unicode point */
         if (Unicode > 1 && gc->fontface == 5 && !xd->usePUA) {
             textstr = utf8Toutf8NoPUA(str);
@@ -1538,7 +1538,7 @@ static void Cairo_MetricInfo(int c, pGEcontext gc,
 
     if (Unicode) {
         const char *textstr;
-	Rf_ucstoutf8(str, (unsigned int) c);
+	ucstoutf8(str, (unsigned int) c);
 	if (Unicode > 1 && gc->fontface == 5 &&
 	    dd->wantSymbolUTF8 == NA_LOGICAL &&
 	    strcmp(xd->symbolfamily, "Symbol") != 0) {

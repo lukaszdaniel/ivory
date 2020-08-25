@@ -138,7 +138,7 @@ static char *expandcmd(const char *cmd, int whole)
    with the hThread handle closed.
 */
 
-extern size_t R::Rf_utf8towcs(wchar_t *wc, const char *s, size_t n);
+extern size_t R::utf8towcs(wchar_t *wc, const char *s, size_t n);
 
 static void pcreate(const char* cmd, cetype_t enc,
 		      int newconsole, int visible,
@@ -324,7 +324,7 @@ static void pcreate(const char* cmd, cetype_t enc,
     if(enc == CE_UTF8) {
 	int n = strlen(ecmd); /* max no of chars */
 	wchar_t wcmd[n+1];
-	Rf_utf8towcs(wcmd, ecmd, n+1);
+	utf8towcs(wcmd, ecmd, n+1);
 	ret = CreateProcessW(nullptr, wcmd, &sa, &sa, TRUE, flags,
 			     nullptr, nullptr, &wsi, &(pi->pi));
     } else

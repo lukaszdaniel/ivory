@@ -78,7 +78,7 @@ HIDDEN SEXP R::mkPRIMSXP(int offset, int eval)
 /*  mkCLOSXP - return a closure with formals f,  */
 /*             body b, and environment rho       */
 
-HIDDEN SEXP R::Rf_mkCLOSXP(SEXP formals, SEXP body, SEXP rho)
+HIDDEN SEXP R::mkCLOSXP(SEXP formals, SEXP body, SEXP rho)
 {
     SEXP c;
     PROTECT(formals);
@@ -136,7 +136,7 @@ static bool isDDName(SEXP name)
     return false;
 }
 
-HIDDEN SEXP R::Rf_mkSYMSXP(SEXP name, SEXP value)
+HIDDEN SEXP R::mkSYMSXP(SEXP name, SEXP value)
 {
     PROTECT(name);
     PROTECT(value);

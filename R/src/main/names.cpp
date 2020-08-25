@@ -1058,7 +1058,7 @@ HIDDEN SEXP do_primitive(SEXP call, SEXP op, SEXP args, SEXP env)
     return prim;
 }
 
-HIDDEN int R::Rf_StrToInternal(const char *s)
+HIDDEN int R::StrToInternal(const char *s)
 {
     for (int i = 0; R_FunTab[i].name; i++)
         if (streql(s, R_FunTab[i].name))
@@ -1186,7 +1186,7 @@ static SEXP mkSymMarker(SEXP pname)
 }
 
 /* initialize the symbol table */
-HIDDEN void R::Rf_InitNames()
+HIDDEN void R::InitNames()
 {
     /* allocate the symbol table */
     if (!(R_SymbolTable = (SEXP *) calloc(HSIZE, sizeof(SEXP))))

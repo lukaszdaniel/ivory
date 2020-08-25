@@ -194,7 +194,7 @@ HIDDEN SEXP do_deparse(SEXP call, SEXP op, SEXP args, SEXP rho)
 }
 
 // deparse1() version *looking* at getOption("deparse.max.lines")
-SEXP R::Rf_deparse1m(SEXP call, bool abbrev, int opts)
+SEXP R::deparse1m(SEXP call, bool abbrev, int opts)
 {
     bool backtick = true;
     int old_bl = R_BrowseLines,
@@ -208,7 +208,7 @@ SEXP R::Rf_deparse1m(SEXP call, bool abbrev, int opts)
 }
 
 // deparse1() version with R_BrowseLines := 0
-SEXP R::Rf_deparse1(SEXP call, bool abbrev, int opts)
+SEXP R::deparse1(SEXP call, bool abbrev, int opts)
 {
     bool backtick = true;
     int old_bl = R_BrowseLines;
@@ -222,7 +222,7 @@ SEXP R::Rf_deparse1(SEXP call, bool abbrev, int opts)
 
 /* used for language objects in print() */
 HIDDEN
-SEXP R::Rf_deparse1w(SEXP call, bool abbrev, int opts)
+SEXP R::deparse1w(SEXP call, bool abbrev, int opts)
 {
     bool backtick = true;
     return deparse1WithCutoff(call, abbrev, R_print.cutoff, backtick, opts, -1);
@@ -348,14 +348,14 @@ SEXP R::deparse1line_(SEXP call, bool abbrev, int opts)
     return(temp);
 }
 
-SEXP R::Rf_deparse1line(SEXP call, bool abbrev)
+SEXP R::deparse1line(SEXP call, bool abbrev)
 {
     return deparse1line_(call, abbrev, SIMPLEDEPARSE);
 }
 
 
 // called only from ./errors.cpp  for calls in warnings and errors :
-HIDDEN SEXP R::Rf_deparse1s(SEXP call)
+HIDDEN SEXP R::deparse1s(SEXP call)
 {
    bool backtick = true;
    return

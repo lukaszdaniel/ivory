@@ -252,7 +252,7 @@ inline static bool sequal(SEXP x, const R_xlen_t &i, SEXP y, const R_xlen_t &j)
 	/* another pre-test to avoid the call to Seql */
 	if (IS_CACHED(xi) && IS_CACHED(yj) && ENC_KNOWN(xi) == ENC_KNOWN(yj))
 		return false;
-	return Rf_Seql(xi, yj);
+	return Seql(xi, yj);
 }
 
 static hlen rawhash(SEXP x, const R_xlen_t &indx, HashData &d)

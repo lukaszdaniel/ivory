@@ -912,7 +912,8 @@ int Rf_utf8toAdobeSymbol(char *out, const char *in);
 const char *Rf_utf8Toutf8NoPUA(const char *in);
 const char *Rf_utf8ToLatin1AdobeSymbol2utf8(const char *in, Rboolean usePUA);
 /* Translates Unicode point to UTF-8 */
-size_t Rf_ucstoutf8(char *s, const unsigned int c);
+#define Rf_ucstoutf8 ucstoutf8
+size_t ucstoutf8(char *s, const unsigned int c);
 
 #ifdef __cplusplus
 } //extern "C"

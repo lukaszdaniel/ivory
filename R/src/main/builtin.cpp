@@ -36,7 +36,7 @@
 using namespace R;
 
 HIDDEN
-R_xlen_t R::Rf_asVecSize(SEXP x)
+R_xlen_t R::asVecSize(SEXP x)
 {
     if (isVectorAtomic(x) && LENGTH(x) >= 1) {
 	switch (TYPEOF(x)) {

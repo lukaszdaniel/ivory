@@ -75,7 +75,7 @@ static void pp(int pre)
 
 static const char *typename_(SEXP v)
 {
-	return Rf_sexptype2char(TYPEOF(v)); // -> memory.cpp
+	return sexptype2char(TYPEOF(v)); // -> memory.cpp
 }
 
 static void inspect_tree(int, SEXP, int, int);

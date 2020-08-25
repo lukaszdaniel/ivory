@@ -132,7 +132,7 @@ int R_SelectEx(int  n,  fd_set  *readfds,  fd_set  *writefds,
 	return select(n, readfds, writefds, exceptfds, timeout);
     else {
 	volatile sel_intr_handler_t myintr = intr != nullptr ?
-	    intr : onintr;
+	    intr : Rf_onintr;
 	volatile int old_interrupts_suspended = R_interrupts_suspended;
 	volatile double base_time = currentTime();
 	struct timeval tm;
@@ -343,7 +343,7 @@ fd_set *R_checkActivityEx(int usec, int ignore_stdin, void (*intr)(void))
 
     if (R_interrupts_pending) {
 	if (intr != nullptr) intr();
-	else onintr();
+	else Rf_onintr();
     }
 
     /* Solaris (but not POSIX) requires these times to be normalized.
@@ -935,7 +935,7 @@ HIDDEN void R::set_rl_word_breaks(const char *str)
 #else
 static void handleInterrupt(void)
 {
-	Rf_onintrNoResume();
+	onintrNoResume();
 }
 #endif /* HAVE_LIBREADLINE */
 

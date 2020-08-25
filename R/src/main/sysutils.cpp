@@ -1002,7 +1002,7 @@ const char *Rf_translateChar(SEXP x)
 }
 
 /* Variant which must work, used for file paths, including devices */
-const char *R::Rf_translateCharFP(SEXP x)
+const char *R::translateCharFP(SEXP x)
 {
     if(TYPEOF(x) != CHARSXP)
 	error(_("'%s' function must be called on a CHARSXP, but got '%s'"),
@@ -1022,7 +1022,7 @@ const char *R::Rf_translateCharFP(SEXP x)
 }
 
 /* Variant which may return nullptr, used for file paths */
-HIDDEN const char *R::Rf_translateCharFP2(SEXP x)
+HIDDEN const char *R::translateCharFP2(SEXP x)
 {
     if(TYPEOF(x) != CHARSXP)
 	error(_("'%s' function must be called on a CHARSXP, but got '%s'"),
@@ -1149,7 +1149,7 @@ next_char:
 }
 
 /* Variant which does not return escaped string */
-HIDDEN const char *R::Rf_trCharUTF8(SEXP x)
+HIDDEN const char *R::trCharUTF8(SEXP x)
 {
     void *obj;
     const char *inbuf, *ans = CHAR(x);
@@ -1236,7 +1236,7 @@ static void *latin1_wobj = nullptr, *utf8_wobj=nullptr;
 /* This may return a R_alloc-ed result, so the caller has to manage the
    R_alloc stack */
 HIDDEN /* but not hidden on Windows, where it was used in tcltk.cpp */
-const wchar_t *R::Rf_wtransChar(SEXP x)
+const wchar_t *R::wtransChar(SEXP x)
 {
     void * obj;
     const char *inbuf, *ans = CHAR(x), *from;
@@ -1592,7 +1592,7 @@ static constexpr char UNICODE[] = "UCS-4LE";
 #endif
 
 /* used in gram.cpp and devX11.cpp */
-size_t R::Rf_ucstomb(char *s, const unsigned int wc)
+size_t R::ucstomb(char *s, const unsigned int wc)
 {
     char     buf[MB_CUR_MAX+1];
     void    *cd = nullptr ;
@@ -1646,7 +1646,7 @@ size_t R::Rf_ucstomb(char *s, const unsigned int wc)
 }
 
 /* used in plot.cpp for non-UTF-8 MBCS */
-HIDDEN size_t R::Rf_mbtoucs(unsigned int *wc, const char *s, size_t n)
+HIDDEN size_t R::mbtoucs(unsigned int *wc, const char *s, size_t n)
 {
     unsigned int  wcs[2];
     char     buf[16];
@@ -1684,7 +1684,7 @@ HIDDEN size_t R::Rf_mbtoucs(unsigned int *wc, const char *s, size_t n)
 }
 
 /* made available for use in graphics devices */
-size_t Rf_ucstoutf8(char *s, const unsigned int wc)
+size_t ucstoutf8(char *s, const unsigned int wc)
 {
     char     buf[16];
     void    *cd = nullptr ;
@@ -1860,7 +1860,7 @@ void R::R_reInitTempDir(int die_on_fail)
     }
 }
 
-HIDDEN void R::Rf_InitTempDir() {
+HIDDEN void R::InitTempDir() {
     R_reInitTempDir(/* die_on_fail = */ TRUE);
 }
 

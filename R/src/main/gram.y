@@ -1991,10 +1991,10 @@ static int KeywordLookup(const char *s)
 			PRESERVE_SV(yylval = mkNA());
 			break;
 		    case 2:
-			PRESERVE_SV(yylval = R::Rf_mkTrue());
+			PRESERVE_SV(yylval = R::mkTrue());
 			break;
 		    case 3:
-			PRESERVE_SV(yylval = R::Rf_mkFalse());
+			PRESERVE_SV(yylval = R::mkFalse());
 			break;
 		    case 4:
 			PRESERVE_SV(yylval = allocVector(REALSXP, 1));
@@ -2075,14 +2075,14 @@ static SEXP mkNA(void)
     return t;
 }
 
-HIDDEN SEXP R::Rf_mkTrue(void)
+HIDDEN SEXP R::mkTrue(void)
 {
     SEXP s = allocVector(LGLSXP, 1);
     LOGICAL(s)[0] = 1;
     return s;
 }
 
-SEXP R::Rf_mkFalse(void)
+SEXP R::mkFalse(void)
 {
     SEXP s = allocVector(LGLSXP, 1);
     LOGICAL(s)[0] = 0;
@@ -2987,7 +2987,7 @@ static int SpecialValue(int c)
 }
 
 /* return 1 if name is a valid name 0 otherwise */
-HIDDEN bool R::Rf_isValidName(const char *name)
+HIDDEN bool R::isValidName(const char *name)
 {
     const char *p = name;
 

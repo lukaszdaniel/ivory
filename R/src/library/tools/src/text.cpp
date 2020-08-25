@@ -34,7 +34,7 @@ using namespace R;
 LibExtern Rboolean mbcslocale;
 namespace R
 {
-	size_t Rf_mbrtowc(wchar_t *wc, const char *s, size_t n, mbstate_t *ps);
+	size_t Mbrtowc(wchar_t *wc, const char *s, size_t n, mbstate_t *ps);
 }
 
 /* .Call, so manages R_alloc stack */
@@ -100,7 +100,7 @@ SEXP delim_match(SEXP x, SEXP delims)
 	    else if(c == '%') {
 		while((c != '\0') && (c != '\n')) {
 		    if(mbcslocale) {
-			used = (int) Rf_mbrtowc(nullptr, s, MB_CUR_MAX, &mb_st);
+			used = (int) Mbrtowc(nullptr, s, MB_CUR_MAX, &mb_st);
 			if(used == 0) break;
 			s += used; c = *s;
 		    } else
@@ -124,7 +124,7 @@ SEXP delim_match(SEXP x, SEXP delims)
 		delim_depth++;
 	    }
 	    if(mbcslocale) {
-		used = (int) Rf_mbrtowc(nullptr, s, MB_CUR_MAX, &mb_st);
+		used = (int) Mbrtowc(nullptr, s, MB_CUR_MAX, &mb_st);
 		if(used == 0) break;
 		s += used;
 	    } else

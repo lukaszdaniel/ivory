@@ -182,7 +182,7 @@ int Rf_GetOptionDigits(void)
 }
 
 HIDDEN
-int R::Rf_GetOptionCutoff(void)
+int R::GetOptionCutoff(void)
 {
     int w;
     w = asInteger(GetOption1(install("deparse.cutoff")));
@@ -274,7 +274,7 @@ HIDDEN int R::R_SetOptionWarn(int w)
 /* Note that options are stored as a dotted pair list */
 /* This is barely historical, but is also useful. */
 
-HIDDEN void R::Rf_InitOptions(void)
+HIDDEN void R::InitOptions(void)
 {
     SEXP val, v;
     const char *p = nullptr;

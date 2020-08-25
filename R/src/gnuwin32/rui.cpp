@@ -413,7 +413,7 @@ static void menukill(control m)
 static void menukillall(control m)
 {
     consolenewline(RConsole);
-    Rf_jump_to_toplevel();
+    jump_to_toplevel();
 }
 
 static Rboolean isdebuggerpresent(void)

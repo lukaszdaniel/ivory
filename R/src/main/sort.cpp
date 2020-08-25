@@ -309,7 +309,7 @@ void R_csort(Rcomplex *x, int n)
 }
 
 /* used in platform.cpp */
-HIDDEN void R::Rf_ssort(SEXP *x, int n)
+HIDDEN void R::ssort(SEXP *x, int n)
 {
     SEXP v;
     sort_body(scmp,PROTECT,UNPROTECT(1))
@@ -611,7 +611,7 @@ static void ssort2(SEXP *x, R_xlen_t n, bool decreasing)
 }
 
 /* The meat of sort.int() */
-void R::Rf_sortVector(SEXP s, bool decreasing)
+void R::sortVector(SEXP s, bool decreasing)
 {
     R_xlen_t n = XLENGTH(s);
     if (n >= 2 && (decreasing || isUnsorted(s, FALSE)))

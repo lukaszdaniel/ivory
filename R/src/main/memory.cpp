@@ -210,7 +210,7 @@ inline static void register_bad_sexp_type(SEXP s, int line)
 
 /* also called from typename() in inspect.cpp */
 HIDDEN
-const char *R::Rf_sexptype2char(const SEXPTYPE type) {
+const char *R::sexptype2char(const SEXPTYPE type) {
     switch (type) {
     case NILSXP:	return "NILSXP";
     case SYMSXP:	return "SYMSXP";
@@ -2196,7 +2196,7 @@ NORET static void mem_err_malloc(R_size_t size)
 constexpr int PP_REDZONE_SIZE = 1000L;
 static int R_StandardPPStackSize, R_RealPPStackSize;
 
-HIDDEN void R::Rf_InitMemory()
+HIDDEN void R::InitMemory()
 {
     int gen;
     char *arg;
@@ -2558,7 +2558,7 @@ HIDDEN SEXP CONS_NR(SEXP car, SEXP cdr)
   The valuelist is destructively modified and used as the
   environment's frame.
 */
-SEXP R::Rf_NewEnvironment(SEXP namelist, SEXP valuelist, SEXP rho)
+SEXP R::NewEnvironment(SEXP namelist, SEXP valuelist, SEXP rho)
 {
     SEXP v, n, newrho;
 
@@ -2608,7 +2608,7 @@ SEXP R::Rf_NewEnvironment(SEXP namelist, SEXP valuelist, SEXP rho)
 
 /* mkPROMISE is defined directly do avoid the need to protect its arguments
    unless a GC will actually occur. */
-HIDDEN SEXP R::Rf_mkPROMISE(SEXP expr, SEXP rho)
+HIDDEN SEXP R::mkPROMISE(SEXP expr, SEXP rho)
 {
     SEXP s;
     if (FORCE_GC || NO_FREE_NODES())
@@ -2999,7 +2999,7 @@ SEXP Rf_allocVector3(SEXPTYPE type, R_xlen_t length = 1, R_allocator_t *allocato
 }
 
 /* For future hiding of allocVector(CHARSXP) */
-HIDDEN SEXP R::Rf_allocCharsxp(R_len_t len)
+HIDDEN SEXP R::allocCharsxp(R_len_t len)
 {
     return Rf_allocVector(intCHARSXP, len);
 }
@@ -3353,7 +3353,7 @@ HIDDEN SEXP do_memoryprofile(SEXP call, SEXP op, SEXP args, SEXP env)
 /* "protect" push a single argument onto R_PPStack */
 
 /* In handling a stack overflow we have to be careful not to use
-   PROTECT. error(_("protect(): stack overflow")) would call deparse1,
+   PROTECT. error(_("Rf_protect(): stack overflow")) would call deparse1,
    which uses PROTECT and segfaults.*/
 
 /* However, the traceback creation in the normal error handler also
@@ -3378,7 +3378,7 @@ NORET void R_signal_protect_error(void)
 
     if (R_PPStackSize < R_RealPPStackSize)
 	R_PPStackSize = R_RealPPStackSize;
-    errorcall(R_NilValue, _("protect(): protection stack overflow"));
+    errorcall(R_NilValue, _("Rf_protect(): protection stack overflow"));
 
     cntxt.end(); /* not reached */
 }
@@ -3391,7 +3391,7 @@ NORET void R_signal_unprotect_error(void)
 }
 
 #ifndef INLINE_PROTECT
-SEXP protect(SEXP s)
+SEXP Rf_protect(SEXP s)
 {
     R_CHECK_THREAD;
     if (R_PPStackTop >= R_PPStackSize)
@@ -3455,7 +3455,7 @@ int Rf_isProtected(SEXP s)
 #ifndef INLINE_PROTECT
 void R_ProtectWithIndex(SEXP s, PROTECT_INDEX *pi)
 {
-    protect(s);
+    Rf_protect(s);
     *pi = R_PPStackTop - 1;
 }
 #endif
@@ -3488,7 +3488,7 @@ SEXP R_CollectFromIndex(PROTECT_INDEX i)
     SEXP res;
     int top = R_PPStackTop, j = 0;
     if (i > top) i = top;
-    res = protect(allocVector(VECSXP, top - i));
+    res = Rf_protect(allocVector(VECSXP, top - i));
     while (i < top)
 	SET_VECTOR_ELT(res, j++, R_PPStack[--top]);
     R_PPStackTop = top; /* this includes the protect we used above */
@@ -3497,7 +3497,7 @@ SEXP R_CollectFromIndex(PROTECT_INDEX i)
 #endif
 
 /* "initStack" initialize environment stack */
-HIDDEN void R::Rf_initStack(void)
+HIDDEN void R::initStack(void)
 {
     R_PPStackTop = 0;
 }
@@ -4710,7 +4710,7 @@ void R_StringBuffer::R_FreeStringBufferL()
 /* ======== This needs direct access to gp field for efficiency ======== */
 
 /* this has NA_STRING = NA_STRING */
-HIDDEN bool R::Rf_Seql(SEXP a, SEXP b)
+HIDDEN bool R::Seql(SEXP a, SEXP b)
 {
     /* The only case where pointer comparisons do not suffice is where
       we have two strings in different encodings (which must be

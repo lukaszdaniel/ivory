@@ -4435,7 +4435,7 @@ static void PS_Text0(double x, double y, const char *str, int enc,
 	/*
 	 * CID convert PS encoding != locale encode case
 	 */
-	ucslen = (dd->hasTextUTF8) ? Rf_utf8towcs(nullptr, str, 0) : mbstowcs(nullptr, str, 0);
+	ucslen = (dd->hasTextUTF8) ? utf8towcs(nullptr, str, 0) : mbstowcs(nullptr, str, 0);
 	if (ucslen != (size_t)-1) {
 	    void *cd;
 	    const char  *i_buf; char *o_buf;
@@ -9203,7 +9203,7 @@ static void PDF_Text0(double x, double y, const char *str, int enc,
 	/*
 	 * CID convert  PDF encoding != locale encode case
 	 */
-	ucslen = (dd->hasTextUTF8) ? Rf_utf8towcs(nullptr, str, 0): mbstowcs(nullptr, str, 0);
+	ucslen = (dd->hasTextUTF8) ? utf8towcs(nullptr, str, 0): mbstowcs(nullptr, str, 0);
 	if (ucslen != (size_t)-1) {
 	    void *cd;
 	    const char *i_buf; char *o_buf;

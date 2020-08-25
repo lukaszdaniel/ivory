@@ -671,7 +671,7 @@ void Rf_init_con(Rconnection newconn, const char *description, int enc,
 #endif
 
 #ifdef _WIN32
-size_t R::Rf_utf8towcs(wchar_t *wc, const char *s, size_t n);
+size_t R::utf8towcs(wchar_t *wc, const char *s, size_t n);
 #endif
 
 typedef struct fileconn
@@ -767,7 +767,7 @@ static Rboolean file_open(Rconnection con)
 	    wchar_t wname[2 * (n+1)], wmode[20];
 	    mbstowcs(wmode, mode, 19);
 	    R_CheckStack();
-	    Rf_utf8towcs(wname, name, n+1);
+	    utf8towcs(wname, name, n+1);
 	    fp = _wfopen(wname, wmode);
 	    if(!fp) {
 		warning(_("cannot open file '%ls': %s"), wname, strerror(errno));
@@ -1521,7 +1521,7 @@ static Rboolean pipe_open(Rconnection con)
 	int n = strlen(con->description);
 	wchar_t wname[2 * (n+1)], wmode[10];
 	R_CheckStack();
-	Rf_utf8towcs(wname, con->description, n+1);
+	utf8towcs(wname, con->description, n+1);
 	mbstowcs(wmode, con->mode, 10);
 	fp = _wpopen(wname, wmode);
 	if(!fp) {
@@ -5244,7 +5244,7 @@ void WinCheckUTF8(void)
 
 /* ------------------- admin functions  --------------------- */
 
-HIDDEN void R::Rf_InitConnections()
+HIDDEN void R::InitConnections()
 {
     int i;
     Connections[0] = newterminal("stdin", "r");

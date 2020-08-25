@@ -55,7 +55,7 @@ static void getSystemError(char *buf, int len);
 
 static int computeDLOpenFlag(int asLocal, int now);
 
-HIDDEN void R::Rf_InitFunctionHashing()
+HIDDEN void R::InitFunctionHashing()
 {
     R_osDynSymbol->loadLibrary = loadLibrary;
     R_osDynSymbol->dlsym = R_local_dlsym;

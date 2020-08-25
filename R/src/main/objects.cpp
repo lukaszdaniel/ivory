@@ -373,7 +373,7 @@ R_INLINE static SEXP addS3Var(SEXP vars, SEXP name, SEXP value) {
 }
 
 HIDDEN
-SEXP R::Rf_createS3Vars(SEXP dotGeneric, SEXP dotGroup, SEXP dotClass, SEXP dotMethod,
+SEXP R::createS3Vars(SEXP dotGeneric, SEXP dotGroup, SEXP dotClass, SEXP dotMethod,
 		  SEXP dotGenericCallEnv, SEXP dotGenericDefEnv) {
 
     SEXP v = R_NilValue;
@@ -442,7 +442,7 @@ static SEXP dispatchMethod(SEXP op, SEXP sxp, SEXP dotClass, RCNTXT *cptr, SEXP 
 }
 
 HIDDEN
-bool R::Rf_usemethod(const char *generic, SEXP obj, SEXP call, SEXP args,
+bool R::usemethod(const char *generic, SEXP obj, SEXP call, SEXP args,
 	      SEXP rho, SEXP callrho, SEXP defrho, SEXP *ans)
 {
     SEXP klass, method, sxp;

@@ -145,7 +145,7 @@ static SEXP matchPar_int(const char *tag, SEXP *list, Rboolean exact)
 }
 
 /* unused outside this file */
-HIDDEN SEXP R::Rf_matchPar(const char *tag, SEXP *list)
+HIDDEN SEXP R::matchPar(const char *tag, SEXP *list)
 {
 	return matchPar_int(tag, list, FALSE);
 }
@@ -154,7 +154,7 @@ HIDDEN SEXP R::Rf_matchPar(const char *tag, SEXP *list)
 /* Returns the first partially matching tag found. */
 /* Pattern is a symbol. */
 
-HIDDEN SEXP R::Rf_matchArg(SEXP tag, SEXP *list)
+HIDDEN SEXP R::matchArg(SEXP tag, SEXP *list)
 {
 	return matchPar(CHAR(PRINTNAME(tag)), list);
 }
@@ -163,7 +163,7 @@ HIDDEN SEXP R::Rf_matchArg(SEXP tag, SEXP *list)
 /* Returns the first exactly matching tag found. */
 /* Pattern is a symbol. */
 
-HIDDEN SEXP R::Rf_matchArgExact(SEXP tag, SEXP *list)
+HIDDEN SEXP R::matchArgExact(SEXP tag, SEXP *list)
 {
 	return matchPar_int(CHAR(PRINTNAME(tag)), list, TRUE);
 }
@@ -181,7 +181,7 @@ const auto SET_ARGUSED = SETLEVELS;
 /* Renamed to matchArgs_NR to reflect that it returns a
    non-reference-tracking list */
 
-HIDDEN SEXP R::Rf_matchArgs_NR(SEXP formals, SEXP supplied, SEXP call)
+HIDDEN SEXP R::matchArgs_NR(SEXP formals, SEXP supplied, SEXP call)
 {
     Rboolean seendots;
     int i, arg_i = 0;
@@ -380,7 +380,7 @@ HIDDEN SEXP R::Rf_matchArgs_NR(SEXP formals, SEXP supplied, SEXP call)
 }
 
 /* Use matchArgs_RC if the result might escape into R. */
-HIDDEN SEXP R::Rf_matchArgs_RC(SEXP formals, SEXP supplied, SEXP call)
+HIDDEN SEXP R::matchArgs_RC(SEXP formals, SEXP supplied, SEXP call)
 {
     SEXP args = matchArgs_NR(formals, supplied, call);
     /* it would be better not to build this arglist with CONS_NR in
@@ -430,7 +430,7 @@ inline static void patchArgument(SEXP suppliedSlot, SEXP name, fstype_t *farg, S
     SETCAR(suppliedSlot, mkPROMISE(name, cloenv));
 }
 
-HIDDEN SEXP R::Rf_patchArgsByActuals(SEXP formals, SEXP supplied, SEXP cloenv)
+HIDDEN SEXP R::patchArgsByActuals(SEXP formals, SEXP supplied, SEXP cloenv)
 {
     int i, seendots, farg_i;
     SEXP f, a, b, prsupplied;

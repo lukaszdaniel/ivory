@@ -138,7 +138,7 @@ const char *Rf_EncodeInteger(int x, int w)
 }
 
 HIDDEN
-const char *R::Rf_EncodeRaw(Rbyte x, const char *prefix)
+const char *R::EncodeRaw(Rbyte x, const char *prefix)
 {
 	static char buff[10];
 	sprintf(buff, "%s%02x", prefix, x);
@@ -274,7 +274,7 @@ static const char *EncodeRealDrop0(double x, int w, int d, int e, const char *de
     return out;
 }
 
-HIDDEN SEXP R::Rf_StringFromReal(double x, int &warn)
+HIDDEN SEXP R::StringFromReal(double x, int &warn)
 {
     int w, d, e;
     formatReal(&x, 1, &w, &d, &e, 0);
@@ -284,7 +284,7 @@ HIDDEN SEXP R::Rf_StringFromReal(double x, int &warn)
 
 
 HIDDEN
-const char *R::Rf_EncodeReal2(double x, int w, int d, int e)
+const char *R::EncodeReal2(double x, int w, int d, int e)
 {
     static char buff[NB];
     char fmt[20];
@@ -520,7 +520,7 @@ int R::Rstrlen(SEXP s, int quote)
  */
 
 HIDDEN
-const char *R::Rf_EncodeString(SEXP s, int w, int quote, Rprt_adj justify)
+const char *R::EncodeString(SEXP s, int w, int quote, Rprt_adj justify)
 {
     int b, b0, i, j, cnt;
     const char *p; char *q, buf[11];
@@ -837,7 +837,7 @@ const char *R::Rf_EncodeElement0(SEXP x, R_xlen_t indx, int quote, const char *d
    particularly it is NOT safe to pass the result of EncodeChar as 3rd
    argument to errorcall (errorcall_cpy can be used instead). */
 //HIDDEN
-const char *R::Rf_EncodeChar(SEXP x)
+const char *R::EncodeChar(SEXP x)
 {
     return EncodeString(x, 0, 0, Rprt_adj_left);
 }

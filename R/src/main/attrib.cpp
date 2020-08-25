@@ -300,7 +300,7 @@ void Rf_copyMostAttrib(SEXP inp, SEXP ans)
 }
 
 /* version that does not preserve ts information, for subsetting */
-void R::Rf_copyMostAttribNoTs(SEXP inp, SEXP ans)
+void R::copyMostAttribNoTs(SEXP inp, SEXP ans)
 {
     SEXP s;
 
@@ -422,7 +422,7 @@ NORET static void badtsp(void)
 }
 
 HIDDEN
-SEXP R::Rf_tspgets(SEXP vec, SEXP val)
+SEXP R::tspgets(SEXP vec, SEXP val)
 {
     double start, end, frequency;
     int n;
@@ -778,7 +778,7 @@ static SEXP createDefaultClass(SEXP part1, SEXP part2, SEXP part3, SEXP part4)
 
 // called when R's main loop is setup :
 HIDDEN
-void R::Rf_InitS3DefaultTypes()
+void R::InitS3DefaultTypes()
 {
     for(int type = 0; type < MAX_NUM_BASIC_SEXPTYPE; type++) {
 	SEXP part3 = R_NilValue;

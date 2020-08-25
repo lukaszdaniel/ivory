@@ -27,7 +27,7 @@ int main(int ac, char **av)
 {
     R_running_as_main_program = 1;
     Rf_initialize_R(ac, av);
-    Rf_mainloop(); /* does not return */
+    mainloop(); /* does not return */
     return 0;
 }
 

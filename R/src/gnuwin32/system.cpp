@@ -137,7 +137,7 @@ void R_ProcessEvents(void)
     }
     if (UserBreak) {
 	UserBreak = FALSE;
-	onintr();
+	Rf_onintr();
     }
     R_CallBackHook();
     if(R_Tcl_do) R_Tcl_do();
@@ -526,7 +526,7 @@ void R_CleanUp(SA_TYPE saveact, int status, int runLast)
 
 
 extern FILE *R_wfopen(const wchar_t *filename, const wchar_t *mode);
-extern size_t R::Rf_utf8towcs(wchar_t *wc, const char *s, size_t n);
+extern size_t R::utf8towcs(wchar_t *wc, const char *s, size_t n);
 
 int R::R_ShowFiles(int nfile, const char **file, const char **headers,
 		const char *wtitle, bool del, const char *pager)

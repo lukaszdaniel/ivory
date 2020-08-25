@@ -294,7 +294,7 @@ static bool dispatch_asvector(SEXP *x, SEXP call, SEXP rho) {
         op = INTERNAL(install("as.vector"));
     PROTECT(args = list2(*x, mkString("any")));
     /* DispatchOrEval internal generic: as.vector */
-    ans = Rf_DispatchOrEval(call, op, "as.vector", args, rho, x, 0, 1);
+    ans = DispatchOrEval(call, op, "as.vector", args, rho, x, 0, 1);
     UNPROTECT(1);
     return ans;
 }

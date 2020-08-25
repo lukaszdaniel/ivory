@@ -142,7 +142,7 @@ void Rf_endEmbeddedR(int fatal)
     CleanEd();
     R_CleanTempDir();
     if(!fatal){
-	Rf_KillAllDevices();
+	KillAllDevices();
 	AllDevicesKilled = TRUE;
     }
     if(!fatal && R_CollectWarnings)

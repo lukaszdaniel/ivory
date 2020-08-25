@@ -231,6 +231,7 @@ SEXPTYPE
     typedef class R::RObject RList;
 #endif
 #else
+    #define RObject SEXPREC
     typedef struct RObject *SEXP;
 #endif
 
@@ -1042,7 +1043,7 @@ void Rf_errorcall(SEXP, const char *, ...) __attribute__((noreturn));
 #else
 void Rf_errorcall(SEXP, const char *, ...);
 #endif
-void Rf_warningcall(SEXP, const char *, ...);
+void warningcall(SEXP, const char *, ...);
 void Rf_warningcall_immediate(SEXP, const char *, ...);
 
 /* Save/Load Interface */
@@ -1385,12 +1386,12 @@ void R_orderVector1(int *indx, int n, SEXP x,       Rboolean nalast, Rboolean de
 #define unprotect		Rf_unprotect
 #define unprotect_ptr		Rf_unprotect_ptr
 #define VectorToPairList	Rf_VectorToPairList
-#define warningcall		Rf_warningcall
+// #define warningcall		Rf_warningcall
 #define warningcall_immediate	Rf_warningcall_immediate
 #define xlength(x)		Rf_xlength(x)
 #define xlengthgets		Rf_xlengthgets
-
 #endif
+#define Rf_warningcall		warningcall
 
 /* Defining NO_RINLINEDFUNS disables use to simulate platforms where
    this is not available */

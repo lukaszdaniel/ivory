@@ -567,7 +567,7 @@ extern inline void Rf_unprotect(int l)
 
 extern inline void R_ProtectWithIndex(SEXP s, PROTECT_INDEX *pi)
 {
-    protect(s);
+    Rf_protect(s);
     *pi = R_PPStackTop - 1;
 }
 

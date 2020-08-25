@@ -103,7 +103,7 @@ int Rf_ncols(SEXP s) // ~== NCOL(.)  in R
 #ifdef UNUSED
 //const static char type_msg[] = "invalid type passed to internal function\n";
 
-void R::Rf_internalTypeCheck(SEXP call, SEXP s, SEXPTYPE type)
+void R::internalTypeCheck(SEXP call, SEXP s, SEXPTYPE type)
 {
     if (TYPEOF(s) != type) {
 	if (call)
@@ -238,7 +238,7 @@ namespace
 } // namespace
 
 // called from main.cpp
-HIDDEN void R::Rf_InitTypeTables(void) {
+HIDDEN void R::InitTypeTables(void) {
 
     /* Type2Table */
     for (int type = 0; type < MAX_NUM_BASIC_SEXPTYPE; type++) {
@@ -310,7 +310,7 @@ const char *Rf_type2char(const SEXPTYPE t) /* returns a char* */
 }
 
 #ifdef UNUSED
-NORET SEXP R::Rf_type2symbol(SEXPTYPE t)
+NORET SEXP R::type2symbol(SEXPTYPE t)
 {
     // if (t >= 0 && t < MAX_NUM_BASIC_SEXPTYPE) { /* branch not really needed */
 	SEXP res = Type2Table[t].rsymName;
@@ -354,7 +354,7 @@ static constexpr char UCS2ENC[] = "UCS-2LE";
 /* Note: this does not terminate out, as all current uses are to look
  * at 'out' a wchar at a time, and sometimes just one char.
  */
-size_t R::Rf_mbcsToUcs2(const char *in, R_ucs2_t *out, int nout, int enc)
+size_t R::mbcsToUcs2(const char *in, R_ucs2_t *out, int nout, int enc)
 {
     void   *cd = nullptr ;
     const char *i_buf;
@@ -439,7 +439,7 @@ Rboolean Rf_StringFalse(const char* name)
 }
 
 /* used in bind.cpp and options.cpp */
-HIDDEN SEXP R::Rf_EnsureString(SEXP s)
+HIDDEN SEXP R::EnsureString(SEXP s)
 {
     switch(TYPEOF(s)) {
     case SYMSXP:
@@ -485,7 +485,7 @@ void R::Rf_checkArityCall(SEXP op, SEXP args, SEXP call)
 	}
 }
 
-HIDDEN void R::Rf_check1arg(SEXP arg, SEXP call, const char *formal)
+HIDDEN void R::check1arg(SEXP arg, SEXP call, const char *formal)
 {
 	SEXP tag = TAG(arg);
 	if (tag == R_NilValue)
@@ -1211,7 +1211,7 @@ HIDDEN SEXP do_setencoding(SEXP call, SEXP op, SEXP args, SEXP rho)
     return x;
 }
 
-HIDDEN SEXP R::Rf_markKnown(const char *const s, SEXP ref)
+HIDDEN SEXP R::markKnown(const char *const s, SEXP ref)
 {
     cetype_t ienc = CE_NATIVE;
     if(ENC_KNOWN(ref)) {
@@ -1221,7 +1221,7 @@ HIDDEN SEXP R::Rf_markKnown(const char *const s, SEXP ref)
     return mkCharCE(s, ienc);
 }
 
-bool R::Rf_strIsASCII(const char *const str)
+bool R::strIsASCII(const char *const str)
 {
 	const char *p;
 	for (p = str; *p; p++)
@@ -1262,7 +1262,7 @@ HIDDEN R_wchar_t utf8toucs32(wchar_t high, const char * const s)
 
 /* These return the result in wchar_t.  If wchar_t is 16 bit (e.g. UTF-16LE on Windows)
    only the high surrogate is returned; call utf8toutf16low next. */
-HIDDEN size_t R::Rf_utf8toucs(wchar_t *wc, const char * const s)
+HIDDEN size_t R::utf8toucs(wchar_t *wc, const char * const s)
 {
     unsigned int byte;
     wchar_t local, *w;
@@ -1330,7 +1330,7 @@ HIDDEN size_t R::Rf_utf8toucs(wchar_t *wc, const char * const s)
     }
 }
 
-size_t R::Rf_utf8towcs(wchar_t *wc, const char * const s, size_t n)
+size_t R::utf8towcs(wchar_t *wc, const char * const s, size_t n)
 {
     ssize_t m, res = 0;
     const char *t;
@@ -1394,7 +1394,7 @@ static size_t Rwcrtomb32(char *s, R_wchar_t cvalue, size_t n)
    The return value is the number of chars including the terminating null.  If the
    buffer is not big enough, the result is truncated but still null-terminated */
 HIDDEN // but used in windlgs
-size_t R::Rf_wcstoutf8(char *s, const wchar_t *wc, size_t n)
+size_t R::wcstoutf8(char *s, const wchar_t *wc, size_t n)
 {
     size_t m, res=0;
     char *t;
@@ -1416,7 +1416,7 @@ size_t R::Rf_wcstoutf8(char *s, const wchar_t *wc, size_t n)
 }
 
 /* A version that reports failure as an error */
-size_t R::Rf_mbrtowc(wchar_t *wc, const char *s, size_t n, mbstate_t *ps)
+size_t R::Mbrtowc(wchar_t *wc, const char *s, size_t n, mbstate_t *ps)
 {
     size_t used;
 
@@ -1787,7 +1787,7 @@ void *Rf_AdobeSymbol2utf8(char *work, const char *c0, size_t nwork,
 /* Convert UTF8 symbol back to single-byte symbol
  * ASSUME fontface == 5 and 'str' is UTF8, i.e., we are dealing with
  * a UTF8 string that has been through Rf_AdobeSymbol2utf8(usePUA=TRUE)
- * (or through Rf_AdobeSymbol2ucs2() then Rf_ucstoutf8())
+ * (or through Rf_AdobeSymbol2ucs2() then ucstoutf8())
  * i.e., we are dealing with CE_UTF8 string that has come from CE_SYMBOL string.
 */
 int Rf_utf8toAdobeSymbol(char *out, const char *in) {
@@ -2336,7 +2336,7 @@ HIDDEN SEXP do_ICUget(SEXP call, SEXP op, SEXP args, SEXP rho)
 
 /* Caller has to manage the R_alloc stack */
 /* NB: strings can have equal collation weight without being identical */
-HIDDEN int R::Rf_Scollate(SEXP a, SEXP b)
+HIDDEN int R::Scollate(SEXP a, SEXP b)
 {
     if (!collationLocaleSet) {
 	int errsv = errno;      /* OSX may set errno in the operations below. */
@@ -2419,7 +2419,7 @@ static int Rstrcoll(const char *s1, const char *s2)
     return wcscoll(w1, w2);
 }
 
-int R::Rf_Scollate(SEXP a, SEXP b)
+int R::Scollate(SEXP a, SEXP b)
 {
     if(getCharCE(a) == CE_UTF8 || getCharCE(b) == CE_UTF8)
 	return Rstrcoll(translateCharUTF8(a), translateCharUTF8(b));
@@ -2428,7 +2428,7 @@ int R::Rf_Scollate(SEXP a, SEXP b)
 }
 
 # else
-HIDDEN int R::Rf_Scollate(SEXP a, SEXP b)
+HIDDEN int R::Scollate(SEXP a, SEXP b)
 {
     return strcoll(translateChar(a), translateChar(b));
 }

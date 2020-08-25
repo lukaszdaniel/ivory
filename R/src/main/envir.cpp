@@ -705,13 +705,13 @@ static SEXP R_GlobalCache, R_GlobalCachePreserve;
 static SEXP R_BaseNamespaceName;
 static SEXP R_NamespaceSymbol;
 
-HIDDEN void R::Rf_InitBaseEnv()
+HIDDEN void R::InitBaseEnv()
 {
-    R_EmptyEnv = Rf_NewEnvironment(R_NilValue, R_NilValue, R_NilValue);
-    R_BaseEnv = Rf_NewEnvironment(R_NilValue, R_NilValue, R_EmptyEnv);
+    R_EmptyEnv = NewEnvironment(R_NilValue, R_NilValue, R_NilValue);
+    R_BaseEnv = NewEnvironment(R_NilValue, R_NilValue, R_EmptyEnv);
 }
 
-HIDDEN void R::Rf_InitGlobalEnv()
+HIDDEN void R::InitGlobalEnv()
 {
     R_NamespaceSymbol = install(".__NAMESPACE__.");
 
@@ -866,7 +866,7 @@ static SEXP RemoveFromList(SEXP thing, SEXP list, int *found)
     }
 }
 
-HIDDEN void R::Rf_unbindVar(SEXP symbol, SEXP rho)
+HIDDEN void R::unbindVar(SEXP symbol, SEXP rho)
 {
     int hashcode;
     int found;
@@ -1341,7 +1341,7 @@ R_varloc_t R::R_findVarLoc(SEXP rho, SEXP symbol)
 
 */
 
-HIDDEN SEXP R::Rf_findVar1(SEXP symbol, SEXP rho, SEXPTYPE mode, int inherits_)
+HIDDEN SEXP R::findVar1(SEXP symbol, SEXP rho, SEXPTYPE mode, int inherits_)
 {
     SEXP vl;
     while (rho != R_EmptyEnv) {
@@ -1474,7 +1474,7 @@ SEXP ddfind(int i, SEXP rho)
 }
 
 HIDDEN
-SEXP R::Rf_ddfindVar(SEXP symbol, SEXP rho)
+SEXP R::ddfindVar(SEXP symbol, SEXP rho)
 {
     int i = ddVal(symbol);
     return ddfind(i, rho);
@@ -3966,7 +3966,7 @@ static unsigned int char_hash(const char *s, int len)
     return h;
 }
 
-HIDDEN void R::Rf_InitStringHash()
+HIDDEN void R::InitStringHash()
 {
     R_StringHash = R_NewHashTable(char_hash_size);
 }
