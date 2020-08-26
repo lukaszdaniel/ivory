@@ -39,6 +39,8 @@
 #include <config.h>
 #endif
 
+#define R_NO_REMAP
+
 #ifdef DEBUG_TEST
 #define SPRINT(x) printf("%6d:" #x "=%s\n", __LINE__, x)
 #define DPRINT(x) printf("%6d:" #x "=%d\n", __LINE__, x)

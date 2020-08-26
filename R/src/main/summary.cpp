@@ -23,6 +23,7 @@
 #endif
 
 #define R_NO_REMAP
+
 #include <Localization.h>
 #include <Defn.h>
 #include <Internal.h>
@@ -454,7 +455,7 @@ SEXP R::fixup_NaRm(SEXP args)
  * mean.default.
  */
 
-R_INLINE static SEXP logical_mean(SEXP x)
+inline static SEXP logical_mean(SEXP x)
 {
     R_xlen_t n = XLENGTH(x);
     LDOUBLE s = 0.0;
@@ -467,7 +468,7 @@ R_INLINE static SEXP logical_mean(SEXP x)
     return ScalarReal((double) (s/n));
 }
 
-R_INLINE static SEXP integer_mean(SEXP x)
+inline static SEXP integer_mean(SEXP x)
 {
     R_xlen_t n = XLENGTH(x);
     LDOUBLE s = 0.0;
@@ -480,7 +481,7 @@ R_INLINE static SEXP integer_mean(SEXP x)
     return ScalarReal((double) (s/n));
 }
 
-R_INLINE static SEXP real_mean(SEXP x)
+inline static SEXP real_mean(SEXP x)
 {
     R_xlen_t n = XLENGTH(x);
     LDOUBLE s = 0.0;
@@ -500,28 +501,33 @@ R_INLINE static SEXP real_mean(SEXP x)
     return ScalarReal((double) s);
 }
 
-R_INLINE static SEXP complex_mean(SEXP x)
+inline static SEXP complex_mean(SEXP x)
 {
-    R_xlen_t n = XLENGTH(x);
-    LDOUBLE s = 0.0, si = 0.0;
-    Rcomplex *px = COMPLEX(x);
-    for (R_xlen_t i = 0; i < n; i++) {
-	Rcomplex xi = px[i];
-	s += xi.r;
-	si += xi.i;
-    }
-    s /= n; si /= n;
-    if( R_FINITE((double)s) && R_FINITE((double)si) ) {
-	LDOUBLE t = 0.0, ti = 0.0;
-	for (R_xlen_t i = 0; i < n; i++) {
-	    Rcomplex xi = px[i];
-	    t += xi.r - s;
-	    ti += xi.i - si;
+	R_xlen_t n = XLENGTH(x);
+	LDOUBLE s = 0.0, si = 0.0;
+	Rcomplex *px = COMPLEX(x);
+	for (R_xlen_t i = 0; i < n; i++)
+	{
+		Rcomplex xi = px[i];
+		s += xi.r;
+		si += xi.i;
 	}
-	s += t/n; si += ti/n;
-    }
-    Rcomplex val = { (double)s, (double)si };
-    return ScalarComplex(val);
+	s /= n;
+	si /= n;
+	if (R_FINITE((double)s) && R_FINITE((double)si))
+	{
+		LDOUBLE t = 0.0, ti = 0.0;
+		for (R_xlen_t i = 0; i < n; i++)
+		{
+			Rcomplex xi = px[i];
+			t += xi.r - s;
+			ti += xi.i - si;
+		}
+		s += t / n;
+		si += ti / n;
+	}
+	Rcomplex val = {(double)s, (double)si};
+	return ScalarComplex(val);
 }
 
 HIDDEN SEXP do_summary(SEXP call, SEXP op, SEXP args, SEXP env)
@@ -1190,17 +1196,18 @@ HIDDEN SEXP do_pmin(SEXP call, SEXP op, SEXP args, SEXP rho)
     SEXP x = CAR(args);
 
     SEXPTYPE anstype = TYPEOF(x);
-    switch(anstype) {
-    case NILSXP:
-    case LGLSXP:
-    case INTSXP:
-    case REALSXP:
-    case STRSXP:
-	break;
-    default:
-	error(_("invalid input type"));
-    }
-    SEXP a = CDR(args);
+	switch (anstype)
+	{
+	case NILSXP:
+	case LGLSXP:
+	case INTSXP:
+	case REALSXP:
+	case STRSXP:
+		break;
+	default:
+		error(_("invalid input type"));
+	}
+	SEXP a = CDR(args);
     if(a == R_NilValue) return x; /* one input */
 
     R_xlen_t n, len = xlength(x), /* not LENGTH, as NULL is allowed */
@@ -1208,15 +1215,16 @@ HIDDEN SEXP do_pmin(SEXP call, SEXP op, SEXP args, SEXP rho)
     for(; a != R_NilValue; a = CDR(a)) {
 	x = CAR(a);
 	SEXPTYPE type = TYPEOF(x);
-	switch(type) {
+	switch (type)
+	{
 	case NILSXP:
 	case LGLSXP:
 	case INTSXP:
 	case REALSXP:
 	case STRSXP:
-	    break;
+		break;
 	default:
-	    error(_("invalid input type"));
+		error(_("invalid input type"));
 	}
 	if(type > anstype) anstype = type;
 	n = xlength(x);

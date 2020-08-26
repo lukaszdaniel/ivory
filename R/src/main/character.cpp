@@ -69,6 +69,8 @@ abbreviate chartr make.names strtrim tolower toupper give error.
 #include <config.h>
 #endif
 
+#define R_NO_REMAP
+
 #include <Defn.h>
 #include <Localization.h>
 #include <Internal.h>

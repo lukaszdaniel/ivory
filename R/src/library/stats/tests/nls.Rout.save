@@ -1,9 +1,9 @@
 
-Ivory Under development (unstable) (2020-08-17 r1266) -- "Internationalized Version of R"
+Ivory Under development (unstable) (2020-08-26 r1285) -- "Internationalized Version of R"
 Copyright (C) 2013-2020 Lukasz Daniel (lukasz.daniel@gmail.com)
 See README-IVORY file for details.
 
-R Under development (unstable) (2020-08-17 r79028) -- "Unsuffered Consequences"
+R Under development (unstable) (2020-08-26 r79085) -- "Unsuffered Consequences"
 Copyright (C) 2020 The R Foundation for Statistical Computing
 Platform: x86_64-pc-linux-gnu (64-bit)
 
@@ -753,4 +753,4 @@ Consider specifying 'start' or using a selfStart model
 > 
 > proc.time()
    user  system elapsed 
-  3.119   0.049   3.161 
+  3.128   0.036   3.158 

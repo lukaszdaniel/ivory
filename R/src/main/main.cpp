@@ -23,6 +23,8 @@
 #include <config.h>
 #endif
 
+
+
 #include <cmath> /* avoid redefinition of extern in Defn.h */
 #include <cfloat>
 #include <cctype>
@@ -30,7 +32,9 @@
 #include <cstring>
 
 #define __MAIN__
+#define R_NO_REMAP
 #define R_USE_SIGNALS 1
+
 #include <Localization.h>
 #include <Defn.h>
 #include <RObject.hpp>

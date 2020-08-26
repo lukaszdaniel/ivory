@@ -23,6 +23,8 @@
 #include <config.h>
 #endif
 
+#define R_NO_REMAP
+
 /* Note: gcc -pedantic may warn in several places about C99 features
    as extensions.
    This was a very-long-standing GCC bug, http://gcc.gnu.org/PR7263

@@ -26,6 +26,8 @@
 #include <config.h>
 #endif
 
+#define R_NO_REMAP
+
 #include <Defn.h>
 #include <Localization.h>
 #include <Rinterface.h>

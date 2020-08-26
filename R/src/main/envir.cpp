@@ -91,7 +91,9 @@
 #include <config.h>
 #endif
 
+#define R_NO_REMAP
 #define R_USE_SIGNALS 1
+
 #include <Localization.h>
 #include <Defn.h>
 #include <Internal.h>

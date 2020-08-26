@@ -23,8 +23,9 @@
 #endif
 
 #define R_NO_REMAP
-#include <cstdlib> /* for putenv */
 #define R_USE_SIGNALS 1
+
+#include <cstdlib> /* for putenv */
 #include <Localization.h>
 #include <Defn.h>
 #include <Internal.h>

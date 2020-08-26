@@ -22,7 +22,9 @@
 #include <config.h>
 #endif
 
+#define R_NO_REMAP
 #define R_USE_SIGNALS 1
+
 #include <Localization.h>
 #include <Defn.h>
 #include <Internal.h>
@@ -69,35 +71,43 @@ extern "C"
 
 int Rf_nrows(SEXP s) // ~== NROW(.)  in R
 {
-    SEXP t;
-    if (isVector(s) || isList(s)) {
-	t = getAttrib(s, R_DimSymbol);
-	if (t == R_NilValue) return LENGTH(s);
-	return INTEGER(t)[0];
-    }
-    else if (isFrame(s)) {
-	return nrows(CAR(s));
-    }
-    else error(_("object is not a matrix"));
-    return -1;
+	SEXP t;
+	if (isVector(s) || isList(s))
+	{
+		t = getAttrib(s, R_DimSymbol);
+		if (t == R_NilValue)
+			return LENGTH(s);
+		return INTEGER(t)[0];
+	}
+	else if (isFrame(s))
+	{
+		return nrows(CAR(s));
+	}
+	else
+		error(_("object is not a matrix"));
+	return -1;
 }
-
 
 int Rf_ncols(SEXP s) // ~== NCOL(.)  in R
 {
-    SEXP t;
-    if (isVector(s) || isList(s)) {
-	t = getAttrib(s, R_DimSymbol);
-	if (t == R_NilValue) return 1;
-	if (LENGTH(t) >= 2) return INTEGER(t)[1];
-	/* This is a 1D (or possibly 0D array) */
-	return 1;
-    }
-    else if (isFrame(s)) {
-	return length(s);
-    }
-    else error(_("object is not a matrix"));
-    return -1;/*NOTREACHED*/
+	SEXP t;
+	if (isVector(s) || isList(s))
+	{
+		t = getAttrib(s, R_DimSymbol);
+		if (t == R_NilValue)
+			return 1;
+		if (LENGTH(t) >= 2)
+			return INTEGER(t)[1];
+		/* This is a 1D (or possibly 0D array) */
+		return 1;
+	}
+	else if (isFrame(s))
+	{
+		return length(s);
+	}
+	else
+		error(_("object is not a matrix"));
+	return -1; /*NOTREACHED*/
 }
 
 #ifdef UNUSED
@@ -156,16 +166,12 @@ SEXP Rf_asChar(SEXP x)
 
 Rboolean Rf_isUnordered(SEXP s)
 {
-    return (Rboolean) (TYPEOF(s) == INTSXP
-	    && inherits(s, "factor")
-	    && !inherits(s, "ordered"));
+	return (Rboolean)(TYPEOF(s) == INTSXP && inherits(s, "factor") && !inherits(s, "ordered"));
 }
 
 Rboolean Rf_isOrdered(SEXP s)
 {
-    return (Rboolean) (TYPEOF(s) == INTSXP
-	    && inherits(s, "factor")
-	    && inherits(s, "ordered"));
+	return (Rboolean)(TYPEOF(s) == INTSXP && inherits(s, "factor") && inherits(s, "ordered"));
 }
 
 namespace {
@@ -277,14 +283,15 @@ SEXP Rf_type2str_nowarn(const SEXPTYPE t) /* returns a CHARSXP */
 
 SEXP Rf_type2str(const SEXPTYPE t) /* returns a CHARSXP */
 {
-    SEXP s = type2str_nowarn(t);
-    if (s != R_NilValue) {
-	return s;
-    }
-    warning(_("type %d is unimplemented in '%s' function"), t, "type2str()");
-    char buf[50];
-    snprintf(buf, 50, _("unknown type #%d"), t);
-    return mkChar(buf);
+	SEXP s = type2str_nowarn(t);
+	if (s != R_NilValue)
+	{
+		return s;
+	}
+	warning(_("type %d is unimplemented in '%s' function"), t, "type2str()");
+	char buf[50];
+	snprintf(buf, 50, _("unknown type #%d"), t);
+	return mkChar(buf);
 }
 
 SEXP Rf_type2rstr(const SEXPTYPE t) /* returns a STRSXP */
@@ -322,11 +329,12 @@ NORET SEXP R::type2symbol(SEXPTYPE t)
 
 HIDDEN NORET void R::UNIMPLEMENTED_TYPE(const char *s, const SEXPTYPE t)
 {
-    for (int i = 0; TypeTable[i].str; i++) {
-	if (TypeTable[i].type == t)
-	    error(_("unimplemented type '%s' in '%s' function"), TypeTable[i].str, s);
-    }
-    error(_("type %d is unimplemented in '%s' function"), t, s);
+	for (int i = 0; TypeTable[i].str; i++)
+	{
+		if (TypeTable[i].type == t)
+			error(_("unimplemented type '%s' in '%s' function"), TypeTable[i].str, s);
+	}
+	error(_("type %d is unimplemented in '%s' function"), t, s);
 }
 
 NORET void R::UNIMPLEMENTED_TYPE(const char *s, const SEXP x)
@@ -441,22 +449,23 @@ Rboolean Rf_StringFalse(const char* name)
 /* used in bind.cpp and options.cpp */
 HIDDEN SEXP R::EnsureString(SEXP s)
 {
-    switch(TYPEOF(s)) {
-    case SYMSXP:
-	s = PRINTNAME(s);
-	break;
-    case STRSXP:
-	s = STRING_ELT(s, 0);
-	break;
-    case CHARSXP:
-	break;
-    case NILSXP:
-	s = R_BlankString;
-	break;
-    default:
-	error(_("invalid tag in name extraction"));
-    }
-    return s;
+	switch (TYPEOF(s))
+	{
+	case SYMSXP:
+		s = PRINTNAME(s);
+		break;
+	case STRSXP:
+		s = STRING_ELT(s, 0);
+		break;
+	case CHARSXP:
+		break;
+	case NILSXP:
+		s = R_BlankString;
+		break;
+	default:
+		error(_("invalid tag in name extraction"));
+	}
+	return s;
 }
 
 // NB: have  checkArity(a,b) :=  Rf_checkArityCall(a,b,call)
@@ -635,21 +644,21 @@ HIDDEN SEXP do_merge(SEXP call, SEXP op, SEXP args, SEXP rho)
     checkArity(op, args);
     xi = CAR(args);
     // NB: long vectors are not supported for input
-    if ( !isInteger(xi) || !(nx = LENGTH(xi)) )
-	error(_("invalid '%s' argument"), "xinds");
-    yi = CADR(args);
-    if ( !isInteger(yi) || !(ny = LENGTH(yi)) )
-	error(_("invalid '%s' argument"), "yinds");
-    if(!LENGTH(ans = CADDR(args)) || NA_LOGICAL == (all_x = asLogical(ans)))
-	error(_("'%s' argument must be TRUE or FALSE"), "all.x");
-    if(!LENGTH(ans = CADDDR(args))|| NA_LOGICAL == (all_y = asLogical(ans)))
-	error(_("'%s' argument must be TRUE or FALSE"), "all.y");
+	if (!isInteger(xi) || !(nx = LENGTH(xi)))
+		error(_("invalid '%s' argument"), "xinds");
+	yi = CADR(args);
+	if (!isInteger(yi) || !(ny = LENGTH(yi)))
+		error(_("invalid '%s' argument"), "yinds");
+	if (!LENGTH(ans = CADDR(args)) || NA_LOGICAL == (all_x = asLogical(ans)))
+		error(_("'%s' argument must be TRUE or FALSE"), "all.x");
+	if (!LENGTH(ans = CADDDR(args)) || NA_LOGICAL == (all_y = asLogical(ans)))
+		error(_("'%s' argument must be TRUE or FALSE"), "all.y");
 
-    /* 0. sort the indices */
+	/* 0. sort the indices */
     int *ix = (int *) R_alloc((size_t) nx, sizeof(int));
     int *iy = (int *) R_alloc((size_t) ny, sizeof(int));
-    for(i = 0; i < nx; i++) ix[i] = i+1;
-    for(i = 0; i < ny; i++) iy[i] = i+1;
+    for(int i = 0; i < nx; i++) ix[i] = i+1;
+    for(int i = 0; i < ny; i++) iy[i] = i+1;
     isort_with_index(INTEGER(xi), ix, nx);
     isort_with_index(INTEGER(yi), iy, ny);
 
@@ -657,7 +666,7 @@ HIDDEN SEXP do_merge(SEXP call, SEXP op, SEXP args, SEXP rho)
     for (i = 0; i < nx; i++)
 	if (INTEGER(xi)[i] > 0) break;
     nx_lone = i;
-    for (i = 0; i < ny; i++)
+    for (int i = 0; i < ny; i++)
 	if (INTEGER(yi)[i] > 0) break;
     ny_lone = i;
     double dnans = 0;
@@ -912,22 +921,22 @@ HIDDEN SEXP do_dirname(SEXP call, SEXP op, SEXP args, SEXP rho)
     SEXP ans, s = R_NilValue;	/* -Wall */
     char buf[PATH_MAX], *p, fsp = FILESEP[0];
     const char *pp;
-    int i, n;
+    int n;
 
     checkArity(op, args);
     if (TYPEOF(s = CAR(args)) != STRSXP)
 	error(_("a character vector argument expected"));
     PROTECT(ans = allocVector(STRSXP, n = LENGTH(s)));
-    for(i = 0; i < n; i++) {
+    for(int i = 0; i < n; i++) {
 	if (STRING_ELT(s, i) == NA_STRING)
 	    SET_STRING_ELT(ans, i, NA_STRING);
 	else {
 	    pp = R_ExpandFileName(translateCharFP(STRING_ELT(s, i)));
-	    if (strlen(pp) > PATH_MAX - 1)
-		error(_("'%s' argument is too long"), "path");
-	    size_t ll = strlen(pp);
+		if (strlen(pp) > PATH_MAX - 1)
+			error(_("'%s' argument is too long"), "path");
+		size_t ll = strlen(pp);
 	    if (ll) { // svMisc calls this with ""
-		strcpy (buf, pp);
+		strcpy(buf, pp);
 		/* remove trailing file separator(s) */
 		while ( *(p = buf + ll - 1) == fsp  && p > buf) *p = '\0';
 		p = Rf_strrchr(buf, fsp);
@@ -954,16 +963,16 @@ extern char *realpath(const char *path, char *resolved_path);
 
 HIDDEN SEXP do_normalizepath(SEXP call, SEXP op, SEXP args, SEXP rho)
 {
-    SEXP ans, paths = CAR(args), elp;
-    int i, n = LENGTH(paths);
-    const char *path;
-    char abspath[PATH_MAX+1];
+	SEXP ans, paths = CAR(args), elp;
+	int i, n = LENGTH(paths);
+	const char *path;
+	char abspath[PATH_MAX + 1];
 
-    checkArity(op, args);
-    if (!isString(paths))
-	error(_("'%s' argument must be a character vector"), "path");
+	checkArity(op, args);
+	if (!isString(paths))
+		error(_("'%s' argument must be a character vector"), "path");
 
-    int mustWork = asLogical(CADDR(args)); /* 1, NA_LOGICAL or 0 */
+	int mustWork = asLogical(CADDR(args)); /* 1, NA_LOGICAL or 0 */
 
 /* Does any platform not have this? */
 #ifdef HAVE_REALPATH
@@ -1039,26 +1048,29 @@ HIDDEN SEXP do_normalizepath(SEXP call, SEXP op, SEXP args, SEXP rho)
 #ifdef USE_INTERNAL_MKTIME
 const char *getTZinfo(void)
 {
-    static char def_tz[PATH_MAX+1] = "";
-    if (def_tz[0]) return def_tz;
+	static char def_tz[PATH_MAX + 1] = "";
+	if (def_tz[0])
+		return def_tz;
 
-    // call Sys.timezone()
-    SEXP expr = PROTECT(install("Sys.timezone"));
-    SEXP call = PROTECT(lang1(expr));
-    SEXP ans = PROTECT(eval(call, R_GlobalEnv));
-    if(TYPEOF(ans) == STRSXP && LENGTH(ans) == 1) {
-	SEXP el = STRING_ELT(ans, 0);
-	if (el != NA_STRING) {
-	    strcpy(def_tz, CHAR(el));
-	    // printf("tz is %s\n", CHAR(el));
-	    UNPROTECT(3);
-	    return def_tz;
+	// call Sys.timezone()
+	SEXP expr = PROTECT(install("Sys.timezone"));
+	SEXP call = PROTECT(lang1(expr));
+	SEXP ans = PROTECT(eval(call, R_GlobalEnv));
+	if (TYPEOF(ans) == STRSXP && LENGTH(ans) == 1)
+	{
+		SEXP el = STRING_ELT(ans, 0);
+		if (el != NA_STRING)
+		{
+			strcpy(def_tz, CHAR(el));
+			// printf("tz is %s\n", CHAR(el));
+			UNPROTECT(3);
+			return def_tz;
+		}
 	}
-    }
-    UNPROTECT(3);
-    warning("system timezone name is unknown: set environment variable TZ");
-    strcpy(def_tz, "unknown");  // code will then use TZDEFAULT, which is "UTC"
-    return def_tz;
+	UNPROTECT(3);
+	warning("system timezone name is unknown: set environment variable TZ");
+	strcpy(def_tz, "unknown"); // code will then use TZDEFAULT, which is "UTC"
+	return def_tz;
 }
 #endif
 
@@ -1239,8 +1251,9 @@ constexpr unsigned char utf8_table4[] = {
 
 HIDDEN int R::utf8clen(const char c)
 {
-    /* This allows through 8-bit chars 10xxxxxx, which are invalid */
-    if ((c & 0xc0) != 0xc0) return 1;
+	/* This allows through 8-bit chars 10xxxxxx, which are invalid */
+	if ((c & 0xc0) != 0xc0)
+		return 1;
 	return 1 + utf8_table4[c & 0x3f];
 }
 
@@ -1454,10 +1467,10 @@ size_t R::Mbrtowc(wchar_t *wc, const char *s, size_t n, mbstate_t *ps)
    valid multi-byte characters. Has no effect in non-mbcs locales. */
 HIDDEN char *R::mbcsTruncateToValid(char *const s)
 {
-    if (!mbcslocale || *s == '\0')
-	return s;
+	if (!mbcslocale || *s == '\0')
+		return s;
 
-    mbstate_t mb_st;
+	mbstate_t mb_st;
     size_t slen = strlen(s); /* at least 1 */
     size_t goodlen = 0;
 

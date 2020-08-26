@@ -11,7 +11,9 @@
  * From w_drawprim.h
  */
 
-#define         MAXNUMPTS       25000
+#define R_NO_REMAP
+
+constexpr int MAXNUMPTS = 25000;
 #include <Localization.h>
 /*
  * From u_draw.c

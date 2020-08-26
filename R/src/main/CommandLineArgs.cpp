@@ -21,13 +21,14 @@
 #include <config.h>
 #endif
 
-#include <cstring>
+#define R_NO_REMAP
 
 #include <Localization.h>
 #include <Defn.h>
 #include <Rinterface.h>
 #include <R_ext/RStartup.h>
 #include <R_ext/RS.h> // for Calloc
+#include <cstring>
 
 using namespace R;
 

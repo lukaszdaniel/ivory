@@ -28,6 +28,8 @@
 #include <config.h>
 #endif
 
+#define R_NO_REMAP
+
 #include <Defn.h> /* => Utils.h with the protos from here */
 #include <Localization.h>
 #include <Internal.h>

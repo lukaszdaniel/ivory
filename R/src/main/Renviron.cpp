@@ -27,6 +27,8 @@
 #include <config.h>
 #endif
 
+#define R_NO_REMAP
+
 #include <cstdlib> /* for setenv or putenv */
 #include <Localization.h>
 #include <Defn.h> /* for PATH_MAX */

@@ -25,6 +25,8 @@
 #include <config.h>
 #endif
 
+#define R_NO_REMAP
+
 #ifdef emacs
 #include "blockinput.h"
 #endif

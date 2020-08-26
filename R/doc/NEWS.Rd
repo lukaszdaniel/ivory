@@ -77,8 +77,20 @@
       Based on patch from Bob Rudis submitted with \PR{17873}.
 
       \item \code{path.expand()} can expand \samp{~user} on most
-      Unix-alikes even when \code{readline} is not in use.
+      Unix-alikes even when \code{readline} is not in use.  It tries
+      harder to expand \samp{~}, for example should environment variable
+      \env{HOME} be unset.
+
+      \item For HTML help (both dynamic and static), Rd file links to
+      help pages in external packages are now treated as references to
+      topics rather than file names, and falls back to a file link only
+      if the topic is not found in the target package. The earlier rule
+      which prioritized file names over topics can be restored by
+      setting the environment variable \env{_R_HELP_LINKS_TO_TOPICS_} to
+      a false value.
+  
     }
+
   }
 
   \subsection{GRAPHICS}{
@@ -251,7 +263,7 @@
       \item \code{R_allocLD()} has been fixed to return memory aligned for
       long double type (PR#16534).
 
-      \item Fix incorrect calculation in \code{logLik.nls} \PR{16100}, patch
+      \item Fix incorrect calculation in \code{logLik.nls()} \PR{16100}, patch
       from Sebastian Meyer.
     }
   }

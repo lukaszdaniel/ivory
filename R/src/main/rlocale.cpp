@@ -35,6 +35,8 @@
 #include <config.h>
 #endif
 
+#define R_NO_REMAP
+
 #include <Defn.h>
 #include <R_ext/Visibility.h>
 

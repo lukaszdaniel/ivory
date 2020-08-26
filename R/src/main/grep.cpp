@@ -52,6 +52,8 @@ strsplit grep [g]sub [g]regexpr
 #include <config.h>
 #endif
 
+#define R_NO_REMAP
+
 /* How many encoding warnings to give */
 constexpr int NWARN = 5;
 
@@ -194,7 +196,7 @@ static void R_pcre_exec_error(int rc, R_xlen_t i)
 	char buf[256];
 	pcre2_get_error_message(rc, (PCRE2_UCHAR *)buf, sizeof(buf));
     if(streql(buf, "recursion limit exceeded"))
-	strcat(buf, ": consider increasing the C stack size for the R process");
+	{strcat(buf, ": consider increasing the C stack size for the R process");}
 	warning(_("PCRE error\n\t'%s'\n\tfor element %d"), buf, (int)i + 1);
 }
 #else
@@ -3274,7 +3276,7 @@ HIDDEN SEXP do_regexec(SEXP call, SEXP op, SEXP args, SEXP env)
 		}
 		setAttrib(matchpos, install("match.length"), matchlen);
 		if(useBytes)
-		    setAttrib(matchpos, install("index.type"), itype);
+		    {setAttrib(matchpos, install("index.type"), itype);}
 		    setAttrib(matchpos, install("useBytes"),
 			      R_TrueValue);
 		SET_VECTOR_ELT(ans, i, matchpos);
@@ -3291,7 +3293,7 @@ HIDDEN SEXP do_regexec(SEXP call, SEXP op, SEXP args, SEXP env)
 		PROTECT(matchlen = ScalarInteger(-1));
 		setAttrib(matchpos, install("match.length"), matchlen);
 		if(useBytes)
-		    setAttrib(matchpos, install("index.type"), itype);
+		    {setAttrib(matchpos, install("index.type"), itype);}
 		    setAttrib(matchpos, install("useBytes"),
 			      R_TrueValue);
 		SET_VECTOR_ELT(ans, i, matchpos);

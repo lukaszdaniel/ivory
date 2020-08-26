@@ -23,6 +23,7 @@
 #include <config.h>
 #endif
 
+#define R_NO_REMAP
 #define HAVE_BZIP2
 
 #include <Localization.h>
