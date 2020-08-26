@@ -36,50 +36,53 @@
 
 // for backcompatibility but not to stay (MM) :
 #define formatComplex_USING_signif
+namespace R
+{
+    /* Computation of printing formats */
+    void Rf_formatLogical(const int *, R_xlen_t, int *);
+    void Rf_formatInteger(const int *, R_xlen_t, int *);
+    void Rf_formatReal(const double *, R_xlen_t, int *, int *, int *, int);
+    void Rf_formatComplex(const Rcomplex *, R_xlen_t, int *, int *, int *, int *, int *, int *, int);
+    void formatLogicalS(SEXP, R_xlen_t, int *);
+    void formatIntegerS(SEXP, R_xlen_t, int *);
+    void formatRealS(SEXP, R_xlen_t, int &, int &, int &, int);
+    void formatComplexS(SEXP, R_xlen_t, int *, int *, int *, int *, int *, int *, int);
 
-#define formatLogical      Rf_formatLogical
-#define formatInteger      Rf_formatInteger
-#define formatReal         Rf_formatReal
-#define formatComplex      Rf_formatComplex
-#define EncodeLogical      Rf_EncodeLogical
-#define EncodeInteger      Rf_EncodeInteger
-#define EncodeReal         Rf_EncodeReal
-#define EncodeReal0        Rf_EncodeReal0
-#define EncodeComplex      Rf_EncodeComplex
-#define VectorIndex        Rf_VectorIndex
-#define printIntegerVector Rf_printIntegerVector
-#define printRealVector    Rf_printRealVector
-#define printComplexVector Rf_printComplexVector
+    /* Formating of values */
+    const char *Rf_EncodeLogical(int, int);
+    const char *Rf_EncodeInteger(int, int);
+    const char *Rf_EncodeReal0(double, int, int, int, const char *);
+    const char *Rf_EncodeComplex(Rcomplex, int, int, int, int, int, int, const char *);
 
-/* Computation of printing formats */
-void Rf_formatLogical(const int *, R_xlen_t, int *);
-void Rf_formatInteger(const int *, R_xlen_t, int *);
-void Rf_formatReal(const double *, R_xlen_t, int *, int *, int *, int);
-void Rf_formatComplex(const Rcomplex *, R_xlen_t, int *, int *, int *, int *, int *, int *, int);
-void formatLogicalS(SEXP, R_xlen_t, int *);
-void formatIntegerS(SEXP, R_xlen_t, int *);
-void formatRealS(SEXP, R_xlen_t, int &, int &, int &, int);
-void formatComplexS(SEXP, R_xlen_t, int *, int *, int *, int *, int *, int *, int);
+    /* Legacy, misused by packages RGtk2 and qtbase */
+    const char *Rf_EncodeReal(double, int, int, int, char);
 
-/* Formating of values */
-const char *Rf_EncodeLogical(int, int);
-const char *Rf_EncodeInteger(int, int);
-const char *Rf_EncodeReal0(double, int, int, int, const char *);
-const char *Rf_EncodeComplex(Rcomplex, int, int, int, int, int, int, const char *);
+    /* Printing */
+    int Rf_IndexWidth(R_xlen_t);
+    void Rf_VectorIndex(R_xlen_t, int);
 
-/* Legacy, misused by packages RGtk2 and qtbase */
-const char *Rf_EncodeReal(double, int, int, int, char);
+    //void printLogicalVector(int *, R_xlen_t, int);
+    void Rf_printIntegerVector(const int *, R_xlen_t, int);
+    void Rf_printRealVector(const double *, R_xlen_t, int);
+    void Rf_printComplexVector(const Rcomplex *, R_xlen_t, int);
+    void printIntegerVectorS(SEXP, R_xlen_t, int);
+    void printRealVectorS(SEXP, R_xlen_t, int);
+    void printComplexVectorS(SEXP, R_xlen_t, int);
 
-/* Printing */
-int Rf_IndexWidth(R_xlen_t);
-void Rf_VectorIndex(R_xlen_t, int);
+    const auto formatLogical = Rf_formatLogical;
+    const auto formatInteger = Rf_formatInteger;
+    const auto formatReal = Rf_formatReal;
+    const auto formatComplex = Rf_formatComplex;
+    const auto EncodeLogical = Rf_EncodeLogical;
+    const auto EncodeInteger = Rf_EncodeInteger;
+    const auto EncodeReal = Rf_EncodeReal;
+    const auto EncodeReal0 = Rf_EncodeReal0;
+    const auto EncodeComplex = Rf_EncodeComplex;
+    const auto VectorIndex = Rf_VectorIndex;
+    const auto printIntegerVector = Rf_printIntegerVector;
+    const auto printRealVector = Rf_printRealVector;
+    const auto printComplexVector = Rf_printComplexVector;
 
-//void printLogicalVector(int *, R_xlen_t, int);
-void Rf_printIntegerVector(const int *, R_xlen_t, int);
-void Rf_printRealVector(const double *, R_xlen_t, int);
-void Rf_printComplexVector(const Rcomplex *, R_xlen_t, int);
-void printIntegerVectorS(SEXP, R_xlen_t, int);
-void printRealVectorS(SEXP, R_xlen_t, int);
-void printComplexVectorS(SEXP, R_xlen_t, int);
+} // namespace R
 
 #endif /* PRTUTIL_H_ */

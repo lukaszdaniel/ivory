@@ -39,54 +39,58 @@
 #include <Defn.h>
 #include <cstdio>
 
-constexpr int IOBSIZE = 4096;
-
-struct BufferListItem
+namespace R
 {
-	unsigned char buf[IOBSIZE];
-	struct BufferListItem *next;
-};
+	constexpr int IOBSIZE = 4096;
 
-struct IoBuffer
-{
-	BufferListItem *start_buf; /* First buffer item */
-	BufferListItem *write_buf; /* Write pointer location */
-	unsigned char *write_ptr;  /* Write pointer location */
-	int write_offset;		   /* Write pointer location */
-	BufferListItem *read_buf;  /* Read pointer location */
-	unsigned char *read_ptr;   /* Read pointer location */
-	int read_offset;		   /* Read pointer location */
-};
+	struct BufferListItem
+	{
+		unsigned char buf[IOBSIZE];
+		struct BufferListItem *next;
+	};
 
-struct TextBuffer
-{
-	void *vmax;			 /* Memory stack top */
-	unsigned char *buf;	 /* Line buffer */
-	unsigned char *bufp; /* Line buffer location */
-	SEXP text;			 /* String Vector */
-	int ntext;			 /* Vector length */
-	int offset;			 /* Offset within vector */
-};
+	struct IoBuffer
+	{
+		BufferListItem *start_buf; /* First buffer item */
+		BufferListItem *write_buf; /* Write pointer location */
+		unsigned char *write_ptr;  /* Write pointer location */
+		int write_offset;		   /* Write pointer location */
+		BufferListItem *read_buf;  /* Read pointer location */
+		unsigned char *read_ptr;   /* Read pointer location */
+		int read_offset;		   /* Read pointer location */
+	};
 
+	struct TextBuffer
+	{
+		void *vmax;			 /* Memory stack top */
+		unsigned char *buf;	 /* Line buffer */
+		unsigned char *bufp; /* Line buffer location */
+		SEXP text;			 /* String Vector */
+		int ntext;			 /* Vector length */
+		int offset;			 /* Offset within vector */
+	};
+} // namespace R
 #ifndef __MAIN__
-extern
+	extern
 #else
-HIDDEN
+	HIDDEN
 #endif
-	IoBuffer R_ConsoleIob; /* Console IO Buffer */
+		R::IoBuffer R_ConsoleIob; /* Console IO Buffer */
+namespace R
+{
+	/*- some of these really could be void */
+	bool R_IoBufferInit(IoBuffer *);
+	bool R_IoBufferFree(IoBuffer *);
+	bool R_IoBufferReadReset(IoBuffer *);
+	bool R_IoBufferWriteReset(IoBuffer *);
+	int R_IoBufferGetc(IoBuffer *);
+	bool R_IoBufferPutc(int, IoBuffer *);
+	int R_IoBufferPuts(char *, IoBuffer *);
+	int R_IoBufferReadOffset(IoBuffer *);
 
-/*- some of these really could be void */
-bool R_IoBufferInit(IoBuffer *);
-bool R_IoBufferFree(IoBuffer *);
-bool R_IoBufferReadReset(IoBuffer *);
-bool R_IoBufferWriteReset(IoBuffer *);
-int R_IoBufferGetc(IoBuffer *);
-bool R_IoBufferPutc(int, IoBuffer *);
-int R_IoBufferPuts(char *, IoBuffer *);
-int R_IoBufferReadOffset(IoBuffer *);
-
-bool R_TextBufferInit(TextBuffer *, SEXP);
-bool R_TextBufferFree(TextBuffer *);
-int R_TextBufferGetc(TextBuffer *);
+	bool R_TextBufferInit(TextBuffer *, SEXP);
+	bool R_TextBufferFree(TextBuffer *);
+	int R_TextBufferGetc(TextBuffer *);
+} // namespace R
 
 #endif /* R_IOSTUFF_H */

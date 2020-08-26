@@ -549,8 +549,8 @@ void R_check_thread(const char *s);
 
 /* List Access Functions */
 /* These also work for ... objects */
-#define CONS(a, b)	cons((a), (b))		/* data lists */
-#define LCONS(a, b)	lcons((a), (b))		/* language lists */
+#define CONS(a, b)	Rf_cons((a), (b))		/* data lists */
+#define LCONS(a, b)	Rf_lcons((a), (b))		/* language lists */
 int (BNDCELL_TAG)(SEXP e);
 void (SET_BNDCELL_TAG)(SEXP e, int v);
 double (BNDCELL_DVAL)(SEXP cell);
@@ -793,8 +793,7 @@ SEXP Rf_allocVector3(SEXPTYPE, R_xlen_t, R_allocator_t *);
 R_xlen_t Rf_any_duplicated(SEXP x, Rboolean from_last);
 R_xlen_t Rf_any_duplicated3(SEXP x, SEXP incomp, Rboolean from_last);
 SEXP Rf_applyClosure(SEXP, SEXP, SEXP, SEXP, SEXP);
-SEXP Rf_arraySubscript(int, SEXP, SEXP, SEXP (*)(SEXP, SEXP),
-                       SEXP (*)(SEXP, int), SEXP);
+SEXP Rf_arraySubscript(int, SEXP, SEXP, SEXP (*)(SEXP, SEXP), SEXP (*)(SEXP, int), SEXP);
 SEXP Rf_classgets(SEXP, SEXP);
 SEXP Rf_cons(SEXP, SEXP);
 SEXP Rf_fixSubset3Args(SEXP, SEXP, SEXP, SEXP *);
@@ -875,9 +874,7 @@ typedef enum
     Chars,
     Width
 } nchar_type;
-int R_nchar(SEXP string, nchar_type type_,
-	    Rboolean allowNA, Rboolean keepNA, const char* msg_name);
-
+int R_nchar(SEXP string, nchar_type type_, Rboolean allowNA, Rboolean keepNA, const char* msg_name);
 Rboolean Rf_pmatch(SEXP formal, SEXP tag, Rboolean exact);
 Rboolean Rf_psmatch(const char *f, const char *t, Rboolean exact);
 SEXP R_ParseEvalString(const char *, SEXP);
@@ -1001,8 +998,7 @@ void R_reinit_altrep_classes(DllInfo *);
 
 /* Protected evaluation */
 Rboolean R_ToplevelExec(void (*fun)(void *), void *data);
-SEXP R_ExecWithCleanup(SEXP (*fun)(void *), void *data,
-		       void (*cleanfun)(void *), void *cleandata);
+SEXP R_ExecWithCleanup(SEXP (*fun)(void *), void *data, void (*cleanfun)(void *), void *cleandata);
 SEXP R_tryCatch(SEXP (*)(void *), void *,       /* body closure*/
 		SEXP,                           /* condition classes (STRSXP) */
 		SEXP (*)(SEXP, void *), void *, /* handler closure */
@@ -1150,15 +1146,15 @@ SEXP R_S4_extends(SEXP klass, SEXP useTable);
 
 /* class definition, new objects (objects.cpp) */
 SEXP R_do_MAKE_CLASS(const char *what);
-SEXP R_getClassDef  (const char *what);
+SEXP R_getClassDef(const char *what);
 SEXP R_getClassDef_R(SEXP what);
 Rboolean R_has_methods_attached(void);
 Rboolean R_isVirtualClass(SEXP class_def, SEXP env);
-Rboolean R_extends  (SEXP class1, SEXP class2, SEXP env);
+Rboolean R_extends(SEXP class1, SEXP class2, SEXP env);
 SEXP R_do_new_object(SEXP class_def);
 /* supporting  a C-level version of  is(., .) : */
 int R_check_class_and_super(SEXP x, const char **valid, SEXP rho);
-int R_check_class_etc      (SEXP x, const char **valid);
+int R_check_class_etc(SEXP x, const char **valid);
 
 /* preserve objects across GCs */
 void R_PreserveObject(SEXP);
@@ -1199,11 +1195,12 @@ SEXP R_body_no_src(SEXP x); // body(x) without "srcref" etc, ../main/utils.cpp
 
 /* C version of R's  indx <- order(..., na.last, decreasing) :
    e.g.  arglist = Rf_lang2(x,y)  or  Rf_lang3(x,y,z) */
-void R_orderVector (int *indx, int n, SEXP arglist, Rboolean nalast, Rboolean decreasing);
+void R_orderVector(int *indx, int n, SEXP arglist, Rboolean nalast, Rboolean decreasing);
 // C version of R's  indx <- order(x, na.last, decreasing) :
-void R_orderVector1(int *indx, int n, SEXP x,       Rboolean nalast, Rboolean decreasing);
+void R_orderVector1(int *indx, int n, SEXP x, Rboolean nalast, Rboolean decreasing);
 
-#ifndef R_NO_REMAP
+#ifdef R_NO_REMAP
+#else
 #define acopy_string		Rf_acopy_string
 #define addMissingVarsToNewEnv	Rf_addMissingVarsToNewEnv
 #define alloc3DArray            Rf_alloc3DArray
@@ -1358,7 +1355,6 @@ void R_orderVector1(int *indx, int n, SEXP x,       Rboolean nalast, Rboolean de
 #define protect			Rf_protect
 #define readS3VarsFromFrame	Rf_readS3VarsFromFrame
 #define reEnc			Rf_reEnc
-//#define rownamesgets		Rf_rownamesgets
 #define S3Class                 Rf_S3Class
 #define ScalarComplex		Rf_ScalarComplex
 #define ScalarInteger		Rf_ScalarInteger
@@ -1386,7 +1382,6 @@ void R_orderVector1(int *indx, int n, SEXP x,       Rboolean nalast, Rboolean de
 #define unprotect		Rf_unprotect
 #define unprotect_ptr		Rf_unprotect_ptr
 #define VectorToPairList	Rf_VectorToPairList
-// #define warningcall		Rf_warningcall
 #define warningcall_immediate	Rf_warningcall_immediate
 #define xlength(x)		Rf_xlength(x)
 #define xlengthgets		Rf_xlengthgets
@@ -1545,11 +1540,187 @@ void R_BadValueInRCode(SEXP value, SEXP call, SEXP rho, const char *rawmsg,
 }
 #endif
 
+#if defined(R_NO_REMAP) && defined(COMPILING_IVORY) && defined(__cplusplus)
+const auto acopy_string = Rf_acopy_string;
+const auto addMissingVarsToNewEnv = Rf_addMissingVarsToNewEnv;
+const auto alloc3DArray = Rf_alloc3DArray;
+const auto allocArray = Rf_allocArray;
+const auto allocFormalsList2 = Rf_allocFormalsList2;
+const auto allocFormalsList3 = Rf_allocFormalsList3;
+const auto allocFormalsList4 = Rf_allocFormalsList4;
+const auto allocFormalsList5 = Rf_allocFormalsList5;
+const auto allocFormalsList6 = Rf_allocFormalsList6;
+const auto allocList = Rf_allocList;
+const auto allocMatrix = Rf_allocMatrix;
+const auto allocS4Object = Rf_allocS4Object;
+const auto allocSExp = Rf_allocSExp;
+const auto allocVector = Rf_allocVector;
+const auto allocVector3 = Rf_allocVector3;
+const auto any_duplicated = Rf_any_duplicated;
+const auto any_duplicated3 = Rf_any_duplicated3;
+const auto applyClosure = Rf_applyClosure;
+const auto arraySubscript = Rf_arraySubscript;
+const auto asChar = Rf_asChar;
+const auto asCharacterFactor = Rf_asCharacterFactor;
+const auto asComplex = Rf_asComplex;
+const auto asInteger = Rf_asInteger;
+const auto asLogical = Rf_asLogical;
+const auto asLogical2 = Rf_asLogical2;
+const auto asReal = Rf_asReal;
+const auto asS4	= Rf_asS4;
+const auto classgets = Rf_classgets;
+const auto coerceVector = Rf_coerceVector;
+const auto conformable = Rf_conformable;
+const auto cons = Rf_cons;
+const auto error = Rf_error;
+const auto warning = Rf_warning;
+const auto fixSubset3Args = Rf_fixSubset3Args;
+const auto copyListMatrix = Rf_copyListMatrix;
+const auto copyMatrix = Rf_copyMatrix;
+const auto copyMostAttrib = Rf_copyMostAttrib;
+const auto copyVector = Rf_copyVector;
+const auto countContexts = Rf_countContexts;
+const auto CreateTag = Rf_CreateTag;
+const auto defineVar = Rf_defineVar;
+const auto dimgets = Rf_dimgets;
+const auto dimnamesgets = Rf_dimnamesgets;
+const auto DropDims = Rf_DropDims;
+const auto duplicate = Rf_duplicate;
+const auto duplicated = Rf_duplicated;
+const auto elt = Rf_elt;
+const auto errorcall = Rf_errorcall;
+const auto eval = Rf_eval;
+const auto ExtractSubset = Rf_ExtractSubset;
+const auto findFun = Rf_findFun;
+const auto findFun3 = Rf_findFun3;
+const auto findFunctionForBody = Rf_findFunctionForBody;
+const auto findVar = Rf_findVar;
+const auto findVarInFrame = Rf_findVarInFrame;
+const auto findVarInFrame3 = Rf_findVarInFrame3;
+const auto FixupDigits = Rf_FixupDigits;
+const auto FixupWidth = Rf_FixupWidth;
+const auto GetArrayDimnames = Rf_GetArrayDimnames;
+const auto getAttrib = Rf_getAttrib;
+const auto getCharCE = Rf_getCharCE;
+const auto GetColNames = Rf_GetColNames;
+const auto GetMatrixDimnames = Rf_GetMatrixDimnames;
+const auto GetOption1 = Rf_GetOption1;
+const auto GetOptionDigits = Rf_GetOptionDigits;
+const auto GetOptionWidth = Rf_GetOptionWidth;
+const auto GetOption = Rf_GetOption;
+const auto GetRowNames = Rf_GetRowNames;
+const auto gsetVar = Rf_gsetVar;
+const auto inherits = Rf_inherits;
+const auto install = Rf_install;
+const auto installChar = Rf_installTrChar;
+const auto installNoTrChar = Rf_installNoTrChar;
+const auto installTrChar = Rf_installTrChar;
+const auto installDDVAL = Rf_installDDVAL;
+const auto installS3Signature = Rf_installS3Signature;
+const auto isArray = Rf_isArray;
+const auto isBasicClass = Rf_isBasicClass;
+const auto isFactor = Rf_isFactor;
+const auto isFrame = Rf_isFrame;
+const auto isFree = Rf_isFree;
+const auto isFunction = Rf_isFunction;
+const auto isInteger = Rf_isInteger;
+const auto isLanguage = Rf_isLanguage;
+const auto isList = Rf_isList;
+const auto isMatrix = Rf_isMatrix;
+const auto isNewList = Rf_isNewList;
+const auto isNumeric = Rf_isNumeric;
+const auto isNumber = Rf_isNumber;
+const auto isOrdered = Rf_isOrdered;
+const auto isPairList = Rf_isPairList;
+const auto isPrimitive = Rf_isPrimitive;
+const auto isS4 = Rf_isS4;
+const auto isTs = Rf_isTs;
+const auto isUnmodifiedSpecSym = Rf_isUnmodifiedSpecSym;
+const auto isUnordered = Rf_isUnordered;
+const auto isUnsorted = Rf_isUnsorted;
+const auto isUserBinop = Rf_isUserBinop;
+const auto isValidString = Rf_isValidString;
+const auto isValidStringF = Rf_isValidStringF;
+const auto isVector = Rf_isVector;
+const auto isVectorAtomic = Rf_isVectorAtomic;
+const auto isVectorizable = Rf_isVectorizable;
+const auto isVectorList = Rf_isVectorList;
+const auto lang1 = Rf_lang1;
+const auto lang2 = Rf_lang2;
+const auto lang3 = Rf_lang3;
+const auto lang4 = Rf_lang4;
+const auto lang5 = Rf_lang5;
+const auto lang6 = Rf_lang6;
+const auto lastElt = Rf_lastElt;
+const auto lazy_duplicate = Rf_lazy_duplicate;
+const auto lcons = Rf_lcons;
+const auto lengthgets = Rf_lengthgets;
+const auto list1 = Rf_list1;
+const auto list2 = Rf_list2;
+const auto list3 = Rf_list3;
+const auto list4 = Rf_list4;
+const auto list5 = Rf_list5;
+const auto list6 = Rf_list6;
+const auto listAppend = Rf_listAppend;
+const auto match = Rf_match;
+const auto matchE = Rf_matchE;
+const auto mkChar = Rf_mkChar;
+const auto mkCharCE = Rf_mkCharCE;
+const auto mkCharLen = Rf_mkCharLen;
+const auto mkCharLenCE = Rf_mkCharLenCE;
+const auto mkNamed = Rf_mkNamed;
+const auto mkString = Rf_mkString;
+const auto namesgets = Rf_namesgets;
+const auto ncols = Rf_ncols;
+const auto nlevels = Rf_nlevels;
+const auto NonNullStringMatch = Rf_NonNullStringMatch;
+const auto nrows = Rf_nrows;
+const auto nthcdr = Rf_nthcdr;
+const auto PairToVectorList = Rf_PairToVectorList;
+const auto pmatch = Rf_pmatch;
+const auto psmatch = Rf_psmatch;
+const auto PrintValue = Rf_PrintValue;
+const auto printwhere = Rf_printwhere;
+const auto protect = Rf_protect;
+const auto readS3VarsFromFrame = Rf_readS3VarsFromFrame;
+const auto reEnc = Rf_reEnc;
+const auto S3Class = Rf_S3Class;
+const auto ScalarComplex = Rf_ScalarComplex;
+const auto ScalarInteger = Rf_ScalarInteger;
+const auto ScalarLogical = Rf_ScalarLogical;
+const auto ScalarReal = Rf_ScalarReal;
+const auto ScalarString = Rf_ScalarString;
+const auto ScalarRaw = Rf_ScalarRaw;
+const auto setAttrib = Rf_setAttrib;
+const auto setSVector = Rf_setSVector;
+const auto setVar = Rf_setVar;
+const auto shallow_duplicate = Rf_shallow_duplicate;
+const auto str2type = Rf_str2type;
+const auto stringSuffix = Rf_stringSuffix;
+const auto stringPositionTr = Rf_stringPositionTr;
+const auto StringBlank = Rf_StringBlank;
+const auto substitute = Rf_substitute;
+const auto topenv = Rf_topenv;
+const auto translateChar = Rf_translateChar;
+const auto translateChar0 = Rf_translateChar0;
+const auto translateCharUTF8 = Rf_translateCharUTF8;
+const auto type2char = Rf_type2char;
+const auto type2rstr = Rf_type2rstr;
+const auto type2str = Rf_type2str;
+const auto type2str_nowarn = Rf_type2str_nowarn;
+const auto unprotect = Rf_unprotect;
+const auto unprotect_ptr = Rf_unprotect_ptr;
+const auto VectorToPairList = Rf_VectorToPairList;
+const auto warningcall_immediate = Rf_warningcall_immediate;
+const auto xlength = Rf_xlength;
+const auto xlengthgets = Rf_xlengthgets;
+#endif
+
 #ifdef __cplusplus
 
 /** @brief Shorthand for Rf_length().
  */
-inline auto length(SEXP s)
+inline R_len_t length(SEXP s)
 {
     return Rf_length(s);
 }

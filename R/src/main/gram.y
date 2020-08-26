@@ -1398,7 +1398,7 @@ static void UseSrcRefState(SrcRefState *state);
 
 /* This is called once when R starts up. */
 HIDDEN
-void InitParser(void)
+void R::InitParser(void)
 {
     ParseState.sexps = allocVector(VECSXP, 7); /* initialized to R_NilValue */
     ParseState.data = R_NilValue;
@@ -1414,7 +1414,7 @@ static void FinalizeSrcRefStateOnError(void *dummy)
 
 /* This is called each time a new parse sequence begins */
 HIDDEN
-void R_InitSrcRefState(RCNTXT* cptr)
+void R::R_InitSrcRefState(RCNTXT* cptr)
 {
     if (busy) {
     	SrcRefState *prev = (SrcRefState *) malloc(sizeof(SrcRefState));
@@ -1447,7 +1447,7 @@ void R_InitSrcRefState(RCNTXT* cptr)
 }
 
 HIDDEN
-void R_FinalizeSrcRefState(void)
+void R::R_FinalizeSrcRefState(void)
 {
     PS_SET_SRCFILE(R_NilValue);
     PS_SET_ORIGINAL(R_NilValue);
@@ -1574,7 +1574,7 @@ static int file_getc(void)
 
 /* used in main.cpp */
 HIDDEN
-SEXP R_Parse1File(FILE *fp, int gencode, ParseStatus *status)
+SEXP R::R_Parse1File(FILE *fp, int gencode, ParseStatus *status)
 {
     ParseInit();
     ParseContextInit();
@@ -1595,7 +1595,7 @@ static int buffer_getc(void)
 
 /* Used only in main.cpp */
 HIDDEN
-SEXP R_Parse1Buffer(IoBuffer *buffer, int gencode, ParseStatus *status)
+SEXP R::R_Parse1Buffer(IoBuffer *buffer, int gencode, ParseStatus *status)
 {
     Rboolean keepSource = FALSE; 
     RCNTXT cntxt;
@@ -1723,7 +1723,7 @@ finish:
 
 /* used in edit.cpp */
 HIDDEN
-SEXP R_ParseFile(FILE *fp, int n, ParseStatus *status, SEXP srcfile)
+SEXP R::R_ParseFile(FILE *fp, int n, ParseStatus *status, SEXP srcfile)
 {
     GenerateCode = 1;
     fp_parse = fp;
@@ -1747,7 +1747,7 @@ static int con_getc(void)
 
 /* used in source.cpp */
 HIDDEN
-SEXP R_ParseConn(Rconnection con, int n, ParseStatus *status, SEXP srcfile)
+SEXP R::R_ParseConn(Rconnection con, int n, ParseStatus *status, SEXP srcfile)
 {
     GenerateCode = 1;
     con_parse = con;
@@ -1785,7 +1785,7 @@ static const char *Prompt(SEXP prompt, int type)
 
 /* used in source.cpp */
 HIDDEN
-SEXP R_ParseBuffer(IoBuffer *buffer, int n, ParseStatus *status, SEXP prompt, 
+SEXP R::R_ParseBuffer(IoBuffer *buffer, int n, ParseStatus *status, SEXP prompt, 
 		   SEXP srcfile)
 {
     SEXP rval, t;

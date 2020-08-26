@@ -25,6 +25,9 @@
 #ifdef HAVE_CONFIG_H
 #include <config.h>
 #endif
+
+#define R_NO_REMAP
+
 #include <Localization.h>
 #include <Defn.h>
 

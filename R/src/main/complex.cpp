@@ -917,14 +917,13 @@ HIDDEN SEXP do_polyroot(SEXP call, SEXP op, SEXP args, SEXP rho)
 
 #include <Rmath.h> /* for R_pow_di */
 
-static void calct(bool&);
+static void calct(bool &);
 static bool fxshft(int, double *, double *);
 static bool vrshft(int, double *, double *);
 static void nexth(bool);
 static void noshft(int);
 
-static void polyev(int, double, double,
-		   double *, double *, double *, double *, double *, double *);
+static void polyev(int, double, double, double *, double *, double *, double *, double *, double *);
 static double errev(int, double *, double *, double, double, double, double);
 static double cpoly_cauchy(int, double *, double *);
 static double cpoly_scale(int, double *, double, double, double, double);

@@ -59,7 +59,7 @@
 extern inline SEXP CAR(SEXP e)
 {
     if (BNDCELL_TAG(e))
-        error(_("bad binding access"));
+        Rf_error(_("bad binding access"));
     return CAR0(e);
 }
 #else
@@ -83,7 +83,7 @@ extern inline void CHKVEC(SEXP x)
     case WEAKREFSXP:
         break;
     default:
-        error(_("cannot get data pointer of '%s' objects"), type2char(TYPEOF(x)));
+        Rf_error(_("cannot get data pointer of '%s' objects"), type2char(TYPEOF(x)));
     }
 }
 #else
@@ -128,35 +128,35 @@ extern inline const void *DATAPTR_OR_NULL(SEXP x)
 }
 
 #ifdef STRICT_TYPECHECK
-#define CHECK_VECTOR_LGL(x)                      \
-    do                                           \
-    {                                            \
-        if (TYPEOF(x) != LGLSXP)                 \
-            error(_("bad %s vector"), "LGLSXP"); \
+#define CHECK_VECTOR_LGL(x)                         \
+    do                                              \
+    {                                               \
+        if (TYPEOF(x) != LGLSXP)                    \
+            Rf_error(_("bad %s vector"), "LGLSXP"); \
     } while (0)
 #define CHECK_VECTOR_INT(x)                                \
     do                                                     \
     {                                                      \
         if (!(TYPEOF(x) == INTSXP || TYPEOF(x) == LGLSXP)) \
-            error(_("bad %s vector"), "INTSXP");           \
+            Rf_error(_("bad %s vector"), "INTSXP");        \
     } while (0)
-#define CHECK_VECTOR_REAL(x)                      \
-    do                                            \
-    {                                             \
-        if (TYPEOF(x) != REALSXP)                 \
-            error(_("bad %s vector"), "REALSXP"); \
+#define CHECK_VECTOR_REAL(x)                         \
+    do                                               \
+    {                                                \
+        if (TYPEOF(x) != REALSXP)                    \
+            Rf_error(_("bad %s vector"), "REALSXP"); \
     } while (0)
-#define CHECK_VECTOR_CPLX(x)                      \
-    do                                            \
-    {                                             \
-        if (TYPEOF(x) != CPLXSXP)                 \
-            error(_("bad %s vector"), "CPLXSXP"); \
+#define CHECK_VECTOR_CPLX(x)                         \
+    do                                               \
+    {                                                \
+        if (TYPEOF(x) != CPLXSXP)                    \
+            Rf_error(_("bad %s vector"), "CPLXSXP"); \
     } while (0)
-#define CHECK_VECTOR_RAW(x)                      \
-    do                                           \
-    {                                            \
-        if (TYPEOF(x) != RAWSXP)                 \
-            error(_("bad %s vector"), "RAWSXP"); \
+#define CHECK_VECTOR_RAW(x)                         \
+    do                                              \
+    {                                               \
+        if (TYPEOF(x) != RAWSXP)                    \
+            Rf_error(_("bad %s vector"), "RAWSXP"); \
     } while (0)
 #else
 #define CHECK_VECTOR_LGL(x) do { } while(0)
@@ -224,35 +224,35 @@ extern inline int LENGTH_EX(SEXP x, const char *file, int line)
     {                                                     \
         CHECK_VECTOR_LGL(x);                              \
         if (ALTREP(x))                                    \
-            error(_("bad standard %s vector"), "LGLSXP"); \
+            Rf_error(_("bad standard %s vector"), "LGLSXP"); \
     } while (0)
 #define CHECK_STDVEC_INT(x)                               \
     do                                                    \
     {                                                     \
         CHECK_VECTOR_INT(x);                              \
         if (ALTREP(x))                                    \
-            error(_("bad standard %s vector"), "INTSXP"); \
+            Rf_error(_("bad standard %s vector"), "INTSXP"); \
     } while (0)
 #define CHECK_STDVEC_REAL(x)                               \
     do                                                     \
     {                                                      \
         CHECK_VECTOR_REAL(x);                              \
         if (ALTREP(x))                                     \
-            error(_("bad standard %s vector"), "REALSXP"); \
+            Rf_error(_("bad standard %s vector"), "REALSXP"); \
     } while (0)
 #define CHECK_STDVEC_CPLX(x)                               \
     do                                                     \
     {                                                      \
         CHECK_VECTOR_CPLX(x);                              \
         if (ALTREP(x))                                     \
-            error(_("bad standard %s vector"), "CPLXSXP"); \
+            Rf_error(_("bad standard %s vector"), "CPLXSXP"); \
     } while (0)
 #define CHECK_STDVEC_RAW(x)                               \
     do                                                    \
     {                                                     \
         CHECK_VECTOR_RAW(x);                              \
         if (ALTREP(x))                                    \
-            error(_("bad standard %s vector"), "RAWSXP"); \
+            Rf_error(_("bad standard %s vector"), "RAWSXP"); \
     } while (0)
 
 #define CHECK_SCALAR_LGL(x)                      \
@@ -260,42 +260,42 @@ extern inline int LENGTH_EX(SEXP x, const char *file, int line)
     {                                            \
         CHECK_STDVEC_LGL(x);                     \
         if (XLENGTH(x) != 1)                     \
-            error(_("bad %s scalar"), "LGLSXP"); \
+            Rf_error(_("bad %s scalar"), "LGLSXP"); \
     } while (0)
 #define CHECK_SCALAR_INT(x)                      \
     do                                           \
     {                                            \
         CHECK_STDVEC_INT(x);                     \
         if (XLENGTH(x) != 1)                     \
-            error(_("bad %s scalar"), "INTSXP"); \
+            Rf_error(_("bad %s scalar"), "INTSXP"); \
     } while (0)
 #define CHECK_SCALAR_REAL(x)                      \
     do                                            \
     {                                             \
         CHECK_STDVEC_REAL(x);                     \
         if (XLENGTH(x) != 1)                      \
-            error(_("bad %s scalar"), "REALSXP"); \
+            Rf_error(_("bad %s scalar"), "REALSXP"); \
     } while (0)
 #define CHECK_SCALAR_CPLX(x)                      \
     do                                            \
     {                                             \
         CHECK_STDVEC_CPLX(x);                     \
         if (XLENGTH(x) != 1)                      \
-            error(_("bad %s scalar"), "CPLXSXP"); \
+            Rf_error(_("bad %s scalar"), "CPLXSXP"); \
     } while (0)
 #define CHECK_SCALAR_RAW(x)                      \
     do                                           \
     {                                            \
         CHECK_STDVEC_RAW(x);                     \
         if (XLENGTH(x) != 1)                     \
-            error(_("bad %s scalar"), "RAWSXP"); \
+            Rf_error(_("bad %s scalar"), "RAWSXP"); \
     } while (0)
 
 #define CHECK_BOUNDS_ELT(x, i)                   \
     do                                           \
     {                                            \
         if (i < 0 || i > XLENGTH(x))             \
-            error(_("subscript out of bounds")); \
+            Rf_error(_("subscript out of bounds")); \
     } while (0)
 
 #define CHECK_VECTOR_LGL_ELT(x, i)          \
@@ -662,7 +662,7 @@ extern inline R_xlen_t Rf_xlength(SEXP s)
     }
 }
 
-/* regular allocVector() as a special case of allocVector3() with no custom allocator */
+/* regular Rf_allocVector() as a special case of allocVector3() with no custom allocator */
 extern inline SEXP Rf_allocVector(SEXPTYPE type, R_xlen_t length = 1)
 {
     return Rf_allocVector3(type, length, nullptr);
@@ -715,7 +715,7 @@ extern inline SEXP Rf_list1(SEXP s)
 extern inline SEXP Rf_list2(SEXP s, SEXP t)
 {
     PROTECT(s);
-    s = CONS(s, list1(t));
+    s = CONS(s, Rf_list1(t));
     UNPROTECT(1);
     return s;
 }
@@ -723,7 +723,7 @@ extern inline SEXP Rf_list2(SEXP s, SEXP t)
 extern inline SEXP Rf_list3(SEXP s, SEXP t, SEXP u)
 {
     PROTECT(s);
-    s = CONS(s, list2(t, u));
+    s = CONS(s, Rf_list2(t, u));
     UNPROTECT(1);
     return s;
 }
@@ -731,7 +731,7 @@ extern inline SEXP Rf_list3(SEXP s, SEXP t, SEXP u)
 extern inline SEXP Rf_list4(SEXP s, SEXP t, SEXP u, SEXP v)
 {
     PROTECT(s);
-    s = CONS(s, list3(t, u, v));
+    s = CONS(s, Rf_list3(t, u, v));
     UNPROTECT(1);
     return s;
 }
@@ -739,7 +739,7 @@ extern inline SEXP Rf_list4(SEXP s, SEXP t, SEXP u, SEXP v)
 extern inline SEXP Rf_list5(SEXP s, SEXP t, SEXP u, SEXP v, SEXP w)
 {
     PROTECT(s);
-    s = CONS(s, list4(t, u, v, w));
+    s = CONS(s, Rf_list4(t, u, v, w));
     UNPROTECT(1);
     return s;
 }
@@ -747,7 +747,7 @@ extern inline SEXP Rf_list5(SEXP s, SEXP t, SEXP u, SEXP v, SEXP w)
 extern inline SEXP Rf_list6(SEXP s, SEXP t, SEXP u, SEXP v, SEXP w, SEXP x)
 {
     PROTECT(s);
-    s = CONS(s, list5(t, u, v, w, x));
+    s = CONS(s, Rf_list5(t, u, v, w, x));
     UNPROTECT(1);
     return s;
 }
@@ -786,7 +786,7 @@ extern inline SEXP Rf_lang1(SEXP s)
 extern inline SEXP Rf_lang2(SEXP s, SEXP t)
 {
     PROTECT(s);
-    s = LCONS(s, list1(t));
+    s = LCONS(s, Rf_list1(t));
     UNPROTECT(1);
     return s;
 }
@@ -794,7 +794,7 @@ extern inline SEXP Rf_lang2(SEXP s, SEXP t)
 extern inline SEXP Rf_lang3(SEXP s, SEXP t, SEXP u)
 {
     PROTECT(s);
-    s = LCONS(s, list2(t, u));
+    s = LCONS(s, Rf_list2(t, u));
     UNPROTECT(1);
     return s;
 }
@@ -802,7 +802,7 @@ extern inline SEXP Rf_lang3(SEXP s, SEXP t, SEXP u)
 extern inline SEXP Rf_lang4(SEXP s, SEXP t, SEXP u, SEXP v)
 {
     PROTECT(s);
-    s = LCONS(s, list3(t, u, v));
+    s = LCONS(s, Rf_list3(t, u, v));
     UNPROTECT(1);
     return s;
 }
@@ -810,7 +810,7 @@ extern inline SEXP Rf_lang4(SEXP s, SEXP t, SEXP u, SEXP v)
 extern inline SEXP Rf_lang5(SEXP s, SEXP t, SEXP u, SEXP v, SEXP w)
 {
     PROTECT(s);
-    s = LCONS(s, list4(t, u, v, w));
+    s = LCONS(s, Rf_list4(t, u, v, w));
     UNPROTECT(1);
     return s;
 }
@@ -818,7 +818,7 @@ extern inline SEXP Rf_lang5(SEXP s, SEXP t, SEXP u, SEXP v, SEXP w)
 extern inline SEXP Rf_lang6(SEXP s, SEXP t, SEXP u, SEXP v, SEXP w, SEXP x)
 {
     PROTECT(s);
-    s = LCONS(s, list5(t, u, v, w, x));
+    s = LCONS(s, Rf_list5(t, u, v, w, x));
     UNPROTECT(1);
     return s;
 }
@@ -830,8 +830,8 @@ extern inline SEXP Rf_lang6(SEXP s, SEXP t, SEXP u, SEXP v, SEXP w, SEXP x)
 extern inline Rboolean Rf_conformable(SEXP x, SEXP y)
 {
     int i, n;
-    PROTECT(x = getAttrib(x, R_DimSymbol));
-    y = getAttrib(y, R_DimSymbol);
+    PROTECT(x = Rf_getAttrib(x, R_DimSymbol));
+    y = Rf_getAttrib(y, R_DimSymbol);
     UNPROTECT(1);
     if ((n = Rf_length(x)) != Rf_length(y))
         return FALSE;
@@ -841,8 +841,8 @@ extern inline Rboolean Rf_conformable(SEXP x, SEXP y)
     return TRUE;
 }
 
-/* NOTE: R's inherits() is based on inherits3() in ../main/objects.cpp
- * Here, use char / CHAR() instead of the slower more general translateChar()
+/* NOTE: R's Rf_inherits() is based on inherits3() in ../main/objects.cpp
+ * Here, use char / CHAR() instead of the slower more general Rf_translateChar()
  */
 extern inline Rboolean Rf_inherits(SEXP s, const char *name)
 {
@@ -850,7 +850,7 @@ extern inline Rboolean Rf_inherits(SEXP s, const char *name)
     int i, nclass;
     if (OBJECT(s))
     {
-        klass = getAttrib(s, R_ClassSymbol);
+        klass = Rf_getAttrib(s, R_ClassSymbol);
         nclass = Rf_length(klass);
         for (i = 0; i < nclass; i++)
         {
@@ -869,7 +869,7 @@ extern inline Rboolean Rf_isValidString(SEXP x)
 /* non-empty ("") valid string :*/
 extern inline Rboolean Rf_isValidStringF(SEXP x)
 {
-    return Rboolean(isValidString(x) && CHAR(STRING_ELT(x, 0))[0]);
+    return Rboolean(Rf_isValidString(x) && CHAR(STRING_ELT(x, 0))[0]);
 }
 
 extern inline Rboolean Rf_isUserBinop(SEXP s)
@@ -892,7 +892,7 @@ extern inline Rboolean Rf_isPrimitive(SEXP s)
 extern inline Rboolean Rf_isFunction(SEXP s)
 {
     return Rboolean(TYPEOF(s) == CLOSXP ||
-                    isPrimitive(s));
+                    Rf_isPrimitive(s));
 }
 
 extern inline Rboolean Rf_isList(SEXP s)
@@ -972,7 +972,7 @@ extern inline Rboolean Rf_isFrame(SEXP s)
     int i;
     if (OBJECT(s))
     {
-        klass = getAttrib(s, R_ClassSymbol);
+        klass = Rf_getAttrib(s, R_ClassSymbol);
         for (i = 0; i < Rf_length(klass); i++)
             if (!strcmp(CHAR(STRING_ELT(klass, i)), "data.frame"))
                 return TRUE;
@@ -990,9 +990,9 @@ extern inline Rboolean Rf_isLanguage(SEXP s)
 extern inline Rboolean Rf_isMatrix(SEXP s)
 {
     SEXP t;
-    if (isVector(s))
+    if (Rf_isVector(s))
     {
-        t = getAttrib(s, R_DimSymbol);
+        t = Rf_getAttrib(s, R_DimSymbol);
         /* You are not supposed to be able to assign a non-integer dim,
 	   although this might be possible by misuse of ATTRIB. */
         if (TYPEOF(t) == INTSXP && LENGTH(t) == 2)
@@ -1004,9 +1004,9 @@ extern inline Rboolean Rf_isMatrix(SEXP s)
 extern inline Rboolean Rf_isArray(SEXP s)
 {
     SEXP t;
-    if (isVector(s))
+    if (Rf_isVector(s))
     {
-        t = getAttrib(s, R_DimSymbol);
+        t = Rf_getAttrib(s, R_DimSymbol);
         /* You are not supposed to be able to assign a 0-length dim,
 	 nor a non-integer dim */
         if ((TYPEOF(t) == INTSXP) && LENGTH(t) > 0)
@@ -1017,24 +1017,24 @@ extern inline Rboolean Rf_isArray(SEXP s)
 
 extern inline Rboolean Rf_isTs(SEXP s)
 {
-    return Rboolean(isVector(s) && getAttrib(s, R_TspSymbol) != R_NilValue);
+    return Rboolean(Rf_isVector(s) && Rf_getAttrib(s, R_TspSymbol) != R_NilValue);
 }
 
 extern inline Rboolean Rf_isInteger(SEXP s)
 {
-    return Rboolean(s && TYPEOF(s) == INTSXP && !inherits(s, "factor"));
+    return Rboolean(s && TYPEOF(s) == INTSXP && !Rf_inherits(s, "factor"));
 }
 
 extern inline Rboolean Rf_isFactor(SEXP s)
 {
-    return Rboolean(s && TYPEOF(s) == INTSXP && inherits(s, "factor"));
+    return Rboolean(s && TYPEOF(s) == INTSXP && Rf_inherits(s, "factor"));
 }
 
 extern inline int Rf_nlevels(SEXP f)
 {
-    if (!isFactor(f))
+    if (!Rf_isFactor(f))
         return 0;
-    return LENGTH(getAttrib(f, R_LevelsSymbol));
+    return LENGTH(Rf_getAttrib(f, R_LevelsSymbol));
 }
 
 /* Is an object of numeric type. */
@@ -1046,7 +1046,7 @@ extern inline Rboolean Rf_isNumeric(SEXP s)
     switch (TYPEOF(s))
     {
     case INTSXP:
-        if (inherits(s, "factor"))
+        if (Rf_inherits(s, "factor"))
             return FALSE;
     case LGLSXP:
     case REALSXP:
@@ -1062,7 +1062,7 @@ extern inline Rboolean Rf_isNumber(SEXP s)
     switch (TYPEOF(s))
     {
     case INTSXP:
-        if (inherits(s, "factor"))
+        if (Rf_inherits(s, "factor"))
             return FALSE;
     case LGLSXP:
     case REALSXP:
@@ -1087,21 +1087,21 @@ extern inline SEXP Rf_ScalarLogical(int x)
 
 extern inline SEXP Rf_ScalarInteger(int x)
 {
-    SEXP ans = allocVector(INTSXP, 1);
+    SEXP ans = Rf_allocVector(INTSXP, 1);
     SET_SCALAR_IVAL(ans, x);
     return ans;
 }
 
 extern inline SEXP Rf_ScalarReal(double x)
 {
-    SEXP ans = allocVector(REALSXP, 1);
+    SEXP ans = Rf_allocVector(REALSXP, 1);
     SET_SCALAR_DVAL(ans, x);
     return ans;
 }
 
 extern inline SEXP Rf_ScalarComplex(Rcomplex x)
 {
-    SEXP ans = allocVector(CPLXSXP, 1);
+    SEXP ans = Rf_allocVector(CPLXSXP, 1);
     SET_SCALAR_CVAL(ans, x);
     return ans;
 }
@@ -1110,7 +1110,7 @@ extern inline SEXP Rf_ScalarString(SEXP x)
 {
     SEXP ans;
     PROTECT(x);
-    ans = allocVector(STRSXP, (R_xlen_t)1);
+    ans = Rf_allocVector(STRSXP, (R_xlen_t)1);
     SET_STRING_ELT(ans, (R_xlen_t)0, x);
     UNPROTECT(1);
     return ans;
@@ -1118,7 +1118,7 @@ extern inline SEXP Rf_ScalarString(SEXP x)
 
 extern inline SEXP Rf_ScalarRaw(Rbyte x)
 {
-    SEXP ans = allocVector(RAWSXP, 1);
+    SEXP ans = Rf_allocVector(RAWSXP, 1);
     SET_SCALAR_BVAL(ans, x);
     return ans;
 }
@@ -1131,20 +1131,20 @@ extern inline Rboolean Rf_isVectorizable(SEXP s)
 {
     if (s == R_NilValue)
         return TRUE;
-    else if (isNewList(s))
+    else if (Rf_isNewList(s))
     {
         R_xlen_t i, n;
 
         n = XLENGTH(s);
         for (i = 0; i < n; i++)
-            if (!isVector(VECTOR_ELT(s, i)) || XLENGTH(VECTOR_ELT(s, i)) > 1)
+            if (!Rf_isVector(VECTOR_ELT(s, i)) || XLENGTH(VECTOR_ELT(s, i)) > 1)
                 return FALSE;
         return TRUE;
     }
-    else if (isList(s))
+    else if (Rf_isList(s))
     {
         for (; s != R_NilValue; s = CDR(s))
-            if (!isVector(CAR(s)) || LENGTH(CAR(s)) > 1)
+            if (!Rf_isVector(CAR(s)) || LENGTH(CAR(s)) > 1)
                 return FALSE;
         return TRUE;
     }
@@ -1170,24 +1170,24 @@ extern inline SEXP Rf_mkNamed(SEXPTYPE TYP, const char **names)
     R_xlen_t i, n;
 
     for (n = 0; strlen(names[n]) > 0; n++) {}
-    ans = PROTECT(allocVector(TYP, n));
-    nms = PROTECT(allocVector(STRSXP, n));
+    ans = PROTECT(Rf_allocVector(TYP, n));
+    nms = PROTECT(Rf_allocVector(STRSXP, n));
     for (i = 0; i < n; i++)
-        SET_STRING_ELT(nms, i, mkChar(names[i]));
-    setAttrib(ans, R_NamesSymbol, nms);
+        SET_STRING_ELT(nms, i, Rf_mkChar(names[i]));
+    Rf_setAttrib(ans, R_NamesSymbol, nms);
     UNPROTECT(2);
     return ans;
 }
 
 /* from gram.y */
 
-/* short cut for  ScalarString(mkChar(s)) : */
+/* short cut for  ScalarString(Rf_mkChar(s)) : */
 extern inline SEXP Rf_mkString(const char *s)
 {
     SEXP t;
 
-    PROTECT(t = allocVector(STRSXP, (R_xlen_t)1));
-    SET_STRING_ELT(t, (R_xlen_t)0, mkChar(s));
+    PROTECT(t = Rf_allocVector(STRSXP, (R_xlen_t)1));
+    SET_STRING_ELT(t, (R_xlen_t)0, Rf_mkChar(s));
     UNPROTECT(1);
     return t;
 }
@@ -1202,7 +1202,7 @@ extern inline int Rf_stringPositionTr(SEXP string, const char *translatedElement
     const void *vmax = vmaxget();
     for (i = 0; i < slen; i++)
     {
-        Rboolean found = (Rboolean)(!strcmp(translateChar(STRING_ELT(string, i)),
+        Rboolean found = (Rboolean)(!strcmp(Rf_translateChar(STRING_ELT(string, i)),
                                             translatedElement));
         vmaxset(vmax);
         if (found)
@@ -1222,7 +1222,7 @@ extern inline SEXP R_FixupRHS(SEXP x, SEXP y)
             warning(_("cycle detected"));
             R_cycle_detected(x, y);
 #endif
-            y = duplicate(y);
+            y = Rf_duplicate(y);
         }
         else
             ENSURE_NAMEDMAX(y);

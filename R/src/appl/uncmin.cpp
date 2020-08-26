@@ -38,6 +38,8 @@
 #include <Rmath.h>
 #define Rexp10(x) pow(10.0, x)
 
+using namespace R;
+
 /* CC	 subroutines  mvmlt[lsu] should be REPLACED by BLAS ones!
  * CC
  * CC--- choldc(nr,n,a,diagmx,tol,addmax)	 is ``choleski + tolerance''

@@ -22,6 +22,7 @@
 #include <config.h>
 #endif
 
+#define R_NO_REMAP
 #include <cstdlib> /* for putenv */
 #define R_USE_SIGNALS 1
 #include <Localization.h>

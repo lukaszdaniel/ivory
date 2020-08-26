@@ -32,6 +32,8 @@
 #include <config.h>
 #endif
 
+#define R_NO_REMAP
+
 #include <Localization.h>
 #include <Defn.h>
 #include "Print.h"

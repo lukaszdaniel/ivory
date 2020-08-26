@@ -33,6 +33,7 @@
 #include <R_ext/Minmax.h>
 
 using namespace std;
+using namespace R;
 
 #include "RBufferUtils.h"
 static R_StringBuffer cbuff = R_StringBuffer();

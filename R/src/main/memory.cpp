@@ -34,6 +34,8 @@
 #include <config.h>
 #endif
 
+#define R_NO_REMAP
+
 #include <cstdarg>
 
 #include <R_ext/RS.h> /* for S4 allocation */
@@ -4482,15 +4484,16 @@ SEXP (SET_CXTAIL)(SEXP x, SEXP v) {
 /* Test functions */
 extern "C"
 {
-    Rboolean Rf_isNull(SEXP s) { return (Rboolean)isNull(CHK(s)); }
-    Rboolean Rf_isSymbol(SEXP s) { return (Rboolean)isSymbol(CHK(s)); }
-    Rboolean Rf_isLogical(SEXP s) { return (Rboolean)isLogical(CHK(s)); }
-    Rboolean Rf_isReal(SEXP s) { return (Rboolean)isReal(CHK(s)); }
-    Rboolean Rf_isComplex(SEXP s) { return (Rboolean)isComplex(CHK(s)); }
-    Rboolean Rf_isExpression(SEXP s) { return (Rboolean)isExpression(CHK(s)); }
-    Rboolean Rf_isEnvironment(SEXP s) { return (Rboolean)isEnvironment(CHK(s)); }
-    Rboolean Rf_isString(SEXP s) { return (Rboolean)isString(CHK(s)); }
-    Rboolean Rf_isObject(SEXP s) { return (Rboolean)isObject(CHK(s)); }
+    Rboolean Rf_isNull(SEXP s) { return (Rboolean) (TYPEOF(CHK(s)) == NILSXP); }
+    Rboolean Rf_isSymbol(SEXP s) { return (Rboolean) (TYPEOF(CHK(s)) == SYMSXP); }
+    Rboolean Rf_isLogical(SEXP s) { return (Rboolean) (TYPEOF(CHK(s)) == LGLSXP); }
+    Rboolean Rf_isReal(SEXP s) { return (Rboolean) (TYPEOF(CHK(s)) == REALSXP); }
+    Rboolean Rf_isComplex(SEXP s) { return (Rboolean) (TYPEOF(CHK(s)) == CPLXSXP); }
+    Rboolean Rf_isExpression(SEXP s) { return (Rboolean) (TYPEOF(CHK(s)) == EXPRSXP); }
+    Rboolean Rf_isEnvironment(SEXP s) { return (Rboolean) (TYPEOF(CHK(s)) == ENVSXP); }
+    Rboolean Rf_isString(SEXP s) { return (Rboolean) (TYPEOF(CHK(s)) == STRSXP); }
+    Rboolean Rf_isObject(SEXP s) { return (Rboolean) (OBJECT(CHK(s)) != 0); }
+    Rboolean Rf_isRaw(SEXP s) { return (Rboolean) (TYPEOF(CHK(s)) == RAWSXP); }
 }
 
 /* Bindings accessors */

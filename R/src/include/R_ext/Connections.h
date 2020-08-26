@@ -47,6 +47,7 @@
 #ifndef HAVE_RCONNECTION_TYPEDEF
 typedef struct Rconn* Rconnection;
 #endif
+
 struct Rconn
 {
     char *connclass;
@@ -102,7 +103,7 @@ struct Rconn
 extern "C" {
 #endif
 
-SEXP   R_new_custom_connection(const char *description, const char *mode, const char *class_name, Rconnection *ptr);
+SEXP R_new_custom_connection(const char *description, const char *mode, const char *class_name, Rconnection *ptr);
 size_t R_ReadConnection(Rconnection con, void *buf, size_t n);
 size_t R_WriteConnection(Rconnection con, const void *buf, size_t n);
 Rconnection R_GetConnection(SEXP sConn); // added in R 3.3.0

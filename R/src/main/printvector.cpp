@@ -34,6 +34,8 @@
 #include <config.h>
 #endif
 
+#define R_NO_REMAP
+
 #include <Localization.h>
 #include <Defn.h>
 #include <Rinternals.h>
@@ -136,7 +138,7 @@ static void printLogicalVectorS(SEXP x, R_xlen_t n, int indx) {
 }
 
 HIDDEN
-void Rf_printIntegerVector(const int *x, R_xlen_t n, int indx)
+void R::Rf_printIntegerVector(const int *x, R_xlen_t n, int indx)
 {
     int w, labwidth=0, width;
 
@@ -151,7 +153,7 @@ void Rf_printIntegerVector(const int *x, R_xlen_t n, int indx)
 }
 
 HIDDEN
-void printIntegerVectorS(SEXP x, R_xlen_t n, int indx)
+void R::printIntegerVectorS(SEXP x, R_xlen_t n, int indx)
 {
     int w, labwidth=0, width;
     R_xlen_t i;
@@ -171,7 +173,7 @@ void printIntegerVectorS(SEXP x, R_xlen_t n, int indx)
 // used in uncmin.cpp
 // Not easily converted to printRealVectorS calls
 HIDDEN
-void Rf_printRealVector(const double *x, R_xlen_t n, int indx)
+void R::Rf_printRealVector(const double *x, R_xlen_t n, int indx)
 {
     int w, d, e, labwidth=0, width;
 
@@ -186,7 +188,7 @@ void Rf_printRealVector(const double *x, R_xlen_t n, int indx)
 }
 
 HIDDEN
-void printRealVectorS(SEXP x, R_xlen_t n, int indx)
+void R::printRealVectorS(SEXP x, R_xlen_t n, int indx)
 {
     int w, d, e, labwidth=0, width;
     R_xlen_t i;
@@ -205,7 +207,7 @@ void printRealVectorS(SEXP x, R_xlen_t n, int indx)
 
 #define CMPLX_ISNA(cplx) (ISNA(cplx.r) || ISNA(cplx.i))
 HIDDEN
-void Rf_printComplexVector(const Rcomplex *x, R_xlen_t n, int indx)
+void R::Rf_printComplexVector(const Rcomplex *x, R_xlen_t n, int indx)
 {
     int w, wr, dr, er, wi, di, ei, labwidth=0, width;
 
@@ -225,7 +227,7 @@ void Rf_printComplexVector(const Rcomplex *x, R_xlen_t n, int indx)
 }
 
 HIDDEN
-void printComplexVectorS(SEXP x, R_xlen_t n, int indx)
+void R::printComplexVectorS(SEXP x, R_xlen_t n, int indx)
 {
     int w, wr, dr, er, wi, di, ei, labwidth=0, width;
     R_xlen_t i;
