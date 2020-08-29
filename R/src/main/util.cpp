@@ -666,7 +666,7 @@ HIDDEN SEXP do_merge(SEXP call, SEXP op, SEXP args, SEXP rho)
     for (i = 0; i < nx; i++)
 	if (INTEGER(xi)[i] > 0) break;
     nx_lone = i;
-    for (int i = 0; i < ny; i++)
+    for (i = 0; i < ny; i++)
 	if (INTEGER(yi)[i] > 0) break;
     ny_lone = i;
     double dnans = 0;
