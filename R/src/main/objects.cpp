@@ -34,6 +34,8 @@
 #include <Internal.h>
 #include <R_ext/RS.h> /* for Calloc, Realloc and for S4 object bit */
 
+#include <utility>
+
 using namespace R;
 
 static SEXP GetObject(RCNTXT *cptr)
@@ -1552,7 +1554,7 @@ void R_set_quick_method_check(R_stdGen_ptr_t value)
    promises, but not from the other two: there all the arguments have
    already been evaluated.
  */
-HIDDEN SEXP R::R_possible_dispatch(SEXP call, SEXP op, SEXP args, SEXP rho,
+HIDDEN std::pair<bool, SEXP> R::R_possible_dispatch(SEXP call, SEXP op, SEXP args, SEXP rho,
 		    bool promisedArgs)
 {
     SEXP fundef, value, mlist=R_NilValue, s, a, b, suppliedvars;
@@ -1563,7 +1565,7 @@ HIDDEN SEXP R::R_possible_dispatch(SEXP call, SEXP op, SEXP args, SEXP rho,
 	error(_("invalid primitive operation given for dispatch"));
     current = prim_methods[offset];
     if(current == NO_METHODS || current == SUPPRESSED)
-	return(nullptr);
+	return std::make_pair(false, nullptr);
     /* check that the methods for this function have been set */
     if(current == NEEDS_RESET) {
 	/* get the methods and store them in the in-core primitive
@@ -1581,10 +1583,10 @@ HIDDEN SEXP R::R_possible_dispatch(SEXP call, SEXP op, SEXP args, SEXP rho,
        && quick_method_check_ptr) {
 	value = (*quick_method_check_ptr)(args, mlist, op);
 	if(isPrimitive(value))
-	    return(nullptr);
+	    return std::make_pair(false, nullptr);
 	if(isFunction(value)) {
             if (inherits(value, "internalDispatchMethod")) {
-                return(nullptr);
+                return std::make_pair(false, nullptr);
             }
             PROTECT(suppliedvars = list1(mkString(PRIMNAME(op))));
             SET_TAG(suppliedvars, R_dot_Generic);
@@ -1599,7 +1601,7 @@ HIDDEN SEXP R::R_possible_dispatch(SEXP call, SEXP op, SEXP args, SEXP rho,
 		unpromiseArgs(s);
 #endif
 		UNPROTECT(2);
-		return value;
+		return std::make_pair(true, value);
 	    } else {
 		/* INC/DEC of REFCNT needed for non-tracking args */
 		for (SEXP a = args; a != R_NilValue; a = CDR(a))
@@ -1608,7 +1610,7 @@ HIDDEN SEXP R::R_possible_dispatch(SEXP call, SEXP op, SEXP args, SEXP rho,
 		for (SEXP a = args; a != R_NilValue; a = CDR(a))
 		    DECREMENT_REFCNT(CAR(a));
                 UNPROTECT(1);
-                return value;
+                return std::make_pair(true, value);
             }
 	}
 	/* else, need to perform full method search */
@@ -1635,9 +1637,9 @@ HIDDEN SEXP R::R_possible_dispatch(SEXP call, SEXP op, SEXP args, SEXP rho,
     }
     prim_methods[offset] = current;
     if(value == deferred_default_object)
-	return nullptr;
+	return std::make_pair(false, nullptr);
     else
-	return value;
+	return std::make_pair(true, value);
 }
 
 SEXP R_do_MAKE_CLASS(const char *what)

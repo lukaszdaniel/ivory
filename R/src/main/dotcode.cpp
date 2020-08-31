@@ -527,7 +527,8 @@ static SEXP check_retval(SEXP call, SEXP val)
 		if (val < (SEXP)16)
 			errorcall(call, _("WEIRD RETURN VALUE: %p"), val);
 	}
-	else if (val == nullptr)
+	// R_NilValue is nullptr now
+	else if (R_NilValue && val == nullptr)
 	{
 		warningcall(call, _("converting NULL pointer to R NULL"));
 		val = R_NilValue;

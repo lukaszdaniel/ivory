@@ -231,7 +231,6 @@ SEXP do_copyDFattr(SEXP call, SEXP op, SEXP args, SEXP env)
 /* 'name' should be 1-element STRSXP or SYMSXP */
 SEXP Rf_setAttrib(SEXP vec, SEXP name, SEXP val)
 {
-	if(!vec) return nullptr;
     PROTECT(vec);
     PROTECT(name);
 
@@ -380,7 +379,6 @@ static SEXP installAttrib(SEXP vec, SEXP name, SEXP val)
 
 static SEXP removeAttrib(SEXP vec, SEXP name)
 {
-	if(!vec) return nullptr;
 
 	SEXP t;
 	if (TYPEOF(vec) == CHARSXP)
@@ -608,7 +606,7 @@ HIDDEN SEXP do_class(SEXP call, SEXP op, SEXP args, SEXP env)
 static SEXP lang2str(SEXP obj, SEXPTYPE t)
 {
   SEXP symb = CAR(obj);
-  assert(symb);
+
   static SEXP if_sym = nullptr, while_sym, for_sym, eq_sym, gets_sym,
     lpar_sym, lbrace_sym, call_sym;
   if(!if_sym) {

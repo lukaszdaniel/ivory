@@ -3462,7 +3462,8 @@ bool R::DispatchAnyOrEval(SEXP call, SEXP op, const char *generic, SEXP args,
 		      SEXP rho, SEXP *ans, int dropmissing, int argsevald)
 {
     if(R_has_methods(op)) {
-	SEXP argValue, el,  value;
+	SEXP argValue, el;
+	std::pair<bool, SEXP> value;
 	/* Rboolean hasS4 = FALSE; */
 	int nprotect = 0, dispatch;
 	if(!argsevald) {
@@ -3474,8 +3475,8 @@ bool R::DispatchAnyOrEval(SEXP call, SEXP op, const char *generic, SEXP args,
 	for(el = argValue; el != R_NilValue; el = CDR(el)) {
 	    if(IS_S4_OBJECT(CAR(el))) {
 		value = R_possible_dispatch(call, op, argValue, rho, true);
-		if(value) {
-		    *ans = value;
+		if(value.first) {
+		    *ans = value.second;
 		    UNPROTECT(nprotect);
 		    return true;
 		}
@@ -3553,7 +3554,8 @@ bool R::DispatchOrEval(SEXP call, SEXP op, const char *generic, SEXP args,
 	char *pt;
 	/* Try for formal method. */
 	if(IS_S4_OBJECT(x) && R_has_methods(op)) {
-	    SEXP value, argValue;
+		std::pair<bool, SEXP> value;
+	    SEXP argValue;
 	    /* create a promise to pass down to applyClosure  */
 	    if(!argsevald) {
 		argValue = promiseArgs(args, rho);
@@ -3562,8 +3564,8 @@ bool R::DispatchOrEval(SEXP call, SEXP op, const char *generic, SEXP args,
 	    PROTECT(argValue); nprotect++;
 	    /* This means S4 dispatch */
 	    value = R_possible_dispatch(call, op, argValue, rho, true);
-	    if(value) {
-		*ans = value;
+	    if(value.first) {
+		*ans = value.second;
 		UNPROTECT(nprotect);
 		return true;
 	    }
@@ -3714,7 +3716,8 @@ bool R::DispatchGroup(const char* group, SEXP call, SEXP op, SEXP args, SEXP rho
 {
     int i, nargs, lwhich, rwhich;
     SEXP lclass, s, t, m, lmeth, lsxp, lgr, newvars;
-    SEXP rclass, rmeth, rgr, rsxp, value;
+    SEXP rclass, rmeth, rgr, rsxp;
+	std::pair<bool, SEXP> value;
     const char *generic;
     bool useS4 = true, isOps = false;
 
@@ -3738,10 +3741,14 @@ bool R::DispatchGroup(const char* group, SEXP call, SEXP op, SEXP args, SEXP rho
 	/* Remove argument names to ensure positional matching */
 	if(isOps)
 	    for(s = args; s != R_NilValue; s = CDR(s)) SET_TAG(s, R_NilValue);
-	if(R_has_methods(op) &&
-	   (value = R_possible_dispatch(call, op, args, rho, false))) {
-	       *ans = value;
-	       return true;
+	if (R_has_methods(op))
+	{
+		value = R_possible_dispatch(call, op, args, rho, false);
+		if ((value.first))
+		{
+			*ans = value.second;
+			return true;
+		}
 	}
 	/* else go on to look for S3 methods */
     }
@@ -5556,9 +5563,9 @@ static int tryDispatch(const char *generic, SEXP call, SEXP x, SEXP rho, SEXP *p
 	have been evaluated; these will then be evaluated again by the
 	compiled argument code. */
   if (IS_S4_OBJECT(x) && R_has_methods(op)) {
-    SEXP val = R_possible_dispatch(call, op, pargs, rho, true);
-    if (val) {
-      *pv = val;
+    std::pair<bool, SEXP> val = R_possible_dispatch(call, op, pargs, rho, true);
+    if (val.first) {
+      *pv = val.second;
       UNPROTECT(1);
       return TRUE;
     }

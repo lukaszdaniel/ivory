@@ -797,7 +797,7 @@ namespace
 #define FORWARD_NODE(s)                              \
     do                                               \
     {                                                \
-        GCNode *fn__n__ = (s);                          \
+        GCNode *fn__n__ = (s);                       \
         if (fn__n__ && !NODE_IS_MARKED(fn__n__))     \
         {                                            \
             CHECK_FOR_FREE_NODE(fn__n__)             \
@@ -1336,7 +1336,7 @@ static void SortNodes(void)
             for (int j = 0; j < page_count; j++, data += node_size)
             {
                 s = (SEXP)data;
-                if (!NODE_IS_MARKED(s))
+                if (s && !NODE_IS_MARKED(s))
                     SNAP_NODE(s, R_GenHeap[i].New);
             }
         }
@@ -1445,7 +1445,8 @@ static void CheckFinalizers(void)
     R_finalizers_pending = false;
     for (SEXP wr = R_weak_refs; wr != R_NilValue; wr = WEAKREF_NEXT(wr))
     {
-        if (!NODE_IS_MARKED(WEAKREF_KEY(wr)) && !IS_READY_TO_FINALIZE(wr))
+        SEXP wrfk = WEAKREF_KEY(wr);
+        if (wrfk && !NODE_IS_MARKED(wrfk) && !IS_READY_TO_FINALIZE(wr))
             SET_READY_TO_FINALIZE(wr);
         if (IS_READY_TO_FINALIZE(wr))
             R_finalizers_pending = true;
@@ -1854,13 +1855,15 @@ static int RunGenCollect(R_size_t size_needed)
 	    recheck_weak_refs = FALSE;
 	    for (RObject *s = R_weak_refs; s != R_NilValue; s = WEAKREF_NEXT(s)) {
 		if (NODE_IS_MARKED(WEAKREF_KEY(s))) {
-		    if (! NODE_IS_MARKED(WEAKREF_VALUE(s))) {
+            SEXP wrv = WEAKREF_VALUE(s);
+		    if (wrv && !NODE_IS_MARKED(wrv)) {
 			recheck_weak_refs = TRUE;
 			FORWARD_NODE(WEAKREF_VALUE(s));
 		    }
-		    if (! NODE_IS_MARKED(WEAKREF_FINALIZER(s))) {
+            SEXP wrf = WEAKREF_FINALIZER(s);
+		    if (wrf && !NODE_IS_MARKED(wrf)) {
 			recheck_weak_refs = TRUE;
-			FORWARD_NODE(WEAKREF_FINALIZER(s));
+			FORWARD_NODE(wrf);
 		    }
 		}
 	    }
@@ -1892,7 +1895,7 @@ static int RunGenCollect(R_size_t size_needed)
 	    s = VECTOR_ELT(R_StringHash, i);
 	    t = R_NilValue;
 	    while (s != R_NilValue) {
-		if (! NODE_IS_MARKED(CXHEAD(s))) { /* remove unused CHARSXP and cons cell */
+		if (CXHEAD(s) && !NODE_IS_MARKED(CXHEAD(s))) { /* remove unused CHARSXP and cons cell */
 		    if (t == R_NilValue) /* head of list */
 			VECTOR_ELT(R_StringHash, i) = CXTAIL(s);
 		    else
@@ -2259,7 +2262,7 @@ HIDDEN void R::InitMemory()
     /* Field assignments for R_NilValue must not go through write barrier
        since the write barrier prevents assignments to R_NilValue's fields.
        because of checks for nil */
-#ifndef NOT_YET
+#if 0
     GET_FREE_NODE(R_NilValue);
     RObject::copy_sxpinfo(R_NilValue, UnmarkedNodeTemplate);
     INIT_REFCNT(R_NilValue);

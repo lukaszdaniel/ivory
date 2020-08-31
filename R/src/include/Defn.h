@@ -32,6 +32,8 @@
 #error Defn.h can only be included in C++ files
 #endif
 
+#include <utility>
+
 /* To test the write barrier used by the generational collector,
    define TESTING_WRITE_BARRIER.  This makes the internal structure of
    SEXPRECs visible only inside of files that explicitly define
@@ -1192,7 +1194,7 @@ namespace R
     bool R_current_debug_state(void);
     bool R_has_methods(SEXP);
     void R_InitialData(void);
-    SEXP R_possible_dispatch(SEXP, SEXP, SEXP, SEXP, bool);
+    std::pair<bool, SEXP> R_possible_dispatch(SEXP, SEXP, SEXP, SEXP, bool);
     bool inherits2(SEXP, const char *);
     void InitGraphics(void);
     void InitMemory(void);
