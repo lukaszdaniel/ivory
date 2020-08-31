@@ -1,9 +1,9 @@
 
-Ivory Under development (unstable) (2020-06-17 r1231) -- "Internationalized Version of R"
+Ivory Under development (unstable) (2020-08-31 r1289) -- "Internationalized Version of R"
 Copyright (C) 2013-2020 Lukasz Daniel (lukasz.daniel@gmail.com)
 See README-IVORY file for details.
 
-R Under development (unstable) (2020-06-17 r78705) -- "Unsuffered Consequences"
+R Under development (unstable) (2020-08-31 r79091) -- "Unsuffered Consequences"
 Copyright (C) 2020 The R Foundation for Statistical Computing
 Platform: x86_64-pc-linux-gnu (64-bit)
 
@@ -307,4 +307,4 @@ Call: survfit(formula = fit, newdata = list(x = 2))
 > 
 > proc.time()
    user  system elapsed 
-  1.770   0.080   1.842 
+  4.055   0.077   4.121 
