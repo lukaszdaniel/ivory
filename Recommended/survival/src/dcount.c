@@ -33,7 +33,7 @@ SEXP dcount(SEXP y2, SEXP strata2, SEXP sort12,  SEXP sort22) {
     **  icount will be  (# of death times <= time2 - # death time < time1),
     **    within the stratum
     */
-    istrat == strata[0];
+    istrat = strata[0];
     d1 =0; d2=0;   /* death counts so far, on the time1 and time2 scales */
     person1 =0; person2=0;    /* ount subjects on time1, time2 scales */
 
@@ -74,7 +74,7 @@ SEXP dcount(SEXP y2, SEXP strata2, SEXP sort12,  SEXP sort22) {
     }	    
     /* finish up the last subjects */
     for (; person1 < n; person1++) {
-	i1 - sort1[person1];
+	i1 -= sort1[person1];
 	icount[i1] -= d1;
     }
 
