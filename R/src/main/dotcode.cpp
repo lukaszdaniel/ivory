@@ -1129,6 +1129,7 @@ HIDDEN SEXP do_dotCode(SEXP call, SEXP op, SEXP args, SEXP env)
 	    }
 	    break;
 	case VECSXP:
+	{
 	    if (Fort) error(_("invalid mode (%s) to pass to Fortran (arg %d)"),
 			    type2char(t), na + 1);
 	    /* Used read-only, so this is safe */
@@ -1140,6 +1141,7 @@ HIDDEN SEXP do_dotCode(SEXP call, SEXP op, SEXP args, SEXP env)
 	    for (R_xlen_t i = 0 ; i < n ; i++) lptr[i] = VECTOR_ELT(s, i);
 	    cargs[na] = (void*) lptr;
 #endif
+	}
 	    break;
 	case CLOSXP:
 	case BUILTINSXP:

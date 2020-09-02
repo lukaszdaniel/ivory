@@ -83,7 +83,7 @@ extern inline void CHKVEC(SEXP x)
     case WEAKREFSXP:
         break;
     default:
-        Rf_error(_("cannot get data pointer of '%s' objects"), type2char(TYPEOF(x)));
+        Rf_error(_("cannot get data pointer of '%s' objects"), Rf_type2char(TYPEOF(x)));
     }
 }
 #else
@@ -198,12 +198,12 @@ extern inline const Rbyte *RAW_OR_NULL(SEXP x)
 
 extern inline R_xlen_t XLENGTH_EX(SEXP x)
 {
-    return ALTREP(x) ? ALTREP_LENGTH(x) : STDVEC_LENGTH(x);
+    return ALTREP(x) ? ALTREP_LENGTH(x) : R::VECTOR::stdvec_length(x);
 }
 
 extern inline R_xlen_t XTRUELENGTH(SEXP x)
 {
-    return ALTREP(x) ? ALTREP_TRUELENGTH(x) : STDVEC_TRUELENGTH(x);
+    return ALTREP(x) ? ALTREP_TRUELENGTH(x) : R::VECTOR::stdvec_truelength(x);
 }
 
 extern inline int LENGTH_EX(SEXP x, const char *file, int line)

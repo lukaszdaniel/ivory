@@ -43,9 +43,11 @@
    penalty, code that includes Defn.h (or code that explicitly defines
    USE_RINTERNALS) can access a RObject's fields directly. */
 
-#ifndef TESTING_WRITE_BARRIER
-# define USE_RINTERNALS
-#endif
+// #define TESTING_WRITE_BARRIER
+
+// #ifndef TESTING_WRITE_BARRIER
+// # define USE_RINTERNALS
+// #endif
 
 #include <R_ext/Visibility.h>
 
@@ -110,30 +112,8 @@ extern0 SEXP    R_dot_GenericDefEnv;  /* ".GenericDefEnv" */
 
 extern0 SEXP	R_StringHash;       /* Global hash of CHARSXPs */
 
-
- /* writable char access for R internal use only */
-#define CHAR_RW(x) ((char *)CHAR(x))
-
 /**** HASHASH uses the first bit -- see HASHASH_MASK defined below */
 
-#ifdef USE_RINTERNALS
-
-// Content moved to RObject.hpp
-
-#else
-/* Needed only for write-barrier testing */
-int IS_BYTES(SEXP x);
-void SET_BYTES(SEXP x);
-int IS_LATIN1(SEXP x);
-void SET_LATIN1(SEXP x);
-int IS_ASCII(SEXP x);
-void SET_ASCII(SEXP x);
-int IS_UTF8(SEXP x);
-void SET_UTF8(SEXP x);
-int ENC_KNOWN(SEXP x);
-void SET_CACHED(SEXP x);
-int IS_CACHED(SEXP x);
-#endif
 /* macros and declarations for managing CHARSXP cache */
 # define CXHEAD(x) (x)
 # define CXTAIL(x) ATTRIB(x)
@@ -384,7 +364,6 @@ struct FUNTAB
 
 #else /* of USE_RINTERNALS */
 
-using VECP = VECREC *;
 int (PRIMOFFSET)(SEXP x);
 void (SET_PRIMOFFSET)(SEXP x, int v);
 

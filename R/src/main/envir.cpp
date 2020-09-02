@@ -223,11 +223,11 @@ Rboolean R_envHasNoSpecialSymbols(SEXP env)
 
 R_INLINE static int HASHSIZE(SEXP x)
 {
-    return (int)STDVEC_LENGTH(x);
+    return (int)R::VECTOR::stdvec_length(x);
 }
 R_INLINE static int HASHPRI(SEXP x)
 {
-    return (int)STDVEC_TRUELENGTH(x);
+    return (int)R::VECTOR::stdvec_truelength(x);
 }
 #define HASHTABLEGROWTHRATE 1.2
 #define HASHMINSIZE 29
@@ -4063,12 +4063,12 @@ SEXP Rf_mkCharLenCE(const char * const name, int len, cetype_t enc)
 	c = allocCharsxp(len);
 	memcpy(CHAR_RW(c), name, len);
 	switch(enc) {
-	case CE_UTF8: SET_UTF8(c); break;
-	case CE_LATIN1: SET_LATIN1(c); break;
-	case CE_BYTES: SET_BYTES(c); break;
+	case CE_UTF8: R::RObject::set_utf8(c); break;
+	case CE_LATIN1: R::RObject::set_latin1(c); break;
+	case CE_BYTES: R::RObject::set_bytes(c); break;
 	default: break;
 	}
-	if (is_ascii) SET_ASCII(c);
+	if (is_ascii) R::RObject::set_ascii(c);
 	error(_("embedded nul in string: '%s'"), EncodeString(c, 0, 0, Rprt_adj_none));
     }
 
@@ -4103,19 +4103,19 @@ SEXP Rf_mkCharLenCE(const char * const name, int len, cetype_t enc)
 	case CE_NATIVE:
 	    break;          /* don't set encoding */
 	case CE_UTF8:
-	    SET_UTF8(cval);
+	    R::RObject::set_utf8(cval);
 	    break;
 	case CE_LATIN1:
-	    SET_LATIN1(cval);
+	    R::RObject::set_latin1(cval);
 	    break;
 	case CE_BYTES:
-	    SET_BYTES(cval);
+	    R::RObject::set_bytes(cval);
 	    break;
 	default:
 	    error(_("unknown encoding mask: %d"), enc);
 	}
-	if (is_ascii) SET_ASCII(cval);
-	SET_CACHED(cval);  /* Mark it */
+	if (is_ascii) R::RObject::set_ascii(cval);
+	R::RObject::set_cached(cval);  /* Mark it */
 	/* add the new value to the cache */
 	chain = VECTOR_ELT(R_StringHash, hashcode);
 	if (ISNULL(chain))

@@ -27,11 +27,9 @@
 
 #include <RObject.hpp>
 
-/* Promise Access Macros */
-#define PRCODE(x) (R::RObject::prcode(x))
-#define PRENV(x) (R::RObject::prenv(x))
-#define PRVALUE(x) (R::RObject::prvalue(x))
-#define PRSEEN(x) (R::RObject::prseen(x))
-#define SET_PRSEEN(x, v) (R::RObject::set_prseen(x, v))
+namespace R
+{
 
-#endif
+} // namespace R
+
+#endif /* PROMISE_HPP */

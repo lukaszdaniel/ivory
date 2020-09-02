@@ -27,11 +27,9 @@
 
 #include <RObject.hpp>
 
-/* Environment Access Macros */
-#define FRAME(x) (R::RObject::frame(x))
-#define ENCLOS(x) (R::RObject::enclos(x))
-#define HASHTAB(x) (R::RObject::hashtab(x))
-#define ENVFLAGS(x) (R::RObject::envflags(x)) /* for environments */
-#define SET_ENVFLAGS(x, v) (R::RObject::set_envflags(x, v))
+namespace R
+{
 
-#endif
+} // namespace R
+
+#endif /* ENVIRONMENT_HPP */

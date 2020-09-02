@@ -27,22 +27,9 @@
 
 #include <RObject.hpp>
 
-/* List Access Macros */
-/* These also work for ... objects */
-#define TAG(e) (R::RObject::tag(e))
-#define CAR0(e) (R::RObject::car0(e))
-#define EXTPTR_PTR(e) (R::RObject::extptr_ptr(e))
-#define CDR(e) (R::RObject::cdr(e))
-#define CAAR(e) CAR(CAR(e))
-#define CDAR(e) CDR(CAR(e))
-#define CADR(e) CAR(CDR(e))
-#define CDDR(e) CDR(CDR(e))
-#define CDDDR(e) CDR(CDDR(e))
-#define CD4R(x) CDR(CDR(CDR(CDR(x))))
-#define CADDR(e) CAR(CDDR(e))
-#define CADDDR(e) CAR(CDR(CDDR(e)))
-#define CAD3R(e) CAR(CDR(CDDR(e)))
-#define CAD4R(e) CAR(CDDR(CDDR(e)))
-#define CAD5R(e) CAR(CDR(CDR(CDR(CDR(CDR(e))))))
+namespace R
+{
 
-#endif
+} // namespace R
+
+#endif /* LIST_HPP */

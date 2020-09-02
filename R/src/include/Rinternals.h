@@ -257,25 +257,6 @@ SEXPTYPE
 #else /* not USE_RINTERNALS */
 // ======================= not USE_RINTERNALS section
 
-// =====
-// These are required by stringi and data.table packages
-// if we're disabling USE_RINTERNALS for them.
-#ifndef IS_BYTES
-#define IS_BYTES(x) (LEVELS(x) & 2)
-#endif
-#ifndef IS_LATIN1
-#define IS_LATIN1(x) (LEVELS(x) & 4)
-#endif
-#ifndef IS_ASCII
-#define IS_ASCII(x) (LEVELS(x) & 64)
-#endif
-#ifndef IS_UTF8
-#define IS_UTF8(x) (LEVELS(x) & 8)
-#endif
-#ifndef ENC_KNOWN
-#define ENC_KNOWN(x) (LEVELS(x) & 12)
-#endif
-// =====
 
 #define CHAR(x)		R_CHAR(x)
 const char *(R_CHAR)(SEXP x);
@@ -292,6 +273,31 @@ Rboolean (Rf_isString)(SEXP s);
 Rboolean (Rf_isObject)(SEXP s);
 
 #endif /* USE_RINTERNALS */
+
+// =====
+// These are required by stringi and data.table packages
+// if we're disabling USE_RINTERNALS for them.
+#ifndef TESTING_WRITE_BARRIER
+#ifndef IS_BYTES
+#define IS_BYTES(x) (LEVELS(x) & 2)
+#endif
+#ifndef IS_LATIN1
+#define IS_LATIN1(x) (LEVELS(x) & 4)
+#endif
+#ifndef IS_ASCII
+#define IS_ASCII(x) (LEVELS(x) & 64)
+#endif
+#ifndef IS_UTF8
+#define IS_UTF8(x) (LEVELS(x) & 8)
+#endif
+#ifndef IS_CACHED
+#define IS_CACHED(x) (LEVELS(x) & 32)
+#endif
+#ifndef ENC_KNOWN
+#define ENC_KNOWN(x) (LEVELS(x) & 12)
+#endif
+#endif
+// =====
 
 #define IS_SIMPLE_SCALAR(x, type) \
     (IS_SCALAR(x, type) && ATTRIB(x) == R_NilValue)
@@ -441,7 +447,7 @@ void (SET_TRUELENGTH)(SEXP x, R_xlen_t v);
 int  (IS_LONG_VEC)(SEXP x);
 int  (LEVELS)(SEXP x);
 void  (SETLEVELS)(SEXP x, int v);
-#ifdef TESTING_WRITE_BARRIER
+#if defined(TESTING_WRITE_BARRIER) || defined(COMPILING_IVORY)
 R_xlen_t (STDVEC_LENGTH)(SEXP);
 R_xlen_t (STDVEC_TRUELENGTH)(SEXP);
 void (SETALTREP)(SEXP, int);
@@ -571,8 +577,11 @@ SEXP (CADR)(SEXP e);
 SEXP (CDDR)(SEXP e);
 SEXP (CDDDR)(SEXP e);
 SEXP (CADDR)(SEXP e);
+SEXP (CD4R)(SEXP e);
 SEXP (CADDDR)(SEXP e);
+SEXP (CAD3R)(SEXP e);
 SEXP (CAD4R)(SEXP e);
+SEXP (CAD5R)(SEXP e);
 int  (MISSING)(SEXP x);
 void (SET_MISSING)(SEXP x, int v);
 void (SET_TAG)(SEXP x, SEXP y);
@@ -1504,7 +1513,7 @@ void SET_INTEGER_ELT(SEXP x, R_xlen_t i, int v);
 void SET_REAL_ELT(SEXP x, R_xlen_t i, double v);
 #endif
 
-#ifdef USE_RINTERNALS
+#if defined(USE_RINTERNALS) || defined(TESTING_WRITE_BARRIER) || defined(COMPILING_IVORY)
 
 /* Test macros with function versions above */
 // These macros are required by stringi package.

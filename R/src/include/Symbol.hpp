@@ -27,13 +27,8 @@
 
 #include <RObject.hpp>
 
-/* Symbol Access Macros */
-#define PRINTNAME(x) (R::RObject::printname(x))
-#define SYMVALUE(x) (R::RObject::symvalue(x))
-#define INTERNAL(x) (R::RObject::internal(x))
-#define DDVAL(x) (R::RObject::ddval(x))
-#define SET_DDVAL_BIT(x) (R::RObject::set_ddval_bit(x))
-#define UNSET_DDVAL_BIT(x) (R::RObject::unset_ddval_bit(x))
-#define SET_DDVAL(x, v) (R::RObject::set_ddval(x, v))
+namespace R {
 
-#endif
+} // namespace R
+
+#endif /* SYMBOL_HPP */

@@ -27,7 +27,7 @@
  *	and reset the stack pointer.
  */
 
-// #define USE_RINTERNALS
+#define USE_RINTERNALS
 #define COMPILING_MEMORY_C
 
 #ifdef HAVE_CONFIG_H
@@ -172,14 +172,14 @@ int R_gc_running() { return R_in_gc; }
 /* Before a node is marked as a FREESXP by the collector the previous
    type is recorded.  For now using the LEVELS field seems
    reasonable.  */
-inline int OLDTYPE(SEXP x) { return LEVELS(x); }
+inline SEXPTYPE OLDTYPE(SEXP x) { return SEXPTYPE(LEVELS(x)); }
 inline void SETOLDTYPE(SEXP x, int v) { SETLEVELS(x, v); }
 
 inline static SEXP CHK(SEXP x)
 {
     /* **** NULL check because of R_CurrentExpr */
     if (x && TYPEOF(x) == FREESXP)
-	error(_("unprotected object (%p) encountered (was %s)"), x, sexptype2char(OLDTYPE(x)));
+        error(_("unprotected object (%p) encountered (was %s)"), x, sexptype2char(OLDTYPE(x)));
     return x;
 }
 #else
@@ -192,7 +192,7 @@ inline static SEXP CHK(SEXP x)
 static SEXPTYPE bad_sexp_type_seen = NILSXP;
 static SEXP bad_sexp_type_sexp = nullptr;
 #ifdef PROTECTCHECK
-static SEXPTYPE bad_sexp_type_old_type = 0;
+static SEXPTYPE bad_sexp_type_old_type = NILSXP;
 #endif
 static int bad_sexp_type_line = 0;
 
@@ -1101,7 +1101,7 @@ static void TryToReleasePages(void)
 R_INLINE static R_size_t getVecSizeInVEC(SEXP s)
 {
     if (IS_GROWABLE(s))
-	SET_STDVEC_LENGTH(s, XTRUELENGTH(s));
+	R::VECTOR::set_stdvec_length(s, XTRUELENGTH(s));
 
     R_size_t size;
     switch (TYPEOF(s)) {	/* get size in bytes */
@@ -1916,7 +1916,7 @@ static int RunGenCollect(R_size_t size_needed)
     PROCESS_NODES();
 
 #ifdef PROTECTCHECK
-    for(i=0; i< NUM_SMALL_NODE_CLASSES;i++){
+    for(int i=0; i< NUM_SMALL_NODE_CLASSES;i++){
 	s = NEXT_NODE(R_GenHeap[i].New);
 	while (s != R_GenHeap[i].New) {
 	    GCNode *next = NEXT_NODE(s);
@@ -1931,7 +1931,7 @@ static int RunGenCollect(R_size_t size_needed)
 	    s = next;
 	}
     }
-    for (i = CUSTOM_NODE_CLASS; i <= LARGE_NODE_CLASS; i++) {
+    for (int i = CUSTOM_NODE_CLASS; i <= LARGE_NODE_CLASS; i++) {
 	s = NEXT_NODE(R_GenHeap[i].New);
 	while (s != R_GenHeap[i].New) {
 	    GCNode *next = NEXT_NODE(s);
@@ -1942,7 +1942,7 @@ static int RunGenCollect(R_size_t size_needed)
 			  calculating size */
 		    if (CHAR(s)) {
 			R_size_t size = getVecSizeInVEC(s);
-			SET_STDVEC_LENGTH(s, size);
+			R::VECTOR::set_stdvec_length(s, size);
 		    }
 		    SETOLDTYPE(s, TYPEOF(s));
 		    SET_TYPEOF(s, FREESXP);
@@ -2741,15 +2741,15 @@ SEXP Rf_allocVector3(SEXPTYPE type, R_xlen_t length = 1, R_allocator_t *allocato
 	    VALGRIND_MAKE_MEM_UNDEFINED(STDVEC_DATAPTR(s), actual_size);
 #endif
 	    RObject::copy_sxpinfo(s, UnmarkedNodeTemplate);
-	    SETSCALAR(s, 1);
+	    R::RObject::setscalar(s, 1);
 	    SET_NODE_CLASS(s, node_class);
 	    R_SmallVallocSize += alloc_size;
 	    /* Note that we do not include the header size into VallocSize,
 	       but it is counted into memory usage via R_NodesInUse. */
 	    RObject::set_attrib(s, R_NilValue);
 	    SET_TYPEOF(s, type);
-	    SET_STDVEC_LENGTH(s, (R_len_t) length); // is 1
-	    SET_STDVEC_TRUELENGTH(s, 0);
+	    R::VECTOR::set_stdvec_length(s, (R_len_t) length); // is 1
+	    R::VECTOR::set_stdvec_truelength(s, 0);
 	    INIT_REFCNT(s);
 	    return(s);
     default:
@@ -2892,7 +2892,7 @@ SEXP Rf_allocVector3(SEXPTYPE type, R_xlen_t length = 1, R_allocator_t *allocato
 	    INIT_REFCNT(s);
 	    SET_NODE_CLASS(s, node_class);
 	    R_SmallVallocSize += alloc_size;
-	    SET_STDVEC_LENGTH(s, (R_len_t) length);
+	    R::VECTOR::set_stdvec_length(s, (R_len_t) length);
 	}
 	else {
 	    Rboolean success = FALSE;
@@ -2918,7 +2918,7 @@ SEXP Rf_allocVector3(SEXPTYPE type, R_xlen_t length = 1, R_allocator_t *allocato
 		}
 		if (mem) {
 		    s = (SEXP) mem;
-		    SET_STDVEC_LENGTH(s, length);
+		    R::VECTOR::set_stdvec_length(s, length);
 		    success = TRUE;
 		}
 		else s = nullptr;
@@ -2956,10 +2956,10 @@ SEXP Rf_allocVector3(SEXPTYPE type, R_xlen_t length = 1, R_allocator_t *allocato
     }
     else {
 	GC_PROT(s = allocSExpNonCons(type));
-	SET_STDVEC_LENGTH(s, (R_len_t) length);
+	R::VECTOR::set_stdvec_length(s, (R_len_t) length);
     }
-    SETALTREP(s, 0);
-    SET_STDVEC_TRUELENGTH(s, 0);
+    R::RObject::set_altrep(s, 0);
+    R::VECTOR::set_stdvec_truelength(s, 0);
     INIT_REFCNT(s);
 
     /* The following prevents disaster in the case */
@@ -3203,7 +3203,7 @@ static void R_gc_internal(R_size_t size_needed)
     double ncells, vcells, vfrac, nfrac;
     SEXPTYPE first_bad_sexp_type = NILSXP;
 #ifdef PROTECTCHECK
-    SEXPTYPE first_bad_sexp_type_old_type = 0;
+    SEXPTYPE first_bad_sexp_type_old_type = NILSXP;
 #endif
     SEXP first_bad_sexp_type_sexp = nullptr;
     int first_bad_sexp_type_line = 0;
@@ -3408,7 +3408,7 @@ SEXP Rf_protect(SEXP s)
 
 /* "unprotect" pop argument list from top of R_PPStack */
 
-void unprotect(int l)
+void Rf_unprotect(int l)
 {
     R_CHECK_THREAD;
     if (R_PPStackTop >=  l)
@@ -3852,58 +3852,58 @@ DL_FUNC R_ExternalPtrAddrFn(SEXP s)
    implement the write barrier. */
 
 /* General Cons Cell Attributes */
-SEXP (ATTRIB)(SEXP x) { return CHK(ATTRIB(CHK(x))); }
-int (OBJECT)(SEXP x) { return OBJECT(CHK(x)); }
-int (MARK)(SEXP x) { return MARK(CHK(x)); }
-SEXPTYPE (TYPEOF)(SEXP x) { return TYPEOF(CHK(x)); }
-int (NAMED)(SEXP x) { return NAMED(CHK(x)); }
-int (RTRACE)(SEXP x) { return RTRACE(CHK(x)); }
-int (LEVELS)(SEXP x) { return LEVELS(CHK(x)); }
-int (REFCNT)(SEXP x) { return REFCNT(CHK(x)); }
-int (TRACKREFS)(SEXP x) { return TRACKREFS(CHK(x)); }
-int (ALTREP)(SEXP x) { return ALTREP(CHK(x)); }
-int (IS_SCALAR)(SEXP x, SEXPTYPE type) { return IS_SCALAR(CHK(x), type); }
-int (SIMPLE_SCALAR_TYPE)(SEXP x) { return (RObject::scalar(CHK(x)) && ATTRIB(CHK(x)) == R_NilValue) ? TYPEOF(CHK(x)) : 0; }
+SEXP (ATTRIB)(SEXP x) { return CHK(R::RObject::attrib(CHK(x))); }
+int (OBJECT)(SEXP x) { return R::RObject::object(CHK(x)); }
+int (MARK)(SEXP x) { return R::RObject::mark(CHK(x)); }
+SEXPTYPE (TYPEOF)(SEXP x) { return R::RObject::typeof_(CHK(x)); }
+int (NAMED)(SEXP x) { return R::RObject::named(CHK(x)); }
+int (RTRACE)(SEXP x) { return R::RObject::rtrace(CHK(x)); }
+int (LEVELS)(SEXP x) { return R::RObject::levels(CHK(x)); }
+int (REFCNT)(SEXP x) { return R::RObject::refcnt(CHK(x)); }
+int (TRACKREFS)(SEXP x) { return R::RObject::trackrefs(CHK(x)); }
+int (ALTREP)(SEXP x) { return R::RObject::altrep(CHK(x)); }
+int (IS_SCALAR)(SEXP x, SEXPTYPE type) { return R::RObject::is_scalar(CHK(x), type); }
+int (SIMPLE_SCALAR_TYPE)(SEXP x) { return (RObject::scalar(CHK(x)) && R::RObject::attrib(CHK(x)) == R_NilValue) ? R::RObject::typeof_(CHK(x)) : 0; }
 void (DECREMENT_REFCNT)(SEXP x) { DECREMENT_REFCNT(CHK(x)); }
 void (INCREMENT_REFCNT)(SEXP x) { INCREMENT_REFCNT(CHK(x)); }
 void (DISABLE_REFCNT)(SEXP x)  { DISABLE_REFCNT(CHK(x)); }
 void (ENABLE_REFCNT)(SEXP x) { ENABLE_REFCNT(CHK(x)); }
 void (MARK_NOT_MUTABLE)(SEXP x) { MARK_NOT_MUTABLE(CHK(x)); }
-int (ASSIGNMENT_PENDING)(SEXP x) { return ASSIGNMENT_PENDING(CHK(x)); }
+int (ASSIGNMENT_PENDING)(SEXP x) { return R::RObject::assignment_pending(CHK(x)); }
 void (SET_ASSIGNMENT_PENDING)(SEXP x, int v)
 {
-    SET_ASSIGNMENT_PENDING(CHK(x), v);
+    R::RObject::set_assignment_pending(CHK(x), v);
 }
 int (IS_ASSIGNMENT_CALL)(SEXP x) { return IS_ASSIGNMENT_CALL(CHK(x)); }
 void (MARK_ASSIGNMENT_CALL)(SEXP x) { MARK_ASSIGNMENT_CALL(CHK(x)); }
 
 void (SET_ATTRIB)(SEXP x, SEXP v) {
-    if(TYPEOF(v) != LISTSXP && TYPEOF(v) != NILSXP)
+    if(R::RObject::typeof_(v) != LISTSXP && R::RObject::typeof_(v) != NILSXP)
 	error(_("value of 'SET_ATTRIB' must be a pairlist or nullptr, not a '%s'"),
-	      type2char(TYPEOF(v)));
-    FIX_REFCNT(x, ATTRIB(x), v);
+	      type2char(R::RObject::typeof_(v)));
+    FIX_REFCNT(x, R::RObject::attrib(x), v);
     CHECK_OLD_TO_NEW(x, v);
     RObject::set_attrib(x, v);
 }
-void (SET_OBJECT)(SEXP x, int v) { SET_OBJECT(CHK(x), v); }
-void (SET_TYPEOF)(SEXP x, SEXPTYPE v) { SET_TYPEOF(CHK(x), v); }
+void (SET_OBJECT)(SEXP x, int v) { R::RObject::set_object(CHK(x), v); }
+void (SET_TYPEOF)(SEXP x, SEXPTYPE v) { R::RObject::set_typeof(CHK(x), v); }
 void (SET_NAMED)(SEXP x, int v)
 {
 #ifndef SWITCH_TO_REFCNT
     SET_NAMED(CHK(x), v);
 #endif
 }
-void (SET_RTRACE)(SEXP x, int v) { SET_RTRACE(CHK(x), v); }
-void (SETLEVELS)(SEXP x, int v) { SETLEVELS(CHK(x), v); }
+void (SET_RTRACE)(SEXP x, int v) { R::RObject::set_rtrace(CHK(x), v); }
+void (SETLEVELS)(SEXP x, int v) { R::RObject::setlevels(CHK(x), v); }
 void DUPLICATE_ATTRIB(SEXP to, SEXP from) {
-    SET_ATTRIB(CHK(to), duplicate(CHK(ATTRIB(CHK(from)))));
-    SET_OBJECT(CHK(to), OBJECT(from));
-    if(IS_S4_OBJECT(from)) {SET_S4_OBJECT(to);} else {UNSET_S4_OBJECT(to);};
+    SET_ATTRIB(CHK(to), duplicate(CHK(R::RObject::attrib(CHK(from)))));
+    R::RObject::set_object(CHK(to), R::RObject::object(from));
+    if(R::RObject::is_s4_object(from)) { R::RObject::set_s4_object(to);} else { R::RObject::unset_s4_object(to);};
 }
 void SHALLOW_DUPLICATE_ATTRIB(SEXP to, SEXP from) {
-    SET_ATTRIB(CHK(to), shallow_duplicate(CHK(ATTRIB(CHK(from)))));
-    SET_OBJECT(CHK(to), OBJECT(from));
-    if(IS_S4_OBJECT(from)) {SET_S4_OBJECT(to);} else {UNSET_S4_OBJECT(to);};
+    SET_ATTRIB(CHK(to), shallow_duplicate(CHK(R::RObject::attrib(CHK(from)))));
+    R::RObject::set_object(CHK(to), R::RObject::object(from));
+    if(R::RObject::is_s4_object(from)) { R::RObject::set_s4_object(to);} else { R::RObject::unset_s4_object(to);};
 }
 
 void (ENSURE_NAMEDMAX)(SEXP x) { ENSURE_NAMEDMAX(CHK(x)); }
@@ -3912,20 +3912,20 @@ void (SETTER_CLEAR_NAMED)(SEXP x) { SETTER_CLEAR_NAMED(CHK(x)); }
 void (RAISE_NAMED)(SEXP x, int n) { RAISE_NAMED(CHK(x), n); }
 
 /* S4 object testing */
-int (IS_S4_OBJECT)(SEXP x){ return IS_S4_OBJECT(CHK(x)); }
-void (SET_S4_OBJECT)(SEXP x){ SET_S4_OBJECT(CHK(x)); }
-void (UNSET_S4_OBJECT)(SEXP x){ UNSET_S4_OBJECT(CHK(x)); }
+int (IS_S4_OBJECT)(SEXP x){ return R::RObject::is_s4_object(CHK(x)); }
+void (SET_S4_OBJECT)(SEXP x){ R::RObject::set_s4_object(CHK(x)); }
+void (UNSET_S4_OBJECT)(SEXP x){ R::RObject::unset_s4_object(CHK(x)); }
 
 /* JIT optimization support */
-int (NOJIT)(SEXP x) { return NOJIT(CHK(x)); }
-int (MAYBEJIT)(SEXP x) { return MAYBEJIT(CHK(x)); }
-void (SET_NOJIT)(SEXP x) { SET_NOJIT(CHK(x)); }
-void (SET_MAYBEJIT)(SEXP x) { SET_MAYBEJIT(CHK(x)); }
-void (UNSET_MAYBEJIT)(SEXP x) { UNSET_MAYBEJIT(CHK(x)); }
+int (NOJIT)(SEXP x) { return R::RObject::nojit(CHK(x)); }
+int (MAYBEJIT)(SEXP x) { return R::RObject::maybejit(CHK(x)); }
+void (SET_NOJIT)(SEXP x) { R::RObject::set_nojit(CHK(x)); }
+void (SET_MAYBEJIT)(SEXP x) { R::RObject::set_maybejit(CHK(x)); }
+void (UNSET_MAYBEJIT)(SEXP x) { R::RObject::unset_maybejit(CHK(x)); }
 
 /* Growable vector support */
-int (IS_GROWABLE)(SEXP x) { return IS_GROWABLE(CHK(x)); }
-void (SET_GROWABLE_BIT)(SEXP x) { SET_GROWABLE_BIT(CHK(x)); }
+int (IS_GROWABLE)(SEXP x) { return R::RObject::growable_bit_set(CHK(x)) && XLENGTH(CHK(x)) < XTRUELENGTH(CHK(x)); }
+void (SET_GROWABLE_BIT)(SEXP x) { R::RObject::set_growable_bit(CHK(x)); }
 
 static constexpr int nvec[32] = {
     1, 1, 1, 1, 1, 1, 1, 1,
@@ -3949,18 +3949,18 @@ R_xlen_t (TRUELENGTH)(SEXP x) { return TRUELENGTH(CHK2(x)); }
 void (SETLENGTH)(SEXP x, R_xlen_t v)
 {
     if (ALTREP(x))
-	error(_("SETLENGTH() cannot be applied to an ALTVEC object."));
-    if (! isVector(x))
-	error(_("SETLENGTH() can only be applied to a standard vector, not a '%s'"), type2char(TYPEOF(x)));
-    SET_STDVEC_LENGTH(CHK2(x), v);
+        error(_("SETLENGTH() cannot be applied to an ALTVEC object."));
+    if (!isVector(x))
+        error(_("SETLENGTH() can only be applied to a standard vector, not a '%s'"), type2char(TYPEOF(x)));
+    R::VECTOR::set_stdvec_length(CHK2(x), v);
 }
 
-void (SET_TRUELENGTH)(SEXP x, R_xlen_t v) { SET_TRUELENGTH(CHK2(x), v); }
+void (SET_TRUELENGTH)(SEXP x, R_xlen_t v) { R::VECTOR::set_truelength(CHK2(x), v); }
 int  (IS_LONG_VEC)(SEXP x) { return IS_LONG_VEC(CHK2(x)); }
-#ifdef TESTING_WRITE_BARRIER
-R_xlen_t (STDVEC_LENGTH)(SEXP x) { return STDVEC_LENGTH(CHK2(x)); }
-R_xlen_t (STDVEC_TRUELENGTH)(SEXP x) { return STDVEC_TRUELENGTH(CHK2(x)); }
-void (SETALTREP)(SEXP x, int v) { SETALTREP(x, v); }
+#if defined(TESTING_WRITE_BARRIER) || defined(COMPILING_IVORY)
+R_xlen_t (STDVEC_LENGTH)(SEXP x) { return R::VECTOR::stdvec_length(CHK2(x)); }
+R_xlen_t (STDVEC_TRUELENGTH)(SEXP x) { return R::VECTOR::stdvec_truelength(CHK2(x)); }
+void (SETALTREP)(SEXP x, int v) { R::RObject::set_altrep(x, v); }
 #endif
 
 /* temporary, to ease transition away from remapping */
@@ -3971,7 +3971,7 @@ const char *(R_CHAR)(SEXP x) {
     if(TYPEOF(x) != CHARSXP) // Han-Tak proposes to prepend  'x && '
 	error(_("'%s' function can only be applied to a charecter, not a '%s'"), "CHAR()",
 	      type2char(TYPEOF(x)));
-    return (const char *) CHAR(CHK(x));
+    return (const char *) R::CHAR(CHK(x));
 }
 
 SEXP (STRING_ELT)(SEXP x, R_xlen_t i) {
@@ -3995,24 +3995,29 @@ SEXP (VECTOR_ELT)(SEXP x, R_xlen_t i) {
 	      type2char(TYPEOF(x)));
     return CHK(VECTOR_ELT(CHK(x), i));
 }
-
+namespace
+{
 #ifdef CATCH_ZERO_LENGTH_ACCESS
-/* Attempts to read or write elements of a zero length vector will
+    /* Attempts to read or write elements of a zero length vector will
    result in a segfault, rather than read and write random memory.
    Returning NULL would be more natural, but Matrix seems to assume
    that even zero-length vectors have non-NULL data pointers, so
    return (void *) 1 instead. Zero-length CHARSXP objects still have a
    trailing zero byte so they are not handled. */
-#define CHKZLN(x)                                          \
-    do                                                     \
-    {                                                      \
-        CHK(x);                                            \
-        if (STDVEC_LENGTH(x) == 0 && TYPEOF(x) != CHARSXP) \
-            return (void *)1;                              \
-    } while (0)
+    int *CHKZLN(SEXP x)
+    {
+        CHK(x);
+        if (STDVEC_LENGTH(x) == 0 && TYPEOF(x) != CHARSXP)
+            return (int *)1;
+        return nullptr;
+    }
 #else
-#define CHKZLN(x) do { } while (0)
+    int *CHKZLN(SEXP x)
+    {
+        return (int *)nullptr;
+    }
 #endif
+} // namespace
 
 void *(STDVEC_DATAPTR)(SEXP x)
 {
@@ -4122,7 +4127,7 @@ const SEXP *(STRING_PTR_RO)(SEXP x) {
     return STRING_PTR_RO(x);
 }
 
-NORET SEXP * (VECTOR_PTR)(SEXP x)
+NORET SEXP *(VECTOR_PTR)(SEXP x)
 {
   error(_("not safe to return vector pointer"));
 }
@@ -4188,9 +4193,9 @@ R_INLINE static SEXP CHKCONS(SEXP e)
 #endif
 
 HIDDEN
-int (BNDCELL_TAG)(SEXP cell) { return BNDCELL_TAG(cell); }
+int (BNDCELL_TAG)(SEXP cell) { return R::RObject::bndcell_tag(cell); }
 HIDDEN
-void (SET_BNDCELL_TAG)(SEXP cell, int val) { SET_BNDCELL_TAG(cell, val); }
+void (SET_BNDCELL_TAG)(SEXP cell, int val) { R::RObject::set_bndcell_tag(cell, val); }
 HIDDEN
 double (BNDCELL_DVAL)(SEXP cell) { return BNDCELL_DVAL(cell); }
 HIDDEN
@@ -4264,13 +4269,13 @@ HIDDEN void R::R_args_enable_refcnt(SEXP args)
        make sure it is reference counting. Should be able to get rid
        of this function if we reduce use of CONS_NR. */
     for (SEXP a = args; a != R_NilValue; a = CDR(a))
-	if (! TRACKREFS(a)) {
+	if (a && !TRACKREFS(a)) {
 	    ENABLE_REFCNT(a);
 	    INCREMENT_REFCNT(CAR(a));
 	    INCREMENT_REFCNT(CDR(a));
 #ifdef TESTING_WRITE_BARRIER
 	    /* this should not see non-tracking arguments */
-	    if (! TRACKREFS(CAR(a)))
+	    if (CAR(a) && !TRACKREFS(CAR(a)))
 		error(_("argument not tracking references"));
 #endif
 	}
@@ -4278,18 +4283,21 @@ HIDDEN void R::R_args_enable_refcnt(SEXP args)
 }
 
 /* List Accessors */
-SEXP (TAG)(SEXP e) { return CHK(TAG(CHKCONS(e))); }
-SEXP (CAR0)(SEXP e) { return CHK(CAR0(CHKCONS(e))); }
-SEXP (CDR)(SEXP e) { return CHK(CDR(CHKCONS(e))); }
-SEXP (CAAR)(SEXP e) { return CHK(CAAR(CHKCONS(e))); }
-SEXP (CDAR)(SEXP e) { return CHK(CDAR(CHKCONS(e))); }
-SEXP (CADR)(SEXP e) { return CHK(CADR(CHKCONS(e))); }
-SEXP (CDDR)(SEXP e) { return CHK(CDDR(CHKCONS(e))); }
-SEXP (CDDDR)(SEXP e) { return CHK(CDDDR(CHKCONS(e))); }
-SEXP (CADDR)(SEXP e) { return CHK(CADDR(CHKCONS(e))); }
-SEXP (CADDDR)(SEXP e) { return CHK(CADDDR(CHKCONS(e))); }
-SEXP (CAD4R)(SEXP e) { return CHK(CAD4R(CHKCONS(e))); }
-int (MISSING)(SEXP x) { return MISSING(CHKCONS(x)); }
+SEXP (TAG)(SEXP e) { return CHK(R::RObject::tag(CHKCONS(e))); }
+SEXP (CAR0)(SEXP e) { return CHK(R::RObject::car0(CHKCONS(e))); }
+SEXP (CDR)(SEXP e) { return CHK(R::RObject::cdr(CHKCONS(e))); }
+SEXP (CAAR)(SEXP e) { return CHK(CAR(CAR(CHKCONS(e)))); }
+SEXP (CDAR)(SEXP e) { return CHK(CDR(CAR(CHKCONS(e)))); }
+SEXP (CADR)(SEXP e) { return CHK(CAR(CDR(CHKCONS(e)))); }
+SEXP (CDDR)(SEXP e) { return CHK(CDR(CDR(CHKCONS(e)))); }
+SEXP (CDDDR)(SEXP e) { return CHK(CDR(CDR(CDR(CHKCONS(e))))); }
+SEXP (CD4R)(SEXP e) { return CHK(CDR(CDR(CDR(CDR(CHKCONS(e)))))); }
+SEXP (CADDR)(SEXP e) { return CHK(CAR(CDR(CDR(CHKCONS(e))))); }
+SEXP (CADDDR)(SEXP e) { return CHK(CAR(CDR(CDR(CDR(CHKCONS(e)))))); }
+SEXP (CAD3R)(SEXP e) { return CHK(CAR(CDR(CDR(CDR(CHKCONS(e)))))); }
+SEXP (CAD4R)(SEXP e) { return CHK(CAR(CDR(CDR(CDR(CDR(CHKCONS(e))))))); }
+SEXP (CAD5R)(SEXP e) { return CHK(CAR(CDR(CDR(CDR(CDR(CDR(CHKCONS(e)))))))); }
+int (MISSING)(SEXP x) { return R::RObject::missing(CHKCONS(x)); }
 
 void (SET_TAG)(SEXP x, SEXP v)
 {
@@ -4391,85 +4399,85 @@ SEXP (SETCAD4R)(SEXP x, SEXP y)
     return y;
 }
 
-void *(EXTPTR_PTR)(SEXP x) { return EXTPTR_PTR(CHK(x)); }
+void *(EXTPTR_PTR)(SEXP x) { return R::RObject::extptr_ptr(CHK(x)); }
 
-void (SET_MISSING)(SEXP x, int v) { SET_MISSING(CHKCONS(x), v); }
+void (SET_MISSING)(SEXP x, int v) { R::RObject::set_missing(CHKCONS(x), v); }
 
 /* Closure Accessors */
-SEXP (FORMALS)(SEXP x) { return CHK(FORMALS(CHK(x))); }
-SEXP (BODY)(SEXP x) { return CHK(BODY(CHK(x))); }
-SEXP (CLOENV)(SEXP x) { return CHK(CLOENV(CHK(x))); }
-int (RDEBUG)(SEXP x) { return RDEBUG(CHK(x)); }
-int (RSTEP)(SEXP x) { return RSTEP(CHK(x)); }
+SEXP (FORMALS)(SEXP x) { return CHK(R::RObject::formals(CHK(x))); }
+SEXP (BODY)(SEXP x) { return CHK(R::RObject::body(CHK(x))); }
+SEXP (CLOENV)(SEXP x) { return CHK(R::RObject::cloenv(CHK(x))); }
+int (RDEBUG)(SEXP x) { return R::RObject::rdebug(CHK(x)); }
+int (RSTEP)(SEXP x) { return R::RObject::rstep(CHK(x)); }
 
-void (SET_FORMALS)(SEXP x, SEXP v) { FIX_REFCNT(x, FORMALS(x), v); CHECK_OLD_TO_NEW(x, v); RObject::set_formals(x, v); }
-void (SET_BODY)(SEXP x, SEXP v) { FIX_REFCNT(x, BODY(x), v); CHECK_OLD_TO_NEW(x, v); RObject::set_body(x, v); }
-void (SET_CLOENV)(SEXP x, SEXP v) { FIX_REFCNT(x, CLOENV(x), v); CHECK_OLD_TO_NEW(x, v); RObject::set_cloenv(x, v); }
-void (SET_RDEBUG)(SEXP x, int v) { SET_RDEBUG(CHK(x), v); }
-void (SET_RSTEP)(SEXP x, int v) { SET_RSTEP(CHK(x), v); }
+void (SET_FORMALS)(SEXP x, SEXP v) { FIX_REFCNT(x, R::RObject::formals(x), v); CHECK_OLD_TO_NEW(x, v); RObject::set_formals(x, v); }
+void (SET_BODY)(SEXP x, SEXP v) { FIX_REFCNT(x, R::RObject::body(x), v); CHECK_OLD_TO_NEW(x, v); RObject::set_body(x, v); }
+void (SET_CLOENV)(SEXP x, SEXP v) { FIX_REFCNT(x, R::RObject::cloenv(x), v); CHECK_OLD_TO_NEW(x, v); RObject::set_cloenv(x, v); }
+void (SET_RDEBUG)(SEXP x, int v) { R::RObject::set_rdebug(CHK(x), v); }
+void (SET_RSTEP)(SEXP x, int v) { R::RObject::set_rstep(CHK(x), v); }
 
 /* These are only needed with the write barrier on */
-#ifdef TESTING_WRITE_BARRIER
+#if defined(TESTING_WRITE_BARRIER) || defined(COMPILING_IVORY)
 /* Primitive Accessors */
 /* not hidden since needed in some base packages */
-int (PRIMOFFSET)(SEXP x) { return PRIMOFFSET(CHK(x)); }
+int (PRIMOFFSET)(SEXP x) { return R::RObject::primoffset(CHK(x)); }
 HIDDEN
-void (SET_PRIMOFFSET)(SEXP x, int v) { SET_PRIMOFFSET(CHK(x), v); }
+void (SET_PRIMOFFSET)(SEXP x, int v) { R::RObject::set_primoffset(CHK(x), v); }
 #endif
 
 /* Symbol Accessors */
-SEXP (PRINTNAME)(SEXP x) { return CHK(PRINTNAME(CHK(x))); }
-SEXP (SYMVALUE)(SEXP x) { return CHK(SYMVALUE(CHK(x))); }
-SEXP (INTERNAL)(SEXP x) { return CHK(INTERNAL(CHK(x))); }
-int (DDVAL)(SEXP x) { return DDVAL(CHK(x)); }
+SEXP (PRINTNAME)(SEXP x) { return CHK(R::RObject::printname(CHK(x))); }
+SEXP (SYMVALUE)(SEXP x) { return CHK(R::RObject::symvalue(CHK(x))); }
+SEXP (INTERNAL)(SEXP x) { return CHK(R::RObject::internal(CHK(x))); }
+int (DDVAL)(SEXP x) { return R::RObject::ddval(CHK(x)); }
 
-void (SET_PRINTNAME)(SEXP x, SEXP v) { FIX_REFCNT(x, PRINTNAME(x), v); CHECK_OLD_TO_NEW(x, v); RObject::set_printname(x, v); }
+void (SET_PRINTNAME)(SEXP x, SEXP v) { FIX_REFCNT(x, R::RObject::printname(x), v); CHECK_OLD_TO_NEW(x, v); RObject::set_printname(x, v); }
 
 void (SET_SYMVALUE)(SEXP x, SEXP v)
 {
-    if (SYMVALUE(x) == v)
+    if (R::RObject::symvalue(x) == v)
         return;
-    FIX_BINDING_REFCNT(x, SYMVALUE(x), v);
+    FIX_BINDING_REFCNT(x, R::RObject::symvalue(x), v);
     CHECK_OLD_TO_NEW(x, v);
     RObject::set_symvalue(x, v);
 }
 
-void (SET_INTERNAL)(SEXP x, SEXP v) { FIX_REFCNT(x, INTERNAL(x), v); CHECK_OLD_TO_NEW(x, v); RObject::set_internal(x, v); }
-void (SET_DDVAL)(SEXP x, int v) { SET_DDVAL(CHK(x), v); }
+void (SET_INTERNAL)(SEXP x, SEXP v) { FIX_REFCNT(x, R::RObject::internal(x), v); CHECK_OLD_TO_NEW(x, v); RObject::set_internal(x, v); }
+void (SET_DDVAL)(SEXP x, int v) { R::RObject::set_ddval(CHK(x), v); }
 
 /* Environment Accessors */
-SEXP (FRAME)(SEXP x) { return CHK(FRAME(CHK(x))); }
-SEXP (ENCLOS)(SEXP x) { return CHK(ENCLOS(CHK(x))); }
-SEXP (HASHTAB)(SEXP x) { return CHK(HASHTAB(CHK(x))); }
-int (ENVFLAGS)(SEXP x) { return ENVFLAGS(CHK(x)); }
+SEXP (FRAME)(SEXP x) { return CHK(R::RObject::frame(CHK(x))); }
+SEXP (ENCLOS)(SEXP x) { return CHK(R::RObject::enclos(CHK(x))); }
+SEXP (HASHTAB)(SEXP x) { return CHK(R::RObject::hashtab(CHK(x))); }
+int (ENVFLAGS)(SEXP x) { return R::RObject::envflags(CHK(x)); }
 
-void (SET_FRAME)(SEXP x, SEXP v) { FIX_REFCNT(x, FRAME(x), v); CHECK_OLD_TO_NEW(x, v); RObject::set_frame(x, v); }
-void (SET_ENCLOS)(SEXP x, SEXP v) { FIX_REFCNT(x, ENCLOS(x), v); CHECK_OLD_TO_NEW(x, v); RObject::set_enclos(x, v); }
-void (SET_HASHTAB)(SEXP x, SEXP v) { FIX_REFCNT(x, HASHTAB(x), v); CHECK_OLD_TO_NEW(x, v); RObject::set_hashtab(x, v); }
-void (SET_ENVFLAGS)(SEXP x, int v) { SET_ENVFLAGS(x, v); }
+void (SET_FRAME)(SEXP x, SEXP v) { FIX_REFCNT(x, R::RObject::frame(x), v); CHECK_OLD_TO_NEW(x, v); RObject::set_frame(x, v); }
+void (SET_ENCLOS)(SEXP x, SEXP v) { FIX_REFCNT(x, R::RObject::enclos(x), v); CHECK_OLD_TO_NEW(x, v); RObject::set_enclos(x, v); }
+void (SET_HASHTAB)(SEXP x, SEXP v) { FIX_REFCNT(x, R::RObject::hashtab(x), v); CHECK_OLD_TO_NEW(x, v); RObject::set_hashtab(x, v); }
+void (SET_ENVFLAGS)(SEXP x, int v) { R::RObject::set_envflags(x, v); }
 
 /* Promise Accessors */
-SEXP (PRCODE)(SEXP x) { return CHK(PRCODE(CHK(x))); }
-SEXP (PRENV)(SEXP x) { return CHK(PRENV(CHK(x))); }
-SEXP (PRVALUE)(SEXP x) { return CHK(PRVALUE(CHK(x))); }
-int (PRSEEN)(SEXP x) { return PRSEEN(CHK(x)); }
+SEXP (PRCODE)(SEXP x) { return CHK(R::RObject::prcode(CHK(x))); }
+SEXP (PRENV)(SEXP x) { return CHK(R::RObject::prenv(CHK(x))); }
+SEXP (PRVALUE)(SEXP x) { return CHK(R::RObject::prvalue(CHK(x))); }
+int (PRSEEN)(SEXP x) { return R::RObject::prseen(CHK(x)); }
 
-void (SET_PRENV)(SEXP x, SEXP v) { FIX_REFCNT(x, PRENV(x), v); CHECK_OLD_TO_NEW(x, v); RObject::set_prenv(x, v); }
-void (SET_PRVALUE)(SEXP x, SEXP v) { FIX_REFCNT(x, PRVALUE(x), v); CHECK_OLD_TO_NEW(x, v); RObject::set_prvalue(x, v); }
-void (SET_PRCODE)(SEXP x, SEXP v) { FIX_REFCNT(x, PRCODE(x), v); CHECK_OLD_TO_NEW(x, v); RObject::set_prcode(x, v); }
-void (SET_PRSEEN)(SEXP x, int v) { SET_PRSEEN(CHK(x), v); }
+void (SET_PRENV)(SEXP x, SEXP v) { FIX_REFCNT(x, R::RObject::prenv(x), v); CHECK_OLD_TO_NEW(x, v); RObject::set_prenv(x, v); }
+void (SET_PRVALUE)(SEXP x, SEXP v) { FIX_REFCNT(x, R::RObject::prvalue(x), v); CHECK_OLD_TO_NEW(x, v); RObject::set_prvalue(x, v); }
+void (SET_PRCODE)(SEXP x, SEXP v) { FIX_REFCNT(x, R::RObject::prcode(x), v); CHECK_OLD_TO_NEW(x, v); RObject::set_prcode(x, v); }
+void (SET_PRSEEN)(SEXP x, int v) { R::RObject::set_prseen(CHK(x), v); }
 
 /* Hashing Accessors */
-#ifdef TESTING_WRITE_BARRIER
+#if defined(TESTING_WRITE_BARRIER) || defined(COMPILING_IVORY)
 HIDDEN
-int (HASHASH)(SEXP x) { return HASHASH(CHK(x)); }
+int (HASHASH)(SEXP x) { return R::RObject::hashash(CHK(x)); }
 HIDDEN
-int (HASHVALUE)(SEXP x) { return HASHVALUE(CHK(x)); }
+int (HASHVALUE)(SEXP x) { return (int)TRUELENGTH(CHK(x)); }
 
 HIDDEN
-void (SET_HASHASH)(SEXP x, int v) { SET_HASHASH(CHK(x), v); }
+void (SET_HASHASH)(SEXP x, int v) { R::RObject::set_hashash(CHK(x), v); }
 HIDDEN
-void (SET_HASHVALUE)(SEXP x, int v) { SET_HASHVALUE(CHK(x), v); }
+void (SET_HASHVALUE)(SEXP x, int v) { SET_TRUELENGTH(x, (int)v); }
 #endif
 
 HIDDEN
@@ -4501,55 +4509,55 @@ extern "C"
 
 /* Bindings accessors */
 HIDDEN Rboolean
-(IS_ACTIVE_BINDING)(SEXP b) {return (Rboolean) IS_ACTIVE_BINDING(CHK(b));}
+(IS_ACTIVE_BINDING)(SEXP b) {return (Rboolean) R::RObject::is_active_binding(CHK(b));}
 HIDDEN Rboolean
-(BINDING_IS_LOCKED)(SEXP b) {return (Rboolean) BINDING_IS_LOCKED(CHK(b));}
+(BINDING_IS_LOCKED)(SEXP b) {return (Rboolean) R::RObject::binding_is_locked(CHK(b));}
 HIDDEN void
-(SET_ACTIVE_BINDING_BIT)(SEXP b) { SET_ACTIVE_BINDING_BIT(CHK(b)); }
-HIDDEN void (LOCK_BINDING)(SEXP b) { LOCK_BINDING(CHK(b)); }
-HIDDEN void (UNLOCK_BINDING)(SEXP b) { UNLOCK_BINDING(CHK(b)); }
+(SET_ACTIVE_BINDING_BIT)(SEXP b) { R::RObject::set_active_binding_bit(CHK(b)); }
+HIDDEN void (LOCK_BINDING)(SEXP b) { R::RObject::lock_binding(CHK(b)); }
+HIDDEN void (UNLOCK_BINDING)(SEXP b) { R::RObject::unlock_binding(CHK(b)); }
 
 HIDDEN
-void (SET_BASE_SYM_CACHED)(SEXP b) { SET_BASE_SYM_CACHED(CHK(b)); }
+void (SET_BASE_SYM_CACHED)(SEXP b) { R::RObject::set_base_sym_cached(CHK(b)); }
 HIDDEN
-void (UNSET_BASE_SYM_CACHED)(SEXP b) { UNSET_BASE_SYM_CACHED(CHK(b)); }
+void (UNSET_BASE_SYM_CACHED)(SEXP b) { R::RObject::unset_base_sym_cached(CHK(b)); }
 HIDDEN
-Rboolean (BASE_SYM_CACHED)(SEXP b) { return (Rboolean) BASE_SYM_CACHED(CHK(b)); }
+Rboolean (BASE_SYM_CACHED)(SEXP b) { return (Rboolean) R::RObject::base_sym_cached(CHK(b)); }
 
 HIDDEN
-void (SET_SPECIAL_SYMBOL)(SEXP b) { SET_SPECIAL_SYMBOL(CHK(b)); }
+void (SET_SPECIAL_SYMBOL)(SEXP b) { R::RObject::set_special_symbol(CHK(b)); }
 HIDDEN
-void (UNSET_SPECIAL_SYMBOL)(SEXP b) { UNSET_SPECIAL_SYMBOL(CHK(b)); }
+void (UNSET_SPECIAL_SYMBOL)(SEXP b) { R::RObject::unset_special_symbol(CHK(b)); }
 HIDDEN
-Rboolean (IS_SPECIAL_SYMBOL)(SEXP b) { return (Rboolean) IS_SPECIAL_SYMBOL(CHK(b)); }
+Rboolean (IS_SPECIAL_SYMBOL)(SEXP b) { return (Rboolean) R::RObject::is_special_symbol(CHK(b)); }
 HIDDEN
-void (SET_NO_SPECIAL_SYMBOLS)(SEXP b) { SET_NO_SPECIAL_SYMBOLS(CHK(b)); }
+void (SET_NO_SPECIAL_SYMBOLS)(SEXP b) { R::RObject::set_no_special_symbols(CHK(b)); }
 HIDDEN
-void (UNSET_NO_SPECIAL_SYMBOLS)(SEXP b) { UNSET_NO_SPECIAL_SYMBOLS(CHK(b)); }
+void (UNSET_NO_SPECIAL_SYMBOLS)(SEXP b) { R::RObject::unset_no_special_symbols(CHK(b)); }
 HIDDEN
-Rboolean (NO_SPECIAL_SYMBOLS)(SEXP b) { return (Rboolean) NO_SPECIAL_SYMBOLS(CHK(b)); }
+Rboolean (NO_SPECIAL_SYMBOLS)(SEXP b) { return (Rboolean) R::RObject::no_special_symbols(CHK(b)); }
 
 /* R_FunTab accessors, only needed when write barrier is on */
 /* Not hidden to allow experimentaiton without rebuilding R - LT */
 /* HIDDEN */
-int (PRIMVAL)(SEXP x) { return PRIMVAL(CHK(x)); }
+int (PRIMVAL)(SEXP x) { return  R_FunTab[PRIMOFFSET(CHK(x))].code; }
 /* HIDDEN */
-CCODE (PRIMFUN)(SEXP x) { return PRIMFUN(CHK(x)); }
+CCODE (PRIMFUN)(SEXP x) { return R_FunTab[PRIMOFFSET(CHK(x))].cfun; }
 /* HIDDEN */
-void (SET_PRIMFUN)(SEXP x, CCODE f) { PRIMFUN(CHK(x)) = f; }
+void (SET_PRIMFUN)(SEXP x, CCODE f) { R_FunTab[PRIMOFFSET(CHK(x))].cfun = f; }
 
 /* for use when testing the write barrier */
-HIDDEN int (IS_BYTES)(SEXP x) { return IS_BYTES(CHK(x)); }
-HIDDEN int (IS_LATIN1)(SEXP x) { return IS_LATIN1(CHK(x)); }
-HIDDEN int (IS_ASCII)(SEXP x) { return IS_ASCII(CHK(x)); }
-HIDDEN int (IS_UTF8)(SEXP x) { return IS_UTF8(CHK(x)); }
-HIDDEN void (SET_BYTES)(SEXP x) { SET_BYTES(CHK(x)); }
-HIDDEN void (SET_LATIN1)(SEXP x) { SET_LATIN1(CHK(x)); }
-HIDDEN void (SET_UTF8)(SEXP x) { SET_UTF8(CHK(x)); }
-HIDDEN void (SET_ASCII)(SEXP x) { SET_ASCII(CHK(x)); }
-int  (ENC_KNOWN)(SEXP x) { return ENC_KNOWN(CHK(x)); }
-HIDDEN void (SET_CACHED)(SEXP x) { SET_CACHED(CHK(x)); }
-int  (IS_CACHED)(SEXP x) { return IS_CACHED(CHK(x)); }
+HIDDEN int (IS_BYTES)(SEXP x) { return R::RObject::is_bytes(CHK(x)); }
+HIDDEN int (IS_LATIN1)(SEXP x) { return R::RObject::is_latin1(CHK(x)); }
+HIDDEN int (IS_ASCII)(SEXP x) { return R::RObject::is_ascii(CHK(x)); }
+HIDDEN int (IS_UTF8)(SEXP x) { return R::RObject::is_utf8(CHK(x)); }
+HIDDEN void (SET_BYTES)(SEXP x) { R::RObject::set_bytes(CHK(x)); }
+HIDDEN void (SET_LATIN1)(SEXP x) { R::RObject::set_latin1(CHK(x)); }
+HIDDEN void (SET_UTF8)(SEXP x) { R::RObject::set_utf8(CHK(x)); }
+HIDDEN void (SET_ASCII)(SEXP x) { R::RObject::set_ascii(CHK(x)); }
+int  (ENC_KNOWN)(SEXP x) { return R::RObject::enc_known(CHK(x)); }
+HIDDEN void (SET_CACHED)(SEXP x) { R::RObject::set_cached(CHK(x)); }
+int  (IS_CACHED)(SEXP x) { return R::RObject::is_cached(CHK(x)); }
 
 /*******************************************/
 /* Non-sampling memory use profiler

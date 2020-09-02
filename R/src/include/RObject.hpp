@@ -25,7 +25,6 @@
 #ifndef ROBJECT_HPP
 #define ROBJECT_HPP
 
-#define USE_RINTERNALS
 #include <Rinternals.h>
 
 /* This is intended for use only within R itself.
@@ -477,36 +476,6 @@ namespace R
     };
 #endif
 
-} // namespace R
-
-/* General Cons Cell Attributes */
-#define ATTRIB(x) (R::RObject::attrib(x))
-#define OBJECT(x) (R::RObject::object(x))
-#define MARK(x) (R::RObject::mark(x))
-#define TYPEOF(x) (R::RObject::typeof_(x))
-#define NAMED(x) (R::RObject::named(x))
-#define RTRACE(x) (R::RObject::rtrace(x))
-#define LEVELS(x) (R::RObject::levels(x))
-#define SET_OBJECT(x, v) (R::RObject::set_object(x, v))
-#define SET_TYPEOF(x, v) (R::RObject::set_typeof(x, v))
-#define SET_NAMED(x, v) (R::RObject::set_named(x, v))
-#define SET_RTRACE(x, v) (R::RObject::set_rtrace(x, v))
-#define SETLEVELS(x, v) (R::RObject::setlevels(x, v))
-#define ALTREP(x) (R::RObject::altrep(x))
-#define SETALTREP(x, v) (R::RObject::set_altrep(x, v))
-#define SETSCALAR(x, v) (R::RObject::setscalar(x, v))
-
-#define IS_BYTES(x) (R::RObject::is_bytes(x))
-#define SET_BYTES(x) (R::RObject::set_bytes(x))
-#define IS_LATIN1(x) (R::RObject::is_latin1(x))
-#define SET_LATIN1(x) (R::RObject::set_latin1(x))
-#define IS_ASCII(x) (R::RObject::is_ascii(x))
-#define SET_ASCII(x) (R::RObject::set_ascii(x))
-#define IS_UTF8(x) (R::RObject::is_utf8(x))
-#define SET_UTF8(x) (R::RObject::set_utf8(x))
-#define ENC_KNOWN(x) (R::RObject::enc_known(x))
-#define SET_CACHED(x) (R::RObject::set_cached(x))
-#define IS_CACHED(x) (R::RObject::is_cached(x))
 
 #if defined(COMPUTE_REFCNT_VALUES)
 #define REFCNT(x) (R::RObject::refcnt(x))
@@ -591,8 +560,6 @@ namespace R
   LT
 */
 
-#define ASSIGNMENT_PENDING(x) (R::RObject::assignment_pending(x))
-#define SET_ASSIGNMENT_PENDING(x, v) (R::RObject::set_assignment_pending(x, v))
 
 /* The same bit can be used to mark calls used in complex assignments
    to allow replacement functions to determine when they are being
@@ -618,7 +585,7 @@ namespace R
 #define ENSURE_NAMEDMAX(v)                  \
     do                                      \
     {                                       \
-        RObject *__enm_v__ = (v);               \
+        RObject *__enm_v__ = (v);           \
         if (NAMED(__enm_v__) < NAMEDMAX)    \
             SET_NAMED(__enm_v__, NAMEDMAX); \
     } while (0)
@@ -657,28 +624,6 @@ namespace R
     } while (0)
 #endif
 
-/* S4 object bit, set by R_do_new_object for all new() calls */
-#define IS_S4_OBJECT(x) (R::RObject::is_s4_object(x))
-#define SET_S4_OBJECT(x) (R::RObject::set_s4_object(x))
-#define UNSET_S4_OBJECT(x) (R::RObject::unset_s4_object(x))
-
-/* JIT optimization support */
-#define NOJIT(x) (R::RObject::nojit(x))
-#define SET_NOJIT(x) (R::RObject::set_nojit(x))
-#define MAYBEJIT(x) (R::RObject::maybejit(x))
-#define SET_MAYBEJIT(x) (R::RObject::set_maybejit(x))
-#define UNSET_MAYBEJIT(x) (R::RObject::unset_maybejit(x))
-
-/* Growable vector support */
-#define GROWABLE_BIT_SET(x) (R::RObject::growable_bit_set(x))
-#define SET_GROWABLE_BIT(x) (R::RObject::set_growable_bit(x))
-#define IS_GROWABLE(x) (GROWABLE_BIT_SET(x) && XLENGTH(x) < XTRUELENGTH(x))
-
-#define MISSING(x) (R::RObject::missing(x)) /* for closure calls */
-#define SET_MISSING(x, v) (R::RObject::set_missing(x, v))
-#define BNDCELL_TAG(e) (R::RObject::bndcell_tag(e))
-#define SET_BNDCELL_TAG(e, v) (R::RObject::set_bndcell_tag(e, v))
-
 #if (SIZEOF_SIZE_T < SIZEOF_DOUBLE)
 #define BOXED_BINDING_CELLS 1
 #else
@@ -696,14 +641,14 @@ namespace R
 #define SET_BNDCELL_IVAL(cell, ival) SET_SCALAR_IVAL(CAR0(cell), ival)
 #define SET_BNDCELL_LVAL(cell, lval) SET_SCALAR_LVAL(CAR0(cell), lval)
 
-#define INIT_BNDCELL(cell, type)         \
-    do                                   \
-    {                                    \
+#define INIT_BNDCELL(cell, type)             \
+    do                                       \
+    {                                        \
         RObject *val = allocVector(type, 1); \
-        SETCAR(cell, val);               \
-        INCREMENT_NAMED(val);            \
-        SET_BNDCELL_TAG(cell, type);     \
-        SET_MISSING(cell, 0);            \
+        SETCAR(cell, val);                   \
+        INCREMENT_NAMED(val);                \
+        SET_BNDCELL_TAG(cell, type);         \
+        SET_MISSING(cell, 0);                \
     } while (0)
 #else
 /* Use a union in the CAR field to represent an RObject* or an immediate
@@ -739,12 +684,6 @@ union R_bndval_t
  * of the Promise and Hashing groups.
  */
 
-/* Hashing Macros */
-#define HASHASH(x) (R::RObject::hashash(x))
-#define HASHVALUE(x) ((int)TRUELENGTH(x))
-#define SET_HASHASH(x, v) (R::RObject::set_hashash(x, v))
-#define SET_HASHVALUE(x, v) SET_TRUELENGTH(x, ((int)(v)))
-
 /* Vector Heap Structure */
 struct VECREC
 {
@@ -755,6 +694,8 @@ struct VECREC
     } u;
 };
 
+using VECP = VECREC *;
+
 /* Vector Heap Macros */
 // #define BACKPOINTER(v) ((v).u.backpointer)
 inline size_t BYTE2VEC(int n) { return (n > 0) ? (std::size_t(n) - 1) / sizeof(VECREC) + 1 : 0; }
@@ -763,24 +704,6 @@ inline size_t FLOAT2VEC(int n) { return (n > 0) ? (std::size_t(n) * sizeof(doubl
 inline size_t COMPLEX2VEC(int n) { return (n > 0) ? (std::size_t(n) * sizeof(Rcomplex) - 1) / sizeof(VECREC) + 1 : 0; }
 inline size_t PTR2VEC(int n) { return (n > 0) ? (std::size_t(n) * sizeof(SEXP) - 1) / sizeof(VECREC) + 1 : 0; }
 
-/* Bindings */
-/* use the same bits (15 and 14) in symbols and bindings */
-#define IS_ACTIVE_BINDING(b) (R::RObject::is_active_binding(b))
-#define BINDING_IS_LOCKED(b) (R::RObject::binding_is_locked(b))
-#define SET_ACTIVE_BINDING_BIT(b) (R::RObject::set_active_binding_bit(b))
-#define LOCK_BINDING(b) (R::RObject::lock_binding(b))
-
-#define UNLOCK_BINDING(b) (R::RObject::unlock_binding(b))
-
-#define SET_BASE_SYM_CACHED(b) (R::RObject::set_base_sym_cached(b))
-#define UNSET_BASE_SYM_CACHED(b) (R::RObject::unset_base_sym_cached(b))
-#define BASE_SYM_CACHED(b) (R::RObject::base_sym_cached(b))
-
-#define SET_SPECIAL_SYMBOL(b) (R::RObject::set_special_symbol(b))
-#define UNSET_SPECIAL_SYMBOL(b) (R::RObject::unset_special_symbol(b))
-#define IS_SPECIAL_SYMBOL(b) (R::RObject::is_special_symbol(b))
-#define SET_NO_SPECIAL_SYMBOLS(b) (R::RObject::set_no_special_symbols(b))
-#define UNSET_NO_SPECIAL_SYMBOLS(b) (R::RObject::unset_no_special_symbols(b))
-#define NO_SPECIAL_SYMBOLS(b) (R::RObject::no_special_symbols(b))
+} // namespace R
 
 #endif /* ROBJECT_HPP */

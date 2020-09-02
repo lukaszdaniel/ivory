@@ -27,15 +27,9 @@
 
 #include <RObject.hpp>
 
-/* Primitive Access Macros */
-#define PRIMOFFSET(x) (R::RObject::primoffset(x))
-#define SET_PRIMOFFSET(x, v) (R::RObject::set_primoffset(x, v))
-#define PRIMFUN(x) (R_FunTab[PRIMOFFSET(x)].cfun)
-#define PRIMNAME(x) (R_FunTab[PRIMOFFSET(x)].name)
-#define PRIMVAL(x) (R_FunTab[PRIMOFFSET(x)].code)
-#define PRIMARITY(x) (R_FunTab[PRIMOFFSET(x)].arity)
-#define PPINFO(x) (R_FunTab[PRIMOFFSET(x)].gram)
-#define PRIMPRINT(x) (((R_FunTab[PRIMOFFSET(x)].eval) / 100) % 10)
-#define PRIMINTERNAL(x) (((R_FunTab[PRIMOFFSET(x)].eval) % 100) / 10)
+namespace R
+{
 
-#endif
+} // namespace R
+
+#endif /* BUILTINFUNCTION_HPP */

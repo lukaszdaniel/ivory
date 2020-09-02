@@ -72,6 +72,12 @@ namespace R
             reinterpret_cast<VECTOR *>(x)->m_length = v;
             RObject::setscalar(x, v == 1);
         }
+        static inline void set_truelength(RObject *x, R_xlen_t v)
+        {
+            if (R::RObject::altrep(x))
+                Rf_error("can't set ALTREP truelength");
+            R::VECTOR::set_stdvec_truelength(x, v);
+        }
     };
 
     using VECSEXP = class R::VECTOR *;
@@ -81,7 +87,6 @@ namespace R
         VECTOR s;
         double align;
     };
-} // namespace R
 
 /* Vector Access Macros */
 #ifdef LONG_VECTOR_SUPPORT
@@ -89,34 +94,22 @@ namespace R
 #else
 #define IS_LONG_VEC(x) false
 #endif
-#define STDVEC_LENGTH(x) (R::VECTOR::stdvec_length(x))
-#define STDVEC_TRUELENGTH(x) (R::VECTOR::stdvec_truelength(x))
-#define SET_STDVEC_TRUELENGTH(x, v) (R::VECTOR::set_stdvec_truelength(x, v))
-#define SET_TRUELENGTH(x, v)                      \
-    do                                            \
-    {                                             \
-        R::RObject *sl__x__ = (x);                \
-        R_xlen_t sl__v__ = (v);                   \
-        if (ALTREP(x))                            \
-            error("can't set ALTREP truelength"); \
-        SET_STDVEC_TRUELENGTH(sl__x__, sl__v__);  \
-    } while (0)
 
-#define IS_SCALAR(x, t) (R::RObject::is_scalar(x, t))
 #define LENGTH(x) LENGTH_EX(x, __FILE__, __LINE__)
 #define TRUELENGTH(x) XTRUELENGTH(x)
 
 /* defined as a macro since fastmatch packages tests for it */
 #define XLENGTH(x) XLENGTH_EX(x)
 
-/* THIS ABSOLUTELY MUST NOT BE USED IN PACKAGES !!! */
-#define SET_STDVEC_LENGTH(x, v) (R::VECTOR::set_stdvec_length(x, v))
-
 /* Under the generational allocator the data for vector nodes comes
    immediately after the node structure, so the data address is a
    known offset from the node SEXP. */
 #define STDVEC_DATAPTR(x) (reinterpret_cast<void *>(reinterpret_cast<R::SEXPREC_ALIGN *>(x) + 1))
-#define CHAR(x) ((const char *)STDVEC_DATAPTR(x))
+
+    inline const char *CHAR(RObject *x) { return (const char *)STDVEC_DATAPTR(x); }
+
+  /* writable char access for R internal use only */
+#define CHAR_RW(x) ((char *)STDVEC_DATAPTR(x))
 #define LOGICAL(x) ((int *)DATAPTR(x))
 #define INTEGER(x) ((int *)DATAPTR(x))
 #define RAW(x) ((Rbyte *)DATAPTR(x))
@@ -132,4 +125,6 @@ namespace R
 #define REAL_RO(x) ((const double *)DATAPTR_RO(x))
 #define STRING_PTR_RO(x) ((const SEXP *)DATAPTR_RO(x))
 
-#endif
+} // namespace R
+
+#endif /* VECTOR_HPP */

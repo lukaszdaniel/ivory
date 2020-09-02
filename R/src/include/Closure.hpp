@@ -27,13 +27,9 @@
 
 #include <RObject.hpp>
 
-/* Closure Access Macros */
-#define FORMALS(x) (R::RObject::formals(x))
-#define BODY(x) (R::RObject::body(x))
-#define CLOENV(x) (R::RObject::cloenv(x))
-#define RDEBUG(x) (R::RObject::rdebug(x))
-#define SET_RDEBUG(x, v) (R::RObject::set_rdebug(x, v))
-#define RSTEP(x) (R::RObject::rstep(x))
-#define SET_RSTEP(x, v) (R::RObject::set_rstep(x, v))
+namespace
+{
 
-#endif
+} // namespace
+
+#endif /* CLOSURE_HPP */
