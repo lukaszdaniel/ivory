@@ -1,7 +1,7 @@
 #  File src/library/base/R/datetime.R
 #  Part of the R package, https://www.R-project.org
 #
-#  Copyright (C) 1995-2019 The R Core Team
+#  Copyright (C) 1995-2020 The R Core Team
 #
 #  This program is free software; you can redistribute it and/or modify
 #  it under the terms of the GNU General Public License as published by
@@ -583,9 +583,7 @@ anyNA.POSIXlt <- function(x, recursive = FALSE)
 ## This is documented to remove the timezone (unless all are marked with
 ## the same).
 c.POSIXct <- function(..., recursive = FALSE) {
-    x <- list(...)
-    x <- lapply(x[!vapply(x, is.null, NA)],
-                function(e) unclass(as.POSIXct(e)))
+    x <- lapply(list(...), function(e) unclass(as.POSIXct(e)))
     tzones <- lapply(x, attr, "tzone")
     tz <- if(length(unique(tzones)) == 1L) tzones[[1L]] else NULL
     .POSIXct(c(unlist(x)), tz)
@@ -593,9 +591,8 @@ c.POSIXct <- function(..., recursive = FALSE) {
 
 ## we need conversion to POSIXct as POSIXlt objects can be in different tz.
 c.POSIXlt <- function(..., recursive = FALSE) {
-    x <- list(...)
     as.POSIXlt(do.call("c",
-                       lapply(x[!vapply(x, is.null, NA)], as.POSIXct)))
+                       lapply(list(...), as.POSIXct)))
 }
 
 
@@ -848,7 +845,6 @@ function(..., recursive = FALSE)
                days = 60*60*24*x, weeks = 60*60*24*7*x)
     }
     args <- list(...)
-    args <- args[!vapply(args, is.null, NA)]
     if(!length(args)) return(.difftime(double(), "secs"))
     ind <- sapply(args, inherits, "difftime")
     pos <- which(!ind)

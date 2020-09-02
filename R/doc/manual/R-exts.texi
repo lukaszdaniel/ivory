@@ -3217,14 +3217,20 @@ directories from source control systems@footnote{called @file{CVS} or
 @file{.svn} or @file{.arch-ids} or @file{.bzr} or @file{.git} (but not
 files called @file{.git}) or @file{.hg}.} or from
 @command{eclipse}@footnote{called @file{.metadata}.}, directories with
-names ending @file{.Rcheck} or @file{Old} or @file{old} and files
+names @file{check}, @file{chm}, or ending @file{.Rcheck} or @file{Old}
+or @file{old} and files
 @file{GNUMakefile}@footnote{which is an error: GNU make uses
 @file{GNUmakefile}.}, @file{Read-and-delete-me} or with base names
 starting with @samp{.#}, or starting and ending with @samp{#}, or ending
-in @samp{~}, @samp{.bak} or @samp{.swp}, are excluded by default.  In
-addition, those files in the @file{R}, @file{demo} and @file{man}
+in @samp{~}, @samp{.bak} or @samp{.swp}, are excluded by
+default@footnote{see @code{tools:::.hidden_file_exclusions} and
+@code{tools:::get_exclude_patterns()} for further
+excluded files and file patterns, respectively.}.  In addition,
+same-package tarballs (from previous builds) and their binary forms will
+be excluded from the top-level directory, as well as
+those files in the @file{R}, @file{demo} and @file{man}
 directories which are flagged by @command{R CMD check} as having invalid
-names will be excluded.
+names.
 
 Use @kbd{R CMD build --help} to obtain more information about the usage
 of the @R{} package builder.
@@ -8975,7 +8981,8 @@ float-divide-by-zero,function,implicit-unsigned-integer-truncation,
 implicit-signed-integer-truncation,implicit-integer-sign-change,
 integer-divide-by-zero,nonnull-attribute,null,object-size,
 pointer-overflow,return,returns-nonnull-attribute,shift,
-signed-integer-overflow,unreachable,unsigned-integer-overflow,vla-bound,vptr
+signed-integer-overflow,unreachable,unsigned-integer-overflow,
+unsigned-shift-base,vla-bound,vptr
 @end example
 
 @noindent
@@ -8997,23 +9004,25 @@ MAIN_LD="clang++ -fsanitize=undefined"
 @noindent
 Option @code{float-divide-by-zero} is undesirable for use with @R{}
 which allow such divisions as part of @acronym{IEC}@tie{}60559
-arithmetic.
+arithmetic, and in versions of @command{clang} since June 2019 it is no
+longer part of @option{-fsanitize=undefined}.
 
 For GCC see
 @uref{https://gcc.gnu.org/@/onlinedocs/@/gcc/@/Instrumentation-Options.html}
 (or the manual for your version of GCC, installed or @emph{via}
 @uref{https://gcc.gnu.org/@/onlinedocs/}: look for `Program
-Instrumentation Options') for the options supported by GCC: 8 supported
+Instrumentation Options') for the options supported by GCC: 10 supported
 @example
 -fsanitize=alignment,bool,bounds,builtin,enum,integer-divide-by-zero,
 nonnull-attribute,null,object-size,pointer-overflow,return,
-returns-nonnull-attribute,shift,unreachable,vla-bound,vptr
+returns-nonnull-attribute,shift,signed-integer-overflow,
+unreachable,vla-bound,vptr
 @end example
 @noindent
 plus the more specific versions @code{shift-base} and
 @code{shift-exponent} and non-default options
 @example
-bound-strict,float-cast-overflow,float-divide-by-zero,signed-integer-overflow
+bound-strict,float-cast-overflow,float-divide-by-zero
 @end example
 @noindent
 where @code{float-divide-by-zero} is not desirable for @R{} uses and

@@ -1,7 +1,7 @@
 #  File src/library/base/R/mapply.R
 #  Part of the R package, https://www.R-project.org
 #
-#  Copyright (C) 1995-2015 The R Core Team
+#  Copyright (C) 1995-2020 The R Core Team
 #
 #  This program is free software; you can redistribute it and/or modify
 #  it under the terms of the GNU General Public License as published by
@@ -56,7 +56,8 @@ Vectorize <- function(FUN, vectorize.args = arg.names, SIMPLIFY = TRUE,
     if (any(collisions))
 	stop(sprintf(ngettext(length(collisions), "%s function may not have argument named %s", "%s function may not have arguments named %s", domain = "R-base"),
 	     sQuote("FUN"), paste(sQuote(arg.names[collisions]), collapse = ", ")), domain = NA)
-
+    rm(arg.names, collisions)
+    (function() {
     FUNV <- function() { ## will set the formals below
         args <- lapply(as.list(match.call())[-1L], eval, parent.frame())
         names <- if(is.null(names(args))) character(length(args))
@@ -69,5 +70,7 @@ Vectorize <- function(FUN, vectorize.args = arg.names, SIMPLIFY = TRUE,
                             USE.NAMES = USE.NAMES))
     }
     formals(FUNV) <- formals(FUN)
+    environment(FUNV) <- parent.env(environment())
     FUNV
+    })()
 }

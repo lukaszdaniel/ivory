@@ -4106,6 +4106,7 @@ fit0 <- glm.fit(x = rep(1, length(y)), y = y, offset = log(x),
                 family = gaussian("log"), start = 0)
 stopifnot(all.equal(fit$null.deviance, fit0$deviance))
 
+
 ## UTF-8 truncation test, fails on R < 4.0
 if (l10n_info()$"UTF-8") {
     # Use .Internal(seterrmessage(old.err)) to trigger truncation via
@@ -4168,6 +4169,45 @@ if (l10n_info()$"UTF-8") {
         stopifnot(validUTF8(output))
     }
 }
+
+
+## c() generic removes all NULL elements before dispatch
+c.foobar <- function(...) list("ok", ...)
+foobar <- structure(list(), class = "foobar")
+stopifnot(exprs = {
+    identical(c(foobar, one=1), list("ok", foobar, one=1))
+    identical(c(a = foobar), list("ok", a = foobar))
+    identical(c(a = NULL, b = foobar), list("ok", b = foobar))
+    identical(c(a = foobar, b = NULL), list("ok", a = foobar))
+    identical(c(a = NULL, b = foobar, c = NULL), list("ok", b = foobar))
+})
+## the last three cases failed in R <= 4.0.x
+
+
+## quantile(*, pr)  allows pr values very slightly outside [0,1] -- PR#17891
+stopifnot( identical(quantile(0:1, 1+1e-14), c("100%" = 1)) )
+## failed  in R <= 4.0.2
+
+
+## quantile(*, pr, names=FALSE)  with NA's in 'pr' -- PR#17892
+x <- (0:99)/64
+prN <- c(0.1, 0.5, 1, 2, 5, 10, 50, NA)/100
+qxN  <- quantile(x, probs = prN)
+qxNN <- quantile(x, probs = prN, names = FALSE)
+stopifnot(exprs = {
+    is.null(names(qxNN))
+    identical(qxNN, unname(qxN))
+    identical(NA_real_, quantile(x, probs = NA, names = FALSE))
+})
+## qxNN gave "Error in names(o.pr)[p.ok] <- names(qs) : ..."  in R <= 4.0.2
+
+
+## Vectorize() no longer keeps "garbage":
+vrep <- Vectorize(rep.int, "times")
+stopifnot(identical(sort(names(environment(vrep))),
+                    c("FUN", "SIMPLIFY", "USE.NAMES", "vectorize.args")))
+## names(..) was of length 7 in R <= 4.0.2
+
 
 
 ## keep at end

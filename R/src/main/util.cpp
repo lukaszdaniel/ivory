@@ -1,7 +1,7 @@
 /*
  *  R : A Computer Language for Statistical Data Analysis
- *  Copyright (C) 1995, 1996  Robert Gentleman and Ross Ihaka
  *  Copyright (C) 1997--2020  The R Core Team
+ *  Copyright (C) 1995, 1996  Robert Gentleman and Ross Ihaka
  *
  *  This program is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -520,6 +520,25 @@ SEXP Rf_nthcdr(SEXP s, int n)
 	else
 		error(_("'nthcdr' needs a list to CDR down"));
 	return R_NilValue; /* for -Wall */
+}
+
+/* Destructively removes R_NilValue ('NULL') elements from a pairlist.
+   's' needs to be protected on entry (==> result does not need protection) */
+SEXP R::R_listCompact(SEXP s)
+{
+	SEXP handle = PROTECT(cons(R_NilValue, s)),
+		 prev = handle;
+	while (s != R_NilValue)
+	{
+		if (CAR(s) == R_NilValue) // skip it
+			SETCDR(prev, CDR(s));
+		else
+			prev = s;
+		s = CDR(s);
+	}
+
+	UNPROTECT(1);
+	return CDR(handle);
 }
 
 /* This is a primitive (with no arguments) */
@@ -1481,7 +1500,7 @@ HIDDEN char *R::mbcsTruncateToValid(char *const s)
 	   for the first non-continuation byte */
 	goodlen = slen - 1; /* at least 0 */
 	/* for char == signed char we assume 2's complement representation */
-	while (goodlen && ((s[goodlen] & '\xC0') == '\x80')) 
+	while (goodlen && ((s[goodlen] & '\xC0') == '\x80'))
 	    --goodlen;
     }
     while(goodlen < slen) {

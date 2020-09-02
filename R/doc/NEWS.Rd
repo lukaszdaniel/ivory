@@ -88,7 +88,13 @@
       which prioritized file names over topics can be restored by
       setting the environment variable \env{_R_HELP_LINKS_TO_TOPICS_} to
       a false value.
-  
+
+      \item \code{c()} now removes \code{NULL} arguments before dispatching
+      to methods, thus simplifying the implementation of \code{c()} methods,
+      thanks to the report and patch by Lionel Henry in \PR{17900}.
+
+      \item \code{Vectorize()}'s result function's environment no longer
+      keeps unneeded objects.
     }
 
   }
@@ -185,6 +191,16 @@
     }
   }
 
+  \subsection{UTILITIES}{
+    \itemize{
+      \item \command{R CMD check} can now scan package functions for
+      bogus \code{return} statements, which were possibly intended as
+      \code{return()} calls (wish of \PR{17180}, patch by Sebastian
+      Meyer). This check can be activated via the new environment
+      variable \env{_R_CHECK_BOGUS_RETURN_}, true for \code{--as-cran}.
+    }
+  }
+  
   \subsection{DEPRECATED AND DEFUNCT}{
     \itemize{
       \item Function \code{plclust()} from the package \pkg{stats} and
@@ -253,9 +269,9 @@
       correct also with \code{center = FALSE}; \PR{14938}, patch from
       Sebastian Meyer.
 
-      \item A very old bug could cause a segfault in \code{model.matrix()} 
+      \item A very old bug could cause a segfault in \code{model.matrix()}
       when terms involved logical variables.  Related to \PR{17879}, but not
-      a complete fix for that issue. 
+      a complete fix for that issue.
 
       \item \code{model.frame.default()} allowed \code{data = 1}, leading to
       involuntary variable capture (rest of \PR{17879}).
@@ -337,6 +353,15 @@
       correctly signal communication errors. Previously, such errors could
       lead to a segfault due to invalid memory access. Reported
       and debugged by Dmitriy Selivanov in \PR{17850}.
+
+      \item \code{quantile(x, pr)} works more consistently for \code{pr}
+      values slightly outside [0,1], thanks to Suharto Anggono's \PR{17891}.
+
+      Further, \code{quantile(x, prN, names=FALSE)} now works even when
+      \code{prN} contains \code{NA}s, thanks to Anggono's \PR{17892}.
+
+      \item Libcurl-based internet access, including
+      \code{curlGetHeaders()}, was not respecting the \code{"timeout"} option.
     }
   }
 }
