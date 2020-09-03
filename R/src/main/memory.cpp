@@ -874,7 +874,7 @@ static void CheckNodeGeneration(SEXP x, int g)
     }
 }
 
-static void DEBUG_CHECK_NODE_COUNTS(char *where)
+static void DEBUG_CHECK_NODE_COUNTS(const char *where)
 {
     int i, OldCount, NewCount, OldToNewCount, gen;
     GCNode *s;
@@ -1141,7 +1141,7 @@ static void ReleaseLargeFreeVectors()
 	GCNode *s = NEXT_NODE(R_GenHeap[node_class].New);
 	while (s != R_GenHeap[node_class].New) {
 	    GCNode *next = NEXT_NODE(s);
-	    if (CHAR(s)) {
+	    if (R::r_char(s)) {
 		R_size_t size;
 #ifdef PROTECTCHECK
 		if (TYPEOF(s) == FREESXP)
@@ -3971,7 +3971,7 @@ const char *(R_CHAR)(SEXP x) {
     if(TYPEOF(x) != CHARSXP) // Han-Tak proposes to prepend  'x && '
 	error(_("'%s' function can only be applied to a charecter, not a '%s'"), "CHAR()",
 	      type2char(TYPEOF(x)));
-    return (const char *) R::CHAR(CHK(x));
+    return (const char *) R::r_char(CHK(x));
 }
 
 SEXP (STRING_ELT)(SEXP x, R_xlen_t i) {
@@ -4586,7 +4586,7 @@ static void R_OutputStackTrace(FILE *file)
         {
             SEXP fun = CAR(cptr->getCall());
             fprintf(file, "\"%s\" ",
-                    TYPEOF(fun) == SYMSXP ? CHAR(PRINTNAME(fun)) : "<Anonymous>");
+                    TYPEOF(fun) == SYMSXP ? R::r_char(PRINTNAME(fun)) : "<Anonymous>");
         }
     }
 }
@@ -4652,7 +4652,7 @@ SEXP do_Rprofmem(SEXP args)
     append_mode = asLogical(CADR(args));
     filename = STRING_ELT(CAR(args), 0);
     threshold = (R_size_t)REAL(CADDR(args))[0];
-    if (strlen(CHAR(filename)))
+    if (strlen(R::r_char(filename)))
         R_InitMemReporting(filename, append_mode, threshold);
     else
         R_EndMemReporting();

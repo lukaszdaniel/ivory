@@ -106,7 +106,7 @@ namespace R
    known offset from the node SEXP. */
 #define STDVEC_DATAPTR(x) (reinterpret_cast<void *>(reinterpret_cast<R::SEXPREC_ALIGN *>(x) + 1))
 
-    inline const char *CHAR(RObject *x) { return (const char *)STDVEC_DATAPTR(x); }
+    inline const char *r_char(RObject *x) { return (const char *)STDVEC_DATAPTR(x); }
 
   /* writable char access for R internal use only */
 #define CHAR_RW(x) ((char *)STDVEC_DATAPTR(x))

@@ -146,10 +146,10 @@ static const char *R_PromptString(int browselevel, int type)
 		snprintf(BrowsePrompt, 20, "Browse[%d]> ", browselevel);
 		return BrowsePrompt;
 	    }
-	    return ::CHAR(STRING_ELT(GetOption1(install("prompt")), 0));
+	    return CHAR(STRING_ELT(GetOption1(install("prompt")), 0));
 	}
 	else {
-	    return ::CHAR(STRING_ELT(GetOption1(install("continue")), 0));
+	    return CHAR(STRING_ELT(GetOption1(install("continue")), 0));
 	}
     }
 }
@@ -479,7 +479,7 @@ static void win32_segv(int signum)
 		q = CAR(p); /* a character vector */
 		REprintf("%2d: ", line);
 		for(i = 0; i < LENGTH(q); i++)
-		    REprintf("%s", ::CHAR(STRING_ELT(q, i)));
+		    REprintf("%s", CHAR(STRING_ELT(q, i)));
 		REprintf("\n");
 	    }
 	    UNPROTECT(1);
@@ -633,7 +633,7 @@ static void sigactionSegv(int signum, siginfo_t *ip, void *context)
 		q = CAR(p); /* a character vector */
 		REprintf("%2d: ", line);
 		for(i = 0; i < LENGTH(q); i++)
-		    REprintf("%s", ::CHAR(STRING_ELT(q, i)));
+		    REprintf("%s", CHAR(STRING_ELT(q, i)));
 		REprintf("\n");
 	    }
 	    UNPROTECT(1);
@@ -1170,7 +1170,7 @@ static int ParseBrowser(SEXP CExpr, SEXP rho)
 {
     int rval = 0;
     if (isSymbol(CExpr)) {
-	const char *expr = ::CHAR(PRINTNAME(CExpr));
+	const char *expr = CHAR(PRINTNAME(CExpr));
 	if (streql(expr, "c") || streql(expr, "cont")) {
 	    rval = 1;
 	    SET_RDEBUG(rho, 0);
@@ -1373,7 +1373,7 @@ HIDDEN SEXP do_quit(SEXP call, SEXP op, SEXP args, SEXP rho)
     }
     if( !isString(CAR(args)) )
 	error(_("one of \"yes\", \"no\", \"ask\" or \"default\" expected."));
-    tmp = ::CHAR(STRING_ELT(CAR(args), 0)); /* ASCII */
+    tmp = CHAR(STRING_ELT(CAR(args), 0)); /* ASCII */
     if( streql(tmp, "ask") ) {
 	ask = SA_SAVEASK;
 	if(!R_Interactive)
@@ -1557,7 +1557,7 @@ SEXP R_removeTaskCallback(SEXP which)
 	if (LENGTH(which) == 0)
 	    val = FALSE;
 	else
-	    val = Rf_removeTaskCallbackByName(::CHAR(STRING_ELT(which, 0)));
+	    val = Rf_removeTaskCallbackByName(CHAR(STRING_ELT(which, 0)));
     } else {
 	id = asInteger(which);
 	if (id != NA_INTEGER) val = Rf_removeTaskCallbackByIndex(id - 1);
@@ -1700,7 +1700,7 @@ SEXP R_addTaskCallback(SEXP f, SEXP data, SEXP useData, SEXP name)
     SET_VECTOR_ELT(internalData, 2, useData);
 
     if(length(name))
-	tmpName = ::CHAR(STRING_ELT(name, 0));
+	tmpName = CHAR(STRING_ELT(name, 0));
 
     PROTECT(index = allocVector(INTSXP, 1));
     el = Rf_addTaskCallback(R_taskCallbackRoutine,  internalData,
@@ -1721,26 +1721,29 @@ SEXP R_addTaskCallback(SEXP f, SEXP data, SEXP useData, SEXP name)
 
 #undef __MAIN__
 
-extern "C" {
+extern "C"
+{
 #ifndef _WIN32
 /* this is here solely to pull in xxxpr.o */
 #include <R_ext/RS.h>
-# if defined FC_LEN_T
+#if defined FC_LEN_T
 #include <cstddef>
-void F77_SYMBOL(rwarnc)(const char *msg, int *nchar, FC_LEN_T msg_len);
-HIDDEN void dummy54321(void)
-{
-    int nc = 5;
-    F77_CALL(rwarnc)("dummy", &nc, (FC_LEN_T) 5);
-}
-# else
-void F77_SYMBOL(rwarnc)(char *msg, int *nchar);
-HIDDEN void dummy54321(void)
-{
-    int nc = 5;
-    F77_CALL(rwarnc)("dummy", &nc);
-}
-# endif
+	void F77_SYMBOL(rwarnc)(const char *msg, int *nchar, FC_LEN_T msg_len);
+	HIDDEN void dummy54321(void)
+	{
+		int nc = 5;
+		F77_CALL(rwarnc)
+		("dummy", &nc, (FC_LEN_T)5);
+	}
+#else
+	void F77_SYMBOL(rwarnc)(char *msg, int *nchar);
+	HIDDEN void dummy54321(void)
+	{
+		int nc = 5;
+		F77_CALL(rwarnc)
+		("dummy", &nc);
+	}
+#endif
 } //extern "C"
 
 #endif

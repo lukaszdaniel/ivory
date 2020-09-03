@@ -522,23 +522,23 @@ SEXP Rf_nthcdr(SEXP s, int n)
 	return R_NilValue; /* for -Wall */
 }
 
-/* Destructively removes R_NilValue ('NULL') elements from a pairlist.
-   's' needs to be protected on entry (==> result does not need protection) */
+/* Destructively removes R_NilValue ('NULL') elements from a pairlist. */
 SEXP R::R_listCompact(SEXP s)
 {
-	SEXP handle = PROTECT(cons(R_NilValue, s)),
-		 prev = handle;
-	while (s != R_NilValue)
-	{
-		if (CAR(s) == R_NilValue) // skip it
-			SETCDR(prev, CDR(s));
-		else
-			prev = s;
-		s = CDR(s);
-	}
+    // skip initial NULL values
+    while (s != R_NilValue && CAR(s) == R_NilValue)
+	s = CDR(s);
 
-	UNPROTECT(1);
-	return CDR(handle);
+    SEXP val = s;
+    SEXP prev = s;
+    while (s != R_NilValue) {
+	s = CDR(s);
+	if (CAR(s) == R_NilValue) // skip it
+	    SETCDR(prev, CDR(s));
+	else
+	    prev = s;
+    }
+    return val;
 }
 
 /* This is a primitive (with no arguments) */

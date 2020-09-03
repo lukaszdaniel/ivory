@@ -237,7 +237,7 @@ SEXPTYPE
 
 /* Define SWITCH_TO_NAMED to use the 'NAMED' mechanism instead of
    reference counting. */
-#if !defined(SWITCH_TO_NAMED) && !defined(SWITCH_TO_REFCNT)
+#if (!defined(SWITCH_TO_NAMED) && !defined(SWITCH_TO_REFCNT)) || defined(COMPILING_IVORY)
 #define SWITCH_TO_REFCNT
 #endif
 
@@ -256,7 +256,6 @@ SEXPTYPE
 
 #else /* not USE_RINTERNALS */
 // ======================= not USE_RINTERNALS section
-
 
 #define CHAR(x)		R_CHAR(x)
 const char *(R_CHAR)(SEXP x);

@@ -854,7 +854,7 @@ extern inline Rboolean Rf_inherits(SEXP s, const char *name)
         nclass = Rf_length(klass);
         for (i = 0; i < nclass; i++)
         {
-            if (!strcmp(CHAR(STRING_ELT(klass, i)), name))
+            if (!strcmp(R::r_char(STRING_ELT(klass, i)), name))
                 return TRUE;
         }
     }
@@ -869,14 +869,14 @@ extern inline Rboolean Rf_isValidString(SEXP x)
 /* non-empty ("") valid string :*/
 extern inline Rboolean Rf_isValidStringF(SEXP x)
 {
-    return Rboolean(Rf_isValidString(x) && CHAR(STRING_ELT(x, 0))[0]);
+    return Rboolean(Rf_isValidString(x) && R::r_char(STRING_ELT(x, 0))[0]);
 }
 
 extern inline Rboolean Rf_isUserBinop(SEXP s)
 {
     if (TYPEOF(s) == SYMSXP)
     {
-        const char *str = CHAR(PRINTNAME(s));
+        const char *str = R::r_char(PRINTNAME(s));
         if (strlen(str) >= 2 && str[0] == '%' && str[strlen(str) - 1] == '%')
             return TRUE;
     }
@@ -974,7 +974,7 @@ extern inline Rboolean Rf_isFrame(SEXP s)
     {
         klass = Rf_getAttrib(s, R_ClassSymbol);
         for (i = 0; i < Rf_length(klass); i++)
-            if (!strcmp(CHAR(STRING_ELT(klass, i)), "data.frame"))
+            if (!strcmp(R::r_char(STRING_ELT(klass, i)), "data.frame"))
                 return TRUE;
     }
     return FALSE;
