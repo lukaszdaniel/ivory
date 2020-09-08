@@ -22,7 +22,7 @@
  *  https://www.R-project.org/Licenses/
  */
 
-#include <Symbol.hpp>
+#include <CXXR/Symbol.hpp>
 
 namespace R
 {

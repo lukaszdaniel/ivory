@@ -129,3 +129,4 @@ R-recommended-frozen/
 R/tests/*.Rcheck/
 R/tests/RecPackages/*/
 R/.RData
+R/src/include/CXXR/stamp-R

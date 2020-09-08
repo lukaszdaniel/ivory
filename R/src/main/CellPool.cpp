@@ -22,7 +22,7 @@
  * Implementation of class CellPool
  */
 
-#include "CellPool.hpp"
+#include <CXXR/CellPool.hpp>
 
 #include <iostream>
 

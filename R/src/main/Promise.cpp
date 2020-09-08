@@ -22,7 +22,7 @@
  *  https://www.R-project.org/Licenses/
  */
 
-#include <Promise.hpp>
+#include <CXXR/Promise.hpp>
 
 namespace R
 {

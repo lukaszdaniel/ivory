@@ -25,7 +25,7 @@
 #ifndef CLOSURE_HPP
 #define CLOSURE_HPP
 
-#include <RObject.hpp>
+#include <CXXR/RObject.hpp>
 
 namespace
 {

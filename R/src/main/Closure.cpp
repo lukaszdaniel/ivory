@@ -22,7 +22,7 @@
  *  https://www.R-project.org/Licenses/
  */
 
-#include <Closure.hpp>
+#include <CXXR/Closure.hpp>
 
 namespace R
 {

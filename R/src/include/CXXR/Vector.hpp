@@ -25,7 +25,7 @@
 #ifndef VECTOR_HPP
 #define VECTOR_HPP
 
-#include <RObject.hpp>
+#include <CXXR/RObject.hpp>
 
 namespace R
 {

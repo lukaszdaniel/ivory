@@ -17,28 +17,28 @@
  *  Foundation, Inc., 51 Franklin Street Fifth Floor, Boston, MA 02110-1301 USA
  */
 
-/** @file Heap.cpp
+/** @file MemoryBank.cpp
  *
- * Implementation of class Heap
+ * Implementation of class MemoryBank
  */
 
-#include "Heap.hpp"
+#include <CXXR/MemoryBank.hpp>
 
 #include <iostream>
 
 using namespace std;
 using namespace R;
 
-unsigned int Heap::s_blocks_allocated = 0;
-unsigned int Heap::s_bytes_allocated = 0;
-bool (*Heap::s_cue_gc)(size_t, bool) = 0;
+unsigned int MemoryBank::s_blocks_allocated = 0;
+unsigned int MemoryBank::s_bytes_allocated = 0;
+bool (*MemoryBank::s_cue_gc)(size_t, bool) = 0;
 
-void Heap::pool_out_of_memory(CellPool* pool)
+void MemoryBank::pool_out_of_memory(CellPool* pool)
 {
     if (s_cue_gc) s_cue_gc(pool->superblockSize(), false);
 }
 
-CellPool Heap::s_pools[] = {CellPool(1, 512, pool_out_of_memory),
+CellPool MemoryBank::s_pools[] = {CellPool(1, 512, pool_out_of_memory),
 			    CellPool(2, 256, pool_out_of_memory),
 			    CellPool(4, 128, pool_out_of_memory),
 			    CellPool(8, 64, pool_out_of_memory),
@@ -47,7 +47,7 @@ CellPool Heap::s_pools[] = {CellPool(1, 512, pool_out_of_memory),
 // Note that the C++ standard requires that an operator new returns a
 // valid pointer even when 0 bytes are requested.  The entry at
 // s_pooltab[0] ensures this.  This table assumes sizeof(double) == 8.
-unsigned int Heap::s_pooltab[]
+unsigned int MemoryBank::s_pooltab[]
 = {0, 0, 0, 0, 0, 0, 0, 0, 0,
    1, 1, 1, 1, 1, 1, 1, 1,
    2, 2, 2, 2, 2, 2, 2, 2,
@@ -65,7 +65,7 @@ unsigned int Heap::s_pooltab[]
    4, 4, 4, 4, 4, 4, 4, 4,
    4, 4, 4, 4, 4, 4, 4, 4};
     
-void* Heap::alloc2(size_t bytes)
+void* MemoryBank::alloc2(size_t bytes)
 {
     void* p = 0;
     bool joy = false;  // true if GC succeeds after bad_alloc
@@ -101,7 +101,7 @@ void* Heap::alloc2(size_t bytes)
     return p;
 }
 				
-void Heap::check()
+void MemoryBank::check()
 {
     for (unsigned int i = 0; i < 5; ++i)
 	s_pools[i].check();

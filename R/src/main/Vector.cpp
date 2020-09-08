@@ -22,7 +22,7 @@
  *  https://www.R-project.org/Licenses/
  */
 
-#include <Vector.hpp>
+#include <CXXR/Vector.hpp>
 
 namespace R
 {

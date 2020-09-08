@@ -22,14 +22,14 @@
  *  https://www.R-project.org/Licenses/
  */
 
-#ifndef PROMISE_HPP
-#define PROMISE_HPP
+#ifndef ENVIRONMENT_HPP
+#define ENVIRONMENT_HPP
 
-#include <RObject.hpp>
+#include <CXXR/RObject.hpp>
 
 namespace R
 {
 
 } // namespace R
 
-#endif /* PROMISE_HPP */
+#endif /* ENVIRONMENT_HPP */

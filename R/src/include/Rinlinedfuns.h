@@ -36,14 +36,14 @@
 
 #include <Localization.h>
 #include <R_ext/Error.h>
-#include <RObject.hpp>
-#include <List.hpp>
-#include <BuiltInFunction.hpp>
-#include <Symbol.hpp>
-#include <Vector.hpp>
-#include <Environment.hpp>
-#include <Promise.hpp>
-#include <Closure.hpp>
+#include <CXXR/RObject.hpp>
+#include <CXXR/List.hpp>
+#include <CXXR/BuiltInFunction.hpp>
+#include <CXXR/Symbol.hpp>
+#include <CXXR/Vector.hpp>
+#include <CXXR/Environment.hpp>
+#include <CXXR/Promise.hpp>
+#include <CXXR/Closure.hpp>
 
 #include <string.h> /* for strlen, strcmp */
 

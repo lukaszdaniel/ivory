@@ -22,7 +22,7 @@
  *  https://www.R-project.org/Licenses/
  */
 
-#include <RObject.hpp>
+#include <CXXR/RObject.hpp>
 
 namespace R
 {

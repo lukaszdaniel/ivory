@@ -25,7 +25,7 @@
 #ifndef SYMBOL_HPP
 #define SYMBOL_HPP
 
-#include <RObject.hpp>
+#include <CXXR/RObject.hpp>
 
 namespace R {
 

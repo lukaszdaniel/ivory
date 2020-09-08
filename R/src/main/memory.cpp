@@ -39,7 +39,7 @@
 #include <cstdarg>
 
 #include <R_ext/RS.h> /* for S4 allocation */
-#include <Heap.hpp>
+#include <CXXR/MemoryBank.hpp>
 #include <R_ext/Print.h>
 
 /* Declarations for Valgrind.
@@ -875,7 +875,7 @@ namespace
             __n__ = R_GenHeap[c].Free;                                      \
             try                                                             \
             {                                                               \
-                __n__ = reinterpret_cast<RObject *>(Heap::allocate(bytes)); \
+                __n__ = reinterpret_cast<RObject *>(MemoryBank::allocate(bytes)); \
             }                                                               \
             catch (bad_alloc)                                               \
             {                                                               \
@@ -1210,8 +1210,8 @@ static void ReleaseLargeFreeVectors()
 		R_GenHeap[node_class].AllocCount--;
 		if (node_class == LARGE_NODE_CLASS) {
 		    R_LargeVallocSize -= size;
-		    Heap::deallocate(s->m_data, s->m_databytes);
-		    Heap::deallocate(s, sizeof(RObject));
+		    MemoryBank::deallocate(s->m_data, s->m_databytes);
+		    MemoryBank::deallocate(s, sizeof(RObject));
 		} else {
 		    custom_node_free(s);
 		}
@@ -2290,7 +2290,7 @@ HIDDEN void R::InitMemory()
     else if (arg && StringFalse(arg))
         gc_fail_on_error = false;
 
-    Heap::setGCCuer(cueGC);
+    MemoryBank::setGCCuer(cueGC);
     gc_reporting = R_Verbose;
     R_StandardPPStackSize = R_PPStackSize;
     R_RealPPStackSize = R_PPStackSize + PP_REDZONE_SIZE;
@@ -2992,7 +2992,7 @@ SEXP Rf_allocVector3(SEXPTYPE type, R_xlen_t length = 1, R_allocator_t *allocato
 		   indexable by size_t. - TK */
 		mem = allocator ?
 		    custom_node_alloc(allocator, sizeof(RObject)) :
-		    reinterpret_cast<RObject*>(Heap::allocate(sizeof(RObject)));
+		    reinterpret_cast<RObject*>(MemoryBank::allocate(sizeof(RObject)));
 		if (mem == nullptr) {
 		    /* If we are near the address space limit, we
 		       might be short of address space.  So return
@@ -3000,12 +3000,12 @@ SEXP Rf_allocVector3(SEXPTYPE type, R_xlen_t length = 1, R_allocator_t *allocato
 		    R_gc_no_finalizers(alloc_size);
 		    mem = allocator ?
 			custom_node_alloc(allocator, sizeof(RObject)) :
-			reinterpret_cast<RObject*>(Heap::allocate(sizeof(RObject)));
+			reinterpret_cast<RObject*>(MemoryBank::allocate(sizeof(RObject)));
 		}
 		if (mem) {
 		    s = (SEXP) mem;
 		    s->m_databytes = bytes;
-		    s->m_data = Heap::allocate(s->m_databytes);
+		    s->m_data = MemoryBank::allocate(s->m_databytes);
 		    R::RObject::set_stdvec_length(s, length);
 		    success = true;
 		}
@@ -3045,7 +3045,7 @@ SEXP Rf_allocVector3(SEXPTYPE type, R_xlen_t length = 1, R_allocator_t *allocato
     else {
 	GC_PROT(s = allocSExpNonCons(type));
     		s->m_databytes = 0;
-		    s->m_data = Heap::allocate(s->m_databytes);
+		    s->m_data = MemoryBank::allocate(s->m_databytes);
 	R::RObject::set_stdvec_length(s, (R_len_t) length);
     }
     R::RObject::set_altrep(s, 0);

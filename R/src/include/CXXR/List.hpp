@@ -22,14 +22,14 @@
  *  https://www.R-project.org/Licenses/
  */
 
-#ifndef BUILTINFUNCTION_HPP
-#define BUILTINFUNCTION_HPP
+#ifndef LIST_HPP
+#define LIST_HPP
 
-#include <RObject.hpp>
+#include <CXXR/RObject.hpp>
 
 namespace R
 {
 
 } // namespace R
 
-#endif /* BUILTINFUNCTION_HPP */
+#endif /* LIST_HPP */

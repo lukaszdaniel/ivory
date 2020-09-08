@@ -22,7 +22,7 @@
  *  https://www.R-project.org/Licenses/
  */
 
-#include <BuiltInFunction.hpp>
+#include <CXXR/BuiltInFunction.hpp>
 
 namespace R
 {

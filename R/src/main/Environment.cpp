@@ -22,7 +22,7 @@
  *  https://www.R-project.org/Licenses/
  */
 
-#include <Environment.hpp>
+#include <CXXR/Environment.hpp>
 
 namespace R
 {
