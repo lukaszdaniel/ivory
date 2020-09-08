@@ -149,7 +149,7 @@ static R_size_t objectsize(SEXP s)
        we need to take into account the rounding up that goes on
        in the node classes. */
     if(isVec) {
-	cnt += sizeof(SEXPREC_ALIGN);
+	cnt += sizeof(RObject);
 	if (vcnt > 16) cnt += 8*vcnt;
 	else if (vcnt > 8) cnt += 128;
 	else if (vcnt > 6) cnt += 64;

@@ -19,7 +19,7 @@ OBJ_HEADERS = Rconfig.h Rmath.h Rversion.h
 ## Non-API internal ones:
 INT_HEADERS = Defn.h Errormsg.h Fileio.h Graphics.h GraphicsBase.h \
    IOStuff.h Internal.h Localization.h Parse.h Print.h Rconnections.h \
-   Rdynpriv.h Rgraphics.h Rinlinedfuns.h RObject.hpp List.hpp BuiltInFunction.hpp Closure.hpp Environment.hpp Vector.hpp Symbol.hpp Promise.hpp \
+   Rdynpriv.h Rgraphics.h Rinlinedfuns.h CellPool.hpp Heap.hpp RObject.hpp List.hpp BuiltInFunction.hpp Closure.hpp Environment.hpp Vector.hpp Symbol.hpp Promise.hpp \
    Startup.h rlocale.h
 
 DISTFILES = Makefile.in Makefile.win $(INT_HEADERS) $(SRC_HEADERS) \

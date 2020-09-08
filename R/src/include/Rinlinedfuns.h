@@ -106,7 +106,7 @@ extern inline void *DATAPTR(SEXP x)
         return (void *)1;
 #endif
     else
-        return STDVEC_DATAPTR(x);
+        return R::stdvec_dataptr(x);
 }
 
 extern inline const void *DATAPTR_RO(SEXP x)
@@ -115,7 +115,7 @@ extern inline const void *DATAPTR_RO(SEXP x)
     if (ALTREP(x))
         return ALTVEC_DATAPTR_RO(x);
     else
-        return STDVEC_DATAPTR(x);
+        return R::stdvec_dataptr(x);
 }
 
 extern inline const void *DATAPTR_OR_NULL(SEXP x)
@@ -124,7 +124,7 @@ extern inline const void *DATAPTR_OR_NULL(SEXP x)
     if (ALTREP(x))
         return ALTVEC_DATAPTR_OR_NULL(x);
     else
-        return STDVEC_DATAPTR(x);
+        return R::stdvec_dataptr(x);
 }
 
 #ifdef STRICT_TYPECHECK
@@ -169,41 +169,41 @@ extern inline const void *DATAPTR_OR_NULL(SEXP x)
 extern inline const int *LOGICAL_OR_NULL(SEXP x)
 {
     CHECK_VECTOR_LGL(x);
-    return (int *)(ALTREP(x) ? ALTVEC_DATAPTR_OR_NULL(x) : STDVEC_DATAPTR(x));
+    return (int *)(ALTREP(x) ? ALTVEC_DATAPTR_OR_NULL(x) : R::stdvec_dataptr(x));
 }
 
 extern inline const int *INTEGER_OR_NULL(SEXP x)
 {
     CHECK_VECTOR_INT(x);
-    return (int *)(ALTREP(x) ? ALTVEC_DATAPTR_OR_NULL(x) : STDVEC_DATAPTR(x));
+    return (int *)(ALTREP(x) ? ALTVEC_DATAPTR_OR_NULL(x) : R::stdvec_dataptr(x));
 }
 
 extern inline const double *REAL_OR_NULL(SEXP x)
 {
     CHECK_VECTOR_REAL(x);
-    return (double *)(ALTREP(x) ? ALTVEC_DATAPTR_OR_NULL(x) : STDVEC_DATAPTR(x));
+    return (double *)(ALTREP(x) ? ALTVEC_DATAPTR_OR_NULL(x) : R::stdvec_dataptr(x));
 }
 
 extern inline const Rcomplex *COMPLEX_OR_NULL(SEXP x)
 {
     CHECK_VECTOR_CPLX(x);
-    return (Rcomplex *)(ALTREP(x) ? ALTVEC_DATAPTR_OR_NULL(x) : STDVEC_DATAPTR(x));
+    return (Rcomplex *)(ALTREP(x) ? ALTVEC_DATAPTR_OR_NULL(x) : R::stdvec_dataptr(x));
 }
 
 extern inline const Rbyte *RAW_OR_NULL(SEXP x)
 {
     CHECK_VECTOR_RAW(x);
-    return (Rbyte *)(ALTREP(x) ? ALTVEC_DATAPTR_OR_NULL(x) : STDVEC_DATAPTR(x));
+    return (Rbyte *)(ALTREP(x) ? ALTVEC_DATAPTR_OR_NULL(x) : R::stdvec_dataptr(x));
 }
 
 extern inline R_xlen_t XLENGTH_EX(SEXP x)
 {
-    return ALTREP(x) ? ALTREP_LENGTH(x) : R::VECTOR::stdvec_length(x);
+    return ALTREP(x) ? ALTREP_LENGTH(x) : R::RObject::stdvec_length(x);
 }
 
 extern inline R_xlen_t XTRUELENGTH(SEXP x)
 {
-    return ALTREP(x) ? ALTREP_TRUELENGTH(x) : R::VECTOR::stdvec_truelength(x);
+    return ALTREP(x) ? ALTREP_TRUELENGTH(x) : R::RObject::stdvec_truelength(x);
 }
 
 extern inline int LENGTH_EX(SEXP x, const char *file, int line)

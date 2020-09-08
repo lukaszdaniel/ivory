@@ -34,59 +34,14 @@ namespace R
    the RObject definition. The standard RObject takes up 7 words
    and the reduced version takes 6 words on most 64-bit systems. On most
    32-bit systems, RObject takes 8 words and the reduced version 7 words. */
-    class VECTOR
+    class VECTOR : public RObject
     {
     private:
-        [[maybe_unused]] SEXPTYPE m_type : FULL_TYPE_BITS;
-        [[maybe_unused]] bool m_scalar;
-        [[maybe_unused]] bool m_has_class;
-        [[maybe_unused]] bool m_alt;
-        [[maybe_unused]] unsigned int m_gpbits : 16;
-        [[maybe_unused]] bool m_marked;
-        [[maybe_unused]] bool m_debug;
-        [[maybe_unused]] bool m_trace;             /* functions and memory tracing */
-        [[maybe_unused]] bool m_spare;             /* used on closures and when REFCNT is defined */
-        [[maybe_unused]] bool m_gcgen;             /* old generation number */
-        [[maybe_unused]] unsigned int m_gcclass : 3; /* node class */
-        [[maybe_unused]] unsigned int m_named : NAMED_BITS;
-        [[maybe_unused]] unsigned int m_extra : 29 - NAMED_BITS; /* used for immediate bindings */
-        [[maybe_unused]] RObject *m_attrib;
-        [[maybe_unused]] RObject *gengc_next_node;
-        [[maybe_unused]] RObject *gengc_prev_node;
-        R_xlen_t m_length;
-        R_xlen_t m_truelength;
-
     public:
-        static inline R_xlen_t stdvec_length(RObject *x) { return x ? reinterpret_cast<VECTOR *>(x)->m_length : 0; }
-        static inline R_xlen_t stdvec_truelength(RObject *x) { return x ? reinterpret_cast<VECTOR *>(x)->m_truelength : 0; }
-        static inline void set_stdvec_truelength(RObject *x, R_xlen_t v)
-        {
-            if (!x)
-                return;
-            reinterpret_cast<VECTOR *>(x)->m_truelength = v;
-        }
-        static inline void set_stdvec_length(RObject *x, R_xlen_t v)
-        {
-            if (!x)
-                return;
-            reinterpret_cast<VECTOR *>(x)->m_length = v;
-            RObject::setscalar(x, v == 1);
-        }
-        static inline void set_truelength(RObject *x, R_xlen_t v)
-        {
-            if (R::RObject::altrep(x))
-                Rf_error("can't set ALTREP truelength");
-            R::VECTOR::set_stdvec_truelength(x, v);
-        }
     };
 
-    using VECSEXP = class R::VECTOR *;
+    using VECSEXP = class R::RObject *;
 
-    union SEXPREC_ALIGN
-    {
-        VECTOR s;
-        double align;
-    };
 
 /* Vector Access Macros */
 #ifdef LONG_VECTOR_SUPPORT
@@ -104,12 +59,13 @@ namespace R
 /* Under the generational allocator the data for vector nodes comes
    immediately after the node structure, so the data address is a
    known offset from the node SEXP. */
-#define STDVEC_DATAPTR(x) (reinterpret_cast<void *>(reinterpret_cast<R::SEXPREC_ALIGN *>(x) + 1))
+inline void *stdvec_dataptr(RObject *x) { return x ? x->m_data : nullptr; }
+#define STDVEC_DATAPTR(x) (x->m_data)
 
-    inline const char *r_char(RObject *x) { return (const char *)STDVEC_DATAPTR(x); }
+    inline const char *r_char(RObject *x) { return (const char *)stdvec_dataptr(x); }
 
   /* writable char access for R internal use only */
-#define CHAR_RW(x) ((char *)STDVEC_DATAPTR(x))
+#define CHAR_RW(x) ((char *)x->m_data)
 #define LOGICAL(x) ((int *)DATAPTR(x))
 #define INTEGER(x) ((int *)DATAPTR(x))
 #define RAW(x) ((Rbyte *)DATAPTR(x))

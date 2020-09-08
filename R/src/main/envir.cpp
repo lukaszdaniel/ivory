@@ -223,11 +223,11 @@ Rboolean R_envHasNoSpecialSymbols(SEXP env)
 
 R_INLINE static int HASHSIZE(SEXP x)
 {
-    return (int)R::VECTOR::stdvec_length(x);
+    return (int)R::RObject::stdvec_length(x);
 }
 R_INLINE static int HASHPRI(SEXP x)
 {
-    return (int)R::VECTOR::stdvec_truelength(x);
+    return (int)R::RObject::stdvec_truelength(x);
 }
 #define HASHTABLEGROWTHRATE 1.2
 #define HASHMINSIZE 29

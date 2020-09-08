@@ -84,6 +84,12 @@ namespace R
         RObject *env;
     };
 
+    struct vecsxp_struct
+    {
+        R_len_t m_length;
+        R_len_t m_truelength;
+    };
+
     /* Every node must start with a set of sxpinfo flags and an attribute
    field. Under the generational collector these are followed by the
    fields used to maintain the collector's linked list structures. */
@@ -125,7 +131,11 @@ namespace R
             envsxp_struct envsxp;
             closxp_struct closxp;
             promsxp_struct promsxp;
+            vecsxp_struct vecsxp;
         } u;
+    public:
+    void* m_data;
+    size_t m_databytes;
         // virtual ~RObject() = default;
 #if 0
     SEXPTYPE sexptype() const { return this->m_type; }
@@ -201,6 +211,7 @@ namespace R
     const char *translateCharUTF8_() const;
 #endif
     public:
+    // virtual ~RObject() {}
         /* General Cons Cell Attributes */
         static bool gcgen(GCNode *v);
         static void set_gcgen(GCNode *v, bool x);
@@ -391,6 +402,28 @@ namespace R
         static void set_bndcell_dval(RObject *x, double v);
         static void set_bndcell_ival(RObject *x, int v);
         static void set_bndcell_lval(RObject *x, int v);
+
+        static inline R_xlen_t stdvec_length(RObject *x) { return x ? x->u.vecsxp.m_length : 0; }
+        static inline R_xlen_t stdvec_truelength(RObject *x) { return x ? x->u.vecsxp.m_truelength : 0; }
+        static inline void set_stdvec_truelength(RObject *x, R_xlen_t v)
+        {
+            if (!x)
+                return;
+            x->u.vecsxp.m_truelength = v;
+        }
+        static inline void set_stdvec_length(RObject *x, R_xlen_t v)
+        {
+            if (!x)
+                return;
+            x->u.vecsxp.m_length = v;
+            RObject::setscalar(x, v == 1);
+        }
+        static inline void set_truelength(RObject *x, R_xlen_t v)
+        {
+            if (R::RObject::altrep(x))
+                Rf_error("can't set ALTREP truelength");
+            R::RObject::set_stdvec_truelength(x, v);
+        }
     };
 #if 0
     class Symbol : public RObject
