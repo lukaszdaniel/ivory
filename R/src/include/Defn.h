@@ -32,7 +32,19 @@
 #error Defn.h can only be included in C++ files
 #endif
 
+// #ifdef USE_RINTERNALS
+// #undef USE_RINTERNALS
+// #endif
+
 #include <utility>
+#include <CXXR/RObject.hpp>
+#include <CXXR/List.hpp>
+#include <CXXR/BuiltInFunction.hpp>
+#include <CXXR/Symbol.hpp>
+#include <CXXR/Vector.hpp>
+#include <CXXR/Environment.hpp>
+#include <CXXR/Promise.hpp>
+#include <CXXR/Closure.hpp>
 
 /* To test the write barrier used by the generational collector,
    define TESTING_WRITE_BARRIER.  This makes the internal structure of

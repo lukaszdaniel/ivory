@@ -37,8 +37,6 @@
 
 #include <Localization.h>
 #include <Defn.h>
-#include <CXXR/RObject.hpp>
-#include <CXXR/Vector.hpp>
 #include <Internal.h>
 #include "Rinterface.h"
 #include "IOStuff.h"

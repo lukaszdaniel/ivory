@@ -23,6 +23,8 @@
  */
 
 #include <CXXR/RObject.hpp>
+#include <R_ext/Boolean.h>
+#include <Rinternals.h>
 
 namespace R
 {

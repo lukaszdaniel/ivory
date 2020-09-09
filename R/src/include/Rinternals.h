@@ -34,6 +34,10 @@
 #ifndef R_INTERNALS_H_
 #define R_INTERNALS_H_
 
+// #ifdef USE_RINTERNALS
+// #undef USE_RINTERNALS
+// #endif
+
 #ifdef __cplusplus
 #include <cstdio>
 #include <climits>
@@ -44,6 +48,18 @@
 #include <stdio.h>
 #include <limits.h> /* for INT_MAX */
 #include <stddef.h> /* for ptrdiff_t, which is required by C99 */
+#endif
+
+#if defined(COMPILING_IVORY) && defined(__cplusplus)
+
+    namespace R
+    {
+        class RObject;
+    }
+    using SEXP = R::RObject *;
+#else
+    #define RObject SEXPREC
+    typedef struct RObject *SEXP;
 #endif
 
 #ifdef __cplusplus
@@ -61,26 +77,9 @@ extern "C" {
 #include <R_ext/Rdynload.h> // for DL_FUNC
 
 #include <R_ext/libextern.h>
-
-#ifdef __cplusplus
-using Rbyte = unsigned char;
-#else
-typedef unsigned char Rbyte;
-#endif
+#include <CXXR/RTypes.hpp>
 
 #define DO_NOTHING do {} while(0)
-/* type for length of (standard, not long) vectors etc */
-#ifdef __cplusplus
-using R_len_t = int;
-constexpr R_len_t R_LEN_T_MAX = std::numeric_limits<R_len_t>::max();
-constexpr int R_INT_MAX = std::numeric_limits<int>::max();
-constexpr int R_INT_MIN = std::numeric_limits<int>::min() + 1;
-#else
-typedef int R_len_t;
-#define R_LEN_T_MAX INT_MAX
-#define R_INT_MAX  INT_MAX
-#define R_INT_MIN -INT_MAX
-#endif
 
 /* both config.h and Rconfig.h set SIZEOF_SIZE_T, but Rconfig.h is
    skipped if config.h has already been included. */
@@ -90,27 +89,6 @@ typedef int R_len_t;
 
 #if (SIZEOF_SIZE_T > 4)
 #define LONG_VECTOR_SUPPORT
-#endif
-
-#ifdef __cplusplus
-#ifdef LONG_VECTOR_SUPPORT
-using R_xlen_t = ptrdiff_t;
-constexpr R_xlen_t R_XLEN_T_MAX = std::numeric_limits<R_xlen_t>::max();
-#else
-using R_xlen_t = int;
-constexpr R_xlen_t R_XLEN_T_MAX = std::numeric_limits<R_xlen_t>::max();
-#endif
-constexpr int R_SHORT_LEN_MAX = std::numeric_limits<int>::max();
-#else // not __cplusplus
-#ifdef LONG_VECTOR_SUPPORT
-#include <stdint.h>
-typedef ptrdiff_t R_xlen_t;
-#define R_XLEN_T_MAX PTRDIFF_MAX
-#define R_SHORT_LEN_MAX INT_MAX
-#else
-typedef int R_xlen_t;
-#define R_XLEN_T_MAX R_LEN_T_MAX
-#endif
 #endif
 
 #ifndef TESTING_WRITE_BARRIER
@@ -133,107 +111,8 @@ typedef int R_xlen_t;
  *  ../main/subassign.cpp, and they are serialized.
 */
 
-    /** @enum SEXPTYPE
-     *
-     * @brief CR's object type identification.
-     *
-     * This enumeration is used within CR to identify different types
-     * of R object.
-     * 
-     * Note: when not compiling ivory, SEXPTYPE is a typedef for unsigned int.
-     * This is done to support C++ packages that expect implicit int to
-     * SEXPTYPE conversions.
-     */
-#ifndef COMPILING_IVORY
-typedef unsigned int SEXPTYPE;
-#else
-typedef
-#endif
-enum
-{
-    NILSXP = 0,      /* nil = NULL */
-    SYMSXP = 1,      /* symbols */
-    LISTSXP = 2,     /* lists of dotted pairs */
-    CLOSXP = 3,      /* closures */
-    ENVSXP = 4,      /* environments */
-    PROMSXP = 5,     /* promises: [un]evaluated closure arguments */
-    LANGSXP = 6,     /* language constructs (special lists) */
-    SPECIALSXP = 7,  /* special forms */
-    BUILTINSXP = 8,  /* builtin non-special forms */
-    CHARSXP = 9,     /* "scalar" string type (internal only)*/
-    LGLSXP = 10,     /* logical vectors */
-    INTSXP = 13,     /* integer vectors */
-    REALSXP = 14,    /* real variables */
-    CPLXSXP = 15,    /* complex variables */
-    STRSXP = 16,     /* string vectors */
-    DOTSXP = 17,     /* dot-dot-dot object */
-    ANYSXP = 18,     /* make "any" args work */
-    VECSXP = 19,     /* generic vectors */
-    EXPRSXP = 20,    /* expressions vectors */
-    BCODESXP = 21,   /* byte code */
-    EXTPTRSXP = 22,  /* external pointer */
-    WEAKREFSXP = 23, /* weak reference */
-    RAWSXP = 24,     /* raw bytes */
-    S4SXP = 25,      /* S4 non-vector */
+#include <CXXR/SEXPTYPE.hpp>
 
-    NEWSXP = 30,    /* fresh node created in new page */
-    FREESXP = 31,   /* node released by GC */
-    SINGLESXP = 47, /* For interfaces to objects created with as.single */
-    intCHARSXP = 73,
-    FUNSXP = 99, /* Closure or Builtin */
-    ALTREP_SXP = 238,
-    ATTRLISTSXP = 239,
-    ATTRLANGSXP = 240,
-    /* the following (241 - 246) are speculative--we may or may not need them soon */
-    BASEENV_SXP = 241,
-    EMPTYENV_SXP = 242,
-    BCREPREF = 243,
-    BCREPDEF = 244,
-    GENERICREFSXP = 245,
-    CLASSREFSXP = 246,
-    PERSISTSXP = 247,
-    PACKAGESXP = 248,
-    NAMESPACESXP = 249,
-    BASENAMESPACE_SXP = 250,
-    MISSINGARG_SXP = 251,
-    UNBOUNDVALUE_SXP = 252,
-    GLOBALENV_SXP = 253,
-    NILVALUE_SXP = 254,
-    REFSXP = 255
-}
-#ifdef COMPILING_IVORY
-SEXPTYPE
-#endif
-    ;
-
-#if defined(COMPILING_IVORY) && defined(__cplusplus)
-
-    namespace R
-    {
-        class RObject;
-    }
-    using SEXP = R::RObject *;
-#if 0
-    class R::GCNode;
-    class R::Symbol;
-    class R::BuiltInFunction;
-    class R::Environment;
-    class R::Closure;
-    class R::Promise;
-    class R::List;
-#else
-    typedef class R::RObject GCNode;
-    typedef class R::RObject Symbol;
-    typedef class R::RObject BuiltInFunction;
-    typedef class R::RObject Environment;
-    typedef class R::RObject Closure;
-    typedef class R::RObject Promise;
-    typedef class R::RObject RList;
-#endif
-#else
-    #define RObject SEXPREC
-    typedef struct RObject *SEXP;
-#endif
 
 /* Define SWITCH_TO_NAMED to use the 'NAMED' mechanism instead of
    reference counting. */

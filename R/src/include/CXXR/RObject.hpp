@@ -25,7 +25,13 @@
 #ifndef ROBJECT_HPP
 #define ROBJECT_HPP
 
-#include <Rinternals.h>
+#define SWITCH_TO_REFCNT
+#define COMPUTE_REFCNT_VALUES
+#include <cstddef>
+#include <CXXR/SEXPTYPE.hpp>
+#include <CXXR/RTypes.hpp>
+#include <R_ext/Error.h>
+#include <R_ext/Complex.h>
 
 /* This is intended for use only within R itself.
  * It defines internal structures that are otherwise only accessible
@@ -43,6 +49,7 @@ constexpr int NAMED_BITS = 16;
 /* Flags */
 namespace R
 {
+    class RObject;
 
     struct primsxp_struct
     {
@@ -120,8 +127,8 @@ namespace R
         unsigned int m_extra : 29 - NAMED_BITS; /* used for immediate bindings */
         RObject *m_attrib;
 
-        GCNode *gengc_next_node;
-        GCNode *gengc_prev_node;
+        RObject *gengc_next_node;
+        RObject *gengc_prev_node;
 
         union
         {
@@ -213,17 +220,17 @@ namespace R
     public:
     // virtual ~RObject() {}
         /* General Cons Cell Attributes */
-        static bool gcgen(GCNode *v);
-        static void set_gcgen(GCNode *v, bool x);
+        static bool gcgen(RObject *v);
+        static void set_gcgen(RObject *v, bool x);
         static unsigned int gccls(RObject *x);
         static void set_gccls(RObject *x, unsigned int v);
-        static GCNode *next_node(GCNode *s);
-        static GCNode *prev_node(GCNode *s);
-        static void set_next_node(GCNode *s, GCNode *t);
-        static void set_prev_node(GCNode *s, GCNode *t);
+        static RObject *next_node(RObject *s);
+        static RObject *prev_node(RObject *s);
+        static void set_next_node(RObject *s, RObject *t);
+        static void set_prev_node(RObject *s, RObject *t);
         static void copy_sxpinfo(RObject *x, RObject &y);
         // Make t the successor of s:
-        static inline void link(GCNode *s, GCNode *t)
+        static inline void link(RObject *s, RObject *t)
         {
             s->gengc_next_node = t;
             t->gengc_prev_node = s;
@@ -618,7 +625,7 @@ namespace R
 #define ENSURE_NAMEDMAX(v)                  \
     do                                      \
     {                                       \
-        RObject *__enm_v__ = (v);           \
+        R::RObject *__enm_v__ = (v);        \
         if (NAMED(__enm_v__) < NAMEDMAX)    \
             SET_NAMED(__enm_v__, NAMEDMAX); \
     } while (0)
@@ -735,7 +742,7 @@ inline size_t BYTE2VEC(int n) { return (n > 0) ? (std::size_t(n) - 1) / sizeof(V
 inline size_t INT2VEC(int n) { return (n > 0) ? (std::size_t(n) * sizeof(int) - 1) / sizeof(VECREC) + 1 : 0; }
 inline size_t FLOAT2VEC(int n) { return (n > 0) ? (std::size_t(n) * sizeof(double) - 1) / sizeof(VECREC) + 1 : 0; }
 inline size_t COMPLEX2VEC(int n) { return (n > 0) ? (std::size_t(n) * sizeof(Rcomplex) - 1) / sizeof(VECREC) + 1 : 0; }
-inline size_t PTR2VEC(int n) { return (n > 0) ? (std::size_t(n) * sizeof(SEXP) - 1) / sizeof(VECREC) + 1 : 0; }
+inline size_t PTR2VEC(int n) { return (n > 0) ? (std::size_t(n) * sizeof(RObject) - 1) / sizeof(VECREC) + 1 : 0; }
 
 } // namespace R
 
