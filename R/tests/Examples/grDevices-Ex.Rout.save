@@ -2805,7 +2805,7 @@ Sturges   Scott      FD
 [53] "YlGnBu"        "Reds"          "RdPu"          "PuRd"         
 [57] "Purples"       "PuBuGn"        "PuBu"          "Greens"       
 [61] "BuGn"          "GnBu"          "BuPu"          "Blues"        
-[65] "Lajolla"       "Turku"        
+[65] "Lajolla"       "Turku"         "Hawaii"        "Batlow"       
 > hcl.pals("diverging")
  [1] "Blue-Red"      "Blue-Red 2"    "Blue-Red 3"    "Red-Green"    
  [5] "Purple-Green"  "Purple-Brown"  "Green-Brown"   "Blue-Yellow 2"
@@ -2815,7 +2815,7 @@ Sturges   Scott      FD
 > hcl.pals("divergingx")
  [1] "ArmyRose" "Earth"    "Fall"     "Geyser"   "TealRose" "Temps"   
  [7] "PuOr"     "RdBu"     "RdGy"     "PiYG"     "PRGn"     "BrBG"    
-[13] "RdYlBu"   "RdYlGn"   "Spectral" "Zissou 1" "Cividis" 
+[13] "RdYlBu"   "RdYlGn"   "Spectral" "Zissou 1" "Cividis"  "Roma"    
 > 
 > 
 > 

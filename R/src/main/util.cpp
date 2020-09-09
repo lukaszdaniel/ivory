@@ -523,12 +523,13 @@ SEXP Rf_nthcdr(SEXP s, int n)
 }
 
 /* Destructively removes R_NilValue ('NULL') elements from a pairlist. */
-SEXP R::R_listCompact(SEXP s)
+SEXP R::R_listCompact(SEXP s, bool keep_initial)
 {
+    if(!keep_initial)
     // skip initial NULL values
-    while (s != R_NilValue && CAR(s) == R_NilValue)
-	s = CDR(s);
-
+	while (s != R_NilValue && CAR(s) == R_NilValue)
+	    s = CDR(s);
+    
     SEXP val = s;
     SEXP prev = s;
     while (s != R_NilValue) {
@@ -1662,6 +1663,7 @@ NORET void F77_SYMBOL(rexitc)(char *msg, int *nchar)
     }
     strncpy(buf, msg, (size_t) nc);
     buf[nc] = '\0';
+    mbcsTruncateToValid(buf);
     error("%s", buf);
 }
 
@@ -1680,6 +1682,7 @@ void F77_SYMBOL(rwarnc)(char *msg, int *nchar)
     }
     strncpy(buf, msg, (size_t) nc);
     buf[nc] = '\0';
+    mbcsTruncateToValid(buf);
     warning("%s", buf);
 }
 

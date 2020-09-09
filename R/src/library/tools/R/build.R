@@ -173,7 +173,8 @@ inRbuildignore <- function(files, pkgdir) {
         if(user == "unknown") user <- Sys.getenv("LOGNAME")
         db["Packaged"] <-
             sprintf("%s; %s",
-                    format(Sys.time(), '', tz = 'UTC', usetz = TRUE),
+                    format(Sys.time(), "%Y-%m-%d %H:%M:%S",
+                           tz = 'UTC', usetz = TRUE),
                     user)
         .write_description(db, ldpath)
     }

@@ -90,13 +90,25 @@
       a false value.
 
       \item \code{c()} now removes \code{NULL} arguments before dispatching
-      to methods, thus simplifying the implementation of \code{c()} methods,
-      thanks to the report and patch by Lionel Henry in \PR{17900}.
+      to methods, thus simplifying the implementation of \code{c()}
+      methods, \emph{but} for back compatibility reasons keeps \code{NULL}
+      when it is the first argument; from a report and patch proposal by
+      Lionel Henry in \PR{17900}.
 
       \item \code{Vectorize()}'s result function's environment no longer
       keeps unneeded objects.
-    }
 
+      \item \code{...elt()} now propagates visibility consistently with
+      \code{..n}, thanks to Lionel Henry's \PR{17905}.
+
+      \item \code{capture.output()} no longer uses NSE to evaluate its
+      arguments.  This makes evaluation of functions like
+      \code{parent.frame()} more consistent, thanks to Lionel Henry's
+      \PR{17907}.
+
+      \item \code{packBits(bits, type="double")} newly works as inverse of
+      \code{numToBits()}, thanks to Bill Dunlap's proposal in \PR{17914}.
+    }
   }
 
   \subsection{GRAPHICS}{
@@ -198,6 +210,10 @@
       \code{return()} calls (wish of \PR{17180}, patch by Sebastian
       Meyer). This check can be activated via the new environment
       variable \env{_R_CHECK_BOGUS_RETURN_}, true for \code{--as-cran}.
+
+      \item \command{R CMD build} now omits tarballs and binaries of
+      previous builds from the top-level package directory; \PR{17828},
+      patch by Sebastian Meyer.
     }
   }
 
@@ -296,6 +312,11 @@
 
       On macOS, \code{"macOS"} is used by default if the system timezone
       database is a newer version than that in the \R installation.
+
+      \item When \code{install.packages()} fails to find a package in a
+      source repository it mentions package versions which are excluded
+      by their \R version requirement and links to hints on why a package
+      might not be found.
     }
   }
 

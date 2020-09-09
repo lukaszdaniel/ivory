@@ -263,16 +263,17 @@ static void setupwarnings(void)
     Rf_setAttrib(R_Warnings, R_NamesSymbol, Rf_allocVector(STRSXP, R_nwarnings));
 }
 
-/* Rvsnprintf: like vsnprintf, but guaranteed to null-terminate and not to split
+/* Rvsnprintf_mbcs: like vsnprintf, but guaranteed to null-terminate and not to split
    multi-byte characters, except if size is zero in which case the buffer is
    untouched and thus may not be null-terminated.
 
-   Dangerous pattern: `Rvsnprintf(buf, size - n, )` with maybe n >= size*/
+   Dangerous pattern: `Rvsnprintf_mbcs(buf, size - n, )` with maybe n >= size*/
 #ifdef _WIN32
 int trio_vsnprintf(char *buffer, size_t bufferSize, const char *format,
 		   va_list args);
 
-static int Rvsnprintf(char *buf, size_t size, const char  *format, va_list ap)
+HIDDEN
+int R::Rvsnprintf_mbcs(char *buf, size_t size, const char *format, va_list ap)
 {
     int val;
     val = trio_vsnprintf(buf, size, format, ap);
@@ -285,7 +286,8 @@ static int Rvsnprintf(char *buf, size_t size, const char  *format, va_list ap)
     return val;
 }
 #else
-static int Rvsnprintf(char *buf, size_t size, const char  *format, va_list ap)
+HIDDEN
+int R::Rvsnprintf_mbcs(char *buf, size_t size, const char *format, va_list ap)
 {
     int val;
     val = vsnprintf(buf, size, format, ap);
@@ -310,7 +312,7 @@ static int Rsnprintf(char *str, size_t size, const char *format, ...)
     va_list ap;
 
     va_start(ap, format);
-    val = Rvsnprintf(str, size, format, ap);
+    val = Rvsnprintf_mbcs(str, size, format, ap);
     va_end(ap);
 
     return val;
@@ -333,12 +335,12 @@ static char *Rstrncat(char *dest, const char *src, size_t n)
     return dest;
 }
 
-/* Rstrncat: like strncpy, but guaranteed to null-terminate and not to
+/* Rstrncpy: like strncpy, but guaranteed to null-terminate and not to
    split multi-byte characters */
 static char *Rstrncpy(char *dest, const char *src, size_t n)
 {
 	strncpy(dest, src, n);
-	if (dest[n - 1] != '\0')
+	if (n)
 	{
 		dest[n - 1] = '\0';
 		mbcsTruncateToValid(dest);
@@ -349,11 +351,12 @@ static char *Rstrncpy(char *dest, const char *src, size_t n)
 constexpr size_t BUFSIZE = 8192;
 R_INLINE static void RprintTrunc(char *buf, int truncated)
 {
-    if(R_WarnLength < BUFSIZE - 20 &&
-      (truncated || strlen(buf) == (size_t) R_WarnLength)) {
-
-	strcat(buf, " ");
-	strcat(buf, _("[... truncated]"));
+    if (truncated) {
+	char *msg = _("[... truncated]");
+	if (strlen(buf) + 1 + strlen(msg) < BUFSIZE) {
+	    strcat(buf, " ");
+	    strcat(buf, msg);
+	}
     }
 }
 
@@ -384,7 +387,7 @@ void Rf_warning(const char *format, ...)
     int pval;
 
     psize = min(BUFSIZE, R_WarnLength+1);
-    pval = Rvsnprintf(buf, psize, format, ap);
+    pval = Rvsnprintf_mbcs(buf, psize, format, ap);
     va_end(ap);
     p = buf + strlen(buf) - 1;
     if(strlen(buf) > 0 && *p == '\n') *p = '\0';
@@ -461,7 +464,7 @@ static void vwarningcall_dflt(SEXP call, const char *format, va_list ap)
 
     if(w >= 2) { /* make it an error */
 	psize = min(BUFSIZE, R_WarnLength+1);
-	pval = Rvsnprintf(buf, psize, format, ap);
+	pval = Rvsnprintf_mbcs(buf, psize, format, ap);
 	RprintTrunc(buf, pval >= (int) psize);
 	inWarning = 0; /* PR#1570 */
 	errorcall(call, _("(converted from warning) %s"), buf);
@@ -472,7 +475,7 @@ static void vwarningcall_dflt(SEXP call, const char *format, va_list ap)
 	    dcall = CHAR(STRING_ELT(deparse1s(call), 0));
 	} else dcall = "";
 	psize = min(BUFSIZE, R_WarnLength+1);
-	pval = Rvsnprintf(buf, psize, format, ap);
+	pval = Rvsnprintf_mbcs(buf, psize, format, ap);
 	RprintTrunc(buf, pval >= (int) psize);
 
 	if(dcall[0] == '\0') REprintf(_("Warning:"));
@@ -494,7 +497,7 @@ static void vwarningcall_dflt(SEXP call, const char *format, va_list ap)
 	if(R_CollectWarnings < R_nwarnings) {
 	    SET_VECTOR_ELT(R_Warnings, R_CollectWarnings, call);
 	    psize = min(BUFSIZE, R_WarnLength+1);
-	    pval = Rvsnprintf(buf, psize, format, ap);
+	    pval = Rvsnprintf_mbcs(buf, psize, format, ap);
 	    RprintTrunc(buf, pval >= (int) psize);
 	    if(R_ShowWarnCalls && call != R_NilValue) {
 		const char *tr =  R_ConciseTraceback(call, 0);
@@ -743,7 +746,7 @@ NORET static void verrorcall_dflt(SEXP call, const char *format, va_list ap)
 	    REprintf(_("Error during wrapup: "));
 	    /* this does NOT try to print the call since that could
 	       cause a cascade of error calls */
-	    Rvsnprintf(errbuf, sizeof(errbuf), format, ap);
+	    Rvsnprintf_mbcs(errbuf, sizeof(errbuf), format, ap);
 	    REprintf("%s\n", errbuf);
 	}
 	if (R_Warnings != R_NilValue) {
@@ -794,7 +797,7 @@ NORET static void verrorcall_dflt(SEXP call, const char *format, va_list ap)
 			 dcall, CHAR(STRING_ELT(srcloc, 0)));
 	}
 
-	Rvsnprintf(tmp, max(msg_len - strlen(head), size_t(0)), format, ap);
+	Rvsnprintf_mbcs(tmp, max(msg_len - strlen(head), size_t(0)), format, ap);
 	if (strlen(tmp2) + strlen(tail) + strlen(tmp) < BUFSIZE) {
 	    if(len) Rsnprintf(errbuf, BUFSIZE,  
 			     _("Error in command '%s' (from %s): "),
@@ -830,7 +833,7 @@ NORET static void verrorcall_dflt(SEXP call, const char *format, va_list ap)
     else {
 	Rsnprintf(errbuf, BUFSIZE, _("Error: "));
 	p = errbuf + strlen(errbuf);
-	Rvsnprintf(p, max(msg_len - strlen(errbuf), size_t(0)), format, ap);
+	Rvsnprintf_mbcs(p, max(msg_len - strlen(errbuf), size_t(0)), format, ap);
     }
     /* Approximate truncation detection, may produce false positives.  Assumes
        MB_CUR_MAX > 0. Note: approximation is fine, as the string may include
@@ -901,7 +904,7 @@ NORET void Rf_errorcall(SEXP call, const char *format, ...)
 		void (*hook)(SEXP, char *) = R_ErrorHook;
 		R_ErrorHook = nullptr; /* to avoid recursion */
 		va_start(ap, format);
-		Rvsnprintf(buf, min(BUFSIZE, R_WarnLength), format, ap);
+		Rvsnprintf_mbcs(buf, min(BUFSIZE, R_WarnLength), format, ap);
 		va_end(ap);
 		hook(call, buf);
 	}
@@ -919,7 +922,7 @@ HIDDEN NORET void R::errorcall_cpy(SEXP call, const char *format, ...)
 
 	va_list ap;
 	va_start(ap, format);
-	Rvsnprintf(buf, BUFSIZE, format, ap);
+	Rvsnprintf_mbcs(buf, BUFSIZE, format, ap);
 	va_end(ap);
 
 	errorcall(call, "%s", buf);
@@ -941,7 +944,7 @@ void Rf_error(const char *format, ...)
 
     va_list ap;
     va_start(ap, format);
-    Rvsnprintf(buf, min(BUFSIZE, R_WarnLength), format, ap);
+    Rvsnprintf_mbcs(buf, min(BUFSIZE, R_WarnLength), format, ap);
     va_end(ap);
     errorcall(getCurrentCall(), "%s", buf);
 }
@@ -1387,7 +1390,7 @@ HIDDEN NORET void R::ErrorMessage(SEXP call, int which_error, ...)
     }
 
     va_start(ap, which_error);
-    Rvsnprintf(buf, BUFSIZE, _(ErrorDB[i].format), ap);
+    Rvsnprintf_mbcs(buf, BUFSIZE, _(ErrorDB[i].format), ap);
     va_end(ap);
     errorcall(call, "%s", buf);
 }
@@ -1406,7 +1409,7 @@ HIDDEN void R::WarningMessage(SEXP call, int which_warn, ...)
     }
 
     va_start(ap, which_warn);
-    Rvsnprintf(buf, BUFSIZE, _(WarningDB[i].format), ap);
+    Rvsnprintf_mbcs(buf, BUFSIZE, _(WarningDB[i].format), ap);
     va_end(ap);
     warningcall(call, "%s", buf);
 }
@@ -1731,7 +1734,7 @@ static void vsignalWarning(SEXP call, const char *format, va_list ap)
 	PROTECT(qfun);
 	PROTECT(qcall = LCONS(qfun, LCONS(call, R_NilValue)));
 	PROTECT(hcall = LCONS(qcall, R_NilValue));
-	Rvsnprintf(buf, BUFSIZE - 1, format, ap);
+	Rvsnprintf_mbcs(buf, BUFSIZE - 1, format, ap);
 	hcall = LCONS(mkString(buf), hcall);
 	PROTECT(hcall = LCONS(hooksym, hcall));
 	evalKeepVis(hcall, R_GlobalEnv);
@@ -1756,7 +1759,7 @@ static void vsignalError(SEXP call, const char *format, va_list ap)
     SEXP list, oldstack;
 
     PROTECT(oldstack = R_HandlerStack);
-    Rvsnprintf(localbuf, BUFSIZE - 1, format, ap);
+    Rvsnprintf_mbcs(localbuf, BUFSIZE - 1, format, ap);
     while ((list = findSimpleErrorHandler()) != R_NilValue) {
 	char *buf = errbuf;
 	SEXP entry = CAR(list);

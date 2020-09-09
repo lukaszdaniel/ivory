@@ -232,7 +232,12 @@ cov.rob <- function(x, cor = FALSE, quantile.used = floor((n+p+1)/2),
 	if(samp) {
 	    if(nsamp == "sample") nsamp <- min(500*ps, 3000)
 	} else nsamp <- nexact
-
+        if (nsamp > 2147483647) {
+            if(samp)
+                stop(gettextf("Too many samples (%.3g)", nsamp))
+            else
+                stop(gettextf('Too many combinations (%.3g) for nsamp = "exact"', nsamp))
+        }
 	if(samp && !missing(seed)) {
 	    if(exists(".Random.seed", envir=.GlobalEnv, inherits=FALSE))  {
 		seed.keep <- get(".Random.seed", envir=.GlobalEnv, inherits=FALSE)

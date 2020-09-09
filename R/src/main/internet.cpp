@@ -396,5 +396,5 @@ HIDDEN Rconnection R_newCurlUrl(const char *description, const char *const mode,
         error(_("internet routines cannot be loaded"));
         return nullptr;
     }
-    return nullptr; /* -Wall */
+    return nullptr; /* -Wall in gcc, but Solaris compiler complains */
 }

@@ -4171,7 +4171,7 @@ if (l10n_info()$"UTF-8") {
         stopifnot(validUTF8(output))
     }
     ## These tests fail on R < 4.1
-    ## 
+    ##
     ## Checking that truncation and `...` concatenation are working
     ## correctly in verrorcall_dflt.  Prior to 4.1 truncation detection did
     ## not work with call set, and multibyte characters could be mangled by
@@ -4315,17 +4315,23 @@ if (l10n_info()$"UTF-8") {
 }
 
 
-## c() generic removes all NULL elements before dispatch
+## c() generic removes all NULL elements --- *but* the first --- before dispatch
 c.foobar <- function(...) list("ok", ...)
 foobar <- structure(list(), class = "foobar")
 stopifnot(exprs = {
-    identical(c(foobar, one=1), list("ok", foobar, one=1))
-    identical(c(a = foobar), list("ok", a = foobar))
-    identical(c(a = NULL, b = foobar), list("ok", b = foobar))
-    identical(c(a = foobar, b = NULL), list("ok", a = foobar))
-    identical(c(a = NULL, b = foobar, c = NULL), list("ok", b = foobar))
+    identical(c(foobar, NULL, one=1,NULL), list("ok", foobar, one=1))
+    identical(c(a = foobar, pi, NULL, b="B",NULL), list("ok", a = foobar, pi, b="B"))
+    identical(c(a = foobar, b = NULL),     list("ok", a = foobar))
+    identical(c(foobar, b = foobar),       list("ok", foobar, b=foobar))
+    ## Back compatibly, w/ initial NULL, using c()'s default method:
+    ##  ==> result has list() for foobar
+    identical(c(NULL,     foobar, NULL, NULL, 1), c(  list(), 1))
+    identical(c(NULL, b = foobar, NULL, NULL, 1), c(b=list(), 1))
+    identical(c(a = NULL, b = foobar),                 list())
+    identical(c(a = NULL, b = foobar, c = NULL),       list())
+    identical(c(NULL, a = NULL, b = foobar, c = NULL), list())
 })
-## the last three cases failed in R <= 4.0.x
+## the first three cases failed in R <= 4.0.x
 
 
 ## quantile(*, pr)  allows pr values very slightly outside [0,1] -- PR#17891
@@ -4359,6 +4365,70 @@ dd <- c("", "2001-09-11")
 (D2 <- as.Date(rev(dd)))
 stopifnot(is.na(D1[1]), identical(D1, rev(D2)))
 ## "" was not treated correctly when at [1] in R <= 4.0.2
+
+
+## ..elt() propagates visibility consistently with ..n and other args, PR#17905
+local({
+    fn <- function(...) list(withVisible(...elt(1)), withVisible(..2))
+    stopifnot(identical(
+	fn(invisible(NULL), invisible(NULL)),
+	rep(list(withVisible(invisible(NULL))), 2)
+    ))
+})
+
+
+## PR#17913 -- numToBits() accidentally was destructive
+n0 <- c(-7.7, 2.34e55)
+b0 <- numToBits(n0)
+stopifnot(sum(l0 <- as.logical(b0)) == 62L,
+          identical(which(head(l0, 10)), c(1L, 3:4, 7:8)),
+          identical(n0, c(-7.7, 2.34e55)))
+## was '0 0' for almost a month in R-devel
+
+
+## No longer assuming integer length()
+if(.Machine$sizeof.pointer >= 8) {
+  .Internal(inspect(-199900000:2e9))
+  ## gave an error in R <= 4.0.2
+}
+
+
+## PR#17907 -- capture.output() now using standard evaluation (SE) :
+## parent.frame() returns the correct environment in capture.output()
+local({
+    fn <- function(env = parent.frame()) {
+	capture.output(env)
+	list(
+	    env,
+	    parent.frame()
+	)
+    }
+    env <- environment()
+    out <- fn()
+    stopifnot(
+	identical(out[[1]], out[[2]]),
+	identical(out[[1]], env)
+    )
+})
+## capture.output() works with forwarded dots
+local({
+    wrapper <- function(...) {
+	capture.output(..., type = "output")
+    }
+    out <- local({
+	foo <- 1
+	wrapper(foo)
+    })
+    stopifnot(identical(out, capture.output(1)))
+})
+## Failed when capture.output() was using NSE
+
+
+## Inverse of numToBits() via
+stopifnot(identical(packBits(b0, "double"), n0))
+r <- c(pi, 1+ (0:8)/4); head(b <- numToBits(r), 25)
+stopifnot(identical(packBits(b, "double"), r))
+## thanks to PR#17914 by Bill Dunlap
 
 
 

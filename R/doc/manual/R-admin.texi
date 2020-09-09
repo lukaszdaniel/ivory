@@ -100,9 +100,9 @@ tar -xf R-@var{x}.@var{y}.@var{z}.tar.gz
 @noindent
 on systems that have a suitable@footnote{e.g.@: @acronym{GNU}
 @command{tar} version 1.15 or later, or that from the @samp{libarchive}
-(as used on macOS versions 10.6 and later) or `Heirloom Toolchest'
-distributions.}  @command{tar} installed.  On other systems you need to
-have the @command{gzip} program installed, when you can use
+(as used on macOS) or `Heirloom Toolchest' distributions.}
+@command{tar} installed.  On other systems you need to have the
+@command{gzip} program installed, when you can use
 
 @example
 gzip -dc R-@var{x}.@var{y}.@var{z}.tar.gz | tar -xf -
@@ -241,7 +241,7 @@ as perhaps (it is tested less frequently on these platforms)
 @cindex Linux
 @cindex macOS
 In addition, binary distributions are available for some common Linux
-distributions and for macOS (formerly OS X and Mac OS).  See the
+distributions and for macOS (formerly OS X and Mac OS X).  See the
 @acronym{FAQ} for current details.  These are installed in
 platform-specific ways, so for the rest of this chapter we consider only
 building from the sources.
@@ -1529,8 +1529,9 @@ Windows' CRLF line endings.
 The front page of a @acronym{CRAN} site has a link `Download R for (Mac)
 OS X'. Click on that, then download the file
 @file{R-@value{VERSIONno}.pkg} and install it. This runs on macOS 10.13
-and later@footnote{macOS 11 remains to be seen even on Intel CPUs.}
-(High Sierra, Mojave, Catalina, @dots{}).
+and later on Intel CPU@footnote{macOS 11 has been a little tested on
+`Apple Silicon' using `Rosetta' emulation.}  (High Sierra, Mojave,
+Catalina, Big Sur, @dots{}).
 
 Installers for R-patched and R-devel are usually available from
 @uref{https://mac.R-project.org}.  (Some of these packages are
@@ -1966,6 +1967,41 @@ local archives, local files, @dots{}).  Function
 @code{setRepositories()} can select amongst those repositories that the
 @R{} installation is aware of.
 
+Something that sometimes puzzles users is that @code{install.packages()}
+may report that a package which they believe should be availablw is not
+found.  Some possible reasons:
+@itemize
+@item
+The package, such as @pkg{grid} or @pkg{tcltk}, is part of @R{}
+itself and not otherwise available.
+
+@item
+The package is not in the available repositories, so check which have been
+selected by
+@example
+getOption("repos")
+@end example
+
+@item
+The package is available, but not for the current version of @R{} or for
+the type of OS (Unix/Windows).  To retrieve the information on available
+versions of package @code{@var{pkg}}, use
+
+@example
+av <- available.packages(filters=list())
+av[av[, "Package"] == @var{pkg}, ]
+@end example
+
+@noindent
+in your @R{} session, and look at the @samp{Depends} and @samp{OS_type}
+fields (there may be more than one matching entry).  If the package
+depends on a version of @R{} later than the one in use, it is possible
+that an earlier version is available which will work with your version
+of @R{}: for @acronym{CRAN} look for `Old sources' on the package's
+@acronym{CRAN} landing page and manually retrieve an appropriate version (of
+comparable age to your version of @R{}).
+@end itemize
+
 Naive users sometimes forget that as well as installing a package, they
 have to use @code{library} to make its functionality available.
 
@@ -2079,8 +2115,9 @@ Package @CRANpkg{rJava} and those which depend on it need a Java runtime
 installed and several packages need X11 installed, including those using
 Tk.  See @ref{macOS} and @ref{Java (macOS)}.
 
-Tcl/Tk extensions @code{BWidget} and @code{Tktable} used to be
-distributed with @R{} but no longer are.
+Tcl/Tk extension @code{BWidget} used to be
+distributed with @R{} but no longer is; @code{Tktable} has been
+distributed with most versions of @R{} (but not 4.0.0).
 
 A few of the binary packages need other software to be installed on your
 system.  In particular packages using Gtk+ (@CRANpkg{RGtk2},
@@ -2171,7 +2208,7 @@ problems} can be specified @emph{via} the environment variable
 Package developers are encouraged to use this mechanism to enable a
 reasonable amount of diagnostic messaging (``warnings'') when compiling,
 such as e.g.@: @option{-Wall -pedantic} for tools from GCC, the GNU
-Compiler Collection or for @command{clang}.
+Compiler Collection, or for @command{clang}.
 
 Note that this mechanism can also be used when it necessary to change
 the optimization level whilst installing a particular package.  For
@@ -3056,7 +3093,7 @@ without X11, using @option{--with-x=no}.
 
 The command-line editing (and command completion) depends on the
 @acronym{GNU} @code{readline} library (including its headers): version
-4.2 or later is needed for all the features to be enabled.  Otherwise
+6.0 or later is needed for all the features to be enabled.  Otherwise
 you will need to configure with @option{--with-readline=no} (or
 equivalent).
 
@@ -3162,12 +3199,12 @@ looking in @file{/usr/xpg4/bin} which is used on some commercial
 Unixes).
 
 You will not be able to build most of the manuals unless you have
-@command{texi2any} version 5.1 or later installed, and if not most of
-the @HTML{} manuals will be linked to a version on @acronym{CRAN}. To
-make PDF versions of the manuals you will also need file
-@file{texinfo.tex} installed (which is part of the @acronym{GNU}
-@pkg{texinfo} distribution but is often made part of the @TeX{} package
-in re-distributions) as well as
+@command{texi2any} version 5.1 or later installed (which requires
+@command{perl}), and if not most of the @HTML{} manuals will be linked
+to a version on @acronym{CRAN}. To make PDF versions of the manuals you
+will also need file @file{texinfo.tex} installed (which is part of the
+@acronym{GNU} @pkg{texinfo} distribution but is often made part of the
+@TeX{} package in re-distributions) as well as
 @command{texi2dvi}.@footnote{@command{texi2dvi} is normally a shell
 script.  Some versions (including those from @pkg{texinfo} 5.2 and
 6.0-6.6) need to be run under @command{bash} rather than a Bourne shell,
@@ -3238,8 +3275,11 @@ suitable code can be compiled.  These tests will fail if
 @command{pkg-config} is not installed@footnote{If necessary the path to
 @command{pkg-config} can be specified by setting @env{PKG_CONFIG} in
 @file{config.site}, on the @command{configure} command line or in the
-environment.}, and are likely to fail if @code{cairo} was built
-statically (unusual).  Most systems with @code{Gtk+} 2.8 or later
+environment. There is a compatible re-implementation of
+@command{pkg-config} called @command{pkgconf} which can be used in the
+unlikely event that is installed but not linked to
+@command{pkg-config}.}, and are likely to fail if @code{cairo} was
+built statically (unusual).  Most systems with @code{Gtk+} 2.8 or later
 installed will have suitable libraries.
 
 For the best font experience with these devices you need suitable fonts
@@ -3280,9 +3320,9 @@ but may need to be present to link the library (usually only an issue
 for static linking).
 
 Option @option{--with-system-tre} is also available: it needs a recent
-version of TRE. (The latest (2016) sources are in the @command{git}
-repository at @url{https://github.com/laurikari/tre/}, but at the time
-of writing the resulting build will not pass its checks.).
+version of TRE. (The latest sources are in the @command{git} repository
+at @url{https://github.com/laurikari/tre/}, but at the time of writing
+(2016) the resulting build did not pass its checks.).
 
 An implementation of @acronym{XDR} is required, and the @R{} sources
 contain one which is likely to suffice (although a system version may
@@ -3311,10 +3351,10 @@ to replace the OS's collation support by that from ICU (International
 Components for Unicode, @uref{http://site.icu-project.org/}), and this
 provides much more precise control over collation on all systems.  ICU
 is available as sources and as binary distributions for (at least) most
-Linux distributions, Solaris, FreeBSD and AIX, usually as @code{libicu}
-or @code{icu4c}.  It will be used by default where available: should a
-very old or broken version of ICU be found this can be suppressed by
-@option{--without-ICU}.
+Linux distributions, Solaris, FreeBSD, macOS and AIX, usually as
+@code{libicu} or @code{icu4c}.  It will be used by default where
+available: should a very old or broken version of ICU be found this can
+be suppressed by @option{--without-ICU}.
 
 The @code{bitmap} and @code{dev2bitmap} devices and function
 @code{embedFonts()} use ghostscript
@@ -3329,7 +3369,7 @@ a useful checklist for other systems:
 @example
 bzip2 cairo fontconfig freetype fribidi glib2 harfbuzz libX11 libXext
 libXt libcurl libicu libjpeg libpng libtiff libtirpc libxcrypt ncurses
-pango pcre2 readline tcl tk xz zlib
+pango pkgconf-pkg-config pcre2 readline tcl tk xz zlib
 @end example
 
 
@@ -3391,8 +3431,8 @@ a sub-architecture-specific version).  A typical setting for
 @cputype{x86_64} Linux is
 
 @example
-JAVA_HOME=/usr/lib/jvm/java-1.8.0-openjdk-1.8.0.252.b09-0.fc32.x86_64/jre
-R_JAVA_LD_LIBRARY_PATH=$@{JAVA_HOME@}/lib/that/server
+JAVA_HOME=/usr/lib/jvm/java-1.8.0-openjdk-1.8.0.265.b01-1.fc32.x86_64/jre
+R_JAVA_LD_LIBRARY_PATH=$@{JAVA_HOME@}/lib/amd64/server
 @end example
 
 Unfortunately this depends on the exact version of the JRE/JDK
@@ -3454,14 +3494,14 @@ sudo apt install default-jdk
 
 Some add-on packages need a C++ compiler.  This is specified by the
 configure variables @code{CXX}, @code{CXXFLAGS} and similar.
-@command{configure} will normally find a suitable compiler.  However, in
-many cases this will be a C++98 compiler, and it is
-possible to specify an alternative compiler for use with C++11 by the
-configure variables @code{CXX11}, @code{CXX11STD}, @code{CXX11FLAGS} and
-similar (@pxref{C++ Support}).  Again, @command{configure} will normally
-find a suitable value for @code{CXX11STD} if the compiler given by
-@code{CXX} is capable of compiling C++11 code, but it is possible that a
-completely different compiler will be needed.
+@command{configure} will normally find a suitable compiler.  It is
+possible to specify an alternative C++14 compiler by the configure
+variables @code{CXX14}, @code{CXX14STD}, @code{CXX14FLAGS} and similar
+(@pxref{C++ Support}).  Again, @command{configure} will normally find a
+suitable value for @code{CXX14STD} if the compiler given by @code{CXX}
+is capable of compiling C++14 code, but it is possible that a completely
+different compiler will be needed.  (Similar macros are provided for
+C++17 and C++20.)
 
 For source files with extension @file{.f90} or @file{.f95} containing
 free-form Fortran, the compiler defined by the macro @code{FC} is used
@@ -4808,14 +4848,13 @@ SAFE_FFLAGS=-axsse2
 
 (`macOS' was known as `OS X' from 2012--2016.)
 
-The instructions here are for 64-bit (@cputype{x86_64}) builds on
-10.13--10.15 (High Sierra, Mojave and Catalina)@footnote{The upcoming
-macOS 11 `Big Sur' remains to be confirmed even on Intel CPUs: no
-Fortran compiler was available for `Apple Silicon' at the time of
-writing.}.  @R{} can in principle be built for 10.6--10.12, although
-this is little tested and it may be necessary to install later versions
-of software such as @code{libcurl} and an older version@footnote{For
-example, from
+The instructions here are for Intel 64-bit (@cputype{x86_64}) builds on
+10.13--10.15 (High Sierra, Mojave and Catalina)@footnote{Details for the
+upcoming macOS 11 `Big Sur' remain to be confirmed: no Fortran compiler
+was available for `Apple Silicon' at the time of writing.}.  @R{} can in
+principle be built for 10.6--10.12, although this is little tested and
+it may be necessary to install later versions of software such as
+@code{libcurl} and an older version@footnote{For example, from
 @uref{https://github.com/@/fxcoudert/@/gfortran-for-macOS/releases}.} of
 @command{gfortran}.
 
@@ -4878,9 +4917,9 @@ version it is straightforward to compile it from its sources.}.  If
 that, configure with @option{--without-readline}.
 
 @item
-Components @code{jpeg}, @code{libpng}, @code{pkgconfig} and @code{tiff}
-from @uref{https://mac.R-project.org/libs-4/}, for the full range of
-bitmapped graphics devices.
+Components @code{jpeg}, @code{libpng}, @code{pkgconfig}, @code{tiff} and
+@code{pkgconfig} from @uref{https://mac.R-project.org/libs-4/}, for the
+full range of bitmapped graphics devices.
 
 @item
 An X sub-system unless configuring using @option{--without-x}: see
@@ -4959,10 +4998,11 @@ and appropriate compilers, e.g.@: Fortran and the C/C++ compilers from
 those tools.  Some packages have further requirements such as
 @command{pkg-config}.
 
+@c svn was in CLT 11.3.1, even in the opensource.apple.com repository
 A subversion client, @command{svn} version 1.10, used to be part of
 macOS@footnote{but as a stub invoking an executable provided by the
-Command Line Tools and the latter is not in some 2020 versions of the
-Command Line Tools.}.  A more recent client can be obtained from
+Command Line Tools and the latter is not in versions 11.5 and later of
+the Command Line Tools.}.  A more recent client can be obtained from
 @uref{https://mac.r-project.org/tools/}, for example by
 @example
 curl -OL https://mac.r-project.org/tools/subversion-1.14.0-darwin15.6.tar.gz

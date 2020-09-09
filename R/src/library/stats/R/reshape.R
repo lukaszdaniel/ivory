@@ -57,7 +57,7 @@ reshape <-
 
     reshapeLong <-
         function(data, varying, v.names = NULL, timevar, idvar,
-                 ids = NULL, times,
+                 ids = 1L:NROW(data), times,
                  drop = NULL,new.row.names = NULL)
         {
             ll <- unlist(lapply(varying,length))
@@ -78,17 +78,13 @@ reshape <-
 
             ## use id variable(s) in wide data to create new row names
             if (is.null(new.row.names)) {
-                if (is.null(ids)) {
-                    ids <- 1:NROW(data)
-                } else {
-                    if (length(idvar) > 1L) {
-                        ids <- interaction(data[, idvar], drop=TRUE)
-                    } else if (idvar %in% names(data)) {
-                        ids <- data[, idvar]
-                    }
-                    if (anyDuplicated(ids))
-                        stop("'idvar' must uniquely identify records")
+                if (length(idvar) > 1L) {
+                    ids <- interaction(data[, idvar], drop=TRUE)
+                } else if (idvar %in% names(data)) {
+                    ids <- data[, idvar]
                 }
+                if (anyDuplicated(ids))
+                    stop("'idvar' must uniquely identify records")
             }
 
             d <- data
