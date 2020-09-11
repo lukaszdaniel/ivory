@@ -303,7 +303,7 @@ static void R_ReportNewPage();
 static void R_gc_internal(R_size_t size_needed);
 static void R_gc_no_finalizers(R_size_t size_needed);
 static void R_gc_lite();
-static void mem_err_heap(R_size_t size);
+// static void mem_err_heap(R_size_t size);
 #ifdef USING_UNUSED_CODE
 static void mem_err_malloc(R_size_t size);
 #endif // USING_UNUSED_CODE
@@ -536,7 +536,7 @@ HIDDEN SEXP do_maxNSize(SEXP call, SEXP op, SEXP args, SEXP rho)
 
 static SEXP R_VStack = nullptr;		/* R_alloc stack pointer */
 static SEXP R_PreciousList = nullptr;      /* List of Persistent Objects */
-static R_size_t R_LargeVallocSize = 0;
+// static R_size_t R_LargeVallocSize = 0;
 static R_size_t R_SmallVallocSize = 0;
 static R_size_t orig_R_NSize;
 static R_size_t orig_R_VSize;
@@ -563,7 +563,7 @@ constexpr int CUSTOM_NODE_CLASS = (NUM_NODE_CLASSES - 2);
 constexpr int NUM_SMALL_NODE_CLASSES = (NUM_NODE_CLASSES - 2);
 
 /* the number of VECREC's in nodes of the small node classes */
-static int NodeClassSize[NUM_SMALL_NODE_CLASSES] = { 0 };
+// static int NodeClassSize[NUM_SMALL_NODE_CLASSES] = { 0 };
 
 namespace
 {
@@ -613,12 +613,13 @@ static int collect_counts[NUM_OLD_GENERATIONS];
 /* Node Pages.  Non-vector nodes and small vector nodes are allocated
    from fixed size pages.  The pages for each node class are kept in a
    linked list. */
-
+#ifdef USING_UNUSED_CODE
 union PAGE_HEADER
 {
     union PAGE_HEADER *next;
     double align;
 };
+#endif
 
 namespace
 {
@@ -645,7 +646,7 @@ namespace
 
     inline R_size_t VHEAP_FREE()
     {
-        return R_VSize - R_LargeVallocSize - R_SmallVallocSize;
+        return R_VSize - MemoryBank::bytesAllocated()/sizeof(VECREC) - R_SmallVallocSize;
     }
 } // namespace
 
@@ -684,11 +685,11 @@ static struct
     RObject *OldToNew[NUM_OLD_GENERATIONS];
     RObject OldToNewPeg[NUM_OLD_GENERATIONS];
 #endif
-    int OldCount[NUM_OLD_GENERATIONS], AllocCount, PageCount;
-    PAGE_HEADER *pages;
+    int OldCount[NUM_OLD_GENERATIONS], AllocCount; //, PageCount;
+    // PAGE_HEADER *pages;
 } R_GenHeap[NUM_NODE_CLASSES];
 
-static R_size_t R_NodesInUse = 0;
+// static R_size_t R_NodesInUse = 0;
 namespace
 {
     inline auto NEXT_NODE(RObject *s) { return RObject::next_node(s); }
@@ -879,18 +880,17 @@ namespace
             }                                                               \
             catch (bad_alloc)                                               \
             {                                                               \
-                mem_err_heap(bytes);                                        \
+                errorcall(R_NilValue, _("memory exhausted"));                                        \
             }                                                               \
             SNAP_NODE(__n__, R_GenHeap[c].New);                             \
         }                                                                   \
         R_GenHeap[c].Free = NEXT_NODE(__n__);                               \
-        R_NodesInUse++;                                                     \
         (s) = __n__;                                                        \
     } while (0)
 
     inline bool NO_FREE_NODES()
     {
-        return R_NodesInUse >= R_NSize;
+        return MemoryBank::blocksAllocated() >= R_NSize;
     }
 #define GET_FREE_NODE(s) CLASS_GET_FREE_NODE(0, s)
 } // namespace
@@ -903,7 +903,6 @@ namespace
         if (__n__ == R_GenHeap[c].New)                  \
             error("need new page - should not happen"); \
         R_GenHeap[c].Free = NEXT_NODE(__n__);           \
-        R_NodesInUse++;                                 \
         (s) = __n__;                                    \
     } while (0)
 
@@ -973,9 +972,9 @@ static void DEBUG_GC_SUMMARY(int full_gc)
 {
     int i, gen, OldCount;
     if(full_gc)
-      REprintf("\nFull, VSize = %lu", R_SmallVallocSize + R_LargeVallocSize);
+      REprintf("\nFull, VSize = %lu", R_SmallVallocSize + MemoryBank::bytesAllocated()/sizeof(VECREC));
     else
-      REprintf("\nMinor, VSize = %lu", R_SmallVallocSize + R_LargeVallocSize);
+      REprintf("\nMinor, VSize = %lu", R_SmallVallocSize + MemoryBank::bytesAllocated()/sizeof(VECREC));
     for (i = 1; i < NUM_NODE_CLASSES; i++) {
 	for (gen = 0, OldCount = 0; gen < NUM_OLD_GENERATIONS; gen++)
 	    OldCount += R_GenHeap[i].OldCount[gen];
@@ -992,10 +991,9 @@ static void DEBUG_ADJUST_HEAP_PRINT(double node_occup, double vect_occup)
 {
     R_size_t alloc;
     REprintf(_("Node occupancy: %.0f%%\nVector occupancy: %.0f%%\n"), 100.0 * node_occup, 100.0 * vect_occup);
-    alloc = R_LargeVallocSize +
-            sizeof(RObject) * R_GenHeap[LARGE_NODE_CLASS].AllocCount;
-    for (int i = 0; i < NUM_SMALL_NODE_CLASSES; i++)
-        alloc += R_PAGE_SIZE * R_GenHeap[i].PageCount;
+    alloc = MemoryBank::bytesAllocated();
+    // for (int i = 0; i < NUM_SMALL_NODE_CLASSES; i++)
+    //     alloc += R_PAGE_SIZE * R_GenHeap[i].PageCount;
     REprintf(_("Total allocation: %lu\n"), alloc);
     REprintf(_("Ncells %lu\nVcells %lu\n"), R_NSize, R_VSize);
 }
@@ -1003,6 +1001,7 @@ static void DEBUG_ADJUST_HEAP_PRINT(double node_occup, double vect_occup)
 #define DEBUG_ADJUST_HEAP_PRINT(node_occup, vect_occup)
 #endif /* DEBUG_ADJUST_HEAP */
 
+#ifdef USING_UNUSED_CODE
 #ifdef DEBUG_RELEASE_MEM
 static void DEBUG_RELEASE_PRINT(int rel_pages, int maxrel_pages, int i)
 {
@@ -1018,6 +1017,7 @@ static void DEBUG_RELEASE_PRINT(int rel_pages, int maxrel_pages, int i)
 #else
 #define DEBUG_RELEASE_PRINT(rel_pages, maxrel_pages, i)
 #endif /* DEBUG_RELEASE_MEM */
+#endif
 
 inline static void INIT_REFCNT(SEXP x)
 {
@@ -1209,7 +1209,7 @@ static void ReleaseLargeFreeVectors()
 		UNSNAP_NODE(s);
 		R_GenHeap[node_class].AllocCount--;
 		if (node_class == LARGE_NODE_CLASS) {
-		    R_LargeVallocSize -= size;
+		    // R_LargeVallocSize -= size;
 		    MemoryBank::deallocate(s->m_data, s->m_databytes);
 		    MemoryBank::deallocate(s, sizeof(RObject));
 		} else {
@@ -1227,8 +1227,8 @@ static void AdjustHeapSize(R_size_t size_needed)
 {
     R_size_t R_MinNFree = (R_size_t)(orig_R_NSize * R_MinFreeFrac);
     R_size_t R_MinVFree = (R_size_t)(orig_R_VSize * R_MinFreeFrac);
-    R_size_t NNeeded = R_NodesInUse + R_MinNFree;
-    R_size_t VNeeded = R_SmallVallocSize + R_LargeVallocSize
+    R_size_t NNeeded = MemoryBank::blocksAllocated() + R_MinNFree;
+    R_size_t VNeeded = R_SmallVallocSize + MemoryBank::bytesAllocated()/sizeof(VECREC)
 	+ size_needed + R_MinVFree;
     double node_occup = ((double) NNeeded) / R_NSize;
     double vect_occup =	((double) VNeeded) / R_VSize;
@@ -1244,8 +1244,8 @@ static void AdjustHeapSize(R_size_t size_needed)
 	    adjust_count++;
 
 	    /* estimate next in-use count by assuming linear growth */
-	    R_size_t next_in_use = R_NodesInUse + (R_NodesInUse - last_in_use);
-	    last_in_use = R_NodesInUse;
+	    R_size_t next_in_use = MemoryBank::blocksAllocated() + (MemoryBank::blocksAllocated() - last_in_use);
+	    last_in_use = MemoryBank::blocksAllocated();
 
 	    /* try to achieve and occupancy rate of R_NGrowFrac */
 	    R_size_t next_nsize = (R_size_t) (next_in_use / R_NGrowFrac);
@@ -2026,6 +2026,7 @@ static int RunGenCollect(R_size_t size_needed)
     DEBUG_CHECK_NODE_COUNTS("after releasing large allocated nodes");
 
     /* tell Valgrind about free nodes */
+#ifdef USING_UNUSED_CODE
 #if VALGRIND_LEVEL > 1
     for(i = 1; i< NUM_NODE_CLASSES; i++) {
 	for(s = NEXT_NODE(R_GenHeap[i].New);
@@ -2036,27 +2037,30 @@ static int RunGenCollect(R_size_t size_needed)
 	}
     }
 #endif
+#endif
 
     /* reset Free pointers */
     for (int i = 0; i < NUM_NODE_CLASSES; i++)
         R_GenHeap[i].Free = NEXT_NODE(R_GenHeap[i].New);
 
     /* update heap statistics */
-    R_Collected = R_NSize;
-    R_SmallVallocSize = 0;
-    for (int gen = 0; gen < NUM_OLD_GENERATIONS; gen++) {
-	for (int i = 1; i < NUM_SMALL_NODE_CLASSES; i++)
-	    R_SmallVallocSize += R_GenHeap[i].OldCount[gen] * NodeClassSize[i];
-	for (int i = 0; i < NUM_NODE_CLASSES; i++)
-	    R_Collected -= R_GenHeap[i].OldCount[gen];
-    }
-    R_NodesInUse = R_NSize - R_Collected;
+    // R_Collected = R_NSize;
+    // R_SmallVallocSize = 0;
+    // for (int gen = 0; gen < NUM_OLD_GENERATIONS; gen++) {
+	// for (int i = 1; i < NUM_SMALL_NODE_CLASSES; i++)
+	//     R_SmallVallocSize += R_GenHeap[i].OldCount[gen] * NodeClassSize[i];
+	// for (int i = 0; i < NUM_NODE_CLASSES; i++)
+	    // R_Collected -= R_GenHeap[i].OldCount[gen];
+    // }
+    // R_NodesInUse = R_NSize - R_Collected;
 
     if (num_old_gens_to_collect < NUM_OLD_GENERATIONS) {
-	if (R_Collected < R_MinFreeFrac * R_NSize ||
+	double nfrac = double(MemoryBank::blocksAllocated())/double(R_NSize);
+	if (nfrac >= 1.0 - R_MinFreeFrac * R_NSize ||
 	    VHEAP_FREE() < size_needed + R_MinFreeFrac * R_VSize) {
 	    num_old_gens_to_collect++;
-	    if (R_Collected <= 0 || VHEAP_FREE() < size_needed)
+	    if (MemoryBank::blocksAllocated() >= R_NSize
+		|| VHEAP_FREE() < size_needed)
 		goto again;
 	}
 	else num_old_gens_to_collect = 0;
@@ -2192,8 +2196,8 @@ HIDDEN void R::get_current_mem(size_t &smallvsize,
                             size_t &nodes)
 {
     smallvsize = R_SmallVallocSize;
-    largevsize = R_LargeVallocSize;
-    nodes = R_NodesInUse * sizeof(RObject);
+    largevsize = MemoryBank::bytesAllocated()/sizeof(VECREC);
+    nodes = 0;
     return;
 }
 
@@ -2201,7 +2205,7 @@ HIDDEN SEXP do_gc(SEXP call, SEXP op, SEXP args, SEXP rho)
 {
     SEXP value;
     int ogc, reset_max, full;
-    R_size_t onsize = R_NSize /* can change during collection */;
+    // R_size_t onsize = R_NSize /* can change during collection */;
 
     checkArity(op, args);
     ogc = gc_reporting;
@@ -2216,12 +2220,12 @@ HIDDEN SEXP do_gc(SEXP call, SEXP op, SEXP args, SEXP rho)
     gc_reporting = ogc;
     /*- now return the [used , gc trigger size] for cells and heap */
     PROTECT(value = allocVector(REALSXP, 14));
-    REAL(value)[0] = onsize - R_Collected;
+    REAL(value)[0] = MemoryBank::blocksAllocated();
     REAL(value)[1] = R_VSize - VHEAP_FREE();
     REAL(value)[4] = R_NSize;
     REAL(value)[5] = R_VSize;
     /* next four are in 0.1Mb, rounded up */
-    REAL(value)[2] = 0.1*ceil(10. * (onsize - R_Collected)/Mega * sizeof(RObject));
+    REAL(value)[2] = 0.0; // 0.1*ceil(10. * (onsize - R_Collected)/Mega * sizeof(RObject));
     REAL(value)[3] = 0.1*ceil(10. * (R_VSize - VHEAP_FREE())/Mega * vsfac);
     REAL(value)[6] = 0.1*ceil(10. * R_NSize/Mega * sizeof(RObject));
     REAL(value)[7] = 0.1*ceil(10. * R_VSize/Mega * vsfac);
@@ -2230,7 +2234,7 @@ HIDDEN SEXP do_gc(SEXP call, SEXP op, SEXP args, SEXP rho)
     REAL(value)[9] = (R_MaxVSize < R_SIZE_T_MAX) ?
 	0.1*ceil(10. * R_MaxVSize/Mega * vsfac) : NA_REAL;
     if (reset_max){
-	    R_N_maxused = onsize - R_Collected;
+	    R_N_maxused = MemoryBank::blocksAllocated();
 	    R_V_maxused = R_VSize - VHEAP_FREE();
     }
     REAL(value)[10] = R_N_maxused;
@@ -2242,16 +2246,16 @@ HIDDEN SEXP do_gc(SEXP call, SEXP op, SEXP args, SEXP rho)
 }
 
 
-NORET static void mem_err_heap(R_size_t size)
-{
-    errorcall(R_NilValue, _("vector memory exhausted (limit reached?)"));
-}
+// NORET static void mem_err_heap(R_size_t size)
+// {
+//     errorcall(R_NilValue, _("vector memory exhausted (limit reached?)"));
+// }
 
 
-NORET static void mem_err_cons(void)
-{
-    errorcall(R_NilValue, _("cons memory exhausted (limit reached?)"));
-}
+// NORET static void mem_err_cons(void)
+// {
+//     errorcall(R_NilValue, _("cons memory exhausted (limit reached?)"));
+// }
 
 #ifdef USING_UNUSED_CODE
 NORET static void mem_err_malloc(R_size_t size)
@@ -2515,11 +2519,7 @@ void *R_realloc_gc(void *p, size_t n)
 SEXP Rf_allocSExp(SEXPTYPE t)
 {
     SEXP s;
-    if (FORCE_GC || NO_FREE_NODES()) {
-	R_gc_internal(0);
-	if (NO_FREE_NODES())
-	    mem_err_cons();
-    }
+
     GET_FREE_NODE(s);
     RObject::copy_sxpinfo(s, UnmarkedNodeTemplate);
     s->m_data = nullptr;
@@ -2536,11 +2536,7 @@ SEXP Rf_allocSExp(SEXPTYPE t)
 static SEXP allocSExpNonCons(SEXPTYPE t)
 {
     SEXP s;
-    if (FORCE_GC || NO_FREE_NODES()) {
-	R_gc_internal(0);
-	if (NO_FREE_NODES())
-	    mem_err_cons();
-    }
+
     GET_FREE_NODE(s);
     RObject::copy_sxpinfo(s, UnmarkedNodeTemplate);
     s->m_data = nullptr;
@@ -2557,15 +2553,6 @@ static SEXP allocSExpNonCons(SEXPTYPE t)
 SEXP Rf_cons(SEXP car, SEXP cdr)
 {
     SEXP s;
-    if (FORCE_GC || NO_FREE_NODES())
-    {
-        PROTECT(car);
-        PROTECT(cdr);
-        R_gc_internal(0);
-        UNPROTECT(2);
-        if (NO_FREE_NODES())
-            mem_err_cons();
-    }
 
     if (NEED_NEW_PAGE())
     {
@@ -2596,15 +2583,6 @@ SEXP Rf_cons(SEXP car, SEXP cdr)
 HIDDEN SEXP CONS_NR(SEXP car, SEXP cdr)
 {
     SEXP s;
-    if (FORCE_GC || NO_FREE_NODES())
-    {
-        PROTECT(car);
-        PROTECT(cdr);
-        R_gc_internal(0);
-        UNPROTECT(2);
-        if (NO_FREE_NODES())
-            mem_err_cons();
-    }
 
     if (NEED_NEW_PAGE())
     {
@@ -2649,17 +2627,6 @@ SEXP R::NewEnvironment(SEXP namelist, SEXP valuelist, SEXP rho)
 {
     SEXP v, n, newrho;
 
-    if (FORCE_GC || NO_FREE_NODES())
-    {
-        PROTECT(namelist);
-        PROTECT(valuelist);
-        PROTECT(rho);
-        R_gc_internal(0);
-        UNPROTECT(3);
-        if (NO_FREE_NODES())
-            mem_err_cons();
-    }
-
     if (NEED_NEW_PAGE())
     {
         PROTECT(namelist);
@@ -2700,15 +2667,6 @@ SEXP R::NewEnvironment(SEXP namelist, SEXP valuelist, SEXP rho)
 HIDDEN SEXP R::mkPROMISE(SEXP expr, SEXP rho)
 {
     SEXP s;
-    if (FORCE_GC || NO_FREE_NODES())
-    {
-        PROTECT(expr);
-        PROTECT(rho);
-        R_gc_internal(0);
-        UNPROTECT(2);
-        if (NO_FREE_NODES())
-            mem_err_cons();
-    }
 
     if (NEED_NEW_PAGE())
     {
@@ -2802,6 +2760,7 @@ SEXP Rf_allocVector3(SEXPTYPE type, R_xlen_t length = 1, R_allocator_t *allocato
 #endif
 
     /* Handle some scalars directly to improve speed. */
+#ifdef USING_UNUSED_CODE
     if (NUM_SMALL_NODE_CLASSES > 1 && length == 1) {
 	switch(type) {
 	case REALSXP:
@@ -2829,7 +2788,7 @@ SEXP Rf_allocVector3(SEXPTYPE type, R_xlen_t length = 1, R_allocator_t *allocato
 	    RObject::copy_sxpinfo(s, UnmarkedNodeTemplate);
 	    R::RObject::setscalar(s, 1);
 	    SET_NODE_CLASS(s, node_class);
-	    R_SmallVallocSize += alloc_size;
+	    // R_SmallVallocSize += alloc_size;
 	    /* Note that we do not include the header size into VallocSize,
 	       but it is counted into memory usage via R_NodesInUse. */
 	    RObject::set_attrib(s, R_NilValue);
@@ -2842,6 +2801,7 @@ SEXP Rf_allocVector3(SEXPTYPE type, R_xlen_t length = 1, R_allocator_t *allocato
         break;
     }
     }
+#endif
 
     if (length > R_XLEN_T_MAX)
 	error(_("vector is too large")); /**** put length into message */
@@ -2939,6 +2899,7 @@ SEXP Rf_allocVector3(SEXPTYPE type, R_xlen_t length = 1, R_allocator_t *allocato
 	node_class = CUSTOM_NODE_CLASS;
 	alloc_size = size;
     } else {
+#ifdef USING_UNUSED_CODE
 	if (NUM_SMALL_NODE_CLASSES > 1 && size <= (R_size_t) NodeClassSize[1]) {
 	    node_class = 1;
 	    alloc_size = NodeClassSize[1];
@@ -2954,22 +2915,16 @@ SEXP Rf_allocVector3(SEXPTYPE type, R_xlen_t length = 1, R_allocator_t *allocato
 		}
 	    }
 	}
+#endif
+    node_class = LARGE_NODE_CLASS;
+    alloc_size = size;
     }
 
     /* save current R_VSize to roll back adjustment if malloc fails */
     old_R_VSize = R_VSize;
 
-    /* we need to do the gc here so allocSExp doesn't! */
-    if (FORCE_GC || NO_FREE_NODES() || VHEAP_FREE() < alloc_size) {
-	R_gc_internal(alloc_size);
-	if (NO_FREE_NODES())
-	    mem_err_cons();
-	if (VHEAP_FREE() < alloc_size)
-	    mem_err_heap(size);
-    }
-
     if (size > 0) {
-	if (node_class < NUM_SMALL_NODE_CLASSES) {
+	if (0 && node_class < NUM_SMALL_NODE_CLASSES) {
 	    CLASS_GET_FREE_NODE(node_class, s);
 #if VALGRIND_LEVEL > 1
 	    VALGRIND_MAKE_MEM_UNDEFINED(STDVEC_DATAPTR(s), actual_size);
@@ -2977,7 +2932,7 @@ SEXP Rf_allocVector3(SEXPTYPE type, R_xlen_t length = 1, R_allocator_t *allocato
 	    RObject::copy_sxpinfo(s, UnmarkedNodeTemplate);
 	    INIT_REFCNT(s);
 	    SET_NODE_CLASS(s, node_class);
-	    R_SmallVallocSize += alloc_size;
+	    // R_SmallVallocSize += alloc_size;
 	    R::RObject::set_stdvec_length(s, (R_len_t) length);
 	}
 	else {
@@ -3034,9 +2989,9 @@ SEXP Rf_allocVector3(SEXPTYPE type, R_xlen_t length = 1, R_allocator_t *allocato
 	    RObject::copy_sxpinfo(s, UnmarkedNodeTemplate);
 	    INIT_REFCNT(s);
 	    SET_NODE_CLASS(s, node_class);
-	    if (!allocator) R_LargeVallocSize += size;
+	    // if (!allocator) R_LargeVallocSize += size;
 	    R_GenHeap[node_class].AllocCount++;
-	    R_NodesInUse++;
+	    // R_NodesInUse++;
 	    SNAP_NODE(s, R_GenHeap[node_class].New);
 	}
 	RObject::set_attrib(s, R_NilValue);
@@ -3275,7 +3230,7 @@ static void R_gc_internal(R_size_t size_needed)
       if (R_in_gc)
         gc_error("*** recursive gc invocation\n");
       if (NO_FREE_NODES())
-	R_NSize = R_NodesInUse + 1;
+	R_NSize = MemoryBank::blocksAllocated() + 1;
 
       if (num_old_gens_to_collect < NUM_OLD_GENERATIONS &&
 	  VHEAP_FREE() < size_needed + R_MinFreeFrac * R_VSize)
@@ -3289,7 +3244,7 @@ static void R_gc_internal(R_size_t size_needed)
     }
     gc_pending = false;
 
-    R_size_t onsize = R_NSize /* can change during collection */;
+    // R_size_t onsize = R_NSize /* can change during collection */;
     double ncells, vcells, vfrac, nfrac;
     SEXPTYPE first_bad_sexp_type = NILSXP;
 #ifdef PROTECTCHECK
@@ -3306,7 +3261,7 @@ static void R_gc_internal(R_size_t size_needed)
 
     gc_count++;
 
-    R_N_maxused = max(R_N_maxused, R_NodesInUse);
+    R_N_maxused = max(R_N_maxused, MemoryBank::blocksAllocated());
     R_V_maxused = max(R_V_maxused, R_VSize - VHEAP_FREE());
 
     BEGIN_SUSPEND_INTERRUPTS {
@@ -3339,7 +3294,7 @@ static void R_gc_internal(R_size_t size_needed)
     }
 
     if (gc_reporting) {
-	ncells = onsize - R_Collected;
+	ncells = MemoryBank::blocksAllocated();
 	nfrac = (100.0 * ncells) / R_NSize;
 	/* We try to make this consistent with the results returned by gc */
 	ncells = 0.1*ceil(10*ncells * sizeof(RObject)/Mega);
