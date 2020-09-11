@@ -31,7 +31,7 @@ using namespace R;
 
 unsigned int MemoryBank::s_blocks_allocated = 0;
 unsigned int MemoryBank::s_bytes_allocated = 0;
-bool (*MemoryBank::s_cue_gc)(size_t, bool) = 0;
+bool (*MemoryBank::s_cue_gc)(size_t, bool) = nullptr;
 
 void MemoryBank::pool_out_of_memory(CellPool* pool)
 {
@@ -67,7 +67,7 @@ unsigned int MemoryBank::s_pooltab[]
     
 void* MemoryBank::alloc2(size_t bytes)
 {
-    void* p = 0;
+    void* p = nullptr;
     bool joy = false;  // true if GC succeeds after bad_alloc
     try {
 	if (bytes > s_max_cell_size) {

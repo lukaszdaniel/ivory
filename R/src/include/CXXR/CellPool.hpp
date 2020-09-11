@@ -164,7 +164,7 @@ namespace R {
 	 * @return The size in bytes of the superblocks from which
 	 *         cells are allocated.
 	 */
-	size_t superblockSize() const {return m_superblocksize;}
+	size_t superblockSize() const { return m_superblocksize; }
     private:
 	struct Cell {
 	    Cell* m_next;

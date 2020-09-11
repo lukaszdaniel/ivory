@@ -637,7 +637,7 @@ enum ARITHOP_TYPE
     POWOP,
     MODOP,
     IDIVOP
-} ;
+};
 
 enum RELOP_TYPE
 {

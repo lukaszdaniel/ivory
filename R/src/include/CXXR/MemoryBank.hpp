@@ -33,14 +33,14 @@
 #include <CXXR/CellPool.hpp>
 
 namespace R {
-    /** Class to manage memory allocation and deallocation for R.
+    /** @brief Class to manage memory allocation and deallocation for R.
      * 
-     * Small objects are quickly allocated from CellPools of various cell
+     * Small objects are quickly allocated from pools of various cell
      * sizes; large objects are obtained directly from the main heap.
      */
     class MemoryBank {
     public:
-	/** Allocate a block of memory.
+	/** @brief Allocate a block of memory.
 	 *
 	 * @param bytes Required size in bytes of the block.
 	 *
@@ -56,12 +56,14 @@ namespace R {
 		? alloc2(bytes) : p;
 	}
 
-	/**
+	/** @brief Number of blocks currently allocated.
+	 *
 	 * @return the number of blocks of memory currently allocated.
 	 */
-	static size_t blocksAllocated() {return s_blocks_allocated;}
+	static size_t blocksAllocated() { return s_blocks_allocated; }
 
-	/**
+	/** @brief Number of bytes currently allocated.
+	 *
 	 * @return the number of bytes of memory currently allocated.
 	 *
 	 * @note This refers to the total number of bytes \e requested
@@ -70,7 +72,7 @@ namespace R {
 	 * may be greater than this, possibly by as much as a factor
 	 * of 2.
 	 */
-	static unsigned int bytesAllocated() {return s_bytes_allocated;}
+	static size_t bytesAllocated() { return s_bytes_allocated; }
 
 	/** @brief Integrity check.
 	 *
@@ -137,6 +139,7 @@ namespace R {
 	static void* alloc2(size_t bytes);
 
 	static void pool_out_of_memory(CellPool* pool);
+	MemoryBank() = delete;
     };
 }
 
