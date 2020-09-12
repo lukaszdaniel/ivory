@@ -4759,6 +4759,7 @@ add_dummies <- function(dir, Log)
                              ": warning: .* with a value, in function returning void",
                              ": warning: .*\\[-Wlto",
                              ": warning: .*\\[-Wodr\\]",
+                             ": warning: line number out of range",
                              ## gcc 10 some -fanalyzer warnings
                              ": warning: .*\\[-Wanalyzer-null-dereference\\]",
                              ": warning: .*\\[-Wanalyzer-double-free\\]",
@@ -4806,7 +4807,8 @@ add_dummies <- function(dir, Log)
                              ## also on gcc, but fewer warnings
                              ": warning: .* \\[-Wlogical-not-parentheses\\]",
                              ## For non-portable flags (seen in sub-Makefiles)
-                             "warning: .* \\[-Wunknown-warning-option\\]"
+                             "warning: .* \\[-Wunknown-warning-option\\]",
+                             "warning: .* \\[-Wnested-anon-types\\]"
                              )
 
                 warn_re <- paste0("(", paste(warn_re, collapse = "|"), ")")

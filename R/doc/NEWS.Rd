@@ -297,6 +297,12 @@
 
       \item Fix incorrect calculation in \code{logLik.nls()} \PR{16100}, patch
       from Sebastian Meyer.
+
+      \item \code{all.equal.POSIXt()} no longer warns about and
+      subsequently ignores inconsistent \code{"tzone"} attributes, but
+      describes the difference in its return value (\PR{17277}).
+      This check can be disabled \emph{via} the new argument
+      \code{check.tzone = FALSE}; as suggested by Sebastian Meyer.
     }
   }
 }
@@ -380,12 +386,17 @@
 
       Further, \code{quantile(x, prN, names=FALSE)} now works even when
       \code{prN} contains \code{NA}s, thanks to Anggono's \PR{17892}.
+      Ditto for ordered factors or \code{Date} objects
+      when \code{type = 1} or \code{3}, thanks to \PR{17899}.
 
       \item Libcurl-based internet access, including
       \code{curlGetHeaders()}, was not respecting the \code{"timeout"} option.
 
       \item \code{as.Date(<char>)} now also works with an initial
       \code{""}, thanks to Michael Chirico's \PR{17909}.
+
+      \item \code{isS3stdGeneric(f)} now detects an S3 generic also when it
+      it is \code{trace()}d, thanks to Gabe Becker's \PR{17917}.
     }
   }
 }
