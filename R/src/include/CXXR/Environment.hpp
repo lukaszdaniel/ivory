@@ -29,7 +29,18 @@
 
 namespace R
 {
+    class Environment : public RObject
+    {
+    private:
+        RObject *m_frame;
+        RObject *m_enclos;
+        RObject *m_hashtab;
 
+    public:
+        auto frame() const { return this->m_frame; }
+        auto enclos() const { return this->m_enclos; }
+        auto hashtab() const { return this->m_hashtab; }
+    };
 } // namespace R
 
 #endif /* ENVIRONMENT_HPP */

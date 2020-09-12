@@ -27,9 +27,20 @@
 
 #include <CXXR/RObject.hpp>
 
-namespace
+namespace R
 {
+    class Closure : public RObject
+    {
+    private:
+        RObject *m_formals;
+        RObject *m_body;
+        RObject *m_env;
 
-} // namespace
+    public:
+        auto formals() const { return this->m_formals; }
+        auto body() const { return this->m_body; }
+        auto env() const { return this->m_env; }
+    };
+} // namespace R
 
 #endif /* CLOSURE_HPP */

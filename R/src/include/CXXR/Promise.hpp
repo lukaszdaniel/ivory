@@ -29,7 +29,18 @@
 
 namespace R
 {
+    class Promise : public RObject
+    {
+    private:
+        RObject *m_value;
+        RObject *m_expr;
+        RObject *m_env;
 
+    public:
+        auto value() const { return this->m_value; }
+        auto expr() const { return this->m_expr; }
+        auto env() const { return this->m_env; }
+    };
 } // namespace R
 
 #endif /* PROMISE_HPP */

@@ -29,19 +29,18 @@
 
 namespace R
 {
-    /* The generational collector uses a reduced version of RObject as a
+  /* The generational collector uses a reduced version of RObject as a
    header in vector nodes.  The layout MUST be kept consistent with
    the RObject definition. The standard RObject takes up 7 words
    and the reduced version takes 6 words on most 64-bit systems. On most
    32-bit systems, RObject takes 8 words and the reduced version 7 words. */
-    class VECTOR : public RObject
-    {
-    private:
-    public:
-    };
+  class VECTOR : public RObject
+  {
+  private:
+  public:
+  };
 
-    using VECSEXP = class R::RObject *;
-
+  using VECSEXP = class R::RObject *;
 
 /* Vector Access Macros */
 #ifdef LONG_VECTOR_SUPPORT
@@ -56,13 +55,13 @@ namespace R
 /* defined as a macro since fastmatch packages tests for it */
 #define XLENGTH(x) XLENGTH_EX(x)
 
-/* Under the generational allocator the data for vector nodes comes
+  /* Under the generational allocator the data for vector nodes comes
    immediately after the node structure, so the data address is a
    known offset from the node SEXP. */
-inline void *stdvec_dataptr(RObject *x) { return x ? x->m_data : nullptr; }
+  inline void *stdvec_dataptr(RObject *x) { return x ? x->m_data : nullptr; }
 #define STDVEC_DATAPTR(x) (x->m_data)
 
-    inline const char *r_char(RObject *x) { return (const char *)stdvec_dataptr(x); }
+  inline const char *r_char(RObject *x) { return static_cast<const char *>(stdvec_dataptr(x)); }
 
   /* writable char access for R internal use only */
 #define CHAR_RW(x) ((char *)x->m_data)

@@ -29,7 +29,18 @@
 
 namespace R
 {
+    class RList : public RObject
+    {
+    private:
+        RObject *m_carval;
+        RObject *m_cdrval;
+        RObject *m_tagval;
 
+    public:
+        auto tag() const { return this->m_tagval; }
+        auto car() const { return this->m_carval; }
+        auto cdr() const { return this->m_cdrval; }
+    };
 } // namespace R
 
 #endif /* LIST_HPP */

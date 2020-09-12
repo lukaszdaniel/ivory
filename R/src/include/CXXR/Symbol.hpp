@@ -27,8 +27,20 @@
 
 #include <CXXR/RObject.hpp>
 
-namespace R {
+namespace R
+{
+    class Symbol : public RObject
+    {
+    private:
+        RObject *m_pname;
+        RObject *m_value;
+        RObject *m_internal;
 
+    public:
+        auto printname() const { return this->m_pname; }
+        auto symvalue() const { return this->m_value; }
+        auto internal() const { return this->m_internal; }
+    };
 } // namespace R
 
 #endif /* SYMBOL_HPP */

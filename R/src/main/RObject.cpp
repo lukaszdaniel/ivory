@@ -28,6 +28,30 @@
 
 namespace R
 {
+    // Force the creation of non-inline embodiments of functions callable
+    // from C:
+    namespace ForceNonInline
+    {
+        const auto &DUPLICATE_ATTRIBptr = DUPLICATE_ATTRIB;
+        const auto &SHALLOW_DUPLICATE_ATTRIBptr = SHALLOW_DUPLICATE_ATTRIB;
+        const auto &isNullptr = Rf_isNull;
+        const auto &isObjectptr = Rf_isObject;
+        const auto &IS_S4_OBJECTptr = IS_S4_OBJECT;
+        const auto &NAMEDptr = NAMED;
+        const auto &OBJECTptr = OBJECT;
+        const auto &SET_NAMEDptr = SET_NAMED;
+        const auto &ENSURE_NAMEDMAXptr = ENSURE_NAMEDMAX;
+        const auto &ENSURE_NAMEDptr = ENSURE_NAMED;
+        const auto &SETTER_CLEAR_NAMEDptr = SETTER_CLEAR_NAMED;
+        const auto &RAISE_NAMEDptr = RAISE_NAMED;
+        const auto &SET_S4_OBJECTptr = SET_S4_OBJECT;
+        const auto &TYPEOFptr = TYPEOF;
+        const auto &UNSET_S4_OBJECTptr = UNSET_S4_OBJECT;
+        const auto &LEVELSptr = LEVELS;
+        const auto &SETLEVELSptr = SETLEVELS;
+        const auto &ALTREPptr = ALTREP;
+        const auto &SETALTREPptr = SETALTREP;
+    } // namespace ForceNonInline
 
     /* General Cons Cell Attributes */
     bool RObject::gcgen(RObject *x) { return x && x->m_gcgen; }
@@ -451,31 +475,31 @@ namespace R
         x->m_gpbits |= ACTIVE_BINDING_MASK;
     }
 
-    double RObject::bndcell_dval(RObject *x) { return x ? ((R_bndval_t *)&(x->u.listsxp.carval))->dval : 0; }
+    double RObject::bndcell_dval(RObject *x) { return x ? ((R_bndval_t *)&(x->u.listsxp.m_carval))->dval : 0; }
 
-    int RObject::bndcell_ival(RObject *x) { return x ? ((R_bndval_t *)&(x->u.listsxp.carval))->ival : 0; }
+    int RObject::bndcell_ival(RObject *x) { return x ? ((R_bndval_t *)&(x->u.listsxp.m_carval))->ival : 0; }
 
-    int RObject::bndcell_lval(RObject *x) { return x ? ((R_bndval_t *)&(x->u.listsxp.carval))->ival : 0; }
+    int RObject::bndcell_lval(RObject *x) { return x ? ((R_bndval_t *)&(x->u.listsxp.m_carval))->ival : 0; }
 
     void RObject::set_bndcell_dval(RObject *x, double v)
     {
         if (!x)
             return;
-        ((R_bndval_t *)&(x->u.listsxp.carval))->dval = v;
+        ((R_bndval_t *)&(x->u.listsxp.m_carval))->dval = v;
     }
 
     void RObject::set_bndcell_ival(RObject *x, int v)
     {
         if (!x)
             return;
-        ((R_bndval_t *)&(x->u.listsxp.carval))->ival = v;
+        ((R_bndval_t *)&(x->u.listsxp.m_carval))->ival = v;
     }
 
     void RObject::set_bndcell_lval(RObject *x, int v)
     {
         if (!x)
             return;
-        ((R_bndval_t *)&(x->u.listsxp.carval))->ival = v;
+        ((R_bndval_t *)&(x->u.listsxp.m_carval))->ival = v;
     }
 
 } // namespace R

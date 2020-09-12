@@ -22,16 +22,33 @@
  *  https://www.R-project.org/Licenses/
  */
 
+/** @file Environment.cpp
+ *
+ *
+ * @brief Implementation of class rho:Environment and associated C
+ * interface.
+ */
+
 #include <CXXR/Environment.hpp>
+#include <Rinternals.h>
 
 namespace R
 {
+    // Force the creation of non-inline embodiments of functions callable
+    // from C:
+    namespace ForceNonInline
+    {
+        const auto &ENCLOSptr = ENCLOS;
+        const auto &isEnvironmentptr = Rf_isEnvironment;
+        const auto &FRAMEptr = FRAME;
+    } // namespace ForceNonInline
+
     /* Environment Access Methods */
-    RObject *RObject::frame(RObject *x) { return x ? x->u.envsxp.frame : nullptr; }
+    RObject *RObject::frame(RObject *x) { return x ? x->u.envsxp.m_frame : nullptr; }
 
-    RObject *RObject::enclos(RObject *x) { return x ? x->u.envsxp.enclos : nullptr; }
+    RObject *RObject::enclos(RObject *x) { return x ? x->u.envsxp.m_enclos : nullptr; }
 
-    RObject *RObject::hashtab(RObject *x) { return x ? x->u.envsxp.hashtab : nullptr; }
+    RObject *RObject::hashtab(RObject *x) { return x ? x->u.envsxp.m_hashtab : nullptr; }
 
     unsigned int RObject::envflags(RObject *x) { return x ? x->m_gpbits : 0; } /* for environments */
 
@@ -46,21 +63,21 @@ namespace R
     {
         if (!x)
             return;
-        x->u.envsxp.frame = v;
+        x->u.envsxp.m_frame = v;
     }
 
     void RObject::set_enclos(RObject *x, RObject *v)
     {
         if (!x)
             return;
-        x->u.envsxp.enclos = v;
+        x->u.envsxp.m_enclos = v;
     }
 
     void RObject::set_hashtab(RObject *x, RObject *v)
     {
         if (!x)
             return;
-        x->u.envsxp.hashtab = v;
+        x->u.envsxp.m_hashtab = v;
     }
 
     unsigned int RObject::frame_is_locked(RObject *e) { return e ? (envflags(e) & FRAME_LOCK_MASK) : 0; }

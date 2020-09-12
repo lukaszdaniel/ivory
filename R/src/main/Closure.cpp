@@ -22,36 +22,57 @@
  *  https://www.R-project.org/Licenses/
  */
 
+/** @file Closure.cpp
+ *
+ * @brief Implementation of class Closure and associated C
+ * interface.
+ */
+
 #include <CXXR/Closure.hpp>
+#include <Rinternals.h>
 
 namespace R
 {
+    // Force the creation of non-inline embodiments of functions callable
+    // from C:
+    namespace ForceNonInline
+    {
+        const auto &BODYptr = BODY;
+        const auto &CLOENVptr = CLOENV;
+        const auto &FORMALSptr = FORMALS;
+        const auto &RDEBUGptr = RDEBUG;
+        const auto &RSTEPptr = RSTEP;
+        const auto &SET_CLOENVptr = SET_CLOENV;
+        const auto &SET_RDEBUGptr = SET_RDEBUG;
+        const auto &SET_RSTEPptr = SET_RSTEP;
+    } // namespace ForceNonInline
+
     /* Closure Access Methods */
-    RObject *RObject::formals(RObject *x) { return x ? x->u.closxp.formals : nullptr; }
+    RObject *RObject::formals(RObject *x) { return x ? x->u.closxp.m_formals : nullptr; }
 
     void RObject::set_formals(RObject *x, RObject *v)
     {
         if (!x)
             return;
-        x->u.closxp.formals = v;
+        x->u.closxp.m_formals = v;
     }
 
-    RObject *RObject::body(RObject *x) { return x ? x->u.closxp.body : nullptr; }
+    RObject *RObject::body(RObject *x) { return x ? x->u.closxp.m_body : nullptr; }
 
     void RObject::set_body(RObject *x, RObject *v)
     {
         if (!x)
             return;
-        x->u.closxp.body = v;
+        x->u.closxp.m_body = v;
     }
 
-    RObject *RObject::cloenv(RObject *x) { return x ? x->u.closxp.env : nullptr; }
+    RObject *RObject::cloenv(RObject *x) { return x ? x->u.closxp.m_env : nullptr; }
 
     void RObject::set_cloenv(RObject *x, RObject *v)
     {
         if (!x)
             return;
-        x->u.closxp.env = v;
+        x->u.closxp.m_env = v;
     }
 
     bool RObject::rdebug(RObject *x) { return x && x->m_debug; }

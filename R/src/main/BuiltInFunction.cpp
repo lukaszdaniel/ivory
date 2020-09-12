@@ -22,17 +22,32 @@
  *  https://www.R-project.org/Licenses/
  */
 
+/** @file BuiltInFunction.cpp
+ *
+ * Implementation of class BuiltInFunction and associated
+ * C interface.
+ */
+
 #include <CXXR/BuiltInFunction.hpp>
+#include <Defn.h>
 
 namespace R
 {
+    // Force the creation of non-inline embodiments of functions callable
+    // from C:
+    namespace ForceNonInline
+    {
+        const auto &PRIMOFFSETptr = PRIMOFFSET;
+        const auto &SET_PRIMOFFSETptr = SET_PRIMOFFSET;
+    }
+
     /* Primitive Access Methods */
-    int RObject::primoffset(RObject *x) { return x ? x->u.primsxp.offset : 0; }
+    int RObject::primoffset(RObject *x) { return x ? x->u.primsxp.m_offset : 0; }
 
     void RObject::set_primoffset(RObject *x, int v)
     {
         if (!x)
             return;
-        x->u.primsxp.offset = v;
+        x->u.primsxp.m_offset = v;
     }
 } // namespace R

@@ -22,16 +22,39 @@
  *  https://www.R-project.org/Licenses/
  */
 
+/** @file Symbol.cpp
+ *
+ * @brief Implementation of class Symbol and associated C
+ * interface.
+ */
+
 #include <CXXR/Symbol.hpp>
+#include <Rinternals.h>
 
 namespace R
 {
+    // Force the creation of non-inline embodiments of functions callable
+    // from C:
+    namespace ForceNonInline
+    {
+        const auto &DDVALptr = DDVAL;
+        const auto &installptr = Rf_install;
+        const auto &isSymbolptr = Rf_isSymbol;
+        const auto &PRINTNAMEptr = PRINTNAME;
+        const auto &SYMVALUEptr = SYMVALUE;
+        const auto &INTERNALptr = INTERNAL;
+        const auto &SET_PRINTNAMEptr = SET_PRINTNAME;
+        const auto &SET_SYMVALUEptr = SET_SYMVALUE;
+        const auto &SET_INTERNALptr = SET_INTERNAL;
+        const auto &SET_DDVALptr = SET_DDVAL;
+    } // namespace ForceNonInline
+
     /* Symbol Access Methods */
-    RObject *RObject::printname(RObject *x) { return x ? x->u.symsxp.pname : nullptr; }
+    RObject *RObject::printname(RObject *x) { return x ? x->u.symsxp.m_pname : nullptr; }
 
-    RObject *RObject::symvalue(RObject *x) { return x ? x->u.symsxp.value : nullptr; }
+    RObject *RObject::symvalue(RObject *x) { return x ? x->u.symsxp.m_value : nullptr; }
 
-    RObject *RObject::internal(RObject *x) { return x ? x->u.symsxp.internal : nullptr; }
+    RObject *RObject::internal(RObject *x) { return x ? x->u.symsxp.m_internal : nullptr; }
 
     unsigned int RObject::ddval(RObject *x) { return x ? (x->m_gpbits & DDVAL_MASK) : 0; } /* for ..1, ..2 etc */
 
@@ -65,20 +88,20 @@ namespace R
     {
         if (!x)
             return;
-        x->u.symsxp.pname = v;
+        x->u.symsxp.m_pname = v;
     }
 
     void RObject::set_symvalue(RObject *x, RObject *v)
     {
         if (!x)
             return;
-        x->u.symsxp.value = v;
+        x->u.symsxp.m_value = v;
     }
 
     void RObject::set_internal(RObject *x, RObject *v)
     {
         if (!x)
             return;
-        x->u.symsxp.internal = v;
+        x->u.symsxp.m_internal = v;
     }
 } // namespace R

@@ -30,6 +30,7 @@
 #include <cstddef>
 #include <CXXR/SEXPTYPE.hpp>
 #include <CXXR/RTypes.hpp>
+#include <CXXR/MemoryBank.hpp>
 #include <R_ext/Error.h>
 #include <R_ext/Complex.h>
 
@@ -53,42 +54,42 @@ namespace R
 
     struct primsxp_struct
     {
-        int offset;
+        int m_offset;
     };
 
     struct symsxp_struct
     {
-        RObject *pname;
-        RObject *value;
-        RObject *internal;
+        RObject *m_pname;
+        RObject *m_value;
+        RObject *m_internal;
     };
 
     struct listsxp_struct
     {
-        RObject *carval;
-        RObject *cdrval;
-        RObject *tagval;
+        RObject *m_carval;
+        RObject *m_cdrval;
+        RObject *m_tagval;
     };
 
     struct envsxp_struct
     {
-        RObject *frame;
-        RObject *enclos;
-        RObject *hashtab;
+        RObject *m_frame;
+        RObject *m_enclos;
+        RObject *m_hashtab;
     };
 
     struct closxp_struct
     {
-        RObject *formals;
-        RObject *body;
-        RObject *env;
+        RObject *m_formals;
+        RObject *m_body;
+        RObject *m_env;
     };
 
     struct promsxp_struct
     {
-        RObject *value;
-        RObject *expr;
-        RObject *env;
+        RObject *m_value;
+        RObject *m_expr;
+        RObject *m_env;
     };
 
     struct vecsxp_struct
@@ -143,81 +144,6 @@ namespace R
     public:
     void* m_data;
     size_t m_databytes;
-        // virtual ~RObject() = default;
-#if 0
-    SEXPTYPE sexptype() const { return this->m_type; }
-    void setsexptype(const SEXPTYPE& type) { this->m_type = type; }
-    bool sexptypeEqual(const SEXPTYPE& type) const { return this->m_type == type; }
-    bool sexptypeNotEqual(const SEXPTYPE& type) const { return !this->sexptypeEqual(type); }
-    bool altrep() const { return this->m_alt; }
-    void setaltrep() { this->m_alt = true; }
-    void unsetaltrep() { this->m_alt = false; }
-    bool isPrimitive_() const { return this->sexptypeEqual(BUILTINSXP) || this->sexptypeEqual(SPECIALSXP); }
-    bool isFunction_() const { return this->sexptypeEqual(CLOSXP) || this->isPrimitive_(); }
-    bool isPairList_() const
-    {
-        switch (this->sexptype())
-        {
-        case NILSXP:
-        case LISTSXP:
-        case LANGSXP:
-        case DOTSXP:
-            return true;
-        default:
-            return false;
-        }
-    }
-    // bool isLanguage_() const { return this->sexptypeEqual(LANGSXP); }
-    // R_len_t length_() const { return this->sexptypeEqual(NILSXP) ? 0 : 1; }
-    bool isNull_() const { return this->sexptype() == SEXPTYPE::NILSXP; }
-    bool isSymbol_() const { return this->sexptype() == SEXPTYPE::SYMSXP; }
-    bool isLogical_() const { return this->sexptype() == SEXPTYPE::LGLSXP; }
-    bool isReal_() const { return this->sexptype() == SEXPTYPE::REALSXP; }
-    bool isComplex_() const { return this->sexptype() == SEXPTYPE::CPLXSXP; }
-    bool isExpression_() const { return this->sexptype() == SEXPTYPE::EXPRSXP; }
-    bool isEnvironment_() const { return this->sexptype() == SEXPTYPE::ENVSXP; }
-    bool isString_() const { return this->sexptype() == SEXPTYPE::STRSXP; }
-    bool isRaw_() const { return this->sexptypeEqual(RAWSXP); }
-    bool isScalar(const SEXPTYPE &t) const { return this->sexptypeEqual(t) && this->m_scalar; }
-    bool isVector_() const
-    {
-        switch (this->sexptype())
-        {
-        case LGLSXP:
-        case INTSXP:
-        case REALSXP:
-        case CPLXSXP:
-        case STRSXP:
-        case RAWSXP:
-
-        case VECSXP:
-        case EXPRSXP:
-            return true;
-        default:
-            return false;
-        }
-    }
-    RObject *attrib_() const { return this->m_attrib; }
-    inline unsigned int isBytes() const;
-    inline void setBytes();
-    inline unsigned int isLatin1() const;
-    inline void setLatin1();
-    inline unsigned int isAscii() const;
-    inline void setAscii();
-    inline unsigned int isUTF8() const;
-    inline void setUTF8();
-    inline aunsigned intto encKnown() const;
-    inline unsigned int isCached() const;
-    inline void setCached();
-    RObject *printname() const { return this->u.symsxp.pname; }
-    RObject *symvalue() const { return this->u.symsxp.value; }
-    RObject *internal() const { return this->u.symsxp.internal; }
-    RObject *tag() const { return this->u.listsxp.tagval; }
-    RObject *car() const { return this->u.listsxp.carval; }
-    RObject *cdr() const { return this->u.listsxp.cdrval; }
-    const char *translateCharUTF8_() const;
-#endif
-    public:
     // virtual ~RObject() {}
         /* General Cons Cell Attributes */
         static bool gcgen(RObject *v);
@@ -432,90 +358,6 @@ namespace R
             R::RObject::set_stdvec_truelength(x, v);
         }
     };
-#if 0
-    class Symbol : public RObject
-    {
-    private:
-        RObject *pname;
-        RObject *value;
-        RObject *internal;
-
-    public:
-        RObject *printname() const
-        {
-            return this->pname;
-        }
-        RObject *symvalue() const
-        {
-            return this->value;
-        }
-        RObject *internal() const
-        {
-            return this->internal;
-        }
-    };
-
-    class Environment : public RObject
-    {
-    private:
-        RObject *frame;
-        RObject *enclos;
-        RObject *hashtab;
-
-    public:
-    };
-
-    class BuiltInFunction : public RObject
-    {
-    private:
-        int offset;
-
-    public:
-    };
-
-    class Closure : public RObject
-    {
-    private:
-        RObject *formals;
-        RObject *body;
-        RObject *env;
-
-    public:
-    };
-
-    class Promise : public RObject
-    {
-    private:
-        RObject *value;
-        RObject *expr;
-        RObject *env;
-
-    public:
-    };
-
-    class RList : public RObject
-    {
-    private:
-        RObject *carval;
-        RObject *cdrval;
-        RObject *tagval;
-
-    public:
-        RObject *tag() const
-        {
-            return this->tagval;
-        }
-        RObject *car() const
-        {
-            return this->carval;
-        }
-        RObject *cdr() const
-        {
-            return this->cdrval;
-        }
-    };
-#endif
-
 
 #if defined(COMPUTE_REFCNT_VALUES)
 #define REFCNT(x) (R::RObject::refcnt(x))

@@ -29,7 +29,14 @@
 
 namespace R
 {
+    class BuiltInFunction : public RObject
+    {
+    private:
+        int m_offset;
 
+    public:
+        auto offset() const { return this->m_offset; }
+    };
 } // namespace R
 
 #endif /* BUILTINFUNCTION_HPP */

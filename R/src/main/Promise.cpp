@@ -22,29 +22,46 @@
  *  https://www.R-project.org/Licenses/
  */
 
+/** @file Promise.cpp
+ *
+ * @brief Implementation of class Promise and associated C
+ * interface.
+ */
+
 #include <CXXR/Promise.hpp>
+#include <Rinternals.h>
 
 namespace R
 {
+    // Force the creation of non-inline embodiments of functions callable
+    // from C:
+    namespace ForceNonInline
+    {
+        const auto &PRCODEptr = PRCODE;
+        const auto &PRENVptr = PRENV;
+        const auto &PRVALUEptr = PRVALUE;
+        const auto &PRSEENptr = PRSEEN;
+    } // namespace ForceNonInline
+
     /* Promise Access Methods */
-    RObject *RObject::prcode(RObject *x) { return x ? x->u.promsxp.expr : nullptr; }
+    RObject *RObject::prcode(RObject *x) { return x ? x->u.promsxp.m_expr : nullptr; }
 
     void RObject::set_prcode(RObject *x, RObject *v)
     {
         if (!x)
             return;
-        x->u.promsxp.expr = v;
+        x->u.promsxp.m_expr = v;
     }
 
-    RObject *RObject::prenv(RObject *x) { return x ? x->u.promsxp.env : nullptr; }
+    RObject *RObject::prenv(RObject *x) { return x ? x->u.promsxp.m_env : nullptr; }
 
-    RObject *RObject::prvalue(RObject *x) { return x ? x->u.promsxp.value : nullptr; }
+    RObject *RObject::prvalue(RObject *x) { return x ? x->u.promsxp.m_value : nullptr; }
 
     void RObject::set_prvalue(RObject *x, RObject *v)
     {
         if (!x)
             return;
-        x->u.promsxp.value = v;
+        x->u.promsxp.m_value = v;
     }
 
     unsigned int RObject::prseen(RObject *x) { return x ? x->m_gpbits : 0; }
@@ -53,7 +70,7 @@ namespace R
     {
         if (!x)
             return;
-        x->u.promsxp.env = v;
+        x->u.promsxp.m_env = v;
     }
 
     void RObject::set_prseen(RObject *x, unsigned int v)
