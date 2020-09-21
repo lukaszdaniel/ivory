@@ -1,7 +1,8 @@
 /*
  *  R : A Computer Language for Statistical Data Analysis
- *  Copyright (C) 2007 Andrew Runnalls.
- *
+ *  Copyright (C) 2008-2014  Andrew R. Runnalls.
+ *  Copyright (C) 2014 and onwards the Rho Project Authors.
+  *
  *  This program is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
  *  the Free Software Foundation; either version 2 of the License, or
@@ -24,6 +25,12 @@
 
 #include <CXXR/CellPool.hpp>
 
+#ifndef __APPLE__
+#include <features.h>
+#endif
+
+#include <algorithm>
+#include <cstdlib>
 #include <iostream>
 
 using namespace std;
@@ -36,7 +43,7 @@ CellPool::~CellPool()
 	::operator delete(*it);
 }
 
-void CellPool::check() const
+bool CellPool::check() const
 {
     unsigned int free_cells = 0;
     for (Cell* c = m_free_cells; c; c = c->m_next) {
@@ -48,6 +55,7 @@ void CellPool::check() const
 	cerr << "CellPool::check(): internal inconsistency\n";
 	abort();
     }
+    return true;
 }
 
 void CellPool::checkAllocatedCell(const void* p) const 
@@ -85,21 +93,20 @@ void CellPool::checkCell(const void* p) const
     }
 }
 
-void CellPool::seekMemory()
+CellPool::Cell* CellPool::seekMemory()
 {
     if (m_out_of_cells) (*m_out_of_cells)(this);
-    if (!m_free_cells) {
 	char* superblock = static_cast<char*>(::operator new(m_superblocksize));
 	m_superblocks.push_back(superblock);
-	// Initialise cells:
-	{
-	    int offset = m_superblocksize - m_cellsize;
-	    Cell* next = nullptr;
-	    while (offset >= 0) {
-		next = new (superblock + offset) Cell(next);
-		offset -= m_cellsize;
-	    }
-	    m_free_cells = next;
+    // Initialise cells:
+    {
+	ptrdiff_t offset
+	    = ptrdiff_t(m_superblocksize - m_cellsize);
+	Cell* next = nullptr;
+	while (offset >= 0) {
+	    next = new (superblock + offset) Cell(next);
+	    offset -= ptrdiff_t(m_cellsize);
 	}
+	return next;
     }
 }

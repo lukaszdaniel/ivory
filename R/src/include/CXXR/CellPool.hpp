@@ -97,7 +97,8 @@ namespace R {
 	 */
 	void* allocate()
 	{
-	    if (!m_free_cells) seekMemory();
+	    if (!m_free_cells)
+		m_free_cells = seekMemory();
 	    Cell* c = m_free_cells;
 	    m_free_cells = c->m_next;
 	    ++m_cells_allocated;
@@ -109,21 +110,30 @@ namespace R {
 	 * @return the size of each cell in bytes (well, strictly as a
 	 * multiple of sizeof(char)).
 	 */         
-	size_t cellSize() const  {return m_cellsize;}
+	size_t cellSize() const
+	{
+	    return m_cellsize;
+	}
 
 	/** @brief Number of cells allocated from this CellPool.
 	 *
 	 * @return the number of cells currently allocated from this
 	 * pool.
 	 */
-	size_t cellsAllocated() const {return m_cells_allocated;}
+	size_t cellsAllocated() const
+	{
+	    return m_cells_allocated;
+	}
 
 	/** @brief Integrity check.
 	 *
 	 * Aborts the program with an error message if the object is
 	 * found to be internally inconsistent.
+	 *
+	 * @return true, if it returns at all.  The return value is to
+	 * facilitate use with \c assert .
 	 */
-	void check() const;
+	bool check() const;
 
 	/** @brief Deallocate a cell
 	 *
@@ -164,7 +174,10 @@ namespace R {
 	 * @return The size in bytes of the superblocks from which
 	 *         cells are allocated.
 	 */
-	size_t superblockSize() const { return m_superblocksize; }
+	size_t superblockSize() const
+	{
+	    return m_superblocksize;
+	}
     private:
 	struct Cell {
 	    Cell* m_next;
@@ -188,7 +201,9 @@ namespace R {
 	// the free list:
 	void checkAllocatedCell(const void* p) const;
 
-	void seekMemory();
+	// Allocates a new superblock and returns a pointer to the
+	// first free cell in it.
+	Cell* seekMemory();
     };
 }
 

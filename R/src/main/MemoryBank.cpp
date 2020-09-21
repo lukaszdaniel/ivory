@@ -25,12 +25,22 @@
 #include <CXXR/MemoryBank.hpp>
 
 #include <iostream>
+#include <limits>
+#include <iterator>
 
 using namespace std;
 using namespace R;
 
-unsigned int MemoryBank::s_blocks_allocated = 0;
-unsigned int MemoryBank::s_bytes_allocated = 0;
+// If NO_CELLPOOLS is defined, all memory blocks are allocated
+// directly via ::operator new.
+#ifdef NO_CELLPOOLS
+const size_t MemoryBank::s_new_threshold = 1;
+#else
+const size_t MemoryBank::s_new_threshold = 128;
+#endif
+
+size_t MemoryBank::s_blocks_allocated = 0;
+size_t MemoryBank::s_bytes_allocated = 0;
 bool (*MemoryBank::s_cue_gc)(size_t, bool) = nullptr;
 
 void MemoryBank::pool_out_of_memory(CellPool* pool)
@@ -39,15 +49,15 @@ void MemoryBank::pool_out_of_memory(CellPool* pool)
 }
 
 CellPool MemoryBank::s_pools[] = {CellPool(1, 512, pool_out_of_memory),
-			    CellPool(2, 256, pool_out_of_memory),
-			    CellPool(4, 128, pool_out_of_memory),
-			    CellPool(8, 64, pool_out_of_memory),
-			    CellPool(16, 32, pool_out_of_memory)};
+                                  CellPool(2, 256, pool_out_of_memory),
+                                  CellPool(4, 128, pool_out_of_memory),
+                                  CellPool(8, 64, pool_out_of_memory),
+                                  CellPool(16, 32, pool_out_of_memory)};
 
 // Note that the C++ standard requires that an operator new returns a
 // valid pointer even when 0 bytes are requested.  The entry at
 // s_pooltab[0] ensures this.  This table assumes sizeof(double) == 8.
-unsigned int MemoryBank::s_pooltab[]
+const unsigned char MemoryBank::s_pooltab[]
 = {0, 0, 0, 0, 0, 0, 0, 0, 0,
    1, 1, 1, 1, 1, 1, 1, 1,
    2, 2, 2, 2, 2, 2, 2, 2,
@@ -70,7 +80,7 @@ void* MemoryBank::alloc2(size_t bytes)
     void* p = nullptr;
     bool joy = false;  // true if GC succeeds after bad_alloc
     try {
-	if (bytes > s_max_cell_size) {
+	if (bytes > s_new_threshold) {
 	    if (s_cue_gc) s_cue_gc(bytes, false);
 	    p = ::operator new(bytes);
 	}
@@ -80,7 +90,7 @@ void* MemoryBank::alloc2(size_t bytes)
 	if (s_cue_gc) {
 	    // Try to force garbage collection if available:
 	    size_t sought_bytes = bytes;
-	    if (bytes < s_max_cell_size)
+	    if (bytes < s_new_threshold)
 		sought_bytes = s_pools[s_pooltab[bytes]].superblockSize();
 	    joy = s_cue_gc(sought_bytes, true);
 	}
@@ -89,20 +99,43 @@ void* MemoryBank::alloc2(size_t bytes)
     if (!p && joy) {
 	// Try once more:
 	try {
-	    if (bytes > s_max_cell_size) p = ::operator new(bytes);
+	    if (bytes > s_new_threshold) p = ::operator new(bytes);
 	    else p = s_pools[s_pooltab[bytes]].allocate();
 	}
 	catch (bad_alloc) {
 	    throw;
 	}
     }
-    ++s_blocks_allocated;
-    s_bytes_allocated += bytes;
+    notifyAllocation(bytes);
     return p;
 }
-				
+
+void* MemoryBank::allocate(size_t bytes)
+{
+    // notifyAllocation(bytes);
+    void* p;
+    // Assumes sizeof(double) == 8:
+    return (bytes > s_new_threshold || !(p = alloc1(bytes)))
+	? alloc2(bytes) : p;
+}
+
 void MemoryBank::check()
 {
-    for (unsigned int i = 0; i < 5; ++i)
+#ifndef NO_CELLPOOLS
+    for (unsigned int i = 0; i < s_num_pools; ++i)
 	s_pools[i].check();
+#endif
 }
+
+void MemoryBank::notifyAllocation(size_t bytes)
+{
+    ++s_blocks_allocated;
+    s_bytes_allocated += bytes;
+}
+
+void MemoryBank::notifyDeallocation(size_t bytes)
+{
+    s_bytes_allocated -= bytes;
+    --s_blocks_allocated;
+}
+

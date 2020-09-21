@@ -30,7 +30,9 @@
 #ifndef MEMORYBANK_HPP
 #define MEMORYBANK_HPP
 
+#include <cstring>
 #include <CXXR/CellPool.hpp>
+#include <CXXR/SEXPTYPE.hpp>
 
 namespace R {
     /** @brief Class to manage memory allocation and deallocation for R.
@@ -48,13 +50,7 @@ namespace R {
 	 *
 	 * @throws bad_alloc if a cell cannot be allocated.
 	 */
-	static void* allocate(size_t bytes)
-	{
-	    void* p;
-	    // Assumes sizeof(double) == 8:
-	    return (bytes > s_max_cell_size || !(p = alloc1(bytes)))
-		? alloc2(bytes) : p;
-	}
+	static void* allocate(size_t bytes);
 
 	/** @brief Number of blocks currently allocated.
 	 *
@@ -87,17 +83,18 @@ namespace R {
 	 *          by MemoryBank::allocate(), or a null pointer (in which
 	 *          case method does nothing).
 	 *
-	 * @param bytes Size in bytes of the block being deallocated.
-	 *          Ignored if p is a null pointer.
+	 * @param bytes The number of bytes in the memory block,
+	 *          i.e. the number of bytes requested in the
+	 *          corresponding call to allocate().
 	 */
 	static void deallocate(void* p, size_t bytes)
 	{
 	    if (!p) return;
 	    // Assumes sizeof(double) == 8:
-	    if (bytes > s_max_cell_size) ::operator delete(p);
+	    if (bytes > s_new_threshold)
+		::operator delete(p);
 	    else s_pools[s_pooltab[bytes]].deallocate(p);
-	    --s_blocks_allocated;
-	    s_bytes_allocated -= bytes;
+	    notifyDeallocation(bytes);
 	}
 
 	/** Set a callback to cue garbage collection.
@@ -116,20 +113,24 @@ namespace R {
 	    s_cue_gc = cue_gc;
 	}
     private:
-	static const size_t s_max_cell_size = 128;
-	static unsigned int s_blocks_allocated;
-	static unsigned int s_bytes_allocated;
+	typedef CellPool Pool;
+	static const size_t s_num_pools = 5;
+	// We use ::operator new directly for allocations at least this big:
+	static const size_t s_new_threshold;
+	static size_t s_blocks_allocated;
+	static size_t s_bytes_allocated;
 	static bool (*s_cue_gc)(size_t, bool);
 	static CellPool s_pools[];
-	static unsigned int s_pooltab[];
+	static const unsigned char s_pooltab[];
+	static void notifyAllocation(size_t bytes);
 
+	static void notifyDeallocation(size_t bytes);
 	// First-line allocation attempt for small objects:
 	static void* alloc1(size_t bytes) throw()
 	{
 	    void* p = s_pools[s_pooltab[bytes]].easyAllocate();
 	    if (p) {
-		++s_blocks_allocated;
-		s_bytes_allocated += bytes;
+		notifyAllocation(bytes);
 	    }
 	    return p;
 	}
@@ -138,7 +139,7 @@ namespace R {
 	// attempt for small objects:
 	static void* alloc2(size_t bytes);
 
-	static void pool_out_of_memory(CellPool* pool);
+	static void pool_out_of_memory(CellPool *pool);
 	MemoryBank() = delete;
     };
 }
