@@ -14,7 +14,7 @@ distdir = $(top_builddir)/$(PACKAGE)-$(VERSION)/$(subdir)
 
 ## Partially included by the API (1) headers in .., but not part of the
 ## API per se. 
-CXXR_HEADERS = CellPool.hpp MemoryBank.hpp RObject.hpp List.hpp BuiltInFunction.hpp Closure.hpp Environment.hpp Vector.hpp RTypes.hpp SEXPTYPE.hpp Symbol.hpp Promise.hpp
+CXXR_HEADERS = CellPool.hpp MemoryBank.hpp RObject.hpp RList.hpp BuiltInFunction.hpp Closure.hpp Environment.hpp Vector.hpp RTypes.hpp SEXPTYPE.hpp Symbol.hpp Promise.hpp
 
 DISTFILES = Makefile.in $(CXXR_HEADERS)
 TIMESTAMPS = $(CXXR_HEADERS:.hpp=.ts)

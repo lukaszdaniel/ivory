@@ -38,7 +38,7 @@
 
 #include <utility>
 #include <CXXR/RObject.hpp>
-#include <CXXR/List.hpp>
+#include <CXXR/RList.hpp>
 #include <CXXR/BuiltInFunction.hpp>
 #include <CXXR/Symbol.hpp>
 #include <CXXR/Vector.hpp>

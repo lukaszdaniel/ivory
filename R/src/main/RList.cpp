@@ -22,7 +22,7 @@
  *  https://www.R-project.org/Licenses/
  */
 
-#include <CXXR/List.hpp>
+#include <CXXR/RList.hpp>
 #include <Defn.h>
 #include <Rinternals.h>
 

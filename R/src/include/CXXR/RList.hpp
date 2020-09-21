@@ -22,8 +22,8 @@
  *  https://www.R-project.org/Licenses/
  */
 
-#ifndef LIST_HPP
-#define LIST_HPP
+#ifndef RLIST_HPP
+#define RLIST_HPP
 
 #include <CXXR/RObject.hpp>
 
@@ -43,4 +43,4 @@ namespace R
     };
 } // namespace R
 
-#endif /* LIST_HPP */
+#endif /* RLIST_HPP */
