@@ -2344,7 +2344,7 @@ SEXP Rf_allocVector3(SEXPTYPE type, R_xlen_t length = 1, R_allocator_t *allocato
     SEXP s = nullptr;     /* For the generational collector it would be safer to
 		   work in terms of a VECSEXP here, but that would
 		   require several casts below... */
-    R_size_t size = 0, alloc_size, old_R_VSize;
+    R_size_t size = 0, old_R_VSize;
 
 #if VALGRIND_LEVEL > 0
     R_size_t actual_size = 0;
@@ -2442,15 +2442,13 @@ SEXP Rf_allocVector3(SEXPTYPE type, R_xlen_t length = 1, R_allocator_t *allocato
 	      type2char(type), length);
     }
 
-	    alloc_size = size;
-
     /* save current R_VSize to roll back adjustment if malloc fails */
     old_R_VSize = R_VSize;
 
     /* we need to do the gc here so allocSExp doesn't! */
-    if (FORCE_GC || NO_FREE_NODES() || VHEAP_FREE() < alloc_size)
+    if (FORCE_GC || NO_FREE_NODES() || VHEAP_FREE() < size)
     {
-        R_gc_internal(alloc_size);
+        R_gc_internal(size);
     }
 
     size_t bytes = size * sizeof(VECREC);
@@ -2464,7 +2462,7 @@ SEXP Rf_allocVector3(SEXPTYPE type, R_xlen_t length = 1, R_allocator_t *allocato
 	// node's children yet:
     R::RObject::set_stdvec_length(s, 0);
 
-    if (size > 0) {
+    if (size >= 0) {
 	    bool success = false;
 	    if (size < (R_SIZE_T_MAX / sizeof(VECREC))) {
             try
