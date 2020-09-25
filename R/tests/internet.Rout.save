@@ -1,9 +1,9 @@
 
-Ivory Under development (unstable) (2020-08-31 r1289) -- "Internationalized Version of R"
+Ivory Under development (unstable) (2020-09-25 r1306) -- "Internationalized Version of R"
 Copyright (C) 2013-2020 Lukasz Daniel (lukasz.daniel@gmail.com)
 See README-IVORY file for details.
 
-R Under development (unstable) (2020-08-31 r79091) -- "Unsuffered Consequences"
+R Under development (unstable) (2020-09-25 r79188) -- "Unsuffered Consequences"
 Copyright (C) 2020 The R Foundation for Statistical Computing
 Platform: x86_64-pc-linux-gnu (64-bit)
 
@@ -32,7 +32,7 @@ Type 'q()' to quit R.
 > ap <- available.packages(contrib.url("http://cran.r-project.org"))
 > ## IGNORE_RDIFF_BEGIN
 > nrow(ap)
-[1] 16166
+[1] 16377
 > ## IGNORE_RDIFF_END
 > 
 > # test url connections on http
