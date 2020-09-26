@@ -40,6 +40,7 @@
 
 #include <R_ext/RS.h> /* for S4 allocation */
 #include <CXXR/MemoryBank.hpp>
+#include <CXXR/SEXP_downcast.hpp>
 #include <R_ext/Print.h>
 
 /* Declarations for Valgrind.
@@ -300,13 +301,11 @@ static void R_ReportAllocation(R_size_t);
 static void R_gc_internal(R_size_t size_needed = 0);
 static void R_gc_lite();
 
-static RObject UnmarkedNodeTemplate;
-
 namespace
 {
-    inline bool NODE_IS_MARKED(SEXP s) { return MARK(s) == 1; }
-    inline void MARK_NODE(SEXP s) { RObject::set_mark(s, 1); }
-    inline void UNMARK_NODE(SEXP s) { RObject::set_mark(s, 0); }
+    inline bool NODE_IS_MARKED(GCNode *s) { return GCNode::mark(s); }
+    inline void MARK_NODE(GCNode *s) { GCNode::set_mark(s, true); }
+    inline void UNMARK_NODE(GCNode *s) { GCNode::set_mark(s, false); }
 } // namespace
 
 /* Tuning Constants. Most of these could be made settable from R,
@@ -536,19 +535,19 @@ namespace
 
     constexpr int NUM_OLD_GENERATIONS = 2;
 
-    inline unsigned int NODE_GENERATION(SEXP s) { return RObject::gcgen(s); }
+    inline unsigned int NODE_GENERATION(GCNode *s) { return GCNode::gcgen(s); }
 
-    inline void SET_NODE_GENERATION(SEXP s, unsigned int g)
+    inline void SET_NODE_GENERATION(GCNode *s, unsigned int g)
     {
-        RObject::set_gcgen(s, g);
+        GCNode::set_gcgen(s, g);
     }
 
-    inline bool NODE_GEN_IS_YOUNGER(SEXP s, unsigned int g)
+    inline bool NODE_GEN_IS_YOUNGER(GCNode *s, unsigned int g)
     {
         return s && ((!NODE_IS_MARKED(s)) || (NODE_GENERATION(s) < g));
     }
 
-    inline bool NODE_IS_OLDER(SEXP x, SEXP y)
+    inline bool NODE_IS_OLDER(GCNode *x, GCNode *y)
     {
         return NODE_IS_MARKED(x) &&
                ((y && !NODE_IS_MARKED(y)) || NODE_GENERATION(x) > NODE_GENERATION(y));
@@ -592,60 +591,62 @@ namespace
 // #define EXPEL_OLD_TO_NEW
     struct
     {
-        RObject *Old[NUM_OLD_GENERATIONS];
-        RObject *New;
-        RObject *Free;
-        RObject OldPeg[NUM_OLD_GENERATIONS];
-        RObject NewPeg;
+        GCNode *Old[NUM_OLD_GENERATIONS];
+        GCNode *New;
 #ifndef EXPEL_OLD_TO_NEW
-        RObject *OldToNew[NUM_OLD_GENERATIONS];
-        RObject OldToNewPeg[NUM_OLD_GENERATIONS];
+        GCNode *OldToNew[NUM_OLD_GENERATIONS];
 #endif
         int OldCount[NUM_OLD_GENERATIONS];
         size_t AllocCount;
     } R_GenHeap;
 
-    inline auto NEXT_NODE(RObject *s) { return RObject::next_node(s); }
-    inline auto PREV_NODE(RObject *s) { return RObject::prev_node(s); }
-    inline void SET_NEXT_NODE(RObject *s, RObject *t) { RObject::set_next_node(s, t); }
-    inline void SET_PREV_NODE(RObject *s, RObject *t) { RObject::set_prev_node(s, t); }
+    inline auto NEXT_NODE(GCNode *s) { return GCNode::next_node(s); }
+    inline auto PREV_NODE(GCNode *s) { return GCNode::prev_node(s); }
+    inline void SET_NEXT_NODE(GCNode *s, GCNode *t) { GCNode::set_next_node(s, t); }
+    // inline void SET_PREV_NODE(GCNode *s, GCNode *t) { GCNode::set_prev_node(s, t); }
 
     /* Node List Manipulation */
 
     /* unsnap node s from its list */
-    inline void UNSNAP_NODE(RObject *s)
+    inline void UNSNAP_NODE(GCNode *s)
     {
-
-        RObject *next = NEXT_NODE(s);
-        RObject *prev = PREV_NODE(s);
-        SET_NEXT_NODE(prev, next);
-        SET_PREV_NODE(next, prev);
+        GCNode::link(PREV_NODE(s), NEXT_NODE(s));
     }
 
     /* snap in node s before node t */
-    inline void SNAP_NODE(RObject *s, RObject *t)
+    inline void SNAP_NODE(GCNode *s, GCNode *t)
     {
-        RObject *prev = PREV_NODE(t);
-        SET_NEXT_NODE(s, t);
-        SET_PREV_NODE(t, s);
-        SET_NEXT_NODE(prev, s);
-        SET_PREV_NODE(s, prev);
+        GCNode::link(PREV_NODE(t), s);
+        GCNode::link(s, t);
     }
 
     /* move all nodes on from_peg to to_peg */
-    inline void BULK_MOVE(RObject *from_peg, RObject *to_peg)
+    inline void BULK_MOVE(GCNode *from_peg, GCNode *to_peg)
     {
-        RObject *first_old = NEXT_NODE(from_peg);
-        RObject *last_old = PREV_NODE(from_peg);
-        RObject *first_new = NEXT_NODE(to_peg);
-        SET_PREV_NODE(first_old, to_peg);
-        SET_NEXT_NODE(to_peg, first_old);
-        SET_PREV_NODE(first_new, last_old);
-        SET_NEXT_NODE(last_old, first_new);
-        SET_NEXT_NODE(from_peg, from_peg);
-        SET_PREV_NODE(from_peg, from_peg);
+        GCNode *first_old = NEXT_NODE(from_peg);
+        GCNode *last_old = PREV_NODE(from_peg);
+        GCNode *first_new = NEXT_NODE(to_peg);
+        GCNode::link(to_peg, first_old);
+        GCNode::link(last_old, first_new);
+        GCNode::link(from_peg, from_peg);
     }
 } // namespace
+
+namespace R
+{
+    GCNode::GCNode()
+    {
+        link(R_GenHeap.New->gengc_prev_node, this);
+        link(this, R_GenHeap.New);
+        ++R_GenHeap.AllocCount;
+    }
+
+    GCNode::~GCNode()
+    {
+        --R_GenHeap.AllocCount;
+        link(gengc_prev_node, gengc_next_node);
+    }
+} // namespace R
 
 /* Processing Node Children */
 
@@ -674,9 +675,10 @@ namespace
 #define FREE_FORWARD_CASE
 #endif
 /*** assume for now all ALTREP nodes are based on CONS nodes */
-#define DO_CHILDREN(__n__, dc__action__, dc__extra__)                \
+#define DO_CHILDREN(__n2__, dc__action__, dc__extra__)                \
     do                                                               \
     {                                                                \
+        RObject* __n__ = static_cast<RObject*>(__n2__);          \
         if (HAS_GENUINE_ATTRIB(__n__))                               \
             dc__action__(ATTRIB(__n__), dc__extra__);                \
         if (ALTREP(__n__))                                           \
@@ -748,7 +750,7 @@ namespace
 #define FORWARD_NODE(s)                              \
     do                                               \
     {                                                \
-        RObject *fn__n__ = (s);                      \
+        GCNode *fn__n__ = (s);                      \
         if (fn__n__ && !NODE_IS_MARKED(fn__n__))     \
         {                                            \
             CHECK_FOR_FREE_NODE(fn__n__)             \
@@ -767,7 +769,7 @@ namespace
 #ifdef PROTECTCHECK
 #define CHECK_FOR_FREE_NODE(s)                                 \
     {                                                          \
-        RObject *cf__n__ = (s);                                \
+        GCNode *cf__n__ = (s);                                \
         if (TYPEOF(cf__n__) == FREESXP && !gc_inhibit_release) \
             register_bad_sexp_type(cf__n__, __LINE__);         \
     }
@@ -778,51 +780,15 @@ namespace
 
 namespace
 {
-    inline bool NEED_NEW_PAGE() { return (R_GenHeap.Free == R_GenHeap.New); }
-
     inline bool NO_FREE_NODES()
     {
         return R_GenHeap.AllocCount >= R_NSize;
     }
 
-    /* Node Allocation. */
-    inline void GET_FREE_NODE(SEXP &s)
-    {
-        RObject *n = R_GenHeap.Free;
-        if (NEED_NEW_PAGE())
-        {
-            if (FORCE_GC || NO_FREE_NODES())
-                R_gc_internal();
-            try
-            {
-                n = reinterpret_cast<RObject *>(MemoryBank::allocate(sizeof(RObject)));
-            }
-            catch (bad_alloc)
-            {
-                errorcall(R_NilValue, _("memory exhausted"));
-            }
-            SNAP_NODE(n, R_GenHeap.New);
-            R_GenHeap.AllocCount++;
-        }
-        R_GenHeap.Free = NEXT_NODE(n);
-        (s) = n;
-    }
-
-    /* versions that assume nodes are avaialble without adding a new page */
-    /* QUICK versions can be used if (CLASS_)NEED_NEW_PAGE returns FALSE */
-    inline void QUICK_GET_FREE_NODE(SEXP &s)
-    {
-        RObject *n = R_GenHeap.Free;
-        if (NEED_NEW_PAGE())
-            error("need new page - should not happen");
-        R_GenHeap.Free = NEXT_NODE(n);
-        (s) = n;
-    }
-
 /* Debugging Routines. */
 
 #ifdef DEBUG_GC
-static void CheckNodeGeneration(SEXP x, int g)
+static void CheckNodeGeneration(GCNode *x, int g)
 {
     if (x && NODE_GENERATION(x) < g)
     {
@@ -833,10 +799,10 @@ static void CheckNodeGeneration(SEXP x, int g)
 static void DEBUG_CHECK_NODE_COUNTS(const char *where)
 {
     int OldCount, NewCount, OldToNewCount, gen;
-    RObject *s;
+    GCNode *s;
 
     REprintf(_("Node counts %s:\n"), where);
-	for (RObject *s = NEXT_NODE(R_GenHeap.New), NewCount = 0;
+	for (GCNode *s = NEXT_NODE(R_GenHeap.New), NewCount = 0;
 	     s != R_GenHeap.New;
 	     s = NEXT_NODE(s)) {
 	    NewCount++;
@@ -844,7 +810,7 @@ static void DEBUG_CHECK_NODE_COUNTS(const char *where)
 	for (gen = 0, OldCount = 0, OldToNewCount = 0;
 	     gen < NUM_OLD_GENERATIONS;
 	     gen++) {
-	    for (RObject *s = NEXT_NODE(R_GenHeap.Old[gen]);
+	    for (GCNode *s = NEXT_NODE(R_GenHeap.Old[gen]);
 		 s != R_GenHeap.Old[gen];
 		 s = NEXT_NODE(s)) {
 		OldCount++;
@@ -852,7 +818,7 @@ static void DEBUG_CHECK_NODE_COUNTS(const char *where)
 		    gc_error(_("Inconsistent node generation\n"));
 		DO_CHILDREN(s, CheckNodeGeneration, gen);
 	    }
-	    for (RObject *s = NEXT_NODE(R_GenHeap.OldToNew[gen]);
+	    for (GCNode *s = NEXT_NODE(R_GenHeap.OldToNew[gen]);
 		 s != R_GenHeap.OldToNew[gen];
 		 s = NEXT_NODE(s)) {
 		OldToNewCount++;
@@ -904,17 +870,11 @@ inline void INIT_REFCNT(SEXP x)
 
 void ReleaseNodes()
 {
-    RObject *s = NEXT_NODE(R_GenHeap.New);
+    GCNode *s = NEXT_NODE(R_GenHeap.New);
     while (s != R_GenHeap.New)
     {
-        RObject *next = NEXT_NODE(s);
-        if (s->m_data)
-        {
-            MemoryBank::deallocate(s->m_data, s->m_databytes);
-        }
-        UNSNAP_NODE(s);
-        R_GenHeap.AllocCount--;
-        MemoryBank::deallocate(s, sizeof(RObject));
+        GCNode *next = NEXT_NODE(s);
+        s->destroy();
         s = next;
     }
 }
@@ -985,7 +945,7 @@ void AdjustHeapSize(R_size_t size_needed)
 #define AGE_NODE(s, g)                                                               \
     do                                                                               \
     {                                                                                \
-        RObject *an__n__ = (s);                                                      \
+        GCNode *an__n__ = (s);                                                      \
         int an__g__ = (g);                                                           \
         if (an__n__ && NODE_GEN_IS_YOUNGER(an__n__, an__g__))                        \
         {                                                                            \
@@ -1000,9 +960,9 @@ void AdjustHeapSize(R_size_t size_needed)
         }                                                                            \
     } while (false)
 
-void AgeNodeAndChildren(RObject *s, int gen)
+void AgeNodeAndChildren(GCNode *s, int gen)
 {
-    RObject *forwarded_nodes = nullptr;
+    GCNode *forwarded_nodes = nullptr;
     AGE_NODE(s, gen);
     while (forwarded_nodes) {
 	s = forwarded_nodes;
@@ -1015,7 +975,7 @@ void AgeNodeAndChildren(RObject *s, int gen)
     }
 }
 
-void old_to_new(SEXP x, SEXP y)
+void old_to_new(GCNode *x, GCNode *y)
 {
 #ifdef EXPEL_OLD_TO_NEW
     AgeNodeAndChildren(y, NODE_GENERATION(x));
@@ -1055,7 +1015,7 @@ void FIX_BINDING_REFCNT(SEXP x, SEXP old, SEXP new_) {
 }
 #endif
 
-    inline void CHECK_OLD_TO_NEW(SEXP x, SEXP y)
+    inline void CHECK_OLD_TO_NEW(GCNode *x, GCNode *y)
     {
         if (y && NODE_IS_OLDER(CHK(x), CHK(y)))
             old_to_new(x, y);
@@ -1406,8 +1366,8 @@ HIDDEN SEXP do_regFinaliz(SEXP call, SEXP op, SEXP args, SEXP rho)
 static int RunGenCollect(R_size_t size_needed)
 {
     int gens_collected;
-    RObject *s;
-    RObject *forwarded_nodes;
+    GCNode *s;
+    GCNode *forwarded_nodes;
 
     bad_sexp_type_seen = NILSXP;
 
@@ -1439,7 +1399,7 @@ static int RunGenCollect(R_size_t size_needed)
             s = NEXT_NODE(R_GenHeap.OldToNew[gen]);
             while (s != R_GenHeap.OldToNew[gen])
             {
-                RObject *next = NEXT_NODE(s);
+                GCNode *next = NEXT_NODE(s);
                 DO_CHILDREN(s, AgeNodeAndChildren, gen);
                 UNSNAP_NODE(s);
                 if (NODE_GENERATION(s) != gen)
@@ -1460,7 +1420,7 @@ static int RunGenCollect(R_size_t size_needed)
             s = NEXT_NODE(R_GenHeap.Old[gen]);
             while (s != R_GenHeap.Old[gen])
             {
-                RObject *next = NEXT_NODE(s);
+                GCNode *next = NEXT_NODE(s);
                 if (gen < NUM_OLD_GENERATIONS - 1)
                     SET_NODE_GENERATION(s, gen + 1);
                 UNMARK_NODE(s);
@@ -1616,16 +1576,16 @@ static int RunGenCollect(R_size_t size_needed)
 	    while (s != R_NilValue) {
 		if (CXHEAD(s) && !NODE_IS_MARKED(CXHEAD(s))) { /* remove unused CHARSXP and cons cell */
 		    if (t == R_NilValue) /* head of list */
-			VECTOR_ELT(R_StringHash, i) = CXTAIL(s);
+			VECTOR_ELT(R_StringHash, i) = CXTAIL(static_cast<RObject*>(s));
 		    else
-			SET_CXTAIL(t, CXTAIL(s));
-		    s = CXTAIL(s);
+			SET_CXTAIL(t, CXTAIL(static_cast<RObject*>(s)));
+		    s = CXTAIL(static_cast<RObject*>(s));
 		    continue;
 		}
 		FORWARD_NODE(s);
 		FORWARD_NODE(CXHEAD(s));
-		t = s;
-		s = CXTAIL(s);
+		t = static_cast<RObject*>(s);
+		s = CXTAIL(static_cast<RObject*>(s));
 	    }
 	    if(VECTOR_ELT(R_StringHash, i) != R_NilValue) nc++;
 	}
@@ -1637,7 +1597,7 @@ static int RunGenCollect(R_size_t size_needed)
 #ifdef PROTECTCHECK
 	s = NEXT_NODE(R_GenHeap.New);
 	while (s != R_GenHeap.New) {
-	    RObject *next = NEXT_NODE(s);
+	    GCNode *next = NEXT_NODE(s);
 	    if (TYPEOF(s) != NEWSXP) {
 		if (TYPEOF(s) != FREESXP) {
 		    /**** could also leave this alone and restore the old
@@ -1662,9 +1622,6 @@ static int RunGenCollect(R_size_t size_needed)
     ReleaseNodes();
 
     DEBUG_CHECK_NODE_COUNTS("after releasing nodes");
-
-    /* reset Free pointers */
-        R_GenHeap.Free = NEXT_NODE(R_GenHeap.New);
 
     /* update heap statistics */
     if (num_old_gens_to_collect < NUM_OLD_GENERATIONS) {
@@ -1892,48 +1849,20 @@ HIDDEN void R::InitMemory()
     R_VSize = (R_VSize + 1)/vsfac;
     if (R_MaxVSize < R_SIZE_T_MAX) R_MaxVSize = (R_MaxVSize + 1)/vsfac;
 
-    UNMARK_NODE(&UnmarkedNodeTemplate);
-
       for (gen = 0; gen < NUM_OLD_GENERATIONS; gen++) {
-	R_GenHeap.Old[gen] = &R_GenHeap.OldPeg[gen];
-	SET_PREV_NODE(R_GenHeap.Old[gen], R_GenHeap.Old[gen]);
-	SET_NEXT_NODE(R_GenHeap.Old[gen], R_GenHeap.Old[gen]);
+	R_GenHeap.Old[gen] = new GCNode(0);
 
 #ifndef EXPEL_OLD_TO_NEW
-	R_GenHeap.OldToNew[gen] = &R_GenHeap.OldToNewPeg[gen];
-	SET_PREV_NODE(R_GenHeap.OldToNew[gen], R_GenHeap.OldToNew[gen]);
-	SET_NEXT_NODE(R_GenHeap.OldToNew[gen], R_GenHeap.OldToNew[gen]);
+	R_GenHeap.OldToNew[gen] = new GCNode(0);
 #endif
 
 	R_GenHeap.OldCount[gen] = 0;
       }
-      R_GenHeap.New = &R_GenHeap.NewPeg;
-      SET_PREV_NODE(R_GenHeap.New, R_GenHeap.New);
-      SET_NEXT_NODE(R_GenHeap.New, R_GenHeap.New);
-
-	R_GenHeap.Free = NEXT_NODE(R_GenHeap.New);
+      R_GenHeap.New = new GCNode(0);
 
     orig_R_NSize = R_NSize;
     orig_R_VSize = R_VSize;
 
-    /* R_NilValue */
-    /* THIS MUST BE THE FIRST CONS CELL ALLOCATED */
-    /* OR ARMAGEDDON HAPPENS. */
-    /* Field assignments for R_NilValue must not go through write barrier
-       since the write barrier prevents assignments to R_NilValue's fields.
-       because of checks for nil */
-#if 0
-    GET_FREE_NODE(R_NilValue);
-    RObject::copy_sxpinfo(R_NilValue, UnmarkedNodeTemplate);
-    INIT_REFCNT(R_NilValue);
-    SET_REFCNT(R_NilValue, REFCNTMAX);
-    SET_TYPEOF(R_NilValue, NILSXP);
-    RObject::set_car0(R_NilValue, R_NilValue);
-    RObject::set_cdr(R_NilValue, R_NilValue);
-    RObject::set_tag(R_NilValue, R_NilValue);
-    RObject::set_attrib(R_NilValue, R_NilValue);
-    MARK_NOT_MUTABLE(R_NilValue);
-#endif
     R_BCNodeStackBase = (R_bcstack_t *) malloc(R_BCNODESTACKSIZE * sizeof(R_bcstack_t));
     if (R_BCNodeStackBase == nullptr)
         R_Suicide(_("couldn't allocate node stack"));
@@ -2103,35 +2032,10 @@ SEXP Rf_allocSExp(SEXPTYPE t)
         R_gc_internal();
     }
 
-    GET_FREE_NODE(s);
-    RObject::copy_sxpinfo(s, UnmarkedNodeTemplate);
-    s->m_data = nullptr;
-    s->m_databytes = 0;
+    s = new RObject(t);
     INIT_REFCNT(s);
-    SET_TYPEOF(s, t);
     RObject::set_car0(s, R_NilValue);
     RObject::set_cdr(s, R_NilValue);
-    RObject::set_tag(s, R_NilValue);
-    RObject::set_attrib(s, R_NilValue);
-    return s;
-}
-
-static SEXP allocSExpNonCons(SEXPTYPE t)
-{
-    SEXP s = nullptr;
-    if (FORCE_GC || NO_FREE_NODES())
-    {
-        R_gc_internal();
-    }
-
-    GET_FREE_NODE(s);
-    RObject::copy_sxpinfo(s, UnmarkedNodeTemplate);
-    s->m_data = nullptr;
-    s->m_databytes = 0;
-    INIT_REFCNT(s);
-    SET_TYPEOF(s, t);
-    RObject::set_tag(s, R_NilValue);
-    RObject::set_attrib(s, R_NilValue);
     return s;
 }
 
@@ -2148,29 +2052,19 @@ SEXP Rf_cons(SEXP car, SEXP cdr)
         UNPROTECT(2);
     }
 
-    if (NEED_NEW_PAGE())
-    {
         PROTECT(car);
         PROTECT(cdr);
-        GET_FREE_NODE(s);
+        s = new RObject(LISTSXP);
         UNPROTECT(2);
-    }
-    else
-        QUICK_GET_FREE_NODE(s);
 
-    RObject::copy_sxpinfo(s, UnmarkedNodeTemplate);
-    s->m_data = nullptr;
-    s->m_databytes = 0;
+
     INIT_REFCNT(s);
-    SET_TYPEOF(s, LISTSXP);
     RObject::set_car0(s, CHK(car));
     if (car)
         INCREMENT_REFCNT(car);
     RObject::set_cdr(s, CHK(cdr));
     if (cdr)
         INCREMENT_REFCNT(cdr);
-    RObject::set_tag(s, R_NilValue);
-    RObject::set_attrib(s, R_NilValue);
     return s;
 }
 
@@ -2185,26 +2079,16 @@ HIDDEN SEXP CONS_NR(SEXP car, SEXP cdr)
         UNPROTECT(2);
     }
 
-    if (NEED_NEW_PAGE())
-    {
         PROTECT(car);
         PROTECT(cdr);
-        GET_FREE_NODE(s);
+        s = new RObject(LISTSXP);
         UNPROTECT(2);
-    }
-    else
-        QUICK_GET_FREE_NODE(s);
 
-    RObject::copy_sxpinfo(s, UnmarkedNodeTemplate);
-    s->m_data = nullptr;
-    s->m_databytes = 0;
+
     INIT_REFCNT(s);
     DISABLE_REFCNT(s);
-    SET_TYPEOF(s, LISTSXP);
     RObject::set_car0(s, CHK(car));
     RObject::set_cdr(s, CHK(cdr));
-    RObject::set_tag(s, R_NilValue);
-    RObject::set_attrib(s, R_NilValue);
     return s;
 }
 
@@ -2238,29 +2122,18 @@ SEXP R::NewEnvironment(SEXP namelist, SEXP valuelist, SEXP rho)
         UNPROTECT(3);
     }
 
-    if (NEED_NEW_PAGE())
-    {
         PROTECT(namelist);
         PROTECT(valuelist);
         PROTECT(rho);
-        GET_FREE_NODE(newrho);
+        newrho = new RObject(ENVSXP);
         UNPROTECT(3);
-    }
-    else
-        QUICK_GET_FREE_NODE(newrho);
 
-    RObject::copy_sxpinfo(newrho, UnmarkedNodeTemplate);
-    newrho->m_data = nullptr;
-    newrho->m_databytes = 0;
     INIT_REFCNT(newrho);
-    SET_TYPEOF(newrho, ENVSXP);
     RObject::set_frame(newrho, valuelist);
     INCREMENT_REFCNT(valuelist);
     RObject::set_enclos(newrho, CHK(rho));
     if (rho)
         INCREMENT_REFCNT(rho);
-    RObject::set_hashtab(newrho, R_NilValue);
-    RObject::set_attrib(newrho, R_NilValue);
 
     v = CHK(valuelist);
     n = CHK(namelist);
@@ -2286,32 +2159,22 @@ HIDDEN SEXP R::mkPROMISE(SEXP expr, SEXP rho)
         UNPROTECT(2);
     }
 
-    if (NEED_NEW_PAGE())
-    {
         PROTECT(expr);
         PROTECT(rho);
-        GET_FREE_NODE(s);
+        s = new RObject(PROMSXP);
         UNPROTECT(2);
-    }
-    else
-        QUICK_GET_FREE_NODE(s);
 
     /* precaution to ensure code does not get modified via
        substitute() and the like */
     ENSURE_NAMEDMAX(expr);
 
-    RObject::copy_sxpinfo(s, UnmarkedNodeTemplate);
-    s->m_data = nullptr;
-    s->m_databytes = 0;
     INIT_REFCNT(s);
-    SET_TYPEOF(s, PROMSXP);
     RObject::set_prcode(s, CHK(expr));
     INCREMENT_REFCNT(expr);
     RObject::set_prenv(s, CHK(rho));
     INCREMENT_REFCNT(rho);
     RObject::set_prvalue(s, R_UnboundValue);
     SET_PRSEEN(s, 0);
-    RObject::set_attrib(s, R_NilValue);
     return s;
 }
 
@@ -2452,12 +2315,8 @@ SEXP Rf_allocVector3(SEXPTYPE type, R_xlen_t length = 1, R_allocator_t *allocato
     }
 
     size_t bytes = size * sizeof(VECREC);
-    GET_FREE_NODE(s);
-    RObject::copy_sxpinfo(s, UnmarkedNodeTemplate);
-    RObject::set_attrib(s, R_NilValue);
-	SET_TYPEOF(s, type);
+    s = new RObject(type);
     s->m_databytes = bytes;
-    s->m_data = nullptr;
 	// We don't want the garbage collector trying to mark this
 	// node's children yet:
     R::RObject::set_stdvec_length(s, 0);
@@ -2563,7 +2422,7 @@ SEXP Rf_allocList(const int n)
 SEXP Rf_allocS4Object(void)
 {
     SEXP s;
-    GC_PROT(s = allocSExpNonCons(S4SXP));
+    GC_PROT(s = new RObject(S4SXP));
     SET_S4_OBJECT(s);
     return s;
 }
@@ -2873,12 +2732,14 @@ HIDDEN SEXP do_memoryprofile(SEXP call, SEXP op, SEXP args, SEXP env)
       /* run a full GC to make sure that all stuff in use is in Old space */
       R_gc();
       for (gen = 0; gen < NUM_OLD_GENERATIONS; gen++) {
-	  for (RObject *s = NEXT_NODE(R_GenHeap.Old[gen]);
+	  for (GCNode *s = NEXT_NODE(R_GenHeap.Old[gen]);
 	       s != R_GenHeap.Old[gen];
 	       s = NEXT_NODE(s)) {
-	      tmp = TYPEOF(s);
+               if (RObject* ob = SEXP_downcast<RObject*>(s, false)) {
+	      tmp = TYPEOF(ob);
 	      if(tmp > LGLSXP) tmp -= 2;
 	      INTEGER(ans)[tmp]++;
+               }
 	  }
       }
     } END_SUSPEND_INTERRUPTS;
@@ -3385,7 +3246,7 @@ DL_FUNC R_ExternalPtrAddrFn(SEXP s)
 /* General Cons Cell Attributes */
 SEXP (ATTRIB)(SEXP x) { return CHK(R::RObject::attrib(CHK(x))); }
 int (OBJECT)(SEXP x) { return R::RObject::object(CHK(x)); }
-int (MARK)(SEXP x) { return R::RObject::mark(CHK(x)); }
+int (MARK)(RObject *x) { return R::GCNode::mark(static_cast<GCNode*>(CHK(x))); }
 SEXPTYPE (TYPEOF)(SEXP x) { return R::RObject::typeof_(CHK(x)); }
 int (NAMED)(SEXP x) { return R::RObject::named(CHK(x)); }
 int (RTRACE)(SEXP x) { return R::RObject::rtrace(CHK(x)); }

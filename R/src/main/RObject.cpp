@@ -53,60 +53,10 @@ namespace R
         const auto &SETALTREPptr = SETALTREP;
     } // namespace ForceNonInline
 
-    /* General Cons Cell Attributes */
-    bool RObject::gcgen(RObject *x) { return x && x->m_gcgen; }
-
-    void RObject::set_gcgen(RObject *x, bool v)
+    RObject::~RObject()
     {
-        if (!x)
-            return;
-        x->m_gcgen = v;
-    }
-    unsigned int RObject::gccls(RObject *x) { return x ? x->m_gcclass : 0; }
-
-    void RObject::set_gccls(RObject *x, unsigned int v)
-    {
-        if (!x)
-            return;
-        x->m_gcclass = v;
-    }
-
-    RObject *RObject::next_node(RObject *x) { return x ? x->gengc_next_node : nullptr; }
-
-    RObject *RObject::prev_node(RObject *x) { return x ? x->gengc_prev_node : nullptr; }
-
-    void RObject::set_next_node(RObject *x, RObject *t)
-    {
-        if (!x)
-            return;
-        x->gengc_next_node = t;
-    }
-
-    void RObject::set_prev_node(RObject *x, RObject *t)
-    {
-        if (!x)
-            return;
-        x->gengc_prev_node = t;
-    }
-
-    void RObject::copy_sxpinfo(RObject *x, RObject &y)
-    {
-        if (!x)
-            return;
-
-        x->m_type = y.m_type;
-        x->m_scalar = y.m_scalar;
-        x->m_has_class = y.m_has_class;
-        x->m_alt = y.m_alt;
-        x->m_gpbits = y.m_gpbits;
-        x->m_marked = y.m_marked;
-        x->m_debug = y.m_debug;
-        x->m_trace = y.m_trace;
-        x->m_spare = y.m_spare;
-        x->m_gcgen = y.m_gcgen;
-        x->m_gcclass = y.m_gcclass;
-        x->m_named = y.m_named;
-        x->m_extra = y.m_extra;
+        if (m_data)
+            MemoryBank::deallocate(m_data, m_databytes);
     }
 
     void RObject::set_ready_to_finalize(RObject *x)
@@ -177,15 +127,6 @@ namespace R
         if (!x)
             return;
         x->m_has_class = v;
-    }
-
-    bool RObject::mark(RObject *x) { return x && x->m_marked; }
-
-    void RObject::set_mark(RObject *x, int v)
-    {
-        if (!x)
-            return;
-        x->m_marked = v;
     }
 
     bool RObject::scalar(RObject *x) { return x && x->m_scalar; }

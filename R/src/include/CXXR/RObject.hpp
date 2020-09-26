@@ -28,9 +28,10 @@
 #define SWITCH_TO_REFCNT
 #define COMPUTE_REFCNT_VALUES
 #include <cstddef>
+#include <cstring>
 #include <CXXR/SEXPTYPE.hpp>
 #include <CXXR/RTypes.hpp>
-#include <CXXR/MemoryBank.hpp>
+#include <CXXR/GCNode.hpp>
 #include <R_ext/Error.h>
 #include <R_ext/Complex.h>
 
@@ -110,7 +111,7 @@ namespace R
 
     /* The standard node structure consists of a header followed by the
    node data. */
-    class RObject
+    class RObject : public GCNode 
     {
     private:
         SEXPTYPE m_type : FULL_TYPE_BITS;
@@ -118,18 +119,12 @@ namespace R
         bool m_has_class;
         bool m_alt;
         unsigned int m_gpbits : 16;
-        bool m_marked;
         bool m_debug;
         bool m_trace;             /* functions and memory tracing */
         bool m_spare;             /* used on closures and when REFCNT is defined */
-        bool m_gcgen;             /* old generation number */
-        unsigned int m_gcclass : 3; /* node class */
         unsigned int m_named : NAMED_BITS;
         unsigned int m_extra : 29 - NAMED_BITS; /* used for immediate bindings */
         RObject *m_attrib;
-
-        RObject *gengc_next_node;
-        RObject *gengc_prev_node;
 
         union
         {
@@ -144,23 +139,22 @@ namespace R
     public:
     void* m_data;
     size_t m_databytes;
-    // virtual ~RObject() {}
+
+	/**
+	 * @param stype Required type of the RObject.
+	 */
+	RObject(SEXPTYPE stype = ANYSXP) : m_type(stype) {}
+
+    /** Destructor
+	 *
+	 * @note The destructor is protected to ensure that RObjects
+	 * are allocated on the heap.  (See Meyers 'More Effective
+	 * C++' Item 27.) Derived classes should likewise declare
+	 * their constructors private or protected.
+	 */
+	virtual ~RObject();
+
         /* General Cons Cell Attributes */
-        static bool gcgen(RObject *v);
-        static void set_gcgen(RObject *v, bool x);
-        static unsigned int gccls(RObject *x);
-        static void set_gccls(RObject *x, unsigned int v);
-        static RObject *next_node(RObject *s);
-        static RObject *prev_node(RObject *s);
-        static void set_next_node(RObject *s, RObject *t);
-        static void set_prev_node(RObject *s, RObject *t);
-        static void copy_sxpinfo(RObject *x, RObject &y);
-        // Make t the successor of s:
-        static inline void link(RObject *s, RObject *t)
-        {
-            s->gengc_next_node = t;
-            t->gengc_prev_node = s;
-        }
         static constexpr int READY_TO_FINALIZE_MASK = 1;
         static constexpr int FINALIZE_ON_EXIT_MASK = 2;
         static constexpr int WEAKREF_SIZE = 4;
@@ -179,8 +173,6 @@ namespace R
         static unsigned int levels(RObject *x);
         static bool object(RObject *x);
         static void set_object(RObject *x, bool v);
-        static bool mark(RObject *x);
-        static void set_mark(RObject *x, int v);
         /* CHARSXP charset bits */
         enum CharsetBit
         {
@@ -356,6 +348,15 @@ namespace R
             if (R::RObject::altrep(x))
                 Rf_error("can't set ALTREP truelength");
             R::RObject::set_stdvec_truelength(x, v);
+        }
+
+    /** @brief The name by which this type is known in R.
+	 *
+	 * @return The name by which this type is known in R.
+	 */
+        static const char *staticTypeName()
+        {
+            return "RObject";
         }
     };
 
