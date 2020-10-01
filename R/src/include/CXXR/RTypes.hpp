@@ -87,4 +87,9 @@ typedef int R_xlen_t;
 #endif
 #endif
 
+#ifdef __cplusplus
+using R_size_t = size_t;
+constexpr R_size_t R_SIZE_T_MAX = std::numeric_limits<R_size_t>::max();
+#endif
+
 #endif /* RTYPES_HPP */

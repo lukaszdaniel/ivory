@@ -194,13 +194,7 @@ extern void R_WaitEvent(void);
 #include <limits.h>
 #endif
 
-#if defined HAVE_DECL_SIZE_MAX && HAVE_DECL_SIZE_MAX
-#include <limits>
-using R_size_t = size_t;
-constexpr R_size_t R_SIZE_T_MAX = std::numeric_limits<R_size_t>::max();
-#else
-#error SIZE_MAX is required for C99
-#endif
+#include <CXXR/RTypes.hpp>
 
 constexpr double Mega = 1048576.; /* 1 Mega Byte := 2^20 (= 1048576) Bytes */
 constexpr double Giga = 1073741824.; /* 1 Giga Byte := 2^30 Bytes */

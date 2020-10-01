@@ -22,6 +22,11 @@
  *  https://www.R-project.org/Licenses/
  */
 
+/** @file RObject.h
+ *
+ * @brief Class rho::RObject and associated C interface functions.
+ */
+
 #ifndef ROBJECT_HPP
 #define ROBJECT_HPP
 
