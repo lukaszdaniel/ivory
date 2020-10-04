@@ -2,6 +2,8 @@
  *  R : A Computer Language for Statistical Data Analysis
  *  Copyright (C) 1999--2020  The R Core Team.
  *  Copyright (C) 1995, 1996  Robert Gentleman and Ross Ihaka
+ *  Copyright (C) 2007-2014  Andrew R. Runnalls.
+ *  Copyright (C) 2014 and onwards the Rho Project Authors.
  *
  *  This header file is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU Lesser General Public License as published by
@@ -20,6 +22,10 @@
  *  You should have received a copy of the GNU Lesser General Public License
  *  along with this program; if not, a copy is available at
  *  https://www.R-project.org/Licenses/
+ */
+
+/** @file BuiltInFunction.hpp
+ * @brief Class R::BuiltInFunction and associated C interface.
  */
 
 #ifndef BUILTINFUNCTION_HPP

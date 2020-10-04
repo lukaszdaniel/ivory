@@ -2,7 +2,8 @@
  *  R : A Computer Language for Statistical Data Analysis
  *  Copyright (C) 1995, 1996  Robert Gentleman and Ross Ihaka
  *  Copyright (C) 1999-2006   The R Development Core Team.
- *  Andrew Runnalls (C) 2007
+ *  Copyright (C) 2008-2014  Andrew R. Runnalls.
+ *  Copyright (C) 2014 and onwards the Rho Project Authors.
  *
  *  This program is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU Lesser General Public License as published by
@@ -20,12 +21,16 @@
  */
 
 /** @file GCNode.hpp
- * Class GCNode.
+ * @brief Class R::GCNode.
  */
 
 #ifndef GCNODE_HPP
 #define GCNODE_HPP
 
+#include <assert.h>
+#include <functional>
+#include <sstream>
+#include <vector>
 #include <CXXR/MemoryBank.hpp>
 
 /* Comment formerly in memory.c:
