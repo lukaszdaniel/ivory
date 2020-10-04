@@ -29,6 +29,43 @@
 
 namespace R
 {
+    const unsigned int GCNode::s_num_old_generations;
+    GCNode *GCNode::s_oldpeg[];
+    unsigned int GCNode::s_oldcount[];
+#ifndef EXPEL_OLD_TO_NEW
+    GCNode *GCNode::s_old_to_new_peg[];
+#endif
+    GCNode *GCNode::s_newpeg;
+    size_t GCNode::s_num_nodes;
+
+    GCNode::GCNode()
+    {
+        link(s_newpeg->m_prev, this);
+        link(this, s_newpeg);
+        ++s_num_nodes;
+    }
+
+    GCNode::~GCNode()
+    {
+        --s_num_nodes;
+        link(m_prev, m_next);
+    }
+
+    void GCNode::initialize()
+    {
+        if (!s_newpeg)
+        {
+            s_newpeg = new GCNode(0);
+            for (unsigned int gen = 0; gen < s_num_old_generations; ++gen)
+            {
+                s_oldpeg[gen] = new GCNode(0);
+                s_oldcount[gen] = 0;
+#ifndef EXPEL_OLD_TO_NEW
+                s_old_to_new_peg[gen] = new GCNode(0);
+#endif
+            }
+        }
+    }
     /* General Cons Cell Attributes */
     bool GCNode::gcgen(GCNode *x) { return x && x->m_gcgen; }
 
@@ -47,25 +84,25 @@ namespace R
         x->m_gcclass = v;
     }
 
-    GCNode *GCNode::next_node(GCNode *x) { return x ? x->gengc_next_node : nullptr; }
+    GCNode *GCNode::next_node(GCNode *x) { return x ? x->m_next : nullptr; }
 
-    GCNode *GCNode::prev_node(GCNode *x) { return x ? x->gengc_prev_node : nullptr; }
+    GCNode *GCNode::prev_node(GCNode *x) { return x ? x->m_prev : nullptr; }
 
     void GCNode::set_next_node(GCNode *x, GCNode *t)
     {
         if (!x)
             return;
-        x->gengc_next_node = t;
+        x->m_next = t;
     }
 
     void GCNode::set_prev_node(GCNode *x, GCNode *t)
     {
         if (!x)
             return;
-        x->gengc_prev_node = t;
+        x->m_prev = t;
     }
 
-    bool GCNode::mark(GCNode *x) { return x && x->m_marked; }
+    bool GCNode::is_marked(GCNode *x) { return x && x->m_marked; }
 
     void GCNode::set_mark(GCNode *x, bool v)
     {

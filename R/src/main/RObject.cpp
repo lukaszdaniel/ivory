@@ -25,6 +25,8 @@
  * Class RObject and associated C interface functions.
  */
 
+// Needed while visitChildren(visitor* v) is unimplemented.
+#include <iostream>
 #include <CXXR/RObject.hpp>
 #include <R_ext/Boolean.h>
 #include <Rinternals.h>
@@ -61,6 +63,49 @@ namespace R
         if (m_data)
             MemoryBank::deallocate(m_data, m_databytes);
     }
+
+
+void RObject::visitChildren(const_visitor* v) const
+{
+    if (m_attrib) m_attrib->conductVisitor(v);
+    switch (sexptype()) {
+    case STRSXP:
+    case EXPRSXP:
+    case VECSXP:
+	for (int i = 0; i < length(); i++)
+	    reinterpret_cast<SEXP*>(m_data)[i]->conductVisitor(v);
+	break;
+    case ENVSXP:
+	if (frame()) frame()->conductVisitor(v);
+	if (enclosingEnvironment())
+	    enclosingEnvironment()->conductVisitor(v);
+	if (hashTable()) hashTable()->conductVisitor(v);
+	break;
+    case CLOSXP:
+    case PROMSXP:
+    case LISTSXP:
+    case LANGSXP:
+    case DOTSXP:
+    case SYMSXP:
+    case BCODESXP:
+	if (tag()) tag()->conductVisitor(v);
+	if (car()) car()->conductVisitor(v);
+	if (cdr()) cdr()->conductVisitor(v);
+	break;
+    case EXTPTRSXP:
+	if (cdr()) cdr()->conductVisitor(v);
+	if (tag()) tag()->conductVisitor(v);
+	break;
+    default:
+	break;
+    }
+}
+
+void RObject::visitChildren(visitor* v)
+{
+    std::cerr << "RObject::visitChildren(visitor* v) not implemented yet.\n";
+    abort();
+}
 
     void RObject::set_ready_to_finalize(RObject *x)
     {

@@ -22,9 +22,9 @@
  *  https://www.R-project.org/Licenses/
  */
 
-/** @file RObject.h
+/** @file RObject.hpp
  *
- * @brief Class rho::RObject and associated C interface functions.
+ * Class RObject.
  */
 
 #ifndef ROBJECT_HPP
@@ -150,7 +150,63 @@ namespace R
 	 */
 	RObject(SEXPTYPE stype = ANYSXP) : m_type(stype) {}
 
-    /** Destructor
+	/**
+	 * @return Pointer to the attributes of this object.
+	 */
+    const RObject *attributes() const { return m_attrib; }
+
+	// Virtual methods of GCNode:
+	void visitChildren(const_visitor* v) const;
+	void visitChildren(visitor* v);
+
+    /**
+	 * @return pointer to first element (car) of this list.
+	 */
+    const RObject *car() const { return u.listsxp.m_carval; }
+
+    /**
+	 * @return pointer to tail (cdr) of this list.
+	 */
+    const RObject *cdr() const { return u.listsxp.m_cdrval; }
+
+    /**
+	 * @return pointer to enclosing environment.
+	 */
+    const RObject *enclosingEnvironment() const { return u.envsxp.m_enclos; }
+
+    /**
+	 * @return pointer to frame of this environment.
+	 */
+    const RObject *frame() const { return u.envsxp.m_frame; }
+
+    /**
+	 * @return pointer to hash table of this environment.
+	 */
+    const RObject *hashTable() const { return u.envsxp.m_hashtab; }
+
+    /**
+	 * @return length of this vector.
+	 */
+    R_len_t length() const { return u.vecsxp.m_length; }
+
+    /**
+	 * @return SEXPTYPE of this object.
+	 */
+    SEXPTYPE sexptype() const { return m_type; }
+
+    /**
+	 * @return altrep status of this object.
+	 */
+    bool altrep() const { return m_alt; }
+
+    /**
+	 * @return pointer to tag of this list.
+	 */
+    const RObject *tag() const { return u.listsxp.m_tagval; }
+
+    // To be protected in future:
+
+	/** Destructor
 	 *
 	 * @note The destructor is protected to ensure that RObjects
 	 * are allocated on the heap.  (See Meyers 'More Effective

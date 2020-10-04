@@ -20,7 +20,7 @@
  */
 
 /** @file GCNode.hpp
- * Class GCNode and associated C-callable routines.
+ * Class GCNode.
  */
 
 #ifndef GCNODE_HPP
@@ -28,18 +28,97 @@
 
 #include <CXXR/MemoryBank.hpp>
 
+/* Comment formerly in memory.c:
+
+   The Heap Structure.  Nodes for each generation are arranged in
+   circular doubly-linked lists.  The double linking allows nodes to
+   be removed in constant time; this is used by the collector to move
+   reachable nodes out of free space and into the appropriate
+   generation.  The circularity eliminates the need for end checks.
+   In addition, each link is anchored at an artificial node called a
+   peg, which simplifies pointer maintenance.  The circular
+   doubly-linked arrangement is taken from Baker's in-place
+   incremental collector design; see
+   ftp://ftp.netcom.com/pub/hb/hbaker/NoMotionGC.html or the Jones and
+   Lins GC book.  The linked lists are implemented by adding two
+   pointer fields to the SEXPREC structure, which increases its size
+   from 5 to 7 words. Other approaches are possible but don't seem
+   worth pursuing for R.
+
+   There are two options for dealing with old-to-new pointers.  The
+   first option is to make sure they never occur by transferring all
+   referenced younger objects to the generation of the referrer when a
+   reference to a newer object is assigned to an older one.  This is
+   enabled by defining EXPEL_OLD_TO_NEW.  The second alternative is to
+   keep track of all nodes that may contain references to newer nodes
+   and to "age" the nodes they refer to at the beginning of each
+   collection.  This is the default.  The first option is simpler in
+   some ways, but will create more floating garbage and add a bit to
+   the execution time, though the difference is probably marginal on
+   both counts.*/
+
 namespace R
 {
+    /** Abstract base class for all objects managed by the garbage collector.
+     * 
+     * @note Because this base class is used purely for housekeeping
+     * by the garbage collector, and does not contribute to the
+     * 'meaning' of an object of a derived class, all of its data
+     * members are mutable.
+     */
     class GCNode
     {
     private:
-        GCNode *gengc_prev_node;
-        GCNode *gengc_next_node;
+        GCNode *m_prev;
+        GCNode *m_next;
         unsigned int m_gcgen : 2;
         unsigned int m_gcclass : 3; /* node class */
         bool m_marked : 1;
 
     public:
+        /** Abstract base class for the Visitor design pattern.
+        *
+        * See Gamma et al 'Design Patterns' Ch. 5 for a description
+        * of the Visitor design pattern.
+        *
+        * The const in the name refers to the fact that the visitor
+        * does not modify the node it visits (or modifies only
+        * mutable fields).  There is currently no provision for the
+        * visitor object itself to be be considered const during a
+        * visit.
+        */
+        struct const_visitor
+        {
+            virtual ~const_visitor() {}
+
+            /** Perform visit
+            *
+            * @param node Node to be visited.
+            *
+            * @return true if the visitor wishes to visit the
+            * children of this node, otherwise false.
+            */
+            virtual bool operator()(const GCNode *node) = 0;
+        };
+
+        /** Abstract base class for the Visitor design pattern.
+        *
+        * See Gamma et al 'Design Patterns' Ch. 5 for a description
+        * of the Visitor design pattern.
+        */
+        struct visitor
+        {
+            virtual ~visitor() {}
+
+            /** Perform visit
+            *
+            * @param node Node to be visited.
+            *
+            * @return true if the visitor wishes to visit the
+            * children of this node, otherwise false.
+            */
+            virtual bool operator()(GCNode *node) = 0;
+        };
         GCNode();
 
      /** Allocate memory.
@@ -64,7 +143,37 @@ namespace R
             MemoryBank::deallocate(p, bytes);
         }
 
-     /** Delete a GCNode
+        /** Present this node to a visitor and, if the visitor so
+        * wishes, conduct the visitor to the children of this node.
+        *
+        * @param v Pointer to the visitor object.
+        *
+        * @return the result of applying the visitor to \e this node.
+        */
+        bool conductVisitor(const_visitor *v) const
+        {
+            if (!(*v)(this))
+                return false;
+            visitChildren(v);
+            return true;
+        }
+
+        /** Present this node to a visitor and, if the visitor so
+        * wishes, conduct the visitor to the children of this node.
+        *
+        * @param v Pointer to the visitor object.
+        *
+        * @return the result of applying the visitor to \e this node.
+        */
+        bool conductVisitor(visitor *v)
+        {
+            if (!(*v)(this))
+                return false;
+            visitChildren(v);
+            return true;
+        }
+
+	/** Delete a GCNode
 	 *
 	 * @note Because the class destructors are not public, objects
 	 * of classes derived from GCNode must be deleted by calling
@@ -72,9 +181,40 @@ namespace R
 	 */
         void destroy() const { delete this; }
 
+        /** Initiate a garbage collection.
+        *
+        * @param num_old_gens The number of old generations to collect.
+        */
+        static void gc(unsigned int num_old_gens);
+
+        /** Initialize static members.
+        *
+        * This method must be called before any GCNodes are created.
+        * If called more than once in a single program run, the
+        * second and subsequent calls do nothing.
+        */
+        static void initialize();
+
+        /**
+        * @return the number of GCNodes currently in existence.
+        */
+        static size_t numNodes() { return s_num_nodes; }
+
+        /** Conduct a visitor to the children of this node.
+        *
+        * @param Pointer to the visitor object.
+        */
+        virtual void visitChildren(const_visitor *v) const {}
+
+        /** Conduct a visitor to the children of this node.
+        *
+        * @param Pointer to the visitor object.
+        */
+        virtual void visitChildren(visitor *v) {}
+
         // To be protected in future:
 
-     /** Destructor
+	/** Destructor
 	 *
 	 * @note The destructor is protected to ensure that GCNodes
 	 * are allocated on the heap.  (See Meyers 'More Effective
@@ -83,6 +223,16 @@ namespace R
 	 */
         virtual ~GCNode();
 
+        // To be private in future:
+
+        static const unsigned int s_num_old_generations = 2;
+        static GCNode *s_oldpeg[s_num_old_generations];
+        static unsigned int s_oldcount[s_num_old_generations];
+#ifndef EXPEL_OLD_TO_NEW
+        static GCNode *s_old_to_new_peg[s_num_old_generations];
+#endif
+        static GCNode *s_newpeg;
+        static size_t s_num_nodes;
         static bool gcgen(GCNode *v);
         static void set_gcgen(GCNode *v, bool x);
         static unsigned int gccls(GCNode *x);
@@ -91,22 +241,76 @@ namespace R
         static GCNode *prev_node(GCNode *s);
         static void set_next_node(GCNode *s, GCNode *t);
         static void set_prev_node(GCNode *s, GCNode *t);
-        static bool mark(GCNode *x);
+        static bool is_marked(GCNode *x);
         static void set_mark(GCNode *x, bool v);
+
         // Special constructor for pegs.  The parameter is simply to
         // give this constructor a distinct signature. Note that the
         // node count isn't altered.
         explicit GCNode(int /*ignored*/)
-            : gengc_prev_node(this), gengc_next_node(this)
-        {
-        }
+            : m_prev(this), m_next(this)
+        {}
+
+        bool isMarked() const { return m_marked; }
 
         // Make t the successor of s:
         static void link(GCNode *s, GCNode *t)
         {
-            s->gengc_next_node = t;
-            t->gengc_prev_node = s;
+            s->m_next = t;
+            t->m_prev = s;
         }
+
+        void mark() { m_marked = true; }
+
+        GCNode *next() const { return m_next; }
+
+        GCNode *prev() const { return m_prev; }
+
+        /** Transfer a node so as to precede this node.
+	 * 
+	 * @param n Pointer to node to be moved, which may be in the
+	 * same (circularly linked) list as '*this', or in a different
+	 * list.  It is permissible for n to point to what is already
+	 * the predecessor of '*this', in which case the function
+	 * amounts to a no-op.  It is also permissible for n to point
+	 * to '*this' itself; beware however that in that case the
+	 * function will detach '*this' from its current list, and turn
+	 * it into a singleton list.
+	 */
+        void splice(GCNode *n)
+        {
+            // Doing things in this order is innocuous if n is already
+            // this node's predecessor:
+            link(n->prev(), n->next());
+            link(prev(), n);
+            link(n, this);
+        }
+
+        /** Transfer a sublist so as to precede this node.
+        *
+        * @param beg Pointer to the first node in the sublist to be
+        * moved.  The sublist may be a sublist of the same (circularly
+        * linked) list of which '*this' forms a part, or of another
+        * list.  Note however that in the former case, the sublist to
+        * be moved must not contain '*this'.
+        *
+        * @param end Pointer to the successor of the last node of the
+        * sublist to be moved.  It is permissible for it be identical
+        * to beg, or to point to '*this': in either case the function
+        * amounts to a no-op.
+        */
+        void splice(GCNode *beg, GCNode *end)
+        {
+            if (beg != end)
+            {
+                GCNode *last = end->prev();
+                link(beg->prev(), end);
+                link(prev(), beg);
+                link(last, this);
+            }
+        }
+
+        void unmark() { m_marked = false; }
     };
 } // namespace R
 
