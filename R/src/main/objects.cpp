@@ -615,7 +615,7 @@ static SEXP fixcall(SEXP call, SEXP args)
 		if( !found ) {
 			SETCDR(s, allocList(1));
 			SET_TAG(CDR(s), TAG(t));
-			SETCAR(CDR(s), duplicate(CAR(t)));
+			SETCAR(CDR(s), lazy_duplicate(CAR(t)));
 		}
 	}
     }
@@ -698,7 +698,7 @@ HIDDEN SEXP do_nextmethod(SEXP call, SEXP op, SEXP args, SEXP env)
     if (cptr == nullptr)
 	error(_("'NextMethod()' called from outside a function"));
 
-    PROTECT(newcall = duplicate(cptr->getCall()));
+    PROTECT(newcall = shallow_duplicate(cptr->getCall()));
 
     /* eg get("print.ts")(1) or do.call() */
     if (TYPEOF(CAR(cptr->getCall())) != SYMSXP)
@@ -1250,7 +1250,7 @@ static SEXP dispatchNonGeneric(SEXP name, SEXP env, SEXP fdef)
 	cptr = cptr->nextContext();
     }
 
-    PROTECT(e = duplicate(cptr->R_syscall(0)));
+    PROTECT(e = shallow_duplicate(cptr->R_syscall(0)));
     SETCAR(e, fun);
     /* evaluate a call the non-generic with the same arguments and from
        the same environment as the call to the generic version */

@@ -3016,7 +3016,7 @@ function(dir, force_suggests = TRUE, check_incoming = FALSE,
 
     ## Check RdMacros.
     RM <- setdiff(.get_requires_from_package_db(db, "RdMacros"),
-                  c(depends, imports, suggests))
+                  c(imports, depends))
     if(length(RM)) bad_depends$missing_rdmacros_depends <- RM
 
     ## (added in 4.0.0) Check for orphaned packages.
@@ -3068,6 +3068,8 @@ function(dir, force_suggests = TRUE, check_incoming = FALSE,
         if(length(strict)) {
             strict0 <- sort(intersect(strict, strict0))
             strict1 <- sort(setdiff(strict, strict0))
+            ## temporary workaround
+            strict1 <- setdiff(strict1, "bibtex")
             if(length(strict0)) bad_depends$orphaned <- strict0
             if(length(strict1)) bad_depends$orphaned1 <- strict1
         }
@@ -3120,7 +3122,7 @@ function(x, ...)
       },
       if(length(bad <- x$missing_rdmacros_depends)) {
           c(.pretty_format2(ngettext(length(bad), "RdMacros package not required:", "RdMacros packages not required:", domain = "R-tools"), sQuote(bad)),
-            strwrap("RdMacros packages must be contained in the DESCRIPTION Imports/Suggests/Depends entries."),
+            strwrap("RdMacros packages must be contained in the DESCRIPTION Imports/Depends entries."),
             "")
       },
       if(length(bad <- x$missing_namespace_depends)) {
@@ -8009,7 +8011,7 @@ function(x, ...)
                 ul <- tolower(z)
                 indp <- (grepl("^https?://cran.r-project.org/web/packages",
                                ul) &
-                         !grepl("^https?://cran.r-project.org/web/packages/[.[:alnum:]]+(html|pdf|rds)$",
+                         !grepl("^https?://cran.r-project.org/web/packages/[.[:alnum:]_]+(html|pdf|rds)$",
                                 ul))
                 indv <- grepl("https?://cran.r-project.org/web/views/[[:alnum:]]+[.]html$",
                               ul)

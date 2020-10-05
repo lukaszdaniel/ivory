@@ -1,8 +1,8 @@
 /*
  *  Mathlib : A C Library of Special Functions
+ *  Copyright (C) 2006-2019 The R Core Team
  *  Copyright (C) 2005-6 Morten Welinder <terra@gnome.org>
  *  Copyright (C) 2005-10 The R Foundation
- *  Copyright (C) 2006-2015 The R Core Team
  *
  *  This program is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -67,7 +67,7 @@ static constexpr double M_cutoff = M_LN2 * DBL_MAX_EXP / DBL_EPSILON; /*=3.19657
 /* Continued fraction for calculation of
  *    1/i + x/(i+d) + x^2/(i+2*d) + x^3/(i+3*d) + ... = sum_{k=0}^Inf x^k/(i+k*d)
  *
- * auxilary in Rf_log1pmx() and Rf_lgamma1p()
+ * auxiliary in Rf_log1pmx() and Rf_lgamma1p()
  */
 static double logcf(double x, double i, double d,
        double eps /* ~ relative tolerance */)
@@ -144,6 +144,9 @@ double Rf_log1pmx(double x)
 /* Compute  log(gamma(a+1))  accurately also for small a (0 < a < 0.5). */
 double Rf_lgamma1p(double a)
 {
+    if (fabs (a) >= 0.5)
+	return Rf_lgammafn (a + 1);
+
     static constexpr double eulers_const = M_EC;
 
     /* coeffs[i] holds (zeta(i+2)-1)/(i+2) , i = 0:(N-1), N = 40 : */
@@ -193,11 +196,6 @@ double Rf_lgamma1p(double a)
 
     constexpr double c = 0.2273736845824652515226821577978691e-12;/* zeta(N+2)-1 */
     constexpr double tol_logcf = 1e-14;
-    double lgam;
-    int i;
-
-    if (fabs (a) >= 0.5)
-	return Rf_lgammafn (a + 1);
 
     /* Abramowitz & Stegun 6.1.33 : for |x| < 2,
      * <==> log(gamma(1+x)) = -(log(1+x) - x) - gamma*x + x^2 * \sum_{n=0}^\infty c_n (-x)^n
@@ -206,8 +204,8 @@ double Rf_lgamma1p(double a)
      * Here, another convergence acceleration trick is used to compute
      * lgam(x) :=  sum_{n=0..Inf} c_n (-x)^n
      */
-    lgam = c * logcf(-a / 2, N + 2, 1, tol_logcf);
-    for (i = N - 1; i >= 0; i--)
+    double lgam = c * logcf(-a / 2, N + 2, 1, tol_logcf);
+    for (int i = N - 1; i >= 0; i--)
 	lgam = coeffs[i] - a * lgam;
 
     return (a * lgam - eulers_const) * a - Rf_log1pmx (a);

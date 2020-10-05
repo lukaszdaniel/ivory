@@ -1,7 +1,8 @@
-coxph.detail <-  function(object, riskmat=FALSE) {
+coxph.detail <-  function(object, riskmat=FALSE, rorder=c("data", "time")) {
     method <- object$method
     if (method!='breslow' && method!='efron')
 	stop(gettextf("detailed output is not available for the %s method", method))
+    rorder <- match.arg(rorder)
     n <- length(object$residuals)
     temp <- coxph.getdata(object, offset=TRUE)
     weights <- temp$weights        #always present if there are weights
@@ -87,8 +88,15 @@ coxph.detail <-  function(object, riskmat=FALSE) {
 	 varhaz=ff$weights[keep], y=y, x=x)
     if (length(strat)) temp$strata <- table((strat[ord])[ff$index[keep]])
     if (riskmat) {
-        temp$riskmat <- rmat
-        temp$sortorder <- ord
+        if (rorder=="data") {
+            temp$riskmat <- matrix(0, nrow(rmat), ncol(rmat),
+                                   dimnames= dimnames(rmat))
+            temp$riskmat[ord,] <- rmat
+        }
+        else {
+            temp$riskmat <- rmat
+            temp$sortorder <- ord
+        }
     }
     if (!all(weights==1)) {
 	temp$weights <- weights

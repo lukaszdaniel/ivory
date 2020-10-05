@@ -202,6 +202,9 @@ RCNTXT *RCNTXT::findProfContext(RCNTXT *cptr)
     if (! R_Filter_Callframes)
 	return cptr->nextContext();
 
+    if (cptr == R_ToplevelContext)
+	return nullptr;
+
     /* Find parent context, same algorithm as in `parent.frame()`. */
     RCNTXT * parent = RCNTXT::R_findParentContext(cptr, 1);
 
@@ -259,8 +262,9 @@ static void doprof(int sig)  /* sig is ignored in Windows */
     if (R_Line_Profiling)
 	lineprof(buf, R_getCurrentSrcref());
 
-    RCNTXT *cptr = R_GlobalContext;
-    while ((cptr = RCNTXT::findProfContext(cptr)) != nullptr) {
+    for (RCNTXT *cptr = R_GlobalContext;
+	 cptr != nullptr;
+	 cptr = RCNTXT::findProfContext(cptr)) {
 	if ((cptr->getCallFlag() & (CTXT_FUNCTION | CTXT_BUILTIN))
 	    && TYPEOF(cptr->getCall()) == LANGSXP) {
 	    SEXP fun = CAR(cptr->getCall());

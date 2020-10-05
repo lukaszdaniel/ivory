@@ -43,6 +43,10 @@
 #define ALTREP_SERIALIZED_CLASS_CLSSYM(x) (CAR(x))
 #define ALTREP_SERIALIZED_CLASS_PKGSYM(x) (CADR(x))
 #define ALTREP_SERIALIZED_CLASS_TYPE(x) INTEGER0(CADDR(x))[0]
+#define ALTREP_OBJECT_CLSSYM(x) ALTREP_SERIALIZED_CLASS_CLSSYM( \
+	ALTREP_SERIALIZED_CLASS(x))
+#define ALTREP_OBJECT_PKGSYM(x) ALTREP_SERIALIZED_CLASS_PKGSYM( \
+	ALTREP_SERIALIZED_CLASS(x))
 
 #define ALTREP_CLASS_BASE_TYPE(x) \
     ALTREP_SERIALIZED_CLASS_TYPE(ALTREP_CLASS_SERIALIZED_CLASS(x))
@@ -106,6 +110,13 @@ HIDDEN void R_reinit_altrep_classes(DllInfo *dll)
 /**
  **  ALTREP Method Tables and Class Objects
  **/
+
+#define ALTREP_ERROR_IN_CLASS(msg, x) do {			\
+	error("%s [class: %s, pkg: %s]",			\
+	      msg,						\
+	      CHAR(PRINTNAME(ALTREP_OBJECT_CLSSYM(x))),		\
+	      CHAR(PRINTNAME(ALTREP_OBJECT_PKGSYM(x))));	\
+    } while(0)
 
 static void SET_ALTREP_CLASS(SEXP x, SEXP class_)
 {
@@ -670,13 +681,12 @@ static Rboolean altrep_Inspect_default(SEXP x, int pre, int deep, int pvec,
 
 static R_xlen_t altrep_Length_default(SEXP x)
 {
-    error(_("no Length method defined"));
+    ALTREP_ERROR_IN_CLASS("no ALTREP Length method defined", x);
 }
 
 static void *altvec_Dataptr_default(SEXP x, Rboolean writeable)
 {
-    /**** use class info for better error message? */
-    error(_("cannot access data pointer for this ALTVEC object"));
+    ALTREP_ERROR_IN_CLASS("cannot access data pointer for this ALTVEC object", x);
 }
 
 static const void *altvec_Dataptr_or_null_default(SEXP x)
@@ -769,12 +779,12 @@ static R_xlen_t altcomplex_Get_region_default(SEXP sx, R_xlen_t i, R_xlen_t n, R
 
 static SEXP altstring_Elt_default(SEXP x, R_xlen_t i)
 {
-    error(_("ALTSTRING classes must provide an Elt method"));
+    ALTREP_ERROR_IN_CLASS("No Elt method found for ALTSTRING class", x);
 }
 
 static void altstring_Set_elt_default(SEXP x, R_xlen_t i, SEXP v)
 {
-    error(_("ALTSTRING classes must provide a Set_elt method"));
+    ALTREP_ERROR_IN_CLASS("No Set_elt found for ALTSTRING class", x);
 }
 
 static int altstring_Is_sorted_default(SEXP x) { return UNKNOWN_SORTEDNESS; }

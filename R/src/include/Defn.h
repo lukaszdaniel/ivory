@@ -1351,6 +1351,7 @@ namespace R
     char *Rf_strchr(const char *s, int c);
     char *Rf_strrchr(const char *s, int c);
     int Rvsnprintf_mbcs(char *buf, size_t size, const char *format, va_list ap);
+    int Rsnprintf_mbcs(char *str, size_t size, const char *format, ...);
 
     SEXP fixup_NaRm(SEXP args);             /* summary.cpp */
     void invalidate_cached_recodings(void); /* from sysutils.cpp */

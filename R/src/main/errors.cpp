@@ -263,11 +263,17 @@ static void setupwarnings(void)
     Rf_setAttrib(R_Warnings, R_NamesSymbol, Rf_allocVector(STRSXP, R_nwarnings));
 }
 
-/* Rvsnprintf_mbcs: like vsnprintf, but guaranteed to null-terminate and not to split
-   multi-byte characters, except if size is zero in which case the buffer is
-   untouched and thus may not be null-terminated.
+/* Rvsnprintf_mbcs: like vsnprintf, but guaranteed to null-terminate and not to
+   split multi-byte characters, except if size is zero in which case the buffer
+   is untouched and thus may not be null-terminated.
 
-   Dangerous pattern: `Rvsnprintf_mbcs(buf, size - n, )` with maybe n >= size*/
+   This function may be invoked by the error handler via REvprintf.  Do not
+   change it unless you are SURE that your changes are compatible with the
+   error handling mechanism.
+
+   REvprintf is also used in R_Suicide on Unix.
+
+   Dangerous pattern: `Rvsnprintf_mbcs(buf, size - n, )` with n >= size */
 #ifdef _WIN32
 int trio_vsnprintf(char *buffer, size_t bufferSize, const char *format,
 		   va_list args);
@@ -301,12 +307,13 @@ int R::Rvsnprintf_mbcs(char *buf, size_t size, const char *format, va_list ap)
 }
 #endif
 
-/* Rsnprintf: like snprintf, but guaranteed to null-terminate and not to split
-   multi-byte characters, except if size is zero in which case the buffer is
-   untouched and thus may not be null-terminated.
+/* Rsnprintf_mbcs: like snprintf, but guaranteed to null-terminate and
+   not to split multi-byte characters, except if size is zero in which
+   case the buffer is untouched and thus may not be null-terminated.
 
-   Dangerous pattern: `Rsnprintf(buf, size - n, )` with maybe n >= size*/
-static int Rsnprintf(char *str, size_t size, const char *format, ...)
+   Dangerous pattern: `Rsnprintf_mbcs(buf, size - n, )` with maybe n >= size*/
+HIDDEN
+int R::Rsnprintf_mbcs(char *str, size_t size, const char *format, ...)
 {
     int val;
     va_list ap;
@@ -787,22 +794,22 @@ NORET static void verrorcall_dflt(SEXP call, const char *format, va_list ap)
 	}
 
 	const char *dcall = CHAR(STRING_ELT(deparse1s(call), 0));
-	Rsnprintf(tmp2, BUFSIZE,  _("Error in command '%s': "), dcall); 
+	Rsnprintf_mbcs(tmp2, BUFSIZE,  _("Error in command '%s': "), dcall); 
 	if (skip != NA_INTEGER) {
 	    PROTECT(srcloc = GetSrcLoc(R_GetCurrentSrcref(skip)));
 	    nprotect++;
 	    len = strlen(CHAR(STRING_ELT(srcloc, 0)));
 	    if (len)
-		Rsnprintf(tmp2, BUFSIZE,  _("Error in command '%s' (from %s): "), 
-			 dcall, CHAR(STRING_ELT(srcloc, 0)));
+		Rsnprintf_mbcs(tmp2, BUFSIZE,  _("Error in command '%s' (from %s): "), 
+			       dcall, CHAR(STRING_ELT(srcloc, 0)));
 	}
 
 	Rvsnprintf_mbcs(tmp, max(msg_len - strlen(head), size_t(0)), format, ap);
 	if (strlen(tmp2) + strlen(tail) + strlen(tmp) < BUFSIZE) {
-	    if(len) Rsnprintf(errbuf, BUFSIZE,  
-			     _("Error in command '%s' (from %s): "),
-			     dcall, CHAR(STRING_ELT(srcloc, 0)));
-	    else Rsnprintf(errbuf, BUFSIZE,  _("Error in command '%s': "), dcall);
+	    if(len) Rsnprintf_mbcs(errbuf, BUFSIZE,  
+				   _("Error in command '%s' (from %s): "),
+				   dcall, CHAR(STRING_ELT(srcloc, 0)));
+	    else Rsnprintf_mbcs(errbuf, BUFSIZE,  _("Error in command '%s': "), dcall);
 	    if (mbcslocale) {
 		int msgline1;
 		char *p = strchr(tmp, '\n');
@@ -825,13 +832,13 @@ NORET static void verrorcall_dflt(SEXP call, const char *format, va_list ap)
 	    }
 	    ERRBUFCAT(tmp);
 	} else {
-	    Rsnprintf(errbuf, BUFSIZE, _("Error: "));
+	    Rsnprintf_mbcs(errbuf, BUFSIZE, _("Error: "));
 	    ERRBUFCAT(tmp);
 	}
 	UNPROTECT(nprotect);
     }
     else {
-	Rsnprintf(errbuf, BUFSIZE, _("Error: "));
+	Rsnprintf_mbcs(errbuf, BUFSIZE, _("Error: "));
 	p = errbuf + strlen(errbuf);
 	Rvsnprintf_mbcs(p, max(msg_len - strlen(errbuf), size_t(0)), format, ap);
     }
@@ -1116,7 +1123,7 @@ HIDDEN SEXP do_gettext(SEXP call, SEXP op, SEXP args, SEXP rho)
 	    size_t len = strlen(domain)+3;
 	    R_CheckStack2(len);
 	    buf = (char *) alloca(len);
-	    Rsnprintf(buf, len, "R-%s", domain);
+	    Rsnprintf_mbcs(buf, len, "R-%s", domain);
 	    domain = buf;
 	}
     } else if(isString(CAR(args)))
@@ -1220,7 +1227,7 @@ HIDDEN SEXP do_ngettext(SEXP call, SEXP op, SEXP args, SEXP rho)
 	    size_t len = strlen(domain)+3;
 	    R_CheckStack2(len);
 	    buf = (char *) alloca(len);
-	    Rsnprintf(buf, len, "R-%s", domain);
+	    Rsnprintf_mbcs(buf, len, "R-%s", domain);
 	    domain = buf;
 	}
     } else if(isString(sdom))

@@ -37,7 +37,7 @@ SEXP survfitci(SEXP ftime2,  SEXP sort12,  SEXP sort22, SEXP ntime2,
     double *i0;         /* initial influence */
     int *id;            /* for each obs, which subject is it */
     int sefit;
-
+        
     /* returned objects */
     SEXP rlist;         /* the returned list and variable names of same */  
     const char *rnames[]= {"nrisk","nevent","ncensor", "p", 
@@ -158,7 +158,7 @@ SEXP survfitci(SEXP ftime2,  SEXP sort12,  SEXP sort22, SEXP ntime2,
             }
             else break;
         }
-
+            
         for (j=0; j<nstate; j++) {
             for (k=0; k<nstate; k++) {
                 hmat[j][k] =0;
@@ -187,7 +187,7 @@ SEXP survfitci(SEXP ftime2,  SEXP sort12,  SEXP sort22, SEXP ntime2,
             }
             else break;
          }
-
+                
         if (wevent > 0) {  /* there was at least one move with weight > 0 */
             /* finish computing H */
             for (j=0; j<nstate; j++) {
@@ -200,29 +200,27 @@ SEXP survfitci(SEXP ftime2,  SEXP sort12,  SEXP sort22, SEXP ntime2,
                     hmat[j][j] =1 -temp/ws[j]; /*rows sum to one */
                 }
                 else hmat[j][j] =1.0; 
-
+         
             }
             if (sefit >0) {
-                if (sefit >0) {
-                    /* Update U, part 1  U = U %*% H -- matrix multiplication */
-                    for (j=0; j<nperson; j++) { /* row of U */
+                /* Update U, part 1  U = U %*% H -- matrix multiplication */
+                for (j=0; j<nperson; j++) { /* row of U */
                         for (k=0; k<nstate; k++) { /* column of U */
                             temp2[k]=0;
                             for (kk=0; kk<nstate; kk++) 
                                 temp2[k] += umat[j][kk] * hmat[kk][k];
                         }  
                         for (k=0; k<nstate; k++) umat[j][k] = temp2[k];
-                    }
+                }
 
-                    /* step 2, add in dH term */
-                    for (j=0; j<nperson; j++) {
+                /* step 2, add in dH term */
+                for (j=0; j<nperson; j++) {
                         if (atrisk[j]==1) {
-                            oldstate = cstate[j];
+                        oldstate = cstate[j];
                             for (k=0; k<nstate; k++)
                                 umat[j][k] -= hmat[oldstate][k]* p[oldstate]/ ws[oldstate];
                             umat[j][dstate[j]] += p[oldstate]/ws[oldstate];
                         }
-                    }
                 }
             }
             /* Finally, update chaz and p.  */
@@ -251,7 +249,7 @@ SEXP survfitci(SEXP ftime2,  SEXP sort12,  SEXP sort22, SEXP ntime2,
             if (sefit > 1)
                 for (k=0; k<nperson; k++) *usave++ = umat[k][j];
          }
-
+      
         /* Take the current events and censors out of the risk set */
         for (; i<n; i++) {
             j= sort2[i];

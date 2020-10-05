@@ -215,6 +215,9 @@ if [[ "$1" == "survival" ]] || [[ "$1" == "all" ]]; then
 `$cmd	survival.Rcheck/tests/pyear.Rout		../../$RECIVORY/survival/tests/pyear.Rout.save`
 `$cmd	survival.Rcheck/tests/quantile.Rout		../../$RECIVORY/survival/tests/quantile.Rout.save`
 `$cmd	survival.Rcheck/tests/ratetable.Rout		../../$RECIVORY/survival/tests/ratetable.Rout.save`
+`$cmd	survival.Rcheck/tests/residsf.Rout		../../$RECIVORY/survival/tests/residsf.Rout.save`
+`$cmd	survival.Rcheck/tests/royston.Rout		../../$RECIVORY/survival/tests/royston.Rout.save`
+`$cmd	survival.Rcheck/tests/rttright.Rout		../../$RECIVORY/survival/tests/rttright.Rout.save`
 `$cmd	survival.Rcheck/tests/r_donnell.Rout		../../$RECIVORY/survival/tests/r_donnell.Rout.save`
 `$cmd	survival.Rcheck/tests/r_lung.Rout		../../$RECIVORY/survival/tests/r_lung.Rout.save`
 `$cmd	survival.Rcheck/tests/r_peterson.Rout		../../$RECIVORY/survival/tests/r_peterson.Rout.save`

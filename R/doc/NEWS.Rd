@@ -146,6 +146,17 @@
     }
   }
 
+  \subsection{INSTALLATION on a UNIX-ALIKE}{
+    \itemize{
+      \item \command{configure} checks for a program \command{pkgconf}
+      if program \command{pkg-config} is not found.  These are now only
+      looked for on the path (like almost all other programs) so if needed
+      specify a full path to the command in \code{PKG_CONFIG}, for example
+      in file \file{config.site}.
+    }
+  }
+
+
   \subsection{LINK-TIME OPTIMIZATION on a UNIX-ALIKE}{
     \itemize{
       \item Configuring with flag \option{--enable-lto=R} now also uses
@@ -266,9 +277,6 @@
       \item \code{boxplot()} now also accepts \code{call}s for labels such
       as \code{ylab}, the same as \code{plot()}.  Reported by Marius Hofert.
 
-      \item \code{phyper(11, 15, 0, 12, log.p=TRUE)} no longer gives
-      \code{NaN}; reported as \PR{17271} by Alexey Stukalov.
-
       \item The help page for \code{xtabs()} now correctly states that
       \code{addNA} is setting \code{na.action = na.pass} among others;
       reported as \PR{17770} by Thomas Soeiro.
@@ -285,29 +293,27 @@
       correct also with \code{center = FALSE}; \PR{14938}, patch from
       Sebastian Meyer.
 
-      \item A very old bug could cause a segfault in \code{model.matrix()}
-      when terms involved logical variables.  Related to \PR{17879}, but not
-      a complete fix for that issue.
-
-      \item \code{model.frame.default()} allowed \code{data = 1}, leading to
-      involuntary variable capture (rest of \PR{17879}).
-
-      \item \code{R_allocLD()} has been fixed to return memory aligned for
-      long double type (PR#16534).
-
-      \item Fix incorrect calculation in \code{logLik.nls()} \PR{16100}, patch
-      from Sebastian Meyer.
-
       \item \code{all.equal.POSIXt()} no longer warns about and
       subsequently ignores inconsistent \code{"tzone"} attributes, but
       describes the difference in its return value (\PR{17277}).
       This check can be disabled \emph{via} the new argument
       \code{check.tzone = FALSE}; as suggested by Sebastian Meyer.
+
+      \item \code{all.equal(x,y)} now \dQuote{sees} the two different
+      \code{NA}s in factors, thanks to Bill Dunlap and others in
+      \PR{17897}.
+
+      \item \code{as.POSIXct()} now populates the \code{"tzone"}
+      attribute from its \code{tz} argument when \code{x} is a logical
+      vector consisting entirely of \code{NA} values.
+
+      \item \code{(~ NULL)[1]} and similar formula subsetting now works,
+      thanks to a report and patch by Henrik Bengtsson in \PR{17935}.
     }
   }
 }
 
-\section{\Rlogo CHANGES IN R 4.0.2 patched}{
+\section{\Rlogo CHANGES IN R 4.0.3}{
 
   \subsection{NEW FEATURES}{
     \itemize{
@@ -319,11 +325,19 @@
       On macOS, \code{"macOS"} is used by default if the system timezone
       database is a newer version than that in the \R installation.
 
-      \item When \code{install.packages()} fails to find a package in a
-      source repository it mentions package versions which are excluded
-      by their \R version requirement and links to hints on why a package
-      might not be found.
-    }
+      \item When \code{install.packages(type = "source")} fails to find
+       a package in a repository it mentions package versions which are
+       excluded by their \R version requirement and links to hints on
+       why a package might not be found.
+
+       \item The default value for \code{options("timeout")} can be set
+       from environment variable \env{R_DEFAULT_INTERNET_TIMEOUT}, still
+       defaulting to 60 (seconds) if that is not set or invalid.
+
+       This may be needed when child \R processes are doing downloads,
+       for example during the installation of source packages which
+       download jars or other forms of data.
+     }
   }
 
   \subsection{LINK-TIME OPTIMIZATION on a UNIX-ALIKE}{
@@ -390,13 +404,43 @@
       when \code{type = 1} or \code{3}, thanks to \PR{17899}.
 
       \item Libcurl-based internet access, including
-      \code{curlGetHeaders()}, was not respecting the \code{"timeout"} option.
+      \code{curlGetHeaders()}, was not respecting the \code{"timeout"}
+      option.  If this causes unanticipated timeouts, consider
+      increasing the default by setting \env{R_DEFAULT_INTERNET_TIMEOUT}.
 
       \item \code{as.Date(<char>)} now also works with an initial
       \code{""}, thanks to Michael Chirico's \PR{17909}.
 
       \item \code{isS3stdGeneric(f)} now detects an S3 generic also when it
       it is \code{trace()}d, thanks to Gabe Becker's \PR{17917}.
+
+      \item \code{R_allocLD()} has been fixed to return memory aligned for
+      long double type \PR{16534}.
+
+      \item \code{fisher.test()} no longer segfaults when called again after
+      its internal stack has been exceeded \PR{17904}.
+
+      \item Accessing a long vector represented by a compact integer
+      sequence no longer segfaults (reported and debugged by Hugh
+      Parsonage).
+
+      \item \code{duplicated()} now works also for strings with multiple
+      encodings inside a single vector \PR{17809}.
+
+      \item \code{tar()} no longer skips non-directory files, thanks to a
+      patch by Sebastian Meyer, fixing the remaining part of \PR{16716}.
+
+      \item \code{phyper(11, 15, 0, 12, log.p=TRUE)} no longer gives
+      \code{NaN}; reported as \PR{17271} by Alexey Stukalov.
+
+      \item Fix incorrect calculation in \code{logLik.nls()} \PR{16100}, patch
+      from Sebastian Meyer.
+
+      \item A very old bug could cause a segfault in \code{model.matrix()}
+      when terms involved logical variables.  Part of \PR{17879}.
+
+      \item \code{model.frame.default()} allowed \code{data = 1}, leading to
+      involuntary variable capture (rest of \PR{17879}).
     }
   }
 }

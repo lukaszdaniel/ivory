@@ -8,13 +8,13 @@ SEXP agfit4(SEXP nused2, SEXP surv2,      SEXP covar2,    SEXP strata2,
             SEXP sort12,     SEXP sort22,    SEXP method2,
             SEXP maxiter2,   SEXP  eps2,     SEXP tolerance2,
             SEXP doscale2) { 
-
+                
     int i,j,k, person;
     int indx1, istrat, p, p1;
     int nrisk, nr;
     int nused, nvar;
     int rank=0, rank2, fail;  /* =0 to keep -Wall happy */
-
+   
     double **covar, **cmat, **imat;  /*ragged array versions*/
     double *a, *oldbeta;
     double *scale;
@@ -29,6 +29,7 @@ SEXP agfit4(SEXP nused2, SEXP surv2,      SEXP covar2,    SEXP strata2,
     double  meanwt;
     int deaths;
     double denom2, etasum;
+    double recenter;
 
     /* inputs */
     double *start, *tstop, *event;
@@ -58,7 +59,7 @@ SEXP agfit4(SEXP nused2, SEXP surv2,      SEXP covar2,    SEXP strata2,
     tol_chol = asReal(tolerance2);
     maxiter = asInteger(maxiter2);
     doscale = asInteger(doscale2);
-
+  
     /* input arguments */
     start = REAL(surv2);
     tstop  = start + nr;
@@ -80,7 +81,7 @@ SEXP agfit4(SEXP nused2, SEXP surv2,      SEXP covar2,    SEXP strata2,
     a2= a + nvar;
     scale  = a2 + nvar;
     oldbeta = scale + nvar;
-
+            
     /*
     **  Set up the ragged arrays
     **  covar2 might not need to be duplicated, even though
@@ -120,10 +121,10 @@ SEXP agfit4(SEXP nused2, SEXP surv2,      SEXP covar2,    SEXP strata2,
 
     iter2  =  SET_VECTOR_ELT(rlist, 6, allocVector(INTSXP, 1));
     iter = INTEGER(iter2);
-
+                
     /*
     ** Subtract the mean from each covar, as this makes the variance
-    **  computation much more stable.  The mean is taken per stratum,
+    **  computation more stable.  The mean is taken per stratum,
     **  the scaling is overall.
     */
     for (i=0; i<nvar; i++) {
@@ -162,12 +163,12 @@ SEXP agfit4(SEXP nused2, SEXP surv2,      SEXP covar2,    SEXP strata2,
             }
         }
     }
-
+ 
     if (doscale ==1) {
         for (i=0; i<nvar; i++) beta[i] /= scale[i]; /* rescale initial betas */
         }
     else {for (i=0; i<nvar; i++) scale[i] = 1.0;}
-
+             
     /* main loop */
     halving =0 ;             /* =1 when in the midst of "step halving" */
     fail =0;
@@ -196,6 +197,7 @@ SEXP agfit4(SEXP nused2, SEXP surv2,      SEXP covar2,    SEXP strata2,
         indx1 =0;
 
         /* this next set is rezeroed at the start of each stratum */
+        recenter =0;
         denom=0;
         nrisk=0;
         etasum =0;
@@ -251,38 +253,13 @@ SEXP agfit4(SEXP nused2, SEXP surv2,      SEXP covar2,    SEXP strata2,
                 }
                 else {
                     etasum -= eta[p1];
-                    risk = exp(eta[p1]) * weights[p1];
+                    risk = exp(eta[p1] - recenter) * weights[p1];
                     denom -= risk;
                     for (i=0; i<nvar; i++) {
                         a[i] -= risk*covar[i][p1];
                         for (j=0; j<=i; j++)
                             cmat[i][j] -= risk*covar[i][p1]*covar[j][p1];
                     }
-                }
-                /* 
-                ** We must avoid overflow in the exp function (~750 on Intel)
-                ** and want to act well before that, but not take action very often.  
-                ** One of the case-cohort papers suggests an offset of -100 meaning
-                ** that etas of 50-100 can occur in "ok" data, so make it larger 
-                ** than this.
-                ** If the range of eta is more then log(1e16) = 37 then the data is
-                **  hopeless: some observations will have effectively 0 weight.  Keeping
-                **  the mean sensible suffices to keep the max in check for all other
-                *   data sets.
-                */
-                if (fabs(etasum/nrisk) > 200) {  
-                    flag[1]++;  /* a count, for debugging/profiling purposes */
-                    temp = etasum/nrisk;
-                    for (i=0; i<nused; i++) eta[i] -= temp;
-                    temp = exp(-temp);
-                    denom *= temp;
-                    for (i=0; i<nvar; i++) {
-                        a[i] *= temp;
-                        for (j=0; j<nvar; j++) {
-                            cmat[i][j]*= temp;
-                        }
-                    }
-                    etasum =0;
                 }
             }
 
@@ -299,19 +276,48 @@ SEXP agfit4(SEXP nused2, SEXP surv2,      SEXP covar2,    SEXP strata2,
                     cmat2[i][j]=0;
                 }
             }
-
+            
             for (; person <nused; person++) {
                 p = sort2[person];
                 if (strata[p] != istrat || tstop[p] < dtime) break;/*no more to add*/
-                risk = exp(eta[p]) * weights[p];
+                nrisk++;
+                etasum += eta[p];
+                /* 
+                ** We must avoid overflow in the exp function (~709 on Intel)
+                ** and want to act well before that, but not take action very often.  
+                ** One of the case-cohort papers suggests an offset of -100 meaning
+                ** that etas of 50-100 can occur in "ok" data, so make it larger 
+                ** than this.
+                ** If the range of eta is more then log(1e16) = 37 then the data is
+                **  hopeless: some observations will have effectively 0 weight.  Keeping
+                **  the mean sensible has sufficed to keep the max in check.
+                */
+                if (fabs(etasum/nrisk - recenter) > 200) {  
+                    flag[1]++;  /* a count, for debugging/profiling purposes */
+                    temp = etasum/nrisk - recenter;
+                    recenter = etasum/nrisk;
 
+                    if (denom > 0) {
+                        /* we can skip this if there is no one at risk */
+                        if (fabs(temp) > 709) error("exp overflow due to covariates\n");
+                             
+                        temp = exp(-temp);  /* the change in scale, for all the weights */
+                        denom *= temp;
+                        for (i=0; i<nvar; i++) {
+                            a[i] *= temp;
+                            for (j=0; j<nvar; j++) {
+                                cmat[i][j]*= temp;
+                            }
+                        }
+                    }       
+                }
+                risk = exp(eta[p] - recenter) * weights[p];
+                
                 if (event[p] ==1 ){
-                    nrisk++;
-                    etasum += eta[p];
                     deaths++;
                     denom2 += risk;
                     meanwt += weights[p];
-                    newlk += weights[p]* eta[p];
+                    newlk += weights[p]* (eta[p] - recenter);
                     for (i=0; i<nvar; i++) {
                         u[i] += weights[p] * covar[i][p];
                         a2[i]+= risk*covar[i][p];
@@ -320,8 +326,6 @@ SEXP agfit4(SEXP nused2, SEXP surv2,      SEXP covar2,    SEXP strata2,
                     }
                 }
                 else {
-                    nrisk++;
-                    etasum += eta[p];
                     denom += risk;
                     for (i=0; i<nvar; i++) {
                         a[i] += risk*covar[i][p];
@@ -362,31 +366,6 @@ SEXP agfit4(SEXP nused2, SEXP surv2,      SEXP covar2,    SEXP strata2,
                         }
                 }
             }
-            /* 
-            ** We must avoid overflow in the exp function (~750 on Intel)
-            ** and want to act well before that, but not take action very often.  
-            ** One of the case-cohort papers suggests an offset of -100 meaning
-            ** that etas of 50-100 can occur in "ok" data, so make it larger 
-            ** than this.
-            ** If the range of eta is more then log(1e16) = 37 then the data is
-            **  hopeless: some observations will have effectively 0 weight.  Keeping
-            **  the mean sensible suffices to keep the max in check for all other
-            *   data sets.
-            */
-            if (fabs(etasum/nrisk) > 200) {  
-                flag[1]++;  /* a count, for debugging/profiling purposes */
-                temp = etasum/nrisk;
-                for (i=0; i<nused; i++) eta[i] -= temp;
-                temp = exp(-temp);
-                denom *= temp;
-                for (i=0; i<nvar; i++) {
-                    a[i] *= temp;
-                    for (j=0; j<nvar; j++) {
-                        cmat[i][j]*= temp;
-                    }
-                }
-                etasum =0;
-            }
         }   /* end  of accumulation loop */
 
         if (*iter==0) {
@@ -419,7 +398,7 @@ SEXP agfit4(SEXP nused2, SEXP surv2,      SEXP covar2,    SEXP strata2,
                 if (isfinite(imat[i][i]) ==0) fail++;
             rank2 = cholesky2(imat, nvar, tol_chol);
             fail = fail + isnan(newlk) + isinf(newlk) + abs(rank-rank2);
-
+     
             if (fail ==0 && halving ==0 &&
                 fabs(1-(loglik[1]/newlk)) <= eps) break;  /* success! */
 
@@ -460,6 +439,7 @@ SEXP agfit4(SEXP nused2, SEXP surv2,      SEXP covar2,    SEXP strata2,
                    indx1 =0;
 
                    /* this next set is rezeroed at the start of each stratum */
+                   recenter =0;
                    denom=0;
                    nrisk=0;
                    etasum =0;
@@ -515,38 +495,13 @@ SEXP agfit4(SEXP nused2, SEXP surv2,      SEXP covar2,    SEXP strata2,
                            }
                            else {
                                etasum -= eta[p1];
-                               risk = exp(eta[p1]) * weights[p1];
+                               risk = exp(eta[p1] - recenter) * weights[p1];
                                denom -= risk;
                                for (i=0; i<nvar; i++) {
                                    a[i] -= risk*covar[i][p1];
                                    for (j=0; j<=i; j++)
                                        cmat[i][j] -= risk*covar[i][p1]*covar[j][p1];
                                }
-                           }
-                           /* 
-                           ** We must avoid overflow in the exp function (~750 on Intel)
-                           ** and want to act well before that, but not take action very often.  
-                           ** One of the case-cohort papers suggests an offset of -100 meaning
-                           ** that etas of 50-100 can occur in "ok" data, so make it larger 
-                           ** than this.
-                           ** If the range of eta is more then log(1e16) = 37 then the data is
-                           **  hopeless: some observations will have effectively 0 weight.  Keeping
-                           **  the mean sensible suffices to keep the max in check for all other
-                           *   data sets.
-                           */
-                           if (fabs(etasum/nrisk) > 200) {  
-                               flag[1]++;  /* a count, for debugging/profiling purposes */
-                               temp = etasum/nrisk;
-                               for (i=0; i<nused; i++) eta[i] -= temp;
-                               temp = exp(-temp);
-                               denom *= temp;
-                               for (i=0; i<nvar; i++) {
-                                   a[i] *= temp;
-                                   for (j=0; j<nvar; j++) {
-                                       cmat[i][j]*= temp;
-                                   }
-                               }
-                               etasum =0;
                            }
                        }
 
@@ -563,19 +518,48 @@ SEXP agfit4(SEXP nused2, SEXP surv2,      SEXP covar2,    SEXP strata2,
                                cmat2[i][j]=0;
                            }
                        }
-
+                       
                        for (; person <nused; person++) {
                            p = sort2[person];
                            if (strata[p] != istrat || tstop[p] < dtime) break;/*no more to add*/
-                           risk = exp(eta[p]) * weights[p];
+                           nrisk++;
+                           etasum += eta[p];
+                           /* 
+                           ** We must avoid overflow in the exp function (~709 on Intel)
+                           ** and want to act well before that, but not take action very often.  
+                           ** One of the case-cohort papers suggests an offset of -100 meaning
+                           ** that etas of 50-100 can occur in "ok" data, so make it larger 
+                           ** than this.
+                           ** If the range of eta is more then log(1e16) = 37 then the data is
+                           **  hopeless: some observations will have effectively 0 weight.  Keeping
+                           **  the mean sensible has sufficed to keep the max in check.
+                           */
+                           if (fabs(etasum/nrisk - recenter) > 200) {  
+                               flag[1]++;  /* a count, for debugging/profiling purposes */
+                               temp = etasum/nrisk - recenter;
+                               recenter = etasum/nrisk;
 
+                               if (denom > 0) {
+                                   /* we can skip this if there is no one at risk */
+                                   if (fabs(temp) > 709) error("exp overflow due to covariates\n");
+                                        
+                                   temp = exp(-temp);  /* the change in scale, for all the weights */
+                                   denom *= temp;
+                                   for (i=0; i<nvar; i++) {
+                                       a[i] *= temp;
+                                       for (j=0; j<nvar; j++) {
+                                           cmat[i][j]*= temp;
+                                       }
+                                   }
+                               }       
+                           }
+                           risk = exp(eta[p] - recenter) * weights[p];
+                           
                            if (event[p] ==1 ){
-                               nrisk++;
-                               etasum += eta[p];
                                deaths++;
                                denom2 += risk;
                                meanwt += weights[p];
-                               newlk += weights[p]* eta[p];
+                               newlk += weights[p]* (eta[p] - recenter);
                                for (i=0; i<nvar; i++) {
                                    u[i] += weights[p] * covar[i][p];
                                    a2[i]+= risk*covar[i][p];
@@ -584,8 +568,6 @@ SEXP agfit4(SEXP nused2, SEXP surv2,      SEXP covar2,    SEXP strata2,
                                }
                            }
                            else {
-                               nrisk++;
-                               etasum += eta[p];
                                denom += risk;
                                for (i=0; i<nvar; i++) {
                                    a[i] += risk*covar[i][p];
@@ -626,37 +608,12 @@ SEXP agfit4(SEXP nused2, SEXP surv2,      SEXP covar2,    SEXP strata2,
                                    }
                            }
                        }
-                       /* 
-                       ** We must avoid overflow in the exp function (~750 on Intel)
-                       ** and want to act well before that, but not take action very often.  
-                       ** One of the case-cohort papers suggests an offset of -100 meaning
-                       ** that etas of 50-100 can occur in "ok" data, so make it larger 
-                       ** than this.
-                       ** If the range of eta is more then log(1e16) = 37 then the data is
-                       **  hopeless: some observations will have effectively 0 weight.  Keeping
-                       **  the mean sensible suffices to keep the max in check for all other
-                       *   data sets.
-                       */
-                       if (fabs(etasum/nrisk) > 200) {  
-                           flag[1]++;  /* a count, for debugging/profiling purposes */
-                           temp = etasum/nrisk;
-                           for (i=0; i<nused; i++) eta[i] -= temp;
-                           temp = exp(-temp);
-                           denom *= temp;
-                           for (i=0; i<nvar; i++) {
-                               a[i] *= temp;
-                               for (j=0; j<nvar; j++) {
-                                   cmat[i][j]*= temp;
-                               }
-                           }
-                           etasum =0;
-                       }
                    }   /* end  of accumulation loop */
                    rank2 = cholesky2(imat, nvar, tol_chol);
                    }
                break;
             }
-
+            
             if (fail >0 || newlk < loglik[1]) {
                 /* 
                 ** The routine has not made progress past the last good value.

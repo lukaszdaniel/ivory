@@ -1729,7 +1729,7 @@ add_dummies <- function(dir, Log)
 
             out <- R_runR2(Rcmd, "R_DEFAULT_PACKAGES=NULL")
             if (length(out)) {
-                if(any(grepl("(not declared from|Including base/recommended)", out))) warningLog(Log)
+                if(any(grepl("(not declared from|Missing or unexported object|Including base/recommended)", out))) warningLog(Log)
                 else noteLog(Log)
                 printLog0(Log, paste(c(out, ""), collapse = "\n"))
                 ## wrapLog(msg_DESCRIPTION)
@@ -1742,7 +1742,7 @@ add_dummies <- function(dir, Log)
 
             out <- R_runR0(Rcmd, R_opts2, "R_DEFAULT_PACKAGES=NULL")
             if (length(out)) {
-                if(any(grepl("not declared from", out))) warningLog(Log)
+                if(any(grepl("(not declared from|Missing or unexported object)", out))) warningLog(Log)
                 else noteLog(Log)
                 printLog0(Log, paste(c(out, ""), collapse = "\n"))
                 ## wrapLog(msg_DESCRIPTION)
@@ -2036,11 +2036,14 @@ add_dummies <- function(dir, Log)
 
         if (dir.exists("man") && !extra_arch) {
             checkingLog(Log, gettext("checking Rd files ...", domain = "R-tools"))
+            t1 <- proc.time()
             minlevel <- Sys.getenv("_R_CHECK_RD_CHECKRD_MINLEVEL_", "-1")
             Rcmd <- paste(opWarn_string, "\n",
                           sprintf("tools:::.check_package_parseRd('.', minlevel=%s)\n", minlevel))
             ## This now evaluates \Sexpr, so run with usual packages.
             out <- R_runR0(Rcmd, R_opts2, elibs)
+            t2 <- proc.time()
+            print_time(t1, t2, Log)
             if (length(out)) {
                 if(length(grep("^prepare.*Dropping empty section", out, invert = TRUE)))
                     warningLog(Log)
