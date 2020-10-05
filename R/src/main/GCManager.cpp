@@ -51,6 +51,9 @@ size_t GCManager::s_min_threshold = s_threshold;
 size_t GCManager::s_min_node_threshold = s_node_threshold;
 bool GCManager::s_gc_fail_on_error = false;
 bool GCManager::s_gc_pending = false;
+int GCManager::s_gc_force_wait = 0;
+int GCManager::s_gc_force_gap = 0;
+bool GCManager::s_gc_inhibit_release = false;
 
 size_t GCManager::s_max_bytes = 0;
 size_t GCManager::s_max_nodes = 0;
@@ -257,12 +260,63 @@ void GCManager::adjustThreshold(R_size_t bytes_wanted)
 #endif
 }
 
+bool GCManager::FORCE_GC()
+{
+    if (s_gc_pending)
+    {
+        return true;
+    }
+    else if (s_gc_force_wait > 0)
+    {
+        --s_gc_force_wait;
+        if (s_gc_force_wait > 0)
+        {
+            return false;
+        }
+        else
+        {
+            s_gc_force_wait = s_gc_force_gap;
+            return true;
+        }
+    }
+    return false;
+}
+
+void GCManager::setTortureParameters(int gap, int wait, bool inhibitor)
+{
+    s_gc_force_wait = wait;
+    s_gc_force_gap = gap;
+    setInhibitor(inhibitor);
+}
+
+void GCManager::setInhibitor(bool inhibitor)
+{
+    s_gc_inhibit_release = inhibitor;
+}
+
+int GCManager::gc_force_wait()
+{
+    return s_gc_force_wait;
+}
+
+int GCManager::gc_force_gap()
+{
+    return s_gc_force_gap;
+}
+
+bool GCManager::gc_inhibit_release()
+{
+    return s_gc_inhibit_release;
+}
+
 bool GCManager::cue(size_t bytes_wanted, bool force)
 {
-    if (!force && (GCNode::numNodes() < s_node_threshold) && (s_threshold - MemoryBank::bytesAllocated() >= (bytes_wanted)))
-        return false;
-    gc(bytes_wanted, false);
-    return true;
+    if (force || FORCE_GC() || (GCNode::numNodes() >= s_node_threshold) || (s_threshold - MemoryBank::bytesAllocated() < bytes_wanted))
+    {
+        gc(bytes_wanted, false);
+        return true;
+    }
+    return false;
 }
 
 // Put this prototype here temporarily!

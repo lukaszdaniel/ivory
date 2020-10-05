@@ -170,8 +170,8 @@ int R_gc_running() { return R_in_gc; }
 
    This approach will miss cases where an unprotected node has been
    re-allocated.  For these cases it is possible to set
-   gc_inhibit_release to TRUE.  FREESXP nodes will not be reallocated,
-   or large ones released, until gc_inhibit_release is set to FALSE
+   s_gc_inhibit_release to TRUE.  FREESXP nodes will not be reallocated,
+   or large ones released, until s_gc_inhibit_release is set to FALSE
    again.  This will of course result in memory growth and should be
    used with care and typically in combination with OS mechanisms to
    limit process memory usage.  LT */
@@ -272,34 +272,18 @@ const char *R::sexptype2char(const SEXPTYPE type) {
     }
 }
 
-#define GC_TORTURE
-
-#ifdef GC_TORTURE
-/* **** if the user specified a wait before starting to force
-   **** collections it might make sense to also wait before starting
-   **** to inhibit releases */
-static int gc_force_wait = 0;
-static int gc_force_gap = 0;
-static Rboolean gc_inhibit_release = FALSE;
-#define FORCE_GC (GCManager::gc_pending() || (gc_force_wait > 0 ? (--gc_force_wait > 0 ? 0 : (gc_force_wait = gc_force_gap, 1)) : 0))
-#else
-#define FORCE_GC GCManager::gc_pending()
-#endif
-
 #ifdef R_MEMORY_PROFILING
 static void R_ReportAllocation(R_size_t);
 #endif
 
-#define GC_PROT(X)                                 \
-    do                                             \
-    {                                              \
-        int __wait__ = gc_force_wait;              \
-        int __gap__ = gc_force_gap;                \
-        Rboolean __release__ = gc_inhibit_release; \
-        X;                                         \
-        gc_force_wait = __wait__;                  \
-        gc_force_gap = __gap__;                    \
-        gc_inhibit_release = __release__;          \
+#define GC_PROT(X)                                                        \
+    do                                                                    \
+    {                                                                     \
+        int __wait__ = GCManager::gc_force_wait();                        \
+        int __gap__ = GCManager::gc_force_gap();                          \
+        Rboolean __release__ = (Rboolean)GCManager::gc_inhibit_release(); \
+        X;                                                                \
+        GCManager::setTortureParameters(__gap__, __wait__, __release__);  \
     } while (false)
 
 namespace
@@ -528,7 +512,7 @@ namespace
 #endif
 
 #ifdef PROTECTCHECK
-#define FREE_FORWARD_CASE case FREESXP: if (gc_inhibit_release) break;
+#define FREE_FORWARD_CASE case FREESXP: if (GCManager::gc_inhibit_release()) break;
 #else
 #define FREE_FORWARD_CASE
 #endif
@@ -628,7 +612,7 @@ namespace
 #define CHECK_FOR_FREE_NODE(s)                                 \
     {                                                          \
         GCNode *cf__n__ = (s);                                \
-        if (TYPEOF(cf__n__) == FREESXP && !gc_inhibit_release) \
+        if (TYPEOF(cf__n__) == FREESXP && !GCManager::gc_inhibit_release()) \
             register_bad_sexp_type(cf__n__, __LINE__);         \
     }
 #else
@@ -1134,17 +1118,17 @@ HIDDEN SEXP do_regFinaliz(SEXP call, SEXP op, SEXP args, SEXP rho)
 
 /* The Generational Collector. */
 
-#define PROCESS_NODES()                                      \
-    do                                                       \
-    {                                                        \
-        while (forwarded_nodes)                              \
-        {                                                    \
-            s = forwarded_nodes;                             \
-            forwarded_nodes = NEXT_NODE(forwarded_nodes);    \
+#define PROCESS_NODES()                                         \
+    do                                                          \
+    {                                                           \
+        while (forwarded_nodes)                                 \
+        {                                                       \
+            s = forwarded_nodes;                                \
+            forwarded_nodes = NEXT_NODE(forwarded_nodes);       \
             SNAP_NODE(s, GCNode::s_oldpeg[NODE_GENERATION(s)]); \
-            GCNode::s_oldcount[NODE_GENERATION(s)]++;        \
-            FORWARD_CHILDREN(s);                             \
-        }                                                    \
+            GCNode::s_oldcount[NODE_GENERATION(s)]++;           \
+            FORWARD_CHILDREN(s);                                \
+        }                                                       \
     } while (false)
 
 void GCNode::gc(unsigned int num_old_gens_to_collect)
@@ -1372,12 +1356,12 @@ void GCNode::gc(unsigned int num_old_gens_to_collect)
 		    SETOLDTYPE(s, TYPEOF(s));
 		    SET_TYPEOF(s, FREESXP);
 		}
-		if (gc_inhibit_release)
+		if (GCManager::gc_inhibit_release())
 		    FORWARD_NODE(s);
 	    }
 	    s = next;
 	}
-    if (gc_inhibit_release)
+    if (GCManager::gc_inhibit_release())
 	PROCESS_NODES();
 #endif
 
@@ -1391,27 +1375,27 @@ void GCNode::gc(unsigned int num_old_gens_to_collect)
 void R_gc_torture(int gap, int wait, Rboolean inhibit)
 {
     if (gap != NA_INTEGER && gap >= 0)
-        gc_force_wait = gc_force_gap = gap;
+        GCManager::setTortureParameters(gap, gap, false);
     if (gap > 0)
     {
         if (wait != NA_INTEGER && wait > 0)
-            gc_force_wait = wait;
+            GCManager::setTortureParameters(gap, wait, false);
     }
 #ifdef PROTECTCHECK
     if (gap > 0)
     {
         if (inhibit != NA_LOGICAL)
-            gc_inhibit_release = inhibit;
+            GCManager::setInhibitor(inhibit);
     }
     else
-        gc_inhibit_release = FALSE;
+        GCManager::setInhibitor(false;
 #endif
 }
 
 HIDDEN SEXP do_gctorture(SEXP call, SEXP op, SEXP args, SEXP rho)
 {
     int gap;
-    SEXP old = ScalarLogical(gc_force_wait > 0);
+    SEXP old = ScalarLogical(GCManager::gc_force_wait() > 0);
 
     checkArity(op, args);
 
@@ -1437,7 +1421,7 @@ HIDDEN SEXP do_gctorture2(SEXP call, SEXP op, SEXP args, SEXP rho)
 {
     int gap, wait;
     Rboolean inhibit;
-    int old = gc_force_gap;
+    int old = GCManager::gc_force_gap();
 
     checkArity(op, args);
     gap = asInteger(CAR(args));
@@ -1455,19 +1439,19 @@ static void init_gctorture(void)
     if (arg) {
 	int gap = atoi(arg);
 	if (gap > 0) {
-	    gc_force_wait = gc_force_gap = gap;
+        GCManager::setTortureParameters(gap, gap, false);
 	    arg = getenv("R_GCTORTURE_WAIT");
 	    if (arg) {
 		int wait = atoi(arg);
 		if (wait > 0)
-		    gc_force_wait = wait;
+            GCManager::setTortureParameters(gap, wait, false);
 	    }
 #ifdef PROTECTCHECK
 	    arg = getenv("R_GCTORTURE_INHIBIT_RELEASE");
 	    if (arg) {
 		int inhibit = atoi(arg);
-		if (inhibit > 0) gc_inhibit_release = TRUE;
-		else gc_inhibit_release = FALSE;
+		if (inhibit > 0) GCManager::setInhibitor(true);
+		else GCManager::setInhibitor(false);
 	    }
 #endif
 	}
@@ -1787,7 +1771,7 @@ void *R_realloc_gc(void *p, size_t n)
 SEXP Rf_allocSExp(SEXPTYPE t)
 {
     SEXP s = nullptr;
-    if (FORCE_GC || NO_FREE_NODES())
+    if (GCManager::FORCE_GC() || NO_FREE_NODES())
     {
         GCManager::gc(0);
     }
@@ -1804,7 +1788,7 @@ SEXP Rf_allocSExp(SEXPTYPE t)
 SEXP Rf_cons(SEXP car, SEXP cdr)
 {
     SEXP s = nullptr;
-    if (FORCE_GC || NO_FREE_NODES())
+    if (GCManager::FORCE_GC() || NO_FREE_NODES())
     {
         PROTECT(car);
         PROTECT(cdr);
@@ -1831,7 +1815,7 @@ SEXP Rf_cons(SEXP car, SEXP cdr)
 HIDDEN SEXP CONS_NR(SEXP car, SEXP cdr)
 {
     SEXP s = nullptr;
-    if (FORCE_GC || NO_FREE_NODES())
+    if (GCManager::FORCE_GC() || NO_FREE_NODES())
     {
         PROTECT(car);
         PROTECT(cdr);
@@ -1873,7 +1857,7 @@ HIDDEN SEXP CONS_NR(SEXP car, SEXP cdr)
 SEXP R::NewEnvironment(SEXP namelist, SEXP valuelist, SEXP rho)
 {
     SEXP v = nullptr, n = nullptr, newrho = nullptr;
-    if (FORCE_GC || NO_FREE_NODES())
+    if (GCManager::FORCE_GC() || NO_FREE_NODES())
     {
         PROTECT(namelist);
         PROTECT(valuelist);
@@ -1911,7 +1895,7 @@ SEXP R::NewEnvironment(SEXP namelist, SEXP valuelist, SEXP rho)
 HIDDEN SEXP R::mkPROMISE(SEXP expr, SEXP rho)
 {
     SEXP s = nullptr;
-    if (FORCE_GC || NO_FREE_NODES())
+    if (GCManager::FORCE_GC() || NO_FREE_NODES())
     {
         PROTECT(expr);
         PROTECT(rho);
@@ -1968,7 +1952,6 @@ SEXP Rf_allocVector3(SEXPTYPE type, R_xlen_t length = 1, R_allocator_t *allocato
 		   work in terms of a VECSEXP here, but that would
 		   require several casts below... */
     R_size_t size = 0;
-    // R_size_t old_R_VSize;
 
 #if VALGRIND_LEVEL > 0
     R_size_t actual_size = 0;
@@ -2066,12 +2049,10 @@ SEXP Rf_allocVector3(SEXPTYPE type, R_xlen_t length = 1, R_allocator_t *allocato
 	      type2char(type), length);
     }
 
-    /* save current s_threshold to roll back adjustment if malloc fails */
-    // old_R_VSize = GCManager::triggerLevel();
     size_t bytes = size * sizeof(VECREC);
 
     /* we need to do the gc here so allocSExp doesn't! */
-    if (FORCE_GC || NO_FREE_NODES() || VHEAP_FREE() < bytes)
+    if (GCManager::FORCE_GC() || NO_FREE_NODES() || VHEAP_FREE() < bytes)
     {
         GCManager::gc(bytes);
     }
@@ -2103,8 +2084,6 @@ SEXP Rf_allocVector3(SEXPTYPE type, R_xlen_t length = 1, R_allocator_t *allocato
 	    } else s = nullptr; /* suppress warning */
 	    if (!success) {
 		double dsize = (double)bytes/1024.0;
-		/* reset the vector heap limit */
-		// GCManager::s_threshold = old_R_VSize;
 		if(dsize > 1024.0*1024.0)
 		    errorcall(R_NilValue,
 			      _("cannot allocate vector of size %0.1f GB"),

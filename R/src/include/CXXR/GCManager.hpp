@@ -179,7 +179,12 @@ namespace R
 		static void gc_error(const char *msg);
 		static void setGCGrowParameters(double node_grow_frac = 0.70, double mem_grow_frac = 0.70) { R_NGrowFrac = node_grow_frac; R_VGrowFrac = mem_grow_frac; };
 		static void setGCGrowIncrParameters(double node_grow_incr_frac = 0.2, double mem_grow_incr_frac = 0.2) { R_NGrowIncrFrac = node_grow_incr_frac; R_VGrowIncrFrac = mem_grow_incr_frac; };
-
+		static bool FORCE_GC();
+		static void setTortureParameters(int gap, int wait, bool inhibitor);
+		static void setInhibitor(bool inhibitor);
+		static int gc_force_wait();
+		static int gc_force_gap();
+		static bool gc_inhibit_release();
 	private:
 		static size_t s_threshold;
 		static size_t s_min_threshold;
@@ -189,6 +194,13 @@ namespace R
 		static size_t s_max_node_threshold;
 		static bool s_gc_pending;
 		static bool s_gc_fail_on_error;
+		/* **** if the user specified a wait before starting to force
+   		**** collections it might make sense to also wait before starting
+   		**** to inhibit releases */
+		static int s_gc_force_wait;
+		static int s_gc_force_gap;
+		static bool s_gc_inhibit_release;
+
 		static double R_NGrowFrac;
 		static double R_NShrinkFrac;
 		static double R_VGrowFrac;
