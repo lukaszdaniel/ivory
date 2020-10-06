@@ -1,9 +1,9 @@
 
-Ivory Under development (unstable) (2020-09-25 r1306) -- "Internationalized Version of R"
+Ivory Under development (unstable) (2020-10-05 r1313) -- "Internationalized Version of R"
 Copyright (C) 2013-2020 Lukasz Daniel (lukasz.daniel@gmail.com)
 See README-IVORY file for details.
 
-R Under development (unstable) (2020-09-25 r79188) -- "Unsuffered Consequences"
+R Under development (unstable) (2020-10-05 r79298) -- "Unsuffered Consequences"
 Copyright (C) 2020 The R Foundation for Statistical Computing
 Platform: x86_64-pc-linux-gnu (64-bit)
 
@@ -157,7 +157,7 @@ Hair    Brown Blue Hazel Green
 > x <- 9.9*10^(-3:10)
 > plot(x, 1:14, log = "x")
 > axTicks(1) # now length 5, in R <= 2.13.x gave the following
-[1] 1e-02 1e+01 1e+04 1e+07 1e+10
+[1] 1e-01 1e+01 1e+03 1e+05 1e+07 1e+09 1e+11
 > axTicks(1, nintLog = Inf) # rather too many
  [1] 1e-02 1e-01 1e+00 1e+01 1e+02 1e+03 1e+04 1e+05 1e+06 1e+07 1e+08 1e+09
 [13] 1e+10 1e+11
@@ -2151,7 +2151,7 @@ N
 > points.default # to see how it calls "plot.xy(xy.coords(x, y), ...)"
 function (x, y = NULL, type = "p", ...) 
 plot.xy(xy.coords(x, y), type = type, ...)
-<bytecode: 0xb106430>
+<bytecode: 0xc7681e0>
 <environment: namespace:graphics>
 > 
 > 
@@ -3021,7 +3021,7 @@ function (xy = 1, warn.log = TRUE)
     u <- par("usr")
     xy * c(u[2L] - u[1L], u[4L] - u[3L])/par("pin")
 }
-<bytecode: 0xb560770>
+<bytecode: 0x9ae79b0>
 <environment: namespace:graphics>
 > 
 > ## plot labels offset 0.12 inches to the right
@@ -3102,7 +3102,7 @@ function (xy = 1, warn.log = TRUE)
 > cleanEx()
 > options(digits = 7L)
 > base::cat(gettext("Time elapsed: ", domain = "R-base"), proc.time() - base::get("ptime", pos = 'CheckExEnv'),"\n")
-Time elapsed:  8.95 0.149 9.099 0 0 
+Time elapsed:  8.103 0.123 8.235 0 0 
 > grDevices::dev.off()
 null device 
           1 
