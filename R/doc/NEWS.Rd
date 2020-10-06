@@ -309,6 +309,18 @@
 
       \item \code{(~ NULL)[1]} and similar formula subsetting now works,
       thanks to a report and patch by Henrik Bengtsson in \PR{17935}.
+      Additionally, subsetting leaving an empty formula now works too,
+      thanks to suggestions by Suharto Anggono.
+
+      \item \code{x[[2^31]] <- v} now works, thanks to the report and patch
+      by Suharto Anggono in \PR{17330}.
+
+      \item In log-scale graphics, \code{axis()} ticks and label positions
+      are now computed more carefully and symmetrically in their range,
+      typically providing \emph{more} ticks, fulfilling wishes
+      in \PR{17936}.  The change really corresponds to an improved
+      \code{axisTicks()} (package \pkg{grDevices}), potentially influencing
+      \pkg{grid} and \pkg{lattice}, for example.
     }
   }
 }
