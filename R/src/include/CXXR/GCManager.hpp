@@ -51,10 +51,9 @@ namespace R
      * In the current implementation of GCManager, when cued by R
      * as above, a garbage collection will be carried out if the
      * number of bytes currently allocated via R::MemoryBank is at least
-     * as great as a threshold value.  This threshold values varies
-     * during the run, subject to a user-specifiable maximum; by
-     * default, the maximum is set to
-     * <tt>numeric_limits<size_t>::max()</tt>.
+     * as great as a threshold value.  This threshold value varies
+     * during the run, subject to a minimum value specified in the
+     * <tt>initialize</tt> method.
      */
 	class GCManager
 	{
@@ -79,7 +78,7 @@ namespace R
 
 		/** Initialize static members.
 	 *
-	 * This method must be called before any GCNodes are created.
+	 * This method must be called before any GCNode objects are created.
 	 * If called more than once in a single program run, the
 	 * second and subsequent calls do nothing.
 	 *

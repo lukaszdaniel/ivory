@@ -335,7 +335,7 @@ namespace R
         static constexpr int MISSING_MASK = ((1 << 4) - 1); // = 15 /* reserve 4 bits--only 2 uses now */
         static unsigned int missing(RObject *x);                /* for closure calls */
         static void set_missing(RObject *x, int v);
-        static unsigned int bndcell_tag(RObject *x);
+        static unsigned int bndcell_tag(const RObject *x);
         static void set_bndcell_tag(RObject *e, unsigned int v);
         /* External pointer access methods */
         static RObject *extptr_prot(RObject *x);

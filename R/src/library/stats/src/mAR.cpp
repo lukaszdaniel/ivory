@@ -810,8 +810,8 @@ static void burg2(Array ss_ff, Array ss_bb, Array ss_fb, Array E,
 		for (k = 0; k < nser; k++)
 		    for (l = 0; l < nser; l++) {
 			MATRIX(D2)[nser*i+j][nser*k+l] =
-			    (i == k) * MATRIX(sg)[j][l] +
-			    MATRIX(sh)[i][k] * (j == l);
+			    int(i == k) * MATRIX(sg)[j][l] +
+			    MATRIX(sh)[i][k] * int(j == l);
 		    }
 	    }
 	}

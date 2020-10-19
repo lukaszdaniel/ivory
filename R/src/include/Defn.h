@@ -37,6 +37,8 @@
 // #endif
 
 #include <utility>
+#include <iostream>
+#include <string>
 #include <CXXR/RObject.hpp>
 #include <CXXR/RList.hpp>
 #include <CXXR/BuiltInFunction.hpp>

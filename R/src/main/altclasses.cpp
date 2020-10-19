@@ -803,7 +803,7 @@ static int deferred_string_No_NA(SEXP x)
     SEXP state = DEFERRED_STRING_STATE(x);
     if (state == R_NilValue)
     { /* string is fully expanded and may have been modified. */
-        return FALSE;
+        return false;
     }
     else
     {
@@ -816,7 +816,7 @@ static int deferred_string_No_NA(SEXP x)
         case REALSXP:
             return REAL_NO_NA(arg);
         default:
-            return FALSE;
+            return false;
         }
     }
 }
@@ -840,7 +840,6 @@ static SEXP deferred_string_Extract_subset(SEXP x, SEXP indx, SEXP call)
 
     return result;
 }
-
 
 /*
  * Class Object and Method Table
@@ -1936,7 +1935,7 @@ static SEXP wrap_meta(SEXP x, int srt, int no_na)
     }
 
     /* avoid wrappers of wrappers, at least in some cases */
-    if (is_wrapper(x) && srt == UNKNOWN_SORTEDNESS && no_na == FALSE)
+    if (is_wrapper(x) && srt == UNKNOWN_SORTEDNESS && no_na == false)
 	return shallow_duplicate(x);
 
 #ifndef WRAPATTRIB
@@ -1975,7 +1974,7 @@ HIDDEN SEXP do_wrap_meta(SEXP call, SEXP op, SEXP args, SEXP env)
 
 SEXP R_tryWrap(SEXP x)
 {
-    return wrap_meta(x, UNKNOWN_SORTEDNESS, FALSE);
+    return wrap_meta(x, UNKNOWN_SORTEDNESS, false);
 }
 
 extern "C"

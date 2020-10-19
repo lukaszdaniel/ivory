@@ -64,16 +64,27 @@ namespace R
             MemoryBank::deallocate(m_data, m_databytes);
     }
 
-
 void RObject::visitChildren(const_visitor* v) const
 {
-    if (m_attrib) m_attrib->conductVisitor(v);
-    switch (sexptype()) {
+    if (m_attrib && (m_type != CHARSXP || m_attrib->m_type != CHARSXP))
+        m_attrib->conductVisitor(v);
+
+    if (m_alt)
+    {
+        if(tag()) tag()->conductVisitor(v);
+        if(RObject::bndcell_tag(this)) { Rf_error("bad binding access"); }
+        if(car()) car()->conductVisitor(v);
+        if(cdr()) cdr()->conductVisitor(v);
+    }
+    else
+    switch (m_type) {
     case STRSXP:
     case EXPRSXP:
     case VECSXP:
-	for (int i = 0; i < length(); i++)
-	    reinterpret_cast<SEXP*>(m_data)[i]->conductVisitor(v);
+	for (R_xlen_t i = 0; i < length(); i++) {
+	    const GCNode* node = ((const RObject**)(m_data))[i];
+	    if (node) node->conductVisitor(v);
+	}
 	break;
     case ENVSXP:
 	if (frame()) frame()->conductVisitor(v);
@@ -81,9 +92,13 @@ void RObject::visitChildren(const_visitor* v) const
 	    enclosingEnvironment()->conductVisitor(v);
 	if (hashTable()) hashTable()->conductVisitor(v);
 	break;
+    case LISTSXP:
+	if (tag()) tag()->conductVisitor(v);
+	if ((BOXED_BINDING_CELLS || RObject::bndcell_tag(this) == 0) && car()) car()->conductVisitor(v);
+	if (cdr()) cdr()->conductVisitor(v);
+	break;
     case CLOSXP:
     case PROMSXP:
-    case LISTSXP:
     case LANGSXP:
     case DOTSXP:
     case SYMSXP:
@@ -300,7 +315,7 @@ void RObject::visitChildren(visitor* v)
         x->m_gpbits = __other_flags__ | v;
     }
 
-    unsigned int RObject::bndcell_tag(RObject *e) { return e ? e->m_extra : 0; }
+    unsigned int RObject::bndcell_tag(const RObject *e) { return e ? e->m_extra : 0; }
 
     void RObject::set_bndcell_tag(RObject *e, unsigned int v)
     {
