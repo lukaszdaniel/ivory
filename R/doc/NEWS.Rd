@@ -101,13 +101,20 @@
       \item \code{...elt()} now propagates visibility consistently with
       \code{..n}, thanks to Lionel Henry's \PR{17905}.
 
-      \item \code{capture.output()} no longer uses NSE to evaluate its
-      arguments.  This makes evaluation of functions like
-      \code{parent.frame()} more consistent, thanks to Lionel Henry's
-      \PR{17907}.
+      \item \code{capture.output()} no longer uses non-standard
+      evaluation to evaluate its arguments.  This makes evaluation of
+      functions like \code{parent.frame()} more consistent, thanks to
+      Lionel Henry's \PR{17907}.
 
       \item \code{packBits(bits, type="double")} newly works as inverse of
       \code{numToBits()}, thanks to Bill Dunlap's proposal in \PR{17914}.
+
+      \item \code{curlGetHeaders()} has two new arguments,
+      \code{timeout} to specify the timeout for that call (overriding
+      \code{getOption("timeout")}) and \code{TLS} to specify the minimum
+      TLS protocol version to be used for \code{https://} URLs
+      (\emph{inter alia} providing a means to check for sites using
+      deprecated TLS versions 1.0 and 1.1).
     }
   }
 
@@ -299,18 +306,9 @@
       This check can be disabled \emph{via} the new argument
       \code{check.tzone = FALSE}; as suggested by Sebastian Meyer.
 
-      \item \code{all.equal(x,y)} now \dQuote{sees} the two different
-      \code{NA}s in factors, thanks to Bill Dunlap and others in
-      \PR{17897}.
-
       \item \code{as.POSIXct()} now populates the \code{"tzone"}
       attribute from its \code{tz} argument when \code{x} is a logical
       vector consisting entirely of \code{NA} values.
-
-      \item \code{(~ NULL)[1]} and similar formula subsetting now works,
-      thanks to a report and patch by Henrik Bengtsson in \PR{17935}.
-      Additionally, subsetting leaving an empty formula now works too,
-      thanks to suggestions by Suharto Anggono.
 
       \item \code{x[[2^31]] <- v} now works, thanks to the report and patch
       by Suharto Anggono in \PR{17330}.
@@ -321,6 +319,29 @@
       in \PR{17936}.  The change really corresponds to an improved
       \code{axisTicks()} (package \pkg{grDevices}), potentially influencing
       \pkg{grid} and \pkg{lattice}, for example.
+
+      \item \code{.traceback(n)} keeps source references again, as before
+      \R 4.0.0, fixing a regression; introduced by the \PR{17580}, reported
+      including two patch proposals by Brodie Gaslam.
+
+      \item \code{qnorm(<very large negative>, log.p=TRUE)} is now correct
+      to at least five digits where it was catastrophically wrong, previously.
+    }
+  }
+}
+
+\section{\Rlogo CHANGES IN R 4.0.3 patched}{
+
+  \subsection{BUG FIXES}{
+    \itemize{
+      \item \code{all.equal(x,y)} now \dQuote{sees} the two different
+      \code{NA}s in factors, thanks to Bill Dunlap and others in
+      \PR{17897}.
+
+      \item \code{(~ NULL)[1]} and similar formula subsetting now works,
+      thanks to a report and patch by Henrik Bengtsson in \PR{17935}.
+      Additionally, subsetting leaving an empty formula now works too,
+      thanks to suggestions by Suharto Anggono.
     }
   }
 }
@@ -439,9 +460,6 @@
       \item \code{duplicated()} now works also for strings with multiple
       encodings inside a single vector \PR{17809}.
 
-      \item \code{tar()} no longer skips non-directory files, thanks to a
-      patch by Sebastian Meyer, fixing the remaining part of \PR{16716}.
-
       \item \code{phyper(11, 15, 0, 12, log.p=TRUE)} no longer gives
       \code{NaN}; reported as \PR{17271} by Alexey Stukalov.
 
@@ -453,6 +471,9 @@
 
       \item \code{model.frame.default()} allowed \code{data = 1}, leading to
       involuntary variable capture (rest of \PR{17879}).
+
+      \item \code{tar()} no longer skips non-directory files, thanks to a
+      patch by Sebastian Meyer, fixing the remaining part of \PR{16716}.
     }
   }
 }

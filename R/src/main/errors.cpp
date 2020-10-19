@@ -1534,8 +1534,12 @@ SEXP R::R_GetTraceback(int skip)
     u = v = PROTECT(allocList(nback));
 
     for(t = s; t != R_NilValue; t = CDR(t), v=CDR(v)) {
-        SETCAR(v, PROTECT(deparse1m(CAR(t), FALSE, DEFAULTDEPARSE)));
-        UNPROTECT(1);
+	SEXP sref = getAttrib(CAR(t), R_SrcrefSymbol);
+	SEXP dep = PROTECT(deparse1m(CAR(t), FALSE, DEFAULTDEPARSE));
+	if (!isNull(sref))
+	    setAttrib(dep, R_SrcrefSymbol, duplicate(sref));
+	SETCAR(v, dep);
+	UNPROTECT(1);
     }
     UNPROTECT(2);
     return u;

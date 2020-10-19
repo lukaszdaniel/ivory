@@ -212,6 +212,8 @@ static char *unescape_arg(char *p, char *avp)
 #endif
 #include <csignal> /* thr_stksegment */
 
+extern int R_isWriteableDir(const char *path);
+
 extern "C"
 int Rf_initialize_R(int ac, char *av[])
 {
@@ -487,9 +489,28 @@ int Rf_initialize_R(int ac, char *av[])
 
     if(strlen(cmdlines)) { /* had at least one -e option */
 	size_t res;
-	if(ifp) R_Suicide(_("cannot use -e with -f or --file"));
-	ifp = tmpfile();
+	char *tm;
+	static char ifile[PATH_MAX] = "\0";
+	int ifd;
+
+	if(ifp) R_Suicide(_("cannot use -e with -f or --file"));    
+	/* tmpfile() does not respect TMPDIR on some systems (PR#17925).
+	   R_TempDir is not initialized, yet. */
+	tm = getenv("TMPDIR");
+	if (!R_isWriteableDir(tm)) {
+	    tm = getenv("TMP");
+	    if (!R_isWriteableDir(tm)) {
+		tm = getenv("TEMP");
+		if (!R_isWriteableDir(tm))
+		    tm = (char*)"/tmp";
+	    }
+	}
+	snprintf(ifile, PATH_MAX, "%s/Rscript%x.XXXXXX", tm, getpid());
+	ifd = mkstemp(ifile);
+	if (ifd > 0)
+	    ifp = fdopen(ifd, "w+");
 	if(!ifp) R_Suicide(_("creating temporary file for '-e' failed"));
+	unlink(ifile);
 	res = fwrite(cmdlines, strlen(cmdlines)+1, 1, ifp);
 	if(res != 1) error(_("fwrite error in initialize_R"));
 	fflush(ifp);
