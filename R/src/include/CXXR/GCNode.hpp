@@ -55,7 +55,7 @@
 
 namespace R
 {
-    /** Abstract base class for all objects managed by the garbage collector.
+    /** @brief Base class for objects managed by the garbage collector.
      * 
      * @note Because this base class is used purely for housekeeping
      * by the garbage collector, and does not contribute to the
@@ -64,12 +64,6 @@ namespace R
      */
     class GCNode
     {
-    public: // private:
-        mutable const GCNode *m_prev;
-        mutable const GCNode *m_next;
-        mutable unsigned int m_gcgen;
-        mutable bool m_marked;
-
     public:
 	/** @brief Abstract base class for the Visitor design pattern.
 	 *
@@ -122,6 +116,8 @@ namespace R
 	 *
 	 * @param bytes Number of bytes of memory required.
 	 *
+	 * @return Pointer to the allocated memory block.
+	 *
 	 * @note Since objects of classes derived from RObject \e must
 	 * be allocated on the heap, constructors of these classes may
 	 * rely on the fact that operator new zeroes the allocated
@@ -132,6 +128,15 @@ namespace R
             return memset(MemoryBank::allocate(bytes), 0, bytes);
         }
 
+	/** Deallocate memory
+	 *
+	 * Deallocate memory previously allocated by operator new.
+	 *
+	 * @param p Pointer to the allocated memory block.
+	 *
+	 * @param bytes Size in bytes of the memory block, as
+	 * requested when the block was allocated.
+	 */
         static void operator delete(void *p, size_t bytes)
         {
             MemoryBank::deallocate(p, bytes);
@@ -230,7 +235,16 @@ namespace R
         */
         virtual void visitChildren(visitor *v) {}
 
-        // To be protected in future:
+        static unsigned int gcgen(const GCNode *v);
+        static void set_gcgen(const GCNode *v, unsigned int x);
+        static const GCNode *next_node(const GCNode *s);
+        static const GCNode *prev_node(const GCNode *s);
+        static void set_next_node(const GCNode *s, const GCNode *t);
+        static void set_prev_node(const GCNode *s, const GCNode *t);
+        static bool is_marked(const GCNode *x);
+        static void set_mark(const GCNode *x, bool v);
+    
+    protected:
 
 	/**
 	 * @note The destructor is protected to ensure that GCNode
@@ -239,8 +253,9 @@ namespace R
 	 * declare their destructors private or protected.
 	 */
         virtual ~GCNode();
-
-        // To be private in future:
+    public: // private:
+	// friend class WeakRef;
+	// template <class T> friend class GCEdge;
 
 	/** Visitor class used to impose a minimum generation number.
 	 *
@@ -316,14 +331,10 @@ namespace R
         static std::vector<GCNode*> s_genpeg;
         static std::vector<unsigned int> s_gencount;
         static size_t s_num_nodes;
-        static unsigned int gcgen(const GCNode *v);
-        static void set_gcgen(const GCNode *v, unsigned int x);
-        static const GCNode *next_node(const GCNode *s);
-        static const GCNode *prev_node(const GCNode *s);
-        static void set_next_node(const GCNode *s, const GCNode *t);
-        static void set_prev_node(const GCNode *s, const GCNode *t);
-        static bool is_marked(const GCNode *x);
-        static void set_mark(const GCNode *x, bool v);
+        mutable const GCNode *m_prev;
+        mutable const GCNode *m_next;
+        mutable unsigned int m_gcgen;
+        mutable bool m_marked;
 
         // Special constructor for pegs.  The parameter is simply to
         // give this constructor a distinct signature. Note that the

@@ -48,8 +48,20 @@ namespace R
     } // namespace ForceNonInline
 
     /* Closure Access Methods */
+    /** @brief Access formal arguments of a R::Closure.
+     *
+     * @param x Pointer to a R::Closure object (checked).
+     *
+     * @return Pointer to the formal argument list of \a x.
+     */
     RObject *RObject::formals(RObject *x) { return x ? x->u.closxp.m_formals : nullptr; }
 
+    /** @brief Set the formal arguments of a R::Closure.
+     *
+     * @param x Pointer to a R::Closure object (checked).
+     *
+     * @param v Pointer to the formal argument list.
+     */
     void RObject::set_formals(RObject *x, RObject *v)
     {
         if (!x)
@@ -57,8 +69,20 @@ namespace R
         x->u.closxp.m_formals = v;
     }
 
+    /** @brief Access the body of a R::Closure.
+     *
+     * @param x Pointer to a R::Closure object (checked).
+     *
+     * @return Pointer to the body of \a x.
+     */
     RObject *RObject::body(RObject *x) { return x ? x->u.closxp.m_body : nullptr; }
 
+    /** @brief Set the body of a R::Closure.
+     *
+     * @param x Pointer to a R::Closure object (checked).
+     *
+     * @param v Pointer to the body of this R::Closure.
+     */
     void RObject::set_body(RObject *x, RObject *v)
     {
         if (!x)
@@ -66,8 +90,22 @@ namespace R
         x->u.closxp.m_body = v;
     }
 
+    /** @brief Access the environment of a R::Closure.
+     *
+     * @param x Pointer to a R::Closure object (checked).
+     *
+     * @return Pointer to the environment of x.
+     */
     RObject *RObject::cloenv(RObject *x) { return x ? x->u.closxp.m_env : nullptr; }
 
+    /** @brief Replace the environment of a R::Closure.
+     *
+     * @param x Pointer to a R::Closure object (checked).
+     *
+     * @param v Pointer to the environment now to be
+     *          considered as the environment of this R::Closure.  A
+     *          null pointer is not permissible (not checked).
+     */
     void RObject::set_cloenv(RObject *x, RObject *v)
     {
         if (!x)
@@ -75,8 +113,22 @@ namespace R
         x->u.closxp.m_env = v;
     }
 
+    /** @brief Query debugging status.
+     *
+     * @param x Pointer to a R::Closure object.
+     *
+     * @return \c true if debugging is set, i.e. evaluations of the
+     *         function should run under the browser.
+     */
     bool RObject::rdebug(RObject *x) { return x && x->m_debug; }
 
+    /**
+     * Set the debugging state of a R::Closure object.
+     *
+     * @param x Pointer a R::Closure object (checked).
+     *
+     * @param v The new debugging state.
+     */
     void RObject::set_rdebug(RObject *x, bool v)
     {
         if (!x)

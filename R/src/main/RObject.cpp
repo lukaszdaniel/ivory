@@ -154,6 +154,12 @@ void RObject::visitChildren(visitor* v)
 
     unsigned int RObject::finalize_on_exit(RObject *x) { return x ? (x->m_gpbits & FINALIZE_ON_EXIT_MASK) : 0; }
 
+    /**
+     * Replace x's attributes by \a v.
+     * @param x Pointer to \c RObject.
+     * @param v Pointer to attributes \c RObject.
+     * @todo Could \a v be \c const ?
+     */
     void RObject::set_attrib(RObject *x, RObject *v)
     {
         if (!x)
@@ -161,10 +167,28 @@ void RObject::visitChildren(visitor* v)
         x->m_attrib = v;
     }
 
+     /**
+     * Return the attributes of an \c RObject.
+     * @param x Pointer to the \c RObject whose attributes are required.
+     * @return Pointer to the attributes object of \a x , or 0 if \a x is
+     * a null pointer.
+     */
     RObject *RObject::attrib(RObject *x) { return x ? x->m_attrib : nullptr; }
 
+    /**
+     * Object copying status.
+     * @param x Pointer to \c RObject.
+     * @return Refer to 'R Internals' document.  Returns 0 if \a x is a
+     * null pointer.
+     */ 
     unsigned int RObject::named(RObject *x) { return x ? x->m_named : 0; }
 
+    /**
+     * Set object copying status.  Does nothing if \a x is a null pointer.
+     * @param x Pointer to \c RObject.
+     * @param v Refer to 'R Internals' document.
+     * @deprecated Ought to be private.
+     */
     void RObject::set_named(RObject *x, unsigned int v)
     {
         if (!x)
@@ -172,6 +196,9 @@ void RObject::visitChildren(visitor* v)
         x->m_named = v;
     }
 
+    /**
+     * @deprecated Ought to be private.
+     */
     void RObject::set_typeof(RObject *x, SEXPTYPE v)
     {
         if (!x)
@@ -179,12 +206,29 @@ void RObject::visitChildren(visitor* v)
         x->m_type = v;
     }
 
+    /**
+     * Object type.
+     * @param x Pointer to \c RObject.
+     * @return \c SEXPTYPE of \a x, or NILSXP if x is a null pointer.
+     */
     SEXPTYPE RObject::typeof_(RObject *x) { return x ? x->m_type : NILSXP; }
 
+    /**
+     * @deprecated
+     */
     unsigned int RObject::levels(RObject *x) { return x ? x->m_gpbits : 0; }
 
+    /**
+     * Does \c RObject have a class attribute?.
+     * @param x Pointer to an \c RObject.
+     * @return true iff \a x has a class attribute.  Returns false if \a x
+     * is 0.
+     */
     bool RObject::object(RObject *x) { return x && x->m_has_class; }
 
+    /**
+     * @deprecated Ought to be private.
+     */
     void RObject::set_object(RObject *x, bool v)
     {
         if (!x)
@@ -250,6 +294,9 @@ void RObject::visitChildren(visitor* v)
         x->m_alt = v;
     }
 
+    /**
+     * @deprecated
+     */
     void RObject::setlevels(RObject *x, unsigned short int v)
     {
         if (!x)
@@ -333,9 +380,18 @@ void RObject::visitChildren(visitor* v)
 
     void RObject::set_extptr_prot(RObject *x, RObject *v) { RObject::set_cdr(x, v); }
 
-    /* S4 object bit, set by R_do_new_object for all new() calls */
+    /**
+     * An S4 object?
+     * @param x Pointer to \c RObject.
+     * @return true iff \a x is an S4 object.  Returns false if \a x
+     * is 0.
+     * @note S4 object bit, set by R_do_new_object for all new() calls
+     */
     bool RObject::is_s4_object(RObject *x) { return x && (x->m_gpbits & S4_OBJECT_MASK); }
 
+    /**
+     * @deprecated Ought to be private.
+     */
     void RObject::set_s4_object(RObject *x)
     {
         if (!x)
@@ -343,6 +399,9 @@ void RObject::visitChildren(visitor* v)
         x->m_gpbits |= S4_OBJECT_MASK;
     }
 
+    /**
+     * @deprecated Ought to be private.
+     */
     void RObject::unset_s4_object(RObject *x)
     {
         if (!x)

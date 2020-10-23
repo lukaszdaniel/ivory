@@ -132,14 +132,13 @@ inline static bool IS_USER_DATABASE(SEXP rho)
 
  inline static int FRAME_IS_LOCKED(SEXP e)
  {
-     return (ENVFLAGS(e) & R::RObject::FRAME_LOCK_MASK);
+     return R::RObject::frame_is_locked(e);
  }
 
  inline static void LOCK_FRAME(SEXP e)
  {
-     SET_ENVFLAGS(e, ENVFLAGS(e) | R::RObject::FRAME_LOCK_MASK);
+     R::RObject::lock_frame(e);
  }
-/*#define UNLOCK_FRAME(e) SET_ENVFLAGS(e, ENVFLAGS(e) & (~ FRAME_LOCK_MASK))*/
 
 /* use the same bits (15 and 14) in symbols and bindings */
 static SEXP getActiveValue(SEXP);
@@ -372,14 +371,12 @@ static SEXP R_HashGetLoc(int hashcode, SEXP symbol, SEXP table)
 
 
 
-/*----------------------------------------------------------------------
-
-  R_NewHashTable
-
-  Hash table initialisation function.  Creates a table of size 'size'
-  that increases in size by 'growth_rate' after a threshold is met.
-
-*/
+/**
+ * @brief Hash table initialisation function.
+ * 
+ * Creates a table of size 'size' that increases in size
+ * by 'growth_rate' after a threshold is met.
+ */
 
 static SEXP R_NewHashTable(int size)
 {
@@ -394,13 +391,12 @@ static SEXP R_NewHashTable(int size)
     return(table);
 }
 
-/*----------------------------------------------------------------------
-
-  R_NewHashedEnv
-
-  Returns a new environment with a hash table initialized with default
-  size.  The only non-static hash table function.
-*/
+/**
+ * @return Returns a new environment with a hash table initialized with default
+ * size.
+ * 
+ * @note The only non-static hash table function.
+ */
 
 SEXP R::R_NewHashedEnv(SEXP enclos, SEXP size)
 {
@@ -415,14 +411,13 @@ SEXP R::R_NewHashedEnv(SEXP enclos, SEXP size)
 }
 
 
-/*----------------------------------------------------------------------
-
-  R_HashDelete
-
-  Hash table delete function. Symbols are completely removed from the table;
-  there is no way to mark a symbol as not present without actually removing
-  it.
-*/
+/**
+ * @brief Hash table delete function.
+ * 
+ * Symbols are completely removed from the table;
+ * there is no way to mark a symbol as not present without actually removing
+ * it.
+ */
 
 static SEXP RemoveFromList(SEXP thing, SEXP list, int *found);
 
@@ -446,16 +441,14 @@ static void R_HashDelete(int hashcode, SEXP symbol, SEXP env, int *found)
 
 
 
-/*----------------------------------------------------------------------
-
-  R_HashResize
-
-  Hash table resizing function Increase the size of the hash table by
-  the growth_rate of the table.	 The vector is reallocated, however
-  the lists with in the hash table have their pointers shuffled around
-  so that they are not reallocated.
-
-*/
+/**
+ * @brief Hash table resizing function.
+ * 
+ * Increase the size of the hash table by
+ * the growth_rate of the table. The vector is reallocated, however
+ * the lists with in the hash table have their pointers shuffled around
+ * so that they are not reallocated.
+ */
 
 static SEXP R_HashResize(SEXP table)
 {
@@ -504,15 +497,14 @@ static SEXP R_HashResize(SEXP table)
 
 
 
-/*----------------------------------------------------------------------
-
-  R_HashSizeCheck
-
-  Hash table size rechecking function.	Compares the load factor
-  (size/# of primary slots used)  to a particular threshhold value.
-  Returns true if the table needs to be resized.
-
-*/
+/**
+ * @brief Hash table size rechecking function.
+ * 
+ * Compares the load factor (size/# of primary slots used)
+ * to a particular threshhold value.
+ * 
+ * @return true if the table needs to be resized.
+ */
 
 static int R_HashSizeCheck(SEXP table)
 {
@@ -530,16 +522,14 @@ static int R_HashSizeCheck(SEXP table)
 
 
 
-/*----------------------------------------------------------------------
-
-  R_HashFrame
-
-  Hashing for environment frames.  This function ensures that the
-  first frame in the given environment has been hashed.	 Ultimately
-  all enironments should be created in hashed form.  At that point
-  this function will be redundant.
-
-*/
+/**
+ * @brief Hashing for environment frames.
+ * 
+ * This function ensures that the 
+ * first frame in the given environment has been hashed. Ultimately
+ * all enironments should be created in hashed form.  At that point
+ * this function will be redundant.
+ */
 
 static SEXP R_HashFrame(SEXP rho)
 {
@@ -685,19 +675,19 @@ static SEXP R_HashProfile(SEXP table)
 
    L. T. */
 
-inline static Rboolean IS_GLOBAL_FRAME(SEXP e)
+inline static bool IS_GLOBAL_FRAME(SEXP e)
 {
-    return (Rboolean)(ENVFLAGS(e) & R::RObject::GLOBAL_FRAME_MASK);
+    return RObject::is_global_frame(e);
 }
 
 inline static void MARK_AS_GLOBAL_FRAME(SEXP e)
 {
-    SET_ENVFLAGS(e, ENVFLAGS(e) | R::RObject::GLOBAL_FRAME_MASK);
+    RObject::mark_as_global_frame(e);
 }
 
 inline static void MARK_AS_LOCAL_FRAME(SEXP e)
 {
-    SET_ENVFLAGS(e, ENVFLAGS(e) & (~R::RObject::GLOBAL_FRAME_MASK));
+    RObject::mark_as_local_frame(e);
 }
 
 #define INITIAL_CACHE_SIZE 1000
@@ -819,19 +809,6 @@ static SEXP R_GetGlobalCacheLoc(SEXP symbol)
 }
 #endif /* USE_GLOBAL_CACHE */
 
-/*----------------------------------------------------------------------
-
-  unbindVar
-
-  Remove a value from an environment. This happens only in the frame
-  of the specified environment.
-
-  FIXME ? should this also unbind the symbol value slot when rho is
-  R_BaseEnv.
-  This is only called from eval.cpp in applydefine and bcEval
-  (and applydefine only works for unhashed environments, so not base).
-*/
-
 static SEXP RemoveFromList(SEXP thing, SEXP list, int *found)
 {
     if (list == R_NilValue) {
@@ -867,6 +844,16 @@ static SEXP RemoveFromList(SEXP thing, SEXP list, int *found)
 	return list;
     }
 }
+
+/**
+ * @brief Remove a value from an environment.
+ *
+ *       This happens only in the frame of the specified environment.
+ * 
+ * @todo should this also unbind the symbol value slot when rho is R_BaseEnv.
+ *       This is only called from eval.cpp in applydefine and bcEval
+ *       (and applydefine only works for unhashed environments, so not base).
+*/
 
 HIDDEN void R::unbindVar(SEXP symbol, SEXP rho)
 {
@@ -910,15 +897,11 @@ HIDDEN void R::unbindVar(SEXP symbol, SEXP rho)
 
 
 
-/*----------------------------------------------------------------------
-
-  findVarLocInFrame
-
-  Look up the location of the value of a symbol in a
-  single environment frame.  Almost like findVarInFrame, but
-  does not return the value. R_NilValue if not found.
-
-  Callers set *canCache = TRUE or NULL
+/**
+ * @brief Look up the location of the value of a symbol in a single environment frame.
+ * 
+ *        Almost like findVarInFrame, but does not return the value. R_NilValue if not found.
+ *        Callers set *canCache = TRUE or NULL
 */
 
 static SEXP findVarLocInFrame(SEXP rho, SEXP symbol, Rboolean *canCache)
@@ -977,12 +960,12 @@ static SEXP findVarLocInFrame(SEXP rho, SEXP symbol, Rboolean *canCache)
 }
 
 
-/*
-  External version and accessor functions. Returned value is cast as
-  an opaque pointer to insure it is only used by routines in this
-  group.  This allows the implementation to be changed without needing
-  to change other files.
-*/
+/**
+ * @brief External version and accessor functions.
+ * 
+ * @return Returned value is cast as an opaque pointer to insure it is only used by routines in this
+ * group. This allows the implementation to be changed without needing to change other files.
+ */
 
 R_varloc_t R::R_findVarLocInFrame(SEXP rho, SEXP symbol)
 {
@@ -1143,16 +1126,13 @@ SEXP Rf_findVarInFrame(SEXP rho, SEXP symbol)
     return findVarInFrame3(rho, symbol, TRUE);
 }
 
-/*----------------------------------------------------------------------
-
-  readS3VarsFromFrame
-
-  Reads the S3 meta-variables from a given (single) frame.
-  R_UnboundValue marks that respective variable is not present.
-  This function is optimized to be fast in the common case when the
-  S3 meta-variables are in the expected order and that the frame is
-  represented by a pairlist.
-*/
+/**
+ * @brief Read the S3 meta-variables from a given (single) frame.
+ * R_UnboundValue marks that respective variable is not present.
+ * This function is optimized to be fast in the common case when the
+ * S3 meta-variables are in the expected order and that the frame is
+ * represented by a pairlist.
+ */
 
 HIDDEN
 void Rf_readS3VarsFromFrame(SEXP rho,
@@ -1212,14 +1192,6 @@ slowpath:
 }
 
 
-/*----------------------------------------------------------------------
-
-  findVar
-
-  Look up a symbol in an environment.
-
-*/
-
 #ifdef USE_GLOBAL_CACHE
 /* findGlobalVar searches for a symbol value starting at R_GlobalEnv,
    so the cache can be used. */
@@ -1258,6 +1230,10 @@ R_INLINE static SEXP findGlobalVar(SEXP symbol)
     }
 }
 #endif
+
+/**
+ * @brief Look up a symbol in an environment.
+ */
 
 SEXP Rf_findVar(SEXP symbol, SEXP rho)
 {
@@ -1334,14 +1310,11 @@ R_varloc_t R::R_findVarLoc(SEXP rho, SEXP symbol)
 }
 
 
-/*----------------------------------------------------------------------
-
-  findVar1
-
-  Look up a symbol in an environment.  Ignore any values which are
-  not of the specified type.
-
-*/
+/**
+ * @brief Look up a symbol in an environment.
+ * 
+ * Ignore any values which are not of the specified type.
+ */
 
 HIDDEN SEXP R::findVar1(SEXP symbol, SEXP rho, SEXPTYPE mode, int inherits_)
 {
@@ -1369,8 +1342,10 @@ HIDDEN SEXP R::findVar1(SEXP symbol, SEXP rho, SEXPTYPE mode, int inherits_)
     return (R_UnboundValue);
 }
 
-/*
- *  ditto, but check *mode* not *type*
+/**
+ * @brief Look up a symbol in an environment.
+ * 
+ * Ignore any values which are not of the specified mode.
  */
 
 static SEXP findVar1mode(SEXP symbol, SEXP rho, SEXPTYPE mode, int inherits,
@@ -1433,25 +1408,6 @@ static int ddVal(SEXP symbol)
     return 0;
 }
 
-/*----------------------------------------------------------------------
-  ddfindVar
-
-  This function fetches the variables ..1, ..2, etc from the first
-  frame of the environment passed as the second argument to ddfindVar.
-  These variables are implicitly defined whenever a ... object is
-  created.
-
-  To determine values for the variables we first search for an
-  explicit definition of the symbol, them we look for a ... object in
-  the frame and then walk through it to find the appropriate values.
-
-  If no value is obtained we return R_UnboundValue.
-
-  It is an error to specify a .. index longer than the length of the
-  ... object the value is sought in.
-
-*/
-
 inline static R_len_t length_DOTS(SEXP _v_) { return (TYPEOF(_v_) == DOTSXP ? Rf_length(_v_) : 0); }
 
 SEXP ddfind(int i, SEXP rho)
@@ -1474,6 +1430,22 @@ SEXP ddfind(int i, SEXP rho)
 
     return R_NilValue;
 }
+
+/**
+ * @brief This function fetches the variables ..1, ..2, etc from the first
+ * frame of the environment passed as the second argument to ddfindVar.
+ * 
+ * These variables are implicitly defined whenever a ... object is
+ * created.
+ * 
+ * To determine values for the variables we first search for an
+ * explicit definition of the symbol, them we look for a ... object in
+ * the frame and then walk through it to find the appropriate values.
+ * If no value is obtained we return R_UnboundValue.
+ * 
+ * It is an error to specify a .. index longer than the length of the
+ * ... object the value is sought in.
+ */
 
 HIDDEN
 SEXP R::ddfindVar(SEXP symbol, SEXP rho)
@@ -1524,19 +1496,15 @@ HIDDEN SEXP do_dotsNames(SEXP call, SEXP op, SEXP args, SEXP env)
 
 #undef length_DOTS
 
-/*----------------------------------------------------------------------
-
-  dynamicfindVar
-
-  This function does a variable lookup, but uses dynamic scoping rules
-  rather than the lexical scoping rules used in findVar.
-
-  Return R_UnboundValue if the symbol isn't located and the calling
-  function needs to handle the errors.
-
-*/
-
 #ifdef UNUSED
+/**
+ * @brief This function does a variable lookup, but uses dynamic scoping rules
+ * rather than the lexical scoping rules used in findVar.
+ * 
+ * @return return R_UnboundValue if the symbol isn't located and the calling
+ * function needs to handle the errors.
+ */
+
 SEXP RCNTXT::dynamicfindVar(SEXP symbol, RCNTXT *cptr)
 {
     SEXP vl;
@@ -1625,13 +1593,9 @@ SEXP Rf_findFun(SEXP symbol, SEXP rho)
     return Rf_findFun3(symbol, rho, R_CurrentExpression);
 }
 
-/*----------------------------------------------------------------------
-
-  defineVar
-
-  Assign a value in a specific environment frame.
-
-*/
+/**
+ * @brief Assign a value in a specific environment frame.
+ */
 
 void Rf_defineVar(SEXP symbol, SEXP value, SEXP rho)
 {
@@ -1701,19 +1665,17 @@ void Rf_defineVar(SEXP symbol, SEXP value, SEXP rho)
     }
 }
 
-/*----------------------------------------------------------------------
-
-  addMissingVarsToNewEnv
-
-  Add given variables (addVars - list) to given environment (env) unless
-  they are already there.  Env is a "new" environment, created by
-  NewEnvironment, as in applyClosure (so it list-based).  Slots for vars are
-  re-used.  The addVars list itself can have duplicit variables.
-
-  The implementation is performance optimized towards the common case that
-  the variables from addVars are not present in env and that addVars does
-  not have duplicit variables.
-*/
+/**
+ * @brief Add given variables (addVars - list) to given environment (env) unless
+ * they are already there.
+ * 
+ * Env is a "new" environment, created by NewEnvironment, as in applyClosure (so it list-based).
+ * Slots for vars are re-used.  The addVars list itself can have duplicit variables.
+ * 
+ * The implementation is performance optimized towards the common case that
+ * the variables from addVars are not present in env and that addVars does
+ * not have duplicit variables.
+ */
 
 HIDDEN
 void Rf_addMissingVarsToNewEnv(SEXP env, SEXP addVars)
@@ -1755,15 +1717,13 @@ void Rf_addMissingVarsToNewEnv(SEXP env, SEXP addVars)
     }
 }
 
-/*----------------------------------------------------------------------
-
-  setVarInFrame
-
-  Assign a new value to an existing symbol in a frame.
-  Return the symbol if successful and R_NilValue if not.
-
-  [ Taken static in 2.4.0: not called for emptyenv or baseenv. ]
-*/
+/**
+ * @brief Assign a new value to an existing symbol in a frame.
+ * 
+ * @return Return the symbol if successful and R_NilValue if not.
+ * 
+ * @note Taken static in 2.4.0: not called for emptyenv or baseenv.
+ */
 
 static SEXP setVarInFrame(SEXP rho, SEXP symbol, SEXP value)
 {
@@ -1821,21 +1781,19 @@ static SEXP setVarInFrame(SEXP rho, SEXP symbol, SEXP value)
 }
 
 
-/*----------------------------------------------------------------------
-
-    setVar
-
-    Assign a new value to bound symbol.	 Note this does the "inherits"
-    case.  I.e. it searches frame-by-frame for a symbol and binds the
-    given value to the first symbol encountered.  If no symbol is
-    found then a binding is created in the global environment.
-
-    Changed in R 2.4.0 to look in the base environment (previously the
-    search stopped befor the base environment, but would (and still
-    does) assign into the base namespace if that is on the search and
-    the symbol existed there).
-
-*/
+/**
+ * @brief Assign a new value to bound symbol.
+ * 
+ * Note this does the "inherits" case.
+ * I.e. it searches frame-by-frame for a symbol and binds the
+ * given value to the first symbol encountered.  If no symbol is
+ * found then a binding is created in the global environment.
+ * 
+ * Changed in R 2.4.0 to look in the base environment (previously the
+ * search stopped befor the base environment, but would (and still
+ * does) assign into the base namespace if that is on the search and
+ * the symbol existed there).
+ */
 
 void Rf_setVar(SEXP symbol, SEXP value, SEXP rho)
 {
@@ -1850,14 +1808,11 @@ void Rf_setVar(SEXP symbol, SEXP value, SEXP rho)
 
 
 
-/*----------------------------------------------------------------------
-
-  gsetVar
-
-  Assignment in the base environment. Here we assign directly into
-  the base environment.
-
-*/
+/**
+ * @brief Assignment in the base environment.
+ * 
+ * Here we assign directly into the base environment.
+ */
 
 void Rf_gsetVar(SEXP symbol, SEXP value, SEXP rho)
 {
@@ -1871,17 +1826,19 @@ void Rf_gsetVar(SEXP symbol, SEXP value, SEXP rho)
     SET_SYMBOL_BINDING_VALUE(symbol, value);
 }
 
-/* get environment from a subclass if possible; else return nullptr */
+/**
+ * @brief Get environment from a subclass if possible; else return nullptr.
+ */
+
 inline static SEXP simple_as_environment(SEXP arg)
 {
 	return (IS_S4_OBJECT(arg) && (TYPEOF(arg) == S4SXP) ? R_getS4DataSlot(arg, ENVSXP) : R_NilValue);
 }
 
-/*----------------------------------------------------------------------
+/**
+ * @example .Internal(assign(x, value, envir, inherits))
+ */
 
-  do_assign : .Internal(assign(x, value, envir, inherits))
-
-*/
 HIDDEN SEXP do_assign(SEXP call, SEXP op, SEXP args, SEXP rho)
 {
     SEXP name=R_NilValue, val, aenv;
@@ -1915,8 +1872,9 @@ HIDDEN SEXP do_assign(SEXP call, SEXP op, SEXP args, SEXP rho)
 
 
 /**
- * do_list2env : .Internal(list2env(x, envir))
-  */
+ * @example .Internal(list2env(x, envir))
+ */
+
 HIDDEN SEXP do_list2env(SEXP call, SEXP op, SEXP args, SEXP rho)
 {
     SEXP x, xnms, envir;
@@ -1943,19 +1901,6 @@ HIDDEN SEXP do_list2env(SEXP call, SEXP op, SEXP args, SEXP rho)
 
     return envir;
 }
-
-
-/*----------------------------------------------------------------------
-
-  do_remove
-
-  There are three arguments to do_remove; a list of names to remove,
-  an optional environment (if missing set it to R_GlobalEnv) and
-  inherits, a logical indicating whether to look in the parent env if
-  a symbol is not found in the supplied env.  This is ignored if
-  environment is not specified.
-
-*/
 
 static int RemoveVariable(SEXP name, int hashcode, SEXP env)
 {
@@ -1999,9 +1944,20 @@ static int RemoveVariable(SEXP name, int hashcode, SEXP env)
     return found;
 }
 
+/**
+ * @brief Remove elements for an environment
+ * 
+ * There are three arguments to do_remove; a list of names to remove,
+ * an optional environment (if missing set it to R_GlobalEnv) and
+ * inherits, a logical indicating whether to look in the parent env if
+ * a symbol is not found in the supplied env.  This is ignored if
+ * environment is not specified.
+ * 
+ * @example .Internal(remove(list, envir, inherits))
+ */
+
 HIDDEN SEXP do_remove(SEXP call, SEXP op, SEXP args, SEXP rho)
 {
-    /* .Internal(remove(list, envir, inherits)) */
 
     SEXP name, envarg, tsym, tenv;
     int ginherits = 0;
@@ -2068,18 +2024,16 @@ void R_removeVarFromFrame(SEXP name, SEXP env)
 }
 
 
-/*----------------------------------------------------------------------
-
-  do_get
-
-  This function returns the SEXP associated with the character
-  argument.  It needs the environment of the calling function as a
-  default.
-
-      exists (x, envir, mode, inherits)
-      get    (x, envir, mode, inherits)
-      get0   (x, envir, mode, inherits, value_if_not_exists)
-*/
+/**
+ * @brief This function returns the SEXP associated with the character
+ * argument.
+ * 
+ * It needs the environment of the calling function as a default.
+ * 
+ * @example exists (x, envir, mode, inherits)
+ * @example get    (x, envir, mode, inherits)
+ * @example get0   (x, envir, mode, inherits, value_if_not_exists)
+ */
 
 HIDDEN SEXP do_get(SEXP call, SEXP op, SEXP args, SEXP rho)
 {
@@ -2211,12 +2165,14 @@ static SEXP gfind(const char *name, SEXP env, SEXPTYPE mode,
 }
 
 
-/** mget(): get multiple values from an environment
- *
- * .Internal(mget(x, envir, mode, ifnotfound, inherits))
- *
+/**
+ * @brief Get multiple values from an environment
+ * 
+ * @example .Internal(mget(x, envir, mode, ifnotfound, inherits))
+ * 
  * @return  a list of the same length as x, a character vector (of names).
  */
+
 HIDDEN SEXP do_mget(SEXP call, SEXP op, SEXP args, SEXP rho)
 {
     SEXP ans, env, x, mode, ifnotfound;
@@ -2283,22 +2239,6 @@ HIDDEN SEXP do_mget(SEXP call, SEXP op, SEXP args, SEXP rho)
     UNPROTECT(2);
     return(ans);
 }
-
-/*----------------------------------------------------------------------
-
-  do_missing
-
-  This function tests whether the symbol passed as its first argument
-  is a missing argument to the current closure.  rho is the
-  environment that missing was called from.
-
-  R_isMissing is called on the not-yet-evaluated value of an argument,
-  if this is a symbol, as it could be a missing argument that has been
-  passed down.  So 'symbol' is the promise value, and 'rho' its
-  evaluation argument.
-
-  It is also called in arithmetic.cpp. for e.g. do_log
-*/
 
 static SEXP findRootPromise(SEXP p)
 {
@@ -2383,7 +2323,21 @@ HIDDEN bool R::R_isMissing(SEXP symbol, SEXP rho)
     return false;
 }
 
-/* this is primitive and a SPECIALSXP */
+/**
+ * @brief This function tests whether the symbol passed as its first argument
+ * is a missing argument to the current closure.  rho is the
+ * environment that missing was called from.
+ * 
+ * This is primitive and a SPECIALSXP
+ * 
+ * R_isMissing is called on the not-yet-evaluated value of an argument,
+ * if this is a symbol, as it could be a missing argument that has been
+ * passed down.  So 'symbol' is the promise value, and 'rho' its
+ * evaluation argument.
+ * 
+ * @note It is also called in arithmetic.cpp. for e.g. do_log
+ */
+
 HIDDEN SEXP do_missing(SEXP call, SEXP op, SEXP args, SEXP rho)
 {
     int ddv=0;
@@ -2443,13 +2397,9 @@ HIDDEN SEXP do_missing(SEXP call, SEXP op, SEXP args, SEXP rho)
     return rval;
 }
 
-/*----------------------------------------------------------------------
-
-  do_globalenv
-
-  Returns the current global environment.
-
-*/
+/**
+ * @return the current global environment.
+ */
 
 HIDDEN SEXP do_globalenv(SEXP call, SEXP op, SEXP args, SEXP rho)
 {
@@ -2457,13 +2407,9 @@ HIDDEN SEXP do_globalenv(SEXP call, SEXP op, SEXP args, SEXP rho)
     return R_GlobalEnv;
 }
 
-/*----------------------------------------------------------------------
-
-  do_baseenv
-
-  Returns the current base environment.
-
-*/
+/**
+ * @return the current base environment.
+ */
 
 HIDDEN SEXP do_baseenv(SEXP call, SEXP op, SEXP args, SEXP rho)
 {
@@ -2471,13 +2417,9 @@ HIDDEN SEXP do_baseenv(SEXP call, SEXP op, SEXP args, SEXP rho)
     return R_BaseEnv;
 }
 
-/*----------------------------------------------------------------------
-
-  do_emptyenv
-
-  Returns the current empty environment.
-
-*/
+/**
+ * @return the current empty environment.
+ */
 
 HIDDEN SEXP do_emptyenv(SEXP call, SEXP op, SEXP args, SEXP rho)
 {
@@ -2603,14 +2545,11 @@ HIDDEN SEXP do_attach(SEXP call, SEXP op, SEXP args, SEXP env)
 
 
 
-/*----------------------------------------------------------------------
-
-  do_detach
-
-  detach the specified environment.  Detachment only takes place by
-  position.
-
-*/
+/**
+ * @brief Detach the specified environment.
+ * 
+ * Detachment only takes place by position.
+ */
 
 HIDDEN SEXP do_detach(SEXP call, SEXP op, SEXP args, SEXP env)
 {
@@ -2660,13 +2599,9 @@ HIDDEN SEXP do_detach(SEXP call, SEXP op, SEXP args, SEXP env)
 
 
 
-/*----------------------------------------------------------------------
-
-  do_search
-
-  Print out the current search path.
-
-*/
+/**
+ * @brief Print out the current search path.
+ */
 
 HIDDEN SEXP do_search(SEXP call, SEXP op, SEXP args, SEXP env)
 {
@@ -2695,14 +2630,13 @@ HIDDEN SEXP do_search(SEXP call, SEXP op, SEXP args, SEXP env)
 }
 
 
-/*----------------------------------------------------------------------
+/**
+ * @brief This code implements the functionality of the "ls" and "objects"
+ * functions.
+ * 
+ * @example ls(envir, all.names, sorted)
+ */
 
-  do_ls
-
-  This code implements the functionality of the "ls" and "objects"
-  functions.  [ ls(envir, all.names, sorted) ]
-
-*/
 inline static bool NONEMPTY_(SEXP _FRAME_) { return CHAR(PRINTNAME(TAG(_FRAME_)))[0] != '.'; }
 
 static int FrameSize(SEXP frame, int all)
@@ -2747,7 +2681,7 @@ static void FrameValues(SEXP frame, int all, SEXP values, int *indx)
     if (all) {
 	while (frame != R_NilValue) {
 #define DO_FrameValues                                    \
-    SEXP value = BINDING_VALUE(frame);                \
+    SEXP value = BINDING_VALUE(frame);                    \
     if (TYPEOF(value) == PROMSXP)                         \
     {                                                     \
         PROTECT(value);                                   \
@@ -2877,7 +2811,10 @@ static void BuiltinValues(int all, int intern, SEXP values, int *indx)
     }
 }
 
-// .Internal(ls(envir, all.names, sorted)) :
+/**
+ * @example .Internal(ls(envir, all.names, sorted))
+ */
+
 HIDDEN SEXP do_ls(SEXP call, SEXP op, SEXP args, SEXP rho)
 {
     checkArity(op, args);
@@ -2901,8 +2838,11 @@ HIDDEN SEXP do_ls(SEXP call, SEXP op, SEXP args, SEXP rho)
     return R_lsInternal3(env, (Rboolean) all, (Rboolean) sort_nms);
 }
 
-/* takes an environment, a boolean indicating whether to get all
-   names and a boolean if sorted is desired */
+/**
+ * @brief Takes an environment, a boolean indicating whether to get all
+ * names and a boolean if sorted is desired
+ */
+
 SEXP R_lsInternal3(SEXP env, Rboolean all, Rboolean sorted)
 {
     if(IS_USER_DATABASE(env)) {
@@ -2942,13 +2882,20 @@ SEXP R_lsInternal3(SEXP env, Rboolean all, Rboolean sorted)
     return ans;
 }
 
-/* non-API version used in several packages */
+/**
+ * @brief non-API version used in several packages
+ */
+
 SEXP R_lsInternal(SEXP env, Rboolean all)
 {
     return R_lsInternal3(env, all, TRUE);
 }
 
-/* transform an environment into a named list: as.list.environment(.) */
+/**
+ * @brief transform an environment into a named list
+ * 
+ * @example as.list.environment(.)
+ */
 
 HIDDEN SEXP do_env2list(SEXP call, SEXP op, SEXP args, SEXP rho)
 {
@@ -3030,12 +2977,16 @@ HIDDEN SEXP do_env2list(SEXP call, SEXP op, SEXP args, SEXP rho)
     }
 }
 
-/*
- * apply a function to all objects in an environment and return the
- * results in a list.
- * Equivalent to lapply(as.list(env, all.names=all.names), FUN, ...)
+/**
+ * @brief apply a function to all objects in an environment
+ * 
+ * @return return the results in a list.
+ * 
+ * @example lapply(as.list(env, all.names=all.names), FUN, ...)
+ * 
+ * @note This is a special .Internal
  */
-/* This is a special .Internal */
+
 HIDDEN SEXP do_eapply(SEXP call, SEXP op, SEXP args, SEXP rho)
 {
     SEXP env, ans, R_fcall, FUN, tmp, tmp2, ind;
@@ -3153,14 +3104,10 @@ R_xlen_t Rf_envxlength(SEXP rho)
         return FrameSize(FRAME(rho), 1);
 }
 
-/*----------------------------------------------------------------------
-
-  do_builtins
-
-  Return the names of all the built in functions.  These are fetched
-  directly from the symbol table.
-
-*/
+/**
+ * @return Return the names of all the built in functions.  These are fetched
+ * directly from the symbol table.
+ */
 
 HIDDEN SEXP do_builtins(SEXP call, SEXP op, SEXP args, SEXP rho)
 {
@@ -3179,20 +3126,17 @@ HIDDEN SEXP do_builtins(SEXP call, SEXP op, SEXP args, SEXP rho)
     return ans;
 }
 
-/*----------------------------------------------------------------------
-
-  do_pos2env
-
-  This function returns the environment at a specified position in the
-  search path or the environment of the caller of
-  pos.to.env (? but pos.to.env is usually used in arg lists and hence
-  is evaluated in the calling environment so this is one higher).
-
-  When pos = -1 the environment of the closure that pos2env is
-  evaluated in is obtained. Note: this relies on pos.to.env being
-  a primitive.
-
+/**
+ * This function returns the environment at a specified position in the
+ * search path or the environment of the caller of
+ * pos.to.env (? but pos.to.env is usually used in arg lists and hence
+ * is evaluated in the calling environment so this is one higher).
+ * 
+ * When pos = -1 the environment of the closure that pos2env is
+ * evaluated in is obtained. Note: this relies on pos.to.env being
+ * a primitive.
  */
+
 static SEXP pos2env(int pos, SEXP call)
 {
     SEXP env;
@@ -3224,7 +3168,10 @@ static SEXP pos2env(int pos, SEXP call)
     return env;
 }
 
-/* this is primitive */
+/**
+ * @note this is primitive
+ */
+
 HIDDEN SEXP do_pos2env(SEXP call, SEXP op, SEXP args, SEXP rho)
 {
     SEXP env, pos;
@@ -3267,7 +3214,10 @@ static SEXP matchEnvir(SEXP call, const char *what)
     return R_NilValue;
 }
 
-/* This is primitive */
+/**
+ * @note this is primitive
+ */
+
 HIDDEN SEXP do_as_environment(SEXP call, SEXP op, SEXP args, SEXP rho)
 {
     SEXP arg = CAR(args), ans;
@@ -3610,7 +3560,10 @@ HIDDEN SEXP do_activeBndFun(SEXP call, SEXP op, SEXP args, SEXP rho)
     return R_ActiveBindingFunction(sym, env);
 }
 
-/* This is a .Internal with no wrapper, currently unused in base R */
+/**
+ * @note This is a .Internal with no wrapper, currently unused in base R
+ */
+
 HIDDEN SEXP do_mkUnbound(SEXP call, SEXP op, SEXP args, SEXP rho)
 {
     SEXP sym;
@@ -3933,6 +3886,16 @@ SEXP Rf_mkCharLen(const char *name, int len)
     return mkCharLenCE(name, len, CE_NATIVE);
 }
 
+/**
+ * @brief Make a character (CHARSXP) variable.
+ * 
+ * @param name character string to be used when creating character variable
+ * 
+ * @return CHARXSP object
+ * 
+ * @note See Rinlinedfuns.h
+ */
+
 SEXP Rf_mkChar(const char *const name)
 {
     size_t len = strlen(name);
@@ -3975,7 +3938,9 @@ HIDDEN void R::InitStringHash()
 
 /* #define DEBUG_GLOBAL_STRING_HASH 1 */
 
-/* Resize the global R_StringHash CHARSXP cache */
+/**
+ * @brief Resize the global R_StringHash CHARSXP cache
+ */
 static void R_StringHash_resize(unsigned int newsize)
 {
     SEXP old_table = R_StringHash;
@@ -4027,10 +3992,14 @@ static void R_StringHash_resize(unsigned int newsize)
 }
 
 
-/* mkCharLenCE - make a character (CHARSXP) variable and set its
-   encoding bit.  If a CHARSXP with the same string already exists in
-   the global CHARSXP cache, R_StringHash, it is returned.  Otherwise,
-   a new CHARSXP is created, added to the cache and then returned. */
+/**
+ * @brief Make a character (CHARSXP) variable and set its
+ * encoding bit.
+ * 
+ * @note If a CHARSXP with the same string already exists in
+ * the global CHARSXP cache, R_StringHash, it is returned.  Otherwise,
+ * a new CHARSXP is created, added to the cache and then returned.
+ */
 
 SEXP Rf_mkCharLenCE(const char * const name, int len, cetype_t enc)
 {
@@ -4216,9 +4185,9 @@ SEXP Rf_topenv(SEXP target, SEXP envir) {
     return R_GlobalEnv;
 }
 
-/** topenv():
+/**
  *
- * .Internal(topenv(envir, matchThisEnv))
+ * @example .Internal(topenv(envir, matchThisEnv))
  *
  * @return
  */
@@ -4288,8 +4257,12 @@ void findFunctionForBodyInNamespace(SEXP body, SEXP nsenv, SEXP nsname) {
     UNPROTECT(3); /* names, elist, args */
 }
 
-/*  findFunctionForBody - for a given function body, try to find a closure and
-    the name of its binding (and the name of the package). For debugging. */
+/**
+ * @brief For a given function body, try to find a closure and
+ * the name of its binding (and the name of the package).
+ * 
+ * @note For debugging.
+ * */
 HIDDEN void Rf_findFunctionForBody(SEXP body) {
     SEXP nstable = HASHTAB(R_NamespaceRegistry);
     CHECK_HASH_TABLE(nstable);

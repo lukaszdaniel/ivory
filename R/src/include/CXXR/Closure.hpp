@@ -35,6 +35,14 @@
 
 namespace R
 {
+    /** @brief Class representing a functional programming closure.
+     *
+     * A closure associates a function definition (the body) with a
+     * list of formal arguments and an environment.  In evaluating the
+     * function, non-local variables within the function definition
+     * are interpreted by reference to the specified environment (and
+     * its enclosing environments).
+     */
     class Closure : public RObject
     {
     private:

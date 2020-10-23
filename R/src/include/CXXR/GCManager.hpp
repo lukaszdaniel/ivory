@@ -69,6 +69,8 @@ namespace R
 
 	/** @brief Initiate a garbage collection.
 	 *
+	 * @param bytes_wanted Bytes required to be freed.
+	 * 
 	 * @param full If this is true, a garbage collection of all
 	 *          generations of nodes is forced.  Otherwise
 	 *          GCManager decides for itself how many generations
@@ -82,8 +84,9 @@ namespace R
 	 * If called more than once in a single program run, the
 	 * second and subsequent calls do nothing.
 	 *
-	 * @param initial_threshold  Initial value for the collection
-	 *          threshold.
+	 * @param initial_threshold  Initial value for the collection threshold.
+	 * 
+	 * @param initial_node_threshold Initial value for the node collection threshold.
 	 *
 	 */
 		static void initialize(size_t initial_threshold, size_t initial_node_threshold);
@@ -91,7 +94,7 @@ namespace R
 	/**
 	 * @return true iff garbage collection torture is enabled.
 	 */
-		bool isTortured() { return s_tortured; }
+		static bool isTortured() { return s_tortured; }
 
 	/** @brief Maximum number of bytes used.
 	 *

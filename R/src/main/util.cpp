@@ -2128,7 +2128,7 @@ HIDDEN SEXP do_enc2(SEXP call, SEXP op, SEXP args, SEXP env)
     return ans;
 }
 
-#if 0 //#ifdef USE_ICU
+#if 0 //#ifdef USE_ICU // TODO IVORY
 #include <clocale>
 #ifdef USE_ICU_APPLE
 /* macOS is missing the headers */

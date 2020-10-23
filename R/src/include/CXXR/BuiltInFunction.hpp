@@ -35,6 +35,15 @@
 
 namespace R
 {
+    /** @brief R function implemented within the interpreter.
+     *
+     * A BuiltInFunction object represents an R function that is
+     * implemented within the interpreter by a function in C++ or C.
+     * These objects are of two kinds, according to whether the
+     * arguments passed to BuiltInFunction::apply() are evaluated
+     * before being passed on to the encapsulated C/C++ function (CR's
+     * BUILTINSXP), or are passed on unevaluated (SPECIALSXP).
+     */
     class BuiltInFunction : public RObject
     {
     private:

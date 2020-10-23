@@ -44,14 +44,46 @@ namespace R
     } // namespace ForceNonInline
 
     /* Environment Access Methods */
+    /**
+     * @param x Pointer to an R::Environment.
+     * @return Pointer to the frame of \a x .
+     */
     RObject *RObject::frame(RObject *x) { return x ? x->u.envsxp.m_frame : nullptr; }
 
+    /** @brief Access an environment's Frame, represented as a PairList.
+     *
+     * @param x Pointer to a R::Environment (checked).
+     *
+     * @return Pointer to a PairList representing the contents of the
+     * Frame of \a x (may be null).  This PairList is generated on the
+     * fly, so this is a relatively expensive operation.  Alterations
+     * to the returned PairList will not alter the Environment's Frame.
+     *
+     * @note Beware that since (unlike CR) this isn't a simple
+     * accessor function, its return value will need protection from
+     * garbage collection.
+     */
     RObject *RObject::enclos(RObject *x) { return x ? x->u.envsxp.m_enclos : nullptr; }
 
+    /**
+     * @param x Pointer to a R::Environment.
+     * @return Pointer to \a x 's hash table (may be NULL).
+     */
     RObject *RObject::hashtab(RObject *x) { return x ? x->u.envsxp.m_hashtab : nullptr; }
 
+    /**
+     * @param x Pointer to a R::Environment.
+     * @return \a x 's environment flags.
+     * @deprecated
+     */
     unsigned int RObject::envflags(RObject *x) { return x ? x->m_gpbits : 0; } /* for environments */
 
+    /**
+     * Set environment flags.
+     * @param x Pointer to a R::Environment.
+     * @param v The new flags.
+     * @deprecated
+     */
     void RObject::set_envflags(RObject *x, unsigned int v)
     {
         if (!x)
@@ -59,6 +91,12 @@ namespace R
         x->m_gpbits = v;
     }
 
+    /**
+     * Set environment's frame.
+     * @param x Pointer to a R::Environment.
+     * @param v Pointer to the new frame.
+     * @todo Probably should be private.
+     */
     void RObject::set_frame(RObject *x, RObject *v)
     {
         if (!x)
@@ -66,6 +104,12 @@ namespace R
         x->u.envsxp.m_frame = v;
     }
 
+    /**
+     * Set environment's enclosing environment.
+     * @param x Pointer to a R::Environment.
+     * @param v Pointer to the new enclosing environment.
+     * @todo Probably should be private.
+     */
     void RObject::set_enclos(RObject *x, RObject *v)
     {
         if (!x)
@@ -73,6 +117,12 @@ namespace R
         x->u.envsxp.m_enclos = v;
     }
 
+    /**
+     * Set environment's hash table.
+     * @param x Pointer to a R::Environment.
+     * @param v Pointer to the hash table.
+     * @todo Probably should be private.
+     */
     void RObject::set_hashtab(RObject *x, RObject *v)
     {
         if (!x)
@@ -82,5 +132,27 @@ namespace R
 
     unsigned int RObject::frame_is_locked(RObject *e) { return e ? (envflags(e) & FRAME_LOCK_MASK) : 0; }
 
-    unsigned int RObject::is_global_frame(RObject *e) { return e ? (envflags(e) & GLOBAL_FRAME_MASK) : 0; }
+    void RObject::lock_frame(RObject *x)
+    {
+        if (!x)
+            return;
+        x->m_gpbits |= FRAME_LOCK_MASK;
+    }
+
+    bool RObject::is_global_frame(RObject *e) { return e ? (envflags(e) & GLOBAL_FRAME_MASK) : 0; }
+
+    void RObject::mark_as_global_frame(RObject *x)
+    {
+        if (!x)
+            return;
+
+        x->m_gpbits |= GLOBAL_FRAME_MASK;
+    }
+    void RObject::mark_as_local_frame(RObject *x)
+    {
+        if (!x)
+            return;
+
+        x->m_gpbits &= ~(GLOBAL_FRAME_MASK);
+    }
 } // namespace R

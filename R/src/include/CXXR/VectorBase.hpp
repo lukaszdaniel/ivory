@@ -2,15 +2,17 @@
  *  R : A Computer Language for Statistical Data Analysis
  *  Copyright (C) 1999--2020  The R Core Team.
  *  Copyright (C) 1995, 1996  Robert Gentleman and Ross Ihaka
+ *  Copyright (C) 2008-2014  Andrew R. Runnalls.
+ *  Copyright (C) 2014 and onwards the Rho Project Authors.
+ *
+ *  Rho is not part of the R project, and bugs and other issues should
+ *  not be reported via r-bugs or other R project channels; instead refer
+ *  to the Rho website.
  *
  *  This header file is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU Lesser General Public License as published by
  *  the Free Software Foundation; either version 2.1 of the License, or
  *  (at your option) any later version.
- *
- *  This file is part of R. R is distributed under the terms of the
- *  GNU General Public License, either Version 2, June 1991 or Version 3,
- *  June 2007. See doc/COPYRIGHTS for details of the copyright status of R.
  *
  *  This program is distributed in the hope that it will be useful,
  *  but WITHOUT ANY WARRANTY; without even the implied warranty of
@@ -22,8 +24,12 @@
  *  https://www.R-project.org/Licenses/
  */
 
-#ifndef VECTOR_HPP
-#define VECTOR_HPP
+/** @file VectorBase.hpp
+ * @brief Class R::VectorBase and associated C interface.
+ */
+
+#ifndef VECTORBASE_HPP
+#define VECTORBASE_HPP
 
 #include <CXXR/RObject.hpp>
 
@@ -34,7 +40,7 @@ namespace R
    the RObject definition. The standard RObject takes up 7 words
    and the reduced version takes 6 words on most 64-bit systems. On most
    32-bit systems, RObject takes 8 words and the reduced version 7 words. */
-  class VECTOR : public RObject
+  class VectorBase : public RObject
   {
   private:
   public:
@@ -61,7 +67,10 @@ namespace R
   inline void *stdvec_dataptr(RObject *x) { return x ? x->m_data : nullptr; }
 #define STDVEC_DATAPTR(x) (x->m_data)
 
-  inline const char *r_char(RObject *x) { return static_cast<const char *>(stdvec_dataptr(x)); }
+  inline const char *r_char(RObject *x)
+  {
+    return static_cast<const char *>(stdvec_dataptr(x));
+  }
 
   /* writable char access for R internal use only */
 #define CHAR_RW(x) ((char *)x->m_data)
@@ -82,4 +91,4 @@ namespace R
 
 } // namespace R
 
-#endif /* VECTOR_HPP */
+#endif /* VECTORBASE_HPP */

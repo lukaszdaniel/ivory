@@ -42,8 +42,20 @@ namespace R
     }
 
     /* Primitive Access Methods */
+    /** @brief Get offset of a R::BuiltInFunction.
+     *
+     * @param x Pointer to a R::BuiltInFunction.
+     *
+     * @return The offset of this function within the function table.
+     */
     int RObject::primoffset(RObject *x) { return x ? x->u.primsxp.m_offset : 0; }
 
+    /** @brief Set the new offset for a R::BuiltInFunction.
+     *
+     * @param x Pointer to a R::BuiltInFunction (checked).
+     *
+     * @param v The new offset for this function within the function table.
+     */
     void RObject::set_primoffset(RObject *x, int v)
     {
         if (!x)

@@ -50,12 +50,33 @@ namespace R
     } // namespace ForceNonInline
 
     /* Symbol Access Methods */
+    /** @brief Symbol name.
+     *
+     * @param x Pointer to a R::Symbol (checked).
+     *
+     * @return Pointer to a R::String representing \a x's name.
+     */
     RObject *RObject::printname(RObject *x) { return x ? x->u.symsxp.m_pname : nullptr; }
 
+    /** @brief Symbol's value in the base environment.
+     *
+     * @param x Pointer to a R::Symbol (checked).
+     *
+     * @return Pointer to a R::RObject representings \a x's value.
+     *         Returns R_UnboundValue if no value is currently
+     *         associated with the Symbol.
+     */
     RObject *RObject::symvalue(RObject *x) { return x ? x->u.symsxp.m_value : nullptr; }
 
     RObject *RObject::internal(RObject *x) { return x ? x->u.symsxp.m_internal : nullptr; }
 
+    /** @brief Does symbol relate to a <tt>...</tt> expression?
+     *
+     * @param x Pointer to a R::Symbol (checked).
+     *
+     * @return \c TRUE iff this symbol denotes an element of a
+     *         <tt>...</tt> expression.
+     */
     unsigned int RObject::ddval(RObject *x) { return x ? (x->m_gpbits & DDVAL_MASK) : 0; } /* for ..1, ..2 etc */
 
     void RObject::set_ddval_bit(RObject *x)
@@ -84,6 +105,12 @@ namespace R
         }
     } /* for ..1, ..2 etc */
 
+    /** @brief Set Symbol name.
+     *
+     * @param x Pointer to a R::Symbol (checked).
+     *
+     * @param v Pointer to a R::String representing \a x's name. 
+     */
     void RObject::set_printname(RObject *x, RObject *v)
     {
         if (!x)
@@ -91,11 +118,21 @@ namespace R
         x->u.symsxp.m_pname = v;
     }
 
-    void RObject::set_symvalue(RObject *x, RObject *v)
+    /** @brief Set symbol's value in the base environment.
+     *
+     * @param x Pointer to a R::Symbol (checked).
+     *
+     * @param val Pointer to the RObject now to be considered as
+     *            the value of this symbol.  A null pointer or
+     *            R_UnboundValue are permissible values of \a val.
+     *
+     * @todo No binding to R_UnboundValue ought to be created.
+     */
+    void RObject::set_symvalue(RObject *x, RObject *val)
     {
         if (!x)
             return;
-        x->u.symsxp.m_value = v;
+        x->u.symsxp.m_value = val;
     }
 
     void RObject::set_internal(RObject *x, RObject *v)

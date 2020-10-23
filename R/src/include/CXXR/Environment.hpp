@@ -25,7 +25,7 @@
  */
 
 /** @file Environment.hpp
- * @brief Class rho::Environment and associated C interface.
+ * @brief Class R::Environment and associated C interface.
  */
 
 #ifndef ENVIRONMENT_HPP
@@ -35,6 +35,19 @@
 
 namespace R
 {
+    /** @brief Mapping from Symbols to R objects.
+     *
+     * An Environment has an associated Frame, which defines a mapping
+     * from (pointers to) R::Symbol objects to (pointers to)
+     * arbitrary objects of classes derived from RObject.  An
+     * Environment will normally have an 'enclosing environment', and
+     * the Environment class provides facilities for searching for a
+     * binding for a Symbol first in the Environment's own Frame, and
+     * then successively in the Frames of enclosing Environments.
+     *
+     * @note This class does not in itself enforce the requirement
+     * that the enclosing relationship must be acyclic.
+     */
     class Environment : public RObject
     {
     private:

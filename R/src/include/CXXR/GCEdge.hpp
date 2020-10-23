@@ -48,26 +48,34 @@ namespace R {
      * object, rather than by containing a pointer or reference
      * directly.
      *
-     * @param T This should be a pointer or const pointer to GCNode or
+     * @tparam T This should be a pointer or const pointer to GCNode or
      *          (more usually) a type derived from GCNode.
      */
-    template <class T = RObject>
+    template <class T = RObject*>
     class GCEdge {
     public:
 	/**
 	 * @param from Pointer to the GCNode which needs to refer to
 	 *          \a to.  Usually the constructed GCEdge object will
 	 *          form part of the object to which \a from points.
+	 *          (In the present implementation this parameter is
+	 *          ignored, but it should be set correctly to allow
+	 *          for future changes in implementation.)
 	 *
 	 * @param to Pointer to the object to which reference is to be
 	 *           made.
+	 *
+	 * @note This constructor does not carry out an old-to-new
+	 * check, because normally the GCEdge being constructed will
+	 * form part of newly-constructed object of a type derived
+	 * from GCNode, so will automatically be newer than any GCNode
+	 * it refers to.  If an old-to-new check is required, it is
+	 * recommended to create the GCEdge will a null 'to' pointer,
+	 * and then to redirect it to the desired target.
 	 */
-	GCEdge(GCNode* from, T to)
+	GCEdge(GCNode* /*from*/, T to)
 	    : m_target(to)
-	{
-	    GCNode::Ager ager(from ? from->m_gcgen : 0);
-	    if (m_target) m_target->conductVisitor(&ager);
-	}
+	{}
 
 	/**
 	 * @return the pointer which this GCEdge object encapsulates.
@@ -89,21 +97,26 @@ namespace R {
 	 * object.
 	 */
 
-	void redirect(GCNode* from, T to)
+	void redirect(GCNode *from, T to)
 	{
-	    GCNode::Ager ager(from->m_gcgen);
-	    m_target = to;
-	    if (m_target) m_target->conductVisitor(&ager);
+		m_target = to;
+
+		if (!from)
+			return;
+
+		GCNode::Ager ager(from->m_gcgen);
+
+		if (m_target)
+			m_target->conductVisitor(&ager);
 	}
-    private:
+
+	private:
 	T m_target;
 
 	// Not implemented:
 	GCEdge(const GCEdge&);
 	GCEdge& operator=(const GCEdge&);
     };
-
-    using Edge = GCEdge<RObject*>;
 } // namespace R
 
 #endif  // GCEDGE_HPP

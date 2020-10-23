@@ -664,8 +664,8 @@ extern inline SEXP Rf_allocVector(SEXPTYPE type, R_xlen_t length = 1)
 /* Return a dotted pair with the given CAR and CDR. */
 /* The (R) TAG slot on the cell is set to NULL. */
 
-/* Get the i-th element of a list */
-    /** @brief i-th element of a list.
+
+    /** @brief Get the i-th element of a list.
      *
      * @param list SEXP object.
      * @param i i-th element of that object.
@@ -685,7 +685,9 @@ extern inline SEXP Rf_elt(SEXP list, int i)
     return CAR(result);
 }
 
-/* Return the last element of a list */
+/**
+ * @brief Return the last element of a list
+ */
 extern inline SEXP Rf_lastElt(SEXP list)
 {
     SEXP result = R_NilValue;
@@ -761,7 +763,9 @@ extern inline SEXP Rf_listAppend(SEXP s, SEXP t)
 /* Language based list constructs.  These are identical to the list */
 /* constructs, but the results can be evaluated. */
 
-/* Return a (language) dotted pair with the given car and cdr */
+/**
+ * @brief Return a (language) dotted pair with the given car and cdr
+ */
 
 extern inline SEXP Rf_lcons(SEXP car, SEXP cdr)
 {
@@ -817,7 +821,9 @@ extern inline SEXP Rf_lang6(SEXP s, SEXP t, SEXP u, SEXP v, SEXP w, SEXP x)
 
 /* from util.cpp */
 
-/* Check to see if the arrays "x" and "y" have the identical extents */
+/**
+ * @brief Check to see if the arrays "x" and "y" have the identical extents
+ */
 
 extern inline Rboolean Rf_conformable(SEXP x, SEXP y)
 {
@@ -833,7 +839,8 @@ extern inline Rboolean Rf_conformable(SEXP x, SEXP y)
     return TRUE;
 }
 
-/* NOTE: R's Rf_inherits() is based on inherits3() in ../main/objects.cpp
+/**
+ * @note R's Rf_inherits() is based on inherits3() in ../main/objects.cpp
  * Here, use char / CHAR() instead of the slower more general Rf_translateChar()
  */
 extern inline Rboolean Rf_inherits(SEXP s, const char *name)
@@ -1029,9 +1036,12 @@ extern inline int Rf_nlevels(SEXP f)
     return LENGTH(Rf_getAttrib(f, R_LevelsSymbol));
 }
 
-/* Is an object of numeric type. */
-/* FIXME:  the LGLSXP case should be excluded here
- * (really? in many places we affirm they are treated like INTs)*/
+/**
+ * @brief Is an object of numeric type.
+ * 
+ * @todo the LGLSXP case should be excluded here
+ *       (really? in many places we affirm they are treated like INTs)
+ */
 
 extern inline Rboolean Rf_isNumeric(SEXP s)
 {
@@ -1048,7 +1058,9 @@ extern inline Rboolean Rf_isNumeric(SEXP s)
     }
 }
 
-/** Is an object "Numeric" or  complex */
+/**
+ *  @brief Is an object "Numeric" or  complex
+*/
 extern inline Rboolean Rf_isNumber(SEXP s)
 {
     switch (TYPEOF(s))
@@ -1115,9 +1127,14 @@ extern inline SEXP Rf_ScalarRaw(Rbyte x)
     return ans;
 }
 
-/* Check to see if a list can be made into a vector. */
-/* it must have every element being a vector of length 1. */
-/* BUT it does not exclude 0! */
+/**
+ * @brief Check to see if a list can be made into a vector.
+ * 
+ * @note it must have every element being a vector of length 1.
+ *       BUT it does not exclude 0!
+ * 
+ * @return true if list can be made into a vector
+ */
 
 extern inline Rboolean Rf_isVectorizable(SEXP s)
 {
@@ -1173,7 +1190,11 @@ extern inline SEXP Rf_mkNamed(SEXPTYPE TYP, const char **names)
 
 /* from gram.y */
 
-/* short cut for  ScalarString(Rf_mkChar(s)) : */
+/**
+ * @brief shortcut for ScalarString(Rf_mkChar(s))
+ * 
+ * @return string scalar
+ */
 extern inline SEXP Rf_mkString(const char *s)
 {
     SEXP t;
@@ -1184,7 +1205,11 @@ extern inline SEXP Rf_mkString(const char *s)
     return t;
 }
 
-/* index of a given C string in (translated) R string vector  */
+/**
+ * @brief Obtaing index of a string vector
+ * 
+ * @return index of a given C string in (translated) R string vector
+ */
 extern inline int Rf_stringPositionTr(SEXP string, const char *translatedElement)
 {
 

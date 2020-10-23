@@ -58,6 +58,9 @@ constexpr int NAMED_BITS = 16;
 /* Flags */
 namespace R
 {
+    /** @brief Replacement for CR's SEXPREC.
+     *
+     */
     class RObject;
 
     struct primsxp_struct
@@ -299,7 +302,7 @@ namespace R
         static void unset_ddval_bit(RObject *x);
         static void set_ddval(RObject *x, bool v); /* for ..1, ..2 etc */
         static void set_printname(RObject *x, RObject *v);
-        static void set_symvalue(RObject *x, RObject *v);
+        static void set_symvalue(RObject *x, RObject *val);
         static void set_internal(RObject *x, RObject *v);
         /* Environment Access Methods */
         static constexpr int FRAME_LOCK_MASK = (1 << 14);
@@ -313,7 +316,10 @@ namespace R
         static void set_enclos(RObject *x, RObject *v);
         static void set_hashtab(RObject *x, RObject *v);
         static unsigned int frame_is_locked(RObject *x);
-        static unsigned int is_global_frame(RObject *x);
+        static void lock_frame(RObject *x);
+        static bool is_global_frame(RObject *x);
+        static void mark_as_global_frame(RObject *x);
+        static void mark_as_local_frame(RObject *x);
         /* Promise Access Methods */
         static RObject *prcode(RObject *x);
         static void set_prcode(RObject *x, RObject *v);
@@ -633,13 +639,9 @@ union R_bndval_t
  */
 
 /* Vector Heap Structure */
-struct VECREC
+struct alignas(double) VECREC
 {
-    union
-    {
-        R::RObject *backpointer;
-        double align;
-    } u;
+    R::RObject *backpointer;
 };
 
 using VECP = VECREC *;

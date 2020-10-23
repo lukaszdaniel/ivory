@@ -462,8 +462,8 @@ void FIX_BINDING_REFCNT(SEXP x, SEXP old, SEXP new_) {
 
 inline void CHECK_OLD_TO_NEW(RObject *from_old, RObject *to_new)
 {
-    if (from_old && to_new)
-        Edge(from_old, to_new);
+    GCEdge<> e(from_old, nullptr);
+    e.redirect(from_old, to_new);
 }
 
     /* Finalization and Weak References */
@@ -535,8 +535,21 @@ inline void CHECK_OLD_TO_NEW(RObject *from_old, RObject *to_new)
     }
 } // namespace
 
+static void checkKey(SEXP key)
+{
+    switch (TYPEOF(key)) {
+    case NILSXP:
+    case ENVSXP:
+    case EXTPTRSXP:
+    case BCODESXP:
+	break;
+    default: error(_("can only weakly reference/finalize reference objects"));
+    }
+}
+
 SEXP R_MakeWeakRef(SEXP key, SEXP val, SEXP fin, Rboolean onexit)
 {
+    checkKey(key);
     switch (TYPEOF(fin))
     {
     case NILSXP:
@@ -552,6 +565,7 @@ SEXP R_MakeWeakRef(SEXP key, SEXP val, SEXP fin, Rboolean onexit)
 
 SEXP R_MakeWeakRefC(SEXP key, SEXP val, R_CFinalizer_t fin, Rboolean onexit)
 {
+    checkKey(key);
     SEXP w;
     PROTECT(key);
     PROTECT(val);
@@ -677,7 +691,6 @@ bool RunFinalizers(void)
             /**** use R_ToplevelExec here? */
             RCNTXT thiscontext;
             RCNTXT *volatile saveToplevelContext;
-            volatile int savestack;
             volatile SEXP topExp, oldHStack, oldRStack, oldRVal;
             volatile bool oldvis;
             PROTECT(oldHStack = R_HandlerStack);
@@ -695,7 +708,7 @@ bool RunFinalizers(void)
             thiscontext.start(CTXT_TOPLEVEL, R_NilValue, R_GlobalEnv, R_BaseEnv, R_NilValue, R_NilValue);
             saveToplevelContext = R_ToplevelContext;
             PROTECT(topExp = R_CurrentExpr);
-            savestack = R_PPStackTop;
+            volatile int savestack = R_PPStackTop;
             /* The value of 'next' is protected to make it safe
 	       for this routine to be called recursively from a
 	       gc triggered by a finalizer. */
@@ -1128,12 +1141,11 @@ HIDDEN void R::get_current_mem(size_t &smallvsize,
 HIDDEN SEXP do_gc(SEXP call, SEXP op, SEXP args, SEXP rho)
 {
     SEXP value;
-    bool reset_max, full;
 
     checkArity(op, args);
     std::ostream* report_os = GCManager::setReporting(Rf_asLogical(CAR(args)) ? &std::cerr : nullptr);
-    reset_max = asLogical(CADR(args));
-    full = asLogical(CADDR(args));
+    bool reset_max = asLogical(CADR(args));
+    bool full = asLogical(CADDR(args));
     GCManager::gc(0, full);
 #ifndef IMMEDIATE_FINALIZERS
     R_RunPendingFinalizers();
@@ -1431,7 +1443,6 @@ SEXP Rf_allocSExp(SEXPTYPE t)
    unless a GC will actually occur. */
 SEXP Rf_cons(SEXP car, SEXP cdr)
 {
-    SEXP s = nullptr;
     if (GCManager::FORCE_GC() || GCManager::nodeTriggerLevel() <= GCNode::numNodes())
     {
         PROTECT(car);
@@ -1442,7 +1453,7 @@ SEXP Rf_cons(SEXP car, SEXP cdr)
 
         PROTECT(car);
         PROTECT(cdr);
-        s = new RObject(LISTSXP);
+        SEXP s = new RObject(LISTSXP);
         UNPROTECT(2);
 
 

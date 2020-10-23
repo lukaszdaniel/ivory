@@ -7,7 +7,7 @@ GIT = `if [ -d "$(top_builddir)/.git" ]; then echo "git"; fi`
 VER = $(shell sed -e 's/\([^ ]*\).*/\1/' ../../VERSION)
 
 ## keep these in step with ./Makefile.in
-SRC_HEADERS = R.h S.h Rdefines.h Rembedded.h Rinternals.h Localization.h RObject.hpp List.hpp BuiltInFunction.hpp Closure.hpp Environment.hpp Vector.hpp Symbol.hpp Promise.hpp
+SRC_HEADERS = R.h S.h Rdefines.h Rembedded.h Rinternals.h Localization.h RObject.hpp List.hpp BuiltInFunction.hpp Closure.hpp Environment.hpp VectorBase.hpp Symbol.hpp Promise.hpp
 ## this deliberately does not include Rinterfaces.h, which is Unix-only
 OBJ_HEADERS = Rconfig.h Rmath.h Rversion.h
 GW32_HEADERS = iconv.h psignal.h

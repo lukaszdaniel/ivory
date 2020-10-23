@@ -44,8 +44,21 @@ namespace R
     } // namespace ForceNonInline
 
     /* Promise Access Methods */
+    /** @brief Access the expression of a R::Promise.
+     *
+     * @param x Pointer to a R::Promise (checked).
+     *
+     * @return Pointer to the expression to be evaluated by the
+     *         R::Promise. 
+     */
     RObject *RObject::prcode(RObject *x) { return x ? x->u.promsxp.m_expr : nullptr; }
 
+    /** @brief Set the expression of a R::Promise.
+     *
+     * @param x Pointer to a R::Promise (checked).
+     *
+     * @param v Pointer to the expression to be assigned to the R::Promise.
+     */
     void RObject::set_prcode(RObject *x, RObject *v)
     {
         if (!x)
@@ -53,10 +66,34 @@ namespace R
         x->u.promsxp.m_expr = v;
     }
 
+     /** @brief Access the environment of a R::Promise.
+     *
+     * @param x Pointer to a R::Promise (checked).
+     *
+     * @return Pointer to the environment of the R::Promise. 
+     */
     RObject *RObject::prenv(RObject *x) { return x ? x->u.promsxp.m_env : nullptr; }
 
+    /** @brief Access the value of a R::Promise.
+     *
+     * @param x Pointer to a R::Promise (checked).
+     *
+     * @return Pointer to the value of the R::Promise, or to
+     *         R_UnboundValue if it has not yet been evaluated..
+     */
     RObject *RObject::prvalue(RObject *x) { return x ? x->u.promsxp.m_value : nullptr; }
 
+    /** @brief Set the value of a R::Promise.
+     *
+     * Once the value is set to something other than R_UnboundValue,
+     * the environment pointer is set null.
+     *
+     * @param x Pointer to a R::Promise (checked).
+     *
+     * @param v Pointer to the value to be assigned to the R::Promise.
+     *
+     * @todo Replace this with a method call to evaluate the R::Promise.
+     */
     void RObject::set_prvalue(RObject *x, RObject *v)
     {
         if (!x)
@@ -66,6 +103,12 @@ namespace R
 
     unsigned int RObject::prseen(RObject *x) { return x ? x->m_gpbits : 0; }
 
+     /** @brief Set the environment of a R::Promise.
+     *
+     * @param x Pointer to a R::Promise (checked).
+     *
+     * @param v Pointer to the environment to be assigned to the R::Promise. 
+     */
     void RObject::set_prenv(RObject *x, RObject *v)
     {
         if (!x)

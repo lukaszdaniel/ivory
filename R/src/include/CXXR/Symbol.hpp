@@ -35,6 +35,47 @@
 
 namespace R
 {
+    /** @brief Class used to represent R symbols.
+     *
+     * A Symbol is an R identifier.  Each Symbol (except for
+     * pseudo-symbols, see below) has a name, namely a String giving the
+     * textual representation of the identifier.  Generally speaking,
+     * however, a Symbol object is identified by its address rather
+     * than by its name.  Consequently, the class enforces the
+     * invariant that there is a most one Symbol object with a given
+     * name (but this does not apply to pseudo-symbols).
+     *
+     * Symbols come in two varieties, standard symbols and pseudo-symbols,
+     * both implemented by this class.  Dot-dot symbols are a
+     * subvariety of standard symbols.
+     *
+     * Standard symbols are generated using the static member function
+     * obtain(), and (as explained above) have the property that there
+     * is at most one standard symbol with a given name.  This is
+     * enforced by an internal table mapping names to standard
+     * symbols.
+     *
+     * Dot-dot symbols have names of the form '<tt>..</tt><i>n</i>',
+     * where <i>n</i> is a positive integer.  These are preferably
+     * generated using the static member function obtainDotDotSymbol()
+     * (though they can also be generated using obtain() ), and are
+     * used internally by the interpreter to refer to elements of a
+     * '<tt>...</tt>' argument list.  (Note that CR does not
+     * consistently enforce the 'at most one Symbol per name' rule for
+     * dot-dot symbols; R does.)
+     *
+     * Pseudo-symbols are used to implement certain pseudo-objects
+     * (::R_MissingArg and ::R_UnboundValue) that CR expects to have
+     * ::SEXPTYPE SYMSXP.  Each psuedo-symbol has a blank string as
+     * its name, but despite this each of them is a distinct symbol.
+     *
+     * @note Following the practice with CR's symbol table, Symbol
+     * objects, once created, are permanently preserved against
+     * garbage collection.  There is no inherent reason for this in
+     * R, but some packages may rely on it.  Consequently there is
+     * no need to use smart pointers such as GCStackRoot<Symbol> or
+     * GCEdge<Symbol>: plain pointers will do fine.
+     */
     class Symbol : public RObject
     {
     private:

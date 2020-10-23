@@ -40,10 +40,10 @@
 #include <iostream>
 #include <string>
 #include <CXXR/RObject.hpp>
-#include <CXXR/RList.hpp>
+#include <CXXR/ConsCell.hpp>
 #include <CXXR/BuiltInFunction.hpp>
 #include <CXXR/Symbol.hpp>
-#include <CXXR/Vector.hpp>
+#include <CXXR/VectorBase.hpp>
 #include <CXXR/Environment.hpp>
 #include <CXXR/Promise.hpp>
 #include <CXXR/Closure.hpp>
@@ -1211,7 +1211,7 @@ namespace R
     void memtrace_report(void *old, void *_new);
     SEXP mkCLOSXP(SEXP formals, SEXP body, SEXP rho);
     SEXP mkFalse(void);
-    SEXP mkPRIMSXP(int offset, int eval);
+    SEXP mkPRIMSXP(int offset, bool eval);
     SEXP mkPROMISE(SEXP expr, SEXP rho);
     SEXP R_mkEVPROMISE(SEXP expr, SEXP val);
     SEXP R_mkEVPROMISE_NR(SEXP expr, SEXP val);

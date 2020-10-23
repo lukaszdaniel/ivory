@@ -29,15 +29,23 @@
 #include <Defn.h>
 
 
-/*  mkPRIMSXP - return a builtin function      */
-/*              either "builtin" or "special"  */
+/**
+ * @brief Create a R::BuiltInFunction object
+ * 
+ * @param offset offset for the R::BuiltInFunction
+ * 
+ * @param eval parameter to determine whether R::BuiltInFunction
+ *              is a "builtin" or "special"
+ * 
+ * @return builtin function, either "builtin" or "special"
+ * 
+ * @note The value produced is cached do avoid the need for GC protection
+ *       in cases where a .Primitive is produced by unserializing or
+ *       reconstructed after a package has clobbered the value assigned to
+ *       a symbol in the base package.
+ */
 
-/*  The value produced is cached do avoid the need for GC protection
-    in cases where a .Primitive is produced by unserializing or
-    reconstructed after a package has clobbered the value assigned to
-    a symbol in the base package. */
-
-HIDDEN SEXP R::mkPRIMSXP(int offset, int eval)
+HIDDEN SEXP R::mkPRIMSXP(int offset, bool eval)
 {
     SEXP result;
     SEXPTYPE type = eval ? BUILTINSXP : SPECIALSXP;
@@ -72,13 +80,22 @@ HIDDEN SEXP R::mkPRIMSXP(int offset, int eval)
     return result;
 }
 
-/* This is called by function() {}, where an invalid
-   body should be impossible. When called from
-   other places (eg do_asfunction) they
-   should do this checking in advance */
-
-/*  mkCLOSXP - return a closure with formals f,  */
-/*             body b, and environment rho       */
+/**
+ * @brief Create a R::Closure object
+ * 
+ * @param formals formal arguments to be assigned to the R::Closure
+ * 
+ * @param body function body to be assigned to the R::Closure
+ * 
+ * @param rho environment to be assigned to the R::Closure
+ * 
+ * @return return a closure with formals f, body b, and environment rho
+ * 
+ * @note This is called by function() {}, where an invalid
+ *       body should be impossible. When called from
+ *       other places (eg do_asfunction) they
+ *       should do this checking in advance.
+ */
 
 HIDDEN SEXP R::mkCLOSXP(SEXP formals, SEXP body, SEXP rho)
 {
@@ -118,11 +135,6 @@ HIDDEN SEXP R::mkCLOSXP(SEXP formals, SEXP body, SEXP rho)
     return c;
 }
 
-/* mkChar - make a character (CHARSXP) variable -- see Rinlinedfuns.h */
-
-/*  mkSYMSXP - return a symsxp with the string  */
-/*             name inserted in the name field  */
-
 static bool isDDName(SEXP name)
 {
     const char *buf;
@@ -138,6 +150,16 @@ static bool isDDName(SEXP name)
     return false;
 }
 
+/**
+ * @brief Create a R::Symbol object
+ * 
+ * @param name name of the R::Symbol
+ * 
+ * @param value value to be assigned
+ * 
+ * @return symsxp with the string name inserted in the name field
+ */
+ 
 HIDDEN SEXP R::mkSYMSXP(SEXP name, SEXP value)
 {
     PROTECT(name);
