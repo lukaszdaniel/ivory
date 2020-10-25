@@ -1528,9 +1528,9 @@ SEXP R::NewEnvironment(SEXP namelist, SEXP valuelist, SEXP rho)
         UNPROTECT(3);
 
     INIT_REFCNT(newrho);
-    RObject::set_frame(newrho, valuelist);
+    Environment::set_frame(newrho, valuelist);
     INCREMENT_REFCNT(valuelist);
-    RObject::set_enclos(newrho, CHK(rho));
+    Environment::set_enclos(newrho, CHK(rho));
     if (rho)
         INCREMENT_REFCNT(rho);
 
@@ -1568,11 +1568,11 @@ HIDDEN SEXP R::mkPROMISE(SEXP expr, SEXP rho)
     ENSURE_NAMEDMAX(expr);
 
     INIT_REFCNT(s);
-    RObject::set_prcode(s, CHK(expr));
+    Promise::set_prcode(s, CHK(expr));
     INCREMENT_REFCNT(expr);
-    RObject::set_prenv(s, CHK(rho));
+    Promise::set_prenv(s, CHK(rho));
     INCREMENT_REFCNT(rho);
-    RObject::set_prvalue(s, R_UnboundValue);
+    Promise::set_prvalue(s, R_UnboundValue);
     SET_PRSEEN(s, 0);
     return s;
 }
@@ -1592,7 +1592,7 @@ HIDDEN SEXP R::R_mkEVPROMISE_NR(SEXP expr, SEXP val)
     return prom;
 }
 
-/* All vector objects must be a multiple of sizeof(SEXPREC_ALIGN)
+/* All vector objects must be a multiple of sizeof(RObject)
    bytes so that alignment is preserved for all objects */
 
 /* Allocate a vector object (and also list-like objects).
@@ -1718,7 +1718,7 @@ SEXP Rf_allocVector3(SEXPTYPE type, R_xlen_t length = 1, R_allocator_t *allocato
     s->m_databytes = bytes;
 	// We don't want the garbage collector trying to mark this
 	// node's children yet:
-    R::RObject::set_stdvec_length(s, 0);
+    R::VectorBase::set_stdvec_length(s, 0);
 
     if (size >= 0) {
 	    bool success = false;
@@ -1755,9 +1755,9 @@ SEXP Rf_allocVector3(SEXPTYPE type, R_xlen_t length = 1, R_allocator_t *allocato
 			      dsize);
 	    }
     }
-    R::RObject::set_stdvec_length(s, length);
+    R::VectorBase::set_stdvec_length(s, length);
     R::RObject::set_altrep(s, 0);
-    R::RObject::set_stdvec_truelength(s, 0);
+    R::VectorBase::set_stdvec_truelength(s, 0);
     INIT_REFCNT(s);
 
     /* The following prevents disaster in the case */
@@ -2536,14 +2536,14 @@ void (SETLENGTH)(SEXP x, R_xlen_t v)
         error(_("SETLENGTH() cannot be applied to an ALTVEC object."));
     if (!isVector(x))
         error(_("SETLENGTH() can only be applied to a standard vector, not a '%s'"), type2char(TYPEOF(x)));
-    R::RObject::set_stdvec_length(CHK2(x), v);
+    R::VectorBase::set_stdvec_length(CHK2(x), v);
 }
 
-void (SET_TRUELENGTH)(SEXP x, R_xlen_t v) { R::RObject::set_truelength(CHK2(x), v); }
+void (SET_TRUELENGTH)(SEXP x, R_xlen_t v) { R::VectorBase::set_truelength(CHK2(x), v); }
 int  (IS_LONG_VEC)(SEXP x) { return IS_LONG_VEC(CHK2(x)); }
 #if defined(TESTING_WRITE_BARRIER) || defined(COMPILING_IVORY)
-R_xlen_t (STDVEC_LENGTH)(SEXP x) { return R::RObject::stdvec_length(CHK2(x)); }
-R_xlen_t (STDVEC_TRUELENGTH)(SEXP x) { return R::RObject::stdvec_truelength(CHK2(x)); }
+R_xlen_t (STDVEC_LENGTH)(SEXP x) { return R::VectorBase::stdvec_length(CHK2(x)); }
+R_xlen_t (STDVEC_TRUELENGTH)(SEXP x) { return R::VectorBase::stdvec_truelength(CHK2(x)); }
 void (SETALTREP)(SEXP x, int v) { R::RObject::set_altrep(x, v); }
 #endif
 
@@ -2988,17 +2988,17 @@ void *(EXTPTR_PTR)(SEXP x) { return R::RObject::extptr_ptr(CHK(x)); }
 void (SET_MISSING)(SEXP x, int v) { R::RObject::set_missing(CHKCONS(x), v); }
 
 /* Closure Accessors */
-SEXP (FORMALS)(SEXP x) { return CHK(R::RObject::formals(CHK(x))); }
-SEXP (BODY)(SEXP x) { return CHK(R::RObject::body(CHK(x))); }
-SEXP (CLOENV)(SEXP x) { return CHK(R::RObject::cloenv(CHK(x))); }
-int (RDEBUG)(SEXP x) { return R::RObject::rdebug(CHK(x)); }
-int (RSTEP)(SEXP x) { return R::RObject::rstep(CHK(x)); }
+SEXP (FORMALS)(SEXP x) { return CHK(R::Closure::formals(CHK(x))); }
+SEXP (BODY)(SEXP x) { return CHK(R::Closure::body(CHK(x))); }
+SEXP (CLOENV)(SEXP x) { return CHK(R::Closure::cloenv(CHK(x))); }
+int (RDEBUG)(SEXP x) { return R::Closure::rdebug(CHK(x)); }
+int (RSTEP)(SEXP x) { return R::Closure::rstep(CHK(x)); }
 
-void (SET_FORMALS)(SEXP x, SEXP v) { FIX_REFCNT(x, R::RObject::formals(x), v); CHECK_OLD_TO_NEW(x, v); RObject::set_formals(x, v); }
-void (SET_BODY)(SEXP x, SEXP v) { FIX_REFCNT(x, R::RObject::body(x), v); CHECK_OLD_TO_NEW(x, v); RObject::set_body(x, v); }
-void (SET_CLOENV)(SEXP x, SEXP v) { FIX_REFCNT(x, R::RObject::cloenv(x), v); CHECK_OLD_TO_NEW(x, v); RObject::set_cloenv(x, v); }
-void (SET_RDEBUG)(SEXP x, int v) { R::RObject::set_rdebug(CHK(x), v); }
-void (SET_RSTEP)(SEXP x, int v) { R::RObject::set_rstep(CHK(x), v); }
+void (SET_FORMALS)(SEXP x, SEXP v) { FIX_REFCNT(x, R::Closure::formals(x), v); CHECK_OLD_TO_NEW(x, v); R::Closure::set_formals(x, v); }
+void (SET_BODY)(SEXP x, SEXP v) { FIX_REFCNT(x, R::Closure::body(x), v); CHECK_OLD_TO_NEW(x, v); R::Closure::set_body(x, v); }
+void (SET_CLOENV)(SEXP x, SEXP v) { FIX_REFCNT(x, R::Closure::cloenv(x), v); CHECK_OLD_TO_NEW(x, v); R::Closure::set_cloenv(x, v); }
+void (SET_RDEBUG)(SEXP x, int v) { R::Closure::set_rdebug(CHK(x), v); }
+void (SET_RSTEP)(SEXP x, int v) { R::Closure::set_rstep(CHK(x), v); }
 
 /* These are only needed with the write barrier on */
 #if defined(TESTING_WRITE_BARRIER) || defined(COMPILING_IVORY)
@@ -3010,46 +3010,46 @@ void (SET_PRIMOFFSET)(SEXP x, int v) { R::RObject::set_primoffset(CHK(x), v); }
 #endif
 
 /* Symbol Accessors */
-SEXP (PRINTNAME)(SEXP x) { return CHK(R::RObject::printname(CHK(x))); }
-SEXP (SYMVALUE)(SEXP x) { return CHK(R::RObject::symvalue(CHK(x))); }
-SEXP (INTERNAL)(SEXP x) { return CHK(R::RObject::internal(CHK(x))); }
-int (DDVAL)(SEXP x) { return R::RObject::ddval(CHK(x)); }
+SEXP (PRINTNAME)(SEXP x) { return CHK(R::Symbol::printname(CHK(x))); }
+SEXP (SYMVALUE)(SEXP x) { return CHK(R::Symbol::symvalue(CHK(x))); }
+SEXP (INTERNAL)(SEXP x) { return CHK(R::Symbol::internal(CHK(x))); }
+int (DDVAL)(SEXP x) { return R::Symbol::ddval(CHK(x)); }
 
-void (SET_PRINTNAME)(SEXP x, SEXP v) { FIX_REFCNT(x, R::RObject::printname(x), v); CHECK_OLD_TO_NEW(x, v); RObject::set_printname(x, v); }
+void (SET_PRINTNAME)(SEXP x, SEXP v) { FIX_REFCNT(x, R::Symbol::printname(x), v); CHECK_OLD_TO_NEW(x, v); R::Symbol::set_printname(x, v); }
 
 void (SET_SYMVALUE)(SEXP x, SEXP v)
 {
-    if (R::RObject::symvalue(x) == v)
+    if (R::Symbol::symvalue(x) == v)
         return;
-    FIX_BINDING_REFCNT(x, R::RObject::symvalue(x), v);
+    FIX_BINDING_REFCNT(x, R::Symbol::symvalue(x), v);
     CHECK_OLD_TO_NEW(x, v);
-    RObject::set_symvalue(x, v);
+    R::Symbol::set_symvalue(x, v);
 }
 
-void (SET_INTERNAL)(SEXP x, SEXP v) { FIX_REFCNT(x, R::RObject::internal(x), v); CHECK_OLD_TO_NEW(x, v); RObject::set_internal(x, v); }
-void (SET_DDVAL)(SEXP x, int v) { R::RObject::set_ddval(CHK(x), v); }
+void (SET_INTERNAL)(SEXP x, SEXP v) { FIX_REFCNT(x, R::Symbol::internal(x), v); CHECK_OLD_TO_NEW(x, v); R::Symbol::set_internal(x, v); }
+void (SET_DDVAL)(SEXP x, int v) { R::Symbol::set_ddval(CHK(x), v); }
 
 /* Environment Accessors */
-SEXP (FRAME)(SEXP x) { return CHK(R::RObject::frame(CHK(x))); }
-SEXP (ENCLOS)(SEXP x) { return CHK(R::RObject::enclos(CHK(x))); }
-SEXP (HASHTAB)(SEXP x) { return CHK(R::RObject::hashtab(CHK(x))); }
-int (ENVFLAGS)(SEXP x) { return R::RObject::envflags(CHK(x)); }
+SEXP (FRAME)(SEXP x) { return CHK(R::Environment::frame(CHK(x))); }
+SEXP (ENCLOS)(SEXP x) { return CHK(R::Environment::enclos(CHK(x))); }
+SEXP (HASHTAB)(SEXP x) { return CHK(R::Environment::hashtab(CHK(x))); }
+int (ENVFLAGS)(SEXP x) { return R::Environment::envflags(CHK(x)); }
 
-void (SET_FRAME)(SEXP x, SEXP v) { FIX_REFCNT(x, R::RObject::frame(x), v); CHECK_OLD_TO_NEW(x, v); RObject::set_frame(x, v); }
-void (SET_ENCLOS)(SEXP x, SEXP v) { FIX_REFCNT(x, R::RObject::enclos(x), v); CHECK_OLD_TO_NEW(x, v); RObject::set_enclos(x, v); }
-void (SET_HASHTAB)(SEXP x, SEXP v) { FIX_REFCNT(x, R::RObject::hashtab(x), v); CHECK_OLD_TO_NEW(x, v); RObject::set_hashtab(x, v); }
-void (SET_ENVFLAGS)(SEXP x, int v) { R::RObject::set_envflags(x, v); }
+void (SET_FRAME)(SEXP x, SEXP v) { FIX_REFCNT(x, R::Environment::frame(x), v); CHECK_OLD_TO_NEW(x, v); R::Environment::set_frame(x, v); }
+void (SET_ENCLOS)(SEXP x, SEXP v) { FIX_REFCNT(x, R::Environment::enclos(x), v); CHECK_OLD_TO_NEW(x, v); R::Environment::set_enclos(x, v); }
+void (SET_HASHTAB)(SEXP x, SEXP v) { FIX_REFCNT(x, R::Environment::hashtab(x), v); CHECK_OLD_TO_NEW(x, v); R::Environment::set_hashtab(x, v); }
+void (SET_ENVFLAGS)(SEXP x, int v) { R::Environment::set_envflags(x, v); }
 
 /* Promise Accessors */
-SEXP (PRCODE)(SEXP x) { return CHK(R::RObject::prcode(CHK(x))); }
-SEXP (PRENV)(SEXP x) { return CHK(R::RObject::prenv(CHK(x))); }
-SEXP (PRVALUE)(SEXP x) { return CHK(R::RObject::prvalue(CHK(x))); }
-int (PRSEEN)(SEXP x) { return R::RObject::prseen(CHK(x)); }
+SEXP (PRCODE)(SEXP x) { return CHK(R::Promise::prcode(CHK(x))); }
+SEXP (PRENV)(SEXP x) { return CHK(R::Promise::prenv(CHK(x))); }
+SEXP (PRVALUE)(SEXP x) { return CHK(R::Promise::prvalue(CHK(x))); }
+int (PRSEEN)(SEXP x) { return R::Promise::prseen(CHK(x)); }
 
-void (SET_PRENV)(SEXP x, SEXP v) { FIX_REFCNT(x, R::RObject::prenv(x), v); CHECK_OLD_TO_NEW(x, v); RObject::set_prenv(x, v); }
-void (SET_PRVALUE)(SEXP x, SEXP v) { FIX_REFCNT(x, R::RObject::prvalue(x), v); CHECK_OLD_TO_NEW(x, v); RObject::set_prvalue(x, v); }
-void (SET_PRCODE)(SEXP x, SEXP v) { FIX_REFCNT(x, R::RObject::prcode(x), v); CHECK_OLD_TO_NEW(x, v); RObject::set_prcode(x, v); }
-void (SET_PRSEEN)(SEXP x, int v) { R::RObject::set_prseen(CHK(x), v); }
+void (SET_PRENV)(SEXP x, SEXP v) { FIX_REFCNT(x, R::Promise::prenv(x), v); CHECK_OLD_TO_NEW(x, v); R::Promise::set_prenv(x, v); }
+void (SET_PRVALUE)(SEXP x, SEXP v) { FIX_REFCNT(x, R::Promise::prvalue(x), v); CHECK_OLD_TO_NEW(x, v); R::Promise::set_prvalue(x, v); }
+void (SET_PRCODE)(SEXP x, SEXP v) { FIX_REFCNT(x, R::Promise::prcode(x), v); CHECK_OLD_TO_NEW(x, v); R::Promise::set_prcode(x, v); }
+void (SET_PRSEEN)(SEXP x, int v) { R::Promise::set_prseen(CHK(x), v); }
 
 /* Hashing Accessors */
 #if defined(TESTING_WRITE_BARRIER) || defined(COMPILING_IVORY)

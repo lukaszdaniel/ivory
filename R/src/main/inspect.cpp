@@ -38,8 +38,8 @@
 using namespace R;
 
 /* FIXME: envir.cpp keeps this private - it should probably go to Defn.h */
-#define FRAME_IS_LOCKED(e) (RObject::frame_is_locked(e))
-#define IS_GLOBAL_FRAME(e) (RObject::is_global_frame(e))
+#define FRAME_IS_LOCKED(e) (R::Environment::frame_is_locked(e))
+#define IS_GLOBAL_FRAME(e) (R::Environment::is_global_frame(e))
 
 /* based on EncodeEnvironment in  printutils.cpp */
 static void PrintEnvironment(SEXP x)

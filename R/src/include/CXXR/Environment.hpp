@@ -59,6 +59,23 @@ namespace R
         auto frame() const { return this->m_frame; }
         auto enclos() const { return this->m_enclos; }
         auto hashtab() const { return this->m_hashtab; }
+
+        /* Environment Access Methods */
+        static constexpr int FRAME_LOCK_MASK = (1 << 14);
+        static constexpr int GLOBAL_FRAME_MASK = (1 << 15);
+        static RObject *frame(RObject *x);
+        static RObject *enclos(RObject *x);
+        static RObject *hashtab(RObject *x);
+        static unsigned int envflags(RObject *x); /* for environments */
+        static void set_envflags(RObject *x, unsigned int v);
+        static void set_frame(RObject *x, RObject *v);
+        static void set_enclos(RObject *x, RObject *v);
+        static void set_hashtab(RObject *x, RObject *v);
+        static unsigned int frame_is_locked(RObject *x);
+        static void lock_frame(RObject *x);
+        static bool is_global_frame(RObject *x);
+        static void mark_as_global_frame(RObject *x);
+        static void mark_as_local_frame(RObject *x);
     };
 } // namespace R
 

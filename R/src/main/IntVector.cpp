@@ -24,12 +24,12 @@
  *  https://www.R-project.org/Licenses/
  */
 
-/** @file VectorBase.cpp
+/** @file IntVector.cpp
  *
- * @brief Implementation of class VectorBase and related functions.
+ * @brief Implementation of class IntVector and related functions.
  */
 
-#include <CXXR/VectorBase.hpp>
+#include <CXXR/IntVector.hpp>
 #include <Rinternals.h>
 
 namespace R
@@ -38,8 +38,7 @@ namespace R
     // from C:
     namespace ForceNonInline
     {
-        const auto &STDVEC_LENGTHptr = STDVEC_LENGTH;
-        const auto &SET_TRUELENGTHptr = SET_TRUELENGTH;
-        const auto &STDVEC_TRUELENGTHptr = STDVEC_TRUELENGTH;
+        const auto &INTEGERptr = INTEGER;
+        const auto &INTEGER_ROptr = INTEGER_RO;
     } // namespace ForceNonInline
 } // namespace R

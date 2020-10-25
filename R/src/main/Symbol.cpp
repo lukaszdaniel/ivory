@@ -56,7 +56,7 @@ namespace R
      *
      * @return Pointer to a R::String representing \a x's name.
      */
-    RObject *RObject::printname(RObject *x) { return x ? x->u.symsxp.m_pname : nullptr; }
+    RObject *Symbol::printname(RObject *x) { return x ? x->u.symsxp.m_pname : nullptr; }
 
     /** @brief Symbol's value in the base environment.
      *
@@ -66,9 +66,9 @@ namespace R
      *         Returns R_UnboundValue if no value is currently
      *         associated with the Symbol.
      */
-    RObject *RObject::symvalue(RObject *x) { return x ? x->u.symsxp.m_value : nullptr; }
+    RObject *Symbol::symvalue(RObject *x) { return x ? x->u.symsxp.m_value : nullptr; }
 
-    RObject *RObject::internal(RObject *x) { return x ? x->u.symsxp.m_internal : nullptr; }
+    RObject *Symbol::internal(RObject *x) { return x ? x->u.symsxp.m_internal : nullptr; }
 
     /** @brief Does symbol relate to a <tt>...</tt> expression?
      *
@@ -77,23 +77,23 @@ namespace R
      * @return \c TRUE iff this symbol denotes an element of a
      *         <tt>...</tt> expression.
      */
-    unsigned int RObject::ddval(RObject *x) { return x ? (x->m_gpbits & DDVAL_MASK) : 0; } /* for ..1, ..2 etc */
+    unsigned int Symbol::ddval(RObject *x) { return x ? (x->m_gpbits & DDVAL_MASK) : 0; } /* for ..1, ..2 etc */
 
-    void RObject::set_ddval_bit(RObject *x)
+    void Symbol::set_ddval_bit(RObject *x)
     {
         if (!x)
             return;
         x->m_gpbits |= DDVAL_MASK;
     }
 
-    void RObject::unset_ddval_bit(RObject *x)
+    void Symbol::unset_ddval_bit(RObject *x)
     {
         if (!x)
             return;
         x->m_gpbits &= ~DDVAL_MASK;
     }
 
-    void RObject::set_ddval(RObject *x, bool v)
+    void Symbol::set_ddval(RObject *x, bool v)
     {
         if (v)
         {
@@ -111,7 +111,7 @@ namespace R
      *
      * @param v Pointer to a R::String representing \a x's name. 
      */
-    void RObject::set_printname(RObject *x, RObject *v)
+    void Symbol::set_printname(RObject *x, RObject *v)
     {
         if (!x)
             return;
@@ -128,14 +128,14 @@ namespace R
      *
      * @todo No binding to R_UnboundValue ought to be created.
      */
-    void RObject::set_symvalue(RObject *x, RObject *val)
+    void Symbol::set_symvalue(RObject *x, RObject *val)
     {
         if (!x)
             return;
         x->u.symsxp.m_value = val;
     }
 
-    void RObject::set_internal(RObject *x, RObject *v)
+    void Symbol::set_internal(RObject *x, RObject *v)
     {
         if (!x)
             return;

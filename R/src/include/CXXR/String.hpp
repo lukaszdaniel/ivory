@@ -1,5 +1,7 @@
 /*
  *  R : A Computer Language for Statistical Data Analysis
+ *  Copyright (C) 1995, 1996  Robert Gentleman and Ross Ihaka
+ *  Copyright (C) 1999-2006   The R Development Core Team.
  *  Copyright (C) 2008-2014  Andrew R. Runnalls.
  *  Copyright (C) 2014 and onwards the Rho Project Authors.
  *
@@ -22,37 +24,39 @@
  *  http://www.r-project.org/Licenses/
  */
 
-/** @file FixedVector.hpp
- *
- * @brief Class template R::FixedVector.
+/** @file String.hpp
+ * @brief Class R::String and associated C interface.
  */
 
-#ifndef FIXEDVECTOR_HPP
-#define FIXEDVECTOR_HPP
+#ifndef RHO_STRING_HPP
+#define RHO_STRING_HPP
 
+#include <Rinternals.h>
+#include <CXXR/Allocator.hpp>
+#include <CXXR/GCRoot.hpp>
+#include <CXXR/SEXP_downcast.hpp>
 #include <CXXR/VectorBase.hpp>
+#include <CXXR/Symbol.hpp>
+#include <string>
+#include <unordered_map>
 
-namespace R
-{
-    /** @brief R data vector primarily intended for fixed-size use.
+namespace R {
+    /** @brief RObject representing a character string.
      *
-     * This is a general-purpose class template to represent an R data
-     * vector, and is intended particularly for the case where the
-     * size of the vector is fixed when it is constructed.
+     * At any one time, at most one String object with a particular
+     * text and encoding may exist.
      *
-     * R implements all of CR's built-in vector types using this
-     * template.
-     *
-     * @tparam T The type of the elements of the vector.
-     *
-     * @tparam ST The required ::SEXPTYPE of the vector.
+     * @note When the method size() is applied to a
+     * String, it returns the number of <tt>char</tt>s that the String
+     * comprises.  If the string uses a multibyte encoding scheme,
+     * this may be different from the number of Unicode characters
+     * represented by the string.
      */
-    template <typename T, SEXPTYPE ST>
-    class FixedVector : public VectorBase
-    {
+    class String : public VectorBase {
     public:
     private:
+	friend class Symbol;
     };
-} // namespace R
+}  // namespace R
 
-#endif // FIXEDVECTOR_HPP
+#endif /* RHO_STRING_HPP */

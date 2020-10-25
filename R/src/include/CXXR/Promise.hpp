@@ -70,6 +70,16 @@ namespace R
         auto value() const { return this->m_value; }
         auto expr() const { return this->m_expr; }
         auto env() const { return this->m_env; }
+
+        /* Promise Access Methods */
+        static RObject *prcode(RObject *x);
+        static void set_prcode(RObject *x, RObject *v);
+        static RObject *prenv(RObject *x);
+        static RObject *prvalue(RObject *x);
+        static void set_prvalue(RObject *x, RObject *v);
+        static unsigned int prseen(RObject *x);
+        static void set_prenv(RObject *x, RObject *v);
+        static void set_prseen(RObject *x, unsigned int v);
     };
 } // namespace R
 

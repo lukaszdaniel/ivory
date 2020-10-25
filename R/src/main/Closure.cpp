@@ -54,7 +54,7 @@ namespace R
      *
      * @return Pointer to the formal argument list of \a x.
      */
-    RObject *RObject::formals(RObject *x) { return x ? x->u.closxp.m_formals : nullptr; }
+    RObject *Closure::formals(RObject *x) { return x ? x->u.closxp.m_formals : nullptr; }
 
     /** @brief Set the formal arguments of a R::Closure.
      *
@@ -62,7 +62,7 @@ namespace R
      *
      * @param v Pointer to the formal argument list.
      */
-    void RObject::set_formals(RObject *x, RObject *v)
+    void Closure::set_formals(RObject *x, RObject *v)
     {
         if (!x)
             return;
@@ -75,7 +75,7 @@ namespace R
      *
      * @return Pointer to the body of \a x.
      */
-    RObject *RObject::body(RObject *x) { return x ? x->u.closxp.m_body : nullptr; }
+    RObject *Closure::body(RObject *x) { return x ? x->u.closxp.m_body : nullptr; }
 
     /** @brief Set the body of a R::Closure.
      *
@@ -83,7 +83,7 @@ namespace R
      *
      * @param v Pointer to the body of this R::Closure.
      */
-    void RObject::set_body(RObject *x, RObject *v)
+    void Closure::set_body(RObject *x, RObject *v)
     {
         if (!x)
             return;
@@ -96,7 +96,7 @@ namespace R
      *
      * @return Pointer to the environment of x.
      */
-    RObject *RObject::cloenv(RObject *x) { return x ? x->u.closxp.m_env : nullptr; }
+    RObject *Closure::cloenv(RObject *x) { return x ? x->u.closxp.m_env : nullptr; }
 
     /** @brief Replace the environment of a R::Closure.
      *
@@ -106,7 +106,7 @@ namespace R
      *          considered as the environment of this R::Closure.  A
      *          null pointer is not permissible (not checked).
      */
-    void RObject::set_cloenv(RObject *x, RObject *v)
+    void Closure::set_cloenv(RObject *x, RObject *v)
     {
         if (!x)
             return;
@@ -120,7 +120,7 @@ namespace R
      * @return \c true if debugging is set, i.e. evaluations of the
      *         function should run under the browser.
      */
-    bool RObject::rdebug(RObject *x) { return x && x->m_debug; }
+    bool Closure::rdebug(RObject *x) { return x && x->m_debug; }
 
     /**
      * Set the debugging state of a R::Closure object.
@@ -129,16 +129,16 @@ namespace R
      *
      * @param v The new debugging state.
      */
-    void RObject::set_rdebug(RObject *x, bool v)
+    void Closure::set_rdebug(RObject *x, bool v)
     {
         if (!x)
             return;
         x->m_debug = v;
     }
 
-    bool RObject::rstep(RObject *x) { return x && x->m_spare; }
+    bool Closure::rstep(RObject *x) { return x && x->m_spare; }
 
-    void RObject::set_rstep(RObject *x, bool v)
+    void Closure::set_rstep(RObject *x, bool v)
     {
         if (!x)
             return;

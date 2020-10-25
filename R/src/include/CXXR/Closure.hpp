@@ -54,6 +54,18 @@ namespace R
         auto formals() const { return this->m_formals; }
         auto body() const { return this->m_body; }
         auto env() const { return this->m_env; }
+
+        /* Closure Access Methods */
+        static RObject *formals(RObject *x);
+        static void set_formals(RObject *x, RObject *v);
+        static RObject *body(RObject *x);
+        static void set_body(RObject *x, RObject *v);
+        static RObject *cloenv(RObject *x);
+        static void set_cloenv(RObject *x, RObject *v);
+        static bool rdebug(RObject *x);
+        static void set_rdebug(RObject *x, bool v);
+        static bool rstep(RObject *x);
+        static void set_rstep(RObject *x, bool v);
     };
 } // namespace R
 

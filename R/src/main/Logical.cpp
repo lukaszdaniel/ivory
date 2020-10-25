@@ -1,6 +1,5 @@
 /*
  *  R : A Computer Language for Statistical Data Analysis
- *  Copyright (C) 2008-2014  Andrew R. Runnalls.
  *  Copyright (C) 2014 and onwards the Rho Project Authors.
  *
  *  Rho is not part of the R project, and bugs and other issues should
@@ -19,40 +18,16 @@
  *
  *  You should have received a copy of the GNU General Public License
  *  along with this program; if not, a copy is available at
- *  http://www.r-project.org/Licenses/
+ *  https://www.R-project.org/Licenses/
  */
 
-/** @file FixedVector.hpp
- *
- * @brief Class template R::FixedVector.
- */
+#include <CXXR/Logical.hpp>
 
-#ifndef FIXEDVECTOR_HPP
-#define FIXEDVECTOR_HPP
-
-#include <CXXR/VectorBase.hpp>
+#include <CXXR/GCRoot.hpp>
+#include <CXXR/LogicalVector.hpp>
+#include <Defn.h>
 
 namespace R
 {
-    /** @brief R data vector primarily intended for fixed-size use.
-     *
-     * This is a general-purpose class template to represent an R data
-     * vector, and is intended particularly for the case where the
-     * size of the vector is fixed when it is constructed.
-     *
-     * R implements all of CR's built-in vector types using this
-     * template.
-     *
-     * @tparam T The type of the elements of the vector.
-     *
-     * @tparam ST The required ::SEXPTYPE of the vector.
-     */
-    template <typename T, SEXPTYPE ST>
-    class FixedVector : public VectorBase
-    {
-    public:
-    private:
-    };
+    void Logical::initialize() {}
 } // namespace R
-
-#endif // FIXEDVECTOR_HPP

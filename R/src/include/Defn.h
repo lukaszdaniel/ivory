@@ -44,6 +44,13 @@
 #include <CXXR/BuiltInFunction.hpp>
 #include <CXXR/Symbol.hpp>
 #include <CXXR/VectorBase.hpp>
+#include <CXXR/FixedVector.hpp>
+#include <CXXR/ComplexVector.hpp>
+#include <CXXR/RawVector.hpp>
+#include <CXXR/RealVector.hpp>
+#include <CXXR/IntVector.hpp>
+// #include <CXXR/StringVector.hpp>
+#include <CXXR/LogicalVector.hpp>
 #include <CXXR/Environment.hpp>
 #include <CXXR/Promise.hpp>
 #include <CXXR/Closure.hpp>

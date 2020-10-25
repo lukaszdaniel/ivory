@@ -5,14 +5,14 @@
  *  Copyright (C) 2008-2014  Andrew R. Runnalls.
  *  Copyright (C) 2014 and onwards the Rho Project Authors.
  *
+ *  Rho is not part of the R project, and bugs and other issues should
+ *  not be reported via r-bugs or other R project channels; instead refer
+ *  to the Rho website.
+ *
  *  This header file is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU Lesser General Public License as published by
  *  the Free Software Foundation; either version 2.1 of the License, or
  *  (at your option) any later version.
- *
- *  This file is part of R. R is distributed under the terms of the
- *  GNU General Public License, either Version 2, June 1991 or Version 3,
- *  June 2007. See doc/COPYRIGHTS for details of the copyright status of R.
  *
  *  This program is distributed in the hope that it will be useful,
  *  but WITHOUT ANY WARRANTY; without even the implied warranty of
@@ -87,6 +87,19 @@ namespace R
         auto printname() const { return this->m_pname; }
         auto symvalue() const { return this->m_value; }
         auto internal() const { return this->m_internal; }
+
+        /* Symbol Access Methods */
+        static constexpr int DDVAL_MASK = 1;
+        static RObject *printname(RObject *x);
+        static RObject *symvalue(RObject *x);
+        static RObject *internal(RObject *x);
+        static unsigned int ddval(RObject *x); /* for ..1, ..2 etc */
+        static void set_ddval_bit(RObject *x);
+        static void unset_ddval_bit(RObject *x);
+        static void set_ddval(RObject *x, bool v); /* for ..1, ..2 etc */
+        static void set_printname(RObject *x, RObject *v);
+        static void set_symvalue(RObject *x, RObject *val);
+        static void set_internal(RObject *x, RObject *v);
     };
 } // namespace R
 

@@ -190,12 +190,12 @@ extern inline const Rbyte *RAW_OR_NULL(SEXP x)
 
 extern inline R_xlen_t XLENGTH_EX(SEXP x)
 {
-    return ALTREP(x) ? ALTREP_LENGTH(x) : R::RObject::stdvec_length(x);
+    return ALTREP(x) ? ALTREP_LENGTH(x) : R::VectorBase::stdvec_length(x);
 }
 
 extern inline R_xlen_t XTRUELENGTH(SEXP x)
 {
-    return ALTREP(x) ? ALTREP_TRUELENGTH(x) : R::RObject::stdvec_truelength(x);
+    return ALTREP(x) ? ALTREP_TRUELENGTH(x) : R::VectorBase::stdvec_truelength(x);
 }
 
 extern inline int LENGTH_EX(SEXP x, const char *file, int line)

@@ -24,12 +24,12 @@
  *  https://www.R-project.org/Licenses/
  */
 
-/** @file VectorBase.cpp
+/** @file RealVector.cpp
  *
- * @brief Implementation of class VectorBase and related functions.
+ * @brief Implementation of class RealVector and related functions.
  */
 
-#include <CXXR/VectorBase.hpp>
+#include <CXXR/RealVector.hpp>
 #include <Rinternals.h>
 
 namespace R
@@ -38,8 +38,8 @@ namespace R
     // from C:
     namespace ForceNonInline
     {
-        const auto &STDVEC_LENGTHptr = STDVEC_LENGTH;
-        const auto &SET_TRUELENGTHptr = SET_TRUELENGTH;
-        const auto &STDVEC_TRUELENGTHptr = STDVEC_TRUELENGTH;
+        const auto &isRealptr = Rf_isReal;
+        const auto &REALptr = REAL;
+        const auto &REAL_ROptr = REAL_RO;
     } // namespace ForceNonInline
 } // namespace R

@@ -28,6 +28,7 @@
 // Needed while visitChildren(visitor* v) is unimplemented.
 #include <iostream>
 #include <CXXR/RObject.hpp>
+#include <CXXR/Symbol.hpp>
 #include <R_ext/Boolean.h>
 #include <Rinternals.h>
 
@@ -64,63 +65,67 @@ namespace R
             MemoryBank::deallocate(m_data, m_databytes);
     }
 
-void RObject::visitChildren(const_visitor* v) const
-{
-    if (m_attrib && (m_type != CHARSXP || m_attrib->m_type != CHARSXP))
-        m_attrib->conductVisitor(v);
-
-    if (m_alt)
+    void RObject::visitChildren(const_visitor *v) const
     {
-        if(tag()) tag()->conductVisitor(v);
-        if(RObject::bndcell_tag(this)) { Rf_error("bad binding access"); }
-        if(car()) car()->conductVisitor(v);
-        if(cdr()) cdr()->conductVisitor(v);
-    }
-    else
-    switch (m_type) {
-    case STRSXP:
-    case EXPRSXP:
-    case VECSXP:
-	for (R_xlen_t i = 0; i < length(); i++) {
-	    const GCNode* node = ((const RObject**)(m_data))[i];
-	    if (node) node->conductVisitor(v);
-	}
-	break;
-    case ENVSXP:
-	if (frame()) frame()->conductVisitor(v);
-	if (enclosingEnvironment())
-	    enclosingEnvironment()->conductVisitor(v);
-	if (hashTable()) hashTable()->conductVisitor(v);
-	break;
-    case LISTSXP:
-	if (tag()) tag()->conductVisitor(v);
-	if ((BOXED_BINDING_CELLS || RObject::bndcell_tag(this) == 0) && car()) car()->conductVisitor(v);
-	if (cdr()) cdr()->conductVisitor(v);
-	break;
-    case CLOSXP:
-    case PROMSXP:
-    case LANGSXP:
-    case DOTSXP:
-    case SYMSXP:
-    case BCODESXP:
-	if (tag()) tag()->conductVisitor(v);
-	if (car()) car()->conductVisitor(v);
-	if (cdr()) cdr()->conductVisitor(v);
-	break;
-    case EXTPTRSXP:
-	if (cdr()) cdr()->conductVisitor(v);
-	if (tag()) tag()->conductVisitor(v);
-	break;
-    default:
-	break;
-    }
-}
+        if (m_attrib && (m_type != CHARSXP || m_attrib->m_type != CHARSXP))
+            m_attrib->conductVisitor(v);
 
-void RObject::visitChildren(visitor* v)
-{
-    std::cerr << "RObject::visitChildren(visitor* v) not implemented yet.\n";
-    abort();
-}
+        if (m_alt)
+        {
+            if (tag()) tag()->conductVisitor(v);
+            if (RObject::bndcell_tag(this))
+            {
+                Rf_error("bad binding access");
+            }
+            if (car()) car()->conductVisitor(v);
+            if (cdr()) cdr()->conductVisitor(v);
+        }
+        else
+            switch (m_type)
+            {
+            case STRSXP:
+            case EXPRSXP:
+            case VECSXP:
+                for (R_xlen_t i = 0; i < length(); i++)
+                {
+                    const GCNode *node = ((const RObject **)(m_data))[i];
+                    if (node) node->conductVisitor(v);
+                }
+                break;
+            case ENVSXP:
+                if (frame()) frame()->conductVisitor(v);
+                if (enclosingEnvironment()) enclosingEnvironment()->conductVisitor(v);
+                if (hashTable()) hashTable()->conductVisitor(v);
+                break;
+            case LISTSXP:
+                if (tag()) tag()->conductVisitor(v);
+                if ((BOXED_BINDING_CELLS || RObject::bndcell_tag(this) == 0) && car()) car()->conductVisitor(v);
+                if (cdr()) cdr()->conductVisitor(v);
+                break;
+            case CLOSXP:
+            case PROMSXP:
+            case LANGSXP:
+            case DOTSXP:
+            case SYMSXP:
+            case BCODESXP:
+                if (tag()) tag()->conductVisitor(v);
+                if (car()) car()->conductVisitor(v);
+                if (cdr()) cdr()->conductVisitor(v);
+                break;
+            case EXTPTRSXP:
+                if (cdr()) cdr()->conductVisitor(v);
+                if (tag()) tag()->conductVisitor(v);
+                break;
+            default:
+                break;
+            }
+    }
+
+    void RObject::visitChildren(visitor *v)
+    {
+        std::cerr << "RObject::visitChildren(visitor* v) not implemented yet.\n";
+        abort();
+    }
 
     void RObject::set_ready_to_finalize(RObject *x)
     {
@@ -167,7 +172,7 @@ void RObject::visitChildren(visitor* v)
         x->m_attrib = v;
     }
 
-     /**
+    /**
      * Return the attributes of an \c RObject.
      * @param x Pointer to the \c RObject whose attributes are required.
      * @return Pointer to the attributes object of \a x , or 0 if \a x is
@@ -180,7 +185,7 @@ void RObject::visitChildren(visitor* v)
      * @param x Pointer to \c RObject.
      * @return Refer to 'R Internals' document.  Returns 0 if \a x is a
      * null pointer.
-     */ 
+     */
     unsigned int RObject::named(RObject *x) { return x ? x->m_named : 0; }
 
     /**
@@ -517,7 +522,7 @@ void RObject::visitChildren(visitor* v)
         if (!RObject::is_active_binding(x))
         {
             if (RObject::typeof_(x) == SYMSXP)
-                MARK_NOT_MUTABLE(RObject::symvalue(x));
+                MARK_NOT_MUTABLE(Symbol::symvalue(x));
             else
                 MARK_NOT_MUTABLE(RObject::car0(x));
         }

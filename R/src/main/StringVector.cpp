@@ -24,12 +24,12 @@
  *  https://www.R-project.org/Licenses/
  */
 
-/** @file VectorBase.cpp
+/** @file StringVector.cpp
  *
- * @brief Implementation of class VectorBase and related functions.
+ * @brief Implementation of class StringVector and related functions.
  */
 
-#include <CXXR/VectorBase.hpp>
+#include <CXXR/StringVector.hpp>
 #include <Rinternals.h>
 
 namespace R
@@ -38,8 +38,7 @@ namespace R
     // from C:
     namespace ForceNonInline
     {
-        const auto &STDVEC_LENGTHptr = STDVEC_LENGTH;
-        const auto &SET_TRUELENGTHptr = SET_TRUELENGTH;
-        const auto &STDVEC_TRUELENGTHptr = STDVEC_TRUELENGTH;
+        const auto &isStringptr = Rf_isString;
+        const auto &STRING_ELTptr = STRING_ELT;
     } // namespace ForceNonInline
 } // namespace R

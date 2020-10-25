@@ -123,7 +123,7 @@ namespace R
    node data. */
     class RObject : public GCNode 
     {
-    private:
+    public: // private:
         SEXPTYPE m_type : FULL_TYPE_BITS;
         bool m_scalar;
         bool m_has_class;
@@ -281,54 +281,7 @@ namespace R
         /* Primitive Access Methods */
         static int primoffset(RObject *x);
         static void set_primoffset(RObject *x, int v);
-        /* Closure Access Methods */
-        static RObject *formals(RObject *x);
-        static void set_formals(RObject *x, RObject *v);
-        static RObject *body(RObject *x);
-        static void set_body(RObject *x, RObject *v);
-        static RObject *cloenv(RObject *x);
-        static void set_cloenv(RObject *x, RObject *v);
-        static bool rdebug(RObject *x);
-        static void set_rdebug(RObject *x, bool v);
-        static bool rstep(RObject *x);
-        static void set_rstep(RObject *x, bool v);
-        /* Symbol Access Methods */
-        static constexpr int DDVAL_MASK = 1;
-        static RObject *printname(RObject *x);
-        static RObject *symvalue(RObject *x);
-        static RObject *internal(RObject *x);
-        static unsigned int ddval(RObject *x); /* for ..1, ..2 etc */
-        static void set_ddval_bit(RObject *x);
-        static void unset_ddval_bit(RObject *x);
-        static void set_ddval(RObject *x, bool v); /* for ..1, ..2 etc */
-        static void set_printname(RObject *x, RObject *v);
-        static void set_symvalue(RObject *x, RObject *val);
-        static void set_internal(RObject *x, RObject *v);
-        /* Environment Access Methods */
-        static constexpr int FRAME_LOCK_MASK = (1 << 14);
-        static constexpr int GLOBAL_FRAME_MASK = (1 << 15);
-        static RObject *frame(RObject *x);
-        static RObject *enclos(RObject *x);
-        static RObject *hashtab(RObject *x);
-        static unsigned int envflags(RObject *x); /* for environments */
-        static void set_envflags(RObject *x, unsigned int v);
-        static void set_frame(RObject *x, RObject *v);
-        static void set_enclos(RObject *x, RObject *v);
-        static void set_hashtab(RObject *x, RObject *v);
-        static unsigned int frame_is_locked(RObject *x);
-        static void lock_frame(RObject *x);
-        static bool is_global_frame(RObject *x);
-        static void mark_as_global_frame(RObject *x);
-        static void mark_as_local_frame(RObject *x);
-        /* Promise Access Methods */
-        static RObject *prcode(RObject *x);
-        static void set_prcode(RObject *x, RObject *v);
-        static RObject *prenv(RObject *x);
-        static RObject *prvalue(RObject *x);
-        static void set_prvalue(RObject *x, RObject *v);
-        static unsigned int prseen(RObject *x);
-        static void set_prenv(RObject *x, RObject *v);
-        static void set_prseen(RObject *x, unsigned int v);
+
         /* List Access Methods */
         static RObject *tag(RObject *x);
         static void set_tag(RObject *x, RObject *v);
@@ -339,7 +292,7 @@ namespace R
         static RObject *cdr(RObject *x);
         static void set_cdr(RObject *x, RObject *v);
         static constexpr int MISSING_MASK = ((1 << 4) - 1); // = 15 /* reserve 4 bits--only 2 uses now */
-        static unsigned int missing(RObject *x);                /* for closure calls */
+        static unsigned int missing(RObject *x);            /* for closure calls */
         static void set_missing(RObject *x, int v);
         static unsigned int bndcell_tag(const RObject *x);
         static void set_bndcell_tag(RObject *e, unsigned int v);
@@ -399,32 +352,10 @@ namespace R
         static void set_bndcell_ival(RObject *x, int v);
         static void set_bndcell_lval(RObject *x, int v);
 
-        static inline R_xlen_t stdvec_length(RObject *x) { return x ? x->u.vecsxp.m_length : 0; }
-        static inline R_xlen_t stdvec_truelength(RObject *x) { return x ? x->u.vecsxp.m_truelength : 0; }
-        static inline void set_stdvec_truelength(RObject *x, R_xlen_t v)
-        {
-            if (!x)
-                return;
-            x->u.vecsxp.m_truelength = v;
-        }
-        static inline void set_stdvec_length(RObject *x, R_xlen_t v)
-        {
-            if (!x)
-                return;
-            x->u.vecsxp.m_length = v;
-            RObject::setscalar(x, v == 1);
-        }
-        static inline void set_truelength(RObject *x, R_xlen_t v)
-        {
-            if (R::RObject::altrep(x))
-                Rf_error("can't set ALTREP truelength");
-            R::RObject::set_stdvec_truelength(x, v);
-        }
-
-    /** @brief The name by which this type is known in R.
-	 *
-	 * @return The name by which this type is known in R.
-	 */
+        /** @brief The name by which this type is known in R.
+         *
+         * @return The name by which this type is known in R.
+         */
         static const char *staticTypeName()
         {
             return "RObject";
@@ -639,15 +570,11 @@ union R_bndval_t
  */
 
 /* Vector Heap Structure */
-struct alignas(double) VECREC
-{
-    R::RObject *backpointer;
-};
+struct alignas(std::max(alignof(double), alignof(RObject*))) VECREC {};
 
 using VECP = VECREC *;
 
 /* Vector Heap Macros */
-// #define BACKPOINTER(v) ((v).u.backpointer)
 inline size_t BYTE2VEC(size_t n) { return (n > 0) ? (n - 1) / sizeof(VECREC) + 1 : 0; }
 inline size_t INT2VEC(size_t n) { return (n > 0) ? (n * sizeof(int) - 1) / sizeof(VECREC) + 1 : 0; }
 inline size_t FLOAT2VEC(size_t n) { return (n > 0) ? (n * sizeof(double) - 1) / sizeof(VECREC) + 1 : 0; }

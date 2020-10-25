@@ -24,12 +24,12 @@
  *  https://www.R-project.org/Licenses/
  */
 
-/** @file VectorBase.cpp
+/** @file ComplexVector.cpp
  *
- * @brief Implementation of class VectorBase and related functions.
+ * @brief Implementation of class ComplexVector and related functions.
  */
 
-#include <CXXR/VectorBase.hpp>
+#include <CXXR/ComplexVector.hpp>
 #include <Rinternals.h>
 
 namespace R
@@ -38,8 +38,8 @@ namespace R
     // from C:
     namespace ForceNonInline
     {
-        const auto &STDVEC_LENGTHptr = STDVEC_LENGTH;
-        const auto &SET_TRUELENGTHptr = SET_TRUELENGTH;
-        const auto &STDVEC_TRUELENGTHptr = STDVEC_TRUELENGTH;
+        const auto &isComplexptr = Rf_isComplex;
+        const auto &COMPLEXptr = COMPLEX;
+        const auto &COMPLEX_ROptr = COMPLEX_RO;
     } // namespace ForceNonInline
 } // namespace R

@@ -1,7 +1,5 @@
 /*
  *  R : A Computer Language for Statistical Data Analysis
- *  Copyright (C) 1999--2020  The R Core Team.
- *  Copyright (C) 1995, 1996  Robert Gentleman and Ross Ihaka
  *  Copyright (C) 2008-2014  Andrew R. Runnalls.
  *  Copyright (C) 2014 and onwards the Rho Project Authors.
  *
@@ -17,20 +15,19 @@
  *  This program is distributed in the hope that it will be useful,
  *  but WITHOUT ANY WARRANTY; without even the implied warranty of
  *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- *  GNU Lesser General Public License for more details.
+ *  GNU General Public License for more details.
  *
- *  You should have received a copy of the GNU Lesser General Public License
+ *  You should have received a copy of the GNU General Public License
  *  along with this program; if not, a copy is available at
  *  https://www.R-project.org/Licenses/
  */
 
-/** @file VectorBase.cpp
+/** @file String.cpp
  *
- * @brief Implementation of class VectorBase and related functions.
+ * Implementation of class String and related functions.
  */
 
-#include <CXXR/VectorBase.hpp>
-#include <Rinternals.h>
+#include <CXXR/String.hpp>
 
 namespace R
 {
@@ -38,8 +35,14 @@ namespace R
     // from C:
     namespace ForceNonInline
     {
-        const auto &STDVEC_LENGTHptr = STDVEC_LENGTH;
-        const auto &SET_TRUELENGTHptr = SET_TRUELENGTH;
-        const auto &STDVEC_TRUELENGTHptr = STDVEC_TRUELENGTH;
+        // const auto &ENC_KNOWNp = ENC_KNOWN;
+        // const auto &IS_ASCIIp = IS_ASCII;
+        // const auto &IS_BYTESp = IS_BYTES;
+        // const auto &IS_LATIN1p = IS_LATIN1;
+        // const auto &IS_UTF8p = IS_UTF8;
+        const auto &R_CHARp = R_CHAR;
+        const auto &mkCharp = Rf_mkChar;
+        const auto &mkCharCEp = Rf_mkCharCE;
+        const auto &mkCharLenp = Rf_mkCharLen;
     } // namespace ForceNonInline
 } // namespace R

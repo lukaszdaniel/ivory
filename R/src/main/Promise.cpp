@@ -51,7 +51,7 @@ namespace R
      * @return Pointer to the expression to be evaluated by the
      *         R::Promise. 
      */
-    RObject *RObject::prcode(RObject *x) { return x ? x->u.promsxp.m_expr : nullptr; }
+    RObject *Promise::prcode(RObject *x) { return x ? x->u.promsxp.m_expr : nullptr; }
 
     /** @brief Set the expression of a R::Promise.
      *
@@ -59,7 +59,7 @@ namespace R
      *
      * @param v Pointer to the expression to be assigned to the R::Promise.
      */
-    void RObject::set_prcode(RObject *x, RObject *v)
+    void Promise::set_prcode(RObject *x, RObject *v)
     {
         if (!x)
             return;
@@ -72,7 +72,7 @@ namespace R
      *
      * @return Pointer to the environment of the R::Promise. 
      */
-    RObject *RObject::prenv(RObject *x) { return x ? x->u.promsxp.m_env : nullptr; }
+    RObject *Promise::prenv(RObject *x) { return x ? x->u.promsxp.m_env : nullptr; }
 
     /** @brief Access the value of a R::Promise.
      *
@@ -81,7 +81,7 @@ namespace R
      * @return Pointer to the value of the R::Promise, or to
      *         R_UnboundValue if it has not yet been evaluated..
      */
-    RObject *RObject::prvalue(RObject *x) { return x ? x->u.promsxp.m_value : nullptr; }
+    RObject *Promise::prvalue(RObject *x) { return x ? x->u.promsxp.m_value : nullptr; }
 
     /** @brief Set the value of a R::Promise.
      *
@@ -94,14 +94,14 @@ namespace R
      *
      * @todo Replace this with a method call to evaluate the R::Promise.
      */
-    void RObject::set_prvalue(RObject *x, RObject *v)
+    void Promise::set_prvalue(RObject *x, RObject *v)
     {
         if (!x)
             return;
         x->u.promsxp.m_value = v;
     }
 
-    unsigned int RObject::prseen(RObject *x) { return x ? x->m_gpbits : 0; }
+    unsigned int Promise::prseen(RObject *x) { return x ? x->m_gpbits : 0; }
 
      /** @brief Set the environment of a R::Promise.
      *
@@ -109,14 +109,14 @@ namespace R
      *
      * @param v Pointer to the environment to be assigned to the R::Promise. 
      */
-    void RObject::set_prenv(RObject *x, RObject *v)
+    void Promise::set_prenv(RObject *x, RObject *v)
     {
         if (!x)
             return;
         x->u.promsxp.m_env = v;
     }
 
-    void RObject::set_prseen(RObject *x, unsigned int v)
+    void Promise::set_prseen(RObject *x, unsigned int v)
     {
         if (!x)
             return;

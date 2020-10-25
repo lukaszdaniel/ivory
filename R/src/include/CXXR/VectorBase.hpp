@@ -35,15 +35,36 @@
 
 namespace R
 {
-  /* The generational collector uses a reduced version of RObject as a
-   header in vector nodes.  The layout MUST be kept consistent with
-   the RObject definition. The standard RObject takes up 7 words
-   and the reduced version takes 6 words on most 64-bit systems. On most
-   32-bit systems, RObject takes 8 words and the reduced version 7 words. */
+  /** @brief Untemplated base class for R vectors.
+     */
   class VectorBase : public RObject
   {
+  public:
+    typedef std::size_t size_type;
+
   private:
   public:
+    static inline R_xlen_t stdvec_length(RObject *x) { return x ? x->u.vecsxp.m_length : 0; }
+    static inline R_xlen_t stdvec_truelength(RObject *x) { return x ? x->u.vecsxp.m_truelength : 0; }
+    static inline void set_stdvec_truelength(RObject *x, R_xlen_t v)
+    {
+      if (!x)
+        return;
+      x->u.vecsxp.m_truelength = v;
+    }
+    static inline void set_stdvec_length(RObject *x, R_xlen_t v)
+    {
+      if (!x)
+        return;
+      x->u.vecsxp.m_length = v;
+      RObject::setscalar(x, v == 1);
+    }
+    static inline void set_truelength(RObject *x, R_xlen_t v)
+    {
+      if (R::RObject::altrep(x))
+        Rf_error("can't set ALTREP truelength");
+      R::VectorBase::set_stdvec_truelength(x, v);
+    }
   };
 
   using VECSEXP = class R::RObject *;
@@ -61,9 +82,6 @@ namespace R
 /* defined as a macro since fastmatch packages tests for it */
 #define XLENGTH(x) XLENGTH_EX(x)
 
-  /* Under the generational allocator the data for vector nodes comes
-   immediately after the node structure, so the data address is a
-   known offset from the node SEXP. */
   inline void *stdvec_dataptr(RObject *x) { return x ? x->m_data : nullptr; }
 #define STDVEC_DATAPTR(x) (x->m_data)
 
@@ -74,19 +92,11 @@ namespace R
 
   /* writable char access for R internal use only */
 #define CHAR_RW(x) ((char *)x->m_data)
-#define LOGICAL(x) ((int *)DATAPTR(x))
-#define INTEGER(x) ((int *)DATAPTR(x))
-#define RAW(x) ((Rbyte *)DATAPTR(x))
-#define COMPLEX(x) ((Rcomplex *)DATAPTR(x))
-#define REAL(x) ((double *)DATAPTR(x))
+
 #define VECTOR_ELT(x, i) ((SEXP *)DATAPTR(x))[i]
-#define STRING_PTR(x) ((SEXP *)DATAPTR(x))
 #define VECTOR_PTR(x) ((SEXP *)DATAPTR(x))
-#define LOGICAL_RO(x) ((const int *)DATAPTR_RO(x))
-#define INTEGER_RO(x) ((const int *)DATAPTR_RO(x))
-#define RAW_RO(x) ((const Rbyte *)DATAPTR_RO(x))
-#define COMPLEX_RO(x) ((const Rcomplex *)DATAPTR_RO(x))
-#define REAL_RO(x) ((const double *)DATAPTR_RO(x))
+
+#define STRING_PTR(x) ((SEXP *)DATAPTR(x))
 #define STRING_PTR_RO(x) ((const SEXP *)DATAPTR_RO(x))
 
 } // namespace R

@@ -1,5 +1,7 @@
 /*
  *  R : A Computer Language for Statistical Data Analysis
+ *  Copyright (C) 1995, 1996  Robert Gentleman and Ross Ihaka
+ *  Copyright (C) 1999-2006   The R Development Core Team.
  *  Copyright (C) 2008-2014  Andrew R. Runnalls.
  *  Copyright (C) 2014 and onwards the Rho Project Authors.
  *
@@ -22,37 +24,31 @@
  *  http://www.r-project.org/Licenses/
  */
 
-/** @file FixedVector.hpp
+/** @file StringVector.hpp
+ * @brief Class R::StringVector and associated C interface.
  *
- * @brief Class template R::FixedVector.
+ * (StringVector implements STRSXP.)
  */
 
-#ifndef FIXEDVECTOR_HPP
-#define FIXEDVECTOR_HPP
+#ifndef STRINGVECTOR_HPP
+#define STRINGVECTOR_HPP
 
-#include <CXXR/VectorBase.hpp>
+#include <CXXR/FixedVector.hpp>
+#include <CXXR/GCEdge.hpp>
+#include <CXXR/String.hpp>
 
 namespace R
 {
-    /** @brief R data vector primarily intended for fixed-size use.
+    /** @brief Vector of strings.
      *
-     * This is a general-purpose class template to represent an R data
-     * vector, and is intended particularly for the case where the
-     * size of the vector is fixed when it is constructed.
-     *
-     * R implements all of CR's built-in vector types using this
-     * template.
-     *
-     * @tparam T The type of the elements of the vector.
-     *
-     * @tparam ST The required ::SEXPTYPE of the vector.
+     * Note that the <tt>StringVector(size_type)</tt> constructor will
+     * fill the constructed vector with blank strings rather than
+     * with NULL.
      */
-    template <typename T, SEXPTYPE ST>
-    class FixedVector : public VectorBase
-    {
-    public:
-    private:
-    };
+    typedef FixedVector<GCEdge<String>, STRSXP> StringVector;
+
+// #define STRING_PTR(x) ((SEXP *)DATAPTR(x))
+// #define STRING_PTR_RO(x) ((const SEXP *)DATAPTR_RO(x))
 } // namespace R
 
-#endif // FIXEDVECTOR_HPP
+#endif // STRINGVECTOR_HPP

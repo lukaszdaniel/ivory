@@ -132,12 +132,12 @@ inline static bool IS_USER_DATABASE(SEXP rho)
 
  inline static int FRAME_IS_LOCKED(SEXP e)
  {
-     return R::RObject::frame_is_locked(e);
+     return R::Environment::frame_is_locked(e);
  }
 
  inline static void LOCK_FRAME(SEXP e)
  {
-     R::RObject::lock_frame(e);
+     R::Environment::lock_frame(e);
  }
 
 /* use the same bits (15 and 14) in symbols and bindings */
@@ -222,11 +222,11 @@ Rboolean R_envHasNoSpecialSymbols(SEXP env)
 
 R_INLINE static int HASHSIZE(SEXP x)
 {
-    return (int)R::RObject::stdvec_length(x);
+    return (int)R::VectorBase::stdvec_length(x);
 }
 R_INLINE static int HASHPRI(SEXP x)
 {
-    return (int)R::RObject::stdvec_truelength(x);
+    return (int)R::VectorBase::stdvec_truelength(x);
 }
 #define HASHTABLEGROWTHRATE 1.2
 #define HASHMINSIZE 29
@@ -677,17 +677,17 @@ static SEXP R_HashProfile(SEXP table)
 
 inline static bool IS_GLOBAL_FRAME(SEXP e)
 {
-    return RObject::is_global_frame(e);
+    return R::Environment::is_global_frame(e);
 }
 
 inline static void MARK_AS_GLOBAL_FRAME(SEXP e)
 {
-    RObject::mark_as_global_frame(e);
+    R::Environment::mark_as_global_frame(e);
 }
 
 inline static void MARK_AS_LOCAL_FRAME(SEXP e)
 {
-    RObject::mark_as_local_frame(e);
+    R::Environment::mark_as_local_frame(e);
 }
 
 #define INITIAL_CACHE_SIZE 1000

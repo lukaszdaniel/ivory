@@ -1,5 +1,7 @@
 /*
  *  R : A Computer Language for Statistical Data Analysis
+ *  Copyright (C) 1995, 1996  Robert Gentleman and Ross Ihaka
+ *  Copyright (C) 1999-2006   The R Development Core Team.
  *  Copyright (C) 2008-2014  Andrew R. Runnalls.
  *  Copyright (C) 2014 and onwards the Rho Project Authors.
  *
@@ -22,37 +24,24 @@
  *  http://www.r-project.org/Licenses/
  */
 
-/** @file FixedVector.hpp
- *
- * @brief Class template R::FixedVector.
+/** @file ComplexVector.hpp
+ * @brief Class R::ComplexVector and associated C interface.
  */
 
-#ifndef FIXEDVECTOR_HPP
-#define FIXEDVECTOR_HPP
+#ifndef COMPLEXVECTOR_HPP
+#define COMPLEXVECTOR_HPP
 
-#include <CXXR/VectorBase.hpp>
+#include <CXXR/FixedVector.hpp>
+#include <CXXR/Complex.hpp>
 
 namespace R
 {
-    /** @brief R data vector primarily intended for fixed-size use.
-     *
-     * This is a general-purpose class template to represent an R data
-     * vector, and is intended particularly for the case where the
-     * size of the vector is fixed when it is constructed.
-     *
-     * R implements all of CR's built-in vector types using this
-     * template.
-     *
-     * @tparam T The type of the elements of the vector.
-     *
-     * @tparam ST The required ::SEXPTYPE of the vector.
+    /** @brief Vector of complex numbers.
      */
-    template <typename T, SEXPTYPE ST>
-    class FixedVector : public VectorBase
-    {
-    public:
-    private:
-    };
+    typedef R::FixedVector<Complex, CPLXSXP> ComplexVector;
+
+#define COMPLEX(x) ((Rcomplex *)DATAPTR(x))
+#define COMPLEX_RO(x) ((const Rcomplex *)DATAPTR_RO(x))
 } // namespace R
 
-#endif // FIXEDVECTOR_HPP
+#endif // COMPLEXVECTOR_HPP

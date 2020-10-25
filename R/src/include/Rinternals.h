@@ -149,6 +149,7 @@ Rboolean (Rf_isExpression)(SEXP s);
 Rboolean (Rf_isEnvironment)(SEXP s);
 Rboolean (Rf_isString)(SEXP s);
 Rboolean (Rf_isObject)(SEXP s);
+Rboolean (Rf_isRaw)(SEXP s);
 
 #endif /* USE_RINTERNALS */
 
