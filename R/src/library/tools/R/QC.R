@@ -4267,8 +4267,8 @@ function(package, dir, lib.loc = NULL)
             message(sprintf(ngettext(length(undeclared),
                                      "Undeclared package %s in Rd xrefs",
                                      "Undeclared packages %s in Rd xrefs", domain = "R-tools"),
-                            paste(sQuote(undeclared), collapse = ", "),
-                            domain = NA))
+                            paste(sQuote(undeclared), collapse = ", ")),
+                            domain = NA)
     }
 
     mind_suspects <-

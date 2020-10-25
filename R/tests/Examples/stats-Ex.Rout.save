@@ -1,9 +1,9 @@
 
-Ivory Under development (unstable) (2020-10-05 r1313) -- "Internationalized Version of R"
+Ivory Under development (unstable) (2020-10-23 r1318) -- "Internationalized Version of R"
 Copyright (C) 2013-2020 Lukasz Daniel (lukasz.daniel@gmail.com)
 See README-IVORY file for details.
 
-R Under development (unstable) (2020-10-05 r79298) -- "Unsuffered Consequences"
+R Under development (unstable) (2020-10-23 r79367) -- "Unsuffered Consequences"
 Copyright (C) 2020 The R Foundation for Statistical Computing
 Platform: x86_64-pc-linux-gnu (64-bit)
 
@@ -3918,7 +3918,7 @@ sigma^2 estimated as 0.4566:  log likelihood = -101.2,  aic = 212.4
 > 
 > asOneSidedFormula("age")
 ~age
-<environment: 0x1595fd10>
+<environment: 0x105cc060>
 > asOneSidedFormula(~ age)
 ~age
 > 
@@ -4955,7 +4955,7 @@ function (V)
     r[cbind(seq_len(p), seq_len(p))] <- 1
     r
 }
-<bytecode: 0x19b70030>
+<bytecode: 0x131b9d50>
 <environment: namespace:stats>
 > stopifnot(all.equal(Cl, cov2cor(cov(longley))),
 +           all.equal(cor(longley, method = "kendall"),
@@ -7580,7 +7580,7 @@ attr(,".Environment")
 > environment(as.formula("y ~ x"))
 <environment: R_GlobalEnv>
 > environment(as.formula("y ~ x", env = new.env()))
-<environment: 0x1b714350>
+<environment: 0x10fd1aa0>
 > 
 > 
 > ## Create a formula for a model with a large number of variables:
@@ -11045,6 +11045,21 @@ Residual standard error: 1.21 on 10 degrees of freedom
 > ## without noise.
 > x <- 1:10
 > y <- 2*x + 3                            # perfect fit
+> ## terminates in an error, because convergence cannot be confirmed:
+> try(nls(y ~ a + b*x, start = list(a = 0.12345, b = 0.54321)))
+Error in command 'nls(y ~ a + b * x, start = list(a = 0.12345, b = 0.54321))': 
+  number of iterations exceeded maximum of 50
+> ## adjusting the convergence test by adding 'scaleOffset' to its denominator RSS:
+> nls(y ~ a + b*x, start = list(a = 0.12345, b = 0.54321),
++     control = list(scaleOffset = 1, printEval=TRUE))
+  It.   1, fac=           1, eval (no.,total): ( 1,  1): new dev = 1.05935e-12
+Nonlinear regression model
+  Model: y ~ a + b * x
+   Data: parent.frame()
+a b 
+3 2 
+ Residual sum-of-squares: 1.06e-12
+> ## Alternatively jittering the "too exact" values, slightly:
 > yeps <- y + rnorm(length(y), sd = 0.01) # added noise
 > nls(yeps ~ a + b*x, start = list(a = 0.12345, b = 0.54321))
 Nonlinear regression model
@@ -11053,13 +11068,9 @@ Nonlinear regression model
 a b 
 3 2 
  Residual sum-of-squares: 0.000524
-> ## terminates in an error, because convergence cannot be confirmed:
-> try(nls(y ~ a + b*x, start = list(a = 0.12345, b = 0.54321)))
-Error in command 'nls(y ~ a + b * x, start = list(a = 0.12345, b = 0.54321))': 
-  number of iterations exceeded maximum of 50
+> 
 > 
 > ## the nls() internal cheap guess for starting values can be sufficient:
-> 
 > x <- -(1:100)/10
 > y <- 100 + 10 * exp(x / 2) + rnorm(x)/10
 > nlmod <- nls(y ~  Const + A * exp(B * x))
@@ -11107,6 +11118,9 @@ $printEval
 
 $warnOnly
 [1] FALSE
+
+$scaleOffset
+[1] 0
 
 > 
 > 
@@ -12270,14 +12284,14 @@ attr(,"class")
 $linkfun
 function (mu) 
 mu^lambda
-<bytecode: 0x18d84b20>
-<environment: 0x18d64590>
+<bytecode: 0x1729d4a0>
+<environment: 0x172b93c0>
 
 $linkinv
 function (eta) 
 pmax(eta^(1/lambda), .Machine$double.eps)
-<bytecode: 0x18d84410>
-<environment: 0x18d64590>
+<bytecode: 0x1729e060>
+<environment: 0x172b93c0>
 
 > 
 > 
@@ -16527,8 +16541,8 @@ Step function with continuity 'f'=0.2, 3 knots at:
 > unclass(sfun0)
 function (v) 
 .approxfun(x, y, v, method, yleft, yright, f, na.rm)
-<bytecode: 0x1514c0a0>
-<environment: 0x1f7888c0>
+<bytecode: 0x15519bd0>
+<environment: 0x1f846f50>
 attr(,"call")
 stepfun(1:3, y0, f = 0)
 > ls(envir = environment(sfun0))
@@ -18955,7 +18969,7 @@ Number of Fisher Scoring iterations: 6
 > cleanEx()
 > options(digits = 7L)
 > base::cat(gettext("Time elapsed: ", domain = "R-base"), proc.time() - base::get("ptime", pos = 'CheckExEnv'),"\n")
-Time elapsed:  21.703 0.304 22.03 0 0 
+Time elapsed:  28.436 0.384 28.822 0 0 
 > grDevices::dev.off()
 null device 
           1 

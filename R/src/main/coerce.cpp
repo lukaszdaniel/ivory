@@ -3027,11 +3027,12 @@ HIDDEN SEXP R_do_set_class(SEXP call, SEXP op, SEXP args, SEXP env)
 	checkArity(op, args);
 	check1arg(args, call, "x");
 
-	if (MAYBE_SHARED(CAR(args)))
-		SETCAR(args, shallow_duplicate(CAR(args)));
-	ans = R_set_class(CAR(args), CADR(args), call);
-	SETTER_CLEAR_NAMED(CAR(args));
-	return ans;
+    if (MAYBE_SHARED(CAR(args)) ||
+	((! IS_ASSIGNMENT_CALL(call)) && MAYBE_REFERENCED(CAR(args))))
+	SETCAR(args, shallow_duplicate(CAR(args)));
+    ans = R_set_class(CAR(args), CADR(args), call);
+    SETTER_CLEAR_NAMED(CAR(args));
+    return ans;
 }
 
 /* primitive */

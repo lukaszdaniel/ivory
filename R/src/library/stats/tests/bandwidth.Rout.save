@@ -1,9 +1,9 @@
 
-Ivory Under development (unstable) (2020-10-05 r1313) -- "Internationalized Version of R"
+Ivory Under development (unstable) (2020-10-23 r1318) -- "Internationalized Version of R"
 Copyright (C) 2013-2020 Lukasz Daniel (lukasz.daniel@gmail.com)
 See README-IVORY file for details.
 
-R Under development (unstable) (2020-10-05 r79298) -- "Unsuffered Consequences"
+R Under development (unstable) (2020-10-23 r79367) -- "Unsuffered Consequences"
 Copyright (C) 2020 The R Foundation for Statistical Computing
 Platform: x86_64-pc-linux-gnu (64-bit)
 
@@ -53,4 +53,4 @@ In command 'bw.bcv(precip)': minimum occurred at one end of the range
 > 
 > proc.time()
    user  system elapsed 
-  0.727   0.056   0.774 
+  0.710   0.064   0.766 
