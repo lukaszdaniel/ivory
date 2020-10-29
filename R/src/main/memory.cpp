@@ -50,6 +50,7 @@
 #include <CXXR/GCEdge.hpp>
 #include <CXXR/GCManager.hpp>
 #include <CXXR/MemoryBank.hpp>
+#include <CXXR/WeakRef.hpp>
 #include <CXXR/SEXP_downcast.hpp>
 #include <R_ext/Print.h>
 
@@ -194,7 +195,16 @@ inline static SEXP CHK(SEXP x)
 #define CHK(x) x
 #endif
 
-/* also called from typename() in inspect.cpp */
+/**
+ * @brief Translate SEXPTYPE enum to a character string
+ * 
+ * @param type SEXP object's type
+ * 
+ * @return name of the type
+ * 
+ * @note also called from typename() in inspect.cpp
+ */
+
 HIDDEN
 const char *R::sexptype2char(const SEXPTYPE type) {
     switch (type) {
@@ -473,15 +483,15 @@ inline void CHECK_OLD_TO_NEW(RObject *from_old, RObject *to_new)
    Haskell" by Peyton Jones, Marlow, and Elliott (at
    www.research.microsoft.com/Users/simonpj/papers/weak.ps.gz). --LT */
 
-    SEXP R_weak_refs = nullptr;
+    WeakRef *R_weak_refs = nullptr;
 
-    inline void SET_READY_TO_FINALIZE(SEXP s) { RObject::set_ready_to_finalize(s); }
-    inline void CLEAR_READY_TO_FINALIZE(SEXP s) { RObject::clear_ready_to_finalize(s); }
-    inline bool IS_READY_TO_FINALIZE(SEXP s) { return RObject::is_ready_to_finalize(s); }
+    inline void SET_READY_TO_FINALIZE(SEXP s) { WeakRef::set_ready_to_finalize(s); }
+    inline void CLEAR_READY_TO_FINALIZE(SEXP s) { WeakRef::clear_ready_to_finalize(s); }
+    inline bool IS_READY_TO_FINALIZE(SEXP s) { return WeakRef::is_ready_to_finalize(s); }
 
-    inline void SET_FINALIZE_ON_EXIT(SEXP s) { RObject::set_finalize_on_exit(s); }
-    inline void CLEAR_FINALIZE_ON_EXIT(SEXP s) { RObject::clear_finalize_on_exit(s); }
-    inline bool FINALIZE_ON_EXIT(SEXP s) { return RObject::finalize_on_exit(s); }
+    inline void SET_FINALIZE_ON_EXIT(SEXP s) { WeakRef::set_finalize_on_exit(s); }
+    inline void CLEAR_FINALIZE_ON_EXIT(SEXP s) { WeakRef::clear_finalize_on_exit(s); }
+    inline bool FINALIZE_ON_EXIT(SEXP s) { return WeakRef::finalize_on_exit(s); }
 
     constexpr int WEAKREF_SIZE = 4;
     inline SEXP WEAKREF_KEY(SEXP w) { return VECTOR_ELT(w, 0); }
@@ -490,14 +500,14 @@ inline void CHECK_OLD_TO_NEW(RObject *from_old, RObject *to_new)
     inline void SET_WEAKREF_VALUE(SEXP w, SEXP v) { SET_VECTOR_ELT(w, 1, v); }
     inline SEXP WEAKREF_FINALIZER(SEXP w) { return VECTOR_ELT(w, 2); }
     inline void SET_WEAKREF_FINALIZER(SEXP w, SEXP f) { SET_VECTOR_ELT(w, 2, f); }
-    inline SEXP WEAKREF_NEXT(SEXP w) { return VECTOR_ELT(w, 3); }
-    inline void SET_WEAKREF_NEXT(SEXP w, SEXP n) { SET_VECTOR_ELT(w, 3, n); }
+    inline WeakRef *WEAKREF_NEXT(WeakRef *w) { return (WeakRef*)VECTOR_ELT((RObject*)w, 3); }
+    inline void SET_WEAKREF_NEXT(WeakRef *w, SEXP n) { SET_VECTOR_ELT((RObject*)w, 3, n); }
 
     SEXP MakeCFinalizer(R_CFinalizer_t cfun);
 
     SEXP NewWeakRef(SEXP key, SEXP val, SEXP fin, Rboolean onexit)
     {
-        SEXP w;
+        WeakRef *w = nullptr;
 
         switch (TYPEOF(key))
         {
@@ -513,7 +523,7 @@ inline void CHECK_OLD_TO_NEW(RObject *from_old, RObject *to_new)
         PROTECT(key);
         PROTECT(val = MAYBE_REFERENCED(val) ? duplicate(val) : val);
         PROTECT(fin);
-        w = allocVector(VECSXP, WEAKREF_SIZE);
+        w = SEXP_downcast<WeakRef*>(Rf_allocVector(VECSXP, WEAKREF_SIZE));
         SET_TYPEOF(w, WEAKREFSXP);
         if (key != R_NilValue)
         {
@@ -576,22 +586,6 @@ SEXP R_MakeWeakRefC(SEXP key, SEXP val, R_CFinalizer_t fin, Rboolean onexit)
 
 namespace
 {
-    bool R_finalizers_pending = false;
-    void CheckFinalizers(unsigned int num_old_gens_to_collect)
-    {
-        R_finalizers_pending = false;
-        for (RObject *wr = R_weak_refs; wr != R_NilValue; wr = WEAKREF_NEXT(wr))
-        {
-            GCNode *wrfk = WEAKREF_KEY(wr);
-            if (wrfk->m_gcgen <= num_old_gens_to_collect && !wrfk->isMarked())
-            {
-                SET_READY_TO_FINALIZE(wr);
-            }
-            if (IS_READY_TO_FINALIZE(wr))
-                R_finalizers_pending = true;
-        }
-    }
-
     /* C finalizers are stored in a CHARSXP.  It would be nice if we could
    use EXTPTRSXP's but these only hold a void *, and function pointers
    are not guaranteed to be compatible with a void *.  There should be
@@ -622,20 +616,31 @@ SEXP R_WeakRefKey(SEXP w)
 {
     if (TYPEOF(w) != WEAKREFSXP)
         error(_("not a weak reference"));
-    return WEAKREF_KEY(w);
+
+    WeakRef* wr = SEXP_downcast<WeakRef*>(w);
+
+    return wr->key();
 }
 
 SEXP R_WeakRefValue(SEXP w)
 {
     if (TYPEOF(w) != WEAKREFSXP)
         error(_("not a weak reference"));
-    SEXP v = WEAKREF_VALUE(w);
-    if (v != R_NilValue)
+
+    WeakRef* wr = SEXP_downcast<WeakRef*>(w);
+
+    SEXP v = wr->value();
+    if (v)
         ENSURE_NAMEDMAX(v);
     return v;
 }
 
-void R_RunWeakRefFinalizer(SEXP w)
+void R_RunWeakRefFinalizer(SEXP x)
+{
+    WeakRef::runWeakRefFinalizer(x);
+}
+
+void WeakRef::runWeakRefFinalizer(RObject *w)
 {
     SEXP e;
     if (TYPEOF(w) != WEAKREFSXP)
@@ -670,6 +675,11 @@ void R_RunWeakRefFinalizer(SEXP w)
 
 bool RunFinalizers(void)
 {
+	return WeakRef::runFinalizers();
+}
+
+bool WeakRef::runFinalizers()
+{
     R_CHECK_THREAD;
     /* Prevent this function from running again when already in
        progress. Jumps can only occur inside the top level context
@@ -680,12 +690,13 @@ bool RunFinalizers(void)
         return false;
     running = true;
 
-    volatile SEXP s, last;
-    volatile bool finalizer_run = false;
+    WeakRef *s = nullptr;
+    WeakRef *last = nullptr;
+    bool finalizer_run = false;
 
-    for (s = R_weak_refs, last = R_NilValue; s != R_NilValue;)
+    for (s = R_weak_refs; s != nullptr;)
     {
-        SEXP next = WEAKREF_NEXT(s);
+        WeakRef *next = WEAKREF_NEXT(s);
         if (IS_READY_TO_FINALIZE(s))
         {
             /**** use R_ToplevelExec here? */
@@ -743,24 +754,35 @@ bool RunFinalizers(void)
         s = next;
     }
     running = false;
-    R_finalizers_pending = false;
+    WeakRef::R_finalizers_pending = false;
     return finalizer_run;
 }
 
 void R_RunExitFinalizers(void)
 {
     R_checkConstants(TRUE);
+    WeakRef::runExitFinalizers();
+}
 
-    for (RObject *s = R_weak_refs; s != R_NilValue; s = WEAKREF_NEXT(s))
+void WeakRef::runExitFinalizers()
+{
+    R_checkConstants(TRUE);
+
+    for (WeakRef *s = R_weak_refs; s != nullptr; s = WEAKREF_NEXT(s))
         if (FINALIZE_ON_EXIT(s))
             SET_READY_TO_FINALIZE(s);
-    RunFinalizers();
+    runFinalizers();
 }
 
 void R_RunPendingFinalizers(void)
 {
-    if (R_finalizers_pending)
-        RunFinalizers();
+    WeakRef::runPendingFinalizers();
+}
+
+void WeakRef::runPendingFinalizers()
+{
+    if (WeakRef::R_finalizers_pending)
+        runFinalizers();
 }
 
 void R_RegisterFinalizerEx(SEXP s, SEXP fun, Rboolean onexit)
@@ -905,31 +927,40 @@ void GCNode::gc(unsigned int num_old_gens_to_collect)
 
     /* identify weakly reachable nodes */
     {
-	bool recheck_weak_refs;
-	do {
-	    recheck_weak_refs = false;
-	    for (RObject *s = R_weak_refs; s != R_NilValue; s = WEAKREF_NEXT(s)) {
-		if (WEAKREF_KEY(s)->isMarked()) {
-            SEXP wrv = WEAKREF_VALUE(s);
-		    if (wrv && !wrv->isMarked()) {
-			recheck_weak_refs = true;
-			MARK_THRU(&marker, WEAKREF_VALUE(s));
-		    }
-            SEXP wrf = WEAKREF_FINALIZER(s);
-		    if (wrf && !wrf->isMarked()) {
-			recheck_weak_refs = true;
-			MARK_THRU(&marker, wrf);
-		    }
-		}
-	    }
-	} while (recheck_weak_refs);
+        bool newmarks;
+        do
+        {
+            newmarks = false;
+            for (WeakRef *s = R_weak_refs; s != nullptr; s = WEAKREF_NEXT(s))
+            {
+                if (WEAKREF_KEY(s)->m_gcgen > num_old_gens_to_collect || WEAKREF_KEY(s)->isMarked())
+                {
+                    RObject *value = WEAKREF_VALUE(s);
+                    if (value && value->conductVisitor(&marker))
+                        newmarks = true;
+                    RObject *Rfinalizer = WEAKREF_FINALIZER(s);
+                    if (Rfinalizer && Rfinalizer->conductVisitor(&marker))
+                        newmarks = true;
+                }
+            }
+        } while (newmarks);
     }
 
     /* mark nodes ready for finalizing */
-    CheckFinalizers(num_old_gens_to_collect);
+    {
+        WeakRef::R_finalizers_pending = false;
+        for (WeakRef *wr = R_weak_refs; wr != nullptr; wr = WEAKREF_NEXT(wr))
+        {
+            if (WEAKREF_KEY(wr)->m_gcgen <= num_old_gens_to_collect && !WEAKREF_KEY(wr)->isMarked())
+            {
+                SET_READY_TO_FINALIZE(wr);
+                WeakRef::R_finalizers_pending = true;
+            }
+        }
+    }
 
     /* process the weak reference chain */
-    for (RObject *wr = R_weak_refs; wr != R_NilValue; wr = WEAKREF_NEXT(wr))
+    for (WeakRef *wr = R_weak_refs; wr != nullptr; wr = WEAKREF_NEXT(wr))
     {
         MARK_THRU(&marker, wr);
         MARK_THRU(&marker, WEAKREF_KEY(wr));
@@ -1269,8 +1300,6 @@ HIDDEN void R::InitMemory()
     R_BCNodeStackTop = R_BCNodeStackBase;
     R_BCNodeStackEnd = R_BCNodeStackBase + R_BCNODESTACKSIZE;
     R_BCProtTop = R_BCNodeStackTop;
-
-    R_weak_refs = R_NilValue;
 
     R_HandlerStack = R_RestartStack = R_NilValue;
 

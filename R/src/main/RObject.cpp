@@ -127,38 +127,6 @@ namespace R
         abort();
     }
 
-    void RObject::set_ready_to_finalize(RObject *x)
-    {
-        if (!x)
-            return;
-        x->m_gpbits |= READY_TO_FINALIZE_MASK;
-    }
-
-    void RObject::clear_ready_to_finalize(RObject *x)
-    {
-        if (!x)
-            return;
-        x->m_gpbits &= ~READY_TO_FINALIZE_MASK;
-    }
-
-    unsigned int RObject::is_ready_to_finalize(RObject *x) { return x ? x->m_gpbits & READY_TO_FINALIZE_MASK : 0; }
-
-    void RObject::set_finalize_on_exit(RObject *x)
-    {
-        if (!x)
-            return;
-        x->m_gpbits |= FINALIZE_ON_EXIT_MASK;
-    }
-
-    void RObject::clear_finalize_on_exit(RObject *x)
-    {
-        if (!x)
-            return;
-        x->m_gpbits &= ~FINALIZE_ON_EXIT_MASK;
-    }
-
-    unsigned int RObject::finalize_on_exit(RObject *x) { return x ? (x->m_gpbits & FINALIZE_ON_EXIT_MASK) : 0; }
-
     /**
      * Replace x's attributes by \a v.
      * @param x Pointer to \c RObject.

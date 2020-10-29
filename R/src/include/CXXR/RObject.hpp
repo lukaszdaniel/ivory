@@ -222,16 +222,6 @@ namespace R
 	 */
         virtual ~RObject();
 
-        /* General Cons Cell Attributes */
-        static constexpr int READY_TO_FINALIZE_MASK = 1;
-        static constexpr int FINALIZE_ON_EXIT_MASK = 2;
-        static constexpr int WEAKREF_SIZE = 4;
-        static void set_ready_to_finalize(RObject *x);
-        static void clear_ready_to_finalize(RObject *x);
-        static unsigned int is_ready_to_finalize(RObject *x);
-        static void set_finalize_on_exit(RObject *x);
-        static void clear_finalize_on_exit(RObject *x);
-        static unsigned int finalize_on_exit(RObject *x);
         static void set_attrib(RObject *x, RObject *v);
         static RObject *attrib(RObject *x);
         static unsigned int named(RObject *x);

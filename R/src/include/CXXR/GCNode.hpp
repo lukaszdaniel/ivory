@@ -254,8 +254,8 @@ namespace R
 	 */
         virtual ~GCNode();
     public: // private:
-	// friend class WeakRef;
-	// template <class T> friend class GCEdge;
+	friend class WeakRef;
+	template <class T> friend class GCEdge;
 
 	/** Visitor class used to impose a minimum generation number.
 	 *
