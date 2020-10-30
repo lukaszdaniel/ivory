@@ -1,8 +1,3 @@
-c  Part of R package KernSmooth
-c  Copyright (C) 1995  M. P. Wand
-c
-c  Unlimited use and distribution (see LICENCE).
-
       subroutine dgedi(a,lda,n,ipvt,det,work,job)
       integer lda,n,ipvt(*),job
       double precision a(lda,*),det(2),work(*)

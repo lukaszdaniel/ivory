@@ -7,14 +7,14 @@ e7ddab232fd0c2c20b6eac503229ca89 *man/dpill.Rd
 e9d58f063bb33cd05bb14a80fb6bfcbd *man/dpik.Rd
 5f6ef1beea4f7680cea94e63dd715bcb *man/bkde.Rd
 c8432d2579ea0ce016d5645adc3523e2 *PORTING
-cade3670797c057fd1710a12a1a5c832 *DESCRIPTION
+8eb6525453042a68adf9f513304a2198 *DESCRIPTION
 ef83d24fcd60055ca8de6a7afac1a3d2 *po/R-fr.po
 f9e6460c2f691d7c75dc21b525a2a61d *po/R-ko.po
 913b82567fa9a9e11c21736de93e73f8 *po/R-de.po
 c1442885b924990b9160853f7a95d9f6 *po/R-it.po
 c07a8b2c52697e55b41b63f43ad2b4c1 *po/R-KernSmooth.pot
 d73aa41967d3cb81a5e58646fc2b42e6 *po/R-pl.po
-4a39ab255fed86dd361ce9d83f876488 *LICENCE.note
+2e0dc36e93da6190c3a98daee12adf01 *LICENCE.note
 0a810d5bdfe00d033bd66bd6764d8e62 *inst/po/fr/LC_MESSAGES/R-KernSmooth.mo
 02e7ce883aedf8090c867453f0696e48 *inst/po/en@quot/LC_MESSAGES/R-KernSmooth.mo
 9c7599f76d7901e93a83b9827bfba9c5 *inst/po/de/LC_MESSAGES/R-KernSmooth.mo
@@ -35,4 +35,4 @@ ca3d59ad1312b0ab54f7a390d9d74295 *src/linbin.f
 99da5301640f94f5edefda25b72c5699 *src/sstdiag.f
 fbf478a29898539e563ca19df62372fe *src/blkest.f
 987035a0236cffd57de5afc6594119ed *src/rlbin.f
-9f041860a6b30af57e640675a17e75eb *src/dgedi.f
+a998e830d7647683a856b25a4ae26ad1 *src/dgedi.f

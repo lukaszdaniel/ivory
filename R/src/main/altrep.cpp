@@ -275,9 +275,11 @@ static SEXP ALTREP_UNSERIALIZE_CLASS(SEXP info)
 	SEXP class_ = LookupClass(csym, psym);
 	if (class_ == nullptr) {
 	    SEXP pname = ScalarString(PRINTNAME(psym));
+	    PROTECT(pname);
 	    R_tryCatchError(find_namespace, pname,
 			    handle_namespace_error, nullptr);
 	    class_ = LookupClass(csym, psym);
+	    UNPROTECT(1);
 	}
 	return class_;
     }

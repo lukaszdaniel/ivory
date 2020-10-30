@@ -2924,6 +2924,9 @@ static int class2type(const char *s)
 
 static SEXP do_unsetS4(SEXP obj, SEXP newClass)
 {
+  // act now, as warning()s may be treated as errors:
+  UNSET_S4_OBJECT(obj);
+
 	if (isNull(newClass))
 	{ /* NULL class is only valid for S3 objects */
 		warning(_("Setting 'class(x)' to NULL. Result will no longer be an S4 object"));
@@ -2933,7 +2936,6 @@ static SEXP do_unsetS4(SEXP obj, SEXP newClass)
 				translateChar(STRING_ELT(newClass, 0)), translateChar(STRING_ELT(newClass, 1)));
 	else
 		warning(_("Setting 'class(x)' to \"%s\" sets attribute to NULL. Result will no longer be an S4 object"), CHAR(asChar(newClass)));
-	UNSET_S4_OBJECT(obj);
 	return obj;
 }
 
