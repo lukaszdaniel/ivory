@@ -157,9 +157,8 @@ namespace R
 
 	static void runWeakRefFinalizer(RObject *x);
 	static void runPendingFinalizers();
-	static bool R_finalizers_pending;
 
-    public: // private:
+    private:
 	typedef std::list<WeakRef*, Allocator<WeakRef*> > WRList;
 	static WRList* getLive();
 	static WRList* getFinalizationPending();
@@ -205,17 +204,6 @@ namespace R
 	WRList* wrList() const;
 
 	friend class GCNode;
-#if 1
-        static constexpr int READY_TO_FINALIZE_MASK = 1;
-        static constexpr int FINALIZE_ON_EXIT_MASK = 2;
-        static constexpr int WEAKREF_SIZE = 4;
-        static void set_ready_to_finalize(RObject *x);
-        static void clear_ready_to_finalize(RObject *x);
-        static bool is_ready_to_finalize(RObject *x);
-        static void set_finalize_on_exit(RObject *x);
-        static void clear_finalize_on_exit(RObject *x);
-        static bool finalize_on_exit(RObject *x);
-#endif
     };
 } // namespace R
 

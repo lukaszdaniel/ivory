@@ -40,7 +40,6 @@ using namespace std;
 using namespace R;
 
 int WeakRef::s_count = 0;
-bool WeakRef::R_finalizers_pending = false;
 
 WeakRef::WeakRef(RObject *key, RObject *value, RObject *R_finalizer,
 				 bool finalize_on_exit)
@@ -109,7 +108,7 @@ bool WeakRef::check()
 			 << "\nfinalization pending size: "
 			 << getFinalizationPending()->size()
 			 << "\ntombstone size: " << getTombstone()->size()
-			 << "\ns_count: " << s_count << '\n';
+			 << "\ns_count: " << s_count << "\n";
 		abort();
 	}
 	// Check the live list:
@@ -202,7 +201,7 @@ void WeakRef::markThru(unsigned int max_gen)
 			{
 				WeakRef *wr = *lit++;
 				RObject *key = wr->key();
-				if (key->m_gcgen > max_gen || key->isMarked())
+				if (key && (key->m_gcgen > max_gen || key->isMarked()))
 				{
 					RObject *value = wr->value();
 					if (value && value->conductVisitor(&marker))
@@ -216,20 +215,26 @@ void WeakRef::markThru(unsigned int max_gen)
 		} while (newmarks);
 	}
 	// Step 4 of algorithm.  Process references with unmarked keys.
-	WeakRef::R_finalizers_pending = false;
 	{
 		WRList::iterator lit = live->begin();
 		while (lit != live->end())
 		{
 			WeakRef *wr = *lit++;
+			RObject *key = wr->key();
+			RObject *value = wr->value();
 			RObject *Rfinalizer = wr->m_Rfinalizer;
-			if (Rfinalizer)
-				Rfinalizer->conductVisitor(&marker);
 			if (Rfinalizer || wr->m_Cfinalizer)
 			{
+				if (wr)
+					wr->conductVisitor(&marker);
+				if (key)
+					key->conductVisitor(&marker);
+				if (value)
+					value->conductVisitor(&marker);
+				if (Rfinalizer)
+					Rfinalizer->conductVisitor(&marker);
 				wr->m_ready_to_finalize = true;
 				wr->transfer(live, finalization_pending);
-				WeakRef::R_finalizers_pending = true;
 			}
 			else
 				wr->tombstone();
@@ -262,38 +267,3 @@ WeakRef::WRList *WeakRef::wrList() const
 {
 	return m_ready_to_finalize ? getFinalizationPending() : (m_key ? getLive() : getTombstone());
 }
-
-#if 1
-void WeakRef::set_ready_to_finalize(RObject *x)
-{
-	if (!x)
-		return;
-	x->m_gpbits |= READY_TO_FINALIZE_MASK;
-}
-
-void WeakRef::clear_ready_to_finalize(RObject *x)
-{
-	if (!x)
-		return;
-	x->m_gpbits &= ~READY_TO_FINALIZE_MASK;
-}
-
-bool WeakRef::is_ready_to_finalize(RObject *x) { return x ? x->m_gpbits & READY_TO_FINALIZE_MASK : 0; }
-
-void WeakRef::set_finalize_on_exit(RObject *x)
-{
-	if (!x)
-		return;
-	x->m_gpbits |= FINALIZE_ON_EXIT_MASK;
-}
-
-void WeakRef::clear_finalize_on_exit(RObject *x)
-{
-	if (!x)
-		return;
-	x->m_gpbits &= ~FINALIZE_ON_EXIT_MASK;
-}
-
-bool WeakRef::finalize_on_exit(RObject *x) { return x ? (x->m_gpbits & FINALIZE_ON_EXIT_MASK) : 0; }
-
-#endif

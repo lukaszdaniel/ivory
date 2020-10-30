@@ -560,7 +560,15 @@ union R_bndval_t
  */
 
 /* Vector Heap Structure */
-struct alignas(std::max(alignof(double), alignof(RObject*))) VECREC {};
+// struct alignas(std::max(alignof(double), alignof(RObject*))) VECREC {};
+struct VECREC
+{
+    union
+    {
+        R::RObject *backpointer;
+        double align;
+    } u;
+};
 
 using VECP = VECREC *;
 
