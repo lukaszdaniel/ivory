@@ -32,6 +32,7 @@
 #define ENVIRONMENT_HPP
 
 #include <CXXR/RObject.hpp>
+#include <CXXR/SEXP_downcast.hpp>
 
 namespace R
 {
@@ -54,8 +55,22 @@ namespace R
         RObject *m_frame;
         RObject *m_enclos;
         RObject *m_hashtab;
+        // Declared private to ensure that Environment objects are
+        // created only using 'new':
+        ~Environment() {}
 
     public:
+        // Virtual functions of RObject:
+        const char *typeName() const override;
+
+        /** @brief The name by which this type is known in R.
+         *
+         * @return The name by which this type is known in R.
+         */
+        static const char *staticTypeName()
+        {
+            return "environment";
+        }
         auto frame() const { return this->m_frame; }
         auto enclos() const { return this->m_enclos; }
         auto hashtab() const { return this->m_hashtab; }

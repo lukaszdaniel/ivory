@@ -31,7 +31,7 @@
 #ifndef BUILTINFUNCTION_HPP
 #define BUILTINFUNCTION_HPP
 
-#include <CXXR/RObject.hpp>
+#include <CXXR/FunctionBase.hpp>
 
 namespace R
 {
@@ -44,13 +44,30 @@ namespace R
      * before being passed on to the encapsulated C/C++ function (CR's
      * BUILTINSXP), or are passed on unevaluated (SPECIALSXP).
      */
-    class BuiltInFunction : public RObject
+    class BuiltInFunction : public FunctionBase
     {
     private:
         int m_offset;
+        // Declared private to ensure that BuiltInFunction objects are
+        // allocated only using 'new'.
+        ~BuiltInFunction();
 
     public:
+        // Virtual function of RObject:
+        const char *typeName() const override;
+
+        /** @brief The names by which this type is known in R.
+         *
+         * @return The names by which this type is known in R.
+         */
+        static const char *staticTypeName()
+        {
+            return "(builtin or special)";
+        }
         auto offset() const { return this->m_offset; }
+        /* Primitive Access Methods */
+        static int primoffset(RObject *x);
+        static void set_primoffset(RObject *x, int v);
     };
 } // namespace R
 

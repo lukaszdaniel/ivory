@@ -42,4 +42,10 @@ namespace R
         const auto &COMPLEXptr = COMPLEX;
         const auto &COMPLEX_ROptr = COMPLEX_RO;
     } // namespace ForceNonInline
+
+    template <>
+    const char *ComplexVector::staticTypeName()
+    {
+        return "complex";
+    }
 } // namespace R

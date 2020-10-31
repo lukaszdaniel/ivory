@@ -45,4 +45,9 @@ namespace R
         const auto &mkCharCEp = Rf_mkCharCE;
         const auto &mkCharLenp = Rf_mkCharLen;
     } // namespace ForceNonInline
+
+    const char *String::typeName() const
+    {
+        return staticTypeName();
+    }
 } // namespace R

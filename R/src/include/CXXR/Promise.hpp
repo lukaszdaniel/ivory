@@ -32,6 +32,7 @@
 #define PROMISE_HPP
 
 #include <CXXR/RObject.hpp>
+#include <CXXR/SEXP_downcast.hpp>
 
 namespace R
 {
@@ -67,6 +68,16 @@ namespace R
         RObject *m_env;
 
     public:
+        const char *typeName() const override;
+
+        /** @brief The name by which this type is known in R.
+         *
+         * @return The name by which this type is known in R.
+         */
+        static const char *staticTypeName()
+        {
+            return "promise";
+        }
         auto value() const { return this->m_value; }
         auto expr() const { return this->m_expr; }
         auto env() const { return this->m_env; }

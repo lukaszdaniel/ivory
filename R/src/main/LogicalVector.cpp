@@ -42,4 +42,10 @@ namespace R
         const auto &LOGICALptr = LOGICAL;
         const auto &LOGICAL_ROptr = LOGICAL_RO;
     } // namespace ForceNonInline
+
+    template <>
+    const char *LogicalVector::staticTypeName()
+    {
+        return "logical";
+    }
 } // namespace R

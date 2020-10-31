@@ -72,13 +72,16 @@ namespace R
 
         if (m_alt)
         {
-            if (tag()) tag()->conductVisitor(v);
+            if (tag())
+                tag()->conductVisitor(v);
             if (RObject::bndcell_tag(this))
             {
                 Rf_error("bad binding access");
             }
-            if (car()) car()->conductVisitor(v);
-            if (cdr()) cdr()->conductVisitor(v);
+            if (car())
+                car()->conductVisitor(v);
+            if (cdr())
+                cdr()->conductVisitor(v);
         }
         else
             switch (m_type)
@@ -89,18 +92,25 @@ namespace R
                 for (R_xlen_t i = 0; i < length(); i++)
                 {
                     const GCNode *node = ((const RObject **)(m_data))[i];
-                    if (node) node->conductVisitor(v);
+                    if (node)
+                        node->conductVisitor(v);
                 }
                 break;
             case ENVSXP:
-                if (frame()) frame()->conductVisitor(v);
-                if (enclosingEnvironment()) enclosingEnvironment()->conductVisitor(v);
-                if (hashTable()) hashTable()->conductVisitor(v);
+                if (frame())
+                    frame()->conductVisitor(v);
+                if (enclosingEnvironment())
+                    enclosingEnvironment()->conductVisitor(v);
+                if (hashTable())
+                    hashTable()->conductVisitor(v);
                 break;
             case LISTSXP:
-                if (tag()) tag()->conductVisitor(v);
-                if ((BOXED_BINDING_CELLS || RObject::bndcell_tag(this) == 0) && car()) car()->conductVisitor(v);
-                if (cdr()) cdr()->conductVisitor(v);
+                if (tag())
+                    tag()->conductVisitor(v);
+                if ((BOXED_BINDING_CELLS || RObject::bndcell_tag(this) == 0) && car())
+                    car()->conductVisitor(v);
+                if (cdr())
+                    cdr()->conductVisitor(v);
                 break;
             case CLOSXP:
             case PROMSXP:
@@ -108,13 +118,18 @@ namespace R
             case DOTSXP:
             case SYMSXP:
             case BCODESXP:
-                if (tag()) tag()->conductVisitor(v);
-                if (car()) car()->conductVisitor(v);
-                if (cdr()) cdr()->conductVisitor(v);
+                if (tag())
+                    tag()->conductVisitor(v);
+                if (car())
+                    car()->conductVisitor(v);
+                if (cdr())
+                    cdr()->conductVisitor(v);
                 break;
             case EXTPTRSXP:
-                if (cdr()) cdr()->conductVisitor(v);
-                if (tag()) tag()->conductVisitor(v);
+                if (cdr())
+                    cdr()->conductVisitor(v);
+                if (tag())
+                    tag()->conductVisitor(v);
                 break;
             default:
                 break;
@@ -125,6 +140,11 @@ namespace R
     {
         std::cerr << "RObject::visitChildren(visitor* v) not implemented yet.\n";
         abort();
+    }
+
+    const char *RObject::typeName() const
+    {
+        return Rf_type2char(sexptype());
     }
 
     /**
@@ -316,15 +336,6 @@ namespace R
             (((x)->m_gpbits) &= ~ASSIGNMENT_PENDING_MASK);
     }
 
-    bool RObject::rtrace(RObject *x) { return x && x->m_trace; }
-
-    void RObject::set_rtrace(RObject *x, bool v)
-    {
-        if (!x)
-            return;
-        x->m_trace = v;
-    }
-
     unsigned int RObject::missing(RObject *x) { return x ? (x->m_gpbits & MISSING_MASK) : 0; } /* for closure calls */
 
     void RObject::set_missing(RObject *x, int v)
@@ -343,15 +354,6 @@ namespace R
             return;
         e->m_extra = v;
     }
-
-    /* External pointer access methods */
-    RObject *RObject::extptr_prot(RObject *x) { return RObject::cdr(x); }
-
-    RObject *RObject::extptr_tag(RObject *x) { return RObject::tag(x); }
-
-    void RObject::set_extptr_tag(RObject *x, RObject *v) { RObject::set_tag(x, v); }
-
-    void RObject::set_extptr_prot(RObject *x, RObject *v) { RObject::set_cdr(x, v); }
 
     /**
      * An S4 object?

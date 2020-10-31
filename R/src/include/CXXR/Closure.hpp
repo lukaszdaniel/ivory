@@ -31,7 +31,8 @@
 #ifndef CLOSURE_HPP
 #define CLOSURE_HPP
 
-#include <CXXR/RObject.hpp>
+#include <CXXR/FunctionBase.hpp>
+#include <CXXR/SEXP_downcast.hpp>
 
 namespace R
 {
@@ -43,14 +44,28 @@ namespace R
      * are interpreted by reference to the specified environment (and
      * its enclosing environments).
      */
-    class Closure : public RObject
+    class Closure : public FunctionBase
     {
     private:
         RObject *m_formals;
         RObject *m_body;
         RObject *m_env;
+        // Declared private to ensure that Closure objects are
+        // created only using 'new':
+        ~Closure();
 
     public:
+        // Virtual functions of RObject:
+        const char *typeName() const override;
+
+        /** @brief The name by which this type is known in R.
+         *
+         * @return The name by which this type is known in R.
+         */
+        static const char *staticTypeName()
+        {
+            return "closure";
+        }
         auto formals() const { return this->m_formals; }
         auto body() const { return this->m_body; }
         auto env() const { return this->m_env; }

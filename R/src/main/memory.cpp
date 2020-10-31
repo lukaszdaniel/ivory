@@ -51,6 +51,7 @@
 #include <CXXR/GCManager.hpp>
 #include <CXXR/MemoryBank.hpp>
 #include <CXXR/WeakRef.hpp>
+#include <CXXR/ExternalPointer.hpp>
 #include <CXXR/SEXP_downcast.hpp>
 #include <R_ext/Print.h>
 
@@ -598,11 +599,9 @@ bool WeakRef::runFinalizers()
 
     WeakRef::check();
 
-    WRList::reverse_iterator lit = finalization_pending->rbegin();
-    WRList::reverse_iterator litend = finalization_pending->rend();
-    while (lit != litend)
+    while (finalization_pending->size())
     {
-	        WeakRef* wr = *lit--;
+            WeakRef* wr = *finalization_pending->begin();
             /**** use R_ToplevelExec here? */
             RCNTXT thiscontext;
             RCNTXT *volatile saveToplevelContext;
@@ -653,15 +652,15 @@ void R_RunExitFinalizers(void)
 void WeakRef::runExitFinalizers()
 {
     WeakRef::check();
-    WRList* live = getLive();
-    WRList* finalization_pending = getFinalizationPending();
-    WRList::iterator lit = live->begin();
-    while (lit != live->end()) {
-	WeakRef* wr = *lit++;
-	if (wr->m_finalize_on_exit) {
-	    wr->m_ready_to_finalize = true;
-	    wr->transfer(live, finalization_pending);
-	}
+    WRList *live = getLive();
+    WRList *finalization_pending = getFinalizationPending();
+    for (WeakRef *wr : *finalization_pending)
+    {
+        if (wr->m_finalize_on_exit)
+        {
+            wr->m_ready_to_finalize = true;
+            wr->transfer(live, finalization_pending);
+        }
     }
     runFinalizers();
 }
@@ -2239,9 +2238,9 @@ void R_ReleaseMSet(SEXP mset, int keepSize)
 SEXP R_MakeExternalPtr(void *p, SEXP tag, SEXP prot)
 {
     SEXP s = Rf_allocSExp(EXTPTRSXP);
-    RObject::set_extptr_ptr(s, reinterpret_cast<RObject*>(p));
-    RObject::set_extptr_prot(s, CHK(prot));
-    RObject::set_extptr_tag(s, CHK(tag));
+    ExternalPointer::set_extptr_ptr(s, reinterpret_cast<RObject*>(p));
+    ExternalPointer::set_extptr_prot(s, CHK(prot));
+    ExternalPointer::set_extptr_tag(s, CHK(tag));
     return s;
 }
 
@@ -2262,26 +2261,26 @@ SEXP R_ExternalPtrProtected(SEXP s)
 
 void R_ClearExternalPtr(SEXP s)
 {
-    RObject::set_extptr_ptr(s, nullptr);
+    ExternalPointer::set_extptr_ptr(s, nullptr);
 }
 
 void R_SetExternalPtrAddr(SEXP s, void *p)
 {
-    RObject::set_extptr_ptr(s, reinterpret_cast<RObject*>(p));
+    ExternalPointer::set_extptr_ptr(s, reinterpret_cast<RObject*>(p));
 }
 
 void R_SetExternalPtrTag(SEXP s, SEXP tag)
 {
     FIX_REFCNT(s, EXTPTR_TAG(s), tag);
     CHECK_OLD_TO_NEW(s, tag);
-    RObject::set_extptr_tag(s, tag);
+    ExternalPointer::set_extptr_tag(s, tag);
 }
 
 void R_SetExternalPtrProtected(SEXP s, SEXP p)
 {
     FIX_REFCNT(s, EXTPTR_PROT(s), p);
     CHECK_OLD_TO_NEW(s, p);
-    RObject::set_extptr_prot(s, p);
+    ExternalPointer::set_extptr_prot(s, p);
 }
 
 /*
@@ -2297,12 +2296,8 @@ union fn_ptr
 SEXP R_MakeExternalPtrFn(DL_FUNC p, SEXP tag, SEXP prot)
 {
     fn_ptr tmp;
-    SEXP s = Rf_allocSExp(EXTPTRSXP);
     tmp.fn = p;
-    RObject::set_extptr_ptr(s, reinterpret_cast<RObject*>(tmp.p));
-    RObject::set_extptr_prot(s, CHK(prot));
-    RObject::set_extptr_tag(s, CHK(tag));
-    return s;
+    return R_MakeExternalPtr(tmp.p, tag, prot);
 }
 
 DL_FUNC R_ExternalPtrAddrFn(SEXP s)
@@ -2323,7 +2318,7 @@ int (OBJECT)(SEXP x) { return R::RObject::object(CHK(x)); }
 int (MARK)(RObject *x) { return R::GCNode::is_marked(static_cast<GCNode*>(CHK(x))); }
 SEXPTYPE (TYPEOF)(SEXP x) { return R::RObject::typeof_(CHK(x)); }
 int (NAMED)(SEXP x) { return R::RObject::named(CHK(x)); }
-int (RTRACE)(SEXP x) { return R::RObject::rtrace(CHK(x)); }
+int (RTRACE)(SEXP x) { return R::FunctionBase::rtrace(CHK(x)); }
 int (LEVELS)(SEXP x) { return R::RObject::levels(CHK(x)); }
 int (REFCNT)(SEXP x) { return R::RObject::refcnt(CHK(x)); }
 int (TRACKREFS)(SEXP x) { return R::RObject::trackrefs(CHK(x)); }
@@ -2359,7 +2354,7 @@ void (SET_NAMED)(SEXP x, int v)
     SET_NAMED(CHK(x), v);
 #endif
 }
-void (SET_RTRACE)(SEXP x, int v) { R::RObject::set_rtrace(CHK(x), v); }
+void (SET_RTRACE)(SEXP x, int v) { R::FunctionBase::set_rtrace(CHK(x), v); }
 void (SETLEVELS)(SEXP x, int v) { R::RObject::setlevels(CHK(x), v); }
 void DUPLICATE_ATTRIB(SEXP to, SEXP from) {
     SET_ATTRIB(CHK(to), duplicate(CHK(R::RObject::attrib(CHK(from)))));
@@ -2865,7 +2860,7 @@ SEXP (SETCAD4R)(SEXP x, SEXP y)
     return y;
 }
 
-void *(EXTPTR_PTR)(SEXP x) { return R::RObject::extptr_ptr(CHK(x)); }
+void *(EXTPTR_PTR)(SEXP x) { return R::ExternalPointer::extptr_ptr(CHK(x)); }
 
 void (SET_MISSING)(SEXP x, int v) { R::RObject::set_missing(CHKCONS(x), v); }
 
@@ -2886,9 +2881,9 @@ void (SET_RSTEP)(SEXP x, int v) { R::Closure::set_rstep(CHK(x), v); }
 #if defined(TESTING_WRITE_BARRIER) || defined(COMPILING_IVORY)
 /* Primitive Accessors */
 /* not hidden since needed in some base packages */
-int (PRIMOFFSET)(SEXP x) { return R::RObject::primoffset(CHK(x)); }
+int (PRIMOFFSET)(SEXP x) { return R::BuiltInFunction::primoffset(CHK(x)); }
 HIDDEN
-void (SET_PRIMOFFSET)(SEXP x, int v) { R::RObject::set_primoffset(CHK(x), v); }
+void (SET_PRIMOFFSET)(SEXP x, int v) { R::BuiltInFunction::set_primoffset(CHK(x), v); }
 #endif
 
 /* Symbol Accessors */

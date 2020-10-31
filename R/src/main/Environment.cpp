@@ -43,6 +43,11 @@ namespace R
         const auto &FRAMEptr = FRAME;
     } // namespace ForceNonInline
 
+    const char *Environment::typeName() const
+    {
+        return staticTypeName();
+    }
+
     /* Environment Access Methods */
     /**
      * @param x Pointer to an R::Environment.

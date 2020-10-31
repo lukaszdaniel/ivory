@@ -42,4 +42,10 @@ namespace R
         const auto &RAWptr = RAW;
         const auto &RAW_ROptr = RAW_RO;
     } // namespace ForceNonInline
+
+    template <>
+    const char *RawVector::staticTypeName()
+    {
+        return "raw";
+    }
 } // namespace R

@@ -1,5 +1,7 @@
 /*
  *  R : A Computer Language for Statistical Data Analysis
+ *  Copyright (C) 1995, 1996  Robert Gentleman and Ross Ihaka
+ *  Copyright (C) 1999-2007   The R Development Core Team.
  *  Copyright (C) 2008-2014  Andrew R. Runnalls.
  *  Copyright (C) 2014 and onwards the Rho Project Authors.
  *
@@ -22,51 +24,49 @@
  *  http://www.r-project.org/Licenses/
  */
 
-/** @file FixedVector.hpp
+/** @file FunctionBase.hpp
  *
- * @brief Class template R::FixedVector.
+ * @brief Class R::FunctionBase and associated C interface functions.
  */
 
-#ifndef FIXEDVECTOR_HPP
-#define FIXEDVECTOR_HPP
+#ifndef FUNCTIONBASE_HPP
+#define FUNCTIONBASE_HPP
 
-#include <CXXR/VectorBase.hpp>
+#include <CXXR/RObject.hpp>
+#include <CXXR/SEXP_downcast.hpp>
 
 namespace R
 {
-    /** @brief R data vector primarily intended for fixed-size use.
-     *
-     * This is a general-purpose class template to represent an R data
-     * vector, and is intended particularly for the case where the
-     * size of the vector is fixed when it is constructed.
-     *
-     * R implements all of CR's built-in vector types using this
-     * template.
-     *
-     * @tparam T The type of the elements of the vector.
-     *
-     * @tparam ST The required ::SEXPTYPE of the vector.
+
+    /** @brief Base class for function types.
      */
-    template <typename T, SEXPTYPE ST>
-    class FixedVector : public VectorBase
+    class FunctionBase : public RObject
     {
     public:
-        // Virtual functions of RObject:
-        const char *typeName() const override;
-
-        /** @brief Name by which this type is known in R.
+        /** @brief The name by which this type is known in R.
          *
          * @return the name by which this type is known in R.
-         *
-         * @note This function is declared but not defined as part of
-         * the FixedVector template.  It must be defined as a
-         * specialization for each instantiation of the template for
-         * which it or typeName() is used.
          */
-        static const char *staticTypeName();
+        static const char *staticTypeName()
+        {
+            return "(function type)";
+        }
 
-    private:
+        static bool rtrace(RObject *x);
+        static void set_rtrace(RObject *x, bool v);
+
+    protected:
+        /**
+         * @param stype Required type of the FunctionBase.
+         */
+        explicit FunctionBase(SEXPTYPE stype)
+            : RObject(stype)
+        {
+        }
+
+        virtual ~FunctionBase(){};
     };
+
 } // namespace R
 
-#endif // FIXEDVECTOR_HPP
+#endif // FUNCTIONBASE_HPP

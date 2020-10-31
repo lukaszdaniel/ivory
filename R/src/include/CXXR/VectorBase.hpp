@@ -44,6 +44,14 @@ namespace R
 
   private:
   public:
+    /** @brief The name by which this type is known in R.
+     *
+     * @return the name by which this type is known in R.
+     */
+    static const char *staticTypeName()
+    {
+      return "(vector type)";
+    }
     static inline R_xlen_t stdvec_length(RObject *x) { return x ? x->u.vecsxp.m_length : 0; }
     static inline R_xlen_t stdvec_truelength(RObject *x) { return x ? x->u.vecsxp.m_truelength : 0; }
     static inline void set_stdvec_truelength(RObject *x, R_xlen_t v)
@@ -82,7 +90,10 @@ namespace R
 /* defined as a macro since fastmatch packages tests for it */
 #define XLENGTH(x) XLENGTH_EX(x)
 
-  inline void *stdvec_dataptr(RObject *x) { return x ? x->m_data : nullptr; }
+  inline void *stdvec_dataptr(RObject *x)
+  {
+    return x ? x->m_data : nullptr;
+  }
 #define STDVEC_DATAPTR(x) (x->m_data)
 
   inline const char *r_char(RObject *x)

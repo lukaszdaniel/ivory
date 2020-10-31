@@ -49,6 +49,11 @@ namespace R
         const auto &SET_DDVALptr = SET_DDVAL;
     } // namespace ForceNonInline
 
+    const char *Symbol::typeName() const
+    {
+        return staticTypeName();
+    }
+
     /* Symbol Access Methods */
     /** @brief Symbol name.
      *

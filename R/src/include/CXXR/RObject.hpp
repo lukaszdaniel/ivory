@@ -121,7 +121,7 @@ namespace R
 
     /* The standard node structure consists of a header followed by the
    node data. */
-    class RObject : public GCNode 
+    class RObject : public GCNode
     {
     public: // private:
         SEXPTYPE m_type : FULL_TYPE_BITS;
@@ -130,8 +130,8 @@ namespace R
         bool m_alt;
         unsigned int m_gpbits : 16;
         bool m_debug;
-        bool m_trace;             /* functions and memory tracing */
-        bool m_spare;             /* used on closures and when REFCNT is defined */
+        bool m_trace; /* functions and memory tracing */
+        bool m_spare; /* used on closures and when REFCNT is defined */
         unsigned int m_named : NAMED_BITS;
         unsigned int m_extra : 29 - NAMED_BITS; /* used for immediate bindings */
         RObject *m_attrib;
@@ -146,20 +146,22 @@ namespace R
             promsxp_struct promsxp;
             vecsxp_struct vecsxp;
         } u;
+
     public:
         void *m_data;
         size_t m_databytes;
 
         /**
-	 * @param stype Required type of the RObject.
-	 */
+         * @param stype Required type of the RObject.
+         */
         explicit RObject(SEXPTYPE stype = ANYSXP) : m_type(stype), m_scalar(false), m_has_class(false), m_alt(false), m_gpbits(0), m_debug(false),
                                                     m_trace(false), m_spare(false), m_named(0), m_extra(0), m_attrib(nullptr), m_data(nullptr), m_databytes(0)
-        {}
+        {
+        }
 
-    /**
-	 * @return Pointer to the attributes of this object.
-	 */
+        /**
+         * @return Pointer to the attributes of this object.
+         */
         const RObject *attributes() const { return m_attrib; }
 
         // Virtual methods of GCNode:
@@ -167,59 +169,66 @@ namespace R
         void visitChildren(visitor *v);
 
         /**
-	 * @return pointer to first element (car) of this list.
-	 */
+         * @return pointer to first element (car) of this list.
+         */
         const RObject *car() const { return u.listsxp.m_carval; }
 
         /**
-	 * @return pointer to tail (cdr) of this list.
-	 */
+         * @return pointer to tail (cdr) of this list.
+         */
         const RObject *cdr() const { return u.listsxp.m_cdrval; }
 
         /**
-	 * @return pointer to enclosing environment.
-	 */
+         * @return pointer to enclosing environment.
+         */
         const RObject *enclosingEnvironment() const { return u.envsxp.m_enclos; }
 
         /**
-	 * @return pointer to frame of this environment.
-	 */
+         * @return pointer to frame of this environment.
+         */
         const RObject *frame() const { return u.envsxp.m_frame; }
 
         /**
-	 * @return pointer to hash table of this environment.
-	 */
+         * @return pointer to hash table of this environment.
+         */
         const RObject *hashTable() const { return u.envsxp.m_hashtab; }
 
         /**
-	 * @return length of this vector.
-	 */
+         * @return length of this vector.
+         */
         R_xlen_t length() const { return u.vecsxp.m_length; }
 
         /**
-	 * @return SEXPTYPE of this object.
-	 */
+         * @return SEXPTYPE of this object.
+         */
         SEXPTYPE sexptype() const { return m_type; }
 
         /**
-	 * @return altrep status of this object.
-	 */
+         * @return altrep status of this object.
+         */
         bool altrep() const { return m_alt; }
 
         /**
-	 * @return pointer to tag of this list.
-	 */
+         * @return pointer to tag of this list.
+         */
         const RObject *tag() const { return u.listsxp.m_tagval; }
+
+        /** @brief Name within R of this type of object.
+         *
+         * @return the name by which this type of object is known
+         *         within R.
+         */
+        virtual const char *typeName() const;
 
         // To be protected in future:
 
         /** Destructor
-	 *
-	 * @note The destructor is protected to ensure that RObjects
-	 * are allocated on the heap.  (See Meyers 'More Effective
-	 * C++' Item 27.) Derived classes should likewise declare
-	 * their constructors private or protected.
-	 */
+         *
+         * @note The destructor is protected to ensure that RObjects
+         * are allocated on the heap.  (See Meyers 'More Effective
+         * C++' Item 27.) Derived classes should likewise declare
+         * their constructors private or protected.
+         */
         virtual ~RObject();
 
         static void set_attrib(RObject *x, RObject *v);
@@ -266,19 +275,12 @@ namespace R
         static constexpr int ASSIGNMENT_PENDING_MASK = (1 << 11);
         static unsigned int assignment_pending(RObject *x);
         static void set_assignment_pending(RObject *x, bool v);
-        static bool rtrace(RObject *x);
-        static void set_rtrace(RObject *x, bool v);
-        /* Primitive Access Methods */
-        static int primoffset(RObject *x);
-        static void set_primoffset(RObject *x, int v);
 
         /* List Access Methods */
         static RObject *tag(RObject *x);
         static void set_tag(RObject *x, RObject *v);
         static RObject *car0(RObject *x);
         static void set_car0(RObject *x, RObject *v);
-        static RObject *extptr_ptr(RObject *x);
-        static void set_extptr_ptr(RObject *x, RObject *v);
         static RObject *cdr(RObject *x);
         static void set_cdr(RObject *x, RObject *v);
         static constexpr int MISSING_MASK = ((1 << 4) - 1); // = 15 /* reserve 4 bits--only 2 uses now */
@@ -286,11 +288,6 @@ namespace R
         static void set_missing(RObject *x, int v);
         static unsigned int bndcell_tag(const RObject *x);
         static void set_bndcell_tag(RObject *e, unsigned int v);
-        /* External pointer access methods */
-        static RObject *extptr_prot(RObject *x);
-        static RObject *extptr_tag(RObject *x);
-        static void set_extptr_tag(RObject *x, RObject *v);
-        static void set_extptr_prot(RObject *x, RObject *v);
         /* S4 object bit, set by R_do_new_object for all new() calls */
         static constexpr int S4_OBJECT_MASK = ((unsigned short)(1 << 4));
         static bool is_s4_object(RObject *x);
@@ -435,7 +432,6 @@ namespace R
   LT
 */
 
-
 /* The same bit can be used to mark calls used in complex assignments
    to allow replacement functions to determine when they are being
    called in an assignment context and can modify an object with one
@@ -526,16 +522,16 @@ namespace R
         SET_MISSING(cell, 0);                \
     } while (0)
 #else
-/* Use a union in the CAR field to represent an RObject* or an immediate
+    /* Use a union in the CAR field to represent an RObject* or an immediate
    value.  More efficient, but changes the memory layout on 32 bit
    platforms since the size of the union is larger than the size of a
    pointer. The layout should not change on 64 bit platforms. */
-union R_bndval_t
-{
-    R::RObject *sxpval;
-    double dval;
-    int ival;
-};
+    union R_bndval_t
+    {
+        R::RObject *sxpval;
+        double dval;
+        int ival;
+    };
 
 #define BNDCELL_DVAL(v) (R::RObject::bndcell_dval(v))
 #define BNDCELL_IVAL(v) (R::RObject::bndcell_ival(v))
@@ -555,29 +551,29 @@ union R_bndval_t
     } while (0)
 #endif
 
-/* There is much more in Rinternals.h, including function versions
- * of the Promise and Hashing groups.
- */
+    /* There is much more in Rinternals.h, including function versions
+     * of the Promise and Hashing groups.
+     */
 
-/* Vector Heap Structure */
-// struct alignas(std::max(alignof(double), alignof(RObject*))) VECREC {};
-struct VECREC
-{
-    union
+    /* Vector Heap Structure */
+    // struct alignas(std::max(alignof(double), alignof(RObject*))) VECREC {};
+    struct VECREC
     {
-        R::RObject *backpointer;
-        double align;
-    } u;
-};
+        union
+        {
+            R::RObject *backpointer;
+            double align;
+        } u;
+    };
 
-using VECP = VECREC *;
+    using VECP = VECREC *;
 
-/* Vector Heap Macros */
-inline size_t BYTE2VEC(size_t n) { return (n > 0) ? (n - 1) / sizeof(VECREC) + 1 : 0; }
-inline size_t INT2VEC(size_t n) { return (n > 0) ? (n * sizeof(int) - 1) / sizeof(VECREC) + 1 : 0; }
-inline size_t FLOAT2VEC(size_t n) { return (n > 0) ? (n * sizeof(double) - 1) / sizeof(VECREC) + 1 : 0; }
-inline size_t COMPLEX2VEC(size_t n) { return (n > 0) ? (n * sizeof(Rcomplex) - 1) / sizeof(VECREC) + 1 : 0; }
-inline size_t PTR2VEC(size_t n) { return (n > 0) ? (n * sizeof(RObject) - 1) / sizeof(VECREC) + 1 : 0; }
+    /* Vector Heap Macros */
+    inline size_t BYTE2VEC(size_t n) { return (n > 0) ? (n - 1) / sizeof(VECREC) + 1 : 0; }
+    inline size_t INT2VEC(size_t n) { return (n > 0) ? (n * sizeof(int) - 1) / sizeof(VECREC) + 1 : 0; }
+    inline size_t FLOAT2VEC(size_t n) { return (n > 0) ? (n * sizeof(double) - 1) / sizeof(VECREC) + 1 : 0; }
+    inline size_t COMPLEX2VEC(size_t n) { return (n > 0) ? (n * sizeof(Rcomplex) - 1) / sizeof(VECREC) + 1 : 0; }
+    inline size_t PTR2VEC(size_t n) { return (n > 0) ? (n * sizeof(RObject) - 1) / sizeof(VECREC) + 1 : 0; }
 
 } // namespace R
 

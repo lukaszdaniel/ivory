@@ -71,15 +71,6 @@ namespace R
         x->u.listsxp.m_carval = v;
     }
 
-    RObject *RObject::extptr_ptr(RObject *e) { return e ? e->u.listsxp.m_carval : nullptr; }
-
-    void RObject::set_extptr_ptr(RObject *x, RObject *v)
-    {
-        if (!x)
-            return;
-        x->u.listsxp.m_carval = v;
-    }
-
     RObject *RObject::cdr(RObject *e) { return e ? e->u.listsxp.m_cdrval : nullptr; }
 
     void RObject::set_cdr(RObject *x, RObject *v)

@@ -43,6 +43,11 @@ namespace R
         const auto &PRSEENptr = PRSEEN;
     } // namespace ForceNonInline
 
+    const char *Promise::typeName() const
+    {
+        return staticTypeName();
+    }
+
     /* Promise Access Methods */
     /** @brief Access the expression of a R::Promise.
      *
@@ -66,7 +71,7 @@ namespace R
         x->u.promsxp.m_expr = v;
     }
 
-     /** @brief Access the environment of a R::Promise.
+    /** @brief Access the environment of a R::Promise.
      *
      * @param x Pointer to a R::Promise (checked).
      *
@@ -103,7 +108,7 @@ namespace R
 
     unsigned int Promise::prseen(RObject *x) { return x ? x->m_gpbits : 0; }
 
-     /** @brief Set the environment of a R::Promise.
+    /** @brief Set the environment of a R::Promise.
      *
      * @param x Pointer to a R::Promise (checked).
      *

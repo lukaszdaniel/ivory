@@ -39,6 +39,16 @@ namespace R
     {
         const auto &PRIMOFFSETptr = PRIMOFFSET;
         const auto &SET_PRIMOFFSETptr = SET_PRIMOFFSET;
+    } // namespace ForceNonInline
+
+    BuiltInFunction::~BuiltInFunction()
+    {
+        assert(0 && "BuiltInFunction's destructor should never be called");
+    }
+
+    const char *BuiltInFunction::typeName() const
+    {
+        return sexptype() == SPECIALSXP ? "special" : "builtin";
     }
 
     /* Primitive Access Methods */
@@ -48,7 +58,7 @@ namespace R
      *
      * @return The offset of this function within the function table.
      */
-    int RObject::primoffset(RObject *x) { return x ? x->u.primsxp.m_offset : 0; }
+    int BuiltInFunction::primoffset(RObject *x) { return x ? x->u.primsxp.m_offset : 0; }
 
     /** @brief Set the new offset for a R::BuiltInFunction.
      *
@@ -56,7 +66,7 @@ namespace R
      *
      * @param v The new offset for this function within the function table.
      */
-    void RObject::set_primoffset(RObject *x, int v)
+    void BuiltInFunction::set_primoffset(RObject *x, int v)
     {
         if (!x)
             return;

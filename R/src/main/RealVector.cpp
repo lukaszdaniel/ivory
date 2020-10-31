@@ -42,4 +42,10 @@ namespace R
         const auto &REALptr = REAL;
         const auto &REAL_ROptr = REAL_RO;
     } // namespace ForceNonInline
+
+    template <>
+    const char *RealVector::staticTypeName()
+    {
+        return "numeric";
+    }
 } // namespace R

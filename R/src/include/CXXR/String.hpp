@@ -40,7 +40,8 @@
 #include <string>
 #include <unordered_map>
 
-namespace R {
+namespace R
+{
     /** @brief RObject representing a character string.
      *
      * At any one time, at most one String object with a particular
@@ -52,11 +53,24 @@ namespace R {
      * this may be different from the number of Unicode characters
      * represented by the string.
      */
-    class String : public VectorBase {
+    class String : public VectorBase
+    {
     public:
+        // Virtual functions of RObject:
+        const char *typeName() const override;
+
+        /** @brief The name by which this type is known in R.
+         *
+         * @return the name by which this type is known in R.
+         */
+        static const char *staticTypeName()
+        {
+            return "char";
+        }
+
     private:
-	friend class Symbol;
+        friend class Symbol;
     };
-}  // namespace R
+} // namespace R
 
 #endif /* RHO_STRING_HPP */

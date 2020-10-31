@@ -32,6 +32,7 @@
 #define SYMBOL_HPP
 
 #include <CXXR/RObject.hpp>
+#include <CXXR/SEXP_downcast.hpp>
 
 namespace R
 {
@@ -82,8 +83,23 @@ namespace R
         RObject *m_pname;
         RObject *m_value;
         RObject *m_internal;
+        // bool m_ddval;
+        // Declared private to ensure that Symbol objects are
+        // allocated only using 'new':
+        ~Symbol() {};
 
     public:
+        // Virtual functions of RObject:
+        const char *typeName() const override;
+
+        /** @brief The name by which this type is known in R.
+        *
+        * @return The name by which this type is known in R.
+        */
+        static const char *staticTypeName()
+        {
+            return "symbol";
+        }
         auto printname() const { return this->m_pname; }
         auto symvalue() const { return this->m_value; }
         auto internal() const { return this->m_internal; }

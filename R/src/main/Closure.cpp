@@ -47,6 +47,11 @@ namespace R
         const auto &SET_RSTEPptr = SET_RSTEP;
     } // namespace ForceNonInline
 
+    const char *Closure::typeName() const
+    {
+        return staticTypeName();
+    }
+
     /* Closure Access Methods */
     /** @brief Access formal arguments of a R::Closure.
      *

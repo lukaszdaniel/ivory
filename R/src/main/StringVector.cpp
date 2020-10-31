@@ -41,4 +41,10 @@ namespace R
         const auto &isStringptr = Rf_isString;
         const auto &STRING_ELTptr = STRING_ELT;
     } // namespace ForceNonInline
+
+    template <>
+    const char *StringVector::staticTypeName()
+    {
+        return "character";
+    }
 } // namespace R
