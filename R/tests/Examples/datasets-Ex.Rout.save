@@ -1,9 +1,9 @@
 
-Ivory Under development (unstable) (2020-10-23 r1318) -- "Internationalized Version of R"
+Ivory Under development (unstable) (2020-11-01 r1325) -- "Internationalized Version of R"
 Copyright (C) 2013-2020 Lukasz Daniel (lukasz.daniel@gmail.com)
 See README-IVORY file for details.
 
-R Under development (unstable) (2020-10-23 r79367) -- "Unsuffered Consequences"
+R Under development (unstable) (2020-11-01 r79391) -- "Unsuffered Consequences"
 Copyright (C) 2020 The R Foundation for Statistical Computing
 Platform: x86_64-pc-linux-gnu (64-bit)
 
@@ -107,10 +107,10 @@ Nonlinear regression model
 > # using the plinear algorithm
 > fm2 <- nls(demand ~ (1-exp(-exp(lrc)*Time)), data = BOD,
 +    start = c(lrc = log(.35)), algorithm = "plinear", trace = TRUE)
-32.946 :  -1.0498 22.1260
-25.992 :  -0.62572 19.10319
-25.99 :  -0.6327 19.1419
-25.99 :  -0.63282 19.14256
+32.946   (7.093411e-01): par = (-1.0498 22.126)
+25.992   (1.292894e-02): par = (-0.62572 19.103)
+25.99    (2.133335e-04): par = (-0.6327 19.142)
+25.99    (3.546157e-06): par = (-0.63282 19.143)
 > # using a self-starting model
 > fm3 <- nls(demand ~ SSasympOrig(Time, A, lrc), data = BOD)
 > summary(fm3)
@@ -3515,7 +3515,7 @@ c0   -5.14
 > cleanEx()
 > options(digits = 7L)
 > base::cat(gettext("Time elapsed: ", domain = "R-base"), proc.time() - base::get("ptime", pos = 'CheckExEnv'),"\n")
-Time elapsed:  8.136 0.148 8.286 0 0 
+Time elapsed:  7.977 0.072 8.05 0 0 
 > grDevices::dev.off()
 null device 
           1 
