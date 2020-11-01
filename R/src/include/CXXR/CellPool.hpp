@@ -30,9 +30,28 @@
 #ifndef CELLPOOL_HPP
 #define CELLPOOL_HPP
 
+#ifdef HAVE_CONFIG_H
+#include <config.h>
+#endif
+
 #include <cstddef>
 #include <new>
 #include <vector>
+
+// TODO: Similar predefines also in memory.cpp
+// TODO: Move to a separate header.
+#ifndef VALGRIND_LEVEL
+#define VALGRIND_LEVEL 0
+#endif
+
+#ifndef NVALGRIND
+# ifdef HAVE_VALGRIND_MEMCHECK_H
+#  include "valgrind/memcheck.h"
+# else
+// internal version of headers
+#  include "vg/memcheck.h"
+# endif
+#endif
 
 namespace R {
     /** @brief Class to manage a pool of memory cells of a fixed size.
@@ -97,8 +116,7 @@ namespace R {
 	 */
 	void* allocate()
 	{
-	    if (!m_free_cells)
-		m_free_cells = seekMemory();
+	    if (!m_free_cells) seekMemory();
 	    Cell* c = m_free_cells;
 	    m_free_cells = c->m_next;
 	    ++m_cells_allocated;
@@ -110,7 +128,7 @@ namespace R {
 	 * @return the size of each cell in bytes (well, strictly as a
 	 * multiple of sizeof(char)).
 	 */         
-	size_t cellSize() const
+	auto cellSize() const
 	{
 	    return m_cellsize;
 	}
@@ -120,7 +138,7 @@ namespace R {
 	 * @return the number of cells currently allocated from this
 	 * pool.
 	 */
-	size_t cellsAllocated() const
+	auto cellsAllocated() const
 	{
 	    return m_cells_allocated;
 	}
@@ -151,6 +169,9 @@ namespace R {
 	    c->m_next = m_free_cells;
 	    m_free_cells = c;
 	    --m_cells_allocated;
+#if VALGRIND_LEVEL > 1
+	    VALGRIND_MAKE_MEM_NOACCESS(c + 1, m_cellsize - sizeof(Cell));
+#endif
 	}
 
 	/**
@@ -174,7 +195,7 @@ namespace R {
 	 * @return The size in bytes of the superblocks from which
 	 *         cells are allocated.
 	 */
-	size_t superblockSize() const
+	auto superblockSize() const
 	{
 	    return m_superblocksize;
 	}
@@ -191,7 +212,7 @@ namespace R {
 	void (*m_out_of_cells)(CellPool*);
 	std::vector<void*> m_superblocks;
 	Cell* m_free_cells;
-	unsigned int m_cells_allocated;
+	size_t m_cells_allocated;
 
 	// Checks that p is either null or points to a cell belonging
 	// to this pool; aborts if not.
@@ -201,9 +222,7 @@ namespace R {
 	// the free list:
 	void checkAllocatedCell(const void* p) const;
 
-	// Allocates a new superblock and returns a pointer to the
-	// first free cell in it.
-	Cell* seekMemory();
+	void seekMemory();
     };
 }
 

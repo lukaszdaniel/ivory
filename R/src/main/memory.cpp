@@ -1525,7 +1525,7 @@ SEXP Rf_allocVector3(SEXPTYPE type, R_xlen_t length = 1, R_allocator_t *allocato
 		error(_("cannot allocate vector of length %d"), length);
 	    size = INT2VEC(length);
 #if VALGRIND_LEVEL > 0
-	    actual_size = length*sizeof(int);
+        actual_size = length * sizeof(int);
 #endif
 	}
 	break;
@@ -1663,7 +1663,7 @@ SEXP Rf_allocVector3(SEXPTYPE type, R_xlen_t length = 1, R_allocator_t *allocato
     }
     else if (type == CHARSXP || type == intCHARSXP) {
 #if VALGRIND_LEVEL > 0
-	VALGRIND_MAKE_MEM_UNDEFINED(CHAR(s), actual_size);
+	VALGRIND_MAKE_MEM_UNDEFINED(R::r_char(s), actual_size);
 #endif
 	CHAR_RW(s)[length] = 0;
     }
@@ -3076,6 +3076,7 @@ static void R_EndMemReporting()
         R_MemReportingOutfile = nullptr;
     }
     R_IsMemReporting = 0;
+    MemoryBank::setMonitor(0);
     return;
 }
 
@@ -3088,6 +3089,7 @@ static void R_InitMemReporting(SEXP filename, int append, R_size_t threshold)
         error(_("'Rprofmem()': cannot open output file '%s'"), filename);
     R_MemReportingThreshold = threshold;
     R_IsMemReporting = 1;
+    MemoryBank::setMonitor(R_ReportAllocation, threshold);
     return;
 }
 

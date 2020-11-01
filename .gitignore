@@ -84,6 +84,8 @@ R/stamp-java
 R/tests/Embedding/Makefile
 R/tests/Examples/Makefile
 R/tests/Makefile
+R/tests/CXXR/Makefile
+R/tests/CXXR2/Makefile
 R/tools/Makefile
 R/etc/Makefile
 R/src/nmath/standalone/*.lo
@@ -131,3 +133,7 @@ R/tests/*.Rcheck/
 R/tests/RecPackages/*/
 R/.RData
 R/src/include/CXXR/stamp-R
+R/tests/CXXR/CellPooltest
+R/tests/CXXR/CellPooltest.out
+R/tests/CXXR/MemoryBanktest
+R/tests/CXXR/Allocatortest

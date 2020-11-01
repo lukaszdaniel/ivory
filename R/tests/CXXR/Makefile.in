@@ -1,0 +1,124 @@
+# Low-level tests for the CXXR classes.
+
+uname = $(shell uname)
+
+VPATH = @srcdir@
+srcdir = @srcdir@
+top_srcdir = @top_srcdir@
+
+top_builddir = ../..
+subdir = tests/CXXR
+R_HOME = $(top_builddir)
+
+include $(top_builddir)/Makeconf
+
+maindir = $(top_srcdir)/src/main
+
+#ALL_CPPFLAGS = $(CPPFLAGS) -I../../include
+
+# Thanks to Jochen Laubrock for suggestions about the handling of
+# valgrind on non-Linux platforms.
+
+valgrind = $(shell type -t valgrind > /dev/null \
+             && echo "valgrind -q --leak-check=full")
+
+ifdef valgrind
+valgrind_flags = -DVALGRIND_LEVEL=2
+endif
+
+sources_cxx = Allocatortest.cpp CellPooltest.cpp \
+	  MemoryBanktest.cpp RObject_sizer.cpp
+              # GCManagertest.cpp
+
+depends = $(sources_cxx:.cpp=.d)
+
+#tests = CellPooltest MemoryBanktest Allocatortest GCManagertest splice_test
+tests = CellPooltest MemoryBanktest Allocatortest splice_test
+
+test-CXXR : $(tests:=.ts)
+
+Allocatortest.o : Allocatortest.cpp
+	$(CXX) $(ALL_CPPFLAGS) $(ALL_CXXFLAGS) $(valgrind_flags) -DR_MEMORY_PROFILING -c -o $@ $<
+
+Allocatortest_objs = Allocatortest.o MemoryBank.o CellPool.o
+
+Allocatortest : $(Allocatortest_objs)
+	$(LINK.cc) -o $@ $(Allocatortest_objs)
+
+Allocatortest.ts : Allocatortest Allocatortest.save
+	$(valgrind) ./$< 10 12 > Allocatortest.out
+	diff $(srcdir)/Allocatortest.save Allocatortest.out
+	rm Allocatortest.out
+	touch $@
+
+CellPool.o : $(maindir)/CellPool.cpp
+	$(CXX) $(ALL_CPPFLAGS) $(ALL_CXXFLAGS) $(valgrind_flags) -c -o $@ $<
+
+CellPooltest.o : CellPooltest.cpp
+	$(CXX) $(ALL_CPPFLAGS) $(ALL_CXXFLAGS) $(valgrind_flags) -c -o $@ $<
+
+CellPooltest_objs = CellPooltest.o CellPool.o
+
+CellPooltest : $(CellPooltest_objs)
+	$(LINK.cc) -o $@ $(CellPooltest_objs)
+
+CellPooltest.ts : CellPooltest CellPooltest.save
+	$(valgrind) ./$< > CellPooltest.out
+	diff $(srcdir)/CellPooltest.save CellPooltest.out
+	rm CellPooltest.out
+	touch $@
+
+GCManager.o : $(maindir)/GCManager.cpp
+	$(CXX) $(ALL_CPPFLAGS) $(ALL_CXXFLAGS) -DDEBUG_ADJUST_HEAP -c -o $@ $<
+
+GCManagertest_objs = GCManagertest.o CellPool.o GCManager.o MemoryBank.o
+
+GCManagertest : $(GCManagertest_objs)
+	$(LINK.cc) -o $@ $(GCManagertest_objs)
+
+GCManagertest.ts : GCManagertest GCManagertest.save
+	./$< > GCManagertest.out
+	grep -v '^#' $(srcdir)/GCManagertest.save | diff - GCManagertest.out
+	rm GCManagertest.out
+	touch $@
+
+MemoryBank.o : $(maindir)/MemoryBank.cpp
+	$(CXX) $(ALL_CPPFLAGS) $(ALL_CXXFLAGS) $(valgrind_flags) -DR_MEMORY_PROFILING -c -o $@ $<
+
+MemoryBanktest.o : MemoryBanktest.cpp
+	$(CXX) $(ALL_CPPFLAGS) $(ALL_CXXFLAGS) $(valgrind_flags) -DR_MEMORY_PROFILING -c -o $@ $<
+
+MemoryBanktest_objs = MemoryBanktest.o MemoryBank.o CellPool.o
+
+MemoryBanktest : $(MemoryBanktest_objs)
+	$(LINK.cc) -o $@ $(MemoryBanktest_objs)
+
+MemoryBanktest.ts : MemoryBanktest MemoryBanktest.save
+	$(valgrind) ./$< 10 12 > MemoryBanktest.out
+	diff $(srcdir)/MemoryBanktest.save MemoryBanktest.out
+	rm MemoryBanktest.out
+	touch $@
+
+
+splice_test : splice_test.o
+	$(LINK.cc) -o $@ $<
+
+splice_test.ts : splice_test splice_test.save
+	./$< > splice_test.out
+	diff splice_test.save splice_test.out
+	rm splice_test.out
+	touch $@
+
+RObject_sizer : RObject_sizer.o
+	$(LINK.cc) -o $@ $<
+
+Makefile : $(srcdir)/Makefile.in $(top_builddir)/config.status
+	cd $(top_builddir) && $(SHELL) ./config.status $(subdir)/$@
+
+clean:
+	rm -f *.d *.o *.ts $(tests)
+
+distclean: clean
+	rm -f Makefile
+
+maintainer-clean: distclean

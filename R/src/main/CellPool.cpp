@@ -45,17 +45,22 @@ CellPool::~CellPool()
 
 bool CellPool::check() const
 {
-    unsigned int free_cells = 0;
-    for (Cell* c = m_free_cells; c; c = c->m_next) {
-	checkCell(c);
-	++free_cells;
-    }
-    if (m_cells_allocated + free_cells
-	!= m_cells_per_superblock*m_superblocks.size()) {
-	cerr << "CellPool::check(): internal inconsistency\n";
-	abort();
-    }
-    return true;
+	unsigned int free_cells = 0;
+	for (Cell *c = m_free_cells; c; c = c->m_next)
+	{
+		checkCell(c);
+		++free_cells;
+	}
+	if (m_cells_allocated + free_cells != m_cells_per_superblock * m_superblocks.size())
+	{
+		cerr << "CellPool::check(): internal inconsistency\n";
+		cerr << "cells allocated     = " << m_cells_allocated << "\n";
+		cerr << "free cells          = " << free_cells << "\n";
+		cerr << "cells per uperblock = " << m_cells_per_superblock << "\n";
+		cerr << "superblocks size    = " << m_superblocks.size() << "\n";
+		abort();
+	}
+	return true;
 }
 
 void CellPool::checkAllocatedCell(const void* p) const 
@@ -93,20 +98,25 @@ void CellPool::checkCell(const void* p) const
     }
 }
 
-CellPool::Cell* CellPool::seekMemory()
+void CellPool::seekMemory()
 {
     if (m_out_of_cells) (*m_out_of_cells)(this);
-	char* superblock = static_cast<char*>(::operator new(m_superblocksize));
+    if (!m_free_cells) {
+	char* superblock
+	    = static_cast<char*>(::operator new(m_superblocksize));
 	m_superblocks.push_back(superblock);
-    // Initialise cells:
-    {
-	ptrdiff_t offset
-	    = ptrdiff_t(m_superblocksize - m_cellsize);
-	Cell* next = nullptr;
-	while (offset >= 0) {
-	    next = new (superblock + offset) Cell(next);
-	    offset -= ptrdiff_t(m_cellsize);
+	// Initialise cells:
+	{
+	    ptrdiff_t offset = ptrdiff_t(m_superblocksize - m_cellsize);
+	    Cell* next = nullptr;
+	    while (offset >= 0) {
+		next = new (superblock + offset) Cell(next);
+#if VALGRIND_LEVEL > 1
+		VALGRIND_MAKE_MEM_NOACCESS(next + 1, m_cellsize - sizeof(Cell));
+#endif
+		offset -= ptrdiff_t(m_cellsize);
+	    }
+	    m_free_cells = next;
 	}
-	return next;
     }
 }

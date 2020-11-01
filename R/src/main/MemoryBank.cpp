@@ -3,6 +3,10 @@
  *  Copyright (C) 2008-2014  Andrew R. Runnalls.
  *  Copyright (C) 2014 and onwards the Rho Project Authors.
  *
+ *  Rho is not part of the R project, and bugs and other issues should
+ *  not be reported via r-bugs or other R project channels; instead refer
+ *  to the Rho website.
+ *
  *  This program is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
  *  the Free Software Foundation; either version 2 of the License, or
@@ -29,114 +33,133 @@
 #include <limits>
 #include <iterator>
 
+#ifdef R_MEMORY_PROFILING
+#include <limits>
+#endif
+
 using namespace std;
 using namespace R;
 
-// If NO_CELLPOOLS is defined, all memory blocks are allocated
-// directly via ::operator new.
-#ifdef NO_CELLPOOLS
-const size_t MemoryBank::s_new_threshold = 1;
-#else
-const size_t MemoryBank::s_new_threshold = 128;
-#endif
-
+unsigned int MemoryBank::SchwarzCtr::s_count = 0;
 size_t MemoryBank::s_blocks_allocated = 0;
 size_t MemoryBank::s_bytes_allocated = 0;
 bool (*MemoryBank::s_cue_gc)(size_t, bool) = nullptr;
+#ifdef R_MEMORY_PROFILING
+void (*MemoryBank::s_monitor)(size_t) = 0;
+size_t MemoryBank::s_threshold = numeric_limits<size_t>::max();
+#endif
 
-void MemoryBank::pool_out_of_memory(CellPool* pool)
+void MemoryBank::pool_out_of_memory(CellPool *pool)
 {
-    if (s_cue_gc) s_cue_gc(pool->superblockSize(), false);
+    if (s_cue_gc)
+        s_cue_gc(pool->superblockSize(), false);
 }
 
-CellPool MemoryBank::s_pools[] = {CellPool(1, 512, pool_out_of_memory),
-                                  CellPool(2, 256, pool_out_of_memory),
-                                  CellPool(4, 128, pool_out_of_memory),
-                                  CellPool(8, 64, pool_out_of_memory),
-                                  CellPool(16, 32, pool_out_of_memory)};
+CellPool *MemoryBank::s_pools[5];
 
 // Note that the C++ standard requires that an operator new returns a
 // valid pointer even when 0 bytes are requested.  The entry at
 // s_pooltab[0] ensures this.  This table assumes sizeof(double) == 8.
-const unsigned char MemoryBank::s_pooltab[]
-= {0, 0, 0, 0, 0, 0, 0, 0, 0,
-   1, 1, 1, 1, 1, 1, 1, 1,
-   2, 2, 2, 2, 2, 2, 2, 2,
-   2, 2, 2, 2, 2, 2, 2, 2,
-   3, 3, 3, 3, 3, 3, 3, 3,
-   3, 3, 3, 3, 3, 3, 3, 3,
-   3, 3, 3, 3, 3, 3, 3, 3,
-   3, 3, 3, 3, 3, 3, 3, 3,
-   4, 4, 4, 4, 4, 4, 4, 4,
-   4, 4, 4, 4, 4, 4, 4, 4,
-   4, 4, 4, 4, 4, 4, 4, 4,
-   4, 4, 4, 4, 4, 4, 4, 4,
-   4, 4, 4, 4, 4, 4, 4, 4,
-   4, 4, 4, 4, 4, 4, 4, 4,
-   4, 4, 4, 4, 4, 4, 4, 4,
-   4, 4, 4, 4, 4, 4, 4, 4};
-    
-void* MemoryBank::alloc2(size_t bytes)
-{
-    void* p = nullptr;
-    bool joy = false;  // true if GC succeeds after bad_alloc
-    try {
-	if (bytes > s_new_threshold) {
-	    if (s_cue_gc) s_cue_gc(bytes, false);
-	    p = ::operator new(bytes);
-	}
-	else p = s_pools[s_pooltab[bytes]].allocate();
-    }
-    catch (bad_alloc) {
-	if (s_cue_gc) {
-	    // Try to force garbage collection if available:
-	    size_t sought_bytes = bytes;
-	    if (bytes < s_new_threshold)
-		sought_bytes = s_pools[s_pooltab[bytes]].superblockSize();
-	    joy = s_cue_gc(sought_bytes, true);
-	}
-	else throw;
-    }
-    if (!p && joy) {
-	// Try once more:
-	try {
-	    if (bytes > s_new_threshold) p = ::operator new(bytes);
-	    else p = s_pools[s_pooltab[bytes]].allocate();
-	}
-	catch (bad_alloc) {
-	    throw;
-	}
-    }
-    notifyAllocation(bytes);
-    return p;
-}
+unsigned int MemoryBank::s_pooltab[] = {0, 0, 0, 0, 0, 0, 0, 0, 0,
+                                        1, 1, 1, 1, 1, 1, 1, 1,
+                                        2, 2, 2, 2, 2, 2, 2, 2,
+                                        2, 2, 2, 2, 2, 2, 2, 2,
+                                        3, 3, 3, 3, 3, 3, 3, 3,
+                                        3, 3, 3, 3, 3, 3, 3, 3,
+                                        3, 3, 3, 3, 3, 3, 3, 3,
+                                        3, 3, 3, 3, 3, 3, 3, 3,
+                                        4, 4, 4, 4, 4, 4, 4, 4,
+                                        4, 4, 4, 4, 4, 4, 4, 4,
+                                        4, 4, 4, 4, 4, 4, 4, 4,
+                                        4, 4, 4, 4, 4, 4, 4, 4,
+                                        4, 4, 4, 4, 4, 4, 4, 4,
+                                        4, 4, 4, 4, 4, 4, 4, 4,
+                                        4, 4, 4, 4, 4, 4, 4, 4,
+                                        4, 4, 4, 4, 4, 4, 4, 4};
 
-void* MemoryBank::allocate(size_t bytes)
+void *MemoryBank::alloc2(size_t bytes)
 {
-    // notifyAllocation(bytes);
-    void* p;
-    // Assumes sizeof(double) == 8:
-    return (bytes > s_new_threshold || !(p = alloc1(bytes)))
-	? alloc2(bytes) : p;
+    void *p = nullptr;
+    bool joy = false; // true if GC succeeds after bad_alloc
+    try
+    {
+        if (bytes > s_max_cell_size)
+        {
+            if (s_cue_gc)
+                s_cue_gc(bytes, false);
+            p = ::operator new(bytes);
+        }
+        else
+            p = s_pools[s_pooltab[bytes]]->allocate();
+    }
+    catch (bad_alloc)
+    {
+        if (s_cue_gc)
+        {
+            // Try to force garbage collection if available:
+            size_t sought_bytes = bytes;
+            if (bytes < s_max_cell_size)
+                sought_bytes = s_pools[s_pooltab[bytes]]->superblockSize();
+            joy = s_cue_gc(sought_bytes, true);
+        }
+        else
+            throw;
+    }
+    if (!p && joy)
+    {
+        // Try once more:
+        try
+        {
+            if (bytes > s_max_cell_size)
+                p = ::operator new(bytes);
+            else
+                p = s_pools[s_pooltab[bytes]]->allocate();
+        }
+        catch (bad_alloc)
+        {
+            throw;
+        }
+    }
+    ++s_blocks_allocated;
+    s_bytes_allocated += bytes;
+#if VALGRIND_LEVEL > 1
+    if (bytes <= s_max_cell_size)
+        VALGRIND_MAKE_MEM_UNDEFINED(p, bytes);
+#endif
+#ifdef R_MEMORY_PROFILING
+    if (bytes >= s_threshold && s_monitor)
+        s_monitor(bytes);
+#endif
+    return p;
 }
 
 void MemoryBank::check()
 {
-#ifndef NO_CELLPOOLS
-    for (unsigned int i = 0; i < s_num_pools; ++i)
-	s_pools[i].check();
+    for (unsigned int i = 0; i < 5; ++i)
+        s_pools[i]->check();
+}
+
+// Deleting heap objects on program exit is not strictly necessary,
+// but doing so makes bugs more conspicuous when using valgrind.
+void MemoryBank::cleanup()
+{
+    for (unsigned int i = 0; i < 5; ++i)
+        delete s_pools[i];
+}
+
+void MemoryBank::initialize()
+{
+    s_pools[0] = new CellPool(1, 512, pool_out_of_memory);
+    s_pools[1] = new CellPool(2, 256, pool_out_of_memory);
+    s_pools[2] = new CellPool(4, 128, pool_out_of_memory);
+    s_pools[3] = new CellPool(8, 64, pool_out_of_memory);
+    s_pools[4] = new CellPool(16, 32, pool_out_of_memory);
+}
+
+#ifdef R_MEMORY_PROFILING
+void MemoryBank::setMonitor(void (*monitor)(size_t), size_t threshold)
+{
+    s_monitor = monitor;
+    s_threshold = (monitor ? threshold : numeric_limits<size_t>::max());
+}
 #endif
-}
-
-void MemoryBank::notifyAllocation(size_t bytes)
-{
-    ++s_blocks_allocated;
-    s_bytes_allocated += bytes;
-}
-
-void MemoryBank::notifyDeallocation(size_t bytes)
-{
-    s_bytes_allocated -= bytes;
-    --s_blocks_allocated;
-}
-

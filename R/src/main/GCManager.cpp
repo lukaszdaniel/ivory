@@ -253,7 +253,8 @@ void GCManager::adjustThreshold(R_size_t bytes_wanted)
     *s_os << "Total allocation: " << MemoryBank::bytesAllocated() << "\n";
     *s_os << "Node threshold: " << s_node_threshold << "\n";
     *s_os << "Memory threshold: " << s_threshold << "\n";
-	*s_os << "Bytes needed: " << BNeeded << endl;
+	*s_os << "Nodes needed: " << NNeeded << "\n";
+    *s_os << "Bytes needed: " << VNeeded << endl;
 
     }
 #endif

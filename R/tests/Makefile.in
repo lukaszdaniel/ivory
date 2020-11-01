@@ -33,7 +33,7 @@ DISTFILES = Makefile.in Makefile.win Makefile.install Makefile.common \
 	test-system.R test-system.Rout.save test-system2.c \
 	reg-large.R utf8.R
 
-SUBDIRS = Embedding Examples
+SUBDIRS = CXXR CXXR2 Embedding Examples
 SUBDIRS_WITH_NO_BUILD = Pkgs
 
 ## SRCDIR is used by reg-tests-1a.R, reg-IO2.R and reg-packages.R

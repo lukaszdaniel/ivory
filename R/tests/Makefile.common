@@ -169,7 +169,7 @@ R-valgrind = $(R) --debugger="valgrind --tool=memcheck"
 
 ## The definitions for Internet are in Makefile.{in,win}.
 ## (That's historical: they are currently the same.)
-all-basic-tests = Examples Specific Reg Internet
+all-basic-tests = CXXR CXXR2 Examples Specific Reg Internet
 test-all-basics:
 	@for name in $(all-basic-tests); do \
 	  $(MK) test-$${name} || exit 1; \
@@ -184,6 +184,10 @@ test-all-devel:
 	  $(MK) test-$${name} || exit 1; \
 	done
 
+test-CXXR:
+	@(cd CXXR && $(MK) $@)
+test-CXXR2:
+	@(cd CXXR2 && $(MK) $@)
 test-Examples:
 	@(cd Examples && $(MK) $@)
 test-Examples-Recommended:
