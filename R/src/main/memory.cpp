@@ -1021,6 +1021,30 @@ HIDDEN void R::get_current_mem(size_t &smallvsize,
     nodes = GCNode::numNodes();
 }
 
+namespace
+{
+    void post_gc_checks()
+    {
+        /* sanity check on logical scalar values */
+        if (R_TrueValue && LOGICAL(R_TrueValue)[0] != TRUE)
+        {
+            LOGICAL(R_TrueValue)[0] = TRUE;
+            gc_error(_("internal TRUE value has been modified"));
+        }
+        if (R_FalseValue && LOGICAL(R_FalseValue)[0] != FALSE)
+        {
+            LOGICAL(R_FalseValue)[0] = FALSE;
+            gc_error(_("internal FALSE value has been modified"));
+        }
+        if (R_LogicalNAValue &&
+            LOGICAL(R_LogicalNAValue)[0] != NA_LOGICAL)
+        {
+            LOGICAL(R_LogicalNAValue)[0] = NA_LOGICAL;
+            gc_error(_("internal logical NA value has been modified"));
+        }
+    }
+} // namespace
+
 HIDDEN SEXP do_gc(SEXP call, SEXP op, SEXP args, SEXP rho)
 {
     SEXP value;
@@ -1030,6 +1054,7 @@ HIDDEN SEXP do_gc(SEXP call, SEXP op, SEXP args, SEXP rho)
     bool reset_max = asLogical(CADR(args));
     bool full = asLogical(CADDR(args));
     GCManager::gc(0, full);
+    post_gc_checks();
 #ifndef IMMEDIATE_FINALIZERS
     R_RunPendingFinalizers();
 #endif
@@ -1311,6 +1336,7 @@ SEXP Rf_allocSExp(SEXPTYPE t)
     if (GCManager::FORCE_GC() || GCManager::nodeTriggerLevel() <= GCNode::numNodes())
     {
         GCManager::gc(0);
+        post_gc_checks();
     }
 
     s = new RObject(t);
@@ -1329,6 +1355,7 @@ SEXP Rf_cons(SEXP car, SEXP cdr)
         PROTECT(car);
         PROTECT(cdr);
         GCManager::gc(0);
+        post_gc_checks();
         UNPROTECT(2);
     }
 
@@ -1356,6 +1383,7 @@ HIDDEN SEXP CONS_NR(SEXP car, SEXP cdr)
         PROTECT(car);
         PROTECT(cdr);
         GCManager::gc(0);
+        post_gc_checks();
         UNPROTECT(2);
     }
 
@@ -1399,6 +1427,7 @@ SEXP R::NewEnvironment(SEXP namelist, SEXP valuelist, SEXP rho)
         PROTECT(valuelist);
         PROTECT(rho);
         GCManager::gc(0);
+        post_gc_checks();
         UNPROTECT(3);
     }
 
@@ -1436,6 +1465,7 @@ HIDDEN SEXP R::mkPROMISE(SEXP expr, SEXP rho)
         PROTECT(expr);
         PROTECT(rho);
         GCManager::gc(0);
+        post_gc_checks();
         UNPROTECT(2);
     }
 
@@ -1593,6 +1623,7 @@ SEXP Rf_allocVector3(SEXPTYPE type, R_xlen_t length = 1, R_allocator_t *allocato
         (GCManager::triggerLevel() < bytes + MemoryBank::bytesAllocated()))
     {
         GCManager::gc(bytes);
+        post_gc_checks();
     }
 
     s = new RObject(type);
@@ -1760,6 +1791,7 @@ SEXP Rf_allocFormalsList6(SEXP sym1, SEXP sym2, SEXP sym3, SEXP sym4, SEXP sym5,
 void R_gc(void)
 {
     GCManager::gc(0, true);
+    post_gc_checks();
 #ifndef IMMEDIATE_FINALIZERS
     R_RunPendingFinalizers();
 #endif

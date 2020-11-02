@@ -371,21 +371,6 @@ void GCManager::gc(size_t bytes_wanted, bool full)
 	    gcGenController(bytes_wanted, full);
 
 #endif
-
-    /* sanity check on logical scalar values */
-    if (R_TrueValue && LOGICAL(R_TrueValue)[0] != TRUE) {
-	LOGICAL(R_TrueValue)[0] = TRUE;
-	gc_error(_("internal TRUE value has been modified"));
-    }
-    if (R_FalseValue && LOGICAL(R_FalseValue)[0] != FALSE) {
-	LOGICAL(R_FalseValue)[0] = FALSE;
-	gc_error(_("internal FALSE value has been modified"));
-    }
-    if (R_LogicalNAValue &&
-	LOGICAL(R_LogicalNAValue)[0] != NA_LOGICAL) {
-	LOGICAL(R_LogicalNAValue)[0] = NA_LOGICAL;
-	gc_error(_("internal logical NA value has been modified"));
-    }
 }
 
 void GCManager::gcGenController(size_t bytes_wanted, bool full)

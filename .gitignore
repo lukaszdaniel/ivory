@@ -137,3 +137,6 @@ R/tests/CXXR/CellPooltest
 R/tests/CXXR/CellPooltest.out
 R/tests/CXXR/MemoryBanktest
 R/tests/CXXR/Allocatortest
+R/tests/CXXR/GCManagertest
+R/tests/CXXR/splice_test
+R/tests/CXXR/GCManagertest.out

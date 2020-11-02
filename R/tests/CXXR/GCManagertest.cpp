@@ -27,6 +27,8 @@
 #include <cstdlib>
 #include <iostream>
 #include <vector>
+#include <Rinternals.h>
+#include <Rinterface.h>
 #include <CXXR/GCManager.hpp>
 #include <CXXR/GCNode.hpp>
 #include <CXXR/WeakRef.hpp>
@@ -79,12 +81,39 @@ namespace
     // Allocate an exponentially-distributed number of bytes:
     void alloc(double mean)
     {
+	size_t bytes_allocated = MemoryBank::bytesAllocated();
         size_t bytes = size_t(mean * rexp());
-        cout << " Allocating " << bytes << " bytes\n";
+	cout << "(Allocated " << bytes_allocated
+	     << ") Allocating " << bytes << " bytes\n";
         allocs.push_back(make_pair(bytes, MemoryBank::allocate(bytes)));
     }
 } // namespace
 
+// Stubs required for GCManager:
+bool R_GCEnabled = true;
+bool R_in_gc = false;
+int R_check_constants = 0;
+
+Rboolean R_checkConstants(Rboolean abortOnError)
+{
+    return FALSE;
+}
+void REprintf(const char *format, ...)
+{
+    std::cerr << format << std::endl;
+}
+
+void Rf_error(const char *format, ...)
+{
+    std::cerr << format << std::endl;
+    abort();
+}
+
+void R_Suicide(const char *s)
+{
+    std::cerr << s << std::endl;
+    abort();
+}
 // Stubs for members of GCNode:
 
 void GCNode::gc(unsigned int num_old_gens)
@@ -98,7 +127,7 @@ void GCNode::gc(unsigned int num_old_gens)
         pair<size_t, void *> &pr = allocs.back();
         MemoryBank::deallocate(pr.second, pr.first);
         allocs.pop_back();
-        cout << " Released " << pr.first << " bytes\n";
+        cout << "Released " << pr.first << " bytes (Allocated " << MemoryBank::bytesAllocated() << ")\n";
     }
     // cout << MemoryBank::bytesAllocated() << " bytes allocated at end\n";
 }

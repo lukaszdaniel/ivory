@@ -160,7 +160,7 @@ int R_finite(double x)
 
 HIDDEN void R::InitArithmetic()
 {
-    R_NaInt = std::numeric_limits<int>::min();;
+    R_NaInt = std::numeric_limits<int>::min();
     R_NaReal = R_ValueOfNA();
     R_NaN = std::numeric_limits<double>::quiet_NaN();
     R_PosInf = std::numeric_limits<double>::infinity();
