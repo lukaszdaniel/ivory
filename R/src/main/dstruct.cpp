@@ -55,8 +55,9 @@ HIDDEN SEXP R::mkPRIMSXP(int offset, bool eval)
     if (PrimCache == nullptr)
     {
         /* compute the number of entires in R_FunTab */
-        while (R_FunTab[FunTabSize].name)
-            FunTabSize++;
+        FunTabSize = R_FunTab.size();
+        // while (R_FunTab[FunTabSize].name())
+        //     FunTabSize++;
 
         /* allocate and protect the cache */
         PrimCache = allocVector(VECSXP, FunTabSize);

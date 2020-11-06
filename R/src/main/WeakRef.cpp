@@ -267,3 +267,26 @@ WeakRef::WRList *WeakRef::wrList() const
 {
 	return m_ready_to_finalize ? getFinalizationPending() : (m_key ? getLive() : getTombstone());
 }
+
+void WeakRef::runPendingFinalizers()
+{
+	WRList *finalization_pending = getFinalizationPending();
+	if (!finalization_pending->empty())
+		runFinalizers();
+}
+
+void WeakRef::runExitFinalizers()
+{
+	WeakRef::check();
+	WRList *live = getLive();
+	WRList *finalization_pending = getFinalizationPending();
+	for (WeakRef *wr : *finalization_pending)
+	{
+		if (wr->m_finalize_on_exit)
+		{
+			wr->m_ready_to_finalize = true;
+			wr->transfer(live, finalization_pending);
+		}
+	}
+	runFinalizers();
+}

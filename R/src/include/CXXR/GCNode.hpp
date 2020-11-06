@@ -65,7 +65,7 @@ namespace R
     class GCNode
     {
     public:
-	/** @brief Abstract base class for the Visitor design pattern.
+        /** @brief Abstract base class for the Visitor design pattern.
 	 *
 	 * See Gamma et al 'Design Patterns' Ch. 5 for a description
 	 * of the Visitor design pattern.
@@ -76,10 +76,11 @@ namespace R
 	 * visitor object itself to be be considered const during a
 	 * visit.
 	 */
-	struct const_visitor {
-	    virtual ~const_visitor() {}
+        struct const_visitor
+        {
+            virtual ~const_visitor() {}
 
-	    /** @brief Perform visit.
+            /** @brief Perform visit.
 	     *
 	     * @param node Node to be visited.
             *
@@ -109,7 +110,7 @@ namespace R
         };
         GCNode();
 
-	/** @brief Allocate memory.
+        /** @brief Allocate memory.
          *
 	 * Allocates memory for a new object of a class derived from
 	 * GCNode, and zero the memory thus allocated.
@@ -128,7 +129,7 @@ namespace R
             return memset(MemoryBank::allocate(bytes), 0, bytes);
         }
 
-	/** Deallocate memory
+        /** Deallocate memory
 	 *
 	 * Deallocate memory previously allocated by operator new.
 	 *
@@ -142,7 +143,7 @@ namespace R
             MemoryBank::deallocate(p, bytes);
         }
 
-	/** @brief Integrity check.
+        /** @brief Integrity check.
 	 *
 	 * Aborts the program with an error message if the class is
 	 * found to be internally inconsistent.
@@ -150,7 +151,7 @@ namespace R
 	 * @return true, if it returns at all.  The return value is to
 	 * facilitate use with \c assert.
 	 */
-	static bool check();
+        static bool check();
 
         /** Present this node to a visitor and, if the visitor so
         * wishes, conduct the visitor to the children of this node.
@@ -182,7 +183,7 @@ namespace R
             return true;
         }
 
-	/** Delete a GCNode
+        /** Delete a GCNode
 	 *
 	 * @note It is a design objective that it should be possible
 	 * to delete any GCNode object 'by hand', rather than leaving
@@ -193,7 +194,7 @@ namespace R
 	 */
         void destroy() const { delete this; }
 
-	/** @brief Initiate a garbage collection.
+        /** @brief Initiate a garbage collection.
         *
         * @param num_old_gens The number of old generations to collect.
         */
@@ -208,20 +209,20 @@ namespace R
 	 * @param num_old_generations One fewer than the number of
 	 * generations into which GCNode objects are to be ranked.
 	 */
-	static void initialize(unsigned int num_old_generations);
+        static void initialize(unsigned int num_old_generations);
 
-	/**
+        /**
 	 * @return The number of generations into which GCNode objects
 	 * are ranked by the garbage collector.
 	 */
-	static unsigned int numGenerations() { return s_genpeg.size(); }
+        static unsigned int numGenerations() { return s_genpeg.size(); }
 
-	/** @brief Number of GCNode objects in existence.
+        /** @brief Number of GCNode objects in existence.
 	 *
 	 * @return the number of GCNode objects currently in
 	 * existence.
 	 */
-	static size_t numNodes() { return s_num_nodes; }
+        static size_t numNodes() { return s_num_nodes; }
 
         /** Conduct a visitor to the children of this node.
         *
@@ -243,46 +244,50 @@ namespace R
         static void set_prev_node(const GCNode *s, const GCNode *t);
         static bool is_marked(const GCNode *x);
         static void set_mark(const GCNode *x, bool v);
-    
-    protected:
 
-	/**
+    protected:
+        /**
 	 * @note The destructor is protected to ensure that GCNode
 	 * objects are allocated using 'new'.  (See Meyers 'More
 	 * Effective C++' Item 27.) Derived classes should likewise
 	 * declare their destructors private or protected.
 	 */
         virtual ~GCNode();
-    public: // private:
-	friend class WeakRef;
-	template <class T> friend class GCEdge;
 
-	/** Visitor class used to impose a minimum generation number.
+    public: // private:
+        friend class WeakRef;
+        template <class T>
+        friend class GCEdge;
+
+        /** Visitor class used to impose a minimum generation number.
 	 *
 	 * This visitory class is used to ensure that a node and its
 	 * descendants all have generation numbers that exceed a
 	 * specified minimum value, and is used in implementing the
 	 * write barrier in the generational garbage collector.
 	 */
-	class Ager : public const_visitor {
-	public:
-	    /**
+        class Ager : public const_visitor
+        {
+        public:
+            /**
 	     * @param min_gen The minimum generation number that the
 	     * visitor is to apply.
 	     */
-	    Ager(unsigned int min_gen)
-		: m_mingen(min_gen)
-	    {}
+            Ager(unsigned int min_gen)
+                : m_mingen(min_gen)
+            {
+            }
 
-        unsigned int mingen() const { return m_mingen; }
+            unsigned int mingen() const { return m_mingen; }
 
-	    // Virtual function of const_visitor:
-	    bool operator()(const GCNode* node);
-	private:
-	    unsigned int m_mingen;
-	};
+            // Virtual function of const_visitor:
+            bool operator()(const GCNode *node);
 
-	/** Visitor class used to mark nodes.
+        private:
+            unsigned int m_mingen;
+        };
+
+        /** Visitor class used to mark nodes.
 	 *
 	 * This visitor class is used during the mark phase of garbage
 	 * collection to ensure that a node and its descendants are
@@ -290,45 +295,51 @@ namespace R
 	 * specified level are left unmarked.  It is assumed that no
 	 * node references a node with a younger generation number.
 	 */
-	class Marker : public const_visitor {
-	public:
-	    /**
+        class Marker : public const_visitor
+        {
+        public:
+            /**
 	     * @param max_gen Nodes with a generation number exceeding
 	     *          this are not to be marked.
 	     */
-	    Marker(unsigned int max_gen)
-		: m_maxgen(max_gen)
-	    {}
+            Marker(unsigned int max_gen)
+                : m_maxgen(max_gen)
+            {
+            }
 
-	    unsigned int maxgen() const { return m_maxgen; }
+            unsigned int maxgen() const { return m_maxgen; }
 
-	    // Virtual function of const_visitor:
-	    bool operator()(const GCNode* node);
-	private:
-	    unsigned int m_maxgen;
-	};
+            // Virtual function of const_visitor:
+            bool operator()(const GCNode *node);
 
-	/** Visitor class used to abort the program if old-to-new
+        private:
+            unsigned int m_maxgen;
+        };
+
+        /** Visitor class used to abort the program if old-to-new
 	 * references are found.
 	 */
-	class OldToNewChecker : public const_visitor {
-	public:
-	    /**
+        class OldToNewChecker : public const_visitor
+        {
+        public:
+            /**
 	     * @param min_gen The minimum generation number that is
 	     * acceptable in visited nodes.
 	     */
-	    OldToNewChecker(unsigned int min_gen)
-		: m_mingen(min_gen)
-	    {}
+            OldToNewChecker(unsigned int min_gen)
+                : m_mingen(min_gen)
+            {
+            }
 
-	    // Virtual function of const_visitor:
-	    bool operator()(const GCNode* node);
-	private:
-	    unsigned int m_mingen;
-	};
+            // Virtual function of const_visitor:
+            bool operator()(const GCNode *node);
+
+        private:
+            unsigned int m_mingen;
+        };
 
         static unsigned int s_last_gen;
-        static std::vector<GCNode*> s_genpeg;
+        static std::vector<GCNode *> s_genpeg;
         static std::vector<unsigned int> s_gencount;
         static size_t s_num_nodes;
         mutable const GCNode *m_prev;
@@ -341,7 +352,17 @@ namespace R
         // node count isn't altered.
         explicit GCNode(int /*ignored*/)
             : m_prev(this), m_next(this)
-        {}
+        {
+        }
+
+        /** @brief Initialize the entire memory subsystem.
+	 *
+	 * This method must be called before any GCNodes are created.
+	 * If called more than once in a single program run, the
+	 * second and subsequent calls do nothing.
+	 */
+        friend void initializeMemorySubsystem();
+        static void initialize();
 
         bool isMarked() const { return m_marked; }
 
@@ -404,6 +425,14 @@ namespace R
 
         void unmark() const { m_marked = false; }
     };
+
+    /** @brief Initialize the entire memory subsystem.
+     *
+     * This method must be called before any GCNodes are created.
+     * If called more than once in a single program run, the
+     * second and subsequent calls do nothing.
+     */
+    void initializeMemorySubsystem();
 } // namespace R
 
 #endif /* GCNODE_HPP */

@@ -119,8 +119,26 @@ constexpr int REFCNTMAX = ((1 << NAMED_BITS) - 1);
 namespace R
 {
 
-    /* The standard node structure consists of a header followed by the
-   node data. */
+    /** @brief Replacement for CR's SEXPREC.
+     *
+     * This class is the rough equivalent within CXXR of the SEXPREC
+     * union within CR.  However, all functionality relating to
+     * garbage collection has been factored out into the base class
+     * GCNode, and as CXXR development proceeds other functionality
+     * will be factored out into derived classes (corresponding
+     * roughly, but not exactly, to different SEXPTYPEs within CR).
+     *
+     * Eventually this class may end up simply as the home of R
+     * attributes.
+     *
+     * @note The word 'object' in the name of this class is used in
+     * the sense in which the 'blue book' (Becker <em>et al.</em>
+     * [1988]) uses the phrase 'data object'.  Roughly speaking,
+     * RObject is a base class for the sorts of data items whose
+     * existence would be reported by the R function
+     * <tt>objects()</tt>.  In particular, it does not imply that
+     * the object belongs to an R class.
+     */
     class RObject : public GCNode
     {
     public: // private:

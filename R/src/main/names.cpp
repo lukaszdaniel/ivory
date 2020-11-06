@@ -79,15 +79,15 @@ using namespace R;
  *
  * arity:	How many arguments are required/allowed;  "-1"	meaning ``any''
  *
- * pp-kind:	Deparsing Info (-> PPkind in ../include/Defn.h )
+ * pp-kind:	Deparsing Info (-> Kind in ../include/BuiltInFunction.hpp )
  *
- * precedence: Operator precedence (-> PPprec in ../include/Defn.h )
+ * precedence: Operator precedence (-> Precedence in ../include/BuiltInFunction.hpp )
  *
  * rightassoc: Right (1) or left (0) associative operator
  *
  */
-
-std::vector<FUNTAB> R_FunTab =
+namespace R {
+std::vector<R::FUNTAB> R_FunTab =
 {
 
 /* printname	c-entry		offset	eval	arity	pp-kind	     precedence	rightassoc
@@ -1004,9 +1004,9 @@ std::vector<FUNTAB> R_FunTab =
 {"curlGetHeaders",do_curlGetHeaders,0,	11,	5,	{PP_FUNCALL, PREC_FN,	0}},
 {"curlDownload",do_curlDownload, 0,	11,	6,	{PP_FUNCALL, PREC_FN,	0}},
 
-{nullptr,		nullptr,		0,	0,	0,	{PP_INVALID, PREC_FN,	0}},
+// {nullptr,		nullptr,		0,	0,	0,	{PP_INVALID, PREC_FN,	0}},
 };
-
+} // namespace R
 
 /* Table of special names.  These are marked as special with
    SET_SPECIAL_SYMBOL.  Environments on the function call stack that
@@ -1035,13 +1035,13 @@ namespace
 /* also used in eval.cpp */
 HIDDEN SEXP R::R_Primitive(const char *primname)
 {
-    for (int i = 0; R_FunTab[i].name; i++)
-        if (streql(primname, R_FunTab[i].name))
+    for (int i = 0; i < R_FunTab.size(); i++)
+        if (streql(primname, R_FunTab[i].name()))
         { /* all names are ASCII */
-            if ((R_FunTab[i].eval % 100) / 10)
+            if ((R_FunTab[i].evalargs() % 100) / 10)
                 return R_NilValue; /* it is a .Internal */
             else
-                return mkPRIMSXP(i, R_FunTab[i].eval % 10);
+                return mkPRIMSXP(i, R_FunTab[i].evalargs() % 10);
         }
     return R_NilValue;
 }
@@ -1062,8 +1062,8 @@ HIDDEN SEXP do_primitive(SEXP call, SEXP op, SEXP args, SEXP env)
 
 HIDDEN int R::StrToInternal(const char *s)
 {
-    for (int i = 0; R_FunTab[i].name; i++)
-        if (streql(s, R_FunTab[i].name))
+    for (int i = 0; i < R_FunTab.size(); i++)
+        if (streql(s, R_FunTab[i].name()))
             return i;
     return NA_INTEGER;
 }
@@ -1072,11 +1072,11 @@ static void installFunTab(int i)
 {
     SEXP prim;
     /* mkPRIMSXP caches its results, thus prim does not need protection */
-    prim = mkPRIMSXP(i, R_FunTab[i].eval % 10);
-    if ((R_FunTab[i].eval % 100) / 10)
-        SET_INTERNAL(install(R_FunTab[i].name), prim);
+    prim = mkPRIMSXP(i, R_FunTab[i].evalargs() % 10);
+    if ((R_FunTab[i].evalargs() % 100) / 10)
+        SET_INTERNAL(install(R_FunTab[i].name()), prim);
     else
-        SET_SYMVALUE(install(R_FunTab[i].name), prim);
+        SET_SYMVALUE(install(R_FunTab[i].name()), prim);
 }
 
 static void SymbolShortcuts(void)
@@ -1222,7 +1222,7 @@ HIDDEN void R::InitNames()
     SymbolShortcuts();
 
     /*  Builtin Functions */
-    for (int i = 0; R_FunTab[i].name; i++) installFunTab(i);
+    for (int i = 0; i < R_FunTab.size(); i++) installFunTab(i);
 
     /* Special base functions */
     for (const auto &sname : Spec_name)

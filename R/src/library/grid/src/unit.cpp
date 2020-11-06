@@ -1966,7 +1966,7 @@ SEXP summaryUnits(SEXP units, SEXP op_type) {
 		int k = 0;
 		int first_type = 0, current_type = 0;
 		SEXP unit = SET_VECTOR_ELT(out, i, allocVector(VECSXP, 3));
-		SEXP first_data;
+		SEXP first_data = nullptr;
 		for (int j = 0; j < m; j++) {
 			SEXP unit_temp = PROTECT(unitScalar(VECTOR_ELT(units, j), i));
 			current_type = uUnit(unit_temp);

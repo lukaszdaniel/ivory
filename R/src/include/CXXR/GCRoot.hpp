@@ -24,7 +24,7 @@
 
 /** @file GCRoot.hpp
  *
- * @brief Templated class rho::GCRoot and its untemplated base class
+ * @brief Templated class R::GCRoot and its untemplated base class
  * R::GCRootBase.
  */
 

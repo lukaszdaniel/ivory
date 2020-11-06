@@ -113,6 +113,9 @@
 #include <Localization.h>
 #include <Defn.h>
 #include <Internal.h>
+#include <CXXR/JMPException.hpp>
+
+using namespace R;
 
 /* R_run_onexits - runs the conexit/cend code for all contexts from
    R_GlobalContext down to but not including the argument context.
@@ -238,7 +241,12 @@ HIDDEN NORET void RCNTXT::R_jumpctxt(int mask, SEXP val)
 	R_OldCStackLimit = 0;
     }
 
+#ifdef USE_JMP
+    // std::cerr << __FILE__ << ":" << __LINE__ << " About to throw JMPException(" << cptr << ", " << mask << ")" << std::endl;
+    throw JMPException(cptr, mask);
+#else
     LONGJMP(cptr->getCJmpBuf(), mask);
+#endif
 }
 
 
@@ -796,13 +804,34 @@ Rboolean R_ToplevelExec(void (*fun)(void *), void *data)
     saveToplevelContext = R_ToplevelContext;
 
     thiscontext.start(CTXT_TOPLEVEL, R_NilValue, R_GlobalEnv, R_BaseEnv, R_NilValue, R_NilValue);
-    if (SETJMP(thiscontext.getCJmpBuf()))
-	result = FALSE;
-    else {
-	R_GlobalContext = R_ToplevelContext = &thiscontext;
-	fun(data);
-	result = TRUE;
+#ifdef USE_JMP
+    // std::cerr << __FILE__ << ":" << __LINE__ << " Entering try/catch for " << &thiscontext << std::endl;
+    try
+    {
+        R_GlobalContext = R_ToplevelContext = &thiscontext;
+        fun(data);
+        result = TRUE;
     }
+    catch (JMPException &e)
+    {
+        // std::cerr << __FILE__ << ":" << __LINE__ << " Seeking  " << e.context << "; in " << &thiscontext << std::endl;
+        if (e.context != &thiscontext)
+            throw;
+        result = FALSE;
+    }
+       // std::cerr << __FILE__ << ":" << __LINE__ << " Exiting  try/catch for " << &thiscontext << std::endl;
+#else
+    if (!SETJMP(thiscontext.getCJmpBuf()))
+    {
+        R_GlobalContext = R_ToplevelContext = &thiscontext;
+        fun(data);
+        result = TRUE;
+    }
+    else
+    {
+        result = FALSE;
+    }
+#endif
     thiscontext.end();
 
     R_ToplevelContext = saveToplevelContext;
@@ -954,19 +983,44 @@ SEXP R_UnwindProtect(SEXP (*fun)(void *data), void *data,
     }
 
     thiscontext.start(CTXT_UNWIND, R_NilValue, R_GlobalEnv, R_BaseEnv, R_NilValue, R_NilValue);
-    if (SETJMP(thiscontext.getCJmpBuf())) {
-	jump = TRUE;
-	SETCAR(cont, R_ReturnedValue);
-	unwind_cont_t *u = (unwind_cont_t *) RAWDATA(CDR(cont));
-	u->jumpmask = thiscontext.getJumpMask();
-	u->jumptarget = thiscontext.getJumpTarget();
-	thiscontext.setJumpTarget(nullptr);
+#ifdef USE_JMP
+    // std::cerr << __FILE__ << ":" << __LINE__ << " Entering try/catch for " << &thiscontext << std::endl;
+    try
+    {
+        result = fun(data);
+        SETCAR(cont, result);
+        jump = FALSE;
     }
-    else {
-	result = fun(data);
-	SETCAR(cont, result);
-	jump = FALSE;
+    catch (JMPException &e)
+    {
+        // std::cerr << __FILE__ << ":" << __LINE__ << " Seeking  " << e.context << "; in " << &thiscontext << std::endl;
+        if (e.context != &thiscontext)
+            throw;
+        jump = TRUE;
+        SETCAR(cont, R_ReturnedValue);
+        unwind_cont_t *u = (unwind_cont_t *)RAWDATA(CDR(cont));
+        u->jumpmask = thiscontext.getJumpMask();
+        u->jumptarget = thiscontext.getJumpTarget();
+        thiscontext.setJumpTarget(nullptr);
     }
+    // std::cerr << __FILE__ << ":" << __LINE__ << " Exiting  try/catch for " << &thiscontext << std::endl;
+#else
+    if (!SETJMP(thiscontext.getCJmpBuf()))
+    {
+        result = fun(data);
+        SETCAR(cont, result);
+        jump = FALSE;
+    }
+    else
+    {
+        jump = TRUE;
+        SETCAR(cont, R_ReturnedValue);
+        unwind_cont_t *u = (unwind_cont_t *)RAWDATA(CDR(cont));
+        u->jumpmask = thiscontext.getJumpMask();
+        u->jumptarget = thiscontext.getJumpTarget();
+        thiscontext.setJumpTarget(nullptr);
+    }
+#endif
     thiscontext.end();
 
     cleanfun(cleandata, jump);

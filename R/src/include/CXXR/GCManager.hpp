@@ -226,19 +226,18 @@ namespace R
 		// Callback for R::MemoryBank to cue a garbage collection:
 		static bool cue(size_t bytes_wanted, bool force);
 
-
 		// Detailed control of the garbage collection, in particular
 		// choosing how many generations to collect, is carried out
 		// here.
 		static void gcGenController(size_t bytes_wanted, bool full);
-	static std::ostream* s_os;  // Pointer to output stream for GC
-				    // reporting, or NULL.
+		static std::ostream *s_os; // Pointer to output stream for GC
+								   // reporting, or NULL.
 
-	// Callbacks e.g. for timing:
-	static void (*s_pre_gc)();
-	static void (*s_post_gc)();
+		// Callbacks e.g. for timing:
+		static void (*s_pre_gc)();
+		static void (*s_post_gc)();
 
-	GCManager() = delete;
+		GCManager() = delete;
 	};
 } // namespace R
 

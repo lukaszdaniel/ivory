@@ -35,6 +35,12 @@
 
 namespace R
 {
+    /** @brief The type of the do_xxxx functions.
+     *
+     * These are the built-in R functions.
+     */
+    using CCODE = RObject *(*)(RObject *, RObject *, RObject *, RObject *);
+
     /** @brief R function implemented within the interpreter.
      *
      * A BuiltInFunction object represents an R function that is
@@ -69,6 +75,105 @@ namespace R
         static int primoffset(RObject *x);
         static void set_primoffset(RObject *x, int v);
     };
+
+    /* Information for Deparsing Expressions */
+    /** @brief Kind of function, used mainly in deparsing.
+	 */
+    enum Kind
+    {
+        PP_INVALID = 0,
+        PP_ASSIGN = 1,
+        PP_ASSIGN2 = 2,
+        PP_BINARY = 3,
+        PP_BINARY2 = 4,
+        PP_BREAK = 5,
+        PP_CURLY = 6,
+        PP_FOR = 7,
+        PP_FUNCALL = 8,
+        PP_FUNCTION = 9,
+        PP_IF = 10,
+        PP_NEXT = 11,
+        PP_PAREN = 12,
+        PP_RETURN = 13,
+        PP_SUBASS = 14,
+        PP_SUBSET = 15,
+        PP_WHILE = 16,
+        PP_UNARY = 17,
+        PP_DOLLAR = 18,
+        PP_FOREIGN = 19,
+        PP_REPEAT = 20
+    };
+
+    /** @brief Precedence level of function.
+	 */
+    enum Precedence
+    {
+        PREC_FN = 0,
+        PREC_EQ = 1,
+        PREC_LEFT = 2,
+        PREC_RIGHT = 3,
+        PREC_TILDE = 4,
+        PREC_OR = 5,
+        PREC_AND = 6,
+        PREC_NOT = 7,
+        PREC_COMPARE = 8,
+        PREC_SUM = 9,
+        PREC_PROD = 10,
+        PREC_PERCENT = 11,
+        PREC_COLON = 12,
+        PREC_SIGN = 13,
+        PREC_POWER = 14,
+        PREC_SUBSET = 15,
+        PREC_DOLLAR = 16,
+        PREC_NS = 17
+    };
+
+    struct PPinfo
+    {
+        Kind kind;             /* deparse kind */
+        Precedence precedence; /* operator precedence */
+        bool rightassoc;       /* right associative? */
+    };
+
+    /* The type definitions for the table of built-in functions. */
+    /* This table can be found in ../main/names.cpp */
+    class FUNTAB
+    {
+    private:
+        const char *m_name; /* print name */
+        CCODE m_cfun;       /* c-code address */
+        int m_code;         /* offset within c-code */
+        int m_eval;         /* evaluate args? */
+        int m_arity;        /* function arity */
+        PPinfo m_gram;      /* pretty-print info */
+    public:
+        FUNTAB(const char *name, CCODE cfun, int code, int evalargs, int arity, PPinfo gram)
+            : m_name(name), m_cfun(cfun), m_code(code), m_eval(evalargs), m_arity(arity), m_gram(gram)
+        {
+        }
+        auto name() const { return m_name; }
+        auto code() const { return m_code; }
+        auto evalargs() const { return m_eval; }
+        auto arity() const { return m_arity; }
+        auto cfun() const { return m_cfun; }
+        auto gram() const { return m_gram; }
+    };
+
+    int PRIMOFFSET(RObject *x);
+    void SET_PRIMOFFSET(RObject *x, int v);
+/* Defined and initialized in names.cpp (not main.cpp) :*/
+#ifndef __R_Names__
+    extern std::vector<R::FUNTAB> R_FunTab; /* Built in functions */
+#endif
+
+    CCODE PRIMFUN(RObject *x);
+    const char *PRIMNAME(RObject *x);
+    int PRIMVAL(RObject *x);
+    int PRIMARITY(RObject *x);
+    PPinfo PPINFO(RObject *x);
+    int PRIMPRINT(RObject *x);
+    int PRIMINTERNAL(RObject *x);
+
 } // namespace R
 
 #endif /* BUILTINFUNCTION_HPP */

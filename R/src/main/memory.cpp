@@ -49,11 +49,13 @@
 #include <R_ext/RS.h> /* for S4 allocation */
 #include <CXXR/GCEdge.hpp>
 #include <CXXR/GCManager.hpp>
+#include <CXXR/GCNode.hpp>
 #include <CXXR/MemoryBank.hpp>
 #include <CXXR/WeakRef.hpp>
 #include <CXXR/ExternalPointer.hpp>
 #include <CXXR/SEXP_downcast.hpp>
 #include <R_ext/Print.h>
+#include <CXXR/JMPException.hpp>
 
 /* Declarations for Valgrind.
 
@@ -412,7 +414,6 @@ namespace
 {
     /* Miscellaneous Globals. */
 
-    SEXP R_VStack = nullptr;       /* R_alloc stack pointer */
     SEXP R_PreciousList = nullptr; /* List of Persistent Objects */
 
     /* Debugging Routines. */
@@ -569,7 +570,7 @@ void WeakRef::finalize()
     else if (Rfin)
     {
         SEXP e;
-        PROTECT(e = LCONS(Rfin, LCONS(key, nullptr)));
+        PROTECT(e = Rf_lcons(Rfin, Rf_lcons(key, nullptr)));
         eval(e, R_GlobalEnv);
         UNPROTECT(1);
     }
@@ -621,13 +622,28 @@ bool WeakRef::runFinalizers()
             saveToplevelContext = R_ToplevelContext;
             PROTECT(topExp = R_CurrentExpr);
             volatile int savestack = R_PPStackTop;
-
+#ifdef USE_JMP
+            // std::cerr << __FILE__ << ":" << __LINE__ << " Entering try/catch for " << &thiscontext << std::endl;
+            try
+            {
+                R_GlobalContext = R_ToplevelContext = &thiscontext;
+                runWeakRefFinalizer(wr);
+            }
+            catch (JMPException &e)
+            {
+                // std::cerr << __FILE__ << ":" << __LINE__ << " Seeking " << e.context << "; in " << &thiscontext << std::endl;
+                if (e.context != &thiscontext)
+                    throw;
+            }
+            // std::cerr << __FILE__ << ":" << __LINE__ << " Exiting  try/catch for " << &thiscontext << std::endl;
+#else
             if (!SETJMP(thiscontext.getCJmpBuf()))
             {
                 R_GlobalContext = R_ToplevelContext = &thiscontext;
 
                 runWeakRefFinalizer(wr);
             }
+#endif
             thiscontext.end();
             UNPROTECT(1); /* next */
             R_ToplevelContext = saveToplevelContext;
@@ -649,32 +665,9 @@ void R_RunExitFinalizers(void)
     WeakRef::runExitFinalizers();
 }
 
-void WeakRef::runExitFinalizers()
-{
-    WeakRef::check();
-    WRList *live = getLive();
-    WRList *finalization_pending = getFinalizationPending();
-    for (WeakRef *wr : *finalization_pending)
-    {
-        if (wr->m_finalize_on_exit)
-        {
-            wr->m_ready_to_finalize = true;
-            wr->transfer(live, finalization_pending);
-        }
-    }
-    runFinalizers();
-}
-
 void R_RunPendingFinalizers(void)
 {
     WeakRef::runPendingFinalizers();
-}
-
-void WeakRef::runPendingFinalizers()
-{
-    WRList *finalization_pending = getFinalizationPending();
-    if (!finalization_pending->empty())
-        runFinalizers();
 }
 
 void R_RegisterFinalizerEx(SEXP s, SEXP fun, Rboolean onexit)
@@ -720,14 +713,7 @@ HIDDEN SEXP do_regFinaliz(SEXP call, SEXP op, SEXP args, SEXP rho)
 
 /* The Generational Collector. */
 
-namespace
-{
-    inline void MARK_THRU(GCNode::Marker *marker, const GCNode *node)
-    {
-        if (node)
-            node->conductVisitor(marker);
-    }
-} // namespace
+#define MARK_THRU(marker, node) if (node) (node)->conductVisitor(marker)
 
 void GCNode::gc(unsigned int num_old_gens_to_collect)
 {
@@ -807,8 +793,6 @@ void GCNode::gc(unsigned int num_old_gens_to_collect)
     for (int i = 0; i < R_PPStackTop; i++) /* Protected pointers */
         MARK_THRU(&marker, R_PPStack[i]);
 
-    MARK_THRU(&marker, R_VStack); /* R_alloc stack */
-
     for (R_bcstack_t *sp = R_BCNodeStackBase; sp < R_BCNodeStackTop; sp++)
     {
         if (sp->tag == RAWMEM_TAG)
@@ -821,6 +805,14 @@ void GCNode::gc(unsigned int num_old_gens_to_collect)
     WeakRef::markThru(num_old_gens_to_collect);
 
     /* process CHARSXP cache */
+    // Purge R_StringHash hash table.  In future, when CHARSXP is
+    // embodied as a class, the hash table will be a static member of
+    // the class, and be maintained automatically by the constructors
+    // and destructor, so this special treatment will become
+    // unnecessary.
+    //
+    // Note that CXXR does *not*
+    // USE_ATTRIB_FIELD_FOR_CHARSXP_CACHE_CHAINS.
     if (R_StringHash) /* in case of GC during initialization */
     {
         RObject *t;
@@ -1152,6 +1144,7 @@ HIDDEN void R::InitMemory()
     GCManager::setMonitors(gc_start_timing, gc_end_timing);
     GCManager::initialize(R_VSize, R_NSize);
     GCManager::setReporting(R_Verbose ? &std::cerr : nullptr);
+    R::initializeMemorySubsystem();
 
     init_gctorture();
     init_gc_grow_settings();
@@ -1196,99 +1189,6 @@ HIDDEN void R::InitMemory()
     MARK_NOT_MUTABLE(R_LogicalNAValue);
 }
 
-/* Since memory allocated from the heap is non-moving, R_alloc just
-   allocates off the heap as RAWSXP/REALSXP and maintains the stack of
-   allocations through the ATTRIB pointer.  The stack pointer R_VStack
-   is traced by the collector. */
-void *vmaxget(void)
-{
-    return (void *) R_VStack;
-}
-
-void vmaxset(const void *ovmax)
-{
-    R_VStack = (SEXP) ovmax;
-}
-
-char *R_alloc(size_t nelem, int eltsize)
-{
-    R_size_t size = nelem * eltsize;
-    /* doubles are a precaution against integer overflow on 32-bit */
-    double dsize = (double) nelem * eltsize;
-    if (dsize > 0) {
-	SEXP s;
-#ifdef LONG_VECTOR_SUPPORT
-	/* 64-bit platform: previous version used REALSXPs */
-	if(dsize > (double) R_XLEN_T_MAX)  /* currently 4096 TB */
-	    error(_("cannot allocate memory block of size %0.f TB"),
-		  dsize/R_pow_di(1024.0, 4));
-	s = allocVector(RAWSXP, size + 1);
-#else
-	if(dsize > R_LEN_T_MAX) /* must be in the Gb range */
-	    error(_("cannot allocate memory block of size %0.1f GB"),
-		  dsize/R_pow_di(1024.0, 3));
-	s = allocVector(RAWSXP, size + 1);
-#endif
-	RObject::set_attrib(s, R_VStack);
-	R_VStack = s;
-	return (char *) DATAPTR(s);
-    }
-    /* One programmer has relied on this, but it is undocumented! */
-    else return nullptr;
-}
-
-#ifdef HAVE_STDALIGN_H
-#include <stdalign.h>
-#endif
-
-#include <cstdint>
-
-long double *R_allocLD(size_t nelem)
-{
-#if __cplusplus || __alignof_is_defined
-    // This is C11: picky compilers may warn.
-    size_t ld_align = alignof(long double);
-#elif __GNUC__
-    // This is C99, but do not rely on it.
-    size_t ld_align = offsetof(struct { char __a; long double __b; }, __b);
-#else
-    size_t ld_align = 0x0F; // value of x86_64, known others are 4 or 8
-#endif
-    if (ld_align > 8) {
-	uintptr_t tmp = (uintptr_t) R_alloc(nelem + 1, sizeof(long double));
-	tmp = (tmp + ld_align - 1) & ~((uintptr_t)ld_align - 1);
-	return (long double *) tmp;
-    } else {
-	return (long double *) R_alloc(nelem, sizeof(long double));
-    }
-}
-
-
-/* S COMPATIBILITY */
-
-char *S_alloc(long nelem, int eltsize)
-{
-    R_size_t size = nelem * eltsize;
-    char *p = R_alloc(nelem, eltsize);
-
-    if (p)
-        memset(p, 0, size);
-    return p;
-}
-
-char *S_realloc(char *p, long new_, long old, int size)
-{
-    size_t nold;
-    char *q;
-    /* shrinking is a no-op */
-    if (new_ <= old)
-        return p; // so nnew > 0 below
-    q = R_alloc((size_t)new_, size);
-    nold = (size_t)old * size;
-    memcpy(q, p, nold);
-    memset(q + nold, 0, (size_t)new_ * size - nold);
-    return q;
-}
 
 
 /* Allocation functions that GC on initial failure */
@@ -2464,7 +2364,7 @@ const char *(R_CHAR)(SEXP x) {
     if(TYPEOF(x) != CHARSXP) // Han-Tak proposes to prepend  'x && '
 	error(_("'%s' function can only be applied to a charecter, not a '%s'"), "CHAR()",
 	      type2char(TYPEOF(x)));
-    return (const char *) R::r_char(CHK(x));
+    return reinterpret_cast<const char*>(R::r_char(CHK(x)));
 }
 
 SEXP (STRING_ELT)(SEXP x, R_xlen_t i) {
@@ -2913,9 +2813,9 @@ void (SET_RSTEP)(SEXP x, int v) { R::Closure::set_rstep(CHK(x), v); }
 #if defined(TESTING_WRITE_BARRIER) || defined(COMPILING_IVORY)
 /* Primitive Accessors */
 /* not hidden since needed in some base packages */
-int (PRIMOFFSET)(SEXP x) { return R::BuiltInFunction::primoffset(CHK(x)); }
+int R::PRIMOFFSET(SEXP x) { return R::BuiltInFunction::primoffset(CHK(x)); }
 HIDDEN
-void (SET_PRIMOFFSET)(SEXP x, int v) { R::BuiltInFunction::set_primoffset(CHK(x), v); }
+void R::SET_PRIMOFFSET(SEXP x, int v) { R::BuiltInFunction::set_primoffset(CHK(x), v); }
 #endif
 
 /* Symbol Accessors */
@@ -3033,11 +2933,11 @@ Rboolean (NO_SPECIAL_SYMBOLS)(SEXP b) { return (Rboolean) R::RObject::no_special
 /* R_FunTab accessors, only needed when write barrier is on */
 /* Not hidden to allow experimentaiton without rebuilding R - LT */
 /* HIDDEN */
-int (PRIMVAL)(SEXP x) { return  R_FunTab[PRIMOFFSET(CHK(x))].code; }
+int (PRIMVAL)(SEXP x) { return  R_FunTab[PRIMOFFSET(CHK(x))].code(); }
 /* HIDDEN */
-CCODE (PRIMFUN)(SEXP x) { return R_FunTab[PRIMOFFSET(CHK(x))].cfun; }
+R::CCODE (PRIMFUN)(SEXP x) { return R_FunTab[PRIMOFFSET(CHK(x))].cfun(); }
 /* HIDDEN */
-void (SET_PRIMFUN)(SEXP x, CCODE f) { R_FunTab[PRIMOFFSET(CHK(x))].cfun = f; }
+// void (SET_PRIMFUN)(SEXP x, R::CCODE f) { R_FunTab[PRIMOFFSET(CHK(x))].m_cfun = f; }
 
 /* for use when testing the write barrier */
 HIDDEN int (IS_BYTES)(SEXP x) { return R::RObject::is_bytes(CHK(x)); }
@@ -3221,9 +3121,9 @@ HIDDEN bool R::Seql(SEXP a, SEXP b)
         return false;
     else
     {
-        SEXP vmax = R_VStack;
+        auto vmax = vmaxget();
         bool result = streql(translateCharUTF8(a), translateCharUTF8(b));
-        R_VStack = vmax; /* discard any memory used by translateCharUTF8 */
+        vmaxset(vmax); /* discard any memory used by translateCharUTF8 */
         return result;
     }
 }

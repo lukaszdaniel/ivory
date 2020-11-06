@@ -35,6 +35,7 @@
 #include <R_ext/Minmax.h>
 #include <R_ext/Print.h>
 #include <cstdarg>
+#include <CXXR/JMPException.hpp>
 
 using namespace std;
 using namespace R;
@@ -164,15 +165,37 @@ static void onintrEx(Rboolean resumeOK)
 	int dbflag = RDEBUG(rho);
 	RCNTXT restartcontext;
 	restartcontext.start(CTXT_RESTART, R_NilValue, R_GlobalEnv, R_BaseEnv, R_NilValue, R_NilValue);
-	if (SETJMP(restartcontext.getCJmpBuf())) {
-	    SET_RDEBUG(rho, dbflag); /* in case browser() has messed with it */
-	    R_ReturnedValue = R_NilValue;
-	    R_Visible = false;
-	    restartcontext.end();
-	    return;
+#ifdef USE_JMP
+	// std::cerr << __FILE__ << ":" << __LINE__ << " Entering try/catch for " << &restartcontext << std::endl;
+	try
+	{
+		RCNTXT::R_InsertRestartHandlers(&restartcontext, "resume");
+		signalInterrupt();
+	}
+	catch (JMPException &e)
+	{
+		// std::cerr << __FILE__ << ":" << __LINE__ << " Seeking  " << e.context << "; in " << &restartcontext << std::endl;
+		if (e.context != &restartcontext)
+			throw;
+		SET_RDEBUG(rho, dbflag); /* in case browser() has messed with it */
+		R_ReturnedValue = R_NilValue;
+		R_Visible = false;
+		restartcontext.end();
+		return;
+	}
+	// std::cerr << __FILE__ << ":" << __LINE__ << " Exiting  try/catch for " << &restartcontext << std::endl;
+#else
+	if (SETJMP(restartcontext.getCJmpBuf()))
+	{
+		SET_RDEBUG(rho, dbflag); /* in case browser() has messed with it */
+		R_ReturnedValue = R_NilValue;
+		R_Visible = false;
+		restartcontext.end();
+		return;
 	}
 	RCNTXT::R_InsertRestartHandlers(&restartcontext, "resume");
 	signalInterrupt();
+#endif
 	restartcontext.end();
     }
     else signalInterrupt();

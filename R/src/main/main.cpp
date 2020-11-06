@@ -19,11 +19,14 @@
  *  https://www.R-project.org/Licenses/
  */
 
+/** @file main.cpp
+ *
+ * The main program.
+ */
+
 #ifdef HAVE_CONFIG_H
 #include <config.h>
 #endif
-
-
 
 #include <cmath> /* avoid redefinition of extern in Defn.h */
 #include <cfloat>
@@ -47,6 +50,7 @@
 #include <clocale>
 #include <R_ext/Print.h>
 #include <R_ext/Error.h>
+#include <CXXR/JMPException.hpp>
 
 using namespace R;
 
@@ -355,10 +359,33 @@ static void check_session_exit()
 
 void R_ReplDLLinit(void)
 {
-    if (SETJMP(R_Toplevel.getCJmpBuf()))
-	check_session_exit();
-    R_GlobalContext = R_ToplevelContext = R_SessionContext = &R_Toplevel;
-    R_IoBufferWriteReset(&R_ConsoleIob);
+#ifdef USE_JMP
+	bool redo = false;
+	do
+	{
+		redo = false;
+		R_GlobalContext = R_ToplevelContext = R_SessionContext = &R_Toplevel;
+		// std::cerr << __FILE__ << ":" << __LINE__ << " Entering try/catch for " << &R_Toplevel << std::endl;
+		try
+		{
+			R_IoBufferWriteReset(&R_ConsoleIob);
+		}
+		catch (JMPException &e)
+		{
+			// std::cerr << __FILE__ << ":" << __LINE__ << " Seeking " << e.context << "; in " << &R_Toplevel << std::endl;
+			if (e.context != &R_Toplevel)
+				throw;
+			check_session_exit();
+			redo = true;
+		}
+		// std::cerr << __FILE__ << ":" << __LINE__ << " Exiting  try/catch for " << &R_Toplevel << std::endl;
+	} while (redo);
+#else
+	if (SETJMP(R_Toplevel.getCJmpBuf()))
+		check_session_exit();
+	R_GlobalContext = R_ToplevelContext = R_SessionContext = &R_Toplevel;
+	R_IoBufferWriteReset(&R_ConsoleIob);
+#endif
     prompt_type = 1;
     DLLbuf[0] = DLLbuf[CONSOLE_BUFFER_SIZE] = '\0';
     DLLbufp = DLLbuf;
@@ -717,12 +744,32 @@ static void R_LoadProfile(FILE *fparg, SEXP env)
 {
     FILE * volatile fp = fparg; /* is this needed? */
     if (fp) {
-	if (SETJMP(R_Toplevel.getCJmpBuf()))
-	    check_session_exit();
-	else {
-	    R_GlobalContext = R_ToplevelContext = R_SessionContext = &R_Toplevel;
-	    R_ReplFile(fp, env);
-	}
+#ifdef USE_JMP
+		// std::cerr << __FILE__ << ":" << __LINE__ << " Entering try/catch for " << &R_Toplevel << std::endl;
+		try
+		{
+			R_GlobalContext = R_ToplevelContext = R_SessionContext = &R_Toplevel;
+			R_ReplFile(fp, env);
+		}
+		catch (JMPException &e)
+		{
+			// std::cerr << __FILE__ << ":" << __LINE__ << " Seeking " << e.context << "; in " << &R_Toplevel << std::endl;
+			if (e.context != &R_Toplevel)
+				throw;
+			check_session_exit();
+		}
+		// std::cerr << __FILE__ << ":" << __LINE__ << " Exiting  try/catch for " << &R_Toplevel << std::endl;
+#else
+		if (!SETJMP(R_Toplevel.getCJmpBuf()))
+		{
+			R_GlobalContext = R_ToplevelContext = R_SessionContext = &R_Toplevel;
+			R_ReplFile(fp, env);
+		}
+		else
+		{
+			check_session_exit();
+		}
+#endif
 	fclose(fp);
     }
 }
@@ -767,7 +814,10 @@ static uintptr_t almostFillStack() {
 
 void setup_Rmainloop(void)
 {
+#ifdef USE_JMP
+#else
     volatile bool doneit;
+#endif
     volatile SEXP baseEnv;
     SEXP cmd;
     char deferred_warnings[11][250];
@@ -948,15 +998,39 @@ void setup_Rmainloop(void)
     if (fp == nullptr)
 	R_Suicide(_("unable to open the base package\n"));
 
-    doneit = false;
-    if (SETJMP(R_Toplevel.getCJmpBuf()))
-	check_session_exit();
-    R_GlobalContext = R_ToplevelContext = R_SessionContext = &R_Toplevel;
-    if (R_SignalHandlers) init_signal_handlers();
-    if (!doneit) {
-	doneit = true;
-	R_ReplFile(fp, baseEnv);
-    }
+#ifdef USE_JMP
+	R_GlobalContext = R_ToplevelContext = R_SessionContext = &R_Toplevel;
+	// std::cerr << __FILE__ << ":" << __LINE__ << " Entering try/catch for " << &R_Toplevel << std::endl;
+	try
+	{
+		if (R_SignalHandlers)
+			init_signal_handlers();
+		R_ReplFile(fp, baseEnv);
+	}
+	catch (JMPException &e)
+	{
+		// std::cerr << __FILE__ << ":" << __LINE__ << " Seeking " << e.context << "; in " << &R_Toplevel << std::endl;
+		if (e.context != &R_Toplevel)
+			throw;
+		check_session_exit();
+		R_GlobalContext = R_ToplevelContext = R_SessionContext = &R_Toplevel;
+		if (R_SignalHandlers)
+			init_signal_handlers();
+	}
+	// std::cerr << __FILE__ << ":" << __LINE__ << " Exiting  try/catch for " << &R_Toplevel << std::endl;
+#else
+	doneit = false;
+	if (SETJMP(R_Toplevel.getCJmpBuf()))
+		check_session_exit();
+	R_GlobalContext = R_ToplevelContext = R_SessionContext = &R_Toplevel;
+	if (R_SignalHandlers)
+		init_signal_handlers();
+	if (!doneit)
+	{
+		doneit = true;
+		R_ReplFile(fp, baseEnv);
+	}
+#endif
     fclose(fp);
 #endif
 
@@ -978,22 +1052,51 @@ void setup_Rmainloop(void)
     R_unLockBinding(install(".Library.site"), R_BaseEnv);
 
     /* require(methods) if it is in the default packages */
-    doneit = false;
-    if (SETJMP(R_Toplevel.getCJmpBuf()))
-	check_session_exit();
-    R_GlobalContext = R_ToplevelContext = R_SessionContext = &R_Toplevel;
-    if (!doneit) {
-	doneit = true;
-	PROTECT(cmd = install(".OptRequireMethods"));
-	R_CurrentExpr = findVar(cmd, R_GlobalEnv);
-	if (R_CurrentExpr != R_UnboundValue &&
-	    TYPEOF(R_CurrentExpr) == CLOSXP) {
-		PROTECT(R_CurrentExpr = lang1(cmd));
-		R_CurrentExpr = eval(R_CurrentExpr, R_GlobalEnv);
+#ifdef USE_JMP
+	R_GlobalContext = R_ToplevelContext = R_SessionContext = &R_Toplevel;
+	// std::cerr << __FILE__ << ":" << __LINE__ << " Entering try/catch for " << &R_Toplevel << std::endl;
+	try
+	{
+		PROTECT(cmd = install(".OptRequireMethods"));
+		R_CurrentExpr = findVar(cmd, R_GlobalEnv);
+		if (R_CurrentExpr != R_UnboundValue &&
+			TYPEOF(R_CurrentExpr) == CLOSXP)
+		{
+			PROTECT(R_CurrentExpr = lang1(cmd));
+			R_CurrentExpr = eval(R_CurrentExpr, R_GlobalEnv);
+			UNPROTECT(1);
+		}
 		UNPROTECT(1);
 	}
-	UNPROTECT(1);
-    }
+	catch (JMPException &e)
+	{
+		// std::cerr << __FILE__ << ":" << __LINE__ << " Seeking " << e.context << "; in " << &R_Toplevel << std::endl;
+		if (e.context != &R_Toplevel)
+			throw;
+		check_session_exit();
+		R_GlobalContext = R_ToplevelContext = R_SessionContext = &R_Toplevel;
+	}
+	// std::cerr << __FILE__ << ":" << __LINE__ << " Exiting  try/catch for " << &R_Toplevel << std::endl;
+#else
+	doneit = false;
+	if (SETJMP(R_Toplevel.getCJmpBuf()))
+		check_session_exit();
+	R_GlobalContext = R_ToplevelContext = R_SessionContext = &R_Toplevel;
+	if (!doneit)
+	{
+		doneit = true;
+		PROTECT(cmd = install(".OptRequireMethods"));
+		R_CurrentExpr = findVar(cmd, R_GlobalEnv);
+		if (R_CurrentExpr != R_UnboundValue &&
+			TYPEOF(R_CurrentExpr) == CLOSXP)
+		{
+			PROTECT(R_CurrentExpr = lang1(cmd));
+			R_CurrentExpr = eval(R_CurrentExpr, R_GlobalEnv);
+			UNPROTECT(1);
+		}
+		UNPROTECT(1);
+	}
+#endif
 
     if (streql(R_GUIType, "Tk")) {
 	char buf[PATH_MAX];
@@ -1017,61 +1120,147 @@ void setup_Rmainloop(void)
        we look in any documents which might have been double clicked on
        or dropped on the application.
     */
-    doneit = false;
-    if (SETJMP(R_Toplevel.getCJmpBuf()))
-	check_session_exit();
-    R_GlobalContext = R_ToplevelContext = R_SessionContext = &R_Toplevel;
-    if (!doneit) {
-	doneit = true;
-	R_InitialData();
-    }
-    else {
-	if (SETJMP(R_Toplevel.getCJmpBuf()))
-	    check_session_exit();
-	else {
-    	    warning(_("unable to restore saved data in %s\n"), get_workspace_name());
+#ifdef USE_JMP
+	R_GlobalContext = R_ToplevelContext = R_SessionContext = &R_Toplevel;
+	// std::cerr << __FILE__ << ":" << __LINE__ << " Entering try/catch for " << &R_Toplevel << std::endl;
+	try
+	{
+		R_InitialData();
 	}
-    }
+	catch (JMPException &e)
+	{
+		// std::cerr << __FILE__ << ":" << __LINE__ << " Seeking " << e.context << "; in " << &R_Toplevel << std::endl;
+		if (e.context != &R_Toplevel)
+			throw;
+		try
+		{
+			warning(_("unable to restore saved data in %s\n"), get_workspace_name());
+		}
+		catch (JMPException &e)
+		{
+			if (e.context != &R_Toplevel)
+				throw;
+			check_session_exit();
+		}
+	}
+	// std::cerr << __FILE__ << ":" << __LINE__ << " Exiting  try/catch for " << &R_Toplevel << std::endl;
+#else
+	doneit = false;
+	if (SETJMP(R_Toplevel.getCJmpBuf()))
+		check_session_exit();
+	R_GlobalContext = R_ToplevelContext = R_SessionContext = &R_Toplevel;
+	if (!doneit)
+	{
+		doneit = true;
+		R_InitialData();
+	}
+	else
+	{
+		if (SETJMP(R_Toplevel.getCJmpBuf()))
+			check_session_exit();
+		else
+		{
+			warning(_("unable to restore saved data in %s\n"), get_workspace_name());
+		}
+	}
+#endif
 
     /* Initial Loading is done.
        At this point we try to invoke the .First Function.
        If there is an error we continue. */
-
-    doneit = false;
-    if (SETJMP(R_Toplevel.getCJmpBuf()))
-	check_session_exit();
-    R_GlobalContext = R_ToplevelContext = R_SessionContext = &R_Toplevel;
-    if (!doneit) {
-	doneit = true;
-	PROTECT(cmd = install(".First"));
-	R_CurrentExpr = findVar(cmd, R_GlobalEnv);
-	if (R_CurrentExpr != R_UnboundValue &&
-	    TYPEOF(R_CurrentExpr) == CLOSXP) {
-		PROTECT(R_CurrentExpr = lang1(cmd));
-		R_CurrentExpr = eval(R_CurrentExpr, R_GlobalEnv);
+#ifdef USE_JMP
+	R_GlobalContext = R_ToplevelContext = R_SessionContext = &R_Toplevel;
+	// std::cerr << __FILE__ << ":" << __LINE__ << " Entering try/catch for " << &R_Toplevel << std::endl;
+	try
+	{
+		PROTECT(cmd = install(".First"));
+		R_CurrentExpr = findVar(cmd, R_GlobalEnv);
+		if (R_CurrentExpr != R_UnboundValue &&
+			TYPEOF(R_CurrentExpr) == CLOSXP)
+		{
+			PROTECT(R_CurrentExpr = lang1(cmd));
+			R_CurrentExpr = eval(R_CurrentExpr, R_GlobalEnv);
+			UNPROTECT(1);
+		}
 		UNPROTECT(1);
 	}
-	UNPROTECT(1);
-    }
+	catch (JMPException &e)
+	{
+		// std::cerr << __FILE__ << ":" << __LINE__ << " Seeking " << e.context << "; in " << &R_Toplevel << std::endl;
+		if (e.context != &R_Toplevel)
+			throw;
+		check_session_exit();
+		R_GlobalContext = R_ToplevelContext = R_SessionContext = &R_Toplevel;
+	}
+	// std::cerr << __FILE__ << ":" << __LINE__ << " Exiting  try/catch for " << &R_Toplevel << std::endl;
+#else
+	doneit = false;
+	if (SETJMP(R_Toplevel.getCJmpBuf()))
+		check_session_exit();
+	R_GlobalContext = R_ToplevelContext = R_SessionContext = &R_Toplevel;
+	if (!doneit)
+	{
+		doneit = true;
+		PROTECT(cmd = install(".First"));
+		R_CurrentExpr = findVar(cmd, R_GlobalEnv);
+		if (R_CurrentExpr != R_UnboundValue &&
+			TYPEOF(R_CurrentExpr) == CLOSXP)
+		{
+			PROTECT(R_CurrentExpr = lang1(cmd));
+			R_CurrentExpr = eval(R_CurrentExpr, R_GlobalEnv);
+			UNPROTECT(1);
+		}
+		UNPROTECT(1);
+	}
+#endif
     /* Try to invoke the .First.sys function, which loads the default packages.
        If there is an error we continue. */
-
-    doneit = false;
-    if (SETJMP(R_Toplevel.getCJmpBuf()))
-	check_session_exit();
-    R_GlobalContext = R_ToplevelContext = R_SessionContext = &R_Toplevel;
-    if (!doneit) {
-	doneit = true;
-	PROTECT(cmd = install(".First.sys"));
-	R_CurrentExpr = findVar(cmd, baseEnv);
-	if (R_CurrentExpr != R_UnboundValue &&
-	    TYPEOF(R_CurrentExpr) == CLOSXP) {
-		PROTECT(R_CurrentExpr = lang1(cmd));
-		R_CurrentExpr = eval(R_CurrentExpr, R_GlobalEnv);
+#ifdef USE_JMP
+	R_GlobalContext = R_ToplevelContext = R_SessionContext = &R_Toplevel;
+	// std::cerr << __FILE__ << ":" << __LINE__ << " Entering try/catch for " << &R_Toplevel << std::endl;
+	try
+	{
+		PROTECT(cmd = install(".First.sys"));
+		R_CurrentExpr = findVar(cmd, baseEnv);
+		if (R_CurrentExpr != R_UnboundValue &&
+			TYPEOF(R_CurrentExpr) == CLOSXP)
+		{
+			PROTECT(R_CurrentExpr = lang1(cmd));
+			R_CurrentExpr = eval(R_CurrentExpr, R_GlobalEnv);
+			UNPROTECT(1);
+		}
 		UNPROTECT(1);
 	}
-	UNPROTECT(1);
-    }
+	catch (JMPException &e)
+	{
+		// std::cerr << __FILE__ << ":" << __LINE__ << " Seeking " << e.context << "; in " << &R_Toplevel << std::endl;
+		if (e.context != &R_Toplevel)
+			throw;
+		check_session_exit();
+		R_GlobalContext = R_ToplevelContext = R_SessionContext = &R_Toplevel;
+	}
+	// std::cerr << __FILE__ << ":" << __LINE__ << " Exiting  try/catch for " << &R_Toplevel << std::endl;
+#else
+	doneit = false;
+	if (SETJMP(R_Toplevel.getCJmpBuf()))
+		check_session_exit();
+	R_GlobalContext = R_ToplevelContext = R_SessionContext = &R_Toplevel;
+	if (!doneit)
+	{
+		doneit = true;
+		PROTECT(cmd = install(".First.sys"));
+		R_CurrentExpr = findVar(cmd, baseEnv);
+		if (R_CurrentExpr != R_UnboundValue &&
+			TYPEOF(R_CurrentExpr) == CLOSXP)
+		{
+			PROTECT(R_CurrentExpr = lang1(cmd));
+			R_CurrentExpr = eval(R_CurrentExpr, R_GlobalEnv);
+			UNPROTECT(1);
+		}
+		UNPROTECT(1);
+	}
+#endif
+
     {
 	int i;
 	for(i = 0 ; i < ndeferred_warnings; i++)
@@ -1085,15 +1274,36 @@ void setup_Rmainloop(void)
 		 R_Interactive);
 
     /* trying to do this earlier seems to run into bootstrapping issues. */
-    doneit = false;
-    if (SETJMP(R_Toplevel.getCJmpBuf()))
-	check_session_exit();
-    R_GlobalContext = R_ToplevelContext = R_SessionContext = &R_Toplevel;
-    if (!doneit) {
-	doneit = true;
-	R_init_jit_enabled();
-    } else
-	R_Suicide(_("unable to initialize the JIT\n"));
+#ifdef USE_JMP
+	R_GlobalContext = R_ToplevelContext = R_SessionContext = &R_Toplevel;
+	// std::cerr << __FILE__ << ":" << __LINE__ << " Entering try/catch for " << &R_Toplevel << std::endl;
+	try
+	{
+		R_init_jit_enabled();
+	}
+	catch (JMPException &e)
+	{
+		// std::cerr << __FILE__ << ":" << __LINE__ << " Seeking " << e.context << "; in " << &R_Toplevel << std::endl;
+		if (e.context != &R_Toplevel)
+			throw;
+		check_session_exit();
+		R_GlobalContext = R_ToplevelContext = R_SessionContext = &R_Toplevel;
+		R_Suicide(_("unable to initialize the JIT\n"));
+	}
+	// std::cerr << __FILE__ << ":" << __LINE__ << " Exiting  try/catch for " << &R_Toplevel << std::endl;
+#else
+	doneit = false;
+	if (SETJMP(R_Toplevel.getCJmpBuf()))
+		check_session_exit();
+	R_GlobalContext = R_ToplevelContext = R_SessionContext = &R_Toplevel;
+	if (!doneit)
+	{
+		doneit = true;
+		R_init_jit_enabled();
+	}
+	else
+		R_Suicide(_("unable to initialize the JIT\n"));
+#endif
     R_Is_Running = 2;
 }
 
@@ -1113,10 +1323,36 @@ void run_Rmainloop(void)
 {
     /* Here is the real R read-eval-loop. */
     /* We handle the console until end-of-file. */
-    if (SETJMP(R_Toplevel.getCJmpBuf()))
-	check_session_exit();
-    R_GlobalContext = R_ToplevelContext = R_SessionContext = &R_Toplevel;
-    R_ReplConsole(R_GlobalEnv, 0, 0);
+#ifdef USE_JMP
+	bool redo = false;
+	do
+	{
+		redo = false;
+		// std::cerr << __FILE__ << ":" << __LINE__ << " Entering try/catch for " << &R_Toplevel << std::endl;
+		try
+		{
+			R_GlobalContext = R_ToplevelContext = R_SessionContext = &R_Toplevel;
+			R_ReplConsole(R_GlobalEnv, 0, 0);
+		}
+		catch (JMPException &e)
+		{
+			// std::cerr << __FILE__ << ":" << __LINE__ << " Seeking " << e.context << "; in " << &R_Toplevel << std::endl;
+			if (e.context != &R_Toplevel)
+				throw;
+			check_session_exit();
+			redo = true;
+		}
+		//	catch (...) {
+		//	    std::cout << "Non-JMPException caught" << std::endl;
+		//	}
+		// std::cerr << __FILE__ << ":" << __LINE__ << " Exiting  try/catch for " << &R_Toplevel << std::endl;
+	} while (redo);
+#else
+	if (SETJMP(R_Toplevel.getCJmpBuf()))
+		check_session_exit();
+	R_GlobalContext = R_ToplevelContext = R_SessionContext = &R_Toplevel;
+	R_ReplConsole(R_GlobalEnv, 0, 0);
+#endif
     end_Rmainloop(); /* must go here */
 }
 
@@ -1305,18 +1541,59 @@ HIDDEN SEXP do_browser(SEXP call, SEXP op, SEXP args, SEXP rho)
     /* acts as a target for error returns. */
 
     returncontext.start(CTXT_BROWSER, call, rho, R_BaseEnv, argList, R_NilValue);
-    if (!SETJMP(returncontext.getCJmpBuf())) {
-	thiscontext.start(CTXT_RESTART, R_NilValue, rho, R_BaseEnv, R_NilValue, R_NilValue);
-	if (SETJMP(thiscontext.getCJmpBuf())) {
-		thiscontext.setRestartBitOn();
-	    R_ReturnedValue = R_NilValue;
-	    R_Visible = false;
+#ifdef USE_JMP
+	// std::cerr << __FILE__ << ":" << __LINE__ << " Entering try/catch for " << &returncontext << std::endl;
+	try
+	{
+		thiscontext.start(CTXT_RESTART, R_NilValue, rho, R_BaseEnv, R_NilValue, R_NilValue);
+		bool redo = false;
+		do
+		{
+			redo = false;
+			// std::cerr << __FILE__ << ":" << __LINE__ << " Entering try/catch for " << &thiscontext << std::endl;
+			try
+			{
+				R_GlobalContext = &thiscontext;
+				RCNTXT::R_InsertRestartHandlers(&thiscontext, "browser");
+				R_ReplConsole(rho, savestack, browselevel + 1);
+			}
+			catch (JMPException &e)
+			{
+				// std::cerr << __FILE__ << ":" << __LINE__ << " Seeking " << e.context << "; in " << &thiscontext << std::endl;
+				if (e.context != &thiscontext)
+					throw;
+				thiscontext.setRestartBitOn();
+				R_ReturnedValue = R_NilValue;
+				R_Visible = false;
+				redo = true;
+			}
+			// std::cerr << __FILE__ << ":" << __LINE__ << " Exiting  try/catch for " << &thiscontext << std::endl;
+		} while (redo);
+		thiscontext.end();
 	}
-	R_GlobalContext = &thiscontext;
-	RCNTXT::R_InsertRestartHandlers(&thiscontext, "browser");
-	R_ReplConsole(rho, savestack, browselevel+1);
-	thiscontext.end();
-    }
+	catch (JMPException &e)
+	{
+		// std::cerr << __FILE__ << ":" << __LINE__ << " Seeking " << e.context << "; in " << &returncontext << std::endl;
+		if (e.context != &returncontext)
+			throw;
+	}
+	// std::cerr << __FILE__ << ":" << __LINE__ << " Exiting  try/catch for " << &returncontext << std::endl;
+#else
+	if (!SETJMP(returncontext.getCJmpBuf()))
+	{
+		thiscontext.start(CTXT_RESTART, R_NilValue, rho, R_BaseEnv, R_NilValue, R_NilValue);
+		if (SETJMP(thiscontext.getCJmpBuf()))
+		{
+			thiscontext.setRestartBitOn();
+			R_ReturnedValue = R_NilValue;
+			R_Visible = false;
+		}
+		R_GlobalContext = &thiscontext;
+		RCNTXT::R_InsertRestartHandlers(&thiscontext, "browser");
+		R_ReplConsole(rho, savestack, browselevel + 1);
+		thiscontext.end();
+	}
+#endif
     returncontext.end();
 
     /* Reset the interpreter state. */

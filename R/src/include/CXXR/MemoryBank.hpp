@@ -110,11 +110,20 @@ namespace R
 	 */
 		static void *allocate(size_t bytes)
 		{
-			void *p;
+#if VALGRIND_LEVEL >= 3
+			size_t blockbytes = bytes + 1; // trailing redzone
+#else
+			size_t blockbytes = bytes;
+#endif
 			// Assumes sizeof(double) == 8:
-			return (bytes > s_max_cell_size || !(p = alloc1(bytes)))
-					   ? alloc2(bytes)
-					   : p;
+			void *p;
+			p = (blockbytes > s_max_cell_size || !(p = alloc1(blockbytes))) ? alloc2(blockbytes) : p;
+#if VALGRIND_LEVEL >= 3
+			char *c = reinterpret_cast<char *>(p);
+			VALGRIND_MAKE_MEM_NOACCESS(c + bytes, 1);
+			s_bytes_allocated -= 1;
+#endif
+			return p;
 		}
 
 		/** @brief Number of blocks currently allocated.
@@ -132,6 +141,10 @@ namespace R
 	 * deallocated.  Actual utilisation of memory in the main heap
 	 * may be greater than this, possibly by as much as a factor
 	 * of 2.
+	 *
+	 * @note If redzoning is operation (<tt>VALGRIND_LEVEL >=
+	 * 2</tt>), the value returned does not include the size of the
+	 * redzones.
 	 */
 		static auto bytesAllocated() { return s_bytes_allocated; }
 
@@ -147,20 +160,23 @@ namespace R
 	 * @param p Pointer to a block of memory previously allocated
 	 *          by MemoryBank::allocate(), or a null pointer (in which
 	 *          case method does nothing).
-	 *
-	 * @param bytes The number of bytes in the memory block,
-	 *          i.e. the number of bytes requested in the
-	 *          corresponding call to allocate().
 	 */
 		static void deallocate(void *p, size_t bytes)
 		{
 			if (!p)
 				return;
+#if VALGRIND_LEVEL >= 3
+	    size_t blockbytes = bytes + 1;  // trailing redzone
+	    char* c = reinterpret_cast<char*>(p);
+	    VALGRIND_MAKE_MEM_UNDEFINED(c + bytes, 1);
+#else
+	    size_t blockbytes = bytes;
+#endif
 			// Assumes sizeof(double) == 8:
-			if (bytes > s_max_cell_size)
+			if (blockbytes > s_max_cell_size)
 				::operator delete(p);
 			else
-				s_pools[s_pooltab[bytes]]->deallocate(p);
+				s_pools[s_pooltab[blockbytes]]->deallocate(p);
 			--s_blocks_allocated;
 			s_bytes_allocated -= bytes;
 		}
@@ -214,6 +230,10 @@ namespace R
 		static size_t s_threshold;
 #endif
 
+	// Not implemented.  Declared to stop the compiler generating
+	// a constructor.
+	MemoryBank();
+
 		// First-line allocation attempt for small objects:
 		static void *alloc1(size_t bytes) throw()
 		{
@@ -223,7 +243,7 @@ namespace R
 				++s_blocks_allocated;
 				s_bytes_allocated += bytes;
 			}
-#if VALGRIND_LEVEL > 1
+#if VALGRIND_LEVEL >= 2
 			VALGRIND_MAKE_MEM_UNDEFINED(p, bytes);
 #endif
 #ifdef R_MEMORY_PROFILING
@@ -241,6 +261,7 @@ namespace R
 		static void cleanup();
 
 		// Initialize the static data members:
+		friend void initializeMemorySubsystem();
 		static void initialize();
 
 		static void pool_out_of_memory(CellPool *pool);

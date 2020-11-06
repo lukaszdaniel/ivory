@@ -15,12 +15,12 @@ include $(top_builddir)/Makeconf
 SOURCES_C =
 
 SOURCES_CXX = \
-	CellPool.cpp CommandLineArgs.cpp MemoryBank.cpp \
+	CellPool.cpp CommandLineArgs.cpp MemoryBank.cpp RAllocStack.cpp \
 	Rdynload.cpp Renviron.cpp RNG.cpp \
 	GCManager.cpp GCNode.cpp GCRoot.cpp Logical.cpp String.cpp ComplexVector.cpp IntVector.cpp LogicalVector.cpp RawVector.cpp \
-	RealVector.cpp StringVector.cpp RObject.cpp ConsCell.cpp BuiltInFunction.cpp ExternalPointer.cpp FunctionBase.cpp \
+	RealVector.cpp StringVector.cpp RObject.cpp ConsCell.cpp BuiltInFunction.cpp Expression.cpp ExternalPointer.cpp FunctionBase.cpp \
 	Closure.cpp Environment.cpp VectorBase.cpp SEXP_downcast.cpp Symbol.cpp \
-	Promise.cpp WeakRef.cpp \
+	ExpressionVector.cpp Frame.cpp ListVector.cpp PairList.cpp S4Object.cpp Promise.cpp WeakRef.cpp \
 	agrep.cpp altclasses.cpp altrep.cpp apply.cpp arithmetic.cpp array.cpp attrib.cpp \
 	bind.cpp builtin.cpp \
 	character.cpp coerce.cpp colors.cpp complex.cpp connections.cpp context.cpp cum.cpp \

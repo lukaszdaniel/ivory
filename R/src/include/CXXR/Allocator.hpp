@@ -14,7 +14,7 @@
  */
 
 /** @file Allocator.hpp
- * @brief STL-compatible allocator front-ending rho::MemoryBank.
+ * @brief STL-compatible allocator front-ending R::MemoryBank.
  */
 
 #ifndef ALLOCATOR_HPP
@@ -95,10 +95,10 @@ namespace R
 		}
 
 		// initialize elements of allocated storage p with value value
-		void construct(pointer p, const T &value)
+		template <class U, class... Args>
+		void construct(U *p, Args &&... args)
 		{
-			// initialize memory with placement new
-			new (p) T(value);
+			::new ((void *)p) U(std::forward<Args>(args)...);
 		}
 
 		// destroy elements of initialized storage p

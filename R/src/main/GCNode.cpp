@@ -26,12 +26,13 @@
  */
 
 #include <CXXR/GCNode.hpp>
+#include <CXXR/RAllocStack.hpp>
 #include <iostream>
 
 namespace R
 {
     unsigned int GCNode::s_last_gen;
-    std::vector<GCNode*> GCNode::s_genpeg;
+    std::vector<GCNode *> GCNode::s_genpeg;
     std::vector<unsigned int> GCNode::s_gencount;
     size_t GCNode::s_num_nodes;
 
@@ -50,78 +51,85 @@ namespace R
         link(m_prev, m_next);
     }
 
-bool GCNode::check()
-{
-    if (s_genpeg.size() == 0) {
-	std::cerr << "GCNode::check() : class not initialised.\n";
-	abort();
-    }
-    if (s_genpeg.size() != s_last_gen + 1
-	|| s_genpeg.size() != s_gencount.size()) {
-	std::cerr << "GCNode::check() : internal vectors inconsistently sized.\n";
-	abort();
-    }
-    // Check each generation:
+    bool GCNode::check()
     {
-	unsigned int numnodes = 0;
-	for (unsigned int gen = 0; gen <= s_last_gen; ++gen) {
-	    unsigned int gct = 0;
-	    OldToNewChecker o2n(gen);
-	    for (const GCNode* node = s_genpeg[gen]->next();
-		 node != s_genpeg[gen]; node = node->next()) {
-		++gct;
-		if (node->isMarked()) {
-		    std::cerr << "GCNode::check() : marked node found for gen = " << gen << ".\n";
-		    abort();
-		}
-		if (node->m_gcgen != gen) {
-		    std::cerr << "GCNode::check() : node has wrong generation for its list (node gen = " << node->m_gcgen << ", list gen = " << gen << ").\n";
-		    abort();
-		}
-		node->visitChildren(&o2n);
-	    }
-	    if (gct != s_gencount[gen]) {
-		std::cerr << "GCNode::check() : nodes in generation " << gen << " wrongly counted.\n";
-		std::cerr << "GCNode::check() : expected s_gencount[" << gen << "] = " << s_gencount[gen] << ", got: " << gct << ".\n";
-		abort();
-	    }
-	    numnodes += gct;
-	}
-	if (numnodes != s_num_nodes) {
-	    std::cerr << "GCNode::check() : generation node totals inconsistent with grand total.\n";
-		std::cerr << "GCNode::check() : expected s_num_nodes = " << s_num_nodes << ", got: " << numnodes << "\n.";
-	    abort();
-	}
+        if (s_genpeg.size() == 0)
+        {
+            std::cerr << "GCNode::check() : class not initialised.\n";
+            abort();
+        }
+        if (s_genpeg.size() != s_last_gen + 1 || s_genpeg.size() != s_gencount.size())
+        {
+            std::cerr << "GCNode::check() : internal vectors inconsistently sized.\n";
+            abort();
+        }
+        // Check each generation:
+        {
+            unsigned int numnodes = 0;
+            for (unsigned int gen = 0; gen <= s_last_gen; ++gen)
+            {
+                unsigned int gct = 0;
+                OldToNewChecker o2n(gen);
+                for (const GCNode *node = s_genpeg[gen]->next();
+                     node != s_genpeg[gen]; node = node->next())
+                {
+                    ++gct;
+                    if (node->isMarked())
+                    {
+                        std::cerr << "GCNode::check() : marked node found for gen = " << gen << ".\n";
+                        abort();
+                    }
+                    if (node->m_gcgen != gen)
+                    {
+                        std::cerr << "GCNode::check() : node has wrong generation for its list (node gen = " << node->m_gcgen << ", list gen = " << gen << ").\n";
+                        abort();
+                    }
+                    node->visitChildren(&o2n);
+                }
+                if (gct != s_gencount[gen])
+                {
+                    std::cerr << "GCNode::check() : nodes in generation " << gen << " wrongly counted.\n";
+                    std::cerr << "GCNode::check() : expected s_gencount[" << gen << "] = " << s_gencount[gen] << ", got: " << gct << ".\n";
+                    abort();
+                }
+                numnodes += gct;
+            }
+            if (numnodes != s_num_nodes)
+            {
+                std::cerr << "GCNode::check() : generation node totals inconsistent with grand total.\n";
+                std::cerr << "GCNode::check() : expected s_num_nodes = " << s_num_nodes << ", got: " << numnodes << "\n.";
+                abort();
+            }
+        }
+        return true;
     }
-    return true;
-}
 
     void GCNode::initialize(unsigned int num_old_generations)
     {
         if (s_genpeg.size() == 0)
         {
-        s_last_gen = num_old_generations;
-        s_genpeg.resize(num_old_generations + 1);
-        s_gencount.resize(num_old_generations + 1, 0);
-        for (unsigned int gen = 0; gen <= s_last_gen; ++gen)
-            s_genpeg[gen] = new GCNode(0);
+            s_last_gen = num_old_generations;
+            s_genpeg.resize(num_old_generations + 1);
+            s_gencount.resize(num_old_generations + 1, 0);
+            for (unsigned int gen = 0; gen <= s_last_gen; ++gen)
+                s_genpeg[gen] = new GCNode(0);
+        }
     }
-}
 
-bool GCNode::Ager::operator()(const GCNode *node)
-{
-    if (node->m_gcgen < m_mingen) // node is younger than the minimum age required
+    bool GCNode::Ager::operator()(const GCNode *node)
     {
-        --s_gencount[node->m_gcgen];
-        node->m_gcgen = m_mingen;
-        s_genpeg[m_mingen]->splice(node);
-        ++s_gencount[m_mingen];
+        if (node->m_gcgen < m_mingen) // node is younger than the minimum age required
+        {
+            --s_gencount[node->m_gcgen];
+            node->m_gcgen = m_mingen;
+            s_genpeg[m_mingen]->splice(node);
+            ++s_gencount[m_mingen];
 
-        return true;
+            return true;
+        }
+        else
+            return false;
     }
-    else
-        return false;
-}
 
     bool GCNode::Marker::operator()(const GCNode *node)
     {
@@ -179,5 +187,19 @@ bool GCNode::Ager::operator()(const GCNode *node)
         if (!x)
             return;
         x->m_marked = v;
+    }
+
+    void initializeMemorySubsystem()
+    {
+        static bool initialized = false;
+        if (!initialized)
+        {
+            // MemoryBank::initialize();
+            // GCNode::initialize();
+            // ProtectStack::initialize();
+            RAllocStack::initialize();
+
+            initialized = true;
+        }
     }
 } // namespace R

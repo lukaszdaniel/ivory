@@ -72,4 +72,12 @@ namespace R
             return;
         x->u.primsxp.m_offset = v;
     }
+
+    CCODE PRIMFUN(RObject *x) { return R_FunTab[PRIMOFFSET(x)].cfun(); }
+    const char *PRIMNAME(RObject *x) { return R_FunTab[PRIMOFFSET(x)].name(); }
+    int PRIMVAL(RObject *x) { return R_FunTab[PRIMOFFSET(x)].code(); }
+    int PRIMARITY(RObject *x) { return R_FunTab[PRIMOFFSET(x)].arity(); }
+    PPinfo PPINFO(RObject *x) { return R_FunTab[PRIMOFFSET(x)].gram(); }
+    int PRIMPRINT(RObject *x) { return ((R_FunTab[PRIMOFFSET(x)].evalargs()) / 100) % 10; }
+    int PRIMINTERNAL(RObject *x) { return ((R_FunTab[PRIMOFFSET(x)].evalargs()) % 100) / 10; }
 } // namespace R

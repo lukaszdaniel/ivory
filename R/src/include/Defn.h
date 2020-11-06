@@ -54,6 +54,7 @@
 #include <CXXR/Environment.hpp>
 #include <CXXR/Promise.hpp>
 #include <CXXR/Closure.hpp>
+#include <CXXR/RAllocStack.hpp>
 
 /* To test the write barrier used by the generational collector,
    define TESTING_WRITE_BARRIER.  This makes the internal structure of
@@ -145,15 +146,6 @@ SEXP (SET_CXTAIL)(SEXP x, SEXP y);
 extern "C" void R_ProcessEvents(void);
 #ifdef _WIN32
 extern void R_WaitEvent(void);
-#endif
-
-#ifdef R_USE_SIGNALS
-#ifdef _WIN32
-#include <psignal.h>
-#else
-#include <csignal>
-#include <csetjmp>
-#endif
 #endif
 
 #ifdef Unix
@@ -278,118 +270,17 @@ constexpr size_t PATH_MAX = 5000;
 #endif
 #endif
 
-#ifdef R_USE_SIGNALS
-#ifdef HAVE_POSIX_SETJMP
-#define SIGJMP_BUF sigjmp_buf
-#define SIGSETJMP(x, s) sigsetjmp(x, s)
-#define SIGLONGJMP(x, i) siglongjmp(x, i)
-#define JMP_BUF sigjmp_buf
-#define SETJMP(x) sigsetjmp(x, 0)
-#define LONGJMP(x, i) siglongjmp(x, i)
-#else
-#define SIGJMP_BUF jmp_buf
-#define SIGSETJMP(x, s) setjmp(x)
-#define SIGLONGJMP(x, i) longjmp(x, i)
-#define JMP_BUF jmp_buf
-#define SETJMP(x) setjmp(x)
-#define LONGJMP(x, i) longjmp(x, i)
-#endif
-#endif
-
 constexpr int HSIZE = 49157;	/* The size of the hash table for symbols */
 constexpr int MAXIDSIZE = 10000; /* Largest symbol size,                  \
                in bytes excluding terminator.                    \
                Was 256 prior to 2.13.0, now just a sanity check. \
             */
 
-/* The type of the do_xxxx functions. */
-/* These are the built-in R functions. */
-using CCODE = SEXP(*)(SEXP, SEXP, SEXP, SEXP);
-
-/* Information for Deparsing Expressions */
-enum PPkind
-{
-    PP_INVALID = 0,
-    PP_ASSIGN = 1,
-    PP_ASSIGN2 = 2,
-    PP_BINARY = 3,
-    PP_BINARY2 = 4,
-    PP_BREAK = 5,
-    PP_CURLY = 6,
-    PP_FOR = 7,
-    PP_FUNCALL = 8,
-    PP_FUNCTION = 9,
-    PP_IF = 10,
-    PP_NEXT = 11,
-    PP_PAREN = 12,
-    PP_RETURN = 13,
-    PP_SUBASS = 14,
-    PP_SUBSET = 15,
-    PP_WHILE = 16,
-    PP_UNARY = 17,
-    PP_DOLLAR = 18,
-    PP_FOREIGN = 19,
-    PP_REPEAT = 20
-};
-
-enum PPprec
-{
-    PREC_FN = 0,
-    PREC_EQ = 1,
-    PREC_LEFT = 2,
-    PREC_RIGHT = 3,
-    PREC_TILDE = 4,
-    PREC_OR = 5,
-    PREC_AND = 6,
-    PREC_NOT = 7,
-    PREC_COMPARE = 8,
-    PREC_SUM = 9,
-    PREC_PROD = 10,
-    PREC_PERCENT = 11,
-    PREC_COLON = 12,
-    PREC_SIGN = 13,
-    PREC_POWER = 14,
-    PREC_SUBSET = 15,
-    PREC_DOLLAR = 16,
-    PREC_NS = 17
-};
-
-struct PPinfo
-{
-    PPkind kind;             /* deparse kind */
-    PPprec precedence;       /* operator precedence */
-    bool rightassoc; /* right associative? */
-};
-
-/* The type definitions for the table of built-in functions. */
-/* This table can be found in ../main/names.cpp */
-struct FUNTAB
-{
-    const char *name; /* print name */
-    CCODE cfun;       /* c-code address */
-    int code;         /* offset within c-code */
-    int eval;         /* evaluate args? */
-    int arity;        /* function arity */
-    PPinfo gram;      /* pretty-print info */
-};
-
 #ifdef USE_RINTERNALS
 
 // Content moved to RObject.hpp
 
 #else /* of USE_RINTERNALS */
-
-int (PRIMOFFSET)(SEXP x);
-void (SET_PRIMOFFSET)(SEXP x, int v);
-
-#define PRIMFUN(x) (R_FunTab[PRIMOFFSET(x)].cfun)
-#define PRIMNAME(x) (R_FunTab[PRIMOFFSET(x)].name)
-#define PRIMVAL(x) (R_FunTab[PRIMOFFSET(x)].code)
-#define PRIMARITY(x) (R_FunTab[PRIMOFFSET(x)].arity)
-#define PPINFO(x) (R_FunTab[PRIMOFFSET(x)].gram)
-#define PRIMPRINT(x) (((R_FunTab[PRIMOFFSET(x)].eval) / 100) % 10)
-#define PRIMINTERNAL(x) (((R_FunTab[PRIMOFFSET(x)].eval) % 100) / 10)
-
 
 Rboolean (IS_ACTIVE_BINDING)(SEXP b);
 Rboolean (BINDING_IS_LOCKED)(SEXP b);
@@ -443,182 +334,7 @@ inline int IS_PARTIAL_SXP_TAG(int x) { return ((x)&PARTIALSXP_MASK); }
 constexpr int RAWMEM_TAG = 254;
 constexpr int CACHESZ_TAG = 253;
 
-#ifdef R_USE_SIGNALS
-/* Stack entry for pending promises */
-struct RPRSTACK
-{
-    SEXP promise;
-    RPRSTACK *next;
-};
-
-/* The Various Context Types.
-
- * In general the type is a bitwise OR of the values below.
- * Note that CTXT_LOOP is already the or of CTXT_NEXT and CTXT_BREAK.
- * Only functions should have the third bit turned on;
- * this allows us to move up the context stack easily
- * with either RETURN's or GENERIC's or RESTART's.
- * If you add a new context type for functions make sure
- *   CTXT_NEWTYPE & CTXT_FUNCTION > 0
- */
-enum CTXT
-{
-    CTXT_TOPLEVEL = 0,
-    CTXT_NEXT = 1,
-    CTXT_BREAK = 2,
-    CTXT_LOOP = 3, /* break OR next target */
-    CTXT_FUNCTION = 4,
-    CTXT_CCODE = 8,
-    CTXT_RETURN = 12,
-    CTXT_BROWSER = 16,
-    CTXT_GENERIC = 20,
-    CTXT_RESTART = 32,
-    CTXT_BUILTIN = 64, /* used in profiling */
-    CTXT_UNWIND = 128
-};
-
-/*    1 2 4 8 ...
-TOP   0 0 0 0 0 0  = 0
-NEX   1 0 0 0 0 0  = 1
-BRE   0 1 0 0 0 0  = 2
-LOO   1 1 0 0 0 0  = 3
-FUN   0 0 1 0 0 0  = 4
-CCO   0 0 0 1 0 0  = 8
-BRO   0 0 0 0 1 0  = 16
-RET   0 0 1 1 0 0  = 12
-GEN   0 0 1 0 1 0  = 20
-RES   0 0 0 0 0 0 1 = 32
-BUI   0 0 0 0 0 0 0 1 = 64
-*/
-
-/* Evaluation Context Structure */
-class RCNTXT
-{
-    private:
-    RCNTXT *nextcontext;  /* The next context up the chain */
-    int callflag;         /* The context "type" */
-    JMP_BUF cjmpbuf;      /* C stack and register information */
-    int cstacktop;        /* Top of the pointer protection stack */
-    int evaldepth;        /* evaluation depth at inception */
-    SEXP promargs;        /* Promises supplied to closure */
-    SEXP callfun;         /* The closure called */
-    SEXP sysparent;       /* environment the closure was called from */
-    SEXP call;            /* The call that effected this context*/
-    SEXP cloenv;  /* The environment */
-    SEXP conexit;         /* Interpreted "on.exit" code */
-    void (*cend)(void *); /* C "on.exit" thunk */
-    void *cenddata;       /* data for C "on.exit" thunk */
-    void *vmax;           /* top of R_alloc stack */
-    int intsusp;          /* interrupts are suspended */
-    bool gcenabled;        /* R_GCEnabled value */
-    bool bcintactive;      /* R_BCIntActive value */
-    SEXP bcbody;          /* R_BCbody value */
-    void *bcpc;           /* R_BCpc value */
-    SEXP handlerstack;    /* condition handler stack */
-    SEXP restartstack;    /* stack of available restarts */
-    RPRSTACK *prstack;    /* stack of pending promises */
-    R_bcstack_t *nodestack;
-    R_bcstack_t *bcprottop;
-    SEXP srcref;        /* The source line in effect */
-    bool browserfinish;  /* should browser finish this context without
-                                   stopping */
-    SEXP returnValue;   /* only set during on.exit calls */
-    RCNTXT *jumptarget; /* target for a continuing jump */
-    int jumpmask;       /* associated LONGJMP argument */
-    SEXP getCallWithSrcref();
-    RCNTXT *first_jump_target(int mask);
-
-    public:
-    RCNTXT() : nextcontext(nullptr), callflag(0), cjmpbuf(), cstacktop(0), evaldepth(0), promargs(nullptr),
-    callfun(nullptr), sysparent(nullptr), call(nullptr), cloenv(nullptr), conexit(nullptr), cend(nullptr), cenddata(nullptr),
-    vmax(nullptr), intsusp(0), gcenabled(false), bcintactive(false), bcbody(nullptr), bcpc(nullptr), handlerstack(nullptr),
-    restartstack(nullptr), prstack(nullptr), nodestack(nullptr), bcprottop(nullptr), srcref(nullptr), browserfinish(false),
-    returnValue(nullptr), jumptarget(nullptr), jumpmask(0) {};
-    ~RCNTXT() {};
-    SEXP getHandlerStack() const { return this->handlerstack; }
-    void setHandlerStack(SEXP handler) { this->handlerstack = handler; }
-    SEXP onExit() const { return this->conexit; }
-    void setOnExit(SEXP x) { this->conexit = x; }
-    SEXP workingEnvironment() const { return this->cloenv; }
-    void setWorkingEnvironment(SEXP x) {this->cloenv = x; }
-    RCNTXT *nextContext() const { return this->nextcontext; }
-    void setNextContext(RCNTXT *ctxt) { this->nextcontext = ctxt; }
-    SEXP getReturnValue() const { return this->returnValue; }
-    void setReturnValue(SEXP rv) { this->returnValue = rv; }
-    void *getContextEndData() const {return this->cenddata; };
-    void setContextEndData(void *data = nullptr) { cenddata = data; }
-    void setContextEnd(void (*cendf)(void *) = nullptr) { cend = cendf; }
-    void setContextEnd(void (*cendf)(void *), void *data) { cend = cendf; cenddata = data;}
-    auto getContextEnd() { return (this->cend); }
-    int& getCallFlag() { return this->callflag; }
-    int getCallFlag() const { return this->callflag; }
-    void setCallFlag(int cflag) { this->callflag = cflag; }
-    SEXP getSysParent() const { return this->sysparent; }
-    void setSysParent(SEXP sp) { this->sysparent = sp; }
-    SEXP getRestartStack() const { return this->restartstack; }
-    void setRestartStack(SEXP rs) { this->restartstack = rs; }
-    int getCStackTop() const { return this->cstacktop; }
-    void setCStackTop(int stacktop) { this->cstacktop = stacktop; }
-    bool getGCEnabled() const { return this->gcenabled; }
-    void setGCEnabled(bool enabled) { this->gcenabled = enabled;}
-    bool getBCIntactive() const { return this->bcintactive; }
-    void setBCIntactive(bool active) { this->bcintactive = active; }
-    void *getBCPC() const { return this->bcpc; }
-    void setBCPC(void *bc) { this->bcpc = bc; }
-    SEXP getBCBody() const { return this->bcbody; }
-    void setBCBody(SEXP body) { this->bcbody = body; }
-    int getEvalDepth() const { return this->evaldepth; }
-    void setEvalDepth(int depth) { this->evaldepth = depth; }
-    int getIntSusp() const { return this->intsusp; }
-    void setIntSusp(int susp) { this->intsusp = susp; }
-    void *getVMax() const { return this->vmax; }
-    void setVMax(void *vm) { this->vmax = vm; }
-    RPRSTACK *getPrStack() const { return this->prstack; }
-    void setPrStack(RPRSTACK *rpr) { this->prstack = rpr; }
-    RCNTXT *getJumpTarget() const { return this->jumptarget; }
-    void setJumpTarget(RCNTXT * target) { this->jumptarget = target; }
-    int getJumpMask() const { return this->jumpmask; }
-    void setJumpMask(int mask) { this->jumpmask = mask; }
-    R_bcstack_t *getNodeStack() const { return this->nodestack; }
-    void setNodeStack(R_bcstack_t *stack) { this->nodestack = stack; }
-    SEXP getSrcRef() const { return this->srcref; }
-    void setSrcRef(SEXP src) { this->srcref = src; }
-    R_bcstack_t *getBCProtTop() const { return this->bcprottop; }
-    void setBCProtTop(R_bcstack_t *stack) { this->bcprottop = stack; }
-    auto getCJmpBuf() { return this->cjmpbuf; }
-    SEXP getCallFun() const { return this->callfun; }
-    void setCallFun(SEXP cfun) { this->callfun = cfun; }
-    SEXP getPromiseArgs() const { return this->promargs; }
-    void setPromiseArgs(SEXP pargs) { this->promargs = pargs; }
-    SEXP getCall() const { return this->call; }
-    void setCall(SEXP call) { this->call = call; }
-    bool getBrowserFinish() const { return this->browserfinish; }
-    void setBrowserFinish(bool finish) { this->browserfinish = finish; }
-    bool isRestartBitSet() const { return (this->callflag & CTXT_RESTART); }
-    void setRestartBitOn() { this->callflag |= CTXT_RESTART; }
-    void setRestartBitOff() { this->callflag &= ~CTXT_RESTART; }
-    int R_sysparent(int n);
-    SEXP R_sysfunction(int n);
-    SEXP R_syscall(int n);
-    void R_restore_globals();
-    static void R_run_onexits(RCNTXT *cptr = nullptr);
-    NORET void R_jumpctxt(int mask, SEXP val);
-    SEXP R_sysframe(int n);
-    int Rf_framedepth();
-    void start(int, SEXP, SEXP, SEXP, SEXP, SEXP);
-    static void begincontext(RCNTXT &, int, SEXP, SEXP, SEXP, SEXP, SEXP);
-    static void begincontext(RCNTXT *, int, SEXP, SEXP, SEXP, SEXP, SEXP);
-    static SEXP dynamicfindVar(SEXP, RCNTXT *);
-    void end();
-    static void endcontext(RCNTXT &);
-    static void endcontext(RCNTXT *);
-    static void R_InsertRestartHandlers(RCNTXT *, const char *);
-    NORET static void R_JumpToContext(RCNTXT *, int, SEXP);
-    static RCNTXT *R_findExecContext(RCNTXT *, SEXP);
-    static RCNTXT *R_findParentContext(RCNTXT *, int);
-    static RCNTXT *findProfContext(RCNTXT *cptr);
-};
-#endif // R_USE_SIGNALS
+#include <RCNTXT.h>
 
 /* Miscellaneous Definitions */
 inline bool streql(const char *s, const char *t)
@@ -666,10 +382,6 @@ constexpr int R_EOF = -1;
 
 /*--- Global Variables ---------------------------------------------------- */
 
-/* Defined and initialized in names.cpp (not main.cpp) :*/
-#ifndef __R_Names__
-extern std::vector<FUNTAB> R_FunTab; /* Built in functions */
-#endif
 extern "C" {
 #include <R_ext/libextern.h>
 
