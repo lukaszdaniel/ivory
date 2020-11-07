@@ -571,7 +571,7 @@ void WeakRef::finalize()
     {
         SEXP e;
         PROTECT(e = Rf_lcons(Rfin, Rf_lcons(key, nullptr)));
-        eval(e, R_GlobalEnv);
+        Rf_eval(e, R_GlobalEnv);
         UNPROTECT(1);
     }
     UNPROTECT(2);

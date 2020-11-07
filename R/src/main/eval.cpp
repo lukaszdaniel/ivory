@@ -1887,38 +1887,43 @@ inline static SEXP R_execClosure(SEXP call, SEXP newrho, SEXP sysparent,
     /*  Set a longjmp target which will catch any explicit returns
 	from the function body.  */
 #ifdef USE_JMP
-	// std::cerr << __FILE__ << ":" << __LINE__ << " Entering try/catch for " << &cntxt << std::endl;
-	try
+	bool redo = false;
+	do
 	{
-		/* make it available to on.exit and implicitly protect */
-		cntxt.setReturnValue(eval(body, newrho));
-	}
-	catch (JMPException &e)
-	{
-		// std::cerr << __FILE__ << ":" << __LINE__ << " Seeking " << e.context << "; in " << &cntxt << std::endl;
-		if (e.context != &cntxt)
-			throw;
-		if (!cntxt.getJumpTarget())
+		redo = false;
+		// std::cerr << __FILE__ << ":" << __LINE__ << " Entering try/catch for " << &cntxt << std::endl;
+		try
 		{
-			/* ignores intermediate jumps for on.exits */
-			if (R_ReturnedValue == R_RestartToken)
+			/* make it available to on.exit and implicitly protect */
+			cntxt.setReturnValue(eval(body, newrho));
+		}
+		catch (JMPException &e)
+		{
+			// std::cerr << __FILE__ << ":" << __LINE__ << " Seeking " << e.context << "; in " << &cntxt << std::endl;
+			if (e.context != &cntxt)
+				throw;
+			if (!cntxt.getJumpTarget())
 			{
-				cntxt.setCallFlag(CTXT_RETURN); /* turn restart off */
-				R_ReturnedValue = R_NilValue;	/* remove restart token */
-				cntxt.setReturnValue(eval(body, newrho));
+				/* ignores intermediate jumps for on.exits */
+				if (R_ReturnedValue == R_RestartToken)
+				{
+					cntxt.setCallFlag(CTXT_RETURN); /* turn restart off */
+					R_ReturnedValue = R_NilValue;	/* remove restart token */
+					redo = true;
+				}
+				else
+				{
+					cntxt.setReturnValue(R_ReturnedValue);
+				}
 			}
 			else
 			{
-				cntxt.setReturnValue(R_ReturnedValue);
+				cntxt.setReturnValue(nullptr); /* undefined */
 			}
 		}
-		else
-		{
-			cntxt.setReturnValue(nullptr); /* undefined */
-		}
-	}
+		// std::cerr << __FILE__ << ":" << __LINE__ << " Exiting  try/catch for "  << &cntxt << std::endl;
+	} while (redo);
 		R_Srcref = cntxt.getSrcRef();
-	// std::cerr << __FILE__ << ":" << __LINE__ << " Exiting  try/catch for "  << &cntxt << std::endl;
 #else
 	if (!(SETJMP(cntxt.getCJmpBuf())))
 	{
@@ -7234,6 +7239,8 @@ static SEXP bcEval(SEXP body, SEXP rho, bool useCache)
 		// std::cerr << __FILE__ << ":" << __LINE__ << " Exiting  try/catch for " << cptr << std::endl;
 #else
 		switch (SETJMP(cptr->getCJmpBuf())) {
+		case 0:
+			break;
 		case CTXT_BREAK:
 		    pc = codebase + LOOP_BREAK_OFFSET(FOR_LOOP_STATE_SIZE);
 		    break;
@@ -7268,6 +7275,8 @@ static SEXP bcEval(SEXP body, SEXP rho, bool useCache)
 #else
 		switch (SETJMP(cptr->getCJmpBuf()))
 		{
+		case 0:
+			break;
 		case CTXT_BREAK:
 			pc = codebase + LOOP_BREAK_OFFSET(0);
 			break;

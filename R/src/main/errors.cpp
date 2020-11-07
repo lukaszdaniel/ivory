@@ -185,7 +185,12 @@ static void onintrEx(Rboolean resumeOK)
 	}
 	// std::cerr << __FILE__ << ":" << __LINE__ << " Exiting  try/catch for " << &restartcontext << std::endl;
 #else
-	if (SETJMP(restartcontext.getCJmpBuf()))
+	if (!SETJMP(restartcontext.getCJmpBuf()))
+	{
+		RCNTXT::R_InsertRestartHandlers(&restartcontext, "resume");
+		signalInterrupt();
+	}
+	else
 	{
 		SET_RDEBUG(rho, dbflag); /* in case browser() has messed with it */
 		R_ReturnedValue = R_NilValue;
@@ -193,8 +198,6 @@ static void onintrEx(Rboolean resumeOK)
 		restartcontext.end();
 		return;
 	}
-	RCNTXT::R_InsertRestartHandlers(&restartcontext, "resume");
-	signalInterrupt();
 #endif
 	restartcontext.end();
     }
