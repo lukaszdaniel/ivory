@@ -50,18 +50,6 @@
 #include <stddef.h> /* for ptrdiff_t, which is required by C99 */
 #endif
 
-#if defined(COMPILING_IVORY) && defined(__cplusplus)
-
-    namespace R
-    {
-        class RObject;
-    }
-    using SEXP = R::RObject *;
-#else
-    #define RObject SEXPREC
-    typedef struct RObject *SEXP;
-#endif
-
 #ifdef __cplusplus
 extern "C" {
 #endif
@@ -77,7 +65,7 @@ extern "C" {
 #include <R_ext/Rdynload.h> // for DL_FUNC
 
 #include <R_ext/libextern.h>
-#include <CXXR/RTypes.hpp>
+#include <CXXR/RTypes.hpp> // for RObject, SEXPREC, Rbyte, R_*_t, 
 
 #define DO_NOTHING do {} while(0)
 

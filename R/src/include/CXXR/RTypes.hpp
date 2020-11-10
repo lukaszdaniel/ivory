@@ -37,6 +37,18 @@
 #include <stddef.h> /* for ptrdiff_t, which is required by C99 */
 #endif
 
+#if defined(COMPILING_IVORY) && defined(__cplusplus)
+
+    namespace R
+    {
+        class RObject;
+    }
+    using SEXP = R::RObject *;
+#else
+    #define RObject SEXPREC
+    typedef struct RObject *SEXP;
+#endif
+
 #ifdef HAVE_CONFIG_H
 #include <config.h>
 #endif
