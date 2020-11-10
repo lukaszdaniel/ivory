@@ -245,6 +245,7 @@ HIDDEN NORET void RCNTXT::R_jumpctxt(int mask, SEXP val)
     // std::cerr << __FILE__ << ":" << __LINE__ << " About to throw JMPException(" << cptr << ", " << mask << ")" << std::endl;
     throw JMPException(cptr, mask);
 #else
+    // std::cerr << __FILE__ << ":" << __LINE__ << " About to throw JMPException(" << cptr << ", " << mask << ")" << std::endl;
     LONGJMP(cptr->getCJmpBuf(), mask);
 #endif
 }
@@ -805,21 +806,37 @@ Rboolean R_ToplevelExec(void (*fun)(void *), void *data)
 
     thiscontext.start(CTXT_TOPLEVEL, R_NilValue, R_GlobalEnv, R_BaseEnv, R_NilValue, R_NilValue);
 #ifdef USE_JMP
-    // std::cerr << __FILE__ << ":" << __LINE__ << " Entering try/catch for " << &thiscontext << std::endl;
-    try
+    bool redo = false;
+    bool jumped = false;
+    do
     {
-        R_GlobalContext = R_ToplevelContext = &thiscontext;
-        fun(data);
-        result = TRUE;
-    }
-    catch (JMPException &e)
-    {
-        // std::cerr << __FILE__ << ":" << __LINE__ << " Seeking  " << e.context << "; in " << &thiscontext << std::endl;
-        if (e.context != &thiscontext)
-            throw;
-        result = FALSE;
-    }
-       // std::cerr << __FILE__ << ":" << __LINE__ << " Exiting  try/catch for " << &thiscontext << std::endl;
+        redo = false;
+        // std::cerr << __FILE__ << ":" << __LINE__ << " Entering try/catch for " << &thiscontext << std::endl;
+
+        try
+        {
+            if (!jumped)
+            {
+                R_GlobalContext = R_ToplevelContext = &thiscontext;
+                fun(data);
+                result = TRUE;
+            }
+            else
+            {
+                result = FALSE;
+            }
+            thiscontext.end();
+        }
+        catch (JMPException &e)
+        {
+            // std::cerr << __FILE__ << ":" << __LINE__ << " Seeking  " << e.context << "; in " << &thiscontext << std::endl;
+            if (e.context != &thiscontext)
+                throw;
+            redo = true;
+            jumped = true;
+        }
+        // std::cerr << __FILE__ << ":" << __LINE__ << " Exiting  try/catch for " << &thiscontext << std::endl;
+    } while (redo);
 #else
     if (!SETJMP(thiscontext.getCJmpBuf()))
     {
@@ -831,8 +848,8 @@ Rboolean R_ToplevelExec(void (*fun)(void *), void *data)
     {
         result = FALSE;
     }
-#endif
     thiscontext.end();
+#endif
 
     R_ToplevelContext = saveToplevelContext;
     R_CurrentExpr = topExp;
@@ -984,26 +1001,41 @@ SEXP R_UnwindProtect(SEXP (*fun)(void *data), void *data,
 
     thiscontext.start(CTXT_UNWIND, R_NilValue, R_GlobalEnv, R_BaseEnv, R_NilValue, R_NilValue);
 #ifdef USE_JMP
-    // std::cerr << __FILE__ << ":" << __LINE__ << " Entering try/catch for " << &thiscontext << std::endl;
-    try
+    bool redo = false;
+    bool jumped = false;
+    do
     {
-        result = fun(data);
-        SETCAR(cont, result);
-        jump = FALSE;
-    }
-    catch (JMPException &e)
-    {
-        // std::cerr << __FILE__ << ":" << __LINE__ << " Seeking  " << e.context << "; in " << &thiscontext << std::endl;
-        if (e.context != &thiscontext)
-            throw;
-        jump = TRUE;
-        SETCAR(cont, R_ReturnedValue);
-        unwind_cont_t *u = (unwind_cont_t *)RAWDATA(CDR(cont));
-        u->jumpmask = thiscontext.getJumpMask();
-        u->jumptarget = thiscontext.getJumpTarget();
-        thiscontext.setJumpTarget(nullptr);
-    }
-    // std::cerr << __FILE__ << ":" << __LINE__ << " Exiting  try/catch for " << &thiscontext << std::endl;
+        redo = false;
+        // std::cerr << __FILE__ << ":" << __LINE__ << " Entering try/catch for " << &thiscontext << std::endl;
+        try
+        {
+            if (!jumped)
+            {
+                result = fun(data);
+                SETCAR(cont, result);
+                jump = FALSE;
+            }
+            else
+            {
+                jump = TRUE;
+                SETCAR(cont, R_ReturnedValue);
+                unwind_cont_t *u = (unwind_cont_t *)RAWDATA(CDR(cont));
+                u->jumpmask = thiscontext.getJumpMask();
+                u->jumptarget = thiscontext.getJumpTarget();
+                thiscontext.setJumpTarget(nullptr);
+            }
+            thiscontext.end();
+        }
+        catch (JMPException &e)
+        {
+            // std::cerr << __FILE__ << ":" << __LINE__ << " Seeking  " << e.context << "; in " << &thiscontext << std::endl;
+            if (e.context != &thiscontext)
+                throw;
+            redo = true;
+            jumped = true;
+        }
+        // std::cerr << __FILE__ << ":" << __LINE__ << " Exiting  try/catch for " << &thiscontext << std::endl;
+    } while (redo);
 #else
     if (!SETJMP(thiscontext.getCJmpBuf()))
     {
@@ -1020,8 +1052,8 @@ SEXP R_UnwindProtect(SEXP (*fun)(void *data), void *data,
         u->jumptarget = thiscontext.getJumpTarget();
         thiscontext.setJumpTarget(nullptr);
     }
-#endif
     thiscontext.end();
+#endif
 
     cleanfun(cleandata, jump);
 

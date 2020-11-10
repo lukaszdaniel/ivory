@@ -18,6 +18,11 @@
  *  https://www.R-project.org/Licenses/
  */
 
+/** @file character.cpp
+ *
+ * All sorts of character manipulation, including grep and agrep.
+ */
+
 /* The character functions in this file are
 
 nzchar nchar substr substr<- abbreviate tolower toupper chartr strtrim

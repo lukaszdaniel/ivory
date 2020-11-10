@@ -623,19 +623,31 @@ bool WeakRef::runFinalizers()
             PROTECT(topExp = R_CurrentExpr);
             volatile int savestack = R_PPStackTop;
 #ifdef USE_JMP
-            // std::cerr << __FILE__ << ":" << __LINE__ << " Entering try/catch for " << &thiscontext << std::endl;
-            try
+            bool redo = false;
+            bool jumped = false;
+            do
             {
-                R_GlobalContext = R_ToplevelContext = &thiscontext;
-                runWeakRefFinalizer(wr);
-            }
-            catch (JMPException &e)
-            {
-                // std::cerr << __FILE__ << ":" << __LINE__ << " Seeking " << e.context << "; in " << &thiscontext << std::endl;
-                if (e.context != &thiscontext)
-                    throw;
-            }
-            // std::cerr << __FILE__ << ":" << __LINE__ << " Exiting  try/catch for " << &thiscontext << std::endl;
+                redo = false;
+                // std::cerr << __FILE__ << ":" << __LINE__ << " Entering try/catch for " << &thiscontext << std::endl;
+                try
+                {
+                    if (!jumped)
+                    {
+                        R_GlobalContext = R_ToplevelContext = &thiscontext;
+                        runWeakRefFinalizer(wr);
+                    }
+                    thiscontext.end();
+                }
+                catch (JMPException &e)
+                {
+                    // std::cerr << __FILE__ << ":" << __LINE__ << " Seeking " << e.context << "; in " << &thiscontext << std::endl;
+                    if (e.context != &thiscontext)
+                        throw;
+                    redo = true;
+                    jumped = true;
+                }
+                // std::cerr << __FILE__ << ":" << __LINE__ << " Exiting  try/catch for " << &thiscontext << std::endl;
+            } while (redo);
 #else
             if (!SETJMP(thiscontext.getCJmpBuf()))
             {
@@ -643,8 +655,8 @@ bool WeakRef::runFinalizers()
 
                 runWeakRefFinalizer(wr);
             }
-#endif
             thiscontext.end();
+#endif
             UNPROTECT(1); /* next */
             R_ToplevelContext = saveToplevelContext;
             R_PPStackTop = savestack;
@@ -797,7 +809,7 @@ void GCNode::gc(unsigned int num_old_gens_to_collect)
     {
         if (sp->tag == RAWMEM_TAG)
             sp += sp->u.ival;
-        else if (sp->tag == 0 || IS_PARTIAL_SXP_TAG(sp->tag))
+        else if (sp->tag == 0 || R_bcstack_t::IS_PARTIAL_SXP_TAG(sp->tag))
             MARK_THRU(&marker, sp->u.sxpval);
     }
 

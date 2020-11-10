@@ -19,6 +19,12 @@
  *  https://www.R-project.org/Licenses/
  */
 
+/** @file coerce.cpp
+ *
+ * Coercions from one R type to another, including various 'is' and
+ * 'as' functions.  Also 'quote'.
+ */
+
 #ifdef HAVE_CONFIG_H
 #include <config.h>
 #endif

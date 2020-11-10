@@ -28,6 +28,11 @@
    probably continue to ignore).
 */
 
+/** @file scan.cpp
+ *
+ * Input scanning routines including scan and readline.
+ */
+
 #ifdef HAVE_CONFIG_H
 #include <config.h>
 #endif

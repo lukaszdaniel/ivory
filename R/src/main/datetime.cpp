@@ -20,6 +20,11 @@
  *      Interfaces to POSIX date-time conversion functions.
  */
 
+/** @file datetime.cpp
+ *
+ * Date and time manipulation functions.
+ */
+
 /*
     These use POSIX functions which are now also part of C99 so are
     almost universally available, albeit with more room for

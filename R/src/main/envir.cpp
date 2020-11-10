@@ -87,6 +87,12 @@
  *
  * LT */
 
+/** @file envir.cpp
+ *
+ * Environments: all the action of associating values with symbols
+ * happens in this code.
+ */
+
 #ifdef HAVE_CONFIG_H
 #include <config.h>
 #endif

@@ -17,6 +17,11 @@
  *  https://www.R-project.org/Licenses/
  */
 
+/** @file errors.cpp
+ *
+ * Error and warning handling.
+ */
+
 #ifdef HAVE_CONFIG_H
 #include <config.h>
 #endif
@@ -166,24 +171,39 @@ static void onintrEx(Rboolean resumeOK)
 	RCNTXT restartcontext;
 	restartcontext.start(CTXT_RESTART, R_NilValue, R_GlobalEnv, R_BaseEnv, R_NilValue, R_NilValue);
 #ifdef USE_JMP
-	// std::cerr << __FILE__ << ":" << __LINE__ << " Entering try/catch for " << &restartcontext << std::endl;
-	try
+	bool redo = false;
+	bool jumped = false;
+	do
 	{
-		RCNTXT::R_InsertRestartHandlers(&restartcontext, "resume");
-		signalInterrupt();
-	}
-	catch (JMPException &e)
-	{
-		// std::cerr << __FILE__ << ":" << __LINE__ << " Seeking  " << e.context << "; in " << &restartcontext << std::endl;
-		if (e.context != &restartcontext)
-			throw;
-		SET_RDEBUG(rho, dbflag); /* in case browser() has messed with it */
-		R_ReturnedValue = R_NilValue;
-		R_Visible = false;
-		restartcontext.end();
-		return;
-	}
-	// std::cerr << __FILE__ << ":" << __LINE__ << " Exiting  try/catch for " << &restartcontext << std::endl;
+		redo = false;
+		// std::cerr << __FILE__ << ":" << __LINE__ << " Entering try/catch for " << &restartcontext << std::endl;
+		try
+		{
+			if (!jumped)
+			{
+				RCNTXT::R_InsertRestartHandlers(&restartcontext, "resume");
+				signalInterrupt();
+			}
+			else
+			{
+				SET_RDEBUG(rho, dbflag); /* in case browser() has messed with it */
+				R_ReturnedValue = R_NilValue;
+				R_Visible = false;
+				restartcontext.end();
+				return;
+			}
+			restartcontext.end();
+		}
+		catch (JMPException &e)
+		{
+			// std::cerr << __FILE__ << ":" << __LINE__ << " Seeking  " << e.context << "; in " << &restartcontext << std::endl;
+			if (e.context != &restartcontext)
+				throw;
+			redo = true;
+			jumped = true;
+		}
+		// std::cerr << __FILE__ << ":" << __LINE__ << " Exiting  try/catch for " << &restartcontext << std::endl;
+	} while (redo);
 #else
 	if (!SETJMP(restartcontext.getCJmpBuf()))
 	{
@@ -198,8 +218,8 @@ static void onintrEx(Rboolean resumeOK)
 		restartcontext.end();
 		return;
 	}
-#endif
 	restartcontext.end();
+#endif
     }
     else signalInterrupt();
 
@@ -1446,52 +1466,6 @@ HIDDEN void R::WarningMessage(SEXP call, int which_warn, ...)
     va_end(ap);
     warningcall(call, "%s", buf);
 }
-
-#ifdef UNUSED
-/* temporary hook to allow experimenting with alternate warning mechanisms */
-static void (*R_WarningHook)(SEXP, char *) = nullptr;
-
-void R_SetWarningHook(void (*hook)(SEXP, char *))
-{
-    R_WarningHook = hook;
-}
-
-void R_SetErrorHook(void (*hook)(SEXP, char *))
-{
-    R_ErrorHook = hook;
-}
-
-void R_ReturnOrRestart(SEXP val, SEXP env, Rboolean restart)
-{
-    int mask = CTXT_BROWSER | CTXT_FUNCTION;
-
-    for (RCNTXT *c = R_GlobalContext; c; c = c->nextContext()) {
-	if (c->getCallFlag() & mask && c->workingEnvironment() == env)
-	    findcontext(mask, env, val);
-	else if (restart && c->isRestartBitSet())
-	    findcontext(CTXT_RESTART, c->workingEnvironment(), R_RestartToken);
-	else if (c->getCallFlag() == CTXT_TOPLEVEL)
-	    error(_("no function to return from, jumping to top level"));
-    }
-}
-
-NORET void R_JumpToToplevel(Rboolean restart)
-{
-    RCNTXT *c;
-
-    /* Find the target for the jump */
-    for (c = R_GlobalContext; c != nullptr; c = c->nextContext()) {
-	if (restart && c->isRestartBitSet())
-	    findcontext(CTXT_RESTART, c->workingEnvironment(), R_RestartToken);
-	else if (c->getCallFlag() == CTXT_TOPLEVEL)
-	    break;
-    }
-    if (c != R_ToplevelContext)
-	warning(_("top level inconsistency?"));
-
-    R_ToplevelContext->R_jumpctxt(CTXT_TOPLEVEL, nullptr);
-}
-#endif
 
 static void R_SetErrmessage(const char *s)
 {

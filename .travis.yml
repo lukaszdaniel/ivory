@@ -1,10 +1,10 @@
 sudo: required
 dist: focal
-language: c
+language: cpp
 
 matrix:
   include:
-    - compiler: gcc
+    - compiler: g++
       addons:
         apt:
           sources:
@@ -38,10 +38,10 @@ matrix:
             - liblzma-dev
             - libpcre3-dev
             - libedit-dev
-            - libomp-10-dev
+            - libomp-dev
             - clang
             - llvm-dev
-      env: C_COMPILER=clang CXX_COMPILER=clang++ LLVM_CONFIG=/usr/bin/llvm-config CFLAGS="-g -O2 -fsanitize=address" CXXFLAGS="${CFLAGS}" MAIN_LDFLAGS="${CFLAGS}"
+      env: C_COMPILER=clang CXX_COMPILER=clang++ LLVM_CONFIG=/usr/bin/llvm-config CFLAGS="-g -O1" CXXFLAGS="${CFLAGS}" MAIN_LDFLAGS="${CFLAGS}"
 script:
         - ${CXX_COMPILER} --version
         - cd R

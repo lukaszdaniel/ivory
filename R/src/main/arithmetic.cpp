@@ -19,6 +19,12 @@
  *  https://www.R-project.org/Licenses/
  */
 
+/** @arithmetic.cpp
+ *
+ * All sorts of arithmetical and mathematical functions, from addition
+ * through to Bessel functions.
+ */
+
 #ifdef HAVE_CONFIG_H
 #include <config.h>
 #endif

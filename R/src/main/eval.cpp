@@ -18,6 +18,11 @@
  *  https://www.R-project.org/Licenses/
  */
 
+/** @file eval.cpp
+ *
+ * General evaluation of expressions, including implementation of R flow
+ * control constructs, and R profiling.
+ */
 
 #ifdef HAVE_CONFIG_H
 #include <config.h>
@@ -1888,6 +1893,8 @@ inline static SEXP R_execClosure(SEXP call, SEXP newrho, SEXP sysparent,
 	from the function body.  */
 #ifdef USE_JMP
 	bool redo = false;
+	bool setSavedReturnValue = false;
+	bool setNullReturnValue = false;
 	do
 	{
 		redo = false;
@@ -1895,7 +1902,22 @@ inline static SEXP R_execClosure(SEXP call, SEXP newrho, SEXP sysparent,
 		try
 		{
 			/* make it available to on.exit and implicitly protect */
-			cntxt.setReturnValue(eval(body, newrho));
+			if (setSavedReturnValue)
+			{
+				setSavedReturnValue = false;
+				cntxt.setReturnValue(R_ReturnedValue);
+			}
+			else if (setNullReturnValue)
+			{
+				setNullReturnValue = false;
+				cntxt.setReturnValue(nullptr); /* undefined */
+			}
+			else
+			{
+				cntxt.setReturnValue(eval(body, newrho));
+			}
+			R_Srcref = cntxt.getSrcRef();
+			cntxt.end();
 		}
 		catch (JMPException &e)
 		{
@@ -1909,26 +1931,26 @@ inline static SEXP R_execClosure(SEXP call, SEXP newrho, SEXP sysparent,
 				{
 					cntxt.setCallFlag(CTXT_RETURN); /* turn restart off */
 					R_ReturnedValue = R_NilValue;	/* remove restart token */
-					redo = true;
 				}
 				else
 				{
-					cntxt.setReturnValue(R_ReturnedValue);
+					setSavedReturnValue = true;
 				}
 			}
 			else
 			{
-				cntxt.setReturnValue(nullptr); /* undefined */
+				setNullReturnValue = true;
 			}
+			redo = true;
 		}
 		// std::cerr << __FILE__ << ":" << __LINE__ << " Exiting  try/catch for "  << &cntxt << std::endl;
 	} while (redo);
-		R_Srcref = cntxt.getSrcRef();
 #else
 	if (!(SETJMP(cntxt.getCJmpBuf())))
 	{
 		/* make it available to on.exit and implicitly protect */
 		cntxt.setReturnValue(eval(body, newrho));
+		R_Srcref = cntxt.getSrcRef();
 	}
 	else
 	{
@@ -1951,10 +1973,8 @@ inline static SEXP R_execClosure(SEXP call, SEXP newrho, SEXP sysparent,
 			cntxt.setReturnValue(nullptr); /* undefined */
 		}
 	}
-
-	R_Srcref = cntxt.getSrcRef();
+	cntxt.end();
 #endif
-    cntxt.end();
 
     if (dbg) {
 	Rprintf(_("exiting from: "));
@@ -2596,6 +2616,7 @@ HIDDEN SEXP do_while(SEXP call, SEXP op, SEXP args, SEXP rho)
 					do_browser(call, op, R_NilValue, rho);
 				}
 			}
+			cntxt.end();
 		}
 		catch (JMPException &e)
 		{
@@ -2632,8 +2653,8 @@ HIDDEN SEXP do_while(SEXP call, SEXP op, SEXP args, SEXP rho)
 			}
 		}
 	}
-#endif
     cntxt.end();
+#endif
     SET_RDEBUG(rho, dbg);
     return R_NilValue;
 }
@@ -2669,6 +2690,7 @@ HIDDEN SEXP do_repeat(SEXP call, SEXP op, SEXP args, SEXP rho)
 			{
 				eval(body, rho);
 			}
+		    cntxt.end();
 		}
 		catch (JMPException &e)
 		{
@@ -2687,8 +2709,8 @@ HIDDEN SEXP do_repeat(SEXP call, SEXP op, SEXP args, SEXP rho)
 			eval(body, rho);
 		}
 	}
-#endif
     cntxt.end();
+#endif
     SET_RDEBUG(rho, dbg);
     return R_NilValue;
 }
@@ -5355,8 +5377,12 @@ union BCODE { void *v; int i; };
 /* Declare opinfo volatile to prevent gcc 6 from making a local copy
    in bcEval stack frames and thus increasing stack usage
    dramatically */
-volatile
-static struct { void *addr; int argc; const char *instname; } opinfo[OPCOUNT];
+volatile static struct
+{
+	void *addr;
+	int argc;
+	const char *instname;
+} opinfo[OPCOUNT];
 
 #define OP(name, n)                                            \
 	case name##_OP:                                            \
@@ -7073,6 +7099,30 @@ HIDDEN Rboolean R_BCVersionOK(SEXP s)
 					  (version >= R_bcMinVersion && version <= R_bcVersion));
 }
 
+#ifdef USE_JMP
+static void loopWithContect(volatile SEXP code, volatile SEXP rho, bool useCache)
+{
+    RCNTXT cntxt;
+    cntxt.start(CTXT_LOOP, R_NilValue, rho, R_BaseEnv, R_NilValue, R_NilValue);
+    bool redo;
+    do {
+	redo = false;
+	std::cout << __FILE__ << ":" << __LINE__ << " Entering try/catch for " << &cntxt << std::endl;
+	try {
+	    bcEval(code, rho, useCache);
+		cntxt.end();
+	}
+	catch (JMPException& e) {
+		std::cerr << __FILE__ << ":" << __LINE__ << " Seeking  " << e.context << "; in " << &cntxt << std::endl;
+	    if (e.context != &cntxt)
+		throw;
+	    redo = (e.mask != CTXT_BREAK);
+	}
+	std::cout << __FILE__":" << __LINE__ << " Exiting try/catch for " << &cntxt << std::endl;
+    } while (redo);
+}
+#endif
+
 static SEXP bcEval(SEXP body, SEXP rho, bool useCache)
 {
   SEXP retvalue = R_NilValue, constants;
@@ -7206,6 +7256,8 @@ static SEXP bcEval(SEXP body, SEXP rho, bool useCache)
 	    RCNTXT *cptr = BCNALLOC_CNTXT();
 	    BCNPUSH_INTEGER(GETOP());       /* pc offset for 'break' */
 	    BCNPUSH_INTEGER((int)(pc - codebase)); /* pc offset for 'next' */
+		cptr->start(CTXT_LOOP, R_NilValue, rho, R_BaseEnv, R_NilValue, R_NilValue);
+		int tmp_offset = is_for_loop ? FOR_LOOP_STATE_SIZE : 0;
 	    if (is_for_loop) {
 		/* duplicate the for loop state data on the top of the stack */
 		R_bcstack_t *loopdata = oldtop - FOR_LOOP_STATE_SIZE;
@@ -7215,8 +7267,7 @@ static SEXP bcEval(SEXP body, SEXP rho, bool useCache)
 		R_BCNodeStackTop += FOR_LOOP_STATE_SIZE;
 		SET_FOR_LOOP_BCPROT_OFFSET((int)(R_BCProtTop - R_BCNodeStackBase));
 		INCLNK_stack(R_BCNodeStackTop);
-
-		cptr->start(CTXT_LOOP, R_NilValue, rho, R_BaseEnv, R_NilValue, R_NilValue);
+	    }
 #ifdef USE_JMP
 		// std::cerr << __FILE__ << ":" << __LINE__ << " Entering try/catch for " << cptr << std::endl;
 		try
@@ -7229,11 +7280,11 @@ static SEXP bcEval(SEXP body, SEXP rho, bool useCache)
 				throw;
 			if (e.mask == CTXT_BREAK)
 			{
-				pc = codebase + LOOP_BREAK_OFFSET(FOR_LOOP_STATE_SIZE);
+				pc = codebase + LOOP_BREAK_OFFSET(tmp_offset);
 			}
 			else if (e.mask == CTXT_NEXT)
 			{
-				pc = codebase + LOOP_NEXT_OFFSET(FOR_LOOP_STATE_SIZE);
+				pc = codebase + LOOP_NEXT_OFFSET(tmp_offset);
 			}
 		}
 		// std::cerr << __FILE__ << ":" << __LINE__ << " Exiting  try/catch for " << cptr << std::endl;
@@ -7242,50 +7293,13 @@ static SEXP bcEval(SEXP body, SEXP rho, bool useCache)
 		case 0:
 			break;
 		case CTXT_BREAK:
-		    pc = codebase + LOOP_BREAK_OFFSET(FOR_LOOP_STATE_SIZE);
+		    pc = codebase + LOOP_BREAK_OFFSET(tmp_offset);
 		    break;
 		case CTXT_NEXT:
-		    pc = codebase + LOOP_NEXT_OFFSET(FOR_LOOP_STATE_SIZE);
+		    pc = codebase + LOOP_NEXT_OFFSET(tmp_offset);
 		    break;
 		}
 #endif
-	    }
-	    else {
-		cptr->start(CTXT_LOOP, R_NilValue, rho, R_BaseEnv, R_NilValue, R_NilValue);
-#ifdef USE_JMP
-		// std::cerr << __FILE__ << ":" << __LINE__ << " Entering try/catch for " << cptr << std::endl;
-		try
-		{
-		}
-		catch (JMPException &e)
-		{
-			// std::cerr << __FILE__ << ":" << __LINE__ << " Seeking " << e.context << "; in " << cptr << std::endl;
-			if (e.context != cptr)
-				throw;
-			if (e.mask == CTXT_BREAK)
-			{
-				pc = codebase + LOOP_BREAK_OFFSET(0);
-			}
-			else if (e.mask == CTXT_NEXT)
-			{
-				pc = codebase + LOOP_NEXT_OFFSET(0);
-			}
-		}
-		// std::cerr << __FILE__ << ":" << __LINE__ << " Exiting  try/catch for " << cptr << std::endl;
-#else
-		switch (SETJMP(cptr->getCJmpBuf()))
-		{
-		case 0:
-			break;
-		case CTXT_BREAK:
-			pc = codebase + LOOP_BREAK_OFFSET(0);
-			break;
-		case CTXT_NEXT:
-			pc = codebase + LOOP_NEXT_OFFSET(0);
-			break;
-		}
-#endif
-	    }
 	    /* context, offsets on stack, to be popped by ENDLOOPCNTXT */
 	    NEXT();
 	}

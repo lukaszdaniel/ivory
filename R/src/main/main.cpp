@@ -1346,6 +1346,7 @@ void run_Rmainloop(void)
 		{
 			R_GlobalContext = R_ToplevelContext = R_SessionContext = &R_Toplevel;
 			R_ReplConsole(R_GlobalEnv, 0, 0);
+    		end_Rmainloop(); /* must go here */
 		}
 		catch (JMPException &e)
 		{
@@ -1372,8 +1373,8 @@ void run_Rmainloop(void)
 		R_GlobalContext = R_ToplevelContext = R_SessionContext = &R_Toplevel;
 		R_ReplConsole(R_GlobalEnv, 0, 0);
 	}
-#endif
     end_Rmainloop(); /* must go here */
+#endif
 }
 
 void mainloop(void)
