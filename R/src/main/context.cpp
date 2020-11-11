@@ -245,7 +245,7 @@ HIDDEN NORET void RCNTXT::R_jumpctxt(int mask, SEXP val)
     // std::cerr << __FILE__ << ":" << __LINE__ << " About to throw JMPException(" << cptr << ", " << mask << ")" << std::endl;
     throw JMPException(cptr, mask);
 #else
-    // std::cerr << __FILE__ << ":" << __LINE__ << " About to throw JMPException(" << cptr << ", " << mask << ")" << std::endl;
+    // std::cerr << __FILE__ << ":" << __LINE__ << " About to LONGJMP (" << cptr << ", " << mask << ")" << std::endl;
     LONGJMP(cptr->getCJmpBuf(), mask);
 #endif
 }

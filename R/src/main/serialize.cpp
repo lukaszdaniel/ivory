@@ -1004,7 +1004,7 @@ R_INLINE static void OutComplexVec(R_outpstream_t stream, SEXP s, R_xlen_t lengt
     }
 }
 
-static void WriteItem (SEXP s, SEXP ref_table, R_outpstream_t stream)
+static void WriteItem(SEXP s, SEXP ref_table, R_outpstream_t stream)
 {
     int i;
     SEXP t;

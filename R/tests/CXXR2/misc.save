@@ -16,7 +16,7 @@
 > quint(2)
 [1] 7
 > try(quint(break))
-Error in command 'quint(break)': no loop for break/next, jumping to top level
+Error: no loop for break/next, jumping to top level
 > 
 > # Missing ...
 > 

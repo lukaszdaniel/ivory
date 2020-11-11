@@ -39,6 +39,7 @@
 #include <R_ext/Print.h>
 #include "arithmetic.h"
 #include <CXXR/JMPException.hpp>
+#include <CXXR/GCRoot.hpp>
 
 using namespace R;
 
@@ -1893,30 +1894,40 @@ inline static SEXP R_execClosure(SEXP call, SEXP newrho, SEXP sysparent,
 	from the function body.  */
 #ifdef USE_JMP
 	bool redo = false;
-	bool setSavedReturnValue = false;
-	bool setNullReturnValue = false;
+	bool jumped = false;
 	do
 	{
 		redo = false;
 		// std::cerr << __FILE__ << ":" << __LINE__ << " Entering try/catch for " << &cntxt << std::endl;
 		try
 		{
-			/* make it available to on.exit and implicitly protect */
-			if (setSavedReturnValue)
+			if (!jumped)
 			{
-				setSavedReturnValue = false;
-				cntxt.setReturnValue(R_ReturnedValue);
-			}
-			else if (setNullReturnValue)
-			{
-				setNullReturnValue = false;
-				cntxt.setReturnValue(nullptr); /* undefined */
+				/* make it available to on.exit and implicitly protect */
+				cntxt.setReturnValue(eval(body, newrho));
+				R_Srcref = cntxt.getSrcRef();
 			}
 			else
 			{
-				cntxt.setReturnValue(eval(body, newrho));
+				if (!cntxt.getJumpTarget())
+				{
+					/* ignores intermediate jumps for on.exits */
+					if (R_ReturnedValue == R_RestartToken)
+					{
+						cntxt.setCallFlag(CTXT_RETURN); /* turn restart off */
+						R_ReturnedValue = R_NilValue;	/* remove restart token */
+						cntxt.setReturnValue(eval(body, newrho));
+					}
+					else
+					{
+						cntxt.setReturnValue(R_ReturnedValue);
+					}
+				}
+				else
+				{
+					cntxt.setReturnValue(nullptr); /* undefined */
+				}
 			}
-			R_Srcref = cntxt.getSrcRef();
 			cntxt.end();
 		}
 		catch (JMPException &e)
@@ -1924,23 +1935,7 @@ inline static SEXP R_execClosure(SEXP call, SEXP newrho, SEXP sysparent,
 			// std::cerr << __FILE__ << ":" << __LINE__ << " Seeking " << e.context << "; in " << &cntxt << std::endl;
 			if (e.context != &cntxt)
 				throw;
-			if (!cntxt.getJumpTarget())
-			{
-				/* ignores intermediate jumps for on.exits */
-				if (R_ReturnedValue == R_RestartToken)
-				{
-					cntxt.setCallFlag(CTXT_RETURN); /* turn restart off */
-					R_ReturnedValue = R_NilValue;	/* remove restart token */
-				}
-				else
-				{
-					setSavedReturnValue = true;
-				}
-			}
-			else
-			{
-				setNullReturnValue = true;
-			}
+			jumped = true;
 			redo = true;
 		}
 		// std::cerr << __FILE__ << ":" << __LINE__ << " Exiting  try/catch for "  << &cntxt << std::endl;
@@ -2624,6 +2619,7 @@ HIDDEN SEXP do_while(SEXP call, SEXP op, SEXP args, SEXP rho)
 			if (e.context != &cntxt)
 				throw;
 			redo = (e.mask != CTXT_BREAK);
+			if (!redo) cntxt.end();
 		}
 		// std::cerr << __FILE__ << ":" << __LINE__ << " Exiting  try/catch for " << &cntxt << std::endl;
 	} while (redo);
@@ -2698,6 +2694,7 @@ HIDDEN SEXP do_repeat(SEXP call, SEXP op, SEXP args, SEXP rho)
 			if (e.context != &cntxt)
 				throw;
 			redo = (e.mask != CTXT_BREAK);
+			if (!redo) cntxt.end();
 		}
 		// std::cerr << __FILE__ << ":" << __LINE__ << " Exiting  try/catch for " << &cntxt << std::endl;
 	} while (redo);
@@ -3574,6 +3571,7 @@ HIDDEN SEXP do_eval(SEXP call, SEXP op, SEXP args, SEXP rho)
 	try
 	{
 		expr = eval(expr, env);
+		cntxt.end();
 	}
 	catch (JMPException &e)
 	{
@@ -3586,6 +3584,7 @@ HIDDEN SEXP do_eval(SEXP call, SEXP op, SEXP args, SEXP rho)
 			cntxt.setCallFlag(CTXT_RETURN); /* turn restart off */
 			error(_("restarts are not supported in 'eval()' function"));
 		}
+		cntxt.end();
 	}
 	// std::cerr << __FILE__ << ":" << __LINE__ << " Exiting  try/catch for " << &cntxt << std::endl;
 #else
@@ -3602,10 +3601,11 @@ HIDDEN SEXP do_eval(SEXP call, SEXP op, SEXP args, SEXP rho)
 			error(_("restarts are not supported in 'eval()' function"));
 		}
 	}
+	cntxt.end();
 #endif
 	UNPROTECT(1);
 	PROTECT(expr);
-	cntxt.end();
+	// cntxt.end();
 	UNPROTECT(1);
     }
     else if (TYPEOF(expr) == EXPRSXP) {
@@ -3623,6 +3623,7 @@ HIDDEN SEXP do_eval(SEXP call, SEXP op, SEXP args, SEXP rho)
 			R_Srcref = getSrcref(srcrefs, i);
 			tmp = eval(VECTOR_ELT(expr, i), env);
 		}
+		cntxt.end();
 	}
 	catch (JMPException &e)
 	{
@@ -3635,6 +3636,7 @@ HIDDEN SEXP do_eval(SEXP call, SEXP op, SEXP args, SEXP rho)
 			cntxt.setCallFlag(CTXT_RETURN); /* turn restart off */
 			error(_("restarts are not supported in 'eval()' function"));
 		}
+		cntxt.end();
 	}
 	// std::cerr << __FILE__ << ":" << __LINE__ << " Exiting  try/catch for " << &cntxt << std::endl;
 #else
@@ -3656,10 +3658,11 @@ HIDDEN SEXP do_eval(SEXP call, SEXP op, SEXP args, SEXP rho)
 			error(_("restarts are not supported in 'eval()' function"));
 		}
 	}
+	cntxt.end();
 #endif
 	UNPROTECT(1);
 	PROTECT(tmp);
-	cntxt.end();
+	// cntxt.end();
 	UNPROTECT(1);
 	expr = tmp;
     }
@@ -7099,7 +7102,7 @@ HIDDEN Rboolean R_BCVersionOK(SEXP s)
 					  (version >= R_bcMinVersion && version <= R_bcVersion));
 }
 
-#ifdef USE_JMP
+#if 0 // #ifdef USE_JMP
 static void loopWithContect(volatile SEXP code, volatile SEXP rho, bool useCache)
 {
     RCNTXT cntxt;
@@ -7107,18 +7110,19 @@ static void loopWithContect(volatile SEXP code, volatile SEXP rho, bool useCache
     bool redo;
     do {
 	redo = false;
-	std::cout << __FILE__ << ":" << __LINE__ << " Entering try/catch for " << &cntxt << std::endl;
+	// std::cerr << __FILE__ << ":" << __LINE__ << " Entering try/catch for " << &cntxt << std::endl;
 	try {
 	    bcEval(code, rho, useCache);
 		cntxt.end();
 	}
 	catch (JMPException& e) {
-		std::cerr << __FILE__ << ":" << __LINE__ << " Seeking  " << e.context << "; in " << &cntxt << std::endl;
+		// std::cerr << __FILE__ << ":" << __LINE__ << " Seeking  " << e.context << "; in " << &cntxt << std::endl;
 	    if (e.context != &cntxt)
 		throw;
 	    redo = (e.mask != CTXT_BREAK);
+		if (!redo) cntxt.end();
 	}
-	std::cout << __FILE__":" << __LINE__ << " Exiting try/catch for " << &cntxt << std::endl;
+	// std::cerr << __FILE__":" << __LINE__ << " Exiting try/catch for " << &cntxt << std::endl;
     } while (redo);
 }
 #endif
@@ -7272,6 +7276,9 @@ static SEXP bcEval(SEXP body, SEXP rho, bool useCache)
 		// std::cerr << __FILE__ << ":" << __LINE__ << " Entering try/catch for " << cptr << std::endl;
 		try
 		{
+			// TODO IVORY: R_disable_bytecode is set to 0 in Defn.h, because of 
+			// problems with encapsulating bcEval within try/catch block
+			// (which is needed for GCRoot to work properly).
 		}
 		catch (JMPException &e)
 		{

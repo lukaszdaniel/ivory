@@ -20,7 +20,7 @@
 #ifndef JMPEXCEPTION_HPP
 #define JMPEXCEPTION_HPP
 
-// #define USE_JMP
+#define USE_JMP
 
 class RCNTXT;
 

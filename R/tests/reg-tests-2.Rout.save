@@ -1,9 +1,9 @@
 
-Ivory Under development (unstable) (2020-11-01 r1325) -- "Internationalized Version of R"
+Ivory Under development (unstable) (2020-11-10 r1331) -- "Internationalized Version of R"
 Copyright (C) 2013-2020 Lukasz Daniel (lukasz.daniel@gmail.com)
 See README-IVORY file for details.
 
-R Under development (unstable) (2020-11-01 r79391) -- "Unsuffered Consequences"
+R Under development (unstable) (2020-11-10 r79391) -- "Unsuffered Consequences"
 Copyright (C) 2020 The R Foundation for Statistical Computing
 Platform: x86_64-pc-linux-gnu (64-bit)
 
@@ -6363,7 +6363,6 @@ function(given = NULL) {
     if (is.null(given)) callObj$default <- TRUE
     callObj
 }
-<bytecode: 0xa1566c0>
 > print(foo, useSource = FALSE)
 function (given = NULL) 
 {
@@ -6374,7 +6373,6 @@ function (given = NULL)
         callObj$default <- TRUE
     callObj
 }
-<bytecode: 0xa1566c0>
 > attr(foo, "srcref") <- NULL
 > foo
 function (given = NULL) 
@@ -6386,7 +6384,6 @@ function (given = NULL)
         callObj$default <- TRUE
     callObj
 }
-<bytecode: 0xa1566c0>
 > (f <- structure(function(){}, note = "just a note",
 +                 yada = function() "not the same"))
 function(){}
@@ -6618,8 +6615,7 @@ Error in command 'complete.cases(list(), list())':
 > ## error messages from (C-level) evalList
 > tst <- function(y) { stopifnot(is.numeric(y)); y+ 1 }
 > try(tst()) # even nicer since R 3.5.0's change to sequential stopifnot()
-Error in command 'stopifnot(is.numeric(y))': 
-  'y' argument is missing, with no default
+Error: 'y' argument is missing, with no default
 > try(c(1,,2))
 Error in command 'c(1, , 2)': argument 2 is empty
 > ## change in 2.8.0 made these less clear

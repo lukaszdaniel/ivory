@@ -37,6 +37,7 @@
 
 #define USE_RINTERNALS
 #define COMPILING_MEMORY_C
+#define R_USE_SIGNALS
 
 #ifdef HAVE_CONFIG_H
 #include <config.h>
@@ -49,8 +50,13 @@
 #include <R_ext/RS.h> /* for S4 allocation */
 #include <CXXR/GCEdge.hpp>
 #include <CXXR/GCManager.hpp>
+#include <CXXR/GCRoot.hpp>
 #include <CXXR/GCNode.hpp>
 #include <CXXR/MemoryBank.hpp>
+#include <CXXR/JMPException.hpp>
+#include <CXXR/IntVector.hpp>
+#include <CXXR/LogicalVector.hpp>
+#include <CXXR/RealVector.hpp>
 #include <CXXR/WeakRef.hpp>
 #include <CXXR/ExternalPointer.hpp>
 #include <CXXR/SEXP_downcast.hpp>
@@ -100,7 +106,6 @@
 #endif
 
 
-#define R_USE_SIGNALS 1
 #include <Defn.h>
 #include <Localization.h>
 #include <Rinterface.h>

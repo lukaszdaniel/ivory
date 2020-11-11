@@ -290,3 +290,5 @@ void WeakRef::runExitFinalizers()
 	}
 	runFinalizers();
 }
+
+// ***** C interface *****
