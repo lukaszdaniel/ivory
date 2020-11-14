@@ -38,10 +38,10 @@ matrix:
             - liblzma-dev
             - libpcre3-dev
             - libedit-dev
-            - libomp-10-dev
+            - libomp-dev
             - clang
             - llvm-dev
-      env: C_COMPILER=clang CXX_COMPILER=clang++ LLVM_CONFIG=/usr/bin/llvm-config CFLAGS="-g -O1" CXXFLAGS="${CFLAGS}" MAIN_LDFLAGS="${CFLAGS}"
+      env: C_COMPILER=clang CXX_COMPILER=clang++ LLVM_CONFIG=/usr/bin/llvm-config CFLAGS="-g -O1" CXXFLAGS="${CFLAGS}" MAIN_LDFLAGS="${CFLAGS}" LD_LIBRARY_PATH="/usr/local/clang/lib"
 script:
         - ${CXX_COMPILER} --version
         - cd R

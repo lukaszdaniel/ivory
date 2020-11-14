@@ -1693,9 +1693,9 @@ HIDDEN SEXP do_str2lang(SEXP call, SEXP op, SEXP args, SEXP rho) {
 
     known_to_be_latin1 = pci.old_latin1;
     known_to_be_utf8 = pci.old_utf8;
-    cntxt.end();
 
     UNPROTECT(2);
+    cntxt.end();
     return ans;
 }
 

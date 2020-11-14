@@ -44,6 +44,7 @@
 #include <limits>
 #include <cstddef>
 #include <string>
+#include <iostream>
 #else
 #include <stdio.h>
 #include <limits.h> /* for INT_MAX */

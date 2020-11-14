@@ -179,7 +179,7 @@ static void onintrEx(Rboolean resumeOK)
 		// std::cerr << __FILE__ << ":" << __LINE__ << " Entering try/catch for " << &restartcontext << std::endl;
 		try
 		{
-			if (!jumped)
+			if (!jumped) // (!SETJMP(restartcontext.getCJmpBuf()))
 			{
 				RCNTXT::R_InsertRestartHandlers(&restartcontext, "resume");
 				signalInterrupt();

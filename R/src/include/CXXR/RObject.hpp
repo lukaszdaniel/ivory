@@ -48,11 +48,6 @@
  * (which are always defined).
  */
 
-/* These are also used with the write barrier on, in attrib.cpp and util.cpp */
-constexpr int BASIC_TYPE_BITS = 5;
-constexpr int FULL_TYPE_BITS = 8;
-constexpr int MAX_NUM_BASIC_SEXPTYPE = (1 << BASIC_TYPE_BITS);
-constexpr int MAX_NUM_SEXPTYPE = (1 << FULL_TYPE_BITS);
 constexpr int NAMED_BITS = 16;
 
 /* Flags */

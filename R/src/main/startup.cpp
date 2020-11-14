@@ -290,7 +290,6 @@ void R_SetParams(Rstart Rp)
     SetSize(Rp->vsize, Rp->nsize);
     R_SetMaxNSize(Rp->max_nsize);
     R_SetMaxVSize(Rp->max_vsize);
-    R_SetPPSize(Rp->ppsize);
 #ifdef _WIN32
     R_SetWin32(Rp);
 #endif

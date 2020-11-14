@@ -32,7 +32,7 @@ sources_cxx = Allocatortest.cpp CellPooltest.cpp \
 
 depends = $(sources_cxx:.cpp=.d)
 
-tests = CellPooltest MemoryBanktest Allocatortest GCManagertest splice_test
+tests = CellPooltest MemoryBanktest Allocatortest GCManagertest splice_test RObject_sizer
 
 test-CXXR : $(tests:=.ts)
 
@@ -108,8 +108,16 @@ splice_test.ts : splice_test splice_test.save
 	rm splice_test.out
 	touch $@
 
-RObject_sizer : RObject_sizer.o
-	$(LINK.cc) -o $@ $<
+RObject_sizer_objs = RObject_sizer.o MemoryBank.o CellPool.o
+
+RObject_sizer : $(RObject_sizer_objs)
+	$(LINK.cc) -o $@ $(RObject_sizer_objs)
+
+RObject_sizer.ts : RObject_sizer RObject_sizer.save
+		./$< > RObject_sizer.out
+	diff $(srcdir)/RObject_sizer.save RObject_sizer.out
+	rm RObject_sizer.out
+	touch $@
 
 Makefile : $(srcdir)/Makefile.in $(top_builddir)/config.status
 	cd $(top_builddir) && $(SHELL) ./config.status $(subdir)/$@

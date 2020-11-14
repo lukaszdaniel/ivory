@@ -3752,9 +3752,9 @@ SEXP R::R_Parse1Buffer(IoBuffer *buffer, int gencode, ParseStatus *status)
 	}
     }
     PROTECT(R_CurrentExpr);
-    cntxt.end();
     R_FinalizeSrcRefState();
     UNPROTECT(1); /* R_CurrentExpr */
+	cntxt.end();
     return R_CurrentExpr;
 }
 
@@ -3826,9 +3826,9 @@ finish:
     }
     UNPROTECT(2); /* t, rval */
     PROTECT(rval);
-    cntxt.end();
     R_FinalizeSrcRefState();
     UNPROTECT(1); /* rval */
+    cntxt.end();
     *status = PARSE_OK;
     return rval;
 }
@@ -3982,9 +3982,9 @@ finish:
     }
     UNPROTECT(2); /* t, rval */
     PROTECT(rval);
-    cntxt.end();
     R_FinalizeSrcRefState();
     UNPROTECT(1); /* rval */
+    cntxt.end();
     *status = PARSE_OK;
     return rval;
 }

@@ -307,7 +307,8 @@ HIDDEN SEXP do_parse(SEXP call, SEXP op, SEXP args, SEXP env)
     known_to_be_latin1 = pci.old_latin1;
     known_to_be_utf8 = pci.old_utf8;
     PROTECT(s);
+    UNPROTECT(2);
     cntxt.end();
-    UNPROTECT(3);
+    UNPROTECT(1);
     return s;
 }

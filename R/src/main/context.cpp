@@ -173,7 +173,7 @@ HIDDEN void RCNTXT::R_run_onexits(RCNTXT *cptr)
 
 void RCNTXT::R_restore_globals()
 {
-    R_PPStackTop = this->getCStackTop();
+    GCRootBase::ppsRestoreSize(this->getCStackTop());
     R_GCEnabled = this->getGCEnabled();
     R_BCIntActive = this->getBCIntactive();
     R_BCpc = this->getBCPC();
@@ -272,7 +272,7 @@ void RCNTXT::start(int flags,
                    SEXP syscall, SEXP env, SEXP sysp,
                    SEXP promargs, SEXP callfun)
 {
-    this->setCStackTop(R_PPStackTop);
+    this->setCStackTop(GCRootBase::ppsSize());
     this->setGCEnabled(R_GCEnabled);
     this->setBCPC(R_BCpc);
     this->setBCBody(R_BCbody);
@@ -815,7 +815,7 @@ Rboolean R_ToplevelExec(void (*fun)(void *), void *data)
 
         try
         {
-            if (!jumped)
+            if (!jumped) // (!SETJMP(thiscontext.getCJmpBuf()))
             {
                 R_GlobalContext = R_ToplevelContext = &thiscontext;
                 fun(data);
@@ -952,8 +952,9 @@ SEXP R_ExecWithCleanup(SEXP (*fun)(void *), void *data,
 
     PROTECT(result = fun(data));
     cleanfun(cleandata);
-    cntxt.end();
+
     UNPROTECT(1);
+    cntxt.end();
 
     return result;
 }
@@ -1009,7 +1010,7 @@ SEXP R_UnwindProtect(SEXP (*fun)(void *data), void *data,
         // std::cerr << __FILE__ << ":" << __LINE__ << " Entering try/catch for " << &thiscontext << std::endl;
         try
         {
-            if (!jumped)
+            if (!jumped) // (!SETJMP(thiscontext.getCJmpBuf()))
             {
                 result = fun(data);
                 SETCAR(cont, result);

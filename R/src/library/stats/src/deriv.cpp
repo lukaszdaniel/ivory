@@ -470,7 +470,7 @@ static SEXP D(SEXP expr, SEXP var)
 	else if (CAR(expr) == SinhSymbol) {
 	    ans = simplify(TimesSymbol,
 			   PP_S2(CoshSymbol, CADR(expr)),
-			   PP(D(CADR(expr), var))),
+			   PP(D(CADR(expr), var)));
 		UNPROTECT(2);
 	}
 	else if (CAR(expr) == TanhSymbol) {

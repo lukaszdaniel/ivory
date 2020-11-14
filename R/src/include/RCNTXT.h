@@ -139,7 +139,7 @@ private:
     RCNTXT *m_nextcontext;  /* The next context up the chain */
     int m_callflag;         /* The context "type" */
     JMP_BUF m_cjmpbuf;      /* C stack and register information */
-    int m_cstacktop;        /* Top of the pointer protection stack */
+    size_t m_cstacktop;        /* Top of the pointer protection stack */
     int m_evaldepth;        /* evaluation depth at inception */
     SEXP m_promargs;        /* Promises supplied to closure */
     SEXP m_callfun;         /* The closure called */
@@ -264,11 +264,11 @@ public:
     static RCNTXT *findProfContext(RCNTXT *cptr);
 };
 
-// LibExtern RCNTXT R_Toplevel;	      /* Storage for the toplevel context */
-// LibExtern RCNTXT* R_ToplevelContext;  /* The toplevel context */
-// LibExtern RCNTXT* R_GlobalContext;    /* The global context */
-// LibExtern RCNTXT* R_SessionContext;   /* The session toplevel context */
-// LibExtern RCNTXT* R_ExitContext;      /* The active context for on.exit processing */
+extern "C" RCNTXT R_Toplevel;	      /* Storage for the toplevel context */
+extern "C" RCNTXT* R_ToplevelContext;  /* The toplevel context */
+extern "C" RCNTXT* R_GlobalContext;    /* The global context */
+extern "C" RCNTXT* R_SessionContext;   /* The session toplevel context */
+extern "C" RCNTXT* R_ExitContext;      /* The active context for on.exit processing */
 
 #endif // R_USE_SIGNALS
 

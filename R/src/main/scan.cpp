@@ -994,7 +994,6 @@ HIDDEN SEXP do_scan(SEXP call, SEXP op, SEXP args, SEXP rho)
 	error(_("invalid '%s' argument"), "what");
     }
     PROTECT(ans);
-    cntxt.end();
 
     /* we might have a character that was unscanchar-ed.
        So pushback if possible */
@@ -1010,6 +1009,7 @@ HIDDEN SEXP do_scan(SEXP call, SEXP op, SEXP args, SEXP rho)
 	warning(_("embedded nul(s) found in input"));
 
     UNPROTECT(1); /* ans */
+    cntxt.end();
     return ans;
 }
 

@@ -4006,12 +4006,16 @@ HIDDEN SEXP do_readLines(SEXP call, SEXP op, SEXP args, SEXP env)
 	    warning(_("line %d appears to contain an embedded nul"), nread + 1);
 	if(c == R_EOF) goto no_more_lines;
     }
-    if(!wasopen) {cntxt.end(); con->close(con);}
+
     UNPROTECT(1);
+    if (!wasopen)
+    {
+        cntxt.end();
+        con->close(con);
+    }
     free(buf);
     return ans;
 no_more_lines:
-    if(!wasopen) {cntxt.end(); con->close(con);}
     if(nbuf > 0) { /* incomplete last line */
 	if(con->text && !con->blocking &&
 	   (strcmp(con->connclass, "gzfile") != 0)) {
@@ -4031,6 +4035,11 @@ no_more_lines:
     for(i = 0; i < nread; i++)
 	SET_STRING_ELT(ans2, i, STRING_ELT(ans, i));
     UNPROTECT(2);
+    if (!wasopen)
+    {
+        cntxt.end();
+        con->close(con);
+    }
     return ans2;
 }
 
@@ -4839,12 +4848,17 @@ HIDDEN SEXP do_readchar(SEXP call, SEXP op, SEXP args, SEXP env)
 	} else break;
     }
 
-    if(!wasopen) {cntxt.end(); con->close(con);}
     if(m < n) {
 	PROTECT(ans = xlengthgets(ans, m));
 	UNPROTECT(1);
     }
     UNPROTECT(1);
+    if (!wasopen)
+    {
+        cntxt.end();
+        con->close(con);
+    }
+
     return ans;
 }
 

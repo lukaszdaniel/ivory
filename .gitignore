@@ -140,3 +140,4 @@ R/tests/CXXR/Allocatortest
 R/tests/CXXR/GCManagertest
 R/tests/CXXR/splice_test
 R/tests/CXXR/GCManagertest.out
+R/tests/CXXR/RObject_sizer

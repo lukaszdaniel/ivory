@@ -529,49 +529,6 @@ extern inline SEXP STRING_ELT(SEXP x, R_xlen_t i)
 SEXP STRING_ELT(SEXP x, R_xlen_t i);
 #endif
 
-#ifdef INLINE_PROTECT
-extern int R_PPStackSize;
-extern int R_PPStackTop;
-extern SEXP *R_PPStack;
-
-extern inline SEXP Rf_protect(SEXP s)
-{
-    R_CHECK_THREAD;
-    if (R_PPStackTop < R_PPStackSize)
-        R_PPStack[R_PPStackTop++] = s;
-    else
-        R_signal_protect_error();
-    return s;
-}
-
-extern inline void Rf_unprotect(int l)
-{
-    R_CHECK_THREAD;
-#ifdef PROTECT_PARANOID
-    if (R_PPStackTop >= l)
-        R_PPStackTop -= l;
-    else
-        R_signal_unprotect_error();
-#else
-    R_PPStackTop -= l;
-#endif
-}
-
-extern inline void R_ProtectWithIndex(SEXP s, PROTECT_INDEX *pi)
-{
-    Rf_protect(s);
-    *pi = R_PPStackTop - 1;
-}
-
-extern inline void R_Reprotect(SEXP s, PROTECT_INDEX i)
-{
-    R_CHECK_THREAD;
-    if (i >= R_PPStackTop || i < 0)
-        R_signal_reprotect_error(i);
-    R_PPStack[i] = s;
-}
-#endif /* INLINE_PROTECT */
-
 /* from dstruct.cpp */
 
 /*  length - length of objects  */

@@ -51,6 +51,7 @@
 #include <R_ext/Print.h>
 #include <R_ext/Error.h>
 #include <CXXR/JMPException.hpp>
+#include <CXXR/GCRoot.hpp>
 
 using namespace R;
 
@@ -91,13 +92,13 @@ static void R_ReplFile(FILE *fp, SEXP rho)
 {
     ParseStatus status;
     int count=0;
-    int savestack;
+    size_t savestack;
     RCNTXT cntxt;
 
     R_InitSrcRefState(&cntxt);
-    savestack = R_PPStackTop;
+    savestack = GCRootBase::ppsSize();
     while(true) {
-	R_PPStackTop = savestack;
+	GCRootBase::ppsRestoreSize(savestack);
 	R_CurrentExpr = R_Parse1File(fp, 1, &status);
 	switch (status) {
 	case PARSE_NULL:
@@ -237,7 +238,7 @@ int Rf_ReplIteration(SEXP rho, int savestack, int browselevel, R_ReplState *stat
 	    if(c == ';' || c == '\n') break;
     }
 
-    R_PPStackTop = savestack;
+    GCRootBase::ppsRestoreSize(savestack);
     R_CurrentExpr = R_Parse1Buffer(&R_ConsoleIob, 0, &state->status);
 
     switch(state->status) {
@@ -418,7 +419,7 @@ int R_ReplDLLdo1(void)
 	R_IoBufferPutc(c, &R_ConsoleIob);
 	if(c == ';' || c == '\n') break;
     }
-    R_PPStackTop = 0;
+    GCRootBase::ppsRestoreSize(0);
     R_CurrentExpr = R_Parse1Buffer(&R_ConsoleIob, 0, &status);
 
     switch(status) {
@@ -1149,6 +1150,7 @@ void setup_Rmainloop(void)
 		}
 		catch (JMPException &e)
 		{
+			// std::cerr << __FILE__ << ":" << __LINE__ << " Seeking " << e.context << "; in " << &R_Toplevel << std::endl;
 			if (e.context != &R_Toplevel)
 				throw;
 			check_session_exit();
@@ -1497,7 +1499,8 @@ HIDDEN SEXP do_browser(SEXP call, SEXP op, SEXP args, SEXP rho)
     RCNTXT *saveToplevelContext;
     RCNTXT *saveGlobalContext;
     RCNTXT thiscontext, returncontext, *cptr;
-    int savestack, browselevel;
+    size_t savestack;
+	int browselevel;
     SEXP ap, topExp, argList;
 
     /* Cannot call checkArity(op, args), because "op" may be a closure  */
@@ -1532,7 +1535,7 @@ HIDDEN SEXP do_browser(SEXP call, SEXP op, SEXP args, SEXP rho)
     /* so that it can be restored on exit. */
 
     browselevel = countContexts(CTXT_BROWSER, 1);
-    savestack = R_PPStackTop;
+    savestack = GCRootBase::ppsSize();
     PROTECT(topExp = R_CurrentExpr);
     saveToplevelContext = R_ToplevelContext;
     saveGlobalContext = R_GlobalContext;
@@ -1563,42 +1566,65 @@ HIDDEN SEXP do_browser(SEXP call, SEXP op, SEXP args, SEXP rho)
 
     returncontext.start(CTXT_BROWSER, call, rho, R_BaseEnv, argList, R_NilValue);
 #ifdef USE_JMP
-	// std::cerr << __FILE__ << ":" << __LINE__ << " Entering try/catch for " << &returncontext << std::endl;
-	try
+	bool redo = false;
+	bool jumped = false;
+	bool redo2 = false;
+	bool jumped2 = false;
+	do
 	{
-		thiscontext.start(CTXT_RESTART, R_NilValue, rho, R_BaseEnv, R_NilValue, R_NilValue);
-		bool redo = false;
-		do
+		redo = false;
+		// std::cerr << __FILE__ << ":" << __LINE__ << " Entering try/catch for " << &returncontext << std::endl;
+		try
 		{
-			redo = false;
-			// std::cerr << __FILE__ << ":" << __LINE__ << " Entering try/catch for " << &thiscontext << std::endl;
-			try
+			if (!jumped) // (!SETJMP(returncontext.getCJmpBuf()))
 			{
-				R_GlobalContext = &thiscontext;
-				RCNTXT::R_InsertRestartHandlers(&thiscontext, "browser");
-				R_ReplConsole(rho, savestack, browselevel + 1);
+				thiscontext.start(CTXT_RESTART, R_NilValue, rho, R_BaseEnv, R_NilValue, R_NilValue);
+				do
+				{
+					redo2 = false;
+					// std::cerr << __FILE__ << ":" << __LINE__ << " Entering try/catch for " << &thiscontext << std::endl;
+					try
+					{
+						if (!jumped2) // (!SETJMP(thiscontext.getCJmpBuf()))
+						{
+							R_GlobalContext = &thiscontext;
+							RCNTXT::R_InsertRestartHandlers(&thiscontext, "browser");
+							R_ReplConsole(rho, savestack + 1, browselevel + 1);
+						}
+						else
+						{
+							thiscontext.setRestartBitOn();
+							R_ReturnedValue = R_NilValue;
+							R_Visible = false;
+							R_GlobalContext = &thiscontext;
+							RCNTXT::R_InsertRestartHandlers(&thiscontext, "browser");
+							R_ReplConsole(rho, savestack + 1, browselevel + 1);
+						}
+						thiscontext.end();
+					}
+					catch (JMPException &e)
+					{
+						// std::cerr << __FILE__ << ":" << __LINE__ << " Seeking " << e.context << "; in " << &thiscontext << std::endl;
+						if (e.context != &thiscontext)
+							throw;
+						jumped2 = true;
+						redo2 = true;
+					}
+					// std::cerr << __FILE__ << ":" << __LINE__ << " Exiting  try/catch for " << &thiscontext << std::endl;
+				} while (redo2);
 			}
-			catch (JMPException &e)
-			{
-				// std::cerr << __FILE__ << ":" << __LINE__ << " Seeking " << e.context << "; in " << &thiscontext << std::endl;
-				if (e.context != &thiscontext)
-					throw;
-				thiscontext.setRestartBitOn();
-				R_ReturnedValue = R_NilValue;
-				R_Visible = false;
-				redo = true;
-			}
-			// std::cerr << __FILE__ << ":" << __LINE__ << " Exiting  try/catch for " << &thiscontext << std::endl;
-		} while (redo);
-		thiscontext.end();
-	}
-	catch (JMPException &e)
-	{
-		// std::cerr << __FILE__ << ":" << __LINE__ << " Seeking " << e.context << "; in " << &returncontext << std::endl;
-		if (e.context != &returncontext)
-			throw;
-	}
-	// std::cerr << __FILE__ << ":" << __LINE__ << " Exiting  try/catch for " << &returncontext << std::endl;
+			returncontext.end();
+		}
+		catch (JMPException &e)
+		{
+			// std::cerr << __FILE__ << ":" << __LINE__ << " Seeking " << e.context << "; in " << &returncontext << std::endl;
+			if (e.context != &returncontext)
+				throw;
+			jumped = true;
+			redo = true;
+		}
+		// std::cerr << __FILE__ << ":" << __LINE__ << " Exiting  try/catch for " << &returncontext << std::endl;
+	} while (redo);
 #else
 	if (!SETJMP(returncontext.getCJmpBuf()))
 	{
@@ -1607,7 +1633,7 @@ HIDDEN SEXP do_browser(SEXP call, SEXP op, SEXP args, SEXP rho)
 		{
 			R_GlobalContext = &thiscontext;
 			RCNTXT::R_InsertRestartHandlers(&thiscontext, "browser");
-			R_ReplConsole(rho, savestack, browselevel + 1);
+			R_ReplConsole(rho, savestack + 1, browselevel + 1);
 		}
 		else
 		{
@@ -1616,18 +1642,19 @@ HIDDEN SEXP do_browser(SEXP call, SEXP op, SEXP args, SEXP rho)
 			R_Visible = false;
 			R_GlobalContext = &thiscontext;
 			RCNTXT::R_InsertRestartHandlers(&thiscontext, "browser");
-			R_ReplConsole(rho, savestack, browselevel + 1);
+			R_ReplConsole(rho, savestack + 1, browselevel + 1);
 		}
 		thiscontext.end();
 	}
-#endif
     returncontext.end();
+#endif
+
 
     /* Reset the interpreter state. */
 
     R_CurrentExpr = topExp;
     UNPROTECT(1);
-    R_PPStackTop = savestack;
+    GCRootBase::ppsRestoreSize(savestack);
     UNPROTECT(1);
     R_CurrentExpr = topExp;
     R_ToplevelContext = saveToplevelContext;
@@ -2006,7 +2033,7 @@ SEXP R_addTaskCallback(SEXP f, SEXP data, SEXP useData, SEXP name)
 
     PROTECT(index = allocVector(INTSXP, 1));
     el = Rf_addTaskCallback(R_taskCallbackRoutine,  internalData,
-			    (void (*)(void*)) R_ReleaseObject, tmpName,
+			    reinterpret_cast<void (*)(void*)>(R_ReleaseObject), tmpName,
 			    INTEGER(index));
 
     if(length(name) == 0) {

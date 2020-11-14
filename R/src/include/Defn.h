@@ -40,6 +40,7 @@
 #include <iostream>
 #include <string>
 #include <CXXR/RObject.hpp>
+#include <CXXR/GCRoot.hpp>
 #include <CXXR/ConsCell.hpp>
 #include <CXXR/BuiltInFunction.hpp>
 #include <CXXR/Symbol.hpp>
@@ -383,11 +384,6 @@ extern0 SEXP	R_NHeap;	    /* Start of the cons cell heap */
 extern0 SEXP	R_FreeSEXP;	    /* Cons cell free list */
 extern0 int	R_Is_Running;	    /* for Windows memory manager */
 
-/* The Pointer Protection Stack */
-LibExtern int	R_PPStackSize	INI_as(R_PPSSIZE); /* The stack size (elements) */
-LibExtern int	R_PPStackTop;	    /* The top of the stack */
-LibExtern SEXP*	R_PPStack;	    /* The pointer protection stack */
-
 /* Evaluation Environment */
 extern0 SEXP	R_CurrentExpr;	    /* Currently evaluating expression */
 extern0 SEXP	R_ReturnedValue;    /* Slot for return-ing values */
@@ -587,7 +583,6 @@ extern0 int R_PCRE_limit_recursion;
 # define asVecSize		Rf_asVecSize
 # define asXLength		Rf_asXLength
 # define BindDomain		Rf_BindDomain
-# define check_stack_balance	Rf_check_stack_balance
 # define check1arg		Rf_check1arg
 # define CheckFormals		Rf_CheckFormals
 # define CleanEd		Rf_CleanEd
@@ -831,7 +826,6 @@ namespace R
     void Rf_checkArityCall(SEXP op_, SEXP args, SEXP call);
     void CheckFormals(SEXP);
     void R_check_locale(void);
-    void check_stack_balance(SEXP op, int save);
     void CleanEd(void);
     void copyMostAttribNoTs(SEXP inp, SEXP ans);
     SEXP createS3Vars(SEXP dotGeneric, SEXP dotGroup, SEXP dotClass, SEXP dotMethod, SEXP dotGenericCallEnv, SEXP dotGenericDefEnv);
@@ -969,7 +963,6 @@ namespace R
     R_size_t R_GetMaxNSize(void);
     void R_SetMaxNSize(R_size_t);
     R_size_t R_Decode2Long(char *p, int &ierr);
-    void R_SetPPSize(R_size_t);
 
     void R_expand_binding_value(SEXP b);
 

@@ -30,6 +30,7 @@
 #include <Localization.h>
 #include <Defn.h>
 #include <Internal.h>
+#include <CXXR/GCRoot.hpp>
 
 #include <Print.h>
 #include "arithmetic.h" /* for do_math[1234], do_cmathfuns */
@@ -1348,7 +1349,7 @@ HIDDEN SEXP do_internal(SEXP call, SEXP op, SEXP args, SEXP env)
 {
     SEXP s, ans;
     SEXP fun;
-    int save = R_PPStackTop;
+    auto save = GCRootBase::ppsSize();
     int flag;
     const void *vmax = vmaxget();
 

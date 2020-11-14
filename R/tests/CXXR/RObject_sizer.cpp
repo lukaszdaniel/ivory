@@ -26,6 +26,7 @@ using namespace R;
 
 int main()
 {
+    cout << "Size of various types used in R (in bytes):\n\n";
     cout << "sizeof(bool): " << sizeof(bool)
          << "\nsizeof(char): " << sizeof(char)
          << "\nsizeof(Rboolean): " << sizeof(Rboolean)

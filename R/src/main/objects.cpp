@@ -33,6 +33,7 @@
 #include <Localization.h>
 #include <Internal.h>
 #include <R_ext/RS.h> /* for Calloc, Realloc and for S4 object bit */
+#include <CXXR/GCRoot.hpp>
 
 #include <utility>
 
@@ -97,7 +98,8 @@ static SEXP applyMethod(SEXP call, SEXP op, SEXP args, SEXP rho, SEXP newvars)
 {
     SEXP ans;
     if (TYPEOF(op) == SPECIALSXP) {
-	int save = R_PPStackTop, flag = PRIMPRINT(op);
+	auto save = GCRootBase::ppsSize();
+	int flag = PRIMPRINT(op);
 	const void *vmax = vmaxget();
 	R_Visible = (flag != 1);
 	ans = PRIMFUN(op) (call, op, args, rho);
@@ -111,7 +113,8 @@ static SEXP applyMethod(SEXP call, SEXP op, SEXP args, SEXP rho, SEXP newvars)
        found).
      */
     else if (TYPEOF(op) == BUILTINSXP) {
-	int save = R_PPStackTop, flag = PRIMPRINT(op);
+	auto save = GCRootBase::ppsSize();
+	int flag = PRIMPRINT(op);
 	const void *vmax = vmaxget();
 	PROTECT(args = evalList(args, rho, call, 0));
 	R_Visible = (flag != 1);

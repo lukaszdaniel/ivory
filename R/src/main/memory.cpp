@@ -373,11 +373,6 @@ HIDDEN void R::R_SetMaxNSize(R_size_t size)
     if (size >= GCManager::nodeTriggerLevel()) GCManager::setMaxNodeTriggerLevel(size);
 }
 
-HIDDEN void R::R_SetPPSize(R_size_t size)
-{
-    R_PPStackSize = (int) size;
-}
-
 HIDDEN SEXP do_maxVSize(SEXP call, SEXP op, SEXP args, SEXP rho)
 {
     constexpr double MB = 1048576.0;
@@ -564,9 +559,8 @@ void WeakRef::runWeakRefFinalizer(RObject *x)
 void WeakRef::finalize()
 {
     R_CFinalizer_t Cfin = m_Cfinalizer;
-    SEXP key, Rfin;
-    PROTECT(key = m_key);
-    PROTECT(Rfin = m_Rfinalizer);
+    GCRoot<> key(m_key);
+    GCRoot<> Rfin(m_Rfinalizer);
     // Do this now to ensure that finalizer is run only once, even if
     // an error occurs:
     tombstone();
@@ -574,12 +568,9 @@ void WeakRef::finalize()
         Cfin(key);
     else if (Rfin)
     {
-        SEXP e;
-        PROTECT(e = Rf_lcons(Rfin, Rf_lcons(key, nullptr)));
+        GCRoot<> e(Rf_lcons(Rfin, Rf_lcons(key, nullptr)));
         Rf_eval(e, R_GlobalEnv);
-        UNPROTECT(1);
     }
-    UNPROTECT(2);
 }
 
 bool RunFinalizers(void)
@@ -611,11 +602,10 @@ bool WeakRef::runFinalizers()
             /**** use R_ToplevelExec here? */
             RCNTXT thiscontext;
             RCNTXT *volatile saveToplevelContext;
-            volatile SEXP topExp, oldHStack, oldRStack, oldRVal;
             volatile bool oldvis;
-            PROTECT(oldHStack = R_HandlerStack);
-            PROTECT(oldRStack = R_RestartStack);
-            PROTECT(oldRVal = R_ReturnedValue);
+            GCRoot<> oldHStack(R_HandlerStack);
+            GCRoot<> oldRStack(R_RestartStack);
+            GCRoot<> oldRVal(R_ReturnedValue);
             oldvis = R_Visible;
             R_HandlerStack = R_NilValue;
             R_RestartStack = R_NilValue;
@@ -625,8 +615,8 @@ bool WeakRef::runFinalizers()
 	       into the call that triggered the collection. */
             thiscontext.start(CTXT_TOPLEVEL, R_NilValue, R_GlobalEnv, R_BaseEnv, R_NilValue, R_NilValue);
             saveToplevelContext = R_ToplevelContext;
-            PROTECT(topExp = R_CurrentExpr);
-            volatile int savestack = R_PPStackTop;
+            GCRoot<> topExp(R_CurrentExpr);
+            auto savestack = GCRootBase::ppsSize();
 #ifdef USE_JMP
             bool redo = false;
             bool jumped = false;
@@ -636,7 +626,7 @@ bool WeakRef::runFinalizers()
                 // std::cerr << __FILE__ << ":" << __LINE__ << " Entering try/catch for " << &thiscontext << std::endl;
                 try
                 {
-                    if (!jumped)
+                    if (!jumped) // (!SETJMP(thiscontext.getCJmpBuf()))
                     {
                         R_GlobalContext = R_ToplevelContext = &thiscontext;
                         runWeakRefFinalizer(wr);
@@ -657,20 +647,17 @@ bool WeakRef::runFinalizers()
             if (!SETJMP(thiscontext.getCJmpBuf()))
             {
                 R_GlobalContext = R_ToplevelContext = &thiscontext;
-
                 runWeakRefFinalizer(wr);
             }
             thiscontext.end();
 #endif
-            UNPROTECT(1); /* next */
             R_ToplevelContext = saveToplevelContext;
-            R_PPStackTop = savestack;
+            GCRootBase::ppsRestoreSize(savestack);
             R_CurrentExpr = topExp;
             R_HandlerStack = oldHStack;
             R_RestartStack = oldRStack;
             R_ReturnedValue = oldRVal;
             R_Visible = oldvis;
-            UNPROTECT(4); /* topExp, oldRVal, oldRStack, oldHStack */
     }
     running = false;
     return finalizer_run;
@@ -739,6 +726,7 @@ void GCNode::gc(unsigned int num_old_gens_to_collect)
     // std::cerr << "Precheck completed OK\n";
 
     GCNode::Marker marker(num_old_gens_to_collect);
+    GCRootBase::visitRoots(&marker);
     MARK_THRU(&marker, NA_STRING);	        /* Builtin constants */
     MARK_THRU(&marker, R_BlankString);
     MARK_THRU(&marker, R_BlankScalarString);
@@ -806,9 +794,6 @@ void GCNode::gc(unsigned int num_old_gens_to_collect)
     }
 
     MARK_THRU(&marker, R_PreciousList);
-
-    for (int i = 0; i < R_PPStackTop; i++) /* Protected pointers */
-        MARK_THRU(&marker, R_PPStack[i]);
 
     for (R_bcstack_t *sp = R_BCNodeStackBase; sp < R_BCNodeStackTop; sp++)
     {
@@ -1056,8 +1041,6 @@ namespace
 
 HIDDEN SEXP do_gc(SEXP call, SEXP op, SEXP args, SEXP rho)
 {
-    SEXP value;
-
     checkArity(op, args);
     std::ostream* report_os = GCManager::setReporting(Rf_asLogical(CAR(args)) ? &std::cerr : nullptr);
     bool reset_max = asLogical(CADR(args));
@@ -1070,7 +1053,7 @@ HIDDEN SEXP do_gc(SEXP call, SEXP op, SEXP args, SEXP rho)
 
     GCManager::setReporting(report_os);
     /*- now return the [used , gc trigger size] for cells and heap */
-    PROTECT(value = allocVector(REALSXP, 14));
+    GCRoot<> value(allocVector(REALSXP, 14));
     REAL(value)[0] = GCNode::numNodes();
     REAL(value)[1] = MemoryBank::bytesAllocated();
     REAL(value)[4] = GCManager::nodeTriggerLevel();
@@ -1089,16 +1072,9 @@ HIDDEN SEXP do_gc(SEXP call, SEXP op, SEXP args, SEXP rho)
     REAL(value)[11] = GCManager::maxBytes();
     REAL(value)[12] = NA_REAL;  // in CXXR, cells don't have a fixed size
     REAL(value)[13] = 0.1*ceil(10. * GCManager::maxBytes()/Mega);
-    UNPROTECT(1);
+
     return value;
 }
-
-namespace
-{
-    constexpr int PP_REDZONE_SIZE = 1000L;
-    int R_StandardPPStackSize, R_RealPPStackSize;
-
-} // namespace
 
 static double gctimes[5], gcstarttimes[5];
 static bool gctime_enabled = false;
@@ -1171,15 +1147,6 @@ HIDDEN void R::InitMemory()
         GCManager::set_gc_fail_on_error(true);
     else if (arg && StringFalse(arg))
         GCManager::set_gc_fail_on_error(false);
-
-    R_StandardPPStackSize = R_PPStackSize;
-    R_RealPPStackSize = R_PPStackSize + PP_REDZONE_SIZE;
-    if (!(R_PPStack = (SEXP *) malloc(R_RealPPStackSize * sizeof(SEXP))))
-	R_Suicide(_("couldn't allocate memory for pointer stack"));
-    R_PPStackTop = 0;
-#if VALGRIND_LEVEL > 1
-    VALGRIND_MAKE_MEM_NOACCESS(R_PPStack+R_PPStackSize, PP_REDZONE_SIZE);
-#endif
 
     R_BCNodeStackBase = (R_bcstack_t *) malloc(R_BCNODESTACKSIZE * sizeof(R_bcstack_t));
     if (R_BCNodeStackBase == nullptr)
@@ -1770,159 +1737,6 @@ HIDDEN SEXP do_memoryprofile(SEXP call, SEXP op, SEXP args, SEXP env)
     UNPROTECT(2);
     return ans;
 }
-
-/* "protect" push a single argument onto R_PPStack */
-
-/* In handling a stack overflow we have to be careful not to use
-   PROTECT. error(_("Rf_protect(): stack overflow")) would call deparse1,
-   which uses PROTECT and segfaults.*/
-
-/* However, the traceback creation in the normal error handler also
-   does a PROTECT, as does the jumping code, at least if there are
-   cleanup expressions to handle on the way out.  So for the moment
-   we'll allocate a slightly larger PP stack and only enable the added
-   red zone during handling of a stack overflow error.  LT */
-
-static void reset_pp_stack(void *data)
-{
-    int *poldpps = (int *)data;
-    R_PPStackSize = *poldpps;
-}
-
-NORET void R_signal_protect_error(void)
-{
-    RCNTXT cntxt;
-    int oldpps = R_PPStackSize;
-
-    cntxt.start(CTXT_CCODE, R_NilValue, R_BaseEnv, R_BaseEnv, R_NilValue, R_NilValue);
-    cntxt.setContextEnd(&reset_pp_stack, &oldpps);
-
-    if (R_PPStackSize < R_RealPPStackSize)
-	R_PPStackSize = R_RealPPStackSize;
-    errorcall(R_NilValue, _("Rf_protect(): protection stack overflow"));
-
-    cntxt.end(); /* not reached */
-}
-
-NORET void R_signal_unprotect_error(void)
-{
-    error(n_("unprotect(): only %d protected item",
-		   "unprotect(): only %d protected items", R_PPStackTop),
-	  R_PPStackTop);
-}
-
-#ifndef INLINE_PROTECT
-SEXP Rf_protect(SEXP s)
-{
-    R_CHECK_THREAD;
-    if (R_PPStackTop >= R_PPStackSize)
-	R_signal_protect_error();
-    R_PPStack[R_PPStackTop++] = CHK(s);
-    return s;
-}
-
-
-/* "unprotect" pop argument list from top of R_PPStack */
-
-void Rf_unprotect(int l)
-{
-    R_CHECK_THREAD;
-    if (R_PPStackTop >=  l)
-	R_PPStackTop -= l;
-    else R_signal_unprotect_error();
-}
-#endif
-
-/* "unprotect_ptr" remove pointer from somewhere in R_PPStack */
-
-void Rf_unprotect_ptr(SEXP s)
-{
-    R_CHECK_THREAD;
-    int i = R_PPStackTop;
-
-    /* go look for  s  in  R_PPStack */
-    /* (should be among the top few items) */
-    do {
-	if (i == 0)
-	    error(_("unprotect_ptr: pointer not found"));
-    } while ( R_PPStack[--i] != s );
-
-    /* OK, got it, and  i  is indexing its location */
-    /* Now drop stack above it, if any */
-
-    while (++i < R_PPStackTop) R_PPStack[i - 1] = R_PPStack[i];
-
-    R_PPStackTop--;
-}
-
-/* Debugging function:  is s protected? */
-
-int Rf_isProtected(SEXP s)
-{
-    R_CHECK_THREAD;
-    int i = R_PPStackTop;
-
-    /* go look for  s  in  R_PPStack */
-    do
-    {
-        if (i == 0)
-            return (i);
-    } while (R_PPStack[--i] != s);
-
-    /* OK, got it, and  i  is indexing its location */
-    return (i);
-}
-
-#ifndef INLINE_PROTECT
-void R_ProtectWithIndex(SEXP s, PROTECT_INDEX *pi)
-{
-    Rf_protect(s);
-    *pi = R_PPStackTop - 1;
-}
-#endif
-
-NORET void R_signal_reprotect_error(PROTECT_INDEX i)
-{
-    error(n_("R_Reprotect: only %d protected item, can't reprotect index %d",
-		   "R_Reprotect: only %d protected items, can't reprotect index %d",
-		   R_PPStackTop),
-	  R_PPStackTop, i);
-}
-
-#ifndef INLINE_PROTECT
-void R_Reprotect(SEXP s, PROTECT_INDEX i)
-{
-    R_CHECK_THREAD;
-    if (i >= R_PPStackTop || i < 0)
-	R_signal_reprotect_error(i);
-    R_PPStack[i] = s;
-}
-#endif
-
-#ifdef UNUSED
-/* remove all objects from the protection stack from index i upwards
-   and return them in a vector. The order in the vector is from new
-   to old. */
-SEXP R_CollectFromIndex(PROTECT_INDEX i)
-{
-    R_CHECK_THREAD;
-    SEXP res;
-    int top = R_PPStackTop, j = 0;
-    if (i > top) i = top;
-    res = Rf_protect(allocVector(VECSXP, top - i));
-    while (i < top)
-	SET_VECTOR_ELT(res, j++, R_PPStack[--top]);
-    R_PPStackTop = top; /* this includes the protect we used above */
-    return res;
-}
-#endif
-
-/* "initStack" initialize environment stack */
-HIDDEN void R::initStack(void)
-{
-    R_PPStackTop = 0;
-}
-
 
 /* S-like wrappers for calloc, realloc and free that check for error
    conditions */

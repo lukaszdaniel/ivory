@@ -2502,9 +2502,9 @@ HIDDEN SEXP do_loadFromConn2(SEXP call, SEXP op, SEXP args, SEXP env)
 	if(!wasopen) {
 	    /* PROTECT is paranoia: some close() method might allocate */
 	    PROTECT(res);
-	    cntxt.end();
 	    con->close(con);
 	    UNPROTECT(1);
+	    cntxt.end();
 	}
     } else
 	error(_("the input does not start with a magic number compatible with loading from a connection"));

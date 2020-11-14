@@ -364,7 +364,7 @@ SEXP numeric_deriv(SEXP expr, SEXP theta, SEXP rho, SEXP dir, SEXP eps_, SEXP ce
 		    grad[start + k] = rDir[i] * (rDel[k] - res[k])/delta;
 		}
 	    }
-	    UNPROTECT(central ? 2 : 1); // ansDel & possibly ans
+	    if (central) {UNPROTECT(2);} else {UNPROTECT(1);} // ansDel & possibly ans
 	    pars_i[j] = origPar;
 	}
     }

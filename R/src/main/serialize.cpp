@@ -2602,9 +2602,10 @@ HIDDEN SEXP do_unserializeFromConn(SEXP call, SEXP op, SEXP args, SEXP env)
     ans = PRIMVAL(op) == 0 ? R_Unserialize(&in) : R_SerializeInfo(&in);    
     if(!wasopen) {
 	PROTECT(ans); /* paranoia about next line */
-	cntxt.end();
+
 	con->close(con);
 	UNPROTECT(1);
+	cntxt.end();
     }
     return ans;
 }
@@ -2851,11 +2852,11 @@ static SEXP R_serialize(SEXP object, SEXP icon, SEXP ascii, SEXP Sversion, SEXP 
 
 	PROTECT(val = CloseMemOutPStream(&out));
 
+	UNPROTECT(1); /* val */
 	/* end the context after anything that could raise an error but before
 	   calling OutTerm so it doesn't get called twice */
 	cntxt.end();
 
-	UNPROTECT(1); /* val */
 	return val;
     }
     else {
@@ -3147,11 +3148,11 @@ static SEXP R_lazyLoadDBinsertValue(SEXP value, SEXP file, SEXP ascii,
     value = R_serialize(value, R_NilValue, ascii, R_NilValue, hook);
     PROTECT_WITH_INDEX(value, &vpi);
     if (compress == 3)
-	REPROTECT(value = R_compress3(value), vpi);
+	{REPROTECT(value = R_compress3(value), vpi);}
     else if (compress == 2)
-	REPROTECT(value = R_compress2(value), vpi);
+	{REPROTECT(value = R_compress2(value), vpi);}
     else if (compress)
-	REPROTECT(value = R_compress1(value), vpi);
+	{REPROTECT(value = R_compress1(value), vpi);}
     key = appendRawToFile(file, value);
     UNPROTECT(1);
     return key;
@@ -3179,11 +3180,11 @@ HIDDEN SEXP do_lazyLoadDBfetch(SEXP call, SEXP op, SEXP args, SEXP env)
 
     PROTECT_WITH_INDEX(val = readRawFromFile(file, key), &vpi);
     if (compressed == 3)
-	REPROTECT(val = R_decompress3(val, err), vpi);
+	{REPROTECT(val = R_decompress3(val, err), vpi);}
     else if (compressed == 2)
-	REPROTECT(val = R_decompress2(val, err), vpi);
+	{REPROTECT(val = R_decompress2(val, err), vpi);}
     else if (compressed)
-	REPROTECT(val = R_decompress1(val, err), vpi);
+	{REPROTECT(val = R_decompress1(val, err), vpi);}
     if (err) error(_("lazy-load database '%s' is corrupt"), translateChar(STRING_ELT(file, 0)));
     val = R_unserialize(val, hook);
     if (TYPEOF(val) == PROMSXP) {

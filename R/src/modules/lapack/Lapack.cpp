@@ -221,7 +221,7 @@ static SEXP La_rs(SEXP x, SEXP only_values)
     SET_STRING_ELT(nm, 0, mkChar("values"));
     setAttrib(ret, R_NamesSymbol, nm);
     SET_VECTOR_ELT(ret, 0, values);
-    UNPROTECT(ov ? 4 : 5);
+    if (ov) {UNPROTECT(4);} else {UNPROTECT(5);}
     return ret;
 }
 
@@ -928,7 +928,7 @@ static SEXP La_rg_cmplx(SEXP x, SEXP only_values)
     SET_STRING_ELT(nm, 0, mkChar("values"));
     SET_VECTOR_ELT(ret, 0, values);
     setAttrib(ret, R_NamesSymbol, nm);
-    UNPROTECT(ov ? 3 : 4);
+    if (ov) {UNPROTECT(3);} else {UNPROTECT(4);}
     return ret;
 #else
     error(_("Fortran complex functions are not available on this platform"));
