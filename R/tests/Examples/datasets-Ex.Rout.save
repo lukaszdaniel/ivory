@@ -109,8 +109,8 @@ Nonlinear regression model
 +    start = c(lrc = log(.35)), algorithm = "plinear", trace = TRUE)
 32.946   (7.093411e-01): par = (-1.0498 22.126)
 25.992   (1.292894e-02): par = (-0.62572 19.103)
-25.99    (2.133335e-04): par = (-0.6327 19.142)
-25.99    (3.546157e-06): par = (-0.63282 19.143)
+25.998   (2.133335e-04): par = (-0.6327 19.142)
+25.990   (3.546157e-06): par = (-0.63282 19.143)
 > # using a self-starting model
 > fm3 <- nls(demand ~ SSasympOrig(Time, A, lrc), data = BOD)
 > summary(fm3)

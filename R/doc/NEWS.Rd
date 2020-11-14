@@ -126,18 +126,34 @@
       arguments \code{eps} and \code{central}, the latter for taking
       central divided differences.  That can be activated for \code{nls()}
       via \code{nls.control(nDcentral = TRUE)}.
+
+      \item \code{nls()} now passes the \code{trace} and \code{control}
+      arguments to \code{getInitial()}, notably for all self-starting models,
+      so these can also be fit in zero-noise situations via a
+      \code{scaleOffset}.  For this reason, the \code{initial} function of a
+      \code{selfStart} model now must have \code{...} in its argument list.
+
+      \item \code{bquote(splice = TRUE)} can now splice expression
+      vectors with attributes: this makes it possible to splice the
+      result of \code{parse(keep.source = TRUE)}.  Report and patch
+      provided by Lionel Henry in \PR{17869}.
+
+      \item \code{textConnection()} gets an optional \code{name} argument.
     }
   }
 
   \subsection{GRAPHICS}{
     \itemize{
       \item The graphics engine version, \code{R_GE_version}, has been
-      bumped to 13 and so packages that provide graphics devices should
+      bumped to 14 and so packages that provide graphics devices should
       be reinstalled.
 
-      \item Graphics devices can now specify \code{canClip =
-        NA_LOGICAL}, in which case the graphics engine will never
-      perform any clipping of output itself.
+      \item Graphics devices should now specify \code{deviceVersion} to
+      indicate what version of the graphics engine they support.
+
+      \item Graphics devices can now specify \code{deviceClip}.  If
+      \code{TRUE}, the graphics engine will never perform any clipping
+      of output itself.
 
       The clipping that the graphics engine does perform (for both
       \code{canClip = TRUE} and \code{canClip = FALSE}) has been
@@ -363,6 +379,10 @@
       \item \code{unlist(plst, recursive=FALSE)} no longer drops content
       for pairlists with list components, thanks to the report and patch
       by Suharto Anggono in \PR{17950}.
+
+      \item \code{iconvlist()} now also works on MUSL based (Linux)
+      systems, from a report and patch suggestion by Wesley Chan in
+      \PR{17970}.
     }
   }
 }

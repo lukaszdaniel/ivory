@@ -241,7 +241,7 @@ as perhaps (it is tested less frequently on these platforms)
 @cindex Linux
 @cindex macOS
 In addition, binary distributions are available for some common Linux
-distributions and for macOS (formerly OS X and Mac OS X).  See the
+distributions and for macOS.  See the
 @acronym{FAQ} for current details.  These are installed in
 platform-specific ways, so for the rest of this chapter we consider only
 building from the sources.
@@ -1244,7 +1244,7 @@ normally separate compilation units.
 With @command{gcc}/@command{gfortran} 9.x and later@footnote{probably
 also 8.4 and later.} LTO will flag inconsistencies in calls to Fortran
 subroutines/functions, both between Fortran source files and between
-Fortran and C/C++.  @command{gfortran} 8,4, 9.2 and later can help
+Fortran and C/C++.  @command{gfortran} 8.4, 9.2 and later can help
 understanding these by extracting C prototypes from Fortran source files
 with its @option{-fc-prototypes-external} option, e.g.@: that (at the
 time of writing) Fortran @code{LOGICAL} corresponds to
@@ -1523,15 +1523,13 @@ Windows' CRLF line endings.
 @sc{R.app}
 @end macro
 
-(`macOS' was known as `OS X' from 2012--2016 and as `Mac OS X' before that.)
-
 [The rest of this paragraph is only relevant after release.]
 The front page of a @acronym{CRAN} site has a link `Download R for (Mac)
 OS X'. Click on that, then download the file
 @file{R-@value{VERSIONno}.pkg} and install it. This runs on macOS 10.13
-and later on Intel CPU@footnote{macOS 11 has been a little tested on
-`Apple Silicon' using `Rosetta' emulation.}  (High Sierra, Mojave,
-Catalina, Big Sur, @dots{}).
+and later on Intel CPUs@footnote{macOS 11 `Big Sur' has been a little
+tested on `Apple Silicon' using `Rosetta' emulation.}  (High Sierra,
+Mojave, Catalina, Big Sur, @dots{}).
 
 Installers for R-patched and R-devel are usually available from
 @uref{https://mac.R-project.org}.  (Some of these packages are
@@ -2138,7 +2136,7 @@ Entries which may need to be changed include @samp{CC}, @samp{CXX},
 @samp{SHLIB_LD}, as well as the @samp{CXX11}, @samp{CXX14},
 @samp{CXX17} and @samp{CXX20} variants
 
-So for example on Mojave or Catalina you could select a specific
+So for example on Mojave or later you could select a specific
 non-Apple build of @command{clang} for both C and C++ with extensive
 checking by having in @file{~/.R/Makevars}
 @example
@@ -4846,16 +4844,14 @@ SAFE_FFLAGS=-axsse2
 @section macOS
 @cindex macOS
 
-(`macOS' was known as `OS X' from 2012--2016.)
-
 The instructions here are for Intel 64-bit (@cputype{x86_64}) builds on
-10.13--10.15 (High Sierra, Mojave and Catalina)@footnote{Details for the
-upcoming macOS 11 `Big Sur' remain to be confirmed: no Fortran compiler
-was available for `Apple Silicon' at the time of writing although there
-are ports under development.}.  @R{} can in principle be built for
-10.6--10.12, although this is little tested and it may be necessary to
-install later versions of software such as @code{libcurl} and an older
-version@footnote{For example, from
+10.13--10.15 (High Sierra, Mojave and Catalina) and 11.0 (Big
+Sur)@footnote{On Intel: no Fortran compiler was available for `Apple
+Silicon' at the time of writing although there are ports under
+development.}.  @R{} can in principle be built for 10.6--10.12, although
+this is little tested and it may be necessary to install later versions
+of software such as @code{libcurl} and an older version@footnote{For
+example, from
 @uref{https://github.com/@/fxcoudert/@/gfortran-for-macOS/releases}.} of
 @command{gfortran}.
 
@@ -5017,15 +5013,15 @@ For some distributions of Command Line Tools version 12,
 external software.
 
 @menu
-* Note for Catalina users::
+* Note for Catalina and Big Sur users::
 @end menu
 
-@node Note for Catalina users,  , Prerequisites, Prerequisites
-@subsubsection Note for Catalina users
+@node Note for Catalina and Big Sur users,  , Prerequisites, Prerequisites
+@subsubsection Note for Catalina and Big Sur users
 
-The default security settings for Catalina can make it difficult to
-install Apple packages built after 2019-06-01 which have not been
-`notarized'@footnote{See
+The default security settings for Catalina and later can make it
+difficult to install Apple packages built after 2019-06-01 which have
+not been `notarized'@footnote{See
 @uref{https://developer.apple.com/@/documentation/@/xcode/@/notarizing_macos_software_before_distribution}.}
 by Apple.  And not just packages, as this has been seen for executables
 contained in tarballs/zipfiles (for example, for @command{pandoc}).
@@ -5714,7 +5710,13 @@ The problem is that there is no agreement on how to set the signalling
 behaviour; Sun/Sparc, SGI/IRIX and @cputype{ix86} Linux require no
 special action, FreeBSD requires a call to (the macro)
 @code{fpsetmask(0)} and OSF1 required that computation be done with a
-@option{-ieee_with_inexact} flag etc.  On a new platform you must find
+@option{-ieee_with_inexact} flag etc. With Intel compilers on 32-bit and
+64-bit Intel machines, one has to explicitly disable flush-to-zero and
+denormals-are-zero modes. Some ARM processors including A12Z (Apple Silicon)
+by default use runfast mode, which includes flush-to-zero and default-nan,
+and hence has to be disabled. With default-nan mode, the NaN payload used
+for representation of numeric NA values is lost even on simple operations
+with finite values. On a new platform you must find
 out the magic recipe and add some code to make it work.  This can often
 be done via the file @file{config.site} which resides in the top level
 directory.

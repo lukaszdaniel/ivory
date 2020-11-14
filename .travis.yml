@@ -38,7 +38,7 @@ matrix:
             - liblzma-dev
             - libpcre3-dev
             - libedit-dev
-            - libomp-dev
+            - libomp-10-dev
             - clang
             - llvm-dev
       env: C_COMPILER=clang CXX_COMPILER=clang++ LLVM_CONFIG=/usr/bin/llvm-config CFLAGS="-g -O1" CXXFLAGS="${CFLAGS}" MAIN_LDFLAGS="${CFLAGS}"

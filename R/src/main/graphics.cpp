@@ -100,10 +100,9 @@ static void GLPretty(double *ul, double *uh, int *n)
  * __ ul < uh __
  * This only does a very simple setup.
  * The real work happens when the axis is drawn. */
-    int p1, p2;
     double dl = *ul, dh = *uh;
-    p1 = (int) ceil (log10(dl));
-    p2 = (int) floor(log10(dh));
+    int p1 = (int) ceil (log10(dl)),
+	p2 = (int) floor(log10(dh));
     if(p2 <= p1 &&  dh/dl > 10.0) {
 	p1 = (int) ceil (log10(dl) - 0.5);
 	p2 = (int) floor(log10(dh) + 0.5);
@@ -121,6 +120,7 @@ static void GLPretty(double *ul, double *uh, int *n)
 	/* round to nice "1e<N>" */
 	*ul = Rexp10(p1);
 	*uh = Rexp10(p2);
+	// have p2-p1 >= 1 
 	if (p2 - p1 <= LPR_SMALL)
 	    *n = 3; /* Small range :	Use 1,2,5,10 times 10^k tickmarks */
 	else if (p2 - p1 <= LPR_MEDIUM)

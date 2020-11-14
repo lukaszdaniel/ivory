@@ -44,7 +44,7 @@
 
 #define R_NO_REMAP
 
-#include <Rmath.h> // Rexp10
+#include <Rmath.h> // for imin2()
 
 // to get tm_zone, tm_gmtoff defined in glibc.
 // some other header, e.g. cmath, might define the macro.

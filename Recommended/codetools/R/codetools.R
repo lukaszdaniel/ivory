@@ -1,6 +1,8 @@
 ## WARNING:
 ## This code is a complete hack, may or may not work, etc..
 ## Use your own risk.  You have been warned.
+##
+## This file is generated from ../noweb/codetools.nw; make changes there.
 
 ##
 ## Environment utilities
@@ -186,7 +188,7 @@ makeLocalsCollector <- function(...,
                                 exit = function(e, msg, w) stop0(msg),
                                 collect = function(v, e, w) print(v))
     makeCodeWalker(leaf = leaf, handler = handler, collect = collect,
-                   isLocal = isLocal)
+                   isLocal = isLocal, exit = exit)
 collectLocals <- function(e, collect) {
     w <- makeLocalsCollector(collect = collect)
     walkCode(e, w)
@@ -200,9 +202,12 @@ getCollectLocalsHandler <- function(v, w) {
            "~" = function(e, w) character(0),
            "local" = if (! w$isLocal(v, w))
                collectLocalsLocalHandler,
+           ## **** could add handler for bquote() here that looks at the .()'s,
+           ## **** ..(), and extra args, but creating locals there is not very
+           ## **** sensible, so handle like quote() for now.
+           "bquote" =,
            "expression" =,
            "Quote" =,
-           # **** could add handler for bquote here that looks at the .()'s
            "quote" = if (! w$isLocal(v, w))
                function(e, w) character(0),
            "delayedAssign" =,
@@ -684,11 +689,29 @@ addCollectUsageHandler("substitute", "base", function(e, w) {
 
 addCollectUsageHandler("bquote", "base", function(e, w) {
     w$enterGlobal("function", "bquote", e, w)
-    if (length(e) > 3)
-        w$signal(gettextf("wrong number of arguments to %s", sQuote("bquote()"), domain = "R-codetools"), w)
-    if (length(e) == 3) {
-        a <- e[[3]]
-        if (! missing(a)) walkCode(a, w)
+    if (! anyDots(e)) {
+        e <- tryCatch(match.call(base::bquote, e), error = function(e) NULL)
+        if (! is.null(e) && length(e) >= 2) {
+            ## check .() and ..() arguments in -expr`, but only if
+            ## 'where' is not supplied
+            if (! "where" %in% names(e)) {
+                bqchk <- function(e) {
+                    if (is.call(e)) {
+                        ## really should only allow for ..() is 'splice =
+                        ## TRUE' is given, but that is awkward to check
+                        if (is.name(e[[1L]]) && length(e) == 2 &&
+                            as.character(e[[1]]) %in% c(".", ".."))
+                            walkCode(e[[2]], w)
+                        else lapply(e, bqchk)
+                    }
+                }
+                bqchk(e[[2]])
+            }
+
+            ## check usage in any additional arguments
+            for (a in as.list(e)[-(1 : 2)])
+                walkCode(a, w)
+        }
     }
 })
 addCollectUsageHandler("library", "base", function(e, w) {
