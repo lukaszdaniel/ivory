@@ -47,8 +47,27 @@ namespace CXXR
         const auto &SET_RTRACEptr = SET_RTRACE;
     } // namespace ForceNonInline
 
-    bool FunctionBase::rtrace(RObject *x) { return x && x->m_trace; }
+    /** @brief Get function tracing status.
+     *
+     * @param x Pointer to a CXXR::FunctionBase (checked), or a null
+     *          pointer.
+     *
+     * @return Refer to 'R Internals' document.  Returns 0 if \a x is a
+     * null pointer.
+     */
+    bool FunctionBase::rtrace(RObject *x)
+    {
+        return x && x->m_trace;
+    }
 
+    /** @brief Set function tracing status.
+     *
+     * @param x Pointer to a CXXR::FunctionBase (checked), or a null
+     * pointer.
+     *
+     * @param v The desired tracing status: non-zero if tracing is
+     * required.
+     */
     void FunctionBase::set_rtrace(RObject *x, bool v)
     {
         if (!x)

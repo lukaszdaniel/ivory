@@ -2051,7 +2051,9 @@ HIDDEN SEXP do_get(SEXP call, SEXP op, SEXP args, SEXP rho)
     /* The first arg is the object name */
     /* It must be present and a non-empty string */
 
-    if (!isValidStringF(CAR(args)))
+    if (TYPEOF(CAR(args)) == SYMSXP)
+	t1 = CAR(args);
+    else if (!isValidStringF(CAR(args)))
 	error(_("invalid first argument"));
     else
 	t1 = installTrChar(STRING_ELT(CAR(args), 0));

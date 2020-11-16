@@ -821,13 +821,15 @@ static void process_request(httpd_conn_t *c)
 #undef process_request
 #endif
 
-/* Remove . and .. from "p" following RFC 3986, 5.2.4.*/
+/* Remove . and (most) .. from "p" following RFC 3986, 5.2.4.*/
 static char *remove_dot_segments(char *p) {
 
     char *inbuf = Rstrdup(p);
     char *in = inbuf;   /* first byte of input buffer */
 
-    char *outbuf = Rstrdup(p); /* can be malloc'd, the content is not used */
+    char *outbuf = static_cast<char *>(malloc(strlen(inbuf) + 1));
+    if (!outbuf)
+	error(_("allocation error in remove_dot_segments"));
     char *out = outbuf; /* last byte (terminator) of output buffer */
     *out = '\0';
     
@@ -1043,12 +1045,14 @@ static void worker_input_handler(void *data) {
 			    return;
 			}
 			url++;
+			bol[strlen(bol) - 9] = 0; /* cut off " HTTP/1.x" */
+			c->url = remove_dot_segments(url);
 			if (streqln(bol + rll - 3, "1.0", 3)) c->attr |= HTTP_1_0;
 			if (streqln(bol, "GET ", 4)) c->method = METHOD_GET;
 			if (streqln(bol, "POST ", 5)) c->method = METHOD_POST;
 			if (streqln(bol, "HEAD ", 5)) c->method = METHOD_HEAD;
 			/* only custom handlers can use other methods */
-			if (streqln(url, "/custom/", 8)) {
+			if (streqln(c->url, "/custom/", 8)) {
 			    char *mend = url - 1;
 			    /* we generate a header with the method so it can be passed to the handler */
 			    if (!c->headers)
@@ -1069,8 +1073,6 @@ static void worker_input_handler(void *data) {
 			    remove_worker(c);
 			    return;
 			}
-			bol[strlen(bol) - 9] = 0;
-			c->url = remove_dot_segments(url);
 			c->part = PART_HEADER;
 			DBG(printf("parsed request, method=%d, URL='%s'\n", (int)c->method, c->url));
 		    } else if (c->part == PART_HEADER) {

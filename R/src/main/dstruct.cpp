@@ -30,11 +30,11 @@
 
 
 /**
- * @brief Create a R::BuiltInFunction object
+ * @brief Create a CXXR::BuiltInFunction object
  * 
- * @param offset offset for the R::BuiltInFunction
+ * @param offset offset for the CXXR::BuiltInFunction
  * 
- * @param eval parameter to determine whether R::BuiltInFunction
+ * @param eval parameter to determine whether CXXR::BuiltInFunction
  *              is a "builtin" or "special"
  * 
  * @return builtin function, either "builtin" or "special"

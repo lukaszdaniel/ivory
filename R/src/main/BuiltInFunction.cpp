@@ -52,17 +52,17 @@ namespace CXXR
     }
 
     /* Primitive Access Methods */
-    /** @brief Get offset of a R::BuiltInFunction.
+    /** @brief Get offset of a CXXR::BuiltInFunction.
      *
-     * @param x Pointer to a R::BuiltInFunction.
+     * @param x Pointer to a CXXR::BuiltInFunction.
      *
      * @return The offset of this function within the function table.
      */
     int BuiltInFunction::primoffset(RObject *x) { return x ? x->u.primsxp.m_offset : 0; }
 
-    /** @brief Set the new offset for a R::BuiltInFunction.
+    /** @brief Set the new offset for a CXXR::BuiltInFunction.
      *
-     * @param x Pointer to a R::BuiltInFunction (checked).
+     * @param x Pointer to a CXXR::BuiltInFunction (checked).
      *
      * @param v The new offset for this function within the function table.
      */
