@@ -27,6 +27,7 @@
 #include <Localization.h>
 #include <Defn.h>
 #include <Internal.h>
+using namespace R;
 
 static SEXP cumsum(SEXP x, SEXP s)
 {

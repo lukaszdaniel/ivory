@@ -68,7 +68,7 @@
 #include "arithmetic.h"		/* complex_*  */
 #include "Rcomplex.h"		/* I, SET_C99_COMPLEX, toC99 */
 #include <R_ext/Itermacros.h>
-
+using namespace R;
 
 /* interval at which to check interrupts, a guess */
 constexpr R_xlen_t NINTERRUPT = 10000000;

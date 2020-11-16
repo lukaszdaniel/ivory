@@ -38,7 +38,7 @@
 #endif
 
 using namespace std;
-using namespace R;
+using namespace CXXR;
 
 unsigned int MemoryBank::SchwarzCtr::s_count = 0;
 size_t MemoryBank::s_blocks_allocated = 0;
@@ -79,6 +79,7 @@ unsigned int MemoryBank::s_pooltab[] = {0, 0, 0, 0, 0, 0, 0, 0, 0,
 
 void *MemoryBank::alloc2(size_t bytes)
 {
+    CellPool *pool = nullptr;
     void *p = nullptr;
     bool joy = false; // true if GC succeeds after bad_alloc
     try
@@ -90,16 +91,17 @@ void *MemoryBank::alloc2(size_t bytes)
             p = ::operator new(bytes);
         }
         else
-            p = s_pools[s_pooltab[bytes]]->allocate();
+        {
+            pool = s_pools[s_pooltab[bytes]];
+            p = pool->allocate();
+        }
     }
     catch (bad_alloc)
     {
         if (s_cue_gc)
         {
             // Try to force garbage collection if available:
-            size_t sought_bytes = bytes;
-            if (bytes < s_max_cell_size)
-                sought_bytes = s_pools[s_pooltab[bytes]]->superblockSize();
+            size_t sought_bytes = (pool ? pool->superblockSize() : bytes);
             joy = s_cue_gc(sought_bytes, true);
         }
         else
@@ -108,23 +110,21 @@ void *MemoryBank::alloc2(size_t bytes)
     if (!p && joy)
     {
         // Try once more:
-        try
-        {
-            if (bytes > s_max_cell_size)
-                p = ::operator new(bytes);
-            else
-                p = s_pools[s_pooltab[bytes]]->allocate();
-        }
-        catch (bad_alloc)
-        {
-            throw;
-        }
+        p = (pool ? pool->allocate() : ::operator new(bytes));
     }
     ++s_blocks_allocated;
     s_bytes_allocated += bytes;
 #if VALGRIND_LEVEL >= 2
-    if (bytes <= s_max_cell_size)
-        VALGRIND_MAKE_MEM_UNDEFINED(p, bytes);
+    if (pool)
+    {
+        // Fence off supernumerary bytes:
+        size_t surplus = pool->cellSize() - bytes;
+        if (surplus > 0)
+        {
+            char *tail = reinterpret_cast<char *>(p) + bytes;
+            VALGRIND_MAKE_MEM_NOACCESS(tail, surplus);
+        }
+    }
 #endif
 #ifdef R_MEMORY_PROFILING
     if (bytes >= s_threshold && s_monitor)

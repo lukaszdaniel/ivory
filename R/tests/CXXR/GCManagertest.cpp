@@ -19,7 +19,7 @@
 
 /** @file GCManagertest.cpp
  *
- * Test of class R::GCManager
+ * Test of class CXXR::GCManager
  */
 
 #include <cmath>
@@ -34,7 +34,7 @@
 #include <CXXR/WeakRef.hpp>
 
 using namespace std;
-using namespace R;
+using namespace CXXR;
 
 namespace
 {

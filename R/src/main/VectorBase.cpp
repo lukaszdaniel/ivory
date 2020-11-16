@@ -32,7 +32,7 @@
 #include <CXXR/VectorBase.hpp>
 #include <Rinternals.h>
 
-namespace R
+namespace CXXR
 {
     // Force the creation of non-inline embodiments of functions callable
     // from C:
@@ -42,4 +42,4 @@ namespace R
         const auto &SET_TRUELENGTHptr = SET_TRUELENGTH;
         const auto &STDVEC_TRUELENGTHptr = STDVEC_TRUELENGTH;
     } // namespace ForceNonInline
-} // namespace R
+} // namespace CXXR

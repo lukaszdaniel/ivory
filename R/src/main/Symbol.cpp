@@ -31,7 +31,7 @@
 #include <CXXR/Symbol.hpp>
 #include <Rinternals.h>
 
-namespace R
+namespace CXXR
 {
     // Force the creation of non-inline embodiments of functions callable
     // from C:
@@ -57,7 +57,7 @@ namespace R
     /* Symbol Access Methods */
     /** @brief Symbol name.
      *
-     * @param x Pointer to a R::Symbol (checked).
+     * @param x Pointer to a CXXR::Symbol (checked).
      *
      * @return Pointer to a R::String representing \a x's name.
      */
@@ -65,9 +65,9 @@ namespace R
 
     /** @brief Symbol's value in the base environment.
      *
-     * @param x Pointer to a R::Symbol (checked).
+     * @param x Pointer to a CXXR::Symbol (checked).
      *
-     * @return Pointer to a R::RObject representings \a x's value.
+     * @return Pointer to a CXXR::RObject representings \a x's value.
      *         Returns R_UnboundValue if no value is currently
      *         associated with the Symbol.
      */
@@ -77,7 +77,7 @@ namespace R
 
     /** @brief Does symbol relate to a <tt>...</tt> expression?
      *
-     * @param x Pointer to a R::Symbol (checked).
+     * @param x Pointer to a CXXR::Symbol (checked).
      *
      * @return \c TRUE iff this symbol denotes an element of a
      *         <tt>...</tt> expression.
@@ -112,7 +112,7 @@ namespace R
 
     /** @brief Set Symbol name.
      *
-     * @param x Pointer to a R::Symbol (checked).
+     * @param x Pointer to a CXXR::Symbol (checked).
      *
      * @param v Pointer to a R::String representing \a x's name. 
      */
@@ -125,7 +125,7 @@ namespace R
 
     /** @brief Set symbol's value in the base environment.
      *
-     * @param x Pointer to a R::Symbol (checked).
+     * @param x Pointer to a CXXR::Symbol (checked).
      *
      * @param val Pointer to the RObject now to be considered as
      *            the value of this symbol.  A null pointer or
@@ -146,4 +146,4 @@ namespace R
             return;
         x->u.symsxp.m_internal = v;
     }
-} // namespace R
+} // namespace CXXR

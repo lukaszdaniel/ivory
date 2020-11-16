@@ -26,7 +26,7 @@
 
 /** @file FunctionBase.hpp
  *
- * @brief Class R::FunctionBase and associated C interface functions.
+ * @brief Class CXXR::FunctionBase and associated C interface functions.
  */
 
 #ifndef FUNCTIONBASE_HPP
@@ -35,7 +35,7 @@
 #include <CXXR/RObject.hpp>
 #include <CXXR/SEXP_downcast.hpp>
 
-namespace R
+namespace CXXR
 {
 
     /** @brief Base class for function types.
@@ -67,6 +67,6 @@ namespace R
         virtual ~FunctionBase(){};
     };
 
-} // namespace R
+} // namespace CXXR
 
 #endif // FUNCTIONBASE_HPP

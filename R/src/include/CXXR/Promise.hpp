@@ -25,7 +25,7 @@
  */
 
 /** @file Promise.hpp
- * @brief Class R::Promise and associated C interface.
+ * @brief Class CXXR::Promise and associated C interface.
  */
 
 #ifndef PROMISE_HPP
@@ -34,7 +34,7 @@
 #include <CXXR/RObject.hpp>
 #include <CXXR/SEXP_downcast.hpp>
 
-namespace R
+namespace CXXR
 {
     /** @brief Mechanism for deferred evaluation.
      *
@@ -92,6 +92,6 @@ namespace R
         static void set_prenv(RObject *x, RObject *v);
         static void set_prseen(RObject *x, unsigned int v);
     };
-} // namespace R
+} // namespace CXXR
 
 #endif /* PROMISE_HPP */

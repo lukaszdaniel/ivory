@@ -35,9 +35,9 @@
 #include <R_ext/Print.h>
 #include <Rinternals.h>
 
-using namespace R;
+using namespace CXXR;
 
-namespace R
+namespace CXXR
 {
     // Force the creation of non-inline embodiments of functions callable
     // from C:
@@ -55,4 +55,4 @@ namespace R
             return;
         x->m_trace = v;
     }
-} // namespace R
+} // namespace CXXR

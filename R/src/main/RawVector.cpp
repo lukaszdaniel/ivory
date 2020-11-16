@@ -32,7 +32,7 @@
 #include <CXXR/RawVector.hpp>
 #include <Rinternals.h>
 
-namespace R
+namespace CXXR
 {
     // Force the creation of non-inline embodiments of functions callable
     // from C:
@@ -48,4 +48,4 @@ namespace R
     {
         return "raw";
     }
-} // namespace R
+} // namespace CXXR

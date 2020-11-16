@@ -32,7 +32,7 @@
 #include <R_ext/Boolean.h>
 #include <Rinternals.h>
 
-namespace R
+namespace CXXR
 {
     // Force the creation of non-inline embodiments of functions callable
     // from C:
@@ -540,4 +540,4 @@ namespace R
         ((R_bndval_t *)&(x->u.listsxp.m_carval))->ival = v;
     }
 
-} // namespace R
+} // namespace CXXR

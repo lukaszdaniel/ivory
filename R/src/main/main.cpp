@@ -54,6 +54,7 @@
 #include <CXXR/GCRoot.hpp>
 
 using namespace R;
+using namespace CXXR;
 
 #ifdef ENABLE_NLS
 HIDDEN void nl_Rdummy(void)
@@ -371,7 +372,7 @@ void R_ReplDLLinit(void)
 		{
 			R_IoBufferWriteReset(&R_ConsoleIob);
 		}
-		catch (JMPException &e)
+		catch (CXXR::JMPException &e)
 		{
 			// std::cerr << __FILE__ << ":" << __LINE__ << " Seeking " << e.context << "; in " << &R_Toplevel << std::endl;
 			if (e.context != &R_Toplevel)
@@ -759,7 +760,7 @@ static void R_LoadProfile(FILE *fparg, SEXP env)
 			R_GlobalContext = R_ToplevelContext = R_SessionContext = &R_Toplevel;
 			R_ReplFile(fp, env);
 		}
-		catch (JMPException &e)
+		catch (CXXR::JMPException &e)
 		{
 			// std::cerr << __FILE__ << ":" << __LINE__ << " Seeking " << e.context << "; in " << &R_Toplevel << std::endl;
 			if (e.context != &R_Toplevel)
@@ -1015,7 +1016,7 @@ void setup_Rmainloop(void)
 			init_signal_handlers();
 		R_ReplFile(fp, baseEnv);
 	}
-	catch (JMPException &e)
+	catch (CXXR::JMPException &e)
 	{
 		// std::cerr << __FILE__ << ":" << __LINE__ << " Seeking " << e.context << "; in " << &R_Toplevel << std::endl;
 		if (e.context != &R_Toplevel)
@@ -1079,7 +1080,7 @@ void setup_Rmainloop(void)
 		}
 		UNPROTECT(1);
 	}
-	catch (JMPException &e)
+	catch (CXXR::JMPException &e)
 	{
 		// std::cerr << __FILE__ << ":" << __LINE__ << " Seeking " << e.context << "; in " << &R_Toplevel << std::endl;
 		if (e.context != &R_Toplevel)
@@ -1139,7 +1140,7 @@ void setup_Rmainloop(void)
 	{
 		R_InitialData();
 	}
-	catch (JMPException &e)
+	catch (CXXR::JMPException &e)
 	{
 		// std::cerr << __FILE__ << ":" << __LINE__ << " Seeking " << e.context << "; in " << &R_Toplevel << std::endl;
 		if (e.context != &R_Toplevel)
@@ -1148,7 +1149,7 @@ void setup_Rmainloop(void)
 		{
 			warning(_("unable to restore saved data in %s\n"), get_workspace_name());
 		}
-		catch (JMPException &e)
+		catch (CXXR::JMPException &e)
 		{
 			// std::cerr << __FILE__ << ":" << __LINE__ << " Seeking " << e.context << "; in " << &R_Toplevel << std::endl;
 			if (e.context != &R_Toplevel)
@@ -1197,7 +1198,7 @@ void setup_Rmainloop(void)
 		}
 		UNPROTECT(1);
 	}
-	catch (JMPException &e)
+	catch (CXXR::JMPException &e)
 	{
 		// std::cerr << __FILE__ << ":" << __LINE__ << " Seeking " << e.context << "; in " << &R_Toplevel << std::endl;
 		if (e.context != &R_Toplevel)
@@ -1245,7 +1246,7 @@ void setup_Rmainloop(void)
 		}
 		UNPROTECT(1);
 	}
-	catch (JMPException &e)
+	catch (CXXR::JMPException &e)
 	{
 		// std::cerr << __FILE__ << ":" << __LINE__ << " Seeking " << e.context << "; in " << &R_Toplevel << std::endl;
 		if (e.context != &R_Toplevel)
@@ -1296,7 +1297,7 @@ void setup_Rmainloop(void)
 	{
 		R_init_jit_enabled();
 	}
-	catch (JMPException &e)
+	catch (CXXR::JMPException &e)
 	{
 		// std::cerr << __FILE__ << ":" << __LINE__ << " Seeking " << e.context << "; in " << &R_Toplevel << std::endl;
 		if (e.context != &R_Toplevel)
@@ -1350,7 +1351,7 @@ void run_Rmainloop(void)
 			R_ReplConsole(R_GlobalEnv, 0, 0);
     		end_Rmainloop(); /* must go here */
 		}
-		catch (JMPException &e)
+		catch (CXXR::JMPException &e)
 		{
 			// std::cerr << __FILE__ << ":" << __LINE__ << " Seeking " << e.context << "; in " << &R_Toplevel << std::endl;
 			if (e.context != &R_Toplevel)
@@ -1602,7 +1603,7 @@ HIDDEN SEXP do_browser(SEXP call, SEXP op, SEXP args, SEXP rho)
 						}
 						thiscontext.end();
 					}
-					catch (JMPException &e)
+					catch (CXXR::JMPException &e)
 					{
 						// std::cerr << __FILE__ << ":" << __LINE__ << " Seeking " << e.context << "; in " << &thiscontext << std::endl;
 						if (e.context != &thiscontext)
@@ -1615,7 +1616,7 @@ HIDDEN SEXP do_browser(SEXP call, SEXP op, SEXP args, SEXP rho)
 			}
 			returncontext.end();
 		}
-		catch (JMPException &e)
+		catch (CXXR::JMPException &e)
 		{
 			// std::cerr << __FILE__ << ":" << __LINE__ << " Seeking " << e.context << "; in " << &returncontext << std::endl;
 			if (e.context != &returncontext)

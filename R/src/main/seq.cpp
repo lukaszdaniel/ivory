@@ -36,6 +36,8 @@
 #include <R_ext/Itermacros.h>
 
 #include "RBufferUtils.h"
+using namespace R;
+
 static R_StringBuffer cbuff = R_StringBuffer();
 
 #define _S4_rep_keepClass

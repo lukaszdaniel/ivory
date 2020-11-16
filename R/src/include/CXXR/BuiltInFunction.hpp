@@ -25,7 +25,7 @@
  */
 
 /** @file BuiltInFunction.hpp
- * @brief Class R::BuiltInFunction and associated C interface.
+ * @brief Class CXXR::BuiltInFunction and associated C interface.
  */
 
 #ifndef BUILTINFUNCTION_HPP
@@ -33,7 +33,7 @@
 
 #include <CXXR/FunctionBase.hpp>
 
-namespace R
+namespace CXXR
 {
     /** @brief The type of the do_xxxx functions.
      *
@@ -163,7 +163,7 @@ namespace R
     void SET_PRIMOFFSET(RObject *x, int v);
 /* Defined and initialized in names.cpp (not main.cpp) :*/
 #ifndef __R_Names__
-    extern std::vector<R::FUNTAB> R_FunTab; /* Built in functions */
+    extern std::vector<CXXR::FUNTAB> R_FunTab; /* Built in functions */
 #endif
 
     CCODE PRIMFUN(RObject *x);
@@ -174,6 +174,6 @@ namespace R
     int PRIMPRINT(RObject *x);
     int PRIMINTERNAL(RObject *x);
 
-} // namespace R
+} // namespace CXXR
 
 #endif /* BUILTINFUNCTION_HPP */

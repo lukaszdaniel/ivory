@@ -25,7 +25,7 @@
  */
 
 /** @file ExternalPointer.hpp
- * @brief Class R::ExternalPointer and associated C interface.
+ * @brief Class CXXR::ExternalPointer and associated C interface.
  */
 
 #ifndef EXTERNALPOINTER_HPP
@@ -35,7 +35,7 @@
 #include <CXXR/GCEdge.hpp>
 #include <CXXR/SEXP_downcast.hpp>
 
-namespace R
+namespace CXXR
 {
     /** @brief External pointer.
      *
@@ -80,6 +80,6 @@ namespace R
     protected:
     private:
     };
-} // namespace R
+} // namespace CXXR
 
 #endif // EXTERNALPOINTER_HPP

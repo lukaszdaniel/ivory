@@ -28,6 +28,7 @@
 #include <Defn.h>
 
 using namespace R;
+using namespace CXXR;
 
 /* A count of the memory used by an object. The following assumptions
    are made.
@@ -59,7 +60,7 @@ static R_size_t objectsize(SEXP s)
 	for (Rboolean done = FALSE; ! done; ) {
 	    cnt += objectsize(TAG(s));
 	    cnt += objectsize(CAR(s));
-	    cnt += sizeof(RObject);
+	    cnt += sizeof(CXXR::RObject);
 	    cnt += objectsize(ATTRIB(s));
 	    s = CDR(s);
 	    switch (TYPEOF(s)) {
@@ -149,7 +150,7 @@ static R_size_t objectsize(SEXP s)
        we need to take into account the rounding up that goes on
        in the node classes. */
     if(isVec) {
-	cnt += sizeof(RObject);
+	cnt += sizeof(CXXR::RObject);
 	if (vcnt > 16) cnt += 8*vcnt;
 	else if (vcnt > 8) cnt += 128;
 	else if (vcnt > 6) cnt += 64;
@@ -157,7 +158,7 @@ static R_size_t objectsize(SEXP s)
 	else if (vcnt > 2) cnt += 32;
 	else if (vcnt > 1) cnt += 16;
 	else if (vcnt > 0) cnt += 8;
-    } else cnt += sizeof(RObject);
+    } else cnt += sizeof(CXXR::RObject);
     /* add in attributes: these are fake for CHARSXPs */
     if(TYPEOF(s) != CHARSXP) cnt += objectsize(ATTRIB(s));
     return(cnt);

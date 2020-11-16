@@ -25,7 +25,7 @@
  */
 
 /** @file Symbol.hpp
- * @brief Class R::Symbol and associated C interface.
+ * @brief Class CXXR::Symbol and associated C interface.
  */
 
 #ifndef SYMBOL_HPP
@@ -34,7 +34,7 @@
 #include <CXXR/RObject.hpp>
 #include <CXXR/SEXP_downcast.hpp>
 
-namespace R
+namespace CXXR
 {
     /** @brief Class used to represent R symbols.
      *
@@ -117,6 +117,6 @@ namespace R
         static void set_symvalue(RObject *x, RObject *val);
         static void set_internal(RObject *x, RObject *v);
     };
-} // namespace R
+} // namespace CXXR
 
 #endif /* SYMBOL_HPP */

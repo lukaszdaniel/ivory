@@ -26,7 +26,7 @@
 
 /** @file RObject.hpp
  *
- * @brief Class R::RObject and associated C interface functions.
+ * @brief Class CXXR::RObject and associated C interface functions.
  */
 
 #ifndef ROBJECT_HPP
@@ -51,7 +51,7 @@
 constexpr int NAMED_BITS = 16;
 
 /* Flags */
-namespace R
+namespace CXXR
 {
     /** @brief Replacement for CR's SEXPREC.
      *
@@ -107,11 +107,11 @@ namespace R
     /* Every node must start with a set of sxpinfo flags and an attribute
    field. Under the generational collector these are followed by the
    fields used to maintain the collector's linked list structures. */
-} // namespace R
+} // namespace CXXR
 #ifdef SWITCH_TO_REFCNT
 constexpr int REFCNTMAX = ((1 << NAMED_BITS) - 1);
 #endif
-namespace R
+namespace CXXR
 {
 
     /** @brief Replacement for CR's SEXPREC.
@@ -363,31 +363,31 @@ namespace R
     };
 
 #if defined(COMPUTE_REFCNT_VALUES)
-#define REFCNT(x) (R::RObject::refcnt(x))
-#define TRACKREFS(x) (R::RObject::trackrefs(x))
+#define REFCNT(x) (CXXR::RObject::refcnt(x))
+#define TRACKREFS(x) (CXXR::RObject::trackrefs(x))
 #else
 #define REFCNT(x) 0
 #define TRACKREFS(x) false
 #endif
 
 #if defined(COMPUTE_REFCNT_VALUES)
-#define SET_REFCNT(x, v) (R::RObject::set_refcnt(x, v))
+#define SET_REFCNT(x, v) (CXXR::RObject::set_refcnt(x, v))
 #if defined(EXTRA_REFCNT_FIELDS)
-#define SET_TRACKREFS(x, v) (R::RObject::set_trackrefs(x, v))
+#define SET_TRACKREFS(x, v) (CXXR::RObject::set_trackrefs(x, v))
 #else
-#define SET_TRACKREFS(x, v) (R::RObject::set_trackrefs(x, !v))
+#define SET_TRACKREFS(x, v) (CXXR::RObject::set_trackrefs(x, !v))
 #endif
 #define DECREMENT_REFCNT(x)                                       \
     do                                                            \
     {                                                             \
-        R::RObject *drc__x__ = (x);                               \
+        CXXR::RObject *drc__x__ = (x);                               \
         if (REFCNT(drc__x__) > 0 && REFCNT(drc__x__) < REFCNTMAX) \
             SET_REFCNT(drc__x__, REFCNT(drc__x__) - 1);           \
     } while (0)
 #define INCREMENT_REFCNT(x)                             \
     do                                                  \
     {                                                   \
-        R::RObject *irc__x__ = (x);                     \
+        CXXR::RObject *irc__x__ = (x);                     \
         if (REFCNT(irc__x__) < REFCNTMAX)               \
             SET_REFCNT(irc__x__, REFCNT(irc__x__) + 1); \
     } while (0)
@@ -469,7 +469,7 @@ namespace R
 #define ENSURE_NAMEDMAX(v)                  \
     do                                      \
     {                                       \
-        R::RObject *__enm_v__ = (v);        \
+        CXXR::RObject *__enm_v__ = (v);        \
         if (NAMED(__enm_v__) < NAMEDMAX)    \
             SET_NAMED(__enm_v__, NAMEDMAX); \
     } while (0)
@@ -541,18 +541,18 @@ namespace R
    pointer. The layout should not change on 64 bit platforms. */
     union R_bndval_t
     {
-        R::RObject *sxpval;
+        CXXR::RObject *sxpval;
         double dval;
         int ival;
     };
 
-#define BNDCELL_DVAL(v) (R::RObject::bndcell_dval(v))
-#define BNDCELL_IVAL(v) (R::RObject::bndcell_ival(v))
-#define BNDCELL_LVAL(v) (R::RObject::bndcell_lval(v))
+#define BNDCELL_DVAL(v) (CXXR::RObject::bndcell_dval(v))
+#define BNDCELL_IVAL(v) (CXXR::RObject::bndcell_ival(v))
+#define BNDCELL_LVAL(v) (CXXR::RObject::bndcell_lval(v))
 
-#define SET_BNDCELL_DVAL(cell, dval_) (R::RObject::set_bndcell_dval(cell, dval_))
-#define SET_BNDCELL_IVAL(cell, ival_) (R::RObject::set_bndcell_ival(cell, ival_))
-#define SET_BNDCELL_LVAL(cell, lval_) (R::RObject::set_bndcell_lval(cell, lval_))
+#define SET_BNDCELL_DVAL(cell, dval_) (CXXR::RObject::set_bndcell_dval(cell, dval_))
+#define SET_BNDCELL_IVAL(cell, ival_) (CXXR::RObject::set_bndcell_ival(cell, ival_))
+#define SET_BNDCELL_LVAL(cell, lval_) (CXXR::RObject::set_bndcell_lval(cell, lval_))
 
 #define INIT_BNDCELL(cell, type)      \
     do                                \
@@ -574,7 +574,7 @@ namespace R
     {
         union
         {
-            R::RObject *backpointer;
+            CXXR::RObject *backpointer;
             double align;
         } u;
     };
@@ -588,6 +588,6 @@ namespace R
     inline size_t COMPLEX2VEC(size_t n) { return (n > 0) ? (n * sizeof(Rcomplex) - 1) / sizeof(VECREC) + 1 : 0; }
     inline size_t PTR2VEC(size_t n) { return (n > 0) ? (n * sizeof(RObject) - 1) / sizeof(VECREC) + 1 : 0; }
 
-} // namespace R
+} // namespace CXXR
 
 #endif /* ROBJECT_HPP */

@@ -38,6 +38,7 @@
 #include <utility>
 
 using namespace R;
+using namespace CXXR;
 
 static SEXP GetObject(RCNTXT *cptr)
 {

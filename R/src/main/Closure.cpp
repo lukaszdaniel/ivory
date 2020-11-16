@@ -31,7 +31,7 @@
 #include <CXXR/Closure.hpp>
 #include <Rinternals.h>
 
-namespace R
+namespace CXXR
 {
     // Force the creation of non-inline embodiments of functions callable
     // from C:
@@ -53,17 +53,17 @@ namespace R
     }
 
     /* Closure Access Methods */
-    /** @brief Access formal arguments of a R::Closure.
+    /** @brief Access formal arguments of a CXXR::Closure.
      *
-     * @param x Pointer to a R::Closure object (checked).
+     * @param x Pointer to a CXXR::Closure object (checked).
      *
      * @return Pointer to the formal argument list of \a x.
      */
     RObject *Closure::formals(RObject *x) { return x ? x->u.closxp.m_formals : nullptr; }
 
-    /** @brief Set the formal arguments of a R::Closure.
+    /** @brief Set the formal arguments of a CXXR::Closure.
      *
-     * @param x Pointer to a R::Closure object (checked).
+     * @param x Pointer to a CXXR::Closure object (checked).
      *
      * @param v Pointer to the formal argument list.
      */
@@ -74,19 +74,19 @@ namespace R
         x->u.closxp.m_formals = v;
     }
 
-    /** @brief Access the body of a R::Closure.
+    /** @brief Access the body of a CXXR::Closure.
      *
-     * @param x Pointer to a R::Closure object (checked).
+     * @param x Pointer to a CXXR::Closure object (checked).
      *
      * @return Pointer to the body of \a x.
      */
     RObject *Closure::body(RObject *x) { return x ? x->u.closxp.m_body : nullptr; }
 
-    /** @brief Set the body of a R::Closure.
+    /** @brief Set the body of a CXXR::Closure.
      *
-     * @param x Pointer to a R::Closure object (checked).
+     * @param x Pointer to a CXXR::Closure object (checked).
      *
-     * @param v Pointer to the body of this R::Closure.
+     * @param v Pointer to the body of this CXXR::Closure.
      */
     void Closure::set_body(RObject *x, RObject *v)
     {
@@ -95,20 +95,20 @@ namespace R
         x->u.closxp.m_body = v;
     }
 
-    /** @brief Access the environment of a R::Closure.
+    /** @brief Access the environment of a CXXR::Closure.
      *
-     * @param x Pointer to a R::Closure object (checked).
+     * @param x Pointer to a CXXR::Closure object (checked).
      *
      * @return Pointer to the environment of x.
      */
     RObject *Closure::cloenv(RObject *x) { return x ? x->u.closxp.m_env : nullptr; }
 
-    /** @brief Replace the environment of a R::Closure.
+    /** @brief Replace the environment of a CXXR::Closure.
      *
-     * @param x Pointer to a R::Closure object (checked).
+     * @param x Pointer to a CXXR::Closure object (checked).
      *
      * @param v Pointer to the environment now to be
-     *          considered as the environment of this R::Closure.  A
+     *          considered as the environment of this CXXR::Closure.  A
      *          null pointer is not permissible (not checked).
      */
     void Closure::set_cloenv(RObject *x, RObject *v)
@@ -120,7 +120,7 @@ namespace R
 
     /** @brief Query debugging status.
      *
-     * @param x Pointer to a R::Closure object.
+     * @param x Pointer to a CXXR::Closure object.
      *
      * @return \c true if debugging is set, i.e. evaluations of the
      *         function should run under the browser.
@@ -128,9 +128,9 @@ namespace R
     bool Closure::rdebug(RObject *x) { return x && x->m_debug; }
 
     /**
-     * Set the debugging state of a R::Closure object.
+     * Set the debugging state of a CXXR::Closure object.
      *
-     * @param x Pointer a R::Closure object (checked).
+     * @param x Pointer a CXXR::Closure object (checked).
      *
      * @param v The new debugging state.
      */
@@ -149,4 +149,4 @@ namespace R
             return;
         x->m_spare = v;
     }
-} // namespace R
+} // namespace CXXR

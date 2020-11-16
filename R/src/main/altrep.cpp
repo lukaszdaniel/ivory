@@ -26,7 +26,7 @@
 #include <Defn.h>
 #include <Localization.h>
 #include <R_ext/Altrep.h>
-
+using namespace R;
 
 /***
  *** ALTREP Abstract Class Framework 
@@ -111,12 +111,14 @@ HIDDEN void R_reinit_altrep_classes(DllInfo *dll)
  **  ALTREP Method Tables and Class Objects
  **/
 
-#define ALTREP_ERROR_IN_CLASS(msg, x) do {			\
-	error("%s [class: %s, pkg: %s]",			\
-	      msg,						\
-	      CHAR(PRINTNAME(ALTREP_OBJECT_CLSSYM(x))),		\
-	      CHAR(PRINTNAME(ALTREP_OBJECT_PKGSYM(x))));	\
-    } while(0)
+#define ALTREP_ERROR_IN_CLASS(msg, x)                    \
+    do                                                   \
+    {                                                    \
+        error("%s [class: %s, pkg: %s]",                 \
+              msg,                                       \
+              CHAR(PRINTNAME(ALTREP_OBJECT_CLSSYM(x))),  \
+              CHAR(PRINTNAME(ALTREP_OBJECT_PKGSYM(x)))); \
+    } while (0)
 
 static void SET_ALTREP_CLASS(SEXP x, SEXP class_)
 {
@@ -124,7 +126,7 @@ static void SET_ALTREP_CLASS(SEXP x, SEXP class_)
     SET_TAG(x, class_);
 }
 
-#define CLASS_METHODS_TABLE(class_) STDVEC_DATAPTR(class_)
+#define CLASS_METHODS_TABLE(class_) CXXR::stdvec_dataptr(class_)
 #define GENERIC_METHODS_TABLE(x, class_) \
     ((class_##_methods_t *)CLASS_METHODS_TABLE(ALTREP_CLASS(x)))
 

@@ -39,6 +39,7 @@
 #include <boost/preprocessor.hpp>
 
 using namespace std;
+using namespace R;
 
 /* Was 'name' prior to 2.13.0, then .NAME, but checked as
    'name' up to 2.15.1. */

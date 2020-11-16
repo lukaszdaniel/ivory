@@ -32,7 +32,7 @@
 #include <CXXR/Environment.hpp>
 #include <Rinternals.h>
 
-namespace R
+namespace CXXR
 {
     // Force the creation of non-inline embodiments of functions callable
     // from C:
@@ -50,14 +50,14 @@ namespace R
 
     /* Environment Access Methods */
     /**
-     * @param x Pointer to an R::Environment.
+     * @param x Pointer to an CXXR::Environment.
      * @return Pointer to the frame of \a x .
      */
     RObject *Environment::frame(RObject *x) { return x ? x->u.envsxp.m_frame : nullptr; }
 
     /** @brief Access an environment's Frame, represented as a PairList.
      *
-     * @param x Pointer to a R::Environment (checked).
+     * @param x Pointer to a CXXR::Environment (checked).
      *
      * @return Pointer to a PairList representing the contents of the
      * Frame of \a x (may be null).  This PairList is generated on the
@@ -71,13 +71,13 @@ namespace R
     RObject *Environment::enclos(RObject *x) { return x ? x->u.envsxp.m_enclos : nullptr; }
 
     /**
-     * @param x Pointer to a R::Environment.
+     * @param x Pointer to a CXXR::Environment.
      * @return Pointer to \a x 's hash table (may be NULL).
      */
     RObject *Environment::hashtab(RObject *x) { return x ? x->u.envsxp.m_hashtab : nullptr; }
 
     /**
-     * @param x Pointer to a R::Environment.
+     * @param x Pointer to a CXXR::Environment.
      * @return \a x 's environment flags.
      * @deprecated
      */
@@ -85,7 +85,7 @@ namespace R
 
     /**
      * Set environment flags.
-     * @param x Pointer to a R::Environment.
+     * @param x Pointer to a CXXR::Environment.
      * @param v The new flags.
      * @deprecated
      */
@@ -98,7 +98,7 @@ namespace R
 
     /**
      * Set environment's frame.
-     * @param x Pointer to a R::Environment.
+     * @param x Pointer to a CXXR::Environment.
      * @param v Pointer to the new frame.
      * @todo Probably should be private.
      */
@@ -111,7 +111,7 @@ namespace R
 
     /**
      * Set environment's enclosing environment.
-     * @param x Pointer to a R::Environment.
+     * @param x Pointer to a CXXR::Environment.
      * @param v Pointer to the new enclosing environment.
      * @todo Probably should be private.
      */
@@ -124,7 +124,7 @@ namespace R
 
     /**
      * Set environment's hash table.
-     * @param x Pointer to a R::Environment.
+     * @param x Pointer to a CXXR::Environment.
      * @param v Pointer to the hash table.
      * @todo Probably should be private.
      */
@@ -160,4 +160,4 @@ namespace R
 
         x->m_gpbits &= ~(GLOBAL_FRAME_MASK);
     }
-} // namespace R
+} // namespace CXXR

@@ -37,7 +37,7 @@
 #include <Localization.h>
 
 using namespace std;
-using namespace R;
+using namespace CXXR;
 
 int WeakRef::s_count = 0;
 

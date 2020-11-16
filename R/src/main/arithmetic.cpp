@@ -56,6 +56,7 @@ constexpr R_xlen_t NINTERRUPT = 10000000;
 
 #include <cerrno>
 #include <limits>
+using namespace R;
 
 #ifdef HAVE_MATHERR
 
@@ -2379,7 +2380,7 @@ HIDDEN SEXP do_math5(SEXP call, SEXP op, SEXP args, SEXP env)
 #endif /* Math5 is there */
 
 /* This is used for experimenting with parallelized nmath functions -- LT */
-R::CCODE R_get_arith_function(int which)
+CXXR::CCODE R_get_arith_function(int which)
 {
     switch (which) {
     case 1: return do_math1;

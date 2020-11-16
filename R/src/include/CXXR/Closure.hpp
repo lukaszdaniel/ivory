@@ -25,7 +25,7 @@
  */
 
 /** @file Closure.hpp
- * @brief Class R::Closure and associated C interface.
+ * @brief Class CXXR::Closure and associated C interface.
  */
 
 #ifndef CLOSURE_HPP
@@ -34,7 +34,7 @@
 #include <CXXR/FunctionBase.hpp>
 #include <CXXR/SEXP_downcast.hpp>
 
-namespace R
+namespace CXXR
 {
     /** @brief Class representing a functional programming closure.
      *
@@ -82,6 +82,6 @@ namespace R
         static bool rstep(RObject *x);
         static void set_rstep(RObject *x, bool v);
     };
-} // namespace R
+} // namespace CXXR
 
 #endif /* CLOSURE_HPP */

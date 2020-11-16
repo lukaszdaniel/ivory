@@ -19,7 +19,7 @@
 
 /** @file Allocatortest.cpp
  *
- * Test of class R::Allocator
+ * Test of class CXXR::Allocator
  */
 
 #include <algorithm>
@@ -33,7 +33,7 @@
 #include <CXXR/Allocator.hpp>
 
 using namespace std;
-using namespace R;
+using namespace CXXR;
 
 namespace
 {

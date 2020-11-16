@@ -38,8 +38,8 @@
 using namespace R;
 
 /* FIXME: envir.cpp keeps this private - it should probably go to Defn.h */
-#define FRAME_IS_LOCKED(e) (R::Environment::frame_is_locked(e))
-#define IS_GLOBAL_FRAME(e) (R::Environment::is_global_frame(e))
+#define FRAME_IS_LOCKED(e) (CXXR::Environment::frame_is_locked(e))
+#define IS_GLOBAL_FRAME(e) (CXXR::Environment::is_global_frame(e))
 
 /* based on EncodeEnvironment in  printutils.cpp */
 static void PrintEnvironment(SEXP x)
@@ -101,10 +101,10 @@ static void inspect_tree(int pre, SEXP v, int deep, int pvec) {
     */
 #ifdef _WIN64
     Rprintf("@%p %02d %s g%d [", v, TYPEOF(v), typename_(v),
-	    RObject::gcgen(v));
+	    CXXR::RObject::gcgen(v));
 #else
     Rprintf("@%lx %02d %s g%d [", (long) v, TYPEOF(v), typename_(v),
-	    RObject::gcgen(v));
+	    CXXR::RObject::gcgen(v));
 #endif
     if (OBJECT(v)) { a = 1; Rprintf("OBJ"); }
     if (MARK(v)) { if (a) Rprintf(","); Rprintf("MARK"); a = 1; }

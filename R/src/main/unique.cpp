@@ -30,6 +30,7 @@
 #include <Localization.h>
 #include <Defn.h>
 #include <Internal.h>
+using namespace R;
 
 static constexpr int NIL = -1;
 const auto ARGUSED = LEVELS;

@@ -37,6 +37,7 @@
 
 #include <complex>
 #include "Rcomplex.h"	/* toC99 */
+using namespace R;
 
 /* "GetRowNames" and "GetColNames" are utility routines which
  * locate and return the row names and column names from the

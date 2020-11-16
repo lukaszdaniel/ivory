@@ -117,6 +117,7 @@
 #endif
 
 using namespace R;
+using namespace CXXR;
 
 constexpr size_t BUFSIZE = 512;
 

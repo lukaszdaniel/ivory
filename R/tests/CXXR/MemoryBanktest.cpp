@@ -19,7 +19,7 @@
 
 /** @file MemoryBanktest.cpp
  *
- * Test of class R::MemoryBank
+ * Test of class CXXR::MemoryBank
  */
 
 #include <algorithm>
@@ -31,7 +31,7 @@
 #include <CXXR/MemoryBank.hpp>
 
 using namespace std;
-using namespace R;
+using namespace CXXR;
 
 namespace
 {

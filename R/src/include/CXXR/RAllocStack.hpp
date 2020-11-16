@@ -26,7 +26,7 @@
  * @brief Function R_alloc() and kin.
  *
  * Defines functions R_alloc() and related functions, and the class
- * R::RAllocStack which is used to implement them.
+ * CXXR::RAllocStack which is used to implement them.
  */
 
 #ifndef RALLOCSTACK_HPP
@@ -36,7 +36,7 @@
 #include <stack>
 #include <vector>
 
-namespace R
+namespace CXXR
 {
     /** @brief Class for implementing R_alloc() and kindred functions.
      *
@@ -137,7 +137,7 @@ namespace R
 
 	RAllocStack() = delete;
     };
-} // namespace R
+} // namespace CXXR
 
 extern "C" {
     /* ***** C interface ***** */
@@ -235,12 +235,12 @@ extern "C" {
      *         are declared in the R.h API.)
      *
      * @note C++ code should preferably use the
-     * R::RAllocStack::Scope class instead.  It is possible that in
+     * CXXR::RAllocStack::Scope class instead.  It is possible that in
      * the future this function will always return a null pointer.
      */
     inline void* vmaxget(void)
     {
-	return static_cast<char*>(nullptr) + R::RAllocStack::size();
+	return static_cast<char*>(nullptr) + CXXR::RAllocStack::size();
     }
 
     /** @brief Reclaims memory blocks.
@@ -252,14 +252,14 @@ extern "C" {
      *          vmaxget().
      *
      * @deprecated For expert use only.  C++ code should preferably
-     * use the R::RAllocStack::Scope class instead.  It is possible
+     * use the CXXR::RAllocStack::Scope class instead.  It is possible
      * that in the future this function will become a no-op.
      */
     inline void vmaxset(const void* stack_sizep)
     {
 	size_t stack_size = size_t(static_cast<const char*>(stack_sizep)
 				   - static_cast<const char*>(nullptr));
-	R::RAllocStack::restoreSize(stack_size);
+	CXXR::RAllocStack::restoreSize(stack_size);
     }
 }  /* extern "C" */
 

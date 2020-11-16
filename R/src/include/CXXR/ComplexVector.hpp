@@ -25,7 +25,7 @@
  */
 
 /** @file ComplexVector.hpp
- * @brief Class R::ComplexVector and associated C interface.
+ * @brief Class CXXR::ComplexVector and associated C interface.
  */
 
 #ifndef COMPLEXVECTOR_HPP
@@ -34,14 +34,14 @@
 #include <CXXR/FixedVector.hpp>
 #include <CXXR/Complex.hpp>
 
-namespace R
+namespace CXXR
 {
     /** @brief Vector of complex numbers.
      */
-    typedef R::FixedVector<Complex, CPLXSXP> ComplexVector;
+    typedef CXXR::FixedVector<Complex, CPLXSXP> ComplexVector;
 
-#define COMPLEX(x) ((Rcomplex *)DATAPTR(x))
-#define COMPLEX_RO(x) ((const Rcomplex *)DATAPTR_RO(x))
-} // namespace R
+#define COMPLEXVECTOR_COMPLEX(x) ((Rcomplex *)DATAPTR(x))
+#define COMPLEXVECTOR_COMPLEX_RO(x) ((const Rcomplex *)DATAPTR_RO(x))
+} // namespace CXXR
 
 #endif // COMPLEXVECTOR_HPP

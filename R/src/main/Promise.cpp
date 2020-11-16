@@ -31,7 +31,7 @@
 #include <CXXR/Promise.hpp>
 #include <Rinternals.h>
 
-namespace R
+namespace CXXR
 {
     // Force the creation of non-inline embodiments of functions callable
     // from C:
@@ -49,20 +49,20 @@ namespace R
     }
 
     /* Promise Access Methods */
-    /** @brief Access the expression of a R::Promise.
+    /** @brief Access the expression of a CXXR::Promise.
      *
-     * @param x Pointer to a R::Promise (checked).
+     * @param x Pointer to a CXXR::Promise (checked).
      *
      * @return Pointer to the expression to be evaluated by the
-     *         R::Promise. 
+     *         CXXR::Promise. 
      */
     RObject *Promise::prcode(RObject *x) { return x ? x->u.promsxp.m_expr : nullptr; }
 
-    /** @brief Set the expression of a R::Promise.
+    /** @brief Set the expression of a CXXR::Promise.
      *
-     * @param x Pointer to a R::Promise (checked).
+     * @param x Pointer to a CXXR::Promise (checked).
      *
-     * @param v Pointer to the expression to be assigned to the R::Promise.
+     * @param v Pointer to the expression to be assigned to the CXXR::Promise.
      */
     void Promise::set_prcode(RObject *x, RObject *v)
     {
@@ -71,33 +71,33 @@ namespace R
         x->u.promsxp.m_expr = v;
     }
 
-    /** @brief Access the environment of a R::Promise.
+    /** @brief Access the environment of a CXXR::Promise.
      *
-     * @param x Pointer to a R::Promise (checked).
+     * @param x Pointer to a CXXR::Promise (checked).
      *
-     * @return Pointer to the environment of the R::Promise. 
+     * @return Pointer to the environment of the CXXR::Promise. 
      */
     RObject *Promise::prenv(RObject *x) { return x ? x->u.promsxp.m_env : nullptr; }
 
-    /** @brief Access the value of a R::Promise.
+    /** @brief Access the value of a CXXR::Promise.
      *
-     * @param x Pointer to a R::Promise (checked).
+     * @param x Pointer to a CXXR::Promise (checked).
      *
-     * @return Pointer to the value of the R::Promise, or to
+     * @return Pointer to the value of the CXXR::Promise, or to
      *         R_UnboundValue if it has not yet been evaluated..
      */
     RObject *Promise::prvalue(RObject *x) { return x ? x->u.promsxp.m_value : nullptr; }
 
-    /** @brief Set the value of a R::Promise.
+    /** @brief Set the value of a CXXR::Promise.
      *
      * Once the value is set to something other than R_UnboundValue,
      * the environment pointer is set null.
      *
-     * @param x Pointer to a R::Promise (checked).
+     * @param x Pointer to a CXXR::Promise (checked).
      *
-     * @param v Pointer to the value to be assigned to the R::Promise.
+     * @param v Pointer to the value to be assigned to the CXXR::Promise.
      *
-     * @todo Replace this with a method call to evaluate the R::Promise.
+     * @todo Replace this with a method call to evaluate the CXXR::Promise.
      */
     void Promise::set_prvalue(RObject *x, RObject *v)
     {
@@ -108,11 +108,11 @@ namespace R
 
     unsigned int Promise::prseen(RObject *x) { return x ? x->m_gpbits : 0; }
 
-    /** @brief Set the environment of a R::Promise.
+    /** @brief Set the environment of a CXXR::Promise.
      *
-     * @param x Pointer to a R::Promise (checked).
+     * @param x Pointer to a CXXR::Promise (checked).
      *
-     * @param v Pointer to the environment to be assigned to the R::Promise. 
+     * @param v Pointer to the environment to be assigned to the CXXR::Promise. 
      */
     void Promise::set_prenv(RObject *x, RObject *v)
     {
@@ -127,4 +127,4 @@ namespace R
             return;
         x->m_gpbits = v;
     }
-} // namespace R
+} // namespace CXXR

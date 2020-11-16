@@ -116,6 +116,7 @@
 #include <CXXR/JMPException.hpp>
 
 using namespace R;
+using namespace CXXR;
 
 /* R_run_onexits - runs the conexit/cend code for all contexts from
    R_GlobalContext down to but not including the argument context.
@@ -827,7 +828,7 @@ Rboolean R_ToplevelExec(void (*fun)(void *), void *data)
             }
             thiscontext.end();
         }
-        catch (JMPException &e)
+        catch (CXXR::JMPException &e)
         {
             // std::cerr << __FILE__ << ":" << __LINE__ << " Seeking  " << e.context << "; in " << &thiscontext << std::endl;
             if (e.context != &thiscontext)
@@ -1027,7 +1028,7 @@ SEXP R_UnwindProtect(SEXP (*fun)(void *data), void *data,
             }
             thiscontext.end();
         }
-        catch (JMPException &e)
+        catch (CXXR::JMPException &e)
         {
             // std::cerr << __FILE__ << ":" << __LINE__ << " Seeking  " << e.context << "; in " << &thiscontext << std::endl;
             if (e.context != &thiscontext)

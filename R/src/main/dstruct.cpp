@@ -55,9 +55,7 @@ HIDDEN SEXP R::mkPRIMSXP(int offset, bool eval)
     if (PrimCache == nullptr)
     {
         /* compute the number of entires in R_FunTab */
-        FunTabSize = R_FunTab.size();
-        // while (R_FunTab[FunTabSize].name())
-        //     FunTabSize++;
+        FunTabSize = CXXR::R_FunTab.size();
 
         /* allocate and protect the cache */
         PrimCache = allocVector(VECSXP, FunTabSize);
@@ -82,13 +80,13 @@ HIDDEN SEXP R::mkPRIMSXP(int offset, bool eval)
 }
 
 /**
- * @brief Create a R::Closure object
+ * @brief Create a CXXR::Closure object
  * 
- * @param formals formal arguments to be assigned to the R::Closure
+ * @param formals formal arguments to be assigned to the CXXR::Closure
  * 
- * @param body function body to be assigned to the R::Closure
+ * @param body function body to be assigned to the CXXR::Closure
  * 
- * @param rho environment to be assigned to the R::Closure
+ * @param rho environment to be assigned to the CXXR::Closure
  * 
  * @return return a closure with formals f, body b, and environment rho
  * 
@@ -152,9 +150,9 @@ static bool isDDName(SEXP name)
 }
 
 /**
- * @brief Create a R::Symbol object
+ * @brief Create a CXXR::Symbol object
  * 
- * @param name name of the R::Symbol
+ * @param name name of the CXXR::Symbol
  * 
  * @param value value to be assigned
  * 

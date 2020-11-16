@@ -23,7 +23,7 @@
  */
 
 /** @file SEXP_downcast.hpp
- * @brief The templated function R::SEXP_downcast().
+ * @brief The templated function CXXR::SEXP_downcast().
  */
 #ifndef SEXP_DOWNCAST_HPP
 #define SEXP_DOWNCAST_HPP
@@ -31,7 +31,7 @@
 #include "R_ext/Error.h" // For NORET
 #include <type_traits>
 
-namespace R
+namespace CXXR
 {
     /** @brief Not for general use.
      *
@@ -86,6 +86,6 @@ namespace R
         return ans;
     }
 #endif
-} // namespace R
+} // namespace CXXR
 
 #endif // SEXP_DOWNCAST_HPP

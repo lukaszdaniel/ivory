@@ -25,7 +25,7 @@
  */
 
 /** @file StringVector.hpp
- * @brief Class R::StringVector and associated C interface.
+ * @brief Class CXXR::StringVector and associated C interface.
  *
  * (StringVector implements STRSXP.)
  */
@@ -37,7 +37,7 @@
 #include <CXXR/GCEdge.hpp>
 #include <CXXR/String.hpp>
 
-namespace R
+namespace CXXR
 {
     /** @brief Vector of strings.
      *
@@ -47,8 +47,8 @@ namespace R
      */
     typedef FixedVector<GCEdge<String>, STRSXP> StringVector;
 
-// #define STRING_PTR(x) ((SEXP *)DATAPTR(x))
-// #define STRING_PTR_RO(x) ((const SEXP *)DATAPTR_RO(x))
-} // namespace R
+#define STRING_PTR(x) ((SEXP *)DATAPTR(x))
+#define STRINGVECTOR_STRING_PTR_RO(x) ((const SEXP *)DATAPTR_RO(x))
+} // namespace CXXR
 
 #endif // STRINGVECTOR_HPP

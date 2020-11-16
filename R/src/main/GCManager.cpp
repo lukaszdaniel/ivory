@@ -41,7 +41,7 @@
 #include <Rinterface.h>
 
 using namespace std;
-using namespace R;
+using namespace CXXR;
 
 size_t GCManager::s_threshold = R_VSIZE;
 size_t GCManager::s_max_threshold = R_SIZE_T_MAX;

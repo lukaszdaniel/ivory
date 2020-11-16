@@ -42,6 +42,7 @@
 #include <CXXR/GCRoot.hpp>
 
 using namespace R;
+using namespace CXXR;
 
 static SEXP bcEval(SEXP, SEXP, bool);
 
@@ -1932,7 +1933,7 @@ inline static SEXP R_execClosure(SEXP call, SEXP newrho, SEXP sysparent,
 			}
 			cntxt.end();
 		}
-		catch (JMPException &e)
+		catch (CXXR::JMPException &e)
 		{
 			// std::cerr << __FILE__ << ":" << __LINE__ << " Seeking " << e.context << "; in " << &cntxt << std::endl;
 			if (e.context != &cntxt)
@@ -2475,7 +2476,7 @@ HIDDEN SEXP do_for(SEXP call, SEXP op, SEXP args, SEXP rho)
 			}
 			eval(body, rho);
 		}
-		catch (JMPException &e)
+		catch (CXXR::JMPException &e)
 		{
 			// std::cerr << __FILE__ << ":" << __LINE__ << " Seeking " << e.context << "; in " << &cntxt << std::endl;
 			if (e.context != &cntxt)
@@ -2618,7 +2619,7 @@ HIDDEN SEXP do_while(SEXP call, SEXP op, SEXP args, SEXP rho)
 			}
 			cntxt.end();
 		}
-		catch (JMPException &e)
+		catch (CXXR::JMPException &e)
 		{
 			// std::cerr << __FILE__ << ":" << __LINE__ << " Seeking " << e.context << "; in " << &cntxt << std::endl;
 			if (e.context != &cntxt)
@@ -2693,7 +2694,7 @@ HIDDEN SEXP do_repeat(SEXP call, SEXP op, SEXP args, SEXP rho)
 			}
 		    cntxt.end();
 		}
-		catch (JMPException &e)
+		catch (CXXR::JMPException &e)
 		{
 			// std::cerr << __FILE__ << ":" << __LINE__ << " Seeking " << e.context << "; in " << &cntxt << std::endl;
 			if (e.context != &cntxt)
@@ -3596,7 +3597,7 @@ HIDDEN SEXP do_eval(SEXP call, SEXP op, SEXP args, SEXP rho)
 			}
 			cntxt.end();
 		}
-		catch (JMPException &e)
+		catch (CXXR::JMPException &e)
 		{
 			// std::cerr << __FILE__ << ":" << __LINE__ << " Seeking " << e.context << "; in " << &cntxt << std::endl;
 			if (e.context != &cntxt)
@@ -3661,7 +3662,7 @@ HIDDEN SEXP do_eval(SEXP call, SEXP op, SEXP args, SEXP rho)
 			}
 			cntxt.end();
 		}
-		catch (JMPException &e)
+		catch (CXXR::JMPException &e)
 		{
 			// std::cerr << __FILE__ << ":" << __LINE__ << " Seeking " << e.context << "; in " << &cntxt << std::endl;
 			if (e.context != &cntxt)
@@ -7138,7 +7139,7 @@ static void loopWithContect(volatile SEXP code, volatile SEXP rho, bool useCache
 	    bcEval(code, rho, useCache);
 		cntxt.end();
 	}
-	catch (JMPException& e) {
+	catch (CXXR::JMPException& e) {
 		// std::cerr << __FILE__ << ":" << __LINE__ << " Seeking  " << e.context << "; in " << &cntxt << std::endl;
 	    if (e.context != &cntxt)
 		throw;
@@ -7303,7 +7304,7 @@ static SEXP bcEval(SEXP body, SEXP rho, bool useCache)
 			// problems with encapsulating bcEval within try/catch block
 			// (which is needed for GCRoot to work properly).
 		}
-		catch (JMPException &e)
+		catch (CXXR::JMPException &e)
 		{
 			// std::cerr << __FILE__ << ":" << __LINE__ << " Seeking " << e.context << "; in " << cptr << std::endl;
 			if (e.context != cptr)

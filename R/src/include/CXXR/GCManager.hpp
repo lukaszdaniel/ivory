@@ -25,7 +25,7 @@
  */
 
 /** @file GCManager.hpp
- * @brief Class R::GCManager.
+ * @brief Class CXXR::GCManager.
  *
  * @todo Reinstate garbage collection timing.
  * @todo Update DEBUG_GC_SUMMARY etc.
@@ -39,18 +39,18 @@
 #include <CXXR/RTypes.hpp>
 #include <CXXR/MemoryBank.hpp>
 
-namespace R
+namespace CXXR
 {
     /** @brief Class for managing garbage collection.
      * 
-     * This class only has static members.  When R::MemoryBank indicates
+     * This class only has static members.  When CXXR::MemoryBank indicates
      * that it is on the point of requesting additional memory from
      * the operating system, the class decides whether to initiate a
      * garbage collection, and if so how many levels to collect.
      *
      * In the current implementation of GCManager, when cued by R
      * as above, a garbage collection will be carried out if the
-     * number of bytes currently allocated via R::MemoryBank is at least
+     * number of bytes currently allocated via CXXR::MemoryBank is at least
      * as great as a threshold value.  This threshold value varies
      * during the run, subject to a minimum value specified in the
      * <tt>initialize</tt> method.
@@ -63,7 +63,7 @@ namespace R
 	 *  addressed.
 	 *
 	 * @param bytes_wanted If specified, the number of bytes
-	 *          currently being sought by R::MemoryBank.
+	 *          currently being sought by CXXR::MemoryBank.
 	 */
 		static void adjustThreshold(R_size_t bytes_wanted = 0);
 
@@ -152,7 +152,7 @@ namespace R
 		static std::ostream *setReporting(std::ostream *os = 0);
 
 	/** @brief Turn garbage collection torture on or off.
-	 *  If enabled, every time that R::MemoryBank indicates that
+	 *  If enabled, every time that CXXR::MemoryBank indicates that
 	 *  it is about to request additional memory from the operating
 	 *  system, a garbage collection is carried out.
 	 *
@@ -220,10 +220,10 @@ namespace R
 		static size_t s_max_nodes;
 
 		static bool s_tortured; // If this is true, every cue from
-			// R::MemoryBank leads to a garbage
+			// CXXR::MemoryBank leads to a garbage
 			// collection.
 
-		// Callback for R::MemoryBank to cue a garbage collection:
+		// Callback for CXXR::MemoryBank to cue a garbage collection:
 		static bool cue(size_t bytes_wanted, bool force);
 
 		// Detailed control of the garbage collection, in particular
@@ -239,6 +239,6 @@ namespace R
 
 		GCManager() = delete;
 	};
-} // namespace R
+} // namespace CXXR
 
 #endif /* GCMANAGER_HPP */

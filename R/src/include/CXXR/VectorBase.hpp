@@ -25,15 +25,18 @@
  */
 
 /** @file VectorBase.hpp
- * @brief Class R::VectorBase and associated C interface.
+ * @brief Class CXXR::VectorBase and associated C interface.
  */
 
 #ifndef VECTORBASE_HPP
 #define VECTORBASE_HPP
 
 #include <CXXR/RObject.hpp>
+#include <CXXR/GCRoot.hpp>
+#include <CXXR/SEXP_downcast.hpp>
+#include <cstddef>
 
-namespace R
+namespace CXXR
 {
   /** @brief Untemplated base class for R vectors.
      */
@@ -41,9 +44,26 @@ namespace R
   {
   public:
     typedef std::size_t size_type;
+    /**
+     * @param stype The required <tt>SEXPTYPE</tt>.
+     * @param sz The required number of elements in the vector.
+     */
+    VectorBase(SEXPTYPE stype, size_t sz)
+        : RObject(stype)
+    {
+      u.vecsxp.m_length = sz;
+      u.vecsxp.m_truelength = sz;
+    }
 
-  private:
-  public:
+    /** @brief Number of elements in the vector.
+     *
+     * @return The number of elements in the vector.
+     */
+    auto size() const
+    {
+      return length();
+    }
+
     /** @brief The name by which this type is known in R.
      *
      * @return the name by which this type is known in R.
@@ -52,6 +72,8 @@ namespace R
     {
       return "(vector type)";
     }
+
+  public:
     static inline R_xlen_t stdvec_length(RObject *x) { return x ? x->u.vecsxp.m_length : 0; }
     static inline R_xlen_t stdvec_truelength(RObject *x) { return x ? x->u.vecsxp.m_truelength : 0; }
     static inline void set_stdvec_truelength(RObject *x, R_xlen_t v)
@@ -69,13 +91,13 @@ namespace R
     }
     static inline void set_truelength(RObject *x, R_xlen_t v)
     {
-      if (R::RObject::altrep(x))
+      if (CXXR::RObject::altrep(x))
         Rf_error("can't set ALTREP truelength");
-      R::VectorBase::set_stdvec_truelength(x, v);
+      CXXR::VectorBase::set_stdvec_truelength(x, v);
     }
   };
 
-  using VECSEXP = class R::RObject *;
+  using VECSEXP = class CXXR::RObject *;
 
 /* Vector Access Macros */
 #ifdef LONG_VECTOR_SUPPORT
@@ -90,26 +112,26 @@ namespace R
 /* defined as a macro since fastmatch packages tests for it */
 #define XLENGTH(x) XLENGTH_EX(x)
 
-  inline void *stdvec_dataptr(RObject *x)
+  template <typename T = void *>
+  inline T stdvec_dataptr(RObject *x)
   {
-    return x ? x->m_data : nullptr;
+    return static_cast<T>(x->m_data);
   }
-#define STDVEC_DATAPTR(x) (x->m_data)
 
   inline const char *r_char(RObject *x)
   {
-    return static_cast<const char *>(stdvec_dataptr(x));
+    return stdvec_dataptr<const char *>(x);
   }
 
   /* writable char access for R internal use only */
-#define CHAR_RW(x) ((char *)x->m_data)
+  inline char *CHAR_RW(RObject *x)
+  {
+    return stdvec_dataptr<char *>(x);
+  }
 
 #define VECTOR_ELT(x, i) ((SEXP *)DATAPTR(x))[i]
 #define VECTOR_PTR(x) ((SEXP *)DATAPTR(x))
 
-#define STRING_PTR(x) ((SEXP *)DATAPTR(x))
-#define STRING_PTR_RO(x) ((const SEXP *)DATAPTR_RO(x))
-
-} // namespace R
+} // namespace CXXR
 
 #endif /* VECTORBASE_HPP */

@@ -27,7 +27,7 @@
 #include <CXXR/LogicalVector.hpp>
 #include <Defn.h>
 
-namespace R
+namespace CXXR
 {
     void Logical::initialize() {}
-} // namespace R
+} // namespace CXXR

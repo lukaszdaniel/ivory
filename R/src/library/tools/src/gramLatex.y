@@ -32,6 +32,7 @@
 #include <cctype>
 #include <R_ext/Print.h>
 #include "localization.h"
+using namespace R;
 
 /* bison creates a non-static symbol yylloc (and other) in both gramLatex.o
    and gramRd.o, so remap */

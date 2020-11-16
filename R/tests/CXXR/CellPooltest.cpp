@@ -19,7 +19,7 @@
 
 /** @file CellPooltest.cpp
  *
- * Test of class CellPool
+ * Test of class CXXR::CellPool
  */
 
 #include <CXXR/CellPool.hpp>
@@ -27,7 +27,7 @@
 #include <iostream>
 
 using namespace std;
-using namespace R;
+using namespace CXXR;
 
 namespace
 {

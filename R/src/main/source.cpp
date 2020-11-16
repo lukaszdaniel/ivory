@@ -29,6 +29,7 @@
 #include <Internal.h>
 #include <Fileio.h>
 #include <Rconnections.h>
+using namespace R;
 
 HIDDEN SEXP getParseContext(void)
 {

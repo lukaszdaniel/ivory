@@ -28,6 +28,7 @@
 #include <Defn.h>
 #include <Internal.h>
 #include <R_ext/Itermacros.h>
+using namespace R;
 
 HIDDEN SEXP do_split(SEXP call, SEXP op, SEXP args, SEXP env)
 {

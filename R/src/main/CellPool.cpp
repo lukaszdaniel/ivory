@@ -34,13 +34,16 @@
 #include <iostream>
 
 using namespace std;
-using namespace R;
+using namespace CXXR;
 
 CellPool::~CellPool()
 {
-    for (vector<void*>::iterator it = m_superblocks.begin();
-	 it != m_superblocks.end(); ++it)
-	::operator delete(*it);
+#if VALGRIND_LEVEL >= 2
+	VALGRIND_DESTROY_MEMPOOL(this);
+#endif
+	for (vector<void *>::iterator it = m_superblocks.begin();
+		 it != m_superblocks.end(); ++it)
+		::operator delete(*it);
 }
 
 bool CellPool::check() const
@@ -63,60 +66,68 @@ bool CellPool::check() const
 	return true;
 }
 
-void CellPool::checkAllocatedCell(const void* p) const 
+void CellPool::checkAllocatedCell(const void *p) const
 {
-    checkCell(p);
-    const Cell* cp = static_cast<const Cell*>(p);
-    bool found = false;
-    for (Cell* c = m_free_cells; !found && c; c = c->m_next)
-	found = (c == cp);
-    if (found) {
-	cerr << "CellPool::checkCell : designated block is (already) free.\n";
-	abort();
-    }
+	checkCell(p);
+	const Cell *cp = static_cast<const Cell *>(p);
+	bool found = false;
+	for (Cell *c = m_free_cells; !found && c; c = c->m_next)
+		found = (c == cp);
+	if (found)
+	{
+		cerr << "CellPool::checkCell : designated block is (already) free.\n";
+		abort();
+	}
 }
 
-void CellPool::checkCell(const void* p) const
+void CellPool::checkCell(const void *p) const
 {
-    if (!p) return;
-    const char* pc = static_cast<const char*>(p);
-    bool found = false;
-    for (vector<void*>::const_iterator it = m_superblocks.begin();
-	 !found && it != m_superblocks.end(); ++it) {
-	ptrdiff_t offset = pc - static_cast<const char*>(*it);
-	if (offset >= 0 && offset < static_cast<long>(m_superblocksize)) {
-	    found = true;
-	    if (offset%m_cellsize != 0) {
-		cerr << "CellPool::checkCell : designated block is misaligned\n";
-		abort();
-	    }
+	if (!p)
+		return;
+	const char *pc = static_cast<const char *>(p);
+	bool found = false;
+	for (vector<void *>::const_iterator it = m_superblocks.begin();
+		 !found && it != m_superblocks.end(); ++it)
+	{
+		ptrdiff_t offset = pc - static_cast<const char *>(*it);
+		if (offset >= 0 && offset < static_cast<long>(m_superblocksize))
+		{
+			found = true;
+			if (offset % m_cellsize != 0)
+			{
+				cerr << "CellPool::checkCell : designated block is misaligned\n";
+				abort();
+			}
+		}
 	}
-    }
-    if (!found) {
-	cerr << "CellPool::checkCell : designated block doesn't belong to this CellPool\n";
-	abort();
-    }
+	if (!found)
+	{
+		cerr << "CellPool::checkCell : designated block doesn't belong to this CellPool\n";
+		abort();
+	}
 }
 
 void CellPool::seekMemory()
 {
-    if (m_out_of_cells) (*m_out_of_cells)(this);
-    if (!m_free_cells) {
-	char* superblock
-	    = static_cast<char*>(::operator new(m_superblocksize));
-	m_superblocks.push_back(superblock);
-	// Initialise cells:
+	if (m_out_of_cells)
+		(*m_out_of_cells)(this);
+	if (!m_free_cells)
 	{
-	    ptrdiff_t offset = ptrdiff_t(m_superblocksize - m_cellsize);
-	    Cell* next = nullptr;
-	    while (offset >= 0) {
-		next = new (superblock + offset) Cell(next);
-#if VALGRIND_LEVEL > 1
-		VALGRIND_MAKE_MEM_NOACCESS(next + 1, m_cellsize - sizeof(Cell));
+		char *superblock = static_cast<char *>(::operator new(m_superblocksize));
+		m_superblocks.push_back(superblock);
+		// Initialise cells:
+		{
+			ptrdiff_t offset = ptrdiff_t(m_superblocksize - m_cellsize);
+			Cell *next = nullptr;
+			while (offset >= 0)
+			{
+				next = new (superblock + offset) Cell(next);
+#if VALGRIND_LEVEL >= 2
+				VALGRIND_MAKE_MEM_NOACCESS(next + 1, m_cellsize - sizeof(Cell));
 #endif
-		offset -= ptrdiff_t(m_cellsize);
-	    }
-	    m_free_cells = next;
+				offset -= ptrdiff_t(m_cellsize);
+			}
+			m_free_cells = next;
+		}
 	}
-    }
 }

@@ -25,23 +25,26 @@
  */
 
 /** @file LogicalVector.hpp
- * @brief Class R::LogicalVector and associated C interface.
+ * @brief Class CXXR::LogicalVector and associated C interface.
  */
 
 #ifndef LOGICALVECTOR_HPP
 #define LOGICALVECTOR_HPP
 
+#include <R_ext/Arith.h>
+#include <CXXR/VectorBase.hpp>
 #include <CXXR/FixedVector.hpp>
 #include <CXXR/Logical.hpp>
+#include <CXXR/SEXP_downcast.hpp>
 
-namespace R
+namespace CXXR
 {
     /** @brief Vector of truth values.
      */
-    typedef R::FixedVector<Logical, LGLSXP> LogicalVector;
+    typedef CXXR::FixedVector<Logical, LGLSXP> LogicalVector;
 
-#define LOGICAL(x) ((int *)DATAPTR(x))
-#define LOGICAL_RO(x) ((const int *)DATAPTR_RO(x))
-} // namespace R
+#define LOGICALVECTOR_LOGICAL(x) ((int *)DATAPTR(x))
+#define LOGICALVECTOR_LOGICAL_RO(x) ((const int *)DATAPTR_RO(x))
+} // namespace CXXR
 
 #endif // LOGICALVECTOR_HPP

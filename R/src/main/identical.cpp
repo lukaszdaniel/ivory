@@ -26,6 +26,8 @@
 
 #include <Localization.h>
 #include <Defn.h>
+using namespace R;
+
 /* -> Rinternals.h which exports R_compute_identical() */
 
 /* Implementation of identical(x, y) */

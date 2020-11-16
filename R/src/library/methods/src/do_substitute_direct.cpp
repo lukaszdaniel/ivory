@@ -25,6 +25,8 @@
 #include "methods.h"
 #include "localization.h"
 
+using namespace R;
+
 /* substitute in an _evaluated_ object, with an explicit list as
    second arg (although old-style lists and environments are allowed).
 

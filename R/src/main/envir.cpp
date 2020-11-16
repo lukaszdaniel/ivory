@@ -138,12 +138,12 @@ inline static bool IS_USER_DATABASE(SEXP rho)
 
  inline static int FRAME_IS_LOCKED(SEXP e)
  {
-     return R::Environment::frame_is_locked(e);
+     return CXXR::Environment::frame_is_locked(e);
  }
 
  inline static void LOCK_FRAME(SEXP e)
  {
-     R::Environment::lock_frame(e);
+     CXXR::Environment::lock_frame(e);
  }
 
 /* use the same bits (15 and 14) in symbols and bindings */
@@ -228,11 +228,11 @@ Rboolean R_envHasNoSpecialSymbols(SEXP env)
 
 R_INLINE static int HASHSIZE(SEXP x)
 {
-    return (int)R::VectorBase::stdvec_length(x);
+    return (int)CXXR::VectorBase::stdvec_length(x);
 }
 R_INLINE static int HASHPRI(SEXP x)
 {
-    return (int)R::VectorBase::stdvec_truelength(x);
+    return (int)CXXR::VectorBase::stdvec_truelength(x);
 }
 #define HASHTABLEGROWTHRATE 1.2
 #define HASHMINSIZE 29
@@ -240,7 +240,7 @@ R_INLINE static void SET_HASHPRI(SEXP x, int v)
 {
     SET_TRUELENGTH(x, v);
 }
-#define HASHCHAIN(table, i) ((SEXP *)STDVEC_DATAPTR(table))[i]
+#define HASHCHAIN(table, i) ((SEXP *)CXXR::stdvec_dataptr(table))[i]
 
 R_INLINE static bool IS_HASHED(SEXP x)
 {
@@ -683,17 +683,17 @@ static SEXP R_HashProfile(SEXP table)
 
 inline static bool IS_GLOBAL_FRAME(SEXP e)
 {
-    return R::Environment::is_global_frame(e);
+    return CXXR::Environment::is_global_frame(e);
 }
 
 inline static void MARK_AS_GLOBAL_FRAME(SEXP e)
 {
-    R::Environment::mark_as_global_frame(e);
+    CXXR::Environment::mark_as_global_frame(e);
 }
 
 inline static void MARK_AS_LOCAL_FRAME(SEXP e)
 {
-    R::Environment::mark_as_local_frame(e);
+    CXXR::Environment::mark_as_local_frame(e);
 }
 
 #define INITIAL_CACHE_SIZE 1000
@@ -4141,7 +4141,7 @@ SEXP Rf_mkCharLenCE(const char * const name, int len, cetype_t enc)
 {
     SEXP cval, chain;
     unsigned int hashcode;
-    R::RObject::CharsetBit need_enc;
+    CXXR::RObject::CharsetBit need_enc;
     bool embedNul = false, is_ascii = true;
 
     switch (enc)
@@ -4168,21 +4168,21 @@ SEXP Rf_mkCharLenCE(const char * const name, int len, cetype_t enc)
 	c = allocCharsxp(len);
 	memcpy(CHAR_RW(c), name, len);
 	switch(enc) {
-	case CE_UTF8: R::RObject::set_utf8(c); break;
-	case CE_LATIN1: R::RObject::set_latin1(c); break;
-	case CE_BYTES: R::RObject::set_bytes(c); break;
+	case CE_UTF8: CXXR::RObject::set_utf8(c); break;
+	case CE_LATIN1: CXXR::RObject::set_latin1(c); break;
+	case CE_BYTES: CXXR::RObject::set_bytes(c); break;
 	default: break;
 	}
-	if (is_ascii) R::RObject::set_ascii(c);
+	if (is_ascii) CXXR::RObject::set_ascii(c);
 	error(_("embedded nul in string: '%s'"), EncodeString(c, 0, 0, Rprt_adj_none));
     }
 
     if (enc && is_ascii) enc = CE_NATIVE;
     switch(enc) {
-    case CE_UTF8: need_enc = R::RObject::CharsetBit::UTF8_MASK; break;
-    case CE_LATIN1: need_enc = R::RObject::CharsetBit::LATIN1_MASK; break;
-    case CE_BYTES: need_enc = R::RObject::CharsetBit::BYTES_MASK; break;
-    default: need_enc = R::RObject::CharsetBit::NATIVE_MASK;
+    case CE_UTF8: need_enc = CXXR::RObject::CharsetBit::UTF8_MASK; break;
+    case CE_LATIN1: need_enc = CXXR::RObject::CharsetBit::LATIN1_MASK; break;
+    case CE_BYTES: need_enc = CXXR::RObject::CharsetBit::BYTES_MASK; break;
+    default: need_enc = CXXR::RObject::CharsetBit::NATIVE_MASK;
     }
 
     hashcode = char_hash(name, len) & char_hash_mask;
@@ -4208,19 +4208,19 @@ SEXP Rf_mkCharLenCE(const char * const name, int len, cetype_t enc)
 	case CE_NATIVE:
 	    break;          /* don't set encoding */
 	case CE_UTF8:
-	    R::RObject::set_utf8(cval);
+	    CXXR::RObject::set_utf8(cval);
 	    break;
 	case CE_LATIN1:
-	    R::RObject::set_latin1(cval);
+	    CXXR::RObject::set_latin1(cval);
 	    break;
 	case CE_BYTES:
-	    R::RObject::set_bytes(cval);
+	    CXXR::RObject::set_bytes(cval);
 	    break;
 	default:
 	    error(_("unknown encoding mask: %d"), enc);
 	}
-	if (is_ascii) R::RObject::set_ascii(cval);
-	R::RObject::set_cached(cval);  /* Mark it */
+	if (is_ascii) CXXR::RObject::set_ascii(cval);
+	CXXR::RObject::set_cached(cval);  /* Mark it */
 	/* add the new value to the cache */
 	chain = VECTOR_ELT(R_StringHash, hashcode);
 	if (ISNULL(chain))

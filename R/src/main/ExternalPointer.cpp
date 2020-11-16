@@ -33,9 +33,9 @@
 // #include "CXXR/GCStackRoot.hpp"
 
 using namespace std;
-using namespace R;
+using namespace CXXR;
 
-namespace R
+namespace CXXR
 {
     // Force the creation of non-inline embodiments of functions callable
     // from C:
@@ -70,4 +70,4 @@ namespace R
         x->u.listsxp.m_carval = v;
     }
 
-} // namespace R
+} // namespace CXXR

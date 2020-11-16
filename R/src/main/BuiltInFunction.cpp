@@ -31,7 +31,7 @@
 #include <CXXR/BuiltInFunction.hpp>
 #include <Defn.h>
 
-namespace R
+namespace CXXR
 {
     // Force the creation of non-inline embodiments of functions callable
     // from C:
@@ -80,4 +80,4 @@ namespace R
     PPinfo PPINFO(RObject *x) { return R_FunTab[PRIMOFFSET(x)].gram(); }
     int PRIMPRINT(RObject *x) { return ((R_FunTab[PRIMOFFSET(x)].evalargs()) / 100) % 10; }
     int PRIMINTERNAL(RObject *x) { return ((R_FunTab[PRIMOFFSET(x)].evalargs()) % 100) / 10; }
-} // namespace R
+} // namespace CXXR

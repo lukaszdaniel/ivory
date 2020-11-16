@@ -36,7 +36,7 @@
 #include <Rmath.h>
 
 #include <R_ext/RS.h>
-
+using namespace R;
 
 #ifdef LONG_VECTOR_SUPPORT
 static void R_qsort_R(double *v, double *I, size_t i, size_t j);

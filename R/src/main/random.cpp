@@ -33,6 +33,7 @@
 #include <R_ext/RS.h>		/* for Calloc() */
 #include <Rmath.h>		/* for rxxx functions */
 #include <cerrno>
+using namespace R;
 
 /* Code down to do_random3 (inclusive) can be removed once the byte
   compiler knows how to optimize to .External rather than .Internal */

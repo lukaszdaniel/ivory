@@ -42,11 +42,9 @@
 #include <cstdint>
 
 using namespace std;
-using namespace R;
+using namespace CXXR;
 
-// Force the creation of non-inline embodiments of functions callable
-// from C:
-namespace R
+namespace CXXR
 {
     // Force the creation of non-inline embodiments of functions callable
     // from C:
@@ -55,7 +53,7 @@ namespace R
         const auto &vmaxgetp = vmaxget;
         const auto &vmaxsetp = vmaxset;
     } // namespace ForceNonInline
-} // namespace R
+} // namespace CXXR
 
 RAllocStack::Stack *RAllocStack::s_stack = nullptr;
 RAllocStack::Scope *RAllocStack::s_innermost_scope = 0;

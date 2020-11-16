@@ -40,6 +40,7 @@
 #include <string>
 
 using namespace R;
+using namespace CXXR;
 
 /* Table of  .Internal(.) and .Primitive(.)  R functions
  * =====     =========	      ==========
@@ -87,8 +88,8 @@ using namespace R;
  * rightassoc: Right (1) or left (0) associative operator
  *
  */
-namespace R {
-std::vector<R::FUNTAB> R_FunTab =
+namespace CXXR {
+std::vector<CXXR::FUNTAB> R_FunTab =
 {
 
 /* printname	c-entry		offset	eval	arity	pp-kind	     precedence	rightassoc
@@ -1010,7 +1011,7 @@ std::vector<R::FUNTAB> R_FunTab =
 
 // {nullptr,		nullptr,		0,	0,	0,	{PP_INVALID, PREC_FN,	0}},
 };
-} // namespace R
+} // namespace CXXR
 
 /* Table of special names.  These are marked as special with
    SET_SPECIAL_SYMBOL.  Environments on the function call stack that
@@ -1211,7 +1212,7 @@ HIDDEN void R::InitNames()
     /* NA_STRING */
     NA_STRING = allocCharsxp(strlen("NA"));
     strcpy(CHAR_RW(NA_STRING), "NA");
-    R::RObject::set_cached(NA_STRING);  /* Mark it */
+    CXXR::RObject::set_cached(NA_STRING);  /* Mark it */
     R_print.na_string = NA_STRING;
     /* R_BlankString */
     R_BlankString = mkChar("");

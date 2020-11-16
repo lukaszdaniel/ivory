@@ -25,7 +25,7 @@
  */
 
 /** @file Complex.hpp
- * @brief Class R::Complex.
+ * @brief Class CXXR::Complex.
  */
 
 #ifndef CXXR_COMPLEX_VECTOR_HPP
@@ -34,7 +34,7 @@
 #include <R_ext/Complex.h>
 #include <CXXR/Logical.hpp>
 
-namespace R
+namespace CXXR
 {
 	/** @brief CXXR's extension of CR's Rcomplex.
      *
@@ -80,6 +80,6 @@ namespace R
 			return *this;
 		}
 	};
-} // namespace R
+} // namespace CXXR
 
 #endif // CXXR_COMPLEX_VECTOR_HPP

@@ -194,7 +194,7 @@ static void onintrEx(Rboolean resumeOK)
 			}
 			restartcontext.end();
 		}
-		catch (JMPException &e)
+		catch (CXXR::JMPException &e)
 		{
 			// std::cerr << __FILE__ << ":" << __LINE__ << " Seeking  " << e.context << "; in " << &restartcontext << std::endl;
 			if (e.context != &restartcontext)

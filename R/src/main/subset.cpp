@@ -43,6 +43,7 @@
 #include <Localization.h>
 #include <Defn.h>
 #include <Internal.h>
+using namespace R;
 
 /* JMC convinced MM that this was not a good idea: */
 #undef _S4_subsettable

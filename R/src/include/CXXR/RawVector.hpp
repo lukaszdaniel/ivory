@@ -25,7 +25,7 @@
  */
 
 /** @file RawVector.hpp
- * @brief Class R::RawVector and associated C interface.
+ * @brief Class CXXR::RawVector and associated C interface.
  */
 
 #ifndef RAWVECTOR_HPP
@@ -33,14 +33,14 @@
 
 #include <CXXR/FixedVector.hpp>
 
-namespace R
+namespace CXXR
 {
     /** @brief Vector of 'raw bytes'.
      */
-    typedef R::FixedVector<Rbyte, RAWSXP> RawVector;
+    typedef CXXR::FixedVector<Rbyte, RAWSXP> RawVector;
 
-#define RAW(x) ((Rbyte *)DATAPTR(x))
-#define RAW_RO(x) ((const Rbyte *)DATAPTR_RO(x))
-} // namespace R
+#define RAWVECTOR_RAW(x) ((Rbyte *)DATAPTR(x))
+#define RAWVECTOR_RAW_RO(x) ((const Rbyte *)DATAPTR_RO(x))
+} // namespace CXXR
 
 #endif // RAWVECTOR_HPP

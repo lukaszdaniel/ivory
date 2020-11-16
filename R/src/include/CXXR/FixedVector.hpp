@@ -24,15 +24,17 @@
 
 /** @file FixedVector.hpp
  *
- * @brief Class template R::FixedVector.
+ * @brief Class template CXXR::FixedVector.
  */
 
 #ifndef FIXEDVECTOR_HPP
 #define FIXEDVECTOR_HPP
 
 #include <CXXR/VectorBase.hpp>
+#include <CXXR/MemoryBank.hpp>
+#include <Localization.h>
 
-namespace R
+namespace CXXR
 {
     /** @brief R data vector primarily intended for fixed-size use.
      *
@@ -50,9 +52,61 @@ namespace R
     template <typename T, SEXPTYPE ST>
     class FixedVector : public VectorBase
     {
+
     public:
-        // Virtual functions of RObject:
-        const char *typeName() const override;
+        /** @brief Create a vector, leaving its contents
+         *         uninitialized. 
+         * @param sz Number of elements required.  Zero is
+         *          permissible.
+         */
+        FixedVector(R_xlen_t sz)
+            : VectorBase(ST, sz), m_data(&m_singleton)
+        {
+            if (sz > 1)
+                allocData(sz);
+#if VALGRIND_LEVEL >= 1
+            else
+                VALGRIND_MAKE_MEM_UNDEFINED(&m_singleton, sizeof(T));
+#endif
+        }
+
+        /** @brief Create a vector, and fill with a specified initial
+         *         value. 
+         * @param sz Number of elements required.  Zero is
+         *          permissible.
+         * @param initializer Initial value to be assigned to every
+         *          element.
+         */
+        FixedVector(R_xlen_t sz, const T &initializer)
+            : VectorBase(ST, sz), m_data(&m_singleton),
+              m_singleton(initializer)
+        {
+            if (sz > 1)
+                allocData(sz, true);
+        }
+
+        /** @brief Element access.
+         * @param index Index of required element (counting from
+         *          zero).  No bounds checking is applied.
+         *
+         * @return Reference to the specified element.
+         */
+        T &operator[](R_xlen_t index)
+        {
+            return m_data[index];
+        }
+
+        /** @brief Read-only element access.
+         *
+         * @param index Index of required element (counting from
+         *          zero).  No bounds checking is applied.
+         *
+         * @return \c const reference to the specified element.
+         */
+        const T &operator[](R_xlen_t index) const
+        {
+            return m_data[index];
+        }
 
         /** @brief Name by which this type is known in R.
          *
@@ -65,8 +119,67 @@ namespace R
          */
         static const char *staticTypeName();
 
+        // Virtual functions of RObject:
+        const char *typeName() const override;
+
+    protected:
+        /**
+         * Declared protected to ensure that FixedVector objects are
+         * allocated only using 'new'.
+         */
+        ~FixedVector()
+        {
+            if (m_data != &m_singleton)
+                MemoryBank::deallocate(m_data, m_databytes);
+        }
+
     private:
+        T *m_data;          // pointer to the vector's data block.
+        R_xlen_t m_databytes; // used only if > 1 elements
+
+        // If there is only one element, it is stored here, internally
+        // to the FixedVector object, rather than via a separate
+        // allocation from CXXR::MemoryBank.  We put this last, so that it
+        // will be adjacent to any trailing redzone.
+        T m_singleton;
+
+        // Not implemented yet.  Declared to prevent
+        // compiler-generated versions:
+        FixedVector(const FixedVector &);
+        FixedVector &operator=(const FixedVector &);
+
+        // If there is more than one element, this function is used to
+        // allocate the required memory block from CXXR::MemoryBank :
+        void allocData(R_xlen_t sz, bool initialize = false);
     };
-} // namespace R
+
+    template <typename T, SEXPTYPE ST>
+    void FixedVector<T, ST>::allocData(R_xlen_t sz, bool initialize)
+    {
+        m_databytes = sz * sizeof(T);
+        // Check for integer overflow:
+        if (m_databytes / sizeof(T) != sz)
+            Rf_error(_("Request to create impossibly large vector."));
+        GCRoot<> thisroot(this);
+        m_data = reinterpret_cast<T *>(MemoryBank::allocate(m_databytes));
+        if (initialize)
+        {
+            for (R_xlen_t i = 0; i < sz; ++i)
+                m_data[i] = m_singleton;
+        }
+#if VALGRIND_LEVEL == 1
+        // For VALGRIND_LEVEL > 1 this will already have been done:
+        else
+            VALGRIND_MAKE_MEM_UNDEFINED(m_data, m_databytes);
+#endif
+    }
+
+    template <class T, SEXPTYPE ST>
+    const char *FixedVector<T, ST>::typeName() const
+    {
+        return FixedVector<T, ST>::staticTypeName();
+    }
+
+} // namespace CXXR
 
 #endif // FIXEDVECTOR_HPP

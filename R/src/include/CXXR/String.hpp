@@ -25,13 +25,13 @@
  */
 
 /** @file String.hpp
- * @brief Class R::String and associated C interface.
+ * @brief Class CXXR::String and associated C interface.
  */
 
 #ifndef RHO_STRING_HPP
 #define RHO_STRING_HPP
 
-#include <Rinternals.h>
+// #include <Rinternals.h>
 #include <CXXR/Allocator.hpp>
 #include <CXXR/GCRoot.hpp>
 #include <CXXR/SEXP_downcast.hpp>
@@ -40,7 +40,7 @@
 #include <string>
 #include <unordered_map>
 
-namespace R
+namespace CXXR
 {
     /** @brief RObject representing a character string.
      *
@@ -71,6 +71,6 @@ namespace R
     private:
         friend class Symbol;
     };
-} // namespace R
+} // namespace CXXR
 
 #endif /* RHO_STRING_HPP */

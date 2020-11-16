@@ -25,7 +25,7 @@
  */
 
 /** @file IntVector.hpp
- * @brief Class R::IntVector and associated C interface.
+ * @brief Class CXXR::IntVector and associated C interface.
  */
 
 #ifndef INTVECTOR_HPP
@@ -33,14 +33,14 @@
 
 #include <CXXR/FixedVector.hpp>
 
-namespace R
+namespace CXXR
 {
     /** @brief Vector of integer values.
      */
-    typedef R::FixedVector<int, INTSXP> IntVector;
+    typedef CXXR::FixedVector<int, INTSXP> IntVector;
 
-#define INTEGER(x) ((int *)DATAPTR(x))
-#define INTEGER_RO(x) ((const int *)DATAPTR_RO(x))
-} // namespace R
+#define INTVECTOR_INTEGER(x) ((int *)DATAPTR(x))
+#define INTVECTOR_INTEGER_RO(x) ((const int *)DATAPTR_RO(x))
+} // namespace CXXR
 
 #endif // INTVECTOR_HPP

@@ -29,7 +29,7 @@
 
 #include <CXXR/String.hpp>
 
-namespace R
+namespace CXXR
 {
     // Force the creation of non-inline embodiments of functions callable
     // from C:
@@ -40,14 +40,14 @@ namespace R
         // const auto &IS_BYTESp = IS_BYTES;
         // const auto &IS_LATIN1p = IS_LATIN1;
         // const auto &IS_UTF8p = IS_UTF8;
-        const auto &R_CHARp = R_CHAR;
-        const auto &mkCharp = Rf_mkChar;
-        const auto &mkCharCEp = Rf_mkCharCE;
-        const auto &mkCharLenp = Rf_mkCharLen;
+        // const auto &R_CHARp = R_CHAR;
+        // const auto &mkCharp = Rf_mkChar;
+        // const auto &mkCharCEp = Rf_mkCharCE;
+        // const auto &mkCharLenp = Rf_mkCharLen;
     } // namespace ForceNonInline
 
     const char *String::typeName() const
     {
         return staticTypeName();
     }
-} // namespace R
+} // namespace CXXR

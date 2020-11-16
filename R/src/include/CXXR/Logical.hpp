@@ -22,7 +22,7 @@
  */
 
 /** @file Logical.hpp
- * @brief Class R::Logical.
+ * @brief Class CXXR::Logical.
  */
 
 #ifndef CXXR_LOGICAL_HPP
@@ -31,7 +31,7 @@
 #include "R_ext/Arith.h"
 #include <cassert>
 
-namespace R
+namespace CXXR
 {
 	/** @brief Object representing a scalar logical value.
      *
@@ -134,6 +134,6 @@ namespace R
 		}
 		return true;
 	}
-} // namespace R
+} // namespace CXXR
 
 #endif // CXXR_LOGICAL_HPP

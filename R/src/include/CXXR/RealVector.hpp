@@ -25,22 +25,26 @@
  */
 
 /** @file RealVector.hpp
- * @brief Class R::RealVector and associated C interface.
+ * @brief Class CXXR::RealVector and associated C interface.
  */
 
 #ifndef REALVECTOR_HPP
 #define REALVECTOR_HPP
 
+#include <CXXR/VectorBase.hpp>
+#include <R_ext/Arith.h>
 #include <CXXR/FixedVector.hpp>
+#include <CXXR/SEXP_downcast.hpp>
+#include <cmath>
 
-namespace R
+namespace CXXR
 {
     /** @brief Vector of real numbers.
      */
-    typedef R::FixedVector<double, REALSXP> RealVector;
+    typedef CXXR::FixedVector<double, REALSXP> RealVector;
 
-#define REAL(x) ((double *)DATAPTR(x))
-#define REAL_RO(x) ((const double *)DATAPTR_RO(x))
-} // namespace R
+#define REALVECTOR_REAL(x) ((double *)DATAPTR(x))
+#define REALVECTOR_REAL_RO(x) ((const double *)DATAPTR_RO(x))
+} // namespace CXXR
 
 #endif // REALVECTOR_HPP

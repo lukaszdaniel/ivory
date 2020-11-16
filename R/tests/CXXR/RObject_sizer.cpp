@@ -22,7 +22,7 @@
 #include <CXXR/RObject.hpp>
 
 using namespace std;
-using namespace R;
+using namespace CXXR;
 
 int main()
 {
@@ -31,7 +31,9 @@ int main()
          << "\nsizeof(char): " << sizeof(char)
          << "\nsizeof(Rboolean): " << sizeof(Rboolean)
          << "\nsizeof(int): " << sizeof(int)
+         << "\nsizeof(unsigned): " << sizeof(unsigned int)
          << "\nsizeof(size_t): " << sizeof(size_t)
+         << "\nsizeof(R_xlen_t): " << sizeof(R_xlen_t)
          << "\nsizeof(double): " << sizeof(double)
          << "\nsizeof(RObject): " << sizeof(RObject) << "\n";
     return 0;

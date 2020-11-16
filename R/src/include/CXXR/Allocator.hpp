@@ -14,7 +14,7 @@
  */
 
 /** @file Allocator.hpp
- * @brief STL-compatible allocator front-ending R::MemoryBank.
+ * @brief STL-compatible allocator front-ending CXXR::MemoryBank.
  */
 
 #ifndef ALLOCATOR_HPP
@@ -23,12 +23,12 @@
 #include <limits>
 #include <CXXR/MemoryBank.hpp>
 
-namespace R
+namespace CXXR
 {
-	/** @brief STL-compatible allocator front-ending R::MemoryBank.
+	/** @brief STL-compatible allocator front-ending CXXR::MemoryBank.
      *
      * This templated class enables container classes within the C++
-     * standard library to allocate their memory via R::MemoryBank.
+     * standard library to allocate their memory via CXXR::MemoryBank.
      *
      * The code below is adapted from an example in the book "The C++
      * Standard Library - A Tutorial and Reference" by Nicolai
@@ -128,6 +128,6 @@ namespace R
 	{
 		return false;
 	}
-} // namespace R
+} // namespace CXXR
 
 #endif // ALLOCATOR_HPP

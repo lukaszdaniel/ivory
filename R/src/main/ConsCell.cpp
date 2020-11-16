@@ -31,7 +31,7 @@
 #include <Defn.h>
 #include <Rinternals.h>
 
-namespace R
+namespace CXXR
 {
     // Force the creation of non-inline embodiments of functions callable
     // from C:
@@ -80,4 +80,4 @@ namespace R
         x->u.listsxp.m_cdrval = v;
     }
 
-} // namespace R
+} // namespace CXXR

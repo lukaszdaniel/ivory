@@ -21,7 +21,7 @@
  */
 
 /** @file GCNode.hpp
- * @brief Class R::GCNode.
+ * @brief Class CXXR::GCNode.
  */
 
 #ifndef GCNODE_HPP
@@ -53,7 +53,7 @@
    worth pursuing for R.
 */
 
-namespace R
+namespace CXXR
 {
     /** @brief Base class for objects managed by the garbage collector.
      * 
@@ -433,6 +433,6 @@ namespace R
      * second and subsequent calls do nothing.
      */
     void initializeMemorySubsystem();
-} // namespace R
+} // namespace CXXR
 
 #endif /* GCNODE_HPP */

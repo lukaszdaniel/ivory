@@ -24,7 +24,7 @@
 
 /** @file GCEdge.hpp
  *
- * @brief Templated class R::GCEdge.
+ * @brief Templated class CXXR::GCEdge.
  */
 
 #ifndef GCEDGE_HPP
@@ -32,7 +32,7 @@
 
 #include <CXXR/GCNode.hpp>
 
-namespace R {
+namespace CXXR {
     class RObject;
 
     /** @brief Directed edge in the graph whose nodes are GCNode objects.
@@ -117,6 +117,6 @@ namespace R {
 	GCEdge(const GCEdge&);
 	GCEdge& operator=(const GCEdge&);
     };
-} // namespace R
+} // namespace CXXR
 
 #endif  // GCEDGE_HPP

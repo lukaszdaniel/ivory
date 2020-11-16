@@ -24,7 +24,7 @@
 
 class RCNTXT;
 
-namespace R
+namespace CXXR
 {
     /**
      * This class is intended as far as possible as a drop-in
@@ -52,6 +52,6 @@ namespace R
         {
         }
     };
-} // namespace R
+} // namespace CXXR
 
 #endif // JMPEXCEPTION_HPP

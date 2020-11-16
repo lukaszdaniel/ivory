@@ -46,7 +46,7 @@
 
 #include <Localization.h>
 #include <Defn.h>
-
+using namespace R;
 
 /* used in subscript.cpp and subassign.cpp */
 Rboolean Rf_NonNullStringMatch(SEXP s, SEXP t)

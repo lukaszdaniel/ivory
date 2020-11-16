@@ -28,6 +28,7 @@
 #include <Defn.h>
 #include <Internal.h>
 #include <R_ext/Itermacros.h>
+using namespace R;
 
 /* interval at which to check interrupts, a guess */
 // constexpr R_xlen_t NINTERRUPT = 10000000;

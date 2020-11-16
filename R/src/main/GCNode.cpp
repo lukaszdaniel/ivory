@@ -29,7 +29,7 @@
 #include <CXXR/RAllocStack.hpp>
 #include <iostream>
 
-namespace R
+namespace CXXR
 {
     unsigned int GCNode::s_last_gen;
     std::vector<GCNode *> GCNode::s_genpeg;
@@ -202,4 +202,4 @@ namespace R
             initialized = true;
         }
     }
-} // namespace R
+} // namespace CXXR

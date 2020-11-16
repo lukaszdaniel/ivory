@@ -36,9 +36,9 @@
 #include <unordered_map>
 
 using namespace std;
-using namespace R;
+using namespace CXXR;
 
-namespace R
+namespace CXXR
 {
     // Force generation of non-inline embodiments of functions in the C
     // interface:
@@ -49,7 +49,7 @@ namespace R
         // const auto &ProtectWithIndexp = R_ProtectWithIndex;
         // const auto &Reprotectp = R_Reprotect;
     } // namespace
-} // namespace R
+} // namespace CXXR
 
 vector<GCNode *> GCRootBase::s_roots;
 

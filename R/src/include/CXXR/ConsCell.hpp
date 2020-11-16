@@ -25,13 +25,13 @@
  */
 
 /** @file ConsCell.hpp
- * @brief Class R::ConsCell and associated C interface.
+ * @brief Class CXXR::ConsCell and associated C interface.
  *
  * To facilitate inlining of various ConsCell member functions, this
- * file also includes the definition of class R::PairList.
+ * file also includes the definition of class CXXR::PairList.
  *
  * This file includes C functions for examining and setting the CAR
- * and TAG of a R::ConsCell; functions for examining and setting
+ * and TAG of a CXXR::ConsCell; functions for examining and setting
  * the CDR, and other operations accessing the tail of the list, are
  * to be found in PairList.hpp.
  */
@@ -41,7 +41,7 @@
 
 #include <CXXR/RObject.hpp>
 
-namespace R
+namespace CXXR
 {
     /** @brief Element of a singly linked list.
      *
@@ -86,6 +86,6 @@ namespace R
         auto car() const { return this->m_carval; }
         auto cdr() const { return this->m_cdrval; }
     };
-} // namespace R
+} // namespace CXXR
 
 #endif /* CONSCELL_HPP */

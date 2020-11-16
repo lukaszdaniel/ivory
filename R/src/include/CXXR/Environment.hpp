@@ -25,7 +25,7 @@
  */
 
 /** @file Environment.hpp
- * @brief Class R::Environment and associated C interface.
+ * @brief Class CXXR::Environment and associated C interface.
  */
 
 #ifndef ENVIRONMENT_HPP
@@ -34,12 +34,12 @@
 #include <CXXR/RObject.hpp>
 #include <CXXR/SEXP_downcast.hpp>
 
-namespace R
+namespace CXXR
 {
     /** @brief Mapping from Symbols to R objects.
      *
      * An Environment has an associated Frame, which defines a mapping
-     * from (pointers to) R::Symbol objects to (pointers to)
+     * from (pointers to) CXXR::Symbol objects to (pointers to)
      * arbitrary objects of classes derived from RObject.  An
      * Environment will normally have an 'enclosing environment', and
      * the Environment class provides facilities for searching for a
@@ -92,6 +92,6 @@ namespace R
         static void mark_as_global_frame(RObject *x);
         static void mark_as_local_frame(RObject *x);
     };
-} // namespace R
+} // namespace CXXR
 
 #endif /* ENVIRONMENT_HPP */

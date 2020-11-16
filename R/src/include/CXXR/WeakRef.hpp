@@ -25,7 +25,7 @@
  */
 
 /** @file WeakRef.hpp
- * @brief Class R::WeakRef and associated C interface.
+ * @brief Class CXXR::WeakRef and associated C interface.
  */
 
 #ifndef WEAKREF_HPP
@@ -38,7 +38,7 @@
 #include <CXXR/GCEdge.hpp>
 // #include <Rinternals.h>
 
-namespace R
+namespace CXXR
 {
 	typedef void (*R_CFinalizer_t)(RObject *);
     /** @brief Weak reference.
@@ -205,6 +205,6 @@ namespace R
 
 	friend class GCNode;
     };
-} // namespace R
+} // namespace CXXR
 
 #endif /* WEAKREF_HPP */
