@@ -66,8 +66,8 @@ namespace CXXR
 		}
 
 		/* constructors and destructor
-	 * - nothing to do because the allocator has no state
-	 */
+		 * - nothing to do because the allocator has no state
+		 */
 		Allocator() throw()
 		{
 		}

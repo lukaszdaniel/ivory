@@ -3950,6 +3950,8 @@ function(x, ...)
   , Filters = NULL
   , close.winProgressBar = function(con, ...) {}
   , DLL.version = function(path) {}
+  , .fixupGFortranStderr = function() {}
+  , .fixupGFortranStdout = function() {}
   , getClipboardFormats = function(numeric = FALSE) {}
   , getIdentification = function() {}
   , getWindowsHandle = function(which = "Console") {}
@@ -4470,7 +4472,7 @@ function(pkgDir)
     ## add try() to ensure that all datasets are looked at
     ## (if not all of each dataset).
     for(ds in ls(envir = dataEnv, all.names = TRUE)) {
-        if(inherits(suppressMessages(try(check_one(get(ds, envir = dataEnv), ds), silent = TRUE)),
+        if(inherits(suppressWarnings(suppressMessages(try(check_one(get(ds, envir = dataEnv), ds), silent = TRUE))),
                     "try-error")) {
             msg <- gettextf("Error loading dataset %s:\n ", sQuote(ds), domain = "R-tools")
             message(msg, geterrmessage())
