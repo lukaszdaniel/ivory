@@ -62,7 +62,7 @@ namespace CXXR
     RObject::~RObject()
     {
         if (m_data)
-            MemoryBank::deallocate(m_data, m_databytes);
+            MemoryBank::deallocate(m_data, m_databytes, m_allocator);
     }
 
     void RObject::visitChildren(const_visitor *v) const

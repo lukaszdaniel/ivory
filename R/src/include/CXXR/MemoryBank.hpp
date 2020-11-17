@@ -34,6 +34,7 @@
 #include <config.h>
 #include <CXXR/CellPool.hpp>
 #include <CXXR/SEXPTYPE.hpp>
+#include <R_ext/Rallocators.h>
 
 namespace CXXR
 {
@@ -103,18 +104,20 @@ namespace CXXR
 		/** @brief Allocate a block of memory.
 		 *
 		 * @param bytes Required size in bytes of the block.
+		 * 
+		 * @param allocator Pointer to the custom allocator.
 		 *
 		 * @return a pointer to the allocated cell.
-		 *
-		 * @throws bad_alloc if a cell cannot be allocated.
 		 */
-		static void *allocate(size_t bytes)
+		static void *allocate(size_t bytes = 0, R_allocator_t *allocator = nullptr)
 		{
 #if VALGRIND_LEVEL >= 3
 			size_t blockbytes = bytes + 1; // trailing redzone
 #else
 			size_t blockbytes = bytes;
 #endif
+			if (allocator)
+				return custom_node_alloc(allocator, bytes);
 			// Assumes sizeof(double) == 8:
 			void *p;
 			p = (blockbytes > s_max_cell_size || !(p = alloc1(blockbytes))) ? alloc2(blockbytes) : p;
@@ -160,11 +163,17 @@ namespace CXXR
 		 * @param p Pointer to a block of memory previously allocated
 		 *          by MemoryBank::allocate(), or a null pointer (in which
 		 *          case method does nothing).
+		 * 
+		 * @param bytes Size of the block.
+		 * 
+		 * @param allocator If true, use custom deallocation.
 		 */
-		static void deallocate(void *p, size_t bytes)
+		static void deallocate(void *p = nullptr, size_t bytes = 0, bool allocator = false)
 		{
 			if (!p)
 				return;
+			if (allocator)
+				custom_node_free(p);
 #if VALGRIND_LEVEL >= 3
 			size_t blockbytes = bytes + 1; // trailing redzone
 			char *c = reinterpret_cast<char *>(p);
@@ -177,8 +186,7 @@ namespace CXXR
 				::operator delete(p);
 			else
 				s_pools[s_pooltab[blockbytes]]->deallocate(p);
-			--s_blocks_allocated;
-			s_bytes_allocated -= bytes;
+			notifyDeallocation(bytes);
 		}
 
 		/** Set a callback to cue garbage collection.
@@ -227,8 +235,16 @@ namespace CXXR
 		static unsigned int s_pooltab[];
 #ifdef R_MEMORY_PROFILING
 		static void (*s_monitor)(size_t);
-		static size_t s_threshold;
+		static size_t s_monitor_threshold;
 #endif
+
+		/* support for custom allocators that allow vectors to be allocated
+		 using non-standard means such as COW mmap() */
+		static void *custom_node_alloc(R_allocator_t *allocator, size_t bytes);
+		static void custom_node_free(void *ptr);
+
+		static void notifyAllocation(size_t bytes);
+		static void notifyDeallocation(size_t bytes);
 
 		// Not implemented.  Declared to stop the compiler generating
 		// a constructor.
@@ -241,8 +257,7 @@ namespace CXXR
 			void *p = pool->easyAllocate();
 			if (p)
 			{
-				++s_blocks_allocated;
-				s_bytes_allocated += bytes;
+				notifyAllocation(bytes);
 #if VALGRIND_LEVEL >= 2
 				// Fence off supernumerary bytes:
 				size_t surplus = pool->cellSize() - bytes;
@@ -253,10 +268,6 @@ namespace CXXR
 				}
 #endif
 			}
-#ifdef R_MEMORY_PROFILING
-			if (bytes >= s_threshold && s_monitor)
-				s_monitor(bytes);
-#endif
 			return p;
 		}
 

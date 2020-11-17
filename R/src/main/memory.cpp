@@ -1516,6 +1516,7 @@ SEXP Rf_allocVector3(SEXPTYPE type, R_xlen_t length = 1, R_allocator_t *allocato
 
     s = new RObject(type);
     s->m_databytes = bytes;
+    s->m_allocator = (allocator != nullptr);
 	// We don't want the garbage collector trying to mark this
 	// node's children yet:
     CXXR::VectorBase::set_stdvec_length(s, 0);
@@ -1526,7 +1527,7 @@ SEXP Rf_allocVector3(SEXPTYPE type, R_xlen_t length = 1, R_allocator_t *allocato
             try
             {
                 PROTECT(s);
-                s->m_data = MemoryBank::allocate(s->m_databytes);
+                s->m_data = MemoryBank::allocate(s->m_databytes, allocator);
                 UNPROTECT(1);
                 success = true;
             }

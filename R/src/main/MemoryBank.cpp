@@ -46,7 +46,7 @@ size_t MemoryBank::s_bytes_allocated = 0;
 bool (*MemoryBank::s_cue_gc)(size_t, bool) = nullptr;
 #ifdef R_MEMORY_PROFILING
 void (*MemoryBank::s_monitor)(size_t) = 0;
-size_t MemoryBank::s_threshold = numeric_limits<size_t>::max();
+size_t MemoryBank::s_monitor_threshold = numeric_limits<size_t>::max();
 #endif
 
 void MemoryBank::pool_out_of_memory(CellPool *pool)
@@ -112,8 +112,7 @@ void *MemoryBank::alloc2(size_t bytes)
         // Try once more:
         p = (pool ? pool->allocate() : ::operator new(bytes));
     }
-    ++s_blocks_allocated;
-    s_bytes_allocated += bytes;
+    notifyAllocation(bytes);
 #if VALGRIND_LEVEL >= 2
     if (pool)
     {
@@ -125,10 +124,6 @@ void *MemoryBank::alloc2(size_t bytes)
             VALGRIND_MAKE_MEM_NOACCESS(tail, surplus);
         }
     }
-#endif
-#ifdef R_MEMORY_PROFILING
-    if (bytes >= s_threshold && s_monitor)
-        s_monitor(bytes);
 #endif
     return p;
 }
@@ -156,10 +151,50 @@ void MemoryBank::initialize()
     s_pools[4] = new CellPool(16, 32, pool_out_of_memory);
 }
 
+void MemoryBank::notifyAllocation(size_t bytes)
+{
+#ifdef R_MEMORY_PROFILING
+    if (s_monitor && bytes >= s_monitor_threshold)
+        s_monitor(bytes);
+#endif
+    ++s_blocks_allocated;
+    s_bytes_allocated += bytes;
+}
+
+void MemoryBank::notifyDeallocation(size_t bytes)
+{
+    s_bytes_allocated -= bytes;
+    --s_blocks_allocated;
+}
+
 #ifdef R_MEMORY_PROFILING
 void MemoryBank::setMonitor(void (*monitor)(size_t), size_t threshold)
 {
     s_monitor = monitor;
-    s_threshold = (monitor ? threshold : numeric_limits<size_t>::max());
+    s_monitor_threshold = (monitor ? threshold : numeric_limits<size_t>::max());
 }
 #endif
+
+void *MemoryBank::custom_node_alloc(R_allocator_t *allocator, size_t bytes)
+{
+    if (!allocator || !allocator->mem_alloc)
+        return nullptr;
+    void *ptr = allocator->mem_alloc(allocator, bytes + sizeof(R_allocator_t));
+    if (ptr)
+    {
+        notifyAllocation(bytes);
+        R_allocator_t *ca = (R_allocator_t *)ptr;
+        *ca = *allocator;
+        return (void *)(ca + 1);
+    }
+    return nullptr;
+}
+
+void MemoryBank::custom_node_free(void *ptr)
+{
+    if (ptr)
+    {
+        R_allocator_t *allocator = ((R_allocator_t *)ptr) - 1;
+        allocator->mem_free(allocator, (void *)allocator);
+    }
+}

@@ -163,12 +163,13 @@ namespace CXXR
     public:
         void *m_data;
         size_t m_databytes;
+        bool m_allocator;
 
         /**
          * @param stype Required type of the RObject.
          */
         explicit RObject(SEXPTYPE stype = ANYSXP) : m_type(stype), m_scalar(false), m_has_class(false), m_alt(false), m_gpbits(0), m_debug(false),
-                                                    m_trace(false), m_spare(false), m_named(0), m_extra(0), m_attrib(nullptr), m_data(nullptr), m_databytes(0)
+                                                    m_trace(false), m_spare(false), m_named(0), m_extra(0), m_attrib(nullptr), m_data(nullptr), m_databytes(0), m_allocator(false)
         {
         }
 
