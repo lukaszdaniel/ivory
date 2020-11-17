@@ -275,26 +275,6 @@ const char *R::sexptype2char(const SEXPTYPE type) {
 static void R_ReportAllocation(R_size_t);
 #endif
 
-#define GC_PROT(X)                                                        \
-    do                                                                    \
-    {                                                                     \
-        int __wait__ = GCManager::gc_force_wait();                        \
-        int __gap__ = GCManager::gc_force_gap();                          \
-        Rboolean __release__ = (Rboolean)GCManager::gc_inhibit_release(); \
-        X;                                                                \
-        GCManager::setTortureParameters(__gap__, __wait__, __release__);  \
-    } while (false)
-
-/* There are three levels of collections.  Level 0 collects only the
-   youngest generation, level 1 collects the two youngest generations,
-   and level 2 collects all generations.  Higher level collections
-   occur at least after specified numbers of lower level ones.  After
-   LEVEL_0_FREQ level zero collections a level 1 collection is done;
-   after every LEVEL_1_FREQ level 1 collections a level 2 collection
-   occurs.  Thus, roughly, every LEVEL_0_FREQ-th collection is a level
-   1 collection and every (LEVEL_0_FREQ * LEVEL_1_FREQ)-th collection
-   is a level 2 collection.  */
-
 static void init_gc_grow_settings()
 {
     char *arg;
@@ -352,8 +332,6 @@ static void init_gc_grow_settings()
    Access to these values is provided with reader and writer
    functions; the writer function insures that the maximal values are
    never set below the current ones. */
-// static R_size_t R_MaxVSize = R_SIZE_T_MAX;
-// static R_size_t R_MaxNSize = R_SIZE_T_MAX;
 
 HIDDEN R_size_t R::R_GetMaxVSize(void)
 {
@@ -421,17 +399,6 @@ namespace
     SEXP R_PreciousList = nullptr; /* List of Persistent Objects */
 
     /* Debugging Routines. */
-
-#ifdef DEBUG_ADJUST_HEAP
-    static void DEBUG_ADJUST_HEAP_PRINT(double node_occup, double vect_occup)
-    {
-        REprintf(_("Node occupancy: %.0f%%\nVector occupancy: %.0f%%\n"), 100.0 * node_occup, 100.0 * vect_occup);
-        REprintf(_("Total allocation: %lu\n"), MemoryBank::bytesAllocated());
-        REprintf(_("Ncells %lu\nVcells %lu\n"), GCManager::nodeTriggerLevel(), GCManager::triggerLevel());
-    }
-#else
-#define DEBUG_ADJUST_HEAP_PRINT(node_occup, vect_occup)
-#endif /* DEBUG_ADJUST_HEAP */
 
     inline void INIT_REFCNT(SEXP x)
     {
@@ -1615,14 +1582,6 @@ SEXP Rf_allocList(const int n)
     for (int i = 0; i < n; i++)
         result = CONS(R_NilValue, result);
     return result;
-}
-
-SEXP Rf_allocS4Object(void)
-{
-    SEXP s;
-    GC_PROT(s = new RObject(S4SXP));
-    SET_S4_OBJECT(s);
-    return s;
 }
 
 static SEXP allocFormalsList(const int nargs, ...)

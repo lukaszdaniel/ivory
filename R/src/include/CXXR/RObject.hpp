@@ -173,6 +173,12 @@ namespace CXXR
         {
         }
 
+        /** @brief Copy constructor.
+         *
+         * @param pattern Object to be copied.
+         */
+        RObject(const RObject &pattern);
+
         /**
          * @return Pointer to the attributes of this object.
          */
@@ -227,12 +233,67 @@ namespace CXXR
          */
         const RObject *tag() const { return u.listsxp.m_tagval; }
 
+        /** @brief Set the status of this RObject as an S4 object.
+         *
+         * @param on true iff this is to be considered an S4 object.
+         *          CXXR raises an error if an attempt is made to
+         *          unset the S4 object status of an S4Object
+         *          (::S4SXP), whereas CR permits this.
+         */
+        void setS4Object(bool on);
+
         /** @brief Name within R of this type of object.
          *
          * @return the name by which this type of object is known
          *         within R.
          */
         virtual const char *typeName() const;
+
+        /** @brief Return pointer to a copy of this object.
+         *
+         * This function creates a copy of this object, and returns a
+         * pointer to that copy.
+         *
+         * Generally this function (and the copy constructors it
+         * utilises) will attempt to create a 'deep' copy of the
+         * object; this follows standard practice within C++, and it
+         * is intended to extend this practice as CXXR development
+         * continues.
+         *
+         * However, if the pattern object contains unclonable
+         * subobjects, then the created copy will at the relevant
+         * places simply contain pointers to those subobjects, i.e. to
+         * that extent the copy is 'shallow'.  This is managed using
+         * the smart pointers defined by nested class RObject::Handle.
+         *
+         * @return a pointer to a clone of this object.  Returns the original
+         *          object if it cannot be cloned.
+         *
+         * @note Derived classes should exploit the covariant return
+         *          type facility to return a pointer to the type of object
+         *          being cloned.
+         */
+        virtual RObject *clone() const
+        {
+            return const_cast<RObject *>(this);
+        }
+
+        /** @brief Return a pointer to a copy of an object or the object itself
+         *          if it isn't cloneable.
+         *
+         * @tparam T RObject or a type derived from RObject.
+         *
+         * @param pattern Either a null pointer or a pointer to the
+         *          object to be cloned.
+         *
+         * @return Pointer to a clone of \a pattern, or \a pattern
+         * if \a pattern cannot be cloned or is itself a null pointer.
+         */
+        template <class T>
+        static T *clone(const T *pattern)
+        {
+            return pattern ? pattern->clone() : nullptr;
+        }
 
         // To be protected in future:
 
@@ -381,14 +442,14 @@ namespace CXXR
 #define DECREMENT_REFCNT(x)                                       \
     do                                                            \
     {                                                             \
-        CXXR::RObject *drc__x__ = (x);                               \
+        CXXR::RObject *drc__x__ = (x);                            \
         if (REFCNT(drc__x__) > 0 && REFCNT(drc__x__) < REFCNTMAX) \
             SET_REFCNT(drc__x__, REFCNT(drc__x__) - 1);           \
     } while (0)
 #define INCREMENT_REFCNT(x)                             \
     do                                                  \
     {                                                   \
-        CXXR::RObject *irc__x__ = (x);                     \
+        CXXR::RObject *irc__x__ = (x);                  \
         if (REFCNT(irc__x__) < REFCNTMAX)               \
             SET_REFCNT(irc__x__, REFCNT(irc__x__) + 1); \
     } while (0)
@@ -470,7 +531,7 @@ namespace CXXR
 #define ENSURE_NAMEDMAX(v)                  \
     do                                      \
     {                                       \
-        CXXR::RObject *__enm_v__ = (v);        \
+        CXXR::RObject *__enm_v__ = (v);     \
         if (NAMED(__enm_v__) < NAMEDMAX)    \
             SET_NAMED(__enm_v__, NAMEDMAX); \
     } while (0)

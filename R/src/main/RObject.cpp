@@ -142,6 +142,22 @@ namespace CXXR
         abort();
     }
 
+    RObject::RObject(const RObject &pattern)
+        : m_type(pattern.m_type), m_scalar(pattern.m_scalar), m_has_class(pattern.m_has_class), m_alt(pattern.m_alt), m_gpbits(pattern.m_gpbits), m_debug(pattern.m_debug),
+          m_trace(pattern.m_trace), m_spare(pattern.m_spare), m_named(pattern.m_named), m_extra(pattern.m_extra), m_attrib(pattern.m_attrib), m_data(pattern.m_data), m_databytes(pattern.m_databytes), m_allocator(pattern.m_allocator)
+    {
+    }
+
+    void RObject::setS4Object(bool on)
+    {
+        if (!on && sexptype() == S4SXP)
+            Rf_error("CXXR: S4 object (S4SXP) cannot cease to be an S4 object.");
+        if (on)
+            m_gpbits |= S4_OBJECT_MASK;
+        else
+            m_gpbits &= ~S4_OBJECT_MASK;
+    }
+
     const char *RObject::typeName() const
     {
         return Rf_type2char(sexptype());
@@ -371,7 +387,7 @@ namespace CXXR
     {
         if (!x)
             return;
-        x->m_gpbits |= S4_OBJECT_MASK;
+        x->setS4Object(true);
     }
 
     /**
@@ -381,7 +397,7 @@ namespace CXXR
     {
         if (!x)
             return;
-        x->m_gpbits &= ~S4_OBJECT_MASK;
+        x->setS4Object(false);
     }
 
     /* JIT optimization support */
