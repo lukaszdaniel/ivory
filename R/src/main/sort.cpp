@@ -214,6 +214,12 @@ Rboolean Rf_isUnsorted(SEXP x, Rboolean strictly)
     return FALSE;/* sorted */
 } // isUnsorted()
 
+#define FIRST_LAST_DIFF(x, type) type##_ELT(x, 0) != type##_ELT(x, XLENGTH(x) - 1)
+/* assumes no NAs, which is the case for do_isunsorted, they're removed in R code */
+#define SORTED_VEC_NONCONST(x)	(XLENGTH(x) > 1 &&			\
+     ((TYPEOF(x) == INTSXP && FIRST_LAST_DIFF(x, INTEGER)) ||		\
+      (TYPEOF(x) == REALSXP && FIRST_LAST_DIFF(x, REAL))))
+
 HIDDEN SEXP do_isunsorted(SEXP call, SEXP op, SEXP args, SEXP rho)
 {
     checkArity(op, args);
@@ -243,8 +249,12 @@ HIDDEN SEXP do_isunsorted(SEXP call, SEXP op, SEXP args, SEXP rho)
 	    UNPROTECT(1);
 	    return ScalarLogical(FALSE);
 	}
-	/* is.unsorted returns TRUE for vectors sorted in descending order */
-	else if( KNOWN_DECR(sorted) || sorted == KNOWN_UNSORTED) {
+	/* is.unsorted returns TRUE for vectors sorted in descending order 
+	   iff the vector has more than 1 unique value */
+	else if(KNOWN_DECR(sorted)) {
+	    UNPROTECT(1);
+	    return ScalarLogical(SORTED_VEC_NONCONST(x));
+	} else if (sorted == KNOWN_UNSORTED) {
 	    UNPROTECT(1);
 	    return ScalarLogical(TRUE);
 	}

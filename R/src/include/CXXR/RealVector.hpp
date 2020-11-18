@@ -31,10 +31,10 @@
 #ifndef REALVECTOR_HPP
 #define REALVECTOR_HPP
 
-#include <CXXR/VectorBase.hpp>
 #include <R_ext/Arith.h>
 #include <CXXR/FixedVector.hpp>
 #include <CXXR/SEXP_downcast.hpp>
+#include <CXXR/VectorBase.hpp>
 #include <cmath>
 
 namespace CXXR

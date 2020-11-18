@@ -63,7 +63,7 @@ namespace CXXR
      * used internally by the interpreter to refer to elements of a
      * '<tt>...</tt>' argument list.  (Note that CR does not
      * consistently enforce the 'at most one Symbol per name' rule for
-     * dot-dot symbols; R does.)
+     * dot-dot symbols; CXXR does.)
      *
      * Pseudo-symbols are used to implement certain pseudo-objects
      * (::R_MissingArg and ::R_UnboundValue) that CR expects to have
@@ -73,7 +73,7 @@ namespace CXXR
      * @note Following the practice with CR's symbol table, Symbol
      * objects, once created, are permanently preserved against
      * garbage collection.  There is no inherent reason for this in
-     * R, but some packages may rely on it.  Consequently there is
+     * CXXR, but some packages may rely on it.  Consequently there is
      * no need to use smart pointers such as GCStackRoot<Symbol> or
      * GCEdge<Symbol>: plain pointers will do fine.
      */
@@ -86,7 +86,7 @@ namespace CXXR
         // bool m_ddval;
         // Declared private to ensure that Symbol objects are
         // allocated only using 'new':
-        ~Symbol() {};
+        ~Symbol(){};
 
     public:
         // Virtual functions of RObject:

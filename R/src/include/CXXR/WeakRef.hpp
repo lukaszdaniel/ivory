@@ -41,7 +41,7 @@
 namespace CXXR
 {
 	typedef void (*R_CFinalizer_t)(RObject *);
-    /** @brief Weak reference.
+	/** @brief Weak reference.
      *
      * Refer to <em>Stretching the storage manager: weak pointers and
      * stable names in Haskell</em> by Peyton Jones, Marlow, and
@@ -62,149 +62,150 @@ namespace CXXR
      * A WeakRef object with a reachable key will not be garbage
      * collected even if the WeakRef object is not itself reachable.
      */
-    class WeakRef : public RObject {
-    public:
-	/**
-	 * @param key Pointer to the key of the WeakRef.  It is not
-	 * forbidden but probably pointless for the key to be null: in
-	 * this event the reference will immediately be tombstoned,
-	 * and its finalizer (if any) will never be run.
-	 *
-	 * @param value Pointer to the value of the WeakRef (may be
-	 *          null)
-	 *
-	 * @param R_finalizer Pointer to an R object to be evaluated
-	 *          as a finalizer (may be null).  The finalizer will
-	 *          be called with the key of the WeakRef object as
-	 *          its argument, and at the time of call the key and
-	 *          finalizer will be protected from the garbage
-	 *          collector.  However, the WeakRef object itself
-	 *          will already have been tombstoned.
-	 *
-	 * @param finalize_on_exit True iff the finalizer should be
-	 *          run when R exits.
-	 */
-	WeakRef(RObject* key, RObject* value, RObject* R_finalizer = nullptr,
-		bool finalize_on_exit = false);
-
-	/**
-	 * @param key Pointer to the key of the WeakRef.  It is
-	 *          not forbidden but probably pointless for the key
-	 *          to be null: in this event the reference will
-	 *          immediately be tombstoned, and its finalizer (if
-	 *          any) will never be run.
-	 *
-	 * @param value Pointer to the value of the WeakRef
-	 *          (may be null).  The finalizer will be called with
-	 *          a pointer to the key of the WeakRef object
-	 *          as its argument, and at the time of call the key
-	 *          object will be protected from the garbage
-	 *          collector.  However, the WeakRef object
-	 *          itself will already have been tombstoned.
-	 *
-	 * @param C_finalizer Pointer to an C function to be invoked
-	 *          as a finalizer (may be null).
-	 *
-	 * @param finalize_on_exit True iff the finalizer should be
-	 *          run when R exits.
-	 */
-	WeakRef(RObject* key, RObject* value, R_CFinalizer_t C_finalizer,
-		bool finalize_on_exit = false);
-
-	~WeakRef();
-
-	/** @brief Integrity check.
-	 *
-	 * Aborts the program with an error message if the class is
-	 * found to be internally inconsistent.
-	 *
-	 * @return true, if it returns at all.  The return value is to
-	 * facilitate use with \c assert.
-	 */
-	static bool check();
-
-	/**
-	 * @return Pointer to the key of the WeakRef.
-	 */
-	RObject* key() const { return m_key; }
-
-	/** @brief Run finalizers with 'finalize_on_exit' specified.
-	 *
-	 * Run the finalizers of all (non-tombstoned) WeakRef object
-	 * for which 'finalize_on_exit' was specified.
-	 */
-	static void runExitFinalizers();
-
-	/** @brief Run finalizers.
-	 *
-	 * This is called by GCManager::gc() immediately after garbage
-	 * collection, and runs the finalizers of any weak references that
-	 * were identified during the garbage collection as being
-	 * ready to finalize; when the call exits, all such weak
-	 * references will have been tombstoned.  (Consequently,
-	 * calling this method at any other time will effectively be a
-	 * no-op.)
-	 *
-	 * @return true iff any finalizers are actually run (whether
-	 * successfully or not).
-	 */
-	static bool runFinalizers();
-
-	/**
-	 * @return Pointer to the value of the WeakRef.
-	 */
-	RObject* value() const { return m_value; }
-
-	static void runWeakRefFinalizer(RObject *x);
-	static void runPendingFinalizers();
-
-    private:
-	typedef std::list<WeakRef*, Allocator<WeakRef*> > WRList;
-	static WRList* getLive();
-	static WRList* getFinalizationPending();
-	static WRList* getTombstone();
-
-	static int s_count;  // Count of references in existence (for debugging)
-
-	RObject* m_key;
-	GCEdge<> m_value;
-	GCEdge<> m_Rfinalizer;
-	R_CFinalizer_t m_Cfinalizer;
-	WRList::iterator m_lit;
-	bool m_ready_to_finalize;
-	bool m_finalize_on_exit;
-
-	void finalize();
-
-	/** Mark nodes reachable via weak references.
-	 *
-	 * This function implements the algorithm in Sec. 6.2 of the
-	 * Peyton-Jones et al. paper.  If a WeakRef has a marked key,
-	 * its value and R finalizer and their descendants are marked.
-	 * If the key is not marked, and there is a finalizer, then
-	 * the WeakRef is placed on a finalization pending list.  If
-	 * the key is not marked and there is no finalizer, the
-	 * WeakRef is tombstoned.
-	 */
-	static void markThru(unsigned int max_gen);
-
-	// Tombstone the node:
-	void tombstone();
-
-	// Transfer the WeakRef from list 'from' to list 'to':
-	void transfer(WRList* from, WRList* to)
+	class WeakRef : public RObject
 	{
-	    to->splice(to->end(), *from, m_lit);
-	}
+	public:
+		/**
+		 * @param key Pointer to the key of the WeakRef.  It is not
+		 * forbidden but probably pointless for the key to be null: in
+		 * this event the reference will immediately be tombstoned,
+		 * and its finalizer (if any) will never be run.
+		 *
+		 * @param value Pointer to the value of the WeakRef (may be
+		 *          null)
+		 *
+		 * @param R_finalizer Pointer to an R object to be evaluated
+		 *          as a finalizer (may be null).  The finalizer will
+		 *          be called with the key of the WeakRef object as
+		 *          its argument, and at the time of call the key and
+		 *          finalizer will be protected from the garbage
+		 *          collector.  However, the WeakRef object itself
+		 *          will already have been tombstoned.
+		 *
+		 * @param finalize_on_exit True iff the finalizer should be
+		 *          run when R exits.
+		 */
+		WeakRef(RObject *key, RObject *value, RObject *R_finalizer = nullptr,
+				bool finalize_on_exit = false);
 
-	// Return pointer to the list (live, finalization_pending or
-	// tombstone) on which - according to its internal data -
-	// the object currently should be listed (and quite possibly
-	// is listed).
-	WRList* wrList() const;
+		/**
+		 * @param key Pointer to the key of the WeakRef.  It is
+		 *          not forbidden but probably pointless for the key
+		 *          to be null: in this event the reference will
+		 *          immediately be tombstoned, and its finalizer (if
+		 *          any) will never be run.
+		 *
+		 * @param value Pointer to the value of the WeakRef
+		 *          (may be null).  The finalizer will be called with
+		 *          a pointer to the key of the WeakRef object
+		 *          as its argument, and at the time of call the key
+		 *          object will be protected from the garbage
+		 *          collector.  However, the WeakRef object
+		 *          itself will already have been tombstoned.
+		 *
+		 * @param C_finalizer Pointer to an C function to be invoked
+		 *          as a finalizer (may be null).
+		 *
+		 * @param finalize_on_exit True iff the finalizer should be
+		 *          run when R exits.
+		 */
+		WeakRef(RObject *key, RObject *value, R_CFinalizer_t C_finalizer,
+				bool finalize_on_exit = false);
 
-	friend class GCNode;
-    };
+		~WeakRef();
+
+		/** @brief Integrity check.
+		 *
+		 * Aborts the program with an error message if the class is
+		 * found to be internally inconsistent.
+		 *
+		 * @return true, if it returns at all.  The return value is to
+		 * facilitate use with \c assert.
+		 */
+		static bool check();
+
+		/**
+		 * @return Pointer to the key of the WeakRef.
+		 */
+		RObject *key() const { return m_key; }
+
+		/** @brief Run finalizers with 'finalize_on_exit' specified.
+		 *
+		 * Run the finalizers of all (non-tombstoned) WeakRef object
+		 * for which 'finalize_on_exit' was specified.
+		 */
+		static void runExitFinalizers();
+
+		/** @brief Run finalizers.
+		 *
+		 * This is called by GCManager::gc() immediately after garbage
+		 * collection, and runs the finalizers of any weak references that
+		 * were identified during the garbage collection as being
+		 * ready to finalize; when the call exits, all such weak
+		 * references will have been tombstoned.  (Consequently,
+		 * calling this method at any other time will effectively be a
+		 * no-op.)
+		 *
+		 * @return true iff any finalizers are actually run (whether
+		 * successfully or not).
+		 */
+		static bool runFinalizers();
+
+		/**
+		 * @return Pointer to the value of the WeakRef.
+		 */
+		RObject *value() const { return m_value; }
+
+		static void runWeakRefFinalizer(RObject *x);
+		static void runPendingFinalizers();
+
+	private:
+		typedef std::list<WeakRef *, Allocator<WeakRef *>> WRList;
+		static WRList *getLive();
+		static WRList *getFinalizationPending();
+		static WRList *getTombstone();
+
+		static int s_count; // Count of references in existence (for debugging)
+
+		RObject *m_key;
+		GCEdge<> m_value;
+		GCEdge<> m_Rfinalizer;
+		R_CFinalizer_t m_Cfinalizer;
+		WRList::iterator m_lit;
+		bool m_ready_to_finalize;
+		bool m_finalize_on_exit;
+
+		void finalize();
+
+		/** Mark nodes reachable via weak references.
+		 *
+		 * This function implements the algorithm in Sec. 6.2 of the
+		 * Peyton-Jones et al. paper.  If a WeakRef has a marked key,
+		 * its value and R finalizer and their descendants are marked.
+		 * If the key is not marked, and there is a finalizer, then
+		 * the WeakRef is placed on a finalization pending list.  If
+		 * the key is not marked and there is no finalizer, the
+		 * WeakRef is tombstoned.
+		 */
+		static void markThru(unsigned int max_gen);
+
+		// Tombstone the node:
+		void tombstone();
+
+		// Transfer the WeakRef from list 'from' to list 'to':
+		void transfer(WRList *from, WRList *to)
+		{
+			to->splice(to->end(), *from, m_lit);
+		}
+
+		// Return pointer to the list (live, finalization_pending or
+		// tombstone) on which - according to its internal data -
+		// the object currently should be listed (and quite possibly
+		// is listed).
+		WRList *wrList() const;
+
+		friend class GCNode;
+	};
 } // namespace CXXR
 
 #endif /* WEAKREF_HPP */

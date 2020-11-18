@@ -31,8 +31,8 @@
 #ifndef VECTORBASE_HPP
 #define VECTORBASE_HPP
 
-#include <CXXR/RObject.hpp>
 #include <CXXR/GCRoot.hpp>
+#include <CXXR/RObject.hpp>
 #include <CXXR/SEXP_downcast.hpp>
 #include <cstddef>
 

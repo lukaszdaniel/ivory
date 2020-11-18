@@ -229,25 +229,25 @@ namespace CXXR
     {
     public:
         /**
-	 * @param node Pointer the node to be pointed to, and
-	 *          protected from the garbage collector, or a null
-	 *          pointer.
-	 */
+         * @param node Pointer the node to be pointed to, and
+         *          protected from the garbage collector, or a null
+         *          pointer.
+         */
         explicit GCRoot(T node = nullptr) : GCRootBase(node) {}
 
         /** Copy constructor.
-	 *
-	 * The constructed GCRoot will protect the same GCNode as
-	 * source.  (There is probably no reason to use this
-	 * constructor.)
-	 */
+         *
+         * The constructed GCRoot will protect the same GCNode as
+         * source.  (There is probably no reason to use this
+         * constructor.)
+         */
         GCRoot(const GCRoot &source) : GCRootBase(source) {}
 
         /** Upcast constructor
-	 *
-	 * This constructor enables a GCRoot<Derived*> to be
-	 * implicitly converted to a GCRoot<Base*>.
-	 */
+         *
+         * This constructor enables a GCRoot<Derived*> to be
+         * implicitly converted to a GCRoot<Base*>.
+         */
         template <class U>
         GCRoot(const GCRoot<U> &source)
             : GCRootBase(T(source))
@@ -255,10 +255,10 @@ namespace CXXR
         }
 
         /**
-	 * This will cause this GCRoot to protect the same GCNode as
-	 * is protected by source.  (There is probably no reason to
-	 * use this method.)
-	 */
+         * This will cause this GCRoot to protect the same GCNode as
+         * is protected by source.  (There is probably no reason to
+         * use this method.)
+         */
         GCRoot operator=(const GCRoot &source)
         {
             GCRootBase::operator=(source);
@@ -266,13 +266,13 @@ namespace CXXR
         }
 
         /**
-	 * This will cause this GCRoot to point to and protect node,
-	 * instead of the node (if any) it currently points to and
-	 * protects.
-	 *
-	 * @param node Pointer to the GCNode that is not to be pointed
-	 *          to and protected from the garbage collector.
-	 */
+         * This will cause this GCRoot to point to and protect node,
+         * instead of the node (if any) it currently points to and
+         * protects.
+         *
+         * @param node Pointer to the GCNode that is not to be pointed
+         *          to and protected from the garbage collector.
+         */
         GCRoot operator=(T node)
         {
             GCRootBase::operator=(node);
@@ -280,11 +280,11 @@ namespace CXXR
         }
 
         /**
-	 * @return the pointer currently encapsulated by the node.
-	 * The pointer is of type T* const to prevent its use as an
-	 * lvalue, the effect of which would probably not be what the
-	 * programmer expected.
-	 */
+         * @return the pointer currently encapsulated by the node.
+         * The pointer is of type T* const to prevent its use as an
+         * lvalue, the effect of which would probably not be what the
+         * programmer expected.
+         */
         operator T const() const
         {
             return static_cast<T>(ptr());

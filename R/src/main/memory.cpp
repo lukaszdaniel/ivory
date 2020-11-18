@@ -1966,8 +1966,8 @@ SEXP R_MakeExternalPtr(void *p, SEXP tag, SEXP prot)
 {
     SEXP s = Rf_allocSExp(EXTPTRSXP);
     ExternalPointer::set_extptr_ptr(s, reinterpret_cast<RObject*>(p));
-    ExternalPointer::set_extptr_prot(s, CHK(prot));
-    ExternalPointer::set_extptr_tag(s, CHK(tag));
+    ExternalPointer::set_extptr_prot(s, CHK(prot)); if (prot) INCREMENT_REFCNT(prot);
+    ExternalPointer::set_extptr_tag(s, CHK(tag)); if (tag) INCREMENT_REFCNT(tag);
     return s;
 }
 
@@ -2078,7 +2078,7 @@ void (SET_TYPEOF)(SEXP x, SEXPTYPE v) { CXXR::RObject::set_typeof(CHK(x), v); }
 void (SET_NAMED)(SEXP x, int v)
 {
 #ifndef SWITCH_TO_REFCNT
-    SET_NAMED(CHK(x), v);
+    CXXR::RObject::set_named(CHK(x), v);
 #endif
 }
 void (SET_RTRACE)(SEXP x, int v) { CXXR::FunctionBase::set_rtrace(CHK(x), v); }

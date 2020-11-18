@@ -32,10 +32,11 @@
 
 #include <CXXR/GCNode.hpp>
 
-namespace CXXR {
-    class RObject;
+namespace CXXR
+{
+	class RObject;
 
-    /** @brief Directed edge in the graph whose nodes are GCNode objects.
+	/** @brief Directed edge in the graph whose nodes are GCNode objects.
      *
      * This class encapsulates a pointer from one GCNode to another,
      * and carries out housekeeping required by the garbage collection
@@ -51,72 +52,74 @@ namespace CXXR {
      * @tparam T This should be a pointer or const pointer to GCNode or
      *          (more usually) a type derived from GCNode.
      */
-    template <class T = RObject*>
-    class GCEdge {
-    public:
-	/**
-	 * @param from Pointer to the GCNode which needs to refer to
-	 *          \a to.  Usually the constructed GCEdge object will
-	 *          form part of the object to which \a from points.
-	 *          (In the present implementation this parameter is
-	 *          ignored, but it should be set correctly to allow
-	 *          for future changes in implementation.)
-	 *
-	 * @param to Pointer to the object to which reference is to be
-	 *           made.
-	 *
-	 * @note This constructor does not carry out an old-to-new
-	 * check, because normally the GCEdge being constructed will
-	 * form part of newly-constructed object of a type derived
-	 * from GCNode, so will automatically be newer than any GCNode
-	 * it refers to.  If an old-to-new check is required, it is
-	 * recommended to create the GCEdge will a null 'to' pointer,
-	 * and then to redirect it to the desired target.
-	 */
-	GCEdge(GCNode* /*from*/, T to)
-	    : m_target(to)
-	{}
-
-	/**
-	 * @return the pointer which this GCEdge object encapsulates.
-	 */
-	operator T const() const { return m_target; }
-
-	/** Redirect the GCEdge to point at a (possibly) different node.
-	 *
-	 * @param from This \e must point to the same node as that
-	 *          pointed to by the \a from parameter used construct
-	 *          this GCEdge object.
-	 *
-	 * @param to Pointer to the object to which reference is now
-	 *           to be made.
-	 *
-	 * @note An alternative implementational approach would be to
-	 * save the \a from pointer within the GCEdge object.
-	 * However, this would double the space occupied by a GCEdge
-	 * object.
-	 */
-
-	void redirect(GCNode *from, T to)
+	template <class T = RObject *>
+	class GCEdge
 	{
-		m_target = to;
+	public:
+		/**
+		 * @param from Pointer to the GCNode which needs to refer to
+		 *          \a to.  Usually the constructed GCEdge object will
+		 *          form part of the object to which \a from points.
+		 *          (In the present implementation this parameter is
+		 *          ignored, but it should be set correctly to allow
+		 *          for future changes in implementation.)
+		 *
+		 * @param to Pointer to the object to which reference is to be
+		 *           made.
+		 *
+		 * @note This constructor does not carry out an old-to-new
+		 * check, because normally the GCEdge being constructed will
+		 * form part of newly-constructed object of a type derived
+		 * from GCNode, so will automatically be newer than any GCNode
+		 * it refers to.  If an old-to-new check is required, it is
+		 * recommended to create the GCEdge will a null 'to' pointer,
+		 * and then to redirect it to the desired target.
+		 */
+		GCEdge(GCNode * /*from*/, T to)
+			: m_target(to)
+		{
+		}
 
-		if (!from)
-			return;
+		/**
+		 * @return the pointer which this GCEdge object encapsulates.
+		 */
+		operator T const() const { return m_target; }
 
-		GCNode::Ager ager(from->m_gcgen);
+		/** Redirect the GCEdge to point at a (possibly) different node.
+		 *
+		 * @param from This \e must point to the same node as that
+		 *          pointed to by the \a from parameter used construct
+		 *          this GCEdge object.
+		 *
+		 * @param to Pointer to the object to which reference is now
+		 *           to be made.
+		 *
+		 * @note An alternative implementational approach would be to
+		 * save the \a from pointer within the GCEdge object.
+		 * However, this would double the space occupied by a GCEdge
+		 * object.
+		 */
 
-		if (m_target)
-			m_target->conductVisitor(&ager);
-	}
+		void redirect(GCNode *from, T to)
+		{
+			m_target = to;
+
+			if (!from)
+				return;
+
+			GCNode::Ager ager(from->m_gcgen);
+
+			if (m_target)
+				m_target->conductVisitor(&ager);
+		}
 
 	private:
-	T m_target;
+		T m_target;
 
-	// Not implemented:
-	GCEdge(const GCEdge&);
-	GCEdge& operator=(const GCEdge&);
-    };
+		// Not implemented:
+		GCEdge(const GCEdge &);
+		GCEdge &operator=(const GCEdge &);
+	};
 } // namespace CXXR
 
-#endif  // GCEDGE_HPP
+#endif // GCEDGE_HPP

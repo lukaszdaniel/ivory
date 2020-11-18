@@ -50,7 +50,10 @@
 
 constexpr int NAMED_BITS = 16;
 
-/* Flags */
+/** @brief Namespace for the CXXR project.
+ *
+ * CXXR is a project to refactorize the R interpreter into C++.
+ */
 namespace CXXR
 {
     /** @brief Replacement for CR's SEXPREC.
@@ -129,7 +132,7 @@ namespace CXXR
      * @note The word 'object' in the name of this class is used in
      * the sense in which the 'blue book' (Becker <em>et al.</em>
      * [1988]) uses the phrase 'data object'.  Roughly speaking,
-     * RObject is a base class for the sorts of data items whose
+     * CXXR::RObject is a base class for the sorts of data items whose
      * existence would be reported by the R function
      * <tt>objects()</tt>.  In particular, it does not imply that
      * the object belongs to an R class.
@@ -515,8 +518,6 @@ namespace CXXR
 #define IS_ASSIGNMENT_CALL(call) ASSIGNMENT_PENDING(call)
 
 #ifdef SWITCH_TO_REFCNT
-#undef NAMED
-#undef SET_NAMED
 #define NAMED(x) REFCNT(x)
 /* no definition for SET_NAMED; any calls will use the one in memory.cpp */
 #define ENSURE_NAMEDMAX(v) \

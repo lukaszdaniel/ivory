@@ -73,7 +73,7 @@ void GCRootBase::reprotect(RObject *node, unsigned int index)
 #ifdef NDEBUG
     s_pps[index] = node;
 #else
-    pair<RObject *, RCNTXT *> &pr = s_pps[index];
+    auto &pr = s_pps[index];
     // if (pr.second != R_GlobalContext)
     //     throw logic_error("GCRootBase::reprotect: not in same context as the corresponding call of protect().");
     pr.first = node;
@@ -107,7 +107,7 @@ void GCRootBase::unprotect(unsigned int count)
 #else
     for (unsigned int i = 0; i < count; ++i)
     {
-        const pair<RObject *, RCNTXT *> &pr = s_pps.back();
+        const auto &pr = s_pps.back();
         if (pr.second != R_GlobalContext)
             throw logic_error("GCRootBase::unprotect: not in same context as the corresponding call of protect().");
         s_pps.pop_back();
@@ -118,9 +118,9 @@ void GCRootBase::unprotect(unsigned int count)
 void GCRootBase::unprotectPtr(RObject *node)
 {
 #ifdef NDEBUG
-    vector<RObject *>::reverse_iterator rit = find(s_pps.rbegin(), s_pps.rend(), node);
+    auto rit = find(s_pps.rbegin(), s_pps.rend(), node);
 #else
-    vector<pair<RObject *, RCNTXT *>>::reverse_iterator rit = s_pps.rbegin();
+    auto rit = s_pps.rbegin();
     while (rit != s_pps.rend() && (*rit).first != node)
         ++rit;
 #endif
@@ -132,56 +132,44 @@ void GCRootBase::unprotectPtr(RObject *node)
 
 void GCRootBase::visitRoots(GCNode::const_visitor *v)
 {
-    for (vector<GCNode *>::iterator it = s_roots.begin();
-         it != s_roots.end(); ++it)
+    for (auto &n : s_roots)
     {
-        GCNode *n = *it;
         if (n)
             n->conductVisitor(v);
     }
 #ifdef NDEBUG
-    for (vector<RObject *>::iterator it = s_pps.begin();
-         it != s_pps.end(); ++it)
+    for (auto &n : s_pps)
     {
-        RObject *n = *it;
         if (n)
             n->conductVisitor(v);
     }
 #else
-    for (vector<pair<RObject *, RCNTXT *>>::iterator it = s_pps.begin();
-         it != s_pps.end(); ++it)
+    for (auto &n : s_pps)
     {
-        RObject *n = (*it).first;
-        if (n)
-            n->conductVisitor(v);
+        if (n.first)
+            (n.first)->conductVisitor(v);
     }
 #endif
 }
 
 void GCRootBase::visitRoots(GCNode::visitor *v)
 {
-    for (vector<GCNode *>::iterator it = s_roots.begin();
-         it != s_roots.end(); ++it)
+    for (auto &n : s_roots)
     {
-        GCNode *n = *it;
         if (n)
             n->conductVisitor(v);
     }
 #ifdef NDEBUG
-    for (vector<RObject *>::iterator it = s_pps.begin();
-         it != s_pps.end(); ++it)
+    for (auto &n : s_pps)
     {
-        RObject *n = *it;
         if (n)
             n->conductVisitor(v);
     }
 #else
-    for (vector<pair<RObject *, RCNTXT *>>::iterator it = s_pps.begin();
-         it != s_pps.end(); ++it)
+    for (auto &n : s_pps)
     {
-        RObject *n = (*it).first;
-        if (n)
-            n->conductVisitor(v);
+        if (n.first)
+            (n.first)->conductVisitor(v);
     }
 #endif
 }
