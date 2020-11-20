@@ -27,10 +27,9 @@
  * @brief Class ExternalPointer and associated C interface.
  */
 
-#include "CXXR/ExternalPointer.hpp"
+#include <CXXR/ExternalPointer.hpp>
 #include <Rinternals.h>
 #include <Localization.h>
-// #include "CXXR/GCStackRoot.hpp"
 
 using namespace std;
 using namespace CXXR;

@@ -27,16 +27,16 @@
 #ifndef SEXPTYPE_HPP
 #define SEXPTYPE_HPP
 
-    /**
-     * @brief CR's object type identification.
-     *
-     * @enum SEXPTYPE This enumeration is used within CR to identify different types
-     * of R object.
-     * 
-     * @note when not compiling ivory, SEXPTYPE is a typedef for unsigned int.
-     * This is done to support C++ packages that expect implicit int to
-     * SEXPTYPE conversions.
-     */
+/**
+ * @brief CR's object type identification.
+ *
+ * @enum SEXPTYPE This enumeration is used within CR to identify different types
+ * of R object.
+ * 
+ * @note when not compiling ivory, SEXPTYPE is a typedef for unsigned int.
+ * This is done to support C++ packages that expect implicit int to
+ * SEXPTYPE conversions.
+ */
 #ifndef COMPILING_IVORY
 typedef unsigned int SEXPTYPE;
 #else

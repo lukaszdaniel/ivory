@@ -47,11 +47,12 @@ namespace CXXR
 	struct Complex : public Rcomplex
 	{
 		/** @brief Default constructor.
-		*
-		* Leaves data fields uninitialised.
-		*/
+		 *
+		 * Leaves data fields uninitialised.
+		 */
 		Complex()
-		{}
+		{
+		}
 
 		/** @brief Primary constructor.
 		 *

@@ -58,7 +58,7 @@ bool GCManager::s_gc_inhibit_release = false;
 size_t GCManager::s_max_bytes = 0;
 size_t GCManager::s_max_nodes = 0;
 bool GCManager::s_tortured = false;
-std::ostream* GCManager::s_os = nullptr;
+std::ostream *GCManager::s_os = nullptr;
 
 void (*GCManager::s_pre_gc)() = nullptr;
 void (*GCManager::s_post_gc)() = nullptr;
@@ -85,7 +85,7 @@ namespace
    This constant is also used in heap size adjustment as a minimal
    fraction of the minimal heap size levels that should be available
    for allocation. */
-    static const double R_MinFreeFrac = 0.2;
+static const double R_MinFreeFrac = 0.2;
 
 /* The heap size constants s_node_threshold and s_threshold are used for triggering
    collections.  The initial values set by defaults or command line
@@ -139,7 +139,6 @@ namespace
     constexpr int LEVEL_1_FREQ = 5;
     const unsigned int collect_counts_max[num_old_generations] = {LEVEL_0_FREQ, LEVEL_1_FREQ};
 
-
     /** Choose how many generations to collect according to a rota.
      *
      * There are three levels of collections.  Level 0 collects only
@@ -176,14 +175,14 @@ namespace
     // This ought to go in GCNode.
     void DEBUG_GC_SUMMARY(int full_gc)
     {
-    int OldCount;
-    if(full_gc)
-      REprintf("\nFull, VSize = %lu", MemoryBank::bytesAllocated());
-    else
-      REprintf("\nMinor, VSize = %lu", MemoryBank::bytesAllocated());
-	for (unsigned int gen = 0, OldCount = 0; gen < num_old_generations; ++gen)
-	    OldCount += GCNode::s_gencount[gen];
-	REprintf(", %d", OldCount);
+        int OldCount;
+        if (full_gc)
+            REprintf("\nFull, VSize = %lu", MemoryBank::bytesAllocated());
+        else
+            REprintf("\nMinor, VSize = %lu", MemoryBank::bytesAllocated());
+        for (unsigned int gen = 0, OldCount = 0; gen < num_old_generations; ++gen)
+            OldCount += GCNode::s_gencount[gen];
+        REprintf(", %d", OldCount);
     }
 #else
 #define DEBUG_GC_SUMMARY(x)
@@ -198,64 +197,68 @@ void GCManager::adjustThreshold(R_size_t bytes_wanted)
     size_t R_MinNFree = size_t(s_min_node_threshold * R_MinFreeFrac);
     size_t NNeeded = GCNode::numNodes() + R_MinNFree;
 
-    double vect_occup = ((double) VNeeded) / s_threshold;
-    double node_occup = ((double) NNeeded) / s_node_threshold;
+    double vect_occup = ((double)VNeeded) / s_threshold;
+    double node_occup = ((double)NNeeded) / s_node_threshold;
 
+    if (node_occup > R_NGrowFrac)
+    {
+        size_t change =
+            size_t(R_NGrowIncrMin + R_NGrowIncrFrac * s_node_threshold);
 
-    if (node_occup > R_NGrowFrac) {
-	size_t change =
-	    size_t(R_NGrowIncrMin + R_NGrowIncrFrac * s_node_threshold);
+        /* for early andjustments grow more agressively */
+        static R_size_t last_in_use = 0;
+        static int adjust_count = 1;
+        if (adjust_count < 50)
+        {
+            adjust_count++;
 
-	/* for early andjustments grow more agressively */
-	static R_size_t last_in_use = 0;
-	static int adjust_count = 1;
-	if (adjust_count < 50) {
-	    adjust_count++;
+            /* estimate next in-use count by assuming linear growth */
+            R_size_t next_in_use = GCNode::numNodes() + (GCNode::numNodes() - last_in_use);
+            last_in_use = GCNode::numNodes();
 
-	    /* estimate next in-use count by assuming linear growth */
-	    R_size_t next_in_use = GCNode::numNodes() + (GCNode::numNodes() - last_in_use);
-	    last_in_use = GCNode::numNodes();
+            /* try to achieve and occupancy rate of R_NGrowFrac */
+            R_size_t next_nsize = (R_size_t)(next_in_use / R_NGrowFrac);
+            if (next_nsize > s_node_threshold + change)
+                change = next_nsize - s_node_threshold;
+        }
 
-	    /* try to achieve and occupancy rate of R_NGrowFrac */
-	    R_size_t next_nsize = (R_size_t) (next_in_use / R_NGrowFrac);
-        if (next_nsize > s_node_threshold + change)
-            change = next_nsize - s_node_threshold;
+        if (s_max_node_threshold >= s_node_threshold + change)
+            s_node_threshold += change;
     }
-
-	if (s_max_node_threshold >= s_node_threshold + change)
-	    s_node_threshold += change;
-    }
-    else if (node_occup < R_NShrinkFrac) {
-	s_node_threshold -= (R_size_t)(R_NShrinkIncrMin + R_NShrinkIncrFrac * s_node_threshold);
-	if (s_node_threshold < NNeeded)
-	    s_node_threshold = min(NNeeded, s_max_node_threshold);
-    s_node_threshold = max(s_node_threshold, s_min_node_threshold);
+    else if (node_occup < R_NShrinkFrac)
+    {
+        s_node_threshold -= (R_size_t)(R_NShrinkIncrMin + R_NShrinkIncrFrac * s_node_threshold);
+        if (s_node_threshold < NNeeded)
+            s_node_threshold = min(NNeeded, s_max_node_threshold);
+        s_node_threshold = max(s_node_threshold, s_min_node_threshold);
     }
 
     if (vect_occup > 1.0 && VNeeded < s_max_threshold)
         s_threshold = VNeeded;
     // This follows memory.c in 2.5.1, but should the following
     // actually read 'else if'?
-    if (vect_occup > R_VGrowFrac) {
-	size_t change = size_t(R_VGrowIncrMin + R_VGrowIncrFrac * s_threshold);
-	if (s_max_threshold >= change + s_threshold)
-	    s_threshold += change;
+    if (vect_occup > R_VGrowFrac)
+    {
+        size_t change = size_t(R_VGrowIncrMin + R_VGrowIncrFrac * s_threshold);
+        if (s_max_threshold >= change + s_threshold)
+            s_threshold += change;
     }
-    else if (vect_occup < R_VShrinkFrac) {
-	s_threshold = size_t(s_threshold - R_VShrinkIncrMin - R_VShrinkIncrFrac * s_threshold);
-    s_threshold = max(VNeeded, s_threshold);
-    s_threshold = max(s_threshold, s_min_threshold);
+    else if (vect_occup < R_VShrinkFrac)
+    {
+        s_threshold = size_t(s_threshold - R_VShrinkIncrMin - R_VShrinkIncrFrac * s_threshold);
+        s_threshold = max(VNeeded, s_threshold);
+        s_threshold = max(s_threshold, s_min_threshold);
     }
 #ifdef DEBUG_ADJUST_HEAP
-    if (s_os) {
-    *s_os << "Node occupancy: " << fixed << setprecision(0) << 100.0 * node_occup << "\n";
-    *s_os << "Memory occupancy: " << fixed << setprecision(0) << 100.0 * vect_occup << "\n";
-    *s_os << "Total allocation: " << MemoryBank::bytesAllocated() << "\n";
-    *s_os << "Node threshold: " << s_node_threshold << "\n";
-    *s_os << "Memory threshold: " << s_threshold << "\n";
-	*s_os << "Nodes needed: " << NNeeded << "\n";
-    *s_os << "Bytes needed: " << VNeeded << endl;
-
+    if (s_os)
+    {
+        *s_os << "Node occupancy: " << fixed << setprecision(0) << 100.0 * node_occup << "\n";
+        *s_os << "Memory occupancy: " << fixed << setprecision(0) << 100.0 * vect_occup << "\n";
+        *s_os << "Total allocation: " << MemoryBank::bytesAllocated() << "\n";
+        *s_os << "Node threshold: " << s_node_threshold << "\n";
+        *s_os << "Memory threshold: " << s_threshold << "\n";
+        *s_os << "Nodes needed: " << NNeeded << "\n";
+        *s_os << "Bytes needed: " << VNeeded << endl;
     }
 #endif
 }
@@ -337,20 +340,22 @@ void GCManager::gc(size_t bytes_wanted, bool full)
 {
     static bool running_finalizers = false;
     // Prevent recursion:
-    if (running_finalizers) return;
+    if (running_finalizers)
+        return;
 
     R_CHECK_THREAD;
-    if (!R_GCEnabled || R_in_gc) {
-      if (R_in_gc)
-        gc_error("*** recursive gc invocation\n");
-      if (GCNode::numNodes() >= s_node_threshold)
-          GCManager::s_node_threshold = GCNode::numNodes() + 1;
+    if (!R_GCEnabled || R_in_gc)
+    {
+        if (R_in_gc)
+            gc_error("*** recursive gc invocation\n");
+        if (GCNode::numNodes() >= s_node_threshold)
+            GCManager::s_node_threshold = GCNode::numNodes() + 1;
 
-      if (bytes_wanted + MemoryBank::bytesAllocated() > s_threshold)
-          s_threshold = bytes_wanted + MemoryBank::bytesAllocated();
+        if (bytes_wanted + MemoryBank::bytesAllocated() > s_threshold)
+            s_threshold = bytes_wanted + MemoryBank::bytesAllocated();
 
-      s_gc_pending = true;
-      return;
+        s_gc_pending = true;
+        return;
     }
     s_gc_pending = false;
 
@@ -360,15 +365,15 @@ void GCManager::gc(size_t bytes_wanted, bool full)
     running_finalizers = true;
     bool any_finalizers_run = RunFinalizers();
     running_finalizers = false;
-	/* Run any eligible finalizers.  The return result of
+    /* Run any eligible finalizers.  The return result of
 	   RunFinalizers is TRUE if any finalizers are actually run.
 	   There is a small chance that running finalizers here may
 	   chew up enough memory to make another immediate collection
 	   necessary.  If so, we jump back to the beginning and run
 	   the collection, but on this second pass we do not run
 	   finalizers. */
-	if (any_finalizers_run && ((GCNode::numNodes() >= s_node_threshold) || (bytes_wanted + MemoryBank::bytesAllocated() > s_threshold)))
-	    gcGenController(bytes_wanted, full);
+    if (any_finalizers_run && ((GCNode::numNodes() >= s_node_threshold) || (bytes_wanted + MemoryBank::bytesAllocated() > s_threshold)))
+        gcGenController(bytes_wanted, full);
 
 #endif
 }
@@ -377,7 +382,8 @@ void GCManager::gcGenController(size_t bytes_wanted, bool full)
 {
     static unsigned int level = 0;
     double ncells, nfrac;
-    if (full) level = num_old_generations;
+    if (full)
+        level = num_old_generations;
     level = genRota(level);
 
     unsigned int gens_collected;
@@ -388,27 +394,32 @@ void GCManager::gcGenController(size_t bytes_wanted, bool full)
     s_max_bytes = max(s_max_bytes, MemoryBank::bytesAllocated());
 
     /* BEGIN_SUSPEND_INTERRUPTS { */
-	R_in_gc = true;
-	if (s_pre_gc) (*s_pre_gc)();
+    R_in_gc = true;
+    if (s_pre_gc)
+        (*s_pre_gc)();
 
-        bool ok = false;
-        while (!ok)
+    bool ok = false;
+    while (!ok)
+    {
+        ok = true;
+        GCNode::gc(level);
+        gens_collected = level;
+
+        /* update heap statistics */
+        if (level < num_old_generations)
         {
-            ok = true;
-            GCNode::gc(level);
-            gens_collected = level;
-
-    /* update heap statistics */
-    if (level < num_old_generations) {
-	if (GCNode::numNodes() ||
-	    MemoryBank::bytesAllocated() + bytes_wanted > (1.0 - R_MinFreeFrac)*s_threshold) {
-	    level++;
-	    if (GCNode::numNodes() >= s_node_threshold || MemoryBank::bytesAllocated() + bytes_wanted >= s_threshold)
-		ok = false;
-	}
-	else level = 0;
-    }
-    else level = 0;
+            if (GCNode::numNodes() ||
+                MemoryBank::bytesAllocated() + bytes_wanted > (1.0 - R_MinFreeFrac) * s_threshold)
+            {
+                level++;
+                if (GCNode::numNodes() >= s_node_threshold || MemoryBank::bytesAllocated() + bytes_wanted >= s_threshold)
+                    ok = false;
+            }
+            else
+                level = 0;
+        }
+        else
+            level = 0;
     }
 
     gen_gc_counts[gens_collected]++;
@@ -418,30 +429,34 @@ void GCManager::gcGenController(size_t bytes_wanted, bool full)
         /**** do some adjustment for intermediate collections? */
         adjustThreshold(bytes_wanted);
     }
-	if (s_post_gc) (*s_post_gc)();
-	R_in_gc = false;
+    if (s_post_gc)
+        (*s_post_gc)();
+    R_in_gc = false;
     /* } END_SUSPEND_INTERRUPTS; */
 
     if (R_check_constants > 2 ||
-	    (R_check_constants > 1 && gens_collected == num_old_generations))
-	R_checkConstants(TRUE);
+        (R_check_constants > 1 && gens_collected == num_old_generations))
+        R_checkConstants(TRUE);
 
-    if (s_os) {
-	*s_os << "Garbage collection " << gc_count << " = " << gen_gc_counts[0];
-	for (unsigned int i = 0; i < num_old_generations; ++i)
-	    *s_os << "+" << gen_gc_counts[i + 1];
-	*s_os << " (level " << gens_collected << ") ... ";
-	DEBUG_GC_SUMMARY(gens_collected == num_old_generations);
+    if (s_os)
+    {
+        *s_os << "Garbage collection " << gc_count << " = " << gen_gc_counts[0];
+        for (unsigned int i = 0; i < num_old_generations; ++i)
+            *s_os << "+" << gen_gc_counts[i + 1];
+        *s_os << " (level " << gens_collected << ") ... ";
+        DEBUG_GC_SUMMARY(gens_collected == num_old_generations);
 
-	ncells = GCNode::numNodes();
-	nfrac = (100.0 * ncells) / s_node_threshold;
-	/* We try to make this consistent with the results returned by gc */
-	ncells = 0.1*ceil(10.0*ncells * sizeof(RObject)/Mega);
-	*s_os << "\n" << std::fixed << std::setprecision(1) << ncells << " Mbytes of cons cells used (" << int(nfrac + 0.5) << "%)";
-	double bytes = MemoryBank::bytesAllocated();
-	double bfrac = (100.0 * bytes) / s_threshold;
-	double mbytes = 0.1*ceil(10.0*bytes/Mega);
-	*s_os << "\n" << std::fixed << std::setprecision(1) << mbytes << " Mbytes used (" << int(bfrac + 0.5) << "%)\n";
+        ncells = GCNode::numNodes();
+        nfrac = (100.0 * ncells) / s_node_threshold;
+        /* We try to make this consistent with the results returned by gc */
+        ncells = 0.1 * ceil(10.0 * ncells * sizeof(RObject) / Mega);
+        *s_os << "\n"
+              << std::fixed << std::setprecision(1) << ncells << " Mbytes of cons cells used (" << int(nfrac + 0.5) << "%)";
+        double bytes = MemoryBank::bytesAllocated();
+        double bfrac = (100.0 * bytes) / s_threshold;
+        double mbytes = 0.1 * ceil(10.0 * bytes / Mega);
+        *s_os << "\n"
+              << std::fixed << std::setprecision(1) << mbytes << " Mbytes used (" << int(bfrac + 0.5) << "%)\n";
     }
 }
 
@@ -462,10 +477,9 @@ void GCManager::resetMaxTallies()
     s_max_nodes = GCNode::numNodes();
 }
 
-std::ostream* GCManager::setReporting(std::ostream* os)
+std::ostream *GCManager::setReporting(std::ostream *os)
 {
-    std::ostream* ans = s_os;
+    std::ostream *ans = s_os;
     s_os = os;
     return ans;
 }
-

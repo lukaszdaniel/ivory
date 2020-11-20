@@ -81,10 +81,10 @@ namespace
     // Allocate an exponentially-distributed number of bytes:
     void alloc(double mean)
     {
-	size_t bytes_allocated = MemoryBank::bytesAllocated();
+        size_t bytes_allocated = MemoryBank::bytesAllocated();
         size_t bytes = size_t(mean * rexp());
-	cout << "(Allocated " << bytes_allocated
-	     << ") Allocating " << bytes << " bytes\n";
+        cout << "(Allocated " << bytes_allocated
+             << ") Allocating " << bytes << " bytes\n";
         allocs.push_back(make_pair(bytes, MemoryBank::allocate(bytes)));
     }
 } // namespace

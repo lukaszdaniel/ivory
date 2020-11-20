@@ -19,17 +19,16 @@ tests = miscR
 
 test-CXXR2 : $(tests:=.ts)
 
-miscR.ts : $(REXEC) misc.R misc.save
+miscR.ts : $(REXEC) misc.R misc.Rout.save
 	$(R) < $(srcdir)/misc.R > misc.Rout 2>&1
-	diff $(srcdir)/misc.save misc.Rout
-	rm misc.Rout
+	$(RDIFF) misc.Rout $(srcdir)/misc.Rout.save
 	touch $@
 
 Makefile : $(srcdir)/Makefile.in $(top_builddir)/config.status
 	cd $(top_builddir) && $(SHELL) ./config.status $(subdir)/$@
 
 clean:
-	rm -f *.ts
+	rm -f *.ts *.Rout
 
 distclean: clean
 	rm -f Makefile

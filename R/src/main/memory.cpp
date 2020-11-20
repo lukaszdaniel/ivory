@@ -1369,7 +1369,7 @@ HIDDEN SEXP R::R_mkEVPROMISE_NR(SEXP expr, SEXP val)
 
 SEXP Rf_allocVector3(SEXPTYPE type, R_xlen_t length = 1, R_allocator_t *allocator = nullptr)
 {
-    SEXP s = nullptr;     /* For the generational collector it would be safer to
+    RObject *s = nullptr;     /* For the generational collector it would be safer to
 		   work in terms of a VECSEXP here, but that would
 		   require several casts below... */
     R_size_t size = 0;

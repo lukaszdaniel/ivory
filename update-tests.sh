@@ -57,6 +57,11 @@ if [[ "$1" == "core" ]] || [[ "$1" == "all" ]]; then
 #`$cmd ver20.tex			ver20.tex.save`
 #`$cmd ver20.txt			ver20.txt.save`
 
+#CXXR2
+cd CXXR2
+`$cmd misc.Rout	misc.Rout.save`
+cd ..
+
 #Examples
 cd Examples
 `$cmd datasets-Ex.Rout	datasets-Ex.Rout.save`

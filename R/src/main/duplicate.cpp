@@ -398,7 +398,7 @@ static SEXP duplicate1(SEXP s, Rboolean deep)
     }
     if(TYPEOF(t) == TYPEOF(s) ) { /* surely it only makes sense in this case*/
 	SET_OBJECT(t, OBJECT(s));
-	if(IS_S4_OBJECT(s)) {SET_S4_OBJECT(t);} else {UNSET_S4_OBJECT(t);};
+	t->setS4Object(IS_S4_OBJECT(s));
     }
     return t;
 }

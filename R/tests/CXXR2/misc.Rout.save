@@ -1,0 +1,87 @@
+> # Miscellaneous tests
+> 
+> ## 'break' in Promise:
+> 
+> quint <- function(arg) {
++     sum <- 0
++     for (i in 1:5) {
++         sum <- sum + 1
++ 	if (i == 3) sum <- sum + arg;
++     }
++     sum
++ }
+> 
+> quint(0)
+[1] 5
+> quint(2)
+[1] 7
+> try(quint(break))
+Error: no loop for break/next, jumping to top level
+> 
+> ## Missing ...
+> 
+> missdots <- function(...) missing(...)
+> missdots()
+[1] TRUE
+> missdots(2)
+[1] FALSE
+> 
+> ## ALTREP support
+> 
+> x <- 1:1e10
+> stopifnot(length(x) == 1e+10)
+> 
+> system.time(for (i in 1:1e9) break)
+   user  system elapsed 
+      0       0       0 
+> 
+> tools::assertError(y <- x + 1L)
+> 
+> x <- rnorm(1e7)
+> y <- x + rnorm(1e7)
+> system.time(lm(y ~ x))
+   user  system elapsed 
+  8.105   0.412   8.517 
+> 
+> x <- structure(numeric(1e9), class = "foo")
+> system.time(base::unclass(x))
+   user  system elapsed 
+      0       0       0 
+> 
+>  
+> x <- rnorm(1e8)
+> system.time(y <- sort(x))
+   user  system elapsed 
+ 33.450   0.655  34.108 
+> system.time(sort(y))
+   user  system elapsed 
+      0       0       0 
+> system.time(anyNA(y))
+   user  system elapsed 
+      0       0       0 
+> 
+> 
+> indx <- seq_along(x)
+> system.time(anyNA(indx))
+   user  system elapsed 
+      0       0       0 
+> system.time(sort(indx))
+   user  system elapsed 
+  0.001   0.000   0.000 
+> system.time(sum(as.double(indx)))
+   user  system elapsed 
+      0       0       0 
+> 
+> x <- 1:1e12
+> length(x)
+[1] 1e+12
+> head(x)
+[1] 1 2 3 4 5 6
+> set.seed(17)
+> sample(x, 10)
+ [1] 764368353249 950939650543 714829529238 750889530620 895933301510
+ [6] 676570063252 570113772955  13282874133 351947733008 403918802067
+> tail(x)
+[1] 1e+12 1e+12 1e+12 1e+12 1e+12 1e+12
+> 
+> 

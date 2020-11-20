@@ -39,14 +39,14 @@
 
 #if defined(COMPILING_IVORY) && defined(__cplusplus)
 
-    namespace CXXR
-    {
-        class RObject;
-    }
-    using SEXP = CXXR::RObject *;
+namespace CXXR
+{
+    class RObject;
+}
+using SEXP = CXXR::RObject *;
 #else
-    #define RObject SEXPREC
-    typedef struct RObject *SEXP;
+#define RObject SEXPREC
+typedef struct RObject *SEXP;
 #endif
 
 #ifdef HAVE_CONFIG_H
@@ -73,7 +73,7 @@ constexpr int R_INT_MIN = std::numeric_limits<int>::min() + 1;
 #else
 typedef int R_len_t;
 #define R_LEN_T_MAX INT_MAX
-#define R_INT_MAX  INT_MAX
+#define R_INT_MAX INT_MAX
 #define R_INT_MIN -INT_MAX
 #endif
 

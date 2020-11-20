@@ -35,7 +35,7 @@ int main()
          << "\nsizeof(size_t): " << sizeof(size_t)
          << "\nsizeof(R_xlen_t): " << sizeof(R_xlen_t)
          << "\nsizeof(double): " << sizeof(double)
-         << "\nsizeof(RObject*): " << sizeof(RObject*)
+         << "\nsizeof(RObject*): " << sizeof(RObject *)
          << "\nsizeof(RObject): " << sizeof(RObject) << "\n";
     return 0;
 }

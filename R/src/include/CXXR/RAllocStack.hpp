@@ -46,100 +46,104 @@ namespace CXXR
     class RAllocStack
     {
     public:
-	/** @brief Object constraining lifetime of R_alloc() blocks.
-	 *
-	 * Scope objects must be declared on the processor stack
-	 * (i.e. as C++ automatic variables).  Any R_alloc() block
-	 * allocated during the lifetime of a Scope object will be
-	 * automatically deallocated when that lifetime comes to an
-	 * end, i.e. when the Scope object itself goes out of scope.
-	 */
-	class Scope {
-	public:
-	    Scope()
-		: m_next_scope(RAllocStack::s_innermost_scope),
-		  m_saved_size(RAllocStack::size())
-	    {
-		RAllocStack::s_innermost_scope = this;
-	    }
+        /** @brief Object constraining lifetime of R_alloc() blocks.
+         *
+         * Scope objects must be declared on the processor stack
+         * (i.e. as C++ automatic variables).  Any R_alloc() block
+         * allocated during the lifetime of a Scope object will be
+         * automatically deallocated when that lifetime comes to an
+         * end, i.e. when the Scope object itself goes out of scope.
+         */
+        class Scope
+        {
+        public:
+            Scope()
+                : m_next_scope(RAllocStack::s_innermost_scope),
+                  m_saved_size(RAllocStack::size())
+            {
+                RAllocStack::s_innermost_scope = this;
+            }
 
-	    ~Scope()
-	    {
-		if (RAllocStack::size() != m_saved_size)
-		    RAllocStack::trim(m_saved_size);
-		RAllocStack::s_innermost_scope = m_next_scope;
-	    }
+            ~Scope()
+            {
+                if (RAllocStack::size() != m_saved_size)
+                    RAllocStack::trim(m_saved_size);
+                RAllocStack::s_innermost_scope = m_next_scope;
+            }
 
-	    /** @brief RAllocStack size at construction.
-	     *
-	     * @return The size of the RAllocStack at the time this
-	     * Scope object was constructed.  The RAllocStack will be
-	     * restored to this size by the Scope destructor.
-	     */
-	    size_t startSize() const
-	    {
-		return m_saved_size;
-	    }
-	private:
-	    Scope* m_next_scope;
-	    size_t m_saved_size;
-	};
+            /** @brief RAllocStack size at construction.
+             *
+             * @return The size of the RAllocStack at the time this
+             * Scope object was constructed.  The RAllocStack will be
+             * restored to this size by the Scope destructor.
+             */
+            size_t startSize() const
+            {
+                return m_saved_size;
+            }
 
-	/** @brief Allocate a new block of memory.
-	 *
-	 * The block will be aligned on a multiple of
-	 * <tt>sizeof(double)</tt> .
-	 * @param sz The required size in bytes (strictly, as a
-	 *           multiple of <tt>sizeof(char)</tt>), of the memory block.
-	 * @return Pointer to the start of the memory block.
-	 */
-	static void* allocate(size_t sz);
+        private:
+            Scope *m_next_scope;
+            size_t m_saved_size;
+        };
 
-	/** @brief Restore stack to a previous size.
-	 *
-	 * Restore the stack to a previous size by popping elements
-	 * off the top.
-	 *
-	 * @param new_size The size to which the stack is to be
-	 *          restored.  Must not be greater than the current
-	 *          size.
-	 *
-	 * @note In future this method may cease to be available,
-	 * since the use of the RAllocStack::Scope class is
-	 * preferable.
-	 */
-	static void restoreSize(size_t new_size);
+        /** @brief Allocate a new block of memory.
+         *
+         * The block will be aligned on a multiple of
+         * <tt>sizeof(double)</tt> .
+         * @param sz The required size in bytes (strictly, as a
+         *           multiple of <tt>sizeof(char)</tt>), of the memory block.
+         * @return Pointer to the start of the memory block.
+         */
+        static void *allocate(size_t sz);
 
-	/** @brief Current size of stack.
-	 *
-	 * @return the current size of the stack.
-	 *
-	 * @note This method is intended for use in conjunction with
-	 * restoreSize(), and may cease to be public in future.
-	 */
-	static size_t size()
-	{
-	    return s_stack->size();
-	}
+        /** @brief Restore stack to a previous size.
+         *
+         * Restore the stack to a previous size by popping elements
+         * off the top.
+         *
+         * @param new_size The size to which the stack is to be
+         *          restored.  Must not be greater than the current
+         *          size.
+         *
+         * @note In future this method may cease to be available,
+         * since the use of the RAllocStack::Scope class is
+         * preferable.
+         */
+        static void restoreSize(size_t new_size);
+
+        /** @brief Current size of stack.
+         *
+         * @return the current size of the stack.
+         *
+         * @note This method is intended for use in conjunction with
+         * restoreSize(), and may cease to be public in future.
+         */
+        static size_t size()
+        {
+            return s_stack->size();
+        }
+
     private:
-	typedef std::pair<size_t, void*> Pair;
-	typedef std::stack<Pair, std::vector<Pair> > Stack;
-	static Stack* s_stack;
-	static Scope* s_innermost_scope;
+        typedef std::pair<size_t, void *> Pair;
+        typedef std::stack<Pair, std::vector<Pair>> Stack;
+        static Stack *s_stack;
+        static Scope *s_innermost_scope;
 
-	// Initialize the static data members:
-    friend void initializeMemorySubsystem();
-	static void initialize();
+        // Initialize the static data members:
+        friend void initializeMemorySubsystem();
+        static void initialize();
 
-	// Pop entries off the stack to reduce its size to new_size,
-	// which must be no greater than the current size.
-	static void trim(size_t new_size);
+        // Pop entries off the stack to reduce its size to new_size,
+        // which must be no greater than the current size.
+        static void trim(size_t new_size);
 
-	RAllocStack() = delete;
+        RAllocStack() = delete;
     };
 } // namespace CXXR
 
-extern "C" {
+extern "C"
+{
     /* ***** C interface ***** */
 
     /** @brief Allocate a block of memory.
@@ -161,7 +165,7 @@ extern "C" {
      * @note The signed type of \a elt_size is anomalous, but is part
      * of the R API.
      */
-    char* R_alloc(size_t num_elts, int elt_size);
+    char *R_alloc(size_t num_elts, int elt_size);
 
     long double *R_allocLD(size_t num_elts);
 
@@ -186,9 +190,9 @@ extern "C" {
      * not accessible from C, and new C++ code should use C++ memory
      * allocation mechanisms (i.e. new/delete).
      */
-    inline void* RHO_alloc(size_t num_elts, int elt_size)
+    inline void *RHO_alloc(size_t num_elts, int elt_size)
     {
-	return static_cast<void*>(R_alloc(num_elts, elt_size));
+        return static_cast<void *>(R_alloc(num_elts, elt_size));
     }
 
     /** @brief Allocate a block of memory, and initialize it to zero.
@@ -203,7 +207,7 @@ extern "C" {
      *          non-negative.
      * @return Pointer to the start of the memory block.
      */
-    char* S_alloc(long num_elts, int elt_size);
+    char *S_alloc(long num_elts, int elt_size);
 
     /** @brief Reallocate a block of memory.
      *
@@ -225,7 +229,7 @@ extern "C" {
      *         not allocate a new block, and simply returns \a
      *         prev_block.
      */
-    char* S_realloc(char *prev_block, long new_sz, long old_sz, int elt_size);
+    char *S_realloc(char *prev_block, long new_sz, long old_sz, int elt_size);
 
     /** @brief Number of memory blocks allocated.
      *
@@ -238,9 +242,9 @@ extern "C" {
      * CXXR::RAllocStack::Scope class instead.  It is possible that in
      * the future this function will always return a null pointer.
      */
-    inline void* vmaxget(void)
+    inline void *vmaxget(void)
     {
-	return static_cast<char*>(nullptr) + CXXR::RAllocStack::size();
+        return static_cast<char *>(nullptr) + CXXR::RAllocStack::size();
     }
 
     /** @brief Reclaims memory blocks.
@@ -255,12 +259,11 @@ extern "C" {
      * use the CXXR::RAllocStack::Scope class instead.  It is possible
      * that in the future this function will become a no-op.
      */
-    inline void vmaxset(const void* stack_sizep)
+    inline void vmaxset(const void *stack_sizep)
     {
-	size_t stack_size = size_t(static_cast<const char*>(stack_sizep)
-				   - static_cast<const char*>(nullptr));
-	CXXR::RAllocStack::restoreSize(stack_size);
+        size_t stack_size = size_t(static_cast<const char *>(stack_sizep) - static_cast<const char *>(nullptr));
+        CXXR::RAllocStack::restoreSize(stack_size);
     }
-}  /* extern "C" */
+} /* extern "C" */
 
 #endif // RALLOCSTACK_HPP

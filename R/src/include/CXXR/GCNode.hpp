@@ -35,7 +35,7 @@
 
 #define EXPEL_OLD_TO_NEW
 
-/* Comment formerly in memory.c:
+/* Comment formerly in memory.cpp:
 
    The Heap Structure.  Nodes for each generation are arranged in
    circular doubly-linked lists.  The double linking allows nodes to
@@ -91,21 +91,21 @@ namespace CXXR
         };
 
         /** Abstract base class for the Visitor design pattern.
-        *
-        * See Gamma et al 'Design Patterns' Ch. 5 for a description
-        * of the Visitor design pattern.
-        */
+         *
+         * See Gamma et al 'Design Patterns' Ch. 5 for a description
+         * of the Visitor design pattern.
+         */
         struct visitor
         {
             virtual ~visitor() {}
 
             /** Perform visit
-            *
-            * @param node Node to be visited.
-            *
-            * @return true if the visitor wishes to visit the
-            * children of this node, otherwise false.
-            */
+             *
+             * @param node Node to be visited.
+             *
+             * @return true if the visitor wishes to visit the
+             * children of this node, otherwise false.
+             */
             virtual bool operator()(GCNode *node) = 0;
         };
         GCNode();
@@ -154,12 +154,12 @@ namespace CXXR
         static bool check();
 
         /** Present this node to a visitor and, if the visitor so
-        * wishes, conduct the visitor to the children of this node.
-        *
-        * @param v Pointer to the visitor object.
-        *
-        * @return the result of applying the visitor to \e this node.
-        */
+         * wishes, conduct the visitor to the children of this node.
+         *
+         * @param v Pointer to the visitor object.
+         *
+         * @return the result of applying the visitor to \e this node.
+         */
         bool conductVisitor(const_visitor *v) const
         {
             if (!(*v)(this))
@@ -169,12 +169,12 @@ namespace CXXR
         }
 
         /** Present this node to a visitor and, if the visitor so
-        * wishes, conduct the visitor to the children of this node.
-        *
-        * @param v Pointer to the visitor object.
-        *
-        * @return the result of applying the visitor to \e this node.
-        */
+         * wishes, conduct the visitor to the children of this node.
+         *
+         * @param v Pointer to the visitor object.
+         *
+         * @return the result of applying the visitor to \e this node.
+         */
         bool conductVisitor(visitor *v)
         {
             if (!(*v)(this))
@@ -195,9 +195,9 @@ namespace CXXR
         void destroy() const { delete this; }
 
         /** @brief Initiate a garbage collection.
-        *
-        * @param num_old_gens The number of old generations to collect.
-        */
+         *
+         * @param num_old_gens The number of old generations to collect.
+         */
         static void gc(unsigned int num_old_gens);
 
         /** Initialize static members.
@@ -225,15 +225,15 @@ namespace CXXR
         static size_t numNodes() { return s_num_nodes; }
 
         /** Conduct a visitor to the children of this node.
-        *
-        * @param Pointer to the visitor object.
-        */
+         *
+         * @param Pointer to the visitor object.
+         */
         virtual void visitChildren(const_visitor *v) const {}
 
         /** Conduct a visitor to the children of this node.
-        *
-        * @param Pointer to the visitor object.
-        */
+         *
+         * @param Pointer to the visitor object.
+         */
         virtual void visitChildren(visitor *v) {}
 
         static unsigned int gcgen(const GCNode *v);
@@ -270,9 +270,9 @@ namespace CXXR
         {
         public:
             /**
-	     * @param min_gen The minimum generation number that the
-	     * visitor is to apply.
-	     */
+             * @param min_gen The minimum generation number that the
+             * visitor is to apply.
+             */
             Ager(unsigned int min_gen)
                 : m_mingen(min_gen)
             {
@@ -299,9 +299,9 @@ namespace CXXR
         {
         public:
             /**
-	     * @param max_gen Nodes with a generation number exceeding
-	     *          this are not to be marked.
-	     */
+             * @param max_gen Nodes with a generation number exceeding
+             *          this are not to be marked.
+             */
             Marker(unsigned int max_gen)
                 : m_maxgen(max_gen)
             {
@@ -323,9 +323,9 @@ namespace CXXR
         {
         public:
             /**
-	     * @param min_gen The minimum generation number that is
-	     * acceptable in visited nodes.
-	     */
+             * @param min_gen The minimum generation number that is
+             * acceptable in visited nodes.
+             */
             OldToNewChecker(unsigned int min_gen)
                 : m_mingen(min_gen)
             {

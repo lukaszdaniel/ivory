@@ -41,7 +41,7 @@
 
 namespace CXXR
 {
-    /** @brief Class for managing garbage collection.
+	/** @brief Class for managing garbage collection.
      * 
      * This class only has static members.  When CXXR::MemoryBank indicates
      * that it is on the point of requesting additional memory from
@@ -58,117 +58,117 @@ namespace CXXR
 	class GCManager
 	{
 	public:
-	/** Adjust the garbage collection threshold in the light of
-	 *  current allocations, and the space demand currently being
-	 *  addressed.
-	 *
-	 * @param bytes_wanted If specified, the number of bytes
-	 *          currently being sought by CXXR::MemoryBank.
-	 */
+		/** Adjust the garbage collection threshold in the light of
+		 *  current allocations, and the space demand currently being
+		 *  addressed.
+		 *
+		 * @param bytes_wanted If specified, the number of bytes
+		 *          currently being sought by CXXR::MemoryBank.
+		 */
 		static void adjustThreshold(R_size_t bytes_wanted = 0);
 
-	/** @brief Initiate a garbage collection.
-	 *
-	 * @param bytes_wanted Bytes required to be freed.
-	 * 
-	 * @param full If this is true, a garbage collection of all
-	 *          generations of nodes is forced.  Otherwise
-	 *          GCManager decides for itself how many generations
-	 *          should be collected.
-	 */
+		/** @brief Initiate a garbage collection.
+		 *
+		 * @param bytes_wanted Bytes required to be freed.
+		 *
+		 * @param full If this is true, a garbage collection of all
+		 *          generations of nodes is forced.  Otherwise
+		 *          GCManager decides for itself how many generations
+		 *          should be collected.
+		 */
 		static void gc(size_t bytes_wanted, bool full = false);
 
 		/** Initialize static members.
-	 *
-	 * This method must be called before any GCNode objects are created.
-	 * If called more than once in a single program run, the
-	 * second and subsequent calls do nothing.
-	 *
-	 * @param initial_threshold  Initial value for the collection threshold.
-	 * 
-	 * @param initial_node_threshold Initial value for the node collection threshold.
-	 *
-	 */
+		 *
+		 * This method must be called before any GCNode objects are created.
+		 * If called more than once in a single program run, the
+		 * second and subsequent calls do nothing.
+		 *
+		 * @param initial_threshold  Initial value for the collection threshold.
+		 *
+		 * @param initial_node_threshold Initial value for the node collection threshold.
+		 *
+		 */
 		static void initialize(size_t initial_threshold, size_t initial_node_threshold);
 
-	/**
-	 * @return true iff garbage collection torture is enabled.
-	 */
+		/**
+		 * @return true iff garbage collection torture is enabled.
+		 */
 		static bool isTortured() { return s_tortured; }
 
-	/** @brief Maximum number of bytes used.
-	 *
-	 * @return the maximum number of bytes used (up to the time of
-	 *         the most recent garbage collection.)
-	 */
+		/** @brief Maximum number of bytes used.
+		 *
+		 * @return the maximum number of bytes used (up to the time of
+		 *         the most recent garbage collection.)
+		 */
 		static size_t maxBytes() { return s_max_bytes; }
 
-	/** @brief Maximum number of GCNode objects allocated.
-	 * 
-	 * @return the maximum number of GCNode objects allocated (up
-	 * to the time of the most recent garbage collection.)
-	 *
-	 * @note This method is provided for compatibility with CR.
-	 * The number of GCNode objects doesn't directly affect the
-	 * operation of garbage collection in R.
-	 */
+		/** @brief Maximum number of GCNode objects allocated.
+		 *
+		 * @return the maximum number of GCNode objects allocated (up
+		 * to the time of the most recent garbage collection.)
+		 *
+		 * @note This method is provided for compatibility with CR.
+		 * The number of GCNode objects doesn't directly affect the
+		 * operation of garbage collection in R.
+		 */
 		static size_t maxNodes() { return s_max_nodes; }
 
-	/** @brief Reset the tallies of the maximum numbers of bytes and
-	 *  GCNode objects.
-	 *
-	 * This method resets the record of the maximum number of
-	 * bytes allocated to the current number of bytes allocated,
-	 * and similarly for the maximum number of GCNode objects.
-	 */
+		/** @brief Reset the tallies of the maximum numbers of bytes and
+		 *  GCNode objects.
+		 *
+		 * This method resets the record of the maximum number of
+		 * bytes allocated to the current number of bytes allocated,
+		 * and similarly for the maximum number of GCNode objects.
+		 */
 		static void resetMaxTallies();
 
-	/** @brief Set/unset monitors on mark-sweep garbage collection.
-	 *
-	 * @param pre_gc If not a null pointer, this function will be
-	 *          called just before garbage collection begins,
-	 *          e.g. to carry out timing.  It must not itself give
-	 *          rise to a garbage collection.
-	 *
-	 * @param post_gc If not a null pointer, this function will be
-	 *          called just after garbage collection is completed.
-	 *          It  must not itself give rise to a garbage
-	 *          collection.
-	 */
-	static void setMonitors(void (*pre_gc)() = 0,
-				void (*post_gc)() = 0)
-	{
-	    s_pre_gc = pre_gc;
-	    s_post_gc = post_gc;
-	}
+		/** @brief Set/unset monitors on mark-sweep garbage collection.
+		 *
+		 * @param pre_gc If not a null pointer, this function will be
+		 *          called just before garbage collection begins,
+		 *          e.g. to carry out timing.  It must not itself give
+		 *          rise to a garbage collection.
+		 *
+		 * @param post_gc If not a null pointer, this function will be
+		 *          called just after garbage collection is completed.
+		 *          It  must not itself give rise to a garbage
+		 *          collection.
+		 */
+		static void setMonitors(void (*pre_gc)() = 0,
+								void (*post_gc)() = 0)
+		{
+			s_pre_gc = pre_gc;
+			s_post_gc = post_gc;
+		}
 
-	/** @brief Set the output stream for garbage collection reporting.
-	 *
-	 * @param os Pointer to the output stream to which reporting
-	 *          should be directed.  If NULL, suppresses reporting.
-	 *
-	 * @return The previous value of the output stream pointer.
-	 */
+		/** @brief Set the output stream for garbage collection reporting.
+		 *
+		 * @param os Pointer to the output stream to which reporting
+		 *          should be directed.  If NULL, suppresses reporting.
+		 *
+		 * @return The previous value of the output stream pointer.
+		 */
 		static std::ostream *setReporting(std::ostream *os = 0);
 
-	/** @brief Turn garbage collection torture on or off.
-	 *  If enabled, every time that CXXR::MemoryBank indicates that
-	 *  it is about to request additional memory from the operating
-	 *  system, a garbage collection is carried out.
-	 *
-	 * @param on The required torturing status.
-	 */
+		/** @brief Turn garbage collection torture on or off.
+		 *  If enabled, every time that CXXR::MemoryBank indicates that
+		 *  it is about to request additional memory from the operating
+		 *  system, a garbage collection is carried out.
+		 *
+		 * @param on The required torturing status.
+		 */
 		static void torture(bool on) { s_tortured = on; }
 
-	/** @brief Current threshold level for mark-sweep garbage
-	 * collection.
-	 *
-	 * @return The current threshold level.  When GCNode::operator
-	 * new is on the point of requesting memory from MemoryBank,
-	 * if it finds that the number of bytes already allocated via
-	 * MemoryBank is at least as great as this threshold level, it
-	 * may initiate a mark-sweep garbage collection.
-	 */
+		/** @brief Current threshold level for mark-sweep garbage
+		 * collection.
+		 *
+		 * @return The current threshold level.  When GCNode::operator
+		 * new is on the point of requesting memory from MemoryBank,
+		 * if it finds that the number of bytes already allocated via
+		 * MemoryBank is at least as great as this threshold level, it
+		 * may initiate a mark-sweep garbage collection.
+		 */
 		static size_t triggerLevel() { return s_threshold; }
 		static size_t nodeTriggerLevel() { return s_node_threshold; }
 		static size_t maxTriggerLevel() { return s_max_threshold; }
@@ -179,14 +179,23 @@ namespace CXXR
 		static bool gc_fail_on_error() { return s_gc_fail_on_error; }
 		static void set_gc_fail_on_error(bool status) { s_gc_fail_on_error = status; }
 		static void gc_error(const char *msg);
-		static void setGCGrowParameters(double node_grow_frac = 0.70, double mem_grow_frac = 0.70) { R_NGrowFrac = node_grow_frac; R_VGrowFrac = mem_grow_frac; };
-		static void setGCGrowIncrParameters(double node_grow_incr_frac = 0.2, double mem_grow_incr_frac = 0.2) { R_NGrowIncrFrac = node_grow_incr_frac; R_VGrowIncrFrac = mem_grow_incr_frac; };
+		static void setGCGrowParameters(double node_grow_frac = 0.70, double mem_grow_frac = 0.70)
+		{
+			R_NGrowFrac = node_grow_frac;
+			R_VGrowFrac = mem_grow_frac;
+		};
+		static void setGCGrowIncrParameters(double node_grow_incr_frac = 0.2, double mem_grow_incr_frac = 0.2)
+		{
+			R_NGrowIncrFrac = node_grow_incr_frac;
+			R_VGrowIncrFrac = mem_grow_incr_frac;
+		};
 		static bool FORCE_GC();
 		static void setTortureParameters(int gap, int wait, bool inhibitor);
 		static void setInhibitor(bool inhibitor);
 		static int gc_force_wait();
 		static int gc_force_gap();
 		static bool gc_inhibit_release();
+
 	private:
 		static size_t s_threshold;
 		static size_t s_min_threshold;
@@ -220,8 +229,8 @@ namespace CXXR
 		static size_t s_max_nodes;
 
 		static bool s_tortured; // If this is true, every cue from
-			// CXXR::MemoryBank leads to a garbage
-			// collection.
+								// CXXR::MemoryBank leads to a garbage
+								// collection.
 
 		// Callback for CXXR::MemoryBank to cue a garbage collection:
 		static bool cue(size_t bytes_wanted, bool force);

@@ -665,7 +665,7 @@ static SEXP altrep_DuplicateEX_default(SEXP x, Rboolean deep)
 	    PROTECT(ans);
 	    SET_ATTRIB(ans, deep ? duplicate(attr) : shallow_duplicate(attr));
 	    SET_OBJECT(ans, OBJECT(x));
-        if(IS_S4_OBJECT(x)) { SET_S4_OBJECT(ans); } else { UNSET_S4_OBJECT(ans); };
+        ans->setS4Object(IS_S4_OBJECT(x));
 	    UNPROTECT(1);
 	}
 	else if (ATTRIB(ans) != R_NilValue) {

@@ -134,7 +134,7 @@ namespace CXXR
         }
 
     private:
-        T *m_data;          // pointer to the vector's data block.
+        T *m_data;            // pointer to the vector's data block.
         R_xlen_t m_databytes; // used only if > 1 elements
 
         // If there is only one element, it is stored here, internally
