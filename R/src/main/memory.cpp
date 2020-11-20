@@ -399,7 +399,7 @@ namespace
     SEXP R_PreciousList = nullptr; /* List of Persistent Objects */
 
     /* Debugging Routines. */
-
+#if 0
     inline void INIT_REFCNT(SEXP x)
     {
 #ifdef COMPUTE_REFCNT_VALUES
@@ -407,7 +407,7 @@ namespace
         SET_TRACKREFS(x, TRUE);
 #endif
     }
-
+#endif
 #ifdef COMPUTE_REFCNT_VALUES
     void FIX_REFCNT_EX(SEXP x, SEXP old, SEXP new_, Rboolean chkpnd)
     {
@@ -1195,7 +1195,7 @@ SEXP Rf_allocSExp(SEXPTYPE t)
     }
 
     s = new RObject(t);
-    INIT_REFCNT(s);
+    // INIT_REFCNT(s);
     RObject::set_car0(s, R_NilValue);
     RObject::set_cdr(s, R_NilValue);
     return s;
@@ -1220,7 +1220,7 @@ SEXP Rf_cons(SEXP car, SEXP cdr)
         UNPROTECT(2);
 
 
-    INIT_REFCNT(s);
+    // INIT_REFCNT(s);
     RObject::set_car0(s, CHK(car));
     if (car)
         INCREMENT_REFCNT(car);
@@ -1248,7 +1248,7 @@ HIDDEN SEXP CONS_NR(SEXP car, SEXP cdr)
         UNPROTECT(2);
 
 
-    INIT_REFCNT(s);
+    // INIT_REFCNT(s);
     DISABLE_REFCNT(s);
     RObject::set_car0(s, CHK(car));
     RObject::set_cdr(s, CHK(cdr));
@@ -1292,7 +1292,7 @@ SEXP R::NewEnvironment(SEXP namelist, SEXP valuelist, SEXP rho)
         newrho = new RObject(ENVSXP);
         UNPROTECT(3);
 
-    INIT_REFCNT(newrho);
+    // INIT_REFCNT(newrho);
     Environment::set_frame(newrho, valuelist);
     INCREMENT_REFCNT(valuelist);
     Environment::set_enclos(newrho, CHK(rho));
@@ -1333,7 +1333,7 @@ HIDDEN SEXP R::mkPROMISE(SEXP expr, SEXP rho)
        substitute() and the like */
     ENSURE_NAMEDMAX(expr);
 
-    INIT_REFCNT(s);
+    // INIT_REFCNT(s);
     Promise::set_prcode(s, CHK(expr));
     INCREMENT_REFCNT(expr);
     Promise::set_prenv(s, CHK(rho));
@@ -1385,7 +1385,7 @@ SEXP Rf_allocVector3(SEXPTYPE type, R_xlen_t length = 1, R_allocator_t *allocato
     /* number of vector cells to allocate */
     switch (type) {
     case NILSXP:
-	return R_NilValue;
+	return nullptr;
     case RAWSXP:
 	size = BYTE2VEC(length);
 #if VALGRIND_LEVEL > 0
@@ -1453,18 +1453,18 @@ SEXP Rf_allocVector3(SEXPTYPE type, R_xlen_t length = 1, R_allocator_t *allocato
 	}
 	break;
     case LANGSXP:
-	if(length == 0) return R_NilValue;
+	if(length == 0) return nullptr;
 #ifdef LONG_VECTOR_SUPPORT
 	if (length > R_SHORT_LEN_MAX) error(_("invalid length for pairlist"));
 #endif
-	s = allocList((int) length);
+	s = Rf_allocList((int) length);
 	SET_TYPEOF(s, LANGSXP);
 	return s;
     case LISTSXP:
 #ifdef LONG_VECTOR_SUPPORT
 	if (length > R_SHORT_LEN_MAX) error(_("invalid length for pairlist"));
 #endif
-	return allocList((int) length);
+	return Rf_allocList((int) length);
     default:
 	error(_("invalid type/length (%s/%d) in vector allocation"),
 	      type2char(type), length);
@@ -1510,15 +1510,15 @@ SEXP Rf_allocVector3(SEXPTYPE type, R_xlen_t length = 1, R_allocator_t *allocato
 	    if (!success) {
 		double dsize = (double)bytes/1024.0;
 		if(dsize > 1024.0*1024.0)
-		    errorcall(R_NilValue,
+		    errorcall(nullptr,
 			      _("cannot allocate vector of size %0.1f GB"),
 			      dsize/1024.0/1024.0);
 		if(dsize > 1024.0)
-		    errorcall(R_NilValue,
+		    errorcall(nullptr,
 			      _("cannot allocate vector of size %0.1f MB"),
 			      dsize/1024.0);
 		else
-		    errorcall(R_NilValue,
+		    errorcall(nullptr,
 			      _("cannot allocate vector of size %0.f KB"),
 			      dsize);
 	    }
@@ -1526,7 +1526,7 @@ SEXP Rf_allocVector3(SEXPTYPE type, R_xlen_t length = 1, R_allocator_t *allocato
     CXXR::VectorBase::set_stdvec_length(s, length);
     CXXR::RObject::set_altrep(s, 0);
     CXXR::VectorBase::set_stdvec_truelength(s, 0);
-    INIT_REFCNT(s);
+    // INIT_REFCNT(s);
 
     /* The following prevents disaster in the case */
     /* that an uninitialised string vector is marked */
@@ -1538,7 +1538,7 @@ SEXP Rf_allocVector3(SEXPTYPE type, R_xlen_t length = 1, R_allocator_t *allocato
 	VALGRIND_MAKE_MEM_DEFINED(STRING_PTR(s), actual_size);
 #endif
 	for (R_xlen_t i = 0; i < length; i++)
-	    data[i] = R_NilValue;
+	    data[i] = nullptr;
     }
     else if(type == STRSXP) {
 	SEXP *data = STRING_PTR(s);

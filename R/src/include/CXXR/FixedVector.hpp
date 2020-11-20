@@ -59,11 +59,11 @@ namespace CXXR
          * @param sz Number of elements required.  Zero is
          *          permissible.
          */
-        FixedVector(R_xlen_t sz)
-            : VectorBase(ST, sz), m_data(&m_singleton)
+        FixedVector(R_xlen_t sz, R_allocator_t *allocator)
+            : VectorBase(ST, sz), m_data(&m_singleton), m_allocator(allocator)
         {
             if (sz > 1)
-                allocData(sz);
+                allocData(sz, allocator);
 #if VALGRIND_LEVEL >= 1
             else
                 VALGRIND_MAKE_MEM_UNDEFINED(&m_singleton, sizeof(T));
@@ -77,12 +77,12 @@ namespace CXXR
          * @param initializer Initial value to be assigned to every
          *          element.
          */
-        FixedVector(R_xlen_t sz, const T &initializer)
+        FixedVector(R_xlen_t sz, const T &initializer, R_allocator_t *allocator)
             : VectorBase(ST, sz), m_data(&m_singleton),
-              m_singleton(initializer)
+              m_singleton(initializer), m_allocator(allocator)
         {
             if (sz > 1)
-                allocData(sz, true);
+                allocData(sz, true, allocator);
         }
 
         /** @brief Element access.
@@ -130,11 +130,12 @@ namespace CXXR
         ~FixedVector()
         {
             if (m_data != &m_singleton)
-                MemoryBank::deallocate(m_data, m_databytes);
+                MemoryBank::deallocate(m_data, m_databytes, m_allocator);
         }
 
     private:
         T *m_data;            // pointer to the vector's data block.
+        bool m_allocator;     // indicator whether external allocator was used
         R_xlen_t m_databytes; // used only if > 1 elements
 
         // If there is only one element, it is stored here, internally
@@ -150,18 +151,27 @@ namespace CXXR
 
         // If there is more than one element, this function is used to
         // allocate the required memory block from CXXR::MemoryBank :
-        void allocData(R_xlen_t sz, bool initialize = false);
+        void allocData(R_xlen_t sz, bool initialize = false, R_allocator_t *allocator = nullptr);
     };
 
     template <typename T, SEXPTYPE ST>
-    void FixedVector<T, ST>::allocData(R_xlen_t sz, bool initialize)
+    void FixedVector<T, ST>::allocData(R_xlen_t sz, bool initialize, R_allocator_t *allocator)
     {
         m_databytes = sz * sizeof(T);
         // Check for integer overflow:
         if (m_databytes / sizeof(T) != sz)
             Rf_error(_("Request to create impossibly large vector."));
         GCRoot<> thisroot(this);
-        m_data = reinterpret_cast<T *>(MemoryBank::allocate(m_databytes));
+        try
+        {
+            m_data = reinterpret_cast<T *>(MemoryBank::allocate(m_databytes, allocator));
+        }
+        catch (std::bad_alloc &e)
+        {
+            m_data = nullptr;
+            tooBig(m_databytes);
+            return;
+        }
         if (initialize)
         {
             for (R_xlen_t i = 0; i < sz; ++i)

@@ -52,7 +52,7 @@ namespace CXXR
         : RObject(stype)
     {
       u.vecsxp.m_length = sz;
-      u.vecsxp.m_truelength = sz;
+      u.vecsxp.m_truelength = 0;
     }
 
     /** @brief Number of elements in the vector.
@@ -72,6 +72,12 @@ namespace CXXR
     {
       return "(vector type)";
     }
+
+    /** @brief Raise error on attempt to allocate overlarge vector.
+     *
+     * @param bytes Size of data block for which allocation failed.
+     */
+    static void tooBig(std::size_t bytes);
 
   public:
     static inline R_xlen_t stdvec_length(RObject *x) { return x ? x->u.vecsxp.m_length : 0; }

@@ -34,6 +34,7 @@
 
 #define SWITCH_TO_REFCNT
 #define COMPUTE_REFCNT_VALUES
+
 #include <cstddef>
 #include <cstring>
 #include <CXXR/SEXPTYPE.hpp>
@@ -41,6 +42,206 @@
 #include <CXXR/GCNode.hpp>
 #include <R_ext/Error.h>
 #include <R_ext/Complex.h>
+
+#if defined(COMPUTE_REFCNT_VALUES)
+#define REFCNT(x) (CXXR::RObject::refcnt(x))
+#define TRACKREFS(x) (CXXR::RObject::trackrefs(x))
+#else
+#define REFCNT(x) 0
+#define TRACKREFS(x) false
+#endif
+
+#if defined(COMPUTE_REFCNT_VALUES)
+#define SET_REFCNT(x, v) (CXXR::RObject::set_refcnt(x, v))
+#if defined(EXTRA_REFCNT_FIELDS)
+#define SET_TRACKREFS(x, v) (CXXR::RObject::set_trackrefs(x, v))
+#else
+#define SET_TRACKREFS(x, v) (CXXR::RObject::set_trackrefs(x, !v))
+#endif
+#define DECREMENT_REFCNT(x)                                       \
+    do                                                            \
+    {                                                             \
+        CXXR::RObject *drc__x__ = (x);                            \
+        if (REFCNT(drc__x__) > 0 && REFCNT(drc__x__) < REFCNTMAX) \
+            SET_REFCNT(drc__x__, REFCNT(drc__x__) - 1);           \
+    } while (0)
+#define INCREMENT_REFCNT(x)                             \
+    do                                                  \
+    {                                                   \
+        CXXR::RObject *irc__x__ = (x);                  \
+        if (REFCNT(irc__x__) < REFCNTMAX)               \
+            SET_REFCNT(irc__x__, REFCNT(irc__x__) + 1); \
+    } while (0)
+#else
+#define SET_REFCNT(x, v) \
+    do                   \
+    {                    \
+    } while (0)
+#define SET_TRACKREFS(x, v) \
+    do                      \
+    {                       \
+    } while (0)
+#define DECREMENT_REFCNT(x) \
+    do                      \
+    {                       \
+    } while (0)
+#define INCREMENT_REFCNT(x) \
+    do                      \
+    {                       \
+    } while (0)
+#endif
+
+#define ENABLE_REFCNT(x) SET_TRACKREFS(x, TRUE)
+#define DISABLE_REFCNT(x) SET_TRACKREFS(x, FALSE)
+
+/* To make complex assignments a bit safer, in particular with
+   reference counting, a bit is set on the LHS binding cell or symbol
+   at the beginning of the complex assignment process and unset at the
+   end.
+
+   - When the assignment bit is set and a new value is assigned to the
+     binding then the reference count on the old value is not
+     decremented. This prevents moving a single binding from the LHS
+     variable of the assignment to another variable during the
+     assignment process.
+
+  - If a complex assignment tries to update a binding that already has
+    its bit set then, the value of the binding is shallow-duplicated
+    before proceeding. This ensures that the structure involved in the
+    original complex assignment will not be mutated by further R level
+    assignments during the original assignment process.
+
+  For now, no attempt is made to unset the bit if the end of an
+  assignment is not reached because of a jump. This may result in some
+  unnecessary duplications. This could be prevented by maintaining a
+  stack of pending assignments to resent the bits on jump, but that
+  seems like overkill.
+
+  It might also be useful to use this bit to communicate to functions
+  when they are used in a getter/setter context.
+
+  The bit used is bit 11 in the 'gp' field. An alternative would be to
+  take a bit from the 'extra' field.
+
+  LT
+*/
+
+/* The same bit can be used to mark calls used in complex assignments
+   to allow replacement functions to determine when they are being
+   called in an assignment context and can modify an object with one
+   refrence */
+#define MARK_ASSIGNMENT_CALL(call) SET_ASSIGNMENT_PENDING(call, TRUE)
+#define IS_ASSIGNMENT_CALL(call) ASSIGNMENT_PENDING(call)
+
+#ifdef SWITCH_TO_REFCNT
+#define NAMED(x) REFCNT(x)
+/* no definition for SET_NAMED; any calls will use the one in memory.cpp */
+#define ENSURE_NAMEDMAX(v) \
+    do                     \
+    {                      \
+    } while (0)
+#define ENSURE_NAMED(v) \
+    do                  \
+    {                   \
+    } while (0)
+#else
+#define ENSURE_NAMEDMAX(v)                  \
+    do                                      \
+    {                                       \
+        CXXR::RObject *__enm_v__ = (v);     \
+        if (NAMED(__enm_v__) < NAMEDMAX)    \
+            SET_NAMED(__enm_v__, NAMEDMAX); \
+    } while (0)
+#define ENSURE_NAMED(v)      \
+    do                       \
+    {                        \
+        if (NAMED(v) == 0)   \
+            SET_NAMED(v, 1); \
+    } while (0)
+#endif
+
+#ifdef SWITCH_TO_REFCNT
+#define SETTER_CLEAR_NAMED(x) \
+    do                        \
+    {                         \
+    } while (0)
+#define RAISE_NAMED(x, n) \
+    do                    \
+    {                     \
+    } while (0)
+#else
+#define SETTER_CLEAR_NAMED(x)    \
+    do                           \
+    {                            \
+        RObject *__x__ = (x);    \
+        if (NAMED(__x__) == 1)   \
+            SET_NAMED(__x__, 0); \
+    } while (0)
+#define RAISE_NAMED(x, n)            \
+    do                               \
+    {                                \
+        RObject *__x__ = (x);        \
+        int __n__ = (n);             \
+        if (NAMED(__x__) < __n__)    \
+            SET_NAMED(__x__, __n__); \
+    } while (0)
+#endif
+
+#if (SIZEOF_SIZE_T < SIZEOF_DOUBLE)
+#define BOXED_BINDING_CELLS 1
+#else
+#define BOXED_BINDING_CELLS 0
+#endif
+#if BOXED_BINDING_CELLS
+/* Use allocated scalars to hold immediate binding values. A little
+   less efficient but does not change memory layout or use. These
+   allocated scalars must not escape their bindings. */
+#define BNDCELL_DVAL(v) SCALAR_DVAL(CAR0(v))
+#define BNDCELL_IVAL(v) SCALAR_IVAL(CAR0(v))
+#define BNDCELL_LVAL(v) SCALAR_LVAL(CAR0(v))
+
+#define SET_BNDCELL_DVAL(cell, dval) SET_SCALAR_DVAL(CAR0(cell), dval)
+#define SET_BNDCELL_IVAL(cell, ival) SET_SCALAR_IVAL(CAR0(cell), ival)
+#define SET_BNDCELL_LVAL(cell, lval) SET_SCALAR_LVAL(CAR0(cell), lval)
+
+#define INIT_BNDCELL(cell, type)             \
+    do                                       \
+    {                                        \
+        RObject *val = allocVector(type, 1); \
+        SETCAR(cell, val);                   \
+        INCREMENT_NAMED(val);                \
+        SET_BNDCELL_TAG(cell, type);         \
+        SET_MISSING(cell, 0);                \
+    } while (0)
+#else
+/* Use a union in the CAR field to represent an RObject* or an immediate
+   value.  More efficient, but changes the memory layout on 32 bit
+   platforms since the size of the union is larger than the size of a
+   pointer. The layout should not change on 64 bit platforms. */
+union R_bndval_t
+{
+    CXXR::RObject *sxpval;
+    double dval;
+    int ival;
+};
+
+#define BNDCELL_DVAL(v) (CXXR::RObject::bndcell_dval(v))
+#define BNDCELL_IVAL(v) (CXXR::RObject::bndcell_ival(v))
+#define BNDCELL_LVAL(v) (CXXR::RObject::bndcell_lval(v))
+
+#define SET_BNDCELL_DVAL(cell, dval_) (CXXR::RObject::set_bndcell_dval(cell, dval_))
+#define SET_BNDCELL_IVAL(cell, ival_) (CXXR::RObject::set_bndcell_ival(cell, ival_))
+#define SET_BNDCELL_LVAL(cell, lval_) (CXXR::RObject::set_bndcell_lval(cell, lval_))
+
+#define INIT_BNDCELL(cell, type)      \
+    do                                \
+    {                                 \
+        if (BNDCELL_TAG(cell) == 0)   \
+            SETCAR(cell, R_NilValue); \
+        SET_BNDCELL_TAG(cell, type);  \
+        SET_MISSING(cell, 0);         \
+    } while (0)
+#endif
 
 /* This is intended for use only within R itself.
  * It defines internal structures that are otherwise only accessible
@@ -174,6 +375,10 @@ namespace CXXR
         explicit RObject(SEXPTYPE stype = ANYSXP) : m_type(stype), m_scalar(false), m_has_class(false), m_alt(false), m_gpbits(0), m_debug(false),
                                                     m_trace(false), m_spare(false), m_named(0), m_extra(0), m_attrib(nullptr), m_data(nullptr), m_databytes(0), m_allocator(false)
         {
+#ifdef COMPUTE_REFCNT_VALUES
+            SET_REFCNT(this, 0);
+            SET_TRACKREFS(this, true);
+#endif
         }
 
         /** @brief Copy constructor.
@@ -426,206 +631,6 @@ namespace CXXR
             return "RObject";
         }
     };
-
-#if defined(COMPUTE_REFCNT_VALUES)
-#define REFCNT(x) (CXXR::RObject::refcnt(x))
-#define TRACKREFS(x) (CXXR::RObject::trackrefs(x))
-#else
-#define REFCNT(x) 0
-#define TRACKREFS(x) false
-#endif
-
-#if defined(COMPUTE_REFCNT_VALUES)
-#define SET_REFCNT(x, v) (CXXR::RObject::set_refcnt(x, v))
-#if defined(EXTRA_REFCNT_FIELDS)
-#define SET_TRACKREFS(x, v) (CXXR::RObject::set_trackrefs(x, v))
-#else
-#define SET_TRACKREFS(x, v) (CXXR::RObject::set_trackrefs(x, !v))
-#endif
-#define DECREMENT_REFCNT(x)                                       \
-    do                                                            \
-    {                                                             \
-        CXXR::RObject *drc__x__ = (x);                            \
-        if (REFCNT(drc__x__) > 0 && REFCNT(drc__x__) < REFCNTMAX) \
-            SET_REFCNT(drc__x__, REFCNT(drc__x__) - 1);           \
-    } while (0)
-#define INCREMENT_REFCNT(x)                             \
-    do                                                  \
-    {                                                   \
-        CXXR::RObject *irc__x__ = (x);                  \
-        if (REFCNT(irc__x__) < REFCNTMAX)               \
-            SET_REFCNT(irc__x__, REFCNT(irc__x__) + 1); \
-    } while (0)
-#else
-#define SET_REFCNT(x, v) \
-    do                   \
-    {                    \
-    } while (0)
-#define SET_TRACKREFS(x, v) \
-    do                      \
-    {                       \
-    } while (0)
-#define DECREMENT_REFCNT(x) \
-    do                      \
-    {                       \
-    } while (0)
-#define INCREMENT_REFCNT(x) \
-    do                      \
-    {                       \
-    } while (0)
-#endif
-
-#define ENABLE_REFCNT(x) SET_TRACKREFS(x, TRUE)
-#define DISABLE_REFCNT(x) SET_TRACKREFS(x, FALSE)
-
-/* To make complex assignments a bit safer, in particular with
-   reference counting, a bit is set on the LHS binding cell or symbol
-   at the beginning of the complex assignment process and unset at the
-   end.
-
-   - When the assignment bit is set and a new value is assigned to the
-     binding then the reference count on the old value is not
-     decremented. This prevents moving a single binding from the LHS
-     variable of the assignment to another variable during the
-     assignment process.
-
-  - If a complex assignment tries to update a binding that already has
-    its bit set then, the value of the binding is shallow-duplicated
-    before proceeding. This ensures that the structure involved in the
-    original complex assignment will not be mutated by further R level
-    assignments during the original assignment process.
-
-  For now, no attempt is made to unset the bit if the end of an
-  assignment is not reached because of a jump. This may result in some
-  unnecessary duplications. This could be prevented by maintaining a
-  stack of pending assignments to resent the bits on jump, but that
-  seems like overkill.
-
-  It might also be useful to use this bit to communicate to functions
-  when they are used in a getter/setter context.
-
-  The bit used is bit 11 in the 'gp' field. An alternative would be to
-  take a bit from the 'extra' field.
-
-  LT
-*/
-
-/* The same bit can be used to mark calls used in complex assignments
-   to allow replacement functions to determine when they are being
-   called in an assignment context and can modify an object with one
-   refrence */
-#define MARK_ASSIGNMENT_CALL(call) SET_ASSIGNMENT_PENDING(call, TRUE)
-#define IS_ASSIGNMENT_CALL(call) ASSIGNMENT_PENDING(call)
-
-#ifdef SWITCH_TO_REFCNT
-#define NAMED(x) REFCNT(x)
-/* no definition for SET_NAMED; any calls will use the one in memory.cpp */
-#define ENSURE_NAMEDMAX(v) \
-    do                     \
-    {                      \
-    } while (0)
-#define ENSURE_NAMED(v) \
-    do                  \
-    {                   \
-    } while (0)
-#else
-#define ENSURE_NAMEDMAX(v)                  \
-    do                                      \
-    {                                       \
-        CXXR::RObject *__enm_v__ = (v);     \
-        if (NAMED(__enm_v__) < NAMEDMAX)    \
-            SET_NAMED(__enm_v__, NAMEDMAX); \
-    } while (0)
-#define ENSURE_NAMED(v)      \
-    do                       \
-    {                        \
-        if (NAMED(v) == 0)   \
-            SET_NAMED(v, 1); \
-    } while (0)
-#endif
-
-#ifdef SWITCH_TO_REFCNT
-#define SETTER_CLEAR_NAMED(x) \
-    do                        \
-    {                         \
-    } while (0)
-#define RAISE_NAMED(x, n) \
-    do                    \
-    {                     \
-    } while (0)
-#else
-#define SETTER_CLEAR_NAMED(x)    \
-    do                           \
-    {                            \
-        RObject *__x__ = (x);    \
-        if (NAMED(__x__) == 1)   \
-            SET_NAMED(__x__, 0); \
-    } while (0)
-#define RAISE_NAMED(x, n)            \
-    do                               \
-    {                                \
-        RObject *__x__ = (x);        \
-        int __n__ = (n);             \
-        if (NAMED(__x__) < __n__)    \
-            SET_NAMED(__x__, __n__); \
-    } while (0)
-#endif
-
-#if (SIZEOF_SIZE_T < SIZEOF_DOUBLE)
-#define BOXED_BINDING_CELLS 1
-#else
-#define BOXED_BINDING_CELLS 0
-#endif
-#if BOXED_BINDING_CELLS
-/* Use allocated scalars to hold immediate binding values. A little
-   less efficient but does not change memory layout or use. These
-   allocated scalars must not escape their bindings. */
-#define BNDCELL_DVAL(v) SCALAR_DVAL(CAR0(v))
-#define BNDCELL_IVAL(v) SCALAR_IVAL(CAR0(v))
-#define BNDCELL_LVAL(v) SCALAR_LVAL(CAR0(v))
-
-#define SET_BNDCELL_DVAL(cell, dval) SET_SCALAR_DVAL(CAR0(cell), dval)
-#define SET_BNDCELL_IVAL(cell, ival) SET_SCALAR_IVAL(CAR0(cell), ival)
-#define SET_BNDCELL_LVAL(cell, lval) SET_SCALAR_LVAL(CAR0(cell), lval)
-
-#define INIT_BNDCELL(cell, type)             \
-    do                                       \
-    {                                        \
-        RObject *val = allocVector(type, 1); \
-        SETCAR(cell, val);                   \
-        INCREMENT_NAMED(val);                \
-        SET_BNDCELL_TAG(cell, type);         \
-        SET_MISSING(cell, 0);                \
-    } while (0)
-#else
-    /* Use a union in the CAR field to represent an RObject* or an immediate
-   value.  More efficient, but changes the memory layout on 32 bit
-   platforms since the size of the union is larger than the size of a
-   pointer. The layout should not change on 64 bit platforms. */
-    union R_bndval_t
-    {
-        CXXR::RObject *sxpval;
-        double dval;
-        int ival;
-    };
-
-#define BNDCELL_DVAL(v) (CXXR::RObject::bndcell_dval(v))
-#define BNDCELL_IVAL(v) (CXXR::RObject::bndcell_ival(v))
-#define BNDCELL_LVAL(v) (CXXR::RObject::bndcell_lval(v))
-
-#define SET_BNDCELL_DVAL(cell, dval_) (CXXR::RObject::set_bndcell_dval(cell, dval_))
-#define SET_BNDCELL_IVAL(cell, ival_) (CXXR::RObject::set_bndcell_ival(cell, ival_))
-#define SET_BNDCELL_LVAL(cell, lval_) (CXXR::RObject::set_bndcell_lval(cell, lval_))
-
-#define INIT_BNDCELL(cell, type)      \
-    do                                \
-    {                                 \
-        if (BNDCELL_TAG(cell) == 0)   \
-            SETCAR(cell, R_NilValue); \
-        SET_BNDCELL_TAG(cell, type);  \
-        SET_MISSING(cell, 0);         \
-    } while (0)
-#endif
 
     /* There is much more in Rinternals.h, including function versions
      * of the Promise and Hashing groups.
