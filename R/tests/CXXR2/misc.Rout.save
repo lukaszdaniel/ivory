@@ -49,7 +49,7 @@ Error: no loop for break/next, jumping to top level
       0       0       0 
 > 
 >  
-> x <- rnorm(1e8)
+> x <- rnorm(1e7)
 > system.time(y <- sort(x))
    user  system elapsed 
  33.450   0.655  34.108 

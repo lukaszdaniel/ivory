@@ -34,6 +34,7 @@
 #include <CXXR/GCRoot.hpp>
 #include <CXXR/RObject.hpp>
 #include <CXXR/SEXP_downcast.hpp>
+#include <Localization.h>
 #include <cstddef>
 
 namespace CXXR
@@ -51,6 +52,11 @@ namespace CXXR
     VectorBase(SEXPTYPE stype, size_t sz)
         : RObject(stype)
     {
+      if (sz > R_XLEN_T_MAX)
+        Rf_error(_("vector is too large")); /**** put length into message */
+      else if (sz < 0)
+        Rf_error(_("negative length vectors are not allowed"));
+
       u.vecsxp.m_length = sz;
       u.vecsxp.m_truelength = 0;
     }
@@ -117,23 +123,6 @@ namespace CXXR
 
 /* defined as a macro since fastmatch packages tests for it */
 #define XLENGTH(x) XLENGTH_EX(x)
-
-  template <typename T = void *>
-  inline T stdvec_dataptr(RObject *x)
-  {
-    return static_cast<T>(x->m_data);
-  }
-
-  inline const char *r_char(RObject *x)
-  {
-    return stdvec_dataptr<const char *>(x);
-  }
-
-  /* writable char access for R internal use only */
-  inline char *CHAR_RW(RObject *x)
-  {
-    return stdvec_dataptr<char *>(x);
-  }
 
 #define VECTOR_ELT(x, i) ((SEXP *)DATAPTR(x))[i]
 #define VECTOR_PTR(x) ((SEXP *)DATAPTR(x))

@@ -46,6 +46,21 @@ namespace CXXR
         // const auto &mkCharLenp = Rf_mkCharLen;
     } // namespace ForceNonInline
 
+    // String::Comparator::operator()(const String&, const String&) is in
+    // sort.cpp
+
+    String::String(size_t sz)
+        : VectorBase(CHARSXP, sz), m_data(m_short_string)
+    {
+        if (sz > s_short_strlen)
+        {
+            GCRoot<> thisroot(this);
+            m_data = reinterpret_cast<char *>(MemoryBank::allocate(sz + 1));
+        }
+        // Insert trailing null byte:
+        m_data[sz] = 0;
+    }
+
     const char *String::typeName() const
     {
         return staticTypeName();

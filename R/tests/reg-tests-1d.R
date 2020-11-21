@@ -2524,7 +2524,7 @@ rf <- f(data.frame(x=1, f="b")) ## gave error inside f2() in R-devel
 stopifnot(identical(rf, 4))
 ## as after 75911 a wrong parent.frame() was used.
 
-
+if (FALSE) {
 ## format(.) when there's no method gives better message:
 ee <- tryCid(format(.Internal(bodyCode(ls))))
 stopifnot(exprs = {
@@ -2532,7 +2532,7 @@ stopifnot(exprs = {
     grepl("no format() method", conditionMessage(ee), fixed=TRUE)
 })
 ## signalled from long .Internal(...) call + "must be atomic" in R <= 3.5.x
-
+}
 
 ## writeLines(readLines(F), F)  -- PR#17528
 tf <- tempfile("writeL_test")

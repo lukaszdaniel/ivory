@@ -247,7 +247,6 @@ const char *R::sexptype2char(const SEXPTYPE type) {
     case NEWSXP:	return "NEWSXP"; /* should never happen */
     case FREESXP:	return "FREESXP";
     case SINGLESXP: return "SINGLEEXP";
-    case intCHARSXP: return "intCHARSXP";
     case FUNSXP:     return "FUNSXP";
     case ALTREP_SXP: return "ALTREP_SXP";
     case ATTRLISTSXP: return "ATTRLISTSXP";
@@ -1387,57 +1386,42 @@ SEXP Rf_allocVector3(SEXPTYPE type, R_xlen_t length = 1, R_allocator_t *allocato
     case NILSXP:
 	return nullptr;
     case RAWSXP:
-	size = BYTE2VEC(length);
-#if VALGRIND_LEVEL > 0
-	actual_size = length;
+    {
+#ifdef R_MEMORY_PROFILING
+        R_ReportAllocation(convert2VEC<bool>(length) * sizeof(VECREC));
 #endif
-	break;
+        return new RawVector(length, allocator);
+    }
     case CHARSXP:
-	error(_("use of allocVector(CHARSXP ...) is defunct\n"));
-    case intCHARSXP:
-	type = CHARSXP;
-	size = BYTE2VEC(length + 1);
-#if VALGRIND_LEVEL > 0
-	actual_size = length + 1;
-#endif
-	break;
+        Rf_error(_("use of allocVector(CHARSXP ...) is defunct\n"));
     case LGLSXP:
+    {
+#ifdef R_MEMORY_PROFILING
+        R_ReportAllocation(convert2VEC<int>(length) * sizeof(VECREC));
+#endif
+        return new LogicalVector(length, allocator);
+    }
     case INTSXP:
-	if (length <= 0)
-	    size = 0;
-	else {
-	    if (length > (R_xlen_t) (R_SIZE_T_MAX / sizeof(int)))
-		error(_("cannot allocate vector of length %d"), length);
-	    size = INT2VEC(length);
-#if VALGRIND_LEVEL > 0
-        actual_size = length * sizeof(int);
+    {
+#ifdef R_MEMORY_PROFILING
+        R_ReportAllocation(convert2VEC<int>(length) * sizeof(VECREC));
 #endif
-	}
-	break;
+        return new IntVector(length, allocator);
+    }
     case REALSXP:
-	if (length <= 0)
-	    size = 0;
-	else {
-	    if (length > (R_xlen_t) (R_SIZE_T_MAX / sizeof(double)))
-		error(_("cannot allocate vector of length %d"), length);
-	    size = FLOAT2VEC(length);
-#if VALGRIND_LEVEL > 0
-	    actual_size = length * sizeof(double);
+    {
+#ifdef R_MEMORY_PROFILING
+        R_ReportAllocation(convert2VEC<double>(length) * sizeof(VECREC));
 #endif
-	}
-	break;
+        return new RealVector(length, allocator);
+    }
     case CPLXSXP:
-	if (length <= 0)
-	    size = 0;
-	else {
-	    if (length > (R_xlen_t) (R_SIZE_T_MAX / sizeof(Rcomplex)))
-		error(_("cannot allocate vector of length %d"), length);
-	    size = COMPLEX2VEC(length);
-#if VALGRIND_LEVEL > 0
-	    actual_size = length * sizeof(Rcomplex);
+    {
+#ifdef R_MEMORY_PROFILING
+        R_ReportAllocation(convert2VEC<Rcomplex>(length) * sizeof(VECREC));
 #endif
-	}
-	break;
+        return new ComplexVector(length, allocator);
+    }
     case STRSXP:
     case EXPRSXP:
     case VECSXP:
@@ -1446,7 +1430,7 @@ SEXP Rf_allocVector3(SEXPTYPE type, R_xlen_t length = 1, R_allocator_t *allocato
 	else {
 	    if (length > (R_xlen_t) (R_SIZE_T_MAX / sizeof(SEXP)))
 		error(_("cannot allocate vector of length %d"), length);
-	    size = PTR2VEC(length);
+	    size = convert2VEC<RObject>(length);
 #if VALGRIND_LEVEL > 0
 	    actual_size = length * sizeof(SEXP);
 #endif
@@ -1548,31 +1532,17 @@ SEXP Rf_allocVector3(SEXPTYPE type, R_xlen_t length = 1, R_allocator_t *allocato
 	for (R_xlen_t i = 0; i < length; i++)
 	    data[i] = R_BlankString;
     }
-    else if (type == CHARSXP || type == intCHARSXP) {
-#if VALGRIND_LEVEL > 0
-	VALGRIND_MAKE_MEM_UNDEFINED(CXXR::r_char(s), actual_size);
-#endif
-	CHAR_RW(s)[length] = 0;
-    }
-#if VALGRIND_LEVEL > 0
-    else if (type == REALSXP)
-	VALGRIND_MAKE_MEM_UNDEFINED(REAL(s), actual_size);
-    else if (type == INTSXP)
-	VALGRIND_MAKE_MEM_UNDEFINED(INTEGER(s), actual_size);
-    else if (type == LGLSXP)
-	VALGRIND_MAKE_MEM_UNDEFINED(LOGICAL(s), actual_size);
-    else if (type == CPLXSXP)
-	VALGRIND_MAKE_MEM_UNDEFINED(COMPLEX(s), actual_size);
-    else if (type == RAWSXP)
-	VALGRIND_MAKE_MEM_UNDEFINED(RAW(s), actual_size);
-#endif
+
     return s;
 }
 
 /* For future hiding of allocVector(CHARSXP) */
-HIDDEN SEXP R::allocCharsxp(R_len_t len)
+HIDDEN SEXP R::allocCharsxp(R_len_t length)
 {
-    return Rf_allocVector(intCHARSXP, len);
+#ifdef R_MEMORY_PROFILING
+        R_ReportAllocation(convert2VEC<char>(length + 1) * sizeof(VECREC));
+#endif
+        return new String(length);
 }
 
 SEXP Rf_allocList(const int n)

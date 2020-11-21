@@ -1998,7 +1998,7 @@ static SEXP ReadItem(SEXP ref_table, R_inpstream_t stream)
 	    }
 	    break;
 	case S4SXP:
-	    PROTECT(s = allocS4Object());
+	    PROTECT(s = Rf_allocS4Object());
 	    break;
 	default:
 	    s = R_NilValue; /* keep compiler happy */

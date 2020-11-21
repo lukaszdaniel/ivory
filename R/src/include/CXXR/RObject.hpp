@@ -365,6 +365,14 @@ namespace CXXR
         } u;
 
     public:
+        virtual void *data()
+        {
+            return m_data;
+        }
+        virtual const void *data() const
+        {
+            return m_data;
+        }
         void *m_data;
         size_t m_databytes;
         bool m_allocator;
@@ -650,11 +658,13 @@ namespace CXXR
     using VECP = VECREC *;
 
     /* Vector Heap Macros */
-    inline size_t BYTE2VEC(size_t n) { return (n > 0) ? (n - 1) / sizeof(VECREC) + 1 : 0; }
-    inline size_t INT2VEC(size_t n) { return (n > 0) ? (n * sizeof(int) - 1) / sizeof(VECREC) + 1 : 0; }
-    inline size_t FLOAT2VEC(size_t n) { return (n > 0) ? (n * sizeof(double) - 1) / sizeof(VECREC) + 1 : 0; }
-    inline size_t COMPLEX2VEC(size_t n) { return (n > 0) ? (n * sizeof(Rcomplex) - 1) / sizeof(VECREC) + 1 : 0; }
-    inline size_t PTR2VEC(size_t n) { return (n > 0) ? (n * sizeof(RObject) - 1) / sizeof(VECREC) + 1 : 0; }
+    // inline size_t BYTE2VEC(size_t n) { return (n > 0) ? (n - 1) / sizeof(VECREC) + 1 : 0; }
+    // inline size_t INT2VEC(size_t n) { return (n > 0) ? (n * sizeof(int) - 1) / sizeof(VECREC) + 1 : 0; }
+    // inline size_t FLOAT2VEC(size_t n) { return (n > 0) ? (n * sizeof(double) - 1) / sizeof(VECREC) + 1 : 0; }
+    // inline size_t COMPLEX2VEC(size_t n) { return (n > 0) ? (n * sizeof(Rcomplex) - 1) / sizeof(VECREC) + 1 : 0; }
+    // inline size_t PTR2VEC(size_t n) { return (n > 0) ? (n * sizeof(RObject) - 1) / sizeof(VECREC) + 1 : 0; }
+    template <typename T>
+    inline size_t convert2VEC(size_t n) { return (n > 0) ? (n * sizeof(T) - 1) / sizeof(VECREC) + 1 : 0; }
 
 } // namespace CXXR
 

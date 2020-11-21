@@ -388,7 +388,7 @@ static SEXP duplicate1(SEXP s, Rboolean deep)
 	break;
     case S4SXP:
 	PROTECT(s);
-	PROTECT(t = allocS4Object());
+	PROTECT(t = Rf_allocS4Object());
 	DUPLICATE_ATTRIB(t, s, deep);
 	UNPROTECT(2);
 	break;

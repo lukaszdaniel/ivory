@@ -86,6 +86,12 @@ static int scmp(SEXP x, SEXP y, Rboolean nalast)
     return Scollate(x, y);
 }
 
+bool CXXR::String::Comparator::operator()(const String *l, const String *r) const
+{
+	return scmp(const_cast<String *>(l), const_cast<String *>(r),
+				Rboolean(m_na_last)) < 0;
+}
+
 Rboolean Rf_isUnsorted(SEXP x, Rboolean strictly)
 {
     R_xlen_t n, i;

@@ -5,6 +5,7 @@ sizeof(char): 1
 sizeof(Rboolean): 4
 sizeof(int): 4
 sizeof(unsigned): 4
+sizeof(R_len_t): 4
 sizeof(size_t): 8
 sizeof(R_xlen_t): 8
 sizeof(double): 8

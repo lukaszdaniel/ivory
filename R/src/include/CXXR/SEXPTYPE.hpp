@@ -72,7 +72,6 @@ enum
     NEWSXP = 30,    /* fresh node created in new page */
     FREESXP = 31,   /* node released by GC */
     SINGLESXP = 47, /* For interfaces to objects created with as.single */
-    intCHARSXP = 73,
     FUNSXP = 99, /* Closure or Builtin */
     ALTREP_SXP = 238,
     ATTRLISTSXP = 239,

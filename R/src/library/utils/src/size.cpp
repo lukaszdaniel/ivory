@@ -87,25 +87,25 @@ static R_size_t objectsize(SEXP s)
     case BUILTINSXP:
 	break;
     case CHARSXP:
-	vcnt = BYTE2VEC(length(s)+1);
+	vcnt = convert2VEC<char>(length(s)+1);
 	isVec = TRUE;
 	break;
     case LGLSXP:
     case INTSXP:
-	vcnt = INT2VEC(xlength(s));
+	vcnt = convert2VEC<int>(xlength(s));
 	isVec = TRUE;
 	break;
     case REALSXP:
-	vcnt = FLOAT2VEC(xlength(s));
+	vcnt = convert2VEC<double>(xlength(s));
 	isVec = TRUE;
 	break;
     case CPLXSXP:
-	vcnt = COMPLEX2VEC(xlength(s));
+	vcnt = convert2VEC<Rcomplex>(xlength(s));
 	isVec = TRUE;
 	break;
     case STRSXP:
 	R_CheckStack();
-	vcnt = PTR2VEC(xlength(s));
+	vcnt = convert2VEC<RObject>(xlength(s));
 	PROTECT(dup = Rf_csduplicated(s));
 	for (R_xlen_t i = 0; i < xlength(s); i++) {
 	    tmp = STRING_ELT(s, i);
@@ -123,7 +123,7 @@ static R_size_t objectsize(SEXP s)
     case WEAKREFSXP:
 	/* Generic Vector Objects */
 	R_CheckStack();
-	vcnt = PTR2VEC(xlength(s));
+	vcnt = convert2VEC<RObject>(xlength(s));
 	for (R_xlen_t i = 0; i < xlength(s); i++)
 	    cnt += objectsize(VECTOR_ELT(s, i));
 	isVec = TRUE;
@@ -135,7 +135,7 @@ static R_size_t objectsize(SEXP s)
 	cnt += objectsize(EXTPTR_TAG(s));
 	break;
     case RAWSXP:
-	vcnt = BYTE2VEC(xlength(s));
+	vcnt = convert2VEC<bool>(xlength(s));
 	isVec = TRUE;
 	break;
     case S4SXP:

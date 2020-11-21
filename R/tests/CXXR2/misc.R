@@ -38,7 +38,7 @@ x <- structure(numeric(1e9), class = "foo")
 system.time(base::unclass(x))
 
  
-x <- rnorm(1e8)
+x <- rnorm(1e7)
 system.time(y <- sort(x))
 system.time(sort(y))
 system.time(anyNA(y))
