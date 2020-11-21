@@ -935,7 +935,7 @@ static void performCompletion(control c)
 	    cmdexpr = PROTECT(R_ParseVector(cmdSexp, -1, &status, R_NilValue));
 	    if(status == PARSE_OK) {
 		for(i = 0; i < length(cmdexpr); i++)
-		    eval(VECTOR_ELT(cmdexpr, i), R_GlobalEnv);
+		    eval(XVECTOR_ELT(cmdexpr, i), R_GlobalEnv);
 	    }
 	    UNPROTECT(2);
 	    if(findVarInFrame(R_NamespaceRegistry, install("utils"))
@@ -972,7 +972,7 @@ static void performCompletion(control c)
     }
     /* Loop is needed here as EXPSEXP will be of length > 1 */
     for(i = 0; i < length(cmdexpr); i++)
-	ans = eval(VECTOR_ELT(cmdexpr, i), R_GlobalEnv);
+	ans = eval(XVECTOR_ELT(cmdexpr, i), R_GlobalEnv);
     UNPROTECT(2);
 
     /* ans has the form list(addition, possible), where 'addition' is

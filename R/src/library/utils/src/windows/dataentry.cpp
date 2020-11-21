@@ -805,7 +805,7 @@ static SEXP processEscapes(SEXP x)
        we'd probably want to loop over all of expr */
 
     if (status == PARSE_OK && length(expr))
-	PROTECT( newval = eval(VECTOR_ELT(expr, 0), R_BaseEnv) );
+	PROTECT( newval = eval(XVECTOR_ELT(expr, 0), R_BaseEnv) );
     else
 	PROTECT( newval = R_NilValue );  /* protect just so the count doesn't change */
     UNPROTECT(10);

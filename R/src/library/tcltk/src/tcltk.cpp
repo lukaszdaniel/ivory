@@ -72,7 +72,7 @@ static int R_eval(ClientData clientData,
 	R_Busy(1);
 	int n = length(expr);
 	for(i = 0 ; i < n ; i++)
-	    ans = eval(VECTOR_ELT(expr, i), R_GlobalEnv);
+	    ans = eval(XVECTOR_ELT(expr, i), R_GlobalEnv);
 	PROTECT(ans);
 	R_Busy(0);
     }

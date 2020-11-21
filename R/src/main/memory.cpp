@@ -60,6 +60,7 @@
 #include <CXXR/ComplexVector.hpp>
 #include <CXXR/RawVector.hpp>
 #include <CXXR/StringVector.hpp>
+#include <CXXR/ExpressionVector.hpp>
 #include <CXXR/WeakRef.hpp>
 #include <CXXR/ExternalPointer.hpp>
 #include <CXXR/SEXP_downcast.hpp>

@@ -52,7 +52,7 @@ namespace CXXR
      * @tparam T This should be a pointer or const pointer to GCNode or
      *          (more usually) a type derived from GCNode.
      */
-	template <class T = RObject *>
+	template <class T = RObject>
 	class GCEdge
 	{
 	public:
@@ -75,7 +75,7 @@ namespace CXXR
 		 * recommended to create the GCEdge will a null 'to' pointer,
 		 * and then to redirect it to the desired target.
 		 */
-		GCEdge(GCNode * /*from*/, T to = nullptr)
+		GCEdge(GCNode * /*from*/, T *to = nullptr)
 			: m_target(to)
 		{
 		}
@@ -83,7 +83,7 @@ namespace CXXR
 		/**
 		 * @return the pointer which this GCEdge object encapsulates.
 		 */
-		operator T const() const { return m_target; }
+		operator T * const() const { return m_target; }
 
 		/** Redirect the GCEdge to point at a (possibly) different node.
 		 *
@@ -100,7 +100,7 @@ namespace CXXR
 		 * object.
 		 */
 
-		void redirect(GCNode *from, T to)
+		void redirect(GCNode *from, T *to)
 		{
 			m_target = to;
 
@@ -114,7 +114,7 @@ namespace CXXR
 		}
 
 	private:
-		T m_target;
+		T *m_target;
 
 		// Not implemented:
 		GCEdge(const GCEdge &);

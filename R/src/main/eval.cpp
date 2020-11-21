@@ -3648,7 +3648,7 @@ HIDDEN SEXP do_eval(SEXP call, SEXP op, SEXP args, SEXP rho)
 				for (int i = 0; i < n; i++)
 				{
 					R_Srcref = getSrcref(srcrefs, i);
-					tmp = eval(VECTOR_ELT(expr, i), env);
+					tmp = eval(XVECTOR_ELT(expr, i), env);
 				}
 			}
 			else
@@ -3679,7 +3679,7 @@ HIDDEN SEXP do_eval(SEXP call, SEXP op, SEXP args, SEXP rho)
 		for (int i = 0; i < n; i++)
 		{
 			R_Srcref = getSrcref(srcrefs, i);
-			tmp = eval(VECTOR_ELT(expr, i), env);
+			tmp = eval(XVECTOR_ELT(expr, i), env);
 		}
 	}
 	else
@@ -9090,7 +9090,7 @@ SEXP R_ParseEvalString(const char *str, SEXP env)
 	LENGTH(ps) != 1)
 	error(_("parse error"));
 
-    SEXP val = eval(VECTOR_ELT(ps, 0), env);
+    SEXP val = eval(XVECTOR_ELT(ps, 0), env);
     UNPROTECT(2); /* s, ps */
     return val;
 }
