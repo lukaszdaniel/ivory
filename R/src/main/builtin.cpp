@@ -775,9 +775,9 @@ HIDDEN SEXP do_expression(SEXP call, SEXP op, SEXP args, SEXP rho)
     a = args;
     for (i = 0; i < n; i++) {
 	if(MAYBE_REFERENCED(CAR(a)))
-	    SET_VECTOR_ELT(ans, i, duplicate(CAR(a)));
+	    SET_XVECTOR_ELT(ans, i, duplicate(CAR(a)));
 	else
-	    SET_VECTOR_ELT(ans, i, CAR(a));
+	    SET_XVECTOR_ELT(ans, i, CAR(a));
 	if (TAG(a) != R_NilValue) named = 1;
 	a = CDR(a);
     }

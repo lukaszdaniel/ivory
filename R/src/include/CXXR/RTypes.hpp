@@ -49,6 +49,9 @@ using SEXP = CXXR::RObject *;
 typedef struct RObject *SEXP;
 #endif
 
+#define CXXR_TRUE 1
+#define CXXR_FALSE 0
+
 #ifdef HAVE_CONFIG_H
 #include <config.h>
 #endif

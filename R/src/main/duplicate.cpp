@@ -362,10 +362,19 @@ static SEXP duplicate1(SEXP s, Rboolean deep)
 	return s;
 	break;
     case EXPRSXP:
+	n = XLENGTH(s);
+	PROTECT(s);
+	PROTECT(t = Rf_allocVector(EXPRSXP, n));
+	for(i = 0 ; i < n ; i++)
+	    SET_XVECTOR_ELT(t, i, duplicate_child(XVECTOR_ELT(s, i), deep));
+	DUPLICATE_ATTRIB(t, s, deep);
+	COPY_TRUELENGTH(t, s);
+	UNPROTECT(2);
+	break;
     case VECSXP:
 	n = XLENGTH(s);
 	PROTECT(s);
-	PROTECT(t = allocVector(TYPEOF(s), n));
+	PROTECT(t = Rf_allocVector(VECSXP, n));
 	for(i = 0 ; i < n ; i++)
 	    SET_VECTOR_ELT(t, i, duplicate_child(VECTOR_ELT(s, i), deep));
 	DUPLICATE_ATTRIB(t, s, deep);
@@ -426,6 +435,8 @@ void Rf_copyVector(SEXP s, SEXP t)
 	xcopyWithRecycle(COMPLEX(s), COMPLEX(t), 0, ns, nt);
 	break;
     case EXPRSXP:
+	xcopyVectorWithRecycle(s, t, 0, ns, nt);
+	break;
     case VECSXP:
 	xcopyVectorWithRecycle(s, t, 0, ns, nt);
 	break;
@@ -500,6 +511,9 @@ void Rf_copyMatrix(SEXP s, SEXP t, Rboolean byrow)
 		COMPLEX(s)[didx] = COMPLEX(t)[sidx];
 	    break;
 	case EXPRSXP:
+	    FILL_MATRIX_BYROW_ITERATE(0, nr, nc, nt)
+		SET_XVECTOR_ELT(s, didx, VECTOR_ELT_LD(t, sidx));
+	    break;
 	case VECSXP:
 	    FILL_MATRIX_BYROW_ITERATE(0, nr, nc, nt)
 		SET_VECTOR_ELT(s, didx, VECTOR_ELT_LD(t, sidx));

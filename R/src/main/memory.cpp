@@ -2152,8 +2152,21 @@ SEXP (VECTOR_ELT)(SEXP x, R_xlen_t i) {
        TYPEOF(x) != WEAKREFSXP)
 	error(_("'%s' function can only be applied to a list, not a '%s'"), "VECTOR_ELT()",
 	      type2char(TYPEOF(x)));
+    if (TYPEOF(x) == EXPRSXP)
+    {
+        return (XVECTOR_ELT)(x, i);
+    }
     return CHK(VECTOR_ELT(CHK(x), i));
 }
+
+SEXP (XVECTOR_ELT)(SEXP x, R_xlen_t i) {
+    /* We need to allow vector-like types here */
+    if(TYPEOF(x) != EXPRSXP)
+	error(_("'%s' function can only be applied to a list, not a '%s'"), "XVECTOR_ELT()",
+	      type2char(TYPEOF(x)));
+    return CHK(XVECTOR_ELT(CHK(x), i));
+}
+
 namespace
 {
 #ifdef CATCH_ZERO_LENGTH_ACCESS
@@ -2318,11 +2331,27 @@ SEXP (SET_VECTOR_ELT)(SEXP x, R_xlen_t i, SEXP v) {
 	error(_("'%s' function can only be applied to a list, not a '%s'"), "SET_VECTOR_ELT()",
 	      type2char(TYPEOF(x)));
     }
+    if (TYPEOF(x) == EXPRSXP)
+    {
+        return (SET_XVECTOR_ELT)(x, i, v);
+    }
     if (i < 0 || i >= XLENGTH(x))
 	error(_("attempt to set index %ld/%ld in 'SET_VECTOR_ELT()' function"), (long long)i, (long long)XLENGTH(x));
     FIX_REFCNT(x, VECTOR_ELT(x, i), v);
     CHECK_OLD_TO_NEW(x, v);
     return VECTOR_ELT(x, i) = v;
+}
+
+SEXP (SET_XVECTOR_ELT)(SEXP x, R_xlen_t i, SEXP v) {
+    if(TYPEOF(x) != EXPRSXP) {
+	error(_("'%s' function can only be applied to a list, not a '%s'"), "SET_XVECTOR_ELT()",
+	      type2char(TYPEOF(x)));
+    }
+    if (i < 0 || i >= XLENGTH(x))
+	error(_("attempt to set index %ld/%ld in 'SET_XVECTOR_ELT()' function"), (long long)i, (long long)XLENGTH(x));
+    FIX_REFCNT(x, XVECTOR_ELT(x, i), v);
+    CHECK_OLD_TO_NEW(x, v);
+    return XVECTOR_ELT(x, i) = v;
 }
 
 /* check for a CONS-like object */

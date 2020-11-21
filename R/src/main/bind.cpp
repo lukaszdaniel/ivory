@@ -42,12 +42,6 @@ static R_StringBuffer cbuff = R_StringBuffer();
 
 #include "duplicate.h"
 
-#define LIST_ASSIGN(x)                                    \
-	{                                                     \
-		SET_VECTOR_ELT(data.ans_ptr, data.ans_length, x); \
-		data.ans_length++;                                \
-	}
-
 static SEXP cbind(SEXP, SEXP, SEXPTYPE, SEXP, int);
 static SEXP rbind(SEXP, SEXP, SEXPTYPE, SEXP, int);
 
@@ -124,7 +118,6 @@ static void AnswerType(SEXP x, bool recurse, bool usenames, struct BindData &dat
 	break;
 #endif
     case VECSXP:
-    case EXPRSXP:
 	if (recurse) {
 	    R_xlen_t i, n = XLENGTH(x);
 	    if (usenames && !data.ans_nnames &&
@@ -134,6 +127,26 @@ static void AnswerType(SEXP x, bool recurse, bool usenames, struct BindData &dat
 		if (usenames && !data.ans_nnames)
 		    data.ans_nnames = HasNames(VECTOR_ELT(x, i));
 		AnswerType(VECTOR_ELT(x, i), recurse, usenames, data, call);
+	    }
+	}
+	else {
+	    if (TYPEOF(x) == EXPRSXP)
+		data.ans_flags |= 512;
+	    else
+		data.ans_flags |= 256;
+	    data.ans_length += XLENGTH(x);
+	}
+	break;
+    case EXPRSXP:
+	if (recurse) {
+	    R_xlen_t i, n = XLENGTH(x);
+	    if (usenames && !data.ans_nnames &&
+		!isNull(getAttrib(x, R_NamesSymbol)))
+		data.ans_nnames = 1;
+	    for (i = 0; i < n; i++) {
+		if (usenames && !data.ans_nnames)
+		    data.ans_nnames = HasNames(XVECTOR_ELT(x, i));
+		AnswerType(XVECTOR_ELT(x, i), recurse, usenames, data, call);
 	    }
 	}
 	else {
@@ -184,6 +197,18 @@ static void AnswerType(SEXP x, bool recurse, bool usenames, struct BindData &dat
 /* The following functions are used to coerce arguments to the
  * appropriate type for inclusion in the returned value. */
 
+namespace
+{
+	inline void LIST_ASSIGN(struct BindData &data, SEXP x)
+	{
+		// if (ExpressionVector *ev = dynamic_cast<ExpressionVector *>(data.ans_ptr))
+		// 	(*ev)[data.ans_length] = x;
+		// else
+		SET_VECTOR_ELT(data.ans_ptr, data.ans_length, x);
+		data.ans_length++;
+	}
+} // namespace
+
 static void ListAnswer(SEXP x, int recurse, struct BindData &data, SEXP call)
 {
     R_xlen_t i;
@@ -193,37 +218,46 @@ static void ListAnswer(SEXP x, int recurse, struct BindData &data, SEXP call)
 	break;
     case LGLSXP:
 	for (i = 0; i < XLENGTH(x); i++)
-	    LIST_ASSIGN(ScalarLogical(LOGICAL(x)[i]));
+	    LIST_ASSIGN(data, ScalarLogical(LOGICAL(x)[i]));
 	break;
     case RAWSXP:
 	for (i = 0; i < XLENGTH(x); i++)
-	    LIST_ASSIGN(ScalarRaw(RAW(x)[i]));
+	    LIST_ASSIGN(data, ScalarRaw(RAW(x)[i]));
 	break;
     case INTSXP:
 	for (i = 0; i < XLENGTH(x); i++)
-	    LIST_ASSIGN(ScalarInteger(INTEGER(x)[i]));
+	    LIST_ASSIGN(data, ScalarInteger(INTEGER(x)[i]));
 	break;
     case REALSXP:
 	for (i = 0; i < XLENGTH(x); i++)
-	    LIST_ASSIGN(ScalarReal(REAL(x)[i]));
+	    LIST_ASSIGN(data, ScalarReal(REAL(x)[i]));
 	break;
     case CPLXSXP:
 	for (i = 0; i < XLENGTH(x); i++)
-	    LIST_ASSIGN(ScalarComplex(COMPLEX(x)[i]));
+	    LIST_ASSIGN(data, ScalarComplex(COMPLEX(x)[i]));
 	break;
     case STRSXP:
 	for (i = 0; i < XLENGTH(x); i++)
-	    LIST_ASSIGN(ScalarString(STRING_ELT(x, i)));
+	    LIST_ASSIGN(data, ScalarString(STRING_ELT(x, i)));
 	break;
     case VECSXP:
-    case EXPRSXP:
 	if (recurse) {
 	    for (i = 0; i < XLENGTH(x); i++)
 		ListAnswer(VECTOR_ELT(x, i), recurse, data, call);
 	}
 	else {
 	    for (i = 0; i < XLENGTH(x); i++)
-		LIST_ASSIGN(lazy_duplicate(VECTOR_ELT(x, i)));
+		LIST_ASSIGN(data, lazy_duplicate(VECTOR_ELT(x, i)));
+	}
+	break;
+    case EXPRSXP:
+	if (recurse) {
+	    for (i = 0; i < XLENGTH(x); i++)
+		ListAnswer(XVECTOR_ELT(x, i), recurse, data, call);
+	}
+	else {
+	    for (i = 0; i < XLENGTH(x); i++)
+		LIST_ASSIGN(data, lazy_duplicate(XVECTOR_ELT(x, i)));
 	}
 	break;
     case LISTSXP:
@@ -235,12 +269,12 @@ static void ListAnswer(SEXP x, int recurse, struct BindData &data, SEXP call)
 	}
 	else
 	    while (x != R_NilValue) {
-		LIST_ASSIGN(lazy_duplicate(CAR(x)));
+		LIST_ASSIGN(data, lazy_duplicate(CAR(x)));
 		x = CDR(x);
 	    }
 	break;
     default:
-	LIST_ASSIGN(lazy_duplicate(x));
+	LIST_ASSIGN(data, lazy_duplicate(x));
 	break;
     }
 }
@@ -258,6 +292,9 @@ static void StringAnswer(SEXP x, struct BindData &data, SEXP call)
 	}
 	break;
     case EXPRSXP:
+	for (i = 0; i < XLENGTH(x); i++)
+	    StringAnswer(XVECTOR_ELT(x, i), data, call);
+	break;
     case VECSXP:
 	for (i = 0; i < XLENGTH(x); i++)
 	    StringAnswer(VECTOR_ELT(x, i), data, call);
@@ -284,6 +321,9 @@ static void LogicalAnswer(SEXP x, struct BindData &data, SEXP call)
 	}
 	break;
     case EXPRSXP:
+	for (i = 0; i < XLENGTH(x); i++)
+	    LogicalAnswer(XVECTOR_ELT(x, i), data, call);
+	break;
     case VECSXP:
 	for (i = 0; i < XLENGTH(x); i++)
 	    LogicalAnswer(VECTOR_ELT(x, i), data, call);
@@ -321,6 +361,9 @@ static void IntegerAnswer(SEXP x, struct BindData &data, SEXP call)
 	}
 	break;
     case EXPRSXP:
+	for (i = 0; i < XLENGTH(x); i++)
+	    IntegerAnswer(XVECTOR_ELT(x, i), data, call);
+	break;
     case VECSXP:
 	for (i = 0; i < XLENGTH(x); i++)
 	    IntegerAnswer(VECTOR_ELT(x, i), data, call);
@@ -357,9 +400,12 @@ static void RealAnswer(SEXP x, struct BindData &data, SEXP call)
 	}
 	break;
     case VECSXP:
-    case EXPRSXP:
 	for (i = 0; i < XLENGTH(x); i++)
 	    RealAnswer(VECTOR_ELT(x, i), data, call);
+	break;
+    case EXPRSXP:
+	for (i = 0; i < XLENGTH(x); i++)
+	    RealAnswer(XVECTOR_ELT(x, i), data, call);
 	break;
     case REALSXP:
 	for (i = 0; i < XLENGTH(x); i++)
@@ -405,6 +451,9 @@ static void ComplexAnswer(SEXP x, struct BindData &data, SEXP call)
 	}
 	break;
     case EXPRSXP:
+	for (i = 0; i < XLENGTH(x); i++)
+	    ComplexAnswer(XVECTOR_ELT(x, i), data, call);
+	break;
     case VECSXP:
 	for (i = 0; i < XLENGTH(x); i++)
 	    ComplexAnswer(VECTOR_ELT(x, i), data, call);
@@ -476,6 +525,9 @@ static void RawAnswer(SEXP x, struct BindData &data, SEXP call)
 	}
 	break;
     case EXPRSXP:
+	for (i = 0; i < XLENGTH(x); i++)
+	    RawAnswer(XVECTOR_ELT(x, i), data, call);
+	break;
     case VECSXP:
 	for (i = 0; i < XLENGTH(x); i++)
 	    RawAnswer(VECTOR_ELT(x, i), data, call);
@@ -617,12 +669,20 @@ static void namesCount(SEXP v, int recurse, struct NameData &nameData)
 	    break;
 	} /* else fall through */
     case VECSXP:
-    case EXPRSXP:
 	if (recurse) {
 	    for (i = 0; i < n && nameData.count <= 1; i++) {
 		namei = ItemName(names, i);
 		if (namei == R_NilValue)
 		    namesCount(VECTOR_ELT(v, i), recurse, nameData);
+	    }
+	    break;
+	} /* else fall through */
+    case EXPRSXP:
+	if (recurse) {
+	    for (i = 0; i < n && nameData.count <= 1; i++) {
+		namei = ItemName(names, i);
+		if (namei == R_NilValue)
+		    namesCount(XVECTOR_ELT(v, i), recurse, nameData);
 	    }
 	    break;
 	} /* else fall through */
@@ -682,11 +742,22 @@ static void NewExtractNames(SEXP v, SEXP base, SEXP tag, int recurse,
 	}
 	break;
     case VECSXP:
-    case EXPRSXP:
 	for (i = 0; i < n; i++) {
 	    namei = ItemName(names, i);
 	    if (recurse) {
 		NewExtractNames(VECTOR_ELT(v, i), base, namei, recurse, data, nameData);
+	    }
+	    else {
+		namei = NewName(base, namei, ++(nameData.seqno), nameData.count);
+		SET_STRING_ELT(data.ans_names, (data.ans_nnames)++, namei);
+	    }
+	}
+	break;
+    case EXPRSXP:
+	for (i = 0; i < n; i++) {
+	    namei = ItemName(names, i);
+	    if (recurse) {
+		NewExtractNames(XVECTOR_ELT(v, i), base, namei, recurse, data, nameData);
 	    }
 	    else {
 		namei = NewName(base, namei, ++(nameData.seqno), nameData.count);

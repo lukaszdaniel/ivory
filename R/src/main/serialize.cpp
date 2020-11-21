@@ -1181,6 +1181,11 @@ static void WriteItem(SEXP s, SEXP ref_table, R_outpstream_t stream)
 		WriteItem(STRING_ELT(s, ix), ref_table, stream);
 	    break;
 	case VECSXP:
+	    len = XLENGTH(s);
+	    WriteLENGTH(stream, s);
+	    for (R_xlen_t ix = 0; ix < len; ix++)
+		WriteItem(XVECTOR_ELT(s, ix), ref_table, stream);
+	    break;
 	case EXPRSXP:
 	    len = XLENGTH(s);
 	    WriteLENGTH(stream, s);
@@ -1956,7 +1961,6 @@ static SEXP ReadItem(SEXP ref_table, R_inpstream_t stream)
 	    R_ReadItemDepth--;
 	    break;
 	case VECSXP:
-	case EXPRSXP:
 	    len = ReadLENGTH(stream);
 	    PROTECT(s = allocVector(type, len));
 	    R_ReadItemDepth++;
@@ -1964,6 +1968,17 @@ static SEXP ReadItem(SEXP ref_table, R_inpstream_t stream)
 		if (R_ReadItemDepth <= 0)
 		    Rprintf("%*s[%d]\n", 2*(R_ReadItemDepth - R_InitReadItemDepth), "", count+1);
 		SET_VECTOR_ELT(s, count, ReadItem(ref_table, stream));
+	    }
+	    R_ReadItemDepth--;
+	    break;
+	case EXPRSXP:
+	    len = ReadLENGTH(stream);
+	    PROTECT(s = allocVector(type, len));
+	    R_ReadItemDepth++;
+	    for (count = 0; count < len; ++count) {
+		if (R_ReadItemDepth <= 0)
+		    Rprintf("%*s[%d]\n", 2*(R_ReadItemDepth - R_InitReadItemDepth), "", count+1);
+		SET_XVECTOR_ELT(s, count, ReadItem(ref_table, stream));
 	    }
 	    R_ReadItemDepth--;
 	    break;

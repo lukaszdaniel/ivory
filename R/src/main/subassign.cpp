@@ -233,6 +233,13 @@ static SEXP EnlargeVector(SEXP x, R_xlen_t newlen)
 	    SET_STRING_ELT(newx, i, NA_STRING); /* was R_BlankString  < 1.6.0 */
 	break;
     case EXPRSXP:
+	for (R_xlen_t i = 0; i < len; i++) {
+	    SET_XVECTOR_ELT(newx, i, XVECTOR_ELT(x, i));
+	    CLEAR_VECTOR_ELT(x, i);
+	}
+	for (R_xlen_t i = len; i < newtruelen; i++)
+	    SET_XVECTOR_ELT(newx, i, R_NilValue);
+	break;
     case VECSXP:
 	for (R_xlen_t i = 0; i < len; i++) {
 	    SET_VECTOR_ELT(newx, i, VECTOR_ELT(x, i));
@@ -843,9 +850,13 @@ static SEXP VectorAssign(SEXP call, SEXP rho, SEXP x, SEXP s, SEXP y)
     /* case 2016:  expression <- character  */
     case 2019:	/* expression <- vector, needed if we have promoted a
 		   RHS  to a list */
-    case 2020:	/* expression <- expression */
 
 	VECTOR_ASSIGN_LOOP(SET_VECTOR_ELT(x, ii, VECTOR_ELT(y, iny)););
+	break;
+
+    case 2020:	/* expression <- expression */
+
+	VECTOR_ASSIGN_LOOP(SET_XVECTOR_ELT(x, ii, XVECTOR_ELT(y, iny)););
 	break;
 
     case 1900:  /* vector     <- null       */
@@ -2020,11 +2031,17 @@ do_subassign2_dflt(SEXP call, SEXP op, SEXP args, SEXP rho)
 	case 2024:	/* expression     <- raw */
 	case 2025:	/* expression     <- S4 */
 	case 1919:      /* vector     <- vector     */
-	case 2020:	/* expression <- expression */
 
 	    if (MAYBE_REFERENCED(y) && VECTOR_ELT(x, offset) != y)
 		y = R_FixupRHS(x, y);
 	    SET_VECTOR_ELT(x, offset, y);
+	    break;
+
+	case 2020:	/* expression <- expression */
+
+	    if (MAYBE_REFERENCED(y) && XVECTOR_ELT(x, offset) != y)
+		y = R_FixupRHS(x, y);
+	    SET_XVECTOR_ELT(x, offset, y);
 	    break;
 
 	case 2424:      /* raw <- raw */

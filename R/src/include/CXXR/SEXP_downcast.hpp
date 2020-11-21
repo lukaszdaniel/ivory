@@ -25,6 +25,7 @@
 /** @file SEXP_downcast.hpp
  * @brief The templated function CXXR::SEXP_downcast().
  */
+
 #ifndef SEXP_DOWNCAST_HPP
 #define SEXP_DOWNCAST_HPP
 

@@ -229,13 +229,21 @@ static SEXP rep2(SEXP s, SEXP ncopy)
 		}                                                         \
 		break;                                                    \
 	case VECSXP:                                                  \
-	case EXPRSXP:                                                 \
 		for (i = 0; i < nc; i++)                                  \
 		{                                                         \
 			/*	    if ((i+1) % ni == 0) R_CheckUserInterrupt();*/ \
 			SEXP elt = lazy_duplicate(VECTOR_ELT(s, i));          \
 			for (j = (R_xlen_t)it[i]; j > 0; j--)                 \
 				SET_VECTOR_ELT(a, n++, elt);                      \
+		}                                                         \
+		break;                                                    \
+	case EXPRSXP:                                                 \
+		for (i = 0; i < nc; i++)                                  \
+		{                                                         \
+			/*	    if ((i+1) % ni == 0) R_CheckUserInterrupt();*/ \
+			SEXP elt = lazy_duplicate(XVECTOR_ELT(s, i));         \
+			for (j = (R_xlen_t)it[i]; j > 0; j--)                 \
+				SET_XVECTOR_ELT(a, n++, elt);                     \
 		}                                                         \
 		break;                                                    \
 	case RAWSXP:                                                  \
@@ -343,10 +351,15 @@ static SEXP rep3(SEXP s, R_xlen_t ns, R_xlen_t na)
 	});
 	break;
     case VECSXP:
-    case EXPRSXP:
 	MOD_ITERATE1(na, ns, i, j, {
 //	    if ((i+1) % NINTERRUPT == 0) R_CheckUserInterrupt();
 	    SET_VECTOR_ELT(a, i, lazy_duplicate(VECTOR_ELT(s, j)));
+	});
+	break;
+    case EXPRSXP:
+	MOD_ITERATE1(na, ns, i, j, {
+//	    if ((i+1) % NINTERRUPT == 0) R_CheckUserInterrupt();
+	    SET_XVECTOR_ELT(a, i, lazy_duplicate(XVECTOR_ELT(s, j)));
 	});
 	break;
     default:
@@ -586,7 +599,6 @@ static SEXP rep4(SEXP x, SEXP times, R_xlen_t len, R_xlen_t each, R_xlen_t nt)
 		}                                                              \
 		break;                                                         \
 	case VECSXP:                                                       \
-	case EXPRSXP:                                                      \
 		for (i = 0, k = 0, k2 = 0; i < lx; i++)                        \
 		{                                                              \
 			/*		if ((i+1) % NINTERRUPT == 0) R_CheckUserInterrupt();*/ \
@@ -596,6 +608,21 @@ static SEXP rep4(SEXP x, SEXP times, R_xlen_t len, R_xlen_t each, R_xlen_t nt)
 			for (k3 = 0; k3 < sum; k3++)                               \
 			{                                                          \
 				SET_VECTOR_ELT(a, k2++, elt);                          \
+				if (k2 == len)                                         \
+					goto done;                                         \
+			}                                                          \
+		}                                                              \
+		break;                                                         \
+	case EXPRSXP:                                                      \
+		for (i = 0, k = 0, k2 = 0; i < lx; i++)                        \
+		{                                                              \
+			/*		if ((i+1) % NINTERRUPT == 0) R_CheckUserInterrupt();*/ \
+			for (j = 0, sum = 0; j < each; j++)                        \
+				sum += (R_xlen_t)itimes[k++];                          \
+			SEXP elt = lazy_duplicate(XVECTOR_ELT(x, i));              \
+			for (k3 = 0; k3 < sum; k3++)                               \
+			{                                                          \
+				SET_XVECTOR_ELT(a, k2++, elt);                         \
 				if (k2 == len)                                         \
 					goto done;                                         \
 			}                                                          \
@@ -653,11 +680,17 @@ static SEXP rep4(SEXP x, SEXP times, R_xlen_t len, R_xlen_t each, R_xlen_t nt)
 	    }
 	    break;
 	case VECSXP:
-	case EXPRSXP:
 	    for(i = 0; i < len; i++) {
 //		if ((i+1) % NINTERRUPT == 0) R_CheckUserInterrupt();
 		SEXP elt = lazy_duplicate(VECTOR_ELT(x, (i/each) % lx));
 		SET_VECTOR_ELT(a, i, elt);
+	    }
+	    break;
+	case EXPRSXP:
+	    for(i = 0; i < len; i++) {
+//		if ((i+1) % NINTERRUPT == 0) R_CheckUserInterrupt();
+		SEXP elt = lazy_duplicate(XVECTOR_ELT(x, (i/each) % lx));
+		SET_XVECTOR_ELT(a, i, elt);
 	    }
 	    break;
 	case RAWSXP:

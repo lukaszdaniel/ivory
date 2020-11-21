@@ -2419,6 +2419,13 @@ HIDDEN SEXP do_for(SEXP call, SEXP op, SEXP args, SEXP rho)
 			{
 
 			case EXPRSXP:
+				/* make sure loop variable is not modified via other vars */
+				ENSURE_NAMEDMAX(XVECTOR_ELT(val, i));
+				/* defineVar is used here and below rather than setVar in
+	       case the loop code removes the variable. */
+				defineVar(sym, XVECTOR_ELT(val, i), rho);
+				break;
+
 			case VECSXP:
 				/* make sure loop variable is not modified via other vars */
 				ENSURE_NAMEDMAX(VECTOR_ELT(val, i));
@@ -2498,6 +2505,13 @@ HIDDEN SEXP do_for(SEXP call, SEXP op, SEXP args, SEXP rho)
 	switch (val_type) {
 
 	case EXPRSXP:
+	    /* make sure loop variable is not modified via other vars */
+	    ENSURE_NAMEDMAX(XVECTOR_ELT(val, i));
+	    /* defineVar is used here and below rather than setVar in
+	       case the loop code removes the variable. */
+	    defineVar(sym, XVECTOR_ELT(val, i), rho);
+	    break;
+
 	case VECSXP:
 	    /* make sure loop variable is not modified via other vars */
 	    ENSURE_NAMEDMAX(VECTOR_ELT(val, i));
@@ -7508,6 +7522,9 @@ static SEXP bcEval(SEXP body, SEXP rho, bool useCache)
 	    SET_SCALAR_BVAL(value, RAW(seq)[i]);
 	    break;
 	  case EXPRSXP:
+	    value = XVECTOR_ELT(seq, i);
+	    ENSURE_NAMEDMAX(value);
+	    break;
 	  case VECSXP:
 	    value = VECTOR_ELT(seq, i);
 	    ENSURE_NAMEDMAX(value);

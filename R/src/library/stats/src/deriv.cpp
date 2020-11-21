@@ -777,7 +777,7 @@ SEXP doD(SEXP args)
 {
     SEXP expr, var;
     args = CDR(args);
-    if (isExpression(CAR(args))) expr = VECTOR_ELT(CAR(args), 0);
+    if (isExpression(CAR(args))) expr = XVECTOR_ELT(CAR(args), 0);
     else expr = CAR(args);
     if (!(isLanguage(expr) || isSymbol(expr) || isNumeric(expr) || isComplex(expr)))
         error(_("'%s' argument must not be of type '%s'"), "expr", type2char(TYPEOF(expr)));
@@ -1070,7 +1070,7 @@ SEXP deriv(SEXP args)
     PROTECT(exprlist = LCONS(R_BraceSymbol, R_NilValue));
     /* expr: */
     if (isExpression(CAR(args)))
-	PROTECT(expr = VECTOR_ELT(CAR(args), 0));
+	PROTECT(expr = XVECTOR_ELT(CAR(args), 0));
     else PROTECT(expr = CAR(args));
     args = CDR(args);
     /* namevec: */
@@ -1253,7 +1253,7 @@ SEXP deriv(SEXP args)
     }
     else {
 	funarg = allocVector(EXPRSXP, 1);
-	SET_VECTOR_ELT(funarg, 0, exprlist);
+	SET_XVECTOR_ELT(funarg, 0, exprlist);
 	/* funarg = lang2(install("expression"), exprlist); */
     }
     UNPROTECT(2);

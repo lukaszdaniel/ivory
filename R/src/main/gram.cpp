@@ -3818,7 +3818,7 @@ finish:
     t = CDR(t);
     PROTECT(rval = allocVector(EXPRSXP, length(t)));
     for (n = 0 ; n < LENGTH(rval) ; n++, t = CDR(t))
-	SET_VECTOR_ELT(rval, n, CAR(t));
+	SET_XVECTOR_ELT(rval, n, CAR(t));
     if (ParseState.keepSrcRefs) {
 	if (ParseState.keepParseData)
 	    finalizeData();
@@ -3974,7 +3974,7 @@ finish:
     t = CDR(t);
     PROTECT(rval = allocVector(EXPRSXP, length(t)));
     for (n = 0 ; n < LENGTH(rval) ; n++, t = CDR(t))
-	SET_VECTOR_ELT(rval, n, CAR(t));
+	SET_XVECTOR_ELT(rval, n, CAR(t));
     if (ParseState.keepSrcRefs) {
 	if (ParseState.keepParseData)
 	    finalizeData();

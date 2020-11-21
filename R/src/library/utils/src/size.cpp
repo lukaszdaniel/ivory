@@ -118,8 +118,15 @@ static R_size_t objectsize(SEXP s)
     case ANYSXP:
 	/* we don't know about these */
 	break;
-    case VECSXP:
     case EXPRSXP:
+	/* Generic Vector Objects */
+	R_CheckStack();
+	vcnt = convert2VEC<RObject>(xlength(s));
+	for (R_xlen_t i = 0; i < xlength(s); i++)
+	    cnt += objectsize(XVECTOR_ELT(s, i));
+	isVec = TRUE;
+	break;
+    case VECSXP:
     case WEAKREFSXP:
 	/* Generic Vector Objects */
 	R_CheckStack();

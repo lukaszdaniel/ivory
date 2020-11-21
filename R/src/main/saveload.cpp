@@ -662,10 +662,14 @@ static void RestoreSEXP(SEXP s, FILE *fp, InputRoutines &m, NodeInfo &node, int 
 	    SET_STRING_ELT(s, j, OffsetToNode(m.InInteger(fp, d), node));
 	break;
     case VECSXP:
-    case EXPRSXP:
 	len = m.InInteger(fp, d);
 	for (auto j = 0; j < len; j++)
 	    SET_VECTOR_ELT(s, j, OffsetToNode(m.InInteger(fp, d), node));
+	break;
+    case EXPRSXP:
+	len = m.InInteger(fp, d);
+	for (auto j = 0; j < len; j++)
+	    SET_XVECTOR_ELT(s, j, OffsetToNode(m.InInteger(fp, d), node));
 	break;
     default: error(_("bad 'SEXP' type in data file"));
     }
@@ -956,10 +960,14 @@ static void NewMakeLists(SEXP obj, SEXP sym_list, SEXP env_list)
 	NewMakeLists(EXTPTR_TAG(obj), sym_list, env_list);
 	break;
     case VECSXP:
-    case EXPRSXP:
 	length = LENGTH(obj);
 	for (count = 0; count < length; ++count)
 	    NewMakeLists(VECTOR_ELT(obj, count), sym_list, env_list);
+	break;
+    case EXPRSXP:
+	length = LENGTH(obj);
+	for (count = 0; count < length; ++count)
+	    NewMakeLists(XVECTOR_ELT(obj, count), sym_list, env_list);
 	break;
     case WEAKREFSXP:
 	error(_("cannot save weak references in version 1 workspaces"));
@@ -1231,9 +1239,12 @@ static SEXP NewReadVec(SEXPTYPE type, SEXP sym_table, SEXP env_table, FILE *fp, 
 	} while (0);
 	break;
     case VECSXP:
-    case EXPRSXP:
 	for (count = 0; count < length_; ++count)
 	    SET_VECTOR_ELT(my_vec, count, NewReadItem(sym_table, env_table, fp, m, d));
+	break;
+    case EXPRSXP:
+	for (count = 0; count < length_; ++count)
+	    SET_XVECTOR_ELT(my_vec, count, NewReadItem(sym_table, env_table, fp, m, d));
 	break;
     default:
 	error(_("NewReadVec called with non-vector type"));

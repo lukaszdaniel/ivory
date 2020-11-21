@@ -816,27 +816,27 @@ static SEXP coerceToExpression(SEXP v)
 	switch (TYPEOF(v)) {
 	case LGLSXP:
 	    for (i = 0; i < n; i++)
-		SET_VECTOR_ELT(ans, i, ScalarLogical(LOGICAL_ELT(v, i)));
+		SET_XVECTOR_ELT(ans, i, ScalarLogical(LOGICAL_ELT(v, i)));
 	    break;
 	case INTSXP:
 	    for (i = 0; i < n; i++)
-		SET_VECTOR_ELT(ans, i, ScalarInteger(INTEGER_ELT(v, i)));
+		SET_XVECTOR_ELT(ans, i, ScalarInteger(INTEGER_ELT(v, i)));
 	    break;
 	case REALSXP:
 	    for (i = 0; i < n; i++)
-		SET_VECTOR_ELT(ans, i, ScalarReal(REAL_ELT(v, i)));
+		SET_XVECTOR_ELT(ans, i, ScalarReal(REAL_ELT(v, i)));
 	    break;
 	case CPLXSXP:
 	    for (i = 0; i < n; i++)
-		SET_VECTOR_ELT(ans, i, ScalarComplex(COMPLEX_ELT(v, i)));
+		SET_XVECTOR_ELT(ans, i, ScalarComplex(COMPLEX_ELT(v, i)));
 	    break;
 	case STRSXP:
 	    for (i = 0; i < n; i++)
-		SET_VECTOR_ELT(ans, i, ScalarString(STRING_ELT(v, i)));
+		SET_XVECTOR_ELT(ans, i, ScalarString(STRING_ELT(v, i)));
 	    break;
 	case RAWSXP:
 	    for (i = 0; i < n; i++)
-		SET_VECTOR_ELT(ans, i, ScalarRaw(RAW_ELT(v, i)));
+		SET_XVECTOR_ELT(ans, i, ScalarRaw(RAW_ELT(v, i)));
 	    break;
 	default:
 	    UNIMPLEMENTED_TYPE("coerceToExpression()", v);
@@ -844,7 +844,7 @@ static SEXP coerceToExpression(SEXP v)
     }
     else {/* not used either */
 	PROTECT(ans = allocVector(EXPRSXP, 1));
-	SET_VECTOR_ELT(ans, 0, duplicate(v));
+	SET_XVECTOR_ELT(ans, 0, duplicate(v));
     }
     UNPROTECT(1);
     return ans;
@@ -952,7 +952,7 @@ static SEXP coerceToPairList(SEXP v)
 	    SETCAR(ansp, VECTOR_ELT(v, i));
 	    break;
 	case EXPRSXP:
-	    SETCAR(ansp, VECTOR_ELT(v, i));
+	    SETCAR(ansp, XVECTOR_ELT(v, i));
 	    break;
 	default:
 	    UNIMPLEMENTED_TYPE("coerceToPairList()", v);
@@ -972,7 +972,7 @@ static SEXP coercePairList(SEXP v, SEXPTYPE type)
     SEXP rval= R_NilValue, vp;
     if (type == EXPRSXP) {
 	PROTECT(rval = allocVector(type, 1));
-	SET_VECTOR_ELT(rval, 0, v);
+	SET_XVECTOR_ELT(rval, 0, v);
 	UNPROTECT(1);
 	return rval;
     }
@@ -1054,19 +1054,37 @@ static SEXP coerceVectorList(SEXP v, SEXPTYPE type)
     rval = R_NilValue;	/* -Wall */
 
     /* expression -> list, new in R 2.4.0 */
+#if CXXR_FALSE
+	if (type == VECSXP && v->sexptype() == EXPRSXP) {
+	    ExpressionVector* ev = static_cast<ExpressionVector*>(v);
+	    GCStackRoot<ListVector>
+		lv(ListVector::create(ev->begin(), ev->end()));
+	    lv->copyAttribute(NamesSymbol, ev);
+	    return lv;
+	}
+#else
     if (type == VECSXP && TYPEOF(v) == EXPRSXP) {
 	/* This is sneaky but saves us rewriting a lot of the duplicate code */
 	rval = MAYBE_REFERENCED(v) ? duplicate(v) : v;
 	SET_TYPEOF(rval, VECSXP);
 	return rval;
     }
-
+#endif
+#if CXXR_FALSE
+    if (type == EXPRSXP && TYPEOF(v) == VECSXP) {
+	ListVector* lv = static_cast<ListVector*>(v);
+	GCStackRoot<ExpressionVector>
+	    ev(ExpressionVector::create(lv->begin(), lv->end()));
+	ev->copyAttribute(NamesSymbol, lv);
+	return ev;
+    }
+#else
     if (type == EXPRSXP && TYPEOF(v) == VECSXP) {
 	rval = MAYBE_REFERENCED(v) ? duplicate(v) : v;
 	SET_TYPEOF(rval, EXPRSXP);
 	return rval;
     }
-
+#endif
     if (type == STRSXP) {
 	n = xlength(v);
 	PROTECT(rval = allocVector(type, n));
@@ -1077,19 +1095,31 @@ static SEXP coerceVectorList(SEXP v, SEXPTYPE type)
 	}
 #endif
 	for (i = 0; i < n;  i++) {
+#if 0
 	    if (isString(VECTOR_ELT(v, i)) && xlength(VECTOR_ELT(v, i)) == 1)
 		SET_STRING_ELT(rval, i, STRING_ELT(VECTOR_ELT(v, i), 0));
+#else
+		SEXP elt;
+	    if (v->sexptype() == EXPRSXP) {
+		// ExpressionVector* ev = static_cast<ExpressionVector*>(v);
+		// elt = (*ev)[i];
+		elt = &(v)[i];
+	    }
+	    else elt = VECTOR_ELT(v, i);
+	    if (Rf_isString(elt) && xlength(elt) == 1)
+		SET_STRING_ELT(rval, i, STRING_ELT(elt, 0));
+#endif
 #if 0
 	    /* this will make as.character(list(s)) not backquote
 	     * non-syntactic name s. It is not entirely clear that
 	     * that is really desirable though....
 	     */
-	    else if (isSymbol(VECTOR_ELT(v, i)))
-		SET_STRING_ELT(rval, i, PRINTNAME(VECTOR_ELT(v, i)));
+	    else if (isSymbol(elt))
+		SET_STRING_ELT(rval, i, PRINTNAME(elt));
 #endif
 	    else
 		SET_STRING_ELT(rval, i,
-			       STRING_ELT(deparse1line_(VECTOR_ELT(v, i), false, NICE_NAMES),
+			       STRING_ELT(deparse1line_(elt, false, NICE_NAMES),
 					  0));
 	}
     }
@@ -1715,8 +1745,7 @@ HIDDEN SEXP do_ascall(SEXP call, SEXP op, SEXP args, SEXP rho)
     case LANGSXP:
 	ans = args;
 	break;
-    case VECSXP:
-    case EXPRSXP: {
+    case VECSXP: {
 	int n = length(args);
 	if(n == 0)
 	    errorcall(call, _("invalid argument of length 0"));
@@ -1724,6 +1753,21 @@ HIDDEN SEXP do_ascall(SEXP call, SEXP op, SEXP args, SEXP rho)
 	PROTECT(ap = ans = allocList(n));
 	for (int i = 0; i < n; i++) {
 	    SETCAR(ap, VECTOR_ELT(args, i));
+	    if (names != R_NilValue && !StringBlank(STRING_ELT(names, i)))
+		SET_TAG(ap, installTrChar(STRING_ELT(names, i)));
+	    ap = CDR(ap);
+	}
+	UNPROTECT(2); /* ap, names */
+	break;
+    }
+    case EXPRSXP: {
+	int n = length(args);
+	if(n == 0)
+	    errorcall(call, _("invalid argument of length 0"));
+	SEXP names = PROTECT(getAttrib(args, R_NamesSymbol)), ap;
+	PROTECT(ap = ans = allocList(n));
+	for (int i = 0; i < n; i++) {
+	    SETCAR(ap, XVECTOR_ELT(args, i));
 	    if (names != R_NilValue && !StringBlank(STRING_ELT(names, i)))
 		SET_TAG(ap, installTrChar(STRING_ELT(names, i)));
 	    ap = CDR(ap);

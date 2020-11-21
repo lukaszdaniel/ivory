@@ -370,12 +370,25 @@ static int islistfactor(SEXP X)
 	switch (TYPEOF(X))
 	{
 	case VECSXP:
-	case EXPRSXP:
 	{
 		int n = LENGTH(X), ans = NA_LOGICAL;
 		for (int i = 0; i < n; i++)
 		{
 			int isLF = islistfactor(VECTOR_ELT(X, i));
+			if (!isLF)
+				return FALSE;
+			else if (isLF == TRUE)
+				ans = TRUE;
+			// else isLF is NA
+		}
+		return ans;
+	}
+	case EXPRSXP:
+	{
+		int n = LENGTH(X), ans = NA_LOGICAL;
+		for (int i = 0; i < n; i++)
+		{
+			int isLF = islistfactor(XVECTOR_ELT(X, i));
 			if (!isLF)
 				return FALSE;
 			else if (isLF == TRUE)

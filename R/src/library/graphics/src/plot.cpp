@@ -364,7 +364,7 @@ static void GetTextArg(SEXP spec, SEXP *ptxt, rcolor *pcol, double *pcex, int *p
 	else {
 	    nms = getAttrib(spec, R_NamesSymbol);
 	    if (nms == R_NilValue){ /* PR#1939 */
-	       txt = VECTOR_ELT(spec, 0);
+	       txt = XVECTOR_ELT(spec, 0);
 	       if (TYPEOF(txt) == LANGSXP || TYPEOF(txt) == SYMSXP )
 		    REPROTECT(txt = coerceVector(txt, EXPRSXP), pi);
 	       else if (!isExpression(txt))
@@ -1118,7 +1118,7 @@ SEXP C_axis(SEXP args)
 	    /* Clip tick labels to user coordinates. */
 	    if (low < x && x < high) {
 		if (isExpression(lab)) {
-		    GMMathText(VECTOR_ELT(lab, ind[i]), side,
+		    GMMathText(XVECTOR_ELT(lab, ind[i]), side,
 			       axis_lab, 0, x, gpptr(dd)->las,
 			       padjval, dd);
 		}
@@ -1271,7 +1271,7 @@ SEXP C_axis(SEXP args)
 	    /* Clip tick labels to user coordinates. */
 	    if (low < y && y < high) {
 		if (isExpression(lab)) {
-		    GMMathText(VECTOR_ELT(lab, ind[i]), side,
+		    GMMathText(XVECTOR_ELT(lab, ind[i]), side,
 			       axis_lab, 0, y, gpptr(dd)->las,
 			       padjval, dd);
 		}
@@ -2236,7 +2236,7 @@ SEXP C_text(SEXP args)
 		}
 	    }
 	    if (isExpression(txt)) {
-		GMathText(xx, yy, INCHES, VECTOR_ELT(txt, i % ntxt),
+		GMathText(xx, yy, INCHES, XVECTOR_ELT(txt, i % ntxt),
 			  adjx, adjy, gpptr(dd)->srt, dd);
 	    } else {
 		string = STRING_ELT(txt, i % ntxt);
@@ -2704,7 +2704,7 @@ SEXP C_title(SEXP args)
 	    where = 0;
 	}
 	if (isExpression(xlab))
-	    GMMathText(VECTOR_ELT(xlab, 0), 1, vpos, where,
+	    GMMathText(XVECTOR_ELT(xlab, 0), 1, vpos, where,
 		       hpos, 0, 0.0, dd);
 	else {
 	    n = length(xlab);
@@ -2740,7 +2740,7 @@ SEXP C_title(SEXP args)
 	    where = 0;
 	}
 	if (isExpression(ylab))
-	    GMMathText(VECTOR_ELT(ylab, 0), 2, vpos, where,
+	    GMMathText(XVECTOR_ELT(ylab, 0), 2, vpos, where,
 		       hpos, 0, 0.0, dd);
 	else {
 	    n = length(ylab);
@@ -3367,7 +3367,7 @@ SEXP C_identify(SEXP call, SEXP op, SEXP args, SEXP rho)
 		for (i = 0; i < n; i++)                                                                            \
 			if (isExpression(str))                                                                         \
 				REAL(ans)                                                                                  \
-				[i] = GExpression##KIND(VECTOR_ELT(str, i),                                                \
+				[i] = GExpression##KIND(XVECTOR_ELT(str, i),                                                \
 										GMapUnits(units), dd);                                             \
 			else                                                                                           \
 			{                                                                                              \

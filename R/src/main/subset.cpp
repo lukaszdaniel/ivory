@@ -149,10 +149,14 @@ HIDDEN SEXP Rf_ExtractSubset(SEXP x, SEXP indx, SEXP call)
 			    SET_STRING_ELT(result, i, NA_STRING));
 	break;
     case VECSXP:
-    case EXPRSXP:
 	EXTRACT_SUBSET_LOOP(SET_VECTOR_ELT(result, i,
 					   VECTOR_ELT_FIX_NAMED(x, ii)),
 			    SET_VECTOR_ELT(result, i, R_NilValue));
+	break;
+    case EXPRSXP:
+	EXTRACT_SUBSET_LOOP(SET_XVECTOR_ELT(result, i,
+					   VECTOR_ELT_FIX_NAMED(x, ii)),
+			    SET_XVECTOR_ELT(result, i, R_NilValue));
 	break;
     case RAWSXP:
 	EXTRACT_SUBSET_LOOP(RAW0(result)[i] = RAW_ELT(x, ii),
@@ -334,10 +338,14 @@ static SEXP MatrixSubset(SEXP x, SEXP s, SEXP call, int drop)
 			   SET_STRING_ELT(result, ij, NA_STRING));
 	break;
     case VECSXP:
-    case EXPRSXP:
 	MATRIX_SUBSET_LOOP(SET_VECTOR_ELT(result, ij,
 					  VECTOR_ELT_FIX_NAMED(x, iijj)),
 			   SET_VECTOR_ELT(result, ij, R_NilValue));
+	break;
+    case EXPRSXP:
+	MATRIX_SUBSET_LOOP(SET_XVECTOR_ELT(result, ij,
+					  VECTOR_ELT_FIX_NAMED(x, iijj)),
+			   SET_XVECTOR_ELT(result, ij, R_NilValue));
 	break;
     case RAWSXP:
 	MATRIX_SUBSET_LOOP(RAW0(result)[ij] = RAW_ELT(x, iijj),
@@ -511,10 +519,14 @@ static SEXP ArraySubset(SEXP x, SEXP s, SEXP call, int drop)
 			  SET_STRING_ELT(result, i, NA_STRING));
 	break;
     case VECSXP:
-    case EXPRSXP:
 	ARRAY_SUBSET_LOOP(SET_VECTOR_ELT(result, i,
 					 VECTOR_ELT_FIX_NAMED(x, ii)),
 			  SET_VECTOR_ELT(result, i, R_NilValue));
+	break;
+    case EXPRSXP:
+	ARRAY_SUBSET_LOOP(SET_XVECTOR_ELT(result, i,
+					 VECTOR_ELT_FIX_NAMED(x, ii)),
+			  SET_XVECTOR_ELT(result, i, R_NilValue));
 	break;
     case RAWSXP:
 	ARRAY_SUBSET_LOOP(RAW0(result)[i] = RAW_ELT(x, ii),
@@ -1097,7 +1109,13 @@ HIDDEN SEXP do_subset2_dflt(SEXP call, SEXP op, SEXP args, SEXP rho)
 #endif
     } else if(isVectorList(x)) {
 	/* did unconditional duplication before 2.4.0 */
+#if CXXR_TRUE
+	if (x->sexptype() == EXPRSXP)
+	    ans = XVECTOR_ELT(x, offset);
+	else ans = VECTOR_ELT(x, offset);
+#else
 	ans = VECTOR_ELT(x, offset);
+#endif
 #ifndef SWITCH_TO_REFCNT
 	RAISE_NAMED(ans, named_x);
 #endif
