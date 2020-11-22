@@ -37,8 +37,8 @@ namespace CXXR
     // from C:
     namespace ForceNonInline
     {
-        // Rboolean (*isExpressionptr)(SEXP s) = Rf_isExpression;
-        // SEXP (*XVECTOR_ELTp)(const SEXP x, R_xlen_t i) = XVECTOR_ELT;
+        // const auto &isExpressionptr = Rf_isExpression;
+        // const auto &XVECTOR_ELTptr = XVECTOR_ELT;
     } // namespace ForceNonInline
 
     template <>

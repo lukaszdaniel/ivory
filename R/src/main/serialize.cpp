@@ -1184,13 +1184,13 @@ static void WriteItem(SEXP s, SEXP ref_table, R_outpstream_t stream)
 	    len = XLENGTH(s);
 	    WriteLENGTH(stream, s);
 	    for (R_xlen_t ix = 0; ix < len; ix++)
-		WriteItem(XVECTOR_ELT(s, ix), ref_table, stream);
+		WriteItem(VECTOR_ELT(s, ix), ref_table, stream);
 	    break;
 	case EXPRSXP:
 	    len = XLENGTH(s);
 	    WriteLENGTH(stream, s);
 	    for (R_xlen_t ix = 0; ix < len; ix++)
-		WriteItem(VECTOR_ELT(s, ix), ref_table, stream);
+		WriteItem(XVECTOR_ELT(s, ix), ref_table, stream);
 	    break;
 	case BCODESXP:
 	    WriteBC(s, ref_table, stream);

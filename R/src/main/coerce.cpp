@@ -1095,15 +1095,16 @@ static SEXP coerceVectorList(SEXP v, SEXPTYPE type)
 	}
 #endif
 	for (i = 0; i < n;  i++) {
-#if 0
-	    if (isString(VECTOR_ELT(v, i)) && xlength(VECTOR_ELT(v, i)) == 1)
-		SET_STRING_ELT(rval, i, STRING_ELT(VECTOR_ELT(v, i), 0));
+#if CXXR_FALSE
+		SEXP elt = VECTOR_ELT(v, i);
+	    if (isString(elt) && xlength(elt) == 1)
+		SET_STRING_ELT(rval, i, STRING_ELT(elt, 0));
 #else
 		SEXP elt;
 	    if (v->sexptype() == EXPRSXP) {
 		// ExpressionVector* ev = static_cast<ExpressionVector*>(v);
 		// elt = (*ev)[i];
-		elt = &(v)[i];
+		elt = &(v)[i]; // XVECTOR_ELT(v, i);
 	    }
 	    else elt = VECTOR_ELT(v, i);
 	    if (Rf_isString(elt) && xlength(elt) == 1)

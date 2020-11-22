@@ -130,9 +130,6 @@ static void AnswerType(SEXP x, bool recurse, bool usenames, struct BindData &dat
 	    }
 	}
 	else {
-	    if (TYPEOF(x) == EXPRSXP)
-		data.ans_flags |= 512;
-	    else
 		data.ans_flags |= 256;
 	    data.ans_length += XLENGTH(x);
 	}
@@ -150,10 +147,7 @@ static void AnswerType(SEXP x, bool recurse, bool usenames, struct BindData &dat
 	    }
 	}
 	else {
-	    if (TYPEOF(x) == EXPRSXP)
 		data.ans_flags |= 512;
-	    else
-		data.ans_flags |= 256;
 	    data.ans_length += XLENGTH(x);
 	}
 	break;

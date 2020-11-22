@@ -5391,7 +5391,7 @@ static SEXP bytecodeExpr(SEXP e)
 {
     if (isByteCode(e)) {
 	if (LENGTH(BCCONSTS(e)) > 0)
-	    return VECTOR_ELT(BCCONSTS(e), 0);
+	    return XVECTOR_ELT(BCCONSTS(e), 0);
 	else return R_NilValue;
     }
     else return e;
