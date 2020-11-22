@@ -1837,7 +1837,7 @@ static void vec2buff(SEXP v, LocalParseData *d,
 		// if (ExpressionVector *ev = dynamic_cast<ExpressionVector *>(v))
 		// 	deparse2buff((*ev)[i], d);
 		if(v->sexptype() == EXPRSXP)
-			deparse2buff(&(v)[i], d); // deparse2buff(XVECTOR_ELT(v, i), d);
+			deparse2buff(XVECTOR_ELT(v, i), d); // deparse2buff(&(v)[i], d);
 		else
 			deparse2buff(VECTOR_ELT(v, i), d);
 	}

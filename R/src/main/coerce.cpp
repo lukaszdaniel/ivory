@@ -1104,7 +1104,7 @@ static SEXP coerceVectorList(SEXP v, SEXPTYPE type)
 	    if (v->sexptype() == EXPRSXP) {
 		// ExpressionVector* ev = static_cast<ExpressionVector*>(v);
 		// elt = (*ev)[i];
-		elt = &(v)[i]; // XVECTOR_ELT(v, i);
+		elt = XVECTOR_ELT(v, i); // elt = &(v)[i];
 	    }
 	    else elt = VECTOR_ELT(v, i);
 	    if (Rf_isString(elt) && xlength(elt) == 1)
