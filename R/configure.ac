@@ -1127,7 +1127,7 @@ if test "${SAFE_FFLAGS+set}" != set; then
       ;;
     *)
       SAFE_FFLAGS="${FFLAGS}"
-      ::
+      ;;
     esac
   else
     SAFE_FFLAGS="${FFLAGS}"
