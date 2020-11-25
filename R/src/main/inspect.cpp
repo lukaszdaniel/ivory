@@ -75,7 +75,15 @@ static void pp(int pre)
 		Rprintf(" ");
 }
 
-static const char *typename_(SEXP v)
+/**
+ * @brief Translate RObject's SEXPTYPE enum to a character string
+ * 
+ * @param v examined RObject
+ * 
+ * @return name of RObject's type
+ */
+
+HIDDEN const char *R::typeName(SEXP v)
 {
 	return sexptype2char(TYPEOF(v)); // -> memory.cpp
 }
@@ -100,10 +108,10 @@ static void inspect_tree(int pre, SEXP v, int deep, int pvec) {
        It is invalid on 64-bit Windows.
     */
 #ifdef _WIN64
-    Rprintf("@%p %02d %s g%d [", v, TYPEOF(v), typename_(v),
+    Rprintf("@%p %02d %s g%d [", v, TYPEOF(v), typeName(v),
 	    CXXR::RObject::gcgen(v));
 #else
-    Rprintf("@%lx %02d %s g%d [", (long) v, TYPEOF(v), typename_(v),
+    Rprintf("@%lx %02d %s g%d [", (long) v, TYPEOF(v), typeName(v),
 	    CXXR::RObject::gcgen(v));
 #endif
     if (OBJECT(v)) { a = 1; Rprintf("OBJ"); }

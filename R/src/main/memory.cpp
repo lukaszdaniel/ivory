@@ -215,7 +215,7 @@ inline static SEXP CHK(SEXP x)
  * 
  * @return name of the type
  * 
- * @note also called from typename() in inspect.cpp
+ * @note also called from typeName() in inspect.cpp
  */
 
 HIDDEN
@@ -2130,7 +2130,7 @@ const char *(R_CHAR)(SEXP x) {
     if(TYPEOF(x) != CHARSXP) // Han-Tak proposes to prepend  'x && '
 	error(_("'%s' function can only be applied to a charecter, not a '%s'"), "CHAR()",
 	      type2char(TYPEOF(x)));
-    return reinterpret_cast<const char*>(CXXR::r_char(CHK(x)));
+    return CXXR::r_char(CHK(x));
 }
 
 SEXP (STRING_ELT)(SEXP x, R_xlen_t i) {
@@ -2140,7 +2140,7 @@ SEXP (STRING_ELT)(SEXP x, R_xlen_t i) {
     if (ALTREP(x))
 	return CHK(ALTSTRING_ELT(CHK(x), i));
     else {
-	SEXP *ps = (SEXP*) CXXR::stdvec_dataptr(CHK(x));
+	SEXP *ps = CXXR::stdvec_dataptr<SEXP*>(CHK(x));
 	return CHK(ps[i]);
     }
 }
@@ -2317,7 +2317,7 @@ void (SET_STRING_ELT)(SEXP x, R_xlen_t i, SEXP v) {
     if (ALTREP(x))
 	ALTSTRING_SET_ELT(x, i, v);
     else {
-	SEXP *ps = (SEXP*) CXXR::stdvec_dataptr(x);
+	SEXP *ps = CXXR::stdvec_dataptr<SEXP*>(x);
 	FIX_REFCNT(x, ps[i], v);
 	ps[i] = v;
     }

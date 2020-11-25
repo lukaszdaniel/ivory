@@ -931,6 +931,7 @@ namespace R
     void R_getProcTime(double *data);
     bool R_isMissing(SEXP symbol, SEXP rho);
     const char *sexptype2char(SEXPTYPE type);
+    const char *typeName(SEXP v);
     void sortVector(SEXP s, bool decreasing);
     void SrcrefPrompt(const char *prefix, SEXP srcref);
     void ssort(SEXP *x, int n);
