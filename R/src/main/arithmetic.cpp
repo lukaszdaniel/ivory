@@ -62,6 +62,11 @@ using namespace R;
 
 /* Override the SVID matherr function:
    the main difference here is not to print warnings.
+
+   This used to be common but was removed in glibc 2.27 having
+   previously been marked as obsolete.
+
+   macOS had it for x86_64 even in 11.0, but not for arm64.
  */
 #ifndef __cplusplus
 int matherr(struct exception *exc)

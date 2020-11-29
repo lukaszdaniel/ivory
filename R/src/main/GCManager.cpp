@@ -37,6 +37,7 @@
 #include <limits>
 #include <R_ext/Print.h>
 #include <CXXR/GCNode.hpp>
+#include <CXXR/WeakRef.hpp>
 #include <Defn.h>
 #include <Rinterface.h>
 
@@ -323,9 +324,6 @@ bool GCManager::cue(size_t bytes_wanted, bool force)
     return false;
 }
 
-// Put this prototype here temporarily!
-bool RunFinalizers();
-
 void GCManager::gc_error(const char *msg)
 {
     if (s_gc_fail_on_error)
@@ -352,7 +350,16 @@ void GCManager::gc(size_t bytes_wanted, bool full)
             GCManager::s_node_threshold = GCNode::numNodes() + 1;
 
         if (bytes_wanted + MemoryBank::bytesAllocated() > s_threshold)
-            s_threshold = bytes_wanted + MemoryBank::bytesAllocated();
+        {
+            R_size_t expand = bytes_wanted - s_threshold + MemoryBank::bytesAllocated();
+            if (s_threshold + expand > s_max_threshold)
+            {
+                std::cerr << "vector memory exhausted (limit reached?)" << std::endl;
+                // Rf_errorcall(R_NilValue, _("vector memory exhausted (limit reached?)"));
+                abort();
+            }
+            s_threshold += expand;
+        }
 
         s_gc_pending = true;
         return;
@@ -363,7 +370,7 @@ void GCManager::gc(size_t bytes_wanted, bool full)
 
 #ifdef IMMEDIATE_FINALIZERS
     running_finalizers = true;
-    bool any_finalizers_run = RunFinalizers();
+    bool any_finalizers_run = WeakRef::runFinalizers();
     running_finalizers = false;
     /* Run any eligible finalizers.  The return result of
 	   RunFinalizers is TRUE if any finalizers are actually run.

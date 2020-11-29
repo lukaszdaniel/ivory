@@ -2205,6 +2205,45 @@ compiler) and undesrstandably package authors have been unaware that
 this might be done --- issues are most often seen in @command{configure}
 scripts.
 
+Some care may be needed with selecting compilers when installing external
+software for use with packages.  The `system' compilers as used when
+building @R{} are @command{clang} and @command{clang++}, but the Apple
+toolchain also provides compilers called @command{gcc} and @command{g++}
+which despite their names are based on LLVM and @code{libc++} like the
+system ones and which behave in almost the same way as the system ones.
+Most Open Source software has a @command{configure} script developed
+using GNU @command{autoconf} and hence will select @command{gcc} and
+@command{g++} as the default compilers: this usually works fine.  For
+consistency one can use
+
+@example
+./configure CC=clang CFLAGS=-O2 CXX=clang++ CXXFLAGS=-O2
+@end example
+
+@noindent
+(avoiding @command{autoconf}'s default @option{-g}).  Be careful if you
+put the @file{/usr/local/gfortran/bin} directory on your path as that
+contains (real) @command{gcc} and @command{g++} which may be found
+rather the Apple-provided commands, and may not be able to find the
+headers and libraries@footnote{From Big Sur those libraries are not
+publicly visible: rather the system compiler link to `text-based
+definition (@file{.tbd}) files.} of the SDK.
+
+For @cputype{arm64}, not all configure scripts have been updated to
+recognize the platform and so might need the flag
+@option{--build=aarch64-apple-darwin20.1.0}.  Also, be aware that
+running the compilers from a @cputype{x86_64} application switches them
+to generating code for that CPU: this applies to a Terminal, a shell,
+@command{cmake} or (non-system) @command{make}.  One can use
+
+@example
+./configure CC="clang -target arm64-apple-macos11" CFLAGS=-O2 \
+CXX="clang++ -target arm64-apple-macos11" CXXFLAGS=-O2
+@end example
+
+@noindent
+to force @cputype{arm64} code.
+
 @node Customizing package compilation, Multiple sub-architectures, macOS packages, Installing packages
 @subsection Customizing package compilation
 
@@ -4912,8 +4951,8 @@ is said to be for Mojave and later but works well enough on High
 Sierra.}  This installs into @file{/usr/local/gfortran}.
 
 @item
-Binary components @code{pcre2} and @code{xz} (for
-@code{liblzma}) from @uref{https://mac.R-project.org/libs-4/}.  For example
+Binary components @code{pcre2} and @code{xz} (for @code{liblzma}) from
+@uref{https://mac.R-project.org/libs-4/}.  For example
 @example
 curl -OL https://mac.r-project.org/libs-4/pcre2-10.34-darwin.17-x86_64.tar.gz
 sudo tar -xvzf pcre2-10.34-darwin.17-x86_64.tar.gz -C /
@@ -5150,9 +5189,7 @@ though.}  This also includes a full LAPACK which can be used @emph{via}
 @option{--with-lapack}: however, the version of LAPACK it contains has
 @c 3.2.1 in Big Sur.
 often been seriously old (and is not used unless @option{--with-lapack}
-is specified).  (For the Command Line Tools 12 and later, you need to
-ensure that @option{-Wno-implicit-function-declaration} is part of
-@code{CFLAGS}.)
+is specified).
 
 @c https://developer.apple.com/documentation/accelerate/veclib
 Threading in Accelerate is controlled by `Grand Central Dispatch' and is
@@ -5177,18 +5214,19 @@ times before 1902 or after 2037 (despite using a 64-bit @code{time_t}).
 
 The @TeX{} implementation used by the developers is MacTeX@footnote{An
 essentially equivalent @TeX{} installation can be obtained by the Unix
-TeX Live installation scripts: MacTeX also contains GhostScript.}
+TeX Live installation scripts.}
 (@uref{https://www.tug.org/mactex/}): the full installation is about
-7GB, but a smaller version (`Basic TeX') is available at
+8.5GB, but a smaller version (`Basic TeX') is available at
 @uref{https://www.tug.org/mactex/morepackages.html} to which you will
 need to add some packages to build @R{}, e.g.@: for the 2020 version we
 needed to add@footnote{E.g.@: @emph{via} @command{tlmgr install cm-super
 helvetic inconsolata texinfo} .}  @pkg{cm-super}, @pkg{helvetic},
-@pkg{inconsolata} and @pkg{texinfo} which brought this to about 380MB.
-@samp{TeX Live Utility} (available @emph{via} the MacTeX front page)
-provides a graphical means to manage @TeX{} packages.  This is
-documented to require High Sierra or later: for earlier versions see the
-instructions on the MacTeX front page.
+@pkg{inconsolata} and @pkg{texinfo} which brought this to about
+380MB.@footnote{Adding all the packages needed to check @acronym{CRAN}
+only increased this to about 560MB.}  @samp{TeX Live Utility} (available
+@emph{via} the MacTeX front page) provides a graphical means to manage
+@TeX{} packages.  This is documented to require High Sierra or later:
+for earlier versions see the instructions on the MacTeX front page.
 
 Checking packages thoroughly requires @command{ghostscript} (part of the
 full MacTeX distribution or separately from
@@ -5235,7 +5273,8 @@ distribution but these were often not at all recent versions of Tcl/Tk
 (8.5.9 in High Sierra, which is not even the latest patched version in
 that series). (Catalina included a partial distribution which lacks the
 files needed to compile against Tcl/Tk.) It is better to install Tcl/Tk
-8.6.x from the sources or a binary distribution from
+8.6.x from the sources@footnote{Configure Tk with
+@option{--enable-aqua}.} or a binary distribution from
 @uref{https://www.activestate.com/@/activetcl/@/downloads}.  For the
 latter, configure @R{} with
 @example
@@ -5489,8 +5528,10 @@ seem harmless.)
 No Fortran compiler has been released for this architecture at the time
 of writing although there are ports under development.@footnote{We used
 the fork of @command{gfortran} from
-@url{https://github.com/@/iains/@/gcc-darwin-arm64}}  So this is section
-is completely experimental.
+@url{https://github.com/@/iains/@/gcc-darwin-arm64}, and there is an
+experimental binary distribution at
+@uref{https://github.com/@/fxcoudert/@/gfortran-for-macOS/@/releases/@/tag/@/11-arm-alpha1}}
+So this is section is experimental.
 
 Native Java builds are becoming available, for example
 @uref{https://www.azul.com/downloads/zulu-community/?os=macos&architecture=arm-64-bit&package=jdk}.
@@ -5510,7 +5551,8 @@ for @command{pkg-config} and support files.
 
 @example
 /path/to/configure --enable-R-shlib --enable-memory-profiling --without-x \
-PKG_CONFIG_PATH=/usr/local/lib/pkgconfig:/usr/lib/pkgconfig
+PKG_CONFIG_PATH=/usr/local/lib/pkgconfig:/usr/lib/pkgconfig \
+JAVA_HOME=/path/to/zulu-11.jdk/Contents/Home
 @end example
 
 @noindent
