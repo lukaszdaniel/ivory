@@ -65,7 +65,6 @@
 #include <CXXR/ExternalPointer.hpp>
 #include <CXXR/SEXP_downcast.hpp>
 #include <R_ext/Print.h>
-#include <CXXR/JMPException.hpp>
 
 /* Declarations for Valgrind.
 

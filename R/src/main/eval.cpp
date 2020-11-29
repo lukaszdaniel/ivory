@@ -5361,7 +5361,11 @@ NORET static void nodeStackOverflow()
     error(_("node stack overflow"));
 }
 
+// loopWithContext() was abolished in commit 71492 (on 2016-10-10)
+// in order to use bcEval with the try/catch approach (instead of SETJMP/LONGJMP) we had to revert that change.
+#define REVERTED_71492
 /* Allocate consecutive space of nelems node stack elements */
+#ifndef REVERTED_71492
 inline static void *BCNALLOC(int nelems)
 {
 	void *ans;
@@ -5374,19 +5378,19 @@ inline static void *BCNALLOC(int nelems)
 	R_BCNodeStackTop += nelems;
 	return ans;
 }
-
+#endif
 /* Allocate R context on the node stack */
 #define RCNTXT_ELEMS ((sizeof(RCNTXT) + sizeof(R_bcstack_t) - 1) \
 			/ sizeof(R_bcstack_t))
 
 #define BCNALLOC_CNTXT() (RCNTXT *)BCNALLOC(RCNTXT_ELEMS)
-
+#ifndef REVERTED_71492
 inline static void BCNPOP_AND_END_CNTXT() {
     RCNTXT* cptr = (RCNTXT *)(R_BCNodeStackTop - RCNTXT_ELEMS);
     cptr->end();
     R_BCNodeStackTop -= RCNTXT_ELEMS + 1;
 }
-
+#endif
 static SEXP bytecodeExpr(SEXP e)
 {
     if (isByteCode(e)) {
@@ -5536,6 +5540,21 @@ inline static SEXP BINDING_VALUE(SEXP loc)
    new variable is defined in an intervening frame. Some mechanism for
    invalidating the cache would be needed. This is certainly possible,
    but finding an efficient mechanism does not seem to be easy.   LT */
+
+#ifdef REVERTED_71492
+/* Both mechanisms implemented here make use of the stack to hold
+   cache information.  This is not a problem except for "safe" for()
+   loops using the STARTLOOPCNTXT instruction to run the body in a
+   separate bcEval call.  Since this approach expects loop setup
+   information to be passed on the stack from the outer bcEval call to
+   an inner one the inner one cannot put things on the stack. For now,
+   bcEval takes an additional argument that disables the cache in
+   calls via STARTLOOPCNTXT for all "safe" loops. It would be better
+   to deal with this in some other way, for example by having a
+   specific STARTFORLOOPCNTXT instruction that deals with transferring
+   the information in some other way. For now disabling the cache is
+   an expedient solution. LT */
+#endif
 
 #define USE_BINDING_CACHE
 # ifdef USE_BINDING_CACHE
@@ -6838,7 +6857,7 @@ struct R_loopinfo_t{
    target offset for a 'next' on the stack. For a 'for' loop the loop
    state information is then pushed on the stack as well. The
    following functions retrieve the offsets. */
-
+#ifndef REVERTED_71492
 inline static int LOOP_BREAK_OFFSET(int loop_state_size)
 {
 	return GETSTACK_IVAL_PTR(R_BCNodeStackTop - 2 - loop_state_size);
@@ -6848,7 +6867,7 @@ inline static int LOOP_NEXT_OFFSET(int loop_state_size)
 {
 	return GETSTACK_IVAL_PTR(R_BCNodeStackTop - 1 - loop_state_size);
 }
-
+#endif
 /* Check whether a call is to a base function; if not use AST interpeter */
 /***** need a faster guard check */
 inline static SEXP SymbolValue(SEXP sym)
@@ -7140,28 +7159,36 @@ HIDDEN Rboolean R_BCVersionOK(SEXP s)
 					  (version >= R_bcMinVersion && version <= R_bcVersion));
 }
 
-#if 0 // #ifdef USE_JMP
-static void loopWithContect(volatile SEXP code, volatile SEXP rho, bool useCache)
+#ifdef REVERTED_71492
+static void loopWithContext(SEXP code, SEXP rho)
 {
     RCNTXT cntxt;
     cntxt.start(CTXT_LOOP, R_NilValue, rho, R_BaseEnv, R_NilValue, R_NilValue);
-    bool redo;
-    do {
-	redo = false;
-	// std::cerr << __FILE__ << ":" << __LINE__ << " Entering try/catch for " << &cntxt << std::endl;
-	try {
-	    bcEval(code, rho, useCache);
-		cntxt.end();
-	}
-	catch (CXXR::JMPException& e) {
-		// std::cerr << __FILE__ << ":" << __LINE__ << " Seeking  " << e.context << "; in " << &cntxt << std::endl;
-	    if (e.context != &cntxt)
-		throw;
-	    redo = (e.mask != CTXT_BREAK);
-		if (!redo) cntxt.end();
-	}
-	// std::cerr << __FILE__":" << __LINE__ << " Exiting try/catch for " << &cntxt << std::endl;
-    } while (redo);
+#ifdef USE_JMP
+	bool redo;
+	do
+	{
+		redo = false;
+		// std::cerr << __FILE__ << ":" << __LINE__ << " Entering try/catch for " << &cntxt << std::endl;
+		try
+		{
+			bcEval(code, rho, false);
+			cntxt.end();
+		}
+		catch (CXXR::JMPException &e)
+		{
+			// std::cerr << __FILE__ << ":" << __LINE__ << " Seeking  " << e.context << "; in " << &cntxt << std::endl;
+			if (e.context != &cntxt)
+				throw;
+			redo = (e.mask != CTXT_BREAK);
+		}
+		// std::cerr << __FILE__ << ":" << __LINE__ << " Exiting try/catch for " << &cntxt << std::endl;
+	} while (redo);
+#else
+	if (SETJMP(cntxt.cjmpbuf) != CTXT_BREAK)
+		bcEval(code, rho, FALSE);
+	endcontext(&cntxt);
+#endif
 }
 #endif
 
@@ -7291,6 +7318,21 @@ static SEXP bcEval(SEXP body, SEXP rho, bool useCache)
     OP(POP, 0): BCNPOP_IGNORE_VALUE(); NEXT();
     OP(DUP, 0): BCNDUP(); NEXT();
     OP(PRINTVALUE, 0): PrintValue(BCNPOP()); NEXT();
+#ifdef REVERTED_71492
+    OP(STARTLOOPCNTXT, 2):
+	{
+		int dummy = GETOP(); dummy++; // dummy variable so to keep the same number (2) of arguments needed by STARTLOOPCNTXT
+	    SEXP code = VECTOR_ELT(constants, GETOP());
+	    loopWithContext(code, rho);
+	    NEXT();
+	}
+	OP(ENDLOOPCNTXT, 1) :
+	{
+		int dummy = GETOP(); dummy++; // dummy variable so to keep the same number (1) of arguments needed by ENDLOOPCNTXT
+		retvalue = R_NilValue;
+		goto done;
+	}
+#else
     OP(STARTLOOPCNTXT, 2):
 	{
 	    Rboolean is_for_loop = (Rboolean) GETOP();
@@ -7363,6 +7405,7 @@ static SEXP bcEval(SEXP body, SEXP rho, bool useCache)
 	    BCNPOP_AND_END_CNTXT();
 	    NEXT();
 	}
+#endif
     OP(DOLOOPNEXT, 0): findcontext(CTXT_NEXT, rho, R_NilValue);
     OP(DOLOOPBREAK, 0): findcontext(CTXT_BREAK, rho, R_NilValue);
     OP(STARTFOR, 3):
@@ -8479,7 +8522,7 @@ SEXP R_bcEncode(SEXP bytes)
 	for (i = 1; i < n;) {
 	    int op = pc[i].i;
 	    if (op < 0 || op >= OPCOUNT)
-		error(_("unknown instruction code"));
+		error(_("unknown instruction code: %d (OPCOUNT = %d)"), op, OPCOUNT);
 	    pc[i].v = opinfo[op].addr;
 	    i += opinfo[op].argc + 1;
 	}

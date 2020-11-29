@@ -1718,7 +1718,7 @@ static SEXP ReadChar(R_inpstream_t stream, char *buf, int length, int levs)
     return mkCharLenCE(buf, length, CE_NATIVE); 
 }
 
-static R_xlen_t ReadLENGTH (R_inpstream_t stream)
+static R_xlen_t ReadLENGTH(R_inpstream_t stream)
 {
     int len = InInteger(stream);
 #ifdef LONG_VECTOR_SUPPORT

@@ -6363,6 +6363,7 @@ function(given = NULL) {
     if (is.null(given)) callObj$default <- TRUE
     callObj
 }
+<bytecode: 0xce0aaf0>
 > print(foo, useSource = FALSE)
 function (given = NULL) 
 {
@@ -6373,6 +6374,7 @@ function (given = NULL)
         callObj$default <- TRUE
     callObj
 }
+<bytecode: 0xce0aaf0>
 > attr(foo, "srcref") <- NULL
 > foo
 function (given = NULL) 
@@ -6384,6 +6386,7 @@ function (given = NULL)
         callObj$default <- TRUE
     callObj
 }
+<bytecode: 0xce0aaf0>
 > (f <- structure(function(){}, note = "just a note",
 +                 yada = function() "not the same"))
 function(){}
@@ -6615,7 +6618,8 @@ Error in command 'complete.cases(list(), list())':
 > ## error messages from (C-level) evalList
 > tst <- function(y) { stopifnot(is.numeric(y)); y+ 1 }
 > try(tst()) # even nicer since R 3.5.0's change to sequential stopifnot()
-Error: 'y' argument is missing, with no default
+Error in command 'stopifnot(is.numeric(y))': 
+  'y' argument is missing, with no default
 > try(c(1,,2))
 Error in command 'c(1, , 2)': argument 2 is empty
 > ## change in 2.8.0 made these less clear

@@ -5001,6 +5001,7 @@ function (V)
     r[cbind(seq_len(p), seq_len(p))] <- 1
     r
 }
+<bytecode: 0xccb2d10>
 <environment: namespace:stats>
 > stopifnot(all.equal(Cl, cov2cor(cov(longley))),
 +           all.equal(cor(longley, method = "kendall"),
@@ -5529,7 +5530,7 @@ surv(ft, case) ~ a + b * f
 > 
 > x <- c("a name", "another name")
 > try( reformulate(x) ) # -> Error ..... unexpected symbol
-Error: <text>:1:3: unexpected symbol
+Error in command 'str2lang(termtext)': <text>:1:3: unexpected symbol
 1: a name
       ^
 > ## rather backquote the strings in x :
@@ -12444,12 +12445,14 @@ attr(,"class")
 $linkfun
 function (mu) 
 mu^lambda
-<environment: 0x27254f0>
+<bytecode: 0xde688b0>
+<environment: 0xe787200>
 
 $linkinv
 function (eta) 
 pmax(eta^(1/lambda), .Machine$double.eps)
-<environment: 0x27254f0>
+<bytecode: 0xde68210>
+<environment: 0xe787200>
 
 > 
 > 
@@ -16699,7 +16702,8 @@ Step function with continuity 'f'=0.2, 3 knots at:
 > unclass(sfun0)
 function (v) 
 .approxfun(x, y, v, method, yleft, yright, f, na.rm)
-<environment: 0x7f67ca0>
+<bytecode: 0xd57bc90>
+<environment: 0x8427a10>
 attr(,"call")
 stepfun(1:3, y0, f = 0)
 > ls(envir = environment(sfun0))
