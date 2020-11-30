@@ -103,6 +103,12 @@ void REprintf(const char *format, ...)
     std::cerr << format << std::endl;
 }
 
+NORET void Rf_errorcall(SEXP env, const char *format, ...)
+{
+    std::cerr << format << std::endl;
+    throw "error";
+}
+
 void Rf_error(const char *format, ...)
 {
     std::cerr << format << std::endl;

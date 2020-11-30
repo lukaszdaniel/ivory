@@ -1186,14 +1186,7 @@ void *R_realloc_gc(void *p, size_t n)
 
 SEXP Rf_allocSExp(SEXPTYPE t)
 {
-    SEXP s = nullptr;
-    if (GCManager::FORCE_GC() || GCManager::nodeTriggerLevel() <= GCNode::numNodes())
-    {
-        GCManager::gc(0);
-        post_gc_checks();
-    }
-
-    s = new RObject(t);
+    SEXP s = new RObject(t);
     // INIT_REFCNT(s);
     RObject::set_car0(s, R_NilValue);
     RObject::set_cdr(s, R_NilValue);
@@ -1204,20 +1197,10 @@ SEXP Rf_allocSExp(SEXPTYPE t)
    unless a GC will actually occur. */
 SEXP Rf_cons(SEXP car, SEXP cdr)
 {
-    if (GCManager::FORCE_GC() || GCManager::nodeTriggerLevel() <= GCNode::numNodes())
-    {
-        PROTECT(car);
-        PROTECT(cdr);
-        GCManager::gc(0);
-        post_gc_checks();
-        UNPROTECT(2);
-    }
-
-        PROTECT(car);
-        PROTECT(cdr);
-        SEXP s = new RObject(LISTSXP);
-        UNPROTECT(2);
-
+    PROTECT(car);
+    PROTECT(cdr);
+    SEXP s = new RObject(LISTSXP);
+    UNPROTECT(2);
 
     // INIT_REFCNT(s);
     RObject::set_car0(s, CHK(car));
@@ -1231,21 +1214,10 @@ SEXP Rf_cons(SEXP car, SEXP cdr)
 
 HIDDEN SEXP CONS_NR(SEXP car, SEXP cdr)
 {
-    SEXP s = nullptr;
-    if (GCManager::FORCE_GC() || GCManager::nodeTriggerLevel() <= GCNode::numNodes())
-    {
-        PROTECT(car);
-        PROTECT(cdr);
-        GCManager::gc(0);
-        post_gc_checks();
-        UNPROTECT(2);
-    }
-
-        PROTECT(car);
-        PROTECT(cdr);
-        s = new RObject(LISTSXP);
-        UNPROTECT(2);
-
+    PROTECT(car);
+    PROTECT(cdr);
+    SEXP s = new RObject(LISTSXP);
+    UNPROTECT(2);
 
     // INIT_REFCNT(s);
     DISABLE_REFCNT(s);
@@ -1274,22 +1246,11 @@ HIDDEN SEXP CONS_NR(SEXP car, SEXP cdr)
 */
 SEXP R::NewEnvironment(SEXP namelist, SEXP valuelist, SEXP rho)
 {
-    SEXP v = nullptr, n = nullptr, newrho = nullptr;
-    if (GCManager::FORCE_GC() || GCManager::nodeTriggerLevel() <= GCNode::numNodes())
-    {
-        PROTECT(namelist);
-        PROTECT(valuelist);
-        PROTECT(rho);
-        GCManager::gc(0);
-        post_gc_checks();
-        UNPROTECT(3);
-    }
-
-        PROTECT(namelist);
-        PROTECT(valuelist);
-        PROTECT(rho);
-        newrho = new RObject(ENVSXP);
-        UNPROTECT(3);
+    PROTECT(namelist);
+    PROTECT(valuelist);
+    PROTECT(rho);
+    SEXP newrho = new RObject(ENVSXP);
+    UNPROTECT(3);
 
     // INIT_REFCNT(newrho);
     Environment::set_frame(newrho, valuelist);
@@ -1298,8 +1259,8 @@ SEXP R::NewEnvironment(SEXP namelist, SEXP valuelist, SEXP rho)
     if (rho)
         INCREMENT_REFCNT(rho);
 
-    v = CHK(valuelist);
-    n = CHK(namelist);
+    SEXP v = CHK(valuelist);
+    SEXP n = CHK(namelist);
     while (v != R_NilValue && n != R_NilValue)
     {
         SET_TAG(v, TAG(n));
@@ -1313,20 +1274,10 @@ SEXP R::NewEnvironment(SEXP namelist, SEXP valuelist, SEXP rho)
    unless a GC will actually occur. */
 HIDDEN SEXP R::mkPROMISE(SEXP expr, SEXP rho)
 {
-    SEXP s = nullptr;
-    if (GCManager::FORCE_GC() || GCManager::nodeTriggerLevel() <= GCNode::numNodes())
-    {
-        PROTECT(expr);
-        PROTECT(rho);
-        GCManager::gc(0);
-        post_gc_checks();
-        UNPROTECT(2);
-    }
-
-        PROTECT(expr);
-        PROTECT(rho);
-        s = new RObject(PROMSXP);
-        UNPROTECT(2);
+    PROTECT(expr);
+    PROTECT(rho);
+    SEXP s = new RObject(PROMSXP);
+    UNPROTECT(2);
 
     /* precaution to ensure code does not get modified via
        substitute() and the like */
@@ -1465,15 +1416,6 @@ SEXP Rf_allocVector3(SEXPTYPE type, R_xlen_t length = 1, R_allocator_t *allocato
     }
 
     size_t bytes = size * sizeof(VECREC);
-
-    /* we need to do the gc here so allocSExp doesn't! */
-    if (GCManager::FORCE_GC() ||
-        (GCManager::nodeTriggerLevel() <= GCNode::numNodes()) ||
-        (GCManager::triggerLevel() < bytes + MemoryBank::bytesAllocated()))
-    {
-        GCManager::gc(bytes);
-        post_gc_checks();
-    }
 
     s = new RObject(type);
     s->m_databytes = bytes;

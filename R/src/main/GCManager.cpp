@@ -331,7 +331,7 @@ void GCManager::gc_error(const char *msg)
     else if (R_in_gc)
         REprintf(msg);
     else
-        error(msg);
+        Rf_error(msg);
 }
 
 void GCManager::gc(size_t bytes_wanted, bool full)
@@ -354,9 +354,7 @@ void GCManager::gc(size_t bytes_wanted, bool full)
             R_size_t expand = bytes_wanted - s_threshold + MemoryBank::bytesAllocated();
             if (s_threshold + expand > s_max_threshold)
             {
-                std::cerr << "vector memory exhausted (limit reached?)" << std::endl;
-                // Rf_errorcall(R_NilValue, _("vector memory exhausted (limit reached?)"));
-                abort();
+                Rf_errorcall(nullptr, "vector memory exhausted (limit reached?)");
             }
             s_threshold += expand;
         }
