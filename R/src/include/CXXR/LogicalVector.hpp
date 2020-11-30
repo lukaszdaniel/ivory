@@ -43,8 +43,15 @@ namespace CXXR
      */
     typedef CXXR::FixedVector<Logical, LGLSXP> LogicalVector;
 
-#define LOGICALVECTOR_LOGICAL(x) ((int *)DATAPTR(x))
-#define LOGICALVECTOR_LOGICAL_RO(x) ((const int *)DATAPTR_RO(x))
+    inline int *LOGICALVECTOR_LOGICAL(RObject *x)
+    {
+        return static_cast<int *>(DATAPTR(x));
+    }
+
+    inline const int *LOGICALVECTOR_LOGICAL_RO(RObject *x)
+    {
+        return static_cast<const int *>(DATAPTR_RO(x));
+    }
 } // namespace CXXR
 
 #endif // LOGICALVECTOR_HPP

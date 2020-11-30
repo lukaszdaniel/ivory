@@ -39,8 +39,15 @@ namespace CXXR
      */
     typedef CXXR::FixedVector<Rbyte, RAWSXP> RawVector;
 
-#define RAWVECTOR_RAW(x) ((Rbyte *)DATAPTR(x))
-#define RAWVECTOR_RAW_RO(x) ((const Rbyte *)DATAPTR_RO(x))
+    inline Rbyte *RAWVECTOR_RAW(RObject *x)
+    {
+        return static_cast<Rbyte *>(DATAPTR(x));
+    }
+
+    inline const Rbyte *RAWVECTOR_RAW_RO(RObject *x)
+    {
+        return static_cast<const Rbyte *>(DATAPTR_RO(x));
+    }
 } // namespace CXXR
 
 #endif // RAWVECTOR_HPP

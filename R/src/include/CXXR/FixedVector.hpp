@@ -194,6 +194,9 @@ namespace CXXR
 #endif
     }
 
+    extern "C" void *DATAPTR(SEXP x);
+    extern "C" const void *DATAPTR_RO(SEXP x);
+
     template <class T, SEXPTYPE ST>
     const char *FixedVector<T, ST>::typeName() const
     {

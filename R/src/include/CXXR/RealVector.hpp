@@ -43,8 +43,15 @@ namespace CXXR
      */
     typedef CXXR::FixedVector<double, REALSXP> RealVector;
 
-#define REALVECTOR_REAL(x) ((double *)DATAPTR(x))
-#define REALVECTOR_REAL_RO(x) ((const double *)DATAPTR_RO(x))
+    inline double *REALVECTOR_REAL(RObject *x)
+    {
+        return static_cast<double *>(DATAPTR(x));
+    }
+
+    inline const double *REALVECTOR_REAL_RO(RObject *x)
+    {
+        return static_cast<const double *>(DATAPTR_RO(x));
+    }
 } // namespace CXXR
 
 #endif // REALVECTOR_HPP

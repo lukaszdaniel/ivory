@@ -1368,7 +1368,7 @@ HIDDEN SEXP R::R_mkEVPROMISE_NR(SEXP expr, SEXP val)
 
 SEXP Rf_allocVector3(SEXPTYPE type, R_xlen_t length = 1, R_allocator_t *allocator = nullptr)
 {
-    RObject *s = nullptr;     /* For the generational collector it would be safer to
+    RObject *s = nullptr; /* For the generational collector it would be safer to
 		   work in terms of a VECSEXP here, but that would
 		   require several casts below... */
     R_size_t size = 0;
@@ -1378,13 +1378,14 @@ SEXP Rf_allocVector3(SEXPTYPE type, R_xlen_t length = 1, R_allocator_t *allocato
 #endif
 
     if (length > R_XLEN_T_MAX)
-	error(_("vector is too large")); /**** put length into message */
-    else if (length < 0 )
-	error(_("negative length vectors are not allowed"));
+        error(_("vector is too large")); /**** put length into message */
+    else if (length < 0)
+        error(_("negative length vectors are not allowed"));
     /* number of vector cells to allocate */
-    switch (type) {
+    switch (type)
+    {
     case NILSXP:
-	return nullptr;
+        return nullptr;
     case RAWSXP:
     {
 #ifdef R_MEMORY_PROFILING
@@ -1425,33 +1426,42 @@ SEXP Rf_allocVector3(SEXPTYPE type, R_xlen_t length = 1, R_allocator_t *allocato
     case STRSXP:
     case EXPRSXP:
     case VECSXP:
-	if (length <= 0)
-	    size = 0;
-	else {
-	    if (length > (R_xlen_t) (R_SIZE_T_MAX / sizeof(SEXP)))
-		error(_("cannot allocate vector of length %d"), length);
-	    size = convert2VEC<RObject>(length);
+    {
+        if (length <= 0)
+            size = 0;
+        else
+        {
+            if (length > (R_xlen_t)(R_SIZE_T_MAX / sizeof(SEXP)))
+                error(_("cannot allocate vector of length %d"), length);
+            size = convert2VEC<RObject>(length);
 #if VALGRIND_LEVEL > 0
-	    actual_size = length * sizeof(SEXP);
+            actual_size = length * sizeof(SEXP);
 #endif
-	}
-	break;
+        }
+    }
+    break;
     case LANGSXP:
-	if(length == 0) return nullptr;
+    {
+        if (length == 0)
+            return nullptr;
 #ifdef LONG_VECTOR_SUPPORT
-	if (length > R_SHORT_LEN_MAX) error(_("invalid length for pairlist"));
+        if (length > R_SHORT_LEN_MAX)
+            error(_("invalid length for pairlist"));
 #endif
-	s = Rf_allocList((int) length);
-	SET_TYPEOF(s, LANGSXP);
-	return s;
+        s = Rf_allocList((int)length);
+        SET_TYPEOF(s, LANGSXP);
+        return s;
+    }
     case LISTSXP:
+    {
 #ifdef LONG_VECTOR_SUPPORT
-	if (length > R_SHORT_LEN_MAX) error(_("invalid length for pairlist"));
+        if (length > R_SHORT_LEN_MAX)
+            error(_("invalid length for pairlist"));
 #endif
-	return Rf_allocList((int) length);
+        return Rf_allocList((int)length);
+    }
     default:
-	error(_("invalid type/length (%s/%d) in vector allocation"),
-	      type2char(type), length);
+        error(_("invalid type/length (%s/%d) in vector allocation"), type2char(type), length);
     }
 
     size_t bytes = size * sizeof(VECREC);
@@ -1517,17 +1527,17 @@ SEXP Rf_allocVector3(SEXPTYPE type, R_xlen_t length = 1, R_allocator_t *allocato
     /* Direct assignment is OK since the node was just allocated and */
     /* so is at least as new as R_NilValue and R_BlankString */
     if (type == EXPRSXP || type == VECSXP) {
-	SEXP *data = STRING_PTR(s);
+	SEXP *data = STRINGVECTOR_STRING_PTR(s);
 #if VALGRIND_LEVEL > 1
-	VALGRIND_MAKE_MEM_DEFINED(STRING_PTR(s), actual_size);
+	VALGRIND_MAKE_MEM_DEFINED(STRINGVECTOR_STRING_PTR(s), actual_size);
 #endif
 	for (R_xlen_t i = 0; i < length; i++)
 	    data[i] = nullptr;
     }
     else if(type == STRSXP) {
-	SEXP *data = STRING_PTR(s);
+	SEXP *data = STRINGVECTOR_STRING_PTR(s);
 #if VALGRIND_LEVEL > 1
-	VALGRIND_MAKE_MEM_DEFINED(STRING_PTR(s), actual_size);
+	VALGRIND_MAKE_MEM_DEFINED(STRINGVECTOR_STRING_PTR(s), actual_size);
 #endif
 	for (R_xlen_t i = 0; i < length; i++)
 	    data[i] = R_BlankString;
@@ -2287,7 +2297,7 @@ SEXP *(STRING_PTR)(SEXP x) {
 	error(_("'%s' function can only be applied to a character, not a '%s'"),
 	      "STRING_PTR()", type2char(TYPEOF(x)));
     CHKZLN(x);
-    return STRING_PTR(x);
+    return STRINGVECTOR_STRING_PTR(x);
 }
 
 const SEXP *(STRING_PTR_RO)(SEXP x) {

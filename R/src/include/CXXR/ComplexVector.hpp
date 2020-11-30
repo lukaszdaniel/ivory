@@ -40,8 +40,15 @@ namespace CXXR
      */
     typedef CXXR::FixedVector<Complex, CPLXSXP> ComplexVector;
 
-#define COMPLEXVECTOR_COMPLEX(x) ((Rcomplex *)DATAPTR(x))
-#define COMPLEXVECTOR_COMPLEX_RO(x) ((const Rcomplex *)DATAPTR_RO(x))
+    inline Rcomplex *COMPLEXVECTOR_COMPLEX(RObject *x)
+    {
+        return static_cast<Rcomplex *>(DATAPTR(x));
+    }
+
+    inline const Rcomplex *COMPLEXVECTOR_COMPLEX_RO(RObject *x)
+    {
+        return static_cast<const Rcomplex *>(DATAPTR_RO(x));
+    }
 } // namespace CXXR
 
 #endif // COMPLEXVECTOR_HPP

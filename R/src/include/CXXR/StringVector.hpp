@@ -47,8 +47,15 @@ namespace CXXR
      */
     typedef FixedVector<GCEdge<String>, STRSXP> StringVector;
 
-#define STRING_PTR(x) ((SEXP *)DATAPTR(x))
-#define STRINGVECTOR_STRING_PTR_RO(x) ((const SEXP *)DATAPTR_RO(x))
+    inline SEXP *STRINGVECTOR_STRING_PTR(RObject *x)
+    {
+        return static_cast<SEXP *>(DATAPTR(x));
+    }
+
+    inline const SEXP *STRINGVECTOR_STRING_PTR_RO(RObject *x)
+    {
+        return static_cast<const SEXP *>(DATAPTR_RO(x));
+    }
 } // namespace CXXR
 
 #endif // STRINGVECTOR_HPP

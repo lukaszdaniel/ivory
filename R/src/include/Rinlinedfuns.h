@@ -90,7 +90,7 @@ extern inline void CHKVEC(SEXP x)
  * 
  * @return pointer to the data block
  */
-extern inline void *DATAPTR(SEXP x)
+extern inline void *CXXR::DATAPTR(SEXP x)
 {
     CHKVEC(x);
     if (ALTREP(x))
@@ -117,7 +117,7 @@ extern inline void *DATAPTR(SEXP x)
  * 
  * @return pointer to the (read only) data block
  */
-extern inline const void *DATAPTR_RO(SEXP x)
+extern inline const void *CXXR::DATAPTR_RO(SEXP x)
 {
     CHKVEC(x);
     if (ALTREP(x))
@@ -227,82 +227,82 @@ extern inline int LENGTH_EX(SEXP x, const char *file, int line)
 }
 
 #ifdef STRICT_TYPECHECK
-#define CHECK_STDVEC_LGL(x)                               \
-    do                                                    \
-    {                                                     \
-        CHECK_VECTOR_LGL(x);                              \
-        if (ALTREP(x))                                    \
+#define CHECK_STDVEC_LGL(x)                                  \
+    do                                                       \
+    {                                                        \
+        CHECK_VECTOR_LGL(x);                                 \
+        if (ALTREP(x))                                       \
             Rf_error(_("bad standard %s vector"), "LGLSXP"); \
     } while (0)
-#define CHECK_STDVEC_INT(x)                               \
-    do                                                    \
-    {                                                     \
-        CHECK_VECTOR_INT(x);                              \
-        if (ALTREP(x))                                    \
+#define CHECK_STDVEC_INT(x)                                  \
+    do                                                       \
+    {                                                        \
+        CHECK_VECTOR_INT(x);                                 \
+        if (ALTREP(x))                                       \
             Rf_error(_("bad standard %s vector"), "INTSXP"); \
     } while (0)
-#define CHECK_STDVEC_REAL(x)                               \
-    do                                                     \
-    {                                                      \
-        CHECK_VECTOR_REAL(x);                              \
-        if (ALTREP(x))                                     \
+#define CHECK_STDVEC_REAL(x)                                  \
+    do                                                        \
+    {                                                         \
+        CHECK_VECTOR_REAL(x);                                 \
+        if (ALTREP(x))                                        \
             Rf_error(_("bad standard %s vector"), "REALSXP"); \
     } while (0)
-#define CHECK_STDVEC_CPLX(x)                               \
-    do                                                     \
-    {                                                      \
-        CHECK_VECTOR_CPLX(x);                              \
-        if (ALTREP(x))                                     \
+#define CHECK_STDVEC_CPLX(x)                                  \
+    do                                                        \
+    {                                                         \
+        CHECK_VECTOR_CPLX(x);                                 \
+        if (ALTREP(x))                                        \
             Rf_error(_("bad standard %s vector"), "CPLXSXP"); \
     } while (0)
-#define CHECK_STDVEC_RAW(x)                               \
-    do                                                    \
-    {                                                     \
-        CHECK_VECTOR_RAW(x);                              \
-        if (ALTREP(x))                                    \
+#define CHECK_STDVEC_RAW(x)                                  \
+    do                                                       \
+    {                                                        \
+        CHECK_VECTOR_RAW(x);                                 \
+        if (ALTREP(x))                                       \
             Rf_error(_("bad standard %s vector"), "RAWSXP"); \
     } while (0)
 
-#define CHECK_SCALAR_LGL(x)                      \
-    do                                           \
-    {                                            \
-        CHECK_STDVEC_LGL(x);                     \
-        if (XLENGTH(x) != 1)                     \
+#define CHECK_SCALAR_LGL(x)                         \
+    do                                              \
+    {                                               \
+        CHECK_STDVEC_LGL(x);                        \
+        if (XLENGTH(x) != 1)                        \
             Rf_error(_("bad %s scalar"), "LGLSXP"); \
     } while (0)
-#define CHECK_SCALAR_INT(x)                      \
-    do                                           \
-    {                                            \
-        CHECK_STDVEC_INT(x);                     \
-        if (XLENGTH(x) != 1)                     \
+#define CHECK_SCALAR_INT(x)                         \
+    do                                              \
+    {                                               \
+        CHECK_STDVEC_INT(x);                        \
+        if (XLENGTH(x) != 1)                        \
             Rf_error(_("bad %s scalar"), "INTSXP"); \
     } while (0)
-#define CHECK_SCALAR_REAL(x)                      \
-    do                                            \
-    {                                             \
-        CHECK_STDVEC_REAL(x);                     \
-        if (XLENGTH(x) != 1)                      \
+#define CHECK_SCALAR_REAL(x)                         \
+    do                                               \
+    {                                                \
+        CHECK_STDVEC_REAL(x);                        \
+        if (XLENGTH(x) != 1)                         \
             Rf_error(_("bad %s scalar"), "REALSXP"); \
     } while (0)
-#define CHECK_SCALAR_CPLX(x)                      \
-    do                                            \
-    {                                             \
-        CHECK_STDVEC_CPLX(x);                     \
-        if (XLENGTH(x) != 1)                      \
+#define CHECK_SCALAR_CPLX(x)                         \
+    do                                               \
+    {                                                \
+        CHECK_STDVEC_CPLX(x);                        \
+        if (XLENGTH(x) != 1)                         \
             Rf_error(_("bad %s scalar"), "CPLXSXP"); \
     } while (0)
-#define CHECK_SCALAR_RAW(x)                      \
-    do                                           \
-    {                                            \
-        CHECK_STDVEC_RAW(x);                     \
-        if (XLENGTH(x) != 1)                     \
+#define CHECK_SCALAR_RAW(x)                         \
+    do                                              \
+    {                                               \
+        CHECK_STDVEC_RAW(x);                        \
+        if (XLENGTH(x) != 1)                        \
             Rf_error(_("bad %s scalar"), "RAWSXP"); \
     } while (0)
 
-#define CHECK_BOUNDS_ELT(x, i)                   \
-    do                                           \
-    {                                            \
-        if (i < 0 || i > XLENGTH(x))             \
+#define CHECK_BOUNDS_ELT(x, i)                      \
+    do                                              \
+    {                                               \
+        if (i < 0 || i > XLENGTH(x))                \
             Rf_error(_("subscript out of bounds")); \
     } while (0)
 
@@ -637,14 +637,13 @@ extern inline SEXP Rf_allocVector(SEXPTYPE type, R_xlen_t length = 1)
 /* Return a dotted pair with the given CAR and CDR. */
 /* The (R) TAG slot on the cell is set to NULL. */
 
-
-    /** @brief Get the i-th element of a list.
-     *
-     * @param list SEXP object.
-     * @param i i-th element of that object.
-     *
-     * @return i-th element.
-     */
+/** @brief Get the i-th element of a list.
+ *
+ * @param list SEXP object.
+ * @param i i-th element of that object.
+ *
+ * @return i-th element.
+ */
 extern inline SEXP Rf_elt(SEXP list, int i)
 {
     SEXP result = list;

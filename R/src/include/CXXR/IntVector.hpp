@@ -39,8 +39,15 @@ namespace CXXR
      */
     typedef CXXR::FixedVector<int, INTSXP> IntVector;
 
-#define INTVECTOR_INTEGER(x) ((int *)DATAPTR(x))
-#define INTVECTOR_INTEGER_RO(x) ((const int *)DATAPTR_RO(x))
+    inline int *INTVECTOR_INTEGER(RObject *x)
+    {
+        return static_cast<int *>(DATAPTR(x));
+    }
+
+    inline const int *INTVECTOR_INTEGER_RO(RObject *x)
+    {
+        return static_cast<const int *>(DATAPTR_RO(x));
+    }
 } // namespace CXXR
 
 #endif // INTVECTOR_HPP
