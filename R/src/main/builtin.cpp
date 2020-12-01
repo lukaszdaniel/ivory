@@ -367,13 +367,12 @@ HIDDEN SEXP do_newenv(SEXP call, SEXP op, SEXP args, SEXP rho)
     if (isNull(enclos))
 	error(_("use of NULL environment is defunct"));
 
-    if( !isEnvironment(enclos)   &&
+    if( !isEnvironment(enclos) &&
 	!isEnvironment((enclos = simple_as_environment(enclos))))
 	error(_("'%s' argument is not an environment"), "enclos");
 
     if( hash ) {
-	args = CDR(args);
-	size = asInteger(CAR(args));
+	size = asInteger(CADR(args));
 	if (size == NA_INTEGER)
 	    size = 0; /* so it will use the internal default */
     }
