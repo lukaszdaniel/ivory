@@ -1699,12 +1699,12 @@ inline static void cleanupEnvVector(SEXP v)
     /* FIXME: Disabled for now since a BUILTIN that saves its (NR)
        list can cause problems. .External.graphics does this for
        recording. Probably the best option is to not have the args go
-       down as NR. Most of these are fixed now, but this stilll seems
+       down as NR. Most of these are fixed now, but this still seems
        to wake things up, so hold off for now. */
     return;
 
     // avoid ODS compiler warning.
- #ifdef FALSE
+#ifdef FALSE
 	R_xlen_t len = XLENGTH(v);
 	for (R_xlen_t i = 0; i < len; i++)
 		SET_VECTOR_ELT(v, i, R_NilValue);
@@ -1895,7 +1895,7 @@ inline static SEXP R_execClosure(SEXP call, SEXP newrho, SEXP sysparent,
 
     /*  Set a longjmp target which will catch any explicit returns
 	from the function body.  */
-#ifdef USE_JMP
+
 	bool redo = false;
 	bool jumped = false;
 	do
@@ -1904,7 +1904,7 @@ inline static SEXP R_execClosure(SEXP call, SEXP newrho, SEXP sysparent,
 		// std::cerr << __FILE__ << ":" << __LINE__ << " Entering try/catch for " << &cntxt << std::endl;
 		try
 		{
-			if (!jumped) // (!(SETJMP(cntxt.getCJmpBuf())))
+			if (!jumped)
 			{
 				/* make it available to on.exit and implicitly protect */
 				cntxt.setReturnValue(eval(body, newrho));
@@ -1935,44 +1935,14 @@ inline static SEXP R_execClosure(SEXP call, SEXP newrho, SEXP sysparent,
 		}
 		catch (CXXR::JMPException &e)
 		{
-			// std::cerr << __FILE__ << ":" << __LINE__ << " Seeking " << e.context << "; in " << &cntxt << std::endl;
-			if (e.context != &cntxt)
+			// std::cerr << __FILE__ << ":" << __LINE__ << " Seeking " << e.context() << "; in " << &cntxt << std::endl;
+			if (e.context() != &cntxt)
 				throw;
 			jumped = true;
 			redo = true;
 		}
 		// std::cerr << __FILE__ << ":" << __LINE__ << " Exiting  try/catch for "  << &cntxt << std::endl;
 	} while (redo);
-#else
-	if (!(SETJMP(cntxt.getCJmpBuf())))
-	{
-		/* make it available to on.exit and implicitly protect */
-		cntxt.setReturnValue(eval(body, newrho));
-		R_Srcref = cntxt.getSrcRef();
-	}
-	else
-	{
-		if (!cntxt.getJumpTarget())
-		{
-			/* ignores intermediate jumps for on.exits */
-			if (R_ReturnedValue == R_RestartToken)
-			{
-				cntxt.setCallFlag(CTXT_RETURN); /* turn restart off */
-				R_ReturnedValue = R_NilValue;	/* remove restart token */
-				cntxt.setReturnValue(eval(body, newrho));
-			}
-			else
-			{
-				cntxt.setReturnValue(R_ReturnedValue);
-			}
-		}
-		else
-		{
-			cntxt.setReturnValue(nullptr); /* undefined */
-		}
-	}
-	cntxt.end();
-#endif
 
     if (dbg) {
 	Rprintf(_("exiting from: "));
@@ -2409,7 +2379,7 @@ HIDDEN SEXP do_for(SEXP call, SEXP op, SEXP args, SEXP rho)
     PROTECT_WITH_INDEX(v = R_NilValue, &vpi); nprot++;
 
     cntxt.start(CTXT_LOOP, R_NilValue, rho, R_BaseEnv, R_NilValue, R_NilValue);
-#ifdef USE_JMP
+
 	for (i = 0; i < n; i++)
 	{
 		// std::cerr << __FILE__ << ":" << __LINE__ << " (" << i << ") Entering try/catch for " << &cntxt << std::endl;
@@ -2485,93 +2455,15 @@ HIDDEN SEXP do_for(SEXP call, SEXP op, SEXP args, SEXP rho)
 		}
 		catch (CXXR::JMPException &e)
 		{
-			// std::cerr << __FILE__ << ":" << __LINE__ << " Seeking " << e.context << "; in " << &cntxt << std::endl;
-			if (e.context != &cntxt)
+			// std::cerr << __FILE__ << ":" << __LINE__ << " Seeking " << e.context() << "; in " << &cntxt << std::endl;
+			if (e.context() != &cntxt)
 				throw;
-			if (e.mask == CTXT_BREAK)
+			if (e.mask() == CTXT_BREAK)
 				break;
 			// Otherwise assume it's CTXT_NEXT
 		}
 		// std::cerr << __FILE__ << ":" << __LINE__ << " Exiting  try/catch for " << &cntxt << std::endl;
 	}
-#else
-    switch (SETJMP(cntxt.getCJmpBuf())) {
-    case CTXT_BREAK: goto for_break;
-    case CTXT_NEXT: goto for_next;
-    }
-
-    for (i = 0; i < n; i++) {
-
-	switch (val_type) {
-
-	case EXPRSXP:
-	    /* make sure loop variable is not modified via other vars */
-	    ENSURE_NAMEDMAX(XVECTOR_ELT(val, i));
-	    /* defineVar is used here and below rather than setVar in
-	       case the loop code removes the variable. */
-	    defineVar(sym, XVECTOR_ELT(val, i), rho);
-	    break;
-
-	case VECSXP:
-	    /* make sure loop variable is not modified via other vars */
-	    ENSURE_NAMEDMAX(VECTOR_ELT(val, i));
-	    /* defineVar is used here and below rather than setVar in
-	       case the loop code removes the variable. */
-	    defineVar(sym, VECTOR_ELT(val, i), rho);
-	    break;
-
-	case LISTSXP:
-	    /* make sure loop variable is not modified via other vars */
-	    ENSURE_NAMEDMAX(CAR(val));
-	    defineVar(sym, CAR(val), rho);
-	    val = CDR(val);
-	    break;
-
-	default:
-
-	    switch (val_type) {
-	    case LGLSXP:
-		ALLOC_LOOP_VAR(v, val_type, vpi);
-		SET_SCALAR_LVAL(v, (Rboolean) LOGICAL_ELT(val, i));
-		break;
-	    case INTSXP:
-		ALLOC_LOOP_VAR(v, val_type, vpi);
-		SET_SCALAR_IVAL(v, INTEGER_ELT(val, i));
-		break;
-	    case REALSXP:
-		ALLOC_LOOP_VAR(v, val_type, vpi);
-		SET_SCALAR_DVAL(v, REAL_ELT(val, i));
-		break;
-	    case CPLXSXP:
-		ALLOC_LOOP_VAR(v, val_type, vpi);
-		SET_SCALAR_CVAL(v, COMPLEX_ELT(val, i));
-		break;
-	    case STRSXP:
-		ALLOC_LOOP_VAR(v, val_type, vpi);
-		SET_STRING_ELT(v, 0, STRING_ELT(val, i));
-		break;
-	    case RAWSXP:
-		ALLOC_LOOP_VAR(v, val_type, vpi);
-		SET_SCALAR_BVAL(v, RAW(val)[i]);
-		break;
-	    default:
-		errorcall(call, _("invalid 'for()' loop sequence"));
-	    }
-	    if (CAR(cell) == R_UnboundValue || ! SET_BINDING_VALUE(cell, v))
-		defineVar(sym, v, rho);
-	}
-	if (!bgn && RDEBUG(rho) && !R_GlobalContext->getBrowserFinish()) {
-	    SrcrefPrompt("debug", R_Srcref);
-	    PrintValue(body);
-	    do_browser(call, op, R_NilValue, rho);
-	}
-	eval(body, rho);
-
-    for_next:
-	; /* needed for strict ISO C compliance, according to gcc 2.95.2 */
-    }
- for_break:
-#endif
 	UNPROTECT(sub_nprot);
     DECREMENT_LINKS(val);
     cntxt.end();
@@ -2601,7 +2493,7 @@ HIDDEN SEXP do_while(SEXP call, SEXP op, SEXP args, SEXP rho)
     bgn = BodyHasBraces(body);
 
     cntxt.start(CTXT_LOOP, R_NilValue, rho, R_BaseEnv, R_NilValue, R_NilValue);
-#ifdef USE_JMP
+
 	bool redo = false;
 	do
 	{
@@ -2635,42 +2527,15 @@ HIDDEN SEXP do_while(SEXP call, SEXP op, SEXP args, SEXP rho)
 		}
 		catch (CXXR::JMPException &e)
 		{
-			// std::cerr << __FILE__ << ":" << __LINE__ << " Seeking " << e.context << "; in " << &cntxt << std::endl;
-			if (e.context != &cntxt)
+			// std::cerr << __FILE__ << ":" << __LINE__ << " Seeking " << e.context() << "; in " << &cntxt << std::endl;
+			if (e.context() != &cntxt)
 				throw;
-			redo = (e.mask != CTXT_BREAK);
+			redo = (e.mask() != CTXT_BREAK);
 			if (!redo) cntxt.end();
 		}
 		// std::cerr << __FILE__ << ":" << __LINE__ << " Exiting  try/catch for " << &cntxt << std::endl;
 	} while (redo);
-#else
-	if (SETJMP(cntxt.getCJmpBuf()) != CTXT_BREAK)
-	{
-		while (true)
-		{
-			SEXP cond = PROTECT(eval(CAR(args), rho));
-			int condl = asLogicalNoNA(cond, call, rho);
-			UNPROTECT(1);
-			if (!condl)
-				break;
-			if (RDEBUG(rho) && !bgn && !R_GlobalContext->getBrowserFinish())
-			{
-				SrcrefPrompt("debug", R_Srcref);
-				PrintValue(body);
-				do_browser(call, op, R_NilValue, rho);
-			}
-			eval(body, rho);
-			if (RDEBUG(rho) && !R_GlobalContext->getBrowserFinish())
-			{
-				SrcrefPrompt("debug", R_Srcref);
-				Rprintf("(while) ");
-				PrintValue(CAR(args));
-				do_browser(call, op, R_NilValue, rho);
-			}
-		}
-	}
-    cntxt.end();
-#endif
+
     SET_RDEBUG(rho, dbg);
     return R_NilValue;
 }
@@ -2694,7 +2559,6 @@ HIDDEN SEXP do_repeat(SEXP call, SEXP op, SEXP args, SEXP rho)
     body = CAR(args);
 
     cntxt.start(CTXT_LOOP, R_NilValue, rho, R_BaseEnv, R_NilValue, R_NilValue);
-#ifdef USE_JMP
 	bool redo = false;
 	do
 	{
@@ -2710,24 +2574,15 @@ HIDDEN SEXP do_repeat(SEXP call, SEXP op, SEXP args, SEXP rho)
 		}
 		catch (CXXR::JMPException &e)
 		{
-			// std::cerr << __FILE__ << ":" << __LINE__ << " Seeking " << e.context << "; in " << &cntxt << std::endl;
-			if (e.context != &cntxt)
+			// std::cerr << __FILE__ << ":" << __LINE__ << " Seeking " << e.context() << "; in " << &cntxt << std::endl;
+			if (e.context() != &cntxt)
 				throw;
-			redo = (e.mask != CTXT_BREAK);
+			redo = (e.mask() != CTXT_BREAK);
 			if (!redo) cntxt.end();
 		}
 		// std::cerr << __FILE__ << ":" << __LINE__ << " Exiting  try/catch for " << &cntxt << std::endl;
 	} while (redo);
-#else
-	if (SETJMP(cntxt.getCJmpBuf()) != CTXT_BREAK)
-	{
-		while (true)
-		{
-			eval(body, rho);
-		}
-	}
-    cntxt.end();
-#endif
+
     SET_RDEBUG(rho, dbg);
     return R_NilValue;
 }
@@ -3587,7 +3442,7 @@ HIDDEN SEXP do_eval(SEXP call, SEXP op, SEXP args, SEXP rho)
     if (TYPEOF(expr) == LANGSXP || TYPEOF(expr) == SYMSXP || isByteCode(expr)) {
 	PROTECT(expr);
 	cntxt.start(CTXT_RETURN, R_GlobalContext->getCall(), env, rho, args, op);
-#ifdef USE_JMP
+
 	bool redo = false;
 	bool jumped = false;
 	do
@@ -3596,7 +3451,7 @@ HIDDEN SEXP do_eval(SEXP call, SEXP op, SEXP args, SEXP rho)
 		// std::cerr << __FILE__ << ":" << __LINE__ << " Entering try/catch for " << &cntxt << std::endl;
 		try
 		{
-			if (!jumped) // (!SETJMP(cntxt.getCJmpBuf()))
+			if (!jumped)
 			{
 				expr = eval(expr, env);
 			}
@@ -3613,30 +3468,15 @@ HIDDEN SEXP do_eval(SEXP call, SEXP op, SEXP args, SEXP rho)
 		}
 		catch (CXXR::JMPException &e)
 		{
-			// std::cerr << __FILE__ << ":" << __LINE__ << " Seeking " << e.context << "; in " << &cntxt << std::endl;
-			if (e.context != &cntxt)
+			// std::cerr << __FILE__ << ":" << __LINE__ << " Seeking " << e.context() << "; in " << &cntxt << std::endl;
+			if (e.context() != &cntxt)
 				throw;
 			redo = true;
 			jumped = true;
 		}
 		// std::cerr << __FILE__ << ":" << __LINE__ << " Exiting  try/catch for " << &cntxt << std::endl;
 	} while (redo);
-#else
-	if (!SETJMP(cntxt.getCJmpBuf()))
-	{
-		expr = eval(expr, env);
-	}
-	else
-	{
-		expr = R_ReturnedValue;
-		if (expr == R_RestartToken)
-		{
-			cntxt.setCallFlag(CTXT_RETURN); /* turn restart off */
-			error(_("restarts are not supported in 'eval()' function"));
-		}
-	}
-	cntxt.end();
-#endif
+
 	UNPROTECT(1);
 	PROTECT(expr);
 	// cntxt.end();
@@ -3647,7 +3487,6 @@ HIDDEN SEXP do_eval(SEXP call, SEXP op, SEXP args, SEXP rho)
 	PROTECT(expr);
 	tmp = R_NilValue;
 	cntxt.start(CTXT_RETURN, R_GlobalContext->getCall(), env, rho, args, op);
-#ifdef USE_JMP
 	bool redo = false;
 	bool jumped = false;
 	do
@@ -3656,7 +3495,7 @@ HIDDEN SEXP do_eval(SEXP call, SEXP op, SEXP args, SEXP rho)
 		// std::cerr << __FILE__ << ":" << __LINE__ << " Entering try/catch for " << &cntxt << std::endl;
 		try
 		{
-			if (!jumped) // (!SETJMP(cntxt.getCJmpBuf()))
+			if (!jumped)
 			{
 				int n = LENGTH(expr);
 				for (int i = 0; i < n; i++)
@@ -3678,35 +3517,15 @@ HIDDEN SEXP do_eval(SEXP call, SEXP op, SEXP args, SEXP rho)
 		}
 		catch (CXXR::JMPException &e)
 		{
-			// std::cerr << __FILE__ << ":" << __LINE__ << " Seeking " << e.context << "; in " << &cntxt << std::endl;
-			if (e.context != &cntxt)
+			// std::cerr << __FILE__ << ":" << __LINE__ << " Seeking " << e.context() << "; in " << &cntxt << std::endl;
+			if (e.context() != &cntxt)
 				throw;
 			redo = true;
 			jumped = true;
 		}
 		// std::cerr << __FILE__ << ":" << __LINE__ << " Exiting  try/catch for " << &cntxt << std::endl;
 	} while (redo);
-#else
-	if (!SETJMP(cntxt.getCJmpBuf()))
-	{
-		int n = LENGTH(expr);
-		for (int i = 0; i < n; i++)
-		{
-			R_Srcref = getSrcref(srcrefs, i);
-			tmp = eval(XVECTOR_ELT(expr, i), env);
-		}
-	}
-	else
-	{
-		tmp = R_ReturnedValue;
-		if (tmp == R_RestartToken)
-		{
-			cntxt.setCallFlag(CTXT_RETURN); /* turn restart off */
-			error(_("restarts are not supported in 'eval()' function"));
-		}
-	}
-	cntxt.end();
-#endif
+
 	UNPROTECT(1);
 	PROTECT(tmp);
 	// cntxt.end();
@@ -3947,7 +3766,7 @@ bool R::DispatchOrEval(SEXP call, SEXP op, const char *generic, SEXP args,
 	       Using rho for current and calling environment can be
 	       confusing for things like sys.parent() calls captured
 	       in promises (Gabor G had an example of this).  Also,
-	       since the context is established without a SETJMP using
+	       since the context is established without a try/catch using
 	       an R-accessible environment allows a segfault to be
 	       triggered (by something very obscure, but still).
 	       Hence here and in the other usemethod() uses below a
@@ -5361,36 +5180,12 @@ NORET static void nodeStackOverflow()
     error(_("node stack overflow"));
 }
 
-// loopWithContext() was abolished in commit 71492 (on 2016-10-10)
-// in order to use bcEval with the try/catch approach (instead of SETJMP/LONGJMP) we had to revert that change.
-#define REVERTED_71492
-/* Allocate consecutive space of nelems node stack elements */
-#ifndef REVERTED_71492
-inline static void *BCNALLOC(int nelems)
-{
-	void *ans;
-
-	BCNSTACKCHECK(nelems + 1);
-	R_BCNodeStackTop->tag = RAWMEM_TAG;
-	R_BCNodeStackTop->u.ival = nelems;
-	R_BCNodeStackTop++;
-	ans = R_BCNodeStackTop;
-	R_BCNodeStackTop += nelems;
-	return ans;
-}
-#endif
 /* Allocate R context on the node stack */
 #define RCNTXT_ELEMS ((sizeof(RCNTXT) + sizeof(R_bcstack_t) - 1) \
 			/ sizeof(R_bcstack_t))
 
 #define BCNALLOC_CNTXT() (RCNTXT *)BCNALLOC(RCNTXT_ELEMS)
-#ifndef REVERTED_71492
-inline static void BCNPOP_AND_END_CNTXT() {
-    RCNTXT* cptr = (RCNTXT *)(R_BCNodeStackTop - RCNTXT_ELEMS);
-    cptr->end();
-    R_BCNodeStackTop -= RCNTXT_ELEMS + 1;
-}
-#endif
+
 static SEXP bytecodeExpr(SEXP e)
 {
     if (isByteCode(e)) {
@@ -5541,7 +5336,6 @@ inline static SEXP BINDING_VALUE(SEXP loc)
    invalidating the cache would be needed. This is certainly possible,
    but finding an efficient mechanism does not seem to be easy.   LT */
 
-#ifdef REVERTED_71492
 /* Both mechanisms implemented here make use of the stack to hold
    cache information.  This is not a problem except for "safe" for()
    loops using the STARTLOOPCNTXT instruction to run the body in a
@@ -5554,7 +5348,6 @@ inline static SEXP BINDING_VALUE(SEXP loc)
    specific STARTFORLOOPCNTXT instruction that deals with transferring
    the information in some other way. For now disabling the cache is
    an expedient solution. LT */
-#endif
 
 #define USE_BINDING_CACHE
 # ifdef USE_BINDING_CACHE
@@ -6851,23 +6644,7 @@ struct R_loopinfo_t{
 			defineVar(loopinfo->symbol, value, rho); \
 	} while (0)
 
-/* Loops that cannot have their SETJMPs optimized out are bracketed by
-   STARTLOOPCNTXT and ENLOOPCNTXT instructions.  The STARTLOOPCNTXT
-   instruction stores the target offset for a 'break' and then the
-   target offset for a 'next' on the stack. For a 'for' loop the loop
-   state information is then pushed on the stack as well. The
-   following functions retrieve the offsets. */
-#ifndef REVERTED_71492
-inline static int LOOP_BREAK_OFFSET(int loop_state_size)
-{
-	return GETSTACK_IVAL_PTR(R_BCNodeStackTop - 2 - loop_state_size);
-}
 
-inline static int LOOP_NEXT_OFFSET(int loop_state_size)
-{
-	return GETSTACK_IVAL_PTR(R_BCNodeStackTop - 1 - loop_state_size);
-}
-#endif
 /* Check whether a call is to a base function; if not use AST interpeter */
 /***** need a faster guard check */
 inline static SEXP SymbolValue(SEXP sym)
@@ -7159,12 +6936,10 @@ HIDDEN Rboolean R_BCVersionOK(SEXP s)
 					  (version >= R_bcMinVersion && version <= R_bcVersion));
 }
 
-#ifdef REVERTED_71492
 static void loopWithContext(SEXP code, SEXP rho)
 {
     RCNTXT cntxt;
     cntxt.start(CTXT_LOOP, R_NilValue, rho, R_BaseEnv, R_NilValue, R_NilValue);
-#ifdef USE_JMP
 	bool redo;
 	do
 	{
@@ -7177,20 +6952,15 @@ static void loopWithContext(SEXP code, SEXP rho)
 		}
 		catch (CXXR::JMPException &e)
 		{
-			// std::cerr << __FILE__ << ":" << __LINE__ << " Seeking  " << e.context << "; in " << &cntxt << std::endl;
-			if (e.context != &cntxt)
+			// std::cerr << __FILE__ << ":" << __LINE__ << " Seeking  " << e.context() << "; in " << &cntxt << std::endl;
+			if (e.context() != &cntxt)
 				throw;
-			redo = (e.mask != CTXT_BREAK);
+			redo = (e.mask() != CTXT_BREAK);
 		}
 		// std::cerr << __FILE__ << ":" << __LINE__ << " Exiting try/catch for " << &cntxt << std::endl;
 	} while (redo);
-#else
-	if (SETJMP(cntxt.cjmpbuf) != CTXT_BREAK)
-		bcEval(code, rho, FALSE);
-	endcontext(&cntxt);
-#endif
+
 }
-#endif
 
 static SEXP bcEval(SEXP body, SEXP rho, bool useCache)
 {
@@ -7318,7 +7088,6 @@ static SEXP bcEval(SEXP body, SEXP rho, bool useCache)
     OP(POP, 0): BCNPOP_IGNORE_VALUE(); NEXT();
     OP(DUP, 0): BCNDUP(); NEXT();
     OP(PRINTVALUE, 0): PrintValue(BCNPOP()); NEXT();
-#ifdef REVERTED_71492
     OP(STARTLOOPCNTXT, 2):
 	{
 		int dummy = GETOP(); dummy++; // dummy variable so to keep the same number (2) of arguments needed by STARTLOOPCNTXT
@@ -7332,80 +7101,6 @@ static SEXP bcEval(SEXP body, SEXP rho, bool useCache)
 		retvalue = R_NilValue;
 		goto done;
 	}
-#else
-    OP(STARTLOOPCNTXT, 2):
-	{
-	    Rboolean is_for_loop = (Rboolean) GETOP();
-	    R_bcstack_t *oldtop = R_BCNodeStackTop;
-	    RCNTXT *cptr = BCNALLOC_CNTXT();
-	    BCNPUSH_INTEGER(GETOP());       /* pc offset for 'break' */
-	    BCNPUSH_INTEGER((int)(pc - codebase)); /* pc offset for 'next' */
-		cptr->start(CTXT_LOOP, R_NilValue, rho, R_BaseEnv, R_NilValue, R_NilValue);
-		int tmp_offset = is_for_loop ? FOR_LOOP_STATE_SIZE : 0;
-	    if (is_for_loop) {
-		/* duplicate the for loop state data on the top of the stack */
-		R_bcstack_t *loopdata = oldtop - FOR_LOOP_STATE_SIZE;
-		BCNSTACKCHECK(FOR_LOOP_STATE_SIZE);
-		for (int i = 0; i < FOR_LOOP_STATE_SIZE; i++)
-		    R_BCNodeStackTop[i] = loopdata[i];
-		R_BCNodeStackTop += FOR_LOOP_STATE_SIZE;
-		SET_FOR_LOOP_BCPROT_OFFSET((int)(R_BCProtTop - R_BCNodeStackBase));
-		INCLNK_stack(R_BCNodeStackTop);
-	    }
-#ifdef USE_JMP
-		// std::cerr << __FILE__ << ":" << __LINE__ << " Entering try/catch for " << cptr << std::endl;
-		try
-		{
-			// TODO IVORY: R_disable_bytecode is set to 0 in Defn.h, because of 
-			// problems with encapsulating bcEval within try/catch block
-			// (which is needed for GCRoot to work properly).
-		}
-		catch (CXXR::JMPException &e)
-		{
-			// std::cerr << __FILE__ << ":" << __LINE__ << " Seeking " << e.context << "; in " << cptr << std::endl;
-			if (e.context != cptr)
-				throw;
-			if (e.mask == CTXT_BREAK)
-			{
-				pc = codebase + LOOP_BREAK_OFFSET(tmp_offset);
-			}
-			else if (e.mask == CTXT_NEXT)
-			{
-				pc = codebase + LOOP_NEXT_OFFSET(tmp_offset);
-			}
-		}
-		// std::cerr << __FILE__ << ":" << __LINE__ << " Exiting  try/catch for " << cptr << std::endl;
-#else
-		switch (SETJMP(cptr->getCJmpBuf())) {
-		case 0:
-			break;
-		case CTXT_BREAK:
-		    pc = codebase + LOOP_BREAK_OFFSET(tmp_offset);
-		    break;
-		case CTXT_NEXT:
-		    pc = codebase + LOOP_NEXT_OFFSET(tmp_offset);
-		    break;
-		}
-#endif
-	    /* context, offsets on stack, to be popped by ENDLOOPCNTXT */
-	    NEXT();
-	}
-    OP(ENDLOOPCNTXT, 1):
-	{
-	    Rboolean is_for_loop = (Rboolean) GETOP();
-	    if (is_for_loop) {
-		int offset = GET_FOR_LOOP_BCPROT_OFFSET();
-		DECLNK_stack(R_BCNodeStackBase + offset);
-
-		/* remove the duplicated for loop state data */
-		R_BCNodeStackTop -= FOR_LOOP_STATE_SIZE;
-	    }
-	    BCNPOP_IGNORE_VALUE(); /* 'next' target */
-	    BCNPOP_IGNORE_VALUE(); /* 'break' target */
-	    BCNPOP_AND_END_CNTXT();
-	    NEXT();
-	}
-#endif
     OP(DOLOOPNEXT, 0): findcontext(CTXT_NEXT, rho, R_NilValue);
     OP(DOLOOPBREAK, 0): findcontext(CTXT_BREAK, rho, R_NilValue);
     OP(STARTFOR, 3):

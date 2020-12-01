@@ -303,7 +303,7 @@ Rboolean (NO_SPECIAL_SYMBOLS)(SEXP b);
 
 #endif /* USE_RINTERNALS */
 
-#include <RCNTXT.h>
+#include <RContext.h>
 
 /* Miscellaneous Definitions */
 inline bool streql(const char *s, const char *t)

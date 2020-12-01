@@ -587,7 +587,7 @@ bool WeakRef::runFinalizers()
             saveToplevelContext = R_ToplevelContext;
             GCRoot<> topExp(R_CurrentExpr);
             auto savestack = GCRootBase::ppsSize();
-#ifdef USE_JMP
+
             bool redo = false;
             bool jumped = false;
             do
@@ -596,7 +596,7 @@ bool WeakRef::runFinalizers()
                 // std::cerr << __FILE__ << ":" << __LINE__ << " Entering try/catch for " << &thiscontext << std::endl;
                 try
                 {
-                    if (!jumped) // (!SETJMP(thiscontext.getCJmpBuf()))
+                    if (!jumped)
                     {
                         R_GlobalContext = R_ToplevelContext = &thiscontext;
                         runWeakRefFinalizer(wr);
@@ -605,22 +605,15 @@ bool WeakRef::runFinalizers()
                 }
                 catch (CXXR::JMPException &e)
                 {
-                    // std::cerr << __FILE__ << ":" << __LINE__ << " Seeking " << e.context << "; in " << &thiscontext << std::endl;
-                    if (e.context != &thiscontext)
+                    // std::cerr << __FILE__ << ":" << __LINE__ << " Seeking " << e.context() << "; in " << &thiscontext << std::endl;
+                    if (e.context() != &thiscontext)
                         throw;
                     redo = true;
                     jumped = true;
                 }
                 // std::cerr << __FILE__ << ":" << __LINE__ << " Exiting  try/catch for " << &thiscontext << std::endl;
             } while (redo);
-#else
-            if (!SETJMP(thiscontext.getCJmpBuf()))
-            {
-                R_GlobalContext = R_ToplevelContext = &thiscontext;
-                runWeakRefFinalizer(wr);
-            }
-            thiscontext.end();
-#endif
+
             R_ToplevelContext = saveToplevelContext;
             GCRootBase::ppsRestoreSize(savestack);
             R_CurrentExpr = topExp;

@@ -170,7 +170,6 @@ static void onintrEx(Rboolean resumeOK)
 	int dbflag = RDEBUG(rho);
 	RCNTXT restartcontext;
 	restartcontext.start(CTXT_RESTART, R_NilValue, R_GlobalEnv, R_BaseEnv, R_NilValue, R_NilValue);
-#ifdef USE_JMP
 	bool redo = false;
 	bool jumped = false;
 	do
@@ -179,7 +178,7 @@ static void onintrEx(Rboolean resumeOK)
 		// std::cerr << __FILE__ << ":" << __LINE__ << " Entering try/catch for " << &restartcontext << std::endl;
 		try
 		{
-			if (!jumped) // (!SETJMP(restartcontext.getCJmpBuf()))
+			if (!jumped)
 			{
 				RCNTXT::R_InsertRestartHandlers(&restartcontext, "resume");
 				signalInterrupt();
@@ -196,30 +195,14 @@ static void onintrEx(Rboolean resumeOK)
 		}
 		catch (CXXR::JMPException &e)
 		{
-			// std::cerr << __FILE__ << ":" << __LINE__ << " Seeking  " << e.context << "; in " << &restartcontext << std::endl;
-			if (e.context != &restartcontext)
+			// std::cerr << __FILE__ << ":" << __LINE__ << " Seeking  " << e.context() << "; in " << &restartcontext << std::endl;
+			if (e.context() != &restartcontext)
 				throw;
 			redo = true;
 			jumped = true;
 		}
 		// std::cerr << __FILE__ << ":" << __LINE__ << " Exiting  try/catch for " << &restartcontext << std::endl;
 	} while (redo);
-#else
-	if (!SETJMP(restartcontext.getCJmpBuf()))
-	{
-		RCNTXT::R_InsertRestartHandlers(&restartcontext, "resume");
-		signalInterrupt();
-	}
-	else
-	{
-		SET_RDEBUG(rho, dbflag); /* in case browser() has messed with it */
-		R_ReturnedValue = R_NilValue;
-		R_Visible = false;
-		restartcontext.end();
-		return;
-	}
-	restartcontext.end();
-#endif
     }
     else signalInterrupt();
 

@@ -18,13 +18,13 @@
  *  https://www.R-project.org/Licenses/
  */
 
-/** @file RCNTXT.h
+/** @file RContext.h
  *
- * Class RCNTXT and related functions.
+ * Class RContext and related functions.
  */
 
-#ifndef RCNTXT_H
-#define RCNTXT_H
+#ifndef RCONTEXT_H
+#define RCONTEXT_H
 
 /* The byte code engine uses a typed stack. The typed stack's entries
    consist of a tag and a union. An entry can represent a standard
@@ -44,7 +44,8 @@
    used for jump buffers.
 */
 
-enum BCStack_enum {
+enum BCStack_enum
+{
     PARTIALSXP_MASK = (~255),
     CACHESZ_TAG = 253,
     RAWMEM_TAG = 254
@@ -54,7 +55,8 @@ struct R_bcstack_t
 {
     int tag;
     int flags;
-    union {
+    union
+    {
         int ival;
         double dval;
         SEXP sxpval;
@@ -63,6 +65,7 @@ struct R_bcstack_t
 };
 
 #ifdef R_USE_SIGNALS
+
 #ifdef _WIN32
 #include <psignal.h>
 #else
@@ -74,15 +77,11 @@ struct R_bcstack_t
 #define SIGSETJMP(x, s) sigsetjmp(x, s)
 #define SIGLONGJMP(x, i) siglongjmp(x, i)
 #define JMP_BUF sigjmp_buf
-#define SETJMP(x) sigsetjmp(x, 0)
-#define LONGJMP(x, i) siglongjmp(x, i)
 #else
 #define SIGJMP_BUF jmp_buf
 #define SIGSETJMP(x, s) setjmp(x)
 #define SIGLONGJMP(x, i) longjmp(x, i)
 #define JMP_BUF jmp_buf
-#define SETJMP(x) setjmp(x)
-#define LONGJMP(x, i) longjmp(x, i)
 #endif
 
 /* Stack entry for pending promises */
@@ -133,57 +132,57 @@ BUI   0 0 0 0 0 0 0 1 = 64
 */
 
 /* Evaluation Context Structure */
-class RCNTXT
+class RContext
 {
 private:
-    RCNTXT *m_nextcontext;  /* The next context up the chain */
-    int m_callflag;         /* The context "type" */
-    JMP_BUF m_cjmpbuf;      /* C stack and register information */
-    size_t m_cstacktop;        /* Top of the pointer protection stack */
-    int m_evaldepth;        /* evaluation depth at inception */
-    SEXP m_promargs;        /* Promises supplied to closure */
-    SEXP m_callfun;         /* The closure called */
-    SEXP m_sysparent;       /* environment the closure was called from */
-    SEXP m_call;            /* The call that effected this context*/
-    SEXP m_cloenv;          /* The environment */
-    SEXP m_conexit;         /* Interpreted "on.exit" code */
-    void (*m_cend)(void *); /* C "on.exit" thunk */
-    void *m_cenddata;       /* data for C "on.exit" thunk */
-    void *m_vmax;           /* top of R_alloc stack */
-    int m_intsusp;          /* interrupts are suspended */
-    bool m_gcenabled;       /* R_GCEnabled value */
-    bool m_bcintactive;     /* R_BCIntActive value */
-    SEXP m_bcbody;          /* R_BCbody value */
-    void *m_bcpc;           /* R_BCpc value */
-    SEXP m_handlerstack;    /* condition handler stack */
-    SEXP m_restartstack;    /* stack of available restarts */
-    RPRSTACK *m_prstack;    /* stack of pending promises */
+    RContext *m_nextcontext; /* The next context up the chain */
+    int m_callflag;          /* The context "type" */
+    JMP_BUF m_cjmpbuf;       /* C stack and register information */
+    size_t m_cstacktop;      /* Top of the pointer protection stack */
+    int m_evaldepth;         /* evaluation depth at inception */
+    SEXP m_promargs;         /* Promises supplied to closure */
+    SEXP m_callfun;          /* The closure called */
+    SEXP m_sysparent;        /* environment the closure was called from */
+    SEXP m_call;             /* The call that effected this context*/
+    SEXP m_cloenv;           /* The environment */
+    SEXP m_conexit;          /* Interpreted "on.exit" code */
+    void (*m_cend)(void *);  /* C "on.exit" thunk */
+    void *m_cenddata;        /* data for C "on.exit" thunk */
+    void *m_vmax;            /* top of R_alloc stack */
+    int m_intsusp;           /* interrupts are suspended */
+    bool m_gcenabled;        /* R_GCEnabled value */
+    bool m_bcintactive;      /* R_BCIntActive value */
+    SEXP m_bcbody;           /* R_BCbody value */
+    void *m_bcpc;            /* R_BCpc value */
+    SEXP m_handlerstack;     /* condition handler stack */
+    SEXP m_restartstack;     /* stack of available restarts */
+    RPRSTACK *m_prstack;     /* stack of pending promises */
     R_bcstack_t *m_nodestack;
     R_bcstack_t *m_bcprottop;
-    SEXP m_srcref;        /* The source line in effect */
-    bool m_browserfinish; /* should browser finish this context without
+    SEXP m_srcref;          /* The source line in effect */
+    bool m_browserfinish;   /* should browser finish this context without
                                    stopping */
-    SEXP m_returnValue;   /* only set during on.exit calls */
-    RCNTXT *m_jumptarget; /* target for a continuing jump */
-    int m_jumpmask;       /* associated LONGJMP argument */
+    SEXP m_returnValue;     /* only set during on.exit calls */
+    RContext *m_jumptarget; /* target for a continuing jump */
+    int m_jumpmask;         /* associated JMPException argument */
     SEXP getCallWithSrcref();
-    RCNTXT *first_jump_target(int mask);
+    RContext *first_jump_target(int mask);
 
 public:
-    RCNTXT() : m_nextcontext(nullptr), m_callflag(0), m_cjmpbuf(), m_cstacktop(0), m_evaldepth(0), m_promargs(nullptr),
-               m_callfun(nullptr), m_sysparent(nullptr), m_call(nullptr), m_cloenv(nullptr), m_conexit(nullptr), m_cend(nullptr), m_cenddata(nullptr),
-               m_vmax(nullptr), m_intsusp(0), m_gcenabled(false), m_bcintactive(false), m_bcbody(nullptr), m_bcpc(nullptr), m_handlerstack(nullptr),
-               m_restartstack(nullptr), m_prstack(nullptr), m_nodestack(nullptr), m_bcprottop(nullptr), m_srcref(nullptr), m_browserfinish(false),
-               m_returnValue(nullptr), m_jumptarget(nullptr), m_jumpmask(0){};
-    ~RCNTXT(){};
+    RContext() : m_nextcontext(nullptr), m_callflag(0), m_cjmpbuf(), m_cstacktop(0), m_evaldepth(0), m_promargs(nullptr),
+                 m_callfun(nullptr), m_sysparent(nullptr), m_call(nullptr), m_cloenv(nullptr), m_conexit(nullptr), m_cend(nullptr), m_cenddata(nullptr),
+                 m_vmax(nullptr), m_intsusp(0), m_gcenabled(false), m_bcintactive(false), m_bcbody(nullptr), m_bcpc(nullptr), m_handlerstack(nullptr),
+                 m_restartstack(nullptr), m_prstack(nullptr), m_nodestack(nullptr), m_bcprottop(nullptr), m_srcref(nullptr), m_browserfinish(false),
+                 m_returnValue(nullptr), m_jumptarget(nullptr), m_jumpmask(0){};
+    ~RContext(){};
     SEXP getHandlerStack() const { return this->m_handlerstack; }
     void setHandlerStack(SEXP handler) { this->m_handlerstack = handler; }
     SEXP onExit() const { return this->m_conexit; }
     void setOnExit(SEXP x) { this->m_conexit = x; }
     SEXP workingEnvironment() const { return this->m_cloenv; }
     void setWorkingEnvironment(SEXP x) { this->m_cloenv = x; }
-    RCNTXT *nextContext() const { return this->m_nextcontext; }
-    void setNextContext(RCNTXT *ctxt) { this->m_nextcontext = ctxt; }
+    RContext *nextContext() const { return this->m_nextcontext; }
+    void setNextContext(RContext *ctxt) { this->m_nextcontext = ctxt; }
     SEXP getReturnValue() const { return this->m_returnValue; }
     void setReturnValue(SEXP rv) { this->m_returnValue = rv; }
     void *getContextEndData() const { return this->m_cenddata; };
@@ -220,8 +219,8 @@ public:
     void setVMax(void *vm) { this->m_vmax = vm; }
     RPRSTACK *getPrStack() const { return this->m_prstack; }
     void setPrStack(RPRSTACK *rpr) { this->m_prstack = rpr; }
-    RCNTXT *getJumpTarget() const { return this->m_jumptarget; }
-    void setJumpTarget(RCNTXT *target) { this->m_jumptarget = target; }
+    RContext *getJumpTarget() const { return this->m_jumptarget; }
+    void setJumpTarget(RContext *target) { this->m_jumptarget = target; }
     int getJumpMask() const { return this->m_jumpmask; }
     void setJumpMask(int mask) { this->m_jumpmask = mask; }
     R_bcstack_t *getNodeStack() const { return this->m_nodestack; }
@@ -246,30 +245,32 @@ public:
     SEXP R_sysfunction(int n);
     SEXP R_syscall(int n);
     void R_restore_globals();
-    static void R_run_onexits(RCNTXT *cptr = nullptr);
+    static void R_run_onexits(RContext *cptr = nullptr);
     NORET void R_jumpctxt(int mask, SEXP val);
     SEXP R_sysframe(int n);
     int Rf_framedepth();
     void start(int, SEXP, SEXP, SEXP, SEXP, SEXP);
-    static void begincontext(RCNTXT &, int, SEXP, SEXP, SEXP, SEXP, SEXP);
-    static void begincontext(RCNTXT *, int, SEXP, SEXP, SEXP, SEXP, SEXP);
-    static SEXP dynamicfindVar(SEXP, RCNTXT *);
+    static void begincontext(RContext &, int, SEXP, SEXP, SEXP, SEXP, SEXP);
+    static void begincontext(RContext *, int, SEXP, SEXP, SEXP, SEXP, SEXP);
+    static SEXP dynamicfindVar(SEXP, RContext *);
     void end();
-    static void endcontext(RCNTXT &);
-    static void endcontext(RCNTXT *);
-    static void R_InsertRestartHandlers(RCNTXT *, const char *);
-    NORET static void R_JumpToContext(RCNTXT *, int, SEXP);
-    static RCNTXT *R_findExecContext(RCNTXT *, SEXP);
-    static RCNTXT *R_findParentContext(RCNTXT *, int);
-    static RCNTXT *findProfContext(RCNTXT *cptr);
+    static void endcontext(RContext &);
+    static void endcontext(RContext *);
+    static void R_InsertRestartHandlers(RContext *, const char *);
+    NORET static void R_JumpToContext(RContext *, int, SEXP);
+    static RContext *R_findExecContext(RContext *, SEXP);
+    static RContext *R_findParentContext(RContext *, int);
+    static RContext *findProfContext(RContext *cptr);
 };
 
-extern "C" RCNTXT R_Toplevel;	      /* Storage for the toplevel context */
-extern "C" RCNTXT* R_ToplevelContext;  /* The toplevel context */
-extern "C" RCNTXT* R_GlobalContext;    /* The global context */
-extern "C" RCNTXT* R_SessionContext;   /* The session toplevel context */
-extern "C" RCNTXT* R_ExitContext;      /* The active context for on.exit processing */
+using RCNTXT = RContext;
+
+extern "C" RContext R_Toplevel;         /* Storage for the toplevel context */
+extern "C" RContext *R_ToplevelContext; /* The toplevel context */
+extern "C" RContext *R_GlobalContext;   /* The global context */
+extern "C" RContext *R_SessionContext;  /* The session toplevel context */
+extern "C" RContext *R_ExitContext;     /* The active context for on.exit processing */
 
 #endif // R_USE_SIGNALS
 
-#endif // RCNTXT_H
+#endif // RCONTEXT_H

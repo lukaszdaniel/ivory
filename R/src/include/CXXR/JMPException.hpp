@@ -20,9 +20,7 @@
 #ifndef JMPEXCEPTION_HPP
 #define JMPEXCEPTION_HPP
 
-#define USE_JMP
-
-class RCNTXT;
+class RContext;
 
 namespace CXXR
 {
@@ -36,21 +34,39 @@ namespace CXXR
      * be desirable to replace it and RCNTXT with something more in
      * line with conventional C++ exception handling idioms.
      */
-    struct JMPException
+    class JMPException
     {
-        RCNTXT *context;
-        int mask;
-
-        /**
+    public:
+        /** @brief Constructor.
+         *
          * @param the_context Pointer to the context within which the
          *          exception is to be caught.  (catch blocks within
          *          other contexts should rethrow the exception.)
          * @param the_mask Context mask, or zero.
          */
-        JMPException(RCNTXT *the_context, int the_mask = 0)
-            : context(the_context), mask(the_mask)
+        JMPException(RContext *the_context = nullptr, int the_mask = 0)
+            : m_context(the_context), m_mask(the_mask)
         {
         }
+
+        /** @brief Target Context of this JMPException.
+         *
+         * @return pointer to the Context within which this
+         * JMPException should be caught.
+         */
+        RContext *context() const
+        {
+            return m_context;
+        }
+
+        int mask() const
+        {
+            return m_mask;
+        }
+
+    private:
+        RContext *m_context;
+        int m_mask;
     };
 } // namespace CXXR
 
