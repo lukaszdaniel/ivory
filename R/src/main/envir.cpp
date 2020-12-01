@@ -3194,12 +3194,16 @@ HIDDEN SEXP do_pos2env(SEXP call, SEXP op, SEXP args, SEXP rho)
     npos = length(pos);
     if (npos <= 0)
 	errorcall(call, _("invalid '%s' argument"), "pos");
-    PROTECT(env = allocVector(VECSXP, npos));
-    for (i = 0; i < npos; i++) {
-	SET_VECTOR_ELT(env, i, pos2env(INTEGER(pos)[i], call));
+    if (npos == 1)
+	env = pos2env(INTEGER(pos)[0], call);
+    else {
+	PROTECT(env = allocVector(VECSXP, npos));
+	for (i = 0; i < npos; i++) {
+	    SET_VECTOR_ELT(env, i, pos2env(INTEGER(pos)[i], call));
+	}
+	UNPROTECT(1); /* env */
     }
-    if (npos == 1) env = VECTOR_ELT(env, 0);
-    UNPROTECT(2);
+    UNPROTECT(1); /* pos */
     return env;
 }
 
@@ -3594,6 +3598,19 @@ HIDDEN SEXP do_mkUnbound(SEXP call, SEXP op, SEXP args, SEXP rho)
     R_FlushGlobalCache(sym);
 #endif
     return R_NilValue;
+}
+
+/* C version of new.env */
+SEXP R_NewEnv(SEXP enclos, int hash, int size)
+{
+    if (hash) {
+	SEXP ssize = PROTECT(ScalarInteger(size));
+	SEXP ans = R_NewHashedEnv(enclos, ssize);
+	UNPROTECT(1); /* ssize */
+	return ans;
+    }
+    else
+	return NewEnvironment(R_NilValue, R_NilValue, enclos);
 }
 
 void R_RestoreHashCount(SEXP rho)

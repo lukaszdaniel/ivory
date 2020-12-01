@@ -91,20 +91,25 @@ show <- function(object) showDefault(object)
               where = envir)
     setMethod("show", "genericFunction",
               function(object)  {
+                  nam <- as.character(object@generic)
 		if(length(object@group) && length(object@valueClass))
-                  cat(sprintf(gettext("Class %s for generic %s defined from package %s\n  belonging to group(s): %s\n  defined with value class: %s\n", domain = "R-methods"), dQuote(class(object)), dQuote(object@generic), sQuote(object@package), paste(unlist(object@group), collapse =", "), dQuote(object@valueClass)))
+                  cat(sprintf(gettext("Class %s for generic %s defined from package %s\n  belonging to group(s): %s\n  defined with value class: %s\n", domain = "R-methods"), dQuote(class(object)), dQuote(nam), sQuote(object@package), paste(unlist(object@group), collapse =", "), dQuote(object@valueClass)))
 		else if(!length(object@group) && length(object@valueClass))
-                  cat(gettextf("Class %s for generic %s defined from package %s\n  defined with value class: %s\n", dQuote(class(object)), dQuote(object@generic), sQuote(object@package), dQuote(object@valueClass), domain = "R-methods"))
+                  cat(gettextf("Class %s for generic %s defined from package %s\n  defined with value class: %s\n", dQuote(class(object)), dQuote(nam), sQuote(object@package), dQuote(object@valueClass), domain = "R-methods"))
 		else if(length(object@group) && !length(object@valueClass))
-                  cat(sprintf(gettext("Class %s for generic %s defined from package %s\n  belonging to group(s): %s\n", domain = "R-methods"), dQuote(class(object)), dQuote(object@generic), sQuote(object@package), paste(unlist(object@group), collapse =", ")))
+                  cat(sprintf(gettext("Class %s for generic %s defined from package %s\n  belonging to group(s): %s\n", domain = "R-methods"), dQuote(class(object)), dQuote(nam), sQuote(object@package), paste(unlist(object@group), collapse =", ")))
 		else
-                  cat(gettextf("Class %s for generic %s defined from package %s", dQuote(class(object)), dQuote(object@generic), sQuote(object@package), domain = "R-methods"), "\n", sep = "")
+                  cat(gettextf("Class %s for generic %s defined from package %s", dQuote(class(object)), dQuote(nam), sQuote(object@package), domain = "R-methods"), "\n", sep = "")
 
                   cat("\n")
                   show(object@.Data)
-                  cat(sprintf(gettext("Methods may be defined for arguments: %s\nUse 'showMethods(\"%s\")' for currently available ones.", domain = "R-methods"), paste(object@signature, collapse=", "), object@generic), "\n", sep = "")
+                  ns <- asNamespace(object@package)
+                  exported <- nam %in% names(.getNamespaceInfo(ns, "exports"))
+                  showGen <- if(exported) dQuote(nam, NULL)
+                             else paste(object@package, nam, sep=":::")
+                  cat(sprintf(gettext("Methods may be defined for arguments: %s\nUse 'showMethods(\"%s\")' for currently available ones.", domain = "R-methods"), paste(object@signature, collapse=", "), showGen), "\n", sep = "")
                   if(.simpleInheritanceGeneric(object))
-                      cat(gettext("(This generic function excludes non-simple inheritance; see '?setIs')"), "\n", sep = "");
+                      cat(gettext("(This generic function excludes non-simple inheritance; see '?setIs')"), "\n", sep = "")
               },
               where = envir)
     setMethod("show", "classRepresentation",
