@@ -53,10 +53,7 @@ namespace CXXR
         : VectorBase(CHARSXP, sz), m_data(m_short_string)
     {
         if (sz > s_short_strlen)
-        {
-            GCRoot<> thisroot(this);
             m_data = reinterpret_cast<char *>(MemoryBank::allocate(sz + 1));
-        }
         // Insert trailing null byte:
         m_data[sz] = 0;
     }

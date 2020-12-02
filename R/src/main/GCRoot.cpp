@@ -68,6 +68,8 @@ void GCRootBase::ppsRestoreSize(size_t new_size)
 
 void GCRootBase::reprotect(RObject *node, unsigned int index)
 {
+    if (node)
+        node->expose();
     if (index >= s_pps.size())
         throw out_of_range("GCRootBase::reprotect: index out of range.");
 #ifdef NDEBUG
@@ -89,6 +91,8 @@ void GCRootBase::seq_error()
 unsigned int GCRootBase::protect(RObject *node)
 {
     unsigned int index = s_pps.size();
+    if (node)
+        node->expose();
 #ifdef NDEBUG
     s_pps.push_back(node);
 #else

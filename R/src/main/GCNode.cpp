@@ -36,14 +36,6 @@ namespace CXXR
     std::vector<unsigned int> GCNode::s_gencount;
     size_t GCNode::s_num_nodes;
 
-    GCNode::GCNode()
-    {
-        link(s_genpeg[0]->m_prev, this);
-        link(this, s_genpeg[0]);
-        ++s_gencount[0];
-        ++s_num_nodes;
-    }
-
     GCNode::~GCNode()
     {
         --s_num_nodes;
@@ -94,7 +86,8 @@ namespace CXXR
                 }
                 numnodes += gct;
             }
-            if (numnodes != s_num_nodes)
+            // s_num_nodes > numnodes is possible because of infant immunity.
+            if (numnodes > s_num_nodes)
             {
                 std::cerr << "GCNode::check() : generation node totals inconsistent with grand total.\n";
                 std::cerr << "GCNode::check() : expected s_num_nodes = " << s_num_nodes << ", got: " << numnodes << "\n.";
@@ -102,6 +95,16 @@ namespace CXXR
             }
         }
         return true;
+    }
+
+    void GCNode::expose() const
+    {
+        if (!m_prev)
+        {
+            link(s_genpeg[0]->m_prev, this);
+            link(this, s_genpeg[0]);
+            ++s_gencount[0];
+        }
     }
 
     void GCNode::initialize(unsigned int num_old_generations)
@@ -118,6 +121,7 @@ namespace CXXR
 
     bool GCNode::Ager::operator()(const GCNode *node)
     {
+        node->expose();
         if (node->m_gcgen < m_mingen) // node is younger than the minimum age required
         {
             --s_gencount[node->m_gcgen];

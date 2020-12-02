@@ -66,6 +66,8 @@ namespace CXXR
         explicit GCRootBase(GCNode *node)
             : m_index(s_roots.size())
         {
+            if (node)
+                node->expose();
             s_roots.push_back(node);
         }
 
@@ -90,6 +92,8 @@ namespace CXXR
 
         GCRootBase &operator=(GCNode *node)
         {
+            if (node)
+                node->expose();
             s_roots[m_index] = node;
             return *this;
         }
@@ -378,7 +382,7 @@ inline void R_Reprotect(SEXP node, PROTECT_INDEX index)
      * Push a node pointer onto the C pointer protection stack.
      * @param node Pointer to the node to be protected from the
      *          garbage collector.
-     * @return a copy of \a node .
+     * @return a copy of \a node.
      */
 #ifndef __cplusplus
     SEXP Rf_protect(SEXP node);
