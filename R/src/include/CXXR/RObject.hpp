@@ -42,6 +42,7 @@
 #include <CXXR/GCNode.hpp>
 #include <R_ext/Error.h>
 #include <R_ext/Complex.h>
+#include <R_ext/Boolean.h>
 
 #if defined(COMPUTE_REFCNT_VALUES)
 #define REFCNT(x) (CXXR::RObject::refcnt(x))
@@ -667,5 +668,179 @@ namespace CXXR
     inline size_t convert2VEC(size_t n) { return (n > 0) ? (n * sizeof(T) - 1) / sizeof(VECREC) + 1 : 0; }
 
 } // namespace CXXR
+
+extern "C"
+{
+    /**
+     * Object type.
+     * @param x Pointer to \c RObject.
+     * @return \c SEXPTYPE of \a x, or NILSXP if x is a null pointer.
+     */
+    SEXPTYPE TYPEOF(SEXP x);
+
+    /** @brief Name of type within R.
+     *
+     * Translate a SEXPTYPE to the name by which it is known within R.
+     * @param st The SEXPTYPE whose name is required.
+     * @return The SEXPTYPE's name within R.
+     */
+    const char *Rf_type2char(SEXPTYPE st);
+
+    /** @brief Copy attributes, with some exceptions.
+     *
+     * This is called in the case of binary operations to copy most
+     * attributes from one of the input arguments to the output.
+     * Note that the Dim, Dimnames and Names attributes are not
+     * copied: these should have been assigned elsewhere.  The
+     * function also copies the S4 object status.
+     * @param inp Pointer to the RObject from which attributes are to
+     *          be copied.
+     * @param ans Pointer to the RObject to which attributes are to be
+     *          copied.
+     * @note The above documentation is probably incomplete: refer to the
+     *       source code for further details.
+     */
+    void Rf_copyMostAttrib(SEXP inp, SEXP ans);
+
+    /** @brief Access a named attribute.
+     * @param vec Pointer to the RObject whose attributes are to be
+     *          accessed.
+     * @param name Either a pointer to the symbol representing the
+     *          required attribute, or a pointer to a StringVector
+     *          containing the required symbol name as element 0; in
+     *          the latter case, as a side effect, the corresponding
+     *          symbol is installed if necessary.
+     * @return Pointer to the requested attribute, or a null pointer
+     *         if there is no such attribute.
+     * @note The above documentation is incomplete: refer to the
+     *       source code for further details.
+     */
+    SEXP Rf_getAttrib(SEXP vec, SEXP name);
+
+    /** @brief Set or remove a named attribute.
+     * @param vec Pointer to the RObject whose attributes are to be
+     *          modified.
+     * @param name Either a pointer to the symbol representing the
+     *          required attribute, or a pointer to a StringVector
+     *          containing the required symbol name as element 0; in
+     *          the latter case, as a side effect, the corresponding
+     *          symbol is installed if necessary.
+     * @param val Either the value to which the attribute is to be
+     *          set, or a null pointer.  In the latter case the
+     *          attribute (if present) is removed.
+     * @return Refer to source code.  (Sometimes \a vec, sometimes \a
+     * val, sometime a null pointer ...)
+     * @note The above documentation is probably incomplete: refer to the
+     *       source code for further details.
+     */
+    SEXP Rf_setAttrib(SEXP vec, SEXP name, SEXP val);
+
+    /**
+     * Does \c RObject have a class attribute?.
+     * @param x Pointer to an \c RObject.
+     * @return true iff \a x has a class attribute.  Returns false if \a x
+     * is 0.
+     */
+    int OBJECT(SEXP x);
+
+    /* Various tests */
+
+    /**
+     * @param s Pointer to an RObject.
+     * @return TRUE iff the RObject pointed to by \a s is either a null
+     * pointer (i.e. <tt>== R_NilValue</tt> in CXXR), or is an RObject
+     * with SEXPTYPE NILSXP (should not happen in CXXR).
+     */
+    Rboolean Rf_isNull(SEXP s);
+
+    /**
+     * @param s Pointer to an RObject.
+     * @return TRUE iff the RObject pointed to by \a s is a vector of strings.
+     */
+    Rboolean Rf_isString(SEXP s);
+
+    /**
+     * @param s Pointer to an RObject.
+     * @return TRUE iff the RObject pointed to by \a s has a class attribute.
+     */
+    Rboolean Rf_isObject(SEXP s);
+
+    /* Accessor functions.  Many are declared using () to avoid the macro
+       definitions in the USE_RINTERNALS section.
+       The function STRING_ELT is used as an argument to arrayAssign even 
+       if the macro version is in use.
+    */
+
+    /* General Cons Cell Attributes */
+
+    /**
+     * Return the attributes of an \c RObject.
+     * @param x Pointer to the \c RObject whose attributes are required.
+     * @return Pointer to the attributes object of \a x , or 0 if \a x is
+     * a null pointer.
+     */
+    SEXP ATTRIB(SEXP x);
+
+    /**
+     * @deprecated
+     */
+    int LEVELS(SEXP x);
+
+    /**
+     * Object copying status.
+     * @param x Pointer to \c RObject.
+     * @return Refer to 'R Internals' document.  Returns 0 if \a x is a
+     * null pointer.
+     */
+    int(NAMED)(SEXP x);
+
+    /**
+     * Object tracing status.
+     * @param x Pointer to \c RObject.
+     * @return Refer to 'R Internals' document.  Returns 0 if \a x is a
+     * null pointer.
+     */
+    int TRACE(SEXP x);
+
+    /**
+     * @deprecated
+     */
+    void SETLEVELS(SEXP x, int v);
+
+    /**
+     * Replace x's attributes by \a v.
+     * @param x Pointer to \c RObject.
+     * @param v Pointer to attributes \c RObject.
+     * @todo Could \a v be \c const ?
+     */
+    void SET_ATTRIB(SEXP x, SEXP v);
+
+    /**
+     * Set object copying status.  Does nothing if \a x is a null pointer.
+     * @param x Pointer to \c RObject.
+     * @param v Refer to 'R Internals' document.
+     * @deprecated Ought to be private.
+     */
+    void SET_NAMED(SEXP x, int v);
+
+    /**
+     * @deprecated Ought to be private.
+     */
+    void SET_OBJECT(SEXP x, int v);
+
+    void SET_TRACE(SEXP x, int v);
+
+    /**
+     * @deprecated Ought to be private.
+     */
+    void SET_TYPEOF(SEXP x, SEXPTYPE v);
+
+    /**
+     * Replace \a to's attributes by those of \a from.
+     * @param to Pointer to \c RObject.
+     * @param from Pointer to another \c RObject.
+     */
+    void DUPLICATE_ATTRIB(SEXP to, SEXP from);
+} // extern "C"
 
 #endif /* ROBJECT_HPP */

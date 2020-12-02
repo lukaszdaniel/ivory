@@ -50,4 +50,21 @@ namespace CXXR
     }
 } // namespace CXXR
 
+extern "C"
+{
+    /**
+     * @param s Pointer to an RObject.
+     * @return TRUE iff the RObject pointed to by \a s is a raw vector.
+     */
+    Rboolean Rf_isRaw(SEXP s);
+
+    /**
+     * @param x Pointer to an \c RawVector (i.e. an R numeric vector).
+     *          An error is generated if \a x is not pointer to an \c
+     *          RawVector.
+     * @return Pointer to element 0 of \a x.
+     */
+    Rbyte *RAW(SEXP x);
+} // extern "C"
+
 #endif // RAWVECTOR_HPP

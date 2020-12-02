@@ -159,7 +159,7 @@ namespace CXXR
 		 * found to be internally inconsistent.
 		 *
 		 * @return true, if it returns at all.  The return value is to
-		 * facilitate use with \c assert .
+		 * facilitate use with \c assert.
 		 */
 		bool check() const;
 

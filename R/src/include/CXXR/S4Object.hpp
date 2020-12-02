@@ -93,11 +93,31 @@ namespace CXXR
 
 extern "C"
 {
+	/* S4 object testing */
+
+	/**
+     * An S4 object?
+     * @param x Pointer to \c RObject.
+     * @return true iff \a x is an S4 object.  Returns false if \a x
+     * is 0.
+     */
+	Rboolean IS_S4_OBJECT(SEXP x);
+
+	/**
+     * @deprecated Ought to be private.
+     */
+	void SET_S4_OBJECT(SEXP x);
+
+	/**
+     * @deprecated Ought to be private.
+     */
+	void UNSET_S4_OBJECT(SEXP x);
+
 	/** @brief Create an S4 object.
      *
      * @return Pointer to the created object.
      */
 	SEXP Rf_allocS4Object();
-}
+} // extern "C"
 
 #endif /* S4OBJECT_HPP */

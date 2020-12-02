@@ -36,62 +36,132 @@
 
 namespace CXXR
 {
-    /** @brief Mapping from Symbols to R objects.
-     *
-     * An Environment has an associated Frame, which defines a mapping
-     * from (pointers to) CXXR::Symbol objects to (pointers to)
-     * arbitrary objects of classes derived from RObject.  An
-     * Environment will normally have an 'enclosing environment', and
-     * the Environment class provides facilities for searching for a
-     * binding for a Symbol first in the Environment's own Frame, and
-     * then successively in the Frames of enclosing Environments.
-     *
-     * @note This class does not in itself enforce the requirement
-     * that the enclosing relationship must be acyclic.
-     */
-    class Environment : public RObject
-    {
-    private:
-        RObject *m_frame;
-        RObject *m_enclos;
-        RObject *m_hashtab;
-        // Declared private to ensure that Environment objects are
-        // created only using 'new':
-        ~Environment() {}
+   /** @brief Mapping from Symbols to R objects.
+    *
+    * An Environment has an associated Frame, which defines a mapping
+    * from (pointers to) CXXR::Symbol objects to (pointers to)
+    * arbitrary objects of classes derived from RObject.  An
+    * Environment will normally have an 'enclosing environment', and
+    * the Environment class provides facilities for searching for a
+    * binding for a Symbol first in the Environment's own Frame, and
+    * then successively in the Frames of enclosing Environments.
+    *
+    * @note This class does not in itself enforce the requirement
+    * that the enclosing relationship must be acyclic.
+    */
+   class Environment : public RObject
+   {
+   private:
+      RObject *m_frame;
+      RObject *m_enclos;
+      RObject *m_hashtab;
+      // Declared private to ensure that Environment objects are
+      // created only using 'new':
+      ~Environment() {}
 
-    public:
-        // Virtual functions of RObject:
-        const char *typeName() const override;
+   public:
+      // Virtual functions of RObject:
+      const char *typeName() const override;
 
-        /** @brief The name by which this type is known in R.
-         *
-         * @return The name by which this type is known in R.
-         */
-        static const char *staticTypeName()
-        {
-            return "environment";
-        }
-        auto frame() const { return this->m_frame; }
-        auto enclos() const { return this->m_enclos; }
-        auto hashtab() const { return this->m_hashtab; }
+      /** @brief The name by which this type is known in R.
+       *
+       * @return The name by which this type is known in R.
+       */
+      static const char *staticTypeName()
+      {
+         return "environment";
+      }
+      auto frame() const { return this->m_frame; }
+      auto enclos() const { return this->m_enclos; }
+      auto hashtab() const { return this->m_hashtab; }
 
-        /* Environment Access Methods */
-        static constexpr int FRAME_LOCK_MASK = (1 << 14);
-        static constexpr int GLOBAL_FRAME_MASK = (1 << 15);
-        static RObject *frame(RObject *x);
-        static RObject *enclos(RObject *x);
-        static RObject *hashtab(RObject *x);
-        static unsigned int envflags(RObject *x); /* for environments */
-        static void set_envflags(RObject *x, unsigned int v);
-        static void set_frame(RObject *x, RObject *v);
-        static void set_enclos(RObject *x, RObject *v);
-        static void set_hashtab(RObject *x, RObject *v);
-        static unsigned int frame_is_locked(RObject *x);
-        static void lock_frame(RObject *x);
-        static bool is_global_frame(RObject *x);
-        static void mark_as_global_frame(RObject *x);
-        static void mark_as_local_frame(RObject *x);
-    };
+      /* Environment Access Methods */
+      static constexpr int FRAME_LOCK_MASK = (1 << 14);
+      static constexpr int GLOBAL_FRAME_MASK = (1 << 15);
+      static RObject *frame(RObject *x);
+      static RObject *enclos(RObject *x);
+      static RObject *hashtab(RObject *x);
+      static unsigned int envflags(RObject *x); /* for environments */
+      static void set_envflags(RObject *x, unsigned int v);
+      static void set_frame(RObject *x, RObject *v);
+      static void set_enclos(RObject *x, RObject *v);
+      static void set_hashtab(RObject *x, RObject *v);
+      static unsigned int frame_is_locked(RObject *x);
+      static void lock_frame(RObject *x);
+      static bool is_global_frame(RObject *x);
+      static void mark_as_global_frame(RObject *x);
+      static void mark_as_local_frame(RObject *x);
+   };
 } // namespace CXXR
+
+extern "C"
+{
+   /**
+    * @param s Pointer to an RObject.
+    * @return TRUE iff the RObject pointed to by s is an environment.
+    */
+   Rboolean Rf_isEnvironment(SEXP s);
+
+   /* Accessor functions. */
+
+   /* Environment Access Functions */
+
+   /**
+    * @param x Pointer to an \c Environment.
+    * @return Pointer to the frame of \a x.
+    */
+   SEXP FRAME(SEXP x);
+
+   /**
+    * @param x Pointer to an \c Environment.
+    * @return Pointer to \a x 's enclosing environment.
+    */
+   SEXP ENCLOS(SEXP x);
+
+   /**
+    * @param x Pointer to an \c Environment.
+    * @return Pointer to \a x 's hash table (may be NULL).
+    */
+   SEXP HASHTAB(SEXP x);
+
+   /**
+    * @param x Pointer to an \c Environment.
+    * @return \a x 's environment flags.
+    * @deprecated
+    */
+   int ENVFLAGS(SEXP x);
+
+   /**
+    * Set environment flags.
+    * @param x Pointer to an \c Environment.
+    * @param v The new flags.
+    * @deprecated
+    */
+   void SET_ENVFLAGS(SEXP x, int v);
+
+   /**
+    * Set environment's frame.
+    * @param x Pointer to an \c Environment.
+    * @param v Pointer to the new frame.
+    * @todo Probably should be private.
+    */
+   void SET_FRAME(SEXP x, SEXP v);
+
+   /**
+    * Set environment's enclosing environment.
+    * @param x Pointer to an \c Environment.
+    * @param v Pointer to the new enclosing environment.
+    * @todo Probably should be private.
+    */
+   void SET_ENCLOS(SEXP x, SEXP v);
+
+   /**
+    * Set environment's hash table.
+    * @param x Pointer to an \c Environment.
+    * @param v Pointer to the hash table.
+    * @todo Probably should be private.
+    */
+   void SET_HASHTAB(SEXP x, SEXP v);
+} // extern "C"
 
 #endif /* ENVIRONMENT_HPP */

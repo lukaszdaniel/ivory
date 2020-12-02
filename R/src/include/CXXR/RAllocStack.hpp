@@ -90,7 +90,7 @@ namespace CXXR
         /** @brief Allocate a new block of memory.
          *
          * The block will be aligned on a multiple of
-         * <tt>sizeof(double)</tt> .
+         * <tt>sizeof(double)</tt>.
          * @param sz The required size in bytes (strictly, as a
          *           multiple of <tt>sizeof(char)</tt>), of the memory block.
          * @return Pointer to the start of the memory block.

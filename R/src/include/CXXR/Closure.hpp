@@ -36,52 +36,112 @@
 
 namespace CXXR
 {
-    /** @brief Class representing a functional programming closure.
-     *
-     * A closure associates a function definition (the body) with a
-     * list of formal arguments and an environment.  In evaluating the
-     * function, non-local variables within the function definition
-     * are interpreted by reference to the specified environment (and
-     * its enclosing environments).
-     */
-    class Closure : public FunctionBase
-    {
-    private:
-        RObject *m_formals;
-        RObject *m_body;
-        RObject *m_env;
-        // Declared private to ensure that Closure objects are
-        // created only using 'new':
-        ~Closure();
+   /** @brief Class representing a functional programming closure.
+    *
+    * A closure associates a function definition (the body) with a
+    * list of formal arguments and an environment.  In evaluating the
+    * function, non-local variables within the function definition
+    * are interpreted by reference to the specified environment (and
+    * its enclosing environments).
+    */
+   class Closure : public FunctionBase
+   {
+   private:
+      RObject *m_formals;
+      RObject *m_body;
+      RObject *m_env;
+      // Declared private to ensure that Closure objects are
+      // created only using 'new':
+      ~Closure();
 
-    public:
-        // Virtual functions of RObject:
-        const char *typeName() const override;
+   public:
+      // Virtual functions of RObject:
+      const char *typeName() const override;
 
-        /** @brief The name by which this type is known in R.
-         *
-         * @return The name by which this type is known in R.
-         */
-        static const char *staticTypeName()
-        {
-            return "closure";
-        }
-        auto formals() const { return this->m_formals; }
-        auto body() const { return this->m_body; }
-        auto env() const { return this->m_env; }
+      /** @brief The name by which this type is known in R.
+       *
+       * @return The name by which this type is known in R.
+       */
+      static const char *staticTypeName()
+      {
+         return "closure";
+      }
+      auto formals() const { return this->m_formals; }
+      auto body() const { return this->m_body; }
+      auto env() const { return this->m_env; }
 
-        /* Closure Access Methods */
-        static RObject *formals(RObject *x);
-        static void set_formals(RObject *x, RObject *v);
-        static RObject *body(RObject *x);
-        static void set_body(RObject *x, RObject *v);
-        static RObject *cloenv(RObject *x);
-        static void set_cloenv(RObject *x, RObject *v);
-        static bool rdebug(RObject *x);
-        static void set_rdebug(RObject *x, bool v);
-        static bool rstep(RObject *x);
-        static void set_rstep(RObject *x, bool v);
-    };
+      /* Closure Access Methods */
+      static RObject *formals(RObject *x);
+      static void set_formals(RObject *x, RObject *v);
+      static RObject *body(RObject *x);
+      static void set_body(RObject *x, RObject *v);
+      static RObject *cloenv(RObject *x);
+      static void set_cloenv(RObject *x, RObject *v);
+      static bool rdebug(RObject *x);
+      static void set_rdebug(RObject *x, bool v);
+      static bool rstep(RObject *x);
+      static void set_rstep(RObject *x, bool v);
+   };
 } // namespace CXXR
+
+extern "C"
+{
+   /* Accessor functions.*/
+
+   /* Closure Access Functions */
+
+   /**
+    * @param x Pointer a closure object.
+    * @return Pointer to the body of x.
+    */
+   SEXP BODY(SEXP x);
+
+   /**
+    * @param x Pointer a closure object.
+    * @return Pointer to the environment of x.
+    */
+   SEXP CLOENV(SEXP x);
+
+   /**
+    * @param x Pointer a closure object.
+    * @return \c true if debugging is set, i.e. evaluations of the
+    *         function should run under the browser.
+    */
+   Rboolean DEBUG(SEXP x);
+
+   /**
+    * @param x Pointer a closure object.
+    * @return Pointer to the formals list of x.
+    */
+   SEXP FORMALS(SEXP x);
+
+   /**
+    * Set the debugging state of a closure object.
+    * @param x Pointer a closure object.
+    * @param v The new debugging state.
+    */
+   void SET_DEBUG(SEXP x, Rboolean v);
+
+   /**
+    * Set the formals of a closure object.
+    * @param x Pointer a closure object.
+    * @return Pointer to the new formals list of x.
+    */
+   void SET_FORMALS(SEXP x, SEXP v);
+
+   /**
+    * Set the body of a closure object.
+    * @param x Pointer a closure object.
+    * @return Pointer to the new body of x.
+    */
+   void SET_BODY(SEXP x, SEXP v);
+
+   /**
+    * Set the environment of a closure object.
+    * @param x Pointer a closure object.
+    * @return Pointer to the new environment of x.
+    */
+   void SET_CLOENV(SEXP x, SEXP v);
+} // extern "C"
 
 #endif /* CLOSURE_HPP */

@@ -72,7 +72,7 @@ namespace CXXR
 			 *          ordering; if false, it will come before all
 			 *          other strings.
 			 */
-			Comparator(bool na_last = true)
+			explicit Comparator(bool na_last = true)
 				: m_na_last(na_last)
 			{
 			}
@@ -95,7 +95,7 @@ namespace CXXR
 		 * @param sz Number of elements required.  Zero is
 		 *          permissible.
 		 */
-		String(size_t sz);
+		explicit String(size_t sz);
 
 		/** @brief Character access.
 		 * @param index Index of required character (counting from
@@ -181,6 +181,87 @@ namespace CXXR
 		}
 		friend class Symbol;
 	};
+
+	inline const char *r_char(RObject *x)
+	{
+		return stdvec_dataptr<const char *>(x);
+	}
 } // namespace CXXR
+
+extern "C"
+{
+	/**
+	 * @brief Writable char access.
+     * @param x \c pointer to a \c String.
+     * @return \c pointer to character 0 \a x.
+     * @note For R internal use only.  May be removed in future.
+     */
+	inline char *CHAR_RW(SEXP x)
+	{
+		return CXXR::stdvec_dataptr<char *>(x);
+	}
+
+	/**
+     * @param x \c const pointer to a \c String.
+     * @return \c const pointer to character 0 \a x.
+     */
+	const char *R_CHAR(SEXP x);
+
+	/**
+     * @param x Pointer to a \c VectorBase representing a character string.
+     * @return true iff \a x is marked as having LATIN1 encoding.
+     */
+	int IS_LATIN1(SEXP x);
+
+	/**
+     * @brief Set LATIN1 encoding.
+     * @param x Pointer to a \c VectorBase representing a character string.
+     */
+	void SET_LATIN1(SEXP x);
+
+	/**
+     * @brief Unset LATIN1 encoding.
+     * @param x Pointer to a \c VectorBase representing a character string.
+     */
+	void UNSET_LATIN1(SEXP x);
+
+	/**
+     * @param x Pointer to a \c VectorBase representing a character string.
+     * @return true iff \a x is marked as having UTF8 encoding.
+     */
+	int IS_UTF8(SEXP x);
+
+	/**
+     * @brief Set UTF8 encoding.
+     * @param x Pointer to a \c VectorBase representing a character string.
+     */
+	void SET_UTF8(SEXP x);
+
+	/**
+     * @brief Unset UTF8 encoding.
+     * @param x Pointer to a \c VectorBase representing a character string.
+     */
+	void UNSET_UTF8(SEXP x);
+
+	/**
+     * @brief Create a string object.
+     *
+     *  Allocate a string object.
+     * @param length The length of the string to be created (excluding the
+     *          trailing null byte).
+     * @return Pointer to the created string.
+     */
+	SEXP Rf_allocString(R_len_t length);
+
+	/* Hashing Functions */
+
+	int HASHASH(SEXP x);
+
+	int HASHVALUE(SEXP x);
+
+	void SET_HASHASH(SEXP x, int v);
+
+	void SET_HASHVALUE(SEXP x, int v);
+} // extern "C"
 
 #endif /* CXXR_STRING_HPP */

@@ -94,4 +94,68 @@ namespace CXXR
     };
 } // namespace CXXR
 
+extern "C"
+{
+    /* Accessor functions. */
+
+    /* Promise Access Functions */
+
+    /**
+     * @param x Pointer to a promise.
+     * @return Pointer to the expression to be evaluated.
+     */
+    SEXP PRCODE(SEXP x);
+
+    /**
+     * @param x Pointer to a promise.
+     * @return Pointer to the environment in which the expression is to be
+     *         evaluated.  Set NULL when the promise has been evaluated.
+     */
+    SEXP PRENV(SEXP x);
+
+    /**
+     * @param x Pointer to a promise.
+     * @return Pointer to the value of the expression (once evaluated?).
+     */
+    SEXP PRVALUE(SEXP x);
+
+    /**
+     * @param x Pointer to a promise.
+     * @return ?
+     * @deprecated Will need to be fixed.
+     */
+    int PRSEEN(SEXP x);
+
+    /**
+     * @param x Pointer to a promise.
+     * @deprecated Will need to be fixed.
+     */
+    void SET_PRSEEN(SEXP x, int v);
+
+    /**
+     * Set environment
+     * @param x Pointer to a promise.
+     * @param v Pointer to the environment in which the expression is to
+     *          be evaluated.
+     * @todo Probably ought to be private or done in the constructor.
+     */
+    void SET_PRENV(SEXP x, SEXP v);
+
+    /**
+     * Set value of promise.
+     * @param x Pointer to a promise.
+     * @param v Pointer to the value to be assigned to the promise.
+     * @todo Probably ought to be private.
+     */
+    void SET_PRVALUE(SEXP x, SEXP v);
+
+    /**
+     * Set expression
+     * @param x Pointer to a promise.
+     * @param v Pointer to the expression to be associated with the promise.
+     * @todo Probably ought to be private or done in the constructor.
+     */
+    void SET_PRCODE(SEXP x, SEXP v);
+} // extern "C"
+
 #endif /* PROMISE_HPP */

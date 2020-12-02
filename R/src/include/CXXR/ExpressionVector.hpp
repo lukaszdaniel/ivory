@@ -58,4 +58,29 @@ namespace CXXR
 #define XVECTOR_PTR(x) ((SEXP *)DATAPTR(x))
 } // namespace CXXR
 
+extern "C"
+{
+    /**
+     * @param s Pointer to an RObject.
+     * @return TRUE iff the RObject pointed to by \a s is an expression.
+     */
+    Rboolean Rf_isExpression(SEXP s);
+
+    /** @brief Set element of ExpressionVector.
+     * 
+     * @param x Pointer to an \c ExpressionVector .
+     * @param i Index of the required element.  There is no bounds checking.
+     * @param v Pointer to \c RObject representing the new value.
+     */
+    SEXP SET_XVECTOR_ELT(SEXP x, R_xlen_t i, SEXP v);
+
+    /**
+     * @brief Examine element of an ExpressionVector.
+     * @param x Pointer to an \c ExpressionVector .
+     * @param i Index of the required element.  There is no bounds checking.
+     * @return Pointer to extracted \a i 'th element.
+     */
+    SEXP(XVECTOR_ELT)(SEXP x, R_xlen_t i);
+}
+
 #endif /* EXPRESSIONVECTOR_HPP */

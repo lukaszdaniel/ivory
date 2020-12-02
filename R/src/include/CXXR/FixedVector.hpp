@@ -194,30 +194,10 @@ namespace CXXR
 #endif
     }
 
-    extern "C" void *DATAPTR(SEXP x);
-    extern "C" const void *DATAPTR_RO(SEXP x);
-
     template <class T, SEXPTYPE ST>
     const char *FixedVector<T, ST>::typeName() const
     {
         return FixedVector<T, ST>::staticTypeName();
-    }
-
-    template <typename T = void *>
-    inline T stdvec_dataptr(RObject *x)
-    {
-        return static_cast<T>(x->data());
-    }
-
-    inline const char *r_char(RObject *x)
-    {
-        return stdvec_dataptr<const char *>(x);
-    }
-
-    /* writable char access for R internal use only */
-    inline char *CHAR_RW(RObject *x)
-    {
-        return stdvec_dataptr<char *>(x);
     }
 
 } // namespace CXXR

@@ -33,6 +33,52 @@
 
 #include <CXXR/RObject.hpp>
 #include <CXXR/SEXP_downcast.hpp>
+#include <R_ext/Boolean.h>
+
+/* Symbol Table Shortcuts */
+extern "C" SEXP R_AsCharacterSymbol;  /* "as.character" */
+extern "C" SEXP R_baseSymbol;         // <-- backcompatible version of:
+extern "C" SEXP R_BaseSymbol;         // "base"
+extern "C" SEXP R_BraceSymbol;        /* "{" */
+extern "C" SEXP R_Bracket2Symbol;     /* "[[" */
+extern "C" SEXP R_BracketSymbol;      /* "[" */
+extern "C" SEXP R_ClassSymbol;        /* "class" */
+extern "C" SEXP R_DeviceSymbol;       /* ".Device" */
+extern "C" SEXP R_DimNamesSymbol;     /* "dimnames" */
+extern "C" SEXP R_DimSymbol;          /* "dim" */
+extern "C" SEXP R_DollarSymbol;       /* "$" */
+extern "C" SEXP R_DotsSymbol;         /* "..." */
+extern "C" SEXP R_DoubleColonSymbol;  // "::"
+extern "C" SEXP R_DropSymbol;         /* "drop" */
+extern "C" SEXP R_EvalSymbol;         /* "eval" */
+extern "C" SEXP R_LastvalueSymbol;    /* ".Last.value" */
+extern "C" SEXP R_LevelsSymbol;       /* "levels" */
+extern "C" SEXP R_ModeSymbol;         /* "mode" */
+extern "C" SEXP R_NaRmSymbol;         /* "na.rm" */
+extern "C" SEXP R_NameSymbol;         /* "name" */
+extern "C" SEXP R_NamesSymbol;        /* "names" */
+extern "C" SEXP R_NamespaceEnvSymbol; // ".__NAMESPACE__."
+extern "C" SEXP R_PackageSymbol;      /* "package" */
+extern "C" SEXP R_PreviousSymbol;     /* "previous" */
+extern "C" SEXP R_QuoteSymbol;        /* "quote" */
+extern "C" SEXP R_RowNamesSymbol;     /* "row.names" */
+extern "C" SEXP R_SeedsSymbol;        /* ".Random.seed" */
+extern "C" SEXP R_SortListSymbol;     /* "sort.list" */
+extern "C" SEXP R_SourceSymbol;       /* "source" */
+extern "C" SEXP R_SpecSymbol;         // "spec"
+extern "C" SEXP R_TripleColonSymbol;  // ":::"
+extern "C" SEXP R_TspSymbol;          /* "tsp" */
+
+extern "C" SEXP R_dot_defined;     /* ".defined" */
+extern "C" SEXP R_dot_Method;      /* ".Method" */
+extern "C" SEXP R_dot_packageName; // ".packageName"
+extern "C" SEXP R_dot_target;      /* ".target" */
+extern "C" SEXP R_dot_Generic;     /* ".Generic" */
+
+/* Missing Values - others from Arith.h */
+extern "C" SEXP R_NaString;          /* NA_STRING as a CHARSXP */
+extern "C" SEXP R_BlankString;       /* "" as a CHARSXP */
+extern "C" SEXP R_BlankScalarString; /* "" as a STRSXP */
 
 namespace CXXR
 {
@@ -118,5 +164,73 @@ namespace CXXR
         static void set_internal(RObject *x, RObject *v);
     };
 } // namespace CXXR
+
+extern "C"
+{
+    /**
+     * @param s Pointer to an RObject.
+     * @return TRUE iff the RObject pointed to by \a s is a symbol.
+     */
+    Rboolean Rf_isSymbol(SEXP s);
+
+    /* Accessor functions. */
+
+    /* Symbol Access Functions */
+
+    /**
+     * Symbol name.
+     * @param x Pointer to an \c Symbol.
+     * @return Pointer to \c RObject representings \a x's name.
+     */
+    SEXP PRINTNAME(SEXP x);
+
+    /**
+     * Symbol value.
+     * @param x Pointer to an \c Symbol.
+     * @return Pointer to \c RObject representings \a x's value.
+     */
+    SEXP SYMVALUE(SEXP x);
+
+    /**
+     * Internal function value.
+     * @param x Pointer to an \c Symbol.
+     * @return ? If \a x represents and internal function, the corresponding
+     * \c RObject, otherwise NULL..
+     */
+    SEXP INTERNAL(SEXP x);
+
+    /**
+     * Did symbol arise from ... expression?
+     * @param x Pointer to an \c Symbol.
+     * @return \c true iff this symbol arose from a ... expression.
+     */
+    int DDVAL(SEXP x);
+
+    /**
+     * @deprecated Ought to be private.
+     */
+    void SET_DDVAL(SEXP x, int v);
+
+    /**
+     * Set symbol's name.
+     * @param x Pointer to an \c Symbol.
+     * @param v Pointer to an \c RObject representing the new name.
+     */
+    void SET_PRINTNAME(SEXP x, SEXP v);
+
+    /**
+     * Set symbol's value.
+     * @param x Pointer to an \c Symbol.
+     * @param v Pointer to an \c RObject representing the new value.
+     */
+    void SET_SYMVALUE(SEXP x, SEXP v);
+
+    /**
+     * Set internal function.
+     * @param x Pointer to an \c Symbol.
+     * @param v Pointer to an \c RObject representing an internal function.
+     */
+    void SET_INTERNAL(SEXP x, SEXP v);
+} // extern "C"
 
 #endif /* SYMBOL_HPP */
