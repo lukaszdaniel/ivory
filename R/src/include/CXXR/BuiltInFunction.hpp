@@ -159,8 +159,21 @@ namespace CXXR
         auto gram() const { return m_gram; }
     };
 
+    /**
+     * @param x Pointer to a BuiltInFunction.
+     * @return The offset of this function within the function table.
+     * @todo Ought to be private.
+     */
     int PRIMOFFSET(RObject *x);
+
+    /**
+     * Set the object's table offset.
+     * @param x Pointer to a BuiltInFunction.
+     * @param v The required offset value.
+     * @todo Ought to be private.
+     */
     void SET_PRIMOFFSET(RObject *x, int v);
+
 /* Defined and initialized in names.cpp (not main.cpp) :*/
 #ifndef __R_Names__
     extern std::vector<CXXR::FUNTAB> R_FunTab; /* Built in functions */
