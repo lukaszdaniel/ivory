@@ -306,7 +306,8 @@ void RCNTXT::endcontext(RCNTXT &cptr) { cptr.end(); }
 void RCNTXT::end()
 {
     void R_FixupExitingHandlerResult(SEXP); /* defined in error.cpp */
-    R_HandlerStack = this->getHandlerStack();
+    SEXP R_UnwindHandlerStack(SEXP); /* defined in error.cpp */
+    R_HandlerStack = R_UnwindHandlerStack(this->getHandlerStack());
     R_RestartStack = this->getRestartStack();
     RCNTXT *jumptarget = this->getJumpTarget();
     if (this->workingEnvironment() != R_NilValue && this->onExit() != R_NilValue)

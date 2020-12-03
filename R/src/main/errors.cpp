@@ -1617,13 +1617,40 @@ static SEXP mkHandlerEntry(SEXP klass, SEXP parentenv, SEXP handler, SEXP rho,
     return entry;
 }
 
-/**** rename these??*/
-inline int IS_CALLING_ENTRY(SEXP e) { return LEVELS(e); }
-inline SEXP ENTRY_CLASS(SEXP e) { return VECTOR_ELT(e, 0); }
-inline SEXP ENTRY_CALLING_ENVIR(SEXP e) { return VECTOR_ELT(e, 1); }
-inline SEXP ENTRY_HANDLER(SEXP e) { return VECTOR_ELT(e, 2); }
-inline SEXP ENTRY_TARGET_ENVIR(SEXP e) { return VECTOR_ELT(e, 3); }
-inline SEXP ENTRY_RETURN_RESULT(SEXP e) { return VECTOR_ELT(e, 4); }
+namespace
+{
+	/**** rename these??*/
+	inline int IS_CALLING_ENTRY(SEXP e) { return LEVELS(e); }
+	inline SEXP ENTRY_CLASS(SEXP e) { return VECTOR_ELT(e, 0); }
+	// inline SEXP ENTRY_CALLING_ENVIR(SEXP e) { return VECTOR_ELT(e, 1); }
+	inline SEXP ENTRY_HANDLER(SEXP e) { return VECTOR_ELT(e, 2); }
+	inline SEXP ENTRY_TARGET_ENVIR(SEXP e) { return VECTOR_ELT(e, 3); }
+	inline SEXP ENTRY_RETURN_RESULT(SEXP e) { return VECTOR_ELT(e, 4); }
+	inline void CLEAR_ENTRY_CALLING_ENVIR(SEXP e) { SET_VECTOR_ELT(e, 1, R_NilValue); }
+	inline void CLEAR_ENTRY_TARGET_ENVIR(SEXP e) { SET_VECTOR_ELT(e, 3, R_NilValue); }
+} // namespace
+
+HIDDEN SEXP R_UnwindHandlerStack(SEXP target)
+{
+    SEXP hs;
+
+    /* check that the target is in the current stack */
+    for (hs = R_HandlerStack; hs != target && hs != R_NilValue; hs = CDR(hs))
+	if (hs == target)
+	    break;
+    if (hs != target)
+	return target; /* restoring a saved stack */
+
+    for (hs = R_HandlerStack; hs != target; hs = CDR(hs)) {
+	/* pop top handler; may not be needed */
+	R_HandlerStack = CDR(hs);
+
+	/* clear the two environments to reduce reference counts */
+	CLEAR_ENTRY_CALLING_ENVIR(CAR(hs));
+	CLEAR_ENTRY_TARGET_ENVIR(CAR(hs));
+    }
+    return target;
+}
 
 constexpr R_xlen_t RESULT_SIZE = 4;
 
