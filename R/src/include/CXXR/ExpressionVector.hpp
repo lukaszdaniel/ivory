@@ -37,12 +37,17 @@
 #ifndef EXPRESSIONVECTOR_HPP
 #define EXPRESSIONVECTOR_HPP
 
-#include <CXXR/FixedVector.hpp>
-#include <CXXR/GCEdge.hpp>
+#include <CXXR/VectorBase.hpp>
+#include <CXXR/EdgeVector.hpp>
 #include <CXXR/SEXP_downcast.hpp>
 
 namespace CXXR
 {
+    /** @brief Vector of language objects, representing an expression.
+     * @todo Replace the type parameter RObject* with something stricter.
+     */
+    typedef CXXR::EdgeVector<RObject *, EXPRSXP> ExpressionVector;
+
     /** @brief Expression vector.
      *
      * The vector contains smart pointers of type
@@ -52,7 +57,7 @@ namespace CXXR
      * @todo Replace the encapsulated pointer type RObject* with something
      * stricter (but is needs to embrace Symbol as well as Expression).
      */
-    typedef FixedVector<GCEdge<>, EXPRSXP> ExpressionVector;
+    // typedef FixedVector<GCEdge<>, EXPRSXP> ExpressionVector;
 
 #define XVECTOR_ELT(x, i) ((SEXP *)DATAPTR(x))[i]
 #define XVECTOR_PTR(x) ((SEXP *)DATAPTR(x))
@@ -66,19 +71,26 @@ extern "C"
      */
     Rboolean Rf_isExpression(SEXP s);
 
-    /** @brief Set element of ExpressionVector.
-     * 
-     * @param x Pointer to an \c ExpressionVector .
+    /** @brief Set element of CXXR::ExpressionVector.
+     *
+     * @param x Pointer to a CXXR::ExpressionVector.
+     *
      * @param i Index of the required element.  There is no bounds checking.
-     * @param v Pointer to \c RObject representing the new value.
+     *
+     * @param v Pointer, possibly null, to CXXR::RObject representing the
+     *          new value.
+     *
+     * @return The new value \a v.
      */
     SEXP SET_XVECTOR_ELT(SEXP x, R_xlen_t i, SEXP v);
 
-    /**
-     * @brief Examine element of an ExpressionVector.
-     * @param x Pointer to an \c ExpressionVector .
+    /** @brief Examine element of CXXR::ExpressionVector.
+     *
+     * @param x Non-null pointer to a CXXR::ExpressionVector.
+     *
      * @param i Index of the required element.  There is no bounds checking.
-     * @return Pointer to extracted \a i 'th element.
+     *
+     * @return The value of the \a i 'th element.
      */
     SEXP(XVECTOR_ELT)(SEXP x, R_xlen_t i);
 }

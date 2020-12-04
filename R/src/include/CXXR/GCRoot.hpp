@@ -353,7 +353,7 @@ inline void R_Reprotect(SEXP node, PROTECT_INDEX index)
      * @param op Operation being performed.
      * @param save The expected size of the pointer protection stack.
      *
-     * @todo A warning seems to mild a response in this eventuality.
+     * @todo A warning seems too mild a response in this eventuality.
      */
     void check_stack_balance(SEXP op, size_t save);
 

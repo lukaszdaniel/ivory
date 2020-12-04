@@ -61,6 +61,7 @@
 #include <CXXR/RawVector.hpp>
 #include <CXXR/StringVector.hpp>
 #include <CXXR/ExpressionVector.hpp>
+#include <CXXR/ListVector.hpp>
 #include <CXXR/WeakRef.hpp>
 #include <CXXR/ExternalPointer.hpp>
 #include <CXXR/SEXP_downcast.hpp>
@@ -444,8 +445,7 @@ namespace
 
     inline void CHECK_OLD_TO_NEW(RObject *from_old, RObject *to_new)
     {
-        GCEdge<> e(from_old, nullptr);
-        e.redirect(from_old, to_new);
+        from_old->devolveAge(to_new);
     }
 
 } // namespace

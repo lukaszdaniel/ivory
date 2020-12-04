@@ -42,7 +42,7 @@ namespace CXXR
     } // namespace ForceNonInline
 
     template <>
-    const char *ExpressionVector::staticTypeName()
+    const char *EdgeVector<RObject *, EXPRSXP>::staticTypeName()
     {
         return "expression";
     }

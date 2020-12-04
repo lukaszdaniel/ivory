@@ -100,16 +100,16 @@ namespace CXXR
     {
     public:
         /** @brief Abstract base class for the Visitor design pattern.
-		 *
-		 * See Gamma et al 'Design Patterns' Ch. 5 for a description
-		 * of the Visitor design pattern.
-		 *
-		 * The const in the name refers to the fact that the visitor
-		 * does not modify the node it visits (or modifies only
-		 * mutable fields).  There is currently no provision for the
-		 * visitor object itself to be be considered const during a
-		 * visit.
-		 */
+         *
+         * See Gamma et al 'Design Patterns' Ch. 5 for a description
+         * of the Visitor design pattern.
+         *
+         * The const in the name refers to the fact that the visitor
+         * does not modify the node it visits (or modifies only
+         * mutable fields).  There is currently no provision for the
+         * visitor object itself to be be considered const during a
+         * visit.
+         */
         struct const_visitor
         {
             virtual ~const_visitor() {}
@@ -124,7 +124,7 @@ namespace CXXR
             virtual bool operator()(const GCNode *node) = 0;
         };
 
-        /** Abstract base class for the Visitor design pattern.
+        /** @brief Abstract base class for the Visitor design pattern.
          *
          * See Gamma et al 'Design Patterns' Ch. 5 for a description
          * of the Visitor design pattern.
@@ -150,49 +150,49 @@ namespace CXXR
 
         /** @brief Allocate memory.
          *
-		 * Allocates memory for a new object of a class derived from
-		 * GCNode, and zero the memory thus allocated.
-		 *
-		 * @param bytes Number of bytes of memory required.
-		 *
-		 * @return Pointer to the allocated memory block.
-		 *
-		 * @note Since objects of classes derived from RObject \e must
-		 * be allocated on the heap, constructors of these classes may
-		 * rely on the fact that operator new zeroes the allocated
-		 * memory to elide member initializations.
-		 */
+         * Allocates memory for a new object of a class derived from
+         * GCNode, and zero the memory thus allocated.
+         *
+         *@param bytes Number of bytes of memory required.
+         *
+         * @return Pointer to the allocated memory block.
+         *
+         * @note Since objects of classes derived from RObject \e must
+         * be allocated on the heap, constructors of these classes may
+         * elide some member initializations by relying on the fact
+         * that operator new zeroes the allocated memory.
+         */
         static void *operator new(size_t bytes)
         {
             return memset(MemoryBank::allocate(bytes), 0, bytes);
         }
 
-        /** Deallocate memory
-		 *
-		 * Deallocate memory previously allocated by operator new.
-		 *
-		 * @param p Pointer to the allocated memory block.
-		 *
-		 * @param bytes Size in bytes of the memory block, as
-		 * requested when the block was allocated.
-		 */
+        /** @brief Deallocate memory
+         *
+         * Deallocate memory previously allocated by operator new.
+         *
+         * @param p Pointer to the allocated memory block.
+         *
+         * @param bytes Size in bytes of the memory block, as
+         * requested when the block was allocated.
+         */
         static void operator delete(void *p, size_t bytes)
         {
             MemoryBank::deallocate(p, bytes);
         }
 
         /** @brief Integrity check.
-		 *
-		 * Aborts the program with an error message if the class is
-		 * found to be internally inconsistent.
-		 *
-		 * @return true, if it returns at all.  The return value is to
-		 * facilitate use with \c assert.
-		 */
+         *
+         * Aborts the program with an error message if the class is
+         * found to be internally inconsistent.
+         *
+         * @return true, if it returns at all.  The return value is to
+         * facilitate use with \c assert.
+         */
         static bool check();
 
         /** Present this node to a visitor and, if the visitor so
-         * wishes, conduct the visitor to the children of this node.
+         * requests, conduct the visitor to the children of this node.
          *
          * @param v Pointer to the visitor object.
          *
@@ -207,7 +207,7 @@ namespace CXXR
         }
 
         /** Present this node to a visitor and, if the visitor so
-         * wishes, conduct the visitor to the children of this node.
+         * requests, conduct the visitor to the children of this node.
          *
          * @param v Pointer to the visitor object.
          *
@@ -222,16 +222,43 @@ namespace CXXR
         }
 
         /** Delete a GCNode
-		 *
-		 * @note It is a design objective that it should be possible
-		 * to delete any GCNode object 'by hand', rather than leaving
-		 * it to the garbage collector: designers of derived classes
-		 * should bear this in mind.  Because the class destructors
-		 * are not public, such manual deletion will normally be
-		 * accomplished by calling this method.
-		 */
+         *
+         * @note It is a design objective that it should be possible
+         * to delete any GCNode object 'by hand', rather than leaving
+         * it to the garbage collector: designers of derived classes
+         * should bear this in mind.  Because the class destructors
+         * are not public, such manual deletion will normally be
+         * accomplished by calling this method.
+         */
         void destroy() const { delete this; }
 
+        /** @brief Prevent old-to-new references.
+         *
+         * If \a node points to a node of a younger generation than
+         * this node, then raise it to this node's generation, and
+         * propagate this change to the nodes to which \a node refers,
+         * and so on recursively.
+         *
+         * @param node Pointer to the node whose generation is to be
+         *          adjusted if necessary.  If this is a null pointer,
+         *          the method does nothing.
+         *
+         * @note In practice only \a node has its generation changed
+         * as a direct result of this call; the recursive propagation
+         * of the change is deferred until the next garbage
+         * collection.
+         *
+         * @todo Make this protected once CHECK_OLD_TO_NEW in
+         * memory.cpp is no longer required.
+         */
+        void devolveAge(const GCNode *node);
+#if 0
+        void propagateAge(const GCNode *node) const
+        {
+            if (node)
+                node->ageTo(m_gcgen);
+        }
+#endif
         /** @brief Initiate a garbage collection.
          *
          * @param num_old_gens The number of old generations to collect.
@@ -243,23 +270,26 @@ namespace CXXR
          * This method must be called before any GCNodes are created.
          * If called more than once in a single program run, the
          * second and subsequent calls do nothing.
-		 *
-		 * @param num_old_generations One fewer than the number of
-		 * generations into which GCNode objects are to be ranked.
-		 */
+         *
+         * @param num_old_generations One fewer than the number of
+         * generations into which GCNode objects are to be ranked.
+         *
+         * @todo Have this method called automatically by a Schwarz
+         * counter, and make it private.
+         */
         static void initialize(unsigned int num_old_generations);
 
         /**
-		 * @return The number of generations into which GCNode objects
-		 * are ranked by the garbage collector.
-		 */
+         * @return The number of generations into which GCNode objects
+         * are ranked by the garbage collector.
+         */
         static unsigned int numGenerations() { return s_genpeg.size(); }
 
         /** @brief Number of GCNode objects in existence.
-		 *
-		 * @return the number of GCNode objects currently in
-		 * existence.
-		 */
+         *
+         * @return the number of GCNode objects currently in
+         * existence.
+         */
         static size_t numNodes() { return s_num_nodes; }
 
         /** Conduct a visitor to the children of this node.
@@ -285,11 +315,11 @@ namespace CXXR
 
     protected:
         /**
-		 * @note The destructor is protected to ensure that GCNode
-		 * objects are allocated using 'new'.  (See Meyers 'More
-		 * Effective C++' Item 27.) Derived classes should likewise
-		 * declare their destructors private or protected.
-		 */
+         * @note The destructor is protected to ensure that GCNode
+         * objects are allocated using 'new'.  (See Meyers 'More
+         * Effective C++' Item 27.) Derived classes should likewise
+         * declare their destructors private or protected.
+         */
         virtual ~GCNode();
 
     public: // private:
@@ -299,12 +329,12 @@ namespace CXXR
         friend class GCEdge;
 
         /** Visitor class used to impose a minimum generation number.
-		 *
-		 * This visitory class is used to ensure that a node and its
-		 * descendants all have generation numbers that exceed a
-		 * specified minimum value, and is used in implementing the
-		 * write barrier in the generational garbage collector.
-		 */
+         *
+         * This visitory class is used to ensure that a node and its
+         * descendants all have generation numbers that exceed a
+         * specified minimum value, and is used in implementing the
+         * write barrier in the generational garbage collector.
+         */
         class Ager : public const_visitor
         {
         public:
@@ -327,13 +357,13 @@ namespace CXXR
         };
 
         /** Visitor class used to mark nodes.
-		 *
-		 * This visitor class is used during the mark phase of garbage
-		 * collection to ensure that a node and its descendants are
-		 * marked.  However, nodes with generation numbers exceeding a
-		 * specified level are left unmarked.  It is assumed that no
-		 * node references a node with a younger generation number.
-		 */
+         *
+         * This visitor class is used during the mark phase of garbage
+         * collection to ensure that a node and its descendants are
+         * marked.  However, nodes with generation numbers exceeding a
+         * specified level are left unmarked.  It is assumed that no
+         * node references a node with a younger generation number.
+         */
         class Marker : public const_visitor
         {
         public:
@@ -356,8 +386,8 @@ namespace CXXR
         };
 
         /** Visitor class used to abort the program if old-to-new
-		 * references are found.
-		 */
+         * references are found.
+         */
         class OldToNewChecker : public const_visitor
         {
         public:
@@ -394,12 +424,17 @@ namespace CXXR
         {
         }
 
+        // Force the generation number of this node up to mingen, and
+        // if the generation number is changed, flag up the change for
+        // recursive propagation by propagateAges().
+        void ageTo(unsigned int mingen) const;
+
         /** @brief Initialize the entire memory subsystem.
-		 *
-		 * This method must be called before any GCNodes are created.
-		 * If called more than once in a single program run, the
-		 * second and subsequent calls do nothing.
-		 */
+         *
+         * This method must be called before any GCNodes are created.
+         * If called more than once in a single program run, the
+         * second and subsequent calls do nothing.
+         */
         friend void initializeMemorySubsystem();
         static void initialize();
 
@@ -427,16 +462,16 @@ namespace CXXR
         const GCNode *prev() const { return m_prev; }
 
         /** Transfer a node so as to precede this node.
-		 *
-		 * @param n Pointer to node to be moved, which may be in the
-		 * same (circularly linked) list as '*this', or in a different
-		 * list.  It is permissible for n to point to what is already
-		 * the predecessor of '*this', in which case the function
-		 * amounts to a no-op.  It is also permissible for n to point
-		 * to '*this' itself; beware however that in that case the
-		 * function will detach '*this' from its current list, and turn
-		 * it into a singleton list.
-		 */
+         *
+         * @param n Pointer to node to be moved, which may be in the
+         * same (circularly linked) list as '*this', or in a different
+         * list.  It is permissible for n to point to what is already
+         * the predecessor of '*this', in which case the function
+         * amounts to a no-op.  It is also permissible for n to point
+         * to '*this' itself; beware however that in that case the
+         * function will detach '*this' from its current list, and turn
+         * it into a singleton list.
+         */
         void splice(const GCNode *n) const
         {
             // Doing things in this order is innocuous if n is already

@@ -32,7 +32,7 @@
 #include <cstdlib>
 #include <iostream>
 
-#include <CXXR/GCEdge.hpp>
+// #include <CXXR/GCEdge.hpp>
 #include <CXXR/WeakRef.hpp>
 #include <Localization.h>
 
@@ -43,14 +43,16 @@ int WeakRef::s_count = 0;
 
 WeakRef::WeakRef(RObject *key, RObject *value, RObject *R_finalizer,
 				 bool finalize_on_exit)
-	: RObject(WEAKREFSXP), m_key(key), m_value(key, nullptr), m_Rfinalizer(key, nullptr), m_Cfinalizer(nullptr),
+	: RObject(WEAKREFSXP), m_key(key), m_value(value), m_Rfinalizer(R_finalizer), m_Cfinalizer(nullptr),
 	  m_ready_to_finalize(false),
 	  m_finalize_on_exit(finalize_on_exit)
 {
-	// m_key = key;
-	// Force old-to-new checks:
-	m_value.redirect(key, value);
-	m_Rfinalizer.redirect(key, R_finalizer);
+	if (m_key)
+	{
+		// Force old-to-new checks:
+		m_key->devolveAge(m_value);
+		m_key->devolveAge(m_Rfinalizer);
+	}
 
 	getLive()->push_back(this);
 	m_lit = std::prev(getLive()->end());
@@ -72,13 +74,14 @@ WeakRef::WeakRef(RObject *key, RObject *value, RObject *R_finalizer,
 
 WeakRef::WeakRef(RObject *key, RObject *value, R_CFinalizer_t C_finalizer,
 				 bool finalize_on_exit)
-	: RObject(WEAKREFSXP), m_key(key), m_value(key, nullptr), m_Rfinalizer(key, nullptr), m_Cfinalizer(C_finalizer),
+	: RObject(WEAKREFSXP), m_key(key), m_value(value), m_Rfinalizer(nullptr), m_Cfinalizer(C_finalizer),
 	  m_ready_to_finalize(false), m_finalize_on_exit(finalize_on_exit)
 {
-	// m_key = key;
-	// Force old-to-new check:
-	m_value.redirect(key, value);
-	m_Rfinalizer.redirect(key, nullptr);
+	if (m_key)
+	{
+		// Force old-to-new check:
+		m_key->devolveAge(m_value);
+	}
 
 	getLive()->push_back(this);
 	m_lit = std::prev(getLive()->end());
@@ -256,8 +259,8 @@ void WeakRef::tombstone()
 {
 	WRList *currentList = wrList();
 	m_key = nullptr;
-	m_value.redirect(nullptr, nullptr);
-	m_Rfinalizer.redirect(nullptr, nullptr);
+	m_value = nullptr;
+	m_Rfinalizer = nullptr;
 	m_Cfinalizer = nullptr;
 	m_ready_to_finalize = false;
 	transfer(currentList, getTombstone());

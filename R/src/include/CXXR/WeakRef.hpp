@@ -35,7 +35,7 @@
 #include <CXXR/RObject.hpp>
 #include <R_ext/Boolean.h>
 #include <CXXR/Allocator.hpp>
-#include <CXXR/GCEdge.hpp>
+// #include <CXXR/GCEdge.hpp>
 // #include <Rinternals.h>
 
 namespace CXXR
@@ -168,8 +168,8 @@ namespace CXXR
 		static int s_count; // Count of references in existence (for debugging)
 
 		RObject *m_key;
-		GCEdge<> m_value;
-		GCEdge<> m_Rfinalizer;
+		RObject *m_value;
+		RObject *m_Rfinalizer;
 		R_CFinalizer_t m_Cfinalizer;
 		WRList::iterator m_lit;
 		bool m_ready_to_finalize;

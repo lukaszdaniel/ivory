@@ -49,130 +49,87 @@ namespace CXXR
      * object, rather than by containing a pointer or reference
      * directly.
      *
-     * @tparam T This should be a pointer or const pointer to GCNode or
-     *          (more usually) a type derived from GCNode.
+     * @tparam T GCNode or a type publicly derived from GCNode.  This
+     *          may be qualified by const, so for example a const
+     *          String* may be encapsulated in a GCEdge using the type
+     *          GCEdge<const String>.
      */
 	template <class T = RObject>
 	class GCEdge
 	{
 	public:
-		/** @brief Destination comparator template.
+		typedef T type;
+		/** @brief Default constructor.
 		 *
-		 * This templated class converts an STL-compatible comparator
-		 * type for object of the type to which T points to into an
-		 * STL-comparator for GCEdge<T>.  The comparison is based on
-		 * the destinations of the GCEdge objects being compared.
-		 * @param BinaryPredicate STL-compatible comparator type for
-		 *          objects of the type to which T points.
+		 * @note Why can't I specify the target in the constructor?
+		 * Suppose that <tt>Foo</tt>, Bar and \c Baz are all classes
+		 * derived from GCNode, and that a \c Foo object in effect
+		 * 'contains' a \c Bar and a <tt>Baz</tt>.  If it were
+		 * possibly to initialize a GCEdge in its constructor, it
+		 * would be tempting to implement the \c Foo constructor as
+		 * follows:
+		 * <pre>
+		 * Foo()
+		 *      : m_edge1(new Bar), m_edge2(new Baz)
+		 * {}
+		 * </pre>
+		 * But now consider what would happen if the call <tt>new
+		 * Bar</tt> resulted in a garbage collection.  Then the
+		 * visitReferents() function of the object under construction
+		 * may be called before the field <tt>m_edge2</tt> has been
+		 * initialized, i.e. when it still contains junk, and this
+		 * will result in undefined behaviour, probably a program
+		 * crash.  This bug would remain latent until a garbage
+		 * collection happened at precisely this point.
 		 */
-		template <class BinaryPredicate>
-		class DestComparator
-		{
-		public:
-			/**
-			 * @param tcomp The constructed object will compare two
-			 *          GCEdge<T> objects according to how \a tcomp
-			 *          compares their destinations.
-			 */
-			explicit DestComparator(const BinaryPredicate &tcomp)
-				: m_tcomp(tcomp)
-			{
-			}
+		GCEdge() : m_target(nullptr) {}
 
-			/** @brief Comparison operation.
-			 * @param l const reference to a GCEdge<T>.
-			 * @param r const reference to a GCEdge<T>.
-			 * @return true iff \a l < \a r in the defined ordering.
-			 */
-			bool operator()(const GCEdge<T *> &l, const GCEdge<T *> &r) const
-			{
-				return m_tcomp(*l, *r);
-			}
+		T *operator->() const { return get(); }
 
-		private:
-			const BinaryPredicate &m_tcomp;
-		};
-		/** @fn GCEdge(GCNode* from, T to = nullptr)
-		 * @param from Pointer to the GCNode which needs to refer to
-		 *          \a to.  Usually the constructed GCEdge object will
-		 *          form part of the object to which \a from points.
-		 *          (In the present implementation this parameter is
-		 *          ignored, but it should be set correctly to allow
-		 *          for future changes in implementation.)
+		/** @brief Extract encapsulated pointer
 		 *
-		 * @param to Pointer to the object to which reference is to be
-		 *           made.
-		 *
-		 * @note This constructor does not carry out an old-to-new
-		 * check, because normally the GCEdge being constructed will
-		 * form part of newly-constructed object of a type derived
-		 * from GCNode, so will automatically be newer than any GCNode
-		 * it refers to.  If an old-to-new check is required, it is
-		 * recommended to create the GCEdge will a null 'to' pointer,
-		 * and then to redirect it to the desired target.
+		 * @return The encapsulated pointer.
 		 */
-		GCEdge(GCNode * /*from*/, T *to = nullptr)
-			: m_target(to)
+		operator T *() const { return get(); }
+
+		/** @brief Access the target pointer.
+		 *
+		 * @return pointer to the current target (if any) of the edge.
+		 */
+		T *get() const { return m_target; }
+
+		/** @brief Present the target (if any) of this GCEdge to a
+		 *  visitor.
+		 *
+		 * @param v Reference to the visitor object.
+		 */
+		void conductVisitor(GCNode::const_visitor *v) const
 		{
+			if (m_target)
+				m_target->conductVisitor(v);
 		}
-
-		/** @fn GCEdge(const GCEdge<T>& source)
-		 * @brief Copy constructor
-		 * @param source const reference to the GCEdge to be copied.
-		 *
-		 * @note This constructor does not carry out an old-to-new
-		 * check, because normally the GCEdge being constructed will
-		 * form part of newly-constructed object of a type derived
-		 * from GCNode, so will automatically be newer than any GCNode
-		 * it refers to.
-		 */
-
-		/** @fn GCEdge<T>& operator=(const GCEdge<T>& rhs)
-		 * @brief Assignment operator.
-		 * @param rhs Right-hand side of the assignment.  It is
-		 *          <em>essential</em> that the origin ('from') of \a
-		 *          rhs be the same as the origin of the GCEdge being
-		 *          assigned to, but this is not checked in the
-		 *          default implementation.  Failure to observe this
-		 *          rule will result in garbage collection chaos.
-		 * @return A reference to this object.
-		 */
-
-		/**
-		 * @return the pointer which this GCEdge object encapsulates.
-		 */
-		operator T * const() const { return m_target; }
 
 		/** Redirect the GCEdge to point at a (possibly) different node.
 		 *
-		 * @param from This \e must point to the same node as that
-		 *          pointed to by the \a from parameter used to
-		 *          construct this GCEdge object.
+		 * @param from This \e must point to the GCNode object that
+		 *          contains this GCEdge object.
 		 *
 		 * @param to Pointer to the object to which reference is now
 		 *           to be made.
-		 *
-		 * @note An alternative implementational approach would be to
-		 * save the \a from pointer within the GCEdge object.
-		 * However, this would double the space occupied by a GCEdge
-		 * object.
 		 */
-		void redirect(GCNode *from, T *to)
+		void retarget(GCNode *from, T *to)
 		{
 			m_target = to;
-
-			if (!from)
-				return;
-
-			if (m_target)
-			{
-				GCNode::Ager ager(from->m_gcgen);
-				m_target->conductVisitor(&ager);
-			}
+			// from->propagateAge(to);
 		}
 
 	private:
 		T *m_target;
+
+		// Not implemented (yet).  Declared to prevent
+		// compiler-generated versions:
+		GCEdge(const GCEdge &);
+		GCEdge &operator=(const GCEdge &);
 	};
 } // namespace CXXR
 
