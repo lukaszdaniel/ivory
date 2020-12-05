@@ -58,4 +58,42 @@ namespace CXXR
     }
 } // namespace CXXR
 
+extern "C"
+{
+    /**
+     * @param s Pointer to an RObject.
+     * @return TRUE iff the RObject pointed to by \a s is a vector of
+     *         strings.
+     */
+    Rboolean Rf_isString(SEXP s);
+
+    /** @brief Set element of CXXR::StringVector.
+     *
+     * @param x Pointer to a CXXR::StringVector .
+     * @param i Index of the required element.  There is no bounds checking.
+     * @param v Pointer to CXXR::RObject representing the new value.
+     */
+    void SET_STRING_ELT(SEXP x, R_xlen_t i, SEXP v);
+
+    /**
+     * @brief Examine element of a CXXR::StringVector.
+     * @param x Pointer to a CXXR::StringVector.  An error is raised if \a x
+     *          is not a pointer to a StringVector.
+     * @param i Index of the required element.  There is no bounds checking.
+     * @return Pointer to extracted \a i 'th element.
+     */
+    SEXP STRING_ELT(SEXP x, R_xlen_t i);
+
+    /**
+     * @param x Pointer to a CXXR::StringVector; an error is raised if \a x
+     *          is not a pointer to a CXXR::StringVector.
+     * @return Pointer to the start of \a x 's data, interpreted (riskily)
+     *         as an array of CXXR::String*.
+     * @deprecated This function puts the integrity of the write barrier
+     * at the mercy of callers.  It is deliberately not made visible
+     * to C code.
+     */
+    SEXP *(STRING_PTR)(SEXP x);
+} // extern "C"
+
 #endif // STRINGVECTOR_HPP

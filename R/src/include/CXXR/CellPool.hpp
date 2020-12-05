@@ -186,7 +186,8 @@ namespace CXXR
 			--m_cells_allocated;
 		}
 
-		/**
+		/** @brief Allocate a cell 'from stock'.
+		 *
 		 * Allocate a cell from the pool, provided it can be allocated
 		 * 'from stock'.  Can be useful when called from other inlined
 		 * functions in that it doesn't throw any exceptions.

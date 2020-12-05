@@ -66,8 +66,8 @@ namespace CXXR
 extern "C"
 {
     /**
-     * @param s Pointer to an RObject.
-     * @return TRUE iff the RObject pointed to by \a s is an expression.
+     * @param s Pointer to a CXXR::RObject.
+     * @return TRUE iff the CXXR::RObject pointed to by \a s is an expression.
      */
     Rboolean Rf_isExpression(SEXP s);
 

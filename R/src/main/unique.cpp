@@ -98,7 +98,7 @@ R_INLINE static hlen ihash(SEXP x, const R_xlen_t &indx, HashData &d)
 {
     int xi = INTEGER_ELT(x, indx);
     if (xi == NA_INTEGER) return 0;
-    return scatter((unsigned int) xi, d);
+    return scatter(static_cast<unsigned int>(xi), d);
 }
 
 /* We use unions here because Solaris gcc -O2 has trouble with

@@ -52,20 +52,20 @@ namespace CXXR
     public:
         /** @brief Create a ListVector.
          *
-         * Create a ListVector.  Each element will initially encapsulate
-         * a null pointer.
-	 * @param sz Number of elements required.  Zero is
-	 *          permissible.
-	 */
+         * Each element will initially encapsulate a null pointer.
+         * @param sz Number of elements required.  Zero is
+         *          permissible.
+         */
         ListVector(size_t sz)
             : EdgeVector<RObject *, VECSXP>(sz)
         {
         }
 
-        /** Construct from ExpressionVector.
-	 * @param ev The ExpressionVector on which the constructed
-	 *          ListVector is to be modelled.
-	 */
+        /** @brief Construct from ExpressionVector.
+         *
+         * @param ev The ExpressionVector on which the constructed
+         *          ListVector is to be modelled.
+         */
         ListVector(const EdgeVector<RObject *, EXPRSXP> &ev);
 
     private:
@@ -77,28 +77,28 @@ namespace CXXR
 
 extern "C"
 {
-   /** @brief Set element of CXXR::ListVector.
-    *
-    * @param x Pointer to a CXXR::ListVector.
-    *
-    * @param i Index of the required element.  There is no bounds checking.
-    *
-    * @param v Pointer, possibly null, to CXXR::RObject representing the
-    *          new value.
-    *
-    * @return The new value \a v.
-    */
-   SEXP SET_VECTOR_ELT(SEXP x, R_xlen_t i, SEXP v);
+    /** @brief Set element of CXXR::ListVector.
+     *
+     * @param x Pointer to a CXXR::ListVector.
+     *
+     * @param i Index of the required element.  There is no bounds checking.
+     *
+     * @param v Pointer, possibly null, to CXXR::RObject representing the
+     *          new value.
+     *
+     * @return The new value \a v.
+     */
+    SEXP SET_VECTOR_ELT(SEXP x, R_xlen_t i, SEXP v);
 
-   /** @brief Examine element of CXXR::ListVector.
-    *
-    * @param x Non-null pointer to a CXXR::ListVector.
-    *
-    * @param i Index of the required element.  There is no bounds checking.
-    *
-    * @return The value of the \a i 'th element.
-    */
-   SEXP(VECTOR_ELT)(SEXP x, R_xlen_t i);
+    /** @brief Examine element of CXXR::ListVector.
+     *
+     * @param x Non-null pointer to a CXXR::ListVector.
+     *
+     * @param i Index of the required element.  There is no bounds checking.
+     *
+     * @return The value of the \a i 'th element.
+     */
+    SEXP(VECTOR_ELT)(SEXP x, R_xlen_t i);
 }
 
 #endif /* LISTVECTOR_HPP */

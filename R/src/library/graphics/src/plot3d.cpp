@@ -598,9 +598,9 @@ static void DrawFacets(double *z, double *x, double *y, int nx, int ny,
 	    if (DoLighting) {
 		// shade can degenerate to NaN
 		if(R_FINITE(shade)) {
-		    r = (int)(shade * R_RED(newcol));
-		    g = (int)(shade * R_GREEN(newcol));
-		    b = (int)(shade * R_BLUE(newcol));
+		    r = static_cast<int>(shade * R_RED(newcol));
+		    g = static_cast<int>(shade * R_GREEN(newcol));
+		    b = static_cast<int>(shade * R_BLUE(newcol));
 		    newcol = R_RGB(r, g, b);
 		    GPolygon(nv, xx, yy, USER, newcol, border, dd);
 		}

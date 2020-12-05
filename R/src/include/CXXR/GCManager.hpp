@@ -53,12 +53,14 @@ namespace CXXR
      * number of bytes currently allocated via CXXR::MemoryBank is at least
      * as great as a threshold value.  This threshold value varies
      * during the run, subject to a minimum value specified in the
-     * <tt>initialize</tt> method.
+     * initialize() method.
      */
 	class GCManager
 	{
 	public:
-		/** Adjust the garbage collection threshold in the light of
+		/** @brief Adjust the garbage collection threshold.
+		 *
+		 *  Adjust the garbage collection threshold in the light of
 		 *  current allocations, and the space demand currently being
 		 *  addressed.
 		 *
@@ -78,7 +80,7 @@ namespace CXXR
 		 */
 		static void gc(size_t bytes_wanted, bool full = false);
 
-		/** Initialize static members.
+		/** @brief Initialize static members.
 		 *
 		 * This method must be called before any GCNode objects are created.
 		 * If called more than once in a single program run, the
@@ -152,9 +154,10 @@ namespace CXXR
 		static std::ostream *setReporting(std::ostream *os = 0);
 
 		/** @brief Turn garbage collection torture on or off.
-		 *  If enabled, every time that CXXR::MemoryBank indicates that
-		 *  it is about to request additional memory from the operating
-		 *  system, a garbage collection is carried out.
+		 *
+		 * If enabled, every time that CXXR::Heap indicates that it is
+		 * about to request additional memory from the operating
+		 * system, a garbage collection is carried out.
 		 *
 		 * @param on The required torturing status.
 		 */

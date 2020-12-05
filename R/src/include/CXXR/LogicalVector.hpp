@@ -57,16 +57,16 @@ namespace CXXR
 extern "C"
 {
     /**
-     * @param s Pointer to an RObject.
-     * @return TRUE iff the RObject pointed to by \a s is a logical vector.
+     * @param s Pointer to a CXXR::RObject.
+     * @return TRUE iff the CXXR::RObject pointed to by \a s is a logical vector.
      */
     Rboolean Rf_isLogical(SEXP s);
 
     /**
-     * @param x Pointer to a \c LogicalVector or an \c IntVector (i.e. an
+     * @param x Pointer to a CXXR::LogicalVector or an CXXR::IntVector (i.e. an
      *          R logical or integer vector).
      *          An error is generated if \a x is not pointer to a \c
-     *          LogicalVector or an \c IntVector.
+     *          CXXR::LogicalVector or an CXXR::IntVector.
      * @return Pointer to element 0 of \a x.
      */
     int *LOGICAL(SEXP x);

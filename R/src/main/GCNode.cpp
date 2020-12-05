@@ -106,14 +106,11 @@ namespace CXXR
         }
     }
 
-    void GCNode::expose() const
+    void GCNode::expose_aux() const
     {
-        if (!m_prev)
-        {
-            link(s_genpeg[0]->m_prev, this);
-            link(this, s_genpeg[0]);
-            ++s_gencount[0];
-        }
+        link(s_genpeg[0]->m_prev, this);
+        link(this, s_genpeg[0]);
+        ++s_gencount[0];
     }
 
     void GCNode::initialize(unsigned int num_old_generations)

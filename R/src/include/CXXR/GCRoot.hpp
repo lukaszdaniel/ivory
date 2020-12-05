@@ -24,8 +24,10 @@
 
 /** @file GCRoot.hpp
  *
- * Templated class GCRoot and its untemplated base class GCRootBase.
- * The latter also encapsulates the functionality of the CR pointer
+ * @brief Templated class CXXR::GCRoot and its untemplated base class
+ * CXXR::GCRootBase.
+ *
+ * GCRootBase also encapsulates the functionality of the CR pointer
  * protection stack.
  */
 
@@ -47,14 +49,14 @@ namespace CXXR
 {
     class RObject;
 
-    /** Untemplated base class for GCRoot.
+    /** @brief Untemplated base class for GCRoot.
      *
      * The preferred method for C++ code to protect a GCNode
      * from the garbage collector is to use the templated class
      * GCRoot, of which this is the untemplated base class.
      *
      * However, GCRoot is not usable by C code, which should continue
-     * to use <tt>PROTECT</tt>, <tt>UNPROTECT</tt> etc. as in CR.
+     * to use PROTECT(), UNPROTECT() etc. as in CR.
      * However, these functions have been reimplemented to manipulate
      * a C pointer protection stack (as we shall call it, despite the
      * fact that it's implemented in C++) encapsulated as a static
@@ -98,7 +100,8 @@ namespace CXXR
             return *this;
         }
 
-        /**
+        /** @brief Restore PPS to a previous size.
+         *
          * Restore the C pointer protection stack to a previous size by
          * popping elements off the top.
          * @param new_size The size to which the stack is to be
@@ -110,7 +113,8 @@ namespace CXXR
          */
         static void ppsRestoreSize(size_t new_size);
 
-        /**
+        /** @brief Current size of PPS.
+         *
          * @return the current size of the C pointer protection stack.
          *
          * @note This method is intended for use in conjunction with
@@ -122,7 +126,8 @@ namespace CXXR
             return s_pps.size();
         }
 
-        /**
+        /** @brief Push a node pointer onto the PPS.
+         *
          * Push a node pointer onto the C pointer protection stack.
          * @param node Pointer to the node to be protected from the
          *          garbage collector.
@@ -131,7 +136,8 @@ namespace CXXR
          */
         static unsigned int protect(RObject *node);
 
-        /**
+        /** @brief Access the encapsulated pointer.
+         *
          * @return the GCNode pointer encapsulated by this object.
          */
         GCNode *ptr() const
@@ -139,11 +145,12 @@ namespace CXXR
             return s_roots[m_index];
         }
 
-        /**
+        /** @brief Change the target of a pointer on the PPS.
+         *
          * Change the node that a particular cell in the C pointer
          * protection stack protects.  As a consistency check, it is
          * required that the reprotect takes place within the same
-         * RContext as the corresponding protect.  (CR does not apply this
+         * ::RContext as the corresponding protect.  (CR does not apply this
          * check.)
          * @param node Pointer to the node now to be protected from
          *          the garbage collector by the designated stack
@@ -156,10 +163,11 @@ namespace CXXR
          */
         static void reprotect(RObject *node, unsigned int index);
 
-        /**
+        /** @brief Pop pointers from the PPS.
+         *
          * Pop cells from the C pointer protection stack.  As a
          * consistency check, it is required that the unprotect takes
-         * place within the same RContext as the corresponding protect.
+         * place within the same ::RContext as the corresponding protect.
          * (CR does not apply this check.)
          * @param count Number of cells to be popped.  Must not be
          *          larger than the current size of the C pointer
@@ -179,7 +187,8 @@ namespace CXXR
          */
         static void unprotectPtr(RObject *node);
 
-        /**
+        /** @brief Conduct a const visitor to all 'root' GCNode objects.
+         *
          * Conduct a GCNode::const_visitor object to each root GCNode
          * and each node on the C pointer protection stack.
          *
@@ -187,7 +196,8 @@ namespace CXXR
          */
         static void visitRoots(GCNode::const_visitor *v);
 
-        /**
+        /** @brief Conduct a const visitor to all 'root' GCNode objects.
+         *
          * Conduct a GCNode::visitor object to each root GCNode
          * and each node on the C pointer protection stack.
          *
@@ -214,7 +224,9 @@ namespace CXXR
         static void seq_error();
     };
 
-    /**
+    /** @brief Smart pointer to protect a GCNode from garbage
+     * collection.
+     *
      * This class encapsulates a pointer to an object of a type
      * derived from GCNode.  For as long as the GCRoot object exists,
      * the GCNode that it points to will not be garbage collected.

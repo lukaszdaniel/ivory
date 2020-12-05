@@ -1712,7 +1712,7 @@ char *Rf_acopy_string(const char *const in)
 		strcpy(out, in);
 	}
 	else
-		out = (char *)"";
+		out = const_cast<char*>("");
 	return out;
 }
 

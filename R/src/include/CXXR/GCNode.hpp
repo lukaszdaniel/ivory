@@ -60,30 +60,54 @@ namespace CXXR
      * Abstract base class for all objects managed by the garbage
      * collector.
      *
-     * \par Prenatal immunity:
+     * \par Derived class checklist:
+     * Classes derived directly or indirectly from GCNode should do
+     * the following to ensure the integrity of the garbage collection
+     * scheme:
+     * <ol>
+     * <li>Explicitly declare a destructor (even if it does nothing)
+     * as either protected or (if no further derivation from the class
+     * is envisaged) private.  This ensures that objects of classes
+     * derived from GCNode can be created only using 'new'.</li>
+     *
+     * <li>If the derived class contains any pointers or references to
+     * other objects derived from GCNode, it should reimplement the
+     * methods visitChildren() appropriately.</li>
+     *
+     * <li>If the derived class contains any pointers to other objects
+     * derived from GCNode, then any post-construction operation that
+     * modifies the pointer must invoke the method devolveAge() with the
+     * new destination of the pointer as its argument, to ensure that
+     * no old-to-new references arise.  There is no need to do this
+     * during the operation of a constructor for the derived class,
+     * because then the object under construction will necessarily be
+     * newer than anything to which it refers.</li>
+     * </ol>
+     *
+     * \par Infant immunity:
      * While a GCNode or an object of a class derived from GCNode is
      * under construction, it is effectively immune from the garbage
      * collector.  Not only does this greatly simplify the coding of
      * the constructors themselves, it also means that in implementing
-     * the virtual method visitChildren(), it is not necessary to
+     * the virtual methods visitChildren(), it is not necessary to
      * consider the possibility that the garbage collector will invoke
      * this method for a node whose construction is not yet complete.
      *
      * \par
-     * The private method \c expose() is used to end this immunity once
+     * The private method expose() is used to end this immunity once
      * construction of an object is complete.  However, there appears
-     * to be no clean and general way in C++ of calling \c expose() \e
+     * to be no clean and general way in C++ of calling expose() \e
      * exactly when construction is complete.  Consequently, a node's
-     * prenatal immunity will in fact continue until one of the
+     * infant immunity will in fact continue until one of the
      * following events occurs:
      * <ul>
      * <li>The node is explicitly protected from the garbage
      * collector, either by encapsulating a pointer to it in a
-     * GCRoot, or by the CR \c PROTECT mechanism.  For this reason, it
+     * GCRoot, or by the CR PROTECT() mechanism.  For this reason, it
      * is important that constructors <em>do not</em> attempt
      * explicitly to protect '<tt>this</tt>'; a particular risk with
      * this is that constructors of derived classes will not be able
-     * to rely on prenatal immunity.</li>
+     * to rely on infant immunity.</li>
      *
      * <li>The node is marked by the garbage collector.</li>
      *
@@ -279,11 +303,12 @@ namespace CXXR
          */
         static void initialize(unsigned int num_old_generations);
 
-        /**
+        /** @brief Number of generations used by garbage collector.
+         *
          * @return The number of generations into which GCNode objects
          * are ranked by the garbage collector.
          */
-        static unsigned int numGenerations() { return s_genpeg.size(); }
+        static size_t numGenerations() { return s_genpeg.size(); }
 
         /** @brief Number of GCNode objects in existence.
          *
@@ -294,13 +319,13 @@ namespace CXXR
 
         /** Conduct a visitor to the children of this node.
          *
-         * @param Pointer to the visitor object.
+         * @param v Pointer to the visitor object.
          */
         virtual void visitChildren(const_visitor *v) const {}
 
         /** Conduct a visitor to the children of this node.
          *
-         * @param Pointer to the visitor object.
+         * @param v Pointer to the visitor object.
          */
         virtual void visitChildren(visitor *v) {}
 
@@ -440,7 +465,14 @@ namespace CXXR
 
         // Make the node known to the garbage collector (if it isn't
         // already).
-        void expose() const;
+        void expose() const
+        {
+            if (!m_prev)
+                expose_aux();
+        }
+
+        // Does the business for expose():
+        void expose_aux() const;
 
         bool isMarked() const { return m_marked; }
 

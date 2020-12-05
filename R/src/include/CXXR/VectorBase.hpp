@@ -46,7 +46,7 @@ namespace CXXR
   public:
     typedef std::size_t size_type;
     /**
-     * @param stype The required <tt>SEXPTYPE</tt>.
+     * @param stype The required ::SEXPTYPE.
      * @param sz The required number of elements in the vector.
      */
     VectorBase(SEXPTYPE stype, size_t sz)
@@ -145,16 +145,17 @@ extern "C"
   /* Vector Access Functions */
 
   /**
-   * @param x Pointer to a \c VectorBase.
+   * @param x Pointer to a CXXR::RObject.
    *
-   * @return The length of \a x, or 0 if \a x is a null pointer.  (In
+   * @return The length of \a x, or 0 if \a x is a null pointer, or is
+   *         not a pointer to a vector object (VectorBase).  (In 
    *         the case of certain hash tables, this means the 'capacity'
    *         of \a x , not all of which may be used.)
    */
   int(LENGTH)(SEXP x);
 
   /**
-   * @param x Pointer to a \c VectorBase.
+   * @param x Pointer to a CXXR::VectorBase.
    * @return The 'true length' of \a x.  According to the R Internals
    *         document for R 2.4.1, this is only used for certain hash
    *         tables, and signifies the number of used slots in the
@@ -164,47 +165,26 @@ extern "C"
 
   /**
    * Set length of vector.
-   * @param x Pointer to a \c VectorBase.
+   * @param x Pointer to a CXXR::VectorBase.
    * @param v The required new length.
    */
   void SETLENGTH(SEXP x, R_xlen_t v);
 
   /**
    * Set 'true length' of vector.
-   * @param x Pointer to a \c VectorBase.
+   * @param x Pointer to a CXXR::VectorBase.
    * @param v The required new 'true length'.
    */
   void SET_TRUELENGTH(SEXP x, R_xlen_t v);
 
   /**
-   * Extract element of character string.
-   * @param x Pointer to a \c VectorBase representing a character string.
-   * @param i Index of the required element
-   * @return Pointer to extracted \i 'th element.
-   */
-  SEXP STRING_ELT(SEXP x, R_xlen_t i);
-
-  /**
-   * Set element of character string.
-   * @param x Pointer to a \c VectorBase representing a character string.
-   * @param i Index of the required element
-   * @param v Pointer to \c RObject representing the new value.
-   */
-  void SET_STRING_ELT(SEXP x, R_xlen_t i, SEXP v);
-
-  /**
-   * @param x Pointer to a \c VectorBase representing a vector of string
-   *          objects.
-   * @return Pointer to the start of \a x 's data, thus interpreted.
-   */
-  SEXP *STRING_PTR(SEXP x);
-
-  /**
    * @brief Create a vector object.
    *
-   *  Allocate a vector object.  This ensures only validity of list-like
-   *  SEXPTYPES (as the elements must be initialized).  Initializing of
-   *  other vector types is done in do_makevector.
+   *  Allocate a vector object.  This ensures only validity of
+   *  ::SEXPTYPE values representing lists (as the elements must be
+   *  initialized).  Initializing of other vector types is done in
+   *  do_makevector().
+   * 
    * @param stype The type of vector required.
    * @param length The length of the vector to be created.
    * @return Pointer to the created vector.
@@ -214,9 +194,11 @@ extern "C"
   /**
    * @brief Create a vector object.
    *
-   *  Allocate a vector object.  This ensures only validity of list-like
-   *  SEXPTYPES (as the elements must be initialized).  Initializing of
-   *  other vector types is done in do_makevector.
+   *  Allocate a vector object.  This ensures only validity of
+   *  ::SEXPTYPE values representing lists (as the elements must be
+   *  initialized).  Initializing of other vector types is done in
+   *  do_makevector().
+   * 
    * @param stype The type of vector required.
    * @param length The length of the vector to be created.
    * @param length Custom allocator to be used.

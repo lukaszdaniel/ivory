@@ -60,9 +60,9 @@ extern "C"
     Rboolean Rf_isComplex(SEXP s);
 
     /**
-     * @param x Pointer to a \c ComplexVector (i.e. an R complex vector).
-     *          An error is generated if \a x is not pointer to a \c
-     *          ComplexVector.
+     * @param x Pointer to a CXXR::ComplexVector (i.e. an R complex vector).
+     *          An error is generated if \a x is not pointer to a
+     *          CXXR::ComplexVector.
      * @return Pointer to element 0 of \a x.
      */
     Rcomplex *COMPLEX(SEXP x);

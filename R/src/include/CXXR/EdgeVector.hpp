@@ -19,7 +19,7 @@
 
 /** @file EdgeVector.hpp
  *
- * @brief Templated class EdgeVector.
+ * @brief Templated class CXXR::EdgeVector.
  */
 
 #ifndef EDGEVECTOR_HPP
@@ -36,34 +36,33 @@
 
 namespace CXXR
 {
-    /** @brief Vector of GCEdge objects.
+    /** @brief Vector of pointers to RObject.
      *
      * This is a templated class to represent a vector whose members
-     * are of a type instantiated from the template GCEdge.
-     * @param Ptr The type of pointer to be encapsulated by the GCEdge
-     *          objects.  This should be pointer or const pointer to
+     * are pointers to other GCNode objects.
+     * @param Ptr This should be pointer or const pointer to
      *          GCNode or to a type (publicly) derived from GCNode.
-     *          The vector elements will be of type GCEdge<Ptr>.
-     * @param ST The required \c SEXPTYPE of the vector.
+     *          The vector elements will be of type \a Ptr.
+     * @param ST The required ::SEXPTYPE of the vector.
      */
     template <class Ptr, SEXPTYPE ST>
     class EdgeVector : public VectorBase
     {
     public:
-        /** Proxy object for an element of an EdgeVector<Ptr, ST>.
-	 *
-	 * Objects of this class are used to allow the elements of an
-	 * EdgeVector<Ptr, ST> to be examined and modified using the
-	 * same syntax as would be used for accessing an array of
-	 * <tt>Ptr</tt>, whilst nevertheless enforcing the write
-	 * barrier.  See Item 30 of Scott Meyers's 'More Effective
-	 * C++' for a general discussion of proxy objects, but see the
-	 * <a
-	 * href="http://www.aristeia.com/BookErrata/mec++-errata_frames.html">errata</a>.
-	 * (It may look complicated, but an optimising compiler should
-	 * be able to distil an invocation of EdgeVector<Ptr,
-	 * ST>::operator[] into very few instructions.)
-	 */
+        /** @brief Proxy object for an element of an EdgeVector<Ptr, ST>.
+         *
+         * Objects of this class are used to allow the elements of an
+         * EdgeVector<Ptr, ST> to be examined and modified using the
+         * same syntax as would be used for accessing an array of
+         * \a Ptr, whilst nevertheless enforcing the write
+         * barrier.  See Item 30 of Scott Meyers's 'More Effective
+         * C++' for a general discussion of proxy objects, but see the
+         * <a
+         * href="http://www.aristeia.com/BookErrata/mec++-errata_frames.html">errata</a>.
+         * (It may look complicated, but an optimising compiler should
+         * be able to distil an invocation of EdgeVector<Ptr,
+         * ST>::operator[] into very few instructions.)
+         */
         class ElementProxy
         {
         public:
@@ -81,7 +80,7 @@ namespace CXXR
             }
 
             /** Redirect the pointer encapsulated by the proxied element.
-             * @param rhs New pointer value.
+             * @param s New pointer value.
              * @return Reference to this ElementProxy.
              */
             ElementProxy &operator=(Ptr s)
@@ -121,7 +120,7 @@ namespace CXXR
          * @param sz Number of elements required.  Zero is
          *          permissible.
          * @param init Initial value for the destination of each
-         *          GCEdge<Ptr> in the EdgeVector.
+         *          \a Ptr in the EdgeVector.
          */
         explicit EdgeVector(size_t sz, Ptr init = nullptr)
             : VectorBase(ST, sz), m_data(sz, init)
@@ -142,14 +141,15 @@ namespace CXXR
         /** @brief Read-only element access.
          * @param index Index of required element (counting from
          *          zero).  No bounds checking is applied.
-         * @return \c the specified element.
+         * @return the specified element.
          */
         Ptr const operator[](unsigned int index) const
         {
             return m_data[index];
         }
 
-        /**
+        /** @brief Name by which this type is known in R.
+         *
          * @return the name by which this type is known in R.
          *
          * @note This function is declared but not defined as part of
@@ -191,7 +191,7 @@ namespace CXXR
     }
 
     template <class Ptr, SEXPTYPE ST>
-    void EdgeVector<Ptr, ST>::visitChildren(GCNode::const_visitor *v) const
+    void EdgeVector<Ptr, ST>::visitChildren(const_visitor *v) const
     {
         VectorBase::visitChildren(v);
         for (unsigned int i = 0; i < size(); ++i)
@@ -203,7 +203,7 @@ namespace CXXR
     }
 
     template <class Ptr, SEXPTYPE ST>
-    void EdgeVector<Ptr, ST>::visitChildren(GCNode::visitor *v)
+    void EdgeVector<Ptr, ST>::visitChildren(visitor *v)
     {
         VectorBase::visitChildren(v);
         for (unsigned int i = 0; i < size(); ++i)

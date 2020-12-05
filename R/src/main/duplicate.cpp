@@ -144,7 +144,7 @@ using namespace R;
 static SEXP duplicate1(SEXP, Rboolean deep);
 
 #ifdef R_PROFILING
-static unsigned long duplicate_counter = (unsigned long)-1;
+static unsigned long duplicate_counter = static_cast<unsigned long>(-1);
 
 HIDDEN unsigned long R::get_duplicate_counter(void)
 {

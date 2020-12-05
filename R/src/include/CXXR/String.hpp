@@ -192,8 +192,8 @@ extern "C"
 {
 	/**
 	 * @brief Writable char access.
-     * @param x \c pointer to a \c String.
-     * @return \c pointer to character 0 \a x.
+     * @param x pointer to a CXXR::String 
+     * @return pointer to character 0 of \a x.
      * @note For R internal use only.  May be removed in future.
      */
 	inline char *CHAR_RW(SEXP x)
@@ -202,44 +202,44 @@ extern "C"
 	}
 
 	/**
-     * @param x \c const pointer to a \c String.
-     * @return \c const pointer to character 0 \a x.
+     * @param x \c const pointer to a CXXR::String .
+     * @return \c const pointer to character 0 of \a x.
      */
 	const char *R_CHAR(SEXP x);
 
 	/**
-     * @param x Pointer to a \c VectorBase representing a character string.
+     * @param x Pointer to a CXXR::String .
      * @return true iff \a x is marked as having LATIN1 encoding.
      */
 	int IS_LATIN1(SEXP x);
 
 	/**
      * @brief Set LATIN1 encoding.
-     * @param x Pointer to a \c VectorBase representing a character string.
+     * @param x Pointer to a CXXR::String .
      */
 	void SET_LATIN1(SEXP x);
 
 	/**
      * @brief Unset LATIN1 encoding.
-     * @param x Pointer to a \c VectorBase representing a character string.
+     * @param x Pointer to a CXXR::String .
      */
 	void UNSET_LATIN1(SEXP x);
 
 	/**
-     * @param x Pointer to a \c VectorBase representing a character string.
+     * @param x Pointer to a CXXR::String .
      * @return true iff \a x is marked as having UTF8 encoding.
      */
 	int IS_UTF8(SEXP x);
 
 	/**
      * @brief Set UTF8 encoding.
-     * @param x Pointer to a \c VectorBase representing a character string.
+     * @param x Pointer to a CXXR::String .
      */
 	void SET_UTF8(SEXP x);
 
 	/**
      * @brief Unset UTF8 encoding.
-     * @param x Pointer to a \c VectorBase representing a character string.
+     * @param x Pointer to a CXXR::String .
      */
 	void UNSET_UTF8(SEXP x);
 

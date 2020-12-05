@@ -137,14 +137,14 @@ extern "C"
     /**
      * @brief Set the tag of a list element.
      * @param x Pointer to a list.
-     * @param y Pointer an \c RObject representing the new tag of the list head..
+     * @param y Pointer a CXXR::RObject representing the new tag of the list head..
      */
     void SET_TAG(SEXP x, SEXP y);
 
     /**
      * @brief Set the value of the first element of list.
      * @param x Pointer to a list.
-     * @param y Pointer an \c RObject representing the new value of the
+     * @param y Pointer a CXXR::RObject representing the new value of the
      *          list head.
      */
     SEXP SETCAR(SEXP x, SEXP y);
@@ -265,7 +265,7 @@ extern "C"
     SEXP Rf_allocList(int n);
 
     /**
-     * @brief Create an RObject...of listlike type
+     * @brief Create a CXXR::RObject of listlike type
      *
      * Despite the general name, the code (in memory.cpp) seems to assume
      * that the resulting object with have CAR, CDR, TAG etc.

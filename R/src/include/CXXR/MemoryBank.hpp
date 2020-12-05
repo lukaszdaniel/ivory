@@ -46,7 +46,7 @@ namespace CXXR
 	class MemoryBank
 	{
 	public:
-		/** Schwarz counter.
+		/** @brief Schwarz counter.
 		 *
 		 * The Schwarz counter (see for example Stephen C. Dewhurst's
 		 * book 'C++ Gotchas') is a programming idiom to ensure that a
@@ -189,7 +189,7 @@ namespace CXXR
 			notifyDeallocation(bytes);
 		}
 
-		/** Set a callback to cue garbage collection.
+		/** @brief Set a callback to cue garbage collection.
 		 *
 		 * @param cue_gc This is a pointer to a function that this
 		 *         class will call before it attempts to allocate

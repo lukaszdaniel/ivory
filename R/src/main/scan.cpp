@@ -326,7 +326,7 @@ static void scan_cleanup(void *data)
 	if (!ld->ttyflag && !ld->wasopen)
 		ld->con->close(ld->con);
 	if (ld->quoteset[0])
-		free((void *)(ld->quoteset));
+		free(const_cast<char*>(ld->quoteset));
 }
 
 #include "RBufferUtils.h"
@@ -1004,7 +1004,7 @@ HIDDEN SEXP do_scan(SEXP call, SEXP op, SEXP args, SEXP rho)
     }
     if (!data.ttyflag && !data.wasopen)
 	data.con->close(data.con);
-    if (data.quoteset[0]) free((char*) data.quoteset);
+    if (data.quoteset[0]) free(const_cast<char*>(data.quoteset));
     if (!skipNul && data.embedWarn)
 	warning(_("embedded nul(s) found in input"));
 
