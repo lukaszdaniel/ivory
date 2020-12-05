@@ -929,7 +929,7 @@ HIDDEN void R::PrintValueRec(SEXP s, R_PrintData &data)
 		    if (!isNull(nn))
 			title = translateChar(STRING_ELT(nn, 0));
 
-		    printNamedVector(s, VECTOR_ELT(t, 0), data.quote, title);
+		    printNamedVector(reinterpret_cast<CXXR::String*>(s), reinterpret_cast<CXXR::String*>(VECTOR_ELT(t, 0)), data.quote, title);
 		}
 		else
 		    printVector(s, 1, data.quote);
@@ -954,7 +954,7 @@ HIDDEN void R::PrintValueRec(SEXP s, R_PrintData &data)
 	    UNPROTECT(1);
 	    PROTECT(t = getAttrib(s, R_NamesSymbol));
 	    if (t != R_NilValue)
-		printNamedVector(s, t, data.quote, nullptr);
+		printNamedVector(reinterpret_cast<CXXR::String*>(s), reinterpret_cast<CXXR::String*>(t), data.quote, nullptr);
 	    else
 		printVector(s, 1, data.quote);
 	}

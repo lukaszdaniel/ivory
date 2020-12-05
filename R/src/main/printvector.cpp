@@ -43,6 +43,7 @@
 #include <R_ext/Itermacros.h> /* for ITERATE_BY_REGION */
 
 using namespace R;
+using namespace CXXR;
 
 #define DO_first_lab                  \
 	if (indx)                         \
@@ -247,8 +248,7 @@ void R::printComplexVectorS(SEXP x, R_xlen_t n, int indx)
     Rprintf("\n");
 }
 
-
-static void printStringVector(const SEXP *x, R_xlen_t n, int quote, int indx)
+static void printStringVector(String *const *x, R_xlen_t n, int quote, int indx)
 {
 	int w, labwidth = 0, width;
 
@@ -266,7 +266,7 @@ static void printStringVector(const SEXP *x, R_xlen_t n, int quote, int indx)
     Rprintf("\n");
 }
 
-static void printStringVectorS(SEXP x, R_xlen_t n, int quote, int indx)
+static void printStringVectorS(String *x, R_xlen_t n, int quote, int indx)
 {
     /* because there's no get_region method for ALTSTRINGs
        we hit the old version if we can to avoid the
@@ -276,7 +276,7 @@ static void printStringVectorS(SEXP x, R_xlen_t n, int quote, int indx)
        the ALTSTRING class is willing to give us a full dataptr from
        Dataptr_or_null method. */
 
-    const SEXP *xptr = (const SEXP *) DATAPTR_OR_NULL(x);
+    String* const *xptr = reinterpret_cast<String* const *>(DATAPTR_OR_NULL(x));
     if(xptr) {
 	printStringVector(xptr, n, quote, indx);
 	return;
@@ -348,9 +348,9 @@ void R::Rf_printVector(SEXP x, int indx, int quote)
 	    break;
 	case STRSXP:
 	    if (quote)
-		printStringVectorS(x, n_pr, '"', indx);
+		printStringVectorS(reinterpret_cast<CXXR::String*>(x), n_pr, '"', indx);
 	    else
-		printStringVectorS(x, n_pr, 0, indx);
+		printStringVectorS(reinterpret_cast<CXXR::String*>(x), n_pr, 0, indx);
 	    break;
 	case CPLXSXP:
 	    printComplexVectorS(x, n_pr, indx);
@@ -438,12 +438,12 @@ void R::Rf_printVector(SEXP x, int indx, int quote)
 		Rprintf("\n");                                                   \
 	}
 
-static void printNamedLogicalVectorS(SEXP x, int n, SEXP names)
+static void printNamedLogicalVectorS(SEXP x, int n, String* names)
     PRINT_N_VECTOR_SEXP(formatLogicalS(x, n, &w),
 			Rprintf("%s%*s", EncodeLogical(LOGICAL_ELT(x, k), w),
 				R_print.gap,""))
 
-static void printNamedIntegerVectorS(SEXP x, int n, SEXP names)
+static void printNamedIntegerVectorS(SEXP x, int n, String* names)
     PRINT_N_VECTOR_SEXP(formatIntegerS(x, n, &w),
 			Rprintf("%s%*s", EncodeInteger(INTEGER_ELT(x, k), w),
 				R_print.gap,""))
@@ -451,7 +451,7 @@ static void printNamedIntegerVectorS(SEXP x, int n, SEXP names)
 #undef INI_F_REAL_S
 #define INI_F_REAL_S	int d, e; formatRealS(x, n, w, d, e, 0)
 
-static void printNamedRealVectorS(SEXP x, int n, SEXP names)
+static void printNamedRealVectorS(SEXP x, int n, String* names)
     PRINT_N_VECTOR_SEXP(INI_F_REAL_S,
 			Rprintf("%s%*s",
 				EncodeReal0(REAL_ELT(x, k), w, d, e, OutDec),
@@ -470,7 +470,7 @@ static void printNamedRealVectorS(SEXP x, int n, SEXP names)
 		Rprintf("+%si", "NaN");		\
 	    else
 
-static void printNamedComplexVectorS(SEXP x, int n, SEXP names)
+static void printNamedComplexVectorS(SEXP x, int n, String* names)
     PRINT_N_VECTOR_SEXP(INI_F_CPLX_S,
 	{ /* PRINT_1 */
 	    tmp = COMPLEX_ELT(x, k);
@@ -488,20 +488,20 @@ static void printNamedComplexVectorS(SEXP x, int n, SEXP names)
 	    }
 	})
 
-static void printNamedStringVectorS(SEXP x, int n, int quote, SEXP names)
+static void printNamedStringVectorS(CXXR::String *x, int n, int quote, String* names)
     PRINT_N_VECTOR_SEXP(formatStringS(x, n, &w, quote),
 		   Rprintf("%s%*s",
 			   EncodeString(STRING_ELT(x, k), w, quote,
 					Rprt_adj_right),
 			   R_print.gap, ""))
 
-static void printNamedRawVectorS(SEXP x, int n, SEXP names)
+static void printNamedRawVectorS(SEXP x, int n, String* names)
     PRINT_N_VECTOR_SEXP(formatRawS(x, n, &w),
 		   Rprintf("%*s%s%*s", w - 2, "",
 			   EncodeRaw(RAW_ELT(x, k), ""), R_print.gap,""))
 
 HIDDEN
-void R::Rf_printNamedVector(SEXP x, SEXP names, int quote, const char *title)
+void R::Rf_printNamedVector(String *x, String *names, int quote, const char *title)
 {
     int n;
 

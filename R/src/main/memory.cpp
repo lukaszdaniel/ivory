@@ -2602,14 +2602,22 @@ void (SET_PRSEEN)(SEXP x, int v) { CXXR::Promise::set_prseen(CHK(x), v); }
 /* Hashing Accessors */
 #if defined(TESTING_WRITE_BARRIER) || defined(COMPILING_IVORY)
 HIDDEN
-int (HASHASH)(SEXP x) { return CXXR::RObject::hashash(CHK(x)); }
+int (HASHASH)(SEXP x) { return CXXR::String::hashash(CHK(x)); }
 HIDDEN
-int (HASHVALUE)(SEXP x) { return (int)TRUELENGTH(CHK(x)); }
+int(HASHVALUE)(SEXP x)
+{
+    const CXXR::String& str = *CXXR::SEXP_downcast<CXXR::String*>(x);
+	return str.hash();
+}
 
 HIDDEN
-void (SET_HASHASH)(SEXP x, int v) { CXXR::RObject::set_hashash(CHK(x), v); }
+void (SET_HASHASH)(SEXP x, int v) { /* does nothing in CXXR */ }
 HIDDEN
-void (SET_HASHVALUE)(SEXP x, int v) { SET_TRUELENGTH(x, (int)v); }
+void (SET_HASHVALUE)(SEXP x, int v)
+{
+    const CXXR::String &str = *CXXR::SEXP_downcast<CXXR::String *>(x);
+    str.hash();
+}
 #endif
 
 HIDDEN

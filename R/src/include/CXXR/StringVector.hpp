@@ -61,9 +61,8 @@ namespace CXXR
 extern "C"
 {
     /**
-     * @param s Pointer to an RObject.
-     * @return TRUE iff the RObject pointed to by \a s is a vector of
-     *         strings.
+     * @param s Pointer to a CXXR::RObject.
+     * @return TRUE iff the CXXR::RObject pointed to by \a s is a vector of strings.
      */
     Rboolean Rf_isString(SEXP s);
 
@@ -93,7 +92,18 @@ extern "C"
      * at the mercy of callers.  It is deliberately not made visible
      * to C code.
      */
-    SEXP *(STRING_PTR)(SEXP x);
+    SEXP *STRING_PTR(SEXP x);
+
+    /**
+     * @param x Pointer to a CXXR::StringVector; an error is raised if \a x
+     *          is not a pointer to a CXXR::StringVector.
+     * @return Constant pointer to the start of \a x 's data, interpreted (riskily)
+     *         as an array of CXXR::String*.
+     * @deprecated This function puts the integrity of the write barrier
+     * at the mercy of callers.  It is deliberately not made visible
+     * to C code.
+     */
+    const SEXP *STRING_PTR_RO(SEXP x);
 } // extern "C"
 
 #endif // STRINGVECTOR_HPP

@@ -600,10 +600,6 @@ namespace CXXR
         static constexpr int GROWABLE_MASK = ((unsigned short)(1 << 5));
         static unsigned int growable_bit_set(RObject *x);
         static void set_growable_bit(RObject *x);
-        /* Hashing Methods */
-        static constexpr int HASHASH_MASK = 1;
-        static unsigned int hashash(RObject *x);
-        static void set_hashash(RObject *x, bool v);
 
         static constexpr int SPECIAL_SYMBOL_MASK = (1 << 12);
         static constexpr int BASE_SYM_CACHED_MASK = (1 << 13);
@@ -752,12 +748,6 @@ extern "C"
      * with SEXPTYPE NILSXP (should not happen in CXXR).
      */
     Rboolean Rf_isNull(SEXP s);
-
-    /**
-     * @param s Pointer to a CXXR::RObject.
-     * @return TRUE iff the CXXR::RObject pointed to by \a s is a vector of strings.
-     */
-    Rboolean Rf_isString(SEXP s);
 
     /**
      * @param s Pointer to a CXXR::RObject.

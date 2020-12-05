@@ -72,6 +72,7 @@
 
 using namespace std;
 using namespace R;
+using namespace CXXR;
 
 #if !defined(__STDC_ISO_10646__) && (defined(__APPLE__) || defined(__FreeBSD__))
 /* This may not be 100% true (see the comment in rlocales.h),
@@ -498,8 +499,7 @@ int Rstrwid(const char *str, int slen, cetype_t ienc, int quote)
 }
 
 /* Match what EncodeString does with encodings */
-HIDDEN
-int R::Rstrlen(SEXP s, int quote)
+HIDDEN int R::Rstrlen(SEXP s, int quote)
 {
 	cetype_t ienc = getCharCE(s);
 	if (ienc == CE_UTF8 || ienc == CE_BYTES)
@@ -815,7 +815,7 @@ const char *R::Rf_EncodeElement0(SEXP x, R_xlen_t indx, int quote, const char *d
 		res = EncodeReal0(REAL_RO(x)[indx], w, d, e, dec);
 		break;
 	case STRSXP:
-		formatString(&STRING_PTR_RO(x)[indx], 1, &w, quote);
+		formatString(reinterpret_cast<CXXR::String *const *>(&STRING_PTR_RO(x)[indx]), 1, &w, quote);
 		res = EncodeString(STRING_ELT(x, indx), w, quote, Rprt_adj_left);
 		break;
 	case CPLXSXP:

@@ -29,21 +29,32 @@
 
 #include <CXXR/S4Object.hpp>
 
-using namespace CXXR;
-
-S4Object *S4Object::clone() const
+namespace CXXR
 {
-    return new S4Object(*this);
-}
+    // Force the creation of non-inline embodiments of functions callable
+    // from C:
+    namespace ForceNonInline
+    {
+        const auto &IS_S4_OBJECTptr = IS_S4_OBJECT;
+        const auto &SET_S4_OBJECTptr = SET_S4_OBJECT;
+        const auto &UNSET_S4_OBJECTptr = UNSET_S4_OBJECT;
 
-const char *S4Object::typeName() const
-{
-    return S4Object::staticTypeName();
-}
+    } // namespace ForceNonInline
+
+    S4Object *S4Object::clone() const
+    {
+        return new S4Object(*this);
+    }
+
+    const char *S4Object::typeName() const
+    {
+        return S4Object::staticTypeName();
+    }
+} // namespace CXXR
 
 // ***** C interface *****
 
 SEXP Rf_allocS4Object()
 {
-    return new S4Object();
+    return new CXXR::S4Object();
 }

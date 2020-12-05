@@ -42,7 +42,6 @@ namespace CXXR
         const auto &SHALLOW_DUPLICATE_ATTRIBptr = SHALLOW_DUPLICATE_ATTRIB;
         const auto &isNullptr = Rf_isNull;
         const auto &isObjectptr = Rf_isObject;
-        const auto &IS_S4_OBJECTptr = IS_S4_OBJECT;
         const auto &NAMEDptr = NAMED;
         const auto &OBJECTptr = OBJECT;
         const auto &SET_NAMEDptr = SET_NAMED;
@@ -50,9 +49,7 @@ namespace CXXR
         const auto &ENSURE_NAMEDptr = ENSURE_NAMED;
         const auto &SETTER_CLEAR_NAMEDptr = SETTER_CLEAR_NAMED;
         const auto &RAISE_NAMEDptr = RAISE_NAMED;
-        const auto &SET_S4_OBJECTptr = SET_S4_OBJECT;
         const auto &TYPEOFptr = TYPEOF;
-        const auto &UNSET_S4_OBJECTptr = UNSET_S4_OBJECT;
         const auto &LEVELSptr = LEVELS;
         const auto &SETLEVELSptr = SETLEVELS;
         const auto &ALTREPptr = ALTREP;
@@ -435,21 +432,6 @@ namespace CXXR
         if (!x)
             return;
         x->m_gpbits |= GROWABLE_MASK;
-    }
-
-    /* Hashing Methods */
-    unsigned int RObject::hashash(RObject *x) { return x ? (x->m_gpbits & HASHASH_MASK) : 0; }
-
-    void RObject::set_hashash(RObject *x, bool v)
-    {
-        if (v)
-        {
-            (x->m_gpbits |= HASHASH_MASK);
-        }
-        else
-        {
-            (x->m_gpbits &= (~HASHASH_MASK));
-        }
     }
 
     void RObject::set_base_sym_cached(RObject *x)

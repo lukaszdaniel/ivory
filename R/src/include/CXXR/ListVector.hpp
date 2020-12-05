@@ -73,6 +73,9 @@ namespace CXXR
         // allocated only using 'new'.
         ~ListVector() {}
     };
+
+#define VECTOR_ELT(x, i) ((SEXP *)DATAPTR(x))[i]
+#define VECTOR_PTR(x) ((SEXP *)DATAPTR(x))
 } // namespace CXXR
 
 extern "C"
@@ -98,7 +101,7 @@ extern "C"
      *
      * @return The value of the \a i 'th element.
      */
-    SEXP(VECTOR_ELT)(SEXP x, R_xlen_t i);
+    SEXP (VECTOR_ELT)(SEXP x, R_xlen_t i);
 }
 
 #endif /* LISTVECTOR_HPP */

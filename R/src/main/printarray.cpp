@@ -41,6 +41,7 @@
 #include <cstdlib> /* for div() */
 
 using namespace R;
+using namespace CXXR;
 
 /* We need display width of a string.
    Used only for row/column names found by GetMatrixDimnames,
@@ -142,7 +143,7 @@ static void printLogicalMatrix(SEXP sx, int offset, int r_pr, int r, int c,
 	int i, j, jmin = 0, jmax = 0, lbloff = 0;          \
                                                        \
 	if (!isNull(rl))                                   \
-		formatString(STRING_PTR_RO(rl), r, &rlabw, 0); \
+		formatString(reinterpret_cast<CXXR::String* const*>(STRING_PTR_RO(rl)), r, &rlabw, 0); \
 	else                                               \
 		rlabw = IndexWidth(r + 1) + 3;                 \
                                                        \
@@ -318,7 +319,7 @@ static void printStringMatrix(SEXP sx, int offset, int r_pr, int r, int c,
 			      const char *rn, const char *cn, bool print_ij)
 {
     _PRINT_INIT_rl_rn;
-    const SEXP *x = STRING_PTR_RO(sx)+offset;
+    String *const*x = reinterpret_cast<String *const*>(STRING_PTR_RO(sx)+offset);
 
     _COMPUTE_W2_( formatString(&x[j * (R_xlen_t) r], (R_xlen_t) r,
                                &w[j], quote), );

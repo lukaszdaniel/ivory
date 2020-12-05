@@ -50,10 +50,14 @@ namespace CXXR
     // sort.cpp
 
     String::String(size_t sz)
-        : VectorBase(CHARSXP, sz), m_data(m_short_string)
+        : VectorBase(CHARSXP, sz), m_hash(-1),
+          m_databytes(sz + 1), m_data(m_short_string)
     {
         if (sz > s_short_strlen)
-            m_data = reinterpret_cast<char *>(MemoryBank::allocate(sz + 1));
+        {
+            GCRoot<> thisroot(this);
+            m_data = reinterpret_cast<char *>(MemoryBank::allocate(m_databytes));
+        }
         // Insert trailing null byte:
         m_data[sz] = 0;
     }
@@ -62,4 +66,7 @@ namespace CXXR
     {
         return staticTypeName();
     }
+
+    /* Hashing Methods */
+    unsigned int String::hashash(RObject *x) { return x ? SEXP_downcast<String *>(x)->m_hash != -1 : 0; }
 } // namespace CXXR

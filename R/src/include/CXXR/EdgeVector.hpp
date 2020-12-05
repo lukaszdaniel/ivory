@@ -45,7 +45,7 @@ namespace CXXR
      *          The vector elements will be of type \a Ptr.
      * @param ST The required ::SEXPTYPE of the vector.
      */
-    template <class Ptr, SEXPTYPE ST>
+    template <typename Ptr, SEXPTYPE ST>
     class EdgeVector : public VectorBase
     {
     public:
@@ -184,13 +184,13 @@ namespace CXXR
         friend class ElementProxy;
     };
 
-    template <class Ptr, SEXPTYPE ST>
+    template <typename Ptr, SEXPTYPE ST>
     const char *EdgeVector<Ptr, ST>::typeName() const
     {
         return EdgeVector<Ptr, ST>::staticTypeName();
     }
 
-    template <class Ptr, SEXPTYPE ST>
+    template <typename Ptr, SEXPTYPE ST>
     void EdgeVector<Ptr, ST>::visitChildren(const_visitor *v) const
     {
         VectorBase::visitChildren(v);
@@ -202,7 +202,7 @@ namespace CXXR
         }
     }
 
-    template <class Ptr, SEXPTYPE ST>
+    template <typename Ptr, SEXPTYPE ST>
     void EdgeVector<Ptr, ST>::visitChildren(visitor *v)
     {
         VectorBase::visitChildren(v);

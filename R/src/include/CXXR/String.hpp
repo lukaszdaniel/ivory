@@ -40,6 +40,7 @@
 #include <string>
 #include <unordered_map>
 
+extern "C" SEXP R_BlankString;
 extern "C" SEXP R_NaString;
 
 namespace CXXR
@@ -104,6 +105,7 @@ namespace CXXR
 		 */
 		char &operator[](R_xlen_t index)
 		{
+			m_hash = -1;
 			return m_data[index];
 		}
 
@@ -128,10 +130,28 @@ namespace CXXR
 			return m_data;
 		}
 
+		/** @brief Blank string.
+		 * @return <tt>const</tt> pointer to the string "".
+		 */
+		static const String *blank()
+		{
+			return static_cast<String *>(R_BlankString);
+		}
+
+		/** @brief Access encapsulated C-style string.
+		 *
+		 * @return Pointer to the encapsulated C-style (null
+		 * terminated) string.
+		 */
 		const char *c_str() const
 		{
 			return m_data;
 		}
+
+		/** @brief Hash value.
+		 * @return The hash value of this string.
+		 */
+		int hash() const;
 
 		/** @brief 'Not available' string.
 		 * @return <tt>const</tt> pointer to the string representing
@@ -153,12 +173,17 @@ namespace CXXR
 
 		// Virtual functions of RObject:
 		const char *typeName() const override;
+		/* Hashing Methods */
+		static constexpr int HASHASH_MASK = 1;
+		static unsigned int hashash(RObject *x);
 
 	private:
 		// Max. strlen stored internally:
 		static const size_t s_short_strlen = 7;
 
-		char *m_data; // pointer to the string's data block.
+		mutable int m_hash; // negative signifies invalid
+		size_t m_databytes; // includes trailing null byte
+		char *m_data;		// pointer to the string's data block.
 
 		// If there are fewer than s_short_strlen+1 chars in the
 		// string (including the trailing null), it is stored here,
@@ -177,7 +202,7 @@ namespace CXXR
 		~String()
 		{
 			if (m_data != m_short_string)
-				MemoryBank::deallocate(m_data, length() + 1);
+				MemoryBank::deallocate(m_data, m_databytes);
 		}
 		friend class Symbol;
 	};

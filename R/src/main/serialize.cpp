@@ -753,7 +753,7 @@ static int PackFlags(int type, int levs, int isobj, int hasattr, int hastag)
        Also make sure the HASHASH bit is not written out.
     */
     int val;
-    if (type == CHARSXP) levs &= (~(CXXR::RObject::CharsetBit::CACHED_MASK | CXXR::RObject::HASHASH_MASK));
+    if (type == CHARSXP) levs &= (~(CXXR::RObject::CharsetBit::CACHED_MASK | CXXR::String::HASHASH_MASK));
     val = type | ENCODE_LEVELS(levs);
     if (isobj) val |= IS_OBJECT_BIT_MASK;
     if (hasattr) val |= HAS_ATTR_BIT_MASK;

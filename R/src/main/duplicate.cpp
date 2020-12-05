@@ -32,6 +32,7 @@
 
 #include "duplicate.h"
 using namespace R;
+using namespace CXXR;
 
 /*  duplicate  -  object duplication  */
 
@@ -390,7 +391,7 @@ static SEXP duplicate1(SEXP s, Rboolean deep)
 	/* direct copying and bypassing the write barrier is OK since
 	   t was just allocated and so it cannot be older than any of
 	   the elements in s.  LT */
-	DUPLICATE_ATOMIC_VECTOR(SEXP, STRING_PTR, t, s, deep);
+	DUPLICATE_ATOMIC_VECTOR(String*, STRING_PTR, t, s, deep);
 	break;
     case PROMSXP:
 	return s;

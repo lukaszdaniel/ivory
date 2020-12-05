@@ -59,6 +59,7 @@
 #include <Rcomplex.h>
 
 using namespace R;
+using namespace CXXR;
 
 /* this is just for conformity with other types */
 HIDDEN
@@ -75,7 +76,7 @@ void R::Rf_formatRawS(SEXP x, R_xlen_t n, int *fieldwidth)
 
 
 HIDDEN
-void R::Rf_formatString(const SEXP *x, R_xlen_t n, int *fieldwidth, int quote)
+void R::Rf_formatString(String *const *x, R_xlen_t n, int *fieldwidth, int quote)
 {
     int xmax = 0;
     int l;
@@ -92,7 +93,7 @@ void R::Rf_formatString(const SEXP *x, R_xlen_t n, int *fieldwidth, int quote)
 /* currently there is no STRING_GET_REGION */
 
 HIDDEN
-void R::Rf_formatStringS(SEXP x, R_xlen_t n, int *fieldwidth, int quote)
+void R::Rf_formatStringS(String *x, R_xlen_t n, int *fieldwidth, int quote)
 {
     int xmax = 0;
     int l;

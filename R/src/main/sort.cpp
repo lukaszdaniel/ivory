@@ -32,7 +32,9 @@
 #include <R_ext/RS.h>  /* for Calloc/Free */
 #include <cfloat> /* for DBL_MAX */
 #include <R_ext/Itermacros.h> /* for ITERATE_BY_REGION */
+
 using namespace R;
+using namespace CXXR;
 
 			/*--- Part I: Comparison Utilities ---*/
 
@@ -222,9 +224,9 @@ Rboolean Rf_isUnsorted(SEXP x, Rboolean strictly)
 
 #define FIRST_LAST_DIFF(x, type) type##_ELT(x, 0) != type##_ELT(x, XLENGTH(x) - 1)
 /* assumes no NAs, which is the case for do_isunsorted, they're removed in R code */
-#define SORTED_VEC_NONCONST(x)	(XLENGTH(x) > 1 &&			\
-     ((TYPEOF(x) == INTSXP && FIRST_LAST_DIFF(x, INTEGER)) ||		\
-      (TYPEOF(x) == REALSXP && FIRST_LAST_DIFF(x, REAL))))
+#define SORTED_VEC_NONCONST(x) (XLENGTH(x) > 1 &&                                        \
+								((TYPEOF(x) == INTSXP && FIRST_LAST_DIFF(x, INTEGER)) || \
+								 (TYPEOF(x) == REALSXP && FIRST_LAST_DIFF(x, REAL))))
 
 HIDDEN SEXP do_isunsorted(SEXP call, SEXP op, SEXP args, SEXP rho)
 {
@@ -294,20 +296,25 @@ HIDDEN SEXP do_isunsorted(SEXP call, SEXP op, SEXP args, SEXP rho)
 
 /* SHELLsort -- corrected from R. Sedgewick `Algorithms in C'
  *		(version of BDR's lqs():*/
-#define sort_body(TYPE_CMP, TYPE_PROT, TYPE_UNPROT)	\
-    Rboolean nalast=TRUE;				\
-    int i, j, h;					\
-							\
-    for (h = 1; h <= n / 9; h = 3 * h + 1);		\
-    for (; h > 0; h /= 3)				\
-	for (i = h; i < n; i++) {			\
-	    v = TYPE_PROT(x[i]);			\
-	    j = i;					\
-	    while (j >= h && TYPE_CMP(x[j - h], v, nalast) > 0)	\
-		 { x[j] = x[j - h]; j -= h; }		\
-	    x[j] = v;					\
-	    TYPE_UNPROT;				\
-	}
+#define sort_body(TYPE_CMP, TYPE_PROT, TYPE_UNPROT)             \
+	Rboolean nalast = TRUE;                                     \
+	int i, j, h;                                                \
+                                                                \
+	for (h = 1; h <= n / 9; h = 3 * h + 1)                      \
+		;                                                       \
+	for (; h > 0; h /= 3)                                       \
+		for (i = h; i < n; i++)                                 \
+		{                                                       \
+			TYPE_PROT(v = x[i]);                                \
+			j = i;                                              \
+			while (j >= h && TYPE_CMP(x[j - h], v, nalast) > 0) \
+			{                                                   \
+				x[j] = x[j - h];                                \
+				j -= h;                                         \
+			}                                                   \
+			x[j] = v;                                           \
+			TYPE_UNPROT;                                        \
+		}
 
 void R_isort(int *x, int n)
 {
@@ -328,9 +335,9 @@ void R_csort(Rcomplex *x, int n)
 }
 
 /* used in platform.cpp */
-HIDDEN void R::ssort(SEXP *x, int n)
+HIDDEN void R::ssort(String** x, int n)
 {
-    SEXP v;
+    String* v;
     sort_body(scmp,PROTECT,UNPROTECT(1))
 }
 
@@ -606,9 +613,9 @@ static void R_csort2(Rcomplex *x, R_xlen_t n, bool decreasing)
 	}
 }
 
-static void ssort2(SEXP *x, R_xlen_t n, bool decreasing)
+static void ssort2(String **x, R_xlen_t n, bool decreasing)
 {
-    SEXP v;
+    String*v;
     R_xlen_t i, j, h, t;
 
     if (n < 2) error(_("'n >= 2' is required"));
@@ -646,7 +653,7 @@ void R::sortVector(SEXP s, bool decreasing)
 	    R_csort2(COMPLEX(s), n, decreasing);
 	    break;
 	case STRSXP:
-	    ssort2(STRING_PTR(s), n, decreasing);
+	    ssort2(reinterpret_cast<CXXR::String**>(STRING_PTR(s)), n, decreasing);
 	    break;
 	default:
 	    UNIMPLEMENTED_TYPE("sortVector()", s);
@@ -714,9 +721,9 @@ static void cPsort2(Rcomplex *x, R_xlen_t lo, R_xlen_t hi, R_xlen_t k)
 }
 
 
-static void sPsort2(SEXP *x, R_xlen_t lo, R_xlen_t hi, R_xlen_t k)
+static void sPsort2(String **x, R_xlen_t lo, R_xlen_t hi, R_xlen_t k)
 {
-    SEXP v, w;
+    String *v, *w;
 #define TYPE_CMP scmp
     psort_body
 #undef TYPE_CMP
@@ -755,7 +762,7 @@ static void Psort(SEXP x, R_xlen_t lo, R_xlen_t hi, R_xlen_t k)
 	cPsort2(COMPLEX(x), lo, hi, k);
 	break;
     case STRSXP:
-	sPsort2(STRING_PTR(x), lo, hi, k);
+	sPsort2(reinterpret_cast<CXXR::String**>(STRING_PTR(x)), lo, hi, k);
 	break;
     default:
 	UNIMPLEMENTED_TYPE("Psort()", x);
@@ -948,34 +955,42 @@ static int listgreater(int i, int j, SEXP key, Rboolean nalast,
     if (c == 0 && i < j) return 0; else return 1;
 }
 
-
-#define GREATER_2_SUB_DEF(FNAME, TYPE_1, TYPE_2, CMP_FN_1, CMP_FN_2)	\
-static int FNAME(int i, int j,						\
-		 TYPE_1 *x, TYPE_2 *y,					\
-		 Rboolean nalast, Rboolean decreasing)			\
-{									\
-    int CMP_FN_1(TYPE_1, TYPE_1, Rboolean);				\
-    int CMP_FN_2(TYPE_2, TYPE_2, Rboolean);				\
-									\
-    int c = CMP_FN_1(x[i], x[j], nalast);				\
-    if(c) {								\
-	if (decreasing) c = -c;						\
-	if (c > 0) return 1;						\
-	/* else: (c < 0) */ return 0;					\
-    }									\
-    else {/* have a tie in x -- use  y[]: */				\
-	c = CMP_FN_2(y[i], y[j], nalast);				\
-	if(c) {								\
-	    if (decreasing) c = -c;					\
-	    if (c > 0) return 1;					\
-	    /* else: (c < 0) */ return 0;				\
-	}								\
-	else { /* tie in both x[] and y[] : */				\
-	    if (i < j) return 0;					\
-	    /* else */ return 1;					\
-	}								\
-    }									\
-}
+#define GREATER_2_SUB_DEF(FNAME, TYPE_1, TYPE_2, CMP_FN_1, CMP_FN_2) \
+	static int FNAME(int i, int j,                                   \
+					 TYPE_1 *x, TYPE_2 *y,                           \
+					 Rboolean nalast, Rboolean decreasing)           \
+	{                                                                \
+		int CMP_FN_1(TYPE_1, TYPE_1, Rboolean);                      \
+		int CMP_FN_2(TYPE_2, TYPE_2, Rboolean);                      \
+                                                                     \
+		int c = CMP_FN_1(x[i], x[j], nalast);                        \
+		if (c)                                                       \
+		{                                                            \
+			if (decreasing)                                          \
+				c = -c;                                              \
+			if (c > 0)                                               \
+				return 1;                                            \
+			/* else: (c < 0) */ return 0;                            \
+		}                                                            \
+		else                                                         \
+		{ /* have a tie in x -- use  y[]: */                         \
+			c = CMP_FN_2(y[i], y[j], nalast);                        \
+			if (c)                                                   \
+			{                                                        \
+				if (decreasing)                                      \
+					c = -c;                                          \
+				if (c > 0)                                           \
+					return 1;                                        \
+				/* else: (c < 0) */ return 0;                        \
+			}                                                        \
+			else                                                     \
+			{ /* tie in both x[] and y[] : */                        \
+				if (i < j)                                           \
+					return 0;                                        \
+				/* else */ return 1;                                 \
+			}                                                        \
+		}                                                            \
+	}
 
 static constexpr int sincs[17] = {
     1073790977, 268460033, 67121153, 16783361, 4197377, 1050113,
@@ -1073,26 +1088,31 @@ static void orderVectorl(R_xlen_t *indx, R_xlen_t n, SEXP key, Rboolean nalast,
 #endif
 
 #ifdef UNUSED
-#define ORD_2_BODY(FNAME, TYPE_1, TYPE_2, GREATER_2_SUB)		\
-    void FNAME(int *indx, int n, TYPE_1 *x, TYPE_2 *y,			\
-	   Rboolean nalast, Rboolean decreasing)			\
-{									\
-    int t;								\
-    for(t = 0; t < n; t++) indx[t] = t; /* indx[] <- 0:(n-1) */		\
-    if (n < 2) return;							\
-    for(t = 0; sincs[t] > n; t++);					\
-    for (int h = sincs[t]; t < 16; h = sincs[++t])			\
-	for (int i = h; i < n; i++) {					\
-	    int itmp = indx[i], j = i;					\
-	    while (j >= h &&						\
-		   GREATER_2_SUB(indx[j - h], itmp, x, y,		\
-				 nalast^decreasing, decreasing)) {	\
-		indx[j] = indx[j - h];					\
-		j -= h;							\
-	    }								\
-	    indx[j] = itmp;						\
-	}								\
-}
+#define ORD_2_BODY(FNAME, TYPE_1, TYPE_2, GREATER_2_SUB)               \
+	void FNAME(int *indx, int n, TYPE_1 *x, TYPE_2 *y,                 \
+			   Rboolean nalast, Rboolean decreasing)                   \
+	{                                                                  \
+		int t;                                                         \
+		for (t = 0; t < n; t++)                                        \
+			indx[t] = t; /* indx[] <- 0:(n-1) */                       \
+		if (n < 2)                                                     \
+			return;                                                    \
+		for (t = 0; sincs[t] > n; t++)                                 \
+			;                                                          \
+		for (int h = sincs[t]; t < 16; h = sincs[++t])                 \
+			for (int i = h; i < n; i++)                                \
+			{                                                          \
+				int itmp = indx[i], j = i;                             \
+				while (j >= h &&                                       \
+					   GREATER_2_SUB(indx[j - h], itmp, x, y,          \
+									 nalast ^ decreasing, decreasing)) \
+				{                                                      \
+					indx[j] = indx[j - h];                             \
+					j -= h;                                            \
+				}                                                      \
+				indx[j] = itmp;                                        \
+			}                                                          \
+	}
 
 ORD_2_BODY(R_order2double , double, double, double2greater)
 ORD_2_BODY(R_order2int    ,    int,    int,    int2greater)
@@ -1106,18 +1126,22 @@ GREATER_2_SUB_DEF(dblint2greater, double,    int, rcmp, icmp)
 GREATER_2_SUB_DEF(intdbl2greater,    int, double, icmp, rcmp)
 #endif
 
-#define sort2_with_index \
-    for (h = sincs[t]; t < 16; h = sincs[++t]) { \
-	R_CheckUserInterrupt();	 \
-	for (i = lo + h; i <= hi; i++) {	 \
-	    itmp = indx[i];			 \
-	    j = i;						     \
-	    while (j >= lo + h && less(indx[j - h], itmp)) {	     \
-		indx[j] = indx[j - h]; j -= h; }		     \
-	    indx[j] = itmp;					     \
-	}							     \
-    }
-
+#define sort2_with_index                                   \
+	for (h = sincs[t]; t < 16; h = sincs[++t])             \
+	{                                                      \
+		R_CheckUserInterrupt();                            \
+		for (i = lo + h; i <= hi; i++)                     \
+		{                                                  \
+			itmp = indx[i];                                \
+			j = i;                                         \
+			while (j >= lo + h && less(indx[j - h], itmp)) \
+			{                                              \
+				indx[j] = indx[j - h];                     \
+				j -= h;                                    \
+			}                                              \
+			indx[j] = itmp;                                \
+		}                                                  \
+	}
 
 /* TODO: once LONG_VECTOR_SUPPORT and  R_xlen_t  belong to the R API,
  * ----  also add "long" versions, say,
@@ -1159,7 +1183,7 @@ HIDDEN void R::orderVector1(int *indx, int n, SEXP key, Rboolean nalast, Rboolea
     int *ix = nullptr /* -Wall */;
     double *x = nullptr /* -Wall */;
     Rcomplex *cx = nullptr /* -Wall */;
-    SEXP *sx = nullptr /* -Wall */;
+    String **sx = nullptr /* -Wall */;
 
     if (n < 2) return;
     switch (TYPEOF(key)) {
@@ -1171,7 +1195,7 @@ HIDDEN void R::orderVector1(int *indx, int n, SEXP key, Rboolean nalast, Rboolea
 	x = REAL(key);
 	break;
     case STRSXP:
-	sx = STRING_PTR(key);
+	sx = reinterpret_cast<CXXR::String**>(STRING_PTR(key));
 	break;
     case CPLXSXP:
 	cx = COMPLEX(key);
@@ -1298,7 +1322,7 @@ static void orderVector1l(R_xlen_t *indx, R_xlen_t n, SEXP key, Rboolean nalast,
     int *ix = nullptr /* -Wall */;
     double *x = nullptr /* -Wall */;
     Rcomplex *cx = nullptr /* -Wall */;
-    SEXP *sx = nullptr /* -Wall */;
+    String **sx = nullptr /* -Wall */;
     R_xlen_t itmp;
 
     if (n < 2) return;
@@ -1311,7 +1335,7 @@ static void orderVector1l(R_xlen_t *indx, R_xlen_t n, SEXP key, Rboolean nalast,
 	x = REAL(key);
 	break;
     case STRSXP:
-	sx = STRING_PTR(key);
+	sx = reinterpret_cast<CXXR::String**>(STRING_PTR(key));
 	break;
     case CPLXSXP:
 	cx = COMPLEX(key);

@@ -171,6 +171,7 @@ namespace CXXR
         // Check for integer overflow:
         if (m_databytes / sizeof(T) != sz)
             Rf_error(_("Request to create impossibly large vector."));
+        GCRoot<> thisroot(this);
         try
         {
             m_data = reinterpret_cast<T *>(MemoryBank::allocate(m_databytes, allocator));
@@ -193,7 +194,7 @@ namespace CXXR
 #endif
     }
 
-    template <class T, SEXPTYPE ST>
+    template <typename T, SEXPTYPE ST>
     const char *FixedVector<T, ST>::typeName() const
     {
         return FixedVector<T, ST>::staticTypeName();

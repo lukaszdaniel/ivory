@@ -60,6 +60,15 @@ extern "C"
      * @return Pointer to element 0 of \a x.
      */
     int *INTEGER(SEXP x);
+
+    /**
+     * @param x Pointer to an \c IntVector or a \c LogicalVector (i.e. an
+     *          R integer or logical vector).
+     *          An error is generated if \a x is not pointer to an \c
+     *          IntVector or a \c LogicalVector.
+     * @return Pointer to constant element 0 of \a x.
+     */
+    const int *INTEGER_RO(SEXP x);
 } // extern "C"
 
 #endif // INTVECTOR_HPP

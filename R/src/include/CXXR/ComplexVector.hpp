@@ -66,6 +66,14 @@ extern "C"
      * @return Pointer to element 0 of \a x.
      */
     Rcomplex *COMPLEX(SEXP x);
+
+    /**
+     * @param x Pointer to a CXXR::ComplexVector (i.e. an R complex vector).
+     *          An error is generated if \a x is not pointer to a
+     *          CXXR::ComplexVector.
+     * @return Pointer to constant element 0 of \a x.
+     */
+    const Rcomplex *COMPLEX_RO(SEXP x);
 } // extern "C"
 
 #endif // COMPLEXVECTOR_HPP

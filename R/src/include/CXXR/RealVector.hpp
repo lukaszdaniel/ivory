@@ -70,6 +70,14 @@ extern "C"
      */
     double *REAL(SEXP x);
 
+    /**
+     * @param x Pointer to an \c RealVector (i.e. an R numeric vector).
+     *          An error is generated if \a x is not pointer to an \c
+     *          RealVector.
+     * @return Pointer to constant element 0 of \a x.
+     */
+    const double *REAL_RO(SEXP x);
+
 } // extern "C"
 
 #endif // REALVECTOR_HPP

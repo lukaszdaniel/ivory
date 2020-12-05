@@ -1360,7 +1360,7 @@ HIDDEN SEXP do_listfiles(SEXP call, SEXP op, SEXP args, SEXP rho)
     }
     REPROTECT(ans = lengthgets(ans, count), idx);
     if (pattern) tre_regfree(&reg);
-    ssort(STRING_PTR(ans), count);
+    ssort(reinterpret_cast<CXXR::String**>(STRING_PTR(ans)), count);
     UNPROTECT(1);
     return ans;
 }
@@ -1453,7 +1453,7 @@ HIDDEN SEXP do_listdirs(SEXP call, SEXP op, SEXP args, SEXP rho)
 	list_dirs(dnp, "", (Rboolean) fullnames, &count, &ans, &countmax, idx, (Rboolean) recursive);
     }
     REPROTECT(ans = lengthgets(ans, count), idx);
-    ssort(STRING_PTR(ans), count);
+    ssort(reinterpret_cast<CXXR::String**>(STRING_PTR(ans)), count);
     UNPROTECT(1);
     return ans;
 }

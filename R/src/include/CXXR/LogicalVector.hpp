@@ -70,6 +70,15 @@ extern "C"
      * @return Pointer to element 0 of \a x.
      */
     int *LOGICAL(SEXP x);
+
+    /**
+     * @param x Pointer to a CXXR::LogicalVector or an CXXR::IntVector (i.e. an
+     *          R logical or integer vector).
+     *          An error is generated if \a x is not pointer to a \c
+     *          CXXR::LogicalVector or an CXXR::IntVector.
+     * @return Pointer to constant element 0 of \a x.
+     */
+    const int *LOGICAL_RO(SEXP x);
 } // extern "C"
 
 #endif // LOGICALVECTOR_HPP

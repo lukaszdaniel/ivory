@@ -934,7 +934,7 @@ namespace R
     const char *typeName(SEXP v);
     void sortVector(SEXP s, bool decreasing);
     void SrcrefPrompt(const char *prefix, SEXP srcref);
-    void ssort(SEXP *x, int n);
+    void ssort(CXXR::String **x, int n);
     int StrToInternal(const char *s);
     SEXP strmat2intmat(SEXP s, SEXP dnamelist, SEXP call);
     SEXP substituteList(SEXP el, SEXP rho);

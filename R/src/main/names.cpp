@@ -1261,8 +1261,6 @@ SEXP Rf_install(const char *name)
     if (strlen(name) > MAXIDSIZE)
         error(_("variable names are limited to %d bytes"), MAXIDSIZE);
     sym = mkSYMSXP(mkChar(name), R_UnboundValue);
-    SET_HASHVALUE(PRINTNAME(sym), hashcode);
-    SET_HASHASH(PRINTNAME(sym), 1);
 
     R_SymbolTable[i] = CONS(sym, R_SymbolTable[i]);
     return (sym);

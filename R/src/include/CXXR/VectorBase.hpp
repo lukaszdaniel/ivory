@@ -127,9 +127,6 @@ namespace CXXR
   extern "C" void *DATAPTR(SEXP x);
   extern "C" const void *DATAPTR_RO(SEXP x);
 
-#define VECTOR_ELT(x, i) ((SEXP *)DATAPTR(x))[i]
-#define VECTOR_PTR(x) ((SEXP *)DATAPTR(x))
-
   template <typename T = void *>
   inline T stdvec_dataptr(RObject *x)
   {
