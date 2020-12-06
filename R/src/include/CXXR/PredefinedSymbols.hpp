@@ -60,6 +60,7 @@ PREDEFINED_SYMBOL2(DollarSymbol, "$");
 PREDEFINED_SYMBOL2(DotsSymbol, "...");
 PREDEFINED_SYMBOL2(DropSymbol, "drop");
 PREDEFINED_SYMBOL2(EvalSymbol, "eval");
+PREDEFINED_SYMBOL2(FunctionSymbol, "function");
 PREDEFINED_SYMBOL2(LastvalueSymbol, ".Last.value");
 PREDEFINED_SYMBOL2(LevelsSymbol, "levels");
 PREDEFINED_SYMBOL2(ModeSymbol, "mode");
@@ -116,6 +117,4 @@ PREDEFINED_SYMBOL(R_dot_packageName, DotPackageName, ".packageName");
 #undef PREDEFINED_SYMBOL2
 
 /* Missing Values - others from Arith.h */
-extern SEXP R_NaString;          /* NA_STRING as a CHARSXP */
-extern SEXP R_BlankString;       /* "" as a CHARSXP */
 extern SEXP R_BlankScalarString; /* "" as a STRSXP */

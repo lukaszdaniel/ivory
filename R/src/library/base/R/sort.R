@@ -262,9 +262,15 @@ sort.list <- function(x, partial = NULL, na.last = TRUE, decreasing = FALSE,
 
 ## xtfrm is now primitive
 ## xtfrm <- function(x) UseMethod("xtfrm")
-xtfrm.default <- function(x)
-    if(is.numeric(x)) unclass(x) else as.vector(rank(x, ties.method = "min",
-                                                     na.last = "keep"))
+xtfrm.default <- function(x) {
+    y <- if(is.numeric(x))
+             unclass(x)
+         else as.vector(rank(x, ties.method = "min", na.last = "keep"))
+    if(!is.numeric(y) || (length(y) != length(x)))
+        stop("cannot xtfrm 'x'")
+    y
+}
+
 xtfrm.factor <- function(x) as.integer(x) # primitive, so needs a wrapper
 
 ## ## Moved to package survival

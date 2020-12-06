@@ -1106,9 +1106,12 @@ inRbuildignore <- function(files, pkgdir) {
             toonew <- names(vers[vers >= 3L])
             if (length(toonew)) {
                 fixup_R_dep(pkgname, "3.5.0")
-                msg <- gettextf("WARNING: Added dependency on R >= 3.5.0 because\nserialized objects in serialize/load version 3\ncannot be read in older versions of R. File(s)\ncontaining such objects:\n%s\n",
-                             .pretty_format(sort(toonew)), domain = "R-tools")
-                printLog(Log, strwrap(msg, indent = 2L, exdent = 2L), "\n")
+                msg <- gettextf("WARNING: Added dependency on R >= 3.5.0 because\nserialized objects in serialize/load version 3\ncannot be read in older versions of R. File(s)\ncontaining such objects:\n", domain = "R-tools")
+                printLog(Log,
+                         paste(c(strwrap(msg, indent = 2L, exdent = 2L),
+                                 paste0("  ", .pretty_format(sort(toonew)))),
+                               collapse = "\n"),
+                         "\n")
             }
         }
 

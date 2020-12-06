@@ -591,6 +591,7 @@ LibExtern SEXP R_DotsSymbol;	    /* "..." */
 LibExtern SEXP R_DoubleColonSymbol;// "::"
 LibExtern SEXP R_DropSymbol;	    /* "drop" */
 LibExtern SEXP R_EvalSymbol;	    /* "eval" */
+LibExtern SEXP R_FunctionSymbol;   /* "function" */
 LibExtern SEXP R_LastvalueSymbol;  /* ".Last.value" */
 LibExtern SEXP R_LevelsSymbol;	    /* "levels" */
 LibExtern SEXP R_ModeSymbol;	    /* "mode" */
@@ -717,7 +718,7 @@ SEXP Rf_GetRowNames(SEXP);
 void Rf_gsetVar(SEXP, SEXP, SEXP);
 SEXP Rf_install(const char *name);
 #ifdef __cplusplus
-namespace R
+namespace CXXR
 {
     SEXP install_(const std::string &name);
 }

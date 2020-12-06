@@ -362,6 +362,7 @@ static SEXP	xxrepeat(SEXP, SEXP);
 static SEXP	xxnxtbrk(SEXP);
 static SEXP	xxfuncall(SEXP, SEXP);
 static SEXP	xxdefun(SEXP, SEXP, SEXP, YYLTYPE *);
+static SEXP	xxpipe(SEXP, SEXP);
 static SEXP	xxunary(SEXP, SEXP);
 static SEXP	xxbinary(SEXP, SEXP, SEXP);
 static SEXP	xxparen(SEXP, SEXP);
@@ -390,6 +391,7 @@ static int	xxvalue(SEXP, int, YYLTYPE *);
 %token		SYMBOL_PACKAGE
 /* no longer used: %token COLON_ASSIGN */
 %token		SLOT
+%token		PIPE
 
 /* This is the precedence table, low to high */
 %left		'?'
@@ -400,6 +402,7 @@ static int	xxvalue(SEXP, int, YYLTYPE *);
 %right		EQ_ASSIGN
 %left		RIGHT_ASSIGN
 %left		'~' TILDE
+%left		PIPE
 %left		OR OR2
 %left		AND AND2
 %left		UNOT NOT
@@ -464,10 +467,12 @@ expr	: 	NUM_CONST			{ $$ = $1;	setId(@$); }
 	|	expr OR expr			{ $$ = xxbinary($2,$1,$3);	setId(@$); }
 	|	expr AND2 expr			{ $$ = xxbinary($2,$1,$3);	setId(@$); }
 	|	expr OR2 expr			{ $$ = xxbinary($2,$1,$3);	setId(@$); }
+	|	expr PIPE expr			{ $$ = xxpipe($1,$3);  setId(@$); }
 	|	expr LEFT_ASSIGN expr 		{ $$ = xxbinary($2,$1,$3);	setId(@$); }
 	|	expr RIGHT_ASSIGN expr 		{ $$ = xxbinary($2,$3,$1);	setId(@$); }
 	|	FUNCTION '(' formlist ')' cr expr_or_assign_or_help %prec LOW
 						{ $$ = xxdefun($1,$3,$6,&@$); 	setId(@$); }
+	|	'\\' '(' formlist ')' cr expr_or_assign_or_help %prec LOW							{ $$ = xxdefun(R_FunctionSymbol,$3,$6,&@$); 	setId(@$); }
 	|	expr '(' sublist ')'		{ $$ = xxfuncall($1,$3);  setId(@$); modif_token( &@1, SYMBOL_FUNCTION_CALL ) ; }
 	|	IF ifcond expr_or_assign_or_help 	{ $$ = xxif($1,$2,$3);	setId(@$); }
 	|	IF ifcond expr_or_assign_or_help ELSE expr_or_assign_or_help	{ $$ = xxifelse($1,$2,$3,$5);	setId(@$); }
@@ -1173,6 +1178,37 @@ static SEXP xxbinary(SEXP n1, SEXP n2, SEXP n3)
 	PRESERVE_SV(ans = R_NilValue);
     RELEASE_SV(n2);
     RELEASE_SV(n3);
+    return ans;
+}
+
+static SEXP xxpipe(SEXP lhs, SEXP rhs)
+{
+    SEXP ans;
+    if (GenerateCode) {
+	/* allow for rhs lambda expressions */
+	if (TYPEOF(rhs) == LANGSXP && CAR(rhs) == R_FunctionSymbol)
+	    return lang2(rhs, lhs);
+		    
+	if (TYPEOF(rhs) != LANGSXP)
+	    error(_("The pipe operator requires a function call or an anonymous function expression as RHS"));
+
+        SEXP fun = CAR(rhs);
+        SEXP args = CDR(rhs);
+
+
+	/* rule out syntactically special functions */
+	/* the IS_SPECIAL_SYMBOL bit is set in names.c */
+	if (TYPEOF(fun) == SYMSXP && IS_SPECIAL_SYMBOL(fun))
+	    error(_("function '%s' not supported in RHS call of a pipe"),
+		  CHAR(PRINTNAME(fun)));
+	
+	PRESERVE_SV(ans = lcons(fun, lcons(lhs, args)));
+    }
+    else {
+	PRESERVE_SV(ans = R_NilValue);
+    }
+    RELEASE_SV(lhs);
+    RELEASE_SV(rhs);
     return ans;
 }
 
@@ -2134,6 +2170,7 @@ static void yyerror(const char *s)
 	"OR2",		"'||'",
 	"NS_GET",	"'::'",
 	"NS_GET_INT",	"':::'",
+	"PIPE",         "'|>'",
 	0
     };
     static char const yyunexpected[] = "syntax error, unexpected ";
@@ -3283,6 +3320,10 @@ static int token(void)
 	    yylval = install_and_save("||");
 	    return OR2;
 	}
+	else if (nextchar('>')) {
+	    yylval = install_and_save("|>");
+	    return PIPE;
+	}
 	yylval = install_and_save("|");
 	return OR;
     case LBRACE:
@@ -3328,6 +3369,7 @@ static int token(void)
     case '~':
     case '$':
     case '@':
+    case '\\':
 	yytext[0] = (char) c;
 	yytext[1] = '\0';
 	yylval = install(yytext);
@@ -3509,6 +3551,7 @@ static int yylex(void)
     case AND:
     case OR2:
     case AND2:
+    case PIPE:
     case SPECIAL:
     case FUNCTION:
     case WHILE:

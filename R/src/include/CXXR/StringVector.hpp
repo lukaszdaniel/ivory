@@ -68,7 +68,7 @@ extern "C"
 
     /** @brief Set element of CXXR::StringVector.
      *
-     * @param x Pointer to a CXXR::StringVector .
+     * @param x Pointer to a CXXR::StringVector.
      * @param i Index of the required element.  There is no bounds checking.
      * @param v Pointer to CXXR::RObject representing the new value.
      */

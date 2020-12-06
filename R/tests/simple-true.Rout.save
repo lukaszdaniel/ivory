@@ -1,9 +1,9 @@
 
-Ivory Under development (unstable) (2020-11-23 r1349) -- "Internationalized Version of R"
+Ivory Under development (unstable) (2020-12-06 r1364) -- "Internationalized Version of R"
 Copyright (C) 2013-2020 Lukasz Daniel (lukasz.daniel@gmail.com)
 See README-IVORY file for details.
 
-R Under development (unstable) (2020-11-23 r79473) -- "Unsuffered Consequences"
+R Under development (unstable) (2020-12-06 r79569) -- "Unsuffered Consequences"
 Copyright (C) 2020 The R Foundation for Statistical Computing
 Platform: x86_64-pc-linux-gnu (64-bit)
 
@@ -56,7 +56,7 @@ non-integer value 1e-3L qualified with L; using numeric value
 Warning message:
 integer literal 1.L contains unnecessary decimal point 
 > try(parse(text = "12iL")) # gives syntax error
-Error in command 'parse(text = "12iL")': <text>:1:4: unexpected symbol
+Error in command 'parse(text = "12iL")': <text>:1:4: syntax error
 1: 12iL
        ^
 > 

@@ -1022,14 +1022,19 @@ std::vector<CXXR::FUNTAB> R_FunTab =
    Any symbols can be put here, but ones that contain special
    characters, or are reserved words, are the ones unlikely to be
    defined in any environment other than base, and hence the ones
-   where this is most likely to help. */
+   where this is most likely to help.
+
+   This is now also used for screening out syntactically special
+   functions from use on the RHS of a pipe. If a
+   non-syntactically-special symbol is added here it would neet to be
+   explicitly allowed in the pipe code. */
 
 namespace
 {
     const std::vector<std::string> Spec_name = {
         "if", "while", "repeat", "for", "break", "next", "return", "function",
         "(", "{",
-        "+", "-", "*", "/", "^", "%%", "%/%", "%*%", ":",
+        "+", "-", "*", "/", "^", "%%", "%/%", "%*%", ":", "::", ":::", "?", "|>",
         "==", "!=", "<", ">", "<=", ">=",
         "&", "|", "&&", "||", "!",
         "<-", "<<-", "=",
@@ -1141,6 +1146,7 @@ static void SymbolShortcuts(void)
     R_SpecSymbol = install("spec");
     R_NamespaceEnvSymbol = install(".__NAMESPACE__.");
     R_AsCharacterSymbol = install("as.character");
+    R_FunctionSymbol = install("function");
 
     R_dot_Generic = install(".Generic");
     R_dot_Method = install(".Method");
@@ -1243,7 +1249,7 @@ HIDDEN void R::InitNames()
 /*  install - probe the symbol table */
 /*  If "name" is not found, it is installed in the symbol table.
     The symbol corresponding to the string "name" is returned. */
-SEXP R::install_(const std::string &name) { return Rf_install(name.c_str()); }
+SEXP CXXR::install_(const std::string &name) { return Rf_install(name.c_str()); }
 SEXP Rf_install(const char *name)
 {
     SEXP sym;
