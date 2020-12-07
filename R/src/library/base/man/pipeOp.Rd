@@ -8,7 +8,7 @@
 \alias{pipeOp}
 \title{Pipe Operator}
 \description{
-  Pipe a value into a call expression or a function.
+  Pipe a value into a call expression or a function expression.
 }
 \usage{
 \special{lhs |> rhs}
@@ -24,7 +24,7 @@
   If the \code{rhs} expression is a call, then the \code{lhs} is
   inserted as the first argument in the call. So \code{x |> f(y)} is
   interpreted as \code{f(x, y)}. To avoid ambiguities, functions in
-  \code{lhs} calls may not be syntactically special, such as \code{+} or
+  \code{rhs} calls may not be syntactically special, such as \code{+} or
   \code{if}.
   
   If the \code{rhs} expression is a \code{function} expression, then the
@@ -43,7 +43,7 @@
   Returns the result of evaluating the transformed expression.
 }
 \note{ \bold{Pipe support is experimental and may change prior to release.} }
-\seealso{
+\section{Background}{
   The pipe operator is motivated by the pipe introduced in the
   \CRANpkg{magrittr} package, but more streamlined. It is similar to
   pipe or pipeline operators introduced in other languages, including
