@@ -319,9 +319,9 @@ static void printStringMatrix(SEXP sx, int offset, int r_pr, int r, int c,
 			      const char *rn, const char *cn, bool print_ij)
 {
     _PRINT_INIT_rl_rn;
-    String *const*x = reinterpret_cast<String *const*>(STRING_PTR_RO(sx)+offset);
+	String *const *x = reinterpret_cast<String *const *>(STRING_PTR_RO(sx) + offset);
 
-    _COMPUTE_W2_( formatString(&x[j * (R_xlen_t) r], (R_xlen_t) r,
+	_COMPUTE_W2_( formatString(&x[j * (R_xlen_t) r], (R_xlen_t) r,
                                &w[j], quote), );
 
     _PRINT_MATRIX_( + R_print.gap,

@@ -276,8 +276,8 @@ static void printStringVectorS(String *x, R_xlen_t n, int quote, int indx)
        the ALTSTRING class is willing to give us a full dataptr from
        Dataptr_or_null method. */
 
-    String* const *xptr = reinterpret_cast<String* const *>(DATAPTR_OR_NULL(x));
-    if(xptr) {
+	String *const *xptr = reinterpret_cast<String *const *>(DATAPTR_OR_NULL(x));
+	if(xptr) {
 	printStringVector(xptr, n, quote, indx);
 	return;
     }

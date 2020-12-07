@@ -1055,13 +1055,9 @@ static SEXP coerceVectorList(SEXP v, SEXPTYPE type)
 
     /* expression -> list, new in R 2.4.0 */
 #if CXXR_FALSE
-	if (type == VECSXP && v->sexptype() == EXPRSXP) {
-	    ExpressionVector* ev = static_cast<ExpressionVector*>(v);
-	    GCStackRoot<ListVector>
-		lv(ListVector::create(ev->begin(), ev->end()));
-	    lv->copyAttribute(NamesSymbol, ev);
-	    return lv;
-	}
+	if (type == VECSXP)
+		if (ExpressionVector *ev = dynamic_cast<ExpressionVector *>(v))
+			return new ListVector(*ev);
 #else
     if (type == VECSXP && TYPEOF(v) == EXPRSXP) {
 	/* This is sneaky but saves us rewriting a lot of the duplicate code */
@@ -1071,13 +1067,11 @@ static SEXP coerceVectorList(SEXP v, SEXPTYPE type)
     }
 #endif
 #if CXXR_FALSE
-    if (type == EXPRSXP && TYPEOF(v) == VECSXP) {
-	ListVector* lv = static_cast<ListVector*>(v);
-	GCStackRoot<ExpressionVector>
-	    ev(ExpressionVector::create(lv->begin(), lv->end()));
-	ev->copyAttribute(NamesSymbol, lv);
-	return ev;
-    }
+	if (type == EXPRSXP && TYPEOF(v) == VECSXP)
+	{
+		GCRoot<ListVector *> lv(static_cast<ListVector *>(v));
+		return new ExpressionVector(*lv);
+	}
 #else
     if (type == EXPRSXP && TYPEOF(v) == VECSXP) {
 	rval = MAYBE_REFERENCED(v) ? duplicate(v) : v;
@@ -1095,21 +1089,15 @@ static SEXP coerceVectorList(SEXP v, SEXPTYPE type)
 	}
 #endif
 	for (i = 0; i < n;  i++) {
-#if CXXR_FALSE
-		SEXP elt = VECTOR_ELT(v, i);
-	    if (isString(elt) && xlength(elt) == 1)
-		SET_STRING_ELT(rval, i, STRING_ELT(elt, 0));
-#else
 		SEXP elt;
-	    if (v->sexptype() == EXPRSXP) {
-		// ExpressionVector* ev = static_cast<ExpressionVector*>(v);
-		// elt = (*ev)[i];
-		elt = XVECTOR_ELT(v, i); // elt = &(v)[i];
-	    }
-	    else elt = VECTOR_ELT(v, i);
-	    if (Rf_isString(elt) && xlength(elt) == 1)
-		SET_STRING_ELT(rval, i, STRING_ELT(elt, 0));
-#endif
+		if (v->sexptype() == EXPRSXP)
+		{
+			elt = XVECTOR_ELT(v, i);
+		}
+		else
+			elt = VECTOR_ELT(v, i);
+		if (Rf_isString(elt) && xlength(elt) == 1)
+			SET_STRING_ELT(rval, i, STRING_ELT(elt, 0));
 #if 0
 	    /* this will make as.character(list(s)) not backquote
 	     * non-syntactic name s. It is not entirely clear that

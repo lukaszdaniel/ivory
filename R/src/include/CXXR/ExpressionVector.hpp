@@ -59,8 +59,8 @@ namespace CXXR
      */
     // typedef FixedVector<GCEdge<>, EXPRSXP> ExpressionVector;
 
-#define XVECTOR_ELT(x, i) ((SEXP *)DATAPTR(x))[i]
-#define XVECTOR_PTR(x) ((SEXP *)DATAPTR(x))
+#define EXPRVECTOR_ELT(x, i) ((SEXP *)DATAPTR(x))[i]
+#define EXPRVECTOR_PTR(x) ((SEXP *)DATAPTR(x))
 } // namespace CXXR
 
 extern "C"
@@ -92,7 +92,7 @@ extern "C"
      *
      * @return The value of the \a i 'th element.
      */
-    SEXP(XVECTOR_ELT)(SEXP x, R_xlen_t i);
+    SEXP XVECTOR_ELT(SEXP x, R_xlen_t i);
 }
 
 #endif /* EXPRESSIONVECTOR_HPP */

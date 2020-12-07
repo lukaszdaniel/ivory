@@ -1286,10 +1286,10 @@ static void SetBit(SEXP term, int whichBit, int value)
     Rprintf("SetBit(term, which=%3d, value=%d): |term|=%d, word= %d, offset= %2d\n",
 	    whichBit, value, length(term), word, offset);
 #endif
-    if (value)
-	((unsigned *) INTEGER(term))[word] |=  ((unsigned) 1 << offset);
-    else
-	((unsigned *) INTEGER(term))[word] &= ~((unsigned) 1 << offset);
+	if (value)
+		reinterpret_cast<unsigned int *>(INTEGER(term))[word] |= (1U << offset);
+	else
+		reinterpret_cast<unsigned int *>(INTEGER(term))[word] &= ~(1U << offset);
 }
 
 /* 0.   Install var (if needed)

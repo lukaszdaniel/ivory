@@ -245,17 +245,6 @@ namespace CXXR
             return true;
         }
 
-        /** Delete a GCNode
-         *
-         * @note It is a design objective that it should be possible
-         * to delete any GCNode object 'by hand', rather than leaving
-         * it to the garbage collector: designers of derived classes
-         * should bear this in mind.  Because the class destructors
-         * are not public, such manual deletion will normally be
-         * accomplished by calling this method.
-         */
-        void destroy() const { delete this; }
-
         /** @brief Prevent old-to-new references.
          *
          * If \a node points to a node of a younger generation than

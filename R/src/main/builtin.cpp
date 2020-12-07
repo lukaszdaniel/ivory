@@ -124,7 +124,7 @@ HIDDEN SEXP do_makelazy(SEXP call, SEXP op, SEXP args, SEXP rho)
 
     for(i = 0; i < XLENGTH(names); i++) {
 	SEXP name = installTrChar(STRING_ELT(names, i));
-	PROTECT(val = eval(XVECTOR_ELT(values, i), eenv));
+	PROTECT(val = eval(VECTOR_ELT(values, i), eenv));
 	PROTECT(expr0 = duplicate(expr));
 	SETCAR(CDR(expr0), val);
 	defineVar(name, mkPROMISE(expr0, eenv), aenv);
