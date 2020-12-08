@@ -452,6 +452,10 @@ namespace CXXR
         friend void initializeMemorySubsystem();
         static void initialize();
 
+        // Not implemented.  Declared private to prevent clients
+        // allocating arrays of GCNode.
+        static void *operator new[](size_t);
+
         // Make the node known to the garbage collector (if it isn't
         // already).
         void expose() const

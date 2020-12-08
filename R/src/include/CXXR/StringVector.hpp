@@ -36,6 +36,8 @@
 #include <CXXR/FixedVector.hpp>
 #include <CXXR/GCEdge.hpp>
 #include <CXXR/String.hpp>
+#include <CXXR/EdgeVector.hpp>
+#include <CXXR/SEXP_downcast.hpp>
 
 namespace CXXR
 {
@@ -45,15 +47,47 @@ namespace CXXR
      * fill the constructed vector with blank strings rather than
      * with NULL.
      */
-    typedef FixedVector<GCEdge<String>, STRSXP> StringVector;
+
+    // Template specialization:
+    template <>
+    inline const char *EdgeVector<String *, STRSXP>::staticTypeName()
+    {
+        return "character";
+    }
+
+    /** @brief Vector of strings.
+     * @todo Replace the type parameter RObject* with something stricter.
+     */
+    class StringVector : public CXXR::EdgeVector<String *, STRSXP>
+    {
+    public:
+        /** @brief Create a StringVector.
+         *
+         * @param sz Number of elements required.  Zero is
+         *          permissible.
+         */
+        explicit StringVector(size_t sz)
+            : EdgeVector<String *, STRSXP>(sz, const_cast<String *>(String::blank()))
+        {
+        }
+
+    private:
+        /**
+         * Declared private to ensure that StringVector objects are
+         * allocated only using 'new'.
+         */
+        ~StringVector() {}
+    };
 
     inline SEXP *STRINGVECTOR_STRING_PTR(RObject *x)
     {
+        // return static_cast<StringVector **>(DATAPTR(x));
         return static_cast<SEXP *>(DATAPTR(x));
     }
 
     inline const SEXP *STRINGVECTOR_STRING_PTR_RO(RObject *x)
     {
+        // return static_cast<StringVector *const *>(DATAPTR(x));
         return static_cast<const SEXP *>(DATAPTR_RO(x));
     }
 } // namespace CXXR

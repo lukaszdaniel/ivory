@@ -28,6 +28,8 @@
  */
 
 #include <CXXR/ExpressionVector.hpp>
+#include <CXXR/ListVector.hpp>
+#include <CXXR/Symbol.hpp>
 
 using namespace CXXR;
 
@@ -41,10 +43,16 @@ namespace CXXR
         // const auto &XVECTOR_ELTptr = XVECTOR_ELT;
     } // namespace ForceNonInline
 
-    template <>
-    const char *EdgeVector<RObject *, EXPRSXP>::staticTypeName()
+    ExpressionVector::ExpressionVector(const ListVector &lv)
+        : EdgeVector<RObject *, EXPRSXP>(lv.size())
     {
-        return "expression";
+        // The following results in unnecessary invocations of
+        // devolveAge() on the nodes pointed to.
+        for (unsigned int i = 0; i < size(); ++i)
+            (*this)[i] = lv[i];
+        SEXP names = Rf_getAttrib(const_cast<ListVector *>(&lv), R_NamesSymbol);
+        if (names)
+            Rf_setAttrib(this, R_NamesSymbol, names);
     }
 } // namespace CXXR
 

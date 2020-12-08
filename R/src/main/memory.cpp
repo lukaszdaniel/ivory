@@ -2138,164 +2138,184 @@ namespace
 void *STDVEC_DATAPTR(SEXP x)
 {
     if (ALTREP(x))
-	error(_("cannot get STDVEC_DATAPTR from ALTREP object"));
-    if (! isVector(x) && TYPEOF(x) != WEAKREFSXP)
-	error(_("STDVEC_DATAPTR can only be applied to a vector, not a '%s'"),
-	      type2char(TYPEOF(x)));
+        Rf_error(_("cannot get STDVEC_DATAPTR from ALTREP object"));
+    if (!Rf_isVector(x) && TYPEOF(x) != WEAKREFSXP)
+        Rf_error(_("STDVEC_DATAPTR can only be applied to a vector, not a '%s'"),
+                 Rf_type2char(TYPEOF(x)));
     CHKZLN(x);
     return CXXR::stdvec_dataptr(x);
 }
 
-int *LOGICAL(SEXP x) {
-    if(TYPEOF(x) != LGLSXP)
-	error(_("'%s' function can only be applied to a logical, not a '%s'"), "LOGICAL()",
-	      type2char(TYPEOF(x)));
+int *LOGICAL(SEXP x)
+{
+    if (TYPEOF(x) != LGLSXP)
+        Rf_error(_("'%s' function can only be applied to a logical, not a '%s'"), "LOGICAL()",
+                 Rf_type2char(TYPEOF(x)));
     CHKZLN(x);
     return LOGICALVECTOR_LOGICAL(x);
 }
 
-const int *LOGICAL_RO(SEXP x) {
-    if(TYPEOF(x) != LGLSXP)
-	error(_("'%s' function can only be applied to a logical, not a '%s'"),
-	      "LOGICAL()", type2char(TYPEOF(x)));
+const int *LOGICAL_RO(SEXP x)
+{
+    if (TYPEOF(x) != LGLSXP)
+        Rf_error(_("'%s' function can only be applied to a logical, not a '%s'"),
+                 "LOGICAL()", Rf_type2char(TYPEOF(x)));
     CHKZLN(x);
     return LOGICALVECTOR_LOGICAL_RO(x);
 }
 
 /* Maybe this should exclude logicals, but it is widely used */
-int *INTEGER(SEXP x) {
-    if(TYPEOF(x) != INTSXP && TYPEOF(x) != LGLSXP)
-	error(_("'%s' function can only be applied to an integer, not a '%s'"), "INTEGER()",
-	      type2char(TYPEOF(x)));
+int *INTEGER(SEXP x)
+{
+    if (TYPEOF(x) != INTSXP && TYPEOF(x) != LGLSXP)
+        Rf_error(_("'%s' function can only be applied to an integer, not a '%s'"), "INTEGER()",
+                 Rf_type2char(TYPEOF(x)));
     CHKZLN(x);
     return INTVECTOR_INTEGER(x);
 }
 
-const int *INTEGER_RO(SEXP x) {
-    if(TYPEOF(x) != INTSXP && TYPEOF(x) != LGLSXP)
-	error(_("'%s' function can only be applied to an integer, not a '%s'"),
-	      "INTEGER()", type2char(TYPEOF(x)));
+const int *INTEGER_RO(SEXP x)
+{
+    if (TYPEOF(x) != INTSXP && TYPEOF(x) != LGLSXP)
+        Rf_error(_("'%s' function can only be applied to an integer, not a '%s'"),
+                 "INTEGER()", Rf_type2char(TYPEOF(x)));
     CHKZLN(x);
     return INTVECTOR_INTEGER_RO(x);
 }
 
-Rbyte *RAW(SEXP x) {
-    if(TYPEOF(x) != RAWSXP)
-	error(_("'%s' function can only be applied to a raw, not a '%s'"), "RAW()",
-	      type2char(TYPEOF(x)));
+Rbyte *RAW(SEXP x)
+{
+    if (TYPEOF(x) != RAWSXP)
+        Rf_error(_("'%s' function can only be applied to a raw, not a '%s'"), "RAW()",
+                 Rf_type2char(TYPEOF(x)));
     CHKZLN(x);
     return RAWVECTOR_RAW(x);
 }
 
-const Rbyte *RAW_RO(SEXP x) {
-    if(TYPEOF(x) != RAWSXP)
-	error(_("'%s' function can only be applied to a raw, not a '%s'"),
-	      "RAW()", type2char(TYPEOF(x)));
+const Rbyte *RAW_RO(SEXP x)
+{
+    if (TYPEOF(x) != RAWSXP)
+        Rf_error(_("'%s' function can only be applied to a raw, not a '%s'"),
+                 "RAW()", Rf_type2char(TYPEOF(x)));
     CHKZLN(x);
     return RAWVECTOR_RAW_RO(x);
 }
 
-double *REAL(SEXP x) {
-    if(TYPEOF(x) != REALSXP)
-	error(_("'%s' function can only be applied to a numeric, not a '%s'"), "REAL()",
-	      type2char(TYPEOF(x)));
+double *REAL(SEXP x)
+{
+    if (TYPEOF(x) != REALSXP)
+        Rf_error(_("'%s' function can only be applied to a numeric, not a '%s'"), "REAL()",
+                 Rf_type2char(TYPEOF(x)));
     CHKZLN(x);
     return REALVECTOR_REAL(x);
 }
 
-const double *REAL_RO(SEXP x) {
-    if(TYPEOF(x) != REALSXP)
-	error(_("'%s' function can only be applied to a numeric, not a '%s'"),
-	      "REAL()", type2char(TYPEOF(x)));
+const double *REAL_RO(SEXP x)
+{
+    if (TYPEOF(x) != REALSXP)
+        Rf_error(_("'%s' function can only be applied to a numeric, not a '%s'"),
+                 "REAL()", Rf_type2char(TYPEOF(x)));
     CHKZLN(x);
     return REALVECTOR_REAL_RO(x);
 }
 
-Rcomplex *COMPLEX(SEXP x) {
-    if(TYPEOF(x) != CPLXSXP)
-	error(_("'%s' function can only be applied to a complex, not a '%s'"), "COMPLEX()",
-	      type2char(TYPEOF(x)));
+Rcomplex *COMPLEX(SEXP x)
+{
+    if (TYPEOF(x) != CPLXSXP)
+        Rf_error(_("'%s' function can only be applied to a complex, not a '%s'"), "COMPLEX()",
+                 Rf_type2char(TYPEOF(x)));
     CHKZLN(x);
     return COMPLEXVECTOR_COMPLEX(x);
 }
 
-const Rcomplex *COMPLEX_RO(SEXP x) {
-    if(TYPEOF(x) != CPLXSXP)
-	error(_("'%s' function can only be applied to a complex, not a '%s'"),
-	      "COMPLEX()", "complex", type2char(TYPEOF(x)));
+const Rcomplex *COMPLEX_RO(SEXP x)
+{
+    if (TYPEOF(x) != CPLXSXP)
+        Rf_error(_("'%s' function can only be applied to a complex, not a '%s'"),
+                 "COMPLEX()", "complex", Rf_type2char(TYPEOF(x)));
     CHKZLN(x);
     return COMPLEXVECTOR_COMPLEX_RO(x);
 }
 
-SEXP *STRING_PTR(SEXP x) {
-    if(TYPEOF(x) != STRSXP)
-	error(_("'%s' function can only be applied to a character, not a '%s'"),
-	      "STRING_PTR()", type2char(TYPEOF(x)));
+SEXP *STRING_PTR(SEXP x)
+{
+    if (TYPEOF(x) != STRSXP)
+        Rf_error(_("'%s' function can only be applied to a character, not a '%s'"),
+                 "STRING_PTR()", Rf_type2char(TYPEOF(x)));
     CHKZLN(x);
     return STRINGVECTOR_STRING_PTR(x);
 }
 
-const SEXP *STRING_PTR_RO(SEXP x) {
-    if(TYPEOF(x) != STRSXP)
-	error(_("'%s' function can only be applied to a character, not a '%s'"),
-	      "STRING_PTR_RO()", type2char(TYPEOF(x)));
+const SEXP *STRING_PTR_RO(SEXP x)
+{
+    if (TYPEOF(x) != STRSXP)
+        Rf_error(_("'%s' function can only be applied to a character, not a '%s'"),
+                 "STRING_PTR_RO()", Rf_type2char(TYPEOF(x)));
     CHKZLN(x);
     return STRINGVECTOR_STRING_PTR_RO(x);
 }
 
 NORET SEXP *VECTOR_PTR(SEXP x)
 {
-  error(_("not safe to return vector pointer"));
+    Rf_error(_("not safe to return vector pointer"));
 }
 
-void SET_STRING_ELT(SEXP x, R_xlen_t i, SEXP v) {
-    if(TYPEOF(CHK(x)) != STRSXP)
-	error(_("'%s' function can only be applied to a character vector, not a '%s'"), "SET_STRING_ELT()",
-	      type2char(TYPEOF(x)));
-    if(TYPEOF(CHK(v)) != CHARSXP)
-       error(_("value of 'SET_STRING_ELT()' function must be a 'CHARSXP' not a '%s'"),
-	     type2char(TYPEOF(v)));
+void SET_STRING_ELT(SEXP x, R_xlen_t i, SEXP v)
+{
+    if (TYPEOF(CHK(x)) != STRSXP)
+        Rf_error(_("'%s' function can only be applied to a character vector, not a '%s'"), "SET_STRING_ELT()",
+                 Rf_type2char(TYPEOF(x)));
+    if (TYPEOF(CHK(v)) != CHARSXP)
+        Rf_error(_("value of 'SET_STRING_ELT()' function must be a 'CHARSXP' not a '%s'"),
+                 Rf_type2char(TYPEOF(v)));
     if (i < 0 || i >= XLENGTH(x))
-	error(_("attempt to set index %ld/%ld in 'SET_STRING_ELT()' function"), (long long)i, (long long)XLENGTH(x));
+        Rf_error(_("attempt to set index %ld/%ld in 'SET_STRING_ELT()' function"), (long long)i, (long long)XLENGTH(x));
     CHECK_OLD_TO_NEW(x, v);
     if (ALTREP(x))
-	ALTSTRING_SET_ELT(x, i, v);
-    else {
-	SEXP *ps = CXXR::stdvec_dataptr<SEXP*>(x);
-	FIX_REFCNT(x, ps[i], v);
-	ps[i] = v;
+        ALTSTRING_SET_ELT(x, i, v);
+    else
+    {
+        SEXP *ps = CXXR::stdvec_dataptr<SEXP *>(x);
+        FIX_REFCNT(x, ps[i], v);
+        ps[i] = v;
     }
 }
 
-SEXP SET_VECTOR_ELT(SEXP x, R_xlen_t i, SEXP v) {
+SEXP SET_VECTOR_ELT(SEXP x, R_xlen_t i, SEXP v)
+{
     /*  we need to allow vector-like types here */
-    if(TYPEOF(x) != VECSXP &&
-       TYPEOF(x) != EXPRSXP &&
-       TYPEOF(x) != WEAKREFSXP) {
-	error(_("'%s' function can only be applied to a list, not a '%s'"), "SET_VECTOR_ELT()",
-	      type2char(TYPEOF(x)));
+    if (TYPEOF(x) != VECSXP &&
+        TYPEOF(x) != EXPRSXP &&
+        TYPEOF(x) != WEAKREFSXP)
+    {
+        Rf_error(_("'%s' function can only be applied to a list, not a '%s'"), "SET_VECTOR_ELT()",
+                 Rf_type2char(TYPEOF(x)));
     }
     if (TYPEOF(x) == EXPRSXP)
     {
         return (SET_XVECTOR_ELT)(x, i, v);
     }
     if (i < 0 || i >= XLENGTH(x))
-	error(_("attempt to set index %ld/%ld in 'SET_VECTOR_ELT()' function"), (long long)i, (long long)XLENGTH(x));
+        Rf_error(_("attempt to set index %ld/%ld in 'SET_VECTOR_ELT()' function"), (long long)i, (long long)XLENGTH(x));
     FIX_REFCNT(x, VECTOR_ELT(x, i), v);
     CHECK_OLD_TO_NEW(x, v);
-    return LISTVECTOR_ELT(x, i) = v;
+    LISTVECTOR_ELT(x, i) = v;
+    return v;
 }
 
-SEXP SET_XVECTOR_ELT(SEXP x, R_xlen_t i, SEXP v) {
-    if(TYPEOF(x) != EXPRSXP) {
-	error(_("'%s' function can only be applied to a list, not a '%s'"), "SET_XVECTOR_ELT()",
-	      type2char(TYPEOF(x)));
+SEXP SET_XVECTOR_ELT(SEXP x, R_xlen_t i, SEXP v)
+{
+    if (TYPEOF(x) != EXPRSXP)
+    {
+        Rf_error(_("'%s' function can only be applied to a list, not a '%s'"), "SET_XVECTOR_ELT()",
+                 Rf_type2char(TYPEOF(x)));
     }
     if (i < 0 || i >= XLENGTH(x))
-	error(_("attempt to set index %ld/%ld in 'SET_XVECTOR_ELT()' function"), (long long)i, (long long)XLENGTH(x));
+        Rf_error(_("attempt to set index %ld/%ld in 'SET_XVECTOR_ELT()' function"), (long long)i, (long long)XLENGTH(x));
     FIX_REFCNT(x, XVECTOR_ELT(x, i), v);
     CHECK_OLD_TO_NEW(x, v);
-    return EXPRVECTOR_ELT(x, i) = v;
+    EXPRVECTOR_ELT(x, i) = v;
+    return v;
 }
 
 /* check for a CONS-like object */
@@ -2675,17 +2695,17 @@ CXXR::CCODE PRIMFUN(SEXP x) { return R_FunTab[PRIMOFFSET(CHK(x))].cfun(); }
 // void (SET_PRIMFUN)(SEXP x, CXXR::CCODE f) { R_FunTab[PRIMOFFSET(CHK(x))].m_cfun = f; }
 
 /* for use when testing the write barrier */
-HIDDEN int (IS_BYTES)(SEXP x) { return CXXR::RObject::is_bytes(CHK(x)); }
-HIDDEN int (IS_LATIN1)(SEXP x) { return CXXR::RObject::is_latin1(CHK(x)); }
-HIDDEN int (IS_ASCII)(SEXP x) { return CXXR::RObject::is_ascii(CHK(x)); }
-HIDDEN int (IS_UTF8)(SEXP x) { return CXXR::RObject::is_utf8(CHK(x)); }
-HIDDEN void (SET_BYTES)(SEXP x) { CXXR::RObject::set_bytes(CHK(x)); }
-HIDDEN void (SET_LATIN1)(SEXP x) { CXXR::RObject::set_latin1(CHK(x)); }
-HIDDEN void (SET_UTF8)(SEXP x) { CXXR::RObject::set_utf8(CHK(x)); }
-HIDDEN void (SET_ASCII)(SEXP x) { CXXR::RObject::set_ascii(CHK(x)); }
-int  (ENC_KNOWN)(SEXP x) { return CXXR::RObject::enc_known(CHK(x)); }
-HIDDEN void (SET_CACHED)(SEXP x) { CXXR::RObject::set_cached(CHK(x)); }
-int  (IS_CACHED)(SEXP x) { return CXXR::RObject::is_cached(CHK(x)); }
+HIDDEN int (IS_BYTES)(SEXP x) { return CXXR::String::is_bytes(CHK(x)); }
+HIDDEN int (IS_LATIN1)(SEXP x) { return CXXR::String::is_latin1(CHK(x)); }
+HIDDEN int (IS_ASCII)(SEXP x) { return CXXR::String::is_ascii(CHK(x)); }
+HIDDEN int (IS_UTF8)(SEXP x) { return CXXR::String::is_utf8(CHK(x)); }
+HIDDEN void (SET_BYTES)(SEXP x) { CXXR::String::set_bytes(CHK(x)); }
+HIDDEN void (SET_LATIN1)(SEXP x) { CXXR::String::set_latin1(CHK(x)); }
+HIDDEN void (SET_UTF8)(SEXP x) { CXXR::String::set_utf8(CHK(x)); }
+HIDDEN void (SET_ASCII)(SEXP x) { CXXR::String::set_ascii(CHK(x)); }
+int  (ENC_KNOWN)(SEXP x) { return CXXR::String::enc_known(CHK(x)); }
+HIDDEN void (SET_CACHED)(SEXP x) { CXXR::String::set_cached(CHK(x)); }
+int  (IS_CACHED)(SEXP x) { return CXXR::String::is_cached(CHK(x)); }
 
 /*******************************************/
 /* Non-sampling memory use profiler

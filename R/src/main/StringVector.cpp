@@ -42,10 +42,4 @@ namespace CXXR
         const auto &SET_STRING_ELTptr = SET_STRING_ELT;
         const auto &STRING_ELTptr = STRING_ELT;
     } // namespace ForceNonInline
-
-    template <>
-    const char *StringVector::staticTypeName()
-    {
-        return "character";
-    }
 } // namespace CXXR

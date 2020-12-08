@@ -73,9 +73,9 @@ namespace CXXR
              */
             ElementProxy &operator=(const ElementProxy &rhs)
             {
-                (m_ev->m_data)[m_index] = (rhs.m_ev->m_data)[m_index];
+                *m_it = *rhs.m_it;
                 if (rhs.m_ev != m_ev)
-                    m_ev->devolveAge((m_ev->m_data)[m_index]);
+                    m_ev->devolveAge(*m_it);
                 return *this;
             }
 
@@ -86,7 +86,7 @@ namespace CXXR
             ElementProxy &operator=(Ptr s)
             {
                 m_ev->devolveAge(s);
-                (m_ev->m_data)[m_index] = s;
+                *m_it = s;
                 return *this;
             }
 
@@ -96,15 +96,15 @@ namespace CXXR
              */
             operator Ptr const() const
             {
-                return (m_ev->m_data)[m_index];
+                return *m_it;
             }
 
         private:
             EdgeVector<Ptr, ST> *m_ev;
-            unsigned int m_index;
+            typename std::vector<Ptr, Allocator<Ptr>>::iterator m_it;
 
             ElementProxy(EdgeVector<Ptr, ST> *ev, unsigned int index)
-                : m_ev(ev), m_index(index)
+                : m_ev(ev), m_it(m_ev->m_data.begin() + index)
             {
             }
 
@@ -125,6 +125,8 @@ namespace CXXR
         explicit EdgeVector(size_t sz, Ptr init = nullptr)
             : VectorBase(ST, sz), m_data(sz, init)
         {
+            if (sz > (R_xlen_t)(R_SIZE_T_MAX / sizeof(RObject *)))
+                Rf_error(_("cannot allocate vector of length %d"), sz);
         }
 
         /** @brief Element access.
@@ -148,6 +150,29 @@ namespace CXXR
             return m_data[index];
         }
 
+        /**
+         * @return pointer to the start of this object's data,
+         * interpreted (riskily) as an array of \a Ptr.
+         * @deprecated This function puts the integrity of the write barrier
+         * at the mercy of class clients.  (It also assumes that the
+         * data of a std::vector are stored contiguously, which isn't
+         * guaranteed by the standard.)
+         */
+        Ptr *dataPtr()
+        {
+            return &m_data[0];
+        }
+
+        virtual void *data() override
+        {
+            return &m_data;
+        }
+
+        virtual const void *data() const override
+        {
+            return &m_data;
+        }
+
         /** @brief Name by which this type is known in R.
          *
          * @return the name by which this type is known in R.
@@ -160,11 +185,11 @@ namespace CXXR
         inline static const char *staticTypeName();
 
         // Virtual function of RObject:
-        const char *typeName() const;
+        const char *typeName() const override;
 
         // Virtual functions of GCNode:
-        void visitChildren(const_visitor *v) const;
-        void visitChildren(visitor *v);
+        void visitChildren(const_visitor *v) const override;
+        void visitChildren(visitor *v) override;
 
     protected:
         /**

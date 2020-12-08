@@ -402,8 +402,8 @@ namespace CXXR
         const RObject *attributes() const { return m_attrib; }
 
         // Virtual methods of GCNode:
-        void visitChildren(const_visitor *v) const;
-        void visitChildren(visitor *v);
+        void visitChildren(const_visitor *v) const override;
+        void visitChildren(visitor *v) override;
 
         /**
          * @return pointer to first element (car) of this list.
@@ -532,29 +532,8 @@ namespace CXXR
         static unsigned int levels(RObject *x);
         static bool object(RObject *x);
         static void set_object(RObject *x, bool v);
-        /* CHARSXP charset bits */
-        enum CharsetBit
-        {
-            NATIVE_MASK = 0,
-            BYTES_MASK = (1 << 1),
-            LATIN1_MASK = (1 << 2),
-            UTF8_MASK = (1 << 3),
-            /* (1 << 4) is taken by S4_OBJECT_MASK */
-            CACHED_MASK = (1 << 5),
-            ASCII_MASK = (1 << 6)
-        };
         static bool scalar(RObject *x);
-        static unsigned int is_bytes(RObject *x);
-        static void set_bytes(RObject *x);
-        static unsigned int is_latin1(RObject *x);
-        static void set_latin1(RObject *x);
-        static unsigned int is_ascii(RObject *x);
-        static void set_ascii(RObject *x);
-        static unsigned int is_utf8(RObject *x);
-        static void set_utf8(RObject *x);
-        static unsigned int enc_known(RObject *x);
-        static void set_cached(RObject *x);
-        static unsigned int is_cached(RObject *x);
+
         static bool altrep(RObject *x);
         static void set_altrep(RObject *x, bool v);
         static void setlevels(RObject *x, unsigned short int v);
@@ -725,7 +704,7 @@ extern "C"
      *          set, or a null pointer.  In the latter case the
      *          attribute (if present) is removed.
      * @return Refer to source code.  (Sometimes \a vec, sometimes \a
-     * val, sometime a null pointer ...)
+     *         val, sometime a null pointer ...)
      * @note The above documentation is probably incomplete: refer to the
      *       source code for further details.
      */
@@ -735,7 +714,7 @@ extern "C"
      * Does CXXR::RObject have a class attribute?.
      * @param x Pointer to a CXXR::RObject.
      * @return true iff \a x has a class attribute.  Returns false if \a x
-     * is 0.
+     *         is 0.
      */
     int OBJECT(SEXP x);
 
@@ -744,8 +723,8 @@ extern "C"
     /**
      * @param s Pointer to a CXXR::RObject.
      * @return TRUE iff the CXXR::RObject pointed to by \a s is either a null
-     * pointer (i.e. <tt>== R_NilValue</tt> in CXXR), or is a CXXR::RObject
-     * with SEXPTYPE NILSXP (should not happen in CXXR).
+     *         pointer (i.e. <tt>== R_NilValue</tt> in CXXR), or is a CXXR::RObject
+     *         with SEXPTYPE NILSXP (should not happen in CXXR).
      */
     Rboolean Rf_isNull(SEXP s);
 
@@ -767,7 +746,7 @@ extern "C"
      * Return the attributes of a CXXR::RObject.
      * @param x Pointer to the CXXR::RObject whose attributes are required.
      * @return Pointer to the attributes object of \a x , or 0 if \a x is
-     * a null pointer.
+     *         a null pointer.
      */
     SEXP ATTRIB(SEXP x);
 
@@ -780,7 +759,7 @@ extern "C"
      * Object copying status.
      * @param x Pointer to CXXR::RObject.
      * @return Refer to 'R Internals' document.  Returns 0 if \a x is a
-     * null pointer.
+     *         null pointer.
      */
     int(NAMED)(SEXP x);
 
@@ -788,7 +767,7 @@ extern "C"
      * Object tracing status.
      * @param x Pointer to CXXR::RObject.
      * @return Refer to 'R Internals' document.  Returns 0 if \a x is a
-     * null pointer.
+     *         null pointer.
      */
     int TRACE(SEXP x);
 

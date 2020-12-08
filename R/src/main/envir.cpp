@@ -4129,7 +4129,7 @@ SEXP Rf_mkCharLenCE(const char * const name, int len, cetype_t enc)
 {
     SEXP cval, chain;
     unsigned int hashcode;
-    CXXR::RObject::CharsetBit need_enc;
+    CXXR::String::CharsetBit need_enc;
     bool embedNul = false, is_ascii = true;
 
     switch (enc)
@@ -4156,21 +4156,21 @@ SEXP Rf_mkCharLenCE(const char * const name, int len, cetype_t enc)
 	c = allocCharsxp(len);
 	memcpy(CHAR_RW(c), name, len);
 	switch(enc) {
-	case CE_UTF8: CXXR::RObject::set_utf8(c); break;
-	case CE_LATIN1: CXXR::RObject::set_latin1(c); break;
-	case CE_BYTES: CXXR::RObject::set_bytes(c); break;
+	case CE_UTF8: CXXR::String::set_utf8(c); break;
+	case CE_LATIN1: CXXR::String::set_latin1(c); break;
+	case CE_BYTES: CXXR::String::set_bytes(c); break;
 	default: break;
 	}
-	if (is_ascii) CXXR::RObject::set_ascii(c);
+	if (is_ascii) CXXR::String::set_ascii(c);
 	error(_("embedded nul in string: '%s'"), EncodeString(c, 0, 0, Rprt_adj_none));
     }
 
     if (enc && is_ascii) enc = CE_NATIVE;
     switch(enc) {
-    case CE_UTF8: need_enc = CXXR::RObject::CharsetBit::UTF8_MASK; break;
-    case CE_LATIN1: need_enc = CXXR::RObject::CharsetBit::LATIN1_MASK; break;
-    case CE_BYTES: need_enc = CXXR::RObject::CharsetBit::BYTES_MASK; break;
-    default: need_enc = CXXR::RObject::CharsetBit::NATIVE_MASK;
+    case CE_UTF8: need_enc = CXXR::String::CharsetBit::UTF8_MASK; break;
+    case CE_LATIN1: need_enc = CXXR::String::CharsetBit::LATIN1_MASK; break;
+    case CE_BYTES: need_enc = CXXR::String::CharsetBit::BYTES_MASK; break;
+    default: need_enc = CXXR::String::CharsetBit::NATIVE_MASK;
     }
 
     hashcode = char_hash(name, len) & char_hash_mask;
@@ -4196,19 +4196,19 @@ SEXP Rf_mkCharLenCE(const char * const name, int len, cetype_t enc)
 	case CE_NATIVE:
 	    break;          /* don't set encoding */
 	case CE_UTF8:
-	    CXXR::RObject::set_utf8(cval);
+	    CXXR::String::set_utf8(cval);
 	    break;
 	case CE_LATIN1:
-	    CXXR::RObject::set_latin1(cval);
+	    CXXR::String::set_latin1(cval);
 	    break;
 	case CE_BYTES:
-	    CXXR::RObject::set_bytes(cval);
+	    CXXR::String::set_bytes(cval);
 	    break;
 	default:
 	    error(_("unknown encoding mask: %d"), enc);
 	}
-	if (is_ascii) CXXR::RObject::set_ascii(cval);
-	CXXR::RObject::set_cached(cval);  /* Mark it */
+	if (is_ascii) CXXR::String::set_ascii(cval);
+	CXXR::String::set_cached(cval);  /* Mark it */
 	/* add the new value to the cache */
 	chain = VECTOR_ELT(R_StringHash, hashcode);
 	if (ISNULL(chain))

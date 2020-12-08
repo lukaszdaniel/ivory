@@ -69,4 +69,51 @@ namespace CXXR
 
     /* Hashing Methods */
     unsigned int String::hashash(RObject *x) { return x ? SEXP_downcast<String *>(x)->m_hash != -1 : 0; }
+
+    unsigned int String::is_bytes(RObject *x) { return x ? (x->m_gpbits & BYTES_MASK) : 0; }
+
+    void String::set_bytes(RObject *x)
+    {
+        if (!x)
+            return;
+        x->m_gpbits |= BYTES_MASK;
+    }
+
+    unsigned int String::is_latin1(RObject *x) { return x ? (x->m_gpbits & LATIN1_MASK) : 0; }
+
+    void String::set_latin1(RObject *x)
+    {
+        if (!x)
+            return;
+        x->m_gpbits |= LATIN1_MASK;
+    }
+
+    unsigned int String::is_ascii(RObject *x) { return x ? (x->m_gpbits & ASCII_MASK) : 0; }
+
+    void String::set_ascii(RObject *x)
+    {
+        if (!x)
+            return;
+        x->m_gpbits |= ASCII_MASK;
+    }
+
+    unsigned int String::is_utf8(RObject *x) { return x ? (x->m_gpbits & UTF8_MASK) : 0; }
+
+    void String::set_utf8(RObject *x)
+    {
+        if (!x)
+            return;
+        x->m_gpbits |= UTF8_MASK;
+    }
+
+    unsigned int String::enc_known(RObject *x) { return x ? (x->m_gpbits & (LATIN1_MASK | UTF8_MASK)) : 0; }
+
+    void String::set_cached(RObject *x)
+    {
+        if (!x)
+            return;
+        x->m_gpbits |= CACHED_MASK;
+    }
+
+    unsigned int String::is_cached(RObject *x) { return x ? (x->m_gpbits & CACHED_MASK) : 0; }
 } // namespace CXXR

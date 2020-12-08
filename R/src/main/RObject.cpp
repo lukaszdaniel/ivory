@@ -244,53 +244,6 @@ namespace CXXR
 
     bool RObject::scalar(RObject *x) { return x && x->m_scalar; }
 
-    unsigned int RObject::is_bytes(RObject *x) { return x ? (x->m_gpbits & BYTES_MASK) : 0; }
-
-    void RObject::set_bytes(RObject *x)
-    {
-        if (!x)
-            return;
-        x->m_gpbits |= BYTES_MASK;
-    }
-
-    unsigned int RObject::is_latin1(RObject *x) { return x ? (x->m_gpbits & LATIN1_MASK) : 0; }
-
-    void RObject::set_latin1(RObject *x)
-    {
-        if (!x)
-            return;
-        x->m_gpbits |= LATIN1_MASK;
-    }
-
-    unsigned int RObject::is_ascii(RObject *x) { return x ? (x->m_gpbits & ASCII_MASK) : 0; }
-
-    void RObject::set_ascii(RObject *x)
-    {
-        if (!x)
-            return;
-        x->m_gpbits |= ASCII_MASK;
-    }
-
-    unsigned int RObject::is_utf8(RObject *x) { return x ? (x->m_gpbits & UTF8_MASK) : 0; }
-
-    void RObject::set_utf8(RObject *x)
-    {
-        if (!x)
-            return;
-        x->m_gpbits |= UTF8_MASK;
-    }
-
-    unsigned int RObject::enc_known(RObject *x) { return x ? (x->m_gpbits & (LATIN1_MASK | UTF8_MASK)) : 0; }
-
-    void RObject::set_cached(RObject *x)
-    {
-        if (!x)
-            return;
-        x->m_gpbits |= CACHED_MASK;
-    }
-
-    unsigned int RObject::is_cached(RObject *x) { return x ? (x->m_gpbits & CACHED_MASK) : 0; }
-
     bool RObject::altrep(RObject *x) { return x && x->m_alt; }
 
     void RObject::set_altrep(RObject *x, bool v)

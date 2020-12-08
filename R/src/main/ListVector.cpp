@@ -51,8 +51,7 @@ namespace CXXR
     {
         for (unsigned int i = 0; i < size(); ++i)
             (*this)[i] = ev[i];
-        SEXP names = Rf_getAttrib(const_cast<ExpressionVector *>(&ev),
-                                  R_NamesSymbol);
+        SEXP names = Rf_getAttrib(const_cast<ExpressionVector *>(&ev), R_NamesSymbol);
         if (names)
             Rf_setAttrib(this, R_NamesSymbol, names);
     }

@@ -43,10 +43,48 @@
 
 namespace CXXR
 {
+    class ListVector;
+
+    template <>
+    inline const char *EdgeVector<RObject *, EXPRSXP>::staticTypeName()
+    {
+        return "expression";
+    }
+
     /** @brief Vector of language objects, representing an expression.
      * @todo Replace the type parameter RObject* with something stricter.
      */
-    typedef CXXR::EdgeVector<RObject *, EXPRSXP> ExpressionVector;
+    class ExpressionVector : public EdgeVector<RObject *, EXPRSXP>
+    {
+    public:
+        /** @brief Create an ExpressionVector.
+         *
+         * @param sz Number of elements required.  Zero is permissible.
+         */
+        explicit ExpressionVector(size_t sz)
+            : EdgeVector<RObject *, EXPRSXP>(sz)
+        {
+        }
+
+        /** @brief Create an ExpressionVector from a ListVector.
+         *
+         * @param lv The ListVector to be copied.  The
+         *           ExpressionVector created will comprise exactly
+         *           the same sequence of pointers to RObject as \a
+         *           lv.
+         *
+         * @note Q: Of all the possible coercions to ExpressionVector,
+         * why have a constructor to implement this one?  A: Because
+         * in all other cases, existing code in coerce.cpp needed at
+         * most trivial modification.
+         */
+        explicit ExpressionVector(const ListVector &lv);
+
+    private:
+        // Declare private to ensure that ExpressionVector objects are
+        // allocated only using 'new':
+        ~ExpressionVector() {}
+    };
 
     /** @brief Expression vector.
      *

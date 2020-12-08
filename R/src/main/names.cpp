@@ -1219,7 +1219,7 @@ HIDDEN void R::InitNames()
     /* NA_STRING */
     NA_STRING = allocCharsxp(strlen("NA"));
     strcpy(CHAR_RW(NA_STRING), "NA");
-    CXXR::RObject::set_cached(NA_STRING);  /* Mark it */
+    CXXR::String::set_cached(NA_STRING);  /* Mark it */
     R_print.na_string = NA_STRING;
     /* R_BlankString */
     R_BlankString = mkChar("");

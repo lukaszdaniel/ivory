@@ -38,6 +38,8 @@
 
 namespace CXXR
 {
+    class ExpressionVector;
+
     // Template specialization:
     template <>
     inline const char *EdgeVector<RObject *, VECSXP>::staticTypeName()
@@ -56,7 +58,7 @@ namespace CXXR
          * @param sz Number of elements required.  Zero is
          *          permissible.
          */
-        ListVector(size_t sz)
+        explicit ListVector(size_t sz)
             : EdgeVector<RObject *, VECSXP>(sz)
         {
         }
@@ -66,7 +68,7 @@ namespace CXXR
          * @param ev The ExpressionVector on which the constructed
          *          ListVector is to be modelled.
          */
-        ListVector(const EdgeVector<RObject *, EXPRSXP> &ev);
+        explicit ListVector(const ExpressionVector &ev);
 
     private:
         // Declared private to ensure that ListVectors are
