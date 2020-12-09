@@ -682,6 +682,10 @@ HIDDEN SEXP do_regFinaliz(SEXP call, SEXP op, SEXP args, SEXP rho)
 
 #define MARK_THRU(marker, node) if (node) (node)->conductVisitor(marker)
 
+// The MARK_THRU invocations below could be eliminated by
+// encapsulating the pointers concerned in GCRoot<> objects declared
+// at file/global/static scope.
+
 void GCNode::gc(unsigned int num_old_gens_to_collect)
 {
     // std::cerr << "GCNode::gc(" << num_old_gens_to_collect << ")\n";
@@ -819,7 +823,7 @@ void GCNode::gc(unsigned int num_old_gens_to_collect)
     // Sweep.  gen must be signed here or the loop won't terminate!
     for (int gen = num_old_gens_to_collect; gen >= 0; --gen)
     {
-        if (gen == int(s_last_gen))
+        if (gen == int(s_num_generations - 1))
         {
             // Delete unmarked nodes and unmark the rest:
             const GCNode *node = s_genpeg[gen]->next();
@@ -1098,8 +1102,8 @@ HIDDEN void R::InitMemory()
     char *arg;
 
     GCManager::setMonitors(gc_start_timing, gc_end_timing);
-    GCManager::initialize(R_VSize, R_NSize);
     GCManager::setReporting(R_Verbose ? &std::cerr : nullptr);
+    GCManager::enableGC(R_VSize, R_NSize);
     CXXR::initializeMemorySubsystem();
 
     init_gctorture();

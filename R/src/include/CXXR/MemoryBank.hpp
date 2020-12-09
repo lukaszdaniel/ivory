@@ -172,6 +172,8 @@ namespace CXXR
 		{
 			if (!p)
 				return;
+			// Uncommenting this helps to diagnose premature GC:
+			memset(p, 0x55, bytes);
 			if (allocator)
 				custom_node_free(p);
 #if VALGRIND_LEVEL >= 3
@@ -290,7 +292,7 @@ namespace CXXR
 
 namespace
 {
-	CXXR::MemoryBank::SchwarzCtr schwarz_ctr;
+	CXXR::MemoryBank::SchwarzCtr memorybank_schwarz_ctr;
 }
 
 #endif /* MEMORYBANK_HPP */

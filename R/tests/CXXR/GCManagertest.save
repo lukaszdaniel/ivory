@@ -1,4 +1,4 @@
-GCNode::initialize(2)
+GCNode::initialize(0)
 (Allocated 0) Allocating 96200 bytes
 (Allocated 96200) Allocating 17544 bytes
 (Allocated 113744) Allocating 157028 bytes
@@ -333,3 +333,4 @@ Garbage collection 16 = 7+1+8 (level 2) ...
 (Allocated 5604061) Allocating 507404 bytes
 (Allocated 6111465) Allocating 74371 bytes
 (Allocated 6185836) Allocating 634054 bytes
+GCNode::cleanup()

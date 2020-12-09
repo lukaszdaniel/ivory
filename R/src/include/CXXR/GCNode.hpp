@@ -30,7 +30,6 @@
 #include <assert.h>
 #include <functional>
 #include <sstream>
-#include <vector>
 #include <CXXR/MemoryBank.hpp>
 
 #define EXPEL_OLD_TO_NEW
@@ -123,6 +122,31 @@ namespace CXXR
     class GCNode
     {
     public:
+        /** @brief Schwarz counter for managing static data associated
+         * with garbage collection.
+         *
+         * (See MemoryBank::SchwarzCtr for a description of how
+         * Schwarz counters work.)
+         */
+        class SchwarzCtr
+        {
+        public:
+            SchwarzCtr()
+            {
+                if (!s_count++)
+                    GCNode::initialize();
+            }
+
+            ~SchwarzCtr()
+            {
+                if (!--s_count)
+                    GCNode::cleanup();
+            }
+
+        private:
+            static unsigned int s_count;
+        };
+
         /** @brief Abstract base class for the Visitor design pattern.
          *
          * See Gamma et al 'Design Patterns' Ch. 5 for a description
@@ -278,26 +302,12 @@ namespace CXXR
          */
         static void gc(unsigned int num_old_gens);
 
-        /** Initialize static members.
-         *
-         * This method must be called before any GCNodes are created.
-         * If called more than once in a single program run, the
-         * second and subsequent calls do nothing.
-         *
-         * @param num_old_generations One fewer than the number of
-         * generations into which GCNode objects are to be ranked.
-         *
-         * @todo Have this method called automatically by a Schwarz
-         * counter, and make it private.
-         */
-        static void initialize(unsigned int num_old_generations);
-
         /** @brief Number of generations used by garbage collector.
          *
          * @return The number of generations into which GCNode objects
          * are ranked by the garbage collector.
          */
-        static size_t numGenerations() { return s_genpeg.size(); }
+        static size_t numGenerations() { return s_num_generations; }
 
         /** @brief Number of GCNode objects in existence.
          *
@@ -421,9 +431,9 @@ namespace CXXR
             unsigned int m_mingen;
         };
 
-        static unsigned int s_last_gen;
-        static std::vector<GCNode *> s_genpeg;
-        static std::vector<unsigned int> s_gencount;
+        static unsigned int s_num_generations;
+        static const GCNode **s_genpeg;
+        static unsigned int *s_gencount;
         static size_t s_num_nodes;
         mutable const GCNode *m_prev;
         mutable const GCNode *m_next;
@@ -450,11 +460,13 @@ namespace CXXR
          * second and subsequent calls do nothing.
          */
         friend void initializeMemorySubsystem();
-        static void initialize();
 
         // Not implemented.  Declared private to prevent clients
         // allocating arrays of GCNode.
         static void *operator new[](size_t);
+
+        // Clean up static data at end of run:
+        static void cleanup();
 
         // Make the node known to the garbage collector (if it isn't
         // already).
@@ -466,6 +478,17 @@ namespace CXXR
 
         // Does the business for expose():
         void expose_aux() const;
+
+        /** @brief Initialize static members.
+         *
+         * This method must be called before any GCNodes are created.
+         * If called more than once in a single program run, the
+         * second and subsequent calls do nothing.
+         *
+         * @param num_old_generations One fewer than the number of
+         * generations into which GCNode objects are to be ranked.
+         */
+        static void initialize();
 
         bool isMarked() const { return m_marked; }
 
@@ -531,7 +554,14 @@ namespace CXXR
         }
 
         void unmark() const { m_marked = false; }
+
+        friend class SchwarzCtr;
     };
+
+    namespace
+    {
+        CXXR::GCNode::SchwarzCtr gcnode_schwarz_ctr;
+    }
 
     /** @brief Initialize the entire memory subsystem.
      *

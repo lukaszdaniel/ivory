@@ -71,6 +71,9 @@ namespace CXXR
 
 		/** @brief Initiate a garbage collection.
 		 *
+		 * Note that enableGC() must have been called before this
+		 * method is used.
+		 *
 		 * @param bytes_wanted Bytes required to be freed.
 		 *
 		 * @param full If this is true, a garbage collection of all
@@ -80,18 +83,19 @@ namespace CXXR
 		 */
 		static void gc(size_t bytes_wanted, bool full = false);
 
-		/** @brief Initialize static members.
+		/** @brief Enable garbage collection.
 		 *
-		 * This method must be called before any GCNode objects are created.
-		 * If called more than once in a single program run, the
-		 * second and subsequent calls do nothing.
+		 * No automatic garbage collection of GCNode objects will take
+		 * place until this method has been called; nor may a
+		 * collection may be initiated 'manually' by calling gc().
+		 * The effect of calling enableGC() more than once during a
+		 * single program run is undefined.
 		 *
 		 * @param initial_threshold  Initial value for the collection threshold.
 		 *
 		 * @param initial_node_threshold Initial value for the node collection threshold.
-		 *
 		 */
-		static void initialize(size_t initial_threshold, size_t initial_node_threshold);
+		static void enableGC(size_t initial_threshold, size_t initial_node_threshold);
 
 		/**
 		 * @return true iff garbage collection torture is enabled.
@@ -116,6 +120,13 @@ namespace CXXR
 		 */
 		static size_t maxNodes() { return s_max_nodes; }
 
+		/** @brief Number of generations used by garbage collector.
+		 *
+		 * @return The number of generations into which GCNode objects
+		 * are ranked by the garbage collector.
+		 */
+		static size_t numGenerations() { return s_num_old_generations + 1; }
+
 		/** @brief Reset the tallies of the maximum numbers of bytes and
 		 *  GCNode objects.
 		 *
@@ -137,8 +148,8 @@ namespace CXXR
 		 *          It  must not itself give rise to a garbage
 		 *          collection.
 		 */
-		static void setMonitors(void (*pre_gc)() = 0,
-								void (*post_gc)() = 0)
+		static void setMonitors(void (*pre_gc)() = nullptr,
+								void (*post_gc)() = nullptr)
 		{
 			s_pre_gc = pre_gc;
 			s_post_gc = post_gc;
@@ -200,6 +211,9 @@ namespace CXXR
 		static bool gc_inhibit_release();
 
 	private:
+		static const size_t s_num_old_generations = 2;
+		static const unsigned int s_collect_counts_max[s_num_old_generations];
+		static unsigned int s_gen_gc_counts[s_num_old_generations + 1];
 		static size_t s_threshold;
 		static size_t s_min_threshold;
 		static size_t s_max_threshold;
@@ -235,6 +249,9 @@ namespace CXXR
 								// CXXR::MemoryBank leads to a garbage
 								// collection.
 
+		// Clean up static data associated with garbage collection.
+		static void cleanup() {}
+
 		// Callback for CXXR::MemoryBank to cue a garbage collection:
 		static bool cue(size_t bytes_wanted, bool force);
 
@@ -242,6 +259,27 @@ namespace CXXR
 		// choosing how many generations to collect, is carried out
 		// here.
 		static void gcGenController(size_t bytes_wanted, bool full);
+
+		/** Choose how many generations to collect according to a rota.
+		 *
+		 * There are three levels of collections.  Level 0 collects only
+		 * the youngest generation, Level 1 collects the two youngest
+		 * generations, and Level 2 collects all generations.  This
+		 * function decides how many old generations to collect according
+		 * to a rota.  Most collections are Level 0.  However, after every
+		 * collect_counts_max[0] Level 0 collections, a Level 1 collection
+		 * will be carried out; similarly after every
+		 * collect_counts_max[1] Level 1 collections a Level 2 collection
+		 * will be carried out.
+		 *
+		 * @param minlevel (<= 2, not checked) This parameter places a
+		 *          minimum on the number of old generations to be
+		 *          collected.  If minlevel is higher than the number of
+		 *          generations that genRota would have chosen for itself,
+		 *          the position in the rota is advanced accordingly.
+		 */
+		static unsigned int genRota(unsigned int minlevel);
+
 		static std::ostream *s_os; // Pointer to output stream for GC
 								   // reporting, or NULL.
 

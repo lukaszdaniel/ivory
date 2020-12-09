@@ -44,6 +44,11 @@
 using namespace std;
 using namespace CXXR;
 
+constexpr int LEVEL_0_FREQ = 20;
+constexpr int LEVEL_1_FREQ = 5;
+const unsigned int GCManager::s_collect_counts_max[s_num_old_generations] = {LEVEL_0_FREQ, LEVEL_1_FREQ};
+unsigned int GCManager::s_gen_gc_counts[s_num_old_generations + 1];
+
 size_t GCManager::s_threshold = R_VSIZE;
 size_t GCManager::s_max_threshold = R_SIZE_T_MAX;
 size_t GCManager::s_node_threshold = R_NSIZE;
@@ -66,12 +71,10 @@ void (*GCManager::s_post_gc)() = nullptr;
 
 namespace
 {
-    const unsigned int num_old_generations = 2;
     unsigned int gc_count;
-    unsigned int gen_gc_counts[num_old_generations + 1];
-
 } // namespace
-  /* Tuning Constants. Most of these could be made settable from R,
+
+/* Tuning Constants. Most of these could be made settable from R,
    within some reasonable constraints at least.  Since there are quite
    a lot of constants it would probably make sense to put together
    several "packages" representing different space/speed tradeoffs
@@ -136,42 +139,6 @@ int GCManager::R_VGrowIncrMin = 80000, GCManager::R_VShrinkIncrMin = 0;
 namespace
 {
 
-    constexpr int LEVEL_0_FREQ = 20;
-    constexpr int LEVEL_1_FREQ = 5;
-    const unsigned int collect_counts_max[num_old_generations] = {LEVEL_0_FREQ, LEVEL_1_FREQ};
-
-    /** Choose how many generations to collect according to a rota.
-     *
-     * There are three levels of collections.  Level 0 collects only
-     * the youngest generation, Level 1 collects the two youngest
-     * generations, and Level 2 collects all generations.  This
-     * function decides how many old generations to collect according
-     * to a rota.  Most collections are Level 0.  However, after every
-     * collect_counts_max[0] Level 0 collections, a Level 1 collection
-     * will be carried out; similarly after every
-     * collect_counts_max[1] Level 1 collections a Level 2 collection
-     * will be carried out.
-     *
-     * @param minlevel (<= 2, not checked) This parameter places a
-     *          minimum on the number of old generations to be
-     *          collected.  If minlevel is higher than the number of
-     *          generations that genRota would have chosen for itself,
-     *          the position in the rota is advanced accordingly.
-     */
-    unsigned int genRota(unsigned int minlevel)
-    {
-        static unsigned int collect_counts[num_old_generations];
-        unsigned int level = minlevel;
-        for (unsigned int i = 0; i < level; ++i)
-            collect_counts[i] = 0;
-        while (level < num_old_generations && ++collect_counts[level] > collect_counts_max[level])
-        {
-            collect_counts[level] = 0;
-            ++level;
-        }
-        return level;
-    }
-
 #ifdef DEBUG_GC
     // This ought to go in GCNode.
     void DEBUG_GC_SUMMARY(int full_gc)
@@ -181,7 +148,7 @@ namespace
             REprintf("\nFull, VSize = %lu", MemoryBank::bytesAllocated());
         else
             REprintf("\nMinor, VSize = %lu", MemoryBank::bytesAllocated());
-        for (unsigned int gen = 0, OldCount = 0; gen < num_old_generations; ++gen)
+        for (unsigned int gen = 0, OldCount = 0; gen < s_num_old_generations; ++gen)
             OldCount += GCNode::s_gencount[gen];
         REprintf(", %d", OldCount);
     }
@@ -334,6 +301,16 @@ void GCManager::gc_error(const char *msg)
         Rf_error(msg);
 }
 
+void GCManager::enableGC(size_t initial_threshold, size_t initial_node_threshold)
+{
+    s_min_threshold = s_threshold = initial_threshold;
+    s_min_node_threshold = s_node_threshold = initial_node_threshold;
+    gc_count = 0;
+    for (unsigned int i = 0; i <= s_num_old_generations; ++i)
+        s_gen_gc_counts[i] = 0;
+    MemoryBank::setGCCuer(cue);
+}
+
 void GCManager::gc(size_t bytes_wanted, bool full)
 {
     static bool running_finalizers = false;
@@ -388,7 +365,7 @@ void GCManager::gcGenController(size_t bytes_wanted, bool full)
     static unsigned int level = 0;
     double ncells, nfrac;
     if (full)
-        level = num_old_generations;
+        level = s_num_old_generations;
     level = genRota(level);
 
     unsigned int gens_collected;
@@ -411,7 +388,7 @@ void GCManager::gcGenController(size_t bytes_wanted, bool full)
         gens_collected = level;
 
         /* update heap statistics */
-        if (level < num_old_generations)
+        if (level < s_num_old_generations)
         {
             if (GCNode::numNodes() ||
                 MemoryBank::bytesAllocated() + bytes_wanted > (1.0 - R_MinFreeFrac) * s_threshold)
@@ -427,9 +404,9 @@ void GCManager::gcGenController(size_t bytes_wanted, bool full)
             level = 0;
     }
 
-    gen_gc_counts[gens_collected]++;
+    s_gen_gc_counts[gens_collected]++;
 
-    if (gens_collected == num_old_generations)
+    if (gens_collected == s_num_old_generations)
     {
         /**** do some adjustment for intermediate collections? */
         adjustThreshold(bytes_wanted);
@@ -440,16 +417,16 @@ void GCManager::gcGenController(size_t bytes_wanted, bool full)
     /* } END_SUSPEND_INTERRUPTS; */
 
     if (R_check_constants > 2 ||
-        (R_check_constants > 1 && gens_collected == num_old_generations))
+        (R_check_constants > 1 && gens_collected == s_num_old_generations))
         R_checkConstants(TRUE);
 
     if (s_os)
     {
-        *s_os << "Garbage collection " << gc_count << " = " << gen_gc_counts[0];
-        for (unsigned int i = 0; i < num_old_generations; ++i)
-            *s_os << "+" << gen_gc_counts[i + 1];
+        *s_os << "Garbage collection " << gc_count << " = " << s_gen_gc_counts[0];
+        for (unsigned int i = 0; i < s_num_old_generations; ++i)
+            *s_os << "+" << s_gen_gc_counts[i + 1];
         *s_os << " (level " << gens_collected << ") ... ";
-        DEBUG_GC_SUMMARY(gens_collected == num_old_generations);
+        DEBUG_GC_SUMMARY(gens_collected == s_num_old_generations);
 
         ncells = GCNode::numNodes();
         nfrac = (100.0 * ncells) / s_node_threshold;
@@ -465,15 +442,18 @@ void GCManager::gcGenController(size_t bytes_wanted, bool full)
     }
 }
 
-void GCManager::initialize(size_t initial_threshold, size_t initial_node_threshold)
+unsigned int GCManager::genRota(unsigned int minlevel)
 {
-    GCNode::initialize(num_old_generations);
-    s_min_threshold = s_threshold = initial_threshold;
-    s_min_node_threshold = s_node_threshold = initial_node_threshold;
-    gc_count = 0;
-    for (unsigned int i = 0; i <= num_old_generations; ++i)
-        gen_gc_counts[i] = 0;
-    MemoryBank::setGCCuer(cue);
+    static unsigned int collect_counts[s_num_old_generations];
+    unsigned int level = minlevel;
+    for (unsigned int i = 0; i < level; ++i)
+        collect_counts[i] = 0;
+    while (level < s_num_old_generations && ++collect_counts[level] > s_collect_counts_max[level])
+    {
+        collect_counts[level] = 0;
+        ++level;
+    }
+    return level;
 }
 
 void GCManager::resetMaxTallies()

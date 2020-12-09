@@ -122,6 +122,13 @@ void R_Suicide(const char *s)
 }
 // Stubs for members of GCNode:
 
+unsigned int GCNode::SchwarzCtr::s_count = 0;
+
+void GCNode::cleanup()
+{
+    cout << "GCNode::cleanup()\n";
+}
+
 void GCNode::gc(unsigned int num_old_gens)
 {
     cout << "GCNode::gc(" << num_old_gens << ")\n";
@@ -138,9 +145,9 @@ void GCNode::gc(unsigned int num_old_gens)
     // cout << MemoryBank::bytesAllocated() << " bytes allocated at end\n";
 }
 
-void GCNode::initialize(unsigned int num_old_generations)
+void GCNode::initialize()
 {
-    cout << "GCNode::initialize(" << num_old_generations << ")\n";
+    cout << "GCNode::initialize()\n";
 }
 
 size_t GCNode::s_num_nodes = 42;
@@ -163,8 +170,8 @@ int main()
 {
     ios_base::sync_with_stdio();
     srandom(0);
-    GCManager::initialize(1000000, 1000000);
     GCManager::setMonitors(gcstart, gcend);
+    GCManager::enableGC(1000000, 1000000);
     GCManager::setReporting(&cout);
     //    GCManager::setMaxTrigger(8000000);
     for (int k = 0; k < 100; ++k)
