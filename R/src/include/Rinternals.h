@@ -519,8 +519,9 @@ void (SET_HASHVALUE)(SEXP x, int v);
 
 
 /* External pointer access macros */
-#define EXTPTR_PROT(x)	CDR(x)
-#define EXTPTR_TAG(x)	TAG(x)
+/* (only for backwards compatibility in CXXR) */
+#define EXTPTR_PROT(x)	R_ExternalPtrProtected(x)
+#define EXTPTR_TAG(x)	R_ExternalPtrTag(x)
 /* EXTPTR_PTR is defined above within USE_RINTERNALS */
 
 /* Bytecode access macros */

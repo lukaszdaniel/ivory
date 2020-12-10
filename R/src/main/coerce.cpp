@@ -1055,16 +1055,20 @@ static SEXP coerceVectorList(SEXP v, SEXPTYPE type)
 
     /* expression -> list, new in R 2.4.0 */
 #if CXXR_FALSE
-	if (type == VECSXP)
-		if (ExpressionVector *ev = dynamic_cast<ExpressionVector *>(v))
-			return new ListVector(*ev);
+	if (type == VECSXP && TYPEOF(v) == EXPRSXP)
+	{
+		/* This is sneaky but saves us rewriting a lot of the duplicate code */
+		ExpressionVector *ev = dynamic_cast<ExpressionVector *>(v);
+		return new ListVector(*ev);
+	}
 #else
-    if (type == VECSXP && TYPEOF(v) == EXPRSXP) {
-	/* This is sneaky but saves us rewriting a lot of the duplicate code */
-	rval = MAYBE_REFERENCED(v) ? duplicate(v) : v;
-	SET_TYPEOF(rval, VECSXP);
-	return rval;
-    }
+	if (type == VECSXP && TYPEOF(v) == EXPRSXP)
+	{
+		/* This is sneaky but saves us rewriting a lot of the duplicate code */
+		rval = MAYBE_REFERENCED(v) ? duplicate(v) : v;
+		SET_TYPEOF(rval, VECSXP);
+		return rval;
+	}
 #endif
 #if CXXR_FALSE
 	if (type == EXPRSXP && TYPEOF(v) == VECSXP)

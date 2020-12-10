@@ -25,7 +25,7 @@
  * Class RObject and associated C interface functions.
  */
 
-// Needed while visitChildren(visitor* v) is unimplemented.
+// Needed while visitChildren(visitor *v) is unimplemented.
 #include <iostream>
 #include <CXXR/RObject.hpp>
 #include <CXXR/Symbol.hpp>
@@ -122,12 +122,6 @@ namespace CXXR
                 if (cdr())
                     cdr()->conductVisitor(v);
                 break;
-            case EXTPTRSXP:
-                if (cdr())
-                    cdr()->conductVisitor(v);
-                if (tag())
-                    tag()->conductVisitor(v);
-                break;
             default:
                 break;
             }
@@ -135,7 +129,7 @@ namespace CXXR
 
     void RObject::visitChildren(visitor *v)
     {
-        std::cerr << "RObject::visitChildren(visitor* v) not implemented yet.\n";
+        std::cerr << "RObject::visitChildren(visitor *v) not implemented yet.\n";
         abort();
     }
 

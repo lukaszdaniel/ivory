@@ -58,6 +58,85 @@ namespace CXXR
     class ExternalPointer : public RObject
     {
     public:
+        /**
+         * @param ptr The pointer that the ExternalPointer object is
+         *          to encapsulate.
+         * @param tag Pointer to the tag object.  May be null (and
+         *          often is). 
+         * @param prot Pointer to the protege object.  May be null
+         *          (and often is).
+         */
+        explicit ExternalPointer(void *ptr = nullptr, RObject *tag = nullptr,
+                                 RObject *prot = nullptr)
+            : RObject(EXTPTRSXP), m_ptr(ptr), m_tag(tag), m_protege(prot)
+        {
+        }
+
+        /**
+         * @return a const pointer to the protege object of this
+         * ExternalPointer.
+         */
+        const RObject *protege() const
+        {
+            return m_protege;
+        }
+
+        /**
+         * @return a pointer to the protege object of this
+         * ExternalPointer.
+         */
+        RObject *protege()
+        {
+            return m_protege;
+        }
+
+        /**
+         * @return the encapsulated pointer, qualified by const.
+         */
+        const void *ptr() const
+        {
+            return m_ptr;
+        }
+
+        /**
+         * @return the encapsulated pointer.
+         */
+        void *ptr()
+        {
+            return m_ptr;
+        }
+
+        /** @brief Designate the protege object.
+         *
+         * @param prot Pointer to the new protege object (or a null
+         *          pointer).
+         */
+        void setProtege(RObject *prot)
+        {
+            m_protege = prot;
+            devolveAge(m_protege);
+        }
+
+        /** @brief Set the value of the encapsulated pointer
+         *
+         * @param ptr New pointer value (may be null).
+         */
+        void setPtr(void *ptr)
+        {
+            m_ptr = ptr;
+        }
+
+        /** @brief Set the 'tag' value.
+         *
+         * @param tag Pointer to the new tag object (or a null
+         *           pointer).
+         */
+        void setTag(RObject *tag)
+        {
+            m_tag = tag;
+            devolveAge(m_tag);
+        }
+
         // Virtual function of RObject:
         const char *typeName() const override;
 
@@ -69,17 +148,113 @@ namespace CXXR
         {
             return "externalptr";
         }
-        /* External pointer access methods */
-        static RObject *extptr_prot(RObject *x);
-        static RObject *extptr_tag(RObject *x);
-        static void set_extptr_tag(RObject *x, RObject *v);
-        static void set_extptr_prot(RObject *x, RObject *v);
-        static RObject *extptr_ptr(RObject *x);
-        static void set_extptr_ptr(RObject *x, RObject *v);
 
-    protected:
+        /**
+         * @return a const pointer to the 'tag' of this ExternalPointer.
+         */
+        const RObject *tag() const
+        {
+            return m_tag;
+        }
+
+        /**
+         * @return a pointer to the 'tag' of this ExternalPointer.
+         */
+        RObject *tag()
+        {
+            return m_tag;
+        }
+
+        // Virtual functions of GCNode:
+        void visitChildren(const_visitor *v) const override;
+        void visitChildren(visitor *v) override;
+
     private:
+        void *m_ptr;
+        RObject *m_tag;
+        RObject *m_protege;
+
+        // Declared private to ensure that ExternalPointer objects are
+        // allocated only using 'new':
+        ~ExternalPointer() {}
+
+        // Not implemented yet.  Declared to prevent
+        // compiler-generated versions:
+        ExternalPointer(const ExternalPointer &);
+        ExternalPointer &operator=(const ExternalPointer &);
     };
 } // namespace CXXR
+
+extern "C"
+{
+    /** @brief Create an ExternalPointer object.
+     *
+     * @param p The pointer that the ExternalPointer object is
+     *          to encapsulate.
+     * @param tag Pointer to the tag object.  May be null (and
+     *          often is). 
+     * @param prot Pointer to the protege object.  May be null
+     *          (and often is).
+     *
+     * @return Pointer to the created ExternalPointer object.
+     */
+    SEXP R_MakeExternalPtr(void *p, SEXP tag, SEXP prot);
+
+    /** @brief Get the encapsulated external pointer.
+     *
+     * @param s Pointer to a CXXR::ExternalPointer (checked).
+     *
+     * @return the external pointer encapsulated by \a s.
+     */
+    void *R_ExternalPtrAddr(SEXP s);
+
+    /** @brief Get pointer to tag object.
+     *
+     * @param s Pointer to a CXXR::ExternalPointer (checked).
+     *
+     * @return a pointer to the tag object of \a s.
+     */
+    SEXP R_ExternalPtrTag(SEXP s);
+
+    /** @brief Get pointer to protege object.
+     *
+     * @param s Pointer to a CXXR::ExternalPointer (checked).
+     *
+     * @return a pointer to the protege object of \a s.
+     */
+    SEXP R_ExternalPtrProtected(SEXP s);
+
+    /** @brief Set the value of the encapsulated pointer
+     *
+     * @param s Pointer to a CXXR::ExternalPointer (checked).
+     *
+     * @param p New pointer value (may be null).
+     */
+    void R_SetExternalPtrAddr(SEXP s, void *p);
+
+    /** @brief Reset the encapsulated pointer to a null pointer.
+     *
+     * @param s Pointer to a CXXR::ExternalPointer (checked).
+     */
+    void R_ClearExternalPtr(SEXP s);
+
+    /** @brief Designate the tag object.
+     *
+     * @param s Pointer to a CXXR::ExternalPointer (checked).
+     *
+     * @param tag Pointer to the new tag object (or a null
+     *          pointer).
+     */
+    void R_SetExternalPtrTag(SEXP s, SEXP tag);
+
+    /** @brief Designate the protege object.
+     *
+     * @param s Pointer to a CXXR::ExternalPointer (checked).
+     *
+     * @param p Pointer to the new protege object (or a null
+     *          pointer).
+     */
+    void R_SetExternalPtrProtected(SEXP s, SEXP p);
+} // extern "C"
 
 #endif // EXTERNALPOINTER_HPP

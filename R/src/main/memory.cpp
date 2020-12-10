@@ -1883,50 +1883,64 @@ void R_ReleaseMSet(SEXP mset, int keepSize)
 /* External Pointer Objects */
 SEXP R_MakeExternalPtr(void *p, SEXP tag, SEXP prot)
 {
-    SEXP s = Rf_allocSExp(EXTPTRSXP);
-    ExternalPointer::set_extptr_ptr(s, reinterpret_cast<RObject*>(p));
-    ExternalPointer::set_extptr_prot(s, CHK(prot)); if (prot) INCREMENT_REFCNT(prot);
-    ExternalPointer::set_extptr_tag(s, CHK(tag)); if (tag) INCREMENT_REFCNT(tag);
-    return s;
+    GCRoot<> tagr(tag); if (tag) INCREMENT_REFCNT(tag);
+    GCRoot<> protr(prot); if (prot) INCREMENT_REFCNT(prot);
+    return new ExternalPointer(p, tag, prot);
 }
 
 void *R_ExternalPtrAddr(SEXP s)
 {
-    return EXTPTR_PTR(CHK(s));
+    if (!s)
+        return nullptr;
+    ExternalPointer *ep = SEXP_downcast<ExternalPointer *>(s, false);
+    return ep->ptr();
 }
 
 SEXP R_ExternalPtrTag(SEXP s)
 {
-    return CHK(EXTPTR_TAG(CHK(s)));
+    if (!s)
+        return nullptr;
+    ExternalPointer *ep = SEXP_downcast<ExternalPointer *>(s, false);
+    return ep->tag();
 }
 
 SEXP R_ExternalPtrProtected(SEXP s)
 {
-    return CHK(EXTPTR_PROT(CHK(s)));
+    if (!s)
+        return nullptr;
+    ExternalPointer *ep = SEXP_downcast<ExternalPointer *>(s, false);
+    return ep->protege();
 }
 
 void R_ClearExternalPtr(SEXP s)
 {
-    ExternalPointer::set_extptr_ptr(s, nullptr);
+    R_SetExternalPtrAddr(s, nullptr);
 }
 
 void R_SetExternalPtrAddr(SEXP s, void *p)
 {
-    ExternalPointer::set_extptr_ptr(s, reinterpret_cast<RObject*>(p));
+    if (!s)
+        return;
+    ExternalPointer *ep = SEXP_downcast<ExternalPointer *>(s, false);
+    ep->setPtr(p);
 }
 
 void R_SetExternalPtrTag(SEXP s, SEXP tag)
 {
-    FIX_REFCNT(s, EXTPTR_TAG(s), tag);
-    CHECK_OLD_TO_NEW(s, tag);
-    ExternalPointer::set_extptr_tag(s, tag);
+    if (!s)
+        return;
+    ExternalPointer *ep = SEXP_downcast<ExternalPointer *>(s, false);
+    FIX_REFCNT(s, ep->tag(), tag);
+    ep->setTag(tag);
 }
 
 void R_SetExternalPtrProtected(SEXP s, SEXP p)
 {
-    FIX_REFCNT(s, EXTPTR_PROT(s), p);
-    CHECK_OLD_TO_NEW(s, p);
-    ExternalPointer::set_extptr_prot(s, p);
+    if (!s)
+        return;
+    ExternalPointer *ep = SEXP_downcast<ExternalPointer *>(s, false);
+    FIX_REFCNT(s, ep->protege(), p);
+    ep->setProtege(p);
 }
 
 /*
@@ -2555,7 +2569,13 @@ SEXP SETCAD4R(SEXP x, SEXP y)
     return y;
 }
 
-void *EXTPTR_PTR(SEXP x) { return CXXR::ExternalPointer::extptr_ptr(CHK(x)); }
+void *EXTPTR_PTR(SEXP x)
+{
+    if (!x)
+        return nullptr;
+    ExternalPointer *ep = SEXP_downcast<ExternalPointer *>(x, false);
+    return ep->ptr();
+}
 
 void SET_MISSING(SEXP x, int v) { CXXR::RObject::set_missing(CHKCONS(x), v); }
 

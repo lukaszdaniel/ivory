@@ -219,7 +219,7 @@ namespace CXXR
     void EdgeVector<Ptr, ST>::visitChildren(const_visitor *v) const
     {
         VectorBase::visitChildren(v);
-        for (unsigned int i = 0; i < size(); ++i)
+        for (R_xlen_t i = 0; i < size(); ++i)
         {
             Ptr ptr = (*this)[i];
             if (ptr)
@@ -231,7 +231,7 @@ namespace CXXR
     void EdgeVector<Ptr, ST>::visitChildren(visitor *v)
     {
         VectorBase::visitChildren(v);
-        for (unsigned int i = 0; i < size(); ++i)
+        for (R_xlen_t i = 0; i < size(); ++i)
         {
             Ptr ptr = (*this)[i];
             if (ptr)

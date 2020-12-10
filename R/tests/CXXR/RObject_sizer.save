@@ -1,3 +1,4 @@
+GCNode::initialize()
 Size of various types used in R (in bytes):
 
 sizeof(bool): 1
@@ -11,3 +12,4 @@ sizeof(R_xlen_t): 8
 sizeof(double): 8
 sizeof(RObject*): 8
 sizeof(RObject): 104
+GCNode::cleanup()

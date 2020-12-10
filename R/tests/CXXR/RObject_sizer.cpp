@@ -24,6 +24,19 @@
 using namespace std;
 using namespace CXXR;
 
+// Stubs for members of GCNode:
+unsigned int GCNode::SchwarzCtr::s_count = 0;
+
+void GCNode::cleanup()
+{
+    cout << "GCNode::cleanup()\n";
+}
+
+void CXXR::GCNode::initialize()
+{
+    cout << "GCNode::initialize()\n";
+}
+
 int main()
 {
     cout << "Size of various types used in R (in bytes):\n\n";

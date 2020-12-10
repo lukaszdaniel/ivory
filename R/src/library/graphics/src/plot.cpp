@@ -364,7 +364,7 @@ static void GetTextArg(SEXP spec, SEXP *ptxt, rcolor *pcol, double *pcex, int *p
 	else {
 	    nms = getAttrib(spec, R_NamesSymbol);
 	    if (nms == R_NilValue){ /* PR#1939 */
-	       txt = XVECTOR_ELT(spec, 0);
+	       txt = VECTOR_ELT(spec, 0);
 	       if (TYPEOF(txt) == LANGSXP || TYPEOF(txt) == SYMSXP )
 		    REPROTECT(txt = coerceVector(txt, EXPRSXP), pi);
 	       else if (!isExpression(txt))
@@ -2668,7 +2668,7 @@ SEXP C_title(SEXP args)
 	    where = 0;
 	}
 	if (isExpression(sub))
-	    GMMathText(VECTOR_ELT(sub, 0), 1, vpos, where,
+	    GMMathText(XVECTOR_ELT(sub, 0), 1, vpos, where,
 		       hpos, 0, 0.0, dd);
 	else {
 	    n = length(sub);
@@ -3366,14 +3366,12 @@ SEXP C_identify(SEXP call, SEXP op, SEXP args, SEXP rho)
 		gpptr(dd)->cex = cex * gpptr(dd)->cexbase;                                                         \
 		for (i = 0; i < n; i++)                                                                            \
 			if (isExpression(str))                                                                         \
-				REAL(ans)                                                                                  \
-				[i] = GExpression##KIND(XVECTOR_ELT(str, i),                                                \
+				REAL(ans)[i] = GExpression##KIND(XVECTOR_ELT(str, i),                                      \
 										GMapUnits(units), dd);                                             \
 			else                                                                                           \
 			{                                                                                              \
 				ch = STRING_ELT(str, i);                                                                   \
-				REAL(ans)                                                                                  \
-				[i] = (ch == NA_STRING) ? 0.0 : GStr##KIND(CHAR(ch), getCharCE(ch), GMapUnits(units), dd); \
+				REAL(ans)[i] = (ch == NA_STRING) ? 0.0 : GStr##KIND(CHAR(ch), getCharCE(ch), GMapUnits(units), dd); \
 			}                                                                                              \
 		gpptr(dd)->cex = cexsave;                                                                          \
 		GRestorePars(dd);                                                                                  \

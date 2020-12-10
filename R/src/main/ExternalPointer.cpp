@@ -51,22 +51,21 @@ namespace CXXR
         return ExternalPointer::staticTypeName();
     }
 
-    /* External pointer access methods */
-    RObject *ExternalPointer::extptr_prot(RObject *x) { return RObject::cdr(x); }
-
-    RObject *ExternalPointer::extptr_tag(RObject *x) { return RObject::tag(x); }
-
-    void ExternalPointer::set_extptr_tag(RObject *x, RObject *v) { RObject::set_tag(x, v); }
-
-    void ExternalPointer::set_extptr_prot(RObject *x, RObject *v) { RObject::set_cdr(x, v); }
-
-    RObject *ExternalPointer::extptr_ptr(RObject *e) { return e ? e->u.listsxp.m_carval : nullptr; }
-
-    void ExternalPointer::set_extptr_ptr(RObject *x, RObject *v)
+    void ExternalPointer::visitChildren(const_visitor *v) const
     {
-        if (!x)
-            return;
-        x->u.listsxp.m_carval = v;
+        RObject::visitChildren(v);
+        if (m_protege)
+            m_protege->conductVisitor(v);
+        if (m_tag)
+            m_tag->conductVisitor(v);
     }
 
+    void ExternalPointer::visitChildren(visitor *v)
+    {
+        RObject::visitChildren(v);
+        if (m_protege)
+            m_protege->conductVisitor(v);
+        if (m_tag)
+            m_tag->conductVisitor(v);
+    }
 } // namespace CXXR

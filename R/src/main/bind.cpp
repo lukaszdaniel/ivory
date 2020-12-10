@@ -195,10 +195,10 @@ namespace
 {
 	inline void LIST_ASSIGN(struct BindData &data, SEXP x)
 	{
-		// if (ExpressionVector *ev = dynamic_cast<ExpressionVector *>(data.ans_ptr))
-		// 	(*ev)[data.ans_length] = x;
-		// else
-		SET_VECTOR_ELT(data.ans_ptr, data.ans_length, x);
+		if (TYPEOF(data.ans_ptr) == EXPRSXP)
+			SET_XVECTOR_ELT(data.ans_ptr, data.ans_length, x);
+		else
+			SET_VECTOR_ELT(data.ans_ptr, data.ans_length, x);
 		data.ans_length++;
 	}
 } // namespace

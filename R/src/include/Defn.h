@@ -57,6 +57,7 @@
 #include <CXXR/Promise.hpp>
 #include <CXXR/Closure.hpp>
 #include <CXXR/RAllocStack.hpp>
+#include <CXXR/ExternalPointer.hpp>
 
 /* To test the write barrier used by the generational collector,
    define TESTING_WRITE_BARRIER.  This makes the internal structure of
