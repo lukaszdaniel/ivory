@@ -156,28 +156,6 @@ void GCRootBase::visitRoots(GCNode::const_visitor *v)
 #endif
 }
 
-void GCRootBase::visitRoots(GCNode::visitor *v)
-{
-    for (auto &n : s_roots)
-    {
-        if (n)
-            n->conductVisitor(v);
-    }
-#ifdef NDEBUG
-    for (auto &n : s_pps)
-    {
-        if (n)
-            n->conductVisitor(v);
-    }
-#else
-    for (auto &n : s_pps)
-    {
-        if (n.first)
-            (n.first)->conductVisitor(v);
-    }
-#endif
-}
-
 void Rf_ppsRestoreSize(size_t new_size)
 {
     GCRootBase::ppsRestoreSize(new_size);

@@ -117,8 +117,10 @@ namespace CXXR
         /** @brief Create a vector.
          *
          * Create a vector.
+         *
          * @param sz Number of elements required.  Zero is
          *          permissible.
+         *
          * @param init Initial value for the destination of each
          *          \a Ptr in the EdgeVector.
          */
@@ -130,8 +132,10 @@ namespace CXXR
         }
 
         /** @brief Element access.
+         *
          * @param index Index of required element (counting from
          *          zero).  No bounds checking is applied.
+         *
          * @return Proxy for the specified element, via which the
          *         element can be examined or modified.
          */
@@ -141,8 +145,10 @@ namespace CXXR
         }
 
         /** @brief Read-only element access.
+         *
          * @param index Index of required element (counting from
          *          zero).  No bounds checking is applied.
+         *
          * @return the specified element.
          */
         Ptr const operator[](unsigned int index) const
@@ -153,6 +159,7 @@ namespace CXXR
         /**
          * @return pointer to the start of this object's data,
          * interpreted (riskily) as an array of \a Ptr.
+         *
          * @deprecated This function puts the integrity of the write barrier
          * at the mercy of class clients.  (It also assumes that the
          * data of a std::vector are stored contiguously, which isn't
@@ -187,9 +194,8 @@ namespace CXXR
         // Virtual function of RObject:
         const char *typeName() const override;
 
-        // Virtual functions of GCNode:
+        // Virtual function of GCNode:
         void visitChildren(const_visitor *v) const override;
-        void visitChildren(visitor *v) override;
 
     protected:
         /**
@@ -217,18 +223,6 @@ namespace CXXR
 
     template <typename Ptr, SEXPTYPE ST>
     void EdgeVector<Ptr, ST>::visitChildren(const_visitor *v) const
-    {
-        VectorBase::visitChildren(v);
-        for (R_xlen_t i = 0; i < size(); ++i)
-        {
-            Ptr ptr = (*this)[i];
-            if (ptr)
-                ptr->conductVisitor(v);
-        }
-    }
-
-    template <typename Ptr, SEXPTYPE ST>
-    void EdgeVector<Ptr, ST>::visitChildren(visitor *v)
     {
         VectorBase::visitChildren(v);
         for (R_xlen_t i = 0; i < size(); ++i)

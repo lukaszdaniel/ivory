@@ -165,9 +165,8 @@ namespace CXXR
             return m_tag;
         }
 
-        // Virtual functions of GCNode:
+        // Virtual function of GCNode:
         void visitChildren(const_visitor *v) const override;
-        void visitChildren(visitor *v) override;
 
     private:
         void *m_ptr;

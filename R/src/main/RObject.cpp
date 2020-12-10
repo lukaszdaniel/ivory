@@ -25,8 +25,6 @@
  * Class RObject and associated C interface functions.
  */
 
-// Needed while visitChildren(visitor *v) is unimplemented.
-#include <iostream>
 #include <CXXR/RObject.hpp>
 #include <CXXR/Symbol.hpp>
 #include <R_ext/Boolean.h>
@@ -125,12 +123,6 @@ namespace CXXR
             default:
                 break;
             }
-    }
-
-    void RObject::visitChildren(visitor *v)
-    {
-        std::cerr << "RObject::visitChildren(visitor *v) not implemented yet.\n";
-        abort();
     }
 
     RObject::RObject(const RObject &pattern)

@@ -401,9 +401,8 @@ namespace CXXR
          */
         const RObject *attributes() const { return m_attrib; }
 
-        // Virtual methods of GCNode:
+        // Virtual function of GCNode:
         void visitChildren(const_visitor *v) const override;
-        void visitChildren(visitor *v) override;
 
         /**
          * @return pointer to first element (car) of this list.

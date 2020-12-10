@@ -196,15 +196,6 @@ namespace CXXR
          */
         static void visitRoots(GCNode::const_visitor *v);
 
-        /** @brief Conduct a const visitor to all 'root' GCNode objects.
-         *
-         * Conduct a GCNode::visitor object to each root GCNode
-         * and each node on the C pointer protection stack.
-         *
-         * @param v Pointer to the visitor object.
-         */
-        static void visitRoots(GCNode::visitor *v);
-
     private:
         // There may be a case, at least in some C++ library
         // implementations, for using a deque instead of a vector in
@@ -212,7 +203,7 @@ namespace CXXR
         // shrinks.
         static std::vector<GCNode *> s_roots;
 
-        // Ye older pointer protection stack:
+        // Ye olde pointer protection stack:
 #ifdef NDEBUG
         static std::vector<RObject *> s_pps;
 #else

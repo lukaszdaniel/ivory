@@ -172,25 +172,6 @@ namespace CXXR
             virtual bool operator()(const GCNode *node) = 0;
         };
 
-        /** @brief Abstract base class for the Visitor design pattern.
-         *
-         * See Gamma et al 'Design Patterns' Ch. 5 for a description
-         * of the Visitor design pattern.
-         */
-        struct visitor
-        {
-            virtual ~visitor() {}
-
-            /** Perform visit
-             *
-             * @param node Node to be visited.
-             *
-             * @return true if the visitor wishes to visit the
-             * children of this node, otherwise false.
-             */
-            virtual bool operator()(GCNode *node) = 0;
-        };
-
         GCNode()
         {
             ++s_num_nodes;
@@ -254,21 +235,6 @@ namespace CXXR
             return true;
         }
 
-        /** Present this node to a visitor and, if the visitor so
-         * requests, conduct the visitor to the children of this node.
-         *
-         * @param v Pointer to the visitor object.
-         *
-         * @return the result of applying the visitor to \e this node.
-         */
-        bool conductVisitor(visitor *v)
-        {
-            if (!(*v)(this))
-                return false;
-            visitChildren(v);
-            return true;
-        }
-
         /** @brief Prevent old-to-new references.
          *
          * If \a node points to a node of a younger generation than
@@ -321,12 +287,6 @@ namespace CXXR
          * @param v Pointer to the visitor object.
          */
         virtual void visitChildren(const_visitor *v) const {}
-
-        /** Conduct a visitor to the children of this node.
-         *
-         * @param v Pointer to the visitor object.
-         */
-        virtual void visitChildren(visitor *v) {}
 
         static unsigned int gcgen(const GCNode *v);
         static void set_gcgen(const GCNode *v, unsigned int x);
