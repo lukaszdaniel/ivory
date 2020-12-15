@@ -228,8 +228,6 @@ namespace CXXR
         x->m_has_class = v;
     }
 
-    bool RObject::scalar(RObject *x) { return x && x->m_scalar; }
-
     bool RObject::altrep(RObject *x) { return x && x->m_alt; }
 
     void RObject::set_altrep(RObject *x, bool v)
@@ -248,6 +246,8 @@ namespace CXXR
             return;
         x->m_gpbits = (unsigned short)v;
     }
+
+    bool RObject::scalar(RObject *x) { return x && x->m_scalar; }
 
     void RObject::setscalar(RObject *x, bool v)
     {

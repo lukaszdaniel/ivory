@@ -61,7 +61,7 @@ namespace CXXR
          *
          * @param sz Number of elements required.  Zero is permissible.
          */
-        explicit ExpressionVector(size_t sz)
+        explicit ExpressionVector(R_xlen_t sz)
             : EdgeVector<RObject *, EXPRSXP>(sz)
         {
         }

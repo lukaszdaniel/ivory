@@ -95,8 +95,8 @@ extern "C"
 {
 	/* S4 object testing */
 
-	/**
-     * An S4 object?
+	/** @brief Is this an S4 object?
+     *
      * @param x Pointer to \c RObject.
      * @return true iff \a x is an S4 object.  Returns false if \a x
      * is 0.

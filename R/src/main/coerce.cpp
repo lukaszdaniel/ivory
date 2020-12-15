@@ -44,6 +44,7 @@
 #endif
 
 using namespace R;
+using namespace CXXR;
 
 /* interval at which to check interrupts */
 // constexpr R_xlen_t NINTERRUPT = 10000000;
@@ -1073,7 +1074,7 @@ static SEXP coerceVectorList(SEXP v, SEXPTYPE type)
 #if CXXR_FALSE
 	if (type == EXPRSXP && TYPEOF(v) == VECSXP)
 	{
-		GCRoot<ListVector *> lv(static_cast<ListVector *>(v));
+		GCRoot<ListVector *> lv(dynamic_cast<ListVector *>(v));
 		return new ExpressionVector(*lv);
 	}
 #else

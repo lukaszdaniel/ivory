@@ -11,5 +11,7 @@ sizeof(size_t): 8
 sizeof(R_xlen_t): 8
 sizeof(double): 8
 sizeof(RObject*): 8
-sizeof(RObject): 104
+sizeof(ListVector*): 8
+sizeof(ListVector): 120
+sizeof(RObject): 80
 GCNode::cleanup()

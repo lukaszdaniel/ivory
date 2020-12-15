@@ -52,6 +52,7 @@
 #include <CXXR/IntVector.hpp>
 #include <CXXR/StringVector.hpp>
 #include <CXXR/LogicalVector.hpp>
+#include <CXXR/ListVector.hpp>
 #include <CXXR/ExpressionVector.hpp>
 #include <CXXR/Environment.hpp>
 #include <CXXR/Promise.hpp>

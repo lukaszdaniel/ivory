@@ -396,7 +396,8 @@ namespace CXXR
          */
         RObject(const RObject &pattern);
 
-        /**
+        /** @brief Get object attributes.
+         *
          * @return Pointer to the attributes of this object.
          */
         const RObject *attributes() const { return m_attrib; }
@@ -434,8 +435,9 @@ namespace CXXR
          */
         R_xlen_t length() const { return u.vecsxp.m_length; }
 
-        /**
-         * @return SEXPTYPE of this object.
+        /** @brief Get an object's ::SEXPTYPE.
+         *
+         * @return ::SEXPTYPE of this object.
          */
         SEXPTYPE sexptype() const { return m_type; }
 
@@ -531,13 +533,15 @@ namespace CXXR
         static unsigned int levels(RObject *x);
         static bool object(RObject *x);
         static void set_object(RObject *x, bool v);
-        static bool scalar(RObject *x);
 
         static bool altrep(RObject *x);
         static void set_altrep(RObject *x, bool v);
         static void setlevels(RObject *x, unsigned short int v);
+
+        static bool scalar(RObject *x);
         static void setscalar(RObject *x, bool v);
         static bool is_scalar(RObject *x, SEXPTYPE t);
+
         static unsigned int refcnt(RObject *x);
         static void set_refcnt(RObject *x, unsigned int v);
         static bool trackrefs(RObject *x);
@@ -630,8 +634,6 @@ namespace CXXR
         } u;
     };
 
-    using VECP = VECREC *;
-
     /* Vector Heap Macros */
     // inline size_t BYTE2VEC(size_t n) { return (n > 0) ? (n - 1) / sizeof(VECREC) + 1 : 0; }
     // inline size_t INT2VEC(size_t n) { return (n > 0) ? (n * sizeof(int) - 1) / sizeof(VECREC) + 1 : 0; }
@@ -645,8 +647,8 @@ namespace CXXR
 
 extern "C"
 {
-    /**
-     * Object type.
+    /** @brief Get object's ::SEXPTYPE.
+     *
      * @param x Pointer to CXXR::RObject.
      * @return ::SEXPTYPE of \a x, or NILSXP if x is a null pointer.
      */
@@ -680,7 +682,7 @@ extern "C"
      * @param vec Pointer to the CXXR::RObject whose attributes are to be
      *          accessed.
      * @param name Either a pointer to the symbol representing the
-     *          required attribute, or a pointer to a StringVector
+     *          required attribute, or a pointer to a CXXR::StringVector
      *          containing the required symbol name as element 0; in
      *          the latter case, as a side effect, the corresponding
      *          symbol is installed if necessary.
@@ -695,7 +697,7 @@ extern "C"
      * @param vec Pointer to the CXXR::RObject whose attributes are to be
      *          modified.
      * @param name Either a pointer to the symbol representing the
-     *          required attribute, or a pointer to a StringVector
+     *          required attribute, or a pointer to a CXXR::StringVector
      *          containing the required symbol name as element 0; in
      *          the latter case, as a side effect, the corresponding
      *          symbol is installed if necessary.
@@ -709,8 +711,8 @@ extern "C"
      */
     SEXP Rf_setAttrib(SEXP vec, SEXP name, SEXP val);
 
-    /**
-     * Does CXXR::RObject have a class attribute?.
+    /** @brief Does an object have a class attribute?
+     *
      * @param x Pointer to a CXXR::RObject.
      * @return true iff \a x has a class attribute.  Returns false if \a x
      *         is 0.
@@ -727,22 +729,15 @@ extern "C"
      */
     Rboolean Rf_isNull(SEXP s);
 
-    /**
+    /** @brief Does an object have a class attribute?
+     *
      * @param s Pointer to a CXXR::RObject.
      * @return TRUE iff the CXXR::RObject pointed to by \a s has a class attribute.
      */
     Rboolean Rf_isObject(SEXP s);
 
-    /* Accessor functions.  Many are declared using () to avoid the macro
-       definitions in the USE_RINTERNALS section.
-       The function STRING_ELT is used as an argument to arrayAssign even 
-       if the macro version is in use.
-    */
-
-    /* General Cons Cell Attributes */
-
-    /**
-     * Return the attributes of a CXXR::RObject.
+    /** @brief Get the attributes of a CXXR::RObject.
+     *
      * @param x Pointer to the CXXR::RObject whose attributes are required.
      * @return Pointer to the attributes object of \a x , or 0 if \a x is
      *         a null pointer.
@@ -754,16 +749,16 @@ extern "C"
      */
     int LEVELS(SEXP x);
 
-    /**
-     * Object copying status.
+    /** @brief Get object copying status.
+     *
      * @param x Pointer to CXXR::RObject.
      * @return Refer to 'R Internals' document.  Returns 0 if \a x is a
      *         null pointer.
      */
-    int(NAMED)(SEXP x);
+    int (NAMED)(SEXP x);
 
-    /**
-     * Object tracing status.
+    /** @brief Get object tracing status.
+     *
      * @param x Pointer to CXXR::RObject.
      * @return Refer to 'R Internals' document.  Returns 0 if \a x is a
      *         null pointer.
@@ -775,17 +770,18 @@ extern "C"
      */
     void SETLEVELS(SEXP x, int v);
 
-    /**
-     * Replace x's attributes by \a v.
-     * @param x Pointer to CXXR::RObject.
-     * @param v Pointer to attributes CXXR::RObject.
+    /** @brief Replace an object's attributes.
+     *
+     * @param x Pointer to a CXXR::RObject.
+     * @param v Pointer to the new attributes CXXR::RObject.
      * @todo Could \a v be \c const ?
      */
     void SET_ATTRIB(SEXP x, SEXP v);
 
-    /**
-     * Set object copying status.  Does nothing if \a x is a null pointer.
-     * @param x Pointer to CXXR::RObject.
+    /** @brief Set object copying status.
+     *
+     * @param x Pointer to CXXR::RObject.  The function does nothing
+     *          if \a x is a null pointer.
      * @param v Refer to 'R Internals' document.
      * @deprecated Ought to be private.
      */
@@ -803,8 +799,8 @@ extern "C"
      */
     void SET_TYPEOF(SEXP x, SEXPTYPE v);
 
-    /**
-     * Replace \a to's attributes by those of \a from.
+    /** @brief Replace the attributes of \a to by those of \a from.
+     *
      * @param to Pointer to CXXR::RObject.
      * @param from Pointer to another CXXR::RObject.
      */

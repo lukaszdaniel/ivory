@@ -48,7 +48,7 @@ namespace CXXR
     {
         // The following results in unnecessary invocations of
         // devolveAge() on the nodes pointed to.
-        for (unsigned int i = 0; i < size(); ++i)
+        for (R_xlen_t i = 0; i < size(); ++i)
             (*this)[i] = lv[i];
         SEXP names = Rf_getAttrib(const_cast<ListVector *>(&lv), R_NamesSymbol);
         if (names)

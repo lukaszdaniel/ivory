@@ -58,7 +58,7 @@ namespace CXXR
          * @param sz Number of elements required.  Zero is
          *          permissible.
          */
-        explicit ListVector(size_t sz)
+        explicit ListVector(R_xlen_t sz)
             : EdgeVector<RObject *, VECSXP>(sz)
         {
         }

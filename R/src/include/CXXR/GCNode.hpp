@@ -118,6 +118,11 @@ namespace CXXR
      * by the garbage collector, and does not contribute to the
      * 'meaning' of an object of a derived class, its data members are
      * mutable.
+     *
+     * @todo The (private) cleanup() method needs to address the
+     * possibility that derived classes may have destructors that
+     * release some external resource (e.g. a lock).  Maybe a garbage
+     * collection without a 'mark' phase would do the trick.
      */
     class GCNode
     {
@@ -264,7 +269,8 @@ namespace CXXR
 #endif
         /** @brief Initiate a garbage collection.
          *
-         * @param num_old_gens The number of old generations to collect.
+         * @param num_old_gens The number of old generations to
+         * collect.  Must be strictly smaller than numGenerations().
          */
         static void gc(unsigned int num_old_gens);
 
@@ -284,7 +290,17 @@ namespace CXXR
 
         /** Conduct a visitor to the children of this node.
          *
+         * The children of this node are those objects derived from
+         * GCNode to which this node contains a pointer or a
+         * reference.
+         *
          * @param v Pointer to the visitor object.
+         *
+         * @note If this method is reimplemented in a derived class,
+         * the reimplemented version must remember to invoke
+         * visitChildren() for the immediate base class of the derived
+         * class, to ensure that \e all children of the object get
+         * visited.
          */
         virtual void visitChildren(const_visitor *v) const {}
 

@@ -40,7 +40,7 @@
 namespace CXXR
 {
   /** @brief Untemplated base class for R vectors.
-     */
+   */
   class VectorBase : public RObject
   {
   public:
@@ -49,7 +49,7 @@ namespace CXXR
      * @param stype The required ::SEXPTYPE.
      * @param sz The required number of elements in the vector.
      */
-    VectorBase(SEXPTYPE stype, size_t sz)
+    VectorBase(SEXPTYPE stype, R_xlen_t sz)
         : RObject(stype)
     {
       if (sz > R_XLEN_T_MAX)
@@ -65,7 +65,7 @@ namespace CXXR
      *
      * @return The number of elements in the vector.
      */
-    auto size() const
+    R_xlen_t size() const
     {
       return length();
     }
@@ -101,6 +101,7 @@ namespace CXXR
       x->u.vecsxp.m_length = v;
       RObject::setscalar(x, v == 1);
     }
+
     static inline void set_truelength(RObject *x, R_xlen_t v)
     {
       if (CXXR::RObject::altrep(x))
@@ -108,8 +109,6 @@ namespace CXXR
       CXXR::VectorBase::set_stdvec_truelength(x, v);
     }
   };
-
-  using VECSEXP = class CXXR::RObject *;
 
 /* Vector Access Macros */
 #ifdef LONG_VECTOR_SUPPORT
@@ -149,7 +148,7 @@ extern "C"
    *         the case of certain hash tables, this means the 'capacity'
    *         of \a x , not all of which may be used.)
    */
-  int(LENGTH)(SEXP x);
+  int (LENGTH)(SEXP x);
 
   /**
    * @param x Pointer to a CXXR::VectorBase.
@@ -158,7 +157,7 @@ extern "C"
    *         tables, and signifies the number of used slots in the
    *         table.
    */
-  R_xlen_t(TRUELENGTH)(SEXP x);
+  R_xlen_t (TRUELENGTH)(SEXP x);
 
   /**
    * Set length of vector.

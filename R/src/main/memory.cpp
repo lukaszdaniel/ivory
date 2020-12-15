@@ -798,7 +798,7 @@ void GCNode::gc(unsigned int num_old_gens_to_collect)
                 {                        /* remove unused CHARSXP and cons cell */
                     if (t == R_NilValue) /* head of list */
                     {
-                        LISTVECTOR_ELT(R_StringHash, i) = CXTAIL(s);
+                        SET_VECTOR_ELT(R_StringHash, i, CXTAIL(s));
                     }
                     else
                     {
@@ -1316,9 +1316,7 @@ HIDDEN SEXP R::R_mkEVPROMISE_NR(SEXP expr, SEXP val)
 
 SEXP Rf_allocVector3(SEXPTYPE type, R_xlen_t length = 1, R_allocator_t *allocator = nullptr)
 {
-    RObject *s = nullptr; /* For the generational collector it would be safer to
-		   work in terms of a VECSEXP here, but that would
-		   require several casts below... */
+    RObject *s = nullptr;
     R_size_t size = 0;
 
 #if VALGRIND_LEVEL > 0
@@ -1409,7 +1407,7 @@ SEXP Rf_allocVector3(SEXPTYPE type, R_xlen_t length = 1, R_allocator_t *allocato
         return Rf_allocList((int)length);
     }
     default:
-        error(_("invalid type/length (%s/%d) in vector allocation"), type2char(type), length);
+        Rf_error(_("invalid type/length (%s/%d) in vector allocation"), type2char(type), length);
     }
 
     size_t bytes = size * sizeof(VECREC);
@@ -2311,7 +2309,7 @@ SEXP SET_VECTOR_ELT(SEXP x, R_xlen_t i, SEXP v)
     }
     if (TYPEOF(x) == EXPRSXP)
     {
-        return (SET_XVECTOR_ELT)(x, i, v);
+        return SET_XVECTOR_ELT(x, i, v);
     }
     if (i < 0 || i >= XLENGTH(x))
         Rf_error(_("attempt to set index %ld/%ld in 'SET_VECTOR_ELT()' function"), (long long)i, (long long)XLENGTH(x));

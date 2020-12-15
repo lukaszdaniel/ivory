@@ -103,7 +103,7 @@ namespace CXXR
             EdgeVector<Ptr, ST> *m_ev;
             typename std::vector<Ptr, Allocator<Ptr>>::iterator m_it;
 
-            ElementProxy(EdgeVector<Ptr, ST> *ev, unsigned int index)
+            ElementProxy(EdgeVector<Ptr, ST> *ev, R_xlen_t index)
                 : m_ev(ev), m_it(m_ev->m_data.begin() + index)
             {
             }
@@ -124,7 +124,7 @@ namespace CXXR
          * @param init Initial value for the destination of each
          *          \a Ptr in the EdgeVector.
          */
-        explicit EdgeVector(size_t sz, Ptr init = nullptr)
+        explicit EdgeVector(R_xlen_t sz, Ptr init = nullptr)
             : VectorBase(ST, sz), m_data(sz, init)
         {
             if (sz > (R_xlen_t)(R_SIZE_T_MAX / sizeof(RObject *)))
@@ -139,7 +139,7 @@ namespace CXXR
          * @return Proxy for the specified element, via which the
          *         element can be examined or modified.
          */
-        ElementProxy operator[](unsigned int index)
+        ElementProxy operator[](R_xlen_t index)
         {
             return ElementProxy(this, index);
         }
@@ -151,7 +151,7 @@ namespace CXXR
          *
          * @return the specified element.
          */
-        Ptr const operator[](unsigned int index) const
+        Ptr const operator[](R_xlen_t index) const
         {
             return m_data[index];
         }
@@ -172,12 +172,12 @@ namespace CXXR
 
         virtual void *data() override
         {
-            return &m_data;
+            return &m_data[0];
         }
 
         virtual const void *data() const override
         {
-            return &m_data;
+            return &m_data[0];
         }
 
         /** @brief Name by which this type is known in R.

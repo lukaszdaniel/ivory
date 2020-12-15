@@ -49,7 +49,7 @@ namespace CXXR
     // String::Comparator::operator()(const String&, const String&) is in
     // sort.cpp
 
-    String::String(size_t sz)
+    String::String(R_xlen_t sz)
         : VectorBase(CHARSXP, sz), m_hash(-1),
           m_databytes(sz + 1), m_data(m_short_string)
     {

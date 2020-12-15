@@ -96,7 +96,7 @@ namespace CXXR
 		 * @param sz Number of elements required.  Zero is
 		 *          permissible.
 		 */
-		explicit String(size_t sz);
+		explicit String(R_xlen_t sz);
 
 		/** @brief Character access.
 		 * @param index Index of required character (counting from
@@ -202,10 +202,10 @@ namespace CXXR
 
 	private:
 		// Max. strlen stored internally:
-		static const size_t s_short_strlen = 7;
+		static const R_xlen_t s_short_strlen = 7;
 
 		mutable int m_hash; // negative signifies invalid
-		size_t m_databytes; // includes trailing null byte
+		R_xlen_t m_databytes; // includes trailing null byte
 		char *m_data;		// pointer to the string's data block.
 
 		// If there are fewer than s_short_strlen+1 chars in the

@@ -20,6 +20,7 @@
 #include <iostream>
 #include <R_ext/Boolean.h>
 #include <CXXR/RObject.hpp>
+#include <CXXR/ListVector.hpp>
 
 using namespace std;
 using namespace CXXR;
@@ -50,6 +51,8 @@ int main()
          << "\nsizeof(R_xlen_t): " << sizeof(R_xlen_t)
          << "\nsizeof(double): " << sizeof(double)
          << "\nsizeof(RObject*): " << sizeof(RObject *)
+         << "\nsizeof(ListVector*): " << sizeof(ListVector *)
+         << "\nsizeof(ListVector): " << sizeof(ListVector)
          << "\nsizeof(RObject): " << sizeof(RObject) << "\n";
     return 0;
 }
