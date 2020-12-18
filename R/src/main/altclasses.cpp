@@ -689,7 +689,7 @@ R_INLINE static SEXP ExpandDeferredStringElt(SEXP x, R_xlen_t i)
     if (val == R_NilValue) {
 	R_xlen_t n = XLENGTH(x);
 	val = allocVector(STRSXP, n);
-    memset(CXXR::stdvec_dataptr(val), 0, n * sizeof(SEXP));
+    memset(CXXR::stdvec_dataptr<>(val), 0, n * sizeof(SEXP));
 	SET_DEFERRED_STRING_EXPANDED(x, val);
     }
 

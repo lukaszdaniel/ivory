@@ -97,8 +97,11 @@ namespace CXXR
      */
     // typedef FixedVector<GCEdge<>, EXPRSXP> ExpressionVector;
 
-#define EXPRVECTOR_ELT(x, i) ((SEXP *)DATAPTR(x))[i]
-#define EXPRVECTOR_PTR(x) ((SEXP *)DATAPTR(x))
+    inline RObject **EXPRVECTOR_PTR(RObject *x)
+    {
+        return static_cast<RObject **>(DATAPTR(x));
+    }
+#define EXPRVECTOR_ELT(x, i) (EXPRVECTOR_PTR(x))[i]
 } // namespace CXXR
 
 extern "C"

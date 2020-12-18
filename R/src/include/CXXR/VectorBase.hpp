@@ -50,16 +50,20 @@ namespace CXXR
      * @param sz The required number of elements in the vector.
      */
     VectorBase(SEXPTYPE stype, R_xlen_t sz)
-        : RObject(stype)
+        : RObject(stype), m_size(sz), m_truelength(0)
     {
       if (sz > R_XLEN_T_MAX)
         Rf_error(_("vector is too large")); /**** put length into message */
       else if (sz < 0)
         Rf_error(_("negative length vectors are not allowed"));
-
-      u.vecsxp.m_length = sz;
-      u.vecsxp.m_truelength = 0;
     }
+
+    /** @brief Alter the size (number of elements) in the vector.
+     * @param new_size New size required.  Zero is permissible,
+     *          but (as presently implemented) the new size must
+     *          not be greater than the current size. 
+     */
+    void resize(R_xlen_t new_size);
 
     /** @brief Number of elements in the vector.
      *
@@ -67,7 +71,12 @@ namespace CXXR
      */
     R_xlen_t size() const
     {
-      return length();
+      return m_size;
+    }
+
+    R_xlen_t truelength() const
+    {
+      return m_truelength;
     }
 
     /** @brief The name by which this type is known in R.
@@ -85,20 +94,41 @@ namespace CXXR
      */
     static void tooBig(std::size_t bytes);
 
+  protected:
+    ~VectorBase() {}
+
+  private:
+    R_xlen_t m_size;
+    R_xlen_t m_truelength;
+
   public:
-    static inline R_xlen_t stdvec_length(RObject *x) { return x ? x->u.vecsxp.m_length : 0; }
-    static inline R_xlen_t stdvec_truelength(RObject *x) { return x ? x->u.vecsxp.m_truelength : 0; }
+
+    static inline R_xlen_t stdvec_length(RObject *x)
+    {
+      VectorBase *vb = dynamic_cast<VectorBase *>(x);
+      return vb ? vb->size() : 0;
+    }
+
+    static inline R_xlen_t stdvec_truelength(RObject *x)
+    {
+      VectorBase *vb = dynamic_cast<VectorBase *>(x);
+      return vb ? vb->truelength() : 0;
+    }
+
     static inline void set_stdvec_truelength(RObject *x, R_xlen_t v)
     {
-      if (!x)
-        return;
-      x->u.vecsxp.m_truelength = v;
+      VectorBase *vb = dynamic_cast<VectorBase *>(x);
+      if (!vb)
+        Rf_error("SET_TRUELENGTH invoked for a non-vector.");
+      vb->m_truelength = v;
     }
+
     static inline void set_stdvec_length(RObject *x, R_xlen_t v)
     {
-      if (!x)
-        return;
-      x->u.vecsxp.m_length = v;
+      VectorBase *vb = dynamic_cast<VectorBase *>(x);
+      if (!vb)
+        Rf_error("SETLENGTH invoked for a non-vector.");
+      vb->resize(v);
       RObject::setscalar(x, v == 1);
     }
 
@@ -126,10 +156,10 @@ namespace CXXR
   extern "C" void *DATAPTR(SEXP x);
   extern "C" const void *DATAPTR_RO(SEXP x);
 
-  template <typename T = void *>
-  inline T stdvec_dataptr(RObject *x)
+  template <typename T = void>
+  inline T *stdvec_dataptr(RObject *x)
   {
-    return static_cast<T>(x->data());
+    return reinterpret_cast<T *>(x->data());
   }
 
 } // namespace CXXR

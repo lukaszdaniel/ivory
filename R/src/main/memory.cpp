@@ -1317,11 +1317,6 @@ HIDDEN SEXP R::R_mkEVPROMISE_NR(SEXP expr, SEXP val)
 SEXP Rf_allocVector3(SEXPTYPE type, R_xlen_t length = 1, R_allocator_t *allocator = nullptr)
 {
     RObject *s = nullptr;
-    R_size_t size = 0;
-
-#if VALGRIND_LEVEL > 0
-    R_size_t actual_size = 0;
-#endif
 
     if (length > R_XLEN_T_MAX)
         error(_("vector is too large")); /**** put length into message */
@@ -1370,22 +1365,26 @@ SEXP Rf_allocVector3(SEXPTYPE type, R_xlen_t length = 1, R_allocator_t *allocato
         return new ComplexVector(length, allocator);
     }
     case STRSXP:
+    {
+#ifdef R_MEMORY_PROFILING
+        R_ReportAllocation(convert2VEC<RObject>(length) * sizeof(VECREC));
+#endif
+        return new StringVector(length);
+    }
     case EXPRSXP:
+    {
+#ifdef R_MEMORY_PROFILING
+        R_ReportAllocation(convert2VEC<RObject>(length) * sizeof(VECREC));
+#endif
+        return new ExpressionVector(length);
+    }
     case VECSXP:
     {
-        if (length <= 0)
-            size = 0;
-        else
-        {
-            if (length > (R_xlen_t)(R_SIZE_T_MAX / sizeof(SEXP)))
-                error(_("cannot allocate vector of length %d"), length);
-            size = convert2VEC<RObject>(length);
-#if VALGRIND_LEVEL > 0
-            actual_size = length * sizeof(SEXP);
+#ifdef R_MEMORY_PROFILING
+        R_ReportAllocation(convert2VEC<RObject>(length) * sizeof(VECREC));
 #endif
-        }
+        return new ListVector(length);
     }
-    break;
     case LANGSXP:
     {
         if (length == 0)
@@ -1410,75 +1409,10 @@ SEXP Rf_allocVector3(SEXPTYPE type, R_xlen_t length = 1, R_allocator_t *allocato
         Rf_error(_("invalid type/length (%s/%d) in vector allocation"), type2char(type), length);
     }
 
-    size_t bytes = size * sizeof(VECREC);
-
-    s = new RObject(type);
-    s->m_databytes = bytes;
-    s->m_allocator = (allocator != nullptr);
-	// We don't want the garbage collector trying to mark this
-	// node's children yet:
-    CXXR::VectorBase::set_stdvec_length(s, 0);
-
-    if (size >= 0) {
-	    bool success = false;
-	    if (size < (R_SIZE_T_MAX / sizeof(VECREC))) {
-            try
-            {
-                PROTECT(s);
-                s->m_data = MemoryBank::allocate(s->m_databytes, allocator);
-                UNPROTECT(1);
-                success = true;
-            }
-            catch (bad_alloc)
-            {
-                // Leave s itself to the garbage collector.
-                success = false;
-            }
-#ifdef R_MEMORY_PROFILING
-		R_ReportAllocation(bytes);
-#endif
-	    } else s = nullptr; /* suppress warning */
-	    if (!success) {
-		double dsize = (double)bytes/1024.0;
-		if(dsize > 1024.0*1024.0)
-		    errorcall(nullptr,
-			      _("cannot allocate vector of size %0.1f GB"),
-			      dsize/1024.0/1024.0);
-		if(dsize > 1024.0)
-		    errorcall(nullptr,
-			      _("cannot allocate vector of size %0.1f MB"),
-			      dsize/1024.0);
-		else
-		    errorcall(nullptr,
-			      _("cannot allocate vector of size %0.f KB"),
-			      dsize);
-	    }
-    }
-    CXXR::VectorBase::set_stdvec_length(s, length);
-    CXXR::RObject::set_altrep(s, 0);
-    CXXR::VectorBase::set_stdvec_truelength(s, 0);
+    // CXXR::VectorBase::set_stdvec_length(s, length);
+    // CXXR::RObject::set_altrep(s, 0);
+    // CXXR::VectorBase::set_stdvec_truelength(s, 0);
     // INIT_REFCNT(s);
-
-    /* The following prevents disaster in the case */
-    /* that an uninitialised string vector is marked */
-    /* Direct assignment is OK since the node was just allocated and */
-    /* so is at least as new as R_NilValue and R_BlankString */
-    if (type == EXPRSXP || type == VECSXP) {
-	SEXP *data = STRINGVECTOR_STRING_PTR(s);
-#if VALGRIND_LEVEL > 1
-	VALGRIND_MAKE_MEM_DEFINED(STRINGVECTOR_STRING_PTR(s), actual_size);
-#endif
-	for (R_xlen_t i = 0; i < length; i++)
-	    data[i] = nullptr;
-    }
-    else if(type == STRSXP) {
-	SEXP *data = STRINGVECTOR_STRING_PTR(s);
-#if VALGRIND_LEVEL > 1
-	VALGRIND_MAKE_MEM_DEFINED(STRINGVECTOR_STRING_PTR(s), actual_size);
-#endif
-	for (R_xlen_t i = 0; i < length; i++)
-	    data[i] = R_BlankString;
-    }
 
     return s;
 }
@@ -2100,7 +2034,7 @@ SEXP STRING_ELT(SEXP x, R_xlen_t i) {
     if (ALTREP(x))
 	return CHK(ALTSTRING_ELT(CHK(x), i));
     else {
-	SEXP *ps = CXXR::stdvec_dataptr<SEXP*>(CHK(x));
+	SEXP *ps = CXXR::stdvec_dataptr<SEXP>(CHK(x));
 	return CHK(ps[i]);
     }
 }
@@ -2116,7 +2050,8 @@ SEXP VECTOR_ELT(SEXP x, R_xlen_t i) {
     {
         return XVECTOR_ELT(x, i);
     }
-    return CHK(LISTVECTOR_ELT(CHK(x), i));
+    // return CHK(LISTVECTOR_ELT(CHK(x), i));
+    return CHK((*CXXR::SEXP_downcast<CXXR::ListVector *>(CHK(x)))[i]);
 }
 
 SEXP XVECTOR_ELT(SEXP x, R_xlen_t i) {
@@ -2124,7 +2059,8 @@ SEXP XVECTOR_ELT(SEXP x, R_xlen_t i) {
     if(TYPEOF(x) != EXPRSXP)
 	error(_("'%s' function can only be applied to an expression, not a '%s'"), "XVECTOR_ELT()",
 	      type2char(TYPEOF(x)));
-    return CHK(EXPRVECTOR_ELT(CHK(x), i));
+    // return CHK(EXPRVECTOR_ELT(CHK(x), i));
+    return CHK((*CXXR::SEXP_downcast<CXXR::ExpressionVector *>(CHK(x)))[i]);
 }
 
 namespace
@@ -2159,7 +2095,7 @@ void *STDVEC_DATAPTR(SEXP x)
         Rf_error(_("STDVEC_DATAPTR can only be applied to a vector, not a '%s'"),
                  Rf_type2char(TYPEOF(x)));
     CHKZLN(x);
-    return CXXR::stdvec_dataptr(x);
+    return CXXR::stdvec_dataptr<>(x);
 }
 
 int *LOGICAL(SEXP x)
@@ -2291,7 +2227,7 @@ void SET_STRING_ELT(SEXP x, R_xlen_t i, SEXP v)
         ALTSTRING_SET_ELT(x, i, v);
     else
     {
-        SEXP *ps = CXXR::stdvec_dataptr<SEXP *>(x);
+        SEXP *ps = CXXR::stdvec_dataptr<SEXP>(x);
         FIX_REFCNT(x, ps[i], v);
         ps[i] = v;
     }
@@ -2314,8 +2250,10 @@ SEXP SET_VECTOR_ELT(SEXP x, R_xlen_t i, SEXP v)
     if (i < 0 || i >= XLENGTH(x))
         Rf_error(_("attempt to set index %ld/%ld in 'SET_VECTOR_ELT()' function"), (long long)i, (long long)XLENGTH(x));
     FIX_REFCNT(x, VECTOR_ELT(x, i), v);
-    CHECK_OLD_TO_NEW(x, v);
-    LISTVECTOR_ELT(x, i) = v;
+    // CHECK_OLD_TO_NEW(x, v);
+    // LISTVECTOR_ELT(x, i) = v;
+    ListVector *lv = SEXP_downcast<ListVector *>(x);
+    (*lv)[i] = v;
     return v;
 }
 
@@ -2329,8 +2267,10 @@ SEXP SET_XVECTOR_ELT(SEXP x, R_xlen_t i, SEXP v)
     if (i < 0 || i >= XLENGTH(x))
         Rf_error(_("attempt to set index %ld/%ld in 'SET_XVECTOR_ELT()' function"), (long long)i, (long long)XLENGTH(x));
     FIX_REFCNT(x, XVECTOR_ELT(x, i), v);
-    CHECK_OLD_TO_NEW(x, v);
-    EXPRVECTOR_ELT(x, i) = v;
+    // CHECK_OLD_TO_NEW(x, v);
+    // EXPRVECTOR_ELT(x, i) = v;
+    ExpressionVector *ev = SEXP_downcast<ExpressionVector *>(x);
+    (*ev)[i] = v;
     return v;
 }
 

@@ -45,6 +45,16 @@ namespace CXXR
         const auto &STDVEC_TRUELENGTHptr = STDVEC_TRUELENGTH;
     } // namespace ForceNonInline
 
+    void VectorBase::resize(R_xlen_t new_size)
+    {
+        // if (new_size > m_size)
+        // {
+        //     Rf_error("VectorBase::resize() : requested size exceeds current size.");
+        //     return;
+        // }
+        m_size = new_size;
+    }
+
     // The error messages here match those used by CR (as of 3.0.2),
     // not including the malformed unit abbreviations.
     void VectorBase::tooBig(std::size_t bytes)

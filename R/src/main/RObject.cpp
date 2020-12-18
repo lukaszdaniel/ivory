@@ -56,8 +56,6 @@ namespace CXXR
 
     RObject::~RObject()
     {
-        if (m_data)
-            MemoryBank::deallocate(m_data, m_databytes, m_allocator);
     }
 
     void RObject::visitChildren(const_visitor *v) const
@@ -81,16 +79,6 @@ namespace CXXR
         else
             switch (m_type)
             {
-            case STRSXP:
-            case EXPRSXP:
-            case VECSXP:
-                for (R_xlen_t i = 0; i < length(); i++)
-                {
-                    const GCNode *node = ((const RObject **)(m_data))[i];
-                    if (node)
-                        node->conductVisitor(v);
-                }
-                break;
             case ENVSXP:
                 if (frame())
                     frame()->conductVisitor(v);
@@ -127,7 +115,7 @@ namespace CXXR
 
     RObject::RObject(const RObject &pattern)
         : m_type(pattern.m_type), m_scalar(pattern.m_scalar), m_has_class(pattern.m_has_class), m_alt(pattern.m_alt), m_gpbits(pattern.m_gpbits), m_debug(pattern.m_debug),
-          m_trace(pattern.m_trace), m_spare(pattern.m_spare), m_named(pattern.m_named), m_extra(pattern.m_extra), m_attrib(pattern.m_attrib), m_data(pattern.m_data), m_databytes(pattern.m_databytes), m_allocator(pattern.m_allocator)
+          m_trace(pattern.m_trace), m_spare(pattern.m_spare), m_named(pattern.m_named), m_extra(pattern.m_extra), m_attrib(pattern.m_attrib)
     {
     }
 

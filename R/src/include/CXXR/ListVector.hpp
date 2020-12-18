@@ -76,8 +76,12 @@ namespace CXXR
         ~ListVector() {}
     };
 
-#define LISTVECTOR_ELT(x, i) ((SEXP *)DATAPTR(x))[i]
-#define LISTVECTOR_PTR(x) ((SEXP *)DATAPTR(x))
+    inline RObject **LISTVECTOR_PTR(RObject *x)
+    {
+        return static_cast<RObject **>(DATAPTR(x));
+    }
+
+#define LISTVECTOR_ELT(x, i) (LISTVECTOR_PTR(x))[i]
 } // namespace CXXR
 
 extern "C"

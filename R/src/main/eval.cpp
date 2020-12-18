@@ -7092,14 +7092,14 @@ static SEXP bcEval(SEXP body, SEXP rho, bool useCache)
     OP(PRINTVALUE, 0): PrintValue(BCNPOP()); NEXT();
     OP(STARTLOOPCNTXT, 2):
 	{
-		int dummy = GETOP(); dummy++; // dummy variable so to keep the same number (2) of arguments needed by STARTLOOPCNTXT
+		SKIP_OP(); // skip dummy operand - needed to keep the same number (2) of arguments needed by STARTLOOPCNTXT
 	    SEXP code = VECTOR_ELT(constants, GETOP());
 	    loopWithContext(code, rho);
 	    NEXT();
 	}
 	OP(ENDLOOPCNTXT, 1) :
 	{
-		int dummy = GETOP(); dummy++; // dummy variable so to keep the same number (1) of arguments needed by ENDLOOPCNTXT
+		SKIP_OP(); // skip dummy operand - needed to keep the same number (1) of arguments needed by ENDLOOPCNTXT
 		retvalue = R_NilValue;
 		goto done;
 	}
@@ -7788,7 +7788,7 @@ static SEXP bcEval(SEXP body, SEXP rho, bool useCache)
     OP(ISLOGICAL, 0): DO_ISTYPE(LGLSXP);
     OP(ISINTEGER, 0): {
 	SEXP arg = GETSTACK(-1);
-	Rboolean test = (Rboolean) ((TYPEOF(arg) == INTSXP) && ! inherits(arg, "factor"));
+	bool test = ((TYPEOF(arg) == INTSXP) && ! inherits(arg, "factor"));
 	SETSTACK(-1, test ? R_TrueValue : R_FalseValue);
 	R_Visible = true;
 	NEXT();

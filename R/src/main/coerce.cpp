@@ -1055,35 +1055,19 @@ static SEXP coerceVectorList(SEXP v, SEXPTYPE type)
     rval = R_NilValue;	/* -Wall */
 
     /* expression -> list, new in R 2.4.0 */
-#if CXXR_FALSE
 	if (type == VECSXP && TYPEOF(v) == EXPRSXP)
 	{
 		/* This is sneaky but saves us rewriting a lot of the duplicate code */
 		ExpressionVector *ev = dynamic_cast<ExpressionVector *>(v);
 		return new ListVector(*ev);
 	}
-#else
-	if (type == VECSXP && TYPEOF(v) == EXPRSXP)
-	{
-		/* This is sneaky but saves us rewriting a lot of the duplicate code */
-		rval = MAYBE_REFERENCED(v) ? duplicate(v) : v;
-		SET_TYPEOF(rval, VECSXP);
-		return rval;
-	}
-#endif
-#if CXXR_FALSE
+
 	if (type == EXPRSXP && TYPEOF(v) == VECSXP)
 	{
 		GCRoot<ListVector *> lv(dynamic_cast<ListVector *>(v));
 		return new ExpressionVector(*lv);
 	}
-#else
-    if (type == EXPRSXP && TYPEOF(v) == VECSXP) {
-	rval = MAYBE_REFERENCED(v) ? duplicate(v) : v;
-	SET_TYPEOF(rval, EXPRSXP);
-	return rval;
-    }
-#endif
+
     if (type == STRSXP) {
 	n = xlength(v);
 	PROTECT(rval = allocVector(type, n));

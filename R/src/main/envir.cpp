@@ -240,7 +240,7 @@ R_INLINE static void SET_HASHPRI(SEXP x, int v)
 {
     SET_TRUELENGTH(x, v);
 }
-#define HASHCHAIN(table, i) ((SEXP *)CXXR::stdvec_dataptr(table))[i]
+#define HASHCHAIN(table, i) (CXXR::stdvec_dataptr<SEXP>(table))[i]
 
 R_INLINE static bool IS_HASHED(SEXP x)
 {

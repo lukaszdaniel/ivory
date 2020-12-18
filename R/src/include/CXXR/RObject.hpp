@@ -303,12 +303,6 @@ namespace CXXR
         RObject *m_env;
     };
 
-    struct vecsxp_struct
-    {
-        R_xlen_t m_length;
-        R_xlen_t m_truelength;
-    };
-
     /* Every node must start with a set of sxpinfo flags and an attribute
    field. Under the generational collector these are followed by the
    fields used to maintain the collector's linked list structures. */
@@ -362,27 +356,24 @@ namespace CXXR
             envsxp_struct envsxp;
             closxp_struct closxp;
             promsxp_struct promsxp;
-            vecsxp_struct vecsxp;
         } u;
 
     public:
         virtual void *data()
         {
-            return m_data;
+            return nullptr;
         }
+
         virtual const void *data() const
         {
-            return m_data;
+            return nullptr;
         }
-        void *m_data;
-        size_t m_databytes;
-        bool m_allocator;
 
         /**
          * @param stype Required type of the RObject.
          */
         explicit RObject(SEXPTYPE stype = ANYSXP) : m_type(stype), m_scalar(false), m_has_class(false), m_alt(false), m_gpbits(0), m_debug(false),
-                                                    m_trace(false), m_spare(false), m_named(0), m_extra(0), m_attrib(nullptr), m_data(nullptr), m_databytes(0), m_allocator(false)
+                                                    m_trace(false), m_spare(false), m_named(0), m_extra(0), m_attrib(nullptr)
         {
 #ifdef COMPUTE_REFCNT_VALUES
             SET_REFCNT(this, 0);
@@ -429,11 +420,6 @@ namespace CXXR
          * @return pointer to hash table of this environment.
          */
         const RObject *hashTable() const { return u.envsxp.m_hashtab; }
-
-        /**
-         * @return length of this vector.
-         */
-        R_xlen_t length() const { return u.vecsxp.m_length; }
 
         /** @brief Get an object's ::SEXPTYPE.
          *
@@ -515,13 +501,6 @@ namespace CXXR
 
         // To be protected in future:
 
-        /** Destructor
-         *
-         * @note The destructor is protected to ensure that RObjects
-         * are allocated on the heap.  (See Meyers 'More Effective
-         * C++' Item 27.) Derived classes should likewise declare
-         * their constructors private or protected.
-         */
         virtual ~RObject();
 
         static void set_attrib(RObject *x, RObject *v);

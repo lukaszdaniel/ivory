@@ -224,7 +224,7 @@ namespace CXXR
     template <typename Ptr, SEXPTYPE ST>
     void EdgeVector<Ptr, ST>::visitChildren(const_visitor *v) const
     {
-        VectorBase::visitChildren(v);
+        RObject::visitChildren(v);
         for (R_xlen_t i = 0; i < size(); ++i)
         {
             Ptr ptr = (*this)[i];

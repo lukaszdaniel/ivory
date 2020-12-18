@@ -232,7 +232,7 @@ namespace CXXR
 
 	inline const char *r_char(RObject *x)
 	{
-		return stdvec_dataptr<const char *>(x);
+		return stdvec_dataptr<const char>(x);
 	}
 } // namespace CXXR
 
@@ -246,7 +246,7 @@ extern "C"
      */
 	inline char *CHAR_RW(SEXP x)
 	{
-		return CXXR::stdvec_dataptr<char *>(x);
+		return CXXR::stdvec_dataptr<char>(x);
 	}
 
 	/**
