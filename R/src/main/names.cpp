@@ -1190,12 +1190,12 @@ HIDDEN SEXP Rf_installDDVAL(int n)
 
 static SEXP mkSymMarker(SEXP pname)
 {
-    PROTECT(pname);
-    SEXP ans = allocSExp(SYMSXP);
+    GCRoot<> ppname(pname);
+    SEXP ans = new RObject(SYMSXP);
     SET_SYMVALUE(ans, ans);
     SET_ATTRIB(ans, R_NilValue);
     SET_PRINTNAME(ans, pname);
-    UNPROTECT(1);
+
     return ans;
 }
 

@@ -2071,7 +2071,7 @@ SEXP R::R_execMethod(SEXP op, SEXP rho)
 		SET_PRENV(val, newrho);
 		/* find the symbol in the method, copy its expression
 		 * to the promise */
-		for(deflt = CAR(op); deflt != R_NilValue; deflt = CDR(deflt)) {
+		for(deflt = FORMALS(op); deflt != R_NilValue; deflt = CDR(deflt)) {
 		    if(TAG(deflt) == symbol)
 			break;
 		}

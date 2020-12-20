@@ -39,6 +39,7 @@
 #include <cctype>		/* for isspace */
 
 using namespace R;
+using namespace CXXR;
 
 /* From time to time changes in R, such as the addition of a new SXP,
  * may require changes in the save file format.  Here are some
@@ -535,10 +536,28 @@ static void RemakeNextSEXP(FILE *fp, NodeInfo &node, int version, InputRoutines 
     switch (type) {
     case LISTSXP:
     case LANGSXP:
-    case CLOSXP:
-    case PROMSXP:
-    case ENVSXP:
 	s = allocSExp(type);
+	/* skip over CAR, CDR, and TAG */
+	/* CAR(s) = */ m.InInteger(fp, d);
+	/* CDR(s) = */ m.InInteger(fp, d);
+	/* TAG(s) = */ m.InInteger(fp, d);
+	break;
+    case CLOSXP:
+	s = new RObject(CLOSXP);
+	/* skip over CAR, CDR, and TAG */
+	/* CAR(s) = */ m.InInteger(fp, d);
+	/* CDR(s) = */ m.InInteger(fp, d);
+	/* TAG(s) = */ m.InInteger(fp, d);
+	break;
+    case PROMSXP:
+	s = new RObject(PROMSXP);
+	/* skip over CAR, CDR, and TAG */
+	/* CAR(s) = */ m.InInteger(fp, d);
+	/* CDR(s) = */ m.InInteger(fp, d);
+	/* TAG(s) = */ m.InInteger(fp, d);
+	break;
+    case ENVSXP:
+	s = new RObject(ENVSXP);
 	/* skip over CAR, CDR, and TAG */
 	/* CAR(s) = */ m.InInteger(fp, d);
 	/* CDR(s) = */ m.InInteger(fp, d);
@@ -546,7 +565,7 @@ static void RemakeNextSEXP(FILE *fp, NodeInfo &node, int version, InputRoutines 
 	break;
     case SPECIALSXP:
     case BUILTINSXP:
-	s = allocSExp(type);
+	s = new RObject(type);
 	/* skip over length and name fields */
 	/* length = */ m.InInteger(fp, d);
 	R_AllocStringBuffer(MAXELTSIZE - 1, (d->buffer));
@@ -613,12 +632,24 @@ static void RestoreSEXP(SEXP s, FILE *fp, InputRoutines &m, NodeInfo &node, int 
     switch (TYPEOF(s)) {
     case LISTSXP:
     case LANGSXP:
-    case CLOSXP:
-    case PROMSXP:
-    case ENVSXP:
 	SETCAR(s, OffsetToNode(m.InInteger(fp, d), node));
 	SETCDR(s, OffsetToNode(m.InInteger(fp, d), node));
 	SET_TAG(s, OffsetToNode(m.InInteger(fp, d), node));
+	break;
+    case CLOSXP:
+	SET_FORMALS(s, OffsetToNode(m.InInteger(fp, d), node));
+	SET_BODY(s, OffsetToNode(m.InInteger(fp, d), node));
+	SET_CLOENV(s, OffsetToNode(m.InInteger(fp, d), node));
+	break;
+    case PROMSXP:
+	SET_PRVALUE(s, OffsetToNode(m.InInteger(fp, d), node));
+	SET_PRCODE(s, OffsetToNode(m.InInteger(fp, d), node));
+	SET_PRENV(s, OffsetToNode(m.InInteger(fp, d), node));
+	break;
+    case ENVSXP:
+	SET_FRAME(s, OffsetToNode(m.InInteger(fp, d), node));
+	SET_ENCLOS(s, OffsetToNode(m.InInteger(fp, d), node));
+	SET_HASHTAB(s, OffsetToNode(m.InInteger(fp, d), node));
 	break;
     case SPECIALSXP:
     case BUILTINSXP:
@@ -948,12 +979,20 @@ static void NewMakeLists(SEXP obj, SEXP sym_list, SEXP env_list)
 	/* FALLTHROUGH */
     case LISTSXP:
     case LANGSXP:
-    case CLOSXP:
-    case PROMSXP:
     case DOTSXP:
 	NewMakeLists(TAG(obj), sym_list, env_list);
 	NewMakeLists(CAR(obj), sym_list, env_list);
 	NewMakeLists(CDR(obj), sym_list, env_list);
+	break;
+    case CLOSXP:
+	NewMakeLists(CLOENV(obj), sym_list, env_list);
+	NewMakeLists(FORMALS(obj), sym_list, env_list);
+	NewMakeLists(BODY(obj), sym_list, env_list);
+	break;
+    case PROMSXP:
+	NewMakeLists(PRENV(obj), sym_list, env_list);
+	NewMakeLists(PRVALUE(obj), sym_list, env_list);
+	NewMakeLists(PRCODE(obj), sym_list, env_list);
 	break;
     case EXTPTRSXP:
 	NewMakeLists(EXTPTR_PROT(obj), sym_list, env_list);
@@ -1008,7 +1047,7 @@ static void OutCHARSXP(FILE *fp, SEXP s, OutputRoutines *m, SaveLoadData *d)
     m->OutString(fp, CHAR(s), d);
 }
 
-static void NewWriteVec (SEXP s, SEXP sym_list, SEXP env_list, FILE *fp, OutputRoutines *m, SaveLoadData *d)
+static void NewWriteVec(SEXP s, SEXP sym_list, SEXP env_list, FILE *fp, OutputRoutines *m, SaveLoadData *d)
 {
     int count;
 
@@ -1056,7 +1095,7 @@ static void NewWriteVec (SEXP s, SEXP sym_list, SEXP env_list, FILE *fp, OutputR
     }
 }
 
-static void NewWriteItem (SEXP s, SEXP sym_list, SEXP env_list, FILE *fp, OutputRoutines *m, SaveLoadData *d)
+static void NewWriteItem(SEXP s, SEXP sym_list, SEXP env_list, FILE *fp, OutputRoutines *m, SaveLoadData *d)
 {
     int i;
 
@@ -1083,13 +1122,23 @@ static void NewWriteItem (SEXP s, SEXP sym_list, SEXP env_list, FILE *fp, Output
 	    break;
 	case LISTSXP:
 	case LANGSXP:
-	case CLOSXP:
-	case PROMSXP:
 	case DOTSXP:
 	    /* Dotted pair objects */
 	    NewWriteItem(TAG(s), sym_list, env_list, fp, m, d);
 	    NewWriteItem(CAR(s), sym_list, env_list, fp, m, d);
 	    NewWriteItem(CDR(s), sym_list, env_list, fp, m, d);
+	    break;
+	case CLOSXP:
+	    /* Dotted pair objects */
+	    NewWriteItem(CLOENV(s), sym_list, env_list, fp, m, d);
+	    NewWriteItem(FORMALS(s), sym_list, env_list, fp, m, d);
+	    NewWriteItem(BODY(s), sym_list, env_list, fp, m, d);
+	    break;
+	case PROMSXP:
+	    /* Dotted pair objects */
+	    NewWriteItem(PRENV(s), sym_list, env_list, fp, m, d);
+	    NewWriteItem(PRVALUE(s), sym_list, env_list, fp, m, d);
+	    NewWriteItem(PRCODE(s), sym_list, env_list, fp, m, d);
 	    break;
 	case EXTPTRSXP:
 	    NewWriteItem(EXTPTR_PROT(s), sym_list, env_list, fp, m, d);
@@ -1136,7 +1185,7 @@ static void newdatasave_cleanup(void *data)
     cinfo->methods->OutTerm(fp, cinfo->data);
 }
 
-static void NewDataSave (SEXP s, FILE *fp, OutputRoutines *m, SaveLoadData *d)
+static void NewDataSave(SEXP s, FILE *fp, OutputRoutines *m, SaveLoadData *d)
 {
     SEXP sym_table, env_table, iterator;
     int sym_count, env_count;
@@ -1256,12 +1305,12 @@ static SEXP NewReadVec(SEXPTYPE type, SEXP sym_table, SEXP env_table, FILE *fp, 
 static SEXP NewReadItem(SEXP sym_table, SEXP env_table, FILE *fp,
 			 InputRoutines *m, SaveLoadData *d)
 {
-    int type;
+    SEXPTYPE type;
     SEXP s;
     int pos, levs, objf;
 
     R_assert(TYPEOF(sym_table) == VECSXP && TYPEOF(env_table) == VECSXP);
-    type = m->InInteger(fp, d);
+    type = SEXPTYPE(m->InInteger(fp, d));
     if ((s = NewLoadSpecialHook(type)))
 	return s;
     levs = m->InInteger(fp, d);
@@ -1277,17 +1326,29 @@ static SEXP NewReadItem(SEXP sym_table, SEXP env_table, FILE *fp,
 	break;
     case LISTSXP:
     case LANGSXP:
-    case CLOSXP:
-    case PROMSXP:
     case DOTSXP:
-	PROTECT(s = allocSExp(SEXPTYPE(type)));
+	PROTECT(s = allocSExp(type));
 	SET_TAG(s, NewReadItem(sym_table, env_table, fp, m, d));
 	SETCAR(s, NewReadItem(sym_table, env_table, fp, m, d));
 	SETCDR(s, NewReadItem(sym_table, env_table, fp, m, d));
 	/*UNPROTECT(1);*/
 	break;
+    case CLOSXP:
+	PROTECT(s = new RObject(CLOSXP));
+	SET_CLOENV(s, NewReadItem(sym_table, env_table, fp, m, d));
+	SET_FORMALS(s, NewReadItem(sym_table, env_table, fp, m, d));
+	SET_BODY(s, NewReadItem(sym_table, env_table, fp, m, d));
+	/*UNPROTECT(1);*/
+	break;
+    case PROMSXP:
+	PROTECT(s = new RObject(PROMSXP));
+	SET_PRENV(s, NewReadItem(sym_table, env_table, fp, m, d));
+	SET_PRVALUE(s, NewReadItem(sym_table, env_table, fp, m, d));
+	SET_PRCODE(s, NewReadItem(sym_table, env_table, fp, m, d));
+	/*UNPROTECT(1);*/
+	break;
     case EXTPTRSXP:
-	PROTECT(s = allocSExp(SEXPTYPE(type)));
+	PROTECT(s = new ExternalPointer());
 	R_SetExternalPtrAddr(s, nullptr);
 	R_SetExternalPtrProtected(s, NewReadItem(sym_table, env_table, fp, m, d));
 	R_SetExternalPtrTag(s, NewReadItem(sym_table, env_table, fp, m, d));
@@ -1318,7 +1379,7 @@ static SEXP NewReadItem(SEXP sym_table, SEXP env_table, FILE *fp,
     case STRSXP:
     case VECSXP:
     case EXPRSXP:
-	PROTECT(s = NewReadVec(SEXPTYPE(type), sym_table, env_table, fp, m, d));
+	PROTECT(s = NewReadVec(type, sym_table, env_table, fp, m, d));
 	break;
     case BCODESXP:
 	error(_("cannot read byte code objects from version 1 workspaces"));
@@ -1339,7 +1400,7 @@ static void newdataload_cleanup(void *data)
     cinfo->methods->InTerm(fp, cinfo->data);
 }
 
-static SEXP NewDataLoad (FILE *fp, InputRoutines *m, SaveLoadData *d)
+static SEXP NewDataLoad(FILE *fp, InputRoutines *m, SaveLoadData *d)
 {
     int sym_count, env_count, count;
     SEXP sym_table, env_table, obj;
@@ -1367,7 +1428,7 @@ static SEXP NewDataLoad (FILE *fp, InputRoutines *m, SaveLoadData *d)
     }
     /* Allocate the environments */
     for (count = 0; count < env_count; ++count)
-	SET_VECTOR_ELT(env_table, count, allocSExp(ENVSXP));
+	SET_VECTOR_ELT(env_table, count, new RObject(ENVSXP));
 
     /* Now fill them in  */
     for (count = 0; count < env_count; ++count) {

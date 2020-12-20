@@ -27,6 +27,7 @@
 
 #include <CXXR/RObject.hpp>
 #include <CXXR/Symbol.hpp>
+#include <CXXR/PairList.hpp>
 #include <R_ext/Boolean.h>
 #include <Rinternals.h>
 
@@ -87,6 +88,30 @@ namespace CXXR
                 if (hashTable())
                     hashTable()->conductVisitor(v);
                 break;
+            case CLOSXP:
+                if (u.closxp.m_formals)
+                    u.closxp.m_formals->conductVisitor(v);
+                if (u.closxp.m_body)
+                    u.closxp.m_body->conductVisitor(v);
+                if (u.closxp.m_env)
+                    u.closxp.m_env->conductVisitor(v);
+                break;
+            case PROMSXP:
+                if (u.promsxp.m_value)
+                    u.promsxp.m_value->conductVisitor(v);
+                if (u.promsxp.m_expr)
+                    u.promsxp.m_expr->conductVisitor(v);
+                if (u.promsxp.m_env)
+                    u.promsxp.m_env->conductVisitor(v);
+                break;
+            case SYMSXP:
+                if (u.symsxp.m_pname)
+                    u.symsxp.m_pname->conductVisitor(v);
+                if (u.symsxp.m_value)
+                    u.symsxp.m_value->conductVisitor(v);
+                if (u.symsxp.m_internal)
+                    u.symsxp.m_internal->conductVisitor(v);
+                break;
             case LISTSXP:
                 if (tag())
                     tag()->conductVisitor(v);
@@ -95,11 +120,8 @@ namespace CXXR
                 if (cdr())
                     cdr()->conductVisitor(v);
                 break;
-            case CLOSXP:
-            case PROMSXP:
             case LANGSXP:
             case DOTSXP:
-            case SYMSXP:
             case BCODESXP:
                 if (tag())
                     tag()->conductVisitor(v);
@@ -419,7 +441,7 @@ namespace CXXR
             if (RObject::typeof_(x) == SYMSXP)
                 MARK_NOT_MUTABLE(Symbol::symvalue(x));
             else
-                MARK_NOT_MUTABLE(RObject::car0(x));
+                MARK_NOT_MUTABLE(PairList::car0(x));
         }
         ((x))->m_gpbits |= BINDING_LOCK_MASK;
     }
@@ -437,32 +459,4 @@ namespace CXXR
             return;
         x->m_gpbits |= ACTIVE_BINDING_MASK;
     }
-
-    double RObject::bndcell_dval(RObject *x) { return x ? ((R_bndval_t *)&(x->u.listsxp.m_carval))->dval : 0; }
-
-    int RObject::bndcell_ival(RObject *x) { return x ? ((R_bndval_t *)&(x->u.listsxp.m_carval))->ival : 0; }
-
-    int RObject::bndcell_lval(RObject *x) { return x ? ((R_bndval_t *)&(x->u.listsxp.m_carval))->ival : 0; }
-
-    void RObject::set_bndcell_dval(RObject *x, double v)
-    {
-        if (!x)
-            return;
-        ((R_bndval_t *)&(x->u.listsxp.m_carval))->dval = v;
-    }
-
-    void RObject::set_bndcell_ival(RObject *x, int v)
-    {
-        if (!x)
-            return;
-        ((R_bndval_t *)&(x->u.listsxp.m_carval))->ival = v;
-    }
-
-    void RObject::set_bndcell_lval(RObject *x, int v)
-    {
-        if (!x)
-            return;
-        ((R_bndval_t *)&(x->u.listsxp.m_carval))->ival = v;
-    }
-
 } // namespace CXXR

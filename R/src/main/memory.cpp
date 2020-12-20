@@ -64,6 +64,7 @@
 #include <CXXR/ListVector.hpp>
 #include <CXXR/WeakRef.hpp>
 #include <CXXR/ExternalPointer.hpp>
+#include <CXXR/PairList.hpp>
 #include <CXXR/SEXP_downcast.hpp>
 #include <R_ext/Print.h>
 
@@ -1183,27 +1184,21 @@ void *R_realloc_gc(void *p, size_t n)
 
 SEXP Rf_allocSExp(SEXPTYPE t)
 {
-    SEXP s = new RObject(t);
-    // INIT_REFCNT(s);
-    RObject::set_car0(s, R_NilValue);
-    RObject::set_cdr(s, R_NilValue);
-    return s;
+    return new RObject(t);
 }
 
 /* cons is defined directly to avoid the need to protect its arguments
    unless a GC will actually occur. */
 SEXP Rf_cons(SEXP car, SEXP cdr)
 {
-    PROTECT(car);
-    PROTECT(cdr);
+    GCRoot<> crr(car);
+    GCRoot<> tlr(cdr);
     SEXP s = new RObject(LISTSXP);
-    UNPROTECT(2);
 
-    // INIT_REFCNT(s);
-    RObject::set_car0(s, CHK(car));
+    PairList::set_car0(s, CHK(car));
     if (car)
         INCREMENT_REFCNT(car);
-    RObject::set_cdr(s, CHK(cdr));
+    PairList::set_cdr(s, CHK(cdr));
     if (cdr)
         INCREMENT_REFCNT(cdr);
     return s;
@@ -1211,16 +1206,22 @@ SEXP Rf_cons(SEXP car, SEXP cdr)
 
 HIDDEN SEXP CONS_NR(SEXP car, SEXP cdr)
 {
-    PROTECT(car);
-    PROTECT(cdr);
+    GCRoot<> crr(car);
+    GCRoot<> tlr(cdr);
     SEXP s = new RObject(LISTSXP);
-    UNPROTECT(2);
-
-    // INIT_REFCNT(s);
     DISABLE_REFCNT(s);
-    RObject::set_car0(s, CHK(car));
-    RObject::set_cdr(s, CHK(cdr));
+    PairList::set_car0(s, CHK(car));
+    PairList::set_cdr(s, CHK(cdr));
     return s;
+}
+
+SEXP Rf_lcons(SEXP cr, SEXP tl)
+{
+    GCRoot<> crr(cr);
+    GCRoot<> tlr(tl);
+    SEXP e = Rf_cons(crr, tlr);
+    SET_TYPEOF(e, LANGSXP);
+    return e;
 }
 
 /*----------------------------------------------------------------------
@@ -1409,11 +1410,6 @@ SEXP Rf_allocVector3(SEXPTYPE type, R_xlen_t length = 1, R_allocator_t *allocato
         Rf_error(_("invalid type/length (%s/%d) in vector allocation"), type2char(type), length);
     }
 
-    // CXXR::VectorBase::set_stdvec_length(s, length);
-    // CXXR::RObject::set_altrep(s, 0);
-    // CXXR::VectorBase::set_stdvec_truelength(s, 0);
-    // INIT_REFCNT(s);
-
     return s;
 }
 
@@ -1428,8 +1424,7 @@ HIDDEN SEXP R::allocCharsxp(R_len_t length)
 
 SEXP Rf_allocList(const int n)
 {
-    SEXP result;
-    result = R_NilValue;
+    SEXP result = nullptr;
     for (int i = 0; i < n; i++)
         result = CONS(R_NilValue, result);
     return result;
@@ -2323,7 +2318,7 @@ static void CLEAR_BNDCELL_TAG(SEXP cell)
 {
     if (BNDCELL_TAG(cell))
     {
-        RObject::set_car0(cell, R_NilValue);
+        PairList::set_car0(cell, nullptr);
         SET_BNDCELL_TAG(cell, 0);
     }
 }
@@ -2391,9 +2386,9 @@ HIDDEN void R::R_args_enable_refcnt(SEXP args)
 }
 
 /* List Accessors */
-SEXP TAG(SEXP e) { return CHK(CXXR::RObject::tag(CHKCONS(e))); }
-SEXP CAR0(SEXP e) { return CHK(CXXR::RObject::car0(CHKCONS(e))); }
-SEXP CDR(SEXP e) { return CHK(CXXR::RObject::cdr(CHKCONS(e))); }
+SEXP TAG(SEXP e) { return CHK(CXXR::PairList::tag(CHKCONS(e))); }
+SEXP CAR0(SEXP e) { return CHK(CXXR::PairList::car0(CHKCONS(e))); }
+SEXP CDR(SEXP e) { return CHK(CXXR::PairList::cdr(CHKCONS(e))); }
 SEXP CAAR(SEXP e) { return CHK(CAR(CAR(CHKCONS(e)))); }
 SEXP CDAR(SEXP e) { return CHK(CDR(CAR(CHKCONS(e)))); }
 SEXP CADR(SEXP e) { return CHK(CAR(CDR(CHKCONS(e)))); }
@@ -2410,29 +2405,29 @@ int MISSING(SEXP x) { return CXXR::RObject::missing(CHKCONS(x)); }
 void SET_TAG(SEXP x, SEXP v)
 {
     if (CHKCONS(x) == nullptr || x == R_NilValue)
-        error(_("incorrect value"));
+        Rf_error(_("incorrect value"));
     FIX_REFCNT(x, TAG(x), v);
     CHECK_OLD_TO_NEW(x, v);
-    RObject::set_tag(x, v);
+    PairList::set_tag(x, v);
 }
 
 SEXP SETCAR(SEXP x, SEXP y)
 {
     if (CHKCONS(x) == nullptr || x == R_NilValue)
-        error(_("incorrect value"));
+        Rf_error(_("incorrect value"));
     CLEAR_BNDCELL_TAG(x);
     if (y == CAR(x))
         return y;
     FIX_BINDING_REFCNT(x, CAR(x), y);
     CHECK_OLD_TO_NEW(x, y);
-    RObject::set_car0(x, y);
+    PairList::set_car0(x, y);
     return y;
 }
 
 SEXP SETCDR(SEXP x, SEXP y)
 {
     if (CHKCONS(x) == nullptr || x == R_NilValue)
-        error(_("incorrect value"));
+        Rf_error(_("incorrect value"));
     FIX_REFCNT(x, CDR(x), y);
 #ifdef TESTING_WRITE_BARRIER
     /* this should not add a non-tracking CDR to a tracking cell */
@@ -2440,7 +2435,7 @@ SEXP SETCDR(SEXP x, SEXP y)
 	error(_("inserting non-tracking CDR in tracking cell"));
 #endif
     CHECK_OLD_TO_NEW(x, y);
-    RObject::set_cdr(x, y);
+    PairList::set_cdr(x, y);
     return y;
 }
 
@@ -2454,7 +2449,7 @@ SEXP SETCADR(SEXP x, SEXP y)
     CLEAR_BNDCELL_TAG(cell);
     FIX_REFCNT(cell, CAR(cell), y);
     CHECK_OLD_TO_NEW(cell, y);
-    RObject::set_car0(cell, y);
+    PairList::set_car0(cell, y);
     return y;
 }
 
@@ -2469,7 +2464,7 @@ SEXP SETCADDR(SEXP x, SEXP y)
     CLEAR_BNDCELL_TAG(cell);
     FIX_REFCNT(cell, CAR(cell), y);
     CHECK_OLD_TO_NEW(cell, y);
-    RObject::set_car0(cell, y);
+    PairList::set_car0(cell, y);
     return y;
 }
 
@@ -2485,7 +2480,7 @@ SEXP SETCADDDR(SEXP x, SEXP y)
     CLEAR_BNDCELL_TAG(cell);
     FIX_REFCNT(cell, CAR(cell), y);
     CHECK_OLD_TO_NEW(cell, y);
-    RObject::set_car0(cell, y);
+    PairList::set_car0(cell, y);
     return y;
 }
 
@@ -2503,7 +2498,7 @@ SEXP SETCAD4R(SEXP x, SEXP y)
     CLEAR_BNDCELL_TAG(cell);
     FIX_REFCNT(cell, CAR(cell), y);
     CHECK_OLD_TO_NEW(cell, y);
-    RObject::set_car0(cell, y);
+    PairList::set_car0(cell, y);
     return y;
 }
 

@@ -90,6 +90,12 @@ namespace CXXR
         // return static_cast<StringVector *const *>(DATAPTR(x));
         return static_cast<const SEXP *>(DATAPTR_RO(x));
     }
+
+    /** @brief (For debugging.)
+     *
+     * @note The name and interface of this function may well change.
+     */
+    void strdump(std::ostream &os, const StringVector &sv, size_t margin = 0);
 } // namespace CXXR
 
 extern "C"

@@ -106,6 +106,7 @@
 #include <R_ext/Callbacks.h>
 
 using namespace R;
+using namespace CXXR;
 
 #define FAST_BASE_CACHE_LOOKUP  /* Define to enable fast lookups of symbols */
 				/*    in global cache from base environment */
@@ -2441,12 +2442,12 @@ HIDDEN SEXP do_attach(SEXP call, SEXP op, SEXP args, SEXP env)
 	    for (x = CAR(args); x != R_NilValue; x = CDR(x))
 		if (TAG(x) == R_NilValue)
 		    error(_("all elements of a list must be named"));
-	    PROTECT(s = allocSExp(ENVSXP));
+	    PROTECT(s = new RObject(ENVSXP));
 	    SET_FRAME(s, shallow_duplicate(CAR(args)));
 	} else if (isEnvironment(CAR(args))) {
 	    SEXP p, loadenv = CAR(args);
 
-	    PROTECT(s = allocSExp(ENVSXP));
+	    PROTECT(s = new RObject(ENVSXP));
 	    if (HASHTAB(loadenv) != R_NilValue) {
 		int i, n;
 		n = length(HASHTAB(loadenv));
@@ -2487,7 +2488,7 @@ HIDDEN SEXP do_attach(SEXP call, SEXP op, SEXP args, SEXP env)
 	R_ObjectTable *tb = (R_ObjectTable*) R_ExternalPtrAddr(CAR(args));
 	if(tb->onAttach)
 	    tb->onAttach(tb);
-	PROTECT(s = allocSExp(ENVSXP));
+	PROTECT(s = new RObject(ENVSXP));
 	SET_HASHTAB(s, CAR(args));
 	setAttrib(s, R_ClassSymbol, getAttrib(HASHTAB(s), R_ClassSymbol));
     }

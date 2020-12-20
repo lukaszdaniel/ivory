@@ -40,6 +40,8 @@ namespace CXXR
         const auto &BODYptr = BODY;
         const auto &CLOENVptr = CLOENV;
         const auto &FORMALSptr = FORMALS;
+        const auto &MISSINGptr = MISSING;
+        const auto &SET_MISSINGptr = SET_MISSING;
         const auto &RDEBUGptr = RDEBUG;
         const auto &RSTEPptr = RSTEP;
         const auto &SET_CLOENVptr = SET_CLOENV;
@@ -150,3 +152,9 @@ namespace CXXR
         x->m_spare = v;
     }
 } // namespace CXXR
+
+extern "C"
+{
+    int MISSING(SEXP x);
+    void SET_MISSING(SEXP x, int v);
+}

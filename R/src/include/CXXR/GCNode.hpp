@@ -112,8 +112,18 @@ namespace CXXR
      *
      * <li>The node is visited by a \b GCNode::Ager object (as part of
      * write barrier enforcement).</li>
+     *
+     * <li>The (protected) method expose() is called explicitly.
      * </ul>
-     * 
+     *
+     * \par
+     * It is the responsibility of any code that creates an object of
+     * a class derived from GCNode to ensure that the object is in due
+     * course exposed to the garbage collector <em>even when
+     * exceptions occur</em>.  A very general way of ensuring this is,
+     * immediately after the object is created, to encapsulating a
+     * pointer to it in a GCRoot smart pointer.
+     *
      * @note Because this base class is used purely for housekeeping
      * by the garbage collector, and does not contribute to the
      * 'meaning' of an object of a derived class, its data members are
@@ -322,6 +332,24 @@ namespace CXXR
          */
         virtual ~GCNode();
 
+        /** @brief Make node known to the garbage collector.
+         *
+         * Makes this node known to the garbage collector (if it isn't
+         * already).
+         *
+         * @note The only circumstance in which a derived class will
+         * typically need to use this method is when an exception
+         * arises in a constructor;  if the object under construction
+         * contains 'subobjects' derived from GCNode, the constructor
+         * will need to make these known to the garbage collector
+         * before the exception propagates.
+         */
+        void expose() const
+        {
+            if (!m_prev)
+                expose_aux();
+        }
+
     public: // private:
         friend class WeakRef;
         friend class GCRootBase;
@@ -443,14 +471,6 @@ namespace CXXR
 
         // Clean up static data at end of run:
         static void cleanup();
-
-        // Make the node known to the garbage collector (if it isn't
-        // already).
-        void expose() const
-        {
-            if (!m_prev)
-                expose_aux();
-        }
 
         // Does the business for expose():
         void expose_aux() const;

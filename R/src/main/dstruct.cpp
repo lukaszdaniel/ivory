@@ -28,6 +28,7 @@
 #include <Localization.h>
 #include <Defn.h>
 
+using namespace CXXR;
 
 /**
  * @brief Create a CXXR::BuiltInFunction object
@@ -69,7 +70,7 @@ HIDDEN SEXP R::mkPRIMSXP(int offset, bool eval)
 
     if (result == R_NilValue)
     {
-        result = allocSExp(type);
+        result = new RObject(type);
         SET_PRIMOFFSET(result, offset);
         SET_VECTOR_ELT(PrimCache, offset, result);
     }
@@ -102,7 +103,7 @@ HIDDEN SEXP R::mkCLOSXP(SEXP formals, SEXP body, SEXP rho)
     PROTECT(formals);
     PROTECT(body);
     PROTECT(rho);
-    c = allocSExp(CLOSXP);
+    c = new RObject(CLOSXP);
 
 #ifdef not_used_CheckFormals
     if (isList(formals))
@@ -164,7 +165,7 @@ HIDDEN SEXP R::mkSYMSXP(SEXP name, SEXP value)
     PROTECT(name);
     PROTECT(value);
     bool i = isDDName(name);
-    SEXP c = allocSExp(SYMSXP);
+    SEXP c = new RObject(SYMSXP);
     SET_PRINTNAME(c, name);
     SET_SYMVALUE(c, value);
     SET_DDVAL(c, i);

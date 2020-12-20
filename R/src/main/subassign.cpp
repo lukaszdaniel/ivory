@@ -91,7 +91,9 @@
 #include <Internal.h>
 #include <R_ext/RS.h> /* for test of S4 objects */
 #include <R_ext/Itermacros.h>
+
 using namespace R;
+using namespace CXXR;
 
 /* The SET_STDVEC_LENGTH macro is used to modify the length of
    growable vectors. This would need to change to allow ALTREP vectors to

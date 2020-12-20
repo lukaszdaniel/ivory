@@ -30,6 +30,7 @@
 #include "localization.h"
 
 using namespace R;
+using namespace CXXR;
 
 static SEXP ParenSymbol;
 static SEXP PlusSymbol;
@@ -1231,7 +1232,7 @@ SEXP deriv(SEXP args)
 
     if (TYPEOF(funarg) == CLOSXP)
     {
-	s = allocSExp(CLOSXP);
+	s = new RObject(CLOSXP);
 	SET_FORMALS(s, FORMALS(funarg));
 	SET_CLOENV(s, CLOENV(funarg));
 	funarg = s;
@@ -1239,7 +1240,7 @@ SEXP deriv(SEXP args)
     }
     else if (isString(funarg)) {
 	PROTECT(names = duplicate(funarg));
-	PROTECT(funarg = allocSExp(CLOSXP));
+	PROTECT(funarg = new RObject(CLOSXP));
 	PROTECT(ans = allocList(length(names)));
 	SET_FORMALS(funarg, ans);
 	for(i = 0; i < length(names); i++) {

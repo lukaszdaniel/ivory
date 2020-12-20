@@ -59,6 +59,7 @@
 #include <CXXR/Closure.hpp>
 #include <CXXR/RAllocStack.hpp>
 #include <CXXR/ExternalPointer.hpp>
+#include <CXXR/PairList.hpp>
 
 /* To test the write barrier used by the generational collector,
    define TESTING_WRITE_BARRIER.  This makes the internal structure of
@@ -143,7 +144,7 @@ extern0 SEXP	R_StringHash;       /* Global hash of CHARSXPs */
 /* macros and declarations for managing CHARSXP cache */
 # define CXHEAD(x) (x)
 # define CXTAIL(x) ATTRIB(x)
-SEXP (SET_CXTAIL)(SEXP x, SEXP y);
+SEXP SET_CXTAIL(SEXP x, SEXP y);
 
 #include <Errormsg.h>
 
@@ -286,22 +287,22 @@ constexpr int MAXIDSIZE = 10000; /* Largest symbol size,                  \
 
 #else /* of USE_RINTERNALS */
 
-Rboolean (IS_ACTIVE_BINDING)(SEXP b);
-Rboolean (BINDING_IS_LOCKED)(SEXP b);
-void (SET_ACTIVE_BINDING_BIT)(SEXP b);
-void (LOCK_BINDING)(SEXP b);
-void (UNLOCK_BINDING)(SEXP b);
+Rboolean IS_ACTIVE_BINDING(SEXP b);
+Rboolean BINDING_IS_LOCKED(SEXP b);
+void SET_ACTIVE_BINDING_BIT(SEXP b);
+void LOCK_BINDING(SEXP b);
+void UNLOCK_BINDING(SEXP b);
 
-void (SET_BASE_SYM_CACHED)(SEXP b);
-void (UNSET_BASE_SYM_CACHED)(SEXP b);
-Rboolean (BASE_SYM_CACHED)(SEXP b);
+void SET_BASE_SYM_CACHED(SEXP b);
+void UNSET_BASE_SYM_CACHED(SEXP b);
+Rboolean BASE_SYM_CACHED(SEXP b);
 
-void (SET_SPECIAL_SYMBOL)(SEXP b);
-void (UNSET_SPECIAL_SYMBOL)(SEXP b);
-Rboolean (IS_SPECIAL_SYMBOL)(SEXP b);
-void (SET_NO_SPECIAL_SYMBOLS)(SEXP b);
-void (UNSET_NO_SPECIAL_SYMBOLS)(SEXP b);
-Rboolean (NO_SPECIAL_SYMBOLS)(SEXP b);
+void SET_SPECIAL_SYMBOL(SEXP b);
+void UNSET_SPECIAL_SYMBOL(SEXP b);
+Rboolean IS_SPECIAL_SYMBOL(SEXP b);
+void SET_NO_SPECIAL_SYMBOLS(SEXP b);
+void UNSET_NO_SPECIAL_SYMBOLS(SEXP b);
+Rboolean NO_SPECIAL_SYMBOLS(SEXP b);
 
 #endif /* USE_RINTERNALS */
 

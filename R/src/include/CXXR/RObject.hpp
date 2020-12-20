@@ -188,62 +188,6 @@
     } while (0)
 #endif
 
-#if (SIZEOF_SIZE_T < SIZEOF_DOUBLE)
-#define BOXED_BINDING_CELLS 1
-#else
-#define BOXED_BINDING_CELLS 0
-#endif
-#if BOXED_BINDING_CELLS
-/* Use allocated scalars to hold immediate binding values. A little
-   less efficient but does not change memory layout or use. These
-   allocated scalars must not escape their bindings. */
-#define BNDCELL_DVAL(v) SCALAR_DVAL(CAR0(v))
-#define BNDCELL_IVAL(v) SCALAR_IVAL(CAR0(v))
-#define BNDCELL_LVAL(v) SCALAR_LVAL(CAR0(v))
-
-#define SET_BNDCELL_DVAL(cell, dval) SET_SCALAR_DVAL(CAR0(cell), dval)
-#define SET_BNDCELL_IVAL(cell, ival) SET_SCALAR_IVAL(CAR0(cell), ival)
-#define SET_BNDCELL_LVAL(cell, lval) SET_SCALAR_LVAL(CAR0(cell), lval)
-
-#define INIT_BNDCELL(cell, type)             \
-    do                                       \
-    {                                        \
-        RObject *val = allocVector(type, 1); \
-        SETCAR(cell, val);                   \
-        INCREMENT_NAMED(val);                \
-        SET_BNDCELL_TAG(cell, type);         \
-        SET_MISSING(cell, 0);                \
-    } while (0)
-#else
-/* Use a union in the CAR field to represent an RObject* or an immediate
-   value.  More efficient, but changes the memory layout on 32 bit
-   platforms since the size of the union is larger than the size of a
-   pointer. The layout should not change on 64 bit platforms. */
-union R_bndval_t
-{
-    CXXR::RObject *sxpval;
-    double dval;
-    int ival;
-};
-
-#define BNDCELL_DVAL(v) (CXXR::RObject::bndcell_dval(v))
-#define BNDCELL_IVAL(v) (CXXR::RObject::bndcell_ival(v))
-#define BNDCELL_LVAL(v) (CXXR::RObject::bndcell_lval(v))
-
-#define SET_BNDCELL_DVAL(cell, dval_) (CXXR::RObject::set_bndcell_dval(cell, dval_))
-#define SET_BNDCELL_IVAL(cell, ival_) (CXXR::RObject::set_bndcell_ival(cell, ival_))
-#define SET_BNDCELL_LVAL(cell, lval_) (CXXR::RObject::set_bndcell_lval(cell, lval_))
-
-#define INIT_BNDCELL(cell, type)      \
-    do                                \
-    {                                 \
-        if (BNDCELL_TAG(cell) == 0)   \
-            SETCAR(cell, R_NilValue); \
-        SET_BNDCELL_TAG(cell, type);  \
-        SET_MISSING(cell, 0);         \
-    } while (0)
-#endif
-
 /* This is intended for use only within R itself.
  * It defines internal structures that are otherwise only accessible
  * via RObject*, and macros to replace many (but not all) of accessor functions
@@ -303,9 +247,18 @@ namespace CXXR
         RObject *m_env;
     };
 
+    /*
+    Triplet's translation table:
+    ---- LIST ----- ENV ---------- CLO ---------- PROM --------- SYM
+         (SET)CAR   (SET_)FRAME    (SET_)FORMALS  (SET_)PRVALUE  (SET_)PRINTNAME
+         (SET)CDR   (SET_)ENCLOS   (SET_)BODY     (SET_)PRCODE   (SET_)SYMVALUE
+         (SET_)TAG  (SET_)HASHTAB  (SET_)CLOENV   (SET_)PRENV    (SET_)INTERNAL
+    */
+
     /* Every node must start with a set of sxpinfo flags and an attribute
-   field. Under the generational collector these are followed by the
-   fields used to maintain the collector's linked list structures. */
+       field. Under the generational collector these are followed by the
+       fields used to maintain the collector's linked list structures.
+    */
 } // namespace CXXR
 #ifdef SWITCH_TO_REFCNT
 constexpr int REFCNTMAX = ((1 << NAMED_BITS) - 1);
@@ -407,6 +360,11 @@ namespace CXXR
         const RObject *cdr() const { return u.listsxp.m_cdrval; }
 
         /**
+         * @return pointer to tag of this list.
+         */
+        const RObject *tag() const { return u.listsxp.m_tagval; }
+
+        /**
          * @return pointer to enclosing environment.
          */
         const RObject *enclosingEnvironment() const { return u.envsxp.m_enclos; }
@@ -431,11 +389,6 @@ namespace CXXR
          * @return altrep status of this object.
          */
         bool altrep() const { return m_alt; }
-
-        /**
-         * @return pointer to tag of this list.
-         */
-        const RObject *tag() const { return u.listsxp.m_tagval; }
 
         /** @brief Set the status of this RObject as an S4 object.
          *
@@ -530,12 +483,6 @@ namespace CXXR
         static void set_assignment_pending(RObject *x, bool v);
 
         /* List Access Methods */
-        static RObject *tag(RObject *x);
-        static void set_tag(RObject *x, RObject *v);
-        static RObject *car0(RObject *x);
-        static void set_car0(RObject *x, RObject *v);
-        static RObject *cdr(RObject *x);
-        static void set_cdr(RObject *x, RObject *v);
         static constexpr int MISSING_MASK = ((1 << 4) - 1); // = 15 /* reserve 4 bits--only 2 uses now */
         static unsigned int missing(RObject *x);            /* for closure calls */
         static void set_missing(RObject *x, int v);
@@ -581,12 +528,6 @@ namespace CXXR
         static void lock_binding(RObject *x);
         static void unlock_binding(RObject *x);
         static void set_active_binding_bit(RObject *x);
-        static double bndcell_dval(RObject *x);
-        static int bndcell_ival(RObject *x);
-        static int bndcell_lval(RObject *x);
-        static void set_bndcell_dval(RObject *x, double v);
-        static void set_bndcell_ival(RObject *x, int v);
-        static void set_bndcell_lval(RObject *x, int v);
 
         /** @brief The name by which this type is known in R.
          *

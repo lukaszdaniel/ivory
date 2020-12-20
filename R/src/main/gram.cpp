@@ -3018,7 +3018,7 @@ static SEXP xxforcond(SEXP sym, SEXP expr)
     SEXP ans;
     EatLines = 1;
     if (GenerateCode)
-	PRESERVE_SV(ans = LCONS(sym, expr));
+	PRESERVE_SV(ans = lang2(sym, expr));  /* CXXR change */
     else
 	PRESERVE_SV(ans = R_NilValue);
     RELEASE_SV(expr);
@@ -3030,7 +3030,7 @@ static SEXP xxfor(SEXP forsym, SEXP forcond, SEXP body)
 {
     SEXP ans;
     if (GenerateCode)
-	PRESERVE_SV(ans = lang4(forsym, CAR(forcond), CDR(forcond), body));
+	PRESERVE_SV(ans = lang4(forsym, CAR(forcond), CADR(forcond), body));  /* CXXR change */
     else
 	PRESERVE_SV(ans = R_NilValue);
     RELEASE_SV(body);

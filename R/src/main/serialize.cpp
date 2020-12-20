@@ -44,6 +44,7 @@
 
 using namespace std;
 using namespace R;
+using namespace CXXR;
 
 /* From time to time changes in R, such as the addition of a new SXP,
  * may require changes in the save file format.  Here are some
@@ -1103,10 +1104,17 @@ static void WriteItem(SEXP s, SEXP ref_table, R_outpstream_t stream)
 	switch(TYPEOF(s)) {
 	case LISTSXP:
 	case LANGSXP:
+	case DOTSXP:
+		hastag = (TAG(s) != nullptr);
+		break;
 	case CLOSXP:
+		hastag = (CLOENV(s) != nullptr);
+		break;
 	case PROMSXP:
-	case DOTSXP: hastag = TAG(s) != R_NilValue; break;
-	default: hastag = FALSE;
+		hastag = (PRENV(s) != nullptr);
+		break;
+	default:
+		hastag = FALSE;
 	}
 	/* With the CHARSXP cache chains maintained through the ATTRIB
 	   field the content of that field must not be serialized, so
@@ -1118,22 +1126,48 @@ static void WriteItem(SEXP s, SEXP ref_table, R_outpstream_t stream)
 	switch (TYPEOF(s)) {
 	case LISTSXP:
 	case LANGSXP:
-	case CLOSXP:
-	case PROMSXP:
 	case DOTSXP:
-	    /* Dotted pair objects */
-	    /* These write their ATTRIB fields first to allow us to avoid
+		/* Dotted pair objects */
+		/* These write their ATTRIB fields first to allow us to avoid
 	       recursion on the CDR */
-	    if (hasattr)
-		WriteItem(ATTRIB(s), ref_table, stream);
-	    if (TAG(s) != R_NilValue)
-		WriteItem(TAG(s), ref_table, stream);
-	    if (BNDCELL_TAG(s))
-		R_expand_binding_value(s);
-	    WriteItem(CAR(s), ref_table, stream);
-	    /* now do a tail call to WriteItem to handle the CDR */
-	    s = CDR(s);
-	    goto tailcall;
+		if (hasattr)
+			WriteItem(ATTRIB(s), ref_table, stream);
+		if (TAG(s) != R_NilValue)
+			WriteItem(TAG(s), ref_table, stream);
+		if (BNDCELL_TAG(s))
+			R_expand_binding_value(s);
+		WriteItem(CAR(s), ref_table, stream);
+		/* now do a tail call to WriteItem to handle the CDR */
+		s = CDR(s);
+		goto tailcall;
+	case CLOSXP:
+		/* Dotted pair objects */
+		/* These write their ATTRIB fields first to allow us to avoid
+	       recursion on the CDR */
+		if (hasattr)
+			WriteItem(ATTRIB(s), ref_table, stream);
+		if (CLOENV(s) != R_NilValue)
+			WriteItem(CLOENV(s), ref_table, stream);
+		if (BNDCELL_TAG(s))
+			R_expand_binding_value(s);
+		WriteItem(FORMALS(s), ref_table, stream);
+		/* now do a tail call to WriteItem to handle the CDR */
+		s = BODY(s);
+		goto tailcall;
+	case PROMSXP:
+		/* Dotted pair objects */
+		/* These write their ATTRIB fields first to allow us to avoid
+	       recursion on the CDR */
+		if (hasattr)
+			WriteItem(ATTRIB(s), ref_table, stream);
+		if (PRENV(s) != R_NilValue)
+			WriteItem(PRENV(s), ref_table, stream);
+		if (BNDCELL_TAG(s))
+			R_expand_binding_value(s);
+		WriteItem(PRVALUE(s), ref_table, stream);
+		/* now do a tail call to WriteItem to handle the CDR */
+		s = PRCODE(s);
+		goto tailcall;
 	case EXTPTRSXP:
 	    /* external pointers */
 	    HashAdd(s, ref_table);
@@ -1819,7 +1853,7 @@ static SEXP ReadItem(SEXP ref_table, R_inpstream_t stream)
 	{
 	    int locked = InInteger(stream);
 
-	    PROTECT(s = allocSExp(ENVSXP));
+	    PROTECT(s = new RObject(ENVSXP));
 
 	    /* MUST register before filling in */
 	    AddReadRef(ref_table, s);
@@ -1845,10 +1879,9 @@ static SEXP ReadItem(SEXP ref_table, R_inpstream_t stream)
 	}
     case LISTSXP:
     case LANGSXP:
-    case CLOSXP:
-    case PROMSXP:
     case DOTSXP:
-	{ /* This handling of dotted pair objects still uses recursion
+	{
+	  /* This handling of dotted pair objects still uses recursion
 	   on the CDR and so will overflow the PROTECT stack for long
 	   lists.  The save format does permit using an iterative
 	   approach; it just has to pass around the place to write the
@@ -1877,10 +1910,67 @@ static SEXP ReadItem(SEXP ref_table, R_inpstream_t stream)
 		SETCAR(s, ReadItem(ref_table, stream));
 		R_ReadItemDepth--; /* do this early because of the recursion. */
 		SETCDR(s, ReadItem(ref_table, stream));
+		if (set_lastname)
+			strcpy(lastname, "<unknown>");
+		UNPROTECT(1); /* s */
+		return s;
+	}
+    case CLOSXP:
+	{
+		PROTECT(s = new RObject(CLOSXP));
+		SETLEVELS(s, levs);
+		SET_OBJECT(s, objf);
+		R_ReadItemDepth++;
+		Rboolean set_lastname = (Rboolean) FALSE;
+		SET_ATTRIB(s, hasattr ? ReadItem(ref_table, stream) : R_NilValue);
+		SET_CLOENV(s, hastag ? ReadItem(ref_table, stream) : R_NilValue);
+		if (hastag && R_ReadItemDepth == R_InitReadItemDepth + 1 &&
+			isSymbol(CLOENV(s)))
+		{
+			snprintf(lastname, 8192, "%s", CHAR(PRINTNAME(CLOENV(s))));
+			set_lastname = (Rboolean) TRUE;
+		}
+		if (hastag && R_ReadItemDepth <= 0)
+		{
+			Rprintf("%*s", 2 * (R_ReadItemDepth - R_InitReadItemDepth), "");
+			PrintValue(CLOENV(s));
+		}
+		SET_FORMALS(s, ReadItem(ref_table, stream));
+		R_ReadItemDepth--; /* do this early because of the recursion. */
+		SET_BODY(s, ReadItem(ref_table, stream));
 		/* For reading closures and promises stored in earlier versions, convert NULL env to baseenv() */
-		if (type == CLOSXP && CLOENV(s) == R_NilValue)
+		if (CLOENV(s) == R_NilValue)
 			SET_CLOENV(s, R_BaseEnv);
-		else if (type == PROMSXP && PRENV(s) == R_NilValue)
+		if (set_lastname)
+			strcpy(lastname, "<unknown>");
+		UNPROTECT(1); /* s */
+		return s;
+	}
+    case PROMSXP:
+	{
+		PROTECT(s = new RObject(PROMSXP));
+		SETLEVELS(s, levs);
+		SET_OBJECT(s, objf);
+		R_ReadItemDepth++;
+		Rboolean set_lastname = (Rboolean) FALSE;
+		SET_ATTRIB(s, hasattr ? ReadItem(ref_table, stream) : R_NilValue);
+		SET_PRENV(s, hastag ? ReadItem(ref_table, stream) : R_NilValue);
+		if (hastag && R_ReadItemDepth == R_InitReadItemDepth + 1 &&
+			isSymbol(PRENV(s)))
+		{
+			snprintf(lastname, 8192, "%s", CHAR(PRINTNAME(PRENV(s))));
+			set_lastname = (Rboolean) TRUE;
+		}
+		if (hastag && R_ReadItemDepth <= 0)
+		{
+			Rprintf("%*s", 2 * (R_ReadItemDepth - R_InitReadItemDepth), "");
+			PrintValue(PRENV(s));
+		}
+		SET_PRVALUE(s, ReadItem(ref_table, stream));
+		R_ReadItemDepth--; /* do this early because of the recursion. */
+		SET_PRCODE(s, ReadItem(ref_table, stream));
+		/* For reading closures and promises stored in earlier versions, convert NULL env to baseenv() */
+		if (PRENV(s) == R_NilValue)
 			SET_PRENV(s, R_BaseEnv);
 		if (set_lastname)
 			strcpy(lastname, "<unknown>");

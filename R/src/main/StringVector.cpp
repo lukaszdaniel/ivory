@@ -31,6 +31,7 @@
 
 #include <CXXR/StringVector.hpp>
 #include <Rinternals.h>
+#include <iostream>
 
 namespace CXXR
 {
@@ -43,3 +44,23 @@ namespace CXXR
         const auto &STRING_ELTptr = STRING_ELT;
     } // namespace ForceNonInline
 } // namespace CXXR
+
+namespace
+{
+    void indent(std::ostream &os, size_t margin)
+    {
+        while (margin--)
+            os << " ";
+    }
+} // namespace
+
+void CXXR::strdump(std::ostream &os, const StringVector &sv, size_t margin)
+{
+    indent(os, margin);
+    os << "character:\n";
+    for (R_xlen_t i = 0; i < sv.size(); ++i)
+    {
+        indent(os, margin + 2);
+        os << sv[i]->c_str() << "\n";
+    }
+}
