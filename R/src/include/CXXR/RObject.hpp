@@ -379,6 +379,51 @@ namespace CXXR
          */
         const RObject *hashTable() const { return u.envsxp.m_hashtab; }
 
+        /**
+         * @return pointer to formals of this closure.
+         */
+        const RObject *formals() const { return u.closxp.m_formals; }
+
+        /**
+         * @return pointer to the body of this closure.
+         */
+        const RObject *body() const { return u.closxp.m_body; }
+
+        /**
+         * @return pointer to enclosing environment.
+         */
+        const RObject *closureEnvironment() const { return u.closxp.m_env; }
+
+        /**
+         * @return pointer to the value of this promise.
+         */
+        const RObject *promiseValue() const { return u.promsxp.m_value; }
+
+        /**
+         * @return pointer to expression of this promise.
+         */
+        const RObject *promiseExpression() const { return u.promsxp.m_expr; }
+
+        /**
+         * @return pointer to enclosing environment.
+         */
+        const RObject *promiseEnvironment() const { return u.promsxp.m_env; }
+
+        /**
+         * @return pointer to the name of this symbol.
+         */
+        const RObject *symbolName() const { return u.symsxp.m_pname; }
+
+        /**
+         * @return pointer to the value of this symbol.
+         */
+        const RObject *symbolValue() const { return u.symsxp.m_value; }
+
+        /**
+         * @return pointer to internal.
+         */
+        const RObject *symbolInternal() const { return u.symsxp.m_internal; }
+
         /** @brief Get an object's ::SEXPTYPE.
          *
          * @return ::SEXPTYPE of this object.

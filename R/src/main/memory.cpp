@@ -1184,6 +1184,16 @@ void *R_realloc_gc(void *p, size_t n)
 
 SEXP Rf_allocSExp(SEXPTYPE t)
 {
+    switch (t)
+    {
+    case LISTSXP:
+    case LANGSXP:
+    case DOTSXP:
+    case BCODESXP:
+        break;
+    default:
+        Rf_error("Inappropriate SEXPTYPE for PairList.");
+    }
     return new RObject(t);
 }
 
@@ -1388,8 +1398,6 @@ SEXP Rf_allocVector3(SEXPTYPE type, R_xlen_t length = 1, R_allocator_t *allocato
     }
     case LANGSXP:
     {
-        if (length == 0)
-            return nullptr;
 #ifdef LONG_VECTOR_SUPPORT
         if (length > R_SHORT_LEN_MAX)
             error(_("invalid length for pairlist"));
@@ -1424,9 +1432,12 @@ HIDDEN SEXP R::allocCharsxp(R_len_t length)
 
 SEXP Rf_allocList(const int n)
 {
+    if (n == 0)
+        return nullptr;
+
     SEXP result = nullptr;
     for (int i = 0; i < n; i++)
-        result = CONS(R_NilValue, result);
+        result = Rf_cons(R_NilValue, result);
     return result;
 }
 
@@ -1439,7 +1450,7 @@ static SEXP allocFormalsList(const int nargs, ...)
 
     for (int i = 0; i < nargs; i++)
     {
-        res = CONS(R_NilValue, res);
+        res = Rf_cons(R_NilValue, res);
     }
     R_PreserveObject(res);
 

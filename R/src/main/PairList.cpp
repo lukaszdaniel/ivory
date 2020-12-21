@@ -207,26 +207,10 @@ void PairList::visitChildren(const_visitor *v) const
     do
     {
         p->RObject::visitChildren(v);
-        if (p->altrep())
-        {
-            if (p->m_tag)
-                p->m_tag->conductVisitor(v);
-            if (RObject::bndcell_tag(p))
-            {
-                Rf_error("bad binding access");
-            }
-            if (p->m_car)
-                p->m_car->conductVisitor(v);
-            if (p->m_tail)
-                p->m_tail->conductVisitor(v);
-        }
-        else
-        {
-            if ((p->sexptype() != LISTSXP || BOXED_BINDING_CELLS || RObject::bndcell_tag(p) == 0) && p->m_car)
-                p->m_car->conductVisitor(v);
-            if (p->m_tag)
-                p->m_tag->conductVisitor(v);
-        }
+        if ((p->sexptype() != LISTSXP || BOXED_BINDING_CELLS || RObject::bndcell_tag(p) == 0) && p->m_car)
+            p->m_car->conductVisitor(v);
+        if (p->m_tag)
+            p->m_tag->conductVisitor(v);
         p = p->m_tail;
     } while (p && (*v)(p));
 }

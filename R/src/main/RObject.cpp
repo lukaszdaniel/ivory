@@ -66,12 +66,12 @@ namespace CXXR
 
         if (m_alt)
         {
-            if (tag())
-                tag()->conductVisitor(v);
             if (RObject::bndcell_tag(this))
             {
                 Rf_error("bad binding access");
             }
+            if (tag())
+                tag()->conductVisitor(v);
             if (car())
                 car()->conductVisitor(v);
             if (cdr())
@@ -89,43 +89,36 @@ namespace CXXR
                     hashTable()->conductVisitor(v);
                 break;
             case CLOSXP:
-                if (u.closxp.m_formals)
-                    u.closxp.m_formals->conductVisitor(v);
-                if (u.closxp.m_body)
-                    u.closxp.m_body->conductVisitor(v);
-                if (u.closxp.m_env)
-                    u.closxp.m_env->conductVisitor(v);
+                if (formals())
+                    formals()->conductVisitor(v);
+                if (body())
+                    body()->conductVisitor(v);
+                if (closureEnvironment())
+                    closureEnvironment()->conductVisitor(v);
                 break;
             case PROMSXP:
-                if (u.promsxp.m_value)
-                    u.promsxp.m_value->conductVisitor(v);
-                if (u.promsxp.m_expr)
-                    u.promsxp.m_expr->conductVisitor(v);
-                if (u.promsxp.m_env)
-                    u.promsxp.m_env->conductVisitor(v);
+                if (promiseValue())
+                    promiseValue()->conductVisitor(v);
+                if (promiseExpression())
+                    promiseExpression()->conductVisitor(v);
+                if (promiseEnvironment())
+                    promiseEnvironment()->conductVisitor(v);
                 break;
             case SYMSXP:
-                if (u.symsxp.m_pname)
-                    u.symsxp.m_pname->conductVisitor(v);
-                if (u.symsxp.m_value)
-                    u.symsxp.m_value->conductVisitor(v);
-                if (u.symsxp.m_internal)
-                    u.symsxp.m_internal->conductVisitor(v);
+                if (symbolName())
+                    symbolName()->conductVisitor(v);
+                if (symbolValue())
+                    symbolValue()->conductVisitor(v);
+                if (symbolInternal())
+                    symbolInternal()->conductVisitor(v);
                 break;
             case LISTSXP:
-                if (tag())
-                    tag()->conductVisitor(v);
-                if ((BOXED_BINDING_CELLS || RObject::bndcell_tag(this) == 0) && car())
-                    car()->conductVisitor(v);
-                if (cdr())
-                    cdr()->conductVisitor(v);
-                break;
             case LANGSXP:
             case DOTSXP:
             case BCODESXP:
                 if (tag())
                     tag()->conductVisitor(v);
-                if (car())
+                if ((sexptype() != LISTSXP || BOXED_BINDING_CELLS || RObject::bndcell_tag(this) == 0) && car())
                     car()->conductVisitor(v);
                 if (cdr())
                     cdr()->conductVisitor(v);
