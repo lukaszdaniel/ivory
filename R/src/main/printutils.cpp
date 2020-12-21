@@ -74,7 +74,11 @@ using namespace std;
 using namespace R;
 using namespace CXXR;
 
-#if !defined(__STDC_ISO_10646__) && (defined(__APPLE__) || defined(__FreeBSD__))
+/* At times we want to convert marked UTF-8 strings to wchar_t*. We
+ * can use our facilities to do so in a UTF-8 locale or system
+ * facilities if the platform tells us that wchar_t is UCS-4 or we
+ * know that about the platform. */
+#if !defined(__STDC_ISO_10646__) && (defined(__APPLE__) || defined(__FreeBSD__) || defined(__sun))
 /* This may not be 100% true (see the comment in rlocales.h),
    but it seems true in normal locales */
 #define __STDC_ISO_10646__
@@ -445,12 +449,13 @@ int Rstrwid(const char *str, int slen, cetype_t ienc, int quote)
 		    }
 		    p++;
 		} else {
+		    // conceivably an invalid \U escape could use 11 or 12
 		    len += iswprint((wint_t)k) ? Ri18n_wcwidth(wc) :
 		    	(k > 0xffff ? 10 : 6);
 		    i += (res - 1);
 		    p += res;
 		}
-	    } else {
+	    } else { /* invalid char */
 		len += 4;
 		p++;
 	    }
@@ -525,7 +530,7 @@ HIDDEN
 const char *R::EncodeString(SEXP s, int w, int quote, Rprt_adj justify)
 {
     int b, b0, i, j, cnt;
-    const char *p; char *q, buf[11];
+    const char *p; char *q, buf[13];
     cetype_t ienc = getCharCE(s);
     Rboolean useUTF8 = (Rboolean) (w < 0);
     const void *vmax = vmaxget();
@@ -694,14 +699,19 @@ const char *R::EncodeString(SEXP s, int w, int quote, Rprt_adj justify)
 			/* The problem here is that wc may be
 			   printable according to the Unicode tables,
 			   but it may not be printable on the output
-			   device concerned. */
+			   device concerned.
+
+			   And the system iswprintf may not correspond
+			   to the latest Unicode tables.
+			*/
 			for(j = 0; j < res; j++) *q++ = *p++;
 		    } else {
 # if !defined (__STDC_ISO_10646__) && !defined (Win32)
-			Unicode_warning = TRUE;
+			if(!use_ucs) Unicode_warning = TRUE;
 # endif
 			if(k > 0xffff)
-			    snprintf(buf, 11, "\\U%08x", k);
+			    // This could conceivably use >6 hex digits
+			    snprintf(buf, 13, "\\U{%06x}", k);
 			else
 			    snprintf(buf, 11, "\\u%04x", k);
 			j = (int) strlen(buf);
@@ -717,11 +727,8 @@ const char *R::EncodeString(SEXP s, int w, int quote, Rprt_adj justify)
 	    }
 	}
 #ifndef __STDC_ISO_10646__
-// We know Solaris conforms even if the system headers do not define it.
-# ifndef __sun
 	if(Unicode_warning)
 	    warning(_("it is not known that wchar_t is Unicode on this platform"));
-# endif
 #endif
 
     } else

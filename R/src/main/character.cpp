@@ -76,6 +76,12 @@ abbreviate chartr make.names strtrim tolower toupper give error.
 
 #define R_NO_REMAP
 
+/* Used to indicate that we can safely converted marked UTF-8 strings
+ * to wchar_t* */
+#if defined(Win32) || defined(__STDC_ISO_10646__) || defined(__APPLE__) || defined(__FreeBSD__) || defined(__sun)
+#define TO_WCS_OK
+#endif
+
 #include <Defn.h>
 #include <Localization.h>
 #include <Internal.h>
@@ -999,7 +1005,7 @@ HIDDEN SEXP do_tolower(SEXP call, SEXP op, SEXP args, SEXP env)
     if (!isString(x)) error(_("non-character argument"));
     n = XLENGTH(x);
     PROTECT(y = allocVector(STRSXP, n));
-#if defined(_WIN32) || defined(__STDC_ISO_10646__) || defined(__APPLE__) || defined(__FreeBSD__)
+#ifdef TO_WCS_OK
     /* utf8towcs is really to UCS-4/2 */
     for (i = 0; i < n; i++)
 	if (getCharCE(STRING_ELT(x, i)) == CE_UTF8) use_UTF8 = TRUE;
@@ -1362,8 +1368,8 @@ HIDDEN SEXP do_chartr(SEXP call, SEXP op, SEXP args, SEXP env)
 	warning(_("argument '%s' has length > 1 and only the first element will be used"), "new");
     if (!isString(x)) error(_("invalid '%s' argument"), "x");
 
+#ifdef TO_WCS_OK
     /* utf8towcs is really to UCS-4/2 */
-#if defined(_WIN32) || defined(__STDC_ISO_10646__) || defined(__APPLE__)  || defined(__FreeBSD__)
     for (i = 0; i < n; i++)
 	if (getCharCE(STRING_ELT(x, i)) == CE_UTF8) use_UTF8 = TRUE;
 

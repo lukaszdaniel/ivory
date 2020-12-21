@@ -1480,6 +1480,18 @@ Initialize.corCompSymm <-
   object
 }
 
+print.corCompSymm <- function(x, ...)
+{
+  if (length(as.vector(x)) > 0 && !is.null(attr(x, "inf"))) {
+    NextMethod()
+  } else {
+    cat(gettext("Uninitialized correlation structure of class corCompSymm\n", doman = "R-nlme"))
+    invisible(x)
+  }
+}
+
+print.summary.corCompSymm <- print.corCompSymm
+
 recalc.corCompSymm <-
   function(object, conLin, ...)
 {
@@ -1499,7 +1511,9 @@ recalc.corCompSymm <-
 summary.corCompSymm <-
   function(object, structName = gettext("Compound symmetry", domain = "R-nlme"), ...)
 {
-  summary.corStruct(object, structName)
+  object <- summary.corStruct(object, structName)
+  class(object) <- c("summary.corCompSymm", class(object))
+  object
 }
 
 ####*# corHF - Huyn-Feldt structure

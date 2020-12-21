@@ -1,6 +1,6 @@
 ###            Fit a general linear mixed effects model
 ###
-### Copyright 2005-2019  The R Core team
+### Copyright 2005-2020  The R Core team
 ### Copyright 1997-2003  Jose C. Pinheiro,
 ###                      Douglas M. Bates <bates@stat.wisc.edu>
 ###
@@ -2091,7 +2091,7 @@ print.lme <- function(x, ...)
   cat(gettext("  Fixed: ", domain = "R-nlme"),
       deparse(
 	if(inherits(fixF, "formula") || is.call(fixF) || is.name(fixF))
-	  x$call$fixed
+	  fixF
 	else
 	  lapply(fixF, function(el) as.name(deparse(el)))), "\n")
   print(fixef(x), ...)
@@ -2147,22 +2147,23 @@ print.summary.lme <- function(x, verbose = FALSE, ...)
     }
   }
   ##  method <- x$method
-  cat(gettext(" Data: ", domain = "R-nlme"), deparse( x$call$data ), "\n", sep = "")
+  cat(gettext("  Data: ", domain = "R-nlme"), deparse( x$call$data ), "\n", sep = "")
   if (!is.null(x$call$subset)) {
     cat(gettext("  Subset: ", domain = "R-nlme"), deparse(asOneSidedFormula(x$call$subset)[[2L]]), "\n", sep = "")
   }
   print(data.frame(AIC = x$AIC, BIC = x$BIC, logLik = c(x$logLik), row.names = " "), ...)
-  if (verbose) { cat(gettext("Convergence at iteration: ", domain = "R-nlme"), x$numIter, "\n", sep = "") }
+  if (verbose) cat(gettext("Convergence at iteration: ", domain = "R-nlme"), x$numIter, "\n", sep = "")
   cat("\n")
   print(summary(x$modelStruct), sigma = x$sigma,
         reEstimates = x$coef$random, verbose = verbose, ...)
-  cat(gettext("Fixed effects: ", domain = "R-nlme"))
   fixF <- x$call$fixed
-  if (inherits(fixF, "formula") || is.call(fixF)) {
-    cat(deparse(x$call$fixed), "\n", sep = "")
-  } else {
-    cat(deparse(lapply(fixF, function(el) as.name(deparse(el)))), "\n")
-  }
+  cat(gettext("Fixed effects: ", domain = "R-nlme"),
+      deparse(
+        if(inherits(fixF, "formula") || is.call(fixF))
+          fixF
+        else
+          lapply(fixF, function(el) as.name(deparse(el)))),
+      "\n", sep = "")
   ## fixed effects t-table and correlations
   xtTab <- as.data.frame(x$tTable)
   wchPval <- match("p-value", names(xtTab))

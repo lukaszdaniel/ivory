@@ -1,4 +1,4 @@
-b0149b802b5f93f94b34ed9770591f7e *NAMESPACE
+5dbfd4ca66a403bb28805119321d91fe *NAMESPACE
 5f06972eb22dfccd71057d67654f4eed *man/pdNatural.Rd
 d6c724bdb3eacb6c69918bc22d4e2f53 *man/getCovariate.data.frame.Rd
 13741091d4011b2d7be72cacfd6737ce *man/varIdent.Rd
@@ -29,6 +29,7 @@ e5223021d4ef963c2e0e0bd8b2b56ebb *man/coef.pdMat.Rd
 767924880a39f5f42e17d5ab419d9d85 *man/Covariate.Rd
 bf2d3cfeba6f7b2dbbb38da5dee13bff *man/collapse.Rd
 4870feebe7b61f4a5d3bbddb0d6786ee *man/Variogram.corSpatial.Rd
+a56851baa939adc7ae87656d138e78e1 *man/varConstProp.Rd
 30311327dee2255284dcaf920e7ec687 *man/recalc.Rd
 eb27e04e3e0bc7f14bf1a55d987c5ed3 *man/logLik.gnls.Rd
 e27e73db4fd3b6818e2a48ef04582e45 *man/Initialize.glsStruct.Rd
@@ -45,7 +46,7 @@ dd1fd42b2801e78eb9ba1fa11326ebe5 *man/nlmeStruct.Rd
 530dc14d9df00efe7bff45130f72ab23 *man/pairs.lmList.Rd
 bddd6554150a0fb58d9a3f6292e6e161 *man/residuals.lmList.Rd
 b015ee9aaf0f2b1b7ace91f735793f05 *man/asOneFormula.Rd
-6fcdb2fc0d882a285d12ec209675f4fb *man/Initialize.varFunc.Rd
+a1457edef10ec2087d904cb2f522cac0 *man/Initialize.varFunc.Rd
 a2f66466b56f892f9585627f17ff229e *man/pdBlocked.Rd
 9ad92c3f583b940866eaad8fbfa14549 *man/corMatrix.corStruct.Rd
 04f98816fa09bf9b31c2e616fe258f12 *man/random.effects.Rd
@@ -85,7 +86,7 @@ b87b469b48e1d1e3f61d2facbd0b973d *man/residuals.lme.Rd
 6e762e25a29d49c66cb9f86386d3b7c8 *man/ACF.gls.Rd
 55dec363e1a39915184fea67b745cddc *man/fitted.lme.Rd
 73f329bdd6e26ec82028104be3cde970 *man/fitted.gnlsStruct.Rd
-0b08d4906ec59a4d007980b4a02a3bfb *man/varClasses.Rd
+ad19da38df56a1745be0c3aeab1f37fa *man/varClasses.Rd
 72faf3c9623f1ea10d1aaf08036a2cc9 *man/lme.lmList.Rd
 0a183f1abced3b6e2e27fac21706dfff *man/logDet.Rd
 4a2e34fa8aed0c6d04be6269d15b24a8 *man/pdSymm.Rd
@@ -93,7 +94,7 @@ b87b469b48e1d1e3f61d2facbd0b973d *man/residuals.lme.Rd
 7836c68f3dc446bddb4f2b7aa138872b *man/Dim.corSpatial.Rd
 8eb7a6cf9302bbcbaec81cfddda978a6 *man/Names.formula.Rd
 f1d54fd06f9de3382de88bad5d47b10e *man/fitted.lmeStruct.Rd
-aceb407ac91f2d97c9dc9b274b636506 *man/coef.varFunc.Rd
+a59b202e7637e57a511e58b5ee05d99a *man/coef.varFunc.Rd
 99b53109238f2bba2365191a68a0a251 *man/gapply.Rd
 d650aace7475c64096f490cdff42f9d7 *man/coef.gnls.Rd
 236a68a050c7d6d1bfbbe09b14454973 *man/corFactor.Rd
@@ -150,7 +151,7 @@ a718222d2e3c6ee50b3622380f74cd40 *man/coef.modelStruct.Rd
 deb3a9c9c02c7828e4d02f9ae970fca5 *man/residuals.nlmeStruct.Rd
 972006af5df348873567b608f8d77689 *man/qqnorm.gls.Rd
 6d2e3289690dc40de6ca67a2a5169e27 *man/predict.gls.Rd
-7b8413fc94c6fc41bb481ff0c1bbbbb8 *man/corCompSymm.Rd
+13e6154a01eac923127fd0e3d710d268 *man/corCompSymm.Rd
 6ac3888e9938d2e2bfdb0cb0729783ce *man/comparePred.Rd
 3230bcef111d815fc75bcd2b3205e0b1 *man/logLik.reStruct.Rd
 c0a263b2c59738dab3b4c196c8d797a6 *man/varFunc.Rd
@@ -207,7 +208,7 @@ c2975c5117961c5844804db3043dc911 *man/MathAchieve.Rd
 a4b79221d0b90322544a15d84aefb75f *man/fitted.nlmeStruct.Rd
 8fa7e2679c0096450808e7c1c605a037 *man/getResponseFormula.Rd
 d20850fd0b7480e603e3e77dcf62e49a *man/getGroups.data.frame.Rd
-dc38904f1e4952f38d9181c01be8e607 *man/summary.varFunc.Rd
+1803ce4dd37e5310e2bb7c03af23f14c *man/summary.varFunc.Rd
 d06030a80389318a197a400d95c84bac *man/corSpatial.Rd
 e829fde20237430d7eb7a11e0ce19305 *man/nlmeObject.Rd
 406454f5d85d2d658a4ac4cb6822ff05 *man/Initialize.corStruct.Rd
@@ -248,7 +249,7 @@ e4025869be76a7a91f5ee6009c0a191d *man/MathAchSchool.Rd
 56ff35f77389d33e7dfabdf2fedcbb89 *man/getData.Rd
 7799a8aafc9e4d25878beec1d08c9a50 *man/pdIdent.Rd
 35a9eacfe11252e14f8069e9b2aa4aab *man/gnls.Rd
-fe93e070119eaec29a86dde2df59ae71 *man/update.varFunc.Rd
+8113cd9978a39dea1a29d5c4a2f6b589 *man/update.varFunc.Rd
 222b482c4d6d320c4ff69edddb1c7a4d *man/as.matrix.pdMat.Rd
 3cb4792ead6504d766d2715f90c472ee *man/Machines.Rd
 ed75dae79409e98c064649641f82d875 *man/reStruct.Rd
@@ -284,8 +285,8 @@ b8bf3369965838b2dde2f82e6d8b9ba8 *man/predict.lmList.Rd
 6f56c20d173a1f99128799c5eda51873 *man/gls.Rd
 90931caface7ab83c19fba204c7ac818 *man/varComb.Rd
 967bf0c65e5a3f8c94efb6186482ade1 *LICENCE
-9fe6c13fff236184220bc1fe82c97507 *ChangeLog
-ab7fd156f911f5b40fe1c97c1475a18c *DESCRIPTION
+8c3dfb39d06c34b19f3eaa29f03da39b *ChangeLog
+15535eece5a5f8ecbec903a950adcc21 *DESCRIPTION
 3ca8715986b6bea70610e4cadb339fb0 *po/R-fr.po
 e3419ef4249ee866f3bcc092a096746e *po/R-ko.po
 c9c286a5731db93724b9f0e7b259f702 *po/R-de.po
@@ -326,6 +327,7 @@ acbc43cefb4e2ab33d47609e745d6311 *tests/lmList.R
 c338794f58a889a3c552fdfbb9c62374 *tests/augPred_lab.R
 2e2ed18cde1ff6fdf0cd284d8073ed19 *tests/sigma-fixed-etc.R
 5d84af6fb453785dcb1d39674321dbaf *tests/data.frame.R
+ffe6a13d13fcfb77ba53f5d259b0aaf7 *tests/varConstProp.R
 ab25428328f64b827b7ff267fc84ab5e *tests/coef.R
 2cddd1873dda4ba139adf0aa86772429 *tests/lme.R
 db2b6e128769fe949671803e3dff6737 *tests/gls.R
@@ -349,18 +351,18 @@ cdced2c0665ee6e3f80188b92267e8c8 *tests/augPredmissing.R
 cb883defd4a248b64ea1c0905f7c0ba2 *tests/missing.Rout.save
 4191899f37fc372e70793b9c71d72304 *tests/missing.R
 8ff37dbadc319edc1c2c0a737ab2f845 *tests/contrMat.R
-983a211f5ce1f86238b827a45974bfa1 *R/varFunc.R
+c2e022b6e55e459304c952ddc3c47705 *R/varFunc.R
 de127d3724a0252ca2fc31d416c06286 *R/simulate.R
 a9942bd3ba07dc1d836c7ba4a6f9513a *R/lmList.R
 c6a45987f8f932b033cfcd5a86f7c959 *R/gnls.R
-db01b80a41f647da72bd62147e1f697e *R/lme.R
+66cc559012aecb5efaa0dcbe14440402 *R/lme.R
 418811ee1261539bcc3d3ffecc09ca3b *R/gls.R
 1548e7a2392e75a6ee7e676ee1e2495d *R/newGenerics.R
 3f06a541f2924bcf371323618d4dd343 *R/nlme.R
 2f538f8d7d9e838a92c42b2d4cb88ef2 *R/groupedData.R
 8a1c210cae66bd9c7a62655d3b52ebd0 *R/modelStruct.R
 9900a966d25e50dd05069a3d975bc6e5 *R/VarCorr.R
-28f8610e99d6b76da85c53ff080b77bb *R/corStruct.R
+4fa943aa9b810b20aff3d26c2e3169c9 *R/corStruct.R
 fc8278cbf9ae29db0249edf33eb20a97 *R/pdMat.R
 c28c52f014259957f11c34b7de01c879 *R/newMethods.R
 dfa37c48fc43d4eaa51d8d77315431bd *R/newFunc.R
@@ -428,3 +430,4 @@ a009547983f17acc9fb1af999d1ddde4 *src/base.h
 183fb67b22d772170ee934151870daa1 *src/nlOptimizer.c
 5225d615caa3ab1cd28d8859f2da6554 *src/pdMat.c
 f5638d8da756049ecb729345adf88eb7 *src/matrix.c
+0bd92dd94d33eb04c368580168e1b6a2 *build/partial.rdb

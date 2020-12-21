@@ -1,9 +1,9 @@
 
-Ivory Under development (unstable) (2020-11-23 r1349) -- "Internationalized Version of R"
+Ivory Under development (unstable) (2020-12-20 r1374) -- "Internationalized Version of R"
 Copyright (C) 2013-2020 Lukasz Daniel (lukasz.daniel@gmail.com)
 See README-IVORY file for details.
 
-R Under development (unstable) (2020-11-23 r79473) -- "Unsuffered Consequences"
+R Under development (unstable) (2020-12-20 r79658) -- "Unsuffered Consequences"
 Copyright (C) 2020 The R Foundation for Statistical Computing
 Platform: x86_64-pc-linux-gnu (64-bit)
 
@@ -935,8 +935,20 @@ Error in command 'nchar(x, "w")': invalid multibyte string, element 10
 +                   pmax(as.Matrix(M), 7))
 +     })
 +     rm(M)
++ 
++     ## show(<S4 generic>) from base
++     show(chol2inv) # last line now has .. showMethods(chol2inv) ..
++ 
 +     detach("package:Matrix", unload=TRUE)
 + }##{Matrix}
 Loading required package: 'Matrix'
 <sparse>[ <logic> ] : .M.sub.i.logical() maybe inefficient
+Class "standardGeneric" for generic "chol2inv" defined from package 'base'
+
+function (x, ...) 
+standardGeneric("chol2inv")
+<bytecode: 0xda271f0>
+<environment: 0xda10490>
+Methods may be defined for arguments: x
+Use 'showMethods("chol2inv")' for currently available ones.
 > 
