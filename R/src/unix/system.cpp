@@ -106,7 +106,7 @@ void R::R_ResetConsole(void) { ptr_R_ResetConsole(); }
 void R_FlushConsole(void) { ptr_R_FlushConsole(); }
 #endif
 void R_ClearerrConsole(void) { ptr_R_ClearerrConsole(); }
-void R::R_Busy(int which) { ptr_R_Busy(which); }
+void R_Busy(int which) { ptr_R_Busy(which); }
 NORET void R_CleanUp(SA_TYPE saveact, int status, int runLast)
 {
     ptr_R_CleanUp(saveact, status, runLast);

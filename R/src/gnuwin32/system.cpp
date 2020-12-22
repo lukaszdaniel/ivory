@@ -413,7 +413,7 @@ static void CharBusy(int which)
 {
 }
 
-void R::R_Busy(int which)
+void R_Busy(int which)
 {
     my_R_Busy(which);
 }

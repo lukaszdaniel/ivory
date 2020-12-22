@@ -103,10 +103,11 @@ show <- function(object) showDefault(object)
 
                   cat("\n")
                   show(object@.Data)
-                  exported <- isBaseNamespace(ns <- asNamespace(object@package)) ||
+                  pkg <- object@package
+                  exported <- pkg == ".GlobalEnv" || isBaseNamespace(ns <- asNamespace(pkg)) ||
                       nam %in% names(.getNamespaceInfo(ns, "exports"))
                   showGen <- if(exported) nam # was dQuote(nam, NULL)
-                             else paste(object@package, nam, sep=":::")
+                             else paste(pkg, nam, sep=":::")
                   cat(sprintf(gettext("Methods may be defined for arguments: %s\nUse 'showMethods(\"%s\")' for currently available ones.", domain = "R-methods"), paste(object@signature, collapse=", "), showGen), "\n", sep = "")
                   if(.simpleInheritanceGeneric(object))
                       cat(gettext("(This generic function excludes non-simple inheritance; see '?setIs')"), "\n", sep = "")

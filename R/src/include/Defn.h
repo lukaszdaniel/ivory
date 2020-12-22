@@ -740,9 +740,9 @@ namespace R
 } // namespace R
 extern "C" void R_FlushConsole(void);
 extern "C" void R_ClearerrConsole(void);
+extern "C" void R_Busy(int);
 namespace R
 {
-    void R_Busy(int);
     int R_ShowFiles(int, const char **, const char **, const char *, bool, const char *);
     int R_EditFiles(int, const char **, const char **, const char *);
     size_t R_ChooseFile(int, char *, size_t);

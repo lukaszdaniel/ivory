@@ -145,131 +145,134 @@ namespace CXXR
             return;
         ((R_bndval_t *)&(x->u.listsxp.m_carval))->ival = v;
     }
-} // namespace CXXR
 
-PairList::PairList(SEXPTYPE st, size_t sz)
-    : RObject(st)
-{
-    checkST(st);
+    PairList::PairList(SEXPTYPE st, size_t sz)
+        : RObject(st)
+    {
+        checkST(st);
 #ifdef LONG_VECTOR_SUPPORT
-    if (sz > R_SHORT_LEN_MAX)
-        Rf_error(_("invalid length for pairlist"));
+        if (sz > R_SHORT_LEN_MAX)
+            Rf_error(_("invalid length for pairlist"));
 #endif
-    if (sz == 0)
-        throw out_of_range(_("Cannot construct PairList of zero length."));
-    try
-    {
-        while (--sz)
-            m_tail = new PairList(st, nullptr, m_tail, nullptr);
-    }
-    catch (...)
-    {
-        if (m_tail)
-            m_tail->expose();
-        throw;
-    }
-}
-
-void PairList::checkST(SEXPTYPE st)
-{
-    switch (st)
-    {
-    case LISTSXP:
-    case LANGSXP:
-    case DOTSXP:
-    case BCODESXP:
-        break;
-    default:
-        throw invalid_argument("Inappropriate SEXPTYPE for PairList.");
-    }
-}
-
-const char *PairList::typeName() const
-{
-    switch (sexptype())
-    {
-    case LISTSXP:
-        return "pairlist";
-    case LANGSXP:
-        return "language";
-    case DOTSXP:
-        return "...";
-    case BCODESXP:
-        return "bytecode";
-    default:
-        throw logic_error(_("PairList has illegal SEXPTYPE."));
-    }
-}
-
-void PairList::visitChildren(const_visitor *v) const
-{
-    const PairList *p = this;
-    do
-    {
-        p->RObject::visitChildren(v);
-        if ((p->sexptype() != LISTSXP || BOXED_BINDING_CELLS || RObject::bndcell_tag(p) == 0) && p->m_car)
-            p->m_car->conductVisitor(v);
-        if (p->m_tag)
-            p->m_tag->conductVisitor(v);
-        p = p->m_tail;
-    } while (p && (*v)(p));
-}
-
-namespace
-{
-    void indent(ostream &os, size_t margin)
-    {
-        while (margin--)
-            os << " ";
-    }
-
-    const char *sympname(const RObject *sym)
-    {
-        const RObject *pname = sym->u.symsxp.m_pname;
-        if (!pname)
-            return "(Symbol has no PRINTNAME)";
-        const String *pstr = dynamic_cast<const String *>(pname);
-        if (!pstr)
-            return "(PRINTNAME not a String)";
-        return pstr->c_str();
-    }
-} // namespace
-
-void CXXR::pldump(ostream &os, const PairList &pl, size_t margin)
-{
-    indent(os, margin);
-    os << Rf_type2char(pl.sexptype()) << "\n";
-    for (const PairList *p = &pl; p; p = p->tail())
-    {
-        // Print tag:
-        indent(os, margin);
-        os << "- ";
-        const RObject *tag = p->tag();
-        if (!tag)
-            os << "(No tag):\n";
-        else if (tag->sexptype() != SYMSXP)
-            os << "(Tag not a SYMSXP):\n";
-        else
-            os << sympname(tag) << ":\n";
-        // Print car:
-        const RObject *car = p->car();
-        if (const PairList *plinner = dynamic_cast<const PairList *>(car))
-            pldump(os, *plinner, margin + 2);
-        else if (const StringVector *sv = dynamic_cast<const StringVector *>(car))
-            strdump(os, *sv, margin + 2);
-        else
+        if (sz == 0)
+            throw out_of_range(_("Cannot construct PairList of zero length."));
+        try
         {
+            while (--sz)
+                m_tail = new PairList(st, nullptr, m_tail, nullptr);
+        }
+        catch (...)
+        {
+            if (m_tail)
+                m_tail->expose();
+            throw;
+        }
+    }
+
+    void PairList::checkST(SEXPTYPE st)
+    {
+        switch (st)
+        {
+        case LISTSXP:
+        case LANGSXP:
+        case DOTSXP:
+        case BCODESXP:
+            break;
+        default:
+            throw invalid_argument(_("Inappropriate SEXPTYPE for PairList."));
+        }
+    }
+
+    const char *PairList::typeName() const
+    {
+        switch (sexptype())
+        {
+        case LISTSXP:
+            return "pairlist";
+        case LANGSXP:
+            return "language";
+        case DOTSXP:
+            return "...";
+        case BCODESXP:
+            return "bytecode";
+        default:
+            throw logic_error(_("PairList has illegal SEXPTYPE."));
+        }
+    }
+
+    void PairList::visitChildren(const_visitor *v) const
+    {
+        const PairList *p = this;
+        do
+        {
+            p->RObject::visitChildren(v);
+            if ((p->sexptype() != LISTSXP || BOXED_BINDING_CELLS || RObject::bndcell_tag(p) == 0) && p->m_car)
+                p->m_car->conductVisitor(v);
+            if (p->m_tag)
+                p->m_tag->conductVisitor(v);
+            p = p->m_tail;
+        } while (p && (*v)(p));
+    }
+
+    namespace
+    {
+        void indent(ostream &os, size_t margin)
+        {
+            while (margin--)
+                os << " ";
+        }
+
+        const char *sympname(const RObject *sym)
+        {
+            const RObject *pname = sym->u.symsxp.m_pname;
+            if (!pname)
+                return "(Symbol has no PRINTNAME)";
+            const String *pstr = dynamic_cast<const String *>(pname);
+            if (!pstr)
+                return "(PRINTNAME not a String)";
+            return pstr->c_str();
+        }
+    } // namespace
+
+    void pldump(ostream &os, const PairList &pl, size_t margin)
+    {
+        indent(os, margin);
+        os << Rf_type2char(pl.sexptype()) << "\n";
+        for (const PairList *p = &pl; p; p = p->tail())
+        {
+            // Print tag:
+            indent(os, margin);
+            os << "- ";
+            const RObject *tag = p->tag();
+            os << "Tag = ";
+            if (!tag)
+                os << "(No tag):\n";
+            else if (tag->sexptype() != SYMSXP)
+                os << "(Tag not a SYMSXP):\n";
+            else
+                os << sympname(tag) << ":\n";
+            // Print car:
+            const RObject *car = p->car();
             indent(os, margin + 2);
-            if (!car)
-                os << "NILSXP\n";
+            os << "Car = ";
+            if (const PairList *plinner = dynamic_cast<const PairList *>(car))
+                pldump(os, *plinner, margin + 2);
+            else if (const StringVector *sv = dynamic_cast<const StringVector *>(car))
+                strdump(os, *sv, margin + 2);
             else
             {
-                SEXPTYPE st = car->sexptype();
-                os << Rf_type2char(st);
-                if (st == SYMSXP)
-                    os << ": " << sympname(car);
-                os << "\n";
+                indent(os, margin + 2);
+                if (!car)
+                    os << "NILSXP\n";
+                else
+                {
+                    SEXPTYPE st = car->sexptype();
+                    os << Rf_type2char(st);
+                    if (st == SYMSXP)
+                        os << ": " << sympname(car);
+                    os << "\n";
+                }
             }
         }
     }
-}
+} // namespace CXXR

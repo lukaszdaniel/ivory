@@ -1190,11 +1190,12 @@ SEXP Rf_allocSExp(SEXPTYPE t)
     case LANGSXP:
     case DOTSXP:
     case BCODESXP:
-        break;
+        return new RObject(t);
+        // break;
     default:
-        Rf_error("Inappropriate SEXPTYPE for PairList.");
+        return new RObject(t);
+        // Rf_error(_("Inappropriate SEXPTYPE (%d) for PairList."), t);
     }
-    return new RObject(t);
 }
 
 /* cons is defined directly to avoid the need to protect its arguments
