@@ -64,9 +64,9 @@ HIDDEN SEXP do_lapply(SEXP call, SEXP op, SEXP args, SEXP rho)
        since the computation of one may destroy the other */
 
     SEXP tmp = PROTECT(LCONS(R_Bracket2Symbol,
-			LCONS(X, LCONS(isym, R_NilValue))));
+			CONS(X, CONS(isym, R_NilValue))));
     SEXP R_fcall = PROTECT(LCONS(FUN,
-				 LCONS(tmp, LCONS(R_DotsSymbol, R_NilValue))));
+				 CONS(tmp, CONS(R_DotsSymbol, R_NilValue))));
 
     for(R_xlen_t i = 0; i < n; i++) {
 	if (realIndx) REAL(ind)[0] = (double)(i + 1);

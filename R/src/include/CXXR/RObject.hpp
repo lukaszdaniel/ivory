@@ -312,15 +312,6 @@ namespace CXXR
         } u;
 
     public:
-        virtual void *data()
-        {
-            return nullptr;
-        }
-
-        virtual const void *data() const
-        {
-            return nullptr;
-        }
 
         /**
          * @param stype Required type of the RObject.

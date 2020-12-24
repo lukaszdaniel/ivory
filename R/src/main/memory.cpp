@@ -490,7 +490,7 @@ SEXP R_WeakRefKey(SEXP w)
     if (TYPEOF(w) != WEAKREFSXP)
         error(_("not a weak reference"));
 
-    WeakRef* wr = SEXP_downcast<WeakRef*>(w);
+    WeakRef* wr = SEXP_downcast<WeakRef*>(w, false);
 
     return wr->key();
 }
@@ -500,7 +500,7 @@ SEXP R_WeakRefValue(SEXP w)
     if (TYPEOF(w) != WEAKREFSXP)
         error(_("not a weak reference"));
 
-    WeakRef* wr = SEXP_downcast<WeakRef*>(w);
+    WeakRef* wr = SEXP_downcast<WeakRef*>(w, false);
 
     SEXP v = wr->value();
     if (v)
@@ -539,7 +539,7 @@ void WeakRef::finalize()
         Cfin(key);
     else if (Rfin)
     {
-        GCRoot<> e(Rf_lcons(Rfin, Rf_lcons(key, nullptr)));
+        GCRoot<> e(Rf_lcons(Rfin, Rf_cons(key, nullptr)));
         Rf_eval(e, R_GlobalEnv);
     }
 }
@@ -1206,10 +1206,10 @@ SEXP Rf_cons(SEXP car, SEXP cdr)
     GCRoot<> tlr(cdr);
     SEXP s = new RObject(LISTSXP);
 
-    PairList::set_car0(s, CHK(car));
+    ConsCell::set_car0(s, CHK(car));
     if (car)
         INCREMENT_REFCNT(car);
-    PairList::set_cdr(s, CHK(cdr));
+    ConsCell::set_cdr(s, CHK(cdr));
     if (cdr)
         INCREMENT_REFCNT(cdr);
     return s;
@@ -1221,8 +1221,8 @@ HIDDEN SEXP CONS_NR(SEXP car, SEXP cdr)
     GCRoot<> tlr(cdr);
     SEXP s = new RObject(LISTSXP);
     DISABLE_REFCNT(s);
-    PairList::set_car0(s, CHK(car));
-    PairList::set_cdr(s, CHK(cdr));
+    ConsCell::set_car0(s, CHK(car));
+    ConsCell::set_cdr(s, CHK(cdr));
     return s;
 }
 
@@ -2058,7 +2058,7 @@ SEXP VECTOR_ELT(SEXP x, R_xlen_t i) {
         return XVECTOR_ELT(x, i);
     }
     // return CHK(LISTVECTOR_ELT(CHK(x), i));
-    return CHK((*CXXR::SEXP_downcast<CXXR::ListVector *>(CHK(x)))[i]);
+    return CHK((*CXXR::SEXP_downcast<CXXR::ListVector *>(CHK(x), false))[i]);
 }
 
 SEXP XVECTOR_ELT(SEXP x, R_xlen_t i) {
@@ -2067,7 +2067,7 @@ SEXP XVECTOR_ELT(SEXP x, R_xlen_t i) {
 	error(_("'%s' function can only be applied to an expression, not a '%s'"), "XVECTOR_ELT()",
 	      type2char(TYPEOF(x)));
     // return CHK(EXPRVECTOR_ELT(CHK(x), i));
-    return CHK((*CXXR::SEXP_downcast<CXXR::ExpressionVector *>(CHK(x)))[i]);
+    return CHK((*CXXR::SEXP_downcast<CXXR::ExpressionVector *>(CHK(x), false))[i]);
 }
 
 namespace
@@ -2259,7 +2259,7 @@ SEXP SET_VECTOR_ELT(SEXP x, R_xlen_t i, SEXP v)
     FIX_REFCNT(x, VECTOR_ELT(x, i), v);
     // CHECK_OLD_TO_NEW(x, v);
     // LISTVECTOR_ELT(x, i) = v;
-    ListVector *lv = SEXP_downcast<ListVector *>(x);
+    ListVector *lv = SEXP_downcast<ListVector *>(x, false);
     (*lv)[i] = v;
     return v;
 }
@@ -2276,7 +2276,7 @@ SEXP SET_XVECTOR_ELT(SEXP x, R_xlen_t i, SEXP v)
     FIX_REFCNT(x, XVECTOR_ELT(x, i), v);
     // CHECK_OLD_TO_NEW(x, v);
     // EXPRVECTOR_ELT(x, i) = v;
-    ExpressionVector *ev = SEXP_downcast<ExpressionVector *>(x);
+    ExpressionVector *ev = SEXP_downcast<ExpressionVector *>(x, false);
     (*ev)[i] = v;
     return v;
 }
@@ -2330,7 +2330,7 @@ static void CLEAR_BNDCELL_TAG(SEXP cell)
 {
     if (BNDCELL_TAG(cell))
     {
-        PairList::set_car0(cell, nullptr);
+        ConsCell::set_car0(cell, nullptr);
         SET_BNDCELL_TAG(cell, 0);
     }
 }
@@ -2398,9 +2398,9 @@ HIDDEN void R::R_args_enable_refcnt(SEXP args)
 }
 
 /* List Accessors */
-SEXP TAG(SEXP e) { return CHK(CXXR::PairList::tag(CHKCONS(e))); }
-SEXP CAR0(SEXP e) { return CHK(CXXR::PairList::car0(CHKCONS(e))); }
-SEXP CDR(SEXP e) { return CHK(CXXR::PairList::cdr(CHKCONS(e))); }
+SEXP TAG(SEXP e) { return CHK(CXXR::ConsCell::tag(CHKCONS(e))); }
+SEXP CAR0(SEXP e) { return CHK(CXXR::ConsCell::car0(CHKCONS(e))); }
+SEXP CDR(SEXP e) { return CHK(CXXR::ConsCell::cdr(CHKCONS(e))); }
 SEXP CAAR(SEXP e) { return CHK(CAR(CAR(CHKCONS(e)))); }
 SEXP CDAR(SEXP e) { return CHK(CDR(CAR(CHKCONS(e)))); }
 SEXP CADR(SEXP e) { return CHK(CAR(CDR(CHKCONS(e)))); }
@@ -2420,7 +2420,7 @@ void SET_TAG(SEXP x, SEXP v)
         Rf_error(_("incorrect value"));
     FIX_REFCNT(x, TAG(x), v);
     CHECK_OLD_TO_NEW(x, v);
-    PairList::set_tag(x, v);
+    ConsCell::set_tag(x, v);
 }
 
 SEXP SETCAR(SEXP x, SEXP y)
@@ -2432,7 +2432,7 @@ SEXP SETCAR(SEXP x, SEXP y)
         return y;
     FIX_BINDING_REFCNT(x, CAR(x), y);
     CHECK_OLD_TO_NEW(x, y);
-    PairList::set_car0(x, y);
+    ConsCell::set_car0(x, y);
     return y;
 }
 
@@ -2447,7 +2447,7 @@ SEXP SETCDR(SEXP x, SEXP y)
 	error(_("inserting non-tracking CDR in tracking cell"));
 #endif
     CHECK_OLD_TO_NEW(x, y);
-    PairList::set_cdr(x, y);
+    ConsCell::set_cdr(x, y);
     return y;
 }
 
@@ -2461,7 +2461,7 @@ SEXP SETCADR(SEXP x, SEXP y)
     CLEAR_BNDCELL_TAG(cell);
     FIX_REFCNT(cell, CAR(cell), y);
     CHECK_OLD_TO_NEW(cell, y);
-    PairList::set_car0(cell, y);
+    ConsCell::set_car0(cell, y);
     return y;
 }
 
@@ -2476,7 +2476,7 @@ SEXP SETCADDR(SEXP x, SEXP y)
     CLEAR_BNDCELL_TAG(cell);
     FIX_REFCNT(cell, CAR(cell), y);
     CHECK_OLD_TO_NEW(cell, y);
-    PairList::set_car0(cell, y);
+    ConsCell::set_car0(cell, y);
     return y;
 }
 
@@ -2492,7 +2492,7 @@ SEXP SETCADDDR(SEXP x, SEXP y)
     CLEAR_BNDCELL_TAG(cell);
     FIX_REFCNT(cell, CAR(cell), y);
     CHECK_OLD_TO_NEW(cell, y);
-    PairList::set_car0(cell, y);
+    ConsCell::set_car0(cell, y);
     return y;
 }
 
@@ -2510,7 +2510,7 @@ SEXP SETCAD4R(SEXP x, SEXP y)
     CLEAR_BNDCELL_TAG(cell);
     FIX_REFCNT(cell, CAR(cell), y);
     CHECK_OLD_TO_NEW(cell, y);
-    PairList::set_car0(cell, y);
+    ConsCell::set_car0(cell, y);
     return y;
 }
 
@@ -2595,7 +2595,7 @@ int HASHASH(SEXP x) { return CXXR::String::hashash(CHK(x)); }
 HIDDEN
 int HASHVALUE(SEXP x)
 {
-    const CXXR::String& str = *CXXR::SEXP_downcast<CXXR::String*>(x);
+    const CXXR::String& str = *CXXR::SEXP_downcast<CXXR::String*>(x, false);
 	return str.hash();
 }
 
@@ -2604,7 +2604,7 @@ void SET_HASHASH(SEXP x, int v) { /* does nothing in CXXR */ }
 HIDDEN
 void SET_HASHVALUE(SEXP x, int v)
 {
-    const CXXR::String &str = *CXXR::SEXP_downcast<CXXR::String *>(x);
+    const CXXR::String &str = *CXXR::SEXP_downcast<CXXR::String *>(x, false);
     str.hash();
 }
 #endif

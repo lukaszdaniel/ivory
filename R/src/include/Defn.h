@@ -42,8 +42,11 @@
 #include <CXXR/RObject.hpp>
 #include <CXXR/GCRoot.hpp>
 #include <CXXR/ConsCell.hpp>
+#include <CXXR/DottedArgs.hpp>
+#include <CXXR/ByteCode.hpp>
 #include <CXXR/BuiltInFunction.hpp>
 #include <CXXR/Symbol.hpp>
+#include <CXXR/Expression.hpp>
 #include <CXXR/VectorBase.hpp>
 #include <CXXR/FixedVector.hpp>
 #include <CXXR/ComplexVector.hpp>

@@ -68,7 +68,7 @@ namespace CXXR
     }
 
     /* Hashing Methods */
-    unsigned int String::hashash(RObject *x) { return x ? SEXP_downcast<String *>(x)->m_hash != -1 : 0; }
+    unsigned int String::hashash(RObject *x) { return x ? SEXP_downcast<String *>(x, false)->m_hash != -1 : 0; }
 
     unsigned int String::is_bytes(RObject *x) { return x ? (x->m_gpbits & BYTES_MASK) : 0; }
 

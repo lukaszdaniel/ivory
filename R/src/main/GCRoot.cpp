@@ -51,31 +51,41 @@ namespace CXXR
     } // namespace
 } // namespace CXXR
 
-vector<GCNode *> GCRootBase::s_roots;
+vector<GCNode *> *GCRootBase::s_roots;
 
 #ifdef NDEBUG
-vector<RObject *> GCRootBase::s_pps;
+vector<RObject *> *GCRootBase::s_pps;
 #else
-vector<pair<RObject *, RCNTXT *>> GCRootBase::s_pps;
+vector<pair<RObject *, RCNTXT *>> *GCRootBase::s_pps;
 #endif
+
+void GCRootBase::initialize()
+{
+    s_roots = new vector<GCNode *>;
+#ifdef NDEBUG
+    s_pps = new vector<RObject *>;
+#else
+    s_pps = new vector<pair<RObject *, RCNTXT *>>;
+#endif
+}
 
 void GCRootBase::ppsRestoreSize(size_t new_size)
 {
-    if (new_size > s_pps.size())
+    if (new_size > s_pps->size())
         throw out_of_range("GCRootBase::ppsRestoreSize: requested size greater than current size.");
-    s_pps.resize(new_size);
+    s_pps->resize(new_size);
 }
 
 void GCRootBase::reprotect(RObject *node, unsigned int index)
 {
     if (node)
         node->expose();
-    if (index >= s_pps.size())
+    if (index >= s_pps->size())
         throw out_of_range("GCRootBase::reprotect: index out of range.");
 #ifdef NDEBUG
-    s_pps[index] = node;
+    (*s_pps)[index] = node;
 #else
-    auto &pr = s_pps[index];
+    auto &pr = (*s_pps)[index];
     // if (pr.second != R_GlobalContext)
     //     throw logic_error("GCRootBase::reprotect: not in same context as the corresponding call of protect().");
     pr.first = node;
@@ -90,31 +100,31 @@ void GCRootBase::seq_error()
 
 unsigned int GCRootBase::protect(RObject *node)
 {
-    unsigned int index = s_pps.size();
+    unsigned int index = s_pps->size();
     if (node)
         node->expose();
 #ifdef NDEBUG
-    s_pps.push_back(node);
+    s_pps->push_back(node);
 #else
-    s_pps.push_back(std::make_pair(node, R_GlobalContext));
+    s_pps->push_back(std::make_pair(node, R_GlobalContext));
 #endif
     return index;
 }
 
 void GCRootBase::unprotect(unsigned int count)
 {
-    size_t sz = s_pps.size();
+    size_t sz = s_pps->size();
     if (count > sz)
         throw out_of_range("GCRootBase::unprotect: count greater than current stack size.");
 #ifdef NDEBUG
-    s_pps.resize(sz - count);
+    s_pps->resize(sz - count);
 #else
     for (unsigned int i = 0; i < count; ++i)
     {
-        const auto &pr = s_pps.back();
+        const auto &pr = s_pps->back();
         if (pr.second != R_GlobalContext)
             throw logic_error("GCRootBase::unprotect: not in same context as the corresponding call of protect().");
-        s_pps.pop_back();
+        s_pps->pop_back();
     }
 #endif
 }
@@ -122,33 +132,33 @@ void GCRootBase::unprotect(unsigned int count)
 void GCRootBase::unprotectPtr(RObject *node)
 {
 #ifdef NDEBUG
-    auto rit = find(s_pps.rbegin(), s_pps.rend(), node);
+    auto rit = find(s_pps->rbegin(), s_pps->rend(), node);
 #else
-    auto rit = s_pps.rbegin();
-    while (rit != s_pps.rend() && (*rit).first != node)
+    auto rit = s_pps->rbegin();
+    while (rit != s_pps->rend() && (*rit).first != node)
         ++rit;
 #endif
-    if (rit == s_pps.rend())
+    if (rit == s_pps->rend())
         throw invalid_argument("GCRootBase::unprotectPtr: pointer not found.");
     // See Josuttis p.267 for the need for -- :
-    s_pps.erase(--(rit.base()));
+    s_pps->erase(--(rit.base()));
 }
 
 void GCRootBase::visitRoots(GCNode::const_visitor *v)
 {
-    for (auto &n : s_roots)
+    for (auto &n : *s_roots)
     {
         if (n)
             n->conductVisitor(v);
     }
 #ifdef NDEBUG
-    for (auto &n : s_pps)
+    for (auto &n : *s_pps)
     {
         if (n)
             n->conductVisitor(v);
     }
 #else
-    for (auto &n : s_pps)
+    for (auto &n : *s_pps)
     {
         if (n.first)
             (n.first)->conductVisitor(v);

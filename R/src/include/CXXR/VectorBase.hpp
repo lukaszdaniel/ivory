@@ -93,6 +93,8 @@ namespace CXXR
      * @param bytes Size of data block for which allocation failed.
      */
     static void tooBig(std::size_t bytes);
+    virtual void *data() = 0;
+    virtual const void *data() const = 0;
 
   protected:
     ~VectorBase() {}
@@ -102,7 +104,6 @@ namespace CXXR
     R_xlen_t m_truelength;
 
   public:
-
     static inline R_xlen_t stdvec_length(RObject *x)
     {
       VectorBase *vb = dynamic_cast<VectorBase *>(x);
@@ -159,7 +160,7 @@ namespace CXXR
   template <typename T = void>
   inline T *stdvec_dataptr(RObject *x)
   {
-    return reinterpret_cast<T *>(x->data());
+    return reinterpret_cast<T *>(SEXP_downcast<VectorBase *>(x, false)->data());
   }
 
 } // namespace CXXR

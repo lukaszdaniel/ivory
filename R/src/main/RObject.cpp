@@ -70,59 +70,79 @@ namespace CXXR
             {
                 Rf_error("bad binding access");
             }
-            if (tag())
-                tag()->conductVisitor(v);
-            if (car())
-                car()->conductVisitor(v);
-            if (cdr())
-                cdr()->conductVisitor(v);
+            const RObject *p = this;
+            do
+            {
+                if (p->car())
+                    p->car()->conductVisitor(v);
+                if (p->tag())
+                    p->tag()->conductVisitor(v);
+                if (p->cdr())
+                    p->cdr()->conductVisitor(v);
+                p = p->cdr();
+            } while (p && (*v)(p));
         }
         else
             switch (m_type)
             {
             case ENVSXP:
+            {
                 if (frame())
                     frame()->conductVisitor(v);
                 if (enclosingEnvironment())
                     enclosingEnvironment()->conductVisitor(v);
                 if (hashTable())
                     hashTable()->conductVisitor(v);
-                break;
+            }
+            break;
             case CLOSXP:
+            {
                 if (formals())
                     formals()->conductVisitor(v);
                 if (body())
                     body()->conductVisitor(v);
                 if (closureEnvironment())
                     closureEnvironment()->conductVisitor(v);
-                break;
+            }
+            break;
             case PROMSXP:
+            {
                 if (promiseValue())
                     promiseValue()->conductVisitor(v);
                 if (promiseExpression())
                     promiseExpression()->conductVisitor(v);
                 if (promiseEnvironment())
                     promiseEnvironment()->conductVisitor(v);
-                break;
+            }
+            break;
             case SYMSXP:
+            {
                 if (symbolName())
                     symbolName()->conductVisitor(v);
                 if (symbolValue())
                     symbolValue()->conductVisitor(v);
                 if (symbolInternal())
                     symbolInternal()->conductVisitor(v);
-                break;
+            }
+            break;
             case LISTSXP:
             case LANGSXP:
             case DOTSXP:
             case BCODESXP:
-                if (tag())
-                    tag()->conductVisitor(v);
-                if ((sexptype() != LISTSXP || BOXED_BINDING_CELLS || RObject::bndcell_tag(this) == 0) && car())
-                    car()->conductVisitor(v);
-                if (cdr())
-                    cdr()->conductVisitor(v);
-                break;
+            {
+                const RObject *p = this;
+                do
+                {
+                    if (p->car() && (p->sexptype() != LISTSXP || BOXED_BINDING_CELLS || RObject::bndcell_tag(p) == 0))
+                        p->car()->conductVisitor(v);
+                    if (p->tag())
+                        p->tag()->conductVisitor(v);
+                    if (p->cdr())
+                        p->cdr()->conductVisitor(v);
+                    p = p->cdr();
+                } while (p && (*v)(p));
+            }
+            break;
             default:
                 break;
             }
@@ -434,7 +454,7 @@ namespace CXXR
             if (RObject::typeof_(x) == SYMSXP)
                 MARK_NOT_MUTABLE(Symbol::symvalue(x));
             else
-                MARK_NOT_MUTABLE(PairList::car0(x));
+                MARK_NOT_MUTABLE(ConsCell::car0(x));
         }
         ((x))->m_gpbits |= BINDING_LOCK_MASK;
     }

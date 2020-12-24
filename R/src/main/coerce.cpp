@@ -1064,7 +1064,7 @@ static SEXP coerceVectorList(SEXP v, SEXPTYPE type)
 
 	if (type == EXPRSXP && TYPEOF(v) == VECSXP)
 	{
-		GCRoot<ListVector *> lv(dynamic_cast<ListVector *>(v));
+		GCRoot<ListVector> lv(dynamic_cast<ListVector *>(v));
 		return new ExpressionVector(*lv);
 	}
 
@@ -2822,7 +2822,7 @@ HIDDEN SEXP R::substituteList(SEXP el, SEXP rho)
 	    else
 		h = findVarInFrame3(rho, CAR(el), TRUE);
 	    if (h == R_UnboundValue)
-		h = LCONS(R_DotsSymbol, R_NilValue);
+		h = CONS(R_DotsSymbol, R_NilValue);
 	    else if (h == R_NilValue  || h == R_MissingArg)
 		h = R_NilValue;
 	    else if (TYPEOF(h) == DOTSXP) {

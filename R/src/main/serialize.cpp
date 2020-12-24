@@ -647,17 +647,17 @@ static void InFormat(R_inpstream_t stream)
 
 #define PTRHASH(obj) (((R_size_t) (obj)) >> 2)
 
-#define HASH_TABLE_COUNT(ht) ((int) TRUELENGTH(CDR(ht)))
-#define SET_HASH_TABLE_COUNT(ht, val) SET_TRUELENGTH(CDR(ht), ((int) (val)))
+#define HASH_TABLE_COUNT(ht) ((int) TRUELENGTH(ht))
+#define SET_HASH_TABLE_COUNT(ht, val) SET_TRUELENGTH(ht, ((int) (val)))
 
-#define HASH_TABLE_SIZE(ht) LENGTH(CDR(ht))
+#define HASH_TABLE_SIZE(ht) LENGTH(ht)
 
-#define HASH_BUCKET(ht, pos) VECTOR_ELT(CDR(ht), pos)
-#define SET_HASH_BUCKET(ht, pos, val) SET_VECTOR_ELT(CDR(ht), pos, val)
+#define HASH_BUCKET(ht, pos) VECTOR_ELT(ht, pos)
+#define SET_HASH_BUCKET(ht, pos, val) SET_VECTOR_ELT(ht, pos, val)
 
 static SEXP MakeHashTable(void)
 {
-    SEXP val = CONS(R_NilValue, allocVector(VECSXP, HASHSIZE));
+    SEXP val = allocVector(VECSXP, HASHSIZE);
     SET_HASH_TABLE_COUNT(val, 0);
     return val;
 }
@@ -2583,7 +2583,7 @@ void R_InitConnInPStream(R_inpstream_t stream,  Rconnection con,
 static SEXP CallHook(SEXP x, SEXP fun)
 {
 	SEXP val, call;
-	PROTECT(call = LCONS(fun, LCONS(x, R_NilValue)));
+	PROTECT(call = LCONS(fun, CONS(x, R_NilValue)));
 	val = eval(call, R_GlobalEnv);
 	UNPROTECT(1);
 	return val;

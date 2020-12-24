@@ -2707,13 +2707,13 @@ static SEXP evalseq(SEXP expr, SEXP rho, int forcelocal,  R_varloc_t tmploc,
 	if (maybe_in_assign || MAYBE_SHARED(nval))
 	    nval = shallow_duplicate(nval);
 	UNPROTECT(1);
-	return CONS_NR(nval, expr);
+	return CONS_NR(nval, CONS_NR(expr, nullptr));
     }
     else if (isLanguage(expr)) {
 	PROTECT(expr);
 	PROTECT(val = evalseq(CADR(expr), rho, forcelocal, tmploc, ploc));
 	R_SetVarLocValue(tmploc, CAR(val));
-	PROTECT(nexpr = LCONS(R_GetVarLocSymbol(tmploc), CDDR(expr)));
+	PROTECT(nexpr = CONS(R_GetVarLocSymbol(tmploc), CDDR(expr)));
 	PROTECT(nexpr = LCONS(CAR(expr), nexpr));
 	nval = eval(nexpr, rho);
 	/* duplicate nval if it might be shared _or_ if the container,
@@ -3012,7 +3012,7 @@ static SEXP applydefine(SEXP call, SEXP op, SEXP args, SEXP rho)
 	    error(_("invalid function in complex assignment"));
     }
     SET_TEMPVARLOC_FROM_CAR(tmploc, lhs);
-    SEXP lhsSym = CDR(lhs);
+    SEXP lhsSym = CADR(lhs);
 
     PROTECT(expr = replaceCall(afun, R_TmpvalSymbol, CDDR(expr), rhsprom)); nprot++;
     SEXP value = eval(expr, rho);

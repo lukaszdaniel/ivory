@@ -22,49 +22,17 @@
  *  https://www.R-project.org/Licenses/
  */
 
-/** @file Expression.cpp
+/** @file DottedArgs.cpp
  *
- * @brief Class Expression and associated C interface.
+ * @brief Class CXXR::DottedArgs.
  */
 
-#include <CXXR/Expression.hpp>
-
-#include <iostream>
-
-#include <R_ext/Error.h>
-#include <Localization.h>
-#include <CXXR/BuiltInFunction.hpp>
-#include <CXXR/Closure.hpp>
-#include <CXXR/Environment.hpp>
-#include <CXXR/FunctionBase.hpp>
-#include <CXXR/RAllocStack.hpp>
-#include <CXXR/Symbol.hpp>
-#include <Rinternals.h>
-
-#undef match
+#include <CXXR/DottedArgs.hpp>
 
 using namespace std;
 using namespace CXXR;
 
-namespace CXXR
+const char* DottedArgs::typeName() const
 {
-    // Force the creation of non-inline embodiments of functions callable
-    // from C:
-    namespace ForceNonInline
-    {
-        const auto &lconsptr = Rf_lcons;
-    }
-
-    const char *Expression::typeName() const
-    {
-        return staticTypeName();
-    }
-} // namespace CXXR
-
-// ***** C interface *****
-
-SEXP Rf_currentExpression();
-
-SEXP Rf_lcons(SEXP cr, SEXP tl);
-
-void Rf_setCurrentExpression(SEXP e);
+    return staticTypeName();
+}

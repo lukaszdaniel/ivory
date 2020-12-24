@@ -2348,7 +2348,7 @@ void R_SaveGlobalEnvToFile(const char *name)
     }
     else {
 	SEXP args, call;
-	args = LCONS(ScalarString(mkChar(name)), R_NilValue);
+	args = CONS(ScalarString(mkChar(name)), R_NilValue);
 	PROTECT(call = LCONS(sym, args));
 	eval(call, R_GlobalEnv);
 	UNPROTECT(1);
@@ -2370,8 +2370,8 @@ void R_RestoreGlobalEnvFromFile(const char *name, Rboolean quiet)
     else {
 	SEXP args, call, sQuiet;
 	sQuiet = quiet ? mkTrue() : mkFalse();
-	PROTECT(args = LCONS(sQuiet, R_NilValue));
-	args = LCONS(ScalarString(mkChar(name)), args);
+	PROTECT(args = CONS(sQuiet, R_NilValue));
+	args = CONS(ScalarString(mkChar(name)), args);
 	PROTECT(call = LCONS(sym, args));
 	eval(call, R_GlobalEnv);
 	UNPROTECT(2);

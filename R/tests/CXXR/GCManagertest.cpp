@@ -124,6 +124,18 @@ void R_Suicide(const char *s)
 
 unsigned int GCNode::SchwarzCtr::s_count = 0;
 
+GCNode::SchwarzCtr::SchwarzCtr()
+{
+    if (!s_count++)
+        GCNode::initialize();
+}
+
+GCNode::SchwarzCtr::~SchwarzCtr()
+{
+    if (!--s_count)
+        GCNode::cleanup();
+}
+
 void GCNode::cleanup()
 {
     cout << "GCNode::cleanup()\n";
