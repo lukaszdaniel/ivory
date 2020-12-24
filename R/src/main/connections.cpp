@@ -135,7 +135,7 @@ typedef long long int _lli_t;
 #include <Startup.h>
 #endif
 
-constexpr int NCONNECTIONS = 128; /* snow needs one per no-echo node */
+constexpr int NCONNECTIONS = 128; /* need one per cluster node */
 constexpr int NSINKS = 21;
 
 static Rconnection Connections[NCONNECTIONS];
