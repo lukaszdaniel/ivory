@@ -26,7 +26,9 @@
 #include <Localization.h>
 #include <Defn.h>
 #include <Internal.h>
+
 using namespace R;
+using namespace CXXR;
 
 /* .Internal(lapply(X, FUN)) */
 

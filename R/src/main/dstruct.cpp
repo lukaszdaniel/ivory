@@ -70,8 +70,7 @@ HIDDEN SEXP R::mkPRIMSXP(int offset, bool eval)
 
     if (result == R_NilValue)
     {
-        result = new RObject(type);
-        SET_PRIMOFFSET(result, offset);
+        result = new BuiltInFunction(offset, eval);
         SET_VECTOR_ELT(PrimCache, offset, result);
     }
     else if (TYPEOF(result) != type)
@@ -135,12 +134,12 @@ HIDDEN SEXP R::mkCLOSXP(SEXP formals, SEXP body, SEXP rho)
     return c;
 }
 
-static bool isDDName(SEXP name)
+static bool isDDName(const String *name)
 {
     const char *buf;
     char *endp;
 
-    buf = CHAR(name);
+    buf = name->c_str();
     if (streqln(buf, "..", 2) && strlen(buf) > 2)
     {
         buf += 2;
@@ -148,6 +147,13 @@ static bool isDDName(SEXP name)
         return (*endp == '\0');
     }
     return false;
+}
+
+Symbol::Symbol(const String *name, RObject *val, const BuiltInFunction *internal_func)
+    : RObject(SYMSXP), m_name(name), m_value(val), m_internalfunc(internal_func)
+{
+    if (name && isDDName(name))
+        m_gpbits |= DDVAL_MASK;
 }
 
 /**
@@ -159,16 +165,10 @@ static bool isDDName(SEXP name)
  * 
  * @return symsxp with the string name inserted in the name field
  */
- 
+
 HIDDEN SEXP R::mkSYMSXP(SEXP name, SEXP value)
 {
-    PROTECT(name);
-    PROTECT(value);
-    bool i = isDDName(name);
-    SEXP c = new RObject(SYMSXP);
-    SET_PRINTNAME(c, name);
-    SET_SYMVALUE(c, value);
-    SET_DDVAL(c, i);
-    UNPROTECT(2);
-    return c;
+    GCRoot<const String> namert(SEXP_downcast<const String *>(name));
+    GCRoot<> valuert(value);
+    return new Symbol(namert, valuert);
 }

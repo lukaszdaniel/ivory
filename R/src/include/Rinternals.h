@@ -265,12 +265,12 @@ typedef enum Sortness
 SEXP (ATTRIB)(SEXP x);
 int  (OBJECT)(SEXP x);
 int  (MARK)(SEXP x);
-SEXPTYPE (TYPEOF)(SEXP x);
+SEXPTYPE TYPEOF(SEXP x);
 int  (NAMED)(SEXP x);
 int  (REFCNT)(SEXP x);
 int  (TRACKREFS)(SEXP x);
-void (SET_OBJECT)(SEXP x, int v);
-void (SET_TYPEOF)(SEXP x, SEXPTYPE v);
+void SET_OBJECT(SEXP x, int v);
+void SET_TYPEOF(SEXP x, SEXPTYPE v);
 void (SET_NAMED)(SEXP x, int v);
 void SET_ATTRIB(SEXP x, SEXP v);
 void DUPLICATE_ATTRIB(SEXP to, SEXP from);
@@ -285,22 +285,22 @@ void (DISABLE_REFCNT)(SEXP x);
 void (ENABLE_REFCNT)(SEXP x);
 void (MARK_NOT_MUTABLE)(SEXP x);
 
-int (ASSIGNMENT_PENDING)(SEXP x);
-void (SET_ASSIGNMENT_PENDING)(SEXP x, int v);
+int ASSIGNMENT_PENDING(SEXP x);
+void SET_ASSIGNMENT_PENDING(SEXP x, int v);
 int (IS_ASSIGNMENT_CALL)(SEXP x);
 void (MARK_ASSIGNMENT_CALL)(SEXP x);
 
 /* S4 object testing */
-int (IS_S4_OBJECT)(SEXP x);
-void (SET_S4_OBJECT)(SEXP x);
-void (UNSET_S4_OBJECT)(SEXP x);
+int IS_S4_OBJECT(SEXP x);
+void SET_S4_OBJECT(SEXP x);
+void UNSET_S4_OBJECT(SEXP x);
 
 /* JIT optimization support */
-int (NOJIT)(SEXP x);
-int (MAYBEJIT)(SEXP x);
-void (SET_NOJIT)(SEXP x);
-void (SET_MAYBEJIT)(SEXP x);
-void (UNSET_MAYBEJIT)(SEXP x);
+int NOJIT(SEXP x);
+int MAYBEJIT(SEXP x);
+void SET_NOJIT(SEXP x);
+void SET_MAYBEJIT(SEXP x);
+void UNSET_MAYBEJIT(SEXP x);
 
 /* Growable vector support */
 int (IS_GROWABLE)(SEXP x);
@@ -313,12 +313,12 @@ R_xlen_t  (TRUELENGTH)(SEXP x);
 void (SETLENGTH)(SEXP x, R_xlen_t v);
 void (SET_TRUELENGTH)(SEXP x, R_xlen_t v);
 int  (IS_LONG_VEC)(SEXP x);
-int  (LEVELS)(SEXP x);
-void  (SETLEVELS)(SEXP x, int v);
+int  LEVELS(SEXP x);
+void  SETLEVELS(SEXP x, int v);
 #if defined(TESTING_WRITE_BARRIER) || defined(COMPILING_IVORY)
 R_xlen_t (STDVEC_LENGTH)(SEXP);
 R_xlen_t (STDVEC_TRUELENGTH)(SEXP);
-void (SETALTREP)(SEXP, int);
+void SETALTREP(SEXP, int);
 #endif
 
 int  *(LOGICAL)(SEXP x);
@@ -332,8 +332,8 @@ const Rbyte *(RAW_RO)(SEXP x);
 const double *(REAL_RO)(SEXP x);
 const Rcomplex *(COMPLEX_RO)(SEXP x);
 //SEXP (STRING_ELT)(SEXP x, R_xlen_t i);
-SEXP (VECTOR_ELT)(SEXP x, R_xlen_t i);
-SEXP (XVECTOR_ELT)(SEXP x, R_xlen_t i);
+SEXP VECTOR_ELT(SEXP x, R_xlen_t i);
+SEXP XVECTOR_ELT(SEXP x, R_xlen_t i);
 void SET_STRING_ELT(SEXP x, R_xlen_t i, SEXP v);
 SEXP SET_VECTOR_ELT(SEXP x, R_xlen_t i, SEXP v);
 SEXP SET_XVECTOR_ELT(SEXP x, R_xlen_t i, SEXP v);
@@ -342,9 +342,9 @@ const SEXP *(STRING_PTR_RO)(SEXP x);
 NORET SEXP * (VECTOR_PTR)(SEXP x);
 
 /* ALTREP support */
-void *(STDVEC_DATAPTR)(SEXP x);
-int (IS_SCALAR)(SEXP x, SEXPTYPE type);
-int (ALTREP)(SEXP x);
+void *STDVEC_DATAPTR(SEXP x);
+int IS_SCALAR(SEXP x, SEXPTYPE type);
+int ALTREP(SEXP x);
 SEXP ALTREP_DUPLICATE_EX(SEXP x, Rboolean deep);
 SEXP ALTREP_COERCE(SEXP x, int type);
 Rboolean ALTREP_INSPECT(SEXP, int, int, int, void (*)(SEXP, int, int, int));
@@ -452,16 +452,16 @@ SEXP (CADDDR)(SEXP e);
 SEXP (CAD3R)(SEXP e);
 SEXP (CAD4R)(SEXP e);
 SEXP (CAD5R)(SEXP e);
-int  (MISSING)(SEXP x);
-void (SET_MISSING)(SEXP x, int v);
-void (SET_TAG)(SEXP x, SEXP y);
+int  MISSING(SEXP x);
+void SET_MISSING(SEXP x, int v);
+void SET_TAG(SEXP x, SEXP y);
 SEXP SETCAR(SEXP x, SEXP y);
 SEXP SETCDR(SEXP x, SEXP y);
 SEXP SETCADR(SEXP x, SEXP y);
 SEXP SETCADDR(SEXP x, SEXP y);
 SEXP SETCADDDR(SEXP x, SEXP y);
 SEXP SETCAD4R(SEXP e, SEXP y);
-void *(EXTPTR_PTR)(SEXP);
+void *EXTPTR_PTR(SEXP);
 
 SEXP CONS_NR(SEXP a, SEXP b);
 
@@ -1355,7 +1355,7 @@ const int *(INTEGER_OR_NULL)(SEXP x);
 const double *(REAL_OR_NULL)(SEXP x);
 const Rcomplex *(COMPLEX_OR_NULL)(SEXP x);
 const Rbyte *(RAW_OR_NULL)(SEXP x);
-void *(STDVEC_DATAPTR)(SEXP x);
+void *STDVEC_DATAPTR(SEXP x);
 int (INTEGER_ELT)(SEXP x, R_xlen_t i);
 double (REAL_ELT)(SEXP x, R_xlen_t i);
 int (LOGICAL_ELT)(SEXP x, R_xlen_t i);

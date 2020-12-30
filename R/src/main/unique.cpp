@@ -1392,7 +1392,11 @@ static SEXP ExpandDots(SEXP s, int expdots)
     if (s == R_NilValue)
 	return s;
     if (TYPEOF(CAR(s)) == DOTSXP ) {
-	SET_TYPEOF(CAR(s), LISTSXP);	/* a safe mutation */
+        // Convert CAR(s) to a PairList:
+        {
+            GCRoot<ConsCell> cc(SEXP_downcast<ConsCell *>(CAR(s)));
+			SETCAR(s, ConsCell::convert<PairList>(cc));
+        }
 	if (expdots) {
 	    r = CAR(s);
 	    while (CDR(r) != R_NilValue ) {
@@ -1542,7 +1546,7 @@ HIDDEN SEXP do_matchcall(SEXP call, SEXP op, SEXP args, SEXP env)
 
     rlist = StripUnmatched(rlist);
 
-    PROTECT(rval = allocSExp(LANGSXP));
+    PROTECT(rval = new Expression());
     SETCAR(rval, lazy_duplicate(CAR(funcall)));
     SETCDR(rval, rlist);
     UNPROTECT(3);

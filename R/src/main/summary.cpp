@@ -34,6 +34,7 @@
 
 using namespace std;
 using namespace R;
+using namespace CXXR;
 
 /* since INT_MIN is the NA_INTEGER value ! */
 namespace {

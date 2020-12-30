@@ -51,7 +51,7 @@ typedef struct RObject *SEXP;
 
 #define CXXR_TRUE 1
 #define CXXR_FALSE 0
-#define LOCATION __FILE__ << ":" << __LINE__ << " "
+#define LOCATION __FILE__ << ":" << __LINE__ << " " << __func__ << ": "
 
 #ifdef HAVE_CONFIG_H
 #include <config.h>

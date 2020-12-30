@@ -38,7 +38,6 @@ namespace CXXR
     namespace ForceNonInline
     {
         const auto &PRIMOFFSETptr = PRIMOFFSET;
-        const auto &SET_PRIMOFFSETptr = SET_PRIMOFFSET;
     } // namespace ForceNonInline
 
     BuiltInFunction::~BuiltInFunction()
@@ -58,19 +57,10 @@ namespace CXXR
      *
      * @return The offset of this function within the function table.
      */
-    int BuiltInFunction::primoffset(RObject *x) { return x ? x->u.primsxp.m_offset : 0; }
-
-    /** @brief Set the new offset for a CXXR::BuiltInFunction.
-     *
-     * @param x Pointer to a CXXR::BuiltInFunction (checked).
-     *
-     * @param v The new offset for this function within the function table.
-     */
-    void BuiltInFunction::set_primoffset(RObject *x, int v)
+    int BuiltInFunction::primoffset(RObject *x)
     {
-        if (!x)
-            return;
-        x->u.primsxp.m_offset = v;
+        CXXR::BuiltInFunction *bif = CXXR::SEXP_downcast<CXXR::BuiltInFunction *>(x);
+        return bif->offset();
     }
 
     CCODE PRIMFUN(RObject *x) { return R_FunTab[PRIMOFFSET(x)].cfun(); }

@@ -61,7 +61,22 @@ namespace CXXR
      *
      * @return Pointer to the formal argument list of \a x.
      */
-    RObject *Closure::formals(RObject *x) { return x ? x->u.closxp.m_formals : nullptr; }
+    RObject *Closure::formals(RObject *x)
+    {
+        if (!x)
+            return nullptr;
+#ifdef ENABLE_ST_CHECKS
+        switch (x->sexptype())
+        {
+        case CLOSXP:
+            break;
+        default:
+            std::cerr << LOCATION << "Inappropriate SEXPTYPE (" << x->sexptype() << ") for Closure." << std::endl;
+            abort();
+        }
+#endif
+        return x->u.closxp.m_formals;
+    }
 
     /** @brief Set the formal arguments of a CXXR::Closure.
      *
@@ -73,6 +88,16 @@ namespace CXXR
     {
         if (!x)
             return;
+#ifdef ENABLE_ST_CHECKS
+        switch (x->sexptype())
+        {
+        case CLOSXP:
+            break;
+        default:
+            std::cerr << LOCATION << "Inappropriate SEXPTYPE (" << x->sexptype() << ") for Closure." << std::endl;
+            abort();
+        }
+#endif
         x->u.closxp.m_formals = v;
     }
 
@@ -82,7 +107,22 @@ namespace CXXR
      *
      * @return Pointer to the body of \a x.
      */
-    RObject *Closure::body(RObject *x) { return x ? x->u.closxp.m_body : nullptr; }
+    RObject *Closure::body(RObject *x)
+    {
+        if (!x)
+            return nullptr;
+#ifdef ENABLE_ST_CHECKS
+        switch (x->sexptype())
+        {
+        case CLOSXP:
+            break;
+        default:
+            std::cerr << LOCATION << "Inappropriate SEXPTYPE (" << x->sexptype() << ") for Closure." << std::endl;
+            abort();
+        }
+#endif
+        return x->u.closxp.m_body;
+    }
 
     /** @brief Set the body of a CXXR::Closure.
      *
@@ -94,6 +134,16 @@ namespace CXXR
     {
         if (!x)
             return;
+#ifdef ENABLE_ST_CHECKS
+        switch (x->sexptype())
+        {
+        case CLOSXP:
+            break;
+        default:
+            std::cerr << LOCATION << "Inappropriate SEXPTYPE (" << x->sexptype() << ") for Closure." << std::endl;
+            abort();
+        }
+#endif
         x->u.closxp.m_body = v;
     }
 
@@ -103,7 +153,22 @@ namespace CXXR
      *
      * @return Pointer to the environment of x.
      */
-    RObject *Closure::cloenv(RObject *x) { return x ? x->u.closxp.m_env : nullptr; }
+    RObject *Closure::cloenv(RObject *x)
+    {
+        if (!x)
+            return nullptr;
+#ifdef ENABLE_ST_CHECKS
+        switch (x->sexptype())
+        {
+        case CLOSXP:
+            break;
+        default:
+            std::cerr << LOCATION << "Inappropriate SEXPTYPE (" << x->sexptype() << ") for Closure." << std::endl;
+            abort();
+        }
+#endif
+        return x->u.closxp.m_env;
+    }
 
     /** @brief Replace the environment of a CXXR::Closure.
      *
@@ -117,6 +182,16 @@ namespace CXXR
     {
         if (!x)
             return;
+#ifdef ENABLE_ST_CHECKS
+        switch (x->sexptype())
+        {
+        case CLOSXP:
+            break;
+        default:
+            std::cerr << LOCATION << "Inappropriate SEXPTYPE (" << x->sexptype() << ") for Closure." << std::endl;
+            abort();
+        }
+#endif
         x->u.closxp.m_env = v;
     }
 

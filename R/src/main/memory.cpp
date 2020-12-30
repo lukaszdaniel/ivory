@@ -65,6 +65,7 @@
 #include <CXXR/WeakRef.hpp>
 #include <CXXR/ExternalPointer.hpp>
 #include <CXXR/PairList.hpp>
+#include <CXXR/RAltRep.hpp>
 #include <CXXR/SEXP_downcast.hpp>
 #include <R_ext/Print.h>
 
@@ -1187,14 +1188,16 @@ SEXP Rf_allocSExp(SEXPTYPE t)
     switch (t)
     {
     case LISTSXP:
+        return new PairList();
     case LANGSXP:
+        return new Expression();
     case DOTSXP:
+        return new DottedArgs();
     case BCODESXP:
-        return new RObject(t);
-        // break;
+        return new ByteCode();
     default:
         return new RObject(t);
-        // Rf_error(_("Inappropriate SEXPTYPE (%d) for PairList."), t);
+        // throw invalid_argument("Inappropriate SEXPTYPE for ConsCell.");
     }
 }
 
@@ -1202,37 +1205,24 @@ SEXP Rf_allocSExp(SEXPTYPE t)
    unless a GC will actually occur. */
 SEXP Rf_cons(SEXP car, SEXP cdr)
 {
-    GCRoot<> crr(car);
-    GCRoot<> tlr(cdr);
-    SEXP s = new RObject(LISTSXP);
-
-    ConsCell::set_car0(s, CHK(car));
-    if (car)
-        INCREMENT_REFCNT(car);
-    ConsCell::set_cdr(s, CHK(cdr));
-    if (cdr)
-        INCREMENT_REFCNT(cdr);
-    return s;
+    return CXXR_cons<PairList>(CHK(car), CHK(cdr));
 }
 
 HIDDEN SEXP CONS_NR(SEXP car, SEXP cdr)
 {
-    GCRoot<> crr(car);
-    GCRoot<> tlr(cdr);
-    SEXP s = new RObject(LISTSXP);
+    GCRoot<> crr(CHK(car));
+    GCRoot<PairList> tlr(SEXP_downcast<CXXR::PairList *>(CHK(cdr)));
+    SEXP s = new PairList(crr, tlr);
+
     DISABLE_REFCNT(s);
-    ConsCell::set_car0(s, CHK(car));
-    ConsCell::set_cdr(s, CHK(cdr));
     return s;
 }
 
 SEXP Rf_lcons(SEXP cr, SEXP tl)
 {
     GCRoot<> crr(cr);
-    GCRoot<> tlr(tl);
-    SEXP e = Rf_cons(crr, tlr);
-    SET_TYPEOF(e, LANGSXP);
-    return e;
+    GCRoot<PairList> tlr(SEXP_downcast<PairList *>(tl));
+    return new Expression(crr, tlr);
 }
 
 /*----------------------------------------------------------------------
@@ -1403,9 +1393,7 @@ SEXP Rf_allocVector3(SEXPTYPE type, R_xlen_t length = 1, R_allocator_t *allocato
         if (length > R_SHORT_LEN_MAX)
             error(_("invalid length for pairlist"));
 #endif
-        s = Rf_allocList((int)length);
-        SET_TYPEOF(s, LANGSXP);
-        return s;
+        return new Expression(length);
     }
     case LISTSXP:
     {
@@ -1433,13 +1421,9 @@ HIDDEN SEXP R::allocCharsxp(R_len_t length)
 
 SEXP Rf_allocList(const int n)
 {
-    if (n == 0)
-        return nullptr;
-
-    SEXP result = nullptr;
-    for (int i = 0; i < n; i++)
-        result = Rf_cons(R_NilValue, result);
-    return result;
+    if (n > 0)
+        return new PairList(n);
+    return nullptr;
 }
 
 static SEXP allocFormalsList(const int nargs, ...)
@@ -1915,7 +1899,13 @@ DL_FUNC R_ExternalPtrAddrFn(SEXP s)
 SEXP ATTRIB(SEXP x) { return CHK(CXXR::RObject::attrib(CHK(x))); }
 int OBJECT(SEXP x) { return CXXR::RObject::object(CHK(x)); }
 int MARK(RObject *x) { return CXXR::GCNode::is_marked(static_cast<GCNode*>(CHK(x))); }
-SEXPTYPE TYPEOF(SEXP x) { return CXXR::RObject::typeof_(CHK(x)); }
+SEXPTYPE TYPEOF(SEXP x)
+{
+    if (!RObject::altrep(x))
+        return RObject::typeof_(CHK(x));
+
+    return AltRep::wrapper_type(SEXP_downcast<AltRep *>(CHK(x)));
+}
 int (NAMED)(SEXP x) { return CXXR::RObject::named(CHK(x)); }
 int RTRACE(SEXP x) { return CXXR::FunctionBase::rtrace(CHK(x)); }
 int LEVELS(SEXP x) { return CXXR::RObject::levels(CHK(x)); }
@@ -2257,7 +2247,6 @@ SEXP SET_VECTOR_ELT(SEXP x, R_xlen_t i, SEXP v)
     if (i < 0 || i >= XLENGTH(x))
         Rf_error(_("attempt to set index %ld/%ld in 'SET_VECTOR_ELT()' function"), (long long)i, (long long)XLENGTH(x));
     FIX_REFCNT(x, VECTOR_ELT(x, i), v);
-    // CHECK_OLD_TO_NEW(x, v);
     // LISTVECTOR_ELT(x, i) = v;
     ListVector *lv = SEXP_downcast<ListVector *>(x, false);
     (*lv)[i] = v;
@@ -2274,7 +2263,6 @@ SEXP SET_XVECTOR_ELT(SEXP x, R_xlen_t i, SEXP v)
     if (i < 0 || i >= XLENGTH(x))
         Rf_error(_("attempt to set index %ld/%ld in 'SET_XVECTOR_ELT()' function"), (long long)i, (long long)XLENGTH(x));
     FIX_REFCNT(x, XVECTOR_ELT(x, i), v);
-    // CHECK_OLD_TO_NEW(x, v);
     // EXPRVECTOR_ELT(x, i) = v;
     ExpressionVector *ev = SEXP_downcast<ExpressionVector *>(x, false);
     (*ev)[i] = v;
@@ -2419,7 +2407,6 @@ void SET_TAG(SEXP x, SEXP v)
     if (CHKCONS(x) == nullptr || x == R_NilValue)
         Rf_error(_("incorrect value"));
     FIX_REFCNT(x, TAG(x), v);
-    CHECK_OLD_TO_NEW(x, v);
     ConsCell::set_tag(x, v);
 }
 
@@ -2431,7 +2418,6 @@ SEXP SETCAR(SEXP x, SEXP y)
     if (y == CAR(x))
         return y;
     FIX_BINDING_REFCNT(x, CAR(x), y);
-    CHECK_OLD_TO_NEW(x, y);
     ConsCell::set_car0(x, y);
     return y;
 }
@@ -2446,7 +2432,6 @@ SEXP SETCDR(SEXP x, SEXP y)
     if (TRACKREFS(x) && y && ! TRACKREFS(y))
 	error(_("inserting non-tracking CDR in tracking cell"));
 #endif
-    CHECK_OLD_TO_NEW(x, y);
     ConsCell::set_cdr(x, y);
     return y;
 }
@@ -2460,7 +2445,6 @@ SEXP SETCADR(SEXP x, SEXP y)
     cell = CDR(x);
     CLEAR_BNDCELL_TAG(cell);
     FIX_REFCNT(cell, CAR(cell), y);
-    CHECK_OLD_TO_NEW(cell, y);
     ConsCell::set_car0(cell, y);
     return y;
 }
@@ -2475,7 +2459,6 @@ SEXP SETCADDR(SEXP x, SEXP y)
     cell = CDDR(x);
     CLEAR_BNDCELL_TAG(cell);
     FIX_REFCNT(cell, CAR(cell), y);
-    CHECK_OLD_TO_NEW(cell, y);
     ConsCell::set_car0(cell, y);
     return y;
 }
@@ -2491,7 +2474,6 @@ SEXP SETCADDDR(SEXP x, SEXP y)
     cell = CDDDR(x);
     CLEAR_BNDCELL_TAG(cell);
     FIX_REFCNT(cell, CAR(cell), y);
-    CHECK_OLD_TO_NEW(cell, y);
     ConsCell::set_car0(cell, y);
     return y;
 }
@@ -2509,7 +2491,6 @@ SEXP SETCAD4R(SEXP x, SEXP y)
     cell = CD4R(x);
     CLEAR_BNDCELL_TAG(cell);
     FIX_REFCNT(cell, CAR(cell), y);
-    CHECK_OLD_TO_NEW(cell, y);
     ConsCell::set_car0(cell, y);
     return y;
 }
@@ -2542,8 +2523,6 @@ void SET_RSTEP(SEXP x, int v) { CXXR::Closure::set_rstep(CHK(x), v); }
 /* Primitive Accessors */
 /* not hidden since needed in some base packages */
 int CXXR::PRIMOFFSET(SEXP x) { return CXXR::BuiltInFunction::primoffset(CHK(x)); }
-HIDDEN
-void CXXR::SET_PRIMOFFSET(SEXP x, int v) { CXXR::BuiltInFunction::set_primoffset(CHK(x), v); }
 #endif
 
 /* Symbol Accessors */
@@ -2552,18 +2531,17 @@ SEXP SYMVALUE(SEXP x) { return CHK(CXXR::Symbol::symvalue(CHK(x))); }
 SEXP INTERNAL(SEXP x) { return CHK(CXXR::Symbol::internal(CHK(x))); }
 int DDVAL(SEXP x) { return CXXR::Symbol::ddval(CHK(x)); }
 
-void SET_PRINTNAME(SEXP x, SEXP v) { FIX_REFCNT(x, CXXR::Symbol::printname(x), v); CHECK_OLD_TO_NEW(x, v); CXXR::Symbol::set_printname(x, v); }
+void SET_PRINTNAME(SEXP x, SEXP v) { FIX_REFCNT(x, CXXR::Symbol::printname(x), v); CXXR::Symbol::set_printname(x, v); }
 
 void SET_SYMVALUE(SEXP x, SEXP v)
 {
     if (CXXR::Symbol::symvalue(x) == v)
         return;
     FIX_BINDING_REFCNT(x, CXXR::Symbol::symvalue(x), v);
-    CHECK_OLD_TO_NEW(x, v);
     CXXR::Symbol::set_symvalue(x, v);
 }
 
-void SET_INTERNAL(SEXP x, SEXP v) { FIX_REFCNT(x, CXXR::Symbol::internal(x), v); CHECK_OLD_TO_NEW(x, v); CXXR::Symbol::set_internal(x, v); }
+void SET_INTERNAL(SEXP x, SEXP v) { FIX_REFCNT(x, CXXR::Symbol::internal(x), v); CXXR::Symbol::set_internal(x, v); }
 void SET_DDVAL(SEXP x, int v) { CXXR::Symbol::set_ddval(CHK(x), v); }
 
 /* Environment Accessors */

@@ -44,35 +44,43 @@ typedef
 #endif
 enum
 {
-    NILSXP = 0,      /* nil = NULL */
-    SYMSXP = 1,      /* symbols */
-    LISTSXP = 2,     /* lists of dotted pairs */
-    CLOSXP = 3,      /* closures */
-    ENVSXP = 4,      /* environments */
-    PROMSXP = 5,     /* promises: [un]evaluated closure arguments */
-    LANGSXP = 6,     /* language constructs (special lists) */
-    SPECIALSXP = 7,  /* special forms */
-    BUILTINSXP = 8,  /* builtin non-special forms */
-    CHARSXP = 9,     /* "scalar" string type (internal only)*/
-    LGLSXP = 10,     /* logical vectors */
-    INTSXP = 13,     /* integer vectors */
-    REALSXP = 14,    /* real variables */
-    CPLXSXP = 15,    /* complex variables */
-    STRSXP = 16,     /* string vectors */
-    DOTSXP = 17,     /* dot-dot-dot object */
-    ANYSXP = 18,     /* make "any" args work */
-    VECSXP = 19,     /* generic vectors */
-    EXPRSXP = 20,    /* expressions vectors */
-    BCODESXP = 21,   /* byte code */
-    EXTPTRSXP = 22,  /* external pointer */
-    WEAKREFSXP = 23, /* weak reference */
-    RAWSXP = 24,     /* raw bytes */
-    S4SXP = 25,      /* S4 non-vector */
+    NILSXP = 0,      /**< NULL. In rho no CXXR::RObject has
+                      * this type, but for backward
+                      * compatibility TYPEOF will return ::NILSXP
+                      * if passed a null pointer.
+                      */
+    SYMSXP = 1,      /**< symbols, implemented in class CXXR::Symbol. */
+    LISTSXP = 2,     /**< lists of dotted pairs, implemented in class CXXR::PairList. */
+    CLOSXP = 3,      /**< closures, implemented in class CXXR::Closure. */
+    ENVSXP = 4,      /**< environments, implemented in class CXXR::Environment. */
+    PROMSXP = 5,     /**< promises: [un]evaluated closure arguments, implemented in class CXXR::Promise. */
+    LANGSXP = 6,     /**< language constructs (special lists), implemented in class CXXR::Expression. */
+    SPECIALSXP = 7,  /**< special forms, implemented in class CXXR::BuiltInFunction. */
+    BUILTINSXP = 8,  /**< builtin non-special forms, also implemented in class CXXR::BuiltInFunction. */
+    CHARSXP = 9,     /**< "scalar" string type (internal only), implemented in class CXXR::String. */
+    LGLSXP = 10,     /**< logical vectors, implemented in class CXXR::LogicalVector. */
+    INTSXP = 13,     /**< integer vectors, implemented in class CXXR::IntVector. */
+    REALSXP = 14,    /**< real variables, implemented in class CXXR::RealVector. */
+    CPLXSXP = 15,    /**< complex variables, implemented in class CXXR::ComplexVector. */
+    STRSXP = 16,     /**< string vectors, implemented in class CXXR::StringVector. */
+    DOTSXP = 17,     /**< dot-dot-dot objects, implemented in class CXXR::DottedArgs. */
+    ANYSXP = 18,     /**< Used to make "any" args work.  No CXXR::RObject has this type. */
+    VECSXP = 19,     /**< generic vectors, implemented in class CXXR::ListVector. */
+    EXPRSXP = 20,    /**< expression vectors, implemented in class CXXR::ExpressionVector. */
+    BCODESXP = 21,   /**< byte code.  Unused in rho. */
+    EXTPTRSXP = 22,  /**< external pointers, implemented in class CXXR::ExternalPointer. */
+    WEAKREFSXP = 23, /**< weak references, implemented in class CXXR::WeakRef. */
+    RAWSXP = 24,     /**< raw bytes, implemented in class CXXR::RawVector. */
+    S4SXP = 25,      /**< S4 object not inheriting from another ::SEXPTYPE, implemented in class CXXR::S4Object. */
 
-    NEWSXP = 30,    /* fresh node created in new page */
-    FREESXP = 31,   /* node released by GC */
+    NEWSXP = 30,  /* fresh node created in new page */
+    FREESXP = 31, /* node released by GC */
+    CXXSXP = 43,  /**< object types specific to rho.*/
+                  /* (43 = ASCII +) */
+    BAILSXP = 44, /**< Object used to implement indirect flow of control in R without using a C++ exception. */
+
     SINGLESXP = 47, /* For interfaces to objects created with as.single */
-    FUNSXP = 99, /* Closure or Builtin */
+    FUNSXP = 99,    /**< Closure or Builtin.  No CXXR::RObject has this type. */
     ALTREP_SXP = 238,
     ATTRLISTSXP = 239,
     ATTRLANGSXP = 240,

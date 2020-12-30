@@ -73,6 +73,7 @@
 #include <R_ext/RS.h>
 
 using namespace R;
+using namespace CXXR;
 
 /* Global print parameter struct: */
 namespace R

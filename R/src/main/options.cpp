@@ -31,6 +31,7 @@
 #include <Rinternals.h>
 
 using namespace R;
+using namespace CXXR;
 
 /* The global var. R_Expressions is in Defn.h */
 constexpr int R_MIN_EXPRESSIONS_OPT = 25;
@@ -121,8 +122,7 @@ static SEXP FindTaggedItem(SEXP lst, SEXP tag)
 static SEXP makeErrorCall(SEXP fun)
 {
   SEXP call;
-  PROTECT(call = allocList(1));
-  SET_TYPEOF(call, LANGSXP);
+  PROTECT(call = new Expression(1));
   SETCAR(call, fun);
   UNPROTECT(1);
   return call;

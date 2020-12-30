@@ -37,6 +37,7 @@
 #include <cassert>
 
 using namespace R;
+using namespace CXXR;
 
 /*
   See ../unix/system.txt for a description of some of these functions.

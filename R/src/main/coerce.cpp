@@ -1728,7 +1728,7 @@ HIDDEN SEXP do_ascall(SEXP call, SEXP op, SEXP args, SEXP rho)
 	if(n == 0)
 	    errorcall(call, _("invalid argument of length 0"));
 	SEXP names = PROTECT(getAttrib(args, R_NamesSymbol)), ap;
-	PROTECT(ap = ans = allocList(n));
+	PROTECT(ap = ans = new Expression(n));
 	for (int i = 0; i < n; i++) {
 	    SETCAR(ap, VECTOR_ELT(args, i));
 	    if (names != R_NilValue && !StringBlank(STRING_ELT(names, i)))
@@ -1743,7 +1743,7 @@ HIDDEN SEXP do_ascall(SEXP call, SEXP op, SEXP args, SEXP rho)
 	if(n == 0)
 	    errorcall(call, _("invalid argument of length 0"));
 	SEXP names = PROTECT(getAttrib(args, R_NamesSymbol)), ap;
-	PROTECT(ap = ans = allocList(n));
+	PROTECT(ap = ans = new Expression(n));
 	for (int i = 0; i < n; i++) {
 	    SETCAR(ap, XVECTOR_ELT(args, i));
 	    if (names != R_NilValue && !StringBlank(STRING_ELT(names, i)))
@@ -1754,7 +1754,12 @@ HIDDEN SEXP do_ascall(SEXP call, SEXP op, SEXP args, SEXP rho)
 	break;
     }
     case LISTSXP:
-	ans = duplicate(args);
+	{
+		ConsCell *cc = SEXP_downcast<ConsCell *>(args);
+		GCRoot<Expression> ansr(ConsCell::convert<Expression>(cc));
+		ans = ansr;
+		break;
+	}
 	break;
     case STRSXP:
 	errorcall(call, _("as.call(<character>) not feasible; consider str2lang(<char.>)"));
@@ -1763,7 +1768,6 @@ HIDDEN SEXP do_ascall(SEXP call, SEXP op, SEXP args, SEXP rho)
 	errorcall(call, _("invalid argument list"));
 	ans = R_NilValue;
     }
-    SET_TYPEOF(ans, LANGSXP);
     SET_TAG(ans, R_NilValue);
     return ans;
 }
@@ -2726,8 +2730,7 @@ HIDDEN SEXP do_docall(SEXP call, SEXP op, SEXP args, SEXP rho)
     n = length(args);
     PROTECT(names = getAttrib(args, R_NamesSymbol));
 
-    PROTECT(c = call = allocList(n + 1));
-    SET_TYPEOF(c, LANGSXP);
+    PROTECT(c = call = new Expression(n + 1));
     if( isString(fun) ) {
 	const char *str = translateChar(STRING_ELT(fun, 0));
 	if (streql(str, ".Internal")) error(_("illegal usage"));

@@ -1116,7 +1116,7 @@ HIDDEN SEXP do_encodeString(SEXP call, SEXP op, SEXP args, SEXP rho)
     checkArity(op, args);
     if (TYPEOF(x = CAR(args)) != STRSXP)
 	error(_("a character vector argument expected"));
-    if(isNull(CADR(args))) w = NA_INTEGER;
+    if(Rf_isNull(CADR(args))) w = NA_INTEGER;
     else {
 	w = asInteger(CADR(args));
 	if(w != NA_INTEGER && w < 0)
@@ -2133,7 +2133,8 @@ HIDDEN SEXP do_enc2(SEXP call, SEXP op, SEXP args, SEXP env)
     return ans;
 }
 
-#if 0 //#ifdef USE_ICU // TODO IVORY
+#undef isNull
+#ifdef USE_ICU
 #include <clocale>
 #ifdef USE_ICU_APPLE
 /* macOS is missing the headers */
@@ -2305,7 +2306,7 @@ HIDDEN SEXP do_ICUset(SEXP call, SEXP op, SEXP args, SEXP rho)
     UErrorCode  status = U_ZERO_ERROR;
 
     for (; args != R_NilValue; args = CDR(args)) {
-	if (isNull(TAG(args))) error(_("all arguments must be named"));
+	if (Rf_isNull(TAG(args))) error(_("all arguments must be named"));
 	const char *this_ = CHAR(PRINTNAME(TAG(args)));
 	const char *s;
 

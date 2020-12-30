@@ -63,6 +63,7 @@
 #include <CXXR/RAllocStack.hpp>
 #include <CXXR/ExternalPointer.hpp>
 #include <CXXR/PairList.hpp>
+#include <CXXR/RAltRep.hpp>
 
 /* To test the write barrier used by the generational collector,
    define TESTING_WRITE_BARRIER.  This makes the internal structure of

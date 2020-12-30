@@ -34,6 +34,7 @@
 #include <Localization.h>
 
 using namespace R;
+using namespace CXXR;
 
 #if !defined(__STDC_ISO_10646__) && (defined(__APPLE__) || defined(__FreeBSD__))
 /* This may not be 100% true (see the comment in rlocale.h),
@@ -1243,12 +1244,11 @@ static SEXP xxsubscript(SEXP a1, SEXP a2, SEXP a3)
 
 static SEXP xxexprlist(SEXP a1, YYLTYPE *lloc, SEXP a2)
 {
-    SEXP ans;
+    SEXP ans, anslist;
     SEXP prevSrcrefs;
 
     EatLines = 0;
     if (GenerateCode) {
-	SET_TYPEOF(a2, LANGSXP);
 	SETCAR(a2, a1);
 	if (ParseState.keepSrcRefs) {
 	    PROTECT(prevSrcrefs = getAttrib(a2, R_SrcrefSymbol));
@@ -1265,7 +1265,14 @@ static SEXP xxexprlist(SEXP a1, YYLTYPE *lloc, SEXP a2)
 #endif
 	    PS_SET_SRCREFS(prevSrcrefs);
 	}
-	PRESERVE_SV(ans = a2);
+	PRESERVE_SV(anslist = a2);
+	/* CXXR: Transform anslist to class Expression: */
+	{
+	    PRESERVE_SV(ans = Rf_lcons(CAR(anslist), CDR(anslist)));
+	    SET_TAG(ans, TAG(anslist));
+	    DUPLICATE_ATTRIB(ans, anslist);
+	    RELEASE_SV(anslist);
+	}
     }
     else
 	PRESERVE_SV(ans = R_NilValue);

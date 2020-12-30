@@ -749,8 +749,12 @@ HIDDEN SEXP do_nextmethod(SEXP call, SEXP op, SEXP args, SEXP env)
     if (s == R_DotsSymbol) {
 	t = findVarInFrame3(env, s, TRUE);
 	if (t != R_NilValue && t != R_MissingArg) {
-		SET_TYPEOF(t, LISTSXP); /* a safe mutation */
-	    s = matchmethargs(matchedarg, t);
+		// Convert t to a PairList:
+		{
+			GCRoot<ConsCell> cc(SEXP_downcast<ConsCell *>(t));
+			t = ConsCell::convert<PairList>(cc);
+		}
+		s = matchmethargs(matchedarg, t);
 	    UNPROTECT(1);
 	    PROTECT(matchedarg = s);
 	    newcall = fixcall(newcall, matchedarg);

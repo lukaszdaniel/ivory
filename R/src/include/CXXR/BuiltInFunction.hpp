@@ -52,6 +52,19 @@ namespace CXXR
      */
     class BuiltInFunction : public FunctionBase
     {
+    public:
+        /**
+         * @param offset The required table offset.  (Not
+         * range-checked in any way.)
+         *
+         * @param evaluate true iff this is to be a BUILTINSXP;
+         *          otherwise it will be a SPECIALSXP.
+         */
+        explicit BuiltInFunction(unsigned int offset, bool evaluate = true)
+            : FunctionBase(evaluate ? BUILTINSXP : SPECIALSXP), m_offset(offset)
+        {
+        }
+
     private:
         int m_offset;
         // Declared private to ensure that BuiltInFunction objects are
@@ -70,7 +83,12 @@ namespace CXXR
         {
             return "(builtin or special)";
         }
-        auto offset() const { return this->m_offset; }
+
+        /** @brief Get table offset.
+         *
+         * @return The offset into the table of functions.
+         */
+        int offset() const { return m_offset; }
         /* Primitive Access Methods */
         static int primoffset(RObject *x);
         static void set_primoffset(RObject *x, int v);
@@ -159,20 +177,13 @@ namespace CXXR
         auto gram() const { return m_gram; }
     };
 
-    /**
+    /** @brief Get offset of a CXXR::BuiltInFunction.
+     * 
      * @param x Pointer to a BuiltInFunction.
      * @return The offset of this function within the function table.
      * @todo Ought to be private.
      */
     int PRIMOFFSET(RObject *x);
-
-    /**
-     * Set the object's table offset.
-     * @param x Pointer to a BuiltInFunction.
-     * @param v The required offset value.
-     * @todo Ought to be private.
-     */
-    void SET_PRIMOFFSET(RObject *x, int v);
 
 /* Defined and initialized in names.cpp (not main.cpp) :*/
 #ifndef __R_Names__
@@ -188,5 +199,20 @@ namespace CXXR
     int PRIMINTERNAL(RObject *x);
 
 } // namespace CXXR
+
+/** @brief Create a CXXR::BuiltInFunction object.
+ *
+ * @param offset The required table offset.  (Not
+ * range-checked in any way.)
+ *
+ * @param evaluate true iff this is to be a BUILTINSXP;
+ *          otherwise it will be a SPECIALSXP.
+ *
+ * @return Pointer to the created CXXR::BuiltInFunction object.
+ */
+namespace R
+{
+    SEXP mkPRIMSXP(int offset, bool eval);
+}
 
 #endif /* BUILTINFUNCTION_HPP */

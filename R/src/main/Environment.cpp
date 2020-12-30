@@ -53,7 +53,22 @@ namespace CXXR
      * @param x Pointer to an CXXR::Environment.
      * @return Pointer to the frame of \a x .
      */
-    RObject *Environment::frame(RObject *x) { return x ? x->u.envsxp.m_frame : nullptr; }
+    RObject *Environment::frame(RObject *x)
+    {
+        if (!x)
+            return nullptr;
+#ifdef ENABLE_ST_CHECKS
+        switch (x->sexptype())
+        {
+        case ENVSXP:
+            break;
+        default:
+            std::cerr << LOCATION << "Inappropriate SEXPTYPE (" << x->sexptype() << ") for Environment." << std::endl;
+            abort();
+        }
+#endif
+        return x->u.envsxp.m_frame;
+    }
 
     /** @brief Access an environment's Frame, represented as a PairList.
      *
@@ -68,13 +83,43 @@ namespace CXXR
      * accessor function, its return value will need protection from
      * garbage collection.
      */
-    RObject *Environment::enclos(RObject *x) { return x ? x->u.envsxp.m_enclos : nullptr; }
+    RObject *Environment::enclos(RObject *x)
+    {
+        if (!x)
+            return nullptr;
+#ifdef ENABLE_ST_CHECKS
+        switch (x->sexptype())
+        {
+        case ENVSXP:
+            break;
+        default:
+            std::cerr << LOCATION << "Inappropriate SEXPTYPE (" << x->sexptype() << ") for PairList." << std::endl;
+            abort();
+        }
+#endif
+        return x->u.envsxp.m_enclos;
+    }
 
     /**
      * @param x Pointer to a CXXR::Environment.
      * @return Pointer to \a x 's hash table (may be NULL).
      */
-    RObject *Environment::hashtab(RObject *x) { return x ? x->u.envsxp.m_hashtab : nullptr; }
+    RObject *Environment::hashtab(RObject *x)
+    {
+        if (!x)
+            return nullptr;
+#ifdef ENABLE_ST_CHECKS
+        switch (x->sexptype())
+        {
+        case ENVSXP:
+            break;
+        default:
+            std::cerr << LOCATION << "Inappropriate SEXPTYPE (" << x->sexptype() << ") for Environment." << std::endl;
+            abort();
+        }
+#endif
+        return x->u.envsxp.m_hashtab;
+    }
 
     /**
      * @param x Pointer to a CXXR::Environment.
@@ -106,6 +151,16 @@ namespace CXXR
     {
         if (!x)
             return;
+#ifdef ENABLE_ST_CHECKS
+        switch (x->sexptype())
+        {
+        case ENVSXP:
+            break;
+        default:
+            std::cerr << LOCATION << "Inappropriate SEXPTYPE (" << x->sexptype() << ") for Environment." << std::endl;
+            abort();
+        }
+#endif
         x->u.envsxp.m_frame = v;
     }
 
@@ -119,6 +174,16 @@ namespace CXXR
     {
         if (!x)
             return;
+#ifdef ENABLE_ST_CHECKS
+        switch (x->sexptype())
+        {
+        case ENVSXP:
+            break;
+        default:
+            std::cerr << LOCATION << "Inappropriate SEXPTYPE (" << x->sexptype() << ") for Environment." << std::endl;
+            abort();
+        }
+#endif
         x->u.envsxp.m_enclos = v;
     }
 
@@ -132,6 +197,16 @@ namespace CXXR
     {
         if (!x)
             return;
+#ifdef ENABLE_ST_CHECKS
+        switch (x->sexptype())
+        {
+        case ENVSXP:
+            break;
+        default:
+            std::cerr << LOCATION << "Inappropriate SEXPTYPE (" << x->sexptype() << ") for Environment." << std::endl;
+            abort();
+        }
+#endif
         x->u.envsxp.m_hashtab = v;
     }
 

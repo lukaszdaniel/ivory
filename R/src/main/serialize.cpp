@@ -1878,8 +1878,6 @@ static SEXP ReadItem(SEXP ref_table, R_inpstream_t stream)
 	    return s;
 	}
     case LISTSXP:
-    case LANGSXP:
-    case DOTSXP:
 	{
 	  /* This handling of dotted pair objects still uses recursion
 	   on the CDR and so will overflow the PROTECT stack for long
@@ -1889,7 +1887,7 @@ static SEXP ReadItem(SEXP ref_table, R_inpstream_t stream)
 	   is worth to write the code to handle this now, but if it
 	   becomes necessary we can do it without needing to change
 	   the save format. */
-		PROTECT(s = allocSExp(type));
+		PROTECT(s = new PairList());
 		SETLEVELS(s, levs);
 		SET_OBJECT(s, objf);
 		R_ReadItemDepth++;
@@ -1910,6 +1908,72 @@ static SEXP ReadItem(SEXP ref_table, R_inpstream_t stream)
 		SETCAR(s, ReadItem(ref_table, stream));
 		R_ReadItemDepth--; /* do this early because of the recursion. */
 		SETCDR(s, ReadItem(ref_table, stream));
+		if (set_lastname)
+			strcpy(lastname, "<unknown>");
+		UNPROTECT(1); /* s */
+		return s;
+	}
+    case LANGSXP:
+	{
+		PROTECT(s = new Expression());
+		SETLEVELS(s, levs);
+		SET_OBJECT(s, objf);
+		R_ReadItemDepth++;
+		Rboolean set_lastname = (Rboolean) FALSE;
+		SET_ATTRIB(s, hasattr ? ReadItem(ref_table, stream) : R_NilValue);
+		SET_TAG(s, hastag ? ReadItem(ref_table, stream) : R_NilValue);
+		if (hastag && R_ReadItemDepth == R_InitReadItemDepth + 1 &&
+			isSymbol(TAG(s)))
+		{
+			snprintf(lastname, 8192, "%s", CHAR(PRINTNAME(TAG(s))));
+			set_lastname = (Rboolean) TRUE;
+		}
+		if (hastag && R_ReadItemDepth <= 0)
+		{
+			Rprintf("%*s", 2 * (R_ReadItemDepth - R_InitReadItemDepth), "");
+			PrintValue(TAG(s));
+		}
+		SETCAR(s, ReadItem(ref_table, stream));
+		R_ReadItemDepth--; /* do this early because of the recursion. */
+		// Convert tail to PairList if necessary:
+		{
+			GCRoot<ConsCell>
+				cc(SEXP_downcast<ConsCell *>(ReadItem(ref_table, stream)));
+			SETCDR(s, ConsCell::convert<PairList>(cc));
+		}
+		if (set_lastname)
+			strcpy(lastname, "<unknown>");
+		UNPROTECT(1); /* s */
+		return s;
+	}
+    case DOTSXP:
+	{
+		PROTECT(s = new DottedArgs());
+		SETLEVELS(s, levs);
+		SET_OBJECT(s, objf);
+		R_ReadItemDepth++;
+		Rboolean set_lastname = (Rboolean) FALSE;
+		SET_ATTRIB(s, hasattr ? ReadItem(ref_table, stream) : R_NilValue);
+		SET_TAG(s, hastag ? ReadItem(ref_table, stream) : R_NilValue);
+		if (hastag && R_ReadItemDepth == R_InitReadItemDepth + 1 &&
+			isSymbol(TAG(s)))
+		{
+			snprintf(lastname, 8192, "%s", CHAR(PRINTNAME(TAG(s))));
+			set_lastname = (Rboolean) TRUE;
+		}
+		if (hastag && R_ReadItemDepth <= 0)
+		{
+			Rprintf("%*s", 2 * (R_ReadItemDepth - R_InitReadItemDepth), "");
+			PrintValue(TAG(s));
+		}
+		SETCAR(s, ReadItem(ref_table, stream));
+		R_ReadItemDepth--; /* do this early because of the recursion. */
+		// Convert tail to PairList if necessary:
+		{
+			GCRoot<ConsCell>
+				cc(SEXP_downcast<ConsCell *>(ReadItem(ref_table, stream)));
+			SETCDR(s, ConsCell::convert<PairList>(cc));
+		}
 		if (set_lastname)
 			strcpy(lastname, "<unknown>");
 		UNPROTECT(1); /* s */
@@ -2219,7 +2283,7 @@ static SEXP ReadBCConsts(SEXP ref_table, SEXP reps, R_inpstream_t stream)
 static SEXP ReadBC1(SEXP ref_table, SEXP reps, R_inpstream_t stream)
 {
     SEXP s;
-    PROTECT(s = allocSExp(BCODESXP));
+    PROTECT(s = new ByteCode());
     R_ReadItemDepth++;
     SETCAR(s, ReadItem(ref_table, stream)); /* code */
     R_ReadItemDepth--;

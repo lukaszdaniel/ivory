@@ -36,7 +36,6 @@
 #include <CXXR/GCRoot.hpp>
 #include <CXXR/SEXP_downcast.hpp>
 #include <CXXR/VectorBase.hpp>
-#include <CXXR/Symbol.hpp>
 #include <string>
 #include <unordered_map>
 

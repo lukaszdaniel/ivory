@@ -34,6 +34,24 @@
 
 #define SWITCH_TO_REFCNT
 #define COMPUTE_REFCNT_VALUES
+// #define CXXR_OLD_PAIRLIST_IMPL
+// #define ENABLE_ST_CHECKS
+#define PRINT_PL(call)                                                                                                                      \
+    if (call && (call->sexptype() == LISTSXP || call->sexptype() == DOTSXP || call->sexptype() == LANGSXP || call->sexptype() == BCODESXP)) \
+    {                                                                                                                                       \
+        std::cerr << LOCATION << "Begin ccdump for " << Rf_type2char(call->sexptype()) << " ..." << std::endl;                              \
+        ccdump(std::cerr, SEXP_downcast<const CXXR::PairList *>(call), 1);                                                                  \
+        std::cerr << LOCATION << "Done ccdump ..." << std::endl                                                                             \
+                  << std::endl;                                                                                                             \
+    }                                                                                                                                       \
+    else if (call)                                                                                                                          \
+    {                                                                                                                                       \
+        std::cerr << LOCATION << "Not a pairlist but " << Rf_type2char(call->sexptype()) << std::endl;                                      \
+    }                                                                                                                                       \
+    else                                                                                                                                    \
+    {                                                                                                                                       \
+        std::cerr << LOCATION << "pairlist = nullptr" << std::endl;                                                                         \
+    }
 
 #include <cstddef>
 #include <cstring>
@@ -207,25 +225,14 @@ namespace CXXR
      */
     class RObject;
 
-    struct primsxp_struct
-    {
-        int m_offset;
-    };
-
-    struct symsxp_struct
-    {
-        RObject *m_pname;
-        RObject *m_value;
-        RObject *m_internal;
-    };
-
+#ifdef CXXR_OLD_PAIRLIST_IMPL
     struct listsxp_struct
     {
         RObject *m_carval;
         RObject *m_cdrval;
         RObject *m_tagval;
     };
-
+#endif
     struct envsxp_struct
     {
         RObject *m_frame;
@@ -303,9 +310,9 @@ namespace CXXR
 
         union
         {
-            primsxp_struct primsxp;
-            symsxp_struct symsxp;
+#ifdef CXXR_OLD_PAIRLIST_IMPL
             listsxp_struct listsxp;
+#endif
             envsxp_struct envsxp;
             closxp_struct closxp;
             promsxp_struct promsxp;
@@ -316,7 +323,7 @@ namespace CXXR
         /**
          * @param stype Required type of the RObject.
          */
-        explicit RObject(SEXPTYPE stype = ANYSXP) : m_type(stype), m_scalar(false), m_has_class(false), m_alt(false), m_gpbits(0), m_debug(false),
+        explicit RObject(SEXPTYPE stype = CXXSXP) : m_type(stype), m_scalar(false), m_has_class(false), m_alt(false), m_gpbits(0), m_debug(false),
                                                     m_trace(false), m_spare(false), m_named(0), m_extra(0), m_attrib(nullptr)
         {
 #ifdef COMPUTE_REFCNT_VALUES
@@ -339,21 +346,6 @@ namespace CXXR
 
         // Virtual function of GCNode:
         void visitChildren(const_visitor *v) const override;
-
-        /**
-         * @return pointer to first element (car) of this list.
-         */
-        const RObject *car() const { return u.listsxp.m_carval; }
-
-        /**
-         * @return pointer to tail (cdr) of this list.
-         */
-        const RObject *cdr() const { return u.listsxp.m_cdrval; }
-
-        /**
-         * @return pointer to tag of this list.
-         */
-        const RObject *tag() const { return u.listsxp.m_tagval; }
 
         /**
          * @return pointer to enclosing environment.
@@ -400,20 +392,6 @@ namespace CXXR
          */
         const RObject *promiseEnvironment() const { return u.promsxp.m_env; }
 
-        /**
-         * @return pointer to the name of this symbol.
-         */
-        const RObject *symbolName() const { return u.symsxp.m_pname; }
-
-        /**
-         * @return pointer to the value of this symbol.
-         */
-        const RObject *symbolValue() const { return u.symsxp.m_value; }
-
-        /**
-         * @return pointer to internal.
-         */
-        const RObject *symbolInternal() const { return u.symsxp.m_internal; }
 
         /** @brief Get an object's ::SEXPTYPE.
          *
@@ -497,7 +475,7 @@ namespace CXXR
         static unsigned int named(RObject *x);
         static void set_named(RObject *x, unsigned int v);
         static void set_typeof(RObject *x, SEXPTYPE v);
-        static SEXPTYPE typeof_(RObject *x);
+        static SEXPTYPE typeof_(const RObject *x);
         static unsigned int levels(RObject *x);
         static bool object(RObject *x);
         static void set_object(RObject *x, bool v);

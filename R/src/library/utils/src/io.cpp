@@ -44,6 +44,7 @@
 #include <rlocale.h> /* for btowc */
 
 using namespace R;
+using namespace CXXR;
 
 /* The size of vector initially allocated by scan */
 #define SCAN_BLOCKSIZE		1000
@@ -721,13 +722,13 @@ SEXP typeconvert(SEXP call, SEXP op, SEXP args, SEXP env)
 		    SET_STRING_ELT(levs, j++, STRING_ELT(cvec, i));
 	    }
 
-	    /* We avoid an allocation by reusing dup,
-	     * a LGLSXP of the right length
+		/* CR avoided an allocation by reusing dup,
+	     * a LGLSXP of the right length.  CXXR doesn't!
 	     */
-	    rval = dup;
-	    SET_TYPEOF(rval, INTSXP);
+		GCRoot<IntVector> rvalr(new IntVector(LENGTH(dup), true));
+		rval = rvalr;
 
-	    /* put the levels in lexicographic order */
+		/* put the levels in lexicographic order */
 
 	    sortVector(levs, false);
 

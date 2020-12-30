@@ -535,12 +535,10 @@ static void RemakeNextSEXP(FILE *fp, NodeInfo &node, int version, InputRoutines 
     /* ATTRIB(s) = */ m.InInteger(fp, d);
     switch (type) {
     case LISTSXP:
+	s = new PairList();
+	break;
     case LANGSXP:
-	s = allocSExp(type);
-	/* skip over CAR, CDR, and TAG */
-	/* CAR(s) = */ m.InInteger(fp, d);
-	/* CDR(s) = */ m.InInteger(fp, d);
-	/* TAG(s) = */ m.InInteger(fp, d);
+	s = new Expression();
 	break;
     case CLOSXP:
 	s = new RObject(CLOSXP);
@@ -564,12 +562,16 @@ static void RemakeNextSEXP(FILE *fp, NodeInfo &node, int version, InputRoutines 
 	/* TAG(s) = */ m.InInteger(fp, d);
 	break;
     case SPECIALSXP:
-    case BUILTINSXP:
-	s = new RObject(type);
 	/* skip over length and name fields */
 	/* length = */ m.InInteger(fp, d);
 	R_AllocStringBuffer(MAXELTSIZE - 1, (d->buffer));
-	/* name = */ m.InString(fp, d);
+	s = new BuiltInFunction(StrToInternal(m.InString(fp, d)), false);
+	break;
+    case BUILTINSXP:
+	/* skip over length and name fields */
+	/* length = */ m.InInteger(fp, d);
+	R_AllocStringBuffer(MAXELTSIZE - 1, (d->buffer));
+	s = new BuiltInFunction(StrToInternal(m.InString(fp, d)));
 	break;
     case CHARSXP:
 	len = m.InInteger(fp, d);
@@ -662,7 +664,6 @@ static void RestoreSEXP(SEXP s, FILE *fp, InputRoutines &m, NodeInfo &node, int 
             warning(_("unrecognized internal function name '%s'"), d->buffer.data);
             index = 0; /* zero doesn't make sense, but is back compatible with 3.0.0 and earlier */
         }
-        SET_PRIMOFFSET(s, index);
     }
     break;
     case CHARSXP:
@@ -1325,9 +1326,21 @@ static SEXP NewReadItem(SEXP sym_table, SEXP env_table, FILE *fp,
 	PROTECT(s = pos ? VECTOR_ELT(env_table, pos - 1) : R_NilValue);
 	break;
     case LISTSXP:
+	PROTECT(s = new PairList());
+	SET_TAG(s, NewReadItem(sym_table, env_table, fp, m, d));
+	SETCAR(s, NewReadItem(sym_table, env_table, fp, m, d));
+	SETCDR(s, NewReadItem(sym_table, env_table, fp, m, d));
+	/*UNPROTECT(1);*/
+	break;
     case LANGSXP:
+	PROTECT(s = new Expression());
+	SET_TAG(s, NewReadItem(sym_table, env_table, fp, m, d));
+	SETCAR(s, NewReadItem(sym_table, env_table, fp, m, d));
+	SETCDR(s, NewReadItem(sym_table, env_table, fp, m, d));
+	/*UNPROTECT(1);*/
+	break;
     case DOTSXP:
-	PROTECT(s = allocSExp(type));
+	PROTECT(s = new DottedArgs());
 	SET_TAG(s, NewReadItem(sym_table, env_table, fp, m, d));
 	SETCAR(s, NewReadItem(sym_table, env_table, fp, m, d));
 	SETCDR(s, NewReadItem(sym_table, env_table, fp, m, d));

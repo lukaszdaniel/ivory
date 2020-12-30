@@ -40,6 +40,7 @@
 
 using namespace std;
 using namespace R;
+using namespace CXXR;
 
 static R_StringBuffer cbuff = R_StringBuffer();
 

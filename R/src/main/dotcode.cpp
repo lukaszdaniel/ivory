@@ -40,6 +40,7 @@
 
 using namespace std;
 using namespace R;
+using namespace CXXR;
 
 /* Was 'name' prior to 2.13.0, then .NAME, but checked as
    'name' up to 2.15.1. */
@@ -1497,8 +1498,7 @@ void call_R(char *func, long nargs, void **arguments, char **modes,
 	error(_("invalid argument count in 'call_R()'"));
     if (nres < 0)
 	error(_("invalid return value count in 'call_R()'"));
-    PROTECT(pcall = call = allocList((int) nargs + 1));
-    SET_TYPEOF(call, LANGSXP);
+    PROTECT(pcall = call = new Expression((int) nargs + 1));
     SETCAR(pcall, (SEXP)func);
     s = R_NilValue;		/* -Wall */
     for (i = 0 ; i < nargs ; i++) {

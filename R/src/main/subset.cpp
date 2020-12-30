@@ -43,7 +43,9 @@
 #include <Localization.h>
 #include <Defn.h>
 #include <Internal.h>
+
 using namespace R;
+using namespace CXXR;
 
 /* JMC convinced MM that this was not a good idea: */
 #undef _S4_subsettable
@@ -898,9 +900,8 @@ HIDDEN SEXP do_subset_dflt(SEXP call, SEXP op, SEXP args, SEXP rho)
 
     if (type == LANGSXP) {
 	ax = ans;
-	PROTECT(ans = allocList(LENGTH(ax)));
+	PROTECT(ans = (LENGTH(ax) > 0 ? new Expression(LENGTH(ax)) : nullptr));
 	if ( LENGTH(ax) > 0 ) {
-	    SET_TYPEOF(ans, LANGSXP);
 	    for(px = ans, i = 0 ; px != R_NilValue ; px = CDR(px))
 		SETCAR(px, VECTOR_ELT(ax, i++));
 	    setAttrib(ans, R_DimSymbol, getAttrib(ax, R_DimSymbol));

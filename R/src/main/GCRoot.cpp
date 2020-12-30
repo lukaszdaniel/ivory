@@ -51,7 +51,7 @@ namespace CXXR
     } // namespace
 } // namespace CXXR
 
-vector<GCNode *> *GCRootBase::s_roots;
+vector<const GCNode *> *GCRootBase::s_roots;
 
 #ifdef NDEBUG
 vector<RObject *> *GCRootBase::s_pps;
@@ -61,7 +61,7 @@ vector<pair<RObject *, RCNTXT *>> *GCRootBase::s_pps;
 
 void GCRootBase::initialize()
 {
-    s_roots = new vector<GCNode *>;
+    s_roots = new vector<const GCNode *>;
 #ifdef NDEBUG
     s_pps = new vector<RObject *>;
 #else

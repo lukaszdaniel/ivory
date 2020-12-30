@@ -31,6 +31,7 @@
 #include <assert.h>
 
 using namespace R;
+using namespace CXXR;
 
 static SEXP installAttrib(SEXP, SEXP, SEXP);
 static SEXP removeAttrib(SEXP, SEXP);
@@ -923,8 +924,7 @@ HIDDEN SEXP do_namesgets(SEXP call, SEXP op, SEXP args, SEXP env)
     SEXP names = CADR(args);
     if (names != R_NilValue &&
 	! (TYPEOF(names) == STRSXP && ATTRIB(names) == R_NilValue)) {
-	PROTECT(call = allocList(2));
-	SET_TYPEOF(call, LANGSXP);
+	PROTECT(call = new Expression(2));
 	SETCAR(call, R_AsCharacterSymbol);
 	SETCADR(call, names);
 	names = eval(call, env);

@@ -92,6 +92,7 @@
 #include <R_ext/RS.h> /* for test of S4 objects */
 #include <R_ext/Itermacros.h>
 
+using namespace std;
 using namespace R;
 using namespace CXXR;
 
@@ -1496,7 +1497,8 @@ static SEXP SimpleListAssign(SEXP call, SEXP x, SEXP s, SEXP y, int ind,
 
 static SEXP listRemove(SEXP x, SEXP s, int ind)
 {
-    SEXP pv, px, val;
+#if CXXR_TRUE //#ifdef CXXR_OLD_PAIRLIST_IMPL
+	SEXP pv, px, val;
     int i, ii, *indx, ns, nx;
     R_xlen_t stretch=0;
     const void *vmax = vmaxget();
@@ -1546,6 +1548,63 @@ static SEXP listRemove(SEXP x, SEXP s, int ind)
     UNPROTECT(2);
     vmaxset(vmax);
     return val;
+#else
+	vector<ConsCell *, Allocator<ConsCell *>> vcc;
+	// Assemble vector of pointers to list elements:
+	for (ConsCell *xp = SEXP_downcast<ConsCell *>(x); xp; xp = xp->tail())
+		vcc.push_back(xp);
+
+	// Null out pointers to unwanted elements:
+	{
+		R_xlen_t stretch = 0;
+		if (TYPEOF(s) == REALSXP)
+		{
+			GCRoot<RealVector> rv(SEXP_downcast<RealVector *>(makeSubscript(x, GetOneIndex(s, ind), stretch, nullptr)));
+			int ns = rv->size();
+
+			for (int i = 0; i < ns; i++)
+			{
+				double di = (*rv)[i];
+				if (R_FINITE(di))
+					vcc[(R_xlen_t)di - 1] = 0;
+			}
+		}
+		else
+		{
+			GCRoot<IntVector> iv(SEXP_downcast<IntVector *>(makeSubscript(x, GetOneIndex(s, ind), stretch, nullptr)));
+			int ns = iv->size();
+			for (int i = 0; i < ns; ++i)
+			{
+				int ii = (*iv)[i];
+				if (ii != NA_INTEGER)
+					vcc[ii - 1] = 0;
+			}
+		}
+	}
+	// Restring the pearls:
+	{
+		ConsCell *ans = nullptr;
+		for (int i = vcc.size() - 1; i >= 0; --i)
+		{
+			ConsCell *cc = vcc[i];
+			if (cc)
+			{
+				PairList *tail = static_cast<PairList *>(ans);
+				ans = cc;
+				ans->setTail(tail);
+			}
+			else
+			{
+				/* The current cell, to which cc points, is removed and is
+				 no longer accessible, so we can decrement the reference
+				 count on it's fields. */
+				DECREMENT_REFCNT(CAR(cc));
+				DECREMENT_REFCNT(CDR(cc));
+			}
+		}
+		return ans;
+	}
+#endif
 }
 
 
@@ -1712,8 +1771,9 @@ HIDDEN SEXP do_subassign_dflt(SEXP call, SEXP op, SEXP args, SEXP rho)
 
     if (oldtype == LANGSXP) {
 	if(Rf_length(x)) {
-	    x = VectorToPairList(x);
-		SET_TYPEOF(x, LANGSXP);
+	    GCRoot<PairList> xlr(static_cast<PairList*>(VectorToPairList(x)));
+	    GCRoot<Expression> xr(ConsCell::convert<Expression>(xlr));
+	    x = xr;
 	} else
 	    error(_("result is zero-length and so cannot be a language object"));
     }
@@ -2216,7 +2276,7 @@ SEXP R::R_subassign3_dflt(SEXP call, SEXP x, SEXP nlist, SEXP val)
 		    break;
 		}
 		else if (CDR(t) == R_NilValue && val != R_NilValue) {
-		    SETCDR(t, allocSExp(LISTSXP));
+		    SETCDR(t, new PairList());
 		    SET_TAG(CDR(t), nlist);
 		    if (MAYBE_REFERENCED(val)) ENSURE_NAMEDMAX(val);
 		    SETCADR(t, val);

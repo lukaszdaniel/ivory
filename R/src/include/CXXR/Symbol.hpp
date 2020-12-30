@@ -32,11 +32,14 @@
 #define SYMBOL_HPP
 
 #include <CXXR/RObject.hpp>
+#include <CXXR/BuiltInFunction.hpp>
+#include <CXXR/String.hpp>
 #include <CXXR/SEXP_downcast.hpp>
 #include <R_ext/Boolean.h>
 
 extern "C"
 {
+    extern SEXP R_UnboundValue;
     /* Symbol Table Shortcuts */
 #define PREDEFINED_SYMBOL(C_NAME, RHO_NAME, R_NAME) \
     extern SEXP C_NAME;
@@ -89,18 +92,71 @@ namespace CXXR
      */
     class Symbol : public RObject
     {
-    private:
-        RObject *m_pname;
-        RObject *m_value;
-        RObject *m_internal;
-        // bool m_ddval;
-        // Declared private to ensure that Symbol objects are
-        // allocated only using 'new':
-        ~Symbol(){};
-
     public:
-        // Virtual functions of RObject:
-        const char *typeName() const override;
+        /**
+         * @param name Pointer to String object representing the name
+         *          of the symbol.  Names of the form
+         *          <tt>..<em>n</em></tt>, where n is a (non-negative)
+         *          decimal integer signify that the Symbol to be
+         *          constructed relates to an element of a
+         *          <tt>...</tt> argument list.
+         *
+         * @param val Value to be associated with the constructed
+         *          Symbol object.  The default value is a placeholder
+         *          signifying that no value has yet been associated
+         *          with the Symbol.
+         *
+         * @param internal_func Pointer to an internal function to be
+         *          denoted by the constructed Symbol.
+         */
+        explicit Symbol(const String *name, RObject *val = R_UnboundValue,
+                        const BuiltInFunction *internal_func = nullptr);
+
+        /** @brief Access internal function.
+         *
+         * @return const pointer to the internal function (if any)
+         *         denoted by this Symbol.
+         */
+        const BuiltInFunction *internalFunction() const
+        {
+            return m_internalfunc;
+        }
+
+        /** @brief Access name.
+         *
+         * @return const pointer to the name of this Symbol.
+         */
+        const String *name() const
+        {
+            return m_name;
+        }
+
+        /** @brief Set internal function.
+         *
+         * @param func Pointer to the internal function now to be
+         *          denoted by this symbol.  A null pointer is
+         *          permissible.
+         *
+         * @note It would be better if this was set exclusively during
+         * construction.
+         */
+        void setInternalFunction(const BuiltInFunction *fun)
+        {
+            m_internalfunc = fun;
+            devolveAge(m_internalfunc);
+        }
+
+        /** @brief Set value.
+         *
+         * @param val Pointer to the RObject now to be considered as
+         *            the value of this symbol.  A null pointer or
+         *            unboundValue() are permissible values of \a val.
+         */
+        void setValue(RObject *val)
+        {
+            m_value = val;
+            devolveAge(m_value);
+        }
 
         /** @brief The name by which this type is known in R.
          *
@@ -110,9 +166,34 @@ namespace CXXR
         {
             return "symbol";
         }
-        auto printname() const { return this->m_pname; }
-        auto symvalue() const { return this->m_value; }
-        auto internal() const { return this->m_internal; }
+
+        /** @brief Access value.
+         *
+         * @return pointer to the value of this Symbol.  Returns
+         *         unboundValue() if no value is currently associated
+         *         with the Symbol.
+         */
+        RObject *value()
+        {
+            return m_value;
+        }
+
+        /** @brief Access value (const variant).
+         *
+         * @return const pointer to the value of this Symbol.  Returns
+         *         unboundValue() if no value is currently associated
+         *         with the Symbol.
+         */
+        const RObject *value() const
+        {
+            return m_value;
+        }
+
+        // Virtual function of RObject:
+        const char *typeName() const override;
+
+        // Virtual function of GCNode:
+        void visitChildren(const_visitor *v) const override;
 
         /* Symbol Access Methods */
         static constexpr int DDVAL_MASK = 1;
@@ -126,54 +207,72 @@ namespace CXXR
         static void set_printname(RObject *x, RObject *v);
         static void set_symvalue(RObject *x, RObject *val);
         static void set_internal(RObject *x, RObject *v);
+
+    private:
+        static const unsigned int s_DDBIT = 0;
+
+        const String *m_name;
+        RObject *m_value;
+        const BuiltInFunction *m_internalfunc;
+
+        // Declared private to ensure that Symbol objects are
+        // allocated only using 'new':
+        ~Symbol() {}
+
+        // Not (yet) implemented.  Declared to prevent
+        // compiler-generated versions:
+        Symbol(const Symbol &);
+        Symbol &operator=(const Symbol &);
     };
 } // namespace CXXR
 
 extern "C"
 {
-    /**
-     * @param s Pointer to an RObject.
-     * @return TRUE iff the RObject pointed to by \a s is a symbol.
+    /** @brief Test if SYMSXP.
+     *
+     * @param s Pointer to a CXXR::RObject.
+     *
+     * @return TRUE iff s points to a CXXR::RObject with ::SEXPTYPE
+     *         SYMSXP. 
      */
     Rboolean Rf_isSymbol(SEXP s);
 
-    /* Accessor functions. */
-
-    /* Symbol Access Functions */
-
-    /**
-     * Symbol name.
-     * @param x Pointer to an \c Symbol.
-     * @return Pointer to \c RObject representings \a x's name.
+    /** @brief Symbol name.
+     *
+     * @param x Pointer to a CXXR::Symbol (checked).
+     *
+     * @return Pointer to a CXXR::String representings \a x's name.
      */
     SEXP PRINTNAME(SEXP x);
 
-    /**
-     * Symbol value.
-     * @param x Pointer to an \c Symbol.
-     * @return Pointer to \c RObject representings \a x's value.
+     /** @brief Symbol value.
+     *
+     * @param x Pointer to a CXXR::Symbol (checked).
+     *
+     * @return Pointer to a CXXR::RObject representings \a x's value.
+     *         Returns R_UnboundValue if no value is currently
+     *         associated with the Symbol.
      */
     SEXP SYMVALUE(SEXP x);
 
-    /**
-     * Internal function value.
-     * @param x Pointer to an \c Symbol.
-     * @return ? If \a x represents and internal function, the corresponding
-     * \c RObject, otherwise NULL..
+    /** @brief Internal function value.
+     *
+     * @param x Pointer to a CXXR::Symbol (checked).
+     *
+     * @return If \a x denotes an internal function, a pointer to
+     *         the appropriate CXXR::BuiltInFunction, otherwise a null
+     *         pointer..
      */
     SEXP INTERNAL(SEXP x);
 
-    /**
-     * Did symbol arise from ... expression?
-     * @param x Pointer to an \c Symbol.
-     * @return \c true iff this symbol arose from a ... expression.
+    /** @brief Does symbol relate to a <tt>...</tt> expression?
+     *
+     * @param x Pointer to a CXXR::Symbol (checked).
+     *
+     * @return \c TRUE iff this symbol denotes an element of a
+     *         <tt>...</tt> expression.
      */
     int DDVAL(SEXP x);
-
-    /**
-     * @deprecated Ought to be private.
-     */
-    void SET_DDVAL(SEXP x, int v);
 
     /**
      * Set symbol's name.
@@ -182,19 +281,44 @@ extern "C"
      */
     void SET_PRINTNAME(SEXP x, SEXP v);
 
-    /**
-     * Set symbol's value.
-     * @param x Pointer to an \c Symbol.
-     * @param v Pointer to an \c RObject representing the new value.
+    /** @brief Set symbol's value.
+     *
+     * @param x Pointer to a CXXR::Symbol (checked).
+     *
+     * @param val Pointer to the RObject now to be considered as
+     *            the value of this symbol.  A null pointer or
+     *            R_UnboundValue are permissible values of \a val.
      */
     void SET_SYMVALUE(SEXP x, SEXP v);
 
-    /**
-     * Set internal function.
-     * @param x Pointer to an \c Symbol.
-     * @param v Pointer to an \c RObject representing an internal function.
+    /** @brief Set internal function denoted by a symbol.
+     *
+     * @param x Pointer to a CXXR::Symbol (checked).
+     *
+     * @param func Pointer to the CXXR::BuiltInFunction (checked) to
+     *          be denoted by this symbol.  A null pointer is
+     *          permissible.
+     *
+     * @note It would be better if this was set exclusively during
+     * construction.
      */
     void SET_INTERNAL(SEXP x, SEXP v);
 } // extern "C"
+
+/** @brief Create a CXXR::Symbol object.
+     *
+     * @param name Pointer to a CXXR::String object (checked) to be
+     *          taken as the name of the constructed symbol.
+     *
+     * @param val Pointer to the CXXR::RObject to be considered as
+     *          the value of the constructed symbol.  A null pointer or
+     *          R_UnboundValue are permissible values of \a val.
+     *
+     * @return Pointer to the created CXXR::Symbol object.
+     */
+namespace R
+{
+    SEXP mkSYMSXP(SEXP name, SEXP value);
+}
 
 #endif /* SYMBOL_HPP */

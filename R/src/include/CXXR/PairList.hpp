@@ -58,18 +58,18 @@ namespace CXXR
     {
     public:
         /**
-         * @param st The required ::SEXPTYPE of the PairList.  Must
-         *           be one of LISTSXP, LANGSXP, DOTSXP or BCODESXP (not
-         *           checked).
          * @param cr Pointer to the 'car' of the element to be
          *           constructed.
          * @param tl Pointer to the 'tail' (LISP cdr) of the element
          *           to be constructed.
          * @param tg Pointer to the 'tag' of the element to be constructed.
          */
-        explicit PairList(SEXPTYPE st,
-                          RObject *cr = nullptr, PairList *tl = nullptr, RObject *tg = nullptr)
-            : ConsCell(st, cr, tl, tg) // ConsCell(LISTSXP, cr, tl, tg)
+#ifdef CXXR_OLD_PAIRLIST_IMPL
+        explicit PairList(RObject *cr = nullptr, RObject *tl = nullptr, RObject *tg = nullptr)
+#else
+        explicit PairList(RObject *cr = nullptr, PairList *tl = nullptr, RObject *tg = nullptr)
+#endif
+            : ConsCell(LISTSXP, cr, tl, tg)
         {
         }
 
@@ -79,15 +79,12 @@ namespace CXXR
          * of elements.  On creation, each element has null 'car' and
          * 'tag'.
          *
-         * @param st The required ::SEXPTYPE of the PairList.  Must
-         *           be one of LISTSXP, LANGSXP, DOTSXP or BCODESXP
-         *           (not checked).
          * @param sz Number of elements required in the list.  Must be
          *           strictly positive; the constructor throws
          *           std::out_of_range if \a sz is zero.
          */
-        PairList(SEXPTYPE st, size_t sz)
-            : ConsCell(st, sz) // ConsCell(LISTSXP, sz)
+        PairList(size_t sz)
+            : ConsCell(LISTSXP, sz)
         {
         }
 
@@ -103,11 +100,12 @@ namespace CXXR
         // Virtual function of RObject:
         const char *typeName() const;
 
-    private:
-        // Declared private to ensure that PairList objects are
+    protected:
+        // Declared protected to ensure that PairList objects are
         // allocated only using 'new':
         ~PairList() {}
 
+    private:
         // Not implemented yet.  Declared to prevent
         // compiler-generated versions:
         PairList(const PairList &);
@@ -116,8 +114,26 @@ namespace CXXR
 
     inline void ConsCell::setTail(PairList *tl)
     {
+#ifdef CXXR_OLD_PAIRLIST_IMPL
+        u.listsxp.m_cdrval = tl;
+        devolveAge(u.listsxp.m_cdrval);
+#else
         m_tail = tl;
         devolveAge(m_tail);
+#endif
+    }
+
+    template <class T = PairList>
+    T *CXXR_cons(SEXP car, SEXP cdr)
+    {
+        GCRoot<> crr(car);
+        GCRoot<PairList> tlr(SEXP_downcast<PairList *>(cdr));
+
+        if (car)
+            INCREMENT_REFCNT(crr);
+        if (cdr)
+            INCREMENT_REFCNT(tlr);
+        return new T(crr, tlr);
     }
 } // namespace CXXR
 
@@ -138,9 +154,9 @@ extern "C"
      */
     SEXP CAR0(SEXP e);
 
-    /** @brief Get tail of CXXR::PairList element.
+    /** @brief Get tail of CXXR::ConsCell.
      *
-     * @param e Pointer to a CXXR::PairList (checked), or a null pointer.
+     * @param e Pointer to a CXXR::ConsCell (checked), or a null pointer.
      * @return Pointer to the tail of the list, or 0 if \a e is
      * a null pointer.
      */

@@ -56,7 +56,23 @@ namespace CXXR
      * @return Pointer to the expression to be evaluated by the
      *         CXXR::Promise. 
      */
-    RObject *Promise::prcode(RObject *x) { return x ? x->u.promsxp.m_expr : nullptr; }
+    RObject *Promise::prcode(RObject *x)
+    {
+        if (!x)
+            return nullptr;
+#ifdef ENABLE_ST_CHECKS
+        switch (x->sexptype())
+        {
+        case PROMSXP:
+        case SYMSXP:
+            break;
+        default:
+            std::cerr << LOCATION << "Inappropriate SEXPTYPE (" << x->sexptype() << ") for Promise." << std::endl;
+            abort();
+        }
+#endif
+        return x->u.promsxp.m_expr;
+    }
 
     /** @brief Set the expression of a CXXR::Promise.
      *
@@ -68,6 +84,17 @@ namespace CXXR
     {
         if (!x)
             return;
+#ifdef ENABLE_ST_CHECKS
+        switch (x->sexptype())
+        {
+        case PROMSXP:
+        case SYMSXP:
+            break;
+        default:
+            std::cerr << LOCATION << "Inappropriate SEXPTYPE (" << x->sexptype() << ") for Promise." << std::endl;
+            abort();
+        }
+#endif
         x->u.promsxp.m_expr = v;
     }
 
@@ -77,7 +104,23 @@ namespace CXXR
      *
      * @return Pointer to the environment of the CXXR::Promise. 
      */
-    RObject *Promise::prenv(RObject *x) { return x ? x->u.promsxp.m_env : nullptr; }
+    RObject *Promise::prenv(RObject *x)
+    {
+        if (!x)
+            return nullptr;
+#ifdef ENABLE_ST_CHECKS
+        switch (x->sexptype())
+        {
+        case PROMSXP:
+        case SYMSXP:
+            break;
+        default:
+            std::cerr << LOCATION << "Inappropriate SEXPTYPE (" << x->sexptype() << ") for Promise." << std::endl;
+            abort();
+        }
+#endif
+        return x->u.promsxp.m_env;
+    }
 
     /** @brief Access the value of a CXXR::Promise.
      *
@@ -86,7 +129,23 @@ namespace CXXR
      * @return Pointer to the value of the CXXR::Promise, or to
      *         R_UnboundValue if it has not yet been evaluated..
      */
-    RObject *Promise::prvalue(RObject *x) { return x ? x->u.promsxp.m_value : nullptr; }
+    RObject *Promise::prvalue(RObject *x)
+    {
+        if (!x)
+            return nullptr;
+#ifdef ENABLE_ST_CHECKS
+        switch (x->sexptype())
+        {
+        case PROMSXP:
+        case SYMSXP:
+            break;
+        default:
+            std::cerr << LOCATION << "Inappropriate SEXPTYPE (" << x->sexptype() << ") for Promise." << std::endl;
+            abort();
+        }
+#endif
+        return x->u.promsxp.m_value;
+    }
 
     /** @brief Set the value of a CXXR::Promise.
      *
@@ -103,6 +162,17 @@ namespace CXXR
     {
         if (!x)
             return;
+#ifdef ENABLE_ST_CHECKS
+        switch (x->sexptype())
+        {
+        case PROMSXP:
+        case SYMSXP:
+            break;
+        default:
+            std::cerr << LOCATION << "Inappropriate SEXPTYPE (" << x->sexptype() << ") for Promise." << std::endl;
+            abort();
+        }
+#endif
         x->u.promsxp.m_value = v;
     }
 
@@ -118,6 +188,17 @@ namespace CXXR
     {
         if (!x)
             return;
+#ifdef ENABLE_ST_CHECKS
+        switch (x->sexptype())
+        {
+        case PROMSXP:
+        case SYMSXP:
+            break;
+        default:
+            std::cerr << LOCATION << "Inappropriate SEXPTYPE (" << x->sexptype() << ") for Promise." << std::endl;
+            abort();
+        }
+#endif
         x->u.promsxp.m_env = v;
     }
 

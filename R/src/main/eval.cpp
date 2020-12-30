@@ -1275,7 +1275,7 @@ inline static SEXP make_cached_cmpenv(SEXP fun)
 	SEXP newenv = PROTECT(NewEnvironment(R_NilValue, R_NilValue, top));
 	for (; frmls != R_NilValue; frmls = CDR(frmls))
 	    defineVar(TAG(frmls), R_NilValue, newenv);
-	for (SEXP env = cmpenv; env != top; env = CDR(env)) {
+	for (SEXP env = cmpenv; env != top; env = ENCLOS(env)) {
 	    if (IS_STANDARD_UNHASHED_FRAME(env))
 		cmpenv_enter_frame(FRAME(env), newenv);
 	    else if (IS_STANDARD_HASHED_FRAME(env)) {
@@ -2172,8 +2172,8 @@ static SEXP replaceCall(SEXP fun, SEXP val, SEXP args, SEXP rhs)
     PROTECT(args);
     PROTECT(rhs);
     PROTECT(val);
-    ptmp = tmp = allocList(length(args)+3);
-    UNPROTECT(4);
+	ptmp = tmp = new Expression(length(args) + 3);
+	UNPROTECT(4);
     SETCAR(ptmp, fun); ptmp = CDR(ptmp);
     SETCAR(ptmp, val); ptmp = CDR(ptmp);
     while(args != R_NilValue) {
@@ -2184,7 +2184,6 @@ static SEXP replaceCall(SEXP fun, SEXP val, SEXP args, SEXP rhs)
     }
     SETCAR(ptmp, rhs);
     SET_TAG(ptmp, R_valueSym);
-    SET_TYPEOF(tmp, LANGSXP);
     MARK_ASSIGNMENT_CALL(tmp);
     return tmp;
 }
@@ -8484,10 +8483,10 @@ HIDDEN SEXP do_mkcode(SEXP call, SEXP op, SEXP args, SEXP rho)
 	checkArity(op, args);
 	bytes = CAR(args);
 	consts = CADR(args);
-	ans = PROTECT(CONS(R_bcEncode(bytes), consts));
-	SET_TYPEOF(ans, BCODESXP);
+	GCRoot<> enc(R_bcEncode(bytes));
+	GCRoot<PairList> pl(SEXP_downcast<PairList *>(consts));
+	ans = new ByteCode(enc, pl);
 	R_registerBC(bytes, ans);
-	UNPROTECT(1); /* ans */
 	return ans;
 }
 

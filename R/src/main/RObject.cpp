@@ -65,87 +65,43 @@ namespace CXXR
             m_attrib->conductVisitor(v);
 
         if (m_alt)
+            return;
+
+        switch (m_type)
         {
-            if (RObject::bndcell_tag(this))
-            {
-                Rf_error("bad binding access");
-            }
-            const RObject *p = this;
-            do
-            {
-                if (p->car())
-                    p->car()->conductVisitor(v);
-                if (p->tag())
-                    p->tag()->conductVisitor(v);
-                if (p->cdr())
-                    p->cdr()->conductVisitor(v);
-                p = p->cdr();
-            } while (p && (*v)(p));
+        case ENVSXP:
+        {
+            if (frame())
+                frame()->conductVisitor(v);
+            if (enclosingEnvironment())
+                enclosingEnvironment()->conductVisitor(v);
+            if (hashTable())
+                hashTable()->conductVisitor(v);
         }
-        else
-            switch (m_type)
-            {
-            case ENVSXP:
-            {
-                if (frame())
-                    frame()->conductVisitor(v);
-                if (enclosingEnvironment())
-                    enclosingEnvironment()->conductVisitor(v);
-                if (hashTable())
-                    hashTable()->conductVisitor(v);
-            }
+        break;
+        case CLOSXP:
+        {
+            if (formals())
+                formals()->conductVisitor(v);
+            if (body())
+                body()->conductVisitor(v);
+            if (closureEnvironment())
+                closureEnvironment()->conductVisitor(v);
+        }
+        break;
+        case PROMSXP:
+        {
+            if (promiseValue())
+                promiseValue()->conductVisitor(v);
+            if (promiseExpression())
+                promiseExpression()->conductVisitor(v);
+            if (promiseEnvironment())
+                promiseEnvironment()->conductVisitor(v);
+        }
+        break;
+        default:
             break;
-            case CLOSXP:
-            {
-                if (formals())
-                    formals()->conductVisitor(v);
-                if (body())
-                    body()->conductVisitor(v);
-                if (closureEnvironment())
-                    closureEnvironment()->conductVisitor(v);
-            }
-            break;
-            case PROMSXP:
-            {
-                if (promiseValue())
-                    promiseValue()->conductVisitor(v);
-                if (promiseExpression())
-                    promiseExpression()->conductVisitor(v);
-                if (promiseEnvironment())
-                    promiseEnvironment()->conductVisitor(v);
-            }
-            break;
-            case SYMSXP:
-            {
-                if (symbolName())
-                    symbolName()->conductVisitor(v);
-                if (symbolValue())
-                    symbolValue()->conductVisitor(v);
-                if (symbolInternal())
-                    symbolInternal()->conductVisitor(v);
-            }
-            break;
-            case LISTSXP:
-            case LANGSXP:
-            case DOTSXP:
-            case BCODESXP:
-            {
-                const RObject *p = this;
-                do
-                {
-                    if (p->car() && (p->sexptype() != LISTSXP || BOXED_BINDING_CELLS || RObject::bndcell_tag(p) == 0))
-                        p->car()->conductVisitor(v);
-                    if (p->tag())
-                        p->tag()->conductVisitor(v);
-                    if (p->cdr())
-                        p->cdr()->conductVisitor(v);
-                    p = p->cdr();
-                } while (p && (*v)(p));
-            }
-            break;
-            default:
-                break;
-            }
+        }
     }
 
     RObject::RObject(const RObject &pattern)
@@ -226,7 +182,7 @@ namespace CXXR
      * @param x Pointer to \c RObject.
      * @return \c SEXPTYPE of \a x, or NILSXP if x is a null pointer.
      */
-    SEXPTYPE RObject::typeof_(RObject *x) { return x ? x->m_type : NILSXP; }
+    SEXPTYPE RObject::typeof_(const RObject *x) { return x ? x->m_type : NILSXP; }
 
     /**
      * @deprecated

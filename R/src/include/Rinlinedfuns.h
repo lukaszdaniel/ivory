@@ -740,11 +740,6 @@ extern inline SEXP Rf_listAppend(SEXP s, SEXP t)
  */
 
 extern SEXP Rf_lcons(SEXP cr, SEXP tl);
-// {
-//     SEXP e = Rf_cons(cr, tl);
-//     SET_TYPEOF(e, LANGSXP);
-//     return e;
-// }
 
 extern inline SEXP Rf_lang1(SEXP s)
 {

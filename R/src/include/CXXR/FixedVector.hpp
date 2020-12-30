@@ -59,7 +59,7 @@ namespace CXXR
          * @param sz Number of elements required.  Zero is
          *          permissible.
          */
-        FixedVector(R_xlen_t sz, R_allocator_t *allocator)
+        FixedVector(R_xlen_t sz, R_allocator_t *allocator = nullptr)
             : VectorBase(ST, sz), m_data(&m_singleton), m_allocator(allocator)
         {
             if (sz > 1)
@@ -77,7 +77,7 @@ namespace CXXR
          * @param initializer Initial value to be assigned to every
          *          element.
          */
-        FixedVector(R_xlen_t sz, const T &initializer, R_allocator_t *allocator)
+        FixedVector(R_xlen_t sz, const T &initializer, R_allocator_t *allocator = nullptr)
             : VectorBase(ST, sz), m_data(&m_singleton),
               m_singleton(initializer), m_allocator(allocator)
         {
@@ -145,7 +145,6 @@ namespace CXXR
 
     private:
         T *m_data;            // pointer to the vector's data block.
-        bool m_allocator;     // indicator whether external allocator was used
         R_xlen_t m_databytes; // used only if > 1 elements
 
         // If there is only one element, it is stored here, internally
@@ -153,6 +152,7 @@ namespace CXXR
         // allocation from CXXR::MemoryBank.  We put this last, so that it
         // will be adjacent to any trailing redzone.
         T m_singleton;
+        bool m_allocator; // indicator whether external allocator was used
 
         // Not implemented yet.  Declared to prevent
         // compiler-generated versions:

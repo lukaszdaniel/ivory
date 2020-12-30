@@ -47,20 +47,26 @@ namespace CXXR
 
 namespace
 {
-    void indent(std::ostream &os, size_t margin)
-    {
-        while (margin--)
-            os << " ";
-    }
+    // void indent(std::ostream &os, size_t margin)
+    // {
+    //     while (margin--)
+    //         os << " ";
+    // }
 } // namespace
 
-void CXXR::strdump(std::ostream &os, const StringVector &sv, size_t margin)
+void CXXR::strdump(std::ostream &os, const StringVector *sv, size_t margin)
 {
-    indent(os, margin);
-    os << "character:\n";
-    for (R_xlen_t i = 0; i < sv.size(); ++i)
+    if (!sv)
     {
-        indent(os, margin + 2);
-        os << sv[i]->c_str() << "\n";
+        os << "sv is nullptr" << std::endl;
+        return;
     }
+    // indent(os, margin);
+    os << "character:";
+    for (R_xlen_t i = 0; i < sv->size(); ++i)
+    {
+        // indent(os, margin + 2);
+        os << " " << (*sv)[i]->c_str() << ";";
+    }
+    os << "\n";
 }

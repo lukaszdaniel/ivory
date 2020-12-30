@@ -38,6 +38,7 @@ const Sampletype &Sample_DEFAULT = REJECTION;
 #include <R_ext/Rdynload.h>
 
 using namespace R;
+using namespace CXXR;
 
 static DL_FUNC User_unif_fun, User_unif_nseed,
 	User_unif_seedloc;

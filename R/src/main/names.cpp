@@ -1188,15 +1188,11 @@ HIDDEN SEXP Rf_installDDVAL(int n)
     return createDDVALSymbol(n);
 }
 
-static SEXP mkSymMarker(SEXP pname)
+static SEXP mkSymMarker(const String *pname, SEXP value)
 {
-    GCRoot<> ppname(pname);
-    SEXP ans = new RObject(SYMSXP);
-    SET_SYMVALUE(ans, ans);
-    SET_ATTRIB(ans, R_NilValue);
-    SET_PRINTNAME(ans, pname);
-
-    return ans;
+    GCRoot<const String> ppname(pname);
+    GCRoot<> pvalue(value);
+    return new Symbol(pname, value);
 }
 
 /* initialize the symbol table */
@@ -1207,11 +1203,11 @@ HIDDEN void R::InitNames()
 	R_Suicide(_("couldn't allocate memory for symbol table"));
 
     /* Create marker values */
-    R_UnboundValue = mkSymMarker(R_NilValue);
-    R_MissingArg = mkSymMarker(mkChar(""));
-    R_InBCInterpreter = mkSymMarker(mkChar("<in-bc-interp>"));
-    R_RestartToken = mkSymMarker(mkChar(""));
-    R_CurrentExpression = mkSymMarker(mkChar("<current-expression>"));
+    R_UnboundValue = mkSymMarker(nullptr, R_UnboundValue);
+    R_MissingArg = mkSymMarker(SEXP_downcast<const String *>(mkChar("")), R_MissingArg);
+    R_InBCInterpreter = mkSymMarker(SEXP_downcast<const String *>(mkChar("<in-bc-interp>")), R_InBCInterpreter);
+    R_RestartToken = mkSymMarker(SEXP_downcast<const String *>(mkChar("")), R_RestartToken);
+    R_CurrentExpression = mkSymMarker(SEXP_downcast<const String *>(mkChar("<current-expression>")), R_CurrentExpression);
 
     /* String constants (CHARSXP values) */
     /* Note: we don't want NA_STRING to be in the CHARSXP cache, so that

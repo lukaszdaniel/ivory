@@ -24,57 +24,37 @@
  *  http://www.r-project.org/Licenses/
  */
 
-/** @file DottedArgs.hpp
- * @brief Class CXXR::DottedArgs.
+/** @file RAltRep.hpp
+ * @brief Class CXXR::AltRep.
  */
 
-#ifndef DOTTEDARGS_HPP
-#define DOTTEDARGS_HPP
+#ifndef RALTREP_HPP
+#define RALTREP_HPP
 
-#include <CXXR/ConsCell.hpp>
+#include <CXXR/PairList.hpp>
 
 namespace CXXR
 {
-    /** @brief List of Promise objects corresponding to an R ... argument
-     * specification.
-     *
-     * At present the class makes no attempt to enforce the
-     * requirement that it should contain Promise objects.
+    /** @brief Singly linked list of pairs for Alternative Representation (ALTREP)
      */
-    class DottedArgs : public ConsCell
+    class AltRep : public PairList
     {
     public:
         /**
          * @param cr Pointer to the 'car' of the element to be
          *           constructed.
-         *
          * @param tl Pointer to the 'tail' (LISP cdr) of the element
          *           to be constructed.
-         *
          * @param tg Pointer to the 'tag' of the element to be constructed.
          */
 #ifdef CXXR_OLD_PAIRLIST_IMPL
-        explicit DottedArgs(RObject *cr = nullptr, RObject *tl = nullptr, RObject *tg = nullptr)
+        explicit AltRep(RObject *cr = nullptr, RObject *tl = nullptr, RObject *tg = nullptr)
 #else
-        explicit DottedArgs(RObject *cr = nullptr, PairList *tl = nullptr, RObject *tg = nullptr)
+        explicit AltRep(RObject *cr = nullptr, PairList *tl = nullptr, RObject *tg = nullptr)
 #endif
-            : ConsCell(DOTSXP, cr, tl, tg)
+            : PairList(cr, tl, tg)
         {
-        }
-
-        /** @brief Create an expression of a specified length.
-         *
-         * This constructor creates an Expression with a specified number
-         * of elements.  On creation, each element has null 'car' and
-         * 'tag'.
-         *
-         * @param sz Number of elements required in the list.  Must be
-         *           strictly positive; the constructor throws
-         *           std::out_of_range if \a sz is zero.
-         */
-        explicit DottedArgs(size_t sz)
-            : ConsCell(DOTSXP, sz)
-        {
+             m_alt = true;
         }
 
         /** @brief The name by which this type is known in R.
@@ -83,22 +63,26 @@ namespace CXXR
          */
         static const char *staticTypeName()
         {
-            return "...";
+            return "altrep";
         }
+
+        static void set_wrapper_type(AltRep *x, SEXPTYPE v);
+        static SEXPTYPE wrapper_type(AltRep *x);
 
         // Virtual function of RObject:
         const char *typeName() const;
 
     private:
-        // Declared private to ensure that DottedArgs objects are
+        SEXPTYPE m_wrapper_type;
+        // Declared private to ensure that AltRep objects are
         // allocated only using 'new':
-        ~DottedArgs() {}
+        ~AltRep() {}
 
         // Not implemented yet.  Declared to prevent
         // compiler-generated versions:
-        DottedArgs(const DottedArgs &);
-        DottedArgs &operator=(const DottedArgs &);
+        AltRep(const AltRep &);
+        AltRep &operator=(const AltRep &);
     };
 } // namespace CXXR
 
-#endif /* DOTTEDARGS_HPP */
+#endif /* RALTREP_HPP */

@@ -67,84 +67,271 @@ namespace CXXR
     {
         if (!e)
             return nullptr;
-        return e->u.listsxp.m_tagval;
+#ifdef ENABLE_ST_CHECKS
+        switch (e->sexptype())
+        {
+        case LISTSXP:
+        case LANGSXP:
+        case DOTSXP:
+        case BCODESXP:
+            break;
+        default:
+            std::cerr << LOCATION << "Inappropriate SEXPTYPE (" << e->sexptype() << ") for PairList." << std::endl;
+            abort();
+        }
+#endif
+        ConsCell &cc = *SEXP_downcast<ConsCell *>(e, false);
+        return cc.tag();
     }
 
     void ConsCell::set_tag(RObject *x, RObject *v)
     {
         if (!x)
             Rf_error(_("incorrect value"));
-        x->u.listsxp.m_tagval = v;
+#ifdef ENABLE_ST_CHECKS
+        switch (x->sexptype())
+        {
+        case LISTSXP:
+        case LANGSXP:
+        case DOTSXP:
+        case BCODESXP:
+            break;
+        default:
+            std::cerr << LOCATION << "Inappropriate SEXPTYPE (" << x->sexptype() << ") for PairList." << std::endl;
+            abort();
+        }
+#endif
+        ConsCell &cc = *SEXP_downcast<ConsCell *>(x, false);
+        cc.setTag(v);
     }
 
     RObject *ConsCell::car0(RObject *e)
     {
         if (!e)
             return nullptr;
-        return e->u.listsxp.m_carval;
+#ifdef ENABLE_ST_CHECKS
+        switch (e->sexptype())
+        {
+        case LISTSXP:
+        case LANGSXP:
+        case DOTSXP:
+        case BCODESXP:
+            break;
+        default:
+            std::cerr << LOCATION << "Inappropriate SEXPTYPE (" << e->sexptype() << ") for PairList." << std::endl;
+            abort();
+        }
+#endif
+        ConsCell &cc = *SEXP_downcast<ConsCell *>(e, false);
+        return cc.car();
     }
 
     void ConsCell::set_car0(RObject *x, RObject *v)
     {
         if (!x)
             Rf_error(_("incorrect value"));
-        x->u.listsxp.m_carval = v;
+#ifdef ENABLE_ST_CHECKS
+        switch (x->sexptype())
+        {
+        case LISTSXP:
+        case LANGSXP:
+        case DOTSXP:
+        case BCODESXP:
+            break;
+        default:
+            std::cerr << LOCATION << "Inappropriate SEXPTYPE (" << x->sexptype() << ") for PairList." << std::endl;
+            abort();
+        }
+#endif
+        ConsCell &cc = *SEXP_downcast<ConsCell *>(x, false);
+        cc.setCar(v);
     }
 
     RObject *ConsCell::cdr(RObject *e)
     {
         if (!e)
             return nullptr;
-        return e->u.listsxp.m_cdrval;
+#ifdef ENABLE_ST_CHECKS
+        switch (e->sexptype())
+        {
+        case LISTSXP:
+        case LANGSXP:
+        case DOTSXP:
+        case BCODESXP:
+            break;
+        default:
+            std::cerr << LOCATION << "Inappropriate SEXPTYPE (" << e->sexptype() << ") for PairList." << std::endl;
+            abort();
+        }
+#endif
+        ConsCell &cc = *SEXP_downcast<ConsCell *>(e, false);
+        return cc.tail();
     }
 
     void ConsCell::set_cdr(RObject *x, RObject *v)
     {
         if (!x)
             Rf_error(_("incorrect value"));
-        x->u.listsxp.m_cdrval = v;
+#ifdef ENABLE_ST_CHECKS
+        switch (x->sexptype())
+        {
+        case LISTSXP:
+        case LANGSXP:
+        case DOTSXP:
+        case BCODESXP:
+            break;
+        default:
+            std::cerr << LOCATION << "Inappropriate SEXPTYPE (" << x->sexptype() << ") for PairList." << std::endl;
+            abort();
+        }
+#endif
+        ConsCell &cc = *SEXP_downcast<ConsCell *>(x, false);
+        PairList *tl = SEXP_downcast<PairList *>(v);
+        cc.setTail(tl);
     }
 
     double ConsCell::bndcell_dval(RObject *x)
     {
         if (!x)
             return 0.0;
-        return ((R_bndval_t *)&(x->u.listsxp.m_carval))->dval;
+#ifdef ENABLE_ST_CHECKS
+        switch (x->sexptype())
+        {
+        case LISTSXP:
+        case LANGSXP:
+        case DOTSXP:
+        case BCODESXP:
+            break;
+        default:
+            std::cerr << LOCATION << "Inappropriate SEXPTYPE (" << x->sexptype() << ") for PairList." << std::endl;
+            abort();
+        }
+#endif
+#ifdef CXXR_OLD_PAIRLIST_IMPL
+        return ((R_bndval_t *)&(SEXP_downcast<ConsCell *>(x, false)->u.listsxp.m_carval))->dval;
+#else
+        return ((R_bndval_t *)&(SEXP_downcast<ConsCell *>(x, false)->m_car))->dval;
+#endif
     }
 
     int ConsCell::bndcell_ival(RObject *x)
     {
         if (!x)
             return 0;
-        return ((R_bndval_t *)&(x->u.listsxp.m_carval))->ival;
+#ifdef ENABLE_ST_CHECKS
+        switch (x->sexptype())
+        {
+        case LISTSXP:
+        case LANGSXP:
+        case DOTSXP:
+        case BCODESXP:
+            break;
+        default:
+            std::cerr << LOCATION << "Inappropriate SEXPTYPE (" << x->sexptype() << ") for PairList." << std::endl;
+            abort();
+        }
+#endif
+#ifdef CXXR_OLD_PAIRLIST_IMPL
+        return ((R_bndval_t *)&(SEXP_downcast<ConsCell *>(x, false)->u.listsxp.m_carval))->ival;
+#else
+        return ((R_bndval_t *)&(SEXP_downcast<ConsCell *>(x, false)->m_car))->ival;
+#endif
     }
 
     int ConsCell::bndcell_lval(RObject *x)
     {
         if (!x)
             return 0;
-        return ((R_bndval_t *)&(x->u.listsxp.m_carval))->ival;
+#ifdef ENABLE_ST_CHECKS
+        switch (x->sexptype())
+        {
+        case LISTSXP:
+        case LANGSXP:
+        case DOTSXP:
+        case BCODESXP:
+            break;
+        default:
+            std::cerr << LOCATION << "Inappropriate SEXPTYPE (" << x->sexptype() << ") for PairList." << std::endl;
+            abort();
+        }
+#endif
+#ifdef CXXR_OLD_PAIRLIST_IMPL
+        return ((R_bndval_t *)&(SEXP_downcast<ConsCell *>(x, false)->u.listsxp.m_carval))->ival;
+#else
+        return ((R_bndval_t *)&(SEXP_downcast<ConsCell *>(x, false)->m_car))->ival;
+#endif
     }
 
     void ConsCell::set_bndcell_dval(RObject *x, double v)
     {
         if (!x)
             return;
-        ((R_bndval_t *)&(x->u.listsxp.m_carval))->dval = v;
+#ifdef ENABLE_ST_CHECKS
+        switch (x->sexptype())
+        {
+        case LISTSXP:
+        case LANGSXP:
+        case DOTSXP:
+        case BCODESXP:
+            break;
+        default:
+            std::cerr << LOCATION << "Inappropriate SEXPTYPE (" << x->sexptype() << ") for PairList." << std::endl;
+            abort();
+        }
+#endif
+#ifdef CXXR_OLD_PAIRLIST_IMPL
+        ((R_bndval_t *)&(SEXP_downcast<ConsCell *>(x, false)->u.listsxp.m_carval))->dval = v;
+#else
+        ((R_bndval_t *)&(SEXP_downcast<ConsCell *>(x, false)->m_car))->dval = v;
+#endif
     }
 
     void ConsCell::set_bndcell_ival(RObject *x, int v)
     {
         if (!x)
             return;
-        ((R_bndval_t *)&(x->u.listsxp.m_carval))->ival = v;
+#ifdef ENABLE_ST_CHECKS
+        switch (x->sexptype())
+        {
+        case LISTSXP:
+        case LANGSXP:
+        case DOTSXP:
+        case BCODESXP:
+            break;
+        default:
+            std::cerr << LOCATION << "Inappropriate SEXPTYPE (" << x->sexptype() << ") for PairList." << std::endl;
+            abort();
+        }
+#endif
+#ifdef CXXR_OLD_PAIRLIST_IMPL
+        ((R_bndval_t *)&(SEXP_downcast<ConsCell *>(x, false)->u.listsxp.m_carval))->ival = v;
+#else
+        ((R_bndval_t *)&(SEXP_downcast<ConsCell *>(x, false)->m_car))->ival = v;
+#endif
     }
 
     void ConsCell::set_bndcell_lval(RObject *x, int v)
     {
         if (!x)
             return;
-        ((R_bndval_t *)&(x->u.listsxp.m_carval))->ival = v;
+#ifdef ENABLE_ST_CHECKS
+        switch (x->sexptype())
+        {
+        case LISTSXP:
+        case LANGSXP:
+        case DOTSXP:
+        case BCODESXP:
+            break;
+        default:
+            std::cerr << LOCATION << "Inappropriate SEXPTYPE (" << x->sexptype() << ") for PairList." << std::endl;
+            abort();
+        }
+#endif
+#ifdef CXXR_OLD_PAIRLIST_IMPL
+        ((R_bndval_t *)&(SEXP_downcast<ConsCell *>(x, false)->u.listsxp.m_carval))->ival = v;
+#else
+        ((R_bndval_t *)&(SEXP_downcast<ConsCell *>(x, false)->m_car))->ival = v;
+#endif
     }
 
     ConsCell::ConsCell(SEXPTYPE st, size_t sz)
@@ -160,12 +347,18 @@ namespace CXXR
         try
         {
             while (--sz)
-                m_tail = new PairList(st, nullptr, m_tail, nullptr);
+#ifdef CXXR_OLD_PAIRLIST_IMPL
+                u.listsxp.m_cdrval = new PairList(nullptr, SEXP_downcast<PairList *>(u.listsxp.m_cdrval), nullptr);
+#else
+                m_tail = new PairList(nullptr, m_tail, nullptr);
+#endif
         }
         catch (...)
         {
+#ifndef CXXR_OLD_PAIRLIST_IMPL
             if (m_tail)
                 m_tail->expose();
+#endif
             throw;
         }
     }
@@ -186,18 +379,60 @@ namespace CXXR
 
     void ConsCell::visitChildren(const_visitor *v) const
     {
+#if CXXR_TRUE
+        RObject::visitChildren(v);
+        if (altrep())
+        {
+            if (RObject::bndcell_tag(this))
+            {
+                Rf_error("bad binding access");
+            }
+            if (car())
+                car()->conductVisitor(v);
+            if (tag())
+                tag()->conductVisitor(v);
+            if (tail())
+                tail()->conductVisitor(v);
+        }
+        else
+        {
+            if (car() && (sexptype() != LISTSXP || BOXED_BINDING_CELLS || RObject::bndcell_tag(this) == 0))
+                car()->conductVisitor(v);
+            if (tag())
+                tag()->conductVisitor(v);
+            if (tail())
+                tail()->conductVisitor(v);
+        }
+#else
         const ConsCell *p = this;
         do
         {
+            ccdump(cerr, p, 1);
+            std::cerr << std::endl;
             p->RObject::visitChildren(v);
-            if ((p->sexptype() != LISTSXP || BOXED_BINDING_CELLS || RObject::bndcell_tag(p) == 0) && p->m_car)
-                p->m_car->conductVisitor(v);
-            if (p->m_tag)
-                p->m_tag->conductVisitor(v);
+            if (p->altrep())
+            {
+                if (RObject::bndcell_tag(p))
+                {
+                    Rf_error("bad binding access");
+                }
+                if (p->car())
+                    p->car()->conductVisitor(v);
+                if (p->tag())
+                    p->tag()->conductVisitor(v);
+            }
+            else
+            {
+                if (p->car() && (p->sexptype() != LISTSXP || BOXED_BINDING_CELLS || RObject::bndcell_tag(p) == 0))
+                    p->car()->conductVisitor(v);
+                if (p->tag())
+                    p->tag()->conductVisitor(v);
+            }
             p = p->m_tail;
         } while (p && (*v)(p));
+#endif
     }
-
+#ifndef CXXR_OLD_PAIRLIST_IMPL
     namespace
     {
         void indent(ostream &os, size_t margin)
@@ -208,44 +443,58 @@ namespace CXXR
 
         const char *sympname(const RObject *sym)
         {
-            const RObject *pname = sym->u.symsxp.m_pname;
+            const Symbol *symb = dynamic_cast<const Symbol *>(sym);
+            if (!symb)
+                return "(SYMSXP is not a Symbol)";
+            const String *pname = symb->name();
             if (!pname)
                 return "(Symbol has no PRINTNAME)";
-            const String *pstr = dynamic_cast<const String *>(pname);
-            if (!pstr)
-                return "(PRINTNAME not a String)";
-            return pstr->c_str();
+            return pname->c_str();
         }
     } // namespace
 
-    void ccdump(std::ostream &os, const ConsCell &cc, size_t margin)
+    void ccdump(std::ostream &os, const ConsCell *cc, size_t margin)
     {
-        indent(os, margin);
-        os << Rf_type2char(cc.sexptype()) << "\n";
-        for (const ConsCell *p = &cc; p; p = p->tail())
+        if (!cc)
+        {
+            os << "cc is nullptr" << std::endl;
+            return;
+        }
+        // indent(os, margin);
+        if (cc->altrep())
+            os << "altrep ";
+        os << Rf_type2char(cc->sexptype()) << "\n";
+        for (const ConsCell *p = cc; p; p = p->tail())
         {
             // Print tag:
             indent(os, margin);
             os << "- ";
             const RObject *tag = p->tag();
+            if (tag && tag->altrep())
+                os << "altrep ";
             os << "Tag = ";
             if (!tag)
                 os << "(No tag):\n";
             else if (tag->sexptype() != SYMSXP)
-                os << "(Tag not a SYMSXP):\n";
+                os << "(Tag not a SYMSXP but " << R::sexptype2char(tag->sexptype()) << "):\n";
             else
                 os << sympname(tag) << ":\n";
             // Print car:
             const RObject *car = p->car();
             indent(os, margin + 2);
-            os << "Car = ";
+            // if (car && car->altrep()) os << "altrep ";
+            os << "Car (p = " << Rf_type2char(RObject::typeof_(p)) << ", " << car << ") = ";
             if (const ConsCell *ccinner = dynamic_cast<const ConsCell *>(car))
-                ccdump(os, *ccinner, margin + 2);
+            {
+                ccdump(os, ccinner, margin + 2);
+            }
             else if (const StringVector *sv = dynamic_cast<const StringVector *>(car))
-                strdump(os, *sv, margin + 2);
+            {
+                strdump(os, sv, margin + 2);
+            }
             else
             {
-                indent(os, margin + 2);
+                // indent(os, margin + 2);
                 if (!car)
                     os << "NILSXP\n";
                 else
@@ -257,6 +506,12 @@ namespace CXXR
                     os << "\n";
                 }
             }
+            if (p->tail())
+            {
+                indent(os, margin + 2);
+                os << "------" << std::endl;
+            }
         }
     }
+#endif
 } // namespace CXXR

@@ -35,6 +35,7 @@
 #endif
 
 using namespace R;
+using namespace CXXR;
 
 /***
  *** ALTREP Concrete Class Implementations
@@ -2010,7 +2011,11 @@ SEXP R_tryUnwrap(SEXP x)
 	    /* Clear the fields to drop reference counts and set the
 	       type to LISTSXP to limit errors in case the object is
 	       still live. */
-	    SET_TYPEOF(x, LISTSXP);
+	    // Convert x to a PairList:
+	    {
+            GCRoot<ConsCell> cc(SEXP_downcast<ConsCell *>(x));
+            x = ConsCell::convert<PairList>(cc);
+	    }
 	    SET_ATTRIB(x, R_NilValue);
 	    SETCAR(x, R_NilValue);
 	    SETCDR(x, R_NilValue);

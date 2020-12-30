@@ -47,7 +47,11 @@ namespace CXXR
          *           to be constructed.
          * @param tg Pointer to the 'tag' of the element to be constructed.
          */
+#ifdef CXXR_OLD_PAIRLIST_IMPL
+        explicit ByteCode(RObject *cr = nullptr, RObject *tl = nullptr, RObject *tg = nullptr)
+#else
         explicit ByteCode(RObject *cr = nullptr, PairList *tl = nullptr, RObject *tg = nullptr)
+#endif
             : ConsCell(BCODESXP, cr, tl, tg)
         {
         }

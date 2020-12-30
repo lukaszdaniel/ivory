@@ -287,24 +287,29 @@ Rboolean R_cycle_detected(SEXP s, SEXP child) {
     return FALSE;
 }
 
-R_INLINE static SEXP duplicate_list(SEXP s, Rboolean deep)
+namespace
 {
-    SEXP sp, vp, val;
-    PROTECT(s);
+	template <class T = PairList>
+	SEXP duplicate_list(SEXP s, Rboolean deep)
+	{
+		SEXP sp, vp, val;
+		PROTECT(s);
 
-    val = R_NilValue;
-    for (sp = s; sp != R_NilValue; sp = CDR(sp))
-	val = CONS(R_NilValue, val);
+		val = R_NilValue;
+		for (sp = s; sp != R_NilValue; sp = CDR(sp))
+			val = CXXR_cons<T>(R_NilValue, val);
 
-    PROTECT(val);
-    for (sp = s, vp = val; sp != R_NilValue; sp = CDR(sp), vp = CDR(vp)) {
-	SETCAR(vp, duplicate_child(CAR(sp), deep));
-	COPY_TAG(vp, sp);
-	DUPLICATE_ATTRIB(vp, sp, deep);
-    }
-    UNPROTECT(2);
-    return val;
-}
+		PROTECT(val);
+		for (sp = s, vp = val; sp != R_NilValue; sp = CDR(sp), vp = CDR(vp))
+		{
+			SETCAR(vp, duplicate_child(CAR(sp), deep));
+			COPY_TAG(vp, sp);
+			DUPLICATE_ATTRIB(vp, sp, deep);
+		}
+		UNPROTECT(2);
+		return val;
+	}
+} // namespace
 
 static SEXP duplicate1(SEXP s, Rboolean deep)
 {
@@ -342,20 +347,18 @@ static SEXP duplicate1(SEXP s, Rboolean deep)
 	break;
     case LISTSXP:
 	PROTECT(s);
-	t = duplicate_list(s, deep);
+	t = duplicate_list<PairList>(s, deep);
 	UNPROTECT(1);
 	break;
     case LANGSXP:
 	PROTECT(s);
-	PROTECT(t = duplicate_list(s, deep));
-	SET_TYPEOF(t, LANGSXP);
+	PROTECT(t = duplicate_list<Expression>(s, deep));
 	DUPLICATE_ATTRIB(t, s, deep);
 	UNPROTECT(2);
 	break;
     case DOTSXP:
 	PROTECT(s);
-	PROTECT(t = duplicate_list(s, deep));
-	SET_TYPEOF(t, DOTSXP);
+	PROTECT(t = duplicate_list<DottedArgs>(s, deep));
 	DUPLICATE_ATTRIB(t, s, deep);
 	UNPROTECT(2);
 	break;

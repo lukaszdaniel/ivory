@@ -68,41 +68,6 @@ namespace CXXR
     class GCRootBase
     {
     public:
-        explicit GCRootBase(GCNode *node)
-            : m_index(s_roots->size())
-        {
-            if (node)
-                node->expose();
-            s_roots->push_back(node);
-        }
-
-        GCRootBase(const GCRootBase &source)
-            : m_index(s_roots->size())
-        {
-            s_roots->push_back((*s_roots)[source.m_index]);
-        }
-
-        ~GCRootBase()
-        {
-            s_roots->pop_back();
-            if (m_index != s_roots->size())
-                seq_error();
-        }
-
-        GCRootBase &operator=(const GCRootBase &source)
-        {
-            (*s_roots)[m_index] = (*s_roots)[source.m_index];
-            return *this;
-        }
-
-        GCRootBase &operator=(GCNode *node)
-        {
-            if (node)
-                node->expose();
-            (*s_roots)[m_index] = node;
-            return *this;
-        }
-
         /** @brief Restore PPS to a previous size.
          *
          * Restore the C pointer protection stack to a previous size by
@@ -138,15 +103,6 @@ namespace CXXR
          *          subsequent use with reprotect().
          */
         static unsigned int protect(RObject *node);
-
-        /** @brief Access the encapsulated pointer.
-         *
-         * @return the GCNode pointer encapsulated by this object.
-         */
-        GCNode *ptr() const
-        {
-            return (*s_roots)[m_index];
-        }
 
         /** @brief Change the target of a pointer on the PPS.
          *
@@ -199,14 +155,63 @@ namespace CXXR
          */
         static void visitRoots(GCNode::const_visitor *v);
 
+    protected:
+        explicit GCRootBase(const GCNode *node)
+            : m_index(s_roots->size())
+        {
+            if (node)
+                node->expose();
+            s_roots->push_back(node);
+        }
+
+        GCRootBase(const GCRootBase &source)
+            : m_index(s_roots->size())
+        {
+            s_roots->push_back((*s_roots)[source.m_index]);
+        }
+
+        ~GCRootBase()
+        {
+            s_roots->pop_back();
+            if (m_index != s_roots->size())
+                seq_error();
+        }
+
+        GCRootBase &operator=(const GCRootBase &source)
+        {
+            (*s_roots)[m_index] = (*s_roots)[source.m_index];
+            return *this;
+        }
+
+        void redirect(GCNode *node)
+        {
+            if (node)
+                node->expose();
+            (*s_roots)[m_index] = node;
+        }
+
+        /** @brief Access the encapsulated pointer.
+         *
+         * @return the GCNode pointer encapsulated by this object.
+         */
+        const GCNode *ptr() const
+        {
+            return (*s_roots)[m_index];
+        }
+
     private:
         friend class GCNode::SchwarzCtr;
+
+        // Note that we deliberately do not use CXXR::Allocator in
+        // declaring the following vectors: we really don't want a
+        // garbage collection happening just as we're trying to
+        // protect something from the garbage collector!
 
         // There may be a case, at least in some C++ library
         // implementations, for using a deque instead of a vector in
         // the following, so that memory is released as the stack
         // shrinks.
-        static std::vector<GCNode *> *s_roots;
+        static std::vector<const GCNode *> *s_roots;
 
         // Ye olde pointer protection stack:
 #ifdef NDEBUG
@@ -245,9 +250,10 @@ namespace CXXR
      * GCRoot objects are destroyed in the reverse order of creation,
      * and the destructor checks this.
      *
-     * @param T GCNode or a type publicly derived from GCNode.  There
-     *          is at present no provision for const pointers to be
-     *          encapsulated within a GCRoot.
+     * @param T GCNode or a type publicly derived from GCNode.  This
+     *          may be qualified by const, so for example a const
+     *          String* may be encapsulated in a GCRoot using the type
+     *          GCRoot<const String>.
      *
      * \par Caller protects:
      * Suppose some code calls a function (or class method) that takes
@@ -290,7 +296,7 @@ namespace CXXR
          * is protected by source.  (There is probably no reason to
          * use this method.)
          */
-        GCRoot operator=(const GCRoot &source)
+        GCRoot &operator=(const GCRoot &source)
         {
             GCRootBase::operator=(source);
             return *this;
@@ -304,9 +310,9 @@ namespace CXXR
          * @param node Pointer to the GCNode that is now to be pointed
          *          to and protected from the garbage collector.
          */
-        GCRoot operator=(T *node)
+        GCRoot &operator=(T *node)
         {
-            GCRootBase::operator=(node);
+            GCRootBase::redirect(node);
             return *this;
         }
 
@@ -348,7 +354,7 @@ namespace CXXR
          */
         T *get() const
         {
-            return static_cast<T *>(ptr());
+            return static_cast<T *>(const_cast<GCNode *>(ptr()));
         }
     };
 } // namespace CXXR

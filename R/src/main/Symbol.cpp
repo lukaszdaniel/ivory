@@ -54,14 +54,40 @@ namespace CXXR
         return staticTypeName();
     }
 
-    /* Symbol Access Methods */
+    void Symbol::visitChildren(const_visitor *v) const
+    {
+        RObject::visitChildren(v);
+        if (m_name)
+            m_name->conductVisitor(v);
+        if (m_value)
+            m_value->conductVisitor(v);
+        if (m_internalfunc)
+            m_internalfunc->conductVisitor(v);
+    }
+
     /** @brief Symbol name.
      *
      * @param x Pointer to a CXXR::Symbol (checked).
      *
      * @return Pointer to a R::String representing \a x's name.
      */
-    RObject *Symbol::printname(RObject *x) { return x ? x->u.symsxp.m_pname : nullptr; }
+    RObject *Symbol::printname(RObject *x)
+    {
+        if (!x)
+            return nullptr;
+#ifdef ENABLE_ST_CHECKS
+        switch (x->sexptype())
+        {
+        case SYMSXP:
+            break;
+        default:
+            std::cerr << LOCATION << "Inappropriate SEXPTYPE (" << x->sexptype() << ") for Symbol." << std::endl;
+            abort();
+        }
+#endif
+        const Symbol &sym = *SEXP_downcast<Symbol *>(x);
+        return const_cast<String *>(sym.name());
+    }
 
     /** @brief Symbol's value in the base environment.
      *
@@ -71,9 +97,41 @@ namespace CXXR
      *         Returns R_UnboundValue if no value is currently
      *         associated with the Symbol.
      */
-    RObject *Symbol::symvalue(RObject *x) { return x ? x->u.symsxp.m_value : nullptr; }
+    RObject *Symbol::symvalue(RObject *x)
+    {
+        if (!x)
+            return nullptr;
+#ifdef ENABLE_ST_CHECKS
+        switch (x->sexptype())
+        {
+        case SYMSXP:
+            break;
+        default:
+            std::cerr << LOCATION << "Inappropriate SEXPTYPE (" << x->sexptype() << ") for Symbol." << std::endl;
+            abort();
+        }
+#endif
+        Symbol &sym = *SEXP_downcast<Symbol *>(x);
+        return sym.value();
+    }
 
-    RObject *Symbol::internal(RObject *x) { return x ? x->u.symsxp.m_internal : nullptr; }
+    RObject *Symbol::internal(RObject *x)
+    {
+        if (!x)
+            return nullptr;
+#ifdef ENABLE_ST_CHECKS
+        switch (x->sexptype())
+        {
+        case SYMSXP:
+            break;
+        default:
+            std::cerr << LOCATION << "Inappropriate SEXPTYPE (" << x->sexptype() << ") for Symbol." << std::endl;
+            abort();
+        }
+#endif
+        Symbol &sym = *SEXP_downcast<Symbol *>(x);
+        return const_cast<BuiltInFunction *>(sym.internalFunction());
+    }
 
     /** @brief Does symbol relate to a <tt>...</tt> expression?
      *
@@ -84,30 +142,9 @@ namespace CXXR
      */
     unsigned int Symbol::ddval(RObject *x) { return x ? (x->m_gpbits & DDVAL_MASK) : 0; } /* for ..1, ..2 etc */
 
-    void Symbol::set_ddval_bit(RObject *x)
-    {
-        if (!x)
-            return;
-        x->m_gpbits |= DDVAL_MASK;
-    }
-
-    void Symbol::unset_ddval_bit(RObject *x)
-    {
-        if (!x)
-            return;
-        x->m_gpbits &= ~DDVAL_MASK;
-    }
-
+ 
     void Symbol::set_ddval(RObject *x, bool v)
     {
-        if (v)
-        {
-            set_ddval_bit(x);
-        }
-        else
-        {
-            unset_ddval_bit(x);
-        }
     } /* for ..1, ..2 etc */
 
     /** @brief Set Symbol name.
@@ -120,7 +157,16 @@ namespace CXXR
     {
         if (!x)
             return;
-        x->u.symsxp.m_pname = v;
+#ifdef ENABLE_ST_CHECKS
+        switch (x->sexptype())
+        {
+        case SYMSXP:
+            break;
+        default:
+            std::cerr << LOCATION << "Inappropriate SEXPTYPE (" << x->sexptype() << ") for Symbol." << std::endl;
+            abort();
+        }
+#endif
     }
 
     /** @brief Set symbol's value in the base environment.
@@ -137,13 +183,36 @@ namespace CXXR
     {
         if (!x)
             return;
-        x->u.symsxp.m_value = val;
+#ifdef ENABLE_ST_CHECKS
+        switch (x->sexptype())
+        {
+        case SYMSXP:
+            break;
+        default:
+            std::cerr << LOCATION << "Inappropriate SEXPTYPE (" << x->sexptype() << ") for Symbol." << std::endl;
+            abort();
+        }
+#endif
+        Symbol &sym = *SEXP_downcast<Symbol *>(x);
+        sym.setValue(val);
     }
 
     void Symbol::set_internal(RObject *x, RObject *v)
     {
         if (!x)
             return;
-        x->u.symsxp.m_internal = v;
+#ifdef ENABLE_ST_CHECKS
+        switch (x->sexptype())
+        {
+        case SYMSXP:
+            break;
+        default:
+            std::cerr << LOCATION << "Inappropriate SEXPTYPE (" << x->sexptype() << ") for Symbol." << std::endl;
+            abort();
+        }
+#endif
+        Symbol &sym = *SEXP_downcast<Symbol *>(x);
+        BuiltInFunction *fun = SEXP_downcast<BuiltInFunction *>(v);
+        sym.setInternalFunction(fun);
     }
 } // namespace CXXR

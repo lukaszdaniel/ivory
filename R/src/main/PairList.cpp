@@ -63,18 +63,6 @@ namespace CXXR
 
     const char *PairList::typeName() const
     {
-        switch (sexptype())
-        {
-        case LISTSXP:
-            return "pairlist";
-        case LANGSXP:
-            return "language";
-        case DOTSXP:
-            return "...";
-        case BCODESXP:
-            return "bytecode";
-        default:
-            throw logic_error(_("PairList has illegal SEXPTYPE."));
-        }
+        return staticTypeName();
     }
 } // namespace CXXR
