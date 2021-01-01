@@ -26,7 +26,7 @@
  * (a) supplies wrapper/substitute wc[s]width functions for use in 
  *    character.cpp, errors.cpp, printutils.cpp, devPS.cpp, RGui console.
  * (b) Defines a replacment for iswctype to be used on Windows, maxOS and AIX.
- * in gram.cpp
+ * in gram.cpp, the TRE engine and elsewhere.
  *
  * It is not an installed header.
  */
@@ -34,9 +34,9 @@
 #ifndef R_LOCALE_H
 #define R_LOCALE_H
 
-#include <cwchar>
-#include <cctype>
-#include <cwctype>
+#include <wchar.h>
+#include <ctype.h>
+#include <wctype.h>
 
 #ifdef __cplusplus
 extern "C" {
@@ -92,10 +92,19 @@ extern int Ri18n_wcswidth (const wchar_t *, size_t);
  * Japanese "a-ru" of R as a letter. 
  * Therefore Japanese "Buraian.Ripuri-" of "Brian Ripley" is
  * shown of hex-string.:-)
- * We define alternatives to be used if
- * defined(_WIN32) || defined(__APPLE__) || defined(_AIX)
  */
+
+/* 
+   iswspace is used in Rstrptime.h, character.c and util.c
+   iswalpha, iswalnum used in gram.y and in X11/dataentry.c
+   iswdigit is used in plotmath.c X11/dataentry.c (and indirectly in gram.y) 
+   iswprint is used in printutils.c
+*/
+#if defined(_WIN32) || defined(_AIX) || defined(__APPLE__)
+#define USE_RI18N_FNS
+
 extern wctype_t Ri18n_wctype(const char *);
+// Apparently wint_t is unsigned short on Windows, unsigned int on Linux
 extern int      Ri18n_iswctype(wint_t, wctype_t);
 
 #ifndef IN_RLOCALE_C
@@ -131,6 +140,18 @@ extern int      Ri18n_iswctype(wint_t, wctype_t);
 #define iswctype(__x,__y) Ri18n_iswctype(__x,__y)
 #endif
 
+#endif
+
+#if defined(__APPLE__)
+// # define USE_RI18N_CASE
+#endif
+
+#ifdef USE_RI18N_CASE
+R_wchar_t Ri18n_towupper(R_wchar_t wc);
+R_wchar_t Ri18n_towlower(R_wchar_t wc);
+#endif
+
+
 /* These definitions are from winnls.h in MinGW-W64.  We don't need
  * the rest of that file. */
 
@@ -151,6 +172,12 @@ extern int      Ri18n_iswctype(wint_t, wctype_t);
 
 # define utf8toucs32		Rf_utf8toucs32
 R_wchar_t utf8toucs32(wchar_t high, const char *s);
+
+// convert strings UTF-8 <-> UCS-4 (stored in R_wchar_t aka int)
+# define utf8towcs4		Rf_utf8towcs4
+size_t utf8towcs4(R_wchar_t *wc, const char *s, size_t n);
+#define wcs4toutf8              Rf_wcs4toutf8
+size_t wcs4toutf8(char *s, const R_wchar_t *wc, size_t n);
 
 #ifdef __cplusplus
 } //extern "C"

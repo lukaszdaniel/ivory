@@ -85,7 +85,7 @@ static int isum(SEXP sx, isum_INT *value, Rboolean narm, SEXP call)
 
     /**** assumes INTEGER(sx) and LOGICAL(sx) are identical!! */
     ITERATE_BY_REGION(sx, x, i, nbatch, int, INTEGER, {
-	    for (int k = 0; k < nbatch; k++) {
+	    for (R_xlen_t k = 0; k < nbatch; k++) {
 		if (x[k] != NA_INTEGER) {
 		    if(!updated) updated = 1;
 		    s += x[k];
@@ -110,7 +110,7 @@ static Rboolean isum(SEXP sx, isum_INT *value, Rboolean narm, SEXP call)
 
     /**** assumes INTEGER(sx) and LOGICAL(sx) are identical!! */
     ITERATE_BY_REGION(sx, x, i, nbatch, int, INTEGER, {
-	    for (int k = 0; k < nbatch; k++) {
+	    for (R_xlen_t k = 0; k < nbatch; k++) {
 		if (x[k] != NA_INTEGER) {
 		    if(!updated) updated = TRUE;
 		    s += x[k];
@@ -204,7 +204,7 @@ static Rboolean imin(SEXP sx, int *value, Rboolean narm)
     int s = 0;
 
     ITERATE_BY_REGION(sx, x, i, nbatch, int, INTEGER, {
-	    for (int k = 0; k < nbatch; k++) {
+	    for (R_xlen_t k = 0; k < nbatch; k++) {
 		if (x[k] != NA_INTEGER) {
 		    if (!updated || s > x[k]) {
 			s = x[k];
@@ -347,7 +347,7 @@ static Rboolean iprod(SEXP sx, double *value, Rboolean narm)
 
     /**** assumes INTEGER(sx) and LOGICAL(sx) are identical!! */
     ITERATE_BY_REGION(sx, x, i, nbatch, int, INTEGER, {
-	    for (int k = 0; k < nbatch; k++) {
+	    for (R_xlen_t k = 0; k < nbatch; k++) {
 		if (x[k] != NA_INTEGER) {
 		    s *= x[k];
 		    if(!updated) updated = TRUE;

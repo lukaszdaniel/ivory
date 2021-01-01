@@ -698,7 +698,7 @@ install.packages <-
     if(verbose)
         message(gettextf("system (cmd0): %s", paste(c(cmd0, args0), collapse = " ")), domain = "R-utils")
 
-    if(is.null(repos) & missing(contriburl)) {
+    if(is.null(repos) && missing(contriburl)) {
         ## install from local source tarball(s)
         update <- cbind(path.expand(pkgs), lib) # for side-effect of recycling to same length
 

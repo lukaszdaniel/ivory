@@ -105,9 +105,9 @@
 using namespace R;
 using namespace CXXR;
 
-#if !defined(__STDC_ISO_10646__) && (defined(__APPLE__) || defined(__FreeBSD__))
+#if !defined(__STDC_ISO_10646__) && (defined(__APPLE__) || defined(__FreeBSD__) || defined(__sun))
 /* This may not be 100% true (see the comment in rlocale.h),
-   but it seems true in normal locales.  Also seems to be true for __sun__.
+   but it seems true in normal locales.
  */
 #define __STDC_ISO_10646__
 #endif
@@ -1082,16 +1082,16 @@ static const yytype_int8 yytranslate[] =
   /* YYRLINE[YYN] -- Source line where rule number YYN was defined.  */
 static const yytype_int16 yyrline[] =
 {
-       0,   423,   423,   424,   425,   426,   427,   430,   431,   432,
-     435,   436,   439,   440,   441,   442,   444,   445,   447,   448,
-     449,   450,   451,   453,   454,   455,   456,   457,   458,   459,
-     460,   461,   462,   463,   464,   465,   466,   467,   468,   469,
-     470,   471,   472,   473,   474,   476,   477,   478,   479,   480,
-     481,   482,   483,   484,   485,   486,   487,   488,   489,   490,
-     491,   492,   493,   494,   495,   496,   497,   498,   502,   505,
-     508,   512,   513,   514,   515,   516,   517,   520,   521,   524,
-     525,   526,   527,   528,   529,   530,   531,   534,   535,   536,
-     537,   538,   542
+       0,   424,   424,   425,   426,   427,   428,   431,   432,   433,
+     436,   437,   440,   441,   442,   443,   445,   446,   448,   449,
+     450,   451,   452,   454,   455,   456,   457,   458,   459,   460,
+     461,   462,   463,   464,   465,   466,   467,   468,   469,   470,
+     471,   472,   473,   474,   475,   477,   478,   479,   480,   481,
+     482,   483,   484,   485,   486,   487,   488,   489,   490,   491,
+     492,   493,   494,   495,   496,   497,   498,   499,   503,   506,
+     509,   513,   514,   515,   516,   517,   518,   521,   522,   525,
+     526,   527,   528,   529,   530,   531,   532,   535,   536,   537,
+     538,   539,   543
 };
 #endif
 
@@ -4249,10 +4249,12 @@ static char yytext[MAXELTSIZE];
 static int SkipSpace(void)
 {
     int c;
-    static wctype_t blankwct = 0;
 
+#if defined(USE_RI18N_FNS) // includes Win32
+    static wctype_t blankwct = 0;
     if (!blankwct)
 	blankwct = Ri18n_wctype("blank");
+#endif
 
 #ifdef Win32
     if(!mbcslocale) { /* 0xa0 is NBSP in all 8-bit Windows locales */
@@ -4284,11 +4286,16 @@ static int SkipSpace(void)
 	    if (c == '\n' || c == R_EOF) break;
 	    if ((unsigned int) c < 0x80) break;
 	    clen = mbcs_get_next(c, &wc);
+#if defined(USE_RI18N_FNS)
 	    if(! Ri18n_iswctype(wc, blankwct) ) break;
+#else
+	    if(! iswblank(wc) ) break;
+#endif
 	    for(i = 1; i < clen; i++) c = xxgetc();
 	}
     } else
 #endif
+	// does not support non-ASCII spaces, unlike Windows
 	while ((c = xxgetc()) == ' ' || c == '\t' || c == '\f') ;
     return c;
 }
@@ -5060,6 +5067,7 @@ static int SymbolValue(int c)
     int kw;
     DECLARE_YYTEXT_BUFP(yyp);
     if(mbcslocale) {
+	// FIXME potentially need R_wchar_t with UTF-8 Windows.
 	wchar_t wc; int i, clen;
 	clen = mbcs_get_next(c, &wc);
 	while(true) {
@@ -5220,6 +5228,7 @@ static int token(void)
 
     if (c == '.') return SymbolValue(c);
     if(mbcslocale) {
+	// FIXME potentially need R_wchar_t with UTF-8 Windows.
 	mbcs_get_next(c, &wc);
 	if (iswalpha(wc)) return SymbolValue(c);
     } else

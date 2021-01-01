@@ -64,7 +64,7 @@ HEADERS = \
 	gzio.h \
 	machar.cpp \
 	qsort-body.cpp \
-	rlocale_data.h \
+	rlocale_data.h rlocale_tolower.h rlocale_toupper.h rlocale_widths.h \
 	split-incl.cpp \
 	unzip.h \
 	valid_utf8.h \

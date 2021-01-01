@@ -166,22 +166,6 @@
       \code{nls()} fits, e.g., may now need \code{all.equal(m1, m2,
 	check.environment = FALSE)}.
 
-      \item The parser now treats \samp{\\Unnnnnnnn} escapes larger than
-      the upper limit for Unicode points (\samp{\\U10FFFF}) as an error
-      as they cannot be represented by valid UTF-8.
-
-      Where such escapes are used for outputting non-printable
-      characters, 6 (not 8) hex digits are used (as it was decided by
-      Unicode that the first two would always be zero).
-
-      \item Code converting UTF-8 strings (e.g., \code{tolower()} and some
-      \sQuote{printing}) now uses internal routines rather than system
-      functions:  these detect more uses of invalid UTF-8 strings.
-
-      There are warnings (including from the parser) on the use of unpaired
-      surrogate Unicode points such as \samp{\\uD834} (which cannot be
-      converted to valid UTF-8).
-
       \item \code{.libPaths()} gets a new option \code{include.site},
       allowing to \emph{not} include the site library, thanks to Dario
       Strbenac's suggestion and Gabe Becker's \PR{18016}.
@@ -239,6 +223,9 @@
       looked for on the path (like almost all other programs) so if needed
       specify a full path to the command in \code{PKG_CONFIG}, for example
       in file \file{config.site}.
+
+      \item C99 function \code{iswblank} is required -- it was last seen
+      missing ca 2003 so the workaround has been removed.
     }
   }
 
@@ -311,6 +298,46 @@
       \item \command{R CMD build} now omits tarballs and binaries of
       previous builds from the top-level package directory; \PR{17828},
       patch by Sebastian Meyer.
+    }
+  }
+
+  \subsection{ENCODING-RELATED CHANGES}{
+    \itemize{
+      \item The parser now treats \samp{\\Unnnnnnnn} escapes larger than
+      the upper limit for Unicode points (\samp{\\U10FFFF}) as an error
+      as they cannot be represented by valid UTF-8.
+
+      Where such escapes are used for outputting non-printable
+      (inclduing unassigned) characters, 6 (not 8) hex digits are used
+      (rather than 8 with leading zeros).  For clarity, braces are used,
+      for example \samp{\\U\{0effff\}}.
+
+      \item The parser now looks for non-ASCII spaces on Solaris (as
+      previously on most other OSes).
+
+      \item There are warnings (including from the parser) on the use of
+      unpaired surrogate Unicode points such as \samp{\\uD834}.  (These
+      cannot be converted to valid UTF-8).
+
+      \item Functions \code{nchar()}, \code{tolower()}, \code{toupper()}
+      and \code{chartr()} and those using regular expressions have more
+      support for inputs with a marked Latin-1 encoding.
+
+      \item The character-classification functions used to replace the
+      system \code{iswxxxx} functions on Windows, macOS and AIX have
+      been updated to Unicode 13.0.0 -- in particular, many more UTF-8
+      characters are regarded as printable.
+
+      \item The code for the evaluating default (extended) regular
+      expressions now uses the same replacement character-classification
+      functions as the rest of \R on Windows, macOS and AIX.
+
+      \item There is a build-time option to replace the system's
+      wide-character \code{wctrans} C function by tables shipped with
+      \R: use \samp{-DUSE_RI18N_CASE} in \samp{CFLAGS} when building \R.
+      On Windows this allows \code{tolower()} and \code{toupper()} to work
+      with Unicode characters beyond the Basic Multilingual Plane and is
+      intended to become the default.
     }
   }
 
@@ -419,6 +446,9 @@
 
       \item Parsing strings containing UTF-16 surrogate pairs such as
       \code{"\uD834\uDD1E"} works better on some (uncommon) platforms.
+      \code{sprintf("\%X", utf8ToInt("\uD834\uDD1E"))} should now give
+      \code{"1D11E"} on all platforms.
+      %% failed on Solaris
     }
   }
 }
@@ -478,6 +508,9 @@
 
       \item \code{identical(x,y)} no longer prints "Unknown Type .." for
       \code{typeof(x) == "..."} objects.
+
+      \item Fix (auto-)\code{print()}ing of named complex vectors, see
+      \PR{17868} and \PR{18019}.
     }
   }
 }

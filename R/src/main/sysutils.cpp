@@ -156,7 +156,7 @@ FILE *R_fopen(const char *filename, const char *mode)
 
    On NT-based versions of Windows, file names are stored in 'Unicode'
    (UCS-2), and _wfopen is provided to access them by UCS-2 names.
-   <FIXME> since Windows 2000 they are UTF-16LE
+   <FIXME> since Windows 2000 they could be UTF-16LE
 */
 
 #if defined(_WIN32)
@@ -182,7 +182,7 @@ wchar_t *R::filenameToWchar(const SEXP fn, const Rboolean expand)
 #endif
     if(IS_UTF8(fn)) from = "UTF-8";
     if(IS_BYTES(fn)) error(_("encoding of a filename cannot be 'bytes'"));
-    obj = Riconv_open("UCS-2LE", from);
+    obj = Riconv_open("UCS-2LE", from); // "UTF-16LE" ?
     if(obj == (void *)(-1))
 	error(_("unsupported conversion from '%s' in codepage %d"), from, localeCP);
 
@@ -1649,7 +1649,7 @@ size_t R::ucstomb(char *s, const unsigned int wc)
     return strlen(buf);
 }
 
-/* used in plot.cpp for non-UTF-8 MBCS */
+/* used in engine.cpp for non-UTF-8 MBCS */
 HIDDEN size_t R::mbtoucs(unsigned int *wc, const char *s, size_t n)
 {
     unsigned int  wcs[2];

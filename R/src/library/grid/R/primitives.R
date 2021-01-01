@@ -80,7 +80,7 @@ validDetails.move.to <- function(x) {
       !is.unit(x$y))
     stop(gettextf("'%s' and '%s' components of argument 'x' must be units", "x", "y"))
   # Make sure that x and y are of length 1
-  if (length(x$x) > 1 | length(x$y) > 1)
+  if (length(x$x) > 1 || length(x$y) > 1)
     stop(gettextf("'%s' and '%s' components of argument 'x' must be of length 1", "x", "y"))
   x
 }
@@ -115,7 +115,7 @@ validDetails.line.to <- function(x) {
       !is.unit(x$y))
     stop(gettextf("'%s' and '%s' components of argument 'x' must be units", "x", "y"))
   # Make sure that x and y are of length 1
-  if (length(x$x) > 1 | length(x$y) > 1)
+  if (length(x$x) > 1 || length(x$y) > 1)
     stop(gettextf("'%s' and '%s' components of argument 'x' must be of length 1", "x", "y"))
   if (!(is.null(x$arrow) || inherits(x$arrow, "arrow")))
       stop(gettextf("invalid '%s' component of argument 'x'", "arrow"))

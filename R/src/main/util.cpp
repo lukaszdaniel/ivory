@@ -407,6 +407,7 @@ Rboolean Rf_isBlankString(const char *s)
     if(mbcslocale) {
 	wchar_t wc; size_t used; mbstate_t mb_st;
 	mbs_init(&mb_st);
+	// This does not allow for surrogate pairs, but all blanks are in BMP
 	while( (used = Mbrtowc(&wc, s, MB_CUR_MAX, &mb_st)) ) {
 	    if(!iswspace((wint_t) wc)) return FALSE;
 	    s += used;
@@ -1277,6 +1278,7 @@ HIDDEN int R::utf8clen(const char c)
 	return 1 + utf8_table4[c & 0x3f];
 }
 
+/* These are misnamed: they convert a single char */
 static R_wchar_t utf16toucs(wchar_t high, wchar_t low)
 {
     return 0x10000 + ((int) (high & 0x3FF) << 10 ) + (int) (low & 0x3FF);
@@ -1392,7 +1394,33 @@ size_t R::utf8towcs(wchar_t *wc, const char * const s, size_t n)
 	    if (m == 0) break;
 	    res ++;
 	    if (IS_HIGH_SURROGATE(local))
-		res++;
+		res ++;
+	}
+    return (size_t) res;
+}
+
+size_t utf8towcs4(R_wchar_t *wc, const char *s, size_t n)
+{
+    ssize_t m, res = 0;
+    const char *t;
+    R_wchar_t *p;
+    R_wchar_t local;
+
+    if(wc)
+	for(p = wc, t = s; ; p++, t += m) {
+	    m  = (ssize_t) utf8toucs(p, t);
+	    if (m < 0) error(_("invalid input '%s' in 'utf8towcs32'"), s);
+	    if (m == 0) break;
+	    if (IS_HIGH_SURROGATE(*p)) *p = utf8toucs32(*p, s);
+	    res ++;
+	    if (res >= n) break;
+	}
+    else
+	for(t = s; ; t += m) {
+	    m  = (ssize_t) utf8toucs(&local, t);
+	    if (m < 0) error(_("invalid input '%s' in 'utf8towcs32'"), s);
+	    if (m == 0) break;
+	    res ++;
 	}
     return (size_t) res;
 }
@@ -1402,7 +1430,11 @@ constexpr unsigned int utf8_table1[] =
 	{0x7f, 0x7ff, 0xffff, 0x1fffff, 0x3ffffff, 0x7fffffff};
 constexpr unsigned int utf8_table2[] = {0, 0xc0, 0xe0, 0xf0, 0xf8, 0xfc};
 
-/* s is nullptr, or it contains at least n bytes.  Just write a a terminator if it's not big enough. */
+/* s is NULL, or it contains at least n bytes.  Just write a
+   terminator if it's not big enough.
+
+   Strangely named: converts from UCS-4 to UTF-8.
+*/
 
 static size_t Rwcrtomb32(char *s, R_wchar_t cvalue, size_t n)
 {
@@ -1424,14 +1456,19 @@ static size_t Rwcrtomb32(char *s, R_wchar_t cvalue, size_t n)
     return i + 1;
 }
 
-/* on input, wc is a string encoded in UTF-16 or UCS-2 or UCS-4.
-   s can be a buffer of size n>=0 chars, or NULL.  If n=0 or s=nullptr, nothing is written.
-   The return value is the number of chars including the terminating null.  If the
-   buffer is not big enough, the result is truncated but still null-terminated */
+/* On input, wc is a wide string encoded in UTF-16 or UCS-2 or UCS-4.
+
+   s can be a buffer of size n >= 0 chars, or NULL.  If n = 0 or s =
+   NULL, nothing is written.
+
+   The return value is the number of chars including the terminating
+   null.  If the buffer is not big enough, the result is truncated but
+   still null-terminated 
+*/
 HIDDEN // but used in windlgs
 size_t R::wcstoutf8(char *s, const wchar_t *wc, size_t n)
 {
-    size_t m, res=0;
+    size_t m, res = 0;
     char *t;
     const wchar_t *p;
     if (!n) return 0;
@@ -1445,6 +1482,24 @@ size_t R::wcstoutf8(char *s, const wchar_t *wc, size_t n)
 		warning("unpaired surrogate Unicode point %x", *p);
 	    m = Rwcrtomb32(t, (R_wchar_t)(*p), n - res);
 	}
+	if (!m) break;
+	res += m;
+	if (t)
+	    t += m;
+    }
+    return res + 1;
+}
+
+/* convert from R_wchar_t * (UCS-4) */
+HIDDEN
+size_t wcs4toutf8(char *s, const R_wchar_t *wc, size_t n)
+{
+    size_t m, res=0;
+    char *t;
+    const R_wchar_t *p;
+    if (!n) return 0;
+    for(p = wc, t = s; ; p++) {
+	m = Rwcrtomb32(t, (*p), n - res);
 	if (!m) break;
 	res += m;
 	if (t)

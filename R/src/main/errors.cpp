@@ -450,6 +450,7 @@ static int wd(const char *buf)
     if(nc > 0 && nc < 2000) {
 	wchar_t wc[2000];
 	mbstowcs(wc, buf, nc + 1);
+	// FIXME: width could conceivably exceed MAX_INT.
 	nw = Ri18n_wcswidth(wc, 2147483647);
 	return (nw < 1) ? nc : nw;
     }

@@ -1108,7 +1108,7 @@ static void WriteItem(SEXP s, SEXP ref_table, R_outpstream_t stream)
 		hastag = (TAG(s) != nullptr);
 		break;
 	case CLOSXP:
-		hastag = (CLOENV(s) != nullptr);
+		hastag = true;
 		break;
 	case PROMSXP:
 		hastag = (PRENV(s) != nullptr);
@@ -1141,23 +1141,20 @@ static void WriteItem(SEXP s, SEXP ref_table, R_outpstream_t stream)
 		s = CDR(s);
 		goto tailcall;
 	case CLOSXP:
-		/* Dotted pair objects */
-		/* These write their ATTRIB fields first to allow us to avoid
-	       recursion on the CDR */
+		/* Like a dotted pair object */
+		/* Write the ATTRIB field first to allow us to avoid
+	       recursion on the CDR/BODY */
 		if (hasattr)
 			WriteItem(ATTRIB(s), ref_table, stream);
-		if (CLOENV(s) != R_NilValue)
-			WriteItem(CLOENV(s), ref_table, stream);
-		if (BNDCELL_TAG(s))
-			R_expand_binding_value(s);
+		WriteItem(CLOENV(s), ref_table, stream);
 		WriteItem(FORMALS(s), ref_table, stream);
-		/* now do a tail call to WriteItem to handle the CDR */
+		/* now do a tail call to WriteItem to handle the CDR/BODY */
 		s = BODY(s);
 		goto tailcall;
 	case PROMSXP:
-		/* Dotted pair objects */
-		/* These write their ATTRIB fields first to allow us to avoid
-	       recursion on the CDR */
+		/* Like a dotted pair object */
+		/* Write the ATTRIB field first to allow us to avoid
+	       recursion on the CDR/PRCODE */
 		if (hasattr)
 			WriteItem(ATTRIB(s), ref_table, stream);
 		if (PRENV(s) != R_NilValue)
@@ -1165,7 +1162,7 @@ static void WriteItem(SEXP s, SEXP ref_table, R_outpstream_t stream)
 		if (BNDCELL_TAG(s))
 			R_expand_binding_value(s);
 		WriteItem(PRVALUE(s), ref_table, stream);
-		/* now do a tail call to WriteItem to handle the CDR */
+		/* now do a tail call to WriteItem to handle the CDR/PRCODE */
 		s = PRCODE(s);
 		goto tailcall;
 	case EXTPTRSXP:

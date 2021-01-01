@@ -137,7 +137,7 @@ contr.treatment <-
     if(contrasts) {
 	if(n < 2L)
 	    stop(gettextf("contrasts not defined for %d degrees of freedom", n - 1L), domain = "R-stats")
-	if (base < 1L | base > n)
+	if (base < 1L || base > n)
 	    stop("baseline group number out of range")
 	contr <- contr[, -base, drop = FALSE]
     }

@@ -19,7 +19,7 @@
 rect.hclust <- function(tree, k=NULL, which=NULL,
                         x=NULL, h=NULL, border=2, cluster=NULL)
 {
-    if(length(h) > 1L | length(k) > 1L)
+    if(length(h) > 1L || length(k) > 1L)
         stop("'k' and 'h' arguments must be a scalar")
 
     if(!is.null(h)){
@@ -32,7 +32,7 @@ rect.hclust <- function(tree, k=NULL, which=NULL,
         if(is.null(k))
             stop("specify exactly one of 'k' and 'h'")
 
-    if(k < 2 | k > length(tree$height))
+    if(k < 2 || k > length(tree$height))
         stop(gettextf("'%s' argument must be between %s and %s", "k", "2", length(tree$height)), domain = "R-stats")
 
     if(is.null(cluster))

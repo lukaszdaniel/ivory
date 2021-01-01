@@ -1926,6 +1926,7 @@ void GEText(double x, double y, const char * const str, cetype_t enc,
 					wchar_t wc;
 					mbstate_t mb_st;
 					mbs_init(&mb_st);
+					// FIXME this does not allow for surrogate pairs
 					while ((int)(used = mbrtowc(&wc, ss, n, &mb_st)) > 0) {
 #ifdef DEBUG_MI
 					    printf(" centring %s aka %d in MBCS\n", ss, wc);
@@ -2756,6 +2757,7 @@ void GEStrMetric(const char *str, cetype_t enc, const pGEcontext gc,
                     wchar_t wc;
                     mbstate_t mb_st;
                     mbs_init(&mb_st);
+		    // FIXME this does not allow for surrogate pairs
                     while ((int)(used = mbrtowc(&wc, s, n, &mb_st)) > 0) {
                         GEMetricInfo((int) wc, gc, &asc, &dsc, &wid, dd);
                         if (asc > *ascent)
@@ -2817,6 +2819,7 @@ void GEStrMetric(const char *str, cetype_t enc, const pGEcontext gc,
                     wchar_t wc;
                     mbstate_t mb_st;
                     mbs_init(&mb_st);
+		    // FIXME this does not allow for surrogate pairs
                     while ((int)(used = mbrtowc(&wc, s, n, &mb_st)) > 0) {
                         GEMetricInfo((int) wc, gc, &asc, &dsc, &wid, dd);
                         if (dsc > *descent)

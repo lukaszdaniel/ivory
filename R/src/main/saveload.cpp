@@ -1130,13 +1130,11 @@ static void NewWriteItem(SEXP s, SEXP sym_list, SEXP env_list, FILE *fp, OutputR
 	    NewWriteItem(CDR(s), sym_list, env_list, fp, m, d);
 	    break;
 	case CLOSXP:
-	    /* Dotted pair objects */
 	    NewWriteItem(CLOENV(s), sym_list, env_list, fp, m, d);
 	    NewWriteItem(FORMALS(s), sym_list, env_list, fp, m, d);
 	    NewWriteItem(BODY(s), sym_list, env_list, fp, m, d);
 	    break;
 	case PROMSXP:
-	    /* Dotted pair objects */
 	    NewWriteItem(PRENV(s), sym_list, env_list, fp, m, d);
 	    NewWriteItem(PRVALUE(s), sym_list, env_list, fp, m, d);
 	    NewWriteItem(PRCODE(s), sym_list, env_list, fp, m, d);
@@ -1220,7 +1218,7 @@ static void NewDataSave(SEXP s, FILE *fp, OutputRoutines *m, SaveLoadData *d)
 	R_assert(TYPEOF(CAR(iterator)) == ENVSXP);
 	NewWriteItem(ENCLOS(CAR(iterator)), sym_table, env_table, fp, m, d);
 	NewWriteItem(FRAME(CAR(iterator)), sym_table, env_table, fp, m, d);
-	NewWriteItem(TAG(CAR(iterator)), sym_table, env_table, fp, m, d);
+	NewWriteItem(HASHTAB(CAR(iterator)), sym_table, env_table, fp, m, d);
     }
     NewWriteItem(s, sym_table, env_table, fp, m, d);
 
