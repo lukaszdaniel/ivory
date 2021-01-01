@@ -145,11 +145,7 @@ namespace CXXR
          */
         const RObject *car() const
         {
-#ifdef CXXR_OLD_PAIRLIST_IMPL
-            return u.listsxp.m_carval;
-#else
             return m_car;
-#endif
         }
 
         /**
@@ -157,11 +153,7 @@ namespace CXXR
          */
         RObject *car()
         {
-#ifdef CXXR_OLD_PAIRLIST_IMPL
-            return u.listsxp.m_carval;
-#else
             return m_car;
-#endif
         }
 
         /** @brief Convert a ConsCell to a (possibly) different
@@ -197,13 +189,8 @@ namespace CXXR
          */
         void setCar(RObject *cr)
         {
-#ifdef CXXR_OLD_PAIRLIST_IMPL
-            u.listsxp.m_carval = cr;
-            devolveAge(u.listsxp.m_carval);
-#else
             m_car = cr;
             devolveAge(m_car);
-#endif
         }
 
         /** @brief Set the 'tag' value.
@@ -213,13 +200,8 @@ namespace CXXR
          */
         void setTag(RObject *tg)
         {
-#ifdef CXXR_OLD_PAIRLIST_IMPL
-            u.listsxp.m_tagval = tg;
-            devolveAge(u.listsxp.m_tagval);
-#else
             m_tag = tg;
             devolveAge(m_tag);
-#endif
         }
 
         /** @brief Set the 'tail' value.
@@ -245,11 +227,7 @@ namespace CXXR
          */
         const RObject *tag() const
         {
-#ifdef CXXR_OLD_PAIRLIST_IMPL
-            return u.listsxp.m_tagval;
-#else
             return m_tag;
-#endif
         }
 
         /**
@@ -257,43 +235,25 @@ namespace CXXR
          */
         RObject *tag()
         {
-#ifdef CXXR_OLD_PAIRLIST_IMPL
-            return u.listsxp.m_tagval;
-#else
             return m_tag;
-#endif
         }
 
         /**
          * @return a const pointer to the 'tail' of this ConsCell
          * element.
          */
-#ifdef CXXR_OLD_PAIRLIST_IMPL
-        const RObject *tail() const
-        {
-            return u.listsxp.m_cdrval;
-        }
-#else
         const PairList *tail() const
         {
             return m_tail;
         }
-#endif
 
         /**
          * @return a pointer to the 'tail' of this ConsCell.
          */
-#ifdef CXXR_OLD_PAIRLIST_IMPL
-        RObject *tail()
-        {
-            return u.listsxp.m_cdrval;
-        }
-#else
         PairList *tail()
         {
             return m_tail;
         }
-#endif
 
         // Virtual function of GCNode:
         void visitChildren(const_visitor *v) const;
@@ -325,24 +285,12 @@ namespace CXXR
          *
          * @param tg Pointer to the 'tag' of the element to be constructed.
          */
-#ifdef CXXR_OLD_PAIRLIST_IMPL
-        explicit ConsCell(SEXPTYPE st,
-                          RObject *cr = nullptr, RObject *tl = nullptr, RObject *tg = nullptr)
-            : RObject(st)
-        {
-            checkST(st);
-            u.listsxp.m_cdrval = tl;
-            u.listsxp.m_carval = cr;
-            u.listsxp.m_tagval = tg;
-        }
-#else
         explicit ConsCell(SEXPTYPE st,
                           RObject *cr = nullptr, PairList *tl = nullptr, RObject *tg = nullptr)
             : RObject(st), m_car(cr), m_tail(tl), m_tag(tg)
         {
             checkST(st);
         }
-#endif
 
         /** @brief Create a chain of ConsCell objects.
          *
@@ -374,17 +322,10 @@ namespace CXXR
          * @param tl Pointer to the new tail list (or a null
          *           pointer).
          */
-#ifdef CXXR_OLD_PAIRLIST_IMPL
-        void constructTail(RObject *tl)
-        {
-            u.listsxp.m_cdrval = tl;
-        }
-#else
         void constructTail(PairList *tl)
         {
             m_tail = tl;
         }
-#endif
 
     private:
         RObject *m_car;
@@ -404,9 +345,7 @@ namespace CXXR
      *
      * @note The name and interface of this function may well change.
      */
-#ifndef CXXR_OLD_PAIRLIST_IMPL
     void ccdump(std::ostream &os, const ConsCell *cc, size_t margin = 0);
-#endif
 } // namespace CXXR
 
 extern "C"

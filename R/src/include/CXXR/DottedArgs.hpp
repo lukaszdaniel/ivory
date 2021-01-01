@@ -53,11 +53,7 @@ namespace CXXR
          *
          * @param tg Pointer to the 'tag' of the element to be constructed.
          */
-#ifdef CXXR_OLD_PAIRLIST_IMPL
-        explicit DottedArgs(RObject *cr = nullptr, RObject *tl = nullptr, RObject *tg = nullptr)
-#else
         explicit DottedArgs(RObject *cr = nullptr, PairList *tl = nullptr, RObject *tg = nullptr)
-#endif
             : ConsCell(DOTSXP, cr, tl, tg)
         {
         }

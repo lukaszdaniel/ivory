@@ -1061,7 +1061,11 @@ SEXP R_new_altrep(R_altrep_class_t aclass, SEXP data1, SEXP data2)
 {
     SEXP sclass = R_SEXP(aclass);
     SEXPTYPE type = SEXPTYPE(ALTREP_CLASS_BASE_TYPE(sclass));
+#ifdef CXXR_OLD_ALTREP_IMPL
     AltRep *ans = CXXR_cons<AltRep>(data1, data2);
+#else
+    AltRep *ans = CXXR_cons<AltRep>(data1, CONS(data2, nullptr));
+#endif
     AltRep::set_wrapper_type(ans, type);
     SET_ALTREP_CLASS(ans, sclass);
     return ans;

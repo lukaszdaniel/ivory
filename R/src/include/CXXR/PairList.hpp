@@ -64,11 +64,7 @@ namespace CXXR
          *           to be constructed.
          * @param tg Pointer to the 'tag' of the element to be constructed.
          */
-#ifdef CXXR_OLD_PAIRLIST_IMPL
-        explicit PairList(RObject *cr = nullptr, RObject *tl = nullptr, RObject *tg = nullptr)
-#else
         explicit PairList(RObject *cr = nullptr, PairList *tl = nullptr, RObject *tg = nullptr)
-#endif
             : ConsCell(LISTSXP, cr, tl, tg)
         {
         }
@@ -114,13 +110,8 @@ namespace CXXR
 
     inline void ConsCell::setTail(PairList *tl)
     {
-#ifdef CXXR_OLD_PAIRLIST_IMPL
-        u.listsxp.m_cdrval = tl;
-        devolveAge(u.listsxp.m_cdrval);
-#else
         m_tail = tl;
         devolveAge(m_tail);
-#endif
     }
 
     template <class T = PairList>

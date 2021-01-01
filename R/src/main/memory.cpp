@@ -1703,7 +1703,7 @@ SEXP R_NewPreciousMSet(int initialSize)
     /* npreserved is modified in place */
     npreserved = allocVector(INTSXP, 1);
     SET_INTEGER_ELT(npreserved, 0, 0);
-    PROTECT(mset = CONS(R_NilValue, npreserved));
+    PROTECT(mset = CONS(R_NilValue, CONS(npreserved, nullptr)));
     /* isize is not modified in place */
     if (initialSize < 0)
 	error("'initialSize' must be non-negative");
@@ -1716,7 +1716,7 @@ SEXP R_NewPreciousMSet(int initialSize)
 static void checkMSet(SEXP mset)
 {
     SEXP store = CAR(mset);
-    SEXP npreserved = CDR(mset);
+    SEXP npreserved = CADR(mset);
     SEXP isize = TAG(mset);
     if (/*MAYBE_REFERENCED(mset) ||*/
 	((store != R_NilValue) &&
@@ -1737,7 +1737,7 @@ void R_PreserveInMSet(SEXP x, SEXP mset)
     PROTECT(x);
     checkMSet(mset);
     SEXP store = CAR(mset);
-    int *n = INTEGER(CDR(mset));
+    int *n = INTEGER(CADR(mset));
     if (store == R_NilValue) {
 	R_xlen_t newsize = INTEGER_ELT(TAG(mset), 0);
 	if (newsize == 0)
@@ -1772,7 +1772,7 @@ void R_ReleaseFromMSet(SEXP x, SEXP mset)
     SEXP store = CAR(mset);
     if (store == R_NilValue)
 	return; /* not preserved */
-    int *n = INTEGER(CDR(mset));
+    int *n = INTEGER(CADR(mset));
     for(R_xlen_t i = (*n) - 1; i >= 0; i--) {
 	if (VECTOR_ELT(store, i) == x) {
 	    for(;i < (*n) - 1; i++)
@@ -1793,7 +1793,7 @@ void R_ReleaseMSet(SEXP mset, int keepSize)
     SEXP store = CAR(mset);
     if (store == R_NilValue)
 	return; /* already empty */
-    int *n = INTEGER(CDR(mset));
+    int *n = INTEGER(CADR(mset));
     if (XLENGTH(store) <= keepSize) {
 	/* just free the entries */
 	for(R_xlen_t i = 0; i < *n; i++)

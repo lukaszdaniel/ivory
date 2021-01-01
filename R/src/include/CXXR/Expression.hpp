@@ -54,11 +54,7 @@ namespace CXXR
        *           to be constructed.
        * @param tg Pointer to the 'tag' of the element to be constructed.
        */
-#ifdef CXXR_OLD_PAIRLIST_IMPL
-      explicit Expression(RObject *cr = nullptr, RObject *tl = nullptr, RObject *tg = nullptr)
-#else
       explicit Expression(RObject *cr = nullptr, PairList *tl = nullptr, RObject *tg = nullptr)
-#endif
           : ConsCell(LANGSXP, cr, tl, tg)
       {
       }

@@ -207,11 +207,7 @@ namespace CXXR
             abort();
         }
 #endif
-#ifdef CXXR_OLD_PAIRLIST_IMPL
-        return ((R_bndval_t *)&(SEXP_downcast<ConsCell *>(x, false)->u.listsxp.m_carval))->dval;
-#else
         return ((R_bndval_t *)&(SEXP_downcast<ConsCell *>(x, false)->m_car))->dval;
-#endif
     }
 
     int ConsCell::bndcell_ival(RObject *x)
@@ -231,11 +227,7 @@ namespace CXXR
             abort();
         }
 #endif
-#ifdef CXXR_OLD_PAIRLIST_IMPL
-        return ((R_bndval_t *)&(SEXP_downcast<ConsCell *>(x, false)->u.listsxp.m_carval))->ival;
-#else
         return ((R_bndval_t *)&(SEXP_downcast<ConsCell *>(x, false)->m_car))->ival;
-#endif
     }
 
     int ConsCell::bndcell_lval(RObject *x)
@@ -255,11 +247,7 @@ namespace CXXR
             abort();
         }
 #endif
-#ifdef CXXR_OLD_PAIRLIST_IMPL
-        return ((R_bndval_t *)&(SEXP_downcast<ConsCell *>(x, false)->u.listsxp.m_carval))->ival;
-#else
         return ((R_bndval_t *)&(SEXP_downcast<ConsCell *>(x, false)->m_car))->ival;
-#endif
     }
 
     void ConsCell::set_bndcell_dval(RObject *x, double v)
@@ -279,11 +267,7 @@ namespace CXXR
             abort();
         }
 #endif
-#ifdef CXXR_OLD_PAIRLIST_IMPL
-        ((R_bndval_t *)&(SEXP_downcast<ConsCell *>(x, false)->u.listsxp.m_carval))->dval = v;
-#else
         ((R_bndval_t *)&(SEXP_downcast<ConsCell *>(x, false)->m_car))->dval = v;
-#endif
     }
 
     void ConsCell::set_bndcell_ival(RObject *x, int v)
@@ -303,11 +287,7 @@ namespace CXXR
             abort();
         }
 #endif
-#ifdef CXXR_OLD_PAIRLIST_IMPL
-        ((R_bndval_t *)&(SEXP_downcast<ConsCell *>(x, false)->u.listsxp.m_carval))->ival = v;
-#else
         ((R_bndval_t *)&(SEXP_downcast<ConsCell *>(x, false)->m_car))->ival = v;
-#endif
     }
 
     void ConsCell::set_bndcell_lval(RObject *x, int v)
@@ -327,11 +307,7 @@ namespace CXXR
             abort();
         }
 #endif
-#ifdef CXXR_OLD_PAIRLIST_IMPL
-        ((R_bndval_t *)&(SEXP_downcast<ConsCell *>(x, false)->u.listsxp.m_carval))->ival = v;
-#else
         ((R_bndval_t *)&(SEXP_downcast<ConsCell *>(x, false)->m_car))->ival = v;
-#endif
     }
 
     ConsCell::ConsCell(SEXPTYPE st, size_t sz)
@@ -347,18 +323,12 @@ namespace CXXR
         try
         {
             while (--sz)
-#ifdef CXXR_OLD_PAIRLIST_IMPL
-                u.listsxp.m_cdrval = new PairList(nullptr, SEXP_downcast<PairList *>(u.listsxp.m_cdrval), nullptr);
-#else
                 m_tail = new PairList(nullptr, m_tail, nullptr);
-#endif
         }
         catch (...)
         {
-#ifndef CXXR_OLD_PAIRLIST_IMPL
             if (m_tail)
                 m_tail->expose();
-#endif
             throw;
         }
     }
@@ -407,9 +377,13 @@ namespace CXXR
         const ConsCell *p = this;
         do
         {
-            ccdump(cerr, p, 1);
-            std::cerr << std::endl;
             p->RObject::visitChildren(v);
+            if (p->m_tail && !(p->m_tail->sexptype() == LISTSXP || p->m_tail->sexptype() == LANGSXP || p->m_tail->sexptype() == DOTSXP || p->m_tail->sexptype() == BCODESXP))
+            {
+                std::cerr << LOCATION << Rf_type2char(p->m_tail->sexptype()) << " : " << R::typeName(p->m_tail) << std::endl;
+                ccdump(std::cerr, p, 0);
+                abort();
+            }
             if (p->altrep())
             {
                 if (RObject::bndcell_tag(p))
@@ -432,7 +406,7 @@ namespace CXXR
         } while (p && (*v)(p));
 #endif
     }
-#ifndef CXXR_OLD_PAIRLIST_IMPL
+
     namespace
     {
         void indent(ostream &os, size_t margin)
@@ -513,5 +487,4 @@ namespace CXXR
             }
         }
     }
-#endif
 } // namespace CXXR

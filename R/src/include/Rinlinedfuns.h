@@ -449,9 +449,17 @@ extern inline void SET_SCALAR_BVAL(SEXP x, Rbyte v)
 extern inline SEXP ALTREP_CLASS(SEXP x) { return TAG(x); }
 
 extern inline SEXP R_altrep_data1(SEXP x) { return CAR(x); }
+#ifdef CXXR_OLD_ALTREP_IMPL
 extern inline SEXP R_altrep_data2(SEXP x) { return CDR(x); }
+#else
+extern inline SEXP R_altrep_data2(SEXP x) { return CADR(x); }
+#endif
 extern inline void R_set_altrep_data1(SEXP x, SEXP v) { SETCAR(x, v); }
+#ifdef CXXR_OLD_ALTREP_IMPL
 extern inline void R_set_altrep_data2(SEXP x, SEXP v) { SETCDR(x, v); }
+#else
+extern inline void R_set_altrep_data2(SEXP x, SEXP v) { SETCADR(x, v); }
+#endif
 
 extern inline int INTEGER_ELT(SEXP x, R_xlen_t i)
 {

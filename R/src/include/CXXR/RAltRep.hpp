@@ -47,11 +47,7 @@ namespace CXXR
          *           to be constructed.
          * @param tg Pointer to the 'tag' of the element to be constructed.
          */
-#ifdef CXXR_OLD_PAIRLIST_IMPL
-        explicit AltRep(RObject *cr = nullptr, RObject *tl = nullptr, RObject *tg = nullptr)
-#else
         explicit AltRep(RObject *cr = nullptr, PairList *tl = nullptr, RObject *tg = nullptr)
-#endif
             : PairList(cr, tl, tg)
         {
              m_alt = true;

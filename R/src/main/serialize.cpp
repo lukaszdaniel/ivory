@@ -1260,14 +1260,14 @@ static void WriteItem(SEXP s, SEXP ref_table, R_outpstream_t stream)
 
 static SEXP MakeCircleHashTable(void)
 {
-    return CONS(R_NilValue, allocVector(VECSXP, HASHSIZE));
+    return CONS(R_NilValue, CONS(allocVector(VECSXP, HASHSIZE), nullptr)); 
 }
 
 static bool AddCircleHash(SEXP item, SEXP ct)
 {
     SEXP table, bucket, list;
 
-    table = CDR(ct);
+    table = CADR(ct);
     R_size_t pos = PTRHASH(item) % LENGTH(table);
     bucket = VECTOR_ELT(table, pos);
     for (list = bucket; list != R_NilValue; list = CDR(list))

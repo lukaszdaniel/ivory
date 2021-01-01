@@ -599,7 +599,11 @@ HIDDEN SEXP R_compact_intrange(R_xlen_t n1, R_xlen_t n2)
 
 #define MAKE_DEFERRED_STRING_STATE(v, sp) CONS(v, sp)
 #define DEFERRED_STRING_STATE_ARG(s) CAR(s)
+#ifdef CXXR_OLD_ALTREP_IMPL
 #define DEFERRED_STRING_STATE_INFO(s) CDR(s)
+#else
+#define DEFERRED_STRING_STATE_INFO(s) CADR(s)
+#endif
 
 #define DEFERRED_STRING_ARG(x) \
     DEFERRED_STRING_STATE_ARG(DEFERRED_STRING_STATE(x))
@@ -897,8 +901,13 @@ HIDDEN SEXP R_deferred_coerceToString(SEXP v, SEXP info)
 	    }
 	}
 	MARK_NOT_MUTABLE(v); /* make sure it can't change once captured */
+#ifdef CXXR_OLD_ALTREP_IMPL
 	ans = PROTECT(MAKE_DEFERRED_STRING_STATE(v, info));
 	ans = R_new_altrep(R_deferred_string_class, ans, R_NilValue);
+#else
+	ans = PROTECT(MAKE_DEFERRED_STRING_STATE(v, MAKE_DEFERRED_STRING_STATE(info, nullptr)));
+	ans = R_new_altrep(R_deferred_string_class, ans, R_NilValue);
+#endif
 	UNPROTECT(2); /* ans, v */
 	break;
     default:
@@ -1475,14 +1484,24 @@ R_INLINE static SEXP WRAPPER_WRAPPED_RW(SEXP x)
 
 static SEXP wrapper_Serialized_state(SEXP x)
 {
-    return CONS(WRAPPER_WRAPPED(x), WRAPPER_METADATA(x));
+#ifdef CXXR_OLD_ALTREP_IMPL
+    GCRoot<> ans(CONS(WRAPPER_WRAPPED(x), WRAPPER_METADATA(x)));
+#else
+    GCRoot<AltRep> ans(CXXR_cons<AltRep>(WRAPPER_WRAPPED(x), CXXR_cons<AltRep>(CAR(WRAPPER_METADATA(x)), CDR(WRAPPER_METADATA(x)))));
+#endif
+    return ans;
 }
 
 static SEXP make_wrapper(SEXP, SEXP);
 
 static SEXP wrapper_Unserialize(SEXP class_, SEXP state)
 {
-    return make_wrapper(CAR(state), CDR(state));
+#ifdef CXXR_OLD_ALTREP_IMPL
+    GCRoot<> ans(make_wrapper(CAR(state), CDR(state)));
+#else
+    GCRoot<AltRep> ans(static_cast<AltRep*>(make_wrapper(CAR(state), CDR(state))));
+#endif
+    return ans;
 }
 
 static SEXP wrapper_Duplicate(SEXP x, Rboolean deep)
@@ -1904,7 +1923,6 @@ static SEXP make_wrapper(SEXP x, SEXP meta)
 	/* make sure no mutation can happen through another reference */
 	MARK_NOT_MUTABLE(x);
 #endif
-
     return ans;
 }
 

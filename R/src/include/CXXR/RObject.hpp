@@ -34,15 +34,30 @@
 
 #define SWITCH_TO_REFCNT
 #define COMPUTE_REFCNT_VALUES
-// #define CXXR_OLD_PAIRLIST_IMPL
 // #define ENABLE_ST_CHECKS
+#define CXXR_OLD_ALTREP_IMPL
+
+#define TEST_PL(pp)                                                                                                                   \
+    {                                                                                                                                 \
+        ConsCell *p = SEXP_downcast<ConsCell *>(pp);                                                                                  \
+        do                                                                                                                            \
+        {                                                                                                                             \
+            if (p && !(p->sexptype() == LISTSXP || p->sexptype() == LANGSXP || p->sexptype() == DOTSXP || p->sexptype() == BCODESXP)) \
+            {                                                                                                                         \
+                std::cerr << LOCATION << Rf_type2char(p->sexptype()) << "; " << R::typeName(p) << std::endl;                          \
+                std::abort();                                                                                                         \
+            }                                                                                                                         \
+            if (p)                                                                                                                    \
+                p = p->tail();                                                                                                        \
+        } while (p);                                                                                                                  \
+    }
+
 #define PRINT_PL(call)                                                                                                                      \
     if (call && (call->sexptype() == LISTSXP || call->sexptype() == DOTSXP || call->sexptype() == LANGSXP || call->sexptype() == BCODESXP)) \
     {                                                                                                                                       \
-        std::cerr << LOCATION << "Begin ccdump for " << Rf_type2char(call->sexptype()) << " ..." << std::endl;                              \
-        ccdump(std::cerr, SEXP_downcast<const CXXR::PairList *>(call), 1);                                                                  \
-        std::cerr << LOCATION << "Done ccdump ..." << std::endl                                                                             \
-                  << std::endl;                                                                                                             \
+        std::cerr << LOCATION << "Begin ccdump for " << Rf_type2char(call->sexptype()) << " ...\n";                                         \
+        ccdump(std::cerr, SEXP_downcast<const CXXR::PairList *>(call), 0);                                                                  \
+        std::cerr << LOCATION << "Done ccdump ...\n\n";                                                                                     \
     }                                                                                                                                       \
     else if (call)                                                                                                                          \
     {                                                                                                                                       \
@@ -50,7 +65,7 @@
     }                                                                                                                                       \
     else                                                                                                                                    \
     {                                                                                                                                       \
-        std::cerr << LOCATION << "pairlist = nullptr" << std::endl;                                                                         \
+        std::cerr << LOCATION << "object = nullptr" << std::endl;                                                                         \
     }
 
 #include <cstddef>
@@ -225,14 +240,6 @@ namespace CXXR
      */
     class RObject;
 
-#ifdef CXXR_OLD_PAIRLIST_IMPL
-    struct listsxp_struct
-    {
-        RObject *m_carval;
-        RObject *m_cdrval;
-        RObject *m_tagval;
-    };
-#endif
     struct envsxp_struct
     {
         RObject *m_frame;
@@ -310,9 +317,6 @@ namespace CXXR
 
         union
         {
-#ifdef CXXR_OLD_PAIRLIST_IMPL
-            listsxp_struct listsxp;
-#endif
             envsxp_struct envsxp;
             closxp_struct closxp;
             promsxp_struct promsxp;
