@@ -1048,6 +1048,7 @@ HIDDEN SEXP do_tolower(SEXP call, SEXP op, SEXP args, SEXP env)
 		ienc = getCharCE(el);
 		if (use_UTF8 && ienc == CE_UTF8) {
 		    xi = CHAR(el);
+		    // could overcount if there are conjugate pairs
 		    nc = (int) utf8towcs(nullptr, xi, 0);
 		} else if (use_UTF8 && ienc == CE_LATIN1) {
 		    xi = translateCharUTF8(el); // in case it is really in CP1252
