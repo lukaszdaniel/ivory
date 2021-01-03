@@ -19,7 +19,7 @@ CXXR_HEADERS = Allocator.hpp RAllocStack.hpp CellPool.hpp MemoryBank.hpp GCEdge.
   EdgeVector.hpp ExpressionVector.hpp ExternalPointer.hpp Environment.hpp Frame.hpp FunctionBase.hpp \
   Complex.hpp Logical.hpp String.hpp VectorBase.hpp FixedVector.hpp ComplexVector.hpp RealVector.hpp \
   IntVector.hpp ListVector.hpp LogicalVector.hpp PairList.hpp RawVector.hpp StringVector.hpp\
-  PredefinedSymbols.hpp RTypes.hpp SEXP_downcast.hpp SEXPTYPE.hpp S4Object.hpp Symbol.hpp Promise.hpp WeakRef.hpp
+  PredefinedSymbols.hpp RTypes.hpp SEXP_downcast.hpp SEXPTYPE.hpp S4Object.hpp Symbol.hpp UncachedString.hpp CachedString.hpp Promise.hpp WeakRef.hpp
 
 DISTFILES = Makefile.in $(CXXR_HEADERS)
 TIMESTAMPS = $(CXXR_HEADERS:.hpp=.ts)

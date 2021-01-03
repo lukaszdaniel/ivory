@@ -282,7 +282,7 @@ HIDDEN int R::R_Newhashpjw(const char *s)
 int CXXR::String::hash() const
 {
     if (m_hash < 0)
-        m_hash = R_Newhashpjw(m_data);
+        m_hash = R_Newhashpjw(m_c_str);
     return m_hash;
 }
 
@@ -4001,14 +4001,14 @@ SEXP Rf_mkCharCE(const char *name, cetype_t enc)
 {
     size_t len = strlen(name);
     if (len > R_INT_MAX)
-        error(_("R character strings are limited to 2^31-1 bytes"));
+        Rf_error(_("R character strings are limited to 2^31-1 bytes"));
     return Rf_mkCharLenCE(name, (int)len, enc);
 }
 
 /* no longer used in R but documented in 2.7.x */
 SEXP Rf_mkCharLen(const char *name, int len)
 {
-    return mkCharLenCE(name, len, CE_NATIVE);
+    return Rf_mkCharLenCE(name, len, CE_NATIVE);
 }
 
 /**
@@ -4025,8 +4025,8 @@ SEXP Rf_mkChar(const char *const name)
 {
     size_t len = strlen(name);
     if (len > R_INT_MAX)
-        error(_("R character strings are limited to 2^31-1 bytes"));
-    return mkCharLenCE(name, (int)len, CE_NATIVE);
+        Rf_error(_("R character strings are limited to 2^31-1 bytes"));
+    return Rf_mkCharLenCE(name, (int)len, CE_NATIVE);
 }
 
 /* Global CHARSXP cache and code for char-based hash tables */
@@ -4126,7 +4126,7 @@ static void R_StringHash_resize(unsigned int newsize)
  * a new CHARSXP is created, added to the cache and then returned.
  */
 
-SEXP Rf_mkCharLenCE(const char * const name, int len, cetype_t enc)
+SEXP Rf_mkCharLenCE(const char *const name, int len, cetype_t enc)
 {
     SEXP cval, chain;
     unsigned int hashcode;
@@ -4145,33 +4145,55 @@ SEXP Rf_mkCharLenCE(const char * const name, int len, cetype_t enc)
     default:
         error(_("unknown encoding: %d"), enc);
     }
-    for (int slen = 0; slen < len; slen++) {
-	if ((unsigned int) name[slen] > 127) is_ascii = false;
-	if (!name[slen]) embedNul = true;
+    for (int slen = 0; slen < len; slen++)
+    {
+        if ((unsigned int)name[slen] > 127)
+            is_ascii = false;
+        if (!name[slen])
+            embedNul = true;
     }
-    if (embedNul) {
-	SEXP c;
-	/* This is tricky: we want to make a reasonable job of
+    if (embedNul)
+    {
+        SEXP c;
+        /* This is tricky: we want to make a reasonable job of
 	   representing this string, and EncodeString() is the most
 	   comprehensive */
-	c = allocCharsxp(len);
-	memcpy(CHAR_RW(c), name, len);
-	switch(enc) {
-	case CE_UTF8: CXXR::String::set_utf8(c); break;
-	case CE_LATIN1: CXXR::String::set_latin1(c); break;
-	case CE_BYTES: CXXR::String::set_bytes(c); break;
-	default: break;
-	}
-	if (is_ascii) CXXR::String::set_ascii(c);
-	error(_("embedded nul in string: '%s'"), EncodeString(c, 0, 0, Rprt_adj_none));
+        c = allocCharsxp(len);
+        memcpy(CHAR_RW(c), name, len);
+        switch (enc)
+        {
+        case CE_UTF8:
+            CXXR::String::set_utf8(c);
+            break;
+        case CE_LATIN1:
+            CXXR::String::set_latin1(c);
+            break;
+        case CE_BYTES:
+            CXXR::String::set_bytes(c);
+            break;
+        default:
+            break;
+        }
+        if (is_ascii)
+            CXXR::String::set_ascii(c);
+        error(_("embedded nul in string: '%s'"), EncodeString(c, 0, 0, Rprt_adj_none));
     }
 
-    if (enc && is_ascii) enc = CE_NATIVE;
-    switch(enc) {
-    case CE_UTF8: need_enc = CXXR::String::CharsetBit::UTF8_MASK; break;
-    case CE_LATIN1: need_enc = CXXR::String::CharsetBit::LATIN1_MASK; break;
-    case CE_BYTES: need_enc = CXXR::String::CharsetBit::BYTES_MASK; break;
-    default: need_enc = CXXR::String::CharsetBit::NATIVE_MASK;
+    if (enc && is_ascii)
+        enc = CE_NATIVE;
+    switch (enc)
+    {
+    case CE_UTF8:
+        need_enc = CXXR::String::CharsetBit::UTF8_MASK;
+        break;
+    case CE_LATIN1:
+        need_enc = CXXR::String::CharsetBit::LATIN1_MASK;
+        break;
+    case CE_BYTES:
+        need_enc = CXXR::String::CharsetBit::BYTES_MASK;
+        break;
+    default:
+        need_enc = CXXR::String::CharsetBit::NATIVE_MASK;
     }
 
     hashcode = char_hash(name, len) & char_hash_mask;
@@ -4179,59 +4201,63 @@ SEXP Rf_mkCharLenCE(const char * const name, int len, cetype_t enc)
     /* Search for a cached value */
     cval = R_NilValue;
     chain = VECTOR_ELT(R_StringHash, hashcode);
-    for (; !ISNULL(chain) ; chain = CXTAIL(chain)) {
-	SEXP val = CXHEAD(chain);
-	if (TYPEOF(val) != CHARSXP) break; /* sanity check */
-	if (need_enc == (ENC_KNOWN(val) | IS_BYTES(val)) &&
-	    LENGTH(val) == len &&  /* quick pretest */
-	    (!len || (memcmp(CHAR(val), name, len) == 0))) { // called with len = 0
-	    cval = val;
-	    break;
-	}
+    for (; !ISNULL(chain); chain = CXTAIL(chain))
+    {
+        SEXP val = CXHEAD(chain);
+        if (TYPEOF(val) != CHARSXP)
+            break; /* sanity check */
+        if (need_enc == (ENC_KNOWN(val) | IS_BYTES(val)) &&
+            LENGTH(val) == len && /* quick pretest */
+            (!len || (memcmp(CHAR(val), name, len) == 0)))
+        { // called with len = 0
+            cval = val;
+            break;
+        }
     }
-    if (cval == R_NilValue) {
-	/* no cached value; need to allocate one and add to the cache */
-	PROTECT(cval = allocCharsxp(len));
-	memcpy(CHAR_RW(cval), name, len);
-	switch(enc) {
-	case CE_NATIVE:
-	    break;          /* don't set encoding */
-	case CE_UTF8:
-	    CXXR::String::set_utf8(cval);
-	    break;
-	case CE_LATIN1:
-	    CXXR::String::set_latin1(cval);
-	    break;
-	case CE_BYTES:
-	    CXXR::String::set_bytes(cval);
-	    break;
-	default:
-	    error(_("unknown encoding mask: %d"), enc);
-	}
-	if (is_ascii) CXXR::String::set_ascii(cval);
-	CXXR::String::set_cached(cval);  /* Mark it */
-	/* add the new value to the cache */
-	chain = VECTOR_ELT(R_StringHash, hashcode);
-	if (ISNULL(chain))
-	    SET_HASHPRI(R_StringHash, HASHPRI(R_StringHash) + 1);
-	/* this is a destrictive modification */
-	chain = SET_CXTAIL(cval, chain);
-	SET_VECTOR_ELT(R_StringHash, hashcode, chain);
+    if (cval == R_NilValue)
+    {
+        /* no cached value; need to allocate one and add to the cache */
+        PROTECT(cval = allocCharsxp(len));
+        memcpy(CHAR_RW(cval), name, len);
+        switch (enc)
+        {
+        case CE_NATIVE:
+            break; /* don't set encoding */
+        case CE_UTF8:
+            CXXR::String::set_utf8(cval);
+            break;
+        case CE_LATIN1:
+            CXXR::String::set_latin1(cval);
+            break;
+        case CE_BYTES:
+            CXXR::String::set_bytes(cval);
+            break;
+        default:
+            error(_("unknown encoding mask: %d"), enc);
+        }
+        if (is_ascii)
+            CXXR::String::set_ascii(cval);
+        CXXR::String::set_cached(cval); /* Mark it */
+        /* add the new value to the cache */
+        chain = VECTOR_ELT(R_StringHash, hashcode);
+        if (ISNULL(chain))
+            SET_HASHPRI(R_StringHash, HASHPRI(R_StringHash) + 1);
+        /* this is a destrictive modification */
+        chain = SET_CXTAIL(cval, chain);
+        SET_VECTOR_ELT(R_StringHash, hashcode, chain);
 
-	/* resize the hash table if necessary with the new entry still
-	   protected.
-	   Maximum possible power of two is 2^30 for a VECSXP.
-	   FIXME: this has changed with long vectors.
-	*/
-	if (R_HashSizeCheck(R_StringHash)
-	    && char_hash_size < 1073741824 /* 2^30 */)
-	    R_StringHash_resize(char_hash_size * 2);
+        /* resize the hash table if necessary with the new entry still
+           protected.
+           Maximum possible power of two is 2^30 for a VECSXP.
+           FIXME: this has changed with long vectors.
+        */
+        if (R_HashSizeCheck(R_StringHash) && char_hash_size < 1073741824 /* 2^30 */)
+            R_StringHash_resize(char_hash_size * 2);
 
-	UNPROTECT(1);
+        UNPROTECT(1);
     }
     return cval;
 }
-
 
 #ifdef DEBUG_SHOW_CHARSXP_CACHE
 /* Call this from gdb with

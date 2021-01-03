@@ -44,12 +44,9 @@ extern "C" SEXP R_BlankString; /* "" as a CHARSXP */
 
 namespace CXXR
 {
-	/** @brief RObject representing a character string.
+	/** @brief Base class for RObject representing a character string.
      *
-     * At any one time, at most one String object with a particular
-     * text and encoding may exist.
-     *
-     * @note When the method size() is applied to a
+     * @note When the method size() of VectorBase is applied to a
      * String, it returns the number of <tt>char</tt>s that the String
      * comprises.  If the string uses a multibyte encoding scheme,
      * this may be different from the number of Unicode characters
@@ -90,24 +87,6 @@ namespace CXXR
 
 		String *clone() const override { return const_cast<String *>(this); }
 
-		/** @brief Create a string, leaving its contents
-		 *         uninitialized. 
-		 * @param sz Number of elements required.  Zero is
-		 *          permissible.
-		 */
-		explicit String(R_xlen_t sz);
-
-		/** @brief Character access.
-		 * @param index Index of required character (counting from
-		 *          zero).  No bounds checking is applied.
-		 * @return Reference to the specified character.
-		 */
-		char &operator[](R_xlen_t index)
-		{
-			m_hash = -1;
-			return m_data[index];
-		}
-
 		/** @brief Read-only character access.
 		 * @param index Index of required character (counting from
 		 *          zero).  No bounds checking is applied.
@@ -116,17 +95,7 @@ namespace CXXR
 		 */
 		char operator[](R_xlen_t index) const
 		{
-			return m_data[index];
-		}
-
-		virtual void *data() override
-		{
-			return m_data;
-		}
-
-		virtual const void *data() const override
-		{
-			return m_data;
+			return m_c_str[index];
 		}
 
 		/** @brief Blank string.
@@ -144,21 +113,44 @@ namespace CXXR
 		 */
 		const char *c_str() const
 		{
-			return m_data;
+			return m_c_str;
 		}
 
 		/** @brief Hash value.
+		 *
 		 * @return The hash value of this string.
+		 *
+		 * @note The current hashing algorithm (taken from CR) does
+		 * not deal satisfactorily with strings containing embedded
+		 * null characters: the hashing processes characters only up
+		 * to the first null.
 		 */
 		int hash() const;
 
+		/** @brief Test if 'not available'.
+		 *
+		 * @return true iff this is the 'not available' string.
+		 */
+		bool isNA() const
+		{
+			return this == NA(); //s_na.get();
+		}
+
 		/** @brief 'Not available' string.
+		 *
+		 * Note that although the 'not available' string contains the
+		 * text "NA", it is identified as the 'not available' string
+		 * by its <em>address</em>, not by its content.  It is
+		 * entirely in order to create another string with the text
+		 * "NA", and that string will not be considered 'not
+		 * available'.
+		 *
 		 * @return <tt>const</tt> pointer to the string representing
 		 *         'not available'.
 		 */
 		static const String *NA()
 		{
-			return static_cast<String *>(R_NaString);
+			return static_cast<String *>(R_NaString); // s_na;
 		}
 
 		/** @brief The name by which this type is known in R.
@@ -170,8 +162,70 @@ namespace CXXR
 			return "char";
 		}
 
-		// Virtual functions of RObject:
-		const char *typeName() const override;
+	protected:
+		/** @brief Create a string. 
+		 *
+		 * @param sz Number of <tt>char</tt>s in the string.  Zero is
+		 *          permissible.  Note that if the string uses a
+		 *          multibyte encoding scheme, this may be different
+		 *          from the number of Unicode characters represented
+		 *          by the string.
+		 *
+		 * @param encoding The intended encoding of the string, as
+		 *          indicated by the LATIN1_MASK and UTF8_MASK bits.
+		 *          Zero signifies ASCII encoding, and at most one of
+		 *          the MASK bits may be set (checked).
+		 *
+		 * @param c_string Pointer to a representation of the string
+		 *          as a C-style string (but possibly with embedded
+		 *          null characters), with \sz plus one bytes, the
+		 *          last byte being a null byte.  (Because of the
+		 *          possibility of embedded nulls the size of the
+		 *          string is not checked.)  This string
+		 *          representation must remain in existence for the
+		 *          lifetime of the String object.  If a null pointer
+		 *          is supplied here, a string pointer must be
+		 *          supplied later in the construction of the derived
+		 *          class object by calling setCString().
+		 */
+		String(size_t sz, unsigned int encoding, const char *c_string = nullptr)
+			: VectorBase(CHARSXP, sz), m_c_str(c_string), m_hash(-1)
+		{
+			if (encoding)
+				checkEncoding(encoding);
+			m_gpbits = encoding;
+		}
+
+		/** @brief Supply pointer to the string representation.
+		 *
+		 * @param c_string Pointer to a representation of the string
+		 *          as a C-style string (but possibly with embedded
+		 *          null characters), with size() plus one bytes, the
+		 *          last byte being a null byte.  (Because of the
+		 *          possibility of embedded nulls the size of the
+		 *          string is not checked.)  This string
+		 *          representation must remain in existence for the
+		 *          lifetime of the String object.  If a null pointer
+		 *          is supplied here, a string pointer must be
+		 *          supplied later in the construction of the derived
+		 *          class object by calling setCString().
+		 */
+		void setCString(const char *c_string)
+		{
+			m_c_str = c_string;
+		}
+
+		/** @brief Mark the hash value as invalid.
+		 *
+		 * This should be called in the event that the text of the
+		 * String may have been changed.
+		 */
+		void invalidateHash() const
+		{
+			m_hash = -1;
+		}
+
+	public:
 		/* Hashing Methods */
 		static constexpr int HASHASH_MASK = 1;
 		static unsigned int hashash(RObject *x);
@@ -200,33 +254,16 @@ namespace CXXR
 		static unsigned int is_cached(RObject *x);
 
 	private:
-		// Max. strlen stored internally:
-		static const R_xlen_t s_short_strlen = 7;
+		const char *m_c_str;
 
 		mutable int m_hash; // negative signifies invalid
-		R_xlen_t m_databytes; // includes trailing null byte
-		char *m_data;		// pointer to the string's data block.
-
-		// If there are fewer than s_short_strlen+1 chars in the
-		// string (including the trailing null), it is stored here,
-		// internally to the String object, rather than via a separate
-		// allocation from CXXR::MemoryBank.  We put this last, so that it
-		// will be adjacent to any trailing redzone.
-		char m_short_string[s_short_strlen + 1];
 
 		// Not implemented yet.  Declared to prevent
 		// compiler-generated versions:
 		String(const String &);
 		String &operator=(const String &);
-
-		// Declared private to ensure that Strings are
-		// allocated only using 'new'.
-		~String()
-		{
-			if (m_data != m_short_string)
-				MemoryBank::deallocate(m_data, m_databytes);
-		}
-		friend class Symbol;
+		// Report error if encoding is invalid:
+		static void checkEncoding(unsigned int encoding);
 	};
 
 	inline const char *r_char(RObject *x)
@@ -237,17 +274,6 @@ namespace CXXR
 
 extern "C"
 {
-	/**
-	 * @brief Writable char access.
-     * @param x pointer to a CXXR::String 
-     * @return pointer to character 0 of \a x.
-     * @note For R internal use only.  May be removed in future.
-     */
-	inline char *CHAR_RW(SEXP x)
-	{
-		return CXXR::stdvec_dataptr<char>(x);
-	}
-
 	/**
      * @param x \c const pointer to a CXXR::String.
      * @return \c const pointer to character 0 of \a x.
@@ -261,44 +287,10 @@ extern "C"
 	int IS_LATIN1(SEXP x);
 
 	/**
-     * @brief Set LATIN1 encoding.
-     * @param x Pointer to a CXXR::String.
-     */
-	void SET_LATIN1(SEXP x);
-
-	/**
-     * @brief Unset LATIN1 encoding.
-     * @param x Pointer to a CXXR::String.
-     */
-	void UNSET_LATIN1(SEXP x);
-
-	/**
      * @param x Pointer to a CXXR::String.
      * @return true iff \a x is marked as having UTF8 encoding.
      */
 	int IS_UTF8(SEXP x);
-
-	/**
-     * @brief Set UTF8 encoding.
-     * @param x Pointer to a CXXR::String.
-     */
-	void SET_UTF8(SEXP x);
-
-	/**
-     * @brief Unset UTF8 encoding.
-     * @param x Pointer to a CXXR::String.
-     */
-	void UNSET_UTF8(SEXP x);
-
-	/**
-     * @brief Create a string object.
-     *
-     *  Allocate a string object.
-     * @param length The length of the string to be created (excluding the
-     *          trailing null byte).
-     * @return Pointer to the created string.
-     */
-	SEXP Rf_allocString(R_len_t length);
 
 	/* Hashing Functions */
 

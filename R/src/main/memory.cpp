@@ -62,6 +62,7 @@
 #include <CXXR/StringVector.hpp>
 #include <CXXR/ExpressionVector.hpp>
 #include <CXXR/ListVector.hpp>
+#include <CXXR/UncachedString.hpp>
 #include <CXXR/WeakRef.hpp>
 #include <CXXR/ExternalPointer.hpp>
 #include <CXXR/PairList.hpp>
@@ -1416,7 +1417,7 @@ HIDDEN SEXP R::allocCharsxp(R_len_t length)
 #ifdef R_MEMORY_PROFILING
         R_ReportAllocation(convert2VEC<char>(length + 1) * sizeof(VECREC));
 #endif
-        return new String(length);
+        return new UncachedString(length);
 }
 
 SEXP Rf_allocList(const int n)

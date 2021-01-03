@@ -28,6 +28,8 @@
  */
 
 #include <CXXR/String.hpp>
+#include <CXXR/CachedString.hpp>
+#include <CXXR/UncachedString.hpp>
 
 namespace CXXR
 {
@@ -49,22 +51,10 @@ namespace CXXR
     // String::Comparator::operator()(const String&, const String&) is in
     // sort.cpp
 
-    String::String(R_xlen_t sz)
-        : VectorBase(CHARSXP, sz), m_hash(-1),
-          m_databytes(sz + 1), m_data(m_short_string)
+    void String::checkEncoding(unsigned int encoding)
     {
-        if (sz > s_short_strlen)
-        {
-            GCRoot<> thisroot(this);
-            m_data = reinterpret_cast<char *>(MemoryBank::allocate(m_databytes));
-        }
-        // Insert trailing null byte:
-        m_data[sz] = 0;
-    }
-
-    const char *String::typeName() const
-    {
-        return staticTypeName();
+        if (encoding != 0 && encoding != UTF8_MASK && encoding != LATIN1_MASK)
+            Rf_error("unknown encoding mask: %d", encoding);
     }
 
     /* Hashing Methods */

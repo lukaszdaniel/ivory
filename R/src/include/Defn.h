@@ -57,6 +57,7 @@
 #include <CXXR/LogicalVector.hpp>
 #include <CXXR/ListVector.hpp>
 #include <CXXR/ExpressionVector.hpp>
+#include <CXXR/UncachedString.hpp>
 #include <CXXR/Environment.hpp>
 #include <CXXR/Promise.hpp>
 #include <CXXR/Closure.hpp>
