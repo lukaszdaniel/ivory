@@ -1071,6 +1071,7 @@ with_system_valgrind_headers
 with_internal_tzcode
 with_internal_towlower
 with_internal_iswxxxxx
+with_internal_wcwidth
 with_recommended_packages
 with_ICU
 enable_byte_compiled_packages
@@ -1885,10 +1886,11 @@ Optional Packages:
   --with-internal-tzcode  use internal time-zone code [no, yes on macOS]
   --with-internal-towlower
                           use internal code for towlower/upper [no, yes on
-                          macOS]
+                          macOS and Solaris]
   --with-internal-iswxxxxx
-                          use internal iswprint etc. [no, yes on macOS and
-                          AIX]
+                          use internal iswprint etc. [no, yes on macOS,
+                          Solaris and AIX]
+  --with-internal-wcwidth use internal wcwidth [yes]
   --with-recommended-packages
                           use/install recommended R packages [yes]
   --with-ICU              use ICU library (if available) [yes]
@@ -6403,6 +6405,15 @@ if test "${with_internal_iswxxxxx+set}" = set; then :
   withval=$with_internal_iswxxxxx; use_internal_iswxxxxx=${withval}
 else
   use_internal_iswxxxxx=default
+fi
+
+
+
+# Check whether --with-internal-wcwidth was given.
+if test "${with_internal_wcwidth+set}" = set; then :
+  withval=$with_internal_wcwidth; use_internal_wcwidth=${withval}
+else
+  use_internal_wcwidth=yes
 fi
 
 
@@ -26862,7 +26873,7 @@ _ACEOF
 # flags.
 r_save_CFLAGS=$CFLAGS
 CFLAGS="$CFLAGS $r_verb"
-(eval echo $as_me:26865: \"$ac_link\") >&5
+(eval echo $as_me:26876: \"$ac_link\") >&5
 r_c_v_output=`eval $ac_link 5>&1 2>&1 | grep -v 'Driving:'`
 echo "$r_c_v_output" >&5
 CFLAGS=$r_save_CFLAGS
@@ -26937,7 +26948,7 @@ _ACEOF
 # flags.
 r_save_CFLAGS=$CFLAGS
 CFLAGS="$CFLAGS $r_cv_prog_c_v"
-(eval echo $as_me:26940: \"$ac_link\") >&5
+(eval echo $as_me:26951: \"$ac_link\") >&5
 r_c_v_output=`eval $ac_link 5>&1 2>&1 | grep -v 'Driving:'`
 echo "$r_c_v_output" >&5
 CFLAGS=$r_save_CFLAGS
@@ -42458,6 +42469,9 @@ case "${host_os}" in
    aix*)
      use_internal_iswxxxxx=yes;
      ;;
+   solaris*)
+     use_internal_iswxxxxx=yes;
+     ;;
 esac
 fi
 if test x${use_internal_iswxxxxx} = xyes; then
@@ -42466,9 +42480,18 @@ $as_echo "#define USE_RI18N_FNS 1" >>confdefs.h
 
 fi
 
+if test x${use_internal_wcwidth} = xyes; then
+
+$as_echo "#define USE_RI18N_WIDTH 1" >>confdefs.h
+
+fi
+
 if test x${use_internal_towlower} = xdefault; then
 case "${host_os}" in
    darwin*)
+     use_internal_towlower=yes;
+     ;;
+   solaris*)
      use_internal_towlower=yes;
      ;;
 esac
@@ -44570,6 +44593,58 @@ done
       want_mbcs_support=no
     fi
   done
+fi
+if test "$want_mbcs_support" = yes ; then
+  for ac_func in wcwidth wcswidth
+do
+as_ac_Symbol=`$as_echo "ac_cv_have_decl_$ac_func" | $as_tr_sh`
+{ $as_echo "$as_me:${as_lineno-$LINENO}: checking whether $ac_func exists and is declared" >&5
+$as_echo_n "checking whether $ac_func exists and is declared... " >&6; }
+if eval \${$as_ac_Symbol+:} false; then :
+  $as_echo_n "(cached) " >&6
+else
+  cat confdefs.h - <<_ACEOF >conftest.$ac_ext
+/* end confdefs.h.  */
+#include <wchar.h>
+
+#ifdef FC_DUMMY_MAIN
+#ifndef FC_DUMMY_MAIN_EQ_F77
+#  ifdef __cplusplus
+     extern "C"
+#  endif
+   int FC_DUMMY_MAIN() { return 1; }
+#endif
+#endif
+int
+main ()
+{
+#ifndef $ac_func
+  char *p = (char *) $ac_func;
+#endif
+
+  ;
+  return 0;
+}
+_ACEOF
+if ac_fn_c_try_link "$LINENO"; then :
+  eval "$as_ac_Symbol=yes"
+else
+  eval "$as_ac_Symbol=no"
+fi
+rm -f core conftest.err conftest.$ac_objext \
+    conftest$ac_exeext conftest.$ac_ext
+fi
+eval ac_res=\$$as_ac_Symbol
+	       { $as_echo "$as_me:${as_lineno-$LINENO}: result: $ac_res" >&5
+$as_echo "$ac_res" >&6; }
+if test `eval 'as_val=${'$as_ac_Symbol'};$as_echo "$as_val"'` = yes; then :
+  cat >>confdefs.h <<_ACEOF
+#define `$as_echo "HAVE_$ac_func" | $as_tr_cpp` 1
+_ACEOF
+
+fi
+done
+
 fi
 if test "$want_mbcs_support" = yes ; then
   ac_fn_c_check_type "$LINENO" "wctrans_t" "ac_cv_type_wctrans_t" "#include <wchar.h>

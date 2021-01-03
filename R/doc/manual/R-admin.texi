@@ -232,11 +232,14 @@ platforms including @samp{@var{cpu}-*-linux-gnu} for the
 @c Actually, see https://packages.debian.org/unstable/math/r-base-core as
 @c the build daemon is not used for all platforms; note also that Debian
 @c has x86_64 <=> amd64, ix86 <=> i386.
-@samp{x86_64-@/apple-@/darwin}, @samp{aarch64-@/apple-@/darwin} and
-@samp{i386-@/sun-@/solaris} as well as perhaps (it is tested less
-frequently on these platforms) @samp{i386-@/*-@/freebsd},
-@samp{x86_64-@/*-@/freebsd}, @samp{i386-@/*-@/netbsd},
-@samp{x86_64-@/*-@/openbsd} and @samp{powerpc-@/ibm-@/aix6*}
+@samp{x86_64-@/apple-@/darwin},
+@samp{aarch64-@/apple-@/darwin}@footnote{aka `Apple Silicon': the
+triplet name may change and is known to some as
+@samp{arm64-@/apple-@/darwin}.} and @samp{i386-@/sun-@/solaris} as well
+as perhaps (it is tested less frequently on these platforms)
+@samp{i386-@/*-@/freebsd}, @samp{x86_64-@/*-@/freebsd},
+@samp{i386-@/*-@/netbsd}, @samp{x86_64-@/*-@/openbsd} and
+@samp{powerpc-@/ibm-@/aix6*}
 
 @cindex Linux
 @cindex macOS
@@ -944,23 +947,28 @@ as @file{Europe/London}.  On all tested OSes the system timezone was
 deduced correctly, but if necessary it can be set as the value of
 environment variable @env{TZ}.
 
-Options @option{--with-internal-iswxxxxx} and
-@option{--with-internal-towlower} were introduced in @R{} 4.1.0.  These
-control the replacement of the system wide-character classification
-functions (such as @code{iswprint}) and case-changing functions by ones
-contained in the @R{} sources.  Replacement of the classification
-functions has been done for many years on macOS and AIX (and Windows):
-option @option{--with-internal-iswxxxxx} allows this to be suppressed on
-those platforms or used on others (it is recommended for Solaris).
-Replacing the case-changing functions is new in @R{} 4.1.0 and the
-default on macOS.  These options will only matter to those working with
-non-ASCII character data, especially in languages written in a
-non-Western script (which includes `symbols' such as emoji).  Note that
-one of those @code{iswxxxxx} is @code{iswprint} which is used to decide
-whether to output a character as a glyph or as a @samp{\U@{xxxxxx@}}
-escape--for example, -try @samp{"\U1f600"}.  (Replacing the system
-functions provides a degree of plaform-independence (including to OS
-updates) but replaces it with a dependence on the @R{} version.)
+Options @option{--with-internal-iswxxxxx},
+@option{--with-internal-towlower} and @option{--with-internal-wcwidth}
+were introduced in @R{} 4.1.0.  These control the replacement of the
+system wide-character classification (such as @code{iswprint}),
+case-changing (@code{wctrans}) and width (@code{wcwidth} and
+@code{wcswidth}) functions by ones contained in the @R{} sources.
+Replacement of the classification functions has been done for many years
+on macOS and AIX (and Windows): option @option{--with-internal-iswxxxxx}
+allows this to be suppressed on those platforms or used on others (it is
+now the default for Solaris).  Replacing the case-changing functions is
+new in @R{} 4.1.0 and the default on macOS.  Replacement of the width
+functions has also been done for many years and remains the default.
+These options will only matter to those working with non-ASCII character
+data, especially in languages written in a non-Western script (which
+includes `symbols' such as emoji).  Note that one of those
+@code{iswxxxxx} is @code{iswprint} which is used to decide whether to
+output a character as a glyph or as a @samp{\U@{xxxxxx@}} escape---for
+example, try @samp{"\U1f600"}, an emoji.  The width functions are of
+most importance in East Asian locale: their values differ between such
+locales.  (Replacing the system functions provides a degree of
+plaform-independence (including to OS updates) but replaces it with a
+dependence on the @R{} version.)
 
 @menu
 * Debugging Symbols::
@@ -1553,7 +1561,8 @@ administrator privileges.}, as can @acronym{CRAN} binary packages.
 Installers for R-patched and R-devel are usually available from
 @uref{https://mac.R-project.org}.  (Some of these packages are
 unsigned/not notarized: to install those Control/right/two-finger click,
-select @samp{Open With} and @samp{Installer}.)
+select @samp{Open With} and @samp{Installer}.)  There is usually an
+experimental tarball (not package) for @cputype{arm64}.
 
 For some older versions of the OS you can in principle (it is little
 tested) install @R{} from the sources (see @ref{macOS}).
@@ -1606,12 +1615,13 @@ For building @R{} from source, see @ref{macOS}.
 There are two ways to run @R{} on macOS from a @acronym{CRAN} binary
 distribution.
 
-There is a GUI console normally installed with the @R{} icon in
-@file{/Applications} which you can run by double-clicking (e.g.@: from
-Launchpad or Finder).  (If you cannot find it there it was possibly
-installed elsewhere so try searching for it in Spotlight.) This is
-usually referred to as @Rapp{} to distinguish it from command-line @R{}:
-its user manual is currently part of the macOS FAQ at
+There is a GUI console normally installed@footnote{Not yet available for
+@cputype{arm64}.} with the @R{} icon in @file{/Applications} which you
+can run by double-clicking (e.g.@: from Launchpad or Finder).  (If you
+cannot find it there it was possibly installed elsewhere so try
+searching for it in Spotlight.) This is usually referred to as @Rapp{}
+to distinguish it from command-line @R{}: its user manual is currently
+part of the macOS FAQ at
 @uref{https://cran.r-project.org/@/bin/@/macosx/@/RMacOSX-FAQ.html} and
 can be viewed from @Rapp{}'s `Help' menu.
 
@@ -4526,8 +4536,7 @@ directory.  To re-create the sources from
 @command{notangle} is required.  Some Linux distributions include this
 command in package @pkg{noweb}.  It can also be installed from the
 sources at @url{https://www.cs.tufts.edu/@/~nr/@/noweb/}@footnote{The links
-there have proved difficult to access, in which case either point an FTP
-client at @uref{ftp://www.eecs.harvard.edu/@/pub/@/nr/} or grab the copy
+there have proved difficult to access, in which case grab the copy
 made available at
 @uref{https://developer.r-project.org/noweb-2.11b.tgz}.}.  The package
 sources are only re-created even in maintainer mode if
@@ -5578,15 +5587,15 @@ seem harmless.)
 No Fortran compiler has been released for this architecture at the time
 of writing although there are ports under development.@footnote{We used
 the fork of @command{gfortran} from
-@url{https://github.com/@/iains/@/gcc-darwin-arm64}, and there is an
-experimental binary distribution at
+@url{https://github.com/@/iains/@/gcc-darwin-arm64}, and there are
+experimental binary distributions at
+@uref{https://mac.r-project.org/@/libs-arm64/} and
 @uref{https://github.com/@/fxcoudert/@/gfortran-for-macOS/@/releases/}}
 So this section is experimental.
 
-At the time of writing updating a build failed because of the bug
-described at
-@uref{https://openradar.appspot.com/@/FB8914243}
-but @emph{ab initio} builds worked.
+At the time of writing updating a build may fail because of the bug
+described at @uref{https://openradar.appspot.com/@/FB8914243} but
+@emph{ab initio} builds worked.
 
 At the time of writing no distribution of X11@footnote{XQuartz has
 sources on GitHub, so one could try building from those.} was available,
@@ -5600,7 +5609,11 @@ support libraries @code{jpeg}, @code{libpng} and @code{tiff} are not
 needed.  Nor currently is @code{pkgconfig} needed to build @R{}.)
 
 Experimentally, some prerequisites are available at
-@uref{https://mac.r-project.org/libs-arm/}.
+@uref{https://mac.r-project.org/libs-arm64/}.  These install into
+@file{/opt/R/arm64} to allow them to co-exist with Intel versions.
+Using those would need adding @file{/opt/R/arm64/bin} to the @env{PATH}
+and @file{/opt/R/arm64/include} and @file{/opt/R/arm64/lib} to the C
+include and library paths.
 
 @R{} was configured by
 

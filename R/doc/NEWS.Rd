@@ -54,10 +54,6 @@
       character string, or by giving the first elements of their class
       vector and their length.
 
-      \item Unicode character width tables (as used by
-      \code{nchar(, type="w")}) have been updated to Unicode 12.1
-      by Brodie Gaslam (\PR{17781}).
-
       \item \code{capabilities()} gets new entry \code{"Rprof"} which is
       \code{TRUE} when \R has been configured with the equivalent of
       \command{--enable-R-profiling} (as it is by default): related to
@@ -228,13 +224,17 @@
       missing ca 2003 so the workaround has been removed.
 
       \item There are new \command{configure} options
-      \option{--with-internal-iswxxxxx} and
-      \option{--with-internal-towlower} which allows the system
-      wide-character classification and case-switching routines to be
-      replaced by internal ones.  The first has long been used on macOS,
-      AIX (and Windows) but this enables it to be unselected there and
-      selected for other platforms.  The second is new in this version
-      of \R and is selected by default on macOS.
+      \option{--with-internal-iswxxxxx},
+      \option{--with-internal-towlower} and
+      \option{--with-internal-wcwidth} which allows the system functions
+      for wide-character classification, case-switching and width
+      (\code{wcwidth} and \code{wcswidth}) to be replaced by internal
+      ones.  The first has long been used on macOS, AIX (and Windows)
+      but this enables it to be unselected there and selected for other
+      platforms (it is the new default on Solaris).  The second is new
+      in this version of \R and is selected by default on macOS and
+      Solaris.  The third has long been the default and remains so as it
+      contains customizations for East Asian languages.
 
       System versions of these functions are often minimally implemented
       (sometimes only for ASCII characters) and do not cover the full
@@ -322,7 +322,7 @@
       as they cannot be represented by valid UTF-8.
 
       Where such escapes are used for outputting non-printable
-      (inclduing unassigned) characters, 6 hex digits are used (rather
+      (including unassigned) characters, 6 hex digits are used (rather
       than 8 with leading zeros).  For clarity, braces are used, for
       example \samp{\\U\{0effff\}}.
 
@@ -351,11 +351,11 @@
       wide-character \code{wctrans} C function by tables shipped with
       \R: use \command{configure} option
       \option{--with-internal-towlower} or (on Windows)
-      \samp{-DUSE_RI18N_CASE} in \samp{CFLAGS} when building \R.  On
-      Windows and Solaris this allows \code{tolower()} and
-      \code{toupper()} to work with Unicode characters beyond the Basic
-      Multilingual Plane and is intended to become the default there (it
-      currently is on macOS).
+      \samp{-DUSE_RI18N_CASE} in \samp{CFLAGS} when building \R.  This
+      may be needed to allow \code{tolower()} and \code{toupper()} to
+      work with Unicode characters beyond the Basic Multilingual Plan
+      where on supported by system functions (e.g. on Solaris where it
+      is the new default).
     }
   }
 
@@ -477,6 +477,10 @@
     \itemize{
       \item File \file{share/texmf/tex/latex/jss.cls} has been updated
       to work with LaTeX versions since Oct 2020.
+
+      \item Unicode character width tables (as used by
+      \code{nchar(, type = "w")}) have been updated to Unicode 12.1
+      by Brodie Gaslam (\PR{17781}), including many emoji.
     }
   }
 

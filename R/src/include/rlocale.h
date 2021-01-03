@@ -44,8 +44,12 @@ extern "C" {
 
 /*
   The R_wchar_t typedef represents a single Unicode code point.  On
-  most systems it is the same as wchar_t, but on Windows (and others?)
-  where wchar_t is too small and UTF-16 is used, it is an unsigned int .
+  The R_wchar_t typedef represents a single Unicode code point.  On
+  most systems it is the same as wchar_t, but on Windows (and 32-bit
+  AIX and perhaps others) where wchar_t is too small and UTF-16 is
+  used, it needs to be an unsigned int .
+
+  AIX ref: https://www.gnu.org/software/gnulib/manual/html_node/wcwidth.html
  */
 
 #ifdef _WIN32
@@ -54,6 +58,11 @@ typedef unsigned int R_wchar_t;
 typedef wchar_t R_wchar_t;
 #endif
 
+#if !defined(USE_RI18N_WIDTH) && (!defined(HAVE_WCWIDTH) || !defined(HAVE_WCSWIDTH))
+# define USE_RI18N_WIDTH 1
+#endif
+
+#ifdef USE_RI18N_WIDTH
 /*
  * Windows CJK
  * In Unicode, there is not a rule about character width. 
@@ -85,6 +94,7 @@ typedef wchar_t R_wchar_t;
 
 extern int Ri18n_wcwidth(R_wchar_t);
 extern int Ri18n_wcswidth (const wchar_t *, size_t);
+#endif
 
 /* macOS CJK and WindowXP(Japanese)
  * iswctypes of macOS calls isctypes. no i18n.

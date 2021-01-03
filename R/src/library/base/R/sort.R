@@ -263,12 +263,11 @@ sort.list <- function(x, partial = NULL, na.last = TRUE, decreasing = FALSE,
 ## xtfrm is now primitive
 ## xtfrm <- function(x) UseMethod("xtfrm")
 xtfrm.default <- function(x) {
-    if(isdf <- inherits(x, "data.frame"))
-        warning("cannot xtfrm data frames")
     y <- if(is.numeric(x))
              unclass(x)
          else as.vector(rank(x, ties.method = "min", na.last = "keep"))
-    if(!is.numeric(y) || ((length(y) != length(x)) && !isdf))
+    if(!is.numeric(y) ||
+       ((length(y) != length(x)) && !inherits(x, "data.frame")))
         stop("cannot xtfrm 'x'")
     y
 }

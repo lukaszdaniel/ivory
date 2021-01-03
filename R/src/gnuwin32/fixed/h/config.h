@@ -945,6 +945,9 @@
 /* Define to 1 if you have the `wcstombs' function. */
 #define HAVE_WCSTOMBS 1
 
+/* Define to 1 if you have the `wcswidth' function. */
+/* #undef HAVE_WCSWIDTH */
+
 /* Define to 1 if you have the `wctrans' function. */
 #define HAVE_WCTRANS 1
 
@@ -956,6 +959,9 @@
 
 /* Define to 1 if you have the <wctype.h> header file. */
 #define HAVE_WCTYPE_H 1
+
+/* Define to 1 if you have the `wcwidth' function. */
+/* #undef HAVE_WCWIDTH */
 
 /* Define if you have the 'wint_t' type. (For intl) */
 #define HAVE_WINT_T 1
@@ -1195,6 +1201,9 @@
 
 /* Define to 1 to use internal `iswprint' etc. */
 #define USE_RI18N_FNS 1
+
+/* Define to 1 to use internal `wcwidth' */
+#define USE_RI18N_WIDTH
 
 /* Define if the old Solaris multithreading library can be used. (For intl) */
 /* #undef USE_SOLARIS_THREADS */
