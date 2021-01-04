@@ -40,10 +40,8 @@ namespace CXXR
     // from C:
     namespace ForceNonInline
     {
-        // const auto &SET_LATIN1ptr = SET_LATIN1;
-        // const auto &SET_UTF8ptr = SET_UTF8;
-        // const auto &UNSET_LATIN1ptr = UNSET_LATIN1;
-        // const auto &UNSET_UTF8ptr = UNSET_UTF8;
+        const auto &SET_LATIN1ptr = SET_LATIN1;
+        const auto &SET_UTF8ptr = SET_UTF8;
     } // namespace ForceNonInline
 } // namespace CXXR
 

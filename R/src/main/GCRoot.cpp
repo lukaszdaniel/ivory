@@ -44,10 +44,10 @@ namespace CXXR
     // interface:
     namespace
     {
-        // const auto &protectp = Rf_protect;
-        // const auto &unprotectp = Rf_unprotect;
-        // const auto &ProtectWithIndexp = R_ProtectWithIndex;
-        // const auto &Reprotectp = R_Reprotect;
+        // const auto &protectptr = Rf_protect;
+        // const auto &unprotectptr = Rf_unprotect;
+        // const auto &ProtectWithIndexptr = R_ProtectWithIndex;
+        // const auto &Reprotectptr = R_Reprotect;
     } // namespace
 } // namespace CXXR
 

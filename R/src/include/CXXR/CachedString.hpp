@@ -150,7 +150,7 @@ extern "C"
      * @return Pointer to a string object representing the specified
      *         text in the specified encoding.
      */
-    SEXP Rf_mkCharCE(const char *str, int encoding);
+    SEXP Rf_mkCharCE(const char *str, cetype_t encoding);
 
     /** @brief Create a CXXR::String object for specified text and
      * encoding.
@@ -173,7 +173,7 @@ extern "C"
      *
      * @return Pointer to the created string.
      */
-    // SEXP Rf_mkCharLenCE(const char * const name, int len, cetype_t encoding);
+    SEXP Rf_mkCharLenCE(const char *const name, int len, cetype_t encoding);
 
     /** @brief Create a CXXR::String object for specified text.
      *
@@ -205,8 +205,8 @@ extern "C"
      * due course.
      */
     const char *Rf_translateCharUTF8(SEXP x);
-    // cetype_t Rf_getCharCE(SEXP x);
-    // const char *Rf_reEnc(const char *x, cetype_t ce_in, cetype_t ce_out, int subst);
+    cetype_t Rf_getCharCE(SEXP x);
+    const char *Rf_reEnc(const char *x, cetype_t ce_in, cetype_t ce_out, int subst);
 } // extern "C"
 
 #endif /* CACHEDSTRING_HPP */

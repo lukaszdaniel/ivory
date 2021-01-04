@@ -39,8 +39,8 @@ namespace CXXR
     // from C:
     namespace ForceNonInline
     {
-        // const auto &isExpressionptr = Rf_isExpression;
-        // const auto &XVECTOR_ELTptr = XVECTOR_ELT;
+        const auto &isExpressionptr = Rf_isExpression;
+        const auto &XVECTOR_ELTptr = XVECTOR_ELT;
     } // namespace ForceNonInline
 
     ExpressionVector::ExpressionVector(const ListVector &lv)

@@ -53,6 +53,7 @@
 #include <CXXR/GCRoot.hpp>
 #include <CXXR/GCNode.hpp>
 #include <CXXR/MemoryBank.hpp>
+#include <CXXR/String.hpp>
 #include <CXXR/JMPException.hpp>
 #include <CXXR/IntVector.hpp>
 #include <CXXR/LogicalVector.hpp>

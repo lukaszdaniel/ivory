@@ -38,12 +38,12 @@ using namespace std;
 
 namespace CXXR
 {
+    // Force the creation of non-inline embodiments of functions callable
+    // from C:
     namespace ForceNonInline
     {
-        // Force the creation of non-inline embodiments of functions callable
-        // from C:
-        const auto &SET_VECTOR_ELTp = SET_VECTOR_ELT;
-        const auto &VECTOR_ELTp = VECTOR_ELT;
+        const auto &SET_VECTOR_ELTptr = SET_VECTOR_ELT;
+        const auto &VECTOR_ELTptr = VECTOR_ELT;
     } // namespace ForceNonInline
 
     ListVector::ListVector(const ExpressionVector &ev)

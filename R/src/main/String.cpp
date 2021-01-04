@@ -37,15 +37,14 @@ namespace CXXR
     // from C:
     namespace ForceNonInline
     {
-        // const auto &ENC_KNOWNp = ENC_KNOWN;
-        // const auto &IS_ASCIIp = IS_ASCII;
-        // const auto &IS_BYTESp = IS_BYTES;
-        // const auto &IS_LATIN1p = IS_LATIN1;
-        // const auto &IS_UTF8p = IS_UTF8;
-        // const auto &R_CHARp = R_CHAR;
-        // const auto &mkCharp = Rf_mkChar;
-        // const auto &mkCharCEp = Rf_mkCharCE;
-        // const auto &mkCharLenp = Rf_mkCharLen;
+        // const auto &ENC_KNOWNptr = ENC_KNOWN;
+        // const auto &IS_ASCIIptr = IS_ASCII;
+        // const auto &IS_BYTESptr = IS_BYTES;
+        const auto &IS_LATIN1ptr = IS_LATIN1;
+        const auto &IS_UTF8ptr = IS_UTF8;
+        const auto &R_CHARptr = R_CHAR;
+        const auto &mkCharCEptr = Rf_mkCharCE;
+        const auto &mkCharLenptr = Rf_mkCharLen;
     } // namespace ForceNonInline
 
     // String::Comparator::operator()(const String&, const String&) is in

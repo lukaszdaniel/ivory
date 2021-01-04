@@ -188,22 +188,10 @@ extern "C"
     void SET_LATIN1(SEXP x);
 
     /**
-     * @brief Unset LATIN1 encoding.
-     * @param x Pointer to a CXXR::String.
-     */
-    void UNSET_LATIN1(SEXP x);
-
-    /**
      * @brief Set UTF8 encoding.
      * @param x Pointer to a CXXR::String.
      */
     void SET_UTF8(SEXP x);
-
-    /**
-     * @brief Unset UTF8 encoding.
-     * @param x Pointer to a CXXR::String.
-     */
-    void UNSET_UTF8(SEXP x);
 } // extern "C"
 
 #endif /* UNCACHEDSTRING_HPP */

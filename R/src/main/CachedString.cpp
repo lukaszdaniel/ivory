@@ -40,8 +40,7 @@ namespace CXXR
     // from C:
     namespace ForceNonInline
     {
-        // const auto &mkCharp = Rf_mkChar;
-        // const auto &mkCharEncp = Rf_mkCharEnc;
+        const auto &mkCharptr = Rf_mkChar;
     } // namespace ForceNonInline
 } // namespace CXXR
 

@@ -42,23 +42,9 @@ namespace CXXR
     // from C:
     namespace ForceNonInline
     {
-        // const auto &BINDING_IS_LOCKEDptr = BINDING_IS_LOCKED;
-        // const auto &CAD4Rp = CAD4R;
-        // const auto &CADDDRp = CADDDR;
-        // const auto &CADDRp = CADDR;
-        // const auto &CADRp = CADR;
-        // const auto &CDARp = CDAR;
-        // const auto &CDDRp = CDDR;
-        // const auto &CDDDRp = CDDDR;
-        // const auto &CDRp = CDR;
-        // const auto &allocListp = Rf_allocList;
-        // const auto &allocSExpp = Rf_allocSExp;
-        // const auto &consp = Rf_cons;
-        // const auto &lconsp = Rf_lcons;
-        // const auto &IS_ACTIVE_BINDINGptr = IS_ACTIVE_BINDING;
-        // const auto &LOCK_BINDINGptr = LOCK_BINDING;
-        // const auto &SET_ACTIVE_BINDING_BITptr = SET_ACTIVE_BINDING_BIT;
-        // const auto &UNLOCK_BINDINGptr = UNLOCK_BINDING;
+        const auto &allocListptr = Rf_allocList;
+        const auto &allocSExpptr = Rf_allocSExp;
+        const auto &consptr = Rf_cons;
     } // namespace ForceNonInline
 
     const char *PairList::typeName() const

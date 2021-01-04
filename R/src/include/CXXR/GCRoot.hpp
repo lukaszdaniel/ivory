@@ -359,11 +359,8 @@ namespace CXXR
     };
 } // namespace CXXR
 
-#ifdef __cplusplus
 extern "C"
 {
-#endif /* __cplusplus */
-
     /* ***** C interface ***** */
 
     typedef int PROTECT_INDEX;
@@ -377,14 +374,10 @@ extern "C"
      * @param iptr Pointer to a location in which the stack cell index
      *          is to be stored.
      */
-#ifndef __cplusplus
-    void R_ProtectWithIndex(SEXP node, PROTECT_INDEX *iptr);
-#else
-inline void R_ProtectWithIndex(SEXP node, PROTECT_INDEX *iptr)
-{
-    *iptr = CXXR::GCRootBase::protect(node);
-}
-#endif
+    inline void R_ProtectWithIndex(SEXP node, PROTECT_INDEX *iptr)
+    {
+        *iptr = CXXR::GCRootBase::protect(node);
+    }
 
     /**
      * Change the node that a particular cell in the C pointer
@@ -401,14 +394,10 @@ inline void R_ProtectWithIndex(SEXP node, PROTECT_INDEX *iptr)
      *          than the current size of the C pointer protection
      *          stack.
      */
-#ifndef __cplusplus
-    void R_Reprotect(SEXP node, PROTECT_INDEX index);
-#else
-inline void R_Reprotect(SEXP node, PROTECT_INDEX index)
-{
-    CXXR::GCRootBase::reprotect(node, index);
-}
-#endif
+    inline void R_Reprotect(SEXP node, PROTECT_INDEX index)
+    {
+        CXXR::GCRootBase::reprotect(node, index);
+    }
 
     /**
      * Check that the C pointer protection stack has the expected size,
@@ -447,15 +436,11 @@ inline void R_Reprotect(SEXP node, PROTECT_INDEX index)
      *          garbage collector.
      * @return a copy of \a node.
      */
-#ifndef __cplusplus
-    SEXP Rf_protect(SEXP node);
-#else
-inline SEXP Rf_protect(SEXP node)
-{
-    CXXR::GCRootBase::protect(node);
-    return node;
-}
-#endif
+    inline SEXP Rf_protect(SEXP node)
+    {
+        CXXR::GCRootBase::protect(node);
+        return node;
+    }
 
     /**
      * Pop cells from the C pointer protection stack.  As a
@@ -466,14 +451,10 @@ inline SEXP Rf_protect(SEXP node)
      *          larger than the current size of the C pointer
      *          protection stack.
      */
-#ifndef __cplusplus
-    void Rf_unprotect(int count);
-#else
-inline void Rf_unprotect(int count)
-{
-    CXXR::GCRootBase::unprotect(count);
-}
-#endif
+    inline void Rf_unprotect(int count)
+    {
+        CXXR::GCRootBase::unprotect(count);
+    }
 
     /**
      * Removes from the C pointer protection stack the uppermost
@@ -485,17 +466,10 @@ inline void Rf_unprotect(int count)
      *
      * @deprecated Utterly.
      */
-#ifndef __cplusplus
-    void Rf_unprotect_ptr(SEXP node);
-#else
-inline void Rf_unprotect_ptr(SEXP node)
-{
-    CXXR::GCRootBase::unprotectPtr(node);
-}
-#endif
-
-#ifdef __cplusplus
+    inline void Rf_unprotect_ptr(SEXP node)
+    {
+        CXXR::GCRootBase::unprotectPtr(node);
+    }
 } /* extern "C" */
-#endif
 
 #endif // GCROOT_HPP

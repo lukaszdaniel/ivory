@@ -50,8 +50,8 @@ namespace CXXR
     // from C:
     namespace ForceNonInline
     {
-        const auto &vmaxgetp = vmaxget;
-        const auto &vmaxsetp = vmaxset;
+        const auto &vmaxgetptr = vmaxget;
+        const auto &vmaxsetptr = vmaxset;
     } // namespace ForceNonInline
 } // namespace CXXR
 

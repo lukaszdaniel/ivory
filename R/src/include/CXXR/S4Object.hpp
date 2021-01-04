@@ -101,7 +101,7 @@ extern "C"
      * @return true iff \a x is an S4 object.  Returns false if \a x
      * is 0.
      */
-	Rboolean IS_S4_OBJECT(SEXP x);
+	int IS_S4_OBJECT(SEXP x);
 
 	/**
      * @deprecated Ought to be private.

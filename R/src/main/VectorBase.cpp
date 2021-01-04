@@ -29,8 +29,8 @@
  * @brief Implementation of class VectorBase and related functions.
  */
 
-#include <R_ext/Error.h>
 #include <CXXR/VectorBase.hpp>
+#include <R_ext/Error.h>
 #include <Rinternals.h>
 #include <Localization.h>
 

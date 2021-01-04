@@ -284,13 +284,13 @@ extern "C"
      * @param x Pointer to a CXXR::String.
      * @return true iff \a x is marked as having LATIN1 encoding.
      */
-	int IS_LATIN1(SEXP x);
+	int (IS_LATIN1)(SEXP x);
 
 	/**
      * @param x Pointer to a CXXR::String.
      * @return true iff \a x is marked as having UTF8 encoding.
      */
-	int IS_UTF8(SEXP x);
+	int (IS_UTF8)(SEXP x);
 
 	/* Hashing Functions */
 

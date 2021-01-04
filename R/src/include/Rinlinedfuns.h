@@ -45,6 +45,8 @@
 # define CATCH_ZERO_LENGTH_ACCESS
 #endif
 
+extern "C" SEXP Rf_protect(SEXP);
+extern "C" void Rf_unprotect(int);
 
 #if defined(USE_RINTERNALS) || defined(COMPILING_R)
 /* inline version of CAR to support immediate bindings */
@@ -90,7 +92,7 @@ extern inline void CHKVEC(SEXP x)
  * 
  * @return pointer to the data block
  */
-extern inline void *CXXR::DATAPTR(SEXP x)
+extern inline void *DATAPTR(SEXP x)
 {
     CHKVEC(x);
     if (ALTREP(x))
@@ -106,7 +108,7 @@ extern inline void *CXXR::DATAPTR(SEXP x)
         return (void *)1;
 #endif
     else
-        return CXXR::stdvec_dataptr(x);
+        return STDVEC_DATAPTR(x);
 }
 
 /**
@@ -117,13 +119,13 @@ extern inline void *CXXR::DATAPTR(SEXP x)
  * 
  * @return pointer to the (read only) data block
  */
-extern inline const void *CXXR::DATAPTR_RO(SEXP x)
+extern inline const void *DATAPTR_RO(SEXP x)
 {
     CHKVEC(x);
     if (ALTREP(x))
         return ALTVEC_DATAPTR_RO(x);
     else
-        return CXXR::stdvec_dataptr(x);
+        return STDVEC_DATAPTR(x);
 }
 
 extern inline const void *DATAPTR_OR_NULL(SEXP x)
@@ -132,7 +134,7 @@ extern inline const void *DATAPTR_OR_NULL(SEXP x)
     if (ALTREP(x))
         return ALTVEC_DATAPTR_OR_NULL(x);
     else
-        return CXXR::stdvec_dataptr(x);
+        return STDVEC_DATAPTR(x);
 }
 
 #ifdef STRICT_TYPECHECK
@@ -177,41 +179,41 @@ extern inline const void *DATAPTR_OR_NULL(SEXP x)
 extern inline const int *LOGICAL_OR_NULL(SEXP x)
 {
     CHECK_VECTOR_LGL(x);
-    return (int *)(ALTREP(x) ? ALTVEC_DATAPTR_OR_NULL(x) : CXXR::stdvec_dataptr(x));
+    return (int *)(ALTREP(x) ? ALTVEC_DATAPTR_OR_NULL(x) : STDVEC_DATAPTR(x));
 }
 
 extern inline const int *INTEGER_OR_NULL(SEXP x)
 {
     CHECK_VECTOR_INT(x);
-    return (int *)(ALTREP(x) ? ALTVEC_DATAPTR_OR_NULL(x) : CXXR::stdvec_dataptr(x));
+    return (int *)(ALTREP(x) ? ALTVEC_DATAPTR_OR_NULL(x) : STDVEC_DATAPTR(x));
 }
 
 extern inline const double *REAL_OR_NULL(SEXP x)
 {
     CHECK_VECTOR_REAL(x);
-    return (double *)(ALTREP(x) ? ALTVEC_DATAPTR_OR_NULL(x) : CXXR::stdvec_dataptr(x));
+    return (double *)(ALTREP(x) ? ALTVEC_DATAPTR_OR_NULL(x) : STDVEC_DATAPTR(x));
 }
 
 extern inline const Rcomplex *COMPLEX_OR_NULL(SEXP x)
 {
     CHECK_VECTOR_CPLX(x);
-    return (Rcomplex *)(ALTREP(x) ? ALTVEC_DATAPTR_OR_NULL(x) : CXXR::stdvec_dataptr(x));
+    return (Rcomplex *)(ALTREP(x) ? ALTVEC_DATAPTR_OR_NULL(x) : STDVEC_DATAPTR(x));
 }
 
 extern inline const Rbyte *RAW_OR_NULL(SEXP x)
 {
     CHECK_VECTOR_RAW(x);
-    return (Rbyte *)(ALTREP(x) ? ALTVEC_DATAPTR_OR_NULL(x) : CXXR::stdvec_dataptr(x));
+    return (Rbyte *)(ALTREP(x) ? ALTVEC_DATAPTR_OR_NULL(x) : STDVEC_DATAPTR(x));
 }
 
 extern inline R_xlen_t XLENGTH_EX(SEXP x)
 {
-    return ALTREP(x) ? ALTREP_LENGTH(x) : CXXR::VectorBase::stdvec_length(x);
+    return ALTREP(x) ? ALTREP_LENGTH(x) : STDVEC_LENGTH(x);
 }
 
 extern inline R_xlen_t XTRUELENGTH(SEXP x)
 {
-    return ALTREP(x) ? ALTREP_TRUELENGTH(x) : CXXR::VectorBase::stdvec_truelength(x);
+    return ALTREP(x) ? ALTREP_TRUELENGTH(x) : STDVEC_TRUELENGTH(x);
 }
 
 extern inline int LENGTH_EX(SEXP x, const char *file, int line)
@@ -828,7 +830,7 @@ extern inline Rboolean Rf_inherits(SEXP s, const char *name)
         nclass = Rf_length(klass);
         for (i = 0; i < nclass; i++)
         {
-            if (!strcmp(CXXR::r_char(STRING_ELT(klass, i)), name))
+            if (!strcmp(R_CHAR(STRING_ELT(klass, i)), name))
                 return TRUE;
         }
     }
@@ -843,14 +845,14 @@ extern inline Rboolean Rf_isValidString(SEXP x)
 /* non-empty ("") valid string :*/
 extern inline Rboolean Rf_isValidStringF(SEXP x)
 {
-    return Rboolean(Rf_isValidString(x) && CXXR::r_char(STRING_ELT(x, 0))[0]);
+    return Rboolean(Rf_isValidString(x) && R_CHAR(STRING_ELT(x, 0))[0]);
 }
 
 extern inline Rboolean Rf_isUserBinop(SEXP s)
 {
     if (TYPEOF(s) == SYMSXP)
     {
-        const char *str = CXXR::r_char(PRINTNAME(s));
+        const char *str = R_CHAR(PRINTNAME(s));
         if (strlen(str) >= 2 && str[0] == '%' && str[strlen(str) - 1] == '%')
             return TRUE;
     }
@@ -948,7 +950,7 @@ extern inline Rboolean Rf_isFrame(SEXP s)
     {
         klass = Rf_getAttrib(s, R_ClassSymbol);
         for (i = 0; i < Rf_length(klass); i++)
-            if (!strcmp(CXXR::r_char(STRING_ELT(klass, i)), "data.frame"))
+            if (!strcmp(R_CHAR(STRING_ELT(klass, i)), "data.frame"))
                 return TRUE;
     }
     return FALSE;

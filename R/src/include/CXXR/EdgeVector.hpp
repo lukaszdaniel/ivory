@@ -27,12 +27,12 @@
 
 #include <algorithm>
 
-#include <Localization.h>
-#include <R_ext/Error.h>
 #include <CXXR/Allocator.hpp>
 #include <CXXR/Allocator.hpp>
 #include <CXXR/GCRoot.hpp>
 #include <CXXR/VectorBase.hpp>
+#include <Localization.h>
+#include <R_ext/Error.h>
 
 namespace CXXR
 {

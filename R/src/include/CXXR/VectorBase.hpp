@@ -154,15 +154,11 @@ namespace CXXR
 /* defined as a macro since fastmatch packages tests for it */
 #define XLENGTH(x) XLENGTH_EX(x)
 
-  extern "C" void *DATAPTR(SEXP x);
-  extern "C" const void *DATAPTR_RO(SEXP x);
-
   template <typename T = void>
   inline T *stdvec_dataptr(RObject *x)
   {
     return reinterpret_cast<T *>(SEXP_downcast<VectorBase *>(x, false)->data());
   }
-
 } // namespace CXXR
 
 extern "C"

@@ -116,7 +116,8 @@ extern "C" {
 #define ADJUST_ENVIR_REFCNTS
 #endif
 
-
+const char *R_CHAR(SEXP x);
+#define CHAR(x)		R_CHAR(x)
 // ======================= USE_RINTERNALS section
 #if defined(USE_RINTERNALS) && defined(COMPILING_IVORY) && defined(__cplusplus)
 
@@ -124,9 +125,6 @@ extern "C" {
 
 #else /* not USE_RINTERNALS */
 // ======================= not USE_RINTERNALS section
-
-#define CHAR(x)		R_CHAR(x)
-const char *(R_CHAR)(SEXP x);
 
 /* Various tests with macro versions in the second USE_RINTERNALS section */
 Rboolean (Rf_isNull)(SEXP s);
@@ -143,7 +141,7 @@ Rboolean (Rf_isRaw)(SEXP s);
 #endif /* USE_RINTERNALS */
 
 // =====
-// These are required by stringi and data.table packages
+// These are required by stringi package
 // if we're disabling USE_RINTERNALS for them.
 #ifndef TESTING_WRITE_BARRIER
 #ifndef IS_BYTES
@@ -1233,7 +1231,7 @@ void R_orderVector1(int *indx, int n, SEXP x, Rboolean nalast, Rboolean decreasi
 #define psmatch			Rf_psmatch
 #define PrintValue		Rf_PrintValue
 #define printwhere		Rf_printwhere
-#define protect			Rf_protect
+#define protect(x)			Rf_protect(x)
 #define readS3VarsFromFrame	Rf_readS3VarsFromFrame
 #define reEnc			Rf_reEnc
 #define S3Class                 Rf_S3Class
@@ -1260,7 +1258,7 @@ void R_orderVector1(int *indx, int n, SEXP x, Rboolean nalast, Rboolean decreasi
 #define type2rstr		Rf_type2rstr
 #define type2str		Rf_type2str
 #define type2str_nowarn		Rf_type2str_nowarn
-#define unprotect		Rf_unprotect
+#define unprotect(x)		Rf_unprotect(x)
 #define unprotect_ptr		Rf_unprotect_ptr
 #define VectorToPairList	Rf_VectorToPairList
 #define warningcall_immediate	Rf_warningcall_immediate

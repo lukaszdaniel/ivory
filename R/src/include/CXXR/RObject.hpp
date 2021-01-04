@@ -32,6 +32,7 @@
 #ifndef ROBJECT_HPP
 #define ROBJECT_HPP
 
+#define R_NO_REMAP
 #define SWITCH_TO_REFCNT
 #define COMPUTE_REFCNT_VALUES
 // #define ENABLE_ST_CHECKS
@@ -65,7 +66,7 @@
     }                                                                                                                                       \
     else                                                                                                                                    \
     {                                                                                                                                       \
-        std::cerr << LOCATION << "object = nullptr" << std::endl;                                                                         \
+        std::cerr << LOCATION << "object = nullptr" << std::endl;                                                                           \
     }
 
 #include <cstddef>
@@ -73,6 +74,9 @@
 #include <CXXR/SEXPTYPE.hpp>
 #include <CXXR/RTypes.hpp>
 #include <CXXR/GCNode.hpp>
+#define CALLED_FROM_DEFN_H
+#include <Rinternals.h>
+#undef CALLED_FROM_DEFN_H
 #include <R_ext/Error.h>
 #include <R_ext/Complex.h>
 #include <R_ext/Boolean.h>
@@ -323,7 +327,6 @@ namespace CXXR
         } u;
 
     public:
-
         /**
          * @param stype Required type of the RObject.
          */
@@ -395,7 +398,6 @@ namespace CXXR
          * @return pointer to enclosing environment.
          */
         const RObject *promiseEnvironment() const { return u.promsxp.m_env; }
-
 
         /** @brief Get an object's ::SEXPTYPE.
          *

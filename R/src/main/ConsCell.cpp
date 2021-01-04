@@ -47,19 +47,19 @@ namespace CXXR
     // from C:
     namespace ForceNonInline
     {
-        // const auto &CAD4Rptr = CAD4R;
-        // const auto &CADDDRptr = CADDDR;
-        // const auto &CADDRptr = CADDR;
-        // const auto &CADRptr = CADR;
-        // const auto &CDARptr = CDAR;
-        // const auto &CDDRptr = CDDR;
-        // const auto &CDDDRptr = CDDDR;
-        // const auto &CDRptr = CDR;
-        // const auto &BINDING_IS_LOCKEDptr = BINDING_IS_LOCKED;
-        // const auto &IS_ACTIVE_BINDINGptr = IS_ACTIVE_BINDING;
-        // const auto &LOCK_BINDINGptr = LOCK_BINDING;
-        // const auto &SET_ACTIVE_BINDING_BITptr = SET_ACTIVE_BINDING_BIT;
-        // const auto &UNLOCK_BINDINGptr = UNLOCK_BINDING;
+        const auto &CAD4Rptr = CAD4R;
+        const auto &CADDDRptr = CADDDR;
+        const auto &CADDRptr = CADDR;
+        const auto &CADRptr = CADR;
+        const auto &CDARptr = CDAR;
+        const auto &CDDRptr = CDDR;
+        const auto &CDDDRptr = CDDDR;
+        const auto &CDRptr = CDR;
+        const auto &BINDING_IS_LOCKEDptr = BINDING_IS_LOCKED;
+        const auto &IS_ACTIVE_BINDINGptr = IS_ACTIVE_BINDING;
+        const auto &LOCK_BINDINGptr = LOCK_BINDING;
+        const auto &SET_ACTIVE_BINDING_BITptr = SET_ACTIVE_BINDING_BIT;
+        const auto &UNLOCK_BINDINGptr = UNLOCK_BINDING;
     } // namespace ForceNonInline
 
     /* List Access Methods */
