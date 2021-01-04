@@ -1971,7 +1971,7 @@ HIDDEN SEXP do_remove(SEXP call, SEXP op, SEXP args, SEXP rho)
 	    done = RemoveVariable(tsym, hashcode, tenv);
 	    if (done || !ginherits)
 		break;
-	    tenv = CDR(tenv);
+	    tenv = ENCLOS(tenv);
 	}
 	if (!done)
 	    warning(_("object '%s' was not found"), EncodeChar(PRINTNAME(tsym)));

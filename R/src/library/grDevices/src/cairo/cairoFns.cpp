@@ -1515,6 +1515,8 @@ static void FT_getFont(pGEcontext gc, pDevDesc dd, double fs)
 	else if (streql(fm, "serif")) family = times;
 	else if (streql(fm, "sans")) family = hv;
 	else if (fm[0]) family = fm;
+	// none of the above, so ultimate fallback.
+	else family = hv;
     }
 
     cairo_select_font_face (xd->cc, family,  cairo_font_slant_t(slant), cairo_font_weight_t(wt));
