@@ -32,7 +32,7 @@
 #define CACHEDSTRING_HPP
 
 #include <CXXR/String.hpp>
-#include <map>
+#include <unordered_map>
 #include <string>
 
 namespace CXXR
@@ -58,8 +58,11 @@ namespace CXXR
          *          as  indicated by the LATIN1_MASK and UTF8_MASK
          *          bits.  Zero signifies ASCII encoding, and at most
          *          one of the MASK bits may be set (checked).
+         *
+         * @return Pointer to a CachedString representing the
+         *         specified text in the specified encoding.
          */
-        static const CachedString *obtain(const std::string &str, unsigned int encoding = 0);
+        static const CachedString *obtain(const std::string &str, CharsetBit encoding = NATIVE_MASK);
 
         /** @brief The name by which this type is known in R.
          *
@@ -86,22 +89,37 @@ namespace CXXR
     private:
         // The first element of the key is the text, the second
         // element the encoding:
-        typedef std::pair<std::string, unsigned int> key;
+        typedef std::pair<std::string, CharsetBit> key;
 
+        // Hashing is based simply on the text of the key, not on its
+        // encoding:
+        class Hasher : public std::unary_function<key, std::size_t>
+        {
+        public:
+            std::size_t operator()(const key &k) const
+            {
+                return s_string_hasher(k.first);
+            }
+
+        private:
+            static std::hash<std::string> s_string_hasher;
+        };
         // The cache is implemented as a mapping from keys to pointers
-        // to CachedString objects.  Each CachedString simply contains an
-        // iterator locating its text and encoding within the cache.
-        // In the future this may be changed to a TR1 unordered_map.
-        typedef std::map<key, CachedString *> map;
+        // to CachedString objects.  Each CachedString simply contains
+        // a pointer locating its entry within the cache.  Note that
+        // we cannot use CXXR::Allocator here, because when creating a
+        // new CachedString, the call to insert() might lead to a
+        // garbage collection, which in turn might lead to a call to
+        // erase() before the insert() was complete.  (Yes, I tried
+        // this, and it took ages to debug!)
+        typedef std::unordered_map<key, CachedString *, Hasher> map;
 
-        static map s_cache;
+        map::value_type *m_key_val_pr;
 
-        map::iterator m_it;
-
-        explicit CachedString(map::iterator iter)
-            : String((*iter).first.first.size(), (*iter).first.second,
-                     (*iter).first.first.c_str()),
-              m_it(iter)
+        explicit CachedString(map::value_type *key_val_pr)
+            : String(key_val_pr->first.first.size(), key_val_pr->first.second,
+                     key_val_pr->first.first.c_str()),
+              m_key_val_pr(key_val_pr)
         {
         }
 
@@ -114,8 +132,20 @@ namespace CXXR
         // allocated only using 'new'.
         ~CachedString()
         {
-            s_cache.erase(m_it);
+            // m_key_val_pr is null for serialization proxies.
+            if (m_key_val_pr)
+            {
+                // Must copy the key, because some implementations may,
+                // having deleted the cache entry pointed to by
+                // m_key_val_pr, continue looking for other entries with
+                // the given key.
+                key k = m_key_val_pr->first;
+                getCache()->erase(k);
+            }
         }
+
+        // Return pointer to the cache:
+        static map *getCache();
     };
 } // namespace CXXR
 

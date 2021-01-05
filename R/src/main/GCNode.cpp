@@ -57,13 +57,6 @@ namespace CXXR
         }
     }
 
-    GCNode::~GCNode()
-    {
-        --s_num_nodes;
-        --s_gencount[m_gcgen];
-        link(m_prev, m_next);
-    }
-
     bool GCNode::check()
     {
         if (s_num_generations == 0)

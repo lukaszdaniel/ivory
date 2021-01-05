@@ -39,8 +39,12 @@
 #include <string>
 #include <unordered_map>
 
-extern "C" SEXP R_NaString;	   /* NA_STRING as a CHARSXP */
 extern "C" SEXP R_BlankString; /* "" as a CHARSXP */
+
+namespace R
+{
+	extern void InitNames();
+}
 
 namespace CXXR
 {
@@ -133,7 +137,7 @@ namespace CXXR
 		 */
 		bool isNA() const
 		{
-			return this == NA(); //s_na.get();
+			return this == s_na.get();
 		}
 
 		/** @brief 'Not available' string.
@@ -150,7 +154,7 @@ namespace CXXR
 		 */
 		static const String *NA()
 		{
-			return static_cast<String *>(R_NaString); // s_na;
+			return s_na;
 		}
 
 		/** @brief The name by which this type is known in R.
@@ -162,70 +166,6 @@ namespace CXXR
 			return "char";
 		}
 
-	protected:
-		/** @brief Create a string. 
-		 *
-		 * @param sz Number of <tt>char</tt>s in the string.  Zero is
-		 *          permissible.  Note that if the string uses a
-		 *          multibyte encoding scheme, this may be different
-		 *          from the number of Unicode characters represented
-		 *          by the string.
-		 *
-		 * @param encoding The intended encoding of the string, as
-		 *          indicated by the LATIN1_MASK and UTF8_MASK bits.
-		 *          Zero signifies ASCII encoding, and at most one of
-		 *          the MASK bits may be set (checked).
-		 *
-		 * @param c_string Pointer to a representation of the string
-		 *          as a C-style string (but possibly with embedded
-		 *          null characters), with \sz plus one bytes, the
-		 *          last byte being a null byte.  (Because of the
-		 *          possibility of embedded nulls the size of the
-		 *          string is not checked.)  This string
-		 *          representation must remain in existence for the
-		 *          lifetime of the String object.  If a null pointer
-		 *          is supplied here, a string pointer must be
-		 *          supplied later in the construction of the derived
-		 *          class object by calling setCString().
-		 */
-		String(size_t sz, unsigned int encoding, const char *c_string = nullptr)
-			: VectorBase(CHARSXP, sz), m_c_str(c_string), m_hash(-1)
-		{
-			if (encoding)
-				checkEncoding(encoding);
-			m_gpbits = encoding;
-		}
-
-		/** @brief Supply pointer to the string representation.
-		 *
-		 * @param c_string Pointer to a representation of the string
-		 *          as a C-style string (but possibly with embedded
-		 *          null characters), with size() plus one bytes, the
-		 *          last byte being a null byte.  (Because of the
-		 *          possibility of embedded nulls the size of the
-		 *          string is not checked.)  This string
-		 *          representation must remain in existence for the
-		 *          lifetime of the String object.  If a null pointer
-		 *          is supplied here, a string pointer must be
-		 *          supplied later in the construction of the derived
-		 *          class object by calling setCString().
-		 */
-		void setCString(const char *c_string)
-		{
-			m_c_str = c_string;
-		}
-
-		/** @brief Mark the hash value as invalid.
-		 *
-		 * This should be called in the event that the text of the
-		 * String may have been changed.
-		 */
-		void invalidateHash() const
-		{
-			m_hash = -1;
-		}
-
-	public:
 		/* Hashing Methods */
 		static constexpr int HASHASH_MASK = 1;
 		static unsigned int hashash(RObject *x);
@@ -253,7 +193,69 @@ namespace CXXR
 		static void set_cached(RObject *x);
 		static unsigned int is_cached(RObject *x);
 
+	protected:
+		/** @brief Create a string. 
+		 *
+		 * @param sz Number of <tt>char</tt>s in the string.  Zero is
+		 *          permissible.  Note that if the string uses a
+		 *          multibyte encoding scheme, this may be different
+		 *          from the number of Unicode characters represented
+		 *          by the string.
+		 *
+		 * @param encoding The intended encoding of the string, as
+		 *          indicated by the LATIN1_MASK and UTF8_MASK bits.
+		 *          Zero signifies ASCII encoding, and at most one of
+		 *          the MASK bits may be set (checked).
+		 *
+		 * @param c_string Pointer to a representation of the string
+		 *          as a C-style string (but possibly with embedded
+		 *          null characters), with \a sz plus one bytes, the
+		 *          last byte being a null byte.  (Because of the
+		 *          possibility of embedded nulls the size of the
+		 *          string is not checked.)  This string
+		 *          representation must remain in existence for the
+		 *          lifetime of the String object.  If a null pointer
+		 *          is supplied here, a string pointer must be
+		 *          supplied later in the construction of the derived
+		 *          class object by calling setCString().
+		 */
+		String(size_t sz, CharsetBit encoding, const char *c_string = nullptr)
+			: VectorBase(CHARSXP, sz), m_c_str(c_string), m_hash(-1)
+		{
+			if (encoding)
+				checkEncoding(encoding);
+			m_gpbits = encoding;
+		}
+
+		/** @brief Supply pointer to the string representation.
+		 *
+		 * @param c_string Pointer to a representation of the string
+		 *          as a C-style string (but possibly with embedded
+		 *          null characters), with size() plus one bytes, the
+		 *          last byte being a null byte.  (Because of the
+		 *          possibility of embedded nulls the size of the
+		 *          string is not checked.)  This string
+		 *          representation must remain in existence for the
+		 *          lifetime of the String object.
+		 */
+		void setCString(const char *c_string)
+		{
+			m_c_str = c_string;
+		}
+
+		/** @brief Mark the hash value as invalid.
+		 *
+		 * This should be called in the event that the text of the
+		 * String may have been changed.
+		 */
+		void invalidateHash() const
+		{
+			m_hash = -1;
+		}
+
 	private:
+		static GCRoot<const String> s_na;
+		static GCRoot<const String> s_blank;
 		const char *m_c_str;
 
 		mutable int m_hash; // negative signifies invalid
@@ -263,7 +265,10 @@ namespace CXXR
 		String(const String &);
 		String &operator=(const String &);
 		// Report error if encoding is invalid:
-		static void checkEncoding(unsigned int encoding);
+		static void checkEncoding(CharsetBit encoding);
+		// Initialize the static data members:
+		static void initialize();
+		friend void ::R::InitNames();
 	};
 
 	inline const char *r_char(RObject *x)
@@ -274,6 +279,8 @@ namespace CXXR
 
 extern "C"
 {
+	extern SEXP R_NaString; /* NA_STRING as a CHARSXP */
+
 	/**
      * @param x \c const pointer to a CXXR::String.
      * @return \c const pointer to character 0 of \a x.
@@ -284,13 +291,13 @@ extern "C"
      * @param x Pointer to a CXXR::String.
      * @return true iff \a x is marked as having LATIN1 encoding.
      */
-	int (IS_LATIN1)(SEXP x);
+	int(IS_LATIN1)(SEXP x);
 
 	/**
      * @param x Pointer to a CXXR::String.
      * @return true iff \a x is marked as having UTF8 encoding.
      */
-	int (IS_UTF8)(SEXP x);
+	int(IS_UTF8)(SEXP x);
 
 	/* Hashing Functions */
 

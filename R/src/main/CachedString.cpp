@@ -44,26 +44,42 @@ namespace CXXR
     } // namespace ForceNonInline
 } // namespace CXXR
 
-CachedString::map CachedString::s_cache;
+hash<std::string> CachedString::Hasher::s_string_hasher;
 
-const CachedString *CachedString::obtain(const std::string &str, unsigned int encoding)
+CachedString::map *CachedString::getCache()
+{
+    static map *cache = new map();
+    return cache;
+}
+
+const CachedString *CachedString::obtain(const std::string &str, CharsetBit encoding)
 {
     // This will be checked again when we actually construct the
     // CachedString, but we precheck now so that we don't create an
     // invalid cache key:
-    if (encoding != 0 && encoding != UTF8_MASK && encoding != LATIN1_MASK)
+    switch (encoding)
+    {
+    case NATIVE_MASK:
+    case UTF8_MASK:
+    case LATIN1_MASK:
+    case BYTES_MASK:
+        break;
+    default:
         Rf_error("unknown encoding mask: %d", encoding);
-    pair<map::iterator, bool> pr = s_cache.insert(map::value_type(key(str, encoding), 0));
+    }
+
+    pair<map::iterator, bool> pr = getCache()->insert(map::value_type(key(str, encoding), nullptr));
     map::iterator it = pr.first;
     if (pr.second)
     {
         try
         {
-            (*it).second = new CachedString(it);
+            map::value_type &val = *it;
+            val.second = new CachedString(&val);
         }
         catch (...)
         {
-            s_cache.erase(it);
+            getCache()->erase(it);
             throw;
         }
     }

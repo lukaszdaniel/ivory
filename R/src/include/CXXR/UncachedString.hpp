@@ -62,7 +62,7 @@ namespace CXXR
          *          Zero signifies ASCII encoding, and at most one of
          *          the MASK bits may be set (checked).
          */
-        explicit UncachedString(size_t sz, unsigned int encoding = 0)
+        explicit UncachedString(size_t sz, CharsetBit encoding = NATIVE_MASK)
             : String(sz, encoding), m_databytes(sz + 1), m_data(m_short_string)
         {
             allocData(sz);
@@ -79,7 +79,7 @@ namespace CXXR
          *          Zero signifies ASCII encoding, and at most one of
          *          the MASK bits may be set (checked).
          */
-        explicit UncachedString(const std::string &str, unsigned int encoding = 0);
+        explicit UncachedString(const std::string &str, CharsetBit encoding = NATIVE_MASK);
 
         /** @brief Character access.
 		 * @param index Index of required character (counting from
@@ -170,10 +170,12 @@ namespace CXXR
 
 extern "C"
 {
-    /**
-	 * @brief Writable char access.
+    /** @brief Writable char access.
+	 *
      * @param x pointer to a CXXR::String 
+     *
      * @return pointer to character 0 of \a x.
+     *
      * @note For R internal use only.  May be removed in future.
      */
     inline char *CHAR_RW(SEXP x)
@@ -181,14 +183,14 @@ extern "C"
         return CXXR::stdvec_dataptr<char>(x);
     }
 
-    /**
-     * @brief Set LATIN1 encoding.
+    /** @brief Set LATIN1 encoding.
+     *
      * @param x Pointer to a CXXR::String.
      */
     void SET_LATIN1(SEXP x);
 
-    /**
-     * @brief Set UTF8 encoding.
+    /** @brief Set UTF8 encoding.
+     *
      * @param x Pointer to a CXXR::String.
      */
     void SET_UTF8(SEXP x);

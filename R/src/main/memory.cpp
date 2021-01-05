@@ -698,8 +698,7 @@ void GCNode::gc(unsigned int num_old_gens_to_collect)
 
     GCNode::Marker marker(num_old_gens_to_collect);
     GCRootBase::visitRoots(&marker);
-    MARK_THRU(&marker, NA_STRING);	        /* Builtin constants */
-    MARK_THRU(&marker, R_BlankString);
+    MARK_THRU(&marker, R_BlankString);	        /* Builtin constants */
     MARK_THRU(&marker, R_BlankScalarString);
     MARK_THRU(&marker, R_CurrentExpression);
     MARK_THRU(&marker, R_UnboundValue);

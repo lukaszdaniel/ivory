@@ -47,13 +47,34 @@ namespace CXXR
         const auto &mkCharLenptr = Rf_mkCharLen;
     } // namespace ForceNonInline
 
+    GCRoot<const String> String::s_na(new UncachedString("NA"));
+    // SEXP R_NaString = const_cast<String *>(String::NA());
+
+    // String::s_blank and R_BlankString are defined in CachedString.cpp
+
     // String::Comparator::operator()(const String&, const String&) is in
     // sort.cpp
 
-    void String::checkEncoding(unsigned int encoding)
+    void String::initialize()
     {
-        if (encoding != 0 && encoding != UTF8_MASK && encoding != LATIN1_MASK)
+        R_NaString = const_cast<String *>(String::NA());
+        set_cached(R_NaString);  /* Mark it */
+        // R_NaString = NA();
+        // R_BlankString = blank();
+    }
+
+    void String::checkEncoding(CharsetBit encoding)
+    {
+        switch (encoding)
+        {
+        case NATIVE_MASK:
+        case UTF8_MASK:
+        case LATIN1_MASK:
+        case BYTES_MASK:
+            break;
+        default:
             Rf_error("unknown encoding mask: %d", encoding);
+        }
     }
 
     /* Hashing Methods */

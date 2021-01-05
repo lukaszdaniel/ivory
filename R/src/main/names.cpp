@@ -27,10 +27,12 @@
 #define R_NO_REMAP
 #define R_USE_SIGNALS 1
 
+#include <CXXR/CachedString.hpp>
+#include <CXXR/GCRoot.hpp>
+
 #include <Localization.h>
 #include <Defn.h>
 #include <Internal.h>
-#include <CXXR/GCRoot.hpp>
 
 #include <Print.h>
 #include "arithmetic.h" /* for do_math[1234], do_cmathfuns */
@@ -1199,8 +1201,8 @@ static SEXP mkSymMarker(const String *pname, SEXP value)
 HIDDEN void R::InitNames()
 {
     /* allocate the symbol table */
-    if (!(R_SymbolTable = (SEXP *) calloc(HSIZE, sizeof(SEXP))))
-	R_Suicide(_("couldn't allocate memory for symbol table"));
+    if (!(R_SymbolTable = (SEXP *)calloc(HSIZE, sizeof(SEXP))))
+        R_Suicide(_("couldn't allocate memory for symbol table"));
 
     /* Create marker values */
     R_UnboundValue = mkSymMarker(nullptr, R_UnboundValue);
@@ -1210,16 +1212,12 @@ HIDDEN void R::InitNames()
     R_CurrentExpression = mkSymMarker(SEXP_downcast<const String *>(mkChar("<current-expression>")), R_CurrentExpression);
 
     /* String constants (CHARSXP values) */
-    /* Note: we don't want NA_STRING to be in the CHARSXP cache, so that
-       mkChar("NA") is distinct from NA_STRING */
-    /* NA_STRING */
-    NA_STRING = allocCharsxp(strlen("NA"));
-    strcpy(CHAR_RW(NA_STRING), "NA");
-    CXXR::String::set_cached(NA_STRING);  /* Mark it */
-    R_print.na_string = NA_STRING;
+    String::initialize();
+
+    R_print.na_string = R_NaString;
     /* R_BlankString */
     R_BlankString = mkChar("");
-    R_BlankScalarString = ScalarString(R_BlankString);
+    R_BlankScalarString = Rf_ScalarString(R_BlankString);
     MARK_NOT_MUTABLE(R_BlankScalarString);
 
     /* Initialize the symbol Table */
