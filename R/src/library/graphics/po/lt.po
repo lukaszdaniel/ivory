@@ -1,0 +1,652 @@
+# Lithuanian translations for graphics package.
+# Copyright (C) 2020 THE graphics'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the graphics package.
+# <r.zakauskas@gmail.com;gabriele.dauksaite@gmail.com>, 2020.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: graphics 4.1.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2021-01-07 23:37+0100\n"
+"PO-Revision-Date: 2020-12-09 13:20+0200\n"
+"Last-Translator: r.zakauskas@gmail.com;gabriele.dauksaite@gmail.com\n"
+"Language-Team: Lithuanian\n"
+"Language: lt\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && (n"
+"%100<10 || n%100>=20) ? 1 : 2);\n"
+"X-Generator: Poedit 2.4.1\n"
+
+#: base.cpp:37
+msgid "no base graphics system is registered"
+msgstr "nėra registruota jokia pagrindinė grafikos sistema"
+
+#: base.cpp:304
+msgid "Incompatible graphics state"
+msgstr "Neleistina grafikos būsena"
+
+#: base.cpp:348
+msgid "event 'GE_ScalePS' requires a single numeric value"
+msgstr ""
+
+#: base.cpp:379 base.cpp:386 base.cpp:394
+msgid "the base graphics system is not registered"
+msgstr "pagrindinė grafikos sistema neužregistruota"
+
+#: graphics.cpp:292
+#, c-format
+msgid "bad units specified in '%s'"
+msgstr "blogi vienetai, kurie nurodyti '%s'"
+
+#: graphics.cpp:1806 graphics.cpp:1828
+msgid "attempt to plot on null device"
+msgstr "bandymas nubraižyti neveikiančiame įrenginyje"
+
+#: graphics.cpp:1858
+#, fuzzy
+msgid "outer margins are too large (figure region is too small)"
+msgstr "išorinės paraštės per didelės (paveikslo sritis per maža)"
+
+#: graphics.cpp:1860
+#, fuzzy
+msgid "figure region is too large"
+msgstr "paveikslo sritis per didelė"
+
+#: graphics.cpp:1862
+#, fuzzy
+msgid "figure margins are too large"
+msgstr "paveikslo paraštės per didelės"
+
+#: graphics.cpp:1864
+#, fuzzy
+msgid "plot region is too large"
+msgstr "brėžinio sritis per didelė"
+
+#: graphics.cpp:1920
+#, c-format
+msgid "nonfinite axis limits [GScale(%g,%g,%d, .); log=%d]"
+msgstr "nebaigtinės ašies ribos [GScale(%g,%g,%d, .); log=%d]"
+
+#: graphics.cpp:1950
+#, c-format
+msgid "axis style \"%c\" unimplemented"
+msgstr "ašies stilius \"%c\" neįgyvendintas"
+
+#: graphics.cpp:2188 graphics.cpp:2589
+msgid "no graphics device is active"
+msgstr "joks grafinis įrenginys nėra aktyvus"
+
+#: graphics.cpp:2382
+msgid "plot.new has not been called yet"
+msgstr "plot.new dar nebuvo iškviesta"
+
+#: graphics.cpp:2384
+msgid "invalid graphics state"
+msgstr "neleistina grafikos būsena"
+
+#: graphics.cpp:2539
+msgid "graphics device closed during call to locator or identify"
+msgstr ""
+"grafinis įrenginys uždarytas iškvietimo į ieškiklį arba identifikavimą metu"
+
+#: graphics.cpp:3047
+msgid "zero-length arrow is of indeterminate angle and so skipped"
+msgstr "nulinio ilgio rodyklė yra neapibrėžto kampo ir todėl praleista"
+
+#: graphics.cpp:3128
+#, c-format
+msgid "invalid par(\"bty\") = '%c'; no box() drawn"
+msgstr "neteisingas par(\"bty\") = ‘%c’; nėra nupiešto box()"
+
+#: graphics.cpp:3145 par.cpp:1123
+#, fuzzy, c-format
+msgid "invalid argument passed to '%s' function"
+msgstr "netinkamas argumentas perduotas į par()"
+
+#: graphics.cpp:3352
+msgid "metric information not available for this device"
+msgstr "šio įrenginio metrikos informacija negalima"
+
+#: par-common.cpp:146
+msgid "graphical parameter 'family' has a maximum length of 200 bytes"
+msgstr "grafinis parametras 'family' turi ne ilgesnį kaip 200 baitų ilgį"
+
+#: par-common.cpp:248
+msgid "'mgp[1:3]' are of differing sign"
+msgstr ""
+
+#: par.cpp:163
+#, c-format
+msgid "invalid value specified for graphical parameter \"%s\""
+msgstr "nurodyta neleistina grafinio parametro \"%s\" reikšmė"
+
+#: par.cpp:170
+#, c-format
+msgid "graphical parameter \"%s\" has the wrong length"
+msgstr "grafinis parametras \"%s\" turi neteisingą ilgį"
+
+#: par.cpp:265 par.cpp:676
+#, c-format
+msgid "graphical parameter \"%s\" cannot be set"
+msgstr "negalima nustatyti grafinio parametro \"%s\""
+
+#: par.cpp:437
+msgid "parameter \"mfg\" has the wrong length"
+msgstr "parametras \"mfg\" turi neteisingą ilgį"
+
+#: par.cpp:445 par.cpp:447
+#, fuzzy, c-format
+msgid "parameter \"%s\" in \"mfg\" parameter is out of range"
+msgstr "parametras \"i\", esantis \"mfg\", nepatenka į intervalą"
+
+#: par.cpp:452 par.cpp:454
+#, fuzzy, c-format
+msgid "value of '%s' in \"mfg\" parameter is wrong and will be ignored"
+msgstr "'nr' reikšmė, esanti \"mfg\", yra neteisinga ir bus ignoruojama"
+
+#: par.cpp:481
+#, fuzzy
+msgid "calling 'par(new=TRUE)' with no plot"
+msgstr "iškviečiamas par(new=TRUE) be brėžinio"
+
+#: par.cpp:668 par.cpp:1066
+#, c-format
+msgid "graphical parameter \"%s\" is obsolete"
+msgstr "grafinis parametras \"%s\" yra nebenaudojamas"
+
+#: par.cpp:672 par.cpp:1070
+#, c-format
+msgid "\"%s\" is not a graphical parameter"
+msgstr "\"%s\" nėra grafinis parametras"
+
+#: par.cpp:1167
+#, c-format
+msgid "too many rows in layout, limit %d"
+msgstr "per daug eilučių išdėstyme, riba %d"
+
+#: par.cpp:1173
+#, c-format
+msgid "too many columns in layout, limit %d"
+msgstr "per daug stulpelių išdėstyme, riba %d"
+
+#: par.cpp:1175
+#, c-format
+msgid "too many cells in layout, limit %d"
+msgstr "per daug langelių išdėstyme, riba %d"
+
+#: plot.cpp:42 plot3d.cpp:40
+msgid "invalid type passed to graphics function"
+msgstr ""
+
+#: plot.cpp:65
+msgid "invalid color specification"
+msgstr "netinkama spalvų specifikacija"
+
+#: plot.cpp:131
+msgid "only NA allowed in logical plotting symbol"
+msgstr "tik NA leidžiamas loginiame braižymo simbolyje"
+
+#: plot.cpp:133
+msgid "invalid plotting symbol"
+msgstr "neleistinas braižymo simbolis"
+
+#: plot.cpp:222 plot.cpp:2816 plot3d.cpp:1182 plot3d.cpp:1186
+#, c-format
+msgid "invalid '%s' specification"
+msgstr "netinkama '%s' specifikacija"
+
+#: plot.cpp:281 plot.cpp:295 plot.cpp:481 plot.cpp:486 plot.cpp:2147
+#: plot.cpp:2154 plot.cpp:3177 plot.cpp:3179 plot.cpp:3181 plot.cpp:3342
+#: plot3d.cpp:1166 plot3d.cpp:1170 plot3d.cpp:1172 plot3d.cpp:1899
+#, c-format
+msgid "invalid '%s' value"
+msgstr "neteisinga '%s' reikšmė"
+
+#: plot.cpp:298
+#, c-format
+msgid "invalid 'vfont' value [typeface %d]"
+msgstr "neleistina 'vfont' reikšmė [šriftas %d]"
+
+#: plot.cpp:322
+#, c-format
+msgid "invalid 'vfont' value [typeface = %d, fontindex = %d]"
+msgstr "neleistina 'vfont' reikšmė [šriftas %d, šrifto indeksas = %d]"
+
+#: plot.cpp:395
+msgid "invalid graphics parameter"
+msgstr "neleistinas grafikos parametras"
+
+#: plot.cpp:477
+#, fuzzy
+msgid "at least 3 arguments are required"
+msgstr "reikalingi bent 3 argumentai"
+
+#: plot.cpp:491
+msgid "\"log=\" specification must be character"
+msgstr "\"log=\" specifikacija turi būti ženklas"
+
+#: plot.cpp:504
+#, c-format
+msgid "invalid \"log=%s\" specification"
+msgstr "netinkama \"log=%s\" specifikacija"
+
+#: plot.cpp:520 plot.cpp:532
+#, fuzzy, c-format
+msgid "NA values are not allowed in '%s'"
+msgstr "'xlim' neleidžiama naudoti NA"
+
+#: plot.cpp:526 plot.cpp:538
+#, fuzzy, c-format
+msgid "'%s' needs finite values"
+msgstr "reikia baigtinių 'xlim' reikšmių"
+
+#: plot.cpp:544
+msgid "Logarithmic axis must have positive limits"
+msgstr "Logaritminės ašies ribos turi būti teigiamos"
+
+#: plot.cpp:668
+msgid "invalid type for axis labels"
+msgstr "neleistinas ašies žymenų tipas"
+
+#: plot.cpp:756 plot.cpp:1331 plot.cpp:1656 plot.cpp:1721 plot.cpp:1796
+#: plot.cpp:1862 plot.cpp:1936 plot.cpp:2031 plot.cpp:2107 plot.cpp:2385
+#: plot.cpp:2559 plot.cpp:2775 plot.cpp:3323 plot.cpp:3464 plot.cpp:3540
+#: plot.cpp:3705 plot.cpp:3985 plot3d.cpp:1868
+msgid "too few arguments"
+msgstr "per mažai argumentų"
+
+#: plot.cpp:767
+#, c-format
+msgid "invalid axis number %d"
+msgstr "netinkamas ašies numeris %d"
+
+#: plot.cpp:854 plot.cpp:866
+#, fuzzy, c-format
+msgid "'%s' argument must be of length 1"
+msgstr "'hadj' turi būti vieno ilgio"
+
+#: plot.cpp:861 plot.cpp:2119 plot.cpp:2396 plot.cpp:2402 plot.cpp:2409
+#: plot.cpp:2417 plot.cpp:2424 plot.cpp:2431 plot.cpp:2438 plot.cpp:2445
+#: plot.cpp:2453 plot.cpp:2460 plot.cpp:3184
+#, c-format
+msgid "zero-length '%s' specified"
+msgstr "nurodytas nulinis ilgis '%s'"
+
+#: plot.cpp:896
+#, fuzzy, c-format
+msgid "'%s' argument must be NA or a finite number"
+msgstr "'gap.axis' turi būti NA arba baigtinis skaičius"
+
+#: plot.cpp:948
+#, fuzzy
+msgid "'labels' argument is supplied and not 'at' argument"
+msgstr "'labels' yra pateiktos ir nėra 'at'"
+
+#: plot.cpp:952
+#, fuzzy, c-format
+msgid "'at' and 'labels' argument lengths differ, %d != %d"
+msgstr "'at' ir 'labels' ilgis skiriasi, %d != %d"
+
+#: plot.cpp:971
+msgid "no locations are finite"
+msgstr "nėra baigtinių vietų"
+
+#: plot.cpp:1349
+msgid "invalid plotting structure"
+msgstr "netinkama brėžinio struktūra"
+
+#: plot.cpp:1351
+#, fuzzy, c-format
+msgid "'x' and 'y' argument lengths differ in '%s' function"
+msgstr "'x' ir 'y' ilgiai skiriasi %s()"
+
+#: plot.cpp:1362
+#, c-format
+msgid "plot type '%s' will be truncated to first character"
+msgstr "brėžinio tipas '%s' bus sutrumpintas iki pirmojo simbolio"
+
+#: plot.cpp:1366 plot.cpp:3038
+msgid "invalid plot type"
+msgstr "netinkamas brėžinio tipas"
+
+#: plot.cpp:1568
+#, c-format
+msgid "invalid plot type '%c'"
+msgstr "netinkamas braižymo tipas '%c'"
+
+#: plot.cpp:1611
+msgid "invalid first argument"
+msgstr "neteisingas pirmasis argumentas"
+
+#: plot.cpp:1618
+msgid "invalid second argument"
+msgstr "neteisingas antras argumentas"
+
+#: plot.cpp:1626
+msgid "invalid third argument"
+msgstr "neteisingas trečias argumentas"
+
+#: plot.cpp:1634
+msgid "invalid fourth argument"
+msgstr "neteisingas ketvirtasis argumentas"
+
+#: plot.cpp:1642
+msgid "cannot mix zero-length and non-zero-length coordinates"
+msgstr "negalima maišyti nulinio ilgio ir ne nulinio ilgio koordinačių"
+
+#: plot.cpp:1867
+msgid "Empty raster"
+msgstr "Tuščias rasteris"
+
+#: plot.cpp:1949
+msgid "invalid arrow head length"
+msgstr "netinkamas rodyklės smaigalio ilgis"
+
+#: plot.cpp:1954
+msgid "invalid arrow head angle"
+msgstr "netinkamas rodyklės smaigalio kampas"
+
+#: plot.cpp:1959
+msgid "invalid arrow head specification"
+msgstr "netinkama rodyklės smaigalio specifikacija"
+
+#: plot.cpp:2193
+msgid "no coordinates were supplied"
+msgstr "nebuvo pateikta koordinačių"
+
+#: plot.cpp:2825
+#, fuzzy
+msgid "'a' and 'b' arguments must be finite"
+msgstr "‘a’ ir ‘b’ turi būti baigtiniai"
+
+#: plot.cpp:2961 plot.cpp:4076 plot.cpp:4079 plot.cpp:4082 plot.cpp:4085
+#: plot.cpp:4105 plot.cpp:4109 plot.cpp:4112 plot.cpp:4132 plot.cpp:4136
+#: plot.cpp:4139 plot3d.cpp:1088 plot3d.cpp:1092 plot3d.cpp:1097
+#: plot3d.cpp:1101 plot3d.cpp:1105 plot3d.cpp:1109 stem.cpp:153 stem.cpp:154
+#: stem.cpp:156 stem.cpp:157 stem.cpp:202 stem.cpp:203
+#, c-format
+msgid "invalid '%s' argument"
+msgstr "neteisingas argumentas '%s'"
+
+#: plot.cpp:3033 plot.cpp:3173
+#, fuzzy, c-format
+msgid "invalid number of points in '%s' function"
+msgstr "netinkamas taškų skaičius, esantis %s"
+
+#: plot.cpp:3175
+msgid "incorrect argument type"
+msgstr "neteisingas argumento tipas"
+
+#: plot.cpp:3187
+msgid "different argument lengths"
+msgstr "skirtingi argumentų ilgiai"
+
+#: plot.cpp:3189
+#, fuzzy
+msgid "more labels than points"
+msgstr "daugiau 'labels' nei taškų"
+
+#: plot.cpp:3241
+#, c-format
+msgid "warning: no point within %.2f inches\n"
+msgstr "įspėjimas: nėra taško, esančio %.2f colių\n"
+
+#: plot.cpp:3247
+#, fuzzy
+msgid "warning: nearest point is already identified\n"
+msgstr "įspėjimas: jau nustatytas artimiausias taškas\n"
+
+#: plot.cpp:3334
+msgid "invalid units"
+msgstr "neleistini vienetai"
+
+#: plot.cpp:3524 plot.cpp:3631
+msgid "invalid dendrogram input"
+msgstr "neleistina dendrogramos įvestis"
+
+#: plot.cpp:3687
+msgid "invalid symbol parameter vector"
+msgstr "neleistinas simbolio parametro vektorius"
+
+#: plot.cpp:3710
+msgid "invalid symbol coordinates"
+msgstr "netinkamos simbolių koordinatės"
+
+#: plot.cpp:3718
+msgid "x/y/parameter length mismatch"
+msgstr "x/y/parametro ilgio neatitikimas"
+
+#: plot.cpp:3737
+msgid "invalid circles data"
+msgstr "netinkami apskritimų duomenys"
+
+#: plot.cpp:3739 plot.cpp:3760 plot.cpp:3785 plot.cpp:3815
+msgid "invalid symbol parameter"
+msgstr "neleistinas simbolio parametras"
+
+#: plot.cpp:3758
+msgid "invalid squares data"
+msgstr "neleistini kvadratų duomenys"
+
+#: plot.cpp:3783
+msgid "invalid rectangles data (need 2 columns)"
+msgstr "neleistini stačiakampių duomenys (reikia 2 stulpelių)"
+
+#: plot.cpp:3813
+msgid "invalid stars data"
+msgstr "netinkami žvaigždžių duomenys"
+
+#: plot.cpp:3855
+msgid "invalid thermometers data (need 3 or 4 columns)"
+msgstr "netinkami termometrų duomenys (reikia 3 arba 4 stulpelių)"
+
+#: plot.cpp:3858 plot.cpp:3864
+#, c-format
+msgid "invalid 'thermometers[, %s]'"
+msgstr "neteisingas ‘thermometers[, %s]’"
+
+#: plot.cpp:3861
+#, c-format
+msgid "'thermometers[, %s]' not in [0,1] -- may look funny"
+msgstr "‘thermometers[, %s]’ nėra [0,1] -- gali atrodyti juokinga"
+
+#: plot.cpp:3903
+msgid "invalid 'boxplots' data (need 5 columns)"
+msgstr "netinkami 'boxplots' duomenys (reikia 5 stulpelių)"
+
+#: plot.cpp:3912
+msgid "'boxplots[, 5]' outside [0,1] -- may look funny"
+msgstr "'boxplots[, 5]' už [0,1] -- gali atrodyti juokinga"
+
+#: plot.cpp:3914
+msgid "invalid 'boxplots[, 1:4]'"
+msgstr "neteisingas ‘boxplots[, 1:4]’"
+
+#: plot.cpp:3960
+msgid "invalid symbol type"
+msgstr "netinkamas simbolio tipas"
+
+#: plot.cpp:3998 plot.cpp:4000 plot.cpp:4005 plot.cpp:4007
+#, c-format
+msgid "incorrect length for '%s' argument"
+msgstr "neteisingas argumento '%s' ilgis"
+
+#: plot.cpp:4024
+msgid "unable to allocate memory (in 'xspline()')"
+msgstr ""
+
+#: plot3d.cpp:184 plot3d.cpp:1925
+msgid "insufficient 'x' or 'y' values"
+msgstr "nepakankamos 'x' arba 'y' reikšmės"
+
+#: plot3d.cpp:188 plot3d.cpp:1928
+msgid "dimension mismatch"
+msgstr "matavimų skaičiaus neatitikimas"
+
+#: plot3d.cpp:196
+msgid "no contour values"
+msgstr "nėra kontūro reikšmių"
+
+#: plot3d.cpp:258
+msgid "invalid x / y values or limits"
+msgstr "netinkamos x / y reikšmės arba ribos"
+
+#: plot3d.cpp:260
+msgid "invalid contour levels: must be strictly increasing"
+msgstr "netinkami kontūro lygiai: turi būti griežtai didėjantys"
+
+#: plot3d.cpp:1052 plot3d.cpp:1065
+msgid "Axis orientation not calculated"
+msgstr "Ašies kryptis neapskaičiuota"
+
+#: plot3d.cpp:1085
+msgid "too few parameters"
+msgstr "per mažai parametrų"
+
+#: plot3d.cpp:1115 plot3d.cpp:1117 plot3d.cpp:1119
+#, fuzzy, c-format
+msgid "invalid '%s' limits"
+msgstr "netinkamos 'x' ribos"
+
+#: plot3d.cpp:1140 plot3d.cpp:1142 plot3d.cpp:1144
+#, fuzzy, c-format
+msgid "'%s' argument must be a character vector of length 1"
+msgstr "‘xlab’ turi būti 1 ilgio simbolių vektorius"
+
+#: plot3d.cpp:1164
+msgid "invalid viewing parameters"
+msgstr "netinkami peržiūros parametrai"
+
+#: plot3d.cpp:1522
+#, c-format
+msgid "contour(): circular/long seglist -- set %s > %d?"
+msgstr "contour(): circular/long seglist -- nustatyti %s > %d?"
+
+#: plot3d.cpp:1931
+msgid "no 'levels'"
+msgstr "nėra 'levels'"
+
+#: plot3d.cpp:1935 plot3d.cpp:1942
+#, fuzzy, c-format
+msgid "missing '%s' values"
+msgstr "trūksta 'x' reikšmių"
+
+#: plot3d.cpp:1937 plot3d.cpp:1944
+#, fuzzy, c-format
+msgid "increasing '%s' values expected"
+msgstr "numatomos didėjančios ‘x’ reikšmės"
+
+#: plot3d.cpp:1949
+#, c-format
+msgid "non-finite level values: levels[%d] = %g"
+msgstr "ne baigtinių lygių reikšmės: levels[%d] = %g"
+
+#: plot3d.cpp:1962
+#, fuzzy
+msgid "all 'z' values are equal"
+msgstr "visos z reikšmės yra lygios"
+
+#: plot3d.cpp:1964
+#, fuzzy
+msgid "all 'z' values are NA"
+msgstr "visos z reikšmės yra NA"
+
+#: stem.cpp:103
+msgid ""
+"  The decimal point is at the |\n"
+"\n"
+msgstr ""
+
+#: stem.cpp:107
+#, c-format
+msgid ""
+"  The decimal point is %d digit to the right of the |\n"
+"\n"
+msgid_plural ""
+"  The decimal point is %d digits to the right of the |\n"
+"\n"
+msgstr[0] ""
+msgstr[1] ""
+msgstr[2] ""
+
+#: stem.cpp:109
+#, c-format
+msgid ""
+"  The decimal point is %d digit to the left of the |\n"
+"\n"
+msgid_plural ""
+"  The decimal point is %d digits to the left of the |\n"
+"\n"
+msgstr[0] ""
+msgstr[1] ""
+msgstr[2] ""
+
+#: stem.cpp:147
+#, fuzzy
+msgid "invalid input"
+msgstr "neleistini vienetai"
+
+#: stem.cpp:150
+#, c-format
+msgid "long vector '%s' is not supported"
+msgstr "ilgas vektorius '%s' nepalaikomas"
+
+#: stem.cpp:188
+msgid "count for a bin exceeds INT_MAX"
+msgstr ""
+
+#~ msgid "No graphics device is active"
+#~ msgstr "Joks grafinis įrenginys nėra aktyvus"
+
+#~ msgid "invalid argument to GBox"
+#~ msgstr "netinkamas argumentas į GBox"
+
+#~ msgid "parameter \"j\" in \"mfg\" is out of range"
+#~ msgstr "parametras \"j\", esantis \"mfg\", nepatenka į intervalą"
+
+#~ msgid "value of 'nc' in \"mfg\" is wrong and will be ignored"
+#~ msgstr "'nc' reikšmė, esanti \"mfg\", yra neteisinga ir bus ignoruojama"
+
+#~ msgid "invalid font specification"
+#~ msgstr "netinkama šrifto specifikacija"
+
+#~ msgid "NAs not allowed in 'ylim'"
+#~ msgstr "'ylim' neleidžiama naudoti NA"
+
+#~ msgid "need finite 'ylim' values"
+#~ msgstr "reikia baigtinių 'ylim' reikšmių"
+
+#~ msgid "'gap.axis' must be of length one"
+#~ msgstr "'gap.axis' turi būti vieno ilgio"
+
+#~ msgid "invalid a=, b= specification"
+#~ msgstr "netinkama a=, b= specifikacija"
+
+#~ msgid "invalid 'thermometers[, 1:2]'"
+#~ msgstr "neteisingas ‘thermometers[, 1:2]’"
+
+#~ msgid "invalid 'y' limits"
+#~ msgstr "netinkamos 'y' ribos"
+
+#~ msgid "invalid 'z' limits"
+#~ msgstr "netinkamos 'z' ribos"
+
+#~ msgid "'ylab' must be a character vector of length 1"
+#~ msgstr "‘ylab’ turi būti 1 ilgio simbolių vektorius"
+
+#~ msgid "'zlab' must be a character vector of length 1"
+#~ msgstr "‘zlab’ turi būti 1 ilgio simbolių vektorius"
+
+#~ msgid "missing 'y' values"
+#~ msgstr "trūksta 'y' reikšmių"
+
+#~ msgid "increasing 'y' values expected"
+#~ msgstr "numatomos didėjančios ‘y’ reikšmės"
+
+#~ msgid "invalid NA contour values"
+#~ msgstr "netinkamos NA kontūro reikšmės"
+
+#~ msgid "relative range of values (%4.0f * EPS) is small (axis %d)"
+#~ msgstr "santykinė reikšmių sritis (%4.0f * EPS) yra maža (ašis %d)"

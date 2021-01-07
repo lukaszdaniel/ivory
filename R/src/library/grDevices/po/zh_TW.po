@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 3.5.1\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-08-14 18:58+0200\n"
+"POT-Creation-Date: 2021-01-07 23:37+0100\n"
 "PO-Revision-Date: 2018-09-16 23:38+0800\n"
 "Last-Translator: Wei-Lun Chao <bluebat@member.fsf.org>\n"
 "Language-Team: Chinese (traditional) <zh-l10n@linux.org.tw>\n"
@@ -91,7 +91,7 @@ msgstr "'names' 向量無效"
 msgid "invalid gray level, must be in [0,1]."
 msgstr "灰色水平不對，必須在[0,1]。"
 
-#: colors.cpp:551 devPS.cpp:9620 devPS.cpp:9783 devPS.cpp:9786
+#: colors.cpp:551 devPS.cpp:9632 devPS.cpp:9795 devPS.cpp:9798
 #: devWindows.cpp:3676 devWindows.cpp:3680 devWindows.cpp:3688
 #: devWindows.cpp:3699 devWindows.cpp:3705 devWindows.cpp:3712
 #: devWindows.cpp:3719 devWindows.cpp:3723
@@ -144,222 +144,222 @@ msgstr "最大顏色數是 %d"
 msgid "failed to load cairo DLL"
 msgstr "無法指派柵格"
 
-#: devPS.cpp:568
+#: devPS.cpp:569
 #, c-format
 msgid "afm file '%s' could not be opened"
 msgstr "無法開啟 afm 文字 '%s'"
 
-#: devPS.cpp:598
+#: devPS.cpp:599
 #, fuzzy
 msgid "'FontBBox' could not be parsed"
 msgstr "無法開啟 afm 文字 '%s'"
 
-#: devPS.cpp:606
+#: devPS.cpp:607
 #, fuzzy
 msgid "'CharInfo' could not be parsed"
 msgstr "無法開啟 afm 文字 '%s'"
 
-#: devPS.cpp:636
+#: devPS.cpp:637
 msgid "unknown AFM entity encountered"
 msgstr "遇到未知 AFM 值這個錯誤"
 
-#: devPS.cpp:747 devPS.cpp:750 devPS.cpp:4479 devPS.cpp:9245 devPicTeX.cpp:472
-#: devPicTeX.cpp:474
+#: devPS.cpp:752 devPS.cpp:755 devPS.cpp:4491 devPS.cpp:9257 devPicTeX.cpp:480
+#: devPicTeX.cpp:482
 #, fuzzy, c-format
 msgid "invalid string in '%s' function"
 msgstr "'%s' 裡的字串無效"
 
-#: devPS.cpp:781
+#: devPS.cpp:786
 #, c-format
 msgid "font width unknown for character 0x%x"
 msgstr "字元 0x%x 不帶字型寬度這樣的設定"
 
-#: devPS.cpp:838 devPS.cpp:4359
+#: devPS.cpp:843 devPS.cpp:4371
 #, fuzzy, c-format
 msgid "unknown encoding '%s' in '%s' function"
 msgstr "'mbcsToSbcs' 不存在 '%s' 這樣的編碼"
 
-#: devPS.cpp:854 devPS.cpp:865
+#: devPS.cpp:859 devPS.cpp:870
 #, c-format
 msgid "font metrics unknown for Unicode character U+%04x"
 msgstr "Unicode 字元 U+%04x 不帶字型度量"
 
-#: devPS.cpp:873
+#: devPS.cpp:878
 #, c-format
 msgid "font metrics unknown for character 0x%x"
 msgstr "字元 0x%x 不帶字型度量"
 
-#: devPS.cpp:886
+#: devPS.cpp:891
 #, fuzzy, c-format
 msgid ""
 "invalid character (%04x) sent to 'PostScriptCIDMetricInfo()' function in a "
 "single-byte locale"
 msgstr "傳給 'PostScriptCIDMetricInfo' 的字元(%04x)在單位元組場所裡，因此無效"
 
-#: devPS.cpp:894
+#: devPS.cpp:899
 #, fuzzy
 msgid ""
 "invalid character sent to 'PostScriptCIDMetricInfo()' in a single-byte locale"
 msgstr "傳給 'PostScriptCIDMetricInfo' 的字元是單位元組場所，因此無效"
 
-#: devPS.cpp:1007
+#: devPS.cpp:1019
 msgid "failed to allocate CID font info"
 msgstr "無法指派 CID 字型資訊"
 
-#: devPS.cpp:1023
+#: devPS.cpp:1035
 msgid "failed to allocate Type 1 font info"
 msgstr "無法指派一類別字型資訊"
 
-#: devPS.cpp:1043
+#: devPS.cpp:1055
 msgid "failed to allocate encoding info"
 msgstr "無法指派編碼資訊"
 
-#: devPS.cpp:1062
+#: devPS.cpp:1074
 msgid "failed to allocate CID font family"
 msgstr "無法指派 CID 字型系列"
 
-#: devPS.cpp:1076
+#: devPS.cpp:1088
 msgid "failed to allocate Type 1 font family"
 msgstr "無法指派一類別字型系列"
 
-#: devPS.cpp:1113 devPS.cpp:1124
+#: devPS.cpp:1125 devPS.cpp:1136
 msgid "failed to allocate font list"
 msgstr "無法指派字型列"
 
-#: devPS.cpp:1182
+#: devPS.cpp:1194
 msgid "failed to allocated encoding list"
 msgstr "無法指派編碼列"
 
-#: devPS.cpp:1331
+#: devPS.cpp:1343
 msgid "truncated string which was too long for copy"
 msgstr "切斷的字串太長，無法拷貝"
 
-#: devPS.cpp:1371
+#: devPS.cpp:1383
 #, c-format
 msgid "failed to load encoding file '%s'"
 msgstr "無法載入編碼文字 '%s'"
 
-#: devPS.cpp:1469 devPS.cpp:1502
+#: devPS.cpp:1481 devPS.cpp:1514
 msgid "invalid font name or more than one font name"
 msgstr "字型名稱不對或太多"
 
-#: devPS.cpp:1621 devPS.cpp:1655
+#: devPS.cpp:1633 devPS.cpp:1667
 #, c-format
 msgid "font family '%s' not found in PostScript font database"
 msgstr "PostScript 字型資料庫裡找不到 '%s' 這個字型系列"
 
-#: devPS.cpp:1739 devPS.cpp:1820 devPS.cpp:1847
+#: devPS.cpp:1751 devPS.cpp:1832 devPS.cpp:1859
 #, c-format
 msgid "font encoding for family '%s' not found in font database"
 msgstr "字型資料庫裡找不到 '%s' 字型系列的字型編碼"
 
-#: devPS.cpp:1766 devPS.cpp:1793
+#: devPS.cpp:1778 devPS.cpp:1805
 #, c-format
 msgid "font CMap for family '%s' not found in font database"
 msgstr "字型資料庫裡找不到用於 '%s' 字型系列的 CMap 這個字型"
 
-#: devPS.cpp:1987 devPS.cpp:2067 devPS.cpp:2134
+#: devPS.cpp:1999 devPS.cpp:2079 devPS.cpp:2146
 #, c-format
 msgid "cannot load afm file '%s'"
 msgstr "無法載入 afm 文字 '%s'"
 
-#: devPS.cpp:2421
+#: devPS.cpp:2433
 msgid "corrupt loaded encodings;  encoding not recorded"
 msgstr "載入的編碼損壞了 ; 沒有記錄編碼"
 
-#: devPS.cpp:2432
+#: devPS.cpp:2444
 msgid "failed to record device encoding"
 msgstr "無法記錄裝置編碼"
 
-#: devPS.cpp:2603
+#: devPS.cpp:2615
 msgid "object '.ps.prolog' is not a character vector"
 msgstr "物件 '.ps.prolog' 不是字元向量"
 
-#: devPS.cpp:2678 devPS.cpp:7546 devWindows.cpp:798
+#: devPS.cpp:2690 devPS.cpp:7558 devWindows.cpp:798
 msgid "invalid line end"
 msgstr "列尾發生錯誤"
 
-#: devPS.cpp:2697 devPS.cpp:7566 devWindows.cpp:811
+#: devPS.cpp:2709 devPS.cpp:7578 devWindows.cpp:811
 msgid "invalid line join"
 msgstr "行接連處發生錯誤"
 
-#: devPS.cpp:2705
+#: devPS.cpp:2717
 msgid "invalid line mitre"
 msgstr "行斜接發生錯誤"
 
-#: devPS.cpp:2910 devPS.cpp:3829 devPS.cpp:4277 devPS.cpp:4304 devPS.cpp:5347
-#: devPS.cpp:9095 devPS.cpp:9140
+#: devPS.cpp:2922 devPS.cpp:3841 devPS.cpp:4289 devPS.cpp:4316 devPS.cpp:5359
+#: devPS.cpp:9107 devPS.cpp:9152
 #, c-format
 msgid "attempt to use invalid font %d replaced by font 1"
 msgstr "不能用 %d 這個字型，代用一字型"
 
-#: devPS.cpp:3137 devPS.cpp:4802 devPS.cpp:6932 devWindows.cpp:1812
+#: devPS.cpp:3149 devPS.cpp:4814 devPS.cpp:6944 devWindows.cpp:1812
 #: devWindows.cpp:1849 devWindows.cpp:1879 devWindows.cpp:1911
 #, fuzzy, c-format
 msgid "filename too long in '%s' call"
 msgstr "%s()調用裡的文字名稱太長"
 
-#: devPS.cpp:3143 devPS.cpp:4808 devPS.cpp:6938
+#: devPS.cpp:3155 devPS.cpp:4820 devPS.cpp:6950
 #, fuzzy, c-format
 msgid "memory allocation problem in '%s' function"
 msgstr "%s()記憶體指派出了問題"
 
-#: devPS.cpp:3161 devPS.cpp:7002
+#: devPS.cpp:3173 devPS.cpp:7014
 #, fuzzy, c-format
 msgid "encoding path is too long in '%s' function"
 msgstr "%s() 裡的編碼路徑太長"
 
-#: devPS.cpp:3175 devPS.cpp:4848
+#: devPS.cpp:3187 devPS.cpp:4860
 #, fuzzy, c-format
 msgid "failed to load encoding file in '%s' function"
 msgstr "無法載入編碼文字 '%s'"
 
-#: devPS.cpp:3220 devPS.cpp:3283 devPS.cpp:7061 devPS.cpp:7117 devPS.cpp:8975
+#: devPS.cpp:3232 devPS.cpp:3295 devPS.cpp:7073 devPS.cpp:7129 devPS.cpp:8987
 msgid "invalid font type"
 msgstr "字型類別發生錯誤"
 
-#: devPS.cpp:3244
+#: devPS.cpp:3256
 msgid "failed to initialise default PostScript font"
 msgstr "無法初始化 PostScript 字型的預設值"
 
-#: devPS.cpp:3310
+#: devPS.cpp:3322
 msgid "failed to initialise additional PostScript fonts"
 msgstr "無法初始化外加的 PostScript 字型"
 
-#: devPS.cpp:3326
+#: devPS.cpp:3338
 msgid "invalid foreground/background color (postscript)"
 msgstr "前景/後景顏色不對(postscript)"
 
-#: devPS.cpp:3331
+#: devPS.cpp:3343
 msgid "'command' is too long"
 msgstr "'command' 太長"
 
-#: devPS.cpp:3336
+#: devPS.cpp:3348
 msgid "'postscript(print.it=TRUE)' used with an empty 'print' command"
 msgstr "'postscript(print.it=TRUE)' 不能用在空 'print' 命令裡"
 
-#: devPS.cpp:3387
+#: devPS.cpp:3399
 #, c-format
 msgid "invalid page type '%s' (postscript)"
 msgstr "頁類別 '%s'(postscript)無效"
 
-#: devPS.cpp:3509 devPS.cpp:4647 devWindows.cpp:2346
+#: devPS.cpp:3521 devPS.cpp:4659 devWindows.cpp:2346
 msgid ""
 "semi-transparency is not supported on this device: reported only once per "
 "page"
 msgstr "此裝置不支援半透明：每一頁將被報告一次"
 
-#: devPS.cpp:3620 devPS.cpp:3631
+#: devPS.cpp:3632 devPS.cpp:3643
 #, c-format
 msgid "cannot open 'postscript' pipe to '%s'"
 msgstr "無法開啟 'postscript' 管道至 '%s'"
 
-#: devPS.cpp:3642 devPS.cpp:5065 devPS.cpp:5078 devPS.cpp:8269 qdPDF.cpp:98
+#: devPS.cpp:3654 devPS.cpp:5077 devPS.cpp:5090 devPS.cpp:8281 qdPDF.cpp:98
 #, c-format
 msgid "cannot open file '%s'"
 msgstr "無法開啟 '%s' 檔案"
 
-#: devPS.cpp:3770 devPS.cpp:3785
+#: devPS.cpp:3782 devPS.cpp:3797
 #, c-format
 msgid ""
 "error from postscript() in running:\n"
@@ -368,176 +368,176 @@ msgstr ""
 "postscript()發生錯誤，是在執行這個命令時發生的:\n"
 "    %s"
 
-#: devPS.cpp:3817
+#: devPS.cpp:3829
 #, c-format
 msgid "CID family '%s' not included in postscript() device"
 msgstr "postscript()裝置裡沒有 CID 系列 '%s'"
 
-#: devPS.cpp:3835 devPS.cpp:3846 devPS.cpp:4284 devPS.cpp:4314 devPS.cpp:4419
+#: devPS.cpp:3847 devPS.cpp:3858 devPS.cpp:4296 devPS.cpp:4326 devPS.cpp:4431
 #, c-format
 msgid "family '%s' not included in postscript() device"
 msgstr " postscript()裝置裡沒有 '%s' 系列"
 
-#: devPS.cpp:4369
+#: devPS.cpp:4381
 #, fuzzy, c-format
 msgid "conversion failure on '%s' in '%s' function: dot substituted for <%02x>"
 msgstr "'mbcsToSbcs' 裡轉換 '%s' 發生錯誤：<%02x>代替了 dot"
 
-#: devPS.cpp:4377
+#: devPS.cpp:4389
 #, c-format
 msgid "conversion failure from %s to %s on '%s' in '%s' function"
 msgstr ""
 
-#: devPS.cpp:4447
+#: devPS.cpp:4459
 #, c-format
 msgid "failed open converter to encoding '%s'"
 msgstr "編碼 '%s' 時文字轉換器發生錯誤"
 
-#: devPS.cpp:4465 devPS.cpp:5392 devPS.cpp:9230
+#: devPS.cpp:4477 devPS.cpp:5404 devPS.cpp:9242
 #, c-format
 msgid "failed in text conversion to encoding '%s'"
 msgstr "文字轉換到編碼 '%s' 時發生錯誤"
 
-#: devPS.cpp:4661
+#: devPS.cpp:4673
 #, fuzzy
 msgid "ran out of colors in 'xfig()' function"
 msgstr "xfig() 裡的顏色不夠用"
 
-#: devPS.cpp:4690
+#: devPS.cpp:4702
 #, c-format
 msgid "unimplemented line texture %08x: using Dash-double-dotted"
 msgstr "沒有實作 %08x 這樣的字行結構: 用 Dash-double-dotted"
 
-#: devPS.cpp:4762
+#: devPS.cpp:4774
 #, c-format
 msgid "unknown postscript font family '%s', using Helvetica"
 msgstr "不存在 postscript 字型系列 '%s'，用 Helvetica"
 
-#: devPS.cpp:4833
+#: devPS.cpp:4845
 msgid "invalid foreground/background color (xfig)"
 msgstr "前景/後景顏色不對(xfig)"
 
-#: devPS.cpp:4866
+#: devPS.cpp:4878
 msgid "only Type 1 fonts supported for XFig"
 msgstr "XFig 只支援 Type 1 字型"
 
-#: devPS.cpp:4879
+#: devPS.cpp:4891
 msgid "failed to initialise default XFig font"
 msgstr "無法初始化 XFig 預設字型"
 
-#: devPS.cpp:4916
+#: devPS.cpp:4928
 #, c-format
 msgid "invalid page type '%s' (xfig)"
 msgstr "頁類別 '%s' 發生錯誤(xfig)"
 
-#: devPS.cpp:4924
+#: devPS.cpp:4936
 #, c-format
 msgid "xfig(%s, onefile=FALSE) will only return the last plot"
 msgstr "xfig(%s，onefile=FALSE)只會回傳最後的一張圖"
 
-#: devPS.cpp:5057
+#: devPS.cpp:5069
 msgid "empty file name"
 msgstr "空文字名稱"
 
-#: devPS.cpp:5124 devPS.cpp:5176 devPS.cpp:6756 devPS.cpp:6800 devPS.cpp:8330
+#: devPS.cpp:5136 devPS.cpp:5188 devPS.cpp:6768 devPS.cpp:6812 devPS.cpp:8342
 msgid "write failed"
 msgstr "讀寫失敗"
 
-#: devPS.cpp:5381
+#: devPS.cpp:5393
 #, c-format
 msgid "unable to use encoding '%s'"
 msgstr "不可使用編碼 '%s'"
 
-#: devPS.cpp:5706
+#: devPS.cpp:5718
 msgid "failed to increase definition string (shut down PDF device)"
 msgstr ""
 
-#: devPS.cpp:5749
+#: devPS.cpp:5761
 #, fuzzy
 msgid "failed to increase 'maxDefns'"
 msgstr "無法增加 'maxRaster'"
 
-#: devPS.cpp:6644 devPS.cpp:6647
+#: devPS.cpp:6656 devPS.cpp:6659
 msgid "failed to increase 'maxRaster'"
 msgstr "無法增加 'maxRaster'"
 
-#: devPS.cpp:6659
+#: devPS.cpp:6671
 msgid "unable to allocate raster image"
 msgstr "無法指派光柵圖像"
 
-#: devPS.cpp:6860
+#: devPS.cpp:6872
 msgid "corrupt loaded encodings;  font not added"
 msgstr "載入的編碼壞了 ; 字型沒有加入"
 
-#: devPS.cpp:6870
+#: devPS.cpp:6882
 msgid "failed to record device encoding; font not added"
 msgstr "無法記錄裝置編碼 ; 字型沒有加入"
 
-#: devPS.cpp:6988 devPS.cpp:7395 devPS.cpp:8120
+#: devPS.cpp:7000 devPS.cpp:7407 devPS.cpp:8132
 #, fuzzy, c-format
 msgid "increasing the PDF version to %s"
 msgstr "增加 PDF 版本到 1.2"
 
-#: devPS.cpp:7018
+#: devPS.cpp:7030
 msgid "failed to load default encoding"
 msgstr "無法載入預設編碼"
 
-#: devPS.cpp:7085
+#: devPS.cpp:7097
 msgid "failed to initialise default PDF font"
 msgstr "無法初始化 PDF 預設字型"
 
-#: devPS.cpp:7140
+#: devPS.cpp:7152
 msgid "failed to initialise additional PDF fonts"
 msgstr "無法初始化外加的 PDF 字型"
 
-#: devPS.cpp:7153
+#: devPS.cpp:7165
 msgid "failed to allocate rasters"
 msgstr "無法指派柵格"
 
-#: devPS.cpp:7160
+#: devPS.cpp:7172
 msgid "failed to allocate masks"
 msgstr "無法指派面具"
 
-#: devPS.cpp:7169
+#: devPS.cpp:7181
 #, fuzzy
 msgid "failed to allocate definitions"
 msgstr "無法指派字型列"
 
-#: devPS.cpp:7238
+#: devPS.cpp:7250
 #, c-format
 msgid "invalid paper type '%s' (pdf)"
 msgstr "紙張類別 '%s' 不對(pdf)"
 
-#: devPS.cpp:7262
+#: devPS.cpp:7274
 msgid "invalid foreground/background color (pdf)"
 msgstr "前景/後景顏色不對(pdf)"
 
-#: devPS.cpp:7370
+#: devPS.cpp:7382
 msgid "invalid 'alpha' value in PDF"
 msgstr "PDF 裡的 'alpha' 值無效"
 
-#: devPS.cpp:7439 devPS.cpp:7487
+#: devPS.cpp:7451 devPS.cpp:7499
 msgid "unknown 'colormodel', using 'srgb'"
 msgstr "不明的 'colormodel'，用 'srgb'"
 
-#: devPS.cpp:7732
+#: devPS.cpp:7744
 msgid "failed to load sRGB colorspace file"
 msgstr "無法載入 sRGB 色彩檔案"
 
-#: devPS.cpp:8039
+#: devPS.cpp:8051
 msgid "corrupt encodings in PDF device"
 msgstr "PDF 裝置裡的編碼壞了"
 
-#: devPS.cpp:8253
+#: devPS.cpp:8265
 #, c-format
 msgid "cannot open 'pdf' pipe to '%s'"
 msgstr "無法開啟通到 '%s' 的 'pdf' 管道"
 
-#: devPS.cpp:8259
+#: devPS.cpp:8271
 msgid "file = \"|cmd\" implies 'onefile = TRUE'"
 msgstr "file = \"|cmd\"意味着 'onefile = TRUE'"
 
-#: devPS.cpp:8403
+#: devPS.cpp:8415
 #, c-format
 msgid ""
 "cannot open 'pdf' file argument '%s'\n"
@@ -546,37 +546,37 @@ msgstr ""
 "無法開啟 'pdf' 文字引數 '%s'\n"
 "  請關閉 PDF 裝置"
 
-#: devPS.cpp:8423
+#: devPS.cpp:8435
 #, fuzzy, c-format
 msgid ""
 "cannot open temporary file '%s' for compression (reason: %s); compression "
 "has been turned off for this device"
 msgstr "無法開啟暫時檔案 '%s' 以供壓縮 (原因：%s)；這個裝置上已關閉壓縮"
 
-#: devPS.cpp:8615
+#: devPS.cpp:8627
 msgid "Raster image within mask ignored"
 msgstr ""
 
-#: devPS.cpp:9000 devPS.cpp:9362 devPS.cpp:9409
+#: devPS.cpp:9012 devPS.cpp:9374 devPS.cpp:9421
 msgid "failed to find or load PDF font"
 msgstr "沒有能夠找到或載入 PDF 字型"
 
-#: devPS.cpp:9184 devPS.cpp:9317
+#: devPS.cpp:9196 devPS.cpp:9329
 msgid "failed to find or load PDF CID font"
 msgstr "沒有能夠找到或載入 PDF CID 字型"
 
-#: devPS.cpp:9592 devPS.cpp:9596 devPS.cpp:9614 devPS.cpp:9757 devPS.cpp:9761
-#: devPS.cpp:9773
+#: devPS.cpp:9604 devPS.cpp:9608 devPS.cpp:9626 devPS.cpp:9769 devPS.cpp:9773
+#: devPS.cpp:9785
 #, fuzzy, c-format
 msgid "invalid '%s' parameter in '%s'"
 msgstr "%s 裡的 'fonts' 引數無效"
 
-#: devPS.cpp:9633 devPS.cpp:9700 devPS.cpp:9800
+#: devPS.cpp:9645 devPS.cpp:9712 devPS.cpp:9812
 #, fuzzy, c-format
 msgid "unable to start '%s' device"
 msgstr "無法啟動 %s()裝置"
 
-#: devPicTeX.cpp:770 devWindows.cpp:3766
+#: devPicTeX.cpp:778 devWindows.cpp:3766
 #, c-format
 msgid "unable to start %s() device"
 msgstr "無法啟動 %s()裝置"

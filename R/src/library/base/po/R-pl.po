@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R-core\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2020-08-14 18:57\n"
+"POT-Creation-Date: 2021-01-07 23:35\n"
 "PO-Revision-Date: \n"
 "Last-Translator: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
 "Language-Team: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
@@ -203,7 +203,6 @@ msgstr "wartość w argumencie '%s' jest znacznie za mała"
 msgid "'%s' argument is not a QR decomposition"
 msgstr "argument '%s' nie jest dekompozycją QR"
 
-#. R/all.equal.R: gettextf("'%s' argument is not a factor", "target")
 #. R/all.equal.R: gettextf("'%s' argument is not a factor", "current")
 #: R/all.equal.R:0
 msgid "'%s' argument is not a factor"
@@ -535,11 +534,6 @@ msgstr "funkcja '%s' nie jest określona dla obiektów klasy %s"
 msgid "'%s' is not a valid choice"
 msgstr "wartość '%s' nie jest poprawnym wyborem"
 
-#. R/namespace.R: gettextf("'%s' is not an exported object from 'namespace:%s'", name, getNamespaceName(ns))
-#: R/namespace.R:0
-msgid "'%s' is not an exported object from 'namespace:%s'"
-msgstr "'%s' nie jest eksportowanym obiektem z 'namespace:%s'"
-
 #. R/datetime.R: gettextf("'%s' operator is not defined for objects of class %s", .Generic, dQuote("POSIXt"))
 #. R/datetime.R: gettextf("'%s' operator is not defined for objects of class %s", .Generic, dQuote("POSIXt"))
 #. R/datetime.R: gettextf("'%s' operator is not defined for objects of class %s", .Generic, dQuote("POSIXt"))
@@ -855,6 +849,13 @@ msgid ""
 msgstr ""
 "argument 'mode' musi być \"double\" (\"real\"), \"integer\" lub \"character\""
 
+#. R/connections.R: if (missing(name)) "argument 'object' must deparse to a single character string" else "'name' must be a single character string"
+#: R/connections.R:0
+#, fuzzy
+msgid "'name' must be a single character string"
+msgstr ""
+"argument 'object' musi być konwertowalny do pojedynczego łańcucha tekstowego"
+
 #. R/diag.R: stop("'nrow' or 'ncol' cannot be specified when 'x' is a matrix")
 #: R/diag.R:0
 msgid "'nrow' or 'ncol' cannot be specified when 'x' is a matrix"
@@ -940,10 +941,11 @@ msgstr ""
 "funkcja 'solve.default()' zostało wywołane z obiektem klasy \"qr\": użyj "
 "funkcji 'qr.solve()'"
 
-#. R/dataframe.R: stop("'summary()' function is only defined on a data frame with all numeric variables")
+#. R/dataframe.R: stop("'summary()' function is only defined on a data frame with all numeric-alike variables")
 #: R/dataframe.R:0
+#, fuzzy
 msgid ""
-"'summary()' function is only defined on a data frame with all numeric "
+"'summary()' function is only defined on a data frame with all numeric-alike "
 "variables"
 msgstr ""
 "funkcja 'summary()' zdefiniowana jest jedynie na ramce danych ze wszystkimi "
@@ -986,6 +988,12 @@ msgstr ""
 #. R/datetime.R: warning("'tzone' attributes are inconsistent")
 #: R/datetime.R:0
 msgid "'tzone' attributes are inconsistent"
+msgstr "atrybuty 'tzone' są niespójne"
+
+#. R/all.equal.R: gettextf("'tzone' attributes are inconsistent ('%s' and '%s')", tzt, tzc)
+#: R/all.equal.R:0
+#, fuzzy
+msgid "'tzone' attributes are inconsistent ('%s' and '%s')"
 msgstr "atrybuty 'tzone' są niespójne"
 
 #. R/findInt.R: stop("'vec' argument must be sorted non-decreasingly and not contain NA values")
@@ -1851,7 +1859,13 @@ msgstr "argument zostanie częściowo powtórzony"
 msgid "an object with that name already exists"
 msgstr "obiekt o tej nazwie już istnieje"
 
-#. R/connections.R: stop("argument 'object' must deparse to a single character string")
+#. R/grep.R: gettextf("argument '%s' will be ignored", "perl = TRUE")
+#: R/grep.R:0
+#, fuzzy
+msgid "argument '%s' will be ignored"
+msgstr "argument 'drop' zostanie zignorowany"
+
+#. R/connections.R: if (missing(name)) "argument 'object' must deparse to a single character string" else "'name' must be a single character string"
 #: R/connections.R:0
 msgid "argument 'object' must deparse to a single character string"
 msgstr ""
@@ -2041,6 +2055,18 @@ msgstr ""
 msgid "cannot split the message connection"
 msgstr "nie można rozdzielić komunikatu wiadomości"
 
+#. R/sort.R: stop("cannot xtfrm 'x'")
+#: R/sort.R:0
+msgid "cannot xtfrm 'x'"
+msgstr ""
+
+#. R/dataframe.R: stop("cannot xtfrm data frames")
+#. R/dataframe.R: warning("cannot xtfrm data frames")
+#: R/dataframe.R:0
+#, fuzzy
+msgid "cannot xtfrm data frames"
+msgstr "argument 'x' nie jest ramką danych"
+
 #. R/dates.R: stop("character string is not in a standard unambiguous format")
 #. R/datetime.R: stop("character string is not in a standard unambiguous format")
 #: R/dates.R:0 R/datetime.R:0
@@ -2196,6 +2222,11 @@ msgstr "pusta nazwa w dyrektywie %s w pliku 'NAMESPACE'"
 #: R/source.R:0
 msgid "encoding = \"%s\" chosen"
 msgstr "wybrano 'encoding = \"%s\"'"
+
+#. R/all.equal.R: gettext("environments contain objects of the same names, but are not identical",     domain = "R-base")
+#: R/all.equal.R:0
+msgid "environments contain objects of the same names, but are not identical"
+msgstr ""
 
 #. R/qr.R: stop("exact singularity in 'qr.coef()' function")
 #: R/qr.R:0
@@ -2733,6 +2764,12 @@ msgstr "nazwy nie zgadzają się z poprzednimi nazwami"
 #: R/all.equal.R:0
 msgid "names for '%s' argument but not for '%s' argument"
 msgstr "nazwy dla argumentu '%s', ale nie dla argumentu '%s'"
+
+#. R/all.equal.R: gettext("names of environments differ:", domain = "R-base")
+#: R/all.equal.R:0
+#, fuzzy
+msgid "names of environments differ:"
+msgstr "liczba poziomów różni się"
 
 #. R/namespace.R: gettextf("namespace %s %s is already loaded, but %s %s is required", sQuote(package),     current, zop, zversion)
 #: R/namespace.R:0
@@ -3756,10 +3793,11 @@ msgstr[0] "biblioteka %s nie zawiera pakietów"
 msgstr[1] "biblioteki %s nie zawierają pakietów"
 msgstr[2] "biblioteki %s nie zawierają pakietów"
 
-#. R/dataframe.R: ngettext(sum(!mode.ok), "non-numeric variable in data frame: ", "non-numeric variables in data frame: ",     domain = "R-base")
+#. R/dataframe.R: ngettext(sum(!mode.ok), "non-numeric-alike variable in data frame: ", "non-numeric-alike variables in data frame: ",     domain = "R-base")
 #: R/dataframe.R:0
-msgid "non-numeric variable in data frame: "
-msgid_plural "non-numeric variables in data frame: "
+#, fuzzy
+msgid "non-numeric-alike variable in data frame: "
+msgid_plural "non-numeric-alike variables in data frame: "
 msgstr[0] "zmienna nieliczbowa w ramce danych:"
 msgstr[1] "zmienne nieliczbowe w ramce danych:"
 msgstr[2] "zmienne nieliczbowe w ramce danych:"
@@ -3911,6 +3949,9 @@ msgid_plural "variables %s are not all TRUE"
 msgstr[0] "zmienna %s nie ma wartości TRUE"
 msgstr[1] "nie wszystkie zmienne %s mają wartość TRUE"
 msgstr[2] "nie wszystkie zmienne %s mają wartość TRUE"
+
+#~ msgid "'%s' is not an exported object from 'namespace:%s'"
+#~ msgstr "'%s' nie jest eksportowanym obiektem z 'namespace:%s'"
 
 #~ msgid "bad handler specification"
 #~ msgstr "niepoprawne określenie obsługi"

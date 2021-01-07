@@ -1,0 +1,211 @@
+# Lithuanian translations for parallel package.
+# Copyright (C) 2020 THE parallel'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the parallel package.
+# <r.zakauskas@gmail.com;gabriele.dauksaite@gmail.com>, 2020.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: parallel 4.1.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2021-01-07 23:37+0100\n"
+"PO-Revision-Date: 2020-11-29 16:30+0200\n"
+"Last-Translator: <r.zakauskas@gmail.com;gabriele.dauksaite@gmail.com>\n"
+"Language-Team: Lithuanian\n"
+"Language: lt\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && (n"
+"%100<10 || n%100>=20) ? 1 : 2);\n"
+
+#: fork.cpp:202
+msgid "cannot close internal file descriptor"
+msgstr ""
+
+#: fork.cpp:217
+#, c-format
+msgid "unable to terminate child process: %s"
+msgstr "negalima nutraukti antrinio proceso: %s"
+
+#: fork.cpp:244
+#, c-format
+msgid "unable to terminate child: %s"
+msgstr "negalima nutraukti antrinio: %s"
+
+#: fork.cpp:274
+#, c-format
+msgid "WARNING: child %d was to be removed but it doesn't exist\n"
+msgstr ""
+
+#: fork.cpp:323 fork.cpp:603 ncpus.cpp:91 ncpus.cpp:127
+msgid "memory allocation error"
+msgstr "atminties paskirstymo klaida"
+
+#: fork.cpp:375 fork.cpp:379 fork.cpp:383
+#, c-format
+msgid "invalid '%s' argument"
+msgstr "neteisingas argumentas '%s'"
+
+#: fork.cpp:439
+msgid ""
+"Error while shutting down parallel: unable to terminate some child "
+"processes\n"
+msgstr ""
+"Klaida išjungiant lygiagrečiai: negali nutraukti kai kurių antrinių procesų\n"
+
+#: fork.cpp:471
+#, c-format
+msgid "child process %d got SIGUSR1; child_exit_status=%d\n"
+msgstr ""
+
+#: fork.cpp:527 fork.cpp:530
+msgid "unable to create a pipe"
+msgstr "negalima sukurti kanalo"
+
+#: fork.cpp:533
+#, c-format
+msgid "parent[%d] created pipes: comm (C%d->M%d), sir (M%d->C%d)\n"
+msgstr ""
+
+#: fork.cpp:552
+#, c-format
+msgid "unable to fork, possible reason: %s"
+msgstr "negalimas išsišakojimas, kurio priežastys yra %s"
+
+#: fork.cpp:560
+msgid "detected re-use of valid pipe ends\n"
+msgstr ""
+
+#: fork.cpp:596
+#, c-format
+msgid "child process %d started, master_fd=%d\n"
+msgstr ""
+
+#: fork.cpp:666
+msgid "descriptors must be integers"
+msgstr ""
+
+#: fork.cpp:687
+#, c-format
+msgid "process %d: error %s reading from fd %d\n"
+msgstr ""
+
+#: fork.cpp:715
+#, c-format
+msgid "process %d: error %s writing to fd %d\n"
+msgstr ""
+
+#: fork.cpp:726
+#, c-format
+msgid "process %d: write() returned 0 writing to fd %d\n"
+msgstr ""
+
+#: fork.cpp:744
+msgid "only children can send data to the master process"
+msgstr "tik antriniai procesai gali siųsti duomenis į pagrindinį procesą"
+
+#: fork.cpp:746
+msgid "there is no pipe to the master process"
+msgstr "nėra kanalo į pagrindinį procesą"
+
+#: fork.cpp:748
+msgid "content to send must be RAW, use serialize() if needed"
+msgstr "siunčiamas turinys turi būti RAW, naudokite serialize(), jei reikia"
+
+#: fork.cpp:757 fork.cpp:765 fork.cpp:1175
+msgid "write error, closing pipe to the master"
+msgstr "rašymo klaida, uždarymo kanalas į pagrindinį"
+
+#: fork.cpp:775
+msgid "only the master process can send data to a child process"
+msgstr "tik pagrindinis procesas gali siųsti duomenis į antrinį procesą"
+
+#: fork.cpp:776
+msgid "what must be a raw vector"
+msgstr ""
+
+#: fork.cpp:783
+#, c-format
+msgid "child %d does not exist"
+msgstr "toks antrinis %d neegzistuoja"
+
+#: fork.cpp:789
+msgid "write error"
+msgstr "rašymo klaida"
+
+#: fork.cpp:831 fork.cpp:844
+msgid "file descriptor is too large for select()"
+msgstr ""
+
+#: fork.cpp:875
+#, c-format
+msgid "cannot wait for child %d as it does not exist"
+msgstr "negali laukti antrinio %d, nes tokio nėra"
+
+#: fork.cpp:934 fork.cpp:1054
+#, c-format
+msgid "error '%s' in select"
+msgstr "klaida '%s' pasirinkus"
+
+#: fork.cpp:940
+#, c-format
+msgid " - read select %d children: \n"
+msgstr ""
+
+#: fork.cpp:967
+#, c-format
+msgid " read_child_ci(%d) - read length returned %lld\n"
+msgstr ""
+
+#: fork.cpp:980
+#, c-format
+msgid "read_child_ci(%d) - read %lld at %lld returned %lld\n"
+msgstr ""
+
+#: fork.cpp:1011
+#, c-format
+msgid "read_child(%d) - pid is not in the list of children\n"
+msgstr ""
+
+#: fork.cpp:1144
+msgid "'mckill' failed"
+msgstr "nepavyko 'mckill'"
+
+#: fork.cpp:1157
+msgid "'mcexit' can only be used in a child process"
+msgstr "'mcexit' gali būti naudojamas tik antriniuose procesuose"
+
+#: fork.cpp:1179
+#, c-format
+msgid "child %d is waiting for permission to exit\n"
+msgstr ""
+
+#: fork.cpp:1189
+#, fuzzy
+msgid "'mcexit()' function failed"
+msgstr "nepavyko 'mcexit'"
+
+#: fork.cpp:1218 fork.cpp:1227
+msgid "invalid CPU affinity specification"
+msgstr "neteisinga CPU atitikimo specifikacija"
+
+#: fork.cpp:1238
+msgid "requested CPU set is too large for this system"
+msgstr "reikalaujamas CPU rinkinys per didelis šiai sistemai"
+
+#: fork.cpp:1261
+msgid "retrieving CPU affinity set failed"
+msgstr "CPU atitikimo rinkinio nuskaitymo klaida"
+
+#: ncpus.cpp:94 ncpus.cpp:193
+#, c-format
+msgid "in reading processor information, probable cause: %d"
+msgstr ""
+
+#: ncpus.cpp:179
+msgid "GetLogicalProcessorInformation is not supported on this OS."
+msgstr ""
+
+#: ncpus.cpp:192
+msgid "allocation failure"
+msgstr ""

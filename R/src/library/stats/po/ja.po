@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.1.1\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-08-14 18:59+0200\n"
+"POT-Creation-Date: 2021-01-07 23:38+0100\n"
 "PO-Revision-Date: 2015-01-17 15:50+0100\n"
 "Last-Translator: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
 "Language-Team: RjpWiki Message Translation Team <mokada@md.tsukuba.ac.jp>\n"
@@ -137,44 +137,44 @@ msgstr " 'x' が空です "
 msgid "the standard deviation is zero"
 msgstr " 標準偏差が0です "
 
-#: deriv.cpp:152
+#: deriv.cpp:155
 msgid "invalid form in unary minus check"
 msgstr " 単項のマイナスの検査に不正な形式があります "
 
-#: deriv.cpp:436
+#: deriv.cpp:439
 msgid ""
 "only single-argument calls to log() are supported;\n"
 "  maybe use log(x,a) = log(x)/log(a)"
 msgstr ""
 
-#: deriv.cpp:675
+#: deriv.cpp:677
 #, c-format
 msgid "Function '%s' is not in the derivatives table"
 msgstr " 関数 '%s' は導関数の表中にありません "
 
-#: deriv.cpp:781
+#: deriv.cpp:783
 #, fuzzy, c-format
 msgid "'%s' argument must not be of type '%s'"
 msgstr " 'm' はリストでなければなりません "
 
-#: deriv.cpp:784
+#: deriv.cpp:786
 msgid "variable must be a character string"
 msgstr " 変数は文字列でなければいけません "
 
-#: deriv.cpp:786
+#: deriv.cpp:788
 msgid "only the first element is used as variable name"
 msgstr " 最初の要素だけが変数名として使われました "
 
-#: deriv.cpp:799
+#: deriv.cpp:801
 #, c-format
 msgid "invalid expression in '%s'"
 msgstr " \"%s\" 中の式が不正です "
 
-#: deriv.cpp:1077 model.cpp:89
+#: deriv.cpp:1079 model.cpp:95
 msgid "invalid variable names"
 msgstr " 変数名が不正です "
 
-#: deriv.cpp:1086
+#: deriv.cpp:1088
 msgid "invalid tag"
 msgstr " タグが不正です "
 
@@ -258,12 +258,12 @@ msgid ""
 "Try increasing the size of the workspace and possibly 'mult'"
 msgstr ""
 
-#: fexact.cpp:1035
+#: fexact.cpp:1037
 #, c-format
 msgid "Bug in fexact3, it[i=%d]=%d: negative key %d (kyy=%d)\n"
 msgstr ""
 
-#: fexact.cpp:1064
+#: fexact.cpp:1069
 #, c-format
 msgid ""
 "FEXACT error 30.  Stack length exceeded in f3xact,\n"
@@ -271,14 +271,14 @@ msgid ""
 "Increase workspace or consider using 'simulate.p.value=TRUE'"
 msgstr ""
 
-#: fexact.cpp:1397
+#: fexact.cpp:1402
 #, c-format
 msgid ""
 "FEXACT error 6 (f5xact).  LDKEY=%d is too small for this problem: kval=%d.\n"
 "Try increasing the size of the workspace."
 msgstr ""
 
-#: fexact.cpp:1409
+#: fexact.cpp:1414
 #, c-format
 msgid ""
 "FEXACT error 7(%s). LDSTP=%d is too small for this problem,\n"
@@ -286,7 +286,7 @@ msgid ""
 "Increase workspace or consider using 'simulate.p.value=TRUE'."
 msgstr ""
 
-#: fexact.cpp:1444
+#: fexact.cpp:1449
 #, c-format
 msgid ""
 "FEXACT error 7(%s). LDSTP=%d is too small for this problem,\n"
@@ -294,18 +294,18 @@ msgid ""
 "Increase workspace or consider using 'simulate.p.value=TRUE'"
 msgstr ""
 
-#: fexact.cpp:1793
+#: fexact.cpp:1798
 #, c-format
 msgid ""
 "FEXACT error %d.\n"
 "%s"
 msgstr ""
 
-#: fexact.cpp:1829
+#: fexact.cpp:1834
 msgid "Out of workspace."
 msgstr ""
 
-#: fexact.cpp:1908
+#: fexact.cpp:1913
 msgid "This should never occur, please report!"
 msgstr ""
 
@@ -455,9 +455,9 @@ msgstr ""
 msgid "'%s' argument is too small"
 msgstr " 範囲(span)が小さすぎます "
 
-#: loessc.cpp:366 loessc.cpp:367 optim.cpp:394 optimize.cpp:255
-#: optimize.cpp:262 optimize.cpp:271 optimize.cpp:345 optimize.cpp:350
-#: optimize.cpp:366 pacf.cpp:463
+#: loessc.cpp:366 loessc.cpp:367 optim.cpp:394 optimize.cpp:256
+#: optimize.cpp:263 optimize.cpp:272 optimize.cpp:346 optimize.cpp:351
+#: optimize.cpp:367 pacf.cpp:463
 #, c-format
 msgid "invalid '%s' value"
 msgstr " '%s' の値が不正です "
@@ -646,7 +646,7 @@ msgstr ""
 msgid "Singular matrix in '%s' function"
 msgstr " ldet 中の特異行列です "
 
-#: mAR.cpp:700 massdist.cpp:42 model.cpp:370 model.cpp:378 optim.cpp:221
+#: mAR.cpp:700 massdist.cpp:42 model.cpp:376 model.cpp:384 optim.cpp:221
 #, c-format
 msgid "invalid '%s' argument"
 msgstr " '%s' 引数が不正です "
@@ -655,144 +655,144 @@ msgstr " '%s' 引数が不正です "
 msgid "Burg's algorithm failed to find partial correlation"
 msgstr " Burg のアルゴリズムが偏相関を見つけ損ないました "
 
-#: model.cpp:87
+#: model.cpp:93
 msgid "invalid variables"
 msgstr " 変数が不正です "
 
-#: model.cpp:91 model.cpp:96
+#: model.cpp:97 model.cpp:102
 msgid "number of variables != number of variable names"
 msgstr " 変数の個数が変数名の個数と一致していません "
 
-#: model.cpp:94
+#: model.cpp:100
 msgid "invalid extra variables"
 msgstr " 追加変数が不正です "
 
-#: model.cpp:98
+#: model.cpp:104
 msgid "invalid extra variable names"
 msgstr " 追加変数名が不正です "
 
-#: model.cpp:119
+#: model.cpp:125
 #, c-format
 msgid "overlong names in '%s'"
 msgstr " '%s' の名前が長すぎます "
 
-#: model.cpp:146
+#: model.cpp:152
 #, c-format
 msgid "invalid type (%s) for variable '%s'"
 msgstr " 型 (%s) は変数 '%s' に対しては不正です "
 
-#: model.cpp:151
+#: model.cpp:157
 #, c-format
 msgid "variable lengths differ (found for '%s')"
 msgstr " 変数('%s'に基づく)の長さが異なります "
 
-#: model.cpp:208
+#: model.cpp:214
 msgid "invalid result from na.action"
 msgstr " na.action の結果が不正です "
 
-#: model.cpp:389
+#: model.cpp:395
 msgid "invalid model frame"
 msgstr " モデルフレームが不正です "
 
-#: model.cpp:391
+#: model.cpp:397
 msgid "do not know how many cases"
 msgstr " ケースの数が幾つあるか分かりません "
 
-#: model.cpp:415
+#: model.cpp:421
 #, c-format
 msgid "variable lengths differ (found for variable %d)"
 msgstr " 変数(%d変数に基づく)の長さが異なります "
 
-#: model.cpp:419 model.cpp:426
+#: model.cpp:425 model.cpp:432
 #, c-format
 msgid "variable %d has no levels"
 msgstr " 変数 %d は水準を持ちません "
 
-#: model.cpp:538
+#: model.cpp:543
 msgid "the response appeared on the right-hand side and was dropped"
 msgstr " 目的変数が右辺にあるため、捨て去られました "
 
-#: model.cpp:558
+#: model.cpp:563
 #, c-format
 msgid "term %d would require %.0g columns"
 msgstr " 項 %d は %.0g 行を必要とするかもしれません "
 
-#: model.cpp:562
+#: model.cpp:567
 #, c-format
 msgid "matrix would require %.0g columns"
 msgstr " 行列は %.0g 行を必要とするかもしれません "
 
-#: model.cpp:573
+#: model.cpp:578
 #, fuzzy, c-format
 msgid "problem with term %d in model.matrix(): no columns are assigned"
 msgstr ""
 " model.matrix 中の項 %d に問題があります：いかなる列も指定されていません "
 
-#: model.cpp:621 model.cpp:626 model.cpp:632 model.cpp:643 model.cpp:649
-#: model.cpp:655
+#: model.cpp:626 model.cpp:631 model.cpp:637 model.cpp:648 model.cpp:654
+#: model.cpp:660
 msgid "term names will be truncated"
 msgstr " 項の名前は切りつめらられるでしょう "
 
-#: model.cpp:635
+#: model.cpp:640
 msgid "complex variables are not currently allowed in model matrices"
 msgstr " モデル行列中では複素数は現在許されていません "
 
-#: model.cpp:659
+#: model.cpp:664
 #, c-format
 msgid "variables of type '%s' are not allowed in model matrices"
 msgstr " タイプ '%s' の変数はモデル行列中では許されません "
 
-#: model.cpp:883
+#: model.cpp:888
 msgid "invalid formula in 'update'"
 msgstr " 'update' 中の式が不正です "
 
-#: model.cpp:917
+#: model.cpp:922
 msgid "formula expected"
 msgstr " 式が期待されています "
 
-#: model.cpp:1085
+#: model.cpp:1090
 msgid "invalid term in model formula"
 msgstr " モデル式に不正な項があります "
 
-#: model.cpp:1176 model.cpp:1257
+#: model.cpp:1181 model.cpp:1262
 #, fuzzy, c-format
 msgid "invalid model formula in '%s' function"
 msgstr " EncodeVars 中のモデル式が不正です "
 
-#: model.cpp:1208 model.cpp:1514
+#: model.cpp:1213 model.cpp:1519
 msgid "invalid power in formula"
 msgstr " モデル式中に不正なべき乗があります "
 
-#: model.cpp:1625
+#: model.cpp:1630
 #, c-format
 msgid "duplicated name '%s' in data frame using '.'"
 msgstr " データフレーム中の重複した名前 '%s' を '.' を使って複製しました "
 
-#: model.cpp:1692
+#: model.cpp:1697
 #, fuzzy
 msgid "invalid model formula in EncodeVars"
 msgstr " ExtractVars 中のモデル式が不正です "
 
-#: model.cpp:1769
+#: model.cpp:1774
 msgid "argument is not a valid model"
 msgstr " 引数は有効なモデルではありません "
 
-#: model.cpp:1779
+#: model.cpp:1784
 msgid "'specials' must be NULL or a character vector"
 msgstr " 'specials' はNULLまたは文字ベクタでなくてはなりません "
 
-#: model.cpp:1790
+#: model.cpp:1795
 msgid "'data' argument is of the wrong type"
 msgstr " 'data' 引数が誤った型です "
 
-#: model.cpp:1862
+#: model.cpp:1867
 #, c-format
 msgid ""
 "'varlist' has changed (from nvar=%d) to new %d after EncodeVars() -- should "
 "no longer happen!"
 msgstr ""
 
-#: model.cpp:2146
+#: model.cpp:2151
 msgid "'.' in formula and no 'data' argument"
 msgstr " '.' が式中にありますが, 'data' 引数がありません "
 
@@ -814,22 +814,26 @@ msgstr " length(m) は少なくとも２でなければなりません "
 msgid "Argument Sx must be numeric vector one shorter than m[]"
 msgstr " 引数 Sx は長さが m[] より 1 だけ短い数値ベクトルでなければなりません "
 
-#: nls.cpp:97 nls.cpp:99 port.cpp:578
+#: nls.cpp:91 nls.cpp:93 port.cpp:578
 #, fuzzy, c-format
 msgid "'%s' argument must be a list"
 msgstr " 'm' はリストでなければなりません "
 
-#: nls.cpp:105 nls.cpp:110 nls.cpp:115 nls.cpp:120 nls.cpp:125 nls.cpp:166
-#: nls.cpp:171 nls.cpp:176 nls.cpp:181 nls.cpp:186 nls.cpp:191
+#: nls.cpp:100 nls.cpp:105 nls.cpp:110 nls.cpp:115 nls.cpp:120
 #, fuzzy, c-format
 msgid "'%s' is absent"
+msgstr " '%s' がありません "
+
+#: nls.cpp:128 nls.cpp:133 nls.cpp:138 nls.cpp:143 nls.cpp:148 nls.cpp:153
+#, fuzzy, c-format
+msgid "'%s' absent"
 msgstr " '%s' がありません "
 
 #: nls.cpp:231
 msgid "singular gradient"
 msgstr " 勾配が特異です "
 
-#: nls.cpp:252
+#: nls.cpp:253
 #, c-format
 msgid "step factor %g reduced below 'minFactor' of %g"
 msgstr " step 因子 %g は %g の 'minFactor' 以下に縮小しました "
@@ -839,38 +843,42 @@ msgstr " step 因子 %g は %g の 'minFactor' 以下に縮小しました "
 msgid "number of iterations exceeded maximum of %d"
 msgstr " 繰り返し数が最大値 %d を超えました "
 
-#: nls.cpp:266
+#: nls.cpp:265
 msgid "converged"
 msgstr " 収束しました "
 
-#: nls.cpp:286
+#: nls.cpp:281
 #, fuzzy, c-format
 msgid "'%s' argument should be of type character"
 msgstr " 'theta' は文字型でなければなりません "
 
-#: nls.cpp:288 port.cpp:400
+#: nls.cpp:283 port.cpp:400
 msgid "use of NULL environment is defunct"
 msgstr " NULL 環境の使用は廃止されました "
 
-#: nls.cpp:292
+#: nls.cpp:287
 #, fuzzy, c-format
 msgid "'%s' argument should be an environment"
 msgstr " 'rho' は環境(environment)でなければなりません "
 
-#: nls.cpp:295
+#: nls.cpp:293
 msgid "'dir' is not a numeric vector of the correct length"
 msgstr " 'dir' は正しい長さの数値ベクトルではありません "
 
-#: nls.cpp:309 nls.cpp:343
+#: nls.cpp:296
+msgid "'central' is NA, but must be TRUE or FALSE"
+msgstr ""
+
+#: nls.cpp:316
 msgid "Missing value or an infinity produced when evaluating the model"
 msgstr " モデルを評価する際，欠損値または無限大が生成されました "
 
-#: nls.cpp:317
+#: nls.cpp:329
 #, c-format
 msgid "variable '%s' is integer, not numeric"
 msgstr " 変数 '%s' は整数です、数値ではありません "
 
-#: nls.cpp:319
+#: nls.cpp:331
 #, c-format
 msgid "variable '%s' is not numeric"
 msgstr " 変数 '%s' は数値ではありません "
@@ -917,115 +925,115 @@ msgstr " 'maxit' が整数ではありません "
 msgid "'%s' argument is not a positive integer"
 msgstr " 'maxit' が整数ではありません "
 
-#: optimize.cpp:213 optimize.cpp:299 optimize.cpp:521
+#: optimize.cpp:214 optimize.cpp:300 optimize.cpp:522
 msgid "NA replaced by maximum positive value"
 msgstr " NA は正の最大値で置き換えられました "
 
-#: optimize.cpp:221 optimize.cpp:311 optimize.cpp:529
+#: optimize.cpp:222 optimize.cpp:312 optimize.cpp:530
 msgid "NA/Inf replaced by maximum positive value"
 msgstr " NA/Inf は正の最大値で置き換えられました "
 
-#: optimize.cpp:230 optimize.cpp:321
+#: optimize.cpp:231 optimize.cpp:322
 #, fuzzy, c-format
 msgid "invalid function value in '%s' function"
 msgstr " 'zeroin' における関数値が不正です "
 
-#: optimize.cpp:248 optimize.cpp:340 optimize.cpp:707
+#: optimize.cpp:249 optimize.cpp:341 optimize.cpp:708
 msgid "attempt to minimize non-function"
 msgstr " 関数でないものを最小化しようとしました "
 
-#: optimize.cpp:264 optimize.cpp:351
+#: optimize.cpp:265 optimize.cpp:352
 msgid "'xmin' not less than 'xmax'"
 msgstr " 'xmin' が 'xmax' より大きいか等しいです "
 
-#: optimize.cpp:308
+#: optimize.cpp:309
 msgid "-Inf replaced by maximally negative value"
 msgstr " -Inf は負の最大値で置き換えられました "
 
-#: optimize.cpp:356 optimize.cpp:361
+#: optimize.cpp:357 optimize.cpp:362
 #, fuzzy, c-format
 msgid "NA value for '%s' argument is not allowed"
 msgstr " '%s' に対してNAは認められません "
 
-#: optimize.cpp:371
+#: optimize.cpp:372
 #, fuzzy, c-format
 msgid "'%s' argument must be positive"
 msgstr " 'm' はリストでなければなりません "
 
-#: optimize.cpp:513
+#: optimize.cpp:514
 msgid "non-finite value supplied by 'nlm'"
 msgstr " 'nlm' により有限でない値が与えられました "
 
-#: optimize.cpp:548
+#: optimize.cpp:549
 msgid "invalid function value in 'nlm' optimizer"
 msgstr " 'nlm' 最適化における関数値が不正です "
 
-#: optimize.cpp:559 optimize.cpp:574
+#: optimize.cpp:560 optimize.cpp:575
 msgid "function value caching for optimization is seriously confused"
 msgstr " 最適化用にキャッシュされた関数値がひどく混乱しています "
 
-#: optimize.cpp:588
+#: optimize.cpp:589
 msgid "numeric parameter expected"
 msgstr " 数値パラメータが期待されています "
 
-#: optimize.cpp:592
+#: optimize.cpp:593
 msgid "conflicting parameter lengths"
 msgstr " パラメータの長さが矛盾しています "
 
-#: optimize.cpp:596
+#: optimize.cpp:597
 msgid "invalid parameter length"
 msgstr " パラメータの長さが不正です "
 
-#: optimize.cpp:606 optimize.cpp:613
+#: optimize.cpp:607 optimize.cpp:614
 msgid "missing value in parameter"
 msgstr " パラメータに欠損値があります "
 
-#: optimize.cpp:618
+#: optimize.cpp:619
 msgid "invalid parameter type"
 msgstr " パラメータのタイプが不正です "
 
-#: optimize.cpp:629
+#: optimize.cpp:630
 msgid "non-positive number of parameters in nlm"
 msgstr " nlm のパラメータが正の値ではありません "
 
-#: optimize.cpp:631
+#: optimize.cpp:632
 #, fuzzy
 msgid "'nlm()' function is inefficient for 1-d problems"
 msgstr " nlm は一次元問題には効率的ではありません "
 
-#: optimize.cpp:633
+#: optimize.cpp:634
 #, fuzzy
 msgid "invalid gradient tolerance in 'nlm()' function"
 msgstr " nlm における勾配の許容値が不正です "
 
-#: optimize.cpp:635
+#: optimize.cpp:636
 #, fuzzy
 msgid "invalid iteration limit in 'nlm()' function"
 msgstr " nlm の繰り返し回数の限界値が不正です "
 
-#: optimize.cpp:637
+#: optimize.cpp:638
 msgid "minimization function has no good digits in nlm"
 msgstr " nlm 中で最小化関数は十分な桁数をもちません "
 
-#: optimize.cpp:639
+#: optimize.cpp:640
 #, fuzzy
 msgid "no analytic gradient to check in 'nlm()' function"
 msgstr " nlm 中でチェックされる勾配の解析的な式がありません！ "
 
-#: optimize.cpp:641
+#: optimize.cpp:642
 #, fuzzy
 msgid "no analytic Hessian to check in 'nlm()' function"
 msgstr " nlm 中でチェックすべき解析的なヘッセ行列がありません "
 
-#: optimize.cpp:643
+#: optimize.cpp:644
 msgid "probable coding error in analytic gradient"
 msgstr " 解析的な勾配式中にコーディングの間違いの可能性 "
 
-#: optimize.cpp:645
+#: optimize.cpp:646
 msgid "probable coding error in analytic Hessian"
 msgstr " 解析的なヘッセ行列式中にコーディングの間違いの可能性があります "
 
-#: optimize.cpp:647
+#: optimize.cpp:648
 #, fuzzy, c-format
 msgid ""
 "*** unknown error message (msg = %d) in 'nlm()' function\n"
@@ -1034,24 +1042,24 @@ msgstr ""
 " *** nlm 関数から未知のエラーメッセージ (msg = %d)  \n"
 " *** これはあり得ないことです！ "
 
-#: optimize.cpp:658
+#: optimize.cpp:659
 msgid "Relative gradient close to zero.\n"
 msgstr " 相対勾配が0に近くなっています \n"
 
-#: optimize.cpp:659 optimize.cpp:663
+#: optimize.cpp:660 optimize.cpp:664
 msgid "Current iterate is probably solution.\n"
 msgstr " 現在の繰り返しでおそらく解が得られたでしょう \n"
 
-#: optimize.cpp:662
+#: optimize.cpp:663
 msgid "Successive iterates within tolerance.\n"
 msgstr " 連続した繰り返しが許容範囲内です \n"
 
-#: optimize.cpp:666
+#: optimize.cpp:667
 msgid "Last global step failed to locate a point lower than x.\n"
 msgstr ""
 " 最終の大局的ステップは x よりも小さな点を見つけることが出来ませんでした \n"
 
-#: optimize.cpp:667
+#: optimize.cpp:668
 #, fuzzy
 msgid ""
 "Either 'x' is an approximate local minimum of the function, the function is "
@@ -1061,12 +1069,12 @@ msgstr ""
 " 関数がこのアルゴリズムには非線形的すぎるか、 \n"
 " steptol が大きすぎます \n"
 
-#: optimize.cpp:670
+#: optimize.cpp:671
 #, fuzzy
 msgid "Iteration limit exceeded. Algorithm failed.\n"
 msgstr " 繰り返し数が上限を超えました．アルゴリズムは破綻しました \n"
 
-#: optimize.cpp:673
+#: optimize.cpp:674
 #, fuzzy
 msgid ""
 "Maximum step size exceeded 5 consecutive times. Either the function is "
@@ -1078,16 +1086,16 @@ msgstr ""
 " ある方向で上から漸近的に有限値に近づいているか、 \n"
 " または stepmx が小さすぎるか、です \n"
 
-#: optimize.cpp:731 optimize.cpp:736 optimize.cpp:740 optimize.cpp:744
-#: optimize.cpp:748 optimize.cpp:752 optimize.cpp:757
+#: optimize.cpp:732 optimize.cpp:737 optimize.cpp:741 optimize.cpp:745
+#: optimize.cpp:749 optimize.cpp:753 optimize.cpp:758
 msgid "invalid NA value in parameter"
 msgstr " パラメータ中に不正な NA 値があります "
 
-#: optimize.cpp:786
+#: optimize.cpp:787
 msgid "hessian supplied is of the wrong length or mode, so ignored"
 msgstr " 提供されたヘッセ行列は不正な長さかモードであったため無視されました "
 
-#: optimize.cpp:790
+#: optimize.cpp:791
 msgid "gradient supplied is of the wrong length or mode, so ignored"
 msgstr " 提供された勾配は不正な長さかモードであったので無視されました "
 
@@ -1249,7 +1257,7 @@ msgstr ""
 msgid "invalid end-rule for running median of 3: %d"
 msgstr " 3点移動中央値計算の終了ルールが不正です: %d "
 
-#: splines.cpp:371
+#: splines.cpp:369
 msgid "inputs of different lengths"
 msgstr ""
 

@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.16.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-07-23 12:00+0200\n"
+"POT-Creation-Date: 2021-01-07 23:37+0100\n"
 "PO-Revision-Date: \n"
 "Last-Translator: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
 "Language-Team: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
@@ -16,35 +16,35 @@ msgstr ""
 "X-Poedit-SourceCharset: iso-8859-1\n"
 "X-Generator: Poedit 2.0.6\n"
 
-#: fork.cpp:200
+#: fork.cpp:202
 msgid "cannot close internal file descriptor"
 msgstr ""
 
-#: fork.cpp:215
+#: fork.cpp:217
 #, c-format
 msgid "unable to terminate child process: %s"
 msgstr "nie można zakończyć potomnego procesu: %s"
 
-#: fork.cpp:242
+#: fork.cpp:244
 #, c-format
 msgid "unable to terminate child: %s"
 msgstr "nie można zakończyć potomnego procesu: %s"
 
-#: fork.cpp:272
+#: fork.cpp:274
 #, c-format
 msgid "WARNING: child %d was to be removed but it doesn't exist\n"
 msgstr "OSTRZEŻENIE: dziecko %d miało być usunięte, ale nie istnieje\n"
 
-#: fork.cpp:321 fork.cpp:601 ncpus.cpp:91 ncpus.cpp:127
+#: fork.cpp:323 fork.cpp:603 ncpus.cpp:91 ncpus.cpp:127
 msgid "memory allocation error"
 msgstr "błąd przydziału pamięci"
 
-#: fork.cpp:373 fork.cpp:377 fork.cpp:381
+#: fork.cpp:375 fork.cpp:379 fork.cpp:383
 #, c-format
 msgid "invalid '%s' argument"
 msgstr "niepoprawny argument '%s'"
 
-#: fork.cpp:437
+#: fork.cpp:439
 msgid ""
 "Error while shutting down parallel: unable to terminate some child "
 "processes\n"
@@ -52,147 +52,147 @@ msgstr ""
 "Błąd podczas wyłączania równoległych procesów: nie można zakończyć "
 "niektórych procesów potomnych\n"
 
-#: fork.cpp:469
+#: fork.cpp:471
 #, c-format
 msgid "child process %d got SIGUSR1; child_exit_status=%d\n"
 msgstr "proces potomny %d otrzymał SIGUSR1; child_exit_status=%d\n"
 
-#: fork.cpp:525 fork.cpp:528
+#: fork.cpp:527 fork.cpp:530
 msgid "unable to create a pipe"
 msgstr "nie można utworzyć potoku"
 
-#: fork.cpp:531
+#: fork.cpp:533
 #, fuzzy, c-format
 msgid "parent[%d] created pipes: comm (C%d->M%d), sir (M%d->C%d)\n"
 msgstr "parent[%d] utworzył kanały: comm (%d->%d), sir (%d->%d)\n"
 
-#: fork.cpp:550
+#: fork.cpp:552
 #, c-format
 msgid "unable to fork, possible reason: %s"
 msgstr "nie można rozdzielić, prawdopodobny powód: %s"
 
-#: fork.cpp:558
+#: fork.cpp:560
 msgid "detected re-use of valid pipe ends\n"
 msgstr ""
 
-#: fork.cpp:594
+#: fork.cpp:596
 #, fuzzy, c-format
 msgid "child process %d started, master_fd=%d\n"
 msgstr "proces potomny %d rozpoczął się\n"
 
-#: fork.cpp:664
+#: fork.cpp:666
 msgid "descriptors must be integers"
 msgstr "deskryptory muszą być liczbami całkowitymi"
 
-#: fork.cpp:685
+#: fork.cpp:687
 #, c-format
 msgid "process %d: error %s reading from fd %d\n"
 msgstr ""
 
-#: fork.cpp:713
+#: fork.cpp:715
 #, c-format
 msgid "process %d: error %s writing to fd %d\n"
 msgstr ""
 
-#: fork.cpp:724
+#: fork.cpp:726
 #, c-format
 msgid "process %d: write() returned 0 writing to fd %d\n"
 msgstr ""
 
-#: fork.cpp:742
+#: fork.cpp:744
 msgid "only children can send data to the master process"
 msgstr "tylko potomne procesy mogą przesłać dane do procesu głównego"
 
-#: fork.cpp:744
+#: fork.cpp:746
 msgid "there is no pipe to the master process"
 msgstr "nie ma potoku do procesu głównego"
 
-#: fork.cpp:746
+#: fork.cpp:748
 msgid "content to send must be RAW, use serialize() if needed"
 msgstr ""
 "zawartość do wysłania musi być PUSTA, użyj 'serialize()' jeśli konieczne"
 
-#: fork.cpp:755 fork.cpp:763 fork.cpp:1173
+#: fork.cpp:757 fork.cpp:765 fork.cpp:1175
 msgid "write error, closing pipe to the master"
 msgstr "błąd zapisu, zamykanie potoku do procesu głównego"
 
-#: fork.cpp:773
+#: fork.cpp:775
 msgid "only the master process can send data to a child process"
 msgstr "tylko główny proces może przesłać dane do potomnego procesu"
 
-#: fork.cpp:774
+#: fork.cpp:776
 msgid "what must be a raw vector"
 msgstr "'what' musi być pustym wektorem"
 
-#: fork.cpp:781
+#: fork.cpp:783
 #, c-format
 msgid "child %d does not exist"
 msgstr "potomny proces %d nie istnieje"
 
-#: fork.cpp:787
+#: fork.cpp:789
 msgid "write error"
 msgstr "błąd zapisu"
 
-#: fork.cpp:829 fork.cpp:842
+#: fork.cpp:831 fork.cpp:844
 msgid "file descriptor is too large for select()"
 msgstr "opis pliku jest zbyt duży dla funkcji 'select()'"
 
-#: fork.cpp:873
+#: fork.cpp:875
 #, c-format
 msgid "cannot wait for child %d as it does not exist"
 msgstr "nie można czekać na potomny proces %d ponieważ on nie istnieje"
 
-#: fork.cpp:932 fork.cpp:1052
+#: fork.cpp:934 fork.cpp:1054
 #, c-format
 msgid "error '%s' in select"
 msgstr "błąd '%s' przy wyborze"
 
-#: fork.cpp:938
+#: fork.cpp:940
 #, fuzzy, c-format
 msgid " - read select %d children: \n"
 msgstr " - przeczytaj wybrane %d dzieci: "
 
-#: fork.cpp:965
+#: fork.cpp:967
 #, c-format
 msgid " read_child_ci(%d) - read length returned %lld\n"
 msgstr " read_child_ci(%d) - przeczytana długość zwróciła %lld\n"
 
-#: fork.cpp:978
+#: fork.cpp:980
 #, c-format
 msgid "read_child_ci(%d) - read %lld at %lld returned %lld\n"
 msgstr " read_child_ci(%d) - przeczytane %lld w %lld zwróciło %lld\n"
 
-#: fork.cpp:1009
+#: fork.cpp:1011
 #, c-format
 msgid "read_child(%d) - pid is not in the list of children\n"
 msgstr "read_child(%d) - pid nie jest na liście dzieci\n"
 
-#: fork.cpp:1142
+#: fork.cpp:1144
 msgid "'mckill' failed"
 msgstr "'mckill' nie powiodło się"
 
-#: fork.cpp:1155
+#: fork.cpp:1157
 msgid "'mcexit' can only be used in a child process"
 msgstr "'mcexit' może być użyty jedynie w potomnym procesie"
 
-#: fork.cpp:1177
+#: fork.cpp:1179
 #, c-format
 msgid "child %d is waiting for permission to exit\n"
 msgstr "dziecko %d oczekuje na pozwolenie by wyjść\n"
 
-#: fork.cpp:1187
+#: fork.cpp:1189
 msgid "'mcexit()' function failed"
 msgstr "funkcja 'mcexit()' nie powiodła się"
 
-#: fork.cpp:1216 fork.cpp:1225
+#: fork.cpp:1218 fork.cpp:1227
 msgid "invalid CPU affinity specification"
 msgstr "niepoprawne określenie koligacji CPU"
 
-#: fork.cpp:1236
+#: fork.cpp:1238
 msgid "requested CPU set is too large for this system"
 msgstr "zażądane ustawienie CPU jest zbyt duże dla tego systemu"
 
-#: fork.cpp:1259
+#: fork.cpp:1261
 msgid "retrieving CPU affinity set failed"
 msgstr "pozyskiwanie ustawienia koligacji CPU nie powiodło się"
 

@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: grDevices 4.1.0\n"
-"POT-Creation-Date: 2020-07-23 12:02\n"
+"POT-Creation-Date: 2021-01-07 23:37\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -443,6 +443,20 @@ msgstr ""
 #. R/unix/x11.R: warning("cairo-based types are not supported on this build - using \"Xlib\"")
 
 msgid "cairo-based types are not supported on this build - using \"Xlib\""
+msgstr ""
+
+
+#: R/cairo.R: 0
+#. R/cairo.R: stop("cairo_pdf: Cairo-based devices are not available for this platform")
+
+msgid "cairo_pdf: Cairo-based devices are not available for this platform"
+msgstr ""
+
+
+#: R/cairo.R: 0
+#. R/cairo.R: stop("cairo_ps: Cairo-based devices are not available for this platform")
+
+msgid "cairo_ps: Cairo-based devices are not available for this platform"
 msgstr ""
 
 
@@ -949,6 +963,40 @@ msgstr ""
 #. R/windows/windows.R: stop("subscript is out of range")
 
 msgid "subscript is out of range"
+msgstr ""
+
+
+#: R/cairo.R: 0
+#. R/cairo.R: stop("svg: Cairo-based devices are not available for this platform")
+
+msgid "svg: Cairo-based devices are not available for this platform"
+msgstr ""
+
+
+#: R/unix/png.R: 0
+#. R/unix/png.R: warning("type = \"cairo\" is unavailable. trying \"Xlib\"")
+#. R/unix/png.R: warning("type = \"cairo\" is unavailable. trying \"Xlib\"")
+#. R/unix/png.R: warning("type = \"cairo\" is unavailable. trying \"Xlib\"")
+#. R/unix/png.R: warning("type = \"cairo\" is unavailable. trying \"Xlib\"")
+
+msgid "type = \"cairo\" is unavailable. trying \"Xlib\""
+msgstr ""
+
+
+#: R/unix/png.R: 0
+#. R/unix/png.R: warning("type = \"cairo-png\" is unavailable. trying \"Xlib\"")
+
+msgid "type = \"cairo-png\" is unavailable. trying \"Xlib\""
+msgstr ""
+
+
+#: R/unix/png.R: 0
+#. R/unix/png.R: warning("type = \"quartz\" is unavailable. trying \"Xlib\"")
+#. R/unix/png.R: warning("type = \"quartz\" is unavailable. trying \"Xlib\"")
+#. R/unix/png.R: warning("type = \"quartz\" is unavailable. trying \"Xlib\"")
+#. R/unix/png.R: warning("type = \"quartz\" is unavailable. trying \"Xlib\"")
+
+msgid "type = \"quartz\" is unavailable. trying \"Xlib\""
 msgstr ""
 
 

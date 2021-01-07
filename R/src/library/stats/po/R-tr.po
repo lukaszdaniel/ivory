@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.13.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2020-08-14 18:58\n"
+"POT-Creation-Date: 2021-01-07 23:38\n"
 "PO-Revision-Date: 2011-04-02 \n"
 "Last-Translator: Murat Alkan <muratalk@gmail.com>\n"
 "Language-Team: Turkish <muratalk@gmail.com>\n"
@@ -674,6 +674,13 @@ msgstr "'cutpoints' 0 < cuts < 1 içinde eşsiz olmalı, ancak ="
 msgid "'cv' argument must not be NA when 'df' argument is specified"
 msgstr "'df' seçildiğinde 'cv' NA olmamalı"
 
+#. R/models.R: stop("'data' must be a data.frame, environment, or list")
+#. R/models.R: stop("'data' must be a data.frame, environment, or list")
+#: R/models.R:0
+#, fuzzy
+msgid "'data' must be a data.frame, environment, or list"
+msgstr "'data' bir liste veya bir çevrebirim olmalı"
+
 #. R/models.R: stop("'data' must be a data.frame, not a matrix or an array")
 #. R/models.R: stop("'data' must be a data.frame, not a matrix or an array")
 #: R/models.R:0
@@ -785,6 +792,11 @@ msgstr "'height' en az bileşenlerinin maksimum yüksekliği olan %g olmalı"
 #, fuzzy
 msgid "'hybrid' argument is ignored for a 2 x 2 table"
 msgstr "bir 2 x 2 tablo için 'hybrid' görmezden gelindi"
+
+#. R/reshape.R: stop("'idvar' must uniquely identify records")
+#: R/reshape.R:0
+msgid "'idvar' must uniquely identify records"
+msgstr ""
 
 #. R/identify.hclust.R: stop("'k' and 'h' arguments must be a scalar")
 #: R/identify.hclust.R:0
@@ -1526,6 +1538,12 @@ msgstr ""
 #: R/wilcox.test.R:0
 msgid "(pseudo)median"
 msgstr ""
+
+#. R/quantile.R: stop("(unordered) factors are not allowed")
+#: R/quantile.R:0
+#, fuzzy
+msgid "(unordered) factors are not allowed"
+msgstr "faktörlere izin verilmiyor"
 
 #. R/models.R: gettext("(weights)", domain = "R-stats")
 #: R/models.R:0
@@ -4043,11 +4061,6 @@ msgstr "faktör analizi en az 3 değişken gerektirir"
 msgid "factor levels have been ordered"
 msgstr ""
 
-#. R/quantile.R: stop("factors are not allowed")
-#: R/quantile.R:0
-msgid "factors are not allowed"
-msgstr "faktörlere izin verilmiyor"
-
 #. R/reshape.R: stop("failed to guess time-varying variables from their names")
 #: R/reshape.R:0
 msgid "failed to guess time-varying variables from their names"
@@ -4270,6 +4283,11 @@ msgstr ""
 #: R/power.R:0 R/power.anova.test.R:0
 msgid "internal error"
 msgstr "iç hata"
+
+#. R/nls.R: stop("invalid  'attr(rhs, \"gradient\")'")
+#: R/nls.R:0
+msgid "invalid  'attr(rhs, \"gradient\")'"
+msgstr ""
 
 #. R/arima.R: gettextf("invalid '%s' argument", "SSinit")
 #. R/chisq.test.R: gettextf("invalid '%s' argument", "x")

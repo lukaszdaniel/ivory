@@ -1,0 +1,844 @@
+# Lithuanian translations for grDevices package.
+# Copyright (C) 2020 THE grDevices'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the grDevices package.
+# <r.zakauskas@gmail.com;gabriele.dauksaite@gmail.com>, 2020.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: grDevices 4.1.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2021-01-07 23:37+0100\n"
+"PO-Revision-Date: 2020-12-09 13:16+0200\n"
+"Last-Translator: r.zakauskas@gmail.com;gabriele.dauksaite@gmail.com\n"
+"Language-Team: Lithuanian\n"
+"Language: lt\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && (n"
+"%100<10 || n%100>=20) ? 1 : 2);\n"
+"X-Generator: Poedit 2.4.1\n"
+
+#: axis_scales.cpp:38 axis_scales.cpp:39 axis_scales.cpp:57
+#, c-format
+msgid "'%s' must be numeric of length %d"
+msgstr "'%s' turi būti skaitinė ilgio %d reikšmė"
+
+#: colors.cpp:70
+#, fuzzy, c-format
+msgid "color intensity '%s' is not in [0,1]"
+msgstr "spalvos intensyvumas %s ne iš intervalo [0,1]"
+
+#: colors.cpp:72
+#, c-format
+msgid "color intensity %g, not in [0,1]"
+msgstr "spalvos intensyvumas %g ne iš intervalo [0,1]"
+
+#: colors.cpp:79
+#, fuzzy, c-format
+msgid "color intensity '%s' is not in 0:255"
+msgstr "spalvos intensyvumas %s ne iš intervalo 0:255"
+
+#: colors.cpp:81
+#, c-format
+msgid "color intensity %d, not in 0:255"
+msgstr "spalvos intensyvumas %d ne iš intervalo 0:255"
+
+#: colors.cpp:88
+#, fuzzy, c-format
+msgid "alpha level '%s' is not in [0,1]"
+msgstr "alfa lygis %s ne iš intervalo [0,1]"
+
+#: colors.cpp:90
+#, c-format
+msgid "alpha level %g, not in [0,1]"
+msgstr "alfa lygis %g ne iš intervalo [0,1]"
+
+#: colors.cpp:97
+#, fuzzy, c-format
+msgid "alpha level '%s' is not in 0:255"
+msgstr "alfa lygis %s ne iš intervalo 0:255"
+
+#: colors.cpp:99
+#, c-format
+msgid "alpha level %d, not in 0:255"
+msgstr "alfa lygis %d ne iš intervalo 0:255"
+
+#: colors.cpp:114
+msgid "inputs must be finite"
+msgstr "įvestys turi būti baigtinės"
+
+#: colors.cpp:129
+msgid "bad hsv to rgb color conversion"
+msgstr "netinkamas spalvų keitimas iš hsv į rgb"
+
+#: colors.cpp:221 colors.cpp:235
+msgid "invalid hsv color"
+msgstr "netinkama hsv spalva"
+
+#: colors.cpp:347 colors.cpp:367
+msgid "invalid hcl color"
+msgstr "netinkamas hcl spalva"
+
+#: colors.cpp:399
+msgid "invalid value of 'maxColorValue'"
+msgstr "neteisinga 'maxColorValue' reikšmė"
+
+#: colors.cpp:427
+msgid "invalid 'names' vector"
+msgstr "neteisingas 'names' vektorius"
+
+#: colors.cpp:486 colors.cpp:495
+msgid "invalid gray level, must be in [0,1]."
+msgstr "netinkamas pilkumo lygis, turi būti iš intervalo [0,1]."
+
+#: colors.cpp:551 devPS.cpp:9632 devPS.cpp:9795 devPS.cpp:9798
+#: devWindows.cpp:3676 devWindows.cpp:3680 devWindows.cpp:3688
+#: devWindows.cpp:3699 devWindows.cpp:3705 devWindows.cpp:3712
+#: devWindows.cpp:3719 devWindows.cpp:3723
+#, c-format
+msgid "invalid '%s' value"
+msgstr "neteisinga '%s' reikšmė"
+
+#: colors.cpp:1337
+msgid "invalid hex digit in 'color' or 'lty'"
+msgstr "neteisingas šešioliktainis skaitmuo 'color' ar 'lty'"
+
+#: colors.cpp:1347 colors.cpp:1357
+msgid "invalid RGB specification"
+msgstr "neteisinga RGB specifikacija"
+
+#: colors.cpp:1390
+#, c-format
+msgid "invalid color name '%s'"
+msgstr "neteisingas spalvos vardas '%s'"
+
+#: colors.cpp:1440 colors.cpp:1449
+#, c-format
+msgid "invalid color specification \"%s\""
+msgstr "neteisinga spalvos specifikacija \"%s\""
+
+#: colors.cpp:1477
+msgid "supplied color is neither numeric nor character"
+msgstr "pateikta spalva nėra nei skaitinė, nei simbolinė"
+
+#: colors.cpp:1481
+#, c-format
+msgid "numerical color values must be >= 0, found %d"
+msgstr "spalvos skaitinė reikšmė turi būti > = 0, rasta %d"
+
+#: colors.cpp:1492
+msgid "invalid argument type"
+msgstr "neteisingas argumento tipas"
+
+#: colors.cpp:1503
+msgid "unknown palette (need >= 2 colors)"
+msgstr "nežinoma paletė (reikia >= 2 spalvų)"
+
+#: colors.cpp:1507 colors.cpp:1529
+#, c-format
+msgid "maximum number of colors is %d"
+msgstr "didžiausias spalvų skaičius yra %d"
+
+#: devCairo.cpp:53 devCairo.cpp:64
+#, fuzzy
+msgid "failed to load cairo DLL"
+msgstr "nepavyko paskirti rastrų"
+
+#: devPS.cpp:569
+#, c-format
+msgid "afm file '%s' could not be opened"
+msgstr "afm failas '%s' negali būti atvertas"
+
+#: devPS.cpp:599
+#, fuzzy
+msgid "'FontBBox' could not be parsed"
+msgstr "afm failas '%s' negali būti atvertas"
+
+#: devPS.cpp:607
+#, fuzzy
+msgid "'CharInfo' could not be parsed"
+msgstr "afm failas '%s' negali būti atvertas"
+
+#: devPS.cpp:637
+msgid "unknown AFM entity encountered"
+msgstr "nežinoma AFM objekto klaida"
+
+#: devPS.cpp:752 devPS.cpp:755 devPS.cpp:4491 devPS.cpp:9257 devPicTeX.cpp:480
+#: devPicTeX.cpp:482
+#, fuzzy, c-format
+msgid "invalid string in '%s' function"
+msgstr "neteisinga eilutė, esanti '%s'"
+
+#: devPS.cpp:786
+#, c-format
+msgid "font width unknown for character 0x%x"
+msgstr "nežinomas šrifto plotis ženklui 0x%x"
+
+#: devPS.cpp:843 devPS.cpp:4371
+#, fuzzy, c-format
+msgid "unknown encoding '%s' in '%s' function"
+msgstr "nežinoma koduotė '%s', esanti 'mbcsToSbcs'"
+
+#: devPS.cpp:859 devPS.cpp:870
+#, c-format
+msgid "font metrics unknown for Unicode character U+%04x"
+msgstr "nežinoma šrifto metrika unikodo ženklui U+%04x"
+
+#: devPS.cpp:878
+#, c-format
+msgid "font metrics unknown for character 0x%x"
+msgstr "nežinoma šrifto metrika ženklui 0x%x"
+
+#: devPS.cpp:891
+#, fuzzy, c-format
+msgid ""
+"invalid character (%04x) sent to 'PostScriptCIDMetricInfo()' function in a "
+"single-byte locale"
+msgstr ""
+"neteisingas ženklas (%04x) perduotas į 'PostScriptCIDMetricInfo' vienbaitėje "
+"koduotės lokalėje"
+
+#: devPS.cpp:899
+#, fuzzy
+msgid ""
+"invalid character sent to 'PostScriptCIDMetricInfo()' in a single-byte locale"
+msgstr ""
+"neteisingas ženklas perduotas į 'PostScriptCIDMetricInfo' vienbaitėje "
+"koduotės lokalėje"
+
+#: devPS.cpp:1019
+msgid "failed to allocate CID font info"
+msgstr "nepavyko paskirti CID šriftų informacijos"
+
+#: devPS.cpp:1035
+msgid "failed to allocate Type 1 font info"
+msgstr "nepavyko paskirti Tipas 1 šriftų informacijos"
+
+#: devPS.cpp:1055
+msgid "failed to allocate encoding info"
+msgstr "nepavyko paskirti koduotės informacijos"
+
+#: devPS.cpp:1074
+msgid "failed to allocate CID font family"
+msgstr "nepavyko paskirti CID šriftų šeimos"
+
+#: devPS.cpp:1088
+msgid "failed to allocate Type 1 font family"
+msgstr "nepavyko paskirti Tipas 1 šriftų šeimos"
+
+#: devPS.cpp:1125 devPS.cpp:1136
+msgid "failed to allocate font list"
+msgstr "nepavyko paskirti šriftų sąrašo"
+
+#: devPS.cpp:1194
+msgid "failed to allocated encoding list"
+msgstr "nepavyko paskirti koduočių sąrašo"
+
+#: devPS.cpp:1343
+msgid "truncated string which was too long for copy"
+msgstr "eilutė, kuri buvo per ilga kopijuoti, yra sutrumpinta"
+
+#: devPS.cpp:1383
+#, c-format
+msgid "failed to load encoding file '%s'"
+msgstr "nepavyko įkelti koduotės failo '%s'"
+
+#: devPS.cpp:1481 devPS.cpp:1514
+msgid "invalid font name or more than one font name"
+msgstr "neteisingas vienas ar keli šrifto vardai"
+
+#: devPS.cpp:1633 devPS.cpp:1667
+#, c-format
+msgid "font family '%s' not found in PostScript font database"
+msgstr "šrifto šeimos '%s' nepavyko rasti PostScript šriftų duomenų bazėje"
+
+#: devPS.cpp:1751 devPS.cpp:1832 devPS.cpp:1859
+#, c-format
+msgid "font encoding for family '%s' not found in font database"
+msgstr "šriftų duomenų bazėje nepavyko rasti šrifto koduotės šeimai '%s'"
+
+#: devPS.cpp:1778 devPS.cpp:1805
+#, c-format
+msgid "font CMap for family '%s' not found in font database"
+msgstr "šriftų duomenų bazėje nepavyko rasti šrifto CMap šeimai '%s'"
+
+#: devPS.cpp:1999 devPS.cpp:2079 devPS.cpp:2146
+#, c-format
+msgid "cannot load afm file '%s'"
+msgstr "nepavyksta įkelti afm failo '%s'"
+
+#: devPS.cpp:2433
+msgid "corrupt loaded encodings;  encoding not recorded"
+msgstr "sugadinta įkeliama koduotė;  koduotė neįrašyta"
+
+#: devPS.cpp:2444
+msgid "failed to record device encoding"
+msgstr "nepavyko įrašyti įrenginio koduotės"
+
+#: devPS.cpp:2615
+msgid "object '.ps.prolog' is not a character vector"
+msgstr "objektas '.ps.prolog' nėra ženklo vektorius"
+
+#: devPS.cpp:2690 devPS.cpp:7558 devWindows.cpp:798
+msgid "invalid line end"
+msgstr "neteisinga eilutės pabaiga"
+
+#: devPS.cpp:2709 devPS.cpp:7578 devWindows.cpp:811
+msgid "invalid line join"
+msgstr "neteisingas eilutės sujungimas"
+
+#: devPS.cpp:2717
+msgid "invalid line mitre"
+msgstr "neteisingas linijos jungimas 45° nuožambiu kampu"
+
+#: devPS.cpp:2922 devPS.cpp:3841 devPS.cpp:4289 devPS.cpp:4316 devPS.cpp:5359
+#: devPS.cpp:9107 devPS.cpp:9152
+#, c-format
+msgid "attempt to use invalid font %d replaced by font 1"
+msgstr "bandymas naudoti negaliojantį šriftą %d pakeistas šriftu 1"
+
+#: devPS.cpp:3149 devPS.cpp:4814 devPS.cpp:6944 devWindows.cpp:1812
+#: devWindows.cpp:1849 devWindows.cpp:1879 devWindows.cpp:1911
+#, fuzzy, c-format
+msgid "filename too long in '%s' call"
+msgstr "failo vardas yra per ilgas %s() kreipinyje"
+
+#: devPS.cpp:3155 devPS.cpp:4820 devPS.cpp:6950
+#, fuzzy, c-format
+msgid "memory allocation problem in '%s' function"
+msgstr "atminties paskirstymo problema, esanti %s()"
+
+#: devPS.cpp:3173 devPS.cpp:7014
+#, fuzzy, c-format
+msgid "encoding path is too long in '%s' function"
+msgstr "koduojamas kelias per ilgas %s()"
+
+#: devPS.cpp:3187 devPS.cpp:4860
+#, fuzzy, c-format
+msgid "failed to load encoding file in '%s' function"
+msgstr "nepavyko įkelti koduotės failo '%s'"
+
+#: devPS.cpp:3232 devPS.cpp:3295 devPS.cpp:7073 devPS.cpp:7129 devPS.cpp:8987
+msgid "invalid font type"
+msgstr "neteisingas šrifto tipas"
+
+#: devPS.cpp:3256
+msgid "failed to initialise default PostScript font"
+msgstr "nepavyko nustatyti numatytojo PostScript šrifto"
+
+#: devPS.cpp:3322
+msgid "failed to initialise additional PostScript fonts"
+msgstr "nepavyko nustatyti papildomų PostScript šriftų"
+
+#: devPS.cpp:3338
+msgid "invalid foreground/background color (postscript)"
+msgstr "netinkama priekinio plano/fono spalva (postScript)"
+
+#: devPS.cpp:3343
+msgid "'command' is too long"
+msgstr "'command' yra per ilga"
+
+#: devPS.cpp:3348
+msgid "'postscript(print.it=TRUE)' used with an empty 'print' command"
+msgstr "'postscript(print.it=TRUE)' naudojama su tuščia 'print' komanda"
+
+#: devPS.cpp:3399
+#, c-format
+msgid "invalid page type '%s' (postscript)"
+msgstr "netinkamas puslapio tipas '%s' (postscript)"
+
+#: devPS.cpp:3521 devPS.cpp:4659 devWindows.cpp:2346
+msgid ""
+"semi-transparency is not supported on this device: reported only once per "
+"page"
+msgstr ""
+"pusiau skaidrumas šiame įrenginyje nėra palaikomas: pranešama tik kartą "
+"puslapyje"
+
+#: devPS.cpp:3632 devPS.cpp:3643
+#, c-format
+msgid "cannot open 'postscript' pipe to '%s'"
+msgstr "nepavyksta atverti 'postscript' kanalo '%s'"
+
+#: devPS.cpp:3654 devPS.cpp:5077 devPS.cpp:5090 devPS.cpp:8281 qdPDF.cpp:98
+#, c-format
+msgid "cannot open file '%s'"
+msgstr "nepavyko atverti failo '%s'"
+
+#: devPS.cpp:3782 devPS.cpp:3797
+#, c-format
+msgid ""
+"error from postscript() in running:\n"
+"    %s"
+msgstr ""
+"klaida iš postscript() vykdant:\n"
+"    %s"
+
+#: devPS.cpp:3829
+#, c-format
+msgid "CID family '%s' not included in postscript() device"
+msgstr "CID šeima '%s' nėra įtraukta į postscript() įrenginį"
+
+#: devPS.cpp:3847 devPS.cpp:3858 devPS.cpp:4296 devPS.cpp:4326 devPS.cpp:4431
+#, c-format
+msgid "family '%s' not included in postscript() device"
+msgstr "šeima '%s' nėra įtraukta į postscript() įrenginį"
+
+#: devPS.cpp:4381
+#, fuzzy, c-format
+msgid "conversion failure on '%s' in '%s' function: dot substituted for <%02x>"
+msgstr "'mbcsToSbcs' konvertavimo klaida '%s': taškas pakeistas į <%02x>"
+
+#: devPS.cpp:4389
+#, c-format
+msgid "conversion failure from %s to %s on '%s' in '%s' function"
+msgstr ""
+
+#: devPS.cpp:4459
+#, c-format
+msgid "failed open converter to encoding '%s'"
+msgstr "nepavyko atverti keitiklio į kodavimą '%s'"
+
+#: devPS.cpp:4477 devPS.cpp:5404 devPS.cpp:9242
+#, c-format
+msgid "failed in text conversion to encoding '%s'"
+msgstr "nepavyko konvertuoti teksto į kodavimą '%s'"
+
+#: devPS.cpp:4673
+#, fuzzy
+msgid "ran out of colors in 'xfig()' function"
+msgstr "xfig() trūksta spalvų"
+
+#: devPS.cpp:4702
+#, c-format
+msgid "unimplemented line texture %08x: using Dash-double-dotted"
+msgstr "negalima linijos tekstūra %08x naudojant punktyrus dvigubus brūkšnius"
+
+#: devPS.cpp:4774
+#, c-format
+msgid "unknown postscript font family '%s', using Helvetica"
+msgstr "nežinoma postscript šriftų šeima '%s', naudojant Helvetica"
+
+#: devPS.cpp:4845
+msgid "invalid foreground/background color (xfig)"
+msgstr "netinkama priekinio plano/fono spalva (xfig)"
+
+#: devPS.cpp:4878
+msgid "only Type 1 fonts supported for XFig"
+msgstr "tik Tipas 1 šriftai palaikomi XFig"
+
+#: devPS.cpp:4891
+msgid "failed to initialise default XFig font"
+msgstr "nepavyko nustatyti numatytojo XFig šrifto"
+
+#: devPS.cpp:4928
+#, c-format
+msgid "invalid page type '%s' (xfig)"
+msgstr "netinkamas puslapio tipas '%s' (xfig)"
+
+#: devPS.cpp:4936
+#, c-format
+msgid "xfig(%s, onefile=FALSE) will only return the last plot"
+msgstr "xfig(%s, onefile=FALSE) grąžins tik paskutinį grafiką"
+
+#: devPS.cpp:5069
+msgid "empty file name"
+msgstr "tuščias failo vardas"
+
+#: devPS.cpp:5136 devPS.cpp:5188 devPS.cpp:6768 devPS.cpp:6812 devPS.cpp:8342
+msgid "write failed"
+msgstr "įrašyti nepavyko"
+
+#: devPS.cpp:5393
+#, c-format
+msgid "unable to use encoding '%s'"
+msgstr "negalima naudoti koduotės '%s'"
+
+#: devPS.cpp:5718
+msgid "failed to increase definition string (shut down PDF device)"
+msgstr "nepavyko padidinti apibrėžimo eilutės (išjungti PDF įrenginį)"
+
+#: devPS.cpp:5761
+msgid "failed to increase 'maxDefns'"
+msgstr "nepavyko padidinti 'maxDefns'"
+
+#: devPS.cpp:6656 devPS.cpp:6659
+msgid "failed to increase 'maxRaster'"
+msgstr "nepavyko padidinti 'maxRaster'"
+
+#: devPS.cpp:6671
+msgid "unable to allocate raster image"
+msgstr "nepavyko priskirti rastrinio vaizdo"
+
+#: devPS.cpp:6872
+msgid "corrupt loaded encodings;  font not added"
+msgstr "sugadinta įkeliama koduotė;  šriftai nepridėti"
+
+#: devPS.cpp:6882
+msgid "failed to record device encoding; font not added"
+msgstr "nepavyko įrašyti įrenginio koduotės, šriftai nepridėti"
+
+#: devPS.cpp:7000 devPS.cpp:7407 devPS.cpp:8132
+#, fuzzy, c-format
+msgid "increasing the PDF version to %s"
+msgstr "atnaujinti PDF versiją į 1.2"
+
+#: devPS.cpp:7030
+msgid "failed to load default encoding"
+msgstr "nepavyko įkelti numatytosios koduotės"
+
+#: devPS.cpp:7097
+msgid "failed to initialise default PDF font"
+msgstr "nepavyko nustatyti numatytojo PDF šrifto"
+
+#: devPS.cpp:7152
+msgid "failed to initialise additional PDF fonts"
+msgstr "nepavyko nustatyti papildomų PDF šriftų"
+
+#: devPS.cpp:7165
+msgid "failed to allocate rasters"
+msgstr "nepavyko paskirti rastrų"
+
+#: devPS.cpp:7172
+msgid "failed to allocate masks"
+msgstr "nepavyko paskirti šablonų"
+
+#: devPS.cpp:7181
+msgid "failed to allocate definitions"
+msgstr "nepavyko priskirti apibrėžimų"
+
+#: devPS.cpp:7250
+#, c-format
+msgid "invalid paper type '%s' (pdf)"
+msgstr "netinkamas popieriaus tipas '%s' (pdf)"
+
+#: devPS.cpp:7274
+msgid "invalid foreground/background color (pdf)"
+msgstr "netinkama priekinio plano/fono spalva (PDF)"
+
+#: devPS.cpp:7382
+msgid "invalid 'alpha' value in PDF"
+msgstr "neteisinga 'alpha' reikšmė PDF faile"
+
+#: devPS.cpp:7451 devPS.cpp:7499
+msgid "unknown 'colormodel', using 'srgb'"
+msgstr "nežinomas 'colormodel' naudojant 'srgb'"
+
+#: devPS.cpp:7744
+msgid "failed to load sRGB colorspace file"
+msgstr "nepavyko įkelti sRGB spalvų erdvės failo"
+
+#: devPS.cpp:8051
+msgid "corrupt encodings in PDF device"
+msgstr "sugadinta koduotė PDF įrenginyje"
+
+#: devPS.cpp:8265
+#, c-format
+msgid "cannot open 'pdf' pipe to '%s'"
+msgstr "nepavyksta atverti 'pdf' kanalo '%s'"
+
+#: devPS.cpp:8271
+msgid "file = \"|cmd\" implies 'onefile = TRUE'"
+msgstr "file = \"|cmd\" reiškia 'onefile = TRUE'"
+
+#: devPS.cpp:8415
+#, c-format
+msgid ""
+"cannot open 'pdf' file argument '%s'\n"
+"  please shut down the PDF device"
+msgstr ""
+"nepavyksta atverti 'pdf' failo argumento '%s'\n"
+"  išjunkite PDF įrenginį"
+
+#: devPS.cpp:8435
+#, fuzzy, c-format
+msgid ""
+"cannot open temporary file '%s' for compression (reason: %s); compression "
+"has been turned off for this device"
+msgstr ""
+"Negalima atidaryti laikinojo failo '%s' glaudinimui (priežastis: %s); "
+"glaudinimas šiam įrenginiui išjungtas"
+
+#: devPS.cpp:8627
+msgid "Raster image within mask ignored"
+msgstr ""
+
+#: devPS.cpp:9012 devPS.cpp:9374 devPS.cpp:9421
+msgid "failed to find or load PDF font"
+msgstr "nepavyko rasti ir įkelti PDF šrifto"
+
+#: devPS.cpp:9196 devPS.cpp:9329
+msgid "failed to find or load PDF CID font"
+msgstr "nepavyko rasti ir įkelti PDF CID šrifto"
+
+#: devPS.cpp:9604 devPS.cpp:9608 devPS.cpp:9626 devPS.cpp:9769 devPS.cpp:9773
+#: devPS.cpp:9785
+#, fuzzy, c-format
+msgid "invalid '%s' parameter in '%s'"
+msgstr "neteisingas 'fonts' parametras, esantis %s"
+
+#: devPS.cpp:9645 devPS.cpp:9712 devPS.cpp:9812
+#, fuzzy, c-format
+msgid "unable to start '%s' device"
+msgstr "nepavyko paleisti %s() įrenginio"
+
+#: devPicTeX.cpp:778 devWindows.cpp:3766
+#, c-format
+msgid "unable to start %s() device"
+msgstr "nepavyko paleisti %s() įrenginio"
+
+#: devQuartz.cpp:668
+#, c-format
+msgid "font \"%s\" could not be found for family \"%s\""
+msgstr "nepavyko rasti \"%s\" šrifto šeimos \"%s\""
+
+#: devQuartz.cpp:686
+msgid "font family name is too long"
+msgstr "šriftų šeimos vardas per ilgas"
+
+#: devQuartz.cpp:726
+#, c-format
+msgid "no font could be found for family \"%s\""
+msgstr "\"%s\" šeimai nerastas joks šriftas"
+
+#: devQuartz.cpp:936
+msgid "allocation failure in text2unichar"
+msgstr ""
+
+#: devQuartz.cpp:960
+msgid "allocation failure in RQuartz_StrWidth"
+msgstr ""
+
+#: devQuartz.cpp:996
+msgid "allocation failure in RQuartz_Text"
+msgstr ""
+
+#: devQuartz.cpp:1410
+msgid "invalid 'file' argument"
+msgstr "neteisingas 'file' argumentas"
+
+#: devQuartz.cpp:1437
+msgid "invalid quartz() device size"
+msgstr "netinkamas quartz() įrenginio dydis"
+
+#: devQuartz.cpp:1465
+msgid "unable to create device description"
+msgstr "nepavyko sukurti įrenginio aprašo"
+
+#: devQuartz.cpp:1515
+msgid ""
+"unable to create quartz() device target, given type may not be supported"
+msgstr ""
+"nepavyko sukurti quartz() paskirties įrenginio, nurodytas tipas gali būti "
+"nepalaikomas"
+
+#: devQuartz.cpp:1646
+msgid "Quartz device is not available on this platform"
+msgstr "Šioje platformoje nėra Quartz įrenginio"
+
+#: devWindows.cpp:355 devWindows.cpp:401 devWindows.cpp:472
+msgid "Not enough memory to copy graphics window"
+msgstr "Nepakanka atminties kopijuoti grafinį langą"
+
+#: devWindows.cpp:360 devWindows.cpp:406 devWindows.cpp:477
+msgid "No device available to copy graphics window"
+msgstr "Nėra įrenginio, kuris kopijuotų grafinį langą"
+
+#: devWindows.cpp:410 devWindows.cpp:481
+#, c-format
+msgid "'%%' is not allowed in file name"
+msgstr "'%%' failo varde nėra leidžiamas"
+
+#: devWindows.cpp:577
+#, c-format
+msgid "[%s] Error at line %d."
+msgstr ""
+
+#: devWindows.cpp:581
+#, fuzzy
+msgid "Insufficient memory. "
+msgstr "Nepakanka atminties pakeisti dydį. Įrenginio naikinimas"
+
+#: devWindows.cpp:592
+#, c-format
+msgid "Unknown style at line %d. "
+msgstr ""
+
+#: devWindows.cpp:618
+msgid "invalid font specification"
+msgstr "neteisinga šrifto specifikacija"
+
+#: devWindows.cpp:657
+msgid "font family not found in Windows font database"
+msgstr "šrifto šeima nerasta Windows šriftų duomenų bazėje"
+
+#: devWindows.cpp:1088
+msgid "plot history seems corrupted"
+msgstr "sugadinta grafiko istorija"
+
+#: devWindows.cpp:1095
+msgid "no plot history!"
+msgstr "nėra grafiko istorijos!"
+
+#: devWindows.cpp:1817 devWindows.cpp:1852 devWindows.cpp:1882
+#, c-format
+msgid "'width=%d, height=%d' are unlikely values in pixels"
+msgstr "'width=%d, height=%d' negalimos pikselių reikšmės"
+
+#: devWindows.cpp:1825 devWindows.cpp:1830 devWindows.cpp:1855
+#: devWindows.cpp:1860 devWindows.cpp:1885 devWindows.cpp:1890
+msgid "unable to allocate bitmap"
+msgstr "nepavyko priskirti rastrų"
+
+#: devWindows.cpp:1836 devWindows.cpp:1866 devWindows.cpp:2186
+#, c-format
+msgid "unable to open file '%s' for writing"
+msgstr "nepavyko atverti failo '%s' įrašymui"
+
+#: devWindows.cpp:1921
+#, c-format
+msgid "unable to open metafile '%s' for writing"
+msgstr "nepavyko atverti metafailo '%s' įrašymui"
+
+#: devWindows.cpp:1923
+msgid "unable to open clipboard to write metafile"
+msgstr "nepavyko atverti iškarpinės ir įrašyti metafailą"
+
+#: devWindows.cpp:2134
+msgid "Insufficient memory for resize. Killing device"
+msgstr "Nepakanka atminties pakeisti dydį. Įrenginio naikinimas"
+
+#: devWindows.cpp:2142
+msgid "Insufficient memory for resize. Disabling alpha blending"
+msgstr "Nepakanka atminties pakeisti dydį. Alfa suliejimo išjungimas"
+
+#: devWindows.cpp:2171
+msgid "a clipboard metafile can store only one figure."
+msgstr "iškarpinės metafaile gali būti saugomas tik vienas paveikslas."
+
+#: devWindows.cpp:2177
+#, c-format
+msgid "metafile '%s' could not be created"
+msgstr "metafailas '%s' negali būti sukurtas"
+
+#: devWindows.cpp:3117 devWindows.cpp:3790
+msgid "R Graphics"
+msgstr "R grafika"
+
+#: devWindows.cpp:3131
+msgid "attempt to use the locator after dev.hold()"
+msgstr "bandymas naudoti ieškiklį po dev.hold()"
+
+#: devWindows.cpp:3160
+msgid "graphics device closed during call to locator or identify"
+msgstr ""
+"grafinis įrenginys uždarytas iškvietimo į ieškiklį arba identifikavimą metu"
+
+#: devWindows.cpp:3426
+msgid "option 'windowsTimeouts' should be integer"
+msgstr "parametras 'windowsTimeouts' turi būti sveikasis skaičius"
+
+#: devWindows.cpp:3448
+#, fuzzy
+msgid "invalid device number in 'savePlot()' function"
+msgstr "neteisingas įrenginio numeris 'savePlot'"
+
+#: devWindows.cpp:3450
+#, fuzzy
+msgid "invalid device in 'savePlot()' function"
+msgstr "neteisingas įrenginys 'savePlot'"
+
+#: devWindows.cpp:3453
+#, fuzzy
+msgid "invalid filename argument in 'savePlot()' function"
+msgstr "neteisingas failo vardo argumentas 'savePlot'"
+
+#: devWindows.cpp:3458
+#, fuzzy
+msgid "invalid type argument in 'savePlot()' function"
+msgstr "neteisingo tipo argumentas, esantis 'savePlot'"
+
+#: devWindows.cpp:3485
+msgid "unknown type in savePlot"
+msgstr "nežinomas tipas, esantis savePlot"
+
+#: devWindows.cpp:3530 devWindows.cpp:3562 devWindows.cpp:3590
+#: devWindows.cpp:3621 devWindows.cpp:3642
+msgid "processing of the plot ran out of memory"
+msgstr "grafiko apdorojimui trūksta atminties"
+
+#: devWindows.cpp:3606
+msgid "Impossible to open "
+msgstr "Neįmanoma atverti "
+
+#: devWindows.cpp:3671
+msgid "invalid 'width' or 'height'"
+msgstr "neteisingas 'width' arba 'height'"
+
+#: devices.cpp:43
+msgid "argument must have positive length"
+msgstr "argumento ilgis turi būti teigiamas"
+
+#: devices.cpp:52 stubs.cpp:105
+#, c-format
+msgid "invalid '%s' argument"
+msgstr "neteisingas '%s' argumentas"
+
+#: devices.cpp:81 devices.cpp:89 devices.cpp:97
+msgid "NA argument is invalid"
+msgstr "NA argumentas neleistinas"
+
+#: qdBitmap.cpp:80
+#, c-format
+msgid "QuartzBitmap_Output - unable to open file '%s'"
+msgstr "QuartzBitmap_Output - nepavyko atverti failo '%s'"
+
+#: qdBitmap.cpp:95
+msgid "not a supported scheme, no image data written"
+msgstr "schema nepalaikoma, nėra įrašytų vaizdo duomenų"
+
+#: qdBitmap.cpp:151 qdBitmap.cpp:158 qdBitmap.cpp:167
+msgid "allocation failure in QuartzBitmap_DeviceCreate"
+msgstr ""
+
+#: qdCocoa.m:900
+msgid "allocation failure in QuartzCocoa_DeviceCreate"
+msgstr ""
+
+#: qdPDF.cpp:110
+msgid "Quartz R Device"
+msgstr ""
+
+#~ msgid "unknown encoding '%s' in 'PostScriptMetricInfo'"
+#~ msgstr "nežinoma koduotė '%s', esanti 'PostScriptMetricInfo'"
+
+#~ msgid "filename too long in %s()"
+#~ msgstr "failo vardas yra per ilgas %s()"
+
+#~ msgid "failed to load encoding file in %s()"
+#~ msgstr "nepavyko įkelti koduotės failo, esančio %s()"
+
+#~ msgid "increasing the PDF version to 1.4"
+#~ msgstr "atnaujinti PDF versiją į 1.4"
+
+#~ msgid "increasing the PDF version to 1.3"
+#~ msgstr "atnaujinti PDF versiją į 1.3"
+
+#~ msgid "invalid 'family' parameter in %s"
+#~ msgstr "neteisingas 'family' parametras, esantis %s"
+
+#~ msgid "invalid value of '%s'"
+#~ msgstr "neteisinga '%s' reikšmė"
+
+#~ msgid "filename too long in jpeg() call"
+#~ msgstr "failo vardas per ilgas jpeg() kreipinyje"
+
+#~ msgid "filename too long in tiff() call"
+#~ msgstr "failo vardas per ilgas tiff() kreipinyje"
+
+#~ msgid "filename too long in win.metafile() call"
+#~ msgstr "failo vardas yra per ilgas win.metafile() kreipinyje"
+
+#~ msgid "invalid argument"
+#~ msgstr "neteisingas argumentas"

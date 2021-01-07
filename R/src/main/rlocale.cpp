@@ -90,6 +90,34 @@ static int wcsearch(int wint, const struct interval *table, int max)
 // ------------------------- width functions --------------------
 #ifdef USE_RI18N_WIDTH
 
+/* wcwidth and wcswidth, from POSIX 2001 (formerly in some draft C
+ * standards but not implemented in Windows).  One could argue that
+ * the width of non-printable / unassigned characters is immaterial
+ * (they will be represented by escapes) so could be given a
+ * conventional value such as 0 or 1.  POSIX suggests returning -1 for
+ * non-printable characters, but these were not written that way in
+ * 2005.
+ *
+ * It is not always clear what to do for unassigned code points
+ * (especially 'private use' ones).
+ *
+ * Although what a character represents may be locale-specific,
+ * reference images are available at
+ * https://www.unicode.org/charts/PDF/ whose width can be assessed.
+ *
+ * There is a problem with character-by-character appoaches: apart
+ * from surrogate pairs, some glyphs are defined in combinations of
+ * others.  For human languages this is largely (but not entirely)
+ * covered by giving combining characters zero width.  However, quite
+ * a few emoji are defined as combinations of others: e.g.
+ * 'polar bear' is bear+snowflake with a zero-width joiner,
+ * "\U1f43b\u200d\u2744" which gets width 2+0+1.
+ * (https://emojipedia.org/polar-bear/,
+ * https://emojipedia.org/emoji-zwj-sequence/).  There are a few such
+ * in human languages:
+ * https://en.wikipedia.org/wiki/Zero-width_joiner.
+ */
+
 #include "rlocale_widths.h"
 
 static int wcwidthsearch(int wint, const struct interval_wcwidth *table,
@@ -224,6 +252,8 @@ int Ri18n_wcswidth (const wchar_t *wc, size_t n)
     while ((n-- > 0) && (*wc != L'\0'))
     {
 	if (IS_SURROGATE_PAIR(*wc, *(wc+1))) {
+	    /* surrogate pairs should only occur with 'short' wchar_t,
+	     * that is Windows and perhaps 32-bit AIX */
 	    R_wchar_t val =
 		((*wc & 0x3FF) << 10) + (*(wc+1) & 0x3FF) + 0x010000;
 	    int now = Ri18n_wcwidth (val);
@@ -245,8 +275,7 @@ int Ri18n_wcswidth (const wchar_t *wc, size_t n)
 
 /*********************************************************************
  *  macOS's wide character type functions are based on NetBSD
- *  and only work correctly for Latin-1 characters.
- *  (Confirmed for macOS 11.1 in 2020-12.)
+ *  and only work(ed) correctly for Latin-1 characters.
  *  So we replace them.  May also be needed on *BSD, and are on AIX
  ********************************************************************/
 

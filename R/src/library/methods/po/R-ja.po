@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.5.0 \n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2020-04-15 18:32\n"
+"POT-Creation-Date: 2021-01-07 23:37\n"
 "PO-Revision-Date: 2012-02-26 14:07+0200 \n"
 "Last-Translator: Shigeru Mase <maseshigeru@gmail.com> \n"
 "Language-Team: RjpWiki Message Translation Team <mokada@md.tsukuba.ac.jp> \n"
@@ -508,7 +508,7 @@ msgstr " パッケージ名ではありません: %s "
 msgid "Class %s consists of following classes:"
 msgstr ""
 
-#. R/show.R: gettextf("Class %s for generic %s defined from package %s", dQuote(class(object)),     dQuote(object@generic), sQuote(object@package), domain = "R-methods")
+#. R/show.R: gettextf("Class %s for generic %s defined from package %s", dQuote(class(object)),     dQuote(nam), sQuote(object@package), domain = "R-methods")
 #: R/show.R:0
 #, fuzzy
 msgid "Class %s for generic %s defined from package %s"
@@ -535,7 +535,7 @@ msgstr ""
 " 総称的な \"%s\" に対するメソッドテーブルを、パッケージ \"%s\" （パッケージ "
 "\"%s\" 中の）から見つけることができません "
 
-#. R/show.R: gettextf("Class %s for generic %s defined from package %s\n  defined with value class: %s\n",     dQuote(class(object)), dQuote(object@generic), sQuote(object@package), dQuote(object@valueClass),     domain = "R-methods")
+#. R/show.R: gettextf("Class %s for generic %s defined from package %s\n  defined with value class: %s\n",     dQuote(class(object)), dQuote(nam), sQuote(object@package), dQuote(object@valueClass),     domain = "R-methods")
 #: R/show.R:0
 #, fuzzy
 msgid ""

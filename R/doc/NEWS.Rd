@@ -165,6 +165,9 @@
       \item \code{.libPaths()} gets a new option \code{include.site},
       allowing to \emph{not} include the site library, thanks to Dario
       Strbenac's suggestion and Gabe Becker's \PR{18016}.
+
+      \item Lithuanian translations are now available, thanks to
+      Rimantas Žakauskas.
     }
   }
 
@@ -342,12 +345,14 @@
 
       \item The character-classification functions used (by default) to
       replace the system \code{iswxxxxx} functions on Windows, macOS and
-      AIX have been updated to Unicode 13.0.0 -- in particular, many
-      more UTF-8 characters (such as emojis) are regarded as printable.
+      AIX have been updated to Unicode 13.0.0.
+
+      The character-width tables have been updated to include new
+      assignments in Unicode 13.0.0.
 
       \item The code for evaluating default (extended) regular
       expressions now uses the same character-classification functions
-      as the rest of \R (they previously differed on Windows, macOS and
+      as the rest of \R (previously they differed on Windows, macOS and
       AIX.)
 
       \item There is a build-time option to replace the system's
@@ -356,8 +361,8 @@
       \option{--with-internal-towlower} or (on Windows)
       \samp{-DUSE_RI18N_CASE} in \samp{CFLAGS} when building \R.  This
       may be needed to allow \code{tolower()} and \code{toupper()} to
-      work with Unicode characters beyond the Basic Multilingual Plan
-      where on supported by system functions (e.g. on Solaris where it
+      work with Unicode characters beyond the Basic Multilingual Plane
+      where not supported by system functions (e.g. on Solaris where it
       is the new default).
     }
   }
@@ -484,6 +489,10 @@
       \item Unicode character width tables (as used by
       \code{nchar(, type = "w")}) have been updated to Unicode 12.1
       by Brodie Gaslam (\PR{17781}), including many emoji.
+
+      \item The internal table for \code{iswprint} (used on Windows,
+      macOS and AIX) has been updated to include many recent Unicode
+      characters.
     }
   }
 

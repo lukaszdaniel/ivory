@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 3.3.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-07-23 12:01+0200\n"
+"POT-Creation-Date: 2021-01-07 23:39+0100\n"
 "PO-Revision-Date: 2018-04-16 18:50+0200\n"
 "Last-Translator: Alexey Shipunov <dactylorhiza@gmail.com>\n"
 "Language-Team: Russian\n"
@@ -22,142 +22,142 @@ msgstr ""
 "X-Generator: Poedit 2.0.4\n"
 "X-Poedit-SourceCharset: UTF-8\n"
 
-#: io.cpp:320 io.cpp:324 io.cpp:334 io.cpp:562 io.cpp:761 io.cpp:813 io.cpp:827
-#: io.cpp:831 io.cpp:837 io.cpp:838 io.cpp:1079 io.cpp:1080 io.cpp:1082
-#: io.cpp:1083 io.cpp:1084 io.cpp:1085 io.cpp:1086 io.cpp:1087 stubs.cpp:39
-#: stubs.cpp:59 windows/dialogs.cpp:169 windows/dialogs.cpp:194
+#: io.cpp:323 io.cpp:327 io.cpp:337 io.cpp:565 io.cpp:764 io.cpp:816 io.cpp:830
+#: io.cpp:834 io.cpp:840 io.cpp:841 io.cpp:1082 io.cpp:1083 io.cpp:1085
+#: io.cpp:1086 io.cpp:1087 io.cpp:1088 io.cpp:1089 io.cpp:1090 stubs.cpp:41
+#: stubs.cpp:61 windows/dialogs.cpp:169 windows/dialogs.cpp:194
 #: windows/dialogs.cpp:197 windows/dialogs.cpp:241 windows/dialogs.cpp:278
 #: windows/dialogs.cpp:289 windows/dialogs.cpp:313 windows/dialogs.cpp:321
-#: windows/util.cpp:121 windows/widgets.cpp:79 windows/widgets.cpp:82
-#: windows/widgets.cpp:87
+#: windows/util.cpp:121 windows/widgets.cpp:75 windows/widgets.cpp:78
+#: windows/widgets.cpp:83
 #, c-format
 msgid "invalid '%s' argument"
 msgstr "неправильный аргумент '%s'"
 
-#: io.cpp:343 io.cpp:824
+#: io.cpp:346 io.cpp:827
 msgid "invalid quote symbol set"
 msgstr "неправильная установка символа кавычек"
 
-#: io.cpp:355 io.cpp:847 io.cpp:1067
+#: io.cpp:358 io.cpp:850 io.cpp:1070
 msgid "cannot open the connection"
 msgstr "не могу открыть соединение"
 
-#: io.cpp:358 io.cpp:362
+#: io.cpp:361 io.cpp:365
 msgid "cannot read from this connection"
 msgstr "не могу прочитать из соединения"
 
-#: io.cpp:409 io.cpp:427
+#: io.cpp:412 io.cpp:430
 #, c-format
 msgid "quoted string on line %d terminated by EOF"
 msgstr "закавыченная подстрока строки %d заканчивается EOF"
 
-#: io.cpp:558
+#: io.cpp:561
 msgid "the first argument must be of mode character"
 msgstr "первый аргумент должен быть текстовым"
 
-#: io.cpp:588
+#: io.cpp:591
 #, c-format
 msgid "invalid 'numerals' string: \"%s\""
 msgstr "неправильная строка 'numerals': \"%s\""
 
-#: io.cpp:763
+#: io.cpp:766
 #, c-format
 msgid "Selection: "
 msgstr "Выбор:"
 
-#: io.cpp:857 io.cpp:872
+#: io.cpp:860 io.cpp:875
 msgid "cannot allocate buffer in 'readTableHead'"
 msgstr "не могу разместить буфер в 'readTableHead'"
 
-#: io.cpp:885
+#: io.cpp:888
 msgid "\\ followed by EOF"
 msgstr "\\ завершается EOF"
 
-#: io.cpp:924
+#: io.cpp:927
 #, c-format
 msgid "line %d appears to contain embedded nulls"
 msgstr ""
 
-#: io.cpp:937 io.cpp:941
+#: io.cpp:940 io.cpp:944
 #, c-format
 msgid "incomplete final line found by readTableHeader on '%s'"
 msgstr "readTableHeader нашел неполную последнюю строку в '%s'"
 
-#: io.cpp:997
+#: io.cpp:1000
 msgid "index out of range"
 msgstr "индекс вне пределов"
 
-#: io.cpp:1035
+#: io.cpp:1038
 #, c-format
 msgid "Problem closing connection:  %s"
 msgstr ""
 
-#: io.cpp:1037
+#: io.cpp:1040
 #, fuzzy
 msgid "Problem closing connection"
 msgstr "'file' -- это не соединение"
 
-#: io.cpp:1060
+#: io.cpp:1063
 msgid "'file' argument is not a connection"
 msgstr "'file' -- это не соединение"
 
-#: io.cpp:1063
+#: io.cpp:1066
 msgid "cannot write to this connection"
 msgstr "не могу писать в это соединение"
 
-#: io.cpp:1093
+#: io.cpp:1096
 msgid "'dec' argument must be a single character"
 msgstr "'dec' должен быть одним символом"
 
-#: io.cpp:1117
+#: io.cpp:1120
 #, fuzzy, c-format
 msgid "corrupt data frame -- length of column %d does not match nrows"
 msgstr ""
 "поврежденная таблица данных -- длина колонки %d не соответствует строкам"
 
-#: io.cpp:1145
+#: io.cpp:1148
 #, c-format
 msgid "column %s claims to be a factor but does not have numeric codes"
 msgstr "колонка %s считает себя фактором, но у нее нет числовых кодов"
 
-#: io.cpp:1162
+#: io.cpp:1165
 #, fuzzy
 msgid "corrupt matrix -- dims do not match length"
 msgstr "поврежденная матрица -- длины измерений не сходятся"
 
-#: stubs.cpp:48
+#: stubs.cpp:50
 msgid "'savehistory' can only be used in Rgui and Rterm"
 msgstr "'savehistory' можно использовать только в Rgui и Rterm"
 
-#: stubs.cpp:65
+#: stubs.cpp:67
 msgid "'loadhistory' can only be used in Rgui and Rterm"
 msgstr "'loadhistory' можно использовать только Rgui и Rterm"
 
-#: stubs.cpp:77
+#: stubs.cpp:79
 msgid "invalid timestamp"
 msgstr "неправильная дата и время"
 
-#: stubs.cpp:143 stubs.cpp:151
+#: stubs.cpp:145 stubs.cpp:153
 msgid "X11 dataentry cannot be loaded"
 msgstr "таблицу X11 нельзя загрузить"
 
-#: stubs.cpp:147 stubs.cpp:176 stubs.cpp:182
+#: stubs.cpp:149 stubs.cpp:178 stubs.cpp:184
 msgid "X11 is not available"
 msgstr "X11 недоступна"
 
-#: stubs.cpp:240 stubs.cpp:243
+#: stubs.cpp:242 stubs.cpp:245
 #, c-format
 msgid "invalid '%s' specification"
 msgstr "неправильное определение '%s'"
 
-#: stubs.cpp:246
+#: stubs.cpp:248
 #, c-format
 msgid "'%s' contains missing values"
 msgstr ""
 
 #: utils.cpp:64 windows/util.cpp:408 windows/util.cpp:417
-#: windows/widgets.cpp:183 windows/widgets.cpp:189 windows/widgets.cpp:251
-#: windows/widgets.cpp:257
+#: windows/widgets.cpp:188 windows/widgets.cpp:194 windows/widgets.cpp:256
+#: windows/widgets.cpp:262
 #, c-format
 msgid "'%s' argument must be a character string"
 msgstr "'%s' должен быть текстовой строкой"
@@ -266,23 +266,23 @@ msgstr "'%s' должен быть списком"
 msgid "'%s' element %d is not a window handle"
 msgstr "'%s' элемент из %d -- не дескриптор окна"
 
-#: windows/widgets.cpp:109
+#: windows/widgets.cpp:105
 msgid "Select one or more"
 msgstr "Выберите один или больше"
 
-#: windows/widgets.cpp:109
+#: windows/widgets.cpp:105
 msgid "Select one"
 msgstr "Выберите один"
 
-#: windows/widgets.cpp:185 windows/widgets.cpp:253
+#: windows/widgets.cpp:190 windows/widgets.cpp:258
 msgid "'default' argument is overlong"
 msgstr "'default' слишком длинный"
 
-#: windows/widgets.cpp:191
+#: windows/widgets.cpp:196
 msgid "'multi' argument must be a logical value"
 msgstr "'multi' должен быть логическим"
 
-#: windows/widgets.cpp:193
+#: windows/widgets.cpp:198
 msgid "'filterindex' argument must be an integer value"
 msgstr "'filterindex' должен быть целочисленным"
 

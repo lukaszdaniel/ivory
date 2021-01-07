@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R-core\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-08-14 18:59\n"
+"POT-Creation-Date: 2021-01-07 23:38\n"
 "PO-Revision-Date: \n"
 "Last-Translator: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
 "Language-Team: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
@@ -292,6 +292,11 @@ msgstr ""
 "%s\n"
 "  rozważ uruchomienie 'tools::compactPDF()' na tych plikach"
 
+#. R/checktools.R: stop("'reverse$repos' should be a subset of getOption(\"repos\")")
+#: R/checktools.R:0
+msgid "'reverse$repos' should be a subset of getOption(\"repos\")"
+msgstr ""
+
 #. R/Rd2pdf.R: stop("'type' must be one of 'txt', 'html', 'latex' or 'example'", call. = FALSE)
 #: R/Rd2pdf.R:0
 msgid "'type' must be one of 'txt', 'html', 'latex' or 'example'"
@@ -349,11 +354,6 @@ msgstr "*** Błędy Weave ***"
 #: R/admin.R:0
 msgid "*** someone has corrupted the Built field in package %s ***"
 msgstr "*** ktoś uszkodził pole 'Built' w pakiecie %s ***"
-
-#. R/QC.R: paste(sQuote(undeclared), collapse = ", ")
-#: R/QC.R:0
-msgid ","
-msgstr ","
 
 #. R/Vignettes.R: gettextf("--- failed re-building %s\n", sQuote(file))
 #. R/Vignettes.R: gettextf("--- failed re-building %s\n", sQuote(file))
@@ -1845,6 +1845,13 @@ msgid "Found the following Makefiles with CR or CRLF line endings:"
 msgstr ""
 "Znaleziono poniższe pliki 'Makefile' z zakończeniami linii CR lub CRLF."
 
+#. R/QC.R: gettext("Found the following URLs which should use \\doi (with the DOI name only):",     domain = "R-tools")
+#: R/QC.R:0
+#, fuzzy
+msgid ""
+"Found the following URLs which should use \\doi (with the DOI name only):"
+msgstr "Znaleziono następujące pliki z powtórzonymi nazwami plików:"
+
 #. R/QC.R: gettext("Found the following \\keyword or \\concept entries which likely give several index terms:",     domain = "R-tools")
 #: R/QC.R:0
 msgid ""
@@ -3229,6 +3236,11 @@ msgstr "Pozycja: %d Kod: %s Dokumentacje: %s"
 msgid "Possibly mis-spelled words in DESCRIPTION:"
 msgstr "Prawdopodobnie występują literówki w pliku 'DESCRIPTION'"
 
+#. R/Rd2HTML.R: warning("Previous alias or file overwritten by alias: ", aname)
+#: R/Rd2HTML.R:0
+msgid "Previous alias or file overwritten by alias:"
+msgstr ""
+
 #. R/QC.R: gettext("Problems when formatting CITATION entries:", domain = "R-tools")
 #: R/QC.R:0
 msgid "Problems when formatting CITATION entries:"
@@ -4471,14 +4483,13 @@ msgstr "Ilustracje:"
 msgid "WARNING"
 msgstr "OSTRZEŻENIE"
 
-#. R/build.R: gettextf("WARNING: Added dependency on R >= 3.5.0 because\nserialized objects in serialize/load version 3\ncannot be read in older versions of R. File(s)\ncontaining such objects:\n%s\n",     .pretty_format(sort(toonew)), domain = "R-tools")
+#. R/build.R: gettextf("WARNING: Added dependency on R >= 3.5.0 because\nserialized objects in serialize/load version 3\ncannot be read in older versions of R. File(s)\ncontaining such objects:\n",     domain = "R-tools")
 #: R/build.R:0
 msgid ""
 "WARNING: Added dependency on R >= 3.5.0 because\n"
 "serialized objects in serialize/load version 3\n"
 "cannot be read in older versions of R. File(s)\n"
-"containing such objects:\n"
-"%s"
+"containing such objects:"
 msgstr ""
 
 #. R/build.R: gettextf("WARNING: Removing directory %s which should only occur in an installed package",     sQuote(d), domain = "R-tools")
@@ -4682,6 +4693,12 @@ msgstr "najwyraźniej używanie '$(BLAS_LIBS)' bez '$(FLIBS)' w %s"
 #: R/check.R:0
 msgid "apparently using $(LAPACK_LIBS) without following $(BLAS_LIBS) in %s"
 msgstr "najwyraźniej używanie '$(LAPACK_LIBS)' bez '$(BLAS_LIBS)' w %s"
+
+#. R/QC.R: stop("argument 'package' must be of length 1")
+#: R/QC.R:0
+#, fuzzy
+msgid "argument 'package' must be of length 1"
+msgstr "argument 'pkg' musi być długości 1"
 
 #. R/parseLatex.R: gettext("argument for %s was not found", sQuote(c(a)))
 #: R/parseLatex.R:0
@@ -4898,11 +4915,6 @@ msgstr "sprawdzanie metadanych Rd ..."
 #: R/check.R:0
 msgid "checking S3 generic/method consistency ..."
 msgstr "sprawdzanie spójności funkcji ogólnych S3/metod ..."
-
-#. R/check.R: gettextf("checking a package with encoding %s in an ASCII locale", sQuote(e), domain = "R-tools")
-#: R/check.R:0
-msgid "checking a package with encoding %s in an ASCII locale"
-msgstr "sprawdzanie pakietu z kodowaniem %s w lokalizacji ASCII"
 
 #. R/install.R: gettext("checking absolute paths in shared objects and dynamic libraries", domain = "R-tools")
 #: R/install.R:0
@@ -6105,16 +6117,11 @@ msgstr "przygotowywanie %s"
 #. R/urltools.R: sprintf("processing %s", .file_path_relative_to_dir(f, dir))
 #. R/urltools.R: sprintf("processing %s", .file_path_relative_to_dir(f, dir))
 #. R/urltools.R: gettextf("processing %s", p)
-#. R/urltools.R: sprintf("processing %s", u)
+#. R/urltools.R: gettextf("processing %s", i)
 #. R/urltools.R: gettextf("processing %s", u)
 #: R/urltools.R:0
 msgid "processing %s"
 msgstr "przetwarzanie %s"
-
-#. R/doitools.R: gettextf("processing DOI %s", d)
-#: R/doitools.R:0
-msgid "processing DOI %s"
-msgstr "przetwarzanie DOI %s"
 
 #. R/utils.R: gettextf("processing directory %s", sQuote(basename(dir)))
 #: R/utils.R:0
@@ -6776,6 +6783,11 @@ msgstr "musisz określić argument '%s' lub '%s'"
 #: R/QC.R:0
 msgid "you must specify '%s', '%s' or '%s' argument"
 msgstr "musisz określić argument '%s', '%s' lub '%s'"
+
+#. R/QC.R: stop("you must specify 'package' or 'dir'")
+#: R/QC.R:0
+msgid "you must specify 'package' or 'dir'"
+msgstr "musisz określić 'package' lub 'dir'"
 
 #. R/check.R: ngettext(length(bad), "  Namespace with empty importFrom: %s", "  Namespaces with empty importFrom: %s",     domain = "R-tools")
 #: R/check.R:0
@@ -7762,6 +7774,21 @@ msgstr[1] ""
 msgstr[2] ""
 "Pakiety, które ten pakiet rozszerza, ale nie są dostępne do sprawdzenia:"
 
+#. R/QC.R: ngettext(length(x$bad_closures), "Possibly missing '()' after 'return' in the following function:",     "Possibly missing '()' after 'return' in the following functions:")
+#: R/QC.R:0
+#, fuzzy
+msgid "Possibly missing '()' after 'return' in the following function:"
+msgid_plural "Possibly missing '()' after 'return' in the following functions:"
+msgstr[0] ""
+"Znaleziono prawdopodobnie globalną wartość 'T' lub 'F' w następującej "
+"funkcji:"
+msgstr[1] ""
+"Znaleziono prawdopodobnie globalną wartość 'T' lub 'F' w następujących "
+"funkcjach:"
+msgstr[2] ""
+"Znaleziono prawdopodobnie globalną wartość 'T' lub 'F' w następujących "
+"funkcjach:"
+
 #. R/update_packages.R: ngettext(nrow(newpkgdf), "Processed %d entry from package tarballs.", "Processed %d entries from package tarballs.",     domain = "R-tools")
 #: R/update_packages.R:0
 msgid "Processed %d entry from package tarballs."
@@ -8181,6 +8208,15 @@ msgstr[0] "nie można przekodować %s linia %s"
 msgstr[1] "nie można przekodować %s linie %s"
 msgstr[2] "nie można przekodować %s linie %s"
 
+#~ msgid ","
+#~ msgstr ","
+
+#~ msgid "checking a package with encoding %s in an ASCII locale"
+#~ msgstr "sprawdzanie pakietu z kodowaniem %s w lokalizacji ASCII"
+
+#~ msgid "processing DOI %s"
+#~ msgstr "przetwarzanie DOI %s"
+
 #~ msgid ""
 #~ "file link %s in package %s does not exist and so has been treated as a "
 #~ "topic"
@@ -8217,9 +8253,6 @@ msgstr[2] "nie można przekodować %s linie %s"
 
 #~ msgid "Package '%s' had its dependencies reduced to a minimal set."
 #~ msgstr "Pakiet '%s'zredukował swoje zależności do najmniejszego zbioru."
-
-#~ msgid "argument 'pkg' must be of length 1"
-#~ msgstr "argument 'pkg' musi być długości 1"
 
 #~ msgid "argument 'vignette' must be of length 1"
 #~ msgstr "argument 'vignette' musi być długości 1"
@@ -8791,9 +8824,6 @@ msgstr[2] "nie można przekodować %s linie %s"
 
 #~ msgid "parsing '%s'"
 #~ msgstr "parsowanie '%s'"
-
-#~ msgid "you must specify 'package' or 'dir'"
-#~ msgstr "musisz określić 'package' lub 'dir'"
 
 #~ msgid "removing %s"
 #~ msgstr "usuwanie %s"

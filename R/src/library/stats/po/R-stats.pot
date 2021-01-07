@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: stats 4.1.0\n"
-"POT-Creation-Date: 2020-08-14 18:58\n"
+"POT-Creation-Date: 2021-01-07 23:38\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -875,6 +875,14 @@ msgstr ""
 
 
 #: R/models.R: 0
+#. R/models.R: stop("'data' must be a data.frame, environment, or list")
+#. R/models.R: stop("'data' must be a data.frame, environment, or list")
+
+msgid "'data' must be a data.frame, environment, or list"
+msgstr ""
+
+
+#: R/models.R: 0
 #. R/models.R: stop("'data' must be a data.frame, not a matrix or an array")
 #. R/models.R: stop("'data' must be a data.frame, not a matrix or an array")
 
@@ -1012,6 +1020,13 @@ msgstr ""
 #. R/fisher.test.R: warning("'hybrid' argument is ignored for a 2 x 2 table")
 
 msgid "'hybrid' argument is ignored for a 2 x 2 table"
+msgstr ""
+
+
+#: R/reshape.R: 0
+#. R/reshape.R: stop("'idvar' must uniquely identify records")
+
+msgid "'idvar' must uniquely identify records"
 msgstr ""
 
 
@@ -1960,6 +1975,13 @@ msgstr ""
 #. R/wilcox.test.R: gettext("(pseudo)median", domain = "R-stats")
 
 msgid "(pseudo)median"
+msgstr ""
+
+
+#: R/quantile.R: 0
+#. R/quantile.R: stop("(unordered) factors are not allowed")
+
+msgid "(unordered) factors are not allowed"
 msgstr ""
 
 
@@ -5353,13 +5375,6 @@ msgid "factor levels have been ordered"
 msgstr ""
 
 
-#: R/quantile.R: 0
-#. R/quantile.R: stop("factors are not allowed")
-
-msgid "factors are not allowed"
-msgstr ""
-
-
 #: R/reshape.R: 0
 #. R/reshape.R: stop("failed to guess time-varying variables from their names")
 
@@ -5650,6 +5665,13 @@ msgstr ""
 #. R/power.anova.test.R: stop("internal error", domain = "R-stats")
 
 msgid "internal error"
+msgstr ""
+
+
+#: R/nls.R: 0
+#. R/nls.R: stop("invalid  'attr(rhs, \"gradient\")'")
+
+msgid "invalid  'attr(rhs, \"gradient\")'"
 msgstr ""
 
 

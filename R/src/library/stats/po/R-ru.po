@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.11.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2020-08-14 18:58\n"
+"POT-Creation-Date: 2021-01-07 23:38\n"
 "PO-Revision-Date: 2015-01-17 15:49+0100\n"
 "Last-Translator: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
 "Language-Team: Russian\n"
@@ -680,6 +680,13 @@ msgstr "'cutpoints' должны быть уникальны в пределах
 msgid "'cv' argument must not be NA when 'df' argument is specified"
 msgstr "'cv' не может быть NA в случае, когда указан 'df'"
 
+#. R/models.R: stop("'data' must be a data.frame, environment, or list")
+#. R/models.R: stop("'data' must be a data.frame, environment, or list")
+#: R/models.R:0
+#, fuzzy
+msgid "'data' must be a data.frame, environment, or list"
+msgstr "'data' должны быть списком либо окружением"
+
 #. R/models.R: stop("'data' must be a data.frame, not a matrix or an array")
 #. R/models.R: stop("'data' must be a data.frame, not a matrix or an array")
 #: R/models.R:0
@@ -793,6 +800,11 @@ msgstr ""
 #, fuzzy
 msgid "'hybrid' argument is ignored for a 2 x 2 table"
 msgstr "'hybrid' проигнорирован для таблицы 2 x 2"
+
+#. R/reshape.R: stop("'idvar' must uniquely identify records")
+#: R/reshape.R:0
+msgid "'idvar' must uniquely identify records"
+msgstr ""
 
 #. R/identify.hclust.R: stop("'k' and 'h' arguments must be a scalar")
 #: R/identify.hclust.R:0
@@ -1543,6 +1555,12 @@ msgstr ""
 #: R/wilcox.test.R:0
 msgid "(pseudo)median"
 msgstr ""
+
+#. R/quantile.R: stop("(unordered) factors are not allowed")
+#: R/quantile.R:0
+#, fuzzy
+msgid "(unordered) factors are not allowed"
+msgstr "факторы не разрешены"
 
 #. R/models.R: gettext("(weights)", domain = "R-stats")
 #: R/models.R:0
@@ -4108,11 +4126,6 @@ msgstr "факторный анализ требует как минимум т�
 msgid "factor levels have been ordered"
 msgstr ""
 
-#. R/quantile.R: stop("factors are not allowed")
-#: R/quantile.R:0
-msgid "factors are not allowed"
-msgstr "факторы не разрешены"
-
 #. R/reshape.R: stop("failed to guess time-varying variables from their names")
 #: R/reshape.R:0
 #, fuzzy
@@ -4337,6 +4350,11 @@ msgstr "взаимодействия не разрешены"
 #: R/power.R:0 R/power.anova.test.R:0
 msgid "internal error"
 msgstr "внутренняя ошибка"
+
+#. R/nls.R: stop("invalid  'attr(rhs, \"gradient\")'")
+#: R/nls.R:0
+msgid "invalid  'attr(rhs, \"gradient\")'"
+msgstr ""
 
 #. R/arima.R: gettextf("invalid '%s' argument", "SSinit")
 #. R/chisq.test.R: gettextf("invalid '%s' argument", "x")

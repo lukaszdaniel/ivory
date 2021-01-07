@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 3.5.1\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2020-04-15 18:32\n"
+"POT-Creation-Date: 2021-01-07 23:37\n"
 "PO-Revision-Date: 2018-09-16 23:38+0800\n"
 "Last-Translator: Wei-Lun Chao <bluebat@member.fsf.org>\n"
 "Language-Team: Chinese (traditional) <zh-l10n@linux.org.tw>\n"
@@ -461,7 +461,7 @@ msgstr ""
 msgid "Class %s consists of following classes:"
 msgstr ""
 
-#. R/show.R: gettextf("Class %s for generic %s defined from package %s", dQuote(class(object)),     dQuote(object@generic), sQuote(object@package), domain = "R-methods")
+#. R/show.R: gettextf("Class %s for generic %s defined from package %s", dQuote(class(object)),     dQuote(nam), sQuote(object@package), domain = "R-methods")
 #: R/show.R:0
 #, fuzzy
 msgid "Class %s for generic %s defined from package %s"
@@ -483,7 +483,7 @@ msgid ""
 "  defined with value class: %s"
 msgstr ""
 
-#. R/show.R: gettextf("Class %s for generic %s defined from package %s\n  defined with value class: %s\n",     dQuote(class(object)), dQuote(object@generic), sQuote(object@package), dQuote(object@valueClass),     domain = "R-methods")
+#. R/show.R: gettextf("Class %s for generic %s defined from package %s\n  defined with value class: %s\n",     dQuote(class(object)), dQuote(nam), sQuote(object@package), dQuote(object@valueClass),     domain = "R-methods")
 #: R/show.R:0
 #, fuzzy
 msgid ""

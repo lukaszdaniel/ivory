@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.3.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2020-07-23 12:01\n"
+"POT-Creation-Date: 2021-01-07 23:39\n"
 "PO-Revision-Date: 2012-03-09 06:16+0200\n"
 "Last-Translator: Chel Hee Lee <chl948@mail.usask.ca>\n"
 "Language-Team: The Korean R Translation Council <gnustats@gmail.com>\n"
@@ -332,9 +332,10 @@ msgstr "'file' 은 반드시 \"\" 혹은 열린 커넥션 객체이어야 합니
 msgid "'file' must be NULL, a character string or a connection"
 msgstr "'file' 은 반드시 NULL, 문자열, 혹은 커넥션이어야 합니다 "
 
-#. R/zip.R: stop("'files' must a character vector specifying one or more filepaths")
+#. R/zip.R: stop("'files' must be a character vector specifying one or more filepaths")
 #: R/zip.R:0
-msgid "'files' must a character vector specifying one or more filepaths"
+#, fuzzy
+msgid "'files' must be a character vector specifying one or more filepaths"
 msgstr "'files' 는 한개 이상의 파일패스들을 지정하는 문자형 벡터이야 합니다"
 
 #. R/frametools.R: stop("'form' must be a two-sided formula")
@@ -1225,6 +1226,11 @@ msgstr ""
 msgid "Package"
 msgstr "패키지"
 
+#. R/packages2.R: gettextf("Package %s version %s is in the repositories but depends on %s", sQuote(av2[,     "Package"]), av2[, "Version"], unlist(x))
+#: R/packages2.R:0
+msgid "Package %s version %s is in the repositories but depends on %s"
+msgstr ""
+
 #. R/bug.report.R: gettextf("Package %s: DESCRIPTION file not found", sQuote(package))
 #: R/bug.report.R:0
 #, fuzzy
@@ -1881,6 +1887,12 @@ msgstr "열의 이름들을 파일에 추가합니다 "
 msgid "argument 'help.db' is deprecated"
 msgstr "인수 'help.db' 가 누락되었습니다 "
 
+#. R/zip.R: stop("argument 'zip' must be a non-empty character string")
+#: R/zip.R:0
+#, fuzzy
+msgid "argument 'zip' must be a non-empty character string"
+msgstr "'url' 은 반드시 비어있지 않은 문자열이어야 합니다 "
+
 #. R/sourceutils.R: stop("argument is not a function or language object:", typeof(fn))
 #: R/sourceutils.R:0
 msgid "argument is not a function or language object:"
@@ -1907,11 +1919,6 @@ msgstr "패키지 %s 를 찾을 수 없습니다 "
 #: R/write.table.R:0
 msgid "attempt to set '%s' ignored"
 msgstr "'%s' 을 설정하고자 하는 시도가 무시되었습니다"
-
-#. R/capture.output.R: stop("bad argument")
-#: R/capture.output.R:0
-msgid "bad argument"
-msgstr "인수가 잘못되었습니다 "
 
 #. R/packages2.R: gettextf("begin installing package %s", sQuote(pkg), domain = "R-utils")
 #: R/packages2.R:0
@@ -3458,6 +3465,18 @@ msgid_plural "A bibentry of bibtype %s has to specify the fields: %s"
 msgstr[0] ""
 "비브타입 %s 를 가지는 비브엔트리는 다음 항목(들)을 명시해야합니다: %s"
 
+#. R/packages2.R: ngettext(sum(m0), "A version of this package for your version of R might be available elsewhere,\nsee the ideas at\n",     "Versions of these packages for your version of R might be available elsewhere,\nsee the ideas at\n")
+#: R/packages2.R:0
+msgid ""
+"A version of this package for your version of R might be available "
+"elsewhere,\n"
+"see the ideas at\n"
+msgid_plural ""
+"Versions of these packages for your version of R might be available "
+"elsewhere,\n"
+"see the ideas at\n"
+msgstr[0] ""
+
 #. R/str.R: ngettext(length(cl), "Class %s", "Classes %s", domain = "R-utils")
 #: R/str.R:0
 msgid "Class %s"
@@ -3686,18 +3705,20 @@ msgid "package %s is in use and will not be installed"
 msgid_plural "packages %s are in use and will not be installed"
 msgstr[0] "패키지 %s 는 사용중이며 설치되지 않을 것입니다 "
 
-#. R/packages2.R: ngettext(sum(miss), "package %s is not available (as a binary package for %s)", "packages %s are not available (as a binary packages for %s)",     domain = "R-utils")
+#. R/packages2.R: ngettext(sum(m0), "package %s is not available %s", "packages %s are not available %s")
 #: R/packages2.R:0
 #, fuzzy
-msgid "package %s is not available (as a binary package for %s)"
-msgid_plural "packages %s are not available (as a binary packages for %s)"
+msgid "package %s is not available %s"
+msgid_plural "packages %s are not available %s"
 msgstr[0] "패키지 %s 는 (%s 에 대하여) 이용가능하지 않습니다 "
 
-#. R/packages2.R: ngettext(sum(miss), "package %s is not available (for %s)", "packages %s are not available (for %s)",     domain = "R-utils")
-#: R/packages2.R:0
-msgid "package %s is not available (for %s)"
-msgid_plural "packages %s are not available (for %s)"
-msgstr[0] "패키지 %s 는 (%s 에 대하여) 이용가능하지 않습니다 "
+#~ msgid "bad argument"
+#~ msgstr "인수가 잘못되었습니다 "
+
+#, fuzzy
+#~ msgid "package %s is not available (as a binary package for %s)"
+#~ msgid_plural "packages %s are not available (as a binary packages for %s)"
+#~ msgstr[0] "패키지 %s 는 (%s 에 대하여) 이용가능하지 않습니다 "
 
 #~ msgid "cannot turn off locale-specific chars via LC_CTYPE"
 #~ msgstr "LC_CTYPE 을 통해서 로케일 특정문자를 사용못하게 할 수 없습니다 "

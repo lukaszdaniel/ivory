@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.3.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2020-08-14 18:57\n"
+"POT-Creation-Date: 2021-01-07 23:35\n"
 "PO-Revision-Date: 2015-01-17 13:33+0100\n"
 "Last-Translator: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
 "Language-Team: Chinese\n"
@@ -224,7 +224,6 @@ msgstr "'by'参数太小"
 msgid "'%s' argument is not a QR decomposition"
 msgstr "第一个参数必需是QR分解"
 
-#. R/all.equal.R: gettextf("'%s' argument is not a factor", "target")
 #. R/all.equal.R: gettextf("'%s' argument is not a factor", "current")
 #: R/all.equal.R:0
 #, fuzzy
@@ -600,12 +599,6 @@ msgstr "'%s'对\"POSIXt\"对象不适用"
 msgid "'%s' is not a valid choice"
 msgstr "%s'不是正当的选择"
 
-#. R/namespace.R: gettextf("'%s' is not an exported object from 'namespace:%s'", name, getNamespaceName(ns))
-#: R/namespace.R:0
-#, fuzzy
-msgid "'%s' is not an exported object from 'namespace:%s'"
-msgstr "'%s'不是'namespace:%s'内的出口对象："
-
 #. R/datetime.R: gettextf("'%s' operator is not defined for objects of class %s", .Generic, dQuote("POSIXt"))
 #. R/datetime.R: gettextf("'%s' operator is not defined for objects of class %s", .Generic, dQuote("POSIXt"))
 #. R/datetime.R: gettextf("'%s' operator is not defined for objects of class %s", .Generic, dQuote("POSIXt"))
@@ -937,6 +930,12 @@ msgid ""
 msgstr ""
 "'mode'的值必需是\"double\" (\"real\")， \"integer\"或\"character\"中的一个"
 
+#. R/connections.R: if (missing(name)) "argument 'object' must deparse to a single character string" else "'name' must be a single character string"
+#: R/connections.R:0
+#, fuzzy
+msgid "'name' must be a single character string"
+msgstr "'file'的值必需是长度大于零的字符串"
+
 #. R/diag.R: stop("'nrow' or 'ncol' cannot be specified when 'x' is a matrix")
 #: R/diag.R:0
 msgid "'nrow' or 'ncol' cannot be specified when 'x' is a matrix"
@@ -1025,11 +1024,11 @@ msgid ""
 "solve()' function"
 msgstr "调用solve.default在\"qr\"对象上：用'qr.solve'"
 
-#. R/dataframe.R: stop("'summary()' function is only defined on a data frame with all numeric variables")
+#. R/dataframe.R: stop("'summary()' function is only defined on a data frame with all numeric-alike variables")
 #: R/dataframe.R:0
 #, fuzzy
 msgid ""
-"'summary()' function is only defined on a data frame with all numeric "
+"'summary()' function is only defined on a data frame with all numeric-alike "
 "variables"
 msgstr "只适用于全数值数据框"
 
@@ -1070,6 +1069,12 @@ msgstr "只能截断已经打开了的链结"
 #. R/datetime.R: warning("'tzone' attributes are inconsistent")
 #: R/datetime.R:0
 msgid "'tzone' attributes are inconsistent"
+msgstr "'tzone'的屬性相互有矛盾"
+
+#. R/all.equal.R: gettextf("'tzone' attributes are inconsistent ('%s' and '%s')", tzt, tzc)
+#: R/all.equal.R:0
+#, fuzzy
+msgid "'tzone' attributes are inconsistent ('%s' and '%s')"
 msgstr "'tzone'的屬性相互有矛盾"
 
 #. R/findInt.R: stop("'vec' argument must be sorted non-decreasingly and not contain NA values")
@@ -1951,7 +1956,13 @@ msgstr "参数将被数据略微回收"
 msgid "an object with that name already exists"
 msgstr "对象的名字已经存在"
 
-#. R/connections.R: stop("argument 'object' must deparse to a single character string")
+#. R/grep.R: gettextf("argument '%s' will be ignored", "perl = TRUE")
+#: R/grep.R:0
+#, fuzzy
+msgid "argument '%s' will be ignored"
+msgstr "忽略drop参数"
+
+#. R/connections.R: if (missing(name)) "argument 'object' must deparse to a single character string" else "'name' must be a single character string"
 #: R/connections.R:0
 msgid "argument 'object' must deparse to a single character string"
 msgstr "参数'object'必需解析成单一个字符串"
@@ -2154,6 +2165,18 @@ msgstr ""
 msgid "cannot split the message connection"
 msgstr "无法将消息链结分割"
 
+#. R/sort.R: stop("cannot xtfrm 'x'")
+#: R/sort.R:0
+msgid "cannot xtfrm 'x'"
+msgstr ""
+
+#. R/dataframe.R: stop("cannot xtfrm data frames")
+#. R/dataframe.R: warning("cannot xtfrm data frames")
+#: R/dataframe.R:0
+#, fuzzy
+msgid "cannot xtfrm data frames"
+msgstr "不是数据框"
+
 #. R/dates.R: stop("character string is not in a standard unambiguous format")
 #. R/datetime.R: stop("character string is not in a standard unambiguous format")
 #: R/dates.R:0 R/datetime.R:0
@@ -2315,6 +2338,11 @@ msgstr "NAMESPACE文件里'%s'指示中有空的名字"
 #, fuzzy
 msgid "encoding = \"%s\" chosen"
 msgstr "已经选择了encoding = \"%s\""
+
+#. R/all.equal.R: gettext("environments contain objects of the same names, but are not identical",     domain = "R-base")
+#: R/all.equal.R:0
+msgid "environments contain objects of the same names, but are not identical"
+msgstr ""
 
 #. R/qr.R: stop("exact singularity in 'qr.coef()' function")
 #: R/qr.R:0
@@ -2862,6 +2890,12 @@ msgstr "名字同原来已有的名字不相对"
 #, fuzzy
 msgid "names for '%s' argument but not for '%s' argument"
 msgstr "'scale'的长度必需和'x'列的数目相同"
+
+#. R/all.equal.R: gettext("names of environments differ:", domain = "R-base")
+#: R/all.equal.R:0
+#, fuzzy
+msgid "names of environments differ:"
+msgstr "层次数目不同"
 
 #. R/namespace.R: gettextf("namespace %s %s is already loaded, but %s %s is required", sQuote(package),     current, zop, zversion)
 #: R/namespace.R:0
@@ -3815,11 +3849,11 @@ msgid "library %s contains no packages"
 msgid_plural "libraries %s contain no packages"
 msgstr[0] "图书馆%s里没有程辑包"
 
-#. R/dataframe.R: ngettext(sum(!mode.ok), "non-numeric variable in data frame: ", "non-numeric variables in data frame: ",     domain = "R-base")
+#. R/dataframe.R: ngettext(sum(!mode.ok), "non-numeric-alike variable in data frame: ", "non-numeric-alike variables in data frame: ",     domain = "R-base")
 #: R/dataframe.R:0
 #, fuzzy
-msgid "non-numeric variable in data frame: "
-msgid_plural "non-numeric variables in data frame: "
+msgid "non-numeric-alike variable in data frame: "
+msgid_plural "non-numeric-alike variables in data frame: "
 msgstr[0] "数据框里有非数值的参数"
 
 #. R/dataframe.R: ngettext(length(nonuniq), "non-unique value when setting 'row.names': %s", "non-unique values when setting 'row.names': %s",     domain = "R-base")
@@ -3941,6 +3975,10 @@ msgstr[0] "不存在叫%s这个名字的程辑包"
 msgid "variable %s is not TRUE"
 msgid_plural "variables %s are not all TRUE"
 msgstr[0] "用T代替TRUE"
+
+#, fuzzy
+#~ msgid "'%s' is not an exported object from 'namespace:%s'"
+#~ msgstr "'%s'不是'namespace:%s'内的出口对象："
 
 #~ msgid "bad handler specification"
 #~ msgstr "处置器柄规格不对"
@@ -4167,10 +4205,6 @@ msgstr[0] "用T代替TRUE"
 
 #~ msgid "length of 'center' must equal the number of columns of 'x'"
 #~ msgstr "'center'的长度必需和'x'列的数目相同"
-
-#, fuzzy
-#~ msgid "'%s' must be non-empty character string"
-#~ msgstr "'file'的值必需是长度大于零的字符串"
 
 #~ msgid "'echo' must be logical"
 #~ msgstr "'echo'必需为逻辑值"

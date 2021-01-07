@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.1.0 \n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2020-07-23 12:01\n"
+"POT-Creation-Date: 2021-01-07 23:39\n"
 "PO-Revision-Date: 2012-02-26 14:23+0200 \n"
 "Last-Translator: Shigeru Mase <maseshigeru@gmail.com> \n"
 "Language-Team: RjpWiki Message Translation Team <mokada@md.tsukuba.ac.jp> \n"
@@ -330,9 +330,10 @@ msgstr ""
 msgid "'file' must be NULL, a character string or a connection"
 msgstr " 'file' はconnectionか文字列か NULL でなければなりません "
 
-#. R/zip.R: stop("'files' must a character vector specifying one or more filepaths")
+#. R/zip.R: stop("'files' must be a character vector specifying one or more filepaths")
 #: R/zip.R:0
-msgid "'files' must a character vector specifying one or more filepaths"
+#, fuzzy
+msgid "'files' must be a character vector specifying one or more filepaths"
 msgstr ""
 " 'files' は１つ以上のファイルパスを指定する文字ベクトルでなければなりません "
 
@@ -1231,6 +1232,11 @@ msgstr ""
 msgid "Package"
 msgstr " パッケージ "
 
+#. R/packages2.R: gettextf("Package %s version %s is in the repositories but depends on %s", sQuote(av2[,     "Package"]), av2[, "Version"], unlist(x))
+#: R/packages2.R:0
+msgid "Package %s version %s is in the repositories but depends on %s"
+msgstr ""
+
 #. R/bug.report.R: gettextf("Package %s: DESCRIPTION file not found", sQuote(package))
 #: R/bug.report.R:0
 #, fuzzy
@@ -1897,6 +1903,12 @@ msgstr " ファイルに列名を加えます "
 msgid "argument 'help.db' is deprecated"
 msgstr " 引数 'help.db' は廃止されました  "
 
+#. R/zip.R: stop("argument 'zip' must be a non-empty character string")
+#: R/zip.R:0
+#, fuzzy
+msgid "argument 'zip' must be a non-empty character string"
+msgstr " 'url' は空でない文字列でなければなりません "
+
 #. R/sourceutils.R: stop("argument is not a function or language object:", typeof(fn))
 #: R/sourceutils.R:0
 msgid "argument is not a function or language object:"
@@ -1923,11 +1935,6 @@ msgstr " パッケージ %s を見付けることが出来ませんでした "
 #: R/write.table.R:0
 msgid "attempt to set '%s' ignored"
 msgstr " '%s' への変更の試みは無視されました "
-
-#. R/capture.output.R: stop("bad argument")
-#: R/capture.output.R:0
-msgid "bad argument"
-msgstr " 誤った引数 "
 
 #. R/packages2.R: gettextf("begin installing package %s", sQuote(pkg), domain = "R-utils")
 #: R/packages2.R:0
@@ -3495,6 +3502,18 @@ msgid_plural "A bibentry of bibtype %s has to specify the fields: %s"
 msgstr[0] ""
 " bibitype %s の bibentry は欄を正確に指定しなければなりません： %s  "
 
+#. R/packages2.R: ngettext(sum(m0), "A version of this package for your version of R might be available elsewhere,\nsee the ideas at\n",     "Versions of these packages for your version of R might be available elsewhere,\nsee the ideas at\n")
+#: R/packages2.R:0
+msgid ""
+"A version of this package for your version of R might be available "
+"elsewhere,\n"
+"see the ideas at\n"
+msgid_plural ""
+"Versions of these packages for your version of R might be available "
+"elsewhere,\n"
+"see the ideas at\n"
+msgstr[0] ""
+
 #. R/str.R: ngettext(length(cl), "Class %s", "Classes %s", domain = "R-utils")
 #: R/str.R:0
 msgid "Class %s"
@@ -3723,19 +3742,20 @@ msgid "package %s is in use and will not be installed"
 msgid_plural "packages %s are in use and will not be installed"
 msgstr[0] " パッケージ '%s' は使用中ですから、インストールされません "
 
-#. R/packages2.R: ngettext(sum(miss), "package %s is not available (as a binary package for %s)", "packages %s are not available (as a binary packages for %s)",     domain = "R-utils")
+#. R/packages2.R: ngettext(sum(m0), "package %s is not available %s", "packages %s are not available %s")
 #: R/packages2.R:0
 #, fuzzy
-msgid "package %s is not available (as a binary package for %s)"
-msgid_plural "packages %s are not available (as a binary packages for %s)"
+msgid "package %s is not available %s"
+msgid_plural "packages %s are not available %s"
 msgstr[0] " パッケージ %s が利用できません "
 
-#. R/packages2.R: ngettext(sum(miss), "package %s is not available (for %s)", "packages %s are not available (for %s)",     domain = "R-utils")
-#: R/packages2.R:0
+#~ msgid "bad argument"
+#~ msgstr " 誤った引数 "
+
 #, fuzzy
-msgid "package %s is not available (for %s)"
-msgid_plural "packages %s are not available (for %s)"
-msgstr[0] " パッケージ %s が利用できません "
+#~ msgid "package %s is not available (as a binary package for %s)"
+#~ msgid_plural "packages %s are not available (as a binary packages for %s)"
+#~ msgstr[0] " パッケージ %s が利用できません "
 
 #~ msgid "cannot turn off locale-specific chars via LC_CTYPE"
 #~ msgstr " LC_CTYPE 経由でロケール固有の文字を使用停止にできません "

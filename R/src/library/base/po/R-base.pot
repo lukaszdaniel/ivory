@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: base 4.1.0\n"
-"POT-Creation-Date: 2020-08-14 18:57\n"
+"POT-Creation-Date: 2021-01-07 23:35\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -242,7 +242,6 @@ msgstr ""
 
 
 #: R/all.equal.R: 0
-#. R/all.equal.R: gettextf("'%s' argument is not a factor", "target")
 #. R/all.equal.R: gettextf("'%s' argument is not a factor", "current")
 
 msgid "'%s' argument is not a factor"
@@ -713,13 +712,6 @@ msgid "'%s' is not a valid choice"
 msgstr ""
 
 
-#: R/namespace.R: 0
-#. R/namespace.R: gettextf("'%s' is not an exported object from 'namespace:%s'", name, getNamespaceName(ns))
-
-msgid "'%s' is not an exported object from 'namespace:%s'"
-msgstr ""
-
-
 #: R/datetime.R: 0
 #. R/datetime.R: gettextf("'%s' operator is not defined for objects of class %s", .Generic, dQuote("POSIXt"))
 #. R/datetime.R: gettextf("'%s' operator is not defined for objects of class %s", .Generic, dQuote("POSIXt"))
@@ -1094,6 +1086,13 @@ msgid "'mode' argument must be \"double\" (\"real\"), \"integer\" or \"character
 msgstr ""
 
 
+#: R/connections.R: 0
+#. R/connections.R: if (missing(name)) "argument 'object' must deparse to a single character string" else "'name' must be a single character string"
+
+msgid "'name' must be a single character string"
+msgstr ""
+
+
 #: R/diag.R: 0
 #. R/diag.R: stop("'nrow' or 'ncol' cannot be specified when 'x' is a matrix")
 
@@ -1192,9 +1191,9 @@ msgstr ""
 
 
 #: R/dataframe.R: 0
-#. R/dataframe.R: stop("'summary()' function is only defined on a data frame with all numeric variables")
+#. R/dataframe.R: stop("'summary()' function is only defined on a data frame with all numeric-alike variables")
 
-msgid "'summary()' function is only defined on a data frame with all numeric variables"
+msgid "'summary()' function is only defined on a data frame with all numeric-alike variables"
 msgstr ""
 
 
@@ -1244,6 +1243,13 @@ msgstr ""
 #. R/datetime.R: warning("'tzone' attributes are inconsistent")
 
 msgid "'tzone' attributes are inconsistent"
+msgstr ""
+
+
+#: R/all.equal.R: 0
+#. R/all.equal.R: gettextf("'tzone' attributes are inconsistent ('%s' and '%s')", tzt, tzc)
+
+msgid "'tzone' attributes are inconsistent ('%s' and '%s')"
 msgstr ""
 
 
@@ -2329,8 +2335,15 @@ msgid "an object with that name already exists"
 msgstr ""
 
 
+#: R/grep.R: 0
+#. R/grep.R: gettextf("argument '%s' will be ignored", "perl = TRUE")
+
+msgid "argument '%s' will be ignored"
+msgstr ""
+
+
 #: R/connections.R: 0
-#. R/connections.R: stop("argument 'object' must deparse to a single character string")
+#. R/connections.R: if (missing(name)) "argument 'object' must deparse to a single character string" else "'name' must be a single character string"
 
 msgid "argument 'object' must deparse to a single character string"
 msgstr ""
@@ -2585,6 +2598,21 @@ msgid "cannot split the message connection"
 msgstr ""
 
 
+#: R/sort.R: 0
+#. R/sort.R: stop("cannot xtfrm 'x'")
+
+msgid "cannot xtfrm 'x'"
+msgstr ""
+
+
+#: R/dataframe.R: 0
+#. R/dataframe.R: stop("cannot xtfrm data frames")
+#. R/dataframe.R: warning("cannot xtfrm data frames")
+
+msgid "cannot xtfrm data frames"
+msgstr ""
+
+
 #: R/dates.R: 0
 #: R/datetime.R: 0
 #. R/dates.R: stop("character string is not in a standard unambiguous format")
@@ -2784,6 +2812,13 @@ msgstr ""
 #. R/source.R: gettextf("encoding = \"%s\" chosen", encoding, domain = "R-base")
 
 msgid "encoding = \"%s\" chosen"
+msgstr ""
+
+
+#: R/all.equal.R: 0
+#. R/all.equal.R: gettext("environments contain objects of the same names, but are not identical",     domain = "R-base")
+
+msgid "environments contain objects of the same names, but are not identical"
 msgstr ""
 
 
@@ -3499,6 +3534,13 @@ msgstr ""
 #. R/all.equal.R: gettextf("names for '%s' argument but not for '%s' argument", "current", "target",     domain = "R-base")
 
 msgid "names for '%s' argument but not for '%s' argument"
+msgstr ""
+
+
+#: R/all.equal.R: 0
+#. R/all.equal.R: gettext("names of environments differ:", domain = "R-base")
+
+msgid "names of environments differ:"
 msgstr ""
 
 
@@ -4678,10 +4720,10 @@ msgstr[1]    ""
 
 
 #: R/dataframe.R: 0
-#. R/dataframe.R: ngettext(sum(!mode.ok), "non-numeric variable in data frame: ", "non-numeric variables in data frame: ",     domain = "R-base")
+#. R/dataframe.R: ngettext(sum(!mode.ok), "non-numeric-alike variable in data frame: ", "non-numeric-alike variables in data frame: ",     domain = "R-base")
 
-msgid        "non-numeric variable in data frame: "
-msgid_plural "non-numeric variables in data frame: "
+msgid        "non-numeric-alike variable in data frame: "
+msgid_plural "non-numeric-alike variables in data frame: "
 msgstr[0]    ""
 msgstr[1]    ""
 

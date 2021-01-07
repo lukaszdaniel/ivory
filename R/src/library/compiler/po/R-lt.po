@@ -1,0 +1,282 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: compiler 4.1.0\n"
+"POT-Creation-Date: 2020-04-15 18:32\n"
+"PO-Revision-Date: 2020-12-09 13:20+0200\n"
+"Last-Translator: r.zakauskas@gmail.com;gabriele.dauksaite@gmail.com\n"
+"Language-Team: Lithuanian\n"
+"Language: lt\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && (n"
+"%100<10 || n%100>=20) ? 1 : 2);\n"
+"X-Generator: Poedit 2.4.1\n"
+
+#. R/cmp.R: gettextf("%s at %s", paste(e$message, collapse = ""), paste(deparse(e$call), collapse = ""),     domain = "R-compiler")
+#. R/cmp.R: gettextf("%s at %s", paste(err$message, collapse = ""), paste(deparse(err$call),     collapse = ""), domain = "R-compiler")
+#: R/cmp.R:0
+msgid "%s at %s"
+msgstr ""
+
+#. R/cmp.R: gettextf("%s is not a registered math1 function", sQuote(name))
+#: R/cmp.R:0
+msgid "%s is not a registered math1 function"
+msgstr "%s nėra registruota math1 funkcija"
+
+#. R/cmp.R: gettextf("%s may be used in an incorrect context", var)
+#: R/cmp.R:0
+msgid "%s may be used in an incorrect context"
+msgstr ""
+
+#. R/cmp.R: gettextf("%s used in wrong context: no loop is visible", fun)
+#: R/cmp.R:0
+msgid "%s used in wrong context: no loop is visible"
+msgstr ""
+
+#. R/cmp.R: gettextf("'%s' is not a valid compiler option", n)
+#: R/cmp.R:0
+msgid "'%s' is not a valid compiler option"
+msgstr "'%s' netinkama kompiliatoriaus parinktis"
+
+#. R/cmp.R: stop("'env' must be a top level environment")
+#: R/cmp.R:0
+msgid "'env' must be a top level environment"
+msgstr "'env' turi būti aukščiausio lygio aplinka"
+
+#. R/cmp.R: gettext("'switch()' function with no alternatives")
+#: R/cmp.R:0
+#, fuzzy
+msgid "'switch()' function with no alternatives"
+msgstr "'switch' be alternatyvų"
+
+#. R/cmp.R: gettext("Error: compilation failed:", domain = "R-compiler")
+#: R/cmp.R:0
+#, fuzzy
+msgid "Error: compilation failed:"
+msgstr "Klaida: kompiliavimas nepavyko -"
+
+#. R/cmp.R: gettext("Note: ", domain = "R-compiler")
+#: R/cmp.R:0
+msgid "Note:"
+msgstr ""
+
+#. R/cmp.R: gettext("bad assignment 1")
+#: R/cmp.R:0
+msgid "bad assignment 1"
+msgstr "neteisingas priskyrimas 1"
+
+#. R/cmp.R: gettext("bad assignment 2")
+#: R/cmp.R:0
+msgid "bad assignment 2"
+msgstr "neteisingas priskyrimas 2"
+
+#. R/cmp.R: gettextf("bad assignment: %s", pasteExpr(e))
+#. R/cmp.R: gettextf("bad assignment: %s", pasteExpr(e))
+#. R/cmp.R: gettextf("bad assignment: %s", pasteExpr(e))
+#. R/cmp.R: gettextf("bad assignment: %s", pasteExpr(e))
+#: R/cmp.R:0
+msgid "bad assignment: %s"
+msgstr "neteisingas priskyrimas: %s"
+
+#. R/cmp.R: gettext("bad namespace import frame")
+#: R/cmp.R:0
+msgid "bad namespace import frame"
+msgstr "neteisinga vardų erdvės importo sistema"
+
+#. R/cmp.R: stop("cannot compile a non-function")
+#: R/cmp.R:0
+msgid "cannot compile a non-function"
+msgstr "negalima kompiliuoti ne fukcijos"
+
+#. R/cmp.R: gettext("cannot compile byte code literals in code")
+#. R/cmp.R: gettext("cannot compile byte code literals in code")
+#. R/cmp.R: gettext("cannot compile byte code literals in code")
+#: R/cmp.R:0
+msgid "cannot compile byte code literals in code"
+msgstr "negalima kompiliuoti baitinio kodo literalų kode"
+
+#. R/cmp.R: gettext("cannot compile promise literals in code")
+#. R/cmp.R: gettext("cannot compile promise literals in code")
+#. R/cmp.R: gettext("cannot compile promise literals in code")
+#: R/cmp.R:0
+msgid "cannot compile promise literals in code"
+msgstr "negalima kompiliuoti tikėtinų literalų kode"
+
+#. R/cmp.R: gettext("cannot compile this expression")
+#. R/cmp.R: gettext("cannot compile this expression")
+#. R/cmp.R: gettext("cannot compile this expression")
+#. R/cmp.R: gettext("cannot compile this expression")
+#: R/cmp.R:0
+msgid "cannot compile this expression"
+msgstr "negalima kompiliuoti šio reiškinio"
+
+#. R/cmp.R: gettext("cannot constant fold literal bytecode objects")
+#: R/cmp.R:0
+msgid "cannot constant fold literal bytecode objects"
+msgstr "negalima pastoviai suskleisti literalų baitinio kodo objektų"
+
+#. R/cmp.R: gettext("cannot constant fold literal promises")
+#: R/cmp.R:0
+msgid "cannot constant fold literal promises"
+msgstr "negalima pastoviai suskleisti tikėtinų literalų"
+
+#. R/cmp.R: gettextf("compiling %s", sQuote(f), domain = "R-compiler")
+#: R/cmp.R:0
+#, fuzzy
+msgid "compiling %s"
+msgstr "'%s' kompiliavimas"
+
+#. R/cmp.R: gettextf("compiling expression %s ...", sQuote(deparse(e, 20)[1]), domain = "R-compiler")
+#: R/cmp.R:0
+#, fuzzy
+msgid "compiling expression %s ..."
+msgstr "negalima kompiliuoti šio reiškinio"
+
+#. R/cmp.R: gettextf("compiling function %s", sQuote(e[[2]]), domain = "R-compiler")
+#: R/cmp.R:0
+#, fuzzy
+msgid "compiling function %s"
+msgstr "'%s' kompiliavimas"
+
+#. R/cmp.R: gettext("done", domain = "R-compiler")
+#. R/cmp.R: gettext("done", domain = "R-compiler")
+#: R/cmp.R:0
+msgid "done"
+msgstr "atlikta"
+
+#. R/cmp.R: stop("empty alternative in numeric 'switch()' function")
+#: R/cmp.R:0
+#, fuzzy
+msgid "empty alternative in numeric 'switch()' function"
+msgstr "tuščia alternatyva skaitiniame perjungime"
+
+#. R/cmp.R: warning("empty input file; no output written")
+#: R/cmp.R:0
+msgid "empty input file; no output written"
+msgstr "tuščias įvesties failas; nėra įrašytos išvesties"
+
+#. R/cmp.R: gettextf("file '%s' does not exist", file)
+#: R/cmp.R:0
+msgid "file '%s' does not exist"
+msgstr "'%s' failo nėra"
+
+#. R/cmp.R: stop("function is not compiled")
+#: R/cmp.R:0
+msgid "function is not compiled"
+msgstr "funkcija nesukompiliuota"
+
+#. R/cmp.R: gettextf("handler for '%s' is already defined for another package", name)
+#. R/cmp.R: gettextf("handler for '%s' is already defined for another package", name)
+#. R/cmp.R: gettextf("handler for '%s' is already defined for another package", name)
+#: R/cmp.R:0
+msgid "handler for '%s' is already defined for another package"
+msgstr ""
+
+#. R/cmp.R: stop("input and output file names are the same")
+#: R/cmp.R:0
+msgid "input and output file names are the same"
+msgstr "įvesties failo vardas toks pat, kaip ir išvesties"
+
+#. R/cmp.R: gettextf("invalid compiler options: 'optimize(==%d)<2' and 'jitEnabled(==%d)>2'",     optimize, jitEnabled)
+#: R/cmp.R:0
+#, fuzzy
+msgid "invalid compiler options: 'optimize(==%d)<2' and 'jitEnabled(==%d)>2'"
+msgstr ""
+"netinkamos kompiliatoriaus parinktys: optimize(==%d)<2 ir jitEnabled(=%d)>2"
+
+#. R/cmp.R: gettextf("invalid environment variable value: %s==%s", varName, value)
+#: R/cmp.R:0
+msgid "invalid environment variable value: %s==%s"
+msgstr "neleistina aplinkos kintamojo reikšmė: %s==%s"
+
+#. R/cmp.R: gettext("invalid function in complex assignment")
+#. R/cmp.R: gettext("invalid function in complex assignment")
+#: R/cmp.R:0
+msgid "invalid function in complex assignment"
+msgstr "neteisinga funkcija kompleksiniame priskyrime"
+
+#. R/cmp.R: gettext("missing arguments are not allowed")
+#: R/cmp.R:0
+msgid "missing arguments are not allowed"
+msgstr "trūkstami argumentai yra neleidžiami"
+
+#. R/cmp.R: gettext("more than one default provided in 'switch()' call")
+#: R/cmp.R:0
+#, fuzzy
+msgid "more than one default provided in 'switch()' call"
+msgstr ""
+"daugiau negu vienas numatytasis pateikiamas, esantis switch() kreipinyje"
+
+#. R/cmp.R: stop("namespace found within global environments")
+#: R/cmp.R:0
+msgid "namespace found within global environments"
+msgstr "vardų sritis rasta globaliose aplinkose"
+
+#. R/cmp.R: stop("namespace found within local environments")
+#: R/cmp.R:0
+msgid "namespace found within local environments"
+msgstr "vardų sritis randama vietinėse aplinkose"
+
+#. R/cmp.R: gettextf("no offset recorded for label \"%s\"", lbl)
+#: R/cmp.R:0
+msgid "no offset recorded for label \"%s\""
+msgstr "joks poslinkis neįrašytas \"%s\" žymenai"
+
+#. R/cmp.R: gettextf("no visible binding for '<<-' assignment to '%s'", as.character(symbol))
+#: R/cmp.R:0
+msgid "no visible binding for '<<-' assignment to '%s'"
+msgstr "nėra matomo saistymo '<<-' priskyrimui į '%s'"
+
+#. R/cmp.R: gettextf("no visible binding for global variable '%s'", as.character(var))
+#: R/cmp.R:0
+msgid "no visible binding for global variable '%s'"
+msgstr "nėra matomo saistymo globaliam kintamajam '%s'"
+
+#. R/cmp.R: gettextf("no visible global function definition for '%s'", as.character(fun))
+#: R/cmp.R:0
+msgid "no visible global function definition for '%s'"
+msgstr "nėra matomas globaliosios funkcijos apibrėžimas '%s'"
+
+#. R/cmp.R: stop("non-namespace found within namespace environments")
+#: R/cmp.R:0
+msgid "non-namespace found within namespace environments"
+msgstr "ne vardų sritis, rasta vardų srities aplinkose"
+
+#. R/cmp.R: gettextf("possible error in '%s': %s", deparse(call, 20)[1], msg)
+#: R/cmp.R:0
+msgid "possible error in '%s': %s"
+msgstr "galima klaida, esanti '%s': %s"
+
+#. R/cmp.R: gettextf("saving to file %s ... ", sQuote(file), domain = "R-compiler")
+#. R/cmp.R: gettextf("saving to file %s ... ", sQuote(outfile), domain = "R-compiler")
+#: R/cmp.R:0
+#, fuzzy
+msgid "saving to file %s ..."
+msgstr "įrašoma į failą \"%s\" ..."
+
+#. R/cmp.R: stop("supplied 'env' argument is not a proper evaluation environment")
+#. R/cmp.R: stop("supplied 'env' argument is not a proper evaluation environment")
+#: R/cmp.R:0
+#, fuzzy
+msgid "supplied 'env' argument is not a proper evaluation environment"
+msgstr "netinkama vertinimo aplinka"
+
+#. R/cmp.R: gettextf("wrong number of arguments to '%s'", as.character(fun))
+#: R/cmp.R:0
+msgid "wrong number of arguments to '%s'"
+msgstr "neteisingas argumentų skaičius į '%s'"
+
+#. R/cmp.R: ngettext(length(funs), "local assignment to syntactic function: ", "local assignments to syntactic functions: ")
+#: R/cmp.R:0
+msgid "local assignment to syntactic function: "
+msgid_plural "local assignments to syntactic functions: "
+msgstr[0] "vietos priskyrimas į sintaksinę funkciją: "
+msgstr[1] "vietų priskyrimas į sintaksines funkcijas: "
+msgstr[2] "vietos priskyrimas į sintaksinę funkciją: "
+
+#~ msgid "2. local assignments to syntactic functions:"
+#~ msgstr "2. vietos priskyrimai į sintaksines funkcijas:"
+
+#~ msgid "3. local assignments to syntactic functions:"
+#~ msgstr "3. vietos priskyrimų į sintaksines funkcijas:"

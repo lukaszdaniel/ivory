@@ -1,0 +1,928 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: grDevices 4.1.0\n"
+"POT-Creation-Date: 2021-01-07 23:37\n"
+"PO-Revision-Date: 2020-11-29 17:27+0200\n"
+"Last-Translator: <r.zakauskas@gmail.com;gabriele.dauksaite@gmail.com>\n"
+"Language-Team: Lithuanian\n"
+"Language: lt\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && (n"
+"%100<10 || n%100>=20) ? 1 : 2);\n"
+
+#. R/windows/windows.R: gettext("  #plot calls are:", domain = "R-grDevices")
+#: R/windows/windows.R:0
+msgid "#plot calls are:"
+msgstr ""
+
+#. R/convertColor.R: gettextf("'%s' argument disagrees with definition of '%s'", "from.ref.white", from$name)
+#. R/convertColor.R: gettextf("'%s' argument disagrees with definition of '%s'", "to.ref.white", to$name)
+#: R/convertColor.R:0
+#, fuzzy
+msgid "'%s' argument disagrees with definition of '%s'"
+msgstr "'from.ref.white' nesutampa su %s apibrėžtimi"
+
+#. R/postscript.R: gettextf("'%s' argument is not an object of class %s", "font", dQuote("CIDFont"))
+#. R/recordplot.R: gettextf("'%s' argument is not an object of class %s", "x", dQuote("recordedplot"))
+#. R/windows/windows.R: gettextf("'%s' argument is not an object of class %s", "x", dQuote("SavedPlots"),     domain = "R-grDevices")
+#: R/postscript.R:0 R/recordplot.R:0 R/windows/windows.R:0
+#, fuzzy
+msgid "'%s' argument is not an object of class %s"
+msgstr "argumentas nėra %s klasės"
+
+#. R/convertColor.R: gettextf("'%s' argument must be an object of class %s or a string", "from", dQuote("colorConverter"))
+#. R/convertColor.R: gettextf("'%s' argument must be an object of class %s or a string", "to", dQuote("colorConverter"))
+#: R/convertColor.R:0
+#, fuzzy
+msgid "'%s' argument must be an object of class %s or a string"
+msgstr "argumentas nėra %s klasės"
+
+#. R/smooth2d.R: gettextf("'%s' argument must be numeric", "bandwidth")
+#: R/smooth2d.R:0
+#, fuzzy
+msgid "'%s' argument must be numeric"
+msgstr "rgb matrica turi būti skaitinė"
+
+#. R/colorRamp.R: gettextf("'%s' argument must be positive", "bias")
+#. R/smooth2d.R: gettextf("'%s' argument must be positive", "bandwidth")
+#: R/colorRamp.R:0 R/smooth2d.R:0
+#, fuzzy
+msgid "'%s' argument must be positive"
+msgstr "'bias' turi būti teigiamas"
+
+#. R/device.R: gettextf("'%s' function called without an open graphics device", "dev.control()")
+#. R/device.R: gettextf("'%s' function called without an open graphics device", "dev.displaylist()")
+#: R/device.R:0
+#, fuzzy
+msgid "'%s' function called without an open graphics device"
+msgstr "dev.control() iškviesta be atverto grafikos įrenginio"
+
+#. R/colorRamp.R: stop("'alpha' must be false if 'space' is specified")
+#: R/colorRamp.R:0
+msgid "'alpha' must be false if 'space' is specified"
+msgstr "'alpha' turi būti klaidingas, jei nurodyta 'space'"
+
+#. R/calc.R: stop("'coef' must not be negative")
+#: R/calc.R:0
+msgid "'coef' must not be negative"
+msgstr "'coef' turi neturi būti neigiamas"
+
+#. R/device.R: stop("'device' should be a function")
+#: R/device.R:0
+msgid "'device' should be a function"
+msgstr "'device' turėtų būti funkcija"
+
+#. R/raster.R: warning("'drop' is always implicitly FALSE in '[.raster'")
+#: R/raster.R:0
+msgid "'drop' is always implicitly FALSE in '[.raster'"
+msgstr "drop' visada netiesiogiai FALSE, esanti '[.raster'"
+
+#. R/unix/dev2bitmap.R: stop("'file' argument is missing with no default")
+#. R/unix/dev2bitmap.R: stop("'file' argument is missing with no default")
+#. R/windows/dev2bitmap.R: stop("'file' argument is missing with no default")
+#. R/windows/dev2bitmap.R: stop("'file' argument is missing with no default")
+#: R/unix/dev2bitmap.R:0 R/windows/dev2bitmap.R:0
+#, fuzzy
+msgid "'file' argument is missing with no default"
+msgstr "trūkstamas argumentas nėra numatytasis"
+
+#. R/postscript.R: stop("'file' argument must be a non-empty character string")
+#. R/unix/dev2bitmap.R: stop("'file' argument must be a non-empty character string")
+#. R/unix/dev2bitmap.R: stop("'file' argument must be a non-empty character string")
+#. R/windows/dev2bitmap.R: stop("'file' argument must be a non-empty character string")
+#. R/windows/dev2bitmap.R: stop("'file' argument must be a non-empty character string")
+#: R/postscript.R:0 R/unix/dev2bitmap.R:0 R/windows/dev2bitmap.R:0
+#, fuzzy
+msgid "'file' argument must be a non-empty character string"
+msgstr "'file' turi būti netuščia simbolių eilutė"
+
+#. R/convertColor.R: stop("'gamma' argument must be a scalar or 'sRGB' value")
+#: R/convertColor.R:0
+#, fuzzy
+msgid "'gamma' argument must be a scalar or 'sRGB' value"
+msgstr "'gamma' turi būti skaliaras arba 'sRGB'"
+
+#. R/colorstuff.R: sprintf("'n' set to %s, the maximum available for %s palette", nc, palette)
+#: R/colorstuff.R:0
+msgid "'n' set to %s, the maximum available for %s palette"
+msgstr "'n' nustatyta kaip %s, didžiausia galima paletei %s"
+
+#. R/device.R: stop("'name' must be a character vector")
+#: R/device.R:0
+msgid "'name' must be a character vector"
+msgstr "'names' turi būti tekstinis vektorius"
+
+#. R/postscript.R: stop("'name.opt' argument must be character, name of an existing list")
+#: R/postscript.R:0
+#, fuzzy
+msgid "'name.opt' argument must be character, name of an existing list"
+msgstr "'name.opt' turi būti ženklas, egzistuojančio sąrašo vardas"
+
+#. R/smooth2d.R: stop("'nbin' argument must be numeric of length 1 or 2")
+#: R/smooth2d.R:0
+#, fuzzy
+msgid "'nbin' argument must be numeric of length 1 or 2"
+msgstr "'nbin' turi būti 1 ar 2 ilgio skaitmuo"
+
+#. R/colorstuff.R: stop("'palette' does not match any given palette")
+#. R/hcl.colors.R: stop("'palette' does not match any given palette")
+#: R/colorstuff.R:0 R/hcl.colors.R:0
+msgid "'palette' does not match any given palette"
+msgstr "'palette' neatitinka jokios konkrečios paletės"
+
+#. R/colorstuff.R: stop("'palette' is ambiguous")
+#. R/hcl.colors.R: stop("'palette' is ambiguous")
+#: R/colorstuff.R:0 R/hcl.colors.R:0
+msgid "'palette' is ambiguous"
+msgstr "'palette' yra dviprasmiška"
+
+#. R/utils.R: stop("'r' must be a 'range()' result, hence of length 2")
+#: R/utils.R:0
+#, fuzzy
+msgid "'r' must be a 'range()' result, hence of length 2"
+msgstr "'r' turi būti \"range\", vadinasi 2 ilgio"
+
+#. R/colorstuff.R: stop("'r', 'g', and 'b' arguments must be in [0, maxColorValue]")
+#: R/colorstuff.R:0
+#, fuzzy
+msgid "'r', 'g', and 'b' arguments must be in [0, maxColorValue]"
+msgstr "rgb reikšmės turi būti intervale [0, maxColorValue]"
+
+#. R/unix/png.R: stop("'res' must be specified unless 'units = \"px\"'")
+#. R/windows/png.R: stop("'res' must be specified unless 'units = \"px\"'")
+#: R/unix/png.R:0 R/windows/png.R:0
+msgid "'res' must be specified unless 'units = \"px\"'"
+msgstr "'res' turi nurodytas nebent 'units = \"px\"'"
+
+#. R/colorstuff.R: stop("'start' and 'end' must be distinct and in [0, 1].")
+#: R/colorstuff.R:0
+msgid "'start' and 'end' must be distinct and in [0, 1]."
+msgstr "'start' ir 'end' turi būti skirtingos ir iš intervalo [0, 1]."
+
+#. R/postscript.R: gettextf("'title' argument \"%s\" contains invalid characters", old$title)
+#: R/postscript.R:0
+msgid "'title' argument \"%s\" contains invalid characters"
+msgstr "'title' argumentas \"%s\" turi neleistinų simbolių"
+
+#. R/windows/windows.R: stop("'type' not applicable to the R console")
+#: R/windows/windows.R:0
+msgid "'type' not applicable to the R console"
+msgstr "'type' nėra taikomas R konsolei"
+
+#. R/xyz.coords.R: stop("'x' and 'y' lengths differ")
+#: R/xyz.coords.R:0
+msgid "'x' and 'y' lengths differ"
+msgstr "skirtingi 'x' ir 'y' ilgiai"
+
+#. R/xyz.coords.R: stop("'x' is a list, but does not have components 'x' and 'y'")
+#: R/xyz.coords.R:0
+msgid "'x' is a list, but does not have components 'x' and 'y'"
+msgstr "'x' yra sąrašas, bet neturi 'x' ir 'y' komponentų"
+
+#. R/xyz.coords.R: stop("'x' is a list, but does not have components 'x', 'y'  and 'z'")
+#: R/xyz.coords.R:0
+msgid "'x' is a list, but does not have components 'x', 'y'  and 'z'"
+msgstr "'x' yra sąrašas, bet neturi 'x', 'y' ir 'z' komponentų"
+
+#. R/xyz.coords.R: stop("'x', 'y' and 'z' lengths differ")
+#: R/xyz.coords.R:0
+msgid "'x', 'y' and 'z' lengths differ"
+msgstr "skirtingi 'x', 'y', 'z' ilgiai"
+
+#. R/unix/dev2bitmap.R: gettextf("Available devices are:\n%s", paste(gsdevs, collapse = "\n"))
+#. R/windows/dev2bitmap.R: gettextf("Available devices are:\n%s", paste(gsdevs, collapse = "\n"))
+#: R/unix/dev2bitmap.R:0 R/windows/dev2bitmap.R:0
+msgid ""
+"Available devices are:\n"
+"%s"
+msgstr ""
+"Galimi įrenginiai:\n"
+"%s"
+
+#. R/windows/windows.R: gettextf("Calls like '%s' are unsafe and should be replaced by '%s'", "x11(w, h)",     "x11(width=w, height=h)")
+#: R/windows/windows.R:0
+msgid "Calls like '%s' are unsafe and should be replaced by '%s'"
+msgstr "Iškvietimai, pvz., '%s', yra nesaugūs ir turėtų būti pakeisti '%s'"
+
+#. R/convertColor.R: gettextf("Color space converter: %s", x$name, domain = "R-grDevices")
+#: R/convertColor.R:0
+msgid "Color space converter: %s"
+msgstr "Spalvų erdvės keitiklis: %s"
+
+#. R/windows/windows.R: gettextf("  Contains %d out of a maximum %d plots", x[[2L]], x[[3L]], domain = "R-grDevices")
+#: R/windows/windows.R:0
+msgid "Contains %d out of a maximum %d plots"
+msgstr ""
+
+#. R/windows/windows.R: gettextf("  Current position is plot %d", 1L + x[[4L]], domain = "R-grDevices")
+#: R/windows/windows.R:0
+msgid "Current position is plot %d"
+msgstr ""
+
+#. R/postscript.R: stop("GhostScript was not found")
+#. R/unix/dev2bitmap.R: stop("GhostScript was not found")
+#. R/unix/dev2bitmap.R: stop("GhostScript was not found")
+#. R/windows/dev2bitmap.R: stop("GhostScript was not found")
+#. R/windows/dev2bitmap.R: stop("GhostScript was not found")
+#: R/postscript.R:0 R/unix/dev2bitmap.R:0 R/windows/dev2bitmap.R:0
+msgid "GhostScript was not found"
+msgstr "GhostScript nerastas"
+
+#. R/xyz.coords.R: gettext("Index", domain = "R-grDevices")
+#. R/xyz.coords.R: gettext("Index", domain = "R-grDevices")
+#. R/xyz.coords.R: gettext("Index", domain = "R-grDevices")
+#. R/xyz.coords.R: gettext("Index", domain = "R-grDevices")
+#: R/xyz.coords.R:0
+msgid "Index"
+msgstr ""
+
+#. R/patterns.R: stop("Invalid 'extend' value")
+#. R/patterns.R: stop("Invalid 'extend' value")
+#. R/patterns.R: stop("Invalid 'extend' value")
+#: R/patterns.R:0
+msgid "Invalid 'extend' value"
+msgstr "Neleistina 'extend' reikšmė"
+
+#. R/postscript.R: stop("Invalid font database name")
+#: R/postscript.R:0
+msgid "Invalid font database name"
+msgstr "Neteisingas šriftų duomenų bazės vardas"
+
+#. R/postscript.R: stop("Invalid font type")
+#: R/postscript.R:0
+msgid "Invalid font type"
+msgstr "Neteisingas šrifto tipas"
+
+#. R/patterns.R: stop("Invalid pattern type")
+#: R/patterns.R:0
+msgid "Invalid pattern type"
+msgstr "Netinkamas šablono tipas"
+
+#. R/smooth2d.R: stop("Must have the ('Recommended') package \"KernSmooth\" installed")
+#: R/smooth2d.R:0
+msgid "Must have the ('Recommended') package \"KernSmooth\" installed"
+msgstr "Turi būti įdiegtas ('Recommended') paketas \"KernSmooth\""
+
+#. R/convertColor.R: gettextf("Reference white: %s", x$reference.white, domain = "R-grDevices")
+#: R/convertColor.R:0
+msgid "Reference white: %s"
+msgstr "Nuoroda baltos spalvos: %s"
+
+#. R/windows/windows.R: gettext("Saved Plots from R version 1.4.0 or later", domain = "R-grDevices")
+#: R/windows/windows.R:0
+msgid "Saved Plots from R version 1.4.0 or later"
+msgstr ""
+
+#. R/xyz.coords.R: gettext("Time", domain = "R-grDevices")
+#: R/xyz.coords.R:0
+msgid "Time"
+msgstr ""
+
+#. R/gevents.R: gettext("Waiting for input", domain = "R-grDevices")
+#: R/gevents.R:0
+msgid "Waiting for input"
+msgstr ""
+
+#. R/unix/x11.R: stop("X11 library is missing: install XQuartz from xquartz.macosforge.org", domain = "R-utils")
+#: R/unix/x11.R:0
+msgid "X11 library is missing: install XQuartz from xquartz.macosforge.org"
+msgstr ""
+
+#. R/raster.R: stop("a raster array must be numeric")
+#: R/raster.R:0
+msgid "a raster array must be numeric"
+msgstr "rastrinis masyvas turi būti skaitinis"
+
+#. R/raster.R: stop("a raster array must have exactly 3 dimensions")
+#: R/raster.R:0
+msgid "a raster array must have exactly 3 dimensions"
+msgstr "rastrinis masyvas turi būti būtent 3 matavimo skaičių"
+
+#. R/raster.R: stop("a raster array must have exactly 3 or 4 planes")
+#: R/raster.R:0
+msgid "a raster array must have exactly 3 or 4 planes"
+msgstr "rastrinis masyvas turi būti būtent 3 ar 4 plokštumų"
+
+#. R/raster.R: stop("a raster matrix must be character, or numeric, or logical")
+#: R/raster.R:0
+msgid "a raster matrix must be character, or numeric, or logical"
+msgstr "rastrinė matrica turi būti ženklas, skaičius ar loginė reikšmė"
+
+#. R/postscript.R: warning("argument 'append' is for back-compatibility and will be ignored", immediate. = TRUE)
+#: R/postscript.R:0
+msgid "argument 'append' is for back-compatibility and will be ignored"
+msgstr "argumentas 'append' yra atgaliniam suderinamumui ir bus ignoruojamas"
+
+#. R/device.R: stop("argument is missing with no default")
+#: R/device.R:0
+msgid "argument is missing with no default"
+msgstr "trūkstamas argumentas nėra numatytasis"
+
+#. R/xyz.coords.R: stop("at least 2 columns are needed")
+#: R/xyz.coords.R:0
+#, fuzzy
+msgid "at least 2 columns are needed"
+msgstr "turi būti bent 2 stulpeliai"
+
+#. R/colorstuff.R: stop("at least 3 columns are needed")
+#: R/colorstuff.R:0
+#, fuzzy
+msgid "at least 3 columns are needed"
+msgstr "turi būti bent 3 stulpeliai"
+
+#. R/unix/x11.R: warning("cairo-based types are not supported on this build - using \"Xlib\"")
+#: R/unix/x11.R:0
+msgid "cairo-based types are not supported on this build - using \"Xlib\""
+msgstr "Kairo tipai nepalaikomi šioje versijoje - naudoti \"Xlib\""
+
+#. R/cairo.R: stop("cairo_pdf: Cairo-based devices are not available for this platform")
+#: R/cairo.R:0
+msgid "cairo_pdf: Cairo-based devices are not available for this platform"
+msgstr ""
+
+#. R/cairo.R: stop("cairo_ps: Cairo-based devices are not available for this platform")
+#: R/cairo.R:0
+msgid "cairo_ps: Cairo-based devices are not available for this platform"
+msgstr ""
+
+#. R/windows/windows.R: stop("can only bring windows devices to the front")
+#: R/windows/windows.R:0
+msgid "can only bring windows devices to the front"
+msgstr "tik Windows įrenginius galima perkelti į priekį"
+
+#. R/unix/x11.R: stop("can only copy from 'X11(type=\"*cairo\")' devices")
+#: R/unix/x11.R:0
+msgid "can only copy from 'X11(type=\"*cairo\")' devices"
+msgstr "galima tik kopijuoti iš 'X11(type=\"*cairo\")' įrenginių"
+
+#. R/windows/windows.R: stop("can only copy from 'windows' devices")
+#: R/windows/windows.R:0
+msgid "can only copy from 'windows' devices"
+msgstr "galima kopijuoti tik iš 'windows' įrenginių"
+
+#. R/windows/windows.R: stop("can only manipulate windows devices")
+#: R/windows/windows.R:0
+msgid "can only manipulate windows devices"
+msgstr "galima valdyti tik Windows įrenginius"
+
+#. R/device.R: stop("can only print from a screen device")
+#. R/device.R: stop("can only print from a screen device")
+#. R/device.R: stop("can only print from a screen device")
+#. R/unix/quartz.R: stop("can only print from a screen device")
+#: R/device.R:0 R/unix/quartz.R:0
+msgid "can only print from a screen device"
+msgstr "galima tik spausdinti iš ekrano įrenginio"
+
+#. R/device.R: stop("cannot copy device to itself")
+#: R/device.R:0
+msgid "cannot copy device to itself"
+msgstr "nepavyko kopijuoti įrenginio į tą patį įrenginį"
+
+#. R/device.R: stop("cannot copy from the null device")
+#: R/device.R:0
+msgid "cannot copy from the null device"
+msgstr "nepavyko kopijuoti iš NULL įrenginio"
+
+#. R/device.R: stop("cannot copy to the null device")
+#: R/device.R:0
+msgid "cannot copy to the null device"
+msgstr "nepavyko kopijuoti į NULL įrenginį"
+
+#. R/postscript.R: gettextf("cannot reset non-existent '%s'", name.opt)
+#: R/postscript.R:0
+msgid "cannot reset non-existent '%s'"
+msgstr "nepavyko atstatyti neegzistuojančio '%s'"
+
+#. R/device.R: stop("cannot shut down device 1 (the null device)")
+#: R/device.R:0
+msgid "cannot shut down device 1 (the null device)"
+msgstr "nepavyko išjungti 1 įrenginio (NULL įrenginio)"
+
+#. R/device.R: stop("cannot supply 'which' and 'device' at the same time")
+#: R/device.R:0
+msgid "cannot supply 'which' and 'device' at the same time"
+msgstr "nepavyko pateikti 'which' ir 'device' tuo pačiu metu"
+
+#. R/convertColor.R: warning("color spaces use different reference whites")
+#: R/convertColor.R:0
+msgid "color spaces use different reference whites"
+msgstr "spalvų erdvės naudoja skirtingas baltas nuorodas"
+
+#. R/device.R: gettextf("dev.new(): using '%s'", paste("pdf(file=\"", tmp[!fe][1L], "\")", collapse = ""))
+#. R/device.R: gettextf("dev.new(): using '%s'", paste("postscript(file=\"", tmp[!fe][1L], "\")",     collapse = ""))
+#: R/device.R:0
+#, fuzzy
+msgid "dev.new(): using '%s'"
+msgstr "dev.new(): naudojant pdf(file=\"%s\")"
+
+#. R/unix/dev2bitmap.R: gettextf("device '%s' is not available\n", type)
+#. R/windows/dev2bitmap.R: gettextf("device '%s' is not available\n", type)
+#: R/unix/dev2bitmap.R:0 R/windows/dev2bitmap.R:0
+msgid "device '%s' is not available"
+msgstr "įrenginys '%s' nepasiekiamas"
+
+#. R/device.R: gettextf("device '%s' was not found", dev)
+#: R/device.R:0
+#, fuzzy
+msgid "device '%s' was not found"
+msgstr "įrenginio '%s' nėra"
+
+#. R/calc.R: stop("dimensions of 'x', 'y' and 'z' do not match")
+#: R/calc.R:0
+msgid "dimensions of 'x', 'y' and 'z' do not match"
+msgstr "nesutampa 'x', 'y' ir 'z' matavimo skaičiai"
+
+#. R/convertColor.R: gettextf("display gamma = %s", format(x$gamma), domain = "R-grDevices")
+#: R/convertColor.R:0
+msgid "display gamma = %s"
+msgstr "rodyti gamma = %s"
+
+#. R/prettyDate.R: stop("failed to add more ticks; 'min.n' argument too large?")
+#: R/prettyDate.R:0
+#, fuzzy
+msgid "failed to add more ticks; 'min.n' argument too large?"
+msgstr "nepavyko pridėti daugiau padalų; 'min.n' per didelis?"
+
+#. R/calc.R: stop("finite coordinates are required")
+#: R/calc.R:0
+#, fuzzy
+msgid "finite coordinates are required"
+msgstr "turi būti baigtinės koordinatės"
+
+#. R/postscript.R: gettextf("font %s already in use", sQuote(i))
+#: R/postscript.R:0
+msgid "font %s already in use"
+msgstr "šriftas %s jau naudojamas"
+
+#. R/postscript.R: gettextf("font encoding mismatch '%s'/'%s'", font$encoding, encoding)
+#: R/postscript.R:0
+msgid "font encoding mismatch '%s'/'%s'"
+msgstr "šriftų kuoduotė nesutampa '%s'/'%s'"
+
+#. R/calc.R: stop("increasing 'x' and 'y' values expected")
+#: R/calc.R:0
+msgid "increasing 'x' and 'y' values expected"
+msgstr "turėtų būti didėjančios 'x' ir 'y' reikšmės"
+
+#. R/recordplot.R: stop("invalid \"recordedplot\": ", conditionMessage(e))
+#: R/recordplot.R:0
+msgid "invalid \"recordedplot\":"
+msgstr "neteisingas \"recordedplot\":"
+
+#. R/cairo.R: gettextf("invalid '%s' argument", "filename")
+#. R/cairo.R: gettextf("invalid '%s' argument", "filename")
+#. R/cairo.R: gettextf("invalid '%s' argument", "filename")
+#. R/postscript.R: gettextf("invalid '%s' argument", "family")
+#. R/postscript.R: gettextf("invalid '%s' argument", "family")
+#. R/unix/png.R: gettextf("invalid '%s' argument", "filename")
+#. R/unix/png.R: gettextf("invalid '%s' argument", "filename")
+#. R/unix/png.R: gettextf("invalid '%s' argument", "filename")
+#. R/unix/png.R: gettextf("invalid '%s' argument", "filename")
+#. R/unix/quartz.R: gettextf("invalid '%s' argument", "title")
+#. R/unix/quartz.R: gettextf("invalid '%s' argument", "file")
+#. R/unix/x11.R: gettextf("invalid '%s' argument", "title")
+#. R/windows/png.R: gettextf("invalid '%s' argument", "filename")
+#. R/windows/png.R: gettextf("invalid '%s' argument", "filename")
+#. R/windows/png.R: gettextf("invalid '%s' argument", "filename")
+#. R/windows/png.R: gettextf("invalid '%s' argument", "filename")
+#. R/windows/windows.R: gettextf("invalid '%s' argument", "filename")
+#: R/cairo.R:0 R/postscript.R:0 R/unix/png.R:0 R/unix/quartz.R:0 R/unix/x11.R:0
+#: R/windows/png.R:0 R/windows/windows.R:0
+#, fuzzy
+msgid "invalid '%s' argument"
+msgstr "neteisingas pirmas argumentas"
+
+#. R/postscript.R: stop("invalid 'cmapEncoding' in font specification")
+#: R/postscript.R:0
+msgid "invalid 'cmapEncoding' in font specification"
+msgstr "neteisinga 'cmapEncoding' šrifto specifikacijoje"
+
+#. R/postscript.R: gettextf("invalid 'file' argument '%s'", file)
+#. R/postscript.R: gettextf("invalid 'file' argument '%s'", file)
+#. R/postscript.R: gettextf("invalid 'file' argument '%s'", file)
+#: R/postscript.R:0
+msgid "invalid 'file' argument '%s'"
+msgstr "neteisingas 'file' argumentas '%s'"
+
+#. R/postscript.R: stop("invalid CMap name in font specification")
+#: R/postscript.R:0
+msgid "invalid CMap name in font specification"
+msgstr "netinkamas CMap vardas šriftų specifikacijoje"
+
+#. R/postscript.R: stop("invalid PDF resource in font specification")
+#: R/postscript.R:0
+msgid "invalid PDF resource in font specification"
+msgstr "netinkamas PDF šaltinis šriftų specifikacijoje"
+
+#. R/postscript.R: stop("invalid PDF version")
+#: R/postscript.R:0
+msgid "invalid PDF version"
+msgstr "netinkama PDF versija"
+
+#. R/unix/quartz.R: stop("invalid Quartz font:  must be 4 strings")
+#: R/unix/quartz.R:0
+msgid "invalid Quartz font:  must be 4 strings"
+msgstr "neteisingas Quart šriftas: turi būti 4 eilutės"
+
+#. R/windows/windows.R: stop("invalid Windows font:  must be a single font family name")
+#: R/windows/windows.R:0
+msgid "invalid Windows font:  must be a single font family name"
+msgstr "neteisingas Windows šriftas: turi būti vienas šriftų šeimos vardas"
+
+#. R/unix/x11.R: stop("invalid X11 font specification: ", errDesc)
+#: R/unix/x11.R:0
+msgid "invalid X11 font specification:"
+msgstr "neteisinga X11 šrifto specifikacija:"
+
+#. R/postscript.R: gettext("invalid arguments in %s (must be font names)", domain = "R-grDevices")
+#. R/postscript.R: gettext("invalid arguments in %s (must be font names)", domain = "R-grDevices")
+#. R/unix/quartz.R: gettextf("invalid arguments in %s (must be font names)", sQuote("quartzFonts"))
+#. R/unix/x11.R: gettextf("invalid arguments in %s (must be font names)", sQuote("X11Fonts"))
+#. R/windows/windows.R: gettextf("invalid arguments in %s (must be font names)", sQuote("windowsFonts"))
+#: R/postscript.R:0 R/unix/quartz.R:0 R/unix/x11.R:0 R/windows/windows.R:0
+#, fuzzy
+msgid "invalid arguments in %s (must be font names)"
+msgstr "'%s' neteisingi argumentai (turi būti šriftų vardai)"
+
+#. R/postscript.R: gettextf("invalid arguments in %s (need named args)", sQuote(deparse(sys.call(sys.parent()))))
+#. R/postscript.R: gettext("invalid arguments in %s (need named args)", domain = "R-grDevices")
+#. R/postscript.R: gettext("invalid arguments in %s (need named args)", domain = "R-grDevices")
+#. R/unix/quartz.R: gettextf("invalid arguments in %s (need named args)", sQuote("quartzFonts"))
+#. R/unix/x11.R: gettextf("invalid arguments in %s (need named args)", sQuote("X11Fonts"))
+#. R/windows/windows.R: gettextf("invalid arguments in %s (need named args)", sQuote("windowsFonts"))
+#: R/postscript.R:0 R/unix/quartz.R:0 R/unix/x11.R:0 R/windows/windows.R:0
+#, fuzzy
+msgid "invalid arguments in %s (need named args)"
+msgstr "%s' neteisingi argumentai (turi būti įvardyti args)"
+
+#. R/postscript.R: stop("invalid encoding in font specification")
+#: R/postscript.R:0
+msgid "invalid encoding in font specification"
+msgstr "neteisinga koduotė šriftų specifikacijoje"
+
+#. R/postscript.R: stop("invalid family name in font specification")
+#. R/postscript.R: stop("invalid family name in font specification")
+#: R/postscript.R:0
+msgid "invalid family name in font specification"
+msgstr "neteisingas šeimos vardas šriftų specifikacijoje"
+
+#. R/xyz.coords.R: stop("invalid first argument")
+#: R/xyz.coords.R:0
+msgid "invalid first argument"
+msgstr "neteisingas pirmas argumentas"
+
+#. R/xyz.coords.R: stop("invalid first argument [bad language object]")
+#: R/xyz.coords.R:0
+msgid "invalid first argument [bad language object]"
+msgstr "neteisingas pirmasis argumentas [netinkamas kalbos objektas]"
+
+#. R/postscript.R: stop("invalid metric information in font specification")
+#. R/postscript.R: stop("invalid metric information in font specification")
+#: R/postscript.R:0
+msgid "invalid metric information in font specification"
+msgstr "netinkama metrikos informacija šriftų specifikacijoje"
+
+#. R/postscript.R: gettextf("invalid options in '%s'", name.opt)
+#: R/postscript.R:0
+msgid "invalid options in '%s'"
+msgstr "neleistinos parinktys '%s'"
+
+#. R/postscript.R: stop("invalid output format")
+#: R/postscript.R:0
+msgid "invalid output format"
+msgstr "netinkamas išvesties formatas"
+
+#. R/raster.R: stop("invalid raster subassignment")
+#: R/raster.R:0
+msgid "invalid raster subassignment"
+msgstr "netinkamas rastro padalijimas"
+
+#. R/raster.R: stop("invalid raster subsetting")
+#: R/raster.R:0
+msgid "invalid raster subsetting"
+msgstr "netinkamas rastro potipis"
+
+#. R/device.R: stop("invalid setting for 'getOption(\"device\")'")
+#: R/device.R:0
+msgid "invalid setting for 'getOption(\"device\")'"
+msgstr "netinkamas nustatymas 'getOption(\"device\")'"
+
+#. R/windows/windows.R: stop("invalid value for 'rescale'")
+#: R/windows/windows.R:0
+msgid "invalid value for 'rescale'"
+msgstr "netinkama reikšmė 'rescale'"
+
+#. R/device.R: warning("need to specify one of 'width' and 'height'")
+#: R/device.R:0
+msgid "need to specify one of 'width' and 'height'"
+msgstr "reikia nurodyti vieną iš 'width' ir 'height'"
+
+#. R/calc.R: stop("no 'z' matrix specified")
+#: R/calc.R:0
+msgid "no 'z' matrix specified"
+msgstr "'z' matrica nenurodyta"
+
+#. R/recordplot.R: stop("no current device to record from")
+#: R/recordplot.R:0
+msgid "no current device to record from"
+msgstr "nėra dabartinio įrenginio, iš kurio norite įrašyti"
+
+#. R/device.R: stop("no device to print from")
+#. R/device.R: stop("no device to print from")
+#. R/device.R: stop("no device to print from")
+#. R/unix/quartz.R: stop("no device to print from")
+#: R/device.R:0 R/unix/quartz.R:0
+msgid "no device to print from"
+msgstr "nėra įrenginio spausdinti iš"
+
+#. R/calc.R: stop("no proper 'z' matrix specified")
+#: R/calc.R:0
+msgid "no proper 'z' matrix specified"
+msgstr "nenurodyta tinkama 'z' matrica"
+
+#. R/unix/x11.R: stop("no such device")
+#. R/windows/windows.R: stop("no such device")
+#: R/unix/x11.R:0 R/windows/windows.R:0
+msgid "no such device"
+msgstr "nėra tokio įrenginio"
+
+#. R/device.R: gettextf("no suitable unused file name for '%s'", "pdf()")
+#. R/device.R: gettextf("no suitable unused file name for '%s'", "postscript()")
+#: R/device.R:0
+#, fuzzy
+msgid "no suitable unused file name for '%s'"
+msgstr "nėra tinkamo nenaudojamo failo vardo pdf()"
+
+#. R/colorstuff.R: stop("numerical color values must be positive")
+#: R/colorstuff.R:0
+#, fuzzy
+msgid "numerical color values must be positive"
+msgstr "'bias' turi būti teigiamas"
+
+#. R/raster.R: stop("operator not meaningful for raster objects")
+#: R/raster.R:0
+msgid "operator not meaningful for raster objects"
+msgstr "operatorius nėra reikšmingas rastriniams objektams"
+
+#. R/colorstuff.R: stop("rgb matrix must be numeric")
+#: R/colorstuff.R:0
+msgid "rgb matrix must be numeric"
+msgstr "rgb matrica turi būti skaitinė"
+
+#. R/colorstuff.R: stop("rgb matrix must have 3 rows")
+#: R/colorstuff.R:0
+msgid "rgb matrix must have 3 rows"
+msgstr "rgb matrica turi būti 3 eilučių"
+
+#. R/unix/quartz.R: stop("screen devices should not be used in examples etc", domain = "R-grDevices")
+#. R/unix/quartz.R: warning("screen devices should not be used in examples etc", immediate. = TRUE, noBreaks. = TRUE,     domain = "R-grDevices")
+#. R/unix/x11.R: stop("screen devices should not be used in examples etc", domain = "R-grDevices")
+#. R/unix/x11.R: warning("screen devices should not be used in examples etc", immediate. = TRUE, noBreaks. = TRUE,     domain = "R-grDevices")
+#. R/windows/windows.R: stop("screen devices should not be used in examples etc", domain = "R-grDevices")
+#. R/windows/windows.R: warning("screen devices should not be used in examples etc", immediate. = TRUE, noBreaks. = TRUE,     domain = "R-grDevices")
+#: R/unix/quartz.R:0 R/unix/x11.R:0 R/windows/windows.R:0
+msgid "screen devices should not be used in examples etc"
+msgstr ""
+
+#. R/recordplot.R: stop("snapshot contains invalid graphics call")
+#: R/recordplot.R:0
+msgid "snapshot contains invalid graphics call"
+msgstr "momentinė kopija yra netinkamas grafikos iškvietimas"
+
+#. R/recordplot.R: gettextf("snapshot recorded in different R version (%s)", snapshotRversion)
+#: R/recordplot.R:0
+msgid "snapshot recorded in different R version (%s)"
+msgstr "momentinė kopija įrašyta kitoje R versijoje (%s)"
+
+#. R/recordplot.R: warning("snapshot recorded in different R version (pre 3.3.0)")
+#: R/recordplot.R:0
+msgid "snapshot recorded in different R version (pre 3.3.0)"
+msgstr "momentinė kopija įrašyta kitoje R versijoje (3.3.0)"
+
+#. R/postscript.R: gettextf("status %d in running command '%s'", ret, cmd)
+#: R/postscript.R:0
+msgid "status %d in running command '%s'"
+msgstr "%d būsena vykdant komandą '%s'"
+
+#. R/windows/windows.R: stop("subscript is out of range")
+#: R/windows/windows.R:0
+#, fuzzy
+msgid "subscript is out of range"
+msgstr "indeksas nepatenka į sritį"
+
+#. R/cairo.R: stop("svg: Cairo-based devices are not available for this platform")
+#: R/cairo.R:0
+msgid "svg: Cairo-based devices are not available for this platform"
+msgstr ""
+
+#. R/unix/png.R: warning("type = \"cairo\" is unavailable. trying \"Xlib\"")
+#. R/unix/png.R: warning("type = \"cairo\" is unavailable. trying \"Xlib\"")
+#. R/unix/png.R: warning("type = \"cairo\" is unavailable. trying \"Xlib\"")
+#. R/unix/png.R: warning("type = \"cairo\" is unavailable. trying \"Xlib\"")
+#: R/unix/png.R:0
+msgid "type = \"cairo\" is unavailable. trying \"Xlib\""
+msgstr ""
+
+#. R/unix/png.R: warning("type = \"cairo-png\" is unavailable. trying \"Xlib\"")
+#: R/unix/png.R:0
+msgid "type = \"cairo-png\" is unavailable. trying \"Xlib\""
+msgstr ""
+
+#. R/unix/png.R: warning("type = \"quartz\" is unavailable. trying \"Xlib\"")
+#. R/unix/png.R: warning("type = \"quartz\" is unavailable. trying \"Xlib\"")
+#. R/unix/png.R: warning("type = \"quartz\" is unavailable. trying \"Xlib\"")
+#. R/unix/png.R: warning("type = \"quartz\" is unavailable. trying \"Xlib\"")
+#: R/unix/png.R:0
+msgid "type = \"quartz\" is unavailable. trying \"Xlib\""
+msgstr ""
+
+#. R/postscript.R: gettextf("unknown family '%s'", family)
+#. R/postscript.R: gettextf("unknown family '%s'", family)
+#: R/postscript.R:0
+msgid "unknown family '%s'"
+msgstr "nežinoma šeima '%s'"
+
+#. R/unix/x11.R: stop("unknown family for 'X11(type = \"XLib\")'")
+#: R/unix/x11.R:0
+#, fuzzy
+msgid "unknown family for 'X11(type = \"XLib\")'"
+msgstr "nežinoma šeima X11(type = \"XLib\")"
+
+#. R/postscript.R: stop("unknown font")
+#: R/postscript.R:0
+msgid "unknown font"
+msgstr "nežinomas šriftas"
+
+#. R/unix/dev2bitmap.R: warning("unrecognized format of gs -help")
+#. R/windows/dev2bitmap.R: warning("unrecognized format of gs -help")
+#: R/unix/dev2bitmap.R:0 R/windows/dev2bitmap.R:0
+msgid "unrecognized format of gs -help"
+msgstr "neatpažįstamas gs -help formatas"
+
+#. R/windows/windows.R: stop("windows devices should not be used in examples etc", domain = "R-grDevices")
+#. R/windows/windows.R: stop("windows devices should not be used in examples etc", domain = "R-grDevices")
+#: R/windows/windows.R:0
+msgid "windows devices should not be used in examples etc"
+msgstr ""
+
+#. R/hcl.colors.R: stop("wrong 'type'; should never happen, please report!")
+#: R/hcl.colors.R:0
+msgid "wrong 'type'; should never happen, please report!"
+msgstr "neteisingas 'type'; niekada neturėtų taip atsitikti, prašome pranešti!"
+
+#. R/xyz.coords.R: ngettext(n, "%d x value <= 0 omitted from logarithmic plot", "%d x values <= 0 omitted from logarithmic plot",     domain = "R-grDevices")
+#. R/xyz.coords.R: ngettext(n, "%d x value <= 0 omitted from logarithmic plot", "%d x values <= 0 omitted from logarithmic plot",     domain = "R-grDevices")
+#: R/xyz.coords.R:0
+msgid "%d x value <= 0 omitted from logarithmic plot"
+msgid_plural "%d x values <= 0 omitted from logarithmic plot"
+msgstr[0] "%d x reikšmė <= 0 praleista iš logaritminės diagramos"
+msgstr[1] "%d x reikšmės <= 0 praleista iš logaritminės diagramos"
+msgstr[2] "%d x reikšmių <= 0 praleista iš logaritminės diagramos"
+
+#. R/xyz.coords.R: ngettext(n, "%d y value <= 0 omitted from logarithmic plot", "%d y values <= 0 omitted from logarithmic plot",     domain = "R-grDevices")
+#. R/xyz.coords.R: ngettext(n, "%d y value <= 0 omitted from logarithmic plot", "%d y values <= 0 omitted from logarithmic plot",     domain = "R-grDevices")
+#: R/xyz.coords.R:0
+msgid "%d y value <= 0 omitted from logarithmic plot"
+msgid_plural "%d y values <= 0 omitted from logarithmic plot"
+msgstr[0] "%d y reikšmė <= 0 praleista iš logaritminės diagramos"
+msgstr[1] "%d y reikšmės <= 0 praleista iš logaritminės diagramos"
+msgstr[2] "%d y reikšmių <= 0 praleista iš logaritminės diagramos"
+
+#. R/xyz.coords.R: ngettext(n, "%d z value <= 0 omitted from logarithmic plot", "%d z values <= 0 omitted from logarithmic plot",     domain = "R-grDevices")
+#: R/xyz.coords.R:0
+msgid "%d z value <= 0 omitted from logarithmic plot"
+msgid_plural "%d z values <= 0 omitted from logarithmic plot"
+msgstr[0] "%d z reikšmė <= 0 praleista iš logaritminės diagramos"
+msgstr[1] "%d z reikšmės <= 0 praleista iš logaritminės diagramos"
+msgstr[2] "%d z reikšmių <= 0 praleista iš logaritminės diagramos"
+
+#. R/postscript.R: ngettext(as.integer(sum(ii)), "%s differs between new and previous", "%s differ between new and previous",     domain = "R-grDevices")
+#: R/postscript.R:0
+#, fuzzy
+msgid "%s differs between new and previous"
+msgid_plural "%s differ between new and previous"
+msgstr[0] "skiriasi tarp naujo ir ankstesnio"
+msgstr[1] "skiriasi tarp naujų ir ankstesnių"
+msgstr[2] "skiriasi tarp naujų ir ankstesnių"
+
+#. R/postscript.R: ngettext(as.integer(sum(ii)), "%s differs between new and previous\n\t ==> NOT changing %s",     "%s differ between new and previous\n\t ==> NOT changing %s", domain = "R-grDevices")
+#: R/postscript.R:0
+#, fuzzy
+msgid ""
+"%s differs between new and previous\n"
+"\t ==> NOT changing %s"
+msgid_plural ""
+"%s differ between new and previous\n"
+"\t ==> NOT changing %s"
+msgstr[0] "skiriasi tarp naujo ir ankstesnio"
+msgstr[1] "skiriasi tarp naujų ir ankstesnių"
+msgstr[2] "skiriasi tarp naujų ir ankstesnių"
+
+#. R/postscript.R: ngettext(as.integer(sum(is.na(matches))), "invalid argument name %s in '%s'", "invalid argument names %s in '%s'",     domain = "R-grDevices")
+#: R/postscript.R:0
+msgid "invalid argument name %s in '%s'"
+msgid_plural "invalid argument names %s in '%s'"
+msgstr[0] "neteisingas argumento vardas %s, esantis ‘%s’"
+msgstr[1] "neteisingi argumento vardai %s, esantys ‘%s’"
+msgstr[2] "neteisingų argumento vardų %s, esančių ‘%s’"
+
+#~ msgid "invalid 'filename'"
+#~ msgstr "neteisingas 'filename'"
+
+#~ msgid "'from' must be a \"colorConverter\" object or a string"
+#~ msgstr "'from' turi būti \"colorConverter\" objektas ar eilutė"
+
+#~ msgid "'to' must be a \"colorConverter\" object or a string"
+#~ msgstr "'to' turi būti \"colorConverter\" objektas ar eilutė"
+
+#~ msgid "'to.ref.white' disagrees with definition of %s"
+#~ msgstr "'to.ref.white' nesutampa su %s apibrėžtimi"
+
+#~ msgid "dev.displaylist() called without an open graphics device"
+#~ msgstr "dev.displaylist() iškviesta be atverto grafikos įrenginio"
+
+#~ msgid "no suitable unused file name for postscript()"
+#~ msgstr "nėra tinkamo nenaudojamo failo vardo postscript()"
+
+#~ msgid "dev.new(): using postscript(file=\"%s\")"
+#~ msgstr "dev.new(): naudojant postscript(file=\"%s\")"
+
+#~ msgid "NOT changing %s"
+#~ msgstr "NOT pakeičia %s"
+
+#~ msgid "invalid 'family' argument"
+#~ msgstr "neteisingas 'family' argumentas"
+
+#~ msgid "Not a CID font"
+#~ msgstr "Ne CID šriftas"
+
+#~ msgid "'bandwidth' must be numeric"
+#~ msgstr "'bandwidth' turi būti skaitinis"
+
+#~ msgid "'bandwidth' must be positive"
+#~ msgstr "'bandwidth' turi būti teigiamas"
+
+#~ msgid "'file' is missing with no default"
+#~ msgstr "'file' yra trūkstamas be numatytojo"
+
+#~ msgid "invalid 'title'"
+#~ msgstr "neteisingas 'title'"
+
+#~ msgid "invalid 'file'"
+#~ msgstr "neteisingas 'file'"
+
+#~ msgid "invalid arguments in 'quartzFonts' (must be font names)"
+#~ msgstr "'quartzFonts' neteisingi argumentai (turi būti šriftų vardai)"
+
+#~ msgid "invalid arguments in 'quartzFonts' (need named args)"
+#~ msgstr "quartzFonts' neteisingi argumentai (turi būti įvardyti args)"
+
+#~ msgid "invalid arguments in 'X11Fonts' (must be font names)"
+#~ msgstr "'X11Fonts' neteisingi argumentai (turi būti šriftų vardai)"
+
+#~ msgid "invalid arguments in 'X11Fonts' (need named args)"
+#~ msgstr "neteisingi argumentai, esantys 'X11Fonts' (turi būti įvardyti args)"
+
+#~ msgid "invalid arguments in 'windowsFonts' (must be font names)"
+#~ msgstr "'windowsFonts' neteisingi argumentai (turi būti šriftų vardai)"
+
+#~ msgid "invalid arguments in 'windowsFonts' (need named args)"
+#~ msgstr "'windowsFonts' neteisingi argumentai (turi būti vadinamieji args)"
+
+#~ msgid "2. %d x values <= 0 omitted from logarithmic plot"
+#~ msgstr "2. %d x reikšmės <= 0 praleistos logaritminėje diagramoje"
+
+#~ msgid "3. %d x values <= 0 omitted from logarithmic plot"
+#~ msgstr "3. %d x reikšmių <= 0 praleistų logaritminėje diagramoje"
+
+#~ msgid "2. %d y values <= 0 omitted from logarithmic plot"
+#~ msgstr "2. %d y reikšmės <= 0 praleistos logaritminėje diagramoje"
+
+#~ msgid "3. %d y values <= 0 omitted from logarithmic plot"
+#~ msgstr "3. %d y reikšmių <= 0 praleistų logaritminėje diagramoje"
+
+#~ msgid "2. %d z values <= 0 omitted from logarithmic plot"
+#~ msgstr "2. %d z reikšmės <= 0 praleistos logaritminėje diagramoje"
+
+#~ msgid "3. %d z values <= 0 omitted from logarithmic plot"
+#~ msgstr "3. %d z reikšmių <= 0 praleistų logaritminėje diagramoje"
+
+#~ msgid "%s"
+#~ msgstr "%s"
+
+#~ msgid "2. differ between new and previous"
+#~ msgstr "2. skiriasi tarp naujų ir ankstesnių"
+
+#~ msgid "3. differ between new and previous"
+#~ msgstr "3. skiriasi tarp naujų ir ankstesnių"
+
+#~ msgid "2. invalid argument names %s in '%s'"
+#~ msgstr "2. neteisingi argumentų vardai %s, esantys ‘%s’"
+
+#~ msgid "3. invalid argument names %s in '%s'"
+#~ msgstr "3. neteisingų argumentų vardų %s, esančių ‘%s’"
+
+#~ msgid "range too small for 'min.n'"
+#~ msgstr "sritis per maža 'min.n'"

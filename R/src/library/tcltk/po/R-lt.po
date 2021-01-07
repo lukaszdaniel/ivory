@@ -1,0 +1,171 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: tcltk 4.1.0\n"
+"POT-Creation-Date: 2020-04-15 18:32\n"
+"PO-Revision-Date: 2020-11-29 16:50+0200\n"
+"Last-Translator: <r.zakauskas@gmail.com;gabriele.dauksaite@gmail.com>\n"
+"Language-Team: Lithuanian\n"
+"Language: lt\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && (n"
+"%100<10 || n%100>=20) ? 1 : 2);\n"
+
+#. R/utils.R: stop("'filters' must be a 2-column character matrix")
+#: R/utils.R:0
+msgid "'filters' must be a 2-column character matrix"
+msgstr "'filters' turi būti 2 stulpelių simbolių matrica"
+
+#. R/utils.R: gettextf("'pb' is not from class %s", dQuote("tkProgressBar"))
+#. R/utils.R: gettextf("'pb' is not from class %s", dQuote("tkProgressBar"))
+#: R/utils.R:0
+msgid "'pb' is not from class %s"
+msgstr "'pb' nėra iš klasės %s"
+
+#. R/utils.R: gettext("Cancel")
+#: R/utils.R:0
+msgid "Cancel"
+msgstr "Atšaukti"
+
+#. R/tkGUI.R: gettext("Demos")
+#: R/tkGUI.R:0
+msgid "Demos"
+msgstr "Demo"
+
+#. R/tkGUI.R: gettext("Density")
+#: R/tkGUI.R:0
+msgid "Density"
+msgstr "Tankis"
+
+#. R/tkGUI.R: gettext("Don't save workspace")
+#: R/tkGUI.R:0
+msgid "Don't save workspace"
+msgstr "Neišsaugota darbo sritis"
+
+#. R/tkGUI.R: gettext("File")
+#: R/tkGUI.R:0
+msgid "File"
+msgstr "Failas"
+
+#. R/tkGUI.R: gettext("Go get them!")
+#: R/tkGUI.R:0
+msgid "Go get them!"
+msgstr "Grįžkite gauti juos!"
+
+#. R/tkGUI.R: gettext("Help")
+#: R/tkGUI.R:0
+msgid "Help"
+msgstr "Žinynas"
+
+#. R/tkGUI.R: gettext("Help topic:")
+#: R/tkGUI.R:0
+msgid "Help topic:"
+msgstr "Žinyno tema:"
+
+#. R/tkGUI.R: gettext("Install packages from CRAN")
+#: R/tkGUI.R:0
+msgid "Install packages from CRAN"
+msgstr "Įdiekite paketus iš CRAN"
+
+#. R/tkGUI.R: gettext("Interactive linear fitting")
+#: R/tkGUI.R:0
+msgid "Interactive linear fitting"
+msgstr "Interaktyvus tiesinis pritaikymas"
+
+#. R/tkGUI.R: gettext("Load")
+#: R/tkGUI.R:0
+msgid "Load"
+msgstr "Įkelti"
+
+#. R/tkGUI.R: gettext("Load packages")
+#: R/tkGUI.R:0
+msgid "Load packages"
+msgstr "Įkelti paketus"
+
+#. R/tkGUI.R: gettext("Manuals in PDF format")
+#: R/tkGUI.R:0
+msgid "Manuals in PDF format"
+msgstr "Žinynai PDF formatu"
+
+#. R/utils.R: gettext("OK")
+#: R/utils.R:0
+msgid "OK"
+msgstr "Gerai"
+
+#. R/tkGUI.R: gettext("Packages")
+#: R/tkGUI.R:0
+msgid "Packages"
+msgstr "Paketai"
+
+#. R/tkGUI.R: gettext("Quit")
+#: R/tkGUI.R:0
+msgid "Quit"
+msgstr "Išeiti"
+
+#. R/tkGUI.R: gettext("R FAQ")
+#: R/tkGUI.R:0
+msgid "R FAQ"
+msgstr "R DUK"
+
+#. R/tkGUI.R: gettext("Save workspace")
+#: R/tkGUI.R:0
+msgid "Save workspace"
+msgstr "Išsaugoti darbo sritį"
+
+#. R/tkGUI.R: gettext("Source R code")
+#: R/tkGUI.R:0
+msgid "Source R code"
+msgstr "Šaltinio R kodas"
+
+#. R/tclsearch.R: gettextf("Tcl package '%s' not found", package)
+#: R/tclsearch.R:0
+msgid "Tcl package '%s' not found"
+msgstr "Tcl paketas '%s' nerastas"
+
+#. R/unix/zzz.R: stop("Tcl/Tk libraries are missing: install the Tcl/Tk component from the R installer")
+#: R/unix/zzz.R:0
+msgid ""
+"Tcl/Tk libraries are missing: install the Tcl/Tk component from the R "
+"installer"
+msgstr ""
+
+#. R/windows/zzz.R: stop("Tcl/Tk support files were not installed", call. = FALSE)
+#: R/windows/zzz.R:0
+msgid "Tcl/Tk support files were not installed"
+msgstr "Tcl/Tk palaikymo failai nebuvo įdiegti"
+
+#. R/unix/zzzstub.R: stop("Tcl/Tk support is not available on this system", domain = "R-tcltk")
+#: R/unix/zzzstub.R:0
+msgid "Tcl/Tk support is not available on this system"
+msgstr "Tcl/Tk palaikymas neprieinamas šioje sistemoje"
+
+#. R/tkGUI.R: stop("The tkGUI is not available under Windows")
+#: R/tkGUI.R:0
+msgid "The tkGUI is not available under Windows"
+msgstr "TkGUI nėra prieinamas Windows"
+
+#. R/unix/zzz.R: stop("X11 library is missing: install XQuartz from xquartz.macosforge.org")
+#: R/unix/zzz.R:0
+msgid "X11 library is missing: install XQuartz from xquartz.macosforge.org"
+msgstr ""
+
+#. R/tclarray.R: stop("cannot change names on Tcl array")
+#: R/tclarray.R:0
+msgid "cannot change names on Tcl array"
+msgstr "negalima pakeisti vardų Tcl masyve"
+
+#. R/Tk.R: gettextf("cannot handle object of mode '%s'", storage.mode(x))
+#: R/Tk.R:0
+msgid "cannot handle object of mode '%s'"
+msgstr "negalima valdyti objekto, kurio rėžimas '%s'"
+
+#. R/tclarray.R: stop("cannot set length of Tcl array")
+#: R/tclarray.R:0
+msgid "cannot set length of Tcl array"
+msgstr "negalima nustatyti Tcl masyvo ilgio"
+
+#. R/tkGUI.R: gettext("t test")
+#: R/tkGUI.R:0
+msgid "t test"
+msgstr "t-testas"

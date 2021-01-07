@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.15.2\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2020-07-23 12:01\n"
+"POT-Creation-Date: 2021-01-07 23:39\n"
 "PO-Revision-Date: 2015-01-17 15:37+0100\n"
 "Last-Translator: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
 "Language-Team: R Core <r-core@r-project.org>\n"
@@ -335,9 +335,10 @@ msgstr "'file' muss \"\" oder eine bereits geöffnetes Verbindungsobjekt sein"
 msgid "'file' must be NULL, a character string or a connection"
 msgstr "'file' muss NULL, eine Zeichenkette oder eine Verbindung sein"
 
-#. R/zip.R: stop("'files' must a character vector specifying one or more filepaths")
+#. R/zip.R: stop("'files' must be a character vector specifying one or more filepaths")
 #: R/zip.R:0
-msgid "'files' must a character vector specifying one or more filepaths"
+#, fuzzy
+msgid "'files' must be a character vector specifying one or more filepaths"
 msgstr ""
 "'files' muss ein Charaktervektor sein, der einen oder mehrere Pfade "
 "spezifiziert"
@@ -1232,6 +1233,11 @@ msgstr ""
 msgid "Package"
 msgstr "Paket"
 
+#. R/packages2.R: gettextf("Package %s version %s is in the repositories but depends on %s", sQuote(av2[,     "Package"]), av2[, "Version"], unlist(x))
+#: R/packages2.R:0
+msgid "Package %s version %s is in the repositories but depends on %s"
+msgstr ""
+
 #. R/bug.report.R: gettextf("Package %s: DESCRIPTION file not found", sQuote(package))
 #: R/bug.report.R:0
 #, fuzzy
@@ -1898,6 +1904,12 @@ msgstr "hänge Spaltennamen an Datei an"
 msgid "argument 'help.db' is deprecated"
 msgstr "Argument 'help.db' ist veraltet"
 
+#. R/zip.R: stop("argument 'zip' must be a non-empty character string")
+#: R/zip.R:0
+#, fuzzy
+msgid "argument 'zip' must be a non-empty character string"
+msgstr "'url' muss eine nicht-leere Zeichenkette sein"
+
 #. R/sourceutils.R: stop("argument is not a function or language object:", typeof(fn))
 #: R/sourceutils.R:0
 msgid "argument is not a function or language object:"
@@ -1924,11 +1936,6 @@ msgstr "konnte Paket %s nicht finden"
 #: R/write.table.R:0
 msgid "attempt to set '%s' ignored"
 msgstr "Versuch ignoriert '%s' zu setzen"
-
-#. R/capture.output.R: stop("bad argument")
-#: R/capture.output.R:0
-msgid "bad argument"
-msgstr "unbrauchbares Argument"
 
 #. R/packages2.R: gettextf("begin installing package %s", sQuote(pkg), domain = "R-utils")
 #: R/packages2.R:0
@@ -3489,6 +3496,19 @@ msgid_plural "A bibentry of bibtype %s has to specify the fields: %s"
 msgstr[0] "Ein bibentry vom Typ %s muss das/die Feld(er) %s spezifizieren."
 msgstr[1] "Ein bibentry vom Typ %s muss das/die Feld(er) %s spezifizieren."
 
+#. R/packages2.R: ngettext(sum(m0), "A version of this package for your version of R might be available elsewhere,\nsee the ideas at\n",     "Versions of these packages for your version of R might be available elsewhere,\nsee the ideas at\n")
+#: R/packages2.R:0
+msgid ""
+"A version of this package for your version of R might be available "
+"elsewhere,\n"
+"see the ideas at\n"
+msgid_plural ""
+"Versions of these packages for your version of R might be available "
+"elsewhere,\n"
+"see the ideas at\n"
+msgstr[0] ""
+msgstr[1] ""
+
 #. R/str.R: ngettext(length(cl), "Class %s", "Classes %s", domain = "R-utils")
 #: R/str.R:0
 msgid "Class %s"
@@ -3760,20 +3780,22 @@ msgid_plural "packages %s are in use and will not be installed"
 msgstr[0] "Paket %s wird gerade benutzt und deshab nicht installiert"
 msgstr[1] "Pakete %s werden gerade bennutzt und deshalb nicht installiert"
 
-#. R/packages2.R: ngettext(sum(miss), "package %s is not available (as a binary package for %s)", "packages %s are not available (as a binary packages for %s)",     domain = "R-utils")
+#. R/packages2.R: ngettext(sum(m0), "package %s is not available %s", "packages %s are not available %s")
 #: R/packages2.R:0
 #, fuzzy
-msgid "package %s is not available (as a binary package for %s)"
-msgid_plural "packages %s are not available (as a binary packages for %s)"
+msgid "package %s is not available %s"
+msgid_plural "packages %s are not available %s"
 msgstr[0] "Paket %s ist nicht verfügbar (für %s)"
 msgstr[1] "Pakete %s sind nicht verfügbar (für %s)"
 
-#. R/packages2.R: ngettext(sum(miss), "package %s is not available (for %s)", "packages %s are not available (for %s)",     domain = "R-utils")
-#: R/packages2.R:0
-msgid "package %s is not available (for %s)"
-msgid_plural "packages %s are not available (for %s)"
-msgstr[0] "Paket %s ist nicht verfügbar (für %s)"
-msgstr[1] "Pakete %s sind nicht verfügbar (für %s)"
+#~ msgid "bad argument"
+#~ msgstr "unbrauchbares Argument"
+
+#, fuzzy
+#~ msgid "package %s is not available (as a binary package for %s)"
+#~ msgid_plural "packages %s are not available (as a binary packages for %s)"
+#~ msgstr[0] "Paket %s ist nicht verfügbar (für %s)"
+#~ msgstr[1] "Pakete %s sind nicht verfügbar (für %s)"
 
 #~ msgid "cannot turn off locale-specific chars via LC_CTYPE"
 #~ msgstr ""

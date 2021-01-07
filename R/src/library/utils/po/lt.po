@@ -1,0 +1,296 @@
+# Lithuanian translations for utils package.
+# Copyright (C) 2020 THE utils'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the utils package.
+# <r.zakauskas@gmail.com;gabriele.dauksaite@gmail.com>, 2020.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: utils 4.1.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2021-01-07 23:39+0100\n"
+"PO-Revision-Date: 2020-12-08 12:22+0200\n"
+"Last-Translator: r.zakauskas@gmail.com;gabriele.dauksaite@gmail.com\n"
+"Language-Team: Lithuanian\n"
+"Language: lt\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && (n"
+"%100<10 || n%100>=20) ? 1 : 2);\n"
+"X-Generator: Poedit 2.4.1\n"
+
+#: io.cpp:323 io.cpp:327 io.cpp:337 io.cpp:565 io.cpp:764 io.cpp:816 io.cpp:830
+#: io.cpp:834 io.cpp:840 io.cpp:841 io.cpp:1082 io.cpp:1083 io.cpp:1085
+#: io.cpp:1086 io.cpp:1087 io.cpp:1088 io.cpp:1089 io.cpp:1090 stubs.cpp:41
+#: stubs.cpp:61 windows/dialogs.cpp:169 windows/dialogs.cpp:194
+#: windows/dialogs.cpp:197 windows/dialogs.cpp:241 windows/dialogs.cpp:278
+#: windows/dialogs.cpp:289 windows/dialogs.cpp:313 windows/dialogs.cpp:321
+#: windows/util.cpp:121 windows/widgets.cpp:75 windows/widgets.cpp:78
+#: windows/widgets.cpp:83
+#, c-format
+msgid "invalid '%s' argument"
+msgstr "netinkamas argumentas '%s'"
+
+#: io.cpp:346 io.cpp:827
+msgid "invalid quote symbol set"
+msgstr "netinkamas kabučių simbolių rinkinys"
+
+#: io.cpp:358 io.cpp:850 io.cpp:1070
+msgid "cannot open the connection"
+msgstr "negalima atidaryti ryšio"
+
+#: io.cpp:361 io.cpp:365
+msgid "cannot read from this connection"
+msgstr "negalima skaityti iš šio ryšio"
+
+#: io.cpp:412 io.cpp:430
+#, c-format
+msgid "quoted string on line %d terminated by EOF"
+msgstr "cituojamą eilutę, esančią %d, nutraukė EOF"
+
+#: io.cpp:561
+msgid "the first argument must be of mode character"
+msgstr "pirmasis argumentas turi būti rėžimo simbolis"
+
+#: io.cpp:591
+#, c-format
+msgid "invalid 'numerals' string: \"%s\""
+msgstr "netinkama 'numerals' eilutė: \"%s\""
+
+#: io.cpp:766
+#, c-format
+msgid "Selection: "
+msgstr "Pasirinkimas: "
+
+#: io.cpp:860 io.cpp:875
+msgid "cannot allocate buffer in 'readTableHead'"
+msgstr "negalima priskirti buferio, esančio 'readTableHead'"
+
+#: io.cpp:888
+msgid "\\ followed by EOF"
+msgstr "\\ sekė EOF"
+
+#: io.cpp:927
+#, c-format
+msgid "line %d appears to contain embedded nulls"
+msgstr ""
+
+#: io.cpp:940 io.cpp:944
+#, c-format
+msgid "incomplete final line found by readTableHeader on '%s'"
+msgstr "neišsami galutinė eilutė, kurią rado readTableHeader '%s'"
+
+#: io.cpp:1000
+msgid "index out of range"
+msgstr "indeksas nepatenka į sritį"
+
+#: io.cpp:1038
+#, c-format
+msgid "Problem closing connection:  %s"
+msgstr "Problema uždarant ryšį: %s"
+
+#: io.cpp:1040
+msgid "Problem closing connection"
+msgstr "Problema uždarant ryšį"
+
+#: io.cpp:1063
+#, fuzzy
+msgid "'file' argument is not a connection"
+msgstr "'file' nėra ryšys"
+
+#: io.cpp:1066
+msgid "cannot write to this connection"
+msgstr "negalima rašyti į šį ryšį"
+
+#: io.cpp:1096
+#, fuzzy
+msgid "'dec' argument must be a single character"
+msgstr "'dec' turi būti vienas simbolis"
+
+#: io.cpp:1120
+#, c-format
+msgid "corrupt data frame -- length of column %d does not match nrows"
+msgstr "sugadinta duomenų sistema – stulpelio %d ilgis neatitinka nrows"
+
+#: io.cpp:1148
+#, c-format
+msgid "column %s claims to be a factor but does not have numeric codes"
+msgstr "stulpelis %s gali būti faktorius, bet neturi skaitinių kodų"
+
+#: io.cpp:1165
+msgid "corrupt matrix -- dims do not match length"
+msgstr "sugadinta matrica - nesutampa dims ilgis"
+
+#: stubs.cpp:50
+msgid "'savehistory' can only be used in Rgui and Rterm"
+msgstr "'savehistory' galima naudoti tik Rgui ir Rterm"
+
+#: stubs.cpp:67
+msgid "'loadhistory' can only be used in Rgui and Rterm"
+msgstr "'loadhistory' galima naudoti tik Rgui ir Rterm"
+
+#: stubs.cpp:79
+msgid "invalid timestamp"
+msgstr "netinkama laiko žyma"
+
+#: stubs.cpp:145 stubs.cpp:153
+msgid "X11 dataentry cannot be loaded"
+msgstr "X11 dataentry negalima įkelti"
+
+#: stubs.cpp:149 stubs.cpp:178 stubs.cpp:184
+msgid "X11 is not available"
+msgstr "X11 nėra"
+
+#: stubs.cpp:242 stubs.cpp:245
+#, c-format
+msgid "invalid '%s' specification"
+msgstr "netinkama '%s' specifikacija"
+
+#: stubs.cpp:248
+#, c-format
+msgid "'%s' contains missing values"
+msgstr "'%s' yra trūkstamų reikšmių"
+
+#: utils.cpp:64 windows/util.cpp:408 windows/util.cpp:417
+#: windows/widgets.cpp:188 windows/widgets.cpp:194 windows/widgets.cpp:256
+#: windows/widgets.cpp:262
+#, fuzzy, c-format
+msgid "'%s' argument must be a character string"
+msgstr "'text' turi būti simbolių eilutė"
+
+#: utils.cpp:87
+#, fuzzy
+msgid "'hostname' argument must be a character vector of length 1"
+msgstr "'hostname' turi būti 1 ilgio simbolių vektorius"
+
+#: utils.cpp:93
+#, fuzzy, c-format
+msgid "'nsl()' was unable to resolve host '%s'"
+msgstr "nsl() nepavyko išspręsti pagrindinio kompiuterio '%s'"
+
+#: utils.cpp:100
+#, fuzzy
+msgid "unknown format returned by 'gethostbyname()'"
+msgstr "nežinomas formatas, kurį grąžino 'gethostbyname'"
+
+#: utils.cpp:109
+#, fuzzy
+msgid "'nsl()' is not supported on this platform"
+msgstr "nsl() šioje platformoje nepalaikomas"
+
+#: windows/dialogs.cpp:181
+msgid "unknown type"
+msgstr "nežinomas tipas"
+
+#: windows/dialogs.cpp:213 windows/dialogs.cpp:237 windows/dialogs.cpp:275
+#: windows/dialogs.cpp:310
+msgid "menu functions can only be used in the GUI"
+msgstr "meniu funkcijas galima naudoti tik GUI"
+
+#: windows/dialogs.cpp:245
+#, fuzzy, c-format
+msgid "unable to retrieve items for '%s' (%s)"
+msgstr "nepavyko nuskaityti %s (%s) elementų"
+
+#: windows/dialogs.cpp:283
+#, c-format
+msgid "unable to add menu (%s)"
+msgstr "neįmanoma pridėti meniu (%s)"
+
+#: windows/dialogs.cpp:295
+#, c-format
+msgid "unable to add menu item (%s)"
+msgstr "neįmanoma pridėti meniu elemento (%s)"
+
+#: windows/dialogs.cpp:318
+msgid "menu does not exist"
+msgstr "meniu nėra"
+
+#: windows/dialogs.cpp:325
+#, c-format
+msgid "unable to delete menu item (%s)"
+msgstr "neįmanoma panaikinti meniu elemento (%s)"
+
+#: windows/registry.cpp:72 windows/registry.cpp:247 windows/registry.cpp:250
+#: windows/registry.cpp:253
+#, c-format
+msgid "invalid '%s' value"
+msgstr "netinkama '%s' reikšmė"
+
+#: windows/registry.cpp:176
+#, c-format
+msgid "RegQueryInfoKey error code %d: '%s'"
+msgstr ""
+
+#: windows/registry.cpp:265
+#, c-format
+msgid "Registry key '%ls' not found"
+msgstr "Registro raktas '%ls' nerastas"
+
+#: windows/util.cpp:46
+msgid "unsupported version of Windows"
+msgstr "nepalaikoma \"Windows\" versija"
+
+#: windows/util.cpp:285
+#, fuzzy, c-format
+msgid "'%s' argument must be a character vector or a raw vector"
+msgstr "argumentas turi būti simbolių vektorius arba neapdorotas vektorius"
+
+#: windows/util.cpp:298
+msgid "'raw = FALSE' and format is a not a known text format"
+msgstr ""
+
+#: windows/util.cpp:324
+msgid "unable to open the clipboard"
+msgstr "neįmanoma atidaryti mainų srities"
+
+#: windows/util.cpp:329
+msgid "unable to write to the clipboard"
+msgstr "neįmanoma rašyti į mainų sritį"
+
+#: windows/util.cpp:456
+#, fuzzy, c-format
+msgid "'%s' argument must be of length 1"
+msgstr "'%s' ilgis turi būti 1"
+
+#: windows/util.cpp:569
+#, fuzzy, c-format
+msgid "'%s' argument must be a list"
+msgstr "'%s' turi būti sąrašas"
+
+#: windows/util.cpp:573
+#, c-format
+msgid "'%s' element %d is not a window handle"
+msgstr "'%s' elementas %d nėra lango rankenėlė"
+
+#: windows/widgets.cpp:105
+msgid "Select one or more"
+msgstr "Pasirinkite vieną ar daugiau"
+
+#: windows/widgets.cpp:105
+msgid "Select one"
+msgstr "Pasirinkite vieną"
+
+#: windows/widgets.cpp:190 windows/widgets.cpp:258
+#, fuzzy
+msgid "'default' argument is overlong"
+msgstr "'default' yra per ilgas"
+
+#: windows/widgets.cpp:196
+#, fuzzy
+msgid "'multi' argument must be a logical value"
+msgstr "'multi' turi būti loginė reikšmė"
+
+#: windows/widgets.cpp:198
+#, fuzzy
+msgid "'filterindex' argument must be an integer value"
+msgstr "'filterindex' turi būti sveikojo skaičiaus reikšmė"
+
+#~ msgid "'title' must be a character string"
+#~ msgstr "'title' turi būti simbolių eilutė"
+
+#~ msgid "'default' must be a character string"
+#~ msgstr "'default' turi būti simbolių eilutė"
+
+#~ msgid "'caption' must be a character string"
+#~ msgstr "'caption' turi būti simbolių eilutė"

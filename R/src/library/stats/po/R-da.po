@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 3.0.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2020-08-14 18:58\n"
+"POT-Creation-Date: 2021-01-07 23:38\n"
 "PO-Revision-Date: 2016-01-09 20:36+0100\n"
 "Last-Translator: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
 "Language-Team: \n"
@@ -656,6 +656,12 @@ msgstr ""
 msgid "'cv' argument must not be NA when 'df' argument is specified"
 msgstr ""
 
+#. R/models.R: stop("'data' must be a data.frame, environment, or list")
+#. R/models.R: stop("'data' must be a data.frame, environment, or list")
+#: R/models.R:0
+msgid "'data' must be a data.frame, environment, or list"
+msgstr ""
+
 #. R/models.R: stop("'data' must be a data.frame, not a matrix or an array")
 #. R/models.R: stop("'data' must be a data.frame, not a matrix or an array")
 #: R/models.R:0
@@ -759,6 +765,11 @@ msgstr ""
 #. R/fisher.test.R: warning("'hybrid' argument is ignored for a 2 x 2 table")
 #: R/fisher.test.R:0
 msgid "'hybrid' argument is ignored for a 2 x 2 table"
+msgstr ""
+
+#. R/reshape.R: stop("'idvar' must uniquely identify records")
+#: R/reshape.R:0
+msgid "'idvar' must uniquely identify records"
 msgstr ""
 
 #. R/identify.hclust.R: stop("'k' and 'h' arguments must be a scalar")
@@ -1488,6 +1499,11 @@ msgstr ""
 #. R/wilcox.test.R: gettext("(pseudo)median", domain = "R-stats")
 #: R/wilcox.test.R:0
 msgid "(pseudo)median"
+msgstr ""
+
+#. R/quantile.R: stop("(unordered) factors are not allowed")
+#: R/quantile.R:0
+msgid "(unordered) factors are not allowed"
 msgstr ""
 
 #. R/models.R: gettext("(weights)", domain = "R-stats")
@@ -3955,11 +3971,6 @@ msgstr ""
 msgid "factor levels have been ordered"
 msgstr ""
 
-#. R/quantile.R: stop("factors are not allowed")
-#: R/quantile.R:0
-msgid "factors are not allowed"
-msgstr ""
-
 #. R/reshape.R: stop("failed to guess time-varying variables from their names")
 #: R/reshape.R:0
 msgid "failed to guess time-varying variables from their names"
@@ -4173,6 +4184,11 @@ msgstr ""
 #. R/power.anova.test.R: stop("internal error", domain = "R-stats")
 #: R/power.R:0 R/power.anova.test.R:0
 msgid "internal error"
+msgstr ""
+
+#. R/nls.R: stop("invalid  'attr(rhs, \"gradient\")'")
+#: R/nls.R:0
+msgid "invalid  'attr(rhs, \"gradient\")'"
 msgstr ""
 
 #. R/arima.R: gettextf("invalid '%s' argument", "SSinit")

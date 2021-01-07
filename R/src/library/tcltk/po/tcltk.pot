@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: tcltk 4.1.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-08-14 18:59+0200\n"
+"POT-Creation-Date: 2021-01-07 23:38+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -17,36 +17,36 @@ msgstr ""
 "Content-Type: text/plain; charset=CHARSET\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: tcltk.cpp:63
+#: tcltk.cpp:65
 msgid "parse error in R expression"
 msgstr ""
 
-#: tcltk.cpp:172 tcltk.cpp:250
+#: tcltk.cpp:174 tcltk.cpp:252
 msgid "tcl error.\n"
 msgstr ""
 
-#: tcltk.cpp:201 tcltk.cpp:276 tcltk.cpp:293 tcltk.cpp:313 tcltk.cpp:333
-#: tcltk.cpp:408 tcltk.cpp:473 tcltk.cpp:527 tcltk.cpp:767
+#: tcltk.cpp:203 tcltk.cpp:278 tcltk.cpp:295 tcltk.cpp:315 tcltk.cpp:335
+#: tcltk.cpp:410 tcltk.cpp:475 tcltk.cpp:529 tcltk.cpp:769
 msgid "invalid argument"
 msgstr ""
 
-#: tcltk.cpp:283
+#: tcltk.cpp:285
 msgid "no such variable"
 msgstr ""
 
-#: tcltk.cpp:315 tcltk.cpp:335 tcltk.cpp:410 tcltk.cpp:475 tcltk.cpp:529
+#: tcltk.cpp:317 tcltk.cpp:337 tcltk.cpp:412 tcltk.cpp:477 tcltk.cpp:531
 msgid "invalid object of type tclObj -- perhaps saved from another session?"
 msgstr ""
 
-#: tcltk.cpp:639
+#: tcltk.cpp:641
 msgid "argument list is too long in tcltk internal function 'callback_closure'"
 msgstr ""
 
-#: tcltk.cpp:673
+#: tcltk.cpp:675
 msgid "argument is not of correct type"
 msgstr ""
 
-#: tcltk.cpp:725
+#: tcltk.cpp:727
 msgid "no DISPLAY variable so Tk is not available"
 msgstr ""
 

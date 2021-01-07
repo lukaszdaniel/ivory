@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.2.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-07-23 12:00+0200\n"
+"POT-Creation-Date: 2021-01-07 23:39+0100\n"
 "PO-Revision-Date: 2012-03-06 17:56+0200\n"
 "Last-Translator: Chel Hee Lee <chl948@mail.usask.ca>\n"
 "Language-Team: The Korean R Translation Council <gnustats@gmail.com>\n"
@@ -34,124 +34,124 @@ msgstr "파일 '%s' 에서 md5 가 작동하지 않습니다 "
 msgid "md5 failed on file '%s'"
 msgstr "파일 '%s' 에서 md5 가 작동하지 않습니다 "
 
-#: getfmts.cpp:55
+#: getfmts.cpp:57
 #, c-format
 msgid "only %d argument is allowed"
 msgid_plural "only %d arguments are allowed"
 msgstr[0] ""
 
-#: getfmts.cpp:60
+#: getfmts.cpp:62
 #, fuzzy, c-format
 msgid "'%s' argument is not a character vector"
 msgstr "'files' 인자는 반드시 문자이어야 합니다 "
 
-#: getfmts.cpp:63
+#: getfmts.cpp:65
 #, c-format
 msgid "'%s' argument must be length 1"
 msgstr ""
 
-#: getfmts.cpp:69
+#: getfmts.cpp:71
 #, c-format
 msgid "length of '%s' argument exceeds maximal format length %d"
 msgstr ""
 
-#: getfmts.cpp:90
+#: getfmts.cpp:92
 #, c-format
 msgid "unrecognised format specification '%s'"
 msgstr ""
 
-#: getfmts.cpp:130
+#: getfmts.cpp:132
 msgid "at most one asterisk '*' is supported in each conversion specification"
 msgstr ""
 
-#: gramLatex.cpp:2435 gramRd.cpp:3792
+#: gramLatex.cpp:2435 gramRd.cpp:3793
 #, c-format
 msgid "unable to allocate buffer for long string at line %d"
 msgstr ""
 
-#: gramLatex.cpp:2631 gramRd.cpp:4286
+#: gramLatex.cpp:2631 gramRd.cpp:4287
 msgid "unable to allocate in PushState"
 msgstr ""
 
-#: gramLatex.cpp:2674 gramRd.cpp:4338 gramRd.cpp:4344
+#: gramLatex.cpp:2674 gramRd.cpp:4339 gramRd.cpp:4345
 #, fuzzy, c-format
 msgid "invalid '%s' value"
 msgstr "올바르지 않은 인자의 유형 "
 
-#: gramRd.cpp:2408 gramRd.cpp:2411
+#: gramRd.cpp:2409 gramRd.cpp:2412
 #, c-format
 msgid "bad markup (extra space?) at %s:%d:%d"
 msgstr ""
 
-#: gramRd.cpp:2936
+#: gramRd.cpp:2937
 #, c-format
 msgid "Macro '%s' previously defined."
 msgstr ""
 
-#: gramRd.cpp:2946
+#: gramRd.cpp:2947
 #, c-format
 msgid "At most 4 arguments are allowed for user defined macros."
 msgstr ""
 
-#: gramRd.cpp:2988
+#: gramRd.cpp:2989
 #, c-format
 msgid "No macro definition for '%s'."
 msgstr ""
 
-#: gramRd.cpp:3005 gramRd.cpp:3021
+#: gramRd.cpp:3006 gramRd.cpp:3022
 msgid "internal error: invalid argument to xxusermacro"
 msgstr ""
 
-#: gramRd.cpp:3050
+#: gramRd.cpp:3051
 #, c-format
 msgid "Not enough arguments passed to user macro '%s'"
 msgstr ""
 
-#: gramRd.cpp:3190 gramRd.cpp:3194
+#: gramRd.cpp:3191 gramRd.cpp:3195
 #, c-format
 msgid "newline within quoted string at %s:%d"
 msgstr ""
 
-#: gramRd.cpp:3217
+#: gramRd.cpp:3218
 #, c-format
 msgid "unable to allocate buffer for long macro at line %d"
 msgstr ""
 
-#: gramRd.cpp:3249
+#: gramRd.cpp:3250
 msgid "macros nested too deeply: infinite recursion?"
 msgstr ""
 
-#: gramRd.cpp:3654
+#: gramRd.cpp:3655
 #, c-format
 msgid "Unable to find macro %s"
 msgstr ""
 
-#: gramRd.cpp:3852
+#: gramRd.cpp:3853
 #, c-format
 msgid "Unexpected end of input (in %c quoted string opened at %s:%d:%d)"
 msgstr ""
 
-#: gramRd.cpp:4351
+#: gramRd.cpp:4352
 msgid "cannot open the connection"
 msgstr ""
 
-#: gramRd.cpp:4356
+#: gramRd.cpp:4357
 msgid "cannot read from this connection"
 msgstr ""
 
-#: gramRd.cpp:4364
+#: gramRd.cpp:4365
 msgid "invalid Rd file"
 msgstr ""
 
-#: gramRd.cpp:4383
+#: gramRd.cpp:4384
 msgid "'deparseRd' only supports deparsing character elements"
 msgstr ""
 
-#: gramRd.cpp:4386
+#: gramRd.cpp:4387
 msgid "bad state"
 msgstr ""
 
-#: gramRd.cpp:4399
+#: gramRd.cpp:4400
 #, c-format
 msgid "bad text mode %d in 'deparseRd'"
 msgstr ""
@@ -160,12 +160,12 @@ msgstr ""
 msgid "invalid bind address specification"
 msgstr ""
 
-#: install.cpp:106 install.cpp:125 install.cpp:127
+#: install.cpp:108 install.cpp:127 install.cpp:129
 #, fuzzy, c-format
 msgid "invalid '%s' argument"
 msgstr "올바르지 않은 인자의 유형 "
 
-#: install.cpp:156
+#: install.cpp:158
 msgid "write error during file append"
 msgstr ""
 
@@ -182,20 +182,20 @@ msgstr ""
 msgid "'%s' function is not supported on this platform"
 msgstr "이 플랫폼에서는 psnice() 가 지원되지 않습니다 "
 
-#: text.cpp:67
+#: text.cpp:74
 msgid "invalid argument type"
 msgstr "올바르지 않은 인자의 유형 "
 
-#: text.cpp:159
+#: text.cpp:166
 #, c-format
 msgid "'%s' argument must be TRUE or FALSE"
 msgstr ""
 
-#: text.cpp:224 text.cpp:246
+#: text.cpp:231 text.cpp:253
 msgid "out of memory"
 msgstr "메모리가 부족합니다 "
 
-#: text.cpp:266 text.cpp:268
+#: text.cpp:273 text.cpp:275
 msgid "first arg must be a single character string"
 msgstr ""
 

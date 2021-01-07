@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.3.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2020-08-14 18:57\n"
+"POT-Creation-Date: 2021-01-07 23:35\n"
 "PO-Revision-Date: 2012-03-08 20:10+0200\n"
 "Last-Translator: Chel Hee Lee <chl948@mail.usask.ca>\n"
 "Language-Team: The Korean R Translation Council <gnustats@gmail.com>\n"
@@ -224,7 +224,6 @@ msgstr "'by' 인수가 너무 작습니다"
 msgid "'%s' argument is not a QR decomposition"
 msgstr "첫번째 인수가 QR 분해이어야 합니다 "
 
-#. R/all.equal.R: gettextf("'%s' argument is not a factor", "target")
 #. R/all.equal.R: gettextf("'%s' argument is not a factor", "current")
 #: R/all.equal.R:0
 #, fuzzy
@@ -600,12 +599,6 @@ msgstr "'%s' 는 \"POSIXt\" 객체들에 대해서 정의 되어 있지 않습�
 msgid "'%s' is not a valid choice"
 msgstr "'%s' 는 올바른 선택이 아닙니다 "
 
-#. R/namespace.R: gettextf("'%s' is not an exported object from 'namespace:%s'", name, getNamespaceName(ns))
-#: R/namespace.R:0
-#, fuzzy
-msgid "'%s' is not an exported object from 'namespace:%s'"
-msgstr "'%s' 는 'namespace:%s' 로부터  내보낸 객체가 아닙니다 "
-
 #. R/datetime.R: gettextf("'%s' operator is not defined for objects of class %s", .Generic, dQuote("POSIXt"))
 #. R/datetime.R: gettextf("'%s' operator is not defined for objects of class %s", .Generic, dQuote("POSIXt"))
 #. R/datetime.R: gettextf("'%s' operator is not defined for objects of class %s", .Generic, dQuote("POSIXt"))
@@ -944,6 +937,12 @@ msgid ""
 "'mode' argument must be \"double\" (\"real\"), \"integer\" or \"character\""
 msgstr "'mode' 는 \"double\" (\"real\") 또는 \"integer\" 이어야 합니다 "
 
+#. R/connections.R: if (missing(name)) "argument 'object' must deparse to a single character string" else "'name' must be a single character string"
+#: R/connections.R:0
+#, fuzzy
+msgid "'name' must be a single character string"
+msgstr "'file' 는 빈문자열이어서는 안됩니다 "
+
 #. R/diag.R: stop("'nrow' or 'ncol' cannot be specified when 'x' is a matrix")
 #: R/diag.R:0
 msgid "'nrow' or 'ncol' cannot be specified when 'x' is a matrix"
@@ -1034,11 +1033,11 @@ msgid ""
 msgstr ""
 "solve.default 는 \"qr\" 객체와 함께 호출되었습니다: 'qr.solve' 를 사용하세요 "
 
-#. R/dataframe.R: stop("'summary()' function is only defined on a data frame with all numeric variables")
+#. R/dataframe.R: stop("'summary()' function is only defined on a data frame with all numeric-alike variables")
 #: R/dataframe.R:0
 #, fuzzy
 msgid ""
-"'summary()' function is only defined on a data frame with all numeric "
+"'summary()' function is only defined on a data frame with all numeric-alike "
 "variables"
 msgstr "모든 변수가 수치형인 데이터 프레임에 대해서만 정의됩니다 "
 
@@ -1079,6 +1078,12 @@ msgstr "can only truncate an open connection"
 #. R/datetime.R: warning("'tzone' attributes are inconsistent")
 #: R/datetime.R:0
 msgid "'tzone' attributes are inconsistent"
+msgstr "'tzone' 속성이 일관되지 않습니다 "
+
+#. R/all.equal.R: gettextf("'tzone' attributes are inconsistent ('%s' and '%s')", tzt, tzc)
+#: R/all.equal.R:0
+#, fuzzy
+msgid "'tzone' attributes are inconsistent ('%s' and '%s')"
 msgstr "'tzone' 속성이 일관되지 않습니다 "
 
 #. R/findInt.R: stop("'vec' argument must be sorted non-decreasingly and not contain NA values")
@@ -1965,7 +1970,13 @@ msgstr "인수가 반복사용될 것입니다 "
 msgid "an object with that name already exists"
 msgstr "해당 이름을 가진 객체가 존재합니다 "
 
-#. R/connections.R: stop("argument 'object' must deparse to a single character string")
+#. R/grep.R: gettextf("argument '%s' will be ignored", "perl = TRUE")
+#: R/grep.R:0
+#, fuzzy
+msgid "argument '%s' will be ignored"
+msgstr "drop argument will be ignored"
+
+#. R/connections.R: if (missing(name)) "argument 'object' must deparse to a single character string" else "'name' must be a single character string"
 #: R/connections.R:0
 msgid "argument 'object' must deparse to a single character string"
 msgstr "argument 'object' must deparse to a single character string"
@@ -2169,6 +2180,18 @@ msgstr ""
 msgid "cannot split the message connection"
 msgstr "메세지 연결을 분할 할 수 없습니다 "
 
+#. R/sort.R: stop("cannot xtfrm 'x'")
+#: R/sort.R:0
+msgid "cannot xtfrm 'x'"
+msgstr ""
+
+#. R/dataframe.R: stop("cannot xtfrm data frames")
+#. R/dataframe.R: warning("cannot xtfrm data frames")
+#: R/dataframe.R:0
+#, fuzzy
+msgid "cannot xtfrm data frames"
+msgstr "데이터 프레임이 아닙니다 "
+
 #. R/dates.R: stop("character string is not in a standard unambiguous format")
 #. R/datetime.R: stop("character string is not in a standard unambiguous format")
 #: R/dates.R:0 R/datetime.R:0
@@ -2331,6 +2354,11 @@ msgstr "NAMESPACE 파일에는 '%s' 라는 명령어 이름이 없습니다 "
 #, fuzzy
 msgid "encoding = \"%s\" chosen"
 msgstr "인코딩 \"%s\" 가 선택되었습니다 "
+
+#. R/all.equal.R: gettext("environments contain objects of the same names, but are not identical",     domain = "R-base")
+#: R/all.equal.R:0
+msgid "environments contain objects of the same names, but are not identical"
+msgstr ""
 
 #. R/qr.R: stop("exact singularity in 'qr.coef()' function")
 #: R/qr.R:0
@@ -2887,6 +2915,12 @@ msgstr "이름들이 이전의 이름들과 일치하지 않습니다 "
 #, fuzzy
 msgid "names for '%s' argument but not for '%s' argument"
 msgstr "'scale' 의 길이는 반드시 'x' 의 열의 개수와 일치해야 합니다 "
+
+#. R/all.equal.R: gettext("names of environments differ:", domain = "R-base")
+#: R/all.equal.R:0
+#, fuzzy
+msgid "names of environments differ:"
+msgstr "수준의 수가 다릅니다"
 
 #. R/namespace.R: gettextf("namespace %s %s is already loaded, but %s %s is required", sQuote(package),     current, zop, zversion)
 #: R/namespace.R:0
@@ -3848,11 +3882,11 @@ msgid "library %s contains no packages"
 msgid_plural "libraries %s contain no packages"
 msgstr[0] "라이브러리 %s 는 아무런 패키지를 포함하고 있지 않습니다 "
 
-#. R/dataframe.R: ngettext(sum(!mode.ok), "non-numeric variable in data frame: ", "non-numeric variables in data frame: ",     domain = "R-base")
+#. R/dataframe.R: ngettext(sum(!mode.ok), "non-numeric-alike variable in data frame: ", "non-numeric-alike variables in data frame: ",     domain = "R-base")
 #: R/dataframe.R:0
 #, fuzzy
-msgid "non-numeric variable in data frame: "
-msgid_plural "non-numeric variables in data frame: "
+msgid "non-numeric-alike variable in data frame: "
+msgid_plural "non-numeric-alike variables in data frame: "
 msgstr[0] "다음 데이터 프레임에 수치가 아닌 변수가 있습니다: "
 
 #. R/dataframe.R: ngettext(length(nonuniq), "non-unique value when setting 'row.names': %s", "non-unique values when setting 'row.names': %s",     domain = "R-base")
@@ -3977,6 +4011,10 @@ msgstr[0] "%s 라는 이름의 패키지는 없습니다"
 msgid "variable %s is not TRUE"
 msgid_plural "variables %s are not all TRUE"
 msgstr[0] "TRUE 대신 T 가 사용되었습니다 "
+
+#, fuzzy
+#~ msgid "'%s' is not an exported object from 'namespace:%s'"
+#~ msgstr "'%s' 는 'namespace:%s' 로부터  내보낸 객체가 아닙니다 "
 
 #~ msgid "bad handler specification"
 #~ msgstr "잘못된 핸들러 지정입니다 "
@@ -4202,10 +4240,6 @@ msgstr[0] "TRUE 대신 T 가 사용되었습니다 "
 
 #~ msgid "length of 'center' must equal the number of columns of 'x'"
 #~ msgstr "'center' 의 길이는 반드시 'x' 의 열의 개수와 일치해야 합니다 "
-
-#, fuzzy
-#~ msgid "'%s' must be non-empty character string"
-#~ msgstr "'file' 는 빈문자열이어서는 안됩니다 "
 
 #~ msgid "'echo' must be logical"
 #~ msgstr "'echo' 는 논리값이어야 합니다 "

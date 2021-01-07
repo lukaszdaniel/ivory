@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.15.2\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2020-08-14 18:59\n"
+"POT-Creation-Date: 2021-01-07 23:38\n"
 "PO-Revision-Date: 2015-01-17 15:37+0100\n"
 "Last-Translator: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
 "Language-Team: R Core <r-core@r-project.org>\n"
@@ -305,6 +305,11 @@ msgid ""
 "  consider running tools::compactPDF() on these files"
 msgstr ""
 
+#. R/checktools.R: stop("'reverse$repos' should be a subset of getOption(\"repos\")")
+#: R/checktools.R:0
+msgid "'reverse$repos' should be a subset of getOption(\"repos\")"
+msgstr ""
+
 #. R/Rd2pdf.R: stop("'type' must be one of 'txt', 'html', 'latex' or 'example'", call. = FALSE)
 #: R/Rd2pdf.R:0
 msgid "'type' must be one of 'txt', 'html', 'latex' or 'example'"
@@ -365,11 +370,6 @@ msgstr ""
 #, fuzzy
 msgid "*** someone has corrupted the Built field in package %s ***"
 msgstr "*** jemand hat das 'Built' Feld im Paket '%s' beschädigt ***"
-
-#. R/QC.R: paste(sQuote(undeclared), collapse = ", ")
-#: R/QC.R:0
-msgid ","
-msgstr ","
 
 #. R/Vignettes.R: gettextf("--- failed re-building %s\n", sQuote(file))
 #. R/Vignettes.R: gettextf("--- failed re-building %s\n", sQuote(file))
@@ -1880,6 +1880,13 @@ msgstr "Evtl. globales 'T' oder 'F' in folgender Rd Beispieldatei gefunden:"
 msgid "Found the following Makefiles with CR or CRLF line endings:"
 msgstr ""
 
+#. R/QC.R: gettext("Found the following URLs which should use \\doi (with the DOI name only):",     domain = "R-tools")
+#: R/QC.R:0
+#, fuzzy
+msgid ""
+"Found the following URLs which should use \\doi (with the DOI name only):"
+msgstr "Evtl. globales 'T' oder 'F' in folgender Rd Beispieldatei gefunden:"
+
 #. R/QC.R: gettext("Found the following \\keyword or \\concept entries which likely give several index terms:",     domain = "R-tools")
 #: R/QC.R:0
 msgid ""
@@ -3237,6 +3244,11 @@ msgstr ""
 msgid "Possibly mis-spelled words in DESCRIPTION:"
 msgstr ""
 
+#. R/Rd2HTML.R: warning("Previous alias or file overwritten by alias: ", aname)
+#: R/Rd2HTML.R:0
+msgid "Previous alias or file overwritten by alias:"
+msgstr ""
+
 #. R/QC.R: gettext("Problems when formatting CITATION entries:", domain = "R-tools")
 #: R/QC.R:0
 msgid "Problems when formatting CITATION entries:"
@@ -4493,14 +4505,13 @@ msgstr "Vignetten:"
 msgid "WARNING"
 msgstr ""
 
-#. R/build.R: gettextf("WARNING: Added dependency on R >= 3.5.0 because\nserialized objects in serialize/load version 3\ncannot be read in older versions of R. File(s)\ncontaining such objects:\n%s\n",     .pretty_format(sort(toonew)), domain = "R-tools")
+#. R/build.R: gettextf("WARNING: Added dependency on R >= 3.5.0 because\nserialized objects in serialize/load version 3\ncannot be read in older versions of R. File(s)\ncontaining such objects:\n",     domain = "R-tools")
 #: R/build.R:0
 msgid ""
 "WARNING: Added dependency on R >= 3.5.0 because\n"
 "serialized objects in serialize/load version 3\n"
 "cannot be read in older versions of R. File(s)\n"
-"containing such objects:\n"
-"%s"
+"containing such objects:"
 msgstr ""
 
 #. R/build.R: gettextf("WARNING: Removing directory %s which should only occur in an installed package",     sQuote(d), domain = "R-tools")
@@ -4711,6 +4722,11 @@ msgstr ""
 #: R/check.R:0
 msgid "apparently using $(LAPACK_LIBS) without following $(BLAS_LIBS) in %s"
 msgstr ""
+
+#. R/QC.R: stop("argument 'package' must be of length 1")
+#: R/QC.R:0
+msgid "argument 'package' must be of length 1"
+msgstr "Argument 'package' muss Länge 1 haben"
 
 #. R/parseLatex.R: gettext("argument for %s was not found", sQuote(c(a)))
 #: R/parseLatex.R:0
@@ -4943,11 +4959,6 @@ msgstr "erzuege DLL"
 #. R/check.R: gettext("checking S3 generic/method consistency ...", domain = "R-tools")
 #: R/check.R:0
 msgid "checking S3 generic/method consistency ..."
-msgstr ""
-
-#. R/check.R: gettextf("checking a package with encoding %s in an ASCII locale", sQuote(e), domain = "R-tools")
-#: R/check.R:0
-msgid "checking a package with encoding %s in an ASCII locale"
 msgstr ""
 
 #. R/install.R: gettext("checking absolute paths in shared objects and dynamic libraries", domain = "R-tools")
@@ -6243,16 +6254,10 @@ msgstr "erzeugen"
 #. R/urltools.R: sprintf("processing %s", .file_path_relative_to_dir(f, dir))
 #. R/urltools.R: sprintf("processing %s", .file_path_relative_to_dir(f, dir))
 #. R/urltools.R: gettextf("processing %s", p)
-#. R/urltools.R: sprintf("processing %s", u)
+#. R/urltools.R: gettextf("processing %s", i)
 #. R/urltools.R: gettextf("processing %s", u)
 #: R/urltools.R:0
 msgid "processing %s"
-msgstr "bearbeite %s'"
-
-#. R/doitools.R: gettextf("processing DOI %s", d)
-#: R/doitools.R:0
-#, fuzzy
-msgid "processing DOI %s"
 msgstr "bearbeite %s'"
 
 #. R/utils.R: gettextf("processing directory %s", sQuote(basename(dir)))
@@ -6965,6 +6970,11 @@ msgstr "sie müssen 'dir' oder 'files' angeben"
 #, fuzzy
 msgid "you must specify '%s', '%s' or '%s' argument"
 msgstr "sie müssen 'dir' oder 'files' angeben"
+
+#. R/QC.R: stop("you must specify 'package' or 'dir'")
+#: R/QC.R:0
+msgid "you must specify 'package' or 'dir'"
+msgstr "'package' oder 'dir' muss angegeben werden"
 
 #. R/check.R: ngettext(length(bad), "  Namespace with empty importFrom: %s", "  Namespaces with empty importFrom: %s",     domain = "R-tools")
 #: R/check.R:0
@@ -7740,6 +7750,14 @@ msgstr[0] ""
 msgstr[1] ""
 "Pakete, welche dieses erweitern, aber nicht für Überprüfung bereit stehen:"
 
+#. R/QC.R: ngettext(length(x$bad_closures), "Possibly missing '()' after 'return' in the following function:",     "Possibly missing '()' after 'return' in the following functions:")
+#: R/QC.R:0
+#, fuzzy
+msgid "Possibly missing '()' after 'return' in the following function:"
+msgid_plural "Possibly missing '()' after 'return' in the following functions:"
+msgstr[0] "Evtl. globales 'T' oder 'F' in der folgenden Funktion gefunden:"
+msgstr[1] "Evtl. globales 'T' oder 'F' in den folgenden Funktionen gefunden:"
+
 #. R/update_packages.R: ngettext(nrow(newpkgdf), "Processed %d entry from package tarballs.", "Processed %d entries from package tarballs.",     domain = "R-tools")
 #: R/update_packages.R:0
 msgid "Processed %d entry from package tarballs."
@@ -8094,6 +8112,13 @@ msgid_plural "unable to re-encode %s lines %s"
 msgstr[0] "kann '%s' Zeile(n) %s nicht rekodieren"
 msgstr[1] "kann '%s' Zeile(n) %s nicht rekodieren"
 
+#~ msgid ","
+#~ msgstr ","
+
+#, fuzzy
+#~ msgid "processing DOI %s"
+#~ msgstr "bearbeite %s'"
+
 #~ msgid ""
 #~ "package %s exists but was not installed under R >= 2.10.0 so xrefs cannot "
 #~ "be checked"
@@ -8416,9 +8441,6 @@ msgstr[1] "kann '%s' Zeile(n) %s nicht rekodieren"
 #~ msgid "argument '%s' must be a character string or connection"
 #~ msgstr "Argument '%s' muss eine Zeichenkette oder eine Verbindung sein"
 
-#~ msgid "argument 'package' must be of length 1"
-#~ msgstr "Argument 'package' muss Länge 1 haben"
-
 #~ msgid "missing/empty \\title field in '%s'"
 #~ msgstr "fehlendes bzw. leeres \\title Feld in '%s'"
 
@@ -8468,9 +8490,6 @@ msgstr[1] "kann '%s' Zeile(n) %s nicht rekodieren"
 
 #~ msgid "parsing '%s'"
 #~ msgstr "parse '%s'"
-
-#~ msgid "you must specify 'package' or 'dir'"
-#~ msgstr "'package' oder 'dir' muss angegeben werden"
 
 #, fuzzy
 #~ msgid "removing %s"

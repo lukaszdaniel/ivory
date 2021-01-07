@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 3.5.1\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2020-07-23 12:01\n"
+"POT-Creation-Date: 2021-01-07 23:39\n"
 "PO-Revision-Date: 2018-09-16 23:38+0800\n"
 "Last-Translator: Wei-Lun Chao <bluebat@member.fsf.org>\n"
 "Language-Team: Chinese (traditional) <zh-l10n@linux.org.tw>\n"
@@ -321,9 +321,10 @@ msgstr "'file' 必須是\"\"或開啟的聯結"
 msgid "'file' must be NULL, a character string or a connection"
 msgstr "'file' 的值必須是 NULL，字串或聯結"
 
-#. R/zip.R: stop("'files' must a character vector specifying one or more filepaths")
+#. R/zip.R: stop("'files' must be a character vector specifying one or more filepaths")
 #: R/zip.R:0
-msgid "'files' must a character vector specifying one or more filepaths"
+#, fuzzy
+msgid "'files' must be a character vector specifying one or more filepaths"
 msgstr "'files' 必須指定一個或多個檔案路徑的字元向量"
 
 #. R/frametools.R: stop("'form' must be a two-sided formula")
@@ -1195,6 +1196,11 @@ msgstr ""
 msgid "Package"
 msgstr "程式套件"
 
+#. R/packages2.R: gettextf("Package %s version %s is in the repositories but depends on %s", sQuote(av2[,     "Package"]), av2[, "Version"], unlist(x))
+#: R/packages2.R:0
+msgid "Package %s version %s is in the repositories but depends on %s"
+msgstr ""
+
 #. R/bug.report.R: gettextf("Package %s: DESCRIPTION file not found", sQuote(package))
 #: R/bug.report.R:0
 msgid "Package %s: DESCRIPTION file not found"
@@ -1844,6 +1850,12 @@ msgstr "給檔案加行名稱"
 msgid "argument 'help.db' is deprecated"
 msgstr "引數 'help.db' 已經不再用了"
 
+#. R/zip.R: stop("argument 'zip' must be a non-empty character string")
+#: R/zip.R:0
+#, fuzzy
+msgid "argument 'zip' must be a non-empty character string"
+msgstr "url 必須的非空字串"
+
 #. R/sourceutils.R: stop("argument is not a function or language object:", typeof(fn))
 #: R/sourceutils.R:0
 msgid "argument is not a function or language object:"
@@ -1869,11 +1881,6 @@ msgstr ""
 #: R/write.table.R:0
 msgid "attempt to set '%s' ignored"
 msgstr "不能修改 '%s'"
-
-#. R/capture.output.R: stop("bad argument")
-#: R/capture.output.R:0
-msgid "bad argument"
-msgstr "引數無效"
 
 #. R/packages2.R: gettextf("begin installing package %s", sQuote(pkg), domain = "R-utils")
 #: R/packages2.R:0
@@ -3383,6 +3390,18 @@ msgid "A bibentry of bibtype %s has to specify the field: %s"
 msgid_plural "A bibentry of bibtype %s has to specify the fields: %s"
 msgstr[0] "bibtype%s 的條目必須設定這些項：%s"
 
+#. R/packages2.R: ngettext(sum(m0), "A version of this package for your version of R might be available elsewhere,\nsee the ideas at\n",     "Versions of these packages for your version of R might be available elsewhere,\nsee the ideas at\n")
+#: R/packages2.R:0
+msgid ""
+"A version of this package for your version of R might be available "
+"elsewhere,\n"
+"see the ideas at\n"
+msgid_plural ""
+"Versions of these packages for your version of R might be available "
+"elsewhere,\n"
+"see the ideas at\n"
+msgstr[0] ""
+
 #. R/str.R: ngettext(length(cl), "Class %s", "Classes %s", domain = "R-utils")
 #: R/str.R:0
 msgid "Class %s"
@@ -3602,19 +3621,20 @@ msgid "package %s is in use and will not be installed"
 msgid_plural "packages %s are in use and will not be installed"
 msgstr[0] "正在使用 %s 這個程式套件，因此不會被安裝"
 
-#. R/packages2.R: ngettext(sum(miss), "package %s is not available (as a binary package for %s)", "packages %s are not available (as a binary packages for %s)",     domain = "R-utils")
+#. R/packages2.R: ngettext(sum(m0), "package %s is not available %s", "packages %s are not available %s")
 #: R/packages2.R:0
 #, fuzzy
-msgid "package %s is not available (as a binary package for %s)"
-msgid_plural "packages %s are not available (as a binary packages for %s)"
+msgid "package %s is not available %s"
+msgid_plural "packages %s are not available %s"
 msgstr[0] "沒有 %s 這個程式套件 (給 %s 用)"
 
-#. R/packages2.R: ngettext(sum(miss), "package %s is not available (for %s)", "packages %s are not available (for %s)",     domain = "R-utils")
-#: R/packages2.R:0
+#~ msgid "bad argument"
+#~ msgstr "引數無效"
+
 #, fuzzy
-msgid "package %s is not available (for %s)"
-msgid_plural "packages %s are not available (for %s)"
-msgstr[0] "沒有 %s 這個程式套件 (給 %s 用)"
+#~ msgid "package %s is not available (as a binary package for %s)"
+#~ msgid_plural "packages %s are not available (as a binary packages for %s)"
+#~ msgstr[0] "沒有 %s 這個程式套件 (給 %s 用)"
 
 #~ msgid "Invalid 'filter' argument."
 #~ msgstr "'filter' 引數無效"

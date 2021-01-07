@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: tools 4.1.0\n"
-"POT-Creation-Date: 2020-08-14 18:59\n"
+"POT-Creation-Date: 2021-01-07 23:38\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -351,6 +351,13 @@ msgid "'qpdf' made some significant size reductions:\n%s\n  consider running too
 msgstr ""
 
 
+#: R/checktools.R: 0
+#. R/checktools.R: stop("'reverse$repos' should be a subset of getOption(\"repos\")")
+
+msgid "'reverse$repos' should be a subset of getOption(\"repos\")"
+msgstr ""
+
+
 #: R/Rd2pdf.R: 0
 #. R/Rd2pdf.R: stop("'type' must be one of 'txt', 'html', 'latex' or 'example'", call. = FALSE)
 
@@ -426,13 +433,6 @@ msgstr ""
 #. R/admin.R: gettextf("*** someone has corrupted the Built field in package %s ***", sQuote(db["Package"]))
 
 msgid "*** someone has corrupted the Built field in package %s ***"
-msgstr ""
-
-
-#: R/QC.R: 0
-#. R/QC.R: paste(sQuote(undeclared), collapse = ", ")
-
-msgid ","
 msgstr ""
 
 
@@ -2228,6 +2228,13 @@ msgstr ""
 
 
 #: R/QC.R: 0
+#. R/QC.R: gettext("Found the following URLs which should use \\doi (with the DOI name only):",     domain = "R-tools")
+
+msgid "Found the following URLs which should use \\doi (with the DOI name only):"
+msgstr ""
+
+
+#: R/QC.R: 0
 #. R/QC.R: gettext("Found the following \\keyword or \\concept entries which likely give several index terms:",     domain = "R-tools")
 
 msgid "Found the following \\keyword or \\concept entries which likely give several index terms:"
@@ -3889,6 +3896,13 @@ msgid "Possibly mis-spelled words in DESCRIPTION:"
 msgstr ""
 
 
+#: R/Rd2HTML.R: 0
+#. R/Rd2HTML.R: warning("Previous alias or file overwritten by alias: ", aname)
+
+msgid "Previous alias or file overwritten by alias:"
+msgstr ""
+
+
 #: R/QC.R: 0
 #. R/QC.R: gettext("Problems when formatting CITATION entries:", domain = "R-tools")
 
@@ -5346,9 +5360,9 @@ msgstr ""
 
 
 #: R/build.R: 0
-#. R/build.R: gettextf("WARNING: Added dependency on R >= 3.5.0 because\nserialized objects in serialize/load version 3\ncannot be read in older versions of R. File(s)\ncontaining such objects:\n%s\n",     .pretty_format(sort(toonew)), domain = "R-tools")
+#. R/build.R: gettextf("WARNING: Added dependency on R >= 3.5.0 because\nserialized objects in serialize/load version 3\ncannot be read in older versions of R. File(s)\ncontaining such objects:\n",     domain = "R-tools")
 
-msgid "WARNING: Added dependency on R >= 3.5.0 because\nserialized objects in serialize/load version 3\ncannot be read in older versions of R. File(s)\ncontaining such objects:\n%s"
+msgid "WARNING: Added dependency on R >= 3.5.0 because\nserialized objects in serialize/load version 3\ncannot be read in older versions of R. File(s)\ncontaining such objects:"
 msgstr ""
 
 
@@ -5610,6 +5624,13 @@ msgstr ""
 #. R/check.R: gettextf("  apparently using $(LAPACK_LIBS) without following $(BLAS_LIBS) in %s\n",     sQuote(f), domain = "R-tools")
 
 msgid "apparently using $(LAPACK_LIBS) without following $(BLAS_LIBS) in %s"
+msgstr ""
+
+
+#: R/QC.R: 0
+#. R/QC.R: stop("argument 'package' must be of length 1")
+
+msgid "argument 'package' must be of length 1"
 msgstr ""
 
 
@@ -5906,13 +5927,6 @@ msgstr ""
 #. R/check.R: gettext("checking S3 generic/method consistency ...", domain = "R-tools")
 
 msgid "checking S3 generic/method consistency ..."
-msgstr ""
-
-
-#: R/check.R: 0
-#. R/check.R: gettextf("checking a package with encoding %s in an ASCII locale", sQuote(e), domain = "R-tools")
-
-msgid "checking a package with encoding %s in an ASCII locale"
 msgstr ""
 
 
@@ -7525,17 +7539,10 @@ msgstr ""
 #. R/urltools.R: sprintf("processing %s", .file_path_relative_to_dir(f, dir))
 #. R/urltools.R: sprintf("processing %s", .file_path_relative_to_dir(f, dir))
 #. R/urltools.R: gettextf("processing %s", p)
-#. R/urltools.R: sprintf("processing %s", u)
+#. R/urltools.R: gettextf("processing %s", i)
 #. R/urltools.R: gettextf("processing %s", u)
 
 msgid "processing %s"
-msgstr ""
-
-
-#: R/doitools.R: 0
-#. R/doitools.R: gettextf("processing DOI %s", d)
-
-msgid "processing DOI %s"
 msgstr ""
 
 
@@ -8414,6 +8421,13 @@ msgid "you must specify '%s', '%s' or '%s' argument"
 msgstr ""
 
 
+#: R/QC.R: 0
+#. R/QC.R: stop("you must specify 'package' or 'dir'")
+
+msgid "you must specify 'package' or 'dir'"
+msgstr ""
+
+
 #: R/check.R: 0
 #. R/check.R: ngettext(length(bad), "  Namespace with empty importFrom: %s", "  Namespaces with empty importFrom: %s",     domain = "R-tools")
 
@@ -9188,6 +9202,15 @@ msgstr[1]    ""
 
 msgid        "Package which this enhances but not available for checking:"
 msgid_plural "Packages which this enhances but not available for checking:"
+msgstr[0]    ""
+msgstr[1]    ""
+
+
+#: R/QC.R: 0
+#. R/QC.R: ngettext(length(x$bad_closures), "Possibly missing '()' after 'return' in the following function:",     "Possibly missing '()' after 'return' in the following functions:")
+
+msgid        "Possibly missing '()' after 'return' in the following function:"
+msgid_plural "Possibly missing '()' after 'return' in the following functions:"
 msgstr[0]    ""
 msgstr[1]    ""
 

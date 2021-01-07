@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: utils 4.1.0\n"
-"POT-Creation-Date: 2020-07-23 12:01\n"
+"POT-Creation-Date: 2021-01-07 23:39\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -398,9 +398,9 @@ msgstr ""
 
 
 #: R/zip.R: 0
-#. R/zip.R: stop("'files' must a character vector specifying one or more filepaths")
+#. R/zip.R: stop("'files' must be a character vector specifying one or more filepaths")
 
-msgid "'files' must a character vector specifying one or more filepaths"
+msgid "'files' must be a character vector specifying one or more filepaths"
 msgstr ""
 
 
@@ -1506,6 +1506,13 @@ msgid "Package"
 msgstr ""
 
 
+#: R/packages2.R: 0
+#. R/packages2.R: gettextf("Package %s version %s is in the repositories but depends on %s", sQuote(av2[,     "Package"]), av2[, "Version"], unlist(x))
+
+msgid "Package %s version %s is in the repositories but depends on %s"
+msgstr ""
+
+
 #: R/bug.report.R: 0
 #. R/bug.report.R: gettextf("Package %s: DESCRIPTION file not found", sQuote(package))
 
@@ -2287,6 +2294,13 @@ msgid "argument 'help.db' is deprecated"
 msgstr ""
 
 
+#: R/zip.R: 0
+#. R/zip.R: stop("argument 'zip' must be a non-empty character string")
+
+msgid "argument 'zip' must be a non-empty character string"
+msgstr ""
+
+
 #: R/sourceutils.R: 0
 #. R/sourceutils.R: stop("argument is not a function or language object:", typeof(fn))
 
@@ -2320,13 +2334,6 @@ msgstr ""
 #. R/write.table.R: gettextf("attempt to set '%s' ignored", argname)
 
 msgid "attempt to set '%s' ignored"
-msgstr ""
-
-
-#: R/capture.output.R: 0
-#. R/capture.output.R: stop("bad argument")
-
-msgid "bad argument"
 msgstr ""
 
 
@@ -4333,6 +4340,15 @@ msgstr[0]    ""
 msgstr[1]    ""
 
 
+#: R/packages2.R: 0
+#. R/packages2.R: ngettext(sum(m0), "A version of this package for your version of R might be available elsewhere,\nsee the ideas at\n",     "Versions of these packages for your version of R might be available elsewhere,\nsee the ideas at\n")
+
+msgid        "A version of this package for your version of R might be available elsewhere,\nsee the ideas at\n"
+msgid_plural "Versions of these packages for your version of R might be available elsewhere,\nsee the ideas at\n"
+msgstr[0]    ""
+msgstr[1]    ""
+
+
 #: R/str.R: 0
 #. R/str.R: ngettext(length(cl), "Class %s", "Classes %s", domain = "R-utils")
 
@@ -4596,18 +4612,9 @@ msgstr[1]    ""
 
 
 #: R/packages2.R: 0
-#. R/packages2.R: ngettext(sum(miss), "package %s is not available (as a binary package for %s)", "packages %s are not available (as a binary packages for %s)",     domain = "R-utils")
+#. R/packages2.R: ngettext(sum(m0), "package %s is not available %s", "packages %s are not available %s")
 
-msgid        "package %s is not available (as a binary package for %s)"
-msgid_plural "packages %s are not available (as a binary packages for %s)"
-msgstr[0]    ""
-msgstr[1]    ""
-
-
-#: R/packages2.R: 0
-#. R/packages2.R: ngettext(sum(miss), "package %s is not available (for %s)", "packages %s are not available (for %s)",     domain = "R-utils")
-
-msgid        "package %s is not available (for %s)"
-msgid_plural "packages %s are not available (for %s)"
+msgid        "package %s is not available %s"
+msgid_plural "packages %s are not available %s"
 msgstr[0]    ""
 msgstr[1]    ""

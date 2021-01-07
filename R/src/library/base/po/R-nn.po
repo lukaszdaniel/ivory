@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.15.1\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2020-08-14 18:57\n"
+"POT-Creation-Date: 2021-01-07 23:35\n"
 "PO-Revision-Date: 2012-09-28 22:18+0200\n"
 "Last-Translator: Karl Ove Hufthammer <karl@huftis.org>\n"
 "Language-Team: Norwegian Nynorsk <i18n-nn@lister.ping.uio.no>\n"
@@ -219,7 +219,6 @@ msgstr "«by»-argumentet er for lite"
 msgid "'%s' argument is not a QR decomposition"
 msgstr "det første argumentet må vera ei QR-dekomponering"
 
-#. R/all.equal.R: gettextf("'%s' argument is not a factor", "target")
 #. R/all.equal.R: gettextf("'%s' argument is not a factor", "current")
 #: R/all.equal.R:0
 #, fuzzy
@@ -597,12 +596,6 @@ msgstr "«%s» er ikkje definert for «POSIXt»-objekt"
 msgid "'%s' is not a valid choice"
 msgstr "«%s» er ikkje eit gyldig val"
 
-#. R/namespace.R: gettextf("'%s' is not an exported object from 'namespace:%s'", name, getNamespaceName(ns))
-#: R/namespace.R:0
-#, fuzzy
-msgid "'%s' is not an exported object from 'namespace:%s'"
-msgstr "«%s» er ikkje eit eksportert objekt frå «namespace:%s»"
-
 #. R/datetime.R: gettextf("'%s' operator is not defined for objects of class %s", .Generic, dQuote("POSIXt"))
 #. R/datetime.R: gettextf("'%s' operator is not defined for objects of class %s", .Generic, dQuote("POSIXt"))
 #. R/datetime.R: gettextf("'%s' operator is not defined for objects of class %s", .Generic, dQuote("POSIXt"))
@@ -937,6 +930,12 @@ msgid ""
 "'mode' argument must be \"double\" (\"real\"), \"integer\" or \"character\""
 msgstr "«mode» må vera «double» («real»), «integer» eller «character»"
 
+#. R/connections.R: if (missing(name)) "argument 'object' must deparse to a single character string" else "'name' must be a single character string"
+#: R/connections.R:0
+#, fuzzy
+msgid "'name' must be a single character string"
+msgstr "«file» må vera ein ikkje-tom teiknstreng"
+
 #. R/diag.R: stop("'nrow' or 'ncol' cannot be specified when 'x' is a matrix")
 #: R/diag.R:0
 msgid "'nrow' or 'ncol' cannot be specified when 'x' is a matrix"
@@ -1029,11 +1028,11 @@ msgid ""
 "solve()' function"
 msgstr "«solve.default» kalla med eit «qr»-objekt: bruk «qr.solve»"
 
-#. R/dataframe.R: stop("'summary()' function is only defined on a data frame with all numeric variables")
+#. R/dataframe.R: stop("'summary()' function is only defined on a data frame with all numeric-alike variables")
 #: R/dataframe.R:0
 #, fuzzy
 msgid ""
-"'summary()' function is only defined on a data frame with all numeric "
+"'summary()' function is only defined on a data frame with all numeric-alike "
 "variables"
 msgstr "berre definert på dataramme med berre numeriske variablar"
 
@@ -1074,6 +1073,12 @@ msgstr "kan berre trunkera eit ope samband"
 #. R/datetime.R: warning("'tzone' attributes are inconsistent")
 #: R/datetime.R:0
 msgid "'tzone' attributes are inconsistent"
+msgstr "«tzone»-attributta er inkonsistente"
+
+#. R/all.equal.R: gettextf("'tzone' attributes are inconsistent ('%s' and '%s')", tzt, tzc)
+#: R/all.equal.R:0
+#, fuzzy
+msgid "'tzone' attributes are inconsistent ('%s' and '%s')"
 msgstr "«tzone»-attributta er inkonsistente"
 
 #. R/findInt.R: stop("'vec' argument must be sorted non-decreasingly and not contain NA values")
@@ -1957,7 +1962,13 @@ msgstr "eit argument vert delvis resirkulert"
 msgid "an object with that name already exists"
 msgstr "det finst alt eit objekt med dette namnet"
 
-#. R/connections.R: stop("argument 'object' must deparse to a single character string")
+#. R/grep.R: gettextf("argument '%s' will be ignored", "perl = TRUE")
+#: R/grep.R:0
+#, fuzzy
+msgid "argument '%s' will be ignored"
+msgstr "«drop»-argumentet vert ignorert"
+
+#. R/connections.R: if (missing(name)) "argument 'object' must deparse to a single character string" else "'name' must be a single character string"
 #: R/connections.R:0
 msgid "argument 'object' must deparse to a single character string"
 msgstr "argumentet «object» må deparsast til ein enkelt tekststreng"
@@ -2160,6 +2171,18 @@ msgstr ""
 msgid "cannot split the message connection"
 msgstr "kan ikkje dela opp meldingssamband"
 
+#. R/sort.R: stop("cannot xtfrm 'x'")
+#: R/sort.R:0
+msgid "cannot xtfrm 'x'"
+msgstr ""
+
+#. R/dataframe.R: stop("cannot xtfrm data frames")
+#. R/dataframe.R: warning("cannot xtfrm data frames")
+#: R/dataframe.R:0
+#, fuzzy
+msgid "cannot xtfrm data frames"
+msgstr "ikkje ei dataramme"
+
 #. R/dates.R: stop("character string is not in a standard unambiguous format")
 #. R/datetime.R: stop("character string is not in a standard unambiguous format")
 #: R/dates.R:0 R/datetime.R:0
@@ -2321,6 +2344,11 @@ msgstr "tomt namn i direktivet «%s» i NAMESPACE-fila"
 #, fuzzy
 msgid "encoding = \"%s\" chosen"
 msgstr "valde «encoding = \"%s\"»"
+
+#. R/all.equal.R: gettext("environments contain objects of the same names, but are not identical",     domain = "R-base")
+#: R/all.equal.R:0
+msgid "environments contain objects of the same names, but are not identical"
+msgstr ""
 
 #. R/qr.R: stop("exact singularity in 'qr.coef()' function")
 #: R/qr.R:0
@@ -2878,6 +2906,12 @@ msgstr "namna er ikkje i samsvar med dei gamle namna"
 #, fuzzy
 msgid "names for '%s' argument but not for '%s' argument"
 msgstr "lengda av «scale» må vera lik talet på kolonnar til «x»"
+
+#. R/all.equal.R: gettext("names of environments differ:", domain = "R-base")
+#: R/all.equal.R:0
+#, fuzzy
+msgid "names of environments differ:"
+msgstr "talet på nivå er forskjellig"
 
 #. R/namespace.R: gettextf("namespace %s %s is already loaded, but %s %s is required", sQuote(package),     current, zop, zversion)
 #: R/namespace.R:0
@@ -3861,11 +3895,11 @@ msgid_plural "libraries %s contain no packages"
 msgstr[0] "biblioteket «%s» inneheld ikkje nokon pakkar"
 msgstr[1] "biblioteka «%s» inneheld ikkje nokon pakkar"
 
-#. R/dataframe.R: ngettext(sum(!mode.ok), "non-numeric variable in data frame: ", "non-numeric variables in data frame: ",     domain = "R-base")
+#. R/dataframe.R: ngettext(sum(!mode.ok), "non-numeric-alike variable in data frame: ", "non-numeric-alike variables in data frame: ",     domain = "R-base")
 #: R/dataframe.R:0
 #, fuzzy
-msgid "non-numeric variable in data frame: "
-msgid_plural "non-numeric variables in data frame: "
+msgid "non-numeric-alike variable in data frame: "
+msgid_plural "non-numeric-alike variables in data frame: "
 msgstr[0] "ikkje numerisk variabel i dataramme:"
 msgstr[1] "ikkje numerisk variabel i dataramme:"
 
@@ -4006,6 +4040,10 @@ msgid "variable %s is not TRUE"
 msgid_plural "variables %s are not all TRUE"
 msgstr[0] "T brukt i staden for TRUE"
 msgstr[1] "T brukt i staden for TRUE"
+
+#, fuzzy
+#~ msgid "'%s' is not an exported object from 'namespace:%s'"
+#~ msgstr "«%s» er ikkje eit eksportert objekt frå «namespace:%s»"
 
 #~ msgid "bad handler specification"
 #~ msgstr "ugyldig handsamarspesifikasjon"
@@ -4231,10 +4269,6 @@ msgstr[1] "T brukt i staden for TRUE"
 
 #~ msgid "length of 'center' must equal the number of columns of 'x'"
 #~ msgstr "lengda av «center» må vera lik talet på kolonnar til «x»"
-
-#, fuzzy
-#~ msgid "'%s' must be non-empty character string"
-#~ msgstr "«file» må vera ein ikkje-tom teiknstreng"
 
 #~ msgid "'echo' must be logical"
 #~ msgstr "«echo» må vera boolsk"

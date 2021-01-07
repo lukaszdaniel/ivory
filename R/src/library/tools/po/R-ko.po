@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 3.1.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2020-08-14 18:59\n"
+"POT-Creation-Date: 2021-01-07 23:38\n"
 "PO-Revision-Date: 2014-03-27 13:35-0600\n"
 "Last-Translator: Chel Hee Lee <chl948@mail.usask.ca>\n"
 "Language-Team:  <chl948@mail.usask.ca>\n"
@@ -301,6 +301,11 @@ msgid ""
 "  consider running tools::compactPDF() on these files"
 msgstr ""
 
+#. R/checktools.R: stop("'reverse$repos' should be a subset of getOption(\"repos\")")
+#: R/checktools.R:0
+msgid "'reverse$repos' should be a subset of getOption(\"repos\")"
+msgstr ""
+
 #. R/Rd2pdf.R: stop("'type' must be one of 'txt', 'html', 'latex' or 'example'", call. = FALSE)
 #: R/Rd2pdf.R:0
 msgid "'type' must be one of 'txt', 'html', 'latex' or 'example'"
@@ -362,11 +367,6 @@ msgstr ""
 #, fuzzy
 msgid "*** someone has corrupted the Built field in package %s ***"
 msgstr "*** 패키지 '%s'내에 있는 Built 항목을 손상되었습니다 ***"
-
-#. R/QC.R: paste(sQuote(undeclared), collapse = ", ")
-#: R/QC.R:0
-msgid ","
-msgstr ","
 
 #. R/Vignettes.R: gettextf("--- failed re-building %s\n", sQuote(file))
 #. R/Vignettes.R: gettextf("--- failed re-building %s\n", sQuote(file))
@@ -1879,6 +1879,13 @@ msgstr "다음은 중복된 이름 '%s'를 가진 Rd 파일들입니다:"
 msgid "Found the following Makefiles with CR or CRLF line endings:"
 msgstr ""
 
+#. R/QC.R: gettext("Found the following URLs which should use \\doi (with the DOI name only):",     domain = "R-tools")
+#: R/QC.R:0
+#, fuzzy
+msgid ""
+"Found the following URLs which should use \\doi (with the DOI name only):"
+msgstr "다음은 중복된 이름 '%s'를 가진 Rd 파일들입니다:"
+
 #. R/QC.R: gettext("Found the following \\keyword or \\concept entries which likely give several index terms:",     domain = "R-tools")
 #: R/QC.R:0
 msgid ""
@@ -3204,6 +3211,11 @@ msgstr ""
 msgid "Possibly mis-spelled words in DESCRIPTION:"
 msgstr ""
 
+#. R/Rd2HTML.R: warning("Previous alias or file overwritten by alias: ", aname)
+#: R/Rd2HTML.R:0
+msgid "Previous alias or file overwritten by alias:"
+msgstr ""
+
 #. R/QC.R: gettext("Problems when formatting CITATION entries:", domain = "R-tools")
 #: R/QC.R:0
 msgid "Problems when formatting CITATION entries:"
@@ -4442,14 +4454,13 @@ msgstr "비니에트:"
 msgid "WARNING"
 msgstr ""
 
-#. R/build.R: gettextf("WARNING: Added dependency on R >= 3.5.0 because\nserialized objects in serialize/load version 3\ncannot be read in older versions of R. File(s)\ncontaining such objects:\n%s\n",     .pretty_format(sort(toonew)), domain = "R-tools")
+#. R/build.R: gettextf("WARNING: Added dependency on R >= 3.5.0 because\nserialized objects in serialize/load version 3\ncannot be read in older versions of R. File(s)\ncontaining such objects:\n",     domain = "R-tools")
 #: R/build.R:0
 msgid ""
 "WARNING: Added dependency on R >= 3.5.0 because\n"
 "serialized objects in serialize/load version 3\n"
 "cannot be read in older versions of R. File(s)\n"
-"containing such objects:\n"
-"%s"
+"containing such objects:"
 msgstr ""
 
 #. R/build.R: gettextf("WARNING: Removing directory %s which should only occur in an installed package",     sQuote(d), domain = "R-tools")
@@ -4655,6 +4666,12 @@ msgstr ""
 #: R/check.R:0
 msgid "apparently using $(LAPACK_LIBS) without following $(BLAS_LIBS) in %s"
 msgstr ""
+
+#. R/QC.R: stop("argument 'package' must be of length 1")
+#: R/QC.R:0
+#, fuzzy
+msgid "argument 'package' must be of length 1"
+msgstr "인자 'package'는 반드시 길이가 1 이어야 합니다"
 
 #. R/parseLatex.R: gettext("argument for %s was not found", sQuote(c(a)))
 #: R/parseLatex.R:0
@@ -4884,11 +4901,6 @@ msgstr "%s를 확인합니다 ..."
 #. R/check.R: gettext("checking S3 generic/method consistency ...", domain = "R-tools")
 #: R/check.R:0
 msgid "checking S3 generic/method consistency ..."
-msgstr ""
-
-#. R/check.R: gettextf("checking a package with encoding %s in an ASCII locale", sQuote(e), domain = "R-tools")
-#: R/check.R:0
-msgid "checking a package with encoding %s in an ASCII locale"
 msgstr ""
 
 #. R/install.R: gettext("checking absolute paths in shared objects and dynamic libraries", domain = "R-tools")
@@ -6145,16 +6157,10 @@ msgstr "%s을 확장하고 있습니다"
 #. R/urltools.R: sprintf("processing %s", .file_path_relative_to_dir(f, dir))
 #. R/urltools.R: sprintf("processing %s", .file_path_relative_to_dir(f, dir))
 #. R/urltools.R: gettextf("processing %s", p)
-#. R/urltools.R: sprintf("processing %s", u)
+#. R/urltools.R: gettextf("processing %s", i)
 #. R/urltools.R: gettextf("processing %s", u)
 #: R/urltools.R:0
 msgid "processing %s"
-msgstr "%s를 처리중입니다"
-
-#. R/doitools.R: gettextf("processing DOI %s", d)
-#: R/doitools.R:0
-#, fuzzy
-msgid "processing DOI %s"
 msgstr "%s를 처리중입니다"
 
 #. R/utils.R: gettextf("processing directory %s", sQuote(basename(dir)))
@@ -6856,6 +6862,12 @@ msgstr "'dir' 또는 'files'을 반드시 지정해야 합니다"
 msgid "you must specify '%s', '%s' or '%s' argument"
 msgstr "'dir' 또는 'files'을 반드시 지정해야 합니다"
 
+#. R/QC.R: stop("you must specify 'package' or 'dir'")
+#: R/QC.R:0
+#, fuzzy
+msgid "you must specify 'package' or 'dir'"
+msgstr "'package' 또는 'dir'를 반드시 지정해야 합니다"
+
 #. R/check.R: ngettext(length(bad), "  Namespace with empty importFrom: %s", "  Namespaces with empty importFrom: %s",     domain = "R-tools")
 #: R/check.R:0
 #, fuzzy
@@ -7530,6 +7542,13 @@ msgid "Package which this enhances but not available for checking:"
 msgid_plural "Packages which this enhances but not available for checking:"
 msgstr[0] ""
 
+#. R/QC.R: ngettext(length(x$bad_closures), "Possibly missing '()' after 'return' in the following function:",     "Possibly missing '()' after 'return' in the following functions:")
+#: R/QC.R:0
+#, fuzzy
+msgid "Possibly missing '()' after 'return' in the following function:"
+msgid_plural "Possibly missing '()' after 'return' in the following functions:"
+msgstr[0] "다음의 함수로부터 .Internal 호출을 찾았습니다:"
+
 #. R/update_packages.R: ngettext(nrow(newpkgdf), "Processed %d entry from package tarballs.", "Processed %d entries from package tarballs.",     domain = "R-tools")
 #: R/update_packages.R:0
 msgid "Processed %d entry from package tarballs."
@@ -7840,6 +7859,13 @@ msgid "unable to re-encode %s line %s"
 msgid_plural "unable to re-encode %s lines %s"
 msgstr[0] "코드 파일들을 기록할 수 없습니다"
 
+#~ msgid ","
+#~ msgstr ","
+
+#, fuzzy
+#~ msgid "processing DOI %s"
+#~ msgstr "%s를 처리중입니다"
+
 #~ msgid ""
 #~ "package %s exists but was not installed under R >= 2.10.0 so xrefs cannot "
 #~ "be checked"
@@ -7850,10 +7876,6 @@ msgstr[0] "코드 파일들을 기록할 수 없습니다"
 #, fuzzy
 #~ msgid "%s file wast not found"
 #~ msgstr "파일 '%s'를 찾을 수 없습니다"
-
-#, fuzzy
-#~ msgid "argument 'pkg' must be of length 1"
-#~ msgstr "인자 'package'는 반드시 길이가 1 이어야 합니다"
 
 #~ msgid "argument 'vignette' must be of length 1"
 #~ msgstr "인자 'vignette'는 반드시 길이가 1 이어야 합니다"
@@ -7976,10 +7998,6 @@ msgstr[0] "코드 파일들을 기록할 수 없습니다"
 #, fuzzy
 #~ msgid "Subdirectory 'exec' contains no files."
 #~ msgstr "디렉토리 '%s'는 존재하지 않습니다"
-
-#, fuzzy
-#~ msgid "you must specify 'package' or 'dir' argument"
-#~ msgstr "'package' 또는 'dir'를 반드시 지정해야 합니다"
 
 #~ msgid "you must specify 'package', 'dir' or 'file'"
 #~ msgstr "'package', 'dir' 또는 'file'을 지정해야 합니다"

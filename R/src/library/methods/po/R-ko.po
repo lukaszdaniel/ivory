@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 3.1.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2020-04-15 18:32\n"
+"POT-Creation-Date: 2021-01-07 23:37\n"
 "PO-Revision-Date: 2014-03-27 13:32-0600\n"
 "Last-Translator: Chel Hee Lee <chl948@mail.usask.ca>\n"
 "Language-Team:  <chl948@mail.usask.ca>\n"
@@ -490,7 +490,7 @@ msgstr ""
 msgid "Class %s consists of following classes:"
 msgstr ""
 
-#. R/show.R: gettextf("Class %s for generic %s defined from package %s", dQuote(class(object)),     dQuote(object@generic), sQuote(object@package), domain = "R-methods")
+#. R/show.R: gettextf("Class %s for generic %s defined from package %s", dQuote(class(object)),     dQuote(nam), sQuote(object@package), domain = "R-methods")
 #: R/show.R:0
 #, fuzzy
 msgid "Class %s for generic %s defined from package %s"
@@ -513,7 +513,7 @@ msgid ""
 "  defined with value class: %s"
 msgstr "패키지 %2$s로부터 클래스 %1$s에 대한 클래스 생성함수"
 
-#. R/show.R: gettextf("Class %s for generic %s defined from package %s\n  defined with value class: %s\n",     dQuote(class(object)), dQuote(object@generic), sQuote(object@package), dQuote(object@valueClass),     domain = "R-methods")
+#. R/show.R: gettextf("Class %s for generic %s defined from package %s\n  defined with value class: %s\n",     dQuote(class(object)), dQuote(nam), sQuote(object@package), dQuote(object@valueClass),     domain = "R-methods")
 #: R/show.R:0
 #, fuzzy
 msgid ""

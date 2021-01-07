@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.4.0 \n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2020-08-14 18:57\n"
+"POT-Creation-Date: 2021-01-07 23:35\n"
 "PO-Revision-Date: 2012-02-26 14:09+0200 \n"
 "Last-Translator: Shigeru Mase <maseshigeru@gmail.com> \n"
 "Language-Team: RjpWiki Message Translation Team <mokada@md.tsukuba.ac.jp> \n"
@@ -218,7 +218,6 @@ msgstr " 'by' 引数がかなり小さすぎます "
 msgid "'%s' argument is not a QR decomposition"
 msgstr " 最初の引数は QR 分解でなければなりません "
 
-#. R/all.equal.R: gettextf("'%s' argument is not a factor", "target")
 #. R/all.equal.R: gettextf("'%s' argument is not a factor", "current")
 #: R/all.equal.R:0
 #, fuzzy
@@ -594,13 +593,6 @@ msgstr " '%s'は \"POSIXt\" オブジェクトに対しては定義されてい�
 msgid "'%s' is not a valid choice"
 msgstr " '%s' は有効な選択ではありません "
 
-#. R/namespace.R: gettextf("'%s' is not an exported object from 'namespace:%s'", name, getNamespaceName(ns))
-#: R/namespace.R:0
-#, fuzzy
-msgid "'%s' is not an exported object from 'namespace:%s'"
-msgstr ""
-" '%s' は 'namespace:%s' からエクスポートされたオブジェクトではありません "
-
 #. R/datetime.R: gettextf("'%s' operator is not defined for objects of class %s", .Generic, dQuote("POSIXt"))
 #. R/datetime.R: gettextf("'%s' operator is not defined for objects of class %s", .Generic, dQuote("POSIXt"))
 #. R/datetime.R: gettextf("'%s' operator is not defined for objects of class %s", .Generic, dQuote("POSIXt"))
@@ -942,6 +934,12 @@ msgstr ""
 " 'mode' は \"double\" (\"real\") , \"integer\" または \"character\" でなけれ"
 "ばなりません "
 
+#. R/connections.R: if (missing(name)) "argument 'object' must deparse to a single character string" else "'name' must be a single character string"
+#: R/connections.R:0
+#, fuzzy
+msgid "'name' must be a single character string"
+msgstr " 'file' は空でない文字列でなければなりません "
+
 #. R/diag.R: stop("'nrow' or 'ncol' cannot be specified when 'x' is a matrix")
 #: R/diag.R:0
 msgid "'nrow' or 'ncol' cannot be specified when 'x' is a matrix"
@@ -1035,11 +1033,11 @@ msgstr ""
 " solve.default が \"qr\" オブジェクトに対して呼び出されました。'qr.solve' を"
 "使って下さい "
 
-#. R/dataframe.R: stop("'summary()' function is only defined on a data frame with all numeric variables")
+#. R/dataframe.R: stop("'summary()' function is only defined on a data frame with all numeric-alike variables")
 #: R/dataframe.R:0
 #, fuzzy
 msgid ""
-"'summary()' function is only defined on a data frame with all numeric "
+"'summary()' function is only defined on a data frame with all numeric-alike "
 "variables"
 msgstr " すべてが数値変数のデータフレームに対してだけ定義されます "
 
@@ -1080,6 +1078,12 @@ msgstr " 開かれたコネクションしか切り詰められません "
 #. R/datetime.R: warning("'tzone' attributes are inconsistent")
 #: R/datetime.R:0
 msgid "'tzone' attributes are inconsistent"
+msgstr " 'tzone' 属性は整合性がありません "
+
+#. R/all.equal.R: gettextf("'tzone' attributes are inconsistent ('%s' and '%s')", tzt, tzc)
+#: R/all.equal.R:0
+#, fuzzy
+msgid "'tzone' attributes are inconsistent ('%s' and '%s')"
 msgstr " 'tzone' 属性は整合性がありません "
 
 #. R/findInt.R: stop("'vec' argument must be sorted non-decreasingly and not contain NA values")
@@ -1964,7 +1968,13 @@ msgstr " 引数は繰り返して使われます "
 msgid "an object with that name already exists"
 msgstr " その名前のオブジェクトは既に存在します "
 
-#. R/connections.R: stop("argument 'object' must deparse to a single character string")
+#. R/grep.R: gettextf("argument '%s' will be ignored", "perl = TRUE")
+#: R/grep.R:0
+#, fuzzy
+msgid "argument '%s' will be ignored"
+msgstr " drop 引数は無視されます "
+
+#. R/connections.R: if (missing(name)) "argument 'object' must deparse to a single character string" else "'name' must be a single character string"
 #: R/connections.R:0
 msgid "argument 'object' must deparse to a single character string"
 msgstr " 引数 'object'' は空でない単一の文字列でなければなりません "
@@ -2168,6 +2178,18 @@ msgstr ""
 msgid "cannot split the message connection"
 msgstr " メッセージコネクションを分割できません "
 
+#. R/sort.R: stop("cannot xtfrm 'x'")
+#: R/sort.R:0
+msgid "cannot xtfrm 'x'"
+msgstr ""
+
+#. R/dataframe.R: stop("cannot xtfrm data frames")
+#. R/dataframe.R: warning("cannot xtfrm data frames")
+#: R/dataframe.R:0
+#, fuzzy
+msgid "cannot xtfrm data frames"
+msgstr " データフレームではありません "
+
 #. R/dates.R: stop("character string is not in a standard unambiguous format")
 #. R/datetime.R: stop("character string is not in a standard unambiguous format")
 #: R/dates.R:0 R/datetime.R:0
@@ -2330,6 +2352,11 @@ msgstr " NAMESPACE ファイル中の directive '%s' 中には名前がありま
 #, fuzzy
 msgid "encoding = \"%s\" chosen"
 msgstr " エンコーディング %s が選択されました "
+
+#. R/all.equal.R: gettext("environments contain objects of the same names, but are not identical",     domain = "R-base")
+#: R/all.equal.R:0
+msgid "environments contain objects of the same names, but are not identical"
+msgstr ""
 
 #. R/qr.R: stop("exact singularity in 'qr.coef()' function")
 #: R/qr.R:0
@@ -2893,6 +2920,12 @@ msgstr " 名前が以前の名前と一致しません "
 #, fuzzy
 msgid "names for '%s' argument but not for '%s' argument"
 msgstr " 'scale' の長さは 'x' の列数に等しくなければなりません; "
+
+#. R/all.equal.R: gettext("names of environments differ:", domain = "R-base")
+#: R/all.equal.R:0
+#, fuzzy
+msgid "names of environments differ:"
+msgstr " 水準の数が異なります "
 
 #. R/namespace.R: gettextf("namespace %s %s is already loaded, but %s %s is required", sQuote(package),     current, zop, zversion)
 #: R/namespace.R:0
@@ -3869,11 +3902,11 @@ msgid "library %s contains no packages"
 msgid_plural "libraries %s contain no packages"
 msgstr[0] " ライブラリ %s はパッケージを含んでいません "
 
-#. R/dataframe.R: ngettext(sum(!mode.ok), "non-numeric variable in data frame: ", "non-numeric variables in data frame: ",     domain = "R-base")
+#. R/dataframe.R: ngettext(sum(!mode.ok), "non-numeric-alike variable in data frame: ", "non-numeric-alike variables in data frame: ",     domain = "R-base")
 #: R/dataframe.R:0
 #, fuzzy
-msgid "non-numeric variable in data frame: "
-msgid_plural "non-numeric variables in data frame: "
+msgid "non-numeric-alike variable in data frame: "
+msgid_plural "non-numeric-alike variables in data frame: "
 msgstr[0] " 以下のデータフレーム中に数値でない変数があります： "
 
 #. R/dataframe.R: ngettext(length(nonuniq), "non-unique value when setting 'row.names': %s", "non-unique values when setting 'row.names': %s",     domain = "R-base")
@@ -4001,6 +4034,11 @@ msgstr[0] " '%s' という名前のパッケージはありません "
 msgid "variable %s is not TRUE"
 msgid_plural "variables %s are not all TRUE"
 msgstr[0] " TRUE の代わりに T が使われました "
+
+#, fuzzy
+#~ msgid "'%s' is not an exported object from 'namespace:%s'"
+#~ msgstr ""
+#~ " '%s' は 'namespace:%s' からエクスポートされたオブジェクトではありません "
 
 #~ msgid "bad handler specification"
 #~ msgstr " 誤ったハンドラーの指定です "
@@ -4228,10 +4266,6 @@ msgstr[0] " TRUE の代わりに T が使われました "
 
 #~ msgid "length of 'center' must equal the number of columns of 'x'"
 #~ msgstr " 'center' の長さは 'x' の列数に等しくなければなりません; "
-
-#, fuzzy
-#~ msgid "'%s' must be non-empty character string"
-#~ msgstr " 'file' は空でない文字列でなければなりません "
 
 #~ msgid "'echo' must be logical"
 #~ msgstr " 'echo' は論理値でなければなりません "

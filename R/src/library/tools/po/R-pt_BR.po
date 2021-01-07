@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 2.13.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2020-08-14 18:59\n"
+"POT-Creation-Date: 2021-01-07 23:38\n"
 "PO-Revision-Date: 2011-03-26 08:57-0300\n"
 "Last-Translator: Colin Robert <beasley@ufpa.br>\n"
 "Language-Team: http://www.feferraz.net/br/P/Projeto_Traducao_R_Portugues\n"
@@ -281,6 +281,11 @@ msgid ""
 "  consider running tools::compactPDF() on these files"
 msgstr ""
 
+#. R/checktools.R: stop("'reverse$repos' should be a subset of getOption(\"repos\")")
+#: R/checktools.R:0
+msgid "'reverse$repos' should be a subset of getOption(\"repos\")"
+msgstr ""
+
 #. R/Rd2pdf.R: stop("'type' must be one of 'txt', 'html', 'latex' or 'example'", call. = FALSE)
 #: R/Rd2pdf.R:0
 msgid "'type' must be one of 'txt', 'html', 'latex' or 'example'"
@@ -337,11 +342,6 @@ msgstr ""
 #. R/admin.R: gettextf("*** someone has corrupted the Built field in package %s ***", sQuote(db["Package"]))
 #: R/admin.R:0
 msgid "*** someone has corrupted the Built field in package %s ***"
-msgstr ""
-
-#. R/QC.R: paste(sQuote(undeclared), collapse = ", ")
-#: R/QC.R:0
-msgid ","
 msgstr ""
 
 #. R/Vignettes.R: gettextf("--- failed re-building %s\n", sQuote(file))
@@ -1750,6 +1750,12 @@ msgstr ""
 msgid "Found the following Makefiles with CR or CRLF line endings:"
 msgstr ""
 
+#. R/QC.R: gettext("Found the following URLs which should use \\doi (with the DOI name only):",     domain = "R-tools")
+#: R/QC.R:0
+msgid ""
+"Found the following URLs which should use \\doi (with the DOI name only):"
+msgstr ""
+
 #. R/QC.R: gettext("Found the following \\keyword or \\concept entries which likely give several index terms:",     domain = "R-tools")
 #: R/QC.R:0
 msgid ""
@@ -3027,6 +3033,11 @@ msgstr ""
 msgid "Possibly mis-spelled words in DESCRIPTION:"
 msgstr ""
 
+#. R/Rd2HTML.R: warning("Previous alias or file overwritten by alias: ", aname)
+#: R/Rd2HTML.R:0
+msgid "Previous alias or file overwritten by alias:"
+msgstr ""
+
 #. R/QC.R: gettext("Problems when formatting CITATION entries:", domain = "R-tools")
 #: R/QC.R:0
 msgid "Problems when formatting CITATION entries:"
@@ -4189,14 +4200,13 @@ msgstr ""
 msgid "WARNING"
 msgstr ""
 
-#. R/build.R: gettextf("WARNING: Added dependency on R >= 3.5.0 because\nserialized objects in serialize/load version 3\ncannot be read in older versions of R. File(s)\ncontaining such objects:\n%s\n",     .pretty_format(sort(toonew)), domain = "R-tools")
+#. R/build.R: gettextf("WARNING: Added dependency on R >= 3.5.0 because\nserialized objects in serialize/load version 3\ncannot be read in older versions of R. File(s)\ncontaining such objects:\n",     domain = "R-tools")
 #: R/build.R:0
 msgid ""
 "WARNING: Added dependency on R >= 3.5.0 because\n"
 "serialized objects in serialize/load version 3\n"
 "cannot be read in older versions of R. File(s)\n"
-"containing such objects:\n"
-"%s"
+"containing such objects:"
 msgstr ""
 
 #. R/build.R: gettextf("WARNING: Removing directory %s which should only occur in an installed package",     sQuote(d), domain = "R-tools")
@@ -4396,6 +4406,11 @@ msgstr ""
 #: R/check.R:0
 msgid "apparently using $(LAPACK_LIBS) without following $(BLAS_LIBS) in %s"
 msgstr ""
+
+#. R/QC.R: stop("argument 'package' must be of length 1")
+#: R/QC.R:0
+msgid "argument 'package' must be of length 1"
+msgstr "argumento 'package' deve ter comprimento 1"
 
 #. R/parseLatex.R: gettext("argument for %s was not found", sQuote(c(a)))
 #: R/parseLatex.R:0
@@ -4612,11 +4627,6 @@ msgstr "Nomes de argumentos no código que não estão nos documentos:"
 #. R/check.R: gettext("checking S3 generic/method consistency ...", domain = "R-tools")
 #: R/check.R:0
 msgid "checking S3 generic/method consistency ..."
-msgstr ""
-
-#. R/check.R: gettextf("checking a package with encoding %s in an ASCII locale", sQuote(e), domain = "R-tools")
-#: R/check.R:0
-msgid "checking a package with encoding %s in an ASCII locale"
 msgstr ""
 
 #. R/install.R: gettext("checking absolute paths in shared objects and dynamic libraries", domain = "R-tools")
@@ -5836,17 +5846,11 @@ msgstr ""
 #. R/urltools.R: sprintf("processing %s", .file_path_relative_to_dir(f, dir))
 #. R/urltools.R: sprintf("processing %s", .file_path_relative_to_dir(f, dir))
 #. R/urltools.R: gettextf("processing %s", p)
-#. R/urltools.R: sprintf("processing %s", u)
+#. R/urltools.R: gettextf("processing %s", i)
 #. R/urltools.R: gettextf("processing %s", u)
 #: R/urltools.R:0
 msgid "processing %s"
 msgstr ""
-
-#. R/doitools.R: gettextf("processing DOI %s", d)
-#: R/doitools.R:0
-#, fuzzy
-msgid "processing DOI %s"
-msgstr "Nomes de argumentos no código que não estão nos documentos:"
 
 #. R/utils.R: gettextf("processing directory %s", sQuote(basename(dir)))
 #: R/utils.R:0
@@ -6510,6 +6514,11 @@ msgstr "você deve especificar 'package' ou 'dir'"
 #: R/QC.R:0
 #, fuzzy
 msgid "you must specify '%s', '%s' or '%s' argument"
+msgstr "você deve especificar 'package' ou 'dir'"
+
+#. R/QC.R: stop("you must specify 'package' or 'dir'")
+#: R/QC.R:0
+msgid "you must specify 'package' or 'dir'"
 msgstr "você deve especificar 'package' ou 'dir'"
 
 #. R/check.R: ngettext(length(bad), "  Namespace with empty importFrom: %s", "  Namespaces with empty importFrom: %s",     domain = "R-tools")
@@ -7225,6 +7234,13 @@ msgid_plural "Packages which this enhances but not available for checking:"
 msgstr[0] ""
 msgstr[1] ""
 
+#. R/QC.R: ngettext(length(x$bad_closures), "Possibly missing '()' after 'return' in the following function:",     "Possibly missing '()' after 'return' in the following functions:")
+#: R/QC.R:0
+msgid "Possibly missing '()' after 'return' in the following function:"
+msgid_plural "Possibly missing '()' after 'return' in the following functions:"
+msgstr[0] ""
+msgstr[1] ""
+
 #. R/update_packages.R: ngettext(nrow(newpkgdf), "Processed %d entry from package tarballs.", "Processed %d entries from package tarballs.",     domain = "R-tools")
 #: R/update_packages.R:0
 msgid "Processed %d entry from package tarballs."
@@ -7563,6 +7579,10 @@ msgstr[0] ""
 msgstr[1] ""
 
 #, fuzzy
+#~ msgid "processing DOI %s"
+#~ msgstr "Nomes de argumentos no código que não estão nos documentos:"
+
+#, fuzzy
 #~ msgid "%s file wast not found"
 #~ msgstr "diretório '%s' não existe"
 
@@ -7622,15 +7642,9 @@ msgstr[1] ""
 #~ msgid "%s is using %s"
 #~ msgstr "argumento 'package' deve ter comprimento 1"
 
-#~ msgid "argument 'package' must be of length 1"
-#~ msgstr "argumento 'package' deve ter comprimento 1"
-
 #, fuzzy
 #~ msgid "checking re-building of vignette outputs"
 #~ msgstr "Nomes de argumentos no código que não estão nos documentos:"
-
-#~ msgid "you must specify 'package' or 'dir'"
-#~ msgstr "você deve especificar 'package' ou 'dir'"
 
 #~ msgid "directory '%s' does not exist"
 #~ msgstr "diretório '%s' não existe"

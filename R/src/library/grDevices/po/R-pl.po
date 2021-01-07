@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R-core\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-07-23 12:02\n"
+"POT-Creation-Date: 2021-01-07 23:37\n"
 "PO-Revision-Date: \n"
 "Last-Translator: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
 "Language-Team: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
@@ -337,6 +337,18 @@ msgstr "potrzeba co najmniej 3 kolumn"
 msgid "cairo-based types are not supported on this build - using \"Xlib\""
 msgstr ""
 "czcionki oparte o cairo nie są wspierane w tej kompilacji - używanie \"Xlib\""
+
+#. R/cairo.R: stop("cairo_pdf: Cairo-based devices are not available for this platform")
+#: R/cairo.R:0
+#, fuzzy
+msgid "cairo_pdf: Cairo-based devices are not available for this platform"
+msgstr "urządzenie '%s' nie jest dostępne"
+
+#. R/cairo.R: stop("cairo_ps: Cairo-based devices are not available for this platform")
+#: R/cairo.R:0
+#, fuzzy
+msgid "cairo_ps: Cairo-based devices are not available for this platform"
+msgstr "urządzenie '%s' nie jest dostępne"
 
 #. R/windows/windows.R: stop("can only bring windows devices to the front")
 #: R/windows/windows.R:0
@@ -693,6 +705,33 @@ msgstr "status '%d' w działającym poleceniu '%s'"
 #: R/windows/windows.R:0
 msgid "subscript is out of range"
 msgstr "indeks jest poza zakresem"
+
+#. R/cairo.R: stop("svg: Cairo-based devices are not available for this platform")
+#: R/cairo.R:0
+#, fuzzy
+msgid "svg: Cairo-based devices are not available for this platform"
+msgstr "urządzenie '%s' nie jest dostępne"
+
+#. R/unix/png.R: warning("type = \"cairo\" is unavailable. trying \"Xlib\"")
+#. R/unix/png.R: warning("type = \"cairo\" is unavailable. trying \"Xlib\"")
+#. R/unix/png.R: warning("type = \"cairo\" is unavailable. trying \"Xlib\"")
+#. R/unix/png.R: warning("type = \"cairo\" is unavailable. trying \"Xlib\"")
+#: R/unix/png.R:0
+msgid "type = \"cairo\" is unavailable. trying \"Xlib\""
+msgstr ""
+
+#. R/unix/png.R: warning("type = \"cairo-png\" is unavailable. trying \"Xlib\"")
+#: R/unix/png.R:0
+msgid "type = \"cairo-png\" is unavailable. trying \"Xlib\""
+msgstr ""
+
+#. R/unix/png.R: warning("type = \"quartz\" is unavailable. trying \"Xlib\"")
+#. R/unix/png.R: warning("type = \"quartz\" is unavailable. trying \"Xlib\"")
+#. R/unix/png.R: warning("type = \"quartz\" is unavailable. trying \"Xlib\"")
+#. R/unix/png.R: warning("type = \"quartz\" is unavailable. trying \"Xlib\"")
+#: R/unix/png.R:0
+msgid "type = \"quartz\" is unavailable. trying \"Xlib\""
+msgstr ""
 
 #. R/postscript.R: gettextf("unknown family '%s'", family)
 #. R/postscript.R: gettextf("unknown family '%s'", family)
@@ -1055,10 +1094,6 @@ msgstr[2] "niepoprawne nazwy argumentów %s w '%s'"
 #, fuzzy
 #~ msgid "unable to create device description"
 #~ msgstr "niepoprawne opcje w '%s'"
-
-#, fuzzy
-#~ msgid "Quartz device is not available on this platform"
-#~ msgstr "urządzenie '%s' nie jest dostępne"
 
 #, fuzzy
 #~ msgid "filename too long in %s() call"

@@ -1,0 +1,4069 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: utils 4.1.0\n"
+"POT-Creation-Date: 2021-01-07 23:39\n"
+"PO-Revision-Date: 2020-11-29 17:00+0200\n"
+"Last-Translator: <r.zakauskas@gmail.com;gabriele.dauksaite@gmail.com>\n"
+"Language-Team: Lithuanian\n"
+"Language: lt\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && (n"
+"%100<10 || n%100>=20) ? 1 : 2);\n"
+
+#. R/unix/create.post.R: gettextf("# Your mailer is set to \"none\",\n# hence we cannot send the, %s directly from R.\n# Please copy the %s (after finishing it) to\n# your favorite email program and send it to\n#\n#       %s",     description, description, address)
+#. R/windows/create.post.R: gettextf("# Your mailer is set to \"none\",\n# hence we cannot send the, %s directly from R.\n# Please copy the %s (after finishing it) to\n# your favorite email program and send it to\n#\n#       %s",     description, description, address)
+#: R/unix/create.post.R:0 R/windows/create.post.R:0
+msgid ""
+"# Your mailer is set to \"none\",\n"
+"# hence we cannot send the, %s directly from R.\n"
+"# Please copy the %s (after finishing it) to\n"
+"# your favorite email program and send it to\n"
+"#\n"
+"#       %s"
+msgstr ""
+
+#. R/packages2.R: gettextf("%d): succeeded '%s'", i, cmd)
+#. R/packages2.R: gettextf("%d): succeeded '%s'", i, cmd, domain = "R-utils")
+#: R/packages2.R:0
+msgid "%d): succeeded '%s'"
+msgstr ""
+
+#. R/help.search.R: gettextf("%s argument must be a single character string", sQuote("pattern"))
+#. R/help.search.R: gettextf("%s argument must be a single character string", sQuote("apropos"))
+#. R/help.search.R: gettextf("%s argument must be a single character string", sQuote("keyword"))
+#. R/help.search.R: gettextf("%s argument must be a single character string", sQuote("whatis"))
+#: R/help.search.R:0
+#, fuzzy
+msgid "%s argument must be a single character string"
+msgstr "argumentas %s turi būti viena simbolių eilutė"
+
+#. R/Sweave.R: gettextf("%s declares an encoding that Sweave does not know about", sQuote(basename(file)),     domain = "R-utils")
+#: R/Sweave.R:0
+msgid "%s declares an encoding that Sweave does not know about"
+msgstr ""
+
+#. R/databrowser.R: gettextf("%s environment is shown in browser", main, domain = "R-utils")
+#: R/databrowser.R:0
+msgid "%s environment is shown in browser"
+msgstr ""
+
+#. R/databrowser.R: gettextf("%s environment is shown in browser %s", main, sQuote(browser), domain = "R-utils")
+#: R/databrowser.R:0
+msgid "%s environment is shown in browser %s"
+msgstr ""
+
+#. R/example.R: gettextf("%s has a help file but no examples", sQuote(topic))
+#: R/example.R:0
+msgid "%s has a help file but no examples"
+msgstr "%s turi pagalbos failą, bet neturi pavyzdžių"
+
+#. R/citation.R: gettextf("%s has to be one of %s", sQuote("bibtype"), paste(BibTeX_names, collapse = ", "))
+#. R/citation.R: gettextf("%s has to be one of %s", sQuote("bibtype"), paste(BibTeX_names, collapse = ", "))
+#: R/citation.R:0
+msgid "%s has to be one of %s"
+msgstr "%s turi būti vienas iš %s"
+
+#. R/findLineNum.R: gettextf(" %s in %s", x[[i]]$name, format(x[[i]]$env))
+#: R/findLineNum.R:0
+msgid "%s in %s"
+msgstr ""
+
+#. R/indices.R: gettextf("%s in package %s:", x$title, sQuote(pkg), domain = "R-utils")
+#. R/indices.R: gettextf("%s in package %s:", x$title, sQuote(pkg), domain = "R-utils")
+#: R/indices.R:0
+#, fuzzy
+msgid "%s in package %s:"
+msgstr "nepavyko rasti paketo %s"
+
+#. R/objects.R: gettextf("%s is a formal generic function; S3 methods will not likely be found",     sQuote(fname))
+#: R/objects.R:0
+#, fuzzy
+msgid "%s is a formal generic function; S3 methods will not likely be found"
+msgstr ""
+"'%s' yra formali bendrinė funkcija; S3 metodai greičiausiai nebus rasti"
+
+#. R/Sweave.R: gettextf("%s is not ASCII and does not declare an encoding", sQuote(basename(file)),     domain = "R-utils")
+#: R/Sweave.R:0
+msgid "%s is not ASCII and does not declare an encoding"
+msgstr ""
+
+#. R/packages.R: gettextf("%s must be supplied", sQuote("available"))
+#: R/packages.R:0
+msgid "%s must be supplied"
+msgstr "%s turi būti pateikta"
+
+#. R/readhttp.R: gettextf("%s option must be a length one character vector or NULL", sQuote("HTTPUserAgent"))
+#: R/readhttp.R:0
+msgid "%s option must be a length one character vector or NULL"
+msgstr "%s parinktis turi būti vieno simbolio ilgio vektorius arba NULL"
+
+#. R/citation.R: gettextf("%s should be one of %s", sQuote("style"), paste(dQuote(bibentry_format_styles),     collapse = ", "))
+#: R/citation.R:0
+msgid "%s should be one of %s"
+msgstr "%s turi būti vienas iš %s"
+
+#. R/findLineNum.R: gettextf(" %s signature %s in %s", x[[i]]$name, paste(x[[i]]$signature, collapse = ","),     format(x[[i]]$env))
+#: R/findLineNum.R:0
+msgid "%s signature %s in %s"
+msgstr ""
+
+#. R/findLineNum.R: gettextf(" %s step %s in %s", x[[i]]$name, paste(x[[i]]$at, collapse = ","), format(x[[i]]$env))
+#: R/findLineNum.R:0
+msgid "%s step %s in %s"
+msgstr ""
+
+#. R/findLineNum.R: gettextf(" %s step %s signature %s in %s", x[[i]]$name, paste(x[[i]]$at, collapse = ","),     paste(x[[i]]$signature, collapse = ","), format(x[[i]]$env))
+#: R/findLineNum.R:0
+msgid "%s step %s signature %s in %s"
+msgstr ""
+
+#. R/tar.R: gettextf("'%s' argument argument must be logical or character", "compressed")
+#: R/tar.R:0
+#, fuzzy
+msgid "'%s' argument argument must be logical or character"
+msgstr "'compressed' turi būti loginė reikšmė arba ženklas"
+
+#. R/de.R: gettextf("'%s' argument ignored", "modes")
+#. R/de.R: gettextf("'%s' argument ignored", "names")
+#. R/de.R: gettextf("'%s' argument ignored", "modes")
+#: R/de.R:0
+#, fuzzy
+msgid "'%s' argument ignored"
+msgstr "'modes' argumentas ignoruojamas"
+
+#. R/tar.R: gettextf("'%s' argument is ignored for the internal method", "compressed")
+#: R/tar.R:0
+#, fuzzy
+msgid "'%s' argument is ignored for the internal method"
+msgstr "vidinio metodo argumentas 'compressed' yra ignoruojamas"
+
+#. R/debugger.R: gettextf("'%s' argument is not an object of class %s", "dump", dQuote("dump.frames"),     domain = "R-utils")
+#: R/debugger.R:0
+#, fuzzy
+msgid "'%s' argument is not an object of class %s"
+msgstr "'dump' nėra klasės %s objektas"
+
+#. R/widgets.R: gettextf("'%s' argument must be NULL or a length-1 character vector", "title")
+#: R/widgets.R:0
+#, fuzzy
+msgid "'%s' argument must be NULL or a length-1 character vector"
+msgstr "'title' turi būti NULL arba 1 ilgio simbolių vektorius"
+
+#. R/readtable.R: gettextf("'%s' argument must be a character string or connection", "file")
+#. R/readtable.R: gettextf("'%s' argument must be a character string or connection", "file")
+#. R/tar.R: gettextf("'%s' argument must be a character string or connection", "tarfile")
+#. R/tar.R: gettextf("'%s' argument must be a character string or connection", "tarfile")
+#. R/write.table.R: gettextf("'%s' argument must be a character string or connection", "file")
+#: R/readtable.R:0 R/tar.R:0 R/write.table.R:0
+#, fuzzy
+msgid "'%s' argument must be a character string or connection"
+msgstr "'file' turi būti simbolių eilutė arba ryšys"
+
+#. R/package.skeleton.R: gettextf("'%s' argument must be a character vector", "code_files")
+#: R/package.skeleton.R:0
+#, fuzzy
+msgid "'%s' argument must be a character vector"
+msgstr "'code_files' turi būti tekstinis vektorius"
+
+#. R/unix/download.file.R: gettextf("'%s' argument must be a length-one character vector", "url")
+#. R/unix/download.file.R: gettextf("'%s' argument must be a length-one character vector", "url")
+#. R/unix/download.file.R: gettextf("'%s' argument must be a length-one character vector", "destfile")
+#. R/unix/download.file.R: gettextf("'%s' argument must be a length-one character vector", "url")
+#. R/unix/download.file.R: gettextf("'%s' argument must be a length-one character vector", "destfile")
+#. R/windows/download.file.R: gettextf("'%s' argument must be a length-one character vector", "url")
+#. R/windows/download.file.R: gettextf("'%s' argument must be a length-one character vector", "url")
+#. R/windows/download.file.R: gettextf("'%s' argument must be a length-one character vector", "destfile")
+#. R/windows/download.file.R: gettextf("'%s' argument must be a length-one character vector", "url")
+#. R/windows/download.file.R: gettextf("'%s' argument must be a length-one character vector", "destfile")
+#: R/unix/download.file.R:0 R/windows/download.file.R:0
+#, fuzzy
+msgid "'%s' argument must be a length-one character vector"
+msgstr "'url' turi būti 1 ilgio simbolio vektorius"
+
+#. R/help.start.R: gettextf("'%s' argument must be a non-empty character string", "url")
+#. R/help.start.R: gettextf("'%s' argument must be a non-empty character string", "browser")
+#: R/help.start.R:0
+#, fuzzy
+msgid "'%s' argument must be a non-empty character string"
+msgstr "'url' turi būti netuščia simbolių eilutė"
+
+#. R/zip.R: gettextf("'%s' argument must be a single character string", "unzip")
+#: R/zip.R:0
+#, fuzzy
+msgid "'%s' argument must be a single character string"
+msgstr "argumentas %s turi būti viena simbolių eilutė"
+
+#. R/sock.R: gettextf("'%s' argument must be character of length 1", "host")
+#: R/sock.R:0
+#, fuzzy
+msgid "'%s' argument must be character of length 1"
+msgstr "'host' turi būti 1 ilgio ženklas"
+
+#. R/packages.R: gettextf("'%s' argument must be character or NULL", "priority")
+#: R/packages.R:0
+#, fuzzy
+msgid "'%s' argument must be character or NULL"
+msgstr "'priority' turi būti ženklas arba NULL"
+
+#. R/sock.R: gettextf("'%s' argument must be integer of length 1", "port")
+#: R/sock.R:0
+#, fuzzy
+msgid "'%s' argument must be integer of length 1"
+msgstr "'port' turi būti sveikasis skaičius, kurio ilgis 1"
+
+#. R/unix/create.post.R: gettextf("'%s' argument must be of length 1", "ccaddress")
+#. R/unix/create.post.R: gettextf("'%s' argument must be of length 1", "ccaddress")
+#. R/windows/create.post.R: gettextf("'%s' argument must be of length 1", "ccaddress")
+#: R/unix/create.post.R:0 R/windows/create.post.R:0
+#, fuzzy
+msgid "'%s' argument must be of length 1"
+msgstr "'ccaddress' ilgis turi būti 1"
+
+#. R/unix/sysutils.R: gettextf("'%s' function is Windows-specific", "memory.size()")
+#. R/unix/sysutils.R: gettextf("'%s' function is Windows-specific", "memory.limit()")
+#: R/unix/sysutils.R:0
+#, fuzzy
+msgid "'%s' function is Windows-specific"
+msgstr "'memory.size()' yra skirtas Windows"
+
+#. R/fix.R: gettextf("'%s' function requires a name", "fix")
+#. R/objects.R: gettextf("'%s' function requires a name", "fixInNamespace")
+#: R/fix.R:0 R/objects.R:0
+#, fuzzy
+msgid "'%s' function requires a name"
+msgstr "'fix' reikalauja vardo"
+
+#. R/edit.R: gettextf("'%s' function should not be used in examples etc", "dataentry()", domain = "R-utils")
+#. R/edit.R: gettextf("'%s' function should not be used in examples etc", "View()", domain = "R-utils")
+#: R/edit.R:0
+msgid "'%s' function should not be used in examples etc"
+msgstr ""
+
+#. R/indices.R: warning("'DESCRIPTION' file has an 'Encoding' field and re-encoding is not possible",     call. = FALSE)
+#: R/indices.R:0
+msgid ""
+"'DESCRIPTION' file has an 'Encoding' field and re-encoding is not possible"
+msgstr "'DESCRIPTION' failas turi 'Encoding' lauką ir perkoduoti neįmanoma"
+
+#. R/combn.R: stop("'FUN' argument must be a function or NULL")
+#: R/combn.R:0
+#, fuzzy
+msgid "'FUN' argument must be a function or NULL"
+msgstr "'FUN' turi būti funkcija arba NULL"
+
+#. R/read.DIF.R: gettextf("'as.is' has the wrong length %d != cols = %d", length(as.is), cols)
+#. R/readtable.R: gettextf("'as.is' has the wrong length %d != cols = %d", length(as.is), cols)
+#: R/read.DIF.R:0 R/readtable.R:0
+#, fuzzy
+msgid "'as.is' has the wrong length %d != cols = %d"
+msgstr "'as.is' turi neteisingą ilgį %d != cols = %d"
+
+#. R/readtable.R: warning("'as.is' should be specified by the caller; using TRUE")
+#: R/readtable.R:0
+msgid "'as.is' should be specified by the caller; using TRUE"
+msgstr "'as.is' turėtų būti nurodytas kaip iškvietos šaltinis; naudojant TRUE"
+
+#. R/objects.R: warning("'class' is of length > 1; only the first element will be used")
+#: R/objects.R:0
+msgid "'class' is of length > 1; only the first element will be used"
+msgstr "'class' ilgis yra > 1; bus naudojamas tik pirmasis elementas"
+
+#. R/write.table.R: stop("'col.names = NA' makes no sense when 'row.names = FALSE'")
+#: R/write.table.R:0
+msgid "'col.names = NA' makes no sense when 'row.names = FALSE'"
+msgstr "'col.names = NA' neturi prasmės kada 'row.names = FALSE'"
+
+#. R/unix/download.file.R: stop("'curl()' call had nonzero exit status")
+#. R/windows/download.file.R: stop("'curl()' call had nonzero exit status")
+#: R/unix/download.file.R:0 R/windows/download.file.R:0
+#, fuzzy
+msgid "'curl()' call had nonzero exit status"
+msgstr "'curl' iškvietimas turėjo nenulinio išėjimo būseną"
+
+#. R/packages.R: stop("'destdir' is not a directory")
+#: R/packages.R:0
+msgid "'destdir' is not a directory"
+msgstr "'destdir' nėra katalogas"
+
+#. R/str.R: warning("'digits' and 'digits.d' are both specified and the latter is not used")
+#: R/str.R:0
+msgid "'digits' and 'digits.d' are both specified and the latter is not used"
+msgstr "'digits' ir 'digits.d' yra nurodyti ir pastarasis nenaudojamas"
+
+#. R/packages.R: gettextf("'download.file()' error code '%d'", m)
+#: R/packages.R:0
+msgid "'download.file()' error code '%d'"
+msgstr "'download.file()' klaidos kodas '%d'"
+
+#. R/debugger.R: gettextf("'dump' is empty", domain = "R-utils")
+#: R/debugger.R:0
+msgid "'dump' is empty"
+msgstr "'dump' tuščias"
+
+#. R/packages2.R: stop("'env' must be an environment")
+#: R/packages2.R:0
+msgid "'env' must be an environment"
+msgstr "'env' turi būti aplinka"
+
+#. R/progressBar.R: stop("'file' must be \"\" or an open connection object")
+#: R/progressBar.R:0
+msgid "'file' must be \"\" or an open connection object"
+msgstr "'file' turi būti \"\" arba atviras ryšio objektas"
+
+#. R/capture.output.R: stop("'file' must be NULL, a character string or a connection")
+#: R/capture.output.R:0
+msgid "'file' must be NULL, a character string or a connection"
+msgstr "'file' turi būti NULL, simbolių eilutė arba ryšys"
+
+#. R/zip.R: stop("'files' must be a character vector specifying one or more filepaths")
+#: R/zip.R:0
+#, fuzzy
+msgid "'files' must be a character vector specifying one or more filepaths"
+msgstr ""
+"'files' turi būti tekstinis vektorius nurodantis vieną ar daugiau failo kelių"
+
+#. R/frametools.R: stop("'form' must be a two-sided formula")
+#: R/frametools.R:0
+msgid "'form' must be a two-sided formula"
+msgstr "'form' turi būti dvipusė formulė"
+
+#. R/frametools.R: stop("'form' must be a two-sided formula with one term on each side")
+#: R/frametools.R:0
+msgid "'form' must be a two-sided formula with one term on each side"
+msgstr "'form' turi būti dvipusė formulė su vienu nariu kiekvienoje pusėje"
+
+#. R/changedFiles.R: stop("'full.names' argument must be TRUE for multiple paths")
+#: R/changedFiles.R:0
+#, fuzzy
+msgid "'full.names' argument must be TRUE for multiple paths"
+msgstr "'full.names' turi būti TRUE keliems keliams."
+
+#. R/unix/download.file.R: stop("'headers' must have names and must not be NA")
+#. R/windows/download.file.R: stop("'headers' must have names and must not be NA")
+#: R/unix/download.file.R:0 R/windows/download.file.R:0
+msgid "'headers' must have names and must not be NA"
+msgstr "'headers' turi turėti pavadinimus ir negali būti NA"
+
+#. R/packages2.R: gettextf("'lib = \"%s\"' is not writable", lib)
+#: R/packages2.R:0
+msgid "'lib = \"%s\"' is not writable"
+msgstr "'lib = \"%s\"' nėra įrašomas"
+
+#. R/package.skeleton.R: stop("'list' argument must be a character vector naming R objects")
+#: R/package.skeleton.R:0
+#, fuzzy
+msgid "'list' argument must be a character vector naming R objects"
+msgstr "'list' turi būti tekstinis vektorius įvardijantis R objektus"
+
+#. R/menu.R: stop("'menu()' function cannot be used non-interactively")
+#: R/menu.R:0
+#, fuzzy
+msgid "'menu()' function cannot be used non-interactively"
+msgstr "meniu() negalima naudoti neinteraktyviai"
+
+#. R/str.R: gettextf("'nchar.max = %d' is too small", nchar.max)
+#: R/str.R:0
+msgid "'nchar.max = %d' is too small"
+msgstr "'nchar.max = %d' yra per mažas"
+
+#. R/str.R: warning("'object' does not have valid levels()")
+#: R/str.R:0
+msgid "'object' does not have valid levels()"
+msgstr "'object' neturi negaliojančio levels()"
+
+#. R/data.R: stop("'package' argument must be a character string or NULL")
+#: R/data.R:0
+#, fuzzy
+msgid "'package' argument must be a character string or NULL"
+msgstr "'package' turi būti simbolių eilutė arba NULL"
+
+#. R/progressBar.R: gettextf("'pb' is not from class %s", dQuote("txtProgressBar"))
+#. R/progressBar.R: gettextf("'pb' is not from class %s", dQuote("txtProgressBar"))
+#. R/windows/winDialog.R: gettextf("'pb' is not from class %s", dQuote("winProgressBar"))
+#. R/windows/winDialog.R: gettextf("'pb' is not from class %s", dQuote("winProgressBar"))
+#: R/progressBar.R:0 R/windows/winDialog.R:0
+msgid "'pb' is not from class %s"
+msgstr "'pb' nėra iš klasės %s"
+
+#. R/write.table.R: stop("'quote' argument must be TRUE, FALSE or numeric")
+#: R/write.table.R:0
+#, fuzzy
+msgid "'quote' argument must be TRUE, FALSE or numeric"
+msgstr "'quote' turi būti 'TRUE', 'FALSE' arba skaitinis"
+
+#. R/relist.R: warning("'relist()' requires recursively unlisted objects.")
+#: R/relist.R:0
+#, fuzzy
+msgid "'relist()' requires recursively unlisted objects."
+msgstr "relist() reikalauja rekursyviai neįtrauktų į sąrašą objektų."
+
+#. R/widgets.R: stop("'select.list()' cannot be used non-interactively")
+#: R/widgets.R:0
+#, fuzzy
+msgid "'select.list()' cannot be used non-interactively"
+msgstr "select.list() negalima naudoti ne interaktyviai"
+
+#. R/str.R: warning("'str.default': 'object' argument is of length NA, so taken as 0", immediate. = TRUE)
+#: R/str.R:0
+#, fuzzy
+msgid "'str.default': 'object' argument is of length NA, so taken as 0"
+msgstr "'str.default': 'le' yra NA, taigi imamas kaip 0"
+
+#. R/unix/create.post.R: stop("'subject' is missing")
+#: R/unix/create.post.R:0
+msgid "'subject' is missing"
+msgstr "trūksta 'subject'"
+
+#. R/unix/mac.install.R: gettextf("'tar' returned non-zero exit code %d", xcode)
+#: R/unix/mac.install.R:0
+msgid "'tar' returned non-zero exit code %d"
+msgstr "'tar' grąžino ne nulinį išėjimo kodą %d"
+
+#. R/help.R: stop("'topic' should be a name, length-one character vector or reserved word")
+#: R/help.R:0
+msgid "'topic' should be a name, length-one character vector or reserved word"
+msgstr ""
+"'topic' turėtų būti pavadinimas, 1 ilgio simbolių vektorius arba rezervuotas "
+"žodis"
+
+#. R/packages2.R: stop("'type == \"both\"' option can only be used on Windows or a CRAN build for macOS")
+#: R/packages2.R:0
+#, fuzzy
+msgid ""
+"'type == \"both\"' option can only be used on Windows or a CRAN build for "
+"macOS"
+msgstr ""
+"type == \"both\" gali būti naudojami tik Windows arba CRAN komponavimo "
+"versijos macOS"
+
+#. R/unix/download.file.R: stop("'wget()' call had nonzero exit status")
+#. R/windows/download.file.R: stop("'wget()' call had nonzero exit status")
+#: R/unix/download.file.R:0 R/windows/download.file.R:0
+#, fuzzy
+msgid "'wget()' call had nonzero exit status"
+msgstr "'wget' iškvietimas turėjo nenulinio išėjimo būseną"
+
+#. R/packageStatus.R: gettext("(each package appears only once)", domain = "R-utils")
+#: R/packageStatus.R:0
+msgid "(each package appears only once)"
+msgstr ""
+
+#. R/SweaveDrivers.R: gettext("(missing #line/file info)", domain = "R-utils")
+#: R/SweaveDrivers.R:0
+msgid "(missing #line/file info)"
+msgstr ""
+
+#. R/str.R: gettextf(", mode %s:", dQuote(mod))
+#: R/str.R:0
+msgid ", mode %s:"
+msgstr ""
+
+#. R/packages.R: gettext("--- Please select a CRAN mirror for use in this session ---", domain = "R-utils")
+#: R/packages.R:0
+msgid "--- Please select a CRAN mirror for use in this session ---"
+msgstr "--- Pasirinkite CRAN, kuris bus naudojamas šiame seanse ---"
+
+#. R/packages.R: gettext("--- Please select repositories for use in this session ---\n")
+#: R/packages.R:0
+msgid "--- Please select repositories for use in this session ---"
+msgstr "--- Pasirinkite saugyklas, skirtas naudoti šiame seanse ---"
+
+#. R/unix/create.post.R: gettext("--please do not edit the information below--", domain = "R-utils")
+#. R/windows/create.post.R: gettext("--please do not edit the information below--", domain = "R-utils")
+#: R/unix/create.post.R:0 R/windows/create.post.R:0
+#, fuzzy
+msgid "--please do not edit the information below--"
+msgstr "nepavyko atkurti tipo informacijos"
+
+#. R/help.search.R: message("... database rebuilt", domain = "R-utils")
+#: R/help.search.R:0
+msgid "... database rebuilt"
+msgstr ""
+
+#. R/bug.report.R: gettext("<<insert bug report here>>")
+#: R/bug.report.R:0
+msgid "<<insert bug report here>>"
+msgstr ""
+
+#. R/citation.R: gettextf("\nA BibTeX entry for LaTeX users is\n%s", paste0("  ", unclass(toBibtex(y))))
+#: R/citation.R:0
+#, fuzzy
+msgid ""
+"A BibTeX entry for LaTeX users is\n"
+"%s"
+msgstr "BibTeX įrašas, skirtas LaTeX vartotojams yra"
+
+#. R/help.search.R: gettext("A help search database:", domain = "R-utils")
+#: R/help.search.R:0
+msgid "A help search database:"
+msgstr ""
+
+#. R/RSiteSearch.R: gettextf("A search query has been submitted to %s", "http://search.r-project.org",     domain = "R-utils")
+#: R/RSiteSearch.R:0
+msgid "A search query has been submitted to %s"
+msgstr "Paieškos užklausa pateikta %s"
+
+#. R/objects.R: gettextf("A single object matching %s was found", sQuote(x$name), domain = "R-utils")
+#: R/objects.R:0
+#, fuzzy
+msgid "A single object matching %s was found"
+msgstr "nerastas paketas '%s'"
+
+#. R/citation.R: gettextf("ATTENTION: This citation information has been auto-generated from the package DESCRIPTION file and may need manual editing, see %s.",     sQuote("help(\"citation\")"))
+#: R/citation.R:0
+msgid ""
+"ATTENTION: This citation information has been auto-generated from the "
+"package DESCRIPTION file and may need manual editing, see %s."
+msgstr ""
+"DĖMESIO: Ši citatos informacija buvo sugeneruota automatiškai iš paketo "
+"DESCRIPTION failo ir gali reikėti redaguoti rankiniu būdu, žr. %s."
+
+#. R/windows/choose.files.R: gettext("All files (*.*)", domain = "R-utils")
+#: R/windows/choose.files.R:0
+msgid "All files (*.*)"
+msgstr ""
+
+#. R/citation.R: gettextf("Argument '%s' is deprecated; rather set '%s' instead.", "citation.bibtex.max",     "bibtex=*")
+#: R/citation.R:0
+msgid "Argument '%s' is deprecated; rather set '%s' instead."
+msgstr "Argumentas '%s' nebenaudojamas; vietoj to nustatyti '%s'."
+
+#. R/debugger.R: gettext("Available environments had calls:", domain = "R-utils")
+#: R/debugger.R:0
+msgid "Available environments had calls:"
+msgstr "Galimos aplinkos turėjo kreipinius:"
+
+#. R/packageStatus.R: gettext("Available packages:", domain = "R-utils")
+#: R/packageStatus.R:0
+msgid "Available packages:"
+msgstr ""
+
+#. R/packages2.R: gettext("Binaries will be installed", domain = "R-utils")
+#: R/packages2.R:0
+msgid "Binaries will be installed"
+msgstr ""
+
+#. R/debugger.R: gettext("Browsing in the environment with call:", domain = "R-utils")
+#: R/debugger.R:0
+msgid "Browsing in the environment with call:"
+msgstr "Naršymas aplinkoje su kreipiniu:"
+
+#. R/bug.report.R: gettext("  Bug reports on R and the base packages need to be submitted\n  to the tracker at <https://bugs.R-project.org/>.\n\n  We will now try to open that website in a browser")
+#: R/bug.report.R:0
+msgid ""
+"Bug reports on R and the base packages need to be submitted\n"
+"  to the tracker at <https://bugs.R-project.org/>.\n"
+"\n"
+"  We will now try to open that website in a browser"
+msgstr ""
+
+#. R/help.search.R: gettextf("Built dbMat[%d,%d]", nrow(dbMat), ncol(dbMat), domain = "R-utils")
+#: R/help.search.R:0
+msgid "Built dbMat[%d,%d]"
+msgstr ""
+
+#. R/askYesNo.R: c("Yes", "No", "Cancel")
+#: R/askYesNo.R:0
+msgid "Cancel"
+msgstr "Atšaukti"
+
+#. R/help.request.R: stop("Cancelled by user")
+#. R/help.request.R: stop("Cancelled by user")
+#. R/help.request.R: stop("Cancelled by user")
+#. R/packages2.R: stop("Cancelled by user")
+#. R/packages2.R: stop("Cancelled by user")
+#: R/help.request.R:0 R/packages2.R:0
+msgid "Cancelled by user"
+msgstr "Atšaukta vartotojo"
+
+#. R/debugcall.R: stop("Cannot debug primitive functions unless they are implicit generics (requires loading the methods package)")
+#: R/debugcall.R:0
+msgid ""
+"Cannot debug primitive functions unless they are implicit generics (requires "
+"loading the methods package)"
+msgstr ""
+"Negalima derinti primityvių funkcijų, nebent jos yra neišreikštinės "
+"bendrinės (reikia įkelti metodų paketą)"
+
+#. R/news.R: gettextf("Changes in %s", vstrings, domain = "R-utils")
+#: R/news.R:0
+msgid "Changes in %s"
+msgstr ""
+
+#. R/news.R: gettextf("Changes in %s (%s)", vstrings, dates, domain = "R-utils")
+#: R/news.R:0
+msgid "Changes in %s (%s)"
+msgstr ""
+
+#. R/help.R: gettext("Choose one")
+#: R/help.R:0
+msgid "Choose one"
+msgstr "Pasirinkite vieną"
+
+#. R/Sweave.R: message("Compacting PDF document")
+#: R/Sweave.R:0
+msgid "Compacting PDF document"
+msgstr "PDF dokumento glaudinimas"
+
+#. R/question.R: gettext("Contacting Delphi...", domain = "R-utils")
+#: R/question.R:0
+msgid "Contacting Delphi..."
+msgstr ""
+
+#. R/package.skeleton.R: message("Copying code files ...", domain = "R-utils")
+#: R/package.skeleton.R:0
+msgid "Copying code files ..."
+msgstr ""
+
+#. R/rtags.R: gettextf("Could not create file %s, aborting", sQuote(ofile))
+#: R/rtags.R:0
+msgid "Could not create file %s, aborting"
+msgstr "Nepavyko sukurti failo %s, nutraukiant"
+
+#. R/prompt.R: gettextf("Created file named %s.", sQuote(filename))
+#. R/prompt.R: gettextf("Created file named %s.", sQuote(filename))
+#. R/prompt.R: gettextf("Created file named %s.", sQuote(filename))
+#. R/prompt.R: gettextf("Created file named %s.", sQuote(filename), domain = "R-utils")
+#: R/prompt.R:0
+msgid "Created file named %s."
+msgstr "Sukurtas failas pavadinimu %s."
+
+#. R/package.skeleton.R: message("Creating DESCRIPTION ...", domain = "R-utils")
+#: R/package.skeleton.R:0
+msgid "Creating DESCRIPTION ..."
+msgstr ""
+
+#. R/package.skeleton.R: message("Creating NAMESPACE ...", domain = "R-utils")
+#: R/package.skeleton.R:0
+msgid "Creating NAMESPACE ..."
+msgstr ""
+
+#. R/package.skeleton.R: message("Creating Read-and-delete-me ...", domain = "R-utils")
+#: R/package.skeleton.R:0
+msgid "Creating Read-and-delete-me ..."
+msgstr ""
+
+#. R/package.skeleton.R: message("Creating directories ...", domain = "R-utils")
+#: R/package.skeleton.R:0
+msgid "Creating directories ..."
+msgstr ""
+
+#. R/indices.R: gettextf("DESCRIPTION file of package '%s' is corrupt", pkg)
+#: R/indices.R:0
+msgid "DESCRIPTION file of package '%s' is corrupt"
+msgstr "Paketo '%s' DESCRIPTION failas sugadintas"
+
+#. R/indices.R: gettextf("DESCRIPTION file of package '%s' is missing or broken", pkg)
+#: R/indices.R:0
+msgid "DESCRIPTION file of package '%s' is missing or broken"
+msgstr "Trūksta paketo '%s' DESCRIPTION failo arba jis neveikia"
+
+#. R/data.R: gettext("Data sets", domain = "R-utils")
+#: R/data.R:0
+msgid "Data sets"
+msgstr ""
+
+#. R/help.search.R: gettextf("Database of %d help objects (%d aliases, %d concepts, %d keywords)", NROW(db$Base),     NROW(db$Aliases), NROW(db$Concepts), NROW(db$Keywords), domain = "R-utils")
+#: R/help.search.R:0
+msgid "Database of %d help objects (%d aliases, %d concepts, %d keywords)"
+msgstr ""
+
+#. R/demo.R: gettextf("Demo for topic %s' found more than once,\nusing the one found in %s", sQuote(topic),     sQuote(dirname(available[1L])))
+#: R/demo.R:0
+msgid ""
+"Demo for topic %s' found more than once,\n"
+"using the one found in %s"
+msgstr ""
+"Temos '%s' demonstracinė versija, rasta daugiau nei vieną kartą,\n"
+"naudoti tą, kuri rasta %s"
+
+#. R/demo.R: gettext("Demos")
+#: R/demo.R:0
+msgid "Demos"
+msgstr ""
+
+#. R/help.search.R: gettextf("Demos with %s fields matching %s using fuzzy matching:", fields_used[[type]],     sQuote(x$pattern), domain = "R-utils")
+#: R/help.search.R:0
+msgid "Demos with %s fields matching %s using fuzzy matching:"
+msgstr ""
+
+#. R/help.search.R: gettextf("Demos with %s fields matching %s using regular expression matching:", fields_used[[type]],     sQuote(x$pattern), domain = "R-utils")
+#: R/help.search.R:0
+msgid "Demos with %s fields matching %s using regular expression matching:"
+msgstr ""
+
+#. R/aspell.R: gettext("Description")
+#: R/aspell.R:0
+msgid "Description"
+msgstr ""
+
+#. R/packages2.R: warning("Do not know which element of 'lib' to install dependencies into\nskipping dependencies")
+#: R/packages2.R:0
+msgid ""
+"Do not know which element of 'lib' to install dependencies into\n"
+"skipping dependencies"
+msgstr ""
+"Nežinia, kuris 'lib' elementas turi įdiegti priklausomybes\n"
+" į praleidžiančias priklausomybes"
+
+#. R/packages2.R: gettext("Do you want to attempt to install these from sources?")
+#: R/packages2.R:0
+msgid "Do you want to attempt to install these from sources?"
+msgstr "Ar norite bandyti įdiegti juos iš šaltinių?"
+
+#. R/package.skeleton.R: message("Done.", domain = "R-utils")
+#: R/package.skeleton.R:0
+msgid "Done."
+msgstr ""
+
+#. R/citation.R: gettextf("Dropping invalid entry %d:\n%s", pc[b], conditionMessage(status[[b]]))
+#: R/citation.R:0
+msgid ""
+"Dropping invalid entry %d:\n"
+"%s"
+msgstr ""
+"Praleidžiamas netinkamas įrašas %d:\n"
+"%s"
+
+#. R/unix/mac.install.R: gettextf("ERROR: failed to create lock directory %s", sQuote(lockdir))
+#. R/windows/install.packages.R: gettextf("ERROR: failed to create lock directory %s", sQuote(lockdir))
+#: R/unix/mac.install.R:0 R/windows/install.packages.R:0
+msgid "ERROR: failed to create lock directory %s"
+msgstr "KLAIDA: nepavyko sukurti užrakinto katalogo %s"
+
+#. R/unix/mac.install.R: gettextf("ERROR: failed to lock directory %s for modifying\nTry removing %s", sQuote(lib),     sQuote(lockdir))
+#. R/windows/install.packages.R: gettextf("ERROR: failed to lock directory %s for modifying\nTry removing %s", sQuote(lib),     sQuote(lockdir))
+#: R/unix/mac.install.R:0 R/windows/install.packages.R:0
+msgid ""
+"ERROR: failed to lock directory %s for modifying\n"
+"Try removing %s"
+msgstr ""
+"KLAIDA: nepavyko užrakinti katalogo %s modifikavimui\n"
+"Pabandykite pašalinti %s"
+
+#. R/prompt.R: gettext("Edit the file and move it to the appropriate directory.")
+#. R/prompt.R: gettext("Edit the file and move it to the appropriate directory.")
+#. R/prompt.R: gettext("Edit the file and move it to the appropriate directory.")
+#. R/prompt.R: gettext("Edit the file and move it to the appropriate directory.", domain = "R-utils")
+#: R/prompt.R:0
+msgid "Edit the file and move it to the appropriate directory."
+msgstr "Redaguokite failą ir perkelkite jį į atitinkamą katalogą."
+
+#. R/unix/create.post.R: gettextf("Email the %s now?", description)
+#: R/unix/create.post.R:0
+msgid "Email the %s now?"
+msgstr ""
+
+#. R/databrowser.R: gettext("Empty environment, nothing to do!", domain = "R-utils")
+#: R/databrowser.R:0
+msgid "Empty environment, nothing to do!"
+msgstr ""
+
+#. R/windows/choose.files.R: gettext("Enhanced metafiles (*.emf)", domain = "R-utils")
+#: R/windows/choose.files.R:0
+msgid "Enhanced metafiles (*.emf)"
+msgstr ""
+
+#. R/debugger.R: gettext("\nEnter a frame number, or 0 to exit  ", domain = "R-utils")
+#: R/debugger.R:0
+#, fuzzy
+msgid "Enter a frame number, or 0 to exit"
+msgstr "Įveskite aplinkos numerį arba 0, kad išeitumėte"
+
+#. R/debugger.R: gettext("Enter an environment number, or 0 to exit  ", domain = "R-utils")
+#: R/debugger.R:0
+msgid "Enter an environment number, or 0 to exit"
+msgstr "Įveskite aplinkos numerį arba 0, kad išeitumėte"
+
+#. R/menu.R: gettext("Enter an item from the menu, or 0 to exit", domain = "R-utils")
+#: R/menu.R:0
+msgid "Enter an item from the menu, or 0 to exit"
+msgstr "Iš meniu įveskite elementą arba 0, kad išeitumėte"
+
+#. R/widgets.R: gettext("Enter one or more numbers separated by spaces and then ENTER, or 0 to cancel",     domain = "R-utils")
+#: R/widgets.R:0
+msgid ""
+"Enter one or more numbers separated by spaces and then ENTER, or 0 to cancel"
+msgstr ""
+"Įveskite vieną ar daugiau skaičių, atskirtų tarpais, tada ENTER arba 0, kad "
+"atšauktumėte"
+
+#. R/aspell.R: gettextf("File '%s':", nms[i])
+#: R/aspell.R:0
+msgid "File '%s':"
+msgstr ""
+
+#. R/changedFiles.R: gettext("File changes:", domain = "R-utils")
+#: R/changedFiles.R:0
+#, fuzzy
+msgid "File changes:"
+msgstr "failas neturėjo eilučių"
+
+#. R/changedFiles.R: gettext("Files added:", domain = "R-utils")
+#: R/changedFiles.R:0
+msgid "Files added:"
+msgstr ""
+
+#. R/changedFiles.R: gettext("Files deleted:", domain = "R-utils")
+#: R/changedFiles.R:0
+msgid "Files deleted:"
+msgstr ""
+
+#. R/changedFiles.R: gettext("Files:", domain = "R-utils")
+#: R/changedFiles.R:0
+#, fuzzy
+msgid "Files:"
+msgstr "failai: %s"
+
+#. R/aspell.R: gettextf("Filter '%s' is not available.", filter_name)
+#. R/aspell.R: gettextf("Filter '%s' is not available.", filter_name)
+#: R/aspell.R:0
+msgid "Filter '%s' is not available."
+msgstr "Filtras '%s' negalimas."
+
+#. R/object.size.R: stop("For SI units, specify 'standard = \"SI\"'")
+#: R/object.size.R:0
+msgid "For SI units, specify 'standard = \"SI\"'"
+msgstr "SI vienetų atveju nurodykite 'standard = \"SI\"'"
+
+#. R/package.skeleton.R: gettextf("Further steps are described in '%s'.", file.path(dir, "Read-and-delete-me"))
+#: R/package.skeleton.R:0
+msgid "Further steps are described in '%s'."
+msgstr ""
+
+#. R/help.R: warning("HTML help is unavailable", call. = FALSE)
+#: R/help.R:0
+msgid "HTML help is unavailable"
+msgstr "HTML žinynas nepasiekiamas"
+
+#. R/help.search.R: gettextf("Help files with %s fields matching %s using fuzzy matching:", fields_used[[type]],     sQuote(x$pattern), domain = "R-utils")
+#: R/help.search.R:0
+msgid "Help files with %s fields matching %s using fuzzy matching:"
+msgstr ""
+
+#. R/help.search.R: gettextf("Help files with %s fields matching %s using regular expression matching:",     fields_used[[type]], sQuote(x$pattern), domain = "R-utils")
+#: R/help.search.R:0
+msgid ""
+"Help files with %s fields matching %s using regular expression matching:"
+msgstr ""
+
+#. R/help.R: gettextf("Help for topic %s is not in any loaded package but can be found in the following packages:",     sQuote(topic))
+#: R/help.R:0
+msgid ""
+"Help for topic %s is not in any loaded package but can be found in the "
+"following packages:"
+msgstr ""
+"Žinyno tema %s nėra jokiame įkeltame pakete, bet ją galima rasti šiuose "
+"paketuose:"
+
+#. R/help.R: gettextf("Help on topic %s was found in the following packages:", sQuote(topic),     domain = "R-utils")
+#: R/help.R:0
+msgid "Help on topic %s was found in the following packages:"
+msgstr "Žinyno tema %s rasta šiuose paketuose:"
+
+#. R/help.start.R: gettextf("If nothing happens, you should open\n%s yourself\n", sQuote(url))
+#: R/help.start.R:0
+msgid ""
+"If nothing happens, you should open\n"
+"%s yourself"
+msgstr ""
+"Jei nieko neįvyksta, turėtumėte atidaryti\n"
+"%s patys"
+
+#. R/sysdata.R: gettext("If the R code is merely a translation from another language\n(typically S), use for the translator to R.",     domain = "R-utils")
+#: R/sysdata.R:0
+msgid ""
+"If the R code is merely a translation from another language\n"
+"(typically S), use for the translator to R."
+msgstr ""
+
+#. R/help.start.R: gettextf("If the browser launched by '%s' is already running, it is *not* restarted, and you must switch to its window.",     browser)
+#: R/help.start.R:0
+msgid ""
+"If the browser launched by '%s' is already running, it is *not* restarted, "
+"and you must switch to its window."
+msgstr ""
+"Jei naršyklė, kurią paleido '%s', jau paleista, ji yra *ne* iš naujo "
+"paleista ir jūs turite pereiti į jos langą."
+
+#. R/sysdata.R: gettext("If the package is part of a thesis, use for the thesis advisor.", domain = "R-utils")
+#: R/sysdata.R:0
+msgid "If the package is part of a thesis, use for the thesis advisor."
+msgstr ""
+
+#. R/packageStatus.R: gettext("Installed packages:", domain = "R-utils")
+#: R/packageStatus.R:0
+#, fuzzy
+msgid "Installed packages:"
+msgstr "nepavyksta įdiegti paketų"
+
+#. R/indices.R: warning("Invalid \"Built\": ", conditionMessage(e))
+#: R/indices.R:0
+msgid "Invalid \"Built\":"
+msgstr "Neleistinas \"Built\":"
+
+#. R/package.skeleton.R: gettextf("Invalid file name(s) for R code in %s:\n%s\n are now renamed to 'z<name>.R'",     code_dir, strwrap(paste(sQuote(wrong), collapse = ", "), indent = 2), domain = "R-utils")
+#: R/package.skeleton.R:0
+msgid ""
+"Invalid file name(s) for R code in %s:\n"
+"%s\n"
+" are now renamed to 'z<name>.R'"
+msgstr ""
+
+#. R/widgets.R: gettext("Invalid input, please try again", domain = "R-utils")
+#: R/widgets.R:0
+msgid "Invalid input, please try again"
+msgstr "Netinkama įvestis, bandykite dar kartą"
+
+#. R/citation.R: gettextf("It is recommended to use %s instead of %s", sQuote("given"), sQuote("first"))
+#. R/citation.R: gettextf("It is recommended to use %s instead of %s", sQuote("given"), sQuote("middle"))
+#. R/citation.R: gettextf("It is recommended to use %s instead of %s", sQuote("family"), sQuote("last"))
+#. R/citation.R: gettextf("It is recommended to use %s instead of %s", paste(sQuote("given"), sQuote("family"),     sep = "/", collapse = ""), paste(sQuote("first"), sQuote("middle"), sQuote("last"),     sep = "/", collapse = ""))
+#: R/citation.R:0
+#, fuzzy
+msgid "It is recommended to use %s instead of %s"
+msgstr "Rekomenduojama naudoti %s vietoj %s."
+
+#. R/objects.R: gettextf("It was found in the following places\n%s\nwith value:", paste0("  ", x$where,     collapse = "\n"), domain = "R-utils")
+#: R/objects.R:0
+#, fuzzy
+msgid ""
+"It was found in the following places\n"
+"%s\n"
+"with value:"
+msgstr "Žinyno tema %s rasta šiuose paketuose:"
+
+#. R/data.R: gettext("Item", domain = "R-utils")
+#. R/demo.R: gettext("Item", domain = "R-utils")
+#: R/data.R:0 R/demo.R:0
+msgid "Item"
+msgstr ""
+
+#. R/windows/choose.files.R: gettext("Jpeg files (*.jpeg,*.jpg)", domain = "R-utils")
+#: R/windows/choose.files.R:0
+msgid "Jpeg files (*.jpeg,*.jpg)"
+msgstr ""
+
+#. R/data.R: gettext("LibPath", domain = "R-utils")
+#. R/demo.R: gettext("LibPath", domain = "R-utils")
+#: R/data.R:0 R/demo.R:0
+msgid "LibPath"
+msgstr ""
+
+#. R/help.R: gettext("Library")
+#: R/help.R:0
+msgid "Library"
+msgstr "Biblioteka"
+
+#. R/packageStatus.R: gettextf("Library %s", names(x$Libs)[k], domain = "R-utils")
+#: R/packageStatus.R:0
+#, fuzzy
+msgid "Library %s"
+msgstr "Biblioteka"
+
+#. R/aspell.R: gettextf("  Line %s: \"%s\", \"%s\", \"%s\"", format(e$Line), gsub("\"", "\\\"",     e$Left), e$Original, gsub("\"", "\\\"", e$Right))
+#: R/aspell.R:0
+msgid "Line %s: \"%s\", \"%s\", \"%s\""
+msgstr ""
+
+#. R/findLineNum.R: stop("Line number missing")
+#: R/findLineNum.R:0
+msgid "Line number missing"
+msgstr "Trūksta eilutės numerio"
+
+#. R/linkhtml.R: message("Making 'packages.html' ...", appendLF = FALSE, domain = "R-utils")
+#: R/linkhtml.R:0
+msgid "Making 'packages.html' ..."
+msgstr ""
+
+#. R/package.skeleton.R: message("Making help files ...", domain = "R-utils")
+#: R/package.skeleton.R:0
+#, fuzzy
+msgid "Making help files ..."
+msgstr "Naudojant pirmąjį sutapimą ..."
+
+#. R/package.skeleton.R: stop("Malformed package name.")
+#: R/package.skeleton.R:0
+msgid "Malformed package name."
+msgstr "Neteisingai suformuotas paketo pavadinimas."
+
+#. R/sessionInfo.R: gettext("Matrix products: ", domain = "R-utils")
+#: R/sessionInfo.R:0
+msgid "Matrix products:"
+msgstr ""
+
+#. R/debugger.R: gettext("Message: ", domain = "R-utils")
+#: R/debugger.R:0
+msgid "Message:"
+msgstr "Pranešimas:"
+
+#. R/read.DIF.R: stop("More columns than specified in header; maybe use 'transpose=TRUE'")
+#: R/read.DIF.R:0
+msgid "More columns than specified in header; maybe use 'transpose=TRUE'"
+msgstr ""
+"Daugiau stulpelių, nei nurodyta antraštėje; gal naudoti 'transpose=TRUE'"
+
+#. R/read.DIF.R: stop("More rows than specified in header; maybe use 'transpose=TRUE'")
+#: R/read.DIF.R:0
+msgid "More rows than specified in header; maybe use 'transpose=TRUE'"
+msgstr "Daugiau eilučių, nei nurodyta antraštėje; gal naudoti 'transpose=TRUE'"
+
+#. R/str.R: gettext("Named character", domain = "R-utils")
+#: R/str.R:0
+msgid "Named character"
+msgstr ""
+
+#. R/str.R: gettext("Named complex", domain = "R-utils")
+#: R/str.R:0
+msgid "Named complex"
+msgstr ""
+
+#. R/str.R: gettext("Named integer", domain = "R-utils")
+#: R/str.R:0
+msgid "Named integer"
+msgstr ""
+
+#. R/str.R: gettext("Named list()", domain = "R-utils")
+#: R/str.R:0
+msgid "Named list()"
+msgstr ""
+
+#. R/str.R: gettext("Named logical", domain = "R-utils")
+#: R/str.R:0
+msgid "Named logical"
+msgstr ""
+
+#. R/str.R: gettext("Named numeric", domain = "R-utils")
+#. R/str.R: gettext("Named numeric", domain = "R-utils")
+#: R/str.R:0
+msgid "Named numeric"
+msgstr ""
+
+#. R/str.R: gettext("Named pairlist()", domain = "R-utils")
+#: R/str.R:0
+msgid "Named pairlist()"
+msgstr ""
+
+#. R/str.R: gettextf(" Named vector %s", le.str, domain = "R-utils")
+#: R/str.R:0
+msgid "Named vector %s"
+msgstr ""
+
+#. R/askYesNo.R: c("Yes", "No", "Cancel")
+#: R/askYesNo.R:0
+msgid "No"
+msgstr "Ne"
+
+#. R/tar.R: gettextf("No %s command found", sQuote("gzip"), domain = "R-utils")
+#. R/tar.R: gettextf("No %s command found", sQuote("bzip2"), domain = "R-utils")
+#. R/tar.R: gettextf("No %s command found", sQuote("xz"), domain = "R-utils")
+#: R/tar.R:0
+msgid "No %s command found"
+msgstr "Komanda %s nerasta"
+
+#. R/read.DIF.R: stop("No DIF data on clipboard")
+#: R/read.DIF.R:0
+msgid "No DIF data on clipboard"
+msgstr "Mainų srityje nėra DIF duomenų"
+
+#. R/demo.R: gettextf("No demo found for topic %s", sQuote(topic))
+#: R/demo.R:0
+msgid "No demo found for topic %s"
+msgstr "Nerasta temos %s demonstracinė versija"
+
+#. R/help.search.R: gettextf("No demos found with %s fields matching %s using fuzzy matching.", fields_used$help,     sQuote(x$pattern), domain = "R-utils")
+#: R/help.search.R:0
+msgid "No demos found with %s fields matching %s using fuzzy matching."
+msgstr ""
+
+#. R/help.search.R: gettextf("No demos found with %s fields matching %s using regular expression matching.",     fields_used$help, sQuote(x$pattern), domain = "R-utils")
+#: R/help.search.R:0
+msgid ""
+"No demos found with %s fields matching %s using regular expression matching."
+msgstr ""
+
+#. R/help.R: gettextf("No documentation for %s in specified packages and libraries.\nYou could try %s",     sQuote(topic), sQuote(paste0("??", topic)), domain = "R-utils")
+#: R/help.R:0
+#, fuzzy
+msgid ""
+"No documentation for %s in specified packages and libraries.\n"
+"You could try %s"
+msgstr "Nurodytuose paketuose ir bibliotekose nėra %s dokumentų:"
+
+#. R/help.search.R: gettextf("No help files found with %s fields matching %s using fuzzy matching.",     fields_used$help, sQuote(x$pattern), domain = "R-utils")
+#: R/help.search.R:0
+msgid "No help files found with %s fields matching %s using fuzzy matching."
+msgstr ""
+
+#. R/help.search.R: gettextf("No help files found with %s fields matching %s using regular expression matching.",     fields_used$help, sQuote(x$pattern), domain = "R-utils")
+#: R/help.search.R:0
+msgid ""
+"No help files found with %s fields matching %s using regular expression "
+"matching."
+msgstr ""
+
+#. R/findLineNum.R: gettext("No source refs found.", domain = "R-utils")
+#: R/findLineNum.R:0
+msgid "No source refs found."
+msgstr ""
+
+#. R/debugger.R: gettext("No suitable frames for recover()", domain = "R-utils")
+#: R/debugger.R:0
+msgid "No suitable frames for recover()"
+msgstr "Nėra tinkamų sistemų dėl recover()"
+
+#. R/aspell.R: stop("No suitable spell check program found.")
+#: R/aspell.R:0
+msgid "No suitable spell check program found."
+msgstr "Nerasta tinkama rašybos tikrinimo programa."
+
+#. R/aspell.R: stop("No suitable spell-checker program found")
+#: R/aspell.R:0
+msgid "No suitable spell-checker program found"
+msgstr "Nerasta tinkama rašybos tikrintuvo programa"
+
+#. R/browseVignettes.R: gettextf("No vignettes found by %s", deparse1(attr(x, "call")), domain = "R-utils")
+#: R/browseVignettes.R:0
+msgid "No vignettes found by %s"
+msgstr "%s nerado vinječių"
+
+#. R/help.search.R: gettextf("No vignettes found with %s fields matching %s using fuzzy matching.", fields_used$help,     sQuote(x$pattern), domain = "R-utils")
+#: R/help.search.R:0
+msgid "No vignettes found with %s fields matching %s using fuzzy matching."
+msgstr ""
+
+#. R/help.search.R: gettextf("No vignettes found with %s fields matching %s using regular expression matching.",     fields_used$help, sQuote(x$pattern), domain = "R-utils")
+#: R/help.search.R:0
+msgid ""
+"No vignettes found with %s fields matching %s using regular expression "
+"matching."
+msgstr ""
+
+#. R/str.R: warning("Not a validObject(): ", r, call. = FALSE)
+#: R/str.R:0
+msgid "Not a validObject():"
+msgstr "Nėra validObject():"
+
+#. R/citation.R: gettextf("Not all arguments are of the same length, the following need to be recycled: %s",     paste(names(args)[!args_length_ok], collapse = ", "))
+#. R/citation.R: gettextf("Not all arguments are of the same length, the following need to be recycled: %s",     paste(names(args)[!args_length_ok], collapse = ", "))
+#. R/citation.R: gettextf("Not all arguments are of the same length, the following need to be recycled: %s",     paste(names(other)[!other_length_ok], collapse = ", "))
+#: R/citation.R:0
+msgid ""
+"Not all arguments are of the same length, the following need to be recycled: "
+"%s"
+msgstr ""
+"Ne visi argumentai yra tokio paties ilgio, reikia perdirbti šiuos "
+"argumentus: %s"
+
+#. R/packageStatus.R: gettext("Nothing to do!", domain = "R-utils")
+#: R/packageStatus.R:0
+msgid "Nothing to do!"
+msgstr ""
+
+#. R/packageStatus.R: gettext("Number of available packages (each package counted only once):", domain = "R-utils")
+#: R/packageStatus.R:0
+msgid "Number of available packages (each package counted only once):"
+msgstr ""
+
+#. R/packageStatus.R: gettext("Number of installed packages:", domain = "R-utils")
+#: R/packageStatus.R:0
+#, fuzzy
+msgid "Number of installed packages:"
+msgstr "nepavyksta įdiegti paketų"
+
+#. R/help.search.R: gettextf("Objects: %d, Aliases: %d, Keywords: %d, Concepts: %d", NROW(x$Base), NROW(x$Aliases),     NROW(x$Keywords), NROW(x$Concepts), domain = "R-utils")
+#: R/help.search.R:0
+msgid "Objects: %d, Aliases: %d, Keywords: %d, Concepts: %d"
+msgstr ""
+
+#. R/windows/install.packages.R: stop("Only '*.zip' and '*.tar.gz' files can be installed.")
+#: R/windows/install.packages.R:0
+msgid "Only '*.zip' and '*.tar.gz' files can be installed."
+msgstr "Galima įdiegti tik '*.zip' ir '*.tar.gz' failus."
+
+#. R/help.start.R: gettext("Otherwise, be patient ...")
+#: R/help.start.R:0
+msgid "Otherwise, be patient ..."
+msgstr "Priešingu atveju būkite kantrūs ..."
+
+#. R/Sweave.R: message("Output file:  ", output)
+#. R/Sweave.R: message("Output file:  ", output)
+#: R/Sweave.R:0
+msgid "Output file:"
+msgstr "Išvesties failas:"
+
+#. R/windows/choose.files.R: gettext("PDF files (*.pdf)", domain = "R-utils")
+#: R/windows/choose.files.R:0
+msgid "PDF files (*.pdf)"
+msgstr ""
+
+#. R/data.R: gettext("Package", domain = "R-utils")
+#. R/demo.R: gettext("Package", domain = "R-utils")
+#. R/help.R: gettext("Package")
+#: R/data.R:0 R/demo.R:0 R/help.R:0
+msgid "Package"
+msgstr "Paketas"
+
+#. R/packages2.R: gettextf("Package %s version %s is in the repositories but depends on %s", sQuote(av2[,     "Package"]), av2[, "Version"], unlist(x))
+#: R/packages2.R:0
+msgid "Package %s version %s is in the repositories but depends on %s"
+msgstr ""
+
+#. R/bug.report.R: gettextf("Package %s: DESCRIPTION file not found", sQuote(package))
+#: R/bug.report.R:0
+msgid "Package %s: DESCRIPTION file not found"
+msgstr "Paketas %s: DESCRIPTION failas nerastas"
+
+#. R/windows/choose.files.R: gettext("Package tarballs (*.tar.gz)", domain = "R-utils")
+#: R/windows/choose.files.R:0
+msgid "Package tarballs (*.tar.gz)"
+msgstr ""
+
+#. R/help.search.R: message("Packages {readRDS() sequentially}:", domain = "R-utils")
+#: R/help.search.R:0
+msgid "Packages {readRDS() sequentially}:"
+msgstr ""
+
+#. R/packages2.R: gettextf("Perhaps you meant %s?", sQuote(row.names(available)[w]))
+#: R/packages2.R:0
+msgid "Perhaps you meant %s?"
+msgstr ""
+
+#. R/sessionInfo.R: gettext("Platform: ", domain = "R-utils")
+#: R/sessionInfo.R:0
+msgid "Platform:"
+msgstr ""
+
+#. R/windows/choose.files.R: gettext("Png files (*.png)", domain = "R-utils")
+#: R/windows/choose.files.R:0
+msgid "Png files (*.png)"
+msgstr ""
+
+#. R/aspell.R: gettext("Possibly mis-spelled words:")
+#: R/aspell.R:0
+msgid "Possibly mis-spelled words:"
+msgstr ""
+
+#. R/windows/choose.files.R: gettext("Postscript files (*.ps)", domain = "R-utils")
+#: R/windows/choose.files.R:0
+msgid "Postscript files (*.ps)"
+msgstr ""
+
+#. R/SweaveDrivers.R: gettext("Processing code chunks with options ...", domain = "R-utils")
+#: R/SweaveDrivers.R:0
+msgid "Processing code chunks with options ..."
+msgstr ""
+
+#. R/aspell.R: gettextf("Processing file %s", fname)
+#. R/rtags.R: gettextf("Processing file %s", s)
+#: R/aspell.R:0 R/rtags.R:0
+msgid "Processing file %s"
+msgstr "Apdorojamas failas %s"
+
+#. R/str.R: gettextf("Prototypical reference class %s [package %s]", paste(dQuote(cl), collapse = ", "),     sQuote(attr(cl, "package")), domain = "R-tools")
+#: R/str.R:0
+msgid "Prototypical reference class %s [package %s]"
+msgstr ""
+
+#. R/help.R: gettextf("R Help on %s", sQuote(topic))
+#: R/help.R:0
+msgid "R Help on %s"
+msgstr "R žinynas %s"
+
+#. R/history.R: gettext("R History", domain = "R-utils")
+#: R/history.R:0
+msgid "R History"
+msgstr ""
+
+#. R/databrowser.R: gettext("R Workspace", domain = "R-utils")
+#: R/databrowser.R:0
+msgid "R Workspace"
+msgstr ""
+
+#. R/SweaveDrivers.R: gettextf("R code from vignette source '%s'", file, domain = "R-utils")
+#: R/SweaveDrivers.R:0
+msgid "R code from vignette source '%s'"
+msgstr ""
+
+#. R/windows/choose.files.R: gettext("R images (*.RData,*.rda)", domain = "R-utils")
+#: R/windows/choose.files.R:0
+msgid "R images (*.RData,*.rda)"
+msgstr ""
+
+#. R/databrowser.R: gettextf("R objects in %s", paste(deparse1(substitute(envir)), collapse = ""), domain = "R-utils")
+#: R/databrowser.R:0
+msgid "R objects in %s"
+msgstr ""
+
+#. R/windows/choose.files.R: gettext("R or S files (*.R,*.q,*.ssc,*.S)", domain = "R-utils")
+#: R/windows/choose.files.R:0
+msgid "R or S files (*.R,*.q,*.ssc,*.S)"
+msgstr ""
+
+#. R/windows/winDialog.R: gettext("R progress bar", domain = "R-utils")
+#: R/windows/winDialog.R:0
+msgid "R progress bar"
+msgstr ""
+
+#. R/help.search.R: gettext("R: creating the help.search() DB", domain = "R-utils")
+#: R/help.search.R:0
+msgid "R: creating the help.search() DB"
+msgstr ""
+
+#. R/RShowDoc.R: message("RShowDoc() should be used with a character string argument specifying a documentation file")
+#: R/RShowDoc.R:0
+#, fuzzy
+msgid ""
+"RShowDoc() should be used with a character string argument specifying a "
+"documentation file"
+msgstr ""
+"RShowDoc() turi būti naudojamas su simbolių eilutės argumentu, nurodančiu\n"
+"dokumentacijos failą"
+
+#. R/help.search.R: message("Rebuilding the help.search() database ...", domain = "R-utils")
+#: R/help.search.R:0
+msgid "Rebuilding the help.search() database ..."
+msgstr ""
+
+#. R/help.search.R: message("Rebuilding the help.search() database ... ...", domain = "R-utils")
+#: R/help.search.R:0
+msgid "Rebuilding the help.search() database ... ..."
+msgstr ""
+
+#. R/packageStatus.R: gettextf("Repository %s", names(x$Repos)[k], domain = "R-utils")
+#: R/packageStatus.R:0
+msgid "Repository %s"
+msgstr ""
+
+#. R/aspell.R: gettextf("Running aspell failed with diagnostics:\n%s", paste(out$stderr, collapse = "\n"))
+#: R/aspell.R:0
+msgid ""
+"Running aspell failed with diagnostics:\n"
+"%s"
+msgstr ""
+"Nepavyko paleisti aspell su diagnostika:\n"
+"%s"
+
+#. R/sessionInfo.R: gettext("Running under:", domain = "R-utils")
+#: R/sessionInfo.R:0
+msgid "Running under:"
+msgstr ""
+
+#. R/objects.R: gettextf("S3 method '%s' not found", method)
+#: R/objects.R:0
+msgid "S3 method '%s' not found"
+msgstr "S3 metodas '%s' nerastas"
+
+#. R/package.skeleton.R: message("Saving functions and data ...", domain = "R-utils")
+#: R/package.skeleton.R:0
+msgid "Saving functions and data ..."
+msgstr ""
+
+#. R/help.R: gettextf("Saving help page to %s", sQuote(basename(ofile2)))
+#. R/help.R: gettextf("Saving help page to %s", sQuote(ofile))
+#: R/help.R:0
+msgid "Saving help page to %s"
+msgstr "Žinyno puslapio įrašymas į %s"
+
+#. R/windows/choose.files.R: gettext("Select files", domain = "R-utils")
+#: R/windows/choose.files.R:0
+msgid "Select files"
+msgstr ""
+
+#. R/windows/choose.files.R: gettext("Select folder", domain = "R-utils")
+#: R/windows/choose.files.R:0
+msgid "Select folder"
+msgstr ""
+
+#. R/unix/create.post.R: gettext("Sending email ...", domain = "R-utils")
+#: R/unix/create.post.R:0
+msgid "Sending email ..."
+msgstr ""
+
+#. R/unix/create.post.R: gettext("Sending email failed!", domain = "R-utils")
+#: R/unix/create.post.R:0
+msgid "Sending email failed!"
+msgstr ""
+
+#. R/sock.R: gettextf("Socket connection #%s to %s on port %s", x$socket, x$host, x$port, domain = "R-utils")
+#: R/sock.R:0
+msgid "Socket connection #%s to %s on port %s"
+msgstr ""
+
+#. R/windows/choose.files.R: gettext("Text files (*.txt)", domain = "R-utils")
+#: R/windows/choose.files.R:0
+msgid "Text files (*.txt)"
+msgstr ""
+
+#. R/unix/create.post.R: gettextf("The %s is being opened for you to edit.", description, domain = "R-utils")
+#. R/unix/create.post.R: gettextf("The %s is being opened for you to edit.", description, domain = "R-utils")
+#. R/windows/create.post.R: gettextf("The %s is being opened for you to edit.", description, domain = "R-utils")
+#: R/unix/create.post.R:0 R/windows/create.post.R:0
+msgid "The %s is being opened for you to edit."
+msgstr ""
+
+#. R/unix/create.post.R: gettextf("The %s is being opened in your default mail program\nfor you to complete and send.",     description, domain = "R-utils")
+#. R/windows/create.post.R: gettextf("The %s is being opened in your default mail program\nfor you to complete and send.",     description, domain = "R-utils")
+#: R/unix/create.post.R:0 R/windows/create.post.R:0
+msgid ""
+"The %s is being opened in your default mail program\n"
+"for you to complete and send."
+msgstr ""
+
+#. R/citation.R: gettextf("The %s package is part of R.", sQuote(package), domain = "R-utils")
+#: R/citation.R:0
+msgid "The %s package is part of R."
+msgstr ""
+
+#. R/relist.R: stop("The 'flesh' argument does not contain a skeleton attribute.\nEither ensure you unlist a relistable object, or specify the skeleton separately.")
+#: R/relist.R:0
+#, fuzzy
+msgid ""
+"The 'flesh' argument does not contain a skeleton attribute.\n"
+"Either ensure you unlist a relistable object, or specify the skeleton "
+"separately."
+msgstr ""
+"Įsitikinkite, kad neįtraukiate į sąrašą relistable objekto, arba atskirai "
+"nurodykite struktūrą."
+
+#. R/unix/mac.install.R: gettext("The downloaded binary packages are in:", domain = "R-utils")
+#. R/windows/install.packages.R: gettext("The downloaded binary packages are in:", domain = "R-utils")
+#: R/unix/mac.install.R:0 R/windows/install.packages.R:0
+#, fuzzy
+msgid "The downloaded binary packages are in:"
+msgstr ""
+"Atsisiųsti dvejetainiai paketai yra\n"
+"\t%s"
+
+#. R/packages2.R: gettext("The downloaded source packages are in:", domain = "R-utils")
+#: R/packages2.R:0
+#, fuzzy
+msgid "The downloaded source packages are in:"
+msgstr ""
+"Atsisiųsti šaltinio paketai yra\n"
+"\t%s"
+
+#. R/aspell.R: gettextf("The following dictionaries were not found:\n%s", paste(sprintf("  %s",     dictionaries[ind]), collapse = "\n"))
+#: R/aspell.R:0
+msgid ""
+"The following dictionaries were not found:\n"
+"%s"
+msgstr ""
+"Nerasta šių žodynų:\n"
+"%s"
+
+#. R/packages2.R: gettextf("The namespace for package \"%s\" is locked; no changes in the global variables list may be made.",     package)
+#: R/packages2.R:0
+msgid ""
+"The namespace for package \"%s\" is locked; no changes in the global "
+"variables list may be made."
+msgstr ""
+"Paketo \"%s\" vardų sritis užrakinta; visuotiniame kintamųjų sąraše negalima "
+"atlikti keitimų."
+
+#. R/strcapture.R: stop("The number of captures in 'pattern' != 'length(proto)'")
+#: R/strcapture.R:0
+msgid "The number of captures in 'pattern' != 'length(proto)'"
+msgstr "Fiksavimų skaičius, esantis 'pattern' != 'length(proto)'"
+
+#. R/strcapture.R: stop("The number of tokens != 'length(proto)'")
+#: R/strcapture.R:0
+msgid "The number of tokens != 'length(proto)'"
+msgstr "Ženklų skaičius != 'length(proto)'"
+
+#. R/strcapture.R: stop("The number of tokens is not consistent across 'x'")
+#: R/strcapture.R:0
+msgid "The number of tokens is not consistent across 'x'"
+msgstr "Ženklų skaičius 'x' nėra vienodas"
+
+#. R/RSiteSearch.R: gettext("The results page should open in your browser shortly", domain = "R-utils")
+#: R/RSiteSearch.R:0
+msgid "The results page should open in your browser shortly"
+msgstr "Rezultatų puslapis netrukus turėtų būti atidarytas naršyklėje"
+
+#. R/unix/create.post.R: gettextf("The unsent %s can be found in file %s", description, sQuote(filename),     domain = "R-utils")
+#. R/unix/create.post.R: gettextf("The unsent %s can be found in file %s", description, sQuote(filename),     domain = "R-utils")
+#. R/unix/create.post.R: gettextf("The unsent %s can be found in file %s", description, filename, domain = "R-utils")
+#. R/windows/create.post.R: gettextf("The unsent %s can be found in file %s", description, normalizePath(filename),     domain = "R-utils")
+#: R/unix/create.post.R:0 R/windows/create.post.R:0
+#, fuzzy
+msgid "The unsent %s can be found in file %s"
+msgstr "naudojant tą, kuris rastas %s"
+
+#. R/packages2.R: gettext("These will not be installed", domain = "R-utils")
+#: R/packages2.R:0
+#, fuzzy
+msgid "These will not be installed"
+msgstr "paketas %s yra naudojamas ir nebus įdiegtas"
+
+#. R/bug.report.R: gettextf("\nThis package has a BugReports field which is not the URL of a web page:\n\n  BugReports: %s\n\nIt appears to contain an email address, so we will try that.",     BR, domain = "R-utils")
+#: R/bug.report.R:0
+msgid ""
+"This package has a BugReports field which is not the URL of a web page:\n"
+"\n"
+"  BugReports: %s\n"
+"\n"
+"It appears to contain an email address, so we will try that."
+msgstr ""
+
+#. R/bug.report.R: gettextf("\nThis package has a BugReports field which is not the URL of a web page:\n\n  BugReports: %s\n\nWe will ignore it and email the maintainer.",     BR, domain = "R-utils")
+#: R/bug.report.R:0
+msgid ""
+"This package has a BugReports field which is not the URL of a web page:\n"
+"\n"
+"  BugReports: %s\n"
+"\n"
+"We will ignore it and email the maintainer."
+msgstr ""
+
+#. R/bug.report.R: gettextf("\nThis package has a bug submission web page, which we will now attempt\nto open.  The information above may be useful in your report.\nIf the web page does not work, you should send email to the maintainer,\n%s.",     DESC$Maintainer, domain = "R-utils")
+#: R/bug.report.R:0
+msgid ""
+"This package has a bug submission web page, which we will now attempt\n"
+"to open.  The information above may be useful in your report.\n"
+"If the web page does not work, you should send email to the maintainer,\n"
+"%s."
+msgstr ""
+
+#. R/packages2.R: stop("This version of R is not set up to install source packages\nIf it was installed from an RPM, you may need the R-devel RPM")
+#: R/packages2.R:0
+msgid ""
+"This version of R is not set up to install source packages\n"
+"If it was installed from an RPM, you may need the R-devel RPM"
+msgstr ""
+"Ši R versija nenustatyta diegti šaltinio paketus\n"
+"Jei jis buvo įdiegtas iš RPM, gali reikėti R-devel RPM"
+
+#. R/str.R: gettextf(" Time-Series %s from %s to %s:", lestr, format(tsp.a[1L]), format(tsp.a[2L]),     domain = "R-tools")
+#: R/str.R:0
+msgid "Time-Series %s from %s to %s:"
+msgstr ""
+
+#. R/changedFiles.R: warning("Timestamp file no longer exists.")
+#: R/changedFiles.R:0
+msgid "Timestamp file no longer exists."
+msgstr "Laiko žymos failo nebėra."
+
+#. R/aspell.R: gettext("Title")
+#. R/data.R: gettext("Title", domain = "R-utils")
+#. R/demo.R: gettext("Title", domain = "R-utils")
+#: R/aspell.R:0 R/data.R:0 R/demo.R:0
+msgid "Title"
+msgstr ""
+
+#. R/citation.R: gettextf("To cite package %s in publications use:", sQuote(package))
+#: R/citation.R:0
+msgid "To cite package %s in publications use:"
+msgstr "Norėdami nurodyti paketą %s leidiniuose, naudokite:"
+
+#. R/citation.R: gettext("To see these entries in BibTeX format, use 'print(<citation>, bibtex=TRUE)',\n'toBibtex(.)', or set 'options(citation.bibtex.max=999)'.",     domain = "R-utils")
+#: R/citation.R:0
+msgid ""
+"To see these entries in BibTeX format, use 'print(<citation>, "
+"bibtex=TRUE)',\n"
+"'toBibtex(.)', or set 'options(citation.bibtex.max=999)'."
+msgstr ""
+
+#. R/demo.R: gettext("Type  <Return> to start:")
+#: R/demo.R:0
+msgid "Type  <Return> to start:"
+msgstr ""
+
+#. R/help.search.R: gettext("Type '?PKG::FOO' to inspect entries 'PKG::FOO', or 'TYPE?PKG::FOO' for entries like 'PKG::FOO-TYPE'.",     domain = "R-utils")
+#: R/help.search.R:0
+msgid ""
+"Type '?PKG::FOO' to inspect entries 'PKG::FOO', or 'TYPE?PKG::FOO' for "
+"entries like 'PKG::FOO-TYPE'."
+msgstr ""
+
+#. R/help.search.R: gettext("Type 'demo(PKG::FOO)' to run demonstration 'PKG::FOO'.", domain = "R-utils")
+#: R/help.search.R:0
+msgid "Type 'demo(PKG::FOO)' to run demonstration 'PKG::FOO'."
+msgstr ""
+
+#. R/help.search.R: gettext("Type 'vignette(\"FOO\", package=\"PKG\")' to inspect entries 'PKG::FOO'.",     domain = "R-utils")
+#: R/help.search.R:0
+msgid ""
+"Type 'vignette(\"FOO\", package=\"PKG\")' to inspect entries 'PKG::FOO'."
+msgstr ""
+
+#. R/help.request.R: warning("Unable to connect to CRAN to check R version.")
+#: R/help.request.R:0
+msgid "Unable to connect to CRAN to check R version."
+msgstr "Neįmanoma prisijungti prie CRAN, kad patikrinti R versiją."
+
+#. R/object.size.R: gettextf("Unit %s is not part of standard %s", sQuote(units), sQuote(standard))
+#: R/object.size.R:0
+#, fuzzy
+msgid "Unit %s is not part of standard %s"
+msgstr "Vienetas \"%s\" nėra standartinio \"%s\" dalis"
+
+#. R/askYesNo.R: gettextf("Unrecognized response %s", dQuote(ans))
+#: R/askYesNo.R:0
+#, fuzzy
+msgid "Unrecognized response %s"
+msgstr "Neatpažintas atsakas"
+
+#. R/read.DIF.R: stop("Unrecognized special data value")
+#: R/read.DIF.R:0
+msgid "Unrecognized special data value"
+msgstr "Neatpažinta speciali duomenų reikšmė"
+
+#. R/read.DIF.R: stop("Unrecognized value indicator")
+#: R/read.DIF.R:0
+msgid "Unrecognized value indicator"
+msgstr "Neatpažintas reikšmės indikatorius"
+
+#. R/packageStatus.R: gettext("Update?")
+#. R/packages.R: gettext("Update?")
+#: R/packageStatus.R:0 R/packages.R:0
+msgid "Update?"
+msgstr ""
+
+#. R/packages.R: message("Updating HTML index of packages in '.Library'")
+#. R/packages2.R: message("Updating HTML index of packages in '.Library'")
+#: R/packages.R:0 R/packages2.R:0
+msgid "Updating HTML index of packages in '.Library'"
+msgstr "Atnaujinamas HTML paketų indeksas, esantis '.Library'"
+
+#. R/data.R: gettextf("Use %s\nto list the data sets in all *available* packages.", sQuote("data(package = .packages(all.available = TRUE))"),     domain = "R-utils")
+#: R/data.R:0
+#, fuzzy
+msgid ""
+"Use %s\n"
+"to list the data sets in all *available* packages."
+msgstr ""
+"Naudoti <code> %s </code>, \n"
+"kad vinjetes būtų rodomos visuose <strong>galimuose</strong> paketuose."
+
+#. R/vignette.R: gettextf("Use %s to list the vignettes in all *available* packages.", sQuote("vignette(all = TRUE)"))
+#: R/vignette.R:0
+#, fuzzy
+msgid "Use %s to list the vignettes in all *available* packages."
+msgstr ""
+"Naudoti <code> %s </code>, \n"
+"kad vinjetes būtų rodomos visuose <strong>galimuose</strong> paketuose."
+
+#. R/browseVignettes.R: gettext("Use <code> %s </code> \n to list the vignettes in all <strong>available</strong> packages.")
+#: R/browseVignettes.R:0
+msgid ""
+"Use <code> %s </code> \n"
+" to list the vignettes in all <strong>available</strong> packages."
+msgstr ""
+"Naudoti <code> %s </code>, \n"
+"kad vinjetes būtų rodomos visuose <strong>galimuose</strong> paketuose."
+
+#. R/objects.R: gettextf("Use [] to view one of them", domain = "R-utils")
+#: R/objects.R:0
+#, fuzzy
+msgid "Use [] to view one of them"
+msgstr "%s turi būti vienas iš %s"
+
+#. R/citation.R: gettextf("Use either %s or %s but not both", sQuote("given"), paste(sQuote("first"),     sQuote("middle"), sep = "/", collapse = ""))
+#. R/citation.R: gettextf("Use either %s or %s but not both", sQuote("family"), sQuote("last"))
+#: R/citation.R:0
+#, fuzzy
+msgid "Use either %s or %s but not both"
+msgstr "Naudokite %s arba %s, bet ne abu."
+
+#. R/sysdata.R: gettext("Use for all copyright holders.", domain = "R-utils")
+#: R/sysdata.R:0
+msgid "Use for all copyright holders."
+msgstr ""
+
+#. R/sysdata.R: gettext("Use for authors who have been contracted to write (parts of) the\npackage and hence do not own intellectual property.",     domain = "R-utils")
+#: R/sysdata.R:0
+msgid ""
+"Use for authors who have been contracted to write (parts of) the\n"
+"package and hence do not own intellectual property."
+msgstr ""
+
+#. R/sysdata.R: gettext("Use for authors who have made smaller contributions (such as\ncode patches etc.) but should not show up in the package\ncitation.",     domain = "R-utils")
+#: R/sysdata.R:0
+msgid ""
+"Use for authors who have made smaller contributions (such as\n"
+"code patches etc.) but should not show up in the package\n"
+"citation."
+msgstr ""
+
+#. R/sysdata.R: gettext("Use for full authors who have made substantial contributions to\nthe package and should show up in the package citation.",     domain = "R-utils")
+#: R/sysdata.R:0
+msgid ""
+"Use for full authors who have made substantial contributions to\n"
+"the package and should show up in the package citation."
+msgstr ""
+
+#. R/sysdata.R: gettext("Use for package maintainers that collected code (potentially in\nother languages) but did not make further substantial\ncontributions to the package.",     domain = "R-utils")
+#: R/sysdata.R:0
+msgid ""
+"Use for package maintainers that collected code (potentially in\n"
+"other languages) but did not make further substantial\n"
+"contributions to the package."
+msgstr ""
+
+#. R/sysdata.R: gettext("Use for persons or organizations responsible for reviewing\n(parts of) the package.",     domain = "R-utils")
+#: R/sysdata.R:0
+msgid ""
+"Use for persons or organizations responsible for reviewing\n"
+"(parts of) the package."
+msgstr ""
+
+#. R/sysdata.R: gettext("Use for persons or organizations that furnished financial support\nfor the development of the package",     domain = "R-utils")
+#: R/sysdata.R:0
+msgid ""
+"Use for persons or organizations that furnished financial support\n"
+"for the development of the package"
+msgstr ""
+
+#. R/sysdata.R: gettext("Use for persons who contributed data sets for the package.", domain = "R-utils")
+#: R/sysdata.R:0
+msgid "Use for persons who contributed data sets for the package."
+msgstr ""
+
+#. R/sysdata.R: gettext("Use for the package maintainer.", domain = "R-utils")
+#: R/sysdata.R:0
+#, fuzzy
+msgid "Use for the package maintainer."
+msgstr "Neteisingai suformuotas paketo pavadinimas."
+
+#. R/demo.R: gettextf("Use: %s to list the demos in all *available* packages.", sQuote("demo(package = .packages(all.available = TRUE))"),     domain = "R-utils")
+#: R/demo.R:0
+#, fuzzy
+msgid "Use: %s to list the demos in all *available* packages."
+msgstr ""
+"Naudoti <code> %s </code>, \n"
+"kad vinjetes būtų rodomos visuose <strong>galimuose</strong> paketuose."
+
+#. R/unix/create.post.R: message("Using the browser to open a mailto: URI")
+#: R/unix/create.post.R:0
+msgid "Using the browser to open a mailto: URI"
+msgstr "Naršyklės naudojimas norint atidaryti mailto: URI"
+
+#. R/help.R: gettext("\nUsing the first match ...")
+#: R/help.R:0
+msgid "Using the first match ..."
+msgstr "Naudojant pirmąjį sutapimą ..."
+
+#. R/help.search.R: gettextf("Vignettes with %s fields matching %s using fuzzy matching:", fields_used[[type]],     sQuote(x$pattern), domain = "R-utils")
+#: R/help.search.R:0
+msgid "Vignettes with %s fields matching %s using fuzzy matching:"
+msgstr ""
+
+#. R/help.search.R: gettextf("Vignettes with %s fields matching %s using regular expression matching:",     fields_used[[type]], sQuote(x$pattern), domain = "R-utils")
+#: R/help.search.R:0
+msgid "Vignettes with %s fields matching %s using regular expression matching:"
+msgstr ""
+
+#. R/Sweave.R: gettextf("Warning: unknown option %s", sQuote(a))
+#. R/Sweave.R: gettextf("Warning: unknown option %s", sQuote(a))
+#: R/Sweave.R:0
+msgid "Warning: unknown option %s"
+msgstr "Įspėjimas: nežinoma parinktis %s"
+
+#. R/Sweave.R: gettextf("Warning: unknown option '--clean='%s", clean., domain = "R-tools")
+#: R/Sweave.R:0
+msgid "Warning: unknown option '--clean='%s"
+msgstr "Įspėjimas: nežinoma parinktis '--clean='%s"
+
+#. R/windows/choose.files.R: gettext("Windows bitmap files (*.bmp)", domain = "R-utils")
+#: R/windows/choose.files.R:0
+msgid "Windows bitmap files (*.bmp)"
+msgstr ""
+
+#. R/packages2.R: gettextf("Would you like to create a personal library\n%s\nto install packages into?",     sQuote(userdir))
+#: R/packages2.R:0
+msgid ""
+"Would you like to create a personal library\n"
+"%s\n"
+"to install packages into?"
+msgstr ""
+"Ar norite sukurti asmeninę biblioteką\n"
+"%s\n"
+"įdiegti paketus į?"
+
+#. R/packages2.R: gettext("Would you like to use a personal library instead?")
+#: R/packages2.R:0
+msgid "Would you like to use a personal library instead?"
+msgstr "Ar norite naudoti asmeninę biblioteką?"
+
+#. R/SweaveDrivers.R: gettext("Writing chunks to files ...", domain = "R-utils")
+#: R/SweaveDrivers.R:0
+msgid "Writing chunks to files ..."
+msgstr ""
+
+#. R/SweaveDrivers.R: gettextf("Writing to file %s", output, domain = "R-utils")
+#. R/SweaveDrivers.R: gettextf("Writing to file %s", output, domain = "R-utils")
+#: R/SweaveDrivers.R:0
+#, fuzzy
+msgid "Writing to file %s"
+msgstr "Apdorojamas failas %s"
+
+#. R/Sweave.R: gettextf("Wrote file %s", output, domain = "R-utils")
+#: R/Sweave.R:0
+#, fuzzy
+msgid "Wrote file %s"
+msgstr "Apdorojamas failas %s"
+
+#. R/edit.R: stop("X11 library is missing: install XQuartz from xquartz.macosforge.org", domain = "R-utils")
+#: R/edit.R:0
+msgid "X11 library is missing: install XQuartz from xquartz.macosforge.org"
+msgstr ""
+
+#. R/askYesNo.R: c("Yes", "No", "Cancel")
+#: R/askYesNo.R:0
+msgid "Yes"
+msgstr "Taip"
+
+#. R/SweaveDrivers.R: gettextf("You can now run (pdf)latex on %s", sQuote(outputname), domain = "R-utils")
+#: R/SweaveDrivers.R:0
+msgid "You can now run (pdf)latex on %s"
+msgstr ""
+
+#. R/windows/choose.files.R: gettext("Zip files (*.zip)", domain = "R-utils")
+#: R/windows/choose.files.R:0
+msgid "Zip files (*.zip)"
+msgstr ""
+
+#. R/str.R: gettext("[list output truncated]", domain = "R-utils")
+#: R/str.R:0
+msgid "[list output truncated]"
+msgstr ""
+
+#. R/str.R: gettext(" __no length(.)__ ")
+#: R/str.R:0
+msgid "__no length(.)__"
+msgstr ""
+
+#. R/edit.R: gettextf("added factor levels in '%s'", names(out)[i])
+#: R/edit.R:0
+msgid "added factor levels in '%s'"
+msgstr "pridėti faktoriaus lygiai, esantys '%s'"
+
+#. R/citation.R: gettextf("all arguments must be of class %s", dQuote("person"))
+#: R/citation.R:0
+msgid "all arguments must be of class %s"
+msgstr "visi argumentai turi būti klasės %s"
+
+#. R/citation.R: stop("all fields have to be named")
+#: R/citation.R:0
+msgid "all fields have to be named"
+msgstr "visi laukai turi būti pavadinti"
+
+#. R/data.R: gettextf("an object named %s already exists and will not be overwritten", sQuote(o))
+#: R/data.R:0
+msgid "an object named %s already exists and will not be overwritten"
+msgstr "objektas, pavadintas %s, jau yra ir nebus perrašytas"
+
+#. R/write.table.R: warning("appending column names to file")
+#: R/write.table.R:0
+msgid "appending column names to file"
+msgstr "stulpelių pavadinimų pridėjimas prie failo"
+
+#. R/help.search.R: warning("argument 'help.db' is deprecated")
+#: R/help.search.R:0
+msgid "argument 'help.db' is deprecated"
+msgstr "argumentas 'help.db' yra prieštaraujantis"
+
+#. R/zip.R: stop("argument 'zip' must be a non-empty character string")
+#: R/zip.R:0
+#, fuzzy
+msgid "argument 'zip' must be a non-empty character string"
+msgstr "'url' turi būti netuščia simbolių eilutė"
+
+#. R/sourceutils.R: stop("argument is not a function or language object:", typeof(fn))
+#: R/sourceutils.R:0
+msgid "argument is not a function or language object:"
+msgstr "argumentas nėra funkcija arba kalbos objektas:"
+
+#. R/SweaveDrivers.R: gettextf("at %s, %s", location, conditionMessage(e))
+#: R/SweaveDrivers.R:0
+msgid "at %s, %s"
+msgstr ""
+
+#. R/frametools.R: stop("at least one vector element is required")
+#: R/frametools.R:0
+msgid "at least one vector element is required"
+msgstr "būtinas bent vienas vektorinis elementas"
+
+#. R/sessionInfo.R: gettext("attached base packages:", domain = "R-utils")
+#: R/sessionInfo.R:0
+msgid "attached base packages:"
+msgstr ""
+
+#. R/write.table.R: gettextf("attempt to set '%s' ignored", argname)
+#. R/write.table.R: gettextf("attempt to set '%s' ignored", argname)
+#: R/write.table.R:0
+msgid "attempt to set '%s' ignored"
+msgstr "bandymas nustatyti '%s' ignoruojamas"
+
+#. R/packages2.R: gettextf("begin installing package %s", sQuote(pkg), domain = "R-utils")
+#: R/packages2.R:0
+#, fuzzy
+msgid "begin installing package %s"
+msgstr "2. Paketa diegiami į %s"
+
+#. R/bug.report.R: gettext("bug report")
+#: R/bug.report.R:0
+msgid "bug report"
+msgstr ""
+
+#. R/edit.R: stop("can only handle vector and factor elements")
+#: R/edit.R:0
+msgid "can only handle vector and factor elements"
+msgstr "gali tvarkyti tik vektoriaus ir faktoriaus elementus"
+
+#. R/sock.R: stop("can only receive calls on local machine")
+#: R/sock.R:0
+msgid "can only receive calls on local machine"
+msgstr "gali priimti tik iškvietimus vietiniame kompiuteryje"
+
+#. R/packageStatus.R: gettext("cancelled by user", domain = "R-utils")
+#: R/packageStatus.R:0
+#, fuzzy
+msgid "cancelled by user"
+msgstr "Atšaukta vartotojo"
+
+#. R/packages.R: gettextf("cannot choose a %s mirror non-interactively", label)
+#: R/packages.R:0
+#, fuzzy
+msgid "cannot choose a %s mirror non-interactively"
+msgstr "negalima pasirinkti BioC veidrodžio neinteraktyviai"
+
+#. R/strcapture.R: gettextf("cannot coerce %s to logical", sQuote(x))
+#: R/strcapture.R:0
+msgid "cannot coerce %s to logical"
+msgstr "negalima %s pakeisti į loginį"
+
+#. R/roman.R: stop("cannot coerce 'x' to roman")
+#: R/roman.R:0
+msgid "cannot coerce 'x' to roman"
+msgstr "negalima 'x' pakeisti į romėnų"
+
+#. R/package.skeleton.R: gettextf("cannot create directory %s", sQuote(path))
+#: R/package.skeleton.R:0
+#, fuzzy
+msgid "cannot create directory %s"
+msgstr "negali sukurti katalogo '%s'"
+
+#. R/prompt.R: stop("cannot determine a usable name")
+#. R/prompt.R: stop("cannot determine a usable name")
+#. R/prompt.R: stop("cannot determine a usable name")
+#. R/prompt.R: stop("cannot determine a usable name")
+#: R/prompt.R:0
+msgid "cannot determine a usable name"
+msgstr "negali nustatyti naudotino pavadinimo"
+
+#. R/prompt.R: stop("cannot determine import name")
+#: R/prompt.R:0
+msgid "cannot determine import name"
+msgstr "negali nustatyti importavimo pavadinimo"
+
+#. R/edit.R: stop("cannot edit NULL row names")
+#: R/edit.R:0
+msgid "cannot edit NULL row names"
+msgstr "negali redaguoti NULL eilučių pavadinimų"
+
+#. R/unix/create.post.R: warning("cannot find program to open 'mailto:' URIs: reverting to 'method=\"none\"'")
+#: R/unix/create.post.R:0
+msgid ""
+"cannot find program to open 'mailto:' URIs: reverting to 'method=\"none\"'"
+msgstr ""
+"nepavyksta rasti programos, kad atidarytumėte 'mailto:' URI: grįžtate prie "
+"'method=\"none\"'"
+
+#. R/completion.R: warning("cannot handle S4 methods yet")
+#: R/completion.R:0
+msgid "cannot handle S4 methods yet"
+msgstr "dar negalima apdoroti S4 metodų"
+
+#. R/packages2.R: stop("cannot install Windows binary packages on this platform")
+#: R/packages2.R:0
+msgid "cannot install Windows binary packages on this platform"
+msgstr "nepavyksta įdiegti Windows dvejetainių paketų šioje platformoje"
+
+#. R/packages2.R: stop("cannot install macOS binary packages on Windows")
+#: R/packages2.R:0
+msgid "cannot install macOS binary packages on Windows"
+msgstr ""
+"nepavyksta įdiegti macOS dvejetainių paketų operacinėje sistemoje Windows"
+
+#. R/packages2.R: stop("cannot install macOS binary packages on this platform")
+#: R/packages2.R:0
+msgid "cannot install macOS binary packages on this platform"
+msgstr "nepavyksta įdiegti macOS dvejetainių paketų šioje platformoje"
+
+#. R/unix/mac.install.R: gettextf("cannot remove prior installation of package %s", sQuote(pkgname))
+#. R/windows/install.packages.R: gettextf("cannot remove prior installation of package %s", sQuote(pkgname))
+#: R/unix/mac.install.R:0 R/windows/install.packages.R:0
+msgid "cannot remove prior installation of package %s"
+msgstr "negali pašalinti paketo %s išankstinio diegimo"
+
+#. R/packages.R: stop("cannot set repositories non-interactively")
+#: R/packages.R:0
+msgid "cannot set repositories non-interactively"
+msgstr "negali nustatyti saugyklų neinteraktyviai"
+
+#. R/linkhtml.R: warning("cannot update HTML package index")
+#: R/linkhtml.R:0
+msgid "cannot update HTML package index"
+msgstr "negali atnaujinti HTML paketo rodyklės"
+
+#. R/objects.R: gettextf("changing locked binding for %s in %s", sQuote(x), sQuote(ns_name))
+#: R/objects.R:0
+msgid "changing locked binding for %s in %s"
+msgstr "keičia užrakintą %s susiejimą, esantį %s"
+
+#. R/objects.R: gettextf("changing locked binding for %s in %s whilst loading %s", sQuote(x), sQuote(ns_name),     sQuote(in_load))
+#: R/objects.R:0
+msgid "changing locked binding for %s in %s whilst loading %s"
+msgstr "keičiant užrakintą %s susiejimą %s įkeliant %s"
+
+#. R/str.R: gettext("character", domain = "R-utils")
+#. R/str.R: gettext("character", domain = "R-utils")
+#: R/str.R:0
+msgid "character"
+msgstr ""
+
+#. R/tar.R: gettextf("checksum error for entry '%s'", name)
+#: R/tar.R:0
+msgid "checksum error for entry '%s'"
+msgstr "įrašo '%s' checksum klaida"
+
+#. R/SweaveDrivers.R: gettextf(" chunk %s\n", paste(options$chunknr, collapse = ""), domain = "R-utils")
+#: R/SweaveDrivers.R:0
+msgid "chunk %s"
+msgstr ""
+
+#. R/SweaveDrivers.R: gettextf(" chunk %s (label = %s)\n", paste(options$chunknr, collapse = ""), paste(options$label,     collapse = ""), domain = "R-utils")
+#: R/SweaveDrivers.R:0
+msgid "chunk %s (label = %s)"
+msgstr ""
+
+#. R/edit.R: warning("class of 'name' will be discarded", call. = FALSE, immediate. = TRUE)
+#: R/edit.R:0
+msgid "class of 'name' will be discarded"
+msgstr "'name' klasė bus atmesta"
+
+#. R/read.DIF.R: gettextf("cols = %d != length(data) = %d", cols, length(data))
+#. R/readtable.R: gettextf("cols = %d != length(data) = %d", cols, length(data))
+#: R/read.DIF.R:0 R/readtable.R:0
+msgid "cols = %d != length(data) = %d"
+msgstr ""
+
+#. R/tar.R: gettextf("command %s returned error code %s", sQuote(cmd), res)
+#: R/tar.R:0
+#, fuzzy
+msgid "command %s returned error code %s"
+msgstr "'tar' grąžino ne nulinį išėjimo kodą %d"
+
+#. R/str.R: gettext("complex", domain = "R-utils")
+#. R/str.R: gettext("complex", domain = "R-utils")
+#: R/str.R:0
+msgid "complex"
+msgstr ""
+
+#. R/citation.R: gettextf("could not determine year for %s from package DESCRIPTION file", sQuote(package))
+#: R/citation.R:0
+msgid "could not determine year for %s from package DESCRIPTION file"
+msgstr "nepavyko nustatyti %s metų iš paketo DESCRIPTION failo"
+
+#. R/de.R: warning("could not restore type information")
+#: R/de.R:0
+msgid "could not restore type information"
+msgstr "nepavyko atkurti tipo informacijos"
+
+#. R/de.R: warning("could not restore variables properly")
+#: R/de.R:0
+msgid "could not restore variables properly"
+msgstr "nepavyko tinkamai atkurti kintamųjų"
+
+#. R/help.R: gettextf("creation of %s failed", sQuote(ofile2))
+#: R/help.R:0
+msgid "creation of %s failed"
+msgstr "nepavyko sukurti %s"
+
+#. R/data.R: gettext("data *NOT* found")
+#: R/data.R:0
+msgid "data *NOT* found"
+msgstr ""
+
+#. R/data.R: gettext("data found")
+#: R/data.R:0
+#, fuzzy
+msgid "data found"
+msgstr "duomenų rinkinys %s nerastas"
+
+#. R/data.R: gettextf("data index for package %s is invalid and will be ignored", sQuote(packageName))
+#: R/data.R:0
+msgid "data index for package %s is invalid and will be ignored"
+msgstr "paketo %s duomenų indeksas neleistinas ir bus ignoruojamas"
+
+#. R/data.R: gettextf("data set %s not found", sQuote(name))
+#: R/data.R:0
+msgid "data set %s not found"
+msgstr "duomenų rinkinys %s nerastas"
+
+#. R/data.R: warning("datasets have been moved from package 'base' to package 'datasets'")
+#: R/data.R:0
+msgid "datasets have been moved from package 'base' to package 'datasets'"
+msgstr "duomenų rinkiniai buvo perkelti iš paketo 'base' į paketą 'datasets'"
+
+#. R/data.R: warning("datasets have been moved from package 'stats' to package 'datasets'")
+#: R/data.R:0
+msgid "datasets have been moved from package 'stats' to package 'datasets'"
+msgstr "duomenų rinkiniai buvo perkelti iš paketo 'stats' į paketą 'datasets'"
+
+#. R/de.R: warning("did not assign anything")
+#: R/de.R:0
+#, fuzzy
+msgid "did not assign anything"
+msgstr "ne assign() nieko"
+
+#. R/package.skeleton.R: gettextf("directory %s already exists", sQuote(dir))
+#: R/package.skeleton.R:0
+#, fuzzy
+msgid "directory %s already exists"
+msgstr "katalogas '%s' jau yra"
+
+#. R/help.search.R: stop("do not know what to search")
+#: R/help.search.R:0
+msgid "do not know what to search"
+msgstr "nežinia, ko ieškoti"
+
+#. R/RShowDoc.R: stop("document was not found")
+#: R/RShowDoc.R:0
+#, fuzzy
+msgid "document was not found"
+msgstr "dokumentas nerastas"
+
+#. R/help.search.R: message(" ", "done", domain = "R-utils")
+#. R/help.search.R: message(" ", "done", domain = "R-utils")
+#. R/linkhtml.R: message(" ", "done")
+#: R/help.search.R:0 R/linkhtml.R:0
+msgid "done"
+msgstr "atlikta"
+
+#. R/unix/download.file.R: warning("download had nonzero exit status")
+#. R/windows/download.file.R: warning("download had nonzero exit status")
+#: R/unix/download.file.R:0 R/windows/download.file.R:0
+msgid "download had nonzero exit status"
+msgstr "atsisiuntimas turėjo nenulinio išėjimo būseną"
+
+#. R/packages.R: gettextf("download of package %s failed", sQuote(p))
+#: R/packages.R:0
+msgid "download of package %s failed"
+msgstr "nepavyko atsisiųsti paketo %s"
+
+#. R/read.DIF.R: stop("duplicate 'row.names' are not allowed")
+#. R/readtable.R: stop("duplicate 'row.names' are not allowed")
+#: R/read.DIF.R:0 R/readtable.R:0
+msgid "duplicate 'row.names' are not allowed"
+msgstr "pasikartojantys 'row.names' neleidžiami"
+
+#. R/edit.R: warning("edited row names contain duplicates and will be ignored")
+#: R/edit.R:0
+msgid "edited row names contain duplicates and will be ignored"
+msgstr "redaguotų eilučių pavadinimuose yra dublikatų ir jie bus ignoruojami"
+
+#. R/apropos.R: warning("elements of 'what' after the first will be ignored")
+#: R/apropos.R:0
+msgid "elements of 'what' after the first will be ignored"
+msgstr "elementai 'what' po pirmojo bus ignoruojami"
+
+#. R/readtable.R: stop("empty beginning of file")
+#: R/readtable.R:0
+msgid "empty beginning of file"
+msgstr "tuščia failo pradžia"
+
+#. R/objects.R: stop("environment specified is not a package")
+#. R/objects.R: stop("environment specified is not a package")
+#. R/objects.R: stop("environment specified is not a package")
+#: R/objects.R:0
+msgid "environment specified is not a package"
+msgstr "nurodyta aplinka nėra paketas"
+
+#. R/debugcall.R: gettextf("error in trying to evaluate the expression for argument %s (%s)", sQuote(arg),     deparse(argExpr))
+#: R/debugcall.R:0
+msgid "error in trying to evaluate the expression for argument %s (%s)"
+msgstr "klaida bandant įvertinti argumento %s išraišką (%s)"
+
+#. R/packages.R: warning("every package depends on at least one other")
+#: R/packages.R:0
+msgid "every package depends on at least one other"
+msgstr "kiekvienas paketas priklauso vienas nuo kito"
+
+#. R/tar.R: gettextf("failed to copy %s to %s", sQuote(name2), sQuote(name))
+#. R/tar.R: gettextf("failed to copy %s to %s", sQuote(from), sQuote(name))
+#. R/tar.R: gettextf("failed to copy %s to %s", sQuote(from), sQuote(name))
+#: R/tar.R:0
+msgid "failed to copy %s to %s"
+msgstr "nepavyko nukopijuoti %s į %s"
+
+#. R/windows/install.packages.R: gettextf("failed to create %s", sQuote(path))
+#. R/windows/install.packages.R: gettextf("failed to create %s", paste(sQuote(mos[!res]), collapse = ", "))
+#. R/windows/install.packages.R: gettextf("failed to create %s", sQuote(path))
+#. R/windows/install.packages.R: gettextf("failed to create %s", paste(sQuote(mos[!res]), collapse = ", "))
+#: R/windows/install.packages.R:0
+msgid "failed to create %s"
+msgstr "nepavyko sukurti %s"
+
+#. R/tar.R: gettextf("failed to create directory %s", sQuote(exdir))
+#. R/tar.R: gettextf("failed to create directory %s", sQuote(path))
+#: R/tar.R:0
+msgid "failed to create directory %s"
+msgstr "nepavyko sukurti katalogo %s"
+
+#. R/packages.R: gettextf("failed to download mirrors file (%s); using local file '%s'", conditionMessage(err),     local.file)
+#: R/packages.R:0
+msgid "failed to download mirrors file (%s); using local file '%s'"
+msgstr "nepavyko atsisiųsti failo (%s); naudojant vietinį failą '%s'"
+
+#. R/unix/mac.install.R: gettextf("file %s is not an OS X binary package", sQuote(pkg))
+#. R/unix/mac.install.R: gettextf("file %s is not an OS X binary package", sQuote(pkg))
+#. R/unix/mac.install.R: gettextf("file %s is not an OS X binary package", sQuote(pkg))
+#: R/unix/mac.install.R:0
+#, fuzzy
+msgid "file %s is not an OS X binary package"
+msgstr "failas %s nėra macOS dvejetainis paketas"
+
+#. R/tar.R: gettextf("file '%s' did not have execute permissions: corrected", f)
+#: R/tar.R:0
+msgid "file '%s' did not have execute permissions: corrected"
+msgstr "failas '%s' neturėjo vykdymo teisių: pataisytas"
+
+#. R/tar.R: gettextf("file '%s' was not found", f)
+#: R/tar.R:0
+#, fuzzy
+msgid "file '%s' was not found"
+msgstr "failas '%s' nerastas"
+
+#. R/data.R: gettextf("file 'filelist' is missing for directory %s", sQuote(p))
+#: R/data.R:0
+msgid "file 'filelist' is missing for directory %s"
+msgstr "trūksta katalogo %s failo 'filelist'"
+
+#. R/read.DIF.R: stop("file had no lines")
+#: R/read.DIF.R:0
+msgid "file had no lines"
+msgstr "failas neturėjo eilučių"
+
+#. R/tar.R: stop("file size is limited to 8GB")
+#: R/tar.R:0
+msgid "file size is limited to 8GB"
+msgstr "failo dydis ribojamas iki 8GB"
+
+#. R/SweaveDrivers.R: gettextf("file stem %s is not portable", sQuote(chunkout))
+#. R/SweaveDrivers.R: gettextf("file stem %s is not portable", sQuote(chunkprefix))
+#. R/SweaveDrivers.R: gettextf("file stem %s is not portable", sQuote(chunkprefix))
+#: R/SweaveDrivers.R:0
+#, fuzzy
+msgid "file stem %s is not portable"
+msgstr "'lib = \"%s\"' nėra įrašomas"
+
+#. R/packages2.R: gettextf("files: %s", paste(files, collapse = ", \n\t"))
+#: R/packages2.R:0
+msgid "files: %s"
+msgstr "failai: %s"
+
+#. R/readtable.R: stop("first five rows are empty: giving up")
+#: R/readtable.R:0
+msgid "first five rows are empty: giving up"
+msgstr "pirmosios penkios eilutės yra tuščios: atsisakyti"
+
+#. R/packages2.R: gettextf("foundpkgs: %s", paste(foundpkgs, collapse = ", "))
+#: R/packages2.R:0
+msgid "foundpkgs: %s"
+msgstr "foundpkgs: %s"
+
+#. R/objects.R: gettextf("function '%s' appears not to be S3 generic; found functions that look like S3 methods",     generic.function)
+#: R/objects.R:0
+msgid ""
+"function '%s' appears not to be S3 generic; found functions that look like "
+"S3 methods"
+msgstr ""
+"funkcija '%s' nėra S3 bendrinė; rastos funkcijos, kurios atrodo kaip S3 "
+"metodai"
+
+#. R/objects.R: gettextf("generic function '%s' dispatches methods for generic '%s'", generic.function,     truegf)
+#: R/objects.R:0
+msgid "generic function '%s' dispatches methods for generic '%s'"
+msgstr "bendrinė funkcija '%s' išsiunčia metodus bendrinei '%s'"
+
+#. R/package.skeleton.R: gettextf("generic functions and other S4 objects (e.g., '%s') cannot be dumped; use the 'code_files' argument",     item)
+#: R/package.skeleton.R:0
+msgid ""
+"generic functions and other S4 objects (e.g., '%s') cannot be dumped; use "
+"the 'code_files' argument"
+msgstr ""
+"bendrinės funkcijos ir kiti S4 objektai (pvz., '%s') negali būti išmesti; "
+"naudoti argumentą 'code_files'"
+
+#. R/read.DIF.R: warning("header and 'col.names' argument are of different lengths")
+#. R/readtable.R: warning("header and 'col.names' argument are of different lengths")
+#: R/read.DIF.R:0 R/readtable.R:0
+#, fuzzy
+msgid "header and 'col.names' argument are of different lengths"
+msgstr "antraštė ir 'col.names' yra skirtingo ilgio"
+
+#. R/help.start.R: stop("help.start() requires the HTTP server to be running", call. = FALSE)
+#: R/help.start.R:0
+msgid "help.start() requires the HTTP server to be running"
+msgstr "help.start() reikalauja, kad HTTP serveris veiktų"
+
+#. R/packages.R: stop("ill-formed 'instPkgs' matrix")
+#: R/packages.R:0
+msgid "ill-formed 'instPkgs' matrix"
+msgstr "blogai suformuota 'instPkgs' matrica"
+
+#. R/tar.R: stop("incomplete block on file")
+#. R/tar.R: stop("incomplete block on file")
+#. R/tar.R: stop("incomplete block on file")
+#: R/tar.R:0
+msgid "incomplete block on file"
+msgstr "nebaigtas blokas faile"
+
+#. R/tar.R: stop("incomplete block: rather use gzfile(.) created connection?")
+#: R/tar.R:0
+msgid "incomplete block: rather use gzfile(.) created connection?"
+msgstr "neišsamus blokas: geriau naudoti gzfile(.) sukurtą ryšį?"
+
+#. R/help.search.R: stop("incorrect 'agrep' specification")
+#: R/help.search.R:0
+msgid "incorrect 'agrep' specification"
+msgstr "neteisinga 'agrep' specifikacija"
+
+#. R/help.search.R: stop("incorrect field specification")
+#: R/help.search.R:0
+msgid "incorrect field specification"
+msgstr "neteisinga lauko specifikacija"
+
+#. R/help.search.R: stop("incorrect type specification")
+#. R/help.search.R: stop("incorrect type specification")
+#: R/help.search.R:0
+msgid "incorrect type specification"
+msgstr "neteisinga tipo specifikacija"
+
+#. R/packages2.R: message("inferring 'repos = NULL' from 'pkgs'")
+#. R/packages2.R: message("inferring 'repos = NULL' from 'pkgs'")
+#. R/packages2.R: message("inferring 'repos = NULL' from 'pkgs'")
+#. R/packages2.R: message("inferring 'repos = NULL' from 'pkgs'")
+#: R/packages2.R:0
+msgid "inferring 'repos = NULL' from 'pkgs'"
+msgstr "numanomas 'repos = NULL' iš 'pkgs'"
+
+#. R/packages2.R: gettextf("installation of one or more packages failed,\n  probably %s", paste(sQuote(failed),     collapse = ", "))
+#: R/packages2.R:0
+msgid ""
+"installation of one or more packages failed,\n"
+"  probably %s"
+msgstr ""
+"nepavyko įdiegti vieno ar daugiau paketų,\n"
+"  tikriausiai %s"
+
+#. R/packages2.R: gettextf("installation of package %s had non-zero exit status", sQuote(update[i,     1L]), domain = "R-utils")
+#. R/packages2.R: gettextf("installation of package %s had non-zero exit status", sQuote(update[i,     1L]), domain = "R-utils")
+#: R/packages2.R:0
+msgid "installation of package %s had non-zero exit status"
+msgstr "paketo %s diegimas turėjo ne nulinio išėjimo būseną"
+
+#. R/str.R: gettext("integer", domain = "R-utils")
+#. R/str.R: gettext("integer", domain = "R-utils")
+#: R/str.R:0
+msgid "integer"
+msgstr ""
+
+#. R/aspell.R: gettextf("invalid '%s' argument", "filter")
+#. R/edit.R: gettextf("invalid '%s' argument", "data")
+#. R/edit.R: gettextf("invalid '%s' argument", "modes")
+#. R/edit.R: gettextf("invalid '%s' argument", "x")
+#. R/help.R: gettextf("invalid '%s' argument", "file")
+#. R/packages.R: gettextf("invalid '%s' argument", "filters")
+#. R/packages2.R: gettextf("invalid '%s' argument", "keep_outputs")
+#. R/sock.R: gettextf("invalid '%s' argument", "socket")
+#. R/tar.R: gettextf("invalid '%s' argument", "tarfile")
+#: R/aspell.R:0 R/edit.R:0 R/help.R:0 R/packages.R:0 R/packages2.R:0 R/sock.R:0
+#: R/tar.R:0
+#, fuzzy
+msgid "invalid '%s' argument"
+msgstr "neleistinas argumentas %s"
+
+#. R/write.table.R: gettextf("invalid '%s' specification", "quote")
+#. R/write.table.R: gettextf("invalid '%s' specification", "row.names")
+#. R/write.table.R: gettextf("invalid '%s' specification", "col.names")
+#: R/write.table.R:0
+#, fuzzy
+msgid "invalid '%s' specification"
+msgstr "netinkama 'quote' specifikacija"
+
+#. R/head.R: gettext("invalid 'n' -  must contain at least one non-missing element, got none.",     domain = "R-utils")
+#: R/head.R:0
+msgid "invalid 'n' -  must contain at least one non-missing element, got none."
+msgstr ""
+"neteisingas 'n' - turi būti bent vienas netrūkstamas elementas, negaunamas "
+"nė vienas."
+
+#. R/head.R: gettextf("invalid 'n' - length(n) must be <= length(dim(x)), got %d > %d", len, length(d),     domain = "R-utils")
+#: R/head.R:0
+msgid "invalid 'n' - length(n) must be <= length(dim(x)), got %d > %d"
+msgstr ""
+"neleistinas 'n' - length(n) turi būti < = length(dim(x)), gaunamas %d > %d"
+
+#. R/head.R: gettextf("invalid 'n' - must have length one when dim(x) is NULL, got %d", len, domain = "R-utils")
+#: R/head.R:0
+msgid "invalid 'n' - must have length one when dim(x) is NULL, got %d"
+msgstr ""
+"neleistinas 'n' - ilgis turi būti vienetas, kai dim(x) yra NULL, gaunamas %d"
+
+#. R/packages.R: stop("invalid 'oldPkgs'; must be a character vector or a result from old.packages()")
+#: R/packages.R:0
+msgid ""
+"invalid 'oldPkgs'; must be a character vector or a result from old.packages()"
+msgstr ""
+"negaliojantis 'oldPkgs'; turi būti simbolių vektorius arba rezultatas iš old."
+"packages()"
+
+#. R/read.DIF.R: stop("invalid 'row.names' length")
+#. R/readtable.R: stop("invalid 'row.names' length")
+#: R/read.DIF.R:0 R/readtable.R:0
+msgid "invalid 'row.names' length"
+msgstr "neleistinas 'row.names' ilgis"
+
+#. R/read.DIF.R: stop("invalid 'row.names' specification")
+#. R/readtable.R: stop("invalid 'row.names' specification")
+#: R/read.DIF.R:0 R/readtable.R:0
+msgid "invalid 'row.names' specification"
+msgstr "neleistina 'row.names' specifikacija"
+
+#. R/packages.R: stop("invalid 'type'")
+#. R/packages.R: stop("invalid 'type'")
+#: R/packages.R:0
+msgid "invalid 'type'"
+msgstr "neleistinas 'type'"
+
+#. R/packages.R: stop("invalid 'type'; must be a character string")
+#. R/packages.R: stop("invalid 'type'; must be a character string")
+#. R/packages.R: stop("invalid 'type'; must be a character string")
+#. R/packages.R: stop("invalid 'type'; must be a character string")
+#. R/packages.R: stop("invalid 'type'; must be a character string")
+#. R/packages.R: stop("invalid 'type'; must be a character string")
+#. R/packages2.R: stop("invalid 'type'; must be a character string")
+#: R/packages.R:0 R/packages2.R:0
+msgid "invalid 'type'; must be a character string"
+msgstr "neleistinas 'type'; turi būti simbolių eilutė"
+
+#. R/help.start.R: stop("invalid browser name, check 'options(\"browser\")'.")
+#: R/help.start.R:0
+#, fuzzy
+msgid "invalid browser name, check 'options(\"browser\")'."
+msgstr ""
+"negaliojantis naršyklės pavadinimas, patikrinkite options(\"browser\")."
+
+#. R/str.R: gettextf("invalid components in options(\"str\"): %s", paste(setdiff(names(strO),     oDefs), collapse = ", "))
+#: R/str.R:0
+msgid "invalid components in options(\"str\"): %s"
+msgstr "netinkami komponentai options(\"str\"): %s"
+
+#. R/edit.R: gettextf("invalid factor levels in '%s'", names(out)[i])
+#: R/edit.R:0
+msgid "invalid factor levels in '%s'"
+msgstr "neleistini faktoriaus lygiai, esantys '%s'"
+
+#. R/read.fortran.R: stop("invalid format")
+#: R/read.fortran.R:0
+msgid "invalid format"
+msgstr "neleistinas formatas"
+
+#. R/tar.R: gettextf("invalid gid value replaced by that for user 'nobody'", uid)
+#: R/tar.R:0
+msgid "invalid gid value replaced by that for user 'nobody'"
+msgstr "negaliojanti gid reikšmė pakeista vartotojui 'nobody'"
+
+#. R/edit.R: stop("invalid input matrix")
+#: R/edit.R:0
+msgid "invalid input matrix"
+msgstr "netinkama įvesties matrica"
+
+#. R/tar.R: stop("invalid name field in tarball")
+#: R/tar.R:0
+msgid "invalid name field in tarball"
+msgstr "netinkamas pavadinimo laukas, esantis tarball"
+
+#. R/write.table.R: stop("invalid numbers in 'quote'")
+#: R/write.table.R:0
+msgid "invalid numbers in 'quote'"
+msgstr "netinkami skaičiai, esantys 'quote'"
+
+#. R/read.DIF.R: stop("invalid numeric 'as.is' expression")
+#. R/readtable.R: stop("invalid numeric 'as.is' expression")
+#: R/read.DIF.R:0 R/readtable.R:0
+msgid "invalid numeric 'as.is' expression"
+msgstr "neleistina skaitinė išraiška 'as.is"
+
+#. R/tar.R: stop("invalid octal digit")
+#: R/tar.R:0
+msgid "invalid octal digit"
+msgstr "neleistinas aštuntainis skaitmuo"
+
+#. R/packages.R: stop("invalid options(\"pkgType\"); must be a character string")
+#: R/packages.R:0
+msgid "invalid options(\"pkgType\"); must be a character string"
+msgstr "netinkamos options(\"pkgType\"); turi būti simbolių eilutė"
+
+#. R/str.R: warning("invalid options(\"str\") -- using defaults instead")
+#: R/str.R:0
+msgid "invalid options(\"str\") -- using defaults instead"
+msgstr ""
+"netinkamas options(\"str\") - vietoj to naudojant numatytuosius nustatymus"
+
+#. R/news.R: stop("invalid query")
+#: R/news.R:0
+msgid "invalid query"
+msgstr "netinkama užklausa"
+
+#. R/tar.R: gettextf("invalid uid value replaced by that for user 'nobody'", uid)
+#: R/tar.R:0
+msgid "invalid uid value replaced by that for user 'nobody'"
+msgstr "neteisinga uid reikšmė pakeista vartotojui 'nobody'"
+
+#. R/SweaveDrivers.R: gettextf("invalid value for %s: %s", sQuote(opt), oldval)
+#: R/SweaveDrivers.R:0
+#, fuzzy
+msgid "invalid value for %s: %s"
+msgstr "neleistina %s reikšmė: %s"
+
+#. R/databrowser.R: gettextf("kind '%s' not yet implemented", kind)
+#: R/databrowser.R:0
+msgid "kind '%s' not yet implemented"
+msgstr "'%s' rūšis dar neįgyvendinta"
+
+#. R/str.R: gettextf("length %d", le, domain = "R-utils")
+#: R/str.R:0
+msgid "length %d"
+msgstr ""
+
+#. R/rtags.R: stop("length mismatch: bug in code!", domain = "R-utils")
+#: R/rtags.R:0
+msgid "length mismatch: bug in code!"
+msgstr ""
+
+#. R/sessionInfo.R: gettext("loaded via a namespace (and not attached):", domain = "R-utils")
+#: R/sessionInfo.R:0
+msgid "loaded via a namespace (and not attached):"
+msgstr ""
+
+#. R/sessionInfo.R: gettext("locale:", domain = "R-utils")
+#: R/sessionInfo.R:0
+msgid "locale:"
+msgstr ""
+
+#. R/objects.R: gettextf("locked binding of %s cannot be changed", sQuote(x), domain = "R-utils")
+#: R/objects.R:0
+msgid "locked binding of %s cannot be changed"
+msgstr ""
+
+#. R/str.R: gettext("logical", domain = "R-utils")
+#. R/str.R: gettext("logical", domain = "R-utils")
+#: R/str.R:0
+msgid "logical"
+msgstr ""
+
+#. R/packages.R: gettextf("metadata of %s is corrupt", sQuote(pkgpath))
+#. R/packages.R: gettextf("metadata of %s is corrupt", sQuote(pkgpath))
+#: R/packages.R:0
+msgid "metadata of %s is corrupt"
+msgstr "%s metaduomenys sugadinti"
+
+#. R/indices.R: gettextf("metadata of package '%s' is corrupt", pkg)
+#: R/indices.R:0
+msgid "metadata of package '%s' is corrupt"
+msgstr "paketo '%s' metaduomenys sugadinti"
+
+#. R/unix/download.file.R: stop("method 'lynx' is defunct", domain = "R-utils")
+#. R/windows/download.file.R: stop("method 'lynx' is defunct", domain = "R-utils")
+#: R/unix/download.file.R:0 R/windows/download.file.R:0
+#, fuzzy
+msgid "method 'lynx' is defunct"
+msgstr "metodas 'mailx' yra tik Unix"
+
+#. R/windows/create.post.R: stop("method 'mailx' is Unix-only")
+#: R/windows/create.post.R:0
+msgid "method 'mailx' is Unix-only"
+msgstr "metodas 'mailx' yra tik Unix"
+
+#. R/citation.R: gettextf("method is only applicable to %s objects", sQuote("person"))
+#. R/citation.R: gettextf("method is only applicable to %s objects", sQuote("bibentry"))
+#: R/citation.R:0
+msgid "method is only applicable to %s objects"
+msgstr "metodas taikomas tik %s objektams"
+
+#. R/read.fortran.R: stop("missing lengths for some fields")
+#: R/read.fortran.R:0
+msgid "missing lengths for some fields"
+msgstr "trūksta ilgių kai kuriuose laukuose"
+
+#. R/read.DIF.R: stop("missing values in 'row.names' are not allowed")
+#. R/readtable.R: stop("missing values in 'row.names' are not allowed")
+#: R/read.DIF.R:0 R/readtable.R:0
+msgid "missing values in 'row.names' are not allowed"
+msgstr "trūkstamos reikšmės 'row.names' neleidžiamos"
+
+#. R/read.DIF.R: stop("more column names than columns")
+#. R/readtable.R: stop("more column names than columns")
+#: R/read.DIF.R:0 R/readtable.R:0
+msgid "more column names than columns"
+msgstr "daugiau stulpelių pavadinimų nei stulpelių"
+
+#. R/read.DIF.R: stop("more columns than column names")
+#. R/readtable.R: stop("more columns than column names")
+#: R/read.DIF.R:0 R/readtable.R:0
+msgid "more columns than column names"
+msgstr "daugiau stulpelių nei stulpelių pavadinimų"
+
+#. R/Sweave.R: warning("more than one syntax specification found, using the first one", domain = "R-utils")
+#: R/Sweave.R:0
+msgid "more than one syntax specification found, using the first one"
+msgstr "rasta daugiau nei viena sintaksės specifikacija, naudojant pirmąją"
+
+#. R/progressBar.R: stop("must have 'max' > 'min'")
+#: R/progressBar.R:0
+msgid "must have 'max' > 'min'"
+msgstr "turi būti 'max' > 'min'"
+
+#. R/unix/create.post.R: stop("must specify 'address'")
+#. R/unix/create.post.R: stop("must specify 'address'")
+#. R/windows/create.post.R: stop("must specify 'address'")
+#: R/unix/create.post.R:0 R/windows/create.post.R:0
+msgid "must specify 'address'"
+msgstr "turi būti nurodytas 'address'"
+
+#. R/objects.R: stop("must supply 'generic.function' or 'class' argument")
+#: R/objects.R:0
+#, fuzzy
+msgid "must supply 'generic.function' or 'class' argument"
+msgstr "turi pateikti 'generic.function' arba 'class'"
+
+#. R/data.R: gettextf("name=%s:\t file= ... %s::\t%s", name, .Platform$file.sep, basename(file))
+#: R/data.R:0
+msgid "name=%s:\t file= ... %s::\t%s"
+msgstr ""
+
+#. R/data.R: gettextf("name=%s: NOT found in names() of Rdata.rds, i.e.,\n\t%s", name, paste(names(rds),     collapse = ","))
+#: R/data.R:0
+msgid ""
+"name=%s: NOT found in names() of Rdata.rds, i.e.,\n"
+"\t%s"
+msgstr ""
+
+#. R/data.R: gettextf("name=%s: found in Rdata.rds", name, domain = "R-utils")
+#: R/data.R:0
+msgid "name=%s: found in Rdata.rds"
+msgstr ""
+
+#. R/indices.R: gettextf("no %s found", tolower(x$title))
+#: R/indices.R:0
+#, fuzzy
+msgid "no %s found"
+msgstr "Komanda %s nerasta"
+
+#. R/package.skeleton.R: stop("no R objects specified or available")
+#: R/package.skeleton.R:0
+msgid "no R objects specified or available"
+msgstr "nenurodyti arba nepasiekiami R objektai"
+
+#. R/Sweave.R: gettextf("no Sweave file with name %s found", sQuote(file[1L]))
+#: R/Sweave.R:0
+msgid "no Sweave file with name %s found"
+msgstr "nerastas Sweave failas, kurio pavadinimas %s"
+
+#. R/citation.R: gettextf("no date field in DESCRIPTION file of package %s", sQuote(package))
+#: R/citation.R:0
+msgid "no date field in DESCRIPTION file of package %s"
+msgstr "paketo %s DESCRIPTION faile nėra datos lauko"
+
+#. R/RShowDoc.R: gettextf("no documentation for %s found in package %s", sQuote(what), sQuote(package))
+#: R/RShowDoc.R:0
+msgid "no documentation for %s found in package %s"
+msgstr "jokių dokumentų, skirtų %s pakete %s nerasta"
+
+#. R/question.R: gettextf("no documentation for function %s and signature %s", sQuote(f), sQuote(sigFormat(sigNames,     sigClasses)))
+#: R/question.R:0
+msgid "no documentation for function %s and signature %s"
+msgstr "nėra funkcijos %s ir parašo %s dokumentų"
+
+#. R/question.R: gettextf("no documentation of type %s and topic %s (or error in processing help)",     sQuote(type), sQuote(topicExpr))
+#: R/question.R:0
+msgid "no documentation of type %s and topic %s (or error in processing help)"
+msgstr "nėra %s tipo dokumentų ir temos %s (arba klaida apdorojant žinyną)"
+
+#. R/summRprof.R: stop("no events were recorded")
+#: R/summRprof.R:0
+msgid "no events were recorded"
+msgstr "nebuvo užregistruota jokių įvykių"
+
+#. R/objects.R: gettextf("no function '%s' could be found", f)
+#: R/objects.R:0
+msgid "no function '%s' could be found"
+msgstr "nepavyko rasti funkcijos '%s'"
+
+#. R/objects.R: gettextf("no function '%s' is visible", generic.function)
+#: R/objects.R:0
+msgid "no function '%s' is visible"
+msgstr "nematoma jokia funkcija '%s'"
+
+#. R/example.R: gettextf("no help found for %s", sQuote(topic))
+#: R/example.R:0
+msgid "no help found for %s"
+msgstr "nerasta %s žinyno"
+
+#. R/help.search.R: gettextf("no hsearch.rds meta data for package %s", sQuote(p))
+#: R/help.search.R:0
+msgid "no hsearch.rds meta data for package %s"
+msgstr ""
+
+#. R/help.search.R: gettextf("no information in the database for package %s: need 'rebuild = TRUE'?",     sQuote(package[pos_in_hsearch_db == 0][1L]))
+#: R/help.search.R:0
+msgid "no information in the database for package %s: need 'rebuild = TRUE'?"
+msgstr "nėra informacijos duomenų bazėje paketui %s: reikia 'rebuild = TRUE'?"
+
+#. R/packages.R: gettextf("no installed packages for (invalid?) 'lib.loc=%s'", lib.loc)
+#: R/packages.R:0
+msgid "no installed packages for (invalid?) 'lib.loc=%s'"
+msgstr "nėra įdiegtų paketų (neteisingas?) 'lib.loc=%s'"
+
+#. R/read.DIF.R: stop("no lines available in input")
+#. R/readtable.R: stop("no lines available in input")
+#: R/read.DIF.R:0 R/readtable.R:0
+msgid "no lines available in input"
+msgstr "nėra įvesties eilučių"
+
+#. R/summRprof.R: gettextf("no lines found in %s", sQuote(filename))
+#: R/summRprof.R:0
+msgid "no lines found in %s"
+msgstr "%s nerasta eilučių"
+
+#. R/question.R: gettextf("no method defined for function %s and signature %s", sQuote(f), sQuote(sigFormat(sigNames,     sigClasses)))
+#: R/question.R:0
+msgid "no method defined for function %s and signature %s"
+msgstr "nenurodytas funkcijos %s ir parašo %s metodas"
+
+#. R/head.R: gettextf("no method found for %s(., n=%s) and class %s", "head", deparse(n), sQuote(class(x)))
+#. R/head.R: gettextf("no method found for %s(., n=%s) and class %s", "tail", deparse(n), sQuote(class(x)))
+#: R/head.R:0
+msgid "no method found for %s(., n=%s) and class %s"
+msgstr "nerastas metodas %s(., n=%s) ir klasei %s"
+
+#. R/question.R: gettextf("no methods for %s and no documentation for it as a function", sQuote(f))
+#: R/question.R:0
+msgid "no methods for %s and no documentation for it as a function"
+msgstr "nėra %s metodų ir nėra dokumentų, skirtų funkcijai"
+
+#. R/objects.R: gettext("no methods found", domain = "R-utils")
+#: R/objects.R:0
+#, fuzzy
+msgid "no methods found"
+msgstr "nerastas atsisiuntimo metodas"
+
+#. R/packages.R: message("no new packages are available")
+#: R/packages.R:0
+msgid "no new packages are available"
+msgstr "nėra naujų paketų"
+
+#. R/objects.R: gettextf("no object named %s was found", sQuote(x$name), domain = "R-utils")
+#: R/objects.R:0
+#, fuzzy
+msgid "no object named %s was found"
+msgstr "nėra rodytino objekto pavadinimu '%s'"
+
+#. R/page.R: gettextf("no object named '%s' to show", x)
+#: R/page.R:0
+msgid "no object named '%s' to show"
+msgstr "nėra rodytino objekto pavadinimu '%s'"
+
+#. R/packages.R: gettextf("no package %s at the repositories", sQuote(p))
+#: R/packages.R:0
+msgid "no package %s at the repositories"
+msgstr "saugyklose nėra paketo %s"
+
+#. R/indices.R: gettextf("no package '%s' was found", pkg)
+#: R/indices.R:0
+msgid "no package '%s' was found"
+msgstr "nerastas paketas '%s'"
+
+#. R/packages2.R: stop("no packages were specified")
+#. R/packages2.R: stop("no packages were specified")
+#: R/packages2.R:0
+msgid "no packages were specified"
+msgstr "nebuvo nurodyta jokių paketų"
+
+#. R/sessionInfo.R: stop("no valid packages were specified")
+#: R/sessionInfo.R:0
+msgid "no valid packages were specified"
+msgstr "nebuvo nurodyta jokių galiojančių paketų"
+
+#. R/frametools.R: stop("no vector columns were selected")
+#: R/frametools.R:0
+msgid "no vector columns were selected"
+msgstr "nepasirinkta jokių vektorinių stulpelių"
+
+#. R/frametools.R: warning("non-vector columns will be ignored")
+#: R/frametools.R:0
+msgid "non-vector columns will be ignored"
+msgstr "nevektorinių stulpelių bus nepaisoma"
+
+#. R/frametools.R: warning("non-vector elements will be ignored")
+#: R/frametools.R:0
+msgid "non-vector elements will be ignored"
+msgstr "nevektoriaus elementų bus nepaisoma"
+
+#. R/read.DIF.R: warning("not all columns named in 'as.is' exist")
+#. R/readtable.R: warning("not all columns named in 'as.is' exist")
+#: R/read.DIF.R:0 R/readtable.R:0
+msgid "not all columns named in 'as.is' exist"
+msgstr "yra ne visi stulpeliai, pavadinti 'as.is'"
+
+#. R/read.DIF.R: warning("not all columns named in 'colClasses' exist")
+#. R/readtable.R: warning("not all columns named in 'colClasses' exist")
+#: R/read.DIF.R:0 R/readtable.R:0
+msgid "not all columns named in 'colClasses' exist"
+msgstr "yra ne visi stulpeliai, pavadinti 'colClasses'"
+
+#. R/str.R: gettext("numeric", domain = "R-utils")
+#. R/str.R: gettext("numeric", domain = "R-utils")
+#. R/str.R: gettext("numeric", domain = "R-utils")
+#: R/str.R:0
+msgid "numeric"
+msgstr ""
+
+#. R/Sweave.R: gettextf("object %s does not have class \"SweaveSyntax\"", sQuote(sname))
+#: R/Sweave.R:0
+msgid "object %s does not have class \"SweaveSyntax\""
+msgstr "objektas %s neturi klasės \"SweaveSyntax\""
+
+#. R/databrowser.R: stop("only 'html = TRUE' is supported on this platform")
+#: R/databrowser.R:0
+msgid "only 'html = TRUE' is supported on this platform"
+msgstr "tik 'html = TRUE' palaiko šią platformą"
+
+#. R/objects.R: stop("only numeric indices can be used")
+#: R/objects.R:0
+msgid "only numeric indices can be used"
+msgstr "galima naudoti tik skaitinius indeksus"
+
+#. R/unix/create.post.R: gettext("opening the mailer failed, so reverting to 'mailer=\"none\"'")
+#. R/windows/create.post.R: gettext("opening the mailer failed, so reverting to 'mailer=\"none\"'")
+#: R/unix/create.post.R:0 R/windows/create.post.R:0
+#, fuzzy
+msgid "opening the mailer failed, so reverting to 'mailer=\"none\"'"
+msgstr ""
+"nepavyksta rasti programos, kad atidarytumėte 'mailto:' URI: grįžtate prie "
+"'method=\"none\"'"
+
+#. R/sessionInfo.R: gettext("other attached packages:", domain = "R-utils")
+#: R/sessionInfo.R:0
+msgid "other attached packages:"
+msgstr ""
+
+#. R/packages.R: gettextf("package %s does not exist on the local repository", sQuote(p))
+#: R/packages.R:0
+msgid "package %s does not exist on the local repository"
+msgstr "paketo %s vietinėje saugykloje nėra"
+
+#. R/help.R: gettextf("package %s exists but was not installed under R >= 2.10.0 so help cannot be accessed",     sQuote(pkgname))
+#: R/help.R:0
+msgid ""
+"package %s exists but was not installed under R >= 2.10.0 so help cannot be "
+"accessed"
+msgstr ""
+"paketas %s yra, bet nebuvo įdiegtas R >= 2.10.0, todėl žinyno pasiekti "
+"negalima"
+
+#. R/help.search.R: gettextf("package %s has empty hsearch data - strangely", sQuote(p))
+#: R/help.search.R:0
+msgid "package %s has empty hsearch data - strangely"
+msgstr "paketas %s turi tuščius hsearch duomenis"
+
+#. R/packages.R: gettextf("package %s in library %s will not be updated", sQuote(oldPkgs[pkg]), sQuote(oldPkgs[pkg,     2]))
+#: R/packages.R:0
+#, fuzzy
+msgid "package %s in library %s will not be updated"
+msgstr "paketas '%s' bibliotekoje '%s' nebus atnaujintas"
+
+#. R/unix/mac.install.R: gettextf("package %s successfully unpacked and MD5 sums checked", sQuote(pkgname))
+#. R/windows/install.packages.R: gettextf("package %s successfully unpacked and MD5 sums checked", sQuote(pkgname),     domain = "R-utils")
+#: R/unix/mac.install.R:0 R/windows/install.packages.R:0
+msgid "package %s successfully unpacked and MD5 sums checked"
+msgstr "paketas %s sėkmingai išpakuotas ir MD5 sumos patikrintos"
+
+#. R/packages.R: gettextf("packages %s are mutually dependent", paste(sQuote(names(DL)), collapse = ", "))
+#: R/packages.R:0
+msgid "packages %s are mutually dependent"
+msgstr "paketai %s priklauso vienas nuo kito"
+
+#. R/Sweave.R: gettextf("parse error or empty option in %s", text)
+#: R/Sweave.R:0
+#, fuzzy
+msgid "parse error or empty option in %s"
+msgstr ""
+"analizavimo klaida arba tuščia parinktis, esanti\n"
+"%s"
+
+#. R/tar.R: stop("path contains '..'")
+#: R/tar.R:0
+msgid "path contains '..'"
+msgstr "kelias turi '..'"
+
+#. R/tar.R: stop("path is empty")
+#: R/tar.R:0
+msgid "path is empty"
+msgstr "kelias yra tuščias"
+
+#. R/tar.R: stop("path starts with '~'")
+#: R/tar.R:0
+msgid "path starts with '~'"
+msgstr "kelias prasideda '~'"
+
+#. R/SweaveDrivers.R: gettextf("path to %s contains spaces, this may cause problems when running LaTeX",     sQuote(styfile))
+#: R/SweaveDrivers.R:0
+#, fuzzy
+msgid "path to %s contains spaces, this may cause problems when running LaTeX"
+msgstr "tai gali sukelti problemų, kai veikia LaTeX"
+
+#. R/summRprof.R: stop("profile does not contain line information")
+#: R/summRprof.R:0
+msgid "profile does not contain line information"
+msgstr "profilyje nėra eilutės informacijos"
+
+#. R/summRprof.R: stop("profile does not contain memory information")
+#: R/summRprof.R:0
+msgid "profile does not contain memory information"
+msgstr "profilyje nėra atminties informacijos"
+
+#. R/debugger.R: gettext("recover called non-interactively; frames dumped, use debugger() to view",     domain = "R-utils")
+#: R/debugger.R:0
+msgid "recover called non-interactively; frames dumped, use debugger() to view"
+msgstr ""
+"susigrąžinti iškvietimą ne interaktyviai; sistemos išmestos, naudoti "
+"debugger(), kad peržiūrėti"
+
+#. R/Sweave.R: gettextf("recursive Sweave input %s in stack", sQuote(ifile), domain = "R-utils")
+#: R/Sweave.R:0
+msgid "recursive Sweave input %s in stack"
+msgstr "rekursivi Sweave įvestis dėkle %s"
+
+#. R/help.search.R: message("reencoding ...", appendLF = FALSE, domain = "R-utils")
+#: R/help.search.R:0
+msgid "reencoding ..."
+msgstr ""
+
+#. R/Sweave.R: gettextf("reference to unknown chunk %s", sQuote(chunkref))
+#: R/Sweave.R:0
+msgid "reference to unknown chunk %s"
+msgstr "nuoroda į nežinomą segmentą %s"
+
+#. R/objects.R: gettextf("registered S3 method for %s", gen)
+#: R/objects.R:0
+msgid "registered S3 method for %s"
+msgstr ""
+
+#. R/objects.R: gettextf("registered S3 method for %s from namespace %s", gen, nmev)
+#: R/objects.R:0
+msgid "registered S3 method for %s from namespace %s"
+msgstr ""
+
+#. R/objects.R: gettext("registered S3method", domain = "R-utils")
+#: R/objects.R:0
+msgid "registered S3method"
+msgstr ""
+
+#. R/objects.R: gettextf("registered S3method for %s", generic.function, domain = "R-utils")
+#: R/objects.R:0
+msgid "registered S3method for %s"
+msgstr ""
+
+#. R/help.search.R: warning("removing all entries with invalid multi-byte character data")
+#: R/help.search.R:0
+msgid "removing all entries with invalid multi-byte character data"
+msgstr "pašalinti visus įrašus su neleistinais kelių baitų simbolių duomenimis"
+
+#. R/tar.R: gettextf("removing drive '%s'", drv)
+#: R/tar.R:0
+msgid "removing drive '%s'"
+msgstr "šalinant diską '%s'"
+
+#. R/tar.R: warning("removing leading '/'")
+#: R/tar.R:0
+msgid "removing leading '/'"
+msgstr "pašalinti priekinį '/'"
+
+#. R/unix/mac.install.R: gettextf("restored %s", sQuote(pkgname))
+#. R/windows/install.packages.R: gettextf("restored %s", sQuote(pkgname))
+#: R/unix/mac.install.R:0 R/windows/install.packages.R:0
+msgid "restored %s"
+msgstr "atkurta %s"
+
+#. R/tar.R: gettext("restoring symbolic link as a file copy")
+#. R/tar.R: gettext("restoring symbolic link as a file copy")
+#: R/tar.R:0
+msgid "restoring symbolic link as a file copy"
+msgstr ""
+
+#. R/read.DIF.R: stop("row and column counts not found")
+#: R/read.DIF.R:0
+msgid "row and column counts not found"
+msgstr "eilučių ir stulpelių skaičius nerastas"
+
+#. R/read.DIF.R: stop("rows are empty: giving up")
+#: R/read.DIF.R:0
+msgid "rows are empty: giving up"
+msgstr "eilutės yra tuščios: atsisakyti"
+
+#. R/help.search.R: message("saving the database ...", appendLF = FALSE, domain = "R-utils")
+#: R/help.search.R:0
+#, fuzzy
+msgid "saving the database ..."
+msgstr "Naudojant pirmąjį sutapimą ..."
+
+#. R/objects.R: gettext("see '?methods' for accessing help and source code", domain = "R-utils")
+#: R/objects.R:0
+msgid "see '?methods' for accessing help and source code"
+msgstr ""
+
+#. R/tar.R: gettext("skipping devices")
+#: R/tar.R:0
+#, fuzzy
+msgid "skipping devices"
+msgstr "praleidžiant priklausomybes"
+
+#. R/tar.R: gettext("skipping fifos")
+#: R/tar.R:0
+#, fuzzy
+msgid "skipping fifos"
+msgstr "praleidžiant priklausomybes"
+
+#. R/tar.R: gettext("skipping pax global extended headers")
+#: R/tar.R:0
+msgid "skipping pax global extended headers"
+msgstr ""
+
+#. R/sock.R: stop("socket not established")
+#. R/sock.R: warning("socket not established")
+#: R/sock.R:0
+msgid "socket not established"
+msgstr "prievadas nenustatytas"
+
+#. R/packages2.R: message("source repository is unavailable to check versions")
+#: R/packages2.R:0
+msgid "source repository is unavailable to check versions"
+msgstr "šaltinio saugykla nepasiekiama versijoms tikrinti"
+
+#. R/packages.R: stop("specifying 'contriburl' or 'available' requires a single type, not type = \"both\"")
+#. R/packages.R: stop("specifying 'contriburl' or 'available' requires a single type, not type = \"both\"")
+#. R/packages2.R: stop("specifying 'contriburl' or 'available' requires a single type, not type = \"both\"")
+#: R/packages.R:0 R/packages2.R:0
+msgid ""
+"specifying 'contriburl' or 'available' requires a single type, not type = "
+"\"both\""
+msgstr ""
+"'contriburl' or 'available' nurodymas reikalauja vieno tipo, o ne type = "
+"\"both\""
+
+#. R/tar.R: gettextf("storing paths of more than 100 bytes is not portable:\n  %s", sQuote(f))
+#: R/tar.R:0
+msgid ""
+"storing paths of more than 100 bytes is not portable:\n"
+"  %s"
+msgstr ""
+
+#. R/str.R: warning("str.data.frame() called with non-data.frame -- coercing to one.")
+#: R/str.R:0
+msgid "str.data.frame() called with non-data.frame -- coercing to one."
+msgstr "str.data.frame() iškviestas su non-data.frame -- versti į vieną."
+
+#. R/citation.R: warning("subscript out of bounds")
+#: R/citation.R:0
+msgid "subscript out of bounds"
+msgstr "indeksas nepatenka į sritis"
+
+#. R/packages2.R: gettextf("system (cmd0): %s", paste(c(cmd0, args0), collapse = " "))
+#: R/packages2.R:0
+msgid "system (cmd0): %s"
+msgstr "sistema (cmd0): %s"
+
+#. R/sessionInfo.R: gettext("system code page: ", domain = "R-utils")
+#: R/sessionInfo.R:0
+msgid "system code page:"
+msgstr ""
+
+#. R/head.R: gettext("tail(., addrownums = V) is deprecated.\nUse ", "tail(., keepnums = V) instead.\n")
+#: R/head.R:0
+msgid ""
+"tail(., addrownums = V) is deprecated.\n"
+"Use"
+msgstr ""
+"tail(., addrownums = V) yra pasenusi.\n"
+"Naudoti"
+
+#. R/head.R: gettext("tail(., addrownums=.) is deprecated.\nUse tail(., keepnums=.) instead.\n",     domain = "R-utils")
+#: R/head.R:0
+#, fuzzy
+msgid ""
+"tail(., addrownums=.) is deprecated.\n"
+"Use tail(., keepnums=.) instead."
+msgstr ""
+"tail(., addrownums = V) yra pasenusi.\n"
+"Naudoti"
+
+#. R/head.R: gettext("tail(., addrownums = V) is deprecated.\nUse ", "tail(., keepnums = V) instead.\n")
+#: R/head.R:0
+msgid "tail(., keepnums = V) instead."
+msgstr "tail(., keepnums = V) vietoj."
+
+#. R/Sweave.R: stop("target syntax contains no translation table")
+#: R/Sweave.R:0
+msgid "target syntax contains no translation table"
+msgstr "paskirties sintaksėje nėra vertimo lentelės"
+
+#. R/Sweave.R: gettextf("target syntax not of class %s", dQuote("SweaveSyntax"))
+#: R/Sweave.R:0
+msgid "target syntax not of class %s"
+msgstr "paskirties sintaksė nėra klasės %s"
+
+#. R/question.R: gettextf("the object of class %s in the function call %s could not be used as a documentation topic",     dQuote(class(f)), sQuote(deparse(expr)))
+#: R/question.R:0
+msgid ""
+"the object of class %s in the function call %s could not be used as a "
+"documentation topic"
+msgstr ""
+"klasės %s funkcijos iškvietimo %s objekto nepavyko naudoti kaip "
+"dokumentacijos temos"
+
+#. R/question.R: gettext("the oracle is unavailable.\nWe apologize for any inconvenience.", domain = "R-utils")
+#: R/question.R:0
+msgid ""
+"the oracle is unavailable.\n"
+"We apologize for any inconvenience."
+msgstr ""
+
+#. R/SweaveDrivers.R: gettextf("the output file '%s' has disappeared", outputname)
+#: R/SweaveDrivers.R:0
+msgid "the output file '%s' has disappeared"
+msgstr "išvesties failas '%s' dingo"
+
+#. R/unix/create.post.R: gettext("the relevant mailing list", domain = "R-utils")
+#. R/windows/create.post.R: gettext("the relevant mailing list", domain = "R-utils")
+#: R/unix/create.post.R:0 R/windows/create.post.R:0
+msgid "the relevant mailing list"
+msgstr ""
+
+#. R/windows/install.packages.R: gettextf("there is no 'libs' directory in package %s", sQuote(pkgname))
+#: R/windows/install.packages.R:0
+msgid "there is no 'libs' directory in package %s"
+msgstr "pakete %s nėra katalogo 'libs'"
+
+#. R/packages2.R: warning("timeouts for parallel installs require the 'timeout' command")
+#: R/packages2.R:0
+msgid "timeouts for parallel installs require the 'timeout' command"
+msgstr "lygiagrečių diegimų laukimas laikas reikalauja 'timeout' komandos"
+
+#. R/format.R: gettextf("too many list items (at most up to %d)", 26L)
+#. R/format.R: gettextf("too many list items (at most up to %d)", 3899L)
+#: R/format.R:0
+msgid "too many list items (at most up to %d)"
+msgstr "per daug sąrašo elementų (daugiausia iki %d)"
+
+#. R/readhttp.R: stop("transfer failure")
+#: R/readhttp.R:0
+msgid "transfer failure"
+msgstr "perdavimo triktis"
+
+#. R/packages.R: stop("trying to use CRAN without setting a mirror", domain = "R-utils")
+#: R/packages.R:0
+msgid "trying to use CRAN without setting a mirror"
+msgstr "bandymas naudoti CRAN be dublikato nustatymo"
+
+#. R/packages2.R: stop("type 'binary' is not supported on this platform")
+#: R/packages2.R:0
+msgid "type 'binary' is not supported on this platform"
+msgstr "tipas 'binary' nepalaikomas šioje platformoje"
+
+#. R/packages2.R: stop("type == \"both\" cannot be used with 'repos = NULL'")
+#: R/packages2.R:0
+msgid "type == \"both\" cannot be used with 'repos = NULL'"
+msgstr "type == \"both\" negali būti naudojami su 'repos = NULL'"
+
+#. R/packages.R: gettextf("unable to access index for repository %s", repos, domain = "R-utils")
+#: R/packages.R:0
+msgid "unable to access index for repository %s"
+msgstr "nepavyko pasiekti saugyklos %s indekso"
+
+#. R/windows/install.packages.R: gettextf("unable to copy temporary installation %s to %s", sQuote(normalizePath(tmpInstPath,     mustWork = FALSE)), sQuote(normalizePath(instPath, mustWork = FALSE)))
+#: R/windows/install.packages.R:0
+msgid "unable to copy temporary installation %s to %s"
+msgstr "neįmanoma perkelti laikino diegimo %s į %s"
+
+#. R/packages2.R: gettextf("unable to create %s", sQuote(userdir))
+#. R/packages2.R: gettextf("unable to create %s", sQuote(keep_outputs))
+#: R/packages2.R:0
+msgid "unable to create %s"
+msgstr "nepavyko sukurti %s"
+
+#. R/packages2.R: gettextf("unable to create temporary directory %s", sQuote(tmpd))
+#. R/packages2.R: gettextf("unable to create temporary directory %s", sQuote(tmpd))
+#. R/packages2.R: gettextf("unable to create temporary directory %s", sQuote(tmpd2))
+#. R/packages2.R: gettextf("unable to create temporary directory %s", sQuote(tmpd2))
+#. R/unix/mac.install.R: gettextf("unable to create temporary directory %s", sQuote(tmpDir))
+#. R/unix/mac.install.R: gettextf("unable to create temporary directory %s", sQuote(tmpd))
+#. R/windows/install.packages.R: gettextf("unable to create temporary directory %s", sQuote(normalizePath(tmpDir,     mustWork = FALSE)))
+#. R/windows/install.packages.R: gettextf("unable to create temporary directory %s", sQuote(normalizePath(tmpd, mustWork = FALSE)))
+#: R/packages2.R:0 R/unix/mac.install.R:0 R/windows/install.packages.R:0
+msgid "unable to create temporary directory %s"
+msgstr "nepavyko sukurti laikino katalogo %s"
+
+#. R/packages2.R: stop("unable to install packages")
+#. R/packages2.R: stop("unable to install packages")
+#. R/packages2.R: stop("unable to install packages")
+#: R/packages2.R:0
+msgid "unable to install packages"
+msgstr "nepavyksta įdiegti paketų"
+
+#. R/unix/mac.install.R: gettextf("unable to move temporary installation %s to %s", sQuote(file.path(tmpDir,     pkgname)), sQuote(instPath))
+#. R/windows/install.packages.R: gettextf("unable to move temporary installation %s to %s", sQuote(normalizePath(file.path(tmpDir,     pkgname, "libs", sub), mustWork = FALSE)), sQuote(normalizePath(file.path(instPath,     "libs"), mustWork = FALSE)))
+#. R/windows/install.packages.R: gettextf("unable to move temporary installation %s to %s", sQuote(normalizePath(tmpInstPath,     mustWork = FALSE)), sQuote(normalizePath(instPath, mustWork = FALSE)))
+#: R/unix/mac.install.R:0 R/windows/install.packages.R:0
+msgid "unable to move temporary installation %s to %s"
+msgstr "neįmanoma perkelti laikino diegimo %s į %s"
+
+#. R/windows/install.packages.R: gettextf("unable to move temporary installation %s to %s, copying instead", sQuote(normalizePath(tmpInstPath,     mustWork = FALSE)), sQuote(normalizePath(instPath, mustWork = FALSE)))
+#: R/windows/install.packages.R:0
+msgid "unable to move temporary installation %s to %s, copying instead"
+msgstr "neįmanoma perkelti laikino diegimo %s į %s, vietoj to kopijuojant"
+
+#. R/tar.R: gettextf("unsupported entry type %s", sQuote(ctype))
+#: R/tar.R:0
+#, fuzzy
+msgid "unsupported entry type %s"
+msgstr "nepalaikomas įrašo tipas"
+
+#. R/tar.R: gettextf("untar: using cmd = %s", sQuote(cmd))
+#. R/tar.R: gettextf("untar: using cmd = %s", sQuote(cmd))
+#: R/tar.R:0
+msgid "untar: using cmd = %s"
+msgstr ""
+
+#. R/tar.R: gettext("using GNU extension for long linkname")
+#: R/tar.R:0
+msgid "using GNU extension for long linkname"
+msgstr ""
+
+#. R/tar.R: gettext("using GNU extension for long pathname")
+#: R/tar.R:0
+msgid "using GNU extension for long pathname"
+msgstr ""
+
+#. R/tar.R: gettext("using pax extended headers")
+#: R/tar.R:0
+msgid "using pax extended headers"
+msgstr ""
+
+#. R/SweaveDrivers.R: warning("value of 'results' option should be lowercase", call. = FALSE)
+#: R/SweaveDrivers.R:0
+msgid "value of 'results' option should be lowercase"
+msgstr "'results' parinkties reikšmė turėtų būti mažosiomis raidėmis"
+
+#. R/SweaveDrivers.R: warning("value of 'strip.white' option should be lowercase", call. = FALSE)
+#: R/SweaveDrivers.R:0
+msgid "value of 'strip.white' option should be lowercase"
+msgstr "'strip.white' parinkties vertė turėtų būti mažosiomis raidėmis"
+
+#. R/vignette.R: gettextf("vignette %s found more than once,\nusing the one found in %s", sQuote(topic),     sQuote(file.path(vinfo[pos, "Dir"], "doc")))
+#: R/vignette.R:0
+msgid ""
+"vignette %s found more than once,\n"
+"using the one found in %s"
+msgstr ""
+"vinjetė %s rasta daugiau nei vieną kartą,\n"
+"naudojant tą, kuri randama %s"
+
+#. R/vignette.R: gettextf("vignette %s has no PDF/HTML", sQuote(x$Topic))
+#: R/vignette.R:0
+msgid "vignette %s has no PDF/HTML"
+msgstr "vinjetė %s neturi PDF/HTML"
+
+#. R/vignette.R: gettextf("vignette %s has no R code", sQuote(x$Topic))
+#: R/vignette.R:0
+msgid "vignette %s has no R code"
+msgstr "vinjetė %s neturi R kodo"
+
+#. R/vignette.R: gettextf("vignette %s not found", sQuote(topic))
+#: R/vignette.R:0
+msgid "vignette %s not found"
+msgstr "vinjetė %s nerasta"
+
+#. R/windows/winDialog.R: stop("winDialog() cannot be used non-interactively")
+#: R/windows/winDialog.R:0
+msgid "winDialog() cannot be used non-interactively"
+msgstr "winDialog() negali būti naudojamas ne interaktyviai"
+
+#. R/windows/winDialog.R: stop("winDialogString() cannot be used non-interactively")
+#: R/windows/winDialog.R:0
+msgid "winDialogString() cannot be used non-interactively"
+msgstr "winDialogString() negalima naudoti ne interaktyviai"
+
+#. R/de.R: stop("wrong argument passed to 'dataentry'")
+#. R/de.R: stop("wrong argument passed to 'dataentry'")
+#. R/de.R: stop("wrong argument passed to 'dataentry'")
+#: R/de.R:0
+#, fuzzy
+msgid "wrong argument passed to 'dataentry'"
+msgstr "neteisingas argumentas į 'dataentry'"
+
+#. R/databrowser.R: stop("wrong number of table row entries")
+#: R/databrowser.R:0
+msgid "wrong number of table row entries"
+msgstr "neteisingas lentelės eilutės įrašų skaičius"
+
+#. R/windows/install.packages.R: gettextf("zip file %s not found", sQuote(zipname))
+#: R/windows/install.packages.R:0
+msgid "zip file %s not found"
+msgstr "zip failas %s nerastas"
+
+#. R/data.R: gettextf("zipped data found for package %s.\nThat is defunct, so please re-install the package.",     sQuote(basename(dirname(p))))
+#: R/data.R:0
+msgid ""
+"zipped data found for package %s.\n"
+"That is defunct, so please re-install the package."
+msgstr ""
+
+#. R/str.R: gettext("| __truncated__")
+#: R/str.R:0
+msgid "| __truncated__"
+msgstr ""
+
+#. R/str.R: ngettext(length(sNms), " and %d slot", " and %d slots", domain = "R-utils")
+#: R/str.R:0
+msgid " and %d slot"
+msgid_plural " and %d slots"
+msgstr[0] ""
+msgstr[1] ""
+msgstr[2] ""
+
+#. R/Sweave.R: ngettext(length(f), "%d Sweave file for basename %s found", "%d Sweave files for basename %s found",     domain = "R-utils")
+#: R/Sweave.R:0
+msgid "%d Sweave file for basename %s found"
+msgid_plural "%d Sweave files for basename %s found"
+msgstr[0] "Rastas %d Sweave failas, skirtas pagrindiniam vardui %s"
+msgstr[1] "Rasti %d Sweave failai, skirti pagrindiniam vardui %s"
+msgstr[2] "Rasta %d Sweave failų, skirtų pagrindiniam vardui %s"
+
+#. R/object.size.R: ngettext(as.integer(x), "%d byte", "%d bytes", domain = "R-utils")
+#: R/object.size.R:0
+msgid "%d byte"
+msgid_plural "%d bytes"
+msgstr[0] ""
+msgstr[1] ""
+msgstr[2] ""
+
+#. R/objects.R: ngettext(n, "%d differing object matching %s was found\nin the following places:",     "%d differing objects matching %s were found\nin the following places:", domain = "R-utils")
+#: R/objects.R:0
+#, fuzzy
+msgid ""
+"%d differing object matching %s was found\n"
+"in the following places:"
+msgid_plural ""
+"%d differing objects matching %s were found\n"
+"in the following places:"
+msgstr[0] "Žinyno tema %s rasta šiuose paketuose:"
+msgstr[1] "Žinyno tema %s rasta šiuose paketuose:"
+msgstr[2] "Žinyno tema %s rasta šiuose paketuose:"
+
+#. R/modifyList.R: ngettext(sum(tt), "%d error caught in %s. The error message and its frequency is:",     "%d errors caught in %s. The error messages and their frequencies are:", domain = "R-utils")
+#: R/modifyList.R:0
+#, fuzzy
+msgid "%d error caught in %s. The error message and its frequency is:"
+msgid_plural ""
+"%d errors caught in %s. The error messages and their frequencies are:"
+msgstr[0] ""
+"%d klaidos, kurios aptiktos %s.  Klaidų pranešimai ir jų dažnumas yra"
+msgstr[1] ""
+"%d klaidos, kurios aptiktos %s.  Klaidų pranešimai ir jų dažnumas yra"
+msgstr[2] ""
+"%d klaidos, kurios aptiktos %s.  Klaidų pranešimai ir jų dažnumas yra"
+
+#. R/modifyList.R: ngettext(tt[[1L]], "%d error caught in %s: %s", "%d times caught the same error in %s: %s",     domain = "R-utils")
+#: R/modifyList.R:0
+msgid "%d error caught in %s: %s"
+msgid_plural "%d times caught the same error in %s: %s"
+msgstr[0] "%d klaida, kuri aptikta %s: %s"
+msgstr[1] "%d kartus aptikta ta pati klaida, esanti %s: %s"
+msgstr[2] "%d kartų aptikta ta pati klaida, esanti %s: %s"
+
+#. R/apropos.R: ngettext(ll, "%d occurrence in %s", "%d occurrences in %s", domain = "R-utils")
+#: R/apropos.R:0
+msgid "%d occurrence in %s"
+msgid_plural "%d occurrences in %s"
+msgstr[0] "%d egzempliorius, esantis %s"
+msgstr[1] "%d egzemplioriai, esantys %s"
+msgstr[2] "%d egzempliorių, esančių %s"
+
+#. R/str.R: ngettext(length(meths), "%s and %d method,", "%s and %d methods,", domain = "R-utils")
+#: R/str.R:0
+msgid "%s and %d method,"
+msgid_plural "%s and %d methods,"
+msgstr[0] ""
+msgstr[1] ""
+msgstr[2] ""
+
+#. R/str.R: ngettext(length(meths), "%s and %d method, of which %d are possibly relevant", "%s and %d methods, of which %d are possibly relevant",     domain = "R-utils")
+#: R/str.R:0
+msgid "%s and %d method, of which %d are possibly relevant"
+msgid_plural "%s and %d methods, of which %d are possibly relevant"
+msgstr[0] ""
+msgstr[1] ""
+msgstr[2] ""
+
+#. R/str.R: ngettext(nrow(object), "'data.frame':\t%d observation of %d variable", "'data.frame':\t%d observations of %d variable",     domain = "R-utils")
+#: R/str.R:0
+msgid "'data.frame':\t%d observation of %d variable"
+msgid_plural "'data.frame':\t%d observations of %d variable"
+msgstr[0] ""
+msgstr[1] ""
+msgstr[2] ""
+
+#. R/str.R: ngettext(nrow(object), "'data.frame':\t%d observation of %d variables", "'data.frame':\t%d observations of %d variables",     domain = "R-utils")
+#: R/str.R:0
+msgid "'data.frame':\t%d observation of %d variables"
+msgid_plural "'data.frame':\t%d observations of %d variables"
+msgstr[0] ""
+msgstr[1] ""
+msgstr[2] ""
+
+#. R/packages2.R: ngettext(sum(!ok), "'lib' element %s is not a writable directory", "'lib' elements %s are not writable directories",     domain = "R-utils")
+#: R/packages2.R:0
+msgid "'lib' element %s is not a writable directory"
+msgid_plural "'lib' elements %s are not writable directories"
+msgstr[0] "'lib' elementas %s nėra įrašomas katalogas"
+msgstr[1] "'lib' %s elementai nėra įrašomi katalogai"
+msgstr[2] "'lib' %s elementų nėra įrašomi katalogai"
+
+#. R/citation.R: ngettext(sum(!ok), "A bibentry of bibtype %s has to specify the field: %s", "A bibentry of bibtype %s has to specify the fields: %s",     domain = "R-utils")
+#: R/citation.R:0
+msgid "A bibentry of bibtype %s has to specify the field: %s"
+msgid_plural "A bibentry of bibtype %s has to specify the fields: %s"
+msgstr[0] "Bibtype %s tipo įrašas bibentry turi nurodyti lauką: %s"
+msgstr[1] "Bibtype %s tipo įrašas bibentry turi nurodyti laukus: %s"
+msgstr[2] "Bibtype %s tipo įrašas bibentry turi nurodyti laukus: %s"
+
+#. R/packages2.R: ngettext(sum(m0), "A version of this package for your version of R might be available elsewhere,\nsee the ideas at\n",     "Versions of these packages for your version of R might be available elsewhere,\nsee the ideas at\n")
+#: R/packages2.R:0
+msgid ""
+"A version of this package for your version of R might be available "
+"elsewhere,\n"
+"see the ideas at\n"
+msgid_plural ""
+"Versions of these packages for your version of R might be available "
+"elsewhere,\n"
+"see the ideas at\n"
+msgstr[0] ""
+msgstr[1] ""
+msgstr[2] ""
+
+#. R/str.R: ngettext(length(cl), "Class %s", "Classes %s", domain = "R-utils")
+#: R/str.R:0
+msgid "Class %s"
+msgid_plural "Classes %s"
+msgstr[0] ""
+msgstr[1] ""
+msgstr[2] ""
+
+#. R/str.R: ngettext(length(cl), "Class %s ", "Classes %s ", domain = "R-utils")
+#: R/str.R:0
+msgid "Class %s "
+msgid_plural "Classes %s "
+msgstr[0] ""
+msgstr[1] ""
+msgstr[2] ""
+
+#. R/str.R: ngettext(as.integer(le), "Class %s hidden list of %s component", "Class %s hidden list of %s components",     domain = "R-utils")
+#: R/str.R:0
+msgid "Class %s hidden list of %s component"
+msgid_plural "Class %s hidden list of %s components"
+msgstr[0] ""
+msgstr[1] ""
+msgstr[2] ""
+
+#. R/str.R: ngettext(nrow(object), "Classes %s and 'data.frame':\t%d observation of %d variable",     "Classes %s and 'data.frame':\t%d observations of %d variable", domain = "R-utils")
+#: R/str.R:0
+msgid "Classes %s and 'data.frame':\t%d observation of %d variable"
+msgid_plural "Classes %s and 'data.frame':\t%d observations of %d variable"
+msgstr[0] ""
+msgstr[1] ""
+msgstr[2] ""
+
+#. R/str.R: ngettext(nrow(object), "Classes %s and 'data.frame':\t%d observation of %d variables",     "Classes %s and 'data.frame':\t%d observations of %d variables", domain = "R-utils")
+#: R/str.R:0
+msgid "Classes %s and 'data.frame':\t%d observation of %d variables"
+msgid_plural "Classes %s and 'data.frame':\t%d observations of %d variables"
+msgstr[0] ""
+msgstr[1] ""
+msgstr[2] ""
+
+#. R/str.R: ngettext(as.integer(le), "Classes %s hidden list of %s component", "Classes %s hidden list of %s components",     domain = "R-utils")
+#: R/str.R:0
+msgid "Classes %s hidden list of %s component"
+msgid_plural "Classes %s hidden list of %s components"
+msgstr[0] ""
+msgstr[1] ""
+msgstr[2] ""
+
+#. R/packages2.R: ngettext(sum(later & hasSrc), "Do you want to install from sources the package which needs compilation?",     "Do you want to install from sources the packages which need compilation?", domain = "R-utils")
+#: R/packages2.R:0
+msgid ""
+"Do you want to install from sources the package which needs compilation?"
+msgid_plural ""
+"Do you want to install from sources the packages which need compilation?"
+msgstr[0] "Ar norite iš šaltinių įdiegti paketą, kurį reikia kompiliuoti?"
+msgstr[1] "Ar norite iš šaltinių įdiegti paketus, kuriuos reikia kompiliuoti?"
+msgstr[2] "Ar norite iš šaltinių įdiegti paketų, kuriuos reikia kompiliuoti?"
+
+#. R/str.R: ngettext(as.integer(le), "Dotted pair list of %s component", "Dotted pair list of %s components",     domain = "R-utils")
+#: R/str.R:0
+msgid "Dotted pair list of %s component"
+msgid_plural "Dotted pair list of %s components"
+msgstr[0] ""
+msgstr[1] ""
+msgstr[2] ""
+
+#. R/changedFiles.R: ngettext(nrow(x$info), "File snapshot:\n path = %s\n timestamp = %s\n file.info = %s\n md5sum = %s\n digest = %s\n full.names = %s\n args = %s\n %d file recorded.",     "File snapshot:\n path = %s\n timestamp = %s\n file.info = %s\n md5sum = %s\n digest = %s\n full.names = %s\n args = %s\n %d files recorded.",     domain = "R-utils")
+#: R/changedFiles.R:0
+msgid ""
+"File snapshot:\n"
+" path = %s\n"
+" timestamp = %s\n"
+" file.info = %s\n"
+" md5sum = %s\n"
+" digest = %s\n"
+" full.names = %s\n"
+" args = %s\n"
+" %d file recorded."
+msgid_plural ""
+"File snapshot:\n"
+" path = %s\n"
+" timestamp = %s\n"
+" file.info = %s\n"
+" md5sum = %s\n"
+" digest = %s\n"
+" full.names = %s\n"
+" args = %s\n"
+" %d files recorded."
+msgstr[0] ""
+msgstr[1] ""
+msgstr[2] ""
+
+#. R/str.R: ngettext(length(sNms), "Formal class %s [package %s] with %d slot", "Formal class %s [package %s] with %d slots",     domain = "R-utils")
+#: R/str.R:0
+msgid "Formal class %s [package %s] with %d slot"
+msgid_plural "Formal class %s [package %s] with %d slots"
+msgstr[0] ""
+msgstr[1] ""
+msgstr[2] ""
+
+#. R/packages2.R: ngettext(length(pkgs), "Installing package into %s directory\n(as %s directory is unspecified)",     "Installing packages into %s directory\n(as %s directory is unspecified)", domain = "R-utils")
+#: R/packages2.R:0
+#, fuzzy
+msgid ""
+"Installing package into %s directory\n"
+"(as %s directory is unspecified)"
+msgid_plural ""
+"Installing packages into %s directory\n"
+"(as %s directory is unspecified)"
+msgstr[0] ""
+"Paketo diegimas į %s\n"
+"(kadangi %s nenurodytas)"
+msgstr[1] ""
+"Paketų diegimas į %s\n"
+"(kadangi %s nenurodytas)"
+msgstr[2] ""
+"Paketų diegimas į %s\n"
+"(kadangi %s nenurodytas)"
+
+#. R/citation.R: ngettext(length(role), "Invalid role specification: %s", "Invalid role specifications: %s",     domain = "R-utils")
+#. R/citation.R: ngettext(length(pos[ind]), "Invalid role specification: %s", "Invalid role specifications: %s",     domain = "R-utils")
+#: R/citation.R:0
+#, fuzzy
+msgid "Invalid role specification: %s"
+msgid_plural "Invalid role specifications: %s"
+msgstr[0] "Neteisinga rolės specifikacija: %s."
+msgstr[1] "Neteisingos rolės specifikacijos: %s."
+msgstr[2] "Neteisingos rolės specifikacijos: %s."
+
+#. R/str.R: ngettext(as.integer(le), "List of %s component", "List of %s components", domain = "R-utils")
+#: R/str.R:0
+msgid "List of %s component"
+msgid_plural "List of %s components"
+msgstr[0] ""
+msgstr[1] ""
+msgstr[2] ""
+
+#. R/packages2.R: ngettext(length(s2), "Package which is only available in source form, and may need compilation of C/C++/Fortran",     "Packages which are only available in source form, and may need compilation of C/C++/Fortran",     domain = "R-utils")
+#: R/packages2.R:0
+msgid ""
+"Package which is only available in source form, and may need compilation of "
+"C/C++/Fortran"
+msgid_plural ""
+"Packages which are only available in source form, and may need compilation "
+"of C/C++/Fortran"
+msgstr[0] ""
+"Paketas, kuris prieinamas tik šaltinio formoje, ir gali reikėti C / C ++ / "
+"Fortran kompiliacijos"
+msgstr[1] ""
+"Paketai, kurie prieinami tik šaltinio formoje ir gali reikėti C / C ++ / "
+"Fortran kompiliacijos"
+msgstr[2] ""
+"Paketų, kurie prieinami tik šaltinio formoje ir gali reikėti C / C ++ / "
+"Fortran kompiliacijos"
+
+#. R/str.R: ngettext(length(a), "Reference class %s [package %s] with %d field", "Reference class %s [package %s] with %d fields",     domain = "R-utils")
+#: R/str.R:0
+msgid "Reference class %s [package %s] with %d field"
+msgid_plural "Reference class %s [package %s] with %d fields"
+msgstr[0] ""
+msgstr[1] ""
+msgstr[2] ""
+
+#. R/packages.R: ngettext(length(pkgs), "Removing package from %s\n(as %s is unspecified)", "Removing packages from %s\n(as %s is unspecified)",     domain = "R-utils")
+#: R/packages.R:0
+msgid ""
+"Removing package from %s\n"
+"(as %s is unspecified)"
+msgid_plural ""
+"Removing packages from %s\n"
+"(as %s is unspecified)"
+msgstr[0] ""
+"Šalinamas paketas iš %s\n"
+"(kadangi %s nenurodytas)"
+msgstr[1] ""
+"Šalinami paketai iš %s\n"
+"(kadangi %s nenurodytas)"
+msgstr[2] ""
+"Šalinama paketų iš %s\n"
+"(kadangi %s nenurodytas)"
+
+#. R/packages2.R: ngettext(sum(later), "There is a binary version available (and will be installed) but the source version is later",     "There are binary versions available (and will be installed) but the source versions are later",     domain = "R-utils")
+#: R/packages2.R:0
+msgid ""
+"There is a binary version available (and will be installed) but the source "
+"version is later"
+msgid_plural ""
+"There are binary versions available (and will be installed) but the source "
+"versions are later"
+msgstr[0] ""
+"Yra prieinama dvejetainė versija (ir bus įdiegta), tačiau šaltinio versija "
+"yra vėlesnė"
+msgstr[1] ""
+"Yra prieinamos dvejetainės versijos (ir bus įdiegtos), tačiau šaltinio "
+"versijos yra vėlesnės"
+msgstr[2] ""
+"Yra prieinama dvejetainių versijų (ir bus įdiegtos), tačiau šaltinio "
+"versijos yra vėlesnės"
+
+#. R/packages2.R: ngettext(sum(later), "There is a binary version available but the source version is later",     "There are binary versions available but the source versions are later", domain = "R-utils")
+#: R/packages2.R:0
+msgid "There is a binary version available but the source version is later"
+msgid_plural ""
+"There are binary versions available but the source versions are later"
+msgstr[0] "Yra dvejetainė versija, tačiau šaltinio versija yra vėlesnė"
+msgstr[1] "Yra dvejetainės versijos, tačiau šaltinio versijos yra vėlesnės"
+msgstr[2] "Yra dvejetainių versijų, tačiau šaltinio versijos yra vėlesnės"
+
+#. R/packages2.R: ngettext(length(added), "also installing the dependency %s", "also installing the dependencies %s",     domain = "R-utils")
+#: R/packages2.R:0
+msgid "also installing the dependency %s"
+msgid_plural "also installing the dependencies %s"
+msgstr[0] "taip pat diegiant %s priklausomybę"
+msgstr[1] "taip pat diegiant %s priklausomybes"
+msgstr[2] "taip pat diegiant %s priklausomybių"
+
+#. R/edit.R: ngettext(sum(has_class), "class discarded from column %s", "classes discarded from columns %s",     domain = "R-utils")
+#: R/edit.R:0
+msgid "class discarded from column %s"
+msgid_plural "classes discarded from columns %s"
+msgstr[0] "klasė išmesta iš %s stulpelio"
+msgstr[1] "klasė išmesta iš %s stulpelių"
+msgstr[2] "klasė išmesta iš %s stulpelių"
+
+#. R/packages2.R: ngettext(length(not_avail), "dependency %s is not available", "dependencies %s are not available",     domain = "R-utils")
+#: R/packages2.R:0
+msgid "dependency %s is not available"
+msgid_plural "dependencies %s are not available"
+msgstr[0] "priklausomybė %s yra negalima"
+msgstr[1] "priklausomybės %s yra negalimos"
+msgstr[2] "%s priklausomybių yra negalima"
+
+#. R/packages2.R: ngettext(length(pkgs), "installing the source package %s", "installing the source packages %s",     domain = "R-utils")
+#: R/packages2.R:0
+msgid "installing the source package %s"
+msgid_plural "installing the source packages %s"
+msgstr[0] "šaltinio paketo %s diegimas"
+msgstr[1] "šaltinio paketų %s diegimas"
+msgstr[2] "šaltinio paketų %s diegimas"
+
+#. R/roman.R: ngettext(sum(!ok), "invalid roman numeral: %s", "invalid roman numerals: %s", domain = "R-utils")
+#: R/roman.R:0
+msgid "invalid roman numeral: %s"
+msgid_plural "invalid roman numerals: %s"
+msgstr[0] "neteisingas romėniškas skaitmuo: %s"
+msgstr[1] "neteisingi romėniški skaitmenys: %s"
+msgstr[2] "neteisingų romėniškų skaitmenų: %s"
+
+#. R/read.fwf.R: ngettext(nread%%recordlength, "last record incomplete, %d line discarded", "last record incomplete, %d lines discarded",     domain = "R-utils")
+#: R/read.fwf.R:0
+msgid "last record incomplete, %d line discarded"
+msgid_plural "last record incomplete, %d lines discarded"
+msgstr[0] "paskutinis įrašas neišsamus, %d eilutė išmesta"
+msgstr[1] "paskutinis įrašas neišsamus, %d eilutės išmestos"
+msgstr[2] "paskutinis įrašas neišsamus, %d eilučių išmesta"
+
+#. R/help.search.R: ngettext(n_of_objects_matched, "matched %d object.", "matched %d objects.", domain = "R-utils")
+#: R/help.search.R:0
+msgid "matched %d object."
+msgid_plural "matched %d objects."
+msgstr[0] "atitiko %d objektą."
+msgstr[1] "atitiko %d objektus."
+msgstr[2] "atitiko %d objektų."
+
+#. R/package.skeleton.R: ngettext(sum(!have), "object %s not found", "objects %s not found", domain = "R-utils")
+#: R/package.skeleton.R:0
+#, fuzzy
+msgid "object %s not found"
+msgid_plural "objects %s not found"
+msgstr[0] "objektas '%s' nerastas"
+msgstr[1] "objektai '%s' nerasti"
+msgstr[2] "objektų '%s' nerasta"
+
+#. R/packages2.R: ngettext(sum(base), "package %s is a base package, and should not be updated", "packages %s are base packages, and should not be updated",     domain = "R-utils")
+#: R/packages2.R:0
+msgid "package %s is a base package, and should not be updated"
+msgid_plural "packages %s are base packages, and should not be updated"
+msgstr[0] "paketas %s yra pagrindinis paketas ir nebus atnaujintas"
+msgstr[1] "paketai %s yra pagrindiniai paketai ir nebus atnaujinti"
+msgstr[2] "%s paketų yra pagrindiniai paketai ir nebus atnaujinti"
+
+#. R/packages2.R: ngettext(length(na), "package %s is available as a source package but not as a binary",     "packages %s are available as source packages but not as binaries", domain = "R-utils")
+#: R/packages2.R:0
+msgid "package %s is available as a source package but not as a binary"
+msgid_plural "packages %s are available as source packages but not as binaries"
+msgstr[0] ""
+"paketas %s yra prieinamas kaip šaltinio paketas, bet ne kaip dvejetainis"
+msgstr[1] ""
+"paketai %s yra prieinami kaip šaltinio paketai, bet ne kaip dvejetainiai"
+msgstr[2] ""
+"%s paketų yra prieinami kaip šaltinio paketai, bet ne kaip dvejetainiai"
+
+#. R/packages2.R: ngettext(sum(inuse), "package %s is in use and will not be installed", "packages %s are in use and will not be installed",     domain = "R-utils")
+#: R/packages2.R:0
+msgid "package %s is in use and will not be installed"
+msgid_plural "packages %s are in use and will not be installed"
+msgstr[0] "paketas %s yra naudojamas ir nebus įdiegtas"
+msgstr[1] "paketai %s yra naudojami ir nebus įdiegti"
+msgstr[2] "%s paketų yra naudojami ir nebus įdiegti"
+
+#. R/packages2.R: ngettext(sum(m0), "package %s is not available %s", "packages %s are not available %s")
+#: R/packages2.R:0
+#, fuzzy
+msgid "package %s is not available %s"
+msgid_plural "packages %s are not available %s"
+msgstr[0] "paketas %s negalimas (%s)"
+msgstr[1] "paketai %s negalimi (%s)"
+msgstr[2] "%s paketų yra negalimi (%s)"
+
+#~ msgid "path to %s contains spaces,"
+#~ msgstr "kelias į %s turi tarpus,"
+
+#~ msgid "Invalid 'filter' argument."
+#~ msgstr "Neleistinas 'filter' argumentas."
+
+#~ msgid "bad argument"
+#~ msgstr "blogas argumentas"
+
+#~ msgid "Use either %s or %s/%s but not both."
+#~ msgstr "Naudokite %s arba %s/%s, bet ne abu."
+
+#~ msgid "It is recommended to use %s/%s instead of %s/%s/%s."
+#~ msgstr "Rekomenduojama naudoti %s/%s vietoj %s/%s/%s."
+
+#~ msgid "'names' argument ignored"
+#~ msgstr "'names' argumentas ignoruojamas"
+
+#~ msgid "invalid 'data' argument"
+#~ msgstr "neleistinas 'data' argumentas"
+
+#~ msgid "invalid 'modes' argument"
+#~ msgstr "netinkamas 'modes' argumentas"
+
+#~ msgid "invalid 'x' argument"
+#~ msgstr "neleistinas 'x' argumentas"
+
+#~ msgid "tail(., addrownums=.) is"
+#~ msgstr "tail(., addrownums=.) yra"
+
+#~ msgid ""
+#~ "deprecated.\n"
+#~ "Use"
+#~ msgstr ""
+#~ "šalinta.\n"
+#~ "Naudoti"
+
+#~ msgid "tail(., keepnums=.) instead."
+#~ msgstr "tail(., keepnums=.) vietoj."
+
+#~ msgid "you could try %s"
+#~ msgstr "galite pabandyti %s"
+
+#~ msgid "'browser' must be a non-empty character string"
+#~ msgstr "'browser' turi būti netuščia simbolių eilutė"
+
+#~ msgid "'fixInNamespace' requires a name"
+#~ msgstr "'fixInNamespace' reikalauja vardo"
+
+#~ msgid "invalid 'filters' argument."
+#~ msgstr "netinkamas 'filters' argumentas."
+
+#~ msgid "cannot choose a"
+#~ msgstr "negali pasirinkti"
+
+#~ msgid "mirror non-interactively"
+#~ msgstr "veidrodis neinteraktyviai"
+
+#~ msgid "The 'flesh' argument does not contain a skeleton attribute."
+#~ msgstr "Argumentas 'flesh' neturi struktūros atributo."
+
+#~ msgid "invalid 'socket' argument"
+#~ msgstr "neleistinas 'socket' argumentas"
+
+#~ msgid "invalid 'tarfile' argument"
+#~ msgstr "netinkamas 'tarfile' argumentas"
+
+#~ msgid "gzip"
+#~ msgstr "gzip"
+
+#~ msgid "bzip2"
+#~ msgstr "bzip2"
+
+#~ msgid "xz"
+#~ msgstr "xz"
+
+#~ msgid "'tarfile' must be a character string or a connection"
+#~ msgstr "'tarfile' turi būti simbolių eilutė arba ryšys"
+
+#~ msgid "invalid 'col.names' specification"
+#~ msgstr "neleistina 'col.names' specifikacija"
+
+#~ msgid "'unzip' must be a single character string"
+#~ msgstr "'unzip' turi būti vieno simbolio eilutė"
+
+#~ msgid "'destfile' must be a length-one character vector"
+#~ msgstr "'destfile' turi būti 1 ilgio tekstinis vektorius"
+
+#~ msgid "'memory.limit()' is Windows-specific"
+#~ msgstr "'memory.limit()' yra skirtas Windows"
+
+#~ msgid "2. %d Sweave files for basename %s found"
+#~ msgstr "2. Rasti %d Sweave failai, skirti pagrindiniam vardui %s"
+
+#~ msgid "3. %d Sweave files for basename %s found"
+#~ msgstr "3. Rasta %d Sweave failų, skirtų pagrindiniam vardui %s"
+
+#~ msgid "2. %d occurrences in %s"
+#~ msgstr "2. %d egzemplioriai, esantys %s"
+
+#~ msgid "3. %d occurrences in %s"
+#~ msgstr "3. %d egzempliorių, esančių %s"
+
+#~ msgid "2. 'lib' elements %s are not writable directories"
+#~ msgstr "2. 'lib' elementai %s nėra įrašomi katalogai"
+
+#~ msgid "3. 'lib' elements %s are not writable directories"
+#~ msgstr "3. 'lib' %s elementų nėra įrašomi katalogai"
+
+#~ msgid "2. A bibentry of bibtype %s has to specify the fields: %s"
+#~ msgstr "2. „bibtype“ %s tipo įrašas „bibentry“ turi nurodyti laukus: %s"
+
+#~ msgid "3. A bibentry of bibtype %s has to specify the fields: %s"
+#~ msgstr "3. „bibtype“ %s tipo įrašas „bibentry“ turi nurodyti laukus: %s"
+
+#~ msgid ""
+#~ "2. Do you want to install from sources the packages which need "
+#~ "compilation?"
+#~ msgstr ""
+#~ "2. Ar norite iš šaltinių įdiegti paketus, kuriuos reikia kompiliuoti?"
+
+#~ msgid ""
+#~ "3. Do you want to install from sources the packages which need "
+#~ "compilation?"
+#~ msgstr ""
+#~ "3. Ar norite iš šaltinių įdiegti paketų, kuriuos reikia kompiliuoti?"
+
+#~ msgid "%s"
+#~ msgstr "%s"
+
+#~ msgid "%s yourself"
+#~ msgstr "%s patys"
+
+#, fuzzy
+#~ msgid "(as %s is unspecified)"
+#~ msgstr ""
+#~ "#-#-#-#-#  catalog.po  #-#-#-#-#\n"
+#~ "(nes %s yra nenustatytas)\n"
+#~ "#-#-#-#-#  catalog.po  #-#-#-#-#\n"
+#~ "(nes %s yra nenustatytas)\n"
+#~ "#-#-#-#-#  catalog.po  #-#-#-#-#\n"
+#~ "(nes %s yra nenustatytas)\n"
+#~ "#-#-#-#-#  catalog.po  #-#-#-#-#\n"
+#~ "(nes nepatikslintas %s)\n"
+#~ "#-#-#-#-#  catalog.po  #-#-#-#-#\n"
+#~ "(nes nepatikslintas %s)\n"
+#~ "#-#-#-#-#  catalog.po  #-#-#-#-#\n"
+#~ "(nes nepatikslintas %s)"
+
+#~ msgid "3. Installing packages into %s"
+#~ msgstr "3. Paketų diegimas į %s"
+
+#~ msgid "2. Invalid role specifications: %s."
+#~ msgstr "2. Neteisingos rolės specifikacijos: %s."
+
+#~ msgid "3. Invalid role specifications: %s."
+#~ msgstr "3. Neteisingų rolės specifikacijų: %s."
+
+#~ msgid ""
+#~ "2. Packages which are only available in source form, and may need "
+#~ "compilation of C/C++/Fortran"
+#~ msgstr ""
+#~ "2. Paketai, kurie prieinami tik šaltinio formoje ir gali reikėti C / C +"
+#~ "+ / Fortran kompiliacijos"
+
+#~ msgid ""
+#~ "3. Packages which are only available in source form, and may need "
+#~ "compilation of C/C++/Fortran"
+#~ msgstr ""
+#~ "3. Paketų, kurie prieinami tik šaltinio formoje ir gali reikėti C / C +"
+#~ "+ / Fortran kompiliacijos"
+
+#~ msgid "a documentation file"
+#~ msgstr "dokumentacijos failą"
+
+#~ msgid "2. Removing packages from %s"
+#~ msgstr "2. Paketų pašalinimas iš %s"
+
+#~ msgid "3. Removing packages from %s"
+#~ msgstr "3. Paketų pašalinimas iš %s"
+
+#~ msgid "\"The namespace for package \"\"%s\"\" is locked"
+#~ msgstr " no changes in the global variables list may be made.\""
+
+#~ msgid ""
+#~ "2. There are binary versions available (and will be installed) but the "
+#~ "source versions are later"
+#~ msgstr ""
+#~ "2. Yra prieinamos dvejetainės versijos (ir bus įdiegtos), tačiau šaltinio "
+#~ "versijos yra vėlesnės"
+
+#~ msgid ""
+#~ "3. There are binary versions available (and will be installed) but the "
+#~ "source versions are later"
+#~ msgstr ""
+#~ "3. Yra prieinamų dvejetainių versijų (ir bus įdiegtų), tačiau šaltinio "
+#~ "versijos yra vėlesnės"
+
+#~ msgid ""
+#~ "2. There are binary versions available but the source versions are later"
+#~ msgstr "2. Yra dvejetainės versijos, tačiau šaltinio versijos yra vėlesnės"
+
+#~ msgid ""
+#~ "3. There are binary versions available but the source versions are later"
+#~ msgstr "3. Yra dvejetainių versijų, tačiau šaltinio versijos yra vėlesnės"
+
+#~ msgid "This version of R is not set up to install source packages"
+#~ msgstr "Ši R versija nenustatyta diegti šaltinio paketus"
+
+#~ msgid "Use <code> %s </code>"
+#~ msgstr "Naudoti <code> %s </code>"
+
+#~ msgid "2. also installing the dependencies %s"
+#~ msgstr "2. taip pat diegiant %s priklausomybes "
+
+#~ msgid "3. also installing the dependencies %s"
+#~ msgstr "3. taip pat diegiant %s priklausomybių "
+
+#~ msgid "cannot choose a CRAN mirror non-interactively"
+#~ msgstr "negalima pasirinkti CRAN veidrodžio neinteraktyviu"
+
+#~ msgid "2. classes discarded from columns %s"
+#~ msgstr "2. klasės išmestos iš %s stulpelių"
+
+#~ msgid "3. classes discarded from columns %s"
+#~ msgstr "3. klasių išmestų iš %s stulpelių"
+
+#~ msgid "2. dependencies %s are not available"
+#~ msgstr "2. Priklausomybės %s negalimos"
+
+#~ msgid "3. dependencies %s are not available"
+#~ msgstr "3. Priklausomybių %s negalimų"
+
+#~ msgid "probably %s"
+#~ msgstr "tikriausiai %s"
+
+#~ msgid "2. installing the source packages %s"
+#~ msgstr "2. šaltinio paketų %s diegimas"
+
+#~ msgid "3. installing the source packages %s"
+#~ msgstr "3. šaltinio paketų %s diegimas"
+
+#~ msgid "\"invalid 'oldPkgs'"
+#~ msgstr " must be a character vector or a result from old.packages()\""
+
+#~ msgid "2. invalid roman numerals: %s"
+#~ msgstr "2. neteisingi romėniški skaitmenys: %s"
+
+#~ msgid "3. invalid roman numerals: %s"
+#~ msgstr "3. neteisingų romėniškų skaitmenų: %s"
+
+#~ msgid "2. last record incomplete, %d lines discarded"
+#~ msgstr "2. paskutinis įrašas neišsamus, %d eilutės išmestos"
+
+#~ msgid "3. last record incomplete, %d lines discarded"
+#~ msgstr "3. paskutinis įrašas neišsamus, %d eilučių išmesta"
+
+#~ msgid "2. matched %d objects."
+#~ msgstr "2. atitiko %d objektus."
+
+#~ msgid "3. matched %d objects."
+#~ msgstr "3. atitiko %d objektų."
+
+#~ msgid "2. objects '%s' not found"
+#~ msgstr "2. objektai '%s' nerasti"
+
+#~ msgid "3. objects '%s' not found"
+#~ msgstr "3. objektų '%s' nerasta"
+
+#~ msgid "2. packages %s are available as source packages but not as binaries"
+#~ msgstr ""
+#~ "2. paketai %s yra preinamai kaip šaltinio paketai, bet ne kaip "
+#~ "dvejetainiai"
+
+#~ msgid "3. packages %s are available as source packages but not as binaries"
+#~ msgstr ""
+#~ "3. %s paketų yra preinamų kaip šaltinio paketai, bet ne kaip dvejetainiai"
+
+#~ msgid "3. packages %s are in use and will not be installed"
+#~ msgstr "3. %s paketų yra naudojamų ir nebus įdiegtų"
+
+#~ msgid "2. packages %s are not available (%s)"
+#~ msgstr "2. paketai %s negalimi (%s)"
+
+#~ msgid "3. packages %s are not available (%s)"
+#~ msgstr "3. %s paketų negalimų (%s)"
+
+#~ msgid "package %s not found"
+#~ msgstr "paketas %s nerastas"

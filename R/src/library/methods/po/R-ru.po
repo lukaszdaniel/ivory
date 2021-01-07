@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.11.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2020-04-15 18:32\n"
+"POT-Creation-Date: 2021-01-07 23:37\n"
 "PO-Revision-Date: 2012-03-15 11:56-0500\n"
 "Last-Translator: Alexey Shipunov <dactylorhiza@gmail.com>\n"
 "Language-Team: Russian <ru@li.org>\n"
@@ -514,7 +514,7 @@ msgstr "не является именем пакета: %s"
 msgid "Class %s consists of following classes:"
 msgstr ""
 
-#. R/show.R: gettextf("Class %s for generic %s defined from package %s", dQuote(class(object)),     dQuote(object@generic), sQuote(object@package), domain = "R-methods")
+#. R/show.R: gettextf("Class %s for generic %s defined from package %s", dQuote(class(object)),     dQuote(nam), sQuote(object@package), domain = "R-methods")
 #: R/show.R:0
 #, fuzzy
 msgid "Class %s for generic %s defined from package %s"
@@ -537,7 +537,7 @@ msgid ""
 "  defined with value class: %s"
 msgstr "Не могу найти таблицу методов для общего %s из пакета %s в пакете %s"
 
-#. R/show.R: gettextf("Class %s for generic %s defined from package %s\n  defined with value class: %s\n",     dQuote(class(object)), dQuote(object@generic), sQuote(object@package), dQuote(object@valueClass),     domain = "R-methods")
+#. R/show.R: gettextf("Class %s for generic %s defined from package %s\n  defined with value class: %s\n",     dQuote(class(object)), dQuote(nam), sQuote(object@package), dQuote(object@valueClass),     domain = "R-methods")
 #: R/show.R:0
 #, fuzzy
 msgid ""

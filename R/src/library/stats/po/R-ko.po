@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 3.1.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2020-08-14 18:58\n"
+"POT-Creation-Date: 2021-01-07 23:38\n"
 "PO-Revision-Date: 2014-03-27 13:33-0600\n"
 "Last-Translator: Chel Hee Lee <chl948@mail.usask.ca>\n"
 "Language-Team:  <chl948@mail.usask.ca>\n"
@@ -669,6 +669,13 @@ msgstr ""
 msgid "'cv' argument must not be NA when 'df' argument is specified"
 msgstr "'df'가 지정되었을때 'cv'는 반드시 NA이서는 안됩니다"
 
+#. R/models.R: stop("'data' must be a data.frame, environment, or list")
+#. R/models.R: stop("'data' must be a data.frame, environment, or list")
+#: R/models.R:0
+#, fuzzy
+msgid "'data' must be a data.frame, environment, or list"
+msgstr "'data'는 반드시 리스트 또는 environment이어야 합니다"
+
 #. R/models.R: stop("'data' must be a data.frame, not a matrix or an array")
 #. R/models.R: stop("'data' must be a data.frame, not a matrix or an array")
 #: R/models.R:0
@@ -778,6 +785,11 @@ msgstr "'height'는 적어도 구성요소들의 최대값인 %g이어야 합니
 #, fuzzy
 msgid "'hybrid' argument is ignored for a 2 x 2 table"
 msgstr "2 x 2 분할표에서 'hybrid'는 무시됩니다"
+
+#. R/reshape.R: stop("'idvar' must uniquely identify records")
+#: R/reshape.R:0
+msgid "'idvar' must uniquely identify records"
+msgstr ""
 
 #. R/identify.hclust.R: stop("'k' and 'h' arguments must be a scalar")
 #: R/identify.hclust.R:0
@@ -1525,6 +1537,12 @@ msgstr ""
 #: R/wilcox.test.R:0
 msgid "(pseudo)median"
 msgstr ""
+
+#. R/quantile.R: stop("(unordered) factors are not allowed")
+#: R/quantile.R:0
+#, fuzzy
+msgid "(unordered) factors are not allowed"
+msgstr "요인은 허용되지 않습니다"
 
 #. R/models.R: gettext("(weights)", domain = "R-stats")
 #: R/models.R:0
@@ -4053,11 +4071,6 @@ msgstr "factor analysis는 최소 3개의 변수들을 필요로 합니다"
 msgid "factor levels have been ordered"
 msgstr ""
 
-#. R/quantile.R: stop("factors are not allowed")
-#: R/quantile.R:0
-msgid "factors are not allowed"
-msgstr "요인은 허용되지 않습니다"
-
 #. R/reshape.R: stop("failed to guess time-varying variables from their names")
 #: R/reshape.R:0
 msgid "failed to guess time-varying variables from their names"
@@ -4278,6 +4291,11 @@ msgstr "interactions을 허용하지 않습니다"
 #. R/power.anova.test.R: stop("internal error", domain = "R-stats")
 #: R/power.R:0 R/power.anova.test.R:0
 msgid "internal error"
+msgstr ""
+
+#. R/nls.R: stop("invalid  'attr(rhs, \"gradient\")'")
+#: R/nls.R:0
+msgid "invalid  'attr(rhs, \"gradient\")'"
 msgstr ""
 
 #. R/arima.R: gettextf("invalid '%s' argument", "SSinit")
