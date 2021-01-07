@@ -1215,8 +1215,6 @@ HIDDEN void R::InitNames()
     String::initialize();
 
     R_print.na_string = R_NaString;
-    /* R_BlankString */
-    R_BlankString = mkChar("");
     R_BlankScalarString = Rf_ScalarString(R_BlankString);
     MARK_NOT_MUTABLE(R_BlankScalarString);
 

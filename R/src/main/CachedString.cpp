@@ -30,6 +30,7 @@
  */
 
 #include <CXXR/CachedString.hpp>
+#include <boost/lambda/lambda.hpp>
 
 using namespace std;
 using namespace CXXR;
@@ -52,21 +53,34 @@ CachedString::map *CachedString::getCache()
     return cache;
 }
 
-const CachedString *CachedString::obtain(const std::string &str, CharsetBit encoding)
+bool CXXR::isASCII(const std::string &str)
+{
+    using namespace boost::lambda;
+    // Beware of the iterator dereferencing to a *signed* char, hence
+    // the bitwise test:
+    std::string::const_iterator it = std::find_if(str.begin(), str.end(), _1 & 0x80);
+    return it == str.end();
+}
+
+CachedString *CachedString::obtain(const std::string &str, cetype_t encoding)
 {
     // This will be checked again when we actually construct the
     // CachedString, but we precheck now so that we don't create an
     // invalid cache key:
     switch (encoding)
     {
-    case NATIVE_MASK:
-    case UTF8_MASK:
-    case LATIN1_MASK:
-    case BYTES_MASK:
+    case CE_NATIVE:
+    case CE_UTF8:
+    case CE_LATIN1:
+    case CE_BYTES:
         break;
     default:
-        Rf_error("unknown encoding mask: %d", encoding);
+        Rf_error(_("unknown encoding: %d"), encoding);
     }
+
+    bool ascii = CXXR::isASCII(str);
+    if (ascii)
+        encoding = CE_NATIVE;
 
     pair<map::iterator, bool> pr = getCache()->insert(map::value_type(key(str, encoding), nullptr));
     map::iterator it = pr.first;
@@ -75,7 +89,8 @@ const CachedString *CachedString::obtain(const std::string &str, CharsetBit enco
         try
         {
             map::value_type &val = *it;
-            val.second = new CachedString(&val);
+            val.second = new CachedString(str, encoding, ascii);
+            val.second->m_key_val_pr = &*it;
         }
         catch (...)
         {

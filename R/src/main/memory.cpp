@@ -698,8 +698,7 @@ void GCNode::gc(unsigned int num_old_gens_to_collect)
 
     GCNode::Marker marker(num_old_gens_to_collect);
     GCRootBase::visitRoots(&marker);
-    MARK_THRU(&marker, R_BlankString);	        /* Builtin constants */
-    MARK_THRU(&marker, R_BlankScalarString);
+    MARK_THRU(&marker, R_BlankScalarString);	        /* Builtin constants */
     MARK_THRU(&marker, R_CurrentExpression);
     MARK_THRU(&marker, R_UnboundValue);
     MARK_THRU(&marker, R_RestartToken);
@@ -775,53 +774,6 @@ void GCNode::gc(unsigned int num_old_gens_to_collect)
 
     /* identify weakly reachable nodes */
     WeakRef::markThru(num_old_gens_to_collect);
-
-    /* process CHARSXP cache */
-    // Purge R_StringHash hash table.  In future, when CHARSXP is
-    // embodied as a class, the hash table will be a static member of
-    // the class, and be maintained automatically by the constructors
-    // and destructor, so this special treatment will become
-    // unnecessary.
-    //
-    // Note that CXXR does *not*
-    // USE_ATTRIB_FIELD_FOR_CHARSXP_CACHE_CHAINS.
-    if (R_StringHash) /* in case of GC during initialization */
-    {
-        RObject *t;
-        RObject *s;
-        int nc = 0;
-
-        for (int i = 0; i < LENGTH(R_StringHash); i++)
-        {
-            s = VECTOR_ELT(R_StringHash, i);
-            t = R_NilValue;
-            while (s != R_NilValue)
-            {
-                if (CXHEAD(s) && (CXHEAD(s)->m_gcgen <= num_old_gens_to_collect) && !CXHEAD(s)->isMarked())
-                {                        /* remove unused CHARSXP and cons cell */
-                    if (t == R_NilValue) /* head of list */
-                    {
-                        SET_VECTOR_ELT(R_StringHash, i, CXTAIL(s));
-                    }
-                    else
-                    {
-                        SET_CXTAIL(t, CXTAIL(s));
-                    }
-                }
-                else
-                {
-                    MARK_THRU(&marker, s);
-                    MARK_THRU(&marker, CXHEAD(s));
-                    t = s;
-                }
-                s = CXTAIL(s);
-            }
-            if (VECTOR_ELT(R_StringHash, i) != R_NilValue)
-                nc++;
-        }
-        SET_TRUELENGTH(R_StringHash, nc); /* SET_HASHPRI, really */
-    }
-    MARK_THRU(&marker, R_StringHash);
 
     // Sweep.  gen must be signed here or the loop won't terminate!
     for (int gen = num_old_gens_to_collect; gen >= 0; --gen)
@@ -2587,18 +2539,6 @@ void SET_HASHVALUE(SEXP x, int v)
     str.hash();
 }
 #endif
-
-HIDDEN
-SEXP SET_CXTAIL(SEXP x, SEXP v) {
-#ifdef USE_TYPE_CHECKING
-    if(TYPEOF(v) != CHARSXP && TYPEOF(v) != NILSXP)
-	error(_("value of 'SET_CXTAIL()' function must be a 'char' or nullptr, not a '%s'"),
-	      type2char(TYPEOF(v)));
-#endif
-    /*CHECK_OLD_TO_NEW(x, v); *//* not needed since not properly traced */
-    RObject::set_attrib(x, v);
-    return x;
-}
 
 /* Test functions */
 extern "C"

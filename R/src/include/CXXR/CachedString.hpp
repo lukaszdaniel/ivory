@@ -32,6 +32,7 @@
 #define CACHEDSTRING_HPP
 
 #include <CXXR/String.hpp>
+#include <CXXR/Allocator.hpp>
 #include <unordered_map>
 #include <string>
 
@@ -62,7 +63,7 @@ namespace CXXR
          * @return Pointer to a CachedString representing the
          *         specified text in the specified encoding.
          */
-        static const CachedString *obtain(const std::string &str, CharsetBit encoding = NATIVE_MASK);
+        static CachedString *obtain(const std::string &str, cetype_t encoding = CE_NATIVE);
 
         /** @brief The name by which this type is known in R.
          *
@@ -76,20 +77,10 @@ namespace CXXR
         // Virtual function of RObject:
         const char *typeName() const override;
 
-        virtual void *data() override
-        {
-            return nullptr;
-        }
-
-        virtual const void *data() const override
-        {
-            return nullptr;
-        }
-
     private:
         // The first element of the key is the text, the second
         // element the encoding:
-        typedef std::pair<std::string, CharsetBit> key;
+        typedef std::pair<std::string, cetype_t> key;
 
         // Hashing is based simply on the text of the key, not on its
         // encoding:
@@ -113,14 +104,16 @@ namespace CXXR
         // erase() before the insert() was complete.  (Yes, I tried
         // this, and it took ages to debug!)
         typedef std::unordered_map<key, CachedString *, Hasher> map;
+        // typedef std::unordered_map<key, CachedString *, Hasher, std::equal_to<key>,
+        //                            CXXR::Allocator<std::pair<const key, CachedString *>>>
+        //     map;
 
         map::value_type *m_key_val_pr;
 
-        explicit CachedString(map::value_type *key_val_pr)
-            : String(key_val_pr->first.first.size(), key_val_pr->first.second,
-                     key_val_pr->first.first.c_str()),
-              m_key_val_pr(key_val_pr)
+        explicit CachedString(const std::string &text, cetype_t encoding, bool isAscii)
+            : String(text.size(), encoding, text, isAscii)
         {
+            m_gpbits |= CACHED_MASK; /* Mark it */
         }
 
         // Not implemented.  Declared to prevent
@@ -203,7 +196,7 @@ extern "C"
      *
      * @return Pointer to the created string.
      */
-    SEXP Rf_mkCharLenCE(const char *const name, int len, cetype_t encoding);
+    SEXP Rf_mkCharLenCE(const char *name, int len, cetype_t encoding);
 
     /** @brief Create a CXXR::String object for specified text.
      *

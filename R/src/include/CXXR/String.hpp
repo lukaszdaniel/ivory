@@ -39,8 +39,6 @@
 #include <string>
 #include <unordered_map>
 
-extern "C" SEXP R_BlankString; /* "" as a CHARSXP */
-
 namespace R
 {
 	extern void InitNames();
@@ -107,7 +105,7 @@ namespace CXXR
 		 */
 		static const String *blank()
 		{
-			return static_cast<String *>(R_BlankString);
+			return s_blank;
 		}
 
 		/** @brief Access encapsulated C-style string.
@@ -117,8 +115,59 @@ namespace CXXR
 		 */
 		const char *c_str() const
 		{
-			return m_c_str;
+			return m_c_str.c_str();
 		}
+
+		/** @brief Character encoding.
+         *
+         * @return the character encoding.  At present the only types
+         * of encoding are CE_NATIVE, CE_UTF8, CE_LATIN1 and CE_BYTES.
+         */
+		cetype_t encoding() const { return m_encoding; }
+
+		/** @brief Extract encoding information from CR's \c gp bits
+         * field.
+         *
+         * This function is used to extract the character encoding
+         * information contained in the <tt>sxpinfo_struct.gp</tt>
+         * field used in CR.  It should be used exclusively for
+         * deserialization.  Refer to the 'R Internals' document for
+         * details of this field.
+         *
+         * @param gpbits the \c gp bits field (within the
+         *          least significant 16 bits).
+         */
+		static cetype_t GPBits2Encoding(unsigned int gpbits);
+
+		/** @brief Is this String pure ASCII?
+         *
+         * @return true iff the String contains only ASCII characters.
+         */
+		bool isASCII() const { return m_ascii; }
+
+		/** @brief Is this String encoded in UTF8?
+         *
+         * @return true iff the String is encoded in UTF8.
+         */
+		bool isUTF8() const { return encodingEquals(CE_UTF8); }
+
+		/** @brief Is this String encoded in LATIN1?
+         *
+         * @return true iff the String is encoded in LATIN1.
+         */
+		bool isLATIN1() const { return encodingEquals(CE_LATIN1); }
+
+		/** @brief Is this String encoded in BYTES?
+         *
+         * @return true iff the String is encoded in BYTES.
+         */
+		bool isBYTES() const { return encodingEquals(CE_BYTES); }
+
+		/** @brief Check if String is encoded in \a t?
+         *
+         * @return true iff the String is encoded in \a t.
+         */
+		bool encodingEquals(const cetype_t &t) const { return encoding() == t; }
 
 		/** @brief Hash value.
 		 *
@@ -155,6 +204,16 @@ namespace CXXR
 		static const String *NA()
 		{
 			return s_na;
+		}
+
+		virtual void *data() override
+		{
+			return const_cast<char *>(m_c_str.c_str());
+		}
+
+		virtual const void *data() const override
+		{
+			return m_c_str.c_str();
 		}
 
 		/** @brief The name by which this type is known in R.
@@ -219,12 +278,29 @@ namespace CXXR
 		 *          supplied later in the construction of the derived
 		 *          class object by calling setCString().
 		 */
-		String(size_t sz, CharsetBit encoding, const char *c_string = nullptr)
-			: VectorBase(CHARSXP, sz), m_c_str(c_string), m_hash(-1)
+		String(size_t sz, cetype_t encoding, const std::string &c_string = "", bool isAscii = false)
+			: VectorBase(CHARSXP, sz), m_c_str(c_string), m_encoding(encoding), m_ascii(isAscii), m_hash(-1)
 		{
 			if (encoding)
 				checkEncoding(encoding);
-			m_gpbits = encoding;
+			switch (m_encoding)
+			{
+			case CE_NATIVE:
+				break;
+			case CE_UTF8:
+				m_gpbits |= UTF8_MASK;
+				break;
+			case CE_LATIN1:
+				m_gpbits |= LATIN1_MASK;
+				break;
+			case CE_BYTES:
+				m_gpbits |= BYTES_MASK;
+				break;
+			default:
+				break;
+			}
+			if (isAscii)
+				m_gpbits |= ASCII_MASK;
 		}
 
 		/** @brief Supply pointer to the string representation.
@@ -240,7 +316,7 @@ namespace CXXR
 		 */
 		void setCString(const char *c_string)
 		{
-			m_c_str = c_string;
+			m_c_str = std::string(c_string);
 		}
 
 		/** @brief Mark the hash value as invalid.
@@ -256,7 +332,9 @@ namespace CXXR
 	private:
 		static GCRoot<const String> s_na;
 		static GCRoot<const String> s_blank;
-		const char *m_c_str;
+		std::string m_c_str;
+		cetype_t m_encoding;
+		bool m_ascii;
 
 		mutable int m_hash; // negative signifies invalid
 
@@ -265,7 +343,7 @@ namespace CXXR
 		String(const String &);
 		String &operator=(const String &);
 		// Report error if encoding is invalid:
-		static void checkEncoding(CharsetBit encoding);
+		static void checkEncoding(cetype_t encoding);
 		// Initialize the static data members:
 		static void initialize();
 		friend void ::R::InitNames();
@@ -275,11 +353,22 @@ namespace CXXR
 	{
 		return stdvec_dataptr<const char>(x);
 	}
+
+	/** @brief Is a std::string entirely ASCII?
+     *
+     * @param str The string to be examined.
+     *
+     * @return false if str contains at least one non-ASCII character,
+     * otherwise true.  In particular the function returns true for an
+     * empty string.
+     */
+	bool isASCII(const std::string &str);
 } // namespace CXXR
 
 extern "C"
 {
-	extern SEXP R_NaString; /* NA_STRING as a CHARSXP */
+	extern SEXP R_NaString;	   /* NA_STRING as a CHARSXP */
+	extern SEXP R_BlankString; /* "" as a CHARSXP */
 
 	/**
      * @param x \c const pointer to a CXXR::String.

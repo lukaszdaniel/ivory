@@ -45,7 +45,7 @@ namespace CXXR
     } // namespace ForceNonInline
 } // namespace CXXR
 
-UncachedString::UncachedString(const std::string &str, CharsetBit encoding)
+UncachedString::UncachedString(const std::string &str, cetype_t encoding)
     : String(str.size(), encoding), m_databytes(str.size() + 1),
       m_data(m_short_string)
 {
@@ -54,13 +54,18 @@ UncachedString::UncachedString(const std::string &str, CharsetBit encoding)
     memcpy(m_data, str.data(), sz);
 }
 
+UncachedString *UncachedString::obtain(const std::string &str, cetype_t encoding)
+{
+    return new UncachedString(str, encoding);
+}
+
 void UncachedString::allocData(size_t sz)
 {
     GCRoot<> thisroot(this);
     if (sz > s_short_strlen)
         m_data = reinterpret_cast<char *>(MemoryBank::allocate(m_databytes));
     // Insert trailing null byte:
-    m_data[sz] = 0;
+    m_data[sz] = '\0';
     setCString(m_data);
 }
 

@@ -47,33 +47,41 @@ namespace CXXR
         const auto &mkCharLenptr = Rf_mkCharLen;
     } // namespace ForceNonInline
 
-    GCRoot<const String> String::s_na(new UncachedString("NA"));
-    // SEXP R_NaString = const_cast<String *>(String::NA());
-
-    // String::s_blank and R_BlankString are defined in CachedString.cpp
+    GCRoot<const String> String::s_na(UncachedString::obtain("NA"));
+    GCRoot<const String> String::s_blank(CachedString::obtain(""));
 
     // String::Comparator::operator()(const String&, const String&) is in
     // sort.cpp
 
+    cetype_t String::GPBits2Encoding(unsigned int gpbits)
+    {
+        if ((gpbits & LATIN1_MASK) != 0)
+            return CE_LATIN1;
+        if ((gpbits & UTF8_MASK) != 0)
+            return CE_UTF8;
+        if ((gpbits & BYTES_MASK) != 0)
+            return CE_BYTES;
+        return CE_NATIVE;
+    }
+
     void String::initialize()
     {
         R_NaString = const_cast<String *>(String::NA());
-        set_cached(R_NaString);  /* Mark it */
-        // R_NaString = NA();
-        // R_BlankString = blank();
+        set_cached(R_NaString); /* Mark it */
+        R_BlankString = const_cast<String *>(String::blank());
     }
 
-    void String::checkEncoding(CharsetBit encoding)
+    void String::checkEncoding(cetype_t encoding)
     {
         switch (encoding)
         {
-        case NATIVE_MASK:
-        case UTF8_MASK:
-        case LATIN1_MASK:
-        case BYTES_MASK:
+        case CE_NATIVE:
+        case CE_UTF8:
+        case CE_LATIN1:
+        case CE_BYTES:
             break;
         default:
-            Rf_error("unknown encoding mask: %d", encoding);
+            Rf_error(_("unknown encoding: %d"), encoding);
         }
     }
 

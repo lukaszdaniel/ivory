@@ -1678,14 +1678,15 @@ static SEXP ReadChar(R_inpstream_t stream, char *buf, int length, int levs)
 { 
     InString(stream, buf, length);
     buf[length] = '\0';
-	if (levs & CXXR::String::CharsetBit::UTF8_MASK)
-		return mkCharLenCE(buf, length, CE_UTF8);
-	if (levs & CXXR::String::CharsetBit::LATIN1_MASK)
-		return mkCharLenCE(buf, length, CE_LATIN1);
-	if (levs & CXXR::String::CharsetBit::BYTES_MASK)
-		return mkCharLenCE(buf, length, CE_BYTES);
-	if (levs & CXXR::String::CharsetBit::ASCII_MASK)
-		return mkCharLenCE(buf, length, CE_NATIVE);
+	cetype_t enc = String::GPBits2Encoding(levs);
+	if (enc == CE_UTF8)
+		return Rf_mkCharLenCE(buf, length, CE_UTF8);
+	if (enc == CE_LATIN1)
+		return Rf_mkCharLenCE(buf, length, CE_LATIN1);
+	if (enc == CE_BYTES)
+		return Rf_mkCharLenCE(buf, length, CE_BYTES);
+	if (enc == CE_NATIVE)
+		return Rf_mkCharLenCE(buf, length, CE_NATIVE);
 
 	/* native encoding, not ascii */
     if (!stream->native_encoding[0] || /* original native encoding unknown */

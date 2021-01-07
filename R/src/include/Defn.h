@@ -58,6 +58,7 @@
 #include <CXXR/ListVector.hpp>
 #include <CXXR/ExpressionVector.hpp>
 #include <CXXR/UncachedString.hpp>
+#include <CXXR/CachedString.hpp>
 #include <CXXR/Environment.hpp>
 #include <CXXR/Promise.hpp>
 #include <CXXR/Closure.hpp>
@@ -141,15 +142,6 @@ extern0 SEXP    R_dot_Group;  /* ".Group" */
 extern0 SEXP    R_dot_Class;  /* ".Class" */
 extern0 SEXP    R_dot_GenericCallEnv;  /* ".GenericCallEnv" */
 extern0 SEXP    R_dot_GenericDefEnv;  /* ".GenericDefEnv" */
-
-extern0 SEXP	R_StringHash;       /* Global hash of CHARSXPs */
-
-/**** HASHASH uses the first bit -- see HASHASH_MASK defined below */
-
-/* macros and declarations for managing CHARSXP cache */
-# define CXHEAD(x) (x)
-# define CXTAIL(x) ATTRIB(x)
-SEXP SET_CXTAIL(SEXP x, SEXP y);
 
 #include <Errormsg.h>
 
@@ -636,7 +628,6 @@ extern0 int R_PCRE_limit_recursion;
 # define InitMemory		Rf_InitMemory
 # define InitNames		Rf_InitNames
 # define InitOptions		Rf_InitOptions
-# define InitStringHash		Rf_InitStringHash
 # define InitS3DefaultTypes	Rf_InitS3DefaultTypes
 # define InitTempDir		Rf_InitTempDir
 # define InitTypeTables		Rf_InitTypeTables
@@ -875,7 +866,6 @@ namespace R
     void InitMemory(void);
     void InitNames(void);
     void InitOptions(void);
-    void InitStringHash(void);
     void Init_R_Variables(SEXP);
     void InitTempDir(void);
     void R_reInitTempDir(int);

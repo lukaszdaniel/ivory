@@ -62,7 +62,7 @@ namespace CXXR
          *          Zero signifies ASCII encoding, and at most one of
          *          the MASK bits may be set (checked).
          */
-        explicit UncachedString(size_t sz, CharsetBit encoding = NATIVE_MASK)
+        explicit UncachedString(size_t sz, cetype_t encoding = CE_NATIVE)
             : String(sz, encoding), m_databytes(sz + 1), m_data(m_short_string)
         {
             allocData(sz);
@@ -79,7 +79,9 @@ namespace CXXR
          *          Zero signifies ASCII encoding, and at most one of
          *          the MASK bits may be set (checked).
          */
-        explicit UncachedString(const std::string &str, CharsetBit encoding = NATIVE_MASK);
+        explicit UncachedString(const std::string &str, cetype_t encoding = CE_NATIVE);
+
+        static UncachedString *obtain(const std::string &str, cetype_t encoding = CE_NATIVE);
 
         /** @brief Character access.
 		 * @param index Index of required character (counting from
