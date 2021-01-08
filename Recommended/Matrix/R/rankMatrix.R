@@ -6,10 +6,59 @@
 ##
 ## Ideas by Martin Maechler (April 2007) and Ravi Varadhan (October 2007)
 
+qr2rankMatrix <- function(qr, tol = NULL, isBqr = is.qr(qr), do.warn=TRUE) {
+    ## NB: 1) base::qr(*, LAPACK = TRUE/FALSE)  differ via attr(.,"useLAPACK")
+    ##     2) if LAPACK=TRUE, .$rank is useless (always = full rank)
+    ##
+    ## return ( . ) :
+    if(isBqr && !isTRUE(attr(qr, "useLAPACK")))
+        qr$rank
+    else {
+        diagR <- if(isBqr) # hence "useLAPACK" here
+                     diag(qr$qr) # faster than, but equivalent to   diag(qr.R(q.r))
+                 else ## ==> assume Matrix::qr() i.e., currently "sparseQR"
+                     ## FIXME: Here, we could be quite a bit faster,
+                     ## by not returning the full sparseQR, but just
+                     ## doing the following in C, and return the rank.
+                     diag(qr@R)
+
+        if(anyNA(diagR) || !all(is.finite(diagR))) {
+            if(do.warn) {
+                ifi <- is.finite(diagR)
+                warning(gettextf(
+                    "qr2rankMatrix(.): QR with only %d out of %d finite diag(R) entries",
+                    sum(ifi), length(ifi)))
+            }
+            ## return
+            NA_integer_
+            ## alternative: gives *too* small rank in typical cases
+            ## reduce the maximal rank by omitting all non-finite entries:
+            ## diagR <- diagR[is.finite(diagR)]
+            ## if(length(diagR) == 0)
+            ##     return(NA_integer_)
+        } else {
+            if(isBqr) diagR <- abs(diagR) # in base qr(), sign( diag(R) ) are *not* coerced to positive
+            else if(do.warn && any(diagR < 0))
+                warning(gettextf("qr2rankMatrix(.): QR has negative diag(R) entries"))
+            ## declare those entries to be zero that are < tol*max(.)
+            if((mdi <- max(diagR, na.rm=TRUE)) > 0) {
+                if(!is.numeric(tol)) {
+                    ## d := dim(x) extracted from qr, in both (dense and sparse) qr() cases
+                    d <- dim(if(isBqr) qr$qr else qr)
+                    tol <- max(d) * .Machine$double.eps
+                }
+                sum(diagR >= tol * mdi)
+                ## was sum(diag(q.r@R) != 0)
+            }
+            else 0L # for 0-matrix or all NaN or negative diagR[]
+        }
+    } ## else {Lapack or sparseQR}
+}
+
 rankMatrix <- function(x, tol = NULL,
                        method = c("tolNorm2", "qr.R", "qrLINPACK", "qr",
                                   "useGrad", "maybeGrad"),
-                       sval = svd(x, 0,0)$d, warn.t = TRUE)
+                       sval = svd(x, 0,0)$d, warn.t = TRUE, warn.qr = TRUE)
 {
     ## Purpose: rank of a matrix ``as Matlab'' or "according to Ravi V"
     ## ----------------------------------------------------------------------
@@ -27,7 +76,6 @@ rankMatrix <- function(x, tol = NULL,
     ## tolerance criterion,
     ##
     ## Author: Ravi Varadhan, Date: 22 October 2007 // Tweaks: MM, Oct.23
-
     ## ----------------------------------------------------------------------
 
     stopifnot(length(d <- dim(x)) == 2)
@@ -36,17 +84,18 @@ rankMatrix <- function(x, tol = NULL,
     method <- match.arg(method)
 
     if(useGrad <- (method %in% c("useGrad", "maybeGrad"))) {
-	stopifnot(length(sval) == p,
-		  diff(sval) <= 0) # must be sorted non-increasingly: max = s..[1]
+	stopifnot(length(sval) == p)
+	if(p > 1) stopifnot(diff(sval) <= 0) # must be sorted non-increasingly: max = s..[1]
 	if(sval[1] == 0) { ## <==> all singular values are zero  <==> Matrix = 0  <==> rank = 0
 	    useGrad <- FALSE
 	    method <- eval(formals()[["method"]])[[1]]
 	} else {
 	    ln.av <- log(abs(sval))
+	    if(any(s0 <- sval == 0)) ln.av[s0] <- - .Machine$double.xmax # so we get diff() == 0
 	    diff1 <- diff(ln.av)
 	    if(method == "maybeGrad") {
 		grad <- (min(ln.av) - max(ln.av)) / p
-		useGrad <- !is.na(grad) &&  min(diff1) <= min(-3, 10 * grad)
+		useGrad <- !is.na(grad) && p > 1 && min(diff1) <= min(-3, 10 * grad)
 	    }#  -------
 	}
     }
@@ -66,7 +115,7 @@ rankMatrix <- function(x, tol = NULL,
 				     method),
 			    immediate.=TRUE, domain = "R-Matrix")
                 ## the "Matlab" default:
-                stopifnot(diff(sval) <= 0) #=> sval[1]= max(sval)
+                if(p > 1) stopifnot(diff(sval) <= 0) #=> sval[1]= max(sval)
                 tol <- max(d) * .Machine$double.eps
 	    } else stopifnot((tol <- as.numeric(tol)[[1]]) >= 0)
 	}
@@ -78,27 +127,7 @@ rankMatrix <- function(x, tol = NULL,
 		  if((do.t <- (d[1L] < d[2L])) && warn.t)
 		      warning(gettextf("rankMatrix(x, method='qr'): computing t(x) as nrow(x) < ncol(x)"))
 		  q.r <- qr(if(do.t) t(x) else x, tol=tol, LAPACK = method != "qrLINPACK")
-		  if(x.dense && (method == "qrLINPACK"))
-                      q.r$rank
-                  else { ## else  "qr.R" or sparse {or a problem)
-		      diagR <-
-			  if(x.dense) # faster than, but equivalent to	diag(qr.R(q.r))
-			      diag(q.r$qr)
-			  else
-			      ## FIXME: Here, we could be quite a bit faster,
-			      ## by not returning the full sparseQR, but just
-			      ## doing the following in C, and return the rank.
-			      diag(q.r@R)
-
-                      d.i <- abs(diagR) ## is abs(.) unneeded? [FIXME]
-                      ## declare those entries to be zero that are < tol*max(.)
-                      if((mdi <- max(d.i)) > 0) sum(d.i >= tol * mdi) else 0L # for 0-matrix
-                      ## was sum(diag(q.r@R) != 0)
-                  }
-		  ## else stop(gettextf(
-		  ##       "method %s not applicable for qr() result class %s",
-		  ##       	     sQuote(method), dQuote(class(q.r)[1])),
-		  ##           domain = "R-Matrix")
+                  qr2rankMatrix(q.r, tol=tol, isBqr = x.dense, do.warn = warn.qr)
 	      }
 	      else if(sval[1] > 0) sum(sval >= tol * sval[1]) else 0L, ## "tolNorm2"
 	      "method" = method,

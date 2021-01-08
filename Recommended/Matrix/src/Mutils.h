@@ -15,6 +15,9 @@ extern "C" {
 #include <R_ext/RS.h> /* for Memzero() */
 #include "localization.h"
 
+// NB: For  'FCONE'  etc (for LTO), the "includer" will  #include "Lapack-etc.h"
+// --
+
 // must come after <R.h> above, for clang (2015-08-05)
 #ifdef __GNUC__
 # undef alloca
@@ -35,6 +38,7 @@ extern "C" {
   typedef int R_xlen_t;
 # endif
 #endif
+
 
 #define Alloca(n, t)   (t *) alloca( (size_t) ( (n) * sizeof(t) ) )
 

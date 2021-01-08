@@ -202,10 +202,10 @@ void GCManager::adjustThreshold(R_size_t bytes_wanted)
     }
 
     if (vect_occup > 1.0 && VNeeded < s_max_threshold)
+    {
         s_threshold = VNeeded;
-    // This follows memory.c in 2.5.1, but should the following
-    // actually read 'else if'?
-    if (vect_occup > R_VGrowFrac)
+    }
+    else if (vect_occup > R_VGrowFrac)
     {
         size_t change = size_t(R_VGrowIncrMin + R_VGrowIncrFrac * s_threshold);
         if (s_max_threshold >= change + s_threshold)
@@ -282,7 +282,7 @@ bool GCManager::gc_inhibit_release()
 
 bool GCManager::cue(size_t bytes_wanted, bool force)
 {
-    if (force || FORCE_GC() || (GCNode::numNodes() >= s_node_threshold) || (s_threshold < bytes_wanted + MemoryBank::bytesAllocated()))
+    if (force || FORCE_GC() || /*(GCNode::numNodes() >= s_node_threshold) ||*/ (s_threshold < bytes_wanted + MemoryBank::bytesAllocated()))
     {
         gc(bytes_wanted, false);
         return true;
@@ -323,8 +323,8 @@ void GCManager::gc(size_t bytes_wanted, bool full)
     {
         if (R_in_gc)
             gc_error("*** recursive gc invocation\n");
-        if (GCNode::numNodes() >= s_node_threshold)
-            GCManager::s_node_threshold = GCNode::numNodes() + 1;
+        // if (GCNode::numNodes() >= s_node_threshold)
+        //     GCManager::s_node_threshold = GCNode::numNodes() + 1;
 
         if (bytes_wanted + MemoryBank::bytesAllocated() > s_threshold)
         {
@@ -354,7 +354,7 @@ void GCManager::gc(size_t bytes_wanted, bool full)
 	   necessary.  If so, we jump back to the beginning and run
 	   the collection, but on this second pass we do not run
 	   finalizers. */
-    if (any_finalizers_run && ((GCNode::numNodes() >= s_node_threshold) || (bytes_wanted + MemoryBank::bytesAllocated() > s_threshold)))
+    if (any_finalizers_run && (/*(GCNode::numNodes() >= s_node_threshold) ||*/ (bytes_wanted + MemoryBank::bytesAllocated() > s_threshold)))
         gcGenController(bytes_wanted, full);
 
 #endif
@@ -390,7 +390,7 @@ void GCManager::gcGenController(size_t bytes_wanted, bool full)
         /* update heap statistics */
         if (level < s_num_old_generations)
         {
-            if (GCNode::numNodes() ||
+            if (/*GCNode::numNodes() ||*/
                 MemoryBank::bytesAllocated() + bytes_wanted > (1.0 - R_MinFreeFrac) * s_threshold)
             {
                 level++;

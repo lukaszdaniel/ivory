@@ -1824,11 +1824,11 @@ SEXP Rf_applyClosure(SEXP call, SEXP op, SEXP arglist, SEXP rho, SEXP suppliedva
 
     /*  Fix up any extras that were supplied by usemethod. */
 
-    if (suppliedvars != R_NilValue)
-	addMissingVarsToNewEnv(newrho, suppliedvars);
+	if (suppliedvars != R_NilValue)
+		Rf_addMissingVarsToNewEnv(newrho, suppliedvars);
 
-    if (R_envHasNoSpecialSymbols(newrho))
-	SET_NO_SPECIAL_SYMBOLS(newrho);
+	if (R_envHasNoSpecialSymbols(newrho))
+		SET_NO_SPECIAL_SYMBOLS(newrho);
 
 #ifdef ADJUST_ENVIR_REFCNTS
     Rboolean is_getter_call =

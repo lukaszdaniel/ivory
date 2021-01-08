@@ -1,8 +1,8 @@
 #include <limits.h>
 
+#include <R_ext/Lapack.h>
 #include "Mutils.h"
 #include "localization.h"
-#include <R_ext/Lapack.h>
 
 // La_norm_type() & La_rcond_type()  have been in R_ext/Lapack.h
 //  but have still not been available to package writers ...
@@ -67,6 +67,7 @@ set_double_by_name(SEXP obj, double val, char *nm)
 
     if ((!isReal(obj)) || (length(obj) > 0 && nms == R_NilValue))
 	error(_("object must be a named, numeric vector"));
+    // case 1:  replace existing entry named  <nm>
     for (i = 0; i < len; i++) {
 	if (!strcmp(nm, CHAR(STRING_ELT(nms, i)))) {
 	    REAL(obj)[i] = val;
@@ -74,6 +75,7 @@ set_double_by_name(SEXP obj, double val, char *nm)
 	    return obj;
 	}
     }
+    // case 2:  no such name --> add new entry with that name at end of vec
     {
 	SEXP nx = PROTECT(allocVector(REALSXP, len + 1)),
 	    nnms = allocVector(STRSXP, len + 1);
@@ -490,6 +492,8 @@ void l_packed_getDiag(int *dest, SEXP x, int n)
 
 //----------------------------------------------------------------------
 
+/** diag(x) <- D  for   x a  <dspMatrix>  or dppMatrix, ..etc
+ */
 SEXP d_packed_setDiag(double *diag, int l_d, SEXP x, int n)
 {
 #define SET_packed_setDiag				\

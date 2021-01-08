@@ -27,7 +27,7 @@ double get_norm_sp(SEXP obj, const char *typstr)
 	work = (double *) R_alloc(dims[0], sizeof(double));
     }
     return F77_CALL(dlansp)(typnm, uplo_P(obj), dims,
-			    REAL(R_do_slot(obj, Matrix_xSym)), work);
+			    REAL(R_do_slot(obj, Matrix_xSym)), work FCONE FCONE);
 }
 
 SEXP dspMatrix_norm(SEXP obj, SEXP type)
@@ -46,7 +46,7 @@ SEXP dspMatrix_rcond(SEXP obj, SEXP type)
 		     INTEGER(R_do_slot(trf, Matrix_permSym)),
 		     &anorm, &rcond,
 		     (double *) R_alloc(2*dims[0], sizeof(double)),
-		     (int *) R_alloc(dims[0], sizeof(int)), &info);
+		     (int *) R_alloc(dims[0], sizeof(int)), &info FCONE);
     return ScalarReal(rcond);
 }
 
@@ -62,7 +62,7 @@ SEXP dspMatrix_solve(SEXP a)
     F77_CALL(dsptri)(uplo_P(val), dims, REAL(R_do_slot(val, Matrix_xSym)),
 		     INTEGER(R_do_slot(trf, Matrix_permSym)),
 		     (double *) R_alloc((long) dims[0], sizeof(double)),
-		     &info);
+		     &info FCONE);
     UNPROTECT(1);
     return val;
 }
@@ -80,7 +80,7 @@ SEXP dspMatrix_matrix_solve(SEXP a, SEXP b)
     F77_CALL(dsptrs)(uplo_P(trf),
 		     &n, &nrhs, REAL(R_do_slot(trf, Matrix_xSym)),
 		     INTEGER(R_do_slot(trf, Matrix_permSym)),
-		     REAL(R_do_slot(val, Matrix_xSym)), &n, &info);
+		     REAL(R_do_slot(val, Matrix_xSym)), &n, &info FCONE);
     UNPROTECT(1);
     return val;
 }
@@ -156,7 +156,7 @@ SEXP dspMatrix_matrix_mm(SEXP a, SEXP b)
     if (nrhs >= 1 && n >= 1) {
 	for (i = 0; i < nrhs; i++)
 	    F77_CALL(dspmv)(uplo, &n, &one, ax, bx + i * n, &ione,
-			    &zero, vx + i * n, &ione);
+			    &zero, vx + i * n, &ione FCONE);
 	if(n * nrhs >= SMALL_4_Alloca) Free(bx);
     }
     UNPROTECT(1);
@@ -180,7 +180,7 @@ SEXP dspMatrix_trf(SEXP x)
     R_do_slot_assign(val, Matrix_DimSym, duplicate(dimP));
     slot_dup(val, x, Matrix_xSym);
     perm = INTEGER(ALLOC_SLOT(val, Matrix_permSym, INTSXP, n));
-    F77_CALL(dsptrf)(uplo, dims, REAL(R_do_slot(val, Matrix_xSym)), perm, &info);
+    F77_CALL(dsptrf)(uplo, dims, REAL(R_do_slot(val, Matrix_xSym)), perm, &info FCONE);
     if (info) error(_("Lapack routine '%s' returned error code %d"), "dsptrf", info);
     UNPROTECT(1);
     return set_factors(x, val, "pBunchKaufman");

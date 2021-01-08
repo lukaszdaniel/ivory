@@ -169,7 +169,7 @@ namespace CXXR
     {
         m_databytes = sz * sizeof(T);
         // Check for integer overflow:
-        if (m_databytes / sizeof(T) != sz)
+        if (R_xlen_t(m_databytes / sizeof(T)) != sz)
             Rf_error(_("Request to create impossibly large vector."));
         GCRoot<> thisroot(this);
         try

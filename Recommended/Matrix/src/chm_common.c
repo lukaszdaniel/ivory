@@ -303,7 +303,7 @@ CHM_SP as_cholmod_sparse(CHM_SP ans, SEXP x,
 	}
     }
 
-    if (check_Udiag && ctype % 3 == 2 // triangular
+    if (check_Udiag && ctype % 3 == 2 /* triangular */ && ans->nrow // fails for Dim = (0,0)
 	&& (*diag_P(x) == 'U')) { /* diagU2N(.)  "in place" : */
 	double one[] = {1, 0};
 	CHM_SP eye = cholmod_speye(ans->nrow, ans->ncol, ans->xtype, &c);
@@ -824,7 +824,10 @@ int R_cholmod_start(CHM_CM c)
     int res;
     if (!(res = cholmod_start(c)))
 	error(_("Unable to initialize 'cholmod' function: error code %d"), res);
-    c->print_function = R_cholmod_printf; /* Rprintf gives warning */
+    /*SuiteSparse <= 4.x.y :
+     * c->print_function = R_cholmod_printf; /. Rprintf gives warning */
+    SuiteSparse_config.printf_func = R_cholmod_printf;/* Rprintf gives warning */
+    //                                 ^^^^^^^^^ now is misnomer
     /* Since we provide an error handler, it may not be a good idea to allow CHOLMOD printing,
      * because that's not easily suppressed on the R level :
      * Hence consider, at least temporarily *  c->print_function = NULL; */

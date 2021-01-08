@@ -44,9 +44,9 @@ if(.Matrix.avoiding.as.matrix) {
 }
 
 ## should propagate to all subclasses:
-setMethod("as.matrix", signature(x = "Matrix"), function(x) as.matrix.Matrix(x))
+setMethod("as.matrix", signature(x = "Matrix"), function(x, ...) as(x, "matrix"))
 ## for 'Matrix' objects, as.array() should be equivalent:
-setMethod("as.array",  signature(x = "Matrix"), function(x)  as.array.Matrix(x))
+setMethod("as.array",  signature(x = "Matrix"), function(x, ...) as(x, "matrix"))
 
 ## head and tail apply to all Matrix objects for which subscripting is allowed:
 setMethod("head", signature(x = "Matrix"), utils::head.matrix)
@@ -266,8 +266,8 @@ Matrix <- function (data = NA, nrow = 1, ncol = 1, byrow = FALSE,
     if((isTri <- !isSym))
 	isTri <- isTriangular(data)
     isDiag <- isSym # cannot be diagonal if it isn't symmetric
-    if(isDiag) # do not *build*  1 x 1 diagonalMatrix
-	isDiag <- doDiag && !isTRUE(sparse1) && nrow(data) > 1 && isDiagonal(data)
+    if(isDiag)
+	isDiag <- doDiag && isDiagonal(data)
 
     ## try to coerce ``via'' virtual classes
     if(isDiag) { ## diagonal is preferred to sparse !
@@ -479,8 +479,7 @@ setMethod("[", signature(x = "Matrix",
 ## missing 'drop' --> 'drop = TRUE'
 ##                     -----------
 ## select rows __ or __ vector indexing:
-setMethod("[", signature(x = "Matrix", i = "index", j = "missing",
-			 drop = "missing"),
+setMethod("[", signature(x = "Matrix", i = "index", j = "missing", drop = "missing"),
 	  function(x,i,j, ..., drop) {
 	      Matrix.msg("M[i,m,m] : nargs()=",nargs(), .M.level = 2)
 	      if(nargs() == 2) { ## e.g. M[0] , M[TRUE], M[1:2], M[-7]
@@ -490,17 +489,14 @@ setMethod("[", signature(x = "Matrix", i = "index", j = "missing",
 		  ##		      ^^
 	      }
 	  })
-
 ## select columns
-setMethod("[", signature(x = "Matrix", i = "missing", j = "index",
-			 drop = "missing"),
+setMethod("[", signature(x = "Matrix", i = "missing", j = "index", drop = "missing"),
 	  function(x,i,j, ..., drop) {
 	      Matrix.msg("M[m,i,m] : nargs()=",nargs(), .M.level = 2)
 	      callGeneric(x, , j=j, drop= TRUE)
 	  })
 ## select both rows *and* columns
-setMethod("[", signature(x = "Matrix", i = "index", j = "index",
-			 drop = "missing"),
+setMethod("[", signature(x = "Matrix", i = "index", j = "index", drop = "missing"),
 	  function(x,i,j, ..., drop) {
 	      Matrix.msg("M[i,i,m] : nargs()=",nargs(), .M.level = 2)
 	      callGeneric(x, i=i, j=j, drop= TRUE)
@@ -517,6 +513,7 @@ setMethod("[", signature(x = "Matrix", i = "ANY", j = "ANY", drop = "ANY"),
 .M.sub.i.logical <- function (x, i, j, ..., drop)
 {
     nA <- nargs() # counts 'M[i]' as 2 arguments,  'M[i,]' as 3
+    Matrix.msg("M[logi,m,m] : nargs()=", nA, .M.level = 2)
     if(nA == 2) { ##  M [ M >= 7 ]
 	## FIXME: when both 'x' and 'i' are sparse, this can be very inefficient
 	if(is(x, "sparseMatrix"))
@@ -526,11 +523,8 @@ setMethod("[", signature(x = "Matrix", i = "ANY", j = "ANY", drop = "ANY"),
 	else as(as(as(x, "generalMatrix"), "denseMatrix"), toC)@x[as.vector(i)]
 	## -> error when lengths don't match
     }
-    else if(nA == 3) { ## M[i, ]  e.g.,  M [ M[,1, drop=FALSE] >= 7, ]
-
-	## Note: current method dispatch seems not to call this ever
-
-	if(length(i) && !anyNA(i) && all(i)) ## select everything
+    else if(nA == 3) { ## M[ <logic>, ]  e.g.,  M [ M[,1, drop=FALSE] >= 7, ]  or M[TRUE,]
+	if(length(i) && x@Dim[1L] && !anyNA(i) && all(i)) ## select everything
 	    x
 	else ## not selecting all -> result is *NOT* diagonal/triangular/symmetric/..
 	    ## keep j missing, but  drop = "logical"
@@ -544,7 +538,6 @@ for(ii in c("lMatrix", "logical"))
     setMethod("[", signature(x = "Matrix", i = ii, j = "missing", drop = "missing"),
 	      .M.sub.i.logical)
 rm(ii)
-
 
 ##' x[ ij ]  where ij is (i,j) 2-column matrix
 ##' @note only called from  .M.sub.i.2col(x, i) below

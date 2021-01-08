@@ -32,7 +32,7 @@ double get_norm(SEXP obj, const char *typstr)
 	work = (double *) R_alloc(dims[0], sizeof(double));
     }
     return F77_CALL(dlantp)(typnm, uplo_P(obj), diag_P(obj), dims,
-			    REAL(R_do_slot(obj, Matrix_xSym)), work);
+			    REAL(R_do_slot(obj, Matrix_xSym)), work FCONE FCONE FCONE);
 }
 
 SEXP dtpMatrix_norm(SEXP obj, SEXP type)
@@ -50,7 +50,8 @@ SEXP dtpMatrix_rcond(SEXP obj, SEXP type)
     F77_CALL(dtpcon)(typnm, uplo_P(obj), diag_P(obj), dims,
 		     REAL(R_do_slot(obj, Matrix_xSym)), &rcond,
 		     (double *) R_alloc(3*dims[0], sizeof(double)),
-		     (int *) R_alloc(dims[0], sizeof(int)), &info);
+		     (int *) R_alloc(dims[0], sizeof(int)),
+		     &info FCONE FCONE FCONE);
     return ScalarReal(rcond);
 }
 
@@ -59,7 +60,7 @@ SEXP dtpMatrix_solve(SEXP a)
     SEXP val = PROTECT(duplicate(a));
     int info, *Dim = INTEGER(R_do_slot(val, Matrix_DimSym));
     F77_CALL(dtptri)(uplo_P(val), diag_P(val), Dim,
-		     REAL(R_do_slot(val, Matrix_xSym)), &info);
+		     REAL(R_do_slot(val, Matrix_xSym)), &info FCONE FCONE);
     UNPROTECT(1);
     return val;
 }
@@ -134,7 +135,7 @@ SEXP dtpMatrix_matrix_mm(SEXP x, SEXP y, SEXP right, SEXP trans)
 	    for (int j = 0; j < n; j++) // X %*% y[,j]
 		F77_CALL(dtpmv)(uplo, /*trans = */ tr ? "T" : "N",
 				diag, yDim, xx,
-				vx + j * m, &ione);
+				vx + j * m, &ione FCONE FCONE FCONE);
 	}
     UNPROTECT(1);
     return val;
@@ -157,12 +158,12 @@ SEXP dtpMatrix_matrix_solve(SEXP a, SEXP b)
 	*vx = REAL(R_do_slot(val, Matrix_xSym));
     for (int j = 0; j < bDim[1]; j++) /* a^{-1} %*% b[,j]  via BLAS 2 DTPSV(.) */
 	F77_CALL(dtpsv)(uplo, "N", diag, bDim, ax,
-			vx + j * bDim[0], &ione);
+			vx + j * bDim[0], &ione FCONE FCONE);
 #else
     F77_CALL(dtptrs)(uplo, "N", diag, /* n= */ aDim, /* nrhs = */ &bDim[1],
 	/* ap = */ REAL(R_do_slot(a, Matrix_xSym)),
 	/* b  = */ REAL(R_do_slot(val, Matrix_xSym)),
-	bDim, &ione);
+	bDim, &ione FCONE FCONE);
 #endif
     UNPROTECT(1);
     return val;
@@ -185,7 +186,7 @@ SEXP dgeMatrix_dtpMatrix_mm(SEXP x, SEXP y)
 	      xDim[0], xDim[1], yDim[0], yDim[1]);
     for (int i = 0; i < xDim[0]; i++)/* val[i,] := Y' %*% x[i,]  */
 	F77_CALL(dtpmv)(uplo, "T", diag, yDim, yx,
-			vx + i, /* incr = */ xDim);
+			vx + i, /* incr = */ xDim FCONE FCONE FCONE);
     UNPROTECT(1);
     return val;
 }

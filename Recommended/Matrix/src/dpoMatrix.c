@@ -36,9 +36,10 @@ SEXP dpoMatrix_chol(SEXP x)
     R_do_slot_assign(val, Matrix_DimSym, duplicate(dimP));
     vx = REAL(ALLOC_SLOT(val, Matrix_xSym, REALSXP, n * n));
     AZERO(vx, n * n);
-    F77_CALL(dlacpy)(uplo, &n, &n, REAL(R_do_slot(x, Matrix_xSym)), &n, vx, &n);
+    F77_CALL(dlacpy)(uplo, &n, &n, REAL(R_do_slot(x, Matrix_xSym)),
+		     &n, vx, &n FCONE);
     if (n > 0) {
-	F77_CALL(dpotrf)(uplo, &n, vx, &n, &info);
+	F77_CALL(dpotrf)(uplo, &n, vx, &n, &info  FCONE);
 	if (info) {
 	    if(info > 0)
 		error(_("the leading minor of order %d is not positive definite"),
@@ -62,7 +63,7 @@ SEXP dpoMatrix_rcond(SEXP obj, SEXP type)
 		     dims, REAL(R_do_slot(Chol, Matrix_xSym)),
 		     dims, &anorm, &rcond,
 		     (double *) R_alloc(3*dims[0], sizeof(double)),
-		     (int *) R_alloc(dims[0], sizeof(int)), &info);
+		     (int *) R_alloc(dims[0], sizeof(int)), &info FCONE);
     return ScalarReal(rcond);
 }
 
@@ -79,7 +80,7 @@ SEXP dpoMatrix_solve(SEXP x)
     R_do_slot_assign(val, Matrix_DimNamesSym,
 	     duplicate(R_do_slot(x, Matrix_DimNamesSym)));
     F77_CALL(dpotri)(uplo_P(val), dims,
-		     REAL(R_do_slot(val, Matrix_xSym)), dims, &info);
+		     REAL(R_do_slot(val, Matrix_xSym)), dims, &info FCONE);
     UNPROTECT(1);
     return val;
 }
@@ -102,7 +103,7 @@ SEXP dpoMatrix_dgeMatrix_solve(SEXP a, SEXP b)
     F77_CALL(dpotrs)(uplo_P(Chol), adims, bdims + 1,
 		     REAL(R_do_slot(Chol, Matrix_xSym)), adims,
 		     REAL(R_do_slot(val, Matrix_xSym)),
-		     bdims, &info);
+		     bdims, &info FCONE);
     UNPROTECT(1);
     return val;
 }
@@ -121,7 +122,7 @@ SEXP dpoMatrix_matrix_solve(SEXP a, SEXP b)
 	error(_("Dimensions of system to be solved are inconsistent"));
     F77_CALL(dpotrs)(uplo_P(Chol), adims, bdims + 1,
 		     REAL(R_do_slot(Chol, Matrix_xSym)), adims,
-		     REAL(val), bdims, &info);
+		     REAL(val), bdims, &info FCONE);
     UNPROTECT(1);
     return val;
 }

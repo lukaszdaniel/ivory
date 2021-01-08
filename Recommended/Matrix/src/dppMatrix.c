@@ -28,7 +28,7 @@ SEXP dppMatrix_chol(SEXP x)
     R_do_slot_assign(val, Matrix_diagSym, mkString("N"));
     R_do_slot_assign(val, Matrix_DimSym, duplicate(dimP));
     slot_dup(val, x, Matrix_xSym);
-    F77_CALL(dpptrf)(uplo, dims, REAL(R_do_slot(val, Matrix_xSym)), &info);
+    F77_CALL(dpptrf)(uplo, dims, REAL(R_do_slot(val, Matrix_xSym)), &info FCONE);
     if (info) {
 	if(info > 0) /* e.g. x singular */
 	    error(_("the leading minor of order %d is not positive definite"),
@@ -50,7 +50,7 @@ SEXP dppMatrix_rcond(SEXP obj, SEXP type)
     F77_CALL(dppcon)(uplo_P(Chol), dims,
 		     REAL(R_do_slot(Chol, Matrix_xSym)), &anorm, &rcond,
 		     (double *) R_alloc(3*dims[0], sizeof(double)),
-		     (int *) R_alloc(dims[0], sizeof(int)), &info);
+		     (int *) R_alloc(dims[0], sizeof(int)), &info FCONE);
     return ScalarReal(rcond);
 }
 
@@ -64,7 +64,7 @@ SEXP dppMatrix_solve(SEXP x)
     slot_dup(val, Chol, Matrix_xSym);
     slot_dup(val, Chol, Matrix_DimSym);
     F77_CALL(dpptri)(uplo_P(val), dims,
-		     REAL(R_do_slot(val, Matrix_xSym)), &info);
+		     REAL(R_do_slot(val, Matrix_xSym)), &info FCONE);
     UNPROTECT(1);
     return val;
 }
@@ -81,7 +81,7 @@ SEXP dppMatrix_matrix_solve(SEXP a, SEXP b)
 	error(_("Dimensions of system to be solved are inconsistent"));
     F77_CALL(dpptrs)(uplo_P(Chol), &n, &nrhs,
 		     REAL(R_do_slot(Chol, Matrix_xSym)),
-		     REAL(R_do_slot(val, Matrix_xSym)), &n, &info);
+		     REAL(R_do_slot(val, Matrix_xSym)), &n, &info FCONE);
     UNPROTECT(1);
     return val;
 }

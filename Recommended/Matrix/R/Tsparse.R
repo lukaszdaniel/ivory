@@ -142,7 +142,7 @@ intI <- function(i, n, dn, give.dn = TRUE)
 		stop("you cannot mix negative and positive indices")
 	    i0 <- (0:(n - 1L))[i]
 	} else {
-	    if(length(i) && max(i, na.rm=TRUE) > n)
+	    if(length(i) && max(i, na.rm=TRUE) > n) # base has "subscript out of bounds":
 		stop(gettextf("index larger than maximal %d", n), domain = "R-Matrix")
 	    if(any(z <- i == 0)) i <- i[!z]
 	    i0 <- i - 1L		# transform to 0-indexing
@@ -315,7 +315,7 @@ replTmat <- function (x, i, j, ..., value)
     .all0 <- function(v) if(spV) length(v@i) == 0 else all0(v)
     delayedAssign("value.not.logical",
                   !(if(spV) {
-                      extends(clDv, "lsparseVector") || extends(clDv, "nsparseVector")
+                      extends1of(clDv, "lsparseVector", "nsparseVector")
                   } else {
                       is.logical(value) || is.logical(as.vector(value))
                   }))
@@ -690,7 +690,7 @@ replTmat <- function (x, i, j, ..., value)
 	## c(i) : drop "matrix" to logical vector
 	x[as.vector(i)] <- value
 	return(x)
-    } else if(extends(cli <- getClassDef(class(i)),"lMatrix") || extends(cli, "nMatrix")) {
+    } else if(extends1of(cli <- getClassDef(class(i)), c("lMatrix", "nMatrix"))) {
 	Matrix.msg(gettext(".TM.repl.i.mat(): \"lMatrix\" case ...", domain = "R-Matrix"), .M.level=2)
 	i <- which(as(i, if(extends(cli, "sparseMatrix")) "sparseVector" else "vector"))
 	## x[i] <- value ; return(x)
@@ -903,3 +903,12 @@ setMethod("t", signature(x = "TsparseMatrix"),
 	      r@Dimnames <- x@Dimnames[2:1]
 	      r
       })
+
+isDiagTsp <- function(object) {
+    d <- dim(object)
+    if(d[1] != d[2])
+        FALSE
+    else
+        length(i <- object@i) == length(j <- object@j) && all(i == j)
+}
+setMethod("isDiagonal", signature(object = "TsparseMatrix"), isDiagTsp)
