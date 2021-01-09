@@ -69,16 +69,6 @@ namespace CXXR
 
         switch (m_type)
         {
-        case ENVSXP:
-        {
-            if (frame())
-                frame()->conductVisitor(v);
-            if (enclosingEnvironment())
-                enclosingEnvironment()->conductVisitor(v);
-            if (hashTable())
-                hashTable()->conductVisitor(v);
-        }
-        break;
         case CLOSXP:
         {
             if (formals())

@@ -403,15 +403,6 @@ namespace
     SEXP R_PreciousList = nullptr; /* List of Persistent Objects */
 
     /* Debugging Routines. */
-#if 0
-    inline void INIT_REFCNT(SEXP x)
-    {
-#ifdef COMPUTE_REFCNT_VALUES
-        SET_REFCNT(x, 0);
-        SET_TRACKREFS(x, TRUE);
-#endif
-    }
-#endif
 #ifdef COMPUTE_REFCNT_VALUES
     void FIX_REFCNT_EX(SEXP x, SEXP old, SEXP new_, Rboolean chkpnd)
     {
@@ -564,67 +555,66 @@ bool WeakRef::runFinalizers()
         return false;
     running = true;
 
-
-    WRList* finalization_pending = getFinalizationPending();
+    WRList *finalization_pending = getFinalizationPending();
     bool finalizer_run = !finalization_pending->empty();
 
     WeakRef::check();
 
     while (finalization_pending->size())
     {
-            WeakRef* wr = *finalization_pending->begin();
-            /**** use R_ToplevelExec here? */
-            RCNTXT thiscontext;
-            RCNTXT *volatile saveToplevelContext;
-            volatile bool oldvis;
-            GCRoot<> oldHStack(R_HandlerStack);
-            GCRoot<> oldRStack(R_RestartStack);
-            GCRoot<> oldRVal(R_ReturnedValue);
-            oldvis = R_Visible;
-            R_HandlerStack = R_NilValue;
-            R_RestartStack = R_NilValue;
+        WeakRef *wr = *finalization_pending->begin();
+        /**** use R_ToplevelExec here? */
+        RCNTXT thiscontext;
+        RCNTXT *volatile saveToplevelContext;
+        volatile bool oldvis;
+        GCRoot<> oldHStack(R_HandlerStack);
+        GCRoot<> oldRStack(R_RestartStack);
+        GCRoot<> oldRVal(R_ReturnedValue);
+        oldvis = R_Visible;
+        R_HandlerStack = R_NilValue;
+        R_RestartStack = R_NilValue;
 
-            /* A top level context is established for the finalizer to
+        /* A top level context is established for the finalizer to
 	       insure that any errors that might occur do not spill
 	       into the call that triggered the collection. */
-            thiscontext.start(CTXT_TOPLEVEL, R_NilValue, R_GlobalEnv, R_BaseEnv, R_NilValue, R_NilValue);
-            saveToplevelContext = R_ToplevelContext;
-            GCRoot<> topExp(R_CurrentExpr);
-            auto savestack = GCRootBase::ppsSize();
+        thiscontext.start(CTXT_TOPLEVEL, R_NilValue, R_GlobalEnv, Environment::base(), R_NilValue, R_NilValue);
+        saveToplevelContext = R_ToplevelContext;
+        GCRoot<> topExp(R_CurrentExpr);
+        auto savestack = GCRootBase::ppsSize();
 
-            bool redo = false;
-            bool jumped = false;
-            do
+        bool redo = false;
+        bool jumped = false;
+        do
+        {
+            redo = false;
+            // std::cerr << __FILE__ << ":" << __LINE__ << " Entering try/catch for " << &thiscontext << std::endl;
+            try
             {
-                redo = false;
-                // std::cerr << __FILE__ << ":" << __LINE__ << " Entering try/catch for " << &thiscontext << std::endl;
-                try
+                if (!jumped)
                 {
-                    if (!jumped)
-                    {
-                        R_GlobalContext = R_ToplevelContext = &thiscontext;
-                        runWeakRefFinalizer(wr);
-                    }
-                    thiscontext.end();
+                    R_GlobalContext = R_ToplevelContext = &thiscontext;
+                    runWeakRefFinalizer(wr);
                 }
-                catch (CXXR::JMPException &e)
-                {
-                    // std::cerr << __FILE__ << ":" << __LINE__ << " Seeking " << e.context() << "; in " << &thiscontext << std::endl;
-                    if (e.context() != &thiscontext)
-                        throw;
-                    redo = true;
-                    jumped = true;
-                }
-                // std::cerr << __FILE__ << ":" << __LINE__ << " Exiting  try/catch for " << &thiscontext << std::endl;
-            } while (redo);
+                thiscontext.end();
+            }
+            catch (CXXR::JMPException &e)
+            {
+                // std::cerr << __FILE__ << ":" << __LINE__ << " Seeking " << e.context() << "; in " << &thiscontext << std::endl;
+                if (e.context() != &thiscontext)
+                    throw;
+                redo = true;
+                jumped = true;
+            }
+            // std::cerr << __FILE__ << ":" << __LINE__ << " Exiting  try/catch for " << &thiscontext << std::endl;
+        } while (redo);
 
-            R_ToplevelContext = saveToplevelContext;
-            GCRootBase::ppsRestoreSize(savestack);
-            R_CurrentExpr = topExp;
-            R_HandlerStack = oldHStack;
-            R_RestartStack = oldRStack;
-            R_ReturnedValue = oldRVal;
-            R_Visible = oldvis;
+        R_ToplevelContext = saveToplevelContext;
+        GCRootBase::ppsRestoreSize(savestack);
+        R_CurrentExpr = topExp;
+        R_HandlerStack = oldHStack;
+        R_RestartStack = oldRStack;
+        R_ReturnedValue = oldRVal;
+        R_Visible = oldvis;
     }
     running = false;
     return finalizer_run;
@@ -706,8 +696,6 @@ void GCNode::gc(unsigned int num_old_gens_to_collect)
     MARK_THRU(&marker, R_InBCInterpreter);
 
     MARK_THRU(&marker, R_GlobalEnv);	           /* Global environment */
-    MARK_THRU(&marker, R_BaseEnv);
-    MARK_THRU(&marker, R_EmptyEnv);
     MARK_THRU(&marker, R_Warnings);	           /* Warnings, if any */
     MARK_THRU(&marker, R_ReturnedValue);
 
@@ -1198,28 +1186,20 @@ SEXP Rf_lcons(SEXP cr, SEXP tl)
 */
 SEXP R::NewEnvironment(SEXP namelist, SEXP valuelist, SEXP rho)
 {
-    PROTECT(namelist);
-    PROTECT(valuelist);
-    PROTECT(rho);
-    SEXP newrho = new RObject(ENVSXP);
-    UNPROTECT(3);
-
-    // INIT_REFCNT(newrho);
-    Environment::set_frame(newrho, valuelist);
-    INCREMENT_REFCNT(valuelist);
-    Environment::set_enclos(newrho, CHK(rho));
-    if (rho)
-        INCREMENT_REFCNT(rho);
-
     SEXP v = CHK(valuelist);
     SEXP n = CHK(namelist);
+
     while (v != R_NilValue && n != R_NilValue)
     {
         SET_TAG(v, TAG(n));
         v = CDR(v);
         n = CDR(n);
     }
-    return (newrho);
+
+    GCRoot<> namelistr(namelist);
+    GCRoot<PairList> namevalr(SEXP_downcast<PairList *>(valuelist));
+    GCRoot<Environment> rhor(SEXP_downcast<Environment *>(rho));
+    return new Environment(rhor, namevalr);
 }
 
 /* mkPROMISE is defined directly do avoid the need to protect its arguments
@@ -1235,7 +1215,6 @@ HIDDEN SEXP R::mkPROMISE(SEXP expr, SEXP rho)
        substitute() and the like */
     ENSURE_NAMEDMAX(expr);
 
-    // INIT_REFCNT(s);
     Promise::set_prcode(s, CHK(expr));
     INCREMENT_REFCNT(expr);
     Promise::set_prenv(s, CHK(rho));
@@ -2503,9 +2482,9 @@ SEXP ENCLOS(SEXP x) { return CHK(CXXR::Environment::enclos(CHK(x))); }
 SEXP HASHTAB(SEXP x) { return CHK(CXXR::Environment::hashtab(CHK(x))); }
 int ENVFLAGS(SEXP x) { return CXXR::Environment::envflags(CHK(x)); }
 
-void SET_FRAME(SEXP x, SEXP v) { FIX_REFCNT(x, CXXR::Environment::frame(x), v); CHECK_OLD_TO_NEW(x, v); CXXR::Environment::set_frame(x, v); }
-void SET_ENCLOS(SEXP x, SEXP v) { FIX_REFCNT(x, CXXR::Environment::enclos(x), v); CHECK_OLD_TO_NEW(x, v); CXXR::Environment::set_enclos(x, v); }
-void SET_HASHTAB(SEXP x, SEXP v) { FIX_REFCNT(x, CXXR::Environment::hashtab(x), v); CHECK_OLD_TO_NEW(x, v); CXXR::Environment::set_hashtab(x, v); }
+void SET_FRAME(SEXP x, SEXP v) { FIX_REFCNT(x, CXXR::Environment::frame(x), v); CXXR::Environment::set_frame(x, v); }
+void SET_ENCLOS(SEXP x, SEXP v) { FIX_REFCNT(x, CXXR::Environment::enclos(x), v); CXXR::Environment::set_enclos(x, v); }
+void SET_HASHTAB(SEXP x, SEXP v) { FIX_REFCNT(x, CXXR::Environment::hashtab(x), v); CXXR::Environment::set_hashtab(x, v); }
 void SET_ENVFLAGS(SEXP x, int v) { CXXR::Environment::set_envflags(x, v); }
 
 /* Promise Accessors */

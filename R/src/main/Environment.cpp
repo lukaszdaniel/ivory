@@ -39,13 +39,50 @@ namespace CXXR
     namespace ForceNonInline
     {
         const auto &ENCLOSptr = ENCLOS;
+        const auto &ENVFLAGSptr = ENVFLAGS;
+        const auto &HASHTABptr = HASHTAB;
         const auto &isEnvironmentptr = Rf_isEnvironment;
         const auto &FRAMEptr = FRAME;
+        const auto &SET_ENCLOSptr = SET_ENCLOS;
+        const auto &SET_ENVFLAGSptr = SET_ENVFLAGS;
+        const auto &SET_FRAMEp = SET_FRAME;
+        const auto &SET_HASHTABptr = SET_HASHTAB;
     } // namespace ForceNonInline
+
+    GCRoot<Environment> Environment::s_empty_env(new Environment());
+    GCRoot<Environment> Environment::s_base_env(new Environment(s_empty_env));
+    GCRoot<Environment> Environment::s_global_env(new Environment(s_base_env));
+
+    void Environment::initialize()
+    {
+        // R_EmptyEnv = empty();
+        R_EmptyEnv = const_cast<Environment *>(Environment::emptyEnvironment());
+        // R_BaseEnv = base();
+        R_BaseEnv = Environment::base();
+
+        // base()->setOnSearchPath(true);
+        // R_GlobalEnv = global();
+        // R_GlobalEnv = Environment::global();
+
+        // global()->setOnSearchPath(true);
+
+        // R_BaseNamespace = baseNamespace();
+    }
 
     const char *Environment::typeName() const
     {
         return staticTypeName();
+    }
+
+    void Environment::visitChildren(const_visitor *v) const
+    {
+        RObject::visitChildren(v);
+        if (m_enclosing)
+            m_enclosing->conductVisitor(v);
+        if (m_frame)
+            m_frame->conductVisitor(v);
+        if (m_hashtable)
+            m_hashtable->conductVisitor(v);
     }
 
     /* Environment Access Methods */
@@ -67,7 +104,8 @@ namespace CXXR
             abort();
         }
 #endif
-        return x->u.envsxp.m_frame;
+        Environment *env = SEXP_downcast<Environment *>(x);
+        return env->frame();
     }
 
     /** @brief Access an environment's Frame, represented as a PairList.
@@ -97,7 +135,8 @@ namespace CXXR
             abort();
         }
 #endif
-        return x->u.envsxp.m_enclos;
+        const Environment *env = SEXP_downcast<Environment *>(x);
+        return env->enclosingEnvironment();
     }
 
     /**
@@ -118,7 +157,8 @@ namespace CXXR
             abort();
         }
 #endif
-        return x->u.envsxp.m_hashtab;
+        Environment *env = SEXP_downcast<Environment *>(x);
+        return env->hashTable();
     }
 
     /**
@@ -161,7 +201,9 @@ namespace CXXR
             abort();
         }
 #endif
-        x->u.envsxp.m_frame = v;
+        Environment *env = SEXP_downcast<Environment *>(x);
+        PairList *pl = SEXP_downcast<PairList *>(v);
+        env->setFrame(pl);
     }
 
     /**
@@ -184,7 +226,9 @@ namespace CXXR
             abort();
         }
 #endif
-        x->u.envsxp.m_enclos = v;
+        Environment *env = SEXP_downcast<Environment *>(x);
+        Environment *enc = SEXP_downcast<Environment *>(v);
+        env->setEnclosingEnvironment(enc);
     }
 
     /**
@@ -207,7 +251,9 @@ namespace CXXR
             abort();
         }
 #endif
-        x->u.envsxp.m_hashtab = v;
+        Environment *env = SEXP_downcast<Environment *>(x);
+        ListVector *lv = SEXP_downcast<ListVector *>(v);
+        env->setHashTable(lv);
     }
 
     unsigned int Environment::frame_is_locked(RObject *e) { return e ? (envflags(e) & FRAME_LOCK_MASK) : 0; }

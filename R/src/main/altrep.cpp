@@ -645,7 +645,8 @@ static SEXP altrep_Serialized_state_default(SEXP x) { return nullptr; }
 
 static SEXP altrep_Unserialize_default(SEXP class_, SEXP state)
 {
-    error(_("cannot unserialize this ALTREP object yet"));
+    Rf_error(_("cannot unserialize this ALTREP object yet"));
+    return nullptr;
 }
 
 static SEXP altrep_Coerce_default(SEXP x, int type) { return nullptr; }
@@ -688,11 +689,13 @@ static Rboolean altrep_Inspect_default(SEXP x, int pre, int deep, int pvec,
 static R_xlen_t altrep_Length_default(SEXP x)
 {
     ALTREP_ERROR_IN_CLASS("no ALTREP Length method defined", x);
+    return 0;
 }
 
 static void *altvec_Dataptr_default(SEXP x, Rboolean writeable)
 {
     ALTREP_ERROR_IN_CLASS("cannot access data pointer for this ALTVEC object", x);
+    return nullptr;
 }
 
 static const void *altvec_Dataptr_or_null_default(SEXP x)
@@ -786,6 +789,7 @@ static R_xlen_t altcomplex_Get_region_default(SEXP sx, R_xlen_t i, R_xlen_t n, R
 static SEXP altstring_Elt_default(SEXP x, R_xlen_t i)
 {
     ALTREP_ERROR_IN_CLASS("No Elt method found for ALTSTRING class", x);
+    return nullptr;
 }
 
 static void altstring_Set_elt_default(SEXP x, R_xlen_t i, SEXP v)

@@ -911,8 +911,7 @@ void setup_Rmainloop(void)
     InitArithmetic();
     InitTempDir(); /* must be before InitEd */
     InitMemory();
-    InitBaseEnv();
-    InitNames(); /* must be after InitBaseEnv to use R_EmptyEnv */
+    InitNames();
     InitParser();  /* must be after InitMemory, InitNames */
     InitGlobalEnv();
     InitDynload();

@@ -419,11 +419,8 @@ namespace CXXR
         {
             const Symbol *symb = dynamic_cast<const Symbol *>(sym);
             if (!symb)
-                return "(SYMSXP is not a Symbol)";
-            const String *pname = symb->name();
-            if (!pname)
-                return "(Symbol has no PRINTNAME)";
-            return pname->c_str();
+                return "(SYMSXP is not a Symbol or SpecialSymbol)";
+            return symb->name()->c_str();
         }
     } // namespace
 

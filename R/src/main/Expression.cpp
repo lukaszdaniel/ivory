@@ -55,6 +55,8 @@ namespace CXXR
         const auto &lconsptr = Rf_lcons;
     }
 
+    SEXP R_CurrentExpr = nullptr;
+
     const char *Expression::typeName() const
     {
         return staticTypeName();

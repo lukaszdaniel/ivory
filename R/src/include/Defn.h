@@ -386,7 +386,7 @@ extern0 SEXP	R_FreeSEXP;	    /* Cons cell free list */
 extern0 int	R_Is_Running;	    /* for Windows memory manager */
 
 /* Evaluation Environment */
-extern0 SEXP	R_CurrentExpr;	    /* Currently evaluating expression */
+extern SEXP	R_CurrentExpr;	    /* Currently evaluating expression */
 extern0 SEXP	R_ReturnedValue;    /* Slot for return-ing values */
 extern0 SEXP*	R_SymbolTable;	    /* The symbol table */
 #ifdef R_USE_SIGNALS
@@ -622,7 +622,6 @@ extern0 int R_PCRE_limit_recursion;
 # define InitConnections	Rf_InitConnections
 # define InitEd			Rf_InitEd
 # define InitFunctionHashing	Rf_InitFunctionHashing
-# define InitBaseEnv		Rf_InitBaseEnv
 # define InitGlobalEnv		Rf_InitGlobalEnv
 # define InitGraphics		Rf_InitGraphics
 # define InitMemory		Rf_InitMemory
@@ -854,7 +853,6 @@ namespace R
     void InitConnections(void);
     void InitEd(void);
     void InitFunctionHashing(void);
-    void InitBaseEnv(void);
     void InitGlobalEnv(void);
     bool R_current_trace_state(void);
     bool R_current_debug_state(void);

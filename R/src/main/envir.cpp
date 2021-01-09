@@ -706,14 +706,9 @@ static SEXP R_GlobalCache, R_GlobalCachePreserve;
 static SEXP R_BaseNamespaceName;
 static SEXP R_NamespaceSymbol;
 
-HIDDEN void R::InitBaseEnv()
-{
-    R_EmptyEnv = NewEnvironment(R_NilValue, R_NilValue, R_NilValue);
-    R_BaseEnv = NewEnvironment(R_NilValue, R_NilValue, R_EmptyEnv);
-}
-
 HIDDEN void R::InitGlobalEnv()
 {
+    Environment::initialize();
     R_NamespaceSymbol = install(".__NAMESPACE__.");
 
     R_GlobalEnv = R_NewHashedEnv(R_BaseEnv, ScalarInteger(0));
@@ -2442,12 +2437,11 @@ HIDDEN SEXP do_attach(SEXP call, SEXP op, SEXP args, SEXP env)
 	    for (x = CAR(args); x != R_NilValue; x = CDR(x))
 		if (TAG(x) == R_NilValue)
 		    error(_("all elements of a list must be named"));
-	    PROTECT(s = new RObject(ENVSXP));
-	    SET_FRAME(s, shallow_duplicate(CAR(args)));
+	    PROTECT(s = new Environment(nullptr, SEXP_downcast<PairList*>(shallow_duplicate(CAR(args)))));
 	} else if (isEnvironment(CAR(args))) {
 	    SEXP p, loadenv = CAR(args);
 
-	    PROTECT(s = new RObject(ENVSXP));
+	    PROTECT(s = new Environment());
 	    if (HASHTAB(loadenv) != R_NilValue) {
 		int i, n;
 		n = length(HASHTAB(loadenv));
@@ -2488,7 +2482,7 @@ HIDDEN SEXP do_attach(SEXP call, SEXP op, SEXP args, SEXP env)
 	R_ObjectTable *tb = (R_ObjectTable*) R_ExternalPtrAddr(CAR(args));
 	if(tb->onAttach)
 	    tb->onAttach(tb);
-	PROTECT(s = new RObject(ENVSXP));
+	PROTECT(s = new Environment());
 	SET_HASHTAB(s, CAR(args));
 	setAttrib(s, R_ClassSymbol, getAttrib(HASHTAB(s), R_ClassSymbol));
     }

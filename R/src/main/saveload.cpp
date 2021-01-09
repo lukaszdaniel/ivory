@@ -555,7 +555,7 @@ static void RemakeNextSEXP(FILE *fp, NodeInfo &node, int version, InputRoutines 
 	/* TAG(s) = */ m.InInteger(fp, d);
 	break;
     case ENVSXP:
-	s = new RObject(ENVSXP);
+	s = new Environment();
 	/* skip over CAR, CDR, and TAG */
 	/* CAR(s) = */ m.InInteger(fp, d);
 	/* CDR(s) = */ m.InInteger(fp, d);
@@ -1439,7 +1439,7 @@ static SEXP NewDataLoad(FILE *fp, InputRoutines *m, SaveLoadData *d)
     }
     /* Allocate the environments */
     for (count = 0; count < env_count; ++count)
-	SET_VECTOR_ELT(env_table, count, new RObject(ENVSXP));
+	SET_VECTOR_ELT(env_table, count, new Environment());
 
     /* Now fill them in  */
     for (count = 0; count < env_count; ++count) {

@@ -33,6 +33,10 @@
 #include <iostream>
 
 // #include <CXXR/GCEdge.hpp>
+#include <CXXR/Environment.hpp>
+#include <CXXR/Expression.hpp>
+#include <CXXR/GCRoot.hpp>
+#include <CXXR/JMPException.hpp>
 #include <CXXR/WeakRef.hpp>
 #include <Localization.h>
 
@@ -182,6 +186,9 @@ WeakRef::WRList *WeakRef::getTombstone()
 	static WRList *tombstone = new WRList();
 	return tombstone;
 }
+
+// WeakRef::finalize() is in memory.cpp (for the time being, until
+// eval() is declared in a CXXR header).
 
 void WeakRef::markThru(unsigned int max_gen)
 {

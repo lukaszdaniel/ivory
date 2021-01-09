@@ -244,13 +244,6 @@ namespace CXXR
      */
     class RObject;
 
-    struct envsxp_struct
-    {
-        RObject *m_frame;
-        RObject *m_enclos;
-        RObject *m_hashtab;
-    };
-
     struct closxp_struct
     {
         RObject *m_formals;
@@ -321,7 +314,6 @@ namespace CXXR
 
         union
         {
-            envsxp_struct envsxp;
             closxp_struct closxp;
             promsxp_struct promsxp;
         } u;
@@ -353,21 +345,6 @@ namespace CXXR
 
         // Virtual function of GCNode:
         void visitChildren(const_visitor *v) const override;
-
-        /**
-         * @return pointer to enclosing environment.
-         */
-        const RObject *enclosingEnvironment() const { return u.envsxp.m_enclos; }
-
-        /**
-         * @return pointer to frame of this environment.
-         */
-        const RObject *frame() const { return u.envsxp.m_frame; }
-
-        /**
-         * @return pointer to hash table of this environment.
-         */
-        const RObject *hashTable() const { return u.envsxp.m_hashtab; }
 
         /**
          * @return pointer to formals of this closure.
@@ -695,7 +672,7 @@ extern "C"
      * @return Refer to 'R Internals' document.  Returns 0 if \a x is a
      *         null pointer.
      */
-    int (NAMED)(SEXP x);
+    int(NAMED)(SEXP x);
 
     /** @brief Get object tracing status.
      *
