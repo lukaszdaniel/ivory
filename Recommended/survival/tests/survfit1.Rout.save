@@ -1,10 +1,10 @@
 
-Ivory Under development (unstable) (2020-08-31 r1289) -- "Internationalized Version of R"
-Copyright (C) 2013-2020 Lukasz Daniel (lukasz.daniel@gmail.com)
+Ivory Under development (unstable) (2021-01-08 r1392) -- "Internationalized Version of R"
+Copyright (C) 2013-2021 Lukasz Daniel (lukasz.daniel@gmail.com)
 See README-IVORY file for details.
 
-R Under development (unstable) (2020-08-31 r79091) -- "Unsuffered Consequences"
-Copyright (C) 2020 The R Foundation for Statistical Computing
+R Under development (unstable) (2021-01-08 r79812) -- "Unsuffered Consequences"
+Copyright (C) 2021 The R Foundation for Statistical Computing
 Platform: x86_64-pc-linux-gnu (64-bit)
 
 Ivory is not part of the R project, so please do not report bugs
@@ -412,17 +412,17 @@ Type 'q()' to quit R.
 Call: survfit(formula = Surv(time, status) ~ x, data = adata, stype = 2)
 
                  n events *rmean *se(rmean) median 0.95LCL 0.95UCL
-x=Maintained    11      7   46.1      14.08     34      23      NA
-x=Nonmaintained 12     11   27.1       6.64     27       8      NA
-    * restricted mean with upper limit = 103
+x=Maintained    11      7   60.3      25.60     34      23      NA
+x=Nonmaintained 12     11   30.1       9.14     27       8      NA
+    * restricted mean with upper limit = 161
 > print(fit1, rmean='common', scale=2)
 Call: survfit(formula = Surv(time, status) ~ x, data = adata, stype = 2)
 
                  n events *rmean *se(rmean) median 0.95LCL 0.95UCL
-x=Maintained    11      7   23.1       7.04   17.0    11.5      NA
-x=Nonmaintained 12     11   13.5       3.32   13.5     4.0      NA
-    * restricted mean with upper limit = 51.5
+x=Maintained    11      7   30.2      12.80   17.0    11.5      NA
+x=Nonmaintained 12     11   15.1       4.57   13.5     4.0      NA
+    * restricted mean with upper limit = 80.5
 > 
 > proc.time()
    user  system elapsed 
-  3.746   0.067   3.805 
+ 20.593   0.080  20.669 

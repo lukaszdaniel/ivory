@@ -68,6 +68,7 @@
 #include <CXXR/ExternalPointer.hpp>
 #include <CXXR/PairList.hpp>
 #include <CXXR/RAltRep.hpp>
+#include <CXXR/S4Object.hpp>
 #include <CXXR/SEXP_downcast.hpp>
 #include <R_ext/Print.h>
 
@@ -2317,8 +2318,32 @@ HIDDEN void R::R_args_enable_refcnt(SEXP args)
 #endif
 }
 
+/* S4Object Accessors */
+SEXP S4TAG(SEXP e)
+{
+    return CHK(CXXR::S4Object::tag(CHKCONS(e)));
+}
+
+void SET_S4TAG(SEXP x, SEXP v)
+{
+    if (CHKCONS(x) == nullptr || x == R_NilValue)
+        Rf_error(_("incorrect value"));
+    FIX_REFCNT(x, S4TAG(x), v);
+    S4Object::set_tag(x, v);
+}
+
 /* List Accessors */
-SEXP TAG(SEXP e) { return CHK(CXXR::ConsCell::tag(CHKCONS(e))); }
+SEXP TAG(SEXP e)
+{
+    if (TYPEOF(e) == S4SXP)
+    {
+        return S4TAG(e);
+    }
+    else
+    {
+        return CHK(CXXR::ConsCell::tag(CHKCONS(e)));
+    }
+}
 SEXP CAR0(SEXP e) { return CHK(CXXR::ConsCell::car0(CHKCONS(e))); }
 SEXP CDR(SEXP e) { return CHK(CXXR::ConsCell::cdr(CHKCONS(e))); }
 SEXP CAAR(SEXP e) { return CHK(CAR(CAR(CHKCONS(e)))); }
@@ -2339,7 +2364,14 @@ void SET_TAG(SEXP x, SEXP v)
     if (CHKCONS(x) == nullptr || x == R_NilValue)
         Rf_error(_("incorrect value"));
     FIX_REFCNT(x, TAG(x), v);
-    ConsCell::set_tag(x, v);
+    if (TYPEOF(x) == S4SXP)
+    {
+        S4Object::set_tag(x, v);
+    }
+    else
+    {
+        ConsCell::set_tag(x, v);
+    }
 }
 
 SEXP SETCAR(SEXP x, SEXP y)

@@ -1,10 +1,10 @@
 
-Ivory Under development (unstable) (2020-08-31 r1289) -- "Internationalized Version of R"
-Copyright (C) 2013-2020 Lukasz Daniel (lukasz.daniel@gmail.com)
+Ivory Under development (unstable) (2021-01-08 r1392) -- "Internationalized Version of R"
+Copyright (C) 2013-2021 Lukasz Daniel (lukasz.daniel@gmail.com)
 See README-IVORY file for details.
 
-R Under development (unstable) (2020-08-31 r79091) -- "Unsuffered Consequences"
-Copyright (C) 2020 The R Foundation for Statistical Computing
+R Under development (unstable) (2021-01-08 r79812) -- "Unsuffered Consequences"
+Copyright (C) 2021 The R Foundation for Statistical Computing
 Platform: x86_64-pc-linux-gnu (64-bit)
 
 Ivory is not part of the R project, so please do not report bugs
@@ -200,4 +200,4 @@ Call: survfit(formula = tempy ~ tempx, weights = c(ww, wt2), robust = FALSE)
 > 
 > proc.time()
    user  system elapsed 
-  3.376   0.065   3.432 
+ 17.933   0.135  18.064 

@@ -146,6 +146,9 @@ if [[ "$1" == "nlme" ]] || [[ "$1" == "all" ]]; then
 `$cmd nlme.Rcheck/tests/missing.Rout	../../$RECIVORY/nlme/tests/missing.Rout.save`
 fi;
 
+if [[ "$1" == "spatial" ]] || [[ "$1" == "all" ]]; then
+`$cmd spatial.Rcheck/spatial-Ex.Rout	../../$RECIVORY/spatial/tests/Examples/spatial-Ex.Rout.save`
+fi;
 
 if [[ "$1" == "rpart" ]] || [[ "$1" == "all" ]]; then
 `$cmd	rpart.Rcheck/tests/backticks.Rout	../../$RECIVORY/rpart/tests/backticks.Rout.save`

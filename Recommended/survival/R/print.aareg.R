@@ -21,7 +21,7 @@ print.aareg <- function(x, maxtime, test=c('aalen', 'nrisk'), scale=1, ...) {
     chi <- summ$chisq
     df <- nrow(summ$table) -1
     pdig <- max(1, getOption("digits")-4)  # default it too high IMO
-    cat("\n", sprintf(gettext("Chisq= %s on %d df, p=%s; test weights= %s", domain = "R-survival"), format(round(chi,2)), df, format.pval(pchisq(chi,df, lower.tail=FALSE), digits=pdig), paste(x$test, collapse = " "), domain = NA), "\n", sep="")
+    cat("\n", gettextf("Chisq= %s on %d df, p=%s; test weights= %s", format(round(chi,2)), df, format.pval(pchisq(chi, df, lower.tail=FALSE), digits=pdig), paste(x$test, collapse = " "), domain = "R-survival"), "\n", sep="")
     invisible(x)
     }
 

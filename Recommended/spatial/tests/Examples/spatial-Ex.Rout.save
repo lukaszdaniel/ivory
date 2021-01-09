@@ -1,10 +1,11 @@
 
-R Under development (unstable) (2014-12-04 r98) -- "Unsuffered Consequences"
-Copyright (C) 2014 The R Foundation for Statistical Computing
-Platform: x86_64-unknown-linux-gnu (64-bit)
+Ivory Under development (unstable) (2021-01-08 r1392) -- "Internationalized Version of R"
+Copyright (C) 2013-2021 Lukasz Daniel (lukasz.daniel@gmail.com)
+See README-IVORY file for details.
 
-Ivory is a modified version of R. See README-IVORY file for details.
-Copyright (C) 2013-2014 Lukasz Daniel (lukasz.daniel@gmail.com)
+R Under development (unstable) (2021-01-08 r79812) -- "Unsuffered Consequences"
+Copyright (C) 2021 The R Foundation for Statistical Computing
+Platform: x86_64-pc-linux-gnu (64-bit)
 
 Ivory is not part of the R project, so please do not report bugs
 via r-bugs or the R website - instead refer to the author.
@@ -29,6 +30,7 @@ Type 'q()' to quit R.
 > library('spatial')
 > 
 > base::assign(".oldSearch", base::search(), pos = 'CheckExEnv')
+> base::assign(".old_wd", base::getwd(), pos = 'CheckExEnv')
 > cleanEx()
 > nameEx("Kaver")
 > ### * Kaver
@@ -506,9 +508,10 @@ detaching ‘package:MASS’
 > 
 > ### * <FOOTER>
 > ###
+> cleanEx()
 > options(digits = 7L)
 > base::cat(gettext("Time elapsed: ", domain = "R-base"), proc.time() - base::get("ptime", pos = 'CheckExEnv'),"\n")
-Time elapsed:  0.721 0.032 0.788 0 0 
+Time elapsed:  2.395 0.02 2.415 0 0 
 > grDevices::dev.off()
 null device 
           1 
