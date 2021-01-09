@@ -433,23 +433,24 @@ SEXP R::R_NewHashedEnv(SEXP enclos, SEXP size)
  * it.
  */
 
-static SEXP RemoveFromList(SEXP thing, SEXP list, int *found);
+static std::pair<SEXP, bool> RemoveFromList(SEXP thing, SEXP list);
 
-static void R_HashDelete(int hashcode, SEXP symbol, SEXP env, int *found)
+static bool R_HashDelete(int hashcode, SEXP symbol, SEXP env)
 {
     int idx;
-    SEXP list, hashtab;
+    SEXP hashtab;
 
     hashtab = HASHTAB(env);
     idx = hashcode % HASHSIZE(hashtab);
-    list = RemoveFromList(symbol, VECTOR_ELT(hashtab, idx), found);
-    if (*found) {
+    auto list = RemoveFromList(symbol, VECTOR_ELT(hashtab, idx));
+    if (list.second) {
 	if (env == R_GlobalEnv)
 	    R_DirtyImage = 1;
-	if (list == R_NilValue)
+	if (list.first == R_NilValue)
 	    SET_HASHPRI(hashtab, HASHPRI(hashtab) - 1);
-	SET_VECTOR_ELT(hashtab, idx, list);
+	SET_VECTOR_ELT(hashtab, idx, list.first);
     }
+    return list.second;
 }
 
 
@@ -809,39 +810,35 @@ static SEXP R_GetGlobalCacheLoc(SEXP symbol)
 }
 #endif /* USE_GLOBAL_CACHE */
 
-static SEXP RemoveFromList(SEXP thing, SEXP list, int *found)
+static std::pair<SEXP, bool> RemoveFromList(SEXP thing, SEXP list)
 {
     if (list == R_NilValue) {
-	*found = 0;
-	return R_NilValue;
+        return std::make_pair(nullptr, false);
     }
     else if (TAG(list) == thing) {
-	*found = 1;
 	SET_BNDCELL(list, R_UnboundValue); /* in case binding is cached */
 	LOCK_BINDING(list);                /* in case binding is cached */
 	SEXP rest = CDR(list);
 	SETCDR(list, R_NilValue);          /* to fix refcnt on 'rest' */
-	return rest;
+	return std::make_pair(rest, true);
     }
     else {
 	SEXP last = list;
 	SEXP next = CDR(list);
 	while (next != R_NilValue) {
 	    if (TAG(next) == thing) {
-		*found = 1;
 		SETCAR(next, R_UnboundValue); /* in case binding is cached */
 		LOCK_BINDING(next);           /* in case binding is cached */
 		SETCDR(last, CDR(next));
 		SETCDR(next, R_NilValue);     /* to fix refcnt on 'list' */
-		return list;
+		return std::make_pair(list, true);
 	    }
 	    else {
 		last = next;
 		next = CDR(next);
 	    }
 	}
-	*found = 0;
-	return list;
+	return std::make_pair(list, false);
     }
 }
 
@@ -858,7 +855,6 @@ static SEXP RemoveFromList(SEXP thing, SEXP list, int *found)
 HIDDEN void R::unbindVar(SEXP symbol, SEXP rho)
 {
     int hashcode;
-    int found;
     SEXP c;
 
     if (rho == R_BaseNamespace)
@@ -868,11 +864,10 @@ HIDDEN void R::unbindVar(SEXP symbol, SEXP rho)
     if (FRAME_IS_LOCKED(rho))
 	error(_("cannot remove bindings from a locked environment"));
     if (HASHTAB(rho) == R_NilValue) {
-	SEXP list;
-	list = RemoveFromList(symbol, FRAME(rho), &found);
-	if (found) {
+	auto list = RemoveFromList(symbol, FRAME(rho));
+	if (list.second) {
 	    if (rho == R_GlobalEnv) R_DirtyImage = 1;
-	    SET_FRAME(rho, list);
+	    SET_FRAME(rho, list.first);
 #ifdef USE_GLOBAL_CACHE
 	    if (IS_GLOBAL_FRAME(rho))
 		R_FlushGlobalCache(symbol);
@@ -883,7 +878,7 @@ HIDDEN void R::unbindVar(SEXP symbol, SEXP rho)
 	/* This branch is used e.g. via sys.source, utils::data */
 	c = PRINTNAME(symbol);
 	hashcode = HASHVALUE(c) % HASHSIZE(HASHTAB(rho));
-	R_HashDelete(hashcode, symbol, rho, &found);
+	bool found = R_HashDelete(hashcode, symbol, rho);
 #ifdef USE_GLOBAL_CACHE
 	if (found && IS_GLOBAL_FRAME(rho))
 	     R_FlushGlobalCache(symbol);
@@ -1880,8 +1875,7 @@ HIDDEN SEXP do_list2env(SEXP call, SEXP op, SEXP args, SEXP rho)
 
 static int RemoveVariable(SEXP name, int hashcode, SEXP env)
 {
-    int found;
-    SEXP list;
+    bool found = false;
 
     if (env == R_BaseNamespace)
 	error(_("cannot remove variables from base namespace"));
@@ -1901,16 +1895,17 @@ static int RemoveVariable(SEXP name, int hashcode, SEXP env)
     }
 
     if (IS_HASHED(env)) {
-	R_HashDelete(hashcode, name, env, &found);
+	found = R_HashDelete(hashcode, name, env);
 #ifdef USE_GLOBAL_CACHE
 	if (found && IS_GLOBAL_FRAME(env))
 	    R_FlushGlobalCache(name);
 #endif
     } else {
-	list = RemoveFromList(name, FRAME(env), &found);
-	if (found) {
+	auto list = RemoveFromList(name, FRAME(env));
+    found = list.second;
+	if (list.second) {
 	    if(env == R_GlobalEnv) R_DirtyImage = 1;
-	    SET_FRAME(env, list);
+	    SET_FRAME(env, list.first);
 #ifdef USE_GLOBAL_CACHE
 	    if (IS_GLOBAL_FRAME(env))
 		R_FlushGlobalCache(name);

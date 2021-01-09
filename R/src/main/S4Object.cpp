@@ -50,6 +50,31 @@ namespace CXXR
     {
         return S4Object::staticTypeName();
     }
+
+    void S4Object::visitChildren(const_visitor *v) const
+    {
+        RObject::visitChildren(v);
+        if (tag())
+            tag()->conductVisitor(v);
+    }
+
+    RObject *S4Object::tag(RObject *e)
+    {
+        if (!e)
+            return nullptr;
+
+        S4Object *s4 = SEXP_downcast<S4Object *>(e, false);
+        return s4->tag();
+    }
+
+    void S4Object::set_tag(RObject *x, RObject *v)
+    {
+        if (!x)
+            Rf_error(_("incorrect value"));
+        S4Object *s4 = SEXP_downcast<S4Object *>(x, false);
+        s4->setTag(v);
+    }
+
 } // namespace CXXR
 
 // ***** C interface *****

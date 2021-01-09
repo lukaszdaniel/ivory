@@ -463,6 +463,10 @@ void *EXTPTR_PTR(SEXP);
 
 SEXP CONS_NR(SEXP a, SEXP b);
 
+/* S4Object Access Functions */
+SEXP S4TAG(SEXP e);
+void SET_S4TAG(SEXP x, SEXP y);
+
 /* Closure Access Functions */
 SEXP (FORMALS)(SEXP x);
 SEXP (BODY)(SEXP x);

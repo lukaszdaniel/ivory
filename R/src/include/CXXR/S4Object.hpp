@@ -45,8 +45,6 @@ namespace CXXR
      * objects of another R type, and corresponds to the ::SEXPTYPE
      * S4SXP.
      *
-     * @note The 'R Internals' document says that S4SXP objects have a
-     * tag field.  This is not currently implemented in CXXR.
      */
 	class S4Object : public RObject
 	{
@@ -68,6 +66,39 @@ namespace CXXR
 		{
 		}
 
+		/**
+         * @return a const pointer to the 'tag' of this S4Object
+         * element.
+         */
+		const RObject *tag() const
+		{
+			return m_tag;
+		}
+
+		/**
+         * @return a pointer to the 'tag' of this S4Object.
+         */
+		RObject *tag()
+		{
+			return m_tag;
+		}
+
+		/** @brief Set the 'tag' value.
+         *
+         * @param tg Pointer to the new tag object (or a null
+         *           pointer).
+         */
+		void setTag(RObject *tg)
+		{
+			m_tag = tg;
+			devolveAge(m_tag);
+		}
+
+		static RObject *tag(RObject *x);
+		static void set_tag(RObject *x, RObject *v);
+		// Virtual function of GCNode:
+		void visitChildren(const_visitor *v) const override;
+
 		/** @brief The name by which this type is known in R.
 		 *
 		 * @return the name by which this type is known in R.
@@ -82,6 +113,7 @@ namespace CXXR
 		const char *typeName() const override;
 
 	private:
+		RObject *m_tag;
 		// Declared private to ensure that S4Objects are allocated
 		// only using 'new':
 		~S4Object() {}
@@ -93,7 +125,22 @@ namespace CXXR
 
 extern "C"
 {
-	/* S4 object testing */
+	/** @brief Get tag of CXXR::S4Object.
+     *
+     * @param e Pointer to a CXXR::S4Object (checked), or a null pointer.
+     * @return Pointer to the tag of the list element, or 0 if \a e is
+     * a null pointer.
+     */
+	SEXP S4TAG(SEXP e);
+
+	/**
+     * @brief Set the tag of a CXXR::S4Object.
+     *
+     * @param x Pointer to a CXXR::S4Object (checked).
+     * @param y Pointer a CXXR::RObject representing the new tag of
+     *          the CXXR::S4Object.
+     */
+	void SET_S4TAG(SEXP x, SEXP y);
 
 	/** @brief Is this an S4 object?
      *

@@ -146,9 +146,9 @@ static R_size_t objectsize(SEXP s)
 	isVec = TRUE;
 	break;
     case S4SXP:
-	/* Has TAG and ATRIB but no CAR nor CDR */
+	/* Has S4TAG and ATRIB but no CAR nor CDR */
 	R_CheckStack();
-	cnt += objectsize(TAG(s));
+	cnt += objectsize(S4TAG(s));
 	break;
     default:
 	UNIMPLEMENTED_TYPE("object.size()", s);

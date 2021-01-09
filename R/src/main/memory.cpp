@@ -2361,15 +2361,15 @@ int MISSING(SEXP x) { return CXXR::RObject::missing(CHKCONS(x)); }
 
 void SET_TAG(SEXP x, SEXP v)
 {
-    if (CHKCONS(x) == nullptr || x == R_NilValue)
-        Rf_error(_("incorrect value"));
-    FIX_REFCNT(x, TAG(x), v);
     if (TYPEOF(x) == S4SXP)
     {
-        S4Object::set_tag(x, v);
+        SET_S4TAG(x, v);
     }
     else
     {
+        if (CHKCONS(x) == nullptr || x == R_NilValue)
+            Rf_error(_("incorrect value"));
+        FIX_REFCNT(x, TAG(x), v);
         ConsCell::set_tag(x, v);
     }
 }
