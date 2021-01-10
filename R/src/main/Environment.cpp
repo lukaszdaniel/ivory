@@ -32,6 +32,11 @@
 #include <CXXR/Environment.hpp>
 #include <Rinternals.h>
 
+namespace R
+{
+    SEXP R_NewHashedEnv(SEXP enclos, SEXP size);
+}
+
 namespace CXXR
 {
     // Force the creation of non-inline embodiments of functions callable
@@ -51,7 +56,7 @@ namespace CXXR
 
     GCRoot<Environment> Environment::s_empty_env(new Environment());
     GCRoot<Environment> Environment::s_base_env(new Environment(s_empty_env));
-    GCRoot<Environment> Environment::s_global_env(new Environment(s_base_env));
+    GCRoot<Environment> Environment::s_global_env(SEXP_downcast<Environment *>(R::R_NewHashedEnv(s_base_env, Rf_ScalarInteger(0))));
 
     void Environment::initialize()
     {
@@ -62,7 +67,7 @@ namespace CXXR
 
         // base()->setOnSearchPath(true);
         // R_GlobalEnv = global();
-        // R_GlobalEnv = Environment::global();
+        R_GlobalEnv = Environment::global();
 
         // global()->setOnSearchPath(true);
 

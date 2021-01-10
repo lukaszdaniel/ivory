@@ -31,7 +31,10 @@
  */
 
 #include <CXXR/Symbol.hpp>
+#include <CXXR/CachedString.hpp>
 #include <Rinternals.h>
+#include <boost/regex.hpp>
+#include <sstream>
 
 namespace CXXR
 {
@@ -51,6 +54,42 @@ namespace CXXR
         const auto &SET_DDVALptr = SET_DDVAL;
     } // namespace ForceNonInline
 
+    Symbol::Symbol(const String *the_name, RObject *val, const BuiltInFunction *internal_func)
+        : RObject(SYMSXP), m_name(the_name), m_value(val), m_internalfunc(internal_func), m_dd_index(-1)
+    {
+        // If this is a ..n symbol, extract the value of n.
+        // boost::regex_match (libboost_regex1_36_0-1.36.0-9.5) doesn't
+        // seem comfortable with empty strings, hence the size check.
+        if (m_name && m_name->size() > 2)
+        {
+            // Versions of GCC prior to 4.9 don't support std::regex, so use
+            // boost::regex instead.
+            static const boost::regex *regex = new boost::regex("\\.\\.(\\d+)");
+
+            std::string name(m_name->c_str());
+            boost::smatch dd_match;
+            if (boost::regex_match(name, dd_match, *regex))
+            {
+                std::istringstream iss(dd_match[1]);
+                int n;
+                iss >> n;
+                m_dd_index = n;
+            }
+        }
+    }
+
+    Symbol::Symbol()
+        : RObject(SYMSXP), m_name(nullptr), m_value(s_unbound_value),
+          m_internalfunc(nullptr), m_dd_index(-1)
+    {
+    }
+
+    GCRoot<Symbol> Symbol::s_unbound_value(new Symbol());
+    GCRoot<Symbol> Symbol::s_missing_arg(new Symbol(String::blank()));
+    GCRoot<Symbol> Symbol::s_restart_token(new Symbol(String::blank()));
+    GCRoot<Symbol> Symbol::s_in_bc_interpreter(new Symbol(CachedString::obtain("<in-bc-interp>")));
+    GCRoot<Symbol> Symbol::s_current_expression(new Symbol(CachedString::obtain("<current-expression>")));
+
     const char *Symbol::typeName() const
     {
         return staticTypeName();
@@ -65,6 +104,33 @@ namespace CXXR
             m_value->conductVisitor(v);
         if (m_internalfunc)
             m_internalfunc->conductVisitor(v);
+    }
+
+    void Symbol::initialize()
+    {
+        /* Create marker values */
+        R_UnboundValue = Symbol::unboundValue();
+        R_MissingArg = Symbol::missingArgument();
+        R_RestartToken = Symbol::restartToken();
+        R_InBCInterpreter = Symbol::inBCInterpreter();
+        R_CurrentExpression = Symbol::currentExpression();
+
+#if CXXR_FALSE
+        R_MissingArg = missingArgument();
+        R_UnboundValue = unboundValue();
+
+        for (int i = 0; s_special_symbol_names[i] != nullptr; i++)
+        {
+            Symbol *symbol = Symbol::obtain(s_special_symbol_names[i]);
+            symbol->m_is_special_symbol = true;
+        }
+
+#define PREDEFINED_SYMBOL(C_NAME, CXXR_NAME, R_NAME) \
+    C_NAME = CXXR::Symbols::CXXR_NAME = Symbol::obtain(R_NAME);
+#include <CXXR/PredefinedSymbols.hpp>
+#undef PREDEFINED_SYMBOL
+        // DISABLE_REFCNT(Symbols::LastvalueSymbol);
+#endif
     }
 
     /** @brief Symbol name.
@@ -142,9 +208,8 @@ namespace CXXR
      * @return \c TRUE iff this symbol denotes an element of a
      *         <tt>...</tt> expression.
      */
-    unsigned int Symbol::ddval(RObject *x) { return x ? (x->m_gpbits & DDVAL_MASK) : 0; } /* for ..1, ..2 etc */
+    unsigned int Symbol::ddval(RObject *x) { return x ? SEXP_downcast<Symbol *>(x)->isDotDotSymbol() : false; } /* for ..1, ..2 etc */
 
- 
     void Symbol::set_ddval(RObject *x, bool v)
     {
     } /* for ..1, ..2 etc */

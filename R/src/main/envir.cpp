@@ -712,7 +712,6 @@ HIDDEN void R::InitGlobalEnv()
     Environment::initialize();
     R_NamespaceSymbol = install(".__NAMESPACE__.");
 
-    R_GlobalEnv = R_NewHashedEnv(R_BaseEnv, ScalarInteger(0));
     R_MethodsNamespace = R_GlobalEnv; // so it is initialized.
 #ifdef NEW_CODE /* Not used */
     HASHTAB(R_GlobalEnv) = R_NewHashTable(100);

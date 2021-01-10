@@ -690,13 +690,7 @@ void GCNode::gc(unsigned int num_old_gens_to_collect)
     GCNode::Marker marker(num_old_gens_to_collect);
     GCRootBase::visitRoots(&marker);
     MARK_THRU(&marker, R_BlankScalarString);	        /* Builtin constants */
-    MARK_THRU(&marker, R_CurrentExpression);
-    MARK_THRU(&marker, R_UnboundValue);
-    MARK_THRU(&marker, R_RestartToken);
-    MARK_THRU(&marker, R_MissingArg);
-    MARK_THRU(&marker, R_InBCInterpreter);
 
-    MARK_THRU(&marker, R_GlobalEnv);	           /* Global environment */
     MARK_THRU(&marker, R_Warnings);	           /* Warnings, if any */
     MARK_THRU(&marker, R_ReturnedValue);
 
@@ -1137,9 +1131,14 @@ SEXP Rf_allocSExp(SEXPTYPE t)
         return new DottedArgs();
     case BCODESXP:
         return new ByteCode();
+    // case CLOSXP:
+    //     return new Closure();
+    // case PROMSXP:
+    //     return new Promise();
     default:
         return new RObject(t);
-        // throw invalid_argument("Inappropriate SEXPTYPE for ConsCell.");
+        // std::cerr << "Inappropriate SEXPTYPE (" << sexptype2char(t) << ") for ConsCell." << std::endl;
+        // abort();
     }
 }
 

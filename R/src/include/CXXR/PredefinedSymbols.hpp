@@ -27,13 +27,13 @@
 // required for those symbols.
 
 // To use this file, define the preprocessor function
-//   PREDEFINED_SYMBOL(C_NAME, RHO_NAME, R_NAME)
+//   PREDEFINED_SYMBOL(C_NAME, CXXR_NAME, R_NAME)
 // and then #include this file.
 //
 // e.g.
 /*
-#define PREDEFINED_SYMBOL(C_NAME, RHO_NAME, R_NAME) \
-    SEXP C_NAME = CXXR::RHO_NAME;
+#define PREDEFINED_SYMBOL(C_NAME, CXXR_NAME, R_NAME) \
+    SEXP C_NAME = CXXR::CXXR_NAME;
 #include <CXXR/PredefinedSymbols.hpp>
 #undef PREDEFINED_SYMBOL
 
@@ -46,8 +46,8 @@
 
 // Helper macro for the common case where the C name is the same as the CXXR
 // name with a 'R_' prefix.
-#define PREDEFINED_SYMBOL2(RHO_NAME, R_NAME) \
-    PREDEFINED_SYMBOL(R_##RHO_NAME, RHO_NAME, R_NAME)
+#define PREDEFINED_SYMBOL2(CXXR_NAME, R_NAME) \
+    PREDEFINED_SYMBOL(R_##CXXR_NAME, CXXR_NAME, R_NAME)
 //public
 PREDEFINED_SYMBOL2(Bracket2Symbol, "[[");
 PREDEFINED_SYMBOL2(BracketSymbol, "[");

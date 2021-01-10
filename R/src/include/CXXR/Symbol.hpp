@@ -37,11 +37,16 @@
 #include <CXXR/SEXP_downcast.hpp>
 #include <R_ext/Boolean.h>
 
+namespace R
+{
+    extern void InitNames();
+}
+
 extern "C"
 {
     extern SEXP R_UnboundValue;
     /* Symbol Table Shortcuts */
-#define PREDEFINED_SYMBOL(C_NAME, RHO_NAME, R_NAME) \
+#define PREDEFINED_SYMBOL(C_NAME, CXXR_NAME, R_NAME) \
     extern SEXP C_NAME;
 #include <CXXR/PredefinedSymbols.hpp>
 #undef PREDEFINED_SYMBOL
@@ -93,8 +98,69 @@ namespace CXXR
     class Symbol : public RObject
     {
     public:
+        /** @brief Missing argument.
+         *
+         * @return a pointer to the 'missing argument' pseudo-object,
+         * which is identified as such by its address, not by its
+         * content.
+         */
+        static Symbol *missingArgument()
+        {
+            return s_missing_arg;
+        }
+
+        /** @brief Restart token.
+         *
+         * @return a pointer to the 'restart token' pseudo-object,
+         * which is identified as such by its address, not by its
+         * content.
+         */
+        static Symbol *restartToken()
+        {
+            return s_restart_token;
+        }
+
+        static Symbol *inBCInterpreter()
+        {
+            return s_in_bc_interpreter;
+        }
+
+        static Symbol *currentExpression()
+        {
+            return s_current_expression;
+        }
+
+        /** @brief Unbound value.
+         *
+         * This is used as the 'value' of a Symbol that has not been
+         * assigned any actual value.
+         *
+         * @return a pointer to the 'unbound value' pseudo-object,
+         * which is identified as such by its address, not by its
+         * content.
+         */
+        static Symbol *unboundValue()
+        {
+            return s_unbound_value;
+        }
+
+        /** @brief Index of a double-dot symbol.
+         *
+         * @return If this is a Symbol whose name is of the form
+         * <tt>..<em>n</em></tt>, where <em>n</em> is a nonnegative integer,
+         * returns <em>n</em>.  Otherwise returns <em>-1</em>.
+         */
+        unsigned int dotDotIndex() const { return m_dd_index; }
+
+        /** @brief Is this a double-dot symbol?
+         *
+         * @return true iff this symbol relates to an element of a
+         *         <tt>...</tt> argument list.
+         */
+        bool isDotDotSymbol() const { return m_dd_index != -1; }
+
         /**
-         * @param name Pointer to String object representing the name
+         * @param the_name Pointer to String object representing the name
          *          of the symbol.  Names of the form
          *          <tt>..<em>n</em></tt>, where n is a (non-negative)
          *          decimal integer signify that the Symbol to be
@@ -109,7 +175,7 @@ namespace CXXR
          * @param internal_func Pointer to an internal function to be
          *          denoted by the constructed Symbol.
          */
-        explicit Symbol(const String *name, RObject *val = R_UnboundValue,
+        explicit Symbol(const String *the_name, RObject *val = unboundValue(),
                         const BuiltInFunction *internal_func = nullptr);
 
         /** @brief Access internal function.
@@ -196,7 +262,6 @@ namespace CXXR
         void visitChildren(const_visitor *v) const override;
 
         /* Symbol Access Methods */
-        static constexpr int DDVAL_MASK = 1;
         static RObject *printname(RObject *x);
         static RObject *symvalue(RObject *x);
         static RObject *internal(RObject *x);
@@ -210,10 +275,19 @@ namespace CXXR
 
     private:
         static const unsigned int s_DDBIT = 0;
+        static GCRoot<Symbol> s_missing_arg;
+        static GCRoot<Symbol> s_restart_token;
+        static GCRoot<Symbol> s_unbound_value;
+        static GCRoot<Symbol> s_current_expression;
+        static GCRoot<Symbol> s_in_bc_interpreter;
 
         const String *m_name;
         RObject *m_value;
         const BuiltInFunction *m_internalfunc;
+        int m_dd_index : 31;
+
+        // Special constructor for 'pseudo-objects':
+        Symbol();
 
         // Declared private to ensure that Symbol objects are
         // allocated only using 'new':
@@ -223,11 +297,21 @@ namespace CXXR
         // compiler-generated versions:
         Symbol(const Symbol &);
         Symbol &operator=(const Symbol &);
+
+        // Initialize the static data members:
+        static void initialize();
+        friend void ::R::InitNames();
     };
 } // namespace CXXR
 
 extern "C"
 {
+    extern SEXP R_MissingArg;        /* Missing argument marker */
+    extern SEXP R_RestartToken;      /* Marker for restarted function calls */
+    extern SEXP R_UnboundValue;      /* Unbound marker */
+    extern SEXP R_CurrentExpression; /* Use current expression (marker) */
+    extern SEXP R_InBCInterpreter;   /* To be found in BC interp. state (marker) */
+
     /** @brief Test if SYMSXP.
      *
      * @param s Pointer to a CXXR::RObject.
@@ -245,7 +329,7 @@ extern "C"
      */
     SEXP PRINTNAME(SEXP x);
 
-     /** @brief Symbol value.
+    /** @brief Symbol value.
      *
      * @param x Pointer to a CXXR::Symbol (checked).
      *
@@ -305,7 +389,9 @@ extern "C"
     void SET_INTERNAL(SEXP x, SEXP v);
 } // extern "C"
 
-/** @brief Create a CXXR::Symbol object.
+namespace R
+{
+    /** @brief Create a CXXR::Symbol object.
      *
      * @param name Pointer to a CXXR::String object (checked) to be
      *          taken as the name of the constructed symbol.
@@ -316,9 +402,7 @@ extern "C"
      *
      * @return Pointer to the created CXXR::Symbol object.
      */
-namespace R
-{
     SEXP mkSYMSXP(SEXP name, SEXP value);
-}
+} // namespace R
 
 #endif /* SYMBOL_HPP */

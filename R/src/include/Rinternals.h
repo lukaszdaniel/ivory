@@ -482,14 +482,14 @@ void (SET_BODY)(SEXP x, SEXP v);
 void (SET_CLOENV)(SEXP x, SEXP v);
 
 /* Symbol Access Functions */
-SEXP (PRINTNAME)(SEXP x);
-SEXP (SYMVALUE)(SEXP x);
-SEXP (INTERNAL)(SEXP x);
-int  (DDVAL)(SEXP x);
-void (SET_DDVAL)(SEXP x, int v);
-void (SET_PRINTNAME)(SEXP x, SEXP v);
-void (SET_SYMVALUE)(SEXP x, SEXP v);
-void (SET_INTERNAL)(SEXP x, SEXP v);
+SEXP PRINTNAME(SEXP x);
+SEXP SYMVALUE(SEXP x);
+SEXP INTERNAL(SEXP x);
+int  DDVAL(SEXP x);
+void SET_DDVAL(SEXP x, int v);
+void SET_PRINTNAME(SEXP x, SEXP v);
+void SET_SYMVALUE(SEXP x, SEXP v);
+void SET_INTERNAL(SEXP x, SEXP v);
 
 /* Environment Access Functions */
 SEXP FRAME(SEXP x);
@@ -568,15 +568,9 @@ LibExtern SEXP	R_NilValue;	    /* The nil object */
 #endif
 LibExtern SEXP R_UnboundValue;	    /* Unbound marker */
 LibExtern SEXP R_MissingArg;	    /* Missing argument marker */
-LibExtern SEXP	R_InBCInterpreter;  /* To be found in BC interp. state
-				       (marker) */
-LibExtern SEXP	R_CurrentExpression; /* Use current expression (marker) */
-#ifdef __MAIN__
-HIDDEN
-#else
-extern
-#endif
-SEXP	R_RestartToken;     /* Marker for restarted function calls */
+LibExtern SEXP R_InBCInterpreter;  /* To be found in BC interp. state (marker) */
+LibExtern SEXP R_CurrentExpression; /* Use current expression (marker) */
+extern SEXP	R_RestartToken;     /* Marker for restarted function calls */
 
 /* Symbol Table Shortcuts */
 LibExtern SEXP R_AsCharacterSymbol;/* "as.character" */

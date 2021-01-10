@@ -1190,13 +1190,6 @@ HIDDEN SEXP Rf_installDDVAL(int n)
     return createDDVALSymbol(n);
 }
 
-static SEXP mkSymMarker(const String *pname, SEXP value)
-{
-    GCRoot<const String> ppname(pname);
-    GCRoot<> pvalue(value);
-    return new Symbol(pname, value);
-}
-
 /* initialize the symbol table */
 HIDDEN void R::InitNames()
 {
@@ -1204,15 +1197,9 @@ HIDDEN void R::InitNames()
     if (!(R_SymbolTable = (SEXP *)calloc(HSIZE, sizeof(SEXP))))
         R_Suicide(_("couldn't allocate memory for symbol table"));
 
-    /* Create marker values */
-    R_UnboundValue = mkSymMarker(nullptr, R_UnboundValue);
-    R_MissingArg = mkSymMarker(SEXP_downcast<const String *>(mkChar("")), R_MissingArg);
-    R_InBCInterpreter = mkSymMarker(SEXP_downcast<const String *>(mkChar("<in-bc-interp>")), R_InBCInterpreter);
-    R_RestartToken = mkSymMarker(SEXP_downcast<const String *>(mkChar("")), R_RestartToken);
-    R_CurrentExpression = mkSymMarker(SEXP_downcast<const String *>(mkChar("<current-expression>")), R_CurrentExpression);
-
     /* String constants (CHARSXP values) */
-    String::initialize();
+    String::initialize(); // NA(), blank()
+    Symbol::initialize();
 
     R_print.na_string = R_NaString;
     R_BlankScalarString = Rf_ScalarString(R_BlankString);

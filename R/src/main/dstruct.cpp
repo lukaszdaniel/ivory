@@ -134,28 +134,6 @@ HIDDEN SEXP R::mkCLOSXP(SEXP formals, SEXP body, SEXP rho)
     return c;
 }
 
-static bool isDDName(const String *name)
-{
-    const char *buf;
-    char *endp;
-
-    buf = name->c_str();
-    if (streqln(buf, "..", 2) && strlen(buf) > 2)
-    {
-        buf += 2;
-        strtol(buf, &endp, 10); // discard value
-        return (*endp == '\0');
-    }
-    return false;
-}
-
-Symbol::Symbol(const String *name, RObject *val, const BuiltInFunction *internal_func)
-    : RObject(SYMSXP), m_name(name), m_value(val), m_internalfunc(internal_func)
-{
-    if (name && isDDName(name))
-        m_gpbits |= DDVAL_MASK;
-}
-
 /**
  * @brief Create a CXXR::Symbol object
  * 
