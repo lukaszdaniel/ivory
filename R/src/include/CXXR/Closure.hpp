@@ -32,6 +32,8 @@
 #define CLOSURE_HPP
 
 #include <CXXR/FunctionBase.hpp>
+#include <CXXR/Environment.hpp>
+#include <CXXR/PairList.hpp>
 #include <CXXR/SEXP_downcast.hpp>
 
 namespace CXXR
@@ -46,17 +48,73 @@ namespace CXXR
     */
    class Closure : public FunctionBase
    {
-   private:
-      RObject *m_formals;
-      RObject *m_body;
-      RObject *m_env;
-      // Declared private to ensure that Closure objects are
-      // created only using 'new':
-      ~Closure();
-
    public:
-      // Virtual functions of RObject:
-      const char *typeName() const override;
+      /**
+       * @param formal_args List of formal arguments.
+       *
+       * @param body Pointer to the body of the Closure.  This must
+       *          be either a null pointer or a pointer to an object
+       *          of one of the following types: PairList,
+       *          Expression, Symbol (including SpecialSymbol),
+       *          ExpressionVector, ListVector or ByteCode
+       *          (checked).
+       *
+       * @param env pointer to the environment in which the Closure
+       *          is to be evaluated.
+       */
+      Closure(const PairList *formal_args, const RObject *body,
+              Environment *env = Environment::global());
+
+      /** @brief Access the body of the Closure.
+       *
+       * @return Pointer to the body of the Closure.
+       */
+      const RObject *body() const
+      {
+         return m_body;
+      }
+
+      /** @brief Access the environment of the Closure.
+       *
+       * @return Pointer to the environment of the Closure.
+       */
+      Environment *environment() const
+      {
+         return m_environment;
+      }
+
+      /** @brief Access the formal argument list of the Closure.
+       *
+       * @return Pointer to the formal argument list of the Closure.
+       */
+      const PairList *formalArgs() const
+      {
+         return m_formals;
+      }
+
+      /** @brief Replace the environment of the closure.
+       *
+       * @param new_env Pointer to the environment now to be
+       *          considered as the environment of this Closure.  A
+       *          null pointer is not permissible (not checked).
+       */
+      void setEnvironment(Environment *new_env)
+      {
+         m_environment = new_env;
+         devolveAge(m_environment);
+      }
+
+      void setFormalArgs(PairList *formal_args)
+      {
+         m_formals = formal_args;
+         devolveAge(m_formals);
+      }
+
+      void setBody(RObject *body)
+      {
+         m_body = body;
+         devolveAge(m_body);
+      }
 
       /** @brief The name by which this type is known in R.
        *
@@ -66,9 +124,12 @@ namespace CXXR
       {
          return "closure";
       }
-      auto formals() const { return this->m_formals; }
-      auto body() const { return this->m_body; }
-      auto env() const { return this->m_env; }
+
+      // Virtual function of RObject:
+      const char *typeName() const override;
+
+      // Virtual function of GCNode:
+      void visitChildren(const_visitor *v) const override;
 
       /* Closure Access Methods */
       static RObject *formals(RObject *x);
@@ -81,65 +142,104 @@ namespace CXXR
       static void set_rdebug(RObject *x, bool v);
       static bool rstep(RObject *x);
       static void set_rstep(RObject *x, bool v);
+
+   private:
+      const PairList *m_formals;
+      const RObject *m_body;
+      Environment *m_environment;
+
+      // Declared private to ensure that Environment objects are
+      // created only using 'new':
+      ~Closure() {}
+
+      // Not (yet) implemented.  Declared to prevent
+      // compiler-generated versions:
+      Closure(const Closure &);
+      Closure &operator=(const Closure &);
    };
 } // namespace CXXR
 
+namespace R
+{
+   /** @brief Create a CXXR::Closure object.
+    *
+    * @param formal_args Pointer to a CXXR::PairList (checked) of
+    *          formal arguments.
+    *
+    * @param body Pointer to the body of the CXXR::Closure.  This must be
+    *          either a null pointer or a pointer to an object of one
+    *          of the following types: LISTSXP, LANGSXP, SYMSXP,
+    *          EXPRSXP, VECSXP or BCODESXP (checked).
+    *
+    * @param env pointer to the CXXR::Environment (checked) in which the
+    *          closure is to be evaluated.
+    *
+    * @return pointer to the created closure object.
+    */
+   SEXP mkCLOSXP(SEXP formal_args, SEXP body, SEXP env);
+} // namespace R
+
 extern "C"
 {
-   /* Accessor functions.*/
-
-   /* Closure Access Functions */
-
-   /**
-    * @param x Pointer a closure object.
-    * @return Pointer to the body of x.
+   /** @brief Access the body of a CXXR::Closure.
+    *
+    * @param x Pointer to a CXXR::Closure object (checked).
+    *
+    * @return Pointer to the body of \a x.
     */
    SEXP BODY(SEXP x);
 
-   /**
-    * @param x Pointer a closure object.
+   /** @brief Access the environment of a CXXR::Closure.
+    *
+    * @param x Pointer to a CXXR::Closure object (checked).
+    *
     * @return Pointer to the environment of x.
     */
    SEXP CLOENV(SEXP x);
 
    /**
-    * @param x Pointer a closure object.
+    * @param x Pointer to a CXXR::Closure object.
     * @return \c true if debugging is set, i.e. evaluations of the
     *         function should run under the browser.
     */
    Rboolean DEBUG(SEXP x);
 
-   /**
-    * @param x Pointer a closure object.
-    * @return Pointer to the formals list of x.
+   /** @brief Access formal arguments of a CXXR::Closure.
+    *
+    * @param x Pointer to a CXXR::Closure object (checked).
+    *
+    * @return Pointer to the formal argument list of \a x.
     */
    SEXP FORMALS(SEXP x);
 
    /**
-    * Set the debugging state of a closure object.
-    * @param x Pointer a closure object.
+    * Set the debugging state of a CXXR::Closure object.
+    * @param x Pointer to a CXXR::Closure object.
     * @param v The new debugging state.
     */
    void SET_DEBUG(SEXP x, Rboolean v);
 
    /**
-    * Set the formals of a closure object.
-    * @param x Pointer a closure object.
+    * Set the formals of a CXXR::Closure object.
+    * @param x Pointer a CXXR::Closure object.
     * @return Pointer to the new formals list of x.
     */
    void SET_FORMALS(SEXP x, SEXP v);
 
    /**
-    * Set the body of a closure object.
-    * @param x Pointer a closure object.
+    * Set the body of a CXXR::Closure object.
+    * @param x Pointer a CXXR::Closure object.
     * @return Pointer to the new body of x.
     */
    void SET_BODY(SEXP x, SEXP v);
 
-   /**
-    * Set the environment of a closure object.
-    * @param x Pointer a closure object.
-    * @return Pointer to the new environment of x.
+   /** @brief Replace the environment of a CXXR::Closure.
+    *
+    * @param x Pointer to a CXXR::Closure object (checked).
+    *
+    * @param v Pointer to the environment now to be
+    *          considered as the environment of this CXXR::Closure.
+    *          A null pointer is not permissible (not checked).
     */
    void SET_CLOENV(SEXP x, SEXP v);
 } // extern "C"

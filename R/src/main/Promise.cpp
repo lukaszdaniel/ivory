@@ -45,9 +45,40 @@ namespace CXXR
         const auto &SET_PRVALUEptr = SET_PRVALUE;
     } // namespace ForceNonInline
 
+    void Promise::setValue(RObject *val)
+    {
+        m_value = val;
+        devolveAge(m_value);
+        if (val != Symbol::unboundValue())
+            m_environment = nullptr;
+    }
+
+    void Promise::setEnvironment(Environment *val)
+    {
+        m_environment = val;
+        devolveAge(m_environment);
+    }
+
+    void Promise::setValueGenerator(RObject *val)
+    {
+        m_valgen = val;
+        devolveAge(m_valgen);
+    }
+
     const char *Promise::typeName() const
     {
         return staticTypeName();
+    }
+
+    void Promise::visitChildren(const_visitor *v) const
+    {
+        RObject::visitChildren(v);
+        if (m_value)
+            m_value->conductVisitor(v);
+        if (m_valgen)
+            m_valgen->conductVisitor(v);
+        if (m_environment)
+            m_environment->conductVisitor(v);
     }
 
     /* Promise Access Methods */

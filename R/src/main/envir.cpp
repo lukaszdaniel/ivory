@@ -1651,7 +1651,7 @@ void Rf_defineVar(SEXP symbol, SEXP value, SEXP rho)
  * not have duplicit variables.
  */
 
-HIDDEN
+/*HIDDEN*/
 void Rf_addMissingVarsToNewEnv(SEXP env, SEXP addVars)
 {
     if (addVars == R_NilValue) return;

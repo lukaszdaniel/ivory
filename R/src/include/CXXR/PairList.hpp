@@ -94,7 +94,7 @@ namespace CXXR
         }
 
         // Virtual function of RObject:
-        const char *typeName() const;
+        const char *typeName() const override;
 
     protected:
         // Declared protected to ensure that PairList objects are

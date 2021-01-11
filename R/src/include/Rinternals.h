@@ -468,18 +468,18 @@ SEXP S4TAG(SEXP e);
 void SET_S4TAG(SEXP x, SEXP y);
 
 /* Closure Access Functions */
-SEXP (FORMALS)(SEXP x);
-SEXP (BODY)(SEXP x);
-SEXP (CLOENV)(SEXP x);
-int  (RDEBUG)(SEXP x);
-int  (RSTEP)(SEXP x);
-int  (RTRACE)(SEXP x);
-void (SET_RDEBUG)(SEXP x, int v);
-void (SET_RSTEP)(SEXP x, int v);
-void (SET_RTRACE)(SEXP x, int v);
-void (SET_FORMALS)(SEXP x, SEXP v);
-void (SET_BODY)(SEXP x, SEXP v);
-void (SET_CLOENV)(SEXP x, SEXP v);
+SEXP FORMALS(SEXP x);
+SEXP BODY(SEXP x);
+SEXP CLOENV(SEXP x);
+int  RDEBUG(SEXP x);
+int  RSTEP(SEXP x);
+int  RTRACE(SEXP x);
+void SET_RDEBUG(SEXP x, int v);
+void SET_RSTEP(SEXP x, int v);
+void SET_RTRACE(SEXP x, int v);
+void SET_FORMALS(SEXP x, SEXP v);
+void SET_BODY(SEXP x, SEXP v);
+void SET_CLOENV(SEXP x, SEXP v);
 
 /* Symbol Access Functions */
 SEXP PRINTNAME(SEXP x);
@@ -503,14 +503,14 @@ void SET_HASHTAB(SEXP x, SEXP v);
 
 /* Promise Access Functions */
 /* First five have macro versions in Defn.h */
-SEXP (PRCODE)(SEXP x);
-SEXP (PRENV)(SEXP x);
-SEXP (PRVALUE)(SEXP x);
-int  (PRSEEN)(SEXP x);
-void (SET_PRSEEN)(SEXP x, int v);
-void (SET_PRENV)(SEXP x, SEXP v);
-void (SET_PRVALUE)(SEXP x, SEXP v);
-void (SET_PRCODE)(SEXP x, SEXP v);
+SEXP PRCODE(SEXP x);
+SEXP PRENV(SEXP x);
+SEXP PRVALUE(SEXP x);
+int  PRSEEN(SEXP x);
+void SET_PRSEEN(SEXP x, int v);
+void SET_PRENV(SEXP x, SEXP v);
+void SET_PRVALUE(SEXP x, SEXP v);
+void SET_PRCODE(SEXP x, SEXP v);
 
 /* Hashing Functions */
 /* There are macro versions in Defn.h */

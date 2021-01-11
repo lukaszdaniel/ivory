@@ -336,10 +336,7 @@ static SEXP duplicate1(SEXP s, Rboolean deep)
 	return s;
     case CLOSXP:
 	PROTECT(s);
-	PROTECT(t = new RObject(CLOSXP));
-	SET_FORMALS(t, FORMALS(s));
-	SET_BODY(t, BODY(s));
-	SET_CLOENV(t, CLOENV(s));
+	PROTECT(t = mkCLOSXP(FORMALS(s), BODY(s), CLOENV(s)));
 	DUPLICATE_ATTRIB(t, s, deep);
 	if (NOJIT(s)) SET_NOJIT(t);
 	if (MAYBEJIT(s)) SET_MAYBEJIT(t);

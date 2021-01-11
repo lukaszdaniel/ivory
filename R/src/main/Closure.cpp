@@ -54,7 +54,17 @@ namespace CXXR
         return staticTypeName();
     }
 
-    /* Closure Access Methods */
+    void Closure::visitChildren(const_visitor *v) const
+    {
+        RObject::visitChildren(v);
+        if (m_formals)
+            m_formals->conductVisitor(v);
+        if (m_body)
+            m_body->conductVisitor(v);
+        if (m_environment)
+            m_environment->conductVisitor(v);
+    }
+
     /** @brief Access formal arguments of a CXXR::Closure.
      *
      * @param x Pointer to a CXXR::Closure object (checked).
@@ -207,7 +217,7 @@ namespace CXXR
     /**
      * Set the debugging state of a CXXR::Closure object.
      *
-     * @param x Pointer a CXXR::Closure object (checked).
+     * @param x Pointer to a CXXR::Closure object (checked).
      *
      * @param v The new debugging state.
      */

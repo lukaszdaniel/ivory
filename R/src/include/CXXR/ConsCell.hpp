@@ -256,7 +256,7 @@ namespace CXXR
         }
 
         // Virtual function of GCNode:
-        void visitChildren(const_visitor *v) const;
+        void visitChildren(const_visitor *v) const override;
 
         static RObject *tag(RObject *x);
         static void set_tag(RObject *x, RObject *v);

@@ -1231,16 +1231,13 @@ SEXP deriv(SEXP args)
 
     if (TYPEOF(funarg) == CLOSXP)
     {
-	s = new RObject(CLOSXP);
-	SET_FORMALS(s, FORMALS(funarg));
-	SET_CLOENV(s, CLOENV(funarg));
+	s = mkCLOSXP(FORMALS(funarg), exprlist, CLOENV(funarg));
 	funarg = s;
-	SET_BODY(funarg, exprlist);
     }
     else if (isString(funarg)) {
 	PROTECT(names = duplicate(funarg));
-	PROTECT(funarg = new RObject(CLOSXP));
 	PROTECT(ans = allocList(length(names)));
+	PROTECT(funarg = mkCLOSXP(ans, exprlist, R_GlobalEnv));
 	SET_FORMALS(funarg, ans);
 	for(i = 0; i < length(names); i++) {
 	    SET_TAG(ans, installTrChar(STRING_ELT(names, i)));
@@ -1248,8 +1245,6 @@ SEXP deriv(SEXP args)
 	    ans = CDR(ans);
 	}
 	UNPROTECT(3);
-	SET_BODY(funarg, exprlist);
-	SET_CLOENV(funarg, R_GlobalEnv);
     }
     else {
 	funarg = allocVector(EXPRSXP, 1);

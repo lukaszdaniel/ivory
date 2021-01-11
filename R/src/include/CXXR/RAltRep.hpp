@@ -66,7 +66,7 @@ namespace CXXR
         static SEXPTYPE wrapper_type(AltRep *x);
 
         // Virtual function of RObject:
-        const char *typeName() const;
+        const char *typeName() const override;
 
     private:
         SEXPTYPE m_wrapper_type;

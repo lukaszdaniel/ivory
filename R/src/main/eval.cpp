@@ -2068,7 +2068,6 @@ SEXP R::R_execMethod(SEXP op, SEXP rho)
 	    SET_MISSING(FRAME(newrho), missing);
 	    if (TYPEOF(val) == PROMSXP && PRENV(val) == rho) {
 		SEXP deflt;
-		SET_PRENV(val, newrho);
 		/* find the symbol in the method, copy its expression
 		 * to the promise */
 		for(deflt = FORMALS(op); deflt != R_NilValue; deflt = CDR(deflt)) {
@@ -2078,7 +2077,7 @@ SEXP R::R_execMethod(SEXP op, SEXP rho)
 		if(deflt == R_NilValue)
 		    error(_("symbol \"%s\" is not in environment of method"),
 			  CHAR(PRINTNAME(symbol)));
-		SET_PRCODE(val, CAR(deflt));
+		val = mkPROMISE(CAR(deflt), newrho);
 	    }
 	}
 #ifdef SWITCH_TO_REFCNT

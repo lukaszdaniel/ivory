@@ -205,10 +205,10 @@ namespace CXXR
       }
 
       // Virtual function of RObject:
-      const char *typeName() const;
+      const char *typeName() const override;
 
       // Virtual function of GCNode:
-      void visitChildren(const_visitor *v) const;
+      void visitChildren(const_visitor *v) const override;
 
       /* Environment Access Methods */
       static constexpr int FRAME_LOCK_MASK = (1 << 14);

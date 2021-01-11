@@ -83,7 +83,7 @@ namespace CXXR
         }
 
         // Virtual function of RObject:
-        const char *typeName() const;
+        const char *typeName() const override;
 
     private:
         // Declared private to ensure that DottedArgs objects are

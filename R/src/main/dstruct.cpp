@@ -96,7 +96,7 @@ HIDDEN SEXP R::mkPRIMSXP(int offset, bool eval)
  *       should do this checking in advance.
  */
 
-HIDDEN SEXP R::mkCLOSXP(SEXP formals, SEXP body, SEXP rho)
+SEXP R::mkCLOSXP(SEXP formals, SEXP body, SEXP rho)
 {
     SEXP c;
     PROTECT(formals);
@@ -104,14 +104,6 @@ HIDDEN SEXP R::mkCLOSXP(SEXP formals, SEXP body, SEXP rho)
     PROTECT(rho);
     c = new RObject(CLOSXP);
 
-#ifdef not_used_CheckFormals
-    if (isList(formals))
-        SET_FORMALS(c, formals);
-    else
-        error(_("invalid formal arguments for 'function'"));
-#else
-    SET_FORMALS(c, formals);
-#endif
     switch (TYPEOF(body))
     {
     case CLOSXP:
@@ -122,14 +114,13 @@ HIDDEN SEXP R::mkCLOSXP(SEXP formals, SEXP body, SEXP rho)
         error(_("invalid body argument for 'function'"));
         break;
     default:
-        SET_BODY(c, body);
         break;
     }
 
-    if (rho == R_NilValue)
-        SET_CLOENV(c, R_GlobalEnv);
-    else
-        SET_CLOENV(c, rho);
+    SET_FORMALS(c, formals);
+    SET_BODY(c, body);
+    SET_CLOENV(c, rho ? rho : R_GlobalEnv);
+
     UNPROTECT(3);
     return c;
 }

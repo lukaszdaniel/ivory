@@ -175,7 +175,7 @@ extern "C"
    *         the case of certain hash tables, this means the 'capacity'
    *         of \a x , not all of which may be used.)
    */
-  int (LENGTH)(SEXP x);
+  int(LENGTH)(SEXP x);
 
   /**
    * @param x Pointer to a CXXR::VectorBase.
@@ -184,7 +184,7 @@ extern "C"
    *         tables, and signifies the number of used slots in the
    *         table.
    */
-  R_xlen_t (TRUELENGTH)(SEXP x);
+  R_xlen_t(TRUELENGTH)(SEXP x);
 
   /**
    * Set length of vector.

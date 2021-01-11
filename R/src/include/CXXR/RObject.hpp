@@ -265,11 +265,6 @@ namespace CXXR
          (SET)CDR   (SET_)ENCLOS   (SET_)BODY     (SET_)PRCODE   (SET_)SYMVALUE
          (SET_)TAG  (SET_)HASHTAB  (SET_)CLOENV   (SET_)PRENV    (SET_)INTERNAL
     */
-
-    /* Every node must start with a set of sxpinfo flags and an attribute
-       field. Under the generational collector these are followed by the
-       fields used to maintain the collector's linked list structures.
-    */
 } // namespace CXXR
 #ifdef SWITCH_TO_REFCNT
 constexpr int REFCNTMAX = ((1 << NAMED_BITS) - 1);
@@ -441,7 +436,7 @@ namespace CXXR
          *          object to be cloned.
          *
          * @return Pointer to a clone of \a pattern, or \a pattern
-         * if \a pattern cannot be cloned or is itself a null pointer.
+         *         if \a pattern cannot be cloned or is itself a null pointer.
          */
         template <class T>
         static T *clone(const T *pattern)
@@ -635,8 +630,6 @@ extern "C"
      *         is 0.
      */
     int OBJECT(SEXP x);
-
-    /* Various tests */
 
     /**
      * @param s Pointer to a CXXR::RObject.
