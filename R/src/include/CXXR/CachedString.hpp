@@ -84,7 +84,7 @@ namespace CXXR
 
         // Hashing is based simply on the text of the key, not on its
         // encoding:
-        class Hasher : public std::unary_function<key, std::size_t>
+        class Hasher
         {
         public:
             std::size_t operator()(const key &k) const

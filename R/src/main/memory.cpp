@@ -2578,16 +2578,16 @@ HIDDEN void SET_ACTIVE_BINDING_BIT(SEXP b) { CXXR::RObject::set_active_binding_b
 HIDDEN void LOCK_BINDING(SEXP b) { CXXR::RObject::lock_binding(CHK(b)); }
 HIDDEN void UNLOCK_BINDING(SEXP b) { CXXR::RObject::unlock_binding(CHK(b)); }
 
-HIDDEN void SET_BASE_SYM_CACHED(SEXP b) { CXXR::RObject::set_base_sym_cached(CHK(b)); }
-HIDDEN void UNSET_BASE_SYM_CACHED(SEXP b) { CXXR::RObject::unset_base_sym_cached(CHK(b)); }
-HIDDEN Rboolean BASE_SYM_CACHED(SEXP b) { return (Rboolean) CXXR::RObject::base_sym_cached(CHK(b)); }
+HIDDEN void SET_BASE_SYM_CACHED(SEXP b) { CXXR::Symbol::set_base_sym_cached(CHK(b)); }
+HIDDEN void UNSET_BASE_SYM_CACHED(SEXP b) { CXXR::Symbol::unset_base_sym_cached(CHK(b)); }
+HIDDEN Rboolean BASE_SYM_CACHED(SEXP b) { return (Rboolean) CXXR::Symbol::base_sym_cached(CHK(b)); }
 
-HIDDEN void SET_SPECIAL_SYMBOL(SEXP b) { CXXR::RObject::set_special_symbol(CHK(b)); }
-HIDDEN void UNSET_SPECIAL_SYMBOL(SEXP b) { CXXR::RObject::unset_special_symbol(CHK(b)); }
-HIDDEN Rboolean IS_SPECIAL_SYMBOL(SEXP b) { return (Rboolean) CXXR::RObject::is_special_symbol(CHK(b)); }
-HIDDEN void SET_NO_SPECIAL_SYMBOLS(SEXP b) { CXXR::RObject::set_no_special_symbols(CHK(b)); }
-HIDDEN void UNSET_NO_SPECIAL_SYMBOLS(SEXP b) { CXXR::RObject::unset_no_special_symbols(CHK(b)); }
-HIDDEN Rboolean NO_SPECIAL_SYMBOLS(SEXP b) { return (Rboolean) CXXR::RObject::no_special_symbols(CHK(b)); }
+HIDDEN void SET_SPECIAL_SYMBOL(SEXP b) { CXXR::Symbol::set_special_symbol(CHK(b)); }
+HIDDEN void UNSET_SPECIAL_SYMBOL(SEXP b) { CXXR::Symbol::unset_special_symbol(CHK(b)); }
+HIDDEN Rboolean IS_SPECIAL_SYMBOL(SEXP b) { return (Rboolean) CXXR::Symbol::is_special_symbol(CHK(b)); }
+HIDDEN void SET_NO_SPECIAL_SYMBOLS(SEXP b) { CXXR::Symbol::set_no_special_symbols(CHK(b)); }
+HIDDEN void UNSET_NO_SPECIAL_SYMBOLS(SEXP b) { CXXR::Symbol::unset_no_special_symbols(CHK(b)); }
+HIDDEN Rboolean NO_SPECIAL_SYMBOLS(SEXP b) { return (Rboolean) CXXR::Symbol::no_special_symbols(CHK(b)); }
 
 /* R_FunTab accessors, only needed when write barrier is on */
 /* Not hidden to allow experimentaiton without rebuilding R - LT */

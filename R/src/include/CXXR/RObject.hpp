@@ -501,17 +501,6 @@ namespace CXXR
         static unsigned int growable_bit_set(RObject *x);
         static void set_growable_bit(RObject *x);
 
-        static constexpr int SPECIAL_SYMBOL_MASK = (1 << 12);
-        static constexpr int BASE_SYM_CACHED_MASK = (1 << 13);
-        static void set_base_sym_cached(RObject *x);
-        static void unset_base_sym_cached(RObject *x);
-        static unsigned int base_sym_cached(RObject *x);
-        static unsigned int no_special_symbols(RObject *x);
-        static void set_no_special_symbols(RObject *x);
-        static unsigned int is_special_symbol(RObject *x);
-        static void set_special_symbol(RObject *x);
-        static void unset_no_special_symbols(RObject *x);
-        static void unset_special_symbol(RObject *x);
         static constexpr int ACTIVE_BINDING_MASK = (1 << 15);
         static constexpr int BINDING_LOCK_MASK = (1 << 14);
         static constexpr int SPECIAL_BINDING_MASK = (ACTIVE_BINDING_MASK | BINDING_LOCK_MASK);

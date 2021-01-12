@@ -282,4 +282,51 @@ namespace CXXR
         BuiltInFunction *fun = SEXP_downcast<BuiltInFunction *>(v);
         sym.setInternalFunction(fun);
     }
+
+    void Symbol::set_base_sym_cached(RObject *x)
+    {
+        if (!x)
+            return;
+        x->m_gpbits |= BASE_SYM_CACHED_MASK;
+    }
+    void Symbol::unset_base_sym_cached(RObject *x)
+    {
+        if (!x)
+            return;
+        x->m_gpbits &= (~BASE_SYM_CACHED_MASK);
+    }
+
+    unsigned int Symbol::base_sym_cached(RObject *x) { return x ? (x->m_gpbits & BASE_SYM_CACHED_MASK) : 0; }
+
+    unsigned int Symbol::no_special_symbols(RObject *x) { return x ? (x->m_gpbits & SPECIAL_SYMBOL_MASK) : 0; }
+
+    void Symbol::set_no_special_symbols(RObject *x)
+    {
+        if (!x)
+            return;
+        x->m_gpbits |= SPECIAL_SYMBOL_MASK;
+    }
+
+    unsigned int Symbol::is_special_symbol(RObject *x) { return x ? (x->m_gpbits & SPECIAL_SYMBOL_MASK) : 0; }
+
+    void Symbol::set_special_symbol(RObject *x)
+    {
+        if (!x)
+            return;
+        x->m_gpbits |= SPECIAL_SYMBOL_MASK;
+    }
+
+    void Symbol::unset_no_special_symbols(RObject *x)
+    {
+        if (!x)
+            return;
+        x->m_gpbits &= (~SPECIAL_SYMBOL_MASK);
+    }
+
+    void Symbol::unset_special_symbol(RObject *x)
+    {
+        if (!x)
+            return;
+        x->m_gpbits &= (~SPECIAL_SYMBOL_MASK);
+    }
 } // namespace CXXR
