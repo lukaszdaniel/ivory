@@ -26,6 +26,8 @@
 #define R_NO_REMAP
 #define R_USE_SIGNALS 1
 
+#include <CXXR/String.hpp>
+#include <CXXR/BuiltInFunction.hpp>
 #include <Defn.h>
 #include <Localization.h>
 #include <Internal.h>

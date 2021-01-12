@@ -25,6 +25,7 @@
 #include <config.h>
 #endif
 
+#include <CXXR/RObject.hpp>
 #include <Defn.h>
 
 using namespace R;

@@ -24,6 +24,7 @@
 
 #define R_NO_REMAP
 
+#include <CXXR/BuiltInFunction.hpp>
 #include <Localization.h>
 #include <Defn.h>
 #include <Internal.h>
@@ -67,10 +68,8 @@ static SEXP ccumsum(SEXP x, SEXP s)
 	{
 		sum.r += COMPLEX(x)[i].r;
 		sum.i += COMPLEX(x)[i].i;
-		COMPLEX(s)
-		[i].r = sum.r;
-		COMPLEX(s)
-		[i].i = sum.i;
+		COMPLEX(s)[i].r = sum.r;
+		COMPLEX(s)[i].i = sum.i;
 	}
 	return s;
 }

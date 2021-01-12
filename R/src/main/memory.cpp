@@ -54,6 +54,12 @@
 #include <CXXR/GCNode.hpp>
 #include <CXXR/MemoryBank.hpp>
 #include <CXXR/String.hpp>
+#include <CXXR/Environment.hpp>
+#include <CXXR/Expression.hpp>
+#include <CXXR/DottedArgs.hpp>
+#include <CXXR/ByteCode.hpp>
+#include <CXXR/Promise.hpp>
+#include <CXXR/Closure.hpp>
 #include <CXXR/JMPException.hpp>
 #include <CXXR/IntVector.hpp>
 #include <CXXR/LogicalVector.hpp>

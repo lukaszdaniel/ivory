@@ -28,7 +28,7 @@
 using namespace R;
 
 #ifdef _WIN32
-#include "Startup.h"
+#include <Startup.h>
 #include "getline/getline.h"     /* for gl_load/savehistory */
 #include "getline/wc_history.h"  /* for wgl_load/savehistory */
 SEXP savehistory(SEXP call, SEXP op, SEXP args, SEXP env)

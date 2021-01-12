@@ -42,7 +42,7 @@ static void mbcsToSbcs(const char *in, char *out, const char *encoding, int enc)
 #include <R_ext/Minmax.h>
 #include <R_ext/Error.h>
 #include <R_ext/RS.h>
-#include "Fileio.h"
+#include <Fileio.h>
 #include "grDevices.h"
 
 #ifdef HAVE_ERRNO_H

@@ -23,6 +23,7 @@
 #include <config.h>
 #endif
 
+#include <CXXR/GCRoot.hpp>
 #include <Defn.h>
 #include <R_ext/Random.h>
 #include <Rmath.h>		/* for lgammafn, rmultinom */

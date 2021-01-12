@@ -26,6 +26,8 @@
 #define R_NO_REMAP
 #define R_USE_SIGNALS 1
 
+#include <CXXR/BuiltInFunction.hpp>
+#include <CXXR/Expression.hpp>
 #include <Localization.h>
 #include <R_ext/Minmax.h>
 #include <Defn.h>

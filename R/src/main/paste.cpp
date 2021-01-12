@@ -30,12 +30,13 @@
 
 #define R_NO_REMAP
 
+#include <CXXR/String.hpp>
+#include <CXXR/BuiltInFunction.hpp>
 #include <Localization.h>
 #include <Defn.h>
 #include <Internal.h>
 #include <R_ext/Minmax.h>
-
-#include "Print.h"
+#include <Print.h>
 #include "RBufferUtils.h"
 
 using namespace std;

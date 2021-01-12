@@ -23,6 +23,8 @@
 
 #define R_NO_REMAP
 
+#include <CXXR/VectorBase.hpp>
+#include <CXXR/RAltRep.hpp>
 #include <Defn.h>
 #include <Localization.h>
 #include <R_ext/Altrep.h>

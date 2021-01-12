@@ -31,6 +31,8 @@
 
 #define R_NO_REMAP
 
+#include <CXXR/BuiltInFunction.hpp>
+#include <CXXR/GCRoot.hpp>
 #include <Defn.h>
 // LDBL_EPSILON
 #include <cfloat>

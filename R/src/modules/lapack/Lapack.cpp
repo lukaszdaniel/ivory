@@ -24,6 +24,7 @@
 #include <config.h>
 #endif
 
+#include <CXXR/BuiltInFunction.hpp>
 #include <Localization.h>
 #include <Defn.h>
 #include <cctype>  /* for toupper */

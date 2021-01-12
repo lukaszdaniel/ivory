@@ -100,6 +100,9 @@
 #define R_NO_REMAP
 #define R_USE_SIGNALS 1
 
+#include <CXXR/Environment.hpp>
+#include <CXXR/CachedString.hpp>
+#include <CXXR/BuiltInFunction.hpp>
 #include <Localization.h>
 #include <Defn.h>
 #include <Internal.h>
@@ -1651,7 +1654,7 @@ void Rf_defineVar(SEXP symbol, SEXP value, SEXP rho)
  * not have duplicit variables.
  */
 
-/*HIDDEN*/
+HIDDEN
 void Rf_addMissingVarsToNewEnv(SEXP env, SEXP addVars)
 {
     if (addVars == R_NilValue) return;

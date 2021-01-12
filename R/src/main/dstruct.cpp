@@ -25,6 +25,9 @@
 
 #define R_NO_REMAP
 
+#include <CXXR/BuiltInFunction.hpp>
+#include <CXXR/String.hpp>
+#include <CXXR/Symbol.hpp>
 #include <Localization.h>
 #include <Defn.h>
 

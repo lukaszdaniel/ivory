@@ -35,7 +35,7 @@
 #include <ctime>
 #include <Defn.h>
 #include <Internal.h>
-#include "Fileio.h"
+#include <Fileio.h>
 #include <direct.h>
 #include "graphapp/ga.h"
 #include "rlocale.h"
@@ -134,7 +134,7 @@ int check_doc_file(const char * file)
     return access(path, 4) == 0; /* read access */
 }
 
-#include "Startup.h"
+#include <Startup.h>
 
 void Rwin_fpset(void)
 {

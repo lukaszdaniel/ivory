@@ -27,7 +27,7 @@
 #define R_USE_SIGNALS 1
 #include <Defn.h>
 #include <R_ext/Riconv.h>
-#include "Fileio.h"
+#include <Fileio.h>
 #include "graphapp/ga.h"
 #include "console.h"
 #include "rui.h"
@@ -47,7 +47,7 @@
 #include <direct.h>
 #endif
 #include "run.h"
-#include "Startup.h"
+#include <Startup.h>
 #include <cstdlib>		/* for exit */
 
 #include <Localization.h>

@@ -46,9 +46,9 @@
   #include <strings.h>
 #endif
 
-#include "Fileio.h"
+#include <Fileio.h>
 #include "Runix.h"
-#include "Startup.h"
+#include <Startup.h>
 #include <R_ext/Riconv.h>
 #include <R_ext/Print.h> // for REprintf
 #include <R_ext/RS.h> // for Calloc

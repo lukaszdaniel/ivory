@@ -23,6 +23,7 @@
 #include <config.h>
 #endif
 
+#include <CXXR/String.hpp>
 #include <Defn.h>
 #include "localization.h"
 #include <cfloat>  /* for DBL_MAX */

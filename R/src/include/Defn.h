@@ -32,41 +32,6 @@
 #error Defn.h can only be included in C++ files
 #endif
 
-// #ifdef USE_RINTERNALS
-// #undef USE_RINTERNALS
-// #endif
-
-#include <utility>
-#include <iostream>
-#include <string>
-#include <CXXR/RObject.hpp>
-#include <CXXR/GCRoot.hpp>
-#include <CXXR/ConsCell.hpp>
-#include <CXXR/DottedArgs.hpp>
-#include <CXXR/ByteCode.hpp>
-#include <CXXR/BuiltInFunction.hpp>
-#include <CXXR/Symbol.hpp>
-#include <CXXR/Expression.hpp>
-#include <CXXR/VectorBase.hpp>
-#include <CXXR/FixedVector.hpp>
-#include <CXXR/ComplexVector.hpp>
-#include <CXXR/RawVector.hpp>
-#include <CXXR/RealVector.hpp>
-#include <CXXR/IntVector.hpp>
-#include <CXXR/StringVector.hpp>
-#include <CXXR/LogicalVector.hpp>
-#include <CXXR/ListVector.hpp>
-#include <CXXR/ExpressionVector.hpp>
-#include <CXXR/UncachedString.hpp>
-#include <CXXR/CachedString.hpp>
-#include <CXXR/Environment.hpp>
-#include <CXXR/Promise.hpp>
-#include <CXXR/Closure.hpp>
-#include <CXXR/RAllocStack.hpp>
-#include <CXXR/ExternalPointer.hpp>
-#include <CXXR/PairList.hpp>
-#include <CXXR/RAltRep.hpp>
-
 /* To test the write barrier used by the generational collector,
    define TESTING_WRITE_BARRIER.  This makes the internal structure of
    SEXPRECs visible only inside of files that explicitly define
@@ -222,7 +187,6 @@ constexpr long R_VSIZE = 67108864L;
 #include <cmath>
 #include <cstdlib>
 #include <cstring>
-#include <vector>
 
 /* declare substitutions */
 #if !defined(strdup) && defined(HAVE_DECL_STRDUP) && !HAVE_DECL_STRDUP
@@ -389,13 +353,6 @@ extern0 int	R_Is_Running;	    /* for Windows memory manager */
 extern SEXP	R_CurrentExpr;	    /* Currently evaluating expression */
 extern0 SEXP	R_ReturnedValue;    /* Slot for return-ing values */
 extern0 SEXP*	R_SymbolTable;	    /* The symbol table */
-#ifdef R_USE_SIGNALS
-extern0 RCNTXT R_Toplevel;	      /* Storage for the toplevel context */
-extern0 RCNTXT* R_ToplevelContext;  /* The toplevel context */
-LibExtern RCNTXT* R_GlobalContext;    /* The global context */
-extern0 RCNTXT* R_SessionContext;   /* The session toplevel context */
-extern0 RCNTXT* R_ExitContext;      /* The active context for on.exit processing */
-#endif
 extern bool R_Visible;	    /* Value visibility flag */
 extern0 int	R_EvalDepth	INI_as(0);	/* Evaluation recursion depth */
 extern0 int	R_BrowseLines	INI_as(0);	/* lines/per call in browser :
@@ -416,9 +373,6 @@ extern uintptr_t R_CStackStart	INI_as((uintptr_t)-1);	/* Initial stack address *
 /* Default here is for Windows: set from configure in src/unix/system.cpp */
 extern int	R_CStackDir	INI_as(1);	/* C stack direction */
 
-#ifdef R_USE_SIGNALS
-extern0 struct RPRSTACK *R_PendingPromises INI_as(nullptr); /* Pending promise stack */
-#endif
 
 /* File Input/Output */
 LibExtern Rboolean R_Interactive INI_as(TRUE);	/* TRUE during interactive use*/
@@ -513,9 +467,6 @@ extern0 int R_disable_bytecode INI_as(0);
 extern SEXP R_cmpfun1(SEXP); /* unconditional fresh compilation */
 extern void R_init_jit_enabled(void);
 extern void R_initAssignSymbols(void);
-#ifdef R_USE_SIGNALS
-extern SEXP R_findBCInterpreterSrcref(RCNTXT *);
-#endif
 extern SEXP R_getCurrentSrcref();
 extern SEXP R_getBCInterpreterExpression();
 
@@ -930,7 +881,7 @@ namespace R
     const char *typeName(SEXP v);
     void sortVector(SEXP s, bool decreasing);
     void SrcrefPrompt(const char *prefix, SEXP srcref);
-    void ssort(CXXR::String **x, int n);
+    // void ssort(CXXR::String **x, int n);
     int StrToInternal(const char *s);
     SEXP strmat2intmat(SEXP s, SEXP dnamelist, SEXP call);
     SEXP substituteList(SEXP el, SEXP rho);

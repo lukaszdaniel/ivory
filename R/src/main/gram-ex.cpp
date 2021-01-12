@@ -29,7 +29,7 @@
 #include <config.h>
 #endif
 
-#include "Defn.h"
+#include <Defn.h>
 
 extern "C"
 HIDDEN int R_fgetc(FILE *fp)

@@ -27,9 +27,8 @@
 #define R_NO_REMAP
 #define R_USE_SIGNALS 1
 
-#include <CXXR/CachedString.hpp>
-#include <CXXR/GCRoot.hpp>
-
+#include <CXXR/BuiltInFunction.hpp>
+#include <CXXR/Symbol.hpp>
 #include <Localization.h>
 #include <Defn.h>
 #include <Internal.h>

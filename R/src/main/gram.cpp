@@ -96,9 +96,10 @@
 #define R_NO_REMAP
 #define R_USE_SIGNALS 1
 
-#include "IOStuff.h"		/*-> Defn.h */
-#include "Fileio.h"
-#include "Parse.h"
+#include <CXXR/GCRoot.hpp>
+#include <IOStuff.h>		/*-> Defn.h */
+#include <Fileio.h>
+#include <Parse.h>
 #include <R_ext/Print.h>
 #include <Localization.h>
 
@@ -1082,16 +1083,16 @@ static const yytype_int8 yytranslate[] =
   /* YYRLINE[YYN] -- Source line where rule number YYN was defined.  */
 static const yytype_int16 yyrline[] =
 {
-       0,   424,   424,   425,   426,   427,   428,   431,   432,   433,
-     436,   437,   440,   441,   442,   443,   445,   446,   448,   449,
-     450,   451,   452,   454,   455,   456,   457,   458,   459,   460,
-     461,   462,   463,   464,   465,   466,   467,   468,   469,   470,
-     471,   472,   473,   474,   475,   477,   478,   479,   480,   481,
-     482,   483,   484,   485,   486,   487,   488,   489,   490,   491,
-     492,   493,   494,   495,   496,   497,   498,   499,   503,   506,
-     509,   513,   514,   515,   516,   517,   518,   521,   522,   525,
-     526,   527,   528,   529,   530,   531,   532,   535,   536,   537,
-     538,   539,   543
+       0,   425,   425,   426,   427,   428,   429,   432,   433,   434,
+     437,   438,   441,   442,   443,   444,   446,   447,   449,   450,
+     451,   452,   453,   455,   456,   457,   458,   459,   460,   461,
+     462,   463,   464,   465,   466,   467,   468,   469,   470,   471,
+     472,   473,   474,   475,   476,   478,   479,   480,   481,   482,
+     483,   484,   485,   486,   487,   488,   489,   490,   491,   492,
+     493,   494,   495,   496,   497,   498,   499,   500,   504,   507,
+     510,   514,   515,   516,   517,   518,   519,   522,   523,   526,
+     527,   528,   529,   530,   531,   532,   533,   536,   537,   538,
+     539,   540,   544
 };
 #endif
 
@@ -3752,7 +3753,7 @@ SEXP R::R_ParseFile(FILE *fp, int n, ParseStatus *status, SEXP srcfile)
     return R_Parse(n, status, srcfile);
 }
 
-#include "Rconnections.h"
+#include <Rconnections.h>
 static Rconnection con_parse;
 
 /* need to handle incomplete last line */

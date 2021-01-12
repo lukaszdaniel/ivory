@@ -40,6 +40,8 @@
 
 #define R_NO_REMAP
 
+#include <CXXR/GCRoot.hpp>
+#include <CXXR/String.hpp>
 #include <Localization.h>
 #include <Defn.h>
 #include <Internal.h>

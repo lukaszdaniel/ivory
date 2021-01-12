@@ -27,9 +27,10 @@
 #define R_NO_REMAP
 #define R_USE_SIGNALS 1
 
-#include "IOStuff.h"		/*-> Defn.h */
-#include "Fileio.h"
-#include "Parse.h"
+#include <CXXR/GCRoot.hpp>
+#include <IOStuff.h>		/*-> Defn.h */
+#include <Fileio.h>
+#include <Parse.h>
 #include <R_ext/Print.h>
 #include <Localization.h>
 
@@ -1777,7 +1778,7 @@ SEXP R::R_ParseFile(FILE *fp, int n, ParseStatus *status, SEXP srcfile)
     return R_Parse(n, status, srcfile);
 }
 
-#include "Rconnections.h"
+#include <Rconnections.h>
 static Rconnection con_parse;
 
 /* need to handle incomplete last line */

@@ -33,6 +33,9 @@
 #endif
 
 #define R_USE_SIGNALS 1
+
+#include <CXXR/String.hpp>
+#include <CXXR/IntVector.hpp>
 #include <Defn.h>
 #include <cfloat>  /* for DBL_DIG */
 #include <Fileio.h>

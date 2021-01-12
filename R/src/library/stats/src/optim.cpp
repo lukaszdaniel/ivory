@@ -21,6 +21,7 @@
 #include <config.h>
 #endif
 
+#include <CXXR/GCRoot.hpp>
 #include <Defn.h>
 #include <R_ext/Applic.h>
 
@@ -42,9 +43,9 @@ SEXP getListElement(SEXP list, const char *str)
     return elmt;
 }
 
-static double * vect(int n)
+static double *vect(int n)
 {
-    return (double *)R_alloc(n, sizeof(double));
+	return (double *)R_alloc(n, sizeof(double));
 }
 
 typedef struct opt_struct

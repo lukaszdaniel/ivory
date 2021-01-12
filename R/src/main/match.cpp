@@ -44,6 +44,7 @@
 
 #define R_NO_REMAP
 
+#include <CXXR/DottedArgs.hpp>
 #include <Localization.h>
 #include <Defn.h>
 

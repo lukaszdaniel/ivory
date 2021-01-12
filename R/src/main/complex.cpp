@@ -60,13 +60,14 @@
 #undef HAVE_CPOW
 #endif
 
+#include <CXXR/BuiltInFunction.hpp>
 #include <Localization.h>
 #include <Defn.h>		/* -> ../include/R_ext/Complex.h */
 #include <Internal.h>
 #include <Rmath.h>
 
 #include "arithmetic.h"		/* complex_*  */
-#include "Rcomplex.h"		/* I, SET_C99_COMPLEX, toC99 */
+#include <Rcomplex.h>		/* I, SET_C99_COMPLEX, toC99 */
 #include <R_ext/Itermacros.h>
 using namespace R;
 

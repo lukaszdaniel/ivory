@@ -24,8 +24,10 @@
 
 #define R_NO_REMAP
 
+#include <CXXR/BuiltInFunction.hpp>
 #include <Localization.h>
 #include <Defn.h>
+
 using namespace R;
 
 /* -> Rinternals.h which exports R_compute_identical() */

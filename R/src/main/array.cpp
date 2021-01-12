@@ -25,6 +25,7 @@
 
 #define R_NO_REMAP
 
+#include <CXXR/BuiltInFunction.hpp>
 #include <Defn.h>
 #include <Localization.h>
 #include <Internal.h>
@@ -36,7 +37,7 @@
 #include "duplicate.h"
 
 #include <complex>
-#include "Rcomplex.h"	/* toC99 */
+#include <Rcomplex.h>	/* toC99 */
 using namespace R;
 
 /* "GetRowNames" and "GetColNames" are utility routines which

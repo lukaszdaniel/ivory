@@ -24,7 +24,7 @@
 #ifndef JMPEXCEPTION_HPP
 #define JMPEXCEPTION_HPP
 
-class RContext;
+#include <RContext.h>
 
 namespace CXXR
 {

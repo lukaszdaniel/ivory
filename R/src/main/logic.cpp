@@ -24,10 +24,12 @@
 
 #define R_NO_REMAP
 
+#include <CXXR/BuiltInFunction.hpp>
 #include <Localization.h>
 #include <Defn.h>
 #include <Internal.h>
 #include <R_ext/Itermacros.h>
+
 using namespace R;
 
 /* interval at which to check interrupts, a guess */

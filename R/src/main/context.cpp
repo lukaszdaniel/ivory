@@ -110,13 +110,24 @@
 #define R_NO_REMAP
 #define R_USE_SIGNALS 1
 
+#include <CXXR/GCRoot.hpp>
+#include <CXXR/BuiltInFunction.hpp>
+#include <CXXR/JMPException.hpp>
 #include <Localization.h>
 #include <Defn.h>
+#include <RContext.h>
 #include <Internal.h>
-#include <CXXR/JMPException.hpp>
 
 using namespace R;
 using namespace CXXR;
+
+RContext R_Toplevel;         /* Storage for the toplevel context */
+RContext *R_ToplevelContext; /* The toplevel context */
+RContext *R_GlobalContext;   /* The global context */
+RContext *R_SessionContext;  /* The session toplevel context */
+RContext *R_ExitContext;     /* The active context for on.exit processing */
+
+struct RPRSTACK *R_PendingPromises = nullptr; /* Pending promise stack */
 
 /* R_run_onexits - runs the conexit/cend code for all contexts from
    R_GlobalContext down to but not including the argument context.

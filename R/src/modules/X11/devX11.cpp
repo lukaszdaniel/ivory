@@ -29,9 +29,12 @@
 #include <config.h>
 #endif
 
+#include <CXXR/GCRoot.hpp>
 #include <Defn.h>
 #include <Localization.h>
+
 using namespace R;
+
 /* rint is C99 */
 #ifdef HAVE_RINT
 #define R_rint(x) rint(x)
@@ -56,7 +59,7 @@ using namespace R;
 
 #define R_USE_PROTOTYPES 1
 #include <R_ext/GraphicsEngine.h>
-#include "Fileio.h"		/* R_fopen */
+#include <Fileio.h>		/* R_fopen */
 #include "rotated.h"		/* 'Public' routines from here */
 /* For the input handlers of the event loop mechanism: */
 #include <R_ext/eventloop.h>

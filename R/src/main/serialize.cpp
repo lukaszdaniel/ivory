@@ -27,6 +27,13 @@
 #define NEED_CONNECTION_PSTREAMS
 #define R_USE_SIGNALS 1
 
+#include <CXXR/String.hpp>
+#include <CXXR/BuiltInFunction.hpp>
+#include <CXXR/Environment.hpp>
+#include <CXXR/Expression.hpp>
+#include <CXXR/DottedArgs.hpp>
+#include <CXXR/ExternalPointer.hpp>
+#include <CXXR/ByteCode.hpp>
 #include <Localization.h>
 #include <Defn.h>
 #include <Rmath.h>

@@ -1052,7 +1052,7 @@ static SEXP ParseRd(ParseStatus *status, SEXP srcfile, bool fragment, SEXP macro
     return parseState.Value;
 }
 
-#include "Rconnections.h"
+#include <Rconnections.h>
 static Rconnection con_parse;
 
 /* need to handle incomplete last line */

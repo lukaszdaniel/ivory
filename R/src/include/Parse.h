@@ -26,7 +26,9 @@
 #error Parse.h can only be included in C++ files
 #endif
 
-#define R_USE_SIGNALS 1
+#ifndef R_USE_SIGNALS
+#define R_USE_SIGNALS
+#endif
 #include <IOStuff.h> /*-> Defn.h */
 
 /* Public interface */

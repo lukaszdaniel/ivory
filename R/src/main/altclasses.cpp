@@ -23,6 +23,8 @@
 
 #define R_NO_REMAP
 
+#include <CXXR/String.hpp>
+#include <CXXR/PairList.hpp>
 #include <Defn.h>
 #include <Localization.h>
 #include <R_ext/Altrep.h>

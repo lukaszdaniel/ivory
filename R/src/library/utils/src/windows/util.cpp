@@ -337,7 +337,7 @@ SEXP writeClipboard(SEXP text, SEXP sformat)
     return ScalarLogical(success);
 }
 
-#include "Startup.h"
+#include <Startup.h>
 
 #include <graphapp/ga.h>
 #include "rui.h"

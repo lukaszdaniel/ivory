@@ -27,14 +27,15 @@
 #endif
 
 #define R_NO_REMAP
-
 #define R_USE_SIGNALS 1	/* for Parse.h */
+
+#include <CXXR/String.hpp>
 #include <Localization.h>
 #include <Defn.h>
 #include <Internal.h>
-#include "Print.h"
-#include "Fileio.h"
-#include "Parse.h"
+#include <Print.h>
+#include <Fileio.h>
+#include <Parse.h>
 
 #include <cstdio>
 #ifdef _WIN32

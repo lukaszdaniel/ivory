@@ -29,6 +29,8 @@
 #define R_NO_REMAP
 #define R_USE_SIGNALS 1
 
+#include <CXXR/GCRoot.hpp>
+#include <CXXR/JMPException.hpp>
 #include <Localization.h>
 #include <Defn.h>
 #include <Internal.h>
@@ -40,7 +42,6 @@
 #include <R_ext/Minmax.h>
 #include <R_ext/Print.h>
 #include <cstdarg>
-#include <CXXR/JMPException.hpp>
 
 using namespace std;
 using namespace R;

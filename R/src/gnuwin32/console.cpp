@@ -48,7 +48,7 @@ extern void R_WaitEvent(void);
 #include "consolestructs.h"
 #include "rui.h"
 #include "getline/wc_history.h"
-#include "Startup.h" /* for CharacterMode */
+#include <Startup.h> /* for CharacterMode */
 #include <Fileio.h>
 
 #include <cstdint>

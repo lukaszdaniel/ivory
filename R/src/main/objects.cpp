@@ -29,12 +29,13 @@
 #define R_NO_REMAP
 #define R_USE_SIGNALS 1
 
+#include <CXXR/BuiltInFunction.hpp>
+#include <CXXR/GCRoot.hpp>
+#include <CXXR/PairList.hpp>
 #include <Defn.h>
 #include <Localization.h>
 #include <Internal.h>
 #include <R_ext/RS.h> /* for Calloc, Realloc and for S4 object bit */
-#include <CXXR/GCRoot.hpp>
-
 #include <utility>
 
 using namespace R;

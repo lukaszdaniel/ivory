@@ -28,6 +28,13 @@
 #define NEED_CONNECTION_PSTREAMS
 #define R_USE_SIGNALS 1
 
+#include <CXXR/PairList.hpp>
+#include <CXXR/Expression.hpp>
+#include <CXXR/Promise.hpp>
+#include <CXXR/Environment.hpp>
+#include <CXXR/DottedArgs.hpp>
+#include <CXXR/ExternalPointer.hpp>
+#include <CXXR/UncachedString.hpp>
 #include <Localization.h>
 #include <Defn.h>
 #include <Internal.h>

@@ -60,6 +60,7 @@
 
 #define R_NO_REMAP
 
+#include <CXXR/String.hpp>
 #include <Localization.h>
 #include <Defn.h>
 #include <Rmath.h>

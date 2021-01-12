@@ -365,6 +365,11 @@ namespace CXXR
 	bool isASCII(const std::string &str);
 } // namespace CXXR
 
+namespace R
+{
+	void ssort(CXXR::String **x, int n);
+}
+
 extern "C"
 {
 	extern SEXP R_NaString;	   /* NA_STRING as a CHARSXP */

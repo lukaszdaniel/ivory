@@ -33,7 +33,7 @@
 #include "localization.h"
 #include "rui.h"
 
-#include "Startup.h"
+#include <Startup.h>
 
 typedef struct {
     window wprog;

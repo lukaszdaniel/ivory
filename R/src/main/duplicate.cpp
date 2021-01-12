@@ -25,6 +25,10 @@
 
 #define R_NO_REMAP
 
+#include <CXXR/PairList.hpp>
+#include <CXXR/Expression.hpp>
+#include <CXXR/String.hpp>
+#include <CXXR/DottedArgs.hpp>
 #include <Localization.h>
 #include <Defn.h>
 

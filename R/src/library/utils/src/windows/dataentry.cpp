@@ -35,7 +35,7 @@
 #define R_USE_SIGNALS 1
 #include <Defn.h>
 #include <Internal.h>
-#include "Print.h"
+#include <Print.h>
 #include <Rinternals.h>
 #include <R_ext/Parse.h>  /* parsing is used in handling escape codes */
 #include <R_ext/Minmax.h>

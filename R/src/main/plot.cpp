@@ -25,6 +25,7 @@
 
 #define R_NO_REMAP
 
+#include <CXXR/String.hpp>
 #include <Localization.h>
 #include <Defn.h>   // Rexp10  (et al)
 #include <cfloat>  /* for DBL_MAX */

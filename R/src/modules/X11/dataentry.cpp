@@ -36,6 +36,9 @@
 #endif
 
 #define R_USE_SIGNALS 1
+
+#include <CXXR/String.hpp>
+#include <CXXR/GCRoot.hpp>
 #include <Localization.h>
 #include <Defn.h>
 #include <cstdlib>

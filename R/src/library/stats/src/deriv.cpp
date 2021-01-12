@@ -26,6 +26,7 @@
 #include <config.h>
 #endif
 
+#include <CXXR/Expression.hpp>
 #include <Defn.h>
 #include "localization.h"
 

@@ -31,6 +31,11 @@
 
 #define R_NO_REMAP
 
+#include <CXXR/String.hpp>
+#include <CXXR/Expression.hpp>
+#include <CXXR/BuiltInFunction.hpp>
+#include <CXXR/ExpressionVector.hpp>
+#include <CXXR/ListVector.hpp>
 #include <Localization.h>
 #include <Parse.h>
 #include <Defn.h> /*-- Maybe modularize into own Coerce.h ..*/

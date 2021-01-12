@@ -22,6 +22,7 @@
 #include <config.h>
 #endif
 
+#include <CXXR/String.hpp>
 #include <Defn.h>
 #include "localization.h"
 #include <cfloat>  /* for DBL_MAX */
@@ -45,8 +46,7 @@ static void TypeCheck(SEXP s, SEXPTYPE type)
 
 	/*  R o s s  I h a k a,  M a r c h  1 9 9 9  */
 
-static void
-FindCutPoints(double low, double high,
+static void FindCutPoints(double low, double high,
 	      double x1, double y1, double z1,
 	      double x2, double y2, double z2,
 	      double *x, double *y, double *z,
@@ -146,8 +146,7 @@ FindCutPoints(double low, double high,
 /* instead of the cell sides.  Use the same switch idea as in */
 /* contour above.  There are 5 cases to handle. */
 
-static void
-FindPolygonVertices(double low, double high,
+static void FindPolygonVertices(double low, double high,
 		    double x1, double x2, double y1, double y2,
 		    double z11, double z21, double z12, double z22,
 		    double *x, double *y, double *z, int *npt)
@@ -703,7 +702,6 @@ static short int Edge[6][4] = {
     { 3,11, 4, 8},
     { 9, 6,10, 1},
 };
-
 
 static void PerspBox(int front, double *x, double *y, double *z,
 		     char *EdgeDone, pGEDevDesc dd)
@@ -1290,6 +1288,7 @@ static void FindCorners(double width, double height, SEXP label,
     REAL(label)[2] = x1 - dy;
     REAL(label)[6] = y1 + dx;
 }
+
 static int TestLabelIntersection(SEXP label1, SEXP label2) {
 
     int i, j, l1, l2;

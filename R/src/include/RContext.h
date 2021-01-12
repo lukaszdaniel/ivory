@@ -175,17 +175,17 @@ public:
                  m_restartstack(nullptr), m_prstack(nullptr), m_nodestack(nullptr), m_bcprottop(nullptr), m_srcref(nullptr), m_browserfinish(false),
                  m_returnValue(nullptr), m_jumptarget(nullptr), m_jumpmask(0){};
     ~RContext(){};
-    SEXP getHandlerStack() const { return this->m_handlerstack; }
-    void setHandlerStack(SEXP handler) { this->m_handlerstack = handler; }
-    SEXP onExit() const { return this->m_conexit; }
-    void setOnExit(SEXP x) { this->m_conexit = x; }
-    SEXP workingEnvironment() const { return this->m_cloenv; }
-    void setWorkingEnvironment(SEXP x) { this->m_cloenv = x; }
-    RContext *nextContext() const { return this->m_nextcontext; }
-    void setNextContext(RContext *ctxt) { this->m_nextcontext = ctxt; }
-    SEXP getReturnValue() const { return this->m_returnValue; }
-    void setReturnValue(SEXP rv) { this->m_returnValue = rv; }
-    void *getContextEndData() const { return this->m_cenddata; };
+    SEXP getHandlerStack() const { return m_handlerstack; }
+    void setHandlerStack(SEXP handler) { m_handlerstack = handler; }
+    SEXP onExit() const { return m_conexit; }
+    void setOnExit(SEXP x) { m_conexit = x; }
+    SEXP workingEnvironment() const { return m_cloenv; }
+    void setWorkingEnvironment(SEXP x) { m_cloenv = x; }
+    RContext *nextContext() const { return m_nextcontext; }
+    void setNextContext(RContext *ctxt) { m_nextcontext = ctxt; }
+    SEXP getReturnValue() const { return m_returnValue; }
+    void setReturnValue(SEXP rv) { m_returnValue = rv; }
+    void *getContextEndData() const { return m_cenddata; };
     void setContextEndData(void *data = nullptr) { m_cenddata = data; }
     void setContextEnd(void (*cendf)(void *) = nullptr) { m_cend = cendf; }
     void setContextEnd(void (*cendf)(void *), void *data)
@@ -193,54 +193,54 @@ public:
         m_cend = cendf;
         m_cenddata = data;
     }
-    auto getContextEnd() { return (this->m_cend); }
-    int &getCallFlag() { return this->m_callflag; }
-    int getCallFlag() const { return this->m_callflag; }
-    void setCallFlag(int cflag) { this->m_callflag = cflag; }
-    SEXP getSysParent() const { return this->m_sysparent; }
-    void setSysParent(SEXP sp) { this->m_sysparent = sp; }
-    SEXP getRestartStack() const { return this->m_restartstack; }
-    void setRestartStack(SEXP rs) { this->m_restartstack = rs; }
-    int getCStackTop() const { return this->m_cstacktop; }
-    void setCStackTop(int stacktop) { this->m_cstacktop = stacktop; }
-    bool getGCEnabled() const { return this->m_gcenabled; }
-    void setGCEnabled(bool enabled) { this->m_gcenabled = enabled; }
-    bool getBCIntactive() const { return this->m_bcintactive; }
-    void setBCIntactive(bool active) { this->m_bcintactive = active; }
-    void *getBCPC() const { return this->m_bcpc; }
-    void setBCPC(void *bc) { this->m_bcpc = bc; }
-    SEXP getBCBody() const { return this->m_bcbody; }
-    void setBCBody(SEXP body) { this->m_bcbody = body; }
-    int getEvalDepth() const { return this->m_evaldepth; }
-    void setEvalDepth(int depth) { this->m_evaldepth = depth; }
-    int getIntSusp() const { return this->m_intsusp; }
-    void setIntSusp(int susp) { this->m_intsusp = susp; }
-    void *getVMax() const { return this->m_vmax; }
-    void setVMax(void *vm) { this->m_vmax = vm; }
-    RPRSTACK *getPrStack() const { return this->m_prstack; }
-    void setPrStack(RPRSTACK *rpr) { this->m_prstack = rpr; }
-    RContext *getJumpTarget() const { return this->m_jumptarget; }
-    void setJumpTarget(RContext *target) { this->m_jumptarget = target; }
-    int getJumpMask() const { return this->m_jumpmask; }
-    void setJumpMask(int mask) { this->m_jumpmask = mask; }
-    R_bcstack_t *getNodeStack() const { return this->m_nodestack; }
-    void setNodeStack(R_bcstack_t *stack) { this->m_nodestack = stack; }
-    SEXP getSrcRef() const { return this->m_srcref; }
-    void setSrcRef(SEXP src) { this->m_srcref = src; }
-    R_bcstack_t *getBCProtTop() const { return this->m_bcprottop; }
-    void setBCProtTop(R_bcstack_t *stack) { this->m_bcprottop = stack; }
-    auto getCJmpBuf() { return this->m_cjmpbuf; }
-    SEXP getCallFun() const { return this->m_callfun; }
-    void setCallFun(SEXP cfun) { this->m_callfun = cfun; }
-    SEXP getPromiseArgs() const { return this->m_promargs; }
-    void setPromiseArgs(SEXP pargs) { this->m_promargs = pargs; }
-    SEXP getCall() const { return this->m_call; }
-    void setCall(SEXP call) { this->m_call = call; }
-    bool getBrowserFinish() const { return this->m_browserfinish; }
-    void setBrowserFinish(bool finish) { this->m_browserfinish = finish; }
-    bool isRestartBitSet() const { return (this->m_callflag & CTXT_RESTART); }
-    void setRestartBitOn() { this->m_callflag |= CTXT_RESTART; }
-    void setRestartBitOff() { this->m_callflag &= ~CTXT_RESTART; }
+    auto getContextEnd() { return (m_cend); }
+    int &getCallFlag() { return m_callflag; }
+    int getCallFlag() const { return m_callflag; }
+    void setCallFlag(int cflag) { m_callflag = cflag; }
+    SEXP getSysParent() const { return m_sysparent; }
+    void setSysParent(SEXP sp) { m_sysparent = sp; }
+    SEXP getRestartStack() const { return m_restartstack; }
+    void setRestartStack(SEXP rs) { m_restartstack = rs; }
+    int getCStackTop() const { return m_cstacktop; }
+    void setCStackTop(int stacktop) { m_cstacktop = stacktop; }
+    bool getGCEnabled() const { return m_gcenabled; }
+    void setGCEnabled(bool enabled) { m_gcenabled = enabled; }
+    bool getBCIntactive() const { return m_bcintactive; }
+    void setBCIntactive(bool active) { m_bcintactive = active; }
+    void *getBCPC() const { return m_bcpc; }
+    void setBCPC(void *bc) { m_bcpc = bc; }
+    SEXP getBCBody() const { return m_bcbody; }
+    void setBCBody(SEXP body) { m_bcbody = body; }
+    int getEvalDepth() const { return m_evaldepth; }
+    void setEvalDepth(int depth) { m_evaldepth = depth; }
+    int getIntSusp() const { return m_intsusp; }
+    void setIntSusp(int susp) { m_intsusp = susp; }
+    void *getVMax() const { return m_vmax; }
+    void setVMax(void *vm) { m_vmax = vm; }
+    RPRSTACK *getPrStack() const { return m_prstack; }
+    void setPrStack(RPRSTACK *rpr) { m_prstack = rpr; }
+    RContext *getJumpTarget() const { return m_jumptarget; }
+    void setJumpTarget(RContext *target) { m_jumptarget = target; }
+    int getJumpMask() const { return m_jumpmask; }
+    void setJumpMask(int mask) { m_jumpmask = mask; }
+    R_bcstack_t *getNodeStack() const { return m_nodestack; }
+    void setNodeStack(R_bcstack_t *stack) { m_nodestack = stack; }
+    SEXP getSrcRef() const { return m_srcref; }
+    void setSrcRef(SEXP src) { m_srcref = src; }
+    R_bcstack_t *getBCProtTop() const { return m_bcprottop; }
+    void setBCProtTop(R_bcstack_t *stack) { m_bcprottop = stack; }
+    auto getCJmpBuf() { return m_cjmpbuf; }
+    SEXP getCallFun() const { return m_callfun; }
+    void setCallFun(SEXP cfun) { m_callfun = cfun; }
+    SEXP getPromiseArgs() const { return m_promargs; }
+    void setPromiseArgs(SEXP pargs) { m_promargs = pargs; }
+    SEXP getCall() const { return m_call; }
+    void setCall(SEXP call) { m_call = call; }
+    bool getBrowserFinish() const { return m_browserfinish; }
+    void setBrowserFinish(bool finish) { m_browserfinish = finish; }
+    bool isRestartBitSet() const { return (m_callflag & CTXT_RESTART); }
+    void setRestartBitOn() { m_callflag |= CTXT_RESTART; }
+    void setRestartBitOff() { m_callflag &= ~CTXT_RESTART; }
     int R_sysparent(int n);
     SEXP R_sysfunction(int n);
     SEXP R_syscall(int n);
@@ -265,11 +265,15 @@ public:
 
 using RCNTXT = RContext;
 
-extern "C" RContext R_Toplevel;         /* Storage for the toplevel context */
-extern "C" RContext *R_ToplevelContext; /* The toplevel context */
-extern "C" RContext *R_GlobalContext;   /* The global context */
-extern "C" RContext *R_SessionContext;  /* The session toplevel context */
-extern "C" RContext *R_ExitContext;     /* The active context for on.exit processing */
+extern RContext R_Toplevel;         /* Storage for the toplevel context */
+extern RContext *R_ToplevelContext; /* The toplevel context */
+extern RContext *R_GlobalContext;   /* The global context */
+extern RContext *R_SessionContext;  /* The session toplevel context */
+extern RContext *R_ExitContext;     /* The active context for on.exit processing */
+
+extern struct RPRSTACK *R_PendingPromises; // INI_as(nullptr); /* Pending promise stack */
+
+extern SEXP R_findBCInterpreterSrcref(RCNTXT *);
 
 #endif // R_USE_SIGNALS
 

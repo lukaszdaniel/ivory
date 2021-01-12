@@ -24,6 +24,9 @@
 
 #define R_NO_REMAP
 
+#include <CXXR/RObject.hpp>
+#include <CXXR/BuiltInFunction.hpp>
+#include <CXXR/Expression.hpp>
 #include <Localization.h>
 #include <Defn.h>
 #include <Internal.h>

@@ -31,6 +31,12 @@
 #define R_NO_REMAP
 #define R_USE_SIGNALS 1
 
+#include <CXXR/GCRoot.hpp>
+#include <CXXR/JMPException.hpp>
+#include <CXXR/BuiltInFunction.hpp>
+#include <CXXR/Expression.hpp>
+#include <CXXR/PairList.hpp>
+#include <CXXR/ByteCode.hpp>
 #include <Localization.h>
 #include <Defn.h>
 #include <Internal.h>
@@ -38,8 +44,6 @@
 #include <Fileio.h>
 #include <R_ext/Print.h>
 #include "arithmetic.h"
-#include <CXXR/JMPException.hpp>
-#include <CXXR/GCRoot.hpp>
 
 using namespace R;
 using namespace CXXR;

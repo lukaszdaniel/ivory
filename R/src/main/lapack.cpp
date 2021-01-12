@@ -27,6 +27,7 @@
 #include <Defn.h>
 #include <Rdynpriv.h>
 #include <Rmodules/Rlapack.h>
+
 using namespace R;
 
 static R_LapackRoutines *ptr;
