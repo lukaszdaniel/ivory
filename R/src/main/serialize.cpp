@@ -34,6 +34,8 @@
 #include <CXXR/DottedArgs.hpp>
 #include <CXXR/ExternalPointer.hpp>
 #include <CXXR/ByteCode.hpp>
+#include <CXXR/Closure.hpp>
+#include <CXXR/Promise.hpp>
 #include <Localization.h>
 #include <Defn.h>
 #include <Rmath.h>
@@ -2017,7 +2019,42 @@ static SEXP ReadItem(SEXP ref_table, R_inpstream_t stream)
 	}
     case PROMSXP:
 	{
-		PROTECT(s = new RObject(PROMSXP));
+#if CXXR_FALSE
+		R_ReadItemDepth++;
+		bool set_lastname = false;
+		bool env_was_null = false;
+		GCRoot<PairList> attr(hasattr ? SEXP_downcast<PairList *>(ReadItem(ref_table, stream)) : nullptr);
+		GCRoot<Environment> env(hastag ? SEXP_downcast<Environment *>(ReadItem(ref_table, stream)) : nullptr);
+		// For reading promises stored in earlier versions,
+		// convert null env to base env:
+		if (!env)
+		{
+			env_was_null = true;
+			env = Environment::base();
+		}
+		GCRoot<> val(ReadItem(ref_table, stream));
+		R_ReadItemDepth--; /* do this early because of the recursion. */
+		GCRoot<> valgen(ReadItem(ref_table, stream));
+		GCRoot<Promise> prom(new Promise(valgen, env));
+		prom->setValue(val);
+		if (hastag && R_ReadItemDepth == R_InitReadItemDepth + 1 && !env_was_null && Rf_isSymbol(PRENV(prom)))
+		{
+			snprintf(lastname, 8192, "%s", CHAR(PRINTNAME(PRENV(prom))));
+			set_lastname = true;
+		}
+		if (hastag && R_ReadItemDepth <= 0)
+		{
+			Rprintf("%*s", 2 * (R_ReadItemDepth - R_InitReadItemDepth), "");
+			PrintValue(PRENV(prom));
+		}
+		if (set_lastname)
+			strcpy(lastname, "<unknown>");
+		SETLEVELS(prom, levs);
+		SET_OBJECT(prom, objf);
+		SET_ATTRIB(prom, attr);
+		return prom;
+#else
+		PROTECT(s = new Promise(nullptr, nullptr));
 		SETLEVELS(s, levs);
 		SET_OBJECT(s, objf);
 		R_ReadItemDepth++;
@@ -2045,6 +2082,7 @@ static SEXP ReadItem(SEXP ref_table, R_inpstream_t stream)
 			strcpy(lastname, "<unknown>");
 		UNPROTECT(1); /* s */
 		return s;
+#endif
 	}
 	default:
 	/* These break out of the switch to have their ATTR,

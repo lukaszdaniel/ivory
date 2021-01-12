@@ -79,16 +79,6 @@ namespace CXXR
                 closureEnvironment()->conductVisitor(v);
         }
         break;
-        case PROMSXP:
-        {
-            if (promiseValue())
-                promiseValue()->conductVisitor(v);
-            if (promiseExpression())
-                promiseExpression()->conductVisitor(v);
-            if (promiseEnvironment())
-                promiseEnvironment()->conductVisitor(v);
-        }
-        break;
         default:
             break;
         }

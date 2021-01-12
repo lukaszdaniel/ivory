@@ -104,7 +104,8 @@ namespace CXXR
             abort();
         }
 #endif
-        return x->u.promsxp.m_expr;
+        const Promise *prom = SEXP_downcast<Promise *>(x);
+        return const_cast<RObject *>(prom->valueGenerator());
     }
 
     /** @brief Set the expression of a CXXR::Promise.
@@ -128,7 +129,8 @@ namespace CXXR
             abort();
         }
 #endif
-        x->u.promsxp.m_expr = v;
+        Promise *prom = SEXP_downcast<Promise *>(x);
+        prom->setValueGenerator(v);
     }
 
     /** @brief Access the environment of a CXXR::Promise.
@@ -152,7 +154,8 @@ namespace CXXR
             abort();
         }
 #endif
-        return x->u.promsxp.m_env;
+        const Promise *prom = SEXP_downcast<Promise *>(x);
+        return const_cast<Environment *>(prom->environment());
     }
 
     /** @brief Access the value of a CXXR::Promise.
@@ -177,7 +180,8 @@ namespace CXXR
             abort();
         }
 #endif
-        return x->u.promsxp.m_value;
+        const Promise *prom = SEXP_downcast<Promise *>(x);
+        return const_cast<RObject *>(prom->value());
     }
 
     /** @brief Set the value of a CXXR::Promise.
@@ -206,7 +210,8 @@ namespace CXXR
             abort();
         }
 #endif
-        x->u.promsxp.m_value = v;
+        Promise *prom = SEXP_downcast<Promise *>(x);
+        prom->setValue(v);
     }
 
     unsigned int Promise::prseen(RObject *x) { return x ? x->m_gpbits : 0; }
@@ -232,7 +237,8 @@ namespace CXXR
             abort();
         }
 #endif
-        x->u.promsxp.m_env = v;
+        Promise *prom = SEXP_downcast<Promise *>(x);
+        prom->setEnvironment(SEXP_downcast<Environment *>(v));
     }
 
     void Promise::set_prseen(RObject *x, unsigned int v)

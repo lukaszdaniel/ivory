@@ -1212,6 +1212,7 @@ SEXP R::NewEnvironment(SEXP namelist, SEXP valuelist, SEXP rho)
    unless a GC will actually occur. */
 HIDDEN SEXP R::mkPROMISE(SEXP expr, SEXP rho)
 {
+#if CXXR_FALSE
     PROTECT(expr);
     PROTECT(rho);
     SEXP s = new RObject(PROMSXP);
@@ -1228,6 +1229,21 @@ HIDDEN SEXP R::mkPROMISE(SEXP expr, SEXP rho)
     Promise::set_prvalue(s, R_UnboundValue);
     SET_PRSEEN(s, 0);
     return s;
+#else
+    GCRoot<> exprt(expr);
+    GCRoot<Environment> rhort(SEXP_downcast<Environment *>(rho));
+
+    /* precaution to ensure code does not get modified via
+       substitute() and the like */
+    ENSURE_NAMEDMAX(expr);
+
+    GCRoot<Promise> s(new Promise(exprt, rhort));
+
+    INCREMENT_REFCNT(expr);
+    INCREMENT_REFCNT(rho);
+    SET_PRSEEN(s, 0);
+    return s;
+#endif
 }
 
 SEXP R::R_mkEVPROMISE(SEXP expr, SEXP val)
@@ -2530,9 +2546,9 @@ SEXP PRENV(SEXP x) { return CHK(CXXR::Promise::prenv(CHK(x))); }
 SEXP PRVALUE(SEXP x) { return CHK(CXXR::Promise::prvalue(CHK(x))); }
 int PRSEEN(SEXP x) { return CXXR::Promise::prseen(CHK(x)); }
 
-void SET_PRENV(SEXP x, SEXP v) { FIX_REFCNT(x, CXXR::Promise::prenv(x), v); CHECK_OLD_TO_NEW(x, v); CXXR::Promise::set_prenv(x, v); }
-void SET_PRVALUE(SEXP x, SEXP v) { FIX_REFCNT(x, CXXR::Promise::prvalue(x), v); CHECK_OLD_TO_NEW(x, v); CXXR::Promise::set_prvalue(x, v); }
-void SET_PRCODE(SEXP x, SEXP v) { FIX_REFCNT(x, CXXR::Promise::prcode(x), v); CHECK_OLD_TO_NEW(x, v); CXXR::Promise::set_prcode(x, v); }
+void SET_PRENV(SEXP x, SEXP v) { FIX_REFCNT(x, CXXR::Promise::prenv(x), v); CXXR::Promise::set_prenv(x, v); }
+void SET_PRVALUE(SEXP x, SEXP v) { FIX_REFCNT(x, CXXR::Promise::prvalue(x), v); CXXR::Promise::set_prvalue(x, v); }
+void SET_PRCODE(SEXP x, SEXP v) { FIX_REFCNT(x, CXXR::Promise::prcode(x), v); CXXR::Promise::set_prcode(x, v); }
 void SET_PRSEEN(SEXP x, int v) { CXXR::Promise::set_prseen(CHK(x), v); }
 
 /* Hashing Accessors */

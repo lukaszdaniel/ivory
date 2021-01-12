@@ -250,14 +250,7 @@ namespace CXXR
         RObject *m_body;
         RObject *m_env;
     };
-
-    struct promsxp_struct
-    {
-        RObject *m_value;
-        RObject *m_expr;
-        RObject *m_env;
-    };
-
+ 
     /*
     Triplet's translation table:
     ---- LIST ----- ENV ---------- CLO ---------- PROM --------- SYM
@@ -310,7 +303,6 @@ namespace CXXR
         union
         {
             closxp_struct closxp;
-            promsxp_struct promsxp;
         } u;
 
     public:
@@ -355,21 +347,6 @@ namespace CXXR
          * @return pointer to enclosing environment.
          */
         const RObject *closureEnvironment() const { return u.closxp.m_env; }
-
-        /**
-         * @return pointer to the value of this promise.
-         */
-        const RObject *promiseValue() const { return u.promsxp.m_value; }
-
-        /**
-         * @return pointer to expression of this promise.
-         */
-        const RObject *promiseExpression() const { return u.promsxp.m_expr; }
-
-        /**
-         * @return pointer to enclosing environment.
-         */
-        const RObject *promiseEnvironment() const { return u.promsxp.m_env; }
 
         /** @brief Get an object's ::SEXPTYPE.
          *

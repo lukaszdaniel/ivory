@@ -31,6 +31,7 @@
 #include <CXXR/PairList.hpp>
 #include <CXXR/Expression.hpp>
 #include <CXXR/Promise.hpp>
+#include <CXXR/Closure.hpp>
 #include <CXXR/Environment.hpp>
 #include <CXXR/DottedArgs.hpp>
 #include <CXXR/ExternalPointer.hpp>
@@ -555,7 +556,7 @@ static void RemakeNextSEXP(FILE *fp, NodeInfo &node, int version, InputRoutines 
 	/* TAG(s) = */ m.InInteger(fp, d);
 	break;
     case PROMSXP:
-	s = new RObject(PROMSXP);
+	s = mkPROMISE(nullptr, nullptr);
 	/* skip over CAR, CDR, and TAG */
 	/* CAR(s) = */ m.InInteger(fp, d);
 	/* CDR(s) = */ m.InInteger(fp, d);
@@ -1359,12 +1360,15 @@ static SEXP NewReadItem(SEXP sym_table, SEXP env_table, FILE *fp,
 	/*UNPROTECT(1);*/
 	break;
     case PROMSXP:
-	PROTECT(s = new RObject(PROMSXP));
-	SET_PRENV(s, NewReadItem(sym_table, env_table, fp, m, d));
-	SET_PRVALUE(s, NewReadItem(sym_table, env_table, fp, m, d));
-	SET_PRCODE(s, NewReadItem(sym_table, env_table, fp, m, d));
-	/*UNPROTECT(1);*/
-	break;
+    {
+        GCRoot<Environment> env(SEXP_downcast<Environment *>(NewReadItem(sym_table, env_table, fp, m, d)));
+        GCRoot<> val(NewReadItem(sym_table, env_table, fp, m, d));
+        GCRoot<> valgen(NewReadItem(sym_table, env_table, fp, m, d));
+        GCRoot<Promise> prom(new Promise(valgen, env));
+        prom->setValue(val);
+        PROTECT(s = prom);
+    }
+    break;
     case EXTPTRSXP:
 	PROTECT(s = new ExternalPointer());
 	R_SetExternalPtrAddr(s, nullptr);

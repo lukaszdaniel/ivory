@@ -28,6 +28,9 @@
 #include <CXXR/BuiltInFunction.hpp>
 #include <CXXR/String.hpp>
 #include <CXXR/Symbol.hpp>
+#include <CXXR/PairList.hpp>
+#include <CXXR/Environment.hpp>
+#include <CXXR/Closure.hpp>
 #include <Localization.h>
 #include <Defn.h>
 
