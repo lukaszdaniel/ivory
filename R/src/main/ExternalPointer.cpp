@@ -54,12 +54,9 @@ namespace CXXR
     void ExternalPointer::visitChildren(const_visitor *v) const
     {
         RObject::visitChildren(v);
-        if (!altrep())
-        {
-            if (m_protege)
-                m_protege->conductVisitor(v);
-            if (m_tag)
-                m_tag->conductVisitor(v);
-        }
+        if (m_protege)
+            m_protege->conductVisitor(v);
+        if (m_tag)
+            m_tag->conductVisitor(v);
     }
 } // namespace CXXR

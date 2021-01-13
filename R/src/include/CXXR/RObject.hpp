@@ -250,15 +250,16 @@ namespace CXXR
         RObject *m_body;
         RObject *m_env;
     };
- 
-    /*
-    Triplet's translation table:
-    ---- LIST ----- ENV ---------- CLO ---------- PROM --------- SYM
-         (SET)CAR   (SET_)FRAME    (SET_)FORMALS  (SET_)PRVALUE  (SET_)PRINTNAME
-         (SET)CDR   (SET_)ENCLOS   (SET_)BODY     (SET_)PRCODE   (SET_)SYMVALUE
-         (SET_)TAG  (SET_)HASHTAB  (SET_)CLOENV   (SET_)PRENV    (SET_)INTERNAL
-    */
-} // namespace CXXR
+ } // namespace CXXR
+
+/*
+Triplet's translation table:
+---- LIST ----- ENV ---------- CLO ---------- PROM --------- SYM
+     (SET)CAR   (SET_)FRAME    (SET_)FORMALS  (SET_)PRVALUE  (SET_)PRINTNAME
+     (SET)CDR   (SET_)ENCLOS   (SET_)BODY     (SET_)PRCODE   (SET_)SYMVALUE
+     (SET_)TAG  (SET_)HASHTAB  (SET_)CLOENV   (SET_)PRENV    (SET_)INTERNAL
+*/
+
 #ifdef SWITCH_TO_REFCNT
 constexpr int REFCNTMAX = ((1 << NAMED_BITS) - 1);
 #endif
