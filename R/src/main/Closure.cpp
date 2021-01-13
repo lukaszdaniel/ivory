@@ -85,7 +85,8 @@ namespace CXXR
             abort();
         }
 #endif
-        return x->u.closxp.m_formals;
+        const Closure *clo = SEXP_downcast<Closure *>(x);
+        return const_cast<PairList *>(clo->formalArgs());
     }
 
     /** @brief Set the formal arguments of a CXXR::Closure.
@@ -108,7 +109,9 @@ namespace CXXR
             abort();
         }
 #endif
-        x->u.closxp.m_formals = v;
+        Closure *clos = SEXP_downcast<Closure *>(x);
+        PairList *formal_args = SEXP_downcast<PairList *>(v);
+        clos->setFormalArgs(formal_args);
     }
 
     /** @brief Access the body of a CXXR::Closure.
@@ -131,7 +134,8 @@ namespace CXXR
             abort();
         }
 #endif
-        return x->u.closxp.m_body;
+        const Closure *clo = SEXP_downcast<Closure *>(x);
+        return const_cast<RObject *>(clo->body());
     }
 
     /** @brief Set the body of a CXXR::Closure.
@@ -154,7 +158,9 @@ namespace CXXR
             abort();
         }
 #endif
-        x->u.closxp.m_body = v;
+        Closure *clos = SEXP_downcast<Closure *>(x);
+        RObject *body = SEXP_downcast<RObject *>(v);
+        clos->setBody(body);
     }
 
     /** @brief Access the environment of a CXXR::Closure.
@@ -177,7 +183,8 @@ namespace CXXR
             abort();
         }
 #endif
-        return x->u.closxp.m_env;
+        Closure *clo = SEXP_downcast<Closure *>(x);
+        return clo->environment();
     }
 
     /** @brief Replace the environment of a CXXR::Closure.
@@ -202,7 +209,9 @@ namespace CXXR
             abort();
         }
 #endif
-        x->u.closxp.m_env = v;
+        Closure *clos = SEXP_downcast<Closure *>(x);
+        Environment *env = SEXP_downcast<Environment *>(v);
+        clos->setEnvironment(env);
     }
 
     /** @brief Query debugging status.

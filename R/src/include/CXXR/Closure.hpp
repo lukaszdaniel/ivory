@@ -62,7 +62,7 @@ namespace CXXR
        * @param env pointer to the environment in which the Closure
        *          is to be evaluated.
        */
-      Closure(const PairList *formal_args, const RObject *body,
+      Closure(const PairList *formal_args = nullptr, const RObject *body = nullptr,
               Environment *env = Environment::global());
 
       /** @brief Access the body of the Closure.

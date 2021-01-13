@@ -85,6 +85,28 @@ HIDDEN SEXP R::mkPRIMSXP(int offset, bool eval)
     return result;
 }
 
+Closure::Closure(const PairList *formal_args, const RObject *body,
+                 Environment *env)
+    : FunctionBase(CLOSXP), m_formals(formal_args), m_body(body),
+      m_environment(env)
+{
+    if (body)
+    {
+        switch (body->sexptype())
+        {
+        case CLOSXP:
+        case BUILTINSXP:
+        case SPECIALSXP:
+        case DOTSXP:
+        case ANYSXP:
+            Rf_error(_("invalid body argument for 'function'\nShould NEVER happen; please bug.report() [mkCLOSXP]"));
+            break;
+        default:
+            break;
+        }
+    }
+}
+
 /**
  * @brief Create a CXXR::Closure object
  * 
@@ -104,11 +126,10 @@ HIDDEN SEXP R::mkPRIMSXP(int offset, bool eval)
 
 SEXP R::mkCLOSXP(SEXP formals, SEXP body, SEXP rho)
 {
-    SEXP c;
     PROTECT(formals);
     PROTECT(body);
     PROTECT(rho);
-    c = new RObject(CLOSXP);
+    SEXP c = new Closure();
 
     switch (TYPEOF(body))
     {
@@ -117,7 +138,7 @@ SEXP R::mkCLOSXP(SEXP formals, SEXP body, SEXP rho)
     case SPECIALSXP:
     case DOTSXP:
     case ANYSXP:
-        error(_("invalid body argument for 'function'"));
+        Rf_error(_("invalid body argument for 'function'"));
         break;
     default:
         break;

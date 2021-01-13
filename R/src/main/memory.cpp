@@ -1142,9 +1142,9 @@ SEXP Rf_allocSExp(SEXPTYPE t)
     // case PROMSXP:
     //     return new Promise();
     default:
-        return new RObject(t);
-        // std::cerr << "Inappropriate SEXPTYPE (" << sexptype2char(t) << ") for ConsCell." << std::endl;
-        // abort();
+        // return new RObject(t);
+        std::cerr << "Inappropriate SEXPTYPE (" << sexptype2char(t) << ") for ConsCell." << std::endl;
+        abort();
     }
 }
 
@@ -1212,24 +1212,6 @@ SEXP R::NewEnvironment(SEXP namelist, SEXP valuelist, SEXP rho)
    unless a GC will actually occur. */
 HIDDEN SEXP R::mkPROMISE(SEXP expr, SEXP rho)
 {
-#if CXXR_FALSE
-    PROTECT(expr);
-    PROTECT(rho);
-    SEXP s = new RObject(PROMSXP);
-    UNPROTECT(2);
-
-    /* precaution to ensure code does not get modified via
-       substitute() and the like */
-    ENSURE_NAMEDMAX(expr);
-
-    Promise::set_prcode(s, CHK(expr));
-    INCREMENT_REFCNT(expr);
-    Promise::set_prenv(s, CHK(rho));
-    INCREMENT_REFCNT(rho);
-    Promise::set_prvalue(s, R_UnboundValue);
-    SET_PRSEEN(s, 0);
-    return s;
-#else
     GCRoot<> exprt(expr);
     GCRoot<Environment> rhort(SEXP_downcast<Environment *>(rho));
 
@@ -1243,7 +1225,6 @@ HIDDEN SEXP R::mkPROMISE(SEXP expr, SEXP rho)
     INCREMENT_REFCNT(rho);
     SET_PRSEEN(s, 0);
     return s;
-#endif
 }
 
 SEXP R::R_mkEVPROMISE(SEXP expr, SEXP val)
@@ -2497,9 +2478,9 @@ SEXP CLOENV(SEXP x) { return CHK(CXXR::Closure::cloenv(CHK(x))); }
 int RDEBUG(SEXP x) { return CXXR::Closure::rdebug(CHK(x)); }
 int RSTEP(SEXP x) { return CXXR::Closure::rstep(CHK(x)); }
 
-void SET_FORMALS(SEXP x, SEXP v) { FIX_REFCNT(x, CXXR::Closure::formals(x), v); CHECK_OLD_TO_NEW(x, v); CXXR::Closure::set_formals(x, v); }
-void SET_BODY(SEXP x, SEXP v) { FIX_REFCNT(x, CXXR::Closure::body(x), v); CHECK_OLD_TO_NEW(x, v); CXXR::Closure::set_body(x, v); }
-void SET_CLOENV(SEXP x, SEXP v) { FIX_REFCNT(x, CXXR::Closure::cloenv(x), v); CHECK_OLD_TO_NEW(x, v); CXXR::Closure::set_cloenv(x, v); }
+void SET_FORMALS(SEXP x, SEXP v) { FIX_REFCNT(x, CXXR::Closure::formals(x), v); CXXR::Closure::set_formals(x, v); }
+void SET_BODY(SEXP x, SEXP v) { FIX_REFCNT(x, CXXR::Closure::body(x), v); CXXR::Closure::set_body(x, v); }
+void SET_CLOENV(SEXP x, SEXP v) { FIX_REFCNT(x, CXXR::Closure::cloenv(x), v); CXXR::Closure::set_cloenv(x, v); }
 void SET_RDEBUG(SEXP x, int v) { CXXR::Closure::set_rdebug(CHK(x), v); }
 void SET_RSTEP(SEXP x, int v) { CXXR::Closure::set_rstep(CHK(x), v); }
 

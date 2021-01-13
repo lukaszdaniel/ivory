@@ -237,20 +237,6 @@ constexpr int NAMED_BITS = 16;
  *
  * CXXR is a project to refactorize the R interpreter into C++.
  */
-namespace CXXR
-{
-    /** @brief Replacement for CR's SEXPREC.
-     *
-     */
-    class RObject;
-
-    struct closxp_struct
-    {
-        RObject *m_formals;
-        RObject *m_body;
-        RObject *m_env;
-    };
- } // namespace CXXR
 
 /*
 Triplet's translation table:
@@ -301,11 +287,6 @@ namespace CXXR
         unsigned int m_extra : 29 - NAMED_BITS; /* used for immediate bindings */
         RObject *m_attrib;
 
-        union
-        {
-            closxp_struct closxp;
-        } u;
-
     public:
         /**
          * @param stype Required type of the RObject.
@@ -333,21 +314,6 @@ namespace CXXR
 
         // Virtual function of GCNode:
         void visitChildren(const_visitor *v) const override;
-
-        /**
-         * @return pointer to formals of this closure.
-         */
-        const RObject *formals() const { return u.closxp.m_formals; }
-
-        /**
-         * @return pointer to the body of this closure.
-         */
-        const RObject *body() const { return u.closxp.m_body; }
-
-        /**
-         * @return pointer to enclosing environment.
-         */
-        const RObject *closureEnvironment() const { return u.closxp.m_env; }
 
         /** @brief Get an object's ::SEXPTYPE.
          *

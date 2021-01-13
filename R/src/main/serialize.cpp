@@ -1988,7 +1988,7 @@ static SEXP ReadItem(SEXP ref_table, R_inpstream_t stream)
 	}
     case CLOSXP:
 	{
-		PROTECT(s = new RObject(CLOSXP));
+		PROTECT(s = new Closure());
 		SETLEVELS(s, levs);
 		SET_OBJECT(s, objf);
 		R_ReadItemDepth++;

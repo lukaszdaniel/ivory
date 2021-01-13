@@ -549,7 +549,7 @@ static void RemakeNextSEXP(FILE *fp, NodeInfo &node, int version, InputRoutines 
 	s = new Expression();
 	break;
     case CLOSXP:
-	s = new RObject(CLOSXP);
+	s = new Closure();
 	/* skip over CAR, CDR, and TAG */
 	/* CAR(s) = */ m.InInteger(fp, d);
 	/* CDR(s) = */ m.InInteger(fp, d);
@@ -1353,7 +1353,7 @@ static SEXP NewReadItem(SEXP sym_table, SEXP env_table, FILE *fp,
 	/*UNPROTECT(1);*/
 	break;
     case CLOSXP:
-	PROTECT(s = new RObject(CLOSXP));
+	PROTECT(s = new Closure());
 	SET_CLOENV(s, NewReadItem(sym_table, env_table, fp, m, d));
 	SET_FORMALS(s, NewReadItem(sym_table, env_table, fp, m, d));
 	SET_BODY(s, NewReadItem(sym_table, env_table, fp, m, d));

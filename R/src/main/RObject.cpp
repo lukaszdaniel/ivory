@@ -63,25 +63,6 @@ namespace CXXR
     {
         if (m_attrib && (m_type != CHARSXP || m_attrib->m_type != CHARSXP))
             m_attrib->conductVisitor(v);
-
-        if (m_alt)
-            return;
-
-        switch (m_type)
-        {
-        case CLOSXP:
-        {
-            if (formals())
-                formals()->conductVisitor(v);
-            if (body())
-                body()->conductVisitor(v);
-            if (closureEnvironment())
-                closureEnvironment()->conductVisitor(v);
-        }
-        break;
-        default:
-            break;
-        }
     }
 
     RObject::RObject(const RObject &pattern)
