@@ -56,6 +56,8 @@ namespace CXXR
     }
 
     SEXP R_CurrentExpr = nullptr;
+    SEXP R_ReturnedValue;
+    bool R_Visible;
 
     const char *Expression::typeName() const
     {

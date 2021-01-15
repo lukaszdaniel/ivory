@@ -47,6 +47,9 @@ namespace CXXR
         const auto &consptr = Rf_cons;
     } // namespace ForceNonInline
 
+    GCRoot<> PairList::s_cons_car;
+    GCRoot<PairList> PairList::s_cons_cdr;
+
     const char *PairList::typeName() const
     {
         return staticTypeName();

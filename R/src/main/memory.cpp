@@ -540,91 +540,15 @@ void WeakRef::finalize()
         Cfin(key);
     else if (Rfin)
     {
-        GCRoot<> e(Rf_lcons(Rfin, Rf_cons(key, nullptr)));
-        Rf_eval(e, R_GlobalEnv);
+        GCRoot<PairList> tail(CXXR_cons(key, nullptr));
+        GCRoot<Expression> e(new Expression(Rfin, tail));
+        Rf_eval(e, Environment::global());
     }
 }
 
 bool RunFinalizers(void)
 {
 	return WeakRef::runFinalizers();
-}
-
-bool WeakRef::runFinalizers()
-{
-    R_CHECK_THREAD;
-    /* Prevent this function from running again when already in
-       progress. Jumps can only occur inside the top level context
-       where they will be caught, so the flag is guaranteed to be
-       reset at the end. */
-    static bool running = false;
-    if (running)
-        return false;
-    running = true;
-
-    WRList *finalization_pending = getFinalizationPending();
-    bool finalizer_run = !finalization_pending->empty();
-
-    WeakRef::check();
-
-    while (finalization_pending->size())
-    {
-        WeakRef *wr = *finalization_pending->begin();
-        /**** use R_ToplevelExec here? */
-        RCNTXT thiscontext;
-        RCNTXT *volatile saveToplevelContext;
-        volatile bool oldvis;
-        GCRoot<> oldHStack(R_HandlerStack);
-        GCRoot<> oldRStack(R_RestartStack);
-        GCRoot<> oldRVal(R_ReturnedValue);
-        oldvis = R_Visible;
-        R_HandlerStack = R_NilValue;
-        R_RestartStack = R_NilValue;
-
-        /* A top level context is established for the finalizer to
-	       insure that any errors that might occur do not spill
-	       into the call that triggered the collection. */
-        thiscontext.start(CTXT_TOPLEVEL, R_NilValue, R_GlobalEnv, Environment::base(), R_NilValue, R_NilValue);
-        saveToplevelContext = R_ToplevelContext;
-        GCRoot<> topExp(R_CurrentExpr);
-        auto savestack = GCRootBase::ppsSize();
-
-        bool redo = false;
-        bool jumped = false;
-        do
-        {
-            redo = false;
-            // std::cerr << __FILE__ << ":" << __LINE__ << " Entering try/catch for " << &thiscontext << std::endl;
-            try
-            {
-                if (!jumped)
-                {
-                    R_GlobalContext = R_ToplevelContext = &thiscontext;
-                    runWeakRefFinalizer(wr);
-                }
-                thiscontext.end();
-            }
-            catch (CXXR::JMPException &e)
-            {
-                // std::cerr << __FILE__ << ":" << __LINE__ << " Seeking " << e.context() << "; in " << &thiscontext << std::endl;
-                if (e.context() != &thiscontext)
-                    throw;
-                redo = true;
-                jumped = true;
-            }
-            // std::cerr << __FILE__ << ":" << __LINE__ << " Exiting  try/catch for " << &thiscontext << std::endl;
-        } while (redo);
-
-        R_ToplevelContext = saveToplevelContext;
-        GCRootBase::ppsRestoreSize(savestack);
-        R_CurrentExpr = topExp;
-        R_HandlerStack = oldHStack;
-        R_RestartStack = oldRStack;
-        R_ReturnedValue = oldRVal;
-        R_Visible = oldvis;
-    }
-    running = false;
-    return finalizer_run;
 }
 
 void R_RunExitFinalizers(void)
@@ -681,7 +605,16 @@ HIDDEN SEXP do_regFinaliz(SEXP call, SEXP op, SEXP args, SEXP rho)
 
 /* The Generational Collector. */
 
-#define MARK_THRU(marker, node) if (node) (node)->conductVisitor(marker)
+namespace
+{
+    inline void MARK_THRU(GCNode::const_visitor *marker, GCNode *node)
+    {
+        if (node)
+        {
+            node->conductVisitor(marker);
+        }
+    }
+} // namespace
 
 // The MARK_THRU invocations below could be eliminated by
 // encapsulating the pointers concerned in GCRoot<> objects declared
@@ -1152,7 +1085,7 @@ SEXP Rf_allocSExp(SEXPTYPE t)
    unless a GC will actually occur. */
 SEXP Rf_cons(SEXP car, SEXP cdr)
 {
-    return CXXR_cons<PairList>(CHK(car), CHK(cdr));
+    return PairList::cons<PairList>(CHK(car), SEXP_downcast<PairList *>(CHK(cdr)));
 }
 
 HIDDEN SEXP CONS_NR(SEXP car, SEXP cdr)

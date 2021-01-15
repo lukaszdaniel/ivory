@@ -84,6 +84,35 @@ namespace CXXR
         {
         }
 
+        /** @brief Create a PairList element on the free store.
+         *
+         * Unlike the constructor (and contrary to CXXR conventions
+         * generally) this function protects its arguments from the
+         * garbage collector.
+         *
+         * @param cr Pointer to the 'car' of the element to be
+         *           constructed.
+         *
+         * @param tl Pointer to the 'tail' (LISP cdr) of the element
+         *           to be constructed.
+         *
+         * @return Pointer to newly created PairList element.
+         */
+        template <class T>
+        static T *cons(RObject *cr, PairList *tl = nullptr)
+        {
+            s_cons_car = cr;
+            s_cons_cdr = tl;
+            if (cr)
+                INCREMENT_REFCNT(cr);
+            if (tl)
+                INCREMENT_REFCNT(tl);
+            T *ans = new T(cr, tl);
+            s_cons_cdr = nullptr;
+            s_cons_car = nullptr;
+            return ans;
+        }
+
         /** @brief The name by which this type is known in R.
          *
          * @return the name by which this type is known in R.
@@ -102,6 +131,10 @@ namespace CXXR
         ~PairList() {}
 
     private:
+        // Permanent GCRoots used to implement cons() without pushing
+        // and popping:
+        static GCRoot<> s_cons_car;
+        static GCRoot<PairList> s_cons_cdr;
         // Not implemented yet.  Declared to prevent
         // compiler-generated versions:
         PairList(const PairList &);
@@ -117,14 +150,7 @@ namespace CXXR
     template <class T = PairList>
     T *CXXR_cons(SEXP car, SEXP cdr)
     {
-        GCRoot<> crr(car);
-        GCRoot<PairList> tlr(SEXP_downcast<PairList *>(cdr));
-
-        if (car)
-            INCREMENT_REFCNT(crr);
-        if (cdr)
-            INCREMENT_REFCNT(tlr);
-        return new T(crr, tlr);
+        return PairList::cons<T>(car, SEXP_downcast<PairList*>(cdr));
     }
 } // namespace CXXR
 

@@ -95,7 +95,8 @@ void GCRootBase::reprotect(RObject *node, unsigned int index)
 
 void GCRootBase::seq_error()
 {
-    throw logic_error("GCRoots must be destroyed in reverse order of creation\n");
+    std::cerr << "Fatal error: GCRoots must be destroyed in reverse order of creation\n";
+    abort();
 }
 
 unsigned int GCRootBase::protect(RObject *node)

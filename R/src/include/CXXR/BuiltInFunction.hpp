@@ -181,7 +181,6 @@ namespace CXXR
      * 
      * @param x Pointer to a BuiltInFunction.
      * @return The offset of this function within the function table.
-     * @todo Ought to be private.
      */
     int PRIMOFFSET(RObject *x);
 

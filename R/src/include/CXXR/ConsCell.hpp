@@ -177,7 +177,7 @@ namespace CXXR
                 return nullptr;
             if (T *ccc = dynamic_cast<T *>(cc))
                 return ccc;
-            GCRoot<T> ans(new T(cc->car(), cc->tail(), cc->tag()));
+            T *ans = new T(cc->car(), cc->tail(), cc->tag());
             SET_ATTRIB(ans, ATTRIB(cc));
             return ans;
         }

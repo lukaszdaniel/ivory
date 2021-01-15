@@ -29,6 +29,10 @@ namespace CXXR
      *
      * This templated class enables container classes within the C++
      * standard library to allocate their memory via CXXR::MemoryBank.
+     * However, its calls to MemoryBank are configured so that they do
+     * not give rise to garbage collections: this is to avoid any
+     * reentrant calls to the code for C++ standard library
+     * containers.
      *
      * The code below is adapted from an example in the book "The C++
      * Standard Library - A Tutorial and Reference" by Nicolai
@@ -96,7 +100,7 @@ namespace CXXR
 
 		// initialize elements of allocated storage p with value value
 		template <class U, class... Args>
-		void construct(U *p, Args &&... args)
+		void construct(U *p, Args &&...args)
 		{
 			::new ((void *)p) U(std::forward<Args>(args)...);
 		}

@@ -53,7 +53,7 @@ namespace CXXR
      * number of bytes currently allocated via CXXR::MemoryBank is at least
      * as great as a threshold value.  This threshold value varies
      * during the run, subject to a minimum value specified in the
-     * initialize() method.
+     * enableGC() method.
      */
 	class GCManager
 	{
@@ -91,9 +91,13 @@ namespace CXXR
 		 * The effect of calling enableGC() more than once during a
 		 * single program run is undefined.
 		 *
-		 * @param initial_threshold  Initial value for the collection threshold.
+		 * @param initial_threshold  Initial value for the collection
+		 *          threshold.  The threshold will never be made less
+		 *          than this value during the run.
 		 *
-		 * @param initial_node_threshold Initial value for the node collection threshold.
+		 * @param initial_node_threshold Initial value for the node collection
+		 *          threshold.  The threshold will never be made less
+		 *          than this value during the run.
 		 */
 		static void enableGC(size_t initial_threshold, size_t initial_node_threshold);
 
@@ -122,6 +126,9 @@ namespace CXXR
 
 		/** @brief Number of generations used by garbage collector.
 		 *
+		 * This will be at least 2, since one generation (Generation
+		 * 0) is for newly created nodes still enjoying infant
+		 * immunity.
 		 * @return The number of generations into which GCNode objects
 		 * are ranked by the garbage collector.
 		 */

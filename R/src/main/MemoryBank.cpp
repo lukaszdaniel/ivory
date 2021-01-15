@@ -41,6 +41,16 @@ using namespace std;
 using namespace CXXR;
 
 unsigned int MemoryBank::SchwarzCtr::s_count = 0;
+// If NO_CELLPOOLS is defined, all memory blocks are allocated
+// directly via ::operator new.  Combined with address sanitizer
+// (or valgrind's memcheck tool) and AGGRESSIVE_GC, this makes
+// finding memory protection errors very simple.
+#ifdef NO_CELLPOOLS
+const size_t MemoryBank::s_new_threshold = 1;
+#else
+const size_t MemoryBank::s_new_threshold = 193;
+#endif
+
 size_t MemoryBank::s_blocks_allocated = 0;
 size_t MemoryBank::s_bytes_allocated = 0;
 bool (*MemoryBank::s_cue_gc)(size_t, bool) = nullptr;
@@ -49,106 +59,120 @@ void (*MemoryBank::s_monitor)(size_t) = 0;
 size_t MemoryBank::s_monitor_threshold = numeric_limits<size_t>::max();
 #endif
 
-void MemoryBank::pool_out_of_memory(CellPool *pool)
-{
-    if (s_cue_gc)
-        s_cue_gc(pool->superblockSize(), false);
-}
-
-CellPool *MemoryBank::s_pools[5];
+MemoryBank::Pool *MemoryBank::s_pools = nullptr;
 
 // Note that the C++ standard requires that an operator new returns a
 // valid pointer even when 0 bytes are requested.  The entry at
 // s_pooltab[0] ensures this.  This table assumes sizeof(double) == 8.
-unsigned int MemoryBank::s_pooltab[] = {0, 0, 0, 0, 0, 0, 0, 0, 0,
-                                        1, 1, 1, 1, 1, 1, 1, 1,
-                                        2, 2, 2, 2, 2, 2, 2, 2,
-                                        2, 2, 2, 2, 2, 2, 2, 2,
-                                        3, 3, 3, 3, 3, 3, 3, 3,
-                                        3, 3, 3, 3, 3, 3, 3, 3,
-                                        3, 3, 3, 3, 3, 3, 3, 3,
-                                        3, 3, 3, 3, 3, 3, 3, 3,
-                                        4, 4, 4, 4, 4, 4, 4, 4,
-                                        4, 4, 4, 4, 4, 4, 4, 4,
-                                        4, 4, 4, 4, 4, 4, 4, 4,
-                                        4, 4, 4, 4, 4, 4, 4, 4,
-                                        4, 4, 4, 4, 4, 4, 4, 4,
-                                        4, 4, 4, 4, 4, 4, 4, 4,
-                                        4, 4, 4, 4, 4, 4, 4, 4,
-                                        4, 4, 4, 4, 4, 4, 4, 4};
+const unsigned char MemoryBank::s_pooltab[] = {0, 0,                    // 8
+                                               1,                       // 16
+                                               2,                       // 24
+                                               3,                       // 32
+                                               4,                       // 40
+                                               5,                       // 48
+                                               6, 6,                    // 64
+                                               7, 7, 7, 7,              // 96
+                                               8, 8, 8, 8,              // 128
+                                               9, 9, 9, 9, 9, 9, 9, 9}; // 192
 
-void *MemoryBank::alloc2(size_t bytes)
+#ifdef ALLOC_STATS
+// Allocation and free frequency tables for profiling the allocator.
+// Allocation stats are collected into 8-byte bins, allocations > 256 bytes are
+// counted in the 256 byte bin.
+size_t alloc_counts[32];
+size_t free_counts[32];
+
+// Computes the bin to update in an allocation frequency table.
+static int get_bin_number(size_t bytes)
 {
-    CellPool *pool = nullptr;
-    void *p = nullptr;
-    bool joy = false; // true if GC succeeds after bad_alloc
-    try
+    if (bytes >= 32 * 8)
     {
-        if (bytes > s_max_cell_size)
-        {
-            if (s_cue_gc)
-                s_cue_gc(bytes, false);
-            p = ::operator new(bytes);
-        }
-        else
-        {
-            pool = s_pools[s_pooltab[bytes]];
-            p = pool->allocate();
-        }
+        // Allocations of size >= 256 are mapped to the 256-byte bin.
+        return 31;
     }
-    catch (bad_alloc)
+    else if (bytes >= 8)
+    {
+        // Allocations of size n*8 to n*8-1 are mapped to the n-byte bin.
+        return (31 & (bytes / 8)) - 1;
+    }
+    else
+    {
+        // Allocations of size < 8 are mapped to the 8-byte bin.
+        return 0;
+    }
+}
+#endif
+
+void MemoryBank::adjustFreedSize(size_t original, size_t actual)
+{
+    adjustBytesAllocated(original - actual);
+#ifdef ALLOC_STATS
+    free_counts[get_bin_number(original)] -= 1;
+    free_counts[get_bin_number(actual)] += 1;
+#endif
+}
+
+void *MemoryBank::allocate(size_t bytes, R_allocator_t *allocator)
+{
+    notifyAllocation(bytes);
+    if (allocator)
+        return custom_node_alloc(allocator, bytes);
+    void *p;
+    if (bytes >= s_new_threshold)
     {
         if (s_cue_gc)
         {
-            // Try to force garbage collection if available:
-            size_t sought_bytes = (pool ? pool->superblockSize() : bytes);
-            joy = s_cue_gc(sought_bytes, true);
+            s_cue_gc(bytes, false);
         }
-        else
-            throw;
+        p = ::operator new(bytes);
     }
-    if (!p && joy)
+    else
     {
-        // Try once more:
-        p = (pool ? pool->allocate() : ::operator new(bytes));
+        Pool &pool = s_pools[s_pooltab[(bytes + 7) >> 3]];
+        p = pool.allocate();
     }
-    notifyAllocation(bytes);
-#if VALGRIND_LEVEL >= 2
-    if (pool)
-    {
-        // Fence off supernumerary bytes:
-        size_t surplus = pool->cellSize() - bytes;
-        if (surplus > 0)
-        {
-            char *tail = reinterpret_cast<char *>(p) + bytes;
-            VALGRIND_MAKE_MEM_NOACCESS(tail, surplus);
-        }
-    }
-#endif
     return p;
 }
 
 void MemoryBank::check()
 {
-    for (unsigned int i = 0; i < 5; ++i)
-        s_pools[i]->check();
+#ifndef NO_CELLPOOLS
+    for (unsigned int i = 0; i < s_num_pools; ++i)
+        s_pools[i].check();
+#endif
 }
 
 // Deleting heap objects on program exit is not strictly necessary,
 // but doing so makes bugs more conspicuous when using valgrind.
 void MemoryBank::cleanup()
 {
-    for (unsigned int i = 0; i < 5; ++i)
-        delete s_pools[i];
+    delete[] s_pools;
+}
+
+void MemoryBank::defragment()
+{
+#ifndef NO_CELLPOOLS
+    for (unsigned int i = 0; i < s_num_pools; ++i)
+        s_pools[i].defragment();
+#endif
 }
 
 void MemoryBank::initialize()
 {
-    s_pools[0] = new CellPool(1, 512, pool_out_of_memory);
-    s_pools[1] = new CellPool(2, 256, pool_out_of_memory);
-    s_pools[2] = new CellPool(4, 128, pool_out_of_memory);
-    s_pools[3] = new CellPool(8, 64, pool_out_of_memory);
-    s_pools[4] = new CellPool(16, 32, pool_out_of_memory);
+    // The following leave some space at the end of each 4096-byte
+    // page, in case posix_memalign needs to put some housekeeping
+    // information for the next page there.
+    s_pools = new Pool[s_num_pools];
+    s_pools[0].initialize(1, 511);
+    s_pools[1].initialize(2, 255);
+    s_pools[2].initialize(3, 170);
+    s_pools[3].initialize(4, 127);
+    s_pools[4].initialize(5, 102);
+    s_pools[5].initialize(6, 85);
+    s_pools[6].initialize(8, 63);
+    s_pools[7].initialize(12, 42);
+    s_pools[8].initialize(16, 31);
+    s_pools[9].initialize(24, 21);
 }
 
 void MemoryBank::notifyAllocation(size_t bytes)
@@ -159,12 +183,18 @@ void MemoryBank::notifyAllocation(size_t bytes)
 #endif
     ++s_blocks_allocated;
     s_bytes_allocated += bytes;
+#ifdef ALLOC_STATS
+    alloc_counts[get_bin_number(bytes)] += 1;
+#endif
 }
 
 void MemoryBank::notifyDeallocation(size_t bytes)
 {
     s_bytes_allocated -= bytes;
     --s_blocks_allocated;
+#ifdef ALLOC_STATS
+    free_counts[get_bin_number(bytes)] += 1;
+#endif
 }
 
 #ifdef R_MEMORY_PROFILING

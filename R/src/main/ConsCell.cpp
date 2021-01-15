@@ -311,7 +311,7 @@ namespace CXXR
     }
 
     ConsCell::ConsCell(SEXPTYPE st, size_t sz)
-        : RObject(st)
+        : RObject(st), m_car(nullptr), m_tail(nullptr), m_tag(nullptr)
     {
         checkST(st);
 #ifdef LONG_VECTOR_SUPPORT

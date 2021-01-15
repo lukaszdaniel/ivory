@@ -135,6 +135,10 @@ namespace CXXR
                 key k = m_key_val_pr->first;
                 getCache()->erase(k);
             }
+            // GCNode::~GCNode doesn't know about the string storage space in this
+            // object, so account for it here.
+            size_t bytes = size() + 1;
+            MemoryBank::adjustFreedSize(sizeof(String), sizeof(String) + bytes);
         }
 
         // Return pointer to the cache:

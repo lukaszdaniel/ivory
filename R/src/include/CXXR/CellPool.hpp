@@ -30,28 +30,9 @@
 #ifndef CELLPOOL_HPP
 #define CELLPOOL_HPP
 
-#ifdef HAVE_CONFIG_H
-#include <config.h>
-#endif
-
 #include <cstddef>
 #include <new>
 #include <vector>
-
-// TODO: Similar predefines also in memory.cpp
-// TODO: Move to a separate header.
-#ifndef VALGRIND_LEVEL
-#define VALGRIND_LEVEL 0
-#endif
-
-#ifndef NVALGRIND
-#ifdef HAVE_VALGRIND_MEMCHECK_H
-#include "valgrind/memcheck.h"
-#else
-// internal version of headers
-#include "vg/memcheck.h"
-#endif
-#endif
 
 namespace CXXR
 {
@@ -62,113 +43,90 @@ namespace CXXR
      * specified size, and is intended as a back-end to implementations of
      * operator new and operator delete to enable the allocation and
      * deallocation of small objects quickly.
+     *
+     * Class CellPool operates a last-in-first-out allocation
+     * policy; that is to say, if there are cells that have been
+     * deallocated and not yet reallocated, the next one to be
+     * reallocated will be the one that was most recently
+     * deallocated.  This makes for efficient utilisation of the
+     * processor caches.
      */
 	class CellPool
 	{
 	public:
-		/**
-		 * @param dbls_per_cell (must be >= 1). Size of cells,
-		 *         expressed as a multiple of sizeof(double).  For
-		 *         example, if you require cells large enough to
-		 *         contain one double, put dbls_per_cell as 1.  (NB:
-		 *         cells can contain anything, not just doubles; we
-		 *         work in doubles because these are likely to have
-		 *         the most stringent address alignment requirements.)
-		 *
-		 * @param cells_per_superblock (must be >= 1).  Memory for cells is
-		 *         obtained from the main heap in 'superblocks'
-		 *         sufficient to contain this many cells.
-		 *
-		 * @param out_of_cells This function (if specified) is called
-		 *         by a CellPool when an allocation attempt finds that
-		 *         there are no cells available within the currently
-		 *         allocated superblocks; the function's argument is set to
-		 *         point to the CellPool concerned.  The function may
-		 *         for example initiate garbage collection.  If when
-		 *         this function returns there are still no free
-		 *         cells, only then will the CellPool allocate a new
-		 *         superblock.
-		 */
-		CellPool(size_t dbls_per_cell, size_t cells_per_superblock,
-				 void (*out_of_cells)(CellPool *) = 0)
-			: m_cellsize(dbls_per_cell * sizeof(double)),
-			  m_cells_per_superblock(cells_per_superblock),
-			  m_superblocksize(m_cellsize * cells_per_superblock),
-			  m_out_of_cells(out_of_cells),
-			  m_free_cells(0),
-			  m_cells_allocated(0)
+		/** @brief Constructor.
+         *
+         * Note that CellPool objects must be initialized by calling
+         * initialize() before being used.
+         */
+		CellPool()
+			: m_free_cells(nullptr),
+			  m_admin(nullptr)
 		{
-#if VALGRIND_LEVEL >= 2
-			VALGRIND_CREATE_MEMPOOL(this, 0, 0);
-#endif
 		}
 
 		/** Destructor
-		 *
-		 * It is up to the user to check that any cells allocated from
-		 * the pool have been freed before this destructor is
-		 * invoked.  (Although the destructor could check this for
-		 * itself and issue an error message, this message would
-		 * probably be a nuisance if it occurred during program shutdown.)
-		 */
+         *
+         * It is up to the user to check that any cells allocated from
+         * the pool have been freed before this destructor is
+         * invoked.  (Although the destructor could check this for
+         * itself and issue an error message, this message would
+         * probably be a nuisance if it occurred during program shutdown.)
+         */
 		~CellPool();
 
 		/**
-		 * @brief Allocate a cell from the pool.
-		 *
-		 * @return a pointer to the allocated cell.
-		 *
-		 * @throws bad_alloc if a cell cannot be allocated.
-		 */
+         * @brief Allocate a cell from the pool.
+         *
+         * @return a pointer to the allocated cell.
+         *
+         * @throws bad_alloc if a cell cannot be allocated.
+         */
 		void *allocate()
 		{
 			if (!m_free_cells)
-				seekMemory();
+				m_free_cells = seekMemory();
 			Cell *c = m_free_cells;
 			m_free_cells = c->m_next;
-			++m_cells_allocated;
-#if VALGRIND_LEVEL >= 2
-			VALGRIND_MEMPOOL_ALLOC(this, c, cellSize());
-#endif
 			return c;
 		}
 
 		/** @brief Size of cells.
-		 *
-		 * @return the size of each cell in bytes (well, strictly as a
-		 * multiple of sizeof(char)).
-		 */
+         *
+         * @return the size of each cell in bytes (well, strictly as a
+         * multiple of sizeof(char)).
+         */
 		size_t cellSize() const
 		{
-			return m_cellsize;
+			return m_admin->m_cellsize;
 		}
 
 		/** @brief Number of cells allocated from this CellPool.
-		 *
-		 * @return the number of cells currently allocated from this
-		 * pool.
-		 */
-		auto cellsAllocated() const
+         *
+         * @return the number of cells currently allocated from this
+         * pool.
+         */
+		size_t cellsAllocated() const
 		{
-			return m_cells_allocated;
+			return m_admin->cellsExisting() - cellsFree();
 		}
 
 		/** @brief Integrity check.
-		 *
-		 * Aborts the program with an error message if the object is
-		 * found to be internally inconsistent.
-		 *
-		 * @return true, if it returns at all.  The return value is to
-		 * facilitate use with \c assert.
-		 */
+         *
+         * Aborts the program with an error message if the object is
+         * found to be internally inconsistent.
+         *
+         * @return true, if it returns at all.  The return value is to
+         * facilitate use with \c assert .
+         */
 		bool check() const;
 
 		/** @brief Deallocate a cell
-		 *
-		 * @param p Pointer to a block of memory previously allocated
-		 * from this pool, or a null pointer (in which case method
-		 * does nothing).
-		 */
+         *
+         * @param p Pointer to a block of memory previously allocated
+         * from this pool, or a null pointer (in which case method
+         * does nothing).
+         */
 		void deallocate(void *p)
 		{
 			if (!p)
@@ -176,45 +134,45 @@ namespace CXXR
 #ifdef DEBUG_RELEASE_MEM
 			checkAllocatedCell(p);
 #endif
-#if VALGRIND_LEVEL >= 2
-			VALGRIND_MEMPOOL_FREE(this, p);
-			VALGRIND_MAKE_MEM_UNDEFINED(p, sizeof(Cell));
-#endif
-			Cell *c = reinterpret_cast<Cell *>(p);
+			Cell *c = static_cast<Cell *>(p);
 			c->m_next = m_free_cells;
 			m_free_cells = c;
-			--m_cells_allocated;
 		}
 
-		/** @brief Allocate a cell 'from stock'.
-		 *
-		 * Allocate a cell from the pool, provided it can be allocated
-		 * 'from stock'.  Can be useful when called from other inlined
-		 * functions in that it doesn't throw any exceptions.
-		 *
-		 * @return a pointer to the allocated cell, or 0 if the cell
-		 * cannot be allocated from the current memory superblocks.
-		 */
-		void *easyAllocate() throw()
-		{
-			if (!m_free_cells)
-				return nullptr;
-			Cell *c = m_free_cells;
-			m_free_cells = c->m_next;
-			++m_cells_allocated;
-#if VALGRIND_LEVEL >= 2
-			VALGRIND_MEMPOOL_ALLOC(this, c, cellSize());
-#endif
-			return c;
-		}
+		/** @brief Reorganise list of free cells within the CellPool.
+         *
+         * This is done with a view to increasing the probability that
+         * successive allocations will lie within the same cache line
+         * or (less importantly nowadays) memory page.
+         */
+		void defragment();
+
+		/** @brief Initialize the CellPool.
+         *
+         * This function must be called exactly once for each
+         * CellPool, before any allocation is made from it.
+         *
+         * @param dbls_per_cell (must be >= 1). Size of cells,
+         *         expressed as a multiple of sizeof(double).  For
+         *         example, if you require cells large enough to
+         *         contain one double, put dbls_per_cell as 1.  (NB:
+         *         cells can contain anything, not just doubles; we
+         *         work in doubles because these are likely to have
+         *         the most stringent address alignment requirements.)
+         *
+         * @param cells_per_superblock (must be >= 1).  Memory for cells is
+         *         obtained from the main heap in 'superblocks'
+         *         sufficient to contain this many cells.
+         */
+		void initialize(size_t dbls_per_cell, size_t cells_per_superblock);
 
 		/**
-		 * @return The size in bytes of the superblocks from which
-		 *         cells are allocated.
-		 */
-		auto superblockSize() const
+         * @return The size in bytes of the superblocks from which
+         *         cells are allocated.
+         */
+		size_t superblockSize() const
 		{
-			return m_superblocksize;
+			return m_admin->m_superblocksize;
 		}
 
 	private:
@@ -225,13 +183,36 @@ namespace CXXR
 			Cell(Cell *next = nullptr) : m_next(next) {}
 		};
 
-		const size_t m_cellsize;
-		const size_t m_cells_per_superblock;
-		const size_t m_superblocksize;
-		void (*m_out_of_cells)(CellPool *);
-		std::vector<void *> m_superblocks;
+		// We put data fields that are used relatively rarely in a
+		// separate data structure stored on the heap, so that an
+		// array of CellPool objects, as used in MemoryBank, can be as
+		// compact as possible.
+		struct Admin
+		{
+			const size_t m_cellsize;
+			const size_t m_cells_per_superblock;
+			const size_t m_superblocksize;
+			std::vector<void *> m_superblocks;
+
+			Admin(size_t dbls_per_cell, size_t cells_per_superblock)
+				: m_cellsize(dbls_per_cell * sizeof(double)),
+				  m_cells_per_superblock(cells_per_superblock),
+				  m_superblocksize(m_cellsize * cells_per_superblock)
+			{
+			}
+
+			size_t cellsExisting() const
+			{
+				return m_cells_per_superblock * m_superblocks.size();
+			}
+		};
+
 		Cell *m_free_cells;
-		size_t m_cells_allocated;
+
+		Admin *m_admin;
+
+		// Number of cells on the free list:
+		unsigned int cellsFree() const;
 
 		// Checks that p is either null or points to a cell belonging
 		// to this pool; aborts if not.
@@ -241,7 +222,9 @@ namespace CXXR
 		// the free list:
 		void checkAllocatedCell(const void *p) const;
 
-		void seekMemory();
+		// Allocates a new superblock and returns a pointer to the
+		// first free cell in it.
+		Cell *seekMemory();
 	};
 } // namespace CXXR
 

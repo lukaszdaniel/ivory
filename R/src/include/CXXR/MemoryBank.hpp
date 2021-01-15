@@ -36,6 +36,18 @@
 #include <CXXR/SEXPTYPE.hpp>
 #include <R_ext/Rallocators.h>
 
+#ifdef __GNUC__
+#  ifdef __i386__
+#    define HOT_FUNCTION __attribute__((hot, fastcall))
+#  else
+#    define HOT_FUNCTION __attribute__((hot))
+#  endif
+#else
+#  define HOT_FUNCTION
+#endif
+
+#define ALLOC_STATS // TODO(joqvist): Make this a configure option?
+
 namespace CXXR
 {
 	/** @brief Class to manage memory allocation and deallocation for R.
@@ -108,32 +120,16 @@ namespace CXXR
 		 * @param allocator Pointer to the custom allocator.
 		 *
 		 * @return a pointer to the allocated cell.
+		 *
+		 * @throws bad_alloc if a cell cannot be allocated.
 		 */
-		static void *allocate(size_t bytes = 0, R_allocator_t *allocator = nullptr)
-		{
-#if VALGRIND_LEVEL >= 3
-			size_t blockbytes = bytes + 1; // trailing redzone
-#else
-			size_t blockbytes = bytes;
-#endif
-			if (allocator)
-				return custom_node_alloc(allocator, bytes);
-			// Assumes sizeof(double) == 8:
-			void *p;
-			p = (blockbytes > s_max_cell_size || !(p = alloc1(blockbytes))) ? alloc2(blockbytes) : p;
-#if VALGRIND_LEVEL >= 3
-			char *c = reinterpret_cast<char *>(p);
-			VALGRIND_MAKE_MEM_NOACCESS(c + bytes, 1);
-			s_bytes_allocated -= 1;
-#endif
-			return p;
-		}
+		static void *allocate(size_t bytes = 0, R_allocator_t *allocator = nullptr) HOT_FUNCTION;
 
 		/** @brief Number of blocks currently allocated.
 		 *
 		 * @return the number of blocks of memory currently allocated.
 		 */
-		static auto blocksAllocated() { return s_blocks_allocated; }
+		static size_t blocksAllocated() { return s_blocks_allocated; }
 
 		/** @brief Number of bytes currently allocated.
 		 *
@@ -144,12 +140,8 @@ namespace CXXR
 		 * deallocated.  Actual utilisation of memory in the main heap
 		 * may be greater than this, possibly by as much as a factor
 		 * of 2.
-		 *
-		 * @note If redzoning is operation (<tt>VALGRIND_LEVEL >=
-		 * 2</tt>), the value returned does not include the size of the
-		 * redzones.
 		 */
-		static auto bytesAllocated() { return s_bytes_allocated; }
+		static size_t bytesAllocated() { return s_bytes_allocated; }
 
 		/** @brief Integrity check.
 		 *
@@ -163,33 +155,34 @@ namespace CXXR
 		 * @param p Pointer to a block of memory previously allocated
 		 *          by MemoryBank::allocate(), or a null pointer (in which
 		 *          case method does nothing).
-		 * 
-		 * @param bytes Size of the block.
-		 * 
-		 * @param allocator If true, use custom deallocation.
+		 *
+		 * @param bytes The number of bytes in the memory block,
+		 *          i.e. the number of bytes requested in the
+		 *          corresponding call to allocate().
 		 */
 		static void deallocate(void *p = nullptr, size_t bytes = 0, bool allocator = false)
 		{
 			if (!p)
 				return;
 			// Uncommenting this helps to diagnose premature GC:
-			memset(p, 0x55, bytes);
+			// memset(p, 0x55, bytes);
 			if (allocator)
 				custom_node_free(p);
-#if VALGRIND_LEVEL >= 3
-			size_t blockbytes = bytes + 1; // trailing redzone
-			char *c = reinterpret_cast<char *>(p);
-			VALGRIND_MAKE_MEM_UNDEFINED(c + bytes, 1);
-#else
-			size_t blockbytes = bytes;
-#endif
 			// Assumes sizeof(double) == 8:
-			if (blockbytes > s_max_cell_size)
+			if (bytes >= s_new_threshold)
 				::operator delete(p);
 			else
-				s_pools[s_pooltab[blockbytes]]->deallocate(p);
+				s_pools[s_pooltab[(bytes + 7) >> 3]].deallocate(p);
 			notifyDeallocation(bytes);
 		}
+
+		/** @brief Reorganise lists of free cells.
+		 *
+		 * This is done with a view to increasing the probability that
+		 * successive allocations will lie within the same cache line
+		 * or (less importantly nowadays) memory page.
+		 */
+		static void defragment();
 
 		/** @brief Set a callback to cue garbage collection.
 		 *
@@ -229,12 +222,15 @@ namespace CXXR
 							   size_t threshold = 0);
 #endif
 	private:
-		static const size_t s_max_cell_size = 128;
+		typedef CellPool Pool;
+		static const size_t s_num_pools = 10;
+		// We use ::operator new directly for allocations at least this big:
+		static const size_t s_new_threshold;
 		static size_t s_blocks_allocated;
 		static size_t s_bytes_allocated;
 		static bool (*s_cue_gc)(size_t, bool);
-		static CellPool *s_pools[];
-		static unsigned int s_pooltab[];
+		static Pool *s_pools;
+		static const unsigned char s_pooltab[];
 #ifdef R_MEMORY_PROFILING
 		static void (*s_monitor)(size_t);
 		static size_t s_monitor_threshold;
@@ -245,37 +241,31 @@ namespace CXXR
 		static void *custom_node_alloc(R_allocator_t *allocator, size_t bytes);
 		static void custom_node_free(void *ptr);
 
+		friend class GCNode;
 		static void notifyAllocation(size_t bytes);
+
 		static void notifyDeallocation(size_t bytes);
 
-		// Not implemented.  Declared to stop the compiler generating
-		// a constructor.
-		MemoryBank();
+		friend class CachedString;
+		template <typename, SEXPTYPE>
+		friend class FixedVector;
 
-		// First-line allocation attempt for small objects:
-		static void *alloc1(size_t bytes) throw()
+		/** @brief Adjust the freed block statistics.
+         *
+         * This should be used when the entire size of a freed block is not
+         * passed to the delete operator, causing inconsistent statistics for
+         * free counts.
+         *
+         * @param original The previously logged freed block size.
+         *
+         * @param actual The actual size of the freed block.
+         */
+		static void adjustFreedSize(size_t original, size_t actual);
+
+		static void adjustBytesAllocated(size_t bytes)
 		{
-			CellPool *pool = s_pools[s_pooltab[bytes]];
-			void *p = pool->easyAllocate();
-			if (p)
-			{
-				notifyAllocation(bytes);
-#if VALGRIND_LEVEL >= 2
-				// Fence off supernumerary bytes:
-				size_t surplus = pool->cellSize() - bytes;
-				if (surplus > 0)
-				{
-					char *tail = reinterpret_cast<char *>(p) + bytes;
-					VALGRIND_MAKE_MEM_NOACCESS(tail, surplus);
-				}
-#endif
-			}
-			return p;
+			s_bytes_allocated += bytes;
 		}
-
-		// Allocation of large objects, and second-line allocation
-		// attempt for small objects:
-		static void *alloc2(size_t bytes);
 
 		// Free memory used by the static data members:
 		static void cleanup();
@@ -284,9 +274,8 @@ namespace CXXR
 		friend void initializeMemorySubsystem();
 		static void initialize();
 
-		static void pool_out_of_memory(CellPool *pool);
-
 		friend class SchwarzCtr;
+		MemoryBank() = delete;
 	};
 } // namespace CXXR
 

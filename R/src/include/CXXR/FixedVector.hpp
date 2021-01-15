@@ -64,10 +64,6 @@ namespace CXXR
         {
             if (sz > 1)
                 allocData(sz, allocator);
-#if VALGRIND_LEVEL >= 1
-            else
-                VALGRIND_MAKE_MEM_UNDEFINED(&m_singleton, sizeof(T));
-#endif
         }
 
         /** @brief Create a vector, and fill with a specified initial
@@ -140,12 +136,19 @@ namespace CXXR
         ~FixedVector()
         {
             if (m_data != &m_singleton)
-                MemoryBank::deallocate(m_data, m_databytes, m_allocator);
+                MemoryBank::deallocate(m_data, size() * sizeof(T), m_allocator);
+            // GCNode::~GCNode doesn't know about the string storage space in
+            // this object, so account for it here.
+            // size_t bytes = (size()) * sizeof(T);
+            // if (bytes != 0)
+            // {
+            //     MemoryBank::adjustFreedSize(
+            //         sizeof(FixedVector), sizeof(FixedVector) + bytes);
+            // }
         }
 
     private:
-        T *m_data;            // pointer to the vector's data block.
-        R_xlen_t m_databytes; // used only if > 1 elements
+        T *m_data; // pointer to the vector's data block.
 
         // If there is only one element, it is stored here, internally
         // to the FixedVector object, rather than via a separate
@@ -167,19 +170,19 @@ namespace CXXR
     template <typename T, SEXPTYPE ST>
     void FixedVector<T, ST>::allocData(R_xlen_t sz, bool initialize, R_allocator_t *allocator)
     {
-        m_databytes = sz * sizeof(T);
+        R_xlen_t bytes = sz * sizeof(T);
         // Check for integer overflow:
-        if (R_xlen_t(m_databytes / sizeof(T)) != sz)
+        if (R_xlen_t(bytes / sizeof(T)) != sz)
             Rf_error(_("Request to create impossibly large vector."));
         GCRoot<> thisroot(this);
         try
         {
-            m_data = reinterpret_cast<T *>(MemoryBank::allocate(m_databytes, allocator));
+            m_data = reinterpret_cast<T *>(MemoryBank::allocate(bytes, allocator));
         }
         catch (std::bad_alloc &e)
         {
             m_data = nullptr;
-            tooBig(m_databytes);
+            tooBig(bytes);
             return;
         }
         if (initialize)
@@ -187,11 +190,6 @@ namespace CXXR
             for (R_xlen_t i = 0; i < sz; ++i)
                 m_data[i] = m_singleton;
         }
-#if VALGRIND_LEVEL == 1
-        // For VALGRIND_LEVEL > 1 this will already have been done:
-        else
-            VALGRIND_MAKE_MEM_UNDEFINED(m_data, m_databytes);
-#endif
     }
 
     template <typename T, SEXPTYPE ST>

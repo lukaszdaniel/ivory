@@ -75,7 +75,7 @@ namespace CXXR
        * checked.
        */
       explicit Environment(Environment *enclosing = nullptr, PairList *namevals = nullptr)
-          : RObject(ENVSXP), m_enclosing(enclosing), m_frame(namevals)
+          : RObject(ENVSXP), m_enclosing(enclosing), m_frame(namevals), m_hashtable(nullptr)
       {
          INCREMENT_REFCNT(namevals);
 

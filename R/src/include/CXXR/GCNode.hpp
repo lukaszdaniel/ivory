@@ -217,16 +217,11 @@ namespace CXXR
         /** @brief Allocate memory.
          *
          * Allocates memory for a new object of a class derived from
-         * GCNode, and zero the memory thus allocated.
+         * GCNode.
          *
          *@param bytes Number of bytes of memory required.
          *
          * @return Pointer to the allocated memory block.
-         *
-         * @note Since objects of classes derived from RObject \e must
-         * be allocated on the heap, constructors of these classes may
-         * elide some member initializations by relying on the fact
-         * that operator new zeroes the allocated memory.
          */
         static void *operator new(size_t bytes)
         {

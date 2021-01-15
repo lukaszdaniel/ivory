@@ -172,13 +172,14 @@ namespace CXXR
 
 extern "C"
 {
-    /** @brief Writable char access.
-	 *
-     * @param x pointer to a CXXR::String 
+    /** @brief Read-write character access.
      *
-     * @return pointer to character 0 of \a x.
+     * @param x pointer to a CXXR::String (checked).
      *
-     * @note For R internal use only.  May be removed in future.
+     * @return pointer to character 0 of \a x .
+     *
+     * @note For R internal use only.  May be removed in future.  See
+     * the remarks on UncachedString::operator[]().
      */
     inline char *CHAR_RW(SEXP x)
     {

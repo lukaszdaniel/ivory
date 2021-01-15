@@ -181,9 +181,12 @@ namespace R
 
 extern "C"
 {
-    /**
-     * @param x Pointer to a promise.
-     * @return Pointer to the expression to be evaluated.
+    /** @brief Access the expression of a CXXR::Promise.
+     *
+     * @param x Pointer to a CXXR::Promise (checked).
+     *
+     * @return Pointer to the expression to be evaluated by the
+     *         CXXR::Promise. 
      */
     SEXP PRCODE(SEXP x);
 

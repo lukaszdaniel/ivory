@@ -15,7 +15,7 @@ include $(top_builddir)/Makeconf
 SOURCES_C =
 
 SOURCES_CXX = \
-	CellPool.cpp CommandLineArgs.cpp MemoryBank.cpp RAllocStack.cpp \
+	CellHeap.cpp CellPool.cpp CommandLineArgs.cpp MemoryBank.cpp RAllocStack.cpp \
 	Rdynload.cpp Renviron.cpp RNG.cpp \
 	GCManager.cpp GCNode.cpp GCRoot.cpp Logical.cpp String.cpp ComplexVector.cpp IntVector.cpp LogicalVector.cpp RawVector.cpp \
 	RealVector.cpp StringVector.cpp RObject.cpp ConsCell.cpp BuiltInFunction.cpp Expression.cpp ExternalPointer.cpp FunctionBase.cpp \
