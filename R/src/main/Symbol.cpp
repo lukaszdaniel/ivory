@@ -84,11 +84,11 @@ namespace CXXR
     {
     }
 
-    GCRoot<Symbol> Symbol::s_unbound_value(new Symbol());
-    GCRoot<Symbol> Symbol::s_missing_arg(new Symbol(String::blank()));
-    GCRoot<Symbol> Symbol::s_restart_token(new Symbol(String::blank()));
-    GCRoot<Symbol> Symbol::s_in_bc_interpreter(new Symbol(CachedString::obtain("<in-bc-interp>")));
-    GCRoot<Symbol> Symbol::s_current_expression(new Symbol(CachedString::obtain("<current-expression>")));
+    GCRoot<Symbol> Symbol::s_unbound_value(new Symbol(), true);
+    GCRoot<Symbol> Symbol::s_missing_arg(new Symbol(String::blank()), true);
+    GCRoot<Symbol> Symbol::s_restart_token(new Symbol(String::blank()), true);
+    GCRoot<Symbol> Symbol::s_in_bc_interpreter(new Symbol(CachedString::obtain("<in-bc-interp>")), true);
+    GCRoot<Symbol> Symbol::s_current_expression(new Symbol(CachedString::obtain("<current-expression>")), true);
 
     const char *Symbol::typeName() const
     {

@@ -477,13 +477,15 @@ SEXP R_MakeWeakRef(SEXP key, SEXP val, SEXP fin, Rboolean onexit)
     default:
         error(_("finalizer must be a function or NULL"));
     }
-    return new WeakRef(key, val, fin, onexit);
+    WeakRef *ans = new WeakRef(key, val, fin, onexit);
+    return ans;
 }
 
 SEXP R_MakeWeakRefC(SEXP key, SEXP val, R_CFinalizer_t fin, Rboolean onexit)
 {
     checkKey(key);
-    return new WeakRef(key, val, fin, onexit);
+    WeakRef *ans = new WeakRef(key, val, fin, onexit);
+    return ans;
 }
 
 SEXP R_WeakRefKey(SEXP w)
@@ -541,7 +543,7 @@ void WeakRef::finalize()
     else if (Rfin)
     {
         GCRoot<PairList> tail(CXXR_cons(key, nullptr));
-        GCRoot<Expression> e(new Expression(Rfin, tail));
+        GCRoot<Expression> e(new Expression(Rfin, tail), true);
         Rf_eval(e, Environment::global());
     }
 }
@@ -1060,16 +1062,21 @@ void *R_realloc_gc(void *p, size_t n)
 
 SEXP Rf_allocSExp(SEXPTYPE t)
 {
+    SEXP ans;
     switch (t)
     {
     case LISTSXP:
-        return new PairList();
+        ans = new PairList();
+        break;
     case LANGSXP:
-        return new Expression();
+        ans = new Expression();
+        break;
     case DOTSXP:
-        return new DottedArgs();
+        ans = new DottedArgs();
+        break;
     case BCODESXP:
-        return new ByteCode();
+        ans = new ByteCode();
+        break;
     // case CLOSXP:
     //     return new Closure();
     // case PROMSXP:
@@ -1079,6 +1086,7 @@ SEXP Rf_allocSExp(SEXPTYPE t)
         std::cerr << "Inappropriate SEXPTYPE (" << sexptype2char(t) << ") for ConsCell." << std::endl;
         abort();
     }
+    return ans;
 }
 
 /* cons is defined directly to avoid the need to protect its arguments
@@ -1102,7 +1110,8 @@ SEXP Rf_lcons(SEXP cr, SEXP tl)
 {
     GCRoot<> crr(cr);
     GCRoot<PairList> tlr(SEXP_downcast<PairList *>(tl));
-    return new Expression(crr, tlr);
+    Expression *ans = new Expression(crr, tlr);
+    return ans;
 }
 
 /*----------------------------------------------------------------------
@@ -1138,7 +1147,8 @@ SEXP R::NewEnvironment(SEXP namelist, SEXP valuelist, SEXP rho)
     GCRoot<> namelistr(namelist);
     GCRoot<PairList> namevalr(SEXP_downcast<PairList *>(valuelist));
     GCRoot<Environment> rhor(SEXP_downcast<Environment *>(rho));
-    return new Environment(rhor, namevalr);
+    Environment *ans = new Environment(rhor, namevalr);
+    return ans;
 }
 
 /* mkPROMISE is defined directly do avoid the need to protect its arguments
@@ -1152,7 +1162,7 @@ HIDDEN SEXP R::mkPROMISE(SEXP expr, SEXP rho)
        substitute() and the like */
     ENSURE_NAMEDMAX(expr);
 
-    GCRoot<Promise> s(new Promise(exprt, rhort));
+    Promise *s = new Promise(exprt, rhort);
 
     INCREMENT_REFCNT(expr);
     INCREMENT_REFCNT(rho);
@@ -1202,7 +1212,8 @@ SEXP Rf_allocVector3(SEXPTYPE type, R_xlen_t length = 1, R_allocator_t *allocato
 #ifdef R_MEMORY_PROFILING
         R_ReportAllocation(convert2VEC<bool>(length) * sizeof(VECREC));
 #endif
-        return new RawVector(length, allocator);
+        s = new RawVector(length, allocator);
+        break;
     }
     case CHARSXP:
         Rf_error(_("use of allocVector(CHARSXP ...) is defunct\n"));
@@ -1211,49 +1222,56 @@ SEXP Rf_allocVector3(SEXPTYPE type, R_xlen_t length = 1, R_allocator_t *allocato
 #ifdef R_MEMORY_PROFILING
         R_ReportAllocation(convert2VEC<int>(length) * sizeof(VECREC));
 #endif
-        return new LogicalVector(length, allocator);
+        s = new LogicalVector(length, allocator);
+        break;
     }
     case INTSXP:
     {
 #ifdef R_MEMORY_PROFILING
         R_ReportAllocation(convert2VEC<int>(length) * sizeof(VECREC));
 #endif
-        return new IntVector(length, allocator);
+        s = new IntVector(length, allocator);
+        break;
     }
     case REALSXP:
     {
 #ifdef R_MEMORY_PROFILING
         R_ReportAllocation(convert2VEC<double>(length) * sizeof(VECREC));
 #endif
-        return new RealVector(length, allocator);
+        s = new RealVector(length, allocator);
+        break;
     }
     case CPLXSXP:
     {
 #ifdef R_MEMORY_PROFILING
         R_ReportAllocation(convert2VEC<Rcomplex>(length) * sizeof(VECREC));
 #endif
-        return new ComplexVector(length, allocator);
+        s = new ComplexVector(length, allocator);
+        break;
     }
     case STRSXP:
     {
 #ifdef R_MEMORY_PROFILING
         R_ReportAllocation(convert2VEC<RObject>(length) * sizeof(VECREC));
 #endif
-        return new StringVector(length);
+        s = new StringVector(length);
+        break;
     }
     case EXPRSXP:
     {
 #ifdef R_MEMORY_PROFILING
         R_ReportAllocation(convert2VEC<RObject>(length) * sizeof(VECREC));
 #endif
-        return new ExpressionVector(length);
+        s = new ExpressionVector(length);
+        break;
     }
     case VECSXP:
     {
 #ifdef R_MEMORY_PROFILING
         R_ReportAllocation(convert2VEC<RObject>(length) * sizeof(VECREC));
 #endif
-        return new ListVector(length);
+        s = new ListVector(length);
+        break;
     }
     case LANGSXP:
     {
@@ -1261,7 +1279,11 @@ SEXP Rf_allocVector3(SEXPTYPE type, R_xlen_t length = 1, R_allocator_t *allocato
         if (length > R_SHORT_LEN_MAX)
             error(_("invalid length for pairlist"));
 #endif
-        return new Expression(length);
+        if (length == 0)
+            return nullptr;
+        GCRoot<PairList> tl(PairList::makeList(length - 1));
+        s = new Expression(nullptr, tl);
+        break;
     }
     case LISTSXP:
     {
@@ -1284,13 +1306,14 @@ HIDDEN SEXP R::allocCharsxp(R_len_t length)
 #ifdef R_MEMORY_PROFILING
         R_ReportAllocation(convert2VEC<char>(length + 1) * sizeof(VECREC));
 #endif
-        return new UncachedString(length);
+        UncachedString *ans = new UncachedString(length);
+        return ans;
 }
 
 SEXP Rf_allocList(const int n)
 {
     if (n > 0)
-        return new PairList(n);
+        return PairList::makeList(n);
     return nullptr;
 }
 
@@ -1676,7 +1699,8 @@ SEXP R_MakeExternalPtr(void *p, SEXP tag, SEXP prot)
 {
     GCRoot<> tagr(tag); if (tag) INCREMENT_REFCNT(tag);
     GCRoot<> protr(prot); if (prot) INCREMENT_REFCNT(prot);
-    return new ExternalPointer(p, tag, prot);
+    ExternalPointer *ans = new ExternalPointer(p, tag, prot);
+    return ans;
 }
 
 void *R_ExternalPtrAddr(SEXP s)
@@ -1800,7 +1824,6 @@ void SET_ATTRIB(SEXP x, SEXP v) {
 	error(_("value of 'SET_ATTRIB' must be a pairlist or nullptr, not a '%s'"),
 	      type2char(CXXR::RObject::typeof_(v)));
     FIX_REFCNT(x, CXXR::RObject::attrib(x), v);
-    CHECK_OLD_TO_NEW(x, v);
     RObject::set_attrib(x, v);
 }
 void SET_OBJECT(SEXP x, int v) { CXXR::RObject::set_object(CHK(x), v); }
@@ -1916,7 +1939,8 @@ SEXP VECTOR_ELT(SEXP x, R_xlen_t i) {
         return XVECTOR_ELT(x, i);
     }
     // return CHK(LISTVECTOR_ELT(CHK(x), i));
-    return CHK((*CXXR::SEXP_downcast<CXXR::ListVector *>(CHK(x), false))[i]);
+    const ListVector *lv = CXXR::SEXP_downcast<CXXR::ListVector *>(CHK(x), false);
+    return CHK((*lv)[i]);
 }
 
 SEXP XVECTOR_ELT(SEXP x, R_xlen_t i) {
@@ -1925,7 +1949,8 @@ SEXP XVECTOR_ELT(SEXP x, R_xlen_t i) {
 	error(_("'%s' function can only be applied to an expression, not a '%s'"), "XVECTOR_ELT()",
 	      type2char(TYPEOF(x)));
     // return CHK(EXPRVECTOR_ELT(CHK(x), i));
-    return CHK((*CXXR::SEXP_downcast<CXXR::ExpressionVector *>(CHK(x), false))[i]);
+    const ExpressionVector *ev = CXXR::SEXP_downcast<CXXR::ExpressionVector *>(CHK(x), false);
+    return CHK((*ev)[i]);
 }
 
 namespace

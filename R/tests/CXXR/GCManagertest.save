@@ -4,357 +4,328 @@ GCNode::initialize()
 (Allocated 113744) Allocating 157028 bytes
 (Allocated 270772) Allocating 240274 bytes
 (Allocated 511046) Allocating 873304 bytes
-GC started: Bytes allocated 511046; threshold 1000000
+GC started: Bytes allocated 1384350; threshold 1000000
 GCNode::gc(0)
 GCNode::gc(1)
 GCNode::gc(2)
-Released 240274 bytes (Allocated 270772)
+Released 240274 bytes (Allocated 1144076)
 Node occupancy: 20
-Memory occupancy: 134
-Total allocation: 270772
+Memory occupancy: 222
+Total allocation: 1144076
 Node threshold: 1000000
-Memory threshold: 1344076
+Memory threshold: 2217380
 Nodes needed: 200042
-Bytes needed: 1344076
-GC finished: Bytes allocated 270772; threshold 1344076
+Bytes needed: 2217380
+GC finished: Bytes allocated 1144076; threshold 2217380
 Garbage collection 1 = 0+0+1 (level 2) ... 
 0.1 Mbytes of cons cells used (0%)
-0.3 Mbytes used (20%)
+1.1 Mbytes used (52%)
 (Allocated 1144076) Allocating 253009 bytes
-GC started: Bytes allocated 1144076; threshold 1344076
+(Allocated 1397085) Allocating 263668 bytes
+(Allocated 1660753) Allocating 978 bytes
+(Allocated 1661731) Allocating 127980 bytes
+(Allocated 1789711) Allocating 170307 bytes
+(Allocated 1960018) Allocating 55979 bytes
+(Allocated 2015997) Allocating 512404 bytes
+GC started: Bytes allocated 2528401; threshold 2217380
 GCNode::gc(0)
-Released 873304 bytes (Allocated 270772)
-GC finished: Bytes allocated 270772; threshold 1344076
-Garbage collection 2 = 1+0+1 (level 0) ... 
-0.1 Mbytes of cons cells used (0%)
-0.3 Mbytes used (20%)
-(Allocated 523781) Allocating 978 bytes
-(Allocated 524759) Allocating 127980 bytes
-(Allocated 652739) Allocating 170307 bytes
-(Allocated 823046) Allocating 55979 bytes
-(Allocated 879025) Allocating 512404 bytes
-GC started: Bytes allocated 879025; threshold 1344076
-GCNode::gc(0)
-Released 55979 bytes (Allocated 823046)
-Released 170307 bytes (Allocated 652739)
-GC finished: Bytes allocated 652739; threshold 1344076
-Garbage collection 3 = 2+0+1 (level 0) ... 
-0.1 Mbytes of cons cells used (0%)
-0.7 Mbytes used (49%)
-(Allocated 1165143) Allocating 161357 bytes
-(Allocated 1326500) Allocating 425490 bytes
-GC started: Bytes allocated 1326500; threshold 1344076
+Released 55979 bytes (Allocated 2472422)
+Released 170307 bytes (Allocated 2302115)
+Released 127980 bytes (Allocated 2174135)
 GCNode::gc(1)
-Released 161357 bytes (Allocated 1165143)
-Released 512404 bytes (Allocated 652739)
-Released 127980 bytes (Allocated 524759)
-Released 978 bytes (Allocated 523781)
-Released 253009 bytes (Allocated 270772)
-Released 157028 bytes (Allocated 113744)
-GC finished: Bytes allocated 113744; threshold 1344076
-Garbage collection 4 = 2+1+1 (level 1) ... 
-0.1 Mbytes of cons cells used (0%)
-0.2 Mbytes used (8%)
-(Allocated 539234) Allocating 274158 bytes
-(Allocated 813392) Allocating 215279 bytes
-(Allocated 1028671) Allocating 205767 bytes
-(Allocated 1234438) Allocating 28725 bytes
-(Allocated 1263163) Allocating 14581 bytes
-(Allocated 1277744) Allocating 440816 bytes
-GC started: Bytes allocated 1277744; threshold 1344076
-GCNode::gc(0)
-Released 14581 bytes (Allocated 1263163)
-Released 28725 bytes (Allocated 1234438)
-GCNode::gc(1)
-Released 205767 bytes (Allocated 1028671)
+Released 978 bytes (Allocated 2173157)
+Released 263668 bytes (Allocated 1909489)
 GCNode::gc(2)
-Released 215279 bytes (Allocated 813392)
+Released 253009 bytes (Allocated 1656480)
+Released 873304 bytes (Allocated 783176)
+Released 157028 bytes (Allocated 626148)
 Node occupancy: 20
-Memory occupancy: 108
-Total allocation: 813392
+Memory occupancy: 60
+Total allocation: 626148
 Node threshold: 1000000
-Memory threshold: 1454208
+Memory threshold: 2217380
 Nodes needed: 200042
-Bytes needed: 1454208
-GC finished: Bytes allocated 813392; threshold 1454208
-Garbage collection 5 = 2+1+2 (level 2) ... 
+Bytes needed: 1338552
+GC finished: Bytes allocated 626148; threshold 2217380
+Garbage collection 2 = 0+0+2 (level 2) ... 
 0.1 Mbytes of cons cells used (0%)
-0.8 Mbytes used (56%)
-(Allocated 1254208) Allocating 56238 bytes
-(Allocated 1310446) Allocating 155747 bytes
-GC started: Bytes allocated 1310446; threshold 1454208
+0.6 Mbytes used (28%)
+(Allocated 626148) Allocating 675224 bytes
+(Allocated 1301372) Allocating 274158 bytes
+(Allocated 1575530) Allocating 215279 bytes
+(Allocated 1790809) Allocating 205767 bytes
+(Allocated 1996576) Allocating 28725 bytes
+(Allocated 2025301) Allocating 14581 bytes
+(Allocated 2039882) Allocating 440816 bytes
+GC started: Bytes allocated 2480698; threshold 2217380
 GCNode::gc(0)
-Released 56238 bytes (Allocated 1254208)
-Released 440816 bytes (Allocated 813392)
-Released 274158 bytes (Allocated 539234)
-GC finished: Bytes allocated 539234; threshold 1454208
-Garbage collection 6 = 3+1+2 (level 0) ... 
-0.1 Mbytes of cons cells used (0%)
-0.6 Mbytes used (37%)
-(Allocated 694981) Allocating 19688 bytes
-(Allocated 714669) Allocating 258623 bytes
-(Allocated 973292) Allocating 226475 bytes
-(Allocated 1199767) Allocating 98105 bytes
-(Allocated 1297872) Allocating 314977 bytes
-GC started: Bytes allocated 1297872; threshold 1454208
-GCNode::gc(0)
-Released 98105 bytes (Allocated 1199767)
+Released 14581 bytes (Allocated 2466117)
+Released 28725 bytes (Allocated 2437392)
 GCNode::gc(1)
-Released 226475 bytes (Allocated 973292)
-Released 258623 bytes (Allocated 714669)
-Released 19688 bytes (Allocated 694981)
-Released 155747 bytes (Allocated 539234)
-Released 425490 bytes (Allocated 113744)
-GC finished: Bytes allocated 113744; threshold 1454208
-Garbage collection 7 = 3+2+2 (level 1) ... 
-0.1 Mbytes of cons cells used (0%)
-0.2 Mbytes used (8%)
-(Allocated 428721) Allocating 11454 bytes
-(Allocated 440175) Allocating 192041 bytes
-(Allocated 632216) Allocating 12699 bytes
-(Allocated 644915) Allocating 78956 bytes
-(Allocated 723871) Allocating 377609 bytes
-(Allocated 1101480) Allocating 167129 bytes
-(Allocated 1268609) Allocating 497764 bytes
-GC started: Bytes allocated 1268609; threshold 1454208
-GCNode::gc(0)
-Released 167129 bytes (Allocated 1101480)
-Released 377609 bytes (Allocated 723871)
-Released 78956 bytes (Allocated 644915)
-Released 12699 bytes (Allocated 632216)
-Released 192041 bytes (Allocated 440175)
-GC finished: Bytes allocated 440175; threshold 1454208
-Garbage collection 8 = 4+2+2 (level 0) ... 
-0.1 Mbytes of cons cells used (0%)
-0.5 Mbytes used (30%)
-(Allocated 937939) Allocating 291001 bytes
-(Allocated 1228940) Allocating 204677 bytes
-(Allocated 1433617) Allocating 455502 bytes
-GC started: Bytes allocated 1433617; threshold 1454208
-GCNode::gc(0)
-Released 204677 bytes (Allocated 1228940)
-GCNode::gc(1)
-Released 291001 bytes (Allocated 937939)
-Released 497764 bytes (Allocated 440175)
-Released 11454 bytes (Allocated 428721)
-GC finished: Bytes allocated 428721; threshold 1454208
-Garbage collection 9 = 4+3+2 (level 1) ... 
-0.1 Mbytes of cons cells used (0%)
-0.5 Mbytes used (29%)
-(Allocated 884223) Allocating 366321 bytes
-(Allocated 1250544) Allocating 586 bytes
-(Allocated 1251130) Allocating 53923 bytes
-(Allocated 1305053) Allocating 759195 bytes
-GC started: Bytes allocated 1305053; threshold 1454208
-GCNode::gc(0)
-GCNode::gc(1)
+Released 205767 bytes (Allocated 2231625)
 GCNode::gc(2)
+Released 215279 bytes (Allocated 2016346)
 Node occupancy: 20
-Memory occupancy: 156
-Total allocation: 1305053
+Memory occupancy: 120
+Total allocation: 2016346
 Node threshold: 1000000
-Memory threshold: 2264248
+Memory threshold: 2657162
 Nodes needed: 200042
-Bytes needed: 2264248
-GC finished: Bytes allocated 1305053; threshold 2264248
-Garbage collection 10 = 4+3+3 (level 2) ... 
+Bytes needed: 2657162
+GC finished: Bytes allocated 2016346; threshold 2657162
+Garbage collection 3 = 0+0+3 (level 2) ... 
 0.1 Mbytes of cons cells used (0%)
-1.3 Mbytes used (58%)
-(Allocated 2064248) Allocating 63081 bytes
-(Allocated 2127329) Allocating 190011 bytes
-GC started: Bytes allocated 2127329; threshold 2264248
-GCNode::gc(0)
-Released 63081 bytes (Allocated 2064248)
-Released 759195 bytes (Allocated 1305053)
-Released 53923 bytes (Allocated 1251130)
-GC finished: Bytes allocated 1251130; threshold 2264248
-Garbage collection 11 = 5+3+3 (level 0) ... 
-0.1 Mbytes of cons cells used (0%)
-1.2 Mbytes used (55%)
-(Allocated 1441141) Allocating 28950 bytes
-(Allocated 1470091) Allocating 233256 bytes
-(Allocated 1703347) Allocating 41527 bytes
-(Allocated 1744874) Allocating 14371 bytes
-(Allocated 1759245) Allocating 63349 bytes
-(Allocated 1822594) Allocating 52648 bytes
-(Allocated 1875242) Allocating 435576 bytes
-GC started: Bytes allocated 1875242; threshold 2264248
-GCNode::gc(0)
-Released 52648 bytes (Allocated 1822594)
-Released 63349 bytes (Allocated 1759245)
-Released 14371 bytes (Allocated 1744874)
-Released 41527 bytes (Allocated 1703347)
-Released 233256 bytes (Allocated 1470091)
-GC finished: Bytes allocated 1470091; threshold 2264248
-Garbage collection 12 = 6+3+3 (level 0) ... 
-0.1 Mbytes of cons cells used (0%)
-1.5 Mbytes used (65%)
-(Allocated 1905667) Allocating 152372 bytes
-(Allocated 2058039) Allocating 459348 bytes
-GC started: Bytes allocated 2058039; threshold 2264248
-GCNode::gc(1)
-Released 152372 bytes (Allocated 1905667)
-Released 435576 bytes (Allocated 1470091)
-Released 28950 bytes (Allocated 1441141)
-Released 190011 bytes (Allocated 1251130)
-GC finished: Bytes allocated 1251130; threshold 2264248
-Garbage collection 13 = 6+4+3 (level 1) ... 
-0.1 Mbytes of cons cells used (0%)
-1.2 Mbytes used (55%)
-(Allocated 1710478) Allocating 103930 bytes
-(Allocated 1814408) Allocating 504950 bytes
-GC started: Bytes allocated 1814408; threshold 2264248
-GCNode::gc(0)
-Released 103930 bytes (Allocated 1710478)
-Released 459348 bytes (Allocated 1251130)
-Released 586 bytes (Allocated 1250544)
-GC finished: Bytes allocated 1250544; threshold 2264248
-Garbage collection 14 = 7+4+3 (level 0) ... 
-0.1 Mbytes of cons cells used (0%)
-1.2 Mbytes used (55%)
-(Allocated 1755494) Allocating 215853 bytes
-(Allocated 1971347) Allocating 60421 bytes
-(Allocated 2031768) Allocating 113000 bytes
-(Allocated 2144768) Allocating 188502 bytes
-GC started: Bytes allocated 2144768; threshold 2264248
-GCNode::gc(0)
-Released 113000 bytes (Allocated 2031768)
-Released 60421 bytes (Allocated 1971347)
-Released 215853 bytes (Allocated 1755494)
-Released 504950 bytes (Allocated 1250544)
-GC finished: Bytes allocated 1250544; threshold 2264248
-Garbage collection 15 = 8+4+3 (level 0) ... 
-0.1 Mbytes of cons cells used (0%)
-1.2 Mbytes used (55%)
-(Allocated 1439046) Allocating 55206 bytes
-(Allocated 1494252) Allocating 14161 bytes
-(Allocated 1508413) Allocating 211870 bytes
-(Allocated 1720283) Allocating 542392 bytes
-(Allocated 2262675) Allocating 85137 bytes
-GC started: Bytes allocated 2262675; threshold 2264248
-GCNode::gc(0)
-Released 542392 bytes (Allocated 1720283)
-Released 211870 bytes (Allocated 1508413)
-Released 14161 bytes (Allocated 1494252)
-Released 55206 bytes (Allocated 1439046)
-Released 188502 bytes (Allocated 1250544)
-GC finished: Bytes allocated 1250544; threshold 2264248
-Garbage collection 16 = 9+4+3 (level 0) ... 
-0.1 Mbytes of cons cells used (0%)
-1.2 Mbytes used (55%)
-(Allocated 1335681) Allocating 344397 bytes
-(Allocated 1680078) Allocating 59630 bytes
-(Allocated 1739708) Allocating 172146 bytes
-(Allocated 1911854) Allocating 252318 bytes
-(Allocated 2164172) Allocating 24265 bytes
-(Allocated 2188437) Allocating 245537 bytes
-GC started: Bytes allocated 2188437; threshold 2264248
-GCNode::gc(0)
-Released 24265 bytes (Allocated 2164172)
-Released 252318 bytes (Allocated 1911854)
-Released 172146 bytes (Allocated 1739708)
-Released 59630 bytes (Allocated 1680078)
-Released 344397 bytes (Allocated 1335681)
-Released 85137 bytes (Allocated 1250544)
-Released 366321 bytes (Allocated 884223)
-Released 455502 bytes (Allocated 428721)
-GC finished: Bytes allocated 428721; threshold 2264248
-Garbage collection 17 = 10+4+3 (level 0) ... 
-0.1 Mbytes of cons cells used (0%)
-0.5 Mbytes used (19%)
-(Allocated 674258) Allocating 260770 bytes
-(Allocated 935028) Allocating 151954 bytes
-(Allocated 1086982) Allocating 66048 bytes
-(Allocated 1153030) Allocating 106575 bytes
-(Allocated 1259605) Allocating 400843 bytes
-(Allocated 1660448) Allocating 15634 bytes
-(Allocated 1676082) Allocating 787147 bytes
-GC started: Bytes allocated 1676082; threshold 2264248
+2.0 Mbytes used (76%)
+(Allocated 2016346) Allocating 56238 bytes
+(Allocated 2072584) Allocating 155747 bytes
+(Allocated 2228331) Allocating 372513 bytes
+GC started: Bytes allocated 2600844; threshold 2657162
 GCNode::gc(0)
 GCNode::gc(1)
+Released 155747 bytes (Allocated 2445097)
+Released 56238 bytes (Allocated 2388859)
+Released 440816 bytes (Allocated 1948043)
+GC finished: Bytes allocated 1948043; threshold 2657162
+Garbage collection 4 = 0+1+3 (level 1) ... 
+0.1 Mbytes of cons cells used (0%)
+1.9 Mbytes used (73%)
+(Allocated 1948043) Allocating 226475 bytes
+(Allocated 2174518) Allocating 98105 bytes
+(Allocated 2272623) Allocating 314977 bytes
+GC started: Bytes allocated 2587600; threshold 2657162
 GCNode::gc(2)
-Released 15634 bytes (Allocated 1660448)
-Released 400843 bytes (Allocated 1259605)
-Released 106575 bytes (Allocated 1153030)
-Released 66048 bytes (Allocated 1086982)
+Released 98105 bytes (Allocated 2489495)
+Node occupancy: 20
+Memory occupancy: 113
+Total allocation: 2489495
+Node threshold: 1000000
+Memory threshold: 3004472
+Nodes needed: 200042
+Bytes needed: 3004472
+GC finished: Bytes allocated 2489495; threshold 3004472
+Garbage collection 5 = 0+1+4 (level 2) ... 
+0.1 Mbytes of cons cells used (0%)
+2.4 Mbytes used (83%)
+(Allocated 2489495) Allocating 560867 bytes
+GC started: Bytes allocated 3050362; threshold 3004472
+GCNode::gc(0)
+GCNode::gc(1)
+Released 314977 bytes (Allocated 2735385)
+Released 226475 bytes (Allocated 2508910)
+Released 372513 bytes (Allocated 2136397)
+GC finished: Bytes allocated 2136397; threshold 3004472
+Garbage collection 6 = 0+2+4 (level 1) ... 
+0.1 Mbytes of cons cells used (0%)
+2.1 Mbytes used (71%)
+(Allocated 2136397) Allocating 12699 bytes
+(Allocated 2149096) Allocating 78956 bytes
+(Allocated 2228052) Allocating 377609 bytes
+(Allocated 2605661) Allocating 167129 bytes
+(Allocated 2772790) Allocating 497764 bytes
+GC started: Bytes allocated 3270554; threshold 3004472
+GCNode::gc(2)
+Released 167129 bytes (Allocated 3103425)
+Released 377609 bytes (Allocated 2725816)
+Released 78956 bytes (Allocated 2646860)
+Released 12699 bytes (Allocated 2634161)
+Released 560867 bytes (Allocated 2073294)
 Node occupancy: 20
 Memory occupancy: 92
-Total allocation: 1086982
+Total allocation: 2073294
 Node threshold: 1000000
-Memory threshold: 2797097
+Memory threshold: 3685366
 Nodes needed: 200042
-Bytes needed: 2074129
-GC finished: Bytes allocated 1086982; threshold 2797097
-Garbage collection 18 = 10+4+4 (level 2) ... 
+Bytes needed: 2771058
+GC finished: Bytes allocated 2073294; threshold 3685366
+Garbage collection 7 = 0+2+5 (level 2) ... 
 0.1 Mbytes of cons cells used (0%)
-1.1 Mbytes used (39%)
-(Allocated 1874129) Allocating 326630 bytes
-(Allocated 2200759) Allocating 276479 bytes
-(Allocated 2477238) Allocating 144174 bytes
-(Allocated 2621412) Allocating 153631 bytes
-(Allocated 2775043) Allocating 280408 bytes
-GC started: Bytes allocated 2775043; threshold 2797097
+2.0 Mbytes used (56%)
+(Allocated 2073294) Allocating 291001 bytes
+(Allocated 2364295) Allocating 204677 bytes
+(Allocated 2568972) Allocating 455502 bytes
+(Allocated 3024474) Allocating 128722 bytes
+(Allocated 3153196) Allocating 331694 bytes
+GC started: Bytes allocated 3484890; threshold 3685366
 GCNode::gc(0)
-Released 153631 bytes (Allocated 2621412)
-Released 144174 bytes (Allocated 2477238)
-Released 276479 bytes (Allocated 2200759)
-Released 326630 bytes (Allocated 1874129)
-GC finished: Bytes allocated 1874129; threshold 2797097
-Garbage collection 19 = 11+4+4 (level 0) ... 
+Released 128722 bytes (Allocated 3356168)
+Released 455502 bytes (Allocated 2900666)
+Released 204677 bytes (Allocated 2695989)
+Released 291001 bytes (Allocated 2404988)
+Released 497764 bytes (Allocated 1907224)
+GC finished: Bytes allocated 1907224; threshold 3685366
+Garbage collection 8 = 1+2+5 (level 0) ... 
 0.1 Mbytes of cons cells used (0%)
-1.8 Mbytes used (67%)
-(Allocated 2154537) Allocating 5143 bytes
-(Allocated 2159680) Allocating 121064 bytes
-(Allocated 2280744) Allocating 352197 bytes
-(Allocated 2632941) Allocating 175876 bytes
-GC started: Bytes allocated 2632941; threshold 2797097
+1.9 Mbytes used (52%)
+(Allocated 1907224) Allocating 586 bytes
+(Allocated 1907810) Allocating 53923 bytes
+(Allocated 1961733) Allocating 759195 bytes
+(Allocated 2720928) Allocating 35840 bytes
+(Allocated 2756768) Allocating 53157 bytes
+(Allocated 2809925) Allocating 26260 bytes
+(Allocated 2836185) Allocating 63081 bytes
+(Allocated 2899266) Allocating 190011 bytes
+(Allocated 3089277) Allocating 177767 bytes
+(Allocated 3267044) Allocating 28950 bytes
+(Allocated 3295994) Allocating 233256 bytes
+GC started: Bytes allocated 3529250; threshold 3685366
 GCNode::gc(0)
-Released 352197 bytes (Allocated 2280744)
-Released 121064 bytes (Allocated 2159680)
-Released 5143 bytes (Allocated 2154537)
-Released 280408 bytes (Allocated 1874129)
-GC finished: Bytes allocated 1874129; threshold 2797097
-Garbage collection 20 = 12+4+4 (level 0) ... 
+Released 28950 bytes (Allocated 3500300)
+GCNode::gc(1)
+GCNode::gc(2)
+Released 177767 bytes (Allocated 3322533)
+Released 190011 bytes (Allocated 3132522)
+Node occupancy: 20
+Memory occupancy: 97
+Total allocation: 3132522
+Node threshold: 1000000
+Memory threshold: 4502439
+Nodes needed: 200042
+Bytes needed: 3565778
+GC finished: Bytes allocated 3132522; threshold 4502439
+Garbage collection 9 = 1+2+6 (level 2) ... 
 0.1 Mbytes of cons cells used (0%)
-1.8 Mbytes used (67%)
-(Allocated 2050005) Allocating 137460 bytes
-(Allocated 2187465) Allocating 5544 bytes
-(Allocated 2193009) Allocating 234514 bytes
-(Allocated 2427523) Allocating 110269 bytes
-(Allocated 2537792) Allocating 218748 bytes
-(Allocated 2756540) Allocating 86637 bytes
-GC started: Bytes allocated 2756540; threshold 2797097
+3.0 Mbytes used (70%)
+(Allocated 3132522) Allocating 52648 bytes
+(Allocated 3185170) Allocating 435576 bytes
+(Allocated 3620746) Allocating 224665 bytes
+(Allocated 3845411) Allocating 152372 bytes
+(Allocated 3997783) Allocating 459348 bytes
+GC started: Bytes allocated 4457131; threshold 4502439
 GCNode::gc(0)
-Released 218748 bytes (Allocated 2537792)
-Released 110269 bytes (Allocated 2427523)
-Released 234514 bytes (Allocated 2193009)
-Released 5544 bytes (Allocated 2187465)
-Released 137460 bytes (Allocated 2050005)
-Released 175876 bytes (Allocated 1874129)
-Released 787147 bytes (Allocated 1086982)
-Released 151954 bytes (Allocated 935028)
-Released 260770 bytes (Allocated 674258)
-GC finished: Bytes allocated 674258; threshold 2797097
-Garbage collection 21 = 13+4+4 (level 0) ... 
+Released 152372 bytes (Allocated 4304759)
+Released 224665 bytes (Allocated 4080094)
+Released 435576 bytes (Allocated 3644518)
+Released 52648 bytes (Allocated 3591870)
+Released 233256 bytes (Allocated 3358614)
+Released 63081 bytes (Allocated 3295533)
+Released 26260 bytes (Allocated 3269273)
+Released 53157 bytes (Allocated 3216116)
+GC finished: Bytes allocated 3216116; threshold 4502439
+Garbage collection 10 = 2+2+6 (level 0) ... 
 0.1 Mbytes of cons cells used (0%)
-0.7 Mbytes used (24%)
-(Allocated 760895) Allocating 74371 bytes
-(Allocated 835266) Allocating 634054 bytes
-(Allocated 1469320) Allocating 322670 bytes
-(Allocated 1791990) Allocating 64694 bytes
-(Allocated 1856684) Allocating 77799 bytes
-(Allocated 1934483) Allocating 94313 bytes
-(Allocated 2028796) Allocating 94000 bytes
-(Allocated 2122796) Allocating 282803 bytes
-(Allocated 2405599) Allocating 122861 bytes
-(Allocated 2528460) Allocating 502526 bytes
-GC started: Bytes allocated 2528460; threshold 2797097
+3.1 Mbytes used (71%)
+(Allocated 3216116) Allocating 103930 bytes
+(Allocated 3320046) Allocating 504950 bytes
+(Allocated 3824996) Allocating 235779 bytes
+(Allocated 4060775) Allocating 215853 bytes
+(Allocated 4276628) Allocating 60421 bytes
+(Allocated 4337049) Allocating 113000 bytes
+GC started: Bytes allocated 4450049; threshold 4502439
+GCNode::gc(1)
+Released 60421 bytes (Allocated 4389628)
+Released 215853 bytes (Allocated 4173775)
+Released 235779 bytes (Allocated 3937996)
+Released 504950 bytes (Allocated 3433046)
+Released 103930 bytes (Allocated 3329116)
+Released 459348 bytes (Allocated 2869768)
+GC finished: Bytes allocated 2869768; threshold 4502439
+Garbage collection 11 = 2+3+6 (level 1) ... 
+0.1 Mbytes of cons cells used (0%)
+2.8 Mbytes used (64%)
+(Allocated 2869768) Allocating 265133 bytes
+(Allocated 3134901) Allocating 55206 bytes
+(Allocated 3190107) Allocating 14161 bytes
+(Allocated 3204268) Allocating 211870 bytes
+(Allocated 3416138) Allocating 542392 bytes
+(Allocated 3958530) Allocating 85137 bytes
+(Allocated 4043667) Allocating 354483 bytes
+GC started: Bytes allocated 4398150; threshold 4502439
+GCNode::gc(0)
+Released 85137 bytes (Allocated 4313013)
+Released 542392 bytes (Allocated 3770621)
+Released 211870 bytes (Allocated 3558751)
+Released 14161 bytes (Allocated 3544590)
+Released 55206 bytes (Allocated 3489384)
+Released 265133 bytes (Allocated 3224251)
+Released 113000 bytes (Allocated 3111251)
+Released 35840 bytes (Allocated 3075411)
+Released 759195 bytes (Allocated 2316216)
+GC finished: Bytes allocated 2316216; threshold 4502439
+Garbage collection 12 = 3+3+6 (level 0) ... 
+0.1 Mbytes of cons cells used (0%)
+2.3 Mbytes used (51%)
+(Allocated 2316216) Allocating 59630 bytes
+(Allocated 2375846) Allocating 172146 bytes
+(Allocated 2547992) Allocating 252318 bytes
+(Allocated 2800310) Allocating 24265 bytes
+(Allocated 2824575) Allocating 245537 bytes
+(Allocated 3070112) Allocating 539473 bytes
+(Allocated 3609585) Allocating 260770 bytes
+(Allocated 3870355) Allocating 151954 bytes
+(Allocated 4022309) Allocating 66048 bytes
+(Allocated 4088357) Allocating 106575 bytes
+(Allocated 4194932) Allocating 400843 bytes
+GC started: Bytes allocated 4595775; threshold 4502439
 GCNode::gc(0)
 GCNode::gc(1)
-Released 122861 bytes (Allocated 2405599)
-Released 282803 bytes (Allocated 2122796)
-GC finished: Bytes allocated 2122796; threshold 2797097
-Garbage collection 22 = 13+5+4 (level 1) ... 
+Released 106575 bytes (Allocated 4489200)
+Released 66048 bytes (Allocated 4423152)
+Released 151954 bytes (Allocated 4271198)
+Released 260770 bytes (Allocated 4010428)
+Released 539473 bytes (Allocated 3470955)
+Released 245537 bytes (Allocated 3225418)
+Released 24265 bytes (Allocated 3201153)
+Released 252318 bytes (Allocated 2948835)
+Released 172146 bytes (Allocated 2776689)
+Released 59630 bytes (Allocated 2717059)
+Released 354483 bytes (Allocated 2362576)
+Released 53923 bytes (Allocated 2308653)
+Released 586 bytes (Allocated 2308067)
+Released 331694 bytes (Allocated 1976373)
+Released 274158 bytes (Allocated 1702215)
+Released 675224 bytes (Allocated 1026991)
+GC finished: Bytes allocated 1026991; threshold 4502439
+Garbage collection 13 = 3+4+6 (level 1) ... 
 0.1 Mbytes of cons cells used (0%)
-2.1 Mbytes used (76%)
+1.0 Mbytes used (23%)
+(Allocated 1026991) Allocating 3745 bytes
+(Allocated 1030736) Allocating 27153 bytes
+(Allocated 1057889) Allocating 271863 bytes
+(Allocated 1329752) Allocating 326630 bytes
+(Allocated 1656382) Allocating 276479 bytes
+(Allocated 1932861) Allocating 144174 bytes
+(Allocated 2077035) Allocating 153631 bytes
+(Allocated 2230666) Allocating 280408 bytes
+(Allocated 2511074) Allocating 185516 bytes
+(Allocated 2696590) Allocating 5143 bytes
+(Allocated 2701733) Allocating 121064 bytes
+(Allocated 2822797) Allocating 352197 bytes
+(Allocated 3174994) Allocating 175876 bytes
+(Allocated 3350870) Allocating 217006 bytes
+(Allocated 3567876) Allocating 137460 bytes
+(Allocated 3705336) Allocating 5544 bytes
+(Allocated 3710880) Allocating 234514 bytes
+(Allocated 3945394) Allocating 110269 bytes
+(Allocated 4055663) Allocating 218748 bytes
+(Allocated 4274411) Allocating 86637 bytes
+(Allocated 4361048) Allocating 507404 bytes
+GC started: Bytes allocated 4868452; threshold 4502439
+GCNode::gc(0)
+Released 86637 bytes (Allocated 4781815)
+Released 218748 bytes (Allocated 4563067)
+Released 110269 bytes (Allocated 4452798)
+Released 234514 bytes (Allocated 4218284)
+GCNode::gc(1)
+Released 5544 bytes (Allocated 4212740)
+Released 137460 bytes (Allocated 4075280)
+Released 217006 bytes (Allocated 3858274)
+Released 175876 bytes (Allocated 3682398)
+Released 352197 bytes (Allocated 3330201)
+Released 121064 bytes (Allocated 3209137)
+Released 5143 bytes (Allocated 3203994)
+Released 185516 bytes (Allocated 3018478)
+Released 280408 bytes (Allocated 2738070)
+Released 153631 bytes (Allocated 2584439)
+Released 144174 bytes (Allocated 2440265)
+Released 276479 bytes (Allocated 2163786)
+Released 326630 bytes (Allocated 1837156)
+Released 271863 bytes (Allocated 1565293)
+Released 27153 bytes (Allocated 1538140)
+GC finished: Bytes allocated 1538140; threshold 4502439
+Garbage collection 14 = 3+5+6 (level 1) ... 
+0.1 Mbytes of cons cells used (0%)
+1.5 Mbytes used (34%)
+(Allocated 1538140) Allocating 322670 bytes
+(Allocated 1860810) Allocating 64694 bytes
+(Allocated 1925504) Allocating 77799 bytes
 GCNode::cleanup()

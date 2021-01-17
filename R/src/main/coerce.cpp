@@ -1063,14 +1063,16 @@ static SEXP coerceVectorList(SEXP v, SEXPTYPE type)
 	if (type == VECSXP && TYPEOF(v) == EXPRSXP)
 	{
 		/* This is sneaky but saves us rewriting a lot of the duplicate code */
-		ExpressionVector *ev = dynamic_cast<ExpressionVector *>(v);
-		return new ListVector(*ev);
+		ExpressionVector *ev = static_cast<ExpressionVector *>(v);
+		ListVector *ans = new ListVector(*ev);
+		return ans;
 	}
 
 	if (type == EXPRSXP && TYPEOF(v) == VECSXP)
 	{
-		GCRoot<ListVector> lv(dynamic_cast<ListVector *>(v));
-		return new ExpressionVector(*lv);
+		GCRoot<ListVector> lv(static_cast<ListVector *>(v));
+		ExpressionVector *ans = new ExpressionVector(*lv);
+		return ans;
 	}
 
     if (type == STRSXP) {
@@ -1725,36 +1727,42 @@ HIDDEN SEXP do_ascall(SEXP call, SEXP op, SEXP args, SEXP rho)
     case LANGSXP:
 	ans = args;
 	break;
-    case VECSXP: {
-	int n = length(args);
-	if(n == 0)
-	    errorcall(call, _("invalid argument of length 0"));
-	SEXP names = PROTECT(getAttrib(args, R_NamesSymbol)), ap;
-	PROTECT(ap = ans = new Expression(n));
-	for (int i = 0; i < n; i++) {
-	    SETCAR(ap, VECTOR_ELT(args, i));
-	    if (names != R_NilValue && !StringBlank(STRING_ELT(names, i)))
-		SET_TAG(ap, installTrChar(STRING_ELT(names, i)));
-	    ap = CDR(ap);
+    case VECSXP:
+	{
+		int n = length(args);
+		if (n == 0)
+			errorcall(call, _("invalid argument of length 0"));
+		SEXP names = PROTECT(getAttrib(args, R_NamesSymbol)), ap;
+		GCRoot<PairList> tl(PairList::makeList(n - 1));
+		PROTECT(ap = ans = new Expression(nullptr, tl));
+		for (int i = 0; i < n; i++)
+		{
+			SETCAR(ap, VECTOR_ELT(args, i));
+			if (names != R_NilValue && !StringBlank(STRING_ELT(names, i)))
+				SET_TAG(ap, installTrChar(STRING_ELT(names, i)));
+			ap = CDR(ap);
+		}
+		UNPROTECT(2); /* ap, names */
+		break;
 	}
-	UNPROTECT(2); /* ap, names */
-	break;
-    }
-    case EXPRSXP: {
-	int n = length(args);
-	if(n == 0)
-	    errorcall(call, _("invalid argument of length 0"));
-	SEXP names = PROTECT(getAttrib(args, R_NamesSymbol)), ap;
-	PROTECT(ap = ans = new Expression(n));
-	for (int i = 0; i < n; i++) {
-	    SETCAR(ap, XVECTOR_ELT(args, i));
-	    if (names != R_NilValue && !StringBlank(STRING_ELT(names, i)))
-		SET_TAG(ap, installTrChar(STRING_ELT(names, i)));
-	    ap = CDR(ap);
+    case EXPRSXP:
+	{
+		int n = length(args);
+		if (n == 0)
+			errorcall(call, _("invalid argument of length 0"));
+		SEXP names = PROTECT(getAttrib(args, R_NamesSymbol)), ap;
+		GCRoot<PairList> tl(PairList::makeList(n - 1));
+		PROTECT(ap = ans = new Expression(nullptr, tl));
+		for (int i = 0; i < n; i++)
+		{
+			SETCAR(ap, XVECTOR_ELT(args, i));
+			if (names != R_NilValue && !StringBlank(STRING_ELT(names, i)))
+				SET_TAG(ap, installTrChar(STRING_ELT(names, i)));
+			ap = CDR(ap);
+		}
+		UNPROTECT(2); /* ap, names */
+		break;
 	}
-	UNPROTECT(2); /* ap, names */
-	break;
-    }
     case LISTSXP:
 	{
 		ConsCell *cc = SEXP_downcast<ConsCell *>(args);
@@ -2732,7 +2740,8 @@ HIDDEN SEXP do_docall(SEXP call, SEXP op, SEXP args, SEXP rho)
     n = length(args);
     PROTECT(names = getAttrib(args, R_NamesSymbol));
 
-    PROTECT(c = call = new Expression(n + 1));
+    GCRoot<PairList> tl(PairList::makeList(n));
+    PROTECT(c = call = new Expression(nullptr, tl));
     if( isString(fun) ) {
 	const char *str = translateChar(STRING_ELT(fun, 0));
 	if (streql(str, ".Internal")) error(_("illegal usage"));

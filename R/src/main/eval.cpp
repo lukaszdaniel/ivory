@@ -2175,7 +2175,8 @@ static SEXP replaceCall(SEXP fun, SEXP val, SEXP args, SEXP rhs)
     PROTECT(args);
     PROTECT(rhs);
     PROTECT(val);
-	ptmp = tmp = new Expression(length(args) + 3);
+    GCRoot<PairList> tl(PairList::makeList(length(args) + 2));
+    ptmp = tmp = new Expression(nullptr, tl);
 	UNPROTECT(4);
     SETCAR(ptmp, fun); ptmp = CDR(ptmp);
     SETCAR(ptmp, val); ptmp = CDR(ptmp);
@@ -2709,7 +2710,9 @@ static SEXP evalseq(SEXP expr, SEXP rho, int forcelocal,  R_varloc_t tmploc,
 	if (maybe_in_assign || MAYBE_SHARED(nval))
 	    nval = shallow_duplicate(nval);
 	UNPROTECT(1);
-	return CONS_NR(nval, CONS_NR(expr, nullptr));
+	GCRoot<PairList> pl(SEXP_downcast<PairList*>(CONS_NR(expr, nullptr)));
+	PairList *ans = SEXP_downcast<PairList *>(CONS_NR(nval, pl));
+	return ans;
     }
     else if (isLanguage(expr)) {
 	PROTECT(expr);

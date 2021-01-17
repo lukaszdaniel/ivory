@@ -310,29 +310,6 @@ namespace CXXR
         ((R_bndval_t *)&(SEXP_downcast<ConsCell *>(x, false)->m_car))->ival = v;
     }
 
-    ConsCell::ConsCell(SEXPTYPE st, size_t sz)
-        : RObject(st), m_car(nullptr), m_tail(nullptr), m_tag(nullptr)
-    {
-        checkST(st);
-#ifdef LONG_VECTOR_SUPPORT
-        if (sz > R_SHORT_LEN_MAX)
-            Rf_error(_("invalid length for pairlist"));
-#endif
-        if (sz == 0)
-            throw std::out_of_range(_("Cannot construct PairList of zero length."));
-        try
-        {
-            while (--sz)
-                m_tail = new PairList(nullptr, m_tail, nullptr);
-        }
-        catch (...)
-        {
-            if (m_tail)
-                m_tail->expose();
-            throw;
-        }
-    }
-
     void ConsCell::checkST(SEXPTYPE st)
     {
         switch (st)

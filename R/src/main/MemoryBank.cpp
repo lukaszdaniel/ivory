@@ -75,6 +75,18 @@ const unsigned char MemoryBank::s_pooltab[] = {0, 0,                    // 8
                                                8, 8, 8, 8,              // 128
                                                9, 9, 9, 9, 9, 9, 9, 9}; // 192
 
+MemoryBank::SchwarzCtr::SchwarzCtr()
+{
+    if (!s_count++)
+        MemoryBank::initialize();
+}
+
+MemoryBank::SchwarzCtr::~SchwarzCtr()
+{
+    if (!--s_count)
+        MemoryBank::cleanup();
+}
+
 #ifdef ALLOC_STATS
 // Allocation and free frequency tables for profiling the allocator.
 // Allocation stats are collected into 8-byte bins, allocations > 256 bytes are

@@ -292,21 +292,6 @@ namespace CXXR
             checkST(st);
         }
 
-        /** @brief Create a chain of ConsCell objects.
-         *
-         * This constructor creates a chain of ConsCell objects with a specified number
-         * of elements.  On creation, each element has null 'car' and
-         * 'tag'.
-         *
-         * @param st The required ::SEXPTYPE of the PairList.  Must
-         *           be one of LISTSXP, LANGSXP, DOTSXP or BCODESXP
-         *           (not checked).
-         * @param sz Number of elements required in the list.  Must be
-         *           strictly positive; the constructor throws
-         *           std::out_of_range if \a sz is zero.
-         */
-        ConsCell(SEXPTYPE st, size_t sz);
-
         /**
          * Declared protected to ensure that ConsCell objects are
          * allocated only using 'new'.
@@ -326,6 +311,21 @@ namespace CXXR
         {
             m_tail = tl;
         }
+
+        /** @brief Create a chain of ConsCell objects.
+	 *
+	 * This constructor creates a chain of ConsCell objects with a
+	 * specified number of elements.  On creation, each element
+	 * has null 'car' and 'tag'.
+	 *
+	 * @param st The required ::SEXPTYPE of the first element of
+	 *           the list.  Must be one of LISTSXP, LANGSXP,
+	 *           DOTSXP or BCODESXP (not checked).
+	 * @param sz Number of elements required in the list.  Must be
+	 *           strictly positive; the function throws
+	 *           std::out_of_range if \a sz is zero.
+	 */
+        static ConsCell *makeList(SEXPTYPE st, size_t sz);
 
     private:
         RObject *m_car;

@@ -484,7 +484,8 @@ static SEXP D(SEXP expr, SEXP var)
 	    UNPROTECT(4);
 	}
 	else if (CAR(expr) == SqrtSymbol) {
-	    PROTECT(expr1 = new Expression(3));
+	    GCRoot<PairList> tl(PairList::makeList(2));
+	    PROTECT(expr1 = new Expression(nullptr, tl));
 	    SETCAR(expr1, PowerSymbol);
 	    SETCADR(expr1, CADR(expr));
 	    SETCADDR(expr1, Constant(0.5));

@@ -1944,8 +1944,7 @@ static SEXP ReadItem(SEXP ref_table, R_inpstream_t stream)
 		R_ReadItemDepth--; /* do this early because of the recursion. */
 		// Convert tail to PairList if necessary:
 		{
-			GCRoot<ConsCell>
-				cc(SEXP_downcast<ConsCell *>(ReadItem(ref_table, stream)));
+			GCRoot<ConsCell> cc(SEXP_downcast<ConsCell *>(ReadItem(ref_table, stream)));
 			SETCDR(s, ConsCell::convert<PairList>(cc));
 		}
 		if (set_lastname)
@@ -2054,7 +2053,7 @@ static SEXP ReadItem(SEXP ref_table, R_inpstream_t stream)
 	   newly allocated value PROTECTed */
 	switch (type) {
 	case EXTPTRSXP:
-	    PROTECT(s = new CXXR::ExternalPointer());
+	    PROTECT(s = new ExternalPointer());
 	    AddReadRef(ref_table, s);
 	    R_SetExternalPtrAddr(s, nullptr);
 	    R_ReadItemDepth++;

@@ -96,35 +96,39 @@ namespace CXXR
      * The private method expose() is used to end this immunity once
      * construction of an object is complete.  However, there appears
      * to be no clean and general way in C++ of calling expose() \e
-     * exactly when construction is complete.  Consequently, a node's
+     * exactly when construction is complete.  Consequently, a node N's
      * infant immunity will in fact continue until one of the
      * following events occurs:
      * <ul>
-     * <li>The node is explicitly protected from the garbage
-     * collector, either by encapsulating a pointer to it in a
-     * GCRoot, or by the CR PROTECT() mechanism.  For this reason, it
-     * is important that constructors <em>do not</em> attempt
-     * explicitly to protect '<tt>this</tt>'; a particular risk with
-     * this is that constructors of derived classes will not be able
-     * to rely on infant immunity.</li>
      *
-     * <li>The node is marked by the garbage collector.</li>
+     * <li>The method expose() is called explicitly for N.</li>
      *
-     * <li>The node is visited by a \b GCNode::Ager object (as part of
-     * write barrier enforcement).</li>
+     * <li>N is visited by a \b GCNode::Ager object (as part of
+     * write barrier enforcement).  This will happen if
+     * a node that is already exposed to the garbage collector is
+     * modified so that it refers to N.</li>
      *
-     * <li>The (protected) method expose() is called explicitly.
+     * <li>A pointer to N is specified in the constructor of a GCRoot
+     * object, and the optional argument \a expose is set to
+     * true.</li>
+     *
+     * <li>N is designated as the key, value or R finalizer of a weak
+     * reference object.</li>
+     *
+     * <li>N is itself a weak reference object (in which case it is
+     * exposed to garbage collection during construction).</li>
+     *
      * </ul>
-     *
+     * 
      * \par
      * It is the responsibility of any code that creates an object of
-     * a class derived from GCNode to ensure that the object is in due
-     * course exposed to the garbage collector <em>even when
-     * exceptions occur</em>.  A very general way of ensuring this is,
-     * immediately after the object is created, to encapsulating a
-     * pointer to it in a GCRoot smart pointer.
+     * a class derived from GCNode to ensure that, under normal
+     * operation, the object is in due course exposed to the garbage
+     * collector.  However, if exceptions occur, the static member
+     * function slaughterInfants() can be used to delete \e all the
+     * nodes currently enjoying infant immunity.
      *
-     * \par Avoid nested <tt>new</tt>:
+     * \par Nested <tt>new</tt>:
      * Consider the following code to create a PairList of two
      * elements, with \c first as the 'car' of the first element and
      * \c second as the 'car' of the second element:
@@ -136,28 +140,22 @@ namespace CXXR
      * that the second element of the list will be garbage-collected
      * when \c new is invoked to allocate space for the first element.
      * But this is not so: at this stage, the second element will
-     * still enjoy infant immunity, which in fact it will continue to
-     * enjoy until the first garbage collection after
-     * <tt>pl2</tt>'s constructor has run.
+     * still enjoy infant immunity.
      *
      * \par
-     * The problem arises from a different quarter.  Suppose that the
-     * \c new to allocate space for the second element succeeds, but
-     * that the \c new to allocate space for the first element fails
-     * because of shortage of memory, and throws
-     * <tt>std::bad_alloc</tt>.  Then the space allocated to the
-     * second element will be lost, because this element will never be
-     * exposed to the garbage collector.  To avoid this, the preferred
-     * coding approach is as follows:
-     * \code
-     * CXXR::GCRoot<CXXR::PairList> pl(new CXXR::PairList(second));
-     * CXXR::GCRoot<CXXR::PairList> pl2(new CXXR::PairList(first, pl));
-     * \endcode
-     * 
+     * However, a potential problem arises from a different quarter.
+     * Suppose that the \c new to allocate space for the second
+     * element succeeds, but that the \c new to allocate space for the
+     * first element fails because of shortage of memory, and throws
+     * <tt>std::bad_alloc</tt>.  Then the second element will not be
+     * exposed to the garbage collector, and the space it occupies is
+     * potentially lost.  An easy workaround is for the handler that
+     * catches the exception to invoke slaughterInfants().
+     *
      * @note Because this base class is used purely for housekeeping
      * by the garbage collector, and does not contribute to the
-     * 'meaning' of an object of a derived class, its data members are
-     * mutable.
+     * 'meaning' of an object of a derived class, all of its data
+     * members are mutable.
      *
      * @todo The (private) cleanup() method needs to address the
      * possibility that derived classes may have destructors that

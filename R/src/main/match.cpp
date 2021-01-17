@@ -45,6 +45,7 @@
 #define R_NO_REMAP
 
 #include <CXXR/DottedArgs.hpp>
+#include <CXXR/PairList.hpp>
 #include <Localization.h>
 #include <Defn.h>
 
@@ -342,7 +343,8 @@ HIDDEN SEXP R::matchArgs_NR(SEXP formals, SEXP supplied, SEXP call)
 	for(a = supplied; a != R_NilValue ; a = CDR(a)) if(!ARGUSED(a)) i++;
 
 	if (i) {
-	    a = new DottedArgs(i);
+	    GCRoot<PairList> tl(PairList::makeList(i - 1));
+	    a = new DottedArgs(nullptr, tl);
 	    f = a;
 	    for(b = supplied; b != R_NilValue; b = CDR(b))
 		if(!ARGUSED(b)) {

@@ -12,6 +12,15 @@ sizeof(R_xlen_t): 8
 sizeof(double): 8
 sizeof(RObject*): 8
 sizeof(ListVector*): 8
-sizeof(ListVector): 120
-sizeof(RObject): 80
+sizeof(GCNode): 32
+sizeof(RObject): 56
+sizeof(VectorBase): 72
+sizeof(ConsCell): 80
+sizeof(PairList): 80
+sizeof(Expression): 80
+sizeof(Environment): 80
+sizeof(Symbol): 88
+sizeof(IntVector): 88
+sizeof(ListVector): 96
+sizeof(RealVector): 96
 GCNode::cleanup()

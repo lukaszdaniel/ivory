@@ -47,8 +47,8 @@ namespace CXXR
         const auto &mkCharLenptr = Rf_mkCharLen;
     } // namespace ForceNonInline
 
-    GCRoot<const String> String::s_na(UncachedString::obtain("NA"));
-    GCRoot<const String> String::s_blank(CachedString::obtain(""));
+    GCRoot<const String> String::s_na(UncachedString::obtain("NA"), true);
+    GCRoot<const String> String::s_blank(CachedString::obtain(""), true);
 
     // String::Comparator::operator()(const String&, const String&) is in
     // sort.cpp

@@ -728,7 +728,7 @@ SEXP typeconvert(SEXP call, SEXP op, SEXP args, SEXP env)
 		/* CR avoided an allocation by reusing dup,
 	     * a LGLSXP of the right length.  CXXR doesn't!
 	     */
-		GCRoot<IntVector> rvalr(new IntVector(LENGTH(dup), true));
+		GCRoot<IntVector> rvalr(new IntVector(LENGTH(dup)), true);
 		rval = rvalr;
 
 		/* put the levels in lexicographic order */

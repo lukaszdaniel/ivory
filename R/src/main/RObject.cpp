@@ -86,6 +86,12 @@ namespace CXXR
         return Rf_type2char(sexptype());
     }
 
+    void RObject::setAttributes(PairList *new_attributes)
+    {
+        m_attrib = new_attributes;
+        devolveAge(m_attrib);
+    }
+
     /**
      * Replace x's attributes by \a v.
      * @param x Pointer to \c RObject.
@@ -96,7 +102,8 @@ namespace CXXR
     {
         if (!x)
             return;
-        x->m_attrib = v;
+        PairList *pl = SEXP_downcast<PairList *>(v);
+        x->setAttributes(pl);
     }
 
     /**

@@ -69,21 +69,6 @@ namespace CXXR
         {
         }
 
-        /** @brief Create a list of a specified length.
-         *
-         * This constructor creates a PairList with a specified number
-         * of elements.  On creation, each element has null 'car' and
-         * 'tag'.
-         *
-         * @param sz Number of elements required in the list.  Must be
-         *           strictly positive; the constructor throws
-         *           std::out_of_range if \a sz is zero.
-         */
-        PairList(size_t sz)
-            : ConsCell(LISTSXP, sz)
-        {
-        }
-
         /** @brief Create a PairList element on the free store.
          *
          * Unlike the constructor (and contrary to CXXR conventions
@@ -112,6 +97,17 @@ namespace CXXR
             s_cons_car = nullptr;
             return ans;
         }
+
+        /** @brief Create a PairList of a specified length.
+	 *
+	 * This constructor creates a chain of PairList nodes with a
+	 * specified number of elements.  On creation, each element
+	 * has null 'car' and 'tag'.
+	 *
+	 * @param sz Number of elements required in the list.  If
+	 *           zero, the function returns a null pointer.
+	 */
+        static PairList *makeList(size_t sz);
 
         /** @brief The name by which this type is known in R.
          *
@@ -150,7 +146,7 @@ namespace CXXR
     template <class T = PairList>
     T *CXXR_cons(SEXP car, SEXP cdr)
     {
-        return PairList::cons<T>(car, SEXP_downcast<PairList*>(cdr));
+        return PairList::cons<T>(car, SEXP_downcast<PairList *>(cdr));
     }
 } // namespace CXXR
 

@@ -20,7 +20,13 @@
 #include <iostream>
 #include <R_ext/Boolean.h>
 #include <CXXR/RObject.hpp>
+#include <CXXR/Environment.hpp>
+#include <CXXR/IntVector.hpp>
+#include <CXXR/PairList.hpp>
+#include <CXXR/RealVector.hpp>
+#include <CXXR/Expression.hpp>
 #include <CXXR/ListVector.hpp>
+#include <CXXR/Symbol.hpp>
 
 using namespace std;
 using namespace CXXR;
@@ -64,7 +70,16 @@ int main()
          << "\nsizeof(double): " << sizeof(double)
          << "\nsizeof(RObject*): " << sizeof(RObject *)
          << "\nsizeof(ListVector*): " << sizeof(ListVector *)
+         << "\nsizeof(GCNode): " << sizeof(GCNode)
+         << "\nsizeof(RObject): " << sizeof(RObject)
+         << "\nsizeof(VectorBase): " << sizeof(VectorBase)
+         << "\nsizeof(ConsCell): " << sizeof(ConsCell)
+         << "\nsizeof(PairList): " << sizeof(PairList)
+         << "\nsizeof(Expression): " << sizeof(Expression)
+         << "\nsizeof(Environment): " << sizeof(Environment)
+         << "\nsizeof(Symbol): " << sizeof(Symbol)
+         << "\nsizeof(IntVector): " << sizeof(IntVector)
          << "\nsizeof(ListVector): " << sizeof(ListVector)
-         << "\nsizeof(RObject): " << sizeof(RObject) << "\n";
+         << "\nsizeof(RealVector): " << sizeof(RealVector) << '\n';
     return 0;
 }

@@ -18,7 +18,6 @@
  *  https://www.R-project.org/Licenses/
  */
 
-
 #ifdef HAVE_CONFIG_H
 #include <config.h>
 #endif
@@ -166,5 +165,6 @@ HIDDEN SEXP R::mkSYMSXP(SEXP name, SEXP value)
 {
     GCRoot<const String> namert(SEXP_downcast<const String *>(name));
     GCRoot<> valuert(value);
-    return new Symbol(namert, valuert);
+    Symbol *ans = new Symbol(namert, valuert);
+    return ans;
 }

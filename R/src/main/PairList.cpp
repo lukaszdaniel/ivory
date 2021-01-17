@@ -50,6 +50,25 @@ namespace CXXR
     GCRoot<> PairList::s_cons_car;
     GCRoot<PairList> PairList::s_cons_cdr;
 
+    PairList *PairList::makeList(size_t sz)
+    {
+        PairList *ans = nullptr;
+        try
+        {
+            while (sz--)
+                ans = new PairList(nullptr, ans, nullptr);
+        }
+        catch (...)
+        {
+            for (PairList *node = ans; node; node = node->tail())
+                node->expose();
+            throw;
+        }
+        // for (PairList *node = ans; node; node = node->tail())
+        // node->expose();
+        return ans;
+    }
+
     const char *PairList::typeName() const
     {
         return staticTypeName();

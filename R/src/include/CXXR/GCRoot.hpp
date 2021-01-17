@@ -156,19 +156,9 @@ namespace CXXR
         static void visitRoots(GCNode::const_visitor *v);
 
     protected:
-        explicit GCRootBase(const GCNode *node)
-            : m_index(s_roots->size())
-        {
-            if (node)
-                node->expose();
-            s_roots->push_back(node);
-        }
+        GCRootBase(const GCNode *node, bool expose);
 
-        GCRootBase(const GCRootBase &source)
-            : m_index(s_roots->size())
-        {
-            s_roots->push_back((*s_roots)[source.m_index]);
-        }
+        GCRootBase(const GCRootBase &source);
 
         ~GCRootBase()
         {
@@ -282,8 +272,15 @@ namespace CXXR
          * @param node Pointer the node to be pointed to, and
          *          protected from the garbage collector, or a null
          *          pointer.
-         */
-        explicit GCRoot(T *node = nullptr) : GCRootBase(node) {}
+	 *
+	 * @param expose If true, and \a node is not a null pointer, a
+	 *          side effect of the constructor is to expose \a
+	 *          node to the garbage collector.  Beware that this
+	 *          exposes only this single node: its effect does not
+	 *          recurse to the node's descendants.
+	 */
+        explicit GCRoot(T *node = nullptr, bool expose = false)
+            : GCRootBase(node, expose) {}
 
         /** @brief Copy constructor.
          *

@@ -56,7 +56,8 @@ UncachedString::UncachedString(const std::string &str, cetype_t encoding)
 
 UncachedString *UncachedString::obtain(const std::string &str, cetype_t encoding)
 {
-    return new UncachedString(str, encoding);
+    UncachedString *ans = new UncachedString(str, encoding);
+    return ans;
 }
 
 void UncachedString::allocData(size_t sz)

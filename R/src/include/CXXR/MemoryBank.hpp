@@ -37,13 +37,13 @@
 #include <R_ext/Rallocators.h>
 
 #ifdef __GNUC__
-#  ifdef __i386__
-#    define HOT_FUNCTION __attribute__((hot, fastcall))
-#  else
-#    define HOT_FUNCTION __attribute__((hot))
-#  endif
+#ifdef __i386__
+#define HOT_FUNCTION __attribute__((hot, fastcall))
 #else
-#  define HOT_FUNCTION
+#define HOT_FUNCTION __attribute__((hot))
+#endif
+#else
+#define HOT_FUNCTION
 #endif
 
 #define ALLOC_STATS // TODO(joqvist): Make this a configure option?
@@ -97,17 +97,9 @@ namespace CXXR
 		class SchwarzCtr
 		{
 		public:
-			SchwarzCtr()
-			{
-				if (!s_count++)
-					MemoryBank::initialize();
-			}
+			SchwarzCtr();
 
-			~SchwarzCtr()
-			{
-				if (!--s_count)
-					MemoryBank::cleanup();
-			}
+			~SchwarzCtr();
 
 		private:
 			static unsigned int s_count;

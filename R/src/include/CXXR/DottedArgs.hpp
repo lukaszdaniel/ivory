@@ -58,21 +58,6 @@ namespace CXXR
         {
         }
 
-        /** @brief Create an expression of a specified length.
-         *
-         * This constructor creates an Expression with a specified number
-         * of elements.  On creation, each element has null 'car' and
-         * 'tag'.
-         *
-         * @param sz Number of elements required in the list.  Must be
-         *           strictly positive; the constructor throws
-         *           std::out_of_range if \a sz is zero.
-         */
-        explicit DottedArgs(size_t sz)
-            : ConsCell(DOTSXP, sz)
-        {
-        }
-
         /** @brief The name by which this type is known in R.
          *
          * @return the name by which this type is known in R.

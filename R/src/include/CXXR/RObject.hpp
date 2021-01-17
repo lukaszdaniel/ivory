@@ -251,7 +251,7 @@ constexpr int REFCNTMAX = ((1 << NAMED_BITS) - 1);
 #endif
 namespace CXXR
 {
-
+    class PairList;
     /** @brief Replacement for CR's SEXPREC.
      *
      * This class is the rough equivalent within CXXR of the SEXPREC
@@ -285,7 +285,7 @@ namespace CXXR
         bool m_spare; /* used on closures and when REFCNT is defined */
         unsigned int m_named : NAMED_BITS;
         unsigned int m_extra : 29 - NAMED_BITS; /* used for immediate bindings */
-        RObject *m_attrib;
+        PairList *m_attrib;
 
     public:
         /**
@@ -310,7 +310,21 @@ namespace CXXR
          *
          * @return Pointer to the attributes of this object.
          */
-        const RObject *attributes() const { return m_attrib; }
+        PairList *attributes() { return m_attrib; }
+
+        /** @brief Get object attributes (const variant).
+         *
+         * @return Pointer to the attributes of this object.
+         */
+        const PairList *attributes() const { return m_attrib; }
+
+        /** @brief Replace the attributes of an object.
+         *
+         * @param new_attributes Pointer to the start of the new list
+         *          of attributes.  May be a null pointer, in which
+         *          case all attributes are removed.
+         */
+        void setAttributes(PairList *new_attributes);
 
         // Virtual function of GCNode:
         void visitChildren(const_visitor *v) const override;
