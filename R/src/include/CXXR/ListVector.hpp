@@ -33,7 +33,7 @@
 #ifndef LISTVECTOR_HPP
 #define LISTVECTOR_HPP
 
-#include <CXXR/EdgeVector.hpp>
+#include <CXXR/RObjectVector.hpp>
 #include <CXXR/SEXP_downcast.hpp>
 
 namespace CXXR
@@ -42,14 +42,14 @@ namespace CXXR
 
     // Template specialization:
     template <>
-    inline const char *EdgeVector<RObject *, VECSXP>::staticTypeName()
+    inline const char *RObjectVector<RObject, VECSXP>::staticTypeName()
     {
         return "list";
     }
 
-    /** @brief Vector of GCEdge<RObject*>.
+    /** @brief General vector of RObject.
      */
-    class ListVector : public EdgeVector<RObject *, VECSXP>
+    class ListVector : public RObjectVector<RObject, VECSXP>
     {
     public:
         /** @brief Create a ListVector.
@@ -59,7 +59,7 @@ namespace CXXR
          *          permissible.
          */
         explicit ListVector(R_xlen_t sz)
-            : EdgeVector<RObject *, VECSXP>(sz)
+            : RObjectVector<RObject, VECSXP>(sz)
         {
         }
 
@@ -68,7 +68,7 @@ namespace CXXR
          * @param ev The ExpressionVector on which the constructed
          *          ListVector is to be modelled.
          */
-        explicit ListVector(const ExpressionVector &ev);
+        explicit ListVector(ExpressionVector &ev);
 
     private:
         // Declared private to ensure that ListVectors are

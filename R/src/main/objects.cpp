@@ -1741,11 +1741,12 @@ SEXP R_do_new_object(SEXP class_def)
 	TYPEOF(value) == EXTPTRSXP);
     if((TYPEOF(value) == S4SXP || getAttrib(e, R_PackageSymbol) != R_NilValue) &&
        !xDataType)
-    {
-	setAttrib(value, R_ClassSymbol, e);
-	SET_S4_OBJECT(value);
-    }
-    UNPROTECT(2); /* value, e */
+	{
+		GCRoot<> valrt(value);
+		setAttrib(value, R_ClassSymbol, e);
+		SET_S4_OBJECT(value);
+	}
+	UNPROTECT(2); /* value, e */
     vmaxset(vmax);
     return value;
 }

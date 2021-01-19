@@ -101,19 +101,19 @@ namespace CXXR
       void setEnvironment(Environment *new_env)
       {
          m_environment = new_env;
-         devolveAge(m_environment);
+         propagateAge(m_environment);
       }
 
       void setFormalArgs(PairList *formal_args)
       {
          m_formals = formal_args;
-         devolveAge(m_formals);
+         propagateAge(m_formals);
       }
 
       void setBody(RObject *body)
       {
          m_body = body;
-         devolveAge(m_body);
+         propagateAge(m_body);
       }
 
       /** @brief The name by which this type is known in R.

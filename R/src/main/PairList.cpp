@@ -56,16 +56,12 @@ namespace CXXR
         try
         {
             while (sz--)
-                ans = new PairList(nullptr, ans, nullptr);
+                ans = construct(nullptr, ans);
         }
         catch (...)
         {
-            for (PairList *node = ans; node; node = node->tail())
-                node->expose();
             throw;
         }
-        // for (PairList *node = ans; node; node = node->tail())
-        // node->expose();
         return ans;
     }
 

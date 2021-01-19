@@ -1767,7 +1767,8 @@ HIDDEN SEXP do_strtoi(SEXP call, SEXP op, SEXP args, SEXP env)
 /* creates a new STRSXP which is a suffix of string, starting
    with given index; the result is returned unprotected  */
 
-HIDDEN SEXP Rf_stringSuffix(SEXP string, int fromIndex)
+/*HIDDEN*/
+SEXP Rf_stringSuffix(SEXP string, int fromIndex)
 {
 
 	int origLen = LENGTH(string);

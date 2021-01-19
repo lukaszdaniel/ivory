@@ -83,8 +83,8 @@ namespace CXXR
          *
          * @return Pointer to newly created PairList element.
          */
-        template <class T>
-        static T *cons(RObject *cr, PairList *tl = nullptr)
+        template <class T = PairList>
+        static T *construct(RObject *cr, PairList *tl = nullptr, RObject *tg = nullptr)
         {
             s_cons_car = cr;
             s_cons_cdr = tl;
@@ -92,7 +92,7 @@ namespace CXXR
                 INCREMENT_REFCNT(cr);
             if (tl)
                 INCREMENT_REFCNT(tl);
-            T *ans = new T(cr, tl);
+            T *ans = new T(cr, tl, tg);
             s_cons_cdr = nullptr;
             s_cons_car = nullptr;
             return ans;
@@ -127,7 +127,7 @@ namespace CXXR
         ~PairList() {}
 
     private:
-        // Permanent GCRoots used to implement cons() without pushing
+        // Permanent GCRoots used to implement construct() without pushing
         // and popping:
         static GCRoot<> s_cons_car;
         static GCRoot<PairList> s_cons_cdr;
@@ -140,13 +140,13 @@ namespace CXXR
     inline void ConsCell::setTail(PairList *tl)
     {
         m_tail = tl;
-        devolveAge(m_tail);
+        propagateAge(m_tail);
     }
 
     template <class T = PairList>
     T *CXXR_cons(SEXP car, SEXP cdr)
     {
-        return PairList::cons<T>(car, SEXP_downcast<PairList *>(cdr));
+        return PairList::construct<T>(car, SEXP_downcast<PairList *>(cdr));
     }
 } // namespace CXXR
 

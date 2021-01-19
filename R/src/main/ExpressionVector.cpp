@@ -43,11 +43,11 @@ namespace CXXR
         const auto &XVECTOR_ELTptr = XVECTOR_ELT;
     } // namespace ForceNonInline
 
-    ExpressionVector::ExpressionVector(const ListVector &lv)
-        : EdgeVector<RObject *, EXPRSXP>(lv.size())
+    ExpressionVector::ExpressionVector(ListVector &lv)
+        : RObjectVector<RObject, EXPRSXP>(lv.size())
     {
         // The following results in unnecessary invocations of
-        // devolveAge() on the nodes pointed to.
+        // propagateAge() on the nodes pointed to.
         for (R_xlen_t i = 0; i < size(); ++i)
             (*this)[i] = lv[i];
         SEXP names = Rf_getAttrib(const_cast<ListVector *>(&lv), R_NamesSymbol);

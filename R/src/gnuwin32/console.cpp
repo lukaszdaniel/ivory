@@ -1799,7 +1799,7 @@ int consolereads(control c, const char *prompt, char *buf, int len,
 		cur_pos = max_pos;
 		break;
 	    case CHARRIGHT:
-		if(cur_pos < max_pos) cur_pos ++;
+		if(cur_pos < max_pos) cur_pos++;
 		break;
 	    case KILLRESTOFLINE:
 		max_pos = cur_pos;

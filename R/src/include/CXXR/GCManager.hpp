@@ -169,7 +169,7 @@ namespace CXXR
 		 *
 		 * @return The previous value of the output stream pointer.
 		 */
-		static std::ostream *setReporting(std::ostream *os = 0);
+		static std::ostream *setReporting(std::ostream *os = nullptr);
 
 		/** @brief Turn garbage collection torture on or off.
 		 *

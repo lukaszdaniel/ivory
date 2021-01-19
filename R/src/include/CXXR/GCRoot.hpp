@@ -59,7 +59,7 @@ namespace CXXR
      * GCRoot, of which this is the untemplated base class.
      *
      * However, GCRoot is not usable by C code, which should continue
-     * to use PROTECT(), UNPROTECT() etc. as in CR.
+     * to use ::PROTECT(), ::UNPROTECT() etc. as in CR.
      * However, these functions have been reimplemented to manipulate
      * a C pointer protection stack (as we shall call it, despite the
      * fact that it's implemented in C++) encapsulated as a static
@@ -272,13 +272,11 @@ namespace CXXR
          * @param node Pointer the node to be pointed to, and
          *          protected from the garbage collector, or a null
          *          pointer.
-	 *
-	 * @param expose If true, and \a node is not a null pointer, a
-	 *          side effect of the constructor is to expose \a
-	 *          node to the garbage collector.  Beware that this
-	 *          exposes only this single node: its effect does not
-	 *          recurse to the node's descendants.
-	 */
+         *
+         * @param expose If true, and \a node is not a null pointer, a
+         *          side effect of the constructor is to expose \a
+         *          node and its descendants to the garbage collector.
+         */
         explicit GCRoot(T *node = nullptr, bool expose = false)
             : GCRootBase(node, expose) {}
 

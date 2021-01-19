@@ -1401,7 +1401,7 @@ size_t R::utf8towcs(wchar_t *wc, const char * const s, size_t n)
     return (size_t) res;
 }
 
-size_t utf8towcs4(R_wchar_t *wc, const char *s, size_t n)
+size_t Rf_utf8towcs4(R_wchar_t *wc, const char *s, size_t n)
 {
     ssize_t m, res = 0;
     const char *t;
@@ -1414,8 +1414,8 @@ size_t utf8towcs4(R_wchar_t *wc, const char *s, size_t n)
 	    if (m < 0) error(_("invalid input '%s' in 'utf8towcs32'"), s);
 	    if (m == 0) break;
 	    if (IS_HIGH_SURROGATE(*p)) *p = utf8toucs32(*p, s);
-	    res ++;
-	    if (res >= n) break;
+	    res++;
+	    if (size_t(res) >= n) break;
 	}
     else
 	for(t = s; ; t += m) {
@@ -1423,7 +1423,7 @@ size_t utf8towcs4(R_wchar_t *wc, const char *s, size_t n)
 	    m  = (ssize_t) utf8toucs(&local, t);
 	    if (m < 0) error(_("invalid input '%s' in 'utf8towcs32'"), s);
 	    if (m == 0) break;
-	    res ++;
+	    res++;
 	}
     return (size_t) res;
 }

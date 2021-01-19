@@ -331,12 +331,14 @@ HIDDEN SEXP ALTREP_UNSERIALIZE_EX(SEXP info, SEXP state, SEXP attr, int objf, in
     return val;
 }
 
-/*HIDDEN*/ R_xlen_t ALTREP_LENGTH(SEXP x)
+/*HIDDEN*/
+R_xlen_t ALTREP_LENGTH(SEXP x)
 {
     return ALTREP_DISPATCH(Length, x);
 }
 
-/*HIDDEN*/ R_xlen_t ALTREP_TRUELENGTH(SEXP x) { return 0; }
+/*HIDDEN*/
+R_xlen_t ALTREP_TRUELENGTH(SEXP x) { return 0; }
 
 
 /*
@@ -504,7 +506,8 @@ R_xlen_t COMPLEX_GET_REGION(SEXP sx, R_xlen_t i, R_xlen_t n, Rcomplex *buf)
         return ALTCOMPLEX_DISPATCH(Get_region, sx, i, n, buf);
 }
 
-/*HIDDEN*/ SEXP ALTSTRING_ELT(SEXP x, R_xlen_t i)
+/*HIDDEN*/
+SEXP ALTSTRING_ELT(SEXP x, R_xlen_t i)
 {
     SEXP val = nullptr;
 

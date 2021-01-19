@@ -1226,7 +1226,8 @@ void mainloop(void)
 /*this functionality now appears in 3
   places-jump_to_toplevel/profile/here */
 
-HIDDEN void Rf_printwhere(void)
+/*HIDDEN*/
+void Rf_printwhere(void)
 {
 	RCNTXT *cptr;
 	int lct = 1;

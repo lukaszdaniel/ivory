@@ -91,7 +91,7 @@ namespace CXXR
 		void setTag(RObject *tg)
 		{
 			m_tag = tg;
-			devolveAge(m_tag);
+			propagateAge(m_tag);
 		}
 
 		static RObject *tag(RObject *x);

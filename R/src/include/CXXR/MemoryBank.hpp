@@ -187,7 +187,7 @@ namespace CXXR
 		 *         The function should return true iff a release of memory 
 		 *         took place.
 		 */
-		static void setGCCuer(bool (*cue_gc)(size_t, bool) = 0)
+		static void setGCCuer(bool (*cue_gc)(size_t, bool) = nullptr)
 		{
 			s_cue_gc = cue_gc;
 		}
@@ -210,7 +210,7 @@ namespace CXXR
 		 * is defined, e.g. by specifying option
 		 * --enable-memory-profiling to the configure script.
 		 */
-		static void setMonitor(void (*monitor)(size_t) = 0,
+		static void setMonitor(void (*monitor)(size_t) = nullptr,
 							   size_t threshold = 0);
 #endif
 	private:

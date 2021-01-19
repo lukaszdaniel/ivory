@@ -36,7 +36,7 @@
 #include <CXXR/FixedVector.hpp>
 #include <CXXR/GCEdge.hpp>
 #include <CXXR/String.hpp>
-#include <CXXR/EdgeVector.hpp>
+#include <CXXR/RObjectVector.hpp>
 #include <CXXR/SEXP_downcast.hpp>
 
 namespace CXXR
@@ -50,7 +50,7 @@ namespace CXXR
 
     // Template specialization:
     template <>
-    inline const char *EdgeVector<String *, STRSXP>::staticTypeName()
+    inline const char *RObjectVector<String, STRSXP>::staticTypeName()
     {
         return "character";
     }
@@ -58,7 +58,7 @@ namespace CXXR
     /** @brief Vector of strings.
      * @todo Replace the type parameter RObject* with something stricter.
      */
-    class StringVector : public CXXR::EdgeVector<String *, STRSXP>
+    class StringVector : public CXXR::RObjectVector<String, STRSXP>
     {
     public:
         /** @brief Create a StringVector.
@@ -67,7 +67,7 @@ namespace CXXR
          *          permissible.
          */
         explicit StringVector(size_t sz)
-            : EdgeVector<String *, STRSXP>(sz, const_cast<String *>(String::blank()))
+            : RObjectVector<String, STRSXP>(sz, const_cast<String *>(String::blank()))
         {
         }
 

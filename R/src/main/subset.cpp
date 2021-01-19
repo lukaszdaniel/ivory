@@ -107,7 +107,8 @@ inline static SEXP VECTOR_ELT_FIX_NAMED(SEXP y, R_xlen_t i)
 		}                                        \
 	} while (0)
 
-HIDDEN SEXP Rf_ExtractSubset(SEXP x, SEXP indx, SEXP call)
+/*HIDDEN*/
+SEXP Rf_ExtractSubset(SEXP x, SEXP indx, SEXP call)
 {
     if (x == R_NilValue)
 	return x;
@@ -907,11 +908,9 @@ HIDDEN SEXP do_subset_dflt(SEXP call, SEXP op, SEXP args, SEXP rho)
 		if (len > 0)
 		{
 			GCRoot<PairList> tl(PairList::makeList(len - 1));
-			ans = new Expression(0, tl);
+			ans = new Expression(nullptr, tl);
 		}
 		PROTECT(ans);
-		// if (ans)
-		// 	ans->expose();
 	}
 	if ( LENGTH(ax) > 0 ) {
 	    for(px = ans, i = 0 ; px != R_NilValue ; px = CDR(px))
@@ -1217,7 +1216,8 @@ static enum pmatch pstrmatch(SEXP target, SEXP input, size_t slen)
     }
 }
 
-HIDDEN SEXP Rf_fixSubset3Args(SEXP call, SEXP args, SEXP env, SEXP* syminp)
+/*HIDDEN*/
+SEXP Rf_fixSubset3Args(SEXP call, SEXP args, SEXP env, SEXP* syminp)
 {
     SEXP input, nlist;
 

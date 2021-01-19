@@ -209,7 +209,7 @@ namespace CXXR
         void setInternalFunction(const BuiltInFunction *fun)
         {
             m_internalfunc = fun;
-            devolveAge(m_internalfunc);
+            propagateAge(m_internalfunc);
         }
 
         /** @brief Set value.
@@ -221,7 +221,7 @@ namespace CXXR
         void setValue(RObject *val)
         {
             m_value = val;
-            devolveAge(m_value);
+            propagateAge(m_value);
         }
 
         /** @brief The name by which this type is known in R.

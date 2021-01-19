@@ -7349,7 +7349,7 @@ static SEXP bcEval(SEXP body, SEXP rho, bool useCache)
 	R_bcstack_t *s = R_BCNodeStackTop - 1;
 	int tag = s->tag;
 
-	if ((unsigned int) tag == BNDCELL_TAG_WR(loc))
+	if (tag == BNDCELL_TAG_WR(loc))
 	    switch (tag) {
 	    case REALSXP: SET_BNDCELL_DVAL(loc, s->u.dval); NEXT();
 	    case INTSXP: SET_BNDCELL_IVAL(loc, s->u.ival); NEXT();

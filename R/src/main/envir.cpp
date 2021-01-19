@@ -1115,7 +1115,7 @@ SEXP Rf_findVarInFrame(SEXP rho, SEXP symbol)
  * represented by a pairlist.
  */
 
-HIDDEN
+/*HIDDEN*/
 void Rf_readS3VarsFromFrame(SEXP rho,
     SEXP *dotGeneric, SEXP *dotGroup, SEXP *dotClass, SEXP *dotMethod,
     SEXP *dotGenericCallEnv, SEXP *dotGenericDefEnv) {
@@ -1516,7 +1516,7 @@ SEXP RCNTXT::dynamicfindVar(SEXP symbol, RCNTXT *cptr)
   This could call findVar1.  NB: they behave differently on failure.
 */
 
-HIDDEN
+/*HIDDEN*/
 SEXP Rf_findFun3(SEXP symbol, SEXP rho, SEXP call)
 {
     SEXP vl;
@@ -1654,7 +1654,7 @@ void Rf_defineVar(SEXP symbol, SEXP value, SEXP rho)
  * not have duplicit variables.
  */
 
-HIDDEN
+/*HIDDEN*/
 void Rf_addMissingVarsToNewEnv(SEXP env, SEXP addVars)
 {
     if (addVars == R_NilValue) return;
@@ -4080,7 +4080,8 @@ HIDDEN SEXP do_topenv(SEXP call, SEXP op, SEXP args, SEXP rho) {
     return topenv(target, envir);
 }
 
-HIDDEN Rboolean Rf_isUnmodifiedSpecSym(SEXP sym, SEXP env) {
+/*HIDDEN*/
+Rboolean Rf_isUnmodifiedSpecSym(SEXP sym, SEXP env) {
     if (!IS_SPECIAL_SYMBOL(sym))
 	return FALSE;
     for(;env != R_EmptyEnv; env = ENCLOS(env))
@@ -4143,7 +4144,8 @@ void findFunctionForBodyInNamespace(SEXP body, SEXP nsenv, SEXP nsname) {
  * 
  * @note For debugging.
  * */
-HIDDEN void Rf_findFunctionForBody(SEXP body) {
+/*HIDDEN*/
+void Rf_findFunctionForBody(SEXP body) {
     SEXP nstable = HASHTAB(R_NamespaceRegistry);
     CHECK_HASH_TABLE(nstable);
     int n = length(nstable);

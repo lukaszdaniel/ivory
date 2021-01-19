@@ -48,7 +48,7 @@ namespace CXXR
     void Promise::setValue(RObject *val)
     {
         m_value = val;
-        devolveAge(m_value);
+        propagateAge(m_value);
         if (val != Symbol::unboundValue())
             m_environment = nullptr;
     }
@@ -56,13 +56,13 @@ namespace CXXR
     void Promise::setEnvironment(Environment *val)
     {
         m_environment = val;
-        devolveAge(m_environment);
+        propagateAge(m_environment);
     }
 
     void Promise::setValueGenerator(RObject *val)
     {
         m_valgen = val;
-        devolveAge(m_valgen);
+        propagateAge(m_valgen);
     }
 
     const char *Promise::typeName() const

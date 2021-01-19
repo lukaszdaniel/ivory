@@ -96,7 +96,7 @@ namespace CXXR
 		 *         superblock.
 		 */
 		CellHeap(size_t dbls_per_cell, size_t cells_per_superblock,
-				 void (*out_of_cells)(CellHeap *) = 0)
+				 void (*out_of_cells)(CellHeap *) = nullptr)
 			: m_cellsize(dbls_per_cell * sizeof(double)),
 			  m_cells_per_superblock(cells_per_superblock),
 			  m_superblocksize(m_cellsize * cells_per_superblock),

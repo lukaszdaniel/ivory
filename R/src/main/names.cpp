@@ -1047,7 +1047,7 @@ namespace
 /* also used in eval.cpp */
 HIDDEN SEXP R::R_Primitive(const char *primname)
 {
-    for (int i = 0; i < R_FunTab.size(); i++)
+    for (size_t i = 0; i < R_FunTab.size(); i++)
         if (streql(primname, R_FunTab[i].name()))
         { /* all names are ASCII */
             if ((R_FunTab[i].evalargs() % 100) / 10)
@@ -1074,7 +1074,7 @@ HIDDEN SEXP do_primitive(SEXP call, SEXP op, SEXP args, SEXP env)
 
 HIDDEN int R::StrToInternal(const char *s)
 {
-    for (int i = 0; i < R_FunTab.size(); i++)
+    for (size_t i = 0; i < R_FunTab.size(); i++)
         if (streql(s, R_FunTab[i].name()))
             return i;
     return NA_INTEGER;
@@ -1181,7 +1181,8 @@ static void initializeDDVALSymbols()
     }
 }
 
-HIDDEN SEXP Rf_installDDVAL(int n)
+/*HIDDEN*/
+SEXP Rf_installDDVAL(int n)
 {
     if (n < N_DDVAL_SYMBOLS)
         return DDVALSymbols[n];
@@ -1212,7 +1213,7 @@ HIDDEN void R::InitNames()
     SymbolShortcuts();
 
     /*  Builtin Functions */
-    for (int i = 0; i < R_FunTab.size(); i++) installFunTab(i);
+    for (size_t i = 0; i < R_FunTab.size(); i++) installFunTab(i);
 
     /* Special base functions */
     for (const auto &sname : Spec_name)
@@ -1254,7 +1255,7 @@ SEXP Rf_install(const char *name)
 /* This function is equivalent to install(CHAR(charSXP)), but faster.
    Like the equivalent code pattern, it discards the encoding information,
    hence in almost all cases installTrChar should be used, instead. */
-HIDDEN
+/*HIDDEN*/
 SEXP Rf_installNoTrChar(SEXP charSXP)
 {
     SEXP sym;
@@ -1296,7 +1297,7 @@ SEXP Rf_installNoTrChar(SEXP charSXP)
 }
 
 constexpr int maxLength = 512;
-HIDDEN
+/*HIDDEN*/
 SEXP Rf_installS3Signature(const char *className, const char *methodName) {
 
     const char *src;

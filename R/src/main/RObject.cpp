@@ -89,7 +89,7 @@ namespace CXXR
     void RObject::setAttributes(PairList *new_attributes)
     {
         m_attrib = new_attributes;
-        devolveAge(m_attrib);
+        propagateAge(m_attrib);
     }
 
     /**

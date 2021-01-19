@@ -2180,13 +2180,13 @@ static bool initwin(DEstruct DE, const char *title) /* TRUE = Error */
        dimensions as above */
 
     /* font size consideration */
-    for(i = 0; i < menu_label.size(); i++)
+    for(size_t i = 0; i < menu_label.size(); i++)
 	twidth = (twidth<textwidth(DE, menu_label[i],(int) strlen(menu_label[i]))) ?
 	    textwidth(DE, menu_label[i],(int) strlen(menu_label[i])) : twidth;
 
     menuwindow = XCreateSimpleWindow(iodisplay, root, 0, 0, twidth,
 				     4 * DE->box_h, 2, ioblack, iowhite);
-    for (i = 0; i < 4; i++) {
+    for (int i = 0; i < 4; i++) {
 	menupanes[i] = XCreateSimpleWindow(iodisplay, menuwindow, 0,
 					   DE->box_h * i, twidth, DE->box_h,
 					   1, ioblack, iowhite);

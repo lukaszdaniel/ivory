@@ -447,7 +447,7 @@ namespace
 
     inline void CHECK_OLD_TO_NEW(RObject *from_old, RObject *to_new)
     {
-        from_old->devolveAge(to_new);
+        from_old->propagateAge(to_new);
     }
 
 } // namespace
@@ -628,6 +628,8 @@ void GCNode::gc(unsigned int num_old_gens_to_collect)
     GCNode::check();
     // std::cerr << "Precheck completed OK\n";
 
+    propagateAges();
+
     GCNode::Marker marker(num_old_gens_to_collect);
     GCRootBase::visitRoots(&marker);
     MARK_THRU(&marker, R_BlankScalarString);	        /* Builtin constants */
@@ -699,51 +701,7 @@ void GCNode::gc(unsigned int num_old_gens_to_collect)
     /* identify weakly reachable nodes */
     WeakRef::markThru(num_old_gens_to_collect);
 
-    // Sweep.  gen must be signed here or the loop won't terminate!
-    for (int gen = num_old_gens_to_collect; gen >= 0; --gen)
-    {
-        if (gen == int(s_num_generations - 1))
-        {
-            // Delete unmarked nodes and unmark the rest:
-            const GCNode *node = s_genpeg[gen]->next();
-            while (node != s_genpeg[gen])
-            {
-                const GCNode *next = node->next();
-                if (!node->isMarked())
-                {
-                    delete node;
-                }
-                else
-                {
-                    node->m_marked = false;
-                }
-                node = next;
-            }
-        }
-        else
-        {
-            // Delete unmarked nodes, unmark the rest and promote them
-            // to the next generation:
-            const GCNode *node = s_genpeg[gen]->next();
-            while (node != s_genpeg[gen])
-            {
-                const GCNode *next = node->next();
-                if (!node->isMarked())
-                {
-                    delete node;
-                }
-                else
-                {
-                    node->m_marked = false;
-                    ++node->m_gcgen;
-                }
-                node = next;
-            }
-            s_genpeg[gen + 1]->splice(s_genpeg[gen]->next(), s_genpeg[gen]);
-            s_gencount[gen + 1] += s_gencount[gen];
-            s_gencount[gen] = 0;
-        }
-    }
+    sweep(num_old_gens_to_collect);
 
     // std::cerr << "Finishing garbage collection\n";
     GCNode::check();
@@ -1093,7 +1051,7 @@ SEXP Rf_allocSExp(SEXPTYPE t)
    unless a GC will actually occur. */
 SEXP Rf_cons(SEXP car, SEXP cdr)
 {
-    return PairList::cons<PairList>(CHK(car), SEXP_downcast<PairList *>(CHK(cdr)));
+    return PairList::construct<PairList>(CHK(car), SEXP_downcast<PairList *>(CHK(cdr)));
 }
 
 HIDDEN SEXP CONS_NR(SEXP car, SEXP cdr)
@@ -1420,8 +1378,8 @@ HIDDEN SEXP do_memoryprofile(SEXP call, SEXP op, SEXP args, SEXP env)
     BEGIN_SUSPEND_INTERRUPTS {
 
       for (unsigned int gen = 0; gen < GCNode::numGenerations(); ++gen) {
-	  for (const GCNode *s = GCNode::s_genpeg[gen]->next();
-	       s != GCNode::s_genpeg[gen];
+	  for (const GCNode *s = GCNode::s_generation[gen]->next();
+	       s != GCNode::s_generation[gen];
 	       s = s->next()) {
                if (const RObject* ob = SEXP_downcast<const RObject*>(s, false)) {
 	      tmp = ob->sexptype();
@@ -1939,7 +1897,7 @@ SEXP VECTOR_ELT(SEXP x, R_xlen_t i) {
         return XVECTOR_ELT(x, i);
     }
     // return CHK(LISTVECTOR_ELT(CHK(x), i));
-    const ListVector *lv = CXXR::SEXP_downcast<CXXR::ListVector *>(CHK(x), false);
+    ListVector *lv = CXXR::SEXP_downcast<CXXR::ListVector *>(CHK(x), false);
     return CHK((*lv)[i]);
 }
 
@@ -1949,7 +1907,7 @@ SEXP XVECTOR_ELT(SEXP x, R_xlen_t i) {
 	error(_("'%s' function can only be applied to an expression, not a '%s'"), "XVECTOR_ELT()",
 	      type2char(TYPEOF(x)));
     // return CHK(EXPRVECTOR_ELT(CHK(x), i));
-    const ExpressionVector *ev = CXXR::SEXP_downcast<CXXR::ExpressionVector *>(CHK(x), false);
+    ExpressionVector *ev = CXXR::SEXP_downcast<CXXR::ExpressionVector *>(CHK(x), false);
     return CHK((*ev)[i]);
 }
 

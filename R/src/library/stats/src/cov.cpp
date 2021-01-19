@@ -442,7 +442,7 @@ static void cov_complete2(int n, int ncx, int ncy, double *x, double *y,
 		    if (ind[k] != 0)					\
 			for (n1 = 0 ; n1 < n ; n1++)			\
 			    if (ind[n1] != 0 &&	 xx[k] != xx[n1])	\
-				sum ++; /* = sign(. - .)^2 */		\
+				sum++; /* = sign(. - .)^2 */		\
 	    }								\
 	    _X_##m [i] = (double)SQRTL(sum);				\
 	}
@@ -530,7 +530,7 @@ static void cov_na_2(int n, int ncx, int ncy, double *x, double *y,
 		    for (k = 0 ; k < n ; k++)				\
 			for (n1 = 0 ; n1 < n ; n1++)			\
 			    if (xx[k] != xx[n1])			\
-				sum ++; /* = sign(. - .)^2 */		\
+				sum++; /* = sign(. - .)^2 */		\
 		}							\
 		_X_##m [i] = (double) SQRTL(sum);			\
 	    }

@@ -60,8 +60,8 @@ WeakRef::WeakRef(RObject *key, RObject *value, RObject *R_finalizer,
 	if (m_key)
 	{
 		// Force old-to-new checks:
-		m_key->devolveAge(m_value);
-		m_key->devolveAge(m_Rfinalizer);
+		m_key->propagateAge(m_value);
+		m_key->propagateAge(m_Rfinalizer);
 	}
 
 	getLive()->push_back(this);
@@ -90,7 +90,7 @@ WeakRef::WeakRef(RObject *key, RObject *value, R_CFinalizer_t C_finalizer,
 	if (m_key)
 	{
 		// Force old-to-new check:
-		m_key->devolveAge(m_value);
+		m_key->propagateAge(m_value);
 	}
 
 	getLive()->push_back(this);

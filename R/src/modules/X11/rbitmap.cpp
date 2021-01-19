@@ -174,7 +174,7 @@ int R_SaveAsPng(void  *d, int width, int height,
 		    for (r = ncols; r > low; r--)
 			palette[r] = palette[r-1] ;
 		    palette[low] = col;
-		    ncols ++;
+		    ncols++;
 		}
 	    }
 	}
@@ -621,7 +621,7 @@ int R_SaveAsBmp(void  *d, int width, int height,
 		    for (r = ncols; r > low; r--)
 			palette[r] = palette[r-1] ;
 		    palette[low] = col;
-		    ncols ++;
+		    ncols++;
 		}
 	    }
 	}
