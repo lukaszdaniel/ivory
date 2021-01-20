@@ -19,6 +19,7 @@
 
 #include <iostream>
 #include <R_ext/Boolean.h>
+#include <Rinternals.h>
 #include <CXXR/RObject.hpp>
 #include <CXXR/Environment.hpp>
 #include <CXXR/IntVector.hpp>

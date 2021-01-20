@@ -30,6 +30,7 @@
  */
 
 #include <CXXR/GCManager.hpp>
+#include <Rinternals.h>
 #include <CXXR/RTypes.hpp>
 #include <cmath>
 #include <iomanip>

@@ -176,42 +176,44 @@ Rboolean Rf_isOrdered(SEXP s)
 	return (Rboolean)(TYPEOF(s) == INTSXP && inherits(s, "factor") && inherits(s, "ordered"));
 }
 
-namespace {
-constexpr struct {
-    const char * const str;
-    const SEXPTYPE type;
-}
-TypeTable[] = {
-    { "NULL",		NILSXP	   },  /* real types */
-    { "symbol",		SYMSXP	   },
-    { "pairlist",	LISTSXP	   },
-    { "closure",	CLOSXP	   },
-    { "environment",	ENVSXP	   },
-    { "promise",	PROMSXP	   },
-    { "language",	LANGSXP	   },
-    { "special",	SPECIALSXP },
-    { "builtin",	BUILTINSXP },
-    { "char",		CHARSXP	   },
-    { "logical",	LGLSXP	   },
-    { "integer",	INTSXP	   },
-    { "double",		REALSXP	   }, /*-  "real", for R <= 0.61.x */
-    { "complex",	CPLXSXP	   },
-    { "character",	STRSXP	   },
-    { "...",		DOTSXP	   },
-    { "any",		ANYSXP	   },
-    { "expression",	EXPRSXP	   },
-    { "list",		VECSXP	   },
-    { "externalptr",	EXTPTRSXP  },
-    { "bytecode",	BCODESXP   },
-    { "weakref",	WEAKREFSXP },
-    { "raw",		RAWSXP },
-    { "S4",		S4SXP },
-    /* aliases : */
-    { "numeric",	REALSXP	   },
-    { "name",		SYMSXP	   },
+namespace
+{
+	constexpr struct
+	{
+		const char *const str;
+		const SEXPTYPE type;
+	}
 
-    { (char *)nullptr,	(SEXPTYPE) -1	   }
-};
+	TypeTable[] = {
+		{"NULL", NILSXP}, /* real types */
+		{"symbol", SYMSXP},
+		{"pairlist", LISTSXP},
+		{"closure", CLOSXP},
+		{"environment", ENVSXP},
+		{"promise", PROMSXP},
+		{"language", LANGSXP},
+		{"special", SPECIALSXP},
+		{"builtin", BUILTINSXP},
+		{"char", CHARSXP},
+		{"logical", LGLSXP},
+		{"integer", INTSXP},
+		{"double", REALSXP}, /*-  "real", for R <= 0.61.x */
+		{"complex", CPLXSXP},
+		{"character", STRSXP},
+		{"...", DOTSXP},
+		{"any", ANYSXP},
+		{"expression", EXPRSXP},
+		{"list", VECSXP},
+		{"externalptr", EXTPTRSXP},
+		{"bytecode", BCODESXP},
+		{"weakref", WEAKREFSXP},
+		{"raw", RAWSXP},
+		{"S4", S4SXP},
+		/* aliases : */
+		{"numeric", REALSXP},
+		{"name", SYMSXP},
+
+		{(char *)nullptr, (SEXPTYPE)-1}};
 } // namespace
 
 SEXPTYPE Rf_str2type(const char *const s)
@@ -227,13 +229,15 @@ SEXPTYPE Rf_str2type(const char *const s)
 
 namespace
 {
-	struct
+	struct type2Table
 	{
 		const char *cstrName;
 		SEXP rcharName;
 		SEXP rstrName;
 		SEXP rsymName;
-	} Type2Table[MAX_NUM_BASIC_SEXPTYPE];
+	};
+
+	std::array<type2Table, MAX_NUM_BASIC_SEXPTYPE> Type2Table;
 
 	int findTypeInTypeTable(const SEXPTYPE t)
 	{
