@@ -1036,7 +1036,7 @@ namespace
         "if", "while", "repeat", "for", "break", "next", "return", "function",
         "(", "{",
         "+", "-", "*", "/", "^", "%%", "%/%", "%*%", ":", "::", ":::", "?", "|>",
-        "~", "@",
+        "~", "@", "=>",
         "==", "!=", "<", ">", "<=", ">=",
         "&", "|", "&&", "||", "!",
         "<-", "<<-", "=",
@@ -1162,10 +1162,11 @@ static void SymbolShortcuts(void)
     R_dot_packageName = install(".packageName");
 }
 
-
-constexpr int N_DDVAL_SYMBOLS = 65;
-
-static SEXP DDVALSymbols[N_DDVAL_SYMBOLS];
+namespace
+{
+    constexpr int N_DDVAL_SYMBOLS = 65;
+    std::array<SEXP, N_DDVAL_SYMBOLS> DDVALSymbols;
+} // namespace
 
 static SEXP createDDVALSymbol(int n)
 {

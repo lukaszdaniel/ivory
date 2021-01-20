@@ -45,6 +45,6 @@ matrix:
 script:
         - ${CXX_COMPILER} --version
         - cd R
-        - CC=${C_COMPILER} CXX=${CXX_COMPILER} ./configure --with-included-gettext --enable-R-profiling --enable-memory-profiling
+        - CC=${C_COMPILER} CXX=${CXX_COMPILER} ./configure --with-included-gettext --enable-R-profiling --enable-memory-profiling --enable-werror --with-recommended-packages=no
         - travis_wait 60 make
           #- travis_wait 60 make check

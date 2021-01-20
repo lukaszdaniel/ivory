@@ -1,6 +1,6 @@
 /*
  *  R : A Computer Language for Statistical Data Analysis
- *  Copyright (C) 1997--2020  The R Core Team
+ *  Copyright (C) 1997--2021  The R Core Team
  *  Copyright (C) 1995, 1996  Robert Gentleman and Ross Ihaka
  *
  *  This program is free software; you can redistribute it and/or modify
@@ -122,8 +122,6 @@ static bool isOneDimensionalArray(SEXP vec)
 HIDDEN SEXP getAttrib0(SEXP vec, SEXP name)
 {
     SEXP s;
-    int len, i, any;
-
     if (name == R_NamesSymbol) {
 	if(isOneDimensionalArray(vec)) {
 	    s = getAttrib(vec, R_DimNamesSymbol);
@@ -132,16 +130,18 @@ HIDDEN SEXP getAttrib0(SEXP vec, SEXP name)
 		return VECTOR_ELT(s, 0);
 	    }
 	}
-	if (isList(vec) || isLanguage(vec)) {
-	    len = length(vec);
+	if (isList(vec) || isLanguage(vec) || TYPEOF(vec) == DOTSXP) {
+	    int len = length(vec);
 	    PROTECT(s = allocVector(STRSXP, len));
-	    i = 0;
-	    any = 0;
+	    int i = 0;
+	    Rboolean any = FALSE;
 	    for ( ; vec != R_NilValue; vec = CDR(vec), i++) {
 		if (TAG(vec) == R_NilValue)
+		{
 		    SET_STRING_ELT(s, i, R_BlankString);
+		}
 		else if (isSymbol(TAG(vec))) {
-		    any = 1;
+		    any = TRUE;
 		    SET_STRING_ELT(s, i, PRINTNAME(TAG(vec)));
 		}
 		else
@@ -151,8 +151,8 @@ HIDDEN SEXP getAttrib0(SEXP vec, SEXP name)
 	    if (any) {
 		if (!isNull(s)) MARK_NOT_MUTABLE(s);
 		return (s);
-	    }
-	    return R_NilValue;
+	    } else
+		return R_NilValue;
 	}
     }
     for (auto s = ATTRIB(vec); s != R_NilValue; s = CDR(s))
@@ -175,7 +175,7 @@ SEXP Rf_getAttrib(SEXP vec, SEXP name)
 	error(_("cannot have attributes on a 'CHARSXP'"));
     /* pre-test to avoid expensive operations if clearly not needed -- LT */
     if (ATTRIB(vec) == R_NilValue &&
-	! (TYPEOF(vec) == LISTSXP || TYPEOF(vec) == LANGSXP))
+	! (TYPEOF(vec) == LISTSXP || TYPEOF(vec) == LANGSXP|| TYPEOF(vec) == DOTSXP))
 	return R_NilValue;
 
     if (isString(name)) name = installTrChar(STRING_ELT(name, 0));
@@ -591,7 +591,7 @@ HIDDEN SEXP do_classgets(SEXP call, SEXP op, SEXP args, SEXP env)
 	return CAR(args);
 }
 
-/* oldClass, primitive */
+// oldClass, primitive --  NB: class() |=> R_do_data_class() |=> R_data_class()
 HIDDEN SEXP do_class(SEXP call, SEXP op, SEXP args, SEXP env)
 {
 	checkArity(op, args);
@@ -1034,7 +1034,7 @@ HIDDEN SEXP do_names(SEXP call, SEXP op, SEXP args, SEXP env)
     ans = CAR(args);
     if (isEnvironment(ans) || isS4Environment(ans))
 	ans = R_lsInternal3(ans, TRUE, FALSE);
-    else if (isVector(ans) || isList(ans) || isLanguage(ans) || IS_S4_OBJECT(ans))
+    else if (isVector(ans) || isList(ans) || isLanguage(ans) || IS_S4_OBJECT(ans) || TYPEOF(ans) == DOTSXP)
 	ans = getAttrib(ans, R_NamesSymbol);
     else ans = R_NilValue;
     UNPROTECT(1);

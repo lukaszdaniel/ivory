@@ -969,6 +969,7 @@ LIBnn
 R_CONFIG_ARGS
 R_OSTYPE
 R_OS
+MAC_CPU
 R_PLATFORM
 host_os
 host_vendor
@@ -4930,7 +4931,7 @@ _ACEOF
 ## exclude some unsupported OSes
 case "${host_os}" in
    ## Darwin 1.3.1 was macOS 10.0, 1.4.1 was 10.1, 5 is 10.2 etc
-   ## with 19 being 10.15 (Catalina) and 20 11.0 (Big Sur)
+   ## with 19 being 10.15 (Catalina) and 20 being 11 (Big Sur)
    ## We no longer support < 10.6 (Snow Leopard, Darwin 10)
    ## https://en.wikipedia.org/wiki/Darwin_OS
    darwin1.*)
@@ -4946,6 +4947,22 @@ case "${host_os}" in
 esac
 
 R_PLATFORM="${host}"
+
+
+MAC_CPU=
+case "${host_os}" in
+  darwin*)
+    case "${host_cpu}" in
+       aarch64)
+       MAC_CPU="arm64"
+       ;;
+       *)
+       MAC_CPU="${host_cpu}"
+       ;;
+    esac
+
+    ;;
+esac
 
 R_OS="${host_os}"
 
@@ -26873,7 +26890,7 @@ _ACEOF
 # flags.
 r_save_CFLAGS=$CFLAGS
 CFLAGS="$CFLAGS $r_verb"
-(eval echo $as_me:26876: \"$ac_link\") >&5
+(eval echo $as_me:26893: \"$ac_link\") >&5
 r_c_v_output=`eval $ac_link 5>&1 2>&1 | grep -v 'Driving:'`
 echo "$r_c_v_output" >&5
 CFLAGS=$r_save_CFLAGS
@@ -26948,7 +26965,7 @@ _ACEOF
 # flags.
 r_save_CFLAGS=$CFLAGS
 CFLAGS="$CFLAGS $r_cv_prog_c_v"
-(eval echo $as_me:26951: \"$ac_link\") >&5
+(eval echo $as_me:26968: \"$ac_link\") >&5
 r_c_v_output=`eval $ac_link 5>&1 2>&1 | grep -v 'Driving:'`
 echo "$r_c_v_output" >&5
 CFLAGS=$r_save_CFLAGS
@@ -45817,13 +45834,24 @@ $as_echo "$r_cv_has_pangocairo" >&6; }
     fi
       if "${PKG_CONFIG}" --exists cairo-xlib; then
          xmodlist="${modlist} cairo-xlib"
+       r_cairo_xlib=yes
       else
          xmodlist="${modlist}"
       fi
     CAIRO_CPPFLAGS=`"${PKG_CONFIG}" --cflags ${modlist}`
     CAIROX11_CPPFLAGS=`"${PKG_CONFIG}" --cflags ${xmodlist}`
-    CAIRO_LIBS=`"${PKG_CONFIG}" --libs ${modlist}`
-    CAIROX11_LIBS=`"${PKG_CONFIG}" --libs ${xmodlist}`
+    case "${host_os}" in
+      darwin*)
+        ## This is for static macOS build
+	## FIXME: doing that unconditionally is really not a good idea
+        CAIRO_LIBS=`"${PKG_CONFIG}" --static --libs ${modlist}`
+        CAIROX11_LIBS=`"${PKG_CONFIG}" --static --libs ${xmodlist}`
+        ;;
+      *)
+        CAIRO_LIBS=`"${PKG_CONFIG}" --libs ${modlist}`
+        CAIROX11_LIBS=`"${PKG_CONFIG}" --libs ${xmodlist}`
+        ;;
+    esac
 
     CPPFLAGS="${CPPFLAGS} ${CAIRO_CPPFLAGS}"
     LIBS="${LIBS} ${CAIRO_LIBS}"
@@ -45905,6 +45933,7 @@ $as_echo "$r_cv_has_cairo" >&6; }
       fi
       if "${PKG_CONFIG}" --exists cairo-xlib; then
          xmodlist="${modlist} cairo-xlib"
+         r_cairo_xlib=yes
       else
          xmodlist="${modlist}"
       fi
@@ -45977,6 +46006,11 @@ if test "x${r_cv_cairo_works}" = xyes; then
 
 $as_echo "#define HAVE_WORKING_CAIRO 1" >>confdefs.h
 
+   if test "x${r_cairo_xlib}" = xyes; then
+
+$as_echo "#define HAVE_WORKING_X11_CAIRO 1" >>confdefs.h
+
+   fi
 fi
 if test "x${r_cairo_pdf}" = xyes; then
 
@@ -48022,6 +48056,8 @@ fi
 
       if test "${have_png}" = no; then
                 unset ac_cv_lib_png_png_create_write_struct
+        { $as_echo "$as_me:${as_lineno-$LINENO}: checking for libpng with static libs" >&5
+$as_echo "$as_me: checking for libpng with static libs" >&6;}
         PNG_LIBS=`"${PKG_CONFIG}" --static --libs libpng`
         { $as_echo "$as_me:${as_lineno-$LINENO}: checking for png_create_write_struct in -lpng" >&5
 $as_echo_n "checking for png_create_write_struct in -lpng... " >&6; }
@@ -48173,6 +48209,8 @@ fi
 
       if test "x${have_tiff}" = xno; then
         unset ac_cv_lib_tiff_TIFFOpen
+        { $as_echo "$as_me:${as_lineno-$LINENO}: checking for libtiff with static libs" >&5
+$as_echo "$as_me: checking for libtiff with static libs" >&6;}
         TIF_LIBS=`"${PKG_CONFIG}" --static --libs ${mod}`
         { $as_echo "$as_me:${as_lineno-$LINENO}: checking for TIFFOpen in -ltiff" >&5
 $as_echo_n "checking for TIFFOpen in -ltiff... " >&6; }
@@ -48531,7 +48569,10 @@ $as_echo "#define HAVE_TIFF 1" >>confdefs.h
       BITMAP_LIBS="-ltiff ${BITMAP_LIBS}"
     else
       # tiff 4.0.x may need lzma too: SU's static build does
+      # OTOH, it will normally be in LIBS at this point in configure
       unset ac_cv_lib_tiff_TIFFOpen
+      { $as_echo "$as_me:${as_lineno-$LINENO}: checking for libtiff with -llzma" >&5
+$as_echo "$as_me: checking for libtiff with -llzma" >&6;}
       { $as_echo "$as_me:${as_lineno-$LINENO}: checking for TIFFOpen in -ltiff" >&5
 $as_echo_n "checking for TIFFOpen in -ltiff... " >&6; }
 if ${ac_cv_lib_tiff_TIFFOpen+:} false; then :
@@ -48592,8 +48633,11 @@ $as_echo "#define HAVE_TIFF 1" >>confdefs.h
       fi
     fi
     if test "x${have_tiff}" != xyes; then
-      # tiff 4.1.x may need webp too:
+      # tiff >= 4.1.0 may need webp too:
+      # (actually, it could also need jbig zstd libdeflate ....)
       unset ac_cv_lib_tiff_TIFFOpen
+      { $as_echo "$as_me:${as_lineno-$LINENO}: checking for libtiff with -lwebp" >&5
+$as_echo "$as_me: checking for libtiff with -lwebp" >&6;}
       { $as_echo "$as_me:${as_lineno-$LINENO}: checking for TIFFOpen in -ltiff" >&5
 $as_echo_n "checking for TIFFOpen in -ltiff... " >&6; }
 if ${ac_cv_lib_tiff_TIFFOpen+:} false; then :

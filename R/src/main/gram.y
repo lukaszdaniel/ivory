@@ -199,6 +199,8 @@ static void	NextArg(SEXP, SEXP, SEXP); /* add named element to list end */
 static SEXP	TagArg(SEXP, SEXP, YYLTYPE *);
 static int 	processLineDirective(int *);
 
+static SEXP R_PipeBindSymbol = NULL;
+
 /* These routines allocate constants */
 
 static SEXP	mkComplex(const char *);
@@ -395,6 +397,7 @@ static int	xxvalue(SEXP, int, YYLTYPE *);
 /* no longer used: %token COLON_ASSIGN */
 %token		SLOT
 %token		PIPE
+%token          PIPEBIND
 
 /* This is the precedence table, low to high */
 %left		'?'
@@ -406,6 +409,7 @@ static int	xxvalue(SEXP, int, YYLTYPE *);
 %left		RIGHT_ASSIGN
 %left		'~' TILDE
 %left		PIPE
+%left		PIPEBIND
 %left		OR OR2
 %left		AND AND2
 %left		UNOT NOT
@@ -471,6 +475,7 @@ expr	: 	NUM_CONST			{ $$ = $1;	setId(@$); }
 	|	expr AND2 expr			{ $$ = xxbinary($2,$1,$3);	setId(@$); }
 	|	expr OR2 expr			{ $$ = xxbinary($2,$1,$3);	setId(@$); }
 	|	expr PIPE expr			{ $$ = xxpipe($1,$3);  setId(@$); }
+	|	expr PIPEBIND expr		{ $$ = xxbinary($2,$1,$3);	setId(@$); }
 	|	expr LEFT_ASSIGN expr 		{ $$ = xxbinary($2,$1,$3);	setId(@$); }
 	|	expr RIGHT_ASSIGN expr 		{ $$ = xxbinary($2,$3,$1);	setId(@$); }
 	|	FUNCTION '(' formlist ')' cr expr_or_assign_or_help %prec LOW
@@ -1184,27 +1189,41 @@ static SEXP xxbinary(SEXP n1, SEXP n2, SEXP n3)
     return ans;
 }
 
+static SEXP findPlaceholderCell(SEXP, SEXP);
+
+static void check_rhs(SEXP rhs)
+{
+    if (TYPEOF(rhs) != LANGSXP)
+	error(_("The pipe operator requires a function call as RHS"));
+
+    /* rule out syntactically special functions */
+    /* the IS_SPECIAL_SYMBOL bit is set in names.c */
+    SEXP fun = CAR(rhs);
+    if (TYPEOF(fun) == SYMSXP && IS_SPECIAL_SYMBOL(fun))
+	error(_("function '%s' not supported in RHS call of a pipe"),
+	      CHAR(PRINTNAME(fun)));
+}
+
 static SEXP xxpipe(SEXP lhs, SEXP rhs)
 {
     SEXP ans;
     if (GenerateCode) {
-	/* allow for rhs lambda expressions */
-	if (TYPEOF(rhs) == LANGSXP && CAR(rhs) == R_FunctionSymbol)
-	    return lang2(rhs, lhs);
-		    
-	if (TYPEOF(rhs) != LANGSXP)
-	    error(_("The pipe operator requires a function call or an anonymous function expression as RHS"));
+	/* allow x => log(x) on RHS */
+	if (TYPEOF(rhs) == LANGSXP && CAR(rhs) == R_PipeBindSymbol) {
+	    SEXP var = CADR(rhs);
+	    SEXP expr = CADDR(rhs);
+	    check_rhs(expr);
+	    SEXP phcell = findPlaceholderCell(var, expr);
+	    if (phcell == NULL)
+		error(_("no placeholder found on RHS"));
+	    SETCAR(phcell, lhs);
+	    return expr;
+	}
 
+	check_rhs(rhs);
+	
         SEXP fun = CAR(rhs);
         SEXP args = CDR(rhs);
-
-
-	/* rule out syntactically special functions */
-	/* the IS_SPECIAL_SYMBOL bit is set in names.c */
-	if (TYPEOF(fun) == SYMSXP && IS_SPECIAL_SYMBOL(fun))
-	    error(_("function '%s' not supported in RHS call of a pipe"),
-		  CHAR(PRINTNAME(fun)));
-	
 	PRESERVE_SV(ans = lcons(fun, lcons(lhs, args)));
     }
     else {
@@ -1452,6 +1471,7 @@ void R::InitParser(void)
     INIT_SVS();
     R_PreserveObject(ParseState.sexps); /* never released in an R session */
     R_NullSymbol = install("NULL");
+    R_PipeBindSymbol = install("=>");
 }
 
 static void FinalizeSrcRefStateOnError(void *dummy)
@@ -2180,6 +2200,7 @@ static void yyerror(const char *s)
 	"NS_GET",	"'::'",
 	"NS_GET_INT",	"':::'",
 	"PIPE",         "'|>'",
+	"PIPEBIND",     "'=>'",
 	0
     };
     static char const yyunexpected[] = "syntax error, unexpected ";
@@ -3314,6 +3335,10 @@ static int token(void)
 	    yylval = install_and_save("==");
 	    return EQ;
 	}
+	else if (nextchar('>')) {
+	    yylval = install_and_save("=>");
+	    return PIPEBIND;
+	}		 
 	yylval = install_and_save("=");
 	return EQ_ASSIGN;
     case ':':
@@ -4052,4 +4077,39 @@ static void growID( int target ){
 
     int new_size = (1 + new_count)*2;
     PS_SET_IDS(lengthgets2(PS_IDS, new_size));
+}
+
+static int checkForPlaceholder(SEXP placeholder, SEXP arg)
+{
+    if (arg == placeholder)
+	return TRUE;
+    else if (TYPEOF(arg) == LANGSXP)
+	for (SEXP cur = arg; cur != R_NilValue; cur = CDR(cur))
+	    if (checkForPlaceholder(placeholder, CAR(cur)))
+		return TRUE;
+    return FALSE;
+}
+
+static void NORET signal_ph_error(SEXP rhs, SEXP ph) {
+    errorcall(rhs, _("pipe placeholder must only appear as a top-level "
+		     "argument in the RHS call"));
+}
+    
+static SEXP findPlaceholderCell(SEXP placeholder, SEXP rhs)
+{
+    SEXP phcell = NULL;
+    int count = 0;
+    if (checkForPlaceholder(placeholder, CAR(rhs)))
+	signal_ph_error(rhs, placeholder);
+    for (SEXP a = CDR(rhs); a != R_NilValue; a = CDR(a))
+	if (CAR(a) == placeholder) {
+	    if (phcell == NULL)
+		phcell = a;
+	    count++;
+	}
+	else if (checkForPlaceholder(placeholder, CAR(a)))
+	    signal_ph_error(rhs, placeholder);
+    if (count > 1)
+	errorcall(rhs, _("pipe placeholder may only appear once"));
+    return phcell;
 }

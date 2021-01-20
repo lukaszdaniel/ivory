@@ -207,7 +207,7 @@ static double RedGamma	 = 1.0;
 static double GreenGamma = 1.0;
 static double BlueGamma	 = 1.0;
 
-#ifdef HAVE_WORKING_CAIRO
+#ifdef HAVE_WORKING_X11_CAIRO
 #include "cairoFns.cpp"
 
 	/************************/
@@ -370,7 +370,7 @@ static int Cairo_holdflush(pDevDesc dd, int level)
     }
     return xd->holdlevel;
 }
-#endif /* HAVE_WORKING_CAIRO */
+#endif /* HAVE_WORKING_X11_CAIRO */
 
 
 
@@ -761,7 +761,7 @@ static void handleEvent(XEvent event)
 	pDevDesc dd = (pDevDesc) temp;
 	pGEDevDesc gdd = desc2GEDesc(dd);
 	if(gdd->dirty) {
-#ifdef HAVE_WORKING_CAIRO
+#ifdef HAVE_WORKING_X11_CAIRO
 	    pX11Desc xd = (pX11Desc) dd->deviceSpecific;
 	    /* We can use the buffered copy where we have it */ 
 	    if(xd->buffered == 1) {
@@ -790,7 +790,7 @@ static void handleEvent(XEvent event)
 
 	    xd->windowWidth = event.xconfigure.width;
 	    xd->windowHeight = event.xconfigure.height;
-#if defined HAVE_WORKING_CAIRO
+#if defined HAVE_WORKING_X11_CAIRO
 	    if(xd->useCairo) {
 		if(xd->buffered) {
 		    cairo_surface_destroy(xd->cs); xd->cs = nullptr;
@@ -1452,7 +1452,7 @@ X11_Open(pDevDesc dd, pX11Desc xd, const char *dsp,
     whitepixel = GetX11Pixel(R_RED(canvascolor), R_GREEN(canvascolor),
 			     R_BLUE(canvascolor));
     blackpixel = GetX11Pixel(0, 0, 0);
-#ifdef HAVE_WORKING_CAIRO
+#ifdef HAVE_WORKING_X11_CAIRO
     if(xd->useCairo && Vclass != TrueColor) {
 	warning(_("cairo-based types may only work correctly on TrueColor visuals"));
     }
@@ -1629,7 +1629,7 @@ X11_Open(pDevDesc dd, pX11Desc xd, const char *dsp,
 		watch_cursor = XCreateFontCursor(display, XC_watch) ;
 	    if(xd->type==WINDOW) XDefineCursor(display, xd->window, arrow_cursor);
 
-#ifdef HAVE_WORKING_CAIRO
+#ifdef HAVE_WORKING_X11_CAIRO
 	    if(xd->useCairo) {
 		cairo_status_t res;
 		if(xd->buffered) {
@@ -2070,7 +2070,7 @@ static void X11_Close(pDevDesc dd)
     pX11Desc xd = (pX11Desc) dd->deviceSpecific;
 
     if (xd->type == WINDOW) {
-#ifdef HAVE_WORKING_CAIRO
+#ifdef HAVE_WORKING_X11_CAIRO
 	if(xd->buffered > 1) removeBuffering(xd);
 #endif
 	/* process pending events */
@@ -2078,7 +2078,7 @@ static void X11_Close(pDevDesc dd)
 	inclose = (Rboolean) TRUE;
 	R_ProcessX11Events((void*) nullptr);
 
-#ifdef HAVE_WORKING_CAIRO
+#ifdef HAVE_WORKING_X11_CAIRO
 	if(xd->useCairo) {
 		CairoDestroyMasks(xd);
 		CairoDestroyClipPaths(xd);
@@ -2534,7 +2534,7 @@ static Rboolean X11_Locator(double *x, double *y, pDevDesc dd)
     int done = 0;
 
     if (xd->type > WINDOW) return (Rboolean) FALSE;
-#ifdef HAVE_WORKING_CAIRO
+#ifdef HAVE_WORKING_X11_CAIRO
     if (xd->holdlevel > 0)
 	error(_("attempt to use the locator after 'dev.hold()'"));
     if (xd->buffered) Cairo_update(xd);
@@ -2700,7 +2700,7 @@ static void X11_Mode(int mode, pDevDesc dd)
 {
     pX11Desc xd = (pX11Desc) dd->deviceSpecific;
     if(xd->holdlevel > 0) {
-#ifdef HAVE_WORKING_CAIRO
+#ifdef HAVE_WORKING_X11_CAIRO
 	if(mode == 0 && xd->buffered > 1)
 	    xd->last_activity = currentTime();
 #endif
@@ -2711,7 +2711,7 @@ static void X11_Mode(int mode, pDevDesc dd)
 	XSync(display, 0);
     }
     if(mode == 0) {
-#ifdef HAVE_WORKING_CAIRO
+#ifdef HAVE_WORKING_X11_CAIRO
 	if(xd->buffered > 1) {
 	    xd->last_activity = currentTime();
 	    if((currentTime() - xd->last) > 0.5 /* 5*xd->update_interval */)
@@ -2784,7 +2784,7 @@ Rboolean X11DeviceDriver(pDevDesc dd,
     xd = Rf_allocX11DeviceDesc(pointsize);
     if(!xd) return (Rboolean) FALSE;
     xd->bg = bgcolor;
-#ifdef HAVE_WORKING_CAIRO
+#ifdef HAVE_WORKING_X11_CAIRO
     xd->useCairo = (Rboolean) (useCairo != 0);
     xd->buffered = (Rboolean) 0;
     switch(useCairo) {
@@ -2836,7 +2836,7 @@ Rboolean X11DeviceDriver(pDevDesc dd,
     strncpy(xd->title, title, 100);
     xd->title[100] = '\0';
 
-#ifdef HAVE_WORKING_CAIRO
+#ifdef HAVE_WORKING_X11_CAIRO
     {
 	SEXP timeouts = GetOption1(install("X11updates"));
 	double tm = asReal(timeouts);
@@ -2870,7 +2870,7 @@ int Rf_setX11DeviceData(pDevDesc dd, double gamma_fac, pX11Desc xd)
     int res0 = (xd->res_dpi > 0) ? xd->res_dpi : 72;
     /*	Set up Data Structures. */
 
-#ifdef HAVE_WORKING_CAIRO
+#ifdef HAVE_WORKING_X11_CAIRO
     if(xd->useCairo) {
 	dd->newPage = Cairo_NewPage;
 	dd->clip = Cairo_Clip;
@@ -2986,7 +2986,7 @@ int Rf_setX11DeviceData(pDevDesc dd, double gamma_fac, pX11Desc xd)
 	dd->ipr[0] = pixelWidth();
 	dd->ipr[1] = pixelHeight();
 	xd->lwdscale = 1.0/(96.0*pixelWidth());
-#ifdef HAVE_WORKING_CAIRO
+#ifdef HAVE_WORKING_X11_CAIRO
 	if(xd->useCairo) {
 # ifdef HAVE_PANGOCAIRO
 	    /* Pango's default resolution is 96 dpi */
@@ -3011,7 +3011,7 @@ int Rf_setX11DeviceData(pDevDesc dd, double gamma_fac, pX11Desc xd)
     /* Device capabilities */
 
     dd->canClip = (Rboolean) TRUE;
-#ifdef HAVE_WORKING_CAIRO
+#ifdef HAVE_WORKING_X11_CAIRO
     dd->canHAdj = xd->useCairo ? 2 : 0;
 #else
     dd->canHAdj = 0;
@@ -3288,7 +3288,7 @@ static SEXP in_do_X11(SEXP call, SEXP op, SEXP args, SEXP env)
 }
 
 
-#ifdef HAVE_WORKING_CAIRO
+#ifdef HAVE_WORKING_X11_CAIRO
 static int stride;
 static unsigned int Sbitgp(void *xi, int x, int y)
 {

@@ -1628,15 +1628,16 @@ can be viewed from @Rapp{}'s `Help' menu.
 
 You can run command-line @R{} and @command{Rscript} from a
 Terminal@footnote{The installer puts links to @command{R} and
-@command{Rscript} in @file{/usr/local/bin}. If these are missing (as
+@command{Rscript} in @file{/usr/local/bin}.  If these are missing (as
 they may be under `Big Sur'), you can run directly the copies in
-@file{/Library/Frameworks/R.framework/Resources/}.} so these can be
-typed as commands like any other Unix-alike: see the next chapter of
-this manual.  There are some small differences which may surprise users
-of @R{} on other platforms, notably the default location of the personal
-library directory (under @file{~/Library/R}, e.g.@:
-@file{~/Library/R/4.0/library}), and that warnings, messages and other
-output to @file{stderr} are highlighted in bold.
+@file{/Library/Frameworks/R.framework/Resources/} or link those yourself
+to somewhere on your path.} so these can be typed as commands like any
+other Unix-alike: see the next chapter of this manual.  There are some
+small differences which may surprise users of @R{} on other platforms,
+notably the default location of the personal library directory (under
+@file{~/Library/R}, e.g.@: @file{~/Library/R/x86_64/4.0/library}), and
+that warnings, messages and other output to @file{stderr} are
+highlighted in bold.
 
 @c https://ryanhomer.github.io/posts/build-openmp-macos-catalina-complete
 Those using the @command{zsh} shell (the default for new user accounts
@@ -5028,9 +5029,8 @@ that, configure with @option{--without-readline}.
 @item
 @c You do not need zlib-system-stub if PKG_CONFIG_PATH includes /opt/X11/lib/pkgconfig
 Components @code{jpeg}, @code{libpng}, @code{pkgconfig}, @code{tiff} and
-@code{pkgconfig}, @code{zlib-system-stub} from
-@uref{https://mac.R-project.org/libs-4/}, for the full range of
-bitmapped graphics devices.
+@code{zlib-system-stub} from @uref{https://mac.R-project.org/libs-4/},
+for the full range of bitmapped graphics devices.
 
 @item
 An X sub-system unless configuring using @option{--without-x}: see
@@ -5372,11 +5372,11 @@ Binary distributions of @R{} are built against a specific version
 (e.g.@: 1.8.0_241 or 11.0.6) of Java so @command{sudo R CMD javareconf}
 will likely be needed to be run before using Java-using packages.
 
-To use Java (specifically, package @CRANpkg{rJava} with a @acronym{CRAN}
-(@cputype{x86_64}) binary distribution of @R{} on @cputype{arm64}
-install a @cputype{x86_64} of a Java JRE such as that from
-@uref{https://adoptopenjdk.net, AdoptOpenJDK}, then run @command{sudo R
-CMD javareconf}.
+To use Java (specifically, package @CRANpkg{rJava}) with a
+@acronym{CRAN} (@cputype{x86_64}) binary distribution of @R{} on
+@cputype{arm64} macOS install a @cputype{x86_64} build of a Java JRE
+such as that from @uref{https://adoptopenjdk.net, AdoptOpenJDK}, then
+run @command{sudo R CMD javareconf}.
 
 To see what compatible versions of Java are currently installed, run
 @command{/usr/libexec/java_home -V -a x86_64}.  If needed, set the
@@ -5456,10 +5456,10 @@ to @command{pkg-config}).
 @node Building R.app, Building binary packages, Frameworks, macOS
 @subsection Building R.app
 
-Note that building the @Rapp{} GUI console is a separate project, using
-Xcode.  Before compiling @Rapp{} make sure the current version of @R{}
-is installed in @file{/Library/Frameworks/R.framework} and working at
-the command-line (this can be a binary install).
+Building the @Rapp{} GUI console is a separate project, using Xcode.
+Before compiling @Rapp{} make sure the current version of @R{} is
+installed in @file{/Library/Frameworks/R.framework} and working at the
+command-line (this can be a binary install).
 
 The current sources can be checked out by
 @example
@@ -5529,7 +5529,7 @@ release).
 @item
 For C++ code there is the possibility that calls will be generated to
 entry points not in the system @file{/usr/lib/libc++.1.dylib}.  The
-previous step allows this to be tested again the system library on the
+previous step allows this to be tested against the system library on the
 build OS, but not against earlier ones.  It may be possible to
 circumvent that by static linking to @file{libc++.a} and
 @file{libc++abi.a} by something like
@@ -5580,6 +5580,13 @@ FC="/usr/local/gfortran/bin/gfortran -mtune=native -mmacosx-version-min=10.13"
 (This may give warnings, in particular for the @command{gfortran} 8.2
 distribution that @code{libgfortran} was built for 10.14 --- but these
 seem harmless.)
+
+To correctly set the architecture (which will be auto-detected as
+@code{aarch64}), use something like
+
+@example
+/path/to/configure --build=x86_64-apple-darwin20
+@end example
 
 @node Native builds,  , `Apple Silicon', `Apple Silicon'
 @subsubsection Native builds

@@ -1316,7 +1316,7 @@ Note that with the exceptions of @file{INDEX},
 @file{LICENSE}/@file{LICENCE} and @file{NEWS}, information files at the
 top level of the package will @emph{not} be installed and so not be
 known to users of Windows and macOS compiled packages (and not seen
-by those who use @command{R CMD INSTALL} or @command{install.packages}
+by those who use @command{R CMD INSTALL} or @code{install.packages()}
 on the tarball).  So any information files you wish an end user to see
 should be included in @file{inst}.  Note that if the named exceptions
 also occur in @file{inst}, the version in @file{inst} will be that seen
@@ -1733,6 +1733,7 @@ if test -z "$CXX"; then
   AC_MSG_ERROR([No C++ compiler is available])
 fi
 CXXFLAGS=`"$@{R_HOME@}/bin/R" CMD config CXXFLAGS`
+CPPFLAGS=`"$@{R_HOME@}/bin/R" CMD config CPPFLAGS`
 AC_LANG(C++)
 @end example
 
@@ -1757,7 +1758,11 @@ to use @samp{FC FFLAGS FPICFLAGS} for fixed-form Fortran and
 @samp{FC FCFLAGS FPICFLAGS} for free-form Fortran.
 
 To check for an external BLAS library using the @code{AX_BLAS} macro
-from the official Autoconf Macro Archive, one can simply do
+from the official Autoconf Macro
+Archive@footnote{@uref{https://www.gnu.org/software/autoconf-archive/ax_blas.html}. If
+you include macros from that archive you need to arrange for them to be
+included in the package sources for use by @command{autoreconf}.}, one
+can use
 
 @example
 @group
@@ -4554,6 +4559,17 @@ features from later standards.  (Although @R{} only requires Fortran 90,
 @code{COMPLEX*16}.  (One can also use something like
 @code{COMPLEX(KIND=KIND(0.0D0))}.)
 
+
+@c https://gcc.gnu.org/onlinedocs/gfortran/KIND-Type-Parameters.html
+@c https://stackoverflow.com/questions/838310/fortran-90-kind-parameter
+The use of Fortran types such as @code{REAL(KIND=8)} is very far from
+portable.  According of the standards this merely enumerates different
+supported types, so @code{DOUBLE PRECISION} might be @code{REAL(KIND=3)}
+(and is on an actual compiler).  Even if for a particular compiler the
+value indicates the size in bytes, which values are supported is
+platform-specific --- for example @command{gfortran} supports values of 4
+and 8 on all current platforms and 10 and 16 on a few (but not for
+example on @cputype{arm} CPUs).
 
 Not all common @R{} platforms conform to the expected standards, e.g.@:
 C99 for C code.  One common area of problems is the @code{*printf}

@@ -80,7 +80,7 @@ AC_DEFINE_UNQUOTED(R_OS, "${host_os}",
 ## exclude some unsupported OSes
 case "${host_os}" in
    ## Darwin 1.3.1 was macOS 10.0, 1.4.1 was 10.1, 5 is 10.2 etc
-   ## with 19 being 10.15 (Catalina) and 20 11.0 (Big Sur)
+   ## with 19 being 10.15 (Catalina) and 20 being 11 (Big Sur)
    ## We no longer support < 10.6 (Snow Leopard, Darwin 10)
    ## https://en.wikipedia.org/wiki/Darwin_OS
    darwin1.*)
@@ -97,6 +97,22 @@ esac
 
 R_PLATFORM="${host}"
 AC_SUBST(R_PLATFORM)
+
+MAC_CPU=
+case "${host_os}" in
+  darwin*)
+    case "${host_cpu}" in
+       aarch64)
+       MAC_CPU="arm64"
+       ;;
+       *)
+       MAC_CPU="${host_cpu}"
+       ;;
+    esac
+    AC_SUBST(MAC_CPU)
+    ;;
+esac
+
 R_OS="${host_os}"
 AC_SUBST(R_OS)
 

@@ -149,12 +149,18 @@
       Previously additional elements were silently ignored.  Suggested
       by Antoine Fabri on R-devel.
 
-      \item \R{} now provides a simple native pipe syntax \code{|>} as
-      well as a shorthand notation for creating functions,
-      e.g. \code{\(x) x + 1} is parsed as \code{function(x) x + 1}. The
-      pipe implementation as a syntax transformation was motivated by
-      suggestions from Jim Hester and Lionel Henry. These features are
-      experimental and may change prior to release.
+      \item \R{} now provides a shorthand notation for creating functions,
+      e.g. \code{\(x) x + 1} is parsed as \code{function(x) x + 1}.  This
+      feature is experimental and may change prior to release.
+
+      \item \R{} now provides a simple native forward pipe syntax
+      \code{|>}.  The simple form of the forward pipe inserts the
+      left-hand side as the first argument in the right-hand side call. A
+      syntax is also provided for passing the left-hand side as an
+      argument other than the first. The pipe implementation as a syntax
+      transformation was motivated by suggestions from Jim Hester and
+      Lionel Henry. This feature is experimental and may change prior to
+      release.
 
       \item \code{all.equal(f, g)} for \code{function}s now by default also
       compares their \code{environment(.)}s, notably via new
@@ -168,6 +174,18 @@
 
       \item Lithuanian translations are now available, thanks to
       Rimantas Žakauskas.
+
+      \item \code{names()} now works for \code{DOTSXP} objects.  On the
+      other hand, in \file{R-lang}, the R language manual, we now warn
+      against relying on the structure or even existence of such
+      \code{dot-dot-dot} objects.
+
+      \item \code{all.equal()} no longer gives an error on \code{DOTSXP}
+      objects.
+
+      \item \code{capabilities("cairo")} now applies only to the
+      file-based devices as it is now possible (if very unusual) to
+      build \R with Cairo support for those but not for \code{X11()}.
     }
   }
 
@@ -196,8 +214,8 @@
       \code{viewport(mask)} that can also be a grob, which defines
       a mask.
 
-      These new features are only supported (so far) on Cairo graphics
-      devices and the \code{pdf()} device.
+      These new features are only supported (so far) on Cairo-based
+      graphics devices and the \code{pdf()} device.
 
       \item (Not Windows.)
       A warning is given when a Cairo-based type is specified for a
@@ -245,7 +263,11 @@
       cover the Basic Multilingual Plane.
 
       \item Cairo installations without X11 are more likely to be
-      detected by \command{configure}.
+      detected by \command{configure}, when the file-based Cairo devices
+      will be available but not \code{X11(type = "cairo")}.
+
+      Pango installations using static libraries on macOS are more
+      likely to be detected.
     }
   }
 
@@ -304,6 +326,18 @@
       This provides a valuable check on code consistency.  It does work
       with GCC 8.3 as in Rtools40, but that does not detect everything
       the \acronym{CRAN} checks with current GCC do.
+    }
+  }
+
+  \subsection{PACKAGE INSTALLATION on macOS}{
+    \itemize{
+      \item The default personal library directory on builds with
+      \option{--enable-aqua} (including\acronym{CRAN} builds) now
+      differs by CPU type, one of
+\preformatted{
+      ~/Library/R/x86_64/x.y/library
+      ~/Library/R/arm64/x.y/library
+}
     }
   }
 
@@ -475,6 +509,12 @@
       \code{sprintf("\%X", utf8ToInt("\uD834\uDD1E"))} should now give
       \code{"1D11E"} on all platforms.
       %% failed on Solaris
+
+      \item \code{identical(x,y)} is no longer true for differing
+      \code{DOTSXP} objects, fixing \PR{18032}.
+
+      \item \code{str()} now works correctly for DOTSXP and related
+      exotics, even when these are doomed.
     }
   }
 }

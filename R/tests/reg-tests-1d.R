@@ -4664,15 +4664,31 @@ a <- (function(...) function() NULL)(1)
 b <- (function(...) function() NULL)(1) # want "a .eq. b"
 D <- (function(...) function() NULL)(1:2 < 3) # want "D .NE. b"
 e.. <- (function(...) environment())(1)
-...maker <- function(expr)   (function(...) environment())(expr)  [["..."]]
-..2maker <- function(e1, e2) (function(...) environment())(e1, e2)[["..."]]
+##' General creator of "..."  (DOTSXP) objects (short form by Suharto Anggono):
+...maker <- function(...) get("...") ## fails if called without argument
+...maker <- function(...) (function(...) environment())(...)[["..."]]
 str( ddd <- ...maker(1) )
-str( Ddd <- environment(D)[["..."]] ) # length 1, mode "...": c(TRUE,TRUE)
-str( D2  <- ..2maker(TRUE,TRUE))      # length 2, mode "...": TRUE TRUE
+str( Ddd <- environment(D)[["..."]] ) # length 1, mode "...":
+str( D2  <- ...maker(TRUE,TRUE))      # length 2, mode "...":
+str( D3n <- ...maker(ch = {cat("HOO!\n"); "arg1"}, 2, three=1+2) )
+assertErrV(lD2 <- D2[]) #  type '...' is not subsettable
+assertErrV(D3n[]) #   (ditto)
+assertErrV(D3n[][["three"]]) #  (ditto)
+str( D3n <- ...maker(ch = {cat("HOO!\n"); "arg1"}, 2, three=1+2) )
+(lD2 <- D2[]) # (unnamed) list of 2 promises
+str(lD2) # failed in R <= 4.0.3
+str(D3n[]) #   (ditto)
+str(lD2[[1]])         # promise (no longer on R level in future!)
+str(D3n[][["three"]]) #  (ditto)
+nlD1 <- nlD <- lD2
+names(nlD1) <- c("first", "");       nlD1
+names(nlD ) <- c("first", "second"); nlD
+str(nlD1)# worked previously, wrongly printing 'symbol first'
+str(nlD) # worked already in R <= 4.0.3
 stopifnot(exprs = {
+    identical(alist(a=)$a, ...maker())# "*the* missing", the empty symbol
     identical(ddd, ...maker(1))
     identical(Ddd, ...maker(1:2 < 3))
-    identical(Ddd, ...maker(c(TRUE, TRUE)))
     is.character(aeLD <- all.equal(quote(x+1), ddd))
     grepl("Mode",    aeLD[1])
     grepl("deparse", aeLD[2])
@@ -4682,15 +4698,24 @@ stopifnot(exprs = {
     typeof(ddd) == "..."
     typeof(D2) == "..."
     length(D2) == 2
-    ## FIXME: is.character(aeD <- all.equal(a, D) )
+    is.character(aeD <- all.equal(a, D) )
+    grepl("same length", aeD)
+    grepl("...", aeD, fixed=TRUE)
+    grepl("not identical", aeD)
+    ##
+    ## names(<DOTSXP>):
+    is.null(names(ddd))
+    identical(c("ch", "", "three"), names(D3n))
 })
 ##  for identical() ==> ./reg-tests-2.R  -- as it's about "output"
 op <- options(keep.source = FALSE) # don't keep "srcref" etc
 ##
 Qlis <- list(NULL
-## FIXME!  These should work
-## , ddd = ddd
-## , Ddd = Ddd
+## Next 4 now must work as identical(X,X) is true:
+, ddd = ddd
+, Ddd = Ddd
+, D2  = D2
+, D3n = D3n
 , Qass   = quote(x <- 1)
 , Qbrc   = quote({1})
 , Qparen = quote((1))
@@ -4701,7 +4726,7 @@ Qlis <- list(NULL
 ##
 sapply(Qlis, class)
 stopifnot( sapply(Qlis, function(obj) all.equal(obj, obj)) )
-options(op) # only the first failed in R <= 4.0.3
+## only the first failed in R <= 4.0.3
 
 ## See PR#18012 -- may well change
 aS <- (function(x) function() NULL)(stop('hello'))
@@ -4710,6 +4735,19 @@ try( all.equal(aS, bS) ) ## now (check.environment=TRUE) triggers the promise ..
 ## Now have a way *not* to evaluate aka force the promise:
 (aeS <- all.equal(aS, bS, evaluate=FALSE)) # no promises forced
 stopifnot(grepl("same names.* not identical", aeS))
+
+
+## PR#18032: identical(<DOTSXP>,*)
+ddd <- ...maker(47)
+DDD <- ...maker(ch = {cat("Hu hu!\n"); "arg1"}, two = 1+1, pi, ABC="A")
+stopifnot(exprs = {
+    identical(ddd,ddd)
+    identical(DDD,DDD)
+    identical  (ddd, ...maker(47))
+    ! identical(ddd, ...maker(7 )) # these *are* different
+    ! identical(ddd, DDD)
+})
+options(op)
 
 
 
