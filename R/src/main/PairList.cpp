@@ -60,8 +60,12 @@ namespace CXXR
         }
         catch (...)
         {
+            if (ans)
+                ans->expose();
             throw;
         }
+        if (ans)
+            ans->expose();
         return ans;
     }
 

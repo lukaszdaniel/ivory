@@ -1502,6 +1502,7 @@ void call_R(char *func, long nargs, void **arguments, char **modes,
 	error(_("invalid return value count in 'call_R()'"));
     GCRoot<PairList> tl(PairList::makeList(nargs));
     PROTECT(pcall = call = new Expression(nullptr, tl));
+    call->expose();
     SETCAR(pcall, (SEXP)func);
     s = R_NilValue;		/* -Wall */
     for (i = 0 ; i < nargs ; i++) {

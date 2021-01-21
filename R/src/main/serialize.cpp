@@ -1861,6 +1861,7 @@ static SEXP ReadItem(SEXP ref_table, R_inpstream_t stream)
 	    int locked = InInteger(stream);
 
 	    PROTECT(s = new Environment());
+	    s->expose();
 
 	    /* MUST register before filling in */
 	    AddReadRef(ref_table, s);
@@ -1895,6 +1896,7 @@ static SEXP ReadItem(SEXP ref_table, R_inpstream_t stream)
 	   becomes necessary we can do it without needing to change
 	   the save format. */
 		PROTECT(s = new PairList());
+		s->expose();
 		SETLEVELS(s, levs);
 		SET_OBJECT(s, objf);
 		R_ReadItemDepth++;
@@ -1923,6 +1925,7 @@ static SEXP ReadItem(SEXP ref_table, R_inpstream_t stream)
     case LANGSXP:
 	{
 		PROTECT(s = new Expression());
+		s->expose();
 		SETLEVELS(s, levs);
 		SET_OBJECT(s, objf);
 		R_ReadItemDepth++;
@@ -1955,6 +1958,7 @@ static SEXP ReadItem(SEXP ref_table, R_inpstream_t stream)
     case DOTSXP:
 	{
 		PROTECT(s = new DottedArgs());
+		s->expose();
 		SETLEVELS(s, levs);
 		SET_OBJECT(s, objf);
 		R_ReadItemDepth++;
@@ -1988,6 +1992,7 @@ static SEXP ReadItem(SEXP ref_table, R_inpstream_t stream)
     case CLOSXP:
 	{
 		PROTECT(s = new Closure());
+		s->expose();
 		SETLEVELS(s, levs);
 		SET_OBJECT(s, objf);
 		R_ReadItemDepth++;
@@ -2019,6 +2024,7 @@ static SEXP ReadItem(SEXP ref_table, R_inpstream_t stream)
     case PROMSXP:
 	{
 		PROTECT(s = new Promise(nullptr, nullptr));
+		s->expose();
 		SETLEVELS(s, levs);
 		SET_OBJECT(s, objf);
 		R_ReadItemDepth++;
@@ -2054,6 +2060,7 @@ static SEXP ReadItem(SEXP ref_table, R_inpstream_t stream)
 	switch (type) {
 	case EXTPTRSXP:
 	    PROTECT(s = new ExternalPointer());
+	    s->expose();
 	    AddReadRef(ref_table, s);
 	    R_SetExternalPtrAddr(s, nullptr);
 	    R_ReadItemDepth++;
@@ -2290,6 +2297,7 @@ static SEXP ReadBC1(SEXP ref_table, SEXP reps, R_inpstream_t stream)
 {
     SEXP s;
     PROTECT(s = new ByteCode());
+    s->expose();
     R_ReadItemDepth++;
     SETCAR(s, ReadItem(ref_table, stream)); /* code */
     R_ReadItemDepth--;

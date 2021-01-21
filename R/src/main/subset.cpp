@@ -911,6 +911,8 @@ HIDDEN SEXP do_subset_dflt(SEXP call, SEXP op, SEXP args, SEXP rho)
 			ans = new Expression(nullptr, tl);
 		}
 		PROTECT(ans);
+		if (ans)
+			ans->expose();
 	}
 	if ( LENGTH(ax) > 0 ) {
 	    for(px = ans, i = 0 ; px != R_NilValue ; px = CDR(px))

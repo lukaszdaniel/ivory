@@ -61,11 +61,16 @@ namespace CXXR
     {
         double dsize = double(bytes) / 1024.0;
         if (dsize > 1024.0 * 1024.0)
-            Rf_errorcall(nullptr, _("cannot allocate vector of size %0.1f GB"),
-                         dsize / 1024.0 / 1024.0);
-        if (dsize > 1024.0)
-            Rf_errorcall(nullptr, _("cannot allocate vector of size %0.1f MB"),
-                         dsize / 1024.0);
-        Rf_errorcall(nullptr, _("cannot allocate vector of size %0.1f KB"), dsize);
+        {
+            Rf_errorcall(nullptr, _("cannot allocate vector of size %0.1f GB"), dsize / 1024.0 / 1024.0);
+        }
+        else if (dsize > 1024.0)
+        {
+            Rf_errorcall(nullptr, _("cannot allocate vector of size %0.1f MB"), dsize / 1024.0);
+        }
+        else
+        {
+            Rf_errorcall(nullptr, _("cannot allocate vector of size %0.1f KB"), dsize);
+        }
     }
 } // namespace CXXR

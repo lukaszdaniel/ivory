@@ -76,6 +76,7 @@ HIDDEN SEXP R::mkPRIMSXP(int offset, bool eval)
     if (result == R_NilValue)
     {
         result = new BuiltInFunction(offset, eval);
+        result->expose();
         SET_VECTOR_ELT(PrimCache, offset, result);
     }
     else if (TYPEOF(result) != type)
@@ -129,7 +130,7 @@ SEXP R::mkCLOSXP(SEXP formals, SEXP body, SEXP rho)
     PROTECT(body);
     PROTECT(rho);
     SEXP c = new Closure();
-
+    c->expose();
     switch (TYPEOF(body))
     {
     case CLOSXP:
@@ -148,6 +149,7 @@ SEXP R::mkCLOSXP(SEXP formals, SEXP body, SEXP rho)
     SET_CLOENV(c, rho ? rho : R_GlobalEnv);
 
     UNPROTECT(3);
+
     return c;
 }
 
@@ -166,5 +168,6 @@ HIDDEN SEXP R::mkSYMSXP(SEXP name, SEXP value)
     GCRoot<const String> namert(SEXP_downcast<const String *>(name));
     GCRoot<> valuert(value);
     Symbol *ans = new Symbol(namert, valuert);
+    ans->expose();
     return ans;
 }

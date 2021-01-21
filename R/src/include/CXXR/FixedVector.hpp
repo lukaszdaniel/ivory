@@ -182,6 +182,7 @@ namespace CXXR
         catch (std::bad_alloc &e)
         {
             m_data = nullptr;
+            expose();
             tooBig(bytes);
             return;
         }

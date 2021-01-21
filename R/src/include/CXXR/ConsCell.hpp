@@ -178,6 +178,7 @@ namespace CXXR
             if (T *ccc = dynamic_cast<T *>(cc))
                 return ccc;
             T *ans = new T(cc->car(), cc->tail(), cc->tag());
+            ans->expose();
             SET_ATTRIB(ans, ATTRIB(cc));
             return ans;
         }

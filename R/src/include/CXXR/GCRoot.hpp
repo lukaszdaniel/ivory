@@ -175,8 +175,6 @@ namespace CXXR
 
         void redirect(GCNode *node)
         {
-            if (node)
-                node->expose();
             (*s_roots)[m_index] = node;
         }
 

@@ -211,7 +211,12 @@ namespace CXXR
         };
 
         GCNode()
+            : m_next(s_generation[0]), m_gcgen(0), m_marked(false), m_aged(false)
         {
+            s_generation[0] = this;
+            if (m_next == this)
+                m_next = nullptr; // do not make loops, where node->m_next points to itself.
+            ++s_gencount[0];
             ++s_num_nodes;
         }
 
@@ -286,12 +291,8 @@ namespace CXXR
          */
         void expose() const
         {
-            if (!m_prev)
-            {
-                link(s_generation[0]->m_prev, this);
-                link(this, s_generation[0]);
-                ++s_gencount[0];
-            }
+            Ager exposer(1);
+            conductVisitor(&exposer);
         }
 
         /** @brief Initiate a garbage collection.
@@ -369,8 +370,6 @@ namespace CXXR
         static void set_gcgen(const GCNode *v, unsigned int x);
         static const GCNode *next_node(const GCNode *s);
         static void set_next_node(const GCNode *s, const GCNode *t);
-        static const GCNode *prev_node(const GCNode *s);
-        static void set_prev_node(const GCNode *s, const GCNode *t);
         static bool is_marked(const GCNode *x);
         static void set_mark(const GCNode *x, bool v);
 
@@ -385,7 +384,6 @@ namespace CXXR
         {
             --s_num_nodes;
             --s_gencount[m_gcgen];
-            link(m_prev, m_next);
         }
 
     public: // private:
@@ -496,7 +494,7 @@ namespace CXXR
                                       // generation numbers have been changed (by
                                       // setting the m_aged flag) since the last
                                       // garbage collection.
-        mutable const GCNode *m_prev;
+
         mutable const GCNode *m_next;
         mutable unsigned int m_gcgen;
         mutable bool m_marked;
@@ -551,64 +549,10 @@ namespace CXXR
 
         void mark() const
         {
-            expose();
             m_marked = true;
         }
 
         const GCNode *next() const { return m_next; }
-
-        const GCNode *prev() const { return m_prev; }
-
-        // Make t the successor of s:
-        static void link(const GCNode *s, const GCNode *t)
-        {
-            s->m_next = t;
-            t->m_prev = s;
-        }
-
-        /** Transfer a node so as to precede this node.
-         *
-         * @param n Pointer to node to be moved, which may be in the
-         * same (circularly linked) list as '*this', or in a different
-         * list.  It is permissible for n to point to what is already
-         * the predecessor of '*this', in which case the function
-         * amounts to a no-op.  It is also permissible for n to point
-         * to '*this' itself; beware however that in that case the
-         * function will detach '*this' from its current list, and turn
-         * it into a singleton list.
-         */
-        void splice(const GCNode *n) const
-        {
-            // Doing things in this order is innocuous if n is already
-            // this node's predecessor:
-            link(n->prev(), n->next());
-            link(prev(), n);
-            link(n, this);
-        }
-
-        /** Transfer a sublist so as to precede this node.
-         *
-         * @param beg Pointer to the first node in the sublist to be
-         * moved.  The sublist may be a sublist of the same (circularly
-         * linked) list of which '*this' forms a part, or of another
-         * list.  Note however that in the former case, the sublist to
-         * be moved must not contain '*this'.
-         *
-         * @param end Pointer to the successor of the last node of the
-         * sublist to be moved.  It is permissible for it be identical
-         * to beg, or to point to '*this': in either case the function
-         * amounts to a no-op.
-         */
-        void splice(const GCNode *beg, const GCNode *end) const
-        {
-            if (beg != end)
-            {
-                const GCNode *last = end->prev();
-                link(beg->prev(), end);
-                link(prev(), beg);
-                link(last, this);
-            }
-        }
 
         // This is the first stage of garbage collection.  It
         // propagates the generation changes initiated by

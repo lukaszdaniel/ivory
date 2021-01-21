@@ -2177,6 +2177,7 @@ static SEXP replaceCall(SEXP fun, SEXP val, SEXP args, SEXP rhs)
     PROTECT(val);
     GCRoot<PairList> tl(PairList::makeList(length(args) + 2));
     ptmp = tmp = new Expression(nullptr, tl);
+    tmp->expose();
 	UNPROTECT(4);
     SETCAR(ptmp, fun); ptmp = CDR(ptmp);
     SETCAR(ptmp, val); ptmp = CDR(ptmp);
@@ -8492,6 +8493,7 @@ HIDDEN SEXP do_mkcode(SEXP call, SEXP op, SEXP args, SEXP rho)
 	GCRoot<> enc(R_bcEncode(bytes));
 	GCRoot<PairList> pl(SEXP_downcast<PairList *>(consts));
 	ans = new ByteCode(enc, pl);
+	ans->expose();
 	R_registerBC(bytes, ans);
 	return ans;
 }

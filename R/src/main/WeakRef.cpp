@@ -57,6 +57,12 @@ WeakRef::WeakRef(RObject *key, RObject *value, RObject *R_finalizer,
 	  m_ready_to_finalize(false),
 	  m_finalize_on_exit(finalize_on_exit)
 {
+	expose();
+	if (m_key)
+		m_key->expose();
+	else
+		tombstone();
+
 	if (m_key)
 	{
 		// Force old-to-new checks:
@@ -87,6 +93,12 @@ WeakRef::WeakRef(RObject *key, RObject *value, R_CFinalizer_t C_finalizer,
 	: RObject(WEAKREFSXP), m_key(key), m_value(value), m_Rfinalizer(nullptr), m_Cfinalizer(C_finalizer),
 	  m_ready_to_finalize(false), m_finalize_on_exit(finalize_on_exit)
 {
+	expose();
+	if (m_key)
+		m_key->expose();
+	else
+		tombstone();
+
 	if (m_key)
 	{
 		// Force old-to-new check:

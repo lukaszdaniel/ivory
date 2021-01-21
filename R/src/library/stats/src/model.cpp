@@ -484,6 +484,7 @@ SEXP modelmatrix(SEXP call, SEXP op, SEXP args, SEXP rho)
     GCRoot<PairList> tl(PairList::makeList(2));
 
     PROTECT(expr = new Expression(nullptr, tl));
+    expr->expose();
     SETCAR(expr, install("contrasts"));
     SETCADDR(expr, allocVector(LGLSXP, 1));
 

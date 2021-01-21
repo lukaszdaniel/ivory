@@ -82,5 +82,6 @@ namespace CXXR
 SEXP Rf_allocS4Object()
 {
     SEXP ans = new CXXR::S4Object();
+    ans->expose();
     return ans;
 }

@@ -1065,6 +1065,7 @@ static SEXP coerceVectorList(SEXP v, SEXPTYPE type)
 		/* This is sneaky but saves us rewriting a lot of the duplicate code */
 		ExpressionVector *ev = static_cast<ExpressionVector *>(v);
 		ListVector *ans = new ListVector(*ev);
+		ans->expose();
 		return ans;
 	}
 
@@ -1072,6 +1073,7 @@ static SEXP coerceVectorList(SEXP v, SEXPTYPE type)
 	{
 		GCRoot<ListVector> lv(static_cast<ListVector *>(v));
 		ExpressionVector *ans = new ExpressionVector(*lv);
+		ans->expose();
 		return ans;
 	}
 
@@ -1735,6 +1737,7 @@ HIDDEN SEXP do_ascall(SEXP call, SEXP op, SEXP args, SEXP rho)
 		SEXP names = PROTECT(getAttrib(args, R_NamesSymbol)), ap;
 		GCRoot<PairList> tl(PairList::makeList(n - 1));
 		PROTECT(ap = ans = new Expression(nullptr, tl));
+		ans->expose();
 		for (int i = 0; i < n; i++)
 		{
 			SETCAR(ap, VECTOR_ELT(args, i));
@@ -1753,6 +1756,7 @@ HIDDEN SEXP do_ascall(SEXP call, SEXP op, SEXP args, SEXP rho)
 		SEXP names = PROTECT(getAttrib(args, R_NamesSymbol)), ap;
 		GCRoot<PairList> tl(PairList::makeList(n - 1));
 		PROTECT(ap = ans = new Expression(nullptr, tl));
+		ans->expose();
 		for (int i = 0; i < n; i++)
 		{
 			SETCAR(ap, XVECTOR_ELT(args, i));
@@ -2742,6 +2746,7 @@ HIDDEN SEXP do_docall(SEXP call, SEXP op, SEXP args, SEXP rho)
 
     GCRoot<PairList> tl(PairList::makeList(n));
     PROTECT(c = call = new Expression(nullptr, tl));
+    call->expose();
     if( isString(fun) ) {
 	const char *str = translateChar(STRING_ELT(fun, 0));
 	if (streql(str, ".Internal")) error(_("illegal usage"));

@@ -95,6 +95,7 @@ namespace CXXR
             T *ans = new T(cr, tl, tg);
             s_cons_cdr = nullptr;
             s_cons_car = nullptr;
+            ans->expose();
             return ans;
         }
 

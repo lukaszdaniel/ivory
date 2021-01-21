@@ -274,15 +274,18 @@ namespace CXXR
      */
     class RObject : public GCNode
     {
-    public: // private:
+    private:
         SEXPTYPE m_type : FULL_TYPE_BITS;
         bool m_scalar;
         bool m_has_class;
         bool m_alt;
+
+    public:
         unsigned int m_gpbits : 16;
         bool m_debug;
         bool m_trace; /* functions and memory tracing */
         bool m_spare; /* used on closures and when REFCNT is defined */
+    private:
         unsigned int m_named : NAMED_BITS;
         unsigned int m_extra : 29 - NAMED_BITS; /* used for immediate bindings */
         PairList *m_attrib;
@@ -338,7 +341,15 @@ namespace CXXR
         /**
          * @return altrep status of this object.
          */
-        bool altrep() const { return m_alt; }
+        bool altrep() const
+        {
+            return m_alt;
+        }
+
+        void setAltrep(bool on)
+        {
+            m_alt = on;
+        }
 
         /** @brief Set the status of this RObject as an S4 object.
          *

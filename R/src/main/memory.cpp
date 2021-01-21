@@ -478,6 +478,7 @@ SEXP R_MakeWeakRef(SEXP key, SEXP val, SEXP fin, Rboolean onexit)
         error(_("finalizer must be a function or NULL"));
     }
     WeakRef *ans = new WeakRef(key, val, fin, onexit);
+    ans->expose();
     return ans;
 }
 
@@ -485,6 +486,7 @@ SEXP R_MakeWeakRefC(SEXP key, SEXP val, R_CFinalizer_t fin, Rboolean onexit)
 {
     checkKey(key);
     WeakRef *ans = new WeakRef(key, val, fin, onexit);
+    ans->expose();
     return ans;
 }
 
@@ -613,6 +615,7 @@ namespace
     {
         if (node)
         {
+            node->expose();
             node->conductVisitor(marker);
         }
     }
@@ -630,7 +633,7 @@ void GCNode::gc(unsigned int num_old_gens_to_collect)
 
     propagateAges();
 
-    GCNode::Marker marker(num_old_gens_to_collect);
+    GCNode::Marker marker(num_old_gens_to_collect + 1);
     GCRootBase::visitRoots(&marker);
     MARK_THRU(&marker, R_BlankScalarString);	        /* Builtin constants */
 
@@ -699,9 +702,9 @@ void GCNode::gc(unsigned int num_old_gens_to_collect)
     }
 
     /* identify weakly reachable nodes */
-    WeakRef::markThru(num_old_gens_to_collect);
+    WeakRef::markThru(num_old_gens_to_collect + 1);
 
-    sweep(num_old_gens_to_collect);
+    sweep(num_old_gens_to_collect + 1);
 
     // std::cerr << "Finishing garbage collection\n";
     GCNode::check();
@@ -1044,6 +1047,7 @@ SEXP Rf_allocSExp(SEXPTYPE t)
         std::cerr << "Inappropriate SEXPTYPE (" << sexptype2char(t) << ") for ConsCell." << std::endl;
         abort();
     }
+    ans->expose();
     return ans;
 }
 
@@ -1059,6 +1063,7 @@ HIDDEN SEXP CONS_NR(SEXP car, SEXP cdr)
     GCRoot<> crr(CHK(car));
     GCRoot<PairList> tlr(SEXP_downcast<CXXR::PairList *>(CHK(cdr)));
     SEXP s = new PairList(crr, tlr);
+    s->expose();
 
     DISABLE_REFCNT(s);
     return s;
@@ -1069,6 +1074,7 @@ SEXP Rf_lcons(SEXP cr, SEXP tl)
     GCRoot<> crr(cr);
     GCRoot<PairList> tlr(SEXP_downcast<PairList *>(tl));
     Expression *ans = new Expression(crr, tlr);
+    ans->expose();
     return ans;
 }
 
@@ -1106,6 +1112,7 @@ SEXP R::NewEnvironment(SEXP namelist, SEXP valuelist, SEXP rho)
     GCRoot<PairList> namevalr(SEXP_downcast<PairList *>(valuelist));
     GCRoot<Environment> rhor(SEXP_downcast<Environment *>(rho));
     Environment *ans = new Environment(rhor, namevalr);
+    ans->expose();
     return ans;
 }
 
@@ -1121,6 +1128,7 @@ HIDDEN SEXP R::mkPROMISE(SEXP expr, SEXP rho)
     ENSURE_NAMEDMAX(expr);
 
     Promise *s = new Promise(exprt, rhort);
+    s->expose();
 
     INCREMENT_REFCNT(expr);
     INCREMENT_REFCNT(rho);
@@ -1254,7 +1262,7 @@ SEXP Rf_allocVector3(SEXPTYPE type, R_xlen_t length = 1, R_allocator_t *allocato
     default:
         Rf_error(_("invalid type/length (%s/%d) in vector allocation"), type2char(type), length);
     }
-
+    s->expose();
     return s;
 }
 
@@ -1265,6 +1273,7 @@ HIDDEN SEXP R::allocCharsxp(R_len_t length)
         R_ReportAllocation(convert2VEC<char>(length + 1) * sizeof(VECREC));
 #endif
         UncachedString *ans = new UncachedString(length);
+        ans->expose();
         return ans;
 }
 
@@ -1378,9 +1387,7 @@ HIDDEN SEXP do_memoryprofile(SEXP call, SEXP op, SEXP args, SEXP env)
     BEGIN_SUSPEND_INTERRUPTS {
 
       for (unsigned int gen = 0; gen < GCNode::numGenerations(); ++gen) {
-	  for (const GCNode *s = GCNode::s_generation[gen]->next();
-	       s != GCNode::s_generation[gen];
-	       s = s->next()) {
+	  for (const GCNode *s = GCNode::s_generation[gen]; s; s = s->next()) {
                if (const RObject* ob = SEXP_downcast<const RObject*>(s, false)) {
 	      tmp = ob->sexptype();
 	      if(tmp > LGLSXP) tmp -= 2;
@@ -1658,6 +1665,7 @@ SEXP R_MakeExternalPtr(void *p, SEXP tag, SEXP prot)
     GCRoot<> tagr(tag); if (tag) INCREMENT_REFCNT(tag);
     GCRoot<> protr(prot); if (prot) INCREMENT_REFCNT(prot);
     ExternalPointer *ans = new ExternalPointer(p, tag, prot);
+    ans->expose();
     return ans;
 }
 

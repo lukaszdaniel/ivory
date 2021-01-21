@@ -920,6 +920,7 @@ static SEXP findVarLocInFrame(SEXP rho, SEXP symbol, Rboolean *canCache)
 	       mechanism to allow setting a new value to get back to
 	       the data base. */
 	    tmp = new PairList();
+	    tmp->expose();
 	    SETCAR(tmp, val);
 	    SET_TAG(tmp, symbol);
 	    /* If the database has a canCache method, then call that.
@@ -2435,10 +2436,12 @@ HIDDEN SEXP do_attach(SEXP call, SEXP op, SEXP args, SEXP env)
 		if (TAG(x) == R_NilValue)
 		    error(_("all elements of a list must be named"));
 	    PROTECT(s = new Environment(nullptr, SEXP_downcast<PairList*>(shallow_duplicate(CAR(args)))));
+	    s->expose();
 	} else if (isEnvironment(CAR(args))) {
 	    SEXP p, loadenv = CAR(args);
 
 	    PROTECT(s = new Environment());
+	    s->expose();
 	    if (HASHTAB(loadenv) != R_NilValue) {
 		int i, n;
 		n = length(HASHTAB(loadenv));
@@ -2480,6 +2483,7 @@ HIDDEN SEXP do_attach(SEXP call, SEXP op, SEXP args, SEXP env)
 	if(tb->onAttach)
 	    tb->onAttach(tb);
 	PROTECT(s = new Environment());
+	s->expose();
 	SET_HASHTAB(s, CAR(args));
 	setAttrib(s, R_ClassSymbol, getAttrib(HASHTAB(s), R_ClassSymbol));
     }

@@ -50,7 +50,7 @@ namespace CXXR
         explicit AltRep(RObject *cr = nullptr, PairList *tl = nullptr, RObject *tg = nullptr)
             : PairList(cr, tl, tg)
         {
-             m_alt = true;
+            setAltrep(true);
         }
 
         /** @brief The name by which this type is known in R.
