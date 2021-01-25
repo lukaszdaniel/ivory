@@ -14,7 +14,7 @@ e70f2c5c23ddf839b5e3b1457fc6fdbd *man/lvqinit.Rd
 396eec671f1bddd185fa79831dd47ee3 *man/lvq3.Rd
 e8e077536af8608b6d5d366410bae87a *man/lvqtest.Rd
 4c659dd015ed95b15223d1a62c39a745 *man/multiedit.Rd
-e5137772a594042c8553b0b0aebfe618 *DESCRIPTION
+e0ce93a4d1e1da738dd5e7946e6421e7 *DESCRIPTION
 a90e18606f5d74d5d7877bac601293c3 *po/R-fr.po
 e569a5c40eda3b66bd0db7671e9c6fdd *po/R-class.pot
 132b8aade86ce1c1a9ee83d7806e6ec3 *po/R-ko.po
@@ -24,7 +24,7 @@ bb58b22589d23aa5601fda9610bba5f9 *po/R-pl.po
 164f05f9b14cae73fe699fdd3f4e2598 *po/class.pot
 3737839e3422f00c3942cf0ea7380674 *po/pl.po
 8d88c23f9287bce276807c315b860d16 *LICENCE.note
-3bad31311a37fe2f39e9c2ad876ab94c *inst/CITATION
+4ab3c6052e2eb9bf3a52dcad7f8c805e *inst/CITATION
 c830cfb0951e2ffda2054354bd4e1995 *inst/po/fr/LC_MESSAGES/R-class.mo
 da65a671962ac97ea64cf06d8ae584f2 *inst/po/en@quot/LC_MESSAGES/R-class.mo
 d3a01b24fd29d080939ee93d7c4905a1 *inst/po/de/LC_MESSAGES/R-class.mo

@@ -1796,7 +1796,8 @@ R_STDCXX([14], [CXX14], [CXX11])
 R_STDCXX([17], [CXX17], [CXX14])
 R_STDCXX([20], [CXX20], [CXX17])
 
-## Set default compiler to C++17 if available; otherwise C++14
+## Set default C++ compiler to C++17 if available, otherwise C++14
+## Do not set if neither is available.
 if test -n "${CXX}" && test -z "${CXXSTD}"; then
   if test -n "${CXX17}"; then
     CXX=${CXX17}
@@ -1804,10 +1805,13 @@ if test -n "${CXX}" && test -z "${CXXSTD}"; then
     CXXFLAGS=${CXX17FLAGS}
     CXXPICFLAGS=${CXX17PICFLAGS}
   elif test -n "${CXX14}"; then
+    AC_MSG_WARN([C++17 is not available so the default C++ standard is C++14])
     CXX=${CXX14}
     CXXSTD=${CXX14STD}
     CXXFLAGS=${CXX14FLAGS}
     CXXPICFLAGS=${CXX14PICFLAGS}
+  else
+    AC_MSG_WARN([Neither C++17 nor C++14 is available so no default C++ compiler is set])
   fi
 fi
 
@@ -3037,6 +3041,7 @@ R is now configured for ${host}
   Fortran fixed-form compiler: ${r_f77_compiler}
 
   Default C++ compiler:        ${r_cxx_compiler}
+  C++11 compiler:              ${r_cxx11_compiler}
   C++14 compiler:              ${r_cxx14_compiler}
   C++17 compiler:              ${r_cxx17_compiler}
   C++20 compiler:              ${r_cxx20_compiler}

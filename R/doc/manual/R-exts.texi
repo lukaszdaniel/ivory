@@ -1126,6 +1126,10 @@ create objects these can use code `earlier' in the package (see the
 provided that the objects created do not depend on those packages except
 @emph{via} namespace imports.
 
+Extreme care is needed if top-level computations are made to depend on
+availability or not of other packages.  In particular this applies to
+@code{setMethods} and @code{setClass} calls.
+
 Two exceptions are allowed: if the @file{R} subdirectory contains a file
 @file{sysdata.rda} (a saved image of one or more @R{} objects: please
 use suitable compression as suggested by @code{tools::resaveRdaFiles},
@@ -1924,8 +1928,7 @@ licence).
 * Using Makevars::
 * Configure example::
 * Using F9x code::
-* Using C++11 code::
-* Using C++14 and later::
+* Using C++ code::
 @end menu
 
 @node Using Makevars, Configure example, Configure and cleanup, Configure and cleanup
@@ -2250,12 +2253,12 @@ PKG_LIBS = $(SHLIB_OPENMP_CFLAGS)
 @end example
 
 Note that the macro @code{SHLIB_OPENMP_CXXFLAGS} applies to the default
-C++11 compiler and not necessarily to the C++14/17/20 compiler: users of
-the latter should do their own @command{configure} checks.  If you do
-use your own checks, make sure that OpenMP support is complete by
-compiling and linking an OpenMP-using program: on some platforms the
-runtime library is optional and on others that library depends on other
-optional libraries.
+C++ compiler and not necessarily to the C++17/20 compiler: users of the
+latter should do their own @command{configure} checks.  If you do use
+your own checks, make sure that OpenMP support is complete by compiling
+and linking an OpenMP-using program: on some platforms the runtime
+library is optional and on others that library depends on other optional
+libraries.
 @c For clang pre-7, libomp.so depended on libatomic.
 
 Some care is needed when compilers are from different families which may
@@ -2630,7 +2633,7 @@ R CMD INSTALL \
 or by setting the environment variables @code{ODBC_INCLUDE} and
 @code{ODBC_LIBS}.
 
-@node Using F9x code, Using C++11 code, Configure example, Configure and cleanup
+@node Using F9x code, Using C++ code, Configure example, Configure and cleanup
 @subsection Using F9x code
 
 @R{} assumes that source files with extension @file{.f} are fixed-form
@@ -2687,17 +2690,19 @@ define a module of the same name in multiple source files.
 @c As was done by frailtypack in 2018-12: gfortran accepted this, ODS
 @c on Solaris did not.
 
-@node Using C++11 code, Using C++14 and later, Using F9x code, Configure and cleanup
-@subsection Using C++11 code
+@node Using C++ code,  , Using F9x code, Configure and cleanup
+@subsection Using C++ code
 
 @R{} can be built without a C++ compiler although one is available (but
 not necessarily installed) on all known @R{} platforms.  As from @R{}
 4.0.0 a C++ compiler will be selected only if it conforms to the 2011
-standard (`C++11').  A minor update@footnote{The changes are linked from
-@uref{https://isocpp.org/@/std/@/standing-documents/@/sd-6-sg10-feature-test-recommendations}.}
-(`C++14') was published in December 2014.  A revision (`C++17') was
-published in December 2017, and a further revision (`C++20', with many
-new features) is scheduled for publication in May 2020.
+standard (`C++11').  A minor update@footnote{Some changes are linked
+from
+@uref{https://isocpp.org/@/std/@/standing-documents/@/sd-6-sg10-feature-test-recommendations}:
+there were also additional deprecations.} (`C++14') was published in
+December 2014 and will be used by default as from @R{} 4.1.0 if
+supported.  Further revisions `C++17' (in December 2017), and `C++20'
+(with many new features in December 2020) have been published since.
 
 What standard a C++ compiler aims to support can be hard to determine:
 the value@footnote{Values @code{201103L}, @code{201402L} and
@@ -2712,18 +2717,13 @@ supported.
 The webpage
 @uref{https://en.cppreference.com/@/w/@/cpp/@/compiler_support} gives
 some information on which compilers are known to support recent C++
-features.  @command{g++} claims full C++11 support from version 4.8.1.
+features.
 
-As from version 3.6.2@footnote{version 3.6.0 except on Windows.}, @R{}
-selects a default C++ compiler with options that conform as far as
-possible@footnote{allowing `GNU extensions', but if possible excluding
-C++14 features.} to C++11. Packages which do not specify @samp{R (>=
-4.0)} in their @file{DESCRIPTION} files need to explicitly require
-C++11, hence the rest of this section.
-
-In order to specify C++11 code in a package to be used with @R{}
-versions from 3.1.0 but before 3.6.2, the package's @file{Makevars} file
-(or @file{Makevars.win} on Windows) should include the line
+Different versions of @R{} have specified different minimum C++
+standards, so for maximal portability a package should specify the
+standard it requires.  In order to specify C++11 code in a package,
+@file{Makevars} file (or @file{Makevars.win} on Windows) should include
+the line
 
 @example
 CXX_STD = CXX11
@@ -2744,8 +2744,8 @@ If a package does have a @file{src/Makevars[.win]} file then setting the
 make variable @samp{CXX_STD} is preferred, as it allows @command{R CMD
 SHLIB} to work correctly in the package's @file{src} directory.
 
-If a package using C++11 has a @command{configure} script it is
-essential that it selects the correct compiler, @emph{via} something like
+If a package using C++ has a @command{configure} script it is essential
+that it selects the correct C++ standard, @emph{via} something like
 
 @example
 CXX11=`"$@{R_HOME@}/bin/R" CMD config CXX11`
@@ -2759,10 +2759,12 @@ AC_LANG(C++)
 @end example
 
 @noindent
-(paying attention to all the quotes required).
+if C++11 was specified, but using @code{CXX} instead of @code{CXX11} if
+no standard was specified.
 
-If you want to compile C++11 code in a subdirectory, make sure you pass
-down the macros to specify that compiler, e.g.@: in @file{src/Makevars}
+If you want to compile C++ code in a subdirectory, make sure you pass
+down the macros to specify the appropriate compiler, e.g.@: in
+@file{src/Makevars}
 @example
 sublibs:
          @@(cd libs && $(MAKE) \
@@ -2774,53 +2776,28 @@ by @command{R CMD SHLIB} as used by default by @command{R CMD INSTALL}.
 They do not necessarily apply if there is a @file{src/Makefile} file,
 nor to compilation done in vignettes or @emph{via} other packages.
 
-@node Using C++14 and later,  , Using C++11 code, Configure and cleanup
-@subsection Using C++14 and later
-
 Support for a C++14 compiler (where available) has been in @R{}
 since version 3.4.0.  Similar considerations to C++11 apply, with the
 variables associated with the C++14 compiler using the prefix
-@samp{CXX14} instead of @samp{CXX11}. Hence to use C++14 code in a
+@samp{CXX14} instead of @samp{CXX11}. For example, to use C++14 code in a
 package, the package's @file{Makevars} file (or @file{Makevars.win} on
 Windows) should include the line
 @example
 CXX_STD = CXX14
 @end example
 
-In the absence of a @file{Makevars} file, C++14 support can also be
-requested by the line
-@example
-SystemRequirements: C++14
-@end example
-@noindent
-in the @file{DESCRIPTION} file. Finally, the C++14 compiler can be
-used systematically by setting the environment variable @env{USE_CXX14}.
+Essentially complete C++14 support is available from GCC 5, LLVM
+@command{clang} 3.4 and currently-used versions of Apple
+@command{clang}.
 
-Code written for C++11 that emulates features of C++14 will
-not necessarily compile under a C++14 compiler@footnote{As from @R{}
-3.4.0, @command{configure} attempts to supply a C++14 compiler only if
-explicitly requested.  However, earlier versions of @R{} will use the
-default C++14 mode of @command{g++} 6 and later.}, since the emulation
-typically leads to a namespace clash.  In order to ensure that the code
-also compiles under C++14, something like the following should be
-done:
-@example
-#if __cplusplus >= 201402L
-using std::make_unique;
-#else
-// your emulation
-#endif
-@end example
-
-@noindent
-Code needing C++14 features would do better to test for their presence
-@emph{via} `SD-6 feature tests'@footnote{See
+Code needing C++14 features can check for their presence @emph{via}
+`SD-6 feature tests'@footnote{See
 @uref{https://isocpp.org/@/std/@/standing-documents/@/sd-6-sg10-feature-test-recommendations}
 or
 @uref{https://en.cppreference.com/@/w/@/cpp/@/experimental/@/feature_test}.
 It seems a reasonable assumption that any compiler promising some C++14
 conformance will provide these---e.g.@: @command{g++} 4.9.x did but
-4.8.5 did not.}.  That test could be
+4.8.5 did not.}.  Such a check could be
 
 @example
 #include <memory> // header where this is defined
@@ -2849,16 +2826,12 @@ back-compatibility @option{-std=gnu1y}.
 
 C++17 (as from @R{} 3.4.0) and C++20 (as from @R{} 4.0.0) can be
 specified in an analogous way (replacing @code{14} by @code{17} or
-@code{20}) but compiler/OS support is platform-dependent.  Feature tests
-can be used (and probably should be as support is still patchy,
-especially library support).
-
-C++17 and C++20 support are available with the default builds of @R{} on
-macOS and Windows as from @R{} 4.0.0.  Much of @command{g++}'s support
-for C++17 needs version 7 or later: this is more recent than some
-still-current Linux distributions.
-@c e.g. Ubuntu 16.04LTS
-
+@code{20}) but compiler/OS support is platform-dependent.  Both C++17
+and C++20 support are available with the default builds of @R{} on macOS
+and Windows as from @R{} 4.0.0.  Much of @command{g++}'s support for
+C++17 needs version 7 or later: that is more recent than some
+still-current Linux distributions and the OpenCSW compilers for
+Solaris.
 
 @node Checking and building packages, Writing package vignettes, Configure and cleanup, Creating R packages
 @section Checking and building packages
@@ -4545,10 +4518,9 @@ R-admin, R Installation and Administration},
 @end ifset
 
 Portable C++ code needs to follow the 2011 standard or to specify
-C+14/17/20 (see @ref{Using C++14 and later}) where available (which is
-not the case on all @R{} platforms).  Currently C++14 code is less
-portable than C++11 and C++17/20 support is patchy across @R{}
-platforms.
+C+14/17/20 where available (which is not the case on all @R{}
+platforms).  Currently C++14 code is a little less portable than C++11
+and C++17/20 support is patchy across @R{} platforms.
 
 If using Fortran with the GNU compiler, use the flags
 @option{-std=f95 -Wall -pedantic} which reject most GNU extensions and
@@ -5225,14 +5197,14 @@ Writing portable C and C++ code is mainly a matter of observing the
 standards (C99, C++11 or where declared C++14/17/20) and testing that
 extensions (such as POSIX functions) are supported.
 
-@strong{C++ standards}: As from version 3.6.0 (3.6.2 on Windows), @R{}
-defaults to C++11 where available@footnote{which it is on all known
-platforms, and is required as from @R{} 4.0.0}. However, in earlier
+@strong{C++ standards}: From version 3.6.0 (3.6.2 on Windows), @R{}
+defaulted to C++11 where available@footnote{which it is on all known
+platforms, and is required as from @R{} 4.0.0}.  However, in earlier
 versions the default standard was that of the compiler used, often C++98
-or C++14.  Packages which are for use only with @R{} 3.6.2 or later can
-assume C++11 or specify a later standard.  However, those which may be
-used in earlier versions need to specify C++11 explicitly (@pxref{Using
-C++11 code}) or be tested under all of C++11, C++98 and C++14.
+or C++14, and the default is likely to change in future.  For maximal
+portability a package should either specify a standard (@pxref{Using C++
+code}) or be tested under all of C++11, C++98 and C++14.  (Specifying
+C++14 or later will limit portability.)
 
 Note that the `TR1' C++ extensions are not part of any of these
 standards and the @code{<tr1/@var{name}>} headers are not supplied by some of
@@ -5344,18 +5316,18 @@ The GNU Fortran compiler also supports a large number of non-portable
 extensions, the most commonly encountered one being
 @code{ISNAN}@footnote{There is a portable way to do this in Fortran 2003
 (@code{ieee_is_nan()} in module @code{ieee_arithmetic}), but ironically
-that is not supported in the commonly-used versions 4.x of GNU Fortran.
-A pretty robust alternative is to test @code{if(my_var /= my_var)}.}.
-Some are listed at
+that is not supported in the versions 4.x of GNU Fortran.  A pretty
+robust alternative is to test @code{if(my_var /= my_var)}.}.  Some are
+listed at
 @uref{https://gcc.gnu.org/@/onlinedocs/@/gfortran/@/Extensions-implemented-in-GNU-Fortran.html}.
 One that frequently catches package writers is that it allows
 out-of-order declarations: in standard-conformant Fortran variables must
 be declared (explicitly or implicitly) before use in other declarations
 such as dimensions.
 
-GNU Fortran 10 gives a compilation error for the previously widespread
-practice of passing a Fortran array element where an array is expected,
-or a scalar instead of a length-one array.  See
+GNU Fortran 10 and later give a compilation error for the previously
+widespread practice of passing a Fortran array element where an array is
+expected, or a scalar instead of a length-one array.  See
 @uref{https://gcc.gnu.org/@/gcc-10/@/porting_to.html}.
 
 @item
@@ -8911,7 +8883,7 @@ ASAN_SYMBOLIZER_PATH=/path/to/llvm-symbolizer
 An alternative is to pipe the output through
 @command{asan_symbolize.py}@footnote{installed on some Linux systems as
 @command{asan_symbolize}, and obtainable from
-@uref{https://llvm.org/@/svn/@/llvm-project/@/compiler-rt/@/trunk/@/lib/@/asan/scripts/@/asan_symbolize.py}:
+@uref{https://github.com/llvm/llvm-project/blob/main/compiler-rt/lib/asan/scripts/asan_symbolize.py}:
 it makes use of @command{llvm-symbolizer} if available.} and perhaps
 then (for compiled C++ code) @command{c++filt}.  (On macOS, you may need
 to run @command{dsymutil} to get line-number reports.)
@@ -15686,7 +15658,7 @@ A possible implementation is
 void R_Suicide (const char *message)
 @{
     char  pp[1024];
-    snprintf(pp, 1024, "Fatal error: %s\n", s);
+    snprintf(pp, 1024, "Fatal error: %s\n", message);
     R_ShowMessage(pp);
     R_CleanUp(SA_SUICIDE, 2, 0);
 @}

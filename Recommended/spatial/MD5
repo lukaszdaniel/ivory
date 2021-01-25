@@ -20,7 +20,7 @@ d57b5eda214c735869247bb740c9ed01 *man/expcov.Rd
 a389d57fce743f4ce9ead8aac5c8526a *man/ppgetregion.Rd
 d9cd1238c3e23b65bc64c68f05e30f21 *man/predict.trls.Rd
 d23e9943ccdc74b185ab5a13cdd16d17 *man/Psim.Rd
-89adfd7f8a590fecf6b55ec37917c5e5 *DESCRIPTION
+ab2b14c741c35a523f15595b1a757dce *DESCRIPTION
 41dfcf71120c7f908d6c5250a6421175 *po/R-fr.po
 bdf952a3d4aa25f22eb4efd5ab6b1216 *po/R-ko.po
 a76d3481491a3fd09768d6b0970c0afd *po/R-de.po
@@ -30,7 +30,7 @@ a76d3481491a3fd09768d6b0970c0afd *po/R-de.po
 710dd83b6cd8b5bafebbe26867b65af6 *po/spatial.pot
 0b058681dc79fb46da0a54fd4832b223 *po/pl.po
 182f00cf50a61e570797768992be4db6 *LICENCE.note
-7112a4d219f74c9ecd9eedbc9c586290 *inst/CITATION
+e996c8c84dd8c4580a1a8926f5587377 *inst/CITATION
 ddd1e8e52385bd99a52eaeb865fd430a *inst/po/fr/LC_MESSAGES/R-spatial.mo
 fccafa15301128c8634e2fb1a30cab56 *inst/po/en@quot/LC_MESSAGES/R-spatial.mo
 8a1e18d1d5be2216ab842a12dca39d68 *inst/po/de/LC_MESSAGES/R-spatial.mo
@@ -62,7 +62,7 @@ ffa9468ba353521ffef5877e52c4e115 *inst/ppdata/pairfn.dat
 68df62ca82fbb4060473e77aa2cdff90 *inst/ppdata/fig1b.dat
 ead1f329d4b2bccbb77f13d2b9523a79 *inst/ppdata/drumlin.dat
 bafdf70ccb34531ff91986c2ba9daf19 *inst/ppdata/redwood.dat
-f9bd53c20b3a769c12dd8bf9a1ffb783 *tests/Examples/spatial-Ex.Rout.save
+3ca0a18120faab147bf62e77e24b9fca *tests/Examples/spatial-Ex.Rout.save
 30a993f860dfe832b6df3c6ffe645232 *R/pp.R
 98a2ee9826ed77ec2c49d4b4d4cbd123 *R/zzz.R
 41d587b6618e1b4b3dd4d00fb8a8a3fe *R/kr.R

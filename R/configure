@@ -29655,6 +29655,7 @@ else
 
 namespace cxx11
 {
+
   namespace test_static_assert
   {
 
@@ -29671,11 +29672,13 @@ namespace cxx11
 
     struct Base
     {
+      virtual ~Base() {}
       virtual void f() {}
     };
 
     struct Derived : public Base
     {
+      virtual ~Derived() override {}
       virtual void f() override {}
     };
 
@@ -29968,6 +29971,7 @@ else
 
 namespace cxx11
 {
+
   namespace test_static_assert
   {
 
@@ -29984,11 +29988,13 @@ namespace cxx11
 
     struct Base
     {
+      virtual ~Base() {}
       virtual void f() {}
     };
 
     struct Derived : public Base
     {
+      virtual ~Derived() override {}
       virtual void f() override {}
     };
 
@@ -30288,6 +30294,7 @@ else
 
 namespace cxx11
 {
+
   namespace test_static_assert
   {
 
@@ -30304,11 +30311,13 @@ namespace cxx11
 
     struct Base
     {
+      virtual ~Base() {}
       virtual void f() {}
     };
 
     struct Derived : public Base
     {
+      virtual ~Derived() override {}
       virtual void f() override {}
     };
 
@@ -30607,6 +30616,7 @@ else
 
 namespace cxx11
 {
+
   namespace test_static_assert
   {
 
@@ -30623,11 +30633,13 @@ namespace cxx11
 
     struct Base
     {
+      virtual ~Base() {}
       virtual void f() {}
     };
 
     struct Derived : public Base
     {
+      virtual ~Derived() override {}
       virtual void f() override {}
     };
 
@@ -30995,6 +31007,7 @@ else
 
 namespace cxx11
 {
+
   namespace test_static_assert
   {
 
@@ -31011,11 +31024,13 @@ namespace cxx11
 
     struct Base
     {
+      virtual ~Base() {}
       virtual void f() {}
     };
 
     struct Derived : public Base
     {
+      virtual ~Derived() override {}
       virtual void f() override {}
     };
 
@@ -31413,6 +31428,7 @@ else
 
 namespace cxx11
 {
+
   namespace test_static_assert
   {
 
@@ -31429,11 +31445,13 @@ namespace cxx11
 
     struct Base
     {
+      virtual ~Base() {}
       virtual void f() {}
     };
 
     struct Derived : public Base
     {
+      virtual ~Derived() override {}
       virtual void f() override {}
     };
 
@@ -31838,6 +31856,7 @@ else
 
 namespace cxx11
 {
+
   namespace test_static_assert
   {
 
@@ -31854,11 +31873,13 @@ namespace cxx11
 
     struct Base
     {
+      virtual ~Base() {}
       virtual void f() {}
     };
 
     struct Derived : public Base
     {
+      virtual ~Derived() override {}
       virtual void f() override {}
     };
 
@@ -32262,6 +32283,7 @@ else
 
 namespace cxx11
 {
+
   namespace test_static_assert
   {
 
@@ -32278,11 +32300,13 @@ namespace cxx11
 
     struct Base
     {
+      virtual ~Base() {}
       virtual void f() {}
     };
 
     struct Derived : public Base
     {
+      virtual ~Derived() override {}
       virtual void f() override {}
     };
 
@@ -32753,6 +32777,7 @@ else
 
 namespace cxx11
 {
+
   namespace test_static_assert
   {
 
@@ -32769,11 +32794,13 @@ namespace cxx11
 
     struct Base
     {
+      virtual ~Base() {}
       virtual void f() {}
     };
 
     struct Derived : public Base
     {
+      virtual ~Derived() override {}
       virtual void f() override {}
     };
 
@@ -33131,23 +33158,6 @@ namespace cxx14
 
 
 
-/* We don't want compiler-specific tests for R so these conditional
-   tests are commented out.
-
-   For C++17 features supported by compiler see
-   https://gcc.gnu.org/projects/cxx-status.html#cxx1z  for gcc
-   http://clang.llvm.org/cxx_status.html               for clang
-   http://en.cppreference.com/w/cpp/compiler_support   for an overview
-
-#if defined(__clang__)
-  #define REALLY_CLANG
-#else
-  #if defined(__GNUC__)
-    #define REALLY_GCC
-  #endif
-#endif
-*/
-
 #include <initializer_list>
 #include <utility>
 #include <type_traits>
@@ -33155,18 +33165,12 @@ namespace cxx14
 namespace cxx17
 {
 
-/* Not listed as supported by clang 4 - MTP
-#if !defined(REALLY_CLANG)
   namespace test_constexpr_lambdas
   {
-
-    // TODO: test it with clang++ from git
 
     constexpr int foo = [](){return 42;}();
 
   }
-#endif // !defined(REALLY_CLANG)
-*/
 
   namespace test::nested_namespace::definitions
   {
@@ -33401,12 +33405,8 @@ namespace cxx17
 
   }
 
-/* P0091R3 not supported by clang 4.0.0 - MTP
-#if !defined(REALLY_CLANG)
   namespace test_template_argument_deduction_for_class_templates
   {
-
-    // TODO: test it with clang++ from git
 
     template <typename T1, typename T2>
     struct pair
@@ -33426,8 +33426,6 @@ namespace cxx17
     }
 
   }
-#endif // !defined(REALLY_CLANG)
-*/
 
   namespace test_non_type_auto_template_parameters
   {
@@ -33441,13 +33439,8 @@ namespace cxx17
 
   }
 
-/* P0217R3 should be supported in clang 4.0.0, but test code dumps core
-   In addition, gcc 7.0.1 fails on the last test - MTP
-#if !defined(REALLY_CLANG)
   namespace test_structured_bindings
   {
-
-    // TODO: test it with clang++ from git
 
     int arr[2] = { 1, 2 };
     std::pair<int, int> pr = { 1, 2 };
@@ -33480,14 +33473,9 @@ namespace cxx17
     const auto [ x3, y3 ] = f3();
 
   }
-#endif // !defined(REALLY_CLANG)
-*/
 
-  // P0012R1: clang >= 4
   namespace test_exception_spec_type_system
   {
-
-    // TODO: test it with clang++ from git
 
     struct Good {};
     struct Bad {};
@@ -33571,6 +33559,7 @@ else
 
 namespace cxx11
 {
+
   namespace test_static_assert
   {
 
@@ -33587,11 +33576,13 @@ namespace cxx11
 
     struct Base
     {
+      virtual ~Base() {}
       virtual void f() {}
     };
 
     struct Derived : public Base
     {
+      virtual ~Derived() override {}
       virtual void f() override {}
     };
 
@@ -33949,23 +33940,6 @@ namespace cxx14
 
 
 
-/* We don't want compiler-specific tests for R so these conditional
-   tests are commented out.
-
-   For C++17 features supported by compiler see
-   https://gcc.gnu.org/projects/cxx-status.html#cxx1z  for gcc
-   http://clang.llvm.org/cxx_status.html               for clang
-   http://en.cppreference.com/w/cpp/compiler_support   for an overview
-
-#if defined(__clang__)
-  #define REALLY_CLANG
-#else
-  #if defined(__GNUC__)
-    #define REALLY_GCC
-  #endif
-#endif
-*/
-
 #include <initializer_list>
 #include <utility>
 #include <type_traits>
@@ -33973,18 +33947,12 @@ namespace cxx14
 namespace cxx17
 {
 
-/* Not listed as supported by clang 4 - MTP
-#if !defined(REALLY_CLANG)
   namespace test_constexpr_lambdas
   {
-
-    // TODO: test it with clang++ from git
 
     constexpr int foo = [](){return 42;}();
 
   }
-#endif // !defined(REALLY_CLANG)
-*/
 
   namespace test::nested_namespace::definitions
   {
@@ -34219,12 +34187,8 @@ namespace cxx17
 
   }
 
-/* P0091R3 not supported by clang 4.0.0 - MTP
-#if !defined(REALLY_CLANG)
   namespace test_template_argument_deduction_for_class_templates
   {
-
-    // TODO: test it with clang++ from git
 
     template <typename T1, typename T2>
     struct pair
@@ -34244,8 +34208,6 @@ namespace cxx17
     }
 
   }
-#endif // !defined(REALLY_CLANG)
-*/
 
   namespace test_non_type_auto_template_parameters
   {
@@ -34259,13 +34221,8 @@ namespace cxx17
 
   }
 
-/* P0217R3 should be supported in clang 4.0.0, but test code dumps core
-   In addition, gcc 7.0.1 fails on the last test - MTP
-#if !defined(REALLY_CLANG)
   namespace test_structured_bindings
   {
-
-    // TODO: test it with clang++ from git
 
     int arr[2] = { 1, 2 };
     std::pair<int, int> pr = { 1, 2 };
@@ -34298,14 +34255,9 @@ namespace cxx17
     const auto [ x3, y3 ] = f3();
 
   }
-#endif // !defined(REALLY_CLANG)
-*/
 
-  // P0012R1: clang >= 4
   namespace test_exception_spec_type_system
   {
-
-    // TODO: test it with clang++ from git
 
     struct Good {};
     struct Bad {};
@@ -34396,6 +34348,7 @@ else
 
 namespace cxx11
 {
+
   namespace test_static_assert
   {
 
@@ -34412,11 +34365,13 @@ namespace cxx11
 
     struct Base
     {
+      virtual ~Base() {}
       virtual void f() {}
     };
 
     struct Derived : public Base
     {
+      virtual ~Derived() override {}
       virtual void f() override {}
     };
 
@@ -34774,23 +34729,6 @@ namespace cxx14
 
 
 
-/* We don't want compiler-specific tests for R so these conditional
-   tests are commented out.
-
-   For C++17 features supported by compiler see
-   https://gcc.gnu.org/projects/cxx-status.html#cxx1z  for gcc
-   http://clang.llvm.org/cxx_status.html               for clang
-   http://en.cppreference.com/w/cpp/compiler_support   for an overview
-
-#if defined(__clang__)
-  #define REALLY_CLANG
-#else
-  #if defined(__GNUC__)
-    #define REALLY_GCC
-  #endif
-#endif
-*/
-
 #include <initializer_list>
 #include <utility>
 #include <type_traits>
@@ -34798,18 +34736,12 @@ namespace cxx14
 namespace cxx17
 {
 
-/* Not listed as supported by clang 4 - MTP
-#if !defined(REALLY_CLANG)
   namespace test_constexpr_lambdas
   {
-
-    // TODO: test it with clang++ from git
 
     constexpr int foo = [](){return 42;}();
 
   }
-#endif // !defined(REALLY_CLANG)
-*/
 
   namespace test::nested_namespace::definitions
   {
@@ -35044,12 +34976,8 @@ namespace cxx17
 
   }
 
-/* P0091R3 not supported by clang 4.0.0 - MTP
-#if !defined(REALLY_CLANG)
   namespace test_template_argument_deduction_for_class_templates
   {
-
-    // TODO: test it with clang++ from git
 
     template <typename T1, typename T2>
     struct pair
@@ -35069,8 +34997,6 @@ namespace cxx17
     }
 
   }
-#endif // !defined(REALLY_CLANG)
-*/
 
   namespace test_non_type_auto_template_parameters
   {
@@ -35084,13 +35010,8 @@ namespace cxx17
 
   }
 
-/* P0217R3 should be supported in clang 4.0.0, but test code dumps core
-   In addition, gcc 7.0.1 fails on the last test - MTP
-#if !defined(REALLY_CLANG)
   namespace test_structured_bindings
   {
-
-    // TODO: test it with clang++ from git
 
     int arr[2] = { 1, 2 };
     std::pair<int, int> pr = { 1, 2 };
@@ -35123,14 +35044,9 @@ namespace cxx17
     const auto [ x3, y3 ] = f3();
 
   }
-#endif // !defined(REALLY_CLANG)
-*/
 
-  // P0012R1: clang >= 4
   namespace test_exception_spec_type_system
   {
-
-    // TODO: test it with clang++ from git
 
     struct Good {};
     struct Bad {};
@@ -35220,6 +35136,7 @@ else
 
 namespace cxx11
 {
+
   namespace test_static_assert
   {
 
@@ -35236,11 +35153,13 @@ namespace cxx11
 
     struct Base
     {
+      virtual ~Base() {}
       virtual void f() {}
     };
 
     struct Derived : public Base
     {
+      virtual ~Derived() override {}
       virtual void f() override {}
     };
 
@@ -35598,23 +35517,6 @@ namespace cxx14
 
 
 
-/* We don't want compiler-specific tests for R so these conditional
-   tests are commented out.
-
-   For C++17 features supported by compiler see
-   https://gcc.gnu.org/projects/cxx-status.html#cxx1z  for gcc
-   http://clang.llvm.org/cxx_status.html               for clang
-   http://en.cppreference.com/w/cpp/compiler_support   for an overview
-
-#if defined(__clang__)
-  #define REALLY_CLANG
-#else
-  #if defined(__GNUC__)
-    #define REALLY_GCC
-  #endif
-#endif
-*/
-
 #include <initializer_list>
 #include <utility>
 #include <type_traits>
@@ -35622,18 +35524,12 @@ namespace cxx14
 namespace cxx17
 {
 
-/* Not listed as supported by clang 4 - MTP
-#if !defined(REALLY_CLANG)
   namespace test_constexpr_lambdas
   {
-
-    // TODO: test it with clang++ from git
 
     constexpr int foo = [](){return 42;}();
 
   }
-#endif // !defined(REALLY_CLANG)
-*/
 
   namespace test::nested_namespace::definitions
   {
@@ -35868,12 +35764,8 @@ namespace cxx17
 
   }
 
-/* P0091R3 not supported by clang 4.0.0 - MTP
-#if !defined(REALLY_CLANG)
   namespace test_template_argument_deduction_for_class_templates
   {
-
-    // TODO: test it with clang++ from git
 
     template <typename T1, typename T2>
     struct pair
@@ -35893,8 +35785,6 @@ namespace cxx17
     }
 
   }
-#endif // !defined(REALLY_CLANG)
-*/
 
   namespace test_non_type_auto_template_parameters
   {
@@ -35908,13 +35798,8 @@ namespace cxx17
 
   }
 
-/* P0217R3 should be supported in clang 4.0.0, but test code dumps core
-   In addition, gcc 7.0.1 fails on the last test - MTP
-#if !defined(REALLY_CLANG)
   namespace test_structured_bindings
   {
-
-    // TODO: test it with clang++ from git
 
     int arr[2] = { 1, 2 };
     std::pair<int, int> pr = { 1, 2 };
@@ -35947,14 +35832,9 @@ namespace cxx17
     const auto [ x3, y3 ] = f3();
 
   }
-#endif // !defined(REALLY_CLANG)
-*/
 
-  // P0012R1: clang >= 4
   namespace test_exception_spec_type_system
   {
-
-    // TODO: test it with clang++ from git
 
     struct Good {};
     struct Bad {};
@@ -36113,6 +35993,7 @@ else
 
 namespace cxx11
 {
+
   namespace test_static_assert
   {
 
@@ -36129,11 +36010,13 @@ namespace cxx11
 
     struct Base
     {
+      virtual ~Base() {}
       virtual void f() {}
     };
 
     struct Derived : public Base
     {
+      virtual ~Derived() override {}
       virtual void f() override {}
     };
 
@@ -36491,23 +36374,6 @@ namespace cxx14
 
 
 
-/* We don't want compiler-specific tests for R so these conditional
-   tests are commented out.
-
-   For C++17 features supported by compiler see
-   https://gcc.gnu.org/projects/cxx-status.html#cxx1z  for gcc
-   http://clang.llvm.org/cxx_status.html               for clang
-   http://en.cppreference.com/w/cpp/compiler_support   for an overview
-
-#if defined(__clang__)
-  #define REALLY_CLANG
-#else
-  #if defined(__GNUC__)
-    #define REALLY_GCC
-  #endif
-#endif
-*/
-
 #include <initializer_list>
 #include <utility>
 #include <type_traits>
@@ -36515,18 +36381,12 @@ namespace cxx14
 namespace cxx17
 {
 
-/* Not listed as supported by clang 4 - MTP
-#if !defined(REALLY_CLANG)
   namespace test_constexpr_lambdas
   {
-
-    // TODO: test it with clang++ from git
 
     constexpr int foo = [](){return 42;}();
 
   }
-#endif // !defined(REALLY_CLANG)
-*/
 
   namespace test::nested_namespace::definitions
   {
@@ -36761,12 +36621,8 @@ namespace cxx17
 
   }
 
-/* P0091R3 not supported by clang 4.0.0 - MTP
-#if !defined(REALLY_CLANG)
   namespace test_template_argument_deduction_for_class_templates
   {
-
-    // TODO: test it with clang++ from git
 
     template <typename T1, typename T2>
     struct pair
@@ -36786,8 +36642,6 @@ namespace cxx17
     }
 
   }
-#endif // !defined(REALLY_CLANG)
-*/
 
   namespace test_non_type_auto_template_parameters
   {
@@ -36801,13 +36655,8 @@ namespace cxx17
 
   }
 
-/* P0217R3 should be supported in clang 4.0.0, but test code dumps core
-   In addition, gcc 7.0.1 fails on the last test - MTP
-#if !defined(REALLY_CLANG)
   namespace test_structured_bindings
   {
-
-    // TODO: test it with clang++ from git
 
     int arr[2] = { 1, 2 };
     std::pair<int, int> pr = { 1, 2 };
@@ -36840,14 +36689,9 @@ namespace cxx17
     const auto [ x3, y3 ] = f3();
 
   }
-#endif // !defined(REALLY_CLANG)
-*/
 
-  // P0012R1: clang >= 4
   namespace test_exception_spec_type_system
   {
-
-    // TODO: test it with clang++ from git
 
     struct Good {};
     struct Bad {};
@@ -36931,6 +36775,7 @@ else
 
 namespace cxx11
 {
+
   namespace test_static_assert
   {
 
@@ -36947,11 +36792,13 @@ namespace cxx11
 
     struct Base
     {
+      virtual ~Base() {}
       virtual void f() {}
     };
 
     struct Derived : public Base
     {
+      virtual ~Derived() override {}
       virtual void f() override {}
     };
 
@@ -37309,23 +37156,6 @@ namespace cxx14
 
 
 
-/* We don't want compiler-specific tests for R so these conditional
-   tests are commented out.
-
-   For C++17 features supported by compiler see
-   https://gcc.gnu.org/projects/cxx-status.html#cxx1z  for gcc
-   http://clang.llvm.org/cxx_status.html               for clang
-   http://en.cppreference.com/w/cpp/compiler_support   for an overview
-
-#if defined(__clang__)
-  #define REALLY_CLANG
-#else
-  #if defined(__GNUC__)
-    #define REALLY_GCC
-  #endif
-#endif
-*/
-
 #include <initializer_list>
 #include <utility>
 #include <type_traits>
@@ -37333,18 +37163,12 @@ namespace cxx14
 namespace cxx17
 {
 
-/* Not listed as supported by clang 4 - MTP
-#if !defined(REALLY_CLANG)
   namespace test_constexpr_lambdas
   {
-
-    // TODO: test it with clang++ from git
 
     constexpr int foo = [](){return 42;}();
 
   }
-#endif // !defined(REALLY_CLANG)
-*/
 
   namespace test::nested_namespace::definitions
   {
@@ -37579,12 +37403,8 @@ namespace cxx17
 
   }
 
-/* P0091R3 not supported by clang 4.0.0 - MTP
-#if !defined(REALLY_CLANG)
   namespace test_template_argument_deduction_for_class_templates
   {
-
-    // TODO: test it with clang++ from git
 
     template <typename T1, typename T2>
     struct pair
@@ -37604,8 +37424,6 @@ namespace cxx17
     }
 
   }
-#endif // !defined(REALLY_CLANG)
-*/
 
   namespace test_non_type_auto_template_parameters
   {
@@ -37619,13 +37437,8 @@ namespace cxx17
 
   }
 
-/* P0217R3 should be supported in clang 4.0.0, but test code dumps core
-   In addition, gcc 7.0.1 fails on the last test - MTP
-#if !defined(REALLY_CLANG)
   namespace test_structured_bindings
   {
-
-    // TODO: test it with clang++ from git
 
     int arr[2] = { 1, 2 };
     std::pair<int, int> pr = { 1, 2 };
@@ -37658,14 +37471,9 @@ namespace cxx17
     const auto [ x3, y3 ] = f3();
 
   }
-#endif // !defined(REALLY_CLANG)
-*/
 
-  // P0012R1: clang >= 4
   namespace test_exception_spec_type_system
   {
-
-    // TODO: test it with clang++ from git
 
     struct Good {};
     struct Bad {};
@@ -37756,6 +37564,7 @@ else
 
 namespace cxx11
 {
+
   namespace test_static_assert
   {
 
@@ -37772,11 +37581,13 @@ namespace cxx11
 
     struct Base
     {
+      virtual ~Base() {}
       virtual void f() {}
     };
 
     struct Derived : public Base
     {
+      virtual ~Derived() override {}
       virtual void f() override {}
     };
 
@@ -38134,23 +37945,6 @@ namespace cxx14
 
 
 
-/* We don't want compiler-specific tests for R so these conditional
-   tests are commented out.
-
-   For C++17 features supported by compiler see
-   https://gcc.gnu.org/projects/cxx-status.html#cxx1z  for gcc
-   http://clang.llvm.org/cxx_status.html               for clang
-   http://en.cppreference.com/w/cpp/compiler_support   for an overview
-
-#if defined(__clang__)
-  #define REALLY_CLANG
-#else
-  #if defined(__GNUC__)
-    #define REALLY_GCC
-  #endif
-#endif
-*/
-
 #include <initializer_list>
 #include <utility>
 #include <type_traits>
@@ -38158,18 +37952,12 @@ namespace cxx14
 namespace cxx17
 {
 
-/* Not listed as supported by clang 4 - MTP
-#if !defined(REALLY_CLANG)
   namespace test_constexpr_lambdas
   {
-
-    // TODO: test it with clang++ from git
 
     constexpr int foo = [](){return 42;}();
 
   }
-#endif // !defined(REALLY_CLANG)
-*/
 
   namespace test::nested_namespace::definitions
   {
@@ -38404,12 +38192,8 @@ namespace cxx17
 
   }
 
-/* P0091R3 not supported by clang 4.0.0 - MTP
-#if !defined(REALLY_CLANG)
   namespace test_template_argument_deduction_for_class_templates
   {
-
-    // TODO: test it with clang++ from git
 
     template <typename T1, typename T2>
     struct pair
@@ -38429,8 +38213,6 @@ namespace cxx17
     }
 
   }
-#endif // !defined(REALLY_CLANG)
-*/
 
   namespace test_non_type_auto_template_parameters
   {
@@ -38444,13 +38226,8 @@ namespace cxx17
 
   }
 
-/* P0217R3 should be supported in clang 4.0.0, but test code dumps core
-   In addition, gcc 7.0.1 fails on the last test - MTP
-#if !defined(REALLY_CLANG)
   namespace test_structured_bindings
   {
-
-    // TODO: test it with clang++ from git
 
     int arr[2] = { 1, 2 };
     std::pair<int, int> pr = { 1, 2 };
@@ -38483,14 +38260,9 @@ namespace cxx17
     const auto [ x3, y3 ] = f3();
 
   }
-#endif // !defined(REALLY_CLANG)
-*/
 
-  // P0012R1: clang >= 4
   namespace test_exception_spec_type_system
   {
-
-    // TODO: test it with clang++ from git
 
     struct Good {};
     struct Bad {};
@@ -38580,6 +38352,7 @@ else
 
 namespace cxx11
 {
+
   namespace test_static_assert
   {
 
@@ -38596,11 +38369,13 @@ namespace cxx11
 
     struct Base
     {
+      virtual ~Base() {}
       virtual void f() {}
     };
 
     struct Derived : public Base
     {
+      virtual ~Derived() override {}
       virtual void f() override {}
     };
 
@@ -38958,23 +38733,6 @@ namespace cxx14
 
 
 
-/* We don't want compiler-specific tests for R so these conditional
-   tests are commented out.
-
-   For C++17 features supported by compiler see
-   https://gcc.gnu.org/projects/cxx-status.html#cxx1z  for gcc
-   http://clang.llvm.org/cxx_status.html               for clang
-   http://en.cppreference.com/w/cpp/compiler_support   for an overview
-
-#if defined(__clang__)
-  #define REALLY_CLANG
-#else
-  #if defined(__GNUC__)
-    #define REALLY_GCC
-  #endif
-#endif
-*/
-
 #include <initializer_list>
 #include <utility>
 #include <type_traits>
@@ -38982,18 +38740,12 @@ namespace cxx14
 namespace cxx17
 {
 
-/* Not listed as supported by clang 4 - MTP
-#if !defined(REALLY_CLANG)
   namespace test_constexpr_lambdas
   {
-
-    // TODO: test it with clang++ from git
 
     constexpr int foo = [](){return 42;}();
 
   }
-#endif // !defined(REALLY_CLANG)
-*/
 
   namespace test::nested_namespace::definitions
   {
@@ -39228,12 +38980,8 @@ namespace cxx17
 
   }
 
-/* P0091R3 not supported by clang 4.0.0 - MTP
-#if !defined(REALLY_CLANG)
   namespace test_template_argument_deduction_for_class_templates
   {
-
-    // TODO: test it with clang++ from git
 
     template <typename T1, typename T2>
     struct pair
@@ -39253,8 +39001,6 @@ namespace cxx17
     }
 
   }
-#endif // !defined(REALLY_CLANG)
-*/
 
   namespace test_non_type_auto_template_parameters
   {
@@ -39268,13 +39014,8 @@ namespace cxx17
 
   }
 
-/* P0217R3 should be supported in clang 4.0.0, but test code dumps core
-   In addition, gcc 7.0.1 fails on the last test - MTP
-#if !defined(REALLY_CLANG)
   namespace test_structured_bindings
   {
-
-    // TODO: test it with clang++ from git
 
     int arr[2] = { 1, 2 };
     std::pair<int, int> pr = { 1, 2 };
@@ -39307,14 +39048,9 @@ namespace cxx17
     const auto [ x3, y3 ] = f3();
 
   }
-#endif // !defined(REALLY_CLANG)
-*/
 
-  // P0012R1: clang >= 4
   namespace test_exception_spec_type_system
   {
-
-    // TODO: test it with clang++ from git
 
     struct Good {};
     struct Bad {};
@@ -39434,7 +39170,8 @@ fi
 
 
 
-## Set default compiler to C++17 if available; otherwise C++14
+## Set default C++ compiler to C++17 if available, otherwise C++14
+## Do not set if neither is available.
 if test -n "${CXX}" && test -z "${CXXSTD}"; then
   if test -n "${CXX17}"; then
     CXX=${CXX17}
@@ -39442,10 +39179,15 @@ if test -n "${CXX}" && test -z "${CXXSTD}"; then
     CXXFLAGS=${CXX17FLAGS}
     CXXPICFLAGS=${CXX17PICFLAGS}
   elif test -n "${CXX14}"; then
+    { $as_echo "$as_me:${as_lineno-$LINENO}: WARNING: C++17 is not available so the default C++ standard is C++14" >&5
+$as_echo "$as_me: WARNING: C++17 is not available so the default C++ standard is C++14" >&2;}
     CXX=${CXX14}
     CXXSTD=${CXX14STD}
     CXXFLAGS=${CXX14FLAGS}
     CXXPICFLAGS=${CXX14PICFLAGS}
+  else
+    { $as_echo "$as_me:${as_lineno-$LINENO}: WARNING: Neither C++17 nor C++14 is available so no default C++ compiler is set" >&5
+$as_echo "$as_me: WARNING: Neither C++17 nor C++14 is available so no default C++ compiler is set" >&2;}
   fi
 fi
 
@@ -57452,6 +57194,7 @@ R is now configured for ${host}
   Fortran fixed-form compiler: ${r_f77_compiler}
 
   Default C++ compiler:        ${r_cxx_compiler}
+  C++11 compiler:              ${r_cxx11_compiler}
   C++14 compiler:              ${r_cxx14_compiler}
   C++17 compiler:              ${r_cxx17_compiler}
   C++20 compiler:              ${r_cxx20_compiler}
@@ -57478,6 +57221,7 @@ R is now configured for ${host}
   Fortran fixed-form compiler: ${r_f77_compiler}
 
   Default C++ compiler:        ${r_cxx_compiler}
+  C++11 compiler:              ${r_cxx11_compiler}
   C++14 compiler:              ${r_cxx14_compiler}
   C++17 compiler:              ${r_cxx17_compiler}
   C++20 compiler:              ${r_cxx20_compiler}

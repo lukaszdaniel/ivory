@@ -1,7 +1,7 @@
 #  File src/library/tools/R/check.R
 #  Part of the R package, https://www.R-project.org
 #
-#  Copyright (C) 1995-2020 The R Core Team
+#  Copyright (C) 1995-2021 The R Core Team
 #
 #  This program is free software; you can redistribute it and/or modify
 #  it under the terms of the GNU General Public License as published by
@@ -1702,7 +1702,10 @@ add_dummies <- function(dir, Log)
     check_non_ASCII <- function()
     {
         checkingLog(Log, gettext("checking R files for non-ASCII characters ...", domain = "R-tools"))
-        out <- R_runR0("tools:::.check_package_ASCII_code('.')", R_opts2, "R_DEFAULT_PACKAGES=NULL")
+        out <- R_runR0("tools:::.check_package_ASCII_code('.')",
+                       R_opts2,
+                       c("R_DEFAULT_PACKAGES=NULL",
+                         "_R_NO_REPORT_MISSING_NAMESPACES_=true"))
         if (length(out)) {
             warningLog(Log)
             msg <- ngettext(length(out),
@@ -2048,7 +2051,8 @@ add_dummies <- function(dir, Log)
             Rcmd <- paste(opWarn_string, "\n",
                           sprintf("tools:::.check_package_parseRd('.', minlevel=%s)\n", minlevel))
             ## This now evaluates \Sexpr, so run with usual packages.
-            out <- R_runR0(Rcmd, R_opts2, elibs)
+            out <- R_runR0(Rcmd, R_opts2,
+                           c(elibs, "_R_NO_REPORT_MISSING_NAMESPACES_=true"))
             t2 <- proc.time()
             print_time(t1, t2, Log)
             if (length(out)) {

@@ -183,6 +183,7 @@
       \item \code{all.equal()} no longer gives an error on \code{DOTSXP}
       objects.
 
+      %% The Homebrew arm64 libs have cairo but not cairo-xlib
       \item \code{capabilities("cairo")} now applies only to the
       file-based devices as it is now possible (if very unusual) to
       build \R with Cairo support for those but not for \code{X11()}.
@@ -315,6 +316,27 @@
     }
   }
 
+  \subsection{PACKAGE INSTALLATION}{
+    \itemize{
+      \item The default C++ standard has been changed to C++14 where
+      available (which it is on all currently checked platforms): if not
+      (as before) C++11 is used if available otherwise C++ is not
+      supported.
+
+      Packages which specify C++11 will still be installed using C++11.
+
+      C++14 compilers may give deprecation warnings, most often for
+      \code{std::random_shuffle} (deprecated in C++14 and removed in
+      C++17).  Either specify C++11 (see \sQuote{Writing R Extenions})
+      or modernize the code and if needed specify C++14.  The latter has
+      been supported since \R 3.4.0 so the package's \file{DESCRIPTION}
+      would need to include something like
+\preformatted{
+     Depends: R (>= 3.4)
+}
+    }
+  }
+
   \subsection{PACKAGE INSTALLATION on Windows}{
     \itemize{
       \item \command{R CMD INSTALL} and \command{R CMD SHLIB} make use
@@ -332,7 +354,7 @@
   \subsection{PACKAGE INSTALLATION on macOS}{
     \itemize{
       \item The default personal library directory on builds with
-      \option{--enable-aqua} (including\acronym{CRAN} builds) now
+      \option{--enable-aqua} (including \acronym{CRAN} builds) now
       differs by CPU type, one of
 \preformatted{
       ~/Library/R/x86_64/x.y/library
@@ -422,6 +444,10 @@
       \code{chol2inv()}, \code{solve.default()} and \code{svd()} has
       been defunct since \R 3.1.0.  It was silently ignored up to \R
       4.0.3 but now gives an error.
+
+      \item Subsetting/indexing, i.e. \code{ddd[*]} on a \code{DOTSXP}
+      (dot-dot-dot) object \code{ddd} has been disabled; it worked by
+      accident only, undocumentedly.
     }
   }
 
@@ -515,6 +541,14 @@
 
       \item \code{str()} now works correctly for DOTSXP and related
       exotics, even when these are doomed.
+
+      Additionally, it no longer fails for \code{list}s with a \code{class} and
+      \dQuote{irregular} method definitions such that e.g. \code{lapply(*)} will
+      necessarily fail, as currently for different \CRANpkg{igraph} objects.
+
+      \item \code{as.data.frame.list(L, row.names=NULL)} now behaves in line
+      with \code{data.frame()}, disregarding names of components of
+      \code{L}, fixing \PR{18034}, reported by Kevin Tappe.
     }
   }
 }
