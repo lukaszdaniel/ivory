@@ -277,8 +277,10 @@ namespace CXXR
     private:
         SEXPTYPE m_type : FULL_TYPE_BITS;
         bool m_scalar;
+
     public:
         bool m_has_class;
+
     private:
         bool m_alt;
 
@@ -594,6 +596,8 @@ namespace CXXR
 
 extern "C"
 {
+    extern SEXP R_NilValue;
+
     /** @brief Get object's ::SEXPTYPE.
      *
      * @param x Pointer to CXXR::RObject.

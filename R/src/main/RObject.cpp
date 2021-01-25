@@ -28,9 +28,7 @@
 #include <CXXR/RObject.hpp>
 #include <CXXR/Symbol.hpp>
 #include <CXXR/PairList.hpp>
-#include <CXXR/DebugMacros.hpp>
 #include <R_ext/Boolean.h>
-#include <Rinternals.h>
 
 namespace CXXR
 {
@@ -55,6 +53,9 @@ namespace CXXR
         const auto &ALTREPptr = ALTREP;
         const auto &SETALTREPptr = SETALTREP;
     } // namespace ForceNonInline
+
+    // In CXXR R_NilValue is simply a null pointer:
+    SEXP R_NilValue = nullptr;
 
     RObject::~RObject()
     {

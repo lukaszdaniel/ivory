@@ -385,13 +385,55 @@ extern "C"
      * @param x Pointer to a CXXR::String.
      * @return true iff \a x is marked as having LATIN1 encoding.
      */
-	int(IS_LATIN1)(SEXP x);
+	int IS_LATIN1(SEXP x);
 
 	/**
      * @param x Pointer to a CXXR::String.
      * @return true iff \a x is marked as having UTF8 encoding.
      */
-	int(IS_UTF8)(SEXP x);
+	int IS_UTF8(SEXP x);
+
+	/**
+     * @param x Pointer to a CXXR::String.
+     * @return true iff \a x is marked as having BYTES encoding.
+     */
+	int IS_BYTES(SEXP x);
+
+	/**
+     * @param x Pointer to a CXXR::String.
+     * @return true iff \a x is marked as having ASCII encoding.
+     */
+	int IS_ASCII(SEXP x);
+
+	int ENC_KNOWN(SEXP x);
+
+	int IS_CACHED(SEXP x);
+
+	/** @brief Set LATIN1 encoding.
+     *
+     * @param x Pointer to a CXXR::String.
+     */
+	void SET_LATIN1(SEXP x);
+
+	/** @brief Set UTF8 encoding.
+     *
+     * @param x Pointer to a CXXR::String.
+     */
+	void SET_UTF8(SEXP x);
+
+	/** @brief Set BYTES encoding.
+     *
+     * @param x Pointer to a CXXR::String.
+     */
+	void SET_BYTES(SEXP x);
+
+	/** @brief Set ASCII encoding.
+     *
+     * @param x Pointer to a CXXR::String.
+     */
+	void SET_ASCII(SEXP x);
+
+	void SET_CACHED(SEXP x);
 
 	/* Hashing Functions */
 

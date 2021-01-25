@@ -1019,7 +1019,6 @@ void *R_realloc_gc(void *p, size_t n)
 
 
 /* "allocSExp" allocate a RObject */
-/* call gc if necessary */
 
 SEXP Rf_allocSExp(SEXPTYPE t)
 {
@@ -1038,12 +1037,13 @@ SEXP Rf_allocSExp(SEXPTYPE t)
     case BCODESXP:
         ans = new ByteCode();
         break;
-    // case CLOSXP:
-    //     return new Closure();
+    case CLOSXP:
+        return new Closure();
+    case ENVSXP:
+        return new Environment();
     // case PROMSXP:
     //     return new Promise();
     default:
-        // return new RObject(t);
         std::cerr << "Inappropriate SEXPTYPE (" << sexptype2char(t) << ") for ConsCell." << std::endl;
         abort();
     }
@@ -2523,17 +2523,17 @@ CXXR::CCODE PRIMFUN(SEXP x) { return R_FunTab[PRIMOFFSET(CHK(x))].cfun(); }
 // void (SET_PRIMFUN)(SEXP x, CXXR::CCODE f) { R_FunTab[PRIMOFFSET(CHK(x))].m_cfun = f; }
 
 /* for use when testing the write barrier */
-HIDDEN int (IS_BYTES)(SEXP x) { return CXXR::String::is_bytes(CHK(x)); }
-HIDDEN int (IS_LATIN1)(SEXP x) { return CXXR::String::is_latin1(CHK(x)); }
-HIDDEN int (IS_ASCII)(SEXP x) { return CXXR::String::is_ascii(CHK(x)); }
-HIDDEN int (IS_UTF8)(SEXP x) { return CXXR::String::is_utf8(CHK(x)); }
-HIDDEN void (SET_BYTES)(SEXP x) { CXXR::String::set_bytes(CHK(x)); }
-HIDDEN void (SET_LATIN1)(SEXP x) { CXXR::String::set_latin1(CHK(x)); }
-HIDDEN void (SET_UTF8)(SEXP x) { CXXR::String::set_utf8(CHK(x)); }
-HIDDEN void (SET_ASCII)(SEXP x) { CXXR::String::set_ascii(CHK(x)); }
-int  (ENC_KNOWN)(SEXP x) { return CXXR::String::enc_known(CHK(x)); }
-HIDDEN void (SET_CACHED)(SEXP x) { CXXR::String::set_cached(CHK(x)); }
-int  (IS_CACHED)(SEXP x) { return CXXR::String::is_cached(CHK(x)); }
+HIDDEN int IS_BYTES(SEXP x) { return CXXR::String::is_bytes(CHK(x)); }
+HIDDEN int IS_LATIN1(SEXP x) { return CXXR::String::is_latin1(CHK(x)); }
+HIDDEN int IS_ASCII(SEXP x) { return CXXR::String::is_ascii(CHK(x)); }
+HIDDEN int IS_UTF8(SEXP x) { return CXXR::String::is_utf8(CHK(x)); }
+HIDDEN void SET_BYTES(SEXP x) { CXXR::String::set_bytes(CHK(x)); }
+HIDDEN void SET_LATIN1(SEXP x) { CXXR::String::set_latin1(CHK(x)); }
+HIDDEN void SET_UTF8(SEXP x) { CXXR::String::set_utf8(CHK(x)); }
+HIDDEN void SET_ASCII(SEXP x) { CXXR::String::set_ascii(CHK(x)); }
+int  ENC_KNOWN(SEXP x) { return CXXR::String::enc_known(CHK(x)); }
+HIDDEN void SET_CACHED(SEXP x) { CXXR::String::set_cached(CHK(x)); }
+int  IS_CACHED(SEXP x) { return CXXR::String::is_cached(CHK(x)); }
 
 /*******************************************/
 /* Non-sampling memory use profiler

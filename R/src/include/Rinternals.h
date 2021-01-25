@@ -140,30 +140,6 @@ Rboolean (Rf_isRaw)(SEXP s);
 
 #endif /* USE_RINTERNALS */
 
-// =====
-// These are required by stringi package
-// if we're disabling USE_RINTERNALS for them.
-#ifndef TESTING_WRITE_BARRIER
-#ifndef IS_BYTES
-#define IS_BYTES(x) (LEVELS(x) & 2)
-#endif
-#ifndef IS_LATIN1
-#define IS_LATIN1(x) (LEVELS(x) & 4)
-#endif
-#ifndef IS_ASCII
-#define IS_ASCII(x) (LEVELS(x) & 64)
-#endif
-#ifndef IS_UTF8
-#define IS_UTF8(x) (LEVELS(x) & 8)
-#endif
-#ifndef IS_CACHED
-#define IS_CACHED(x) (LEVELS(x) & 32)
-#endif
-#ifndef ENC_KNOWN
-#define ENC_KNOWN(x) (LEVELS(x) & 12)
-#endif
-#endif
-// =====
 
 #define IS_SIMPLE_SCALAR(x, type) \
     (IS_SCALAR(x, type) && ATTRIB(x) == R_NilValue)
@@ -559,15 +535,7 @@ LibExtern SEXP	R_NamespaceRegistry;/* Registry for registered namespaces */
 LibExtern SEXP	R_Srcref;           /* Current srcref, for debuggers */
 
 /* Special Values */
-#if 0
-LibExtern SEXP	R_NilValue;	    /* The nil object */
-#else
-#ifdef __cplusplus
-#define R_NilValue ((SEXP)nullptr)
-#else
-#define R_NilValue ((SEXP)NULL)
-#endif
-#endif
+LibExtern SEXP R_NilValue;	    /* The nil object */
 LibExtern SEXP R_UnboundValue;	    /* Unbound marker */
 LibExtern SEXP R_MissingArg;	    /* Missing argument marker */
 LibExtern SEXP R_InBCInterpreter;  /* To be found in BC interp. state (marker) */

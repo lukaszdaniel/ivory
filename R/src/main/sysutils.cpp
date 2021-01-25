@@ -25,6 +25,7 @@
 #define R_NO_REMAP
 #define R_USE_SIGNALS 1
 
+#include <CXXR/String.hpp>
 #include <cstdlib> /* for putenv */
 #include <Localization.h>
 #include <Defn.h>

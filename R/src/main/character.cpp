@@ -90,6 +90,7 @@ abbreviate chartr make.names strtrim tolower toupper give error.
 #endif
 
 #include <CXXR/BuiltInFunction.hpp>
+#include <CXXR/String.hpp>
 #include <Defn.h>
 #include <Localization.h>
 #include <Internal.h>

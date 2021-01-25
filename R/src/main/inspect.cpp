@@ -32,6 +32,7 @@
 
 #include <CXXR/RObject.hpp>
 #include <CXXR/Environment.hpp>
+#include <CXXR/String.hpp>
 #include <Localization.h>
 #include <Defn.h>
 #include <Internal.h>

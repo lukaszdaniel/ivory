@@ -23,6 +23,7 @@
 #endif
 
 #include <CXXR/Expression.hpp>
+#include <CXXR/String.hpp>
 #include <Defn.h>
 
 #include "statsR.h"
