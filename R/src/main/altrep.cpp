@@ -39,22 +39,30 @@ using namespace CXXR;
 /**
  **  ALTREP Class Registry for Serialization
  **/
-
+namespace
+{
 /* Use ATTRIB field to hold class info. OK since not visible outside. */
 #define ALTREP_CLASS_SERIALIZED_CLASS(x) ATTRIB(x)
-#define SET_ALTREP_CLASS_SERIALIZED_CLASS(x, csym, psym, stype) \
-    SET_ATTRIB(x, list3(csym, psym, stype))
+    void SET_ALTREP_CLASS_SERIALIZED_CLASS(SEXP x, SEXP csym, SEXP psym, SEXP stype)
+    {
+        GCRoot<PairList> pl(SEXP_downcast<PairList *>(Rf_list3(csym, psym, stype)));
+        SET_TAG(pl, install("Altrep class"));
+        SET_TAG(CDR(pl), install("Package"));              //
+        SET_TAG(CDR(CDR(pl)), install("Underlying type")); //
+        SET_ATTRIB(x, pl);
+    }
 #define ALTREP_SERIALIZED_CLASS_CLSSYM(x) (CAR(x))
 #define ALTREP_SERIALIZED_CLASS_PKGSYM(x) (CADR(x))
-#define ALTREP_SERIALIZED_CLASS_TYPE(x) INTEGER0(CADDR(x))[0]
+#define ALTREP_SERIALIZED_CLASS_TYPE(x) \
+    INTEGER0(CADDR(x))[0]
 #define ALTREP_OBJECT_CLSSYM(x) ALTREP_SERIALIZED_CLASS_CLSSYM( \
-	ALTREP_SERIALIZED_CLASS(x))
+    ALTREP_SERIALIZED_CLASS(x))
 #define ALTREP_OBJECT_PKGSYM(x) ALTREP_SERIALIZED_CLASS_PKGSYM( \
-	ALTREP_SERIALIZED_CLASS(x))
+    ALTREP_SERIALIZED_CLASS(x))
 
 #define ALTREP_CLASS_BASE_TYPE(x) \
     ALTREP_SERIALIZED_CLASS_TYPE(ALTREP_CLASS_SERIALIZED_CLASS(x))
-
+} // namespace
 static SEXP Registry = nullptr;
 
 static SEXP LookupClassEntry(SEXP csym, SEXP psym)
@@ -677,8 +685,7 @@ static SEXP altrep_DuplicateEX_default(SEXP x, Rboolean deep)
 	    UNPROTECT(1);
 	}
 	else if (ATTRIB(ans) != R_NilValue) {
-	    SET_ATTRIB(ans, R_NilValue);
-	    SET_OBJECT(ans, FALSE);
+	    ans->clearAttributes();
 	    UNSET_S4_OBJECT(ans);
 	}
     }

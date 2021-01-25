@@ -430,8 +430,7 @@ HIDDEN SEXP do_sort(SEXP call, SEXP op, SEXP args, SEXP rho)
     /* we need consistent behaviour here, including dropping attibutes,
        so as from 2.3.0 we always duplicate. */
     PROTECT(ans = duplicate(CAR(args)));
-    SET_ATTRIB(ans, R_NilValue);  /* this is never called with names */
-    SET_OBJECT(ans, 0);		  /* we may have just stripped off the class */
+    ans->clearAttributes(); /* this is never called with names */ /* we may have just stripped off the class */
     sortVector(ans, bool(decreasing));
     UNPROTECT(1);
     return(ans); /* wrapping with metadata happens at end of sort.int */
@@ -837,8 +836,7 @@ HIDDEN SEXP do_psort(SEXP call, SEXP op, SEXP args, SEXP rho)
     }
 #endif
     SETCAR(args, duplicate(x));
-    SET_ATTRIB(CAR(args), R_NilValue);  /* remove all attributes */
-    SET_OBJECT(CAR(args), 0);           /* and the object bit    */
+    CAR(args)->clearAttributes(); /* remove all attributes and the object bit */
     Psort0(CAR(args), 0, n - 1, l, nind);
     return CAR(args);
 }

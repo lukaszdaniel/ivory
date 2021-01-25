@@ -2399,13 +2399,13 @@ void SET_MISSING(SEXP x, int v) { CXXR::RObject::set_missing(CHKCONS(x), v); }
 SEXP FORMALS(SEXP x) { return CHK(CXXR::Closure::formals(CHK(x))); }
 SEXP BODY(SEXP x) { return CHK(CXXR::Closure::body(CHK(x))); }
 SEXP CLOENV(SEXP x) { return CHK(CXXR::Closure::cloenv(CHK(x))); }
-int RDEBUG(SEXP x) { return CXXR::Closure::rdebug(CHK(x)); }
+int RDEBUG(SEXP x) { return CXXR::FunctionBase::rdebug(CHK(x)); }
 int RSTEP(SEXP x) { return CXXR::Closure::rstep(CHK(x)); }
 
 void SET_FORMALS(SEXP x, SEXP v) { FIX_REFCNT(x, CXXR::Closure::formals(x), v); CXXR::Closure::set_formals(x, v); }
 void SET_BODY(SEXP x, SEXP v) { FIX_REFCNT(x, CXXR::Closure::body(x), v); CXXR::Closure::set_body(x, v); }
 void SET_CLOENV(SEXP x, SEXP v) { FIX_REFCNT(x, CXXR::Closure::cloenv(x), v); CXXR::Closure::set_cloenv(x, v); }
-void SET_RDEBUG(SEXP x, int v) { CXXR::Closure::set_rdebug(CHK(x), v); }
+void SET_RDEBUG(SEXP x, int v) { CXXR::FunctionBase::set_rdebug(CHK(x), v); }
 void SET_RSTEP(SEXP x, int v) { CXXR::Closure::set_rstep(CHK(x), v); }
 
 /* These are only needed with the write barrier on */
@@ -2439,11 +2439,14 @@ SEXP FRAME(SEXP x) { return CHK(CXXR::Environment::frame(CHK(x))); }
 SEXP ENCLOS(SEXP x) { return CHK(CXXR::Environment::enclos(CHK(x))); }
 SEXP HASHTAB(SEXP x) { return CHK(CXXR::Environment::hashtab(CHK(x))); }
 int ENVFLAGS(SEXP x) { return CXXR::Environment::envflags(CHK(x)); }
+int ENV_RDEBUG(SEXP x) { return CXXR::Environment::env_rdebug(CHK(x)); }
 
 void SET_FRAME(SEXP x, SEXP v) { FIX_REFCNT(x, CXXR::Environment::frame(x), v); CXXR::Environment::set_frame(x, v); }
 void SET_ENCLOS(SEXP x, SEXP v) { FIX_REFCNT(x, CXXR::Environment::enclos(x), v); CXXR::Environment::set_enclos(x, v); }
 void SET_HASHTAB(SEXP x, SEXP v) { FIX_REFCNT(x, CXXR::Environment::hashtab(x), v); CXXR::Environment::set_hashtab(x, v); }
 void SET_ENVFLAGS(SEXP x, int v) { CXXR::Environment::set_envflags(x, v); }
+void SET_ENV_RDEBUG(SEXP x, int v) { CXXR::Environment::set_env_rdebug(CHK(x), v); }
+
 
 /* Promise Accessors */
 SEXP PRCODE(SEXP x) { return CHK(CXXR::Promise::prcode(CHK(x))); }

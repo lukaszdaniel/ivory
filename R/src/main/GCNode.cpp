@@ -33,31 +33,12 @@
 
 namespace CXXR
 {
-    unsigned int GCNode::SchwarzCtr::s_count = 0;
     unsigned int GCNode::s_num_generations = 0;
     const GCNode **GCNode::s_generation;
     unsigned int *GCNode::s_next_gen;
     size_t *GCNode::s_gencount;
     size_t GCNode::s_num_nodes;
     GCNode::AgedList *GCNode::s_aged_list;
-
-    GCNode::SchwarzCtr::SchwarzCtr()
-    {
-        if (!s_count++)
-        {
-            GCNode::initialize();
-            GCRootBase::initialize();
-        }
-    }
-
-    GCNode::SchwarzCtr::~SchwarzCtr()
-    {
-        if (!--s_count)
-        {
-            GCRootBase::cleanup();
-            GCNode::cleanup();
-        }
-    }
 
     GCNode::GCNode(int)
         : m_next(nullptr), m_gcgen(0), m_marked(false), m_aged(false)
@@ -151,6 +132,7 @@ void* GCNode::operator new(size_t bytes)
 
     void GCNode::cleanup()
     {
+        GCRootBase::cleanup();
         delete s_aged_list;
         delete[] s_gencount;
         delete[] s_next_gen;
@@ -172,6 +154,7 @@ void* GCNode::operator new(size_t bytes)
         }
         s_next_gen[0] = 0;
         s_next_gen[s_num_generations - 1] = s_num_generations - 1;
+        GCRootBase::initialize();
     }
 
     void GCNode::propagateAges()

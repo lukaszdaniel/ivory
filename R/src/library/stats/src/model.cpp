@@ -955,8 +955,7 @@ SEXP updateform(SEXP old, SEXP new_)
     /* the attribute list of the returned */
     /* value, but it can't hurt. */
 
-    SET_ATTRIB(_new, R_NilValue);
-    SET_OBJECT(_new, 0);
+    _new->clearAttributes();
     SEXP DotEnvSymbol = install(".Environment");
     setAttrib(_new, DotEnvSymbol, getAttrib(old, DotEnvSymbol));
 
@@ -1815,8 +1814,8 @@ SEXP termsform(SEXP args)
     if (allowDot == NA_LOGICAL) allowDot = 0;
 
     // a := attributes(<answer>)
-    a = allocList((specials == R_NilValue) ? 8 : 9);
-    SET_ATTRIB(ans, a);
+    GCRoot<> attributes(allocList((specials == R_NilValue) ? 8 : 9));
+    a = attributes;
 
     /* Step 1: Determine the ``variables'' in the model :
      * ------ Here we create a call of the form list(...).
@@ -2176,9 +2175,9 @@ SEXP termsform(SEXP args)
 
     SETCAR(a, mkString("terms"));
     SET_TAG(a, R_ClassSymbol);
-    SET_OBJECT(ans, 1);
 
     SETCDR(a, R_NilValue);  /* truncate if necessary */
+    SET_ATTRIB(ans, attributes);
 
     UNPROTECT(5);
     return ans;

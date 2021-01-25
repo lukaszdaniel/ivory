@@ -36,7 +36,10 @@
 #include <Rmath.h>
 
 #include <R_ext/RS.h>
+#include <CXXR/RObject.hpp>
+
 using namespace R;
+using namespace CXXR;
 
 #ifdef LONG_VECTOR_SUPPORT
 static void R_qsort_R(double *v, double *I, size_t i, size_t j);
@@ -59,8 +62,7 @@ HIDDEN SEXP do_qsort(SEXP call, SEXP op, SEXP args, SEXP rho)
     x_real= (Rboolean) (TYPEOF(x) == REALSXP);
     x_int = (Rboolean) (!x_real && (TYPEOF(x) == INTSXP || TYPEOF(x) == LGLSXP));
     PROTECT(sx = (x_real || x_int) ? duplicate(x) : coerceVector(x, REALSXP));
-    SET_ATTRIB(sx, R_NilValue);
-    SET_OBJECT(sx, 0);
+    sx->clearAttributes();
     indx_ret = asLogical(CADR(args));
     R_xlen_t n = XLENGTH(x);
 #ifdef LONG_VECTOR_SUPPORT

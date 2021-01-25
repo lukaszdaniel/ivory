@@ -43,6 +43,26 @@ namespace CXXR
     class FunctionBase : public RObject
     {
     public:
+        /** @brief Is debugging enabled?
+         *
+         * @return true iff debugging is currently enabled for this
+         * Funtion.
+         */
+        bool debugging() const
+        {
+            return m_debug;
+        }
+
+        /** @brief Set debugging status.
+         *
+         * @param on The required new debugging status (true =
+         *           enabled).
+         */
+        void setDebugging(bool on)
+        {
+            m_debug = on;
+        }
+
         /** @brief The name by which this type is known in R.
          *
          * @return the name by which this type is known in R.
@@ -52,6 +72,8 @@ namespace CXXR
             return "(function type)";
         }
 
+        static bool rdebug(RObject *x);
+        static void set_rdebug(RObject *x, bool v);
         static bool rtrace(RObject *x);
         static void set_rtrace(RObject *x, bool v);
 
@@ -60,13 +82,55 @@ namespace CXXR
          * @param stype Required type of the FunctionBase.
          */
         explicit FunctionBase(SEXPTYPE stype)
-            : RObject(stype)
+            : RObject(stype), m_debug(false)
         {
         }
 
         virtual ~FunctionBase(){};
+
+    private:
+        bool m_debug;
     };
 
 } // namespace CXXR
+
+extern "C"
+{
+    /** @brief Get object tracing status.
+     *
+     * @param x Pointer to CXXR::RObject.
+     * @return Refer to 'R Internals' document.  Returns 0 if \a x is a
+     *         null pointer.
+     */
+    int RTRACE(SEXP x);
+
+    void SET_RTRACE(SEXP x, int v);
+
+    /** @brief Query debugging status.
+     *
+     * @param x Pointer to a CXXR::FunctionBase object.
+     *
+     * @return \c true if debugging is set, i.e. evaluations of the
+     *         function should run under the browser.
+     *
+     * @note In CXXR, RDEBUG() is applicable only to FunctionBase; use
+     * ENV_RDEBUG() to query the debugging (single-stepping) state
+     * for environments.
+     */
+    int RDEBUG(SEXP x);
+
+    /**
+     * Set the debugging state of a CXXR::FunctionBase object.
+     *
+     * @param x Pointer a CXXR::FunctionBase object (checked).
+     *
+     * @param v The new debugging state.
+     *
+     * @note In CXXR, SET_RDEBUG() is applicable only to FunctionBase; use
+     * SET_ENV_RDEBUG() to set the debugging (single-stepping) state
+     * for environments.
+     */
+    void SET_RDEBUG(SEXP x, int v);
+}
 
 #endif // FUNCTIONBASE_HPP

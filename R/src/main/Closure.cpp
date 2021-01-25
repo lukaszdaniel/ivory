@@ -42,10 +42,8 @@ namespace CXXR
         const auto &FORMALSptr = FORMALS;
         const auto &MISSINGptr = MISSING;
         const auto &SET_MISSINGptr = SET_MISSING;
-        const auto &RDEBUGptr = RDEBUG;
         const auto &RSTEPptr = RSTEP;
         const auto &SET_CLOENVptr = SET_CLOENV;
-        const auto &SET_RDEBUGptr = SET_RDEBUG;
         const auto &SET_RSTEPptr = SET_RSTEP;
     } // namespace ForceNonInline
 
@@ -212,29 +210,6 @@ namespace CXXR
         Closure *clos = SEXP_downcast<Closure *>(x);
         Environment *env = SEXP_downcast<Environment *>(v);
         clos->setEnvironment(env);
-    }
-
-    /** @brief Query debugging status.
-     *
-     * @param x Pointer to a CXXR::Closure object.
-     *
-     * @return \c true if debugging is set, i.e. evaluations of the
-     *         function should run under the browser.
-     */
-    bool Closure::rdebug(RObject *x) { return x && x->m_debug; }
-
-    /**
-     * Set the debugging state of a CXXR::Closure object.
-     *
-     * @param x Pointer to a CXXR::Closure object (checked).
-     *
-     * @param v The new debugging state.
-     */
-    void Closure::set_rdebug(RObject *x, bool v)
-    {
-        if (!x)
-            return;
-        x->m_debug = v;
     }
 
     bool Closure::rstep(RObject *x) { return x && x->m_spare; }

@@ -138,8 +138,6 @@ namespace CXXR
       static void set_body(RObject *x, RObject *v);
       static RObject *cloenv(RObject *x);
       static void set_cloenv(RObject *x, RObject *v);
-      static bool rdebug(RObject *x);
-      static void set_rdebug(RObject *x, bool v);
       static bool rstep(RObject *x);
       static void set_rstep(RObject *x, bool v);
 
@@ -197,13 +195,6 @@ extern "C"
     */
    SEXP CLOENV(SEXP x);
 
-   /**
-    * @param x Pointer to a CXXR::Closure object.
-    * @return \c true if debugging is set, i.e. evaluations of the
-    *         function should run under the browser.
-    */
-   Rboolean DEBUG(SEXP x);
-
    /** @brief Access formal arguments of a CXXR::Closure.
     *
     * @param x Pointer to a CXXR::Closure object (checked).
@@ -211,13 +202,6 @@ extern "C"
     * @return Pointer to the formal argument list of \a x.
     */
    SEXP FORMALS(SEXP x);
-
-   /**
-    * Set the debugging state of a CXXR::Closure object.
-    * @param x Pointer to a CXXR::Closure object.
-    * @param v The new debugging state.
-    */
-   void SET_DEBUG(SEXP x, Rboolean v);
 
    /**
     * Set the formals of a CXXR::Closure object.

@@ -168,7 +168,7 @@ static void onintrEx(Rboolean resumeOK)
 
     if (resumeOK) {
 	SEXP rho = R_GlobalContext->workingEnvironment();
-	int dbflag = RDEBUG(rho);
+	int dbflag = ENV_RDEBUG(rho);
 	RCNTXT restartcontext;
 	restartcontext.start(CTXT_RESTART, R_NilValue, R_GlobalEnv, R_BaseEnv, R_NilValue, R_NilValue);
 	bool redo = false;
@@ -186,7 +186,7 @@ static void onintrEx(Rboolean resumeOK)
 			}
 			else
 			{
-				SET_RDEBUG(rho, dbflag); /* in case browser() has messed with it */
+				SET_ENV_RDEBUG(rho, dbflag); /* in case browser() has messed with it */
 				R_ReturnedValue = R_NilValue;
 				R_Visible = false;
 				restartcontext.end();

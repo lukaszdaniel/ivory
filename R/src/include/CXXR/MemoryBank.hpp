@@ -35,6 +35,7 @@
 #include <CXXR/CellPool.hpp>
 #include <CXXR/SEXPTYPE.hpp>
 #include <R_ext/Rallocators.h>
+#include <CXXR/SchwarzCounter.hpp>
 
 #ifdef __GNUC__
 #ifdef __i386__
@@ -58,53 +59,6 @@ namespace CXXR
 	class MemoryBank
 	{
 	public:
-		/** @brief Schwarz counter.
-		 *
-		 * The Schwarz counter (see for example Stephen C. Dewhurst's
-		 * book 'C++ Gotchas') is a programming idiom to ensure that a
-		 * class (including particularly its static members) is
-		 * initialized before any client of the class requires to use
-		 * it, and that on program exit the class's static resources
-		 * are not cleaned up prematurely (e.g. while the class is
-		 * still in use by another class's static members).  Devices
-		 * such as this are necessitated by the fact that the standard
-		 * does not prescribe the order in which objects of file and
-		 * global scope in different compilation units are
-		 * initialized: it only specifies that the order of
-		 * destruction must be the reverse of the order of
-		 * initialization.
-		 *
-		 * This is achieved by the unusual stratagem of including the
-		 * \e definition of a lightweight data item within this header
-		 * file.  This data item is of type MemoryBank::SchwarzCtr, and is
-		 * declared within an anonymous namespace.  Each file that
-		 * <tt>\#include</tt>s this header file will therefore include
-		 * a definition of a SchwarzCtr object, and this definition
-		 * will precede any data definitions within the enclosing file
-		 * that depend on class MemoryBank.  Consequently, the SchwarzCtr
-		 * object will be constructed before any data objects of the
-		 * client file.  The constructor of SchwarzCtr is so defined
-		 * that when the first such object is created, the class MemoryBank
-		 * will itself be initialized.
-		 *
-		 * Conversely, when the program exits, data items within each
-		 * client file will have their destructors invoked before the
-		 * file's SchwarzCtr object has its destructor invoked.  This
-		 * SchwarzCtr destructor is so defined that only when the last
-		 * SchwarzCtr object is destroyed is the MemoryBank class itself
-		 * cleaned up.
-		 */
-		class SchwarzCtr
-		{
-		public:
-			SchwarzCtr();
-
-			~SchwarzCtr();
-
-		private:
-			static unsigned int s_count;
-		};
-
 		/** @brief Allocate a block of memory.
 		 *
 		 * @param bytes Required size in bytes of the block.
@@ -266,14 +220,14 @@ namespace CXXR
 		friend void initializeMemorySubsystem();
 		static void initialize();
 
-		friend class SchwarzCtr;
+		friend class SchwarzCounter<MemoryBank>;
 		MemoryBank() = delete;
 	};
 } // namespace CXXR
 
 namespace
 {
-	CXXR::MemoryBank::SchwarzCtr memorybank_schwarz_ctr;
+	CXXR::SchwarzCounter<CXXR::MemoryBank> memorybank_schwarz_ctr;
 }
 
 #endif /* MEMORYBANK_HPP */

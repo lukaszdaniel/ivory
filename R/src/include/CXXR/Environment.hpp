@@ -75,7 +75,7 @@ namespace CXXR
        * checked.
        */
       explicit Environment(Environment *enclosing = nullptr, PairList *namevals = nullptr)
-          : RObject(ENVSXP), m_enclosing(enclosing), m_frame(namevals), m_hashtable(nullptr)
+          : RObject(ENVSXP), m_enclosing(enclosing), m_frame(namevals), m_hashtable(nullptr), m_single_stepping(false)
       {
          INCREMENT_REFCNT(namevals);
 
@@ -195,6 +195,26 @@ namespace CXXR
          propagateAge(m_hashtable);
       }
 
+      /** @brief Set single-stepping status
+	 *
+	 * @param on The required single-stepping status (true =
+	 *           enabled).
+	 */
+      void setSingleStepping(bool on)
+      {
+         m_single_stepping = on;
+      }
+
+      /** @brief Get single-stepping status.
+	 *
+	 * @return true if debugger should single-step within this
+	 * Environment.
+	 */
+      bool singleStepping() const
+      {
+         return m_single_stepping;
+      }
+
       /** @brief The name by which this type is known in R.
        *
        * @return The name by which this type is known in R.
@@ -226,6 +246,8 @@ namespace CXXR
       static bool is_global_frame(RObject *x);
       static void mark_as_global_frame(RObject *x);
       static void mark_as_local_frame(RObject *x);
+      static bool env_rdebug(RObject *x);
+      static void set_env_rdebug(RObject *x, bool v);
 
    private:
       static GCRoot<Environment> s_empty_env;
@@ -235,6 +257,7 @@ namespace CXXR
       Environment *m_enclosing;
       PairList *m_frame;
       ListVector *m_hashtable;
+      bool m_single_stepping;
 
       // Declared private to ensure that Environment objects are
       // created only using 'new':
@@ -294,6 +317,23 @@ extern "C"
     * @return the environment flags of \a x .
     */
    int ENVFLAGS(SEXP x);
+
+   /** @brief Should the debugger single-step?
+     *
+     * @param x Pointer to a CXXR::Environment object (checked).
+     *
+     * @return \c true if single-stepping is set, i.e. the debugger
+     * should single-step within this environment.
+     */
+   int ENV_RDEBUG(SEXP x);
+
+   /** @brief Enable/disable single-stepping of the debugger.
+     *
+     * @param x Pointer a CXXR::Environment object (checked).
+     *
+     * @param v The new single-stepping state (true = enabled).
+     */
+   void SET_ENV_RDEBUG(SEXP x, int v);
 
    /** @brief Set environment flags.
     *

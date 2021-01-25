@@ -190,7 +190,7 @@ extern "C"
      * not accessible from C, and new C++ code should use C++ memory
      * allocation mechanisms (i.e. new/delete).
      */
-    inline void *RHO_alloc(size_t num_elts, int elt_size)
+    inline void *CXXR_alloc(size_t num_elts, int elt_size)
     {
         return static_cast<void *>(R_alloc(num_elts, elt_size));
     }

@@ -179,7 +179,8 @@ namespace CXXR
                 return ccc;
             T *ans = new T(cc->car(), cc->tail(), cc->tag());
             ans->expose();
-            SET_ATTRIB(ans, ATTRIB(cc));
+            // ans->setAttributes(cc->attributes());
+            SET_ATTRIB(ans, cc->attributes());
             return ans;
         }
 

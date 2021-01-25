@@ -38,37 +38,6 @@
 // #define ENABLE_ST_CHECKS
 #define CXXR_OLD_ALTREP_IMPL
 
-#define TEST_PL(pp)                                                                                                                   \
-    {                                                                                                                                 \
-        ConsCell *p = SEXP_downcast<ConsCell *>(pp);                                                                                  \
-        do                                                                                                                            \
-        {                                                                                                                             \
-            if (p && !(p->sexptype() == LISTSXP || p->sexptype() == LANGSXP || p->sexptype() == DOTSXP || p->sexptype() == BCODESXP)) \
-            {                                                                                                                         \
-                std::cerr << LOCATION << Rf_type2char(p->sexptype()) << "; " << R::typeName(p) << std::endl;                          \
-                std::abort();                                                                                                         \
-            }                                                                                                                         \
-            if (p)                                                                                                                    \
-                p = p->tail();                                                                                                        \
-        } while (p);                                                                                                                  \
-    }
-
-#define PRINT_PL(call)                                                                                                                      \
-    if (call && (call->sexptype() == LISTSXP || call->sexptype() == DOTSXP || call->sexptype() == LANGSXP || call->sexptype() == BCODESXP)) \
-    {                                                                                                                                       \
-        std::cerr << LOCATION << "Begin ccdump for " << Rf_type2char(call->sexptype()) << " ...\n";                                         \
-        ccdump(std::cerr, SEXP_downcast<const CXXR::PairList *>(call), 0);                                                                  \
-        std::cerr << LOCATION << "Done ccdump ...\n\n";                                                                                     \
-    }                                                                                                                                       \
-    else if (call)                                                                                                                          \
-    {                                                                                                                                       \
-        std::cerr << LOCATION << "Not a pairlist but " << Rf_type2char(call->sexptype()) << std::endl;                                      \
-    }                                                                                                                                       \
-    else                                                                                                                                    \
-    {                                                                                                                                       \
-        std::cerr << LOCATION << "object = nullptr" << std::endl;                                                                           \
-    }
-
 #include <cstddef>
 #include <cstring>
 #include <CXXR/SEXPTYPE.hpp>
@@ -252,6 +221,7 @@ constexpr int REFCNTMAX = ((1 << NAMED_BITS) - 1);
 namespace CXXR
 {
     class PairList;
+    class Symbol;
     /** @brief Replacement for CR's SEXPREC.
      *
      * This class is the rough equivalent within CXXR of the SEXPREC
@@ -271,18 +241,49 @@ namespace CXXR
      * existence would be reported by the R function
      * <tt>objects()</tt>.  In particular, it does not imply that
      * the object belongs to an R class.
+     *
+     * @invariant The class currently aims to enforce the following
+     * invariants in regard to each RObject:
+     * <ul>
+     *
+     * <li><tt>m_has_class</tt> is true iff the object has the class
+     * attribute.</li>
+     *
+     * <li>Each attribute in the list of attributes must have a Symbol
+     * as its tag.  Null tags are not allowed.</li>
+     *
+     * <li>Each attribute must have a distinct tag: no duplicates
+     * allowed.</li>
+     *
+     * <li>No attribute may have a null value: an attempt to set the
+     * value of an attribute to null will result in the removal of the
+     * attribute altogether.
+     *
+     * </ul>
+     * The CR code in attrib.cpp applies further consistency
+     * conditions on attributes, but these are not yet enforced via
+     * the class interface.
+     *
+     * @todo Incorporate further attribute consistency checks within
+     * the class interface.  Possibly make setAttribute() virtual so
+     * that these consistency checks can be tailored according to the
+     * derived class.
+     *
+     * @todo Possibly key attributes on (cached) strings rather than
+     * Symbol objects.
      */
     class RObject : public GCNode
     {
     private:
         SEXPTYPE m_type : FULL_TYPE_BITS;
         bool m_scalar;
+    public:
         bool m_has_class;
+    private:
         bool m_alt;
 
     public:
         unsigned int m_gpbits : 16;
-        bool m_debug;
         bool m_trace; /* functions and memory tracing */
         bool m_spare; /* used on closures and when REFCNT is defined */
     private:
@@ -294,7 +295,7 @@ namespace CXXR
         /**
          * @param stype Required type of the RObject.
          */
-        explicit RObject(SEXPTYPE stype = CXXSXP) : m_type(stype), m_scalar(false), m_has_class(false), m_alt(false), m_gpbits(0), m_debug(false),
+        explicit RObject(SEXPTYPE stype = CXXSXP) : m_type(stype), m_scalar(false), m_has_class(false), m_alt(false), m_gpbits(0),
                                                     m_trace(false), m_spare(false), m_named(0), m_extra(0), m_attrib(nullptr)
         {
 #ifdef COMPUTE_REFCNT_VALUES
@@ -312,20 +313,96 @@ namespace CXXR
         /** @brief Get object attributes.
          *
          * @return Pointer to the attributes of this object.
+         *
+         * @deprecated This method allows clients to modify the
+         * attribute list directly, and thus bypass attribute
+         * consistency checks.
          */
         PairList *attributes() { return m_attrib; }
 
         /** @brief Get object attributes (const variant).
          *
-         * @return Pointer to the attributes of this object.
+         * @return const pointer to the attributes of this object.
          */
         const PairList *attributes() const { return m_attrib; }
+
+        /** @brief Remove all attributes.
+         */
+        void clearAttributes()
+        {
+            m_attrib = nullptr;
+            m_has_class = false;
+        }
+
+        /** @brief Get the value a particular attribute.
+         *
+         * @param name Reference to a \c Symbol giving the name of the
+         *          sought attribute.  Note that this \c Symbol is
+         *          identified by its address.
+         *
+         * @return pointer to the value of the attribute with \a name,
+         * or a null pointer if there is no such attribute.
+         */
+        RObject *getAttribute(const Symbol *name);
+
+        /** @brief Get the value a particular attribute (const variant).
+         *
+         * @param name Reference to a \c Symbol giving the name of the
+         *          sought attribute.  Note that this \c Symbol is
+         *          identified by its address.
+         *
+         * @return const pointer to the value of the attribute with \a
+         * name, or a null pointer if there is no such attribute.
+         */
+        const RObject *getAttribute(const Symbol *name) const;
+
+        /** @brief Has this object any attributes?
+         *
+         * @return true iff this object has any attributes.
+         */
+        bool hasAttributes() const
+        {
+            return m_attrib != nullptr;
+        }
+
+        /** @brief Has this object the class attribute?
+         *
+         * @return true iff this object has the class attribute.
+         */
+        bool hasClass() const
+        {
+            return m_has_class;
+        }
+
+        /** @brief Set or remove an attribute.
+         *
+         * @param name Pointer to the Symbol naming the attribute to
+         *          be set or removed.
+         *
+         * @param value Pointer to the value to be ascribed to the
+         *          attribute, or a null pointer if the attribute is
+         *          to be removed.  The object whose attribute is set
+         *          (i.e. <tt>this</tt>) should be considered to
+         *          assume ownership of \a value, which should
+         *          therefore not be subsequently altered externally.
+         */
+        void setAttribute(Symbol *name, RObject *value);
 
         /** @brief Replace the attributes of an object.
          *
          * @param new_attributes Pointer to the start of the new list
          *          of attributes.  May be a null pointer, in which
-         *          case all attributes are removed.
+         *          case all attributes are removed.  The object whose
+         *          attributes are set (i.e. <tt>this</tt>) should be
+         *          considered to assume ownership of the 'car' values
+         *          in \a new_attributes ; they should therefore not
+         *          be subsequently altered externally.
+         *
+         * @note The \a new_attributes list should conform to the
+         * class invariants.  However, attributes with null values are
+         * silently discarded, and if duplicate attributes are
+         * present, only the last one is heeded (and if the last
+         * setting has a null value, the attribute is removed altogether).
          */
         void setAttributes(PairList *new_attributes);
 
@@ -413,10 +490,10 @@ namespace CXXR
             return pattern ? pattern->clone() : nullptr;
         }
 
-        // To be protected in future:
-
+    protected:
         virtual ~RObject();
 
+    public:
         static void set_attrib(RObject *x, RObject *v);
         static RObject *attrib(RObject *x);
         static unsigned int named(RObject *x);
@@ -625,14 +702,6 @@ extern "C"
      */
     int(NAMED)(SEXP x);
 
-    /** @brief Get object tracing status.
-     *
-     * @param x Pointer to CXXR::RObject.
-     * @return Refer to 'R Internals' document.  Returns 0 if \a x is a
-     *         null pointer.
-     */
-    int TRACE(SEXP x);
-
     /**
      * @deprecated
      */
@@ -641,8 +710,17 @@ extern "C"
     /** @brief Replace an object's attributes.
      *
      * @param x Pointer to a CXXR::RObject.
-     * @param v Pointer to the new attributes CXXR::RObject.
-     * @todo Could \a v be \c const ?
+     *
+     * @param v Pointer to a PairList giving the new attributes of \a
+     *          x.  \a x should be considered to assume ownership of
+     *          the 'car' values in \a v ; they should therefore not
+     *          be subsequently altered externally.
+     *
+     * @note Unlike CR, \a v isn't simply plugged into the attributes
+     * field of \x : refer to the documentation for \c
+     * RObject::setAttributes() .  In particular, do not attempt to
+     * modify the attributes by changing \a v \e after SET_ATTRIB
+     * has been called.
      */
     void SET_ATTRIB(SEXP x, SEXP v);
 
@@ -659,8 +737,6 @@ extern "C"
      * @deprecated Ought to be private.
      */
     void SET_OBJECT(SEXP x, int v);
-
-    void SET_TRACE(SEXP x, int v);
 
     /**
      * @deprecated Ought to be private.

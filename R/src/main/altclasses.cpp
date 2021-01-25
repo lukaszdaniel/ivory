@@ -622,7 +622,7 @@ HIDDEN SEXP R_compact_intrange(R_xlen_t n1, R_xlen_t n2)
         if (state != R_NilValue && ATTRIB(CAR(state)) != R_NilValue) \
         {                                                            \
             SETCAR(state, shallow_duplicate(CAR(state)));            \
-            SET_ATTRIB(CAR(state), R_NilValue);                      \
+            CAR(state)->clearAttributes();                           \
         }                                                            \
     } while (0)
 
@@ -2036,11 +2036,10 @@ SEXP R_tryUnwrap(SEXP x)
             GCRoot<ConsCell> cc(SEXP_downcast<ConsCell *>(x));
             x = ConsCell::convert<PairList>(cc);
 	    }
-	    SET_ATTRIB(x, R_NilValue);
+	    x->clearAttributes();
 	    SETCAR(x, R_NilValue);
 	    SETCDR(x, R_NilValue);
 	    SET_TAG(x, R_NilValue);
-	    SET_OBJECT(x, 0);
 	    UNSET_S4_OBJECT(x);
 	    /* NAMED should be zero */
 

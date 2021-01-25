@@ -28,6 +28,7 @@
 #include <CXXR/RObject.hpp>
 #include <CXXR/Symbol.hpp>
 #include <CXXR/PairList.hpp>
+#include <CXXR/DebugMacros.hpp>
 #include <R_ext/Boolean.h>
 #include <Rinternals.h>
 
@@ -66,7 +67,7 @@ namespace CXXR
     }
 
     RObject::RObject(const RObject &pattern)
-        : m_type(pattern.m_type), m_scalar(pattern.m_scalar), m_has_class(pattern.m_has_class), m_alt(pattern.m_alt), m_gpbits(pattern.m_gpbits), m_debug(pattern.m_debug),
+        : m_type(pattern.m_type), m_scalar(pattern.m_scalar), m_has_class(pattern.m_has_class), m_alt(pattern.m_alt), m_gpbits(pattern.m_gpbits),
           m_trace(pattern.m_trace), m_spare(pattern.m_spare), m_named(pattern.m_named), m_extra(pattern.m_extra), m_attrib(pattern.m_attrib)
     {
     }
@@ -86,10 +87,77 @@ namespace CXXR
         return Rf_type2char(sexptype());
     }
 
+    RObject *RObject::getAttribute(const Symbol *name)
+    {
+        for (PairList *node = m_attrib; node; node = node->tail())
+            if (node->tag() == name)
+                return node->car();
+        return nullptr;
+    }
+
+    const RObject *RObject::getAttribute(const Symbol *name) const
+    {
+        for (PairList *node = m_attrib; node; node = node->tail())
+            if (node->tag() == name)
+                return node->car();
+        return nullptr;
+    }
+
+    // This follows CR in adding new attributes at the end of the list,
+    // though it would be easier to add them at the beginning.
+    void RObject::setAttribute(Symbol *name, RObject *value)
+    {
+        if (!name)
+            Rf_error(_("attempt to set an attribute on NULL"));
+        // Update m_has_class if necessary:
+        if (name == R_ClassSymbol)
+            m_has_class = (value != nullptr);
+        // Find attribute:
+        PairList *prev = nullptr;
+        PairList *node = m_attrib;
+        while (node && node->tag() != name)
+        {
+            prev = node;
+            node = node->tail();
+        }
+
+        if (node)
+        { // Attribute already present
+            // Update existing attribute:
+            if (value)
+                node->setCar(value);
+            // Delete existing attribute:
+            else if (prev)
+                prev->setTail(node->tail());
+            else
+                m_attrib = node->tail();
+        }
+        else if (value)
+        {
+            // Create new node:
+            PairList *newnode = new PairList(value, nullptr, name);
+            newnode->expose();
+            if (prev)
+                prev->setTail(newnode);
+            else
+            { // No preexisting attributes at all:
+                m_attrib = newnode;
+                propagateAge(m_attrib);
+            }
+        }
+    }
+
+    // This has complexity O(n^2) where n is the number of attributes, but
+    // we assume n is very small.
     void RObject::setAttributes(PairList *new_attributes)
     {
-        m_attrib = new_attributes;
-        propagateAge(m_attrib);
+        clearAttributes();
+        while (new_attributes)
+        {
+            Symbol *name = SEXP_downcast<Symbol *>(new_attributes->tag());
+            setAttribute(name, new_attributes->car());
+            new_attributes = new_attributes->tail();
+        }
     }
 
     /**
@@ -102,7 +170,7 @@ namespace CXXR
     {
         if (!x)
             return;
-        PairList *pl = SEXP_downcast<PairList *>(v);
+        GCRoot<PairList> pl(SEXP_downcast<PairList *>(v));
         x->setAttributes(pl);
     }
 
@@ -163,16 +231,20 @@ namespace CXXR
      * @return true iff \a x has a class attribute.  Returns false if \a x
      * is 0.
      */
-    bool RObject::object(RObject *x) { return x && x->m_has_class; }
+    bool RObject::object(RObject *x)
+    {
+        return x && x->hasClass();
+    }
 
     /**
-     * @deprecated Ought to be private.
+     * @deprecated This has no effect in CXXR.
+     * Object status is determined in set_attrib().
      */
     void RObject::set_object(RObject *x, bool v)
     {
         if (!x)
             return;
-        x->m_has_class = v;
+        // x->m_has_class = v;
     }
 
     bool RObject::altrep(RObject *x) { return x && x->m_alt; }

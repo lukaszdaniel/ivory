@@ -40,7 +40,6 @@
 using namespace std;
 using namespace CXXR;
 
-unsigned int MemoryBank::SchwarzCtr::s_count = 0;
 // If NO_CELLPOOLS is defined, all memory blocks are allocated
 // directly via ::operator new.  Combined with address sanitizer
 // (or valgrind's memcheck tool) and AGGRESSIVE_GC, this makes
@@ -74,18 +73,6 @@ const unsigned char MemoryBank::s_pooltab[] = {0, 0,                    // 8
                                                7, 7, 7, 7,              // 96
                                                8, 8, 8, 8,              // 128
                                                9, 9, 9, 9, 9, 9, 9, 9}; // 192
-
-MemoryBank::SchwarzCtr::SchwarzCtr()
-{
-    if (!s_count++)
-        MemoryBank::initialize();
-}
-
-MemoryBank::SchwarzCtr::~SchwarzCtr()
-{
-    if (!--s_count)
-        MemoryBank::cleanup();
-}
 
 #ifdef ALLOC_STATS
 // Allocation and free frequency tables for profiling the allocator.

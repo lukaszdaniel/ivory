@@ -411,7 +411,7 @@ namespace CXXR
         // indent(os, margin);
         if (cc->altrep())
             os << "altrep ";
-        os << Rf_type2char(cc->sexptype()) << "\n";
+        os << R::sexptype2char(cc->sexptype()) << "\n";
         for (const ConsCell *p = cc; p; p = p->tail())
         {
             // Print tag:
@@ -430,8 +430,7 @@ namespace CXXR
             // Print car:
             const RObject *car = p->car();
             indent(os, margin + 2);
-            // if (car && car->altrep()) os << "altrep ";
-            os << "Car (p = " << Rf_type2char(RObject::typeof_(p)) << ", " << car << ") = ";
+            os << "Car (p = " << R::sexptype2char(p->sexptype()) << ", " << car << ") = ";
             if (const ConsCell *ccinner = dynamic_cast<const ConsCell *>(car))
             {
                 ccdump(os, ccinner, margin + 2);
@@ -448,7 +447,7 @@ namespace CXXR
                 else
                 {
                     SEXPTYPE st = car->sexptype();
-                    os << Rf_type2char(st);
+                    os << R::sexptype2char(st);
                     if (st == SYMSXP)
                         os << ": " << sympname(car);
                     os << "\n";

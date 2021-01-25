@@ -580,7 +580,7 @@ int Rf_countContexts(int ctxttype, int browser)
             n++;
         else if (browser)
         {
-            if (cptr->getCallFlag() & CTXT_FUNCTION && RDEBUG(cptr->workingEnvironment()))
+            if (cptr->getCallFlag() & CTXT_FUNCTION && ENV_RDEBUG(cptr->workingEnvironment()))
                 n++;
         }
         cptr = cptr->nextContext();
@@ -654,7 +654,7 @@ HIDDEN SEXP do_sysbrowser(SEXP call, SEXP op, SEXP args, SEXP rho)
 	    else
 		warning(_("debug will apply when function leaves compiled code"));
 	}
-	SET_RDEBUG(cptr->workingEnvironment(), 1);
+	SET_ENV_RDEBUG(cptr->workingEnvironment(), 1);
 	break;
     }
     return(rval);

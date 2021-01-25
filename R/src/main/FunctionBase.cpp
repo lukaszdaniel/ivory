@@ -43,9 +43,41 @@ namespace CXXR
     // from C:
     namespace ForceNonInline
     {
+        const auto &RDEBUGptr = RDEBUG;
         const auto &RTRACEptr = RTRACE;
+        const auto &SET_RDEBUGptr = SET_RDEBUG;
         const auto &SET_RTRACEptr = SET_RTRACE;
     } // namespace ForceNonInline
+
+    /** @brief Query debugging status.
+     *
+     * @param x Pointer to a CXXR::Closure object.
+     *
+     * @return \c true if debugging is set, i.e. evaluations of the
+     *         function should run under the browser.
+     */
+    bool FunctionBase::rdebug(RObject *x)
+    {
+        if (!x)
+            return false;
+        const FunctionBase *fb = SEXP_downcast<FunctionBase *>(x);
+        return fb->debugging();
+    }
+
+    /**
+     * Set the debugging state of a CXXR::Closure object.
+     *
+     * @param x Pointer to a CXXR::Closure object (checked).
+     *
+     * @param v The new debugging state.
+     */
+    void FunctionBase::set_rdebug(RObject *x, bool v)
+    {
+        if (!x)
+            return;
+        FunctionBase *fb = SEXP_downcast<FunctionBase *>(x);
+        fb->setDebugging(v);
+    }
 
     /** @brief Get function tracing status.
      *

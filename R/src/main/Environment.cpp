@@ -48,9 +48,11 @@ namespace CXXR
         const auto &HASHTABptr = HASHTAB;
         const auto &isEnvironmentptr = Rf_isEnvironment;
         const auto &FRAMEptr = FRAME;
+        const auto &ENV_RDEBUGptr = ENV_RDEBUG;
         const auto &SET_ENCLOSptr = SET_ENCLOS;
         const auto &SET_ENVFLAGSptr = SET_ENVFLAGS;
         const auto &SET_FRAMEp = SET_FRAME;
+        const auto &SET_ENV_RDEBUGptr = SET_ENV_RDEBUG;
         const auto &SET_HASHTABptr = SET_HASHTAB;
     } // namespace ForceNonInline
 
@@ -285,5 +287,33 @@ namespace CXXR
             return;
 
         x->m_gpbits &= ~(GLOBAL_FRAME_MASK);
+    }
+
+    /** @brief Query debugging status.
+     *
+     * @param x Pointer to a CXXR::Environment object.
+     *
+     * @return \c true if debugging is set, i.e. evaluations of the
+     *         function should run under the browser.
+     */
+    bool Environment::env_rdebug(RObject *x)
+    {
+        const Environment *env = SEXP_downcast<const Environment *>(x);
+        return env->singleStepping();
+    }
+
+    /**
+     * Set the debugging state of a CXXR::Environment object.
+     *
+     * @param x Pointer to a CXXR::Environment object (checked).
+     *
+     * @param v The new debugging state.
+     */
+    void Environment::set_env_rdebug(RObject *x, bool v)
+    {
+        if (!x)
+            return;
+        Environment *env = SEXP_downcast<Environment *>(x);
+        env->setSingleStepping(v);
     }
 } // namespace CXXR

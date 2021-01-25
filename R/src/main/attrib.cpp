@@ -27,6 +27,7 @@
 #include <CXXR/RObject.hpp>
 #include <CXXR/BuiltInFunction.hpp>
 #include <CXXR/Expression.hpp>
+#include <CXXR/Symbol.hpp>
 #include <Localization.h>
 #include <Defn.h>
 #include <Internal.h>
@@ -121,6 +122,8 @@ static bool isOneDimensionalArray(SEXP vec)
    serialize.cpp accordingly.  LT */
 HIDDEN SEXP getAttrib0(SEXP vec, SEXP name)
 {
+    if (!vec)
+        return nullptr;
     SEXP s;
     if (name == R_NamesSymbol) {
 	if(isOneDimensionalArray(vec)) {
@@ -155,26 +158,26 @@ HIDDEN SEXP getAttrib0(SEXP vec, SEXP name)
 		return R_NilValue;
 	}
     }
-    for (auto s = ATTRIB(vec); s != R_NilValue; s = CDR(s))
-	if (TAG(s) == name) {
-	    if (name == R_DimNamesSymbol && TYPEOF(CAR(s)) == LISTSXP)
+	RObject* att = vec->getAttribute(SEXP_downcast<Symbol*>(name));
+	if (!att) return nullptr;
+
+	    if (name == R_DimNamesSymbol && TYPEOF(att) == LISTSXP)
 		error(_("old list is no longer allowed for dimnames attribute"));
 	    /**** this could be dropped for REFCNT or be less
 		  stringent for NAMED for attributes where the setter
 		  does not have a consistency check that could fail
 		  after mutation in a complex assignment LT */
-	    MARK_NOT_MUTABLE(CAR(s));
-	    return CAR(s);
-	}
-    return R_NilValue;
+	    MARK_NOT_MUTABLE(att);
+	    return att;
 }
 
 SEXP Rf_getAttrib(SEXP vec, SEXP name)
 {
+	if (!vec) return nullptr;
     if(TYPEOF(vec) == CHARSXP)
 	error(_("cannot have attributes on a 'CHARSXP'"));
     /* pre-test to avoid expensive operations if clearly not needed -- LT */
-    if (ATTRIB(vec) == R_NilValue &&
+    if (!vec->hasAttributes() &&
 	! (TYPEOF(vec) == LISTSXP || TYPEOF(vec) == LANGSXP|| TYPEOF(vec) == DOTSXP))
 	return R_NilValue;
 
@@ -354,17 +357,17 @@ static SEXP installAttrib(SEXP vec, SEXP name, SEXP val)
 {
     SEXP t = R_NilValue; /* -Wall */
 
-    if(TYPEOF(vec) == CHARSXP)
-	error(_("cannot set attribute on a 'CHARSXP'"));
-    if (TYPEOF(vec) == SYMSXP)
-	error(_("cannot set attribute on a symbol"));
-    /* this does no allocation */
-    for (SEXP s = ATTRIB(vec); s != R_NilValue; s = CDR(s)) {
+	if (TYPEOF(vec) == CHARSXP)
+		Rf_error(_("cannot set attribute on a 'CHARSXP'"));
+	if (TYPEOF(vec) == SYMSXP)
+		Rf_error(_("cannot set attribute on a symbol"));
+	/* this does no allocation */
+    for (PairList *s = vec->attributes(); s; s = s->tail()) {
 	if (TAG(s) == name) {
-	    if (MAYBE_REFERENCED(val) && val != CAR(s))
-		val = R_FixupRHS(vec, val);
-	    SETCAR(s, val);
-	    return val;
+		if (MAYBE_REFERENCED(val) && val != CAR(s))
+			val = R_FixupRHS(vec, val);
+		SETCAR(s, val);
+		return val;
 	}
 	t = s; // record last attribute, if any
     }
@@ -376,19 +379,23 @@ static SEXP installAttrib(SEXP vec, SEXP name, SEXP val)
     if (MAYBE_REFERENCED(val)) ENSURE_NAMEDMAX(val);
     SEXP s = CONS(val, R_NilValue);
     SET_TAG(s, name);
-    if (ATTRIB(vec) == R_NilValue) SET_ATTRIB(vec, s); else SETCDR(t, s);
+    // Update m_has_class if necessary:
+    if (name == R_ClassSymbol)
+        vec->m_has_class = (val != nullptr);
+    if (!vec->hasAttributes()) SET_ATTRIB(vec, s); else SETCDR(t, s);
     UNPROTECT(3);
     return val;
 }
 
 static SEXP removeAttrib(SEXP vec, SEXP name)
 {
-
-	SEXP t;
 	if (TYPEOF(vec) == CHARSXP)
-		error(_("cannot set attribute on a 'CHARSXP'"));
+		Rf_error(_("cannot set attribute on a 'CHARSXP'"));
+
+	if (!vec) return nullptr;  // 2007/07/24 arr
+
 	if (name == R_NamesSymbol && isPairList(vec)) {
-		for (t = vec; t != R_NilValue; t = CDR(t))
+		for (SEXP t = vec; t != R_NilValue; t = CDR(t))
 			SET_TAG(t, R_NilValue);
 		return R_NilValue;
 	}
@@ -1074,8 +1081,7 @@ static SEXP dimnamesgets1(SEXP val1)
 
     if (!isString(val1)) { /* mimic as.character.default */
 	PROTECT(this2 = coerceVector(val1, STRSXP));
-	SET_ATTRIB(this2, R_NilValue);
-	SET_OBJECT(this2, 0);
+	this2->clearAttributes();
 	UNPROTECT(1);
 	return this2;
     }
@@ -1387,9 +1393,8 @@ HIDDEN SEXP do_attributesgets(SEXP call, SEXP op, SEXP args, SEXP env)
 
     if (isList(object))
 	setAttrib(object, R_NamesSymbol, R_NilValue);
-    SET_ATTRIB(object, R_NilValue);
     /* We have just removed the class, but might reset it later */
-    SET_OBJECT(object, 0);
+    object->clearAttributes();
     /* Probably need to fix up S4 bit in other cases, but
        definitely in this one */
     if(nattrs == 0) UNSET_S4_OBJECT(object);
