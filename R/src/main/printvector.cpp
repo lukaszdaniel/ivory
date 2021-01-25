@@ -140,7 +140,7 @@ static void printLogicalVectorS(SEXP x, R_xlen_t n, int indx) {
 }
 
 HIDDEN
-void R::Rf_printIntegerVector(const int *x, R_xlen_t n, int indx)
+void Rf_printIntegerVector(const int *x, R_xlen_t n, int indx)
 {
     int w, labwidth=0, width;
 
@@ -155,7 +155,7 @@ void R::Rf_printIntegerVector(const int *x, R_xlen_t n, int indx)
 }
 
 HIDDEN
-void R::printIntegerVectorS(SEXP x, R_xlen_t n, int indx)
+void printIntegerVectorS(SEXP x, R_xlen_t n, int indx)
 {
     int w, labwidth=0, width;
     R_xlen_t i;
@@ -175,7 +175,7 @@ void R::printIntegerVectorS(SEXP x, R_xlen_t n, int indx)
 // used in uncmin.cpp
 // Not easily converted to printRealVectorS calls
 HIDDEN
-void R::Rf_printRealVector(const double *x, R_xlen_t n, int indx)
+void Rf_printRealVector(const double *x, R_xlen_t n, int indx)
 {
     int w, d, e, labwidth=0, width;
 
@@ -190,12 +190,12 @@ void R::Rf_printRealVector(const double *x, R_xlen_t n, int indx)
 }
 
 HIDDEN
-void R::printRealVectorS(SEXP x, R_xlen_t n, int indx)
+void printRealVectorS(SEXP x, R_xlen_t n, int indx)
 {
     int w, d, e, labwidth=0, width;
     R_xlen_t i;
     DO_first_lab;
-    formatRealS(x, n, w, d, e, 0);
+    formatRealS(x, n, &w, &d, &e, 0);
     w += R_print.gap;
 
     ITERATE_BY_REGION_PARTIAL(x, px, idx, nb, double, REAL, 0, n,
@@ -209,7 +209,7 @@ void R::printRealVectorS(SEXP x, R_xlen_t n, int indx)
 
 #define CMPLX_ISNA(cplx) (ISNA(cplx.r) || ISNA(cplx.i))
 HIDDEN
-void R::Rf_printComplexVector(const Rcomplex *x, R_xlen_t n, int indx)
+void Rf_printComplexVector(const Rcomplex *x, R_xlen_t n, int indx)
 {
     int w, wr, dr, er, wi, di, ei, labwidth=0, width;
 
@@ -229,7 +229,7 @@ void R::Rf_printComplexVector(const Rcomplex *x, R_xlen_t n, int indx)
 }
 
 HIDDEN
-void R::printComplexVectorS(SEXP x, R_xlen_t n, int indx)
+void printComplexVectorS(SEXP x, R_xlen_t n, int indx)
 {
     int w, wr, dr, er, wi, di, ei, labwidth=0, width;
     R_xlen_t i;
@@ -450,7 +450,7 @@ static void printNamedIntegerVectorS(SEXP x, int n, String* names)
 				R_print.gap,""))
 
 #undef INI_F_REAL_S
-#define INI_F_REAL_S	int d, e; formatRealS(x, n, w, d, e, 0)
+#define INI_F_REAL_S	int d, e; formatRealS(x, n, &w, &d, &e, 0)
 
 static void printNamedRealVectorS(SEXP x, int n, String* names)
     PRINT_N_VECTOR_SEXP(INI_F_REAL_S,

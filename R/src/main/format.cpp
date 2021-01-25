@@ -110,7 +110,7 @@ void R::Rf_formatStringS(String *x, R_xlen_t n, int *fieldwidth, int quote)
 
 
 
-void R::Rf_formatLogical(const int *x, R_xlen_t n, int *fieldwidth)
+void Rf_formatLogical(const int *x, R_xlen_t n, int *fieldwidth)
 {
     *fieldwidth = 1;
     for(R_xlen_t i = 0 ; i < n; i++) {
@@ -127,7 +127,7 @@ void R::Rf_formatLogical(const int *x, R_xlen_t n, int *fieldwidth)
     }
 }
 
-void R::formatLogicalS(SEXP x, R_xlen_t n, int *fieldwidth) {
+void formatLogicalS(SEXP x, R_xlen_t n, int *fieldwidth) {
     *fieldwidth = 1;
     int tmpfieldwidth = 1;
     ITERATE_BY_REGION_PARTIAL(x, px, idx, nb, int, LOGICAL, 0, n,
@@ -167,7 +167,7 @@ void R::formatLogicalS(SEXP x, R_xlen_t n, int *fieldwidth) {
         }                                                \
     } while (0)
 
-void R::Rf_formatInteger(const int *x, R_xlen_t n, int *fieldwidth)
+void Rf_formatInteger(const int *x, R_xlen_t n, int *fieldwidth)
 {
     int xmin = R_INT_MAX, xmax = INT_MIN, naflag = 0;
     int l;
@@ -183,7 +183,7 @@ void R::Rf_formatInteger(const int *x, R_xlen_t n, int *fieldwidth)
     FORMATINT_RETLOGIC;
 }
 
-void R::formatIntegerS(SEXP x, R_xlen_t n, int *fieldwidth)
+void formatIntegerS(SEXP x, R_xlen_t n, int *fieldwidth)
 {
 
     int xmin = R_INT_MAX, xmax = INT_MIN, naflag = 0,
@@ -439,7 +439,7 @@ static void scientific(const double &x, int &neg, int &kpower, int &nsig, bool &
    it is 0 except when called from do_format.
 */
 
-void R::Rf_formatReal(const double *x, R_xlen_t n, int *w, int *d, int *e, int nsmall)
+void Rf_formatReal(const double *x, R_xlen_t n, int *w, int *d, int *e, int nsmall)
 {
     Rboolean
 	naflag = FALSE, nanflag = FALSE,
@@ -520,7 +520,7 @@ void R::Rf_formatReal(const double *x, R_xlen_t n, int *w, int *d, int *e, int n
     if (neginf && *w < 4) *w = 4;
 }
 
-void R::formatRealS(SEXP x, R_xlen_t n, int &w, int &d, int &e, int nsmall)
+void formatRealS(SEXP x, R_xlen_t n, int *w, int *d, int *e, int nsmall)
 {
     /*
      *  iterate by region and just take the most extreme
@@ -528,22 +528,22 @@ void R::formatRealS(SEXP x, R_xlen_t n, int &w, int &d, int &e, int nsmall)
      */
     int tmpw, tmpd, tmpe;
 
-    w = 0;
-    d = 0;
-    e = 0;
+    *w = 0;
+    *d = 0;
+    *e = 0;
 
     ITERATE_BY_REGION_PARTIAL(x, px, idx, nb, double, REAL, 0, n,
 		      {
 			  formatReal(px, nb, &tmpw, &tmpd, &tmpe, nsmall);
-			  if(tmpw > w) w = tmpw;
-			  if(!d && tmpd) d = tmpd;
-			  if(tmpe > e) e = tmpe;
+			  if(tmpw > *w) *w = tmpw;
+			  if(!*d && tmpd) *d = tmpd;
+			  if(tmpe > *e) *e = tmpe;
 		      });
 }
 
 /* As from 2.2.0 the number of digits applies to real and imaginary parts
    together, not separately */
-void R::Rf_formatComplex(const Rcomplex *x, R_xlen_t n,
+void Rf_formatComplex(const Rcomplex *x, R_xlen_t n,
 		   int *wr, int *dr, int *er, // (w,d,e) for Re(.)
 		   int *wi, int *di, int *ei, // (w,d,e) for Im(.)
 		   int nsmall)
@@ -713,7 +713,7 @@ void R::Rf_formatComplex(const Rcomplex *x, R_xlen_t n,
 	*wr += (R_print.na_width -(*wr + *wi + 2));
 }
 
-void R::formatComplexS(SEXP x, R_xlen_t n, int *wr, int *dr, int *er,
+void formatComplexS(SEXP x, R_xlen_t n, int *wr, int *dr, int *er,
 		   int *wi, int *di, int *ei, int nsmall)
 {
 /* format.info() for  x[1..n] for both Re & Im */

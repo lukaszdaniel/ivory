@@ -153,7 +153,9 @@ void R_common_command_line(int *pac, char *argv[], Rstart Rp)
 	    else if (streql(*av, "--verbose")) {
 		Rp->R_Verbose = TRUE;
 	    }
-	    else if (streql(*av, "--no-echo") || streql(*av, "-s")) {
+	    else if (streql(*av, "--no-echo") ||
+		     streql(*av, "--slave") || // "deprecated" from R 4.0.0 (spring 2020)
+		     streql(*av, "-s")) {
 		Rp->R_Quiet = TRUE;
 		Rp->R_NoEcho = TRUE;
 		Rp->SaveAction = SA_NOSAVE;

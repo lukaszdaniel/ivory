@@ -126,7 +126,7 @@ R_size_t R::R_Decode2Long(char *p, int &ierr)
 /* There is no documented (or enforced) limit on 'w' here,
    so use snprintf */
 constexpr int NB = 1000; /* Same as deparse.cpp */
-const char *R::Rf_EncodeLogical(int x, int w)
+const char *Rf_EncodeLogical(int x, int w)
 {
     static char buff[NB];
     if(x == NA_LOGICAL) snprintf(buff, NB, "%*s", min(w, (NB-1)), CHAR(R_print.na_string));
@@ -136,7 +136,7 @@ const char *R::Rf_EncodeLogical(int x, int w)
     return buff;
 }
 
-const char *R::Rf_EncodeInteger(int x, int w)
+const char *Rf_EncodeInteger(int x, int w)
 {
     static char buff[NB];
     if(x == NA_INTEGER) snprintf(buff, NB, "%*s", min(w, (NB-1)), CHAR(R_print.na_string));
@@ -176,7 +176,7 @@ const char *R::Rf_EncodeEnvironment(SEXP x)
     return ch;
 }
 
-const char *R::Rf_EncodeReal(double x, int w, int d, int e, char cdec)
+const char *Rf_EncodeReal(double x, int w, int d, int e, char cdec)
 {
 	char dec[2];
 	dec[0] = cdec;
@@ -184,7 +184,7 @@ const char *R::Rf_EncodeReal(double x, int w, int d, int e, char cdec)
 	return EncodeReal0(x, w, d, e, dec);
 }
 
-const char *R::Rf_EncodeReal0(double x, int w, int d, int e, const char *dec)
+const char *Rf_EncodeReal0(double x, int w, int d, int e, const char *dec)
 {
     static char buff[NB], buff2[2*NB];
     char fmt[20], *out = buff;
@@ -324,7 +324,7 @@ const char *R::EncodeReal2(double x, int w, int d, int e)
 }
 
 constexpr size_t NB3 = NB + 3;
-const char *R::Rf_EncodeComplex(Rcomplex x, int wr, int dr, int er, int wi, int di, int ei,
+const char *Rf_EncodeComplex(Rcomplex x, int wr, int dr, int er, int wi, int di, int ei,
 	       const char *dec)
 {
     static char buff[NB3];
@@ -1062,12 +1062,12 @@ void REvprintf(const char *format, va_list arg)
     }
 }
 
-HIDDEN int R::Rf_IndexWidth(R_xlen_t n)
+HIDDEN int Rf_IndexWidth(R_xlen_t n)
 {
     return (int) (log10(n + 0.5) + 1);
 }
 
-HIDDEN void R::Rf_VectorIndex(R_xlen_t i, int w)
+HIDDEN void Rf_VectorIndex(R_xlen_t i, int w)
 {
 	/* print index label "[`i']" , using total width `w' (left filling blanks) */
 	Rprintf("%*s[%ld]", w - IndexWidth(i) - 2, "", i);
