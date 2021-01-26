@@ -263,22 +263,22 @@ SEXP Rf_setAttrib(SEXP vec, SEXP name, SEXP val)
 
     UNPROTECT(2);
 
-    if (name == R_NamesSymbol)
-	return namesgets(vec, val);
-    else if (name == R_DimSymbol)
-	return dimgets(vec, val);
-    else if (name == R_DimNamesSymbol)
-	return dimnamesgets(vec, val);
-    else if (name == R_ClassSymbol)
-	return classgets(vec, val);
-    else if (name == R_TspSymbol)
-	return tspgets(vec, val);
-    else if (name == R_CommentSymbol)
-	return commentgets(vec, val);
-    else if (name == R_RowNamesSymbol) // "row.names" -> care for data frames
-	return row_names_gets(vec, val);
-    else
-	return installAttrib(vec, name, val);
+	if (name == R_NamesSymbol)
+		return namesgets(vec, val);
+	else if (name == R_DimSymbol)
+		return dimgets(vec, val);
+	else if (name == R_DimNamesSymbol)
+		return dimnamesgets(vec, val);
+	else if (name == R_ClassSymbol)
+		return classgets(vec, val);
+	else if (name == R_TspSymbol)
+		return tspgets(vec, val);
+	else if (name == R_CommentSymbol)
+		return commentgets(vec, val);
+	else if (name == R_RowNamesSymbol) // "row.names" -> care for data frames
+		return row_names_gets(vec, val);
+	else
+		return installAttrib(vec, name, val);
 }
 
 /* This is called in the case of binary operations to copy */
@@ -352,39 +352,12 @@ void R::copyMostAttribNoTs(SEXP inp, SEXP ans)
     UNPROTECT(2);
 }
 
-/* Tweaks here based in part on PR#14934 */
 static SEXP installAttrib(SEXP vec, SEXP name, SEXP val)
 {
-    SEXP t = R_NilValue; /* -Wall */
+	if (!vec)
+		return nullptr;
 
-	if (TYPEOF(vec) == CHARSXP)
-		Rf_error(_("cannot set attribute on a 'CHARSXP'"));
-	if (TYPEOF(vec) == SYMSXP)
-		Rf_error(_("cannot set attribute on a symbol"));
-	/* this does no allocation */
-    for (PairList *s = vec->attributes(); s; s = s->tail()) {
-	if (TAG(s) == name) {
-		if (MAYBE_REFERENCED(val) && val != CAR(s))
-			val = R_FixupRHS(vec, val);
-		SETCAR(s, val);
-		return val;
-	}
-	t = s; // record last attribute, if any
-    }
-
-    /* The usual convention is that the caller protects,
-       but a lot of existing code depends assume that
-       setAttrib/installAttrib protects its arguments */
-    PROTECT(vec); PROTECT(name); PROTECT(val);
-    if (MAYBE_REFERENCED(val)) ENSURE_NAMEDMAX(val);
-    SEXP s = CONS(val, R_NilValue);
-    SET_TAG(s, name);
-    // Update m_has_class if necessary:
-    if (name == R_ClassSymbol)
-        vec->m_has_class = (val != nullptr);
-    if (!vec->hasAttributes()) SET_ATTRIB(vec, s); else SETCDR(t, s);
-    UNPROTECT(3);
-    return val;
+	return vec->setAttribute(SEXP_downcast<Symbol *>(name), val);
 }
 
 static SEXP removeAttrib(SEXP vec, SEXP name)

@@ -25,6 +25,7 @@
 #define R_USE_SIGNALS 1
 
 #include <Localization.h>
+#include <RContext.h>
 #include <Defn.h>
 #include <Internal.h>
 #include <Rconnections.h>

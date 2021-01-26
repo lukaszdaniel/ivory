@@ -28,7 +28,7 @@
 
 #define R_USE_SIGNALS 1
 #include <Localization.h>
-
+#include <RContext.h>
 #include <Defn.h>
 #include <Rconnections.h>
 #include <R_ext/R-ftp-http.h>

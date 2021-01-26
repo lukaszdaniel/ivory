@@ -28,6 +28,7 @@
 
 #include <CXXR/String.hpp>
 #include <CXXR/BuiltInFunction.hpp>
+#include <RContext.h>
 #include <Defn.h>
 #include <Localization.h>
 #include <Internal.h>

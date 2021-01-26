@@ -32,6 +32,7 @@
 #include <CXXR/Expression.hpp>
 #include <CXXR/String.hpp>
 #include <Localization.h>
+#include <RContext.h>
 #include <Defn.h>
 #include <Internal.h>
 

@@ -267,8 +267,6 @@ Rboolean NO_SPECIAL_SYMBOLS(SEXP b);
 
 #endif /* USE_RINTERNALS */
 
-#include <RContext.h>
-
 /* Miscellaneous Definitions */
 inline bool streql(const char *s, const char *t)
 {
@@ -455,11 +453,6 @@ extern0 double elapsedLimitValue       	INI_as(-1.0);
 
 void resetTimeLimits(void);
 
-constexpr size_t R_BCNODESTACKSIZE = 200000;
-
-LibExtern R_bcstack_t *R_BCNodeStackTop, *R_BCNodeStackEnd;
-extern0 R_bcstack_t *R_BCNodeStackBase;
-extern0 R_bcstack_t *R_BCProtTop;
 extern0 int R_jit_enabled INI_as(0); /* has to be 0 during R startup */
 extern0 int R_compile_pkgs INI_as(0);
 extern0 int R_check_constants INI_as(0);
@@ -470,7 +463,6 @@ extern void R_initAssignSymbols(void);
 extern SEXP R_getCurrentSrcref();
 extern SEXP R_getBCInterpreterExpression();
 
-void R_BCProtReset(R_bcstack_t *);
 
 LibExtern int R_num_math_threads INI_as(1);
 LibExtern int R_max_num_math_threads INI_as(1);

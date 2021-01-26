@@ -40,6 +40,7 @@
 #include <CXXR/String.hpp>
 #include <CXXR/GCRoot.hpp>
 #include <Localization.h>
+#include <RContext.h>
 #include <Defn.h>
 #include <cstdlib>
 #include <Rinternals.h>

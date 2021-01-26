@@ -114,8 +114,8 @@
 #include <CXXR/BuiltInFunction.hpp>
 #include <CXXR/JMPException.hpp>
 #include <Localization.h>
-#include <Defn.h>
 #include <RContext.h>
+#include <Defn.h>
 #include <Internal.h>
 
 using namespace R;

@@ -25,6 +25,7 @@
 #endif
 
 #define R_USE_SIGNALS 1
+#include <RContext.h>
 #include <Defn.h>
 #include <Parse.h>
 #define STRICT_R_HEADERS

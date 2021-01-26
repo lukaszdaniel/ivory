@@ -38,6 +38,7 @@
 #include <CXXR/PairList.hpp>
 #include <CXXR/ByteCode.hpp>
 #include <Localization.h>
+#include <RContext.h>
 #include <Defn.h>
 #include <Internal.h>
 #include <Rinterface.h>

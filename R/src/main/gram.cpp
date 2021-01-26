@@ -97,6 +97,7 @@
 #define R_USE_SIGNALS 1
 
 #include <CXXR/GCRoot.hpp>
+#include <RContext.h>
 #include <IOStuff.h>		/*-> Defn.h */
 #include <Fileio.h>
 #include <Parse.h>

@@ -37,6 +37,7 @@
 #include <CXXR/Closure.hpp>
 #include <CXXR/Promise.hpp>
 #include <Localization.h>
+#include <RContext.h>
 #include <Defn.h>
 #include <Rmath.h>
 #include <Fileio.h>

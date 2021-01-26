@@ -29,6 +29,7 @@
 #ifndef R_USE_SIGNALS
 #define R_USE_SIGNALS
 #endif
+#include <RContext.h>
 #include <IOStuff.h> /*-> Defn.h */
 
 /* Public interface */

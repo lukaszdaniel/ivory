@@ -32,6 +32,7 @@
 #include <CXXR/BuiltInFunction.hpp>
 #include <CXXR/GCRoot.hpp>
 #include <CXXR/PairList.hpp>
+#include <RContext.h>
 #include <Defn.h>
 #include <Localization.h>
 #include <Internal.h>

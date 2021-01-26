@@ -32,8 +32,9 @@
 #endif
 
 #define R_USE_SIGNALS 1
-#include <Defn.h>
 #include <Localization.h>
+#include <RContext.h>
+#include <Defn.h>
 #include <Internal.h>
 #include <Fileio.h>
 #include <Rmath.h> /* for fround */

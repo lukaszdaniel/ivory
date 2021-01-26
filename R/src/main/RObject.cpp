@@ -28,6 +28,7 @@
 #include <CXXR/RObject.hpp>
 #include <CXXR/Symbol.hpp>
 #include <CXXR/PairList.hpp>
+#include <Rinternals.h>
 #include <R_ext/Boolean.h>
 
 namespace CXXR
@@ -104,21 +105,27 @@ namespace CXXR
         return nullptr;
     }
 
+    /* Tweaks here based in part on PR#14934 */
     // This follows CR in adding new attributes at the end of the list,
     // though it would be easier to add them at the beginning.
-    void RObject::setAttribute(Symbol *name, RObject *value)
+    RObject *RObject::setAttribute(Symbol *name, RObject *value)
     {
         if (!name)
             Rf_error(_("attempt to set an attribute on NULL"));
+        if (sexptype() == CHARSXP)
+            Rf_error(_("cannot set attribute on a 'CHARSXP'"));
+        if (sexptype() == SYMSXP)
+            Rf_error(_("cannot set attribute on a symbol"));
         // Update m_has_class if necessary:
         if (name == R_ClassSymbol)
             m_has_class = (value != nullptr);
         // Find attribute:
+        /* this does no allocation */
         PairList *prev = nullptr;
         PairList *node = m_attrib;
         while (node && node->tag() != name)
         {
-            prev = node;
+            prev = node; // record last attribute, if any
             node = node->tail();
         }
 
@@ -126,18 +133,30 @@ namespace CXXR
         { // Attribute already present
             // Update existing attribute:
             if (value)
+            {
+                if (MAYBE_REFERENCED(value) && value != node->car())
+                    value = R_FixupRHS(this, value);
                 node->setCar(value);
-            // Delete existing attribute:
+                return value;
+            }
             else if (prev)
+            { // Delete existing attribute:
                 prev->setTail(node->tail());
+            }
             else
                 m_attrib = node->tail();
         }
         else if (value)
         {
             // Create new node:
-            PairList *newnode = new PairList(value, nullptr, name);
-            newnode->expose();
+            /* The usual convention is that the caller protects,
+               but a lot of existing code depends assume that
+               setAttrib/installAttrib protects its arguments */
+            GCRoot<Symbol> namer(name);
+            GCRoot<> valuer(value);
+            if (MAYBE_REFERENCED(value))
+                ENSURE_NAMEDMAX(value);
+            PairList *newnode = PairList::construct(value, nullptr, name);
             if (prev)
                 prev->setTail(newnode);
             else
@@ -146,6 +165,7 @@ namespace CXXR
                 propagateAge(m_attrib);
             }
         }
+        return value;
     }
 
     // This has complexity O(n^2) where n is the number of attributes, but

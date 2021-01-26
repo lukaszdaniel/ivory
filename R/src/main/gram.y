@@ -27,6 +27,7 @@
 #define R_NO_REMAP
 #define R_USE_SIGNALS 1
 
+#include <RContext.h>
 #include <CXXR/GCRoot.hpp>
 #include <IOStuff.h>		/*-> Defn.h */
 #include <Fileio.h>

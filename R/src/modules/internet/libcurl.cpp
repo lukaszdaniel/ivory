@@ -24,6 +24,7 @@
 #ifdef _WIN32
 # define R_USE_SIGNALS 1
 #endif
+#include <RContext.h>
 #include <Defn.h>
 #include <Localization.h>
 #include <R_ext/Minmax.h>

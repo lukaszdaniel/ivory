@@ -30,6 +30,7 @@
 #include <CXXR/Expression.hpp>
 #include <Localization.h>
 #include <R_ext/Minmax.h>
+#include <RContext.h>
 #include <Defn.h>
 #include <Rinterface.h>
 #include <Internal.h>

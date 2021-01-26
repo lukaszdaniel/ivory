@@ -28,6 +28,7 @@
 #include <CXXR/String.hpp>
 #include <cstdlib> /* for putenv */
 #include <Localization.h>
+#include <RContext.h>
 #include <Defn.h>
 #include <Internal.h>
 #include <R_ext/Riconv.h>

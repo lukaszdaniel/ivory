@@ -41,6 +41,7 @@
 #include <CXXR/GCRoot.hpp>
 #include <CXXR/JMPException.hpp>
 #include <Localization.h>
+#include <RContext.h>
 #include <Defn.h>
 #include <Internal.h>
 #include <Rinterface.h>

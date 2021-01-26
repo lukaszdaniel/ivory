@@ -36,6 +36,7 @@
 
 #define R_USE_SIGNALS 1
 #include <R_ext/Minmax.h>
+#include <RContext.h>
 #include <Defn.h>
 #include <Localization.h>
 #include <Rinterface.h>

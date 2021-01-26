@@ -26,6 +26,7 @@
 
 #include <CXXR/String.hpp>
 #include <Localization.h>
+#include <RContext.h>
 #include <Parse.h> // -> IOStuff.h, Defn.h
 #include <Internal.h>
 #include <Fileio.h>

@@ -37,6 +37,7 @@
 #include <CXXR/ExpressionVector.hpp>
 #include <CXXR/ListVector.hpp>
 #include <Localization.h>
+#include <RContext.h>
 #include <Parse.h>
 #include <Defn.h> /*-- Maybe modularize into own Coerce.h ..*/
 #include <Internal.h>

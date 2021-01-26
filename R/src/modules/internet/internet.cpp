@@ -26,7 +26,7 @@
 // for contexts
 #define R_USE_SIGNALS 1
 #include <Localization.h>
-
+#include <RContext.h>
 #include <Defn.h>
 #include <Fileio.h>
 #include <Rconnections.h>

@@ -78,6 +78,7 @@
 
 #include <CXXR/BuiltInFunction.hpp>
 #include <Localization.h>
+#include <RContext.h>
 #include <Defn.h>
 #include <Internal.h>
 #include <Fileio.h>

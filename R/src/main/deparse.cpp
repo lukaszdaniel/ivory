@@ -109,6 +109,7 @@
 #include <CXXR/String.hpp>
 #include <CXXR/BuiltInFunction.hpp>
 #include <Localization.h>
+#include <RContext.h>
 #include <Defn.h>
 #include <Internal.h>
 #include <cfloat> /* for DBL_DIG */

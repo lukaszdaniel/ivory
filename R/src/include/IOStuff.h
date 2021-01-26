@@ -36,6 +36,7 @@
  *  vectors.
  */
 
+#include <RContext.h>
 #include <Defn.h>
 #include <cstdio>
 
