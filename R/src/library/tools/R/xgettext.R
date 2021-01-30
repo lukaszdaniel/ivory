@@ -324,7 +324,7 @@ checkPoFile <- function(f, strictPlural = FALSE)
 				diff <- paste(diff, ", ", sprintf(ngettext(length(diffs),
 								"difference in entry %s",
 								"differences in entries %s", domain = "R-tools"),
-								diff, paste(diffs, collapse = ", ")), sep = "")
+								paste(diffs, collapse = ", ")), sep = "")
 				} else {
 				diff <- sprintf(ngettext(length(diffs),
 								"difference in entry %s",
