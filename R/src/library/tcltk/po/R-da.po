@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 3.0.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2015-04-01 22:12\n"
+"POT-Creation-Date: 2021-01-30 18:46\n"
 "PO-Revision-Date: 2016-01-09 20:38+0100\n"
 "Last-Translator: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
 "Language-Team: \n"
@@ -148,9 +148,9 @@ msgstr "Tcl/Tk-understøttelse er ikke tilgængelig på dette system"
 msgid "The tkGUI is not available under Windows"
 msgstr "tkGUI'en er ikke tilgængelig under Windows"
 
-#. R/unix/zzz.R: stop("X11 library is missing: install XQuartz from xquartz.macosforge.org")
+#. R/unix/zzz.R: stop("X11 library is missing: install XQuartz from www.xquartz.org")
 #: R/unix/zzz.R:0
-msgid "X11 library is missing: install XQuartz from xquartz.macosforge.org"
+msgid "X11 library is missing: install XQuartz from www.xquartz.org"
 msgstr ""
 
 #. R/tclarray.R: stop("cannot change names on Tcl array")

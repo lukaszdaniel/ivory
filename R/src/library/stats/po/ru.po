@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.9.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-01-07 23:38+0100\n"
+"POT-Creation-Date: 2021-01-30 18:46+0100\n"
 "PO-Revision-Date: 2015-01-17 15:50+0100\n"
 "Last-Translator: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
 "Language-Team: Russian\n"
@@ -70,7 +70,7 @@ msgstr "approx(): попытка интерполировать пропущен
 msgid "approx(x,y, .., na.rm=FALSE): NA values in x are not allowed"
 msgstr ""
 
-#: arima.cpp:76 arima.cpp:186 arima.cpp:370 arima.cpp:601 optim.cpp:33
+#: arima.cpp:76 arima.cpp:186 arima.cpp:370 arima.cpp:601 optim.cpp:34
 msgid "invalid argument type"
 msgstr "неправильный тип аргумента"
 
@@ -141,44 +141,44 @@ msgstr "'x' пусто"
 msgid "the standard deviation is zero"
 msgstr "стандартное отклонение нулевое"
 
-#: deriv.cpp:155
+#: deriv.cpp:156
 msgid "invalid form in unary minus check"
 msgstr "неправильная форма при проверке унарного минуса"
 
-#: deriv.cpp:439
+#: deriv.cpp:440
 msgid ""
 "only single-argument calls to log() are supported;\n"
 "  maybe use log(x,a) = log(x)/log(a)"
 msgstr ""
 
-#: deriv.cpp:677
+#: deriv.cpp:680
 #, c-format
 msgid "Function '%s' is not in the derivatives table"
 msgstr "Функция '%s' отсутствует в таблице производных"
 
-#: deriv.cpp:783
+#: deriv.cpp:786
 #, fuzzy, c-format
 msgid "'%s' argument must not be of type '%s'"
 msgstr "'m' должен быть списком"
 
-#: deriv.cpp:786
+#: deriv.cpp:789
 msgid "variable must be a character string"
 msgstr "переменная должна быть текстовой строкой"
 
-#: deriv.cpp:788
+#: deriv.cpp:791
 msgid "only the first element is used as variable name"
 msgstr "только первый элемент использован как имя переменной"
 
-#: deriv.cpp:801
+#: deriv.cpp:804
 #, c-format
 msgid "invalid expression in '%s'"
 msgstr "неправильное выражение в '%s'"
 
-#: deriv.cpp:1079 model.cpp:95
+#: deriv.cpp:1082 model.cpp:97
 msgid "invalid variable names"
 msgstr "неправильные имена переменных"
 
-#: deriv.cpp:1088
+#: deriv.cpp:1091
 msgid "invalid tag"
 msgstr "неправильный тег"
 
@@ -459,7 +459,7 @@ msgstr ""
 msgid "'%s' argument is too small"
 msgstr "перекрытие слишком мало"
 
-#: loessc.cpp:366 loessc.cpp:367 optim.cpp:394 optimize.cpp:256
+#: loessc.cpp:366 loessc.cpp:367 optim.cpp:395 optimize.cpp:256
 #: optimize.cpp:263 optimize.cpp:272 optimize.cpp:346 optimize.cpp:351
 #: optimize.cpp:367 pacf.cpp:463
 #, c-format
@@ -650,7 +650,7 @@ msgstr ""
 msgid "Singular matrix in '%s' function"
 msgstr "Сингулярная матрица в ldet"
 
-#: mAR.cpp:700 massdist.cpp:42 model.cpp:376 model.cpp:384 optim.cpp:221
+#: mAR.cpp:700 massdist.cpp:42 model.cpp:378 model.cpp:386 optim.cpp:222
 #, c-format
 msgid "invalid '%s' argument"
 msgstr "неправильный аргумент '%s'"
@@ -659,143 +659,143 @@ msgstr "неправильный аргумент '%s'"
 msgid "Burg's algorithm failed to find partial correlation"
 msgstr "Алгоритм Бурга не смог найти частную корреляцию"
 
-#: model.cpp:93
+#: model.cpp:95
 msgid "invalid variables"
 msgstr "неправильные переменные"
 
-#: model.cpp:97 model.cpp:102
+#: model.cpp:99 model.cpp:104
 msgid "number of variables != number of variable names"
 msgstr "количество переменных != количеству имен переменных"
 
-#: model.cpp:100
+#: model.cpp:102
 msgid "invalid extra variables"
 msgstr "неправильные добавочные переменные"
 
-#: model.cpp:104
+#: model.cpp:106
 msgid "invalid extra variable names"
 msgstr "неправильное имя добавочной переменной"
 
-#: model.cpp:125
+#: model.cpp:127
 #, c-format
 msgid "overlong names in '%s'"
 msgstr "слишком длинное имя в '%s'"
 
-#: model.cpp:152
+#: model.cpp:154
 #, c-format
 msgid "invalid type (%s) for variable '%s'"
 msgstr "неправильный (%s) тип переменной '%s'"
 
-#: model.cpp:157
+#: model.cpp:159
 #, c-format
 msgid "variable lengths differ (found for '%s')"
 msgstr "длины переменных различаются (найдено в '%s')"
 
-#: model.cpp:214
+#: model.cpp:216
 msgid "invalid result from na.action"
 msgstr "неправильный результат 'na.action'"
 
-#: model.cpp:395
+#: model.cpp:397
 msgid "invalid model frame"
 msgstr "неправильный модельный фрейм"
 
-#: model.cpp:397
+#: model.cpp:399
 msgid "do not know how many cases"
 msgstr "не знаю, сколько строк"
 
-#: model.cpp:421
+#: model.cpp:423
 #, c-format
 msgid "variable lengths differ (found for variable %d)"
 msgstr "длины переменных различаются (найдено для переменной %d)"
 
-#: model.cpp:425 model.cpp:432
+#: model.cpp:427 model.cpp:434
 #, c-format
 msgid "variable %d has no levels"
 msgstr "у переменной %d нет уровней"
 
-#: model.cpp:543
+#: model.cpp:547
 msgid "the response appeared on the right-hand side and was dropped"
 msgstr "отклик появился справа и поэтому был удален"
 
-#: model.cpp:563
+#: model.cpp:567
 #, c-format
 msgid "term %d would require %.0g columns"
 msgstr "ермин %d требует %.0g колонок"
 
-#: model.cpp:567
+#: model.cpp:571
 #, c-format
 msgid "matrix would require %.0g columns"
 msgstr "матрица требует %.0g колонок"
 
-#: model.cpp:578
+#: model.cpp:582
 #, fuzzy, c-format
 msgid "problem with term %d in model.matrix(): no columns are assigned"
 msgstr "проблема с термом %d в 'model.matrix': не присвоены колонки"
 
-#: model.cpp:626 model.cpp:631 model.cpp:637 model.cpp:648 model.cpp:654
-#: model.cpp:660
+#: model.cpp:630 model.cpp:635 model.cpp:641 model.cpp:652 model.cpp:658
+#: model.cpp:664
 msgid "term names will be truncated"
 msgstr "имена термов будут укорочены"
 
-#: model.cpp:640
+#: model.cpp:644
 msgid "complex variables are not currently allowed in model matrices"
 msgstr "комплексные переменные в модельных матрицах сейчас не разрешены"
 
-#: model.cpp:664
+#: model.cpp:668
 #, c-format
 msgid "variables of type '%s' are not allowed in model matrices"
 msgstr "переменные типа '%s' в модельных матрицах не разрешены"
 
-#: model.cpp:888
+#: model.cpp:892
 msgid "invalid formula in 'update'"
 msgstr "неправильная формула в 'update'"
 
-#: model.cpp:922
+#: model.cpp:926
 msgid "formula expected"
 msgstr "ожидается формула"
 
-#: model.cpp:1090
+#: model.cpp:1093
 msgid "invalid term in model formula"
 msgstr "неправильный терм в модельной формуле"
 
-#: model.cpp:1181 model.cpp:1262
+#: model.cpp:1184 model.cpp:1265
 #, fuzzy, c-format
 msgid "invalid model formula in '%s' function"
 msgstr "неправильная модельная формула в EncodeVars"
 
-#: model.cpp:1213 model.cpp:1519
+#: model.cpp:1216 model.cpp:1522
 msgid "invalid power in formula"
 msgstr "неправильная степень в формуле"
 
-#: model.cpp:1630
+#: model.cpp:1633
 #, c-format
 msgid "duplicated name '%s' in data frame using '.'"
 msgstr "повторяющееся имя '%s' в таблице данных, использую '.'"
 
-#: model.cpp:1697
+#: model.cpp:1700
 #, fuzzy
 msgid "invalid model formula in EncodeVars"
 msgstr "неправильная модельная формула в ExtractVars"
 
-#: model.cpp:1774
+#: model.cpp:1777
 msgid "argument is not a valid model"
 msgstr "аргумент не является правильной моделью"
 
-#: model.cpp:1784
+#: model.cpp:1787
 msgid "'specials' must be NULL or a character vector"
 msgstr "'specials' должен быть NULL или текстовым вектором"
 
-#: model.cpp:1795
+#: model.cpp:1798
 msgid "'data' argument is of the wrong type"
 msgstr "аргумент 'data' неправильного типа"
 
-#: model.cpp:1867
+#: model.cpp:1870
 #, c-format
 msgid ""
 "'varlist' has changed (from nvar=%d) to new %d after EncodeVars() -- should "
 "no longer happen!"
 msgstr ""
 
-#: model.cpp:2151
+#: model.cpp:2154
 msgid "'.' in formula and no 'data' argument"
 msgstr "'.' в формуле и нет аргумента 'data'"
 
@@ -887,44 +887,44 @@ msgstr "переменная '%s' -- целое число, не 'numeric'"
 msgid "variable '%s' is not numeric"
 msgstr "переменная '%s' не является числовой"
 
-#: optim.cpp:76 optim.cpp:103
+#: optim.cpp:77 optim.cpp:104
 #, fuzzy
 msgid "non-finite value supplied by 'optim' argument"
 msgstr "бесконечное значение передано из 'optim'"
 
-#: optim.cpp:83
+#: optim.cpp:84
 #, c-format
 msgid "objective function in optim evaluates to length %d not 1"
 msgstr "целевая функция в 'optim' возвращает объект длины %d, а не 1"
 
-#: optim.cpp:110
+#: optim.cpp:111
 #, c-format
 msgid "gradient in optim evaluated to length %d not %d"
 msgstr "полученная длина градиента в 'optim' -- %d, а не %d"
 
-#: optim.cpp:146 optim.cpp:185
+#: optim.cpp:147 optim.cpp:186
 #, c-format
 msgid "non-finite finite-difference value [%d]"
 msgstr ""
 
-#: optim.cpp:217 optim.cpp:286 optim.cpp:303 optim.cpp:328 optim.cpp:358
-#: optim.cpp:423 optim.cpp:437
+#: optim.cpp:218 optim.cpp:287 optim.cpp:304 optim.cpp:329 optim.cpp:359
+#: optim.cpp:424 optim.cpp:438
 #, fuzzy, c-format
 msgid "'%s' argument is not a function"
 msgstr "'fn' не является функцией"
 
-#: optim.cpp:235 optim.cpp:309 optim.cpp:334 optim.cpp:364 optim.cpp:429
-#: optim.cpp:443
+#: optim.cpp:236 optim.cpp:310 optim.cpp:335 optim.cpp:365 optim.cpp:430
+#: optim.cpp:444
 #, fuzzy, c-format
 msgid "'%s' argument is of the wrong length"
 msgstr "аргумент 'data' неправильного типа"
 
-#: optim.cpp:264
+#: optim.cpp:265
 #, fuzzy, c-format
 msgid "'%s' argument is not an integer"
 msgstr "'maxit' не является целым числом"
 
-#: optim.cpp:284
+#: optim.cpp:285
 #, fuzzy, c-format
 msgid "'%s' argument is not a positive integer"
 msgstr "'maxit' не является целым числом"
@@ -1219,34 +1219,34 @@ msgstr "'scal' должен быть настоящей квадратной м�
 msgid "'scal' matrix is not positive-definite"
 msgstr "матрица 'scal' не положительно-определенная"
 
-#: random.cpp:54 random.cpp:138 random.cpp:220 random.cpp:312
+#: random.cpp:55 random.cpp:139 random.cpp:221 random.cpp:313
 #, fuzzy
 msgid "NA values produced"
 msgstr "получились NA"
 
-#: random.cpp:61 random.cpp:67 random.cpp:73 random.cpp:88 random.cpp:170
-#: random.cpp:261 random.cpp:405
+#: random.cpp:62 random.cpp:68 random.cpp:74 random.cpp:89 random.cpp:171
+#: random.cpp:262 random.cpp:406
 msgid "invalid arguments"
 msgstr "неправильные аргументы"
 
-#: random.cpp:341
+#: random.cpp:342
 #, fuzzy
 msgid "NA value in probability vector"
 msgstr "неправильное NA-значение в параметре"
 
-#: random.cpp:343
+#: random.cpp:344
 msgid "negative probability"
 msgstr ""
 
-#: random.cpp:351
+#: random.cpp:352
 msgid "no positive probabilities"
 msgstr ""
 
-#: random.cpp:364
+#: random.cpp:365
 msgid "invalid first argument 'n'"
 msgstr "неправильный первый аргумент 'n'"
 
-#: random.cpp:366
+#: random.cpp:367
 msgid "invalid second argument 'size'"
 msgstr "неправильный второй аргумент 'size'"
 

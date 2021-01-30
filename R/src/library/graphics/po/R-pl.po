@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.16.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-04-08 21:34\n"
+"POT-Creation-Date: 2021-01-30 18:44\n"
 "PO-Revision-Date: \n"
 "Last-Translator: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
 "Language-Team: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
@@ -556,6 +556,18 @@ msgstr "niepoprawny pierwszy argument"
 msgid "invalid number of 'breaks'"
 msgstr "niepoprawna liczba 'breaks'"
 
+#. R/plot.R: gettextf("invalid plot type")
+#: R/plot.R:0
+#, fuzzy
+msgid "invalid plot type"
+msgstr "niepoprawne szerokości wykresu pudełkowego"
+
+#. R/plot.R: gettextf("invalid plot type '%s'", t)
+#: R/plot.R:0
+#, fuzzy
+msgid "invalid plot type '%s'"
+msgstr "niepoprawne szerokości wykresu pudełkowego"
+
 #. R/stripchart.R: stop("invalid plotting method")
 #: R/stripchart.R:0
 msgid "invalid plotting method"
@@ -719,6 +731,11 @@ msgstr "tylko jedna kolumna w argumencie przekazywanym do 'pairs'"
 #: R/abline.R:0
 msgid "only using the first two of %d regression coefficients"
 msgstr "używanie tylko pierwszych dwóch z %d współczynników regresji"
+
+#. R/plot.R: gettextf("plot type '%s' will be truncated to first character", type)
+#: R/plot.R:0
+msgid "plot type '%s' will be truncated to first character"
+msgstr ""
 
 #. R/coplot.R: stop("rows * columns too small")
 #: R/coplot.R:0
@@ -911,14 +928,6 @@ msgstr[2] "argumenty %s nie robią użytku z"
 #, fuzzy
 #~ msgid "invalid plotting structure"
 #~ msgstr "niepoprawna metoda rysowania wykresu"
-
-#, fuzzy
-#~ msgid "invalid plot type"
-#~ msgstr "niepoprawne szerokości wykresu pudełkowego"
-
-#, fuzzy
-#~ msgid "invalid plot type '%c'"
-#~ msgstr "niepoprawne szerokości wykresu pudełkowego"
 
 #, fuzzy
 #~ msgid "invalid second argument"

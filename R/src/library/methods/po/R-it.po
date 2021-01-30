@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R-methods 3.6.3\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2021-01-07 23:37\n"
+"POT-Creation-Date: 2021-01-30 18:45\n"
 "PO-Revision-Date: \n"
 "Last-Translator: Daniele Medri <dmedri@gmail.com>\n"
 "Language-Team: Italian https://github.com/dmedri/R-italian-lang\n"
@@ -1531,6 +1531,12 @@ msgstr ""
 msgid "both classes must be defined"
 msgstr "entrambe le classi devono essere definite"
 
+#. R/RMethodUtils.R: gettextf("caching class %s", dQuote(cl))
+#: R/RMethodUtils.R:0
+#, fuzzy
+msgid "caching class %s"
+msgstr "(classe %s)"
+
 #. R/NextMethod.R: stop("call to 'callNextMethod' does not appear to be in a 'method' or 'callNextMethod' context")
 #: R/NextMethod.R:0
 msgid ""
@@ -1885,6 +1891,16 @@ msgstr ""
 msgid "done"
 msgstr ""
 
+#. R/RMethodUtils.R: gettextf("done caching class %s", dQuote(cl))
+#: R/RMethodUtils.R:0
+msgid "done caching class %s"
+msgstr ""
+
+#. R/RMethodUtils.R: gettextf("done getting generic '%s'", f)
+#: R/RMethodUtils.R:0
+msgid "done getting generic '%s'"
+msgstr ""
+
 #. R/SClasses.R: gettext("duplicate class names among superclasses: %s", domain = "R-methods")
 #: R/SClasses.R:0
 msgid "duplicate class names among superclasses: %s"
@@ -2098,6 +2114,11 @@ msgstr "i nomi generici differiscono:%s,%s"
 msgid ""
 "get rid of variables in definition %s (%s); they conflict with the needed "
 "change to argument names (%s)"
+msgstr ""
+
+#. R/RMethodUtils.R: gettextf("getting generic '%s'", f)
+#: R/RMethodUtils.R:0
+msgid "getting generic '%s'"
 msgstr ""
 
 #. R/RMethodUtils.R: stop("got a negative maximum number of frames to look at")

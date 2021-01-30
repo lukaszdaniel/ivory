@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-01-07 23:38+0100\n"
+"POT-Creation-Date: 2021-01-30 18:46+0100\n"
 "PO-Revision-Date: \n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -59,7 +59,7 @@ msgstr "approx(): bandyta interpoliuoti NA reikšmes"
 msgid "approx(x,y, .., na.rm=FALSE): NA values in x are not allowed"
 msgstr "approx(x,y, .., na.rm=FALSE): neleidžiamos NA reikšmės, esančios x"
 
-#: arima.cpp:76 arima.cpp:186 arima.cpp:370 arima.cpp:601 optim.cpp:33
+#: arima.cpp:76 arima.cpp:186 arima.cpp:370 arima.cpp:601 optim.cpp:34
 msgid "invalid argument type"
 msgstr "neleistinas argumento tipas"
 
@@ -130,44 +130,44 @@ msgstr "'x' tuščias"
 msgid "the standard deviation is zero"
 msgstr "standartinis nuokrypis lygus nuliui"
 
-#: deriv.cpp:155
+#: deriv.cpp:156
 msgid "invalid form in unary minus check"
 msgstr "netinkama forma unariojo minuso patikrinime"
 
-#: deriv.cpp:439
+#: deriv.cpp:440
 msgid ""
 "only single-argument calls to log() are supported;\n"
 "  maybe use log(x,a) = log(x)/log(a)"
 msgstr ""
 
-#: deriv.cpp:677
+#: deriv.cpp:680
 #, c-format
 msgid "Function '%s' is not in the derivatives table"
 msgstr "Funkcija '%s' nėra išvestinių lentelėje"
 
-#: deriv.cpp:783
+#: deriv.cpp:786
 #, fuzzy, c-format
 msgid "'%s' argument must not be of type '%s'"
 msgstr "išraiška negali būti '%s' tipo"
 
-#: deriv.cpp:786
+#: deriv.cpp:789
 msgid "variable must be a character string"
 msgstr "kintamasis turi būti simbolių eilutė"
 
-#: deriv.cpp:788
+#: deriv.cpp:791
 msgid "only the first element is used as variable name"
 msgstr "kaip kintamojo pavadinimas naudojamas tik pirmasis elementas"
 
-#: deriv.cpp:801
+#: deriv.cpp:804
 #, c-format
 msgid "invalid expression in '%s'"
 msgstr "neleistina išraiška, esanti '%s'"
 
-#: deriv.cpp:1079 model.cpp:95
+#: deriv.cpp:1082 model.cpp:97
 msgid "invalid variable names"
 msgstr "neleistini kintamųjų pavadinimai"
 
-#: deriv.cpp:1088
+#: deriv.cpp:1091
 msgid "invalid tag"
 msgstr "netinkama žymė"
 
@@ -471,7 +471,7 @@ msgstr ""
 msgid "'%s' argument is too small"
 msgstr "span yra per mažas"
 
-#: loessc.cpp:366 loessc.cpp:367 optim.cpp:394 optimize.cpp:256
+#: loessc.cpp:366 loessc.cpp:367 optim.cpp:395 optimize.cpp:256
 #: optimize.cpp:263 optimize.cpp:272 optimize.cpp:346 optimize.cpp:351
 #: optimize.cpp:367 pacf.cpp:463
 #, c-format
@@ -662,7 +662,7 @@ msgstr ""
 msgid "Singular matrix in '%s' function"
 msgstr "Singuliari matrica, esanti ldet"
 
-#: mAR.cpp:700 massdist.cpp:42 model.cpp:376 model.cpp:384 optim.cpp:221
+#: mAR.cpp:700 massdist.cpp:42 model.cpp:378 model.cpp:386 optim.cpp:222
 #, c-format
 msgid "invalid '%s' argument"
 msgstr "neleistinas argumentas '%s'"
@@ -671,135 +671,135 @@ msgstr "neleistinas argumentas '%s'"
 msgid "Burg's algorithm failed to find partial correlation"
 msgstr "Burgo algoritmui nepavyko rasti dalinės koreliacijos"
 
-#: model.cpp:93
+#: model.cpp:95
 msgid "invalid variables"
 msgstr "neleistini kintamieji"
 
-#: model.cpp:97 model.cpp:102
+#: model.cpp:99 model.cpp:104
 msgid "number of variables != number of variable names"
 msgstr "kintamųjų skaičius != kintamųjų pavadinimų skaičius"
 
-#: model.cpp:100
+#: model.cpp:102
 msgid "invalid extra variables"
 msgstr "netinkami papildomi kintamieji"
 
-#: model.cpp:104
+#: model.cpp:106
 msgid "invalid extra variable names"
 msgstr "neleistini papildomi kintamųjų pavadinimai"
 
-#: model.cpp:125
+#: model.cpp:127
 #, c-format
 msgid "overlong names in '%s'"
 msgstr "per ilgi vardai, esantys '%s'"
 
-#: model.cpp:152
+#: model.cpp:154
 #, c-format
 msgid "invalid type (%s) for variable '%s'"
 msgstr "neleistinas tipas (%s) kintamajam '%s'"
 
-#: model.cpp:157
+#: model.cpp:159
 #, c-format
 msgid "variable lengths differ (found for '%s')"
 msgstr "kintamojo ilgiai skiriasi (rasta '%s')"
 
-#: model.cpp:214
+#: model.cpp:216
 msgid "invalid result from na.action"
 msgstr "neteisingas rezultatas iš na.action"
 
-#: model.cpp:395
+#: model.cpp:397
 msgid "invalid model frame"
 msgstr "neleistina modelio sistema"
 
-#: model.cpp:397
+#: model.cpp:399
 msgid "do not know how many cases"
 msgstr "nežino, kiek atvejų"
 
-#: model.cpp:421
+#: model.cpp:423
 #, c-format
 msgid "variable lengths differ (found for variable %d)"
 msgstr "kintamojo ilgiai skiriasi (randama kintamajam %d)"
 
-#: model.cpp:425 model.cpp:432
+#: model.cpp:427 model.cpp:434
 #, c-format
 msgid "variable %d has no levels"
 msgstr "kintamasis %d neturi lygių"
 
-#: model.cpp:543
+#: model.cpp:547
 msgid "the response appeared on the right-hand side and was dropped"
 msgstr "atsakymas pasirodė dešinėje pusėje ir buvo numestas"
 
-#: model.cpp:563
+#: model.cpp:567
 #, c-format
 msgid "term %d would require %.0g columns"
 msgstr "nariui %d reikės %.0g stulpelių"
 
-#: model.cpp:567
+#: model.cpp:571
 #, c-format
 msgid "matrix would require %.0g columns"
 msgstr "matricai reikės %.0g stulpelių"
 
-#: model.cpp:578
+#: model.cpp:582
 #, fuzzy, c-format
 msgid "problem with term %d in model.matrix(): no columns are assigned"
 msgstr "problema dėl nario %d, esančio model.matrix: stulpeliai nepriskirti"
 
-#: model.cpp:626 model.cpp:631 model.cpp:637 model.cpp:648 model.cpp:654
-#: model.cpp:660
+#: model.cpp:630 model.cpp:635 model.cpp:641 model.cpp:652 model.cpp:658
+#: model.cpp:664
 msgid "term names will be truncated"
 msgstr "nario pavadinimai bus sutrumpinti"
 
-#: model.cpp:640
+#: model.cpp:644
 msgid "complex variables are not currently allowed in model matrices"
 msgstr "kompleksiniai kintamieji šiuo metu neleidžiami modelių matricose"
 
-#: model.cpp:664
+#: model.cpp:668
 #, c-format
 msgid "variables of type '%s' are not allowed in model matrices"
 msgstr "modelio matricose neleidžiama naudoti '%s' tipo kintamųjų"
 
-#: model.cpp:888
+#: model.cpp:892
 msgid "invalid formula in 'update'"
 msgstr "neleistina formulė, esanti ‘update’"
 
-#: model.cpp:922
+#: model.cpp:926
 msgid "formula expected"
 msgstr "laukta formulė"
 
-#: model.cpp:1090
+#: model.cpp:1093
 msgid "invalid term in model formula"
 msgstr "netinkamas narys modelio formulėje"
 
-#: model.cpp:1181 model.cpp:1262
+#: model.cpp:1184 model.cpp:1265
 #, fuzzy, c-format
 msgid "invalid model formula in '%s' function"
 msgstr "netinkama modelio formulė, esanti EncodeVars"
 
-#: model.cpp:1213 model.cpp:1519
+#: model.cpp:1216 model.cpp:1522
 msgid "invalid power in formula"
 msgstr "neteisinga galia formulėje"
 
-#: model.cpp:1630
+#: model.cpp:1633
 #, c-format
 msgid "duplicated name '%s' in data frame using '.'"
 msgstr "dubliuotas pavadinimas '%s' duomenų sistemoje naudojant '.'"
 
-#: model.cpp:1697
+#: model.cpp:1700
 msgid "invalid model formula in EncodeVars"
 msgstr "netinkama modelio formulė, esanti EncodeVars"
 
-#: model.cpp:1774
+#: model.cpp:1777
 msgid "argument is not a valid model"
 msgstr "argumentas nėra tinkamas modelis"
 
-#: model.cpp:1784
+#: model.cpp:1787
 msgid "'specials' must be NULL or a character vector"
 msgstr "specials' turi būti NULL arba tekstinis vektorius"
 
-#: model.cpp:1795
+#: model.cpp:1798
 msgid "'data' argument is of the wrong type"
 msgstr "argumentas 'data' yra netinkamo tipo"
 
-#: model.cpp:1867
+#: model.cpp:1870
 #, c-format
 msgid ""
 "'varlist' has changed (from nvar=%d) to new %d after EncodeVars() -- should "
@@ -808,7 +808,7 @@ msgstr ""
 "'varlist' pasikeitė (iš nvar=%d) į naują %d po EncodeVars() -- nebeturėtų "
 "įvykti!"
 
-#: model.cpp:2151
+#: model.cpp:2154
 msgid "'.' in formula and no 'data' argument"
 msgstr "'.' formulėje ir nėra argumento 'data'"
 
@@ -899,44 +899,44 @@ msgstr "kintamasis '%s' yra sveikasis skaičius, o ne skaitinis"
 msgid "variable '%s' is not numeric"
 msgstr "kintamasis '%s' nėra skaitinis"
 
-#: optim.cpp:76 optim.cpp:103
+#: optim.cpp:77 optim.cpp:104
 #, fuzzy
 msgid "non-finite value supplied by 'optim' argument"
 msgstr "nebaigtinė reikšmė, kurią pateikia optim"
 
-#: optim.cpp:83
+#: optim.cpp:84
 #, c-format
 msgid "objective function in optim evaluates to length %d not 1"
 msgstr "tikslo funkcija, esanti optim, įvertina pagal ilgį %d, o ne 1"
 
-#: optim.cpp:110
+#: optim.cpp:111
 #, c-format
 msgid "gradient in optim evaluated to length %d not %d"
 msgstr "gradientas, esantis optim, vertinamas pagal ilgį %d, ne %d"
 
-#: optim.cpp:146 optim.cpp:185
+#: optim.cpp:147 optim.cpp:186
 #, c-format
 msgid "non-finite finite-difference value [%d]"
 msgstr "nebaigtinė riboto skirtumo reikšmė [%d]"
 
-#: optim.cpp:217 optim.cpp:286 optim.cpp:303 optim.cpp:328 optim.cpp:358
-#: optim.cpp:423 optim.cpp:437
+#: optim.cpp:218 optim.cpp:287 optim.cpp:304 optim.cpp:329 optim.cpp:359
+#: optim.cpp:424 optim.cpp:438
 #, fuzzy, c-format
 msgid "'%s' argument is not a function"
 msgstr "'fn' nėra funkcija"
 
-#: optim.cpp:235 optim.cpp:309 optim.cpp:334 optim.cpp:364 optim.cpp:429
-#: optim.cpp:443
+#: optim.cpp:236 optim.cpp:310 optim.cpp:335 optim.cpp:365 optim.cpp:430
+#: optim.cpp:444
 #, fuzzy, c-format
 msgid "'%s' argument is of the wrong length"
 msgstr "argumentas 'data' yra netinkamo tipo"
 
-#: optim.cpp:264
+#: optim.cpp:265
 #, fuzzy, c-format
 msgid "'%s' argument is not an integer"
 msgstr "'maxit' nėra sveikasis skaičius"
 
-#: optim.cpp:284
+#: optim.cpp:285
 #, fuzzy, c-format
 msgid "'%s' argument is not a positive integer"
 msgstr "'tmax' nėra teigiamas sveikasis skaičius"
@@ -1230,34 +1230,34 @@ msgstr "'scal' turi būti kvadratinė, realioji matrica"
 msgid "'scal' matrix is not positive-definite"
 msgstr "'scal' matrica nėra teigiama"
 
-#: random.cpp:54 random.cpp:138 random.cpp:220 random.cpp:312
+#: random.cpp:55 random.cpp:139 random.cpp:221 random.cpp:313
 #, fuzzy
 msgid "NA values produced"
 msgstr "NA sukurtas"
 
-#: random.cpp:61 random.cpp:67 random.cpp:73 random.cpp:88 random.cpp:170
-#: random.cpp:261 random.cpp:405
+#: random.cpp:62 random.cpp:68 random.cpp:74 random.cpp:89 random.cpp:171
+#: random.cpp:262 random.cpp:406
 msgid "invalid arguments"
 msgstr "neleistini argumentai"
 
-#: random.cpp:341
+#: random.cpp:342
 #, fuzzy
 msgid "NA value in probability vector"
 msgstr "NA tikimybės vektoriuje"
 
-#: random.cpp:343
+#: random.cpp:344
 msgid "negative probability"
 msgstr "neigiama tikimybė"
 
-#: random.cpp:351
+#: random.cpp:352
 msgid "no positive probabilities"
 msgstr "nėra teigiamų tikimybių"
 
-#: random.cpp:364
+#: random.cpp:365
 msgid "invalid first argument 'n'"
 msgstr "neteisingas pirmasis argumentas 'n'"
 
-#: random.cpp:366
+#: random.cpp:367
 msgid "invalid second argument 'size'"
 msgstr "neleistinas antrasis argumentas 'size'"
 

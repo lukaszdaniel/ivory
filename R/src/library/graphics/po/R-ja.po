@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.3.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2019-04-08 21:34\n"
+"POT-Creation-Date: 2021-01-30 18:44\n"
 "PO-Revision-Date: 2015-01-17 15:08+0100\n"
 "Last-Translator: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
 "Language-Team: RjpWiki Message Translation Team <mokada@md.tsukuba.ac.jp>\n"
@@ -569,6 +569,18 @@ msgstr " 最初の引数が無効です "
 msgid "invalid number of 'breaks'"
 msgstr " 'breaks' の数が無効です "
 
+#. R/plot.R: gettextf("invalid plot type")
+#: R/plot.R:0
+#, fuzzy
+msgid "invalid plot type"
+msgstr " boxplot の幅が無効です "
+
+#. R/plot.R: gettextf("invalid plot type '%s'", t)
+#: R/plot.R:0
+#, fuzzy
+msgid "invalid plot type '%s'"
+msgstr " boxplot の幅が無効です "
+
 #. R/stripchart.R: stop("invalid plotting method")
 #: R/stripchart.R:0
 msgid "invalid plotting method"
@@ -736,6 +748,11 @@ msgstr " 'pairs' の引数はただ一つの列しか持ちません "
 #: R/abline.R:0
 msgid "only using the first two of %d regression coefficients"
 msgstr " %d 個の怪奇係数のうち最初の二つだけを使います "
+
+#. R/plot.R: gettextf("plot type '%s' will be truncated to first character", type)
+#: R/plot.R:0
+msgid "plot type '%s' will be truncated to first character"
+msgstr ""
 
 #. R/coplot.R: stop("rows * columns too small")
 #: R/coplot.R:0

@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: graphics 4.1.0\n"
-"POT-Creation-Date: 2020-04-15 18:32\n"
+"POT-Creation-Date: 2021-01-30 18:44\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -747,6 +747,20 @@ msgid "invalid number of 'breaks'"
 msgstr ""
 
 
+#: R/plot.R: 0
+#. R/plot.R: gettextf("invalid plot type")
+
+msgid "invalid plot type"
+msgstr ""
+
+
+#: R/plot.R: 0
+#. R/plot.R: gettextf("invalid plot type '%s'", t)
+
+msgid "invalid plot type '%s'"
+msgstr ""
+
+
 #: R/stripchart.R: 0
 #. R/stripchart.R: stop("invalid plotting method")
 
@@ -967,6 +981,13 @@ msgstr ""
 #. R/abline.R: gettextf("only using the first two of %d regression coefficients", p)
 
 msgid "only using the first two of %d regression coefficients"
+msgstr ""
+
+
+#: R/plot.R: 0
+#. R/plot.R: gettextf("plot type '%s' will be truncated to first character", type)
+
+msgid "plot type '%s' will be truncated to first character"
 msgstr ""
 
 

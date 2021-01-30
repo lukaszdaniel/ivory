@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.15.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2021-01-07 23:37\n"
+"POT-Creation-Date: 2021-01-30 18:45\n"
 "PO-Revision-Date: 2015-01-17 15:36+0100\n"
 "Last-Translator: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
 "Language-Team: R-core <R-core@r-project.org>\n"
@@ -1611,6 +1611,12 @@ msgstr "Namensraum Störung: 'base' Namensraum nicht unter den Eltern gefunden"
 msgid "both classes must be defined"
 msgstr "Beide Klassen müssen definiert sein"
 
+#. R/RMethodUtils.R: gettextf("caching class %s", dQuote(cl))
+#: R/RMethodUtils.R:0
+#, fuzzy
+msgid "caching class %s"
+msgstr "(Klasse %s)"
+
 #. R/NextMethod.R: stop("call to 'callNextMethod' does not appear to be in a 'method' or 'callNextMethod' context")
 #: R/NextMethod.R:0
 msgid ""
@@ -1982,6 +1988,16 @@ msgstr ""
 msgid "done"
 msgstr ""
 
+#. R/RMethodUtils.R: gettextf("done caching class %s", dQuote(cl))
+#: R/RMethodUtils.R:0
+msgid "done caching class %s"
+msgstr ""
+
+#. R/RMethodUtils.R: gettextf("done getting generic '%s'", f)
+#: R/RMethodUtils.R:0
+msgid "done getting generic '%s'"
+msgstr ""
+
 #. R/SClasses.R: gettext("duplicate class names among superclasses: %s", domain = "R-methods")
 #: R/SClasses.R:0
 msgid "duplicate class names among superclasses: %s"
@@ -2207,6 +2223,11 @@ msgid ""
 msgstr ""
 "verwerfe Variablen aus der Definition %s (%s): Konflikt mit der notwendigen "
 "Änderung der Argumentnamen (%s)"
+
+#. R/RMethodUtils.R: gettextf("getting generic '%s'", f)
+#: R/RMethodUtils.R:0
+msgid "getting generic '%s'"
+msgstr ""
 
 #. R/RMethodUtils.R: stop("got a negative maximum number of frames to look at")
 #: R/RMethodUtils.R:0

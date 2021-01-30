@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: methods 4.1.0\n"
-"POT-Creation-Date: 2021-01-07 23:37\n"
+"POT-Creation-Date: 2021-01-30 18:45\n"
 "PO-Revision-Date: 2021-01-07 23:46+0100\n"
 "Last-Translator: r.zakauskas@gmail.com;gabriele.dauksaite@gmail.com\n"
 "Language-Team: Lithuanian\n"
@@ -1501,6 +1501,12 @@ msgstr ""
 msgid "both classes must be defined"
 msgstr "turi būti apibrėžtos abi klasės"
 
+#. R/RMethodUtils.R: gettextf("caching class %s", dQuote(cl))
+#: R/RMethodUtils.R:0
+#, fuzzy
+msgid "caching class %s"
+msgstr "(klasė %s)"
+
 #. R/NextMethod.R: stop("call to 'callNextMethod' does not appear to be in a 'method' or 'callNextMethod' context")
 #: R/NextMethod.R:0
 msgid ""
@@ -1832,6 +1838,16 @@ msgstr "neatrodo, kad yra metodų lentelė bendriniam %s sekimo aplinkoje"
 msgid "done"
 msgstr ""
 
+#. R/RMethodUtils.R: gettextf("done caching class %s", dQuote(cl))
+#: R/RMethodUtils.R:0
+msgid "done caching class %s"
+msgstr ""
+
+#. R/RMethodUtils.R: gettextf("done getting generic '%s'", f)
+#: R/RMethodUtils.R:0
+msgid "done getting generic '%s'"
+msgstr ""
+
 #. R/SClasses.R: gettext("duplicate class names among superclasses: %s", domain = "R-methods")
 #: R/SClasses.R:0
 msgid "duplicate class names among superclasses: %s"
@@ -2039,6 +2055,11 @@ msgstr "bendrieji vardai skiriasi: %s, %s"
 msgid ""
 "get rid of variables in definition %s (%s); they conflict with the needed "
 "change to argument names (%s)"
+msgstr ""
+
+#. R/RMethodUtils.R: gettextf("getting generic '%s'", f)
+#: R/RMethodUtils.R:0
+msgid "getting generic '%s'"
 msgstr ""
 
 #. R/RMethodUtils.R: stop("got a negative maximum number of frames to look at")

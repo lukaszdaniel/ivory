@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.4.0 \n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2021-01-07 23:35\n"
+"POT-Creation-Date: 2021-01-30 18:44\n"
 "PO-Revision-Date: 2012-02-26 14:09+0200 \n"
 "Last-Translator: Shigeru Mase <maseshigeru@gmail.com> \n"
 "Language-Team: RjpWiki Message Translation Team <mokada@md.tsukuba.ac.jp> \n"
@@ -2087,6 +2087,11 @@ msgstr " Kinderman-Ramage の疑似乱数発生法のバギー版は使えませ
 msgid "buggy version of Kinderman-Ramage generator used"
 msgstr " Kinderman-Ramage の疑似乱数発生法のバギー版を使います "
 
+#. R/namespace.R: message("cached metadata")
+#: R/namespace.R:0
+msgid "cached metadata"
+msgstr ""
+
 #. R/load.R: stop("can only save to a binary connection")
 #: R/load.R:0
 msgid "can only save to a binary connection"
@@ -2265,6 +2270,12 @@ msgstr ""
 msgid "cost components must be non-negative"
 msgstr " コスト成分は非負でなければなりません "
 
+#. R/all.equal.R: gettext("current is not deparse()able")
+#: R/all.equal.R:0
+#, fuzzy
+msgid "current is not deparse()able"
+msgstr " 'x' は配列ではありません "
+
 #. R/namespace.R: gettextf("cyclic namespace dependency detected when loading package %s, already loading %s",     sQuote(package), paste(sQuote(loading), collapse = ", "))
 #: R/namespace.R:0
 msgid ""
@@ -2285,6 +2296,23 @@ msgstr " dim(X) は正の長さを持たねばなりません "
 #, fuzzy
 msgid "do not know how to convert %s to class %s"
 msgstr " '%s' をクラス \"Date\" へ変換する仕方が分かりません "
+
+#. R/namespace.R: message("done cached metadata")
+#: R/namespace.R:0
+msgid "done cached metadata"
+msgstr ""
+
+#. R/namespace.R: gettextf("done processing imports for package %s", sQuote(package))
+#: R/namespace.R:0
+#, fuzzy
+msgid "done processing imports for package %s"
+msgstr " パッケージ '%s' のドキュメント "
+
+#. R/namespace.R: gettextf("done running .onLoad for package %s", sQuote(package))
+#: R/namespace.R:0
+#, fuzzy
+msgid "done running .onLoad for package %s"
+msgstr " パッケージ '%s' のドキュメント "
 
 #. R/namespace.R: gettextf("duplicate import names %s", paste(sQuote(impnames[duplicated(impnames)]),     collapse = ", "))
 #: R/namespace.R:0
@@ -2381,6 +2409,11 @@ msgid ""
 msgstr ""
 " 'to', 'by', 'length.out' かまたは 'along.with' の内丁度二つを指定しなければ"
 "なりません "
+
+#. R/namespace.R: gettextf("export method '%s'", mi)
+#: R/namespace.R:0
+msgid "export method '%s'"
+msgstr ""
 
 #. R/factor.R: gettext("factor levels must be \"character\"", domain = "R-base")
 #: R/factor.R:0
@@ -2778,6 +2811,23 @@ msgstr " リンク '%s' はすでに存在します "
 #, fuzzy
 msgid "list of length %d is not meaningful"
 msgstr " 長さ %d のリストは意味がありません "
+
+#. R/namespace.R: message("loading ", package)
+#: R/namespace.R:0
+msgid "loading"
+msgstr ""
+
+#. R/namespace.R: gettextf("loading lazydata for package %s", sQuote(package))
+#: R/namespace.R:0
+#, fuzzy
+msgid "loading lazydata for package %s"
+msgstr " パッケージ '%s' のドキュメント "
+
+#. R/namespace.R: gettextf("loading sysdata for package %s", sQuote(package))
+#: R/namespace.R:0
+#, fuzzy
+msgid "loading sysdata for package %s"
+msgstr " パッケージ '%s' のドキュメント "
 
 #. R/merge.R: stop("long vectors are not supported")
 #: R/merge.R:0
@@ -3398,6 +3448,30 @@ msgstr ""
 msgid "probably wrong encoding in 'names(.)' of column %s"
 msgstr " おそらく列の names(.) 中に間違ったエンコーディングがあります "
 
+#. R/namespace.R: message("procesing classes")
+#: R/namespace.R:0
+#, fuzzy
+msgid "procesing classes"
+msgstr " 間違ったクラスです "
+
+#. R/namespace.R: gettextf("processing S4 stuff for package %s", sQuote(package))
+#: R/namespace.R:0
+#, fuzzy
+msgid "processing S4 stuff for package %s"
+msgstr " パッケージ '%s' のドキュメント "
+
+#. R/namespace.R: gettextf("processing exports for package %s", sQuote(package))
+#: R/namespace.R:0
+#, fuzzy
+msgid "processing exports for package %s"
+msgstr " パッケージ '%s' のドキュメント "
+
+#. R/namespace.R: gettextf("processing imports for package %s", sQuote(package))
+#: R/namespace.R:0
+#, fuzzy
+msgid "processing imports for package %s"
+msgstr " パッケージ '%s' のドキュメント "
+
 #. R/conditions.R: sprintf("pushing duplicate `%s` handler on top of the stack", class)
 #: R/conditions.R:0
 msgid "pushing duplicate `%s` handler on top of the stack"
@@ -3460,11 +3534,23 @@ msgstr " 与えられた列名は誤った長さです "
 msgid "row names were found from a short variable and have been discarded"
 msgstr " 列名は短い変数から見つけられ、捨て去られました "
 
+#. R/namespace.R: gettextf("running .onLoad for package %s", sQuote(package))
+#: R/namespace.R:0
+#, fuzzy
+msgid "running .onLoad for package %s"
+msgstr " パッケージ '%s' のドキュメント "
+
 #. R/windows/system.R: gettextf("running command '%s' had status %d", command, rval)
 #. R/windows/system.R: gettextf("running command '%s' had status %d", command, rval)
 #: R/windows/system.R:0
 msgid "running command '%s' had status %d"
 msgstr ""
+
+#. R/namespace.R: gettextf("sealing exports for package %s", sQuote(package))
+#: R/namespace.R:0
+#, fuzzy
+msgid "sealing exports for package %s"
+msgstr " パッケージ '%s' のドキュメント "
 
 #. R/datetime.R: gettextf("second argument of '/' operator cannot be an object of class %s", dQuote("difftime"))
 #: R/datetime.R:0
@@ -4112,9 +4198,6 @@ msgstr[0] " TRUE の代わりに T が使われました "
 #~ msgid "'by' is NA"
 #~ msgstr " 'by' が NA です "
 
-#~ msgid "wrong class"
-#~ msgstr " 間違ったクラスです "
-
 #~ msgid "second argument must be a list"
 #~ msgstr " 第二引数はリストでなければなりません "
 
@@ -4518,10 +4601,6 @@ msgstr[0] " TRUE の代わりに T が使われました "
 
 #~ msgid "target is %s, current is %s"
 #~ msgstr " 引数 target は %s、引数 current は %s です "
-
-#, fuzzy
-#~ msgid "'current' is not a factor"
-#~ msgstr " 'x' は配列ではありません "
 
 #, fuzzy
 #~ msgid "invalid ncol(x)"

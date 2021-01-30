@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.13.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2021-01-07 23:35\n"
+"POT-Creation-Date: 2021-01-30 18:44\n"
 "PO-Revision-Date: 2011-04-01 04:29+0200\n"
 "Last-Translator: Murat Alkan <muratalk@gmail.com>\n"
 "Language-Team: Turkish <muratalk@gmail.com>\n"
@@ -1939,6 +1939,11 @@ msgstr ""
 msgid "buggy version of Kinderman-Ramage generator used"
 msgstr ""
 
+#. R/namespace.R: message("cached metadata")
+#: R/namespace.R:0
+msgid "cached metadata"
+msgstr ""
+
 #. R/load.R: stop("can only save to a binary connection")
 #: R/load.R:0
 msgid "can only save to a binary connection"
@@ -2104,6 +2109,11 @@ msgstr ""
 msgid "cost components must be non-negative"
 msgstr ""
 
+#. R/all.equal.R: gettext("current is not deparse()able")
+#: R/all.equal.R:0
+msgid "current is not deparse()able"
+msgstr ""
+
 #. R/namespace.R: gettextf("cyclic namespace dependency detected when loading package %s, already loading %s",     sQuote(package), paste(sQuote(loading), collapse = ", "))
 #: R/namespace.R:0
 msgid ""
@@ -2122,6 +2132,23 @@ msgstr ""
 #: R/dates.R:0 R/datetime.R:0
 msgid "do not know how to convert %s to class %s"
 msgstr ""
+
+#. R/namespace.R: message("done cached metadata")
+#: R/namespace.R:0
+msgid "done cached metadata"
+msgstr ""
+
+#. R/namespace.R: gettextf("done processing imports for package %s", sQuote(package))
+#: R/namespace.R:0
+#, fuzzy
+msgid "done processing imports for package %s"
+msgstr "Zorunlu paket yükleniyor: %s"
+
+#. R/namespace.R: gettextf("done running .onLoad for package %s", sQuote(package))
+#: R/namespace.R:0
+#, fuzzy
+msgid "done running .onLoad for package %s"
+msgstr "Zorunlu paket yükleniyor: %s"
 
 #. R/namespace.R: gettextf("duplicate import names %s", paste(sQuote(impnames[duplicated(impnames)]),     collapse = ", "))
 #: R/namespace.R:0
@@ -2205,6 +2232,11 @@ msgstr ""
 #: R/datetime.R:0
 msgid ""
 "exactly two of 'to', 'by' and 'length.out' / 'along.with' must be specified"
+msgstr ""
+
+#. R/namespace.R: gettextf("export method '%s'", mi)
+#: R/namespace.R:0
+msgid "export method '%s'"
 msgstr ""
 
 #. R/factor.R: gettext("factor levels must be \"character\"", domain = "R-base")
@@ -2583,6 +2615,23 @@ msgstr ""
 #: R/dataframe.R:0
 msgid "list of length %d is not meaningful"
 msgstr ""
+
+#. R/namespace.R: message("loading ", package)
+#: R/namespace.R:0
+msgid "loading"
+msgstr ""
+
+#. R/namespace.R: gettextf("loading lazydata for package %s", sQuote(package))
+#: R/namespace.R:0
+#, fuzzy
+msgid "loading lazydata for package %s"
+msgstr "Zorunlu paket yükleniyor: %s"
+
+#. R/namespace.R: gettextf("loading sysdata for package %s", sQuote(package))
+#: R/namespace.R:0
+#, fuzzy
+msgid "loading sysdata for package %s"
+msgstr "Zorunlu paket yükleniyor: %s"
 
 #. R/merge.R: stop("long vectors are not supported")
 #: R/merge.R:0
@@ -3135,6 +3184,29 @@ msgstr ""
 msgid "probably wrong encoding in 'names(.)' of column %s"
 msgstr ""
 
+#. R/namespace.R: message("procesing classes")
+#: R/namespace.R:0
+msgid "procesing classes"
+msgstr ""
+
+#. R/namespace.R: gettextf("processing S4 stuff for package %s", sQuote(package))
+#: R/namespace.R:0
+#, fuzzy
+msgid "processing S4 stuff for package %s"
+msgstr "Zorunlu paket yükleniyor: %s"
+
+#. R/namespace.R: gettextf("processing exports for package %s", sQuote(package))
+#: R/namespace.R:0
+#, fuzzy
+msgid "processing exports for package %s"
+msgstr "Zorunlu paket yükleniyor: %s"
+
+#. R/namespace.R: gettextf("processing imports for package %s", sQuote(package))
+#: R/namespace.R:0
+#, fuzzy
+msgid "processing imports for package %s"
+msgstr "Zorunlu paket yükleniyor: %s"
+
 #. R/conditions.R: sprintf("pushing duplicate `%s` handler on top of the stack", class)
 #: R/conditions.R:0
 msgid "pushing duplicate `%s` handler on top of the stack"
@@ -3193,11 +3265,23 @@ msgstr ""
 msgid "row names were found from a short variable and have been discarded"
 msgstr ""
 
+#. R/namespace.R: gettextf("running .onLoad for package %s", sQuote(package))
+#: R/namespace.R:0
+#, fuzzy
+msgid "running .onLoad for package %s"
+msgstr "Zorunlu paket yükleniyor: %s"
+
 #. R/windows/system.R: gettextf("running command '%s' had status %d", command, rval)
 #. R/windows/system.R: gettextf("running command '%s' had status %d", command, rval)
 #: R/windows/system.R:0
 msgid "running command '%s' had status %d"
 msgstr ""
+
+#. R/namespace.R: gettextf("sealing exports for package %s", sQuote(package))
+#: R/namespace.R:0
+#, fuzzy
+msgid "sealing exports for package %s"
+msgstr "Zorunlu paket yükleniyor: %s"
 
 #. R/datetime.R: gettextf("second argument of '/' operator cannot be an object of class %s", dQuote("difftime"))
 #: R/datetime.R:0

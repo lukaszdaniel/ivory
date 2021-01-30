@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: tcltk 4.1.0\n"
-"POT-Creation-Date: 2020-04-15 18:32\n"
+"POT-Creation-Date: 2021-01-30 18:46\n"
 "PO-Revision-Date: 2020-11-29 16:50+0200\n"
 "Last-Translator: <r.zakauskas@gmail.com;gabriele.dauksaite@gmail.com>\n"
 "Language-Team: Lithuanian\n"
@@ -145,9 +145,9 @@ msgstr "Tcl/Tk palaikymas neprieinamas šioje sistemoje"
 msgid "The tkGUI is not available under Windows"
 msgstr "TkGUI nėra prieinamas Windows"
 
-#. R/unix/zzz.R: stop("X11 library is missing: install XQuartz from xquartz.macosforge.org")
+#. R/unix/zzz.R: stop("X11 library is missing: install XQuartz from www.xquartz.org")
 #: R/unix/zzz.R:0
-msgid "X11 library is missing: install XQuartz from xquartz.macosforge.org"
+msgid "X11 library is missing: install XQuartz from www.xquartz.org"
 msgstr ""
 
 #. R/tclarray.R: stop("cannot change names on Tcl array")

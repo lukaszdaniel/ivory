@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R-core\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-01-07 23:39+0100\n"
+"POT-Creation-Date: 2021-01-30 18:47+0100\n"
 "PO-Revision-Date: \n"
 "Last-Translator: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
 "Language-Team: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
@@ -64,102 +64,102 @@ msgid "at most one asterisk '*' is supported in each conversion specification"
 msgstr ""
 "co najwyżej jedna gwiazdka '*' jest wspierana w każdym określeniu zamiany"
 
-#: gramLatex.cpp:2435 gramRd.cpp:3793
+#: gramLatex.cpp:2436 gramRd.cpp:3794
 #, c-format
 msgid "unable to allocate buffer for long string at line %d"
 msgstr "nie można przydzielić bufora dla długiego łańcucha w linii %d"
 
-#: gramLatex.cpp:2631 gramRd.cpp:4287
+#: gramLatex.cpp:2632 gramRd.cpp:4288
 #, fuzzy
 msgid "unable to allocate in PushState"
 msgstr "nie można przydzielić bufora dla długiego łańcucha w linii %d"
 
-#: gramLatex.cpp:2674 gramRd.cpp:4339 gramRd.cpp:4345
+#: gramLatex.cpp:2675 gramRd.cpp:4340 gramRd.cpp:4346
 #, c-format
 msgid "invalid '%s' value"
 msgstr "niepoprawny wartość '%s'"
 
-#: gramRd.cpp:2409 gramRd.cpp:2412
+#: gramRd.cpp:2410 gramRd.cpp:2413
 #, c-format
 msgid "bad markup (extra space?) at %s:%d:%d"
 msgstr "błędne oznakowanie (dodatkowa spacja?) w %s:%d:%d"
 
-#: gramRd.cpp:2937
+#: gramRd.cpp:2938
 #, c-format
 msgid "Macro '%s' previously defined."
 msgstr "Makro '%s' zostało już poprzednio zdefiniowane."
 
-#: gramRd.cpp:2947
+#: gramRd.cpp:2948
 #, c-format
 msgid "At most 4 arguments are allowed for user defined macros."
 msgstr ""
 "Co najwyżej 4 argumenty są dozwolone dla makr zdefiniowanych przez "
 "użytkownika."
 
-#: gramRd.cpp:2989
+#: gramRd.cpp:2990
 #, c-format
 msgid "No macro definition for '%s'."
 msgstr "Brak makra zdefiniowanego dla '%s'"
 
-#: gramRd.cpp:3006 gramRd.cpp:3022
+#: gramRd.cpp:3007 gramRd.cpp:3023
 msgid "internal error: invalid argument to xxusermacro"
 msgstr ""
 "błąd wewnętrzny: niepoprawny argument przekazany do funkcji 'xxusermacro()'"
 
-#: gramRd.cpp:3051
+#: gramRd.cpp:3052
 #, c-format
 msgid "Not enough arguments passed to user macro '%s'"
 msgstr "Zbyt mało argumentów przekazanych do makra użytkownika '%s'"
 
-#: gramRd.cpp:3191 gramRd.cpp:3195
+#: gramRd.cpp:3192 gramRd.cpp:3196
 #, c-format
 msgid "newline within quoted string at %s:%d"
 msgstr "nowa linia wewnątrz cytowanego łańcucha w %s:%d"
 
-#: gramRd.cpp:3218
+#: gramRd.cpp:3219
 #, c-format
 msgid "unable to allocate buffer for long macro at line %d"
 msgstr "nie można przydzielić bufora dla długiego makra w linii %d"
 
-#: gramRd.cpp:3250
+#: gramRd.cpp:3251
 msgid "macros nested too deeply: infinite recursion?"
 msgstr "makra są zagnieżdżone zbyt głęboko: nieskończona rekurencja?"
 
-#: gramRd.cpp:3655
+#: gramRd.cpp:3656
 #, c-format
 msgid "Unable to find macro %s"
 msgstr "Nie można znaleźć makra %s"
 
-#: gramRd.cpp:3853
+#: gramRd.cpp:3854
 #, c-format
 msgid "Unexpected end of input (in %c quoted string opened at %s:%d:%d)"
 msgstr ""
 "Nieoczekiwane zakończenie wejścia (w %c cytowanym łańcuchu otwartym w %s:%d:"
 "%d)"
 
-#: gramRd.cpp:4352
+#: gramRd.cpp:4353
 msgid "cannot open the connection"
 msgstr "nie można otworzyć połączenia"
 
-#: gramRd.cpp:4357
+#: gramRd.cpp:4358
 msgid "cannot read from this connection"
 msgstr "nie można czytać z tego połączenia"
 
-#: gramRd.cpp:4365
+#: gramRd.cpp:4366
 msgid "invalid Rd file"
 msgstr "niepoprawny plik Rd"
 
-#: gramRd.cpp:4384
+#: gramRd.cpp:4385
 msgid "'deparseRd' only supports deparsing character elements"
 msgstr ""
 "'deparseRd' wspiera tylko konwertowanie wyrażenia na łańcuch tekstowy dla "
 "elementów znakowych"
 
-#: gramRd.cpp:4387
+#: gramRd.cpp:4388
 msgid "bad state"
 msgstr "błędny stan"
 
-#: gramRd.cpp:4400
+#: gramRd.cpp:4401
 #, c-format
 msgid "bad text mode %d in 'deparseRd'"
 msgstr "błędny tryb %d tekstu w 'deparseRd'"

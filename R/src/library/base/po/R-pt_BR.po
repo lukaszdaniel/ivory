@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.3.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2021-01-07 23:35\n"
+"POT-Creation-Date: 2021-01-30 18:44\n"
 "PO-Revision-Date: 2011-03-26 08:54-0300\n"
 "Last-Translator: Fernando Henrique <pessoal@fernandohrosa.com.br>\n"
 "Language-Team: http://www.feferraz.net/br/P/Projeto_Traducao_R_Portugues\n"
@@ -2085,6 +2085,11 @@ msgstr "Uso da versão com erros do gerador Kinderman-Ramage não permitido"
 msgid "buggy version of Kinderman-Ramage generator used"
 msgstr "Usando versão com erros do gerador Kinderman-Ramage"
 
+#. R/namespace.R: message("cached metadata")
+#: R/namespace.R:0
+msgid "cached metadata"
+msgstr ""
+
 #. R/load.R: stop("can only save to a binary connection")
 #: R/load.R:0
 msgid "can only save to a binary connection"
@@ -2265,6 +2270,12 @@ msgstr "data frame corrompido: colunas serão truncadas ou completadas com NAs"
 msgid "cost components must be non-negative"
 msgstr "componentes de 'max.distance' devem ser não negativos"
 
+#. R/all.equal.R: gettext("current is not deparse()able")
+#: R/all.equal.R:0
+#, fuzzy
+msgid "current is not deparse()able"
+msgstr "'x' não é um array"
+
 #. R/namespace.R: gettextf("cyclic namespace dependency detected when loading package %s, already loading %s",     sQuote(package), paste(sQuote(loading), collapse = ", "))
 #: R/namespace.R:0
 msgid ""
@@ -2285,6 +2296,23 @@ msgstr "dim(X) deve ter um comprimento positivo"
 #, fuzzy
 msgid "do not know how to convert %s to class %s"
 msgstr "não sei como converter '%s' para classe \"Date\""
+
+#. R/namespace.R: message("done cached metadata")
+#: R/namespace.R:0
+msgid "done cached metadata"
+msgstr ""
+
+#. R/namespace.R: gettextf("done processing imports for package %s", sQuote(package))
+#: R/namespace.R:0
+#, fuzzy
+msgid "done processing imports for package %s"
+msgstr "Documentação para o pacote '%s'"
+
+#. R/namespace.R: gettextf("done running .onLoad for package %s", sQuote(package))
+#: R/namespace.R:0
+#, fuzzy
+msgid "done running .onLoad for package %s"
+msgstr "Documentação para o pacote '%s'"
 
 #. R/namespace.R: gettextf("duplicate import names %s", paste(sQuote(impnames[duplicated(impnames)]),     collapse = ", "))
 #: R/namespace.R:0
@@ -2381,6 +2409,11 @@ msgid ""
 msgstr ""
 "exatamente dois de 'to', 'by' e 'length.out' / 'along.width' devem ser "
 "especificados"
+
+#. R/namespace.R: gettextf("export method '%s'", mi)
+#: R/namespace.R:0
+msgid "export method '%s'"
+msgstr ""
 
 #. R/factor.R: gettext("factor levels must be \"character\"", domain = "R-base")
 #: R/factor.R:0
@@ -2782,6 +2815,23 @@ msgstr ""
 #, fuzzy
 msgid "list of length %d is not meaningful"
 msgstr "lista de comprimento %d sem sentido"
+
+#. R/namespace.R: message("loading ", package)
+#: R/namespace.R:0
+msgid "loading"
+msgstr ""
+
+#. R/namespace.R: gettextf("loading lazydata for package %s", sQuote(package))
+#: R/namespace.R:0
+#, fuzzy
+msgid "loading lazydata for package %s"
+msgstr "Documentação para o pacote '%s'"
+
+#. R/namespace.R: gettextf("loading sysdata for package %s", sQuote(package))
+#: R/namespace.R:0
+#, fuzzy
+msgid "loading sysdata for package %s"
+msgstr "Documentação para o pacote '%s'"
 
 #. R/merge.R: stop("long vectors are not supported")
 #: R/merge.R:0
@@ -3396,6 +3446,30 @@ msgstr ""
 msgid "probably wrong encoding in 'names(.)' of column %s"
 msgstr "provavelmente codificação errada no names(.) da coluna"
 
+#. R/namespace.R: message("procesing classes")
+#: R/namespace.R:0
+#, fuzzy
+msgid "procesing classes"
+msgstr "classe errada"
+
+#. R/namespace.R: gettextf("processing S4 stuff for package %s", sQuote(package))
+#: R/namespace.R:0
+#, fuzzy
+msgid "processing S4 stuff for package %s"
+msgstr "Documentação para o pacote '%s'"
+
+#. R/namespace.R: gettextf("processing exports for package %s", sQuote(package))
+#: R/namespace.R:0
+#, fuzzy
+msgid "processing exports for package %s"
+msgstr "Documentação para o pacote '%s'"
+
+#. R/namespace.R: gettextf("processing imports for package %s", sQuote(package))
+#: R/namespace.R:0
+#, fuzzy
+msgid "processing imports for package %s"
+msgstr "Documentação para o pacote '%s'"
+
 #. R/conditions.R: sprintf("pushing duplicate `%s` handler on top of the stack", class)
 #: R/conditions.R:0
 msgid "pushing duplicate `%s` handler on top of the stack"
@@ -3459,11 +3533,23 @@ msgid "row names were found from a short variable and have been discarded"
 msgstr ""
 "nomes de linhas foram encontrados em uma variável curta e foram descartados"
 
+#. R/namespace.R: gettextf("running .onLoad for package %s", sQuote(package))
+#: R/namespace.R:0
+#, fuzzy
+msgid "running .onLoad for package %s"
+msgstr "Documentação para o pacote '%s'"
+
 #. R/windows/system.R: gettextf("running command '%s' had status %d", command, rval)
 #. R/windows/system.R: gettextf("running command '%s' had status %d", command, rval)
 #: R/windows/system.R:0
 msgid "running command '%s' had status %d"
 msgstr ""
+
+#. R/namespace.R: gettextf("sealing exports for package %s", sQuote(package))
+#: R/namespace.R:0
+#, fuzzy
+msgid "sealing exports for package %s"
+msgstr "Documentação para o pacote '%s'"
 
 #. R/datetime.R: gettextf("second argument of '/' operator cannot be an object of class %s", dQuote("difftime"))
 #: R/datetime.R:0
@@ -4150,9 +4236,6 @@ msgstr[1] "T usado ao invés de TRUE"
 #~ msgid "'by' is NA"
 #~ msgstr "'by' é NA"
 
-#~ msgid "wrong class"
-#~ msgstr "classe errada"
-
 #~ msgid "second argument must be a list"
 #~ msgstr "segundo argumento deve ser uma lista"
 
@@ -4550,10 +4633,6 @@ msgstr[1] "T usado ao invés de TRUE"
 
 #~ msgid "target is %s, current is %s"
 #~ msgstr "alvo é %s, atual é %s"
-
-#, fuzzy
-#~ msgid "'current' is not a factor"
-#~ msgstr "'x' não é um array"
 
 #, fuzzy
 #~ msgid "invalid ncol(x)"

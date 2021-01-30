@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.3.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2021-01-07 23:37\n"
+"POT-Creation-Date: 2021-01-30 18:44\n"
 "PO-Revision-Date: 2005-05-25 14:17+0900\n"
 "Last-Translator: Chel Hee Lee <chl948@mail.usask.ca>\n"
 "Language-Team: The Korean R Translation Council <gnustats@gmail.com>\n"
@@ -298,9 +298,9 @@ msgstr ""
 msgid "Waiting for input"
 msgstr ""
 
-#. R/unix/x11.R: stop("X11 library is missing: install XQuartz from xquartz.macosforge.org", domain = "R-utils")
+#. R/unix/x11.R: stop("X11 library is missing: install XQuartz from www.xquartz.org", domain = "R-utils")
 #: R/unix/x11.R:0
-msgid "X11 library is missing: install XQuartz from xquartz.macosforge.org"
+msgid "X11 library is missing: install XQuartz from www.xquartz.org"
 msgstr ""
 
 #. R/raster.R: stop("a raster array must be numeric")

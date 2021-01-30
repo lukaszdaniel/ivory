@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: tools 4.1.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-01-07 23:39+0100\n"
+"POT-Creation-Date: 2021-01-30 18:47+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -64,94 +64,94 @@ msgstr ""
 msgid "at most one asterisk '*' is supported in each conversion specification"
 msgstr ""
 
-#: gramLatex.cpp:2435 gramRd.cpp:3793
+#: gramLatex.cpp:2436 gramRd.cpp:3794
 #, c-format
 msgid "unable to allocate buffer for long string at line %d"
 msgstr ""
 
-#: gramLatex.cpp:2631 gramRd.cpp:4287
+#: gramLatex.cpp:2632 gramRd.cpp:4288
 msgid "unable to allocate in PushState"
 msgstr ""
 
-#: gramLatex.cpp:2674 gramRd.cpp:4339 gramRd.cpp:4345
+#: gramLatex.cpp:2675 gramRd.cpp:4340 gramRd.cpp:4346
 #, c-format
 msgid "invalid '%s' value"
 msgstr ""
 
-#: gramRd.cpp:2409 gramRd.cpp:2412
+#: gramRd.cpp:2410 gramRd.cpp:2413
 #, c-format
 msgid "bad markup (extra space?) at %s:%d:%d"
 msgstr ""
 
-#: gramRd.cpp:2937
+#: gramRd.cpp:2938
 #, c-format
 msgid "Macro '%s' previously defined."
 msgstr ""
 
-#: gramRd.cpp:2947
+#: gramRd.cpp:2948
 #, c-format
 msgid "At most 4 arguments are allowed for user defined macros."
 msgstr ""
 
-#: gramRd.cpp:2989
+#: gramRd.cpp:2990
 #, c-format
 msgid "No macro definition for '%s'."
 msgstr ""
 
-#: gramRd.cpp:3006 gramRd.cpp:3022
+#: gramRd.cpp:3007 gramRd.cpp:3023
 msgid "internal error: invalid argument to xxusermacro"
 msgstr ""
 
-#: gramRd.cpp:3051
+#: gramRd.cpp:3052
 #, c-format
 msgid "Not enough arguments passed to user macro '%s'"
 msgstr ""
 
-#: gramRd.cpp:3191 gramRd.cpp:3195
+#: gramRd.cpp:3192 gramRd.cpp:3196
 #, c-format
 msgid "newline within quoted string at %s:%d"
 msgstr ""
 
-#: gramRd.cpp:3218
+#: gramRd.cpp:3219
 #, c-format
 msgid "unable to allocate buffer for long macro at line %d"
 msgstr ""
 
-#: gramRd.cpp:3250
+#: gramRd.cpp:3251
 msgid "macros nested too deeply: infinite recursion?"
 msgstr ""
 
-#: gramRd.cpp:3655
+#: gramRd.cpp:3656
 #, c-format
 msgid "Unable to find macro %s"
 msgstr ""
 
-#: gramRd.cpp:3853
+#: gramRd.cpp:3854
 #, c-format
 msgid "Unexpected end of input (in %c quoted string opened at %s:%d:%d)"
 msgstr ""
 
-#: gramRd.cpp:4352
+#: gramRd.cpp:4353
 msgid "cannot open the connection"
 msgstr ""
 
-#: gramRd.cpp:4357
+#: gramRd.cpp:4358
 msgid "cannot read from this connection"
 msgstr ""
 
-#: gramRd.cpp:4365
+#: gramRd.cpp:4366
 msgid "invalid Rd file"
 msgstr ""
 
-#: gramRd.cpp:4384
+#: gramRd.cpp:4385
 msgid "'deparseRd' only supports deparsing character elements"
 msgstr ""
 
-#: gramRd.cpp:4387
+#: gramRd.cpp:4388
 msgid "bad state"
 msgstr ""
 
-#: gramRd.cpp:4400
+#: gramRd.cpp:4401
 #, c-format
 msgid "bad text mode %d in 'deparseRd'"
 msgstr ""

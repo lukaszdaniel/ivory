@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 3.3.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-01-07 23:39+0100\n"
+"POT-Creation-Date: 2021-01-30 18:47+0100\n"
 "PO-Revision-Date: 2018-04-16 18:50+0200\n"
 "Last-Translator: Alexey Shipunov <dactylorhiza@gmail.com>\n"
 "Language-Team: Russian\n"
@@ -22,9 +22,9 @@ msgstr ""
 "X-Generator: Poedit 2.0.4\n"
 "X-Poedit-SourceCharset: UTF-8\n"
 
-#: io.cpp:323 io.cpp:327 io.cpp:337 io.cpp:565 io.cpp:764 io.cpp:816 io.cpp:830
-#: io.cpp:834 io.cpp:840 io.cpp:841 io.cpp:1082 io.cpp:1083 io.cpp:1085
-#: io.cpp:1086 io.cpp:1087 io.cpp:1088 io.cpp:1089 io.cpp:1090 stubs.cpp:41
+#: io.cpp:327 io.cpp:331 io.cpp:341 io.cpp:569 io.cpp:768 io.cpp:820 io.cpp:834
+#: io.cpp:838 io.cpp:844 io.cpp:845 io.cpp:1086 io.cpp:1087 io.cpp:1089
+#: io.cpp:1090 io.cpp:1091 io.cpp:1092 io.cpp:1093 io.cpp:1094 stubs.cpp:41
 #: stubs.cpp:61 windows/dialogs.cpp:169 windows/dialogs.cpp:194
 #: windows/dialogs.cpp:197 windows/dialogs.cpp:241 windows/dialogs.cpp:278
 #: windows/dialogs.cpp:289 windows/dialogs.cpp:313 windows/dialogs.cpp:321
@@ -34,93 +34,93 @@ msgstr ""
 msgid "invalid '%s' argument"
 msgstr "неправильный аргумент '%s'"
 
-#: io.cpp:346 io.cpp:827
+#: io.cpp:350 io.cpp:831
 msgid "invalid quote symbol set"
 msgstr "неправильная установка символа кавычек"
 
-#: io.cpp:358 io.cpp:850 io.cpp:1070
+#: io.cpp:362 io.cpp:854 io.cpp:1074
 msgid "cannot open the connection"
 msgstr "не могу открыть соединение"
 
-#: io.cpp:361 io.cpp:365
+#: io.cpp:365 io.cpp:369
 msgid "cannot read from this connection"
 msgstr "не могу прочитать из соединения"
 
-#: io.cpp:412 io.cpp:430
+#: io.cpp:416 io.cpp:434
 #, c-format
 msgid "quoted string on line %d terminated by EOF"
 msgstr "закавыченная подстрока строки %d заканчивается EOF"
 
-#: io.cpp:561
+#: io.cpp:565
 msgid "the first argument must be of mode character"
 msgstr "первый аргумент должен быть текстовым"
 
-#: io.cpp:591
+#: io.cpp:595
 #, c-format
 msgid "invalid 'numerals' string: \"%s\""
 msgstr "неправильная строка 'numerals': \"%s\""
 
-#: io.cpp:766
+#: io.cpp:770
 #, c-format
 msgid "Selection: "
 msgstr "Выбор:"
 
-#: io.cpp:860 io.cpp:875
+#: io.cpp:864 io.cpp:879
 msgid "cannot allocate buffer in 'readTableHead'"
 msgstr "не могу разместить буфер в 'readTableHead'"
 
-#: io.cpp:888
+#: io.cpp:892
 msgid "\\ followed by EOF"
 msgstr "\\ завершается EOF"
 
-#: io.cpp:927
+#: io.cpp:931
 #, c-format
 msgid "line %d appears to contain embedded nulls"
 msgstr ""
 
-#: io.cpp:940 io.cpp:944
+#: io.cpp:944 io.cpp:948
 #, c-format
 msgid "incomplete final line found by readTableHeader on '%s'"
 msgstr "readTableHeader нашел неполную последнюю строку в '%s'"
 
-#: io.cpp:1000
+#: io.cpp:1004
 msgid "index out of range"
 msgstr "индекс вне пределов"
 
-#: io.cpp:1038
+#: io.cpp:1042
 #, c-format
 msgid "Problem closing connection:  %s"
 msgstr ""
 
-#: io.cpp:1040
+#: io.cpp:1044
 #, fuzzy
 msgid "Problem closing connection"
 msgstr "'file' -- это не соединение"
 
-#: io.cpp:1063
+#: io.cpp:1067
 msgid "'file' argument is not a connection"
 msgstr "'file' -- это не соединение"
 
-#: io.cpp:1066
+#: io.cpp:1070
 msgid "cannot write to this connection"
 msgstr "не могу писать в это соединение"
 
-#: io.cpp:1096
+#: io.cpp:1100
 msgid "'dec' argument must be a single character"
 msgstr "'dec' должен быть одним символом"
 
-#: io.cpp:1120
+#: io.cpp:1124
 #, fuzzy, c-format
 msgid "corrupt data frame -- length of column %d does not match nrows"
 msgstr ""
 "поврежденная таблица данных -- длина колонки %d не соответствует строкам"
 
-#: io.cpp:1148
+#: io.cpp:1152
 #, c-format
 msgid "column %s claims to be a factor but does not have numeric codes"
 msgstr "колонка %s считает себя фактором, но у нее нет числовых кодов"
 
-#: io.cpp:1165
+#: io.cpp:1169
 #, fuzzy
 msgid "corrupt matrix -- dims do not match length"
 msgstr "поврежденная матрица -- длины измерений не сходятся"

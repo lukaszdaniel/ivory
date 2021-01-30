@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 3.0.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2019-04-08 21:34\n"
+"POT-Creation-Date: 2021-01-30 18:44\n"
 "PO-Revision-Date: 2016-01-09 18:50+0100\n"
 "Last-Translator: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
 "Language-Team: \n"
@@ -549,6 +549,18 @@ msgstr ""
 msgid "invalid number of 'breaks'"
 msgstr ""
 
+#. R/plot.R: gettextf("invalid plot type")
+#: R/plot.R:0
+#, fuzzy
+msgid "invalid plot type"
+msgstr "ugyldig »log«"
+
+#. R/plot.R: gettextf("invalid plot type '%s'", t)
+#: R/plot.R:0
+#, fuzzy
+msgid "invalid plot type '%s'"
+msgstr "ugyldig »log«"
+
 #. R/stripchart.R: stop("invalid plotting method")
 #: R/stripchart.R:0
 msgid "invalid plotting method"
@@ -709,6 +721,11 @@ msgstr ""
 msgid "only using the first two of %d regression coefficients"
 msgstr "bruger kun de første to af %d-regressionskoefficienter"
 
+#. R/plot.R: gettextf("plot type '%s' will be truncated to first character", type)
+#: R/plot.R:0
+msgid "plot type '%s' will be truncated to first character"
+msgstr ""
+
 #. R/coplot.R: stop("rows * columns too small")
 #: R/coplot.R:0
 msgid "rows * columns too small"
@@ -829,8 +846,4 @@ msgstr[1] ""
 #~ msgstr "ugyldig »axp«"
 
 #~ msgid "invalid 'log'"
-#~ msgstr "ugyldig »log«"
-
-#, fuzzy
-#~ msgid "invalid 'title'"
 #~ msgstr "ugyldig »log«"

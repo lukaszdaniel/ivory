@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.5.0 \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-01-07 23:37+0100\n"
+"POT-Creation-Date: 2021-01-30 18:44+0100\n"
 "PO-Revision-Date: 2012-02-26 14:21+0200 \n"
 "Last-Translator: Shigeru Mase <maseshigeru@gmail.com> \n"
 "Language-Team: R-core <R-core@R-project.org> \n"
@@ -178,384 +178,379 @@ msgstr " layout の列が多すぎます（限界は %d） "
 msgid "too many cells in layout, limit %d"
 msgstr " layout のセルが多すぎます（限界は %d） "
 
-#: plot.cpp:42 plot3d.cpp:40
+#: plot.cpp:43 plot3d.cpp:41
 msgid "invalid type passed to graphics function"
 msgstr ""
 
-#: plot.cpp:65
+#: plot.cpp:66
 #, fuzzy
 msgid "invalid color specification"
 msgstr " フォントの指定が不正です "
 
-#: plot.cpp:131
+#: plot.cpp:132
 msgid "only NA allowed in logical plotting symbol"
 msgstr " 論理的なプロットシンボルとしては NA だけが許されています "
 
-#: plot.cpp:133
+#: plot.cpp:134
 msgid "invalid plotting symbol"
 msgstr " プロット記号が不正です "
 
-#: plot.cpp:222 plot.cpp:2816 plot3d.cpp:1182 plot3d.cpp:1186
+#: plot.cpp:223 plot.cpp:2808 plot3d.cpp:1180 plot3d.cpp:1184
 #, c-format
 msgid "invalid '%s' specification"
 msgstr " '%s' の指定が不正です "
 
-#: plot.cpp:281 plot.cpp:295 plot.cpp:481 plot.cpp:486 plot.cpp:2147
-#: plot.cpp:2154 plot.cpp:3177 plot.cpp:3179 plot.cpp:3181 plot.cpp:3342
-#: plot3d.cpp:1166 plot3d.cpp:1170 plot3d.cpp:1172 plot3d.cpp:1899
+#: plot.cpp:282 plot.cpp:296 plot.cpp:482 plot.cpp:487 plot.cpp:2139
+#: plot.cpp:2146 plot.cpp:3169 plot.cpp:3171 plot.cpp:3173 plot.cpp:3334
+#: plot3d.cpp:1164 plot3d.cpp:1168 plot3d.cpp:1170 plot3d.cpp:1898
 #, c-format
 msgid "invalid '%s' value"
 msgstr " '%s' の値が不正です "
 
-#: plot.cpp:298
+#: plot.cpp:299
 #, fuzzy, c-format
 msgid "invalid 'vfont' value [typeface %d]"
 msgstr " 'vfont' の値が不正です [typeface] "
 
-#: plot.cpp:322
+#: plot.cpp:323
 #, c-format
 msgid "invalid 'vfont' value [typeface = %d, fontindex = %d]"
 msgstr " 'vfont' の値が不正です [typeface = %d, fontindex = %d] "
 
-#: plot.cpp:395
+#: plot.cpp:396
 msgid "invalid graphics parameter"
 msgstr " グラフィックスパラメータが不正です "
 
-#: plot.cpp:477
+#: plot.cpp:478
 #, fuzzy
 msgid "at least 3 arguments are required"
 msgstr " 少なくとも3つの引数が必要です "
 
-#: plot.cpp:491
+#: plot.cpp:492
 msgid "\"log=\" specification must be character"
 msgstr " \"log=\" の指定は文字でなくてはなりません "
 
-#: plot.cpp:504
+#: plot.cpp:505
 #, c-format
 msgid "invalid \"log=%s\" specification"
 msgstr " \"log=%s\" の指定が不正です "
 
-#: plot.cpp:520 plot.cpp:532
+#: plot.cpp:521 plot.cpp:533
 #, fuzzy, c-format
 msgid "NA values are not allowed in '%s'"
 msgstr " 'xlin' に NA は許されていません "
 
-#: plot.cpp:526 plot.cpp:538
+#: plot.cpp:527 plot.cpp:539
 #, fuzzy, c-format
 msgid "'%s' needs finite values"
 msgstr " 有限な 'xlim' の値が必要です "
 
-#: plot.cpp:544
+#: plot.cpp:545
 msgid "Logarithmic axis must have positive limits"
 msgstr " 対数軸は正の限界を持たなければなりません "
 
-#: plot.cpp:668
+#: plot.cpp:669
 msgid "invalid type for axis labels"
 msgstr " 軸のラベルの型が不正です "
 
-#: plot.cpp:756 plot.cpp:1331 plot.cpp:1656 plot.cpp:1721 plot.cpp:1796
-#: plot.cpp:1862 plot.cpp:1936 plot.cpp:2031 plot.cpp:2107 plot.cpp:2385
-#: plot.cpp:2559 plot.cpp:2775 plot.cpp:3323 plot.cpp:3464 plot.cpp:3540
-#: plot.cpp:3705 plot.cpp:3985 plot3d.cpp:1868
+#: plot.cpp:757 plot.cpp:1332 plot.cpp:1648 plot.cpp:1713 plot.cpp:1788
+#: plot.cpp:1854 plot.cpp:1928 plot.cpp:2023 plot.cpp:2099 plot.cpp:2377
+#: plot.cpp:2551 plot.cpp:2767 plot.cpp:3315 plot.cpp:3456 plot.cpp:3532
+#: plot.cpp:3697 plot.cpp:3977 plot3d.cpp:1867
 msgid "too few arguments"
 msgstr " 引数が少なすぎます "
 
-#: plot.cpp:767
+#: plot.cpp:768
 #, c-format
 msgid "invalid axis number %d"
 msgstr " 軸の番号 %d が不正です "
 
-#: plot.cpp:854 plot.cpp:866
+#: plot.cpp:855 plot.cpp:867
 #, fuzzy, c-format
 msgid "'%s' argument must be of length 1"
 msgstr " 'hadj' は長さ1でなくてはなりません "
 
-#: plot.cpp:861 plot.cpp:2119 plot.cpp:2396 plot.cpp:2402 plot.cpp:2409
-#: plot.cpp:2417 plot.cpp:2424 plot.cpp:2431 plot.cpp:2438 plot.cpp:2445
-#: plot.cpp:2453 plot.cpp:2460 plot.cpp:3184
+#: plot.cpp:862 plot.cpp:2111 plot.cpp:2388 plot.cpp:2394 plot.cpp:2401
+#: plot.cpp:2409 plot.cpp:2416 plot.cpp:2423 plot.cpp:2430 plot.cpp:2437
+#: plot.cpp:2445 plot.cpp:2452 plot.cpp:3176
 #, fuzzy, c-format
 msgid "zero-length '%s' specified"
 msgstr " 長さゼロの 'side' が指定されています "
 
-#: plot.cpp:896
+#: plot.cpp:897
 #, fuzzy, c-format
 msgid "'%s' argument must be NA or a finite number"
 msgstr " 'hadj' は長さ1でなくてはなりません "
 
-#: plot.cpp:948
+#: plot.cpp:949
 #, fuzzy
 msgid "'labels' argument is supplied and not 'at' argument"
 msgstr " 'label' が与えられていますが 'at' がありません "
 
-#: plot.cpp:952
+#: plot.cpp:953
 #, fuzzy, c-format
 msgid "'at' and 'labels' argument lengths differ, %d != %d"
 msgstr " 'at' と 'label' の長さが違います。 %d != %d "
 
-#: plot.cpp:971
+#: plot.cpp:972
 msgid "no locations are finite"
 msgstr " どの位置も有限ではありません "
 
-#: plot.cpp:1349
+#: plot.cpp:1350
 msgid "invalid plotting structure"
 msgstr " 不正なプロット構造です "
 
-#: plot.cpp:1351
+#: plot.cpp:1352
 #, fuzzy, c-format
 msgid "'x' and 'y' argument lengths differ in '%s' function"
 msgstr " %s() において 'x' と 'y' の長さが異なります "
 
-#: plot.cpp:1362
-#, c-format
-msgid "plot type '%s' will be truncated to first character"
-msgstr " plot タイプ '%s' は最初の一文字に切りつめられます "
-
-#: plot.cpp:1366 plot.cpp:3038
-msgid "invalid plot type"
-msgstr " プロットのタイプが不正です "
-
-#: plot.cpp:1568
+#: plot.cpp:1560
 #, c-format
 msgid "invalid plot type '%c'"
 msgstr " プロットのタイプ '%c' が不正です "
 
-#: plot.cpp:1611
+#: plot.cpp:1603
 msgid "invalid first argument"
 msgstr " 一番目の引数が不正です "
 
-#: plot.cpp:1618
+#: plot.cpp:1610
 msgid "invalid second argument"
 msgstr " 二番目の引数が不正です "
 
-#: plot.cpp:1626
+#: plot.cpp:1618
 msgid "invalid third argument"
 msgstr " 三番目の引数が不正です "
 
-#: plot.cpp:1634
+#: plot.cpp:1626
 msgid "invalid fourth argument"
 msgstr " 四番目の引数が不正です "
 
-#: plot.cpp:1642
+#: plot.cpp:1634
 msgid "cannot mix zero-length and non-zero-length coordinates"
 msgstr " 長さ0と非0の座標は一緒に使えません "
 
-#: plot.cpp:1867
+#: plot.cpp:1859
 msgid "Empty raster"
 msgstr ""
 
-#: plot.cpp:1949
+#: plot.cpp:1941
 msgid "invalid arrow head length"
 msgstr " 矢印のやじり部分の長さが不正です "
 
-#: plot.cpp:1954
+#: plot.cpp:1946
 msgid "invalid arrow head angle"
 msgstr " 矢印のやじり部分の角度が不正です "
 
-#: plot.cpp:1959
+#: plot.cpp:1951
 msgid "invalid arrow head specification"
 msgstr " 矢印のやじり部分の指定が不正です "
 
-#: plot.cpp:2193
+#: plot.cpp:2185
 msgid "no coordinates were supplied"
 msgstr " 座標が提供されていません "
 
-#: plot.cpp:2825
+#: plot.cpp:2817
 #, fuzzy
 msgid "'a' and 'b' arguments must be finite"
 msgstr " 'a' と 'b'  は有限でなければなりません "
 
-#: plot.cpp:2961 plot.cpp:4076 plot.cpp:4079 plot.cpp:4082 plot.cpp:4085
-#: plot.cpp:4105 plot.cpp:4109 plot.cpp:4112 plot.cpp:4132 plot.cpp:4136
-#: plot.cpp:4139 plot3d.cpp:1088 plot3d.cpp:1092 plot3d.cpp:1097
-#: plot3d.cpp:1101 plot3d.cpp:1105 plot3d.cpp:1109 stem.cpp:153 stem.cpp:154
+#: plot.cpp:2953 plot.cpp:4068 plot.cpp:4071 plot.cpp:4074 plot.cpp:4077
+#: plot.cpp:4097 plot.cpp:4101 plot.cpp:4104 plot.cpp:4124 plot.cpp:4128
+#: plot.cpp:4131 plot3d.cpp:1086 plot3d.cpp:1090 plot3d.cpp:1095
+#: plot3d.cpp:1099 plot3d.cpp:1103 plot3d.cpp:1107 stem.cpp:153 stem.cpp:154
 #: stem.cpp:156 stem.cpp:157 stem.cpp:202 stem.cpp:203
 #, c-format
 msgid "invalid '%s' argument"
 msgstr " '%s' 引数が不正です "
 
-#: plot.cpp:3033 plot.cpp:3173
+#: plot.cpp:3025 plot.cpp:3165
 #, fuzzy, c-format
 msgid "invalid number of points in '%s' function"
 msgstr " locator 関数の点の個数が不正です "
 
-#: plot.cpp:3175
+#: plot.cpp:3030
+msgid "invalid plot type"
+msgstr " プロットのタイプが不正です "
+
+#: plot.cpp:3167
 msgid "incorrect argument type"
 msgstr " 正しくない引数の型です "
 
-#: plot.cpp:3187
+#: plot.cpp:3179
 msgid "different argument lengths"
 msgstr " 引数の長さが違います "
 
-#: plot.cpp:3189
+#: plot.cpp:3181
 #, fuzzy
 msgid "more labels than points"
 msgstr " 点の数より'labels'の数が多い "
 
-#: plot.cpp:3241
+#: plot.cpp:3233
 #, c-format
 msgid "warning: no point within %.2f inches\n"
 msgstr " 警告：%.2f インチ内に点はありません \n"
 
-#: plot.cpp:3247
+#: plot.cpp:3239
 #, fuzzy
 msgid "warning: nearest point is already identified\n"
 msgstr " 警告：近傍点がすでに同定（identify）されています \n"
 
-#: plot.cpp:3334
+#: plot.cpp:3326
 msgid "invalid units"
 msgstr " 単位が不正です "
 
-#: plot.cpp:3524 plot.cpp:3631
+#: plot.cpp:3516 plot.cpp:3623
 msgid "invalid dendrogram input"
 msgstr " デンドログラムの入力が不正です "
 
-#: plot.cpp:3687
+#: plot.cpp:3679
 msgid "invalid symbol parameter vector"
 msgstr " シンボル記号パラメータベクトルが不正です "
 
-#: plot.cpp:3710
+#: plot.cpp:3702
 msgid "invalid symbol coordinates"
 msgstr " シンボル記号の座標が不正です "
 
-#: plot.cpp:3718
+#: plot.cpp:3710
 msgid "x/y/parameter length mismatch"
 msgstr " x/y もしくはパラメータの長さが不整合です "
 
-#: plot.cpp:3737
+#: plot.cpp:3729
 msgid "invalid circles data"
 msgstr " 円のデータが不正です "
 
-#: plot.cpp:3739 plot.cpp:3760 plot.cpp:3785 plot.cpp:3815
+#: plot.cpp:3731 plot.cpp:3752 plot.cpp:3777 plot.cpp:3807
 msgid "invalid symbol parameter"
 msgstr " シンボル記号パラメータが不正です "
 
-#: plot.cpp:3758
+#: plot.cpp:3750
 msgid "invalid squares data"
 msgstr " 正方形データが不正です "
 
-#: plot.cpp:3783
+#: plot.cpp:3775
 msgid "invalid rectangles data (need 2 columns)"
 msgstr " 長方形データが不正です（2列必要です） "
 
-#: plot.cpp:3813
+#: plot.cpp:3805
 msgid "invalid stars data"
 msgstr " 星形データが不正です "
 
-#: plot.cpp:3855
+#: plot.cpp:3847
 msgid "invalid thermometers data (need 3 or 4 columns)"
 msgstr " thermometers データが不正です（3または4列必要です） "
 
-#: plot.cpp:3858 plot.cpp:3864
+#: plot.cpp:3850 plot.cpp:3856
 #, fuzzy, c-format
 msgid "invalid 'thermometers[, %s]'"
 msgstr " thermometers [,%s] が不正です "
 
-#: plot.cpp:3861
+#: plot.cpp:3853
 #, fuzzy, c-format
 msgid "'thermometers[, %s]' not in [0,1] -- may look funny"
 msgstr "  thermometers[,%s] が [0,1] 範囲外 ‐ 奇妙に見えるかも知れません "
 
-#: plot.cpp:3903
+#: plot.cpp:3895
 #, fuzzy
 msgid "invalid 'boxplots' data (need 5 columns)"
 msgstr " boxplot のデータが不正です（5列必要です） "
 
-#: plot.cpp:3912
+#: plot.cpp:3904
 #, fuzzy
 msgid "'boxplots[, 5]' outside [0,1] -- may look funny"
 msgstr " boxplots[,5] が [0,1] の範囲外にあるのは変です "
 
-#: plot.cpp:3914
+#: plot.cpp:3906
 #, fuzzy
 msgid "invalid 'boxplots[, 1:4]'"
 msgstr " boxplot[,1:4] が不正です "
 
-#: plot.cpp:3960
+#: plot.cpp:3952
 msgid "invalid symbol type"
 msgstr " シンボル記号の型が不正です "
 
-#: plot.cpp:3998 plot.cpp:4000 plot.cpp:4005 plot.cpp:4007
+#: plot.cpp:3990 plot.cpp:3992 plot.cpp:3997 plot.cpp:3999
 #, c-format
 msgid "incorrect length for '%s' argument"
 msgstr " '%s' 引数の長さが不正です "
 
-#: plot.cpp:4024
+#: plot.cpp:4016
 #, fuzzy
 msgid "unable to allocate memory (in 'xspline()')"
 msgstr " メモリ確保ができません (xspline 中) "
 
-#: plot3d.cpp:184 plot3d.cpp:1925
+#: plot3d.cpp:183 plot3d.cpp:1924
 msgid "insufficient 'x' or 'y' values"
 msgstr " 'x' または 'y' の値が不足しています "
 
-#: plot3d.cpp:188 plot3d.cpp:1928
+#: plot3d.cpp:187 plot3d.cpp:1927
 msgid "dimension mismatch"
 msgstr " 次元が一致しません "
 
-#: plot3d.cpp:196
+#: plot3d.cpp:195
 msgid "no contour values"
 msgstr " 等高線値がありません "
 
-#: plot3d.cpp:258
+#: plot3d.cpp:257
 msgid "invalid x / y values or limits"
 msgstr " x または y の値または限界値が不正です "
 
-#: plot3d.cpp:260
+#: plot3d.cpp:259
 msgid "invalid contour levels: must be strictly increasing"
 msgstr " 等高線レベルが不正です：狭義単調増加でなくてはなりません "
 
-#: plot3d.cpp:1052 plot3d.cpp:1065
+#: plot3d.cpp:1050 plot3d.cpp:1063
 msgid "Axis orientation not calculated"
 msgstr " 軸方向は計算されませんでした "
 
-#: plot3d.cpp:1085
+#: plot3d.cpp:1083
 msgid "too few parameters"
 msgstr " パラメータが少なすぎます "
 
-#: plot3d.cpp:1115 plot3d.cpp:1117 plot3d.cpp:1119
+#: plot3d.cpp:1113 plot3d.cpp:1115 plot3d.cpp:1117
 #, fuzzy, c-format
 msgid "invalid '%s' limits"
 msgstr " 'x' の限界値が不正です "
 
-#: plot3d.cpp:1140 plot3d.cpp:1142 plot3d.cpp:1144
+#: plot3d.cpp:1138 plot3d.cpp:1140 plot3d.cpp:1142
 #, fuzzy, c-format
 msgid "'%s' argument must be a character vector of length 1"
 msgstr " 'xlab' は長さ1の文字列ベクトルでなくてはなりません "
 
-#: plot3d.cpp:1164
+#: plot3d.cpp:1162
 msgid "invalid viewing parameters"
 msgstr " 不正な viewing パラメータです "
 
-#: plot3d.cpp:1522
+#: plot3d.cpp:1521
 #, c-format
 msgid "contour(): circular/long seglist -- set %s > %d?"
 msgstr " contour(): circular/long seglist -- set %s > %d? "
 
-#: plot3d.cpp:1931
+#: plot3d.cpp:1930
 msgid "no 'levels'"
 msgstr ""
 
-#: plot3d.cpp:1935 plot3d.cpp:1942
+#: plot3d.cpp:1934 plot3d.cpp:1941
 #, fuzzy, c-format
 msgid "missing '%s' values"
 msgstr " 'x' の値が欠損しています "
 
-#: plot3d.cpp:1937 plot3d.cpp:1944
+#: plot3d.cpp:1936 plot3d.cpp:1943
 #, fuzzy, c-format
 msgid "increasing '%s' values expected"
 msgstr " 増加する 'x' 値が期待されています "
 
-#: plot3d.cpp:1949
+#: plot3d.cpp:1948
 #, c-format
 msgid "non-finite level values: levels[%d] = %g"
 msgstr ""
 
-#: plot3d.cpp:1962
+#: plot3d.cpp:1961
 #, fuzzy
 msgid "all 'z' values are equal"
 msgstr " z 変数の値が全部同じ値です "
 
-#: plot3d.cpp:1964
+#: plot3d.cpp:1963
 #, fuzzy
 msgid "all 'z' values are NA"
 msgstr " z 変数の値が全部 NA です "
@@ -599,6 +594,9 @@ msgstr ""
 #: stem.cpp:188
 msgid "count for a bin exceeds INT_MAX"
 msgstr ""
+
+#~ msgid "plot type '%s' will be truncated to first character"
+#~ msgstr " plot タイプ '%s' は最初の一文字に切りつめられます "
 
 #~ msgid "invalid NA contour values"
 #~ msgstr " 不正な NA 等高線（contour）値です "

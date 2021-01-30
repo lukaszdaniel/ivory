@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.2.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-01-07 23:37+0100\n"
+"POT-Creation-Date: 2021-01-30 18:44+0100\n"
 "PO-Revision-Date: 2005-05-31 10:31+0900\n"
 "Last-Translator: Chel Hee Lee <chl948@mail.usask.ca>\n"
 "Language-Team: The Korean R Translation Council <gnustats@gmail.com>\n"
@@ -94,9 +94,9 @@ msgid "invalid gray level, must be in [0,1]."
 msgstr ""
 
 #: colors.cpp:551 devPS.cpp:9632 devPS.cpp:9795 devPS.cpp:9798
-#: devWindows.cpp:3676 devWindows.cpp:3680 devWindows.cpp:3688
-#: devWindows.cpp:3699 devWindows.cpp:3705 devWindows.cpp:3712
-#: devWindows.cpp:3719 devWindows.cpp:3723
+#: devWindows.cpp:3677 devWindows.cpp:3681 devWindows.cpp:3689
+#: devWindows.cpp:3700 devWindows.cpp:3706 devWindows.cpp:3713
+#: devWindows.cpp:3720 devWindows.cpp:3724
 #, fuzzy, c-format
 msgid "invalid '%s' value"
 msgstr "무효의 문자열 인수입니다"
@@ -290,12 +290,12 @@ msgstr "encode 디바이스를 기록하는것을 실패했습니다"
 msgid "object '.ps.prolog' is not a character vector"
 msgstr "오브젝트 ps.prolog는 문자 벡터가 아닙니다"
 
-#: devPS.cpp:2690 devPS.cpp:7558 devWindows.cpp:798
+#: devPS.cpp:2690 devPS.cpp:7558 devWindows.cpp:799
 #, fuzzy
 msgid "invalid line end"
 msgstr "무효의 라인 종점입니다"
 
-#: devPS.cpp:2709 devPS.cpp:7578 devWindows.cpp:811
+#: devPS.cpp:2709 devPS.cpp:7578 devWindows.cpp:812
 #, fuzzy
 msgid "invalid line join"
 msgstr "무효인 라인 조인입니다"
@@ -311,8 +311,8 @@ msgstr "무효의 라인 mitre입니다"
 msgid "attempt to use invalid font %d replaced by font 1"
 msgstr "font 1과 변경할 수 있던 무효의 font %d를 사용하기 위하여 시도합니다"
 
-#: devPS.cpp:3149 devPS.cpp:4814 devPS.cpp:6944 devWindows.cpp:1812
-#: devWindows.cpp:1849 devWindows.cpp:1879 devWindows.cpp:1911
+#: devPS.cpp:3149 devPS.cpp:4814 devPS.cpp:6944 devWindows.cpp:1813
+#: devWindows.cpp:1850 devWindows.cpp:1880 devWindows.cpp:1912
 #, fuzzy, c-format
 msgid "filename too long in '%s' call"
 msgstr "%s() 호출에 대해서 너무 긴 파일명입니다"
@@ -366,7 +366,7 @@ msgstr ""
 msgid "invalid page type '%s' (postscript)"
 msgstr "무효의 페이지 유형 '%s' (postscript) 입니다"
 
-#: devPS.cpp:3521 devPS.cpp:4659 devWindows.cpp:2346
+#: devPS.cpp:3521 devPS.cpp:4659 devWindows.cpp:2347
 msgid ""
 "semi-transparency is not supported on this device: reported only once per "
 "page"
@@ -618,7 +618,7 @@ msgstr "%s에서 무효의 'fonts' 파라미터 입니다"
 msgid "unable to start '%s' device"
 msgstr "디바이스 pdf를 시작할수가 없습니다"
 
-#: devPicTeX.cpp:778 devWindows.cpp:3766
+#: devPicTeX.cpp:778 devWindows.cpp:3767
 #, fuzzy, c-format
 msgid "unable to start %s() device"
 msgstr "디바이스 pdf를 시작할수가 없습니다"
@@ -675,147 +675,147 @@ msgstr ""
 msgid "Quartz device is not available on this platform"
 msgstr "Quartz 디바이스는 이 platform에서 이용 가능하지는 않습니다"
 
-#: devWindows.cpp:355 devWindows.cpp:401 devWindows.cpp:472
+#: devWindows.cpp:356 devWindows.cpp:402 devWindows.cpp:473
 msgid "Not enough memory to copy graphics window"
 msgstr "graphics window를 복사하는데 충분한 메모리는 아닙니다"
 
-#: devWindows.cpp:360 devWindows.cpp:406 devWindows.cpp:477
+#: devWindows.cpp:361 devWindows.cpp:407 devWindows.cpp:478
 msgid "No device available to copy graphics window"
 msgstr "복사 graphics 윈도우에 이용 가능한 디바이스가 없습니다"
 
-#: devWindows.cpp:410 devWindows.cpp:481
+#: devWindows.cpp:411 devWindows.cpp:482
 #, c-format
 msgid "'%%' is not allowed in file name"
 msgstr ""
 
-#: devWindows.cpp:577
+#: devWindows.cpp:578
 #, c-format
 msgid "[%s] Error at line %d."
 msgstr ""
 
-#: devWindows.cpp:581
+#: devWindows.cpp:582
 #, fuzzy
 msgid "Insufficient memory. "
 msgstr "불충분한 메모리 때문에 사이즈 변경합니다. Killing 디바이스"
 
-#: devWindows.cpp:592
+#: devWindows.cpp:593
 #, c-format
 msgid "Unknown style at line %d. "
 msgstr ""
 
-#: devWindows.cpp:618
+#: devWindows.cpp:619
 #, fuzzy
 msgid "invalid font specification"
 msgstr "무효의 font 명세입니다"
 
-#: devWindows.cpp:657
+#: devWindows.cpp:658
 #, fuzzy
 msgid "font family not found in Windows font database"
 msgstr "Font 패밀리는 Windows font 데이타베이스로 검색되지 않았습니다"
 
-#: devWindows.cpp:1088
+#: devWindows.cpp:1089
 msgid "plot history seems corrupted"
 msgstr "plot 히스토리는 corrupt가 있는것처럼 보입니다"
 
-#: devWindows.cpp:1095
+#: devWindows.cpp:1096
 msgid "no plot history!"
 msgstr "plot history가 없습니다!"
 
-#: devWindows.cpp:1817 devWindows.cpp:1852 devWindows.cpp:1882
+#: devWindows.cpp:1818 devWindows.cpp:1853 devWindows.cpp:1883
 #, c-format
 msgid "'width=%d, height=%d' are unlikely values in pixels"
 msgstr ""
 
-#: devWindows.cpp:1825 devWindows.cpp:1830 devWindows.cpp:1855
-#: devWindows.cpp:1860 devWindows.cpp:1885 devWindows.cpp:1890
+#: devWindows.cpp:1826 devWindows.cpp:1831 devWindows.cpp:1856
+#: devWindows.cpp:1861 devWindows.cpp:1886 devWindows.cpp:1891
 #, fuzzy
 msgid "unable to allocate bitmap"
 msgstr "bitmap 할당 할수가 없습니다"
 
-#: devWindows.cpp:1836 devWindows.cpp:1866 devWindows.cpp:2186
+#: devWindows.cpp:1837 devWindows.cpp:1867 devWindows.cpp:2187
 #, fuzzy, c-format
 msgid "unable to open file '%s' for writing"
 msgstr "쓰기 위해서 파일 '%s'을 열수가 없습니다"
 
-#: devWindows.cpp:1921
+#: devWindows.cpp:1922
 #, fuzzy, c-format
 msgid "unable to open metafile '%s' for writing"
 msgstr "쓰기 위해서 metafile '%s'를 열 수가 없습니다"
 
-#: devWindows.cpp:1923
+#: devWindows.cpp:1924
 #, fuzzy
 msgid "unable to open clipboard to write metafile"
 msgstr "metafile를 쓰기 위해서 clipboard를 열수가 없습니다"
 
-#: devWindows.cpp:2134
+#: devWindows.cpp:2135
 msgid "Insufficient memory for resize. Killing device"
 msgstr "불충분한 메모리 때문에 사이즈 변경합니다. Killing 디바이스"
 
-#: devWindows.cpp:2142
+#: devWindows.cpp:2143
 #, fuzzy
 msgid "Insufficient memory for resize. Disabling alpha blending"
 msgstr "불충분한 메모리 때문에 사이즈 변경합니다. Killing 디바이스"
 
-#: devWindows.cpp:2171
+#: devWindows.cpp:2172
 #, fuzzy
 msgid "a clipboard metafile can store only one figure."
 msgstr "clipboard metafile은 단지 하나의 figure만을 저장할수가 있습니다"
 
-#: devWindows.cpp:2177
+#: devWindows.cpp:2178
 #, c-format
 msgid "metafile '%s' could not be created"
 msgstr "'%s' metafile 하는것을 작성할 수 없습니다"
 
-#: devWindows.cpp:3117 devWindows.cpp:3790
+#: devWindows.cpp:3118 devWindows.cpp:3791
 msgid "R Graphics"
 msgstr "R Graphics"
 
-#: devWindows.cpp:3131
+#: devWindows.cpp:3132
 msgid "attempt to use the locator after dev.hold()"
 msgstr ""
 
-#: devWindows.cpp:3160
+#: devWindows.cpp:3161
 msgid "graphics device closed during call to locator or identify"
 msgstr ""
 
-#: devWindows.cpp:3426
+#: devWindows.cpp:3427
 msgid "option 'windowsTimeouts' should be integer"
 msgstr "옵션 'windowsTimeouts'는 정수가 아니면 되지 않습니다"
 
-#: devWindows.cpp:3448
+#: devWindows.cpp:3449
 #, fuzzy
 msgid "invalid device number in 'savePlot()' function"
 msgstr "savePlot의 무효인 디바이스번호입니다"
 
-#: devWindows.cpp:3450
+#: devWindows.cpp:3451
 #, fuzzy
 msgid "invalid device in 'savePlot()' function"
 msgstr "savePlot의 무효인 디바이스번호입니다"
 
-#: devWindows.cpp:3453
+#: devWindows.cpp:3454
 #, fuzzy
 msgid "invalid filename argument in 'savePlot()' function"
 msgstr "savaPlot에서 무효인 파일명 인수입니다"
 
-#: devWindows.cpp:3458
+#: devWindows.cpp:3459
 #, fuzzy
 msgid "invalid type argument in 'savePlot()' function"
 msgstr "savaPlot에서 무효인 파일명 인수입니다"
 
-#: devWindows.cpp:3485
+#: devWindows.cpp:3486
 msgid "unknown type in savePlot"
 msgstr "savePlot의 의미없는 유형입니다"
 
-#: devWindows.cpp:3530 devWindows.cpp:3562 devWindows.cpp:3590
-#: devWindows.cpp:3621 devWindows.cpp:3642
+#: devWindows.cpp:3531 devWindows.cpp:3563 devWindows.cpp:3591
+#: devWindows.cpp:3622 devWindows.cpp:3643
 msgid "processing of the plot ran out of memory"
 msgstr "plot 처리는 메모리를 전부 소모 했습니다"
 
-#: devWindows.cpp:3606
+#: devWindows.cpp:3607
 msgid "Impossible to open "
 msgstr "여는 것이 불가능합니다"
 
-#: devWindows.cpp:3671
+#: devWindows.cpp:3672
 #, fuzzy
 msgid "invalid 'width' or 'height'"
 msgstr "devWindow에서 무효인 폭 또는 높이 입니다"

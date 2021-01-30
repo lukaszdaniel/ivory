@@ -41,8 +41,8 @@ src/include/Localization.h
 src/include/Rdefines.h
 src/include/Rinlinedfuns.h
 src/include/Rinterface.h
-src/include/CXXR/EdgeVector.hpp
 src/include/CXXR/FixedVector.hpp
+src/include/CXXR/RObjectVector.hpp
 src/include/CXXR/VectorBase.hpp
 src/main/agrep.cpp
 src/main/altclasses.cpp
@@ -116,7 +116,9 @@ src/main/Rdynload.cpp
 src/main/relop.cpp
 src/main/Renviron.cpp
 src/main/RNG.cpp
+src/main/RObject.cpp
 src/main/Rstrptime.h
+src/main/S4Object.cpp
 src/main/saveload.cpp
 src/main/scan.cpp
 src/main/seq.cpp

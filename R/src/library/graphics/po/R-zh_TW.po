@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 3.5.1\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2020-04-15 18:32\n"
+"POT-Creation-Date: 2021-01-30 18:44\n"
 "PO-Revision-Date: 2018-09-16 23:38+0800\n"
 "Last-Translator: Wei-Lun Chao <bluebat@member.fsf.org>\n"
 "Language-Team: Chinese (traditional) <zh-l10n@linux.org.tw>\n"
@@ -560,6 +560,18 @@ msgstr "第一個引數無效"
 msgid "invalid number of 'breaks'"
 msgstr "'breaks' 數目無效"
 
+#. R/plot.R: gettextf("invalid plot type")
+#: R/plot.R:0
+#, fuzzy
+msgid "invalid plot type"
+msgstr "boxplot 寬度無效"
+
+#. R/plot.R: gettextf("invalid plot type '%s'", t)
+#: R/plot.R:0
+#, fuzzy
+msgid "invalid plot type '%s'"
+msgstr "boxplot 寬度無效"
+
 #. R/stripchart.R: stop("invalid plotting method")
 #: R/stripchart.R:0
 msgid "invalid plotting method"
@@ -720,6 +732,11 @@ msgstr "引數裡只有一個列用在 'pairs' 上"
 #: R/abline.R:0
 msgid "only using the first two of %d regression coefficients"
 msgstr "只用兩個 %d 回返係數中的第一個"
+
+#. R/plot.R: gettextf("plot type '%s' will be truncated to first character", type)
+#: R/plot.R:0
+msgid "plot type '%s' will be truncated to first character"
+msgstr ""
 
 #. R/coplot.R: stop("rows * columns too small")
 #: R/coplot.R:0

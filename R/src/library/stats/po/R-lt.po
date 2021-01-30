@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: stats 4.1.0\n"
-"POT-Creation-Date: 2021-01-07 23:38\n"
+"POT-Creation-Date: 2021-01-30 18:45\n"
 "PO-Revision-Date: 2021-01-07 23:48+0100\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -571,8 +571,10 @@ msgstr "'all.knots' yra TRUE; neatsižvelgiama į 'nknots' specifikaciją"
 #: R/smspline.R:0
 #, fuzzy
 msgid ""
-"'all.knots' argument is vector of knots; 'nknots' specification is disregarded"
-msgstr "'all.knots' – mazgų vektorius; neatsižvelgiama į 'nknots' specifikaciją"
+"'all.knots' argument is vector of knots; 'nknots' specification is "
+"disregarded"
+msgstr ""
+"'all.knots' – mazgų vektorius; neatsižvelgiama į 'nknots' specifikaciją"
 
 #. R/HoltWinters.R: stop("'alpha', 'beta' and 'gamma' must be within the unit interval")
 #: R/HoltWinters.R:0
@@ -925,7 +927,8 @@ msgstr ""
 
 #. R/power.R: gettext("'n' is number of *pairs*, 'sd' is std.dev. of *differences* within pairs")
 #: R/power.R:0
-msgid "'n' is number of *pairs*, 'sd' is std.dev. of *differences* within pairs"
+msgid ""
+"'n' is number of *pairs*, 'sd' is std.dev. of *differences* within pairs"
 msgstr ""
 
 #. R/fisher.test.R: stop("'names(hybridPars)' should be NULL or be identical to the default's")
@@ -1212,8 +1215,8 @@ msgid ""
 "'variance' \"%s\" is invalid: possible values are \"mu(1-mu)\", \"mu\", "
 "\"mu^2\", \"mu^3\" and \"constant\""
 msgstr ""
-"'variance' \"%s\" yra neteisingas: galimos reikšmės yra \"mu(1-mu)\", \"mu\", "
-"\"mu^2\", \"mu^3\" ir \"constant\""
+"'variance' \"%s\" yra neteisingas: galimos reikšmės yra \"mu(1-mu)\", \"mu"
+"\", \"mu^2\", \"mu^3\" ir \"constant\""
 
 #. R/nls-profile.R: stop("'varying' argument must be in 'seq_along(pars)'")
 #: R/nls-profile.R:0
@@ -1476,7 +1479,8 @@ msgstr "'y' turi būti didėjantis arba mažėjantis"
 #: R/ks.test.R:0
 msgid "'y' must be numeric or a function or a string naming a valid function"
 msgstr ""
-"'y' turi būti skaitinė arba funkcija arba eilutė, įvardijanti tinkamą funkciją"
+"'y' turi būti skaitinė arba funkcija arba eilutė, įvardijanti tinkamą "
+"funkciją"
 
 #. R/stepfun.R: stop("'y' must be one longer than 'x'")
 #: R/stepfun.R:0
@@ -2180,7 +2184,8 @@ msgstr ""
 #. R/HoltWinters.R: gettext("Holt-Winters exponential smoothing with trend and additive seasonal component.",     domain = "R-stats")
 #: R/HoltWinters.R:0
 msgid ""
-"Holt-Winters exponential smoothing with trend and additive seasonal component."
+"Holt-Winters exponential smoothing with trend and additive seasonal "
+"component."
 msgstr ""
 
 #. R/HoltWinters.R: gettext("Holt-Winters exponential smoothing with trend and multiplicative seasonal component.",     domain = "R-stats")
@@ -2236,8 +2241,8 @@ msgstr ""
 #. R/selfStart.R: stop("old-style self-starting model functions are no longer supported.\n", "New selfStart functions are available.\n",     "Use\n  SSfpl instead of fpl,\n  SSfol instead of first.order.log,\n  SSbiexp instead of biexp,\n  SSlogis instead of logistic.\n",     "If writing your own selfStart model, see \"help(selfStart)\" for the new form of the \"initial\" attribute.",     domain = "R-stats")
 #: R/selfStart.R:0
 msgid ""
-"If writing your own selfStart model, see \"help(selfStart)\" for the new form "
-"of the \"initial\" attribute."
+"If writing your own selfStart model, see \"help(selfStart)\" for the new "
+"form of the \"initial\" attribute."
 msgstr ""
 
 #. R/prcomp.R: gettext("Importance of components:", domain = "R-stats")
@@ -3089,7 +3094,8 @@ msgstr ""
 #. R/hclust.R: message("The 'ward()' method has been renamed to 'ward.D()'; note new 'ward.D2()'")
 #: R/hclust.R:0
 #, fuzzy
-msgid "The 'ward()' method has been renamed to 'ward.D()'; note new 'ward.D2()'"
+msgid ""
+"The 'ward()' method has been renamed to 'ward.D()'; note new 'ward.D2()'"
 msgstr "Metodas „ward” pervardintas į „ward.D”; įsidėmėkite naują „ward.D2”"
 
 #. R/factanal.R: gettextf("The degrees of freedom for the model is %d and the fit was %s", x$dof,     round(x$criteria["objective"], 4), domain = "R-stats")
@@ -3820,10 +3826,9 @@ msgstr ""
 msgid "cutree(): k(h) ="
 msgstr ""
 
-#. R/fligner.test.R: stop("data are essentially constant")
 #. R/t.test.R: stop("data are essentially constant")
 #. R/t.test.R: stop("data are essentially constant")
-#: R/fligner.test.R:0 R/t.test.R:0
+#: R/t.test.R:0
 msgid "data are essentially constant"
 msgstr "duomenys yra pastovūs"
 
@@ -3844,8 +3849,8 @@ msgid ""
 "dendrogram entries must be 1,2,..,%d (in any order), to be coercible to an "
 "object of class \"hclust\""
 msgstr ""
-"dendrogramos įrašai turi būti 1,2,..,%d (bet kokia tvarka), kad būtų verčiami "
-"į \"hclust\""
+"dendrogramos įrašai turi būti 1,2,..,%d (bet kokia tvarka), kad būtų "
+"verčiami į \"hclust\""
 
 #. R/dendrogram.R: gettextf("dendrogram leaf '%s', at height %s", format(attr(x, "label"), digits = digits),     format(attr(x, "height"), digits = digits), domain = "R-stats")
 #: R/dendrogram.R:0
@@ -4546,7 +4551,8 @@ msgstr "'p' ilgis turi būti 1 arba lygus stulpelių 'x' skaičiui"
 
 #. R/glm.R: gettextf("length of 'start' should equal %d and correspond to initial coefs for %s",     nvars, paste(deparse(xnames), collapse = ", "), domain = "R-stats")
 #: R/glm.R:0
-msgid "length of 'start' should equal %d and correspond to initial coefs for %s"
+msgid ""
+"length of 'start' should equal %d and correspond to initial coefs for %s"
 msgstr ""
 "'start' ilgis turėtų būti lygus %d ir atitikti pradinius %s koeficientus"
 
@@ -4646,8 +4652,8 @@ msgstr ""
 #: R/lm.R:0
 #, fuzzy
 msgid ""
-"lm object does not have a proper 'qr' component. Rank zero or should not have "
-"used lm(.., qr=FALSE)."
+"lm object does not have a proper 'qr' component. Rank zero or should not "
+"have used lm(.., qr=FALSE)."
 msgstr ""
 "objektas lm neturi tinkamo 'qr' komponento.\n"
 "Nulinis rangas arba neturėtų būti naudojamas lm(.., qr=FALSE)."
@@ -4889,7 +4895,8 @@ msgid ""
 "need CRAN package 'SuppDists' for simulation from the 'inverse.gaussian' "
 "family"
 msgstr ""
-"reikalingas CRAN paketas 'SuppDists' simuliacijai iš šeimos 'inverse.gaussian'"
+"reikalingas CRAN paketas 'SuppDists' simuliacijai iš šeimos 'inverse."
+"gaussian'"
 
 #. R/update.R: stop("need an object with call component")
 #: R/update.R:0
@@ -5353,11 +5360,11 @@ msgstr "netinkamas taškų skaičius"
 #. R/ts.R: stop("number of values supplied is not a sub-multiple of the number of values to be replaced")
 #: R/ts.R:0
 msgid ""
-"number of values supplied is not a sub-multiple of the number of values to be "
-"replaced"
+"number of values supplied is not a sub-multiple of the number of values to "
+"be replaced"
 msgstr ""
-"pateiktų reikšmių skaičius nėra dalinis kartotinis tų reikšmių, kurias reikia "
-"pakeisti"
+"pateiktų reikšmių skaičius nėra dalinis kartotinis tų reikšmių, kurias "
+"reikia pakeisti"
 
 #. R/lsfit.R: gettextf("number of weights = %d should equal %d (number of responses)", nwts, nry)
 #: R/lsfit.R:0
@@ -5492,8 +5499,8 @@ msgstr "parinktis \"show.coef.Pvalues\" netinkama: darant prielaidą, kad TRUE"
 #. R/contr.poly.R: gettextf("orthogonal polynomials cannot be represented accurately enough for %d degrees of freedom",     n - 1)
 #: R/contr.poly.R:0
 msgid ""
-"orthogonal polynomials cannot be represented accurately enough for %d degrees "
-"of freedom"
+"orthogonal polynomials cannot be represented accurately enough for %d "
+"degrees of freedom"
 msgstr ""
 "stačiakampių polinomų negalima pavaizduoti pakankamai tiksliai laisvės "
 "laipsniui %d"
@@ -5892,7 +5899,8 @@ msgstr "nurodyti parametrai visiems prediktoriams"
 
 #. R/loess.R: stop("specified the square of a factor predictor to be dropped when degree = 1")
 #: R/loess.R:0
-msgid "specified the square of a factor predictor to be dropped when degree = 1"
+msgid ""
+"specified the square of a factor predictor to be dropped when degree = 1"
 msgstr ""
 "nurodytas faktoriaus prediktoriaus kvadratas turi būti sumažintas, kai "
 "laipsnis = 1"
@@ -6542,7 +6550,8 @@ msgstr "kintamasis '%s' nėra faktorius"
 #: R/models.R:0
 msgid "variable '%s' was fitted with type \"%s\" but type \"%s\" was supplied"
 msgstr ""
-"kintamasis '%s' buvo pritaikytas tipui \"%s\", bet tipas \"%s\" buvo pateiktas"
+"kintamasis '%s' buvo pritaikytas tipui \"%s\", bet tipas \"%s\" buvo "
+"pateiktas"
 
 #. R/models.R: gettextf("variables %s were specified with different types from the fit", paste(sQuote(names(old)[wrong]),     collapse = ", "))
 #: R/models.R:0

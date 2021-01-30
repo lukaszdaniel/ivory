@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.5.0 \n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2021-01-07 23:37\n"
+"POT-Creation-Date: 2021-01-30 18:45\n"
 "PO-Revision-Date: 2012-02-26 14:07+0200 \n"
 "Last-Translator: Shigeru Mase <maseshigeru@gmail.com> \n"
 "Language-Team: RjpWiki Message Translation Team <mokada@md.tsukuba.ac.jp> \n"
@@ -1600,6 +1600,12 @@ msgstr " へまな名前空間：その親中に 'base' 名前空間が見付か
 msgid "both classes must be defined"
 msgstr " どちらのクラスも定義されなければなりません "
 
+#. R/RMethodUtils.R: gettextf("caching class %s", dQuote(cl))
+#: R/RMethodUtils.R:0
+#, fuzzy
+msgid "caching class %s"
+msgstr " (クラス \"%s\") "
+
 #. R/NextMethod.R: stop("call to 'callNextMethod' does not appear to be in a 'method' or 'callNextMethod' context")
 #: R/NextMethod.R:0
 msgid ""
@@ -1961,6 +1967,16 @@ msgstr ""
 msgid "done"
 msgstr ""
 
+#. R/RMethodUtils.R: gettextf("done caching class %s", dQuote(cl))
+#: R/RMethodUtils.R:0
+msgid "done caching class %s"
+msgstr ""
+
+#. R/RMethodUtils.R: gettextf("done getting generic '%s'", f)
+#: R/RMethodUtils.R:0
+msgid "done getting generic '%s'"
+msgstr ""
+
 #. R/SClasses.R: gettext("duplicate class names among superclasses: %s", domain = "R-methods")
 #: R/SClasses.R:0
 msgid "duplicate class names among superclasses: %s"
@@ -2181,6 +2197,11 @@ msgid ""
 msgstr ""
 " 定義 %s (%s) 中の変数をとりのぞきます；これらは引数名 (%s) への必要とされる"
 "変換と相克します "
+
+#. R/RMethodUtils.R: gettextf("getting generic '%s'", f)
+#: R/RMethodUtils.R:0
+msgid "getting generic '%s'"
+msgstr ""
 
 #. R/RMethodUtils.R: stop("got a negative maximum number of frames to look at")
 #: R/RMethodUtils.R:0

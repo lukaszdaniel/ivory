@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.12.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2019-04-08 21:34\n"
+"POT-Creation-Date: 2021-01-30 18:44\n"
 "PO-Revision-Date: 2011-10-15 15:12+0100\n"
 "Last-Translator: Philippe Grosjean <phgrosjean@sciviews.org>\n"
 "Language-Team: French <R-core@r-project.org>\n"
@@ -579,6 +579,18 @@ msgstr "premier argument incorrect"
 msgid "invalid number of 'breaks'"
 msgstr "nombre de 'breaks' incorrect"
 
+#. R/plot.R: gettextf("invalid plot type")
+#: R/plot.R:0
+#, fuzzy
+msgid "invalid plot type"
+msgstr "largeurs des boites à dispersion incorrectes"
+
+#. R/plot.R: gettextf("invalid plot type '%s'", t)
+#: R/plot.R:0
+#, fuzzy
+msgid "invalid plot type '%s'"
+msgstr "largeurs des boites à dispersion incorrectes"
+
 #. R/stripchart.R: stop("invalid plotting method")
 #: R/stripchart.R:0
 msgid "invalid plotting method"
@@ -747,6 +759,11 @@ msgstr "seulement une colonne dans l'argument pour 'pairs'"
 #: R/abline.R:0
 msgid "only using the first two of %d regression coefficients"
 msgstr "utilisation des deux premiers des %d coefficients de régression"
+
+#. R/plot.R: gettextf("plot type '%s' will be truncated to first character", type)
+#: R/plot.R:0
+msgid "plot type '%s' will be truncated to first character"
+msgstr ""
 
 #. R/coplot.R: stop("rows * columns too small")
 #: R/coplot.R:0

@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: base 4.1.0\n"
-"POT-Creation-Date: 2021-01-07 23:35\n"
+"POT-Creation-Date: 2021-01-30 18:44\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -2481,6 +2481,13 @@ msgid "buggy version of Kinderman-Ramage generator used"
 msgstr ""
 
 
+#: R/namespace.R: 0
+#. R/namespace.R: message("cached metadata")
+
+msgid "cached metadata"
+msgstr ""
+
+
 #: R/load.R: 0
 #. R/load.R: stop("can only save to a binary connection")
 
@@ -2705,6 +2712,13 @@ msgid "cost components must be non-negative"
 msgstr ""
 
 
+#: R/all.equal.R: 0
+#. R/all.equal.R: gettext("current is not deparse()able")
+
+msgid "current is not deparse()able"
+msgstr ""
+
+
 #: R/namespace.R: 0
 #. R/namespace.R: gettextf("cyclic namespace dependency detected when loading package %s, already loading %s",     sQuote(package), paste(sQuote(loading), collapse = ", "))
 
@@ -2727,6 +2741,27 @@ msgstr ""
 #. R/datetime.R: gettextf("do not know how to convert %s to class %s", sQuote(deparse1(substitute(x))),     dQuote("POSIXct"))
 
 msgid "do not know how to convert %s to class %s"
+msgstr ""
+
+
+#: R/namespace.R: 0
+#. R/namespace.R: message("done cached metadata")
+
+msgid "done cached metadata"
+msgstr ""
+
+
+#: R/namespace.R: 0
+#. R/namespace.R: gettextf("done processing imports for package %s", sQuote(package))
+
+msgid "done processing imports for package %s"
+msgstr ""
+
+
+#: R/namespace.R: 0
+#. R/namespace.R: gettextf("done running .onLoad for package %s", sQuote(package))
+
+msgid "done running .onLoad for package %s"
 msgstr ""
 
 
@@ -2840,6 +2875,13 @@ msgstr ""
 #. R/datetime.R: stop("exactly two of 'to', 'by' and 'length.out' / 'along.with' must be specified")
 
 msgid "exactly two of 'to', 'by' and 'length.out' / 'along.with' must be specified"
+msgstr ""
+
+
+#: R/namespace.R: 0
+#. R/namespace.R: gettextf("export method '%s'", mi)
+
+msgid "export method '%s'"
 msgstr ""
 
 
@@ -3363,6 +3405,27 @@ msgstr ""
 #. R/dataframe.R: gettextf("list of length %d is not meaningful", length(e1))
 
 msgid "list of length %d is not meaningful"
+msgstr ""
+
+
+#: R/namespace.R: 0
+#. R/namespace.R: message("loading ", package)
+
+msgid "loading"
+msgstr ""
+
+
+#: R/namespace.R: 0
+#. R/namespace.R: gettextf("loading lazydata for package %s", sQuote(package))
+
+msgid "loading lazydata for package %s"
+msgstr ""
+
+
+#: R/namespace.R: 0
+#. R/namespace.R: gettextf("loading sysdata for package %s", sQuote(package))
+
+msgid "loading sysdata for package %s"
 msgstr ""
 
 
@@ -4091,6 +4154,34 @@ msgid "probably wrong encoding in 'names(.)' of column %s"
 msgstr ""
 
 
+#: R/namespace.R: 0
+#. R/namespace.R: message("procesing classes")
+
+msgid "procesing classes"
+msgstr ""
+
+
+#: R/namespace.R: 0
+#. R/namespace.R: gettextf("processing S4 stuff for package %s", sQuote(package))
+
+msgid "processing S4 stuff for package %s"
+msgstr ""
+
+
+#: R/namespace.R: 0
+#. R/namespace.R: gettextf("processing exports for package %s", sQuote(package))
+
+msgid "processing exports for package %s"
+msgstr ""
+
+
+#: R/namespace.R: 0
+#. R/namespace.R: gettextf("processing imports for package %s", sQuote(package))
+
+msgid "processing imports for package %s"
+msgstr ""
+
+
 #: R/conditions.R: 0
 #. R/conditions.R: sprintf("pushing duplicate `%s` handler on top of the stack", class)
 
@@ -4171,11 +4262,25 @@ msgid "row names were found from a short variable and have been discarded"
 msgstr ""
 
 
+#: R/namespace.R: 0
+#. R/namespace.R: gettextf("running .onLoad for package %s", sQuote(package))
+
+msgid "running .onLoad for package %s"
+msgstr ""
+
+
 #: R/windows/system.R: 0
 #. R/windows/system.R: gettextf("running command '%s' had status %d", command, rval)
 #. R/windows/system.R: gettextf("running command '%s' had status %d", command, rval)
 
 msgid "running command '%s' had status %d"
+msgstr ""
+
+
+#: R/namespace.R: 0
+#. R/namespace.R: gettextf("sealing exports for package %s", sQuote(package))
+
+msgid "sealing exports for package %s"
 msgstr ""
 
 

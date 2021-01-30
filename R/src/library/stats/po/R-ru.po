@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.11.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2021-01-07 23:38\n"
+"POT-Creation-Date: 2021-01-30 18:45\n"
 "PO-Revision-Date: 2015-01-17 15:49+0100\n"
 "Last-Translator: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
 "Language-Team: Russian\n"
@@ -3890,10 +3890,9 @@ msgstr "кросс-валидация с неуникальными значен
 msgid "cutree(): k(h) ="
 msgstr ""
 
-#. R/fligner.test.R: stop("data are essentially constant")
 #. R/t.test.R: stop("data are essentially constant")
 #. R/t.test.R: stop("data are essentially constant")
-#: R/fligner.test.R:0 R/t.test.R:0
+#: R/t.test.R:0
 msgid "data are essentially constant"
 msgstr "данные абсолютно константны"
 
