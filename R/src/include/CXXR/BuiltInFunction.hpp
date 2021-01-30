@@ -178,8 +178,9 @@ namespace CXXR
     };
 
     /** @brief Get offset of a CXXR::BuiltInFunction.
-     * 
-     * @param x Pointer to a BuiltInFunction.
+     *
+     * @param x Pointer to a CXXR::BuiltInFunction.
+     *
      * @return The offset of this function within the function table.
      */
     int PRIMOFFSET(RObject *x);

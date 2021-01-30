@@ -62,6 +62,31 @@ namespace CXXR
         const auto &UNLOCK_BINDINGptr = UNLOCK_BINDING;
     } // namespace ForceNonInline
 
+    namespace
+    {
+        // Used in {,un}packGPBits():
+        /* reserve 4 bits -- m_missing uses only 2 bit now */
+        constexpr unsigned int MISSING_MASK = ((1 << 4) - 1); /* = 15 */
+    } // namespace
+
+    unsigned int ConsCell::packGPBits() const
+    {
+        unsigned int ans = RObject::packGPBits();
+        if (m_missing)
+        {
+            ans &= ~MISSING_MASK; // erase 4 rightmost bits
+            ans |= m_missing;
+        }
+        return ans;
+    }
+
+    void ConsCell::unpackGPBits(unsigned int gpbits)
+    {
+        RObject::unpackGPBits(gpbits);
+        m_missing = gpbits;
+        // m_missing = ((gpbits & MISSING_MASK) != 0);
+    }
+
     /* List Access Methods */
     RObject *ConsCell::tag(RObject *e)
     {
@@ -310,6 +335,22 @@ namespace CXXR
         ((R_bndval_t *)&(SEXP_downcast<ConsCell *>(x, false)->m_car))->ival = v;
     }
 
+    unsigned int ConsCell::missing(RObject *x) /* for closure calls */
+    {
+        if (!x)
+            return 0;
+        return SEXP_downcast<ConsCell *>(x)->m_missing;
+    }
+
+    void ConsCell::set_missing(RObject *x, int v)
+    {
+        if (!x)
+            return;
+        int __other_flags__ = x->packGPBits() & ~MISSING_MASK; // erase 4 rightmost bits
+        x->m_gpbits = __other_flags__ | v;
+        SEXP_downcast<ConsCell *>(x)->m_missing = __other_flags__ | v;
+    }
+
     void ConsCell::checkST(SEXPTYPE st)
     {
         switch (st)
@@ -396,7 +437,7 @@ namespace CXXR
         {
             const Symbol *symb = dynamic_cast<const Symbol *>(sym);
             if (!symb)
-                return "(SYMSXP is not a Symbol or SpecialSymbol)";
+                return "(SYMSXP is not a Symbol)";
             return symb->name()->c_str();
         }
     } // namespace

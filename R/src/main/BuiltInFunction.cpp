@@ -50,16 +50,9 @@ namespace CXXR
         return sexptype() == SPECIALSXP ? "special" : "builtin";
     }
 
-    /* Primitive Access Methods */
-    /** @brief Get offset of a CXXR::BuiltInFunction.
-     *
-     * @param x Pointer to a CXXR::BuiltInFunction.
-     *
-     * @return The offset of this function within the function table.
-     */
     int BuiltInFunction::primoffset(RObject *x)
     {
-        CXXR::BuiltInFunction *bif = CXXR::SEXP_downcast<CXXR::BuiltInFunction *>(x);
+        BuiltInFunction *bif = SEXP_downcast<BuiltInFunction *>(x);
         return bif->offset();
     }
 

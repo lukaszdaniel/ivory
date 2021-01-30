@@ -55,7 +55,7 @@ namespace CXXR
     } // namespace ForceNonInline
 
     Symbol::Symbol(const String *the_name, RObject *val, const BuiltInFunction *internal_func)
-        : RObject(SYMSXP), m_name(the_name), m_value(val), m_internalfunc(internal_func), m_dd_index(-1)
+        : RObject(SYMSXP), m_name(the_name), m_value(val), m_internalfunc(internal_func), m_dd_index(-1), m_base_symbol(false), m_special_symbol(false)
     {
         // If this is a ..n symbol, extract the value of n.
         // boost::regex_match (libboost_regex1_36_0-1.36.0-9.5) doesn't
@@ -80,7 +80,7 @@ namespace CXXR
 
     Symbol::Symbol()
         : RObject(SYMSXP), m_name(nullptr), m_value(s_unbound_value),
-          m_internalfunc(nullptr), m_dd_index(-1)
+          m_internalfunc(nullptr), m_dd_index(-1), m_base_symbol(false), m_special_symbol(false)
     {
     }
 
@@ -89,6 +89,30 @@ namespace CXXR
     GCRoot<Symbol> Symbol::s_restart_token(new Symbol(String::blank()), true);
     GCRoot<Symbol> Symbol::s_in_bc_interpreter(new Symbol(CachedString::obtain("<in-bc-interp>")), true);
     GCRoot<Symbol> Symbol::s_current_expression(new Symbol(CachedString::obtain("<current-expression>")), true);
+
+    namespace
+    {
+        // Used in {,un}packGPBits():
+        constexpr unsigned int SPECIAL_SYMBOL_MASK = 1 << 12;
+        constexpr unsigned int BASE_SYM_CACHED_MASK = 1 << 13;
+    } // namespace
+
+    unsigned int Symbol::packGPBits() const
+    {
+        unsigned int ans = RObject::packGPBits();
+        if (m_special_symbol)
+            ans |= SPECIAL_SYMBOL_MASK;
+        if (m_base_symbol)
+            ans |= BASE_SYM_CACHED_MASK;
+        return ans;
+    }
+
+    void Symbol::unpackGPBits(unsigned int gpbits)
+    {
+        RObject::unpackGPBits(gpbits);
+        m_special_symbol = ((gpbits & SPECIAL_SYMBOL_MASK) != 0);
+        m_base_symbol = ((gpbits & BASE_SYM_CACHED_MASK) != 0);
+    }
 
     const char *Symbol::typeName() const
     {
@@ -133,12 +157,6 @@ namespace CXXR
 #endif
     }
 
-    /** @brief Symbol name.
-     *
-     * @param x Pointer to a CXXR::Symbol (checked).
-     *
-     * @return Pointer to a R::String representing \a x's name.
-     */
     RObject *Symbol::printname(RObject *x)
     {
         if (!x)
@@ -157,14 +175,6 @@ namespace CXXR
         return const_cast<String *>(sym.name());
     }
 
-    /** @brief Symbol's value in the base environment.
-     *
-     * @param x Pointer to a CXXR::Symbol (checked).
-     *
-     * @return Pointer to a CXXR::RObject representings \a x's value.
-     *         Returns R_UnboundValue if no value is currently
-     *         associated with the Symbol.
-     */
     RObject *Symbol::symvalue(RObject *x)
     {
         if (!x)
@@ -201,25 +211,15 @@ namespace CXXR
         return const_cast<BuiltInFunction *>(sym.internalFunction());
     }
 
-    /** @brief Does symbol relate to a <tt>...</tt> expression?
-     *
-     * @param x Pointer to a CXXR::Symbol (checked).
-     *
-     * @return \c TRUE iff this symbol denotes an element of a
-     *         <tt>...</tt> expression.
-     */
-    unsigned int Symbol::ddval(RObject *x) { return x ? SEXP_downcast<Symbol *>(x)->isDotDotSymbol() : false; } /* for ..1, ..2 etc */
-
-    void Symbol::set_ddval(RObject *x, bool v)
+    unsigned int Symbol::ddval(RObject *x) /* for ..1, ..2 etc */
     {
-    } /* for ..1, ..2 etc */
+        return x ? SEXP_downcast<Symbol *>(x)->isDotDotSymbol() : false;
+    }
 
-    /** @brief Set Symbol name.
-     *
-     * @param x Pointer to a CXXR::Symbol (checked).
-     *
-     * @param v Pointer to a R::String representing \a x's name. 
-     */
+    void Symbol::set_ddval(RObject *x, bool v) /* for ..1, ..2 etc */
+    {
+    }
+
     void Symbol::set_printname(RObject *x, RObject *v)
     {
         if (!x)
@@ -236,16 +236,6 @@ namespace CXXR
 #endif
     }
 
-    /** @brief Set symbol's value in the base environment.
-     *
-     * @param x Pointer to a CXXR::Symbol (checked).
-     *
-     * @param val Pointer to the RObject now to be considered as
-     *            the value of this symbol.  A null pointer or
-     *            R_UnboundValue are permissible values of \a val.
-     *
-     * @todo No binding to R_UnboundValue ought to be created.
-     */
     void Symbol::set_symvalue(RObject *x, RObject *val)
     {
         if (!x)
@@ -288,32 +278,46 @@ namespace CXXR
         if (!x)
             return;
         x->m_gpbits |= BASE_SYM_CACHED_MASK;
+        SEXP_downcast<Symbol *>(x)->m_base_symbol = true;
     }
+
     void Symbol::unset_base_sym_cached(RObject *x)
     {
         if (!x)
             return;
         x->m_gpbits &= (~BASE_SYM_CACHED_MASK);
+        SEXP_downcast<Symbol *>(x)->m_base_symbol = false;
     }
 
-    unsigned int Symbol::base_sym_cached(RObject *x) { return x ? (x->m_gpbits & BASE_SYM_CACHED_MASK) : 0; }
+    unsigned int Symbol::base_sym_cached(RObject *x)
+    {
+        return x && SEXP_downcast<Symbol *>(x)->m_base_symbol;
+    }
 
-    unsigned int Symbol::no_special_symbols(RObject *x) { return x ? (x->m_gpbits & SPECIAL_SYMBOL_MASK) : 0; }
+    unsigned int Symbol::no_special_symbols(RObject *x)
+    {
+        return x && SEXP_downcast<Symbol *>(x)->m_special_symbol;
+    }
 
     void Symbol::set_no_special_symbols(RObject *x)
     {
         if (!x)
             return;
         x->m_gpbits |= SPECIAL_SYMBOL_MASK;
+        SEXP_downcast<Symbol *>(x)->m_special_symbol = true;
     }
 
-    unsigned int Symbol::is_special_symbol(RObject *x) { return x ? (x->m_gpbits & SPECIAL_SYMBOL_MASK) : 0; }
+    unsigned int Symbol::is_special_symbol(RObject *x)
+    {
+        return x && SEXP_downcast<Symbol *>(x)->m_special_symbol;
+    }
 
     void Symbol::set_special_symbol(RObject *x)
     {
         if (!x)
             return;
         x->m_gpbits |= SPECIAL_SYMBOL_MASK;
+        SEXP_downcast<Symbol *>(x)->m_special_symbol = true;
     }
 
     void Symbol::unset_no_special_symbols(RObject *x)
@@ -321,6 +325,7 @@ namespace CXXR
         if (!x)
             return;
         x->m_gpbits &= (~SPECIAL_SYMBOL_MASK);
+        SEXP_downcast<Symbol *>(x)->m_special_symbol = false;
     }
 
     void Symbol::unset_special_symbol(RObject *x)
@@ -328,5 +333,6 @@ namespace CXXR
         if (!x)
             return;
         x->m_gpbits &= (~SPECIAL_SYMBOL_MASK);
+        SEXP_downcast<Symbol *>(x)->m_special_symbol = false;
     }
 } // namespace CXXR

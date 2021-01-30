@@ -75,7 +75,8 @@ namespace CXXR
        * checked.
        */
       explicit Environment(Environment *enclosing = nullptr, PairList *namevals = nullptr)
-          : RObject(ENVSXP), m_enclosing(enclosing), m_frame(namevals), m_hashtable(nullptr), m_single_stepping(false)
+          : RObject(ENVSXP), m_enclosing(enclosing), m_frame(namevals), m_hashtable(nullptr), m_single_stepping(false),
+            m_globally_cached(false), m_locked(false)
       {
          INCREMENT_REFCNT(namevals);
 
@@ -137,6 +138,24 @@ namespace CXXR
          return s_global_env;
       }
 
+      /** @brief Is this frame in the global cache?
+       *
+       * @return true iff this frame is included in the global cache.
+       */
+      bool inGlobalCache() const
+      {
+         return m_globally_cached;
+      }
+
+      /** @brief Is the frame locked?
+       *
+       * @return true iff the frame is locked.
+       */
+      bool isLocked() const
+      {
+         return m_locked;
+      }
+
       /** @brief Access the hash table.
        *
        * @return pointer to the hash table of this environment.
@@ -195,21 +214,45 @@ namespace CXXR
          propagateAge(m_hashtable);
       }
 
+      /** @brief Set the frame's status as globally cached.
+       *
+       * @param cached The required status.
+       *
+       * @note At present this function just toggles a flag: it
+       * doesn't insert or remove the frame from the global cache.
+       */
+      void setGlobalCaching(bool cached)
+      {
+         m_globally_cached = cached;
+      }
+
+      /** @brief Set locking status.
+       *
+       * @param on The required locking status (true = locked).
+       *
+       * @note Possibly replace by a plain lock(): unlocking doesn't
+       * seem to happen.
+       */
+      void setLocking(bool on)
+      {
+         m_locked = on;
+      }
+
       /** @brief Set single-stepping status
-	 *
-	 * @param on The required single-stepping status (true =
-	 *           enabled).
-	 */
+       *
+       * @param on The required single-stepping status (true =
+       *           enabled).
+       */
       void setSingleStepping(bool on)
       {
          m_single_stepping = on;
       }
 
       /** @brief Get single-stepping status.
-	 *
-	 * @return true if debugger should single-step within this
-	 * Environment.
-	 */
+       *
+       * @return true if debugger should single-step within this
+       * Environment.
+       */
       bool singleStepping() const
       {
          return m_single_stepping;
@@ -224,7 +267,9 @@ namespace CXXR
          return "environment";
       }
 
-      // Virtual function of RObject:
+      // Virtual functions of RObject:
+      unsigned int packGPBits() const override;
+      void unpackGPBits(unsigned int gpbits) override;
       const char *typeName() const override;
 
       // Virtual function of GCNode:
@@ -258,6 +303,8 @@ namespace CXXR
       PairList *m_frame;
       ListVector *m_hashtable;
       bool m_single_stepping;
+      bool m_globally_cached;
+      bool m_locked;
 
       // Declared private to ensure that Environment objects are
       // created only using 'new':
@@ -296,9 +343,18 @@ extern "C"
     */
    SEXP FRAME(SEXP x);
 
-   /**
-    * @param x Pointer to an \c Environment.
-    * @return Pointer to \a x 's enclosing environment.
+   /** @brief Access an environment's Frame, represented as a PairList.
+    *
+    * @param x Pointer to a CXXR::Environment (checked).
+    *
+    * @return Pointer to a PairList representing the contents of the
+    * Frame of \a x (may be null).  This PairList is generated on the
+    * fly, so this is a relatively expensive operation.  Alterations
+    * to the returned PairList will not alter the Environment's Frame.
+    *
+    * @note Beware that since (unlike CR) this isn't a simple
+    * accessor function, its return value will need protection from
+    * garbage collection.
     */
    SEXP ENCLOS(SEXP x);
 
@@ -319,20 +375,20 @@ extern "C"
    int ENVFLAGS(SEXP x);
 
    /** @brief Should the debugger single-step?
-     *
-     * @param x Pointer to a CXXR::Environment object (checked).
-     *
-     * @return \c true if single-stepping is set, i.e. the debugger
-     * should single-step within this environment.
-     */
+    *
+    * @param x Pointer to a CXXR::Environment object (checked).
+    *
+    * @return \c true if single-stepping is set, i.e. the debugger
+    * should single-step within this environment.
+    */
    int ENV_RDEBUG(SEXP x);
 
    /** @brief Enable/disable single-stepping of the debugger.
-     *
-     * @param x Pointer a CXXR::Environment object (checked).
-     *
-     * @param v The new single-stepping state (true = enabled).
-     */
+    *
+    * @param x Pointer a CXXR::Environment object (checked).
+    *
+    * @param v The new single-stepping state (true = enabled).
+    */
    void SET_ENV_RDEBUG(SEXP x, int v);
 
    /** @brief Set environment flags.
@@ -374,7 +430,7 @@ extern "C"
     * @param v Pointer to the new hash table, which must be a
     * CXXR::ListVector (checked), and satisfy other conditions.
     *
-    * @todo To be removed quite soon.
+    * @todo Probably should be private.
     */
    void SET_HASHTAB(SEXP x, SEXP v);
 } // extern "C"

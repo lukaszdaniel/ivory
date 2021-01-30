@@ -404,7 +404,6 @@ void R::Rf_printMatrix(SEXP x, int offset, SEXP dim, int quote, int right,
     default:
 	UNIMPLEMENTED_TYPE("printMatrix()", x);
     }
-//#ifdef ENABLE_NLS
     if(r_pr < r) { // number of formats must be consistent here
 	Rprintf(n_(" [ reached 'getOption(\"max.print\")' -- omitted %d row ]",
 			 " [ reached 'getOption(\"max.print\")' -- omitted %d rows ]",
@@ -412,11 +411,6 @@ void R::Rf_printMatrix(SEXP x, int offset, SEXP dim, int quote, int right,
 		r - r_pr);
 	Rprintf("\n");
     }
-//#else
-//    if(r_pr < r) 
-//	Rprintf(" [ reached 'getOption(\"max.print\")' -- omitted %d rows ]\n",
-//		r - r_pr);
-//#endif
     vmaxset(vmax);
 }
 

@@ -74,7 +74,8 @@ namespace CXXR
          */
         Promise(const RObject *valgen, const Environment *env)
             : RObject(PROMSXP), m_value(Symbol::unboundValue()),
-              m_valgen(valgen), m_environment(env)
+              m_valgen(valgen), m_environment(env), m_seen(false),
+              m_interrupted(false)
         {
         }
 
@@ -87,6 +88,40 @@ namespace CXXR
         const Environment *environment() const
         {
             return m_environment;
+        }
+
+        /** @brief Has evaluation been interrupted by a jump?
+         *
+         * @return true iff evaluation of this Promise has been
+         * interrupted by a jump (JMPException).
+         */
+        bool evaluationInterrupted() const
+        {
+            return m_interrupted;
+        }
+
+        /** @brief Indicate whether evaluation has been interrupted.
+         *
+         * @param on true to indicate that evaluation of this promise
+         *           has been interrupted by a JMPException.
+         *
+         * @note To be removed from public interface in due course.
+         */
+        void markEvaluationInterrupted(bool on)
+        {
+            m_interrupted = on;
+        }
+
+        /** @brief Indicate whether this promise is under evaluation.
+         *
+         * @param on true to indicate that this promise is currently
+         *           under evaluation; otherwise false.
+         *
+         * @note To be removed from public interface in due course.
+         */
+        void markUnderEvaluation(bool on)
+        {
+            m_seen = on;
         }
 
         /** @brief RObject to be evaluated by the Promise.
@@ -124,11 +159,19 @@ namespace CXXR
             return "promise";
         }
 
+        /** @brief Is this promise currently under evaluation?
+         *
+         * @return true iff this promise is currently under evaluation.
+         */
+        bool underEvaluation() const
+        {
+            return m_seen;
+        }
+
         /** @brief Access the value of a Promise.
          *
          * @return pointer to the value of the Promise, or to
-         * Symbol::unboundValue() if it has not yet been
-         * evaluated.
+         * Symbol::unboundValue() if it has not yet been evaluated.
          */
         const RObject *value() const
         {
@@ -155,7 +198,8 @@ namespace CXXR
         RObject *m_value;
         const RObject *m_valgen;
         const Environment *m_environment;
-
+        bool m_seen;
+        bool m_interrupted;
         // Declared private to ensure that Environment objects are
         // created only using 'new':
         ~Promise() {}
@@ -210,21 +254,21 @@ extern "C"
     SEXP PRVALUE(SEXP x);
 
     /**
-     * @param x Pointer to a promise.
+     * @param x Pointer to a CXXR::Promise.
      * @return ?
      * @deprecated Will need to be fixed.
      */
     int PRSEEN(SEXP x);
 
     /**
-     * @param x Pointer to a promise.
+     * @param x Pointer to a CXXR::Promise.
      * @deprecated Will need to be fixed.
      */
     void SET_PRSEEN(SEXP x, int v);
 
-    /**
-     * Set environment
-     * @param x Pointer to a promise.
+    /** @brief Set the environment of a CXXR::Promise.
+     *
+     * @param x Pointer to a CXXR::Promise (checked).
      * @param v Pointer to the environment in which the expression is to
      *          be evaluated.
      * @todo Probably ought to be private or done in the constructor.
@@ -238,13 +282,13 @@ extern "C"
      *
      * @param x Pointer to a CXXR::Promise (checked).
      *
-     * @param v Pointer to the value to be assigned to the promise.
+     * @param v Pointer to the value to be assigned to the CXXR::Promise.
      *
-     * @todo Replace this with a method call to evaluate the promise.
+     * @todo Replace this with a method call to evaluate the CXXR::Promise.
      */
     void SET_PRVALUE(SEXP x, SEXP v);
 
-    /** @brief Access the expression of a CXXR::Promise.
+    /** @brief Set the expression of a CXXR::Promise.
      *
      * @param x Pointer to a CXXR::Promise (checked).
      *

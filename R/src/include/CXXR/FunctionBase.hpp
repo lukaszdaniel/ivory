@@ -96,14 +96,24 @@ namespace CXXR
 
 extern "C"
 {
-    /** @brief Get object tracing status.
+    /** @brief Get function tracing status.
      *
-     * @param x Pointer to CXXR::RObject.
+     * @param x Pointer to a CXXR::FunctionBase (checked), or a null
+     *          pointer.
+     *
      * @return Refer to 'R Internals' document.  Returns 0 if \a x is a
      *         null pointer.
      */
     int RTRACE(SEXP x);
 
+    /** @brief Set function tracing status.
+     *
+     * @param x Pointer to a CXXR::FunctionBase (checked), or a null
+     *          pointer.
+     *
+     * @param v The desired tracing status: non-zero if tracing is
+     *          required.
+     */
     void SET_RTRACE(SEXP x, int v);
 
     /** @brief Query debugging status.

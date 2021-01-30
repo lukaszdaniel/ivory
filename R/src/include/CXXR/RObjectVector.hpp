@@ -38,11 +38,13 @@ namespace CXXR
 {
     /** @brief Vector of pointers to RObject.
      *
-     * This is a templated class to represent a vector whose members
-     * are pointers to other GCNode objects.
-     * @param T This should be pointer or const pointer to
-     *          GCNode or to a type (publicly) derived from GCNode.
-     *          The vector elements will be of type \a T*.
+     * This is a templated class to represent a vector whose elements
+     * are pointers to objects of some type derived from RObject.
+     * Copying the vector copies the objects pointed to.
+     *
+     * @param T This should be RObject or a type (publicly) derived
+     * from RObject.  The vector elements will be of type \a T*.
+     *
      * @param ST The required ::SEXPTYPE of the vector.
      */
     template <typename T, SEXPTYPE ST>
@@ -52,13 +54,12 @@ namespace CXXR
         /** @brief Proxy object for an element of an RObjectVector<T, ST>.
          *
          * Objects of this class are used to allow the elements of an
-         * RObjectVector<T, ST> to be examined and modified using the
-         * same syntax as would be used for accessing an array of
-         * \a T, whilst nevertheless enforcing the write
-         * barrier.  See Item 30 of Scott Meyers's 'More Effective
-         * C++' for a general discussion of proxy objects, but see the
-         * <a
-         * href="http://www.aristeia.com/BookErrata/mec++-errata_frames.html">errata</a>.
+         * RObjectVector<T, ST> to be examined and modified using
+         * the same syntax as would be used for accessing an array of
+         * \a T*, whilst nevertheless enforcing the write barrier.
+         * See Item 30 of Scott Meyers's 'More Effective C++' for a
+         * general discussion of proxy objects, but see the
+         * <a href="http://www.aristeia.com/BookErrata/mec++-errata_frames.html">errata</a>.
          * (It may look complicated, but an optimising compiler should
          * be able to distil an invocation of RObjectVector<T,
          * ST>::operator[] into very few instructions.)
@@ -165,9 +166,7 @@ namespace CXXR
          * interpreted (riskily) as an array of \a T*.
          *
          * @deprecated This function puts the integrity of the write barrier
-         * at the mercy of class clients.  (It also assumes that the
-         * data of a std::vector are stored contiguously, which isn't
-         * guaranteed by the standard.)
+         * at the mercy of class clients.
          */
         T **dataPtr()
         {

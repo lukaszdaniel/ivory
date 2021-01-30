@@ -113,4 +113,18 @@
         }                                                                            \
     }
 
+#define CHECK_packGPBits(x, v)                                                                       \
+    if (x && (x->m_gpbits != x->packGPBits()))                                                       \
+    {                                                                                                \
+        std::cerr << LOCATION << std::endl;                                                          \
+        if (v)                                                                                       \
+            std::cerr << "v = " << std::bitset<16>(v).to_string() << std::endl;                      \
+        std::cerr << "m_gpbits != packGPBits()" << std::endl;                                        \
+        std::cerr << x->m_gpbits << " != " << x->packGPBits() << std::endl;                          \
+        std::cerr << "m_gpbits     = " << std::bitset<16>(x->m_gpbits).to_string() << std::endl;     \
+        std::cerr << "packGPBits() = " << std::bitset<16>(x->packGPBits()).to_string() << std::endl; \
+        std::cerr << "sexptype = " << x->sexptype() << std::endl;                                    \
+        abort();                                                                                     \
+    }
+
 #endif // DEBUGMACROS_HPP

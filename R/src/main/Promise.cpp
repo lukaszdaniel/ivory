@@ -81,14 +81,6 @@ namespace CXXR
             m_environment->conductVisitor(v);
     }
 
-    /* Promise Access Methods */
-    /** @brief Access the expression of a CXXR::Promise.
-     *
-     * @param x Pointer to a CXXR::Promise (checked).
-     *
-     * @return Pointer to the expression to be evaluated by the
-     *         CXXR::Promise. 
-     */
     RObject *Promise::prcode(RObject *x)
     {
         if (!x)
@@ -108,12 +100,6 @@ namespace CXXR
         return const_cast<RObject *>(prom->valueGenerator());
     }
 
-    /** @brief Set the expression of a CXXR::Promise.
-     *
-     * @param x Pointer to a CXXR::Promise (checked).
-     *
-     * @param v Pointer to the expression to be assigned to the CXXR::Promise.
-     */
     void Promise::set_prcode(RObject *x, RObject *v)
     {
         if (!x)
@@ -133,12 +119,6 @@ namespace CXXR
         prom->setValueGenerator(v);
     }
 
-    /** @brief Access the environment of a CXXR::Promise.
-     *
-     * @param x Pointer to a CXXR::Promise (checked).
-     *
-     * @return Pointer to the environment of the CXXR::Promise. 
-     */
     RObject *Promise::prenv(RObject *x)
     {
         if (!x)
@@ -158,13 +138,6 @@ namespace CXXR
         return const_cast<Environment *>(prom->environment());
     }
 
-    /** @brief Access the value of a CXXR::Promise.
-     *
-     * @param x Pointer to a CXXR::Promise (checked).
-     *
-     * @return Pointer to the value of the CXXR::Promise, or to
-     *         R_UnboundValue if it has not yet been evaluated..
-     */
     RObject *Promise::prvalue(RObject *x)
     {
         if (!x)
@@ -184,17 +157,6 @@ namespace CXXR
         return const_cast<RObject *>(prom->value());
     }
 
-    /** @brief Set the value of a CXXR::Promise.
-     *
-     * Once the value is set to something other than R_UnboundValue,
-     * the environment pointer is set null.
-     *
-     * @param x Pointer to a CXXR::Promise (checked).
-     *
-     * @param v Pointer to the value to be assigned to the CXXR::Promise.
-     *
-     * @todo Replace this with a method call to evaluate the CXXR::Promise.
-     */
     void Promise::set_prvalue(RObject *x, RObject *v)
     {
         if (!x)
@@ -214,14 +176,22 @@ namespace CXXR
         prom->setValue(v);
     }
 
-    unsigned int Promise::prseen(RObject *x) { return x ? x->m_gpbits : 0; }
+    unsigned int Promise::prseen(RObject *x)
+    {
+        if (!x)
+            return 0;
+        Promise *prom = SEXP_downcast<Promise *>(x);
+        if (prom->evaluationInterrupted())
+        {
+            return 2;
+        }
+        else if (prom->underEvaluation())
+        {
+            return 1;
+        }
+        return 0;
+    }
 
-    /** @brief Set the environment of a CXXR::Promise.
-     *
-     * @param x Pointer to a CXXR::Promise (checked).
-     *
-     * @param v Pointer to the environment to be assigned to the CXXR::Promise. 
-     */
     void Promise::set_prenv(RObject *x, RObject *v)
     {
         if (!x)
@@ -245,6 +215,21 @@ namespace CXXR
     {
         if (!x)
             return;
-        x->m_gpbits = v;
+        Promise *prom = SEXP_downcast<Promise *>(x);
+        if (v == 1)
+        {
+            prom->markUnderEvaluation(true);
+            prom->markEvaluationInterrupted(false);
+        }
+        else if (v)
+        {
+            prom->markUnderEvaluation(false);
+            prom->markEvaluationInterrupted(true);
+        }
+        else
+        {
+            prom->markUnderEvaluation(false);
+            prom->markEvaluationInterrupted(false);
+        }
     }
 } // namespace CXXR

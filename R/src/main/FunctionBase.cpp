@@ -49,13 +49,6 @@ namespace CXXR
         const auto &SET_RTRACEptr = SET_RTRACE;
     } // namespace ForceNonInline
 
-    /** @brief Query debugging status.
-     *
-     * @param x Pointer to a CXXR::Closure object.
-     *
-     * @return \c true if debugging is set, i.e. evaluations of the
-     *         function should run under the browser.
-     */
     bool FunctionBase::rdebug(RObject *x)
     {
         if (!x)
@@ -64,13 +57,6 @@ namespace CXXR
         return fb->debugging();
     }
 
-    /**
-     * Set the debugging state of a CXXR::Closure object.
-     *
-     * @param x Pointer to a CXXR::Closure object (checked).
-     *
-     * @param v The new debugging state.
-     */
     void FunctionBase::set_rdebug(RObject *x, bool v)
     {
         if (!x)
@@ -79,27 +65,11 @@ namespace CXXR
         fb->setDebugging(v);
     }
 
-    /** @brief Get function tracing status.
-     *
-     * @param x Pointer to a CXXR::FunctionBase (checked), or a null
-     *          pointer.
-     *
-     * @return Refer to 'R Internals' document.  Returns 0 if \a x is a
-     * null pointer.
-     */
     bool FunctionBase::rtrace(RObject *x)
     {
         return x && x->m_trace;
     }
 
-    /** @brief Set function tracing status.
-     *
-     * @param x Pointer to a CXXR::FunctionBase (checked), or a null
-     * pointer.
-     *
-     * @param v The desired tracing status: non-zero if tracing is
-     * required.
-     */
     void FunctionBase::set_rtrace(RObject *x, bool v)
     {
         if (!x)

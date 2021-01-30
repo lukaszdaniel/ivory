@@ -260,6 +260,7 @@ namespace CXXR
         // Virtual function of GCNode:
         void visitChildren(const_visitor *v) const override;
 
+        /* List Access Methods */
         static RObject *tag(RObject *x);
         static void set_tag(RObject *x, RObject *v);
         static RObject *car0(RObject *x);
@@ -272,6 +273,12 @@ namespace CXXR
         static void set_bndcell_dval(RObject *x, double v);
         static void set_bndcell_ival(RObject *x, int v);
         static void set_bndcell_lval(RObject *x, int v);
+        static unsigned int missing(RObject *x); /* for closure calls */
+        static void set_missing(RObject *x, int v);
+
+        // Virtual functions of RObject:
+        unsigned int packGPBits() const override;
+        void unpackGPBits(unsigned int gpbits) override;
 
     protected:
         /**
@@ -289,7 +296,7 @@ namespace CXXR
          */
         explicit ConsCell(SEXPTYPE st,
                           RObject *cr = nullptr, PairList *tl = nullptr, RObject *tg = nullptr)
-            : RObject(st), m_car(cr), m_tail(tl), m_tag(tg)
+            : RObject(st), m_car(cr), m_tail(tl), m_tag(tg), m_missing(0)
         {
             checkST(st);
         }
@@ -326,6 +333,20 @@ namespace CXXR
 
         // Check that st is a legal SEXPTYPE for a ConsCell:
         static void checkST(SEXPTYPE st);
+
+    public:
+        // The following field is used only in connection with objects
+        // inheriting from class ConsCell (and fairly rarely then), so
+        // it would more logically be placed in that class (and
+        // formerly was within rho).  It is placed here so that the
+        // ubiquitous PairList objects can be squeezed into 32 bytes
+        // (on 32-bit architecture), for improved cache efficiency.
+        // This field is obsolescent in any case, and should be got
+        // rid of entirely in due course:
+
+        // 'Scratchpad' field used in handling argument lists,
+        // formerly hosted in the 'gp' field of sxpinfo_struct.
+        unsigned int m_missing : 2;
     };
 
     /** @brief (For debugging.)
@@ -337,6 +358,14 @@ namespace CXXR
 
 extern "C"
 {
+    // Used in argument handling (within envir.cpp, eval.cpp and
+    // match.cpp).  Note comments in the 'R Internals' document.
+    int MISSING(SEXP x);
+
+    // Used in argument handling (within envir.cpp, eval.cpp and
+    // match.cpp).  Note comments in the 'R Internals' document.
+    void SET_MISSING(SEXP x, int v);
+
     /** @brief Get tag of CXXR::ConsCell.
      *
      * @param e Pointer to a CXXR::ConsCell (checked), or a null pointer.

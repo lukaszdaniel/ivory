@@ -49,8 +49,9 @@ namespace CXXR
         /** @brief Get a pointer to a CachedString object.
          *
          * If no CachedString with the specified text and encoding
-         * currently exists, one will be created.  Otherwise a pointer
-         * to the existing CachedString will be returned.
+         * currently exists, one will be created, and a pointer to it
+         * returned.  Otherwise a pointer to the existing CachedString
+         * will be returned.
          *
          * @param str The text of the required CachedString.
          *          (Embedded null characters are permissible.)
@@ -60,8 +61,9 @@ namespace CXXR
          *          bits.  Zero signifies ASCII encoding, and at most
          *          one of the MASK bits may be set (checked).
          *
-         * @return Pointer to a CachedString representing the
-         *         specified text in the specified encoding.
+         * @return Pointer to a CachedString (preexisting or newly
+         * created) representing the specified text in the specified
+         * encoding.
          */
         static CachedString *obtain(const std::string &str, cetype_t encoding = CE_NATIVE);
 
@@ -111,9 +113,8 @@ namespace CXXR
         map::value_type *m_key_val_pr;
 
         explicit CachedString(const std::string &text, cetype_t encoding, bool isAscii)
-            : String(text.size(), encoding, text, isAscii)
+            : String(text.size(), encoding, text, isAscii, true /*cached*/)
         {
-            m_gpbits |= CACHED_MASK; /* Mark it */
         }
 
         // Not implemented.  Declared to prevent

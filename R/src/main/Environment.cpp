@@ -56,6 +56,31 @@ namespace CXXR
         const auto &SET_HASHTABptr = SET_HASHTAB;
     } // namespace ForceNonInline
 
+    namespace
+    {
+        // Used in {,un}packGPBits():
+        constexpr unsigned int FRAME_LOCK_MASK = 1 << 14;
+        constexpr unsigned int GLOBAL_FRAME_MASK = 1 << 15;
+    } // namespace
+
+    unsigned int Environment::packGPBits() const
+    {
+        unsigned int ans = RObject::packGPBits();
+        if (m_locked)
+            ans |= FRAME_LOCK_MASK;
+        if (m_globally_cached)
+            ans |= GLOBAL_FRAME_MASK;
+        return ans;
+    }
+
+    void Environment::unpackGPBits(unsigned int gpbits)
+    {
+        RObject::unpackGPBits(gpbits);
+        // Be careful with precedence!
+        m_locked = ((gpbits & FRAME_LOCK_MASK) != 0);
+        m_globally_cached = ((gpbits & GLOBAL_FRAME_MASK) != 0);
+    }
+
     GCRoot<Environment> Environment::s_empty_env(new Environment(), true);
     GCRoot<Environment> Environment::s_base_env(new Environment(s_empty_env), true);
     GCRoot<Environment> Environment::s_global_env(SEXP_downcast<Environment *>(R::R_NewHashedEnv(s_base_env, Rf_ScalarInteger(0))), true);
@@ -92,11 +117,6 @@ namespace CXXR
             m_hashtable->conductVisitor(v);
     }
 
-    /* Environment Access Methods */
-    /**
-     * @param x Pointer to an CXXR::Environment.
-     * @return Pointer to the frame of \a x .
-     */
     RObject *Environment::frame(RObject *x)
     {
         if (!x)
@@ -115,19 +135,6 @@ namespace CXXR
         return env->frame();
     }
 
-    /** @brief Access an environment's Frame, represented as a PairList.
-     *
-     * @param x Pointer to a CXXR::Environment (checked).
-     *
-     * @return Pointer to a PairList representing the contents of the
-     * Frame of \a x (may be null).  This PairList is generated on the
-     * fly, so this is a relatively expensive operation.  Alterations
-     * to the returned PairList will not alter the Environment's Frame.
-     *
-     * @note Beware that since (unlike CR) this isn't a simple
-     * accessor function, its return value will need protection from
-     * garbage collection.
-     */
     RObject *Environment::enclos(RObject *x)
     {
         if (!x)
@@ -146,10 +153,6 @@ namespace CXXR
         return env->enclosingEnvironment();
     }
 
-    /**
-     * @param x Pointer to a CXXR::Environment.
-     * @return Pointer to \a x 's hash table (may be NULL).
-     */
     RObject *Environment::hashtab(RObject *x)
     {
         if (!x)
@@ -168,32 +171,22 @@ namespace CXXR
         return env->hashTable();
     }
 
-    /**
-     * @param x Pointer to a CXXR::Environment.
-     * @return \a x 's environment flags.
-     * @deprecated
-     */
-    unsigned int Environment::envflags(RObject *x) { return x ? x->m_gpbits : 0; } /* for environments */
+    unsigned int Environment::envflags(RObject *x) /* for environments */
+    {
+        if (!x)
+            return 0;
 
-    /**
-     * Set environment flags.
-     * @param x Pointer to a CXXR::Environment.
-     * @param v The new flags.
-     * @deprecated
-     */
+        return SEXP_downcast<Environment *>(x)->packGPBits();
+    }
+
     void Environment::set_envflags(RObject *x, unsigned int v)
     {
         if (!x)
             return;
         x->m_gpbits = v;
+        SEXP_downcast<Environment *>(x)->unpackGPBits(v);
     }
 
-    /**
-     * Set environment's frame.
-     * @param x Pointer to a CXXR::Environment.
-     * @param v Pointer to the new frame.
-     * @todo Probably should be private.
-     */
     void Environment::set_frame(RObject *x, RObject *v)
     {
         if (!x)
@@ -213,12 +206,6 @@ namespace CXXR
         env->setFrame(pl);
     }
 
-    /**
-     * Set environment's enclosing environment.
-     * @param x Pointer to a CXXR::Environment.
-     * @param v Pointer to the new enclosing environment.
-     * @todo Probably should be private.
-     */
     void Environment::set_enclos(RObject *x, RObject *v)
     {
         if (!x)
@@ -238,12 +225,6 @@ namespace CXXR
         env->setEnclosingEnvironment(enc);
     }
 
-    /**
-     * Set environment's hash table.
-     * @param x Pointer to a CXXR::Environment.
-     * @param v Pointer to the hash table.
-     * @todo Probably should be private.
-     */
     void Environment::set_hashtab(RObject *x, RObject *v)
     {
         if (!x)
@@ -263,52 +244,45 @@ namespace CXXR
         env->setHashTable(lv);
     }
 
-    unsigned int Environment::frame_is_locked(RObject *e) { return e ? (envflags(e) & FRAME_LOCK_MASK) : 0; }
+    unsigned int Environment::frame_is_locked(RObject *e)
+    {
+        return e && SEXP_downcast<Environment *>(e)->isLocked();
+    }
 
     void Environment::lock_frame(RObject *x)
     {
         if (!x)
             return;
         x->m_gpbits |= FRAME_LOCK_MASK;
+        SEXP_downcast<Environment *>(x)->setLocking(true);
     }
 
-    bool Environment::is_global_frame(RObject *e) { return e ? (envflags(e) & GLOBAL_FRAME_MASK) : 0; }
+    bool Environment::is_global_frame(RObject *e)
+    {
+        return e && SEXP_downcast<Environment *>(e)->inGlobalCache();
+    }
 
     void Environment::mark_as_global_frame(RObject *x)
     {
         if (!x)
             return;
-
         x->m_gpbits |= GLOBAL_FRAME_MASK;
+        SEXP_downcast<Environment *>(x)->setGlobalCaching(true);
     }
     void Environment::mark_as_local_frame(RObject *x)
     {
         if (!x)
             return;
-
         x->m_gpbits &= ~(GLOBAL_FRAME_MASK);
+        SEXP_downcast<Environment *>(x)->setGlobalCaching(false);
     }
 
-    /** @brief Query debugging status.
-     *
-     * @param x Pointer to a CXXR::Environment object.
-     *
-     * @return \c true if debugging is set, i.e. evaluations of the
-     *         function should run under the browser.
-     */
     bool Environment::env_rdebug(RObject *x)
     {
         const Environment *env = SEXP_downcast<const Environment *>(x);
         return env->singleStepping();
     }
 
-    /**
-     * Set the debugging state of a CXXR::Environment object.
-     *
-     * @param x Pointer to a CXXR::Environment object (checked).
-     *
-     * @param v The new debugging state.
-     */
     void Environment::set_env_rdebug(RObject *x, bool v)
     {
         if (!x)

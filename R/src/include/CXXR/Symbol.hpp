@@ -255,7 +255,9 @@ namespace CXXR
             return m_value;
         }
 
-        // Virtual function of RObject:
+        // Virtual functions of RObject:
+        unsigned int packGPBits() const override;
+        void unpackGPBits(unsigned int gpbits) override;
         const char *typeName() const override;
 
         // Virtual function of GCNode:
@@ -272,8 +274,6 @@ namespace CXXR
         static void set_printname(RObject *x, RObject *v);
         static void set_symvalue(RObject *x, RObject *val);
         static void set_internal(RObject *x, RObject *v);
-        static constexpr int SPECIAL_SYMBOL_MASK = (1 << 12);
-        static constexpr int BASE_SYM_CACHED_MASK = (1 << 13);
         static void set_base_sym_cached(RObject *x);
         static void unset_base_sym_cached(RObject *x);
         static unsigned int base_sym_cached(RObject *x);
@@ -296,6 +296,8 @@ namespace CXXR
         RObject *m_value;
         const BuiltInFunction *m_internalfunc;
         int m_dd_index : 31;
+        bool m_base_symbol;
+        bool m_special_symbol;
 
         // Special constructor for 'pseudo-objects':
         Symbol();
@@ -340,7 +342,7 @@ extern "C"
      */
     SEXP PRINTNAME(SEXP x);
 
-    /** @brief Symbol value.
+    /** @brief Symbol's value in the base environment.
      *
      * @param x Pointer to a CXXR::Symbol (checked).
      *
@@ -369,20 +371,23 @@ extern "C"
      */
     int DDVAL(SEXP x);
 
-    /**
-     * Set symbol's name.
-     * @param x Pointer to an \c Symbol.
-     * @param v Pointer to an \c RObject representing the new name.
+    /** @brief Set Symbol name.
+     *
+     * @param x Pointer to a CXXR::Symbol (checked).
+     *
+     * @param v Pointer to a CXXR::String representing \a x's name. 
      */
     void SET_PRINTNAME(SEXP x, SEXP v);
 
-    /** @brief Set symbol's value.
+    /** @brief Set symbol's value in the base environment.
      *
      * @param x Pointer to a CXXR::Symbol (checked).
      *
      * @param val Pointer to the RObject now to be considered as
      *            the value of this symbol.  A null pointer or
      *            R_UnboundValue are permissible values of \a val.
+     *
+     * @todo No binding to R_UnboundValue ought to be created.
      */
     void SET_SYMVALUE(SEXP x, SEXP v);
 

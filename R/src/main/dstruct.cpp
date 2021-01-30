@@ -88,7 +88,7 @@ HIDDEN SEXP R::mkPRIMSXP(int offset, bool eval)
 Closure::Closure(const PairList *formal_args, const RObject *body,
                  Environment *env)
     : FunctionBase(CLOSXP), m_formals(formal_args), m_body(body),
-      m_environment(env)
+      m_environment(env), m_no_jit(false), m_maybe_jit(false)
 {
     if (body)
     {

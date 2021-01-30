@@ -920,10 +920,8 @@ static SEXP findVarLocInFrame(SEXP rho, SEXP symbol, Rboolean *canCache)
 	       a user database, or maybe use an active binding
 	       mechanism to allow setting a new value to get back to
 	       the data base. */
-	    tmp = new PairList();
+	    tmp = new PairList(val, nullptr, symbol);
 	    tmp->expose();
-	    SETCAR(tmp, val);
-	    SET_TAG(tmp, symbol);
 	    /* If the database has a canCache method, then call that.
 	       Otherwise, we believe the setting for canCache. */
 	    if(canCache && table->canCache) {

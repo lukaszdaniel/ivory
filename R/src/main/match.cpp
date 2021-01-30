@@ -177,10 +177,6 @@ HIDDEN SEXP R::matchArgExact(SEXP tag, SEXP *list)
 /* Match the supplied arguments with the formals and */
 /* return the matched arguments in actuals. */
 
-const auto ARGUSED = LEVELS;
-const auto SET_ARGUSED = SETLEVELS;
-
-
 /* We need to leave 'supplied' unchanged in case we call UseMethod */
 /* MULTIPLE_MATCHES was added by RI in Jan 2005 but never activated:
    code in R-2-8-branch */

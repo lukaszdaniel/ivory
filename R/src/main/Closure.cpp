@@ -40,12 +40,34 @@ namespace CXXR
         const auto &BODYptr = BODY;
         const auto &CLOENVptr = CLOENV;
         const auto &FORMALSptr = FORMALS;
-        const auto &MISSINGptr = MISSING;
-        const auto &SET_MISSINGptr = SET_MISSING;
         const auto &RSTEPptr = RSTEP;
         const auto &SET_CLOENVptr = SET_CLOENV;
         const auto &SET_RSTEPptr = SET_RSTEP;
     } // namespace ForceNonInline
+
+    namespace
+    {
+        // Used in {,un}packGPBits():
+        constexpr unsigned int NOJIT_MASK = 1 << 5;
+        constexpr unsigned int MAYBEJIT_MASK = 1 << 6;
+    } // namespace
+
+    unsigned int Closure::packGPBits() const
+    {
+        unsigned int ans = RObject::packGPBits();
+        if (m_no_jit)
+            ans |= NOJIT_MASK;
+        if (m_maybe_jit)
+            ans |= MAYBEJIT_MASK;
+        return ans;
+    }
+
+    void Closure::unpackGPBits(unsigned int gpbits)
+    {
+        RObject::unpackGPBits(gpbits);
+        m_no_jit = ((gpbits & NOJIT_MASK) != 0);
+        m_maybe_jit = ((gpbits & MAYBEJIT_MASK) != 0);
+    }
 
     const char *Closure::typeName() const
     {
@@ -63,12 +85,6 @@ namespace CXXR
             m_environment->conductVisitor(v);
     }
 
-    /** @brief Access formal arguments of a CXXR::Closure.
-     *
-     * @param x Pointer to a CXXR::Closure object (checked).
-     *
-     * @return Pointer to the formal argument list of \a x.
-     */
     RObject *Closure::formals(RObject *x)
     {
         if (!x)
@@ -87,12 +103,6 @@ namespace CXXR
         return const_cast<PairList *>(clo->formalArgs());
     }
 
-    /** @brief Set the formal arguments of a CXXR::Closure.
-     *
-     * @param x Pointer to a CXXR::Closure object (checked).
-     *
-     * @param v Pointer to the formal argument list.
-     */
     void Closure::set_formals(RObject *x, RObject *v)
     {
         if (!x)
@@ -112,12 +122,6 @@ namespace CXXR
         clos->setFormalArgs(formal_args);
     }
 
-    /** @brief Access the body of a CXXR::Closure.
-     *
-     * @param x Pointer to a CXXR::Closure object (checked).
-     *
-     * @return Pointer to the body of \a x.
-     */
     RObject *Closure::body(RObject *x)
     {
         if (!x)
@@ -136,12 +140,6 @@ namespace CXXR
         return const_cast<RObject *>(clo->body());
     }
 
-    /** @brief Set the body of a CXXR::Closure.
-     *
-     * @param x Pointer to a CXXR::Closure object (checked).
-     *
-     * @param v Pointer to the body of this CXXR::Closure.
-     */
     void Closure::set_body(RObject *x, RObject *v)
     {
         if (!x)
@@ -161,12 +159,6 @@ namespace CXXR
         clos->setBody(body);
     }
 
-    /** @brief Access the environment of a CXXR::Closure.
-     *
-     * @param x Pointer to a CXXR::Closure object (checked).
-     *
-     * @return Pointer to the environment of x.
-     */
     RObject *Closure::cloenv(RObject *x)
     {
         if (!x)
@@ -185,14 +177,6 @@ namespace CXXR
         return clo->environment();
     }
 
-    /** @brief Replace the environment of a CXXR::Closure.
-     *
-     * @param x Pointer to a CXXR::Closure object (checked).
-     *
-     * @param v Pointer to the environment now to be
-     *          considered as the environment of this CXXR::Closure.  A
-     *          null pointer is not permissible (not checked).
-     */
     void Closure::set_cloenv(RObject *x, RObject *v)
     {
         if (!x)
@@ -212,7 +196,10 @@ namespace CXXR
         clos->setEnvironment(env);
     }
 
-    bool Closure::rstep(RObject *x) { return x && x->m_spare; }
+    bool Closure::rstep(RObject *x)
+    {
+        return x && x->m_spare;
+    }
 
     void Closure::set_rstep(RObject *x, bool v)
     {
@@ -220,10 +207,44 @@ namespace CXXR
             return;
         x->m_spare = v;
     }
-} // namespace CXXR
 
-extern "C"
-{
-    int MISSING(SEXP x);
-    void SET_MISSING(SEXP x, int v);
-}
+    /* JIT optimization support */
+
+    unsigned int Closure::nojit(RObject *x)
+    {
+        if (!x)
+            return 0;
+        return SEXP_downcast<Closure *>(x)->m_no_jit;
+    }
+
+    void Closure::set_nojit(RObject *x)
+    {
+        if (!x)
+            return;
+        x->m_gpbits |= NOJIT_MASK;
+        SEXP_downcast<Closure *>(x)->m_no_jit = true;
+    }
+
+    unsigned int Closure::maybejit(RObject *x)
+    {
+        if (!x)
+            return 0;
+        return SEXP_downcast<Closure *>(x)->m_maybe_jit;
+    }
+
+    void Closure::set_maybejit(RObject *x)
+    {
+        if (!x)
+            return;
+        x->m_gpbits |= MAYBEJIT_MASK;
+        SEXP_downcast<Closure *>(x)->m_maybe_jit = true;
+    }
+
+    void Closure::unset_maybejit(RObject *x)
+    {
+        if (!x)
+            return;
+        x->m_gpbits &= ~MAYBEJIT_MASK;
+        SEXP_downcast<Closure *>(x)->m_maybe_jit = false;
+    }
+} // namespace CXXR

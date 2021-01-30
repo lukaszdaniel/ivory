@@ -134,7 +134,7 @@ namespace CXXR
             return "char (uncached)";
         }
 
-        // Virtual functions of RObject:
+        // Virtual function of RObject:
         const char *typeName() const override;
 
     private:

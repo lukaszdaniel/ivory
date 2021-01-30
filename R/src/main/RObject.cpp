@@ -70,8 +70,43 @@ namespace CXXR
 
     RObject::RObject(const RObject &pattern)
         : m_type(pattern.m_type), m_scalar(pattern.m_scalar), m_has_class(pattern.m_has_class), m_alt(pattern.m_alt), m_gpbits(pattern.m_gpbits),
-          m_trace(pattern.m_trace), m_spare(pattern.m_spare), m_named(pattern.m_named), m_extra(pattern.m_extra), m_attrib(pattern.m_attrib)
+          m_trace(pattern.m_trace), m_spare(pattern.m_spare), m_named(pattern.m_named), m_extra(pattern.m_extra), m_s4_object(pattern.m_s4_object),
+          m_active_binding(pattern.m_active_binding),
+          m_binding_locked(pattern.m_binding_locked), m_assignment_pending(pattern.m_assignment_pending), m_attrib(pattern.m_attrib)
     {
+    }
+
+    namespace
+    {
+        // Used in {,un}packGPBits():
+        constexpr unsigned int S4_OBJECT_MASK = 1 << 4;
+        constexpr unsigned int BINDING_LOCK_MASK = 1 << 14;
+        constexpr unsigned int ACTIVE_BINDING_MASK = 1 << 15;
+        constexpr unsigned int ASSIGNMENT_PENDING_MASK = 1 << 11;
+        constexpr unsigned int SPECIAL_BINDING_MASK = (ACTIVE_BINDING_MASK | BINDING_LOCK_MASK);
+    } // namespace
+
+    unsigned int RObject::packGPBits() const
+    {
+        unsigned int ans = 0;
+        if (m_s4_object)
+            ans |= S4_OBJECT_MASK;
+        if (m_binding_locked)
+            ans |= BINDING_LOCK_MASK;
+        if (m_active_binding)
+            ans |= ACTIVE_BINDING_MASK;
+        if (m_assignment_pending)
+            ans |= ASSIGNMENT_PENDING_MASK;
+        return ans;
+    }
+
+    void RObject::unpackGPBits(unsigned int gpbits)
+    {
+        // Be careful with precedence!
+        setS4Object((gpbits & S4_OBJECT_MASK) != 0);
+        m_binding_locked = ((gpbits & BINDING_LOCK_MASK) != 0);
+        m_active_binding = ((gpbits & ACTIVE_BINDING_MASK) != 0);
+        m_assignment_pending = ((gpbits & ASSIGNMENT_PENDING_MASK) != 0);
     }
 
     void RObject::setS4Object(bool on)
@@ -79,9 +114,15 @@ namespace CXXR
         // if (!on && sexptype() == S4SXP)
         //     Rf_error("CXXR: S4 object (S4SXP) cannot cease to be an S4 object.");
         if (on)
+        {
             m_gpbits |= S4_OBJECT_MASK;
+            m_s4_object = true;
+        }
         else
+        {
             m_gpbits &= ~S4_OBJECT_MASK;
+            m_s4_object = false;
+        }
     }
 
     const char *RObject::typeName() const
@@ -181,12 +222,6 @@ namespace CXXR
         }
     }
 
-    /**
-     * Replace x's attributes by \a v.
-     * @param x Pointer to \c RObject.
-     * @param v Pointer to attributes \c RObject.
-     * @todo Could \a v be \c const ?
-     */
     void RObject::set_attrib(RObject *x, RObject *v)
     {
         if (!x)
@@ -195,28 +230,16 @@ namespace CXXR
         x->setAttributes(pl);
     }
 
-    /**
-     * Return the attributes of an \c RObject.
-     * @param x Pointer to the \c RObject whose attributes are required.
-     * @return Pointer to the attributes object of \a x , or 0 if \a x is
-     * a null pointer.
-     */
-    RObject *RObject::attrib(RObject *x) { return x ? x->m_attrib : nullptr; }
+    RObject *RObject::attrib(RObject *x)
+    {
+        return x ? x->m_attrib : nullptr;
+    }
 
-    /**
-     * Object copying status.
-     * @param x Pointer to \c RObject.
-     * @return Refer to 'R Internals' document.  Returns 0 if \a x is a
-     * null pointer.
-     */
-    unsigned int RObject::named(RObject *x) { return x ? x->m_named : 0; }
+    unsigned int RObject::named(RObject *x)
+    {
+        return x ? x->m_named : 0;
+    }
 
-    /**
-     * Set object copying status.  Does nothing if \a x is a null pointer.
-     * @param x Pointer to \c RObject.
-     * @param v Refer to 'R Internals' document.
-     * @deprecated Ought to be private.
-     */
     void RObject::set_named(RObject *x, unsigned int v)
     {
         if (!x)
@@ -234,24 +257,27 @@ namespace CXXR
         x->m_type = v;
     }
 
-    /**
-     * Object type.
+    /** @brief Object type.
+     *
      * @param x Pointer to \c RObject.
      * @return \c SEXPTYPE of \a x, or NILSXP if x is a null pointer.
      */
-    SEXPTYPE RObject::typeof_(const RObject *x) { return x ? x->m_type : NILSXP; }
+    SEXPTYPE RObject::typeof_(const RObject *x)
+    {
+        return x ? x->m_type : NILSXP;
+    }
 
     /**
      * @deprecated
      */
-    unsigned int RObject::levels(RObject *x) { return x ? x->m_gpbits : 0; }
+    unsigned int RObject::levels(RObject *x)
+    {
+        if (!x)
+            return 0;
 
-    /**
-     * Does \c RObject have a class attribute?.
-     * @param x Pointer to an \c RObject.
-     * @return true iff \a x has a class attribute.  Returns false if \a x
-     * is 0.
-     */
+        return x->packGPBits();
+    }
+
     bool RObject::object(RObject *x)
     {
         return x && x->hasClass();
@@ -268,7 +294,10 @@ namespace CXXR
         // x->m_has_class = v;
     }
 
-    bool RObject::altrep(RObject *x) { return x && x->m_alt; }
+    bool RObject::altrep(RObject *x)
+    {
+        return x && x->m_alt;
+    }
 
     void RObject::set_altrep(RObject *x, bool v)
     {
@@ -284,10 +313,14 @@ namespace CXXR
     {
         if (!x)
             return;
-        x->m_gpbits = (unsigned short)v;
+        x->unpackGPBits(v);
+        x->m_gpbits = v;
     }
 
-    bool RObject::scalar(RObject *x) { return x && x->m_scalar; }
+    bool RObject::scalar(RObject *x)
+    {
+        return x && x->m_scalar;
+    }
 
     void RObject::setscalar(RObject *x, bool v)
     {
@@ -296,9 +329,15 @@ namespace CXXR
         x->m_scalar = v;
     }
 
-    bool RObject::is_scalar(RObject *x, SEXPTYPE t) { return x && (x->m_type == t) && x->m_scalar; }
+    bool RObject::is_scalar(RObject *x, SEXPTYPE t)
+    {
+        return x && (x->m_type == t) && x->m_scalar;
+    }
 
-    unsigned int RObject::refcnt(RObject *x) { return x ? x->m_named : 0; }
+    unsigned int RObject::refcnt(RObject *x)
+    {
+        return x ? x->m_named : 0;
+    }
 
     void RObject::set_refcnt(RObject *x, unsigned int v)
     {
@@ -307,7 +346,10 @@ namespace CXXR
         x->m_named = v;
     }
 
-    bool RObject::trackrefs(RObject *x) { return x && (typeof_(x) == CLOSXP ? TRUE : !x->m_spare); }
+    bool RObject::trackrefs(RObject *x)
+    {
+        return x && (typeof_(x) == CLOSXP ? TRUE : !x->m_spare);
+    }
 
     void RObject::set_trackrefs(RObject *x, bool v)
     {
@@ -316,29 +358,30 @@ namespace CXXR
         x->m_spare = v;
     }
 
-    unsigned int RObject::assignment_pending(RObject *x) { return x ? (x->m_gpbits & ASSIGNMENT_PENDING_MASK) : 0; }
+    unsigned int RObject::assignment_pending(RObject *x)
+    {
+        return x && x->m_assignment_pending;
+    }
 
     void RObject::set_assignment_pending(RObject *x, bool v)
     {
         if (!x)
             return;
         if (v)
-            (((x)->m_gpbits) |= ASSIGNMENT_PENDING_MASK);
+        {
+            (x->m_gpbits |= ASSIGNMENT_PENDING_MASK);
+        }
         else
-            (((x)->m_gpbits) &= ~ASSIGNMENT_PENDING_MASK);
+        {
+            (x->m_gpbits &= ~ASSIGNMENT_PENDING_MASK);
+        }
+        x->m_assignment_pending = v;
     }
 
-    unsigned int RObject::missing(RObject *x) { return x ? (x->m_gpbits & MISSING_MASK) : 0; } /* for closure calls */
-
-    void RObject::set_missing(RObject *x, int v)
+    unsigned int RObject::bndcell_tag(const RObject *e)
     {
-        if (!x)
-            return;
-        int __other_flags__ = x->m_gpbits & ~MISSING_MASK;
-        x->m_gpbits = __other_flags__ | v;
+        return e ? e->m_extra : 0;
     }
-
-    unsigned int RObject::bndcell_tag(const RObject *e) { return e ? e->m_extra : 0; }
 
     void RObject::set_bndcell_tag(RObject *e, unsigned int v)
     {
@@ -354,7 +397,10 @@ namespace CXXR
      * is 0.
      * @note S4 object bit, set by R_do_new_object for all new() calls
      */
-    bool RObject::is_s4_object(RObject *x) { return x && (x->m_gpbits & S4_OBJECT_MASK); }
+    bool RObject::is_s4_object(RObject *x)
+    {
+        return x && x->m_s4_object;
+    }
 
     /**
      * @deprecated Ought to be private.
@@ -376,46 +422,19 @@ namespace CXXR
         x->setS4Object(false);
     }
 
-    /* JIT optimization support */
-
-    unsigned int RObject::nojit(RObject *x) { return x ? (x->m_gpbits & NOJIT_MASK) : 0; }
-
-    void RObject::set_nojit(RObject *x)
+    unsigned int RObject::is_active_binding(RObject *x)
     {
         if (!x)
-            return;
-        x->m_gpbits |= NOJIT_MASK;
+            return 0;
+        return x->m_active_binding;
     }
 
-    unsigned int RObject::maybejit(RObject *x) { return x ? (x->m_gpbits & MAYBEJIT_MASK) : 0; }
-
-    void RObject::set_maybejit(RObject *x)
+    unsigned int RObject::binding_is_locked(RObject *x)
     {
         if (!x)
-            return;
-        x->m_gpbits |= MAYBEJIT_MASK;
+            return 0;
+        return x->m_binding_locked;
     }
-
-    void RObject::unset_maybejit(RObject *x)
-    {
-        if (!x)
-            return;
-        x->m_gpbits &= ~MAYBEJIT_MASK;
-    }
-
-    /* Growable vector support */
-    unsigned int RObject::growable_bit_set(RObject *x) { return x ? (x->m_gpbits & GROWABLE_MASK) : 0; }
-
-    void RObject::set_growable_bit(RObject *x)
-    {
-        if (!x)
-            return;
-        x->m_gpbits |= GROWABLE_MASK;
-    }
-
-    unsigned int RObject::is_active_binding(RObject *x) { return x ? (x->m_gpbits & ACTIVE_BINDING_MASK) : 0; }
-
-    unsigned int RObject::binding_is_locked(RObject *x) { return x ? (x->m_gpbits & BINDING_LOCK_MASK) : 0; }
 
     void RObject::lock_binding(RObject *x)
     {
@@ -426,7 +445,8 @@ namespace CXXR
             else
                 MARK_NOT_MUTABLE(ConsCell::car0(x));
         }
-        ((x))->m_gpbits |= BINDING_LOCK_MASK;
+        x->m_gpbits |= BINDING_LOCK_MASK;
+        x->m_binding_locked = true;
     }
 
     void RObject::unlock_binding(RObject *x)
@@ -434,6 +454,7 @@ namespace CXXR
         if (!x)
             return;
         x->m_gpbits &= (~BINDING_LOCK_MASK);
+        x->m_binding_locked = false;
     }
 
     void RObject::set_active_binding_bit(RObject *x)
@@ -441,5 +462,6 @@ namespace CXXR
         if (!x)
             return;
         x->m_gpbits |= ACTIVE_BINDING_MASK;
+        x->m_active_binding = true;
     }
 } // namespace CXXR

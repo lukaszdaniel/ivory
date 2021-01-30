@@ -65,7 +65,7 @@ namespace CXXR
          * @param tg Pointer to the 'tag' of the element to be constructed.
          */
         explicit PairList(RObject *cr = nullptr, PairList *tl = nullptr, RObject *tg = nullptr)
-            : ConsCell(LISTSXP, cr, tl, tg)
+            : ConsCell(LISTSXP, cr, tl, tg), m_argused(0)
         {
         }
 
@@ -100,14 +100,14 @@ namespace CXXR
         }
 
         /** @brief Create a PairList of a specified length.
-	 *
-	 * This constructor creates a chain of PairList nodes with a
-	 * specified number of elements.  On creation, each element
-	 * has null 'car' and 'tag'.
-	 *
-	 * @param sz Number of elements required in the list.  If
-	 *           zero, the function returns a null pointer.
-	 */
+         *
+         * This constructor creates a chain of PairList nodes with a
+         * specified number of elements.  On creation, each element
+         * has null 'car' and 'tag'.
+         *
+         * @param sz Number of elements required in the list.  If
+         *           zero, the function returns a null pointer.
+         */
         static PairList *makeList(size_t sz);
 
         /** @brief The name by which this type is known in R.
@@ -136,6 +136,12 @@ namespace CXXR
         // compiler-generated versions:
         PairList(const PairList &);
         PairList &operator=(const PairList &);
+
+    public:
+        // 'Scratchpad' field used in handling argument lists,
+        // formerly hosted in the 'gp' field of sxpinfo_struct.  It
+        // would be good to remove this from the class altogether.
+        unsigned char m_argused;
     };
 
     inline void ConsCell::setTail(PairList *tl)
@@ -149,6 +155,21 @@ namespace CXXR
     {
         return PairList::construct<T>(car, SEXP_downcast<PairList *>(cdr));
     }
+
+    // Used in matching formal and actual arguments (within match.cpp
+    // and unique.cpp).
+    inline unsigned char ARGUSED(SEXP x)
+    {
+        return SEXP_downcast<PairList *>(x)->m_argused;
+    }
+
+    // Used in matching formal and actual arguments (within match.cpp
+    // and unique.cpp).
+    inline void SET_ARGUSED(SEXP x, unsigned char v)
+    {
+        SEXP_downcast<PairList *>(x)->m_argused = v;
+    }
+
 } // namespace CXXR
 
 extern "C"

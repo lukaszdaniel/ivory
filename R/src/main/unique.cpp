@@ -40,8 +40,6 @@ using namespace R;
 using namespace CXXR;
 
 static constexpr int NIL = -1;
-const auto ARGUSED = LEVELS;
-const auto SET_ARGUSED = SETLEVELS;
 /* interval at which to check interrupts */
 //constexpr R_xlen_t NINTERRUPT = 1000000;
 

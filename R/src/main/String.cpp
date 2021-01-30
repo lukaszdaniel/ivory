@@ -47,11 +47,41 @@ namespace CXXR
         const auto &mkCharLenptr = Rf_mkCharLen;
     } // namespace ForceNonInline
 
-    GCRoot<const String> String::s_na(UncachedString::obtain("NA"), true);
-    GCRoot<const String> String::s_blank(CachedString::obtain(""), true);
+    namespace
+    {
+        // Used in GPBits2Encoding() and packGPBits():
+        constexpr unsigned int BYTES_MASK = 1 << 1;
+        constexpr unsigned int LATIN1_MASK = 1 << 2;
+        constexpr unsigned int UTF8_MASK = 1 << 3;
+        constexpr unsigned int ASCII_MASK = 1 << 6;
+        constexpr unsigned int CACHED_MASK = 1 << 5;
+    } // namespace
 
-    // String::Comparator::operator()(const String&, const String&) is in
-    // sort.cpp
+    unsigned int String::packGPBits() const
+    {
+        unsigned int ans = VectorBase::packGPBits();
+        switch (m_encoding)
+        {
+        case CE_UTF8:
+            ans |= UTF8_MASK;
+            break;
+        case CE_LATIN1:
+            ans |= LATIN1_MASK;
+            break;
+        case CE_BYTES:
+            ans |= BYTES_MASK;
+            break;
+        default:
+            break;
+        }
+        if (m_cached)
+            ans |= CACHED_MASK;
+        if (m_ascii)
+            ans |= ASCII_MASK;
+        // if (m_hash != -1)
+        //     ans |= HASHASH_MASK;
+        return ans;
+    }
 
     cetype_t String::GPBits2Encoding(unsigned int gpbits)
     {
@@ -63,6 +93,12 @@ namespace CXXR
             return CE_BYTES;
         return CE_NATIVE;
     }
+
+    GCRoot<const String> String::s_na(UncachedString::obtain("NA"), true);
+    GCRoot<const String> String::s_blank(CachedString::obtain(""), true);
+
+    // String::Comparator::operator()(const String&, const String&) is in
+    // sort.cpp
 
     void String::initialize()
     {
@@ -86,52 +122,77 @@ namespace CXXR
     }
 
     /* Hashing Methods */
-    unsigned int String::hashash(RObject *x) { return x ? SEXP_downcast<String *>(x, false)->m_hash != -1 : 0; }
+    unsigned int String::hashash(RObject *x)
+    {
+        return x ? SEXP_downcast<String *>(x, false)->m_hash != -1 : 0;
+    }
 
-    unsigned int String::is_bytes(RObject *x) { return x ? (x->m_gpbits & BYTES_MASK) : 0; }
+    unsigned int String::is_bytes(RObject *x)
+    {
+        if (!x)
+            return false;
+        const String *str = SEXP_downcast<const String *>(x);
+        return str->encoding() == CE_BYTES;
+    }
 
     void String::set_bytes(RObject *x)
     {
-        if (!x)
-            return;
-        x->m_gpbits |= BYTES_MASK;
     }
 
-    unsigned int String::is_latin1(RObject *x) { return x ? (x->m_gpbits & LATIN1_MASK) : 0; }
+    unsigned int String::is_latin1(RObject *x)
+    {
+        if (!x)
+            return false;
+        const String *str = SEXP_downcast<const String *>(x);
+        return str->encoding() == CE_LATIN1;
+    }
 
     void String::set_latin1(RObject *x)
     {
-        if (!x)
-            return;
-        x->m_gpbits |= LATIN1_MASK;
     }
 
-    unsigned int String::is_ascii(RObject *x) { return x ? (x->m_gpbits & ASCII_MASK) : 0; }
+    unsigned int String::is_ascii(RObject *x)
+    {
+        if (!x)
+            return false;
+        const String *str = SEXP_downcast<const String *>(x);
+        return str->encoding() == CE_NATIVE;
+    }
 
     void String::set_ascii(RObject *x)
     {
-        if (!x)
-            return;
-        x->m_gpbits |= ASCII_MASK;
     }
 
-    unsigned int String::is_utf8(RObject *x) { return x ? (x->m_gpbits & UTF8_MASK) : 0; }
+    unsigned int String::is_utf8(RObject *x)
+    {
+        if (!x)
+            return false;
+        const String *str = SEXP_downcast<const String *>(x);
+        return str->encoding() == CE_UTF8;
+    }
 
     void String::set_utf8(RObject *x)
     {
-        if (!x)
-            return;
-        x->m_gpbits |= UTF8_MASK;
     }
 
-    unsigned int String::enc_known(RObject *x) { return x ? (x->m_gpbits & (LATIN1_MASK | UTF8_MASK)) : 0; }
+    unsigned int String::enc_known(RObject *x)
+    {
+        if (!x)
+            return false;
+        // const String *str = SEXP_downcast<const String *>(x);
+        // cetype_t enc = str->encoding();
+        // return enc == CE_LATIN1 || enc == CE_UTF8;
+        return (x->packGPBits() & (LATIN1_MASK | UTF8_MASK));
+    }
 
     void String::set_cached(RObject *x)
     {
-        if (!x)
-            return;
         x->m_gpbits |= CACHED_MASK;
+        SEXP_downcast<String *>(x)->m_cached = true;
     }
 
-    unsigned int String::is_cached(RObject *x) { return x ? (x->m_gpbits & CACHED_MASK) : 0; }
+    unsigned int String::is_cached(RObject *x)
+    {
+        return x && SEXP_downcast<String *>(x)->m_cached;
+    }
 } // namespace CXXR

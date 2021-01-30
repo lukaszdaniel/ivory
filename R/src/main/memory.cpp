@@ -615,7 +615,6 @@ namespace
     {
         if (node)
         {
-            node->expose();
             node->conductVisitor(marker);
         }
     }
@@ -1824,15 +1823,15 @@ void SET_S4_OBJECT(SEXP x){ CXXR::RObject::set_s4_object(CHK(x)); }
 void UNSET_S4_OBJECT(SEXP x){ CXXR::RObject::unset_s4_object(CHK(x)); }
 
 /* JIT optimization support */
-int NOJIT(SEXP x) { return CXXR::RObject::nojit(CHK(x)); }
-int MAYBEJIT(SEXP x) { return CXXR::RObject::maybejit(CHK(x)); }
-void SET_NOJIT(SEXP x) { CXXR::RObject::set_nojit(CHK(x)); }
-void SET_MAYBEJIT(SEXP x) { CXXR::RObject::set_maybejit(CHK(x)); }
-void UNSET_MAYBEJIT(SEXP x) { CXXR::RObject::unset_maybejit(CHK(x)); }
+int NOJIT(SEXP x) { return CXXR::Closure::nojit(CHK(x)); }
+int MAYBEJIT(SEXP x) { return CXXR::Closure::maybejit(CHK(x)); }
+void SET_NOJIT(SEXP x) { CXXR::Closure::set_nojit(CHK(x)); }
+void SET_MAYBEJIT(SEXP x) { CXXR::Closure::set_maybejit(CHK(x)); }
+void UNSET_MAYBEJIT(SEXP x) { CXXR::Closure::unset_maybejit(CHK(x)); }
 
 /* Growable vector support */
-int IS_GROWABLE(SEXP x) { return CXXR::RObject::growable_bit_set(CHK(x)) && XLENGTH(CHK(x)) < XTRUELENGTH(CHK(x)); }
-void SET_GROWABLE_BIT(SEXP x) { CXXR::RObject::set_growable_bit(CHK(x)); }
+int IS_GROWABLE(SEXP x) { return CXXR::VectorBase::growable_bit_set(CHK(x)) && XLENGTH(CHK(x)) < XTRUELENGTH(CHK(x)); }
+void SET_GROWABLE_BIT(SEXP x) { CXXR::VectorBase::set_growable_bit(CHK(x)); }
 
 static constexpr int nvec[32] = {
     1, 1, 1, 1, 1, 1, 1, 1,
@@ -2283,7 +2282,7 @@ SEXP CADDDR(SEXP e) { return CHK(CAR(CDR(CDR(CDR(CHKCONS(e)))))); }
 SEXP CAD3R(SEXP e) { return CHK(CAR(CDR(CDR(CDR(CHKCONS(e)))))); }
 SEXP CAD4R(SEXP e) { return CHK(CAR(CDR(CDR(CDR(CDR(CHKCONS(e))))))); }
 SEXP CAD5R(SEXP e) { return CHK(CAR(CDR(CDR(CDR(CDR(CDR(CHKCONS(e)))))))); }
-int MISSING(SEXP x) { return CXXR::RObject::missing(CHKCONS(x)); }
+int MISSING(SEXP x) { return CXXR::ConsCell::missing(CHKCONS(x)); }
 
 void SET_TAG(SEXP x, SEXP v)
 {
@@ -2393,7 +2392,7 @@ void *EXTPTR_PTR(SEXP x)
     return ep->ptr();
 }
 
-void SET_MISSING(SEXP x, int v) { CXXR::RObject::set_missing(CHKCONS(x), v); }
+void SET_MISSING(SEXP x, int v) { CXXR::ConsCell::set_missing(CHKCONS(x), v); }
 
 /* Closure Accessors */
 SEXP FORMALS(SEXP x) { return CHK(CXXR::Closure::formals(CHK(x))); }

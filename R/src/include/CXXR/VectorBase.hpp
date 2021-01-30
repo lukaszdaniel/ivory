@@ -50,7 +50,7 @@ namespace CXXR
      * @param sz The required number of elements in the vector.
      */
     VectorBase(SEXPTYPE stype, R_xlen_t sz)
-        : RObject(stype), m_size(sz), m_truelength(0)
+        : RObject(stype), m_size(sz), m_truelength(0), m_growable(false)
     {
       if (sz > R_XLEN_T_MAX)
         Rf_error(_("vector is too large")); /**** put length into message */
@@ -59,6 +59,7 @@ namespace CXXR
     }
 
     /** @brief Alter the size (number of elements) in the vector.
+     *
      * @param new_size New size required.  Zero is permissible,
      *          but (as presently implemented) the new size must
      *          not be greater than the current size. 
@@ -79,6 +80,16 @@ namespace CXXR
       return m_truelength;
     }
 
+    bool growable() const
+    {
+      return m_growable;
+    }
+
+    void setGrowable(bool on)
+    {
+      m_growable = on;
+    }
+
     /** @brief The name by which this type is known in R.
      *
      * @return the name by which this type is known in R.
@@ -96,12 +107,21 @@ namespace CXXR
     virtual void *data() = 0;
     virtual const void *data() const = 0;
 
+    // Virtual functions of RObject:
+    unsigned int packGPBits() const override;
+    void unpackGPBits(unsigned int gpbits) override;
+
+    /* Growable vector support */
+    static unsigned int growable_bit_set(RObject *x);
+    static void set_growable_bit(RObject *x);
+
   protected:
     ~VectorBase() {}
 
   private:
     R_xlen_t m_size;
     R_xlen_t m_truelength;
+    bool m_growable;
 
   public:
     static inline R_xlen_t stdvec_length(RObject *x)

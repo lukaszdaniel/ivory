@@ -31,6 +31,10 @@
 
 #include <CXXR/GCRoot.hpp>
 #include <CXXR/JMPException.hpp>
+#include <CXXR/RObject.hpp>
+#include <CXXR/String.hpp>
+#include <CXXR/Environment.hpp>
+#include <CXXR/ListVector.hpp>
 #include <Localization.h>
 #include <RContext.h>
 #include <Defn.h>
@@ -46,6 +50,7 @@
 
 using namespace std;
 using namespace R;
+using namespace CXXR;
 
 /* eval() sets R_Visible = true. Thas may not be wanted when eval() is
    used in C code. This is a version that saves/restores R_Visible.
@@ -1609,32 +1614,94 @@ static const char *R_ConciseTraceback(SEXP call, int skip)
     return buf;
 }
 
+namespace
+{
+	struct HandlerEntry : RObject
+	{
+		String *m_class;
+		Environment *m_parent_environment;
+		RObject *m_handler;
+		Environment *m_environment;
+		ListVector *m_result;
+		bool m_calling;
 
+		static const char *staticTypeName()
+		{
+			return "(error handler entry)";
+		}
+
+		// Virtual function of GCNode:
+		void visitChildren(const_visitor *v) const;
+	};
+
+	void HandlerEntry::visitChildren(const_visitor *v) const
+	{
+		RObject::visitChildren(v);
+		if (m_class)
+			m_class->conductVisitor(v);
+		if (m_parent_environment)
+			m_parent_environment->conductVisitor(v);
+		if (m_handler)
+			m_handler->conductVisitor(v);
+		if (m_environment)
+			m_environment->conductVisitor(v);
+		if (m_result)
+			m_result->conductVisitor(v);
+	}
+} // namespace
 
 static SEXP mkHandlerEntry(SEXP klass, SEXP parentenv, SEXP handler, SEXP rho,
-			   SEXP result, int calling)
+						   SEXP result, int calling)
 {
-    SEXP entry = allocVector(VECSXP, 5);
-    SET_VECTOR_ELT(entry, 0, klass);
-    SET_VECTOR_ELT(entry, 1, parentenv);
-    SET_VECTOR_ELT(entry, 2, handler);
-    SET_VECTOR_ELT(entry, 3, rho);
-    SET_VECTOR_ELT(entry, 4, result);
-    SETLEVELS(entry, calling);
-    return entry;
+	HandlerEntry *entry = new HandlerEntry();
+	entry->m_class = SEXP_downcast<String *>(klass);
+	entry->m_parent_environment = SEXP_downcast<Environment *>(parentenv);
+	entry->m_handler = handler;
+	entry->m_environment = SEXP_downcast<Environment *>(rho);
+	entry->m_result = SEXP_downcast<ListVector *>(result);
+	entry->m_calling = (calling != 0);
+	entry->expose();
+	return entry;
 }
 
 namespace
 {
 	/**** rename these??*/
-	inline int IS_CALLING_ENTRY(SEXP e) { return LEVELS(e); }
-	inline SEXP ENTRY_CLASS(SEXP e) { return VECTOR_ELT(e, 0); }
-	// inline SEXP ENTRY_CALLING_ENVIR(SEXP e) { return VECTOR_ELT(e, 1); }
-	inline SEXP ENTRY_HANDLER(SEXP e) { return VECTOR_ELT(e, 2); }
-	inline SEXP ENTRY_TARGET_ENVIR(SEXP e) { return VECTOR_ELT(e, 3); }
-	inline SEXP ENTRY_RETURN_RESULT(SEXP e) { return VECTOR_ELT(e, 4); }
-	inline void CLEAR_ENTRY_CALLING_ENVIR(SEXP e) { SET_VECTOR_ELT(e, 1, R_NilValue); }
-	inline void CLEAR_ENTRY_TARGET_ENVIR(SEXP e) { SET_VECTOR_ELT(e, 3, R_NilValue); }
+	bool IS_CALLING_ENTRY(SEXP e)
+	{
+		return SEXP_downcast<HandlerEntry *>(e)->m_calling;
+	}
+
+	String *ENTRY_CLASS(SEXP e)
+	{
+		return SEXP_downcast<HandlerEntry *>(e)->m_class;
+	}
+	// Environment *ENTRY_CALLING_ENVIR(SEXP e)
+	// {
+	// 	return SEXP_downcast<HandlerEntry *>(e)->m_parent_environment;
+	// }
+	RObject *ENTRY_HANDLER(SEXP e)
+	{
+		return SEXP_downcast<HandlerEntry *>(e)->m_handler;
+	}
+
+	Environment *ENTRY_TARGET_ENVIR(SEXP e)
+	{
+		return SEXP_downcast<HandlerEntry *>(e)->m_environment;
+	}
+
+	ListVector *ENTRY_RETURN_RESULT(SEXP e)
+	{
+		return SEXP_downcast<HandlerEntry *>(e)->m_result;
+	}
+	void CLEAR_ENTRY_CALLING_ENVIR(SEXP e)
+	{
+		SEXP_downcast<HandlerEntry *>(e)->m_parent_environment = nullptr;
+	}
+	void CLEAR_ENTRY_TARGET_ENVIR(SEXP e)
+	{
+		SEXP_downcast<HandlerEntry *>(e)->m_environment = nullptr;
+	}
 } // namespace
 
 HIDDEN SEXP R_UnwindHandlerStack(SEXP target)

@@ -55,9 +55,8 @@ namespace CXXR
        * @param body Pointer to the body of the Closure.  This must
        *          be either a null pointer or a pointer to an object
        *          of one of the following types: PairList,
-       *          Expression, Symbol (including SpecialSymbol),
-       *          ExpressionVector, ListVector or ByteCode
-       *          (checked).
+       *          Expression, Symbol, ExpressionVector, ListVector
+       *          or ByteCode (checked).
        *
        * @param env pointer to the environment in which the Closure
        *          is to be evaluated.
@@ -125,7 +124,9 @@ namespace CXXR
          return "closure";
       }
 
-      // Virtual function of RObject:
+      // Virtual functions of RObject:
+      unsigned int packGPBits() const override;
+      void unpackGPBits(unsigned int gpbits) override;
       const char *typeName() const override;
 
       // Virtual function of GCNode:
@@ -140,11 +141,19 @@ namespace CXXR
       static void set_cloenv(RObject *x, RObject *v);
       static bool rstep(RObject *x);
       static void set_rstep(RObject *x, bool v);
+      /* JIT optimization support */
+      static unsigned int nojit(RObject *x);
+      static void set_nojit(RObject *x);
+      static unsigned int maybejit(RObject *x);
+      static void set_maybejit(RObject *x);
+      static void unset_maybejit(RObject *x);
 
    private:
       const PairList *m_formals;
       const RObject *m_body;
       Environment *m_environment;
+      bool m_no_jit;
+      bool m_maybe_jit;
 
       // Declared private to ensure that Environment objects are
       // created only using 'new':
@@ -203,17 +212,19 @@ extern "C"
     */
    SEXP FORMALS(SEXP x);
 
-   /**
-    * Set the formals of a CXXR::Closure object.
-    * @param x Pointer a CXXR::Closure object.
-    * @return Pointer to the new formals list of x.
+   /** @brief Set the formal arguments of a CXXR::Closure.
+    *
+    * @param x Pointer to a CXXR::Closure object (checked).
+    *
+    * @param v Pointer to the formal argument list.
     */
    void SET_FORMALS(SEXP x, SEXP v);
 
-   /**
-    * Set the body of a CXXR::Closure object.
-    * @param x Pointer a CXXR::Closure object.
-    * @return Pointer to the new body of x.
+   /** @brief Set the body of a CXXR::Closure.
+    *
+    * @param x Pointer to a CXXR::Closure object (checked).
+    *
+    * @param v Pointer to the body of this CXXR::Closure.
     */
    void SET_BODY(SEXP x, SEXP v);
 

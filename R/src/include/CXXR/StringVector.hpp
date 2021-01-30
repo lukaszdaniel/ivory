@@ -56,7 +56,6 @@ namespace CXXR
     }
 
     /** @brief Vector of strings.
-     * @todo Replace the type parameter RObject* with something stricter.
      */
     class StringVector : public CXXR::RObjectVector<String, STRSXP>
     {
@@ -126,8 +125,10 @@ extern "C"
     /**
      * @param x Pointer to a CXXR::StringVector; an error is raised if \a x
      *          is not a pointer to a CXXR::StringVector.
+     *
      * @return Pointer to the start of \a x 's data, interpreted (riskily)
      *         as an array of CXXR::String*.
+     *
      * @deprecated This function puts the integrity of the write barrier
      * at the mercy of callers.  It is deliberately not made visible
      * to C code.

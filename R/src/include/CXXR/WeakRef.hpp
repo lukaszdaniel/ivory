@@ -159,6 +159,10 @@ namespace CXXR
 		static void runWeakRefFinalizer(RObject *x);
 		static void runPendingFinalizers();
 
+		// Virtual functions of RObject:
+		unsigned int packGPBits() const override;
+		void unpackGPBits(unsigned int gpbits) override;
+
 	private:
 		typedef std::list<WeakRef *, Allocator<WeakRef *>> WRList;
 		static WRList *getLive();

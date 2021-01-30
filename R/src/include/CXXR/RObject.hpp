@@ -40,6 +40,7 @@
 
 #include <cstddef>
 #include <cstring>
+#include <bitset>
 #include <CXXR/SEXPTYPE.hpp>
 #include <CXXR/RTypes.hpp>
 #include <CXXR/GCNode.hpp>
@@ -229,7 +230,8 @@ namespace CXXR
      * garbage collection has been factored out into the base class
      * GCNode, and as CXXR development proceeds other functionality
      * will be factored out into derived classes (corresponding
-     * roughly, but not exactly, to different SEXPTYPEs within CR).
+     * roughly, but not exactly, to different SEXPTYPEs within CR), or
+     * outside the RObject hierarchy altogether.
      *
      * Eventually this class may end up simply as the home of R
      * attributes.
@@ -291,6 +293,22 @@ namespace CXXR
     private:
         unsigned int m_named : NAMED_BITS;
         unsigned int m_extra : 29 - NAMED_BITS; /* used for immediate bindings */
+        bool m_s4_object;
+
+        // public:
+        // The following obsolescent fields squeezed
+        // in here are used only in connection with objects of class
+        // PairList (and only rarely then), so they would more
+        // logically be placed in that class (and formerly were within
+        // rho).
+
+        // Used when the contents of an Environment are represented as
+        // a PairList, for example during serialization and
+        // deserialization, and formerly hosted in the gp field of
+        // sxpinfo_struct.
+        bool m_active_binding : 1;
+        bool m_binding_locked : 1;
+        bool m_assignment_pending : 1;
         PairList *m_attrib;
 
     public:
@@ -298,7 +316,8 @@ namespace CXXR
          * @param stype Required type of the RObject.
          */
         explicit RObject(SEXPTYPE stype = CXXSXP) : m_type(stype), m_scalar(false), m_has_class(false), m_alt(false), m_gpbits(0),
-                                                    m_trace(false), m_spare(false), m_named(0), m_extra(0), m_attrib(nullptr)
+                                                    m_trace(false), m_spare(false), m_named(0), m_extra(0), m_s4_object(false),
+                                                    m_active_binding(false), m_binding_locked(false), m_assignment_pending(false), m_attrib(nullptr)
         {
 #ifdef COMPUTE_REFCNT_VALUES
             SET_REFCNT(this, 0);
@@ -376,6 +395,40 @@ namespace CXXR
             return m_has_class;
         }
 
+        /** @brief Reproduce the \c gp (General Purpose) bits field used in CR.
+         *
+         * This function is used to reproduce the
+         * <tt>sxpinfo_struct.gp</tt> field used in CR.  It should be
+         * used exclusively for serialization.  Refer to the 'R
+         * Internals' document for details of this field.
+         *
+         * @return the reconstructed \c gp bits field (within the
+         * least significant 16 bits).
+         *
+         * @note If this function is overridden in a derived class,
+         * the overriding function should call packGPBits() for its
+         * immediate base class, and then 'or' further bits into the
+         * result.
+         */
+        virtual unsigned int packGPBits() const;
+
+        /** @brief Interpret the \c gp bits field used in CR.
+         *
+         * This function is used to interpret the
+         * <tt>sxpinfo_struct.gp</tt> field used in CR in a way
+         * appropriate to a particular node class.  It should be
+         * used exclusively for deserialization.  Refer to the 'R
+         * Internals' document for details of this field.
+         *
+         * @param gpbits the \c gp bits field (within the
+         *          least significant 16 bits).
+         *
+         * @note If this function is overridden in a derived class,
+         * the overriding function should also pass its argument to
+         * unpackGPBits() for its immediate base class.
+         */
+        virtual void unpackGPBits(unsigned int gpbits);
+
         /** @brief Set or remove an attribute.
          *
          * @param name Pointer to the Symbol naming the attribute to
@@ -430,6 +483,10 @@ namespace CXXR
             m_alt = on;
         }
 
+        bool isS4Object() const
+        {
+            return m_s4_object;
+        }
         /** @brief Set the status of this RObject as an S4 object.
          *
          * @param on true iff this is to be considered an S4 object.
@@ -522,36 +579,13 @@ namespace CXXR
         static unsigned int assignment_pending(RObject *x);
         static void set_assignment_pending(RObject *x, bool v);
 
-        /* List Access Methods */
-        static constexpr int MISSING_MASK = ((1 << 4) - 1); // = 15 /* reserve 4 bits--only 2 uses now */
-        static unsigned int missing(RObject *x);            /* for closure calls */
-        static void set_missing(RObject *x, int v);
         static unsigned int bndcell_tag(const RObject *x);
         static void set_bndcell_tag(RObject *e, unsigned int v);
         /* S4 object bit, set by R_do_new_object for all new() calls */
-        static constexpr int S4_OBJECT_MASK = ((unsigned short)(1 << 4));
         static bool is_s4_object(RObject *x);
         static void set_s4_object(RObject *x);
         static void unset_s4_object(RObject *x);
-        /* JIT optimization support */
-        enum JITBit
-        {
-            NOJIT_MASK = (1 << 5),
-            MAYBEJIT_MASK = (1 << 6)
-        };
-        static unsigned int nojit(RObject *x);
-        static void set_nojit(RObject *x);
-        static unsigned int maybejit(RObject *x);
-        static void set_maybejit(RObject *x);
-        static void unset_maybejit(RObject *x);
-        /* Growable vector support */
-        static constexpr int GROWABLE_MASK = ((unsigned short)(1 << 5));
-        static unsigned int growable_bit_set(RObject *x);
-        static void set_growable_bit(RObject *x);
 
-        static constexpr int ACTIVE_BINDING_MASK = (1 << 15);
-        static constexpr int BINDING_LOCK_MASK = (1 << 14);
-        static constexpr int SPECIAL_BINDING_MASK = (ACTIVE_BINDING_MASK | BINDING_LOCK_MASK);
         static unsigned int is_active_binding(RObject *x);
         static unsigned int binding_is_locked(RObject *x);
         static void lock_binding(RObject *x);
@@ -693,8 +727,8 @@ extern "C"
      */
     SEXP ATTRIB(SEXP x);
 
-    /**
-     * @deprecated
+    /** @brief (For use only in serialization.)
+     *
      */
     int LEVELS(SEXP x);
 
@@ -706,8 +740,8 @@ extern "C"
      */
     int(NAMED)(SEXP x);
 
-    /**
-     * @deprecated
+    /** @brief (For use only in deserialization.)
+     *
      */
     void SETLEVELS(SEXP x, int v);
 

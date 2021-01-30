@@ -51,6 +51,13 @@ extern "C"
 
 int WeakRef::s_count = 0;
 
+namespace
+{
+	// Used in {,un}packGPBits():
+	constexpr unsigned int READY_TO_FINALIZE_MASK = 1;
+	constexpr unsigned int FINALIZE_ON_EXIT_MASK = 2;
+} // namespace
+
 WeakRef::WeakRef(RObject *key, RObject *value, RObject *R_finalizer,
 				 bool finalize_on_exit)
 	: RObject(WEAKREFSXP), m_key(key), m_value(value), m_Rfinalizer(R_finalizer), m_Cfinalizer(nullptr),
@@ -119,6 +126,20 @@ WeakRef::~WeakRef()
 	if (wrl)
 		wrl->erase(m_lit);
 	--s_count;
+}
+
+unsigned int WeakRef::packGPBits() const
+{
+	unsigned int ans = RObject::packGPBits();
+	if (m_finalize_on_exit)
+		ans |= FINALIZE_ON_EXIT_MASK;
+	return ans;
+}
+
+void WeakRef::unpackGPBits(unsigned int gpbits)
+{
+	RObject::unpackGPBits(gpbits);
+	m_finalize_on_exit = ((gpbits & FINALIZE_ON_EXIT_MASK) != 0);
 }
 
 bool WeakRef::check()
@@ -282,79 +303,79 @@ void WeakRef::markThru(unsigned int max_gen)
 
 bool WeakRef::runFinalizers()
 {
-    R_CHECK_THREAD;
-    /* Prevent this function from running again when already in
+	R_CHECK_THREAD;
+	/* Prevent this function from running again when already in
        progress. Jumps can only occur inside the top level context
        where they will be caught, so the flag is guaranteed to be
        reset at the end. */
-    static bool running = false;
-    if (running)
-        return false;
-    running = true;
+	static bool running = false;
+	if (running)
+		return false;
+	running = true;
 
-    WRList *finalization_pending = getFinalizationPending();
-    bool finalizer_run = !finalization_pending->empty();
+	WRList *finalization_pending = getFinalizationPending();
+	bool finalizer_run = !finalization_pending->empty();
 
-    WeakRef::check();
+	WeakRef::check();
 
-    while (finalization_pending->size())
-    {
-        WeakRef *wr = *finalization_pending->begin();
-        /**** use R_ToplevelExec here? */
-        RCNTXT thiscontext;
-        RCNTXT *volatile saveToplevelContext;
-        volatile bool oldvis;
-        GCRoot<> oldHStack(R_HandlerStack);
-        GCRoot<> oldRStack(R_RestartStack);
-        GCRoot<> oldRVal(R_ReturnedValue);
-        oldvis = R_Visible;
-        R_HandlerStack = R_NilValue;
-        R_RestartStack = R_NilValue;
+	while (finalization_pending->size())
+	{
+		WeakRef *wr = *finalization_pending->begin();
+		/**** use R_ToplevelExec here? */
+		RCNTXT thiscontext;
+		RCNTXT *volatile saveToplevelContext;
+		volatile bool oldvis;
+		GCRoot<> oldHStack(R_HandlerStack);
+		GCRoot<> oldRStack(R_RestartStack);
+		GCRoot<> oldRVal(R_ReturnedValue);
+		oldvis = R_Visible;
+		R_HandlerStack = R_NilValue;
+		R_RestartStack = R_NilValue;
 
-        /* A top level context is established for the finalizer to
+		/* A top level context is established for the finalizer to
 	       insure that any errors that might occur do not spill
 	       into the call that triggered the collection. */
-        thiscontext.start(CTXT_TOPLEVEL, R_NilValue, R_GlobalEnv, Environment::base(), R_NilValue, R_NilValue);
-        saveToplevelContext = R_ToplevelContext;
-        GCRoot<> topExp(R_CurrentExpr);
-        auto savestack = GCRootBase::ppsSize();
+		thiscontext.start(CTXT_TOPLEVEL, R_NilValue, R_GlobalEnv, Environment::base(), R_NilValue, R_NilValue);
+		saveToplevelContext = R_ToplevelContext;
+		GCRoot<> topExp(R_CurrentExpr);
+		auto savestack = GCRootBase::ppsSize();
 
-        bool redo = false;
-        bool jumped = false;
-        do
-        {
-            redo = false;
-            // std::cerr << __FILE__ << ":" << __LINE__ << " Entering try/catch for " << &thiscontext << std::endl;
-            try
-            {
-                if (!jumped)
-                {
-                    R_GlobalContext = R_ToplevelContext = &thiscontext;
-                    runWeakRefFinalizer(wr);
-                }
-                thiscontext.end();
-            }
-            catch (CXXR::JMPException &e)
-            {
-                // std::cerr << __FILE__ << ":" << __LINE__ << " Seeking " << e.context() << "; in " << &thiscontext << std::endl;
-                if (e.context() != &thiscontext)
-                    throw;
-                redo = true;
-                jumped = true;
-            }
-            // std::cerr << __FILE__ << ":" << __LINE__ << " Exiting  try/catch for " << &thiscontext << std::endl;
-        } while (redo);
+		bool redo = false;
+		bool jumped = false;
+		do
+		{
+			redo = false;
+			// std::cerr << __FILE__ << ":" << __LINE__ << " Entering try/catch for " << &thiscontext << std::endl;
+			try
+			{
+				if (!jumped)
+				{
+					R_GlobalContext = R_ToplevelContext = &thiscontext;
+					runWeakRefFinalizer(wr);
+				}
+				thiscontext.end();
+			}
+			catch (CXXR::JMPException &e)
+			{
+				// std::cerr << __FILE__ << ":" << __LINE__ << " Seeking " << e.context() << "; in " << &thiscontext << std::endl;
+				if (e.context() != &thiscontext)
+					throw;
+				redo = true;
+				jumped = true;
+			}
+			// std::cerr << __FILE__ << ":" << __LINE__ << " Exiting  try/catch for " << &thiscontext << std::endl;
+		} while (redo);
 
-        R_ToplevelContext = saveToplevelContext;
-        GCRootBase::ppsRestoreSize(savestack);
-        R_CurrentExpr = topExp;
-        R_HandlerStack = oldHStack;
-        R_RestartStack = oldRStack;
-        R_ReturnedValue = oldRVal;
-        R_Visible = oldvis;
-    }
-    running = false;
-    return finalizer_run;
+		R_ToplevelContext = saveToplevelContext;
+		GCRootBase::ppsRestoreSize(savestack);
+		R_CurrentExpr = topExp;
+		R_HandlerStack = oldHStack;
+		R_RestartStack = oldRStack;
+		R_ReturnedValue = oldRVal;
+		R_Visible = oldvis;
+	}
+	running = false;
+	return finalizer_run;
 }
 
 void WeakRef::tombstone()

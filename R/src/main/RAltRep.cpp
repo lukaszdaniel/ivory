@@ -32,10 +32,12 @@
 using namespace std;
 using namespace CXXR;
 
-const char* AltRep::typeName() const
+namespace CXXR
 {
-    return staticTypeName();
-}
+    const char *AltRep::typeName() const
+    {
+        return staticTypeName();
+    }
 
     /**
      * @deprecated Ought to be private.
@@ -47,9 +49,14 @@ const char* AltRep::typeName() const
         x->m_wrapper_type = v;
     }
 
-    /**
-     * Object type.
-     * @param x Pointer to \c AltRep.
+    /** @brief Object type.
+     *
+     * @param x Pointer to CXXR::AltRep.
+     *
      * @return Wrapper \c SEXPTYPE of \a x, or NILSXP if x is a null pointer.
      */
-    SEXPTYPE AltRep::wrapper_type(AltRep *x) { return x ? x->m_wrapper_type : NILSXP; }
+    SEXPTYPE AltRep::wrapper_type(AltRep *x)
+    {
+        return x ? x->m_wrapper_type : NILSXP;
+    }
+} // namespace CXXR

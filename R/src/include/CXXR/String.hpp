@@ -252,6 +252,9 @@ namespace CXXR
 		static void set_cached(RObject *x);
 		static unsigned int is_cached(RObject *x);
 
+		// Virtual function of RObject:
+		unsigned int packGPBits() const override;
+
 	protected:
 		/** @brief Create a string. 
 		 *
@@ -278,8 +281,8 @@ namespace CXXR
 		 *          supplied later in the construction of the derived
 		 *          class object by calling setCString().
 		 */
-		String(size_t sz, cetype_t encoding, const std::string &c_string = "", bool isAscii = false)
-			: VectorBase(CHARSXP, sz), m_c_str(c_string), m_encoding(encoding), m_ascii(isAscii), m_hash(-1)
+		String(size_t sz, cetype_t encoding, const std::string &c_string = "", bool isAscii = false, bool isCached = false)
+			: VectorBase(CHARSXP, sz), m_c_str(c_string), m_encoding(encoding), m_ascii(isAscii), m_cached(isCached), m_hash(-1)
 		{
 			if (encoding)
 				checkEncoding(encoding);
@@ -301,6 +304,8 @@ namespace CXXR
 			}
 			if (isAscii)
 				m_gpbits |= ASCII_MASK;
+			if (m_cached)
+				m_gpbits |= CACHED_MASK;
 		}
 
 		/** @brief Supply pointer to the string representation.
@@ -335,6 +340,7 @@ namespace CXXR
 		std::string m_c_str;
 		cetype_t m_encoding;
 		bool m_ascii;
+		bool m_cached;
 
 		mutable int m_hash; // negative signifies invalid
 

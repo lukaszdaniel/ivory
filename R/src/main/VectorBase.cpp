@@ -45,6 +45,26 @@ namespace CXXR
         const auto &STDVEC_TRUELENGTHptr = STDVEC_TRUELENGTH;
     } // namespace ForceNonInline
 
+    namespace
+    {
+        // Used in {,un}packGPBits():
+        constexpr unsigned int GROWABLE_MASK = 1 << 5;
+    } // namespace
+
+    unsigned int VectorBase::packGPBits() const
+    {
+        unsigned int ans = RObject::packGPBits();
+        if (m_growable)
+            ans |= GROWABLE_MASK;
+        return ans;
+    }
+
+    void VectorBase::unpackGPBits(unsigned int gpbits)
+    {
+        RObject::unpackGPBits(gpbits);
+        m_growable = ((gpbits & GROWABLE_MASK) != 0);
+    }
+
     void VectorBase::resize(R_xlen_t new_size)
     {
         // if (new_size > m_size)
@@ -72,5 +92,21 @@ namespace CXXR
         {
             Rf_errorcall(nullptr, _("cannot allocate vector of size %0.1f KB"), dsize);
         }
+    }
+
+    /* Growable vector support */
+    unsigned int VectorBase::growable_bit_set(RObject *x)
+    {
+        if (!x)
+            return 0;
+        return SEXP_downcast<VectorBase *>(x)->growable();
+    }
+
+    void VectorBase::set_growable_bit(RObject *x)
+    {
+        if (!x)
+            return;
+        x->m_gpbits |= GROWABLE_MASK;
+        SEXP_downcast<VectorBase *>(x)->setGrowable(true);
     }
 } // namespace CXXR
