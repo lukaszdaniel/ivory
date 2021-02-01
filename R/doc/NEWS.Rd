@@ -445,7 +445,7 @@
       been defunct since \R 3.1.0.  It was silently ignored up to \R
       4.0.3 but now gives an error.
 
-      \item Subsetting/indexing, i.e. \code{ddd[*]} on a \code{DOTSXP}
+      \item Subsetting/indexing, such as \code{ddd[*]} or \code{ddd$x} on a \code{DOTSXP}
       (dot-dot-dot) object \code{ddd} has been disabled; it worked by
       accident only, undocumentedly.
     }
@@ -545,10 +545,6 @@
       Additionally, it no longer fails for \code{list}s with a \code{class} and
       \dQuote{irregular} method definitions such that e.g. \code{lapply(*)} will
       necessarily fail, as currently for different \CRANpkg{igraph} objects.
-
-      \item \code{as.data.frame.list(L, row.names=NULL)} now behaves in line
-      with \code{data.frame()}, disregarding names of components of
-      \code{L}, fixing \PR{18034}, reported by Kevin Tappe.
     }
   }
 }
@@ -621,6 +617,10 @@
       \PR{17868} and \PR{18019}.
 
       \item \code{all.equal(<language>, <...>)} now works, fixing \PR{18029}.
+
+      \item \code{as.data.frame.list(L, row.names=NULL)} now behaves in line
+      with \code{data.frame()}, disregarding names of components of
+      \code{L}, fixing \PR{18034}, reported by Kevin Tappe.
     }
   }
 }

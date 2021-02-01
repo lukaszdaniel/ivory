@@ -83,7 +83,7 @@ namespace CXXR
         constexpr unsigned int BINDING_LOCK_MASK = 1 << 14;
         constexpr unsigned int ACTIVE_BINDING_MASK = 1 << 15;
         constexpr unsigned int ASSIGNMENT_PENDING_MASK = 1 << 11;
-        constexpr unsigned int SPECIAL_BINDING_MASK = (ACTIVE_BINDING_MASK | BINDING_LOCK_MASK);
+        // constexpr unsigned int SPECIAL_BINDING_MASK = (ACTIVE_BINDING_MASK | BINDING_LOCK_MASK);
     } // namespace
 
     unsigned int RObject::packGPBits() const

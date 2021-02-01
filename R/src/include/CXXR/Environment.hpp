@@ -276,8 +276,6 @@ namespace CXXR
       void visitChildren(const_visitor *v) const override;
 
       /* Environment Access Methods */
-      static constexpr int FRAME_LOCK_MASK = (1 << 14);
-      static constexpr int GLOBAL_FRAME_MASK = (1 << 15);
       static RObject *frame(RObject *x);
       static RObject *enclos(RObject *x);
       static RObject *hashtab(RObject *x);

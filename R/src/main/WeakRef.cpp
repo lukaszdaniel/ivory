@@ -54,7 +54,7 @@ int WeakRef::s_count = 0;
 namespace
 {
 	// Used in {,un}packGPBits():
-	constexpr unsigned int READY_TO_FINALIZE_MASK = 1;
+	// constexpr unsigned int READY_TO_FINALIZE_MASK = 1;
 	constexpr unsigned int FINALIZE_ON_EXIT_MASK = 2;
 } // namespace
 

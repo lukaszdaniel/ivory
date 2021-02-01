@@ -4671,9 +4671,11 @@ str( ddd <- ...maker(1) )
 str( Ddd <- environment(D)[["..."]] ) # length 1, mode "...":
 str( D2  <- ...maker(TRUE,TRUE))      # length 2, mode "...":
 str( D3n <- ...maker(ch = {cat("HOO!\n"); "arg1"}, 2, three=1+2) )
+## These all worked "accidentally" in R <= 4.0.x
 assertErrV(lD2 <- D2[]) #  type '...' is not subsettable
 assertErrV(D3n[]) #   (ditto)
 assertErrV(D3n[][["three"]]) #  (ditto)
+assertErrV(D3n $ ch) #  (ditto)
 str( D3n <- ...maker(ch = {cat("HOO!\n"); "arg1"}, 2, three=1+2) )
 stopifnot(exprs = {
     identical(alist(a=)$a, ...maker())# "*the* missing", the empty symbol
@@ -4749,7 +4751,7 @@ dfcars1 <- as.data.frame.list(lmtcars)# default: missing(row.names); uses RN
 dfcarsN <- as.data.frame.list(lmtcars, row.names = NULL)# does *not* use  RN
 stopifnot(identical(RN,    rownames      (dfcars1)) ,
           identical(-32L, .row_names_info(dfcarsN))) # now has "automatic" (integer) row names
-## dfcarsN == dfcars1  in  R <= 4.0.x
+## dfcarsN == dfcars1  in  R <= 4.0.3
 
 
 ## str(x) when x has "unusal" length() semantics such that lapply() / vapply() fails:

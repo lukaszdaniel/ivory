@@ -574,7 +574,6 @@ namespace CXXR
         static void set_refcnt(RObject *x, unsigned int v);
         static bool trackrefs(RObject *x);
         static void set_trackrefs(RObject *x, bool v);
-        static constexpr int ASSIGNMENT_PENDING_MASK = (1 << 11);
         static unsigned int assignment_pending(RObject *x);
         static void set_assignment_pending(RObject *x, bool v);
 
