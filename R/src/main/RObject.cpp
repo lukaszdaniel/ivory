@@ -69,7 +69,7 @@ namespace CXXR
     }
 
     RObject::RObject(const RObject &pattern)
-        : m_type(pattern.m_type), m_scalar(pattern.m_scalar), m_has_class(pattern.m_has_class), m_alt(pattern.m_alt), m_gpbits(pattern.m_gpbits),
+        : m_type(pattern.m_type), m_scalar(pattern.m_scalar), m_has_class(pattern.m_has_class), m_alt(pattern.m_alt), /*m_gpbits(pattern.m_gpbits),*/
           m_trace(pattern.m_trace), m_spare(pattern.m_spare), m_named(pattern.m_named), m_extra(pattern.m_extra), m_s4_object(pattern.m_s4_object),
           m_active_binding(pattern.m_active_binding),
           m_binding_locked(pattern.m_binding_locked), m_assignment_pending(pattern.m_assignment_pending), m_attrib(pattern.m_attrib)
@@ -113,16 +113,17 @@ namespace CXXR
     {
         // if (!on && sexptype() == S4SXP)
         //     Rf_error(_("CXXR: S4 object (S4SXP) cannot cease to be an S4 object."));
+#if CXXR_FALSE
         if (on)
         {
             m_gpbits |= S4_OBJECT_MASK;
-            m_s4_object = true;
         }
         else
         {
             m_gpbits &= ~S4_OBJECT_MASK;
-            m_s4_object = false;
         }
+#endif
+        m_s4_object = on;
     }
 
     const char *RObject::typeName() const
@@ -314,7 +315,7 @@ namespace CXXR
         if (!x)
             return;
         x->unpackGPBits(v);
-        x->m_gpbits = v;
+        // x->m_gpbits = v;
     }
 
     bool RObject::scalar(RObject *x)
@@ -367,14 +368,16 @@ namespace CXXR
     {
         if (!x)
             return;
+#if CXXR_FALSE
         if (v)
         {
-            (x->m_gpbits |= ASSIGNMENT_PENDING_MASK);
+            x->m_gpbits |= ASSIGNMENT_PENDING_MASK;
         }
         else
         {
-            (x->m_gpbits &= ~ASSIGNMENT_PENDING_MASK);
+            x->m_gpbits &= ~ASSIGNMENT_PENDING_MASK;
         }
+#endif
         x->m_assignment_pending = v;
     }
 
@@ -445,7 +448,7 @@ namespace CXXR
             else
                 MARK_NOT_MUTABLE(ConsCell::car0(x));
         }
-        x->m_gpbits |= BINDING_LOCK_MASK;
+        // x->m_gpbits |= BINDING_LOCK_MASK;
         x->m_binding_locked = true;
     }
 
@@ -453,7 +456,7 @@ namespace CXXR
     {
         if (!x)
             return;
-        x->m_gpbits &= (~BINDING_LOCK_MASK);
+        // x->m_gpbits &= (~BINDING_LOCK_MASK);
         x->m_binding_locked = false;
     }
 
@@ -461,7 +464,7 @@ namespace CXXR
     {
         if (!x)
             return;
-        x->m_gpbits |= ACTIVE_BINDING_MASK;
+        // x->m_gpbits |= ACTIVE_BINDING_MASK;
         x->m_active_binding = true;
     }
 } // namespace CXXR

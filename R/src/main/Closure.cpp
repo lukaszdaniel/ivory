@@ -221,7 +221,7 @@ namespace CXXR
     {
         if (!x)
             return;
-        x->m_gpbits |= NOJIT_MASK;
+        // x->m_gpbits |= NOJIT_MASK;
         SEXP_downcast<Closure *>(x)->m_no_jit = true;
     }
 
@@ -236,7 +236,7 @@ namespace CXXR
     {
         if (!x)
             return;
-        x->m_gpbits |= MAYBEJIT_MASK;
+        // x->m_gpbits |= MAYBEJIT_MASK;
         SEXP_downcast<Closure *>(x)->m_maybe_jit = true;
     }
 
@@ -244,7 +244,7 @@ namespace CXXR
     {
         if (!x)
             return;
-        x->m_gpbits &= ~MAYBEJIT_MASK;
+        // x->m_gpbits &= ~MAYBEJIT_MASK;
         SEXP_downcast<Closure *>(x)->m_maybe_jit = false;
     }
 } // namespace CXXR

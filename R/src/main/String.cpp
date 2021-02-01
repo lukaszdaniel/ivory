@@ -102,6 +102,7 @@ namespace CXXR
 
     void String::setGPBits()
     {
+#if CXXR_FALSE
         switch (m_encoding)
         {
         case CE_NATIVE:
@@ -122,6 +123,7 @@ namespace CXXR
             m_gpbits |= ASCII_MASK;
         if (m_cached)
             m_gpbits |= CACHED_MASK;
+#endif
     }
 
     GCRoot<const String> String::s_na(UncachedString::obtain("NA"), true);
@@ -221,7 +223,7 @@ namespace CXXR
 
     void String::set_cached(RObject *x)
     {
-        x->m_gpbits |= CACHED_MASK;
+        // x->m_gpbits |= CACHED_MASK;
         SEXP_downcast<String *>(x)->m_cached = true;
     }
 

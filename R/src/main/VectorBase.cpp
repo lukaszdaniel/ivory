@@ -106,7 +106,7 @@ namespace CXXR
     {
         if (!x)
             return;
-        x->m_gpbits |= GROWABLE_MASK;
+        // x->m_gpbits |= GROWABLE_MASK;
         SEXP_downcast<VectorBase *>(x)->setGrowable(true);
     }
 } // namespace CXXR

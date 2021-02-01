@@ -283,7 +283,7 @@ namespace CXXR
         bool m_alt;
 
     public:
-        unsigned int m_gpbits : 16;
+        // unsigned int m_gpbits : 16;
         bool m_trace; /* functions and memory tracing */
         bool m_spare; /* used on closures and when REFCNT is defined */
     private:
@@ -533,7 +533,7 @@ namespace CXXR
         /**
          * @param stype Required type of the RObject.
          */
-        explicit RObject(SEXPTYPE stype = CXXSXP) : m_type(stype), m_scalar(false), m_has_class(false), m_alt(false), m_gpbits(0),
+        explicit RObject(SEXPTYPE stype = CXXSXP) : m_type(stype), m_scalar(false), m_has_class(false), m_alt(false), /*m_gpbits(0),*/
                                                     m_trace(false), m_spare(false), m_named(0), m_extra(0), m_s4_object(stype == S4SXP),
                                                     m_active_binding(false), m_binding_locked(false), m_assignment_pending(false), m_attrib(nullptr)
         {

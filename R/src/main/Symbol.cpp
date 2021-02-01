@@ -277,7 +277,7 @@ namespace CXXR
     {
         if (!x)
             return;
-        x->m_gpbits |= BASE_SYM_CACHED_MASK;
+        // x->m_gpbits |= BASE_SYM_CACHED_MASK;
         SEXP_downcast<Symbol *>(x)->m_base_symbol = true;
     }
 
@@ -285,7 +285,7 @@ namespace CXXR
     {
         if (!x)
             return;
-        x->m_gpbits &= (~BASE_SYM_CACHED_MASK);
+        // x->m_gpbits &= (~BASE_SYM_CACHED_MASK);
         SEXP_downcast<Symbol *>(x)->m_base_symbol = false;
     }
 
@@ -303,7 +303,7 @@ namespace CXXR
     {
         if (!x)
             return;
-        x->m_gpbits |= SPECIAL_SYMBOL_MASK;
+        // x->m_gpbits |= SPECIAL_SYMBOL_MASK;
         SEXP_downcast<Symbol *>(x)->m_special_symbol = true;
     }
 
@@ -316,7 +316,7 @@ namespace CXXR
     {
         if (!x)
             return;
-        x->m_gpbits |= SPECIAL_SYMBOL_MASK;
+        // x->m_gpbits |= SPECIAL_SYMBOL_MASK;
         SEXP_downcast<Symbol *>(x)->m_special_symbol = true;
     }
 
@@ -324,7 +324,7 @@ namespace CXXR
     {
         if (!x)
             return;
-        x->m_gpbits &= (~SPECIAL_SYMBOL_MASK);
+        // x->m_gpbits &= (~SPECIAL_SYMBOL_MASK);
         SEXP_downcast<Symbol *>(x)->m_special_symbol = false;
     }
 
@@ -332,7 +332,7 @@ namespace CXXR
     {
         if (!x)
             return;
-        x->m_gpbits &= (~SPECIAL_SYMBOL_MASK);
+        // x->m_gpbits &= (~SPECIAL_SYMBOL_MASK);
         SEXP_downcast<Symbol *>(x)->m_special_symbol = false;
     }
 } // namespace CXXR

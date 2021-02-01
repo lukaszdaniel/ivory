@@ -183,7 +183,7 @@ namespace CXXR
     {
         if (!x)
             return;
-        x->m_gpbits = v;
+        // x->m_gpbits = v;
         SEXP_downcast<Environment *>(x)->unpackGPBits(v);
     }
 
@@ -253,7 +253,7 @@ namespace CXXR
     {
         if (!x)
             return;
-        x->m_gpbits |= FRAME_LOCK_MASK;
+        // x->m_gpbits |= FRAME_LOCK_MASK;
         SEXP_downcast<Environment *>(x)->setLocking(true);
     }
 
@@ -266,14 +266,14 @@ namespace CXXR
     {
         if (!x)
             return;
-        x->m_gpbits |= GLOBAL_FRAME_MASK;
+        // x->m_gpbits |= GLOBAL_FRAME_MASK;
         SEXP_downcast<Environment *>(x)->setGlobalCaching(true);
     }
     void Environment::mark_as_local_frame(RObject *x)
     {
         if (!x)
             return;
-        x->m_gpbits &= ~(GLOBAL_FRAME_MASK);
+        // x->m_gpbits &= ~(GLOBAL_FRAME_MASK);
         SEXP_downcast<Environment *>(x)->setGlobalCaching(false);
     }
 

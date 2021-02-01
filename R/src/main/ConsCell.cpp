@@ -348,7 +348,7 @@ namespace CXXR
         if (!x)
             return;
         int __other_flags__ = x->packGPBits() & ~MISSING_MASK; // erase 4 rightmost bits
-        x->m_gpbits = __other_flags__ | v;
+        // x->m_gpbits = __other_flags__ | v;
         SEXP_downcast<ConsCell *>(x)->m_missing = __other_flags__ | v;
     }
 
