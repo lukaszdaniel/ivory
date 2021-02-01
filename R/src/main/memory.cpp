@@ -1802,12 +1802,12 @@ void SET_NAMED(SEXP x, int v)
 void SET_RTRACE(SEXP x, int v) { CXXR::FunctionBase::set_rtrace(CHK(x), v); }
 void SETLEVELS(SEXP x, int v) { CXXR::RObject::setlevels(CHK(x), v); }
 void DUPLICATE_ATTRIB(SEXP to, SEXP from) {
-    SET_ATTRIB(CHK(to), duplicate(CHK(CXXR::RObject::attrib(CHK(from)))));
+    SET_ATTRIB(CHK(to), Rf_duplicate(CHK(CXXR::RObject::attrib(CHK(from)))));
     CXXR::RObject::set_object(CHK(to), CXXR::RObject::object(from));
     if(CXXR::RObject::is_s4_object(from)) { CXXR::RObject::set_s4_object(to);} else { CXXR::RObject::unset_s4_object(to);};
 }
 void SHALLOW_DUPLICATE_ATTRIB(SEXP to, SEXP from) {
-    SET_ATTRIB(CHK(to), shallow_duplicate(CHK(CXXR::RObject::attrib(CHK(from)))));
+    SET_ATTRIB(CHK(to), Rf_shallow_duplicate(CHK(CXXR::RObject::attrib(CHK(from)))));
     CXXR::RObject::set_object(CHK(to), CXXR::RObject::object(from));
     if(CXXR::RObject::is_s4_object(from)) { CXXR::RObject::set_s4_object(to);} else { CXXR::RObject::unset_s4_object(to);};
 }

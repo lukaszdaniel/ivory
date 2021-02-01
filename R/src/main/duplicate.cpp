@@ -35,6 +35,7 @@
 #include <R_ext/RS.h> /* S4 bit */
 
 #include "duplicate.h"
+
 using namespace R;
 using namespace CXXR;
 

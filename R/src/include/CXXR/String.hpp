@@ -87,7 +87,10 @@ namespace CXXR
 			bool m_na_last;
 		};
 
-		String *clone() const override { return const_cast<String *>(this); }
+		String *clone() const override
+		{
+			return const_cast<String *>(this);
+		}
 
 		/** @brief Read-only character access.
 		 * @param index Index of required character (counting from
@@ -226,19 +229,7 @@ namespace CXXR
 		}
 
 		/* Hashing Methods */
-		static constexpr int HASHASH_MASK = 1;
 		static unsigned int hashash(RObject *x);
-		/* CHARSXP charset bits */
-		enum CharsetBit
-		{
-			NATIVE_MASK = 0,
-			BYTES_MASK = (1 << 1),
-			LATIN1_MASK = (1 << 2),
-			UTF8_MASK = (1 << 3),
-			/* (1 << 4) is taken by S4_OBJECT_MASK */
-			CACHED_MASK = (1 << 5),
-			ASCII_MASK = (1 << 6)
-		};
 
 		static unsigned int is_bytes(RObject *x);
 		static void set_bytes(RObject *x);
@@ -251,6 +242,7 @@ namespace CXXR
 		static unsigned int enc_known(RObject *x);
 		static void set_cached(RObject *x);
 		static unsigned int is_cached(RObject *x);
+		static int clearCacheAndHashMasks(int levels);
 
 		// Virtual function of RObject:
 		unsigned int packGPBits() const override;
@@ -286,26 +278,7 @@ namespace CXXR
 		{
 			if (encoding)
 				checkEncoding(encoding);
-			switch (m_encoding)
-			{
-			case CE_NATIVE:
-				break;
-			case CE_UTF8:
-				m_gpbits |= UTF8_MASK;
-				break;
-			case CE_LATIN1:
-				m_gpbits |= LATIN1_MASK;
-				break;
-			case CE_BYTES:
-				m_gpbits |= BYTES_MASK;
-				break;
-			default:
-				break;
-			}
-			if (isAscii)
-				m_gpbits |= ASCII_MASK;
-			if (m_cached)
-				m_gpbits |= CACHED_MASK;
+			setGPBits();
 		}
 
 		/** @brief Supply pointer to the string representation.
@@ -343,6 +316,7 @@ namespace CXXR
 		bool m_cached;
 
 		mutable int m_hash; // negative signifies invalid
+		void setGPBits();
 
 		// Not implemented yet.  Declared to prevent
 		// compiler-generated versions:

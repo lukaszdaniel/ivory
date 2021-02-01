@@ -224,18 +224,9 @@ namespace CXXR
         }
 
         /**
-         * @return a const pointer to the 'tag' of this ConsCell
-         * element.
-         */
-        const RObject *tag() const
-        {
-            return m_tag;
-        }
-
-        /**
          * @return a pointer to the 'tag' of this ConsCell.
          */
-        RObject *tag()
+        RObject *tag() const
         {
             return m_tag;
         }

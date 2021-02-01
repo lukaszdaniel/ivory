@@ -112,7 +112,7 @@ namespace CXXR
     void RObject::setS4Object(bool on)
     {
         // if (!on && sexptype() == S4SXP)
-        //     Rf_error("CXXR: S4 object (S4SXP) cannot cease to be an S4 object.");
+        //     Rf_error(_("CXXR: S4 object (S4SXP) cannot cease to be an S4 object."));
         if (on)
         {
             m_gpbits |= S4_OBJECT_MASK;

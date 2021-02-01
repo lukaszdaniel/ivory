@@ -279,11 +279,7 @@ namespace CXXR
     private:
         SEXPTYPE m_type : FULL_TYPE_BITS;
         bool m_scalar;
-
-    public:
         bool m_has_class;
-
-    private:
         bool m_alt;
 
     public:
@@ -312,25 +308,6 @@ namespace CXXR
         PairList *m_attrib;
 
     public:
-        /**
-         * @param stype Required type of the RObject.
-         */
-        explicit RObject(SEXPTYPE stype = CXXSXP) : m_type(stype), m_scalar(false), m_has_class(false), m_alt(false), m_gpbits(0),
-                                                    m_trace(false), m_spare(false), m_named(0), m_extra(0), m_s4_object(false),
-                                                    m_active_binding(false), m_binding_locked(false), m_assignment_pending(false), m_attrib(nullptr)
-        {
-#ifdef COMPUTE_REFCNT_VALUES
-            SET_REFCNT(this, 0);
-            SET_TRACKREFS(this, true);
-#endif
-        }
-
-        /** @brief Copy constructor.
-         *
-         * @param pattern Object to be copied.
-         */
-        RObject(const RObject &pattern);
-
         /** @brief Get object attributes.
          *
          * @return Pointer to the attributes of this object.
@@ -351,8 +328,11 @@ namespace CXXR
          */
         void clearAttributes()
         {
-            m_attrib = nullptr;
-            m_has_class = false;
+            if (m_attrib)
+            {
+                m_attrib = nullptr;
+                m_has_class = false;
+            }
         }
 
         /** @brief Get the value a particular attribute.
@@ -550,6 +530,25 @@ namespace CXXR
         }
 
     protected:
+        /**
+         * @param stype Required type of the RObject.
+         */
+        explicit RObject(SEXPTYPE stype = CXXSXP) : m_type(stype), m_scalar(false), m_has_class(false), m_alt(false), m_gpbits(0),
+                                                    m_trace(false), m_spare(false), m_named(0), m_extra(0), m_s4_object(stype == S4SXP),
+                                                    m_active_binding(false), m_binding_locked(false), m_assignment_pending(false), m_attrib(nullptr)
+        {
+#ifdef COMPUTE_REFCNT_VALUES
+            SET_REFCNT(this, 0);
+            SET_TRACKREFS(this, true);
+#endif
+        }
+
+        /** @brief Copy constructor.
+         *
+         * @param pattern Object to be copied.
+         */
+        RObject(const RObject &pattern);
+
         virtual ~RObject();
 
     public:

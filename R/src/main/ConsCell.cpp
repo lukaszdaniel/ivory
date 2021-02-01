@@ -66,7 +66,8 @@ namespace CXXR
     {
         // Used in {,un}packGPBits():
         /* reserve 4 bits -- m_missing uses only 2 bit now */
-        constexpr unsigned int MISSING_MASK = ((1 << 4) - 1); /* = 15 */
+        /* MISSING_MASK = 15 */
+        constexpr unsigned int MISSING_MASK = ((1 << 4) - 1);
     } // namespace
 
     unsigned int ConsCell::packGPBits() const
