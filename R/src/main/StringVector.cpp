@@ -43,30 +43,30 @@ namespace CXXR
         const auto &SET_STRING_ELTptr = SET_STRING_ELT;
         const auto &STRING_ELTptr = STRING_ELT;
     } // namespace ForceNonInline
+
+    namespace
+    {
+        // void indent(std::ostream &os, size_t margin)
+        // {
+        //     while (margin--)
+        //         os << " ";
+        // }
+    } // namespace
+
+    void strdump(std::ostream &os, const StringVector *sv, size_t margin)
+    {
+        if (!sv)
+        {
+            os << "sv is nullptr" << std::endl;
+            return;
+        }
+        // indent(os, margin);
+        os << "character:";
+        for (R_xlen_t i = 0; i < sv->size(); ++i)
+        {
+            // indent(os, margin + 2);
+            os << " " << (*sv)[i]->c_str() << ";";
+        }
+        os << "\n";
+    }
 } // namespace CXXR
-
-namespace
-{
-    // void indent(std::ostream &os, size_t margin)
-    // {
-    //     while (margin--)
-    //         os << " ";
-    // }
-} // namespace
-
-void CXXR::strdump(std::ostream &os, const StringVector *sv, size_t margin)
-{
-    if (!sv)
-    {
-        os << "sv is nullptr" << std::endl;
-        return;
-    }
-    // indent(os, margin);
-    os << "character:";
-    for (R_xlen_t i = 0; i < sv->size(); ++i)
-    {
-        // indent(os, margin + 2);
-        os << " " << (*sv)[i]->c_str() << ";";
-    }
-    os << "\n";
-}

@@ -29,6 +29,12 @@
 #include <CXXR/Expression.hpp>
 #include <CXXR/String.hpp>
 #include <CXXR/DottedArgs.hpp>
+#include <CXXR/IntVector.hpp>
+#include <CXXR/LogicalVector.hpp>
+#include <CXXR/RealVector.hpp>
+#include <CXXR/ComplexVector.hpp>
+#include <CXXR/RawVector.hpp>
+#include <CXXR/StringVector.hpp>
 #include <Localization.h>
 #include <Defn.h>
 
@@ -62,6 +68,9 @@ using namespace CXXR;
    a small but measurable difference, at least for some cases
    and when (as in R 2.15.x) a for() loop was used.
 */
+/* CXXR: no longer carries out the allocation of the duplicate vector,
+ * which must now be done beforehand.
+ */
 #ifdef __APPLE__
 /* it seems macOS builds did not copy >= 2^32 bytes fully */
 #define DUPLICATE_ATOMIC_VECTOR(type, fun, to, from, deep)    \
@@ -69,7 +78,7 @@ using namespace CXXR;
 	{                                                         \
 		R_xlen_t __n__ = XLENGTH(from);                       \
 		PROTECT(from);                                        \
-		PROTECT(to = allocVector(TYPEOF(from), __n__));       \
+		PROTECT(to);                                          \
 		if (__n__ == 1)                                       \
 			fun(to)[0] = fun(from)[0];                        \
 		else                                                  \
@@ -95,7 +104,7 @@ using namespace CXXR;
 	{                                                         \
 		R_xlen_t __n__ = XLENGTH(from);                       \
 		PROTECT(from);                                        \
-		PROTECT(to = allocVector(TYPEOF(from), __n__));       \
+		PROTECT(to);                                          \
 		if (__n__ == 1)                                       \
 			fun(to)[0] = fun(from)[0];                        \
 		else                                                  \
@@ -110,31 +119,19 @@ using namespace CXXR;
    assignment functions (and duplicate in the case of ATTRIB) when the
    ATTRIB or TAG value to be stored is R_NilValue, the value the field
    will have been set to by the allocation function */
-#define DUPLICATE_ATTRIB(to, from, deep)             \
-	do                                               \
-	{                                                \
-		SEXP __a__ = ATTRIB(from);                   \
-		if (__a__ != R_NilValue)                     \
-		{                                            \
-			SET_ATTRIB(to, duplicate1(__a__, deep)); \
-			SET_OBJECT(to, OBJECT(from));            \
-			if (IS_S4_OBJECT(from))                  \
-			{                                        \
-				SET_S4_OBJECT(to);                   \
-			}                                        \
-			else                                     \
-			{                                        \
-				UNSET_S4_OBJECT(to);                 \
-			};                                       \
-		}                                            \
-	} while (0)
-
-#define COPY_TAG(to, from)         \
-	do                             \
-	{                              \
-		SEXP __tag__ = TAG(from);  \
-		if (__tag__ != R_NilValue) \
-			SET_TAG(to, __tag__);  \
+#define DUPLICATE_ATTRIB(to, from, deep)         \
+	do                                           \
+	{                                            \
+		if (to)                                  \
+			(to)->cloneAttributes((from), deep); \
+		if (IS_S4_OBJECT(from))                  \
+		{                                        \
+			SET_S4_OBJECT(to);                   \
+		}                                        \
+		else                                     \
+		{                                        \
+			UNSET_S4_OBJECT(to);                 \
+		};                                       \
 	} while (0)
 
 /* For memory profiling.  */
@@ -147,7 +144,7 @@ using namespace CXXR;
    is not defined, because we still need to be able to
    optionally rename duplicate() as Rf_duplicate().
 */
-static SEXP duplicate1(SEXP, Rboolean deep);
+/*static*/ SEXP duplicate1(SEXP, bool deep);
 
 #ifdef R_PROFILING
 static unsigned long duplicate_counter = static_cast<unsigned long>(-1);
@@ -164,79 +161,77 @@ HIDDEN void R::reset_duplicate_counter(void)
 }
 #endif
 
-SEXP Rf_duplicate(SEXP s)
+template <bool DEEP = true>
+SEXP CXXR_deep_duplicate(SEXP s)
 {
+	GCRoot<> srt(s);
 	SEXP t;
 
 #ifdef R_PROFILING
-    duplicate_counter++;
+	duplicate_counter++;
 #endif
-    t = duplicate1(s, TRUE);
+	t = duplicate1(s, DEEP);
 #ifdef R_MEMORY_PROFILING
-    if (RTRACE(s) && !(TYPEOF(s) == CLOSXP || TYPEOF(s) == BUILTINSXP ||
-		      TYPEOF(s) == SPECIALSXP || TYPEOF(s) == PROMSXP ||
-		      TYPEOF(s) == ENVSXP)){
-	    memtrace_report(s,t);
-	    SET_RTRACE(t,1);
-    }
+	if (RTRACE(s) && !(TYPEOF(s) == CLOSXP || TYPEOF(s) == BUILTINSXP ||
+					   TYPEOF(s) == SPECIALSXP || TYPEOF(s) == PROMSXP ||
+					   TYPEOF(s) == ENVSXP))
+	{
+		memtrace_report(s, t);
+		SET_RTRACE(t, 1);
+	}
 #endif
-    return t;
+	if (t)
+		t->expose();
+	return t;
+}
+
+SEXP Rf_duplicate(SEXP s)
+{
+	return CXXR_deep_duplicate<true>(s);
 }
 
 SEXP Rf_shallow_duplicate(SEXP s)
 {
-    SEXP t;
-
-#ifdef R_PROFILING
-    duplicate_counter++;
-#endif
-    t = duplicate1(s, FALSE);
-#ifdef R_MEMORY_PROFILING
-    if (RTRACE(s) && !(TYPEOF(s) == CLOSXP || TYPEOF(s) == BUILTINSXP ||
-		      TYPEOF(s) == SPECIALSXP || TYPEOF(s) == PROMSXP ||
-		      TYPEOF(s) == ENVSXP)){
-	    memtrace_report(s,t);
-	    SET_RTRACE(t,1);
-    }
-#endif
-    return t;
+	return CXXR_deep_duplicate<false>(s);
 }
 
-SEXP Rf_lazy_duplicate(SEXP s) {
-    switch (TYPEOF(s)) {
-    case NILSXP:
-    case SYMSXP:
-    case ENVSXP:
-    case SPECIALSXP:
-    case BUILTINSXP:
-    case EXTPTRSXP:
-    case BCODESXP:
-    case WEAKREFSXP:
-    case CHARSXP:
-    case PROMSXP:
-	break;
-    case CLOSXP:
-    case LISTSXP:
-    case LANGSXP:
-    case DOTSXP:
-    case EXPRSXP:
-    case VECSXP:
-    case LGLSXP:
-    case INTSXP:
-    case REALSXP:
-    case CPLXSXP:
-    case RAWSXP:
-    case STRSXP:
-    case S4SXP:
-	ENSURE_NAMEDMAX(s);
-	break;
-    default:
-	UNIMPLEMENTED_TYPE("lazy_duplicate()", s);
-    }
-    return s;
+SEXP Rf_lazy_duplicate(SEXP s)
+{
+	switch (TYPEOF(s))
+	{
+	case NILSXP:
+	case SYMSXP:
+	case ENVSXP:
+	case SPECIALSXP:
+	case BUILTINSXP:
+	case EXTPTRSXP:
+	case BCODESXP:
+	case WEAKREFSXP:
+	case CHARSXP:
+	case PROMSXP:
+		break;
+	case CLOSXP:
+	case LISTSXP:
+	case LANGSXP:
+	case DOTSXP:
+	case EXPRSXP:
+	case VECSXP:
+	case LGLSXP:
+	case INTSXP:
+	case REALSXP:
+	case CPLXSXP:
+	case RAWSXP:
+	case STRSXP:
+	case S4SXP:
+		ENSURE_NAMEDMAX(s);
+		break;
+	default:
+		UNIMPLEMENTED_TYPE("lazy_duplicate()", s);
+	}
+	return s;
 }
 
-static SEXP duplicate_child(SEXP s, Rboolean deep)
+/*static*/ SEXP duplicate_child(SEXP s, bool deep)
 {
 	if (deep)
 	{
@@ -295,127 +290,207 @@ Rboolean R_cycle_detected(SEXP s, SEXP child) {
 namespace
 {
 	template <class T = PairList>
-	SEXP duplicate_list(SEXP s, Rboolean deep)
+	SEXP duplicate_list(SEXP s, bool deep)
 	{
 		SEXP sp, vp, val;
 		PROTECT(s);
 
-		val = R_NilValue;
-		for (sp = s; sp != R_NilValue; sp = CDR(sp))
-			val = CXXR_cons<T>(R_NilValue, val);
+		val = nullptr;
+		sp = s;
+		while (sp)
+		{
+			val = CXXR_cons<T>(nullptr, val);
+			sp = CDR(sp);
+		}
 
 		PROTECT(val);
-		for (sp = s, vp = val; sp != R_NilValue; sp = CDR(sp), vp = CDR(vp))
+		sp = s;
+		vp = val;
+		while (sp)
 		{
 			SETCAR(vp, duplicate_child(CAR(sp), deep));
-			COPY_TAG(vp, sp);
+			SET_TAG(vp, TAG(sp));
 			DUPLICATE_ATTRIB(vp, sp, deep);
+			sp = CDR(sp);
+			vp = CDR(vp);
 		}
 		UNPROTECT(2);
 		return val;
 	}
 } // namespace
 
-static SEXP duplicate1(SEXP s, Rboolean deep)
+/*static*/ SEXP duplicate1(SEXP s, bool deep)
 {
-    SEXP t;
-    R_xlen_t i, n;
+	SEXP t;
+	// R_xlen_t i, n;
 
-    if (ALTREP(s)) {
-	PROTECT(s); /* the methods should protect, but ... */
-	SEXP ans = ALTREP_DUPLICATE_EX(s, deep);
-	UNPROTECT(1);
-	if (ans)
-	    return ans;
-    }
+	if (ALTREP(s))
+	{
+		PROTECT(s); /* the methods should protect, but ... */
+		SEXP ans = ALTREP_DUPLICATE_EX(s, Rboolean(deep));
+		UNPROTECT(1);
+		if (ans)
+			return ans;
+	}
 
-    switch (TYPEOF(s)) {
-    case NILSXP:
-    case SYMSXP:
-    case ENVSXP:
-    case SPECIALSXP:
-    case BUILTINSXP:
-    case EXTPTRSXP:
-    case BCODESXP:
-    case WEAKREFSXP:
-	return s;
-    case CLOSXP:
-	PROTECT(s);
-	PROTECT(t = mkCLOSXP(FORMALS(s), BODY(s), CLOENV(s)));
-	DUPLICATE_ATTRIB(t, s, deep);
-	if (NOJIT(s)) SET_NOJIT(t);
-	if (MAYBEJIT(s)) SET_MAYBEJIT(t);
-	UNPROTECT(2);
+	switch (TYPEOF(s))
+	{
+	case NILSXP:
+	case SYMSXP:
+	case ENVSXP:
+	case SPECIALSXP:
+	case BUILTINSXP:
+	case EXTPTRSXP:
+	case BCODESXP:
+	case WEAKREFSXP:
+		return s;
+	case CLOSXP:
+		PROTECT(s);
+		PROTECT(t = mkCLOSXP(FORMALS(s), BODY(s), CLOENV(s)));
+		DUPLICATE_ATTRIB(t, s, deep);
+		if (NOJIT(s))
+			SET_NOJIT(t);
+		if (MAYBEJIT(s))
+			SET_MAYBEJIT(t);
+		UNPROTECT(2);
+		break;
+	case LISTSXP:
+#if CXXR_TRUE
+		PROTECT(s);
+		t = duplicate_list<PairList>(s, deep);
+		UNPROTECT(1);
+		break;
+#else
+		return s->clone(deep);
+#endif
+	case LANGSXP:
+#if CXXR_TRUE
+		PROTECT(s);
+		PROTECT(t = duplicate_list<Expression>(s, deep));
+		DUPLICATE_ATTRIB(t, s, deep);
+		UNPROTECT(2);
+		break;
+#else
+		return s->clone(deep);
+#endif
+	case DOTSXP:
+#if CXXR_TRUE
+		PROTECT(s);
+		PROTECT(t = duplicate_list<DottedArgs>(s, deep));
+		DUPLICATE_ATTRIB(t, s, deep);
+		UNPROTECT(2);
+		break;
+#else
+		return s->clone(deep);
+#endif
+	case CHARSXP:
+		return s;
+		break;
+	case EXPRSXP:
+#if CXXR_TRUE
+	{
+		R_xlen_t n = XLENGTH(s);
+		PROTECT(s);
+		PROTECT(t = Rf_allocVector(EXPRSXP, n));
+		for (R_xlen_t i = 0; i < n; i++)
+			SET_XVECTOR_ELT(t, i, duplicate_child(XVECTOR_ELT(s, i), deep));
+		DUPLICATE_ATTRIB(t, s, deep);
+		COPY_TRUELENGTH(t, s);
+		UNPROTECT(2);
+	}
 	break;
-    case LISTSXP:
-	PROTECT(s);
-	t = duplicate_list<PairList>(s, deep);
-	UNPROTECT(1);
+#else
+		return s->clone(deep);
+#endif
+	case VECSXP:
+#if CXXR_TRUE
+	{
+		R_xlen_t n = XLENGTH(s);
+		PROTECT(s);
+		PROTECT(t = Rf_allocVector(VECSXP, n));
+		for (R_xlen_t i = 0; i < n; i++)
+			SET_VECTOR_ELT(t, i, duplicate_child(VECTOR_ELT(s, i), deep));
+		DUPLICATE_ATTRIB(t, s, deep);
+		COPY_TRUELENGTH(t, s);
+		UNPROTECT(2);
+	}
 	break;
-    case LANGSXP:
-	PROTECT(s);
-	PROTECT(t = duplicate_list<Expression>(s, deep));
-	DUPLICATE_ATTRIB(t, s, deep);
-	UNPROTECT(2);
-	break;
-    case DOTSXP:
-	PROTECT(s);
-	PROTECT(t = duplicate_list<DottedArgs>(s, deep));
-	DUPLICATE_ATTRIB(t, s, deep);
-	UNPROTECT(2);
-	break;
-    case CHARSXP:
-	return s;
-	break;
-    case EXPRSXP:
-	n = XLENGTH(s);
-	PROTECT(s);
-	PROTECT(t = Rf_allocVector(EXPRSXP, n));
-	for(i = 0 ; i < n ; i++)
-	    SET_XVECTOR_ELT(t, i, duplicate_child(XVECTOR_ELT(s, i), deep));
-	DUPLICATE_ATTRIB(t, s, deep);
-	COPY_TRUELENGTH(t, s);
-	UNPROTECT(2);
-	break;
-    case VECSXP:
-	n = XLENGTH(s);
-	PROTECT(s);
-	PROTECT(t = Rf_allocVector(VECSXP, n));
-	for(i = 0 ; i < n ; i++)
-	    SET_VECTOR_ELT(t, i, duplicate_child(VECTOR_ELT(s, i), deep));
-	DUPLICATE_ATTRIB(t, s, deep);
-	COPY_TRUELENGTH(t, s);
-	UNPROTECT(2);
-	break;
-    case LGLSXP: DUPLICATE_ATOMIC_VECTOR(int, LOGICAL, t, s, deep); break;
-    case INTSXP: DUPLICATE_ATOMIC_VECTOR(int, INTEGER, t, s, deep); break;
-    case REALSXP: DUPLICATE_ATOMIC_VECTOR(double, REAL, t, s, deep); break;
-    case CPLXSXP: DUPLICATE_ATOMIC_VECTOR(Rcomplex, COMPLEX, t, s, deep); break;
-    case RAWSXP: DUPLICATE_ATOMIC_VECTOR(Rbyte, RAW, t, s, deep); break;
-    case STRSXP:
-	/* direct copying and bypassing the write barrier is OK since
-	   t was just allocated and so it cannot be older than any of
-	   the elements in s.  LT */
-	DUPLICATE_ATOMIC_VECTOR(String*, STRING_PTR, t, s, deep);
-	break;
-    case PROMSXP:
-	return s;
-	break;
-    case S4SXP:
-	PROTECT(s);
-	PROTECT(t = Rf_allocS4Object());
-	DUPLICATE_ATTRIB(t, s, deep);
-	UNPROTECT(2);
-	break;
-    default:
-	UNIMPLEMENTED_TYPE("duplicate()", s);
-	t = s;/* for -Wall */
-    }
-    if(TYPEOF(t) == TYPEOF(s) ) { /* surely it only makes sense in this case*/
-	SET_OBJECT(t, OBJECT(s));
-	t->setS4Object(IS_S4_OBJECT(s));
-    }
-    return t;
+#else
+		return s->clone(deep);
+#endif
+	case LGLSXP:
+#if CXXR_TRUE
+		t = Rf_allocVector(LGLSXP, XLENGTH(s));
+		DUPLICATE_ATOMIC_VECTOR(int, LOGICAL, t, s, deep);
+		break;
+#else
+		return s->clone(deep);
+#endif
+	case INTSXP:
+#if CXXR_TRUE
+		t = Rf_allocVector(INTSXP, XLENGTH(s));
+		DUPLICATE_ATOMIC_VECTOR(int, INTEGER, t, s, deep);
+		break;
+#else
+		return s->clone(deep);
+#endif
+	case REALSXP:
+#if CXXR_TRUE
+		t = Rf_allocVector(REALSXP, XLENGTH(s));
+		DUPLICATE_ATOMIC_VECTOR(double, REAL, t, s, deep);
+		break;
+#else
+		return s->clone(deep);
+#endif
+	case CPLXSXP:
+#if CXXR_TRUE
+		t = Rf_allocVector(CPLXSXP, XLENGTH(s));
+		DUPLICATE_ATOMIC_VECTOR(Rcomplex, COMPLEX, t, s, deep);
+		break;
+#else
+		return s->clone(deep);
+#endif
+	case RAWSXP:
+#if CXXR_TRUE
+		t = Rf_allocVector(RAWSXP, XLENGTH(s));
+		DUPLICATE_ATOMIC_VECTOR(Rbyte, RAW, t, s, deep);
+		break;
+#else
+		return s->clone(deep);
+#endif
+	case STRSXP:
+#if CXXR_TRUE
+		/* direct copying and bypassing the write barrier is OK since
+		 * t was just allocated and so it cannot be older than any of
+		 * the elements in s.  LT
+		 */
+		t = Rf_allocVector(STRSXP, XLENGTH(s));
+		DUPLICATE_ATOMIC_VECTOR(String *, STRING_PTR, t, s, deep);
+		break;
+#else
+		return s->clone(deep);
+#endif
+	case PROMSXP:
+		return s;
+		break;
+	case S4SXP:
+		PROTECT(s);
+		PROTECT(t = Rf_allocS4Object());
+		DUPLICATE_ATTRIB(t, s, deep);
+		UNPROTECT(2);
+		break;
+	default:
+		UNIMPLEMENTED_TYPE("duplicate()", s);
+		t = s; /* for -Wall */
+	}
+
+	if (TYPEOF(t) == TYPEOF(s)) /* surely it only makes sense in this case*/
+	{
+		SET_OBJECT(t, OBJECT(s));
+		t->setS4Object(IS_S4_OBJECT(s));
+	}
+
+	return t;
 }
 
 void Rf_copyVector(SEXP s, SEXP t)

@@ -32,7 +32,15 @@
 using namespace std;
 using namespace CXXR;
 
-const char* DottedArgs::typeName() const
+namespace CXXR
 {
-    return staticTypeName();
-}
+    DottedArgs *DottedArgs::clone(bool deep) const
+    {
+        return new DottedArgs(*this, deep);
+    }
+
+    const char *DottedArgs::typeName() const
+    {
+        return staticTypeName();
+    }
+} // namespace CXXR

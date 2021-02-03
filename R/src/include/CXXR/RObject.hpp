@@ -219,6 +219,16 @@ Triplet's translation table:
 #ifdef SWITCH_TO_REFCNT
 constexpr int REFCNTMAX = ((1 << NAMED_BITS) - 1);
 #endif
+
+// Remove this once cloning is fully rolled out:
+namespace CXXR
+{
+    class RObject;
+}
+
+CXXR::RObject *duplicate1(CXXR::RObject *s, bool deep);
+CXXR::RObject *duplicate_child(CXXR::RObject *s, bool deep);
+
 namespace CXXR
 {
     class PairList;
@@ -528,6 +538,10 @@ namespace CXXR
         {
             return pattern ? pattern->clone() : nullptr;
         }
+
+        // Introduced temporarily while copy constructors are being
+        // rolled out:
+        void cloneAttributes(const RObject *source, bool deep);
 
     protected:
         /**

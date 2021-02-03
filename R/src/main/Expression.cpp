@@ -59,6 +59,11 @@ namespace CXXR
     SEXP R_ReturnedValue;
     bool R_Visible;
 
+    Expression *Expression::clone(bool deep) const
+    {
+        return new Expression(*this, deep);
+    }
+
     const char *Expression::typeName() const
     {
         return staticTypeName();
