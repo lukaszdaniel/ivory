@@ -136,6 +136,18 @@ namespace CXXR
                 Rf_error(_("cannot allocate vector of length %d"), sz);
         }
 
+        /** @brief Copy constructor.
+         *
+         * @param pattern RObjectVector to be copied.  Beware that if
+         *          any of the elements of \a pattern are unclonable,
+         *          they will be shared between \a pattern and the
+         *          created object.  This is necessarily prejudicial
+         *          to the constness of the \a pattern parameter.
+         *
+         * @param deep Indicator whether to perform deep or shallow copy.
+         */
+        RObjectVector(const RObjectVector<T, ST> &pattern, bool deep);
+
         /** @brief Element access.
          *
          * @param index Index of required element (counting from
@@ -212,11 +224,19 @@ namespace CXXR
 
         // Not implemented.  Declared to prevent
         // compiler-generated versions:
-        RObjectVector(const RObjectVector &);
         RObjectVector &operator=(const RObjectVector &);
 
         friend class ElementProxy;
     };
+
+    template <typename T, SEXPTYPE ST>
+    RObjectVector<T, ST>::RObjectVector(const RObjectVector<T, ST> &pattern, bool deep)
+        : VectorBase(pattern, deep), m_data(pattern.size())
+    {
+        R_xlen_t sz = size();
+        for (R_xlen_t i = 0; i < sz; ++i)
+            m_data[i] = dup_child2(pattern.m_data[i], deep);
+    }
 
     template <typename T, SEXPTYPE ST>
     const char *RObjectVector<T, ST>::typeName() const

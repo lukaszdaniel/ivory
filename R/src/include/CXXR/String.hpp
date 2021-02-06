@@ -87,7 +87,7 @@ namespace CXXR
 			bool m_na_last;
 		};
 
-		String *clone() const override
+		String *clone(bool deep) const override
 		{
 			return const_cast<String *>(this);
 		}

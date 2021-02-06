@@ -45,6 +45,13 @@ namespace CXXR
         const auto &SET_RSTEPptr = SET_RSTEP;
     } // namespace ForceNonInline
 
+// Closure primary constructor is in dstruct.cpp (for the time being).
+
+Closure* Closure::clone(bool deep) const
+{
+    return new Closure(*this, deep);
+}
+
     namespace
     {
         // Used in {,un}packGPBits():

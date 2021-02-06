@@ -57,4 +57,9 @@ namespace CXXR
         if (names)
             Rf_setAttrib(this, R_NamesSymbol, names);
     }
+
+    ListVector *ListVector::clone(bool deep) const
+    {
+        return new ListVector(*this, deep);
+    }
 } // namespace CXXR

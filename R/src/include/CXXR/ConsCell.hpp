@@ -292,6 +292,23 @@ namespace CXXR
             checkST(st);
         }
 
+        /** @brief Copy constructor.
+         *
+         * @param pattern ConsCell to be copied.
+         */
+        ConsCell(const ConsCell &pattern, bool deep);
+
+        /** @brief Tailless copy constructor.
+         *
+         * Copies the node without copying its tail.  Used in
+         * implementing the PairList copy constructor proper.
+         *
+         * @param pattern ConsCell to be copied.
+         *
+         * @param deep Indicator whether to perform deep or shallow copy.
+         */
+        ConsCell(const ConsCell &pattern, bool deep, int);
+
         /**
          * Declared protected to ensure that ConsCell objects are
          * allocated only using 'new'.
@@ -313,13 +330,13 @@ namespace CXXR
         }
 
     private:
+        friend class PairList;
         RObject *m_car;
         PairList *m_tail;
         RObject *m_tag;
 
         // Not implemented yet.  Declared to prevent
-        // compiler-generated versions:
-        ConsCell(const ConsCell &);
+        // compiler-generated version:
         ConsCell &operator=(const ConsCell &);
 
         // Check that st is a legal SEXPTYPE for a ConsCell:

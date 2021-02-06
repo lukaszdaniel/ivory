@@ -64,6 +64,19 @@ namespace CXXR
       Closure(const PairList *formal_args = nullptr, const RObject *body = nullptr,
               Environment *env = Environment::global());
 
+      /** @brief Copy constructor.
+       *
+       * @param pattern Closure to be copied.
+       *
+       * @param deep Indicator whether to perform deep or shallow copy.
+       */
+      Closure(const Closure &pattern, bool deep)
+          : FunctionBase(pattern, deep),
+            m_formals(pattern.m_formals), m_body(pattern.m_body),
+            m_environment(pattern.m_environment), m_no_jit(pattern.m_no_jit), m_maybe_jit(pattern.m_maybe_jit)
+      {
+      }
+
       /** @brief Access the body of the Closure.
        *
        * @return Pointer to the body of the Closure.
@@ -127,6 +140,7 @@ namespace CXXR
       // Virtual functions of RObject:
       unsigned int packGPBits() const override;
       void unpackGPBits(unsigned int gpbits) override;
+      Closure *clone(bool deep) const;
       const char *typeName() const override;
 
       // Virtual function of GCNode:
@@ -161,7 +175,6 @@ namespace CXXR
 
       // Not (yet) implemented.  Declared to prevent
       // compiler-generated versions:
-      Closure(const Closure &);
       Closure &operator=(const Closure &);
    };
 } // namespace CXXR

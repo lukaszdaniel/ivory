@@ -58,6 +58,19 @@ namespace CXXR
         Rf_error(_("negative length vectors are not allowed"));
     }
 
+    /** @brief Copy constructor.
+     *
+     * @param pattern VectorBase to be copied.
+     *
+     * @param deep Indicator whether to perform deep or shallow copy.
+     */
+    VectorBase(const VectorBase &pattern, bool deep)
+        : RObject(pattern, deep), m_size(pattern.m_size), m_truelength(0), m_growable(pattern.m_growable)
+    {
+      if (!m_growable)
+        m_truelength = pattern.m_truelength;
+    }
+
     /** @brief Alter the size (number of elements) in the vector.
      *
      * @param new_size New size required.  Zero is permissible,

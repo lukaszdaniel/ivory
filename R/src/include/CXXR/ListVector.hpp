@@ -63,12 +63,39 @@ namespace CXXR
         {
         }
 
+        /** @brief Copy constructor.
+         *
+         * @param pattern ListVector to be copied.  Beware that if
+         *          any of the elements of \a pattern are unclonable,
+         *          they will be shared between \a pattern and the
+         *          created object.  This is necessarily prejudicial
+         *          to the constness of the \a pattern parameter.
+         *
+         * @param deep Indicator whether to perform deep or shallow copy.
+         */
+        ListVector(const ListVector &pattern, bool deep)
+            : RObjectVector<RObject, VECSXP>(pattern, deep)
+        {
+        }
+
         /** @brief Construct from ExpressionVector.
          *
          * @param ev The ExpressionVector on which the constructed
-         *          ListVector is to be modelled.
+         *          ListVector is to be modelled.  The ListVector
+         *          created will comprise exactly the same sequence of
+         *          pointers to RObject as \a ev.  Consequently, the
+         *          elements of \a ev will be shared by the created
+         *          object; this is why the \a ev parameter is not const.
+         *
+         * @note The objects pointed to by \a pattern are not
+         * themselves copied in creating the ListVector.  This is
+         * rather at variance with the general semantics of
+         * RObjectVector, and perhaps ought to be changed.
          */
         explicit ListVector(ExpressionVector &ev);
+
+        // Virtual function of RObject:
+        ListVector *clone(bool deep) const override;
 
     private:
         // Declared private to ensure that ListVectors are

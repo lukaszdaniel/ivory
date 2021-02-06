@@ -69,6 +69,14 @@ namespace CXXR
         {
         }
 
+        /** @brief Copy constructor.
+         *
+         * @param pattern PairList to be copied.
+         *
+         * @param deep Indicator whether to perform deep or shallow copy.
+         */
+        PairList(const PairList &pattern, bool deep);
+
         /** @brief Create a PairList element on the free store.
          *
          * Unlike the constructor (and contrary to CXXR conventions
@@ -119,7 +127,8 @@ namespace CXXR
             return "pairlist";
         }
 
-        // Virtual function of RObject:
+        // Virtual functions of RObject:
+        PairList *clone(bool deep) const override;
         const char *typeName() const override;
 
     protected:
@@ -132,9 +141,18 @@ namespace CXXR
         // and popping:
         static GCRoot<> s_cons_car;
         static GCRoot<PairList> s_cons_cdr;
+
+        // Tailless copy constructor.  Copies the node without copying
+        // its tail.  Used in implementing the copy constructor
+        // proper.  The third parameter is simply to provide a
+        // distinct signature, and its value is ignored.
+        PairList(const PairList &pattern, bool deep, int)
+            : ConsCell(pattern, deep, 0), m_argused(0)
+        {
+        }
+
         // Not implemented yet.  Declared to prevent
-        // compiler-generated versions:
-        PairList(const PairList &);
+        // compiler-generated version:
         PairList &operator=(const PairList &);
 
     public:

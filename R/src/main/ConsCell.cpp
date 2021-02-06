@@ -62,6 +62,26 @@ namespace CXXR
         const auto &UNLOCK_BINDINGptr = UNLOCK_BINDING;
     } // namespace ForceNonInline
 
+    ConsCell::ConsCell(const ConsCell &pattern, bool deep)
+        : RObject(pattern, deep), m_car(dup_child2(pattern.car(), deep)),
+          m_tail(clone(pattern.tail(), deep)), m_tag(pattern.tag()), m_missing(0)
+    {
+        if (m_car)
+            INCREMENT_REFCNT(m_car);
+        if (m_tail)
+            INCREMENT_REFCNT(m_tail);
+    }
+
+    ConsCell::ConsCell(const ConsCell &pattern, bool deep, int)
+        : RObject(pattern, deep), m_car(dup_child2(pattern.car(), deep)), m_tail(nullptr),
+          m_tag(pattern.tag()), m_missing(0)
+    {
+        if (m_car)
+            INCREMENT_REFCNT(m_car);
+        // if (m_tail)
+        //     INCREMENT_REFCNT(m_tail);
+    }
+
     namespace
     {
         // Used in {,un}packGPBits():

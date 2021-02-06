@@ -517,10 +517,7 @@ namespace CXXR
          *          type facility to return a pointer to the type of object
          *          being cloned.
          */
-        virtual RObject *clone() const
-        {
-            return const_cast<RObject *>(this);
-        }
+        virtual RObject *clone(bool deep) const;
 
         /** @brief Return a pointer to a copy of an object or the object itself
          *          if it isn't cloneable.
@@ -530,13 +527,51 @@ namespace CXXR
          * @param pattern Either a null pointer or a pointer to the
          *          object to be cloned.
          *
+         * @param deep Indicator whether to perform deep or shallow copy.
+         *
          * @return Pointer to a clone of \a pattern, or \a pattern
          *         if \a pattern cannot be cloned or is itself a null pointer.
          */
         template <class T>
-        static T *clone(const T *pattern)
+        static T *clone(const T *pattern, bool deep)
         {
-            return pattern ? pattern->clone() : nullptr;
+            return pattern ? pattern->clone(deep) : nullptr;
+        }
+
+        /** @brief Temporary interface to duplicate1().
+         *
+         * @param T RObject or a type derived from RObject.
+         *
+         * @param pattern Pointer to object to be duplicated using
+         * duplicate1().
+         *
+         * @param deep Indicator whether to perform deep or shallow copy.
+         *
+         * @note To be removed once copy constructors and clone() are
+         * fully rolled out.
+         */
+        template <class T>
+        static T *dup2(const T *pattern, bool deep)
+        {
+            return static_cast<T *>(duplicate1(const_cast<T *>(pattern), deep));
+        }
+
+        /** @brief Temporary interface to duplicate_child().
+         *
+         * @param T RObject or a type derived from RObject.
+         *
+         * @param pattern Pointer to object to be duplicated using
+         * duplicate_child().
+         *
+         * @param deep Indicator whether to perform deep or shallow copy.
+         *
+         * @note To be removed once copy constructors and clone() are
+         * fully rolled out.
+         */
+        template <class T>
+        static T *dup_child2(const T *pattern, bool deep)
+        {
+            return static_cast<T *>(duplicate_child(const_cast<T *>(pattern), deep));
         }
 
         // Introduced temporarily while copy constructors are being
@@ -560,8 +595,10 @@ namespace CXXR
         /** @brief Copy constructor.
          *
          * @param pattern Object to be copied.
+         *
+         * @param deep Indicator whether to perform deep or shallow copy.
          */
-        RObject(const RObject &pattern);
+        RObject(const RObject &pattern, bool deep);
 
         virtual ~RObject();
 

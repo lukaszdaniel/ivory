@@ -44,6 +44,11 @@ namespace CXXR
         const auto &STRING_ELTptr = STRING_ELT;
     } // namespace ForceNonInline
 
+    StringVector *StringVector::clone(bool deep) const
+    {
+        return new StringVector(*this, deep);
+    }
+
     namespace
     {
         // void indent(std::ostream &os, size_t margin)

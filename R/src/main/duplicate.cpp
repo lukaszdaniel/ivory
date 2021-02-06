@@ -71,34 +71,6 @@ using namespace CXXR;
 /* CXXR: no longer carries out the allocation of the duplicate vector,
  * which must now be done beforehand.
  */
-#ifdef __APPLE__
-/* it seems macOS builds did not copy >= 2^32 bytes fully */
-#define DUPLICATE_ATOMIC_VECTOR(type, fun, to, from, deep)    \
-	do                                                        \
-	{                                                         \
-		R_xlen_t __n__ = XLENGTH(from);                       \
-		PROTECT(from);                                        \
-		PROTECT(to);                                          \
-		if (__n__ == 1)                                       \
-			fun(to)[0] = fun(from)[0];                        \
-		else                                                  \
-		{                                                     \
-			R_xlen_t __this;                                  \
-			type *__to = fun(to), *__from = fun(from);        \
-			do                                                \
-			{                                                 \
-				__this = (__n__ < 1000000) ? __n__ : 1000000; \
-				memcpy(__to, __from, __this * sizeof(type));  \
-				__n__ -= __this;                              \
-				__to += __this;                               \
-				__from += __this;                             \
-			} while (__n__ > 0);                              \
-		}                                                     \
-		DUPLICATE_ATTRIB(to, from, deep);                     \
-		COPY_TRUELENGTH(to, from);                            \
-		UNPROTECT(2);                                         \
-	} while (0)
-#else
 #define DUPLICATE_ATOMIC_VECTOR(type, fun, to, from, deep)    \
 	do                                                        \
 	{                                                         \
@@ -113,7 +85,6 @@ using namespace CXXR;
 		COPY_TRUELENGTH(to, from);                            \
 		UNPROTECT(2);                                         \
 	} while (0)
-#endif
 
 /* The following macros avoid the cost of going through calls to the
    assignment functions (and duplicate in the case of ATTRIB) when the
@@ -345,6 +316,7 @@ namespace
 	case WEAKREFSXP:
 		return s;
 	case CLOSXP:
+#if CXXR_TRUE
 		PROTECT(s);
 		PROTECT(t = mkCLOSXP(FORMALS(s), BODY(s), CLOENV(s)));
 		DUPLICATE_ATTRIB(t, s, deep);
@@ -354,6 +326,9 @@ namespace
 			SET_MAYBEJIT(t);
 		UNPROTECT(2);
 		break;
+#else
+		return s->clone(deep);
+#endif
 	case LISTSXP:
 #if CXXR_TRUE
 		PROTECT(s);
@@ -474,11 +449,15 @@ namespace
 		return s;
 		break;
 	case S4SXP:
+#if CXXR_TRUE
 		PROTECT(s);
 		PROTECT(t = Rf_allocS4Object());
 		DUPLICATE_ATTRIB(t, s, deep);
 		UNPROTECT(2);
 		break;
+#else
+		return s->clone(deep);
+#endif
 	default:
 		UNIMPLEMENTED_TYPE("duplicate()", s);
 		t = s; /* for -Wall */
@@ -680,7 +659,7 @@ static SEXP duplicate_attr(SEXP x, Rboolean deep)
 	    return val;
 	}
     }
-    return deep ? duplicate(x) : shallow_duplicate(x);
+    return deep ? Rf_duplicate(x) : Rf_shallow_duplicate(x);
 }
 
 SEXP R_shallow_duplicate_attr(SEXP x) { return duplicate_attr(x, FALSE); }

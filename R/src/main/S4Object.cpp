@@ -41,9 +41,9 @@ namespace CXXR
 
     } // namespace ForceNonInline
 
-    S4Object *S4Object::clone() const
+    S4Object *S4Object::clone(bool deep) const
     {
-        return new S4Object(*this);
+        return new S4Object(*this, deep);
     }
 
     const char *S4Object::typeName() const

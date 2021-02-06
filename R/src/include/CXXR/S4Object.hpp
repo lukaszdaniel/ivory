@@ -60,9 +60,11 @@ namespace CXXR
 		/** @brief Copy constructor.
 		 *
 		 * @param pattern S4Object to be copied.
+		 *
+		 * @param deep Indicator whether to perform deep or shallow copy.
 		 */
-		S4Object(const S4Object &pattern)
-			: RObject(pattern)
+		S4Object(const S4Object &pattern, bool deep)
+			: RObject(pattern, deep)
 		{
 		}
 
@@ -109,7 +111,7 @@ namespace CXXR
 		}
 
 		// Virtual functions of RObject:
-		S4Object *clone() const override;
+		S4Object *clone(bool deep) const override;
 		const char *typeName() const override;
 
 	private:

@@ -50,6 +50,25 @@ namespace CXXR
     GCRoot<> PairList::s_cons_car;
     GCRoot<PairList> PairList::s_cons_cdr;
 
+    PairList::PairList(const PairList &pattern, bool deep)
+        : ConsCell(pattern, deep, 0), m_argused(0)
+    {
+        // Clone the tail:
+        PairList *c = this;
+        const PairList *pl = pattern.m_tail;
+        while (pl)
+        {
+            c->m_tail = new PairList(*pl, deep, 0);
+            c = c->m_tail;
+            pl = pl->m_tail;
+        }
+    }
+
+    PairList *PairList::clone(bool deep) const
+    {
+        return new PairList(*this, deep);
+    }
+
     PairList *PairList::makeList(size_t sz)
     {
         PairList *ans = nullptr;

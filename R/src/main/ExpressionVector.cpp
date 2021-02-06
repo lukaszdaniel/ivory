@@ -54,6 +54,11 @@ namespace CXXR
         if (names)
             Rf_setAttrib(this, R_NamesSymbol, names);
     }
+
+    ExpressionVector *ExpressionVector::clone(bool deep) const
+    {
+        return new ExpressionVector(*this, deep);
+    }
 } // namespace CXXR
 
 // ***** C interface *****

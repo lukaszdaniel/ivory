@@ -68,19 +68,25 @@ namespace CXXR
             m_attrib->conductVisitor(v);
     }
 
-    RObject::RObject(const RObject &pattern)
+    RObject::RObject(const RObject &pattern, bool deep)
         : m_type(pattern.m_type), m_scalar(pattern.m_scalar), m_has_class(pattern.m_has_class), m_alt(pattern.m_alt), /*m_gpbits(pattern.m_gpbits),*/
-          m_trace(pattern.m_trace), m_spare(pattern.m_spare), m_named(pattern.m_named), m_extra(pattern.m_extra), m_s4_object(pattern.m_s4_object),
-          m_active_binding(pattern.m_active_binding),
-          m_binding_locked(pattern.m_binding_locked), m_assignment_pending(pattern.m_assignment_pending), m_attrib(pattern.m_attrib)
+          m_trace(false), m_spare(0), m_named(0), m_extra(0), m_s4_object(pattern.m_s4_object),
+          m_active_binding(false),
+          m_binding_locked(false), m_assignment_pending(false), m_attrib(clone(pattern.m_attrib, deep))
     {
+    }
+
+    RObject *RObject::clone(bool deep) const
+    {
+        std::cerr << "clone() not yet implemented for this type.\n";
+        abort();
     }
 
     void RObject::cloneAttributes(const RObject *source, bool deep)
     {
         if (source)
         {
-            m_attrib = SEXP_downcast<PairList *>(duplicate1(source->m_attrib, deep));
+            m_attrib = RObject::clone(source->m_attrib, deep);
             propagateAge(m_attrib);
             m_has_class = source->m_has_class;
         }

@@ -81,6 +81,14 @@ namespace CXXR
                 allocData(sz, true, allocator);
         }
 
+        /** @brief Copy constructor.
+         *
+         * @param pattern FixedVector to be copied.
+         *
+         * @param deep Indicator whether to perform deep or shallow copy.
+         */
+        FixedVector(const FixedVector<T, ST> &pattern, bool deep);
+
         /** @brief Element access.
          * @param index Index of required element (counting from
          *          zero).  No bounds checking is applied.
@@ -126,6 +134,7 @@ namespace CXXR
         static const char *staticTypeName();
 
         // Virtual function of RObject:
+        FixedVector<T, ST> *clone(bool deep) const override;
         const char *typeName() const override;
 
     protected:
@@ -159,13 +168,25 @@ namespace CXXR
 
         // Not implemented yet.  Declared to prevent
         // compiler-generated versions:
-        FixedVector(const FixedVector &);
         FixedVector &operator=(const FixedVector &);
 
         // If there is more than one element, this function is used to
         // allocate the required memory block from CXXR::MemoryBank :
         void allocData(R_xlen_t sz, bool initialize = false, R_allocator_t *allocator = nullptr);
     };
+
+    template <typename T, SEXPTYPE ST>
+    FixedVector<T, ST>::FixedVector(const FixedVector<T, ST> &pattern, bool deep)
+        : VectorBase(pattern, deep), m_data(&m_singleton),
+          m_singleton(pattern.m_singleton)
+    {
+        R_xlen_t sz = size();
+        if (sz > 1)
+        {
+            allocData(sz);
+            memcpy(m_data, pattern.m_data, sizeof(T) * sz);
+        }
+    }
 
     template <typename T, SEXPTYPE ST>
     void FixedVector<T, ST>::allocData(R_xlen_t sz, bool initialize, R_allocator_t *allocator)
@@ -191,6 +212,12 @@ namespace CXXR
             for (R_xlen_t i = 0; i < sz; ++i)
                 m_data[i] = m_singleton;
         }
+    }
+
+    template <typename T, SEXPTYPE ST>
+    FixedVector<T, ST> *FixedVector<T, ST>::clone(bool deep) const
+    {
+        return new FixedVector<T, ST>(*this, deep);
     }
 
     template <typename T, SEXPTYPE ST>

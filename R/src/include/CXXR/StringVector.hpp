@@ -70,6 +70,24 @@ namespace CXXR
         {
         }
 
+        /** @brief Copy constructor.
+         *
+         * @param pattern StringVector to be copied.  Beware that
+         *          (because String is not currently clonable) the
+         *          elements of \a pattern will be shared by the
+         *          created object.  This is necessarily prejudicial
+         *          to the constness of the \a pattern parameter.
+         *
+         * @param deep Indicator whether to perform deep or shallow copy.
+         */
+        StringVector(const StringVector &pattern, bool deep)
+            : RObjectVector<String, STRSXP>(pattern, deep)
+        {
+        }
+
+        // Virtual function of RObject:
+        StringVector *clone(bool deep) const override;
+
     private:
         /**
          * Declared private to ensure that StringVector objects are
