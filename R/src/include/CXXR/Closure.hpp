@@ -140,7 +140,7 @@ namespace CXXR
       // Virtual functions of RObject:
       unsigned int packGPBits() const override;
       void unpackGPBits(unsigned int gpbits) override;
-      Closure *clone(bool deep) const;
+      Closure *clone(bool deep) const override;
       const char *typeName() const override;
 
       // Virtual function of GCNode:

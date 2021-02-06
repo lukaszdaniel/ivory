@@ -260,7 +260,7 @@ d62d8d5c2c0643b47ade54dc0c12d036 *man/PBG.Rd
 cdf24b9b17c9a4057970ee1d9d4177a3 *man/getCovariate.corStruct.Rd
 ab97cb56b51d58e9905c8e6ee47da4b7 *man/nlsList.selfStart.Rd
 a29f4b3be852c55acdfc15b09c3ffca4 *man/ranef.lmList.Rd
-3590b07df9e38bb3c145d208011decab *man/Remifentanil.Rd
+b10fdf16ef5fac3b713b79a5aa04ecd7 *man/Remifentanil.Rd
 57595346850b70559bd5f5a00af2f3d1 *man/Alfalfa.Rd
 546284bab7b2c8451b6a45aaed224025 *man/IGF.Rd
 10bf2d3b61d0feb71c2def9f1c50c575 *man/Matrix.pdMat.Rd
@@ -285,8 +285,8 @@ b8bf3369965838b2dde2f82e6d8b9ba8 *man/predict.lmList.Rd
 6f56c20d173a1f99128799c5eda51873 *man/gls.Rd
 90931caface7ab83c19fba204c7ac818 *man/varComb.Rd
 967bf0c65e5a3f8c94efb6186482ade1 *LICENCE
-8c3dfb39d06c34b19f3eaa29f03da39b *ChangeLog
-15535eece5a5f8ecbec903a950adcc21 *DESCRIPTION
+8c185969dccce98393e79c79392a7536 *ChangeLog
+90fcc6f2e2b49447d1889f30f3771125 *DESCRIPTION
 3ca8715986b6bea70610e4cadb339fb0 *po/R-fr.po
 e3419ef4249ee866f3bcc092a096746e *po/R-ko.po
 c9c286a5731db93724b9f0e7b259f702 *po/R-de.po
@@ -343,12 +343,12 @@ db2b6e128769fe949671803e3dff6737 *tests/gls.R
 4c68332d00c3e3f1818fcb8aa60e0d9b *tests/updateLme.R
 dea84bf6c5e3f953ea2c523ef749bfae *tests/fitted.R
 c891766c6501e010dd5f64ce00861d0e *tests/predict.lme.R
-18cb3bc67509ae82f687bf2e8d3e1835 *tests/lme.Rout.save
+14ad9ca0653ae3b57233b24d6d9854c8 *tests/lme.Rout.save
 cdced2c0665ee6e3f80188b92267e8c8 *tests/augPredmissing.R
 683f1a1d208c479e7bed8df5bb420a2e *tests/anova.gls.R
-2ad708f7109c00547b0bc680338319ae *tests/coef.Rout.save
+70e52ee166b53460ceb607b8b59402f6 *tests/coef.Rout.save
 8c6c3eb850ed8c354ba02b1cbbc560bf *tests/gnls-ch8.R
-cb883defd4a248b64ea1c0905f7c0ba2 *tests/missing.Rout.save
+203ce6e45bbddd485754488b082e06a5 *tests/missing.Rout.save
 4191899f37fc372e70793b9c71d72304 *tests/missing.R
 8ff37dbadc319edc1c2c0a737ab2f845 *tests/contrMat.R
 c2e022b6e55e459304c952ddc3c47705 *R/varFunc.R
@@ -430,4 +430,4 @@ a009547983f17acc9fb1af999d1ddde4 *src/base.h
 183fb67b22d772170ee934151870daa1 *src/nlOptimizer.c
 5225d615caa3ab1cd28d8859f2da6554 *src/pdMat.c
 f5638d8da756049ecb729345adf88eb7 *src/matrix.c
-0bd92dd94d33eb04c368580168e1b6a2 *build/partial.rdb
+efb4169fae62b6916bc16d65ff41d0f8 *build/partial.rdb

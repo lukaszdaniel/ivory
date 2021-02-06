@@ -1,0 +1,1289 @@
+
+Ivory Under development (unstable) (2021-02-03 r1422) -- "Internationalized Version of R"
+Copyright (C) 2013-2021 Lukasz Daniel (lukasz.daniel@gmail.com)
+See README-IVORY file for details.
+
+R Under development (unstable) (2021-02-03 r79921) -- "Unsuffered Consequences"
+Copyright (C) 2021 The R Foundation for Statistical Computing
+Platform: x86_64-pc-linux-gnu (64-bit)
+
+Ivory is not part of the R project, so please do not report bugs
+via r-bugs or the R website - instead refer to the author.
+
+R is free software and comes with ABSOLUTELY NO WARRANTY.
+You are welcome to redistribute it under certain conditions.
+Type 'license()' or 'licence()' for distribution details.
+
+R is a collaborative project with many contributors.
+Type 'contributors()' for more information and
+'citation()' on how to cite R or R packages in publications.
+
+Type 'demo()' for some demos, 'help()' for on-line help, or
+'help.start()' for an HTML browser interface to help.
+Type 'q()' to quit R.
+
+> ## For examples skipped in testing because they are 'random'
+> 
+> set.seed(1)
+> if(.Platform$OS.type == "windows") options(pager = "console")
+> 
+> pdf("reg-examples-1.pdf", encoding = "ISOLatin1.enc")
+> 
+> 
+> ## base
+> example(Cstack_info, run.donttest = TRUE)
+
+Cstck_> ## Don't test: 
+Cstck_> Cstack_info()
+      size    current  direction eval_depth 
+   7969177      78664          1          9 
+
+Cstck_> ## End (Don't test)
+Cstck_> 
+Cstck_> 
+> example(DateTimeClasses, run.donttest = TRUE)
+
+DtTmCl> ## Don't test: 
+DtTmCl> (z <- Sys.time())             # the current date, as class "POSIXct"
+[1] "2021-02-06 19:50:37 CET"
+
+DtTmCl> Sys.time() - 3600             # an hour ago
+[1] "2021-02-06 18:50:37 CET"
+
+DtTmCl> as.POSIXlt(Sys.time(), "GMT") # the current time in GMT
+[1] "2021-02-06 18:50:37 GMT"
+
+DtTmCl> format(.leap.seconds)         # the leap seconds in your time zone
+ [1] "1972-07-01" "1973-01-01" "1974-01-01" "1975-01-01" "1976-01-01"
+ [6] "1977-01-01" "1978-01-01" "1979-01-01" "1980-01-01" "1981-07-01"
+[11] "1982-07-01" "1983-07-01" "1985-07-01" "1988-01-01" "1990-01-01"
+[16] "1991-01-01" "1992-07-01" "1993-07-01" "1994-07-01" "1996-01-01"
+[21] "1997-07-01" "1999-01-01" "2006-01-01" "2009-01-01" "2012-07-01"
+[26] "2015-07-01" "2017-01-01"
+
+DtTmCl> print(.leap.seconds, tz = "PST8PDT")  # and in Seattle's
+ [1] "1972-06-30 17:00:00 PDT" "1972-12-31 16:00:00 PST"
+ [3] "1973-12-31 16:00:00 PST" "1974-12-31 16:00:00 PST"
+ [5] "1975-12-31 16:00:00 PST" "1976-12-31 16:00:00 PST"
+ [7] "1977-12-31 16:00:00 PST" "1978-12-31 16:00:00 PST"
+ [9] "1979-12-31 16:00:00 PST" "1981-06-30 17:00:00 PDT"
+[11] "1982-06-30 17:00:00 PDT" "1983-06-30 17:00:00 PDT"
+[13] "1985-06-30 17:00:00 PDT" "1987-12-31 16:00:00 PST"
+[15] "1989-12-31 16:00:00 PST" "1990-12-31 16:00:00 PST"
+[17] "1992-06-30 17:00:00 PDT" "1993-06-30 17:00:00 PDT"
+[19] "1994-06-30 17:00:00 PDT" "1995-12-31 16:00:00 PST"
+[21] "1997-06-30 17:00:00 PDT" "1998-12-31 16:00:00 PST"
+[23] "2005-12-31 16:00:00 PST" "2008-12-31 16:00:00 PST"
+[25] "2012-06-30 17:00:00 PDT" "2015-06-30 17:00:00 PDT"
+[27] "2016-12-31 16:00:00 PST"
+
+DtTmCl> ## End (Don't test)
+DtTmCl> 
+DtTmCl> ## look at *internal* representation of "POSIXlt" :
+DtTmCl> leapS <- as.POSIXlt(.leap.seconds)
+
+DtTmCl> names(leapS) ; is.list(leapS)
+NULL
+[1] TRUE
+
+DtTmCl> ## str() "too smart" -->  need unclass(.):
+DtTmCl> utils::str(unclass(leapS), vec.len = 7)
+List of 9 components
+ $ sec  : numeric [1:27] 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 ...
+ $ min  : integer [1:27] 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 ...
+ $ hour : integer [1:27] 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 ...
+ $ mday : integer [1:27] 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 ...
+ $ mon  : integer [1:27] 6 0 0 0 0 0 0 0 0 6 6 6 6 0 0 0 6 6 ...
+ $ year : integer [1:27] 72 73 74 75 76 77 78 79 80 81 82 83 85 88 90 91 92 93 ...
+ $ wday : integer [1:27] 6 1 2 3 4 6 0 1 2 3 4 5 1 5 1 2 3 4 ...
+ $ yday : integer [1:27] 182 0 0 0 0 0 0 0 0 181 181 181 181 0 0 0 182 181 ...
+ $ isdst: integer [1:27] 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 ...
+ - attr(*, "tzone")= character "GMT"
+
+DtTmCl> ## Extracting *single* components of POSIXlt objects:
+DtTmCl> leapS[1 : 5, "year"]
+[1] 72 73 74 75 76
+
+DtTmCl> ##  length(.) <- n   now works for "POSIXct" and "POSIXlt" :
+DtTmCl> for(lpS in list(.leap.seconds, leapS)) {
+DtTmCl+     ls <- lpS; length(ls) <- 12
+DtTmCl+     l2 <- lpS; length(l2) <- 5 + length(lpS)
+DtTmCl+     stopifnot(exprs = {
+DtTmCl+       ## length(.) <- * is compatible to subsetting/indexing:
+DtTmCl+       identical(ls, lpS[seq_along(ls)])
+DtTmCl+       identical(l2, lpS[seq_along(l2)])
+DtTmCl+       ## has filled with NA's
+DtTmCl+       is.na(l2[(length(lpS)+1):length(l2)])
+DtTmCl+     })
+DtTmCl+ }
+> example(Dates, run.donttest = TRUE)
+
+Dates> ## Don't test: 
+Dates> (today <- Sys.Date())
+[1] "2021-02-06"
+
+Dates> format(today, "%d %b %Y")  # with month as a word
+[1] "06 Feb 2021"
+
+Dates> (tenweeks <- seq(today, length.out=10, by="1 week")) # next ten weeks
+ [1] "2021-02-06" "2021-02-13" "2021-02-20" "2021-02-27" "2021-03-06"
+ [6] "2021-03-13" "2021-03-20" "2021-03-27" "2021-04-03" "2021-04-10"
+
+Dates> weekdays(today)
+[1] "Saturday"
+
+Dates> months(tenweeks)
+ [1] "February" "February" "February" "February" "March"    "March"   
+ [7] "March"    "March"    "April"    "April"   
+
+Dates> ## End (Don't test)
+Dates> (Dls <- as.Date(.leap.seconds))
+ [1] "1972-07-01" "1973-01-01" "1974-01-01" "1975-01-01" "1976-01-01"
+ [6] "1977-01-01" "1978-01-01" "1979-01-01" "1980-01-01" "1981-07-01"
+[11] "1982-07-01" "1983-07-01" "1985-07-01" "1988-01-01" "1990-01-01"
+[16] "1991-01-01" "1992-07-01" "1993-07-01" "1994-07-01" "1996-01-01"
+[21] "1997-07-01" "1999-01-01" "2006-01-01" "2009-01-01" "2012-07-01"
+[26] "2015-07-01" "2017-01-01"
+
+Dates> ##  length(<Date>) <- n   now works
+Dates> ls <- Dls; length(ls) <- 12
+
+Dates> l2 <- Dls; length(l2) <- 5 + length(Dls)
+
+Dates> stopifnot(exprs = {
+Dates+   ## length(.) <- * is compatible to subsetting/indexing:
+Dates+   identical(ls, Dls[seq_along(ls)])
+Dates+   identical(l2, Dls[seq_along(l2)])
+Dates+   ## has filled with NA's
+Dates+   is.na(l2[(length(Dls)+1):length(l2)])
+Dates+ })
+> example(Ops.Date, run.donttest = TRUE)
+
+Ops.Dt> ## Don't test: 
+Ops.Dt> (z <- Sys.Date())
+[1] "2021-02-06"
+
+Ops.Dt> z + 10
+[1] "2021-02-16"
+
+Ops.Dt> z < c("2009-06-01", "2010-01-01", "2015-01-01")
+[1] FALSE FALSE FALSE
+
+Ops.Dt> ## End (Don't test)
+Ops.Dt> 
+Ops.Dt> 
+> example(Random, run.donttest = TRUE)
+
+Random> require(stats)
+
+Random> ## Seed the current RNG, i.e., set the RNG status
+Random> set.seed(42); u1 <- runif(30)
+
+Random> set.seed(42); u2 <- runif(30) # the same because of identical RNG status:
+
+Random> stopifnot(identical(u1, u2))
+
+Random> ## Don't test: 
+Random> ## the default random seed is 626 integers, so only print a few
+Random>  runif(1); .Random.seed[1:6]; runif(1); .Random.seed[1:6]
+[1] 0.7375956
+[1]       10403          31 -1577024373  1699409082  1745430460  -928819969
+[1] 0.8110551
+[1]       10403          32 -1577024373  1699409082  1745430460  -928819969
+
+Random>  ## If there is no seed, a "random" new one is created:
+Random>  rm(.Random.seed); runif(1); .Random.seed[1:6]
+[1] 0.5789905
+[1]       10403           1 -1029125055    65830704  -856429234  -315576391
+
+Random> ## End (Don't test)
+Random> ok <- RNGkind()
+
+Random> RNGkind("Wich")  # (partial string matching on 'kind')
+
+Random> ## This shows how 'runif(.)' works for Wichmann-Hill,
+Random> ## using only R functions:
+Random> 
+Random> p.WH <- c(30269, 30307, 30323)
+
+Random> a.WH <- c(  171,   172,   170)
+
+Random> next.WHseed <- function(i.seed = .Random.seed[-1])
+Random+   { (a.WH * i.seed) %% p.WH }
+
+Random> my.runif1 <- function(i.seed = .Random.seed)
+Random+   { ns <- next.WHseed(i.seed[-1]); sum(ns / p.WH) %% 1 }
+
+Random> set.seed(1998-12-04)# (when the next lines were added to the souRce)
+
+Random> rs <- .Random.seed
+
+Random> (WHs <- next.WHseed(rs[-1]))
+[1] 16476 24419 11857
+
+Random> u <- runif(1)
+
+Random> stopifnot(
+Random+  next.WHseed(rs[-1]) == .Random.seed[-1],
+Random+  all.equal(u, my.runif1(rs))
+Random+ )
+
+Random> ## ----
+Random> .Random.seed
+[1] 10400 16476 24419 11857
+
+Random> RNGkind("Super") # matches  "Super-Duper"
+
+Random> RNGkind()
+[1] "Super-Duper" "Inversion"   "Rejection"  
+
+Random> .Random.seed # new, corresponding to  Super-Duper
+[1]      10402   47619480 -915084615
+
+Random> ## Reset:
+Random> RNGkind(ok[1])
+
+Random> RNGversion(getRversion()) # the default version for this R version
+
+Random> ## ----
+Random> sum(duplicated(runif(1e6))) # around 110 for default generator
+[1] 103
+
+Random> ## and we would expect about almost sure duplicates beyond about
+Random> qbirthday(1 - 1e-6, classes = 2e9) # 235,000
+[1] 235075
+> example(Sys.getpid, run.donttest = TRUE)
+
+Sys.gt> ## Don't test: 
+Sys.gt> Sys.getpid()
+[1] 72819
+
+Sys.gt> ## Show files opened from this R process
+Sys.gt> if(.Platform$OS.type == "unix") ## on Unix-alikes such Linux, macOS, FreeBSD:
+Sys.gt+    system(paste("lsof -p", Sys.getpid()))
+COMMAND   PID  USER   FD   TYPE DEVICE SIZE/OFF     NODE NAME
+R       72819 monia  cwd    DIR  259,4    12288  7446587 /home/monia/dev/ivory/R/tests
+R       72819 monia  rtd    DIR  259,4     4096        2 /
+R       72819 monia  txt    REG  259,4  6737216  7734877 /home/monia/dev/ivory/R/bin/exec/R
+R       72819 monia  mem    REG  259,4  2911456 12192190 /usr/lib/x86_64-linux-gnu/libgfortran.so.5.0.0
+R       72819 monia  mem    REG  259,4  5375632  7734952 /home/monia/dev/ivory/R/lib/libRlapack.so
+R       72819 monia  mem    REG  259,4   297784 12190605 /usr/lib/x86_64-linux-gnu/libquadmath.so.0.0.0
+R       72819 monia  mem    REG  259,4  4171600  7733795 /home/monia/dev/ivory/R/library/stats/libs/stats.so
+R       72819 monia  mem    REG  259,4  1757968  7733808 /home/monia/dev/ivory/R/library/graphics/libs/graphics.so
+R       72819 monia  mem    REG  259,4  1408920  7735661 /home/monia/dev/ivory/R/library/grDevices/libs/grDevices.so
+R       72819 monia  mem    REG  259,4   644944  7735667 /home/monia/dev/ivory/R/library/tools/libs/tools.so
+R       72819 monia  mem    REG  259,4    97224  2097445 /lib/x86_64-linux-gnu/libresolv-2.32.so
+R       72819 monia  mem    REG  259,4    22600  2097190 /lib/x86_64-linux-gnu/libkeyutils.so.1.9
+R       72819 monia  mem    REG  259,4    56112 12190494 /usr/lib/x86_64-linux-gnu/libkrb5support.so.0.1
+R       72819 monia  mem    REG  259,4    22600  2097557 /lib/x86_64-linux-gnu/libcom_err.so.2.1
+R       72819 monia  mem    REG  259,4   191040 12190628 /usr/lib/x86_64-linux-gnu/libk5crypto.so.3.1
+R       72819 monia  mem    REG  259,4   902016 12190585 /usr/lib/x86_64-linux-gnu/libkrb5.so.3.3
+R       72819 monia  mem    REG  259,4 28407424 12196178 /usr/lib/x86_64-linux-gnu/libicudata.so.67.1
+R       72819 monia  mem    REG  259,4   313808 12190615 /usr/lib/x86_64-linux-gnu/libgssapi_krb5.so.2.2
+R       72819 monia  mem    REG  259,4   192032  2097405 /lib/x86_64-linux-gnu/libtinfo.so.6.2
+R       72819 monia  mem    REG  259,4  1995896  2097394 /lib/x86_64-linux-gnu/libc-2.32.so
+R       72819 monia  mem    REG  259,4   151232  2097439 /lib/x86_64-linux-gnu/libpthread-2.32.so
+R       72819 monia  mem    REG  259,4   104984  2097181 /lib/x86_64-linux-gnu/libgcc_s.so.1
+R       72819 monia  mem    REG  259,4  1952928 12192362 /usr/lib/x86_64-linux-gnu/libstdc++.so.6.0.28
+R       72819 monia  mem    REG  259,4  3209864 12196179 /usr/lib/x86_64-linux-gnu/libicui18n.so.67.1
+R       72819 monia  mem    REG  259,4  2001224 12196248 /usr/lib/x86_64-linux-gnu/libicuuc.so.67.1
+R       72819 monia  mem    REG  259,4  1369352  2097396 /lib/x86_64-linux-gnu/libm-2.32.so
+R       72819 monia  mem    REG  259,4    18816  2097395 /lib/x86_64-linux-gnu/libdl-2.32.so
+R       72819 monia  mem    REG  259,4   186992  2097591 /lib/x86_64-linux-gnu/libtirpc.so.3.0.0
+R       72819 monia  mem    REG  259,4   113032  2097243 /lib/x86_64-linux-gnu/libz.so.1.2.11
+R       72819 monia  mem    REG  259,4    74848  2097333 /lib/x86_64-linux-gnu/libbz2.so.1.0.4
+R       72819 monia  mem    REG  259,4   162264  2097197 /lib/x86_64-linux-gnu/liblzma.so.5.2.4
+R       72819 monia  mem    REG  259,4   584392 12189855 /usr/lib/x86_64-linux-gnu/libpcre2-8.so.0.9.0
+R       72819 monia  mem    REG  259,4   319528  2097451 /lib/x86_64-linux-gnu/libreadline.so.8.0
+R       72819 monia  mem    REG  259,4    27002 12456899 /usr/lib/x86_64-linux-gnu/gconv/gconv-modules.cache
+R       72819 monia  mem    REG  259,4   500448  7733839 /home/monia/dev/ivory/R/library/utils/libs/utils.so
+R       72819 monia  mem    REG  259,4   297816  7734241 /home/monia/dev/ivory/R/library/methods/libs/methods.so
+R       72819 monia  mem    REG  259,4   507328  7734233 /home/monia/dev/ivory/R/lib/libRblas.so
+R       72819 monia  mem    REG  259,4  1163304 12192280 /usr/lib/x86_64-linux-gnu/libboost_regex.so.1.71.0
+R       72819 monia  mem    REG  259,4   195584  2097176 /lib/x86_64-linux-gnu/ld-2.32.so
+R       72819 monia    0r   REG  259,4     3091  7402850 /home/monia/dev/ivory/R/tests/reg-examples1.R
+R       72819 monia    1w   REG  259,4     8954  7344321 /home/monia/dev/ivory/R/tests/reg-examples1.Rout.fail
+R       72819 monia    2w   REG  259,4     8954  7344321 /home/monia/dev/ivory/R/tests/reg-examples1.Rout.fail
+R       72819 monia    3w   REG  259,4        0  7345016 /home/monia/dev/ivory/R/tests/reg-examples-1.pdf
+
+Sys.gt> ## End (Don't test)
+Sys.gt> 
+Sys.gt> 
+> example(Sys.sleep, run.donttest = TRUE)
+
+Sys.sl> ## Don't test: 
+Sys.sl> testit <- function(x)
+Sys.sl+ {
+Sys.sl+     p1 <- proc.time()
+Sys.sl+     Sys.sleep(x)
+Sys.sl+     proc.time() - p1 # The cpu usage should be negligible
+Sys.sl+ }
+
+Sys.sl> testit(3.7)
+   user  system elapsed 
+  0.000   0.000   3.703 
+
+Sys.sl> ## End (Don't test)
+Sys.sl> 
+Sys.sl> 
+> example(Sys.time, run.donttest = TRUE)
+
+Sys.tm> ## Don't test: 
+Sys.tm> Sys.time()
+[1] "2021-02-06 19:50:43 CET"
+
+Sys.tm> ## print with possibly greater accuracy:
+Sys.tm> op <- options(digits.secs = 6)
+
+Sys.tm> Sys.time()
+[1] "2021-02-06 19:50:43.248584 CET"
+
+Sys.tm> options(op)
+
+Sys.tm> ## locale-specific version of date()
+Sys.tm> format(Sys.time(), "%a %b %d %X %Y")
+[1] "Sat Feb 06 19:50:43 2021"
+
+Sys.tm> Sys.Date()
+[1] "2021-02-06"
+
+Sys.tm> ## End (Don't test)
+Sys.tm> 
+Sys.tm> 
+> example(as.POSIXlt, run.donttest = TRUE)
+
+a.POSI> ## Don't test: 
+a.POSI> (z <- Sys.time())             # the current datetime, as class "POSIXct"
+[1] "2021-02-06 19:50:43 CET"
+
+a.POSI> unclass(z)                    # a large integer
+[1] 1612637443
+
+a.POSI> floor(unclass(z)/86400)       # the number of days since 1970-01-01 (UTC)
+[1] 18664
+
+a.POSI> (now <- as.POSIXlt(Sys.time())) # the current datetime, as class "POSIXlt"
+[1] "2021-02-06 19:50:43 CET"
+
+a.POSI> unlist(unclass(now))          # a list shown as a named vector
+               sec                min               hour               mday 
+"43.3423528671265"               "50"               "19"                "6" 
+               mon               year               wday               yday 
+               "1"              "121"                "6"               "36" 
+             isdst               zone             gmtoff 
+               "0"              "CET"             "3600" 
+
+a.POSI> now$year + 1900               # see ?DateTimeClasses
+[1] 2021
+
+a.POSI> months(now); weekdays(now)    # see ?months
+[1] "February"
+[1] "Saturday"
+
+a.POSI> ## suppose we have a time in seconds since 1960-01-01 00:00:00 GMT
+a.POSI> ## (the origin used by SAS)
+a.POSI> z <- 1472562988
+
+a.POSI> # ways to convert this
+a.POSI> as.POSIXct(z, origin = "1960-01-01")                # local
+[1] "2006-08-30 15:16:28 CEST"
+
+a.POSI> as.POSIXct(z, origin = "1960-01-01", tz = "GMT")    # in UTC
+[1] "2006-08-30 13:16:28 GMT"
+
+a.POSI> ## SPSS dates (R-help 2006-02-16)
+a.POSI> z <- c(10485849600, 10477641600, 10561104000, 10562745600)
+
+a.POSI> as.Date(as.POSIXct(z, origin = "1582-10-14", tz = "GMT"))
+[1] "1915-01-26" "1914-10-23" "1917-06-15" "1917-07-04"
+
+a.POSI> ## Stata date-times: milliseconds since 1960-01-01 00:00:00 GMT
+a.POSI> ## format %tc excludes leap-seconds, assumed here
+a.POSI> ## For format %tC including leap seconds, see foreign::read.dta()
+a.POSI> z <- 1579598122120
+
+a.POSI> op <- options(digits.secs = 3)
+
+a.POSI> # avoid rounding down: milliseconds are not exactly representable
+a.POSI> as.POSIXct((z+0.1)/1000, origin = "1960-01-01")
+[1] "2010-01-20 10:15:22.120 CET"
+
+a.POSI> options(op)
+
+a.POSI> ## Matlab 'serial day number' (days and fractional days)
+a.POSI> z <- 7.343736909722223e5 # 2010-08-23 16:35:00
+
+a.POSI> as.POSIXct((z - 719529)*86400, origin = "1970-01-01", tz = "UTC")
+[1] "2010-08-23 16:35:00 UTC"
+
+a.POSI> as.POSIXlt(Sys.time(), "GMT") # the current time in UTC
+[1] "2021-02-06 18:50:43 GMT"
+
+a.POSI> ## End (Don't test)
+a.POSI> ## Don't test: 
+a.POSI> ## These may not be correct names on your system
+a.POSI> as.POSIXlt(Sys.time(), "America/New_York")  # in New York
+[1] "2021-02-06 13:50:43 EST"
+
+a.POSI> as.POSIXlt(Sys.time(), "EST5EDT")           # alternative.
+[1] "2021-02-06 13:50:43 EST"
+
+a.POSI> as.POSIXlt(Sys.time(), "EST" )   # somewhere in Eastern Canada
+[1] "2021-02-06 13:50:43 EST"
+
+a.POSI> as.POSIXlt(Sys.time(), "HST")    # in Hawaii
+[1] "2021-02-06 08:50:43 HST"
+
+a.POSI> as.POSIXlt(Sys.time(), "Australia/Darwin")
+[1] "2021-02-07 04:20:43 ACST"
+
+a.POSI> ## End (Don't test)
+a.POSI> 
+a.POSI> tab <- file.path(R.home("share"), "zoneinfo", "zone1970.tab")
+
+a.POSI> if(file.exists(tab)) {
+a.POSI+   cols <- c("code", "coordinates", "TZ", "comments")
+a.POSI+   tmp <- read.delim(file.path(R.home("share"), "zoneinfo", "zone1970.tab"),
+a.POSI+                     header = FALSE, comment.char = "#", col.names = cols)
+a.POSI+   if(interactive()) View(tmp)
+a.POSI+   head(tmp, 10)
+a.POSI+ }
+> example(difftime, run.donttest = TRUE)
+
+difftm> ## Don't test: 
+difftm> (z <- Sys.time() - 3600)
+[1] "2021-02-06 18:50:43 CET"
+
+difftm> Sys.time() - z                # just over 3600 seconds.
+Time difference of 1.000001 hours
+
+difftm> ## time interval between release days of R 1.2.2 and 1.2.3.
+difftm> ISOdate(2001, 4, 26) - ISOdate(2001, 2, 26)
+Time difference of 59 days
+
+difftm> as.difftime(c("0:3:20", "11:23:15"))
+Time differences in minutes
+[1]   3.333333 683.250000
+
+difftm> as.difftime(c("3:20", "23:15", "2:"), format = "%H:%M") # 3rd gives NA
+Time differences in hours
+[1]  3.333333 23.250000        NA
+
+difftm> (z <- as.difftime(c(0,30,60), units = "mins"))
+Time differences in minutes
+[1]  0 30 60
+
+difftm> as.numeric(z, units = "secs")
+[1]    0 1800 3600
+
+difftm> as.numeric(z, units = "hours")
+[1] 0.0 0.5 1.0
+
+difftm> format(z)
+[1] " 0 mins" "30 mins" "60 mins"
+
+difftm> ## End (Don't test)
+difftm> 
+difftm> 
+> example(format.Date, run.donttest = TRUE)
+
+frmt.D> ## Don't test: 
+frmt.D> ## locale-specific version of the date
+frmt.D> format(Sys.Date(), "%a %b %d")
+[1] "Sat Feb 06"
+
+frmt.D> ## End (Don't test)
+frmt.D> 
+frmt.D> ## read in date info in format 'ddmmmyyyy'
+frmt.D> ## This will give NA(s) in some locales; setting the C locale
+frmt.D> ## as in the commented lines will overcome this on most systems.
+frmt.D> ## lct <- Sys.getlocale("LC_TIME"); Sys.setlocale("LC_TIME", "C")
+frmt.D> x <- c("1jan1960", "2jan1960", "31mar1960", "30jul1960")
+
+frmt.D> z <- as.Date(x, "%d%b%Y")
+
+frmt.D> ## Sys.setlocale("LC_TIME", lct)
+frmt.D> z
+[1] "1960-01-01" "1960-01-02" "1960-03-31" "1960-07-30"
+
+frmt.D> ## read in date/time info in format 'm/d/y'
+frmt.D> dates <- c("02/27/92", "02/27/92", "01/14/92", "02/28/92", "02/01/92")
+
+frmt.D> as.Date(dates, "%m/%d/%y")
+[1] "1992-02-27" "1992-02-27" "1992-01-14" "1992-02-28" "1992-02-01"
+
+frmt.D> ## date given as number of days since 1900-01-01 (a date in 1989)
+frmt.D> as.Date(32768, origin = "1900-01-01")
+[1] "1989-09-19"
+
+frmt.D> ## Excel is said to use 1900-01-01 as day 1 (Windows default) or
+frmt.D> ## 1904-01-01 as day 0 (Mac default), but this is complicated by Excel
+frmt.D> ## incorrectly treating 1900 as a leap year.
+frmt.D> ## So for dates (post-1901) from Windows Excel
+frmt.D> as.Date(35981, origin = "1899-12-30") # 1998-07-05
+[1] "1998-07-05"
+
+frmt.D> ## and Mac Excel
+frmt.D> as.Date(34519, origin = "1904-01-01") # 1998-07-05
+[1] "1998-07-05"
+
+frmt.D> ## (these values come from http://support.microsoft.com/kb/214330)
+frmt.D> 
+frmt.D> ## Experiment shows that Matlab's origin is 719529 days before ours,
+frmt.D> ## (it takes the non-existent 0000-01-01 as day 1)
+frmt.D> ## so Matlab day 734373 can be imported as
+frmt.D> as.Date(734373, origin = "1970-01-01") - 719529 # 2010-08-23
+[1] "2010-08-23"
+
+frmt.D> ## (value from
+frmt.D> ## http://www.mathworks.de/de/help/matlab/matlab_prog/represent-date-and-times-in-MATLAB.html)
+frmt.D> 
+frmt.D> ## Time zone effect
+frmt.D> z <- ISOdate(2010, 04, 13, c(0,12)) # midnight and midday UTC
+
+frmt.D> as.Date(z) # in UTC
+[1] "2010-04-13" "2010-04-13"
+
+frmt.D> ## Don't test: 
+frmt.D> ## these time zone names are common
+frmt.D> as.Date(z, tz = "NZ")
+[1] "2010-04-13" "2010-04-14"
+
+frmt.D> as.Date(z, tz = "HST") # Hawaii
+[1] "2010-04-12" "2010-04-13"
+
+frmt.D> ## End (Don't test)
+frmt.D> 
+frmt.D> 
+frmt.D> 
+> example(Reduce, run.donttest = TRUE) # funprog.Rd
+
+Reduce> ## A general-purpose adder:
+Reduce> add <- function(x) Reduce("+", x)
+
+Reduce> add(list(1, 2, 3))
+[1] 6
+
+Reduce> ## Like sum(), but can also used for adding matrices etc., as it will
+Reduce> ## use the appropriate '+' method in each reduction step.
+Reduce> ## More generally, many generics meant to work on arbitrarily many
+Reduce> ## arguments can be defined via reduction:
+Reduce> FOO <- function(...) Reduce(FOO2, list(...))
+
+Reduce> FOO2 <- function(x, y) UseMethod("FOO2")
+
+Reduce> ## FOO() methods can then be provided via FOO2() methods.
+Reduce> 
+Reduce> ## A general-purpose cumulative adder:
+Reduce> cadd <- function(x) Reduce("+", x, accumulate = TRUE)
+
+Reduce> cadd(seq_len(7))
+[1]  1  3  6 10 15 21 28
+
+Reduce> ## A simple function to compute continued fractions:
+Reduce> cfrac <- function(x) Reduce(function(u, v) u + 1 / v, x, right = TRUE)
+
+Reduce> ## Continued fraction approximation for pi:
+Reduce> cfrac(c(3, 7, 15, 1, 292))
+[1] 3.141593
+
+Reduce> ## Continued fraction approximation for Euler's number (e):
+Reduce> cfrac(c(2, 1, 2, 1, 1, 4, 1, 1, 6, 1, 1, 8))
+[1] 2.718282
+
+Reduce> ## Iterative function application:
+Reduce> Funcall <- function(f, ...) f(...)
+
+Reduce> ## Compute log(exp(acos(cos(0))))
+Reduce> Reduce(Funcall, list(log, exp, acos, cos), 0, right = TRUE)
+[1] 0
+
+Reduce> ## n-fold iterate of a function, functional style:
+Reduce> Iterate <- function(f, n = 1)
+Reduce+     function(x) Reduce(Funcall, rep.int(list(f), n), x, right = TRUE)
+
+Reduce> ## Continued fraction approximation to the golden ratio:
+Reduce> Iterate(function(x) 1 + 1 / x, 30)(1)
+[1] 1.618034
+
+Reduce> ## which is the same as
+Reduce> cfrac(rep.int(1, 31))
+[1] 1.618034
+
+Reduce> ## Computing square root approximations for x as fixed points of the
+Reduce> ## function t |-> (t + x / t) / 2, as a function of the initial value:
+Reduce> asqrt <- function(x, n) Iterate(function(t) (t + x / t) / 2, n)
+
+Reduce> asqrt(2, 30)(10) # Starting from a positive value => +sqrt(2)
+[1] 1.414214
+
+Reduce> asqrt(2, 30)(-1) # Starting from a negative value => -sqrt(2)
+[1] -1.414214
+
+Reduce> ## A list of all functions in the base environment:
+Reduce> funs <- Filter(is.function, sapply(ls(baseenv()), get, baseenv()))
+
+Reduce> ## Functions in base with more than 10 arguments:
+Reduce> names(Filter(function(f) length(formals(f)) > 10, funs))
+[1] "format.default"   "formatC"          "library"          "merge.data.frame"
+[5] "prettyNum"        "scan"             "source"           "system2"         
+
+Reduce> ## Number of functions in base with a '...' argument:
+Reduce> length(Filter(function(f)
+Reduce+               any(names(formals(f)) %in% "..."),
+Reduce+               funs))
+[1] 423
+
+Reduce> ## Don't test: 
+Reduce> ## Find all objects in the base environment which are *not* functions:
+Reduce> Filter(Negate(is.function),  sapply(ls(baseenv()), get, baseenv()))
+$F
+[1] FALSE
+
+$LETTERS
+ [1] "A" "B" "C" "D" "E" "F" "G" "H" "I" "J" "K" "L" "M" "N" "O" "P" "Q" "R" "S"
+[20] "T" "U" "V" "W" "X" "Y" "Z"
+
+$R.version
+               _                                                 
+platform       x86_64-pc-linux-gnu                               
+arch           x86_64                                            
+os             linux-gnu                                         
+system         x86_64, linux-gnu                                 
+status         Under development (unstable)                      
+major          4                                                 
+minor          1.0                                               
+year           2021                                              
+month          02                                                
+day            03                                                
+svn rev        79921                                             
+svn rev        1422                                              
+language       R                                                 
+version.string R Under development (unstable) (2021-02-03 r79921)
+nickname       Unsuffered Consequences                           
+
+$R.version.string
+[1] "R Under development (unstable) (2021-02-03 r79921)"
+
+$T
+[1] TRUE
+
+$letters
+ [1] "a" "b" "c" "d" "e" "f" "g" "h" "i" "j" "k" "l" "m" "n" "o" "p" "q" "r" "s"
+[20] "t" "u" "v" "w" "x" "y" "z"
+
+$month.abb
+ [1] "Jan" "Feb" "Mar" "Apr" "May" "Jun" "Jul" "Aug" "Sep" "Oct" "Nov" "Dec"
+
+$month.name
+ [1] "January"   "February"  "March"     "April"     "May"       "June"     
+ [7] "July"      "August"    "September" "October"   "November"  "December" 
+
+$pi
+[1] 3.141593
+
+$version
+               _                                                 
+platform       x86_64-pc-linux-gnu                               
+arch           x86_64                                            
+os             linux-gnu                                         
+system         x86_64, linux-gnu                                 
+status         Under development (unstable)                      
+major          4                                                 
+minor          1.0                                               
+year           2021                                              
+month          02                                                
+day            03                                                
+svn rev        79921                                             
+svn rev        1422                                              
+language       R                                                 
+version.string R Under development (unstable) (2021-02-03 r79921)
+nickname       Unsuffered Consequences                           
+
+
+Reduce> ## End (Don't test)
+Reduce> 
+Reduce> 
+> example(gc, run.donttest = TRUE)
+
+gc> ## Don't test: 
+gc> gc() #- do it now
+           used (Mb) gc trigger (Mb) max used (Mb)
+Ncells   516826   NA    1139928   NA   706115   NA
+Vcells 51073179 48.8   93016643 88.8 78621548   75
+
+gc> gcinfo(TRUE) #-- in the future, show when R does it
+[1] FALSE
+
+gc> ##            vvvvv use larger to *show* something
+gc> x <- integer(100000); for(i in 1:18) x <- c(x, i)
+
+gc> gcinfo(verbose = FALSE) #-- don't show it anymore
+[1] TRUE
+
+gc> gc(TRUE)
+Garbage collection 8 = 5+0+3 (level 2) ... 
+23.7 Mbytes of cons cells used (45%)
+49.1 Mbytes used (55%)
+           used (Mb) gc trigger (Mb) max used (Mb)
+Ncells   516787   NA    1139928   NA   706115   NA
+Vcells 51468831 49.1   93016643 88.8 78621548   75
+
+gc> gc(reset = TRUE)
+           used (Mb) gc trigger (Mb) max used (Mb)
+Ncells   516795   NA    1139928   NA   516795   NA
+Vcells 51469722 49.1   93016643 88.8 51469722 49.1
+
+gc> ## End (Don't test)
+gc> 
+gc> 
+> example(memory.profile, run.donttest = TRUE)
+
+mmry.p> ## Don't test: 
+mmry.p> memory.profile()
+       NULL      symbol    pairlist     closure environment     promise 
+          0        8857      216087        4441        1848        8531 
+   language     special     builtin        char     logical     integer 
+     108878          47         696       12101        8591       50757 
+     double     complex   character         ...         any        list 
+       3432          21       63020         114           0       22919 
+ expression    bytecode externalptr     weakref         raw          S4 
+          5       19832        1391         406          39         917 
+
+mmry.p> ## End (Don't test)
+mmry.p> 
+mmry.p> 
+> paste("Today is", date()) # from paste.Rd
+[1] "Today is Sat Feb  6 19:50:45 2021"
+> trunc(Sys.time(), "day") # from round.POSIXt.Rd
+[1] "2021-02-06 CET"
+> example(srcref, run.donttest = TRUE)
+
+srcref> ## Don't test: 
+srcref>  # has timestamp
+srcref> src <- srcfile(system.file("DESCRIPTION", package = "base"))
+
+srcref> summary(src)
+/home/monia/dev/ivory/R/library/base/DESCRIPTION 
+Timestamp: 2021-02-06 19:37:16 CET
+Encoding: "native.enc"
+
+srcref> getSrcLines(src, 1, 4)
+[1] "Package: base"             "Version: 4.1.0"           
+[3] "Priority: base"            "Title: The R Base Package"
+
+srcref> ref <- srcref(src, c(1, 1, 2, 1000))
+
+srcref> ref
+Package: base
+Version: 4.1.0
+
+srcref> print(ref, useSource = FALSE)
+<srcref: file "/home/monia/dev/ivory/R/library/base/DESCRIPTION" chars 1:1 to 2:1000>
+
+srcref> ## End (Don't test)
+srcref> 
+srcref> 
+> example(strptime, run.donttest = TRUE)
+
+strptm> ## Don't test: 
+strptm> ## locale-specific version of date()
+strptm> format(Sys.time(), "%a %b %d %X %Y %Z")
+[1] "Sat Feb 06 19:50:45 2021 CET"
+
+strptm> ## time to sub-second accuracy (if supported by the OS)
+strptm> format(Sys.time(), "%H:%M:%OS3")
+[1] "19:50:45.378"
+
+strptm> ## read in date info in format 'ddmmmyyyy'
+strptm> ## This will give NA(s) in some non-English locales; setting the C locale
+strptm> ## as in the commented lines will overcome this on most systems.
+strptm> ## lct <- Sys.getlocale("LC_TIME"); Sys.setlocale("LC_TIME", "C")
+strptm> x <- c("1jan1960", "2jan1960", "31mar1960", "30jul1960")
+
+strptm> z <- strptime(x, "%d%b%Y")
+
+strptm> ## Sys.setlocale("LC_TIME", lct)
+strptm> z
+[1] "1960-01-01 CET"  "1960-01-02 CET"  "1960-03-31 CET"  "1960-07-30 CEST"
+
+strptm> ## read in date/time info in format 'm/d/y h:m:s'
+strptm> dates <- c("02/27/92", "02/27/92", "01/14/92", "02/28/92", "02/01/92")
+
+strptm> times <- c("23:03:20", "22:29:56", "01:03:30", "18:21:03", "16:56:26")
+
+strptm> x <- paste(dates, times)
+
+strptm> strptime(x, "%m/%d/%y %H:%M:%S")
+[1] "1992-02-27 23:03:20 CET" "1992-02-27 22:29:56 CET"
+[3] "1992-01-14 01:03:30 CET" "1992-02-28 18:21:03 CET"
+[5] "1992-02-01 16:56:26 CET"
+
+strptm> ## time with fractional seconds
+strptm> z <- strptime("20/2/06 11:16:16.683", "%d/%m/%y %H:%M:%OS")
+
+strptm> z # prints without fractional seconds
+[1] "2006-02-20 11:16:16 CET"
+
+strptm> op <- options(digits.secs = 3)
+
+strptm> z
+[1] "2006-02-20 11:16:16.683 CET"
+
+strptm> options(op)
+
+strptm> ## time zone names are not portable, but 'EST5EDT' comes pretty close.
+strptm> (x <- strptime(c("2006-01-08 10:07:52", "2006-08-07 19:33:02"),
+strptm+                "%Y-%m-%d %H:%M:%S", tz = "EST5EDT"))
+[1] "2006-01-08 10:07:52 EST" "2006-08-07 19:33:02 EDT"
+
+strptm> attr(x, "tzone")
+[1] "EST5EDT" "EST"     "EDT"    
+
+strptm> ## An RFC 5322 header (Eastern Canada, during DST)
+strptm> ## In a non-English locale the commented lines may be needed.
+strptm> ## prev <- Sys.getlocale("LC_TIME"); Sys.setlocale("LC_TIME", "C")
+strptm> strptime("Tue, 23 Mar 2010 14:36:38 -0400", "%a, %d %b %Y %H:%M:%S %z")
+[1] "2010-03-23 19:36:38"
+
+strptm> ## Sys.setlocale("LC_TIME", prev)
+strptm> 
+strptm> ## Make sure you know what the abbreviated names are for you if you wish
+strptm> ## to use them for input (they are matched case-insensitively):
+strptm> format(seq.Date(as.Date('1978-01-01'), by = 'day', len = 7), "%a")
+[1] "Sun" "Mon" "Tue" "Wed" "Thu" "Fri" "Sat"
+
+strptm> format(seq.Date(as.Date('2000-01-01'), by = 'month', len = 12), "%b")
+ [1] "Jan" "Feb" "Mar" "Apr" "May" "Jun" "Jul" "Aug" "Sep" "Oct" "Nov" "Dec"
+
+strptm> ## End (Don't test)
+strptm> 
+strptm> 
+> example(sys.parent, run.donttest = TRUE)
+
+sys.pr> ## Don't test: 
+sys.pr> require(utils)
+
+sys.pr> ## Note: the first two examples will give different results
+sys.pr> ## if run by example().
+sys.pr> ff <- function(x) gg(x)
+
+sys.pr> gg <- function(y) sys.status()
+
+sys.pr> str(ff(1))
+List of 3 components
+ $ sys.calls  :Dotted pair list of 9 components
+  ..$ : language example(sys.parent, run.donttest = TRUE)
+  ..$ : language source(tf, local, echo = echo, prompt.echo = paste0(prompt.prefix, getOption("prompt")),      continue.echo = pas| __truncated__ ...
+  ..$ : language withVisible(eval(ei, envir))
+  ..$ : language eval(ei, envir)
+  ..$ : language eval(ei, envir)
+  ..$ : language str(ff(1))
+  .. ..- attr(*, "srcref")= 'srcref' integer [1:8] 15 1 15 10 1 10 15 15
+  .. .. ..- attr(*, "srcfile")=Classes 'srcfilecopy', 'srcfile' <environment: 0x5574f9002840> 
+  ..$ : language ff(1)
+  ..$ : language gg(x)
+  .. ..- attr(*, "srcref")= 'srcref' integer [1:8] 13 7 13 23 7 23 13 13
+  .. .. ..- attr(*, "srcfile")=Classes 'srcfilecopy', 'srcfile' <environment: 0x5574f9002840> 
+  ..$ : language sys.status()
+  .. ..- attr(*, "srcref")= 'srcref' integer [1:8] 14 7 14 30 7 30 14 14
+  .. .. ..- attr(*, "srcfile")=Classes 'srcfilecopy', 'srcfile' <environment: 0x5574f9002840> 
+ $ sys.parents: integer [1:9] 0 1 2 2 4 0 0 7 8
+ $ sys.frames :Dotted pair list of 9 components
+  ..$ :<environment: 0x5574f86d01e0> 
+  ..$ :<environment: 0x5574f8ffc720> 
+  ..$ :<environment: 0x5574f9069a20> 
+  ..$ :<environment: 0x5574f9069d20> 
+  ..$ :<environment: R_GlobalEnv> 
+  ..$ :<environment: 0x5574f906a300> 
+  ..$ :<environment: 0x5574f906a600> 
+  ..$ :<environment: 0x5574f906a840> 
+  ..$ :<environment: 0x5574f906a960> 
+
+sys.pr> gg <- function(y) {
+sys.pr+     ggg <- function() {
+sys.pr+         cat("current frame is", sys.nframe(), "\n")
+sys.pr+         cat("parents are", sys.parents(), "\n")
+sys.pr+         print(sys.function(0)) # ggg
+sys.pr+         print(sys.function(2)) # gg
+sys.pr+     }
+sys.pr+     if(y > 0) gg(y-1) else ggg()
+sys.pr+ }
+
+sys.pr> gg(3)
+current frame is 10 
+parents are 0 1 2 2 4 0 6 7 8 9 
+function() {
+        cat("current frame is", sys.nframe(), "\n")
+        cat("parents are", sys.parents(), "\n")
+        print(sys.function(0)) # ggg
+        print(sys.function(2)) # gg
+    }
+<bytecode: 0x5574f9b3b600>
+<environment: 0x5574f9c507e0>
+function (file, local = FALSE, echo = verbose, print.eval = echo, 
+    exprs, spaced = use_file, verbose = getOption("verbose"), 
+    prompt.echo = getOption("prompt"), max.deparse.length = 150, 
+    width.cutoff = 60L, deparseCtrl = "showAttributes", chdir = FALSE, 
+    encoding = getOption("encoding"), continue.echo = getOption("continue"), 
+    skip.echo = 0, keep.source = getOption("keep.source")) 
+{
+    envir <- if (isTRUE(local)) 
+        parent.frame()
+    else if (isFALSE(local)) 
+        .GlobalEnv
+    else if (is.environment(local)) 
+        local
+    else stop("'local' argument must be TRUE, FALSE or an environment")
+    if (!missing(echo)) {
+        if (!is.logical(echo)) 
+            stop(gettextf("'%s' argument must be logical", "echo"))
+        if (!echo && verbose) {
+            warning("'verbose' argument is TRUE, 'echo' argument is not; ... coercing 'echo <- TRUE'")
+            echo <- TRUE
+        }
+    }
+    if (verbose) {
+        cat(gettext("'envir' chosen:", domain = "R-base"))
+        print(envir)
+    }
+    if (use_file <- missing(exprs)) {
+        ofile <- file
+        from_file <- FALSE
+        srcfile <- NULL
+        if (is.character(file)) {
+            have_encoding <- !missing(encoding) && encoding != 
+                "unknown"
+            if (identical(encoding, "unknown")) {
+                enc <- utils::localeToCharset()
+                encoding <- enc[length(enc)]
+            }
+            else enc <- encoding
+            if (length(enc) > 1L) {
+                encoding <- NA
+                owarn <- options(warn = 2)
+                for (e in enc) {
+                  if (is.na(e)) 
+                    next
+                  zz <- file(file, encoding = e)
+                  res <- tryCatch(readLines(zz, warn = FALSE), 
+                    error = identity)
+                  close(zz)
+                  if (!inherits(res, "error")) {
+                    encoding <- e
+                    break
+                  }
+                }
+                options(owarn)
+            }
+            if (is.na(encoding)) 
+                stop("unable to find a plausible encoding")
+            if (verbose) 
+                cat(gettextf("encoding = \"%s\" chosen", encoding, 
+                  domain = "R-base"), "\n", sep = "")
+            if (file == "") {
+                file <- stdin()
+                srcfile <- "<stdin>"
+            }
+            else {
+                filename <- file
+                file <- file(filename, "r", encoding = encoding)
+                on.exit(close(file))
+                if (isTRUE(keep.source)) {
+                  lines <- readLines(file, warn = FALSE)
+                  on.exit()
+                  close(file)
+                  srcfile <- srcfilecopy(filename, lines, file.mtime(filename)[1], 
+                    isFile = TRUE)
+                }
+                else {
+                  from_file <- TRUE
+                  srcfile <- filename
+                }
+                loc <- utils::localeToCharset()[1L]
+                encoding <- if (have_encoding) 
+                  switch(loc, `UTF-8` = "UTF-8", `ISO8859-1` = "latin1", 
+                    "unknown")
+                else "unknown"
+            }
+        }
+        else {
+            lines <- readLines(file, warn = FALSE)
+            srcfile <- if (isTRUE(keep.source)) 
+                srcfilecopy(deparse1(substitute(file), ""), lines)
+            else deparse1(substitute(file), "")
+        }
+        exprs <- if (!from_file) {
+            if (length(lines)) 
+                .Internal(parse(stdin(), n = -1, lines, "?", 
+                  srcfile, encoding))
+            else expression()
+        }
+        else .Internal(parse(file, n = -1, NULL, "?", srcfile, 
+            encoding))
+        on.exit()
+        if (from_file) 
+            close(file)
+        if (verbose) 
+            cat(sprintf(ngettext(length(exprs), "--> parsed %d expression; now evaluating them:", 
+                "--> parsed %d expressions; now evaluating them:", 
+                domain = "R-base"), length(exprs)), "\n", sep = "")
+        if (chdir) {
+            if (is.character(ofile)) {
+                if (grepl("^(ftp|http|file)://", ofile)) 
+                  warning("'chdir = TRUE' makes no sense for a URL")
+                else if ((path <- dirname(ofile)) != ".") {
+                  owd <- getwd()
+                  if (is.null(owd)) 
+                    stop("cannot 'chdir' as current directory is unknown")
+                  on.exit(setwd(owd), add = TRUE)
+                  setwd(path)
+                }
+            }
+            else {
+                warning("'chdir = TRUE' makes no sense for a connection")
+            }
+        }
+    }
+    else {
+        if (!missing(file)) 
+            stop("specify either 'file' or 'exprs' argument but not both")
+        if (!is.expression(exprs)) 
+            exprs <- as.expression(exprs)
+    }
+    Ne <- length(exprs)
+    if (echo) {
+        sd <- "\""
+        nos <- "[^\"]*"
+        oddsd <- paste0("^", nos, sd, "(", nos, sd, nos, sd, 
+            ")*", nos, "$")
+        trySrcLines <- function(srcfile, showfrom, showto) {
+            tryCatch(suppressWarnings(getSrcLines(srcfile, showfrom, 
+                showto)), error = function(e) character())
+        }
+    }
+    yy <- NULL
+    lastshown <- 0
+    srcrefs <- attr(exprs, "srcref")
+    if (verbose && !is.null(srcrefs)) {
+        cat("has srcrefs:\n")
+        utils::str(srcrefs)
+    }
+    for (i in seq_len(Ne + echo)) {
+        tail <- i > Ne
+        if (!tail) {
+            if (verbose) 
+                cat("\n>>>> eval(expression_nr.", i, ")\n\t\t =================\n")
+            ei <- exprs[i]
+        }
+        if (echo) {
+            nd <- 0
+            srcref <- if (tail) 
+                attr(exprs, "wholeSrcref")
+            else if (i <= length(srcrefs)) 
+                srcrefs[[i]]
+            if (!is.null(srcref)) {
+                if (i == 1) 
+                  lastshown <- min(skip.echo, srcref[3L] - 1)
+                if (lastshown < srcref[3L]) {
+                  srcfile <- attr(srcref, "srcfile")
+                  dep <- trySrcLines(srcfile, lastshown + 1, 
+                    srcref[3L])
+                  if (length(dep)) {
+                    leading <- if (tail) 
+                      length(dep)
+                    else srcref[1L] - lastshown
+                    lastshown <- srcref[3L]
+                    while (length(dep) && grepl("^[[:blank:]]*$", 
+                      dep[1L])) {
+                      dep <- dep[-1L]
+                      leading <- leading - 1L
+                    }
+                    dep <- paste0(rep.int(c(prompt.echo, continue.echo), 
+                      pmax(0L, c(leading, length(dep) - leading))), 
+                      dep, collapse = "\n")
+                    nd <- nchar(dep, "c")
+                  }
+                  else srcref <- NULL
+                }
+            }
+            if (is.null(srcref)) {
+                if (!tail) {
+                  dep <- substr(paste(deparse(ei, width.cutoff = width.cutoff, 
+                    control = deparseCtrl), collapse = "\n"), 
+                    12L, 1000000L)
+                  dep <- paste0(prompt.echo, gsub("\n", paste0("\n", 
+                    continue.echo), dep, fixed = TRUE))
+                  nd <- nchar(dep, "c") - 1L
+                }
+            }
+            if (nd) {
+                do.trunc <- nd > max.deparse.length
+                dep <- substr(dep, 1L, if (do.trunc) 
+                  max.deparse.length
+                else nd)
+                cat(if (spaced) 
+                  "\n", dep, if (do.trunc) 
+                  paste(if (grepl(sd, dep) && grepl(oddsd, dep)) 
+                    " ...\" ..."
+                  else " ....", gettext("[TRUNCATED] ", domain = "R-base")), 
+                  "\n", sep = "")
+            }
+        }
+        if (!tail) {
+            yy <- withVisible(eval(ei, envir))
+            i.symbol <- mode(ei[[1L]]) == "name"
+            if (!i.symbol) {
+                curr.fun <- ei[[1L]][[1L]]
+                if (verbose) {
+                  cat("curr.fun:")
+                  utils::str(curr.fun)
+                }
+            }
+            if (verbose >= 2) {
+                cat(".... mode(ei[[1L]])=", mode(ei[[1L]]), "; paste(curr.fun)=")
+                utils::str(paste(curr.fun))
+            }
+            if (print.eval && yy$visible) {
+                if (isS4(yy$value)) 
+                  methods::show(yy$value)
+                else print(yy$value)
+            }
+            if (verbose) 
+                cat(" .. after ", sQuote(deparse(ei, control = unique(c(deparseCtrl, 
+                  "useSource")))), "\n", sep = "")
+        }
+    }
+    invisible(yy)
+}
+<bytecode: 0x5574f3ddec00>
+<environment: namespace:base>
+
+sys.pr> t1 <- function() {
+sys.pr+   aa <- "here"
+sys.pr+   t2 <- function() {
+sys.pr+     ## in frame 2 here
+sys.pr+     cat("current frame is", sys.nframe(), "\n")
+sys.pr+     str(sys.calls()) ## list with two components t1() and t2()
+sys.pr+     cat("parents are frame numbers", sys.parents(), "\n") ## 0 1
+sys.pr+     print(ls(envir = sys.frame(-1))) ## [1] "aa" "t2"
+sys.pr+     invisible()
+sys.pr+   }
+sys.pr+   t2()
+sys.pr+ }
+
+sys.pr> t1()
+current frame is 7 
+Dotted pair list of 7 components
+ $ : language example(sys.parent, run.donttest = TRUE)
+ $ : language source(tf, local, echo = echo, prompt.echo = paste0(prompt.prefix, getOption("prompt")),      continue.echo = pas| __truncated__ ...
+ $ : language withVisible(eval(ei, envir))
+ $ : language eval(ei, envir)
+ $ : language eval(ei, envir)
+ $ : language t1()
+  ..- attr(*, "srcref")= 'srcref' integer [1:8] 40 1 40 4 1 4 40 40
+  .. ..- attr(*, "srcfile")=Classes 'srcfilecopy', 'srcfile' <environment: 0x5574f9002840> 
+ $ : language t2()
+  ..- attr(*, "srcref")= 'srcref' integer [1:8] 38 3 38 6 3 6 38 38
+  .. ..- attr(*, "srcfile")=Classes 'srcfilecopy', 'srcfile' <environment: 0x5574f9002840> 
+parents are frame numbers 0 1 2 2 4 0 6 
+[1] "aa" "t2"
+
+sys.pr> test.sys.on.exit <- function() {
+sys.pr+   on.exit(print(1))
+sys.pr+   ex <- sys.on.exit()
+sys.pr+   str(ex)
+sys.pr+   cat("exiting...\n")
+sys.pr+ }
+
+sys.pr> test.sys.on.exit()
+ language print(1)
+exiting...
+[1] 1
+
+sys.pr> ## gives 'language print(1)', prints 1 on exit
+sys.pr> 
+sys.pr> ## An example where the parent is not the next frame up the stack
+sys.pr> ## since method dispatch uses a frame.
+sys.pr> as.double.foo <- function(x)
+sys.pr+ {
+sys.pr+     str(sys.calls())
+sys.pr+     print(sys.frames())
+sys.pr+     print(sys.parents())
+sys.pr+     print(sys.frame(-1)); print(parent.frame())
+sys.pr+     x
+sys.pr+ }
+
+sys.pr> t2 <- function(x) as.double(x)
+
+sys.pr> a <- structure(pi, class = "foo")
+
+sys.pr> t2(a)
+Dotted pair list of 8 components
+ $ : language example(sys.parent, run.donttest = TRUE)
+ $ : language source(tf, local, echo = echo, prompt.echo = paste0(prompt.prefix, getOption("prompt")),      continue.echo = pas| __truncated__ ...
+ $ : language withVisible(eval(ei, envir))
+ $ : language eval(ei, envir)
+ $ : language eval(ei, envir)
+ $ : language t2(a)
+  ..- attr(*, "srcref")= 'srcref' integer [1:8] 63 1 63 5 1 5 63 63
+  .. ..- attr(*, "srcfile")=Classes 'srcfilecopy', 'srcfile' <environment: 0x5574f9002840> 
+ $ : language as.double(x)
+  ..- attr(*, "srcref")= 'srcref' integer [1:8] 61 7 61 30 7 30 61 61
+  .. ..- attr(*, "srcfile")=Classes 'srcfilecopy', 'srcfile' <environment: 0x5574f9002840> 
+ $ : language as.double.foo(x)
+  ..- attr(*, "srcref")= 'srcref' integer [1:8] 61 7 61 30 7 30 61 61
+  .. ..- attr(*, "srcfile")=Classes 'srcfilecopy', 'srcfile' <environment: 0x5574f9002840> 
+[[1]]
+<environment: 0x5574f86d01e0>
+
+[[2]]
+<environment: 0x5574f8ffc720>
+
+[[3]]
+<environment: 0x5574fa11ecc0>
+
+[[4]]
+<environment: 0x5574fa120000>
+
+[[5]]
+<environment: R_GlobalEnv>
+
+[[6]]
+<environment: 0x5574fa120540>
+
+[[7]]
+<environment: 0x5574fa1207e0>
+
+[[8]]
+<environment: 0x5574fa120c60>
+
+[1] 0 1 2 2 4 0 6 6
+<environment: 0x5574fa1207e0>
+<environment: 0x5574fa120540>
+[1] 3.141593
+attr(,"class")
+[1] "foo"
+
+sys.pr> ## End (Don't test)
+sys.pr> 
+sys.pr> 
+> example(system.time, run.donttest = TRUE)
+
+systm.> require(stats)
+
+systm.> ## Don't test: 
+systm.> system.time(for(i in 1:100) mad(runif(1000)))
+
+ *** caught seqfault ***
+address 0x400000010, cause: memory not mapped
+
+Traceback:
+ 1: gc(FALSE)
+ 2: system.time(for (i in 1:100) mad(runif(1000)))
+ 3: eval(ei, envir)
+ 4: eval(ei, envir)
+ 5: withVisible(eval(ei, envir))
+ 6: source(tf, local, echo = echo, prompt.echo = paste0(prompt.prefix, getOption("prompt")),     continue.echo = paste0(prompt.prefix, getOption("continue")), verbose = verbose,     max.deparse.length = Inf, encoding = "UTF-8", skip.echo = skips, keep.source = TRUE)
+ 7: example(system.time, run.donttest = TRUE)
+An irrecoverable exception occurred. R is aborting now ...

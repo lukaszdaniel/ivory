@@ -1,4 +1,4 @@
-[![Build Status](https://travis-ci.org/lukaszdaniel/ivory.svg?branch=master)](https://travis-ci.org/lukaszdaniel/ivory)
+[![Build Status](https://travis-ci.com/lukaszdaniel/ivory.svg?branch=master)](https://travis-ci.com/lukaszdaniel/ivory)
 
 # What is IVORY? #
 IVORY is a project based on R-devel platform. Its aim is to deliver internationalization of R and its recommended packages.

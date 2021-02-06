@@ -187,6 +187,9 @@
       \item \code{capabilities("cairo")} now applies only to the
       file-based devices as it is now possible (if very unusual) to
       build \R with Cairo support for those but not for \code{X11()}.
+
+      \item There is optional support for tracing the progress of
+    \code{loadNamespace} --- see its help.
     }
   }
 
@@ -549,7 +552,7 @@
   }
 }
 
-\section{\Rlogo CHANGES IN R 4.0.3 patched}{
+\section{\Rlogo CHANGES IN R 4.0.4}{
 
   \subsection{NEW FEATURES}{
     \itemize{
@@ -621,6 +624,16 @@
       \item \code{as.data.frame.list(L, row.names=NULL)} now behaves in line
       with \code{data.frame()}, disregarding names of components of
       \code{L}, fixing \PR{18034}, reported by Kevin Tappe.
+
+      \item \code{checkRdaFiles(ff)$version} is now correct also when
+      \code{ff} contains files of different versions, thanks to a report
+      and patch from Sebastian Meyer in \PR{18041}.
+
+      \item Message translation domains, e.g., for errors and warnings, are
+      now correctly determined also when e.g., a \pkg{base} function is
+      called from \dQuote{top-level} function (i.e., defined in \code{globalenv()}),
+      thanks to a patch from Joris Goosen fixing \PR{17998}.
+
     }
   }
 }
