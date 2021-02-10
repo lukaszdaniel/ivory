@@ -1,9 +1,9 @@
 
-Ivory Under development (unstable) (2021-01-29 r1414) -- "Internationalized Version of R"
+Ivory Under development (unstable) (2021-02-06 r1424) -- "Internationalized Version of R"
 Copyright (C) 2013-2021 Lukasz Daniel (lukasz.daniel@gmail.com)
 See README-IVORY file for details.
 
-R Under development (unstable) (2021-01-29 r79898) -- "Unsuffered Consequences"
+R Under development (unstable) (2021-02-06 r79971) -- "Unsuffered Consequences"
 Copyright (C) 2021 The R Foundation for Statistical Computing
 Platform: x86_64-pc-linux-gnu (64-bit)
 
@@ -3755,8 +3755,7 @@ arima(presidents, c(3, 0, 1))  6 838.8124
 +                  fixed=c(NA, NA, 0.5, -0.1, 50), transform.pars=FALSE))
 
 Call:
-arima(x = presidents, order = c(2, 0, 1), seasonal = c(1, 0, 0), transform.pars = FALSE, 
-    fixed = c(NA, NA, 0.5, -0.1, 50))
+arima(x = presidents, order = c(2, 0, 1), seasonal = c(1, 0, 0), transform.pars = FALSE,     fixed = c(NA, NA, 0.5, -0.1, 50))
 
 Coefficients:
          ar1     ar2  ma1  sar1  intercept
@@ -3986,7 +3985,7 @@ sigma^2 estimated as 0.4566:  log likelihood = -101.2,  aic = 212.4
 > 
 > asOneSidedFormula("age")
 ~age
-<environment: 0x564dab2c6600>
+<environment: 0x5983ae0>
 > asOneSidedFormula(~ age)
 ~age
 > 
@@ -5023,7 +5022,7 @@ function (V)
     r[cbind(seq_len(p), seq_len(p))] <- 1
     r
 }
-<bytecode: 0x564dac9dfba0>
+<bytecode: 0x68f3180>
 <environment: namespace:stats>
 > stopifnot(all.equal(Cl, cov2cor(cov(longley))),
 +           all.equal(cor(longley, method = "kendall"),
@@ -7649,7 +7648,7 @@ attr(,".Environment")
 > environment(as.formula("y ~ x"))
 <environment: R_GlobalEnv>
 > environment(as.formula("y ~ x", env = new.env()))
-<environment: 0x564dae786780>
+<environment: 0x9e8b060>
 > 
 > 
 > ## Create a formula for a model with a large number of variables:
@@ -12451,14 +12450,14 @@ attr(,"class")
 $linkfun
 function (mu) 
 mu^lambda
-<bytecode: 0x564dad1b0a80>
-<environment: 0x564dad1c1f00>
+<bytecode: 0x8fd2240>
+<environment: 0x8fe3660>
 
 $linkinv
 function (eta) 
 pmax(eta^(1/lambda), .Machine$double.eps)
-<bytecode: 0x564dad1b1000>
-<environment: 0x564dad1c1f00>
+<bytecode: 0x8fd2780>
+<environment: 0x8fe3660>
 
 > 
 > 
@@ -13019,20 +13018,16 @@ predict.bs :
 	 function (object, newx, ...)  NULL 
 predict.glm :
 	 function (object, newdata = NULL, type = c("link", "response", "terms"), se.fit = FALSE,      dispersion = NULL, terms = NULL, na.action = na.pass, ...)  NULL 
-Warning: namespace ‘MASS’ is not available and has been replaced by '.GlobalEnv' when processing object ‘<unknown>’
 predict.glmmPQL :
 	 function (object, newdata = NULL, type = c("link", "response"), level = Q, na.action = na.pass,      ...)  NULL 
-Warning: namespace ‘MASS’ is not available and has been replaced by '.GlobalEnv' when processing object ‘<unknown>’
 predict.lda :
 	 function (object, newdata, prior = object$prior, dimen, method = c("plug-in", "predictive",      "debiased"), ...)  NULL 
 predict.lm :
 	 function (object, newdata, se.fit = FALSE, scale = NULL, df = Inf, interval = c("none",      "confidence", "prediction"), level = 0.95, type = c("response", "terms"), terms = NULL,      na.action = na.pass, pred.var = res.var/weights, weights = 1, ...)  NULL 
 predict.loess :
 	 function (object, newdata = NULL, se = FALSE, na.action = na.pass, ...)  NULL 
-Warning: namespace ‘MASS’ is not available and has been replaced by '.GlobalEnv' when processing object ‘<unknown>’
 predict.lqs :
 	 function (object, newdata, na.action = na.pass, ...)  NULL 
-Warning: namespace ‘MASS’ is not available and has been replaced by '.GlobalEnv' when processing object ‘<unknown>’
 predict.mca :
 	 function (object, newdata, type = c("row", "factor"), ...)  NULL 
 predict.mlm :
@@ -13047,7 +13042,6 @@ predict.ns :
 	 function (object, newx, ...)  NULL 
 predict.pbSpline :
 	 function (object, x, nseg = 50, deriv = 0, ...)  NULL 
-Warning: namespace ‘MASS’ is not available and has been replaced by '.GlobalEnv' when processing object ‘<unknown>’
 predict.polr :
 	 function (object, newdata, type = c("class", "probs"), ...)  NULL 
 predict.poly :
@@ -13062,10 +13056,8 @@ predict.prcomp :
 	 function (object, newdata, ...)  NULL 
 predict.princomp :
 	 function (object, newdata, ...)  NULL 
-Warning: namespace ‘MASS’ is not available and has been replaced by '.GlobalEnv' when processing object ‘<unknown>’
 predict.qda :
 	 function (object, newdata, prior = object$prior, method = c("plug-in", "predictive",      "debiased", "looCV"), ...)  NULL 
-Warning: namespace ‘MASS’ is not available and has been replaced by '.GlobalEnv' when processing object ‘<unknown>’
 predict.rlm :
 	 function (object, newdata = NULL, scale = NULL, ...)  NULL 
 predict.smooth.spline :
@@ -16708,8 +16700,8 @@ Step function with continuity 'f'=0.2, 3 knots at:
 > unclass(sfun0)
 function (v) 
 .approxfun(x, y, v, method, yleft, yright, f, na.rm)
-<bytecode: 0x564dab3c4d20>
-<environment: 0x564dae090b40>
+<bytecode: 0x58861e0>
+<environment: 0x97f79c0>
 attr(,"call")
 stepfun(1:3, y0, f = 0)
 > ls(envir = environment(sfun0))
@@ -19136,7 +19128,7 @@ Number of Fisher Scoring iterations: 6
 > cleanEx()
 > options(digits = 7L)
 > base::cat(gettext("Time elapsed: ", domain = "R-base"), proc.time() - base::get("ptime", pos = 'CheckExEnv'),"\n")
-Time elapsed:  44.928 0.172 45.111 0 0 
+Time elapsed:  41.636 0.128 41.772 0 0 
 > grDevices::dev.off()
 null device 
           1 
