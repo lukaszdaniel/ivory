@@ -35,6 +35,9 @@ else
   ])
   if test "x${r_cv_has_pangocairo}" = "xyes"; then
     modlist="pangocairo"
+    ## These tests are useful for existence of features but
+    ## because cairo is built as a single library they
+    ## currently make no difference to CPPFLAGS nor LIBS
     for module in cairo-png; do
       if "${PKG_CONFIG}" --exists ${module}; then
 	modlist="${modlist} ${module}"
@@ -54,25 +57,20 @@ else
     fi
     if "${PKG_CONFIG}" --exists cairo-xlib; then
        xmodlist="${modlist} cairo-xlib"
-     r_cairo_xlib=yes
+       r_cairo_xlib=yes
     else
        xmodlist="${modlist}"
     fi
     CAIRO_CPPFLAGS=`"${PKG_CONFIG}" --cflags ${modlist}`
     CAIROX11_CPPFLAGS=`"${PKG_CONFIG}" --cflags ${xmodlist}`
-    case "${host_os}" in
-      darwin*)
-        ## This is for a static macOS build,
-	## although XQuartz does not currently have pangocairo.
-	## FIXME: doing that unconditionally is really not a good idea
-        CAIRO_LIBS=`"${PKG_CONFIG}" --static --libs ${modlist}`
-        CAIROX11_LIBS=`"${PKG_CONFIG}" --static --libs ${xmodlist}`
-        ;;
-      *)
-        CAIRO_LIBS=`"${PKG_CONFIG}" --libs ${modlist}`
-        CAIROX11_LIBS=`"${PKG_CONFIG}" --libs ${xmodlist}`
-        ;;
-    esac
+    if test "x$use_static_cairo" = xyes; then
+       AC_MSG_NOTICE([using static cairo])
+       CAIRO_LIBS=`"${PKG_CONFIG}" --static --libs ${modlist}`
+       CAIROX11_LIBS=`"${PKG_CONFIG}" --static --libs ${xmodlist}`
+    else
+       CAIRO_LIBS=`"${PKG_CONFIG}" --libs ${modlist}`
+       CAIROX11_LIBS=`"${PKG_CONFIG}" --libs ${xmodlist}`
+    fi
 
     CPPFLAGS="${CPPFLAGS} ${CAIRO_CPPFLAGS}"
     LIBS="${LIBS} ${CAIRO_LIBS}"
@@ -135,22 +133,16 @@ int main(void) {
       else
          xmodlist="${modlist}"
       fi
-      ## XQuartz's cairo.pc pulls in X11 headers without cairo-xlib
       CAIRO_CPPFLAGS=`"${PKG_CONFIG}" --cflags ${modlist}`
       CAIROX11_CPPFLAGS=`"${PKG_CONFIG}" --cflags ${xmodlist}`
-      case "${host_os}" in
-        darwin*)
-          ## This is for static macOS build
-	  ## XQuartz's cairo.pc pulls in static X11 libs without cairo-xlib
-	  ## FIXME: doing that unconditionally is really not a good idea
+      if test "x$use_static_cairo" = xyes; then
+      	  AC_MSG_NOTICE([using static cairo])
           CAIRO_LIBS=`"${PKG_CONFIG}" --static --libs ${modlist}`
           CAIROX11_LIBS=`"${PKG_CONFIG}" --static --libs ${xmodlist}`
-          ;;
-        *)
+      else
           CAIRO_LIBS=`"${PKG_CONFIG}" --libs ${modlist}`
           CAIROX11_LIBS=`"${PKG_CONFIG}" --libs ${xmodlist}`
-          ;;
-      esac
+      fi
 
       CPPFLAGS="${CPPFLAGS} ${CAIRO_CPPFLAGS} ${CAIROX11_CPPFLAGS}"
       LIBS="${LIBS} ${CAIRO_LIBS}"
@@ -174,6 +166,8 @@ int main(void) {
 	]])],[r_cv_cairo_works=yes],[r_cv_cairo_works=no
           CAIRO_LIBS=
           CAIRO_CFLAGS=
+          CAIROX11_LIBS=
+          CAIROX11_CFLAGS=
         ])])
       CPPFLAGS=${save_CPPFLAGS}
       LIBS=${save_LIBS}

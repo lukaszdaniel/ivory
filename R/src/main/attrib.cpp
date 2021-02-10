@@ -1240,7 +1240,8 @@ HIDDEN SEXP do_attributes(SEXP call, SEXP op, SEXP args, SEXP env)
     if (TYPEOF(CAR(args)) == ENVSXP)
 	R_CheckStack(); /* in case attributes might lead to a cycle */
 
-    SEXP attrs = ATTRIB(CAR(args)), namesattr;
+    GCRoot<> attrs(ATTRIB(CAR(args)));
+	SEXP namesattr;
     int nvalues = length(attrs);
     if (isList(CAR(args))) {
 	namesattr = getAttrib(CAR(args), R_NamesSymbol);

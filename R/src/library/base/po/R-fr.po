@@ -4190,11 +4190,10 @@ msgstr[1] "aucun package nommé %s n'est trouvé"
 
 #. R/stop.R: ngettext(length(r), "variable %s is not TRUE", "variables %s are not all TRUE", domain = "R-base")
 #: R/stop.R:0
-#, fuzzy
 msgid "variable %s is not TRUE"
 msgid_plural "variables %s are not all TRUE"
-msgstr[0] "T utilisé à la place de TRUE"
-msgstr[1] "T utilisé à la place de TRUE"
+msgstr[0] "%s n'est pas TRUE"
+msgstr[1] "%s ne sont pas TRUE"
 
 #, fuzzy
 #~ msgid "'%s' is not an exported object from 'namespace:%s'"

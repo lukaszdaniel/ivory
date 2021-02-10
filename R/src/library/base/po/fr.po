@@ -1565,22 +1565,17 @@ msgid_plural ""
 msgstr[0] "%d argument passés à '%s' qui en exige %d"
 msgstr[1] "%d argument passés à '%s' qui en exige %d"
 
-#: src/main/arithmetic.cpp:1719
-#, fuzzy, c-format
-msgid "argument \"%s\" is missing, with no default"
-msgstr "l'argument \"%s\" est manquant, avec aucune valeur par défaut"
-
 #: src/main/arithmetic.cpp:1734
 msgid "invalid second argument of length 0"
 msgstr "second argument de taille nulle incorrect"
 
-#: src/main/arithmetic.cpp:1829 src/main/arithmetic.cpp:1847
+#: src/main/arithmetic.cpp:1719 src/main/arithmetic.cpp:1829 src/main/arithmetic.cpp:1847
 #: src/main/envir.cpp:1563 src/main/envir.cpp:2065 src/main/eval.cpp:766
 #: src/main/eval.cpp:767 src/main/eval.cpp:5424 src/main/eval.cpp:5426
 #: src/main/RNG.cpp:360
-#, fuzzy, c-format
+#, c-format
 msgid "'%s' argument is missing, with no default"
-msgstr "argument manquant, sans valeur associée par défaut"
+msgstr "l'argument '%s' est manquant, avec aucune valeur par défaut"
 
 #: src/main/arithmetic.cpp:1853
 msgid "invalid argument 'base' of length 0"

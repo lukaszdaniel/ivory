@@ -59,6 +59,8 @@ namespace CXXR
         while (pl)
         {
             c->m_tail = new PairList(*pl, deep, 0);
+            if (c->m_tail)
+                INCREMENT_REFCNT(c->m_tail);
             c = c->m_tail;
             pl = pl->m_tail;
         }

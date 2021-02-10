@@ -82,21 +82,6 @@ namespace CXXR
         abort();
     }
 
-    void RObject::cloneAttributes(const RObject *source, bool deep)
-    {
-        if (source)
-        {
-            m_attrib = RObject::clone(source->m_attrib, deep);
-            propagateAge(m_attrib);
-            m_has_class = source->m_has_class;
-        }
-        else
-        {
-            m_attrib = nullptr;
-            m_has_class = false;
-        }
-    }
-
     namespace
     {
         // Used in {,un}packGPBits():

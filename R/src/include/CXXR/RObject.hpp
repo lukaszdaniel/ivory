@@ -574,10 +574,6 @@ namespace CXXR
             return static_cast<T *>(duplicate_child(const_cast<T *>(pattern), deep));
         }
 
-        // Introduced temporarily while copy constructors are being
-        // rolled out:
-        void cloneAttributes(const RObject *source, bool deep);
-
     protected:
         /**
          * @param stype Required type of the RObject.

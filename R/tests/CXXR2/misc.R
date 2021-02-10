@@ -30,8 +30,8 @@ system.time(for (i in 1:1e9) break)
 
 tools::assertError(y <- x + 1L)
 
-x <- rnorm(1e7)
-y <- x + rnorm(1e7)
+x <- rnorm(1e5)
+y <- x + rnorm(1e5)
 system.time(lm(y ~ x))
 
 x <- structure(numeric(1e9), class = "foo")

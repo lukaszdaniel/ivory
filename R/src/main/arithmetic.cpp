@@ -1716,7 +1716,7 @@ HIDDEN SEXP do_Math2(SEXP call, SEXP op, SEXP args, SEXP env)
 	    // Ensure  we do not call it with a mis-named argument:
 	    if(CAR(args) == R_MissingArg ||
 	       (TAG(args) != R_NilValue && TAG(args) != R_x_Symbol))
-		error(_("argument \"%s\" is missing, with no default"), "x");
+		error(_("'%s' argument is missing, with no default"), "x");
 	    double digits = 0.0; // round()
 	    if(PRIMVAL(op) == 10004) // signif()
 		digits = 6.0;

@@ -2434,7 +2434,8 @@ HIDDEN SEXP do_attach(SEXP call, SEXP op, SEXP args, SEXP env)
 	    for (x = CAR(args); x != R_NilValue; x = CDR(x))
 		if (TAG(x) == R_NilValue)
 		    error(_("all elements of a list must be named"));
-	    PROTECT(s = new Environment(nullptr, SEXP_downcast<PairList*>(shallow_duplicate(CAR(args)))));
+	    GCRoot<PairList> dupcar(SEXP_downcast<PairList*>(shallow_duplicate(CAR(args))));
+        PROTECT(s = new Environment(nullptr, dupcar));
 	    s->expose();
 	} else if (isEnvironment(CAR(args))) {
 	    SEXP p, loadenv = CAR(args);

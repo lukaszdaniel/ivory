@@ -395,7 +395,7 @@ void GCManager::gcGenController(size_t bytes_wanted, bool full)
                 MemoryBank::bytesAllocated() + bytes_wanted > (1.0 - R_MinFreeFrac) * s_threshold)
             {
                 level++;
-                if (GCNode::numNodes() >= s_node_threshold || MemoryBank::bytesAllocated() + bytes_wanted >= s_threshold)
+                if (/*GCNode::numNodes() >= s_node_threshold ||*/ MemoryBank::bytesAllocated() + bytes_wanted >= s_threshold)
                     ok = false;
             }
             else

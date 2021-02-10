@@ -189,7 +189,11 @@
       build \R with Cairo support for those but not for \code{X11()}.
 
       \item There is optional support for tracing the progress of
-    \code{loadNamespace} --- see its help.
+      \code{loadNamespace} --- see its help.
+
+      \item \code{grSoftVersion()} now reports the versions of FreeType
+      and FontConfig if they are used directly (not \emph{via} Pango),
+      as is most commonly done on macOS.
     }
   }
 
@@ -267,11 +271,17 @@
       cover the Basic Multilingual Plane.
 
       \item Cairo installations without X11 are more likely to be
-      detected by \command{configure}, when the file-based Cairo devices
-      will be available but not \code{X11(type = "cairo")}.
+      detected by \command{configure}, when the file-based Cairo
+      graphics devices will be available but not \code{X11(type =
+      "cairo")}.
 
-      Pango installations using static libraries on macOS are more
-      likely to be detected.
+      \item There is a new \command{configure} option
+      \option{--with-static-cairo} which is the default on macOS.  This
+      should be used when only static cairo (and where relevant, Pango)
+      libraries are available.
+
+      \item Cairo-based graphics devices on platforms without Pango but
+      with freetype/fontconfig will make use of the latter for font selection.
     }
   }
 
@@ -548,6 +558,23 @@
       Additionally, it no longer fails for \code{list}s with a \code{class} and
       \dQuote{irregular} method definitions such that e.g. \code{lapply(*)} will
       necessarily fail, as currently for different \CRANpkg{igraph} objects.
+
+      \item Too long lines in environment files (e.g. \code{Renviron}) no
+      longer crash \R. This limit has been increased to 100,000 bytes
+      (\PR{18001}).
+
+      \item There is a further workaround for FreeType giving
+      incorrect italic font faces with cairo-based graphics devices on
+      macOS.
+
+      \item \code{add_datalist(*, force = TRUE)} (from package
+      \pkg{tools}) now actually updates an existing \file{data/datalist}
+      file for new content, thanks to a report and patch by Sebastian
+      Meyer in \PR{18048}.
+
+      \item \code{cut.Date()} and \code{cut.POSIXt()} could produce
+      an empty last interval for \code{breaks = "months"} or
+      \code{breaks = "years"}.  Reported as \PR{18053} by Christopher Carbone.      
     }
   }
 }

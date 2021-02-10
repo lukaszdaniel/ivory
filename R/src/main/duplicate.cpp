@@ -90,19 +90,23 @@ using namespace CXXR;
    assignment functions (and duplicate in the case of ATTRIB) when the
    ATTRIB or TAG value to be stored is R_NilValue, the value the field
    will have been set to by the allocation function */
-#define DUPLICATE_ATTRIB(to, from, deep)         \
-	do                                           \
-	{                                            \
-		if (to)                                  \
-			(to)->cloneAttributes((from), deep); \
-		if (IS_S4_OBJECT(from))                  \
-		{                                        \
-			SET_S4_OBJECT(to);                   \
-		}                                        \
-		else                                     \
-		{                                        \
-			UNSET_S4_OBJECT(to);                 \
-		};                                       \
+#define DUPLICATE_ATTRIB(to, from, deep)             \
+	do                                               \
+	{                                                \
+		SEXP __a__ = ATTRIB(from);                   \
+		if (__a__ != R_NilValue)                     \
+		{                                            \
+			SET_ATTRIB(to, duplicate1(__a__, deep)); \
+			SET_OBJECT(to, OBJECT(from));            \
+			if (IS_S4_OBJECT(from))                  \
+			{                                        \
+				SET_S4_OBJECT(to);                   \
+			}                                        \
+			else                                     \
+			{                                        \
+				UNSET_S4_OBJECT(to);                 \
+			};                                       \
+		}                                            \
 	} while (0)
 
 /* For memory profiling.  */
