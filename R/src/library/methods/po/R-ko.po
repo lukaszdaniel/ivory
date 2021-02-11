@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 3.1.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2021-01-30 18:45\n"
+"POT-Creation-Date: 2021-02-11 18:11\n"
 "PO-Revision-Date: 2014-03-27 13:32-0600\n"
 "Last-Translator: Chel Hee Lee <chl948@mail.usask.ca>\n"
 "Language-Team:  <chl948@mail.usask.ca>\n"
@@ -340,6 +340,26 @@ msgstr ""
 #. R/methodsTable.R: gettext("** individual arguments' distances:", domain = "R-methods")
 #: R/methodsTable.R:0
 msgid "** individual arguments' distances:"
+msgstr ""
+
+#. R/RMethodUtils.R: gettextf("--- caching class %s", dQuote(cl))
+#: R/RMethodUtils.R:0
+msgid "--- caching class %s"
+msgstr ""
+
+#. R/RMethodUtils.R: gettextf("--- done caching class %s", dQuote(cl))
+#: R/RMethodUtils.R:0
+msgid "--- done caching class %s"
+msgstr ""
+
+#. R/RMethodUtils.R: gettextf("--- done getting generic %s", sQuote(f))
+#: R/RMethodUtils.R:0
+msgid "--- done getting generic %s"
+msgstr ""
+
+#. R/RMethodUtils.R: gettextf("--- getting generic %s (and methods)", sQuote(f))
+#: R/RMethodUtils.R:0
+msgid "--- getting generic %s (and methods)"
 msgstr ""
 
 #. R/methodsTable.R: gettextf(" .. method %d: length(sig) = %d < nArg = %d\n", i, length(sig), nArg, domain = "R-methods")
@@ -1526,11 +1546,6 @@ msgstr ""
 msgid "both classes must be defined"
 msgstr "양쪽 모두의 클래스가 정의되어져야 합니다"
 
-#. R/RMethodUtils.R: gettextf("caching class %s", dQuote(cl))
-#: R/RMethodUtils.R:0
-msgid "caching class %s"
-msgstr ""
-
 #. R/NextMethod.R: stop("call to 'callNextMethod' does not appear to be in a 'method' or 'callNextMethod' context")
 #: R/NextMethod.R:0
 msgid ""
@@ -1872,16 +1887,6 @@ msgstr ""
 msgid "done"
 msgstr ""
 
-#. R/RMethodUtils.R: gettextf("done caching class %s", dQuote(cl))
-#: R/RMethodUtils.R:0
-msgid "done caching class %s"
-msgstr ""
-
-#. R/RMethodUtils.R: gettextf("done getting generic '%s'", f)
-#: R/RMethodUtils.R:0
-msgid "done getting generic '%s'"
-msgstr ""
-
 #. R/SClasses.R: gettext("duplicate class names among superclasses: %s", domain = "R-methods")
 #: R/SClasses.R:0
 msgid "duplicate class names among superclasses: %s"
@@ -2075,11 +2080,6 @@ msgstr "제네릭명이 다릅니다: %s, %s"
 msgid ""
 "get rid of variables in definition %s (%s); they conflict with the needed "
 "change to argument names (%s)"
-msgstr ""
-
-#. R/RMethodUtils.R: gettextf("getting generic '%s'", f)
-#: R/RMethodUtils.R:0
-msgid "getting generic '%s'"
 msgstr ""
 
 #. R/RMethodUtils.R: stop("got a negative maximum number of frames to look at")

@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: methods 4.1.0\n"
-"POT-Creation-Date: 2021-01-30 18:45\n"
+"POT-Creation-Date: 2021-02-11 18:11\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -364,6 +364,34 @@ msgstr ""
 #. R/methodsTable.R: gettext("** individual arguments' distances:", domain = "R-methods")
 
 msgid "** individual arguments' distances:"
+msgstr ""
+
+
+#: R/RMethodUtils.R: 0
+#. R/RMethodUtils.R: gettextf("--- caching class %s", dQuote(cl))
+
+msgid "--- caching class %s"
+msgstr ""
+
+
+#: R/RMethodUtils.R: 0
+#. R/RMethodUtils.R: gettextf("--- done caching class %s", dQuote(cl))
+
+msgid "--- done caching class %s"
+msgstr ""
+
+
+#: R/RMethodUtils.R: 0
+#. R/RMethodUtils.R: gettextf("--- done getting generic %s", sQuote(f))
+
+msgid "--- done getting generic %s"
+msgstr ""
+
+
+#: R/RMethodUtils.R: 0
+#. R/RMethodUtils.R: gettextf("--- getting generic %s (and methods)", sQuote(f))
+
+msgid "--- getting generic %s (and methods)"
 msgstr ""
 
 
@@ -1684,13 +1712,6 @@ msgid "both classes must be defined"
 msgstr ""
 
 
-#: R/RMethodUtils.R: 0
-#. R/RMethodUtils.R: gettextf("caching class %s", dQuote(cl))
-
-msgid "caching class %s"
-msgstr ""
-
-
 #: R/NextMethod.R: 0
 #. R/NextMethod.R: stop("call to 'callNextMethod' does not appear to be in a 'method' or 'callNextMethod' context")
 
@@ -2051,20 +2072,6 @@ msgid "done"
 msgstr ""
 
 
-#: R/RMethodUtils.R: 0
-#. R/RMethodUtils.R: gettextf("done caching class %s", dQuote(cl))
-
-msgid "done caching class %s"
-msgstr ""
-
-
-#: R/RMethodUtils.R: 0
-#. R/RMethodUtils.R: gettextf("done getting generic '%s'", f)
-
-msgid "done getting generic '%s'"
-msgstr ""
-
-
 #: R/SClasses.R: 0
 #. R/SClasses.R: gettext("duplicate class names among superclasses: %s", domain = "R-methods")
 
@@ -2287,13 +2294,6 @@ msgstr ""
 #. R/RClassUtils.R: gettext("get rid of variables in definition %s (%s); they conflict with the needed change to argument names (%s)",     domain = "R-methods")
 
 msgid "get rid of variables in definition %s (%s); they conflict with the needed change to argument names (%s)"
-msgstr ""
-
-
-#: R/RMethodUtils.R: 0
-#. R/RMethodUtils.R: gettextf("getting generic '%s'", f)
-
-msgid "getting generic '%s'"
 msgstr ""
 
 

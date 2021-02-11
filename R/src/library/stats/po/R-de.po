@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.15.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2021-01-30 18:45\n"
+"POT-Creation-Date: 2021-02-11 18:12\n"
 "PO-Revision-Date: 2015-01-17 15:36+0100\n"
 "Last-Translator: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
 "Language-Team: R Core <r-core@r-project.org>\n"
@@ -507,6 +507,12 @@ msgstr "das 'split' Argument muss eine Liste sein"
 #, fuzzy
 msgid "'%s' argument will be ignored"
 msgstr "Argument 'subset' wird ignoriert"
+
+#. R/power.R: gettextf("'%s' must be numeric in [0, 1]", deparse1(substitute(x)))
+#: R/power.R:0
+#, fuzzy
+msgid "'%s' must be numeric in [0, 1]"
+msgstr "'sig.level' muss numerisch aus [0, 1] sein"
 
 #. R/symnum.R: gettextf("'%s' must be unique, but are = %s", "cutpoints", tmp_n)
 #. R/symnum.R: gettextf("'%s' must be unique, but are = %s", "symbols", tmp_n)
@@ -1148,14 +1154,6 @@ msgstr "'sep' muss eine Zeichenkette sein"
 #, fuzzy
 msgid "'sides' argument must be 1 or 2"
 msgstr "Argument 'x' muss numerisch sein"
-
-#. R/power.R: stop("'sig.level' argument must be numeric in [0, 1]")
-#. R/power.R: stop("'sig.level' argument must be numeric in [0, 1]")
-#. R/power.anova.test.R: stop("'sig.level' argument must be numeric in [0, 1]")
-#: R/power.R:0 R/power.anova.test.R:0
-#, fuzzy
-msgid "'sig.level' argument must be numeric in [0, 1]"
-msgstr "'sig.level' muss numerisch aus [0, 1] sein"
 
 #. R/lm.R: stop("'simulate()' function is not yet implemented for multivariate 'lm()'")
 #: R/lm.R:0
@@ -7157,6 +7155,10 @@ msgstr[0] "benutze %d/%d Zeilen aus einem kombinierten Fit"
 msgstr[1] "benutze %d/%d Zeilen aus einem kombinierten Fit"
 
 #, fuzzy
+#~ msgid "'sig.level' argument must be numeric in [0, 1]"
+#~ msgstr "'sig.level' muss numerisch aus [0, 1] sein"
+
+#, fuzzy
 #~ msgid ""
 #~ "number of offsets (%d) should be equal to number of observations (%d)"
 #~ msgstr ""
@@ -7406,9 +7408,6 @@ msgstr[1] "benutze %d/%d Zeilen aus einem kombinierten Fit"
 
 #~ msgid "'interval' must be a vector of length 2"
 #~ msgstr "'interval' muss ein Vektor der Länge 2 sein"
-
-#~ msgid "'sig.level' must be numeric in [0, 1]"
-#~ msgstr "'sig.level' muss numerisch aus [0, 1] sein"
 
 #~ msgid "'conf.level' must be a single number between 0 and 1"
 #~ msgstr "'conf.level' muss eine einzelne Zahl zwischen 0 und 1 sein"

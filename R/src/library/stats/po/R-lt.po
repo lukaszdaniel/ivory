@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: stats 4.1.0\n"
-"POT-Creation-Date: 2021-01-30 18:45\n"
+"POT-Creation-Date: 2021-02-11 18:12\n"
 "PO-Revision-Date: 2021-01-07 23:48+0100\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -496,6 +496,12 @@ msgstr "'x' ilgis turi būti >= 1"
 #, fuzzy
 msgid "'%s' argument will be ignored"
 msgstr "argumentas 'subset' bus ignoruojamas"
+
+#. R/power.R: gettextf("'%s' must be numeric in [0, 1]", deparse1(substitute(x)))
+#: R/power.R:0
+#, fuzzy
+msgid "'%s' must be numeric in [0, 1]"
+msgstr "'sig.level' turi būti skaitinis [0,1]"
 
 #. R/symnum.R: gettextf("'%s' must be unique, but are = %s", "cutpoints", tmp_n)
 #. R/symnum.R: gettextf("'%s' must be unique, but are = %s", "symbols", tmp_n)
@@ -1129,14 +1135,6 @@ msgstr "'sep' turi būti simbolių eilutė"
 #, fuzzy
 msgid "'sides' argument must be 1 or 2"
 msgstr "argumentas 'sides' turi būti 1 arba 2"
-
-#. R/power.R: stop("'sig.level' argument must be numeric in [0, 1]")
-#. R/power.R: stop("'sig.level' argument must be numeric in [0, 1]")
-#. R/power.anova.test.R: stop("'sig.level' argument must be numeric in [0, 1]")
-#: R/power.R:0 R/power.anova.test.R:0
-#, fuzzy
-msgid "'sig.level' argument must be numeric in [0, 1]"
-msgstr "'sig.level' turi būti skaitinis [0,1]"
 
 #. R/lm.R: stop("'simulate()' function is not yet implemented for multivariate 'lm()'")
 #: R/lm.R:0

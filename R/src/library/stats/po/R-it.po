@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.3.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2021-01-30 18:45\n"
+"POT-Creation-Date: 2021-02-11 18:12\n"
 "PO-Revision-Date: 2005-04-14 18:07+0200\n"
 "Last-Translator: stefano iacus <>\n"
 "Language-Team: Italian <it@li.org>\n"
@@ -501,6 +501,12 @@ msgstr "l'argomento 'split' deve essere di tipo list"
 #, fuzzy
 msgid "'%s' argument will be ignored"
 msgstr "l'argomento 'sides' deve essere 1 o 2"
+
+#. R/power.R: gettextf("'%s' must be numeric in [0, 1]", deparse1(substitute(x)))
+#: R/power.R:0
+#, fuzzy
+msgid "'%s' must be numeric in [0, 1]"
+msgstr "'sig.level' deve essere numerico in [0, 1]"
 
 #. R/symnum.R: gettextf("'%s' must be unique, but are = %s", "cutpoints", tmp_n)
 #. R/symnum.R: gettextf("'%s' must be unique, but are = %s", "symbols", tmp_n)
@@ -1141,14 +1147,6 @@ msgstr "'file' deve essere una stringa di caratteri o una connessione"
 #, fuzzy
 msgid "'sides' argument must be 1 or 2"
 msgstr "l'argomento 'x' deve essere numerico"
-
-#. R/power.R: stop("'sig.level' argument must be numeric in [0, 1]")
-#. R/power.R: stop("'sig.level' argument must be numeric in [0, 1]")
-#. R/power.anova.test.R: stop("'sig.level' argument must be numeric in [0, 1]")
-#: R/power.R:0 R/power.anova.test.R:0
-#, fuzzy
-msgid "'sig.level' argument must be numeric in [0, 1]"
-msgstr "'sig.level' deve essere numerico in [0, 1]"
 
 #. R/lm.R: stop("'simulate()' function is not yet implemented for multivariate 'lm()'")
 #: R/lm.R:0
@@ -7158,6 +7156,10 @@ msgstr[0] "uso le %d/%d righe da una stima combinata"
 msgstr[1] "uso le %d/%d righe da una stima combinata"
 
 #, fuzzy
+#~ msgid "'sig.level' argument must be numeric in [0, 1]"
+#~ msgstr "'sig.level' deve essere numerico in [0, 1]"
+
+#, fuzzy
 #~ msgid ""
 #~ "number of offsets (%d) should be equal to number of observations (%d)"
 #~ msgstr ""
@@ -7399,9 +7401,6 @@ msgstr[1] "uso le %d/%d righe da una stima combinata"
 #, fuzzy
 #~ msgid "'interval' must be a vector of length 2"
 #~ msgstr "'margins' deve essere un vettore numerico di lunghezza 2"
-
-#~ msgid "'sig.level' must be numeric in [0, 1]"
-#~ msgstr "'sig.level' deve essere numerico in [0, 1]"
 
 #~ msgid "'conf.level' must be a single number between 0 and 1"
 #~ msgstr "'conf.level' deve essere un numero tra 0 e 1"

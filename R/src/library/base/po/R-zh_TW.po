@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 3.5.1\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2021-01-30 18:44\n"
+"POT-Creation-Date: 2021-02-11 18:09\n"
 "PO-Revision-Date: 2018-09-16 23:38+0800\n"
 "Last-Translator: Wei-Lun Chao <bluebat@member.fsf.org>\n"
 "Language-Team: Chinese (traditional) <zh-l10n@linux.org.tw>\n"
@@ -1160,6 +1160,118 @@ msgstr ""
 msgid "** No title available **"
 msgstr "無 traceback"
 
+#. R/namespace.R: gettextf("- done loading package %s", dQuote(package))
+#: R/namespace.R:0
+#, fuzzy
+msgid "- done loading package %s"
+msgstr "套件 %s 裡的 R 寫碼載入失敗"
+
+#. R/namespace.R: gettextf("- loading package %s", dQuote(package))
+#: R/namespace.R:0
+#, fuzzy
+msgid "- loading package %s"
+msgstr "載入套件：%s"
+
+#. R/namespace.R: gettextf("-- done processing S4 stuff for package %s", dQuote(package))
+#: R/namespace.R:0
+#, fuzzy
+msgid "-- done processing S4 stuff for package %s"
+msgstr "關於這個套件 %s 的說明書"
+
+#. R/namespace.R: gettextf("-- done processing imports for package %s", dQuote(package))
+#: R/namespace.R:0
+#, fuzzy
+msgid "-- done processing imports for package %s"
+msgstr "關於這個套件 %s 的說明書"
+
+#. R/namespace.R: gettextf("-- done registerS3methods for package %s", dQuote(package))
+#: R/namespace.R:0
+#, fuzzy
+msgid "-- done registerS3methods for package %s"
+msgstr "關於這個套件 %s 的說明書"
+
+#. R/namespace.R: gettextf("-- done running .onLoad for package %s", dQuote(package))
+#: R/namespace.R:0
+#, fuzzy
+msgid "-- done running .onLoad for package %s"
+msgstr "關於這個套件 %s 的說明書"
+
+#. R/namespace.R: gettextf("-- loading code for package %s", dQuote(package))
+#. R/namespace.R: gettextf("-- loading code for package %s", dQuote(package))
+#: R/namespace.R:0
+#, fuzzy
+msgid "-- loading code for package %s"
+msgstr "關於這個套件 %s 的說明書"
+
+#. R/namespace.R: gettextf("-- loading lazydata for package %s", dQuote(package))
+#: R/namespace.R:0
+#, fuzzy
+msgid "-- loading lazydata for package %s"
+msgstr "關於這個套件 %s 的說明書"
+
+#. R/namespace.R: gettextf("-- loading sysdata for package %s", dQuote(package))
+#: R/namespace.R:0
+#, fuzzy
+msgid "-- loading sysdata for package %s"
+msgstr "關於這個套件 %s 的說明書"
+
+#. R/namespace.R: gettextf("-- processing S4 stuff for package %s", dQuote(package))
+#: R/namespace.R:0
+#, fuzzy
+msgid "-- processing S4 stuff for package %s"
+msgstr "關於這個套件 %s 的說明書"
+
+#. R/namespace.R: gettextf("-- processing imports for package %s", dQuote(package))
+#: R/namespace.R:0
+#, fuzzy
+msgid "-- processing imports for package %s"
+msgstr "關於這個套件 %s 的說明書"
+
+#. R/namespace.R: gettextf("-- registerS3methods for package %s", dQuote(package))
+#: R/namespace.R:0
+#, fuzzy
+msgid "-- registerS3methods for package %s"
+msgstr "關於這個套件 %s 的說明書"
+
+#. R/namespace.R: gettextf("-- running .onLoad for package %s", dQuote(package))
+#: R/namespace.R:0
+#, fuzzy
+msgid "-- running .onLoad for package %s"
+msgstr "關於這個套件 %s 的說明書"
+
+#. R/namespace.R: message("--- caching metadata")
+#: R/namespace.R:0
+msgid "--- caching metadata"
+msgstr ""
+
+#. R/namespace.R: message("--- done caching metadata")
+#: R/namespace.R:0
+msgid "--- done caching metadata"
+msgstr ""
+
+#. R/namespace.R: message("--- processing classes")
+#: R/namespace.R:0
+#, fuzzy
+msgid "--- processing classes"
+msgstr "類別無效"
+
+#. R/namespace.R: gettextf("--- processing exports for package %s", dQuote(package))
+#: R/namespace.R:0
+#, fuzzy
+msgid "--- processing exports for package %s"
+msgstr "關於這個套件 %s 的說明書"
+
+#. R/namespace.R: gettextf("--- sealing exports for package %s", dQuote(package))
+#: R/namespace.R:0
+#, fuzzy
+msgid "--- sealing exports for package %s"
+msgstr "關於這個套件 %s 的說明書"
+
+#. R/namespace.R: gettextf("---- export method %s", sQuote(mi))
+#: R/namespace.R:0
+msgid "---- export method %s"
+msgstr ""
+
 #. R/../../../../share/R/REMOVE.R: stop("-l option without value", call. = FALSE)
 #: R/../../../../share/R/REMOVE.R:0
 msgid "-l option without value"
@@ -2056,11 +2168,6 @@ msgstr ""
 msgid "buggy version of Kinderman-Ramage generator used"
 msgstr ""
 
-#. R/namespace.R: message("cached metadata")
-#: R/namespace.R:0
-msgid "cached metadata"
-msgstr ""
-
 #. R/load.R: stop("can only save to a binary connection")
 #: R/load.R:0
 msgid "can only save to a binary connection"
@@ -2262,23 +2369,6 @@ msgstr "dim(X) 的值必須是正數"
 msgid "do not know how to convert %s to class %s"
 msgstr "不知如何將 '%s' 轉換成 %s 類別"
 
-#. R/namespace.R: message("done cached metadata")
-#: R/namespace.R:0
-msgid "done cached metadata"
-msgstr ""
-
-#. R/namespace.R: gettextf("done processing imports for package %s", sQuote(package))
-#: R/namespace.R:0
-#, fuzzy
-msgid "done processing imports for package %s"
-msgstr "關於這個套件 %s 的說明書"
-
-#. R/namespace.R: gettextf("done running .onLoad for package %s", sQuote(package))
-#: R/namespace.R:0
-#, fuzzy
-msgid "done running .onLoad for package %s"
-msgstr "關於這個套件 %s 的說明書"
-
 #. R/namespace.R: gettextf("duplicate import names %s", paste(sQuote(impnames[duplicated(impnames)]),     collapse = ", "))
 #: R/namespace.R:0
 msgid "duplicate import names %s"
@@ -2366,11 +2456,6 @@ msgstr " 'to'，'by'，'length.out'/'along.with' 中四個只能同時選兩個"
 msgid ""
 "exactly two of 'to', 'by' and 'length.out' / 'along.with' must be specified"
 msgstr " 'to'，'by'，'length.out'/'along.with' 中四個只能同時選兩個"
-
-#. R/namespace.R: gettextf("export method '%s'", mi)
-#: R/namespace.R:0
-msgid "export method '%s'"
-msgstr ""
 
 #. R/factor.R: gettext("factor levels must be \"character\"", domain = "R-base")
 #: R/factor.R:0
@@ -2762,23 +2847,6 @@ msgstr "已經存在 '%s' 這個鏈結"
 #, fuzzy
 msgid "list of length %d is not meaningful"
 msgstr "%d 長度的串列沒有意義"
-
-#. R/namespace.R: message("loading ", package)
-#: R/namespace.R:0
-msgid "loading"
-msgstr ""
-
-#. R/namespace.R: gettextf("loading lazydata for package %s", sQuote(package))
-#: R/namespace.R:0
-#, fuzzy
-msgid "loading lazydata for package %s"
-msgstr "關於這個套件 %s 的說明書"
-
-#. R/namespace.R: gettextf("loading sysdata for package %s", sQuote(package))
-#: R/namespace.R:0
-#, fuzzy
-msgid "loading sysdata for package %s"
-msgstr "關於這個套件 %s 的說明書"
 
 #. R/merge.R: stop("long vectors are not supported")
 #: R/merge.R:0
@@ -3368,30 +3436,6 @@ msgstr ""
 msgid "probably wrong encoding in 'names(.)' of column %s"
 msgstr "行名稱的編碼可能無效"
 
-#. R/namespace.R: message("procesing classes")
-#: R/namespace.R:0
-#, fuzzy
-msgid "procesing classes"
-msgstr "類別無效"
-
-#. R/namespace.R: gettextf("processing S4 stuff for package %s", sQuote(package))
-#: R/namespace.R:0
-#, fuzzy
-msgid "processing S4 stuff for package %s"
-msgstr "關於這個套件 %s 的說明書"
-
-#. R/namespace.R: gettextf("processing exports for package %s", sQuote(package))
-#: R/namespace.R:0
-#, fuzzy
-msgid "processing exports for package %s"
-msgstr "關於這個套件 %s 的說明書"
-
-#. R/namespace.R: gettextf("processing imports for package %s", sQuote(package))
-#: R/namespace.R:0
-#, fuzzy
-msgid "processing imports for package %s"
-msgstr "關於這個套件 %s 的說明書"
-
 #. R/conditions.R: sprintf("pushing duplicate `%s` handler on top of the stack", class)
 #: R/conditions.R:0
 msgid "pushing duplicate `%s` handler on top of the stack"
@@ -3452,23 +3496,11 @@ msgstr "列名稱長度無效"
 msgid "row names were found from a short variable and have been discarded"
 msgstr "短變數裡找到了列名稱，因此不用"
 
-#. R/namespace.R: gettextf("running .onLoad for package %s", sQuote(package))
-#: R/namespace.R:0
-#, fuzzy
-msgid "running .onLoad for package %s"
-msgstr "關於這個套件 %s 的說明書"
-
 #. R/windows/system.R: gettextf("running command '%s' had status %d", command, rval)
 #. R/windows/system.R: gettextf("running command '%s' had status %d", command, rval)
 #: R/windows/system.R:0
 msgid "running command '%s' had status %d"
 msgstr ""
-
-#. R/namespace.R: gettextf("sealing exports for package %s", sQuote(package))
-#: R/namespace.R:0
-#, fuzzy
-msgid "sealing exports for package %s"
-msgstr "關於這個套件 %s 的說明書"
 
 #. R/datetime.R: gettextf("second argument of '/' operator cannot be an object of class %s", dQuote("difftime"))
 #: R/datetime.R:0

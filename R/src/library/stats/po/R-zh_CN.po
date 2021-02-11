@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.2.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2021-01-30 18:45\n"
+"POT-Creation-Date: 2021-02-11 18:12\n"
 "PO-Revision-Date: 2015-01-17 15:50+0100\n"
 "Last-Translator: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
 "Language-Team: Chinese\n"
@@ -507,6 +507,12 @@ msgstr "'split'参数必需是串列"
 #, fuzzy
 msgid "'%s' argument will be ignored"
 msgstr "参数'subset'略过不用"
+
+#. R/power.R: gettextf("'%s' must be numeric in [0, 1]", deparse1(substitute(x)))
+#: R/power.R:0
+#, fuzzy
+msgid "'%s' must be numeric in [0, 1]"
+msgstr "'sig.level'必需是在[0, 1] 里的数值"
 
 #. R/symnum.R: gettextf("'%s' must be unique, but are = %s", "cutpoints", tmp_n)
 #. R/symnum.R: gettextf("'%s' must be unique, but are = %s", "symbols", tmp_n)
@@ -1144,14 +1150,6 @@ msgstr "'sep'必需是字符串"
 #, fuzzy
 msgid "'sides' argument must be 1 or 2"
 msgstr "参数'x'必需是数值"
-
-#. R/power.R: stop("'sig.level' argument must be numeric in [0, 1]")
-#. R/power.R: stop("'sig.level' argument must be numeric in [0, 1]")
-#. R/power.anova.test.R: stop("'sig.level' argument must be numeric in [0, 1]")
-#: R/power.R:0 R/power.anova.test.R:0
-#, fuzzy
-msgid "'sig.level' argument must be numeric in [0, 1]"
-msgstr "'sig.level'必需是在[0, 1] 里的数值"
 
 #. R/lm.R: stop("'simulate()' function is not yet implemented for multivariate 'lm()'")
 #: R/lm.R:0
@@ -7021,6 +7019,10 @@ msgid_plural "using the %d/%d rows from a combined fit"
 msgstr[0] "在组合拟合中用%d/%d行"
 
 #, fuzzy
+#~ msgid "'sig.level' argument must be numeric in [0, 1]"
+#~ msgstr "'sig.level'必需是在[0, 1] 里的数值"
+
+#, fuzzy
 #~ msgid ""
 #~ "number of offsets (%d) should be equal to number of observations (%d)"
 #~ msgstr "偏置的个数是%d，应该同观察量的个数%d相等"
@@ -7262,9 +7264,6 @@ msgstr[0] "在组合拟合中用%d/%d行"
 
 #~ msgid "'interval' must be a vector of length 2"
 #~ msgstr "'interval'必需是长度为二的数值矢量"
-
-#~ msgid "'sig.level' must be numeric in [0, 1]"
-#~ msgstr "'sig.level'必需是在[0, 1] 里的数值"
 
 #~ msgid "'conf.level' must be a single number between 0 and 1"
 #~ msgstr "'conf.level'必需是一个数值在零到一之间的数字"

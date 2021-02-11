@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 3.1.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2021-01-30 18:45\n"
+"POT-Creation-Date: 2021-02-11 18:12\n"
 "PO-Revision-Date: 2014-03-27 13:33-0600\n"
 "Last-Translator: Chel Hee Lee <chl948@mail.usask.ca>\n"
 "Language-Team:  <chl948@mail.usask.ca>\n"
@@ -504,6 +504,12 @@ msgstr "'x'는 반드시 길이가 1보다 크거나 같아야 합니다"
 #, fuzzy
 msgid "'%s' argument will be ignored"
 msgstr "인자 'subset'은 사용되지 않을 것입니다"
+
+#. R/power.R: gettextf("'%s' must be numeric in [0, 1]", deparse1(substitute(x)))
+#: R/power.R:0
+#, fuzzy
+msgid "'%s' must be numeric in [0, 1]"
+msgstr "'sig.level'은 반드시 [0, 1]내에 있는 숫자이어야 합니다"
 
 #. R/symnum.R: gettextf("'%s' must be unique, but are = %s", "cutpoints", tmp_n)
 #. R/symnum.R: gettextf("'%s' must be unique, but are = %s", "symbols", tmp_n)
@@ -1141,14 +1147,6 @@ msgstr "'sep'은 반드시 문자열이어야 합니다"
 #, fuzzy
 msgid "'sides' argument must be 1 or 2"
 msgstr "인자 'sides'는 반드시 1 또는 2이어야 합니다"
-
-#. R/power.R: stop("'sig.level' argument must be numeric in [0, 1]")
-#. R/power.R: stop("'sig.level' argument must be numeric in [0, 1]")
-#. R/power.anova.test.R: stop("'sig.level' argument must be numeric in [0, 1]")
-#: R/power.R:0 R/power.anova.test.R:0
-#, fuzzy
-msgid "'sig.level' argument must be numeric in [0, 1]"
-msgstr "'sig.level'은 반드시 [0, 1]내에 있는 숫자이어야 합니다"
 
 #. R/lm.R: stop("'simulate()' function is not yet implemented for multivariate 'lm()'")
 #: R/lm.R:0

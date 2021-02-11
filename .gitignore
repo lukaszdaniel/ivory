@@ -3,7 +3,8 @@
 *.o
 *.so
 *.ts
-
+R/src/library/**/inst/po/**/LC_MESSAGES/*.mo
+!R/src/library/translations/inst/po/**/LC_MESSAGES/*.mo
 .Rhistory
 R/autom4te.cache/*
 

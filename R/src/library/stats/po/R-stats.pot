@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: stats 4.1.0\n"
-"POT-Creation-Date: 2021-01-30 18:45\n"
+"POT-Creation-Date: 2021-02-11 18:12\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -666,6 +666,13 @@ msgstr ""
 #. R/nls.R: gettextf("'%s' argument will be ignored", "na.action")
 
 msgid "'%s' argument will be ignored"
+msgstr ""
+
+
+#: R/power.R: 0
+#. R/power.R: gettextf("'%s' must be numeric in [0, 1]", deparse1(substitute(x)))
+
+msgid "'%s' must be numeric in [0, 1]"
 msgstr ""
 
 
@@ -1458,16 +1465,6 @@ msgstr ""
 #. R/filter.R: stop("'sides' argument must be 1 or 2")
 
 msgid "'sides' argument must be 1 or 2"
-msgstr ""
-
-
-#: R/power.R: 0
-#: R/power.anova.test.R: 0
-#. R/power.R: stop("'sig.level' argument must be numeric in [0, 1]")
-#. R/power.R: stop("'sig.level' argument must be numeric in [0, 1]")
-#. R/power.anova.test.R: stop("'sig.level' argument must be numeric in [0, 1]")
-
-msgid "'sig.level' argument must be numeric in [0, 1]"
 msgstr ""
 
 

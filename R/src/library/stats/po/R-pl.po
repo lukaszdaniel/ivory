@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R-core\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-01-30 18:45\n"
+"POT-Creation-Date: 2021-02-11 18:12\n"
 "PO-Revision-Date: \n"
 "Last-Translator: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
 "Language-Team: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
@@ -461,6 +461,12 @@ msgstr "argument '%s' musi mieć długość >= %d"
 #: R/nls.R:0
 msgid "'%s' argument will be ignored"
 msgstr "argument '%s' zostanie zignornowany"
+
+#. R/power.R: gettextf("'%s' must be numeric in [0, 1]", deparse1(substitute(x)))
+#: R/power.R:0
+#, fuzzy
+msgid "'%s' must be numeric in [0, 1]"
+msgstr "argument 'sig.level' musi być liczbą w przedziale [0, 1]"
 
 #. R/symnum.R: gettextf("'%s' must be unique, but are = %s", "cutpoints", tmp_n)
 #. R/symnum.R: gettextf("'%s' must be unique, but are = %s", "symbols", tmp_n)
@@ -1074,13 +1080,6 @@ msgstr "'sep' musi być łańcuchem tekstowym"
 #: R/filter.R:0
 msgid "'sides' argument must be 1 or 2"
 msgstr "argument 'sides' musi mieć wartość 1 lub 2"
-
-#. R/power.R: stop("'sig.level' argument must be numeric in [0, 1]")
-#. R/power.R: stop("'sig.level' argument must be numeric in [0, 1]")
-#. R/power.anova.test.R: stop("'sig.level' argument must be numeric in [0, 1]")
-#: R/power.R:0 R/power.anova.test.R:0
-msgid "'sig.level' argument must be numeric in [0, 1]"
-msgstr "argument 'sig.level' musi być liczbą w przedziale [0, 1]"
 
 #. R/lm.R: stop("'simulate()' function is not yet implemented for multivariate 'lm()'")
 #: R/lm.R:0
@@ -6968,6 +6967,9 @@ msgstr[0] "używanie %d/%d wiersza z połączonego dopasowania"
 msgstr[1] "używanie %d/%d wierszy z połączonego dopasowania"
 msgstr[2] "używanie %d/%d wierszy z połączonego dopasowania"
 
+#~ msgid "'sig.level' argument must be numeric in [0, 1]"
+#~ msgstr "argument 'sig.level' musi być liczbą w przedziale [0, 1]"
+
 #~ msgid "Std. Pearson resid."
 #~ msgstr "Ustandaryzowane reszty Pearsona"
 
@@ -7791,9 +7793,6 @@ msgstr[2] "używanie %d/%d wierszy z połączonego dopasowania"
 
 #~ msgid "'print.level' must be in {0,1,2}"
 #~ msgstr "'print.level' musi być ze zbioru {0,1,2}"
-
-#~ msgid "'sig.level' must be numeric in [0, 1]"
-#~ msgstr "argument 'sig.level' musi być liczbą w przedziale [0, 1]"
 
 #~ msgid "Class"
 #~ msgid_plural "Classes"

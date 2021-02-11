@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.3.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2021-01-30 18:45\n"
+"POT-Creation-Date: 2021-02-11 18:11\n"
 "PO-Revision-Date: 2015-01-17 15:43+0100\n"
 "Last-Translator: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
 "Language-Team: Chinese\n"
@@ -339,6 +339,28 @@ msgstr ""
 #. R/methodsTable.R: gettext("** individual arguments' distances:", domain = "R-methods")
 #: R/methodsTable.R:0
 msgid "** individual arguments' distances:"
+msgstr ""
+
+#. R/RMethodUtils.R: gettextf("--- caching class %s", dQuote(cl))
+#: R/RMethodUtils.R:0
+#, fuzzy
+msgid "--- caching class %s"
+msgstr "(类别%s)"
+
+#. R/RMethodUtils.R: gettextf("--- done caching class %s", dQuote(cl))
+#: R/RMethodUtils.R:0
+#, fuzzy
+msgid "--- done caching class %s"
+msgstr "(类别%s)"
+
+#. R/RMethodUtils.R: gettextf("--- done getting generic %s", sQuote(f))
+#: R/RMethodUtils.R:0
+msgid "--- done getting generic %s"
+msgstr ""
+
+#. R/RMethodUtils.R: gettextf("--- getting generic %s (and methods)", sQuote(f))
+#: R/RMethodUtils.R:0
+msgid "--- getting generic %s (and methods)"
 msgstr ""
 
 #. R/methodsTable.R: gettextf(" .. method %d: length(sig) = %d < nArg = %d\n", i, length(sig), nArg, domain = "R-methods")
@@ -1521,12 +1543,6 @@ msgstr "名字空间坏了: 父空间里不存在'base'"
 msgid "both classes must be defined"
 msgstr "两个类别都得有定义"
 
-#. R/RMethodUtils.R: gettextf("caching class %s", dQuote(cl))
-#: R/RMethodUtils.R:0
-#, fuzzy
-msgid "caching class %s"
-msgstr "(类别%s)"
-
 #. R/NextMethod.R: stop("call to 'callNextMethod' does not appear to be in a 'method' or 'callNextMethod' context")
 #: R/NextMethod.R:0
 msgid ""
@@ -1855,16 +1871,6 @@ msgstr "在追溯环境里找不到\"%s\"泛型函数的方法表"
 msgid "done"
 msgstr ""
 
-#. R/RMethodUtils.R: gettextf("done caching class %s", dQuote(cl))
-#: R/RMethodUtils.R:0
-msgid "done caching class %s"
-msgstr ""
-
-#. R/RMethodUtils.R: gettextf("done getting generic '%s'", f)
-#: R/RMethodUtils.R:0
-msgid "done getting generic '%s'"
-msgstr ""
-
 #. R/SClasses.R: gettext("duplicate class names among superclasses: %s", domain = "R-methods")
 #: R/SClasses.R:0
 msgid "duplicate class names among superclasses: %s"
@@ -2060,11 +2066,6 @@ msgstr "泛型名字不相对：%s, %s"
 msgid ""
 "get rid of variables in definition %s (%s); they conflict with the needed "
 "change to argument names (%s)"
-msgstr ""
-
-#. R/RMethodUtils.R: gettextf("getting generic '%s'", f)
-#: R/RMethodUtils.R:0
-msgid "getting generic '%s'"
 msgstr ""
 
 #. R/RMethodUtils.R: stop("got a negative maximum number of frames to look at")

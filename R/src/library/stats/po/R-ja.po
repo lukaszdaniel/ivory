@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.3.0 \n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2021-01-30 18:45\n"
+"POT-Creation-Date: 2021-02-11 18:12\n"
 "PO-Revision-Date: 2012-02-26 14:13+0200 \n"
 "Last-Translator: Shigeru Mase <maseshigeru@gmail.com> \n"
 "Language-Team: RjpWiki Message Translation Team <mokada@md.tsukuba.ac.jp> \n"
@@ -503,6 +503,12 @@ msgstr " 'split' 引数はリストでなければなりません "
 #, fuzzy
 msgid "'%s' argument will be ignored"
 msgstr " 引数'subset'は無視されます "
+
+#. R/power.R: gettextf("'%s' must be numeric in [0, 1]", deparse1(substitute(x)))
+#: R/power.R:0
+#, fuzzy
+msgid "'%s' must be numeric in [0, 1]"
+msgstr " 'sig.level' は [0,1] 中の数字でなければなりません "
 
 #. R/symnum.R: gettextf("'%s' must be unique, but are = %s", "cutpoints", tmp_n)
 #. R/symnum.R: gettextf("'%s' must be unique, but are = %s", "symbols", tmp_n)
@@ -1147,14 +1153,6 @@ msgstr " 'sep'は文字列でなければなりません "
 #, fuzzy
 msgid "'sides' argument must be 1 or 2"
 msgstr " 引数 'x' は数値でなければなりません "
-
-#. R/power.R: stop("'sig.level' argument must be numeric in [0, 1]")
-#. R/power.R: stop("'sig.level' argument must be numeric in [0, 1]")
-#. R/power.anova.test.R: stop("'sig.level' argument must be numeric in [0, 1]")
-#: R/power.R:0 R/power.anova.test.R:0
-#, fuzzy
-msgid "'sig.level' argument must be numeric in [0, 1]"
-msgstr " 'sig.level' は [0,1] 中の数字でなければなりません "
 
 #. R/lm.R: stop("'simulate()' function is not yet implemented for multivariate 'lm()'")
 #: R/lm.R:0
@@ -7073,6 +7071,10 @@ msgid_plural "using the %d/%d rows from a combined fit"
 msgstr[0] " 同時当てはめから %d/%d 行を使用します。 "
 
 #, fuzzy
+#~ msgid "'sig.level' argument must be numeric in [0, 1]"
+#~ msgstr " 'sig.level' は [0,1] 中の数字でなければなりません "
+
+#, fuzzy
 #~ msgid ""
 #~ "number of offsets (%d) should be equal to number of observations (%d)"
 #~ msgstr ""
@@ -7315,9 +7317,6 @@ msgstr[0] " 同時当てはめから %d/%d 行を使用します。 "
 
 #~ msgid "'interval' must be a vector of length 2"
 #~ msgstr " 'intervals' は長さ 2 の数値ベクトルでなければなりません "
-
-#~ msgid "'sig.level' must be numeric in [0, 1]"
-#~ msgstr " 'sig.level' は [0,1] 中の数字でなければなりません "
 
 #~ msgid "'conf.level' must be a single number between 0 and 1"
 #~ msgstr " 'conf.level' は 0 と 1 の間の単一の数値でなければなりません "

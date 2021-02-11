@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.13.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-01-30 18:48+0100\n"
+"POT-Creation-Date: 2021-02-11 18:10+0100\n"
 "PO-Revision-Date: 2011-04-02 18:24+0200\n"
 "Last-Translator: Murat Alkan <muratalk@gmail.com>\n"
 "Language-Team: Turkish <muratalk@gmail.com>\n"
@@ -521,6 +521,7 @@ msgid ""
 msgstr ""
 
 #: src/gnuwin32/console.cpp:1008 src/main/errors.cpp:398
+#: src/main/Renviron.cpp:235
 msgid "[... truncated]"
 msgstr ""
 
@@ -613,40 +614,40 @@ msgstr "'%s' gösterilirken sorun oluştu"
 #: src/main/character.cpp:1688 src/main/character.cpp:1755
 #: src/main/character.cpp:1758 src/main/coerce.cpp:1515
 #: src/main/coerce.cpp:1567 src/main/coerce.cpp:2168
-#: src/main/connections.cpp:1454 src/main/connections.cpp:1460
-#: src/main/connections.cpp:1463 src/main/connections.cpp:1467
-#: src/main/connections.cpp:1617 src/main/connections.cpp:1633
-#: src/main/connections.cpp:1638 src/main/connections.cpp:2273
-#: src/main/connections.cpp:2279 src/main/connections.cpp:2283
-#: src/main/connections.cpp:2287 src/main/connections.cpp:2292
-#: src/main/connections.cpp:2959 src/main/connections.cpp:2964
-#: src/main/connections.cpp:2967 src/main/connections.cpp:2970
-#: src/main/connections.cpp:3381 src/main/connections.cpp:3386
-#: src/main/connections.cpp:3392 src/main/connections.cpp:3395
-#: src/main/connections.cpp:3399 src/main/connections.cpp:3414
-#: src/main/connections.cpp:3462 src/main/connections.cpp:3467
-#: src/main/connections.cpp:3471 src/main/connections.cpp:3483
-#: src/main/connections.cpp:3487 src/main/connections.cpp:3493
-#: src/main/connections.cpp:3540 src/main/connections.cpp:3546
-#: src/main/connections.cpp:3550 src/main/connections.cpp:3602
-#: src/main/connections.cpp:3605 src/main/connections.cpp:3929
-#: src/main/connections.cpp:3932 src/main/connections.cpp:3935
-#: src/main/connections.cpp:3941 src/main/connections.cpp:4060
-#: src/main/connections.cpp:4066 src/main/connections.cpp:4069
-#: src/main/connections.cpp:4224 src/main/connections.cpp:4227
-#: src/main/connections.cpp:4231 src/main/connections.cpp:4234
-#: src/main/connections.cpp:4352 src/main/connections.cpp:4477
-#: src/main/connections.cpp:4480 src/main/connections.cpp:4815
-#: src/main/connections.cpp:4844 src/main/connections.cpp:4884
-#: src/main/connections.cpp:4899 src/main/connections.cpp:4907
-#: src/main/connections.cpp:4933 src/main/connections.cpp:5085
-#: src/main/connections.cpp:5089 src/main/connections.cpp:5217
-#: src/main/connections.cpp:5219 src/main/connections.cpp:5221
-#: src/main/connections.cpp:5249 src/main/connections.cpp:5385
-#: src/main/connections.cpp:5424 src/main/connections.cpp:5429
-#: src/main/connections.cpp:5434 src/main/connections.cpp:5458
-#: src/main/connections.cpp:6217 src/main/connections.cpp:6244
-#: src/main/connections.cpp:6251 src/main/context.cpp:691
+#: src/main/connections.cpp:1452 src/main/connections.cpp:1458
+#: src/main/connections.cpp:1461 src/main/connections.cpp:1465
+#: src/main/connections.cpp:1615 src/main/connections.cpp:1631
+#: src/main/connections.cpp:1636 src/main/connections.cpp:2271
+#: src/main/connections.cpp:2277 src/main/connections.cpp:2281
+#: src/main/connections.cpp:2285 src/main/connections.cpp:2290
+#: src/main/connections.cpp:2957 src/main/connections.cpp:2962
+#: src/main/connections.cpp:2965 src/main/connections.cpp:2968
+#: src/main/connections.cpp:3379 src/main/connections.cpp:3384
+#: src/main/connections.cpp:3390 src/main/connections.cpp:3393
+#: src/main/connections.cpp:3397 src/main/connections.cpp:3412
+#: src/main/connections.cpp:3460 src/main/connections.cpp:3465
+#: src/main/connections.cpp:3469 src/main/connections.cpp:3481
+#: src/main/connections.cpp:3485 src/main/connections.cpp:3491
+#: src/main/connections.cpp:3538 src/main/connections.cpp:3544
+#: src/main/connections.cpp:3548 src/main/connections.cpp:3600
+#: src/main/connections.cpp:3603 src/main/connections.cpp:3927
+#: src/main/connections.cpp:3930 src/main/connections.cpp:3933
+#: src/main/connections.cpp:3939 src/main/connections.cpp:4058
+#: src/main/connections.cpp:4064 src/main/connections.cpp:4067
+#: src/main/connections.cpp:4222 src/main/connections.cpp:4225
+#: src/main/connections.cpp:4229 src/main/connections.cpp:4232
+#: src/main/connections.cpp:4350 src/main/connections.cpp:4475
+#: src/main/connections.cpp:4478 src/main/connections.cpp:4813
+#: src/main/connections.cpp:4842 src/main/connections.cpp:4882
+#: src/main/connections.cpp:4897 src/main/connections.cpp:4905
+#: src/main/connections.cpp:4931 src/main/connections.cpp:5083
+#: src/main/connections.cpp:5087 src/main/connections.cpp:5215
+#: src/main/connections.cpp:5217 src/main/connections.cpp:5219
+#: src/main/connections.cpp:5247 src/main/connections.cpp:5383
+#: src/main/connections.cpp:5422 src/main/connections.cpp:5427
+#: src/main/connections.cpp:5432 src/main/connections.cpp:5456
+#: src/main/connections.cpp:6215 src/main/connections.cpp:6242
+#: src/main/connections.cpp:6249 src/main/context.cpp:691
 #: src/main/context.cpp:700 src/main/context.cpp:704 src/main/datetime.cpp:795
 #: src/main/datetime.cpp:884 src/main/datetime.cpp:887
 #: src/main/datetime.cpp:891 src/main/datetime.cpp:1065
@@ -658,9 +659,9 @@ msgstr "'%s' gösterilirken sorun oluştu"
 #: src/main/envir.cpp:1950 src/main/envir.cpp:1955 src/main/envir.cpp:2038
 #: src/main/envir.cpp:2054 src/main/envir.cpp:2060 src/main/envir.cpp:2176
 #: src/main/envir.cpp:2184 src/main/envir.cpp:2191 src/main/envir.cpp:2202
-#: src/main/envir.cpp:2426 src/main/envir.cpp:2546 src/main/envir.cpp:2840
-#: src/main/envir.cpp:3120 src/main/envir.cpp:3133 src/main/envir.cpp:3140
-#: src/main/envir.cpp:3159 src/main/envir.cpp:3932 src/main/errors.cpp:1240
+#: src/main/envir.cpp:2426 src/main/envir.cpp:2547 src/main/envir.cpp:2841
+#: src/main/envir.cpp:3121 src/main/envir.cpp:3134 src/main/envir.cpp:3141
+#: src/main/envir.cpp:3160 src/main/envir.cpp:3933 src/main/errors.cpp:1279
 #: src/main/eval.cpp:512 src/main/eval.cpp:522 src/main/eval.cpp:525
 #: src/main/grep.cpp:1150 src/main/grep.cpp:1155 src/main/grep.cpp:1477
 #: src/main/grep.cpp:1479 src/main/grep.cpp:1481 src/main/grep.cpp:1958
@@ -772,9 +773,9 @@ msgstr "bellek sınırı azaltılamadı: görmezden geliniyor"
 msgid "'%s' argument must be a character vector"
 msgstr "ilk argüman bir karakter vektörü olmalıdır"
 
-#: src/gnuwin32/extra.cpp:737 src/main/edit.cpp:150 src/main/errors.cpp:1242
-#: src/main/errors.cpp:1244 src/main/objects.cpp:534 src/main/objects.cpp:1326
-#: src/main/options.cpp:419 src/main/Renviron.cpp:373 src/main/unique.cpp:1778
+#: src/gnuwin32/extra.cpp:737 src/main/edit.cpp:150 src/main/errors.cpp:1281
+#: src/main/errors.cpp:1283 src/main/objects.cpp:534 src/main/objects.cpp:1326
+#: src/main/options.cpp:419 src/main/Renviron.cpp:410 src/main/unique.cpp:1778
 #: src/modules/lapack/Lapack.cpp:102 src/modules/lapack/Lapack.cpp:343
 #: src/modules/lapack/Lapack.cpp:373 src/modules/lapack/Lapack.cpp:421
 #: src/modules/lapack/Lapack.cpp:457 src/modules/lapack/Lapack.cpp:514
@@ -867,15 +868,15 @@ msgid "broken Windows pipe"
 msgstr ""
 
 #: src/gnuwin32/run.cpp:957 src/main/connections.cpp:457
-#: src/main/connections.cpp:476 src/main/connections.cpp:3230
+#: src/main/connections.cpp:476 src/main/connections.cpp:3228
 #: src/main/printutils.cpp:945 src/main/printutils.cpp:962
 msgid "printing of extremely long output is truncated"
 msgstr "aşırı uzun çıktının yazdırılması kısaltıldı"
 
 #: src/gnuwin32/run.cpp:971 src/gnuwin32/run.cpp:975 src/gnuwin32/run.cpp:988
-#: src/gnuwin32/run.cpp:1016 src/main/connections.cpp:1568
-#: src/main/connections.cpp:1572 src/main/connections.cpp:1579
-#: src/main/connections.cpp:1594
+#: src/gnuwin32/run.cpp:1016 src/main/connections.cpp:1566
+#: src/main/connections.cpp:1570 src/main/connections.cpp:1577
+#: src/main/connections.cpp:1592
 msgid "allocation of pipe connection failed"
 msgstr "pipe bağlantısı yerleştirmesinde hata"
 
@@ -1179,7 +1180,7 @@ msgstr "altindis sınırlar dışında"
 msgid "cycle detected"
 msgstr ""
 
-#: src/include/CXXR/FixedVector.hpp:176
+#: src/include/CXXR/FixedVector.hpp:197
 msgid "Request to create impossibly large vector."
 msgstr ""
 
@@ -1395,12 +1396,12 @@ msgid "'%s' argument must be a vector"
 msgstr "ilk karakter bir vektör olmalı"
 
 #: src/main/apply.cpp:108 src/main/array.cpp:529 src/main/character.cpp:949
-#: src/main/character.cpp:1821 src/main/connections.cpp:3937
+#: src/main/character.cpp:1821 src/main/connections.cpp:3935
 #: src/main/context.cpp:742 src/main/context.cpp:756 src/main/datetime.cpp:695
 #: src/main/datetime.cpp:797 src/main/datetime.cpp:1069
-#: src/main/dotcode.cpp:234 src/main/errors.cpp:1142 src/main/errors.cpp:1173
-#: src/main/errors.cpp:1277 src/main/errors.cpp:1302 src/main/errors.cpp:1307
-#: src/main/errors.cpp:1551 src/main/identical.cpp:83 src/main/identical.cpp:84
+#: src/main/dotcode.cpp:234 src/main/errors.cpp:1196 src/main/errors.cpp:1210
+#: src/main/errors.cpp:1312 src/main/errors.cpp:1317 src/main/errors.cpp:1561
+#: src/main/identical.cpp:83 src/main/identical.cpp:84
 #: src/main/identical.cpp:85 src/main/identical.cpp:86
 #: src/main/identical.cpp:87 src/main/identical.cpp:88
 #: src/main/platform.cpp:3419 src/main/seq.cpp:280 src/main/seq.cpp:287
@@ -1546,22 +1547,17 @@ msgid_plural ""
 "%d arguments passed to '%s' function which requires 1 or 2 arguments"
 msgstr[0] "%d argüman aktarıldı ('%s' 1 veya 2 argüman gerektiriyor)"
 
-#: src/main/arithmetic.cpp:1719
+#: src/main/arithmetic.cpp:1719 src/main/arithmetic.cpp:1829
+#: src/main/arithmetic.cpp:1847 src/main/envir.cpp:1563 src/main/envir.cpp:2065
+#: src/main/eval.cpp:766 src/main/eval.cpp:767 src/main/eval.cpp:5424
+#: src/main/eval.cpp:5426 src/main/RNG.cpp:360
 #, fuzzy, c-format
-msgid "argument \"%s\" is missing, with no default"
-msgstr "varsayılanı olmayan \"%s\" argümanı yok"
+msgid "'%s' argument is missing, with no default"
+msgstr "varsayılanı olmayan argüman eksik"
 
 #: src/main/arithmetic.cpp:1734
 msgid "invalid second argument of length 0"
 msgstr "0 uzunluğunda geçersiz ikinci argüman"
-
-#: src/main/arithmetic.cpp:1829 src/main/arithmetic.cpp:1847
-#: src/main/envir.cpp:1563 src/main/envir.cpp:2065 src/main/eval.cpp:766
-#: src/main/eval.cpp:767 src/main/eval.cpp:5424 src/main/eval.cpp:5426
-#: src/main/RNG.cpp:360
-#, fuzzy, c-format
-msgid "'%s' argument is missing, with no default"
-msgstr "varsayılanı olmayan argüman eksik"
 
 #: src/main/arithmetic.cpp:1853
 msgid "invalid argument 'base' of length 0"
@@ -1700,8 +1696,8 @@ msgstr "perm[%d] bir boyut ismiyle uyuşmuyo"
 msgid "value is out of range in 'perm' argument"
 msgstr "'perm' de değer sınırlar dışında"
 
-#: src/main/array.cpp:1873 src/main/connections.cpp:5934
-#: src/main/connections.cpp:5937 src/main/debug.cpp:119
+#: src/main/array.cpp:1873 src/main/connections.cpp:5932
+#: src/main/connections.cpp:5935 src/main/debug.cpp:119
 #: src/main/objects.cpp:1189 src/main/raw.cpp:59 src/main/raw.cpp:369
 #: src/main/sort.cpp:423 src/main/sort.cpp:1469 src/main/unique.cpp:730
 #: src/main/unique.cpp:1581 src/main/unique.cpp:1655 src/main/util.cpp:681
@@ -1737,7 +1733,7 @@ msgstr ""
 
 #: src/main/attrib.cpp:50 src/main/attrib.cpp:262 src/main/attrib.cpp:294
 #: src/main/attrib.cpp:316 src/main/attrib.cpp:415 src/main/attrib.cpp:462
-#: src/main/attrib.cpp:513 src/main/RObject.cpp:155
+#: src/main/attrib.cpp:513 src/main/RObject.cpp:162
 msgid "attempt to set an attribute on NULL"
 msgstr "BOŞ'a nitelik belirleme denemesi "
 
@@ -1759,7 +1755,7 @@ msgstr ""
 msgid "cannot have attributes on a 'CHARSXP'"
 msgstr ""
 
-#: src/main/attrib.cpp:366 src/main/RObject.cpp:157
+#: src/main/attrib.cpp:366 src/main/RObject.cpp:164
 msgid "cannot set attribute on a 'CHARSXP'"
 msgstr ""
 
@@ -1880,78 +1876,78 @@ msgstr "dims [product %d] [%d] nesnesinin uzunluğuyla eşleşmiyor"
 msgid "dimensions [product %d] do not match the length of object [%d]"
 msgstr "dims [product %d] [%d] nesnesinin uzunluğuyla eşleşmiyor"
 
-#: src/main/attrib.cpp:1297
+#: src/main/attrib.cpp:1298
 #, c-format
 msgid "factor level [%d] is duplicated"
 msgstr ""
 
-#: src/main/attrib.cpp:1325
+#: src/main/attrib.cpp:1326
 msgid "attributes must be a list or NULL"
 msgstr "nitelikler bir liste veya NULL olmalıdır"
 
-#: src/main/attrib.cpp:1330
+#: src/main/attrib.cpp:1331
 msgid "attributes must be named"
 msgstr "nitelikler isimlendirilmelidir"
 
-#: src/main/attrib.cpp:1334
+#: src/main/attrib.cpp:1335
 #, c-format
 msgid "all attributes must have names [%d does not]"
 msgstr "bütün nitelikler isime sahip olmalıdır [%d değil]"
 
-#: src/main/attrib.cpp:1432
+#: src/main/attrib.cpp:1433
 #, fuzzy
 msgid "either 2 or 3 arguments are required"
 msgstr "dize argümanı gerekli"
 
-#: src/main/attrib.cpp:1439
+#: src/main/attrib.cpp:1440
 #, fuzzy
 msgid "'which' attribute must be of mode character"
 msgstr "'which' mod karakterinin olmalıdır"
 
-#: src/main/attrib.cpp:1441
+#: src/main/attrib.cpp:1442
 msgid "exactly one attribute 'which' must be given"
 msgstr "tam olarak bir 'which' nitelik verilmelidir"
 
-#: src/main/attrib.cpp:1502 src/main/attrib.cpp:1525 src/main/subscript.cpp:261
+#: src/main/attrib.cpp:1503 src/main/attrib.cpp:1526 src/main/subscript.cpp:261
 #: src/main/subscript.cpp:265 src/main/subset.cpp:1348 src/main/subset.cpp:1409
 #, c-format
 msgid "partial match of '%s' to '%s'"
 msgstr "'%s' den '%s' e kısmi eşleşme"
 
-#: src/main/attrib.cpp:1570
+#: src/main/attrib.cpp:1571
 #, fuzzy, c-format
 msgid "invalid type '%s' for slot name"
 msgstr "slot ismi için geçersiz tip yada uzunluk"
 
-#: src/main/attrib.cpp:1616
+#: src/main/attrib.cpp:1617
 #, fuzzy, c-format
 msgid "'%s' argument must be non-null character string"
 msgstr "'norm' bir karakter dizesi olmalıdır"
 
-#: src/main/attrib.cpp:1742 src/main/attrib.cpp:1814 src/main/attrib.cpp:1848
+#: src/main/attrib.cpp:1743 src/main/attrib.cpp:1815 src/main/attrib.cpp:1849
 msgid "invalid type or length for slot name"
 msgstr "slot ismi için geçersiz tip yada uzunluk"
 
-#: src/main/attrib.cpp:1777
+#: src/main/attrib.cpp:1778
 #, c-format
 msgid "cannot get a slot (\"%s\") from an object of type \"%s\""
 msgstr "(\"%s\") slotu alınamıyor (\"%s\" tipinde nesneden)"
 
-#: src/main/attrib.cpp:1788
+#: src/main/attrib.cpp:1789
 #, c-format
 msgid "no slot of name \"%s\" for this object of class \"%s\""
 msgstr "\"%s\" adında bir slot yok (\"%s\" sınıfında bir nesne için)"
 
-#: src/main/attrib.cpp:1805
+#: src/main/attrib.cpp:1806
 msgid "attempt to set slot on NULL object"
 msgstr "NULL nesnede slot belirleme denemesi"
 
-#: src/main/attrib.cpp:1843
+#: src/main/attrib.cpp:1844
 #, fuzzy
 msgid "formal classes cannot be used without the 'methods' package"
 msgstr "biçimsel sınıfsal methods paketi olmadan kullanılamaz"
 
-#: src/main/attrib.cpp:1855
+#: src/main/attrib.cpp:1856
 #, c-format
 msgid ""
 "trying to get slot \"%s\" from an object of a basic class (\"%s\") with no "
@@ -1960,7 +1956,7 @@ msgstr ""
 "slot \"%s\" alınmaya çalışılıyor (slotu olmayan bir temel sınıf -\"%s\"-'in "
 "bir nesnesinden)"
 
-#: src/main/attrib.cpp:1859
+#: src/main/attrib.cpp:1860
 #, fuzzy, c-format
 msgid ""
 "trying to get slot \"%s\" from an object (class \"%s\") that is not an S4 "
@@ -2054,21 +2050,21 @@ msgstr "geçersiz ilk argüman"
 
 #: src/main/builtin.cpp:93 src/main/builtin.cpp:102 src/main/builtin.cpp:331
 #: src/main/builtin.cpp:365 src/main/builtin.cpp:418 src/main/builtin.cpp:432
-#: src/main/coerce.cpp:1602 src/main/connections.cpp:3390
+#: src/main/coerce.cpp:1602 src/main/connections.cpp:3388
 #: src/main/engine.cpp:3250 src/main/envir.cpp:1018 src/main/envir.cpp:1068
 #: src/main/envir.cpp:1224 src/main/envir.cpp:1257 src/main/envir.cpp:1831
 #: src/main/envir.cpp:1947 src/main/envir.cpp:1979 src/main/envir.cpp:2032
-#: src/main/envir.cpp:2169 src/main/envir.cpp:2883 src/main/envir.cpp:2974
-#: src/main/envir.cpp:3287 src/main/envir.cpp:3316 src/main/envir.cpp:3337
-#: src/main/envir.cpp:3360 src/main/envir.cpp:3394 src/main/envir.cpp:3414
-#: src/main/envir.cpp:3460 src/main/envir.cpp:3922 src/main/envir.cpp:3927
+#: src/main/envir.cpp:2169 src/main/envir.cpp:2884 src/main/envir.cpp:2975
+#: src/main/envir.cpp:3288 src/main/envir.cpp:3317 src/main/envir.cpp:3338
+#: src/main/envir.cpp:3361 src/main/envir.cpp:3395 src/main/envir.cpp:3415
+#: src/main/envir.cpp:3461 src/main/envir.cpp:3923 src/main/envir.cpp:3928
 #: src/main/eval.cpp:8518 src/main/objects.cpp:256 src/main/objects.cpp:264
 #: src/main/saveload.cpp:2293 src/main/saveload.cpp:2583
 #: src/main/serialize.cpp:3278
 msgid "use of NULL environment is defunct"
 msgstr "NULL ortamı kullanımı artık geçersiz"
 
-#: src/main/builtin.cpp:264 src/main/builtin.cpp:282 src/main/envir.cpp:3358
+#: src/main/builtin.cpp:264 src/main/builtin.cpp:282 src/main/envir.cpp:3359
 #, fuzzy, c-format
 msgid "'%s' argument is not a function"
 msgstr "argüman bir fonksiyon olmalı"
@@ -2078,9 +2074,9 @@ msgid "replacement object is not an environment"
 msgstr "değiştirme nesnesi bir ortam değil"
 
 #: src/main/builtin.cpp:369 src/main/builtin.cpp:387 src/main/builtin.cpp:423
-#: src/main/builtin.cpp:437 src/main/envir.cpp:3262 src/main/envir.cpp:3290
-#: src/main/envir.cpp:3319 src/main/envir.cpp:3340 src/main/envir.cpp:3362
-#: src/main/envir.cpp:3396 src/main/envir.cpp:3416
+#: src/main/builtin.cpp:437 src/main/envir.cpp:3263 src/main/envir.cpp:3291
+#: src/main/envir.cpp:3320 src/main/envir.cpp:3341 src/main/envir.cpp:3363
+#: src/main/envir.cpp:3397 src/main/envir.cpp:3417
 #, fuzzy, c-format
 msgid "'%s' argument is not an environment"
 msgstr "argüman bir ortam değil"
@@ -2103,11 +2099,11 @@ msgstr "boş ortamın üst öğesi ayarlanamadı"
 msgid "can not set the parent environment of package imports"
 msgstr "boş ortamın üst öğesi ayarlanamadı"
 
-#: src/main/builtin.cpp:587 src/main/connections.cpp:4083
-#: src/main/connections.cpp:4471 src/main/connections.cpp:4506
-#: src/main/connections.cpp:4890 src/main/connections.cpp:4958
-#: src/main/connections.cpp:5175 src/main/connections.cpp:5179
-#: src/main/connections.cpp:5635 src/main/deparse.cpp:414
+#: src/main/builtin.cpp:587 src/main/connections.cpp:4081
+#: src/main/connections.cpp:4469 src/main/connections.cpp:4504
+#: src/main/connections.cpp:4888 src/main/connections.cpp:4956
+#: src/main/connections.cpp:5173 src/main/connections.cpp:5177
+#: src/main/connections.cpp:5633 src/main/deparse.cpp:414
 #: src/main/deparse.cpp:498 src/main/serialize.cpp:2554
 msgid "cannot write to this connection"
 msgstr "bu bağlantıya yazılamıyor"
@@ -2192,7 +2188,7 @@ msgstr ""
 msgid "'switch()' function with no alternatives"
 msgstr "vektör olmayan tiple NewWriteVec çağırıldı"
 
-#: src/main/CachedString.cpp:78 src/main/envir.cpp:4048 src/main/String.cpp:120
+#: src/main/CachedString.cpp:78 src/main/envir.cpp:4049 src/main/String.cpp:152
 #, c-format
 msgid "unknown encoding: %d"
 msgstr "bilinmeyen kodlama: %d"
@@ -2307,12 +2303,12 @@ msgstr "'%s' içinde geçersiz çokbaytlı dize"
 msgid "'old' is longer than 'new'"
 msgstr "'old' 'new' den daha uzun"
 
-#: src/main/character.cpp:1829 src/main/envir.cpp:3998 src/main/envir.cpp:4022
+#: src/main/character.cpp:1829 src/main/envir.cpp:3999 src/main/envir.cpp:4023
 #, fuzzy
 msgid "R character strings are limited to 2^31-1 bytes"
 msgstr "değişken isimleri %d karakterle sınırlıdır"
 
-#: src/main/coerce.cpp:106 src/main/errors.cpp:1419
+#: src/main/coerce.cpp:106 src/main/errors.cpp:1429
 #, fuzzy
 msgid "NA values introduced by coercion"
 msgstr "Zorlamadan dolayı ortaya çıkan NAs"
@@ -2322,7 +2318,7 @@ msgstr "Zorlamadan dolayı ortaya çıkan NAs"
 msgid "NA values introduced by coercion to integer range"
 msgstr "Zorlamadan dolayı ortaya çıkan NAs"
 
-#: src/main/coerce.cpp:110 src/main/errors.cpp:1421
+#: src/main/coerce.cpp:110 src/main/errors.cpp:1431
 msgid "imaginary parts discarded in coercion"
 msgstr "zorlamadaki hayali kısımlar çıkarıldı"
 
@@ -2458,7 +2454,7 @@ msgid "'%s' argument must be a character string or a function"
 msgstr "'what' bir karakter dizesi veya bir fonksiyon olmalıdır"
 
 #: src/main/coerce.cpp:2741 src/main/engine.cpp:3254 src/main/envir.cpp:1867
-#: src/main/envir.cpp:2890 src/main/envir.cpp:2976 src/main/unique.cpp:1479
+#: src/main/envir.cpp:2891 src/main/envir.cpp:2977 src/main/unique.cpp:1479
 #, fuzzy, c-format
 msgid "'%s' argument must be an environment"
 msgstr "'env' argümanı bir ortam olmalı"
@@ -2611,7 +2607,7 @@ msgstr "tüm bağlantılar kullanımda"
 msgid "connection was not found"
 msgstr "bağlantı bulunamadı"
 
-#: src/main/connections.cpp:195 src/main/connections.cpp:5649
+#: src/main/connections.cpp:195 src/main/connections.cpp:5647
 msgid "invalid connection"
 msgstr "geçersiz bağlantı"
 
@@ -2630,9 +2626,9 @@ msgstr "kullanılmayan bağlantı kapatılıyor %d (%s)\n"
 msgid "unsupported conversion from '%s' to '%s'"
 msgstr "'%s' den '%s' e desteklenmeyen dönüşüm"
 
-#: src/main/connections.cpp:310 src/main/connections.cpp:4144
-#: src/main/connections.cpp:4276 src/main/connections.cpp:4367
-#: src/main/connections.cpp:4397 src/main/connections.cpp:4430
+#: src/main/connections.cpp:310 src/main/connections.cpp:4142
+#: src/main/connections.cpp:4274 src/main/connections.cpp:4365
+#: src/main/connections.cpp:4395 src/main/connections.cpp:4428
 #, fuzzy
 msgid "error reading from the connection"
 msgstr "bağlantıdan okunurken hata"
@@ -2669,8 +2665,8 @@ msgstr "dosya '%s' açılamadı: %s"
 msgid "'fdopen' is not supported on this platform"
 msgstr "nsl() bu platformda desteklenmiyor"
 
-#: src/main/connections.cpp:813 src/main/connections.cpp:1717
-#: src/main/connections.cpp:1868 src/main/connections.cpp:2064
+#: src/main/connections.cpp:813 src/main/connections.cpp:1715
+#: src/main/connections.cpp:1866 src/main/connections.cpp:2062
 #, fuzzy, c-format
 msgid "cannot open file '%s': it is a directory"
 msgstr "dosya '%s' açılamadı: %s"
@@ -2685,7 +2681,7 @@ msgstr "bağlantı okuma için açık değil"
 msgid "connection is not open for writing"
 msgstr "bağlantı yazma için açık değil"
 
-#: src/main/connections.cpp:970 src/main/connections.cpp:2509
+#: src/main/connections.cpp:970 src/main/connections.cpp:2507
 msgid "can only truncate connections open for writing"
 msgstr "sadece yazma için açık olan bağlantılar kırpılabilir"
 
@@ -2724,68 +2720,68 @@ msgid "cannot open fifo connection '%s'"
 msgstr "bağlantı açılamadı"
 
 #: src/main/connections.cpp:1166 src/main/connections.cpp:1177
-#: src/main/connections.cpp:1338 src/main/connections.cpp:1356
-#: src/main/connections.cpp:1783 src/main/connections.cpp:1793
-#: src/main/connections.cpp:1923 src/main/connections.cpp:1983
-#: src/main/connections.cpp:2526 src/main/connections.cpp:2543
-#: src/main/connections.cpp:2861 src/main/connections.cpp:5823
-#: src/main/connections.cpp:5887
+#: src/main/connections.cpp:1336 src/main/connections.cpp:1354
+#: src/main/connections.cpp:1781 src/main/connections.cpp:1791
+#: src/main/connections.cpp:1921 src/main/connections.cpp:1981
+#: src/main/connections.cpp:2524 src/main/connections.cpp:2541
+#: src/main/connections.cpp:2859 src/main/connections.cpp:5821
+#: src/main/connections.cpp:5885
 #, fuzzy
 msgid "specified block is too large"
 msgstr "seçilen vektör boyutu çok büyük"
 
-#: src/main/connections.cpp:1235 src/main/connections.cpp:1241
+#: src/main/connections.cpp:1240
 #, fuzzy
 msgid "allocation of fifo name failed"
 msgstr "fifo bağlantısı yer ayırması başarısız"
 
-#: src/main/connections.cpp:1280
+#: src/main/connections.cpp:1279
 #, fuzzy, c-format
 msgid "cannot create fifo '%s', reason '%s'"
 msgstr "dosya '%s' oluşturulamıyor, sebep: '%s'"
 
-#: src/main/connections.cpp:1301
+#: src/main/connections.cpp:1300
 #, fuzzy, c-format
 msgid "cannot open fifo '%s', reason '%s'"
 msgstr "'%s' adresi açılamıyor, sebep:'%s'"
 
-#: src/main/connections.cpp:1341 src/main/connections.cpp:1364
+#: src/main/connections.cpp:1339 src/main/connections.cpp:1362
 #, fuzzy
 msgid "allocation of fifo buffer failed"
 msgstr "fifo bağlantısı yer ayırması başarısız"
 
-#: src/main/connections.cpp:1372
+#: src/main/connections.cpp:1370
 #, fuzzy, c-format
 msgid "cannot write FIFO '%s'"
 msgstr "URL '%s' açılamıyor"
 
-#: src/main/connections.cpp:1408 src/main/connections.cpp:1412
-#: src/main/connections.cpp:1419 src/main/connections.cpp:1436
+#: src/main/connections.cpp:1406 src/main/connections.cpp:1410
+#: src/main/connections.cpp:1417 src/main/connections.cpp:1434
 msgid "allocation of fifo connection failed"
 msgstr "fifo bağlantısı yer ayırması başarısız"
 
-#: src/main/connections.cpp:1456 src/main/connections.cpp:1619
-#: src/main/connections.cpp:2275 src/main/connections.cpp:3542
-#: src/main/connections.cpp:5387 src/modules/internet/internet.cpp:498
+#: src/main/connections.cpp:1454 src/main/connections.cpp:1617
+#: src/main/connections.cpp:2273 src/main/connections.cpp:3540
+#: src/main/connections.cpp:5385 src/modules/internet/internet.cpp:498
 #: src/modules/internet/internet.cpp:504
 #, fuzzy, c-format
 msgid "only first element of '%s' argument will be used"
 msgstr "'description' argümanın sadece ilk öğesi kullanıldı"
 
-#: src/main/connections.cpp:1473 src/main/connections.cpp:5520
+#: src/main/connections.cpp:1471 src/main/connections.cpp:5518
 #, fuzzy, c-format
 msgid ""
 "'%s' only supports 'open = \"w+\"' and 'open = \"w+b\"': using the former"
 msgstr ""
 "fifo(\"\") sadece open = \"w+\" ve open = \"w+b\" destekler:ilki kullanılıyor"
 
-#: src/main/connections.cpp:1488 src/main/connections.cpp:1657
-#: src/main/connections.cpp:2343 src/main/connections.cpp:3510
-#: src/main/connections.cpp:3564 src/main/connections.cpp:3612
-#: src/main/connections.cpp:3949 src/main/connections.cpp:4077
-#: src/main/connections.cpp:4242 src/main/connections.cpp:4501
-#: src/main/connections.cpp:4824 src/main/connections.cpp:4953
-#: src/main/connections.cpp:5171 src/main/connections.cpp:5616
+#: src/main/connections.cpp:1486 src/main/connections.cpp:1655
+#: src/main/connections.cpp:2341 src/main/connections.cpp:3508
+#: src/main/connections.cpp:3562 src/main/connections.cpp:3610
+#: src/main/connections.cpp:3947 src/main/connections.cpp:4075
+#: src/main/connections.cpp:4240 src/main/connections.cpp:4499
+#: src/main/connections.cpp:4822 src/main/connections.cpp:4951
+#: src/main/connections.cpp:5169 src/main/connections.cpp:5614
 #: src/main/dcf.cpp:102 src/main/deparse.cpp:408 src/main/deparse.cpp:492
 #: src/main/saveload.cpp:2487 src/main/saveload.cpp:2570 src/main/scan.cpp:959
 #: src/main/serialize.cpp:2728 src/main/serialize.cpp:2775
@@ -2793,573 +2789,573 @@ msgstr ""
 msgid "cannot open the connection"
 msgstr "bağlantı açılamadı"
 
-#: src/main/connections.cpp:1503
+#: src/main/connections.cpp:1501
 msgid "fifo connections are not available on this system"
 msgstr "fifo bağlantıları bu sistemde mevcut değil"
 
-#: src/main/connections.cpp:1534
+#: src/main/connections.cpp:1532
 #, fuzzy, c-format
 msgid "cannot open 'pipe()' command '%ls': %s"
 msgstr "pipe() komut dizesi '%s' açılamadı: %s"
 
-#: src/main/connections.cpp:1541
+#: src/main/connections.cpp:1539
 #, fuzzy, c-format
 msgid "cannot open 'pipe()' command '%s': %s"
 msgstr "pipe() komut dizesi '%s' açılamadı: %s"
 
-#: src/main/connections.cpp:1722 src/main/connections.cpp:2059
+#: src/main/connections.cpp:1720 src/main/connections.cpp:2057
 #, c-format
 msgid "cannot open compressed file '%s', probable reason '%s'"
 msgstr "sıkıştırılmış dosya '%s' açılamadı, muhtemel sebep: %s"
 
-#: src/main/connections.cpp:1763
+#: src/main/connections.cpp:1761
 #, fuzzy
 msgid "'whence = \"end\"' option is not implemented for gzfile connections"
 msgstr "whence = \"end\" gzfile bağlantıları için tanımlanmadı"
 
-#: src/main/connections.cpp:1768
+#: src/main/connections.cpp:1766
 msgid "seek on a gzfile connection returned an internal error"
 msgstr "gzfile dosyasında gezinme iç bir hata döndürdü"
 
-#: src/main/connections.cpp:1802 src/main/connections.cpp:1806
-#: src/main/connections.cpp:1813 src/main/connections.cpp:1831
+#: src/main/connections.cpp:1800 src/main/connections.cpp:1804
+#: src/main/connections.cpp:1811 src/main/connections.cpp:1829
 msgid "allocation of gzfile connection failed"
 msgstr "gzfile bağlantısı yer ayırması başarısız"
 
-#: src/main/connections.cpp:1863
+#: src/main/connections.cpp:1861
 #, c-format
 msgid "cannot open bzip2-ed file '%s', probable reason '%s'"
 msgstr "bzip sıkıştırılmış dosya '%s' açılamadı, muhtemel sebep: '%s'"
 
-#: src/main/connections.cpp:1877
+#: src/main/connections.cpp:1875
 #, c-format
 msgid "file '%s' appears not to be compressed by bzip2"
 msgstr "'%s' dosyası bzip2 ile sıkıştırılmamış gibi gözüküyor"
 
-#: src/main/connections.cpp:1886
+#: src/main/connections.cpp:1884
 #, c-format
 msgid "initializing bzip2 compression for file '%s' failed"
 msgstr "'%s' dosyası için bzip2 sıkıştırma başlangıcı başarısız"
 
-#: src/main/connections.cpp:1941
+#: src/main/connections.cpp:1939
 #, fuzzy
 msgid "allocation of overflow buffer for bzfile failed"
 msgstr "dosya bağlantısı yer ayırması başarısız"
 
-#: src/main/connections.cpp:1948
+#: src/main/connections.cpp:1946
 #, fuzzy, c-format
 msgid ""
 "file '%s' has trailing content that appears not to be compressed by bzip2"
 msgstr "'%s' dosyası bzip2 ile sıkıştırılmamış gibi gözüküyor"
 
-#: src/main/connections.cpp:1994 src/main/connections.cpp:1998
-#: src/main/connections.cpp:2005 src/main/connections.cpp:2023
+#: src/main/connections.cpp:1992 src/main/connections.cpp:1996
+#: src/main/connections.cpp:2003 src/main/connections.cpp:2021
 msgid "allocation of bzfile connection failed"
 msgstr "bzfile bağlanıtısı yer ayırması başarısız"
 
-#: src/main/connections.cpp:2077 src/main/connections.cpp:6587
+#: src/main/connections.cpp:2075 src/main/connections.cpp:6585
 #, c-format
 msgid "cannot initialize lzma decoder, error %d"
 msgstr "lzma çözücüsü başlatılamadı, hata %d"
 
-#: src/main/connections.cpp:2086 src/main/connections.cpp:6268
-#: src/main/connections.cpp:6433
+#: src/main/connections.cpp:2084 src/main/connections.cpp:6266
+#: src/main/connections.cpp:6431
 #, fuzzy
 msgid "problem with setting presets"
 msgstr "zaman dilimini ayarlarken bir sorun oluştu"
 
-#: src/main/connections.cpp:2093
+#: src/main/connections.cpp:2091
 #, c-format
 msgid "cannot initialize lzma encoder, error %d"
 msgstr "lzma kodlayıcısı başlatılamadı, hata %d"
 
-#: src/main/connections.cpp:2119 src/main/connections.cpp:2212
+#: src/main/connections.cpp:2117 src/main/connections.cpp:2210
 #, fuzzy
 msgid "'fwrite' error"
 msgstr "okuma hatası"
 
-#: src/main/connections.cpp:2154
+#: src/main/connections.cpp:2152
 msgid "lzma decoder needed more memory"
 msgstr ""
 
-#: src/main/connections.cpp:2157
+#: src/main/connections.cpp:2155
 msgid "lzma decoder format error"
 msgstr ""
 
-#: src/main/connections.cpp:2160
+#: src/main/connections.cpp:2158
 msgid "lzma decoder corrupt data"
 msgstr ""
 
-#: src/main/connections.cpp:2163
+#: src/main/connections.cpp:2161
 #, c-format
 msgid "lzma decoding result %d"
 msgstr ""
 
-#: src/main/connections.cpp:2203
+#: src/main/connections.cpp:2201
 msgid "lzma encoder needed more memory"
 msgstr ""
 
-#: src/main/connections.cpp:2206
+#: src/main/connections.cpp:2204
 #, c-format
 msgid "lzma encoding result %d"
 msgstr ""
 
-#: src/main/connections.cpp:2221 src/main/connections.cpp:2225
-#: src/main/connections.cpp:2232 src/main/connections.cpp:2251
+#: src/main/connections.cpp:2219 src/main/connections.cpp:2223
+#: src/main/connections.cpp:2230 src/main/connections.cpp:2249
 msgid "allocation of xzfile connection failed"
 msgstr "xzfile bağlatısı yer ayırması başarısız"
 
-#: src/main/connections.cpp:2312
+#: src/main/connections.cpp:2310
 #, fuzzy, c-format
 msgid ""
 "this is a file compressed using '%s' which this build of R does not support"
 msgstr "bu bir R'nin bu derlemesinin desteklemediği %s-sıkıştırılmış dosya"
 
-#: src/main/connections.cpp:2409 src/modules/X11/devX11.cpp:3444
+#: src/main/connections.cpp:2407 src/modules/X11/devX11.cpp:3444
 msgid "memory allocation to copy clipboard failed"
 msgstr "panoyu kopyalama için bellek yer ayırması başarısız"
 
-#: src/main/connections.cpp:2414 src/modules/X11/devX11.cpp:3423
+#: src/main/connections.cpp:2412 src/modules/X11/devX11.cpp:3423
 #: src/modules/X11/devX11.cpp:3428
 msgid "clipboard cannot be opened or contains no text"
 msgstr "pano açılamıyor veya metin içermiyor"
 
-#: src/main/connections.cpp:2425
+#: src/main/connections.cpp:2423
 msgid "memory allocation to open clipboard failed"
 msgstr "panoyu açmak için bellek ayırması başarısız"
 
-#: src/main/connections.cpp:2454
+#: src/main/connections.cpp:2452
 #, fuzzy
 msgid "unable to open the clipboard"
 msgstr "Pano açılamadı"
 
-#: src/main/connections.cpp:2458
+#: src/main/connections.cpp:2456
 #, fuzzy
 msgid "unable to write to the clipboard"
 msgstr "Panoya yazılamadı"
 
-#: src/main/connections.cpp:2498
+#: src/main/connections.cpp:2496
 msgid "attempt to seek outside the range of the clipboard"
 msgstr "pano alanı dışında tarama yapma girişimi"
 
-#: src/main/connections.cpp:2541
+#: src/main/connections.cpp:2539
 msgid "clipboard connection is open for reading only"
 msgstr "pano bağlantısı sadece okumaya açık"
 
-#: src/main/connections.cpp:2561
+#: src/main/connections.cpp:2559
 msgid "clipboard buffer is full and output lost"
 msgstr "pano önbelleği dolu, çıktı kayboldu"
 
-#: src/main/connections.cpp:2582
+#: src/main/connections.cpp:2580
 msgid "'mode' for the clipboard must be 'r' or 'w'"
 msgstr "pano için 'mode' 'r' veya 'w' olmalı"
 
-#: src/main/connections.cpp:2585
+#: src/main/connections.cpp:2583
 msgid "'mode' for the clipboard must be 'r' on Unix"
 msgstr "pano için 'mode' Unix sistemlerde 'r' olmalıdır"
 
-#: src/main/connections.cpp:2588 src/main/connections.cpp:2594
-#: src/main/connections.cpp:2601 src/main/connections.cpp:2619
+#: src/main/connections.cpp:2586 src/main/connections.cpp:2592
+#: src/main/connections.cpp:2599 src/main/connections.cpp:2617
 msgid "allocation of clipboard connection failed"
 msgstr "pano bağlantısı yer ayırması başarısız"
 
-#: src/main/connections.cpp:2695 src/main/connections.cpp:2699
-#: src/main/connections.cpp:2706
+#: src/main/connections.cpp:2693 src/main/connections.cpp:2697
+#: src/main/connections.cpp:2704
 msgid "allocation of terminal connection failed"
 msgstr "terminal bağlantısı yer ayırması başarısız"
 
-#: src/main/connections.cpp:2838
+#: src/main/connections.cpp:2836
 msgid "attempting to add too many elements to raw vector"
 msgstr "ham bir vektöre çok fazla öğe ekleme deneniyor"
 
-#: src/main/connections.cpp:2890
+#: src/main/connections.cpp:2888
 msgid "attempt to seek outside the range of the raw connection"
 msgstr "ham bir bağlantı alanının dışında tarama denemesi"
 
-#: src/main/connections.cpp:2901 src/main/connections.cpp:2905
-#: src/main/connections.cpp:2912 src/main/connections.cpp:2939
+#: src/main/connections.cpp:2899 src/main/connections.cpp:2903
+#: src/main/connections.cpp:2910 src/main/connections.cpp:2937
 msgid "allocation of raw connection failed"
 msgstr "ham bağlantı yer ayırması başarısız"
 
-#: src/main/connections.cpp:2991
+#: src/main/connections.cpp:2989
 #, fuzzy, c-format
 msgid "'%s' is not a %s"
 msgstr "'fn' bir fonksiyon değil"
 
-#: src/main/connections.cpp:2995
+#: src/main/connections.cpp:2993
 #, fuzzy, c-format
 msgid "internal connection is not a %s"
 msgstr "bağlantı açık değil"
 
-#: src/main/connections.cpp:3008 src/main/connections.cpp:3440
+#: src/main/connections.cpp:3006 src/main/connections.cpp:3438
 #, fuzzy, c-format
 msgid "'%s' is not an output of class %s"
 msgstr "'con' bir çıktı textConnection'ı değil"
 
-#: src/main/connections.cpp:3048
+#: src/main/connections.cpp:3046
 #, fuzzy
 msgid "too many characters for text connection"
 msgstr "metin bağlantısı için bellek ayrılamadı"
 
-#: src/main/connections.cpp:3053
+#: src/main/connections.cpp:3051
 msgid "cannot allocate memory for text connection"
 msgstr "metin bağlantısı için bellek ayrılamadı"
 
-#: src/main/connections.cpp:3107
+#: src/main/connections.cpp:3105
 msgid "seek is not relevant for text connection"
 msgstr "tarama metin bağlantısı ile ilişkili değil"
 
-#: src/main/connections.cpp:3116 src/main/connections.cpp:3120
-#: src/main/connections.cpp:3127 src/main/connections.cpp:3141
-#: src/main/connections.cpp:3329 src/main/connections.cpp:3333
-#: src/main/connections.cpp:3340 src/main/connections.cpp:3354
-#: src/main/connections.cpp:3362
+#: src/main/connections.cpp:3114 src/main/connections.cpp:3118
+#: src/main/connections.cpp:3125 src/main/connections.cpp:3139
+#: src/main/connections.cpp:3327 src/main/connections.cpp:3331
+#: src/main/connections.cpp:3338 src/main/connections.cpp:3352
+#: src/main/connections.cpp:3360
 msgid "allocation of text connection failed"
 msgstr "metin bağlantısı yer ayırması başarısız"
 
-#: src/main/connections.cpp:3259
+#: src/main/connections.cpp:3257
 #, fuzzy
 msgid "last line is too long"
 msgstr "biçim dizesi çok uzun"
 
-#: src/main/connections.cpp:3265
+#: src/main/connections.cpp:3263
 #, fuzzy
 msgid "allocation problem for last line"
 msgstr "dosya bağlantısı yer ayırması başarısız"
 
-#: src/main/connections.cpp:3304
+#: src/main/connections.cpp:3302
 msgid "text connection: appending to a non-existent char vector"
 msgstr "metin bağlantısı: var olmayan bir karakter vektörüne ekleniyor"
 
-#: src/main/connections.cpp:3417
+#: src/main/connections.cpp:3415
 msgid "unsupported mode"
 msgstr "desteklenmeyen mod"
 
-#: src/main/connections.cpp:3592 src/main/connections.cpp:3641
-#: src/main/connections.cpp:3652 src/main/connections.cpp:3737
-#: src/main/connections.cpp:3767 src/main/connections.cpp:3789
-#: src/main/connections.cpp:3801 src/main/connections.cpp:3925
-#: src/main/connections.cpp:4062 src/main/connections.cpp:5927
+#: src/main/connections.cpp:3590 src/main/connections.cpp:3639
+#: src/main/connections.cpp:3650 src/main/connections.cpp:3735
+#: src/main/connections.cpp:3765 src/main/connections.cpp:3787
+#: src/main/connections.cpp:3799 src/main/connections.cpp:3923
+#: src/main/connections.cpp:4060 src/main/connections.cpp:5925
 #, fuzzy, c-format
 msgid "'%s' argument is not an object of class %s"
 msgstr "'con' bir çıktı rawConnection değil"
 
-#: src/main/connections.cpp:3595
+#: src/main/connections.cpp:3593
 msgid "cannot open standard connections"
 msgstr "standart bağlantılar açılamıyor"
 
-#: src/main/connections.cpp:3597
+#: src/main/connections.cpp:3595
 msgid "connection is already open"
 msgstr "bağlantı zaten açık"
 
-#: src/main/connections.cpp:3630
+#: src/main/connections.cpp:3628
 msgid "unknown 'rw' value"
 msgstr "bilinmeyen 'rw' değeri"
 
-#: src/main/connections.cpp:3667
+#: src/main/connections.cpp:3665
 #, fuzzy, c-format
 msgid "Problem closing connection:  %s"
 msgstr "kullanılmayan bağlantı kapatılıyor %d (%s)\n"
 
-#: src/main/connections.cpp:3669
+#: src/main/connections.cpp:3667
 #, fuzzy
 msgid "Problem closing connection"
 msgstr "bağlantıya yazılırken hata"
 
-#: src/main/connections.cpp:3739
+#: src/main/connections.cpp:3737
 msgid "cannot close standard connections"
 msgstr "standart bağlantılar kapatılamıyor"
 
-#: src/main/connections.cpp:3742
+#: src/main/connections.cpp:3740
 #, fuzzy
 msgid "cannot close 'output' sink connection"
 msgstr "sink çıktı bağlantısı kapatılamaz"
 
-#: src/main/connections.cpp:3744
+#: src/main/connections.cpp:3742
 #, fuzzy
 msgid "cannot close 'message' sink connection"
 msgstr "sink bağlantısı mesajları kapatılamaz"
 
-#: src/main/connections.cpp:3769 src/main/connections.cpp:5634
-#: src/main/connections.cpp:5642 src/main/serialize.cpp:2544
+#: src/main/connections.cpp:3767 src/main/connections.cpp:5632
+#: src/main/connections.cpp:5640 src/main/serialize.cpp:2544
 #: src/main/serialize.cpp:2552
 msgid "connection is not open"
 msgstr "bağlantı açık değil"
 
-#: src/main/connections.cpp:3865 src/main/connections.cpp:3877
+#: src/main/connections.cpp:3863 src/main/connections.cpp:3875
 #, fuzzy, c-format
 msgid "line is longer than buffer size %lu"
 msgstr "Dize önbellek boyutundan uzun"
 
-#: src/main/connections.cpp:3895
+#: src/main/connections.cpp:3893
 #, fuzzy, c-format
 msgid "Error writing to connection:  %s"
 msgstr "bağlantıya yazılırken hata"
 
-#: src/main/connections.cpp:3897
+#: src/main/connections.cpp:3895
 #, fuzzy
 msgid "Error writing to connection"
 msgstr "bağlantıya yazılırken hata"
 
-#: src/main/connections.cpp:3954 src/main/connections.cpp:3956
-#: src/main/connections.cpp:4248 src/main/connections.cpp:4807
-#: src/main/connections.cpp:4830 src/main/connections.cpp:5643
+#: src/main/connections.cpp:3952 src/main/connections.cpp:3954
+#: src/main/connections.cpp:4246 src/main/connections.cpp:4805
+#: src/main/connections.cpp:4828 src/main/connections.cpp:5641
 #: src/main/dcf.cpp:107 src/main/scan.cpp:962 src/main/scan.cpp:966
 #: src/main/serialize.cpp:2546 src/main/source.cpp:297
 msgid "cannot read from this connection"
 msgstr "bu bağlantıdan okunamıyor"
 
-#: src/main/connections.cpp:3968 src/main/connections.cpp:3990
+#: src/main/connections.cpp:3966 src/main/connections.cpp:3988
 #, fuzzy
 msgid "cannot allocate buffer in 'readLines()'"
 msgstr "readLines içinde önbellek ayrılamıyor"
 
-#: src/main/connections.cpp:3975 src/main/scan.cpp:606 src/main/scan.cpp:761
+#: src/main/connections.cpp:3973 src/main/scan.cpp:606 src/main/scan.cpp:761
 #, fuzzy
 msgid "too many items"
 msgstr "çok fazla argüman"
 
-#: src/main/connections.cpp:4008
+#: src/main/connections.cpp:4006
 #, c-format
 msgid "line %d appears to contain an embedded nul"
 msgstr ""
 
-#: src/main/connections.cpp:4030
+#: src/main/connections.cpp:4028
 #, c-format
 msgid "incomplete final line found on '%s'"
 msgstr "tamamlanmamış son dize bulundu: '%s'"
 
-#: src/main/connections.cpp:4035
+#: src/main/connections.cpp:4033
 #, fuzzy
 msgid "too few lines read in 'readLines()'"
 msgstr "readLines'da çok az dize"
 
-#: src/main/connections.cpp:4147
+#: src/main/connections.cpp:4145
 msgid "incomplete string at end of file has been discarded"
 msgstr "dosya sonundaki eksik dize görmezden gelindi"
 
-#: src/main/connections.cpp:4153
+#: src/main/connections.cpp:4151
 #, fuzzy
 msgid "null terminator was not found: breaking string at 10000 bytes"
 msgstr "null sonlandırıcısı bulunamadı: 10000 baytta dize sonlandırılıyor"
 
-#: src/main/connections.cpp:4218
+#: src/main/connections.cpp:4216
 msgid "can only read from a binary connection"
 msgstr "sadece ikili bir bağlantıdan okunabilir"
 
-#: src/main/connections.cpp:4264 src/main/connections.cpp:4568
+#: src/main/connections.cpp:4262 src/main/connections.cpp:4566
 msgid "size changing is not supported for complex vectors"
 msgstr "karmaşık vektörler için boyut değiştirme desteklenmiyor"
 
-#: src/main/connections.cpp:4313 src/main/connections.cpp:4347
-#: src/main/connections.cpp:4392 src/main/connections.cpp:4423
-#: src/main/connections.cpp:4443 src/main/connections.cpp:4562
-#: src/main/connections.cpp:4620 src/main/connections.cpp:4651
+#: src/main/connections.cpp:4311 src/main/connections.cpp:4345
+#: src/main/connections.cpp:4390 src/main/connections.cpp:4421
+#: src/main/connections.cpp:4441 src/main/connections.cpp:4560
+#: src/main/connections.cpp:4618 src/main/connections.cpp:4649
 #, c-format
 msgid "size %d is unknown on this machine"
 msgstr "%d boyutu bu makinede desteklenmiyor"
 
-#: src/main/connections.cpp:4332
+#: src/main/connections.cpp:4330
 msgid "raw is always of size 1"
 msgstr "ham hep 1 uzunluğundadır"
 
-#: src/main/connections.cpp:4355
+#: src/main/connections.cpp:4353
 msgid "'signed = FALSE' is only valid for integers of sizes 1 and 2"
 msgstr ""
 
-#: src/main/connections.cpp:4462
+#: src/main/connections.cpp:4460
 #, fuzzy
 msgid "'x' argument is not an atomic vector type"
 msgstr "'x' bir atomik vektör tipi değil"
 
-#: src/main/connections.cpp:4469
+#: src/main/connections.cpp:4467
 msgid "can only write to a binary connection"
 msgstr "sadece ikili bir bağlantıya yazabilir"
 
-#: src/main/connections.cpp:4489
+#: src/main/connections.cpp:4487
 msgid "only 2^31-1 bytes can be written to a raw vector"
 msgstr "bir ham vektöre sadece only 2^31-1 bayt yazılabilir"
 
-#: src/main/connections.cpp:4491
+#: src/main/connections.cpp:4489
 #, fuzzy
 msgid "only 2^31-1 bytes can be written in a single 'writeBin()' call"
 msgstr "tek bir readBin() çağrısına sadece 2^31-1 bayt yazılabilir"
 
-#: src/main/connections.cpp:4541 src/main/connections.cpp:4681
-#: src/main/connections.cpp:4982 src/main/connections.cpp:5023
+#: src/main/connections.cpp:4539 src/main/connections.cpp:4679
+#: src/main/connections.cpp:4980 src/main/connections.cpp:5021
 #, fuzzy
 msgid "problem with writing to connection"
 msgstr "bağlantıya yazılırken hata"
 
-#: src/main/connections.cpp:4573
+#: src/main/connections.cpp:4571
 msgid "size changing is not supported for raw vectors"
 msgstr "ham vektörler için boyut değişikliği desteklenmiyor"
 
-#: src/main/connections.cpp:4718 src/main/connections.cpp:4722
-#: src/main/connections.cpp:4768
+#: src/main/connections.cpp:4716 src/main/connections.cpp:4720
+#: src/main/connections.cpp:4766
 #, fuzzy
 msgid "invalid UTF-8 input in 'readChar()'"
 msgstr "readChar()'da geçersiz UTF-8 girişi"
 
-#: src/main/connections.cpp:4725 src/main/connections.cpp:4735
+#: src/main/connections.cpp:4723 src/main/connections.cpp:4733
 msgid "truncating string with embedded nuls"
 msgstr ""
 
-#: src/main/connections.cpp:4833
+#: src/main/connections.cpp:4831
 msgid "can only read in bytes in a non-UTF-8 MBCS locale"
 msgstr "sadece UTF-8 MBCS yerelinde olmayanlardan bayt okuyabilir"
 
-#: src/main/connections.cpp:4839 src/main/connections.cpp:4963
+#: src/main/connections.cpp:4837 src/main/connections.cpp:4961
 #, c-format
 msgid "text connection used with '%s' function, results may be incorrect"
 msgstr ""
 
-#: src/main/connections.cpp:4916
+#: src/main/connections.cpp:4914
 #, fuzzy
 msgid "'object' argument is too short"
 msgstr "'object' çok kısa"
 
-#: src/main/connections.cpp:4942
+#: src/main/connections.cpp:4940
 msgid "too much data for a raw vector on this platform"
 msgstr ""
 
-#: src/main/connections.cpp:4971
+#: src/main/connections.cpp:4969
 msgid "writeChar: more bytes requested than are in the string - will zero-pad"
 msgstr ""
 "writeChar: dizede bulunandan daha fazla bayt talep edildi - sıfır eklenecek"
 
-#: src/main/connections.cpp:4996
+#: src/main/connections.cpp:4994
 msgid ""
 "writeChar: more characters requested than are in the string - will zero-pad"
 msgstr ""
 "writeChar: dizede bulunandan daha fazla karakter talep edildi - sıfır "
 "eklenecek"
 
-#: src/main/connections.cpp:5054
+#: src/main/connections.cpp:5052
 #, fuzzy
 msgid "maximum number of pushback lines exceeded"
 msgstr "maksimum renk sayısı aşıldı"
 
-#: src/main/connections.cpp:5060 src/main/connections.cpp:5064
-#: src/main/connections.cpp:5101 src/main/connections.cpp:5109
+#: src/main/connections.cpp:5058 src/main/connections.cpp:5062
+#: src/main/connections.cpp:5099 src/main/connections.cpp:5107
 #: src/main/Rdynload.cpp:622 src/main/Rdynload.cpp:661
 #, fuzzy, c-format
 msgid "could not allocate space for '%s'"
 msgstr "'path' için yer ayrılamadı"
 
-#: src/main/connections.cpp:5092
+#: src/main/connections.cpp:5090
 msgid "can only push back on open readable connections"
 msgstr "sadece açık okunabilir bağlantılara geri zorlanabilir"
 
-#: src/main/connections.cpp:5094
+#: src/main/connections.cpp:5092
 msgid "can only push back on text-mode connections"
 msgstr "sadece metin-modu bağlantılara geri zorlanabilir"
 
-#: src/main/connections.cpp:5156 src/main/connections.cpp:5226
+#: src/main/connections.cpp:5154 src/main/connections.cpp:5224
 msgid "sink stack is full"
 msgstr "sink yığını tamamen dolu"
 
-#: src/main/connections.cpp:5159
+#: src/main/connections.cpp:5157
 #, fuzzy
 msgid "cannot switch output to 'stdin'"
 msgstr "çıktı stdin'e değiştirilemez"
 
-#: src/main/connections.cpp:5186
+#: src/main/connections.cpp:5184
 msgid "no sink to remove"
 msgstr "kaldırılcak sink yok"
 
-#: src/main/connections.cpp:5307
+#: src/main/connections.cpp:5305
 #, fuzzy
 msgid "there is no connection NA"
 msgstr "bağlantı yok %d"
 
-#: src/main/connections.cpp:5309
+#: src/main/connections.cpp:5307
 #, c-format
 msgid "there is no connection %d"
 msgstr "bağlantı yok %d"
 
-#: src/main/connections.cpp:5447
+#: src/main/connections.cpp:5445
 #, fuzzy
 msgid "'method = \"wininet\"' is only supported on Windows"
 msgstr "'dirmark = TRUE' bu platformda desteklenmiyor"
 
-#: src/main/connections.cpp:5475
+#: src/main/connections.cpp:5473
 #, fuzzy
 msgid "ftps:// URLs are not supported by this method"
 msgstr "tip '%s' desteklenmiyor"
 
-#: src/main/connections.cpp:5482
+#: src/main/connections.cpp:5480
 #, fuzzy
 msgid "https:// URLs are not supported by this method"
 msgstr "tip '%s' desteklenmiyor"
 
-#: src/main/connections.cpp:5488
+#: src/main/connections.cpp:5486
 #, fuzzy
 msgid "https:// URLs are not supported by the \"internal\" method"
 msgstr "tip '%s' desteklenmiyor"
 
-#: src/main/connections.cpp:5508 src/modules/internet/libcurl.cpp:1022
+#: src/main/connections.cpp:5506 src/modules/internet/libcurl.cpp:1022
 #, fuzzy
 msgid "'url(method = \"libcurl\")' is not supported on this platform"
 msgstr "'dirmark = TRUE' bu platformda desteklenmiyor"
 
-#: src/main/connections.cpp:5541
+#: src/main/connections.cpp:5539
 #, c-format
 msgid "using 'raw = TRUE' because '%s' is a fifo or pipe"
 msgstr ""
 
-#: src/main/connections.cpp:5548
+#: src/main/connections.cpp:5546
 #, fuzzy, c-format
 msgid "'raw = FALSE' but '%s' is not a regular file"
 msgstr "%s sembol ismi \"%s\" yükleme tablosunda değil"
 
-#: src/main/connections.cpp:5592
+#: src/main/connections.cpp:5590
 #, fuzzy
 msgid "URL scheme unsupported by this method"
 msgstr "bu derlemede ICU desteklenmiyor"
 
-#: src/main/connections.cpp:5689
+#: src/main/connections.cpp:5687
 msgid "file stream does not have gzip magic number"
 msgstr "dosya akışı gzip magic numarasına sahip değil"
 
-#: src/main/connections.cpp:5700
+#: src/main/connections.cpp:5698
 msgid "file stream does not have valid gzip header"
 msgstr "dosya akışı geçerli gzip başlığı içermiyor"
 
-#: src/main/connections.cpp:5765
+#: src/main/connections.cpp:5763
 #, fuzzy
 msgid "writing error while flushing gzcon connection"
 msgstr "'gzcon' bağlantısını temizlerken yazma hatası"
 
-#: src/main/connections.cpp:5869
+#: src/main/connections.cpp:5867
 #, c-format
 msgid "crc error %x %x\n"
 msgstr "crc hatası %x %x\n"
 
-#: src/main/connections.cpp:5896
+#: src/main/connections.cpp:5894
 #, fuzzy
 msgid "write error on gzcon connection"
 msgstr "'gzcon' bağlantısında yazma hatası"
 
-#: src/main/connections.cpp:5931
+#: src/main/connections.cpp:5929
 #, fuzzy
 msgid "'level' argument must be one of 0 ... 9"
 msgstr "'level' 0 ... 9'dan biri olmalı"
 
-#: src/main/connections.cpp:5940
+#: src/main/connections.cpp:5938
 #, fuzzy
 msgid "this is already a gzcon connection"
 msgstr "bir zaten bir gzcon bağlantısı"
 
-#: src/main/connections.cpp:5946
+#: src/main/connections.cpp:5944
 msgid "can only use read- or write- binary connections"
 msgstr "ikili bağlantılarda sadece read- veya write- işlemi yapılabilir"
 
-#: src/main/connections.cpp:5949
+#: src/main/connections.cpp:5947
 msgid "using a text-mode 'file' connection may not work correctly"
 msgstr "bir metin modu 'file' bağlantısı düzgün olarak çalışmayabilir"
 
-#: src/main/connections.cpp:5952
+#: src/main/connections.cpp:5950
 #, fuzzy
 msgid ""
 "cannot create a gzcon connection from a writable textConnection; maybe use "
@@ -3368,87 +3364,87 @@ msgstr ""
 "yazılabilir textConnection'dan bir gzcon bağlantısı oluşturulamaz; "
 "rawConnection deneyin"
 
-#: src/main/connections.cpp:5955 src/main/connections.cpp:5959
-#: src/main/connections.cpp:5967
+#: src/main/connections.cpp:5953 src/main/connections.cpp:5957
+#: src/main/connections.cpp:5965
 #, fuzzy
 msgid "allocation of gzcon connection failed"
 msgstr "'gzcon' bağlantısı ayırması başarısız"
 
-#: src/main/connections.cpp:5982
+#: src/main/connections.cpp:5980
 #, fuzzy
 msgid "allocation of 'gzcon' connection failed"
 msgstr "'gzcon' bağlantısı ayırması başarısız"
 
-#: src/main/connections.cpp:6040 src/main/connections.cpp:6064
-#: src/main/connections.cpp:6089 src/main/connections.cpp:6121
-#: src/main/connections.cpp:6289 src/main/connections.cpp:6328
+#: src/main/connections.cpp:6038 src/main/connections.cpp:6062
+#: src/main/connections.cpp:6087 src/main/connections.cpp:6119
+#: src/main/connections.cpp:6287 src/main/connections.cpp:6326
 #, fuzzy, c-format
 msgid "'%s' function requires a raw vector"
 msgstr "'%s' bir karakter vektörü gerektirir"
 
-#: src/main/connections.cpp:6047 src/main/connections.cpp:6070
-#: src/main/connections.cpp:6099 src/main/connections.cpp:6129
-#: src/main/connections.cpp:6138 src/main/connections.cpp:6299
-#: src/main/connections.cpp:6306 src/main/connections.cpp:6339
-#: src/main/connections.cpp:6359 src/main/connections.cpp:6367
-#: src/main/connections.cpp:6403 src/main/connections.cpp:6417
-#: src/main/connections.cpp:6439 src/main/connections.cpp:6450
-#: src/main/connections.cpp:6510 src/main/connections.cpp:6565
+#: src/main/connections.cpp:6045 src/main/connections.cpp:6068
+#: src/main/connections.cpp:6097 src/main/connections.cpp:6127
+#: src/main/connections.cpp:6136 src/main/connections.cpp:6297
+#: src/main/connections.cpp:6304 src/main/connections.cpp:6337
+#: src/main/connections.cpp:6357 src/main/connections.cpp:6365
+#: src/main/connections.cpp:6401 src/main/connections.cpp:6415
+#: src/main/connections.cpp:6437 src/main/connections.cpp:6448
+#: src/main/connections.cpp:6508 src/main/connections.cpp:6563
 #, fuzzy, c-format
 msgid "internal error %d in '%s' function"
 msgstr "'do_sys'de iç hata"
 
-#: src/main/connections.cpp:6145 src/main/connections.cpp:6374
+#: src/main/connections.cpp:6143 src/main/connections.cpp:6372
 #, fuzzy, c-format
 msgid "unknown type in '%s' function"
 msgstr "bilinmeyen cumxxx fonksiyonu"
 
-#: src/main/connections.cpp:6167
+#: src/main/connections.cpp:6165
 #, fuzzy, c-format
 msgid "'%s' argument is not a list of sockets"
 msgstr "bir soket listesi değil"
 
-#: src/main/connections.cpp:6172
+#: src/main/connections.cpp:6170
 msgid "bad write indicators"
 msgstr "hatalı yazma göstericileri"
 
-#: src/main/connections.cpp:6194
+#: src/main/connections.cpp:6192
 #, fuzzy
 msgid "a server socket connection cannot be writeable"
 msgstr "soket rutinleri yüklenemez"
 
-#: src/main/connections.cpp:6196
+#: src/main/connections.cpp:6194
 #, fuzzy
 msgid "this is not a socket connection"
 msgstr "bir soket bağlantısı değil"
 
-#: src/main/connections.cpp:6349
+#: src/main/connections.cpp:6347
 #, fuzzy, c-format
 msgid "internal error %d in '%s' function (%d)"
 msgstr "'do_sys'de iç hata"
 
-#: src/main/connections.cpp:6391 src/main/connections.cpp:6472
+#: src/main/connections.cpp:6389 src/main/connections.cpp:6470
 #, fuzzy
 msgid "'from' argument must be raw or character"
 msgstr "'norm' bir karakter dizesi olmalıdır"
 
-#: src/main/connections.cpp:6484
+#: src/main/connections.cpp:6482
 msgid "unknown compression, assuming none"
 msgstr "bilinmeyen sıkıştırma, sıkıştırma olmadığı varsayılıyor"
 
-#: src/main/connections.cpp:6612
+#: src/main/connections.cpp:6610
 #, fuzzy, c-format
 msgid "internal error %d in '%s' function at %d"
 msgstr "do_random1içinde iç hata"
 
-#: src/main/connections.cpp:6649 src/main/connections.cpp:6653
-#: src/main/connections.cpp:6660
+#: src/main/connections.cpp:6647 src/main/connections.cpp:6651
+#: src/main/connections.cpp:6658
 #, fuzzy, c-format
 msgid "allocation of %s connection failed"
 msgstr "ham bağlantı yer ayırması başarısız"
 
-#: src/main/ConsCell.cpp:115 src/main/ConsCell.cpp:157
-#: src/main/ConsCell.cpp:199 src/main/memory.cpp:2255 src/main/memory.cpp:2296
+#: src/main/ConsCell.cpp:136 src/main/ConsCell.cpp:178
+#: src/main/ConsCell.cpp:220 src/main/memory.cpp:2255 src/main/memory.cpp:2296
 #: src/main/memory.cpp:2305 src/main/memory.cpp:2317 src/main/memory.cpp:2333
 #: src/main/memory.cpp:2347 src/main/memory.cpp:2362 src/main/memory.cpp:2379
 #: src/main/S4Object.cpp:73
@@ -3456,7 +3452,7 @@ msgstr "ham bağlantı yer ayırması başarısız"
 msgid "incorrect value"
 msgstr "hatalı argüman"
 
-#: src/main/ConsCell.cpp:364
+#: src/main/ConsCell.cpp:385
 msgid "Inappropriate SEXPTYPE for PairList."
 msgstr ""
 
@@ -4075,7 +4071,7 @@ msgstr ""
 msgid "invalid body argument for 'function'"
 msgstr "\"function\" için geçersiz biçimsel argümanlar"
 
-#: src/main/duplicate.cpp:424
+#: src/main/duplicate.cpp:483
 msgid "vector types do not match in 'copyVector()'"
 msgstr ""
 
@@ -4395,7 +4391,7 @@ msgstr "bu veritabanından değişken silinemez"
 msgid "argument to '%s' is not an environment"
 msgstr "argüman bir ortam değil"
 
-#: src/main/envir.cpp:1985 src/main/envir.cpp:3458
+#: src/main/envir.cpp:1985 src/main/envir.cpp:3459
 #, fuzzy
 msgid "not a symbol"
 msgstr "geçersiz sembol"
@@ -4436,161 +4432,161 @@ msgstr "'list' argümanı bir liste olmalı"
 msgid "all elements of a list must be named"
 msgstr "bir listenin bütün elemanları isimlendirilmiş olmalıdır"
 
-#: src/main/envir.cpp:2460
+#: src/main/envir.cpp:2461
 #, fuzzy
 msgid "'attach()' function only works for lists, data frames and environments"
 msgstr "'attach' sadece listeler, veri çerçeveleri ve ortamlar için çalışır"
 
-#: src/main/envir.cpp:2541
+#: src/main/envir.cpp:2542
 msgid "detaching \"package:base\" is not allowed"
 msgstr "\"package:base\" i çıkarmaya izin yok"
 
-#: src/main/envir.cpp:2686
+#: src/main/envir.cpp:2687
 #, fuzzy
 msgid "bad hash table contents"
 msgstr "hatalı değişken isimleri"
 
-#: src/main/envir.cpp:2980
+#: src/main/envir.cpp:2981
 msgid "arguments must be symbolic"
 msgstr "argüman sembolik olmalıdır"
 
-#: src/main/envir.cpp:3129
+#: src/main/envir.cpp:3130
 msgid "no enclosing environment"
 msgstr "kapsayıcı bir ortam yok"
 
-#: src/main/envir.cpp:3189
+#: src/main/envir.cpp:3190
 #, fuzzy, c-format
 msgid "no item called '%s' on the search list"
 msgstr "arama listesinde \"%s\" adında öğe yok"
 
-#: src/main/envir.cpp:3217
+#: src/main/envir.cpp:3218
 msgid "using 'as.environment(NULL)' is defunct"
 msgstr "'as.environment(NULL)' kullanımı artık geçersiz"
 
-#: src/main/envir.cpp:3223
+#: src/main/envir.cpp:3224
 msgid "S4 object does not extend class \"environment\""
 msgstr "S4 nesnesi \"environment\" sınıfını genişletmiyor"
 
-#: src/main/envir.cpp:3238
+#: src/main/envir.cpp:3239
 #, fuzzy
 msgid "invalid object for 'as.environment()' function"
 msgstr "'as.environment' için geçersiz nesne"
 
-#: src/main/envir.cpp:3314 src/main/envir.cpp:3335 src/main/envir.cpp:3356
-#: src/main/envir.cpp:3392 src/main/envir.cpp:3412 src/main/envir.cpp:3552
+#: src/main/envir.cpp:3315 src/main/envir.cpp:3336 src/main/envir.cpp:3357
+#: src/main/envir.cpp:3393 src/main/envir.cpp:3413 src/main/envir.cpp:3553
 #, fuzzy, c-format
 msgid "'%s' argument is not a symbol"
 msgstr "bir sembol değil"
 
-#: src/main/envir.cpp:3327 src/main/envir.cpp:3348 src/main/envir.cpp:3404
-#: src/main/envir.cpp:3424
+#: src/main/envir.cpp:3328 src/main/envir.cpp:3349 src/main/envir.cpp:3405
+#: src/main/envir.cpp:3425
 #, fuzzy, c-format
 msgid "no binding for '%s'"
 msgstr "\"%s\" için bağlayıcı yok"
 
-#: src/main/envir.cpp:3365 src/main/envir.cpp:3381
+#: src/main/envir.cpp:3366 src/main/envir.cpp:3382
 msgid "symbol already has a regular binding"
 msgstr "sembol halihazırda düzgün bağlayıcıya sahip"
 
-#: src/main/envir.cpp:3367 src/main/envir.cpp:3383
+#: src/main/envir.cpp:3368 src/main/envir.cpp:3384
 msgid "cannot change active binding if binding is locked"
 msgstr "bağlayıcı kilitli ise aktif bağlayıcı değiştirilemez"
 
-#: src/main/envir.cpp:3463
+#: src/main/envir.cpp:3464
 #, fuzzy
 msgid "not an environment"
 msgstr "bir ortam değil"
 
-#: src/main/envir.cpp:3467 src/main/envir.cpp:3476
+#: src/main/envir.cpp:3468 src/main/envir.cpp:3477
 #, fuzzy, c-format
 msgid "no binding for \"%s\""
 msgstr "\"%s\" için bağlayıcı yok"
 
-#: src/main/envir.cpp:3469 src/main/envir.cpp:3478
+#: src/main/envir.cpp:3470 src/main/envir.cpp:3479
 #, fuzzy, c-format
 msgid "no active binding for \"%s\""
 msgstr "\"%s\" için bağlayıcı yok"
 
-#: src/main/envir.cpp:3498 src/main/envir.cpp:3763
+#: src/main/envir.cpp:3499 src/main/envir.cpp:3764
 msgid "unknown op"
 msgstr "bilinmeyen op"
 
-#: src/main/envir.cpp:3556
+#: src/main/envir.cpp:3557
 msgid "cannot unbind a locked binding"
 msgstr "kilitlenmiş bağlayıcı ayrılamaz"
 
-#: src/main/envir.cpp:3558
+#: src/main/envir.cpp:3559
 msgid "cannot unbind an active binding"
 msgstr "aktif bir bağlayıcı ayrılamaz"
 
-#: src/main/envir.cpp:3714
+#: src/main/envir.cpp:3715
 #, fuzzy
 msgid "bad namespace name"
 msgstr "hatalı "
 
-#: src/main/envir.cpp:3726
+#: src/main/envir.cpp:3727
 #, fuzzy
 msgid "namespace is already registered"
 msgstr "isim alanı halihazırda kayıtlı"
 
-#: src/main/envir.cpp:3738
+#: src/main/envir.cpp:3739
 #, fuzzy
 msgid "namespace is not registered"
 msgstr "isim alanı kayıtlı değil"
 
-#: src/main/envir.cpp:3778
+#: src/main/envir.cpp:3779
 #, fuzzy, c-format
 msgid "object '%s' not found"
 msgstr "'%s' nesnesi bulunamadı"
 
-#: src/main/envir.cpp:3798
+#: src/main/envir.cpp:3799
 #, fuzzy
 msgid "bad variable name"
 msgstr "hatalı değişken isimleri"
 
-#: src/main/envir.cpp:3840
+#: src/main/envir.cpp:3841
 #, fuzzy
 msgid "bad namespace"
 msgstr "hatalı "
 
-#: src/main/envir.cpp:3876
+#: src/main/envir.cpp:3877
 #, fuzzy, c-format
 msgid "'%s' is not an exported object from 'namespace:%s'"
 msgstr "'con' bir çıktı rawConnection değil"
 
-#: src/main/envir.cpp:3925
+#: src/main/envir.cpp:3926
 msgid "bad import environment argument"
 msgstr "hatalı içe aktarma ortam argümanı"
 
-#: src/main/envir.cpp:3930
+#: src/main/envir.cpp:3931
 msgid "bad export environment argument"
 msgstr "hatalı dışa aktarma argümanı"
 
-#: src/main/envir.cpp:3934
+#: src/main/envir.cpp:3935
 msgid "length of import and export names must match"
 msgstr "içe ve dışa aktarma isimleri uzunlukları eşit olmalıdır"
 
-#: src/main/envir.cpp:3957
+#: src/main/envir.cpp:3958
 #, c-format
 msgid "exported symbol '%s' has no value"
 msgstr "'%s' dışa aktarılmış sembolünün değeri yok"
 
-#: src/main/envir.cpp:3990
+#: src/main/envir.cpp:3991
 #, fuzzy, c-format
 msgid "'%s' argument must be a hashed environment"
 msgstr "argüman bir ortam olmalıdır"
 
-#: src/main/envir.cpp:4099
+#: src/main/envir.cpp:4100
 #, fuzzy, c-format
 msgid "'%s' argument is not a namespace"
 msgstr "argüman bir matris değil"
 
-#: src/main/envir.cpp:4115
+#: src/main/envir.cpp:4116
 #, c-format
 msgid "Function %s in namespace %s has this body.\n"
 msgstr ""
 
-#: src/main/envir.cpp:4133
+#: src/main/envir.cpp:4134
 #, c-format
 msgid "S4 Method %s defined in namespace %s with signature %s has this body.\n"
 msgstr ""
@@ -4688,112 +4684,112 @@ msgstr "Hata oluştu: "
 msgid "Error: "
 msgstr "Hata: "
 
-#: src/main/errors.cpp:918 src/main/errors.cpp:1473
+#: src/main/errors.cpp:918 src/main/errors.cpp:1483
 #, fuzzy
 msgid "Additional warning message:"
 msgid_plural "Additional warning messages:"
 msgstr[0] "Kayıp uyarı mesajları\n"
 
-#: src/main/errors.cpp:1207
+#: src/main/errors.cpp:1251
 #, c-format
 msgid "translating '%s' in domain '%s'\n"
 msgstr ""
 
-#: src/main/errors.cpp:1342 src/main/errors.cpp:1374
+#: src/main/errors.cpp:1352 src/main/errors.cpp:1384
 #, fuzzy, c-format
 msgid " [invalid string in '%s']"
 msgstr " [stop(.)'da geçersiz dize]"
 
-#: src/main/errors.cpp:1389
+#: src/main/errors.cpp:1399
 #, fuzzy, c-format
 msgid "incorrect number of arguments passed to '%s' function"
 msgstr "\"%s\" e hatalı sayıda argüman"
 
-#: src/main/errors.cpp:1395 src/main/errors.cpp:1410
+#: src/main/errors.cpp:1405 src/main/errors.cpp:1420
 #, fuzzy, c-format
 msgid "unimplemented feature in '%s' function"
 msgstr "%s de tanımlanmamış özellik"
 
-#: src/main/errors.cpp:1404
+#: src/main/errors.cpp:1414
 msgid "invalid number of arguments"
 msgstr "geçersiz sayıda argüman"
 
-#: src/main/errors.cpp:1405 src/main/logic.cpp:194
+#: src/main/errors.cpp:1415 src/main/logic.cpp:194
 msgid "invalid argument type"
 msgstr "geçersiz argüman tipi"
 
-#: src/main/errors.cpp:1407
+#: src/main/errors.cpp:1417
 msgid "time-series/vector length mismatch"
 msgstr "zaman-serisi/vektör uzunluğu uyuşmazlığı"
 
-#: src/main/errors.cpp:1408
+#: src/main/errors.cpp:1418
 msgid "incompatible arguments"
 msgstr "uyumsuz argümanlar"
 
-#: src/main/errors.cpp:1411
+#: src/main/errors.cpp:1421
 msgid "unknown error (report this!)"
 msgstr "bilinmeyen hata (rapor gönderin!)"
 
-#: src/main/errors.cpp:1420
+#: src/main/errors.cpp:1430
 msgid "inaccurate integer conversion in coercion"
 msgstr "zorlamadaki hatalı tamsayı çevrimi"
 
-#: src/main/errors.cpp:1423
+#: src/main/errors.cpp:1433
 msgid "unknown warning (report this!)"
 msgstr "bilinmeyen uyarı (rapor edin!)"
 
-#: src/main/errors.cpp:1778
+#: src/main/errors.cpp:1788
 msgid "bad handler data"
 msgstr "hatalı "
 
-#: src/main/errors.cpp:1936 src/main/errors.cpp:2161
+#: src/main/errors.cpp:1946 src/main/errors.cpp:2165
 #, fuzzy
 msgid "error message is not a character string"
 msgstr "hata mesajı bir karakter dizesi olmalıdır"
 
-#: src/main/errors.cpp:2017
+#: src/main/errors.cpp:2027
 msgid "handler or restart stack mismatch in old restart"
 msgstr ""
 "önceki yeniden başlatmada yönetici yada yeniden başlatma yığını uyuşmazlığı"
 
-#: src/main/errors.cpp:2043 src/main/errors.cpp:2059
+#: src/main/errors.cpp:2050 src/main/errors.cpp:2063
 msgid "bad error message"
 msgstr "yanlış hata mesajı"
 
-#: src/main/errors.cpp:2100
+#: src/main/errors.cpp:2104
 msgid "bad restart"
 msgstr "yanlış yeniden başlatma"
 
-#: src/main/errors.cpp:2132
+#: src/main/errors.cpp:2136
 #, fuzzy
 msgid "restart is not on stack"
 msgstr "restart yığında değil"
 
-#: src/main/errors.cpp:2148
+#: src/main/errors.cpp:2152
 msgid "not in a try context"
 msgstr "bir deneme içereiğinde değil"
 
-#: src/main/errors.cpp:2264
+#: src/main/errors.cpp:2268
 #, fuzzy, c-format
 msgid "invalid value of %s"
 msgstr "'%s' için geçersiz değer"
 
-#: src/main/errors.cpp:2429
+#: src/main/errors.cpp:2433
 #, fuzzy
 msgid "body function is required"
 msgstr "yeniden başlatılacak fonksiyon yok"
 
-#: src/main/errors.cpp:2472
+#: src/main/errors.cpp:2476
 #, fuzzy
 msgid "this is not an external pointer"
 msgstr "dış işaretci sınıfsızlandırılamaz"
 
-#: src/main/errors.cpp:2524
+#: src/main/errors.cpp:2528
 #, fuzzy
 msgid "must supply a body function"
 msgstr "fonksiyon olmayana uygulama denemesi"
 
-#: src/main/errors.cpp:2598
+#: src/main/errors.cpp:2602
 #, fuzzy
 msgid "should not be called with handlers on the stack"
 msgstr "yığında o kadar çok çerçeve yok"
@@ -7656,48 +7652,53 @@ msgstr "karışık değerlerle geçersiz karşılaştırma "
 msgid "'A' and 'B' must have the same type"
 msgstr "'data' bir vektörü tipinde olmalıdır"
 
-#: src/main/Renviron.cpp:174 src/main/Renviron.cpp:178
+#: src/main/Renviron.cpp:178 src/main/Renviron.cpp:182
 #, fuzzy
 msgid "allocation failure in reading Renviron"
 msgstr "R_tmpnam için bellek ayırma hatası"
 
-#: src/main/Renviron.cpp:207 src/main/Renviron.cpp:212
+#: src/main/Renviron.cpp:211 src/main/Renviron.cpp:216
 #, fuzzy, c-format
 msgid "problem in setting variable '%s' in Renviron"
 msgstr "zaman dilimini ayarlarken bir sorun oluştu"
 
-#: src/main/Renviron.cpp:231
+#: src/main/Renviron.cpp:234
+#, fuzzy
+msgid ""
+"\n"
+"   They were ignored\n"
+msgstr "geçersiz dize sonu "
+
+#: src/main/Renviron.cpp:236
+#, fuzzy
+msgid " (too long)"
+msgstr "zip dosya yolu çok uzun"
+
+#: src/main/Renviron.cpp:249
 #, c-format
 msgid ""
 "\n"
 "   File %s contains invalid line(s)"
 msgstr ""
 
-#: src/main/Renviron.cpp:252
-#, fuzzy
-msgid ""
-"\n"
-"   Invalid lines were ignored\n"
-msgstr "geçersiz dize sonu "
-
-#: src/main/Renviron.cpp:266 src/main/Renviron.cpp:275
+#: src/main/Renviron.cpp:303 src/main/Renviron.cpp:312
 msgid "path to system Renviron is too long: skipping"
 msgstr ""
 
-#: src/main/Renviron.cpp:282
+#: src/main/Renviron.cpp:319
 #, fuzzy
 msgid "cannot find system Renviron"
 msgstr "bir ortam sınıfsızlandırılamaz"
 
-#: src/main/Renviron.cpp:303
+#: src/main/Renviron.cpp:340
 msgid "path to arch-specific Renviron.site is too long: skipping"
 msgstr ""
 
-#: src/main/Renviron.cpp:317
+#: src/main/Renviron.cpp:354
 msgid "path to Renviron.site is too long: skipping"
 msgstr ""
 
-#: src/main/Renviron.cpp:377
+#: src/main/Renviron.cpp:414
 #, fuzzy, c-format
 msgid "file '%s' cannot be opened for reading"
 msgstr "zip dosyası '%s' açılamaz"
@@ -7792,7 +7793,7 @@ msgstr "verilen başlangıç değeri geçerli bir tamsayı değil"
 msgid "function '.TAOCP1997init' is missing"
 msgstr ""
 
-#: src/main/RObject.cpp:159
+#: src/main/RObject.cpp:166
 #, fuzzy
 msgid "cannot set attribute on a symbol"
 msgstr "bu sistem zaman dilimleri ayarlanamıyor"
@@ -8052,8 +8053,8 @@ msgid "first argument must be a file name"
 msgstr "ilk argüman bir dosya ismi olmalıdır"
 
 #: src/main/saveload.cpp:2329 src/main/saveload.cpp:2355
-#: src/main/serialize.cpp:922 src/main/serialize.cpp:958
-#: src/main/serialize.cpp:995
+#: src/main/serialize.cpp:921 src/main/serialize.cpp:957
+#: src/main/serialize.cpp:994
 msgid "XDR write failed"
 msgstr "XDR yazma başarısız"
 
@@ -8324,20 +8325,20 @@ msgstr "bilinmeyen giriş biçimi"
 msgid "input format does not match specified format"
 msgstr "giriş biçimi seçilen biçimle uyuşmuyor"
 
-#: src/main/serialize.cpp:852
+#: src/main/serialize.cpp:851
 msgid "no restore method available"
 msgstr "yeniden yükleme metodu mevcut değil"
 
-#: src/main/serialize.cpp:894
+#: src/main/serialize.cpp:893
 msgid "names in persistent strings are currently ignored"
 msgstr "kalıcı dizelerdeki isimler şuan görmezden geliniyor"
 
-#: src/main/serialize.cpp:1088
+#: src/main/serialize.cpp:1087
 #, c-format
 msgid "'%s' may not be available when loading"
 msgstr "'%s' yüklerken mevcut olmayabilir"
 
-#: src/main/serialize.cpp:1096
+#: src/main/serialize.cpp:1095
 msgid "namespaces may not be available when loading"
 msgstr "isimalanları yüklerken mevcut olmayabilir"
 
@@ -11025,6 +11026,10 @@ msgstr "X11 modülü yüklenemiyor"
 #: src/unix/X11.cpp:168
 msgid "X11 is not available"
 msgstr "X11 mevcut değil"
+
+#, fuzzy
+#~ msgid "argument \"%s\" is missing, with no default"
+#~ msgstr "varsayılanı olmayan \"%s\" argümanı yok"
 
 #, fuzzy
 #~ msgid "Cannot construct PairList of zero length."
