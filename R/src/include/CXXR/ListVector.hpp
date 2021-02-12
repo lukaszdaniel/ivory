@@ -93,6 +93,7 @@ namespace CXXR
          * RObjectVector, and perhaps ought to be changed.
          */
         explicit ListVector(ExpressionVector &ev);
+        static SEXP set_vector_elt(SEXP x, R_xlen_t i, SEXP v);
 
         // Virtual function of RObject:
         ListVector *clone(bool deep) const override;

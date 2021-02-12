@@ -413,34 +413,30 @@ namespace
 #ifdef COMPUTE_REFCNT_VALUES
     void FIX_REFCNT_EX(SEXP x, SEXP old, SEXP new_, Rboolean chkpnd)
     {
-        if (TRACKREFS(x))
+        if (!TRACKREFS(x)) return;
+        if (old == new_) return;
+
+        if (old)
         {
-            if (old != new_)
-            {
-                if (old)
-                {
-                    if ((chkpnd) && ASSIGNMENT_PENDING(x))
-                        SET_ASSIGNMENT_PENDING(x, FALSE);
-                    else
-                        DECREMENT_REFCNT(old);
-                }
-                if (new_)
-                    INCREMENT_REFCNT(new_);
-            }
+            if ((chkpnd) && ASSIGNMENT_PENDING(x))
+                SET_ASSIGNMENT_PENDING(x, FALSE);
+            else
+                DECREMENT_REFCNT(old);
         }
+        if (new_)
+            INCREMENT_REFCNT(new_);
     }
 #define FIX_REFCNT(x, old, new_) FIX_REFCNT_EX(x, old, new_, FALSE)
-#define FIX_BINDING_REFCNT(x, old, new_) \
-    FIX_REFCNT_EX(x, old, new_, TRUE)
+#define FIX_BINDING_REFCNT(x, old, new_) FIX_REFCNT_EX(x, old, new_, TRUE)
 #else
 #define FIX_REFCNT(x, old, new_) \
     do                           \
     {                            \
     } while (false)
+
     void FIX_BINDING_REFCNT(SEXP x, SEXP old, SEXP new_)
     {
-        if (ASSIGNMENT_PENDING(x) && old &&
-            old != new_)
+        if (ASSIGNMENT_PENDING(x) && old && old != new_)
             SET_ASSIGNMENT_PENDING(x, FALSE);
     }
 #endif
@@ -2105,9 +2101,7 @@ SEXP SET_VECTOR_ELT(SEXP x, R_xlen_t i, SEXP v)
     if (i < 0 || i >= XLENGTH(x))
         Rf_error(_("attempt to set index %ld/%ld in 'SET_VECTOR_ELT()' function"), (long long)i, (long long)XLENGTH(x));
     FIX_REFCNT(x, VECTOR_ELT(x, i), v);
-    // LISTVECTOR_ELT(x, i) = v;
-    ListVector *lv = SEXP_downcast<ListVector *>(x, false);
-    (*lv)[i] = v;
+    ListVector::set_vector_elt(x, i, v);
     return v;
 }
 
@@ -2121,9 +2115,7 @@ SEXP SET_XVECTOR_ELT(SEXP x, R_xlen_t i, SEXP v)
     if (i < 0 || i >= XLENGTH(x))
         Rf_error(_("attempt to set index %ld/%ld in 'SET_XVECTOR_ELT()' function"), (long long)i, (long long)XLENGTH(x));
     FIX_REFCNT(x, XVECTOR_ELT(x, i), v);
-    // EXPRVECTOR_ELT(x, i) = v;
-    ExpressionVector *ev = SEXP_downcast<ExpressionVector *>(x, false);
-    (*ev)[i] = v;
+    ExpressionVector::set_xvector_elt(x, i, v);
     return v;
 }
 

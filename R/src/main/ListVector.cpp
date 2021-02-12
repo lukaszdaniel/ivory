@@ -62,4 +62,12 @@ namespace CXXR
     {
         return new ListVector(*this, deep);
     }
+
+    SEXP ListVector::set_vector_elt(SEXP x, R_xlen_t i, SEXP v)
+    {
+        // LISTVECTOR_ELT(x, i) = v;
+        ListVector *lv = SEXP_downcast<ListVector *>(x, false);
+        (*lv)[i] = v;
+        return v;
+    }
 } // namespace CXXR

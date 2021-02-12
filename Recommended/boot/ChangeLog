@@ -1,3 +1,20 @@
+version 1.3-27 2021-02-12
+
+	Bugfix in censboot, regression test tests/parallel-censboot.R
+	Update fr translations.
+
+version 1.3-26 2021-01-21
+
+	Update URLs
+
+version 1.3-25 2020-04-26
+
+	Add Italian translations.
+
+version 1.3-24 2019-12-20
+
+	Use IGNORE_RDIFF in man/abc.ci.Rd
+
 version 1.3-23 2019-07-01
 
 	man/catsM.Rd: correct \usage, clarify 'Sex' is all male.

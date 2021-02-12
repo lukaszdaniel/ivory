@@ -1398,7 +1398,8 @@ censboot <-
 
     res <- if (ncpus > 1L && (have_mc || have_snow)) {
         if (have_mc) {
-            parallel::mclapply(seq_len(R), fn, ..., mc.cores = ncpus)
+            ## ... omitted as from 1.3-27
+            parallel::mclapply(seq_len(R), fn, mc.cores = ncpus)
         } else if (have_snow) {
             list(...) # evaluate any promises
             if (is.null(cl)) {

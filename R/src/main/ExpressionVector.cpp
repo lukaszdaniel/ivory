@@ -59,6 +59,14 @@ namespace CXXR
     {
         return new ExpressionVector(*this, deep);
     }
+
+    SEXP ExpressionVector::set_xvector_elt(SEXP x, R_xlen_t i, SEXP v)
+    {
+        // EXPRVECTOR_ELT(x, i) = v;
+        ExpressionVector *ev = SEXP_downcast<ExpressionVector *>(x, false);
+        (*ev)[i] = v;
+        return v;
+    }
 } // namespace CXXR
 
 // ***** C interface *****

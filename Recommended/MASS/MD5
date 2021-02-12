@@ -76,7 +76,7 @@ f2aec533ce897bd9f2e53ced57697ed0 *man/lda.Rd
 61fbfe12f436f23b478400e0c085731d *man/beav1.Rd
 be8257b0890c6c52c5faf72cdf1781b5 *man/kde2d.Rd
 4c46e5fd6e5cbcbe194c4a6f9b449bdf *man/glmmPQL.Rd
-bfb83f6da9afe19178dd0ac7d2cea9bb *man/Cars93.Rd
+917c6645bb1cee53e03f4155fc6f8599 *man/Cars93.Rd
 b70f43a1c1766f0e3dc2ed66bebabd1c *man/summary.rlm.Rd
 1ce122787e058327f52bd789e3a12dc9 *man/chem.Rd
 e68bc524ad07b0ab7cb5cdf7a53f4759 *man/survey.Rd
@@ -155,7 +155,7 @@ c9354f03af7c5806071ad7554b0e5306 *man/fitdistr.Rd
 e65737579ca1cd2810198d72f0260e21 *man/hills.Rd
 cb8c1be550e2003a83fd7cc7b7f7da02 *man/logtrans.Rd
 2a0b5dd4c71cf01dfc1894be0e8f759b *man/mammals.Rd
-9351994c465acbbd08a2c6c6c55aefec *DESCRIPTION
+7404961773e020ed484da319c976df36 *DESCRIPTION
 f5dd576c663a4b04c2bb4833eea1ab63 *po/R-fr.po
 821fc3e8e6376d620bc522146e6e4a64 *po/R-ko.po
 b678832e02372694edb83acf679710c9 *po/R-de.po
@@ -166,7 +166,7 @@ b679a4b73f11e024451eaaf26b0a6d9e *po/R-MASS.pot
 94b6181a8553f060ca45778ded4e090b *po/pl.po
 e0d1ab11f24f7e3ff569541429d65825 *LICENCE.note
 35aff05a505ecf7e81e0473767794ca9 *INDEX
-a4780efdb7fb26beb4ce17220b6cfbdf *inst/CITATION
+b712abcbf880df8140a6ba49b039db53 *inst/CITATION
 1ca5088281b3bed247f6902039523b8b *inst/scripts/ch07.R
 8fa4f5b6039ff3883a17226085ed77b8 *inst/scripts/ch09.R
 1285c678c90d55d984808aaa2de19796 *inst/scripts/ch05.R
@@ -185,6 +185,7 @@ ea5ee8654eb44d16e07c4d8aa214ce4d *inst/scripts/ch01.R
 793b62dd2329642c3e5e9af5962a0f59 *inst/scripts/ch12.R
 eaccdbc382485cbba1a95f5cf61aa96d *inst/po/fr/LC_MESSAGES/R-MASS.mo
 bcb1e6f2b16b8803b05b5785dfbafeda *inst/po/en@quot/LC_MESSAGES/R-MASS.mo
+9d0982c152c2e43be1362503d0ea1e74 *inst/po/it/LC_MESSAGES/R-MASS.mo
 40cf1769f25af93fcca0a72ae25b4e4e *inst/po/de/LC_MESSAGES/R-MASS.mo
 7dc1a726824f014bae222e1083f1b0e0 *inst/po/pl/LC_MESSAGES/R-MASS.mo
 92627b58b3a02db3fa16448be38c3395 *inst/po/ko/LC_MESSAGES/R-MASS.mo
@@ -194,12 +195,12 @@ f2eeba77216158f02085ec4f29e586c0 *tests/rlm.R
 a23ddf89e02a02ed030e4ed5538d3430 *tests/regression.R
 7fea2161b12d01c8940107342815dd0e *tests/hubers.R
 80c50d5c299f0d0a4dbbb457a235faba *tests/lme.R
-612e8ef3ae6c715d27bacb23087da0ea *tests/fitdistr.Rout.save
+d89057830c80e6c2675f2448da933b26 *tests/fitdistr.Rout.save
 d87553db40364fdc9c337fa31c009b17 *tests/confint.R
 edee76adc2d27e4ba90f1ff79360148b *tests/polr.R
-16d848bd9f322e918b8f06559b9ce7db *tests/regression.Rout.save
+833174166f50f9ae9155e57275d98d21 *tests/regression.Rout.save
 f5fd08eb22747dbe31443bc3560cfa2d *tests/scripts.R
-587f52fd3485dac1024a6d7b00384e4d *tests/Examples/MASS-Ex.Rout.save
+14a2c70f2fdc43fc40e49a54c780a301 *tests/Examples/MASS-Ex.Rout.save
 f4e6b3ffb6521ea7625515e2f0ae7f98 *tests/profile.R
 7b1360150b8598b576e82534b12345a2 *tests/BankWages.rda
 a0854fee9b36691ca1d0880da31d6f79 *tests/fitdistr.R
@@ -339,3 +340,4 @@ a656d5f85e7fa15e72f86d03c14ea7cf *data/chem.rda
 1b785d0f8c6625af60124b845299f872 *src/MASS.c
 8fbf3a0f6c57bb6815ec2d4fbe3faed9 *src/localization.h
 a121d8de53df2d6d556fbbe02b2aa572 *src/lqs.c
+3021bb623076f4c8507153e6d6cd3151 *build/partial.rdb

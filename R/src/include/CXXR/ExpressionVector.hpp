@@ -97,6 +97,7 @@ namespace CXXR
          * most trivial modification.
          */
         explicit ExpressionVector(ListVector &lv);
+        static SEXP set_xvector_elt(SEXP x, R_xlen_t i, SEXP v);
 
         // Virtual function of RObject:
         ExpressionVector *clone(bool deep) const override;
