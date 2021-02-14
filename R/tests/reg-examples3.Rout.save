@@ -1,9 +1,9 @@
 
-Ivory Under development (unstable) (2021-02-06 r1424) -- "Internationalized Version of R"
+Ivory Under development (unstable) (2021-02-12 r1428) -- "Internationalized Version of R"
 Copyright (C) 2013-2021 Lukasz Daniel (lukasz.daniel@gmail.com)
 See README-IVORY file for details.
 
-R Under development (unstable) (2021-02-06 r79971) -- "Unsuffered Consequences"
+R Under development (unstable) (2021-02-12 r80000) -- "Unsuffered Consequences"
 Copyright (C) 2021 The R Foundation for Statistical Computing
 Platform: x86_64-pc-linux-gnu (64-bit)
 
@@ -587,9 +587,11 @@ pckgDs>
 > ## there are few dependencies in a vanilla R installation:
 > ## lattice may not be installed
 > ## Avoid possibly large list from R_HOME/site-library, which --vanilla includes.
-> stopifnot(identical(
+> notrun <- function() {
++ stopifnot(identical(
 +     sort(dependsOnPkgs("lattice", lib.loc = .Library)),
 +     c("Matrix", "mgcv", "nlme", "survival")))
++ }
 > 
 > ## Vignettes may not yet be installed
 > gridEx <- system.file("doc", "grid.Rnw", package = "grid")

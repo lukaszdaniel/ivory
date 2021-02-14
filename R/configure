@@ -595,7 +595,6 @@ PACKAGE_STRING='R 4.1.0'
 PACKAGE_BUGREPORT='https://bugs.r-project.org'
 PACKAGE_URL='https://www.r-project.org'
 
-ac_unique_file="src/include/Defn.h"
 # Factoring default headers for most tests.
 ac_includes_default="\
 #include <stdio.h>
