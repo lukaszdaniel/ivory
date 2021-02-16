@@ -23,6 +23,8 @@
 #endif
 
 #include <CXXR/String.hpp>
+#include <CXXR/StringVector.hpp>
+#include <CXXR/PairList.hpp>
 #include <Defn.h>
 #include "localization.h"
 #include <cfloat>  /* for DBL_MAX */

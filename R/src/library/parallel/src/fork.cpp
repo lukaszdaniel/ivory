@@ -29,6 +29,8 @@
 #include <config.h> /* for affinity function checks and sigaction */
 #endif
 
+#include <CXXR/VectorBase.hpp>
+#include <CXXR/IntVector.hpp>
 #include <Defn.h> /* for R_isForkedChild */
 
 #include "parallel.h"

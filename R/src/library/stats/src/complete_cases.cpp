@@ -22,6 +22,10 @@
 #include <config.h>
 #endif
 
+#include <CXXR/VectorBase.hpp>
+#include <CXXR/PairList.hpp>
+#include <CXXR/ListVector.hpp>
+#include <CXXR/StringVector.hpp>
 #include <Defn.h>
 #include "localization.h"
 #define R_MSG_type	_("invalid 'type' (%s) of argument")

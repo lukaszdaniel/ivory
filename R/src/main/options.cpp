@@ -26,6 +26,10 @@
 
 #include <CXXR/String.hpp>
 #include <CXXR/Expression.hpp>
+#include <CXXR/RealVector.hpp>
+#include <CXXR/IntVector.hpp>
+#include <CXXR/FunctionBase.hpp>
+#include <CXXR/StringVector.hpp>
 #include <Localization.h>
 #include <Defn.h>
 #include <Internal.h>

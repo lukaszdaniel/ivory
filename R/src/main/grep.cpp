@@ -59,6 +59,9 @@ constexpr int NWARN = 5;
 #include <CXXR/GCRoot.hpp>
 #include <CXXR/BuiltInFunction.hpp>
 #include <CXXR/String.hpp>
+#include <CXXR/PairList.hpp>
+#include <CXXR/StringVector.hpp>
+#include <CXXR/IntVector.hpp>
 #include <Localization.h>
 #include <Defn.h>
 #include <Internal.h>

@@ -35,6 +35,7 @@
 #define R_NO_REMAP
 
 #include <CXXR/String.hpp>
+#include <CXXR/StringVector.hpp>
 #include <IOStuff.h>
 
 using namespace R;

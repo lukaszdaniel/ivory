@@ -77,6 +77,10 @@
 #define R_USE_SIGNALS 1
 
 #include <CXXR/BuiltInFunction.hpp>
+#include <CXXR/IntVector.hpp>
+#include <CXXR/RealVector.hpp>
+#include <CXXR/StringVector.hpp>
+#include <CXXR/PairList.hpp>
 #include <Localization.h>
 #include <RContext.h>
 #include <Defn.h>

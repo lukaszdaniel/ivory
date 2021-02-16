@@ -69,6 +69,23 @@ extern "C"
      * @return Pointer to constant element 0 of \a x.
      */
     const int *INTEGER_RO(SEXP x);
+    int *INTEGER0(SEXP x);
+    int SCALAR_IVAL(SEXP x);
+    void SET_SCALAR_IVAL(SEXP x, int v);
+    const int *INTEGER_OR_NULL(SEXP x);
+    int INTEGER_ELT(SEXP x, R_xlen_t i);
+    void SET_INTEGER_ELT(SEXP x, R_xlen_t i, int v);
+    Rboolean Rf_isInteger(SEXP s);
+    Rboolean Rf_isFactor(SEXP s);
+    int Rf_nlevels(SEXP f);
+    SEXP Rf_ScalarInteger(int x);
 } // extern "C"
+
+#if defined(R_NO_REMAP) && defined(COMPILING_IVORY) && defined(__cplusplus)
+const auto isFactor = Rf_isFactor;
+const auto isInteger = Rf_isInteger;
+const auto nlevels = Rf_nlevels;
+const auto ScalarInteger = Rf_ScalarInteger;
+#endif
 
 #endif // INTVECTOR_HPP

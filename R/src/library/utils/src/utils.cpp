@@ -22,6 +22,8 @@
 #endif
 
 #include <cstring>
+#include <CXXR/RObject.hpp>
+#include <CXXR/StringVector.hpp>
 #include <R.h>
 #include <Rinternals.h>
 

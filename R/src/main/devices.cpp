@@ -33,6 +33,9 @@
 
 #define R_NO_REMAP
 
+#include <CXXR/Expression.hpp>
+#include <CXXR/VectorBase.hpp>
+#include <CXXR/StringVector.hpp>
 #include <Defn.h>
 #include <Localization.h>
 #include <Internal.h>

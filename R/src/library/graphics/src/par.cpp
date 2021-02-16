@@ -42,6 +42,12 @@
 #include <config.h>
 #endif
 
+#include <CXXR/VectorBase.hpp>
+#include <CXXR/FixedVector.hpp>
+#include <CXXR/PairList.hpp>
+#include <CXXR/ListVector.hpp>
+#include <CXXR/StringVector.hpp>
+#include <CXXR/IntVector.hpp>
 #include <Defn.h>
 #include "localization.h"
 #include <Rmath.h>

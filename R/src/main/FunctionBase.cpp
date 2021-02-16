@@ -77,3 +77,15 @@ namespace CXXR
         x->m_trace = v;
     }
 } // namespace CXXR
+
+// ***** C interface *****
+
+Rboolean Rf_isPrimitive(SEXP s)
+{
+    return Rboolean(TYPEOF(s) == BUILTINSXP || TYPEOF(s) == SPECIALSXP);
+}
+
+Rboolean Rf_isFunction(SEXP s)
+{
+    return Rboolean(TYPEOF(s) == CLOSXP || Rf_isPrimitive(s));
+}

@@ -26,6 +26,10 @@
 #define R_NO_REMAP
 
 #include <CXXR/String.hpp>
+#include <CXXR/StringVector.hpp>
+#include <CXXR/IntVector.hpp>
+#include <CXXR/RealVector.hpp>
+#include <CXXR/Expression.hpp>
 #include <Localization.h>
 #include <Defn.h> /* => Utils.h with the protos from here; Rinternals.h */
 #include <Internal.h>

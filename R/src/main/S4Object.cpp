@@ -28,6 +28,7 @@
  */
 
 #include <CXXR/S4Object.hpp>
+#include <Localization.h>
 
 namespace CXXR
 {

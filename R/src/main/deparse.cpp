@@ -108,6 +108,9 @@
 
 #include <CXXR/String.hpp>
 #include <CXXR/BuiltInFunction.hpp>
+#include <CXXR/Expression.hpp>
+#include <CXXR/Symbol.hpp>
+#include <CXXR/StringVector.hpp>
 #include <Localization.h>
 #include <RContext.h>
 #include <Defn.h>

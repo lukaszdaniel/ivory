@@ -10,8 +10,10 @@
 #endif
 
 #include <cmath>
-
 #include <cstdio>
+#include <CXXR/RObject.hpp>
+#include <CXXR/VectorBase.hpp>
+#include <CXXR/IntVector.hpp>
 #include <R_ext/Memory.h>
 #include <R_ext/Applic.h>
 #include "localization.h"

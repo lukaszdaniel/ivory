@@ -81,6 +81,8 @@
 
 #define R_NO_REMAP
 
+#include <CXXR/VectorBase.hpp>
+#include <CXXR/RealVector.hpp>
 #include <Defn.h>
 #include <Internal.h>
 

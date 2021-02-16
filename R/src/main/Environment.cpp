@@ -30,6 +30,7 @@
  */
 
 #include <CXXR/Environment.hpp>
+#include <CXXR/IntVector.hpp>
 #include <Rinternals.h>
 
 namespace R

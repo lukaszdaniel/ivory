@@ -77,3 +77,57 @@ SEXP Rf_currentExpression();
 SEXP Rf_lcons(SEXP cr, SEXP tl);
 
 void Rf_setCurrentExpression(SEXP e);
+
+/* Language based list constructs.  These are identical to the list */
+/* constructs, but the results can be evaluated. */
+
+/**
+ * @brief Return a (language) dotted pair with the given car and cdr
+ */
+
+SEXP Rf_lcons(SEXP cr, SEXP tl);
+
+SEXP Rf_lang1(SEXP s)
+{
+    return LCONS(s, R_NilValue);
+}
+
+SEXP Rf_lang2(SEXP s, SEXP t)
+{
+    GCRoot<> ss(s);
+    s = LCONS(s, Rf_list1(t));
+    return s;
+}
+
+SEXP Rf_lang3(SEXP s, SEXP t, SEXP u)
+{
+    GCRoot<> ss(s);
+    s = LCONS(s, Rf_list2(t, u));
+    return s;
+}
+
+SEXP Rf_lang4(SEXP s, SEXP t, SEXP u, SEXP v)
+{
+    GCRoot<> ss(s);
+    s = LCONS(s, Rf_list3(t, u, v));
+    return s;
+}
+
+SEXP Rf_lang5(SEXP s, SEXP t, SEXP u, SEXP v, SEXP w)
+{
+    GCRoot<> ss(s);
+    s = LCONS(s, Rf_list4(t, u, v, w));
+    return s;
+}
+
+SEXP Rf_lang6(SEXP s, SEXP t, SEXP u, SEXP v, SEXP w, SEXP x)
+{
+    GCRoot<> ss(s);
+    s = LCONS(s, Rf_list5(t, u, v, w, x));
+    return s;
+}
+
+Rboolean Rf_isLanguage(SEXP s)
+{
+    return Rboolean(s == R_NilValue || TYPEOF(s) == LANGSXP);
+}

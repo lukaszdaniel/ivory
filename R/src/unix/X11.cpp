@@ -21,6 +21,7 @@
 #include <config.h>
 #endif
 
+#include <CXXR/VectorBase.hpp>
 #include <Defn.h>
 #include <Localization.h>
 #include <Internal.h>

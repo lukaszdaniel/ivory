@@ -28,6 +28,7 @@
 #include <CXXR/RObject.hpp>
 #include <CXXR/Symbol.hpp>
 #include <CXXR/PairList.hpp>
+#include <CXXR/StringVector.hpp>
 #include <Rinternals.h>
 #include <R_ext/Boolean.h>
 
@@ -474,3 +475,146 @@ namespace CXXR
         x->m_active_binding = true;
     }
 } // namespace CXXR
+
+// ***** C interface *****
+
+R_len_t Rf_length(SEXP s)
+{
+    switch (TYPEOF(s))
+    {
+    case NILSXP:
+        return 0;
+    case LGLSXP:
+    case INTSXP:
+    case REALSXP:
+    case CPLXSXP:
+    case STRSXP:
+    case CHARSXP:
+    case VECSXP:
+    case EXPRSXP:
+    case RAWSXP:
+        return LENGTH(s);
+    case LISTSXP:
+    case LANGSXP:
+    case DOTSXP:
+    {
+        R_len_t i = 0;
+        while (s && s != R_NilValue)
+        {
+            ++i;
+            s = CDR(s);
+        }
+        return i;
+    }
+    case ENVSXP:
+        return Rf_envlength(s);
+    default:
+        return 1;
+    }
+}
+
+R_xlen_t Rf_xlength(SEXP s)
+{
+    switch (TYPEOF(s))
+    {
+    case NILSXP:
+        return 0;
+    case LGLSXP:
+    case INTSXP:
+    case REALSXP:
+    case CPLXSXP:
+    case STRSXP:
+    case CHARSXP:
+    case VECSXP:
+    case EXPRSXP:
+    case RAWSXP:
+        return XLENGTH(s);
+    case LISTSXP:
+    case LANGSXP:
+    case DOTSXP:
+    {
+        // it is implausible this would be >= 2^31 elements, but allow it
+        R_xlen_t i = 0;
+        while (s && s != R_NilValue)
+        {
+            ++i;
+            s = CDR(s);
+        }
+        return i;
+    }
+    case ENVSXP:
+        return Rf_envxlength(s);
+    default:
+        return 1;
+    }
+}
+
+SEXP R_FixupRHS(SEXP x, SEXP y)
+{
+    if (y != R_NilValue && MAYBE_REFERENCED(y))
+    {
+        if (R_cycle_detected(x, y))
+        {
+#ifdef WARNING_ON_CYCLE_DETECT
+            warning(_("cycle detected"));
+            R_cycle_detected(x, y);
+#endif
+            y = Rf_duplicate(y);
+        }
+        else
+            ENSURE_NAMEDMAX(y);
+    }
+    return y;
+}
+
+Rboolean Rf_isFrame(SEXP s)
+{
+    if (OBJECT(s))
+    {
+        SEXP klass = Rf_getAttrib(s, R_ClassSymbol);
+        for (int i = 0; i < Rf_length(klass); ++i)
+            if (strcmp(R_CHAR(STRING_ELT(klass, i)), "data.frame") == 0)
+                return TRUE;
+    }
+    return FALSE;
+}
+
+SEXP Rf_ScalarLogical(int x)
+{
+    extern SEXP R_LogicalNAValue, R_TrueValue, R_FalseValue;
+    if (x == NA_LOGICAL)
+        return R_LogicalNAValue;
+    else if (x != 0)
+        return R_TrueValue;
+    else
+        return R_FalseValue;
+}
+
+Rboolean Rf_conformable(SEXP x, SEXP y)
+{
+    int n;
+    PROTECT(x = Rf_getAttrib(x, R_DimSymbol));
+    y = Rf_getAttrib(y, R_DimSymbol);
+    UNPROTECT(1);
+    if ((n = Rf_length(x)) != Rf_length(y))
+        return FALSE;
+    for (int i = 0; i < n; i++)
+        if (INTEGER(x)[i] != INTEGER(y)[i])
+            return FALSE;
+    return TRUE;
+}
+
+Rboolean Rf_inherits(SEXP s, const char *name)
+{
+    if (OBJECT(s))
+    {
+        SEXP klass = Rf_getAttrib(s, R_ClassSymbol);
+        int nclass = Rf_length(klass);
+        for (int i = 0; i < nclass; i++)
+        {
+            if (strcmp(R_CHAR(STRING_ELT(klass, i)), name) == 0)
+                return TRUE;
+        }
+    }
+    return FALSE;
+}

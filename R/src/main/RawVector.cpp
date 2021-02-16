@@ -49,3 +49,100 @@ namespace CXXR
         return "raw";
     }
 } // namespace CXXR
+
+// ***** C interface *****
+
+#ifdef STRICT_TYPECHECK
+#define CHECK_VECTOR_RAW(x)                         \
+    do                                              \
+    {                                               \
+        if (TYPEOF(x) != RAWSXP)                    \
+            Rf_error(_("bad %s vector"), "RAWSXP"); \
+    } while (0)
+
+#define CHECK_STDVEC_RAW(x)                                  \
+    do                                                       \
+    {                                                        \
+        CHECK_VECTOR_RAW(x);                                 \
+        if (ALTREP(x))                                       \
+            Rf_error(_("bad standard %s vector"), "RAWSXP"); \
+    } while (0)
+
+#define CHECK_SCALAR_RAW(x)                         \
+    do                                              \
+    {                                               \
+        CHECK_STDVEC_RAW(x);                        \
+        if (XLENGTH(x) != 1)                        \
+            Rf_error(_("bad %s scalar"), "RAWSXP"); \
+    } while (0)
+
+#define CHECK_VECTOR_RAW_ELT(x, i)          \
+    do                                      \
+    {                                       \
+        SEXP ce__x__ = (x);                 \
+        R_xlen_t ce__i__ = (i);             \
+        CHECK_VECTOR_RAW(ce__x__);          \
+        CHECK_BOUNDS_ELT(ce__x__, ce__i__); \
+    } while (0)
+#else
+#define CHECK_STDVEC_RAW(x) \
+    do                      \
+    {                       \
+    } while (0)
+#define CHECK_SCALAR_RAW(x) \
+    do                      \
+    {                       \
+    } while (0)
+#define CHECK_VECTOR_RAW(x) \
+    do                      \
+    {                       \
+    } while (0)
+#define CHECK_VECTOR_RAW_ELT(x, i) \
+    do                             \
+    {                              \
+    } while (0)
+#endif
+
+Rbyte *RAW0(SEXP x)
+{
+    CHECK_STDVEC_RAW(x);
+    return (Rbyte *)STDVEC_DATAPTR(x);
+}
+Rbyte SCALAR_BVAL(SEXP x)
+{
+    CHECK_SCALAR_RAW(x);
+    return RAW0(x)[0];
+}
+void SET_SCALAR_BVAL(SEXP x, Rbyte v)
+{
+    CHECK_SCALAR_RAW(x);
+    RAW0(x)[0] = v;
+}
+
+const Rbyte *RAW_OR_NULL(SEXP x)
+{
+    CHECK_VECTOR_RAW(x);
+    return (Rbyte *)(ALTREP(x) ? ALTVEC_DATAPTR_OR_NULL(x) : STDVEC_DATAPTR(x));
+}
+
+Rbyte RAW_ELT(SEXP x, R_xlen_t i)
+{
+    CHECK_VECTOR_RAW_ELT(x, i);
+    return ALTREP(x) ? ALTRAW_ELT(x, i) : RAW0(x)[i];
+}
+
+void SET_RAW_ELT(SEXP x, R_xlen_t i, Rbyte v)
+{
+    CHECK_VECTOR_RAW_ELT(x, i);
+    if (ALTREP(x))
+        ALTRAW_SET_ELT(x, i, v);
+    else
+        RAW0(x)[i] = v;
+}
+
+SEXP Rf_ScalarRaw(Rbyte x)
+{
+    SEXP ans = Rf_allocVector(RAWSXP, 1);
+    SET_SCALAR_BVAL(ans, x);
+    return ans;
+}

@@ -28,6 +28,7 @@
 #endif
 
 #include <cinttypes> // for PRIu64
+#include <CXXR/VectorBase.hpp>
 #include <Defn.h>
 #include "localization.h"
 #include "statsR.h"

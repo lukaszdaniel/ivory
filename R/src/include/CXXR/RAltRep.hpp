@@ -81,4 +81,13 @@ namespace CXXR
     };
 } // namespace CXXR
 
+extern "C"
+{
+    SEXP ALTREP_CLASS(SEXP x);
+    SEXP R_altrep_data1(SEXP x);
+    SEXP R_altrep_data2(SEXP x);
+    void R_set_altrep_data1(SEXP x, SEXP v);
+    void R_set_altrep_data2(SEXP x, SEXP v);
+}
+
 #endif /* RALTREP_HPP */

@@ -24,6 +24,11 @@
 #ifdef _WIN32
 # define R_USE_SIGNALS 1
 #endif
+
+#include <CXXR/VectorBase.hpp>
+#include <CXXR/StringVector.hpp>
+#include <CXXR/IntVector.hpp>
+#include <CXXR/PairList.hpp>
 #include <RContext.h>
 #include <Defn.h>
 #include <Localization.h>

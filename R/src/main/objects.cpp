@@ -32,6 +32,9 @@
 #include <CXXR/BuiltInFunction.hpp>
 #include <CXXR/GCRoot.hpp>
 #include <CXXR/PairList.hpp>
+#include <CXXR/Expression.hpp>
+#include <CXXR/VectorBase.hpp>
+#include <CXXR/StringVector.hpp>
 #include <RContext.h>
 #include <Defn.h>
 #include <Localization.h>

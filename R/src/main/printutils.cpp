@@ -61,6 +61,7 @@
 #define R_NO_REMAP
 
 #include <CXXR/String.hpp>
+#include <CXXR/StringVector.hpp>
 #include <Localization.h>
 #include <Defn.h>
 #include <Rmath.h>

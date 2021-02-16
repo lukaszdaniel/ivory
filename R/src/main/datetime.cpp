@@ -110,6 +110,9 @@ extern char *tzname[2];
 
 #endif
 
+#include <CXXR/VectorBase.hpp>
+#include <CXXR/StringVector.hpp>
+#include <CXXR/PairList.hpp>
 #include <cstdlib> /* for setenv or putenv */
 #include <Localization.h>
 #include <Defn.h>

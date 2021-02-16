@@ -30,6 +30,9 @@
 
 #define R_NO_REMAP
 
+#include <CXXR/VectorBase.hpp>
+#include <CXXR/FixedVector.hpp>
+#include <CXXR/PairList.hpp>
 #include <Defn.h> /* => Utils.h with the protos from here */
 #include <Localization.h>
 #include <Internal.h>

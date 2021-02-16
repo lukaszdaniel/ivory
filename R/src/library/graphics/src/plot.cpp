@@ -24,6 +24,13 @@
 #endif
 
 #include <CXXR/String.hpp>
+#include <CXXR/FixedVector.hpp>
+#include <CXXR/PairList.hpp>
+#include <CXXR/Expression.hpp>
+#include <CXXR/IntVector.hpp>
+#include <CXXR/ListVector.hpp>
+#include <CXXR/StringVector.hpp>
+#include <CXXR/RealVector.hpp>
 #include <Defn.h>
 #include "localization.h"
 #include <cfloat>  /* for DBL_MAX */

@@ -28,6 +28,9 @@
 
 #define R_NO_REMAP
 
+#include <CXXR/Expression.hpp>
+#include <CXXR/IntVector.hpp>
+#include <CXXR/RealVector.hpp>
 #include <Localization.h>
 #include <Defn.h>
 #include <Rmath.h>

@@ -25,6 +25,7 @@
 
 #define R_NO_REMAP
 
+#include <CXXR/RObject.hpp>
 #include <Defn.h>
 #include <Localization.h>
 #include <R_ext/GraphicsEngine.h>

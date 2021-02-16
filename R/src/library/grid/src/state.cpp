@@ -174,7 +174,7 @@ static int findStateSlot()
     int i;
     int result = -1;
     SEXP globalstate = findVar(install(".GRID.STATE"), R_gridEvalEnv);
-    for (i = 0; i < length(globalstate); i++)
+    for (i = 0; i < Rf_length(globalstate); i++)
 	if (VECTOR_ELT(globalstate, i) == R_NilValue) {
 	    result = i;
 	    break;

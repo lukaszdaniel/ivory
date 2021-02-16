@@ -35,6 +35,10 @@
 #endif
 
 #define R_USE_SIGNALS 1
+
+#include <CXXR/Expression.hpp>
+#include <CXXR/IntVector.hpp>
+#include <CXXR/StringVector.hpp>
 #include <R_ext/Minmax.h>
 #include <RContext.h>
 #include <Defn.h>

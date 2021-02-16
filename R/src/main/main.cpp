@@ -40,6 +40,8 @@
 
 #include <CXXR/GCRoot.hpp>
 #include <CXXR/JMPException.hpp>
+#include <CXXR/Expression.hpp>
+#include <CXXR/IntVector.hpp>
 #include <Localization.h>
 #include <RContext.h>
 #include <Defn.h>

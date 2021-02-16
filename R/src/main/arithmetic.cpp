@@ -33,6 +33,10 @@
 
 #include <CXXR/BuiltInFunction.hpp>
 #include <CXXR/GCRoot.hpp>
+#include <CXXR/Expression.hpp>
+#include <CXXR/RealVector.hpp>
+#include <CXXR/FixedVector.hpp>
+#include <CXXR/IntVector.hpp>
 #include <Defn.h>
 // LDBL_EPSILON
 #include <cfloat>

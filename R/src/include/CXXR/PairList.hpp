@@ -407,6 +407,60 @@ extern "C"
      * @return Pointer to the constructed list.
      */
     SEXP Rf_cons(SEXP cr, SEXP tl);
+
+    /* from list.cpp */
+    /* Return a dotted pair with the given CAR and CDR. */
+    /* The (R) TAG slot on the cell is set to NULL. */
+
+    /** @brief Get the i-th element of a list.
+     *
+     * @param list SEXP object.
+     * @param i i-th element of that object.
+     *
+     * @return i-th element.
+     */
+    SEXP Rf_elt(SEXP list, int i);
+
+    /**
+     * @brief Return the last element of a list
+     */
+    SEXP Rf_lastElt(SEXP list);
+
+    /* Shorthands for creating small lists */
+
+    SEXP Rf_list1(SEXP s);
+    SEXP Rf_list2(SEXP s, SEXP t);
+    SEXP Rf_list3(SEXP s, SEXP t, SEXP u);
+    SEXP Rf_list4(SEXP s, SEXP t, SEXP u, SEXP v);
+    SEXP Rf_list5(SEXP s, SEXP t, SEXP u, SEXP v, SEXP w);
+    SEXP Rf_list6(SEXP s, SEXP t, SEXP u, SEXP v, SEXP w, SEXP x);
+    SEXP Rf_listAppend(SEXP s, SEXP t);
+    /**
+     * @brief Check to see if a list can be made into a vector.
+     *
+     * @note it must have every element being a vector of length 1.
+     *       BUT it does not exclude 0!
+     *
+     * @return true if list can be made into a vector
+     */
+    Rboolean Rf_isVectorizable(SEXP s);
+    Rboolean Rf_isList(SEXP s);
+    Rboolean Rf_isPairList(SEXP s);
 } // extern "C"
+
+#if defined(R_NO_REMAP) && defined(COMPILING_IVORY) && defined(__cplusplus)
+const auto elt = Rf_elt;
+const auto lastElt = Rf_lastElt;
+const auto list1 = Rf_list1;
+const auto list2 = Rf_list2;
+const auto list3 = Rf_list3;
+const auto list4 = Rf_list4;
+const auto list5 = Rf_list5;
+const auto list6 = Rf_list6;
+const auto listAppend = Rf_listAppend;
+const auto isVectorizable = Rf_isVectorizable;
+const auto isList = Rf_isList;
+const auto isPairList = Rf_isPairList;
+#endif
 
 #endif /* PAIRLIST_HPP */

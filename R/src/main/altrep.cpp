@@ -23,8 +23,13 @@
 
 #define R_NO_REMAP
 
-#include <CXXR/VectorBase.hpp>
+#include <CXXR/StringVector.hpp>
 #include <CXXR/RAltRep.hpp>
+#include <CXXR/LogicalVector.hpp>
+#include <CXXR/IntVector.hpp>
+#include <CXXR/RealVector.hpp>
+#include <CXXR/ComplexVector.hpp>
+#include <CXXR/RawVector.hpp>
 #include <Defn.h>
 #include <Localization.h>
 #include <R_ext/Altrep.h>

@@ -28,6 +28,13 @@
 #include <cstring>
 #include <cmath>
 #include <cfloat>
+#include <CXXR/RObject.hpp>
+#include <CXXR/StringVector.hpp>
+#include <CXXR/FunctionBase.hpp>
+#include <CXXR/IntVector.hpp>
+#include <CXXR/ListVector.hpp>
+#include <CXXR/RealVector.hpp>
+#include <CXXR/Expression.hpp>
 #include <R.h>
 #include <Rinternals.h>
 #include <R_ext/Minmax.h>

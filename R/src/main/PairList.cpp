@@ -29,6 +29,7 @@
 
 #include <CXXR/PairList.hpp>
 #include <CXXR/StringVector.hpp>
+#include <CXXR/ListVector.hpp>
 #include <CXXR/Symbol.hpp>
 #include <Localization.h>
 #include <iostream>
@@ -95,3 +96,151 @@ namespace CXXR
         return staticTypeName();
     }
 } // namespace CXXR
+
+// ***** C interface *****
+
+/* inline version of CAR to support immediate bindings */
+SEXP CAR(SEXP e)
+{
+    if (BNDCELL_TAG(e))
+        Rf_error(_("bad binding access"));
+    return CAR0(e);
+}
+
+/* from list.cpp */
+/* Return a dotted pair with the given CAR and CDR. */
+/* The (R) TAG slot on the cell is set to NULL. */
+
+/** @brief Get the i-th element of a list.
+ *
+ * @param list SEXP object.
+ * @param i i-th element of that object.
+ *
+ * @return i-th element.
+ */
+SEXP Rf_elt(SEXP list, int i)
+{
+    SEXP result = list;
+
+    if ((i < 0) || (i > Rf_length(list)))
+        return R_NilValue;
+
+    for (int j = 0; j < i; j++)
+        result = CDR(result);
+
+    return CAR(result);
+}
+
+/**
+ * @brief Return the last element of a list
+ */
+SEXP Rf_lastElt(SEXP list)
+{
+    SEXP result = R_NilValue;
+    while (list != R_NilValue)
+    {
+        result = list;
+        list = CDR(list);
+    }
+    return result;
+}
+
+/* Shorthands for creating small lists */
+
+SEXP Rf_list1(SEXP s)
+{
+    return CONS(s, R_NilValue);
+}
+
+SEXP Rf_list2(SEXP s, SEXP t)
+{
+    GCRoot<> ss(s);
+    s = CONS(s, Rf_list1(t));
+    return s;
+}
+
+SEXP Rf_list3(SEXP s, SEXP t, SEXP u)
+{
+    GCRoot<> ss(s);
+    s = CONS(s, Rf_list2(t, u));
+    return s;
+}
+
+SEXP Rf_list4(SEXP s, SEXP t, SEXP u, SEXP v)
+{
+    GCRoot<> ss(s);
+    s = CONS(s, Rf_list3(t, u, v));
+    return s;
+}
+
+SEXP Rf_list5(SEXP s, SEXP t, SEXP u, SEXP v, SEXP w)
+{
+    GCRoot<> ss(s);
+    s = CONS(s, Rf_list4(t, u, v, w));
+    return s;
+}
+
+SEXP Rf_list6(SEXP s, SEXP t, SEXP u, SEXP v, SEXP w, SEXP x)
+{
+    GCRoot<> ss(s);
+    s = CONS(s, Rf_list5(t, u, v, w, x));
+    return s;
+}
+
+/* Destructive list append : See also ``append'' */
+
+SEXP Rf_listAppend(SEXP s, SEXP t)
+{
+    SEXP r;
+    if (s == R_NilValue)
+        return t;
+    r = s;
+    while (CDR(r) != R_NilValue)
+        r = CDR(r);
+    SETCDR(r, t);
+    return s;
+}
+
+Rboolean Rf_isVectorizable(SEXP s)
+{
+    if (s == R_NilValue)
+        return TRUE;
+    else if (Rf_isNewList(s))
+    {
+        R_xlen_t i, n;
+
+        n = XLENGTH(s);
+        for (i = 0; i < n; i++)
+            if (!Rf_isVector(VECTOR_ELT(s, i)) || XLENGTH(VECTOR_ELT(s, i)) > 1)
+                return FALSE;
+        return TRUE;
+    }
+    else if (Rf_isList(s))
+    {
+        for (; s != R_NilValue; s = CDR(s))
+            if (!Rf_isVector(CAR(s)) || LENGTH(CAR(s)) > 1)
+                return FALSE;
+        return TRUE;
+    }
+    else
+        return FALSE;
+}
+
+Rboolean Rf_isList(SEXP s)
+{
+    return Rboolean(s == R_NilValue || TYPEOF(s) == LISTSXP);
+}
+
+Rboolean Rf_isPairList(SEXP s)
+{
+    switch (TYPEOF(s))
+    {
+    case NILSXP:
+    case LISTSXP:
+    case LANGSXP:
+    case DOTSXP:
+        return TRUE;
+    default:
+        return FALSE;
+    }
+}

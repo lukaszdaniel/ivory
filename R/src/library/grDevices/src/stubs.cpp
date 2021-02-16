@@ -17,7 +17,12 @@
  *  https://www.R-project.org/Licenses/
  */
 
+#ifdef HAVE_CONFIG_H
 #include <config.h>
+#endif
+
+#include <CXXR/VectorBase.hpp>
+#include <CXXR/PairList.hpp>
 #include <Defn.h>
 #include <Internal.h>
 #include "grDevices.h"

@@ -23,6 +23,12 @@
 #include <config.h>
 #endif
 
+#include <CXXR/Expression.hpp>
+#include <CXXR/VectorBase.hpp>
+#include <CXXR/FixedVector.hpp>
+#include <CXXR/FunctionBase.hpp>
+#include <CXXR/IntVector.hpp>
+#include <CXXR/RealVector.hpp>
 #include <Defn.h>
 #include <cfloat>		/* for DBL_MAX */
 #include <R_ext/Applic.h>	/* for optif9, fdhess */

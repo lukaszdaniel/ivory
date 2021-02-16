@@ -37,6 +37,12 @@
 #include <CXXR/Expression.hpp>
 #include <CXXR/PairList.hpp>
 #include <CXXR/ByteCode.hpp>
+#include <CXXR/LogicalVector.hpp>
+#include <CXXR/IntVector.hpp>
+#include <CXXR/RealVector.hpp>
+#include <CXXR/ComplexVector.hpp>
+#include <CXXR/StringVector.hpp>
+#include <CXXR/RawVector.hpp>
 #include <Localization.h>
 #include <RContext.h>
 #include <Defn.h>
@@ -2424,7 +2430,7 @@ HIDDEN SEXP do_for(SEXP call, SEXP op, SEXP args, SEXP rho)
 				{
 				case LGLSXP:
 					ALLOC_LOOP_VAR(v, val_type, vpi);
-					SET_SCALAR_LVAL(v, (Rboolean)LOGICAL_ELT(val, i));
+					SET_SCALAR_LVAL(v, LOGICAL_ELT(val, i));
 					break;
 				case INTSXP:
 					ALLOC_LOOP_VAR(v, val_type, vpi);
@@ -7253,7 +7259,7 @@ static SEXP bcEval(SEXP body, SEXP rho, bool useCache)
 		NEXT();
 	    }
 	    GET_VEC_LOOP_VALUE(value);
-	    SET_SCALAR_LVAL(value, (Rboolean) LOGICAL_ELT(seq, i));
+	    SET_SCALAR_LVAL(value, LOGICAL_ELT(seq, i));
 	    SET_FOR_LOOP_VAR(value, cell, loopinfo, rho);
 	    NEXT();
 	  case CPLXSXP:

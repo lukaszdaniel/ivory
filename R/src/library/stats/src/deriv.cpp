@@ -27,6 +27,11 @@
 #endif
 
 #include <CXXR/Expression.hpp>
+#include <CXXR/VectorBase.hpp>
+#include <CXXR/FixedVector.hpp>
+#include <CXXR/StringVector.hpp>
+#include <CXXR/IntVector.hpp>
+#include <CXXR/RealVector.hpp>
 #include <Defn.h>
 #include "localization.h"
 

@@ -25,6 +25,11 @@
 
 // for contexts
 #define R_USE_SIGNALS 1
+
+#include <CXXR/Expression.hpp>
+#include <CXXR/VectorBase.hpp>
+#include <CXXR/StringVector.hpp>
+#include <CXXR/IntVector.hpp>
 #include <Localization.h>
 #include <RContext.h>
 #include <Defn.h>

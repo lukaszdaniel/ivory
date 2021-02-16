@@ -23,6 +23,9 @@
 #include <config.h>
 #endif
 
+#include <CXXR/Expression.hpp>
+#include <CXXR/VectorBase.hpp>
+#include <CXXR/StringVector.hpp>
 #include <Defn.h>
 
 #include <cstdio>

@@ -24,6 +24,11 @@
 #define R_NO_REMAP
 
 #include <CXXR/GCRoot.hpp>
+#include <CXXR/Expression.hpp>
+#include <CXXR/VectorBase.hpp>
+#include <CXXR/FunctionBase.hpp>
+#include <CXXR/IntVector.hpp>
+#include <CXXR/StringVector.hpp>
 #include <Localization.h>
 #include <Defn.h>
 #include <Internal.h>

@@ -113,6 +113,9 @@
 #include <CXXR/GCRoot.hpp>
 #include <CXXR/BuiltInFunction.hpp>
 #include <CXXR/JMPException.hpp>
+#include <CXXR/Expression.hpp>
+#include <CXXR/IntVector.hpp>
+#include <CXXR/RawVector.hpp>
 #include <Localization.h>
 #include <RContext.h>
 #include <Defn.h>

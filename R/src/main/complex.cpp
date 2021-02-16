@@ -61,6 +61,9 @@
 #endif
 
 #include <CXXR/BuiltInFunction.hpp>
+#include <CXXR/VectorBase.hpp>
+#include <CXXR/FixedVector.hpp>
+#include <CXXR/PairList.hpp>
 #include <Localization.h>
 #include <Defn.h>		/* -> ../include/R_ext/Complex.h */
 #include <Internal.h>

@@ -35,6 +35,9 @@
 #include <CXXR/String.hpp>
 #include <CXXR/Environment.hpp>
 #include <CXXR/ListVector.hpp>
+#include <CXXR/Expression.hpp>
+#include <CXXR/StringVector.hpp>
+#include <CXXR/IntVector.hpp>
 #include <Localization.h>
 #include <RContext.h>
 #include <Defn.h>

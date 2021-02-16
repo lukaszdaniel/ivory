@@ -25,6 +25,9 @@
 #define R_NO_REMAP
 
 #include <CXXR/BuiltInFunction.hpp>
+#include <CXXR/FixedVector.hpp>
+#include <CXXR/LogicalVector.hpp>
+#include <CXXR/PairList.hpp>
 #include <Localization.h>
 #include <Defn.h>
 #include <Internal.h>

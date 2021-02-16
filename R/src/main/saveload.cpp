@@ -36,6 +36,10 @@
 #include <CXXR/DottedArgs.hpp>
 #include <CXXR/ExternalPointer.hpp>
 #include <CXXR/UncachedString.hpp>
+#include <CXXR/IntVector.hpp>
+#include <CXXR/RealVector.hpp>
+#include <CXXR/ComplexVector.hpp>
+#include <CXXR/StringVector.hpp>
 #include <Localization.h>
 #include <RContext.h>
 #include <Defn.h>
@@ -1253,10 +1257,6 @@ static void NewDataSave(SEXP s, FILE *fp, OutputRoutines *m, SaveLoadData *d)
             accessor(obj, cnt, infunc(fp, d));      \
     } while (0)
 
-#define SET_LOGICAL_ELT(x, __i__, v) (LOGICAL_ELT(x, __i__) = (v))
-#define SET_INTEGER_ELT(x, __i__, v) (INTEGER_ELT(x, __i__) = (v))
-#define SET_REAL_ELT(x, __i__, v) (REAL_ELT(x, __i__) = (v))
-#define SET_COMPLEX_ELT(x, __i__, v) (COMPLEX_ELT(x, __i__) = (v))
 
 static SEXP InCHARSXP(FILE *fp, InputRoutines *m, SaveLoadData *d)
 {

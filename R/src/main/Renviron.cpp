@@ -29,6 +29,9 @@
 
 #define R_NO_REMAP
 
+#include <CXXR/VectorBase.hpp>
+#include <CXXR/StringVector.hpp>
+#include <CXXR/PairList.hpp>
 #include <cstdlib> /* for setenv or putenv */
 #include <Localization.h>
 #include <Defn.h> /* for PATH_MAX */

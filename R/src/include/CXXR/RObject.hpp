@@ -832,6 +832,51 @@ extern "C"
      * @param from Pointer to another CXXR::RObject.
      */
     void DUPLICATE_ATTRIB(SEXP to, SEXP from);
+
+    /* from dstruct.cpp */
+
+    /*  length - length of objects  */
+
+    int Rf_envlength(SEXP rho);
+
+    /* TODO: a  Length(.) {say} which is length() + dispatch (S3 + S4) if needed
+         for one approach, see do_seq_along() in ../main/seq.cpp
+    */
+    R_len_t Rf_length(SEXP s);
+
+    R_xlen_t Rf_envxlength(SEXP rho);
+
+    R_xlen_t Rf_xlength(SEXP s);
+    SEXP R_FixupRHS(SEXP x, SEXP y);
+    Rboolean Rf_isFrame(SEXP s);
+
+    /* As from R 2.4.0 we check that the value is allowed. */
+    SEXP Rf_ScalarLogical(int x);
+    /* from util.cpp */
+
+    /**
+     * @brief Check to see if the arrays "x" and "y" have the identical extents
+     */
+    Rboolean Rf_conformable(SEXP x, SEXP y);
+    /**
+     * @note R's Rf_inherits() is based on inherits3() in ../main/objects.cpp
+     * Here, use char / CHAR() instead of the slower more general Rf_translateChar()
+     */
+    Rboolean Rf_inherits(SEXP s, const char *name);
 } // extern "C"
+
+/** @brief Shorthand for Rf_length().
+ */
+inline R_len_t length(SEXP s)
+{
+    return Rf_length(s);
+}
+
+#if defined(R_NO_REMAP) && defined(COMPILING_IVORY) && defined(__cplusplus)
+const auto xlength = Rf_xlength;
+const auto isFrame = Rf_isFrame;
+const auto conformable = Rf_conformable;
+const auto inherits = Rf_inherits;
+#endif
 
 #endif /* ROBJECT_HPP */

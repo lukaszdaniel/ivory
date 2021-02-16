@@ -49,3 +49,102 @@ namespace CXXR
         return "numeric";
     }
 } // namespace CXXR
+
+// ***** C interface *****
+
+#ifdef STRICT_TYPECHECK
+#define CHECK_VECTOR_REAL(x)                         \
+    do                                               \
+    {                                                \
+        if (TYPEOF(x) != REALSXP)                    \
+            Rf_error(_("bad %s vector"), "REALSXP"); \
+    } while (0)
+
+#define CHECK_STDVEC_REAL(x)                                  \
+    do                                                        \
+    {                                                         \
+        CHECK_VECTOR_REAL(x);                                 \
+        if (ALTREP(x))                                        \
+            Rf_error(_("bad standard %s vector"), "REALSXP"); \
+    } while (0)
+
+#define CHECK_SCALAR_REAL(x)                         \
+    do                                               \
+    {                                                \
+        CHECK_STDVEC_REAL(x);                        \
+        if (XLENGTH(x) != 1)                         \
+            Rf_error(_("bad %s scalar"), "REALSXP"); \
+    } while (0)
+
+#define CHECK_VECTOR_REAL_ELT(x, i)         \
+    do                                      \
+    {                                       \
+        SEXP ce__x__ = (x);                 \
+        R_xlen_t ce__i__ = (i);             \
+        CHECK_VECTOR_REAL(ce__x__);         \
+        CHECK_BOUNDS_ELT(ce__x__, ce__i__); \
+    } while (0)
+#else
+#define CHECK_STDVEC_REAL(x) \
+    do                       \
+    {                        \
+    } while (0)
+#define CHECK_SCALAR_REAL(x) \
+    do                       \
+    {                        \
+    } while (0)
+#define CHECK_VECTOR_REAL(x) \
+    do                       \
+    {                        \
+    } while (0)
+#define CHECK_VECTOR_REAL_ELT(x, i) \
+    do                              \
+    {                               \
+    } while (0)
+#endif
+
+double *REAL0(SEXP x)
+{
+    CHECK_STDVEC_REAL(x);
+    return (double *)STDVEC_DATAPTR(x);
+}
+
+double SCALAR_DVAL(SEXP x)
+{
+    CHECK_SCALAR_REAL(x);
+    return REAL0(x)[0];
+}
+
+void SET_SCALAR_DVAL(SEXP x, double v)
+{
+    CHECK_SCALAR_REAL(x);
+    REAL0(x)[0] = v;
+}
+
+const double *REAL_OR_NULL(SEXP x)
+{
+    CHECK_VECTOR_REAL(x);
+    return (double *)(ALTREP(x) ? ALTVEC_DATAPTR_OR_NULL(x) : STDVEC_DATAPTR(x));
+}
+
+double REAL_ELT(SEXP x, R_xlen_t i)
+{
+    CHECK_VECTOR_REAL_ELT(x, i);
+    return ALTREP(x) ? ALTREAL_ELT(x, i) : REAL0(x)[i];
+}
+
+void SET_REAL_ELT(SEXP x, R_xlen_t i, double v)
+{
+    CHECK_VECTOR_REAL_ELT(x, i);
+    if (ALTREP(x))
+        ALTREAL_SET_ELT(x, i, v);
+    else
+        REAL0(x)[i] = v;
+}
+
+SEXP Rf_ScalarReal(double x)
+{
+    SEXP ans = Rf_allocVector(REALSXP, 1);
+    SET_SCALAR_DVAL(ans, x);
+    return ans;
+}

@@ -71,3 +71,10 @@ namespace CXXR
         return v;
     }
 } // namespace CXXR
+
+// ***** C interface *****
+
+Rboolean Rf_isNewList(SEXP s)
+{
+    return Rboolean(s == R_NilValue || TYPEOF(s) == VECSXP);
+}

@@ -49,3 +49,95 @@ namespace CXXR
         return "logical";
     }
 } // namespace CXXR
+
+// ***** C interface *****
+
+#ifdef STRICT_TYPECHECK
+#define CHECK_VECTOR_LGL(x)                         \
+    do                                              \
+    {                                               \
+        if (TYPEOF(x) != LGLSXP)                    \
+            Rf_error(_("bad %s vector"), "LGLSXP"); \
+    } while (0)
+
+#define CHECK_STDVEC_LGL(x)                                  \
+    do                                                       \
+    {                                                        \
+        CHECK_VECTOR_LGL(x);                                 \
+        if (ALTREP(x))                                       \
+            Rf_error(_("bad standard %s vector"), "LGLSXP"); \
+    } while (0)
+
+#define CHECK_SCALAR_LGL(x)                         \
+    do                                              \
+    {                                               \
+        CHECK_STDVEC_LGL(x);                        \
+        if (XLENGTH(x) != 1)                        \
+            Rf_error(_("bad %s scalar"), "LGLSXP"); \
+    } while (0)
+
+#define CHECK_VECTOR_LGL_ELT(x, i)          \
+    do                                      \
+    {                                       \
+        SEXP ce__x__ = (x);                 \
+        R_xlen_t ce__i__ = (i);             \
+        CHECK_VECTOR_LGL(ce__x__);          \
+        CHECK_BOUNDS_ELT(ce__x__, ce__i__); \
+    } while (0)
+#else
+#define CHECK_VECTOR_LGL(x) \
+    do                      \
+    {                       \
+    } while (0)
+#define CHECK_STDVEC_LGL(x) \
+    do                      \
+    {                       \
+    } while (0)
+#define CHECK_SCALAR_LGL(x) \
+    do                      \
+    {                       \
+    } while (0)
+#define CHECK_VECTOR_LGL_ELT(x, i) \
+    do                             \
+    {                              \
+    } while (0)
+#endif
+
+int *LOGICAL0(SEXP x)
+{
+    CHECK_STDVEC_LGL(x);
+    return (int *)STDVEC_DATAPTR(x);
+}
+
+int SCALAR_LVAL(SEXP x)
+{
+    CHECK_SCALAR_LGL(x);
+    return LOGICAL0(x)[0];
+}
+
+void SET_SCALAR_LVAL(SEXP x, int v)
+{
+    CHECK_SCALAR_LGL(x);
+    LOGICAL0(x)[0] = v;
+}
+
+const int *LOGICAL_OR_NULL(SEXP x)
+{
+    CHECK_VECTOR_LGL(x);
+    return (int *)(ALTREP(x) ? ALTVEC_DATAPTR_OR_NULL(x) : STDVEC_DATAPTR(x));
+}
+
+int LOGICAL_ELT(SEXP x, R_xlen_t i)
+{
+    CHECK_VECTOR_LGL_ELT(x, i);
+    return ALTREP(x) ? ALTLOGICAL_ELT(x, i) : LOGICAL0(x)[i];
+}
+
+void SET_LOGICAL_ELT(SEXP x, R_xlen_t i, int v)
+{
+    CHECK_VECTOR_LGL_ELT(x, i);
+    if (ALTREP(x))
+        ALTLOGICAL_SET_ELT(x, i, v);
+    else
+        LOGICAL0(x)[i] = v;
+}

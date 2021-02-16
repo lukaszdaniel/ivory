@@ -25,6 +25,13 @@
 
 #include <CXXR/String.hpp>
 #include <CXXR/PairList.hpp>
+#include <CXXR/LogicalVector.hpp>
+#include <CXXR/IntVector.hpp>
+#include <CXXR/RealVector.hpp>
+#include <CXXR/ComplexVector.hpp>
+#include <CXXR/RawVector.hpp>
+#include <CXXR/StringVector.hpp>
+#include <CXXR/RAltRep.hpp>
 #include <Defn.h>
 #include <Localization.h>
 #include <R_ext/Altrep.h>

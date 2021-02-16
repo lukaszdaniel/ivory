@@ -22,6 +22,7 @@
 */
 
 #include <cstring>
+#include <CXXR/StringVector.hpp>
 #include <R.h>
 #include "tools.h"
 #include "localization.h"

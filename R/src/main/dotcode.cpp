@@ -28,6 +28,8 @@
 
 #include <CXXR/BuiltInFunction.hpp>
 #include <CXXR/Expression.hpp>
+#include <CXXR/VectorBase.hpp>
+#include <CXXR/StringVector.hpp>
 #include <Localization.h>
 #include <R_ext/Minmax.h>
 #include <RContext.h>

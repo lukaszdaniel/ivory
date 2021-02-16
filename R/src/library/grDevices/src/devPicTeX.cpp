@@ -23,6 +23,7 @@
 #include <config.h>
 #endif
 
+#include <CXXR/PairList.hpp>
 #include <Defn.h>
 
 #include <rlocale.h> /* includes cwchar */

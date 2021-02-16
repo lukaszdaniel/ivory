@@ -29,6 +29,8 @@
 
 #include <CXXR/BuiltInFunction.hpp>
 #include <CXXR/Symbol.hpp>
+#include <CXXR/PairList.hpp>
+#include <CXXR/StringVector.hpp>
 #include <Localization.h>
 #include <RContext.h>
 #include <Defn.h>

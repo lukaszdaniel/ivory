@@ -49,3 +49,102 @@ namespace CXXR
         return "complex";
     }
 } // namespace CXXR
+
+// ***** C interface *****
+
+#ifdef STRICT_TYPECHECK
+#define CHECK_VECTOR_CPLX(x)                         \
+    do                                               \
+    {                                                \
+        if (TYPEOF(x) != CPLXSXP)                    \
+            Rf_error(_("bad %s vector"), "CPLXSXP"); \
+    } while (0)
+
+#define CHECK_STDVEC_CPLX(x)                                  \
+    do                                                        \
+    {                                                         \
+        CHECK_VECTOR_CPLX(x);                                 \
+        if (ALTREP(x))                                        \
+            Rf_error(_("bad standard %s vector"), "CPLXSXP"); \
+    } while (0)
+
+#define CHECK_SCALAR_CPLX(x)                         \
+    do                                               \
+    {                                                \
+        CHECK_STDVEC_CPLX(x);                        \
+        if (XLENGTH(x) != 1)                         \
+            Rf_error(_("bad %s scalar"), "CPLXSXP"); \
+    } while (0)
+
+#define CHECK_VECTOR_CPLX_ELT(x, i)         \
+    do                                      \
+    {                                       \
+        SEXP ce__x__ = (x);                 \
+        R_xlen_t ce__i__ = (i);             \
+        CHECK_VECTOR_CPLX(ce__x__);         \
+        CHECK_BOUNDS_ELT(ce__x__, ce__i__); \
+    } while (0)
+#else
+#define CHECK_STDVEC_CPLX(x) \
+    do                       \
+    {                        \
+    } while (0)
+#define CHECK_SCALAR_CPLX(x) \
+    do                       \
+    {                        \
+    } while (0)
+#define CHECK_VECTOR_CPLX(x) \
+    do                       \
+    {                        \
+    } while (0)
+#define CHECK_VECTOR_CPLX_ELT(x, i) \
+    do                              \
+    {                               \
+    } while (0)
+#endif
+
+Rcomplex *COMPLEX0(SEXP x)
+{
+    CHECK_STDVEC_CPLX(x);
+    return (Rcomplex *)STDVEC_DATAPTR(x);
+}
+
+Rcomplex SCALAR_CVAL(SEXP x)
+{
+    CHECK_SCALAR_CPLX(x);
+    return COMPLEX0(x)[0];
+}
+
+void SET_SCALAR_CVAL(SEXP x, Rcomplex v)
+{
+    CHECK_SCALAR_CPLX(x);
+    COMPLEX0(x)[0] = v;
+}
+
+const Rcomplex *COMPLEX_OR_NULL(SEXP x)
+{
+    CHECK_VECTOR_CPLX(x);
+    return (Rcomplex *)(ALTREP(x) ? ALTVEC_DATAPTR_OR_NULL(x) : STDVEC_DATAPTR(x));
+}
+
+Rcomplex COMPLEX_ELT(SEXP x, R_xlen_t i)
+{
+    CHECK_VECTOR_CPLX_ELT(x, i);
+    return ALTREP(x) ? ALTCOMPLEX_ELT(x, i) : COMPLEX0(x)[i];
+}
+
+void SET_COMPLEX_ELT(SEXP x, R_xlen_t i, Rcomplex v)
+{
+    CHECK_VECTOR_CPLX_ELT(x, i);
+    if (ALTREP(x))
+        ALTCOMPLEX_SET_ELT(x, i, v);
+    else
+        COMPLEX0(x)[i] = v;
+}
+
+SEXP Rf_ScalarComplex(Rcomplex x)
+{
+    SEXP ans = Rf_allocVector(CPLXSXP, 1);
+    SET_SCALAR_CVAL(ans, x);
+    return ans;
+}

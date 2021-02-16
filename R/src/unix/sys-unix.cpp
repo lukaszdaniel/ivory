@@ -32,6 +32,10 @@
 #endif
 
 #define R_USE_SIGNALS 1
+
+#include <CXXR/IntVector.hpp>
+#include <CXXR/StringVector.hpp>
+#include <CXXR/PairList.hpp>
 #include <Localization.h>
 #include <RContext.h>
 #include <Defn.h>

@@ -30,6 +30,7 @@
  */
 
 #include <CXXR/StringVector.hpp>
+#include <CXXR/GCRoot.hpp>
 #include <Rinternals.h>
 #include <iostream>
 
@@ -75,3 +76,40 @@ namespace CXXR
         os << "\n";
     }
 } // namespace CXXR
+
+// ***** C interface *****
+
+int Rf_stringPositionTr(SEXP string, const char *translatedElement)
+{
+
+    int slen = LENGTH(string);
+
+    const void *vmax = vmaxget();
+    for (int i = 0; i < slen; i++)
+    {
+        bool found = (strcmp(Rf_translateChar(STRING_ELT(string, i)), translatedElement) == 0);
+        vmaxset(vmax);
+        if (found)
+            return i;
+    }
+    return -1; /* not found */
+}
+
+Rboolean Rf_isValidString(SEXP x)
+{
+    return Rboolean(TYPEOF(x) == STRSXP && LENGTH(x) > 0 && TYPEOF(STRING_ELT(x, 0)) != NILSXP);
+}
+
+Rboolean Rf_isValidStringF(SEXP x)
+{
+    return Rboolean(Rf_isValidString(x) && R_CHAR(STRING_ELT(x, 0))[0]);
+}
+
+SEXP Rf_ScalarString(SEXP x)
+{
+    SEXP ans;
+    CXXR::GCRoot<> xx(x);
+    ans = Rf_allocVector(STRSXP, (R_xlen_t)1);
+    SET_STRING_ELT(ans, (R_xlen_t)0, x);
+    return ans;
+}

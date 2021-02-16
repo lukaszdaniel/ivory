@@ -47,6 +47,9 @@
 #include <cmath>
 #include "localization.h"
 
+#include <CXXR/VectorBase.hpp>
+#include <CXXR/IntVector.hpp>
+#include <CXXR/RealVector.hpp>
 #include <Defn.h>
 #include <R.h>
 #include <R_ext/Applic.h>

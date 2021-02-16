@@ -20,6 +20,13 @@
 #ifdef HAVE_CONFIG_H
 #include <config.h>
 #endif
+
+#include <CXXR/Expression.hpp>
+#include <CXXR/VectorBase.hpp>
+#include <CXXR/FunctionBase.hpp>
+#include <CXXR/StringVector.hpp>
+#include <CXXR/IntVector.hpp>
+#include <CXXR/RealVector.hpp>
 #include <Defn.h>
 #include <R_ext/RS.h> // for Calloc
 

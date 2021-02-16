@@ -17,6 +17,9 @@
  *  https://www.R-project.org/Licenses/.
  */
 
+#include <CXXR/RObject.hpp>
+#include <CXXR/VectorBase.hpp>
+#include <CXXR/IntVector.hpp>
 #include <R.h>
 #include <Rinternals.h>
 #include <R_ext/Applic.h>

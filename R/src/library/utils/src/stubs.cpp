@@ -21,6 +21,9 @@
 #include <config.h>
 #endif
 
+#include <CXXR/VectorBase.hpp>
+#include <CXXR/StringVector.hpp>
+#include <CXXR/PairList.hpp>
 #include <Defn.h> /* for checkArity */
 #include <Internal.h>
 #include "localization.h"

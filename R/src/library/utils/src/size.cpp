@@ -26,6 +26,10 @@
 #endif
 
 #include <CXXR/RObject.hpp>
+#include <CXXR/VectorBase.hpp>
+#include <CXXR/StringVector.hpp>
+#include <CXXR/RealVector.hpp>
+#include <CXXR/PairList.hpp>
 #include <Defn.h>
 
 using namespace R;

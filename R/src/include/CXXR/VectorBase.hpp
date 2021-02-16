@@ -261,6 +261,46 @@ extern "C"
    * @return Pointer to the created vector.
    */
   SEXP Rf_allocVector3(SEXPTYPE type, R_xlen_t length, R_allocator_t *allocator);
+
+  SEXP Rf_mkNamed(SEXPTYPE TYP, const char **names);
+  SEXP Rf_mkString(const char *s);
+
+  Rboolean Rf_isVectorList(SEXP s);
+  Rboolean Rf_isVectorAtomic(SEXP s);
+  Rboolean Rf_isVector(SEXP s);
+  Rboolean Rf_isMatrix(SEXP s);
+  Rboolean Rf_isArray(SEXP s);
+  Rboolean Rf_isTs(SEXP s);
+  R_xlen_t XLENGTH_EX(SEXP x);
+  R_xlen_t XTRUELENGTH(SEXP x);
+  int LENGTH_EX(SEXP x, const char *file, int line);
+  void *DATAPTR(SEXP x);
+
+  /**
+ * @brief The general (read only) data pointer function
+ * 
+ * Function works as a dispatcher between ALTREP
+ * or STDVEC representation of data.
+ * 
+ * @return pointer to the (read only) data block
+ */
+  const void *DATAPTR_RO(SEXP x);
+
+  const void *DATAPTR_OR_NULL(SEXP x);
 } // extern "C"
+
+#if defined(R_NO_REMAP) && defined(COMPILING_IVORY) && defined(__cplusplus)
+const auto allocVector = Rf_allocVector;
+const auto allocVector3 = Rf_allocVector3;
+const auto ScalarLogical = Rf_ScalarLogical;
+const auto mkNamed = Rf_mkNamed;
+const auto mkString = Rf_mkString;
+const auto isVector = Rf_isVector;
+const auto isVectorAtomic = Rf_isVectorAtomic;
+const auto isVectorList = Rf_isVectorList;
+const auto isTs = Rf_isTs;
+const auto isArray = Rf_isArray;
+const auto isMatrix = Rf_isMatrix;
+#endif
 
 #endif /* VECTORBASE_HPP */

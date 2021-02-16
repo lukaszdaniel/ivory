@@ -22,76 +22,64 @@
  *  https://www.R-project.org/Licenses/
  */
 
-/** @file RAltRep.cpp
+/** @file FixedVector.cpp
  *
- * @brief Class CXXR::AltRep.
+ * @brief Class FixedVector and associated C interface.
  */
 
-#include <CXXR/RAltRep.hpp>
+#include <CXXR/FixedVector.hpp>
 
 using namespace std;
 using namespace CXXR;
 
 namespace CXXR
 {
-    const char *AltRep::typeName() const
+    // Force the creation of non-inline embodiments of functions callable
+    // from C:
+    namespace ForceNonInline
     {
-        return staticTypeName();
-    }
-
-    /**
-     * @deprecated Ought to be private.
-     */
-    void AltRep::set_wrapper_type(AltRep *x, SEXPTYPE v)
-    {
-        if (!x)
-            return;
-        x->m_wrapper_type = v;
-    }
-
-    /** @brief Object type.
-     *
-     * @param x Pointer to CXXR::AltRep.
-     *
-     * @return Wrapper \c SEXPTYPE of \a x, or NILSXP if x is a null pointer.
-     */
-    SEXPTYPE AltRep::wrapper_type(AltRep *x)
-    {
-        return x ? x->m_wrapper_type : NILSXP;
-    }
+    } // namespace ForceNonInline
 } // namespace CXXR
 
 // ***** C interface *****
 
-SEXP ALTREP_CLASS(SEXP x)
+/**
+ * @brief Is an object of numeric type.
+ * 
+ * @todo the LGLSXP case should be excluded here
+ *       (really? in many places we affirm they are treated like INTs)
+ */
+
+extern inline Rboolean Rf_isNumeric(SEXP s)
 {
-    return TAG(x);
+    switch (TYPEOF(s))
+    {
+    case INTSXP:
+        if (Rf_inherits(s, "factor"))
+            return FALSE;
+    case LGLSXP:
+    case REALSXP:
+        return TRUE;
+    default:
+        return FALSE;
+    }
 }
 
-SEXP R_altrep_data1(SEXP x)
+/**
+ *  @brief Is an object "Numeric" or  complex
+*/
+extern inline Rboolean Rf_isNumber(SEXP s)
 {
-    return CAR(x);
-}
-
-SEXP R_altrep_data2(SEXP x)
-{
-#ifdef CXXR_OLD_ALTREP_IMPL
-    return CDR(x);
-#else
-    return CADR(x);
-#endif
-}
-
-void R_set_altrep_data1(SEXP x, SEXP v)
-{
-    SETCAR(x, v);
-}
-
-void R_set_altrep_data2(SEXP x, SEXP v)
-{
-#ifdef CXXR_OLD_ALTREP_IMPL
-    SETCDR(x, v);
-#else
-    SETCADR(x, v);
-#endif
+    switch (TYPEOF(s))
+    {
+    case INTSXP:
+        if (Rf_inherits(s, "factor"))
+            return FALSE;
+    case LGLSXP:
+    case REALSXP:
+    case CPLXSXP:
+        return TRUE;
+    default:
+        return FALSE;
+    }
 }

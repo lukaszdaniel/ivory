@@ -24,6 +24,9 @@
 #endif
 
 #include <CXXR/GCRoot.hpp>
+#include <CXXR/VectorBase.hpp>
+#include <CXXR/FixedVector.hpp>
+#include <CXXR/IntVector.hpp>
 #include <Defn.h>
 #include <R_ext/Random.h>
 #include <Rmath.h>		/* for lgammafn, rmultinom */

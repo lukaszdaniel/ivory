@@ -23,7 +23,11 @@
 #endif
 
 #include <CXXR/Expression.hpp>
+#include <CXXR/FixedVector.hpp>
+#include <CXXR/IntVector.hpp>
+#include <CXXR/ListVector.hpp>
 #include <CXXR/String.hpp>
+#include <CXXR/StringVector.hpp>
 #include <Defn.h>
 
 #include "statsR.h"

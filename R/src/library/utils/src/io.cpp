@@ -35,7 +35,9 @@
 #define R_USE_SIGNALS 1
 
 #include <CXXR/String.hpp>
+#include <CXXR/StringVector.hpp>
 #include <CXXR/IntVector.hpp>
+#include <CXXR/PairList.hpp>
 #include <RContext.h>
 #include <Defn.h>
 #include <cfloat>  /* for DBL_DIG */

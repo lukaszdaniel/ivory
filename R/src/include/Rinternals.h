@@ -82,6 +82,10 @@ extern "C" {
 
 #ifndef TESTING_WRITE_BARRIER
 #define INLINE_PROTECT
+#else
+/* define inline-able functions */
+#define STRICT_TYPECHECK
+#define CATCH_ZERO_LENGTH_ACCESS
 #endif
 
 /* Fundamental Data Types:  These are largely Lisp
@@ -1235,13 +1239,6 @@ void R_orderVector1(int *indx, int n, SEXP x, Rboolean nalast, Rboolean decreasi
 #endif
 #define Rf_warningcall		warningcall
 
-/* Defining NO_RINLINEDFUNS disables use to simulate platforms where
-   this is not available */
-#if defined(CALLED_FROM_DEFN_H) && !defined(__MAIN__) && \
-   (defined(COMPILING_R) || (__GNUC__ && !defined(__INTEL_COMPILER))) && \
-   (defined(COMPILING_R) || !defined(NO_RINLINEDFUNS))
-#include "Rinlinedfuns.h"
-#else
 /* need remapped names here for use with R_NO_REMAP */
 
 /*
@@ -1349,7 +1346,6 @@ Rbyte *RAW0(SEXP x);
 void SET_LOGICAL_ELT(SEXP x, R_xlen_t i, int v);
 void SET_INTEGER_ELT(SEXP x, R_xlen_t i, int v);
 void SET_REAL_ELT(SEXP x, R_xlen_t i, double v);
-#endif
 
 #if defined(USE_RINTERNALS) || defined(TESTING_WRITE_BARRIER) || defined(COMPILING_IVORY)
 
@@ -1401,8 +1397,6 @@ const auto allocList = Rf_allocList;
 const auto allocMatrix = Rf_allocMatrix;
 const auto allocS4Object = Rf_allocS4Object;
 const auto allocSExp = Rf_allocSExp;
-const auto allocVector = Rf_allocVector;
-const auto allocVector3 = Rf_allocVector3;
 const auto any_duplicated = Rf_any_duplicated;
 const auto any_duplicated3 = Rf_any_duplicated3;
 const auto applyClosure = Rf_applyClosure;
@@ -1417,7 +1411,6 @@ const auto asReal = Rf_asReal;
 const auto asS4	= Rf_asS4;
 const auto classgets = Rf_classgets;
 const auto coerceVector = Rf_coerceVector;
-const auto conformable = Rf_conformable;
 const auto cons = Rf_cons;
 const auto error = Rf_error;
 const auto warning = Rf_warning;
@@ -1434,7 +1427,6 @@ const auto dimnamesgets = Rf_dimnamesgets;
 const auto DropDims = Rf_DropDims;
 const auto duplicate = Rf_duplicate;
 const auto duplicated = Rf_duplicated;
-const auto elt = Rf_elt;
 const auto errorcall = Rf_errorcall;
 const auto eval = Rf_eval;
 const auto ExtractSubset = Rf_ExtractSubset;
@@ -1457,69 +1449,29 @@ const auto GetOptionWidth = Rf_GetOptionWidth;
 const auto GetOption = Rf_GetOption;
 const auto GetRowNames = Rf_GetRowNames;
 const auto gsetVar = Rf_gsetVar;
-const auto inherits = Rf_inherits;
 const auto install = Rf_install;
 const auto installChar = Rf_installTrChar;
 const auto installNoTrChar = Rf_installNoTrChar;
 const auto installTrChar = Rf_installTrChar;
 const auto installDDVAL = Rf_installDDVAL;
 const auto installS3Signature = Rf_installS3Signature;
-const auto isArray = Rf_isArray;
 const auto isBasicClass = Rf_isBasicClass;
-const auto isFactor = Rf_isFactor;
-const auto isFrame = Rf_isFrame;
 const auto isFree = Rf_isFree;
-const auto isFunction = Rf_isFunction;
-const auto isInteger = Rf_isInteger;
-const auto isLanguage = Rf_isLanguage;
-const auto isList = Rf_isList;
-const auto isMatrix = Rf_isMatrix;
-const auto isNewList = Rf_isNewList;
-const auto isNumeric = Rf_isNumeric;
-const auto isNumber = Rf_isNumber;
 const auto isOrdered = Rf_isOrdered;
-const auto isPairList = Rf_isPairList;
-const auto isPrimitive = Rf_isPrimitive;
 const auto isS4 = Rf_isS4;
-const auto isTs = Rf_isTs;
 const auto isUnmodifiedSpecSym = Rf_isUnmodifiedSpecSym;
 const auto isUnordered = Rf_isUnordered;
 const auto isUnsorted = Rf_isUnsorted;
-const auto isUserBinop = Rf_isUserBinop;
-const auto isValidString = Rf_isValidString;
-const auto isValidStringF = Rf_isValidStringF;
-const auto isVector = Rf_isVector;
-const auto isVectorAtomic = Rf_isVectorAtomic;
-const auto isVectorizable = Rf_isVectorizable;
-const auto isVectorList = Rf_isVectorList;
-const auto lang1 = Rf_lang1;
-const auto lang2 = Rf_lang2;
-const auto lang3 = Rf_lang3;
-const auto lang4 = Rf_lang4;
-const auto lang5 = Rf_lang5;
-const auto lang6 = Rf_lang6;
-const auto lastElt = Rf_lastElt;
 const auto lazy_duplicate = Rf_lazy_duplicate;
-const auto lcons = Rf_lcons;
 const auto lengthgets = Rf_lengthgets;
-const auto list1 = Rf_list1;
-const auto list2 = Rf_list2;
-const auto list3 = Rf_list3;
-const auto list4 = Rf_list4;
-const auto list5 = Rf_list5;
-const auto list6 = Rf_list6;
-const auto listAppend = Rf_listAppend;
 const auto match = Rf_match;
 const auto matchE = Rf_matchE;
 const auto mkChar = Rf_mkChar;
 const auto mkCharCE = Rf_mkCharCE;
 const auto mkCharLen = Rf_mkCharLen;
 const auto mkCharLenCE = Rf_mkCharLenCE;
-const auto mkNamed = Rf_mkNamed;
-const auto mkString = Rf_mkString;
 const auto namesgets = Rf_namesgets;
 const auto ncols = Rf_ncols;
-const auto nlevels = Rf_nlevels;
 const auto NonNullStringMatch = Rf_NonNullStringMatch;
 const auto nrows = Rf_nrows;
 const auto nthcdr = Rf_nthcdr;
@@ -1528,23 +1480,15 @@ const auto pmatch = Rf_pmatch;
 const auto psmatch = Rf_psmatch;
 const auto PrintValue = Rf_PrintValue;
 const auto printwhere = Rf_printwhere;
-const auto protect = Rf_protect;
 const auto readS3VarsFromFrame = Rf_readS3VarsFromFrame;
 const auto reEnc = Rf_reEnc;
 const auto S3Class = Rf_S3Class;
-const auto ScalarComplex = Rf_ScalarComplex;
-const auto ScalarInteger = Rf_ScalarInteger;
-const auto ScalarLogical = Rf_ScalarLogical;
-const auto ScalarReal = Rf_ScalarReal;
-const auto ScalarString = Rf_ScalarString;
-const auto ScalarRaw = Rf_ScalarRaw;
 const auto setAttrib = Rf_setAttrib;
 const auto setSVector = Rf_setSVector;
 const auto setVar = Rf_setVar;
 const auto shallow_duplicate = Rf_shallow_duplicate;
 const auto str2type = Rf_str2type;
 const auto stringSuffix = Rf_stringSuffix;
-const auto stringPositionTr = Rf_stringPositionTr;
 const auto StringBlank = Rf_StringBlank;
 const auto substitute = Rf_substitute;
 const auto topenv = Rf_topenv;
@@ -1555,22 +1499,10 @@ const auto type2char = Rf_type2char;
 const auto type2rstr = Rf_type2rstr;
 const auto type2str = Rf_type2str;
 const auto type2str_nowarn = Rf_type2str_nowarn;
-const auto unprotect = Rf_unprotect;
 const auto unprotect_ptr = Rf_unprotect_ptr;
 const auto VectorToPairList = Rf_VectorToPairList;
 const auto warningcall_immediate = Rf_warningcall_immediate;
-const auto xlength = Rf_xlength;
 const auto xlengthgets = Rf_xlengthgets;
-#endif
-
-#ifdef __cplusplus
-
-/** @brief Shorthand for Rf_length().
- */
-inline R_len_t length(SEXP s)
-{
-    return Rf_length(s);
-}
 #endif
 
 #endif /* R_INTERNALS_H_ */

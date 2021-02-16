@@ -43,8 +43,12 @@
 #include <config.h>
 #endif
 
+#include <CXXR/PairList.hpp>
+#include <CXXR/Expression.hpp>
+#include <CXXR/VectorBase.hpp>
+#include <CXXR/StringVector.hpp>
+#include <CXXR/IntVector.hpp>
 #include <Localization.h>
-
 #include <Defn.h>
 #include <Fileio.h>
 #include <Rconnections.h>

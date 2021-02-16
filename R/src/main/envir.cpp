@@ -103,6 +103,10 @@
 #include <CXXR/Environment.hpp>
 #include <CXXR/CachedString.hpp>
 #include <CXXR/BuiltInFunction.hpp>
+#include <CXXR/Expression.hpp>
+#include <CXXR/FixedVector.hpp>
+#include <CXXR/StringVector.hpp>
+#include <CXXR/IntVector.hpp>
 #include <Localization.h>
 #include <RContext.h>
 #include <Defn.h>

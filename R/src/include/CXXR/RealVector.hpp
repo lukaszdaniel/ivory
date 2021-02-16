@@ -77,7 +77,17 @@ extern "C"
      * @return Pointer to constant element 0 of \a x.
      */
     const double *REAL_RO(SEXP x);
-
+    double *REAL0(SEXP x);
+    double SCALAR_DVAL(SEXP x);
+    void SET_SCALAR_DVAL(SEXP x, double v);
+    const double *REAL_OR_NULL(SEXP x);
+    double REAL_ELT(SEXP x, R_xlen_t i);
+    void SET_REAL_ELT(SEXP x, R_xlen_t i, double v);
+    SEXP Rf_ScalarReal(double x);
 } // extern "C"
+
+#if defined(R_NO_REMAP) && defined(COMPILING_IVORY) && defined(__cplusplus)
+const auto ScalarReal = Rf_ScalarReal;
+#endif
 
 #endif // REALVECTOR_HPP

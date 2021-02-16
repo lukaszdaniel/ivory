@@ -41,6 +41,8 @@
 #define R_USE_SIGNALS 1
 
 #include <CXXR/String.hpp>
+#include <CXXR/StringVector.hpp>
+#include <CXXR/PairList.hpp>
 #include <Localization.h>
 #include <RContext.h>
 #include <Defn.h>

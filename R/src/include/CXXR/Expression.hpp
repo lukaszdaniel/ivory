@@ -135,6 +135,30 @@ extern "C"
     * @return Pointer to the constructed list.
     */
    SEXP Rf_lcons(SEXP cr, SEXP tl);
+
+   /* Language based list constructs.  These are identical to the list */
+   /* constructs, but the results can be evaluated. */
+
+   SEXP Rf_lang1(SEXP s);
+   SEXP Rf_lang2(SEXP s, SEXP t);
+   SEXP Rf_lang3(SEXP s, SEXP t, SEXP u);
+   SEXP Rf_lang4(SEXP s, SEXP t, SEXP u, SEXP v);
+   SEXP Rf_lang5(SEXP s, SEXP t, SEXP u, SEXP v, SEXP w);
+   SEXP Rf_lang6(SEXP s, SEXP t, SEXP u, SEXP v, SEXP w, SEXP x);
+   /* DIFFERENT than R's  is.language(.) in ../main/coerce.cpp [do_is(), case 301:]
+    *                                    which is   <=>  SYMSXP || LANGSXP || EXPRSXP */
+   Rboolean Rf_isLanguage(SEXP s);
 }
+
+#if defined(R_NO_REMAP) && defined(COMPILING_IVORY) && defined(__cplusplus)
+const auto lang1 = Rf_lang1;
+const auto lang2 = Rf_lang2;
+const auto lang3 = Rf_lang3;
+const auto lang4 = Rf_lang4;
+const auto lang5 = Rf_lang5;
+const auto lang6 = Rf_lang6;
+const auto lcons = Rf_lcons;
+const auto isLanguage = Rf_isLanguage;
+#endif
 
 #endif /* EXPRESSION_HPP */

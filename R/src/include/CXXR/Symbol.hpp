@@ -403,6 +403,7 @@ extern "C"
      * construction.
      */
     void SET_INTERNAL(SEXP x, SEXP v);
+    Rboolean Rf_isUserBinop(SEXP s);
 } // extern "C"
 
 namespace R
@@ -420,5 +421,9 @@ namespace R
      */
     SEXP mkSYMSXP(SEXP name, SEXP value);
 } // namespace R
+
+#if defined(R_NO_REMAP) && defined(COMPILING_IVORY) && defined(__cplusplus)
+const auto isUserBinop = Rf_isUserBinop;
+#endif
 
 #endif /* SYMBOL_HPP */

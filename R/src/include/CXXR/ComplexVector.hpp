@@ -74,6 +74,17 @@ extern "C"
      * @return Pointer to constant element 0 of \a x.
      */
     const Rcomplex *COMPLEX_RO(SEXP x);
+    Rcomplex *COMPLEX0(SEXP x);
+    Rcomplex SCALAR_CVAL(SEXP x);
+    void SET_SCALAR_CVAL(SEXP x, Rcomplex v);
+    const Rcomplex *COMPLEX_OR_NULL(SEXP x);
+    Rcomplex COMPLEX_ELT(SEXP x, R_xlen_t i);
+    void SET_COMPLEX_ELT(SEXP x, R_xlen_t i, Rcomplex v);
+    SEXP Rf_ScalarComplex(Rcomplex x);
 } // extern "C"
+
+#if defined(R_NO_REMAP) && defined(COMPILING_IVORY) && defined(__cplusplus)
+const auto ScalarComplex = Rf_ScalarComplex;
+#endif
 
 #endif // COMPLEXVECTOR_HPP

@@ -29,6 +29,10 @@
 
 #include <RContext.h>
 #include <CXXR/GCRoot.hpp>
+#include <CXXR/Expression.hpp>
+#include <CXXR/IntVector.hpp>
+#include <CXXR/RealVector.hpp>
+#include <CXXR/StringVector.hpp>
 #include <IOStuff.h>		/*-> Defn.h */
 #include <Fileio.h>
 #include <Parse.h>

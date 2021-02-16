@@ -136,6 +136,11 @@ extern "C"
      * @return The value of the \a i 'th element.
      */
     SEXP VECTOR_ELT(SEXP x, R_xlen_t i);
+    Rboolean Rf_isNewList(SEXP s);
 }
+
+#if defined(R_NO_REMAP) && defined(COMPILING_IVORY) && defined(__cplusplus)
+const auto isNewList = Rf_isNewList;
+#endif
 
 #endif /* LISTVECTOR_HPP */

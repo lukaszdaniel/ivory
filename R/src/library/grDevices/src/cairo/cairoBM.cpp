@@ -37,6 +37,11 @@
 
  */
 
+#include <CXXR/Expression.hpp>
+#include <CXXR/VectorBase.hpp>
+#include <CXXR/IntVector.hpp>
+#include <CXXR/StringVector.hpp>
+
 #ifdef _WIN32
 //#define HAVE_PANGOCAIRO 1
 #define HAVE_CAIRO_SVG 1

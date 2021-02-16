@@ -28,6 +28,8 @@
 # define SQRTL sqrt
 #endif
 
+#include <CXXR/VectorBase.hpp>
+#include <CXXR/IntVector.hpp>
 #include <Defn.h>
 #include <Rmath.h>
 #include <R_ext/Minmax.h>

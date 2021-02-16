@@ -30,6 +30,8 @@
 #define R_USE_SIGNALS 1	/* for Parse.h */
 
 #include <CXXR/String.hpp>
+#include <CXXR/Expression.hpp>
+#include <CXXR/StringVector.hpp>
 #include <Localization.h>
 #include <RContext.h>
 #include <Defn.h>

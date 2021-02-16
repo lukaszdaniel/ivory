@@ -228,4 +228,38 @@ namespace CXXR
 
 } // namespace CXXR
 
+extern "C"
+{
+    /**
+     * @brief Is an object of numeric type.
+     *
+     * @todo the LGLSXP case should be excluded here
+     *       (really? in many places we affirm they are treated like INTs)
+     */
+
+    Rboolean Rf_isNumeric(SEXP s);
+
+    /**
+     *  @brief Is an object "Numeric" or  complex
+     */
+    Rboolean Rf_isNumber(SEXP s);
+}
+
+#if defined(R_NO_REMAP) && defined(COMPILING_IVORY) && defined(__cplusplus)
+const auto isNumeric = Rf_isNumeric;
+const auto isNumber = Rf_isNumber;
+#endif
+
+#ifdef STRICT_TYPECHECK
+#define CHECK_BOUNDS_ELT(x, i)                      \
+    do                                              \
+    {                                               \
+        if (i < 0 || i > XLENGTH(x))                \
+            Rf_error(_("subscript out of bounds")); \
+    } while (0)
+
+#else
+#define CHECK_BOUNDS_ELT(x, i) do { } while(0)
+#endif
+
 #endif // FIXEDVECTOR_HPP

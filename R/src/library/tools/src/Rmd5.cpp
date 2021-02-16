@@ -23,6 +23,8 @@
 #include <config.h>
 #endif
 
+#include <CXXR/VectorBase.hpp>
+#include <CXXR/StringVector.hpp>
 #include <Defn.h>
 
 #include "tools.h"

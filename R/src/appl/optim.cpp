@@ -22,6 +22,7 @@
 #endif
 
 #include <CXXR/GCRoot.hpp>
+#include <CXXR/VectorBase.hpp>
 #include <Localization.h>
 #include <Defn.h>
 #include <R_ext/Random.h> /* for the random number generation in samin() */

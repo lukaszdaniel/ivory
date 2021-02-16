@@ -30,6 +30,9 @@
 
 #include <CXXR/BuiltInFunction.hpp>
 #include <CXXR/String.hpp>
+#include <CXXR/Expression.hpp>
+#include <CXXR/StringVector.hpp>
+#include <CXXR/IntVector.hpp>
 #include <Localization.h>
 #include <Defn.h>
 #include <Internal.h>

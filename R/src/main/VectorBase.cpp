@@ -110,3 +110,215 @@ namespace CXXR
         SEXP_downcast<VectorBase *>(x)->setGrowable(true);
     }
 } // namespace CXXR
+
+// ***** C interface *****
+
+#ifdef STRICT_TYPECHECK
+extern inline void CHKVEC(SEXP x)
+{
+    switch (TYPEOF(x))
+    {
+    case CHARSXP:
+    case LGLSXP:
+    case INTSXP:
+    case REALSXP:
+    case CPLXSXP:
+    case STRSXP:
+    case VECSXP:
+    case EXPRSXP:
+    case RAWSXP:
+    case WEAKREFSXP:
+        break;
+    default:
+        Rf_error(_("cannot get data pointer of '%s' objects"), Rf_type2char(TYPEOF(x)));
+    }
+}
+#else
+# define CHKVEC(x) do {} while(0)
+#endif
+
+R_xlen_t XLENGTH_EX(SEXP x)
+{
+    return ALTREP(x) ? ALTREP_LENGTH(x) : STDVEC_LENGTH(x);
+}
+
+R_xlen_t XTRUELENGTH(SEXP x)
+{
+    return ALTREP(x) ? ALTREP_TRUELENGTH(x) : STDVEC_TRUELENGTH(x);
+}
+
+int LENGTH_EX(SEXP x, const char *file, int line)
+{
+    if (!x || x == R_NilValue)
+        return 0;
+    R_xlen_t len = XLENGTH(x);
+#ifdef LONG_VECTOR_SUPPORT
+    if (len > R_SHORT_LEN_MAX)
+        R_BadLongVector(x, file, line);
+#endif
+    return (int)len;
+}
+
+void *DATAPTR(SEXP x)
+{
+    CHKVEC(x);
+    if (ALTREP(x))
+        return ALTVEC_DATAPTR(x);
+#ifdef CATCH_ZERO_LENGTH_ACCESS
+    /* Attempts to read or write elements of a zero length vector will
+       result in a segfault, rather than read and write random memory.
+       Returning NULL would be more natural, but Matrix seems to assume
+       that even zero-length vectors have non-NULL data pointers, so
+       return (void *) 1 instead. Zero-length CHARSXP objects still
+       have a trailing zero byte so they are not handled. */
+    else if (STDVEC_LENGTH(x) == 0 && TYPEOF(x) != CHARSXP)
+        return (void *)1;
+#endif
+    else
+        return STDVEC_DATAPTR(x);
+}
+
+const void *DATAPTR_RO(SEXP x)
+{
+    CHKVEC(x);
+    if (ALTREP(x))
+        return ALTVEC_DATAPTR_RO(x);
+    else
+        return STDVEC_DATAPTR(x);
+}
+
+const void *DATAPTR_OR_NULL(SEXP x)
+{
+    CHKVEC(x);
+    if (ALTREP(x))
+        return ALTVEC_DATAPTR_OR_NULL(x);
+    else
+        return STDVEC_DATAPTR(x);
+}
+
+/* regular Rf_allocVector() as a special case of allocVector3() with no custom allocator */
+SEXP Rf_allocVector(SEXPTYPE type, R_xlen_t length = 1)
+{
+    return Rf_allocVector3(type, length, nullptr);
+}
+
+/** @fn SEXP Rf_mkNamed(SEXPTYPE TYP, const char **names)
+ *
+ * @brief Create a named vector of type TYP
+ *
+ * @example const char *nms[] = {"xi", "yi", "zi", ""};
+ *          mkNamed(VECSXP, nms);  =~= R  list(xi=, yi=, zi=)
+ *
+ * @param TYP a vector SEXP type (e.g. REALSXP)
+ * @param names names of list elements with null string appended
+ *
+ * @return (pointer to a) named vector of type TYP
+ */
+SEXP Rf_mkNamed(SEXPTYPE TYP, const char **names)
+{
+    R_xlen_t n;
+
+    for (n = 0; strlen(names[n]) > 0; ++n)
+    {
+    }
+    CXXR::GCRoot<> ans(Rf_allocVector(TYP, n));
+    CXXR::GCRoot<> nms(Rf_allocVector(STRSXP, n));
+    for (R_xlen_t i = 0; i < n; ++i)
+        SET_STRING_ELT(nms, i, Rf_mkChar(names[i]));
+    Rf_setAttrib(ans, R_NamesSymbol, nms);
+    return ans;
+}
+
+/* from gram.y */
+
+/**
+ * @brief shortcut for ScalarString(Rf_mkChar(s))
+ * 
+ * @return string scalar
+ */
+SEXP Rf_mkString(const char *s)
+{
+    CXXR::GCRoot<> t(Rf_allocVector(STRSXP, (R_xlen_t)1));
+    SET_STRING_ELT(t, (R_xlen_t)0, Rf_mkChar(s));
+    return t;
+}
+
+Rboolean Rf_isVectorList(SEXP s)
+{
+    switch (TYPEOF(s))
+    {
+    case VECSXP:
+    case EXPRSXP:
+        return TRUE;
+    default:
+        return FALSE;
+    }
+}
+
+Rboolean Rf_isVectorAtomic(SEXP s)
+{
+    switch (TYPEOF(s))
+    {
+    case LGLSXP:
+    case INTSXP:
+    case REALSXP:
+    case CPLXSXP:
+    case STRSXP:
+    case RAWSXP:
+        return TRUE;
+    default: /* including NULL */
+        return FALSE;
+    }
+}
+
+Rboolean Rf_isVector(SEXP s) /* === isVectorList() or isVectorAtomic() */
+{
+    switch (TYPEOF(s))
+    {
+    case LGLSXP:
+    case INTSXP:
+    case REALSXP:
+    case CPLXSXP:
+    case STRSXP:
+    case RAWSXP:
+
+    case VECSXP:
+    case EXPRSXP:
+        return TRUE;
+    default:
+        return FALSE;
+    }
+}
+
+Rboolean Rf_isMatrix(SEXP s)
+{
+    SEXP t;
+    if (Rf_isVector(s))
+    {
+        t = Rf_getAttrib(s, R_DimSymbol);
+        /* You are not supposed to be able to assign a non-integer dim,
+	   although this might be possible by misuse of ATTRIB. */
+        if (TYPEOF(t) == INTSXP && LENGTH(t) == 2)
+            return TRUE;
+    }
+    return FALSE;
+}
+
+Rboolean Rf_isArray(SEXP s)
+{
+    SEXP t;
+    if (Rf_isVector(s))
+    {
+        t = Rf_getAttrib(s, R_DimSymbol);
+        /* You are not supposed to be able to assign a 0-length dim,
+	 nor a non-integer dim */
+        if ((TYPEOF(t) == INTSXP) && LENGTH(t) > 0)
+            return TRUE;
+    }
+    return FALSE;
+}
+
+Rboolean Rf_isTs(SEXP s)
+{
+    return Rboolean(Rf_isVector(s) && Rf_getAttrib(s, R_TspSymbol) != R_NilValue);
+}

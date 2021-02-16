@@ -46,6 +46,7 @@
 
 #include <CXXR/DottedArgs.hpp>
 #include <CXXR/PairList.hpp>
+#include <CXXR/StringVector.hpp>
 #include <Localization.h>
 #include <Defn.h>
 

@@ -28,6 +28,10 @@
 
 #include <CXXR/String.hpp>
 #include <CXXR/BuiltInFunction.hpp>
+#include <CXXR/PairList.hpp>
+#include <CXXR/FixedVector.hpp>
+#include <CXXR/IntVector.hpp>
+#include <CXXR/StringVector.hpp>
 #include <RContext.h>
 #include <Defn.h>
 #include <Localization.h>

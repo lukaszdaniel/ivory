@@ -154,4 +154,16 @@ extern "C"
     void SET_RDEBUG(SEXP x, int v);
 }
 
+extern "C"
+{
+    Rboolean Rf_isPrimitive(SEXP s);
+
+    Rboolean Rf_isFunction(SEXP s);
+}
+
+#if defined(R_NO_REMAP) && defined(COMPILING_IVORY) && defined(__cplusplus)
+const auto isFunction = Rf_isFunction;
+const auto isPrimitive = Rf_isPrimitive;
+#endif
+
 #endif // FUNCTIONBASE_HPP

@@ -136,10 +136,10 @@ spline_value(SEXP knots, SEXP coeff, SEXP order, SEXP x, SEXP deriv)
     int n, nk;
 
     PROTECT(knots = coerceVector(knots, REALSXP));
-    kk = REAL(knots); nk = length(knots);
+    kk = REAL(knots); nk = Rf_length(knots);
     PROTECT(coeff = coerceVector(coeff, REALSXP));
     PROTECT(x = coerceVector(x, REALSXP));
-    xx = REAL(x); n = length(x);
+    xx = REAL(x); n = Rf_length(x);
     int ord = asInteger(order);
     int der = asInteger(deriv);
     if (ord == NA_INTEGER || ord <= 0)
@@ -179,12 +179,12 @@ spline_basis(SEXP knots, SEXP order, SEXP xvals, SEXP derivs)
  * at xvals.  */
 
     PROTECT(knots = coerceVector(knots, REALSXP));
-    double *kk = REAL(knots); int nk = length(knots);
+    double *kk = REAL(knots); int nk = Rf_length(knots);
     int ord = asInteger(order);
     PROTECT(xvals = coerceVector(xvals, REALSXP));
-    double *xx = REAL(xvals); int nx = length(xvals);
+    double *xx = REAL(xvals); int nx = Rf_length(xvals);
     PROTECT(derivs = coerceVector(derivs, INTSXP));
-    int *ders = INTEGER(derivs), nd = length(derivs);
+    int *ders = INTEGER(derivs), nd = Rf_length(derivs);
 
     splPTR sp = (struct spl_struct *) R_alloc(1, sizeof(struct spl_struct));
     /* fill sp : */

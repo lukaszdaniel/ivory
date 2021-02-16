@@ -24,6 +24,8 @@
 #include <config.h>
 #endif
 
+#include <CXXR/VectorBase.hpp>
+#include <CXXR/StringVector.hpp>
 #include <Defn.h>
 #include <R_ext/GraphicsEngine.h>
 

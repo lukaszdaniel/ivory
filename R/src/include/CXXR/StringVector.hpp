@@ -163,6 +163,26 @@ extern "C"
      * to C code.
      */
     const SEXP *STRING_PTR_RO(SEXP x);
+
+    /**
+     * @brief Obtaing index of a string vector
+     *
+     * @return index of a given C string in (translated) R string vector
+     */
+    int Rf_stringPositionTr(SEXP string, const char *translatedElement);
+
+    Rboolean Rf_isValidString(SEXP x);
+
+    /* non-empty ("") valid string :*/
+    Rboolean Rf_isValidStringF(SEXP x);
+    SEXP Rf_ScalarString(SEXP x);
 } // extern "C"
+
+#if defined(R_NO_REMAP) && defined(COMPILING_IVORY) && defined(__cplusplus)
+const auto stringPositionTr = Rf_stringPositionTr;
+const auto isValidString = Rf_isValidString;
+const auto isValidStringF = Rf_isValidStringF;
+const auto ScalarString = Rf_ScalarString;
+#endif
 
 #endif // STRINGVECTOR_HPP

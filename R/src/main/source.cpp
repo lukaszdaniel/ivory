@@ -25,6 +25,8 @@
 #define R_NO_REMAP
 
 #include <CXXR/String.hpp>
+#include <CXXR/StringVector.hpp>
+#include <CXXR/PairList.hpp>
 #include <Localization.h>
 #include <RContext.h>
 #include <Parse.h> // -> IOStuff.h, Defn.h

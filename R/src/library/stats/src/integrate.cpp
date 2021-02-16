@@ -22,6 +22,9 @@
 #endif
 
 #include <cmath> // for isfinite
+#include <CXXR/RObject.hpp>
+#include <CXXR/VectorBase.hpp>
+#include <CXXR/Expression.hpp>
 #include <Rinternals.h>
 #include <R_ext/Applic.h>
 #include "localization.h"

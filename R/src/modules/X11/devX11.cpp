@@ -30,6 +30,11 @@
 #endif
 
 #include <CXXR/GCRoot.hpp>
+#include <CXXR/PairList.hpp>
+#include <CXXR/Expression.hpp>
+#include <CXXR/VectorBase.hpp>
+#include <CXXR/StringVector.hpp>
+#include <CXXR/IntVector.hpp>
 #include <Defn.h>
 #include <Localization.h>
 

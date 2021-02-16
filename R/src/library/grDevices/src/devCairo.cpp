@@ -21,9 +21,8 @@
 #include <config.h>
 #endif
 
+#include <CXXR/VectorBase.hpp>
 #include <Defn.h>
-
-
 #include <R_ext/Rdynload.h>
 #include "localization.h"
 

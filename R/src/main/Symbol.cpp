@@ -336,3 +336,16 @@ namespace CXXR
         SEXP_downcast<Symbol *>(x)->m_special_symbol = false;
     }
 } // namespace CXXR
+
+// ***** C interface *****
+
+Rboolean Rf_isUserBinop(SEXP s)
+{
+    if (TYPEOF(s) == SYMSXP)
+    {
+        const char *str = R_CHAR(PRINTNAME(s));
+        if (strlen(str) >= 2 && str[0] == '%' && str[strlen(str) - 1] == '%')
+            return TRUE;
+    }
+    return FALSE;
+}

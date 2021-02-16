@@ -26,6 +26,9 @@
 #define R_NO_REMAP
 #define HAVE_BZIP2
 
+#include <CXXR/IntVector.hpp>
+#include <CXXR/StringVector.hpp>
+#include <CXXR/PairList.hpp>
 #include <Localization.h>
 #include <Defn.h>
 #include <Fileio.h> /* for R_fopen */
