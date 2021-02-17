@@ -264,6 +264,6 @@ extern "C"
         size_t stack_size = size_t(static_cast<const char *>(stack_sizep) - static_cast<const char *>(nullptr));
         CXXR::RAllocStack::restoreSize(stack_size);
     }
-} /* extern "C" */
+} // extern "C"
 
 #endif // RALLOCSTACK_HPP

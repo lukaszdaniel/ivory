@@ -156,6 +156,6 @@ extern "C"
      * @return The value of the \a i 'th element.
      */
     SEXP XVECTOR_ELT(SEXP x, R_xlen_t i);
-}
+} // extern "C"
 
 #endif /* EXPRESSIONVECTOR_HPP */

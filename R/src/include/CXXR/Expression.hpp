@@ -148,7 +148,7 @@ extern "C"
    /* DIFFERENT than R's  is.language(.) in ../main/coerce.cpp [do_is(), case 301:]
     *                                    which is   <=>  SYMSXP || LANGSXP || EXPRSXP */
    Rboolean Rf_isLanguage(SEXP s);
-}
+} // extern "C"
 
 #if defined(R_NO_REMAP) && defined(COMPILING_IVORY) && defined(__cplusplus)
 const auto lang1 = Rf_lang1;

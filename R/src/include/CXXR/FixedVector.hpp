@@ -243,7 +243,7 @@ extern "C"
      *  @brief Is an object "Numeric" or  complex
      */
     Rboolean Rf_isNumber(SEXP s);
-}
+} // extern "C"
 
 #if defined(R_NO_REMAP) && defined(COMPILING_IVORY) && defined(__cplusplus)
 const auto isNumeric = Rf_isNumeric;

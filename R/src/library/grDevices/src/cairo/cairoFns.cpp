@@ -1396,7 +1396,10 @@ static cairo_font_face_t *FC_getFont(const char *family, int style)
 
     /* find candidate fonts via FontConfig */
     if (!fc_loaded) {
-	if (!FcInit()) return nullptr;
+	if (!FcInit()) {
+	    warning(_("unable to initialize FontConfig in cairo-ft font selection"));
+	    return nullptr;
+	}
 	fc_loaded = 1;
     }
     style &= 3;

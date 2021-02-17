@@ -465,6 +465,6 @@ extern "C"
     {
         CXXR::GCRootBase::unprotectPtr(node);
     }
-} /* extern "C" */
+} // extern "C"
 
 #endif // GCROOT_HPP

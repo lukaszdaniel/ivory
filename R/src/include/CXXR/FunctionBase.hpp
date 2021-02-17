@@ -152,14 +152,9 @@ extern "C"
      * for environments.
      */
     void SET_RDEBUG(SEXP x, int v);
-}
-
-extern "C"
-{
     Rboolean Rf_isPrimitive(SEXP s);
-
     Rboolean Rf_isFunction(SEXP s);
-}
+} // extern "C"
 
 #if defined(R_NO_REMAP) && defined(COMPILING_IVORY) && defined(__cplusplus)
 const auto isFunction = Rf_isFunction;

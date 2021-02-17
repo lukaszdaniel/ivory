@@ -88,6 +88,6 @@ extern "C"
     SEXP R_altrep_data2(SEXP x);
     void R_set_altrep_data1(SEXP x, SEXP v);
     void R_set_altrep_data2(SEXP x, SEXP v);
-}
+} // extern "C"
 
 #endif /* RALTREP_HPP */

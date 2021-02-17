@@ -104,4 +104,46 @@
 #include <CXXR/WeakRef.hpp>
 #include <CXXR/ExternalPointer.hpp>
 
+/*
+// Not yet brought into use from rho to CXXR
+#include <CXXR/AddressSanitizer.hpp>
+#include <CXXR/AllocationTable.hpp>
+#include <CXXR/AllocatorSuperblock.hpp>
+#include <CXXR/ArgList.hpp>
+#include <CXXR/ArgMatcher.hpp>
+#include <CXXR/BailoutContext.hpp>
+#include <CXXR/Bailout.hpp>
+#include <CXXR/BinaryFunction.hpp>
+#include <CXXR/Browser.hpp>
+#include <CXXR/ClosureContext.hpp>
+#include <CXXR/CommandChronicle.hpp>
+#include <CXXR/CommandTerminated.hpp>
+#include <CXXR/config.hpp>
+#include <CXXR/DotInternal.hpp>
+#include <CXXR/ElementTraits.hpp>
+#include <CXXR/errors.hpp>
+#include <CXXR/Evaluator_Context.hpp>
+#include <CXXR/Evaluator.hpp>
+#include <CXXR/FrameDescriptor.hpp>
+#include <CXXR/FunctionContext.hpp>
+#include <CXXR/GCNodeAllocator.hpp>
+#include <CXXR/GCStackFrameBoundary.hpp>
+#include <CXXR/GCStackRoot.hpp>
+#include <CXXR/LoopBailout.hpp>
+#include <CXXR/LoopException.hpp>
+#include <CXXR/NodeStack.hpp>
+#include <CXXR/PlainContext.hpp>
+#include <CXXR/ProtectStack.hpp>
+#include <CXXR/Provenance.hpp>
+#include <CXXR/ProvenanceTracker.hpp>
+#include <CXXR/ReturnBailout.hpp>
+#include <CXXR/ReturnException.hpp>
+#include <CXXR/S3Launcher.hpp>
+#include <CXXR/StackChecker.hpp>
+#include <CXXR/strutil.hpp>
+#include <CXXR/Subscripting.hpp>
+#include <CXXR/UnaryFunction.hpp>
+#include <CXXR/unrho.hpp>
+*/
+
 #endif // CXXR_HPP

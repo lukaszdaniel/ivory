@@ -401,6 +401,6 @@ extern "C"
      * @return Pointer to the created object.
      */
     SEXP Rf_allocSExp(SEXPTYPE t);
-}
+} // extern "C"
 
 #endif /* CONSCELL_HPP */
