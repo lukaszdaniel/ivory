@@ -171,8 +171,8 @@ namespace CXXR
             abort();
         }
 #endif
-        const Symbol &sym = *SEXP_downcast<Symbol *>(x);
-        return const_cast<String *>(sym.name());
+        const Symbol *sym = SEXP_downcast<Symbol *>(x);
+        return const_cast<String *>(sym->name());
     }
 
     RObject *Symbol::symvalue(RObject *x)
@@ -189,8 +189,8 @@ namespace CXXR
             abort();
         }
 #endif
-        Symbol &sym = *SEXP_downcast<Symbol *>(x);
-        return sym.value();
+        Symbol *sym = SEXP_downcast<Symbol *>(x);
+        return sym->value();
     }
 
     RObject *Symbol::internal(RObject *x)
@@ -207,8 +207,8 @@ namespace CXXR
             abort();
         }
 #endif
-        Symbol &sym = *SEXP_downcast<Symbol *>(x);
-        return const_cast<BuiltInFunction *>(sym.internalFunction());
+        Symbol *sym = SEXP_downcast<Symbol *>(x);
+        return const_cast<BuiltInFunction *>(sym->internalFunction());
     }
 
     unsigned int Symbol::ddval(RObject *x) /* for ..1, ..2 etc */
@@ -250,8 +250,8 @@ namespace CXXR
             abort();
         }
 #endif
-        Symbol &sym = *SEXP_downcast<Symbol *>(x);
-        sym.setValue(val);
+        Symbol *sym = SEXP_downcast<Symbol *>(x);
+        sym->setValue(val);
     }
 
     void Symbol::set_internal(RObject *x, RObject *v)
@@ -268,9 +268,9 @@ namespace CXXR
             abort();
         }
 #endif
-        Symbol &sym = *SEXP_downcast<Symbol *>(x);
+        Symbol *sym = SEXP_downcast<Symbol *>(x);
         BuiltInFunction *fun = SEXP_downcast<BuiltInFunction *>(v);
-        sym.setInternalFunction(fun);
+        sym->setInternalFunction(fun);
     }
 
     void Symbol::set_base_sym_cached(RObject *x)

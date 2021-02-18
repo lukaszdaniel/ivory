@@ -43,10 +43,6 @@
 
 // #define TESTING_WRITE_BARRIER
 
-// #ifndef TESTING_WRITE_BARRIER
-// # define USE_RINTERNALS
-// #endif
-
 #include <R_ext/Visibility.h>
 
 #ifdef __MAIN__
@@ -242,11 +238,6 @@ constexpr int MAXIDSIZE = 10000; /* Largest symbol size,                  \
                Was 256 prior to 2.13.0, now just a sanity check. \
             */
 
-#ifdef USE_RINTERNALS
-
-// Content moved to RObject.hpp
-
-#else /* of USE_RINTERNALS */
 
 Rboolean IS_ACTIVE_BINDING(SEXP b);
 Rboolean BINDING_IS_LOCKED(SEXP b);
@@ -265,7 +256,6 @@ void SET_NO_SPECIAL_SYMBOLS(SEXP b);
 void UNSET_NO_SPECIAL_SYMBOLS(SEXP b);
 Rboolean NO_SPECIAL_SYMBOLS(SEXP b);
 
-#endif /* USE_RINTERNALS */
 
 /* Miscellaneous Definitions */
 inline bool streql(const char *s, const char *t)

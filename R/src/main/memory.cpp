@@ -724,7 +724,7 @@ void R_gc_torture(int gap, int wait, Rboolean inhibit)
             GCManager::setInhibitor(inhibit);
     }
     else
-        GCManager::setInhibitor(false;
+        GCManager::setInhibitor(false);
 #endif
 }
 

@@ -126,8 +126,8 @@ namespace CXXR
             abort();
         }
 #endif
-        ConsCell &cc = *SEXP_downcast<ConsCell *>(e, false);
-        return cc.tag();
+        ConsCell *cc = SEXP_downcast<ConsCell *>(e, false);
+        return cc->tag();
     }
 
     void ConsCell::set_tag(RObject *x, RObject *v)
@@ -147,8 +147,8 @@ namespace CXXR
             abort();
         }
 #endif
-        ConsCell &cc = *SEXP_downcast<ConsCell *>(x, false);
-        cc.setTag(v);
+        ConsCell *cc = SEXP_downcast<ConsCell *>(x, false);
+        cc->setTag(v);
     }
 
     RObject *ConsCell::car0(RObject *e)
@@ -168,8 +168,8 @@ namespace CXXR
             abort();
         }
 #endif
-        ConsCell &cc = *SEXP_downcast<ConsCell *>(e, false);
-        return cc.car();
+        ConsCell *cc = SEXP_downcast<ConsCell *>(e, false);
+        return cc->car();
     }
 
     void ConsCell::set_car0(RObject *x, RObject *v)
@@ -189,8 +189,8 @@ namespace CXXR
             abort();
         }
 #endif
-        ConsCell &cc = *SEXP_downcast<ConsCell *>(x, false);
-        cc.setCar(v);
+        ConsCell *cc = SEXP_downcast<ConsCell *>(x, false);
+        cc->setCar(v);
     }
 
     RObject *ConsCell::cdr(RObject *e)
@@ -210,8 +210,8 @@ namespace CXXR
             abort();
         }
 #endif
-        ConsCell &cc = *SEXP_downcast<ConsCell *>(e, false);
-        return cc.tail();
+        ConsCell *cc = SEXP_downcast<ConsCell *>(e, false);
+        return cc->tail();
     }
 
     void ConsCell::set_cdr(RObject *x, RObject *v)
@@ -231,9 +231,9 @@ namespace CXXR
             abort();
         }
 #endif
-        ConsCell &cc = *SEXP_downcast<ConsCell *>(x, false);
+        ConsCell *cc = SEXP_downcast<ConsCell *>(x, false);
         PairList *tl = SEXP_downcast<PairList *>(v);
-        cc.setTail(tl);
+        cc->setTail(tl);
     }
 
     double ConsCell::bndcell_dval(RObject *x)

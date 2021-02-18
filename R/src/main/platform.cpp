@@ -1,6 +1,6 @@
 /*
  *  R : A Computer Language for Statistical Data Analysis
- *  Copyright (C) 1998--2020 The R Core Team
+ *  Copyright (C) 1998--2021 The R Core Team
  *  Copyright (C) 1995, 1996  Robert Gentleman and Ross Ihaka
  *
  *  This program is free software; you can redistribute it and/or modify
@@ -360,16 +360,20 @@ HIDDEN const char *R::R_nativeEncoding(void)
 /* retrieves information about the current locale and
    sets the corresponding variables (known_to_be_utf8,
    known_to_be_latin1, utf8locale, latin1locale and mbcslocale) */
+
+static char codeset[R_CODESET_MAX + 1];
 HIDDEN void R::R_check_locale(void)
 {
     known_to_be_utf8 = utf8locale = false;
     known_to_be_latin1 = latin1locale = FALSE;
     mbcslocale = FALSE;
     strcpy(native_enc, "ASCII");
+    strcpy(codeset, "");
 #ifdef HAVE_LANGINFO_CODESET
     /* not on Windows */
     {
-	char  *p = nl_langinfo(CODESET);
+	char *p = nl_langinfo(CODESET);
+	strcpy(codeset, p);  // copy just in case something else calls nl_langinfo.
 	/* more relaxed due to Darwin: CODESET is case-insensitive and
 	   latin1 is ISO8859-1 */
 	if (R_strieql(p, "UTF-8")) known_to_be_utf8 = utf8locale = true;
@@ -2904,7 +2908,7 @@ HIDDEN SEXP do_l10n_info(SEXP call, SEXP op, SEXP args, SEXP env)
 #ifdef _WIN32
     int len = 5;
 #else
-    int len = 3;
+    int len = 4;
 #endif
     SEXP ans, names;
     checkArity(op, args);
@@ -2916,6 +2920,10 @@ HIDDEN SEXP do_l10n_info(SEXP call, SEXP op, SEXP args, SEXP env)
     SET_VECTOR_ELT(ans, 0, ScalarLogical(mbcslocale));
     SET_VECTOR_ELT(ans, 1, ScalarLogical(utf8locale));
     SET_VECTOR_ELT(ans, 2, ScalarLogical(latin1locale));
+#ifndef _WIN32
+    SET_STRING_ELT(names, 3, mkChar("codeset"));
+    SET_VECTOR_ELT(ans, 3, mkString(codeset));
+#endif
 #ifdef _WIN32
     SET_STRING_ELT(names, 3, mkChar("codepage"));
     SET_VECTOR_ELT(ans, 3, ScalarInteger(localeCP));

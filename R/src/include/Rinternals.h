@@ -34,10 +34,6 @@
 #ifndef R_INTERNALS_H_
 #define R_INTERNALS_H_
 
-// #ifdef USE_RINTERNALS
-// #undef USE_RINTERNALS
-// #endif
-
 #ifdef __cplusplus
 #include <cstdio>
 #include <climits>
@@ -122,13 +118,6 @@ extern "C" {
 
 const char *R_CHAR(SEXP x);
 #define CHAR(x)		R_CHAR(x)
-// ======================= USE_RINTERNALS section
-#if defined(USE_RINTERNALS) && defined(COMPILING_IVORY) && defined(__cplusplus)
-
-// Content moved to RObject.hpp
-
-#else /* not USE_RINTERNALS */
-// ======================= not USE_RINTERNALS section
 
 /* Various tests with macro versions in the second USE_RINTERNALS section */
 Rboolean (Rf_isNull)(SEXP s);
@@ -141,8 +130,6 @@ Rboolean (Rf_isEnvironment)(SEXP s);
 Rboolean (Rf_isString)(SEXP s);
 Rboolean (Rf_isObject)(SEXP s);
 Rboolean (Rf_isRaw)(SEXP s);
-
-#endif /* USE_RINTERNALS */
 
 
 #define IS_SIMPLE_SCALAR(x, type) \
