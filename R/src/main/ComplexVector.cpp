@@ -106,7 +106,7 @@ namespace CXXR
 Rcomplex *COMPLEX0(SEXP x)
 {
     CHECK_STDVEC_CPLX(x);
-    return (Rcomplex *)STDVEC_DATAPTR(x);
+    return static_cast<Rcomplex *>(STDVEC_DATAPTR(x));
 }
 
 Rcomplex SCALAR_CVAL(SEXP x)
@@ -124,7 +124,7 @@ void SET_SCALAR_CVAL(SEXP x, Rcomplex v)
 const Rcomplex *COMPLEX_OR_NULL(SEXP x)
 {
     CHECK_VECTOR_CPLX(x);
-    return (Rcomplex *)(ALTREP(x) ? ALTVEC_DATAPTR_OR_NULL(x) : STDVEC_DATAPTR(x));
+    return static_cast<const Rcomplex *>(ALTREP(x) ? ALTVEC_DATAPTR_OR_NULL(x) : STDVEC_DATAPTR(x));
 }
 
 Rcomplex COMPLEX_ELT(SEXP x, R_xlen_t i)

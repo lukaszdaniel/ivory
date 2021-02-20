@@ -257,16 +257,6 @@ void UNSET_NO_SPECIAL_SYMBOLS(SEXP b);
 Rboolean NO_SPECIAL_SYMBOLS(SEXP b);
 
 
-/* Miscellaneous Definitions */
-inline bool streql(const char *s, const char *t)
-{
-    return (strcmp(s, t) == 0);
-}
-inline bool streqln(const char *s, const char *t, size_t n)
-{
-    return (strncmp(s, t, n) == 0);
-}
-
 /* Arithmetic and Relation Operators */
 enum ARITHOP_TYPE
 {
@@ -984,7 +974,7 @@ namespace R
     void InitDynload(void);
 } // namespace R
 
-void R_CleanTempDir(void);
+extern "C" void R_CleanTempDir(void);
 
 namespace R
 {

@@ -26,13 +26,14 @@
 #endif
 
 #include <CXXR/VectorBase.hpp>
+#include <CXXR/String.hpp>
 #include <CXXR/StringVector.hpp>
 #include <Defn.h>
 #include "localization.h"
 #include <Graphics.h>
 #include <GraphicsBase.h>
 
-
+using namespace R;
 
 R_INLINE static GPar* dpSavedptr(pGEDevDesc dd) {
     if (baseRegisterIndex == -1)

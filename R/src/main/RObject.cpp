@@ -474,6 +474,44 @@ namespace CXXR
         // x->m_gpbits |= ACTIVE_BINDING_MASK;
         x->m_active_binding = true;
     }
+
+    void RObject::fix_refcnt(RObject *x, RObject *old, RObject *new_)
+    {
+#ifdef COMPUTE_REFCNT_VALUES
+        if (!TRACKREFS(x))
+            return;
+        if (old == new_)
+            return;
+
+        if (old)
+            DECREMENT_REFCNT(old);
+        if (new_)
+            INCREMENT_REFCNT(new_);
+#endif
+    }
+
+    void RObject::fix_binding_refcnt(RObject *x, RObject *old, RObject *new_)
+    {
+#ifdef COMPUTE_REFCNT_VALUES
+        if (!TRACKREFS(x))
+            return;
+        if (old == new_)
+            return;
+
+        if (old)
+        {
+            if (ASSIGNMENT_PENDING(x))
+                SET_ASSIGNMENT_PENDING(x, FALSE);
+            else
+                DECREMENT_REFCNT(old);
+        }
+        if (new_)
+            INCREMENT_REFCNT(new_);
+#else
+        if (ASSIGNMENT_PENDING(x) && old && old != new_)
+            SET_ASSIGNMENT_PENDING(x, FALSE);
+#endif
+    }
 } // namespace CXXR
 
 // ***** C interface *****
@@ -569,14 +607,7 @@ SEXP R_FixupRHS(SEXP x, SEXP y)
 
 Rboolean Rf_isFrame(SEXP s)
 {
-    if (OBJECT(s))
-    {
-        SEXP klass = Rf_getAttrib(s, R_ClassSymbol);
-        for (int i = 0; i < Rf_length(klass); ++i)
-            if (strcmp(R_CHAR(STRING_ELT(klass, i)), "data.frame") == 0)
-                return TRUE;
-    }
-    return FALSE;
+    return Rf_inherits(s, "data.frame");
 }
 
 SEXP Rf_ScalarLogical(int x)
@@ -590,12 +621,11 @@ SEXP Rf_ScalarLogical(int x)
         return R_FalseValue;
 }
 
-Rboolean Rf_conformable(SEXP x, SEXP y)
+Rboolean Rf_conformable(SEXP x_, SEXP y)
 {
     int n;
-    PROTECT(x = Rf_getAttrib(x, R_DimSymbol));
+    CXXR::GCRoot<> x(Rf_getAttrib(x_, R_DimSymbol));
     y = Rf_getAttrib(y, R_DimSymbol);
-    UNPROTECT(1);
     if ((n = Rf_length(x)) != Rf_length(y))
         return FALSE;
     for (int i = 0; i < n; i++)
@@ -610,7 +640,7 @@ Rboolean Rf_inherits(SEXP s, const char *name)
     {
         SEXP klass = Rf_getAttrib(s, R_ClassSymbol);
         int nclass = Rf_length(klass);
-        for (int i = 0; i < nclass; i++)
+        for (int i = 0; i < nclass; ++i)
         {
             if (strcmp(R_CHAR(STRING_ELT(klass, i)), name) == 0)
                 return TRUE;

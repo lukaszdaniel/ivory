@@ -26,6 +26,7 @@
 
 #include <CXXR/BuiltInFunction.hpp>
 #include <CXXR/VectorBase.hpp>
+#include <CXXR/String.hpp>
 #include <CXXR/StringVector.hpp>
 #include <CXXR/PairList.hpp>
 #include <Localization.h>

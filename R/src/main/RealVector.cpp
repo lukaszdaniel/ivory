@@ -106,7 +106,7 @@ namespace CXXR
 double *REAL0(SEXP x)
 {
     CHECK_STDVEC_REAL(x);
-    return (double *)STDVEC_DATAPTR(x);
+    return static_cast<double *>(STDVEC_DATAPTR(x));
 }
 
 double SCALAR_DVAL(SEXP x)
@@ -124,7 +124,7 @@ void SET_SCALAR_DVAL(SEXP x, double v)
 const double *REAL_OR_NULL(SEXP x)
 {
     CHECK_VECTOR_REAL(x);
-    return (double *)(ALTREP(x) ? ALTVEC_DATAPTR_OR_NULL(x) : STDVEC_DATAPTR(x));
+    return static_cast<const double *>(ALTREP(x) ? ALTVEC_DATAPTR_OR_NULL(x) : STDVEC_DATAPTR(x));
 }
 
 double REAL_ELT(SEXP x, R_xlen_t i)

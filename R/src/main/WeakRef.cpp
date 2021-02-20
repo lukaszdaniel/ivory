@@ -47,44 +47,421 @@ extern "C"
 {
 	extern SEXP R_HandlerStack;
 	extern SEXP R_RestartStack;
+	extern Rboolean R_interrupts_suspended;
 }
 
-int WeakRef::s_count = 0;
+namespace CXXR
+{
+	int WeakRef::s_count = 0;
+
+	namespace
+	{
+		// Used in {,un}packGPBits():
+		// constexpr unsigned int READY_TO_FINALIZE_MASK = 1;
+		constexpr unsigned int FINALIZE_ON_EXIT_MASK = 2;
+	} // namespace
+
+	WeakRef::WeakRef(RObject *key, RObject *value, RObject *R_finalizer,
+					 bool finalize_on_exit)
+		: RObject(WEAKREFSXP), m_key(key), m_value(value), m_Rfinalizer(R_finalizer), m_Cfinalizer(nullptr),
+		  m_ready_to_finalize(false),
+		  m_finalize_on_exit(finalize_on_exit)
+	{
+		expose();
+		if (m_key)
+			m_key->expose();
+		else
+			tombstone();
+
+		if (m_key)
+		{
+			// Force old-to-new checks:
+			m_key->propagateAge(m_value);
+			m_key->propagateAge(m_Rfinalizer);
+		}
+
+		getLive()->push_back(this);
+		m_lit = std::prev(getLive()->end());
+
+		if (!m_key)
+			tombstone();
+		else
+			switch (m_key->sexptype())
+			{
+			case ENVSXP:
+			case EXTPTRSXP:
+			case BCODESXP:
+				break;
+			default:
+				Rf_error(_("can only weakly reference/finalize reference objects"));
+			}
+		++s_count;
+	}
+
+	WeakRef::WeakRef(RObject *key, RObject *value, R_CFinalizer_t C_finalizer,
+					 bool finalize_on_exit)
+		: RObject(WEAKREFSXP), m_key(key), m_value(value), m_Rfinalizer(nullptr), m_Cfinalizer(C_finalizer),
+		  m_ready_to_finalize(false), m_finalize_on_exit(finalize_on_exit)
+	{
+		expose();
+		if (m_key)
+			m_key->expose();
+		else
+			tombstone();
+
+		if (m_key)
+		{
+			// Force old-to-new check:
+			m_key->propagateAge(m_value);
+		}
+
+		getLive()->push_back(this);
+		m_lit = std::prev(getLive()->end());
+
+		if (!m_key)
+			tombstone();
+		++s_count;
+	}
+
+	WeakRef::~WeakRef()
+	{
+		WRList *wrl = wrList();
+		if (wrl)
+			wrl->erase(m_lit);
+		--s_count;
+	}
+
+	unsigned int WeakRef::packGPBits() const
+	{
+		unsigned int ans = RObject::packGPBits();
+		if (m_finalize_on_exit)
+			ans |= FINALIZE_ON_EXIT_MASK;
+		return ans;
+	}
+
+	void WeakRef::unpackGPBits(unsigned int gpbits)
+	{
+		RObject::unpackGPBits(gpbits);
+		m_finalize_on_exit = ((gpbits & FINALIZE_ON_EXIT_MASK) != 0);
+	}
+
+	bool WeakRef::check()
+	{
+#ifndef NDEBUG
+		// Check sizes:
+		size_t total_size = getLive()->size() + getFinalizationPending()->size() + getTombstone()->size();
+		if (total_size != size_t(s_count))
+		{
+			cerr << "WeakRef::check() : tally error\n"
+				 << "live size: " << getLive()->size()
+				 << "\nfinalization pending size: "
+				 << getFinalizationPending()->size()
+				 << "\ntombstone size: " << getTombstone()->size()
+				 << "\ns_count: " << s_count << "\n";
+			abort();
+		}
+		// Check the live list:
+		for (const WeakRef *wr : *getLive())
+		{
+			if (wr->m_ready_to_finalize)
+			{
+				cerr << "Node on live list set READY_TO_FINALIZE\n";
+				abort();
+			}
+			if (!wr->m_key)
+			{
+				cerr << "Node on live list with null key\n";
+				abort();
+			}
+		}
+		// Check finalization pending:
+		for (const WeakRef *wr : *getFinalizationPending())
+		{
+			if (!wr->m_ready_to_finalize)
+			{
+				cerr << "Node on finalization pending list not READY_TO_FINALIZE\n";
+				abort();
+			}
+			if (!wr->m_key)
+			{
+				cerr << "Node on finalization pending list with null key\n";
+				abort();
+			}
+			if (!wr->m_Rfinalizer && !wr->m_Cfinalizer)
+			{
+				cerr << "Node on finalization pending list without finalizer\n";
+				abort();
+			}
+		}
+		// Check tombstone:
+		for (const WeakRef *wr : *getTombstone())
+		{
+			if (wr->m_ready_to_finalize)
+			{
+				cerr << "Node on tombstone list set READY_TO_FINALIZE\n";
+				abort();
+			}
+			if (wr->m_key)
+			{
+				cerr << "Node on tombstone list with non-null key\n";
+				abort();
+			}
+		}
+#endif
+		return true;
+	}
+
+	WeakRef::WRList *WeakRef::getLive()
+	{
+		static WRList *live = new WRList();
+		return live;
+	}
+
+	WeakRef::WRList *WeakRef::getFinalizationPending()
+	{
+		static WRList *finalization_pending = new WRList();
+		return finalization_pending;
+	}
+
+	WeakRef::WRList *WeakRef::getTombstone()
+	{
+		static WRList *tombstone = new WRList();
+		return tombstone;
+	}
+
+	// WeakRef::finalize() is in memory.cpp (for the time being, until
+	// eval() is declared in a CXXR header).
+
+	void WeakRef::markThru(unsigned int max_gen)
+	{
+		WeakRef::check();
+		GCNode::Marker marker(max_gen);
+		WRList newlive;
+
+		WRList *live = getLive();
+		WRList *finalization_pending = getFinalizationPending();
+
+		// Step 2-3 of algorithm.  Mark the value and R finalizer if the
+		// key is marked, or in a generation not being collected.
+		{
+			bool newmarks;
+			do
+			{
+				newmarks = false;
+				WRList::iterator lit = live->begin();
+				while (lit != live->end())
+				{
+					WeakRef *wr = *lit++;
+					RObject *key = wr->key();
+					if (key && (key->m_gcgen > max_gen || key->isMarked()))
+					{
+						RObject *value = wr->value();
+						if (value && value->conductVisitor(&marker))
+							newmarks = true;
+						RObject *Rfinalizer = wr->m_Rfinalizer;
+						if (Rfinalizer && Rfinalizer->conductVisitor(&marker))
+							newmarks = true;
+						wr->transfer(live, &newlive);
+					}
+				}
+			} while (newmarks);
+		}
+		// Step 4 of algorithm.  Process references with unmarked keys.
+		{
+			WRList::iterator lit = live->begin();
+			while (lit != live->end())
+			{
+				WeakRef *wr = *lit++;
+				RObject *key = wr->key();
+				RObject *value = wr->value();
+				RObject *Rfinalizer = wr->m_Rfinalizer;
+				if (Rfinalizer || wr->m_Cfinalizer)
+				{
+					if (wr)
+						wr->conductVisitor(&marker);
+					if (key)
+						key->conductVisitor(&marker);
+					if (value)
+						value->conductVisitor(&marker);
+					if (Rfinalizer)
+						Rfinalizer->conductVisitor(&marker);
+					wr->m_ready_to_finalize = true;
+					wr->transfer(live, finalization_pending);
+				}
+				else
+					wr->tombstone();
+			}
+		}
+		// Step 5 of algorithm.  Mark all live references with reachable keys.
+		{
+			live->splice(live->end(), newlive);
+			for (WRList::iterator lit = live->begin();
+				 lit != live->end(); ++lit)
+			{
+				WeakRef *wr = *lit;
+				wr->conductVisitor(&marker);
+			}
+		}
+	}
+
+	bool WeakRef::runFinalizers()
+	{
+		R_CHECK_THREAD;
+		/* Prevent this function from running again when already in
+       progress. Jumps can only occur inside the top level context
+       where they will be caught, so the flag is guaranteed to be
+       reset at the end. */
+		static bool running = false;
+		if (running)
+			return false;
+		running = true;
+
+		WRList *finalization_pending = getFinalizationPending();
+		bool finalizer_run = !finalization_pending->empty();
+
+		WeakRef::check();
+
+		while (finalization_pending->size())
+		{
+			WeakRef *wr = *finalization_pending->begin();
+			/**** use R_ToplevelExec here? */
+			RCNTXT thiscontext;
+			RCNTXT *volatile saveToplevelContext;
+			volatile bool oldvis;
+			GCRoot<> oldHStack(R_HandlerStack);
+			GCRoot<> oldRStack(R_RestartStack);
+			GCRoot<> oldRVal(R_ReturnedValue);
+			oldvis = R_Visible;
+			R_HandlerStack = R_NilValue;
+			R_RestartStack = R_NilValue;
+
+			/* A top level context is established for the finalizer to
+	       insure that any errors that might occur do not spill
+	       into the call that triggered the collection. */
+			thiscontext.start(CTXT_TOPLEVEL, R_NilValue, R_GlobalEnv, Environment::base(), R_NilValue, R_NilValue);
+			saveToplevelContext = R_ToplevelContext;
+			GCRoot<> topExp(R_CurrentExpr);
+			auto savestack = GCRootBase::ppsSize();
+
+			bool redo = false;
+			bool jumped = false;
+			do
+			{
+				redo = false;
+				// std::cerr << __FILE__ << ":" << __LINE__ << " Entering try/catch for " << &thiscontext << std::endl;
+				try
+				{
+					if (!jumped)
+					{
+						R_GlobalContext = R_ToplevelContext = &thiscontext;
+						runWeakRefFinalizer(wr);
+					}
+					thiscontext.end();
+				}
+				catch (CXXR::JMPException &e)
+				{
+					// std::cerr << __FILE__ << ":" << __LINE__ << " Seeking " << e.context() << "; in " << &thiscontext << std::endl;
+					if (e.context() != &thiscontext)
+						throw;
+					redo = true;
+					jumped = true;
+				}
+				// std::cerr << __FILE__ << ":" << __LINE__ << " Exiting  try/catch for " << &thiscontext << std::endl;
+			} while (redo);
+
+			R_ToplevelContext = saveToplevelContext;
+			GCRootBase::ppsRestoreSize(savestack);
+			R_CurrentExpr = topExp;
+			R_HandlerStack = oldHStack;
+			R_RestartStack = oldRStack;
+			R_ReturnedValue = oldRVal;
+			R_Visible = oldvis;
+		}
+		running = false;
+		return finalizer_run;
+	}
+
+	void WeakRef::tombstone()
+	{
+		WRList *currentList = wrList();
+		m_key = nullptr;
+		m_value = nullptr;
+		m_Rfinalizer = nullptr;
+		m_Cfinalizer = nullptr;
+		m_ready_to_finalize = false;
+		transfer(currentList, getTombstone());
+	}
+
+	WeakRef::WRList *WeakRef::wrList() const
+	{
+		return m_ready_to_finalize ? getFinalizationPending() : (m_key ? getLive() : getTombstone());
+	}
+
+	void WeakRef::runPendingFinalizers()
+	{
+		WRList *finalization_pending = getFinalizationPending();
+		if (!finalization_pending->empty())
+			runFinalizers();
+	}
+
+	void WeakRef::runExitFinalizers()
+	{
+		WeakRef::check();
+		WRList *live = getLive();
+		WRList *finalization_pending = getFinalizationPending();
+		for (WeakRef *wr : *finalization_pending)
+		{
+			if (wr->m_finalize_on_exit)
+			{
+				wr->m_ready_to_finalize = true;
+				wr->transfer(live, finalization_pending);
+			}
+		}
+		runFinalizers();
+	}
+
+	void WeakRef::runWeakRefFinalizer(RObject *x)
+	{
+
+		WeakRef *w = SEXP_downcast<WeakRef *>(x);
+		if (TYPEOF(w) != WEAKREFSXP)
+			Rf_error(_("not a weak reference"));
+
+		Rboolean oldintrsusp = R_interrupts_suspended;
+		R_interrupts_suspended = TRUE;
+		w->finalize();
+
+		R_interrupts_suspended = oldintrsusp;
+	}
+
+	void WeakRef::finalize()
+	{
+		R_CFinalizer_t Cfin = m_Cfinalizer;
+		GCRoot<> key(m_key);
+		GCRoot<> Rfin(m_Rfinalizer);
+		// Do this now to ensure that finalizer is run only once, even if
+		// an error occurs:
+		tombstone();
+		if (Cfin)
+			Cfin(key);
+		else if (Rfin)
+		{
+			GCRoot<PairList> tail(CXXR_cons(key, nullptr));
+			GCRoot<Expression> e(new Expression(Rfin, tail), true);
+			Rf_eval(e, Environment::global());
+		}
+	}
+} // namespace CXXR
+
+// ***** C interface *****
 
 namespace
 {
-	// Used in {,un}packGPBits():
-	// constexpr unsigned int READY_TO_FINALIZE_MASK = 1;
-	constexpr unsigned int FINALIZE_ON_EXIT_MASK = 2;
-} // namespace
-
-WeakRef::WeakRef(RObject *key, RObject *value, RObject *R_finalizer,
-				 bool finalize_on_exit)
-	: RObject(WEAKREFSXP), m_key(key), m_value(value), m_Rfinalizer(R_finalizer), m_Cfinalizer(nullptr),
-	  m_ready_to_finalize(false),
-	  m_finalize_on_exit(finalize_on_exit)
-{
-	expose();
-	if (m_key)
-		m_key->expose();
-	else
-		tombstone();
-
-	if (m_key)
+	void checkKey(SEXP key)
 	{
-		// Force old-to-new checks:
-		m_key->propagateAge(m_value);
-		m_key->propagateAge(m_Rfinalizer);
-	}
-
-	getLive()->push_back(this);
-	m_lit = std::prev(getLive()->end());
-
-	if (!m_key)
-		tombstone();
-	else
-		switch (m_key->sexptype())
+		switch (TYPEOF(key))
 		{
+		case NILSXP:
 		case ENVSXP:
 		case EXTPTRSXP:
 		case BCODESXP:
@@ -92,329 +469,95 @@ WeakRef::WeakRef(RObject *key, RObject *value, RObject *R_finalizer,
 		default:
 			Rf_error(_("can only weakly reference/finalize reference objects"));
 		}
-	++s_count;
-}
-
-WeakRef::WeakRef(RObject *key, RObject *value, R_CFinalizer_t C_finalizer,
-				 bool finalize_on_exit)
-	: RObject(WEAKREFSXP), m_key(key), m_value(value), m_Rfinalizer(nullptr), m_Cfinalizer(C_finalizer),
-	  m_ready_to_finalize(false), m_finalize_on_exit(finalize_on_exit)
-{
-	expose();
-	if (m_key)
-		m_key->expose();
-	else
-		tombstone();
-
-	if (m_key)
-	{
-		// Force old-to-new check:
-		m_key->propagateAge(m_value);
 	}
+} // namespace
 
-	getLive()->push_back(this);
-	m_lit = std::prev(getLive()->end());
-
-	if (!m_key)
-		tombstone();
-	++s_count;
-}
-
-WeakRef::~WeakRef()
+SEXP R_MakeWeakRef(SEXP key, SEXP val, SEXP fin, Rboolean onexit)
 {
-	WRList *wrl = wrList();
-	if (wrl)
-		wrl->erase(m_lit);
-	--s_count;
-}
-
-unsigned int WeakRef::packGPBits() const
-{
-	unsigned int ans = RObject::packGPBits();
-	if (m_finalize_on_exit)
-		ans |= FINALIZE_ON_EXIT_MASK;
+	checkKey(key);
+	switch (TYPEOF(fin))
+	{
+	case NILSXP:
+	case CLOSXP:
+	case BUILTINSXP:
+	case SPECIALSXP:
+		break;
+	default:
+		Rf_error(_("finalizer must be a function or NULL"));
+	}
+	WeakRef *ans = new WeakRef(key, val, fin, onexit);
+	ans->expose();
 	return ans;
 }
 
-void WeakRef::unpackGPBits(unsigned int gpbits)
+SEXP R_MakeWeakRefC(SEXP key, SEXP val, R_CFinalizer_t fin, Rboolean onexit)
 {
-	RObject::unpackGPBits(gpbits);
-	m_finalize_on_exit = ((gpbits & FINALIZE_ON_EXIT_MASK) != 0);
+	checkKey(key);
+	WeakRef *ans = new WeakRef(key, val, fin, onexit);
+	ans->expose();
+	return ans;
 }
 
-bool WeakRef::check()
+SEXP R_WeakRefKey(SEXP w)
 {
-#ifndef NDEBUG
-	// Check sizes:
-	size_t total_size = getLive()->size() + getFinalizationPending()->size() + getTombstone()->size();
-	if (total_size != size_t(s_count))
-	{
-		cerr << "WeakRef::check() : tally error\n"
-			 << "live size: " << getLive()->size()
-			 << "\nfinalization pending size: "
-			 << getFinalizationPending()->size()
-			 << "\ntombstone size: " << getTombstone()->size()
-			 << "\ns_count: " << s_count << "\n";
-		abort();
-	}
-	// Check the live list:
-	for (const WeakRef *wr : *getLive())
-	{
-		if (wr->m_ready_to_finalize)
-		{
-			cerr << "Node on live list set READY_TO_FINALIZE\n";
-			abort();
-		}
-		if (!wr->m_key)
-		{
-			cerr << "Node on live list with null key\n";
-			abort();
-		}
-	}
-	// Check finalization pending:
-	for (const WeakRef *wr : *getFinalizationPending())
-	{
-		if (!wr->m_ready_to_finalize)
-		{
-			cerr << "Node on finalization pending list not READY_TO_FINALIZE\n";
-			abort();
-		}
-		if (!wr->m_key)
-		{
-			cerr << "Node on finalization pending list with null key\n";
-			abort();
-		}
-		if (!wr->m_Rfinalizer && !wr->m_Cfinalizer)
-		{
-			cerr << "Node on finalization pending list without finalizer\n";
-			abort();
-		}
-	}
-	// Check tombstone:
-	for (const WeakRef *wr : *getTombstone())
-	{
-		if (wr->m_ready_to_finalize)
-		{
-			cerr << "Node on tombstone list set READY_TO_FINALIZE\n";
-			abort();
-		}
-		if (wr->m_key)
-		{
-			cerr << "Node on tombstone list with non-null key\n";
-			abort();
-		}
-	}
-#endif
-	return true;
+	if (TYPEOF(w) != WEAKREFSXP)
+		Rf_error(_("not a weak reference"));
+
+	WeakRef *wr = SEXP_downcast<WeakRef *>(w, false);
+
+	return wr->key();
 }
 
-WeakRef::WRList *WeakRef::getLive()
+SEXP R_WeakRefValue(SEXP w)
 {
-	static WRList *live = new WRList();
-	return live;
+	if (TYPEOF(w) != WEAKREFSXP)
+		Rf_error(_("not a weak reference"));
+
+	WeakRef *wr = SEXP_downcast<WeakRef *>(w, false);
+
+	SEXP v = wr->value();
+	if (v)
+		ENSURE_NAMEDMAX(v);
+	return v;
 }
 
-WeakRef::WRList *WeakRef::getFinalizationPending()
+void R_RunWeakRefFinalizer(SEXP x)
 {
-	static WRList *finalization_pending = new WRList();
-	return finalization_pending;
+	WeakRef::runWeakRefFinalizer(x);
 }
 
-WeakRef::WRList *WeakRef::getTombstone()
+bool RunFinalizers(void)
 {
-	static WRList *tombstone = new WRList();
-	return tombstone;
+	return WeakRef::runFinalizers();
 }
 
-// WeakRef::finalize() is in memory.cpp (for the time being, until
-// eval() is declared in a CXXR header).
-
-void WeakRef::markThru(unsigned int max_gen)
+void R_RunExitFinalizers(void)
 {
-	WeakRef::check();
-	GCNode::Marker marker(max_gen);
-	WRList newlive;
-
-	WRList *live = getLive();
-	WRList *finalization_pending = getFinalizationPending();
-
-	// Step 2-3 of algorithm.  Mark the value and R finalizer if the
-	// key is marked, or in a generation not being collected.
-	{
-		bool newmarks;
-		do
-		{
-			newmarks = false;
-			WRList::iterator lit = live->begin();
-			while (lit != live->end())
-			{
-				WeakRef *wr = *lit++;
-				RObject *key = wr->key();
-				if (key && (key->m_gcgen > max_gen || key->isMarked()))
-				{
-					RObject *value = wr->value();
-					if (value && value->conductVisitor(&marker))
-						newmarks = true;
-					RObject *Rfinalizer = wr->m_Rfinalizer;
-					if (Rfinalizer && Rfinalizer->conductVisitor(&marker))
-						newmarks = true;
-					wr->transfer(live, &newlive);
-				}
-			}
-		} while (newmarks);
-	}
-	// Step 4 of algorithm.  Process references with unmarked keys.
-	{
-		WRList::iterator lit = live->begin();
-		while (lit != live->end())
-		{
-			WeakRef *wr = *lit++;
-			RObject *key = wr->key();
-			RObject *value = wr->value();
-			RObject *Rfinalizer = wr->m_Rfinalizer;
-			if (Rfinalizer || wr->m_Cfinalizer)
-			{
-				if (wr)
-					wr->conductVisitor(&marker);
-				if (key)
-					key->conductVisitor(&marker);
-				if (value)
-					value->conductVisitor(&marker);
-				if (Rfinalizer)
-					Rfinalizer->conductVisitor(&marker);
-				wr->m_ready_to_finalize = true;
-				wr->transfer(live, finalization_pending);
-			}
-			else
-				wr->tombstone();
-		}
-	}
-	// Step 5 of algorithm.  Mark all live references with reachable keys.
-	{
-		live->splice(live->end(), newlive);
-		for (WRList::iterator lit = live->begin();
-			 lit != live->end(); ++lit)
-		{
-			WeakRef *wr = *lit;
-			wr->conductVisitor(&marker);
-		}
-	}
+	R_checkConstants(TRUE);
+	WeakRef::runExitFinalizers();
 }
 
-bool WeakRef::runFinalizers()
+void R_RunPendingFinalizers(void)
 {
-	R_CHECK_THREAD;
-	/* Prevent this function from running again when already in
-       progress. Jumps can only occur inside the top level context
-       where they will be caught, so the flag is guaranteed to be
-       reset at the end. */
-	static bool running = false;
-	if (running)
-		return false;
-	running = true;
-
-	WRList *finalization_pending = getFinalizationPending();
-	bool finalizer_run = !finalization_pending->empty();
-
-	WeakRef::check();
-
-	while (finalization_pending->size())
-	{
-		WeakRef *wr = *finalization_pending->begin();
-		/**** use R_ToplevelExec here? */
-		RCNTXT thiscontext;
-		RCNTXT *volatile saveToplevelContext;
-		volatile bool oldvis;
-		GCRoot<> oldHStack(R_HandlerStack);
-		GCRoot<> oldRStack(R_RestartStack);
-		GCRoot<> oldRVal(R_ReturnedValue);
-		oldvis = R_Visible;
-		R_HandlerStack = R_NilValue;
-		R_RestartStack = R_NilValue;
-
-		/* A top level context is established for the finalizer to
-	       insure that any errors that might occur do not spill
-	       into the call that triggered the collection. */
-		thiscontext.start(CTXT_TOPLEVEL, R_NilValue, R_GlobalEnv, Environment::base(), R_NilValue, R_NilValue);
-		saveToplevelContext = R_ToplevelContext;
-		GCRoot<> topExp(R_CurrentExpr);
-		auto savestack = GCRootBase::ppsSize();
-
-		bool redo = false;
-		bool jumped = false;
-		do
-		{
-			redo = false;
-			// std::cerr << __FILE__ << ":" << __LINE__ << " Entering try/catch for " << &thiscontext << std::endl;
-			try
-			{
-				if (!jumped)
-				{
-					R_GlobalContext = R_ToplevelContext = &thiscontext;
-					runWeakRefFinalizer(wr);
-				}
-				thiscontext.end();
-			}
-			catch (CXXR::JMPException &e)
-			{
-				// std::cerr << __FILE__ << ":" << __LINE__ << " Seeking " << e.context() << "; in " << &thiscontext << std::endl;
-				if (e.context() != &thiscontext)
-					throw;
-				redo = true;
-				jumped = true;
-			}
-			// std::cerr << __FILE__ << ":" << __LINE__ << " Exiting  try/catch for " << &thiscontext << std::endl;
-		} while (redo);
-
-		R_ToplevelContext = saveToplevelContext;
-		GCRootBase::ppsRestoreSize(savestack);
-		R_CurrentExpr = topExp;
-		R_HandlerStack = oldHStack;
-		R_RestartStack = oldRStack;
-		R_ReturnedValue = oldRVal;
-		R_Visible = oldvis;
-	}
-	running = false;
-	return finalizer_run;
+	WeakRef::runPendingFinalizers();
 }
 
-void WeakRef::tombstone()
+void R_RegisterFinalizerEx(SEXP s, SEXP fun, Rboolean onexit)
 {
-	WRList *currentList = wrList();
-	m_key = nullptr;
-	m_value = nullptr;
-	m_Rfinalizer = nullptr;
-	m_Cfinalizer = nullptr;
-	m_ready_to_finalize = false;
-	transfer(currentList, getTombstone());
+	R_MakeWeakRef(s, nullptr, fun, onexit);
 }
 
-WeakRef::WRList *WeakRef::wrList() const
+void R_RegisterFinalizer(SEXP s, SEXP fun)
 {
-	return m_ready_to_finalize ? getFinalizationPending() : (m_key ? getLive() : getTombstone());
+	R_RegisterFinalizerEx(s, fun, FALSE);
 }
 
-void WeakRef::runPendingFinalizers()
+void R_RegisterCFinalizerEx(SEXP s, R_CFinalizer_t fun, Rboolean onexit)
 {
-	WRList *finalization_pending = getFinalizationPending();
-	if (!finalization_pending->empty())
-		runFinalizers();
+	R_MakeWeakRefC(s, nullptr, fun, onexit);
 }
 
-void WeakRef::runExitFinalizers()
+void R_RegisterCFinalizer(SEXP s, R_CFinalizer_t fun)
 {
-	WeakRef::check();
-	WRList *live = getLive();
-	WRList *finalization_pending = getFinalizationPending();
-	for (WeakRef *wr : *finalization_pending)
-	{
-		if (wr->m_finalize_on_exit)
-		{
-			wr->m_ready_to_finalize = true;
-			wr->transfer(live, finalization_pending);
-		}
-	}
-	runFinalizers();
+	R_RegisterCFinalizerEx(s, fun, FALSE);
 }
-
-// ***** C interface *****

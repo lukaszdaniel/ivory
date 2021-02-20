@@ -46,6 +46,7 @@
 #include <CXXR/PairList.hpp>
 #include <CXXR/Expression.hpp>
 #include <CXXR/VectorBase.hpp>
+#include <CXXR/String.hpp>
 #include <CXXR/StringVector.hpp>
 #include <CXXR/IntVector.hpp>
 #include <Localization.h>
@@ -58,6 +59,8 @@
 #include <cstring>
 
 #include <Rmodules/Rinternet.h>
+
+using namespace R;
 
 #define HttpdServerActivity 8
 #define HttpdWorkerActivity 9

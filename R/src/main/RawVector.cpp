@@ -106,7 +106,7 @@ namespace CXXR
 Rbyte *RAW0(SEXP x)
 {
     CHECK_STDVEC_RAW(x);
-    return (Rbyte *)STDVEC_DATAPTR(x);
+    return static_cast<Rbyte *>(STDVEC_DATAPTR(x));
 }
 Rbyte SCALAR_BVAL(SEXP x)
 {
@@ -122,7 +122,7 @@ void SET_SCALAR_BVAL(SEXP x, Rbyte v)
 const Rbyte *RAW_OR_NULL(SEXP x)
 {
     CHECK_VECTOR_RAW(x);
-    return (Rbyte *)(ALTREP(x) ? ALTVEC_DATAPTR_OR_NULL(x) : STDVEC_DATAPTR(x));
+    return static_cast<const Rbyte *>(ALTREP(x) ? ALTVEC_DATAPTR_OR_NULL(x) : STDVEC_DATAPTR(x));
 }
 
 Rbyte RAW_ELT(SEXP x, R_xlen_t i)

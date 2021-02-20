@@ -107,17 +107,6 @@ SEXP CAR(SEXP e)
     return CAR0(e);
 }
 
-/* from list.cpp */
-/* Return a dotted pair with the given CAR and CDR. */
-/* The (R) TAG slot on the cell is set to NULL. */
-
-/** @brief Get the i-th element of a list.
- *
- * @param list SEXP object.
- * @param i i-th element of that object.
- *
- * @return i-th element.
- */
 SEXP Rf_elt(SEXP list, int i)
 {
     SEXP result = list;
@@ -131,9 +120,6 @@ SEXP Rf_elt(SEXP list, int i)
     return CAR(result);
 }
 
-/**
- * @brief Return the last element of a list
- */
 SEXP Rf_lastElt(SEXP list)
 {
     SEXP result = R_NilValue;
@@ -149,45 +135,43 @@ SEXP Rf_lastElt(SEXP list)
 
 SEXP Rf_list1(SEXP s)
 {
-    return CONS(s, R_NilValue);
+    return Rf_cons(s, nullptr);
 }
 
 SEXP Rf_list2(SEXP s, SEXP t)
 {
     GCRoot<> ss(s);
-    s = CONS(s, Rf_list1(t));
+    s = Rf_cons(s, Rf_list1(t));
     return s;
 }
 
 SEXP Rf_list3(SEXP s, SEXP t, SEXP u)
 {
     GCRoot<> ss(s);
-    s = CONS(s, Rf_list2(t, u));
+    s = Rf_cons(s, Rf_list2(t, u));
     return s;
 }
 
 SEXP Rf_list4(SEXP s, SEXP t, SEXP u, SEXP v)
 {
     GCRoot<> ss(s);
-    s = CONS(s, Rf_list3(t, u, v));
+    s = Rf_cons(s, Rf_list3(t, u, v));
     return s;
 }
 
 SEXP Rf_list5(SEXP s, SEXP t, SEXP u, SEXP v, SEXP w)
 {
     GCRoot<> ss(s);
-    s = CONS(s, Rf_list4(t, u, v, w));
+    s = Rf_cons(s, Rf_list4(t, u, v, w));
     return s;
 }
 
 SEXP Rf_list6(SEXP s, SEXP t, SEXP u, SEXP v, SEXP w, SEXP x)
 {
     GCRoot<> ss(s);
-    s = CONS(s, Rf_list5(t, u, v, w, x));
+    s = Rf_cons(s, Rf_list5(t, u, v, w, x));
     return s;
 }
-
-/* Destructive list append : See also ``append'' */
 
 SEXP Rf_listAppend(SEXP s, SEXP t)
 {

@@ -26,9 +26,12 @@
 #include <CXXR/VectorBase.hpp>
 #include <CXXR/FunctionBase.hpp>
 #include <CXXR/ListVector.hpp>
+#include <CXXR/String.hpp>
 #include <CXXR/StringVector.hpp>
 #include <Defn.h>
 #include <R_ext/Applic.h>
+
+using namespace R;
 
 #include "statsR.h"
 #include "localization.h"

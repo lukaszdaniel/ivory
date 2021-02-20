@@ -66,10 +66,13 @@
 /* PAUL MURRELL
    extern.h renamed g_extern.h
 */
+#include <CXXR/String.hpp>
 #include "g_extern.h"
 #include "g_control.h"
 #include "g_cntrlify.h"
 #include "g_jis.h"
+
+using namespace R;
 
 /* these two array lengths must agree with values in file g_her_glyph.cpp */
 #define NUM_OCCIDENTAL_HERSHEY_GLYPHS 4400

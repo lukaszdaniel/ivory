@@ -106,7 +106,7 @@ namespace CXXR
 int *LOGICAL0(SEXP x)
 {
     CHECK_STDVEC_LGL(x);
-    return (int *)STDVEC_DATAPTR(x);
+    return static_cast<int *>(STDVEC_DATAPTR(x));
 }
 
 int SCALAR_LVAL(SEXP x)
@@ -124,7 +124,7 @@ void SET_SCALAR_LVAL(SEXP x, int v)
 const int *LOGICAL_OR_NULL(SEXP x)
 {
     CHECK_VECTOR_LGL(x);
-    return (int *)(ALTREP(x) ? ALTVEC_DATAPTR_OR_NULL(x) : STDVEC_DATAPTR(x));
+    return static_cast<const int *>(ALTREP(x) ? ALTVEC_DATAPTR_OR_NULL(x) : STDVEC_DATAPTR(x));
 }
 
 int LOGICAL_ELT(SEXP x, R_xlen_t i)

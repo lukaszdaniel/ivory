@@ -41,6 +41,7 @@
 
 #define R_NO_REMAP
 
+#include <CXXR/String.hpp>
 #include <Defn.h>
 #include <R_ext/Visibility.h>
 
@@ -56,6 +57,8 @@
 #include <clocale>
 #include <climits>
 #include <R_ext/Riconv.h>
+
+using namespace R;
 
 #if defined(USE_RI18N_WIDTH) || defined(USE_RI18N_FNS)
 

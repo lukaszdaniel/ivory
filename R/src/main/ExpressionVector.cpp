@@ -31,6 +31,7 @@
 #include <CXXR/ListVector.hpp>
 #include <CXXR/Symbol.hpp>
 
+using namespace std;
 using namespace CXXR;
 
 namespace CXXR
@@ -59,14 +60,22 @@ namespace CXXR
     {
         return new ExpressionVector(*this, deep);
     }
-
-    SEXP ExpressionVector::set_xvector_elt(SEXP x, R_xlen_t i, SEXP v)
-    {
-        // EXPRVECTOR_ELT(x, i) = v;
-        ExpressionVector *ev = SEXP_downcast<ExpressionVector *>(x, false);
-        (*ev)[i] = v;
-        return v;
-    }
 } // namespace CXXR
 
 // ***** C interface *****
+
+SEXP SET_XVECTOR_ELT(SEXP x, R_xlen_t i, SEXP v)
+{
+    if (TYPEOF(x) != EXPRSXP)
+    {
+        Rf_error(_("'%s' function can only be applied to a list, not a '%s'"), "SET_XVECTOR_ELT()",
+                 Rf_type2char(TYPEOF(x)));
+    }
+    if (i < 0 || i >= XLENGTH(x))
+        Rf_error(_("attempt to set index %ld/%ld in 'SET_XVECTOR_ELT()' function"), (long long)i, (long long)XLENGTH(x));
+    RObject::fix_refcnt(x, XVECTOR_ELT(x, i), v);
+    // EXPRVECTOR_ELT(x, i) = v;
+    ExpressionVector *ev = CXXR::SEXP_downcast<ExpressionVector *>(x, false);
+    (*ev)[i] = v;
+    return v;
+}

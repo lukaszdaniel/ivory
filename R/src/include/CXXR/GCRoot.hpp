@@ -156,8 +156,16 @@ namespace CXXR
         static void visitRoots(GCNode::const_visitor *v);
 
     protected:
+        /** @brief Primary constructor.
+         *
+         * @param node Pointer, possibly null, to the node to be protected.
+         */
         GCRootBase(const GCNode *node, bool expose);
 
+        /** @brief Copy constructor.
+         *
+         * @param source Pattern for the copy.
+         */
         GCRootBase(const GCRootBase &source);
 
         ~GCRootBase()
@@ -173,6 +181,11 @@ namespace CXXR
             return *this;
         }
 
+        /** @brief Change the node protected by this GCRootBase.
+         *
+         * @param node Pointer to the node now to be protected, or a
+         * null pointer.
+         */
         void redirect(GCNode *node)
         {
             (*s_roots)[m_index] = node;
@@ -465,6 +478,26 @@ extern "C"
     {
         CXXR::GCRootBase::unprotectPtr(node);
     }
+
+    /** @brief Protect object against garbage collection.
+     *
+     * This is intended for long-term protection, for which PROTECT()
+     * etc. would be inappropriate.
+     *
+     * @param object Pointer to the object to be preserved.  It is
+     *          permissible for this to be a null pointer.
+     */
+    void R_PreserveObject(SEXP object);
+
+    /** @brief Remove object's protection against garbage collection.
+     *
+     * @param object Pointer to the object whose protection is to be
+     *          removed.  It is permissible (but pointless) for this
+     *          to be a pointer to an object that is not currently
+     *          protected by R_PreserveObject(), but in that case
+     *          R_ReleaseObject() has no effect.
+     */
+    void R_ReleaseObject(SEXP object);
 } // extern "C"
 
 #endif // GCROOT_HPP

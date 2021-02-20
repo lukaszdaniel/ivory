@@ -35,6 +35,7 @@
 #include <CXXR/Symbol.hpp>
 
 using namespace std;
+using namespace CXXR;
 
 namespace CXXR
 {
@@ -62,17 +63,32 @@ namespace CXXR
     {
         return new ListVector(*this, deep);
     }
-
-    SEXP ListVector::set_vector_elt(SEXP x, R_xlen_t i, SEXP v)
-    {
-        // LISTVECTOR_ELT(x, i) = v;
-        ListVector *lv = SEXP_downcast<ListVector *>(x, false);
-        (*lv)[i] = v;
-        return v;
-    }
 } // namespace CXXR
 
 // ***** C interface *****
+
+SEXP SET_VECTOR_ELT(SEXP x, R_xlen_t i, SEXP v)
+{
+    /*  we need to allow vector-like types here */
+    if (TYPEOF(x) != VECSXP &&
+        TYPEOF(x) != EXPRSXP &&
+        TYPEOF(x) != WEAKREFSXP)
+    {
+        Rf_error(_("'%s' function can only be applied to a list, not a '%s'"), "SET_VECTOR_ELT()",
+                 Rf_type2char(TYPEOF(x)));
+    }
+    if (TYPEOF(x) == EXPRSXP)
+    {
+        return SET_XVECTOR_ELT(x, i, v);
+    }
+    if (i < 0 || i >= XLENGTH(x))
+        Rf_error(_("attempt to set index %ld/%ld in 'SET_VECTOR_ELT()' function"), (long long)i, (long long)XLENGTH(x));
+    RObject::fix_refcnt(x, VECTOR_ELT(x, i), v);
+    // LISTVECTOR_ELT(x, i) = v;
+    ListVector *lv = SEXP_downcast<ListVector *>(x, false);
+    (*lv)[i] = v;
+    return v;
+}
 
 Rboolean Rf_isNewList(SEXP s)
 {

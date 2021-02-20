@@ -269,7 +269,7 @@ SEXP GEhandleEvent(GEevent event, pDevDesc dev, SEXP data)
  ****************************************************************
  */
 
-double fromDeviceX(double value, GEUnit to, pGEDevDesc dd)
+double GEfromDeviceX(double value, GEUnit to, pGEDevDesc dd)
 {
     double result = value;
     switch (to) {
@@ -289,7 +289,7 @@ double fromDeviceX(double value, GEUnit to, pGEDevDesc dd)
     return result;
 }
 
-double toDeviceX(double value, GEUnit from, pGEDevDesc dd)
+double GEtoDeviceX(double value, GEUnit from, pGEDevDesc dd)
 {
     double result = value;
     switch (from) {
@@ -309,7 +309,7 @@ double toDeviceX(double value, GEUnit from, pGEDevDesc dd)
     return result;
 }
 
-double fromDeviceY(double value, GEUnit to, pGEDevDesc dd)
+double GEfromDeviceY(double value, GEUnit to, pGEDevDesc dd)
 {
     double result = value;
     switch (to) {
@@ -329,7 +329,7 @@ double fromDeviceY(double value, GEUnit to, pGEDevDesc dd)
     return result;
 }
 
-double toDeviceY(double value, GEUnit from, pGEDevDesc dd)
+double GEtoDeviceY(double value, GEUnit from, pGEDevDesc dd)
 {
     double result = value;
     switch (from) {
@@ -349,7 +349,7 @@ double toDeviceY(double value, GEUnit from, pGEDevDesc dd)
     return result;
 }
 
-double fromDeviceWidth(double value, GEUnit to, pGEDevDesc dd)
+double GEfromDeviceWidth(double value, GEUnit to, pGEDevDesc dd)
 {
     double result = value;
     switch (to) {
@@ -367,7 +367,7 @@ double fromDeviceWidth(double value, GEUnit to, pGEDevDesc dd)
     return result;
 }
 
-double toDeviceWidth(double value, GEUnit from, pGEDevDesc dd)
+double GEtoDeviceWidth(double value, GEUnit from, pGEDevDesc dd)
 {
     double result = value;
     switch (from) {
@@ -387,7 +387,7 @@ double toDeviceWidth(double value, GEUnit from, pGEDevDesc dd)
     return result;
 }
 
-double fromDeviceHeight(double value, GEUnit to, pGEDevDesc dd)
+double GEfromDeviceHeight(double value, GEUnit to, pGEDevDesc dd)
 {
     double result = value;
     switch (to) {
@@ -405,7 +405,7 @@ double fromDeviceHeight(double value, GEUnit to, pGEDevDesc dd)
     return result;
 }
 
-double toDeviceHeight(double value, GEUnit from, pGEDevDesc dd)
+double GEtoDeviceHeight(double value, GEUnit from, pGEDevDesc dd)
 {
     double result = value;
     switch (from) {

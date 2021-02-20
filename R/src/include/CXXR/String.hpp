@@ -348,6 +348,9 @@ namespace CXXR
 namespace R
 {
 	void ssort(CXXR::String **x, int n);
+	bool Seql(SEXP a, SEXP b);
+	bool streql(const char *s, const char *t);
+	bool streqln(const char *s, const char *t, size_t n);
 }
 
 extern "C"

@@ -22,6 +22,8 @@
  * Test of class CXXR::GCManager
  */
 
+#define R_NO_REMAP
+
 #include <cmath>
 #include <cstdarg>
 #include <cstdlib>

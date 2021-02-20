@@ -25,9 +25,12 @@
 #endif
 
 #include <CXXR/VectorBase.hpp>
+#include <CXXR/String.hpp>
 #include <CXXR/StringVector.hpp>
 #include <Defn.h>
 #include <R_ext/GraphicsEngine.h>
+
+using namespace R;
 
 #include "grDevices.h"
 #include "localization.h"

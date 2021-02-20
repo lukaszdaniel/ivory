@@ -636,6 +636,8 @@ namespace CXXR
         static void lock_binding(RObject *x);
         static void unlock_binding(RObject *x);
         static void set_active_binding_bit(RObject *x);
+        static void fix_refcnt(RObject *x, RObject *old, RObject *new_);
+        static void fix_binding_refcnt(RObject *x, RObject *old, RObject *new_);
 
         /** @brief The name by which this type is known in R.
          *
@@ -834,9 +836,7 @@ extern "C"
     void DUPLICATE_ATTRIB(SEXP to, SEXP from);
 
     /* from dstruct.cpp */
-
     /*  length - length of objects  */
-
     int Rf_envlength(SEXP rho);
 
     /* TODO: a  Length(.) {say} which is length() + dispatch (S3 + S4) if needed
@@ -858,6 +858,7 @@ extern "C"
      * @brief Check to see if the arrays "x" and "y" have the identical extents
      */
     Rboolean Rf_conformable(SEXP x, SEXP y);
+
     /**
      * @note R's Rf_inherits() is based on inherits3() in ../main/objects.cpp
      * Here, use char / CHAR() instead of the slower more general Rf_translateChar()

@@ -236,7 +236,6 @@ extern "C"
      * @todo the LGLSXP case should be excluded here
      *       (really? in many places we affirm they are treated like INTs)
      */
-
     Rboolean Rf_isNumeric(SEXP s);
 
     /**

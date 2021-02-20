@@ -30,7 +30,7 @@ using namespace R;
 extern "C" int Rf_initialize_R(int ac, char *av[]); /* in ../unix/system.cpp */
 extern "C" void setup_Rmainloop(void);             /* in main.cpp */
 extern "C" void fpu_setup(Rboolean start);         /* in ../unix/sys-std.cpp */
-extern void R_CleanTempDir(void);
+extern "C" void R_CleanTempDir(void);
 
 /*
  This is the routine that can be called to initialize the R environment

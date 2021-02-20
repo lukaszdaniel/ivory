@@ -408,16 +408,17 @@ extern "C"
      */
     SEXP Rf_cons(SEXP cr, SEXP tl);
 
-    /* from list.cpp */
-    /* Return a dotted pair with the given CAR and CDR. */
-    /* The (R) TAG slot on the cell is set to NULL. */
-
     /** @brief Get the i-th element of a list.
      *
+     * Return a dotted pair with the given CAR and CDR.
+     * The (R) TAG slot on the cell is set to NULL.
+     * 
      * @param list SEXP object.
      * @param i i-th element of that object.
      *
      * @return i-th element.
+     *
+     * @note from list.cpp 
      */
     SEXP Rf_elt(SEXP list, int i);
 
@@ -434,6 +435,11 @@ extern "C"
     SEXP Rf_list4(SEXP s, SEXP t, SEXP u, SEXP v);
     SEXP Rf_list5(SEXP s, SEXP t, SEXP u, SEXP v, SEXP w);
     SEXP Rf_list6(SEXP s, SEXP t, SEXP u, SEXP v, SEXP w, SEXP x);
+
+    /**
+     * @brief Destructive list append
+     * @note See also ``append''
+     */
     SEXP Rf_listAppend(SEXP s, SEXP t);
     /**
      * @brief Check to see if a list can be made into a vector.

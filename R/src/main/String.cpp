@@ -232,3 +232,38 @@ namespace CXXR
         return x && SEXP_downcast<String *>(x)->m_cached;
     }
 } // namespace CXXR
+
+namespace R
+{
+    bool streql(const char *s, const char *t)
+    {
+        return (strcmp(s, t) == 0);
+    }
+    bool streqln(const char *s, const char *t, size_t n)
+    {
+        return (strncmp(s, t, n) == 0);
+    }
+
+    /* this has NA_STRING = NA_STRING */
+    HIDDEN bool Seql(SEXP a, SEXP b)
+    {
+        /* The only case where pointer comparisons do not suffice is where
+      we have two strings in different encodings (which must be
+      non-ASCII strings). Note that one of the strings could be marked
+      as unknown. */
+        if (a == b)
+            return true;
+        /* Leave this to compiler to optimize */
+        if (IS_CACHED(a) && IS_CACHED(b) && ENC_KNOWN(a) == ENC_KNOWN(b))
+            return false;
+        else
+        {
+            auto vmax = vmaxget();
+            bool result = streql(translateCharUTF8(a), translateCharUTF8(b));
+            vmaxset(vmax); /* discard any memory used by translateCharUTF8 */
+            return result;
+        }
+    }
+}
+
+// ***** C interface *****

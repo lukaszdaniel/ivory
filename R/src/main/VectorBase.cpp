@@ -113,8 +113,15 @@ namespace CXXR
 
 // ***** C interface *****
 
+#ifdef LONG_VECTOR_SUPPORT
+NORET R_len_t R_BadLongVector(SEXP x, const char *file, int line)
+{
+    Rf_error(_("long vectors not supported yet: %s:%d"), file, line);
+}
+#endif
+
 #ifdef STRICT_TYPECHECK
-extern inline void CHKVEC(SEXP x)
+static void CHKVEC(SEXP x)
 {
     switch (TYPEOF(x))
     {
@@ -196,24 +203,11 @@ const void *DATAPTR_OR_NULL(SEXP x)
         return STDVEC_DATAPTR(x);
 }
 
-/* regular Rf_allocVector() as a special case of allocVector3() with no custom allocator */
 SEXP Rf_allocVector(SEXPTYPE type, R_xlen_t length = 1)
 {
     return Rf_allocVector3(type, length, nullptr);
 }
 
-/** @fn SEXP Rf_mkNamed(SEXPTYPE TYP, const char **names)
- *
- * @brief Create a named vector of type TYP
- *
- * @example const char *nms[] = {"xi", "yi", "zi", ""};
- *          mkNamed(VECSXP, nms);  =~= R  list(xi=, yi=, zi=)
- *
- * @param TYP a vector SEXP type (e.g. REALSXP)
- * @param names names of list elements with null string appended
- *
- * @return (pointer to a) named vector of type TYP
- */
 SEXP Rf_mkNamed(SEXPTYPE TYP, const char **names)
 {
     R_xlen_t n;
@@ -229,13 +223,6 @@ SEXP Rf_mkNamed(SEXPTYPE TYP, const char **names)
     return ans;
 }
 
-/* from gram.y */
-
-/**
- * @brief shortcut for ScalarString(Rf_mkChar(s))
- * 
- * @return string scalar
- */
 SEXP Rf_mkString(const char *s)
 {
     CXXR::GCRoot<> t(Rf_allocVector(STRSXP, (R_xlen_t)1));
@@ -292,10 +279,9 @@ Rboolean Rf_isVector(SEXP s) /* === isVectorList() or isVectorAtomic() */
 
 Rboolean Rf_isMatrix(SEXP s)
 {
-    SEXP t;
     if (Rf_isVector(s))
     {
-        t = Rf_getAttrib(s, R_DimSymbol);
+        SEXP t = Rf_getAttrib(s, R_DimSymbol);
         /* You are not supposed to be able to assign a non-integer dim,
 	   although this might be possible by misuse of ATTRIB. */
         if (TYPEOF(t) == INTSXP && LENGTH(t) == 2)
@@ -306,10 +292,9 @@ Rboolean Rf_isMatrix(SEXP s)
 
 Rboolean Rf_isArray(SEXP s)
 {
-    SEXP t;
     if (Rf_isVector(s))
     {
-        t = Rf_getAttrib(s, R_DimSymbol);
+        SEXP t = Rf_getAttrib(s, R_DimSymbol);
         /* You are not supposed to be able to assign a 0-length dim,
 	 nor a non-integer dim */
         if ((TYPEOF(t) == INTSXP) && LENGTH(t) > 0)

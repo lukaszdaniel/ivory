@@ -43,14 +43,7 @@ namespace CXXR
 
 // ***** C interface *****
 
-/**
- * @brief Is an object of numeric type.
- * 
- * @todo the LGLSXP case should be excluded here
- *       (really? in many places we affirm they are treated like INTs)
- */
-
-extern inline Rboolean Rf_isNumeric(SEXP s)
+Rboolean Rf_isNumeric(SEXP s)
 {
     switch (TYPEOF(s))
     {
@@ -65,10 +58,7 @@ extern inline Rboolean Rf_isNumeric(SEXP s)
     }
 }
 
-/**
- *  @brief Is an object "Numeric" or  complex
-*/
-extern inline Rboolean Rf_isNumber(SEXP s)
+Rboolean Rf_isNumber(SEXP s)
 {
     switch (TYPEOF(s))
     {

@@ -240,6 +240,8 @@ extern "C"
    *  ::SEXPTYPE values representing lists (as the elements must be
    *  initialized).  Initializing of other vector types is done in
    *  do_makevector().
+   *  Regular Rf_allocVector() as a special case of allocVector3()
+   *  with no custom allocator.
    * 
    * @param stype The type of vector required.
    * @param length The length of the vector to be created.
@@ -262,7 +264,27 @@ extern "C"
    */
   SEXP Rf_allocVector3(SEXPTYPE type, R_xlen_t length, R_allocator_t *allocator);
 
+  /** @fn SEXP Rf_mkNamed(SEXPTYPE TYP, const char **names)
+   *
+   * @brief Create a named vector of type TYP
+   *
+   * @example const char *nms[] = {"xi", "yi", "zi", ""};
+   *          mkNamed(VECSXP, nms);  =~= R  list(xi=, yi=, zi=)
+   *
+   * @param TYP a vector SEXP type (e.g. REALSXP)
+   * @param names names of list elements with null string appended
+   *
+   * @return (pointer to a) named vector of type TYP
+   */
   SEXP Rf_mkNamed(SEXPTYPE TYP, const char **names);
+
+  /**
+   * @brief shortcut for ScalarString(Rf_mkChar(s))
+   *
+   * @return string scalar
+   *
+   * @note from gram.y
+ */
   SEXP Rf_mkString(const char *s);
 
   Rboolean Rf_isVectorList(SEXP s);
@@ -277,16 +299,20 @@ extern "C"
   void *DATAPTR(SEXP x);
 
   /**
- * @brief The general (read only) data pointer function
- * 
- * Function works as a dispatcher between ALTREP
- * or STDVEC representation of data.
- * 
- * @return pointer to the (read only) data block
- */
+   * @brief The general (read only) data pointer function
+   *
+   * Function works as a dispatcher between ALTREP
+   * or STDVEC representation of data.
+   *
+   * @return pointer to the (read only) data block
+   */
   const void *DATAPTR_RO(SEXP x);
 
   const void *DATAPTR_OR_NULL(SEXP x);
+
+#ifdef LONG_VECTOR_SUPPORT
+    NORET R_len_t R_BadLongVector(SEXP, const char *, int);
+#endif
 } // extern "C"
 
 #if defined(R_NO_REMAP) && defined(COMPILING_IVORY) && defined(__cplusplus)

@@ -212,4 +212,31 @@ namespace CXXR
 	};
 } // namespace CXXR
 
+extern "C"
+{
+	SEXP R_MakeWeakRef(SEXP key, SEXP val, SEXP fin, Rboolean onexit);
+
+	SEXP R_MakeWeakRefC(SEXP key, SEXP val, R_CFinalizer_t fin, Rboolean onexit);
+
+	SEXP R_WeakRefKey(SEXP w);
+
+	SEXP R_WeakRefValue(SEXP w);
+
+	void R_RunWeakRefFinalizer(SEXP x);
+
+	bool RunFinalizers(void);
+
+	void R_RunExitFinalizers(void);
+
+	void R_RunPendingFinalizers(void);
+
+	void R_RegisterFinalizerEx(SEXP s, SEXP fun, Rboolean onexit);
+
+	void R_RegisterFinalizer(SEXP s, SEXP fun);
+
+	void R_RegisterCFinalizerEx(SEXP s, R_CFinalizer_t fun, Rboolean onexit);
+
+	void R_RegisterCFinalizer(SEXP s, R_CFinalizer_t fun);
+}
+
 #endif /* WEAKREF_HPP */

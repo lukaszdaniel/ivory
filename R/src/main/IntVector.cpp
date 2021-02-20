@@ -105,7 +105,7 @@ namespace CXXR
 int *INTEGER0(SEXP x)
 {
     CHECK_STDVEC_INT(x);
-    return (int *)STDVEC_DATAPTR(x);
+    return static_cast<int *>(STDVEC_DATAPTR(x));
 }
 
 int SCALAR_IVAL(SEXP x)
@@ -123,7 +123,7 @@ void SET_SCALAR_IVAL(SEXP x, int v)
 const int *INTEGER_OR_NULL(SEXP x)
 {
     CHECK_VECTOR_INT(x);
-    return (int *)(ALTREP(x) ? ALTVEC_DATAPTR_OR_NULL(x) : STDVEC_DATAPTR(x));
+    return static_cast<const int *>(ALTREP(x) ? ALTVEC_DATAPTR_OR_NULL(x) : STDVEC_DATAPTR(x));
 }
 
 int INTEGER_ELT(SEXP x, R_xlen_t i)

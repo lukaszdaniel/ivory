@@ -17,6 +17,8 @@
  *  Foundation, Inc., 51 Franklin Street Fifth Floor, Boston, MA 02110-1301 USA
  */
 
+#define R_NO_REMAP
+
 #include <iostream>
 #include <R_ext/Boolean.h>
 #include <Rinternals.h>

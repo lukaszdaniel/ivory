@@ -47,6 +47,7 @@
 //#define HAVE_STRING_H
 #endif
 
+#include <CXXR/String.hpp>
 #include <Defn.h>
 #include <cstring>
 #include <memory>
@@ -55,6 +56,7 @@
 #include <cstdlib>
 #include <cctype>
 
+using namespace R;
 //#include <rlocale.h> /* To get the correct linkage for locale2charset */
 
 /* name_value struct */
