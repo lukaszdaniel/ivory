@@ -357,13 +357,11 @@ static SEXP baseCallback(GEevent task, pGEDevDesc dd, SEXP data)
 
 /* (un)Register the base graphics system with the graphics engine
  */
-void
-registerBase(void) {
+void registerBase(void) {
     GEregisterSystem(baseCallback, &baseRegisterIndex);
 }
 
-void
-unregisterBase(void) {
+void unregisterBase(void) {
     GEunregisterSystem(baseRegisterIndex);
     baseRegisterIndex = -1;   
 }
@@ -377,14 +375,14 @@ SEXP RunregisterBase(void)
 /* FIXME: Make this a macro to avoid function call overhead?
    Inline it if you really think it matters.
  */
-GPar* gpptr(pGEDevDesc dd) {
+GPar* Rf_gpptr(pGEDevDesc dd) {
     if (baseRegisterIndex == -1)
 	error(_("the base graphics system is not registered"));
     baseSystemState *bss = static_cast<baseSystemState *>(dd->gesd[baseRegisterIndex]->systemSpecific);
     return &(bss->gp);
 }
 
-GPar* dpptr(pGEDevDesc dd) {
+GPar* Rf_dpptr(pGEDevDesc dd) {
     if (baseRegisterIndex == -1)
 	error(_("the base graphics system is not registered"));
     baseSystemState *bss = static_cast<baseSystemState *>(dd->gesd[baseRegisterIndex]->systemSpecific);

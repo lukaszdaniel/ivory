@@ -108,7 +108,7 @@ double R_Log10(double x)
  * the function GMapUnits provides a mapping
  * between interpreted units and internal units.
  */
-GUnit GMapUnits(int Runits)
+GUnit Rf_GMapUnits(int Runits)
 {
     switch (Runits) {
     case 1:	return USER;
@@ -295,7 +295,7 @@ NORET static void BadUnitsError(const char *where)
 /* GConvertXUnits() and GConvertYUnits() convert
    a single value fromUnits toUnits : */
 
-double GConvertXUnits(double x, GUnit fromUnits, GUnit toUnits, pGEDevDesc dd)
+double Rf_GConvertXUnits(double x, GUnit fromUnits, GUnit toUnits, pGEDevDesc dd)
 {
     double dev, final;
     switch (fromUnits) {
@@ -326,7 +326,7 @@ double GConvertXUnits(double x, GUnit fromUnits, GUnit toUnits, pGEDevDesc dd)
     return final;
 }
 
-double GConvertYUnits(double y, GUnit fromUnits, GUnit toUnits, pGEDevDesc dd)
+double Rf_GConvertYUnits(double y, GUnit fromUnits, GUnit toUnits, pGEDevDesc dd)
 {
     double dev, final;
     switch (fromUnits) {
@@ -635,23 +635,23 @@ static double yDevtoxOMA4(double y, pGEDevDesc dd)
     return yDevtoNIC(y, dd);
 }
 
-double xDevtoNFC(double x, pGEDevDesc dd)
+double Rf_xDevtoNFC(double x, pGEDevDesc dd)
 {
     return (x - gpptr(dd)->fig2dev.ax)/gpptr(dd)->fig2dev.bx;
 }
 
-double yDevtoNFC(double y, pGEDevDesc dd)
+double Rf_yDevtoNFC(double y, pGEDevDesc dd)
 {
     return (y - gpptr(dd)->fig2dev.ay)/gpptr(dd)->fig2dev.by;
 }
 
-double xDevtoNPC(double x, pGEDevDesc dd)
+double Rf_xDevtoNPC(double x, pGEDevDesc dd)
 {
     return (xDevtoNFC(x, dd) - gpptr(dd)->plt[0])/
 	(gpptr(dd)->plt[1] - gpptr(dd)->plt[0]);
 }
 
-double yDevtoNPC(double y, pGEDevDesc dd)
+double Rf_yDevtoNPC(double y, pGEDevDesc dd)
 {
     return (yDevtoNFC(y, dd) - gpptr(dd)->plt[2])/
 	(gpptr(dd)->plt[3] - gpptr(dd)->plt[2]);
@@ -659,7 +659,7 @@ double yDevtoNPC(double y, pGEDevDesc dd)
 
 /* a special case (NPC = normalised plot region coordinates) */
 
-double xNPCtoUsr(double x, pGEDevDesc dd)
+double Rf_xNPCtoUsr(double x, pGEDevDesc dd)
 {
     if (gpptr(dd)->xlog)
 	return Rexp10(gpptr(dd)->logusr[0] +
@@ -668,7 +668,7 @@ double xNPCtoUsr(double x, pGEDevDesc dd)
 	return gpptr(dd)->usr[0] + x*(gpptr(dd)->usr[1] - gpptr(dd)->usr[0]);
 }
 
-double yNPCtoUsr(double y, pGEDevDesc dd)
+double Rf_yNPCtoUsr(double y, pGEDevDesc dd)
 {
     if (gpptr(dd)->ylog)
 	return Rexp10(gpptr(dd)->logusr[2] +
@@ -677,7 +677,7 @@ double yNPCtoUsr(double y, pGEDevDesc dd)
 	return gpptr(dd)->usr[2] + y*(gpptr(dd)->usr[3] - gpptr(dd)->usr[2]);
 }
 
-double xDevtoUsr(double x, pGEDevDesc dd)
+double Rf_xDevtoUsr(double x, pGEDevDesc dd)
 {
     double nfc = xDevtoNFC(x, dd);
     if (gpptr(dd)->xlog)
@@ -686,7 +686,7 @@ double xDevtoUsr(double x, pGEDevDesc dd)
 	return (nfc - gpptr(dd)->win2fig.ax)/gpptr(dd)->win2fig.bx;
 }
 
-double yDevtoUsr(double y, pGEDevDesc dd)
+double Rf_yDevtoUsr(double y, pGEDevDesc dd)
 {
   double nfc = yDevtoNFC(y, dd);
   if (gpptr(dd)->ylog)
@@ -740,7 +740,7 @@ static double yDevtoxMAR4(double y, pGEDevDesc dd)
 /* the Convert function converts a LOCATION in the FROM coordinate */
 /* system to a LOCATION in the TO coordinate system */
 
-void GConvert(double *x, double *y, GUnit from, GUnit to, pGEDevDesc dd)
+void Rf_GConvert(double *x, double *y, GUnit from, GUnit to, pGEDevDesc dd)
 {
     double devx, devy;
 
@@ -884,7 +884,7 @@ void GConvert(double *x, double *y, GUnit from, GUnit to, pGEDevDesc dd)
     }
 }
 
-double GConvertX(double x, GUnit from, GUnit to, pGEDevDesc dd)
+double Rf_GConvertX(double x, GUnit from, GUnit to, pGEDevDesc dd)
 {
     double devx;
     switch (from) {
@@ -931,7 +931,7 @@ double GConvertX(double x, GUnit from, GUnit to, pGEDevDesc dd)
     return x;
 }
 
-double GConvertY(double y, GUnit from, GUnit to, pGEDevDesc dd)
+double Rf_GConvertY(double y, GUnit from, GUnit to, pGEDevDesc dd)
 {
     double devy;
     switch (from) {
@@ -1645,7 +1645,7 @@ static void updatePlotRegion(pGEDevDesc dd)
 
 /*  GMapWin2Fig -- transformation from Usr to NFC */
 
-void GMapWin2Fig(pGEDevDesc dd)
+void Rf_GMapWin2Fig(pGEDevDesc dd)
 {
     if (gpptr(dd)->xlog) {
 	gpptr(dd)->win2fig.bx = dpptr(dd)->win2fig.bx =
@@ -1703,7 +1703,7 @@ static void mapping(pGEDevDesc dd, int which)
 
 /*  GReset -- Reset coordinate systems mappings and unit yardsticks */
 
-void GReset(pGEDevDesc dd)
+void Rf_GReset(pGEDevDesc dd)
 {
     /* Character extents are based on the raster size */
     gpptr(dd)->mkh = gpptr(dd)->scale * dd->dev->cra[0]
@@ -1765,7 +1765,7 @@ Rboolean GRecording(SEXP call, pGEDevDesc dd)
 }
 
 /*  GNewPlot -- Begin a new plot (advance to new frame if needed)  */
-pGEDevDesc GNewPlot(Rboolean recording)
+pGEDevDesc Rf_GNewPlot(Rboolean recording)
 {
     pGEDevDesc dd;
 
@@ -1843,15 +1843,16 @@ pGEDevDesc GNewPlot(Rboolean recording)
     /* send an error message to the command line */
     /* IF we are replaying then draw a message in the output */
 
-#define G_ERR_MSG(msg)			\
-	if (recording)			\
-	    invalidError(msg, dd);	\
-	else {				\
-	    int xpdsaved = gpptr(dd)->xpd; \
-	    gpptr(dd)->xpd = 2; \
-	    GText(0.5,0.5, NFC, msg, cetype_t(-1), 0.5, 0.5,  0, dd);  \
-	    gpptr(dd)->xpd = xpdsaved; \
-	}
+#define G_ERR_MSG(msg)                                            \
+    if (recording)                                                \
+        invalidError(msg, dd);                                    \
+    else                                                          \
+    {                                                             \
+        int xpdsaved = gpptr(dd)->xpd;                            \
+        gpptr(dd)->xpd = 2;                                       \
+        GText(0.5, 0.5, NFC, msg, cetype_t(-1), 0.5, 0.5, 0, dd); \
+        gpptr(dd)->xpd = xpdsaved;                                \
+    }
 
     dpptr(dd)->valid = gpptr(dd)->valid = FALSE;
     if (!validOuterMargins(dd)) {
@@ -1882,12 +1883,12 @@ pGEDevDesc GNewPlot(Rboolean recording)
 /*
 // (usr, log, n_inp) |--> (axp = (min, max), n_out) :
 
-void GAxisPars(double *min, double *max, int *n, Rboolean log, int axis)
+void Rf_GAxisPars(double *min, double *max, int *n, Rboolean log, int axis)
 
 * ----> in src/main/graphics.cpp (as used in grDevices too)
 *          ------------------- */
 
-void GScale(double min, double max, int axis, pGEDevDesc dd)
+void Rf_GScale(double min, double max, int axis, pGEDevDesc dd)
 {
 /* GScale: used to default axis information
  *	   i.e., if user has NOT specified par(usr=...)
@@ -1991,16 +1992,18 @@ void GScale(double min, double max, int axis, pGEDevDesc dd)
     // Computation of [xy]axp[0:2] == (min,max,n) :
     GAxisPars(&min, &max, &n, Rboolean(log), axis);
 
-#define G_Store_AXP(is_X)			\
-    if(is_X) {					\
-	gpptr(dd)->xaxp[0] = dpptr(dd)->xaxp[0] = min;	\
-	gpptr(dd)->xaxp[1] = dpptr(dd)->xaxp[1] = max;	\
-	gpptr(dd)->xaxp[2] = dpptr(dd)->xaxp[2] = n;	\
-    }						\
-    else {					\
-	gpptr(dd)->yaxp[0] = dpptr(dd)->yaxp[0] = min;	\
-	gpptr(dd)->yaxp[1] = dpptr(dd)->yaxp[1] = max;	\
-	gpptr(dd)->yaxp[2] = dpptr(dd)->yaxp[2] = n;	\
+#define G_Store_AXP(is_X)                              \
+    if (is_X)                                          \
+    {                                                  \
+        gpptr(dd)->xaxp[0] = dpptr(dd)->xaxp[0] = min; \
+        gpptr(dd)->xaxp[1] = dpptr(dd)->xaxp[1] = max; \
+        gpptr(dd)->xaxp[2] = dpptr(dd)->xaxp[2] = n;   \
+    }                                                  \
+    else                                               \
+    {                                                  \
+        gpptr(dd)->yaxp[0] = dpptr(dd)->yaxp[0] = min; \
+        gpptr(dd)->yaxp[1] = dpptr(dd)->yaxp[1] = max; \
+        gpptr(dd)->yaxp[2] = dpptr(dd)->yaxp[2] = n;   \
     }
 
     G_Store_AXP(is_xaxis);
@@ -2008,7 +2011,7 @@ void GScale(double min, double max, int axis, pGEDevDesc dd)
 #undef EPS_FAC_1
 #undef EPS_FAC_2
 
-void GSetupAxis(int axis, pGEDevDesc dd)
+void Rf_GSetupAxis(int axis, pGEDevDesc dd)
 {
 /*  GSetupAxis -- Set up the default axis information
  *		  called when user specifies	par(usr =...) */
@@ -2049,7 +2052,7 @@ void GSetupAxis(int axis, pGEDevDesc dd)
  * Called from baseCallback.
  */
 
-void GInit(GPar *dp)
+void Rf_GInit(GPar *dp)
 {
     dp->state = 0;
     dp->valid = FALSE;
@@ -2176,14 +2179,14 @@ void GInit(GPar *dp)
 }
 
 /* Copy a GPar structure from source to dest. */
-void copyGPar(GPar *source, GPar *dest)
+void Rf_copyGPar(GPar *source, GPar *dest)
 {
     memcpy(dest, source, sizeof(GPar));
 }
 
 
 /* Restore the graphics parameters from the device copy. */
-void GRestore(pGEDevDesc dd)
+void Rf_GRestore(pGEDevDesc dd)
 {
     if (NoDevices()) error(_("no graphics device is active"));
     copyGPar(dpptr(dd), gpptr(dd));
@@ -2244,7 +2247,7 @@ static char yaxssave;      /* y axis calculation style */
 static char yaxtsave;      /* y axis type */
 
 /* Make a temporary copy of the inline parameter values. */
-void GSavePars(pGEDevDesc dd)
+void Rf_GSavePars(pGEDevDesc dd)
 {
     adjsave = gpptr(dd)->adj;
     annsave = gpptr(dd)->ann;
@@ -2303,7 +2306,7 @@ void GSavePars(pGEDevDesc dd)
 
 
 /*  Restore temporarily saved inline parameter values	*/
-void GRestorePars(pGEDevDesc dd)
+void Rf_GRestorePars(pGEDevDesc dd)
 {
     gpptr(dd)->adj = adjsave;
     gpptr(dd)->ann = Rboolean(annsave);
@@ -2368,7 +2371,7 @@ void GRestorePars(pGEDevDesc dd)
 
 
 /* This records whether GNewPlot has been called. */
-void GSetState(int newstate, pGEDevDesc dd)
+void Rf_GSetState(int newstate, pGEDevDesc dd)
 {
     dpptr(dd)->state = gpptr(dd)->state = newstate;
 }
@@ -2376,7 +2379,7 @@ void GSetState(int newstate, pGEDevDesc dd)
 
 
 /* Enquire whether GNewPlot has been called. */
-void GCheckState(pGEDevDesc dd)
+void Rf_GCheckState(pGEDevDesc dd)
 {
     if(gpptr(dd)->state == 0)
 	error(_("plot.new has not been called yet"));
@@ -2438,7 +2441,7 @@ static void setClipRect(double *x1, double *y1, double *x2, double *y2,
 }
 
 /* Update the device clipping region (depends on GP->xpd). */
-void GClip(pGEDevDesc dd)
+void Rf_GClip(pGEDevDesc dd)
 {
     if (gpptr(dd)->xpd != gpptr(dd)->oldxpd) {
 	double x1, y1, x2, y2;
@@ -2450,7 +2453,7 @@ void GClip(pGEDevDesc dd)
 
 
 /*  Forced update of the device clipping region. */
-void GForceClip(pGEDevDesc dd)
+void Rf_GForceClip(pGEDevDesc dd)
 {
     double x1, y1, x2, y2;
     if (gpptr(dd)->state == 0) return;
@@ -2496,7 +2499,7 @@ void gcontextFromGP(pGEcontext gc, pGEDevDesc dd)
 /* Draw a line. */
 /* If the device canClip, R clips line to device extent and
    device does all other clipping. */
-void GLine(double x1, double y1, double x2, double y2, int coords, pGEDevDesc dd)
+void Rf_GLine(double x1, double y1, double x2, double y2, int coords, pGEDevDesc dd)
 {
     R_GE_gcontext gc; gcontextFromGP(&gc, dd);
     if (gpptr(dd)->lty == LTY_BLANK) return;
@@ -2542,7 +2545,7 @@ locator_close(pDevDesc dd)
 
 
 /* Read the current "pen" position. */
-Rboolean GLocator(double *x, double *y, int coords, pGEDevDesc dd)
+Rboolean Rf_GLocator(double *x, double *y, int coords, pGEDevDesc dd)
 {
   Rboolean ret;
   /* store original close handler (it will still be called on
@@ -2563,7 +2566,7 @@ Rboolean GLocator(double *x, double *y, int coords, pGEDevDesc dd)
 }
 
 /* Access character font metric information.  */
-void GMetricInfo(int c, double *ascent, double *descent, double *width,
+void Rf_GMetricInfo(int c, double *ascent, double *descent, double *width,
 		 GUnit units, pGEDevDesc dd)
 {
     R_GE_gcontext gc;
@@ -2583,7 +2586,7 @@ void GMetricInfo(int c, double *ascent, double *descent, double *width,
 	mode = 1, graphics on
 	mode = 2, graphical input on (ignored by most drivers)
 */
-void GMode(int mode, pGEDevDesc dd)
+void Rf_GMode(int mode, pGEDevDesc dd)
 {
     if (NoDevices())
 	error(_("no graphics device is active"));
@@ -2611,38 +2614,48 @@ void GMode(int mode, pGEDevDesc dd)
  * NOTE:  most of this code (up to GPolygon) is only now used by
  * GClipPolygon -- GPolygon runs the new GEPolygon in engine.cpp
  */
-enum Edge {
+enum Edge
+{
     Left = 0,
     Right = 1,
     Bottom = 2,
     Top = 3
 };
 
-inline Edge& operator++(Edge& edge, int)
+inline Edge &operator++(Edge &edge) // ++edge
 {
-   const int i = static_cast<int>(edge);
-   edge = static_cast<Edge>((i + 1) % 4);
-   return edge;
+    const int i = static_cast<int>(edge);
+    edge = static_cast<Edge>((i + 1) % 4);
+    return edge;
+}
+
+inline Edge &operator++(Edge &edge, int) // edge++
+{
+    Edge *i = new Edge(edge);
+    ++edge;
+    return *i;
 }
 
 /* Clipper State Variables */
-struct GClipState {
-    int first;    /* true if we have seen the first point */
-    double fx;    /* x coord of the first point */
-    double fy;    /* y coord of the first point */
-    double sx;    /* x coord of the most recent point */
-    double sy;    /* y coord of the most recent point */
+struct GClipState
+{
+    int first; /* true if we have seen the first point */
+    double fx; /* x coord of the first point */
+    double fy; /* y coord of the first point */
+    double sx; /* x coord of the most recent point */
+    double sy; /* y coord of the most recent point */
 };
 
 /* The Clipping Rectangle */
-struct GClipRect {
+struct GClipRect
+{
     double xmin;
     double xmax;
     double ymin;
     double ymax;
 };
 
-static int inside (Edge b, double px, double py, GClipRect *clip)
+static int inside(Edge b, double px, double py, GClipRect *clip)
 {
     switch (b) {
     case Left:   if (px < clip->xmin) return 0; break;
@@ -2653,15 +2666,15 @@ static int inside (Edge b, double px, double py, GClipRect *clip)
     return 1;
 }
 
-static int cross (Edge b, double x1, double y1, double x2, double y2,
+static int cross(Edge b, double x1, double y1, double x2, double y2,
 	   GClipRect *clip)
 {
-    if (inside (b, x1, y1, clip) == inside (b, x2, y2, clip))
+    if (inside(b, x1, y1, clip) == inside(b, x2, y2, clip))
 	return 0;
     else return 1;
 }
 
-static void intersect (Edge b, double x1, double y1, double x2, double y2,
+static void intersect(Edge b, double x1, double y1, double x2, double y2,
 		double *ix, double *iy, GClipRect *clip)
 {
     double m = 0;
@@ -2689,7 +2702,7 @@ static void intersect (Edge b, double x1, double y1, double x2, double y2,
     }
 }
 
-static void clipPoint (Edge b, double x, double y,
+static void clipPoint(Edge b, double x, double y,
 		double *xout, double *yout, int *cnt, int store,
 		GClipRect *clip, GClipState *cs)
 {
@@ -2707,10 +2720,10 @@ static void clipPoint (Edge b, double x, double y,
 	/* If 'p' and previous point cross edge, find intersection.  */
 	/* Clip against next boundary, if any.  */
 	/* If no more edges, add intersection to output list. */
-	if (cross (b, x, y, cs[b].sx, cs[b].sy, clip)) {
-	    intersect (b, x, y, cs[b].sx, cs[b].sy, &ix, &iy, clip);
+	if (cross(b, x, y, cs[b].sx, cs[b].sy, clip)) {
+	    intersect(b, x, y, cs[b].sx, cs[b].sy, &ix, &iy, clip);
 	    if (b < Top)
-		clipPoint (Edge(b + 1), ix, iy, xout, yout, cnt, store,
+		clipPoint(Edge(b + 1), ix, iy, xout, yout, cnt, store,
 			   clip, cs);
 	    else {
 		if (store) {
@@ -2727,9 +2740,9 @@ static void clipPoint (Edge b, double x, double y,
 
     /* For all, if point is 'inside' */
     /* proceed to next clip edge, if any */
-    if (inside (b, x, y, clip)) {
+    if (inside(b, x, y, clip)) {
 	if (b < Top)
-	    clipPoint (Edge(b + 1), x, y, xout, yout, cnt, store, clip, cs);
+	    clipPoint(Edge(b + 1), x, y, xout, yout, cnt, store, clip, cs);
 	else {
 	    if (store) {
 		xout[*cnt] = x;
@@ -2740,18 +2753,18 @@ static void clipPoint (Edge b, double x, double y,
     }
 }
 
-static void closeClip (double *xout, double *yout, int *cnt, int store,
+static void closeClip(double *xout, double *yout, int *cnt, int store,
 		GClipRect *clip, GClipState *cs)
 {
     double ix = 0.0, iy = 0.0 /* -Wall */;
     Edge b;
 
-    for (b = Left; b <= Top; b++) {
-	if (cross (b, cs[b].sx, cs[b].sy, cs[b].fx, cs[b].fy, clip)) {
-	    intersect (b, cs[b].sx, cs[b].sy,
+    for (b = Left; b <= Top; ++b) {
+	if (cross(b, cs[b].sx, cs[b].sy, cs[b].fx, cs[b].fy, clip)) {
+	    intersect(b, cs[b].sx, cs[b].sy,
 		       cs[b].fx, cs[b].fy, &ix, &iy, clip);
 	    if (b < Top)
-		clipPoint (Edge(b + 1), ix, iy, xout, yout, cnt, store, clip, cs);
+		clipPoint(Edge(b + 1), ix, iy, xout, yout, cnt, store, clip, cs);
 	    else {
 		if (store) {
 		    xout[*cnt] = ix;
@@ -2763,7 +2776,7 @@ static void closeClip (double *xout, double *yout, int *cnt, int store,
     }
 }
 
-int GClipPolygon(double *x, double *y, int n, int coords, int store,
+int Rf_GClipPolygon(double *x, double *y, int n, int coords, int store,
 		 double *xout, double *yout, pGEDevDesc dd)
 {
     int i, cnt = 0;
@@ -2785,8 +2798,8 @@ int GClipPolygon(double *x, double *y, int n, int coords, int store,
 	clip.ymin = swap;
     }
     for (i = 0; i < n; i++)
-	clipPoint (Left, x[i], y[i], xout, yout, &cnt, store, &clip, cs);
-    closeClip (xout, yout, &cnt, store, &clip, cs);
+	clipPoint(Left, x[i], y[i], xout, yout, &cnt, store, &clip, cs);
+    closeClip(xout, yout, &cnt, store, &clip, cs);
     return (cnt);
 }
 /*
@@ -2806,7 +2819,7 @@ int GClipPolygon(double *x, double *y, int n, int coords, int store,
  *	Filled with color bg and outlined with color fg
  *	These may both be NA_INTEGER
  */
-void GPolygon(int n, double *x, double *y, int coords,
+void Rf_GPolygon(int n, double *x, double *y, int coords,
 	      int bg, int fg, pGEDevDesc dd)
 {
     int i;
@@ -2846,7 +2859,7 @@ void GPolygon(int n, double *x, double *y, int coords,
 /* Draw a series of line segments. */
 /* If the device canClip, R clips to the device extent and the device
    does all other clipping */
-void GPolyline(int n, double *x, double *y, int coords, pGEDevDesc dd)
+void Rf_GPolyline(int n, double *x, double *y, int coords, pGEDevDesc dd)
 {
     int i;
     double *xx;
@@ -2885,7 +2898,7 @@ void GPolyline(int n, double *x, double *y, int coords, pGEDevDesc dd)
  *
  * NB: this fiddles with radius = 0.
  */
-void GCircle(double x, double y, int coords,
+void Rf_GCircle(double x, double y, int coords,
 	     double radius, int bg, int fg, pGEDevDesc dd)
 {
     double ir;
@@ -2914,7 +2927,7 @@ void GCircle(double x, double y, int coords,
 /* Draw a rectangle	*/
 /* Filled with color bg and outlined with color fg  */
 /* These may both be NA_INTEGER	 */
-void GRect(double x0, double y0, double x1, double y1, int coords,
+void Rf_GRect(double x0, double y0, double x1, double y1, int coords,
 	   int bg, int fg, pGEDevDesc dd)
 {
     R_GE_gcontext gc; gcontextFromGP(&gc, dd);
@@ -2937,7 +2950,7 @@ void GRect(double x0, double y0, double x1, double y1, int coords,
     GERect(x0, y0, x1, y1, &gc, dd);
 }
 
-void GPath(double *x, double *y,
+void Rf_GPath(double *x, double *y,
            int npoly, int *nper,
            Rboolean winding,
            int bg, int fg, pGEDevDesc dd)
@@ -2956,7 +2969,7 @@ void GPath(double *x, double *y,
     GEPath(x, y, npoly, nper, winding, &gc, dd);
 }
 
-void GRaster(unsigned int* image, int w, int h,
+void Rf_GRaster(unsigned int* image, int w, int h,
              double x0, double y0, double x1, double y1,
              double angle, Rboolean interpolate,
              pGEDevDesc dd)
@@ -2973,7 +2986,7 @@ void GRaster(unsigned int* image, int w, int h,
 }
 
 /* Compute string width. */
-double GStrWidth(const char *str, cetype_t enc, GUnit units, pGEDevDesc dd)
+double Rf_GStrWidth(const char *str, cetype_t enc, GUnit units, pGEDevDesc dd)
 {
     double w;
     R_GE_gcontext gc; gcontextFromGP(&gc, dd);
@@ -2985,7 +2998,7 @@ double GStrWidth(const char *str, cetype_t enc, GUnit units, pGEDevDesc dd)
 
 
 /* Compute string height. */
-double GStrHeight(const char *str, cetype_t enc, GUnit units, pGEDevDesc dd)
+double Rf_GStrHeight(const char *str, cetype_t enc, GUnit units, pGEDevDesc dd)
 {
     double h;
     R_GE_gcontext gc; gcontextFromGP(&gc, dd);
@@ -2998,7 +3011,7 @@ double GStrHeight(const char *str, cetype_t enc, GUnit units, pGEDevDesc dd)
 /* Draw text in a plot. */
 /* If you want EXACT centering of text (e.g., like in GSymbol) */
 /* then pass NA_REAL for xc and yc */
-void GText(double x, double y, int coords, const char *str, cetype_t enc,
+void Rf_GText(double x, double y, int coords, const char *str, cetype_t enc,
 	   double xc, double yc, double rot, pGEDevDesc dd)
 {
     R_GE_gcontext gc; gcontextFromGP(&gc, dd);
@@ -3023,7 +3036,7 @@ void GText(double x, double y, int coords, const char *str, cetype_t enc,
 
 /* GArrow -- Draw an arrow. */
 /* NOTE that the length parameter is in inches. */
-void GArrow(double xfrom, double yfrom, double xto, double yto, int coords,
+void Rf_GArrow(double xfrom, double yfrom, double xto, double yto, int coords,
 	    double length, double angle, int code, pGEDevDesc dd)
 {
 
@@ -3076,7 +3089,7 @@ void GArrow(double xfrom, double yfrom, double xto, double yto, int coords,
 
 
 /* Draw a box about one of several regions:  box(which) */
-void GBox(int which, pGEDevDesc dd)
+void Rf_GBox(int which, pGEDevDesc dd)
 {
     double x[7], y[7];
     if (which == 1) {/* plot */
@@ -3168,7 +3181,7 @@ void GPretty(double *lo, double *up, int *ndiv)
 /* NOTE: This cex is already multiplied with cexbase */
 
 /* Draw one of the R special symbols. */
-void GSymbol(double x, double y, int coords, int pch, pGEDevDesc dd)
+void Rf_GSymbol(double x, double y, int coords, int pch, pGEDevDesc dd)
 {
     double size = GConvertYUnits(GSTR_0, INCHES, DEVICE, dd);
     R_GE_gcontext gc; gcontextFromGP(&gc, dd);
@@ -3195,7 +3208,7 @@ void GSymbol(double x, double y, int coords, int pch, pGEDevDesc dd)
 
 
 /* Draw text in plot margins. */
-void GMtext(const char *str, cetype_t enc, int side, double line, int outer,
+void Rf_GMtext(const char *str, cetype_t enc, int side, double line, int outer,
 	    double at, int las, double yadj, pGEDevDesc dd)
 {
 /* "las" gives the style of axis labels:
@@ -3293,7 +3306,7 @@ void GMtext(const char *str, cetype_t enc, int side, double line, int outer,
 
  */
 
-double GExpressionWidth(SEXP expr, GUnit units, pGEDevDesc dd)
+double Rf_GExpressionWidth(SEXP expr, GUnit units, pGEDevDesc dd)
 {
     R_GE_gcontext gc;
     double width;
@@ -3305,7 +3318,7 @@ double GExpressionWidth(SEXP expr, GUnit units, pGEDevDesc dd)
 	return GConvertXUnits(width, DEVICE, units, dd);
 }
 
-double GExpressionHeight(SEXP expr, GUnit units, pGEDevDesc dd)
+double Rf_GExpressionHeight(SEXP expr, GUnit units, pGEDevDesc dd)
 {
     R_GE_gcontext gc;
     double height;
@@ -3327,7 +3340,7 @@ double GExpressionHeight(SEXP expr, GUnit units, pGEDevDesc dd)
  * graphics system directly calls the graphics engine for mathematical
  * annotation (GEMathText in ../../../main/plotmath.cpp )
  */
-void GMathText(double x, double y, int coords, SEXP expr,
+void Rf_GMathText(double x, double y, int coords, SEXP expr,
 	       double xc, double yc, double rot,
 	       pGEDevDesc dd)
 {
@@ -3338,7 +3351,7 @@ void GMathText(double x, double y, int coords, SEXP expr,
     GEMathText(x, y, expr, xc, yc, rot, &gc, dd);
 }
 
-void GMMathText(SEXP str, int side, double line, int outer,
+void Rf_GMMathText(SEXP str, int side, double line, int outer,
 		double at, int las, double yadj, pGEDevDesc dd)
 {
     int coords = 0;

@@ -85,7 +85,7 @@ int Rf_stringPositionTr(SEXP string, const char *translatedElement)
     int slen = LENGTH(string);
 
     const void *vmax = vmaxget();
-    for (int i = 0; i < slen; i++)
+    for (int i = 0; i < slen; ++i)
     {
         bool found = (strcmp(Rf_translateChar(STRING_ELT(string, i)), translatedElement) == 0);
         vmaxset(vmax);

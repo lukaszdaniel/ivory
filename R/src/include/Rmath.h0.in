@@ -208,7 +208,6 @@ double  Rlog1p(double);
 #define M_LN_SQRT_PId2	0.225791352644727432363097614947	/* log(sqrt(pi/2)) == log(pi/2)/2 */
 #endif
 
-
 #ifndef M_EC
 #define M_EC            0.57721566490153286060651209008240243104215933593992 /* euler's constant */
 #endif

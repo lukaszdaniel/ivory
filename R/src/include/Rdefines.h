@@ -124,8 +124,8 @@
 #define LOGICAL_VALUE(x)	Rf_asLogical(x)
 #define INTEGER_VALUE(x)	Rf_asInteger(x)
 #define NUMERIC_VALUE(x)	Rf_asReal(x)
-#define CHARACTER_VALUE(x)	CHAR(Rf_asChar(x))
-#define STRING_VALUE(x)		CHAR(Rf_asChar(x))
+#define CHARACTER_VALUE(x)	R_CHAR(Rf_asChar(x))
+#define STRING_VALUE(x)		R_CHAR(Rf_asChar(x))
 #define LIST_VALUE(x)		Rf_error(_("the 'value' of a list object is not defined"))
 #define RAW_VALUE(x)		Rf_error(_("the 'value' of a raw object is not defined"))
 
@@ -162,12 +162,12 @@
 
 #include <R_ext/Boolean.h>
 
-#define COPY_TO_USER_STRING(x)	mkChar(x)
-#define CREATE_STRING_VECTOR(x)	mkChar(x)
+#define COPY_TO_USER_STRING(x)	Rf_mkChar(x)
+#define CREATE_STRING_VECTOR(x)	Rf_mkChar(x)
 
 #define CREATE_FUNCTION_CALL(name, argList) createFunctionCall(name, argList)
 
-#define EVAL(x)			eval(x,R_GlobalEnv)
+#define EVAL(x)			Rf_eval(x, R_GlobalEnv)
 
 
 #endif

@@ -64,8 +64,6 @@ extern "C" {
 #include <R_ext/libextern.h>
 #include <CXXR/RTypes.hpp> // for RObject, SEXPREC, Rbyte, R_*_t, 
 
-#define DO_NOTHING do {} while(0)
-
 /* both config.h and Rconfig.h set SIZEOF_SIZE_T, but Rconfig.h is
    skipped if config.h has already been included. */
 #ifndef R_CONFIG_H
@@ -76,9 +74,7 @@ extern "C" {
 #define LONG_VECTOR_SUPPORT
 #endif
 
-#ifndef TESTING_WRITE_BARRIER
-#define INLINE_PROTECT
-#else
+#ifdef TESTING_WRITE_BARRIER
 /* define inline-able functions */
 #define STRICT_TYPECHECK
 #define CATCH_ZERO_LENGTH_ACCESS
@@ -120,27 +116,27 @@ const char *R_CHAR(SEXP x);
 #define CHAR(x)		R_CHAR(x)
 
 /* Various tests with macro versions in the second USE_RINTERNALS section */
-Rboolean (Rf_isNull)(SEXP s);
-Rboolean (Rf_isSymbol)(SEXP s);
-Rboolean (Rf_isLogical)(SEXP s);
-Rboolean (Rf_isReal)(SEXP s);
-Rboolean (Rf_isComplex)(SEXP s);
-Rboolean (Rf_isExpression)(SEXP s);
-Rboolean (Rf_isEnvironment)(SEXP s);
-Rboolean (Rf_isString)(SEXP s);
-Rboolean (Rf_isObject)(SEXP s);
-Rboolean (Rf_isRaw)(SEXP s);
+Rboolean Rf_isNull(SEXP s);
+Rboolean Rf_isSymbol(SEXP s);
+Rboolean Rf_isLogical(SEXP s);
+Rboolean Rf_isReal(SEXP s);
+Rboolean Rf_isComplex(SEXP s);
+Rboolean Rf_isExpression(SEXP s);
+Rboolean Rf_isEnvironment(SEXP s);
+Rboolean Rf_isString(SEXP s);
+Rboolean Rf_isObject(SEXP s);
+Rboolean Rf_isRaw(SEXP s);
 
 
 #define IS_SIMPLE_SCALAR(x, type) \
     (IS_SCALAR(x, type) && ATTRIB(x) == R_NilValue)
-int (SIMPLE_SCALAR_TYPE)(SEXP x);
+int SIMPLE_SCALAR_TYPE(SEXP x);
 
-#define NAMEDMAX 7
 #ifdef SWITCH_TO_REFCNT
 # define INCREMENT_NAMED(x) do { } while (0)
 # define DECREMENT_NAMED(x) do { } while (0)
 #else
+#define NAMEDMAX 7
 #define INCREMENT_NAMED(x)                      \
     do                                          \
     {                                           \
@@ -227,9 +223,9 @@ typedef enum Sortness
 */
 
 /* General Cons Cell Attributes */
-SEXP (ATTRIB)(SEXP x);
-int  (OBJECT)(SEXP x);
-int  (MARK)(SEXP x);
+SEXP ATTRIB(SEXP x);
+int  OBJECT(SEXP x);
+int  MARK(SEXP x);
 SEXPTYPE TYPEOF(SEXP x);
 int  (NAMED)(SEXP x);
 int  (REFCNT)(SEXP x);
@@ -268,43 +264,40 @@ void SET_MAYBEJIT(SEXP x);
 void UNSET_MAYBEJIT(SEXP x);
 
 /* Growable vector support */
-int (IS_GROWABLE)(SEXP x);
-void (SET_GROWABLE_BIT)(SEXP x);
+int IS_GROWABLE(SEXP x);
+void SET_GROWABLE_BIT(SEXP x);
 
 /* Vector Access Functions */
 int  (LENGTH)(SEXP x);
 R_xlen_t (XLENGTH)(SEXP x);
 R_xlen_t  (TRUELENGTH)(SEXP x);
-void (SETLENGTH)(SEXP x, R_xlen_t v);
-void (SET_TRUELENGTH)(SEXP x, R_xlen_t v);
+void SETLENGTH(SEXP x, R_xlen_t v);
+void SET_TRUELENGTH(SEXP x, R_xlen_t v);
 int  (IS_LONG_VEC)(SEXP x);
 int  LEVELS(SEXP x);
 void  SETLEVELS(SEXP x, int v);
-#if defined(TESTING_WRITE_BARRIER) || defined(COMPILING_IVORY)
-R_xlen_t (STDVEC_LENGTH)(SEXP);
-R_xlen_t (STDVEC_TRUELENGTH)(SEXP);
+R_xlen_t STDVEC_LENGTH(SEXP);
+R_xlen_t STDVEC_TRUELENGTH(SEXP);
 void SETALTREP(SEXP, int);
-#endif
 
-int  *(LOGICAL)(SEXP x);
-int  *(INTEGER)(SEXP x);
-Rbyte *(RAW)(SEXP x);
-double *(REAL)(SEXP x);
-Rcomplex *(COMPLEX)(SEXP x);
-const int  *(LOGICAL_RO)(SEXP x);
-const int  *(INTEGER_RO)(SEXP x);
-const Rbyte *(RAW_RO)(SEXP x);
-const double *(REAL_RO)(SEXP x);
-const Rcomplex *(COMPLEX_RO)(SEXP x);
-//SEXP (STRING_ELT)(SEXP x, R_xlen_t i);
+int  *LOGICAL(SEXP x);
+int  *INTEGER(SEXP x);
+Rbyte *RAW(SEXP x);
+double *REAL(SEXP x);
+Rcomplex *COMPLEX(SEXP x);
+const int  *LOGICAL_RO(SEXP x);
+const int  *INTEGER_RO(SEXP x);
+const Rbyte *RAW_RO(SEXP x);
+const double *REAL_RO(SEXP x);
+const Rcomplex *COMPLEX_RO(SEXP x);
 SEXP VECTOR_ELT(SEXP x, R_xlen_t i);
 SEXP XVECTOR_ELT(SEXP x, R_xlen_t i);
 void SET_STRING_ELT(SEXP x, R_xlen_t i, SEXP v);
 SEXP SET_VECTOR_ELT(SEXP x, R_xlen_t i, SEXP v);
 SEXP SET_XVECTOR_ELT(SEXP x, R_xlen_t i, SEXP v);
-SEXP *(STRING_PTR)(SEXP x);
-const SEXP *(STRING_PTR_RO)(SEXP x);
-NORET SEXP * (VECTOR_PTR)(SEXP x);
+SEXP *STRING_PTR(SEXP x);
+const SEXP *STRING_PTR_RO(SEXP x);
+NORET SEXP *VECTOR_PTR(SEXP x);
 
 /* ALTREP support */
 void *STDVEC_DATAPTR(SEXP x);
@@ -392,8 +385,8 @@ void R_check_thread(const char *s);
 /* These also work for ... objects */
 #define CONS(a, b)	Rf_cons((a), (b))		/* data lists */
 #define LCONS(a, b)	Rf_lcons((a), (b))		/* language lists */
-int (BNDCELL_TAG)(SEXP e);
-void (SET_BNDCELL_TAG)(SEXP e, int v);
+int BNDCELL_TAG(SEXP e);
+void SET_BNDCELL_TAG(SEXP e, int v);
 double (BNDCELL_DVAL)(SEXP cell);
 int (BNDCELL_IVAL)(SEXP cell);
 int (BNDCELL_LVAL)(SEXP cell);
@@ -401,22 +394,22 @@ void (SET_BNDCELL_DVAL)(SEXP cell, double v);
 void (SET_BNDCELL_IVAL)(SEXP cell, int v);
 void (SET_BNDCELL_LVAL)(SEXP cell, int v);
 void (INIT_BNDCELL)(SEXP cell, int type);
-void (SET_BNDCELL)(SEXP cell, SEXP val);
+void SET_BNDCELL(SEXP cell, SEXP val);
 
-SEXP (TAG)(SEXP e);
-SEXP (CAR0)(SEXP e);
-SEXP (CDR)(SEXP e);
-SEXP (CAAR)(SEXP e);
-SEXP (CDAR)(SEXP e);
-SEXP (CADR)(SEXP e);
-SEXP (CDDR)(SEXP e);
-SEXP (CDDDR)(SEXP e);
-SEXP (CADDR)(SEXP e);
-SEXP (CD4R)(SEXP e);
-SEXP (CADDDR)(SEXP e);
-SEXP (CAD3R)(SEXP e);
-SEXP (CAD4R)(SEXP e);
-SEXP (CAD5R)(SEXP e);
+SEXP TAG(SEXP e);
+SEXP CAR0(SEXP e);
+SEXP CDR(SEXP e);
+SEXP CAAR(SEXP e);
+SEXP CDAR(SEXP e);
+SEXP CADR(SEXP e);
+SEXP CDDR(SEXP e);
+SEXP CDDDR(SEXP e);
+SEXP CADDR(SEXP e);
+SEXP CD4R(SEXP e);
+SEXP CADDDR(SEXP e);
+SEXP CAD3R(SEXP e);
+SEXP CAD4R(SEXP e);
+SEXP CAD5R(SEXP e);
 int  MISSING(SEXP x);
 void SET_MISSING(SEXP x, int v);
 void SET_TAG(SEXP x, SEXP y);
@@ -482,11 +475,10 @@ void SET_PRVALUE(SEXP x, SEXP v);
 void SET_PRCODE(SEXP x, SEXP v);
 
 /* Hashing Functions */
-/* There are macro versions in Defn.h */
-int  (HASHASH)(SEXP x);
-int  (HASHVALUE)(SEXP x);
-void (SET_HASHASH)(SEXP x, int v);
-void (SET_HASHVALUE)(SEXP x, int v);
+int  HASHASH(SEXP x);
+int  HASHVALUE(SEXP x);
+void SET_HASHASH(SEXP x, int v);
+void SET_HASHVALUE(SEXP x, int v);
 
 
 /* External pointer access macros */
@@ -718,9 +710,6 @@ Rboolean Rf_psmatch(const char *f, const char *t, Rboolean exact);
 SEXP R_ParseEvalString(const char *, SEXP);
 void Rf_PrintValue(SEXP);
 void Rf_printwhere(void);
-#ifndef INLINE_PROTECT
-SEXP Rf_protect(SEXP);
-#endif
 void Rf_readS3VarsFromFrame(SEXP rho, SEXP *dotGeneric, SEXP *dotGroup, SEXP *dotClass, SEXP *dotMethod, SEXP *dotGenericCallEnv, SEXP *dotGenericDefEnv);
 SEXP Rf_setAttrib(SEXP vec, SEXP name, SEXP val);
 void Rf_setSVector(SEXP *vec, int len, SEXP val);
@@ -737,19 +726,12 @@ const char *Rf_type2char(SEXPTYPE);
 SEXP Rf_type2rstr(SEXPTYPE);
 SEXP Rf_type2str(SEXPTYPE);
 SEXP Rf_type2str_nowarn(SEXPTYPE);
-#ifndef INLINE_PROTECT
-void Rf_unprotect(int);
-#endif
 void Rf_unprotect_ptr(SEXP);
 
 NORET void R_signal_protect_error(void);
 NORET void R_signal_unprotect_error(void);
 NORET void R_signal_reprotect_error(PROTECT_INDEX i);
 
-#ifndef INLINE_PROTECT
-void R_ProtectWithIndex(SEXP, PROTECT_INDEX *);
-void R_Reprotect(SEXP, PROTECT_INDEX);
-#endif
 SEXP R_tryEval(SEXP e, SEXP env, int *ErrorOccurred);
 SEXP R_tryEvalSilent(SEXP e, SEXP env, int *ErrorOccurred);
 SEXP R_GetCurrentEnv();
@@ -1286,32 +1268,30 @@ SEXP	 Rf_ScalarReal(double);
 SEXP	 Rf_ScalarString(SEXP);
 R_xlen_t  Rf_xlength(SEXP);
 R_xlen_t  (XLENGTH)(SEXP x);
-R_xlen_t  (XTRUELENGTH)(SEXP x);
+R_xlen_t  XTRUELENGTH(SEXP x);
 int LENGTH_EX(SEXP x, const char *file, int line);
 R_xlen_t XLENGTH_EX(SEXP x);
-# ifdef INLINE_PROTECT
 SEXP Rf_protect(SEXP);
 void Rf_unprotect(int);
 void R_ProtectWithIndex(SEXP, PROTECT_INDEX *);
 void R_Reprotect(SEXP, PROTECT_INDEX);
-# endif
 SEXP R_FixupRHS(SEXP x, SEXP y);
-SEXP (CAR)(SEXP e);
-void *(DATAPTR)(SEXP x);
-const void *(DATAPTR_RO)(SEXP x);
-const void *(DATAPTR_OR_NULL)(SEXP x);
-const int *(LOGICAL_OR_NULL)(SEXP x);
-const int *(INTEGER_OR_NULL)(SEXP x);
-const double *(REAL_OR_NULL)(SEXP x);
-const Rcomplex *(COMPLEX_OR_NULL)(SEXP x);
-const Rbyte *(RAW_OR_NULL)(SEXP x);
+SEXP CAR(SEXP e);
+void *DATAPTR(SEXP x);
+const void *DATAPTR_RO(SEXP x);
+const void *DATAPTR_OR_NULL(SEXP x);
+const int *LOGICAL_OR_NULL(SEXP x);
+const int *INTEGER_OR_NULL(SEXP x);
+const double *REAL_OR_NULL(SEXP x);
+const Rcomplex *COMPLEX_OR_NULL(SEXP x);
+const Rbyte *RAW_OR_NULL(SEXP x);
 void *STDVEC_DATAPTR(SEXP x);
-int (INTEGER_ELT)(SEXP x, R_xlen_t i);
-double (REAL_ELT)(SEXP x, R_xlen_t i);
-int (LOGICAL_ELT)(SEXP x, R_xlen_t i);
-Rcomplex (COMPLEX_ELT)(SEXP x, R_xlen_t i);
-Rbyte (RAW_ELT)(SEXP x, R_xlen_t i);
-SEXP (STRING_ELT)(SEXP x, R_xlen_t i);
+int INTEGER_ELT(SEXP x, R_xlen_t i);
+double REAL_ELT(SEXP x, R_xlen_t i);
+int LOGICAL_ELT(SEXP x, R_xlen_t i);
+Rcomplex COMPLEX_ELT(SEXP x, R_xlen_t i);
+Rbyte RAW_ELT(SEXP x, R_xlen_t i);
+SEXP STRING_ELT(SEXP x, R_xlen_t i);
 double SCALAR_DVAL(SEXP x);
 int SCALAR_LVAL(SEXP x);
 int SCALAR_IVAL(SEXP x);

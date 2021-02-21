@@ -735,17 +735,17 @@ static void sPsort2(String **x, R_xlen_t lo, R_xlen_t hi, R_xlen_t k)
 
 
 /* Needed for mistaken decision to put these in the API */
-void iPsort(int *x, int n, int k)
+void Rf_iPsort(int *x, int n, int k)
 {
     iPsort2(x, 0, n-1, k);
 }
 
-void rPsort(double *x, int n, int k)
+void Rf_rPsort(double *x, int n, int k)
 {
     rPsort2(x, 0, n-1, k);
 }
 
-void cPsort(Rcomplex *x, int n, int k)
+void Rf_cPsort(Rcomplex *x, int n, int k)
 {
     cPsort2(x, 0, n-1, k);
 }
@@ -1001,8 +1001,7 @@ static constexpr int sincs[17] = {
 };
 
 // Needs indx set to  0:(n-1)  initially :
-static void
-orderVector(int *indx, int n, SEXP key, Rboolean nalast,
+static void orderVector(int *indx, int n, SEXP key, Rboolean nalast,
 	    Rboolean decreasing,
 	    int greater_sub(int, int, SEXP, Rboolean, Rboolean))
 {

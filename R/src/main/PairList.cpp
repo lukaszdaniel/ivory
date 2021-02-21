@@ -114,7 +114,7 @@ SEXP Rf_elt(SEXP list, int i)
     if ((i < 0) || (i > Rf_length(list)))
         return R_NilValue;
 
-    for (int j = 0; j < i; j++)
+    for (int j = 0; j < i; ++j)
         result = CDR(result);
 
     return CAR(result);
@@ -194,7 +194,7 @@ Rboolean Rf_isVectorizable(SEXP s)
         R_xlen_t i, n;
 
         n = XLENGTH(s);
-        for (i = 0; i < n; i++)
+        for (i = 0; i < n; ++i)
             if (!Rf_isVector(VECTOR_ELT(s, i)) || XLENGTH(VECTOR_ELT(s, i)) > 1)
                 return FALSE;
         return TRUE;

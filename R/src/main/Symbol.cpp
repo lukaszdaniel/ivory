@@ -145,7 +145,7 @@ namespace CXXR
         R_MissingArg = missingArgument();
         R_UnboundValue = unboundValue();
 
-        for (int i = 0; s_special_symbol_names[i] != nullptr; i++)
+        for (int i = 0; s_special_symbol_names[i] != nullptr; ++i)
         {
             Symbol *symbol = Symbol::obtain(s_special_symbol_names[i]);
             symbol->m_is_special_symbol = true;

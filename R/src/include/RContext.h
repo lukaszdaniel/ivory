@@ -36,6 +36,7 @@
 #include <csignal>
 #include <csetjmp>
 #endif
+
 #ifdef HAVE_POSIX_SETJMP
 #define SIGJMP_BUF sigjmp_buf
 #define SIGSETJMP(x, s) sigsetjmp(x, s)

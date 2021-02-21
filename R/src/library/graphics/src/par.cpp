@@ -1256,7 +1256,7 @@ SEXP C_layout(SEXP args)
 /* ProcessInLinePars handles inline par specifications
    in graphics functions. */
 
-void ProcessInlinePars(SEXP s, pGEDevDesc dd)
+void Rf_ProcessInlinePars(SEXP s, pGEDevDesc dd)
 {
     if (isList(s)) {
 	while (s != R_NilValue) {

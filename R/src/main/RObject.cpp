@@ -628,7 +628,7 @@ Rboolean Rf_conformable(SEXP x_, SEXP y)
     y = Rf_getAttrib(y, R_DimSymbol);
     if ((n = Rf_length(x)) != Rf_length(y))
         return FALSE;
-    for (int i = 0; i < n; i++)
+    for (int i = 0; i < n; ++i)
         if (INTEGER(x)[i] != INTEGER(y)[i])
             return FALSE;
     return TRUE;

@@ -96,9 +96,6 @@ enum GUnit
 #define GStrWidth		Rf_GStrWidth
 #define GSymbol			Rf_GSymbol
 #define GText			Rf_GText
-#define GVStrHeight		Rf_GVStrHeight
-#define GVStrWidth		Rf_GVStrWidth
-#define GVText			Rf_GVText
 
 #define xDevtoNDC		Rf_xDevtoNDC
 #define xDevtoNFC		Rf_xDevtoNFC
