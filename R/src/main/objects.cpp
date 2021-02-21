@@ -31,6 +31,7 @@
 
 #include <CXXR/BuiltInFunction.hpp>
 #include <CXXR/GCRoot.hpp>
+#include <CXXR/ProtectStack.hpp>
 #include <CXXR/PairList.hpp>
 #include <CXXR/Expression.hpp>
 #include <CXXR/VectorBase.hpp>
@@ -104,7 +105,7 @@ static SEXP applyMethod(SEXP call, SEXP op, SEXP args, SEXP rho, SEXP newvars)
 {
     SEXP ans;
     if (TYPEOF(op) == SPECIALSXP) {
-	auto save = GCRootBase::ppsSize();
+	auto save = ProtectStack::size();
 	int flag = PRIMPRINT(op);
 	const void *vmax = vmaxget();
 	R_Visible = (flag != 1);
@@ -119,7 +120,7 @@ static SEXP applyMethod(SEXP call, SEXP op, SEXP args, SEXP rho, SEXP newvars)
        found).
      */
     else if (TYPEOF(op) == BUILTINSXP) {
-	auto save = GCRootBase::ppsSize();
+	auto save = ProtectStack::size();
 	int flag = PRIMPRINT(op);
 	const void *vmax = vmaxget();
 	PROTECT(args = evalList(args, rho, call, 0));

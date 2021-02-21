@@ -32,6 +32,7 @@
 #define R_USE_SIGNALS 1
 
 #include <CXXR/GCRoot.hpp>
+#include <CXXR/ProtectStack.hpp>
 #include <CXXR/JMPException.hpp>
 #include <CXXR/BuiltInFunction.hpp>
 #include <CXXR/Expression.hpp>
@@ -553,8 +554,8 @@ SEXP do_Rprof(SEXP args)
 
 HIDDEN void check_stack_balance(SEXP op, size_t save)
 {
-    if(save == GCRootBase::ppsSize()) return;
-    REprintf(_("Warning: stack imbalance in '%s', current %d, expected %d\n"), PRIMNAME(op), save, GCRootBase::ppsSize());
+    if(save == ProtectStack::size()) return;
+    REprintf(_("Warning: stack imbalance in '%s', current %d, expected %d\n"), PRIMNAME(op), save, ProtectStack::size());
 }
 
 
@@ -825,7 +826,7 @@ SEXP Rf_eval(SEXP e, SEXP rho)
 	    PrintValue(e);
 	}
 	if (TYPEOF(op) == SPECIALSXP) {
-	    auto save = GCRootBase::ppsSize();
+	    auto save = ProtectStack::size();
 		int flag = PRIMPRINT(op);
 	    const void *vmax = vmaxget();
 	    PROTECT(e);
@@ -846,7 +847,7 @@ SEXP Rf_eval(SEXP e, SEXP rho)
 	    vmaxset(vmax);
 	}
 	else if (TYPEOF(op) == BUILTINSXP) {
-	    auto save = GCRootBase::ppsSize();
+	    auto save = ProtectStack::size();
 		int flag = PRIMPRINT(op);
 	    const void *vmax = vmaxget();
 	    RCNTXT cntxt;

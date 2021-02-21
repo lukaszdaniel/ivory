@@ -29,10 +29,7 @@
  * Class GCManager and associated C-callable functions.
  */
 
-#define R_NO_REMAP
-
 #include <CXXR/GCManager.hpp>
-#include <Rinternals.h>
 #include <CXXR/RTypes.hpp>
 #include <cmath>
 #include <iomanip>

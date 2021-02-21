@@ -30,6 +30,8 @@
  * interface.
  */
 
+#define R_NO_REMAP
+
 #include <CXXR/Symbol.hpp>
 #include <CXXR/CachedString.hpp>
 #include <Rinternals.h>

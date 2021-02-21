@@ -27,6 +27,7 @@
 
 #include <CXXR/GCNode.hpp>
 #include <CXXR/RAllocStack.hpp>
+#include <CXXR/ProtectStack.hpp>
 #include <CXXR/GCManager.hpp>
 #include <CXXR/GCRoot.hpp>
 #include <iostream>
@@ -132,6 +133,7 @@ void* GCNode::operator new(size_t bytes)
 
     void GCNode::cleanup()
     {
+        ProtectStack::cleanup();
         GCRootBase::cleanup();
         delete s_aged_list;
         delete[] s_gencount;
@@ -155,6 +157,7 @@ void* GCNode::operator new(size_t bytes)
         s_next_gen[0] = 0;
         s_next_gen[s_num_generations - 1] = s_num_generations - 1;
         GCRootBase::initialize();
+        ProtectStack::initialize();
     }
 
     void GCNode::propagateAges()

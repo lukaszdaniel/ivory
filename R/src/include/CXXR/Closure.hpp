@@ -169,7 +169,7 @@ namespace CXXR
       bool m_no_jit;
       bool m_maybe_jit;
 
-      // Declared private to ensure that Environment objects are
+      // Declared private to ensure that Closure objects are
       // created only using 'new':
       ~Closure() {}
 

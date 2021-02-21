@@ -27,6 +27,7 @@
 #define R_NO_REMAP
 #define R_USE_SIGNALS 1
 
+#include <CXXR/ProtectStack.hpp>
 #include <CXXR/BuiltInFunction.hpp>
 #include <CXXR/Symbol.hpp>
 #include <CXXR/PairList.hpp>
@@ -1338,7 +1339,7 @@ HIDDEN SEXP do_internal(SEXP call, SEXP op, SEXP args, SEXP env)
 {
     SEXP s, ans;
     SEXP fun;
-    auto save = GCRootBase::ppsSize();
+    auto save = ProtectStack::size();
     int flag;
     const void *vmax = vmaxget();
 

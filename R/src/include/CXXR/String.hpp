@@ -31,7 +31,7 @@
 #ifndef CXXR_STRING_HPP
 #define CXXR_STRING_HPP
 
-// #include <Rinternals.h>
+#include <Rinternals.h>
 #include <CXXR/Allocator.hpp>
 #include <CXXR/GCRoot.hpp>
 #include <CXXR/SEXP_downcast.hpp>

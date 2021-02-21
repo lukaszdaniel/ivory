@@ -36,7 +36,7 @@
 #include <R_ext/Boolean.h>
 #include <CXXR/Allocator.hpp>
 // #include <CXXR/GCEdge.hpp>
-// #include <Rinternals.h>
+#include <Rinternals.h>
 
 namespace CXXR
 {

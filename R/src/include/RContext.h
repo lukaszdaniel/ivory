@@ -30,8 +30,6 @@
 #include <CXXR/RTypes.hpp>
 #include <BCNodeStack.h>
 
-#ifdef R_USE_SIGNALS
-
 #ifdef _WIN32
 #include <psignal.h>
 #else
@@ -240,7 +238,5 @@ extern RContext *R_ExitContext;     /* The active context for on.exit processing
 extern struct RPRSTACK *R_PendingPromises; // INI_as(nullptr); /* Pending promise stack */
 
 extern SEXP R_findBCInterpreterSrcref(RCNTXT *);
-
-#endif // R_USE_SIGNALS
 
 #endif // RCONTEXT_H

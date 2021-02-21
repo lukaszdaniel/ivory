@@ -39,6 +39,7 @@
 #define R_USE_SIGNALS 1
 
 #include <CXXR/GCRoot.hpp>
+#include <CXXR/ProtectStack.hpp>
 #include <CXXR/JMPException.hpp>
 #include <CXXR/Expression.hpp>
 #include <CXXR/IntVector.hpp>
@@ -101,9 +102,9 @@ static void R_ReplFile(FILE *fp, SEXP rho)
     RCNTXT cntxt;
 
     R_InitSrcRefState(&cntxt);
-    savestack = GCRootBase::ppsSize();
+    savestack = ProtectStack::size();
     while(true) {
-	GCRootBase::ppsRestoreSize(savestack);
+	ProtectStack::restoreSize(savestack);
 	R_CurrentExpr = R_Parse1File(fp, 1, &status);
 	switch (status) {
 	case PARSE_NULL:
@@ -243,7 +244,7 @@ int Rf_ReplIteration(SEXP rho, int savestack, int browselevel, R_ReplState *stat
 	    if(c == ';' || c == '\n') break;
     }
 
-    GCRootBase::ppsRestoreSize(savestack);
+    ProtectStack::restoreSize(savestack);
     R_CurrentExpr = R_Parse1Buffer(&R_ConsoleIob, 0, &state->status);
 
     switch(state->status) {
@@ -411,7 +412,7 @@ int R_ReplDLLdo1(void)
 	R_IoBufferPutc(c, &R_ConsoleIob);
 	if(c == ';' || c == '\n') break;
     }
-    GCRootBase::ppsRestoreSize(0);
+    ProtectStack::restoreSize(0);
     R_CurrentExpr = R_Parse1Buffer(&R_ConsoleIob, 0, &status);
 
     switch(status) {
@@ -1378,7 +1379,7 @@ HIDDEN SEXP do_browser(SEXP call, SEXP op, SEXP args, SEXP rho)
     /* so that it can be restored on exit. */
 
     browselevel = countContexts(CTXT_BROWSER, 1);
-    savestack = GCRootBase::ppsSize();
+    savestack = ProtectStack::size();
     PROTECT(topExp = R_CurrentExpr);
     saveToplevelContext = R_ToplevelContext;
     saveGlobalContext = R_GlobalContext;
@@ -1472,7 +1473,7 @@ HIDDEN SEXP do_browser(SEXP call, SEXP op, SEXP args, SEXP rho)
 
     R_CurrentExpr = topExp;
     UNPROTECT(1);
-    GCRootBase::ppsRestoreSize(savestack);
+    ProtectStack::restoreSize(savestack);
     UNPROTECT(1);
     R_CurrentExpr = topExp;
     R_ToplevelContext = saveToplevelContext;

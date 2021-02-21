@@ -36,6 +36,7 @@
 #include <CXXR/Environment.hpp>
 #include <CXXR/Expression.hpp>
 #include <CXXR/GCRoot.hpp>
+#include <CXXR/ProtectStack.hpp>
 #include <CXXR/JMPException.hpp>
 #include <CXXR/WeakRef.hpp>
 #include <Localization.h>
@@ -341,7 +342,7 @@ namespace CXXR
 			thiscontext.start(CTXT_TOPLEVEL, R_NilValue, R_GlobalEnv, Environment::base(), R_NilValue, R_NilValue);
 			saveToplevelContext = R_ToplevelContext;
 			GCRoot<> topExp(R_CurrentExpr);
-			auto savestack = GCRootBase::ppsSize();
+			auto savestack = ProtectStack::size();
 
 			bool redo = false;
 			bool jumped = false;
@@ -370,7 +371,7 @@ namespace CXXR
 			} while (redo);
 
 			R_ToplevelContext = saveToplevelContext;
-			GCRootBase::ppsRestoreSize(savestack);
+			ProtectStack::restoreSize(savestack);
 			R_CurrentExpr = topExp;
 			R_HandlerStack = oldHStack;
 			R_RestartStack = oldRStack;

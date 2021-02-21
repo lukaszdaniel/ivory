@@ -111,6 +111,7 @@
 #define R_USE_SIGNALS 1
 
 #include <CXXR/GCRoot.hpp>
+#include <CXXR/ProtectStack.hpp>
 #include <CXXR/BuiltInFunction.hpp>
 #include <CXXR/JMPException.hpp>
 #include <CXXR/Expression.hpp>
@@ -188,7 +189,7 @@ HIDDEN void RCNTXT::R_run_onexits(RCNTXT *cptr)
 
 void RCNTXT::R_restore_globals()
 {
-    GCRootBase::ppsRestoreSize(this->getCStackTop());
+    ProtectStack::restoreSize(this->getCStackTop());
     R_GCEnabled = this->getGCEnabled();
     R_BCIntActive = this->getBCIntactive();
     R_BCpc = this->getBCPC();
@@ -282,7 +283,7 @@ void RCNTXT::start(int flags,
                    SEXP syscall, SEXP env, SEXP sysp,
                    SEXP promargs, SEXP callfun)
 {
-    this->setCStackTop(GCRootBase::ppsSize());
+    this->setCStackTop(ProtectStack::size());
     this->setGCEnabled(R_GCEnabled);
     this->setBCPC(R_BCpc);
     this->setBCBody(R_BCbody);

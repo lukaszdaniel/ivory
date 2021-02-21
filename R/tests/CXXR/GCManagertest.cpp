@@ -22,14 +22,11 @@
  * Test of class CXXR::GCManager
  */
 
-#define R_NO_REMAP
-
 #include <cmath>
 #include <cstdarg>
 #include <cstdlib>
 #include <iostream>
 #include <vector>
-#include <Rinternals.h>
 #include <Rinterface.h>
 #include <CXXR/GCManager.hpp>
 #include <CXXR/GCNode.hpp>

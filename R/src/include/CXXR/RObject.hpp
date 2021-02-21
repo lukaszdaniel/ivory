@@ -32,7 +32,6 @@
 #ifndef ROBJECT_HPP
 #define ROBJECT_HPP
 
-#define R_NO_REMAP
 #define SWITCH_TO_REFCNT
 #define COMPUTE_REFCNT_VALUES
 // #define ENABLE_ST_CHECKS
@@ -44,9 +43,6 @@
 #include <CXXR/SEXPTYPE.hpp>
 #include <CXXR/RTypes.hpp>
 #include <CXXR/GCNode.hpp>
-#define CALLED_FROM_DEFN_H
-#include <Rinternals.h>
-#undef CALLED_FROM_DEFN_H
 #include <R_ext/Error.h>
 #include <R_ext/Complex.h>
 #include <R_ext/Boolean.h>

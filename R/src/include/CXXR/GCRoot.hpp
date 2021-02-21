@@ -26,26 +26,15 @@
  *
  * @brief Templated class CXXR::GCRoot and its untemplated base class
  * CXXR::GCRootBase.
- *
- * CXXR::GCRootBase also encapsulates the functionality of the CR
- * pointer protection stack.
- *
- * See the paragraph 'Caller Protects' in the description of class
- * CXXR::GCRoot for recommended coding policy.
  */
 
 #ifndef GCROOT_HPP
 #define GCROOT_HPP
 
-#ifndef R_USE_SIGNALS
-#define R_USE_SIGNALS
-#endif
-
-#include <CXXR/RObject.hpp>
-
 #include <vector>
 #include <iostream>
-#include <RContext.h>
+
+#include <CXXR/RObject.hpp>
 #include <CXXR/GCNode.hpp>
 
 namespace CXXR
@@ -68,84 +57,6 @@ namespace CXXR
     class GCRootBase
     {
     public:
-        /** @brief Restore PPS to a previous size.
-         *
-         * Restore the C pointer protection stack to a previous size by
-         * popping elements off the top.
-         * @param new_size The size to which the stack is to be
-         *          restored.  Must not be greater than the current
-         *          size.
-         * @note In future this method will probably cease to be
-         * public, and be accessible only by a class encapsulating R
-         * contexts.
-         */
-        static void ppsRestoreSize(size_t new_size);
-
-        /** @brief Current size of PPS.
-         *
-         * @return the current size of the C pointer protection stack.
-         *
-         * @note This method is intended for use in conjunction with
-         * ppsRestoreSize(), and like it may cease to be public in
-         * future.
-         */
-        static size_t ppsSize()
-        {
-            return s_pps->size();
-        }
-
-        /** @brief Push a node pointer onto the PPS.
-         *
-         * Push a node pointer onto the C pointer protection stack.
-         * @param node Pointer to the node to be protected from the
-         *          garbage collector.
-         * @return Index of the stack cell thus created, for
-         *          subsequent use with reprotect().
-         */
-        static unsigned int protect(RObject *node);
-
-        /** @brief Change the target of a pointer on the PPS.
-         *
-         * Change the node that a particular cell in the C pointer
-         * protection stack protects.  As a consistency check, it is
-         * required that the reprotect takes place within the same
-         * ::RContext as the corresponding protect.  (CR does not apply this
-         * check.)
-         * @param node Pointer to the node now to be protected from
-         *          the garbage collector by the designated stack
-         *          cell.  (Not necessarily a different node from the
-         *          one currently protected.)
-         * @param index Index (as returned by protect() ) of the stack
-         *          cell to be retargeted to node.  Must be less than
-         *          the current size of the C pointer protection
-         *          stack (checked).
-         */
-        static void reprotect(RObject *node, unsigned int index);
-
-        /** @brief Pop pointers from the PPS.
-         *
-         * Pop cells from the C pointer protection stack.  As a
-         * consistency check, it is required that the unprotect takes
-         * place within the same ::RContext as the corresponding protect.
-         * (CR does not apply this check.)
-         * @param count Number of cells to be popped.  Must not be
-         *          larger than the current size of the C pointer
-         *          protection stack.
-         */
-        static void unprotect(unsigned int count = 1);
-
-        /**
-         * Removes from the C pointer protection stack the uppermost
-         * stack cell containing a pointer to a specified node, and
-         * drops all the stack cells above it by one place.
-         *
-         * @param node Pointer to the node whose cell is to be removed
-         *          from the C pointer protection stack.
-         *
-         * @deprecated Utterly.
-         */
-        static void unprotectPtr(RObject *node);
-
         /** @brief Conduct a const visitor to all 'root' GCNode objects.
          *
          * Conduct a GCNode::const_visitor object to each root GCNode
@@ -214,20 +125,12 @@ namespace CXXR
         // shrinks.
         static std::vector<const GCNode *> *s_roots;
 
-        // Ye olde pointer protection stack:
-#ifdef NDEBUG
-        static std::vector<RObject *> *s_pps;
-#else
-        static std::vector<std::pair<RObject *, RContext *>> *s_pps;
-#endif
-
         unsigned int m_index;
 
         // Clean up static data at end of run (called by
         // GCNode::SchwarzCtr destructor:
         static void cleanup()
         {
-            delete s_pps;
             delete s_roots;
         }
 
@@ -370,114 +273,6 @@ namespace CXXR
 extern "C"
 {
     /* ***** C interface ***** */
-
-    typedef int PROTECT_INDEX;
-
-    /**
-     * Push a node pointer onto the C pointer protection stack, and
-     * record the index of the resulting stack cell (for subsequent
-     * use with R_Reprotect).
-     * @param node Pointer to the node to be protected from the
-     *          garbage collector.
-     * @param iptr Pointer to a location in which the stack cell index
-     *          is to be stored.
-     */
-    inline void R_ProtectWithIndex(SEXP node, PROTECT_INDEX *iptr)
-    {
-        *iptr = CXXR::GCRootBase::protect(node);
-    }
-
-    /**
-     * Change the node that a particular cell in the C pointer
-     * protection stack protects.  As a consistency check, it is
-     * required that the reprotect takes place within the same
-     * RContext as the original protect.  (CR does not apply this
-     * check.)
-     * @param node Pointer to the node now to be protected from
-     *          the garbage collector by the designated stack
-     *          cell.  (Not necessarily a different node from the
-     *          one currently protected.)
-     * @param index Index (as returned by R_ProtectWithIndex() ) of
-     *          the stack cell to be retargeted to node.  Must be less
-     *          than the current size of the C pointer protection
-     *          stack.
-     */
-    inline void R_Reprotect(SEXP node, PROTECT_INDEX index)
-    {
-        CXXR::GCRootBase::reprotect(node, index);
-    }
-
-    /**
-     * Check that the C pointer protection stack has the expected size,
-     * and print a warning if not.
-     * @param op Operation being performed.
-     * @param save The expected size of the pointer protection stack.
-     *
-     * @todo A warning seems too mild a response in this eventuality.
-     */
-    void check_stack_balance(SEXP op, size_t save);
-
-    /**
-     * Restore the C pointer protection stack to a previous size by
-     * popping elements off the top.
-     * @param new_size The size to which the stack is to be
-     *          restored.  Must not be greater than the current
-     *          size.
-     * @deprecated This is an interface for C code to call
-     * CXXR::GCRootBase::ppsRestoreSize(), which may cease to be public in
-     * future.
-     */
-    void Rf_ppsRestoreSize(size_t new_size);
-
-    /**
-     * @return the current size of the C pointer protection stack.
-     *
-     * @deprecated This is an interface for C code to call
-     * CXXR::GCRootBase::ppsSize(), which may cease to be public in
-     * future.
-     */
-    size_t Rf_ppsSize();
-
-    /**
-     * Push a node pointer onto the C pointer protection stack.
-     * @param node Pointer to the node to be protected from the
-     *          garbage collector.
-     * @return a copy of \a node.
-     */
-    inline SEXP Rf_protect(SEXP node)
-    {
-        CXXR::GCRootBase::protect(node);
-        return node;
-    }
-
-    /**
-     * Pop cells from the C pointer protection stack.  As a
-     * consistency check, it is required that the unprotect takes
-     * place within the same RContext as the corresponding protect.  (CR
-     * does not apply this check.)
-     * @param count Number of cells to be popped.  Must not be
-     *          larger than the current size of the C pointer
-     *          protection stack.
-     */
-    inline void Rf_unprotect(int count)
-    {
-        CXXR::GCRootBase::unprotect(count);
-    }
-
-    /**
-     * Removes from the C pointer protection stack the uppermost
-     * stack cell containing a pointer to a specified node, and
-     * drops all the stack cells above it by one place.
-     *
-     * @param node Pointer to the node whose cell is to be removed
-     *          from the C pointer protection stack.
-     *
-     * @deprecated Utterly.
-     */
-    inline void Rf_unprotect_ptr(SEXP node)
-    {
-        CXXR::GCRootBase::unprotectPtr(node);
-    }
 
     /** @brief Protect object against garbage collection.
      *

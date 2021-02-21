@@ -51,6 +51,7 @@
 #include <CXXR/GCEdge.hpp>
 #include <CXXR/GCManager.hpp>
 #include <CXXR/GCRoot.hpp>
+#include <CXXR/ProtectStack.hpp>
 #include <CXXR/GCNode.hpp>
 #include <CXXR/MemoryBank.hpp>
 #include <CXXR/String.hpp>
@@ -457,6 +458,7 @@ void GCNode::gc(unsigned int num_old_gens_to_collect)
 
     GCNode::Marker marker(num_old_gens_to_collect + 1);
     GCRootBase::visitRoots(&marker);
+    ProtectStack::visitRoots(&marker);
     MARK_THRU(&marker, R_BlankScalarString);	        /* Builtin constants */
 
     MARK_THRU(&marker, R_Warnings);	           /* Warnings, if any */
