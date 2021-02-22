@@ -28,6 +28,7 @@ Type 'q()' to quit R.
 > 
 > source(system.file("test-tools.R", package = "cluster"), keep.source = FALSE)
 Loading required package: 'tools'
+doExtras <- cluster:::doExtras() :  TRUE
 > ## -> showProc.time() ...  & doExtras
 > 
 > agn1 <- agnes(votes.repub, metric = "manhattan", stand = TRUE)
