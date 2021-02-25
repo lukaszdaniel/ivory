@@ -80,6 +80,26 @@ namespace CXXR
 
 // ***** C interface *****
 
+int RTRACE(SEXP x)
+{
+    return CXXR::FunctionBase::rtrace(x);
+}
+
+void SET_RTRACE(SEXP x, int v)
+{
+    CXXR::FunctionBase::set_rtrace(x, v);
+}
+
+int RDEBUG(SEXP x)
+{
+    return CXXR::FunctionBase::rdebug(x);
+}
+
+void SET_RDEBUG(SEXP x, int v)
+{
+    CXXR::FunctionBase::set_rdebug(x, v);
+}
+
 Rboolean Rf_isPrimitive(SEXP s)
 {
     return Rboolean(TYPEOF(s) == BUILTINSXP || TYPEOF(s) == SPECIALSXP);

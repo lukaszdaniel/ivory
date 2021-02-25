@@ -102,6 +102,24 @@ namespace CXXR
     } while (0)
 #endif
 
+int *INTEGER(SEXP x)
+{
+    if (TYPEOF(x) != INTSXP && TYPEOF(x) != LGLSXP)
+        Rf_error(_("'%s' function can only be applied to an integer, not a '%s'"), "INTEGER()",
+                 Rf_type2char(TYPEOF(x)));
+    CXXR::VectorBase::chkzln(x);
+    return INTVECTOR_INTEGER(x);
+}
+
+const int *INTEGER_RO(SEXP x)
+{
+    if (TYPEOF(x) != INTSXP && TYPEOF(x) != LGLSXP)
+        Rf_error(_("'%s' function can only be applied to an integer, not a '%s'"),
+                 "INTEGER()", Rf_type2char(TYPEOF(x)));
+    CXXR::VectorBase::chkzln(x);
+    return INTVECTOR_INTEGER_RO(x);
+}
+
 int *INTEGER0(SEXP x)
 {
     CHECK_STDVEC_INT(x);

@@ -36,7 +36,7 @@
 #include <CXXR/StringVector.hpp>
 #include <CXXR/Symbol.hpp>
 #include <Defn.h>
-// #include <Rinternals.h>
+#include <Rinternals.h>
 
 using namespace std;
 using namespace CXXR;
@@ -356,6 +356,15 @@ namespace CXXR
         ((R_bndval_t *)&(SEXP_downcast<ConsCell *>(x, false)->m_car))->ival = v;
     }
 
+    void ConsCell::clear_bndcell_tag(SEXP cell)
+    {
+        if (CXXR::RObject::bndcell_tag(cell))
+        {
+            CXXR::ConsCell::set_car0(cell, nullptr);
+            CXXR::RObject::set_bndcell_tag(cell, 0);
+        }
+    }
+
     unsigned int ConsCell::missing(RObject *x) /* for closure calls */
     {
         if (!x)
@@ -523,3 +532,178 @@ namespace CXXR
         }
     }
 } // namespace CXXR
+
+// ***** C interface *****
+
+SEXP TAG(SEXP e)
+{
+    if (TYPEOF(e) == S4SXP)
+    {
+        return S4TAG(e);
+    }
+    else
+    {
+        return CXXR::ConsCell::tag(e);
+    }
+}
+
+void SET_TAG(SEXP x, SEXP v)
+{
+    if (TYPEOF(x) == S4SXP)
+    {
+        SET_S4TAG(x, v);
+    }
+    else
+    {
+        if (x == nullptr || x == R_NilValue)
+            Rf_error(_("incorrect value"));
+        CXXR::RObject::fix_refcnt(x, TAG(x), v);
+        CXXR::ConsCell::set_tag(x, v);
+    }
+}
+
+SEXP SETCAR(SEXP x, SEXP y)
+{
+    if (x == nullptr || x == R_NilValue)
+        Rf_error(_("incorrect value"));
+    CXXR::ConsCell::clear_bndcell_tag(x);
+    if (y == CAR(x))
+        return y;
+    CXXR::RObject::fix_binding_refcnt(x, CAR(x), y);
+    CXXR::ConsCell::set_car0(x, y);
+    return y;
+}
+
+SEXP SETCDR(SEXP x, SEXP y)
+{
+    if (x == nullptr || x == R_NilValue)
+        Rf_error(_("incorrect value"));
+    CXXR::RObject::fix_refcnt(x, CDR(x), y);
+#ifdef TESTING_WRITE_BARRIER
+    /* this should not add a non-tracking CDR to a tracking cell */
+    if (TRACKREFS(x) && y && ! TRACKREFS(y))
+	Rf_error(_("inserting non-tracking CDR in tracking cell"));
+#endif
+    CXXR::ConsCell::set_cdr(x, y);
+    return y;
+}
+
+SEXP SETCADR(SEXP x, SEXP y)
+{
+    SEXP cell;
+    if (x == nullptr || x == R_NilValue ||
+        CDR(x) == nullptr || CDR(x) == R_NilValue)
+        Rf_error(_("incorrect value"));
+    cell = CDR(x);
+    CXXR::ConsCell::clear_bndcell_tag(cell);
+    CXXR::RObject::fix_refcnt(cell, CAR(cell), y);
+    CXXR::ConsCell::set_car0(cell, y);
+    return y;
+}
+
+SEXP SETCADDR(SEXP x, SEXP y)
+{
+    SEXP cell;
+    if (x == nullptr || x == R_NilValue ||
+        CDR(x) == nullptr || CDR(x) == R_NilValue ||
+        CDDR(x) == nullptr || CDDR(x) == R_NilValue)
+        Rf_error(_("incorrect value"));
+    cell = CDDR(x);
+    CXXR::ConsCell::clear_bndcell_tag(cell);
+    CXXR::RObject::fix_refcnt(cell, CAR(cell), y);
+    CXXR::ConsCell::set_car0(cell, y);
+    return y;
+}
+
+SEXP SETCADDDR(SEXP x, SEXP y)
+{
+    SEXP cell;
+    if (x == nullptr || x == R_NilValue ||
+        CDR(x) == nullptr || CDR(x) == R_NilValue ||
+        CDDR(x) == nullptr || CDDR(x) == R_NilValue ||
+        CDDDR(x) == nullptr || CDDDR(x) == R_NilValue)
+        Rf_error(_("incorrect value"));
+    cell = CDDDR(x);
+    CXXR::ConsCell::clear_bndcell_tag(cell);
+    CXXR::RObject::fix_refcnt(cell, CAR(cell), y);
+    CXXR::ConsCell::set_car0(cell, y);
+    return y;
+}
+
+
+SEXP SETCAD4R(SEXP x, SEXP y)
+{
+    SEXP cell;
+    if (x == nullptr || x == R_NilValue ||
+        CDR(x) == nullptr || CDR(x) == R_NilValue ||
+        CDDR(x) == nullptr || CDDR(x) == R_NilValue ||
+        CDDDR(x) == nullptr || CDDDR(x) == R_NilValue ||
+        CD4R(x) == nullptr || CD4R(x) == R_NilValue)
+        Rf_error(_("incorrect value"));
+    cell = CD4R(x);
+    CXXR::ConsCell::clear_bndcell_tag(cell);
+    CXXR::RObject::fix_refcnt(cell, CAR(cell), y);
+    CXXR::ConsCell::set_car0(cell, y);
+    return y;
+}
+
+int MISSING(SEXP x)
+{
+    return CXXR::ConsCell::missing(x);
+}
+
+void SET_MISSING(SEXP x, int v)
+{
+    CXXR::ConsCell::set_missing(x, v);
+}
+
+int BNDCELL_TAG(SEXP cell)
+{
+    return CXXR::RObject::bndcell_tag(cell);
+}
+
+void SET_BNDCELL_TAG(SEXP cell, int val)
+{
+    CXXR::RObject::set_bndcell_tag(cell, val);
+}
+
+double(BNDCELL_DVAL)(SEXP cell)
+{
+    return BNDCELL_DVAL(cell);
+}
+
+int(BNDCELL_IVAL)(SEXP cell)
+{
+    return BNDCELL_IVAL(cell);
+}
+
+int(BNDCELL_LVAL)(SEXP cell)
+{
+    return BNDCELL_LVAL(cell);
+}
+
+void(SET_BNDCELL_DVAL)(SEXP cell, double v)
+{
+    SET_BNDCELL_DVAL(cell, v);
+}
+
+void(SET_BNDCELL_IVAL)(SEXP cell, int v)
+{
+    SET_BNDCELL_IVAL(cell, v);
+}
+
+void(SET_BNDCELL_LVAL)(SEXP cell, int v)
+{
+    SET_BNDCELL_LVAL(cell, v);
+}
+
+void(INIT_BNDCELL)(SEXP cell, int type)
+{
+    INIT_BNDCELL(cell, type);
+}
+
+void SET_BNDCELL(SEXP cell, SEXP val)
+{
+    CXXR::ConsCell::clear_bndcell_tag(cell);
+    SETCAR(cell, val);
+}

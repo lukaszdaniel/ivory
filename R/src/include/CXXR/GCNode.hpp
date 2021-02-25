@@ -32,6 +32,7 @@
 #include <sstream>
 #include <CXXR/MemoryBank.hpp>
 #include <CXXR/SchwarzCounter.hpp>
+#include <CXXR/RTypes.hpp>
 
 #define EXPEL_OLD_TO_NEW
 
@@ -544,22 +545,22 @@ namespace CXXR
         static void propagateAges();
 
         /** @brief Carry out the sweep phase of garbage collection.
-	 *
-	 * Exit conditions: (i) All nodes that on entry were within
-	 * the singly-linked lists of the swept generations will have
-	 * been moved, if necessary, to the singly-linked list
-	 * appropriate to their generation.  (This generation is subject to
-	 * further change as under (iv) below.)  (ii) all nodes within the
-	 * swept generations that were not marked on entry, apart from
-	 * those in Generation 0, will have been deleted.  (iii) all
-	 * nodes will be unmarked.  (iv) Each node within the swept
-	 * generations, other than Generation 0, will have been moved
-	 * to the next higher generation, unless it was already in the
-	 * highest generation.
-	 *
-	 * @param max_generation The highest generation number to be
-	 *          swept.
-	 */
+         *
+         * Exit conditions: (i) All nodes that on entry were within
+         * the singly-linked lists of the swept generations will have
+         * been moved, if necessary, to the singly-linked list
+         * appropriate to their generation.  (This generation is subject to
+         * further change as under (iv) below.)  (ii) all nodes within the
+         * swept generations that were not marked on entry, apart from
+         * those in Generation 0, will have been deleted.  (iii) all
+         * nodes will be unmarked.  (iv) Each node within the swept
+         * generations, other than Generation 0, will have been moved
+         * to the next higher generation, unless it was already in the
+         * highest generation.
+         *
+         * @param max_generation The highest generation number to be
+         *          swept.
+         */
         static void sweep(unsigned int max_generation);
 
         void unmark() const { m_marked = false; }
@@ -580,5 +581,10 @@ namespace CXXR
      */
     void initializeMemorySubsystem();
 } // namespace CXXR
+
+extern "C"
+{
+    int MARK(SEXP x);
+}
 
 #endif /* GCNODE_HPP */

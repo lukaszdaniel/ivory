@@ -264,6 +264,7 @@ namespace CXXR
         static void set_bndcell_dval(RObject *x, double v);
         static void set_bndcell_ival(RObject *x, int v);
         static void set_bndcell_lval(RObject *x, int v);
+        static void clear_bndcell_tag(SEXP cell);
         static unsigned int missing(RObject *x); /* for closure calls */
         static void set_missing(RObject *x, int v);
 
@@ -401,6 +402,24 @@ extern "C"
      * @return Pointer to the created object.
      */
     SEXP Rf_allocSExp(SEXPTYPE t);
+
+    SEXP SETCAR(SEXP x, SEXP y);
+    SEXP SETCDR(SEXP x, SEXP y);
+    SEXP SETCADR(SEXP x, SEXP y);
+    SEXP SETCADDR(SEXP x, SEXP y);
+    SEXP SETCADDDR(SEXP x, SEXP y);
+    SEXP SETCAD4R(SEXP x, SEXP y);
+
+    int BNDCELL_TAG(SEXP cell);
+    void SET_BNDCELL_TAG(SEXP cell, int val);
+    double(BNDCELL_DVAL)(SEXP cell);
+    int(BNDCELL_IVAL)(SEXP cell);
+    int(BNDCELL_LVAL)(SEXP cell);
+    void(SET_BNDCELL_DVAL)(SEXP cell, double v);
+    void(SET_BNDCELL_IVAL)(SEXP cell, int v);
+    void(SET_BNDCELL_LVAL)(SEXP cell, int v);
+    void(INIT_BNDCELL)(SEXP cell, int type);
+    void SET_BNDCELL(SEXP cell, SEXP val);
 } // extern "C"
 
 #endif /* CONSCELL_HPP */

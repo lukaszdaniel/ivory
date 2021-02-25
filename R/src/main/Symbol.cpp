@@ -341,6 +341,96 @@ namespace CXXR
 
 // ***** C interface *****
 
+SEXP PRINTNAME(SEXP x)
+{
+    return CXXR::Symbol::printname(x);
+}
+
+SEXP SYMVALUE(SEXP x)
+{
+    return CXXR::Symbol::symvalue(x);
+}
+
+SEXP INTERNAL(SEXP x)
+{
+    return CXXR::Symbol::internal(x);
+}
+
+int DDVAL(SEXP x)
+{
+    return CXXR::Symbol::ddval(x);
+}
+
+void SET_PRINTNAME(SEXP x, SEXP v)
+{
+    CXXR::RObject::fix_refcnt(x, CXXR::Symbol::printname(x), v);
+    CXXR::Symbol::set_printname(x, v);
+}
+
+void SET_SYMVALUE(SEXP x, SEXP v)
+{
+    if (CXXR::Symbol::symvalue(x) == v)
+        return;
+    CXXR::RObject::fix_binding_refcnt(x, CXXR::Symbol::symvalue(x), v);
+    CXXR::Symbol::set_symvalue(x, v);
+}
+
+void SET_INTERNAL(SEXP x, SEXP v)
+{
+    CXXR::RObject::fix_refcnt(x, CXXR::Symbol::internal(x), v);
+    CXXR::Symbol::set_internal(x, v);
+}
+
+void SET_DDVAL(SEXP x, int v)
+{
+    CXXR::Symbol::set_ddval(x, v);
+}
+
+void SET_BASE_SYM_CACHED(SEXP b)
+{
+    CXXR::Symbol::set_base_sym_cached(b);
+}
+
+void UNSET_BASE_SYM_CACHED(SEXP b)
+{
+    CXXR::Symbol::unset_base_sym_cached(b);
+}
+
+Rboolean BASE_SYM_CACHED(SEXP b)
+{
+    return (Rboolean)CXXR::Symbol::base_sym_cached(b);
+}
+
+void SET_SPECIAL_SYMBOL(SEXP b)
+{
+    CXXR::Symbol::set_special_symbol(b);
+}
+
+void UNSET_SPECIAL_SYMBOL(SEXP b)
+{
+    CXXR::Symbol::unset_special_symbol(b);
+}
+
+Rboolean IS_SPECIAL_SYMBOL(SEXP b)
+{
+    return (Rboolean)CXXR::Symbol::is_special_symbol(b);
+}
+
+void SET_NO_SPECIAL_SYMBOLS(SEXP b)
+{
+    CXXR::Symbol::set_no_special_symbols(b);
+}
+
+void UNSET_NO_SPECIAL_SYMBOLS(SEXP b)
+{
+    CXXR::Symbol::unset_no_special_symbols(b);
+}
+
+Rboolean NO_SPECIAL_SYMBOLS(SEXP b)
+{
+    return (Rboolean)CXXR::Symbol::no_special_symbols(b);
+}
+
 Rboolean Rf_isUserBinop(SEXP s)
 {
     if (TYPEOF(s) == SYMSXP)

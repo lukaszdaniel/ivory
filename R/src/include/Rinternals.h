@@ -74,6 +74,10 @@ extern "C" {
 #define LONG_VECTOR_SUPPORT
 #endif
 
+#ifndef TESTING_WRITE_BARRIER
+#define TESTING_WRITE_BARRIER
+#endif
+
 #ifdef TESTING_WRITE_BARRIER
 /* define inline-able functions */
 #define STRICT_TYPECHECK
@@ -173,13 +177,13 @@ int SIMPLE_SCALAR_TYPE(SEXP x);
 #ifdef SWITCH_TO_REFCNT
 # define MAYBE_SHARED(x) (REFCNT(x) > 1)
 # define NO_REFERENCES(x) (REFCNT(x) == 0)
-# ifdef USE_RINTERNALS
+# if defined(USE_RINTERNALS) || defined(COMPILING_IVORY)
 #  define MARK_NOT_MUTABLE(x) SET_REFCNT(x, REFCNTMAX)
 # endif
 #else
 # define MAYBE_SHARED(x) (NAMED(x) > 1)
 # define NO_REFERENCES(x) (NAMED(x) == 0)
-# ifdef USE_RINTERNALS
+# if defined(USE_RINTERNALS) || defined(COMPILING_IVORY)
 #  define MARK_NOT_MUTABLE(x) SET_NAMED(x, NAMEDMAX)
 # endif
 #endif
@@ -227,29 +231,29 @@ SEXP ATTRIB(SEXP x);
 int  OBJECT(SEXP x);
 int  MARK(SEXP x);
 SEXPTYPE TYPEOF(SEXP x);
-int  (NAMED)(SEXP x);
-int  (REFCNT)(SEXP x);
-int  (TRACKREFS)(SEXP x);
+int  NAMED(SEXP x);
+int  REFCNT(SEXP x);
+int  TRACKREFS(SEXP x);
 void SET_OBJECT(SEXP x, int v);
 void SET_TYPEOF(SEXP x, SEXPTYPE v);
-void (SET_NAMED)(SEXP x, int v);
+void SET_NAMED(SEXP x, int v);
 void SET_ATTRIB(SEXP x, SEXP v);
 void DUPLICATE_ATTRIB(SEXP to, SEXP from);
 void SHALLOW_DUPLICATE_ATTRIB(SEXP to, SEXP from);
-void (ENSURE_NAMEDMAX)(SEXP x);
-void (ENSURE_NAMED)(SEXP x);
-void (SETTER_CLEAR_NAMED)(SEXP x);
-void (RAISE_NAMED)(SEXP x, int n);
-void (DECREMENT_REFCNT)(SEXP x);
-void (INCREMENT_REFCNT)(SEXP x);
-void (DISABLE_REFCNT)(SEXP x);
-void (ENABLE_REFCNT)(SEXP x);
+void ENSURE_NAMEDMAX(SEXP x);
+void ENSURE_NAMED(SEXP x);
+void SETTER_CLEAR_NAMED(SEXP x);
+void RAISE_NAMED(SEXP x, int n);
+void DECREMENT_REFCNT(SEXP x);
+void INCREMENT_REFCNT(SEXP x);
+void DISABLE_REFCNT(SEXP x);
+void ENABLE_REFCNT(SEXP x);
 void (MARK_NOT_MUTABLE)(SEXP x);
 
 int ASSIGNMENT_PENDING(SEXP x);
 void SET_ASSIGNMENT_PENDING(SEXP x, int v);
-int (IS_ASSIGNMENT_CALL)(SEXP x);
-void (MARK_ASSIGNMENT_CALL)(SEXP x);
+int IS_ASSIGNMENT_CALL(SEXP x);
+void MARK_ASSIGNMENT_CALL(SEXP x);
 
 /* S4 object testing */
 int IS_S4_OBJECT(SEXP x);
@@ -1285,7 +1289,6 @@ const int *INTEGER_OR_NULL(SEXP x);
 const double *REAL_OR_NULL(SEXP x);
 const Rcomplex *COMPLEX_OR_NULL(SEXP x);
 const Rbyte *RAW_OR_NULL(SEXP x);
-void *STDVEC_DATAPTR(SEXP x);
 int INTEGER_ELT(SEXP x, R_xlen_t i);
 double REAL_ELT(SEXP x, R_xlen_t i);
 int LOGICAL_ELT(SEXP x, R_xlen_t i);

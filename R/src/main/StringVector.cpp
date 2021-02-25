@@ -79,6 +79,60 @@ namespace CXXR
 
 // ***** C interface *****
 
+SEXP *STRING_PTR(SEXP x)
+{
+    if (TYPEOF(x) != STRSXP)
+        Rf_error(_("'%s' function can only be applied to a character, not a '%s'"),
+                 "STRING_PTR()", Rf_type2char(TYPEOF(x)));
+    CXXR::VectorBase::chkzln(x);
+    return STRINGVECTOR_STRING_PTR(x);
+}
+
+const SEXP *STRING_PTR_RO(SEXP x)
+{
+    if (TYPEOF(x) != STRSXP)
+        Rf_error(_("'%s' function can only be applied to a character, not a '%s'"),
+                 "STRING_PTR_RO()", Rf_type2char(TYPEOF(x)));
+    CXXR::VectorBase::chkzln(x);
+    return STRINGVECTOR_STRING_PTR_RO(x);
+}
+
+void SET_STRING_ELT(SEXP x, R_xlen_t i, SEXP v)
+{
+    if (TYPEOF(x) != STRSXP)
+        Rf_error(_("'%s' function can only be applied to a character vector, not a '%s'"), "SET_STRING_ELT()",
+                 Rf_type2char(TYPEOF(x)));
+    if (TYPEOF(v) != CHARSXP)
+        Rf_error(_("value of 'SET_STRING_ELT()' function must be a 'CHARSXP' not a '%s'"),
+                 Rf_type2char(TYPEOF(v)));
+    if (i < 0 || i >= XLENGTH(x))
+        Rf_error(_("attempt to set index %ld/%ld in 'SET_STRING_ELT()' function"), (long long)i, (long long)XLENGTH(x));
+
+    x->propagateAge(v);
+    if (ALTREP(x))
+        ALTSTRING_SET_ELT(x, i, v);
+    else
+    {
+        SEXP *ps = CXXR::stdvec_dataptr<SEXP>(x);
+        CXXR::RObject::fix_refcnt(x, ps[i], v);
+        ps[i] = v;
+    }
+}
+
+SEXP STRING_ELT(SEXP x, R_xlen_t i)
+{
+    if (TYPEOF(x) != STRSXP)
+        Rf_error(_("'%s' function can only be applied to a character vector, not a '%s'"), "STRING_ELT()",
+                 Rf_type2char(TYPEOF(x)));
+    if (ALTREP(x))
+        return ALTSTRING_ELT(x, i);
+    else
+    {
+        SEXP *ps = CXXR::stdvec_dataptr<SEXP>(x);
+        return ps[i];
+    }
+}
+
 int Rf_stringPositionTr(SEXP string, const char *translatedElement)
 {
 

@@ -404,6 +404,18 @@ extern "C"
      */
     void SET_INTERNAL(SEXP x, SEXP v);
     Rboolean Rf_isUserBinop(SEXP s);
+    void SET_BASE_SYM_CACHED(SEXP b);
+    void UNSET_BASE_SYM_CACHED(SEXP b);
+    Rboolean BASE_SYM_CACHED(SEXP b);
+
+    void SET_SPECIAL_SYMBOL(SEXP b);
+    void UNSET_SPECIAL_SYMBOL(SEXP b);
+    Rboolean IS_SPECIAL_SYMBOL(SEXP b);
+    void SET_NO_SPECIAL_SYMBOLS(SEXP b);
+    void UNSET_NO_SPECIAL_SYMBOLS(SEXP b);
+    Rboolean NO_SPECIAL_SYMBOLS(SEXP b);
+
+    void SET_DDVAL(SEXP x, int v);
 } // extern "C"
 
 namespace R

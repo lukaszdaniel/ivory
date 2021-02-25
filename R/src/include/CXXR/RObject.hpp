@@ -47,57 +47,6 @@
 #include <R_ext/Complex.h>
 #include <R_ext/Boolean.h>
 
-#if defined(COMPUTE_REFCNT_VALUES)
-#define REFCNT(x) (CXXR::RObject::refcnt(x))
-#define TRACKREFS(x) (CXXR::RObject::trackrefs(x))
-#else
-#define REFCNT(x) 0
-#define TRACKREFS(x) false
-#endif
-
-#if defined(COMPUTE_REFCNT_VALUES)
-#define SET_REFCNT(x, v) (CXXR::RObject::set_refcnt(x, v))
-#if defined(EXTRA_REFCNT_FIELDS)
-#define SET_TRACKREFS(x, v) (CXXR::RObject::set_trackrefs(x, v))
-#else
-#define SET_TRACKREFS(x, v) (CXXR::RObject::set_trackrefs(x, !v))
-#endif
-#define DECREMENT_REFCNT(x)                                       \
-    do                                                            \
-    {                                                             \
-        CXXR::RObject *drc__x__ = (x);                            \
-        if (REFCNT(drc__x__) > 0 && REFCNT(drc__x__) < REFCNTMAX) \
-            SET_REFCNT(drc__x__, REFCNT(drc__x__) - 1);           \
-    } while (0)
-#define INCREMENT_REFCNT(x)                             \
-    do                                                  \
-    {                                                   \
-        CXXR::RObject *irc__x__ = (x);                  \
-        if (REFCNT(irc__x__) < REFCNTMAX)               \
-            SET_REFCNT(irc__x__, REFCNT(irc__x__) + 1); \
-    } while (0)
-#else
-#define SET_REFCNT(x, v) \
-    do                   \
-    {                    \
-    } while (0)
-#define SET_TRACKREFS(x, v) \
-    do                      \
-    {                       \
-    } while (0)
-#define DECREMENT_REFCNT(x) \
-    do                      \
-    {                       \
-    } while (0)
-#define INCREMENT_REFCNT(x) \
-    do                      \
-    {                       \
-    } while (0)
-#endif
-
-#define ENABLE_REFCNT(x) SET_TRACKREFS(x, TRUE)
-#define DISABLE_REFCNT(x) SET_TRACKREFS(x, FALSE)
-
 /* To make complex assignments a bit safer, in particular with
    reference counting, a bit is set on the LHS binding cell or symbol
    at the beginning of the complex assignment process and unset at the
@@ -134,54 +83,53 @@
    to allow replacement functions to determine when they are being
    called in an assignment context and can modify an object with one
    refrence */
-#define MARK_ASSIGNMENT_CALL(call) SET_ASSIGNMENT_PENDING(call, TRUE)
-#define IS_ASSIGNMENT_CALL(call) ASSIGNMENT_PENDING(call)
+#define MARK_ASSIGNMENT_CALL_MACRO(call) SET_ASSIGNMENT_PENDING(call, TRUE)
+#define IS_ASSIGNMENT_CALL_MACRO(call) ASSIGNMENT_PENDING(call)
 
 #ifdef SWITCH_TO_REFCNT
-#define NAMED(x) REFCNT(x)
 /* no definition for SET_NAMED; any calls will use the one in memory.cpp */
-#define ENSURE_NAMEDMAX(v) \
-    do                     \
-    {                      \
+#define ENSURE_NAMEDMAX_MACRO(v) \
+    do                           \
+    {                            \
     } while (0)
-#define ENSURE_NAMED(v) \
-    do                  \
-    {                   \
+#define ENSURE_NAMED_MACRO(v) \
+    do                        \
+    {                         \
     } while (0)
 #else
-#define ENSURE_NAMEDMAX(v)                  \
+#define ENSURE_NAMEDMAX_MACRO(v)            \
     do                                      \
     {                                       \
         CXXR::RObject *__enm_v__ = (v);     \
         if (NAMED(__enm_v__) < NAMEDMAX)    \
             SET_NAMED(__enm_v__, NAMEDMAX); \
     } while (0)
-#define ENSURE_NAMED(v)      \
-    do                       \
-    {                        \
-        if (NAMED(v) == 0)   \
-            SET_NAMED(v, 1); \
+#define ENSURE_NAMED_MACRO(v) \
+    do                        \
+    {                         \
+        if (NAMED(v) == 0)    \
+            SET_NAMED(v, 1);  \
     } while (0)
 #endif
 
 #ifdef SWITCH_TO_REFCNT
-#define SETTER_CLEAR_NAMED(x) \
-    do                        \
-    {                         \
+#define SETTER_CLEAR_NAMED_MACRO(x) \
+    do                              \
+    {                               \
     } while (0)
-#define RAISE_NAMED(x, n) \
-    do                    \
-    {                     \
+#define RAISE_NAMED_MACRO(x, n) \
+    do                          \
+    {                           \
     } while (0)
 #else
-#define SETTER_CLEAR_NAMED(x)    \
-    do                           \
-    {                            \
-        RObject *__x__ = (x);    \
-        if (NAMED(__x__) == 1)   \
-            SET_NAMED(__x__, 0); \
+#define SETTER_CLEAR_NAMED_MACRO(x) \
+    do                              \
+    {                               \
+        RObject *__x__ = (x);       \
+        if (NAMED(__x__) == 1)      \
+            SET_NAMED(__x__, 0);    \
     } while (0)
-#define RAISE_NAMED(x, n)            \
+#define RAISE_NAMED_MACRO(x, n)      \
     do                               \
     {                                \
         RObject *__x__ = (x);        \
@@ -574,15 +522,7 @@ namespace CXXR
         /**
          * @param stype Required type of the RObject.
          */
-        explicit RObject(SEXPTYPE stype = CXXSXP) : m_type(stype), m_scalar(false), m_has_class(false), m_alt(false), /*m_gpbits(0),*/
-                                                    m_trace(false), m_spare(false), m_named(0), m_extra(0), m_s4_object(stype == S4SXP),
-                                                    m_active_binding(false), m_binding_locked(false), m_assignment_pending(false), m_attrib(nullptr)
-        {
-#ifdef COMPUTE_REFCNT_VALUES
-            SET_REFCNT(this, 0);
-            SET_TRACKREFS(this, true);
-#endif
-        }
+        explicit RObject(SEXPTYPE stype = CXXSXP);
 
         /** @brief Copy constructor.
          *
@@ -781,7 +721,7 @@ extern "C"
      * @return Refer to 'R Internals' document.  Returns 0 if \a x is a
      *         null pointer.
      */
-    int(NAMED)(SEXP x);
+    int NAMED(SEXP x);
 
     /** @brief (For use only in deserialization.)
      *
@@ -860,6 +800,38 @@ extern "C"
      * Here, use char / CHAR() instead of the slower more general Rf_translateChar()
      */
     Rboolean Rf_inherits(SEXP s, const char *name);
+
+    Rboolean Rf_isSymbol(SEXP s);
+    Rboolean Rf_isLogical(SEXP s);
+    Rboolean Rf_isReal(SEXP s);
+    Rboolean Rf_isComplex(SEXP s);
+    Rboolean Rf_isExpression(SEXP s);
+    Rboolean Rf_isEnvironment(SEXP s);
+    Rboolean Rf_isString(SEXP s);
+    Rboolean Rf_isRaw(SEXP s);
+    int ALTREP(SEXP x);
+    void SETALTREP(SEXP x, int v);
+    int REFCNT(SEXP x);
+    void SET_REFCNT(SEXP x, unsigned int v);
+    int TRACKREFS(SEXP x);
+    void SET_TRACKREFS(SEXP x, bool v);
+    int IS_SCALAR(SEXP x, SEXPTYPE type);
+    int SIMPLE_SCALAR_TYPE(SEXP x);
+    void DECREMENT_REFCNT(SEXP x);
+    void INCREMENT_REFCNT(SEXP x);
+    void DISABLE_REFCNT(SEXP x);
+    void ENABLE_REFCNT(SEXP x);
+    void SHALLOW_DUPLICATE_ATTRIB(SEXP to, SEXP from);
+    int ASSIGNMENT_PENDING(SEXP x);
+    void SET_ASSIGNMENT_PENDING(SEXP x, int v);
+
+    void (MARK_NOT_MUTABLE)(SEXP x);
+    int IS_ASSIGNMENT_CALL(SEXP x);
+    void MARK_ASSIGNMENT_CALL(SEXP x);
+    void ENSURE_NAMEDMAX(SEXP x);
+    void ENSURE_NAMED(SEXP x);
+    void SETTER_CLEAR_NAMED(SEXP x);
+    void RAISE_NAMED(SEXP x, int n);
 } // extern "C"
 
 /** @brief Shorthand for Rf_length().

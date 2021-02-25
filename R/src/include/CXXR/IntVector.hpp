@@ -57,6 +57,9 @@ extern "C"
      *          R integer or logical vector).
      *          An error is generated if \a x is not pointer to an \c
      *          IntVector or a \c LogicalVector.
+     *
+     * @note    Maybe this should exclude logicals, but it is widely used
+     *
      * @return Pointer to element 0 of \a x.
      */
     int *INTEGER(SEXP x);

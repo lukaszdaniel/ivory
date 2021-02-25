@@ -103,6 +103,24 @@ namespace CXXR
     } while (0)
 #endif
 
+Rcomplex *COMPLEX(SEXP x)
+{
+    if (TYPEOF(x) != CPLXSXP)
+        Rf_error(_("'%s' function can only be applied to a complex, not a '%s'"), "COMPLEX()",
+                 Rf_type2char(TYPEOF(x)));
+    CXXR::VectorBase::chkzln(x);
+    return COMPLEXVECTOR_COMPLEX(x);
+}
+
+const Rcomplex *COMPLEX_RO(SEXP x)
+{
+    if (TYPEOF(x) != CPLXSXP)
+        Rf_error(_("'%s' function can only be applied to a complex, not a '%s'"),
+                 "COMPLEX()", "complex", Rf_type2char(TYPEOF(x)));
+    CXXR::VectorBase::chkzln(x);
+    return COMPLEXVECTOR_COMPLEX_RO(x);
+}
+
 Rcomplex *COMPLEX0(SEXP x)
 {
     CHECK_STDVEC_CPLX(x);

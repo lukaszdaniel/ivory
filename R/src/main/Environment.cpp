@@ -292,3 +292,58 @@ namespace CXXR
         env->setSingleStepping(v);
     }
 } // namespace CXXR
+
+// ***** C interface *****
+
+SEXP FRAME(SEXP x)
+{
+    return CXXR::Environment::frame(x);
+}
+
+SEXP ENCLOS(SEXP x)
+{
+    return CXXR::Environment::enclos(x);
+}
+
+SEXP HASHTAB(SEXP x)
+{
+    return CXXR::Environment::hashtab(x);
+}
+
+int ENVFLAGS(SEXP x)
+{
+    return CXXR::Environment::envflags(x);
+}
+
+int ENV_RDEBUG(SEXP x)
+{
+    return CXXR::Environment::env_rdebug(x);
+}
+
+void SET_FRAME(SEXP x, SEXP v)
+{
+    CXXR::RObject::fix_refcnt(x, CXXR::Environment::frame(x), v);
+    CXXR::Environment::set_frame(x, v);
+}
+
+void SET_ENCLOS(SEXP x, SEXP v)
+{
+    CXXR::RObject::fix_refcnt(x, CXXR::Environment::enclos(x), v);
+    CXXR::Environment::set_enclos(x, v);
+}
+
+void SET_HASHTAB(SEXP x, SEXP v)
+{
+    CXXR::RObject::fix_refcnt(x, CXXR::Environment::hashtab(x), v);
+    CXXR::Environment::set_hashtab(x, v);
+}
+
+void SET_ENVFLAGS(SEXP x, int v)
+{
+    CXXR::Environment::set_envflags(x, v);
+}
+
+void SET_ENV_RDEBUG(SEXP x, int v)
+{
+    CXXR::Environment::set_env_rdebug(x, v);
+}

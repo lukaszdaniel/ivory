@@ -28,6 +28,7 @@
 #include <CXXR/RObject.hpp>
 #include <CXXR/Symbol.hpp>
 #include <CXXR/PairList.hpp>
+#include <CXXR/RAltRep.hpp>
 #include <CXXR/StringVector.hpp>
 #include <Rinternals.h>
 #include <R_ext/Boolean.h>
@@ -67,6 +68,16 @@ namespace CXXR
     {
         if (m_attrib && (m_type != CHARSXP || m_attrib->m_type != CHARSXP))
             m_attrib->conductVisitor(v);
+    }
+
+    RObject::RObject(SEXPTYPE stype) : m_type(stype), m_scalar(false), m_has_class(false), m_alt(false), /*m_gpbits(0),*/
+                                       m_trace(false), m_spare(false), m_named(0), m_extra(0), m_s4_object(stype == S4SXP),
+                                       m_active_binding(false), m_binding_locked(false), m_assignment_pending(false), m_attrib(nullptr)
+    {
+#ifdef COMPUTE_REFCNT_VALUES
+        CXXR::RObject::set_refcnt(this, 0);
+        SET_TRACKREFS(this, true);
+#endif
     }
 
     RObject::RObject(const RObject &pattern, bool deep)
@@ -344,19 +355,29 @@ namespace CXXR
 
     unsigned int RObject::refcnt(RObject *x)
     {
+#ifdef COMPUTE_REFCNT_VALUES
         return x ? x->m_named : 0;
+#else
+        return 0;
+#endif
     }
 
     void RObject::set_refcnt(RObject *x, unsigned int v)
     {
+#ifdef COMPUTE_REFCNT_VALUES
         if (!x)
             return;
         x->m_named = v;
+#endif
     }
 
     bool RObject::trackrefs(RObject *x)
     {
+#ifdef COMPUTE_REFCNT_VALUES
         return x && (typeof_(x) == CLOSXP ? TRUE : !x->m_spare);
+#else
+        return false;
+#endif
     }
 
     void RObject::set_trackrefs(RObject *x, bool v)
@@ -515,6 +536,249 @@ namespace CXXR
 } // namespace CXXR
 
 // ***** C interface *****
+
+SEXP ATTRIB(SEXP x)
+{
+    return CXXR::RObject::attrib(x);
+}
+int OBJECT(SEXP x)
+{
+    return CXXR::RObject::object(x);
+}
+
+SEXPTYPE TYPEOF(SEXP x)
+{
+    if (!CXXR::RObject::altrep(x))
+        return CXXR::RObject::typeof_(x);
+
+    return CXXR::AltRep::wrapper_type(CXXR::SEXP_downcast<CXXR::AltRep *>(x));
+}
+
+int ALTREP(SEXP x)
+{
+    return CXXR::RObject::altrep(x);
+}
+
+void SETALTREP(SEXP x, int v)
+{
+    CXXR::RObject::set_altrep(x, v);
+}
+
+int NAMED(SEXP x)
+{
+#ifdef SWITCH_TO_REFCNT
+    return REFCNT(x);
+#else
+    return CXXR::RObject::named(x);
+#endif
+}
+
+int LEVELS(SEXP x)
+{
+    return CXXR::RObject::levels(x);
+}
+
+int REFCNT(SEXP x)
+{
+    return CXXR::RObject::refcnt(x);
+}
+
+void SET_REFCNT(SEXP x, unsigned int v)
+{
+    CXXR::RObject::set_refcnt(x, v);
+}
+
+int TRACKREFS(SEXP x)
+{
+    return CXXR::RObject::trackrefs(x);
+}
+
+void SET_TRACKREFS(SEXP x, bool v)
+{
+#ifdef COMPUTE_REFCNT_VALUES
+#ifdef EXTRA_REFCNT_FIELDS
+    CXXR::RObject::set_trackrefs(x, v);
+#else
+    CXXR::RObject::set_trackrefs(x, !v);
+#endif
+#endif
+}
+
+int IS_SCALAR(SEXP x, SEXPTYPE type)
+{
+    return CXXR::RObject::is_scalar(x, type);
+}
+
+int SIMPLE_SCALAR_TYPE(SEXP x)
+{
+    return (CXXR::RObject::scalar(x) && CXXR::RObject::attrib(x) == R_NilValue) ? CXXR::RObject::typeof_(x) : 0;
+}
+
+void DECREMENT_REFCNT(SEXP x)
+{
+#ifdef COMPUTE_REFCNT_VALUES
+    if (REFCNT(x) > 0 && REFCNT(x) < REFCNTMAX)
+        SET_REFCNT(x, REFCNT(x) - 1);
+#endif
+}
+
+void INCREMENT_REFCNT(SEXP x)
+{
+#ifdef COMPUTE_REFCNT_VALUES
+    if (REFCNT(x) < REFCNTMAX)
+        SET_REFCNT(x, REFCNT(x) + 1);
+#endif
+}
+
+void DISABLE_REFCNT(SEXP x)
+{
+    SET_TRACKREFS(x, false);
+}
+
+void ENABLE_REFCNT(SEXP x)
+{
+    SET_TRACKREFS(x, true);
+}
+
+void SET_ATTRIB(SEXP x, SEXP v)
+{
+    if (CXXR::RObject::typeof_(v) != LISTSXP && CXXR::RObject::typeof_(v) != NILSXP)
+        Rf_error(_("value of 'SET_ATTRIB' must be a pairlist or nullptr, not a '%s'"),
+                 Rf_type2char(CXXR::RObject::typeof_(v)));
+    CXXR::RObject::fix_refcnt(x, CXXR::RObject::attrib(x), v);
+    CXXR::RObject::set_attrib(x, v);
+}
+
+void SET_OBJECT(SEXP x, int v)
+{
+    CXXR::RObject::set_object(x, v);
+}
+
+void SET_TYPEOF(SEXP x, SEXPTYPE v)
+{
+    CXXR::RObject::set_typeof(x, v);
+}
+
+void SET_NAMED(SEXP x, int v)
+{
+#ifndef SWITCH_TO_REFCNT
+    CXXR::RObject::set_named(x, v);
+#endif
+}
+
+void SETLEVELS(SEXP x, int v)
+{
+    CXXR::RObject::setlevels(x, v);
+}
+
+void DUPLICATE_ATTRIB(SEXP to, SEXP from)
+{
+    SET_ATTRIB(to, Rf_duplicate(CXXR::RObject::attrib(from)));
+    CXXR::RObject::set_object(to, CXXR::RObject::object(from));
+    if(CXXR::RObject::is_s4_object(from)) { CXXR::RObject::set_s4_object(to);} else { CXXR::RObject::unset_s4_object(to);};
+}
+
+void SHALLOW_DUPLICATE_ATTRIB(SEXP to, SEXP from)
+{
+    SET_ATTRIB(to, Rf_shallow_duplicate(CXXR::RObject::attrib(from)));
+    CXXR::RObject::set_object(to, CXXR::RObject::object(from));
+    if(CXXR::RObject::is_s4_object(from)) { CXXR::RObject::set_s4_object(to);} else { CXXR::RObject::unset_s4_object(to);};
+}
+
+int ASSIGNMENT_PENDING(SEXP x)
+{
+    return CXXR::RObject::assignment_pending(x);
+}
+
+void SET_ASSIGNMENT_PENDING(SEXP x, int v)
+{
+    CXXR::RObject::set_assignment_pending(x, v);
+}
+
+void(MARK_NOT_MUTABLE)(SEXP x)
+{
+    MARK_NOT_MUTABLE(x);
+}
+
+int IS_ASSIGNMENT_CALL(SEXP x)
+{
+    return IS_ASSIGNMENT_CALL_MACRO(x);
+}
+
+void MARK_ASSIGNMENT_CALL(SEXP x)
+{
+    MARK_ASSIGNMENT_CALL_MACRO(x);
+}
+
+void ENSURE_NAMEDMAX(SEXP x)
+{
+    ENSURE_NAMEDMAX_MACRO(x);
+}
+
+void ENSURE_NAMED(SEXP x)
+{
+    ENSURE_NAMED_MACRO(x);
+}
+
+void SETTER_CLEAR_NAMED(SEXP x)
+{
+    SETTER_CLEAR_NAMED_MACRO(x);
+}
+
+void RAISE_NAMED(SEXP x, int n)
+{
+    RAISE_NAMED_MACRO(x, n);
+}
+
+Rboolean Rf_isNull(SEXP s)
+{
+    return (Rboolean)(TYPEOF(s) == NILSXP);
+}
+
+Rboolean Rf_isSymbol(SEXP s)
+{
+    return (Rboolean)(TYPEOF(s) == SYMSXP);
+}
+
+Rboolean Rf_isLogical(SEXP s)
+{
+    return (Rboolean)(TYPEOF(s) == LGLSXP);
+}
+
+Rboolean Rf_isReal(SEXP s)
+{
+    return (Rboolean)(TYPEOF(s) == REALSXP);
+}
+
+Rboolean Rf_isComplex(SEXP s)
+{
+    return (Rboolean)(TYPEOF(s) == CPLXSXP);
+}
+
+Rboolean Rf_isExpression(SEXP s)
+{
+    return (Rboolean)(TYPEOF(s) == EXPRSXP);
+}
+
+Rboolean Rf_isEnvironment(SEXP s)
+{
+    return (Rboolean)(TYPEOF(s) == ENVSXP);
+}
+
+Rboolean Rf_isString(SEXP s)
+{
+    return (Rboolean)(TYPEOF(s) == STRSXP);
+}
+
+Rboolean Rf_isObject(SEXP s)
+{
+    return (Rboolean)(OBJECT(s) != 0);
+}
+
+Rboolean Rf_isRaw(SEXP s)
+{
+    return (Rboolean)(TYPEOF(s) == RAWSXP);
+}
 
 R_len_t Rf_length(SEXP s)
 {

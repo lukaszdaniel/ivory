@@ -64,3 +64,10 @@ namespace CXXR
     int PRIMPRINT(RObject *x) { return ((R_FunTab[PRIMOFFSET(x)].evalargs()) / 100) % 10; }
     int PRIMINTERNAL(RObject *x) { return ((R_FunTab[PRIMOFFSET(x)].evalargs()) % 100) / 10; }
 } // namespace CXXR
+
+// ***** C interface *****
+
+int CXXR::PRIMOFFSET(SEXP x)
+{
+    return CXXR::BuiltInFunction::primoffset(x);
+}

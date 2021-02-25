@@ -79,3 +79,14 @@ SEXP SET_XVECTOR_ELT(SEXP x, R_xlen_t i, SEXP v)
     (*ev)[i] = v;
     return v;
 }
+
+SEXP XVECTOR_ELT(SEXP x, R_xlen_t i)
+{
+    /* We need to allow vector-like types here */
+    if (TYPEOF(x) != EXPRSXP)
+        Rf_error(_("'%s' function can only be applied to an expression, not a '%s'"), "XVECTOR_ELT()",
+                 Rf_type2char(TYPEOF(x)));
+    // return EXPRVECTOR_ELT(x, i);
+    ExpressionVector *ev = CXXR::SEXP_downcast<CXXR::ExpressionVector *>(x, false);
+    return (*ev)[i];
+}

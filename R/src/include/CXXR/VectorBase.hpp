@@ -127,6 +127,7 @@ namespace CXXR
     /* Growable vector support */
     static unsigned int growable_bit_set(RObject *x);
     static void set_growable_bit(RObject *x);
+    static int *chkzln(SEXP x);
 
   protected:
     ~VectorBase() {}
@@ -297,6 +298,7 @@ extern "C"
   R_xlen_t XTRUELENGTH(SEXP x);
   int LENGTH_EX(SEXP x, const char *file, int line);
   void *DATAPTR(SEXP x);
+  void *STDVEC_DATAPTR(SEXP x);
 
   /**
    * @brief The general (read only) data pointer function
@@ -309,10 +311,25 @@ extern "C"
   const void *DATAPTR_RO(SEXP x);
 
   const void *DATAPTR_OR_NULL(SEXP x);
+  NORET SEXP *VECTOR_PTR(SEXP x);
 
 #ifdef LONG_VECTOR_SUPPORT
-    NORET R_len_t R_BadLongVector(SEXP, const char *, int);
+  NORET R_len_t R_BadLongVector(SEXP, const char *, int);
 #endif
+
+  /* Growable vector support */
+  int IS_GROWABLE(SEXP x);
+  void SET_GROWABLE_BIT(SEXP x);
+
+  R_xlen_t STDVEC_LENGTH(SEXP x);
+  R_xlen_t STDVEC_TRUELENGTH(SEXP x);
+  int(LENGTH)(SEXP x);
+  R_xlen_t(XLENGTH)(SEXP x);
+  R_xlen_t(TRUELENGTH)(SEXP x);
+  int(IS_LONG_VEC)(SEXP x);
+
+  /* temporary, to ease transition away from remapping */
+  R_xlen_t Rf_XLENGTH(SEXP x);
 } // extern "C"
 
 #if defined(R_NO_REMAP) && defined(COMPILING_IVORY) && defined(__cplusplus)

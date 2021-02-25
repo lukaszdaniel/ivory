@@ -103,6 +103,24 @@ namespace CXXR
     } while (0)
 #endif
 
+int *LOGICAL(SEXP x)
+{
+    if (TYPEOF(x) != LGLSXP)
+        Rf_error(_("'%s' function can only be applied to a logical, not a '%s'"), "LOGICAL()",
+                 Rf_type2char(TYPEOF(x)));
+    CXXR::VectorBase::chkzln(x);
+    return LOGICALVECTOR_LOGICAL(x);
+}
+
+const int *LOGICAL_RO(SEXP x)
+{
+    if (TYPEOF(x) != LGLSXP)
+        Rf_error(_("'%s' function can only be applied to a logical, not a '%s'"),
+                 "LOGICAL()", Rf_type2char(TYPEOF(x)));
+    CXXR::VectorBase::chkzln(x);
+    return LOGICALVECTOR_LOGICAL_RO(x);
+}
+
 int *LOGICAL0(SEXP x)
 {
     CHECK_STDVEC_LGL(x);

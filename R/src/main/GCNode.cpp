@@ -334,7 +334,10 @@ void* GCNode::operator new(size_t bytes)
     }
 
     /* General Cons Cell Attributes */
-    unsigned int GCNode::gcgen(const GCNode *x) { return x->m_gcgen; }
+    unsigned int GCNode::gcgen(const GCNode *x)
+    {
+        return x->m_gcgen;
+    }
 
     void GCNode::set_gcgen(const GCNode *x, unsigned int v)
     {
@@ -343,7 +346,10 @@ void* GCNode::operator new(size_t bytes)
         x->m_gcgen = v;
     }
 
-    const GCNode *GCNode::next_node(const GCNode *x) { return x ? x->m_next : nullptr; }
+    const GCNode *GCNode::next_node(const GCNode *x)
+    {
+        return x ? x->m_next : nullptr;
+    }
 
     void GCNode::set_next_node(const GCNode *x, const GCNode *t)
     {
@@ -352,7 +358,10 @@ void* GCNode::operator new(size_t bytes)
         x->m_next = t;
     }
 
-    bool GCNode::is_marked(const GCNode *x) { return x && x->m_marked; }
+    bool GCNode::is_marked(const GCNode *x)
+    {
+        return x && x->m_marked;
+    }
 
     void GCNode::set_mark(const GCNode *x, bool v)
     {
@@ -375,3 +384,10 @@ void* GCNode::operator new(size_t bytes)
         }
     }
 } // namespace CXXR
+
+// ***** C interface *****
+
+int MARK(SEXP x)
+{
+    return CXXR::GCNode::is_marked(static_cast<CXXR::GCNode *>(x));
+}

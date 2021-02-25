@@ -267,3 +267,88 @@ namespace R
 }
 
 // ***** C interface *****
+
+int HASHASH(SEXP x)
+{
+    return CXXR::String::hashash(x);
+}
+
+int HASHVALUE(SEXP x)
+{
+    const CXXR::String *str = CXXR::SEXP_downcast<CXXR::String *>(x, false);
+    return str->hash();
+}
+
+void SET_HASHASH(SEXP x, int v)
+{
+    /* does nothing in CXXR */
+}
+
+void SET_HASHVALUE(SEXP x, int v)
+{
+    const CXXR::String *str = CXXR::SEXP_downcast<CXXR::String *>(x, false);
+    str->hash();
+}
+
+const char *R_CHAR(SEXP x)
+{
+    if (TYPEOF(x) != CHARSXP) // Han-Tak proposes to prepend  'x && '
+        Rf_error(_("'%s' function can only be applied to a charecter, not a '%s'"), "CHAR()",
+                 Rf_type2char(TYPEOF(x)));
+    return CXXR::r_char(x);
+}
+
+int IS_BYTES(SEXP x)
+{
+    return CXXR::String::is_bytes(x);
+}
+
+int IS_LATIN1(SEXP x)
+{
+    return CXXR::String::is_latin1(x);
+}
+
+int IS_ASCII(SEXP x)
+{
+    return CXXR::String::is_ascii(x);
+}
+
+int IS_UTF8(SEXP x)
+{
+    return CXXR::String::is_utf8(x);
+}
+
+void SET_BYTES(SEXP x)
+{
+    CXXR::String::set_bytes(x);
+}
+
+void SET_LATIN1(SEXP x)
+{
+    CXXR::String::set_latin1(x);
+}
+
+void SET_UTF8(SEXP x)
+{
+    CXXR::String::set_utf8(x);
+}
+
+void SET_ASCII(SEXP x)
+{
+    CXXR::String::set_ascii(x);
+}
+
+int ENC_KNOWN(SEXP x)
+{
+    return CXXR::String::enc_known(x);
+}
+
+void SET_CACHED(SEXP x)
+{
+    CXXR::String::set_cached(x);
+}
+
+int IS_CACHED(SEXP x)
+{
+    return CXXR::String::is_cached(x);
+}

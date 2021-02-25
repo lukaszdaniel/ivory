@@ -233,3 +233,48 @@ namespace CXXR
         }
     }
 } // namespace CXXR
+
+// ***** C interface *****
+
+SEXP PRCODE(SEXP x)
+{
+    return CXXR::Promise::prcode(x);
+}
+
+SEXP PRENV(SEXP x)
+{
+    return CXXR::Promise::prenv(x);
+}
+
+SEXP PRVALUE(SEXP x)
+{
+    return CXXR::Promise::prvalue(x);
+}
+
+int PRSEEN(SEXP x)
+{
+    return CXXR::Promise::prseen(x);
+}
+
+void SET_PRENV(SEXP x, SEXP v)
+{
+    CXXR::RObject::fix_refcnt(x, CXXR::Promise::prenv(x), v);
+    CXXR::Promise::set_prenv(x, v);
+}
+
+void SET_PRVALUE(SEXP x, SEXP v)
+{
+    CXXR::RObject::fix_refcnt(x, CXXR::Promise::prvalue(x), v);
+    CXXR::Promise::set_prvalue(x, v);
+}
+
+void SET_PRCODE(SEXP x, SEXP v)
+{
+    CXXR::RObject::fix_refcnt(x, CXXR::Promise::prcode(x), v);
+    CXXR::Promise::set_prcode(x, v);
+}
+
+void SET_PRSEEN(SEXP x, int v)
+{
+    CXXR::Promise::set_prseen(x, v);
+}

@@ -103,6 +103,24 @@ namespace CXXR
     } while (0)
 #endif
 
+Rbyte *RAW(SEXP x)
+{
+    if (TYPEOF(x) != RAWSXP)
+        Rf_error(_("'%s' function can only be applied to a raw, not a '%s'"), "RAW()",
+                 Rf_type2char(TYPEOF(x)));
+    CXXR::VectorBase::chkzln(x);
+    return RAWVECTOR_RAW(x);
+}
+
+const Rbyte *RAW_RO(SEXP x)
+{
+    if (TYPEOF(x) != RAWSXP)
+        Rf_error(_("'%s' function can only be applied to a raw, not a '%s'"),
+                 "RAW()", Rf_type2char(TYPEOF(x)));
+    CXXR::VectorBase::chkzln(x);
+    return RAWVECTOR_RAW_RO(x);
+}
+
 Rbyte *RAW0(SEXP x)
 {
     CHECK_STDVEC_RAW(x);

@@ -45,12 +45,12 @@ namespace CXXR
         const auto &SET_RSTEPptr = SET_RSTEP;
     } // namespace ForceNonInline
 
-// Closure primary constructor is in dstruct.cpp (for the time being).
+    // Closure primary constructor is in dstruct.cpp (for the time being).
 
-Closure* Closure::clone(bool deep) const
-{
-    return new Closure(*this, deep);
-}
+    Closure *Closure::clone(bool deep) const
+    {
+        return new Closure(*this, deep);
+    }
 
     namespace
     {
@@ -255,3 +255,73 @@ Closure* Closure::clone(bool deep) const
         SEXP_downcast<Closure *>(x)->m_maybe_jit = false;
     }
 } // namespace CXXR
+
+// ***** C interface *****
+
+SEXP FORMALS(SEXP x)
+{
+    return CXXR::Closure::formals(x);
+}
+
+SEXP BODY(SEXP x)
+{
+    return CXXR::Closure::body(x);
+}
+
+SEXP CLOENV(SEXP x)
+{
+    return CXXR::Closure::cloenv(x);
+}
+
+int RSTEP(SEXP x)
+{
+    return CXXR::Closure::rstep(x);
+}
+
+void SET_FORMALS(SEXP x, SEXP v)
+{
+    CXXR::RObject::fix_refcnt(x, CXXR::Closure::formals(x), v);
+    CXXR::Closure::set_formals(x, v);
+}
+
+void SET_BODY(SEXP x, SEXP v)
+{
+    CXXR::RObject::fix_refcnt(x, CXXR::Closure::body(x), v);
+    CXXR::Closure::set_body(x, v);
+}
+
+void SET_CLOENV(SEXP x, SEXP v)
+{
+    CXXR::RObject::fix_refcnt(x, CXXR::Closure::cloenv(x), v);
+    CXXR::Closure::set_cloenv(x, v);
+}
+
+void SET_RSTEP(SEXP x, int v)
+{
+    CXXR::Closure::set_rstep(x, v);
+}
+
+int NOJIT(SEXP x)
+{
+    return CXXR::Closure::nojit(x);
+}
+
+int MAYBEJIT(SEXP x)
+{
+    return CXXR::Closure::maybejit(x);
+}
+
+void SET_NOJIT(SEXP x)
+{
+    CXXR::Closure::set_nojit(x);
+}
+
+void SET_MAYBEJIT(SEXP x)
+{
+    CXXR::Closure::set_maybejit(x);
+}
+
+void UNSET_MAYBEJIT(SEXP x)
+{
+    CXXR::Closure::unset_maybejit(x);
+}

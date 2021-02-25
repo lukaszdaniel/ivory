@@ -41,7 +41,9 @@
    penalty, code that includes Defn.h (or code that explicitly defines
    USE_RINTERNALS) can access a RObject's fields directly. */
 
-// #define TESTING_WRITE_BARRIER
+#ifndef TESTING_WRITE_BARRIER
+#define TESTING_WRITE_BARRIER
+#endif
 
 #include <R_ext/Visibility.h>
 
@@ -232,30 +234,11 @@ constexpr size_t PATH_MAX = 5000;
 #endif
 #endif
 
-constexpr int HSIZE = 49157;	/* The size of the hash table for symbols */
+constexpr int HSIZE = 49157;     /* The size of the hash table for symbols */
 constexpr int MAXIDSIZE = 10000; /* Largest symbol size,                  \
                in bytes excluding terminator.                    \
                Was 256 prior to 2.13.0, now just a sanity check. \
             */
-
-
-Rboolean IS_ACTIVE_BINDING(SEXP b);
-Rboolean BINDING_IS_LOCKED(SEXP b);
-void SET_ACTIVE_BINDING_BIT(SEXP b);
-void LOCK_BINDING(SEXP b);
-void UNLOCK_BINDING(SEXP b);
-
-void SET_BASE_SYM_CACHED(SEXP b);
-void UNSET_BASE_SYM_CACHED(SEXP b);
-Rboolean BASE_SYM_CACHED(SEXP b);
-
-void SET_SPECIAL_SYMBOL(SEXP b);
-void UNSET_SPECIAL_SYMBOL(SEXP b);
-Rboolean IS_SPECIAL_SYMBOL(SEXP b);
-void SET_NO_SPECIAL_SYMBOLS(SEXP b);
-void UNSET_NO_SPECIAL_SYMBOLS(SEXP b);
-Rboolean NO_SPECIAL_SYMBOLS(SEXP b);
-
 
 /* Arithmetic and Relation Operators */
 enum ARITHOP_TYPE

@@ -33,6 +33,7 @@
 #include <CXXR/IntVector.hpp>
 #include <CXXR/RealVector.hpp>
 #include <CXXR/StringVector.hpp>
+#include <CXXR/Symbol.hpp>
 #include <IOStuff.h>		/*-> Defn.h */
 #include <Fileio.h>
 #include <Parse.h>

@@ -80,6 +80,36 @@ namespace CXXR
 
 // ***** C interface *****
 
+/* S4 object testing */
+int IS_S4_OBJECT(SEXP x)
+{
+    return CXXR::RObject::is_s4_object(x);
+}
+
+void SET_S4_OBJECT(SEXP x)
+{
+    CXXR::RObject::set_s4_object(x);
+}
+
+void UNSET_S4_OBJECT(SEXP x)
+{
+    CXXR::RObject::unset_s4_object(x);
+}
+
+/* S4Object Accessors */
+SEXP S4TAG(SEXP e)
+{
+    return CXXR::S4Object::tag(e);
+}
+
+void SET_S4TAG(SEXP x, SEXP v)
+{
+    if (x == nullptr || x == R_NilValue)
+        Rf_error(_("incorrect value"));
+    CXXR::RObject::fix_refcnt(x, S4TAG(x), v);
+    CXXR::S4Object::set_tag(x, v);
+}
+
 SEXP Rf_allocS4Object()
 {
     SEXP ans = new CXXR::S4Object();

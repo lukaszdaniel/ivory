@@ -90,6 +90,23 @@ SEXP SET_VECTOR_ELT(SEXP x, R_xlen_t i, SEXP v)
     return v;
 }
 
+SEXP VECTOR_ELT(SEXP x, R_xlen_t i)
+{
+    /* We need to allow vector-like types here */
+    if (TYPEOF(x) != VECSXP &&
+        TYPEOF(x) != EXPRSXP &&
+        TYPEOF(x) != WEAKREFSXP)
+        Rf_error(_("'%s' function can only be applied to a list, not a '%s'"), "VECTOR_ELT()",
+                 Rf_type2char(TYPEOF(x)));
+    if (TYPEOF(x) == EXPRSXP)
+    {
+        return XVECTOR_ELT(x, i);
+    }
+    // return LISTVECTOR_ELT(x, i);
+    ListVector *lv = CXXR::SEXP_downcast<CXXR::ListVector *>(x, false);
+    return (*lv)[i];
+}
+
 Rboolean Rf_isNewList(SEXP s)
 {
     return Rboolean(s == R_NilValue || TYPEOF(s) == VECSXP);

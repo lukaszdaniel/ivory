@@ -103,6 +103,24 @@ namespace CXXR
     } while (0)
 #endif
 
+double *REAL(SEXP x)
+{
+    if (TYPEOF(x) != REALSXP)
+        Rf_error(_("'%s' function can only be applied to a numeric, not a '%s'"), "REAL()",
+                 Rf_type2char(TYPEOF(x)));
+    CXXR::VectorBase::chkzln(x);
+    return REALVECTOR_REAL(x);
+}
+
+const double *REAL_RO(SEXP x)
+{
+    if (TYPEOF(x) != REALSXP)
+        Rf_error(_("'%s' function can only be applied to a numeric, not a '%s'"),
+                 "REAL()", Rf_type2char(TYPEOF(x)));
+    CXXR::VectorBase::chkzln(x);
+    return REALVECTOR_REAL_RO(x);
+}
+
 double *REAL0(SEXP x)
 {
     CHECK_STDVEC_REAL(x);

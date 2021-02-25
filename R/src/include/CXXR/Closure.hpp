@@ -250,6 +250,16 @@ extern "C"
     *          A null pointer is not permissible (not checked).
     */
    void SET_CLOENV(SEXP x, SEXP v);
+
+   /* JIT optimization support */
+   int NOJIT(SEXP x);
+   int MAYBEJIT(SEXP x);
+   void SET_NOJIT(SEXP x);
+   void SET_MAYBEJIT(SEXP x);
+   void UNSET_MAYBEJIT(SEXP x);
+
+   int RSTEP(SEXP x);
+   void SET_RSTEP(SEXP x, int v);
 } // extern "C"
 
 #endif /* CLOSURE_HPP */

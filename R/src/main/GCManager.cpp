@@ -40,6 +40,7 @@
 #include <CXXR/WeakRef.hpp>
 #include <Defn.h>
 #include <Rinterface.h>
+#include <Rinternals.h>
 
 using namespace std;
 using namespace CXXR;

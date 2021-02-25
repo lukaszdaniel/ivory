@@ -109,6 +109,20 @@ namespace CXXR
         // x->m_gpbits |= GROWABLE_MASK;
         SEXP_downcast<VectorBase *>(x)->setGrowable(true);
     }
+    int *VectorBase::chkzln(SEXP x)
+    {
+#ifdef CATCH_ZERO_LENGTH_ACCESS
+        /* Attempts to read or write elements of a zero length vector will
+         result in a segfault, rather than read and write random memory.
+         Returning NULL would be more natural, but Matrix seems to assume
+         that even zero-length vectors have non-NULL data pointers, so
+         return (void *) 1 instead. Zero-length CHARSXP objects still have a
+         trailing zero byte so they are not handled. */
+        if (STDVEC_LENGTH(x) == 0 && TYPEOF(x) != CHARSXP)
+            return (int *)1;
+#endif
+        return (int *)nullptr;
+    }
 } // namespace CXXR
 
 // ***** C interface *****
@@ -141,8 +155,20 @@ static void CHKVEC(SEXP x)
     }
 }
 #else
-# define CHKVEC(x) do {} while(0)
+#define CHKVEC(x) \
+    do            \
+    {             \
+    } while (0)
 #endif
+
+void SETLENGTH(SEXP x, R_xlen_t v)
+{
+    if (ALTREP(x))
+        Rf_error(_("SETLENGTH() cannot be applied to an ALTVEC object."));
+    if (!Rf_isVector(x))
+        Rf_error(_("SETLENGTH() can only be applied to a standard vector, not a '%s'"), Rf_type2char(TYPEOF(x)));
+    CXXR::VectorBase::set_stdvec_length(x, v);
+}
 
 R_xlen_t XLENGTH_EX(SEXP x)
 {
@@ -164,6 +190,17 @@ int LENGTH_EX(SEXP x, const char *file, int line)
         R_BadLongVector(x, file, line);
 #endif
     return (int)len;
+}
+
+void *STDVEC_DATAPTR(SEXP x)
+{
+    if (ALTREP(x))
+        Rf_error(_("cannot get STDVEC_DATAPTR from ALTREP object"));
+    if (!Rf_isVector(x) && TYPEOF(x) != WEAKREFSXP)
+        Rf_error(_("STDVEC_DATAPTR can only be applied to a vector, not a '%s'"),
+                 Rf_type2char(TYPEOF(x)));
+    CXXR::VectorBase::chkzln(x);
+    return CXXR::stdvec_dataptr<>(x);
 }
 
 void *DATAPTR(SEXP x)
@@ -201,6 +238,61 @@ const void *DATAPTR_OR_NULL(SEXP x)
         return ALTVEC_DATAPTR_OR_NULL(x);
     else
         return STDVEC_DATAPTR(x);
+}
+
+NORET SEXP *VECTOR_PTR(SEXP x)
+{
+    Rf_error(_("not safe to return vector pointer"));
+}
+
+int(LENGTH)(SEXP x)
+{
+    return x == R_NilValue ? 0 : LENGTH(x);
+}
+
+R_xlen_t(XLENGTH)(SEXP x)
+{
+    return XLENGTH(x);
+}
+
+R_xlen_t(TRUELENGTH)(SEXP x)
+{
+    return TRUELENGTH(x);
+}
+
+int(IS_LONG_VEC)(SEXP x)
+{
+    return IS_LONG_VEC(x);
+}
+
+R_xlen_t Rf_XLENGTH(SEXP x)
+{
+    return XLENGTH(x);
+}
+
+int IS_GROWABLE(SEXP x)
+{
+    return CXXR::VectorBase::growable_bit_set(x) && XLENGTH(x) < XTRUELENGTH(x);
+}
+
+void SET_GROWABLE_BIT(SEXP x)
+{
+    CXXR::VectorBase::set_growable_bit(x);
+}
+
+void SET_TRUELENGTH(SEXP x, R_xlen_t v)
+{
+    CXXR::VectorBase::set_truelength(x, v);
+}
+
+R_xlen_t STDVEC_LENGTH(SEXP x)
+{
+    return CXXR::VectorBase::stdvec_length(x);
+}
+
+R_xlen_t STDVEC_TRUELENGTH(SEXP x)
+{
+    return CXXR::VectorBase::stdvec_truelength(x);
 }
 
 SEXP Rf_allocVector(SEXPTYPE type, R_xlen_t length = 1)

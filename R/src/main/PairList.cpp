@@ -99,12 +99,100 @@ namespace CXXR
 
 // ***** C interface *****
 
+SEXP CAR0(SEXP e)
+{
+    return CXXR::ConsCell::car0(e);
+}
+
+SEXP CDR(SEXP e)
+{
+    return CXXR::ConsCell::cdr(e);
+}
+SEXP CAAR(SEXP e)
+{
+    return CAR(CAR(e));
+}
+
+SEXP CDAR(SEXP e)
+{
+    return CDR(CAR(e));
+}
+
+SEXP CADR(SEXP e)
+{
+    return CAR(CDR(e));
+}
+
+SEXP CDDR(SEXP e)
+{
+    return CDR(CDR(e));
+}
+
+SEXP CDDDR(SEXP e)
+{
+    return CDR(CDR(CDR(e)));
+}
+
+SEXP CD4R(SEXP e)
+{
+    return CDR(CDR(CDR(CDR(e))));
+}
+SEXP CADDR(SEXP e)
+{
+    return CAR(CDR(CDR(e)));
+}
+
+SEXP CADDDR(SEXP e)
+{
+    return CAR(CDR(CDR(CDR(e))));
+}
+
+SEXP CAD3R(SEXP e)
+{
+    return CAR(CDR(CDR(CDR(e))));
+}
+
+SEXP CAD4R(SEXP e)
+{
+    return CAR(CDR(CDR(CDR(CDR(e)))));
+}
+
+SEXP CAD5R(SEXP e)
+{
+    return CAR(CDR(CDR(CDR(CDR(CDR(e))))));
+}
+
 /* inline version of CAR to support immediate bindings */
 SEXP CAR(SEXP e)
 {
     if (BNDCELL_TAG(e))
         Rf_error(_("bad binding access"));
     return CAR0(e);
+}
+
+Rboolean IS_ACTIVE_BINDING(SEXP b)
+{
+    return (Rboolean)CXXR::RObject::is_active_binding(b);
+}
+
+Rboolean BINDING_IS_LOCKED(SEXP b)
+{
+    return (Rboolean)CXXR::RObject::binding_is_locked(b);
+}
+
+void SET_ACTIVE_BINDING_BIT(SEXP b)
+{
+    CXXR::RObject::set_active_binding_bit(b);
+}
+
+void LOCK_BINDING(SEXP b)
+{
+    CXXR::RObject::lock_binding(b);
+}
+
+void UNLOCK_BINDING(SEXP b)
+{
+    CXXR::RObject::unlock_binding(b);
 }
 
 SEXP Rf_elt(SEXP list, int i)

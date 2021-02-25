@@ -421,11 +421,8 @@ extern "C"
 	/* Hashing Functions */
 
 	int HASHASH(SEXP x);
-
 	int HASHVALUE(SEXP x);
-
 	void SET_HASHASH(SEXP x, int v);
-
 	void SET_HASHVALUE(SEXP x, int v);
 } // extern "C"
 

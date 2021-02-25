@@ -30,6 +30,7 @@
 #ifndef FIXEDVECTOR_HPP
 #define FIXEDVECTOR_HPP
 
+#include <Rinternals.h>
 #include <CXXR/VectorBase.hpp>
 #include <CXXR/MemoryBank.hpp>
 #include <Localization.h>
@@ -258,7 +259,10 @@ const auto isNumber = Rf_isNumber;
     } while (0)
 
 #else
-#define CHECK_BOUNDS_ELT(x, i) do { } while(0)
+#define CHECK_BOUNDS_ELT(x, i) \
+    do                         \
+    {                          \
+    } while (0)
 #endif
 
 #endif // FIXEDVECTOR_HPP

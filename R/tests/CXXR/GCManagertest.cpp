@@ -28,6 +28,7 @@
 #include <iostream>
 #include <vector>
 #include <Rinterface.h>
+#include <Rinternals.h>
 #include <CXXR/GCManager.hpp>
 #include <CXXR/GCNode.hpp>
 #include <CXXR/WeakRef.hpp>
@@ -92,6 +93,12 @@ namespace
 bool R_GCEnabled = true;
 bool R_in_gc = false;
 int R_check_constants = 0;
+
+#ifdef THREADCHECK
+void R_check_thread(const char *s)
+{
+}
+#endif
 
 Rboolean R_checkConstants(Rboolean abortOnError)
 {
