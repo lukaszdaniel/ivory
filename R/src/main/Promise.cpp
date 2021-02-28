@@ -31,6 +31,8 @@
 #include <CXXR/Promise.hpp>
 #include <Rinternals.h>
 
+using namespace CXXR;
+
 namespace CXXR
 {
     // Force the creation of non-inline embodiments of functions callable
@@ -47,6 +49,7 @@ namespace CXXR
 
     void Promise::setValue(RObject *val)
     {
+        xfix_refcnt(m_value, val);
         m_value = val;
         propagateAge(m_value);
         if (val != Symbol::unboundValue())
@@ -55,12 +58,14 @@ namespace CXXR
 
     void Promise::setEnvironment(Environment *val)
     {
+        xfix_refcnt(const_cast<Environment *>(m_environment), val);
         m_environment = val;
         propagateAge(m_environment);
     }
 
     void Promise::setValueGenerator(RObject *val)
     {
+        xfix_refcnt(const_cast<RObject *>(m_valgen), val);
         m_valgen = val;
         propagateAge(m_valgen);
     }
@@ -80,11 +85,8 @@ namespace CXXR
         if (m_environment)
             m_environment->conductVisitor(v);
     }
-
-    RObject *Promise::prcode(RObject *x)
+    void Promise::checkST(const RObject *x)
     {
-        if (!x)
-            return nullptr;
 #ifdef ENABLE_ST_CHECKS
         switch (x->sexptype())
         {
@@ -92,145 +94,10 @@ namespace CXXR
         case SYMSXP:
             break;
         default:
-            std::cerr << LOCATION << "Inappropriate SEXPTYPE (" << x->sexptype() << ") for Promise." << std::endl;
+            std::cerr << "Inappropriate SEXPTYPE (" << x->sexptype() << ") for Promise." << std::endl;
             abort();
         }
 #endif
-        const Promise *prom = SEXP_downcast<Promise *>(x);
-        return const_cast<RObject *>(prom->valueGenerator());
-    }
-
-    void Promise::set_prcode(RObject *x, RObject *v)
-    {
-        if (!x)
-            return;
-#ifdef ENABLE_ST_CHECKS
-        switch (x->sexptype())
-        {
-        case PROMSXP:
-        case SYMSXP:
-            break;
-        default:
-            std::cerr << LOCATION << "Inappropriate SEXPTYPE (" << x->sexptype() << ") for Promise." << std::endl;
-            abort();
-        }
-#endif
-        Promise *prom = SEXP_downcast<Promise *>(x);
-        prom->setValueGenerator(v);
-    }
-
-    RObject *Promise::prenv(RObject *x)
-    {
-        if (!x)
-            return nullptr;
-#ifdef ENABLE_ST_CHECKS
-        switch (x->sexptype())
-        {
-        case PROMSXP:
-        case SYMSXP:
-            break;
-        default:
-            std::cerr << LOCATION << "Inappropriate SEXPTYPE (" << x->sexptype() << ") for Promise." << std::endl;
-            abort();
-        }
-#endif
-        const Promise *prom = SEXP_downcast<Promise *>(x);
-        return const_cast<Environment *>(prom->environment());
-    }
-
-    RObject *Promise::prvalue(RObject *x)
-    {
-        if (!x)
-            return nullptr;
-#ifdef ENABLE_ST_CHECKS
-        switch (x->sexptype())
-        {
-        case PROMSXP:
-        case SYMSXP:
-            break;
-        default:
-            std::cerr << LOCATION << "Inappropriate SEXPTYPE (" << x->sexptype() << ") for Promise." << std::endl;
-            abort();
-        }
-#endif
-        const Promise *prom = SEXP_downcast<Promise *>(x);
-        return const_cast<RObject *>(prom->value());
-    }
-
-    void Promise::set_prvalue(RObject *x, RObject *v)
-    {
-        if (!x)
-            return;
-#ifdef ENABLE_ST_CHECKS
-        switch (x->sexptype())
-        {
-        case PROMSXP:
-        case SYMSXP:
-            break;
-        default:
-            std::cerr << LOCATION << "Inappropriate SEXPTYPE (" << x->sexptype() << ") for Promise." << std::endl;
-            abort();
-        }
-#endif
-        Promise *prom = SEXP_downcast<Promise *>(x);
-        prom->setValue(v);
-    }
-
-    unsigned int Promise::prseen(RObject *x)
-    {
-        if (!x)
-            return 0;
-        Promise *prom = SEXP_downcast<Promise *>(x);
-        if (prom->evaluationInterrupted())
-        {
-            return 2;
-        }
-        else if (prom->underEvaluation())
-        {
-            return 1;
-        }
-        return 0;
-    }
-
-    void Promise::set_prenv(RObject *x, RObject *v)
-    {
-        if (!x)
-            return;
-#ifdef ENABLE_ST_CHECKS
-        switch (x->sexptype())
-        {
-        case PROMSXP:
-        case SYMSXP:
-            break;
-        default:
-            std::cerr << LOCATION << "Inappropriate SEXPTYPE (" << x->sexptype() << ") for Promise." << std::endl;
-            abort();
-        }
-#endif
-        Promise *prom = SEXP_downcast<Promise *>(x);
-        prom->setEnvironment(SEXP_downcast<Environment *>(v));
-    }
-
-    void Promise::set_prseen(RObject *x, unsigned int v)
-    {
-        if (!x)
-            return;
-        Promise *prom = SEXP_downcast<Promise *>(x);
-        if (v == 1)
-        {
-            prom->markUnderEvaluation(true);
-            prom->markEvaluationInterrupted(false);
-        }
-        else if (v)
-        {
-            prom->markUnderEvaluation(false);
-            prom->markEvaluationInterrupted(true);
-        }
-        else
-        {
-            prom->markUnderEvaluation(false);
-            prom->markEvaluationInterrupted(false);
-        }
     }
 } // namespace CXXR
 
@@ -238,43 +105,92 @@ namespace CXXR
 
 SEXP PRCODE(SEXP x)
 {
-    return CXXR::Promise::prcode(x);
+    if (!x)
+        return nullptr;
+    Promise::checkST(x);
+    const Promise *prom = SEXP_downcast<const Promise *>(x);
+    return const_cast<RObject *>(prom->valueGenerator());
 }
 
 SEXP PRENV(SEXP x)
 {
-    return CXXR::Promise::prenv(x);
+    if (!x)
+        return nullptr;
+    Promise::checkST(x);
+    const Promise *prom = SEXP_downcast<const Promise *>(x);
+    return const_cast<Environment *>(prom->environment());
 }
 
 SEXP PRVALUE(SEXP x)
 {
-    return CXXR::Promise::prvalue(x);
+    if (!x)
+        return nullptr;
+    Promise::checkST(x);
+    const Promise *prom = SEXP_downcast<const Promise *>(x);
+    return const_cast<RObject *>(prom->value());
 }
 
 int PRSEEN(SEXP x)
 {
-    return CXXR::Promise::prseen(x);
+    if (!x)
+        return 0;
+    const Promise *prom = SEXP_downcast<const Promise *>(x);
+    if (prom->evaluationInterrupted())
+    {
+        return 2;
+    }
+    else if (prom->underEvaluation())
+    {
+        return 1;
+    }
+    return 0;
 }
 
 void SET_PRENV(SEXP x, SEXP v)
 {
-    CXXR::RObject::fix_refcnt(x, CXXR::Promise::prenv(x), v);
-    CXXR::Promise::set_prenv(x, v);
+    if (!x)
+        return;
+    Promise::checkST(x);
+    Promise *prom = SEXP_downcast<Promise *>(x);
+    prom->setEnvironment(SEXP_downcast<Environment *>(v));
 }
 
 void SET_PRVALUE(SEXP x, SEXP v)
 {
-    CXXR::RObject::fix_refcnt(x, CXXR::Promise::prvalue(x), v);
-    CXXR::Promise::set_prvalue(x, v);
+    if (!x)
+        return;
+    Promise::checkST(x);
+    Promise *prom = SEXP_downcast<Promise *>(x);
+    prom->setValue(v);
 }
 
 void SET_PRCODE(SEXP x, SEXP v)
 {
-    CXXR::RObject::fix_refcnt(x, CXXR::Promise::prcode(x), v);
-    CXXR::Promise::set_prcode(x, v);
+    if (!x)
+        return;
+    Promise::checkST(x);
+    Promise *prom = SEXP_downcast<Promise *>(x);
+    prom->setValueGenerator(v);
 }
 
 void SET_PRSEEN(SEXP x, int v)
 {
-    CXXR::Promise::set_prseen(x, v);
+    if (!x)
+        return;
+    Promise *prom = SEXP_downcast<Promise *>(x);
+    if (v == 1)
+    {
+        prom->markUnderEvaluation(true);
+        prom->markEvaluationInterrupted(false);
+    }
+    else if (v)
+    {
+        prom->markUnderEvaluation(false);
+        prom->markEvaluationInterrupted(true);
+    }
+    else
+    {
+        prom->markUnderEvaluation(false);
+        prom->markEvaluationInterrupted(false);
+    }
 }

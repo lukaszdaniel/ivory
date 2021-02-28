@@ -65,13 +65,6 @@ namespace CXXR
         {
         }
 
-    private:
-        int m_offset;
-        // Declared private to ensure that BuiltInFunction objects are
-        // allocated only using 'new'.
-        ~BuiltInFunction();
-
-    public:
         // Virtual function of RObject:
         const char *typeName() const override;
 
@@ -89,9 +82,12 @@ namespace CXXR
          * @return The offset into the table of functions.
          */
         int offset() const { return m_offset; }
-        /* Primitive Access Methods */
-        static int primoffset(RObject *x);
-        static void set_primoffset(RObject *x, int v);
+
+    private:
+        int m_offset;
+        // Declared private to ensure that BuiltInFunction objects are
+        // allocated only using 'new'.
+        ~BuiltInFunction();
     };
 
     /* Information for Deparsing Expressions */

@@ -62,8 +62,24 @@ namespace CXXR
             return "altrep";
         }
 
-        static void set_wrapper_type(AltRep *x, SEXPTYPE v);
-        static SEXPTYPE wrapper_type(AltRep *x);
+        /** @brief Object type.
+         *
+         * @param x Pointer to CXXR::AltRep.
+         *
+         * @return Wrapper \c SEXPTYPE of \a x, or NILSXP if x is a null pointer.
+         */
+        SEXPTYPE altsexptype() const
+        {
+            return m_wrapper_type;
+        }
+
+        /**
+         * @deprecated Ought to be private.
+         */
+        void setAltsexptype(SEXPTYPE type)
+        {
+            m_wrapper_type = type;
+        }
 
         // Virtual function of RObject:
         const char *typeName() const override;

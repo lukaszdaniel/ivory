@@ -914,8 +914,10 @@ HIDDEN SEXP R::mkPROMISE(SEXP expr, SEXP rho)
     Promise *s = new Promise(exprt, rhort);
     s->expose();
 
-    INCREMENT_REFCNT(expr);
-    INCREMENT_REFCNT(rho);
+    if (expr)
+        expr->incrementRefCount();
+    if (rho)
+        rho->incrementRefCount();
     SET_PRSEEN(s, 0);
     return s;
 }

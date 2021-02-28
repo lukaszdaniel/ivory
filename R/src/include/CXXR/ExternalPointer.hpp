@@ -117,6 +117,7 @@ namespace CXXR
          */
         void setProtege(RObject *prot)
         {
+            xfix_refcnt(m_protege, prot);
             m_protege = prot;
             propagateAge(m_protege);
         }
@@ -137,6 +138,7 @@ namespace CXXR
          */
         void setTag(RObject *tag)
         {
+            xfix_refcnt(m_tag, tag);
             m_tag = tag;
             propagateAge(m_tag);
         }

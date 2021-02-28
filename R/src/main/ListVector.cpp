@@ -83,7 +83,9 @@ SEXP SET_VECTOR_ELT(SEXP x, R_xlen_t i, SEXP v)
     }
     if (i < 0 || i >= XLENGTH(x))
         Rf_error(_("attempt to set index %ld/%ld in 'SET_VECTOR_ELT()' function"), (long long)i, (long long)XLENGTH(x));
-    RObject::fix_refcnt(x, VECTOR_ELT(x, i), v);
+
+    if (x)
+        x->xfix_refcnt(VECTOR_ELT(x, i), v);
     // LISTVECTOR_ELT(x, i) = v;
     ListVector *lv = SEXP_downcast<ListVector *>(x, false);
     (*lv)[i] = v;

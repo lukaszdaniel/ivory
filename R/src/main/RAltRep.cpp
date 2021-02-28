@@ -38,27 +38,6 @@ namespace CXXR
     {
         return staticTypeName();
     }
-
-    /**
-     * @deprecated Ought to be private.
-     */
-    void AltRep::set_wrapper_type(AltRep *x, SEXPTYPE v)
-    {
-        if (!x)
-            return;
-        x->m_wrapper_type = v;
-    }
-
-    /** @brief Object type.
-     *
-     * @param x Pointer to CXXR::AltRep.
-     *
-     * @return Wrapper \c SEXPTYPE of \a x, or NILSXP if x is a null pointer.
-     */
-    SEXPTYPE AltRep::wrapper_type(AltRep *x)
-    {
-        return x ? x->m_wrapper_type : NILSXP;
-    }
 } // namespace CXXR
 
 // ***** C interface *****

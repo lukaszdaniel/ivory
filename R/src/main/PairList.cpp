@@ -61,7 +61,7 @@ namespace CXXR
         {
             c->m_tail = new PairList(*pl, deep, 0);
             if (c->m_tail)
-                INCREMENT_REFCNT(c->m_tail);
+                c->m_tail->incrementRefCount();
             c = c->m_tail;
             pl = pl->m_tail;
         }
@@ -101,13 +101,22 @@ namespace CXXR
 
 SEXP CAR0(SEXP e)
 {
-    return CXXR::ConsCell::car0(e);
+    if (!e)
+        return nullptr;
+    ConsCell::checkST(e);
+    ConsCell *cc = SEXP_downcast<ConsCell *>(e, false);
+    return cc->car();
 }
 
 SEXP CDR(SEXP e)
 {
-    return CXXR::ConsCell::cdr(e);
+    if (!e)
+        return nullptr;
+    ConsCell::checkST(e);
+    ConsCell *cc = SEXP_downcast<ConsCell *>(e, false);
+    return cc->tail();
 }
+
 SEXP CAAR(SEXP e)
 {
     return CAR(CAR(e));
@@ -172,27 +181,34 @@ SEXP CAR(SEXP e)
 
 Rboolean IS_ACTIVE_BINDING(SEXP b)
 {
-    return (Rboolean)CXXR::RObject::is_active_binding(b);
+    if (!b)
+        return FALSE;
+    return Rboolean(b->isActiveBinding());
 }
 
 Rboolean BINDING_IS_LOCKED(SEXP b)
 {
-    return (Rboolean)CXXR::RObject::binding_is_locked(b);
+    if (!b)
+        return FALSE;
+    return Rboolean(b->bindingIsLocked());
 }
 
 void SET_ACTIVE_BINDING_BIT(SEXP b)
 {
-    CXXR::RObject::set_active_binding_bit(b);
+    if (b)
+        b->setActiveBindingBit();
 }
 
 void LOCK_BINDING(SEXP b)
 {
-    CXXR::RObject::lock_binding(b);
+    if (b)
+        b->lockBinding();
 }
 
 void UNLOCK_BINDING(SEXP b)
 {
-    CXXR::RObject::unlock_binding(b);
+    if (b)
+        b->unlockBinding();
 }
 
 SEXP Rf_elt(SEXP list, int i)

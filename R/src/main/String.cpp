@@ -31,6 +31,8 @@
 #include <CXXR/CachedString.hpp>
 #include <CXXR/UncachedString.hpp>
 
+using namespace CXXR;
+
 namespace CXXR
 {
     // Force the creation of non-inline embodiments of functions callable
@@ -135,7 +137,7 @@ namespace CXXR
     void String::initialize()
     {
         R_NaString = const_cast<String *>(String::NA());
-        set_cached(R_NaString); /* Mark it */
+        SEXP_downcast<String *>(R_NaString)->setCached(); /* Mark it */
         R_BlankString = const_cast<String *>(String::blank());
     }
 
@@ -151,85 +153,6 @@ namespace CXXR
         default:
             Rf_error(_("unknown encoding: %d"), encoding);
         }
-    }
-
-    /* Hashing Methods */
-    unsigned int String::hashash(RObject *x)
-    {
-        return x ? SEXP_downcast<String *>(x, false)->m_hash != -1 : 0;
-    }
-
-    unsigned int String::is_bytes(RObject *x)
-    {
-        if (!x)
-            return false;
-        const String *str = SEXP_downcast<const String *>(x);
-        return str->encoding() == CE_BYTES;
-    }
-
-    void String::set_bytes(RObject *x)
-    {
-    }
-
-    unsigned int String::is_latin1(RObject *x)
-    {
-        if (!x)
-            return false;
-        const String *str = SEXP_downcast<const String *>(x);
-        return str->encoding() == CE_LATIN1;
-    }
-
-    void String::set_latin1(RObject *x)
-    {
-    }
-
-    unsigned int String::is_ascii(RObject *x)
-    {
-        if (!x)
-            return false;
-        const String *str = SEXP_downcast<const String *>(x);
-        return str->encoding() == CE_NATIVE;
-    }
-
-    void String::set_ascii(RObject *x)
-    {
-    }
-
-    unsigned int String::is_utf8(RObject *x)
-    {
-        if (!x)
-            return false;
-        const String *str = SEXP_downcast<const String *>(x);
-        return str->encoding() == CE_UTF8;
-    }
-
-    void String::set_utf8(RObject *x)
-    {
-    }
-
-    unsigned int String::enc_known(RObject *x)
-    {
-        if (!x)
-            return CE_NATIVE;
-        const String *str = SEXP_downcast<const String *>(x);
-        cetype_t enc = str->encoding();
-        if (enc == CE_LATIN1)
-            return CE_LATIN1;
-        else if (enc == CE_UTF8)
-            return CE_UTF8;
-
-        return CE_NATIVE;
-    }
-
-    void String::set_cached(RObject *x)
-    {
-        // x->m_gpbits |= CACHED_MASK;
-        SEXP_downcast<String *>(x)->m_cached = true;
-    }
-
-    unsigned int String::is_cached(RObject *x)
-    {
-        return x && SEXP_downcast<String *>(x)->m_cached;
     }
 } // namespace CXXR
 
@@ -270,7 +193,7 @@ namespace R
 
 int HASHASH(SEXP x)
 {
-    return CXXR::String::hashash(x);
+    return x ? SEXP_downcast<const String *>(x)->hasHash() : 0;
 }
 
 int HASHVALUE(SEXP x)
@@ -300,55 +223,77 @@ const char *R_CHAR(SEXP x)
 
 int IS_BYTES(SEXP x)
 {
-    return CXXR::String::is_bytes(x);
+    if (!x)
+        return false;
+    const String *str = SEXP_downcast<const String *>(x);
+    return str->encoding() == CE_BYTES;
 }
 
 int IS_LATIN1(SEXP x)
 {
-    return CXXR::String::is_latin1(x);
+    if (!x)
+        return false;
+    const String *str = SEXP_downcast<const String *>(x);
+    return str->encoding() == CE_LATIN1;
 }
 
 int IS_ASCII(SEXP x)
 {
-    return CXXR::String::is_ascii(x);
+    if (!x)
+        return false;
+    const String *str = SEXP_downcast<const String *>(x);
+    return str->encoding() == CE_NATIVE;
 }
 
 int IS_UTF8(SEXP x)
 {
-    return CXXR::String::is_utf8(x);
+    if (!x)
+        return false;
+    const String *str = SEXP_downcast<const String *>(x);
+    return str->encoding() == CE_UTF8;
 }
 
 void SET_BYTES(SEXP x)
 {
-    CXXR::String::set_bytes(x);
+    /* does nothing in CXXR */
 }
 
 void SET_LATIN1(SEXP x)
 {
-    CXXR::String::set_latin1(x);
+    /* does nothing in CXXR */
 }
 
 void SET_UTF8(SEXP x)
 {
-    CXXR::String::set_utf8(x);
+    /* does nothing in CXXR */
 }
 
 void SET_ASCII(SEXP x)
 {
-    CXXR::String::set_ascii(x);
+    /* does nothing in CXXR */
 }
 
 int ENC_KNOWN(SEXP x)
 {
-    return CXXR::String::enc_known(x);
+    if (!x)
+        return CE_NATIVE;
+    const String *str = SEXP_downcast<const String *>(x);
+    cetype_t enc = str->encoding();
+    if (enc == CE_LATIN1)
+        return CE_LATIN1;
+    else if (enc == CE_UTF8)
+        return CE_UTF8;
+
+    return CE_NATIVE;
 }
 
 void SET_CACHED(SEXP x)
 {
-    CXXR::String::set_cached(x);
+    if (x)
+        SEXP_downcast<String *>(x)->setCached();
 }
 
 int IS_CACHED(SEXP x)
 {
-    return CXXR::String::is_cached(x);
+    return x && SEXP_downcast<const String *>(x)->isCached();
 }

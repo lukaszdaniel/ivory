@@ -31,6 +31,8 @@
 #include <CXXR/Closure.hpp>
 #include <Rinternals.h>
 
+using namespace CXXR;
+
 namespace CXXR
 {
     // Force the creation of non-inline embodiments of functions callable
@@ -92,167 +94,18 @@ namespace CXXR
             m_environment->conductVisitor(v);
     }
 
-    RObject *Closure::formals(RObject *x)
+    void Closure::checkST(const RObject *x)
     {
-        if (!x)
-            return nullptr;
 #ifdef ENABLE_ST_CHECKS
         switch (x->sexptype())
         {
         case CLOSXP:
             break;
         default:
-            std::cerr << LOCATION << "Inappropriate SEXPTYPE (" << x->sexptype() << ") for Closure." << std::endl;
+            std::cerr << "Inappropriate SEXPTYPE (" << x->sexptype() << ") for Closure." << std::endl;
             abort();
         }
 #endif
-        const Closure *clo = SEXP_downcast<Closure *>(x);
-        return const_cast<PairList *>(clo->formalArgs());
-    }
-
-    void Closure::set_formals(RObject *x, RObject *v)
-    {
-        if (!x)
-            return;
-#ifdef ENABLE_ST_CHECKS
-        switch (x->sexptype())
-        {
-        case CLOSXP:
-            break;
-        default:
-            std::cerr << LOCATION << "Inappropriate SEXPTYPE (" << x->sexptype() << ") for Closure." << std::endl;
-            abort();
-        }
-#endif
-        Closure *clos = SEXP_downcast<Closure *>(x);
-        PairList *formal_args = SEXP_downcast<PairList *>(v);
-        clos->setFormalArgs(formal_args);
-    }
-
-    RObject *Closure::body(RObject *x)
-    {
-        if (!x)
-            return nullptr;
-#ifdef ENABLE_ST_CHECKS
-        switch (x->sexptype())
-        {
-        case CLOSXP:
-            break;
-        default:
-            std::cerr << LOCATION << "Inappropriate SEXPTYPE (" << x->sexptype() << ") for Closure." << std::endl;
-            abort();
-        }
-#endif
-        const Closure *clo = SEXP_downcast<Closure *>(x);
-        return const_cast<RObject *>(clo->body());
-    }
-
-    void Closure::set_body(RObject *x, RObject *v)
-    {
-        if (!x)
-            return;
-#ifdef ENABLE_ST_CHECKS
-        switch (x->sexptype())
-        {
-        case CLOSXP:
-            break;
-        default:
-            std::cerr << LOCATION << "Inappropriate SEXPTYPE (" << x->sexptype() << ") for Closure." << std::endl;
-            abort();
-        }
-#endif
-        Closure *clos = SEXP_downcast<Closure *>(x);
-        RObject *body = SEXP_downcast<RObject *>(v);
-        clos->setBody(body);
-    }
-
-    RObject *Closure::cloenv(RObject *x)
-    {
-        if (!x)
-            return nullptr;
-#ifdef ENABLE_ST_CHECKS
-        switch (x->sexptype())
-        {
-        case CLOSXP:
-            break;
-        default:
-            std::cerr << LOCATION << "Inappropriate SEXPTYPE (" << x->sexptype() << ") for Closure." << std::endl;
-            abort();
-        }
-#endif
-        Closure *clo = SEXP_downcast<Closure *>(x);
-        return clo->environment();
-    }
-
-    void Closure::set_cloenv(RObject *x, RObject *v)
-    {
-        if (!x)
-            return;
-#ifdef ENABLE_ST_CHECKS
-        switch (x->sexptype())
-        {
-        case CLOSXP:
-            break;
-        default:
-            std::cerr << LOCATION << "Inappropriate SEXPTYPE (" << x->sexptype() << ") for Closure." << std::endl;
-            abort();
-        }
-#endif
-        Closure *clos = SEXP_downcast<Closure *>(x);
-        Environment *env = SEXP_downcast<Environment *>(v);
-        clos->setEnvironment(env);
-    }
-
-    bool Closure::rstep(RObject *x)
-    {
-        return x && x->m_spare;
-    }
-
-    void Closure::set_rstep(RObject *x, bool v)
-    {
-        if (!x)
-            return;
-        x->m_spare = v;
-    }
-
-    /* JIT optimization support */
-
-    unsigned int Closure::nojit(RObject *x)
-    {
-        if (!x)
-            return 0;
-        return SEXP_downcast<Closure *>(x)->m_no_jit;
-    }
-
-    void Closure::set_nojit(RObject *x)
-    {
-        if (!x)
-            return;
-        // x->m_gpbits |= NOJIT_MASK;
-        SEXP_downcast<Closure *>(x)->m_no_jit = true;
-    }
-
-    unsigned int Closure::maybejit(RObject *x)
-    {
-        if (!x)
-            return 0;
-        return SEXP_downcast<Closure *>(x)->m_maybe_jit;
-    }
-
-    void Closure::set_maybejit(RObject *x)
-    {
-        if (!x)
-            return;
-        // x->m_gpbits |= MAYBEJIT_MASK;
-        SEXP_downcast<Closure *>(x)->m_maybe_jit = true;
-    }
-
-    void Closure::unset_maybejit(RObject *x)
-    {
-        if (!x)
-            return;
-        // x->m_gpbits &= ~MAYBEJIT_MASK;
-        SEXP_downcast<Closure *>(x)->m_maybe_jit = false;
     }
 } // namespace CXXR
 
@@ -260,68 +113,104 @@ namespace CXXR
 
 SEXP FORMALS(SEXP x)
 {
-    return CXXR::Closure::formals(x);
+    if (!x)
+        return nullptr;
+    Closure::checkST(x);
+    const Closure *clo = SEXP_downcast<const Closure *>(x);
+    return const_cast<PairList *>(clo->formalArgs());
 }
 
 SEXP BODY(SEXP x)
 {
-    return CXXR::Closure::body(x);
+    if (!x)
+        return nullptr;
+    Closure::checkST(x);
+    const Closure *clo = SEXP_downcast<const Closure *>(x);
+    return const_cast<RObject *>(clo->body());
 }
 
 SEXP CLOENV(SEXP x)
 {
-    return CXXR::Closure::cloenv(x);
+    if (!x)
+        return nullptr;
+    Closure::checkST(x);
+    const Closure *clo = SEXP_downcast<const Closure *>(x);
+    return clo->environment();
 }
 
 int RSTEP(SEXP x)
 {
-    return CXXR::Closure::rstep(x);
+    return x && x->rstep();
 }
 
 void SET_FORMALS(SEXP x, SEXP v)
 {
-    CXXR::RObject::fix_refcnt(x, CXXR::Closure::formals(x), v);
-    CXXR::Closure::set_formals(x, v);
+    if (!x)
+        return;
+    Closure::checkST(x);
+    Closure *clos = SEXP_downcast<Closure *>(x);
+    PairList *formal_args = SEXP_downcast<PairList *>(v);
+    clos->setFormalArgs(formal_args);
 }
 
 void SET_BODY(SEXP x, SEXP v)
 {
-    CXXR::RObject::fix_refcnt(x, CXXR::Closure::body(x), v);
-    CXXR::Closure::set_body(x, v);
+    if (!x)
+        return;
+    Closure::checkST(x);
+    Closure *clos = SEXP_downcast<Closure *>(x);
+    RObject *body = SEXP_downcast<RObject *>(v);
+    clos->setBody(body);
 }
 
 void SET_CLOENV(SEXP x, SEXP v)
 {
-    CXXR::RObject::fix_refcnt(x, CXXR::Closure::cloenv(x), v);
-    CXXR::Closure::set_cloenv(x, v);
+    if (!x)
+        return;
+    Closure::checkST(x);
+    Closure *clos = SEXP_downcast<Closure *>(x);
+    Environment *env = SEXP_downcast<Environment *>(v);
+    clos->setEnvironment(env);
 }
 
 void SET_RSTEP(SEXP x, int v)
 {
-    CXXR::Closure::set_rstep(x, v);
+    if (!x)
+        return;
+    x->setRstep(v);
 }
 
 int NOJIT(SEXP x)
 {
-    return CXXR::Closure::nojit(x);
+    if (!x)
+        return 0;
+    return SEXP_downcast<const Closure *>(x)->noJIT();
 }
 
 int MAYBEJIT(SEXP x)
 {
-    return CXXR::Closure::maybejit(x);
+    if (!x)
+        return 0;
+    return SEXP_downcast<const Closure *>(x)->maybeJIT();
 }
 
 void SET_NOJIT(SEXP x)
 {
-    CXXR::Closure::set_nojit(x);
+    if (!x)
+        return;
+    SEXP_downcast<Closure *>(x)->setNoJIT();
 }
 
 void SET_MAYBEJIT(SEXP x)
 {
-    CXXR::Closure::set_maybejit(x);
+    if (!x)
+        return;
+    SEXP_downcast<Closure *>(x)->setMaybeJIT(true);
 }
 
 void UNSET_MAYBEJIT(SEXP x)
 {
-    CXXR::Closure::unset_maybejit(x);
+    if (!x)
+        return;
+    SEXP_downcast<Closure *>(x)->setMaybeJIT(false);
 }

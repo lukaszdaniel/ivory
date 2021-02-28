@@ -208,6 +208,7 @@ namespace CXXR
          */
         void setInternalFunction(const BuiltInFunction *fun)
         {
+            xfix_refcnt(const_cast<BuiltInFunction *>(m_internalfunc), const_cast<BuiltInFunction *>(fun));
             m_internalfunc = fun;
             propagateAge(m_internalfunc);
         }
@@ -220,6 +221,7 @@ namespace CXXR
          */
         void setValue(RObject *val)
         {
+            xfix_binding_refcnt(m_value, val);
             m_value = val;
             propagateAge(m_value);
         }
@@ -255,6 +257,36 @@ namespace CXXR
             return m_value;
         }
 
+        bool baseSymbol() const
+        {
+            return m_base_symbol;
+        }
+
+        void setBaseSymbol(bool on)
+        {
+            // if (on)
+            //     m_gpbits |= BASE_SYM_CACHED_MASK;
+            // else
+            //     m_gpbits &= (~BASE_SYM_CACHED_MASK);
+            m_base_symbol = on;
+        }
+
+        bool specialSymbol() const
+        {
+            return m_special_symbol;
+        }
+
+        void setSpecialSymbol(bool on)
+        {
+            // if (on)
+            //     m_gpbits |= SPECIAL_SYMBOL_MASK;
+            // else
+            //     m_gpbits &= (~SPECIAL_SYMBOL_MASK);
+            m_special_symbol = on;
+        }
+
+        static void checkST(const RObject *);
+
         // Virtual functions of RObject:
         unsigned int packGPBits() const override;
         void unpackGPBits(unsigned int gpbits) override;
@@ -262,27 +294,6 @@ namespace CXXR
 
         // Virtual function of GCNode:
         void visitChildren(const_visitor *v) const override;
-
-        /* Symbol Access Methods */
-        static RObject *printname(RObject *x);
-        static RObject *symvalue(RObject *x);
-        static RObject *internal(RObject *x);
-        static unsigned int ddval(RObject *x); /* for ..1, ..2 etc */
-        static void set_ddval_bit(RObject *x);
-        static void unset_ddval_bit(RObject *x);
-        static void set_ddval(RObject *x, bool v); /* for ..1, ..2 etc */
-        static void set_printname(RObject *x, RObject *v);
-        static void set_symvalue(RObject *x, RObject *val);
-        static void set_internal(RObject *x, RObject *v);
-        static void set_base_sym_cached(RObject *x);
-        static void unset_base_sym_cached(RObject *x);
-        static unsigned int base_sym_cached(RObject *x);
-        static unsigned int no_special_symbols(RObject *x);
-        static void set_no_special_symbols(RObject *x);
-        static unsigned int is_special_symbol(RObject *x);
-        static void set_special_symbol(RObject *x);
-        static void unset_no_special_symbols(RObject *x);
-        static void unset_special_symbol(RObject *x);
 
     private:
         static const unsigned int s_DDBIT = 0;

@@ -33,6 +33,8 @@
 #include <CXXR/IntVector.hpp>
 #include <Rinternals.h>
 
+using namespace CXXR;
+
 namespace R
 {
     SEXP R_NewHashedEnv(SEXP enclos, SEXP size);
@@ -118,178 +120,18 @@ namespace CXXR
             m_hashtable->conductVisitor(v);
     }
 
-    RObject *Environment::frame(RObject *x)
+    void Environment::checkST(const RObject *x)
     {
-        if (!x)
-            return nullptr;
 #ifdef ENABLE_ST_CHECKS
         switch (x->sexptype())
         {
         case ENVSXP:
             break;
         default:
-            std::cerr << LOCATION << "Inappropriate SEXPTYPE (" << x->sexptype() << ") for Environment." << std::endl;
+            std::cerr << "Inappropriate SEXPTYPE (" << x->sexptype() << ") for Environment." << std::endl;
             abort();
         }
 #endif
-        Environment *env = SEXP_downcast<Environment *>(x);
-        return env->frame();
-    }
-
-    RObject *Environment::enclos(RObject *x)
-    {
-        if (!x)
-            return nullptr;
-#ifdef ENABLE_ST_CHECKS
-        switch (x->sexptype())
-        {
-        case ENVSXP:
-            break;
-        default:
-            std::cerr << LOCATION << "Inappropriate SEXPTYPE (" << x->sexptype() << ") for PairList." << std::endl;
-            abort();
-        }
-#endif
-        const Environment *env = SEXP_downcast<Environment *>(x);
-        return env->enclosingEnvironment();
-    }
-
-    RObject *Environment::hashtab(RObject *x)
-    {
-        if (!x)
-            return nullptr;
-#ifdef ENABLE_ST_CHECKS
-        switch (x->sexptype())
-        {
-        case ENVSXP:
-            break;
-        default:
-            std::cerr << LOCATION << "Inappropriate SEXPTYPE (" << x->sexptype() << ") for Environment." << std::endl;
-            abort();
-        }
-#endif
-        Environment *env = SEXP_downcast<Environment *>(x);
-        return env->hashTable();
-    }
-
-    unsigned int Environment::envflags(RObject *x) /* for environments */
-    {
-        if (!x)
-            return 0;
-
-        return SEXP_downcast<Environment *>(x)->packGPBits();
-    }
-
-    void Environment::set_envflags(RObject *x, unsigned int v)
-    {
-        if (!x)
-            return;
-        // x->m_gpbits = v;
-        SEXP_downcast<Environment *>(x)->unpackGPBits(v);
-    }
-
-    void Environment::set_frame(RObject *x, RObject *v)
-    {
-        if (!x)
-            return;
-#ifdef ENABLE_ST_CHECKS
-        switch (x->sexptype())
-        {
-        case ENVSXP:
-            break;
-        default:
-            std::cerr << LOCATION << "Inappropriate SEXPTYPE (" << x->sexptype() << ") for Environment." << std::endl;
-            abort();
-        }
-#endif
-        Environment *env = SEXP_downcast<Environment *>(x);
-        PairList *pl = SEXP_downcast<PairList *>(v);
-        env->setFrame(pl);
-    }
-
-    void Environment::set_enclos(RObject *x, RObject *v)
-    {
-        if (!x)
-            return;
-#ifdef ENABLE_ST_CHECKS
-        switch (x->sexptype())
-        {
-        case ENVSXP:
-            break;
-        default:
-            std::cerr << LOCATION << "Inappropriate SEXPTYPE (" << x->sexptype() << ") for Environment." << std::endl;
-            abort();
-        }
-#endif
-        Environment *env = SEXP_downcast<Environment *>(x);
-        Environment *enc = SEXP_downcast<Environment *>(v);
-        env->setEnclosingEnvironment(enc);
-    }
-
-    void Environment::set_hashtab(RObject *x, RObject *v)
-    {
-        if (!x)
-            return;
-#ifdef ENABLE_ST_CHECKS
-        switch (x->sexptype())
-        {
-        case ENVSXP:
-            break;
-        default:
-            std::cerr << LOCATION << "Inappropriate SEXPTYPE (" << x->sexptype() << ") for Environment." << std::endl;
-            abort();
-        }
-#endif
-        Environment *env = SEXP_downcast<Environment *>(x);
-        ListVector *lv = SEXP_downcast<ListVector *>(v);
-        env->setHashTable(lv);
-    }
-
-    unsigned int Environment::frame_is_locked(RObject *e)
-    {
-        return e && SEXP_downcast<Environment *>(e)->isLocked();
-    }
-
-    void Environment::lock_frame(RObject *x)
-    {
-        if (!x)
-            return;
-        // x->m_gpbits |= FRAME_LOCK_MASK;
-        SEXP_downcast<Environment *>(x)->setLocking(true);
-    }
-
-    bool Environment::is_global_frame(RObject *e)
-    {
-        return e && SEXP_downcast<Environment *>(e)->inGlobalCache();
-    }
-
-    void Environment::mark_as_global_frame(RObject *x)
-    {
-        if (!x)
-            return;
-        // x->m_gpbits |= GLOBAL_FRAME_MASK;
-        SEXP_downcast<Environment *>(x)->setGlobalCaching(true);
-    }
-    void Environment::mark_as_local_frame(RObject *x)
-    {
-        if (!x)
-            return;
-        // x->m_gpbits &= ~(GLOBAL_FRAME_MASK);
-        SEXP_downcast<Environment *>(x)->setGlobalCaching(false);
-    }
-
-    bool Environment::env_rdebug(RObject *x)
-    {
-        const Environment *env = SEXP_downcast<const Environment *>(x);
-        return env->singleStepping();
-    }
-
-    void Environment::set_env_rdebug(RObject *x, bool v)
-    {
-        if (!x)
-            return;
-        Environment *env = SEXP_downcast<Environment *>(x);
-        env->setSingleStepping(v);
     }
 } // namespace CXXR
 
@@ -297,53 +139,89 @@ namespace CXXR
 
 SEXP FRAME(SEXP x)
 {
-    return CXXR::Environment::frame(x);
+    if (!x)
+        return nullptr;
+    Environment::checkST(x);
+    Environment *env = SEXP_downcast<Environment *>(x);
+    return env->frame();
 }
 
 SEXP ENCLOS(SEXP x)
 {
-    return CXXR::Environment::enclos(x);
+    if (!x)
+        return nullptr;
+    Environment::checkST(x);
+    const Environment *env = SEXP_downcast<const Environment *>(x);
+    return env->enclosingEnvironment();
 }
 
 SEXP HASHTAB(SEXP x)
 {
-    return CXXR::Environment::hashtab(x);
+    if (!x)
+        return nullptr;
+    Environment::checkST(x);
+    Environment *env = SEXP_downcast<Environment *>(x);
+    return env->hashTable();
 }
 
 int ENVFLAGS(SEXP x)
 {
-    return CXXR::Environment::envflags(x);
+    if (!x)
+        return 0;
+
+    return SEXP_downcast<const Environment *>(x)->packGPBits();
 }
 
 int ENV_RDEBUG(SEXP x)
 {
-    return CXXR::Environment::env_rdebug(x);
+    if (!x)
+        return 0;
+    const Environment *env = SEXP_downcast<const Environment *>(x);
+    return env->singleStepping();
 }
 
 void SET_FRAME(SEXP x, SEXP v)
 {
-    CXXR::RObject::fix_refcnt(x, CXXR::Environment::frame(x), v);
-    CXXR::Environment::set_frame(x, v);
+    if (!x)
+        return;
+    Environment::checkST(x);
+    Environment *env = SEXP_downcast<Environment *>(x);
+    PairList *pl = SEXP_downcast<PairList *>(v);
+    env->setFrame(pl);
 }
 
 void SET_ENCLOS(SEXP x, SEXP v)
 {
-    CXXR::RObject::fix_refcnt(x, CXXR::Environment::enclos(x), v);
-    CXXR::Environment::set_enclos(x, v);
+    if (!x)
+        return;
+    Environment::checkST(x);
+    Environment *env = SEXP_downcast<Environment *>(x);
+    Environment *enc = SEXP_downcast<Environment *>(v);
+    env->setEnclosingEnvironment(enc);
 }
 
 void SET_HASHTAB(SEXP x, SEXP v)
 {
-    CXXR::RObject::fix_refcnt(x, CXXR::Environment::hashtab(x), v);
-    CXXR::Environment::set_hashtab(x, v);
+    if (!x)
+        return;
+    Environment::checkST(x);
+    Environment *env = SEXP_downcast<Environment *>(x);
+    ListVector *lv = SEXP_downcast<ListVector *>(v);
+    env->setHashTable(lv);
 }
 
 void SET_ENVFLAGS(SEXP x, int v)
 {
-    CXXR::Environment::set_envflags(x, v);
+    if (!x)
+        return;
+    // x->m_gpbits = v;
+    SEXP_downcast<Environment *>(x)->unpackGPBits(v);
 }
 
 void SET_ENV_RDEBUG(SEXP x, int v)
 {
-    CXXR::Environment::set_env_rdebug(x, v);
+    if (!x)
+        return;
+    Environment *env = SEXP_downcast<Environment *>(x);
+    env->setSingleStepping(v);
 }

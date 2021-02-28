@@ -48,56 +48,36 @@ namespace CXXR
         const auto &SET_RDEBUGptr = SET_RDEBUG;
         const auto &SET_RTRACEptr = SET_RTRACE;
     } // namespace ForceNonInline
-
-    bool FunctionBase::rdebug(RObject *x)
-    {
-        if (!x)
-            return false;
-        const FunctionBase *fb = SEXP_downcast<FunctionBase *>(x);
-        return fb->debugging();
-    }
-
-    void FunctionBase::set_rdebug(RObject *x, bool v)
-    {
-        if (!x)
-            return;
-        FunctionBase *fb = SEXP_downcast<FunctionBase *>(x);
-        fb->setDebugging(v);
-    }
-
-    bool FunctionBase::rtrace(RObject *x)
-    {
-        return x && x->m_trace;
-    }
-
-    void FunctionBase::set_rtrace(RObject *x, bool v)
-    {
-        if (!x)
-            return;
-        x->m_trace = v;
-    }
 } // namespace CXXR
 
 // ***** C interface *****
 
 int RTRACE(SEXP x)
 {
-    return CXXR::FunctionBase::rtrace(x);
+    return x && x->trace();
 }
 
 void SET_RTRACE(SEXP x, int v)
 {
-    CXXR::FunctionBase::set_rtrace(x, v);
+    if (!x)
+        return;
+    x->setTrace(v);
 }
 
 int RDEBUG(SEXP x)
 {
-    return CXXR::FunctionBase::rdebug(x);
+    if (!x)
+        return false;
+    const FunctionBase *fb = SEXP_downcast<const FunctionBase *>(x);
+    return fb->debugging();
 }
 
 void SET_RDEBUG(SEXP x, int v)
 {
-    CXXR::FunctionBase::set_rdebug(x, v);
+    if (!x)
+        return;
+    FunctionBase *fb = SEXP_downcast<FunctionBase *>(x);
+    fb->setDebugging(v);
 }
 
 Rboolean Rf_isPrimitive(SEXP s)

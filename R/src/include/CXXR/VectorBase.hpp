@@ -100,6 +100,7 @@ namespace CXXR
 
     void setGrowable(bool on)
     {
+      // m_gpbits |= GROWABLE_MASK;
       m_growable = on;
     }
 
@@ -124,20 +125,8 @@ namespace CXXR
     unsigned int packGPBits() const override;
     void unpackGPBits(unsigned int gpbits) override;
 
-    /* Growable vector support */
-    static unsigned int growable_bit_set(RObject *x);
-    static void set_growable_bit(RObject *x);
-    static int *chkzln(SEXP x);
+    static int *chkzln(RObject *x);
 
-  protected:
-    ~VectorBase() {}
-
-  private:
-    R_xlen_t m_size;
-    R_xlen_t m_truelength;
-    bool m_growable;
-
-  public:
     static inline R_xlen_t stdvec_length(RObject *x)
     {
       VectorBase *vb = dynamic_cast<VectorBase *>(x);
@@ -164,15 +153,23 @@ namespace CXXR
       if (!vb)
         Rf_error("SETLENGTH invoked for a non-vector.");
       vb->resize(v);
-      RObject::setscalar(x, v == 1);
+      x->setScalar(v == 1);
     }
 
     static inline void set_truelength(RObject *x, R_xlen_t v)
     {
-      if (CXXR::RObject::altrep(x))
+      if (x && x->altrep())
         Rf_error("can't set ALTREP truelength");
       CXXR::VectorBase::set_stdvec_truelength(x, v);
     }
+
+  protected:
+    ~VectorBase() {}
+
+  private:
+    R_xlen_t m_size;
+    R_xlen_t m_truelength;
+    bool m_growable;
   };
 
 /* Vector Access Macros */

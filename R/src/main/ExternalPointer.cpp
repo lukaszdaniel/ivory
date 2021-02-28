@@ -77,10 +77,10 @@ SEXP R_MakeExternalPtr(void *p, SEXP tag, SEXP prot)
 {
     GCRoot<> tagr(tag);
     if (tag)
-        INCREMENT_REFCNT(tag);
+        tag->incrementRefCount();
     GCRoot<> protr(prot);
     if (prot)
-        INCREMENT_REFCNT(prot);
+        prot->incrementRefCount();
     ExternalPointer *ans = new ExternalPointer(p, tag, prot);
     ans->expose();
     return ans;
@@ -128,7 +128,6 @@ void R_SetExternalPtrTag(SEXP s, SEXP tag)
     if (!s)
         return;
     ExternalPointer *ep = SEXP_downcast<ExternalPointer *>(s, false);
-    RObject::fix_refcnt(s, ep->tag(), tag);
     ep->setTag(tag);
 }
 
@@ -137,6 +136,5 @@ void R_SetExternalPtrProtected(SEXP s, SEXP p)
     if (!s)
         return;
     ExternalPointer *ep = SEXP_downcast<ExternalPointer *>(s, false);
-    RObject::fix_refcnt(s, ep->protege(), p);
     ep->setProtege(p);
 }

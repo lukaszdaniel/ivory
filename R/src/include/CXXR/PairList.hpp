@@ -42,6 +42,8 @@
 #include <CXXR/ConsCell.hpp>
 #include <CXXR/GCRoot.hpp>
 #include <R_ext/Boolean.h>
+#include <Rinternals.h>
+#include <Localization.h>
 
 namespace CXXR
 {
@@ -97,9 +99,9 @@ namespace CXXR
             s_cons_car = cr;
             s_cons_cdr = tl;
             if (cr)
-                INCREMENT_REFCNT(cr);
+                cr->incrementRefCount();
             if (tl)
-                INCREMENT_REFCNT(tl);
+                tl->incrementRefCount();
             T *ans = new T(cr, tl, tg);
             s_cons_cdr = nullptr;
             s_cons_car = nullptr;
@@ -164,6 +166,12 @@ namespace CXXR
 
     inline void ConsCell::setTail(PairList *tl)
     {
+        xfix_refcnt(m_tail, tl);
+#ifdef TESTING_WRITE_BARRIER
+        /* this should not add a non-tracking CDR to a tracking cell */
+        if (TRACKREFS(this) && tl && !TRACKREFS(tl))
+            Rf_error(_("inserting non-tracking CDR in tracking cell"));
+#endif
         m_tail = tl;
         propagateAge(m_tail);
     }

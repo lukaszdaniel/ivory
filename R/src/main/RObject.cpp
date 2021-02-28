@@ -33,6 +33,8 @@
 #include <Rinternals.h>
 #include <R_ext/Boolean.h>
 
+using namespace CXXR;
+
 namespace CXXR
 {
     // Force the creation of non-inline embodiments of functions callable
@@ -75,8 +77,8 @@ namespace CXXR
                                        m_active_binding(false), m_binding_locked(false), m_assignment_pending(false), m_attrib(nullptr)
     {
 #ifdef COMPUTE_REFCNT_VALUES
-        CXXR::RObject::set_refcnt(this, 0);
-        SET_TRACKREFS(this, true);
+        setRefCnt(0);
+        setTrackrefs(true);
 #endif
     }
 
@@ -232,6 +234,7 @@ namespace CXXR
     // we assume n is very small.
     void RObject::setAttributes(PairList *new_attributes)
     {
+        xfix_refcnt(m_attrib, new_attributes);
         clearAttributes();
         while (new_attributes)
         {
@@ -241,296 +244,54 @@ namespace CXXR
         }
     }
 
-    void RObject::set_attrib(RObject *x, RObject *v)
+    void RObject::lockBinding()
     {
-        if (!x)
-            return;
-        GCRoot<PairList> pl(SEXP_downcast<PairList *>(v));
-        x->setAttributes(pl);
-    }
-
-    RObject *RObject::attrib(RObject *x)
-    {
-        return x ? x->m_attrib : nullptr;
-    }
-
-    unsigned int RObject::named(RObject *x)
-    {
-        return x ? x->m_named : 0;
-    }
-
-    void RObject::set_named(RObject *x, unsigned int v)
-    {
-        if (!x)
-            return;
-        x->m_named = v;
-    }
-
-    /**
-     * @deprecated Ought to be private.
-     */
-    void RObject::set_typeof(RObject *x, SEXPTYPE v)
-    {
-        if (!x)
-            return;
-        x->m_type = v;
-    }
-
-    /** @brief Object type.
-     *
-     * @param x Pointer to \c RObject.
-     * @return \c SEXPTYPE of \a x, or NILSXP if x is a null pointer.
-     */
-    SEXPTYPE RObject::typeof_(const RObject *x)
-    {
-        return x ? x->m_type : NILSXP;
-    }
-
-    /**
-     * @deprecated
-     */
-    unsigned int RObject::levels(RObject *x)
-    {
-        if (!x)
-            return 0;
-
-        return x->packGPBits();
-    }
-
-    bool RObject::object(RObject *x)
-    {
-        return x && x->hasClass();
-    }
-
-    /**
-     * @deprecated This has no effect in CXXR.
-     * Object status is determined in set_attrib().
-     */
-    void RObject::set_object(RObject *x, bool v)
-    {
-        if (!x)
-            return;
-        // x->m_has_class = v;
-    }
-
-    bool RObject::altrep(RObject *x)
-    {
-        return x && x->m_alt;
-    }
-
-    void RObject::set_altrep(RObject *x, bool v)
-    {
-        if (!x)
-            return;
-        x->m_alt = v;
-    }
-
-    /**
-     * @deprecated
-     */
-    void RObject::setlevels(RObject *x, unsigned short int v)
-    {
-        if (!x)
-            return;
-        x->unpackGPBits(v);
-        // x->m_gpbits = v;
-    }
-
-    bool RObject::scalar(RObject *x)
-    {
-        return x && x->m_scalar;
-    }
-
-    void RObject::setscalar(RObject *x, bool v)
-    {
-        if (!x)
-            return;
-        x->m_scalar = v;
-    }
-
-    bool RObject::is_scalar(RObject *x, SEXPTYPE t)
-    {
-        return x && (x->m_type == t) && x->m_scalar;
-    }
-
-    unsigned int RObject::refcnt(RObject *x)
-    {
-#ifdef COMPUTE_REFCNT_VALUES
-        return x ? x->m_named : 0;
-#else
-        return 0;
-#endif
-    }
-
-    void RObject::set_refcnt(RObject *x, unsigned int v)
-    {
-#ifdef COMPUTE_REFCNT_VALUES
-        if (!x)
-            return;
-        x->m_named = v;
-#endif
-    }
-
-    bool RObject::trackrefs(RObject *x)
-    {
-#ifdef COMPUTE_REFCNT_VALUES
-        return x && (typeof_(x) == CLOSXP ? TRUE : !x->m_spare);
-#else
-        return false;
-#endif
-    }
-
-    void RObject::set_trackrefs(RObject *x, bool v)
-    {
-        if (!x)
-            return;
-        x->m_spare = v;
-    }
-
-    unsigned int RObject::assignment_pending(RObject *x)
-    {
-        return x && x->m_assignment_pending;
-    }
-
-    void RObject::set_assignment_pending(RObject *x, bool v)
-    {
-        if (!x)
-            return;
-#if CXXR_FALSE
-        if (v)
+        if (!m_active_binding)
         {
-            x->m_gpbits |= ASSIGNMENT_PENDING_MASK;
-        }
-        else
-        {
-            x->m_gpbits &= ~ASSIGNMENT_PENDING_MASK;
-        }
-#endif
-        x->m_assignment_pending = v;
-    }
-
-    unsigned int RObject::bndcell_tag(const RObject *e)
-    {
-        return e ? e->m_extra : 0;
-    }
-
-    void RObject::set_bndcell_tag(RObject *e, unsigned int v)
-    {
-        if (!e)
-            return;
-        e->m_extra = v;
-    }
-
-    /**
-     * An S4 object?
-     * @param x Pointer to \c RObject.
-     * @return true iff \a x is an S4 object.  Returns false if \a x
-     * is 0.
-     * @note S4 object bit, set by R_do_new_object for all new() calls
-     */
-    bool RObject::is_s4_object(RObject *x)
-    {
-        return x && x->m_s4_object;
-    }
-
-    /**
-     * @deprecated Ought to be private.
-     */
-    void RObject::set_s4_object(RObject *x)
-    {
-        if (!x)
-            return;
-        x->setS4Object(true);
-    }
-
-    /**
-     * @deprecated Ought to be private.
-     */
-    void RObject::unset_s4_object(RObject *x)
-    {
-        if (!x)
-            return;
-        x->setS4Object(false);
-    }
-
-    unsigned int RObject::is_active_binding(RObject *x)
-    {
-        if (!x)
-            return 0;
-        return x->m_active_binding;
-    }
-
-    unsigned int RObject::binding_is_locked(RObject *x)
-    {
-        if (!x)
-            return 0;
-        return x->m_binding_locked;
-    }
-
-    void RObject::lock_binding(RObject *x)
-    {
-        if (!RObject::is_active_binding(x))
-        {
-            if (RObject::typeof_(x) == SYMSXP)
-                MARK_NOT_MUTABLE(Symbol::symvalue(x));
+            if (m_type == SYMSXP)
+                MARK_NOT_MUTABLE(SYMVALUE(this));
             else
-                MARK_NOT_MUTABLE(ConsCell::car0(x));
+                MARK_NOT_MUTABLE(SEXP_downcast<ConsCell *>(this)->car());
         }
-        // x->m_gpbits |= BINDING_LOCK_MASK;
-        x->m_binding_locked = true;
+        // m_gpbits |= BINDING_LOCK_MASK;
+        m_binding_locked = true;
     }
 
-    void RObject::unlock_binding(RObject *x)
-    {
-        if (!x)
-            return;
-        // x->m_gpbits &= (~BINDING_LOCK_MASK);
-        x->m_binding_locked = false;
-    }
-
-    void RObject::set_active_binding_bit(RObject *x)
-    {
-        if (!x)
-            return;
-        // x->m_gpbits |= ACTIVE_BINDING_MASK;
-        x->m_active_binding = true;
-    }
-
-    void RObject::fix_refcnt(RObject *x, RObject *old, RObject *new_)
+    void RObject::xfix_refcnt(RObject *old, RObject *new_)
     {
 #ifdef COMPUTE_REFCNT_VALUES
-        if (!TRACKREFS(x))
+        if (!trackrefs())
             return;
         if (old == new_)
             return;
 
         if (old)
-            DECREMENT_REFCNT(old);
+            old->decrementRefCount();
         if (new_)
-            INCREMENT_REFCNT(new_);
+            new_->incrementRefCount();
 #endif
     }
 
-    void RObject::fix_binding_refcnt(RObject *x, RObject *old, RObject *new_)
+    void RObject::xfix_binding_refcnt(RObject *old, RObject *new_)
     {
 #ifdef COMPUTE_REFCNT_VALUES
-        if (!TRACKREFS(x))
+        if (!trackrefs())
             return;
         if (old == new_)
             return;
 
         if (old)
         {
-            if (ASSIGNMENT_PENDING(x))
-                SET_ASSIGNMENT_PENDING(x, FALSE);
+            if (assignmentPending())
+                setAssignmentPending(false);
             else
-                DECREMENT_REFCNT(old);
+                old->decrementRefCount();
         }
         if (new_)
-            INCREMENT_REFCNT(new_);
+            new_->incrementRefCount();
 #else
-        if (ASSIGNMENT_PENDING(x) && old && old != new_)
-            SET_ASSIGNMENT_PENDING(x, FALSE);
+        if (assignmentPending() && old && old != new_)
+            setAssignmentPending(false);
 #endif
     }
 } // namespace CXXR
@@ -539,29 +300,33 @@ namespace CXXR
 
 SEXP ATTRIB(SEXP x)
 {
-    return CXXR::RObject::attrib(x);
+    return x ? x->attributes() : nullptr;
 }
 int OBJECT(SEXP x)
 {
-    return CXXR::RObject::object(x);
+    return x && x->hasClass();
 }
 
 SEXPTYPE TYPEOF(SEXP x)
 {
-    if (!CXXR::RObject::altrep(x))
-        return CXXR::RObject::typeof_(x);
-
-    return CXXR::AltRep::wrapper_type(CXXR::SEXP_downcast<CXXR::AltRep *>(x));
+    if (!x)
+        return NILSXP;
+    else if (x->altrep())
+        return SEXP_downcast<AltRep *>(x)->altsexptype();
+    else
+        return x->sexptype();
 }
 
 int ALTREP(SEXP x)
 {
-    return CXXR::RObject::altrep(x);
+    return x ? x->altrep() : 0;
 }
 
 void SETALTREP(SEXP x, int v)
 {
-    CXXR::RObject::set_altrep(x, v);
+    if (!x)
+        return;
+    x->setAltrep(v);
 }
 
 int NAMED(SEXP x)
@@ -569,65 +334,57 @@ int NAMED(SEXP x)
 #ifdef SWITCH_TO_REFCNT
     return REFCNT(x);
 #else
-    return CXXR::RObject::named(x);
+    return x ? x->named() : 0;
 #endif
 }
 
 int LEVELS(SEXP x)
 {
-    return CXXR::RObject::levels(x);
+    return x ? x->packGPBits() : 0;
 }
 
 int REFCNT(SEXP x)
 {
-    return CXXR::RObject::refcnt(x);
+    return x ? x->refcnt() : 0;
 }
 
 void SET_REFCNT(SEXP x, unsigned int v)
 {
-    CXXR::RObject::set_refcnt(x, v);
+    if (x)
+        x->setRefCnt(v);
 }
 
 int TRACKREFS(SEXP x)
 {
-    return CXXR::RObject::trackrefs(x);
+    return x ? x->trackrefs() : false;
 }
 
 void SET_TRACKREFS(SEXP x, bool v)
 {
-#ifdef COMPUTE_REFCNT_VALUES
-#ifdef EXTRA_REFCNT_FIELDS
-    CXXR::RObject::set_trackrefs(x, v);
-#else
-    CXXR::RObject::set_trackrefs(x, !v);
-#endif
-#endif
+    if (x)
+        x->setTrackrefs(v);
 }
 
 int IS_SCALAR(SEXP x, SEXPTYPE type)
 {
-    return CXXR::RObject::is_scalar(x, type);
+    return x ? x->isScalarOfType(type) : false;
 }
 
 int SIMPLE_SCALAR_TYPE(SEXP x)
 {
-    return (CXXR::RObject::scalar(x) && CXXR::RObject::attrib(x) == R_NilValue) ? CXXR::RObject::typeof_(x) : 0;
+    return (x && x->isScalar() && ATTRIB(x) == nullptr) ? x->sexptype() : 0;
 }
 
 void DECREMENT_REFCNT(SEXP x)
 {
-#ifdef COMPUTE_REFCNT_VALUES
-    if (REFCNT(x) > 0 && REFCNT(x) < REFCNTMAX)
-        SET_REFCNT(x, REFCNT(x) - 1);
-#endif
+    if (x)
+        x->decrementRefCount();
 }
 
 void INCREMENT_REFCNT(SEXP x)
 {
-#ifdef COMPUTE_REFCNT_VALUES
-    if (REFCNT(x) < REFCNTMAX)
-        SET_REFCNT(x, REFCNT(x) + 1);
-#endif
+    if (x)
+        x->incrementRefCount();
 }
 
 void DISABLE_REFCNT(SEXP x)
@@ -642,57 +399,84 @@ void ENABLE_REFCNT(SEXP x)
 
 void SET_ATTRIB(SEXP x, SEXP v)
 {
-    if (CXXR::RObject::typeof_(v) != LISTSXP && CXXR::RObject::typeof_(v) != NILSXP)
+    if (!x)
+        Rf_error(_("null value provided to SET_ATTRIB"));
+    if (v && v->sexptype() != LISTSXP)
         Rf_error(_("value of 'SET_ATTRIB' must be a pairlist or nullptr, not a '%s'"),
-                 Rf_type2char(CXXR::RObject::typeof_(v)));
-    CXXR::RObject::fix_refcnt(x, CXXR::RObject::attrib(x), v);
-    CXXR::RObject::set_attrib(x, v);
+                 Rf_type2char(v->sexptype()));
+    GCRoot<PairList> pl(SEXP_downcast<PairList *>(v));
+    x->setAttributes(pl);
 }
 
+/**
+ * @deprecated This has no effect in CXXR.
+ * Object status is determined in setAttributes().
+ */
 void SET_OBJECT(SEXP x, int v)
 {
-    CXXR::RObject::set_object(x, v);
 }
 
 void SET_TYPEOF(SEXP x, SEXPTYPE v)
 {
-    CXXR::RObject::set_typeof(x, v);
+    if (x)
+        x->setSexpType(v);
 }
 
 void SET_NAMED(SEXP x, int v)
 {
-#ifndef SWITCH_TO_REFCNT
-    CXXR::RObject::set_named(x, v);
-#endif
+    if (x)
+        x->setNamed(v);
 }
 
 void SETLEVELS(SEXP x, int v)
 {
-    CXXR::RObject::setlevels(x, v);
+    if (!x)
+        return;
+    x->unpackGPBits(v);
+    // x->m_gpbits = v;
 }
 
 void DUPLICATE_ATTRIB(SEXP to, SEXP from)
 {
-    SET_ATTRIB(to, Rf_duplicate(CXXR::RObject::attrib(from)));
-    CXXR::RObject::set_object(to, CXXR::RObject::object(from));
-    if(CXXR::RObject::is_s4_object(from)) { CXXR::RObject::set_s4_object(to);} else { CXXR::RObject::unset_s4_object(to);};
+    SET_ATTRIB(to, Rf_duplicate(ATTRIB(from)));
+    if (from && from->isS4Object())
+    {
+        if (to)
+            to->setS4Object(true);
+    }
+    else
+    {
+        if (to)
+            to->setS4Object(false);
+    };
 }
 
 void SHALLOW_DUPLICATE_ATTRIB(SEXP to, SEXP from)
 {
-    SET_ATTRIB(to, Rf_shallow_duplicate(CXXR::RObject::attrib(from)));
-    CXXR::RObject::set_object(to, CXXR::RObject::object(from));
-    if(CXXR::RObject::is_s4_object(from)) { CXXR::RObject::set_s4_object(to);} else { CXXR::RObject::unset_s4_object(to);};
+    SET_ATTRIB(to, Rf_shallow_duplicate(ATTRIB(from)));
+    if (from && from->isS4Object())
+    {
+        if (to)
+            to->setS4Object(true);
+    }
+    else
+    {
+        if (to)
+            to->setS4Object(false);
+    };
 }
 
 int ASSIGNMENT_PENDING(SEXP x)
 {
-    return CXXR::RObject::assignment_pending(x);
+    if (!x)
+        return 0;
+    return x->assignmentPending();
 }
 
 void SET_ASSIGNMENT_PENDING(SEXP x, int v)
 {
-    CXXR::RObject::set_assignment_pending(x, v);
+    if (x)
+        x->setAssignmentPending(v);
 }
 
 void(MARK_NOT_MUTABLE)(SEXP x)
@@ -732,52 +516,52 @@ void RAISE_NAMED(SEXP x, int n)
 
 Rboolean Rf_isNull(SEXP s)
 {
-    return (Rboolean)(TYPEOF(s) == NILSXP);
+    return Rboolean(TYPEOF(s) == NILSXP);
 }
 
 Rboolean Rf_isSymbol(SEXP s)
 {
-    return (Rboolean)(TYPEOF(s) == SYMSXP);
+    return Rboolean(TYPEOF(s) == SYMSXP);
 }
 
 Rboolean Rf_isLogical(SEXP s)
 {
-    return (Rboolean)(TYPEOF(s) == LGLSXP);
+    return Rboolean(TYPEOF(s) == LGLSXP);
 }
 
 Rboolean Rf_isReal(SEXP s)
 {
-    return (Rboolean)(TYPEOF(s) == REALSXP);
+    return Rboolean(TYPEOF(s) == REALSXP);
 }
 
 Rboolean Rf_isComplex(SEXP s)
 {
-    return (Rboolean)(TYPEOF(s) == CPLXSXP);
+    return Rboolean(TYPEOF(s) == CPLXSXP);
 }
 
 Rboolean Rf_isExpression(SEXP s)
 {
-    return (Rboolean)(TYPEOF(s) == EXPRSXP);
+    return Rboolean(TYPEOF(s) == EXPRSXP);
 }
 
 Rboolean Rf_isEnvironment(SEXP s)
 {
-    return (Rboolean)(TYPEOF(s) == ENVSXP);
+    return Rboolean(TYPEOF(s) == ENVSXP);
 }
 
 Rboolean Rf_isString(SEXP s)
 {
-    return (Rboolean)(TYPEOF(s) == STRSXP);
+    return Rboolean(TYPEOF(s) == STRSXP);
 }
 
 Rboolean Rf_isObject(SEXP s)
 {
-    return (Rboolean)(OBJECT(s) != 0);
+    return Rboolean(OBJECT(s) != 0);
 }
 
 Rboolean Rf_isRaw(SEXP s)
 {
-    return (Rboolean)(TYPEOF(s) == RAWSXP);
+    return Rboolean(TYPEOF(s) == RAWSXP);
 }
 
 R_len_t Rf_length(SEXP s)
@@ -801,7 +585,7 @@ R_len_t Rf_length(SEXP s)
     case DOTSXP:
     {
         R_len_t i = 0;
-        while (s && s != R_NilValue)
+        while (s)
         {
             ++i;
             s = CDR(s);
@@ -837,7 +621,7 @@ R_xlen_t Rf_xlength(SEXP s)
     {
         // it is implausible this would be >= 2^31 elements, but allow it
         R_xlen_t i = 0;
-        while (s && s != R_NilValue)
+        while (s)
         {
             ++i;
             s = CDR(s);
@@ -853,7 +637,7 @@ R_xlen_t Rf_xlength(SEXP s)
 
 SEXP R_FixupRHS(SEXP x, SEXP y)
 {
-    if (y != R_NilValue && MAYBE_REFERENCED(y))
+    if (y && MAYBE_REFERENCED(y))
     {
         if (R_cycle_detected(x, y))
         {
@@ -888,7 +672,7 @@ SEXP Rf_ScalarLogical(int x)
 Rboolean Rf_conformable(SEXP x_, SEXP y)
 {
     int n;
-    CXXR::GCRoot<> x(Rf_getAttrib(x_, R_DimSymbol));
+    GCRoot<> x(Rf_getAttrib(x_, R_DimSymbol));
     y = Rf_getAttrib(y, R_DimSymbol);
     if ((n = Rf_length(x)) != Rf_length(y))
         return FALSE;

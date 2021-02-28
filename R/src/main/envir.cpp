@@ -145,17 +145,20 @@ inline static bool IS_USER_DATABASE(SEXP rho)
 }
 
 /* various definitions of macros/functions in Defn.h */
+namespace
+{
+    inline bool FRAME_IS_LOCKED(SEXP e)
+    {
+        return e && SEXP_downcast<const Environment *>(e)->isLocked();
+    }
 
- inline static int FRAME_IS_LOCKED(SEXP e)
- {
-     return CXXR::Environment::frame_is_locked(e);
- }
-
- inline static void LOCK_FRAME(SEXP e)
- {
-     CXXR::Environment::lock_frame(e);
- }
-
+    inline void LOCK_FRAME(SEXP e)
+    {
+        if (!e)
+            return;
+        SEXP_downcast<Environment *>(e)->setLocking(true);
+    }
+}
 /* use the same bits (15 and 14) in symbols and bindings */
 static SEXP getActiveValue(SEXP);
 R_INLINE static SEXP BINDING_VALUE(SEXP b)
@@ -693,20 +696,26 @@ static SEXP R_HashProfile(SEXP table)
    left in place.
 
    L. T. */
-
-inline static bool IS_GLOBAL_FRAME(SEXP e)
+namespace
 {
-    return CXXR::Environment::is_global_frame(e);
-}
+    inline bool IS_GLOBAL_FRAME(SEXP e)
+    {
+        return e && SEXP_downcast<const Environment *>(e)->inGlobalCache();
+    }
 
-inline static void MARK_AS_GLOBAL_FRAME(SEXP e)
-{
-    CXXR::Environment::mark_as_global_frame(e);
-}
+    inline void MARK_AS_GLOBAL_FRAME(SEXP e)
+    {
+        if (!e)
+            return;
+        SEXP_downcast<Environment *>(e)->setGlobalCaching(true);
+    }
 
-inline static void MARK_AS_LOCAL_FRAME(SEXP e)
-{
-    CXXR::Environment::mark_as_local_frame(e);
+    inline void MARK_AS_LOCAL_FRAME(SEXP e)
+    {
+        if (!e)
+            return;
+        SEXP_downcast<Environment *>(e)->setGlobalCaching(false);
+    }
 }
 
 #define INITIAL_CACHE_SIZE 1000

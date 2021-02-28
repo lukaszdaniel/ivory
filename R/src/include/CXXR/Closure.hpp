@@ -112,20 +112,48 @@ namespace CXXR
        */
       void setEnvironment(Environment *new_env)
       {
+         xfix_refcnt(m_environment, new_env);
          m_environment = new_env;
          propagateAge(m_environment);
       }
 
       void setFormalArgs(PairList *formal_args)
       {
+         xfix_refcnt(const_cast<PairList *>(m_formals), formal_args);
          m_formals = formal_args;
          propagateAge(m_formals);
       }
 
       void setBody(RObject *body)
       {
+         xfix_refcnt(const_cast<RObject *>(m_body), body);
          m_body = body;
          propagateAge(m_body);
+      }
+
+      bool noJIT() const
+      {
+         return m_no_jit;
+      }
+
+      void setNoJIT()
+      {
+         // m_gpbits |= NOJIT_MASK;
+         m_no_jit = true;
+      }
+
+      bool maybeJIT() const
+      {
+         return m_maybe_jit;
+      }
+
+      void setMaybeJIT(bool on)
+      {
+         // if (on)
+         //    m_gpbits |= MAYBEJIT_MASK;
+         // else
+         //    m_gpbits &= ~MAYBEJIT_MASK;
+         m_maybe_jit = on;
       }
 
       /** @brief The name by which this type is known in R.
@@ -137,6 +165,8 @@ namespace CXXR
          return "closure";
       }
 
+      static void checkST(const RObject *);
+
       // Virtual functions of RObject:
       unsigned int packGPBits() const override;
       void unpackGPBits(unsigned int gpbits) override;
@@ -145,22 +175,6 @@ namespace CXXR
 
       // Virtual function of GCNode:
       void visitChildren(const_visitor *v) const override;
-
-      /* Closure Access Methods */
-      static RObject *formals(RObject *x);
-      static void set_formals(RObject *x, RObject *v);
-      static RObject *body(RObject *x);
-      static void set_body(RObject *x, RObject *v);
-      static RObject *cloenv(RObject *x);
-      static void set_cloenv(RObject *x, RObject *v);
-      static bool rstep(RObject *x);
-      static void set_rstep(RObject *x, bool v);
-      /* JIT optimization support */
-      static unsigned int nojit(RObject *x);
-      static void set_nojit(RObject *x);
-      static unsigned int maybejit(RObject *x);
-      static void set_maybejit(RObject *x);
-      static void unset_maybejit(RObject *x);
 
    private:
       const PairList *m_formals;
@@ -251,14 +265,55 @@ extern "C"
     */
    void SET_CLOENV(SEXP x, SEXP v);
 
-   /* JIT optimization support */
+   /** @brief Get the JIT state
+    *
+    * @param x Pointer to \c RObject.
+    *
+    * @return true iff \a x is not meant to be JIT-compiled.  Returns false if \a x
+    * is nullptr.
+    */
    int NOJIT(SEXP x);
+
+   /** @brief Can this object be JIT-compiled?
+    *
+    * @param x Pointer to \c RObject.
+    *
+    * @return true iff \a x can be JIT-compiled.  Returns false if \a x
+    * is nullptr.
+    */
    int MAYBEJIT(SEXP x);
+
+   /** @brief Do not allow JIT compilation for this object
+    *
+    * @param x Pointer to \c RObject.
+    */
    void SET_NOJIT(SEXP x);
+
+   /** @brief Mark object as available for JIT compilation
+    *
+    * @param x Pointer to \c RObject.
+    */
    void SET_MAYBEJIT(SEXP x);
+
+   /** @brief Remove availabilty flag for JIT compilation
+    *
+    * @param x Pointer to \c RObject.
+    */
    void UNSET_MAYBEJIT(SEXP x);
 
+   /** @brief Get debugging state
+    *
+    * @param x Pointer to \c RObject.
+    *
+    * @return true iff \a x is in debugging state.  Returns false if \a x
+    * is nullptr.
+    */
    int RSTEP(SEXP x);
+
+   /** @brief Set debugging state
+    *
+    * @param x Pointer to \c RObject.
+    */
    void SET_RSTEP(SEXP x, int v);
 } // extern "C"
 

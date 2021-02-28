@@ -92,12 +92,11 @@ namespace CXXR
          */
 		void setTag(RObject *tg)
 		{
+			xfix_refcnt(m_tag, tg);
 			m_tag = tg;
 			propagateAge(m_tag);
 		}
 
-		static RObject *tag(RObject *x);
-		static void set_tag(RObject *x, RObject *v);
 		// Virtual function of GCNode:
 		void visitChildren(const_visitor *v) const override;
 

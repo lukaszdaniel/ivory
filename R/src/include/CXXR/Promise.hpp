@@ -178,21 +178,13 @@ namespace CXXR
             return m_value;
         }
 
+        static void checkST(const RObject *);
+
         // Virtual function of RObject:
         const char *typeName() const;
 
         // Virtual function of GCNode:
         void visitChildren(const_visitor *v) const;
-
-        /* Promise Access Methods */
-        static RObject *prcode(RObject *x);
-        static void set_prcode(RObject *x, RObject *v);
-        static RObject *prenv(RObject *x);
-        static RObject *prvalue(RObject *x);
-        static void set_prvalue(RObject *x, RObject *v);
-        static unsigned int prseen(RObject *x);
-        static void set_prenv(RObject *x, RObject *v);
-        static void set_prseen(RObject *x, unsigned int v);
 
     private:
         RObject *m_value;

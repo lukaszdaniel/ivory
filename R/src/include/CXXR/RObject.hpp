@@ -235,17 +235,13 @@ namespace CXXR
         bool m_scalar;
         bool m_has_class;
         bool m_alt;
-
-    public:
         // unsigned int m_gpbits : 16;
         bool m_trace; /* functions and memory tracing */
         bool m_spare; /* used on closures and when REFCNT is defined */
-    private:
         unsigned int m_named : NAMED_BITS;
         unsigned int m_extra : 29 - NAMED_BITS; /* used for immediate bindings */
         bool m_s4_object;
 
-        // public:
         // The following obsolescent fields squeezed
         // in here are used only in connection with objects of class
         // PairList (and only rarely then), so they would more
@@ -405,6 +401,14 @@ namespace CXXR
         SEXPTYPE sexptype() const { return m_type; }
 
         /**
+         * @deprecated Ought to be private.
+         */
+        void setSexpType(SEXPTYPE type)
+        {
+            m_type = type;
+        }
+
+        /**
          * @return altrep status of this object.
          */
         bool altrep() const
@@ -415,6 +419,152 @@ namespace CXXR
         void setAltrep(bool on)
         {
             m_alt = on;
+        }
+
+        bool trackrefs() const
+        {
+#ifdef COMPUTE_REFCNT_VALUES
+            return (sexptype() == CLOSXP ? true : !m_spare);
+#else
+            return false;
+#endif
+        }
+
+        void setTrackrefs(bool on)
+        {
+#ifdef COMPUTE_REFCNT_VALUES
+#ifdef EXTRA_REFCNT_FIELDS
+            m_spare = on;
+#else
+            m_spare = !on;
+#endif
+#endif
+        }
+
+        void incrementRefCount()
+        {
+#ifdef COMPUTE_REFCNT_VALUES
+            if (refcnt() < REFCNTMAX)
+                setRefCnt(refcnt() + 1);
+#endif
+        }
+
+        void decrementRefCount()
+        {
+#ifdef COMPUTE_REFCNT_VALUES
+            if (refcnt() > 0 && refcnt() < REFCNTMAX)
+                setRefCnt(refcnt() - 1);
+#endif
+        }
+
+        bool isScalarOfType(SEXPTYPE type) const
+        {
+            return (m_type == type) && m_scalar;
+        }
+
+        bool isScalar() const
+        {
+            return m_scalar;
+        }
+
+        void setScalar(bool on)
+        {
+            m_scalar = on;
+        }
+
+        unsigned int named() const
+        {
+            return m_named;
+        }
+
+        unsigned int refcnt() const
+        {
+#ifdef COMPUTE_REFCNT_VALUES
+            return m_named;
+#else
+            return 0;
+#endif
+        }
+
+        void setRefCnt(unsigned int v)
+        {
+#ifdef COMPUTE_REFCNT_VALUES
+            m_named = v;
+#endif
+        }
+
+        bool trace() const
+        {
+            return m_trace;
+        }
+
+        void setTrace(bool on)
+        {
+            m_trace = on;
+        }
+
+        bool rstep() const
+        {
+            return m_spare;
+        }
+
+        void setRstep(bool on)
+        {
+            m_spare = on;
+        }
+
+        bool bindingIsLocked() const
+        {
+            return m_binding_locked;
+        }
+
+        bool isActiveBinding() const
+        {
+            return m_active_binding;
+        }
+
+        bool assignmentPending() const
+        {
+            return m_assignment_pending;
+        }
+
+        void setAssignmentPending(bool on)
+        {
+#if CXXR_FALSE
+            if (on)
+            {
+                m_gpbits |= ASSIGNMENT_PENDING_MASK;
+            }
+            else
+            {
+                m_gpbits &= ~ASSIGNMENT_PENDING_MASK;
+            }
+#endif
+            m_assignment_pending = on;
+        }
+
+        void lockBinding();
+
+        void setActiveBindingBit()
+        {
+            // m_gpbits |= ACTIVE_BINDING_MASK;
+            m_active_binding = true;
+        }
+
+        void unlockBinding()
+        {
+            // m_gpbits &= (~BINDING_LOCK_MASK);
+            m_binding_locked = false;
+        }
+
+        unsigned int extra() const
+        {
+            return m_extra;
+        }
+
+        void setExtra(unsigned int v)
+        {
+            m_extra = v;
         }
 
         bool isS4Object() const
@@ -429,6 +579,13 @@ namespace CXXR
          *          (::S4SXP), whereas CR permits this.
          */
         void setS4Object(bool on);
+
+        void setNamed(unsigned int v)
+        {
+#ifndef SWITCH_TO_REFCNT
+            m_named = v;
+#endif
+        }
 
         /** @brief Name within R of this type of object.
          *
@@ -518,6 +675,18 @@ namespace CXXR
             return static_cast<T *>(duplicate_child(const_cast<T *>(pattern), deep));
         }
 
+        void xfix_refcnt(RObject *old, RObject *new_);
+        void xfix_binding_refcnt(RObject *old, RObject *new_);
+
+        /** @brief The name by which this type is known in R.
+         *
+         * @return The name by which this type is known in R.
+         */
+        static const char *staticTypeName()
+        {
+            return "RObject";
+        }
+
     protected:
         /**
          * @param stype Required type of the RObject.
@@ -533,56 +702,6 @@ namespace CXXR
         RObject(const RObject &pattern, bool deep);
 
         virtual ~RObject();
-
-    public:
-        static void set_attrib(RObject *x, RObject *v);
-        static RObject *attrib(RObject *x);
-        static unsigned int named(RObject *x);
-        static void set_named(RObject *x, unsigned int v);
-        static void set_typeof(RObject *x, SEXPTYPE v);
-        static SEXPTYPE typeof_(const RObject *x);
-        static unsigned int levels(RObject *x);
-        static bool object(RObject *x);
-        static void set_object(RObject *x, bool v);
-
-        static bool altrep(RObject *x);
-        static void set_altrep(RObject *x, bool v);
-        static void setlevels(RObject *x, unsigned short int v);
-
-        static bool scalar(RObject *x);
-        static void setscalar(RObject *x, bool v);
-        static bool is_scalar(RObject *x, SEXPTYPE t);
-
-        static unsigned int refcnt(RObject *x);
-        static void set_refcnt(RObject *x, unsigned int v);
-        static bool trackrefs(RObject *x);
-        static void set_trackrefs(RObject *x, bool v);
-        static unsigned int assignment_pending(RObject *x);
-        static void set_assignment_pending(RObject *x, bool v);
-
-        static unsigned int bndcell_tag(const RObject *x);
-        static void set_bndcell_tag(RObject *e, unsigned int v);
-        /* S4 object bit, set by R_do_new_object for all new() calls */
-        static bool is_s4_object(RObject *x);
-        static void set_s4_object(RObject *x);
-        static void unset_s4_object(RObject *x);
-
-        static unsigned int is_active_binding(RObject *x);
-        static unsigned int binding_is_locked(RObject *x);
-        static void lock_binding(RObject *x);
-        static void unlock_binding(RObject *x);
-        static void set_active_binding_bit(RObject *x);
-        static void fix_refcnt(RObject *x, RObject *old, RObject *new_);
-        static void fix_binding_refcnt(RObject *x, RObject *old, RObject *new_);
-
-        /** @brief The name by which this type is known in R.
-         *
-         * @return The name by which this type is known in R.
-         */
-        static const char *staticTypeName()
-        {
-            return "RObject";
-        }
     };
 
     /* There is much more in Rinternals.h, including function versions
@@ -825,7 +944,7 @@ extern "C"
     int ASSIGNMENT_PENDING(SEXP x);
     void SET_ASSIGNMENT_PENDING(SEXP x, int v);
 
-    void (MARK_NOT_MUTABLE)(SEXP x);
+    void(MARK_NOT_MUTABLE)(SEXP x);
     int IS_ASSIGNMENT_CALL(SEXP x);
     void MARK_ASSIGNMENT_CALL(SEXP x);
     void ENSURE_NAMEDMAX(SEXP x);

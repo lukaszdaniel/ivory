@@ -114,7 +114,8 @@ void SET_STRING_ELT(SEXP x, R_xlen_t i, SEXP v)
     else
     {
         SEXP *ps = CXXR::stdvec_dataptr<SEXP>(x);
-        CXXR::RObject::fix_refcnt(x, ps[i], v);
+        if (x)
+            x->xfix_refcnt(ps[i], v);
         ps[i] = v;
     }
 }

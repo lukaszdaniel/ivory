@@ -38,6 +38,8 @@
 #include <boost/regex.hpp>
 #include <sstream>
 
+using namespace CXXR;
+
 namespace CXXR
 {
     // Force the creation of non-inline embodiments of functions callable
@@ -158,184 +160,18 @@ namespace CXXR
         // DISABLE_REFCNT(Symbols::LastvalueSymbol);
 #endif
     }
-
-    RObject *Symbol::printname(RObject *x)
+    void Symbol::checkST(const RObject *x)
     {
-        if (!x)
-            return nullptr;
 #ifdef ENABLE_ST_CHECKS
         switch (x->sexptype())
         {
         case SYMSXP:
             break;
         default:
-            std::cerr << LOCATION << "Inappropriate SEXPTYPE (" << x->sexptype() << ") for Symbol." << std::endl;
+            std::cerr << "Inappropriate SEXPTYPE (" << x->sexptype() << ") for Symbol." << std::endl;
             abort();
         }
 #endif
-        const Symbol *sym = SEXP_downcast<Symbol *>(x);
-        return const_cast<String *>(sym->name());
-    }
-
-    RObject *Symbol::symvalue(RObject *x)
-    {
-        if (!x)
-            return nullptr;
-#ifdef ENABLE_ST_CHECKS
-        switch (x->sexptype())
-        {
-        case SYMSXP:
-            break;
-        default:
-            std::cerr << LOCATION << "Inappropriate SEXPTYPE (" << x->sexptype() << ") for Symbol." << std::endl;
-            abort();
-        }
-#endif
-        Symbol *sym = SEXP_downcast<Symbol *>(x);
-        return sym->value();
-    }
-
-    RObject *Symbol::internal(RObject *x)
-    {
-        if (!x)
-            return nullptr;
-#ifdef ENABLE_ST_CHECKS
-        switch (x->sexptype())
-        {
-        case SYMSXP:
-            break;
-        default:
-            std::cerr << LOCATION << "Inappropriate SEXPTYPE (" << x->sexptype() << ") for Symbol." << std::endl;
-            abort();
-        }
-#endif
-        Symbol *sym = SEXP_downcast<Symbol *>(x);
-        return const_cast<BuiltInFunction *>(sym->internalFunction());
-    }
-
-    unsigned int Symbol::ddval(RObject *x) /* for ..1, ..2 etc */
-    {
-        return x ? SEXP_downcast<Symbol *>(x)->isDotDotSymbol() : false;
-    }
-
-    void Symbol::set_ddval(RObject *x, bool v) /* for ..1, ..2 etc */
-    {
-    }
-
-    void Symbol::set_printname(RObject *x, RObject *v)
-    {
-        if (!x)
-            return;
-#ifdef ENABLE_ST_CHECKS
-        switch (x->sexptype())
-        {
-        case SYMSXP:
-            break;
-        default:
-            std::cerr << LOCATION << "Inappropriate SEXPTYPE (" << x->sexptype() << ") for Symbol." << std::endl;
-            abort();
-        }
-#endif
-    }
-
-    void Symbol::set_symvalue(RObject *x, RObject *val)
-    {
-        if (!x)
-            return;
-#ifdef ENABLE_ST_CHECKS
-        switch (x->sexptype())
-        {
-        case SYMSXP:
-            break;
-        default:
-            std::cerr << LOCATION << "Inappropriate SEXPTYPE (" << x->sexptype() << ") for Symbol." << std::endl;
-            abort();
-        }
-#endif
-        Symbol *sym = SEXP_downcast<Symbol *>(x);
-        sym->setValue(val);
-    }
-
-    void Symbol::set_internal(RObject *x, RObject *v)
-    {
-        if (!x)
-            return;
-#ifdef ENABLE_ST_CHECKS
-        switch (x->sexptype())
-        {
-        case SYMSXP:
-            break;
-        default:
-            std::cerr << LOCATION << "Inappropriate SEXPTYPE (" << x->sexptype() << ") for Symbol." << std::endl;
-            abort();
-        }
-#endif
-        Symbol *sym = SEXP_downcast<Symbol *>(x);
-        BuiltInFunction *fun = SEXP_downcast<BuiltInFunction *>(v);
-        sym->setInternalFunction(fun);
-    }
-
-    void Symbol::set_base_sym_cached(RObject *x)
-    {
-        if (!x)
-            return;
-        // x->m_gpbits |= BASE_SYM_CACHED_MASK;
-        SEXP_downcast<Symbol *>(x)->m_base_symbol = true;
-    }
-
-    void Symbol::unset_base_sym_cached(RObject *x)
-    {
-        if (!x)
-            return;
-        // x->m_gpbits &= (~BASE_SYM_CACHED_MASK);
-        SEXP_downcast<Symbol *>(x)->m_base_symbol = false;
-    }
-
-    unsigned int Symbol::base_sym_cached(RObject *x)
-    {
-        return x && SEXP_downcast<Symbol *>(x)->m_base_symbol;
-    }
-
-    unsigned int Symbol::no_special_symbols(RObject *x)
-    {
-        return x && SEXP_downcast<Symbol *>(x)->m_special_symbol;
-    }
-
-    void Symbol::set_no_special_symbols(RObject *x)
-    {
-        if (!x)
-            return;
-        // x->m_gpbits |= SPECIAL_SYMBOL_MASK;
-        SEXP_downcast<Symbol *>(x)->m_special_symbol = true;
-    }
-
-    unsigned int Symbol::is_special_symbol(RObject *x)
-    {
-        return x && SEXP_downcast<Symbol *>(x)->m_special_symbol;
-    }
-
-    void Symbol::set_special_symbol(RObject *x)
-    {
-        if (!x)
-            return;
-        // x->m_gpbits |= SPECIAL_SYMBOL_MASK;
-        SEXP_downcast<Symbol *>(x)->m_special_symbol = true;
-    }
-
-    void Symbol::unset_no_special_symbols(RObject *x)
-    {
-        if (!x)
-            return;
-        // x->m_gpbits &= (~SPECIAL_SYMBOL_MASK);
-        SEXP_downcast<Symbol *>(x)->m_special_symbol = false;
-    }
-
-    void Symbol::unset_special_symbol(RObject *x)
-    {
-        if (!x)
-            return;
-        // x->m_gpbits &= (~SPECIAL_SYMBOL_MASK);
-        SEXP_downcast<Symbol *>(x)->m_special_symbol = false;
     }
 } // namespace CXXR
 
@@ -343,92 +179,123 @@ namespace CXXR
 
 SEXP PRINTNAME(SEXP x)
 {
-    return CXXR::Symbol::printname(x);
+    if (!x)
+        return nullptr;
+    Symbol::checkST(x);
+    const Symbol *sym = SEXP_downcast<const Symbol *>(x);
+    return const_cast<String *>(sym->name());
 }
 
 SEXP SYMVALUE(SEXP x)
 {
-    return CXXR::Symbol::symvalue(x);
+    if (!x)
+        return nullptr;
+    Symbol::checkST(x);
+    Symbol *sym = SEXP_downcast<Symbol *>(x);
+    return sym->value();
 }
 
 SEXP INTERNAL(SEXP x)
 {
-    return CXXR::Symbol::internal(x);
+    if (!x)
+        return nullptr;
+    Symbol::checkST(x);
+    const Symbol *sym = SEXP_downcast<const Symbol *>(x);
+    return const_cast<BuiltInFunction *>(sym->internalFunction());
 }
 
 int DDVAL(SEXP x)
 {
-    return CXXR::Symbol::ddval(x);
+    return x ? SEXP_downcast<const Symbol *>(x)->isDotDotSymbol() : false;
 }
 
 void SET_PRINTNAME(SEXP x, SEXP v)
 {
-    CXXR::RObject::fix_refcnt(x, CXXR::Symbol::printname(x), v);
-    CXXR::Symbol::set_printname(x, v);
+    if (!x)
+        return;
+    Symbol::checkST(x);
 }
 
 void SET_SYMVALUE(SEXP x, SEXP v)
 {
-    if (CXXR::Symbol::symvalue(x) == v)
+    if (SYMVALUE(x) == v)
         return;
-    CXXR::RObject::fix_binding_refcnt(x, CXXR::Symbol::symvalue(x), v);
-    CXXR::Symbol::set_symvalue(x, v);
+    if (!x)
+        return;
+    Symbol::checkST(x);
+    Symbol *sym = SEXP_downcast<Symbol *>(x);
+    sym->setValue(v);
 }
 
 void SET_INTERNAL(SEXP x, SEXP v)
 {
-    CXXR::RObject::fix_refcnt(x, CXXR::Symbol::internal(x), v);
-    CXXR::Symbol::set_internal(x, v);
+    if (!x)
+        return;
+    Symbol::checkST(x);
+    Symbol *sym = SEXP_downcast<Symbol *>(x);
+    BuiltInFunction *fun = SEXP_downcast<BuiltInFunction *>(v);
+    sym->setInternalFunction(fun);
 }
 
 void SET_DDVAL(SEXP x, int v)
 {
-    CXXR::Symbol::set_ddval(x, v);
 }
 
 void SET_BASE_SYM_CACHED(SEXP b)
 {
-    CXXR::Symbol::set_base_sym_cached(b);
+    if (!b)
+        return;
+    SEXP_downcast<Symbol *>(b)->setBaseSymbol(true);
 }
 
 void UNSET_BASE_SYM_CACHED(SEXP b)
 {
-    CXXR::Symbol::unset_base_sym_cached(b);
+    if (!b)
+        return;
+    SEXP_downcast<Symbol *>(b)->setBaseSymbol(false);
 }
 
 Rboolean BASE_SYM_CACHED(SEXP b)
 {
-    return (Rboolean)CXXR::Symbol::base_sym_cached(b);
+    return Rboolean(b && SEXP_downcast<const Symbol *>(b)->baseSymbol());
 }
 
 void SET_SPECIAL_SYMBOL(SEXP b)
 {
-    CXXR::Symbol::set_special_symbol(b);
+    if (!b)
+        return;
+    SEXP_downcast<Symbol *>(b)->setSpecialSymbol(true);
 }
 
 void UNSET_SPECIAL_SYMBOL(SEXP b)
 {
-    CXXR::Symbol::unset_special_symbol(b);
+    if (!b)
+        return;
+    SEXP_downcast<Symbol *>(b)->setSpecialSymbol(false);
 }
 
 Rboolean IS_SPECIAL_SYMBOL(SEXP b)
 {
-    return (Rboolean)CXXR::Symbol::is_special_symbol(b);
+    return Rboolean(b && SEXP_downcast<const Symbol *>(b)->specialSymbol());
 }
 
 void SET_NO_SPECIAL_SYMBOLS(SEXP b)
 {
-    CXXR::Symbol::set_no_special_symbols(b);
+    if (!b)
+        return;
+    SEXP_downcast<Symbol *>(b)->setSpecialSymbol(true);
 }
 
 void UNSET_NO_SPECIAL_SYMBOLS(SEXP b)
 {
-    CXXR::Symbol::unset_no_special_symbols(b);
+    if (!b)
+        return;
+    SEXP_downcast<Symbol *>(b)->setSpecialSymbol(false);
 }
 
 Rboolean NO_SPECIAL_SYMBOLS(SEXP b)
 {
-    return (Rboolean)CXXR::Symbol::no_special_symbols(b);
+    return Rboolean(b && SEXP_downcast<const Symbol *>(b)->specialSymbol());
 }
 
 Rboolean Rf_isUserBinop(SEXP s)

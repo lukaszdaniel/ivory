@@ -584,6 +584,13 @@ namespace CXXR
 
 extern "C"
 {
+    /** @brief Is this node marked?
+     *
+     * @param x Pointer to \c RObject.
+     *
+     * @return true iff \a x is marked to prevent GC of this node.  Returns false if \a x
+     * is nullptr.
+     */
     int MARK(SEXP x);
 }
 

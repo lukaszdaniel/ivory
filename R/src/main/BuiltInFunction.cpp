@@ -50,12 +50,6 @@ namespace CXXR
         return sexptype() == SPECIALSXP ? "special" : "builtin";
     }
 
-    int BuiltInFunction::primoffset(RObject *x)
-    {
-        BuiltInFunction *bif = SEXP_downcast<BuiltInFunction *>(x);
-        return bif->offset();
-    }
-
     CCODE PRIMFUN(RObject *x) { return R_FunTab[PRIMOFFSET(x)].cfun(); }
     const char *PRIMNAME(RObject *x) { return R_FunTab[PRIMOFFSET(x)].name(); }
     int PRIMVAL(RObject *x) { return R_FunTab[PRIMOFFSET(x)].code(); }
@@ -69,5 +63,8 @@ namespace CXXR
 
 int CXXR::PRIMOFFSET(SEXP x)
 {
-    return CXXR::BuiltInFunction::primoffset(x);
+    if (!x)
+        return 0;
+    const BuiltInFunction *bif = SEXP_downcast<const BuiltInFunction *>(x);
+    return bif->offset();
 }

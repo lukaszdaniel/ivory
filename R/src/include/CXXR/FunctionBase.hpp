@@ -72,11 +72,6 @@ namespace CXXR
             return "(function type)";
         }
 
-        static bool rdebug(RObject *x);
-        static void set_rdebug(RObject *x, bool v);
-        static bool rtrace(RObject *x);
-        static void set_rtrace(RObject *x, bool v);
-
     protected:
         /**
          * @param stype Required type of the FunctionBase.

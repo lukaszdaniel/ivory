@@ -34,6 +34,8 @@
 #include <Rinternals.h>
 #include <Localization.h>
 
+using namespace CXXR;
+
 namespace CXXR
 {
     // Force the creation of non-inline embodiments of functions callable
@@ -94,21 +96,6 @@ namespace CXXR
         }
     }
 
-    /* Growable vector support */
-    unsigned int VectorBase::growable_bit_set(RObject *x)
-    {
-        if (!x)
-            return 0;
-        return SEXP_downcast<VectorBase *>(x)->growable();
-    }
-
-    void VectorBase::set_growable_bit(RObject *x)
-    {
-        if (!x)
-            return;
-        // x->m_gpbits |= GROWABLE_MASK;
-        SEXP_downcast<VectorBase *>(x)->setGrowable(true);
-    }
     int *VectorBase::chkzln(SEXP x)
     {
 #ifdef CATCH_ZERO_LENGTH_ACCESS
@@ -272,12 +259,16 @@ R_xlen_t Rf_XLENGTH(SEXP x)
 
 int IS_GROWABLE(SEXP x)
 {
-    return CXXR::VectorBase::growable_bit_set(x) && XLENGTH(x) < XTRUELENGTH(x);
+    if (!x)
+        return 0;
+    return SEXP_downcast<VectorBase *>(x)->growable() && XLENGTH(x) < XTRUELENGTH(x);
 }
 
 void SET_GROWABLE_BIT(SEXP x)
 {
-    CXXR::VectorBase::set_growable_bit(x);
+    if (!x)
+        return;
+    SEXP_downcast<VectorBase *>(x)->setGrowable(true);
 }
 
 void SET_TRUELENGTH(SEXP x, R_xlen_t v)

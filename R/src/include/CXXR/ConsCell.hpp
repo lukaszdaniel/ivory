@@ -202,6 +202,7 @@ namespace CXXR
          */
         void setTag(RObject *tg)
         {
+            xfix_refcnt(m_tag, tg);
             m_tag = tg;
             propagateAge(m_tag);
         }
@@ -213,6 +214,16 @@ namespace CXXR
          */
         void setTail(PairList *tl);
         // Implemented inline in CXXR/PairList.h
+
+        unsigned int bndcellTag() const
+        {
+            return extra();
+        }
+
+        void setBndCellTag(unsigned int v)
+        {
+            setExtra(v);
+        }
 
         /** @brief The name by which this type is known in R.
          *
@@ -248,25 +259,27 @@ namespace CXXR
             return m_tail;
         }
 
+        unsigned int missing() const
+        {
+            return m_missing;
+        }
+
+        void setMissing(unsigned int v);
+
+        static void checkST(const RObject *);
+
         // Virtual function of GCNode:
         void visitChildren(const_visitor *v) const override;
 
         /* List Access Methods */
-        static RObject *tag(RObject *x);
-        static void set_tag(RObject *x, RObject *v);
-        static RObject *car0(RObject *x);
         static void set_car0(RObject *x, RObject *v);
-        static RObject *cdr(RObject *x);
-        static void set_cdr(RObject *x, RObject *v);
-        static double bndcell_dval(RObject *x);
-        static int bndcell_ival(RObject *x);
-        static int bndcell_lval(RObject *x);
+        static double bndcell_dval(const RObject *x);
+        static int bndcell_ival(const RObject *x);
+        static int bndcell_lval(const RObject *x);
         static void set_bndcell_dval(RObject *x, double v);
         static void set_bndcell_ival(RObject *x, int v);
         static void set_bndcell_lval(RObject *x, int v);
         static void clear_bndcell_tag(SEXP cell);
-        static unsigned int missing(RObject *x); /* for closure calls */
-        static void set_missing(RObject *x, int v);
 
         // Virtual functions of RObject:
         unsigned int packGPBits() const override;
@@ -343,7 +356,6 @@ namespace CXXR
         // Check that st is a legal SEXPTYPE for a ConsCell:
         static void checkST(SEXPTYPE st);
 
-    public:
         // The following field is used only in connection with objects
         // inheriting from class ConsCell (and fairly rarely then), so
         // it would more logically be placed in that class (and

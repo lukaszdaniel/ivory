@@ -67,9 +67,9 @@ namespace CXXR
           m_tail(clone(pattern.tail(), deep)), m_tag(pattern.tag()), m_missing(0)
     {
         // if (m_car)
-        //     INCREMENT_REFCNT(m_car);
+        //     m_car->incrementRefCount();
         // if (m_tail)
-        //     INCREMENT_REFCNT(m_tail);
+        //     m_tail->incrementRefCount();
     }
 
     ConsCell::ConsCell(const ConsCell &pattern, bool deep, int)
@@ -77,9 +77,9 @@ namespace CXXR
           m_tag(pattern.tag()), m_missing(0)
     {
         // if (m_car)
-        //     INCREMENT_REFCNT(m_car);
+        //     m_car->incrementRefCount();
         // if (m_tail)
-        //     INCREMENT_REFCNT(m_tail);
+        //     m_tail->incrementRefCount();
     }
 
     namespace
@@ -109,210 +109,44 @@ namespace CXXR
     }
 
     /* List Access Methods */
-    RObject *ConsCell::tag(RObject *e)
-    {
-        if (!e)
-            return nullptr;
-#ifdef ENABLE_ST_CHECKS
-        switch (e->sexptype())
-        {
-        case LISTSXP:
-        case LANGSXP:
-        case DOTSXP:
-        case BCODESXP:
-            break;
-        default:
-            std::cerr << LOCATION << "Inappropriate SEXPTYPE (" << e->sexptype() << ") for PairList." << std::endl;
-            abort();
-        }
-#endif
-        ConsCell *cc = SEXP_downcast<ConsCell *>(e, false);
-        return cc->tag();
-    }
-
-    void ConsCell::set_tag(RObject *x, RObject *v)
-    {
-        if (!x)
-            Rf_error(_("incorrect value"));
-#ifdef ENABLE_ST_CHECKS
-        switch (x->sexptype())
-        {
-        case LISTSXP:
-        case LANGSXP:
-        case DOTSXP:
-        case BCODESXP:
-            break;
-        default:
-            std::cerr << LOCATION << "Inappropriate SEXPTYPE (" << x->sexptype() << ") for PairList." << std::endl;
-            abort();
-        }
-#endif
-        ConsCell *cc = SEXP_downcast<ConsCell *>(x, false);
-        cc->setTag(v);
-    }
-
-    RObject *ConsCell::car0(RObject *e)
-    {
-        if (!e)
-            return nullptr;
-#ifdef ENABLE_ST_CHECKS
-        switch (e->sexptype())
-        {
-        case LISTSXP:
-        case LANGSXP:
-        case DOTSXP:
-        case BCODESXP:
-            break;
-        default:
-            std::cerr << LOCATION << "Inappropriate SEXPTYPE (" << e->sexptype() << ") for PairList." << std::endl;
-            abort();
-        }
-#endif
-        ConsCell *cc = SEXP_downcast<ConsCell *>(e, false);
-        return cc->car();
-    }
-
     void ConsCell::set_car0(RObject *x, RObject *v)
     {
         if (!x)
             Rf_error(_("incorrect value"));
-#ifdef ENABLE_ST_CHECKS
-        switch (x->sexptype())
-        {
-        case LISTSXP:
-        case LANGSXP:
-        case DOTSXP:
-        case BCODESXP:
-            break;
-        default:
-            std::cerr << LOCATION << "Inappropriate SEXPTYPE (" << x->sexptype() << ") for PairList." << std::endl;
-            abort();
-        }
-#endif
+        ConsCell::checkST(x);
         ConsCell *cc = SEXP_downcast<ConsCell *>(x, false);
         cc->setCar(v);
     }
 
-    RObject *ConsCell::cdr(RObject *e)
-    {
-        if (!e)
-            return nullptr;
-#ifdef ENABLE_ST_CHECKS
-        switch (e->sexptype())
-        {
-        case LISTSXP:
-        case LANGSXP:
-        case DOTSXP:
-        case BCODESXP:
-            break;
-        default:
-            std::cerr << LOCATION << "Inappropriate SEXPTYPE (" << e->sexptype() << ") for PairList." << std::endl;
-            abort();
-        }
-#endif
-        ConsCell *cc = SEXP_downcast<ConsCell *>(e, false);
-        return cc->tail();
-    }
-
-    void ConsCell::set_cdr(RObject *x, RObject *v)
-    {
-        if (!x)
-            Rf_error(_("incorrect value"));
-#ifdef ENABLE_ST_CHECKS
-        switch (x->sexptype())
-        {
-        case LISTSXP:
-        case LANGSXP:
-        case DOTSXP:
-        case BCODESXP:
-            break;
-        default:
-            std::cerr << LOCATION << "Inappropriate SEXPTYPE (" << x->sexptype() << ") for PairList." << std::endl;
-            abort();
-        }
-#endif
-        ConsCell *cc = SEXP_downcast<ConsCell *>(x, false);
-        PairList *tl = SEXP_downcast<PairList *>(v);
-        cc->setTail(tl);
-    }
-
-    double ConsCell::bndcell_dval(RObject *x)
+    double ConsCell::bndcell_dval(const RObject *x)
     {
         if (!x)
             return 0.0;
-#ifdef ENABLE_ST_CHECKS
-        switch (x->sexptype())
-        {
-        case LISTSXP:
-        case LANGSXP:
-        case DOTSXP:
-        case BCODESXP:
-            break;
-        default:
-            std::cerr << LOCATION << "Inappropriate SEXPTYPE (" << x->sexptype() << ") for PairList." << std::endl;
-            abort();
-        }
-#endif
-        return ((R_bndval_t *)&(SEXP_downcast<ConsCell *>(x, false)->m_car))->dval;
+        ConsCell::checkST(x);
+        return ((R_bndval_t *)&(SEXP_downcast<const ConsCell *>(x, false)->m_car))->dval;
     }
 
-    int ConsCell::bndcell_ival(RObject *x)
+    int ConsCell::bndcell_ival(const RObject *x)
     {
         if (!x)
             return 0;
-#ifdef ENABLE_ST_CHECKS
-        switch (x->sexptype())
-        {
-        case LISTSXP:
-        case LANGSXP:
-        case DOTSXP:
-        case BCODESXP:
-            break;
-        default:
-            std::cerr << LOCATION << "Inappropriate SEXPTYPE (" << x->sexptype() << ") for PairList." << std::endl;
-            abort();
-        }
-#endif
-        return ((R_bndval_t *)&(SEXP_downcast<ConsCell *>(x, false)->m_car))->ival;
+        ConsCell::checkST(x);
+        return ((R_bndval_t *)&(SEXP_downcast<const ConsCell *>(x, false)->m_car))->ival;
     }
 
-    int ConsCell::bndcell_lval(RObject *x)
+    int ConsCell::bndcell_lval(const RObject *x)
     {
         if (!x)
             return 0;
-#ifdef ENABLE_ST_CHECKS
-        switch (x->sexptype())
-        {
-        case LISTSXP:
-        case LANGSXP:
-        case DOTSXP:
-        case BCODESXP:
-            break;
-        default:
-            std::cerr << LOCATION << "Inappropriate SEXPTYPE (" << x->sexptype() << ") for PairList." << std::endl;
-            abort();
-        }
-#endif
-        return ((R_bndval_t *)&(SEXP_downcast<ConsCell *>(x, false)->m_car))->ival;
+        ConsCell::checkST(x);
+        return ((R_bndval_t *)&(SEXP_downcast<const ConsCell *>(x, false)->m_car))->ival;
     }
 
     void ConsCell::set_bndcell_dval(RObject *x, double v)
     {
         if (!x)
             return;
-#ifdef ENABLE_ST_CHECKS
-        switch (x->sexptype())
-        {
-        case LISTSXP:
-        case LANGSXP:
-        case DOTSXP:
-        case BCODESXP:
-            break;
-        default:
-            std::cerr << LOCATION << "Inappropriate SEXPTYPE (" << x->sexptype() << ") for PairList." << std::endl;
-            abort();
-        }
-#endif
+        ConsCell::checkST(x);
         ((R_bndval_t *)&(SEXP_downcast<ConsCell *>(x, false)->m_car))->dval = v;
     }
 
@@ -320,19 +154,7 @@ namespace CXXR
     {
         if (!x)
             return;
-#ifdef ENABLE_ST_CHECKS
-        switch (x->sexptype())
-        {
-        case LISTSXP:
-        case LANGSXP:
-        case DOTSXP:
-        case BCODESXP:
-            break;
-        default:
-            std::cerr << LOCATION << "Inappropriate SEXPTYPE (" << x->sexptype() << ") for PairList." << std::endl;
-            abort();
-        }
-#endif
+        ConsCell::checkST(x);
         ((R_bndval_t *)&(SEXP_downcast<ConsCell *>(x, false)->m_car))->ival = v;
     }
 
@@ -340,45 +162,24 @@ namespace CXXR
     {
         if (!x)
             return;
-#ifdef ENABLE_ST_CHECKS
-        switch (x->sexptype())
-        {
-        case LISTSXP:
-        case LANGSXP:
-        case DOTSXP:
-        case BCODESXP:
-            break;
-        default:
-            std::cerr << LOCATION << "Inappropriate SEXPTYPE (" << x->sexptype() << ") for PairList." << std::endl;
-            abort();
-        }
-#endif
+        ConsCell::checkST(x);
         ((R_bndval_t *)&(SEXP_downcast<ConsCell *>(x, false)->m_car))->ival = v;
     }
 
     void ConsCell::clear_bndcell_tag(SEXP cell)
     {
-        if (CXXR::RObject::bndcell_tag(cell))
+        if (cell && SEXP_downcast<ConsCell *>(cell)->bndcellTag())
         {
             CXXR::ConsCell::set_car0(cell, nullptr);
-            CXXR::RObject::set_bndcell_tag(cell, 0);
+            SEXP_downcast<ConsCell *>(cell)->setBndCellTag(0);
         }
     }
 
-    unsigned int ConsCell::missing(RObject *x) /* for closure calls */
+    void ConsCell::setMissing(unsigned int v)
     {
-        if (!x)
-            return 0;
-        return SEXP_downcast<ConsCell *>(x)->m_missing;
-    }
-
-    void ConsCell::set_missing(RObject *x, int v)
-    {
-        if (!x)
-            return;
-        int __other_flags__ = x->packGPBits() & ~MISSING_MASK; // erase 4 rightmost bits
-        // x->m_gpbits = __other_flags__ | v;
-        SEXP_downcast<ConsCell *>(x)->m_missing = __other_flags__ | v;
+        int __other_flags__ = packGPBits() & ~MISSING_MASK; // erase 4 rightmost bits
+        // m_gpbits = __other_flags__ | v;
+        m_missing = __other_flags__ | v;
     }
 
     void ConsCell::checkST(SEXPTYPE st)
@@ -401,7 +202,7 @@ namespace CXXR
         RObject::visitChildren(v);
         if (altrep())
         {
-            if (RObject::bndcell_tag(this))
+            if (bndcellTag())
             {
                 Rf_error("bad binding access");
             }
@@ -414,7 +215,7 @@ namespace CXXR
         }
         else
         {
-            if (car() && (sexptype() != LISTSXP || BOXED_BINDING_CELLS || RObject::bndcell_tag(this) == 0))
+            if (car() && (sexptype() != LISTSXP || BOXED_BINDING_CELLS || bndcellTag() == 0))
                 car()->conductVisitor(v);
             if (tag())
                 tag()->conductVisitor(v);
@@ -434,7 +235,7 @@ namespace CXXR
             }
             if (p->altrep())
             {
-                if (RObject::bndcell_tag(p))
+                if (p->bndcellTag())
                 {
                     Rf_error("bad binding access");
                 }
@@ -445,7 +246,7 @@ namespace CXXR
             }
             else
             {
-                if (p->car() && (p->sexptype() != LISTSXP || BOXED_BINDING_CELLS || RObject::bndcell_tag(p) == 0))
+                if (p->car() && (p->sexptype() != LISTSXP || BOXED_BINDING_CELLS || p->bndcellTag() == 0))
                     p->car()->conductVisitor(v);
                 if (p->tag())
                     p->tag()->conductVisitor(v);
@@ -531,34 +332,55 @@ namespace CXXR
             }
         }
     }
+    void ConsCell::checkST(const RObject *x)
+    {
+#ifdef ENABLE_ST_CHECKS
+        switch (e->sexptype())
+        {
+        case LISTSXP:
+        case LANGSXP:
+        case DOTSXP:
+        case BCODESXP:
+            break;
+        default:
+            std::cerr << "Inappropriate SEXPTYPE (" << e->sexptype() << ") for PairList." << std::endl;
+            abort();
+        }
+#endif
+    }
 } // namespace CXXR
 
 // ***** C interface *****
 
 SEXP TAG(SEXP e)
 {
+    if (!e)
+        return nullptr;
     if (TYPEOF(e) == S4SXP)
     {
         return S4TAG(e);
     }
     else
     {
-        return CXXR::ConsCell::tag(e);
+        ConsCell::checkST(e);
+        const ConsCell *cc = SEXP_downcast<const ConsCell *>(e);
+        return cc->tag();
     }
 }
 
 void SET_TAG(SEXP x, SEXP v)
 {
+    if (x == nullptr || x == R_NilValue)
+        Rf_error(_("incorrect value"));
     if (TYPEOF(x) == S4SXP)
     {
         SET_S4TAG(x, v);
     }
     else
     {
-        if (x == nullptr || x == R_NilValue)
-            Rf_error(_("incorrect value"));
-        CXXR::RObject::fix_refcnt(x, TAG(x), v);
-        CXXR::ConsCell::set_tag(x, v);
+        ConsCell::checkST(x);
+        ConsCell *cc = SEXP_downcast<ConsCell *>(x, false);
+        cc->setTag(v);
     }
 }
 
@@ -569,7 +391,8 @@ SEXP SETCAR(SEXP x, SEXP y)
     CXXR::ConsCell::clear_bndcell_tag(x);
     if (y == CAR(x))
         return y;
-    CXXR::RObject::fix_binding_refcnt(x, CAR(x), y);
+    if (x)
+        x->xfix_binding_refcnt(CAR(x), y);
     CXXR::ConsCell::set_car0(x, y);
     return y;
 }
@@ -578,13 +401,10 @@ SEXP SETCDR(SEXP x, SEXP y)
 {
     if (x == nullptr || x == R_NilValue)
         Rf_error(_("incorrect value"));
-    CXXR::RObject::fix_refcnt(x, CDR(x), y);
-#ifdef TESTING_WRITE_BARRIER
-    /* this should not add a non-tracking CDR to a tracking cell */
-    if (TRACKREFS(x) && y && ! TRACKREFS(y))
-	Rf_error(_("inserting non-tracking CDR in tracking cell"));
-#endif
-    CXXR::ConsCell::set_cdr(x, y);
+    ConsCell::checkST(x);
+    ConsCell *cc = SEXP_downcast<ConsCell *>(x, false);
+    PairList *tl = SEXP_downcast<PairList *>(y);
+    cc->setTail(tl);
     return y;
 }
 
@@ -596,7 +416,8 @@ SEXP SETCADR(SEXP x, SEXP y)
         Rf_error(_("incorrect value"));
     cell = CDR(x);
     CXXR::ConsCell::clear_bndcell_tag(cell);
-    CXXR::RObject::fix_refcnt(cell, CAR(cell), y);
+    if (cell)
+        cell->xfix_refcnt(CAR(cell), y);
     CXXR::ConsCell::set_car0(cell, y);
     return y;
 }
@@ -610,7 +431,8 @@ SEXP SETCADDR(SEXP x, SEXP y)
         Rf_error(_("incorrect value"));
     cell = CDDR(x);
     CXXR::ConsCell::clear_bndcell_tag(cell);
-    CXXR::RObject::fix_refcnt(cell, CAR(cell), y);
+    if (cell)
+        cell->xfix_refcnt(CAR(cell), y);
     CXXR::ConsCell::set_car0(cell, y);
     return y;
 }
@@ -625,11 +447,11 @@ SEXP SETCADDDR(SEXP x, SEXP y)
         Rf_error(_("incorrect value"));
     cell = CDDDR(x);
     CXXR::ConsCell::clear_bndcell_tag(cell);
-    CXXR::RObject::fix_refcnt(cell, CAR(cell), y);
+    if (cell)
+        cell->xfix_refcnt(CAR(cell), y);
     CXXR::ConsCell::set_car0(cell, y);
     return y;
 }
-
 
 SEXP SETCAD4R(SEXP x, SEXP y)
 {
@@ -642,29 +464,34 @@ SEXP SETCAD4R(SEXP x, SEXP y)
         Rf_error(_("incorrect value"));
     cell = CD4R(x);
     CXXR::ConsCell::clear_bndcell_tag(cell);
-    CXXR::RObject::fix_refcnt(cell, CAR(cell), y);
+    if (cell)
+        cell->xfix_refcnt(CAR(cell), y);
     CXXR::ConsCell::set_car0(cell, y);
     return y;
 }
 
 int MISSING(SEXP x)
 {
-    return CXXR::ConsCell::missing(x);
+    if (!x)
+        return 0;
+    return SEXP_downcast<const ConsCell *>(x)->missing();
 }
 
 void SET_MISSING(SEXP x, int v)
 {
-    CXXR::ConsCell::set_missing(x, v);
+    if (x)
+        SEXP_downcast<ConsCell *>(x)->setMissing(v);
 }
 
 int BNDCELL_TAG(SEXP cell)
 {
-    return CXXR::RObject::bndcell_tag(cell);
+    return cell ? SEXP_downcast<ConsCell *>(cell)->bndcellTag() : 0;
 }
 
 void SET_BNDCELL_TAG(SEXP cell, int val)
 {
-    CXXR::RObject::set_bndcell_tag(cell, val);
+    if (cell)
+        SEXP_downcast<ConsCell *>(cell)->setBndCellTag(val);
 }
 
 double(BNDCELL_DVAL)(SEXP cell)

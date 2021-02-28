@@ -78,10 +78,11 @@ namespace CXXR
           : RObject(ENVSXP), m_enclosing(enclosing), m_frame(namevals), m_hashtable(nullptr), m_single_stepping(false),
             m_globally_cached(false), m_locked(false)
       {
-         INCREMENT_REFCNT(namevals);
+         if (m_frame)
+            m_frame->incrementRefCount();
 
-         if (enclosing)
-            INCREMENT_REFCNT(enclosing);
+         if (m_enclosing)
+            m_enclosing->incrementRefCount();
       }
 
       /** @brief Base environment.
@@ -184,6 +185,7 @@ namespace CXXR
        */
       void setEnclosingEnvironment(Environment *new_enclos)
       {
+         xfix_refcnt(m_enclosing, new_enclos);
          m_enclosing = new_enclos;
          propagateAge(m_enclosing);
       }
@@ -197,6 +199,7 @@ namespace CXXR
        */
       void setFrame(PairList *new_frame)
       {
+         xfix_refcnt(m_frame, new_frame);
          m_frame = new_frame;
          propagateAge(m_frame);
       }
@@ -210,6 +213,7 @@ namespace CXXR
        */
       void setHashTable(ListVector *new_hash_table)
       {
+         xfix_refcnt(m_hashtable, new_hash_table);
          m_hashtable = new_hash_table;
          propagateAge(m_hashtable);
       }
@@ -223,6 +227,10 @@ namespace CXXR
        */
       void setGlobalCaching(bool cached)
       {
+         // if (cached)
+         //    m_gpbits |= GLOBAL_FRAME_MASK;
+         // else
+         //    m_gpbits &= ~(GLOBAL_FRAME_MASK);
          m_globally_cached = cached;
       }
 
@@ -235,6 +243,7 @@ namespace CXXR
        */
       void setLocking(bool on)
       {
+         // m_gpbits |= FRAME_LOCK_MASK;
          m_locked = on;
       }
 
@@ -267,6 +276,8 @@ namespace CXXR
          return "environment";
       }
 
+      static void checkST(const RObject *);
+
       // Virtual functions of RObject:
       unsigned int packGPBits() const override;
       void unpackGPBits(unsigned int gpbits) override;
@@ -274,23 +285,6 @@ namespace CXXR
 
       // Virtual function of GCNode:
       void visitChildren(const_visitor *v) const override;
-
-      /* Environment Access Methods */
-      static RObject *frame(RObject *x);
-      static RObject *enclos(RObject *x);
-      static RObject *hashtab(RObject *x);
-      static unsigned int envflags(RObject *x); /* for environments */
-      static void set_envflags(RObject *x, unsigned int v);
-      static void set_frame(RObject *x, RObject *v);
-      static void set_enclos(RObject *x, RObject *v);
-      static void set_hashtab(RObject *x, RObject *v);
-      static unsigned int frame_is_locked(RObject *x);
-      static void lock_frame(RObject *x);
-      static bool is_global_frame(RObject *x);
-      static void mark_as_global_frame(RObject *x);
-      static void mark_as_local_frame(RObject *x);
-      static bool env_rdebug(RObject *x);
-      static void set_env_rdebug(RObject *x, bool v);
 
    private:
       static GCRoot<Environment> s_empty_env;

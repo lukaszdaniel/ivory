@@ -30,6 +30,8 @@
 #include <CXXR/S4Object.hpp>
 #include <Localization.h>
 
+using namespace CXXR;
+
 namespace CXXR
 {
     // Force the creation of non-inline embodiments of functions callable
@@ -58,24 +60,6 @@ namespace CXXR
         if (tag())
             tag()->conductVisitor(v);
     }
-
-    RObject *S4Object::tag(RObject *e)
-    {
-        if (!e)
-            return nullptr;
-
-        S4Object *s4 = SEXP_downcast<S4Object *>(e, false);
-        return s4->tag();
-    }
-
-    void S4Object::set_tag(RObject *x, RObject *v)
-    {
-        if (!x)
-            Rf_error(_("incorrect value"));
-        S4Object *s4 = SEXP_downcast<S4Object *>(x, false);
-        s4->setTag(v);
-    }
-
 } // namespace CXXR
 
 // ***** C interface *****
@@ -83,31 +67,35 @@ namespace CXXR
 /* S4 object testing */
 int IS_S4_OBJECT(SEXP x)
 {
-    return CXXR::RObject::is_s4_object(x);
+    return x ? x->isS4Object() : 0;
 }
 
 void SET_S4_OBJECT(SEXP x)
 {
-    CXXR::RObject::set_s4_object(x);
+    if (!x)
+        return;
+    x->setS4Object(true);
 }
 
 void UNSET_S4_OBJECT(SEXP x)
 {
-    CXXR::RObject::unset_s4_object(x);
+    if (!x)
+        return;
+    x->setS4Object(false);
 }
 
 /* S4Object Accessors */
 SEXP S4TAG(SEXP e)
 {
-    return CXXR::S4Object::tag(e);
+    return e ? SEXP_downcast<S4Object *>(e)->tag() : nullptr;
 }
 
 void SET_S4TAG(SEXP x, SEXP v)
 {
     if (x == nullptr || x == R_NilValue)
         Rf_error(_("incorrect value"));
-    CXXR::RObject::fix_refcnt(x, S4TAG(x), v);
-    CXXR::S4Object::set_tag(x, v);
+    S4Object *s4 = SEXP_downcast<S4Object *>(x);
+    s4->setTag(v);
 }
 
 SEXP Rf_allocS4Object()

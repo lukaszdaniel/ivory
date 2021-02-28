@@ -41,10 +41,21 @@
 #include <R_ext/Print.h>
 
 using namespace R;
+using namespace CXXR;
 
 /* FIXME: envir.cpp keeps this private - it should probably go to Defn.h */
-#define FRAME_IS_LOCKED(e) (CXXR::Environment::frame_is_locked(e))
-#define IS_GLOBAL_FRAME(e) (CXXR::Environment::is_global_frame(e))
+namespace
+{
+	bool FRAME_IS_LOCKED(SEXP e)
+	{
+		return e && SEXP_downcast<const Environment *>(e)->isLocked();
+	}
+
+	bool IS_GLOBAL_FRAME(SEXP e)
+	{
+		return e && SEXP_downcast<const Environment *>(e)->inGlobalCache();
+	}
+}
 
 /* based on EncodeEnvironment in  printutils.cpp */
 static void PrintEnvironment(SEXP x)

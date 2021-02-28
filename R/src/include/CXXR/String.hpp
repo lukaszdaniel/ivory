@@ -183,6 +183,22 @@ namespace CXXR
 		 */
 		int hash() const;
 
+		bool hasHash() const
+		{
+			return m_hash != -1;
+		}
+
+		bool isCached() const
+		{
+			return m_cached;
+		}
+
+		void setCached()
+		{
+			// m_gpbits |= CACHED_MASK;
+			m_cached = true;
+		}
+
 		/** @brief Test if 'not available'.
 		 *
 		 * @return true iff this is the 'not available' string.
@@ -228,20 +244,6 @@ namespace CXXR
 			return "char";
 		}
 
-		/* Hashing Methods */
-		static unsigned int hashash(RObject *x);
-
-		static unsigned int is_bytes(RObject *x);
-		static void set_bytes(RObject *x);
-		static unsigned int is_latin1(RObject *x);
-		static void set_latin1(RObject *x);
-		static unsigned int is_ascii(RObject *x);
-		static void set_ascii(RObject *x);
-		static unsigned int is_utf8(RObject *x);
-		static void set_utf8(RObject *x);
-		static unsigned int enc_known(RObject *x);
-		static void set_cached(RObject *x);
-		static unsigned int is_cached(RObject *x);
 		static int clearCacheAndHashMasks(int levels);
 
 		// Virtual function of RObject:
