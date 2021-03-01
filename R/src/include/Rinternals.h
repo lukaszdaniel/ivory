@@ -391,13 +391,13 @@ void R_check_thread(const char *s);
 #define LCONS(a, b)	Rf_lcons((a), (b))		/* language lists */
 int BNDCELL_TAG(SEXP e);
 void SET_BNDCELL_TAG(SEXP e, int v);
-double (BNDCELL_DVAL)(SEXP cell);
-int (BNDCELL_IVAL)(SEXP cell);
-int (BNDCELL_LVAL)(SEXP cell);
-void (SET_BNDCELL_DVAL)(SEXP cell, double v);
-void (SET_BNDCELL_IVAL)(SEXP cell, int v);
-void (SET_BNDCELL_LVAL)(SEXP cell, int v);
-void (INIT_BNDCELL)(SEXP cell, int type);
+double BNDCELL_DVAL(SEXP cell);
+int BNDCELL_IVAL(SEXP cell);
+int BNDCELL_LVAL(SEXP cell);
+void SET_BNDCELL_DVAL(SEXP cell, double v);
+void SET_BNDCELL_IVAL(SEXP cell, int v);
+void SET_BNDCELL_LVAL(SEXP cell, int v);
+void INIT_BNDCELL(SEXP cell, int type);
 void SET_BNDCELL(SEXP cell, SEXP val);
 
 SEXP TAG(SEXP e);
@@ -507,8 +507,8 @@ void SET_HASHVALUE(SEXP x, int v);
    saves an index of the protection location that can be used to
    replace the protected value using REPROTECT. */
 typedef int PROTECT_INDEX;
-#define PROTECT_WITH_INDEX(x,i) R_ProtectWithIndex(x,i)
-#define REPROTECT(x,i) R_Reprotect(x,i)
+#define PROTECT_WITH_INDEX(x, i) R_ProtectWithIndex(x, i)
+#define REPROTECT(x, i) R_Reprotect(x, i)
 
 /* Evaluation Environment */
 LibExtern SEXP R_GlobalEnv;	    /* The "global" environment */

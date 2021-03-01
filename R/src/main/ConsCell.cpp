@@ -108,16 +108,6 @@ namespace CXXR
         // m_missing = ((gpbits & MISSING_MASK) != 0);
     }
 
-    /* List Access Methods */
-    void ConsCell::set_car0(RObject *x, RObject *v)
-    {
-        if (!x)
-            Rf_error(_("incorrect value"));
-        ConsCell::checkST(x);
-        ConsCell *cc = SEXP_downcast<ConsCell *>(x, false);
-        cc->setCar(v);
-    }
-
     double ConsCell::bndcell_dval(const RObject *x)
     {
         if (!x)
@@ -168,10 +158,14 @@ namespace CXXR
 
     void ConsCell::clear_bndcell_tag(SEXP cell)
     {
-        if (cell && SEXP_downcast<ConsCell *>(cell)->bndcellTag())
+        if (!cell)
+            return;
+        ConsCell *cc = SEXP_downcast<ConsCell *>(cell);
+
+        if (cc->bndcellTag())
         {
-            CXXR::ConsCell::set_car0(cell, nullptr);
-            SEXP_downcast<ConsCell *>(cell)->setBndCellTag(0);
+            cc->clearCar();
+            cc->setBndCellTag(0);
         }
     }
 
@@ -388,12 +382,9 @@ SEXP SETCAR(SEXP x, SEXP y)
 {
     if (x == nullptr || x == R_NilValue)
         Rf_error(_("incorrect value"));
-    CXXR::ConsCell::clear_bndcell_tag(x);
-    if (y == CAR(x))
-        return y;
-    if (x)
-        x->xfix_binding_refcnt(CAR(x), y);
-    CXXR::ConsCell::set_car0(x, y);
+
+    ConsCell *cc = SEXP_downcast<ConsCell *>(x, false);
+    cc->setCar(y);
     return y;
 }
 
@@ -415,10 +406,9 @@ SEXP SETCADR(SEXP x, SEXP y)
         CDR(x) == nullptr || CDR(x) == R_NilValue)
         Rf_error(_("incorrect value"));
     cell = CDR(x);
-    CXXR::ConsCell::clear_bndcell_tag(cell);
-    if (cell)
-        cell->xfix_refcnt(CAR(cell), y);
-    CXXR::ConsCell::set_car0(cell, y);
+
+    ConsCell *cc = SEXP_downcast<ConsCell *>(cell, false);
+    cc->setCar(y);
     return y;
 }
 
@@ -430,10 +420,9 @@ SEXP SETCADDR(SEXP x, SEXP y)
         CDDR(x) == nullptr || CDDR(x) == R_NilValue)
         Rf_error(_("incorrect value"));
     cell = CDDR(x);
-    CXXR::ConsCell::clear_bndcell_tag(cell);
-    if (cell)
-        cell->xfix_refcnt(CAR(cell), y);
-    CXXR::ConsCell::set_car0(cell, y);
+
+    ConsCell *cc = SEXP_downcast<ConsCell *>(cell, false);
+    cc->setCar(y);
     return y;
 }
 
@@ -446,10 +435,9 @@ SEXP SETCADDDR(SEXP x, SEXP y)
         CDDDR(x) == nullptr || CDDDR(x) == R_NilValue)
         Rf_error(_("incorrect value"));
     cell = CDDDR(x);
-    CXXR::ConsCell::clear_bndcell_tag(cell);
-    if (cell)
-        cell->xfix_refcnt(CAR(cell), y);
-    CXXR::ConsCell::set_car0(cell, y);
+
+    ConsCell *cc = SEXP_downcast<ConsCell *>(cell, false);
+    cc->setCar(y);
     return y;
 }
 
@@ -463,10 +451,9 @@ SEXP SETCAD4R(SEXP x, SEXP y)
         CD4R(x) == nullptr || CD4R(x) == R_NilValue)
         Rf_error(_("incorrect value"));
     cell = CD4R(x);
-    CXXR::ConsCell::clear_bndcell_tag(cell);
-    if (cell)
-        cell->xfix_refcnt(CAR(cell), y);
-    CXXR::ConsCell::set_car0(cell, y);
+
+    ConsCell *cc = SEXP_downcast<ConsCell *>(cell, false);
+    cc->setCar(y);
     return y;
 }
 
@@ -494,39 +481,39 @@ void SET_BNDCELL_TAG(SEXP cell, int val)
         SEXP_downcast<ConsCell *>(cell)->setBndCellTag(val);
 }
 
-double(BNDCELL_DVAL)(SEXP cell)
+double BNDCELL_DVAL(SEXP cell)
 {
-    return BNDCELL_DVAL(cell);
+    return BNDCELL_DVAL_MACRO(cell);
 }
 
-int(BNDCELL_IVAL)(SEXP cell)
+int BNDCELL_IVAL(SEXP cell)
 {
-    return BNDCELL_IVAL(cell);
+    return BNDCELL_IVAL_MACRO(cell);
 }
 
-int(BNDCELL_LVAL)(SEXP cell)
+int BNDCELL_LVAL(SEXP cell)
 {
-    return BNDCELL_LVAL(cell);
+    return BNDCELL_LVAL_MACRO(cell);
 }
 
-void(SET_BNDCELL_DVAL)(SEXP cell, double v)
+void SET_BNDCELL_DVAL(SEXP cell, double v)
 {
-    SET_BNDCELL_DVAL(cell, v);
+    SET_BNDCELL_DVAL_MACRO(cell, v);
 }
 
-void(SET_BNDCELL_IVAL)(SEXP cell, int v)
+void SET_BNDCELL_IVAL(SEXP cell, int v)
 {
-    SET_BNDCELL_IVAL(cell, v);
+    SET_BNDCELL_IVAL_MACRO(cell, v);
 }
 
-void(SET_BNDCELL_LVAL)(SEXP cell, int v)
+void SET_BNDCELL_LVAL(SEXP cell, int v)
 {
-    SET_BNDCELL_LVAL(cell, v);
+    SET_BNDCELL_LVAL_MACRO(cell, v);
 }
 
-void(INIT_BNDCELL)(SEXP cell, int type)
+void INIT_BNDCELL(SEXP cell, int type)
 {
-    INIT_BNDCELL(cell, type);
+    INIT_BNDCELL_MACRO(cell, type);
 }
 
 void SET_BNDCELL(SEXP cell, SEXP val)

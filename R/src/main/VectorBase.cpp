@@ -234,7 +234,7 @@ NORET SEXP *VECTOR_PTR(SEXP x)
 
 int(LENGTH)(SEXP x)
 {
-    return x == R_NilValue ? 0 : LENGTH(x);
+    return x ? LENGTH(x) : 0;
 }
 
 R_xlen_t(XLENGTH)(SEXP x)

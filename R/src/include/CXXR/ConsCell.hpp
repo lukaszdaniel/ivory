@@ -54,15 +54,15 @@
 /* Use allocated scalars to hold immediate binding values. A little
    less efficient but does not change memory layout or use. These
    allocated scalars must not escape their bindings. */
-#define BNDCELL_DVAL(v) SCALAR_DVAL(CAR0(v))
-#define BNDCELL_IVAL(v) SCALAR_IVAL(CAR0(v))
-#define BNDCELL_LVAL(v) SCALAR_LVAL(CAR0(v))
+#define BNDCELL_DVAL_MACRO(v) SCALAR_DVAL(CAR0(v))
+#define BNDCELL_IVAL_MACRO(v) SCALAR_IVAL(CAR0(v))
+#define BNDCELL_LVAL_MACRO(v) SCALAR_LVAL(CAR0(v))
 
-#define SET_BNDCELL_DVAL(cell, dval) SET_SCALAR_DVAL(CAR0(cell), dval)
-#define SET_BNDCELL_IVAL(cell, ival) SET_SCALAR_IVAL(CAR0(cell), ival)
-#define SET_BNDCELL_LVAL(cell, lval) SET_SCALAR_LVAL(CAR0(cell), lval)
+#define SET_BNDCELL_DVAL_MACRO(cell, dval) SET_SCALAR_DVAL(CAR0(cell), dval)
+#define SET_BNDCELL_IVAL_MACRO(cell, ival) SET_SCALAR_IVAL(CAR0(cell), ival)
+#define SET_BNDCELL_LVAL_MACRO(cell, lval) SET_SCALAR_LVAL(CAR0(cell), lval)
 
-#define INIT_BNDCELL(cell, type)             \
+#define INIT_BNDCELL_MACRO(cell, type)       \
     do                                       \
     {                                        \
         RObject *val = allocVector(type, 1); \
@@ -83,21 +83,21 @@ union R_bndval_t
     int ival;
 };
 
-#define BNDCELL_DVAL(v) (CXXR::ConsCell::bndcell_dval(v))
-#define BNDCELL_IVAL(v) (CXXR::ConsCell::bndcell_ival(v))
-#define BNDCELL_LVAL(v) (CXXR::ConsCell::bndcell_lval(v))
+#define BNDCELL_DVAL_MACRO(v) (CXXR::ConsCell::bndcell_dval(v))
+#define BNDCELL_IVAL_MACRO(v) (CXXR::ConsCell::bndcell_ival(v))
+#define BNDCELL_LVAL_MACRO(v) (CXXR::ConsCell::bndcell_lval(v))
 
-#define SET_BNDCELL_DVAL(cell, dval_) (CXXR::ConsCell::set_bndcell_dval(cell, dval_))
-#define SET_BNDCELL_IVAL(cell, ival_) (CXXR::ConsCell::set_bndcell_ival(cell, ival_))
-#define SET_BNDCELL_LVAL(cell, lval_) (CXXR::ConsCell::set_bndcell_lval(cell, lval_))
+#define SET_BNDCELL_DVAL_MACRO(cell, dval_) (CXXR::ConsCell::set_bndcell_dval(cell, dval_))
+#define SET_BNDCELL_IVAL_MACRO(cell, ival_) (CXXR::ConsCell::set_bndcell_ival(cell, ival_))
+#define SET_BNDCELL_LVAL_MACRO(cell, lval_) (CXXR::ConsCell::set_bndcell_lval(cell, lval_))
 
-#define INIT_BNDCELL(cell, type)      \
-    do                                \
-    {                                 \
-        if (BNDCELL_TAG(cell) == 0)   \
-            SETCAR(cell, R_NilValue); \
-        SET_BNDCELL_TAG(cell, type);  \
-        SET_MISSING(cell, 0);         \
+#define INIT_BNDCELL_MACRO(cell, type) \
+    do                                 \
+    {                                  \
+        if (BNDCELL_TAG(cell) == 0)    \
+            SETCAR(cell, R_NilValue);  \
+        SET_BNDCELL_TAG(cell, type);   \
+        SET_MISSING(cell, 0);          \
     } while (0)
 #endif
 
@@ -179,8 +179,7 @@ namespace CXXR
                 return ccc;
             T *ans = new T(cc->car(), cc->tail(), cc->tag());
             ans->expose();
-            // ans->setAttributes(cc->attributes());
-            SET_ATTRIB(ans, cc->attributes());
+            ans->setAttributes(cc->attributes());
             return ans;
         }
 
@@ -191,8 +190,18 @@ namespace CXXR
          */
         void setCar(RObject *cr)
         {
+            CXXR::ConsCell::clear_bndcell_tag(this);
+            if (m_car == cr)
+                return;
+
+            xfix_binding_refcnt(m_car, cr);
             m_car = cr;
             propagateAge(m_car);
+        }
+
+        void clearCar()
+        {
+            m_car = nullptr;
         }
 
         /** @brief Set the 'tag' value.
@@ -272,7 +281,6 @@ namespace CXXR
         void visitChildren(const_visitor *v) const override;
 
         /* List Access Methods */
-        static void set_car0(RObject *x, RObject *v);
         static double bndcell_dval(const RObject *x);
         static int bndcell_ival(const RObject *x);
         static int bndcell_lval(const RObject *x);
@@ -424,13 +432,13 @@ extern "C"
 
     int BNDCELL_TAG(SEXP cell);
     void SET_BNDCELL_TAG(SEXP cell, int val);
-    double(BNDCELL_DVAL)(SEXP cell);
-    int(BNDCELL_IVAL)(SEXP cell);
-    int(BNDCELL_LVAL)(SEXP cell);
-    void(SET_BNDCELL_DVAL)(SEXP cell, double v);
-    void(SET_BNDCELL_IVAL)(SEXP cell, int v);
-    void(SET_BNDCELL_LVAL)(SEXP cell, int v);
-    void(INIT_BNDCELL)(SEXP cell, int type);
+    double BNDCELL_DVAL(SEXP cell);
+    int BNDCELL_IVAL(SEXP cell);
+    int BNDCELL_LVAL(SEXP cell);
+    void SET_BNDCELL_DVAL(SEXP cell, double v);
+    void SET_BNDCELL_IVAL(SEXP cell, int v);
+    void SET_BNDCELL_LVAL(SEXP cell, int v);
+    void INIT_BNDCELL(SEXP cell, int type);
     void SET_BNDCELL(SEXP cell, SEXP val);
 } // extern "C"
 
