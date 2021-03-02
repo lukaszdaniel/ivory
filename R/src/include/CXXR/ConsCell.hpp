@@ -95,7 +95,7 @@ union R_bndval_t
     do                                 \
     {                                  \
         if (BNDCELL_TAG(cell) == 0)    \
-            SETCAR(cell, R_NilValue);  \
+            SETCAR(cell, nullptr);  \
         SET_BNDCELL_TAG(cell, type);   \
         SET_MISSING(cell, 0);          \
     } while (0)

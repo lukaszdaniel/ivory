@@ -57,7 +57,7 @@ SEXP getfmts(SEXP format)
 	{                                                                                                      \
 		if (n >= MAXNARGS)                                                                                 \
 			error(n_("only %d argument is allowed", "only %d arguments are allowed", MAXNARGS), MAXNARGS); \
-		maxlen = size_t(n) < maxlen ? maxlen : (n) + 1;                                                          \
+		maxlen = size_t(n) < maxlen ? maxlen : (n) + 1;                                                    \
 		SET_STRING_ELT(res, (n), mkChar(s));                                                               \
 	}
 

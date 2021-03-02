@@ -72,7 +72,7 @@ namespace CXXR
             m_attrib->conductVisitor(v);
     }
 
-    RObject::RObject(SEXPTYPE stype) : m_type(stype), m_scalar(false), m_has_class(false), m_alt(false), /*m_gpbits(0),*/
+    RObject::RObject(SEXPTYPE stype) : GCNode(), m_type(stype), m_scalar(false), m_has_class(false), m_alt(false), /*m_gpbits(0),*/
                                        m_trace(false), m_spare(false), m_named(0), m_extra(0), m_s4_object(stype == S4SXP),
                                        m_active_binding(false), m_binding_locked(false), m_assignment_pending(false), m_attrib(nullptr)
     {
@@ -83,7 +83,7 @@ namespace CXXR
     }
 
     RObject::RObject(const RObject &pattern, bool deep)
-        : m_type(pattern.m_type), m_scalar(pattern.m_scalar), m_has_class(pattern.m_has_class), m_alt(pattern.m_alt), /*m_gpbits(pattern.m_gpbits),*/
+        : GCNode(), m_type(pattern.m_type), m_scalar(pattern.m_scalar), m_has_class(pattern.m_has_class), m_alt(pattern.m_alt), /*m_gpbits(pattern.m_gpbits),*/
           m_trace(false), m_spare(0), m_named(0), m_extra(0), m_s4_object(pattern.m_s4_object),
           m_active_binding(false),
           m_binding_locked(false), m_assignment_pending(false), m_attrib(clone(pattern.m_attrib, deep))
@@ -408,10 +408,6 @@ void SET_ATTRIB(SEXP x, SEXP v)
     x->setAttributes(pl);
 }
 
-/**
- * @deprecated This has no effect in CXXR.
- * Object status is determined in setAttributes().
- */
 void SET_OBJECT(SEXP x, int v)
 {
 }
@@ -439,31 +435,15 @@ void SETLEVELS(SEXP x, int v)
 void DUPLICATE_ATTRIB(SEXP to, SEXP from)
 {
     SET_ATTRIB(to, Rf_duplicate(ATTRIB(from)));
-    if (from && from->isS4Object())
-    {
-        if (to)
-            to->setS4Object(true);
-    }
-    else
-    {
-        if (to)
-            to->setS4Object(false);
-    };
+    if (to && from)
+        to->setS4Object(from->isS4Object());
 }
 
 void SHALLOW_DUPLICATE_ATTRIB(SEXP to, SEXP from)
 {
     SET_ATTRIB(to, Rf_shallow_duplicate(ATTRIB(from)));
-    if (from && from->isS4Object())
-    {
-        if (to)
-            to->setS4Object(true);
-    }
-    else
-    {
-        if (to)
-            to->setS4Object(false);
-    };
+    if (to && from)
+        to->setS4Object(from->isS4Object());
 }
 
 int ASSIGNMENT_PENDING(SEXP x)

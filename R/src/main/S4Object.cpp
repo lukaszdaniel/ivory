@@ -92,7 +92,7 @@ SEXP S4TAG(SEXP e)
 
 void SET_S4TAG(SEXP x, SEXP v)
 {
-    if (x == nullptr || x == R_NilValue)
+    if (!x)
         Rf_error(_("incorrect value"));
     S4Object *s4 = SEXP_downcast<S4Object *>(x);
     s4->setTag(v);

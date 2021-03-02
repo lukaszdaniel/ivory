@@ -874,7 +874,8 @@ extern "C"
     void SET_NAMED(SEXP x, int v);
 
     /**
-     * @deprecated Ought to be private.
+     * @deprecated This has no effect in CXXR.
+     * Object status is determined in setAttributes().
      */
     void SET_OBJECT(SEXP x, int v);
 

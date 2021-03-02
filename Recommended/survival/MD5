@@ -560,7 +560,7 @@ c7f1f21ec99ca29e053ebeac0cee5ffd *R/residuals.coxph.R
 e2bd8a81bc87c1243276f83f90400643 *R/frailty.gammacon.R
 e4094a8ed9adb15b429a070f9266bcf4 *R/model.matrix.coxph.R
 cd08e439b1d50a98a19225ccb0cb8a87 *R/survobrien.R
-b362277aa9b318d80a803bead73a9c48 *R/print.survdiff.R
+c698726d1e9a2b51da8960368d190e97 *R/print.survdiff.R
 b0e5f105c9b8b22465c93fc45786475a *R/survpenal.fit.R
 263fc73b9649616e33e7a9fb775005a9 *R/anova.survreg.R
 007b055389d8af1fbb8cffd80f30cd13 *R/coxexact.fit.R

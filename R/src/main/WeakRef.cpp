@@ -309,9 +309,10 @@ namespace CXXR
 	{
 		R_CHECK_THREAD;
 		/* Prevent this function from running again when already in
-       progress. Jumps can only occur inside the top level context
-       where they will be caught, so the flag is guaranteed to be
-       reset at the end. */
+		   progress. Jumps can only occur inside the top level context
+		   where they will be caught, so the flag is guaranteed to be
+		   reset at the end.
+		 */
 		static bool running = false;
 		if (running)
 			return false;
@@ -333,13 +334,14 @@ namespace CXXR
 			GCRoot<> oldRStack(R_RestartStack);
 			GCRoot<> oldRVal(R_ReturnedValue);
 			oldvis = R_Visible;
-			R_HandlerStack = R_NilValue;
-			R_RestartStack = R_NilValue;
+			R_HandlerStack = nullptr;
+			R_RestartStack = nullptr;
 
 			/* A top level context is established for the finalizer to
-	       insure that any errors that might occur do not spill
-	       into the call that triggered the collection. */
-			thiscontext.start(CTXT_TOPLEVEL, R_NilValue, R_GlobalEnv, Environment::base(), R_NilValue, R_NilValue);
+			   insure that any errors that might occur do not spill
+			   into the call that triggered the collection.
+			 */
+			thiscontext.start(CTXT_TOPLEVEL, nullptr, R_GlobalEnv, Environment::base(), nullptr, nullptr);
 			saveToplevelContext = R_ToplevelContext;
 			GCRoot<> topExp(R_CurrentExpr);
 			auto savestack = ProtectStack::size();

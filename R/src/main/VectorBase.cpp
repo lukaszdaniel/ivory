@@ -169,7 +169,7 @@ R_xlen_t XTRUELENGTH(SEXP x)
 
 int LENGTH_EX(SEXP x, const char *file, int line)
 {
-    if (!x || x == R_NilValue)
+    if (!x)
         return 0;
     R_xlen_t len = XLENGTH(x);
 #ifdef LONG_VECTOR_SUPPORT
@@ -388,5 +388,5 @@ Rboolean Rf_isArray(SEXP s)
 
 Rboolean Rf_isTs(SEXP s)
 {
-    return Rboolean(Rf_isVector(s) && Rf_getAttrib(s, R_TspSymbol) != R_NilValue);
+    return Rboolean(Rf_isVector(s) && Rf_getAttrib(s, R_TspSymbol));
 }

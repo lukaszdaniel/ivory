@@ -111,5 +111,5 @@ SEXP VECTOR_ELT(SEXP x, R_xlen_t i)
 
 Rboolean Rf_isNewList(SEXP s)
 {
-    return Rboolean(s == R_NilValue || TYPEOF(s) == VECSXP);
+    return Rboolean(!s || TYPEOF(s) == VECSXP);
 }

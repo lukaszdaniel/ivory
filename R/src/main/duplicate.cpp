@@ -59,7 +59,7 @@ using namespace CXXR;
 #define COPY_TRUELENGTH(to, from)                  \
 	do                                             \
 	{                                              \
-		if (!IS_GROWABLE(from))                    \
+		if (from && !IS_GROWABLE(from))            \
 			SET_TRUELENGTH(to, XTRUELENGTH(from)); \
 	} while (0)
 
@@ -97,15 +97,8 @@ using namespace CXXR;
 		if (__a__ != R_NilValue)                     \
 		{                                            \
 			SET_ATTRIB(to, duplicate1(__a__, deep)); \
-			SET_OBJECT(to, OBJECT(from));            \
-			if (IS_S4_OBJECT(from))                  \
-			{                                        \
-				SET_S4_OBJECT(to);                   \
-			}                                        \
-			else                                     \
-			{                                        \
-				UNSET_S4_OBJECT(to);                 \
-			};                                       \
+			if (to && from)                          \
+				to->setS4Object(from->isS4Object()); \
 		}                                            \
 	} while (0)
 
@@ -267,20 +260,19 @@ namespace
 	template <class T = PairList>
 	SEXP duplicate_list(SEXP s, bool deep)
 	{
-		SEXP sp, vp, val;
-		PROTECT(s);
+		GCRoot<> sr(s);
 
-		val = nullptr;
-		sp = s;
+		RObject *val = nullptr;
+		RObject *sp = s;
 		while (sp)
 		{
 			val = CXXR_cons<T>(nullptr, val);
 			sp = CDR(sp);
 		}
 
-		PROTECT(val);
+		GCRoot<> valr(val);
 		sp = s;
-		vp = val;
+		RObject *vp = val;
 		while (sp)
 		{
 			SETCAR(vp, duplicate_child(CAR(sp), deep));
@@ -289,7 +281,6 @@ namespace
 			sp = CDR(sp);
 			vp = CDR(vp);
 		}
-		UNPROTECT(2);
 		return val;
 	}
 } // namespace

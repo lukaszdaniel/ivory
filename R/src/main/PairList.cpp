@@ -216,7 +216,7 @@ SEXP Rf_elt(SEXP list, int i)
     SEXP result = list;
 
     if ((i < 0) || (i > Rf_length(list)))
-        return R_NilValue;
+        return nullptr;
 
     for (int j = 0; j < i; ++j)
         result = CDR(result);
@@ -226,8 +226,8 @@ SEXP Rf_elt(SEXP list, int i)
 
 SEXP Rf_lastElt(SEXP list)
 {
-    SEXP result = R_NilValue;
-    while (list != R_NilValue)
+    SEXP result = nullptr;
+    while (list)
     {
         result = list;
         list = CDR(list);
@@ -280,10 +280,10 @@ SEXP Rf_list6(SEXP s, SEXP t, SEXP u, SEXP v, SEXP w, SEXP x)
 SEXP Rf_listAppend(SEXP s, SEXP t)
 {
     SEXP r;
-    if (s == R_NilValue)
+    if (!s)
         return t;
     r = s;
-    while (CDR(r) != R_NilValue)
+    while (CDR(r))
         r = CDR(r);
     SETCDR(r, t);
     return s;
@@ -291,7 +291,7 @@ SEXP Rf_listAppend(SEXP s, SEXP t)
 
 Rboolean Rf_isVectorizable(SEXP s)
 {
-    if (s == R_NilValue)
+    if (!s)
         return TRUE;
     else if (Rf_isNewList(s))
     {
@@ -305,7 +305,7 @@ Rboolean Rf_isVectorizable(SEXP s)
     }
     else if (Rf_isList(s))
     {
-        for (; s != R_NilValue; s = CDR(s))
+        for (; s; s = CDR(s))
             if (!Rf_isVector(CAR(s)) || LENGTH(CAR(s)) > 1)
                 return FALSE;
         return TRUE;
@@ -316,7 +316,7 @@ Rboolean Rf_isVectorizable(SEXP s)
 
 Rboolean Rf_isList(SEXP s)
 {
-    return Rboolean(s == R_NilValue || TYPEOF(s) == LISTSXP);
+    return Rboolean(!s || TYPEOF(s) == LISTSXP);
 }
 
 Rboolean Rf_isPairList(SEXP s)

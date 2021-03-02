@@ -364,7 +364,7 @@ SEXP TAG(SEXP e)
 
 void SET_TAG(SEXP x, SEXP v)
 {
-    if (x == nullptr || x == R_NilValue)
+    if (!x)
         Rf_error(_("incorrect value"));
     if (TYPEOF(x) == S4SXP)
     {
@@ -380,7 +380,7 @@ void SET_TAG(SEXP x, SEXP v)
 
 SEXP SETCAR(SEXP x, SEXP y)
 {
-    if (x == nullptr || x == R_NilValue)
+    if (!x)
         Rf_error(_("incorrect value"));
 
     ConsCell *cc = SEXP_downcast<ConsCell *>(x, false);
@@ -390,7 +390,7 @@ SEXP SETCAR(SEXP x, SEXP y)
 
 SEXP SETCDR(SEXP x, SEXP y)
 {
-    if (x == nullptr || x == R_NilValue)
+    if (!x)
         Rf_error(_("incorrect value"));
     ConsCell::checkST(x);
     ConsCell *cc = SEXP_downcast<ConsCell *>(x, false);
@@ -402,8 +402,8 @@ SEXP SETCDR(SEXP x, SEXP y)
 SEXP SETCADR(SEXP x, SEXP y)
 {
     SEXP cell;
-    if (x == nullptr || x == R_NilValue ||
-        CDR(x) == nullptr || CDR(x) == R_NilValue)
+    if (!x ||
+        CDR(x) == nullptr)
         Rf_error(_("incorrect value"));
     cell = CDR(x);
 
@@ -415,9 +415,9 @@ SEXP SETCADR(SEXP x, SEXP y)
 SEXP SETCADDR(SEXP x, SEXP y)
 {
     SEXP cell;
-    if (x == nullptr || x == R_NilValue ||
-        CDR(x) == nullptr || CDR(x) == R_NilValue ||
-        CDDR(x) == nullptr || CDDR(x) == R_NilValue)
+    if (!x ||
+        CDR(x) == nullptr ||
+        CDDR(x) == nullptr)
         Rf_error(_("incorrect value"));
     cell = CDDR(x);
 
@@ -429,10 +429,10 @@ SEXP SETCADDR(SEXP x, SEXP y)
 SEXP SETCADDDR(SEXP x, SEXP y)
 {
     SEXP cell;
-    if (x == nullptr || x == R_NilValue ||
-        CDR(x) == nullptr || CDR(x) == R_NilValue ||
-        CDDR(x) == nullptr || CDDR(x) == R_NilValue ||
-        CDDDR(x) == nullptr || CDDDR(x) == R_NilValue)
+    if (!x ||
+        CDR(x) == nullptr ||
+        CDDR(x) == nullptr ||
+        CDDDR(x) == nullptr)
         Rf_error(_("incorrect value"));
     cell = CDDDR(x);
 
@@ -444,11 +444,11 @@ SEXP SETCADDDR(SEXP x, SEXP y)
 SEXP SETCAD4R(SEXP x, SEXP y)
 {
     SEXP cell;
-    if (x == nullptr || x == R_NilValue ||
-        CDR(x) == nullptr || CDR(x) == R_NilValue ||
-        CDDR(x) == nullptr || CDDR(x) == R_NilValue ||
-        CDDDR(x) == nullptr || CDDDR(x) == R_NilValue ||
-        CD4R(x) == nullptr || CD4R(x) == R_NilValue)
+    if (!x ||
+        CDR(x) == nullptr ||
+        CDDR(x) == nullptr ||
+        CDDDR(x) == nullptr ||
+        CD4R(x) == nullptr)
         Rf_error(_("incorrect value"));
     cell = CD4R(x);
 

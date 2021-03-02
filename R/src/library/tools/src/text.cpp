@@ -146,8 +146,7 @@ SEXP delim_match(SEXP x, SEXP delims)
     return(ans);
 }
 
-SEXP
-check_nonASCII(SEXP text, SEXP ignore_quotes)
+SEXP check_nonASCII(SEXP text, SEXP ignore_quotes)
 {
     /* Check if all the lines in 'text' are ASCII, after removing
        comments and ignoring the contents of quotes (unless ignore_quotes)
