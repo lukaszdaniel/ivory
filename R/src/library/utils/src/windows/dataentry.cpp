@@ -1680,7 +1680,7 @@ static void deresize(console c, rect r)
     if (((DE->p->w  == r.width) &&
 	 (DE->p->h == r.height)) ||
 	(r.width == 0) || (r.height == 0) ) /* minimize */
-	return;;
+	return;
     DE->p->w = r.width;
     DE->p->h = r.height;
 }

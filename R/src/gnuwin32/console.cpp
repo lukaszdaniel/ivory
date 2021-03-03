@@ -647,13 +647,13 @@ void drawconsole(control c, rect r) /* r is unused here */
     int i, ll, wd, maxwd = 0;
 
     ll = min(NUMLINES, ROWS);
-    if(!BM) return;;     /* This is a workaround for PR#1711.
+    if(!BM) return;     /* This is a workaround for PR#1711.
 			    BM should never be null here */
     if (p->kind == PAGER)
 	gfillrect(BM, p->guiColors[pagerbg], getrect(BM));
     else
 	gfillrect(BM, p->guiColors[consolebg], getrect(BM));
-    if(!ll) return;;
+    if(!ll) return;
     for (i = 0; i < ll; i++) {
 	wd = WRITELINE(NEWFV + i, i);
 	if(wd > maxwd) maxwd = wd;
@@ -675,16 +675,16 @@ void setfirstvisible(control c, int fv)
 
     int  ds, rw, ww;
 
-    if (NUMLINES <= ROWS) return;;
+    if (NUMLINES <= ROWS) return;
     if (fv < 0) fv = 0;
     else if (fv > NUMLINES - ROWS) fv = NUMLINES - ROWS;
     if (fv < 0) fv = 0;
     ds = fv - FV;
-    if ((ds == 0) && !p->needredraw) return;;
+    if ((ds == 0) && !p->needredraw) return;
     if (abs(ds) > 1) {
 	NEWFV = fv;
 	REDRAW;
-	return;;
+	return;
     }
     if (p->needredraw) {
 	ww = min(NUMLINES, ROWS) - 1;
@@ -692,7 +692,7 @@ void setfirstvisible(control c, int fv)
 	writeline(c, p, rw, ww);
 	if (ds == 0) {
 	    RSHOW(RLINE(ww));
-	    return;;
+	    return;
 	}
     }
     if (ds == 1) {
@@ -751,7 +751,7 @@ void console_mousedrag(control c, int button, point pt)
 	r=((pt.y > 32000) ? 0 : ((pt.y > HEIGHT) ? HEIGHT : pt.y))/FH;
 	s=((pt.x > 32000) ? 0 : ((pt.x > WIDTH) ? WIDTH : pt.x))/FW;
 	if ((r < 0) || (r > ROWS) || (s < 0) || (s > COLS))
-	    return;;
+	    return;
 	p->my1 = FV + r;
 	p->mx1 = FC + s;
 	p->needredraw = 1;
@@ -880,7 +880,7 @@ static void storekey(control c, int k)
     }
     if (p->numkeys >= NKEYS) {
 	gabeep();
-	return;;
+	return;
     }
     p->kbuf[(p->firstkey + p->numkeys) % NKEYS] = k;
     p->numkeys++;
@@ -1191,7 +1191,7 @@ void consolepastecmds(control c)
 	p->needredraw = 1;
 	REDRAW;
      }
-    if (p->kind == PAGER) return;;
+    if (p->kind == PAGER) return;
     if ( OpenClipboard(nullptr) &&
 	 (hglb = GetClipboardData(CF_UNICODETEXT)) &&
 	 (pc = (wchar_t *) GlobalLock(hglb)))
@@ -1305,7 +1305,7 @@ static void consoletoclipboardHelper(control c, int x0, int y0, int x1, int y1)
     if (!OpenClipboard(nullptr) || !EmptyClipboard()) {
 	R_ShowMessage(G_("Unable to open the clipboard"));
 	GlobalFree(hglb);
-	return;;
+	return;
     }
     SetClipboardData(CF_UNICODETEXT, hglb);
     CloseClipboard();
@@ -1916,7 +1916,7 @@ void consoleresize(console c, rect r)
     if (((WIDTH  == r.width) &&
 	 (HEIGHT == r.height)) ||
 	(r.width == 0) || (r.height == 0) ) /* minimize */
-	return;;
+	return;
 /*
  *  set first visible to keep the bottom line on a console,
  *  the middle line on a pager
@@ -1939,7 +1939,7 @@ void consoleresize(console c, rect r)
        R_ShowMessage(G_("Insufficient memory. Please close the console"));
        return ;
     }
-    if(!p->lbuf) return;;    /* don't implement resize if no content
+    if(!p->lbuf) return;    /* don't implement resize if no content
 				   yet in pager */
     if (CURROW >= 0) {
 	if (NUMLINES > ROWS) {
@@ -2034,7 +2034,7 @@ void consoleprint(console c)
     char msg[LF_FACESIZE + 128], title[60];
     wchar_t buf[1024];
     cursor cur;
-    if (!(lpr = newprinter(0.0, 0.0, ""))) return;;
+    if (!(lpr = newprinter(0.0, 0.0, ""))) return;
     show(c);
 /*
  * If possible, we avoid to use FixedFont for printer since it hasn't the

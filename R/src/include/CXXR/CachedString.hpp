@@ -233,8 +233,13 @@ extern "C"
      * due course.
      */
     const char *Rf_translateCharUTF8(SEXP x);
+    const char *Rf_translateChar(SEXP);
+    const char *Rf_translateChar0(SEXP);
     cetype_t Rf_getCharCE(SEXP x);
     const char *Rf_reEnc(const char *x, cetype_t ce_in, cetype_t ce_out, int subst);
+    SEXP Rf_installChar(SEXP x);
+    SEXP Rf_installNoTrChar(SEXP charSXP);
+    SEXP Rf_installTrChar(SEXP x);
 } // extern "C"
 
 #endif /* CACHEDSTRING_HPP */

@@ -1494,7 +1494,7 @@ void XWXd0(double *XWX,double *X,double *w,int *k,int *ks, int *m,int *p, int *n
        Cost[kk] = m[r]*m[c]*(double) pd[c];
        x = m[r]*m[c]*(double) pd[r]; if (x<Cost[kk]) Cost[kk] = x;
     } else { /* direct accumulation */
-      Cost[kk] = *n * pd[c];;
+      Cost[kk] = *n * pd[c];
       x = *n * pd[r]; if (x < Cost[kk]) Cost[kk] = x;
     }
   }
@@ -1755,7 +1755,7 @@ void XWXd1(double *XWX,double *X,double *w,int *k,int *ks, int *m,int *p, int *n
          Cost[kk] = m[r]*m[c]*(double) pd[c];
          x = m[r]*m[c]*(double) pd[r]; if (x<Cost[kk]) Cost[kk] = x;
       } else { /* direct accumulation */
-        Cost[kk] = *n * pd[c];;
+        Cost[kk] = *n * pd[c];
         x = *n * pd[r]; if (x < Cost[kk]) Cost[kk] = x;
       }
     }  

@@ -320,9 +320,7 @@ extern "C"
 
   R_xlen_t STDVEC_LENGTH(SEXP x);
   R_xlen_t STDVEC_TRUELENGTH(SEXP x);
-  int(LENGTH)(SEXP x);
   R_xlen_t(XLENGTH)(SEXP x);
-  R_xlen_t(TRUELENGTH)(SEXP x);
   int(IS_LONG_VEC)(SEXP x);
 
   /* temporary, to ease transition away from remapping */
@@ -332,7 +330,6 @@ extern "C"
 #if defined(R_NO_REMAP) && defined(COMPILING_IVORY) && defined(__cplusplus)
 const auto allocVector = Rf_allocVector;
 const auto allocVector3 = Rf_allocVector3;
-const auto ScalarLogical = Rf_ScalarLogical;
 const auto mkNamed = Rf_mkNamed;
 const auto mkString = Rf_mkString;
 const auto isVector = Rf_isVector;

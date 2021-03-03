@@ -296,7 +296,6 @@ namespace CXXR
         void visitChildren(const_visitor *v) const override;
 
     private:
-        static const unsigned int s_DDBIT = 0;
         static GCRoot<Symbol> s_missing_arg;
         static GCRoot<Symbol> s_restart_token;
         static GCRoot<Symbol> s_unbound_value;
@@ -326,6 +325,7 @@ namespace CXXR
         static void initialize();
         friend void ::R::InitNames();
     };
+    SEXP install_(const std::string &name);
 } // namespace CXXR
 
 extern "C"
@@ -427,6 +427,8 @@ extern "C"
     Rboolean NO_SPECIAL_SYMBOLS(SEXP b);
 
     void SET_DDVAL(SEXP x, int v);
+    SEXP Rf_installDDVAL(int i);
+    SEXP Rf_install(const char *name);
 } // extern "C"
 
 namespace R

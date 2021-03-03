@@ -748,6 +748,10 @@ extern "C"
      * @return The ::SEXPTYPE's name within R.
      */
     const char *Rf_type2char(SEXPTYPE st);
+    SEXP Rf_type2rstr(SEXPTYPE);
+    SEXP Rf_type2str(SEXPTYPE);
+    SEXP Rf_type2str_nowarn(SEXPTYPE);
+    SEXPTYPE Rf_str2type(const char *const s);
 
     /** @brief Copy attributes, with some exceptions.
      *
@@ -905,10 +909,6 @@ extern "C"
     R_xlen_t Rf_xlength(SEXP s);
     SEXP R_FixupRHS(SEXP x, SEXP y);
     Rboolean Rf_isFrame(SEXP s);
-
-    /* As from R 2.4.0 we check that the value is allowed. */
-    SEXP Rf_ScalarLogical(int x);
-    /* from util.cpp */
 
     /**
      * @brief Check to see if the arrays "x" and "y" have the identical extents

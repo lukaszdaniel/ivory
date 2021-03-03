@@ -265,13 +265,9 @@ extern "C"
 
     void *EXTPTR_PTR(SEXP x);
     SEXP R_MakeExternalPtr(void *p, SEXP tag, SEXP prot);
-    void *R_ExternalPtrAddr(SEXP s);
-    SEXP R_ExternalPtrTag(SEXP s);
-    SEXP R_ExternalPtrProtected(SEXP s);
-    void R_ClearExternalPtr(SEXP s);
-    void R_SetExternalPtrAddr(SEXP s, void *p);
-    void R_SetExternalPtrTag(SEXP s, SEXP tag);
-    void R_SetExternalPtrProtected(SEXP s, SEXP p);
+    typedef void *(*DL_FUNC)();
+    SEXP R_MakeExternalPtrFn(DL_FUNC p, SEXP tag, SEXP prot);
+    DL_FUNC R_ExternalPtrAddrFn(SEXP s);
 } // extern "C"
 
 #endif // EXTERNALPOINTER_HPP

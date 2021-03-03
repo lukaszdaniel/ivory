@@ -43,6 +43,7 @@
 #include <CXXR/JMPException.hpp>
 #include <CXXR/Expression.hpp>
 #include <CXXR/IntVector.hpp>
+#include <CXXR/LogicalVector.hpp>
 #include <CXXR/String.hpp>
 #include <Localization.h>
 #include <RContext.h>

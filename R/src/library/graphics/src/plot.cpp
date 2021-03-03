@@ -515,7 +515,7 @@ SEXP C_plot_window(SEXP args)
     }
     args = CDR(args);
 
-    double asp = (logscale) ? NA_REAL : asReal(CAR(args));;
+    double asp = (logscale) ? NA_REAL : asReal(CAR(args));
     args = CDR(args);
 
     /* This reads [xy]axs and lab, used in GScale */

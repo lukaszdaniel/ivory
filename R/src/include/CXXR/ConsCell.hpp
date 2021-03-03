@@ -440,6 +440,7 @@ extern "C"
     void SET_BNDCELL_LVAL(SEXP cell, int v);
     void INIT_BNDCELL(SEXP cell, int type);
     void SET_BNDCELL(SEXP cell, SEXP val);
+    SEXP CONS_NR(SEXP a, SEXP b);
 } // extern "C"
 
 #endif /* CONSCELL_HPP */

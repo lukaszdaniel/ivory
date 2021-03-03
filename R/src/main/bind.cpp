@@ -30,6 +30,7 @@
 #include <CXXR/BuiltInFunction.hpp>
 #include <CXXR/RealVector.hpp>
 #include <CXXR/IntVector.hpp>
+#include <CXXR/LogicalVector.hpp>
 #include <CXXR/RawVector.hpp>
 #include <CXXR/ComplexVector.hpp>
 #include <CXXR/PairList.hpp>

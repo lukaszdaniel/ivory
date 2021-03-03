@@ -460,6 +460,11 @@ extern "C"
     Rboolean Rf_isVectorizable(SEXP s);
     Rboolean Rf_isList(SEXP s);
     Rboolean Rf_isPairList(SEXP s);
+    SEXP Rf_allocFormalsList2(SEXP sym1, SEXP sym2);
+    SEXP Rf_allocFormalsList3(SEXP sym1, SEXP sym2, SEXP sym3);
+    SEXP Rf_allocFormalsList4(SEXP sym1, SEXP sym2, SEXP sym3, SEXP sym4);
+    SEXP Rf_allocFormalsList5(SEXP sym1, SEXP sym2, SEXP sym3, SEXP sym4, SEXP sym5);
+    SEXP Rf_allocFormalsList6(SEXP sym1, SEXP sym2, SEXP sym3, SEXP sym4, SEXP sym5, SEXP sym6);
 } // extern "C"
 
 #if defined(R_NO_REMAP) && defined(COMPILING_IVORY) && defined(__cplusplus)

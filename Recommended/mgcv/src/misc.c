@@ -536,7 +536,7 @@ void tweedious2(double *w,double *w1,double *w2,double *w1p,double *w2p,
    NOTE: still some redundancy for readability 
 
 */
-{ int k,j_max,i,j,ok,incr,jal_lim=50000000,series_too_long=0,failed=0;;
+{ int k,j_max,i,j,ok,incr,jal_lim=50000000,series_too_long=0,failed=0;
   double x,x1,x2,xx,alpha,alogy,lgammaj1,
     wbj,wb1j,wp1jb,wp2jb,wppjb,
     wp1j,wp2j,wppj,dpth1,dpth2,

@@ -1,6 +1,6 @@
 /*
  *  R : A Computer Language for Statistical Data Analysis
- *  Copyright (C) 2012-2015   The R Core Team.
+ *  Copyright (C) 2012-2021   The R Core Team.
  *
  *  This program is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -22,13 +22,18 @@
 #endif
 
 #include <cstring>
+#include <CXXR/GCRoot.hpp>
 #include <CXXR/RObject.hpp>
+#include <CXXR/String.hpp>
 #include <CXXR/StringVector.hpp>
 #include <R.h>
 #include <Rinternals.h>
 
 #include "utils.h"
 #include "localization.h"
+
+using namespace R;
+using namespace CXXR;
 
 /* from src/main/eval.cpp */
 SEXP do_Rprof(SEXP args);
@@ -57,19 +62,39 @@ SEXP unzip(SEXP args)
 #include <wctype.h>
 #include "rlocale.h" // may remap iswctype, wctype
 
+/* Declarations from Defn.h */
+namespace R
+{
+    const wchar_t *wtransChar(SEXP x);
+}
+
 #if defined(USE_RI18N_FNS) || (defined(HAVE_ISWCTYPE) && defined(HAVE_WCTYPE))
 SEXP charClass(SEXP x, SEXP scl)
 {
-    if (!isInteger(x))
-	error(_("argument 'x' must be integer"));
-    R_xlen_t n = XLENGTH(x);
-    int *px = INTEGER(x);
+    R_xlen_t n;
+    GCRoot<> xx(x);
+    const int *px;
+    if (isString(x)) {
+	if (XLENGTH(x) != 1)
+	    error(_("argument 'x' must be a length-1 character vector"));
+	if (IS_ASCII(x) || IS_UTF8(x))
+	    error(_("argument 'x' must be UTF-8 encoded (including ASCII)"));
+	SEXP sx = STRING_ELT(x, 0);
+	const wchar_t *wx = R::wtransChar(sx);
+	n = wcslen(wx);
+	px = (const int*) wx;
+    } else {
+	x = coerceVector(x, INTSXP);
+	n = XLENGTH(x);
+	px = INTEGER(x);
+    }
+
     if (!isString(scl))
 	error(_("'%s' argument must be a character string"), "class");
     const char *cl = CHAR(STRING_ELT(scl, 0));
     wctype_t wcl = wctype(cl);
     if(wcl == 0) error(_("character class \"%s\" is invalid"), cl);
-    
+
     SEXP ans = allocVector(LGLSXP, n);
     int *pans = LOGICAL(ans);
     for (R_xlen_t i = 0; i < n; i++) {
@@ -143,4 +168,3 @@ SEXP nsl(SEXP hostname)
     return R_NilValue;
 }
 #endif
-

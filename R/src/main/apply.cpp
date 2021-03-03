@@ -28,6 +28,7 @@
 #include <CXXR/VectorBase.hpp>
 #include <CXXR/FunctionBase.hpp>
 #include <CXXR/IntVector.hpp>
+#include <CXXR/LogicalVector.hpp>
 #include <CXXR/StringVector.hpp>
 #include <Localization.h>
 #include <Defn.h>

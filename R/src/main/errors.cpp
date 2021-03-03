@@ -38,6 +38,7 @@
 #include <CXXR/Expression.hpp>
 #include <CXXR/StringVector.hpp>
 #include <CXXR/IntVector.hpp>
+#include <CXXR/LogicalVector.hpp>
 #include <Localization.h>
 #include <RContext.h>
 #include <Defn.h>

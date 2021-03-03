@@ -29,7 +29,7 @@
 
 #define R_NO_REMAP
 
-#include <CXXR/VectorBase.hpp>
+#include <CXXR/LogicalVector.hpp>
 #include <CXXR/StringVector.hpp>
 #include <CXXR/PairList.hpp>
 #include <cstdlib> /* for setenv or putenv */

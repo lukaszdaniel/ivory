@@ -28,6 +28,7 @@
 #include <CXXR/String.hpp>
 #include <CXXR/StringVector.hpp>
 #include <CXXR/PairList.hpp>
+#include <CXXR/LogicalVector.hpp>
 #include <cstdlib> /* for putenv */
 #include <Localization.h>
 #include <RContext.h>
@@ -1243,7 +1244,6 @@ static void *latin1_wobj = nullptr, *utf8_wobj=nullptr;
 
 /* This may return a R_alloc-ed result, so the caller has to manage the
    R_alloc stack */
-HIDDEN /* but not hidden on Windows, where it was used in tcltk.cpp */
 const wchar_t *R::wtransChar(SEXP x)
 {
     void * obj;

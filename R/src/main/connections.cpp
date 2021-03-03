@@ -78,6 +78,7 @@
 
 #include <CXXR/BuiltInFunction.hpp>
 #include <CXXR/IntVector.hpp>
+#include <CXXR/LogicalVector.hpp>
 #include <CXXR/RealVector.hpp>
 #include <CXXR/StringVector.hpp>
 #include <CXXR/PairList.hpp>

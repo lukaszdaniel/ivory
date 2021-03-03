@@ -97,7 +97,7 @@ static void FindCutPoints(double low, double high,
 	} else if (z1 == R_NegInf) {
 	    x[*npt] = x2;
 	    y[*npt] = y1;
-	    z[*npt] = z2;;
+	    z[*npt] = z2;
 	    ++*npt;
 	} else { /* and z2 in range */
 	    c = (z1 - low) / (z1 - z2);
