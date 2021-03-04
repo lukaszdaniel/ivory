@@ -218,11 +218,11 @@ void SET_PRINTNAME(SEXP x, SEXP v)
 
 void SET_SYMVALUE(SEXP x, SEXP v)
 {
-    if (SYMVALUE(x) == v)
-        return;
     if (!x)
         return;
     Symbol::checkST(x);
+    if (SEXP_downcast<Symbol *>(x)->value() == v)
+        return;
     Symbol *sym = SEXP_downcast<Symbol *>(x);
     sym->setValue(v);
 }
@@ -302,7 +302,7 @@ Rboolean Rf_isUserBinop(SEXP s)
 {
     if (TYPEOF(s) == SYMSXP)
     {
-        const char *str = R_CHAR(PRINTNAME(s));
+        const char *str = SEXP_downcast<Symbol *>(s)->name()->c_str();
         if (strlen(str) >= 2 && str[0] == '%' && str[strlen(str) - 1] == '%')
             return TRUE;
     }

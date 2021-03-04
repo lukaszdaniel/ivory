@@ -24,6 +24,7 @@
 
 #define R_NO_REMAP
 
+#include <CXXR/GCRoot.hpp>
 #include <CXXR/VectorBase.hpp>
 #include <CXXR/String.hpp>
 #include <Localization.h>
@@ -32,6 +33,7 @@
 #include <Rversion.h>
 
 using namespace R;
+using namespace CXXR;
 
 HIDDEN void R::PrintGreeting(void)
 {
@@ -54,12 +56,11 @@ Type 'q()' to quit R.\n\n"));
 
 HIDDEN SEXP do_version(SEXP call, SEXP op, SEXP args, SEXP env)
 {
-    SEXP value, names;
     char buf[128];
 
     checkArity(op, args);
-    PROTECT(value = allocVector(VECSXP,15));
-    PROTECT(names = allocVector(STRSXP,15));
+    GCRoot<> value(allocVector(VECSXP,15));
+    GCRoot<> names(allocVector(STRSXP,15));
 
     SET_STRING_ELT(names, 0, mkChar("platform"));
     SET_VECTOR_ELT(value, 0, mkString(R_PLATFORM));
@@ -102,7 +103,7 @@ HIDDEN SEXP do_version(SEXP call, SEXP op, SEXP args, SEXP env)
     SET_VECTOR_ELT(value, 14, mkString(R_NICK));
 
     setAttrib(value, R_NamesSymbol, names);
-    UNPROTECT(2);
+
     return value;
 }
 
@@ -178,5 +179,5 @@ HIDDEN void R::PrintVersion_part_1(char *s, size_t len)
 
 HIDDEN SEXP do_internalsID(SEXP call, SEXP op, SEXP args, SEXP env)
 {
-    return mkString(R_INTERNALS_UUID);
+    return Rf_mkString(R_INTERNALS_UUID);
 }

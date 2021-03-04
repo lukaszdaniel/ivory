@@ -174,12 +174,12 @@ SEXP Rf_asChar(SEXP x)
 
 Rboolean Rf_isUnordered(SEXP s)
 {
-	return (Rboolean)(TYPEOF(s) == INTSXP && inherits(s, "factor") && !inherits(s, "ordered"));
+	return Rboolean(TYPEOF(s) == INTSXP && inherits(s, "factor") && !inherits(s, "ordered"));
 }
 
 Rboolean Rf_isOrdered(SEXP s)
 {
-	return (Rboolean)(TYPEOF(s) == INTSXP && inherits(s, "factor") && inherits(s, "ordered"));
+	return Rboolean(TYPEOF(s) == INTSXP && inherits(s, "factor") && inherits(s, "ordered"));
 }
 
 namespace
@@ -296,10 +296,8 @@ SEXP Rf_type2str_nowarn(const SEXPTYPE t) /* returns a CHARSXP */
 SEXP Rf_type2str(const SEXPTYPE t) /* returns a CHARSXP */
 {
 	SEXP s = type2str_nowarn(t);
-	if (s != R_NilValue)
-	{
+	if (s)
 		return s;
-	}
 	warning(_("type %d is unimplemented in '%s' function"), t, "type2str()");
 	char buf[50];
 	snprintf(buf, 50, _("unknown type #%d"), t);
@@ -432,31 +430,25 @@ Rboolean Rf_isBlankString(const char *s)
 
 Rboolean Rf_StringBlank(SEXP x)
 {
-	if (x == R_NilValue)
+	if (!x)
 		return TRUE;
-	return (Rboolean)(CHAR(x)[0] == '\0');
+	return Rboolean(CHAR(x)[0] == '\0');
 }
 
 /* Function to test whether a string is a true value */
 
-Rboolean Rf_StringTrue(const char* name)
+Rboolean Rf_StringTrue(const char *name)
 {
-    string str(name);
-    vector<string> truenames { "T", "True", "TRUE", "true" };
-    for (const string& word : truenames)
-	if (str == word)
-	    return TRUE;
-    return FALSE;
+	string str(name);
+	vector<string> truenames{"T", "True", "TRUE", "true"};
+	return Rboolean(any_of(truenames.begin(), truenames.end(), [&str](const string &s) { return s == str; }));
 }
 
-Rboolean Rf_StringFalse(const char* name)
+Rboolean Rf_StringFalse(const char *name)
 {
-    vector<string> falsenames { "F", "False", "FALSE", "false" };
-    string str(name);
-    for (const string& word : falsenames)
-	if (str == word)
-	    return TRUE;
-    return FALSE;
+	vector<string> falsenames{"F", "False", "FALSE", "false"};
+	string str(name);
+	return Rboolean(any_of(falsenames.begin(), falsenames.end(), [&str](const string &s) { return s == str; }));
 }
 
 /* used in bind.cpp and options.cpp */
@@ -615,17 +607,17 @@ Rboolean Rf_isFree(SEXP val)
 
 int dtype(SEXP q)
 {
-	return ((int)TYPEOF(q));
+	return int(TYPEOF(q));
 }
 
 SEXP dcar(SEXP l)
 {
-	return (CAR(l));
+	return CAR(l);
 }
 
 SEXP dcdr(SEXP l)
 {
-	return (CDR(l));
+	return CDR(l);
 }
 
 static void isort_with_index(int *x, int *indx, int n)

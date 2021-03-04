@@ -53,43 +53,43 @@ namespace CXXR
         const auto &vmaxgetptr = vmaxget;
         const auto &vmaxsetptr = vmaxset;
     } // namespace ForceNonInline
-} // namespace CXXR
 
-RAllocStack::Stack *RAllocStack::s_stack = nullptr;
-RAllocStack::Scope *RAllocStack::s_innermost_scope = 0;
+    RAllocStack::Stack *RAllocStack::s_stack = nullptr;
+    RAllocStack::Scope *RAllocStack::s_innermost_scope = 0;
 
-void *RAllocStack::allocate(size_t sz)
-{
-    Pair pr(sz, MemoryBank::allocate(sz));
-    s_stack->push(pr);
-    return s_stack->top().second;
-}
-
-void RAllocStack::initialize()
-{
-    s_stack = new Stack();
-}
-
-void RAllocStack::restoreSize(size_t new_size)
-{
-    if (new_size > s_stack->size())
-        throw out_of_range("RAllocStack::restoreSize: requested size greater than current size.");
-#ifndef NDEBUG
-    if (s_innermost_scope && new_size < s_innermost_scope->startSize())
-        throw out_of_range("RAllocStack::restoreSize: requested size too small for current scope.");
-#endif
-    trim(new_size);
-}
-
-void RAllocStack::trim(size_t new_size)
-{
-    while (s_stack->size() > new_size)
+    void *RAllocStack::allocate(size_t sz)
     {
-        Pair &top = s_stack->top();
-        MemoryBank::deallocate(top.second, top.first);
-        s_stack->pop();
+        Pair pr(sz, MemoryBank::allocate(sz));
+        s_stack->push(pr);
+        return s_stack->top().second;
     }
-}
+
+    void RAllocStack::initialize()
+    {
+        s_stack = new Stack();
+    }
+
+    void RAllocStack::restoreSize(size_t new_size)
+    {
+        if (new_size > s_stack->size())
+            throw out_of_range("RAllocStack::restoreSize: requested size greater than current size.");
+#ifndef NDEBUG
+        if (s_innermost_scope && new_size < s_innermost_scope->startSize())
+            throw out_of_range("RAllocStack::restoreSize: requested size too small for current scope.");
+#endif
+        trim(new_size);
+    }
+
+    void RAllocStack::trim(size_t new_size)
+    {
+        while (s_stack->size() > new_size)
+        {
+            Pair &top = s_stack->top();
+            MemoryBank::deallocate(top.second, top.first);
+            s_stack->pop();
+        }
+    }
+} // namespace CXXR
 
 // ***** C interface *****
 

@@ -43,66 +43,66 @@ namespace CXXR
     {
         const auto &mkCharptr = Rf_mkChar;
     } // namespace ForceNonInline
+
+    hash<std::string> CachedString::Hasher::s_string_hasher;
+
+    CachedString::map *CachedString::getCache()
+    {
+        static map *cache = new map();
+        return cache;
+    }
+
+    bool isASCII(const std::string &str)
+    {
+        using namespace boost::lambda;
+        // Beware of the iterator dereferencing to a *signed* char, hence
+        // the bitwise test:
+        std::string::const_iterator it = std::find_if(str.begin(), str.end(), _1 & 0x80);
+        return it == str.end();
+    }
+
+    CachedString *CachedString::obtain(const std::string &str, cetype_t encoding)
+    {
+        // This will be checked again when we actually construct the
+        // CachedString, but we precheck now so that we don't create an
+        // invalid cache key:
+        switch (encoding)
+        {
+        case CE_NATIVE:
+        case CE_UTF8:
+        case CE_LATIN1:
+        case CE_BYTES:
+            break;
+        default:
+            Rf_error(_("unknown encoding: %d"), encoding);
+        }
+
+        bool ascii = CXXR::isASCII(str);
+        if (ascii)
+            encoding = CE_NATIVE;
+
+        pair<map::iterator, bool> pr = getCache()->insert(map::value_type(key(str, encoding), nullptr));
+        map::iterator it = pr.first;
+        if (pr.second)
+        {
+            try
+            {
+                map::value_type &val = *it;
+                val.second = new CachedString(str, encoding, ascii);
+                val.second->expose();
+                val.second->m_key_val_pr = &*it;
+            }
+            catch (...)
+            {
+                getCache()->erase(it);
+                throw;
+            }
+        }
+        return (*it).second;
+    }
+
+    const char *CachedString::typeName() const
+    {
+        return CachedString::staticTypeName();
+    }
 } // namespace CXXR
-
-hash<std::string> CachedString::Hasher::s_string_hasher;
-
-CachedString::map *CachedString::getCache()
-{
-    static map *cache = new map();
-    return cache;
-}
-
-bool CXXR::isASCII(const std::string &str)
-{
-    using namespace boost::lambda;
-    // Beware of the iterator dereferencing to a *signed* char, hence
-    // the bitwise test:
-    std::string::const_iterator it = std::find_if(str.begin(), str.end(), _1 & 0x80);
-    return it == str.end();
-}
-
-CachedString *CachedString::obtain(const std::string &str, cetype_t encoding)
-{
-    // This will be checked again when we actually construct the
-    // CachedString, but we precheck now so that we don't create an
-    // invalid cache key:
-    switch (encoding)
-    {
-    case CE_NATIVE:
-    case CE_UTF8:
-    case CE_LATIN1:
-    case CE_BYTES:
-        break;
-    default:
-        Rf_error(_("unknown encoding: %d"), encoding);
-    }
-
-    bool ascii = CXXR::isASCII(str);
-    if (ascii)
-        encoding = CE_NATIVE;
-
-    pair<map::iterator, bool> pr = getCache()->insert(map::value_type(key(str, encoding), nullptr));
-    map::iterator it = pr.first;
-    if (pr.second)
-    {
-        try
-        {
-            map::value_type &val = *it;
-            val.second = new CachedString(str, encoding, ascii);
-            val.second->expose();
-            val.second->m_key_val_pr = &*it;
-        }
-        catch (...)
-        {
-            getCache()->erase(it);
-            throw;
-        }
-    }
-    return (*it).second;
-}
-
-const char *CachedString::typeName() const
-{
-    return CachedString::staticTypeName();
-}

@@ -43,35 +43,35 @@ namespace CXXR
         const auto &SET_LATIN1ptr = SET_LATIN1;
         const auto &SET_UTF8ptr = SET_UTF8;
     } // namespace ForceNonInline
+
+    UncachedString::UncachedString(const std::string &str, cetype_t encoding)
+        : String(str.size(), encoding), m_databytes(str.size() + 1),
+          m_data(m_short_string)
+    {
+        size_t sz = str.size();
+        allocData(sz);
+        memcpy(m_data, str.data(), sz);
+    }
+
+    UncachedString *UncachedString::obtain(const std::string &str, cetype_t encoding)
+    {
+        UncachedString *ans = new UncachedString(str, encoding);
+        ans->expose();
+        return ans;
+    }
+
+    void UncachedString::allocData(size_t sz)
+    {
+        GCRoot<> thisroot(this);
+        if (sz > s_short_strlen)
+            m_data = reinterpret_cast<char *>(MemoryBank::allocate(m_databytes));
+        // Insert trailing null byte:
+        m_data[sz] = '\0';
+        setCString(m_data);
+    }
+
+    const char *UncachedString::typeName() const
+    {
+        return UncachedString::staticTypeName();
+    }
 } // namespace CXXR
-
-UncachedString::UncachedString(const std::string &str, cetype_t encoding)
-    : String(str.size(), encoding), m_databytes(str.size() + 1),
-      m_data(m_short_string)
-{
-    size_t sz = str.size();
-    allocData(sz);
-    memcpy(m_data, str.data(), sz);
-}
-
-UncachedString *UncachedString::obtain(const std::string &str, cetype_t encoding)
-{
-    UncachedString *ans = new UncachedString(str, encoding);
-    ans->expose();
-    return ans;
-}
-
-void UncachedString::allocData(size_t sz)
-{
-    GCRoot<> thisroot(this);
-    if (sz > s_short_strlen)
-        m_data = reinterpret_cast<char *>(MemoryBank::allocate(m_databytes));
-    // Insert trailing null byte:
-    m_data[sz] = '\0';
-    setCString(m_data);
-}
-
-const char *UncachedString::typeName() const
-{
-    return UncachedString::staticTypeName();
-}

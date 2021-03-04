@@ -32,7 +32,10 @@
 using namespace std;
 using namespace CXXR;
 
-const char* ByteCode::typeName() const
+namespace CXXR
 {
-    return staticTypeName();
+    const char *ByteCode::typeName() const
+    {
+        return staticTypeName();
+    }
 }
