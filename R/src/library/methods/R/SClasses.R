@@ -472,8 +472,8 @@ validObject <- function(object, test = FALSE, complete = FALSE)
     slotTypes <- classDef@slots
     slotNames <- names(slotTypes)
     attrNames <- c(".Data", ".S3Class", names(attributes(object)))
-    if(any(is.na(match(slotNames, attrNames)))) {
-        badSlots <- is.na(match(slotNames, attrNames))
+    if(anyNA(idx <- match(slotNames, attrNames))) {
+        badSlots <- is.na(idx)
 	errors <-
 	    c(errors,
 	      paste(gettext("slots in class definition but not in object:"),
@@ -1003,5 +1003,3 @@ inferProperties <- function(props, what) {
              domain = "R-methods")
     props
 }
-
-
