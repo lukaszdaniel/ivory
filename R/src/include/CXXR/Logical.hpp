@@ -52,13 +52,13 @@ namespace CXXR
 			assert(i == 0 || i == 1 || i == NA_LOGICAL);
 		}
 
-		/*implicit*/ Logical(bool b) : m_value(b ? 1 : 0) {}
+		/*implicit*/ Logical(bool b) : m_value(b) {}
 
 		explicit operator int() const { return m_value; }
 		explicit operator double() const { return isNA() ? NA_REAL : m_value; }
 
-		bool isTrue() const { return m_value == TRUE; }
-		bool isFalse() const { return m_value == FALSE; }
+		bool isTrue() const { return m_value == int(TRUE); }
+		bool isFalse() const { return m_value == int(FALSE); }
 		bool isNA() const { return m_value == NA_LOGICAL; }
 
 		static Logical NA() { return Logical(NA_LOGICAL); }

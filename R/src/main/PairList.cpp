@@ -279,13 +279,12 @@ SEXP Rf_list6(SEXP s, SEXP t, SEXP u, SEXP v, SEXP w, SEXP x)
 
 SEXP Rf_listAppend(SEXP s, SEXP t)
 {
-    SEXP r;
     if (!s)
         return t;
-    r = s;
-    while (CDR(r))
-        r = CDR(r);
-    SETCDR(r, t);
+    ConsCell *r = SEXP_downcast<ConsCell *>(s);
+    while (r && r->tail())
+        r = r->tail();
+    r->setTail(SEXP_downcast<PairList *>(t));
     return s;
 }
 
@@ -295,10 +294,8 @@ Rboolean Rf_isVectorizable(SEXP s)
         return TRUE;
     else if (Rf_isNewList(s))
     {
-        R_xlen_t i, n;
-
-        n = XLENGTH(s);
-        for (i = 0; i < n; ++i)
+        R_xlen_t n = XLENGTH(s);
+        for (R_xlen_t i = 0; i < n; ++i)
             if (!Rf_isVector(VECTOR_ELT(s, i)) || XLENGTH(VECTOR_ELT(s, i)) > 1)
                 return FALSE;
         return TRUE;

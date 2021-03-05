@@ -29,5 +29,22 @@
 
 namespace CXXR
 {
-    void Logical::initialize() {}
+    void Logical::initialize()
+    {
+        static GCRoot<LogicalVector> trueValue(new LogicalVector(1));
+        (*trueValue)[0] = true;
+        MARK_NOT_MUTABLE(trueValue.get());
+
+        static GCRoot<LogicalVector> falseValue(new LogicalVector(1));
+        (*falseValue)[0] = false;
+        MARK_NOT_MUTABLE(falseValue.get());
+
+        static GCRoot<LogicalVector> naValue(new LogicalVector(1));
+        (*naValue)[0] = NA();
+        MARK_NOT_MUTABLE(naValue.get());
+
+        R_TrueValue = trueValue.get();
+        R_FalseValue = falseValue.get();
+        R_LogicalNAValue = naValue.get();
+    }
 } // namespace CXXR

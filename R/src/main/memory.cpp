@@ -416,25 +416,21 @@ void GCNode::gc(unsigned int num_old_gens_to_collect)
     GCNode::Marker marker(num_old_gens_to_collect + 1);
     GCRootBase::visitRoots(&marker);
     ProtectStack::visitRoots(&marker);
-    MARK_THRU(&marker, R_BlankScalarString);	        /* Builtin constants */
+    MARK_THRU(&marker, R_BlankScalarString); /* Builtin constants */
 
-    MARK_THRU(&marker, R_Warnings);	           /* Warnings, if any */
+    MARK_THRU(&marker, R_Warnings); /* Warnings, if any */
     MARK_THRU(&marker, R_ReturnedValue);
 
-    MARK_THRU(&marker, R_HandlerStack);          /* Condition handler stack */
-    MARK_THRU(&marker, R_RestartStack);          /* Available restarts stack */
+    MARK_THRU(&marker, R_HandlerStack); /* Condition handler stack */
+    MARK_THRU(&marker, R_RestartStack); /* Available restarts stack */
 
-    MARK_THRU(&marker, R_BCbody);                /* Current byte code object */
-    MARK_THRU(&marker, R_Srcref);                /* Current source reference */
-
-    MARK_THRU(&marker, R_TrueValue);
-    MARK_THRU(&marker, R_FalseValue);
-    MARK_THRU(&marker, R_LogicalNAValue);
+    MARK_THRU(&marker, R_BCbody); /* Current byte code object */
+    MARK_THRU(&marker, R_Srcref); /* Current source reference */
 
     MARK_THRU(&marker, R_print.na_string);
     MARK_THRU(&marker, R_print.na_string_noquote);
 
-    if (R_SymbolTable)             /* in case of GC during startup */
+    if (R_SymbolTable) /* in case of GC during startup */
         for (int i = 0; i < HSIZE; i++)
         { /* Symbol table */
             MARK_THRU(&marker, R_SymbolTable[i]);
@@ -458,18 +454,19 @@ void GCNode::gc(unsigned int num_old_gens_to_collect)
         }
     }
 
-    for (RCNTXT *ctxt = R_GlobalContext ; ctxt; ctxt = ctxt->nextContext()) {
-	MARK_THRU(&marker, ctxt->onExit());       /* on.exit expressions */
-	MARK_THRU(&marker, ctxt->getPromiseArgs());	   /* promises supplied to closure */
-	MARK_THRU(&marker, ctxt->getCallFun());       /* the closure called */
-	MARK_THRU(&marker, ctxt->getSysParent());     /* calling environment */
-	MARK_THRU(&marker, ctxt->getCall());          /* the call */
-	MARK_THRU(&marker, ctxt->workingEnvironment());        /* the closure environment */
-	MARK_THRU(&marker, ctxt->getBCBody());        /* the current byte code object */
-	MARK_THRU(&marker, ctxt->getHandlerStack());  /* the condition handler stack */
-	MARK_THRU(&marker, ctxt->getRestartStack());  /* the available restarts stack */
-	MARK_THRU(&marker, ctxt->getSrcRef());	   /* the current source reference */
-	MARK_THRU(&marker, ctxt->getReturnValue());   /* For on.exit calls */
+    for (RCNTXT *ctxt = R_GlobalContext; ctxt; ctxt = ctxt->nextContext())
+    {
+        MARK_THRU(&marker, ctxt->onExit());             /* on.exit expressions */
+        MARK_THRU(&marker, ctxt->getPromiseArgs());     /* promises supplied to closure */
+        MARK_THRU(&marker, ctxt->getCallFun());         /* the closure called */
+        MARK_THRU(&marker, ctxt->getSysParent());       /* calling environment */
+        MARK_THRU(&marker, ctxt->getCall());            /* the call */
+        MARK_THRU(&marker, ctxt->workingEnvironment()); /* the closure environment */
+        MARK_THRU(&marker, ctxt->getBCBody());          /* the current byte code object */
+        MARK_THRU(&marker, ctxt->getHandlerStack());    /* the condition handler stack */
+        MARK_THRU(&marker, ctxt->getRestartStack());    /* the available restarts stack */
+        MARK_THRU(&marker, ctxt->getSrcRef());          /* the current source reference */
+        MARK_THRU(&marker, ctxt->getReturnValue());     /* For on.exit calls */
     }
 
     MARK_THRU(&marker, R_PreciousList);
@@ -750,15 +747,6 @@ HIDDEN void R::InitMemory()
 
     /*  The current source line */
     R_Srcref = R_NilValue;
-
-    /* R_TrueValue and R_FalseValue */
-    R_TrueValue = mkTrue();
-    MARK_NOT_MUTABLE(R_TrueValue);
-    R_FalseValue = mkFalse();
-    MARK_NOT_MUTABLE(R_FalseValue);
-    R_LogicalNAValue = allocVector(LGLSXP, 1);
-    LOGICAL(R_LogicalNAValue)[0] = NA_LOGICAL;
-    MARK_NOT_MUTABLE(R_LogicalNAValue);
 }
 
 

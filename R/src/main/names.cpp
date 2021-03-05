@@ -32,6 +32,7 @@
 #include <CXXR/Symbol.hpp>
 #include <CXXR/PairList.hpp>
 #include <CXXR/StringVector.hpp>
+#include <CXXR/Logical.hpp>
 #include <Localization.h>
 #include <RContext.h>
 #include <Defn.h>
@@ -1202,6 +1203,9 @@ HIDDEN void R::InitNames()
     if (!(R_SymbolTable = (SEXP *)calloc(HSIZE, sizeof(SEXP))))
         R_Suicide(_("couldn't allocate memory for symbol table"));
 
+    // Logical constants.
+    Logical::initialize();
+
     /* String constants (CHARSXP values) */
     String::initialize(); // NA(), blank()
     Symbol::initialize();
@@ -1211,14 +1215,16 @@ HIDDEN void R::InitNames()
     MARK_NOT_MUTABLE(R_BlankScalarString);
 
     /* Initialize the symbol Table */
-    for (int i = 0; i < HSIZE; i++) R_SymbolTable[i] = R_NilValue;
+    for (int i = 0; i < HSIZE; i++)
+        R_SymbolTable[i] = R_NilValue;
 
     /* Set up a set of globals so that a symbol table search can be
        avoided when matching something like dim or dimnames. */
     SymbolShortcuts();
 
     /*  Builtin Functions */
-    for (size_t i = 0; i < R_FunTab.size(); i++) installFunTab(i);
+    for (size_t i = 0; i < R_FunTab.size(); i++)
+        installFunTab(i);
 
     /* Special base functions */
     for (const auto &sname : Spec_name)
@@ -1229,7 +1235,6 @@ HIDDEN void R::InitNames()
     R_initialize_bcode();
     R_init_altrep();
 }
-
 
 /*  install - probe the symbol table */
 /*  If "name" is not found, it is installed in the symbol table.

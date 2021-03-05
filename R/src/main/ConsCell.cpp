@@ -401,11 +401,10 @@ SEXP SETCDR(SEXP x, SEXP y)
 
 SEXP SETCADR(SEXP x, SEXP y)
 {
-    SEXP cell;
     if (!x ||
         CDR(x) == nullptr)
         Rf_error(_("incorrect value"));
-    cell = CDR(x);
+    SEXP cell = CDR(x);
 
     ConsCell *cc = SEXP_downcast<ConsCell *>(cell, false);
     cc->setCar(y);
@@ -414,12 +413,11 @@ SEXP SETCADR(SEXP x, SEXP y)
 
 SEXP SETCADDR(SEXP x, SEXP y)
 {
-    SEXP cell;
     if (!x ||
         CDR(x) == nullptr ||
         CDDR(x) == nullptr)
         Rf_error(_("incorrect value"));
-    cell = CDDR(x);
+    SEXP cell = CDDR(x);
 
     ConsCell *cc = SEXP_downcast<ConsCell *>(cell, false);
     cc->setCar(y);
@@ -428,13 +426,12 @@ SEXP SETCADDR(SEXP x, SEXP y)
 
 SEXP SETCADDDR(SEXP x, SEXP y)
 {
-    SEXP cell;
     if (!x ||
         CDR(x) == nullptr ||
         CDDR(x) == nullptr ||
         CDDDR(x) == nullptr)
         Rf_error(_("incorrect value"));
-    cell = CDDDR(x);
+    SEXP cell = CDDDR(x);
 
     ConsCell *cc = SEXP_downcast<ConsCell *>(cell, false);
     cc->setCar(y);
@@ -443,14 +440,13 @@ SEXP SETCADDDR(SEXP x, SEXP y)
 
 SEXP SETCAD4R(SEXP x, SEXP y)
 {
-    SEXP cell;
     if (!x ||
         CDR(x) == nullptr ||
         CDDR(x) == nullptr ||
         CDDDR(x) == nullptr ||
         CD4R(x) == nullptr)
         Rf_error(_("incorrect value"));
-    cell = CD4R(x);
+    SEXP cell = CD4R(x);
 
     ConsCell *cc = SEXP_downcast<ConsCell *>(cell, false);
     cc->setCar(y);
