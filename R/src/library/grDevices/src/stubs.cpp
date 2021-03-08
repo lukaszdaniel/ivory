@@ -23,10 +23,13 @@
 
 #include <CXXR/VectorBase.hpp>
 #include <CXXR/PairList.hpp>
+#include <CXXR/Expression.hpp>
 #include <Defn.h>
 #include <Internal.h>
 #include "grDevices.h"
 #include "localization.h"
+
+using namespace CXXR;
 
 #ifndef _WIN32
 SEXP do_X11(SEXP call, SEXP op, SEXP args, SEXP env);
