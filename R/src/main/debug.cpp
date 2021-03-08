@@ -30,12 +30,14 @@
 #include <CXXR/StringVector.hpp>
 #include <CXXR/PairList.hpp>
 #include <CXXR/LogicalVector.hpp>
+#include <CXXR/Expression.hpp>
 #include <Localization.h>
 #include <RContext.h>
 #include <Defn.h>
 #include <Internal.h>
 
 using namespace R;
+using namespace CXXR;
 
 HIDDEN SEXP do_debug(SEXP call, SEXP op, SEXP args, SEXP rho)
 {

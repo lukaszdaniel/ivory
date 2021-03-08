@@ -85,7 +85,7 @@ extern "C"
     const int *LOGICAL_OR_NULL(SEXP x);
     void SET_LOGICAL_ELT(SEXP x, R_xlen_t i, int v);
     int LOGICAL_ELT(SEXP x, R_xlen_t i);
-    SEXP Rf_ScalarLogical(int);
+    SEXP Rf_ScalarLogical(int x);
 } // extern "C"
 
 #if defined(R_NO_REMAP) && defined(COMPILING_IVORY) && defined(__cplusplus)

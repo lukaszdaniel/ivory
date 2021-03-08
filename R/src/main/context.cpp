@@ -117,6 +117,7 @@
 #include <CXXR/Expression.hpp>
 #include <CXXR/IntVector.hpp>
 #include <CXXR/RawVector.hpp>
+#include <CXXR/Symbol.hpp>
 #include <Localization.h>
 #include <RContext.h>
 #include <Defn.h>

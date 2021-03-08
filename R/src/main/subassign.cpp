@@ -94,6 +94,7 @@
 #include <CXXR/RawVector.hpp>
 #include <CXXR/ListVector.hpp>
 #include <CXXR/StringVector.hpp>
+#include <CXXR/Symbol.hpp>
 #include <Localization.h>
 #include <Defn.h>
 #include <Internal.h>

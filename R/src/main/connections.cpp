@@ -82,6 +82,8 @@
 #include <CXXR/RealVector.hpp>
 #include <CXXR/StringVector.hpp>
 #include <CXXR/PairList.hpp>
+#include <CXXR/Symbol.hpp>
+#include <CXXR/Expression.hpp>
 #include <Localization.h>
 #include <RContext.h>
 #include <Defn.h>
@@ -97,6 +99,7 @@
 
 using namespace std;
 using namespace R;
+using namespace CXXR;
 
 #undef ERROR			/* for compilation on Windows */
 

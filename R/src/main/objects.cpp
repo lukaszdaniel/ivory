@@ -37,6 +37,7 @@
 #include <CXXR/VectorBase.hpp>
 #include <CXXR/StringVector.hpp>
 #include <CXXR/LogicalVector.hpp>
+#include <CXXR/Symbol.hpp>
 #include <RContext.h>
 #include <Defn.h>
 #include <Localization.h>

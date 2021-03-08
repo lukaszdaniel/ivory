@@ -87,7 +87,7 @@ extern0 R_bcstack_t *R_BCProtTop;
 void R_BCProtReset(R_bcstack_t *);
 
 #ifdef __MAIN__
-#undef extern
+#undef extern1
 #undef extern0
 #undef LibExtern
 #endif

@@ -32,6 +32,8 @@
 #include <CXXR/FixedVector.hpp>
 #include <CXXR/IntVector.hpp>
 #include <CXXR/StringVector.hpp>
+#include <CXXR/Symbol.hpp>
+#include <CXXR/Expression.hpp>
 #include <RContext.h>
 #include <Defn.h>
 #include <Localization.h>

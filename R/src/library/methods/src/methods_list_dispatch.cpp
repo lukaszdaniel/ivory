@@ -29,6 +29,7 @@
 #include <CXXR/VectorBase.hpp>
 #include <CXXR/FunctionBase.hpp>
 #include <CXXR/StringVector.hpp>
+#include <CXXR/Symbol.hpp>
 #include <Defn.h>
 #include "localization.h"
 #include "RSMethods.h"
@@ -40,7 +41,7 @@ using namespace R;
 #define STRING_VALUE(x)		CHAR(asChar(x))
 
 #if !defined(snprintf) && defined(HAVE_DECL_SNPRINTF) && !HAVE_DECL_SNPRINTF
-extern int snprintf (char *s, size_t n, const char *format, ...);
+extern int snprintf(char *s, size_t n, const char *format, ...);
 #endif
 
 /* the following utilities are included here for now, as statics.  But

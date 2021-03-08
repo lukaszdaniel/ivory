@@ -77,6 +77,10 @@ namespace CXXR
               m_valgen(valgen), m_environment(env), m_seen(false),
               m_interrupted(false)
         {
+            if (m_valgen)
+                const_cast<RObject *>(m_valgen)->incrementRefCount();
+            if (m_environment)
+                const_cast<Environment *>(m_environment)->incrementRefCount();
         }
 
         /** @brief Access the environment of the Promise.

@@ -363,8 +363,9 @@ HIDDEN SEXP do_maxNSize(SEXP call, SEXP op, SEXP args, SEXP rho)
 
 namespace
 {
-    /* Miscellaneous Globals. */
-    SEXP R_PreciousList = nullptr; /* List of Persistent Objects */
+    /** @brief List of Persistent Objects
+     */
+    GCRoot<> R_PreciousList(nullptr);
 } // namespace
 
 /* R interface function */
@@ -419,7 +420,6 @@ void GCNode::gc(unsigned int num_old_gens_to_collect)
     MARK_THRU(&marker, R_BlankScalarString); /* Builtin constants */
 
     MARK_THRU(&marker, R_Warnings); /* Warnings, if any */
-    MARK_THRU(&marker, R_ReturnedValue);
 
     MARK_THRU(&marker, R_HandlerStack); /* Condition handler stack */
     MARK_THRU(&marker, R_RestartStack); /* Available restarts stack */
@@ -430,17 +430,14 @@ void GCNode::gc(unsigned int num_old_gens_to_collect)
     MARK_THRU(&marker, R_print.na_string);
     MARK_THRU(&marker, R_print.na_string_noquote);
 
-    if (R_SymbolTable) /* in case of GC during startup */
-        for (int i = 0; i < HSIZE; i++)
+    if (Symbol::R_SymbolTable.size()) /* in case of GC during startup */
+        for (size_t i = 0; i < Symbol::R_SymbolTable.size(); i++)
         { /* Symbol table */
-            MARK_THRU(&marker, R_SymbolTable[i]);
-            for (RObject *s = R_SymbolTable[i]; s != R_NilValue; s = CDR(s))
+            MARK_THRU(&marker, Symbol::R_SymbolTable[i]);
+            for (RObject *s = Symbol::R_SymbolTable[i]; s; s = CDR(s))
                 if (ATTRIB(CAR(s)) != R_NilValue)
                     gc_error("****found a symbol with attributes\n");
         }
-
-    if (R_CurrentExpr) /* Current expression */
-        MARK_THRU(&marker, R_CurrentExpr);
 
     for (int i = 0; i < R_MaxDevices; i++)
     { /* Device display lists */
@@ -468,8 +465,6 @@ void GCNode::gc(unsigned int num_old_gens_to_collect)
         MARK_THRU(&marker, ctxt->getSrcRef());          /* the current source reference */
         MARK_THRU(&marker, ctxt->getReturnValue());     /* For on.exit calls */
     }
-
-    MARK_THRU(&marker, R_PreciousList);
 
     for (R_bcstack_t *sp = R_BCNodeStackBase; sp < R_BCNodeStackTop; sp++)
     {
@@ -834,10 +829,12 @@ HIDDEN SEXP CONS_NR(SEXP car, SEXP cdr)
 {
     GCRoot<> crr(car);
     GCRoot<PairList> tlr(SEXP_downcast<CXXR::PairList *>(cdr));
-    SEXP s = new PairList(crr, tlr);
+    SEXP s = new PairList();
     s->expose();
 
     DISABLE_REFCNT(s);
+    SETCAR(s, car);
+    SETCDR(s, cdr);
     return s;
 }
 
@@ -901,25 +898,20 @@ HIDDEN SEXP R::mkPROMISE(SEXP expr, SEXP rho)
 
     Promise *s = new Promise(exprt, rhort);
     s->expose();
-
-    if (expr)
-        expr->incrementRefCount();
-    if (rho)
-        rho->incrementRefCount();
     SET_PRSEEN(s, 0);
     return s;
 }
 
 SEXP R::R_mkEVPROMISE(SEXP expr, SEXP val)
 {
-    SEXP prom = mkPROMISE(expr, R_NilValue);
+    SEXP prom = mkPROMISE(expr, nullptr);
     SET_PRVALUE(prom, val);
     return prom;
 }
 
 HIDDEN SEXP R::R_mkEVPROMISE_NR(SEXP expr, SEXP val)
 {
-    SEXP prom = mkPROMISE(expr, R_NilValue);
+    SEXP prom = mkPROMISE(expr, nullptr);
     DISABLE_REFCNT(prom);
     SET_PRVALUE(prom, val);
     return prom;

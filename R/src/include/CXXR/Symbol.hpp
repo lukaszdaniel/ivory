@@ -42,16 +42,6 @@ namespace R
     extern void InitNames();
 }
 
-extern "C"
-{
-    extern SEXP R_UnboundValue;
-    /* Symbol Table Shortcuts */
-#define PREDEFINED_SYMBOL(C_NAME, CXXR_NAME, R_NAME) \
-    extern SEXP C_NAME;
-#include <CXXR/PredefinedSymbols.hpp>
-#undef PREDEFINED_SYMBOL
-} // extern "C"
-
 namespace CXXR
 {
     /** @brief Class used to represent R symbols.
@@ -287,6 +277,19 @@ namespace CXXR
 
         static void checkST(const RObject *);
 
+        /** @brief Largest symbol size.
+         *
+         * Largest symbol size in bytes excluding terminator.
+
+         * Was 256 prior to 2.13.0, now just a sanity check.
+         */
+        static constexpr int MAXIDSIZE = 10000;
+
+        /** @brief The size of the hash table for symbols
+         */
+        static constexpr size_t HSIZE = 49157;
+        static std::array<RObject *, HSIZE> R_SymbolTable;
+
         // Virtual functions of RObject:
         unsigned int packGPBits() const override;
         void unpackGPBits(unsigned int gpbits) override;
@@ -330,11 +333,31 @@ namespace CXXR
 
 extern "C"
 {
-    extern SEXP R_MissingArg;        /* Missing argument marker */
-    extern SEXP R_RestartToken;      /* Marker for restarted function calls */
-    extern SEXP R_UnboundValue;      /* Unbound marker */
-    extern SEXP R_CurrentExpression; /* Use current expression (marker) */
-    extern SEXP R_InBCInterpreter;   /* To be found in BC interp. state (marker) */
+    /** @brief Missing argument marker
+     */
+    extern SEXP R_MissingArg;
+
+    /** @brief Marker for restarted function calls
+     */
+    extern SEXP R_RestartToken;
+
+    /** @brief Unbound marker
+     */
+    extern SEXP R_UnboundValue;
+
+    /** @brief Use current expression (marker)
+     */
+    extern SEXP R_CurrentExpression;
+
+    /** @brief To be found in BC interp. state (marker)
+     */
+    extern SEXP R_InBCInterpreter;
+
+    /* Symbol Table Shortcuts */
+#define PREDEFINED_SYMBOL(C_NAME, CXXR_NAME, R_NAME) \
+    extern SEXP C_NAME;
+#include <CXXR/PredefinedSymbols.hpp>
+#undef PREDEFINED_SYMBOL
 
     /** @brief Test if SYMSXP.
      *

@@ -100,7 +100,6 @@
 #include <CXXR/Promise.hpp>
 #include <CXXR/S4Object.hpp>
 #include <CXXR/Symbol.hpp>
-#include <CXXR/PredefinedSymbols.hpp>
 #include <CXXR/WeakRef.hpp>
 #include <CXXR/ExternalPointer.hpp>
 

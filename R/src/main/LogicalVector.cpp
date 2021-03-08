@@ -29,8 +29,11 @@
  * @brief Implementation of class LogicalVector and related functions.
  */
 
+#include <CXXR/Logical.hpp>
 #include <CXXR/LogicalVector.hpp>
 #include <Rinternals.h>
+
+using namespace CXXR;
 
 namespace CXXR
 {
@@ -158,4 +161,14 @@ void SET_LOGICAL_ELT(SEXP x, R_xlen_t i, int v)
         ALTLOGICAL_SET_ELT(x, i, v);
     else
         LOGICAL0(x)[i] = v;
+}
+
+SEXP Rf_ScalarLogical(int x)
+{
+    if (x == NA_LOGICAL)
+        return R_LogicalNAValue;
+    else if (x != 0)
+        return R_TrueValue;
+    else
+        return R_FalseValue;
 }

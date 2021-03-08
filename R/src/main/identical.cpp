@@ -30,6 +30,7 @@
 #include <CXXR/StringVector.hpp>
 #include <CXXR/PairList.hpp>
 #include <CXXR/LogicalVector.hpp>
+#include <CXXR/Symbol.hpp>
 #include <Localization.h>
 #include <Defn.h>
 

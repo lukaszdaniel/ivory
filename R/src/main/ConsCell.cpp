@@ -62,6 +62,18 @@ namespace CXXR
         const auto &UNLOCK_BINDINGptr = UNLOCK_BINDING;
     } // namespace ForceNonInline
 
+    ConsCell::ConsCell(SEXPTYPE st, RObject *cr, PairList *tl, RObject *tg)
+        : RObject(st), m_car(cr), m_tail(tl), m_tag(tg), m_missing(0)
+    {
+        checkST(st);
+        if (m_car)
+            m_car->incrementRefCount();
+        if (m_tail)
+            m_tail->incrementRefCount();
+        if (m_tag)
+            m_tag->incrementRefCount();
+    }
+
     ConsCell::ConsCell(const ConsCell &pattern, bool deep)
         : RObject(pattern, deep), m_car(dup_child2(pattern.car(), deep)),
           m_tail(clone(pattern.tail(), deep)), m_tag(pattern.tag()), m_missing(0)

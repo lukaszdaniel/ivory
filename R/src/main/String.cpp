@@ -158,6 +158,9 @@ namespace CXXR
 
 namespace R
 {
+    bool known_to_be_latin1 = false;
+    bool known_to_be_utf8 = false;
+
     bool streql(const char *s, const char *t)
     {
         return (strcmp(s, t) == 0);
@@ -190,6 +193,9 @@ namespace R
 }
 
 // ***** C interface *****
+
+SEXP R_NaString = nullptr;
+SEXP R_BlankString = nullptr;
 
 int HASHASH(SEXP x)
 {

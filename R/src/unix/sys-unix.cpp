@@ -36,6 +36,7 @@
 #include <CXXR/IntVector.hpp>
 #include <CXXR/StringVector.hpp>
 #include <CXXR/PairList.hpp>
+#include <CXXR/Expression.hpp>
 #include <Localization.h>
 #include <RContext.h>
 #include <Defn.h>
@@ -67,6 +68,7 @@
 #include <cerrno>
 
 using namespace R;
+using namespace CXXR;
 
 /*
  *  4) INITIALIZATION AND TERMINATION ACTIONS

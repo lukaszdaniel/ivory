@@ -137,6 +137,10 @@ namespace CXXR
 
 // ***** C interface *****
 
+SEXP R_EmptyEnv = nullptr;
+SEXP R_BaseEnv = nullptr;
+SEXP R_GlobalEnv = nullptr;
+
 SEXP FRAME(SEXP x)
 {
     if (!x)

@@ -42,6 +42,7 @@
 #include <CXXR/ComplexVector.hpp>
 #include <CXXR/RawVector.hpp>
 #include <CXXR/StringVector.hpp>
+#include <CXXR/Symbol.hpp>
 #include <Localization.h>
 #include <RContext.h>
 #include <Parse.h>

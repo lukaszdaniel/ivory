@@ -42,6 +42,7 @@
 
 using namespace std;
 using namespace R;
+using namespace CXXR;
 
 int R_GE_getVersion()
 {

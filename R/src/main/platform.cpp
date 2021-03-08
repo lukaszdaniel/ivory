@@ -48,6 +48,7 @@
 #include <CXXR/RealVector.hpp>
 #include <CXXR/PairList.hpp>
 #include <Localization.h>
+#include <CXXR/Expression.hpp>
 #include <Defn.h>
 #include <Internal.h>
 #include <Rinterface.h>
@@ -111,6 +112,7 @@ const char *formatError(DWORD res);  /* extra.c */
 #endif
 
 using namespace R;
+using namespace CXXR;
 
 static void Init_R_Machine(SEXP rho)
 {

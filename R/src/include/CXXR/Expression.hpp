@@ -93,7 +93,15 @@ namespace CXXR
 
    /** @brief Pointer to expression currently being evaluated.
     */
-   // extern CXXR::GCRoot<> R_CurrentExpr;
+   extern GCRoot<> R_CurrentExpr;
+
+   /** @brief Slot for return-ing values.
+    */
+   extern GCRoot<> R_ReturnedValue;
+
+   /** @brief Value visibility flag.
+    */
+   extern bool R_Visible;
 
    /** @brief Expression currently being evaluated.
     *
@@ -111,18 +119,6 @@ namespace CXXR
 
 extern "C"
 {
-   /** @brief Pointer to expression currently being evaluated.
-    */
-   extern SEXP R_CurrentExpr;
-
-   /** @brief Slot for return-ing values.
-    */
-   extern SEXP R_ReturnedValue;
-
-   /** @brief Value visibility flag.
-    */
-   extern bool R_Visible;
-
    /** @brief Create a CXXR::Expression with a specified car and tail.
     *
     * This function protects its arguments from the garbage collector.

@@ -308,11 +308,7 @@ namespace CXXR
          * @param tg Pointer to the 'tag' of the element to be constructed.
          */
         explicit ConsCell(SEXPTYPE st,
-                          RObject *cr = nullptr, PairList *tl = nullptr, RObject *tg = nullptr)
-            : RObject(st), m_car(cr), m_tail(tl), m_tag(tg), m_missing(0)
-        {
-            checkST(st);
-        }
+                          RObject *cr = nullptr, PairList *tl = nullptr, RObject *tg = nullptr);
 
         /** @brief Copy constructor.
          *

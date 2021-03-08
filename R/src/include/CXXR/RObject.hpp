@@ -732,6 +732,8 @@ namespace CXXR
 
 extern "C"
 {
+    /** @brief The nil object
+     */
     extern SEXP R_NilValue;
 
     /** @brief Get object's ::SEXPTYPE.

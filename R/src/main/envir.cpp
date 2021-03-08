@@ -2731,13 +2731,11 @@ static void HashTableValues(SEXP table, int all, SEXP values, int *indx)
 	FrameValues(VECTOR_ELT(table, i), all, values, indx);
 }
 
-static int BuiltinSize(int all, int intern)
+static int BuiltinSize(bool all, bool intern)
 {
     int count = 0;
-    SEXP s;
-    int j;
-    for (j = 0; j < HSIZE; j++) {
-	for (s = R_SymbolTable[j]; s != R_NilValue; s = CDR(s)) {
+    for (size_t j = 0; j < Symbol::R_SymbolTable.size(); j++) {
+	for (SEXP s = Symbol::R_SymbolTable[j]; s != R_NilValue; s = CDR(s)) {
 	    if (intern) {
 		if (INTERNAL(CAR(s)) != R_NilValue)
 		    count++;
@@ -2754,8 +2752,8 @@ static int BuiltinSize(int all, int intern)
 
 static void BuiltinNames(int all, int intern, SEXP names, int *indx)
 {
-    for (int j = 0; j < HSIZE; j++) {
-	for (SEXP s = R_SymbolTable[j]; s != R_NilValue; s = CDR(s)) {
+    for (size_t j = 0; j < Symbol::R_SymbolTable.size(); j++) {
+	for (SEXP s = Symbol::R_SymbolTable[j]; s != R_NilValue; s = CDR(s)) {
 	    if (intern) {
 		if (INTERNAL(CAR(s)) != R_NilValue)
 		    SET_STRING_ELT(names, (*indx)++, PRINTNAME(CAR(s)));
@@ -2772,8 +2770,8 @@ static void BuiltinNames(int all, int intern, SEXP names, int *indx)
 static void BuiltinValues(int all, int intern, SEXP values, int *indx)
 {
     SEXP vl;
-    for (int j = 0; j < HSIZE; j++) {
-	for (SEXP s = R_SymbolTable[j]; s != R_NilValue; s = CDR(s)) {
+    for (size_t j = 0; j < Symbol::R_SymbolTable.size(); j++) {
+	for (SEXP s = Symbol::R_SymbolTable[j]; s != R_NilValue; s = CDR(s)) {
 	    if (intern) {
 		if (INTERNAL(CAR(s)) != R_NilValue) {
 		    vl = SYMVALUE(CAR(s));
@@ -2844,7 +2842,7 @@ SEXP R_lsInternal3(SEXP env, Rboolean all, Rboolean sorted)
     /* Step 1 : Compute the Vector Size */
     int k = 0;
     if (env == R_BaseEnv || env == R_BaseNamespace)
-	k += BuiltinSize(all, 0);
+	k += BuiltinSize(all, false);
     else if (isEnvironment(env) ||
 	isEnvironment(env = simple_as_environment(env))) {
 	if (HASHTAB(env) != R_NilValue)
@@ -2914,7 +2912,7 @@ HIDDEN SEXP do_env2list(SEXP call, SEXP op, SEXP args, SEXP rho)
 
     // k := length(env) = envxlength(env) :
     if (env == R_BaseEnv || env == R_BaseNamespace)
-	k = BuiltinSize(all, 0);
+	k = BuiltinSize(all, false);
     else if (HASHTAB(env) != R_NilValue)
 	k = HashTableSize(HASHTAB(env), all);
     else
@@ -3006,7 +3004,7 @@ HIDDEN SEXP do_eapply(SEXP call, SEXP op, SEXP args, SEXP rho)
     if (useNms == NA_LOGICAL) useNms = 0;
 
     if (env == R_BaseEnv || env == R_BaseNamespace)
-	k = BuiltinSize(all, 0);
+	k = BuiltinSize(all, false);
     else if (HASHTAB(env) != R_NilValue)
 	k = HashTableSize(HASHTAB(env), all);
     else
@@ -3074,7 +3072,7 @@ int Rf_envlength(SEXP rho)
     else if (HASHTAB(rho) != R_NilValue)
         return HashTableSize(HASHTAB(rho), 1);
     else if (rho == R_BaseEnv || rho == R_BaseNamespace)
-        return BuiltinSize(1, 0);
+        return BuiltinSize(true, false);
     else
         return FrameSize(FRAME(rho), 1);
 }
@@ -3089,7 +3087,7 @@ R_xlen_t Rf_envxlength(SEXP rho)
     else if (HASHTAB(rho) != R_NilValue)
         return HashTableSize(HASHTAB(rho), 1);
     else if (rho == R_BaseEnv || rho == R_BaseNamespace)
-        return BuiltinSize(1, 0);
+        return BuiltinSize(true, false);
     else
         return FrameSize(FRAME(rho), 1);
 }
@@ -3106,7 +3104,7 @@ HIDDEN SEXP do_builtins(SEXP call, SEXP op, SEXP args, SEXP rho)
     intern = asLogical(CAR(args));
     if (intern == NA_INTEGER)
         intern = 0;
-    nelts = BuiltinSize(1, intern);
+    nelts = BuiltinSize(true, intern);
     GCRoot<> ans(allocVector(STRSXP, nelts));
     nelts = 0;
     BuiltinNames(1, intern, ans, &nelts);
@@ -3260,8 +3258,8 @@ void R_LockEnvironment(SEXP env, Rboolean bindings)
 	env = R_getS4DataSlot(env, ANYSXP); /* better be an ENVSXP */
     if (env == R_BaseEnv || env == R_BaseNamespace) {
 	if (bindings) {
-	    for (int j = 0; j < HSIZE; j++)
-		for (SEXP s = R_SymbolTable[j]; s != R_NilValue; s = CDR(s))
+	    for (size_t j = 0; j < Symbol::R_SymbolTable.size(); j++)
+		for (SEXP s = Symbol::R_SymbolTable[j]; s != R_NilValue; s = CDR(s))
 		    if(SYMVALUE(CAR(s)) != R_UnboundValue)
 			LOCK_BINDING(CAR(s));
 	}

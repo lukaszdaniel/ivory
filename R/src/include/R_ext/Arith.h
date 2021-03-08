@@ -44,7 +44,7 @@ LibExtern double R_NegInf;	/* IEEE -Inf */
 LibExtern double R_NaReal;	/* NA_REAL: IEEE */
 LibExtern int	 R_NaInt;	/* NA_INTEGER:= INT_MIN currently */
 #ifdef __MAIN__
-#undef extern
+#undef extern1
 #undef LibExtern
 #endif
 

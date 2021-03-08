@@ -29,6 +29,7 @@
 #include <CXXR/VectorBase.hpp>
 #include <CXXR/StringVector.hpp>
 #include <CXXR/PairList.hpp>
+#include <CXXR/Symbol.hpp>
 #include <RContext.h>
 #include <Defn.h>
 #include <Parse.h>

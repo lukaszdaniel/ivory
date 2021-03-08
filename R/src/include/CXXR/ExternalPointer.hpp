@@ -70,6 +70,10 @@ namespace CXXR
                                  RObject *prot = nullptr)
             : RObject(EXTPTRSXP), m_ptr(ptr), m_tag(tag), m_protege(prot)
         {
+            if (m_tag)
+                m_tag->incrementRefCount();
+            if (m_protege)
+                m_protege->incrementRefCount();
         }
 
         /** @brief Get const pointer to protege object.

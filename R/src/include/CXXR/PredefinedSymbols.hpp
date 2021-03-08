@@ -60,7 +60,6 @@ PREDEFINED_SYMBOL2(DollarSymbol, "$");
 PREDEFINED_SYMBOL2(DotsSymbol, "...");
 PREDEFINED_SYMBOL2(DropSymbol, "drop");
 PREDEFINED_SYMBOL2(EvalSymbol, "eval");
-PREDEFINED_SYMBOL2(FunctionSymbol, "function");
 PREDEFINED_SYMBOL2(LastvalueSymbol, ".Last.value");
 PREDEFINED_SYMBOL2(LevelsSymbol, "levels");
 PREDEFINED_SYMBOL2(ModeSymbol, "mode");
@@ -73,7 +72,7 @@ PREDEFINED_SYMBOL2(QuoteSymbol, "quote");
 PREDEFINED_SYMBOL2(RowNamesSymbol, "row.names");
 PREDEFINED_SYMBOL2(SeedsSymbol, ".Random.seed");
 PREDEFINED_SYMBOL2(SortListSymbol, "sort.list");
-PREDEFINED_SYMBOL2(SourceSymbol, "source");
+PREDEFINED_SYMBOL2(SourceSymbol, "source"); /* Not used by R or core packages */
 PREDEFINED_SYMBOL2(TspSymbol, "tsp");
 //non-public
 PREDEFINED_SYMBOL2(CommentSymbol, "comment");
@@ -95,9 +94,10 @@ PREDEFINED_SYMBOL2(BaseSymbol, "base");
 PREDEFINED_SYMBOL2(SpecSymbol, "spec");
 PREDEFINED_SYMBOL2(NamespaceEnvSymbol, ".__NAMESPACE__.");
 PREDEFINED_SYMBOL2(AsCharacterSymbol, "as.character");
+PREDEFINED_SYMBOL2(FunctionSymbol, "function");
 PREDEFINED_SYMBOL(R_dot_Generic, DotGenericSymbol, ".Generic");
 PREDEFINED_SYMBOL(R_dot_Method, DotMethodSymbol, ".Method");
-PREDEFINED_SYMBOL2(DotMethodsSymbol, ".Methods");
+PREDEFINED_SYMBOL(R_dot_Methods, DotMethodsSymbol, ".Methods");
 PREDEFINED_SYMBOL(R_dot_defined, DotdefinedSymbol, ".defined");
 PREDEFINED_SYMBOL(R_dot_target, DottargetSymbol, ".target");
 PREDEFINED_SYMBOL(R_dot_Group, DotGroupSymbol, ".Group");
@@ -106,15 +106,15 @@ PREDEFINED_SYMBOL(R_dot_GenericCallEnv, DotGenericCallEnvSymbol, ".GenericCallEn
 PREDEFINED_SYMBOL(R_dot_GenericDefEnv, DotGenericDefEnvSymbol, ".GenericDefEnv");
 PREDEFINED_SYMBOL(R_dot_packageName, DotPackageName, ".packageName");
 //other
+// from R_initAssignSymbols()
 // PREDEFINED_SYMBOL2(SubsetSym, "[");
 // PREDEFINED_SYMBOL2(SubassignSym, "[<-");
 // PREDEFINED_SYMBOL2(Subset2Sym, "[[");
 // PREDEFINED_SYMBOL2(Subassign2Sym, "[[<-");
 // PREDEFINED_SYMBOL2(DollarGetsSymbol, "$<-");
-// PREDEFINED_SYMBOL2(S3MethodsTableSymbol, ".__S3MethodsTable__.");
 // PREDEFINED_SYMBOL2(valueSym, "value");
+// PREDEFINED_SYMBOL2(AssignSym, "<-");
+// from R_LookupMethod()
+// PREDEFINED_SYMBOL2(S3MethodsTableSymbol, ".__S3MethodsTable__.");
 
 #undef PREDEFINED_SYMBOL2
-
-/* Missing Values - others from Arith.h */
-extern SEXP R_BlankScalarString; /* "" as a STRSXP */

@@ -827,8 +827,8 @@ selectMethod <-
 		useInherited <- (is.na(match(signature, "ANY")) & # -> vector
 				 if(identical(fdef, coerce))# careful !
 				 c(TRUE,FALSE) else TRUE)
-	    if(verbose) cat(sprintf(gettext("  no direct match found to signature (%s)", domain = "R-methods"),
-			    paste(signature, collapse = ", "), domain = NA), "\n", sep = "")
+	    if(verbose) cat(gettextf("  no direct match found to signature (%s)",
+			    paste(signature, collapse = ", "), domain = "R-methods"), "\n", sep = "")
 	    methods <-
 		if(any(useInherited)) {
 		    allmethods <- .getMethodsTable(fdef, fenv, check=FALSE, inherited=TRUE)

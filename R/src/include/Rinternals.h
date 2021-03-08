@@ -511,70 +511,70 @@ typedef int PROTECT_INDEX;
 #define REPROTECT(x, i) R_Reprotect(x, i)
 
 /* Evaluation Environment */
-LibExtern SEXP R_GlobalEnv;	    /* The "global" environment */
+extern SEXP R_GlobalEnv;	    /* The "global" environment */
 
-LibExtern SEXP R_EmptyEnv;	    /* An empty environment at the root of the
+extern SEXP R_EmptyEnv;	    /* An empty environment at the root of the
 				    	environment tree */
-LibExtern SEXP R_BaseEnv;	    /* The base environment; formerly R_NilValue */
+extern SEXP R_BaseEnv;	    /* The base environment; formerly R_NilValue */
 LibExtern SEXP R_BaseNamespace;    /* The (fake) namespace for base */
 LibExtern SEXP	R_NamespaceRegistry;/* Registry for registered namespaces */
 
 LibExtern SEXP	R_Srcref;           /* Current srcref, for debuggers */
 
 /* Special Values */
-LibExtern SEXP R_NilValue;	    /* The nil object */
-LibExtern SEXP R_UnboundValue;	    /* Unbound marker */
-LibExtern SEXP R_MissingArg;	    /* Missing argument marker */
-LibExtern SEXP R_InBCInterpreter;  /* To be found in BC interp. state (marker) */
-LibExtern SEXP R_CurrentExpression; /* Use current expression (marker) */
-extern SEXP	R_RestartToken;     /* Marker for restarted function calls */
+extern SEXP R_NilValue;	    /* The nil object */
+extern SEXP R_UnboundValue;	    /* Unbound marker */
+extern SEXP R_MissingArg;	    /* Missing argument marker */
+extern SEXP R_InBCInterpreter;  /* To be found in BC interp. state (marker) */
+extern SEXP R_CurrentExpression; /* Use current expression (marker) */
+extern SEXP R_RestartToken;     /* Marker for restarted function calls */
 
 /* Symbol Table Shortcuts */
-LibExtern SEXP R_AsCharacterSymbol;/* "as.character" */
-LibExtern SEXP R_baseSymbol; // <-- backcompatible version of:
-LibExtern SEXP R_BaseSymbol;	// "base"
-LibExtern SEXP R_BraceSymbol;	    /* "{" */
-LibExtern SEXP R_Bracket2Symbol;   /* "[[" */
-LibExtern SEXP R_BracketSymbol;    /* "[" */
-LibExtern SEXP R_ClassSymbol;	    /* "class" */
-LibExtern SEXP R_DeviceSymbol;	    /* ".Device" */
-LibExtern SEXP R_DimNamesSymbol;   /* "dimnames" */
-LibExtern SEXP R_DimSymbol;	    /* "dim" */
-LibExtern SEXP R_DollarSymbol;	    /* "$" */
-LibExtern SEXP R_DotsSymbol;	    /* "..." */
-LibExtern SEXP R_DoubleColonSymbol;// "::"
-LibExtern SEXP R_DropSymbol;	    /* "drop" */
-LibExtern SEXP R_EvalSymbol;	    /* "eval" */
-LibExtern SEXP R_FunctionSymbol;   /* "function" */
-LibExtern SEXP R_LastvalueSymbol;  /* ".Last.value" */
-LibExtern SEXP R_LevelsSymbol;	    /* "levels" */
-LibExtern SEXP R_ModeSymbol;	    /* "mode" */
-LibExtern SEXP R_NaRmSymbol;	    /* "na.rm" */
-LibExtern SEXP R_NameSymbol;	    /* "name" */
-LibExtern SEXP R_NamesSymbol;	    /* "names" */
-LibExtern SEXP R_NamespaceEnvSymbol;// ".__NAMESPACE__."
-LibExtern SEXP R_PackageSymbol;    /* "package" */
-LibExtern SEXP R_PreviousSymbol;   /* "previous" */
-LibExtern SEXP R_QuoteSymbol;	    /* "quote" */
-LibExtern SEXP R_RowNamesSymbol;   /* "row.names" */
-LibExtern SEXP R_SeedsSymbol;	    /* ".Random.seed" */
-LibExtern SEXP R_SortListSymbol;   /* "sort.list" */
-LibExtern SEXP R_SourceSymbol;	    /* "source" */
-LibExtern SEXP R_SpecSymbol;	// "spec"
-LibExtern SEXP R_TripleColonSymbol;// ":::"
-LibExtern SEXP R_TspSymbol;	    /* "tsp" */
+extern SEXP R_AsCharacterSymbol;/* "as.character" */
+extern SEXP R_baseSymbol; // <-- backcompatible version of:
+extern SEXP R_BaseSymbol;	// "base"
+extern SEXP R_BraceSymbol;	    /* "{" */
+extern SEXP R_Bracket2Symbol;   /* "[[" */
+extern SEXP R_BracketSymbol;    /* "[" */
+extern SEXP R_ClassSymbol;	    /* "class" */
+extern SEXP R_DeviceSymbol;	    /* ".Device" */
+extern SEXP R_DimNamesSymbol;   /* "dimnames" */
+extern SEXP R_DimSymbol;	    /* "dim" */
+extern SEXP R_DollarSymbol;	    /* "$" */
+extern SEXP R_DotsSymbol;	    /* "..." */
+extern SEXP R_DoubleColonSymbol;// "::"
+extern SEXP R_DropSymbol;	    /* "drop" */
+extern SEXP R_EvalSymbol;	    /* "eval" */
+extern SEXP R_FunctionSymbol;   /* "function" */
+extern SEXP R_LastvalueSymbol;  /* ".Last.value" */
+extern SEXP R_LevelsSymbol;	    /* "levels" */
+extern SEXP R_ModeSymbol;	    /* "mode" */
+extern SEXP R_NaRmSymbol;	    /* "na.rm" */
+extern SEXP R_NameSymbol;	    /* "name" */
+extern SEXP R_NamesSymbol;	    /* "names" */
+extern SEXP R_NamespaceEnvSymbol;// ".__NAMESPACE__."
+extern SEXP R_PackageSymbol;    /* "package" */
+extern SEXP R_PreviousSymbol;   /* "previous" */
+extern SEXP R_QuoteSymbol;	    /* "quote" */
+extern SEXP R_RowNamesSymbol;   /* "row.names" */
+extern SEXP R_SeedsSymbol;	    /* ".Random.seed" */
+extern SEXP R_SortListSymbol;   /* "sort.list" */
+extern SEXP R_SourceSymbol;	    /* "source" */
+extern SEXP R_SpecSymbol;	// "spec"
+extern SEXP R_TripleColonSymbol;// ":::"
+extern SEXP R_TspSymbol;	    /* "tsp" */
 
-LibExtern SEXP R_dot_defined;      /* ".defined" */
-LibExtern SEXP R_dot_Method;       /* ".Method" */
-LibExtern SEXP R_dot_packageName;// ".packageName"
-LibExtern SEXP R_dot_target;       /* ".target" */
-LibExtern SEXP R_dot_Generic;      /* ".Generic" */
+extern SEXP R_dot_defined;      /* ".defined" */
+extern SEXP R_dot_Method;       /* ".Method" */
+extern SEXP R_dot_packageName;// ".packageName"
+extern SEXP R_dot_target;       /* ".target" */
+extern SEXP R_dot_Generic;      /* ".Generic" */
 
 /* Missing Values - others from Arith.h */
 #define NA_STRING	R_NaString
-LibExtern SEXP	R_NaString;	    /* NA_STRING as a CHARSXP */
-LibExtern SEXP	R_BlankString;	    /* "" as a CHARSXP */
-LibExtern SEXP	R_BlankScalarString;/* "" as a STRSXP */
+extern SEXP R_NaString;	    /* NA_STRING as a CHARSXP */
+extern SEXP R_BlankString;	    /* "" as a CHARSXP */
+LibExtern SEXP R_BlankScalarString;/* "" as a STRSXP */
 
 /* srcref related functions */
 SEXP R_GetCurrentSrcref(int);
@@ -770,7 +770,7 @@ const char *Rf_reEnc(const char *x, cetype_t ce_in, cetype_t ce_out, int subst);
 #define errorcall_return(cl,msg){ Rf_errorcall(cl, msg);   return R_NilValue; }
 
 #ifdef __MAIN__
-#undef extern
+#undef extern1
 #undef LibExtern
 #endif
 

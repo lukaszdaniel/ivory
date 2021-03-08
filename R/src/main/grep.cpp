@@ -62,6 +62,7 @@ constexpr int NWARN = 5;
 #include <CXXR/PairList.hpp>
 #include <CXXR/StringVector.hpp>
 #include <CXXR/IntVector.hpp>
+#include <CXXR/Logical.hpp>
 #include <Localization.h>
 #include <Defn.h>
 #include <Internal.h>
@@ -73,6 +74,7 @@ constexpr int NWARN = 5;
 
 using namespace std;
 using namespace R;
+using namespace CXXR;
 
 /* As from TRE 0.8.0, tre.h replaces regex.h */
 #include <tre/tre.h>

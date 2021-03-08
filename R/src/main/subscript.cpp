@@ -41,6 +41,7 @@
 #include <CXXR/PairList.hpp>
 #include <CXXR/Expression.hpp>
 #include <CXXR/StringVector.hpp>
+#include <CXXR/Symbol.hpp>
 #include <Localization.h>
 #include <Defn.h>
 

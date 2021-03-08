@@ -33,6 +33,7 @@
 #include <CXXR/PairList.hpp>
 #include <CXXR/StringVector.hpp>
 #include <CXXR/Logical.hpp>
+#include <CXXR/Expression.hpp>
 #include <Localization.h>
 #include <RContext.h>
 #include <Defn.h>
@@ -1096,77 +1097,6 @@ static void installFunTab(int i)
         SET_SYMVALUE(install(R_FunTab[i].name()), prim);
 }
 
-static void SymbolShortcuts(void)
-{  /* ../include/Rinternals.h : */
-    R_Bracket2Symbol = install("[[");
-    R_BracketSymbol = install("[");
-    R_BraceSymbol = install("{");
-    R_ClassSymbol = install("class");
-    R_DeviceSymbol = install(".Device");
-    R_DimNamesSymbol = install("dimnames");
-    R_DimSymbol = install("dim");
-    R_DollarSymbol = install("$");
-    R_DotsSymbol = install("...");
-    R_DropSymbol = install("drop");
-    R_EvalSymbol = install("eval");
-
-    /* The last value symbol is used by the interpreter for recording
-       the value of the most recently evaluated top level
-       expression. To avoid creating an additional reference that
-       would requires duplicating on modification this symbol does not
-       increment reference counts on its symbol value.  This is safe
-       since the symbol value corresponds to the base environment
-       where complex assignments are not allowed.  */
-    R_LastvalueSymbol = install(".Last.value");
-    DISABLE_REFCNT(R_LastvalueSymbol);
-
-    R_LevelsSymbol = install("levels");
-    R_ModeSymbol = install("mode");
-    R_NameSymbol  = install("name");
-    R_NamesSymbol = install("names");
-    R_NaRmSymbol = install("na.rm");
-    R_PackageSymbol = install("package");
-    R_PreviousSymbol = install("previous");
-    R_QuoteSymbol = install("quote");
-    R_RowNamesSymbol = install("row.names");
-    R_SeedsSymbol = install(".Random.seed");
-    R_SortListSymbol = install("sort.list");
-    R_SourceSymbol = install("source");   /* Not used by R or core packages */
-    R_TspSymbol = install("tsp");
-    /* ../include/Defn.h , i.e. non-public : */
-    R_CommentSymbol = install("comment");
-    R_DotEnvSymbol = install(".Environment");
-    R_ExactSymbol = install("exact");
-    R_RecursiveSymbol = install("recursive");
-    R_SrcfileSymbol = install("srcfile");
-    R_SrcrefSymbol = install("srcref");
-    R_WholeSrcrefSymbol = install("wholeSrcref");
-    R_TmpvalSymbol = install("*tmp*");
-    R_UseNamesSymbol = install("use.names");
-    R_ColonSymbol = install(":");
-    R_DoubleColonSymbol = install("::");
-    R_TripleColonSymbol = install(":::");
-    R_ConnIdSymbol = install("conn_id");
-    R_DevicesSymbol = install(".Devices");
-    R_baseSymbol = // <- back compatible, "deprecated"
-    R_BaseSymbol = install("base");
-    R_SpecSymbol = install("spec");
-    R_NamespaceEnvSymbol = install(".__NAMESPACE__.");
-    R_AsCharacterSymbol = install("as.character");
-    R_FunctionSymbol = install("function");
-
-    R_dot_Generic = install(".Generic");
-    R_dot_Method = install(".Method");
-    R_dot_Methods = install(".Methods");
-    R_dot_defined = install(".defined");
-    R_dot_target = install(".target");
-    R_dot_Group = install(".Group");
-    R_dot_Class = install(".Class");
-    R_dot_GenericCallEnv = install(".GenericCallEnv");
-    R_dot_GenericDefEnv = install(".GenericDefEnv");
-    R_dot_packageName = install(".packageName");
-}
-
 namespace
 {
     constexpr int N_DDVAL_SYMBOLS = 65;
@@ -1199,28 +1129,16 @@ SEXP Rf_installDDVAL(int n)
 /* initialize the symbol table */
 HIDDEN void R::InitNames()
 {
-    /* allocate the symbol table */
-    if (!(R_SymbolTable = (SEXP *)calloc(HSIZE, sizeof(SEXP))))
-        R_Suicide(_("couldn't allocate memory for symbol table"));
-
     // Logical constants.
     Logical::initialize();
 
     /* String constants (CHARSXP values) */
     String::initialize(); // NA(), blank()
-    Symbol::initialize();
+    Symbol::initialize(); // R_SymbolTable, R_UnboundValue, R_MissingArg, ...
 
     R_print.na_string = R_NaString;
     R_BlankScalarString = Rf_ScalarString(R_BlankString);
     MARK_NOT_MUTABLE(R_BlankScalarString);
-
-    /* Initialize the symbol Table */
-    for (int i = 0; i < HSIZE; i++)
-        R_SymbolTable[i] = R_NilValue;
-
-    /* Set up a set of globals so that a symbol table search can be
-       avoided when matching something like dim or dimnames. */
-    SymbolShortcuts();
 
     /*  Builtin Functions */
     for (size_t i = 0; i < R_FunTab.size(); i++)
@@ -1246,19 +1164,19 @@ SEXP Rf_install(const char *name)
     int i, hashcode;
 
     hashcode = R_Newhashpjw(name);
-    i = hashcode % HSIZE;
+    i = hashcode % Symbol::R_SymbolTable.size();
     /* Check to see if the symbol is already present;  if it is, return it. */
-    for (sym = R_SymbolTable[i]; sym != R_NilValue; sym = CDR(sym))
+    for (sym = Symbol::R_SymbolTable[i]; sym != R_NilValue; sym = CDR(sym))
         if (strcmp(name, CHAR(PRINTNAME(CAR(sym)))) == 0)
             return (CAR(sym));
     /* Create a new symbol node and link it into the table. */
     if (*name == '\0')
         error(_("attempt to use zero-length variable name"));
-    if (strlen(name) > MAXIDSIZE)
-        error(_("variable names are limited to %d bytes"), MAXIDSIZE);
+    if (strlen(name) > Symbol::MAXIDSIZE)
+        error(_("variable names are limited to %d bytes"), Symbol::MAXIDSIZE);
     sym = mkSYMSXP(mkChar(name), R_UnboundValue);
 
-    R_SymbolTable[i] = CONS(sym, R_SymbolTable[i]);
+    Symbol::R_SymbolTable[i] = CONS(sym, Symbol::R_SymbolTable[i]);
     return (sym);
 }
 
@@ -1271,38 +1189,43 @@ SEXP Rf_installNoTrChar(SEXP charSXP)
     SEXP sym;
     int i, hashcode;
 
-    if( !HASHASH(charSXP) ) {
-	hashcode = R_Newhashpjw(CHAR(charSXP));
-	SET_HASHVALUE(charSXP, hashcode);
-	SET_HASHASH(charSXP, 1);
-    } else {
-	hashcode = HASHVALUE(charSXP);
+    if (!HASHASH(charSXP))
+    {
+        hashcode = R_Newhashpjw(CHAR(charSXP));
+        SET_HASHVALUE(charSXP, hashcode);
+        SET_HASHASH(charSXP, 1);
     }
-    i = hashcode % HSIZE;
+    else
+    {
+        hashcode = HASHVALUE(charSXP);
+    }
+    i = hashcode % Symbol::R_SymbolTable.size();
     /* Check to see if the symbol is already present;  if it is, return it. */
-    for (sym = R_SymbolTable[i]; sym != R_NilValue; sym = CDR(sym))
-	if (streql(CHAR(charSXP), CHAR(PRINTNAME(CAR(sym))))) return (CAR(sym));
+    for (sym = Symbol::R_SymbolTable[i]; sym != R_NilValue; sym = CDR(sym))
+        if (streql(CHAR(charSXP), CHAR(PRINTNAME(CAR(sym)))))
+            return (CAR(sym));
     /* Create a new symbol node and link it into the table. */
     int len = LENGTH(charSXP);
     if (len == 0)
-	error(_("attempt to use zero-length variable name"));
-    if (len > MAXIDSIZE)
-	error(_("variable names are limited to %d bytes"), MAXIDSIZE);
+        error(_("attempt to use zero-length variable name"));
+    if (len > Symbol::MAXIDSIZE)
+        error(_("variable names are limited to %d bytes"), Symbol::MAXIDSIZE);
     if (IS_ASCII(charSXP) || (IS_UTF8(charSXP) && utf8locale) ||
-					(IS_LATIN1(charSXP) && latin1locale) )
-	sym = mkSYMSXP(charSXP, R_UnboundValue);
-    else {
-	/* This branch is to match behaviour of install (which is older):
+        (IS_LATIN1(charSXP) && latin1locale))
+        sym = mkSYMSXP(charSXP, R_UnboundValue);
+    else
+    {
+        /* This branch is to match behaviour of install (which is older):
 	   symbol C-string names are always interpreted as if
 	   in the native locale, even when they are not in the native locale */
-	PROTECT(charSXP);
-	sym = mkSYMSXP(mkChar(CHAR(charSXP)), R_UnboundValue);
-	SET_HASHVALUE(PRINTNAME(sym), hashcode);
-	SET_HASHASH(PRINTNAME(sym), 1);
-	UNPROTECT(1);
+        PROTECT(charSXP);
+        sym = mkSYMSXP(mkChar(CHAR(charSXP)), R_UnboundValue);
+        SET_HASHVALUE(PRINTNAME(sym), hashcode);
+        SET_HASHASH(PRINTNAME(sym), 1);
+        UNPROTECT(1);
     }
 
-    R_SymbolTable[i] = CONS(sym, R_SymbolTable[i]);
+    Symbol::R_SymbolTable[i] = CONS(sym, Symbol::R_SymbolTable[i]);
     return (sym);
 }
 

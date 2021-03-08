@@ -98,10 +98,6 @@ namespace CXXR
         {
             s_cons_car = cr;
             s_cons_cdr = tl;
-            if (cr)
-                cr->incrementRefCount();
-            if (tl)
-                tl->incrementRefCount();
             T *ans = new T(cr, tl, tg);
             s_cons_cdr = nullptr;
             s_cons_car = nullptr;
@@ -169,7 +165,7 @@ namespace CXXR
         xfix_refcnt(m_tail, tl);
 #ifdef TESTING_WRITE_BARRIER
         /* this should not add a non-tracking CDR to a tracking cell */
-        if (TRACKREFS(this) && tl && !TRACKREFS(tl))
+        if (trackrefs() && tl && !tl->trackrefs())
             Rf_error(_("inserting non-tracking CDR in tracking cell"));
 #endif
         m_tail = tl;

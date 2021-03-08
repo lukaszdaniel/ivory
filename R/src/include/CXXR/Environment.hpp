@@ -78,11 +78,11 @@ namespace CXXR
           : RObject(ENVSXP), m_enclosing(enclosing), m_frame(namevals), m_hashtable(nullptr), m_single_stepping(false),
             m_globally_cached(false), m_locked(false)
       {
+         if (m_enclosing)
+            m_enclosing->incrementRefCount();
          if (m_frame)
             m_frame->incrementRefCount();
 
-         if (m_enclosing)
-            m_enclosing->incrementRefCount();
       }
 
       /** @brief Base environment.
@@ -313,8 +313,16 @@ namespace CXXR
 
 extern "C"
 {
+   /** @brief An empty environment at the root of the environment tree
+    */
    extern SEXP R_EmptyEnv;
+
+   /** @brief The base environment; formerly R_NilValue
+    */
    extern SEXP R_BaseEnv;
+
+   /** @brief The "global" environment
+    */
    extern SEXP R_GlobalEnv;
 
    /** @brief Is this a CXXR::Environment?

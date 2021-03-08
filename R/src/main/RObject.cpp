@@ -59,9 +59,6 @@ namespace CXXR
         const auto &SETALTREPptr = SETALTREP;
     } // namespace ForceNonInline
 
-    // In CXXR R_NilValue is simply a null pointer:
-    SEXP R_NilValue = nullptr;
-
     RObject::~RObject()
     {
     }
@@ -297,6 +294,9 @@ namespace CXXR
 } // namespace CXXR
 
 // ***** C interface *****
+
+// In CXXR R_NilValue is simply a null pointer:
+SEXP R_NilValue = nullptr;
 
 SEXP ATTRIB(SEXP x)
 {
@@ -636,17 +636,6 @@ SEXP R_FixupRHS(SEXP x, SEXP y)
 Rboolean Rf_isFrame(SEXP s)
 {
     return Rf_inherits(s, "data.frame");
-}
-
-SEXP Rf_ScalarLogical(int x)
-{
-    extern SEXP R_LogicalNAValue, R_TrueValue, R_FalseValue;
-    if (x == NA_LOGICAL)
-        return R_LogicalNAValue;
-    else if (x != 0)
-        return R_TrueValue;
-    else
-        return R_FalseValue;
 }
 
 Rboolean Rf_conformable(SEXP x_, SEXP y)

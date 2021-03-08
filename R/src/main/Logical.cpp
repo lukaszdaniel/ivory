@@ -29,6 +29,10 @@
 
 namespace CXXR
 {
+    SEXP R_TrueValue = nullptr;
+    SEXP R_FalseValue = nullptr;
+    SEXP R_LogicalNAValue = nullptr;
+
     void Logical::initialize()
     {
         static GCRoot<LogicalVector> trueValue(new LogicalVector(1));

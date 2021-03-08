@@ -45,6 +45,7 @@
 #include <CXXR/IntVector.hpp>
 #include <CXXR/LogicalVector.hpp>
 #include <CXXR/String.hpp>
+#include <CXXR/Symbol.hpp>
 #include <Localization.h>
 #include <RContext.h>
 #include <Defn.h>

@@ -349,6 +349,11 @@ namespace CXXR
 
 namespace R
 {
+	/** @brief used in package utils and graphics
+	 */
+	extern bool known_to_be_latin1;
+
+	extern bool known_to_be_utf8;
 	void ssort(CXXR::String **x, int n);
 	bool Seql(SEXP a, SEXP b);
 	bool streql(const char *s, const char *t);
@@ -357,8 +362,13 @@ namespace R
 
 extern "C"
 {
-	extern SEXP R_NaString;	   /* NA_STRING as a CHARSXP */
-	extern SEXP R_BlankString; /* "" as a CHARSXP */
+	/** @brief NA_STRING as a CHARSXP
+	 */
+	extern SEXP R_NaString;
+
+	/** @brief "" as a CHARSXP
+	 */
+	extern SEXP R_BlankString;
 
 	/**
      * @param x \c const pointer to a CXXR::String.

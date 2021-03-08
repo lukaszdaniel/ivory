@@ -35,6 +35,7 @@
 #include <CXXR/Symbol.hpp>
 #include <CXXR/CachedString.hpp>
 #include <Rinternals.h>
+#include <Rinterface.h>
 #include <boost/regex.hpp>
 #include <sstream>
 
@@ -80,6 +81,10 @@ namespace CXXR
                 m_dd_index = n;
             }
         }
+        if (m_value)
+            m_value->incrementRefCount();
+        if (m_internalfunc)
+            const_cast<BuiltInFunction *>(m_internalfunc)->incrementRefCount();
     }
 
     Symbol::Symbol()
@@ -93,6 +98,7 @@ namespace CXXR
     GCRoot<Symbol> Symbol::s_restart_token(new Symbol(String::blank()), true);
     GCRoot<Symbol> Symbol::s_in_bc_interpreter(new Symbol(CachedString::obtain("<in-bc-interp>")), true);
     GCRoot<Symbol> Symbol::s_current_expression(new Symbol(CachedString::obtain("<current-expression>")), true);
+    std::array<RObject *, Symbol::HSIZE> Symbol::R_SymbolTable;
 
     namespace
     {
@@ -142,24 +148,34 @@ namespace CXXR
         R_RestartToken = Symbol::restartToken();
         R_InBCInterpreter = Symbol::inBCInterpreter();
         R_CurrentExpression = Symbol::currentExpression();
-
+        if (!R_SymbolTable.size())
+            R_Suicide(_("couldn't allocate memory for symbol table"));
+        /* Initialize the symbol Table */
+        for (size_t i = 0; i < Symbol::R_SymbolTable.size(); i++)
+            Symbol::R_SymbolTable[i] = nullptr;
+            /* Set up a set of globals so that a symbol table search can be
+       avoided when matching something like dim or dimnames. */
+#define PREDEFINED_SYMBOL(C_NAME, CXXR_NAME, R_NAME) \
+    C_NAME = Rf_install(R_NAME);
+#include <CXXR/PredefinedSymbols.hpp>
+#undef PREDEFINED_SYMBOL
+        /* The last value symbol is used by the interpreter for recording
+       the value of the most recently evaluated top level
+       expression. To avoid creating an additional reference that
+       would requires duplicating on modification this symbol does not
+       increment reference counts on its symbol value.  This is safe
+       since the symbol value corresponds to the base environment
+       where complex assignments are not allowed.  */
+        DISABLE_REFCNT(R_LastvalueSymbol);
 #if CXXR_FALSE
-        R_MissingArg = missingArgument();
-        R_UnboundValue = unboundValue();
-
         for (int i = 0; s_special_symbol_names[i] != nullptr; ++i)
         {
             Symbol *symbol = Symbol::obtain(s_special_symbol_names[i]);
             symbol->m_is_special_symbol = true;
         }
-
-#define PREDEFINED_SYMBOL(C_NAME, CXXR_NAME, R_NAME) \
-    C_NAME = CXXR::Symbols::CXXR_NAME = Symbol::obtain(R_NAME);
-#include <CXXR/PredefinedSymbols.hpp>
-#undef PREDEFINED_SYMBOL
-        // DISABLE_REFCNT(Symbols::LastvalueSymbol);
 #endif
     }
+
     void Symbol::checkST(const RObject *x)
     {
 #ifdef ENABLE_ST_CHECKS
@@ -176,6 +192,18 @@ namespace CXXR
 } // namespace CXXR
 
 // ***** C interface *****
+
+/* Symbol Table Shortcuts */
+#define PREDEFINED_SYMBOL(C_NAME, CXXR_NAME, R_NAME) \
+    SEXP C_NAME = nullptr;
+#include <CXXR/PredefinedSymbols.hpp>
+#undef PREDEFINED_SYMBOL
+
+SEXP R_MissingArg = nullptr;
+SEXP R_RestartToken = nullptr;
+SEXP R_UnboundValue = nullptr;
+SEXP R_CurrentExpression = nullptr;
+SEXP R_InBCInterpreter = nullptr;
 
 SEXP PRINTNAME(SEXP x)
 {

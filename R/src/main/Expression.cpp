@@ -55,10 +55,6 @@ namespace CXXR
         const auto &lconsptr = Rf_lcons;
     }
 
-    SEXP R_CurrentExpr = nullptr;
-    SEXP R_ReturnedValue;
-    bool R_Visible;
-
     Expression *Expression::clone(bool deep) const
     {
         return new Expression(*this, deep);
@@ -68,11 +64,13 @@ namespace CXXR
     {
         return staticTypeName();
     }
+
+    GCRoot<> R_CurrentExpr(nullptr);
+    GCRoot<> R_ReturnedValue(nullptr);
+    bool R_Visible = false;
 } // namespace CXXR
 
 // ***** C interface *****
-
-SEXP Rf_currentExpression();
 
 void Rf_setCurrentExpression(SEXP e);
 

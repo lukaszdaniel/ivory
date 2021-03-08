@@ -85,28 +85,6 @@ HIDDEN SEXP R::mkPRIMSXP(int offset, bool eval)
     return result;
 }
 
-Closure::Closure(const PairList *formal_args, const RObject *body,
-                 Environment *env)
-    : FunctionBase(CLOSXP), m_formals(formal_args), m_body(body),
-      m_environment(env), m_no_jit(false), m_maybe_jit(false)
-{
-    if (body)
-    {
-        switch (body->sexptype())
-        {
-        case CLOSXP:
-        case BUILTINSXP:
-        case SPECIALSXP:
-        case DOTSXP:
-        case ANYSXP:
-            Rf_error(_("invalid body argument for 'function'\nShould NEVER happen; please bug.report() [mkCLOSXP]"));
-            break;
-        default:
-            break;
-        }
-    }
-}
-
 /**
  * @brief Create a CXXR::Closure object
  * 

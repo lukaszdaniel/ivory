@@ -47,7 +47,33 @@ namespace CXXR
         const auto &SET_RSTEPptr = SET_RSTEP;
     } // namespace ForceNonInline
 
-    // Closure primary constructor is in dstruct.cpp (for the time being).
+    Closure::Closure(const PairList *formal_args, const RObject *body,
+                     Environment *env)
+        : FunctionBase(CLOSXP), m_formals(formal_args), m_body(body),
+          m_environment(env), m_no_jit(false), m_maybe_jit(false)
+    {
+        if (body)
+        {
+            switch (body->sexptype())
+            {
+            case CLOSXP:
+            case BUILTINSXP:
+            case SPECIALSXP:
+            case DOTSXP:
+            case ANYSXP:
+                Rf_error(_("invalid body argument for 'function'\nShould NEVER happen; please bug.report() [mkCLOSXP]"));
+                break;
+            default:
+                break;
+            }
+        }
+        if (m_formals)
+            const_cast<PairList *>(m_formals)->incrementRefCount();
+        if (m_body)
+            const_cast<RObject *>(m_body)->incrementRefCount();
+        if (m_environment)
+            m_environment->incrementRefCount();
+    }
 
     Closure *Closure::clone(bool deep) const
     {
