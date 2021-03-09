@@ -1400,9 +1400,9 @@ static SEXP ExpandDots(SEXP s, int expdots)
     SEXP r;
     // The call to ConsCell::convert below will allocate memory:
     GCRoot<> sr(s);
-    if (s == R_NilValue)
-	return s;
-    if (TYPEOF(CAR(s)) == DOTSXP ) {
+	if (s == R_NilValue)
+		return s;
+	if (TYPEOF(CAR(s)) == DOTSXP ) {
         // Convert CAR(s) to a PairList:
         {
             GCRoot<ConsCell> cc(SEXP_downcast<ConsCell *>(CAR(s)));
@@ -1420,8 +1420,8 @@ static SEXP ExpandDots(SEXP s, int expdots)
 	}
     }
     else
-	SET_ARGUSED(s, 0);
-    SETCDR(s, ExpandDots(CDR(s), expdots));
+		SET_ARGUSED(s, 0);
+	SETCDR(s, ExpandDots(CDR(s), expdots));
     return s;
 }
 
@@ -1432,16 +1432,16 @@ static SEXP subDots(SEXP rho)
 
     dots = findVar(R_DotsSymbol, rho);
 
-    if (dots == R_UnboundValue)
-	error(_("'...' used in a situation where it does not exist"));
+	if (dots == R_UnboundValue)
+		error(_("'...' used in a situation where it does not exist"));
 
-    if (dots == R_MissingArg)
-	return dots;
+	if (dots == R_MissingArg)
+		return dots;
 
-    if (!isPairList(dots))
-    error(_("'...' is not a pairlist"));
+	if (!isPairList(dots))
+		error(_("'...' is not a pairlist"));
 
-    len = length(dots);
+	len = length(dots);
     PROTECT(dots);
     PROTECT(rval=allocList(len));
     for(a = dots, b = rval, i = 1; i <= len; a = CDR(a), b = CDR(b), i++) {

@@ -116,6 +116,16 @@ namespace CXXR
          */
         static PairList *makeList(size_t sz);
 
+        unsigned char argUsed() const
+        {
+            return m_argused;
+        }
+
+        void setArgUsed(unsigned char v)
+        {
+            m_argused = v;
+        }
+
         /** @brief The name by which this type is known in R.
          *
          * @return the name by which this type is known in R.
@@ -153,7 +163,6 @@ namespace CXXR
         // compiler-generated version:
         PairList &operator=(const PairList &);
 
-    public:
         // 'Scratchpad' field used in handling argument lists,
         // formerly hosted in the 'gp' field of sxpinfo_struct.  It
         // would be good to remove this from the class altogether.
@@ -182,14 +191,14 @@ namespace CXXR
     // and unique.cpp).
     inline unsigned char ARGUSED(SEXP x)
     {
-        return SEXP_downcast<PairList *>(x)->m_argused;
+        return SEXP_downcast<PairList *>(x)->argUsed();
     }
 
     // Used in matching formal and actual arguments (within match.cpp
     // and unique.cpp).
     inline void SET_ARGUSED(SEXP x, unsigned char v)
     {
-        SEXP_downcast<PairList *>(x)->m_argused = v;
+        SEXP_downcast<PairList *>(x)->setArgUsed(v);
     }
 
 } // namespace CXXR
