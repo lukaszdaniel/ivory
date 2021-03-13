@@ -132,8 +132,11 @@ namespace CXXR
         explicit RObjectVector(R_xlen_t sz, T *init = nullptr)
             : VectorBase(ST, sz), m_data(sz, init)
         {
-            if (sz > (R_xlen_t)(R_SIZE_T_MAX / sizeof(RObject *)))
+            if (sz > R_xlen_t(R_SIZE_T_MAX / sizeof(RObject *)))
                 Rf_error(_("cannot allocate vector of length %d"), sz);
+#ifdef R_MEMORY_PROFILING
+            MemoryBank::R_ReportAllocation(convert2VEC<T>(sz) * sizeof(VECREC));
+#endif
         }
 
         /** @brief Copy constructor.
@@ -234,6 +237,9 @@ namespace CXXR
         : VectorBase(pattern, deep), m_data(pattern.size())
     {
         R_xlen_t sz = size();
+#ifdef R_MEMORY_PROFILING
+            MemoryBank::R_ReportAllocation(convert2VEC<T>(sz) * sizeof(VECREC));
+#endif
         for (R_xlen_t i = 0; i < sz; ++i)
             m_data[i] = dup_child2(pattern.m_data[i], deep);
     }

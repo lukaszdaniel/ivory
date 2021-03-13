@@ -63,6 +63,9 @@ namespace CXXR
         FixedVector(R_xlen_t sz, R_allocator_t *allocator = nullptr)
             : VectorBase(ST, sz), m_data(&m_singleton), m_allocator(allocator)
         {
+#ifdef R_MEMORY_PROFILING
+            MemoryBank::R_ReportAllocation(convert2VEC<T>(sz) * sizeof(VECREC));
+#endif
             if (sz > 1)
                 allocData(sz, allocator);
         }
@@ -78,6 +81,9 @@ namespace CXXR
             : VectorBase(ST, sz), m_data(&m_singleton),
               m_singleton(initializer), m_allocator(allocator)
         {
+#ifdef R_MEMORY_PROFILING
+            MemoryBank::R_ReportAllocation(convert2VEC<T>(sz) * sizeof(VECREC));
+#endif
             if (sz > 1)
                 allocData(sz, true, allocator);
         }
@@ -182,6 +188,9 @@ namespace CXXR
           m_singleton(pattern.m_singleton)
     {
         R_xlen_t sz = size();
+#ifdef R_MEMORY_PROFILING
+            MemoryBank::R_ReportAllocation(convert2VEC<T>(sz) * sizeof(VECREC));
+#endif
         if (sz > 1)
         {
             allocData(sz);

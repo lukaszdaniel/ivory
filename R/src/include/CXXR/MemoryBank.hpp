@@ -32,6 +32,7 @@
 
 #include <cstring>
 #include <config.h>
+#include <CXXR/RTypes.hpp>
 #include <CXXR/CellPool.hpp>
 #include <CXXR/SEXPTYPE.hpp>
 #include <R_ext/Rallocators.h>
@@ -166,6 +167,8 @@ namespace CXXR
 		 */
 		static void setMonitor(void (*monitor)(size_t) = nullptr,
 							   size_t threshold = 0);
+
+		static void R_ReportAllocation(R_size_t size);
 #endif
 	private:
 		typedef CellPool Pool;

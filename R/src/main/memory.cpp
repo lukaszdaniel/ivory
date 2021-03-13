@@ -240,10 +240,6 @@ const char *R::sexptype2char(const SEXPTYPE type) {
     }
 }
 
-#ifdef R_MEMORY_PROFILING
-static void R_ReportAllocation(R_size_t);
-#endif
-
 static void init_gc_grow_settings()
 {
     char *arg;
@@ -931,9 +927,9 @@ SEXP Rf_allocVector3(SEXPTYPE type, R_xlen_t length = 1, R_allocator_t *allocato
     RObject *s = nullptr;
 
     if (length > R_XLEN_T_MAX)
-        error(_("vector is too large")); /**** put length into message */
+        Rf_error(_("vector is too large")); /**** put length into message */
     else if (length < 0)
-        error(_("negative length vectors are not allowed"));
+        Rf_error(_("negative length vectors are not allowed"));
     /* number of vector cells to allocate */
     switch (type)
     {
@@ -941,9 +937,6 @@ SEXP Rf_allocVector3(SEXPTYPE type, R_xlen_t length = 1, R_allocator_t *allocato
         return nullptr;
     case RAWSXP:
     {
-#ifdef R_MEMORY_PROFILING
-        R_ReportAllocation(convert2VEC<bool>(length) * sizeof(VECREC));
-#endif
         s = new RawVector(length, allocator);
         break;
     }
@@ -951,57 +944,36 @@ SEXP Rf_allocVector3(SEXPTYPE type, R_xlen_t length = 1, R_allocator_t *allocato
         Rf_error(_("use of allocVector(CHARSXP ...) is defunct\n"));
     case LGLSXP:
     {
-#ifdef R_MEMORY_PROFILING
-        R_ReportAllocation(convert2VEC<int>(length) * sizeof(VECREC));
-#endif
         s = new LogicalVector(length, allocator);
         break;
     }
     case INTSXP:
     {
-#ifdef R_MEMORY_PROFILING
-        R_ReportAllocation(convert2VEC<int>(length) * sizeof(VECREC));
-#endif
         s = new IntVector(length, allocator);
         break;
     }
     case REALSXP:
     {
-#ifdef R_MEMORY_PROFILING
-        R_ReportAllocation(convert2VEC<double>(length) * sizeof(VECREC));
-#endif
         s = new RealVector(length, allocator);
         break;
     }
     case CPLXSXP:
     {
-#ifdef R_MEMORY_PROFILING
-        R_ReportAllocation(convert2VEC<Rcomplex>(length) * sizeof(VECREC));
-#endif
         s = new ComplexVector(length, allocator);
         break;
     }
     case STRSXP:
     {
-#ifdef R_MEMORY_PROFILING
-        R_ReportAllocation(convert2VEC<RObject>(length) * sizeof(VECREC));
-#endif
         s = new StringVector(length);
         break;
     }
     case EXPRSXP:
     {
-#ifdef R_MEMORY_PROFILING
-        R_ReportAllocation(convert2VEC<RObject>(length) * sizeof(VECREC));
-#endif
         s = new ExpressionVector(length);
         break;
     }
     case VECSXP:
     {
-#ifdef R_MEMORY_PROFILING
-        R_ReportAllocation(convert2VEC<RObject>(length) * sizeof(VECREC));
-#endif
         s = new ListVector(length);
         break;
     }
@@ -1009,7 +981,7 @@ SEXP Rf_allocVector3(SEXPTYPE type, R_xlen_t length = 1, R_allocator_t *allocato
     {
 #ifdef LONG_VECTOR_SUPPORT
         if (length > R_SHORT_LEN_MAX)
-            error(_("invalid length for pairlist"));
+            Rf_error(_("invalid length for pairlist"));
 #endif
         if (length == 0)
             return nullptr;
@@ -1021,7 +993,7 @@ SEXP Rf_allocVector3(SEXPTYPE type, R_xlen_t length = 1, R_allocator_t *allocato
     {
 #ifdef LONG_VECTOR_SUPPORT
         if (length > R_SHORT_LEN_MAX)
-            error(_("invalid length for pairlist"));
+            Rf_error(_("invalid length for pairlist"));
 #endif
         return Rf_allocList((int)length);
     }
@@ -1035,9 +1007,6 @@ SEXP Rf_allocVector3(SEXPTYPE type, R_xlen_t length = 1, R_allocator_t *allocato
 /* For future hiding of allocVector(CHARSXP) */
 HIDDEN SEXP R::allocCharsxp(R_len_t length)
 {
-#ifdef R_MEMORY_PROFILING
-        R_ReportAllocation(convert2VEC<char>(length + 1) * sizeof(VECREC));
-#endif
         UncachedString *ans = new UncachedString(length);
         ans->expose();
         return ans;
@@ -1522,7 +1491,7 @@ NORET SEXP do_Rprofmem(SEXP args)
 }
 
 #else
-static int R_IsMemReporting;  /* Rboolean more appropriate? */
+static bool R_IsMemReporting;
 static FILE *R_MemReportingOutfile;
 static R_size_t R_MemReportingThreshold;
 
@@ -1539,7 +1508,7 @@ static void R_OutputStackTrace(FILE *file)
     }
 }
 
-static void R_ReportAllocation(R_size_t size)
+void MemoryBank::R_ReportAllocation(R_size_t size)
 {
     if (R_IsMemReporting)
     {
@@ -1562,7 +1531,7 @@ static void R_EndMemReporting()
         fclose(R_MemReportingOutfile);
         R_MemReportingOutfile = nullptr;
     }
-    R_IsMemReporting = 0;
+    R_IsMemReporting = false;
     MemoryBank::setMonitor(0);
     return;
 }
@@ -1575,8 +1544,8 @@ static void R_InitMemReporting(SEXP filename, int append, R_size_t threshold)
     if (R_MemReportingOutfile == nullptr)
         error(_("'Rprofmem()': cannot open output file '%s'"), filename);
     R_MemReportingThreshold = threshold;
-    R_IsMemReporting = 1;
-    MemoryBank::setMonitor(R_ReportAllocation, threshold);
+    R_IsMemReporting = true;
+    MemoryBank::setMonitor(MemoryBank::R_ReportAllocation, threshold);
     return;
 }
 

@@ -65,6 +65,9 @@ namespace CXXR
         explicit UncachedString(size_t sz, cetype_t encoding = CE_NATIVE)
             : String(sz, encoding), m_databytes(sz + 1), m_data(m_short_string)
         {
+#ifdef R_MEMORY_PROFILING
+        MemoryBank::R_ReportAllocation(convert2VEC<char>(sz + 1) * sizeof(VECREC));
+#endif
             allocData(sz);
         }
 
