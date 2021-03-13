@@ -107,7 +107,7 @@ e5c2f0e3b9f6a16cccc4f4266a8edfe1 *inst/po/pl/LC_MESSAGES/R-boot.mo
 a7431f0d6baac9766369161ed90a9326 *inst/po/ko/LC_MESSAGES/R-boot.mo
 6e887574f4c46cddf29707098ab3fccf *inst/bd.q
 b4dfe10981d951aa98ea64ecbb96f778 *tests/parallel-censboot.R
-83bc060b0e60602e993b7c6056c4c7d9 *tests/Examples/boot-Ex.Rout.save
+5d9a896705c21bc6d8e217e8a3422909 *tests/Examples/boot-Ex.Rout.save
 167a3d2551651549fa966891802002d5 *R/bootpracs.q
 5bddb80df4b89a6799e6e5c6e2d6d980 *R/bootfuns.q
 5a3e04afacf5edf673d0b11aef8fe760 *data/remission.rda

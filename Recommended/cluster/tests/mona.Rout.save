@@ -1,9 +1,9 @@
 
-Ivory Under development (unstable) (2021-01-08 r1392) -- "Internationalized Version of R"
+Ivory Under development (unstable) (2021-03-12 r1450) -- "Internationalized Version of R"
 Copyright (C) 2013-2021 Lukasz Daniel (lukasz.daniel@gmail.com)
 See README-IVORY file for details.
 
-R Under development (unstable) (2021-01-08 r79812) -- "Unsuffered Consequences"
+R Under development (unstable) (2021-03-12 r80086) -- "Unsuffered Consequences"
 Copyright (C) 2021 The R Foundation for Statistical Computing
 Platform: x86_64-pc-linux-gnu (64-bit)
 
@@ -2813,4 +2813,4 @@ Error in command 'mona(cbind(1:0), trace = 2)':
 > 
 > proc.time()
    user  system elapsed 
-  2.268   0.069   2.329 
+  2.207   0.075   2.274 

@@ -343,12 +343,12 @@ db2b6e128769fe949671803e3dff6737 *tests/gls.R
 4c68332d00c3e3f1818fcb8aa60e0d9b *tests/updateLme.R
 dea84bf6c5e3f953ea2c523ef749bfae *tests/fitted.R
 c891766c6501e010dd5f64ce00861d0e *tests/predict.lme.R
-14ad9ca0653ae3b57233b24d6d9854c8 *tests/lme.Rout.save
+7b2118b93ba843680d1cc2e9408cd079 *tests/lme.Rout.save
 cdced2c0665ee6e3f80188b92267e8c8 *tests/augPredmissing.R
 683f1a1d208c479e7bed8df5bb420a2e *tests/anova.gls.R
-70e52ee166b53460ceb607b8b59402f6 *tests/coef.Rout.save
+bbf25bd34f7dcd55dae8055572977d40 *tests/coef.Rout.save
 8c6c3eb850ed8c354ba02b1cbbc560bf *tests/gnls-ch8.R
-203ce6e45bbddd485754488b082e06a5 *tests/missing.Rout.save
+8e2ae911148ab5710f23121b349c4ee4 *tests/missing.Rout.save
 4191899f37fc372e70793b9c71d72304 *tests/missing.R
 8ff37dbadc319edc1c2c0a737ab2f845 *tests/contrMat.R
 c2e022b6e55e459304c952ddc3c47705 *R/varFunc.R

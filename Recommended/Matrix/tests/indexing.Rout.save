@@ -1,9 +1,9 @@
 
-Ivory Under development (unstable) (2021-03-05 r1446) -- "Internationalized Version of R"
+Ivory Under development (unstable) (2021-03-12 r1450) -- "Internationalized Version of R"
 Copyright (C) 2013-2021 Lukasz Daniel (lukasz.daniel@gmail.com)
 See README-IVORY file for details.
 
-R Under development (unstable) (2021-03-05 r80078) -- "Unsuffered Consequences"
+R Under development (unstable) (2021-03-12 r80086) -- "Unsuffered Consequences"
 Copyright (C) 2021 The R Foundation for Statistical Computing
 Platform: x86_64-pc-linux-gnu (64-bit)
 
@@ -184,7 +184,7 @@ M[m,i,m] : nargs()=3
 M[m,i,m] : nargs()=3
 Csp[m,i,l] : nargs()=4
 > showProc.time()
-Time (user system elapsed): 8.66 0.04 8.7 
+Time (user system elapsed): 8.746 0.016 8.763 
 > 
 > ## Bug found thanks to Timothy Mak, Feb 3, 2017:
 > ## sparseMatrix logical indexing with (partial) NA:
@@ -329,7 +329,7 @@ M[logi,m,m] : nargs()=2
 M[logi,m,m] : nargs()=2
 M[logi,m,m] : nargs()=2
 > showProc.time()
-Time (user system elapsed): 3.209 0.008 3.217 
+Time (user system elapsed): 3.235 0.02 3.256 
 > 
 > ## more sparse Matrices --------------------------------------
 > 
@@ -1124,7 +1124,7 @@ ok( d )
 == ###======================================================================
 
 > showProc.time()
-Time (user system elapsed): 13.009 0.004 13.014 
+Time (user system elapsed): 13.282 0.008 13.291 
 > 
 > if(doExtras) {### {was ./AAA_index.R, MM-only}
 +     ## an nsparse-example
@@ -1353,7 +1353,7 @@ Csp[i,i,l] : nargs()=4
 M[i,i,m] : nargs()=3
 Csp[i,i,l] : nargs()=4
 > showProc.time()
-Time (user system elapsed): 4.039 0.004 4.044 
+Time (user system elapsed): 4.061 0.008 4.069 
 > 
 > stopifnot(all.equal(mC[,3], mm[,3]),
 + 	  identical(mC[ij], mC[ij + 0.4]),
@@ -1673,7 +1673,7 @@ Csp[i,m,l] : nargs()=4
 M[m,i,m] : nargs()=3
 Csp[m,i,l] : nargs()=4
 > showProc.time()
-Time (user system elapsed): 2.8 0.008 2.809 
+Time (user system elapsed): 2.88 0.008 2.888 
 > 
 > ##---  "nsparse*" sub-assignment :----------
 > M <- Matrix(c(1, rep(0,7), 1:4), 3,4)
@@ -1830,7 +1830,7 @@ k.. replTmat(x,i,j,v): nargs()= 4; cl.(x)=ngTMatrix; len.(value)=1; missing (i,j
 .. replTmat(x,i,j,v): nargs()= 4; cl.(x)=ngTMatrix; len.(value)=1; missing (i,j) = (1,0)
 .. replTmat(x,i,j,v): nargs()= 4; cl.(x)=ngTMatrix; len.(value)=1; 
 .> showProc.time()
-Time (user system elapsed): 2.738 0 2.738 
+Time (user system elapsed): 2.763 0 2.763 
 > Nn <- Nn0
 > ## Check that  NA is interpreted as TRUE (with a warning), for "nsparseMatrix":
 > assertWarning(Nn[ii <-     3  ] <- NA); stopifnot(isValid(Nn,"nsparseMatrix"), Nn[ii])
@@ -2258,7 +2258,7 @@ as(<triangular (ge)matrix>, dtCMatrix): valid: TRUE
 M[m,i,m] : nargs()=3
 Csp[m,i,l] : nargs()=4
 > showProc.time()
-Time (user system elapsed): 9.194 0.012 9.207 
+Time (user system elapsed): 9.141 0.008 9.15 
 > 
 > 
 > ## "Vector indices" -------------------
@@ -2636,7 +2636,7 @@ M[i,m,m] : nargs()=3
 Tsp[i,m,l]: nargs()=4
 Csp[i,m,l] : nargs()=4
 > showProc.time()
-Time (user system elapsed): 4.009 0.008 4.018 
+Time (user system elapsed): 4.275 0.004 4.279 
 > 
 > ## Sub *Assignment* ---- now works (partially):
 > mt0 <- mt
@@ -2791,7 +2791,7 @@ Csp[i,i,l] : nargs()=4
 r2  2
 r4  .
 > showProc.time()
-Time (user system elapsed): 3.678 0 3.678 
+Time (user system elapsed): 3.671 0.004 3.675 
 > options(Matrix.verbose = TRUE)
 > 
 > mc # no longer has non-structural zeros
@@ -3012,7 +3012,7 @@ M[i,j] <- v :  coercing symmetric M[] into non-symmetric
 > assert.EQ.mat(t2, m)# ok
 > assert.EQ.mat(s2, m)# failed in 0.9975-8
 > showProc.time()
-Time (user system elapsed): 8.322 0.008 8.33 
+Time (user system elapsed): 8.666 0 8.667 
 > 
 > 
 > ## m[cbind(i,j)] <- value: (2-column matrix subassignment):
@@ -3200,7 +3200,7 @@ M & T ("symm"): dgTMatrix dgTMatrix
 > 
 > cc <- capture.output(show(dLrg))# show(<diag>) used to error for large n
 > showProc.time()
-Time (user system elapsed): 6.025 0.028 6.054 
+Time (user system elapsed): 5.69 0 5.69 
 > 
 > ## Large Matrix indexing / subassignment
 > ## ------------------------------------- (from ex. by Imran Rashid)
@@ -3274,7 +3274,7 @@ M[m,i,m] : nargs()=3
 Csp[m,i,l] : nargs()=4
 > 
 > showProc.time()
-Time (user system elapsed): 19.987 0.299 20.288 
+Time (user system elapsed): 21.409 0.347 21.758 
 > options(op)# revert
 > ##
 > if(doExtras) {#-----------------------------------------------------------------
@@ -3382,10 +3382,10 @@ diagnosing replTmat(x,i,j,v): nargs()= 3; missing (i,j) = (0,1)
 > 
 > 
 > showProc.time()
-Time (user system elapsed): 1.833 0.009 1.841 
+Time (user system elapsed): 1.851 0.009 1.859 
 > 
 > if(!interactive()) warnings()
 > 
 > proc.time()
    user  system elapsed 
- 99.403   0.484  99.886 
+101.728   0.485 102.210 

@@ -195,12 +195,12 @@ f2eeba77216158f02085ec4f29e586c0 *tests/rlm.R
 a23ddf89e02a02ed030e4ed5538d3430 *tests/regression.R
 7fea2161b12d01c8940107342815dd0e *tests/hubers.R
 80c50d5c299f0d0a4dbbb457a235faba *tests/lme.R
-d89057830c80e6c2675f2448da933b26 *tests/fitdistr.Rout.save
+d5c9585add4b5e42adb7f96f10853954 *tests/fitdistr.Rout.save
 d87553db40364fdc9c337fa31c009b17 *tests/confint.R
 edee76adc2d27e4ba90f1ff79360148b *tests/polr.R
-833174166f50f9ae9155e57275d98d21 *tests/regression.Rout.save
+419cb279f604c99593000f383c26cdc0 *tests/regression.Rout.save
 f5fd08eb22747dbe31443bc3560cfa2d *tests/scripts.R
-14a2c70f2fdc43fc40e49a54c780a301 *tests/Examples/MASS-Ex.Rout.save
+a68db3ab05f87aa2def92515cca3d567 *tests/Examples/MASS-Ex.Rout.save
 f4e6b3ffb6521ea7625515e2f0ae7f98 *tests/profile.R
 7b1360150b8598b576e82534b12345a2 *tests/BankWages.rda
 a0854fee9b36691ca1d0880da31d6f79 *tests/fitdistr.R

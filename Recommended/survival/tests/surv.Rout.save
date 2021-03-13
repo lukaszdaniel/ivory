@@ -1,9 +1,9 @@
 
-Ivory Under development (unstable) (2021-01-08 r1392) -- "Internationalized Version of R"
+Ivory Under development (unstable) (2021-03-12 r1450) -- "Internationalized Version of R"
 Copyright (C) 2013-2021 Lukasz Daniel (lukasz.daniel@gmail.com)
 See README-IVORY file for details.
 
-R Under development (unstable) (2021-01-08 r79812) -- "Unsuffered Consequences"
+R Under development (unstable) (2021-03-12 r80086) -- "Unsuffered Consequences"
 Copyright (C) 2021 The R Foundation for Statistical Computing
 Platform: x86_64-pc-linux-gnu (64-bit)
 
@@ -97,4 +97,4 @@ In command 'Surv(c(1, 10, 10, 30, 30), c(9, NA, 5, 20, 40), c(1, 0, 2, 3, 3), ty
 > 
 > proc.time()
    user  system elapsed 
- 15.012   0.128  15.131 
+ 12.711   0.057  12.771 
