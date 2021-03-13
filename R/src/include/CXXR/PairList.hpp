@@ -154,10 +154,7 @@ namespace CXXR
         // its tail.  Used in implementing the copy constructor
         // proper.  The third parameter is simply to provide a
         // distinct signature, and its value is ignored.
-        PairList(const PairList &pattern, bool deep, int)
-            : ConsCell(pattern, deep, 0), m_argused(0)
-        {
-        }
+        PairList(const PairList &pattern, bool deep, int);
 
         // Not implemented yet.  Declared to prevent
         // compiler-generated version:

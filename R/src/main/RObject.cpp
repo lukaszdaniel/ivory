@@ -81,16 +81,26 @@ namespace CXXR
 
     RObject::RObject(const RObject &pattern, bool deep)
         : GCNode(), m_type(pattern.m_type), m_scalar(pattern.m_scalar), m_has_class(pattern.m_has_class), m_alt(pattern.m_alt), /*m_gpbits(pattern.m_gpbits),*/
-          m_trace(false), m_spare(0), m_named(0), m_extra(0), m_s4_object(pattern.m_s4_object),
+          m_trace(false), m_spare(false), m_named(0), m_extra(0), m_s4_object(pattern.m_s4_object),
           m_active_binding(false),
           m_binding_locked(false), m_assignment_pending(false), m_attrib(clone(pattern.m_attrib, deep))
     {
+        if (m_attrib)
+            m_attrib->incrementRefCount();
     }
 
     RObject *RObject::clone(bool deep) const
     {
         std::cerr << "clone() not yet implemented for this type.\n";
         abort();
+    }
+
+    void RObject::cloneAttributes(const RObject &source, bool deep)
+    {
+        m_attrib = RObject::clone(source.m_attrib, deep);
+        if (m_attrib)
+            m_attrib->incrementRefCount();
+        m_has_class = source.m_has_class;
     }
 
     namespace

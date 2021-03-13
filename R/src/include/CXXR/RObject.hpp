@@ -594,6 +594,10 @@ namespace CXXR
          */
         virtual const char *typeName() const;
 
+        // Introduced temporarily while copy constructors are being
+        // rolled out:
+        void cloneAttributes(const RObject &source, bool deep);
+
         /** @brief Return pointer to a copy of this object.
          *
          * This function creates a copy of this object, and returns a

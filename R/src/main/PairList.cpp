@@ -51,6 +51,11 @@ namespace CXXR
     GCRoot<> PairList::s_cons_car;
     GCRoot<PairList> PairList::s_cons_cdr;
 
+    PairList::PairList(const PairList &pattern, bool deep, int)
+        : ConsCell(pattern, deep, 0), m_argused(0)
+    {
+    }
+
     PairList::PairList(const PairList &pattern, bool deep)
         : ConsCell(pattern, deep, 0), m_argused(0)
     {

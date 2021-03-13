@@ -78,20 +78,22 @@ namespace CXXR
         : RObject(pattern, deep), m_car(dup_child2(pattern.car(), deep)),
           m_tail(clone(pattern.tail(), deep)), m_tag(pattern.tag()), m_missing(0)
     {
-        // if (m_car)
-        //     m_car->incrementRefCount();
-        // if (m_tail)
-        //     m_tail->incrementRefCount();
+        if (m_car)
+            m_car->incrementRefCount();
+        if (m_tag)
+            m_tag->incrementRefCount();
+        if (m_tail)
+            m_tail->incrementRefCount();
     }
 
     ConsCell::ConsCell(const ConsCell &pattern, bool deep, int)
         : RObject(pattern, deep), m_car(dup_child2(pattern.car(), deep)), m_tail(nullptr),
           m_tag(pattern.tag()), m_missing(0)
     {
-        // if (m_car)
-        //     m_car->incrementRefCount();
-        // if (m_tail)
-        //     m_tail->incrementRefCount();
+        if (m_car)
+            m_car->incrementRefCount();
+        if (m_tag)
+            m_tag->incrementRefCount();
     }
 
     namespace
