@@ -73,8 +73,14 @@ namespace CXXR
       Closure(const Closure &pattern, bool deep)
           : FunctionBase(pattern, deep),
             m_formals(pattern.m_formals), m_body(pattern.m_body),
-            m_environment(pattern.m_environment), m_no_jit(pattern.m_no_jit), m_maybe_jit(pattern.m_maybe_jit)
+            m_environment(pattern.m_environment ? pattern.m_environment : Environment::global()), m_no_jit(pattern.m_no_jit), m_maybe_jit(pattern.m_maybe_jit)
       {
+         if (m_formals)
+            const_cast<PairList *>(m_formals)->incrementRefCount();
+         if (m_body)
+            const_cast<RObject *>(m_body)->incrementRefCount();
+         if (m_environment)
+            m_environment->incrementRefCount();
       }
 
       /** @brief Access the body of the Closure.

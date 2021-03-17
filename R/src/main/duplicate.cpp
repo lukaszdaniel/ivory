@@ -37,6 +37,7 @@
 #include <CXXR/StringVector.hpp>
 #include <CXXR/Closure.hpp>
 #include <CXXR/ExpressionVector.hpp>
+#include <CXXR/RAltRep.hpp>
 #include <Localization.h>
 #include <Defn.h>
 
@@ -57,53 +58,6 @@ using namespace CXXR;
  *  protection stack, and second, the duplication of
  *  promises requires that the promises be forced and
  *  the value duplicated.  */
-
-#define COPY_TRUELENGTH(to, from)                  \
-	do                                             \
-	{                                              \
-		if (from && !IS_GROWABLE(from))            \
-			SET_TRUELENGTH(to, XTRUELENGTH(from)); \
-	} while (0)
-
-/* This macro pulls out the common code in copying an atomic vector.
-   The special handling of the scalar case (__n__ == 1) seems to make
-   a small but measurable difference, at least for some cases
-   and when (as in R 2.15.x) a for() loop was used.
-*/
-/* CXXR: no longer carries out the allocation of the duplicate vector,
- * which must now be done beforehand.
- */
-#define DUPLICATE_ATOMIC_VECTOR(type, fun, to, from, deep)    \
-	do                                                        \
-	{                                                         \
-		R_xlen_t __n__ = XLENGTH(from);                       \
-		PROTECT(from);                                        \
-		PROTECT(to);                                          \
-		if (__n__ == 1)                                       \
-			fun(to)[0] = fun(from)[0];                        \
-		else                                                  \
-			memcpy(fun(to), fun(from), __n__ * sizeof(type)); \
-		DUPLICATE_ATTRIB(to, from, deep);                     \
-		COPY_TRUELENGTH(to, from);                            \
-		UNPROTECT(2);                                         \
-	} while (0)
-
-/* The following macros avoid the cost of going through calls to the
-   assignment functions (and duplicate in the case of ATTRIB) when the
-   ATTRIB or TAG value to be stored is R_NilValue, the value the field
-   will have been set to by the allocation function */
-#define DUPLICATE_ATTRIB(to, from, deep)              \
-	do                                                \
-	{                                                 \
-		SEXP __a__ = ATTRIB(from);                    \
-		if (__a__ != R_NilValue)                      \
-		{                                             \
-			if (to)                                   \
-				(to)->cloneAttributes(*(from), deep); \
-			if (to && from)                           \
-				to->setS4Object(from->isS4Object());  \
-		}                                             \
-	} while (0)
 
 /* For memory profiling.  */
 /* We want a count of calls to duplicate from outside
@@ -257,7 +211,7 @@ Rboolean R_cycle_detected(SEXP s, SEXP child)
 			el = CDR(el);
 		}
 	}
-	else if (isVectorList(child))
+	else if (Rf_isVectorList(child))
 	{
 		for (int i = 0; i < Rf_length(child); i++)
 			if (R_cycle_detected(s, VECTOR_ELT(child, i)))
@@ -268,16 +222,9 @@ Rboolean R_cycle_detected(SEXP s, SEXP child)
 
 /*static*/ SEXP duplicate1(SEXP s, bool deep)
 {
-	SEXP t;
-
-	if (ALTREP(s))
-	{
-		PROTECT(s); /* the methods should protect, but ... */
-		SEXP ans = ALTREP_DUPLICATE_EX(s, Rboolean(deep));
-		UNPROTECT(1);
-		if (ans)
-			return ans;
-	}
+	SEXP t = nullptr;
+	if (!s)
+		return nullptr;
 
 	switch (TYPEOF(s))
 	{
@@ -289,126 +236,25 @@ Rboolean R_cycle_detected(SEXP s, SEXP child)
 	case EXTPTRSXP:
 	case BCODESXP:
 	case WEAKREFSXP:
+	case PROMSXP:
+	case CHARSXP:
 		return s;
 	case CLOSXP:
-#if CXXR_TRUE
-		PROTECT(s);
-		PROTECT(t = new Closure(SEXP_downcast<PairList *>(FORMALS(s)),
-								BODY(s),
-								SEXP_downcast<Environment *>(CLOENV(s))));
-		DUPLICATE_ATTRIB(t, s, deep);
-		if (NOJIT(s))
-			SET_NOJIT(t);
-		if (MAYBEJIT(s))
-			SET_MAYBEJIT(t);
-		UNPROTECT(2);
-		break;
-#else
-		return s->clone(deep);
-#endif
 	case LISTSXP:
 	case LANGSXP:
 	case DOTSXP:
-		return s->clone(deep);
-	case CHARSXP:
-		return s;
 	case EXPRSXP:
-#if CXXR_TRUE
-	{
-		R_xlen_t n = XLENGTH(s);
-		PROTECT(s);
-		PROTECT(t = new ExpressionVector(n));
-		for (R_xlen_t i = 0; i < n; i++)
-			SET_XVECTOR_ELT(t, i, duplicate_child(XVECTOR_ELT(s, i), deep));
-		DUPLICATE_ATTRIB(t, s, deep);
-		COPY_TRUELENGTH(t, s);
-		UNPROTECT(2);
-	}
-	break;
-#else
-		return s->clone(deep);
-#endif
 	case VECSXP:
-#if CXXR_TRUE
-	{
-		R_xlen_t n = XLENGTH(s);
-		PROTECT(s);
-		PROTECT(t = new ListVector(n));
-		for (R_xlen_t i = 0; i < n; i++)
-			SET_VECTOR_ELT(t, i, duplicate_child(VECTOR_ELT(s, i), deep));
-		DUPLICATE_ATTRIB(t, s, deep);
-		COPY_TRUELENGTH(t, s);
-		UNPROTECT(2);
-	}
-	break;
-#else
-		return s->clone(deep);
-#endif
 	case LGLSXP:
-#if CXXR_TRUE
-		t = new LogicalVector(XLENGTH(s));
-		DUPLICATE_ATOMIC_VECTOR(int, LOGICAL, t, s, deep);
-		break;
-#else
-		return s->clone(deep);
-#endif
 	case INTSXP:
-#if CXXR_TRUE
-		t = new IntVector(XLENGTH(s));
-		DUPLICATE_ATOMIC_VECTOR(int, INTEGER, t, s, deep);
-		break;
-#else
-		return s->clone(deep);
-#endif
 	case REALSXP:
-#if CXXR_TRUE
-		t = new RealVector(XLENGTH(s));
-		DUPLICATE_ATOMIC_VECTOR(double, REAL, t, s, deep);
-		break;
-#else
-		return s->clone(deep);
-#endif
 	case CPLXSXP:
-#if CXXR_TRUE
-		t = new ComplexVector(XLENGTH(s));
-		DUPLICATE_ATOMIC_VECTOR(Rcomplex, COMPLEX, t, s, deep);
-		break;
-#else
-		return s->clone(deep);
-#endif
 	case RAWSXP:
-#if CXXR_TRUE
-		t = new RawVector(XLENGTH(s));
-		DUPLICATE_ATOMIC_VECTOR(Rbyte, RAW, t, s, deep);
-		break;
-#else
-		return s->clone(deep);
-#endif
 	case STRSXP:
-#if CXXR_TRUE
-		/* direct copying and bypassing the write barrier is OK since
-		 * t was just allocated and so it cannot be older than any of
-		 * the elements in s.  LT
-		 */
-		t = new StringVector(XLENGTH(s));
-		DUPLICATE_ATOMIC_VECTOR(String *, STRING_PTR, t, s, deep);
-		break;
-#else
-		return s->clone(deep);
-#endif
-	case PROMSXP:
-		return s;
 	case S4SXP:
 		return s->clone(deep);
 	default:
 		UNIMPLEMENTED_TYPE("duplicate()", s);
-		t = s; /* for -Wall */
-	}
-
-	if (TYPEOF(t) == TYPEOF(s)) /* surely it only makes sense in this case*/
-	{
-		SET_OBJECT(t, OBJECT(s));
-		t->setS4Object(IS_S4_OBJECT(s));
 	}
 
 	return t;
@@ -454,7 +300,7 @@ void Rf_copyVector(SEXP s, SEXP t)
 void Rf_copyListMatrix(SEXP s, SEXP t, Rboolean byrow)
 {
 	int nr = Rf_nrows(s), nc = Rf_ncols(s);
-	R_xlen_t ns = ((R_xlen_t)nr) * nc;
+	R_xlen_t ns = R_xlen_t(nr) * nc;
 	SEXP pt = t;
 	if (byrow)
 	{
@@ -508,23 +354,19 @@ void Rf_copyMatrix(SEXP s, SEXP t, Rboolean byrow)
 			break;
 		case LGLSXP:
 			FILL_MATRIX_BYROW_ITERATE(0, nr, nc, nt)
-			LOGICAL(s)
-			[didx] = LOGICAL(t)[sidx];
+			LOGICAL(s)[didx] = LOGICAL(t)[sidx];
 			break;
 		case INTSXP:
 			FILL_MATRIX_BYROW_ITERATE(0, nr, nc, nt)
-			INTEGER(s)
-			[didx] = INTEGER(t)[sidx];
+			INTEGER(s)[didx] = INTEGER(t)[sidx];
 			break;
 		case REALSXP:
 			FILL_MATRIX_BYROW_ITERATE(0, nr, nc, nt)
-			REAL(s)
-			[didx] = REAL(t)[sidx];
+			REAL(s)[didx] = REAL(t)[sidx];
 			break;
 		case CPLXSXP:
 			FILL_MATRIX_BYROW_ITERATE(0, nr, nc, nt)
-			COMPLEX(s)
-			[didx] = COMPLEX(t)[sidx];
+			COMPLEX(s)[didx] = COMPLEX(t)[sidx];
 			break;
 		case EXPRSXP:
 			FILL_MATRIX_BYROW_ITERATE(0, nr, nc, nt)
@@ -536,15 +378,14 @@ void Rf_copyMatrix(SEXP s, SEXP t, Rboolean byrow)
 			break;
 		case RAWSXP:
 			FILL_MATRIX_BYROW_ITERATE(0, nr, nc, nt)
-			RAW(s)
-			[didx] = RAW(t)[sidx];
+			RAW(s)[didx] = RAW(t)[sidx];
 			break;
 		default:
 			UNIMPLEMENTED_TYPE("copyMatrix()", s);
 		}
 	}
 	else
-		copyVector(s, t);
+		Rf_copyVector(s, t);
 }
 
 #define COPY_ELT_WITH_RECYCLE(TNAME, GETELT, SETELT)                                              \

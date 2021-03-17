@@ -203,7 +203,7 @@ using namespace CXXR;
  */
 
 static void OutStringVec(R_outpstream_t stream, SEXP s, SEXP ref_table);
-static void WriteItem (SEXP s, SEXP ref_table, R_outpstream_t stream);
+static void WriteItem(SEXP s, SEXP ref_table, R_outpstream_t stream);
 static SEXP ReadItem(SEXP ref_table, R_inpstream_t stream);
 static void WriteBC(SEXP s, SEXP ref_table, R_outpstream_t stream);
 static SEXP ReadBC(SEXP ref_table, R_inpstream_t stream);
@@ -1039,7 +1039,7 @@ static void WriteItem(SEXP s, SEXP ref_table, R_outpstream_t stream)
 	SEXP new_s;
 	R_compile_pkgs = FALSE;
 	PROTECT(new_s = R_cmpfun1(s));
-	WriteItem (new_s, ref_table, stream);
+	WriteItem(new_s, ref_table, stream);
 	UNPROTECT(1);
 	R_compile_pkgs = TRUE;
 	return;
@@ -1793,7 +1793,7 @@ static SEXP R_FindNamespace1(SEXP info)
     where = PROTECT(ScalarString(mkChar(lastname)));
     SEXP s_getNamespace = install("..getNamespace");
     PROTECT(expr = LCONS(s_getNamespace,
-			 LCONS(info, LCONS(where, R_NilValue))));
+			 CONS(info, CONS(where, R_NilValue))));
     val = eval(expr, R_GlobalEnv);
     UNPROTECT(3);
     return val;

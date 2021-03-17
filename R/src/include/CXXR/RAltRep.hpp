@@ -81,7 +81,8 @@ namespace CXXR
             m_wrapper_type = type;
         }
 
-        // Virtual function of RObject:
+        // Virtual functions of RObject:
+        AltRep *clone(bool deep) const override;
         const char *typeName() const override;
 
     private:
@@ -92,7 +93,6 @@ namespace CXXR
 
         // Not implemented yet.  Declared to prevent
         // compiler-generated versions:
-        AltRep(const AltRep &);
         AltRep &operator=(const AltRep &);
     };
 } // namespace CXXR

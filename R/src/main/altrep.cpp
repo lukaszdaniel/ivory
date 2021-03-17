@@ -139,7 +139,6 @@ HIDDEN void R_reinit_altrep_classes(DllInfo *dll)
 
 static void SET_ALTREP_CLASS(SEXP x, SEXP class_)
 {
-    SETALTREP(x, 1);
     SET_TAG(x, class_);
 }
 
@@ -323,7 +322,7 @@ HIDDEN SEXP ALTREP_UNSERIALIZE_EX(SEXP info, SEXP state, SEXP attr, int objf, in
 	case RAWSXP:
 	case VECSXP:
 	case EXPRSXP:
-	    warning(_("cannot unserialize ALTVEC object of class_ '%s' from package '%s'; returning length zero vector"),
+	    warning(_("cannot unserialize ALTVEC object of class '%s' from package '%s'; returning length zero vector"),
 		    CHAR(PRINTNAME(csym)), CHAR(PRINTNAME(psym)));
 	    return allocVector(type, 0);
 	default:

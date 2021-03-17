@@ -150,6 +150,7 @@ namespace CXXR
          * @param deep Indicator whether to perform deep or shallow copy.
          */
         RObjectVector(const RObjectVector<T, ST> &pattern, bool deep);
+        RObjectVector(const RObjectVector<T, ST> &pattern, bool deep, int dummy);
 
         /** @brief Element access.
          *
@@ -238,10 +239,25 @@ namespace CXXR
     {
         R_xlen_t sz = size();
 #ifdef R_MEMORY_PROFILING
-            MemoryBank::R_ReportAllocation(convert2VEC<T>(sz) * sizeof(VECREC));
+        MemoryBank::R_ReportAllocation(convert2VEC<T>(sz) * sizeof(VECREC));
 #endif
         for (R_xlen_t i = 0; i < sz; ++i)
+        {
             m_data[i] = dup_child2(pattern.m_data[i], deep);
+            if (m_data[i])
+                m_data[i]->incrementRefCount();
+        }
+    }
+
+    template <typename T, SEXPTYPE ST>
+    RObjectVector<T, ST>::RObjectVector(const RObjectVector<T, ST> &pattern, bool deep, int dummy)
+        : VectorBase(pattern, deep), m_data(pattern.size())
+    {
+        R_xlen_t sz = size();
+#ifdef R_MEMORY_PROFILING
+        MemoryBank::R_ReportAllocation(convert2VEC<T>(sz) * sizeof(VECREC));
+#endif
+        std::copy(pattern.m_data.begin(), pattern.m_data.end(), m_data.begin());
     }
 
     template <typename T, SEXPTYPE ST>
@@ -254,14 +270,11 @@ namespace CXXR
     void RObjectVector<T, ST>::visitChildren(const_visitor *v) const
     {
         RObject::visitChildren(v);
-        if (!altrep())
+        for (R_xlen_t i = 0; i < size(); ++i)
         {
-            for (R_xlen_t i = 0; i < size(); ++i)
-            {
-                const T *ptr = (*this)[i];
-                if (ptr)
-                    ptr->conductVisitor(v);
-            }
+            const T *ptr = (*this)[i];
+            if (ptr)
+                ptr->conductVisitor(v);
         }
     }
 } // namespace CXXR

@@ -2134,7 +2134,7 @@ static SEXP gfind(const char *name, SEXP env, SEXPTYPE mode,
     if (rval == R_UnboundValue) {
 	if( isFunction(ifnotfound) ) {
 	    PROTECT(var = mkString(name));
-	    PROTECT(R_fcall = LCONS(ifnotfound, LCONS(var, R_NilValue)));
+	    PROTECT(R_fcall = LCONS(ifnotfound, CONS(var, R_NilValue)));
 	    rval = eval(R_fcall, enclos);
 	    UNPROTECT(2);
 	} else

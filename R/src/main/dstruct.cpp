@@ -64,12 +64,12 @@ HIDDEN SEXP R::mkPRIMSXP(int offset, bool eval)
         FunTabSize = CXXR::R_FunTab.size();
 
         /* allocate and protect the cache */
-        PrimCache = allocVector(VECSXP, FunTabSize);
+        PrimCache = Rf_allocVector(VECSXP, FunTabSize);
         R_PreserveObject(PrimCache);
     }
 
     if (offset < 0 || offset >= FunTabSize)
-        error(_("offset is out of R_FunTab range"));
+        Rf_error(_("offset is out of R_FunTab range"));
 
     result = VECTOR_ELT(PrimCache, offset);
 
@@ -80,7 +80,7 @@ HIDDEN SEXP R::mkPRIMSXP(int offset, bool eval)
         SET_VECTOR_ELT(PrimCache, offset, result);
     }
     else if (TYPEOF(result) != type)
-        error(_("requested primitive type is not consistent with cached value"));
+        Rf_error(_("requested primitive type is not consistent with cached value"));
 
     return result;
 }
@@ -104,11 +104,10 @@ HIDDEN SEXP R::mkPRIMSXP(int offset, bool eval)
 
 SEXP R::mkCLOSXP(SEXP formals, SEXP body, SEXP rho)
 {
-    PROTECT(formals);
-    PROTECT(body);
-    PROTECT(rho);
-    SEXP c = new Closure();
-    c->expose();
+    GCRoot<const PairList> formalsr(SEXP_downcast<const PairList *>(formals));
+    GCRoot<const RObject> bodyr(body);
+    GCRoot<Environment> rhor(SEXP_downcast<Environment *>(rho));
+
     switch (TYPEOF(body))
     {
     case CLOSXP:
@@ -122,11 +121,8 @@ SEXP R::mkCLOSXP(SEXP formals, SEXP body, SEXP rho)
         break;
     }
 
-    SET_FORMALS(c, formals);
-    SET_BODY(c, body);
-    SET_CLOENV(c, rho ? rho : R_GlobalEnv);
-
-    UNPROTECT(3);
+    Closure *c = new Closure(formalsr, bodyr, rhor);
+    c->expose();
 
     return c;
 }

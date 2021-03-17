@@ -50,7 +50,7 @@ namespace CXXR
     Closure::Closure(const PairList *formal_args, const RObject *body,
                      Environment *env)
         : FunctionBase(CLOSXP), m_formals(formal_args), m_body(body),
-          m_environment(env), m_no_jit(false), m_maybe_jit(false)
+          m_environment(env ? env : Environment::global()), m_no_jit(false), m_maybe_jit(false)
     {
         if (body)
         {

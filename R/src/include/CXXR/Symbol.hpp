@@ -280,7 +280,7 @@ namespace CXXR
         /** @brief Largest symbol size.
          *
          * Largest symbol size in bytes excluding terminator.
-
+         *
          * Was 256 prior to 2.13.0, now just a sanity check.
          */
         static constexpr int MAXIDSIZE = 10000;

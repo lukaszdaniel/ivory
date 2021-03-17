@@ -334,9 +334,6 @@ int ALTREP(SEXP x)
 
 void SETALTREP(SEXP x, int v)
 {
-    if (!x)
-        return;
-    x->setAltrep(v);
 }
 
 int NAMED(SEXP x)

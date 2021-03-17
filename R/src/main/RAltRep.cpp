@@ -28,6 +28,8 @@
  */
 
 #include <CXXR/RAltRep.hpp>
+#include <CXXR/String.hpp>
+#include <CXXR/StringVector.hpp>
 
 using namespace std;
 using namespace CXXR;
@@ -37,6 +39,37 @@ namespace CXXR
     const char *AltRep::typeName() const
     {
         return staticTypeName();
+    }
+
+    AltRep *AltRep::clone(bool deep) const
+    {
+        GCRoot<const AltRep> thisroot(this); /* the methods should protect, but ... */
+        SEXP ans = ALTREP_DUPLICATE_EX(const_cast<AltRep *>(this), Rboolean(deep));
+        if (ans)
+        {
+            return SEXP_downcast<AltRep *>(ans);
+        }
+        else
+        {
+            GCRoot<RObject> t;
+            if (altsexptype() == STRSXP)
+            {
+                R_xlen_t sz = XLENGTH(const_cast<AltRep *>(this));
+                t = new StringVector(sz);
+                memcpy(STRING_PTR(t), STRING_PTR(const_cast<AltRep *>(this)), sz * sizeof(String *));
+                if (hasAttributes())
+                {
+                    t->cloneAttributes(*(this), deep);
+                }
+                SET_TRUELENGTH(t, XTRUELENGTH(const_cast<AltRep *>(this)));
+            }
+            else
+            {
+                std::cerr << "Cloning not implemented yet (" << altsexptype() << ")" << std::endl;
+                abort();
+            }
+            return static_cast<AltRep *>(t.get());
+        }
     }
 } // namespace CXXR
 
