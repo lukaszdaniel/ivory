@@ -12,6 +12,7 @@ R/doc/*/*.html
 R/doc/doxygen/html
 R/doc/NEWS.*.rds
 R/src/library/*/po/*.po~
+Recommended/*/po/*.po~
 R/src/library/*/all.R
 R/src/**/Makedeps
 R/src/**/Makefile

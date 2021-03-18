@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 2.13.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2021-01-07 23:38\n"
+"POT-Creation-Date: 2021-03-18 20:02\n"
 "PO-Revision-Date: 2011-03-26 08:57-0300\n"
 "Last-Translator: Colin Robert <beasley@ufpa.br>\n"
 "Language-Team: http://www.feferraz.net/br/P/Projeto_Traducao_R_Portugues\n"
@@ -5217,7 +5217,6 @@ msgstr "diretório '%s' não contém objetos Rd"
 #. R/admin.R: gettextf("directory %s does not exist", sQuote(dir))
 #. R/admin.R: gettextf("directory %s does not exist", sQuote(dir))
 #. R/admin.R: gettextf("directory %s does not exist", sQuote(outDir))
-#. R/index.R: gettextf("directory %s does not exist", sQuote(dataDir))
 #. R/index.R: gettextf("directory %s does not exist", sQuote(demoDir))
 #. R/index.R: gettextf("directory %s does not exist", sQuote(demoDir))
 #: R/QC.R:0 R/Rd.R:0 R/Vignettes.R:0 R/admin.R:0 R/index.R:0
@@ -5229,6 +5228,11 @@ msgstr "diretório '%s' não existe"
 #: R/check.R:0
 #, fuzzy
 msgid "directory %s was not found"
+msgstr "diretório '%s' não existe"
+
+#. R/makeLazyLoad.R: gettextf("directory '%s' does not exist", dir)
+#: R/makeLazyLoad.R:0
+msgid "directory '%s' does not exist"
 msgstr "diretório '%s' não existe"
 
 #. R/RdConv2.R: gettextf("docType %s is unrecognized", sQuote(docTypes[i]))
@@ -6517,7 +6521,8 @@ msgid "you must specify '%s', '%s' or '%s' argument"
 msgstr "você deve especificar 'package' ou 'dir'"
 
 #. R/QC.R: stop("you must specify 'package' or 'dir'")
-#: R/QC.R:0
+#. R/makeLazyLoad.R: stop("you must specify 'package' or 'dir'")
+#: R/QC.R:0 R/makeLazyLoad.R:0
 msgid "you must specify 'package' or 'dir'"
 msgstr "você deve especificar 'package' ou 'dir'"
 
@@ -7645,9 +7650,6 @@ msgstr[1] ""
 #, fuzzy
 #~ msgid "checking re-building of vignette outputs"
 #~ msgstr "Nomes de argumentos no código que não estão nos documentos:"
-
-#~ msgid "directory '%s' does not exist"
-#~ msgstr "diretório '%s' não existe"
 
 #~ msgid "directory '%s' does not contain R code"
 #~ msgstr "diretório '%s' não contém código R"

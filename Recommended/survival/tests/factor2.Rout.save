@@ -49,8 +49,8 @@ Type 'q()' to quit R.
 > fit3 <- survreg(Surv(time, status) ~ factor(ph.ecog) + age, lung)
 > tdata <- data.frame(ph.ecog=factor(0:3), age=50)
 > predict(fit, type='lp', newdata=tdata)
-          1           2           3           4 
--0.39518177 -0.02634168  0.52120527  1.81279848 
+        1         2         3         4 
+0.0000000 0.3688401 0.9163870 2.2079803 
 > predict(fit3, type='lp', newdata=tdata)
        1        2        3        4 
 6.399571 6.142938 5.770523 4.916993 

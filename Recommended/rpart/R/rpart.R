@@ -56,7 +56,7 @@ rpart <-
 	parms <- init$parms
     } else {
 	method.int <- pmatch(method, c("anova", "poisson", "class", "exp"))
-	if (is.na(method.int)) stop("Invalid method")
+	if (is.na(method.int)) stop("invalid method")
 	method <- c("anova", "poisson", "class", "exp")[method.int]
 	if (method.int == 4L) method.int <- 2L
 

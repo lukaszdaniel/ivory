@@ -13,7 +13,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: cluster 1.15.2\n"
-"POT-Creation-Date: 2019-07-04 21:09\n"
+"POT-Creation-Date: 2021-03-18 19:37\n"
 "PO-Revision-Date: 2015-02-06 21:56-0600\n"
 "Last-Translator:Chel Hee Lee  <chl948@mail.usask.ca>\n"
 "Language-Team: Chel Hee Lee  <chl948@mail.usask.ca>\n"
@@ -117,6 +117,11 @@ msgid "'dmatrix' is not a dissimilarity matrix compatible to 'x'"
 msgstr ""
 "'dmatrix'는 'x'에 부합하는 (또는 사용할 수 있는) 비유사성 행렬(dissimilarity "
 "matrix)이 아닙니다."
+
+#. R/silhouette.R: stop("'full' must be FALSE, TRUE, or a number in [0, 1]")
+#: R/silhouette.R:0
+msgid "'full' must be FALSE, TRUE, or a number in [0, 1]"
+msgstr ""
 
 #. R/fanny.q: stop("'iniMem.p' must be a nonnegative n * k matrix with rowSums == 1")
 #: R/fanny.q:0
@@ -481,6 +486,11 @@ msgstr ""
 "%d개의 표본 각각에 대해서 결측값으로 인하여 어느 군집에도 배정할 수 없는 객체"
 "를 적어도 하나 이상 발견하였습니다."
 
+#. R/pam.q: gettextf("Found better objective, %g < %g (it=%d)\n", r$obj[2], res$obj[2], it, domain = "R-cluster")
+#: R/pam.q:0
+msgid "Found better objective, %g < %g (it=%d)"
+msgstr ""
+
 #. R/fanny.q: gettext("Fuzzy Clustering object of class 'fanny': ", domain = "R-cluster")
 #: R/fanny.q:0
 msgid "Fuzzy Clustering object of class 'fanny':"
@@ -626,6 +636,14 @@ msgstr ""
 "비유사성 행렬(dissimilarity matrix)에 NA가 있기 때문에, 군집화 과정이 실행되"
 "지 않았습니다."
 
+#. R/pam.q: stop("No clustering performed, NAs in the computed dissimilarity matrix.")
+#: R/pam.q:0
+#, fuzzy
+msgid "No clustering performed, NAs in the computed dissimilarity matrix."
+msgstr ""
+"계산된 비유사성 행렬(dissimilarity matrix) 내에 NA가 존재하여 군집화 과정이 "
+"수행되지 않았습니다."
+
 #. R/mona.q: stop("No clustering performed, a variable was found with all non missing values identical.")
 #: R/mona.q:0
 msgid ""
@@ -712,6 +730,11 @@ msgstr ""
 #. R/mona.q: gettext("Separation step:", domain = "R-cluster")
 #: R/mona.q:0
 msgid "Separation step:"
+msgstr ""
+
+#. R/pam.q: stop("Set either 'variant' or 'pamonce', but not both")
+#: R/pam.q:0
+msgid "Set either 'variant' or 'pamonce', but not both"
 msgstr ""
 
 #. R/silhouette.R: gettextf("Silhouette of %d units in %d clusters from %s:", sum(csiz), k, deparse(x$call),     domain = "R-cluster")
@@ -990,6 +1013,11 @@ msgstr "하나 또는 그 이상의 변수들이 오로지 결측값만을 포�
 #. R/plotpart.q: gettext("span & rank2 : calling \"spannel\" ..", domain = "R-cluster")
 #: R/plotpart.q:0
 msgid "span & rank2 : calling \"spannel\" .."
+msgstr ""
+
+#. R/silhouette.R: warning("specified both 'full' and 'subset'; will use 'subset'")
+#: R/silhouette.R:0
+msgid "specified both 'full' and 'subset'; will use 'subset'"
 msgstr ""
 
 #. R/fanny.q: warning("the memberships are all very close to 1/k. Maybe decrease 'memb.exp' ?")

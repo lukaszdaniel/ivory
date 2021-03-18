@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.15.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2021-02-11 18:11\n"
+"POT-Creation-Date: 2021-03-18 20:00\n"
 "PO-Revision-Date: 2015-01-17 15:36+0100\n"
 "Last-Translator: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
 "Language-Team: R-core <R-core@r-project.org>\n"
@@ -2845,7 +2845,7 @@ msgstr ""
 "keine Definiton für  Oberklasse %s in der Spezifikation der Klasse %s "
 "gefunden"
 
-#. R/Methods.R: gettext("  no direct match found to signature (%s)", domain = "R-methods")
+#. R/Methods.R: gettextf("  no direct match found to signature (%s)", paste(signature, collapse = ", "),     domain = "R-methods")
 #: R/Methods.R:0
 #, fuzzy
 msgid "no direct match found to signature (%s)"

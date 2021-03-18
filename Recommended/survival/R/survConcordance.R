@@ -4,7 +4,7 @@
 survConcordance <- function(formula, data,
                             weights, subset, na.action) {
     Call <- match.call()  # save a copy of of the call, as documentation
-#.Deprecated("concordance")
+    .Deprecated("concordance")
     m <- match.call(expand.dots=FALSE)
     m[[1L]] <-  quote(stats::model.frame)
     m$formula <- if(missing(data)) terms(formula, "strata")
@@ -32,7 +32,7 @@ survConcordance <- function(formula, data,
     else strat <- NULL
     
     x <- model.matrix(Terms, m)[,-1, drop=FALSE]  #remove the intercept
-    if (ncol(x) > 1) stop("Only one predictor variable allowed")
+    if (ncol(x) > 1) stop("only one predictor variable allowed")
 
     count <- survConcordance.fit(Y, x, strat, wt)
     if (is.null(strat)) {

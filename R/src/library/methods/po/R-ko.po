@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 3.1.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2021-02-11 18:11\n"
+"POT-Creation-Date: 2021-03-18 20:00\n"
 "PO-Revision-Date: 2014-03-27 13:32-0600\n"
 "Last-Translator: Chel Hee Lee <chl948@mail.usask.ca>\n"
 "Language-Team:  <chl948@mail.usask.ca>\n"
@@ -2633,7 +2633,7 @@ msgid ""
 msgstr ""
 "클래스 %2$s의 상세정의에서 슈퍼클래스 %1$s에 대한 정의를 찾을 수 없습니다"
 
-#. R/Methods.R: gettext("  no direct match found to signature (%s)", domain = "R-methods")
+#. R/Methods.R: gettextf("  no direct match found to signature (%s)", paste(signature, collapse = ", "),     domain = "R-methods")
 #: R/Methods.R:0
 #, fuzzy
 msgid "no direct match found to signature (%s)"

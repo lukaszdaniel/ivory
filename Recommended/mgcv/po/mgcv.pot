@@ -6,9 +6,9 @@
 #, fuzzy
 msgid ""
 msgstr ""
-"Project-Id-Version: mgcv 1.8-31\n"
+"Project-Id-Version: mgcv 1.8-34\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-11-12 19:56+0100\n"
+"POT-Creation-Date: 2021-03-18 19:37+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -17,11 +17,11 @@ msgstr ""
 "Content-Type: text/plain; charset=CHARSET\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: magic.c:445
+#: magic.c:446
 msgid "magic requires smoothing parameter starting values if L supplied"
 msgstr ""
 
-#: magic.c:563
+#: magic.c:564
 msgid "magic, the gcv/ubre optimizer, failed to converge after 400 iterations."
 msgstr ""
 
@@ -37,12 +37,12 @@ msgid ""
 "file dim problem\n"
 msgstr ""
 
-#: mat.c:3325
+#: mat.c:3316
 #, c-format
 msgid "Non orthogonal eigenvectors %d %g\n"
 msgstr ""
 
-#: mat.c:3330
+#: mat.c:3321
 #, c-format
 msgid "Eigenvectors not normalized %d %g\n"
 msgstr ""

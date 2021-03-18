@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.14.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2019-07-04 21:09\n"
+"POT-Creation-Date: 2021-03-18 19:37\n"
 "PO-Revision-Date: 2015-01-17 16:03+0100\n"
 "Last-Translator: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
 "Language-Team: R Core Team <r-core@r-project.org>\n"
@@ -104,6 +104,11 @@ msgstr "'col.clus' sollte Länge 4 haben, wenn color auf TRUE gesetzt ist"
 #: R/silhouette.R:0
 msgid "'dmatrix' is not a dissimilarity matrix compatible to 'x'"
 msgstr "'dmatrix' ist keine zu 'x' kompatible Unähnlichkeitsmatrix "
+
+#. R/silhouette.R: stop("'full' must be FALSE, TRUE, or a number in [0, 1]")
+#: R/silhouette.R:0
+msgid "'full' must be FALSE, TRUE, or a number in [0, 1]"
+msgstr ""
 
 #. R/fanny.q: stop("'iniMem.p' must be a nonnegative n * k matrix with rowSums == 1")
 #: R/fanny.q:0
@@ -459,6 +464,11 @@ msgid ""
 "assigned to a cluster (because of missing values)."
 msgstr "Stichproben wurde mindestens ein Objekt gefunden, das nicht"
 
+#. R/pam.q: gettextf("Found better objective, %g < %g (it=%d)\n", r$obj[2], res$obj[2], it, domain = "R-cluster")
+#: R/pam.q:0
+msgid "Found better objective, %g < %g (it=%d)"
+msgstr ""
+
 #. R/fanny.q: gettext("Fuzzy Clustering object of class 'fanny': ", domain = "R-cluster")
 #: R/fanny.q:0
 msgid "Fuzzy Clustering object of class 'fanny':"
@@ -602,6 +612,13 @@ msgstr "Keine Clusterung durchgeführt. NAs in der Unähnlichkeitsmatrix."
 msgid "No clustering performed, NA's in dissimilarity matrix."
 msgstr "Keine Clusterung durchgeführt, NAs in Unähnlichkeitsmatrix."
 
+#. R/pam.q: stop("No clustering performed, NAs in the computed dissimilarity matrix.")
+#: R/pam.q:0
+#, fuzzy
+msgid "No clustering performed, NAs in the computed dissimilarity matrix."
+msgstr ""
+"Keine Clusterung durchgeführt, NAs in der berechnenten Unähnlichkeitsmatrix."
+
 #. R/mona.q: stop("No clustering performed, a variable was found with all non missing values identical.")
 #: R/mona.q:0
 #, fuzzy
@@ -689,6 +706,11 @@ msgstr "Iterationen"
 #, fuzzy
 msgid "Separation step:"
 msgstr "Iterationen"
+
+#. R/pam.q: stop("Set either 'variant' or 'pamonce', but not both")
+#: R/pam.q:0
+msgid "Set either 'variant' or 'pamonce', but not both"
+msgstr ""
 
 #. R/silhouette.R: gettextf("Silhouette of %d units in %d clusters from %s:", sum(csiz), k, deparse(x$call),     domain = "R-cluster")
 #. R/silhouette.R: gettextf("Silhouette of %d units in %d clusters from %s:", sum(csiz), k, deparse(x$call),     domain = "R-cluster")
@@ -960,6 +982,11 @@ msgstr "eine oder mehrere Variablen enthalten nur fehlende Werte"
 #. R/plotpart.q: gettext("span & rank2 : calling \"spannel\" ..", domain = "R-cluster")
 #: R/plotpart.q:0
 msgid "span & rank2 : calling \"spannel\" .."
+msgstr ""
+
+#. R/silhouette.R: warning("specified both 'full' and 'subset'; will use 'subset'")
+#: R/silhouette.R:0
+msgid "specified both 'full' and 'subset'; will use 'subset'"
 msgstr ""
 
 #. R/fanny.q: warning("the memberships are all very close to 1/k. Maybe decrease 'memb.exp' ?")

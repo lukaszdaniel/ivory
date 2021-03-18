@@ -84,7 +84,7 @@ survexp <- function(formula, data,
     if (any(attr(Terms, 'order') >1))
             stop("Survexp cannot have interaction terms")
     if (!missing(times)) {
-        if (any(times<0)) stop("Invalid time point requested")
+        if (any(times<0)) stop("invalid time point requested")
         if (length(times) >1 )
             if (any(diff(times)<0)) stop("Times must be in increasing order")
         }

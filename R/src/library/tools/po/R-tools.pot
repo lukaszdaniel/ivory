@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: tools 4.1.0\n"
-"POT-Creation-Date: 2021-01-07 23:38\n"
+"POT-Creation-Date: 2021-03-18 20:02\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -6679,7 +6679,6 @@ msgstr ""
 #: R/admin.R: 0
 #: R/index.R: 0
 #: R/index.R: 0
-#: R/index.R: 0
 #. R/QC.R: gettextf("directory %s does not exist", sQuote(dir))
 #. R/QC.R: gettextf("directory %s does not exist", sQuote(dir))
 #. R/QC.R: gettextf("directory %s does not exist", sQuote(dir))
@@ -6703,7 +6702,6 @@ msgstr ""
 #. R/admin.R: gettextf("directory %s does not exist", sQuote(dir))
 #. R/admin.R: gettextf("directory %s does not exist", sQuote(dir))
 #. R/admin.R: gettextf("directory %s does not exist", sQuote(outDir))
-#. R/index.R: gettextf("directory %s does not exist", sQuote(dataDir))
 #. R/index.R: gettextf("directory %s does not exist", sQuote(demoDir))
 #. R/index.R: gettextf("directory %s does not exist", sQuote(demoDir))
 
@@ -6715,6 +6713,13 @@ msgstr ""
 #. R/check.R: gettextf("directory %s was not found\n", sQuote(test_dir), domain = "R-tools")
 
 msgid "directory %s was not found"
+msgstr ""
+
+
+#: R/makeLazyLoad.R: 0
+#. R/makeLazyLoad.R: gettextf("directory '%s' does not exist", dir)
+
+msgid "directory '%s' does not exist"
 msgstr ""
 
 
@@ -8422,7 +8427,9 @@ msgstr ""
 
 
 #: R/QC.R: 0
+#: R/makeLazyLoad.R: 0
 #. R/QC.R: stop("you must specify 'package' or 'dir'")
+#. R/makeLazyLoad.R: stop("you must specify 'package' or 'dir'")
 
 msgid "you must specify 'package' or 'dir'"
 msgstr ""

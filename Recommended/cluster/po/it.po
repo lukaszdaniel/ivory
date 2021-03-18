@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: cluster 2.0.8\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-01-30 22:00+0100\n"
+"POT-Creation-Date: 2021-03-18 19:37+0100\n"
 "PO-Revision-Date: \n"
 "Last-Translator: Daniele Medri <dmedri@gmail.com>\n"
 "Language-Team: Italian https://github.com/dmedri/R-italian-lang\n"
@@ -18,12 +18,12 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Generator: Poedit 2.2.1\n"
 
-#: clara.c:101
+#: clara.c:102
 #, c-format
 msgid "C level clara(): random k=%d > n **\n"
 msgstr "Funzione clara() a livello C: random k=%d > n **\n"
 
-#: clara.c:312
+#: clara.c:313
 #, c-format
 msgid ""
 "clara()'s C level dysta2(nsam=%d, p=%d, nbest=%d, n=%d) gave 'toomany_NA'"
@@ -31,29 +31,73 @@ msgstr ""
 "clara() a livello C: dysta2(nsam=%d, p=%d, nbest=%d, n=%d) ha riportato "
 "'toomany_NA'"
 
-#: clara.c:348 clara.c:353
+#: clara.c:349 clara.c:354
 #, c-format
 msgid "C level dysta2(): nsel[%s= %d] = %d is outside 0..n, n=%d"
 msgstr ""
 "Funzione dysta2() a livello C: nsel[%s= %d] = %d è al di fuori di 0..n, n=%d"
 
-#: pam.c:161
+#: fanny.c:251
+#, c-format
+msgid "  not converged: it = %d\n"
+msgstr ""
+
+#: fanny.c:260
+#, c-format
+msgid "%sConverged after %d iterations,  obj = %#20.*g\n"
+msgstr ""
+
+#: fanny.c:264
+#, c-format
+msgid "%sNOT converged after %d iterations,  obj = %#20.*g\n"
+msgstr ""
+
+#: pam.c:162
 msgid "Invalid 'medoids'"
 msgstr "'medoids' non valido"
 
-#: pam.c:1011
+#: pam.c:321
+msgid "medoids given; "
+msgstr ""
+
+#: pam.c:337
+#, c-format
+msgid "build %d medoids:\n"
+msgstr ""
+
+#: pam.c:368
+#, c-format
+msgid "    new representative. %d\n"
+msgstr ""
+
+#: pam.c:382
+msgid "  after build: medoids are"
+msgstr ""
+
+#: pam.c:386
+msgid ""
+"\n"
+"  and min.dist dysma[1:n] are\n"
+msgstr ""
+
+#: pam.c:795
+#, c-format
+msgid "   swp new %*d <-> %*d old; decreasing diss. %7g by %g\n"
+msgstr ""
+
+#: pam.c:1014
 #, c-format
 msgid "pam(): Bug in C level cstat(), k=%d: ntt=0"
 msgstr "pam(): Bug a livello C di cstat(), k=%d: ntt=0"
 
-#: twins.c:153
+#: twins.c:154
 #, c-format
 msgid ""
 "agnes(method=%d, par.method=*) lead to invalid merge; step %d, D(.,.)=%g"
 msgstr ""
 "agnes(method=%d, par.method=*) porta ad una unione non valida %d, D(.,.)=%g"
 
-#: twins.c:260
+#: twins.c:261
 #, c-format
 msgid "invalid method (code %d)"
 msgstr "metodo non valido (codice %d)"

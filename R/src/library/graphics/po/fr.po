@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R-2.12.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-01-30 18:44+0100\n"
+"POT-Creation-Date: 2021-03-18 20:00+0100\n"
 "PO-Revision-Date: 2012-03-06 22:22+0100\n"
 "Last-Translator: Philippe Grosjean <phgrosjean@sciviews.org>\n"
 "Language-Team: French <R-core@r-project.org>\n"
@@ -19,21 +19,21 @@ msgstr ""
 "X-Poedit-Language: French\n"
 "X-Poedit-Country: FRANCE\n"
 
-#: base.cpp:37
+#: base.cpp:40
 msgid "no base graphics system is registered"
 msgstr ""
 
-#: base.cpp:304
+#: base.cpp:307
 #, fuzzy
 msgid "Incompatible graphics state"
 msgstr "état des graphiques incorrect"
 
-#: base.cpp:348
+#: base.cpp:351
 #, fuzzy
 msgid "event 'GE_ScalePS' requires a single numeric value"
 msgstr "L'événement GE_ScalePS exige une valeur numérique unique"
 
-#: base.cpp:379 base.cpp:386 base.cpp:394
+#: base.cpp:380 base.cpp:387 base.cpp:395
 #, fuzzy
 msgid "the base graphics system is not registered"
 msgstr "trop de systèmes graphiques enregistrés"
@@ -47,69 +47,69 @@ msgstr "mauvaise unité spécifiée dans '%s'"
 msgid "attempt to plot on null device"
 msgstr "tentative de dessin dans un périphérique null"
 
-#: graphics.cpp:1858
+#: graphics.cpp:1859
 #, fuzzy
 msgid "outer margins are too large (figure region is too small)"
 msgstr "marges externes trop larges (fig.region trop petit)"
 
-#: graphics.cpp:1860
+#: graphics.cpp:1861
 #, fuzzy
 msgid "figure region is too large"
 msgstr "zone de dessin trop large"
 
-#: graphics.cpp:1862
+#: graphics.cpp:1863
 #, fuzzy
 msgid "figure margins are too large"
 msgstr "marges de dessin trop larges"
 
-#: graphics.cpp:1864
+#: graphics.cpp:1865
 #, fuzzy
 msgid "plot region is too large"
 msgstr "zone de graphe trop large"
 
-#: graphics.cpp:1920
+#: graphics.cpp:1921
 #, c-format
 msgid "nonfinite axis limits [GScale(%g,%g,%d, .); log=%d]"
 msgstr "limites d'axes non finis [GScale(%g,%g,%d, .) ; log=%d]"
 
-#: graphics.cpp:1950
+#: graphics.cpp:1951
 #, c-format
 msgid "axis style \"%c\" unimplemented"
 msgstr "style d'axe \"%c\" non implémenté"
 
-#: graphics.cpp:2188 graphics.cpp:2589
+#: graphics.cpp:2191 graphics.cpp:2592
 #, fuzzy
 msgid "no graphics device is active"
 msgstr "Aucun périphérique graphique n'est actif"
 
-#: graphics.cpp:2382
+#: graphics.cpp:2385
 msgid "plot.new has not been called yet"
 msgstr "plot.new n'a pas encore été appelé"
 
-#: graphics.cpp:2384
+#: graphics.cpp:2387
 msgid "invalid graphics state"
 msgstr "état des graphiques incorrect"
 
-#: graphics.cpp:2539
+#: graphics.cpp:2542
 msgid "graphics device closed during call to locator or identify"
 msgstr ""
 
-#: graphics.cpp:3047
+#: graphics.cpp:3060
 msgid "zero-length arrow is of indeterminate angle and so skipped"
 msgstr "un flèche de longueur nulle n'a pas d'angle déterminé et est ignorée"
 
-#: graphics.cpp:3128
+#: graphics.cpp:3141
 #, c-format
 msgid "invalid par(\"bty\") = '%c'; no box() drawn"
 msgstr ""
 "par(\"bty\") = '%c' incorrect ; aucune boîte n'est tracée à l'aide de box()"
 
-#: graphics.cpp:3145 par.cpp:1123
+#: graphics.cpp:3158 par.cpp:1129
 #, fuzzy, c-format
 msgid "invalid argument passed to '%s' function"
 msgstr "paramètre passé à par() invalide"
 
-#: graphics.cpp:3352
+#: graphics.cpp:3365
 #, fuzzy
 msgid "metric information not available for this device"
 msgstr "Information de métrique non disponible pour ce périphérique"
@@ -122,440 +122,440 @@ msgstr "le paramètre graphique 'family' a une longueur maximale de 200 octets"
 msgid "'mgp[1:3]' are of differing sign"
 msgstr ""
 
-#: par.cpp:163
+#: par.cpp:169
 #, c-format
 msgid "invalid value specified for graphical parameter \"%s\""
 msgstr "valeur spécifiée pour le paramètre graphique \"%s\" incorrect"
 
-#: par.cpp:170
+#: par.cpp:176
 #, c-format
 msgid "graphical parameter \"%s\" has the wrong length"
 msgstr "le paramètre graphique \"%s\" est de la mauvaise longueur"
 
-#: par.cpp:265 par.cpp:676
+#: par.cpp:271 par.cpp:682
 #, c-format
 msgid "graphical parameter \"%s\" cannot be set"
 msgstr "le paramètre graphique \"%s\" ne peut être changé"
 
-#: par.cpp:437
+#: par.cpp:443
 msgid "parameter \"mfg\" has the wrong length"
 msgstr "le paramètre \"mfg\" est de la mauvaise longueur"
 
-#: par.cpp:445 par.cpp:447
+#: par.cpp:451 par.cpp:453
 #, fuzzy, c-format
 msgid "parameter \"%s\" in \"mfg\" parameter is out of range"
 msgstr "le paramètre \"i\" dans \"mfg\" est hors échelle"
 
-#: par.cpp:452 par.cpp:454
+#: par.cpp:458 par.cpp:460
 #, fuzzy, c-format
 msgid "value of '%s' in \"mfg\" parameter is wrong and will be ignored"
 msgstr "la valeur de nr dans \"mfg\" est mauvaise et sera ignorée"
 
-#: par.cpp:481
+#: par.cpp:487
 #, fuzzy
 msgid "calling 'par(new=TRUE)' with no plot"
 msgstr "appel de par(new=TRUE) sans graphe"
 
-#: par.cpp:668 par.cpp:1066
+#: par.cpp:674 par.cpp:1072
 #, c-format
 msgid "graphical parameter \"%s\" is obsolete"
 msgstr "paramètre graphique \"%s\" incorrect"
 
-#: par.cpp:672 par.cpp:1070
+#: par.cpp:678 par.cpp:1076
 #, c-format
 msgid "\"%s\" is not a graphical parameter"
 msgstr "\"%s\" n'est pas un paramètre graphique"
 
-#: par.cpp:1167
+#: par.cpp:1173
 #, c-format
 msgid "too many rows in layout, limit %d"
 msgstr "trop de lignes dans la mise en page, limité à %d"
 
-#: par.cpp:1173
+#: par.cpp:1179
 #, c-format
 msgid "too many columns in layout, limit %d"
 msgstr "trop de colonnes dans la mise en page, limité à %d"
 
-#: par.cpp:1175
+#: par.cpp:1181
 #, c-format
 msgid "too many cells in layout, limit %d"
 msgstr "trop de cellules dans la mise en page, limité à %d"
 
-#: plot.cpp:43 plot3d.cpp:41
+#: plot.cpp:50 plot3d.cpp:43
 msgid "invalid type passed to graphics function"
 msgstr ""
 
-#: plot.cpp:66
+#: plot.cpp:73
 #, fuzzy
 msgid "invalid color specification"
 msgstr "choix de fonte incorrect"
 
-#: plot.cpp:132
+#: plot.cpp:139
 msgid "only NA allowed in logical plotting symbol"
 msgstr "seul NA est permi dans les symboles logiques de graphes"
 
-#: plot.cpp:134
+#: plot.cpp:141
 msgid "invalid plotting symbol"
 msgstr "symbole graphique incorrect"
 
-#: plot.cpp:223 plot.cpp:2808 plot3d.cpp:1180 plot3d.cpp:1184
+#: plot.cpp:230 plot.cpp:2815 plot3d.cpp:1182 plot3d.cpp:1186
 #, c-format
 msgid "invalid '%s' specification"
 msgstr "spécification de '%s' incorrecte"
 
-#: plot.cpp:282 plot.cpp:296 plot.cpp:482 plot.cpp:487 plot.cpp:2139
-#: plot.cpp:2146 plot.cpp:3169 plot.cpp:3171 plot.cpp:3173 plot.cpp:3334
-#: plot3d.cpp:1164 plot3d.cpp:1168 plot3d.cpp:1170 plot3d.cpp:1898
+#: plot.cpp:289 plot.cpp:303 plot.cpp:489 plot.cpp:494 plot.cpp:2146
+#: plot.cpp:2153 plot.cpp:3176 plot.cpp:3178 plot.cpp:3180 plot.cpp:3341
+#: plot3d.cpp:1166 plot3d.cpp:1170 plot3d.cpp:1172 plot3d.cpp:1900
 #, c-format
 msgid "invalid '%s' value"
 msgstr "valeur '%s' incorrecte"
 
-#: plot.cpp:299
+#: plot.cpp:306
 #, fuzzy, c-format
 msgid "invalid 'vfont' value [typeface %d]"
 msgstr "valeur 'vfont' incorrecte [typeface]"
 
-#: plot.cpp:323
+#: plot.cpp:330
 #, c-format
 msgid "invalid 'vfont' value [typeface = %d, fontindex = %d]"
 msgstr "valeur 'vfont' incorrecte [typeface = %d, fontindex = %d]"
 
-#: plot.cpp:396
+#: plot.cpp:403
 msgid "invalid graphics parameter"
 msgstr "paramètres de dessin incorrects"
 
-#: plot.cpp:478
+#: plot.cpp:485
 #, fuzzy
 msgid "at least 3 arguments are required"
 msgstr "au moins 3 arguments sont nécessaires"
 
-#: plot.cpp:492
+#: plot.cpp:499
 msgid "\"log=\" specification must be character"
 msgstr ""
 "la spécification de \"log=\" doit être sous forme d'une chaîne de caractères"
 
-#: plot.cpp:505
+#: plot.cpp:512
 #, c-format
 msgid "invalid \"log=%s\" specification"
 msgstr "spécification \"log=%s\" incorrecte"
 
-#: plot.cpp:521 plot.cpp:533
+#: plot.cpp:528 plot.cpp:540
 #, fuzzy, c-format
 msgid "NA values are not allowed in '%s'"
 msgstr "NAs non autorisés dans 'xlim'"
 
-#: plot.cpp:527 plot.cpp:539
+#: plot.cpp:534 plot.cpp:546
 #, fuzzy, c-format
 msgid "'%s' needs finite values"
 msgstr "'xlim' nécessite des valeurs finies"
 
-#: plot.cpp:545
+#: plot.cpp:552
 msgid "Logarithmic axis must have positive limits"
 msgstr "Les axes logarithmiques doivent avoir des limites positives"
 
-#: plot.cpp:669
+#: plot.cpp:676
 msgid "invalid type for axis labels"
 msgstr "type incorrect pour les étiquettes des axes"
 
-#: plot.cpp:757 plot.cpp:1332 plot.cpp:1648 plot.cpp:1713 plot.cpp:1788
-#: plot.cpp:1854 plot.cpp:1928 plot.cpp:2023 plot.cpp:2099 plot.cpp:2377
-#: plot.cpp:2551 plot.cpp:2767 plot.cpp:3315 plot.cpp:3456 plot.cpp:3532
-#: plot.cpp:3697 plot.cpp:3977 plot3d.cpp:1867
+#: plot.cpp:764 plot.cpp:1339 plot.cpp:1655 plot.cpp:1720 plot.cpp:1795
+#: plot.cpp:1861 plot.cpp:1935 plot.cpp:2030 plot.cpp:2106 plot.cpp:2384
+#: plot.cpp:2558 plot.cpp:2774 plot.cpp:3322 plot.cpp:3463 plot.cpp:3539
+#: plot.cpp:3704 plot.cpp:3984 plot3d.cpp:1869
 msgid "too few arguments"
 msgstr "trop peu d'arguments"
 
-#: plot.cpp:768
+#: plot.cpp:775
 #, c-format
 msgid "invalid axis number %d"
 msgstr "nombre d'axes %d incorrect"
 
-#: plot.cpp:855 plot.cpp:867
+#: plot.cpp:862 plot.cpp:874
 #, fuzzy, c-format
 msgid "'%s' argument must be of length 1"
 msgstr "'hadj' doit être de longueur unitaire"
 
-#: plot.cpp:862 plot.cpp:2111 plot.cpp:2388 plot.cpp:2394 plot.cpp:2401
-#: plot.cpp:2409 plot.cpp:2416 plot.cpp:2423 plot.cpp:2430 plot.cpp:2437
-#: plot.cpp:2445 plot.cpp:2452 plot.cpp:3176
+#: plot.cpp:869 plot.cpp:2118 plot.cpp:2395 plot.cpp:2401 plot.cpp:2408
+#: plot.cpp:2416 plot.cpp:2423 plot.cpp:2430 plot.cpp:2437 plot.cpp:2444
+#: plot.cpp:2452 plot.cpp:2459 plot.cpp:3183
 #, fuzzy, c-format
 msgid "zero-length '%s' specified"
 msgstr "'side' choisi de taille nulle"
 
-#: plot.cpp:897
+#: plot.cpp:904
 #, fuzzy, c-format
 msgid "'%s' argument must be NA or a finite number"
 msgstr "'hadj' doit être de longueur unitaire"
 
-#: plot.cpp:949
+#: plot.cpp:956
 #, fuzzy
 msgid "'labels' argument is supplied and not 'at' argument"
 msgstr "'labels' est fourni, mais pas 'at'"
 
-#: plot.cpp:953
+#: plot.cpp:960
 #, fuzzy, c-format
 msgid "'at' and 'labels' argument lengths differ, %d != %d"
 msgstr "les longueurs de 'at' et de 'labels' diffèrent, %d != %d"
 
-#: plot.cpp:972
+#: plot.cpp:979
 msgid "no locations are finite"
 msgstr "aucune localisation n'est finie"
 
-#: plot.cpp:1350
+#: plot.cpp:1357
 msgid "invalid plotting structure"
 msgstr "structure de graphique incorrecte"
 
-#: plot.cpp:1352
+#: plot.cpp:1359
 #, fuzzy, c-format
 msgid "'x' and 'y' argument lengths differ in '%s' function"
 msgstr "les longueurs 'x' et 'y' diffèrent dans %s()"
 
-#: plot.cpp:1560
+#: plot.cpp:1567
 #, c-format
 msgid "invalid plot type '%c'"
 msgstr "type de graphe incorrect '%c'"
 
-#: plot.cpp:1603
+#: plot.cpp:1610
 msgid "invalid first argument"
 msgstr "premier argument incorrect"
 
-#: plot.cpp:1610
+#: plot.cpp:1617
 msgid "invalid second argument"
 msgstr "second argument incorrect"
 
-#: plot.cpp:1618
+#: plot.cpp:1625
 msgid "invalid third argument"
 msgstr "troisième argument incorrect"
 
-#: plot.cpp:1626
+#: plot.cpp:1633
 msgid "invalid fourth argument"
 msgstr "quatrième argument incorrect"
 
-#: plot.cpp:1634
+#: plot.cpp:1641
 msgid "cannot mix zero-length and non-zero-length coordinates"
 msgstr ""
 "impossible de mélanger des coordonnées de longueur nulle avec des autres"
 
-#: plot.cpp:1859
+#: plot.cpp:1866
 msgid "Empty raster"
 msgstr ""
 
-#: plot.cpp:1941
+#: plot.cpp:1948
 msgid "invalid arrow head length"
 msgstr "longueur incorrecte pour la pointe de flêche"
 
-#: plot.cpp:1946
+#: plot.cpp:1953
 msgid "invalid arrow head angle"
 msgstr "angle incorrect pour la pointe de flêche"
 
-#: plot.cpp:1951
+#: plot.cpp:1958
 msgid "invalid arrow head specification"
 msgstr "choix incorrect de pointe de flêche"
 
-#: plot.cpp:2185
+#: plot.cpp:2192
 msgid "no coordinates were supplied"
 msgstr "aucunes coordonnées spécifiées"
 
-#: plot.cpp:2817
+#: plot.cpp:2824
 #, fuzzy
 msgid "'a' and 'b' arguments must be finite"
 msgstr "'a' et 'b' doivent être finis"
 
-#: plot.cpp:2953 plot.cpp:4068 plot.cpp:4071 plot.cpp:4074 plot.cpp:4077
-#: plot.cpp:4097 plot.cpp:4101 plot.cpp:4104 plot.cpp:4124 plot.cpp:4128
-#: plot.cpp:4131 plot3d.cpp:1086 plot3d.cpp:1090 plot3d.cpp:1095
-#: plot3d.cpp:1099 plot3d.cpp:1103 plot3d.cpp:1107 stem.cpp:153 stem.cpp:154
+#: plot.cpp:2960 plot.cpp:4075 plot.cpp:4078 plot.cpp:4081 plot.cpp:4084
+#: plot.cpp:4104 plot.cpp:4108 plot.cpp:4111 plot.cpp:4131 plot.cpp:4135
+#: plot.cpp:4138 plot3d.cpp:1088 plot3d.cpp:1092 plot3d.cpp:1097
+#: plot3d.cpp:1101 plot3d.cpp:1105 plot3d.cpp:1109 stem.cpp:153 stem.cpp:154
 #: stem.cpp:156 stem.cpp:157 stem.cpp:202 stem.cpp:203
 #, c-format
 msgid "invalid '%s' argument"
 msgstr "argument '%s' incorrect"
 
-#: plot.cpp:3025 plot.cpp:3165
+#: plot.cpp:3032 plot.cpp:3172
 #, fuzzy, c-format
 msgid "invalid number of points in '%s' function"
 msgstr "nombre de points incorrect dans locator()"
 
-#: plot.cpp:3030
+#: plot.cpp:3037
 msgid "invalid plot type"
 msgstr "type de graphe incorrect"
 
-#: plot.cpp:3167
+#: plot.cpp:3174
 msgid "incorrect argument type"
 msgstr "type d'argument incorrect"
 
-#: plot.cpp:3179
+#: plot.cpp:3186
 msgid "different argument lengths"
 msgstr "longueurs d'arguments différentes"
 
-#: plot.cpp:3181
+#: plot.cpp:3188
 #, fuzzy
 msgid "more labels than points"
 msgstr "plus d'étiquettes (labels) que de points"
 
-#: plot.cpp:3233
+#: plot.cpp:3240
 #, c-format
 msgid "warning: no point within %.2f inches\n"
 msgstr "avis : aucun point à une distance inférieure ou égale à %.2f pouces\n"
 
-#: plot.cpp:3239
+#: plot.cpp:3246
 #, fuzzy
 msgid "warning: nearest point is already identified\n"
 msgstr "avis : le point le plus proche est déjà identifié\n"
 
-#: plot.cpp:3326
+#: plot.cpp:3333
 msgid "invalid units"
 msgstr "unités incorrectes"
 
-#: plot.cpp:3516 plot.cpp:3623
+#: plot.cpp:3523 plot.cpp:3630
 msgid "invalid dendrogram input"
 msgstr "entrée de dendrogramme incorrecte"
 
-#: plot.cpp:3679
+#: plot.cpp:3686
 msgid "invalid symbol parameter vector"
 msgstr "vecteur de paramètre symbole incorrect"
 
-#: plot.cpp:3702
+#: plot.cpp:3709
 msgid "invalid symbol coordinates"
 msgstr "coordonnées des symboles incorrectes"
 
-#: plot.cpp:3710
+#: plot.cpp:3717
 msgid "x/y/parameter length mismatch"
 msgstr "les longueurs des paramètres x et y diffèrent"
 
-#: plot.cpp:3729
+#: plot.cpp:3736
 msgid "invalid circles data"
 msgstr "données de cercles incorrectes"
 
-#: plot.cpp:3731 plot.cpp:3752 plot.cpp:3777 plot.cpp:3807
+#: plot.cpp:3738 plot.cpp:3759 plot.cpp:3784 plot.cpp:3814
 msgid "invalid symbol parameter"
 msgstr "paramètre de symbole incorrect"
 
-#: plot.cpp:3750
+#: plot.cpp:3757
 msgid "invalid squares data"
 msgstr "données de carrés incorrectes"
 
-#: plot.cpp:3775
+#: plot.cpp:3782
 msgid "invalid rectangles data (need 2 columns)"
 msgstr "données de rectangles incorrectes (nécessite 2 colonnes)"
 
-#: plot.cpp:3805
+#: plot.cpp:3812
 msgid "invalid stars data"
 msgstr "données d'étoiles incorrectes"
 
-#: plot.cpp:3847
+#: plot.cpp:3854
 msgid "invalid thermometers data (need 3 or 4 columns)"
 msgstr "données de jauges incorrectes (nécessite 3 ou 4 colonnes)"
 
-#: plot.cpp:3850 plot.cpp:3856
+#: plot.cpp:3857 plot.cpp:3863
 #, fuzzy, c-format
 msgid "invalid 'thermometers[, %s]'"
 msgstr "jauges[,%s] incorrectes"
 
-#: plot.cpp:3853
+#: plot.cpp:3860
 #, fuzzy, c-format
 msgid "'thermometers[, %s]' not in [0,1] -- may look funny"
 msgstr "jauges[,%s] non comprises dans [0,1] -- aspect étrange possible"
 
-#: plot.cpp:3895
+#: plot.cpp:3902
 #, fuzzy
 msgid "invalid 'boxplots' data (need 5 columns)"
 msgstr "données de boites à dispersion incorrectes (nécessite 5 colonnes)"
 
-#: plot.cpp:3904
+#: plot.cpp:3911
 #, fuzzy
 msgid "'boxplots[, 5]' outside [0,1] -- may look funny"
 msgstr "boxplots[,5] en dehors de [0,1] -- peut paraitre bizarre"
 
-#: plot.cpp:3906
+#: plot.cpp:3913
 #, fuzzy
 msgid "invalid 'boxplots[, 1:4]'"
 msgstr "boxplots[, 1:4] incorrect"
 
-#: plot.cpp:3952
+#: plot.cpp:3959
 msgid "invalid symbol type"
 msgstr "type de symbole incorrect"
 
-#: plot.cpp:3990 plot.cpp:3992 plot.cpp:3997 plot.cpp:3999
+#: plot.cpp:3997 plot.cpp:3999 plot.cpp:4004 plot.cpp:4006
 #, c-format
 msgid "incorrect length for '%s' argument"
 msgstr "mauvaise longueur pour l'argument '%s'"
 
-#: plot.cpp:4016
+#: plot.cpp:4023
 #, fuzzy
 msgid "unable to allocate memory (in 'xspline()')"
 msgstr "impossible d'allouer de la mémoire (dans xspline)"
 
-#: plot3d.cpp:183 plot3d.cpp:1924
+#: plot3d.cpp:185 plot3d.cpp:1926
 msgid "insufficient 'x' or 'y' values"
 msgstr "valeurs 'x' ou 'y' insuffisantes"
 
-#: plot3d.cpp:187 plot3d.cpp:1927
+#: plot3d.cpp:189 plot3d.cpp:1929
 msgid "dimension mismatch"
 msgstr "dimensions en désaccord"
 
-#: plot3d.cpp:195
+#: plot3d.cpp:197
 msgid "no contour values"
 msgstr "aucune valeur de contour"
 
-#: plot3d.cpp:257
+#: plot3d.cpp:259
 msgid "invalid x / y values or limits"
 msgstr "valeurs ou limites x / y incorrectes"
 
-#: plot3d.cpp:259
+#: plot3d.cpp:261
 msgid "invalid contour levels: must be strictly increasing"
 msgstr "niveaux de contour incorrects : doivent être strictement croissants"
 
-#: plot3d.cpp:1050 plot3d.cpp:1063
+#: plot3d.cpp:1052 plot3d.cpp:1065
 msgid "Axis orientation not calculated"
 msgstr "Orientation de l'axe non calculée"
 
-#: plot3d.cpp:1083
+#: plot3d.cpp:1085
 msgid "too few parameters"
 msgstr "trop peu de paramètres"
 
-#: plot3d.cpp:1113 plot3d.cpp:1115 plot3d.cpp:1117
+#: plot3d.cpp:1115 plot3d.cpp:1117 plot3d.cpp:1119
 #, fuzzy, c-format
 msgid "invalid '%s' limits"
 msgstr "limites 'x' incorrectes"
 
-#: plot3d.cpp:1138 plot3d.cpp:1140 plot3d.cpp:1142
+#: plot3d.cpp:1140 plot3d.cpp:1142 plot3d.cpp:1144
 #, fuzzy, c-format
 msgid "'%s' argument must be a character vector of length 1"
 msgstr "'xlab' doit être un vecteur de caractères de longueur 1"
 
-#: plot3d.cpp:1162
+#: plot3d.cpp:1164
 msgid "invalid viewing parameters"
 msgstr "paramètres de visualisation incorrects"
 
-#: plot3d.cpp:1521
+#: plot3d.cpp:1523
 #, c-format
 msgid "contour(): circular/long seglist -- set %s > %d?"
 msgstr "contour() : seglist longue / circulaire -- est-ce que %s > %d ?"
 
-#: plot3d.cpp:1930
+#: plot3d.cpp:1932
 msgid "no 'levels'"
 msgstr ""
 
-#: plot3d.cpp:1934 plot3d.cpp:1941
+#: plot3d.cpp:1936 plot3d.cpp:1943
 #, fuzzy, c-format
 msgid "missing '%s' values"
 msgstr "valeurs 'x' manquantes"
 
-#: plot3d.cpp:1936 plot3d.cpp:1943
+#: plot3d.cpp:1938 plot3d.cpp:1945
 #, fuzzy, c-format
 msgid "increasing '%s' values expected"
 msgstr "des valeurs croissantes sont attendues pour 'x'"
 
-#: plot3d.cpp:1948
+#: plot3d.cpp:1950
 #, c-format
 msgid "non-finite level values: levels[%d] = %g"
 msgstr ""
 
-#: plot3d.cpp:1961
+#: plot3d.cpp:1963
 #, fuzzy
 msgid "all 'z' values are equal"
 msgstr "toutes les valeurs en z sont égales"
 
-#: plot3d.cpp:1963
+#: plot3d.cpp:1965
 #, fuzzy
 msgid "all 'z' values are NA"
 msgstr "toutes les valeurs z sont NA"

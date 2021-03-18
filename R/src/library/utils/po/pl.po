@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R-core\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-01-30 18:47+0100\n"
+"POT-Creation-Date: 2021-03-18 20:03+0100\n"
 "PO-Revision-Date: 2019-11-13 21:14+0100\n"
 "Last-Translator: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
 "Language-Team: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
@@ -16,10 +16,10 @@ msgstr ""
 "Plural-Forms: nplurals=3; plural=(n==1 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 "
 "|| n%100>=20) ? 1 : 2);\n"
 
-#: io.cpp:327 io.cpp:331 io.cpp:341 io.cpp:569 io.cpp:768 io.cpp:820 io.cpp:834
-#: io.cpp:838 io.cpp:844 io.cpp:845 io.cpp:1086 io.cpp:1087 io.cpp:1089
-#: io.cpp:1090 io.cpp:1091 io.cpp:1092 io.cpp:1093 io.cpp:1094 stubs.cpp:41
-#: stubs.cpp:61 windows/dialogs.cpp:169 windows/dialogs.cpp:194
+#: io.cpp:329 io.cpp:333 io.cpp:343 io.cpp:571 io.cpp:770 io.cpp:822 io.cpp:836
+#: io.cpp:840 io.cpp:846 io.cpp:847 io.cpp:1088 io.cpp:1089 io.cpp:1091
+#: io.cpp:1092 io.cpp:1093 io.cpp:1094 io.cpp:1095 io.cpp:1096 stubs.cpp:44
+#: stubs.cpp:64 windows/dialogs.cpp:169 windows/dialogs.cpp:194
 #: windows/dialogs.cpp:197 windows/dialogs.cpp:241 windows/dialogs.cpp:278
 #: windows/dialogs.cpp:289 windows/dialogs.cpp:313 windows/dialogs.cpp:321
 #: windows/util.cpp:121 windows/widgets.cpp:75 windows/widgets.cpp:78
@@ -28,148 +28,167 @@ msgstr ""
 msgid "invalid '%s' argument"
 msgstr "niepoprawny argument '%s'"
 
-#: io.cpp:350 io.cpp:831
+#: io.cpp:352 io.cpp:833
 msgid "invalid quote symbol set"
 msgstr "niepoprawne ustawiony symbol cudzysłowiu"
 
-#: io.cpp:362 io.cpp:854 io.cpp:1074
+#: io.cpp:364 io.cpp:856 io.cpp:1076
 msgid "cannot open the connection"
 msgstr "nie można otworzyć połączenia"
 
-#: io.cpp:365 io.cpp:369
+#: io.cpp:367 io.cpp:371
 msgid "cannot read from this connection"
 msgstr "nie można czytać z tego połączenia"
 
-#: io.cpp:416 io.cpp:434
+#: io.cpp:418 io.cpp:436
 #, c-format
 msgid "quoted string on line %d terminated by EOF"
 msgstr ""
 "cytowany łańcuch tekstowy w linii %d przerwany przez znak końca pliku (EOF)"
 
-#: io.cpp:565
+#: io.cpp:567
 msgid "the first argument must be of mode character"
 msgstr "pierwszy argument musi być trybu tekstowego"
 
-#: io.cpp:595
+#: io.cpp:597
 #, c-format
 msgid "invalid 'numerals' string: \"%s\""
 msgstr "niepoprawny łańcuch 'numerals': \"%s\""
 
-#: io.cpp:770
+#: io.cpp:772
 #, c-format
 msgid "Selection: "
 msgstr "Wybór: "
 
-#: io.cpp:864 io.cpp:879
+#: io.cpp:866 io.cpp:881
 msgid "cannot allocate buffer in 'readTableHead'"
 msgstr "nie można przydzielić bufora w 'readTableHead'"
 
-#: io.cpp:892
+#: io.cpp:894
 msgid "\\ followed by EOF"
 msgstr "\\ a następnie EOF"
 
-#: io.cpp:931
+#: io.cpp:933
 #, c-format
 msgid "line %d appears to contain embedded nulls"
 msgstr "wygląda na to, że linia %d zawiera osadzone znaki null"
 
-#: io.cpp:944 io.cpp:948
+#: io.cpp:946 io.cpp:950
 #, c-format
 msgid "incomplete final line found by readTableHeader on '%s'"
 msgstr "niekompletna końcowa linia znaleziona przez 'readTableHeader' w '%s'"
 
-#: io.cpp:1004
+#: io.cpp:1006
 msgid "index out of range"
 msgstr "indeks poza zakresem"
 
-#: io.cpp:1042
+#: io.cpp:1044
 #, c-format
 msgid "Problem closing connection:  %s"
 msgstr "Problem poczas zamykania połączenia: %s"
 
-#: io.cpp:1044
+#: io.cpp:1046
 msgid "Problem closing connection"
 msgstr "Problem poczas zamykania połączenia"
 
-#: io.cpp:1067
+#: io.cpp:1069
 msgid "'file' argument is not a connection"
 msgstr "argument 'file' nie jest połączeniem"
 
-#: io.cpp:1070
+#: io.cpp:1072
 msgid "cannot write to this connection"
 msgstr "nie można zapisać w tym połączeniu"
 
-#: io.cpp:1100
+#: io.cpp:1102
 msgid "'dec' argument must be a single character"
 msgstr "argument 'dec' musi być pojedynczym znakiem"
 
-#: io.cpp:1124
+#: io.cpp:1126
 #, c-format
 msgid "corrupt data frame -- length of column %d does not match nrows"
 msgstr ""
 "uszkodzona ramka danych -- długość kolumny %d nie zgadza się z liczbą wierszy"
 
-#: io.cpp:1152
+#: io.cpp:1154
 #, c-format
 msgid "column %s claims to be a factor but does not have numeric codes"
 msgstr ""
 "kolumna %s twierdzi, że jest czynnikiem, ale nie posiada kodów liczbowych"
 
-#: io.cpp:1169
+#: io.cpp:1171
 msgid "corrupt matrix -- dims do not match length"
 msgstr "macierz jest uszkodzona -- wymiary nie zgadzają się z długością"
 
-#: stubs.cpp:50
+#: stubs.cpp:53
 msgid "'savehistory' can only be used in Rgui and Rterm"
 msgstr "'savehistory' może zostać użyte jedynie w Rgui oraz Rterm"
 
-#: stubs.cpp:67
+#: stubs.cpp:70
 msgid "'loadhistory' can only be used in Rgui and Rterm"
 msgstr "'loadhistory' może zostać użyte jedynie w Rgui oraz Rterm"
 
-#: stubs.cpp:79
+#: stubs.cpp:82
 msgid "invalid timestamp"
 msgstr "niepoprawna sygnatura czasu"
 
-#: stubs.cpp:145 stubs.cpp:153
+#: stubs.cpp:148 stubs.cpp:156
 msgid "X11 dataentry cannot be loaded"
 msgstr "moduł X11 nie może zostać załadowany"
 
-#: stubs.cpp:149 stubs.cpp:178 stubs.cpp:184
+#: stubs.cpp:152 stubs.cpp:181 stubs.cpp:187
 msgid "X11 is not available"
 msgstr "X11 nie jest dostępne"
 
-#: stubs.cpp:242 stubs.cpp:245
+#: stubs.cpp:245 stubs.cpp:248
 #, c-format
 msgid "invalid '%s' specification"
 msgstr "niepoprawne określenie '%s'"
 
-#: stubs.cpp:248
+#: stubs.cpp:251
 #, c-format
 msgid "'%s' contains missing values"
 msgstr "'%s' zawiera brakujące wartości"
 
-#: utils.cpp:64 windows/util.cpp:408 windows/util.cpp:417
+#: utils.cpp:79
+#, fuzzy
+msgid "argument 'x' must be a length-1 character vector"
+msgstr "argument '%s' musi być łańcuchem tekstowym"
+
+#: utils.cpp:81
+msgid "argument 'x' must be UTF-8 encoded (including ASCII)"
+msgstr ""
+
+#: utils.cpp:93 utils.cpp:122 windows/util.cpp:408 windows/util.cpp:417
 #: windows/widgets.cpp:188 windows/widgets.cpp:194 windows/widgets.cpp:256
 #: windows/widgets.cpp:262
 #, c-format
 msgid "'%s' argument must be a character string"
 msgstr "argument '%s' musi być łańcuchem tekstowym"
 
-#: utils.cpp:87
+#: utils.cpp:96
+#, c-format
+msgid "character class \"%s\" is invalid"
+msgstr ""
+
+#: utils.cpp:110
+#, fuzzy
+msgid "'charClass()' function is not available on this platform"
+msgstr "'nsl()' nie jest obsługiwany na tej platformie"
+
+#: utils.cpp:145
 msgid "'hostname' argument must be a character vector of length 1"
 msgstr "argument 'hostname' musi być wektorem tekstowym o długości 1"
 
-#: utils.cpp:93
+#: utils.cpp:151
 #, c-format
 msgid "'nsl()' was unable to resolve host '%s'"
 msgstr "'nsl()' nie był w stanie nawiązać połączenia z hostem '%s'"
 
-#: utils.cpp:100
+#: utils.cpp:158
 msgid "unknown format returned by 'gethostbyname()'"
 msgstr "nieznany format zwrócony przez 'gethostbyname()'"
 
-#: utils.cpp:109
+#: utils.cpp:167
 msgid "'nsl()' is not supported on this platform"
 msgstr "'nsl()' nie jest obsługiwany na tej platformie"
 

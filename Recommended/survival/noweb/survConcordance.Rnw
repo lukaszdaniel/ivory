@@ -574,7 +574,7 @@ survConcordance <- function(formula, data,
     else strat <- NULL
     
     x <- model.matrix(Terms, m)[,-1, drop=FALSE]  #remove the intercept
-    if (ncol(x) > 1) stop("Only one predictor variable allowed")
+    if (ncol(x) > 1) stop("only one predictor variable allowed")
 
     count <- survConcordance.fit(Y, x, strat, wt)
     if (is.null(strat)) {
@@ -628,7 +628,7 @@ tiny number due to round off error.  Since this can cause a warning message
 from the sqrt function we check and correct this.
 <<survConcordance.fit>>=
 survConcordance.fit <- function(y, x, strata, weight) { 
-    #    .Deprecated("concordancefit")
+    .Deprecated("concordancefit")
     # The coxph program may occassionally fail, and this will kill the C
     #  routine below
     if (any(is.na(x)) || any(is.na(y))) return(NULL)   

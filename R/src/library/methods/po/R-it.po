@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R-methods 3.6.3\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2021-02-11 18:11\n"
+"POT-Creation-Date: 2021-03-18 20:00\n"
 "PO-Revision-Date: \n"
 "Last-Translator: Daniele Medri <dmedri@gmail.com>\n"
 "Language-Team: Italian https://github.com/dmedri/R-italian-lang\n"
@@ -2702,7 +2702,7 @@ msgstr ""
 "non è stata trovata alcuna definizione per la superclasse %s nella "
 "specificazione di classe %s"
 
-#. R/Methods.R: gettext("  no direct match found to signature (%s)", domain = "R-methods")
+#. R/Methods.R: gettextf("  no direct match found to signature (%s)", paste(signature, collapse = ", "),     domain = "R-methods")
 #: R/Methods.R:0
 #, fuzzy
 msgid "no direct match found to signature (%s)"

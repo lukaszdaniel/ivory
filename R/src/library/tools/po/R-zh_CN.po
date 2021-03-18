@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.4.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2021-01-07 23:38\n"
+"POT-Creation-Date: 2021-03-18 20:02\n"
 "PO-Revision-Date: 2015-01-17 15:15+0100\n"
 "Last-Translator: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
 "Language-Team: Chinese\n"
@@ -5491,7 +5491,6 @@ msgstr "目录'%s'没有Rd对象"
 #. R/admin.R: gettextf("directory %s does not exist", sQuote(dir))
 #. R/admin.R: gettextf("directory %s does not exist", sQuote(dir))
 #. R/admin.R: gettextf("directory %s does not exist", sQuote(outDir))
-#. R/index.R: gettextf("directory %s does not exist", sQuote(dataDir))
 #. R/index.R: gettextf("directory %s does not exist", sQuote(demoDir))
 #. R/index.R: gettextf("directory %s does not exist", sQuote(demoDir))
 #: R/QC.R:0 R/Rd.R:0 R/Vignettes.R:0 R/admin.R:0 R/index.R:0
@@ -5504,6 +5503,11 @@ msgstr "不存在'%s'这个文件目录"
 #, fuzzy
 msgid "directory %s was not found"
 msgstr "找不到'%s'这个文件"
+
+#. R/makeLazyLoad.R: gettextf("directory '%s' does not exist", dir)
+#: R/makeLazyLoad.R:0
+msgid "directory '%s' does not exist"
+msgstr "不存在'%s'这个文件目录"
 
 #. R/RdConv2.R: gettextf("docType %s is unrecognized", sQuote(docTypes[i]))
 #: R/RdConv2.R:0
@@ -6871,7 +6875,8 @@ msgid "you must specify '%s', '%s' or '%s' argument"
 msgstr "你必需在'dir'或'files'中选一个"
 
 #. R/QC.R: stop("you must specify 'package' or 'dir'")
-#: R/QC.R:0
+#. R/makeLazyLoad.R: stop("you must specify 'package' or 'dir'")
+#: R/QC.R:0 R/makeLazyLoad.R:0
 msgid "you must specify 'package' or 'dir'"
 msgstr "你必需指定'package'或'dir'的值"
 
@@ -8248,9 +8253,6 @@ msgstr[0] "无法重新编码'%s'%s行"
 
 #~ msgid "cannot copy '%s' to '%s'"
 #~ msgstr "无法将'%s'拷贝到'%s'"
-
-#~ msgid "directory '%s' does not exist"
-#~ msgstr "不存在'%s'这个文件目录"
 
 #~ msgid "file '%s' does not exist"
 #~ msgstr "不存在'%s'这一文件"

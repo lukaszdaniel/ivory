@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R-core\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-01-30 18:44+0100\n"
+"POT-Creation-Date: 2021-03-18 20:00+0100\n"
 "PO-Revision-Date: \n"
 "Last-Translator: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
 "Language-Team: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
@@ -21,75 +21,75 @@ msgstr ""
 msgid "'%s' must be numeric of length %d"
 msgstr "'%s' musi być liczbą o długości %d"
 
-#: colors.cpp:70
+#: colors.cpp:75
 #, c-format
 msgid "color intensity '%s' is not in [0,1]"
 msgstr "intensywność koloru '%s', nie jest w przedziale [0,1]"
 
-#: colors.cpp:72
+#: colors.cpp:77
 #, c-format
 msgid "color intensity %g, not in [0,1]"
 msgstr "intensywność %g koloru, nie jest w przedziale [0,1]"
 
-#: colors.cpp:79
+#: colors.cpp:84
 #, c-format
 msgid "color intensity '%s' is not in 0:255"
 msgstr "intensywność koloru '%s', nie jest w zakresie 0:255"
 
-#: colors.cpp:81
+#: colors.cpp:86
 #, c-format
 msgid "color intensity %d, not in 0:255"
 msgstr "intensywność %d koloru, nie jest w zakresie 0:255"
 
-#: colors.cpp:88
+#: colors.cpp:93
 #, c-format
 msgid "alpha level '%s' is not in [0,1]"
 msgstr "poziom alfa '%s', nie jest w przedziale [0, 1]"
 
-#: colors.cpp:90
+#: colors.cpp:95
 #, c-format
 msgid "alpha level %g, not in [0,1]"
 msgstr "poziom alfa %g, nie jest w przedziale [0, 1]"
 
-#: colors.cpp:97
+#: colors.cpp:102
 #, c-format
 msgid "alpha level '%s' is not in 0:255"
 msgstr "poziom alfa '%s', nie jest w zakresie 0:255"
 
-#: colors.cpp:99
+#: colors.cpp:104
 #, c-format
 msgid "alpha level %d, not in 0:255"
 msgstr "poziom alfa %d, nie jest w zakresie 0:255"
 
-#: colors.cpp:114
+#: colors.cpp:119
 msgid "inputs must be finite"
 msgstr "wejścia muszą być skończone"
 
-#: colors.cpp:129
+#: colors.cpp:134
 msgid "bad hsv to rgb color conversion"
 msgstr "błędna konwersja hsv na rgb"
 
-#: colors.cpp:221 colors.cpp:235
+#: colors.cpp:226 colors.cpp:240
 msgid "invalid hsv color"
 msgstr "niepoprawny kolor hsv"
 
-#: colors.cpp:347 colors.cpp:367
+#: colors.cpp:352 colors.cpp:372
 msgid "invalid hcl color"
 msgstr "niepoprawny kolor hcl"
 
-#: colors.cpp:399
+#: colors.cpp:404
 msgid "invalid value of 'maxColorValue'"
 msgstr "niepoprawna wartość 'maxColorValue'"
 
-#: colors.cpp:427
+#: colors.cpp:432
 msgid "invalid 'names' vector"
 msgstr "niepoprawny wektor 'names'"
 
-#: colors.cpp:486 colors.cpp:495
+#: colors.cpp:491 colors.cpp:500
 msgid "invalid gray level, must be in [0,1]."
 msgstr "niepoprawny poziom szarości, musi być w przedziale [0, 1]."
 
-#: colors.cpp:551 devPS.cpp:9632 devPS.cpp:9795 devPS.cpp:9798
+#: colors.cpp:556 devPS.cpp:9635 devPS.cpp:9798 devPS.cpp:9801
 #: devWindows.cpp:3677 devWindows.cpp:3681 devWindows.cpp:3689
 #: devWindows.cpp:3700 devWindows.cpp:3706 devWindows.cpp:3713
 #: devWindows.cpp:3720 devWindows.cpp:3724
@@ -97,94 +97,94 @@ msgstr "niepoprawny poziom szarości, musi być w przedziale [0, 1]."
 msgid "invalid '%s' value"
 msgstr "niepoprawna wartość '%s'"
 
-#: colors.cpp:1337
+#: colors.cpp:1342
 msgid "invalid hex digit in 'color' or 'lty'"
 msgstr "niepoprawna liczba szestnastkowa w 'color' lub 'lty'"
 
-#: colors.cpp:1347 colors.cpp:1357
+#: colors.cpp:1352 colors.cpp:1362
 msgid "invalid RGB specification"
 msgstr "niepoprawne określenie RGB"
 
-#: colors.cpp:1390
+#: colors.cpp:1395
 #, c-format
 msgid "invalid color name '%s'"
 msgstr "niepoprawna nazwa koloru '%s'"
 
-#: colors.cpp:1440 colors.cpp:1449
+#: colors.cpp:1445 colors.cpp:1454
 #, c-format
 msgid "invalid color specification \"%s\""
 msgstr "niepoprawne określenie koloru \"%s\""
 
-#: colors.cpp:1477
+#: colors.cpp:1482
 msgid "supplied color is neither numeric nor character"
 msgstr "dostarczony kolor nie jest ani liczbą ani tekstem"
 
-#: colors.cpp:1481
+#: colors.cpp:1486
 #, c-format
 msgid "numerical color values must be >= 0, found %d"
 msgstr "liczbowe wartości koloru muszą być >=0, znaleziono %d"
 
-#: colors.cpp:1492
+#: colors.cpp:1497
 msgid "invalid argument type"
 msgstr "niepoprawny typ argumentu"
 
-#: colors.cpp:1503
+#: colors.cpp:1508
 msgid "unknown palette (need >= 2 colors)"
 msgstr "nieznana paleta (potrzeba >= 2 kolory)"
 
-#: colors.cpp:1507 colors.cpp:1529
+#: colors.cpp:1512 colors.cpp:1534
 #, c-format
 msgid "maximum number of colors is %d"
 msgstr "maksymalna liczba kolorów wynosi %d"
 
-#: devCairo.cpp:53 devCairo.cpp:64
+#: devCairo.cpp:52 devCairo.cpp:63
 msgid "failed to load cairo DLL"
 msgstr "nie udało się załadować pliku DLL cairo"
 
-#: devPS.cpp:569
+#: devPS.cpp:572
 #, c-format
 msgid "afm file '%s' could not be opened"
 msgstr "plik afm '%s' nie mógł zostać otwarty"
 
-#: devPS.cpp:599
+#: devPS.cpp:602
 msgid "'FontBBox' could not be parsed"
 msgstr "'FontBBox' nie mógł zostać przetworzony"
 
-#: devPS.cpp:607
+#: devPS.cpp:610
 msgid "'CharInfo' could not be parsed"
 msgstr "'CharInfo' nie mógł zostać przetworzony"
 
-#: devPS.cpp:637
+#: devPS.cpp:640
 msgid "unknown AFM entity encountered"
 msgstr "napotkano nieznany obiekt AFM"
 
-#: devPS.cpp:752 devPS.cpp:755 devPS.cpp:4491 devPS.cpp:9257 devPicTeX.cpp:480
-#: devPicTeX.cpp:482
+#: devPS.cpp:755 devPS.cpp:758 devPS.cpp:4494 devPS.cpp:9260 devPicTeX.cpp:481
+#: devPicTeX.cpp:483
 #, c-format
 msgid "invalid string in '%s' function"
 msgstr "niepoprawny łańcuch w funkcji '%s'"
 
-#: devPS.cpp:786
+#: devPS.cpp:789
 #, c-format
 msgid "font width unknown for character 0x%x"
 msgstr "nieznana szerokość czcionki dla znaku '0x%x'"
 
-#: devPS.cpp:843 devPS.cpp:4371
+#: devPS.cpp:846 devPS.cpp:4374
 #, c-format
 msgid "unknown encoding '%s' in '%s' function"
 msgstr "nieznana strona kodowa '%s' w funkcji '%s'"
 
-#: devPS.cpp:859 devPS.cpp:870
+#: devPS.cpp:862 devPS.cpp:873
 #, c-format
 msgid "font metrics unknown for Unicode character U+%04x"
 msgstr "nieznane metryki czcionki dla znaku Unicode 'U+%04x'"
 
-#: devPS.cpp:878
+#: devPS.cpp:881
 #, c-format
 msgid "font metrics unknown for character 0x%x"
 msgstr "nieznane metryki czcionki dla znaku '0x%x'"
 
-#: devPS.cpp:891
+#: devPS.cpp:894
 #, c-format
 msgid ""
 "invalid character (%04x) sent to 'PostScriptCIDMetricInfo()' function in a "
@@ -193,160 +193,160 @@ msgstr ""
 "niepoprawny znak (%04x) wysłany do funkcji 'PostScriptCIDMetricInfo()' w "
 "jednobajtowej lokalizacji"
 
-#: devPS.cpp:899
+#: devPS.cpp:902
 msgid ""
 "invalid character sent to 'PostScriptCIDMetricInfo()' in a single-byte locale"
 msgstr ""
 "niepoprawny znak wysłany do funkcji 'PostScriptCIDMetricInfo()' w "
 "jednobajtowej lokalizacji"
 
-#: devPS.cpp:1019
+#: devPS.cpp:1022
 msgid "failed to allocate CID font info"
 msgstr "nie udało się przydzielić informacji o czcionce CID"
 
-#: devPS.cpp:1035
+#: devPS.cpp:1038
 msgid "failed to allocate Type 1 font info"
 msgstr "nie udało się przydzielić informacji o czcionce  Type 1"
 
-#: devPS.cpp:1055
+#: devPS.cpp:1058
 msgid "failed to allocate encoding info"
 msgstr "nie udało się przydzielić informacji o kodowaniu"
 
-#: devPS.cpp:1074
+#: devPS.cpp:1077
 msgid "failed to allocate CID font family"
 msgstr "nie udało się przydzielić rodziny czcionek CID"
 
-#: devPS.cpp:1088
+#: devPS.cpp:1091
 msgid "failed to allocate Type 1 font family"
 msgstr "nie udało się przydzielić rodziny czcionek Type 1"
 
-#: devPS.cpp:1125 devPS.cpp:1136
+#: devPS.cpp:1128 devPS.cpp:1139
 msgid "failed to allocate font list"
 msgstr "nie udało się przydzielić listy czcionek"
 
-#: devPS.cpp:1194
+#: devPS.cpp:1197
 msgid "failed to allocated encoding list"
 msgstr "nie udało się przydzielić listy kodowań"
 
-#: devPS.cpp:1343
+#: devPS.cpp:1346
 msgid "truncated string which was too long for copy"
 msgstr "przycięty łańcuch, który był zbyt długi do skopiowania"
 
-#: devPS.cpp:1383
+#: devPS.cpp:1386
 #, c-format
 msgid "failed to load encoding file '%s'"
 msgstr "nie udało się załadować pliku strony kodowej '%s'"
 
-#: devPS.cpp:1481 devPS.cpp:1514
+#: devPS.cpp:1484 devPS.cpp:1517
 msgid "invalid font name or more than one font name"
 msgstr "niepoprawna nazwa czcionki lub więcej niż jedna nazwa czcionki"
 
-#: devPS.cpp:1633 devPS.cpp:1667
+#: devPS.cpp:1636 devPS.cpp:1670
 #, c-format
 msgid "font family '%s' not found in PostScript font database"
 msgstr ""
 "rodzina czcionki '%s' nie została znaleziona w bazie danych czcionek "
 "PostScript"
 
-#: devPS.cpp:1751 devPS.cpp:1832 devPS.cpp:1859
+#: devPS.cpp:1754 devPS.cpp:1835 devPS.cpp:1862
 #, c-format
 msgid "font encoding for family '%s' not found in font database"
 msgstr ""
 "kodowanie czcionki dla rodziny '%s' nie zostało znalezione w bazie danych "
 "czcionki"
 
-#: devPS.cpp:1778 devPS.cpp:1805
+#: devPS.cpp:1781 devPS.cpp:1808
 #, c-format
 msgid "font CMap for family '%s' not found in font database"
 msgstr "czcionka CMap dla rodziny '%s' nie została znaleziona w bazie danych"
 
-#: devPS.cpp:1999 devPS.cpp:2079 devPS.cpp:2146
+#: devPS.cpp:2002 devPS.cpp:2082 devPS.cpp:2149
 #, c-format
 msgid "cannot load afm file '%s'"
 msgstr "nie można załadować pliku afm '%s'"
 
-#: devPS.cpp:2433
+#: devPS.cpp:2436
 msgid "corrupt loaded encodings;  encoding not recorded"
 msgstr ""
 "załadowane kodowania są uszkodzone; kodowanie nie zostało zarejestrowane"
 
-#: devPS.cpp:2444
+#: devPS.cpp:2447
 msgid "failed to record device encoding"
 msgstr "nie udało się zapisać kodowania urządzenia"
 
-#: devPS.cpp:2615
+#: devPS.cpp:2618
 msgid "object '.ps.prolog' is not a character vector"
 msgstr "obiekt '.ps.prolog' nie jest wektorem tekstowym"
 
-#: devPS.cpp:2690 devPS.cpp:7558 devWindows.cpp:799
+#: devPS.cpp:2693 devPS.cpp:7561 devWindows.cpp:799
 msgid "invalid line end"
 msgstr "błędny koniec linii"
 
-#: devPS.cpp:2709 devPS.cpp:7578 devWindows.cpp:812
+#: devPS.cpp:2712 devPS.cpp:7581 devWindows.cpp:812
 msgid "invalid line join"
 msgstr "błędny łącznik linii"
 
-#: devPS.cpp:2717
+#: devPS.cpp:2720
 msgid "invalid line mitre"
 msgstr "niepoprawny ukośnik linii"
 
-#: devPS.cpp:2922 devPS.cpp:3841 devPS.cpp:4289 devPS.cpp:4316 devPS.cpp:5359
-#: devPS.cpp:9107 devPS.cpp:9152
+#: devPS.cpp:2925 devPS.cpp:3844 devPS.cpp:4292 devPS.cpp:4319 devPS.cpp:5362
+#: devPS.cpp:9110 devPS.cpp:9155
 #, c-format
 msgid "attempt to use invalid font %d replaced by font 1"
 msgstr "próba użycia niepoprawnej czcionki %d zastąpionej przez czcionkę 1"
 
-#: devPS.cpp:3149 devPS.cpp:4814 devPS.cpp:6944 devWindows.cpp:1813
+#: devPS.cpp:3152 devPS.cpp:4817 devPS.cpp:6947 devWindows.cpp:1813
 #: devWindows.cpp:1850 devWindows.cpp:1880 devWindows.cpp:1912
 #, c-format
 msgid "filename too long in '%s' call"
 msgstr "nazwa pliku jest zbyt długa w wywołaniu '%s'"
 
-#: devPS.cpp:3155 devPS.cpp:4820 devPS.cpp:6950
+#: devPS.cpp:3158 devPS.cpp:4823 devPS.cpp:6953
 #, c-format
 msgid "memory allocation problem in '%s' function"
 msgstr "problem przydziału pamięci w funkcji '%s'"
 
-#: devPS.cpp:3173 devPS.cpp:7014
+#: devPS.cpp:3176 devPS.cpp:7017
 #, c-format
 msgid "encoding path is too long in '%s' function"
 msgstr "ścieżka kodowa w funkcji '%s' jest zbyt długa"
 
-#: devPS.cpp:3187 devPS.cpp:4860
+#: devPS.cpp:3190 devPS.cpp:4863
 #, c-format
 msgid "failed to load encoding file in '%s' function"
 msgstr "nie udało się załadować pliku strony kodowej funkcji '%s'"
 
-#: devPS.cpp:3232 devPS.cpp:3295 devPS.cpp:7073 devPS.cpp:7129 devPS.cpp:8987
+#: devPS.cpp:3235 devPS.cpp:3298 devPS.cpp:7076 devPS.cpp:7132 devPS.cpp:8990
 msgid "invalid font type"
 msgstr "niepoprawny typ czcionki"
 
-#: devPS.cpp:3256
+#: devPS.cpp:3259
 msgid "failed to initialise default PostScript font"
 msgstr "nie udało się zainicjalizować domyślnej czcionki PostScript"
 
-#: devPS.cpp:3322
+#: devPS.cpp:3325
 msgid "failed to initialise additional PostScript fonts"
 msgstr "nie udało się zainicjalizować dodatkowych czcionek PostScript"
 
-#: devPS.cpp:3338
+#: devPS.cpp:3341
 msgid "invalid foreground/background color (postscript)"
 msgstr "niepoprawny kolor pierwszego planu/tła (postscript)"
 
-#: devPS.cpp:3343
+#: devPS.cpp:3346
 msgid "'command' is too long"
 msgstr "'command' jest zbyt długie"
 
-#: devPS.cpp:3348
+#: devPS.cpp:3351
 msgid "'postscript(print.it=TRUE)' used with an empty 'print' command"
 msgstr "'postscript(print.it=TRUE)' użyte z pustą komendą 'print'"
 
-#: devPS.cpp:3399
+#: devPS.cpp:3402
 #, c-format
 msgid "invalid page type '%s' (postscript)"
 msgstr "niepoprawny typ '%s' strony (postscript)"
 
-#: devPS.cpp:3521 devPS.cpp:4659 devWindows.cpp:2347
+#: devPS.cpp:3524 devPS.cpp:4662 devWindows.cpp:2347
 msgid ""
 "semi-transparency is not supported on this device: reported only once per "
 "page"
@@ -354,17 +354,17 @@ msgstr ""
 "półprzezroczystość nie jest wspierana na tym urządzeniu: zaraportowane tylko "
 "raz na stronę"
 
-#: devPS.cpp:3632 devPS.cpp:3643
+#: devPS.cpp:3635 devPS.cpp:3646
 #, c-format
 msgid "cannot open 'postscript' pipe to '%s'"
 msgstr "nie można otworzyć kanału 'postscript' w '%s'"
 
-#: devPS.cpp:3654 devPS.cpp:5077 devPS.cpp:5090 devPS.cpp:8281 qdPDF.cpp:98
+#: devPS.cpp:3657 devPS.cpp:5080 devPS.cpp:5093 devPS.cpp:8284 qdPDF.cpp:98
 #, c-format
 msgid "cannot open file '%s'"
 msgstr "nie można otworzyć pliku '%s'"
 
-#: devPS.cpp:3782 devPS.cpp:3797
+#: devPS.cpp:3785 devPS.cpp:3800
 #, c-format
 msgid ""
 "error from postscript() in running:\n"
@@ -373,176 +373,176 @@ msgstr ""
 "błąd pochodzący z funkcji 'postscript()' w działającym:\n"
 "    %s"
 
-#: devPS.cpp:3829
+#: devPS.cpp:3832
 #, c-format
 msgid "CID family '%s' not included in postscript() device"
 msgstr "rodzina CID '%s' nie jest uwzględniona w urządzeniu 'postScript()'"
 
-#: devPS.cpp:3847 devPS.cpp:3858 devPS.cpp:4296 devPS.cpp:4326 devPS.cpp:4431
+#: devPS.cpp:3850 devPS.cpp:3861 devPS.cpp:4299 devPS.cpp:4329 devPS.cpp:4434
 #, c-format
 msgid "family '%s' not included in postscript() device"
 msgstr "rodzina '%s' nie jest uwzględniona w urządzeniu 'postScript()'"
 
-#: devPS.cpp:4381
+#: devPS.cpp:4384
 #, c-format
 msgid "conversion failure on '%s' in '%s' function: dot substituted for <%02x>"
 msgstr "niepowodzenie konwersji '%s' w funkcji '%s': kropka zastąpiona <%02x>"
 
-#: devPS.cpp:4389
+#: devPS.cpp:4392
 #, c-format
 msgid "conversion failure from %s to %s on '%s' in '%s' function"
 msgstr "niepowodzenie konwersji z %s na %s w '%s' w funkcji '%s'"
 
-#: devPS.cpp:4459
+#: devPS.cpp:4462
 #, c-format
 msgid "failed open converter to encoding '%s'"
 msgstr "nie udało się otworzyć konwertera dla kodowania '%s'"
 
-#: devPS.cpp:4477 devPS.cpp:5404 devPS.cpp:9242
+#: devPS.cpp:4480 devPS.cpp:5407 devPS.cpp:9245
 #, c-format
 msgid "failed in text conversion to encoding '%s'"
 msgstr "konwersja tesktu dla kodowania '%s' nie powiodła się"
 
-#: devPS.cpp:4673
+#: devPS.cpp:4676
 msgid "ran out of colors in 'xfig()' function"
 msgstr "zabrakło kolorów w funkcji 'xfig()'"
 
-#: devPS.cpp:4702
+#: devPS.cpp:4705
 #, c-format
 msgid "unimplemented line texture %08x: using Dash-double-dotted"
 msgstr "niezaimplementowana tekstura linii %08x: używanie kreska-dwie-kropki"
 
-#: devPS.cpp:4774
+#: devPS.cpp:4777
 #, c-format
 msgid "unknown postscript font family '%s', using Helvetica"
 msgstr "nieznana rodzina czcionki postscript '%s', używanie Helvetica"
 
-#: devPS.cpp:4845
+#: devPS.cpp:4848
 msgid "invalid foreground/background color (xfig)"
 msgstr "niepoprawny kolor pierwszego planu/tła (xfig)"
 
-#: devPS.cpp:4878
+#: devPS.cpp:4881
 msgid "only Type 1 fonts supported for XFig"
 msgstr "tylko czcionki 'Type 1' są wspierane w XFig"
 
-#: devPS.cpp:4891
+#: devPS.cpp:4894
 msgid "failed to initialise default XFig font"
 msgstr "nie udało się zainicjalizować domyślnej czcionki XFig"
 
-#: devPS.cpp:4928
+#: devPS.cpp:4931
 #, c-format
 msgid "invalid page type '%s' (xfig)"
 msgstr "niepoprawny typ '%s' strony ('xfig')"
 
-#: devPS.cpp:4936
+#: devPS.cpp:4939
 #, c-format
 msgid "xfig(%s, onefile=FALSE) will only return the last plot"
 msgstr "'xfig(%s, onefile=FALSE)' zwróci tylko ostatni wykres"
 
-#: devPS.cpp:5069
+#: devPS.cpp:5072
 msgid "empty file name"
 msgstr "pusta nazwa pliku"
 
-#: devPS.cpp:5136 devPS.cpp:5188 devPS.cpp:6768 devPS.cpp:6812 devPS.cpp:8342
+#: devPS.cpp:5139 devPS.cpp:5191 devPS.cpp:6771 devPS.cpp:6815 devPS.cpp:8345
 msgid "write failed"
 msgstr "zapis nie powiódł się"
 
-#: devPS.cpp:5393
+#: devPS.cpp:5396
 #, c-format
 msgid "unable to use encoding '%s'"
 msgstr "nie można użyć strony kodowej '%s'"
 
-#: devPS.cpp:5718
+#: devPS.cpp:5721
 msgid "failed to increase definition string (shut down PDF device)"
 msgstr ""
 
-#: devPS.cpp:5761
+#: devPS.cpp:5764
 #, fuzzy
 msgid "failed to increase 'maxDefns'"
 msgstr "nie udało się zwiększyć 'maxRaster'"
 
-#: devPS.cpp:6656 devPS.cpp:6659
+#: devPS.cpp:6659 devPS.cpp:6662
 msgid "failed to increase 'maxRaster'"
 msgstr "nie udało się zwiększyć 'maxRaster'"
 
-#: devPS.cpp:6671
+#: devPS.cpp:6674
 msgid "unable to allocate raster image"
 msgstr "nie można przydzielić obrazu rastrowego"
 
-#: devPS.cpp:6872
+#: devPS.cpp:6875
 msgid "corrupt loaded encodings;  font not added"
 msgstr "załadowane kodowania są uszkodzone; czcionka nie została dodana"
 
-#: devPS.cpp:6882
+#: devPS.cpp:6885
 msgid "failed to record device encoding; font not added"
 msgstr ""
 "nie udało się zarejestrować kodowania urządzenia; czcionka nie została dodana"
 
-#: devPS.cpp:7000 devPS.cpp:7407 devPS.cpp:8132
+#: devPS.cpp:7003 devPS.cpp:7410 devPS.cpp:8135
 #, c-format
 msgid "increasing the PDF version to %s"
 msgstr "zwiększanie wersji PDF do %s"
 
-#: devPS.cpp:7030
+#: devPS.cpp:7033
 msgid "failed to load default encoding"
 msgstr "nie udało się załadować domyślnej strony kodowej"
 
-#: devPS.cpp:7097
+#: devPS.cpp:7100
 msgid "failed to initialise default PDF font"
 msgstr "nie udało się zainicjalizować domyślnej czcionki PDF"
 
-#: devPS.cpp:7152
+#: devPS.cpp:7155
 msgid "failed to initialise additional PDF fonts"
 msgstr "nie udało się zainicjalizować dodatkowych czcionek PDF"
 
-#: devPS.cpp:7165
+#: devPS.cpp:7168
 msgid "failed to allocate rasters"
 msgstr "nie udało się przydzielić rastrów"
 
-#: devPS.cpp:7172
+#: devPS.cpp:7175
 msgid "failed to allocate masks"
 msgstr "nie udało się przydzielić masek"
 
-#: devPS.cpp:7181
+#: devPS.cpp:7184
 #, fuzzy
 msgid "failed to allocate definitions"
 msgstr "nie udało się przydzielić listy czcionek"
 
-#: devPS.cpp:7250
+#: devPS.cpp:7253
 #, c-format
 msgid "invalid paper type '%s' (pdf)"
 msgstr "niepoprawny typ '%s' papieru (pdf)"
 
-#: devPS.cpp:7274
+#: devPS.cpp:7277
 msgid "invalid foreground/background color (pdf)"
 msgstr "niepoprawny kolor pierwszego planu/tła (pdf)"
 
-#: devPS.cpp:7382
+#: devPS.cpp:7385
 msgid "invalid 'alpha' value in PDF"
 msgstr "niepoprawna wartość 'alpha' w PDF"
 
-#: devPS.cpp:7451 devPS.cpp:7499
+#: devPS.cpp:7454 devPS.cpp:7502
 msgid "unknown 'colormodel', using 'srgb'"
 msgstr "nieznany 'colormodel', używanie 'srgb'"
 
-#: devPS.cpp:7744
+#: devPS.cpp:7747
 msgid "failed to load sRGB colorspace file"
 msgstr "nie udało się załadować pliku przestrzeni kolorów sRGB"
 
-#: devPS.cpp:8051
+#: devPS.cpp:8054
 msgid "corrupt encodings in PDF device"
 msgstr "uszkodzone kodowania w urządzeniu PDF"
 
-#: devPS.cpp:8265
+#: devPS.cpp:8268
 #, c-format
 msgid "cannot open 'pdf' pipe to '%s'"
 msgstr "nie można otworzyć kanału 'pdf' w '%s'"
 
-#: devPS.cpp:8271
+#: devPS.cpp:8274
 msgid "file = \"|cmd\" implies 'onefile = TRUE'"
 msgstr "file = \"|cmd\" sugeruje, że 'onefile = TRUE'"
 
-#: devPS.cpp:8415
+#: devPS.cpp:8418
 #, c-format
 msgid ""
 "cannot open 'pdf' file argument '%s'\n"
@@ -551,7 +551,7 @@ msgstr ""
 "nie można otworzyć argumentu pliku 'pdf' '%s'\n"
 "  proszę wyłączyć urządzenie PDF"
 
-#: devPS.cpp:8435
+#: devPS.cpp:8438
 #, c-format
 msgid ""
 "cannot open temporary file '%s' for compression (reason: %s); compression "
@@ -560,30 +560,30 @@ msgstr ""
 "nie można otworzyć tymczasowego pliku '%s' do kompresji (powód: %s); "
 "kompresja została wyłączona dla tego urządzenia"
 
-#: devPS.cpp:8627
+#: devPS.cpp:8630
 msgid "Raster image within mask ignored"
 msgstr ""
 
-#: devPS.cpp:9012 devPS.cpp:9374 devPS.cpp:9421
+#: devPS.cpp:9015 devPS.cpp:9377 devPS.cpp:9424
 msgid "failed to find or load PDF font"
 msgstr "nie udało się znaleźć lub załadować czcionkę PDF"
 
-#: devPS.cpp:9196 devPS.cpp:9329
+#: devPS.cpp:9199 devPS.cpp:9332
 msgid "failed to find or load PDF CID font"
 msgstr "nie udało się znaleźć lub załadować czcionkę CID PDF"
 
-#: devPS.cpp:9604 devPS.cpp:9608 devPS.cpp:9626 devPS.cpp:9769 devPS.cpp:9773
-#: devPS.cpp:9785
+#: devPS.cpp:9607 devPS.cpp:9611 devPS.cpp:9629 devPS.cpp:9772 devPS.cpp:9776
+#: devPS.cpp:9788
 #, c-format
 msgid "invalid '%s' parameter in '%s'"
 msgstr "niepoprawny parametr '%s' w '%s'"
 
-#: devPS.cpp:9645 devPS.cpp:9712 devPS.cpp:9812
+#: devPS.cpp:9648 devPS.cpp:9715 devPS.cpp:9815
 #, c-format
 msgid "unable to start '%s' device"
 msgstr "nie można uruchomić urządzenia '%s'"
 
-#: devPicTeX.cpp:778 devWindows.cpp:3767
+#: devPicTeX.cpp:779 devWindows.cpp:3767
 #, c-format
 msgid "unable to start %s() device"
 msgstr "nie można uruchomić urządzenia '%s()'"
@@ -774,16 +774,16 @@ msgstr "Nie można otworzyć "
 msgid "invalid 'width' or 'height'"
 msgstr "niepoprawna wartość 'width' lub 'height'"
 
-#: devices.cpp:43
+#: devices.cpp:46
 msgid "argument must have positive length"
 msgstr "argument musi mieć dodatnią długość"
 
-#: devices.cpp:52 stubs.cpp:105
+#: devices.cpp:55 stubs.cpp:113
 #, c-format
 msgid "invalid '%s' argument"
 msgstr "niepoprawny argument '%s'"
 
-#: devices.cpp:81 devices.cpp:89 devices.cpp:97
+#: devices.cpp:84 devices.cpp:92 devices.cpp:100
 msgid "NA argument is invalid"
 msgstr "argument N jest niepoprawny"
 
@@ -800,7 +800,7 @@ msgstr "to nie jest wspierany schemat, nie zapisano danych obrazka"
 msgid "allocation failure in QuartzBitmap_DeviceCreate"
 msgstr ""
 
-#: qdCocoa.m:900
+#: qdCocoa.m:918
 msgid "allocation failure in QuartzCocoa_DeviceCreate"
 msgstr ""
 

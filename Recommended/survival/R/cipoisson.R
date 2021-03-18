@@ -17,7 +17,7 @@ cipoisson <- function(k, time=1, p=0.95, method=c('exact', 'anscombe'))
         upper <- (sqrt(k + 7/8) - qnorm(p)/2)^2
         lower <- (sqrt(k - 1/8) + qnorm(p)/2)^2
     }
-    else  stop("Invalid method")
+    else  stop("invalid method")
 
     # The summary.pyears routine sometimes calls this with time=0
     if (any(time<=0)) {

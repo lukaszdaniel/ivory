@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: methods 4.1.0\n"
-"POT-Creation-Date: 2021-02-11 18:11\n"
+"POT-Creation-Date: 2021-03-18 20:00\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -2880,7 +2880,7 @@ msgstr ""
 
 
 #: R/Methods.R: 0
-#. R/Methods.R: gettext("  no direct match found to signature (%s)", domain = "R-methods")
+#. R/Methods.R: gettextf("  no direct match found to signature (%s)", paste(signature, collapse = ", "),     domain = "R-methods")
 
 msgid "no direct match found to signature (%s)"
 msgstr ""

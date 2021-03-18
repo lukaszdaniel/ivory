@@ -116,7 +116,7 @@ anova.coxph <- function (object, ...,  test = 'Chisq') {
         }
   
     temp <- attr(terms(object), "term.labels")
-    if (has.strata) temp <- temp[-stemp$terms]
+    if (has.strata && length(stemp$terms)>0 ) temp <- temp[-stemp$terms]
     row.names(table) <- c('NULL', temp)
 
     title <- paste(gettext("Analysis of Deviance Table"), "\n ", gettextf("Cox model: response is %s", deparse(object$terms[[2]]), domain = "R-survival"), "\n", 

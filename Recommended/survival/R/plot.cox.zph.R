@@ -1,6 +1,6 @@
 plot.cox.zph <- function(x, resid=TRUE, se=TRUE, df=4, nsmo=40, 
                          var, xlab="Time", ylab="", lty=1:2, col=1, lwd=1,
-                         ...) {
+                         hr = FALSE, ...) {
     xx <- x$x
     yy <- x$y
     df <- max(df)     # in case df is a vector
@@ -10,9 +10,12 @@ plot.cox.zph <- function(x, resid=TRUE, se=TRUE, df=4, nsmo=40,
     lmat <- ns(temp, df=df, intercept=TRUE)
     pmat <- lmat[seq_len(nsmo), ]       # for prediction
     xmat <- lmat[-seq_len(nsmo), ]
+    if (!is.logical(hr)) stop("hr parameter must be TRUE/FALSE")
 
-
-    if (missing(ylab)) ylab <- gettextf("Beta(t) for %s", dimnames(yy)[[2]])
+    if (missing(ylab)) {
+        if (hr)  ylab <- gettextf("HR(t) for %s", dimnames(yy)[[2]])
+            else ylab <- gettextf("Beta(t) for %s", dimnames(yy)[[2]])
+    }       
     if (missing(var)) var <- seq_len(nvar)
     else {
 	if (is.character(var)) var <- match(var, dimnames(yy)[[2]])
@@ -77,24 +80,45 @@ plot.cox.zph <- function(x, resid=TRUE, se=TRUE, df=4, nsmo=40,
 	    yr <- range(yr, yup, ylow)
 	    }
 
-	if (x$transform=='identity')
-	    plot(range(xx), yr, type='n', xlab=xlab, ylab=ylab[i], ...)
-	else if (x$transform=='log')
-	    plot(range(xx[keep]), yr, type='n', xlab=xlab, ylab=ylab[i], 
-                log='x', ...)
-	else {
-	    plot(range(xx[keep]), yr, type='n', xlab=xlab, ylab=ylab[i], 
-                 axes=FALSE,...)
-	    axis(1, xaxisval, xaxislab)
-	    axis(2)
-	    box()
+        if (!hr) {
+            if (x$transform=='identity')
+                plot(range(xx), yr, type='n', xlab=xlab, ylab=ylab[i], ...)
+            else if (x$transform=='log')
+                plot(range(xx[keep]), yr, type='n', xlab=xlab, ylab=ylab[i], 
+                     log='x', ...)
+            else {
+                plot(range(xx[keep]), yr, type='n', xlab=xlab, ylab=ylab[i], 
+                     axes=FALSE,...)
+                axis(1, xaxisval, xaxislab)
+                axis(2)
+                box()
 	    }
-	if (resid) points(xx[keep], y)
+            if (resid) points(xx[keep], y)
 
-	lines(pred.x, yhat, lty=lty[1], col=col[1], lwd=lwd[1])
-	if (se) {
-	    lines(pred.x, yup,  col=col[2], lty=lty[2], lwd=lwd[2])
-	    lines(pred.x, ylow, col=col[2], lty=lty[2], lwd=lwd[2])
+            lines(pred.x, yhat, lty=lty[1], col=col[1], lwd=lwd[1])
+            if (se) {
+                lines(pred.x, yup,  col=col[2], lty=lty[2], lwd=lwd[2])
+                lines(pred.x, ylow, col=col[2], lty=lty[2], lwd=lwd[2])
 	    }
-	}
+        } else {    
+            if (x$transform=='identity')
+                plot(range(xx), exp(yr), type='n', xlab=xlab, ylab=ylab[i],
+                     log='y', ...)
+            else if (x$transform=='log')
+                plot(range(xx[keep]), exp(yr), type='n', xlab=xlab, 
+                     ylab=ylab[i], log='xy', ...)
+            else {
+                plot(range(xx[keep]), exp(yr), type='n', xlab=xlab, 
+                     ylab=ylab[i], log='y', xaxt= 'n',...)
+                axis(1, xaxisval, xaxislab)
+	    }
+            if (resid) points(xx[keep], exp(y))
+
+            lines(pred.x, exp(yhat), lty=lty[1], col=col[1], lwd=lwd[1])
+            if (se) {
+                lines(pred.x, exp(yup),  col=col[2], lty=lty[2], lwd=lwd[2])
+                lines(pred.x, exp(ylow), col=col[2], lty=lty[2], lwd=lwd[2])
+	    }
+        }
     }
+}

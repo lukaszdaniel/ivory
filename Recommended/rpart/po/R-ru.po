@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.7.0\n"
 "Report-Msgid-Bugs-To: bugs@r-project.org\n"
-"POT-Creation-Date: 2015-02-13 16:25\n"
+"POT-Creation-Date: 2021-03-18 19:56\n"
 "PO-Revision-Date: 2015-01-17 16:03+0100\n"
 "Last-Translator: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
 "Language-Team: Russian\n"
@@ -119,11 +119,6 @@ msgstr "Неправильный метод ошибок для Poisson"
 #: R/xpred.rpart.R:0
 msgid "Invalid fit object"
 msgstr "Неправильный объект подгонки"
-
-#. R/rpart.R: stop("Invalid method")
-#: R/rpart.R:0
-msgid "Invalid method"
-msgstr "Неправильный метод"
 
 #. R/predict.rpart.R: stop("Invalid prediction for \"rpart\" object")
 #: R/predict.rpart.R:0
@@ -397,6 +392,12 @@ msgstr ""
 #: R/plot.rpart.R:0 R/text.rpart.R:0
 msgid "fit is not a tree, just a root"
 msgstr "подгонка -- не дерево, а просто корень"
+
+#. R/rpart.R: stop("invalid method")
+#: R/rpart.R:0
+#, fuzzy
+msgid "invalid method"
+msgstr "Неправильный метод"
 
 #. R/rsq.rpart.R: warning("may not be applicable for this method")
 #: R/rsq.rpart.R:0

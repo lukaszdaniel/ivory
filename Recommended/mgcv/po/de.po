@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.10.0 / mgcv 1.5-5\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-11-12 19:56+0100\n"
+"POT-Creation-Date: 2021-03-18 19:37+0100\n"
 "PO-Revision-Date: 2009-10-08 16:16+0200\n"
 "Last-Translator: Chris Leick <c.leick@vollbio.de>\n"
 "Language-Team: German <debian-l10n-german@lists.debian.org>\n"
@@ -17,11 +17,11 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-#: magic.c:445
+#: magic.c:446
 msgid "magic requires smoothing parameter starting values if L supplied"
 msgstr "magic benötigt Glättungsparameter-Startwerte, wenn L angegeben"
 
-#: magic.c:563
+#: magic.c:564
 msgid "magic, the gcv/ubre optimizer, failed to converge after 400 iterations."
 msgstr ""
 "magic, der gcv/ubre-Optimierer, konvergierte nach 400 Iterationen noch nicht."
@@ -38,12 +38,12 @@ msgid ""
 "file dim problem\n"
 msgstr ""
 
-#: mat.c:3325
+#: mat.c:3316
 #, c-format
 msgid "Non orthogonal eigenvectors %d %g\n"
 msgstr ""
 
-#: mat.c:3330
+#: mat.c:3321
 #, c-format
 msgid "Eigenvectors not normalized %d %g\n"
 msgstr ""

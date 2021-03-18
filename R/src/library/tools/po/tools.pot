@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: tools 4.1.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-01-30 18:47+0100\n"
+"POT-Creation-Date: 2021-03-18 20:02+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -18,140 +18,140 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=INTEGER; plural=EXPRESSION;\n"
 
-#: Rmd5.cpp:47
+#: Rmd5.cpp:49
 #, c-format
 msgid "'%s' argument must be character"
 msgstr ""
 
-#: Rmd5.cpp:63
+#: Rmd5.cpp:65
 #, c-format
 msgid "md5 failed on file '%ls'"
 msgstr ""
 
-#: Rmd5.cpp:65
+#: Rmd5.cpp:67
 #, c-format
 msgid "md5 failed on file '%s'"
 msgstr ""
 
-#: getfmts.cpp:57
+#: getfmts.cpp:59
 #, c-format
 msgid "only %d argument is allowed"
 msgid_plural "only %d arguments are allowed"
 msgstr[0] ""
 msgstr[1] ""
 
-#: getfmts.cpp:62
+#: getfmts.cpp:64
 #, c-format
 msgid "'%s' argument is not a character vector"
 msgstr ""
 
-#: getfmts.cpp:65
+#: getfmts.cpp:67
 #, c-format
 msgid "'%s' argument must be length 1"
 msgstr ""
 
-#: getfmts.cpp:71
+#: getfmts.cpp:73
 #, c-format
 msgid "length of '%s' argument exceeds maximal format length %d"
 msgstr ""
 
-#: getfmts.cpp:92
+#: getfmts.cpp:94
 #, c-format
 msgid "unrecognised format specification '%s'"
 msgstr ""
 
-#: getfmts.cpp:132
+#: getfmts.cpp:134
 msgid "at most one asterisk '*' is supported in each conversion specification"
 msgstr ""
 
-#: gramLatex.cpp:2436 gramRd.cpp:3794
+#: gramLatex.cpp:2441 gramRd.cpp:3800
 #, c-format
 msgid "unable to allocate buffer for long string at line %d"
 msgstr ""
 
-#: gramLatex.cpp:2632 gramRd.cpp:4288
+#: gramLatex.cpp:2637 gramRd.cpp:4294
 msgid "unable to allocate in PushState"
 msgstr ""
 
-#: gramLatex.cpp:2675 gramRd.cpp:4340 gramRd.cpp:4346
+#: gramLatex.cpp:2680 gramRd.cpp:4346 gramRd.cpp:4352
 #, c-format
 msgid "invalid '%s' value"
 msgstr ""
 
-#: gramRd.cpp:2410 gramRd.cpp:2413
+#: gramRd.cpp:2416 gramRd.cpp:2419
 #, c-format
 msgid "bad markup (extra space?) at %s:%d:%d"
 msgstr ""
 
-#: gramRd.cpp:2938
+#: gramRd.cpp:2944
 #, c-format
 msgid "Macro '%s' previously defined."
 msgstr ""
 
-#: gramRd.cpp:2948
+#: gramRd.cpp:2954
 #, c-format
 msgid "At most 4 arguments are allowed for user defined macros."
 msgstr ""
 
-#: gramRd.cpp:2990
+#: gramRd.cpp:2996
 #, c-format
 msgid "No macro definition for '%s'."
 msgstr ""
 
-#: gramRd.cpp:3007 gramRd.cpp:3023
+#: gramRd.cpp:3013 gramRd.cpp:3029
 msgid "internal error: invalid argument to xxusermacro"
 msgstr ""
 
-#: gramRd.cpp:3052
+#: gramRd.cpp:3058
 #, c-format
 msgid "Not enough arguments passed to user macro '%s'"
 msgstr ""
 
-#: gramRd.cpp:3192 gramRd.cpp:3196
+#: gramRd.cpp:3198 gramRd.cpp:3202
 #, c-format
 msgid "newline within quoted string at %s:%d"
 msgstr ""
 
-#: gramRd.cpp:3219
+#: gramRd.cpp:3225
 #, c-format
 msgid "unable to allocate buffer for long macro at line %d"
 msgstr ""
 
-#: gramRd.cpp:3251
+#: gramRd.cpp:3257
 msgid "macros nested too deeply: infinite recursion?"
 msgstr ""
 
-#: gramRd.cpp:3656
+#: gramRd.cpp:3662
 #, c-format
 msgid "Unable to find macro %s"
 msgstr ""
 
-#: gramRd.cpp:3854
+#: gramRd.cpp:3860
 #, c-format
 msgid "Unexpected end of input (in %c quoted string opened at %s:%d:%d)"
 msgstr ""
 
-#: gramRd.cpp:4353
+#: gramRd.cpp:4359
 msgid "cannot open the connection"
 msgstr ""
 
-#: gramRd.cpp:4358
+#: gramRd.cpp:4364
 msgid "cannot read from this connection"
 msgstr ""
 
-#: gramRd.cpp:4366
+#: gramRd.cpp:4372
 msgid "invalid Rd file"
 msgstr ""
 
-#: gramRd.cpp:4385
+#: gramRd.cpp:4391
 msgid "'deparseRd' only supports deparsing character elements"
 msgstr ""
 
-#: gramRd.cpp:4388
+#: gramRd.cpp:4394
 msgid "bad state"
 msgstr ""
 
-#: gramRd.cpp:4401
+#: gramRd.cpp:4407
 #, c-format
 msgid "bad text mode %d in 'deparseRd'"
 msgstr ""
@@ -160,12 +160,12 @@ msgstr ""
 msgid "invalid bind address specification"
 msgstr ""
 
-#: install.cpp:108 install.cpp:127 install.cpp:129
+#: install.cpp:110 install.cpp:129 install.cpp:131
 #, c-format
 msgid "invalid '%s' argument"
 msgstr ""
 
-#: install.cpp:158
+#: install.cpp:160
 msgid "write error during file append"
 msgstr ""
 
@@ -182,7 +182,7 @@ msgstr ""
 msgid "'%s' function is not supported on this platform"
 msgstr ""
 
-#: text.cpp:74
+#: text.cpp:75
 msgid "invalid argument type"
 msgstr ""
 

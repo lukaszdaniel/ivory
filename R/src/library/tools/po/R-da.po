@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 3.0.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2021-01-07 23:38\n"
+"POT-Creation-Date: 2021-03-18 20:02\n"
 "PO-Revision-Date: 2016-10-14 11:22+0200\n"
 "Last-Translator: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
 "Language-Team: \n"
@@ -5277,7 +5277,6 @@ msgstr "mappe »%s« indeholder ikke Rd-objekter"
 #. R/admin.R: gettextf("directory %s does not exist", sQuote(dir))
 #. R/admin.R: gettextf("directory %s does not exist", sQuote(dir))
 #. R/admin.R: gettextf("directory %s does not exist", sQuote(outDir))
-#. R/index.R: gettextf("directory %s does not exist", sQuote(dataDir))
 #. R/index.R: gettextf("directory %s does not exist", sQuote(demoDir))
 #. R/index.R: gettextf("directory %s does not exist", sQuote(demoDir))
 #: R/QC.R:0 R/Rd.R:0 R/Vignettes.R:0 R/admin.R:0 R/index.R:0
@@ -5290,6 +5289,11 @@ msgstr "mappe »%s« findes ikke"
 #, fuzzy
 msgid "directory %s was not found"
 msgstr "Vignette afhængigheder ikke krævet:"
+
+#. R/makeLazyLoad.R: gettextf("directory '%s' does not exist", dir)
+#: R/makeLazyLoad.R:0
+msgid "directory '%s' does not exist"
+msgstr "mappe »%s« findes ikke"
 
 #. R/RdConv2.R: gettextf("docType %s is unrecognized", sQuote(docTypes[i]))
 #: R/RdConv2.R:0
@@ -6608,7 +6612,8 @@ msgid "you must specify '%s', '%s' or '%s' argument"
 msgstr "du skal angive »package«, »dir« eller »file«"
 
 #. R/QC.R: stop("you must specify 'package' or 'dir'")
-#: R/QC.R:0
+#. R/makeLazyLoad.R: stop("you must specify 'package' or 'dir'")
+#: R/QC.R:0 R/makeLazyLoad.R:0
 msgid "you must specify 'package' or 'dir'"
 msgstr "du skal angive »package« eller »dir«"
 
@@ -7841,9 +7846,6 @@ msgstr[1] "kan ikke skrive kodefiler"
 #, fuzzy
 #~ msgid "ERROR: unable to create %s"
 #~ msgstr "kan ikke oprette"
-
-#~ msgid "directory '%s' does not exist"
-#~ msgstr "mappe »%s« findes ikke"
 
 #~ msgid "file '%s' does not exist"
 #~ msgstr "fil »%s« findes ikke"

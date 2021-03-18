@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: codetools 0.2-8\n"
-"POT-Creation-Date: 2019-04-08 21:35\n"
+"POT-Creation-Date: 2021-03-18 19:37\n"
 "PO-Revision-Date: 2014-11-28 19:30+0100\n"
 "Last-Translator: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
 "Language-Team: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
@@ -157,7 +157,6 @@ msgid "warning in %s:"
 msgstr "ostrzeżenie w %s:"
 
 #. R/codetools.R: gettextf("wrong number of arguments to %s", sQuote("substitute()"), domain = "R-codetools")
-#. R/codetools.R: gettextf("wrong number of arguments to %s", sQuote("bquote()"), domain = "R-codetools")
 #. R/codetools.R: gettextf("wrong number of arguments to %s", sQuote(fn), domain = "R-codetools")
 #: R/codetools.R:0
 msgid "wrong number of arguments to %s"

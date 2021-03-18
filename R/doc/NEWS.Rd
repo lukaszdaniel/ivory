@@ -13,7 +13,7 @@
       that series continuing until early 2023.
     }
   }
-  
+
   \subsection{SIGNIFICANT USER-VISIBLE CHANGES}{
     \itemize{
       \item Data set \code{esoph} in package \pkg{datasets} now provides
@@ -216,6 +216,10 @@
       \item New function \code{charClass()} in package \pkg{utils} to
       query the wide-character classification functions in use (such as
       \code{iswprint}).
+
+      \item The names of \code{quantile()}'s result no longer depend on the
+      global \code{getOption("digits")}, but \code{quantile()} gets a new
+      optional argument \code{digits = 7} instead.
     }
   }
 
@@ -401,7 +405,7 @@
 }
       This uses the CPU type \R (and hence the packages) were built for,
       so when a \samp{x86_64} build of R is run under Rosetta emulation on
-      an \samp{arm64} Mac, the first is used. 
+      an \samp{arm64} Mac, the first is used.
     }
   }
 
@@ -619,6 +623,11 @@
       \item The change to the internal table in \R 4.0.4 for
       \code{iswprint} has been reverted: it contained some errors in
       printability of \sQuote{East Asian} characters.
+
+      \item For packages using \samp{LazyData}, \command{R CMD build}
+      ignored the \option{--resave-data} option and the
+      \samp{BuildResaveData} field of the \file{DESCRIPTION} file (in \R
+      versions 4.0.0 to 4.0.4). 
     }
   }
 }

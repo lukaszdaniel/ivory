@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.15.2\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2021-01-07 23:38\n"
+"POT-Creation-Date: 2021-03-18 20:02\n"
 "PO-Revision-Date: 2015-01-17 15:37+0100\n"
 "Last-Translator: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
 "Language-Team: R Core <r-core@r-project.org>\n"
@@ -5579,7 +5579,6 @@ msgstr "Verzeichnis '%s' enthält keine Rd-Objekte"
 #. R/admin.R: gettextf("directory %s does not exist", sQuote(dir))
 #. R/admin.R: gettextf("directory %s does not exist", sQuote(dir))
 #. R/admin.R: gettextf("directory %s does not exist", sQuote(outDir))
-#. R/index.R: gettextf("directory %s does not exist", sQuote(dataDir))
 #. R/index.R: gettextf("directory %s does not exist", sQuote(demoDir))
 #. R/index.R: gettextf("directory %s does not exist", sQuote(demoDir))
 #: R/QC.R:0 R/Rd.R:0 R/Vignettes.R:0 R/admin.R:0 R/index.R:0
@@ -5592,6 +5591,11 @@ msgstr "Verzeichnis '%s' existiert nicht"
 #, fuzzy
 msgid "directory %s was not found"
 msgstr "Datei '%s' nicht gefunden"
+
+#. R/makeLazyLoad.R: gettextf("directory '%s' does not exist", dir)
+#: R/makeLazyLoad.R:0
+msgid "directory '%s' does not exist"
+msgstr "Verzeichnis '%s' existiert nicht"
 
 #. R/RdConv2.R: gettextf("docType %s is unrecognized", sQuote(docTypes[i]))
 #: R/RdConv2.R:0
@@ -6972,7 +6976,8 @@ msgid "you must specify '%s', '%s' or '%s' argument"
 msgstr "sie müssen 'dir' oder 'files' angeben"
 
 #. R/QC.R: stop("you must specify 'package' or 'dir'")
-#: R/QC.R:0
+#. R/makeLazyLoad.R: stop("you must specify 'package' or 'dir'")
+#: R/QC.R:0 R/makeLazyLoad.R:0
 msgid "you must specify 'package' or 'dir'"
 msgstr "'package' oder 'dir' muss angegeben werden"
 
@@ -8508,9 +8513,6 @@ msgstr[1] "kann '%s' Zeile(n) %s nicht rekodieren"
 
 #~ msgid "cannot copy '%s' to '%s'"
 #~ msgstr "kann '%s' nicht nach '%s' kopieren"
-
-#~ msgid "directory '%s' does not exist"
-#~ msgstr "Verzeichnis '%s' existiert nicht"
 
 #~ msgid "file '%s' does not exist"
 #~ msgstr "Datei '%s' existiert nicht"

@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R-core\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-02-11 18:11\n"
+"POT-Creation-Date: 2021-03-18 20:00\n"
 "PO-Revision-Date: \n"
 "Last-Translator: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
 "Language-Team: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
@@ -2636,7 +2636,7 @@ msgid ""
 "no definition was found for superclass %s in the specification of class %s"
 msgstr "nie znaleziono definicji dla superklasy %s w specyfikacji klasy %s"
 
-#. R/Methods.R: gettext("  no direct match found to signature (%s)", domain = "R-methods")
+#. R/Methods.R: gettextf("  no direct match found to signature (%s)", paste(signature, collapse = ", "),     domain = "R-methods")
 #: R/Methods.R:0
 msgid "no direct match found to signature (%s)"
 msgstr "nie znaleziono bezpośredniego dopasowania do podpisu (%s)"

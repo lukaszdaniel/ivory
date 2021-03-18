@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.15.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-01-07 23:37+0100\n"
+"POT-Creation-Date: 2021-03-18 20:00+0100\n"
 "PO-Revision-Date: 2015-01-17 15:46+0100\n"
 "Last-Translator: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
 "Language-Team:  <gnustats@gmail.com>\n"
@@ -21,184 +21,184 @@ msgstr ""
 "X-Poedit-SourceCharset: UTF-8\n"
 "X-Generator: Poedit 1.5.4\n"
 
-#: fork.cpp:202
+#: fork.cpp:204
 msgid "cannot close internal file descriptor"
 msgstr ""
 
-#: fork.cpp:217
+#: fork.cpp:219
 #, fuzzy, c-format
 msgid "unable to terminate child process: %s"
 msgstr "포크할 수 없는데, 가능한 이유: %s"
 
-#: fork.cpp:244
+#: fork.cpp:246
 #, fuzzy, c-format
 msgid "unable to terminate child: %s"
 msgstr "파이프를 생성할 수 없습니다"
 
-#: fork.cpp:274
+#: fork.cpp:276
 #, c-format
 msgid "WARNING: child %d was to be removed but it doesn't exist\n"
 msgstr ""
 
-#: fork.cpp:323 fork.cpp:603 ncpus.cpp:91 ncpus.cpp:127
+#: fork.cpp:325 fork.cpp:611 ncpus.cpp:91 ncpus.cpp:127
 msgid "memory allocation error"
 msgstr "메모리 할당 오류"
 
-#: fork.cpp:375 fork.cpp:379 fork.cpp:383
+#: fork.cpp:381 fork.cpp:385 fork.cpp:389
 #, c-format
 msgid "invalid '%s' argument"
 msgstr ""
 
-#: fork.cpp:439
+#: fork.cpp:447
 msgid ""
 "Error while shutting down parallel: unable to terminate some child "
 "processes\n"
 msgstr ""
 
-#: fork.cpp:471
+#: fork.cpp:479
 #, c-format
 msgid "child process %d got SIGUSR1; child_exit_status=%d\n"
 msgstr ""
 
-#: fork.cpp:527 fork.cpp:530
+#: fork.cpp:535 fork.cpp:538
 msgid "unable to create a pipe"
 msgstr "파이프를 생성할 수 없습니다"
 
-#: fork.cpp:533
+#: fork.cpp:541
 #, c-format
 msgid "parent[%d] created pipes: comm (C%d->M%d), sir (M%d->C%d)\n"
 msgstr ""
 
-#: fork.cpp:552
+#: fork.cpp:560
 #, c-format
 msgid "unable to fork, possible reason: %s"
 msgstr "포크할 수 없는데, 가능한 이유: %s"
 
-#: fork.cpp:560
+#: fork.cpp:568
 msgid "detected re-use of valid pipe ends\n"
 msgstr ""
 
-#: fork.cpp:596
+#: fork.cpp:604
 #, c-format
 msgid "child process %d started, master_fd=%d\n"
 msgstr ""
 
-#: fork.cpp:666
+#: fork.cpp:674
 msgid "descriptors must be integers"
 msgstr ""
 
-#: fork.cpp:687
+#: fork.cpp:695
 #, c-format
 msgid "process %d: error %s reading from fd %d\n"
 msgstr ""
 
-#: fork.cpp:715
+#: fork.cpp:723
 #, c-format
 msgid "process %d: error %s writing to fd %d\n"
 msgstr ""
 
-#: fork.cpp:726
+#: fork.cpp:734
 #, c-format
 msgid "process %d: write() returned 0 writing to fd %d\n"
 msgstr ""
 
-#: fork.cpp:744
+#: fork.cpp:752
 msgid "only children can send data to the master process"
 msgstr "오로지 children만이 데이터를 마스터 프로세스에 전송할 수 있습니다"
 
-#: fork.cpp:746
+#: fork.cpp:754
 msgid "there is no pipe to the master process"
 msgstr "마스터 프로세스로 연결된 파이프가 없습니다"
 
-#: fork.cpp:748
+#: fork.cpp:756
 msgid "content to send must be RAW, use serialize() if needed"
 msgstr ""
 "보내야할 컨텐츠는 반드시 RAW이어야 하며, 필요하다면 serialize()를 이용하세요"
 
-#: fork.cpp:757 fork.cpp:765 fork.cpp:1175
+#: fork.cpp:765 fork.cpp:773 fork.cpp:1183
 msgid "write error, closing pipe to the master"
 msgstr "쓰기 에러, 마스터에 연결된 파이프를 닫습니다"
 
-#: fork.cpp:775
+#: fork.cpp:783
 msgid "only the master process can send data to a child process"
 msgstr "오로지 마스터 프로세스만이 데이터를 자식 프로세스에 전송할 수 있습니다"
 
-#: fork.cpp:776
+#: fork.cpp:784
 msgid "what must be a raw vector"
 msgstr ""
 
-#: fork.cpp:783
+#: fork.cpp:791
 #, c-format
 msgid "child %d does not exist"
 msgstr "child %d가 존재하지 않습니다"
 
-#: fork.cpp:789
+#: fork.cpp:797
 msgid "write error"
 msgstr "쓰기 에러"
 
-#: fork.cpp:831 fork.cpp:844
+#: fork.cpp:839 fork.cpp:852
 msgid "file descriptor is too large for select()"
 msgstr ""
 
-#: fork.cpp:875
+#: fork.cpp:883
 #, fuzzy, c-format
 msgid "cannot wait for child %d as it does not exist"
 msgstr "child %d가 존재하지 않습니다"
 
-#: fork.cpp:934 fork.cpp:1054
+#: fork.cpp:942 fork.cpp:1062
 #, c-format
 msgid "error '%s' in select"
 msgstr "선택하는 중에 에러 '%s'"
 
-#: fork.cpp:940
+#: fork.cpp:948
 #, c-format
 msgid " - read select %d children: \n"
 msgstr ""
 
-#: fork.cpp:967
+#: fork.cpp:975
 #, c-format
 msgid " read_child_ci(%d) - read length returned %lld\n"
 msgstr ""
 
-#: fork.cpp:980
+#: fork.cpp:988
 #, c-format
 msgid "read_child_ci(%d) - read %lld at %lld returned %lld\n"
 msgstr ""
 
-#: fork.cpp:1011
+#: fork.cpp:1019
 #, c-format
 msgid "read_child(%d) - pid is not in the list of children\n"
 msgstr ""
 
-#: fork.cpp:1144
+#: fork.cpp:1152
 #, fuzzy
 msgid "'mckill' failed"
 msgstr "mckill 실패했습니다"
 
-#: fork.cpp:1157
+#: fork.cpp:1165
 #, fuzzy
 msgid "'mcexit' can only be used in a child process"
 msgstr "mcexit는 자식 프로세스에서만 오로지 사용될 수 있습니다"
 
-#: fork.cpp:1179
+#: fork.cpp:1187
 #, c-format
 msgid "child %d is waiting for permission to exit\n"
 msgstr ""
 
-#: fork.cpp:1189
+#: fork.cpp:1197
 #, fuzzy
 msgid "'mcexit()' function failed"
 msgstr "mcexit 실패했습니다"
 
-#: fork.cpp:1218 fork.cpp:1227
+#: fork.cpp:1226 fork.cpp:1235
 msgid "invalid CPU affinity specification"
 msgstr ""
 
-#: fork.cpp:1238
+#: fork.cpp:1246
 msgid "requested CPU set is too large for this system"
 msgstr ""
 
-#: fork.cpp:1261
+#: fork.cpp:1269
 msgid "retrieving CPU affinity set failed"
 msgstr ""
 

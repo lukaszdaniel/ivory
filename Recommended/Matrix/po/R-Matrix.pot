@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
-"Project-Id-Version: Matrix 1.2-18\n"
-"POT-Creation-Date: 2020-03-09 21:45\n"
+"Project-Id-Version: Matrix 1.3-2\n"
+"POT-Creation-Date: 2021-03-18 19:37\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -196,6 +196,31 @@ msgstr ""
 #. R/abIndex.R: stop("'force' must be (coercable to) TRUE or FALSE")
 
 msgid "'force' must be (coercable to) TRUE or FALSE"
+msgstr ""
+
+
+#: R/sparseVector.R: 0
+#. R/sparseVector.R: gettextf("'giveCsparse' has been deprecated; setting 'repr = \"%s\"' for you", repr)
+
+msgid "'giveCsparse' has been deprecated; setting 'repr = \"%s\"' for you"
+msgstr ""
+
+
+#: R/bandSparse.R: 0
+#: R/sparseMatrix.R: 0
+#. R/bandSparse.R: warning("'giveCsparse' has been deprecated; setting 'repr = \"T\"' for you")
+#. R/sparseMatrix.R: warning("'giveCsparse' has been deprecated; setting 'repr = \"T\"' for you")
+
+msgid "'giveCsparse' has been deprecated; setting 'repr = \"T\"' for you"
+msgstr ""
+
+
+#: R/bandSparse.R: 0
+#: R/sparseMatrix.R: 0
+#. R/bandSparse.R: warning("'giveCsparse' has been deprecated; will use 'repr' instead")
+#. R/sparseMatrix.R: warning("'giveCsparse' has been deprecated; will use 'repr' instead")
+
+msgid "'giveCsparse' has been deprecated; will use 'repr' instead"
 msgstr ""
 
 
@@ -450,6 +475,13 @@ msgstr ""
 #. R/dsparseMatrix.R: stop("'x' is not positive definite -- chol() undefined.")
 
 msgid "'x' is not positive definite -- chol() undefined."
+msgstr ""
+
+
+#: R/triangularMatrix.R: 0
+#. R/triangularMatrix.R: stop("'x' is not symmetric -- chol() undefined.")
+
+msgid "'x' is not symmetric -- chol() undefined."
 msgstr ""
 
 
@@ -1272,6 +1304,15 @@ msgid "invalid 'mod': %s"
 msgstr ""
 
 
+#: R/bandSparse.R: 0
+#: R/sparseMatrix.R: 0
+#. R/bandSparse.R: stop("invalid 'repr'; must be \"C\", \"T\", or \"R\"")
+#. R/sparseMatrix.R: stop("invalid 'repr'; must be \"C\", \"T\", or \"R\"")
+
+msgid "invalid 'repr'; must be \"C\", \"T\", or \"R\""
+msgstr ""
+
+
 #: R/sparseMatrix.R: 0
 #. R/sparseMatrix.R: stop("invalid 'type'")
 
@@ -1893,6 +1934,20 @@ msgstr ""
 #. R/sparseQR.R: warning("qr.R(<sparse>) may differ from qr.R(<dense>) because of permutations.  Possibly use our qrR() instead")
 
 msgid "qr.R(<sparse>) may differ from qr.R(<dense>) because of permutations.  Possibly use our qrR() instead"
+msgstr ""
+
+
+#: R/rankMatrix.R: 0
+#. R/rankMatrix.R: gettextf("qr2rankMatrix(.): QR has negative diag(R) entries")
+
+msgid "qr2rankMatrix(.): QR has negative diag(R) entries"
+msgstr ""
+
+
+#: R/rankMatrix.R: 0
+#. R/rankMatrix.R: gettextf("qr2rankMatrix(.): QR with only %d out of %d finite diag(R) entries", sum(ifi),     length(ifi))
+
+msgid "qr2rankMatrix(.): QR with only %d out of %d finite diag(R) entries"
 msgstr ""
 
 

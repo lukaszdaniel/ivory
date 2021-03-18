@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R-2.15.2 / rpart 3.1-55\n"
 "Report-Msgid-Bugs-To: bugs@r-project.org\n"
-"POT-Creation-Date: 2015-02-13 16:25\n"
+"POT-Creation-Date: 2021-03-18 19:56\n"
 "PO-Revision-Date: 2012-10-10 22:21+0200\n"
 "Last-Translator: Chris Leick <c.leick@vollbio.de>\n"
 "Language-Team: German <debian-l10n-german@lists.debian.org>\n"
@@ -115,11 +115,6 @@ msgstr "ungültige Fehlermethode für Poisson"
 #: R/xpred.rpart.R:0
 msgid "Invalid fit object"
 msgstr "ungültiges angepasstes Objekt"
-
-#. R/rpart.R: stop("Invalid method")
-#: R/rpart.R:0
-msgid "Invalid method"
-msgstr "ungültige Methode"
 
 #. R/predict.rpart.R: stop("Invalid prediction for \"rpart\" object")
 #: R/predict.rpart.R:0
@@ -392,6 +387,12 @@ msgstr ""
 #: R/plot.rpart.R:0 R/text.rpart.R:0
 msgid "fit is not a tree, just a root"
 msgstr "Anpassung ist kein Baum, nur eine Wurzel"
+
+#. R/rpart.R: stop("invalid method")
+#: R/rpart.R:0
+#, fuzzy
+msgid "invalid method"
+msgstr "ungültige Methode"
 
 #. R/rsq.rpart.R: warning("may not be applicable for this method")
 #: R/rsq.rpart.R:0

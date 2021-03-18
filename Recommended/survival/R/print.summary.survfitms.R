@@ -31,7 +31,7 @@ print.summary.survfitms <- function(x,
         if (is.null(x$strata)) group <- rep(paste("data", seq_len(dd[2])), each=dd[1])
         else group <- c(outer(x$strata,
                               paste("data", seq_len(dd[2])), paste, sep=(", ")))
-        mat <- mat[rep(seq_len(nrow(mat)), dim(x$pstate)[2]), ]
+        mat <- mat[rep(seq_len(nrow(mat)), dim(x$pstate)[2]),,drop=FALSE ]
         mat <- cbind(mat, matrix(x$pstate, ncol= dd[3]))
     } else {
         if (is.null(strata)) group <- NULL

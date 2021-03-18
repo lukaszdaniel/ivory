@@ -10,7 +10,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: MASS 7.3-22\n"
-"POT-Creation-Date: 2015-02-13 16:25\n"
+"POT-Creation-Date: 2021-03-18 19:37\n"
 "PO-Revision-Date: 2013-03-11 13:47-0600\n"
 "Last-Translator: Chel Hee Lee <gnustats@gmail.com>\n"
 "Language-Team: R Development Translation Teams (Korean) <gnustats@korea.gnu."
@@ -649,6 +649,16 @@ msgstr ""
 msgid ""
 "Stepwise Model Path \n"
 "Analysis of Deviance Table"
+msgstr ""
+
+#. R/lqs.R: gettextf("Too many combinations (%.3g) for nsamp = \"exact\"", nsamp)
+#: R/lqs.R:0
+msgid "Too many combinations (%.3g) for nsamp = \"exact\""
+msgstr ""
+
+#. R/lqs.R: gettextf("Too many samples (%.3g)", nsamp)
+#: R/lqs.R:0
+msgid "Too many samples (%.3g)"
 msgstr ""
 
 #. R/confint.R: message("Waiting for profiling to be done...")

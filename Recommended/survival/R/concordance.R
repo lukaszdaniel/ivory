@@ -63,7 +63,7 @@ concordance.formula <- function(object, data,
     if (length(group)) cluster <- group
                                             
     x <- model.matrix(Terms, mf)[,-1, drop=FALSE]  #remove the intercept
-    if (ncol(x) > 1) stop("Only one predictor variable allowed")
+    if (ncol(x) > 1) stop("only one predictor variable allowed")
 
     if (!is.null(ymin) & (length(ymin)> 1 || !is.numeric(ymin)))
         stop("ymin must be a single number")

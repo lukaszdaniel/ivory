@@ -14,7 +14,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 3.1.3\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2019-11-12 19:56\n"
+"POT-Creation-Date: 2021-03-18 19:37\n"
 "PO-Revision-Date: 2015-02-21 16:01-0600\n"
 "Last-Translator:Chel Hee Lee  <chl948@mail.usask.ca>\n"
 "Language-Team: Chel Hee Lee  <chl948@mail.usask.ca>\n"
@@ -119,6 +119,12 @@ msgstr ""
 #: R/smooth.r:0
 msgid "%s has insufficient unique values to support %d knots: reduce k"
 msgstr ""
+
+#. R/gamlss.r: gettextf("%s link not available for mu parameter of gammals", link[[i]])
+#: R/gamlss.r:0
+#, fuzzy
+msgid "%s link not available for mu parameter of gammals"
+msgstr "gaulss 모형의 모수 mu에 사용가능한 링크(link)가 아닙니다."
 
 #. R/mgcv.r: gettextf("%s score = %s", sQuote(x$method), x$gcv.ubre, domain = "R-mgcv")
 #: R/mgcv.r:0
@@ -294,6 +300,12 @@ msgstr ""
 #, fuzzy
 msgid "'a' argument has wrong number of rows"
 msgstr "a가 가진 행의 개수가 올바르지 않습니다."
+
+#. R/gamlss.r: stop("'a' has to be positive")
+#: R/gamlss.r:0
+#, fuzzy
+msgid "'a' has to be positive"
+msgstr "인자 k는 반드시 양수(positive)이어야 합니다."
 
 #. R/mgcv.r: stop("'absorb.cons' argument must be TRUE for multi-formula models")
 #: R/mgcv.r:0
@@ -524,6 +536,11 @@ msgstr "1<a<b<2 라는 조건을 반드시 만족해야 합니다."
 msgid ""
 "A term has fewer unique covariate combinations than specified maximum "
 "degrees of freedom"
+msgstr ""
+
+#. R/misc.r: warning("AR not available with sparse marginals")
+#: R/misc.r:0
+msgid "AR not available with sparse marginals"
 msgstr ""
 
 #. R/bam.r: warning("AR1 parameter rho unused with generalized model")
@@ -1483,6 +1500,13 @@ msgstr ""
 msgid "arguments of smooth not same dimension"
 msgstr ""
 
+#. R/mgcv.r: stop("at least one element of lb must be non-zero")
+#: R/mgcv.r:0
+#, fuzzy
+msgid "at least one element of lb must be non-zero"
+msgstr ""
+"random 인자의 개별 구성요소에 이름이 부여되어 있는 리스트이어야 합니다."
+
 #. R/soap.r: stop("attempt to select non existent basis function")
 #: R/soap.r:0
 msgid "attempt to select non existent basis function"
@@ -1608,6 +1632,11 @@ msgstr "알 수 없는 색상표(color scheme)입니다."
 msgid "components of knots relating to a single smooth must be of same length"
 msgstr ""
 
+#. R/bam.r: warning("constraints for sub blocked tensor products un-tested")
+#: R/bam.r:0
+msgid "constraints for sub blocked tensor products un-tested"
+msgstr ""
+
 #. R/gam.fit4.r: gettextf("cor d2b[%d] = %s", i, cor(b$b2[, i], fd.br2[, i]), domain = "R-mgcv")
 #: R/gam.fit4.r:0
 msgid "cor d2b[%d] = %s"
@@ -1629,6 +1658,11 @@ msgid "cubic spline only deals with 1D data"
 msgstr ""
 "삼차 스플라인(cubic spline)은 오로지 1차원 데이터(1D data)만을 다룹니다."
 
+#. R/mgcv.r: warning("danger of round-off error")
+#: R/mgcv.r:0
+msgid "danger of round-off error"
+msgstr ""
+
 #. R/smooth.r: stop("data contain regions that are not contained in the knot specification")
 #: R/smooth.r:0
 msgid "data contain regions that are not contained in the knot specification"
@@ -1645,6 +1679,12 @@ msgstr ""
 #: R/plots.r:0
 msgid "data vectors are of different lengths"
 msgstr "데이터 벡터(data vectors) d1과 d2의 길이가 서로 다릅니다."
+
+#. R/mgcv.r: stop("df must be positive integers")
+#: R/mgcv.r:0
+#, fuzzy
+msgid "df must be positive integers"
+msgstr "nthreads는 반드시 양의 정수이어야 합니다."
 
 #. R/gam.fit3.r: gettext("differences", domain = "R-mgcv")
 #: R/gam.fit3.r:0
@@ -1744,6 +1784,11 @@ msgstr ""
 #. R/mgcv.r: gettextf("factor levels %s not in original fit", paste(levn[!levn %in% levm], collapse = ", "),     domain = "R-mgcv")
 #: R/mgcv.r:0
 msgid "factor levels %s not in original fit"
+msgstr ""
+
+#. R/mgcv.r: warning("failure of Davies method, falling back on Liu et al approximtion")
+#: R/mgcv.r:0
+msgid "failure of Davies method, falling back on Liu et al approximtion"
 msgstr ""
 
 #. R/gamm.r: warning("family are not designed for use with 'gamm()' function!")
@@ -1881,6 +1926,12 @@ msgstr "ziplss 모형은 문자열로 표현된 2개의 링크(link)를 필요�
 msgid "grid vectors are different lengths"
 msgstr "그리드 벡터(grid vectors) g1과 g2의 길이가 서로 다릅니다."
 
+#. R/gamlss.r: stop("gumbls requires 2 links specified as character strings")
+#: R/gamlss.r:0
+#, fuzzy
+msgid "gumbls requires 2 links specified as character strings"
+msgstr "ziplss 모형은 문자열로 표현된 2개의 링크(link)를 필요로 합니다."
+
 #. R/smooth.r: warning("handling 'by' variables in smooth constructors may not work with the summation convention")
 #: R/smooth.r:0
 msgid ""
@@ -1965,6 +2016,11 @@ msgstr ""
 msgid "invalid 'family' argument"
 msgstr "`family' 인자의 값이 올바르지 않습니다."
 
+#. R/misc.r: stop("isa requires a dg/tCMatrix")
+#: R/misc.r:0
+msgid "isa requires a dg/tCMatrix"
+msgstr ""
+
 #. R/gamm.r: gettextf("iteration %d", i)
 #: R/gamm.r:0
 msgid "iteration %d"
@@ -2045,6 +2101,14 @@ msgstr ""
 msgid "lengths of 'k' and 'bnd' arguments are inconsistent"
 msgstr "k와 bnd의 길이가 서로 일치하지 않습니다."
 
+#. R/mgcv.r: stop("lengths of lb, df and nc must match")
+#: R/mgcv.r:0
+#, fuzzy
+msgid "lengths of lb, df and nc must match"
+msgstr ""
+"z의 구성요소에 주어진 이름들과 pc의 구성요소에 주어진 이름들은 반드시 서로 일"
+"치해야 합니다."
+
 #. R/plots.r: gettext("linear predictor", domain = "R-mgcv")
 #. R/plots.r: gettext("linear predictor", domain = "R-mgcv")
 #: R/plots.r:0
@@ -2071,6 +2135,11 @@ msgstr ""
 msgid "link is not implemented for extended families"
 msgstr "본 페밀리(family)에 사용가능한 링크(link)가 없습니다."
 
+#. R/gamlss.r: stop(link[[i]], " link not available for ", param.names[i], " parameter of shashlss")
+#: R/gamlss.r:0
+msgid "link not available for"
+msgstr "링크는"
+
 #. R/gamlss.r: stop(link[[i]], " link not available for mu parameter of gammals")
 #: R/gamlss.r:0
 #, fuzzy
@@ -2081,6 +2150,12 @@ msgstr "gaulss 모형의 모수 mu에 사용가능한 링크(link)가 아닙니�
 #: R/gamlss.r:0
 #, fuzzy
 msgid "link not available for mu parameter of twlss"
+msgstr "gaulss 모형의 모수 mu에 사용가능한 링크(link)가 아닙니다."
+
+#. R/gamlss.r: stop(link[[2]], " link not available for scale parameter of shash")
+#: R/gamlss.r:0
+#, fuzzy
+msgid "link not available for scale parameter of shash"
 msgstr "gaulss 모형의 모수 mu에 사용가능한 링크(link)가 아닙니다."
 
 #. R/gam.fit3.r: stop("link was not recognised")
@@ -2106,6 +2181,12 @@ msgid "lower bound >= upper bound in call passed to 'mono.con()'"
 msgstr ""
 "mono.con()함수에 전달된 lower 인자의 값이 upper 인자의 값보다 크거나 같습니"
 "다."
+
+#. R/smooth.r: stop("matrices must be all class dgCMatrix or all class matrix")
+#. R/smooth.r: stop("matrices must be all class dgCMatrix or all class matrix")
+#: R/smooth.r:0
+msgid "matrices must be all class dgCMatrix or all class matrix"
+msgstr ""
 
 #. R/mgcv.r: stop("matrix 'A' is not square")
 #: R/mgcv.r:0
@@ -2340,6 +2421,11 @@ msgstr ""
 msgid "not enough unique values to find k nearest"
 msgstr ""
 
+#. R/mcmc.r: stop("not usable with bam fits")
+#: R/mcmc.r:0
+msgid "not usable with bam fits"
+msgstr ""
+
 #. R/mgcv.r: stop("nothing to do for this model")
 #: R/mgcv.r:0
 msgid "nothing to do for this model"
@@ -2370,6 +2456,13 @@ msgstr ""
 #: R/sparse.r:0
 msgid "object not fully initialized"
 msgstr "완전히 초기화된 object가 아닙니다."
+
+#. R/gamlss.r: stop("offset not still available for this family")
+#: R/gamlss.r:0
+#, fuzzy
+msgid "offset not still available for this family"
+msgstr ""
+"트위디 페밀리(tweedie family)에 링크(link) \"%s\"는 사용할 수 없습니다."
 
 #. R/smooth.r: warning("one or more supplied k too small - reset to default")
 #. R/smooth.r: warning("one or more supplied k too small - reset to default")
@@ -2440,6 +2533,12 @@ msgid ""
 "p-values for any terms that can be penalized to zero will be unreliable: "
 "refit model to fix this"
 msgstr ""
+
+#. R/gamlss.r: stop(link[[i]], " link not available for ", param.names[i], " parameter of shashlss")
+#: R/gamlss.r:0
+#, fuzzy
+msgid "parameter of shashlss"
+msgstr "(ziplss의 모수)에 사용할 수 없습니다."
 
 #. R/gam.fit3.r: gettextf("penalized deviance = %s", pdev, domain = "R-mgcv")
 #. R/gam.fit4.r: gettextf("penalized deviance = %s", pdev, domain = "R-mgcv")
@@ -2512,6 +2611,11 @@ msgstr ""
 msgid "requested non-existent derivative in B-spline penalty"
 msgstr ""
 
+#. R/bam.r: stop("requires a terms or formula object as first argument")
+#: R/bam.r:0
+msgid "requires a terms or formula object as first argument"
+msgstr ""
+
 #. R/plots.r: warning("residuals argument to plot.gam is wrong length: ignored")
 #: R/plots.r:0
 msgid "residuals argument to plot.gam is wrong length: ignored"
@@ -2526,6 +2630,14 @@ msgstr ""
 #. R/gamlss.r: stop("response not in 0 to number of predictors + 1")
 #: R/gamlss.r:0
 msgid "response not in 0 to number of predictors + 1"
+msgstr ""
+
+#. R/misc.r: stop("reverse indices missing from sparse discrete marginals")
+#. R/misc.r: stop("reverse indices missing from sparse discrete marginals")
+#. R/misc.r: stop("reverse indices missing from sparse discrete marginals")
+#. R/misc.r: stop("reverse indices missing from sparse discrete marginals")
+#: R/misc.r:0
+msgid "reverse indices missing from sparse discrete marginals"
 msgstr ""
 
 #. R/smooth.r: warning("s value increased")
@@ -2563,11 +2675,23 @@ msgstr ""
 msgid "sd should have exactly one less entry than ld"
 msgstr ""
 
+#. R/fast-REML.r: stop("second derivs not available for non-linear penalties")
+#: R/fast-REML.r:0
+#, fuzzy
+msgid "second derivs not available for non-linear penalties"
+msgstr "gaulss 모형의 모수 mu에 사용가능한 링크(link)가 아닙니다."
+
 #. R/mgcv.r: stop("shared offsets are not allowed")
 #: R/mgcv.r:0
 #, fuzzy
 msgid "shared offsets are not allowed"
 msgstr "사용할 수 있는 모형이 아닙니다 (설명변수가 없습니다)."
+
+#. R/gamlss.r: stop("shash requires 4 links specified as character strings")
+#: R/gamlss.r:0
+#, fuzzy
+msgid "shash requires 4 links specified as character strings"
+msgstr "ziplss 모형은 문자열로 표현된 2개의 링크(link)를 필요로 합니다."
 
 #. R/gamm.r: stop("side conditions are not allowed for nested smooths")
 #: R/gamm.r:0
@@ -3016,12 +3140,6 @@ msgstr[0] ""
 #~ msgstr ""
 #~ "다음의 반복에서 얻어진 계수의 추정치가 유한(finite)한 값을 가지지 않습니"
 #~ "다."
-
-#~ msgid "link not available for"
-#~ msgstr "링크는"
-
-#~ msgid "parameter of ziplss"
-#~ msgstr "(ziplss의 모수)에 사용할 수 없습니다."
 
 #~ msgid "NA's in pdTens factor"
 #~ msgstr "pdTens 요인(factor)내에서 NA가 발견되었습니다."

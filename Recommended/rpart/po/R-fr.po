@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: rpart 3.1-24\n"
 "Report-Msgid-Bugs-To: bugs@r-project.org\n"
-"POT-Creation-Date: 2015-02-13 16:25\n"
+"POT-Creation-Date: 2021-03-18 19:56\n"
 "PO-Revision-Date: 2012-10-03 14:18+0100\n"
 "Last-Translator: Philippe Grosjean <phgrosjean@sciviews.org>\n"
 "Language-Team: French <R-core@r-project.org>\n"
@@ -116,11 +116,6 @@ msgstr "Méthode d'erreur incorrecte pour 'Poisson'"
 #: R/xpred.rpart.R:0
 msgid "Invalid fit object"
 msgstr "Objet 'fit' incorrect"
-
-#. R/rpart.R: stop("Invalid method")
-#: R/rpart.R:0
-msgid "Invalid method"
-msgstr "Methode incorrecte"
 
 #. R/predict.rpart.R: stop("Invalid prediction for \"rpart\" object")
 #: R/predict.rpart.R:0
@@ -395,6 +390,12 @@ msgstr ""
 #: R/plot.rpart.R:0 R/text.rpart.R:0
 msgid "fit is not a tree, just a root"
 msgstr "l'ajustement n'est pas un arbre, juste une racine"
+
+#. R/rpart.R: stop("invalid method")
+#: R/rpart.R:0
+#, fuzzy
+msgid "invalid method"
+msgstr "Methode incorrecte"
 
 #. R/rsq.rpart.R: warning("may not be applicable for this method")
 #: R/rsq.rpart.R:0

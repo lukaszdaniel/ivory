@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 3.1.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-01-30 18:47+0100\n"
+"POT-Creation-Date: 2021-03-18 20:03+0100\n"
 "PO-Revision-Date: 2014-03-26 23:03-0600\n"
 "Last-Translator: Chel Hee Lee <chl948@mail.usask.ca>\n"
 "Language-Team:  <chl948@mail.usask.ca>\n"
@@ -20,10 +20,10 @@ msgstr ""
 "X-Poedit-SourceCharset: UTF-8\n"
 "X-Generator: Poedit 1.5.4\n"
 
-#: io.cpp:327 io.cpp:331 io.cpp:341 io.cpp:569 io.cpp:768 io.cpp:820 io.cpp:834
-#: io.cpp:838 io.cpp:844 io.cpp:845 io.cpp:1086 io.cpp:1087 io.cpp:1089
-#: io.cpp:1090 io.cpp:1091 io.cpp:1092 io.cpp:1093 io.cpp:1094 stubs.cpp:41
-#: stubs.cpp:61 windows/dialogs.cpp:169 windows/dialogs.cpp:194
+#: io.cpp:329 io.cpp:333 io.cpp:343 io.cpp:571 io.cpp:770 io.cpp:822 io.cpp:836
+#: io.cpp:840 io.cpp:846 io.cpp:847 io.cpp:1088 io.cpp:1089 io.cpp:1091
+#: io.cpp:1092 io.cpp:1093 io.cpp:1094 io.cpp:1095 io.cpp:1096 stubs.cpp:44
+#: stubs.cpp:64 windows/dialogs.cpp:169 windows/dialogs.cpp:194
 #: windows/dialogs.cpp:197 windows/dialogs.cpp:241 windows/dialogs.cpp:278
 #: windows/dialogs.cpp:289 windows/dialogs.cpp:313 windows/dialogs.cpp:321
 #: windows/util.cpp:121 windows/widgets.cpp:75 windows/widgets.cpp:78
@@ -32,153 +32,172 @@ msgstr ""
 msgid "invalid '%s' argument"
 msgstr "'%s' 인자가 잘못되었습니다"
 
-#: io.cpp:350 io.cpp:831
+#: io.cpp:352 io.cpp:833
 msgid "invalid quote symbol set"
 msgstr ""
 
-#: io.cpp:362 io.cpp:854 io.cpp:1074
+#: io.cpp:364 io.cpp:856 io.cpp:1076
 msgid "cannot open the connection"
 msgstr "연결을 열 수 없습니다"
 
-#: io.cpp:365 io.cpp:369
+#: io.cpp:367 io.cpp:371
 msgid "cannot read from this connection"
 msgstr "이 연결로부터 읽을 수 없습니다"
 
-#: io.cpp:416 io.cpp:434
+#: io.cpp:418 io.cpp:436
 #, c-format
 msgid "quoted string on line %d terminated by EOF"
 msgstr ""
 
-#: io.cpp:565
+#: io.cpp:567
 msgid "the first argument must be of mode character"
 msgstr "첫번째 인자는 반드시 문자형이어야 합니다"
 
-#: io.cpp:595
+#: io.cpp:597
 #, c-format
 msgid "invalid 'numerals' string: \"%s\""
 msgstr ""
 
-#: io.cpp:770
+#: io.cpp:772
 #, c-format
 msgid "Selection: "
 msgstr "선택: "
 
-#: io.cpp:864 io.cpp:879
+#: io.cpp:866 io.cpp:881
 msgid "cannot allocate buffer in 'readTableHead'"
 msgstr "'readTableHead' 내에서 버퍼를 할당할 수 없습니다"
 
-#: io.cpp:892
+#: io.cpp:894
 msgid "\\ followed by EOF"
 msgstr "\\ 가 EOF 뒤에 놓였습니다"
 
-#: io.cpp:931
+#: io.cpp:933
 #, c-format
 msgid "line %d appears to contain embedded nulls"
 msgstr ""
 
-#: io.cpp:944 io.cpp:948
+#: io.cpp:946 io.cpp:950
 #, c-format
 msgid "incomplete final line found by readTableHeader on '%s'"
 msgstr ""
 "'%s'에서 readTableHeader에 의하여 발견된 완성되지 않은 마지막 라인입니다"
 
-#: io.cpp:1004
+#: io.cpp:1006
 msgid "index out of range"
 msgstr "범위밖의 인덱스입니다"
 
-#: io.cpp:1042
+#: io.cpp:1044
 #, c-format
 msgid "Problem closing connection:  %s"
 msgstr ""
 
-#: io.cpp:1044
+#: io.cpp:1046
 msgid "Problem closing connection"
 msgstr ""
 
-#: io.cpp:1067
+#: io.cpp:1069
 #, fuzzy
 msgid "'file' argument is not a connection"
 msgstr "'file'은 연결이 아닙니다"
 
-#: io.cpp:1070
+#: io.cpp:1072
 msgid "cannot write to this connection"
 msgstr "이 연결에 쓰기를 할 수 없습니다"
 
-#: io.cpp:1100
+#: io.cpp:1102
 #, fuzzy
 msgid "'dec' argument must be a single character"
 msgstr "'dec'는 반드시 한개의 문자이어야 합니다"
 
-#: io.cpp:1124
+#: io.cpp:1126
 #, fuzzy, c-format
 msgid "corrupt data frame -- length of column %d does not match nrows"
 msgstr ""
 "데이터 프레임이 손상되었습니다 -- 열의 길이 %d가 행의 개수와 일치하지 않습니"
 "다"
 
-#: io.cpp:1152
+#: io.cpp:1154
 #, c-format
 msgid "column %s claims to be a factor but does not have numeric codes"
 msgstr ""
 
-#: io.cpp:1169
+#: io.cpp:1171
 #, fuzzy
 msgid "corrupt matrix -- dims do not match length"
 msgstr "행렬이 손상되었습니다 -- dims 가 길이가 일치하지 않습니다"
 
-#: stubs.cpp:50
+#: stubs.cpp:53
 msgid "'savehistory' can only be used in Rgui and Rterm"
 msgstr "'savehistory'는 오로지 Rgui 와 Rterm에서만 사용될 수 있습니다"
 
-#: stubs.cpp:67
+#: stubs.cpp:70
 msgid "'loadhistory' can only be used in Rgui and Rterm"
 msgstr "'loadhistory'는 오로지 Rgui 와 Rterm에서만 사용될 수 있습니다"
 
-#: stubs.cpp:79
+#: stubs.cpp:82
 msgid "invalid timestamp"
 msgstr "잘못된 타임스탬프입니다"
 
-#: stubs.cpp:145 stubs.cpp:153
+#: stubs.cpp:148 stubs.cpp:156
 msgid "X11 dataentry cannot be loaded"
 msgstr "X11 데이터엔트리가 로드될 수 없습니다"
 
-#: stubs.cpp:149 stubs.cpp:178 stubs.cpp:184
+#: stubs.cpp:152 stubs.cpp:181 stubs.cpp:187
 msgid "X11 is not available"
 msgstr "X11이 사용가능하지 않습니다"
 
-#: stubs.cpp:242 stubs.cpp:245
+#: stubs.cpp:245 stubs.cpp:248
 #, c-format
 msgid "invalid '%s' specification"
 msgstr "유효하지 않은 '%s' 지정입니다"
 
-#: stubs.cpp:248
+#: stubs.cpp:251
 #, c-format
 msgid "'%s' contains missing values"
 msgstr ""
 
-#: utils.cpp:64 windows/util.cpp:408 windows/util.cpp:417
+#: utils.cpp:79
+#, fuzzy
+msgid "argument 'x' must be a length-1 character vector"
+msgstr "'text'는 반드시 문자열이어야 합니다"
+
+#: utils.cpp:81
+msgid "argument 'x' must be UTF-8 encoded (including ASCII)"
+msgstr ""
+
+#: utils.cpp:93 utils.cpp:122 windows/util.cpp:408 windows/util.cpp:417
 #: windows/widgets.cpp:188 windows/widgets.cpp:194 windows/widgets.cpp:256
 #: windows/widgets.cpp:262
 #, fuzzy, c-format
 msgid "'%s' argument must be a character string"
 msgstr "'text'는 반드시 문자열이어야 합니다"
 
-#: utils.cpp:87
+#: utils.cpp:96
+#, c-format
+msgid "character class \"%s\" is invalid"
+msgstr ""
+
+#: utils.cpp:110
+#, fuzzy
+msgid "'charClass()' function is not available on this platform"
+msgstr "이 플랫폼에서는 nsl()는 지원되지 않습니다"
+
+#: utils.cpp:145
 #, fuzzy
 msgid "'hostname' argument must be a character vector of length 1"
 msgstr "'hostname'은 반드시 길이가 1인 문자형 벡터이어야 합니다"
 
-#: utils.cpp:93
+#: utils.cpp:151
 #, c-format
 msgid "'nsl()' was unable to resolve host '%s'"
 msgstr ""
 
-#: utils.cpp:100
+#: utils.cpp:158
 #, fuzzy
 msgid "unknown format returned by 'gethostbyname()'"
 msgstr "알수없는 형식이 'gethostbyname'에 의해서 반환되었습니다"
 
-#: utils.cpp:109
+#: utils.cpp:167
 #, fuzzy
 msgid "'nsl()' is not supported on this platform"
 msgstr "이 플랫폼에서는 nsl()는 지원되지 않습니다"

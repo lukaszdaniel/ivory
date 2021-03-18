@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: mgcv\n"
 "Report-Msgid-Bugs-To: bugs@r-project.org\n"
-"POT-Creation-Date: 2019-11-12 19:56\n"
+"POT-Creation-Date: 2021-03-18 19:37\n"
 "PO-Revision-Date: 2018-07-19 20:25+0200\n"
 "Last-Translator: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
 "Language-Team: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
@@ -101,6 +101,12 @@ msgstr "człony \"fs\" nie mogą być poprawione tutaj"
 msgid "%s has insufficient unique values to support %d knots: reduce k"
 msgstr ""
 "%s ma niewystarczające unikalne wartości aby wspierać %d węzłów: zredukuj 'k'"
+
+#. R/gamlss.r: gettextf("%s link not available for mu parameter of gammals", link[[i]])
+#: R/gamlss.r:0
+#, fuzzy
+msgid "%s link not available for mu parameter of gammals"
+msgstr "połączenie \"%s\" nie jest dostępne dla parametru 'mu' 'gaulss'"
 
 #. R/mgcv.r: gettextf("%s score = %s", sQuote(x$method), x$gcv.ubre, domain = "R-mgcv")
 #: R/mgcv.r:0
@@ -256,6 +262,12 @@ msgstr "'X' utraciło wymiary w 'magic()!'!"
 #: R/misc.r:0
 msgid "'a' argument has wrong number of rows"
 msgstr "argument 'a' ma niepoprawną liczbę wierszy"
+
+#. R/gamlss.r: stop("'a' has to be positive")
+#: R/gamlss.r:0
+#, fuzzy
+msgid "'a' has to be positive"
+msgstr "argument 'k' musi być dodatni"
 
 #. R/mgcv.r: stop("'absorb.cons' argument must be TRUE for multi-formula models")
 #: R/mgcv.r:0
@@ -470,6 +482,11 @@ msgid ""
 msgstr ""
 "człon posiada mniej unikalnych kombinacji zmiennych niezależnych niż "
 "określona maksymalna liczba stopni swobody"
+
+#. R/misc.r: warning("AR not available with sparse marginals")
+#: R/misc.r:0
+msgid "AR not available with sparse marginals"
+msgstr ""
 
 #. R/bam.r: warning("AR1 parameter rho unused with generalized model")
 #: R/bam.r:0
@@ -1439,6 +1456,12 @@ msgstr ""
 msgid "arguments of smooth not same dimension"
 msgstr "argumenty wygładzania nie mają tego samego wymiaru"
 
+#. R/mgcv.r: stop("at least one element of lb must be non-zero")
+#: R/mgcv.r:0
+#, fuzzy
+msgid "at least one element of lb must be non-zero"
+msgstr "wszystkie elementy listy 'random' muszą być nazwane"
+
 #. R/soap.r: stop("attempt to select non existent basis function")
 #: R/soap.r:0
 msgid "attempt to select non existent basis function"
@@ -1566,6 +1589,11 @@ msgstr ""
 "komponenty węzłów odwołujące się do pojedynczego wygładzenia muszą być tej "
 "samej długości"
 
+#. R/bam.r: warning("constraints for sub blocked tensor products un-tested")
+#: R/bam.r:0
+msgid "constraints for sub blocked tensor products un-tested"
+msgstr ""
+
 #. R/gam.fit4.r: gettextf("cor d2b[%d] = %s", i, cor(b$b2[, i], fd.br2[, i]), domain = "R-mgcv")
 #: R/gam.fit4.r:0
 #, fuzzy
@@ -1587,6 +1615,11 @@ msgstr "korelacja db/drho[%d] = %s"
 msgid "cubic spline only deals with 1D data"
 msgstr "sześcienny splajn radzi sobie jedynie z danymi jednowymiarowymi"
 
+#. R/mgcv.r: warning("danger of round-off error")
+#: R/mgcv.r:0
+msgid "danger of round-off error"
+msgstr ""
+
 #. R/smooth.r: stop("data contain regions that are not contained in the knot specification")
 #: R/smooth.r:0
 msgid "data contain regions that are not contained in the knot specification"
@@ -1603,6 +1636,12 @@ msgstr "dane poza granicami 'soap'"
 #: R/plots.r:0
 msgid "data vectors are of different lengths"
 msgstr "wektory danych są różnej długości"
+
+#. R/mgcv.r: stop("df must be positive integers")
+#: R/mgcv.r:0
+#, fuzzy
+msgid "df must be positive integers"
+msgstr "argument 'nthreads' musi być dodatnią liczbą całkowitą"
 
 #. R/gam.fit3.r: gettext("differences", domain = "R-mgcv")
 #: R/gam.fit3.r:0
@@ -1700,6 +1739,11 @@ msgstr "faktoryzacja zmiennych 'by' nie może być użyta z argumentami macierzy
 #, fuzzy
 msgid "factor levels %s not in original fit"
 msgstr "%s nie ma w oryginalnym dopasowaniu"
+
+#. R/mgcv.r: warning("failure of Davies method, falling back on Liu et al approximtion")
+#: R/mgcv.r:0
+msgid "failure of Davies method, falling back on Liu et al approximtion"
+msgstr ""
 
 #. R/gamm.r: warning("family are not designed for use with 'gamm()' function!")
 #: R/gamm.r:0
@@ -1842,6 +1886,13 @@ msgstr ""
 msgid "grid vectors are different lengths"
 msgstr "wektory siatki są różnej długości"
 
+#. R/gamlss.r: stop("gumbls requires 2 links specified as character strings")
+#: R/gamlss.r:0
+#, fuzzy
+msgid "gumbls requires 2 links specified as character strings"
+msgstr ""
+"funkcja 'ziplss()' wymaga dwóch połączeń określonych jako łańcuchy tekstowe"
+
 #. R/smooth.r: warning("handling 'by' variables in smooth constructors may not work with the summation convention")
 #: R/smooth.r:0
 msgid ""
@@ -1929,6 +1980,11 @@ msgstr ""
 msgid "invalid 'family' argument"
 msgstr "niepoprawny argument 'family'"
 
+#. R/misc.r: stop("isa requires a dg/tCMatrix")
+#: R/misc.r:0
+msgid "isa requires a dg/tCMatrix"
+msgstr ""
+
 #. R/gamm.r: gettextf("iteration %d", i)
 #: R/gamm.r:0
 msgid "iteration %d"
@@ -2012,6 +2068,12 @@ msgstr "długości komponentów 'k' oraz 'bnd' argumentu 'object' są niezgodne"
 msgid "lengths of 'k' and 'bnd' arguments are inconsistent"
 msgstr "długości argumentów 'k' oraz 'bnd' są niezgodne"
 
+#. R/mgcv.r: stop("lengths of lb, df and nc must match")
+#: R/mgcv.r:0
+#, fuzzy
+msgid "lengths of lb, df and nc must match"
+msgstr "nazwy 'z' oraz 'pc' muszą się zgadzać"
+
 #. R/plots.r: gettext("linear predictor", domain = "R-mgcv")
 #. R/plots.r: gettext("linear predictor", domain = "R-mgcv")
 #: R/plots.r:0
@@ -2034,6 +2096,12 @@ msgstr "połączenie \"%s\" nie jest dostępne dla rozkładów z rodziny Tweedie
 msgid "link is not implemented for extended families"
 msgstr "połączenie nie jest zaimplementowane dla rozszerzonych rodzin"
 
+#. R/gamlss.r: stop(link[[i]], " link not available for ", param.names[i], " parameter of shashlss")
+#: R/gamlss.r:0
+#, fuzzy
+msgid "link not available for"
+msgstr "połączenie \"%s\" nie jest dostępne dla rozkładów z rodziny Tweedie"
+
 #. R/gamlss.r: stop(link[[i]], " link not available for mu parameter of gammals")
 #: R/gamlss.r:0
 #, fuzzy
@@ -2044,6 +2112,12 @@ msgstr "połączenie \"%s\" nie jest dostępne dla parametru 'mu' 'gaulss'"
 #: R/gamlss.r:0
 #, fuzzy
 msgid "link not available for mu parameter of twlss"
+msgstr "połączenie \"%s\" nie jest dostępne dla parametru 'mu' 'gaulss'"
+
+#. R/gamlss.r: stop(link[[2]], " link not available for scale parameter of shash")
+#: R/gamlss.r:0
+#, fuzzy
+msgid "link not available for scale parameter of shash"
 msgstr "połączenie \"%s\" nie jest dostępne dla parametru 'mu' 'gaulss'"
 
 #. R/gam.fit3.r: stop("link was not recognised")
@@ -2065,6 +2139,12 @@ msgstr "korelacja hesjanu logarytmu funkcji wiarygnodności = %s"
 #: R/smooth.r:0
 msgid "lower bound >= upper bound in call passed to 'mono.con()'"
 msgstr "dolny zakres >= górny zakres w wywołaniu przekazywanym do 'mono.con()'"
+
+#. R/smooth.r: stop("matrices must be all class dgCMatrix or all class matrix")
+#. R/smooth.r: stop("matrices must be all class dgCMatrix or all class matrix")
+#: R/smooth.r:0
+msgid "matrices must be all class dgCMatrix or all class matrix"
+msgstr ""
 
 #. R/mgcv.r: stop("matrix 'A' is not square")
 #: R/mgcv.r:0
@@ -2305,6 +2385,11 @@ msgstr "Zbyt mało informacyjnych obserwacji"
 msgid "not enough unique values to find k nearest"
 msgstr "zbyt mało unikalnych wartości aby znaleźć k najbliższych"
 
+#. R/mcmc.r: stop("not usable with bam fits")
+#: R/mcmc.r:0
+msgid "not usable with bam fits"
+msgstr ""
+
 #. R/mgcv.r: stop("nothing to do for this model")
 #: R/mgcv.r:0
 msgid "nothing to do for this model"
@@ -2335,6 +2420,12 @@ msgstr "liczba dostarczonych węzłów != k dla wygładzania 'cr'"
 #: R/sparse.r:0
 msgid "object not fully initialized"
 msgstr "obiekt nie został w pełni zainicjalizowany"
+
+#. R/gamlss.r: stop("offset not still available for this family")
+#: R/gamlss.r:0
+#, fuzzy
+msgid "offset not still available for this family"
+msgstr "połączenie \"%s\" nie jest dostępne dla rozkładów z rodziny Tweedie"
 
 #. R/smooth.r: warning("one or more supplied k too small - reset to default")
 #. R/smooth.r: warning("one or more supplied k too small - reset to default")
@@ -2405,6 +2496,11 @@ msgid ""
 msgstr ""
 "p-wartości dla jakichkolwiek członów, które da się ukarać do zera, będą "
 "nierzetelne: ponownie dopasuj model aby to naprawić"
+
+#. R/gamlss.r: stop(link[[i]], " link not available for ", param.names[i], " parameter of shashlss")
+#: R/gamlss.r:0
+msgid "parameter of shashlss"
+msgstr ""
 
 #. R/gam.fit3.r: gettextf("penalized deviance = %s", pdev, domain = "R-mgcv")
 #. R/gam.fit4.r: gettextf("penalized deviance = %s", pdev, domain = "R-mgcv")
@@ -2479,6 +2575,11 @@ msgstr "ponowna parametryzacja nie jest stabilna dla marginesu: nie wykonano"
 msgid "requested non-existent derivative in B-spline penalty"
 msgstr ""
 
+#. R/bam.r: stop("requires a terms or formula object as first argument")
+#: R/bam.r:0
+msgid "requires a terms or formula object as first argument"
+msgstr ""
+
 #. R/plots.r: warning("residuals argument to plot.gam is wrong length: ignored")
 #: R/plots.r:0
 msgid "residuals argument to plot.gam is wrong length: ignored"
@@ -2493,6 +2594,14 @@ msgstr "zmienna zależna"
 #. R/gamlss.r: stop("response not in 0 to number of predictors + 1")
 #: R/gamlss.r:0
 msgid "response not in 0 to number of predictors + 1"
+msgstr ""
+
+#. R/misc.r: stop("reverse indices missing from sparse discrete marginals")
+#. R/misc.r: stop("reverse indices missing from sparse discrete marginals")
+#. R/misc.r: stop("reverse indices missing from sparse discrete marginals")
+#. R/misc.r: stop("reverse indices missing from sparse discrete marginals")
+#: R/misc.r:0
+msgid "reverse indices missing from sparse discrete marginals"
 msgstr ""
 
 #. R/smooth.r: warning("s value increased")
@@ -2530,11 +2639,24 @@ msgstr "'scheme' powinno być pojedynczą liczbą lub wektorem z %d elementami"
 msgid "sd should have exactly one less entry than ld"
 msgstr ""
 
+#. R/fast-REML.r: stop("second derivs not available for non-linear penalties")
+#: R/fast-REML.r:0
+#, fuzzy
+msgid "second derivs not available for non-linear penalties"
+msgstr "typ 'items' nie jest dostępny dla przypadków z wieloma predyktorami"
+
 #. R/mgcv.r: stop("shared offsets are not allowed")
 #: R/mgcv.r:0
 #, fuzzy
 msgid "shared offsets are not allowed"
 msgstr "puste modele nie są dostępne"
+
+#. R/gamlss.r: stop("shash requires 4 links specified as character strings")
+#: R/gamlss.r:0
+#, fuzzy
+msgid "shash requires 4 links specified as character strings"
+msgstr ""
+"funkcja 'ziplss()' wymaga dwóch połączeń określonych jako łańcuchy tekstowe"
 
 #. R/gamm.r: stop("side conditions are not allowed for nested smooths")
 #: R/gamm.r:0
@@ -3078,9 +3200,6 @@ msgstr[2] "Wybór parametrów wygładzania uzbieżnił się po %d iteracjach."
 #~ msgid "lengths of k and bnd are not compatible"
 #~ msgstr "długości 'k' oraz 'bnd' nie są zgodne"
 
-#~ msgid "link \"%s\" not available for Tweedie family."
-#~ msgstr "połączenie \"%s\" nie jest dostępne dla rozkładów z rodziny Tweedie"
-
 #~ msgid "only scalar `rho' and `theta' allowed."
 #~ msgstr "tylko skalarne 'p' oraz 'phi' są dozwolone"
 
@@ -3102,7 +3221,3 @@ msgstr[2] "Wybór parametrów wygładzania uzbieżnił się po %d iteracjach."
 
 #~ msgid "'m' has wrong length and ignored"
 #~ msgstr "'m' posiada niepoprawną długość przez co został zignorowany"
-
-#, fuzzy
-#~ msgid "%s link not available for"
-#~ msgstr "połączenie \"%s\" nie jest dostępne dla rozkładów z rodziny Tweedie"

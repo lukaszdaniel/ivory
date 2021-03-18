@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: cluster 2.0.1\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-04-30 08:05+0200\n"
+"POT-Creation-Date: 2021-03-18 19:37+0100\n"
 "PO-Revision-Date: 2018-04-17 19:45+0200\n"
 "Last-Translator: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
 "Language-Team: Lukasz Daniel <lukasz.daniel@gmail.com>\n"
@@ -55,7 +55,7 @@ msgid "Invalid 'medoids'"
 msgstr ""
 
 #: pam.c:321
-msgid "medoids given\n"
+msgid "medoids given; "
 msgstr ""
 
 #: pam.c:337
@@ -78,12 +78,12 @@ msgid ""
 "  and min.dist dysma[1:n] are\n"
 msgstr ""
 
-#: pam.c:733
+#: pam.c:795
 #, c-format
 msgid "   swp new %*d <-> %*d old; decreasing diss. %7g by %g\n"
 msgstr ""
 
-#: pam.c:888
+#: pam.c:1014
 #, c-format
 msgid "pam(): Bug in C level cstat(), k=%d: ntt=0"
 msgstr ""

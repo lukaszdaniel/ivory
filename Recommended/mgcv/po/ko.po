@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: mgcv 1.8-4\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-11-12 19:56+0100\n"
+"POT-Creation-Date: 2021-03-18 19:37+0100\n"
 "PO-Revision-Date: 2015-02-21 16:01-0600\n"
 "Last-Translator:Chel Hee Lee  <chl948@mail.usask.ca>\n"
 "Language-Team: Chel Hee Lee  <chl948@mail.usask.ca>\n"
@@ -19,13 +19,13 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
 
-#: magic.c:445
+#: magic.c:446
 msgid "magic requires smoothing parameter starting values if L supplied"
 msgstr ""
 "L에 주어진 값이 없다면 스무딩 파라미터(smoothing parameter)에 대한 초기값"
 "(starting values)가 필요합니다."
 
-#: magic.c:563
+#: magic.c:564
 msgid "magic, the gcv/ubre optimizer, failed to converge after 400 iterations."
 msgstr ""
 
@@ -41,12 +41,12 @@ msgid ""
 "file dim problem\n"
 msgstr ""
 
-#: mat.c:3325
+#: mat.c:3316
 #, c-format
 msgid "Non orthogonal eigenvectors %d %g\n"
 msgstr ""
 
-#: mat.c:3330
+#: mat.c:3321
 #, c-format
 msgid "Eigenvectors not normalized %d %g\n"
 msgstr ""

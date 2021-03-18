@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: mgcv\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-11-12 19:56+0100\n"
+"POT-Creation-Date: 2021-03-18 19:37+0100\n"
 "PO-Revision-Date: 2019-07-05 14:32+0200\n"
 "Last-Translator: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
 "Language-Team: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
@@ -15,13 +15,13 @@ msgstr ""
 "X-Poedit-SourceCharset: UTF-8\n"
 "X-Generator: Poedit 2.2.1\n"
 
-#: magic.c:445
+#: magic.c:446
 msgid "magic requires smoothing parameter starting values if L supplied"
 msgstr ""
 "'magic' wymaga wartości startowych dla parametru wygładzającego jeśli L "
 "zostało dostarczone"
 
-#: magic.c:563
+#: magic.c:564
 msgid "magic, the gcv/ubre optimizer, failed to converge after 400 iterations."
 msgstr ""
 "'magic', omptymalizator gcv/ubre, nie zdodał uzbieżnić się po 400 iteracjach."
@@ -42,12 +42,12 @@ msgstr ""
 "\n"
 "problem z wymiarem pliku\n"
 
-#: mat.c:3325
+#: mat.c:3316
 #, c-format
 msgid "Non orthogonal eigenvectors %d %g\n"
 msgstr "Nieortogonalne wektory własne %d %g\n"
 
-#: mat.c:3330
+#: mat.c:3321
 #, c-format
 msgid "Eigenvectors not normalized %d %g\n"
 msgstr "Wektory własne nie są znormalizowane %d %g\n"

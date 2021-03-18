@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.12.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2021-01-07 23:38\n"
+"POT-Creation-Date: 2021-03-18 20:02\n"
 "PO-Revision-Date: 2013-06-02 11:39+0100\n"
 "Last-Translator: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
 "Language-Team: French <R-core@r-project.org>\n"
@@ -5630,7 +5630,6 @@ msgstr "le répertoire '%s' ne contient aucun objet Rd"
 #. R/admin.R: gettextf("directory %s does not exist", sQuote(dir))
 #. R/admin.R: gettextf("directory %s does not exist", sQuote(dir))
 #. R/admin.R: gettextf("directory %s does not exist", sQuote(outDir))
-#. R/index.R: gettextf("directory %s does not exist", sQuote(dataDir))
 #. R/index.R: gettextf("directory %s does not exist", sQuote(demoDir))
 #. R/index.R: gettextf("directory %s does not exist", sQuote(demoDir))
 #: R/QC.R:0 R/Rd.R:0 R/Vignettes.R:0 R/admin.R:0 R/index.R:0
@@ -5643,6 +5642,11 @@ msgstr "le répertoire '%s' n'existe pas"
 #, fuzzy
 msgid "directory %s was not found"
 msgstr "le fichier '%s' est introuvable"
+
+#. R/makeLazyLoad.R: gettextf("directory '%s' does not exist", dir)
+#: R/makeLazyLoad.R:0
+msgid "directory '%s' does not exist"
+msgstr "le répertoire '%s' n'existe pas"
 
 #. R/RdConv2.R: gettextf("docType %s is unrecognized", sQuote(docTypes[i]))
 #: R/RdConv2.R:0
@@ -7018,7 +7022,8 @@ msgid "you must specify '%s', '%s' or '%s' argument"
 msgstr "vous devez spécifier 'dir' ou 'files'"
 
 #. R/QC.R: stop("you must specify 'package' or 'dir'")
-#: R/QC.R:0
+#. R/makeLazyLoad.R: stop("you must specify 'package' or 'dir'")
+#: R/QC.R:0 R/makeLazyLoad.R:0
 msgid "you must specify 'package' or 'dir'"
 msgstr "il faut spécifier 'package' ou 'dir'"
 
@@ -8613,9 +8618,6 @@ msgstr[1] "impossible de réencoder la (les) ligne(s) %2$s de '%1$s'"
 
 #~ msgid "cannot copy '%s' to '%s'"
 #~ msgstr "impossible de copier '%s' dans '%s'"
-
-#~ msgid "directory '%s' does not exist"
-#~ msgstr "le répertoire '%s' n'existe pas"
 
 #~ msgid "file '%s' does not exist"
 #~ msgstr "le fichier '%s' n'existe pas"

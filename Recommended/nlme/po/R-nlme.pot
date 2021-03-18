@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
-"Project-Id-Version: nlme 3.1-148\n"
-"POT-Creation-Date: 2020-06-17 19:43\n"
+"Project-Id-Version: nlme 3.1-152\n"
+"POT-Creation-Date: 2021-03-18 19:38\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -27,12 +27,14 @@ msgstr ""
 
 #: R/varFunc.R: 0
 #. R/varFunc.R: gettextf("%s can have at most two components", nam)
+#. R/varFunc.R: gettextf("%s can have at most two components", nam)
 
 msgid "%s can have at most two components"
 msgstr ""
 
 
 #: R/varFunc.R: 0
+#. R/varFunc.R: gettextf("%s can only be a list or numeric", nam)
 #. R/varFunc.R: gettextf("%s can only be a list or numeric", nam)
 
 msgid "%s can only be a list or numeric"
@@ -43,6 +45,13 @@ msgstr ""
 #. R/varFunc.R: gettextf("%s can only have names \"const\" and \"power\"", nam)
 
 msgid "%s can only have names \"const\" and \"power\""
+msgstr ""
+
+
+#: R/varFunc.R: 0
+#. R/varFunc.R: gettextf("%s can only have names \"const\" and \"prop\"", nam)
+
+msgid "%s can only have names \"const\" and \"prop\""
 msgstr ""
 
 
@@ -64,6 +73,13 @@ msgstr ""
 #. R/varFunc.R: gettextf("%s must have group names in 'varConstPower'", nam)
 
 msgid "%s must have group names in 'varConstPower'"
+msgstr ""
+
+
+#: R/varFunc.R: 0
+#. R/varFunc.R: gettextf("%s must have group names in 'varConstProp'", nam)
+
+msgid "%s must have group names in 'varConstProp'"
 msgstr ""
 
 
@@ -381,7 +397,6 @@ msgstr ""
 #. R/varFunc.R: gettextf("'%s' argument must have a covariate", "value")
 #. R/varFunc.R: gettextf("'%s' argument must have a covariate", "form")
 #. R/varFunc.R: gettextf("'%s' argument must have a covariate", "form")
-#. R/varFunc.R: gettextf("'%s' argument must have a covariate", "form")
 
 msgid "'%s' argument must have a covariate"
 msgstr ""
@@ -473,6 +488,14 @@ msgstr ""
 #. R/lmList.R: stop("'form' must be a formula")
 
 msgid "'form' must be a formula"
+msgstr ""
+
+
+#: R/varFunc.R: 0
+#. R/varFunc.R: stop("'form' must have a covariate")
+#. R/varFunc.R: stop("'form' must have a covariate")
+
+msgid "'form' must have a covariate"
 msgstr ""
 
 
@@ -745,7 +768,7 @@ msgstr ""
 #. R/lmList.R: gettext("   Data: ", domain = "R-nlme")
 #. R/lmList.R: gettext("   Data: ", domain = "R-nlme")
 #. R/lme.R: gettext("  Data: ", domain = "R-nlme")
-#. R/lme.R: gettext(" Data: ", domain = "R-nlme")
+#. R/lme.R: gettext("  Data: ", domain = "R-nlme")
 
 msgid "Data:"
 msgstr ""
@@ -1217,6 +1240,13 @@ msgid "Quantiles of standard normal"
 msgstr ""
 
 
+#: R/corStruct.R: 0
+#. R/corStruct.R: gettext("Uninitialized correlation structure of class corCompSymm\n", doman = "R-nlme")
+
+msgid "R-nlme"
+msgstr ""
+
+
 #: R/lmList.R: 0
 #: R/lme.R: 0
 #. R/lmList.R: gettext("Random effects", domain = "R-nlme")
@@ -1382,6 +1412,13 @@ msgstr ""
 #. R/corStruct.R: gettextf("Uninitialized correlation structure of class %s", dQuote("corNatural"),     domain = "R-nlme")
 
 msgid "Uninitialized correlation structure of class %s"
+msgstr ""
+
+
+#: R/corStruct.R: 0
+#. R/corStruct.R: gettext("Uninitialized correlation structure of class corCompSymm\n", doman = "R-nlme")
+
+msgid "Uninitialized correlation structure of class corCompSymm"
 msgstr ""
 
 
@@ -1647,6 +1684,7 @@ msgstr ""
 #. R/varFunc.R: stop("cannot change coefficients before initialization or when all parameters are fixed")
 #. R/varFunc.R: stop("cannot change coefficients before initialization or when all parameters are fixed")
 #. R/varFunc.R: stop("cannot change coefficients before initialization or when all parameters are fixed")
+#. R/varFunc.R: stop("cannot change coefficients before initialization or when all parameters are fixed")
 
 msgid "cannot change coefficients before initialization or when all parameters are fixed"
 msgstr ""
@@ -1696,8 +1734,10 @@ msgstr ""
 #: R/corStruct.R: 0
 #: R/pdMat.R: 0
 #: R/varFunc.R: 0
+#: R/varFunc.R: 0
 #. R/corStruct.R: stop("cannot change the length of the parameter after initialization")
 #. R/pdMat.R: stop("cannot change the length of the parameter after initialization")
+#. R/varFunc.R: stop("cannot change the length of the parameter after initialization")
 #. R/varFunc.R: stop("cannot change the length of the parameter after initialization")
 
 msgid "cannot change the length of the parameter after initialization"
@@ -1926,9 +1966,10 @@ msgstr ""
 
 
 #: R/varFunc.R: 0
-#. R/varFunc.R: stop("constant in \"varConstPower\" structure must be > 0")
+#. R/varFunc.R: stop("constant in \"varConstProp\" structure must be > 0")
+#. R/varFunc.R: stop("constant in \"varConstProp\" structure must be > 0")
 
-msgid "constant in \"varConstPower\" structure must be > 0"
+msgid "constant in \"varConstProp\" structure must be > 0"
 msgstr ""
 
 
@@ -2090,6 +2131,13 @@ msgstr ""
 #. R/varFunc.R: stop("fixed parameter names in 'varIdent()' function must be a subset of group names")
 
 msgid "fixed parameter names in 'varIdent()' function must be a subset of group names"
+msgstr ""
+
+
+#: R/varFunc.R: 0
+#. R/varFunc.R: stop("fixed parameters must have group names")
+
+msgid "fixed parameters must have group names"
 msgstr ""
 
 
@@ -2264,6 +2312,8 @@ msgstr ""
 #: R/varFunc.R: 0
 #. R/varFunc.R: gettext("initial value should be of length %d", nStratVar)
 #. R/varFunc.R: gettext("initial value should be of length %d", aux)
+#. R/varFunc.R: gettext("initial value should be of length %d", nStratVar)
+#. R/varFunc.R: gettext("initial value should be of length %d", aux)
 
 msgid "initial value should be of length %d"
 msgstr ""
@@ -2381,6 +2431,7 @@ msgstr ""
 
 
 #: R/varFunc.R: 0
+#. R/varFunc.R: stop("mismatch between group names and fixed values names")
 #. R/varFunc.R: stop("mismatch between group names and fixed values names")
 #. R/varFunc.R: stop("mismatch between group names and fixed values names")
 #. R/varFunc.R: stop("mismatch between group names and fixed values names")
@@ -2591,6 +2642,13 @@ msgstr ""
 
 
 #: R/varFunc.R: 0
+#. R/varFunc.R: stop("nonexistent group names for initial values")
+
+msgid "nonexistent group names for initial values"
+msgstr ""
+
+
+#: R/varFunc.R: 0
 #. R/varFunc.R: gettextf("nonexistent group names for initial values in %s function", sQuote("varIdent()"))
 #. R/varFunc.R: gettextf("nonexistent group names for initial values in %s function", sQuote("varPower()"))
 #. R/varFunc.R: gettextf("nonexistent group names for initial values in %s function", sQuote("varExp()"))
@@ -2615,6 +2673,20 @@ msgstr ""
 #. R/zzMethods.R: stop("not (yet) implemented.  Contributions are welcome; use intervals() instead (for now)")
 
 msgid "not (yet) implemented.  Contributions are welcome; use intervals() instead (for now)"
+msgstr ""
+
+
+#: R/VarCov.R: 0
+#. R/VarCov.R: stop("not implemented for correlation structures without a grouping factor")
+
+msgid "not implemented for correlation structures without a grouping factor"
+msgstr ""
+
+
+#: R/VarCov.R: 0
+#. R/VarCov.R: stop("not implemented for uncorrelated errors")
+
+msgid "not implemented for uncorrelated errors"
 msgstr ""
 
 

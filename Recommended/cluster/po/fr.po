@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: cluster 2.0.1\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-01-30 22:00+0100\n"
+"POT-Creation-Date: 2021-03-18 19:37+0100\n"
 "PO-Revision-Date: 2021-02-11 10:56+0100\n"
 "Last-Translator: Philippe Grosjean <phgrosjean@sciviews.org>\n"
 "Language-Team: R Core <r-core@r-project.org>\n"
@@ -17,36 +17,86 @@ msgstr ""
 "X-Generator: Poedit 2.4.2\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
 
-#: clara.c:101
+#: clara.c:102
 #, c-format
 msgid "C level clara(): random k=%d > n **\n"
 msgstr "Au niveau du code C de clara(): random k=%d > n **\n"
 
-#: clara.c:312
+#: clara.c:313
 #, c-format
-msgid "clara()'s C level dysta2(nsam=%d, p=%d, nbest=%d, n=%d) gave 'toomany_NA'"
-msgstr "code C de clara(), dysta2(nsam=%d, p=%d, nbest=%d, n=%d) ergab 'toomany_NA'"
+msgid ""
+"clara()'s C level dysta2(nsam=%d, p=%d, nbest=%d, n=%d) gave 'toomany_NA'"
+msgstr ""
+"code C de clara(), dysta2(nsam=%d, p=%d, nbest=%d, n=%d) ergab 'toomany_NA'"
 
-#: clara.c:348 clara.c:353
+#: clara.c:349 clara.c:354
 #, c-format
 msgid "C level dysta2(): nsel[%s= %d] = %d is outside 0..n, n=%d"
-msgstr "Code C de dysta2(): nsel[%s= %d] = %d est en dehors de la plage 0..n, n=%d"
+msgstr ""
+"Code C de dysta2(): nsel[%s= %d] = %d est en dehors de la plage 0..n, n=%d"
 
-#: pam.c:161
+#: fanny.c:251
+#, c-format
+msgid "  not converged: it = %d\n"
+msgstr ""
+
+#: fanny.c:260
+#, c-format
+msgid "%sConverged after %d iterations,  obj = %#20.*g\n"
+msgstr ""
+
+#: fanny.c:264
+#, c-format
+msgid "%sNOT converged after %d iterations,  obj = %#20.*g\n"
+msgstr ""
+
+#: pam.c:162
 msgid "Invalid 'medoids'"
 msgstr "Les 'medoids' sont incorrects"
 
-#: pam.c:1011
+#: pam.c:321
+msgid "medoids given; "
+msgstr ""
+
+#: pam.c:337
+#, c-format
+msgid "build %d medoids:\n"
+msgstr ""
+
+#: pam.c:368
+#, c-format
+msgid "    new representative. %d\n"
+msgstr ""
+
+#: pam.c:382
+msgid "  after build: medoids are"
+msgstr ""
+
+#: pam.c:386
+msgid ""
+"\n"
+"  and min.dist dysma[1:n] are\n"
+msgstr ""
+
+#: pam.c:795
+#, c-format
+msgid "   swp new %*d <-> %*d old; decreasing diss. %7g by %g\n"
+msgstr ""
+
+#: pam.c:1014
 #, c-format
 msgid "pam(): Bug in C level cstat(), k=%d: ntt=0"
 msgstr "pam() : Bogue dans le code C de cstat(), k=%d: ntt=0"
 
-#: twins.c:153
+#: twins.c:154
 #, c-format
-msgid "agnes(method=%d, par.method=*) lead to invalid merge; step %d, D(.,.)=%g"
-msgstr "agnes(method=%d, par.method=*) conduit à une fusion incorrecte ; étape %d, D(.,.)=%g"
+msgid ""
+"agnes(method=%d, par.method=*) lead to invalid merge; step %d, D(.,.)=%g"
+msgstr ""
+"agnes(method=%d, par.method=*) conduit à une fusion incorrecte ; étape %d, "
+"D(.,.)=%g"
 
-#: twins.c:260
+#: twins.c:261
 #, c-format
 msgid "invalid method (code %d)"
 msgstr "méthode incorrecte (code %d)"

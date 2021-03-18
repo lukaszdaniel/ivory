@@ -13,7 +13,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: rpart 4.1-0\n"
-"POT-Creation-Date: 2015-02-13 16:25\n"
+"POT-Creation-Date: 2021-03-18 19:56\n"
 "PO-Revision-Date: 2015-02-06 21:56-0600\n"
 "Last-Translator:Chel Hee Lee  <chl948@mail.usask.ca>\n"
 "Language-Team: Chel Hee Lee  <chl948@mail.usask.ca>\n"
@@ -127,11 +127,6 @@ msgstr "포아송에 사용되는 올바른 에러메소드(error method)가 아
 #: R/xpred.rpart.R:0
 msgid "Invalid fit object"
 msgstr "올바르게 적합된 객체(fit object)가 아닙니다."
-
-#. R/rpart.R: stop("Invalid method")
-#: R/rpart.R:0
-msgid "Invalid method"
-msgstr "입력된 메소드가 올바르지 않습니다."
 
 #. R/predict.rpart.R: stop("Invalid prediction for \"rpart\" object")
 #: R/predict.rpart.R:0
@@ -410,6 +405,12 @@ msgstr ""
 #: R/plot.rpart.R:0 R/text.rpart.R:0
 msgid "fit is not a tree, just a root"
 msgstr "적합(fit)은 트리(tree)가 아니라 뿌리(root)일 뿐입니다."
+
+#. R/rpart.R: stop("invalid method")
+#: R/rpart.R:0
+#, fuzzy
+msgid "invalid method"
+msgstr "입력된 메소드가 올바르지 않습니다."
 
 #. R/rsq.rpart.R: warning("may not be applicable for this method")
 #: R/rsq.rpart.R:0

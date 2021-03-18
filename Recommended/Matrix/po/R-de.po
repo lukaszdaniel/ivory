@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 3.3.0 / matrix 1.2-4\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2019-04-08 21:35\n"
+"POT-Creation-Date: 2021-03-18 19:37\n"
 "PO-Revision-Date: 2016-04-14 12:55+0200\n"
 "Last-Translator: Detlef Steuer <steuer@hsu-hh.de>\n"
 "Language-Team: R-Core <r-core@r-project.org>\n"
@@ -160,6 +160,23 @@ msgstr ""
 #: R/abIndex.R:0
 msgid "'force' must be (coercable to) TRUE or FALSE"
 msgstr "'force' muss (umwandelbar nach) TRUE oder FALSE sein"
+
+#. R/sparseVector.R: gettextf("'giveCsparse' has been deprecated; setting 'repr = \"%s\"' for you", repr)
+#: R/sparseVector.R:0
+msgid "'giveCsparse' has been deprecated; setting 'repr = \"%s\"' for you"
+msgstr ""
+
+#. R/bandSparse.R: warning("'giveCsparse' has been deprecated; setting 'repr = \"T\"' for you")
+#. R/sparseMatrix.R: warning("'giveCsparse' has been deprecated; setting 'repr = \"T\"' for you")
+#: R/bandSparse.R:0 R/sparseMatrix.R:0
+msgid "'giveCsparse' has been deprecated; setting 'repr = \"T\"' for you"
+msgstr ""
+
+#. R/bandSparse.R: warning("'giveCsparse' has been deprecated; will use 'repr' instead")
+#. R/sparseMatrix.R: warning("'giveCsparse' has been deprecated; will use 'repr' instead")
+#: R/bandSparse.R:0 R/sparseMatrix.R:0
+msgid "'giveCsparse' has been deprecated; will use 'repr' instead"
+msgstr ""
 
 #. R/AllClass.R: gettext("'i' and 'x' differ in length", domain = "R-Matrix")
 #: R/AllClass.R:0
@@ -353,6 +370,12 @@ msgstr "'x' hat ungültigen Datentyp"
 #. R/dsparseMatrix.R: stop("'x' is not positive definite -- chol() undefined.")
 #: R/Auxiliaries.R:0 R/dsparseMatrix.R:0
 msgid "'x' is not positive definite -- chol() undefined."
+msgstr "'x' ist nicht positiv definit -- chol() undefiniert."
+
+#. R/triangularMatrix.R: stop("'x' is not symmetric -- chol() undefined.")
+#: R/triangularMatrix.R:0
+#, fuzzy
+msgid "'x' is not symmetric -- chol() undefined."
 msgstr "'x' ist nicht positiv definit -- chol() undefiniert."
 
 #. R/symmetricMatrix.R: stop("'x' is not symmetric nor triangular")
@@ -1022,6 +1045,12 @@ msgstr "ungültiges 'data'"
 msgid "invalid 'mod': %s"
 msgstr "ungültiges 'mod': %s"
 
+#. R/bandSparse.R: stop("invalid 'repr'; must be \"C\", \"T\", or \"R\"")
+#. R/sparseMatrix.R: stop("invalid 'repr'; must be \"C\", \"T\", or \"R\"")
+#: R/bandSparse.R:0 R/sparseMatrix.R:0
+msgid "invalid 'repr'; must be \"C\", \"T\", or \"R\""
+msgstr ""
+
 #. R/sparseMatrix.R: stop("invalid 'type'")
 #: R/sparseMatrix.R:0
 msgid "invalid 'type'"
@@ -1510,6 +1539,16 @@ msgid ""
 msgstr ""
 "qr.R(<sparse>) könnte von qr.R(<dense>) aufgrund von Permutationen "
 "abweichen. Evtl. besser qrR() nutzen."
+
+#. R/rankMatrix.R: gettextf("qr2rankMatrix(.): QR has negative diag(R) entries")
+#: R/rankMatrix.R:0
+msgid "qr2rankMatrix(.): QR has negative diag(R) entries"
+msgstr ""
+
+#. R/rankMatrix.R: gettextf("qr2rankMatrix(.): QR with only %d out of %d finite diag(R) entries", sum(ifi),     length(ifi))
+#: R/rankMatrix.R:0
+msgid "qr2rankMatrix(.): QR with only %d out of %d finite diag(R) entries"
+msgstr ""
 
 #. R/rankMatrix.R: gettextf("rankMatrix(<large sparse Matrix>, method = '%s') coerces to dense matrix. Probably should rather use method = 'qr' !?",     method)
 #: R/rankMatrix.R:0

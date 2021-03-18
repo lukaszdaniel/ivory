@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
-"Project-Id-Version: cluster 2.1.0\n"
-"POT-Creation-Date: 2019-07-04 21:09\n"
+"Project-Id-Version: cluster 2.1.1\n"
+"POT-Creation-Date: 2021-03-18 19:37\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -117,6 +117,13 @@ msgstr ""
 #. R/silhouette.R: stop("'dmatrix' is not a dissimilarity matrix compatible to 'x'")
 
 msgid "'dmatrix' is not a dissimilarity matrix compatible to 'x'"
+msgstr ""
+
+
+#: R/silhouette.R: 0
+#. R/silhouette.R: stop("'full' must be FALSE, TRUE, or a number in [0, 1]")
+
+msgid "'full' must be FALSE, TRUE, or a number in [0, 1]"
 msgstr ""
 
 
@@ -561,6 +568,13 @@ msgid "For each of the %d samples, at least one object was found which could not
 msgstr ""
 
 
+#: R/pam.q: 0
+#. R/pam.q: gettextf("Found better objective, %g < %g (it=%d)\n", r$obj[2], res$obj[2], it, domain = "R-cluster")
+
+msgid "Found better objective, %g < %g (it=%d)"
+msgstr ""
+
+
 #: R/fanny.q: 0
 #. R/fanny.q: gettext("Fuzzy Clustering object of class 'fanny': ", domain = "R-cluster")
 
@@ -747,6 +761,13 @@ msgid "No clustering performed, NA's in dissimilarity matrix."
 msgstr ""
 
 
+#: R/pam.q: 0
+#. R/pam.q: stop("No clustering performed, NAs in the computed dissimilarity matrix.")
+
+msgid "No clustering performed, NAs in the computed dissimilarity matrix."
+msgstr ""
+
+
 #: R/mona.q: 0
 #. R/mona.q: stop("No clustering performed, a variable was found with all non missing values identical.")
 
@@ -855,6 +876,13 @@ msgstr ""
 #. R/mona.q: gettext("Separation step:", domain = "R-cluster")
 
 msgid "Separation step:"
+msgstr ""
+
+
+#: R/pam.q: 0
+#. R/pam.q: stop("Set either 'variant' or 'pamonce', but not both")
+
+msgid "Set either 'variant' or 'pamonce', but not both"
 msgstr ""
 
 
@@ -1213,6 +1241,13 @@ msgstr ""
 #. R/plotpart.q: gettext("span & rank2 : calling \"spannel\" ..", domain = "R-cluster")
 
 msgid "span & rank2 : calling \"spannel\" .."
+msgstr ""
+
+
+#: R/silhouette.R: 0
+#. R/silhouette.R: warning("specified both 'full' and 'subset'; will use 'subset'")
+
+msgid "specified both 'full' and 'subset'; will use 'subset'"
 msgstr ""
 
 

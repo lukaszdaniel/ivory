@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 3.1.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2021-01-07 23:38\n"
+"POT-Creation-Date: 2021-03-18 20:02\n"
 "PO-Revision-Date: 2014-03-27 13:35-0600\n"
 "Last-Translator: Chel Hee Lee <chl948@mail.usask.ca>\n"
 "Language-Team:  <chl948@mail.usask.ca>\n"
@@ -5500,7 +5500,6 @@ msgstr "디렉퇴 '%s'는 Rd 객체들을 포함하지 않습니다"
 #. R/admin.R: gettextf("directory %s does not exist", sQuote(dir))
 #. R/admin.R: gettextf("directory %s does not exist", sQuote(dir))
 #. R/admin.R: gettextf("directory %s does not exist", sQuote(outDir))
-#. R/index.R: gettextf("directory %s does not exist", sQuote(dataDir))
 #. R/index.R: gettextf("directory %s does not exist", sQuote(demoDir))
 #. R/index.R: gettextf("directory %s does not exist", sQuote(demoDir))
 #: R/QC.R:0 R/Rd.R:0 R/Vignettes.R:0 R/admin.R:0 R/index.R:0
@@ -5513,6 +5512,12 @@ msgstr "디렉토리 '%s'는 존재하지 않습니다"
 #, fuzzy
 msgid "directory %s was not found"
 msgstr "파일 '%s'를 찾을 수 없습니다"
+
+#. R/makeLazyLoad.R: gettextf("directory '%s' does not exist", dir)
+#: R/makeLazyLoad.R:0
+#, fuzzy
+msgid "directory '%s' does not exist"
+msgstr "디렉토리 '%s'는 존재하지 않습니다"
 
 #. R/RdConv2.R: gettextf("docType %s is unrecognized", sQuote(docTypes[i]))
 #: R/RdConv2.R:0
@@ -6863,7 +6868,8 @@ msgid "you must specify '%s', '%s' or '%s' argument"
 msgstr "'dir' 또는 'files'을 반드시 지정해야 합니다"
 
 #. R/QC.R: stop("you must specify 'package' or 'dir'")
-#: R/QC.R:0
+#. R/makeLazyLoad.R: stop("you must specify 'package' or 'dir'")
+#: R/QC.R:0 R/makeLazyLoad.R:0
 #, fuzzy
 msgid "you must specify 'package' or 'dir'"
 msgstr "'package' 또는 'dir'를 반드시 지정해야 합니다"

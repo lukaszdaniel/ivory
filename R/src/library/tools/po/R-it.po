@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.3.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2021-01-07 23:38\n"
+"POT-Creation-Date: 2021-03-18 20:02\n"
 "PO-Revision-Date: 2005-04-17 16:57+0200\n"
 "Last-Translator: stefano iacus <>\n"
 "Language-Team: Italian <it@li.org>\n"
@@ -5407,7 +5407,6 @@ msgstr "la directory '%s' non contiene oggetti Rd"
 #. R/admin.R: gettextf("directory %s does not exist", sQuote(dir))
 #. R/admin.R: gettextf("directory %s does not exist", sQuote(dir))
 #. R/admin.R: gettextf("directory %s does not exist", sQuote(outDir))
-#. R/index.R: gettextf("directory %s does not exist", sQuote(dataDir))
 #. R/index.R: gettextf("directory %s does not exist", sQuote(demoDir))
 #. R/index.R: gettextf("directory %s does not exist", sQuote(demoDir))
 #: R/QC.R:0 R/Rd.R:0 R/Vignettes.R:0 R/admin.R:0 R/index.R:0
@@ -5420,6 +5419,11 @@ msgstr "la directory '%s' non esiste"
 #, fuzzy
 msgid "directory %s was not found"
 msgstr "file '%s' non trovato"
+
+#. R/makeLazyLoad.R: gettextf("directory '%s' does not exist", dir)
+#: R/makeLazyLoad.R:0
+msgid "directory '%s' does not exist"
+msgstr "la directory '%s' non esiste"
 
 #. R/RdConv2.R: gettextf("docType %s is unrecognized", sQuote(docTypes[i]))
 #: R/RdConv2.R:0
@@ -6766,7 +6770,8 @@ msgid "you must specify '%s', '%s' or '%s' argument"
 msgstr "specificare 'package', 'dir' o 'file'"
 
 #. R/QC.R: stop("you must specify 'package' or 'dir'")
-#: R/QC.R:0
+#. R/makeLazyLoad.R: stop("you must specify 'package' or 'dir'")
+#: R/QC.R:0 R/makeLazyLoad.R:0
 msgid "you must specify 'package' or 'dir'"
 msgstr "specificare 'package' o 'dir'"
 
@@ -8107,9 +8112,6 @@ msgstr[1] "impossibile creare '%s'"
 
 #~ msgid "cannot copy '%s' to '%s'"
 #~ msgstr "impossibile copiare '%s' su '%s'"
-
-#~ msgid "directory '%s' does not exist"
-#~ msgstr "la directory '%s' non esiste"
 
 #~ msgid "file '%s' does not exist"
 #~ msgstr "il file '%s' non esiste"

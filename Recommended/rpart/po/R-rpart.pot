@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: rpart 4.1-15\n"
-"POT-Creation-Date: 2019-04-30 08:05\n"
+"POT-Creation-Date: 2021-03-18 19:56\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -141,13 +141,6 @@ msgstr ""
 #. R/xpred.rpart.R: stop("Invalid fit object")
 
 msgid "Invalid fit object"
-msgstr ""
-
-
-#: R/rpart.R: 0
-#. R/rpart.R: stop("Invalid method")
-
-msgid "Invalid method"
 msgstr ""
 
 
@@ -513,6 +506,13 @@ msgstr ""
 #. R/text.rpart.R: stop("fit is not a tree, just a root")
 
 msgid "fit is not a tree, just a root"
+msgstr ""
+
+
+#: R/rpart.R: 0
+#. R/rpart.R: stop("invalid method")
+
+msgid "invalid method"
 msgstr ""
 
 

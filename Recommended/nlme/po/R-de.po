@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.15.2 / nlme-3.1-105\n"
 "Report-Msgid-Bugs-To: bugs@r-project.org\n"
-"POT-Creation-Date: 2019-04-30 08:05\n"
+"POT-Creation-Date: 2021-03-18 19:38\n"
 "PO-Revision-Date: 2012-10-11 13:10+0200\n"
 "Last-Translator: Chris Leick <c.leick@vollbio.de>\n"
 "Language-Team: German <debian-l10n-german@lists.debian.org>\n"
@@ -29,10 +29,12 @@ msgid "%s and %s must have the same group levels"
 msgstr "%s und %s müssen die gleichen Gruppenstufen haben"
 
 #. R/varFunc.R: gettextf("%s can have at most two components", nam)
+#. R/varFunc.R: gettextf("%s can have at most two components", nam)
 #: R/varFunc.R:0
 msgid "%s can have at most two components"
 msgstr "%s kann höchstens zwei Komponenten haben."
 
+#. R/varFunc.R: gettextf("%s can only be a list or numeric", nam)
 #. R/varFunc.R: gettextf("%s can only be a list or numeric", nam)
 #: R/varFunc.R:0
 msgid "%s can only be a list or numeric"
@@ -41,6 +43,12 @@ msgstr "%s kann nur eine Liste oder numerisch sein."
 #. R/varFunc.R: gettextf("%s can only have names \"const\" and \"power\"", nam)
 #: R/varFunc.R:0
 msgid "%s can only have names \"const\" and \"power\""
+msgstr "%s kann nur die Namen \"const\" und \"power\" haben."
+
+#. R/varFunc.R: gettextf("%s can only have names \"const\" and \"prop\"", nam)
+#: R/varFunc.R:0
+#, fuzzy
+msgid "%s can only have names \"const\" and \"prop\""
 msgstr "%s kann nur die Namen \"const\" und \"power\" haben."
 
 #. R/lme.R: gettextf("%s is not a valid effect name", sQuote(reName))
@@ -56,6 +64,12 @@ msgstr "%s ist kein gültiges Objekt für \"pdMat\"."
 #. R/varFunc.R: gettextf("%s must have group names in 'varConstPower'", nam)
 #: R/varFunc.R:0
 msgid "%s must have group names in 'varConstPower'"
+msgstr "%s muss Gruppennamen in 'varConstPower' haben."
+
+#. R/varFunc.R: gettextf("%s must have group names in 'varConstProp'", nam)
+#: R/varFunc.R:0
+#, fuzzy
+msgid "%s must have group names in 'varConstProp'"
 msgstr "%s muss Gruppennamen in 'varConstPower' haben."
 
 #. R/modelStruct.R: gettextf("%s parameters:", i, domain = "R-nlme")
@@ -305,7 +319,6 @@ msgstr ""
 #. R/varFunc.R: gettextf("'%s' argument must have a covariate", "value")
 #. R/varFunc.R: gettextf("'%s' argument must have a covariate", "form")
 #. R/varFunc.R: gettextf("'%s' argument must have a covariate", "form")
-#. R/varFunc.R: gettextf("'%s' argument must have a covariate", "form")
 #: R/varFunc.R:0
 #, fuzzy
 msgid "'%s' argument must have a covariate"
@@ -392,6 +405,12 @@ msgstr ""
 #: R/lmList.R:0
 msgid "'form' must be a formula"
 msgstr "'form' muss eine Formel sein"
+
+#. R/varFunc.R: stop("'form' must have a covariate")
+#. R/varFunc.R: stop("'form' must have a covariate")
+#: R/varFunc.R:0
+msgid "'form' must have a covariate"
+msgstr "'form' muss eine Kovariate haben."
 
 #. R/lme.R: warning("'lme.lmList()' function will redefine 'data' argument")
 #: R/lme.R:0
@@ -593,7 +612,7 @@ msgstr ""
 #. R/lmList.R: gettext("   Data: ", domain = "R-nlme")
 #. R/lmList.R: gettext("   Data: ", domain = "R-nlme")
 #. R/lme.R: gettext("  Data: ", domain = "R-nlme")
-#. R/lme.R: gettext(" Data: ", domain = "R-nlme")
+#. R/lme.R: gettext("  Data: ", domain = "R-nlme")
 #: R/gls.R:0 R/lmList.R:0 R/lme.R:0
 msgid "Data:"
 msgstr ""
@@ -927,6 +946,11 @@ msgstr ""
 msgid "Quantiles of standard normal"
 msgstr ""
 
+#. R/corStruct.R: gettext("Uninitialized correlation structure of class corCompSymm\n", doman = "R-nlme")
+#: R/corStruct.R:0
+msgid "R-nlme"
+msgstr ""
+
 #. R/lmList.R: gettext("Random effects", domain = "R-nlme")
 #. R/lme.R: gettext("Random effects", domain = "R-nlme")
 #: R/lmList.R:0 R/lme.R:0
@@ -1040,6 +1064,11 @@ msgstr ""
 #. R/corStruct.R: gettextf("Uninitialized correlation structure of class %s", dQuote("corNatural"),     domain = "R-nlme")
 #: R/corStruct.R:0
 msgid "Uninitialized correlation structure of class %s"
+msgstr ""
+
+#. R/corStruct.R: gettext("Uninitialized correlation structure of class corCompSymm\n", doman = "R-nlme")
+#: R/corStruct.R:0
+msgid "Uninitialized correlation structure of class corCompSymm"
 msgstr ""
 
 #. R/pdMat.R: gettextf("Uninitialized positive definite matrix structure of class %s.", dQuote(class(x)[1]),     domain = "R-nlme")
@@ -1256,6 +1285,7 @@ msgstr "'form' kann nicht geändert werden."
 #. R/varFunc.R: stop("cannot change coefficients before initialization or when all parameters are fixed")
 #. R/varFunc.R: stop("cannot change coefficients before initialization or when all parameters are fixed")
 #. R/varFunc.R: stop("cannot change coefficients before initialization or when all parameters are fixed")
+#. R/varFunc.R: stop("cannot change coefficients before initialization or when all parameters are fixed")
 #: R/varFunc.R:0
 msgid ""
 "cannot change coefficients before initialization or when all parameters are "
@@ -1303,6 +1333,7 @@ msgstr ""
 
 #. R/corStruct.R: stop("cannot change the length of the parameter after initialization")
 #. R/pdMat.R: stop("cannot change the length of the parameter after initialization")
+#. R/varFunc.R: stop("cannot change the length of the parameter after initialization")
 #. R/varFunc.R: stop("cannot change the length of the parameter after initialization")
 #: R/corStruct.R:0 R/pdMat.R:0 R/varFunc.R:0
 msgid "cannot change the length of the parameter after initialization"
@@ -1503,10 +1534,11 @@ msgstr ""
 msgid "computed \"gls\" fit is singular, rank %s"
 msgstr "errechneter \"gls\"-Fit ist singulär, Rang %s"
 
-#. R/varFunc.R: stop("constant in \"varConstPower\" structure must be > 0")
+#. R/varFunc.R: stop("constant in \"varConstProp\" structure must be > 0")
+#. R/varFunc.R: stop("constant in \"varConstProp\" structure must be > 0")
 #: R/varFunc.R:0
 #, fuzzy
-msgid "constant in \"varConstPower\" structure must be > 0"
+msgid "constant in \"varConstProp\" structure must be > 0"
 msgstr "Konstante in \"varConstPower\"-Struktur muss > 0 sein."
 
 #. R/VarCov.R: gettext("correlation matrix", domain = "R-nlme")
@@ -1645,6 +1677,12 @@ msgid ""
 msgstr ""
 "Feste Parameternamen in 'varIdent' müssen eine Teilmenge von Gruppennamen "
 "sein."
+
+#. R/varFunc.R: stop("fixed parameters must have group names")
+#: R/varFunc.R:0
+#, fuzzy
+msgid "fixed parameters must have group names"
+msgstr "Feste Parameter müssen Gruppennamen in 'varExp' haben."
 
 #. R/varFunc.R: gettextf("fixed parameters must have group names in %s function", sQuote("varPower()"))
 #. R/varFunc.R: gettextf("fixed parameters must have group names in %s function", sQuote("Initialize.varPower()"))
@@ -1790,6 +1828,8 @@ msgstr "Anfangswert des Nugget-Anteils muss zwischen 0 und 1 liegen"
 
 #. R/varFunc.R: gettext("initial value should be of length %d", nStratVar)
 #. R/varFunc.R: gettext("initial value should be of length %d", aux)
+#. R/varFunc.R: gettext("initial value should be of length %d", nStratVar)
+#. R/varFunc.R: gettext("initial value should be of length %d", aux)
 #: R/varFunc.R:0
 msgid "initial value should be of length %d"
 msgstr "Startwert sollte Länge %d haben."
@@ -1890,6 +1930,7 @@ msgstr "maximale Anzahl der Iterationen ohne Konvergenz erreicht"
 msgid "maximum number of iterations reached without convergence"
 msgstr "maximale Anzahl der Iterationen ohne Konvergenz erreicht"
 
+#. R/varFunc.R: stop("mismatch between group names and fixed values names")
 #. R/varFunc.R: stop("mismatch between group names and fixed values names")
 #. R/varFunc.R: stop("mismatch between group names and fixed values names")
 #. R/varFunc.R: stop("mismatch between group names and fixed values names")
@@ -2061,6 +2102,11 @@ msgstr "kein Modell-Variogramm mit 'showModel = TRUE' verfügbar"
 msgid "nonexistent group in 'newdata'"
 msgstr "nicht existierende Gruppe in 'newdata'"
 
+#. R/varFunc.R: stop("nonexistent group names for initial values")
+#: R/varFunc.R:0
+msgid "nonexistent group names for initial values"
+msgstr "Nicht existierende Gruppenamen für Startwerte"
+
 #. R/varFunc.R: gettextf("nonexistent group names for initial values in %s function", sQuote("varIdent()"))
 #. R/varFunc.R: gettextf("nonexistent group names for initial values in %s function", sQuote("varPower()"))
 #. R/varFunc.R: gettextf("nonexistent group names for initial values in %s function", sQuote("varExp()"))
@@ -2086,6 +2132,18 @@ msgid ""
 "not (yet) implemented.  Contributions are welcome; use intervals() instead "
 "(for now)"
 msgstr ""
+
+#. R/VarCov.R: stop("not implemented for correlation structures without a grouping factor")
+#: R/VarCov.R:0
+#, fuzzy
+msgid "not implemented for correlation structures without a grouping factor"
+msgstr "inkompatible Längen für 'random' und Gruppierungsfaktoren"
+
+#. R/VarCov.R: stop("not implemented for uncorrelated errors")
+#: R/VarCov.R:0
+#, fuzzy
+msgid "not implemented for uncorrelated errors"
+msgstr "nicht für \"nlme\"-Objekte implementiert"
 
 #. R/nlme.R: gettextf("number of columns in starting values for random component at level %s should be %d",     namGrp[i], rlength[i])
 #: R/nlme.R:0
@@ -2475,9 +2533,6 @@ msgstr[1] "Terme %s nicht übereinstimmend"
 #~ msgid "incompatible lengths for 'random' and grouping factors"
 #~ msgstr "inkompatible Längen für 'random' und Gruppierungsfaktoren"
 
-#~ msgid "nonexistent group names for initial values"
-#~ msgstr "Nicht existierende Gruppenamen für Startwerte"
-
 #, fuzzy
 #~ msgid "nonexistent group names for initial values in %s"
 #~ msgstr "Nicht existierende Gruppenamen für Startwerte"
@@ -2563,15 +2618,9 @@ msgstr[1] "Terme %s nicht übereinstimmend"
 #~ msgid "'form' not consistent with 'nam'"
 #~ msgstr "'form' nicht konsistent mit 'nam'"
 
-#~ msgid "'form' must have a covariate"
-#~ msgstr "'form' muss eine Kovariate haben."
-
 #, fuzzy
 #~ msgid "'%d' argument must be between %d and %d"
 #~ msgstr "'Terms' müssen zwischen 1 und %d liegen."
-
-#~ msgid "not implemented for \"nlme\" objects"
-#~ msgstr "nicht für \"nlme\"-Objekte implementiert"
 
 #~ msgid ""
 #~ "unique values of the covariate for \"corNatural\" objects must be a "
@@ -2856,9 +2905,6 @@ msgstr[1] "Terme %s nicht übereinstimmend"
 
 #~ msgid "fixed parameters must have group names in 'varPower'"
 #~ msgstr "Feste Parameter müssen Gruppennamen in 'varPower' haben."
-
-#~ msgid "fixed parameters must have group names in 'varExp'"
-#~ msgstr "Feste Parameter müssen Gruppennamen in 'varExp' haben."
 
 #, fuzzy
 #~ msgid "'object' argument is not an object of class \"gls\""
