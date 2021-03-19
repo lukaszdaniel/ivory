@@ -89,12 +89,6 @@ namespace CXXR
             m_attrib->incrementRefCount();
     }
 
-    RObject *RObject::clone(bool deep) const
-    {
-        std::cerr << "clone() not yet implemented for this type.\n";
-        abort();
-    }
-
     void RObject::cloneAttributes(const RObject &source, bool deep)
     {
         m_attrib = RObject::clone(source.m_attrib, deep);

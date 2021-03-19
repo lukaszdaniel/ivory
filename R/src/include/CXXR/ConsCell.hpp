@@ -312,7 +312,14 @@ namespace CXXR
 
         /** @brief Copy constructor.
          *
-         * @param pattern ConsCell to be copied.
+         * @param pattern ConsCell to be copied.  Beware that if this
+         *          ConsCell or any of its successors have unclonable
+         *          'car' objects, they will be shared between \a
+         *          pattern and the created object.  This is
+         *          necessarily prejudicial to the constness of the \a
+         *          pattern parameter.
+         *
+         * @param deep Indicator whether to perform deep or shallow copy.
          */
         ConsCell(const ConsCell &pattern, bool deep);
 
@@ -321,11 +328,20 @@ namespace CXXR
          * Copies the node without copying its tail.  Used in
          * implementing the PairList copy constructor proper.
          *
-         * @param pattern ConsCell to be copied.
+         * @param pattern ConsCell to be copied.  Beware that if this
+         *          ConsCell or any of its successors have unclonable
+         *          'car' objects, they will be shared between \a
+         *          pattern and the created object.  This is
+         *          necessarily prejudicial to the constness of the \a
+         *          pattern parameter.
          *
          * @param deep Indicator whether to perform deep or shallow copy.
+         *
+         * @param dummy This parameter is used simply to provide the
+         *          constructor with a distinct signature.  Its value
+         *          is ignored.
          */
-        ConsCell(const ConsCell &pattern, bool deep, int);
+        ConsCell(const ConsCell &pattern, bool deep, int dummy);
 
         /**
          * Declared protected to ensure that ConsCell objects are

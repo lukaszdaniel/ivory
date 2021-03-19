@@ -164,15 +164,6 @@ Triplet's translation table:
 constexpr int REFCNTMAX = ((1 << NAMED_BITS) - 1);
 #endif
 
-// Remove this once cloning is fully rolled out:
-namespace CXXR
-{
-    class RObject;
-}
-
-CXXR::RObject *duplicate1(CXXR::RObject *s, bool deep);
-CXXR::RObject *duplicate_child(CXXR::RObject *s, bool deep);
-
 namespace CXXR
 {
     class PairList;
@@ -622,7 +613,10 @@ namespace CXXR
          *          type facility to return a pointer to the type of object
          *          being cloned.
          */
-        virtual RObject *clone(bool deep) const;
+        virtual RObject *clone(bool deep) const
+        {
+            return nullptr;
+        }
 
         /** @brief Return a pointer to a copy of an object or the object itself
          *          if it isn't cloneable.
@@ -643,41 +637,24 @@ namespace CXXR
             return pattern ? pattern->clone(deep) : nullptr;
         }
 
-        /** @brief Temporary interface to duplicate1().
+        /** @brief Return a pointer to a copy of an object, or failing
+         * that to the object itself.
          *
          * @param T RObject or a type derived from RObject.
          *
-         * @param pattern Pointer to object to be duplicated using
-         * duplicate1().
+         * @param pattern Either a null pointer or a pointer to the
+         *          object to be cloned.
          *
          * @param deep Indicator whether to perform deep or shallow copy.
          *
-         * @note To be removed once copy constructors and clone() are
-         * fully rolled out.
+         * @return Pointer to a clone of \a pattern, or \a pattern
+         * itself if \a pattern cannot be cloned or is a null pointer.
+         * On return, the clone will not normally have yet been
+         * exposed to the garbage collector; consequently, the calling
+         * code should arrange for this to happen.
          */
         template <class T>
-        static T *dup2(const T *pattern, bool deep)
-        {
-            return static_cast<T *>(duplicate1(const_cast<T *>(pattern), deep));
-        }
-
-        /** @brief Temporary interface to duplicate_child().
-         *
-         * @param T RObject or a type derived from RObject.
-         *
-         * @param pattern Pointer to object to be duplicated using
-         * duplicate_child().
-         *
-         * @param deep Indicator whether to perform deep or shallow copy.
-         *
-         * @note To be removed once copy constructors and clone() are
-         * fully rolled out.
-         */
-        template <class T>
-        static T *dup_child2(const T *pattern, bool deep)
-        {
-            return static_cast<T *>(duplicate_child(const_cast<T *>(pattern), deep));
-        }
+        static T *cloneElseOrig(T *pattern, bool deep);
 
         void xfix_refcnt(RObject *old, RObject *new_);
         void xfix_binding_refcnt(RObject *old, RObject *new_);
@@ -708,9 +685,19 @@ namespace CXXR
         virtual ~RObject();
     };
 
-    /* There is much more in Rinternals.h, including function versions
-     * of the Promise and Hashing groups.
-     */
+    template <class T>
+    T *RObject::cloneElseOrig(T *pattern, bool deep)
+    {
+        if (!pattern)
+            return nullptr;
+        if (deep)
+        {
+            T *t = static_cast<T *>(pattern->clone(deep));
+            return t ? t : pattern;
+        }
+
+        return pattern;
+    }
 
     /* Vector Heap Structure */
     // struct alignas(std::max(alignof(double), alignof(RObject*))) VECREC {};

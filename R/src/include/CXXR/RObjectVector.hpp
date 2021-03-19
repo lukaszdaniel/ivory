@@ -150,6 +150,21 @@ namespace CXXR
          * @param deep Indicator whether to perform deep or shallow copy.
          */
         RObjectVector(const RObjectVector<T, ST> &pattern, bool deep);
+
+        /** @brief Copy constructor.
+         *
+         * @param pattern RObjectVector to be copied.  Beware that if
+         *          any of the elements of \a pattern are unclonable,
+         *          they will be shared between \a pattern and the
+         *          created object.  This is necessarily prejudicial
+         *          to the constness of the \a pattern parameter.
+         *
+         * @param deep Indicator whether to perform deep or shallow copy.
+         *
+         * @param dummy This parameter is used simply to provide the
+         *          constructor with a distinct signature.  Its value
+         *          is ignored.
+         */
         RObjectVector(const RObjectVector<T, ST> &pattern, bool deep, int dummy);
 
         /** @brief Element access.
@@ -243,7 +258,7 @@ namespace CXXR
 #endif
         for (R_xlen_t i = 0; i < sz; ++i)
         {
-            m_data[i] = dup_child2(pattern.m_data[i], deep);
+            m_data[i] = cloneElseOrig(pattern.m_data[i], deep);
             if (m_data[i])
                 m_data[i]->incrementRefCount();
         }
@@ -269,7 +284,7 @@ namespace CXXR
     template <typename T, SEXPTYPE ST>
     void RObjectVector<T, ST>::visitChildren(const_visitor *v) const
     {
-        RObject::visitChildren(v);
+        VectorBase::visitChildren(v);
         for (R_xlen_t i = 0; i < size(); ++i)
         {
             const T *ptr = (*this)[i];

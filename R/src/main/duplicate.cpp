@@ -41,35 +41,12 @@
 #include <Localization.h>
 #include <Defn.h>
 
-#include <R_ext/RS.h> /* S4 bit */
-
 #include "duplicate.h"
 
 using namespace R;
 using namespace CXXR;
 
 /*  duplicate  -  object duplication  */
-
-/*  Because we try to maintain the illusion of call by
- *  value, we often need to duplicate entire data
- *  objects.  There are a couple of points to note.
- *  First, duplication of list-like objects is done
- *  iteratively to prevent growth of the pointer
- *  protection stack, and second, the duplication of
- *  promises requires that the promises be forced and
- *  the value duplicated.  */
-
-/* For memory profiling.  */
-/* We want a count of calls to duplicate from outside
-   which requires a wrapper function.
-
-   The original duplicate() function is now duplicate1().
-
-   I don't see how to make the wrapper go away when R_PROFILING
-   is not defined, because we still need to be able to
-   optionally rename duplicate() as Rf_duplicate().
-*/
-/*static*/ SEXP duplicate1(SEXP, bool deep);
 
 #ifdef R_PROFILING
 static unsigned long duplicate_counter = static_cast<unsigned long>(-1);
@@ -89,13 +66,16 @@ HIDDEN void R::reset_duplicate_counter(void)
 template <bool DEEP = true>
 SEXP CXXR_deep_duplicate(SEXP s)
 {
+	if (!s)
+		return nullptr;
 	GCRoot<> srt(s);
-	SEXP t;
 
 #ifdef R_PROFILING
-	duplicate_counter++;
+	++duplicate_counter;
 #endif
-	t = duplicate1(s, DEEP);
+	SEXP t = RObject::clone(s, DEEP);
+	if (!t)
+		return s;
 #ifdef R_MEMORY_PROFILING
 	if (RTRACE(s) && !(TYPEOF(s) == CLOSXP || TYPEOF(s) == BUILTINSXP ||
 					   TYPEOF(s) == SPECIALSXP || TYPEOF(s) == PROMSXP ||
@@ -105,8 +85,7 @@ SEXP CXXR_deep_duplicate(SEXP s)
 		SET_RTRACE(t, 1);
 	}
 #endif
-	if (t)
-		t->expose();
+	t->expose();
 	return t;
 }
 
@@ -154,16 +133,6 @@ SEXP Rf_lazy_duplicate(SEXP s)
 		UNIMPLEMENTED_TYPE("lazy_duplicate()", s);
 	}
 	return s;
-}
-
-/*static*/ SEXP duplicate_child(SEXP s, bool deep)
-{
-	if (deep)
-	{
-		return duplicate1(s, deep);
-	}
-
-	return Rf_lazy_duplicate(s);
 }
 
 /*****************/
@@ -218,46 +187,6 @@ Rboolean R_cycle_detected(SEXP s, SEXP child)
 				return TRUE;
 	}
 	return FALSE;
-}
-
-/*static*/ SEXP duplicate1(SEXP s, bool deep)
-{
-	SEXP t = nullptr;
-	if (!s)
-		return nullptr;
-
-	switch (TYPEOF(s))
-	{
-	case NILSXP:
-	case SYMSXP:
-	case ENVSXP:
-	case SPECIALSXP:
-	case BUILTINSXP:
-	case EXTPTRSXP:
-	case BCODESXP:
-	case WEAKREFSXP:
-	case PROMSXP:
-	case CHARSXP:
-		return s;
-	case CLOSXP:
-	case LISTSXP:
-	case LANGSXP:
-	case DOTSXP:
-	case EXPRSXP:
-	case VECSXP:
-	case LGLSXP:
-	case INTSXP:
-	case REALSXP:
-	case CPLXSXP:
-	case RAWSXP:
-	case STRSXP:
-	case S4SXP:
-		return s->clone(deep);
-	default:
-		UNIMPLEMENTED_TYPE("duplicate()", s);
-	}
-
-	return t;
 }
 
 void Rf_copyVector(SEXP s, SEXP t)
