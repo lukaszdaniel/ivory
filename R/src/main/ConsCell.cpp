@@ -75,7 +75,7 @@ namespace CXXR
     }
 
     ConsCell::ConsCell(const ConsCell &pattern, bool deep)
-        : RObject(pattern, deep), m_car(cloneElseOrig(const_cast<RObject *>(pattern.car()), deep)),
+        : RObject(pattern, deep), m_car(pattern.m_car, deep),
           m_tail(clone(pattern.tail(), deep)), m_tag(pattern.tag()), m_missing(0)
     {
         if (m_car)
@@ -87,7 +87,7 @@ namespace CXXR
     }
 
     ConsCell::ConsCell(const ConsCell &pattern, bool deep, int)
-        : RObject(pattern, deep), m_car(cloneElseOrig(const_cast<RObject *>(pattern.car()), deep)), m_tail(nullptr),
+        : RObject(pattern, deep), m_car(pattern.m_car, deep), m_tail(nullptr),
           m_tag(pattern.tag()), m_missing(0)
     {
         if (m_car)

@@ -42,7 +42,7 @@ src/include/Rdefines.h
 src/include/Rinlinedfuns.h
 src/include/Rinterface.h
 src/include/CXXR/FixedVector.hpp
-src/include/CXXR/RObjectVector.hpp
+src/include/CXXR/HandleVector.hpp
 src/include/CXXR/VectorBase.hpp
 src/main/agrep.cpp
 src/main/altclasses.cpp

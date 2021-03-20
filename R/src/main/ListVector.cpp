@@ -48,7 +48,7 @@ namespace CXXR
     } // namespace ForceNonInline
 
     ListVector::ListVector(ExpressionVector &ev)
-        : RObjectVector<RObject, VECSXP>(ev.size())
+        : HandleVector<RObject, VECSXP>(ev.size())
     {
         // The following results in unnecessary invocations of
         // propagateAge() on the nodes pointed to.

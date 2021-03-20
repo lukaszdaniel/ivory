@@ -17,13 +17,13 @@
  *  http://www.r-project.org/Licenses/
  */
 
-/** @file RObjectVector.hpp
+/** @file HandleVector.hpp
  *
- * @brief Templated class CXXR::RObjectVector.
+ * @brief Templated class CXXR::HandleVector.
  */
 
-#ifndef ROBJECTVECTOR_HPP
-#define ROBJECTVECTOR_HPP
+#ifndef HANDLEVECTOR_HPP
+#define HANDLEVECTOR_HPP
 
 #include <algorithm>
 
@@ -36,32 +36,34 @@
 
 namespace CXXR
 {
-    /** @brief Vector of pointers to RObject.
+    /** @brief Vector of RObject::Handle smart pointers.
      *
      * This is a templated class to represent a vector whose elements
-     * are pointers to objects of some type derived from RObject.
-     * Copying the vector copies the objects pointed to.
+     * are are smart pointers of type \c RObject::Handle<T>.  As
+     * explained in the documentation for \c RObject::Handle, copying
+     * the vector will copy the objects pointed to, provided that they
+     * are clonable.
      *
      * @param T This should be RObject or a type (publicly) derived
-     * from RObject.  The vector elements will be of type \a T*.
+     * from RObject.  The vector elements will be of type \c Handle<T>.
      *
      * @param ST The required ::SEXPTYPE of the vector.
      */
     template <typename T, SEXPTYPE ST>
-    class RObjectVector : public VectorBase
+    class HandleVector : public VectorBase
     {
     public:
-        /** @brief Proxy object for an element of an RObjectVector<T, ST>.
+        /** @brief Proxy object for an element of an HandleVector<T, ST>.
          *
          * Objects of this class are used to allow the elements of an
-         * RObjectVector<T, ST> to be examined and modified using
+         * HandleVector<T, ST> to be examined and modified using
          * the same syntax as would be used for accessing an array of
          * \a T*, whilst nevertheless enforcing the write barrier.
          * See Item 30 of Scott Meyers's 'More Effective C++' for a
          * general discussion of proxy objects, but see the
          * <a href="http://www.aristeia.com/BookErrata/mec++-errata_frames.html">errata</a>.
          * (It may look complicated, but an optimising compiler should
-         * be able to distil an invocation of RObjectVector<T,
+         * be able to distil an invocation of HandleVector<T,
          * ST>::operator[] into very few instructions.)
          */
         class ElementProxy
@@ -91,7 +93,7 @@ namespace CXXR
             ElementProxy &operator=(T *s)
             {
                 m_ev->propagateAge(s);
-                *m_it = s;
+                (*m_it).retarget(s);
                 return *this;
             }
 
@@ -105,10 +107,10 @@ namespace CXXR
             }
 
         private:
-            RObjectVector<T, ST> *m_ev;
-            typename std::vector<T *, Allocator<T *>>::iterator m_it;
+            HandleVector<T, ST> *m_ev;
+            typename std::vector<Handle<T>, Allocator<Handle<T>>>::iterator m_it;
 
-            ElementProxy(RObjectVector<T, ST> *ev, R_xlen_t index)
+            ElementProxy(HandleVector<T, ST> *ev, R_xlen_t index)
                 : m_ev(ev), m_it(m_ev->m_data.begin() + index)
             {
             }
@@ -116,7 +118,7 @@ namespace CXXR
             // Not implemented:
             ElementProxy(const ElementProxy &);
 
-            friend class RObjectVector<T, ST>;
+            friend class HandleVector<T, ST>;
         };
 
         /** @brief Create a vector.
@@ -127,9 +129,9 @@ namespace CXXR
          *          permissible.
          *
          * @param init Initial value for the destination of each
-         *          \a T* in the RObjectVector.
+         *          \a T* in the HandleVector.
          */
-        explicit RObjectVector(R_xlen_t sz, T *init = nullptr)
+        explicit HandleVector(R_xlen_t sz, Handle<T> init = Handle<T>())
             : VectorBase(ST, sz), m_data(sz, init)
         {
             if (sz > R_xlen_t(R_SIZE_T_MAX / sizeof(RObject *)))
@@ -141,7 +143,7 @@ namespace CXXR
 
         /** @brief Copy constructor.
          *
-         * @param pattern RObjectVector to be copied.  Beware that if
+         * @param pattern HandleVector to be copied.  Beware that if
          *          any of the elements of \a pattern are unclonable,
          *          they will be shared between \a pattern and the
          *          created object.  This is necessarily prejudicial
@@ -149,11 +151,24 @@ namespace CXXR
          *
          * @param deep Indicator whether to perform deep or shallow copy.
          */
-        RObjectVector(const RObjectVector<T, ST> &pattern, bool deep);
+        HandleVector(const HandleVector<T, ST> &pattern, bool deep)
+            : VectorBase(pattern, deep), m_data(pattern.size())
+        {
+            R_xlen_t sz = size();
+#ifdef R_MEMORY_PROFILING
+            MemoryBank::R_ReportAllocation(convert2VEC<T>(sz) * sizeof(VECREC));
+#endif
+            for (R_xlen_t i = 0; i < sz; ++i)
+            {
+                (m_data[i]).clone(pattern.m_data[i], deep);
+                if (m_data[i])
+                    m_data[i]->incrementRefCount();
+            }
+        }
 
         /** @brief Copy constructor.
          *
-         * @param pattern RObjectVector to be copied.  Beware that if
+         * @param pattern HandleVector to be copied.  Beware that if
          *          any of the elements of \a pattern are unclonable,
          *          they will be shared between \a pattern and the
          *          created object.  This is necessarily prejudicial
@@ -165,7 +180,15 @@ namespace CXXR
          *          constructor with a distinct signature.  Its value
          *          is ignored.
          */
-        RObjectVector(const RObjectVector<T, ST> &pattern, bool deep, int dummy);
+        HandleVector(const HandleVector<T, ST> &pattern, bool deep, int dummy)
+            : VectorBase(pattern, deep), m_data(pattern.size())
+        {
+            R_xlen_t sz = size();
+#ifdef R_MEMORY_PROFILING
+            MemoryBank::R_ReportAllocation(convert2VEC<T>(sz) * sizeof(VECREC));
+#endif
+            std::copy(pattern.m_data.begin(), pattern.m_data.end(), m_data.begin());
+        }
 
         /** @brief Element access.
          *
@@ -201,7 +224,7 @@ namespace CXXR
          */
         T **dataPtr()
         {
-            return &m_data[0];
+            return reinterpret_cast<T **>(&m_data[0]);
         }
 
         virtual void *data() override
@@ -219,7 +242,7 @@ namespace CXXR
          * @return the name by which this type is known in R.
          *
          * @note This function is declared but not defined as part of
-         * the RObjectVector template.  It must be defined as a
+         * the HandleVector template.  It must be defined as a
          * specialization for each instantiation of the template for
          * which it or typeName() is used.
          */
@@ -233,56 +256,29 @@ namespace CXXR
 
     protected:
         /**
-         * Declared protected to ensure that RObjectVector objects are
+         * Declared protected to ensure that HandleVector objects are
          * allocated only using 'new'.
          */
-        ~RObjectVector() {}
+        ~HandleVector() {}
 
     private:
-        std::vector<T *, Allocator<T *>> m_data;
+        std::vector<Handle<T>, Allocator<Handle<T>>> m_data;
 
         // Not implemented.  Declared to prevent
         // compiler-generated versions:
-        RObjectVector &operator=(const RObjectVector &);
+        HandleVector &operator=(const HandleVector &);
 
         friend class ElementProxy;
     };
 
     template <typename T, SEXPTYPE ST>
-    RObjectVector<T, ST>::RObjectVector(const RObjectVector<T, ST> &pattern, bool deep)
-        : VectorBase(pattern, deep), m_data(pattern.size())
+    const char *HandleVector<T, ST>::typeName() const
     {
-        R_xlen_t sz = size();
-#ifdef R_MEMORY_PROFILING
-        MemoryBank::R_ReportAllocation(convert2VEC<T>(sz) * sizeof(VECREC));
-#endif
-        for (R_xlen_t i = 0; i < sz; ++i)
-        {
-            m_data[i] = cloneElseOrig(pattern.m_data[i], deep);
-            if (m_data[i])
-                m_data[i]->incrementRefCount();
-        }
+        return HandleVector<T, ST>::staticTypeName();
     }
 
     template <typename T, SEXPTYPE ST>
-    RObjectVector<T, ST>::RObjectVector(const RObjectVector<T, ST> &pattern, bool deep, int dummy)
-        : VectorBase(pattern, deep), m_data(pattern.size())
-    {
-        R_xlen_t sz = size();
-#ifdef R_MEMORY_PROFILING
-        MemoryBank::R_ReportAllocation(convert2VEC<T>(sz) * sizeof(VECREC));
-#endif
-        std::copy(pattern.m_data.begin(), pattern.m_data.end(), m_data.begin());
-    }
-
-    template <typename T, SEXPTYPE ST>
-    const char *RObjectVector<T, ST>::typeName() const
-    {
-        return RObjectVector<T, ST>::staticTypeName();
-    }
-
-    template <typename T, SEXPTYPE ST>
-    void RObjectVector<T, ST>::visitChildren(const_visitor *v) const
+    void HandleVector<T, ST>::visitChildren(const_visitor *v) const
     {
         VectorBase::visitChildren(v);
         for (R_xlen_t i = 0; i < size(); ++i)
@@ -294,4 +290,4 @@ namespace CXXR
     }
 } // namespace CXXR
 
-#endif // ROBJECTVECTOR_HPP
+#endif // HANDLEVECTOR_HPP

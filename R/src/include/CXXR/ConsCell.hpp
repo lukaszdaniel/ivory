@@ -195,13 +195,13 @@ namespace CXXR
                 return;
 
             xfix_binding_refcnt(m_car, cr);
-            m_car = cr;
+            m_car.retarget(cr);
             propagateAge(m_car);
         }
 
         void clearCar()
         {
-            m_car = nullptr;
+            m_car.retarget(nullptr);
         }
 
         /** @brief Set the 'tag' value.
@@ -315,9 +315,7 @@ namespace CXXR
          * @param pattern ConsCell to be copied.  Beware that if this
          *          ConsCell or any of its successors have unclonable
          *          'car' objects, they will be shared between \a
-         *          pattern and the created object.  This is
-         *          necessarily prejudicial to the constness of the \a
-         *          pattern parameter.
+         *          pattern and the created object.
          *
          * @param deep Indicator whether to perform deep or shallow copy.
          */
@@ -331,9 +329,7 @@ namespace CXXR
          * @param pattern ConsCell to be copied.  Beware that if this
          *          ConsCell or any of its successors have unclonable
          *          'car' objects, they will be shared between \a
-         *          pattern and the created object.  This is
-         *          necessarily prejudicial to the constness of the \a
-         *          pattern parameter.
+         *          pattern and the created object.
          *
          * @param deep Indicator whether to perform deep or shallow copy.
          *
@@ -365,7 +361,7 @@ namespace CXXR
 
     private:
         friend class PairList;
-        RObject *m_car;
+        Handle<> m_car;
         PairList *m_tail;
         RObject *m_tag;
 

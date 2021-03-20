@@ -38,7 +38,7 @@
 #define EXPRESSIONVECTOR_HPP
 
 #include <CXXR/VectorBase.hpp>
-#include <CXXR/RObjectVector.hpp>
+#include <CXXR/HandleVector.hpp>
 #include <CXXR/SEXP_downcast.hpp>
 
 namespace CXXR
@@ -46,15 +46,21 @@ namespace CXXR
     class ListVector;
 
     template <>
-    inline const char *RObjectVector<RObject, EXPRSXP>::staticTypeName()
+    inline const char *HandleVector<RObject, EXPRSXP>::staticTypeName()
     {
         return "expression";
     }
 
-    /** @brief Vector of language objects, representing an expression.
-     * @todo Replace the type parameter RObject* with something stricter.
+    /** @brief Expression vector.
+     *
+     * The vector contains smart pointers of type
+     * RObject::Handle<RObject>, where the intention is that these
+     * pointers should point to language objects.
+     *
+     * @todo Replace the encapsulated pointer type RObject* with something
+     * stricter (but is needs to embrace Symbol as well as Expression).
      */
-    class ExpressionVector : public RObjectVector<RObject, EXPRSXP>
+    class ExpressionVector : public HandleVector<RObject, EXPRSXP>
     {
     public:
         /** @brief Create an ExpressionVector.
@@ -62,23 +68,21 @@ namespace CXXR
          * @param sz Number of elements required.  Zero is permissible.
          */
         explicit ExpressionVector(R_xlen_t sz)
-            : RObjectVector<RObject, EXPRSXP>(sz)
+            : HandleVector<RObject, EXPRSXP>(sz)
         {
         }
 
         /** @brief Copy constructor.
          *
-         * @param pattern ExpressionVector to be copied.  Beware that
-         *          if any of the elements of \a pattern are
-         *          unclonable, they will be shared between \a pattern
-         *          and the created object.  This is necessarily
-         *          prejudicial to the constness of the \a pattern
-         *          parameter.
+         * Copy the ExpressionVector, using the RObject::Handle
+         * copying semantics.
+         *
+         * @param pattern ExpressionVector to be copied.
          *
          * @param deep Indicator whether to perform deep or shallow copy.
          */
         ExpressionVector(const ExpressionVector &pattern, bool deep)
-            : RObjectVector<RObject, EXPRSXP>(pattern, deep)
+            : HandleVector<RObject, EXPRSXP>(pattern, deep)
         {
         }
 
@@ -87,9 +91,12 @@ namespace CXXR
          * @param lv The ListVector to be copied.  The
          *          ExpressionVector created will comprise exactly
          *          the same sequence of pointers to RObject as \a
-         *          lv.  Consequently, the elements of \a lv will be
-         *          shared by the created object; this is why the \a lv
-         *          parameter is not const.
+         *          lv.
+         *
+         * @note The objects pointed to by \a lv are never themselves
+         * copied in creating the ExpressionVector.  This is rather at
+         * variance with the general semantics of HandleVector, and
+         * perhaps ought to be changed.
          *
          * @note Q: Of all the possible coercions to ExpressionVector,
          * why have a constructor to implement this one?  A: Because

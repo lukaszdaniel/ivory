@@ -76,7 +76,7 @@
 #include <CXXR/ComplexVector.hpp>
 
 // Specialized derived classes
-#include <CXXR/RObjectVector.hpp>
+#include <CXXR/HandleVector.hpp>
 #include <CXXR/GCEdge.hpp>
 #include <CXXR/ExpressionVector.hpp>
 #include <CXXR/ListVector.hpp>

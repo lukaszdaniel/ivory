@@ -175,8 +175,8 @@ namespace CXXR
      * garbage collection has been factored out into the base class
      * GCNode, and as CXXR development proceeds other functionality
      * will be factored out into derived classes (corresponding
-     * roughly, but not exactly, to different SEXPTYPEs within CR), or
-     * outside the RObject hierarchy altogether.
+     * roughly, but not exactly, to different ::SEXPTYPE values within
+     * CR), or outside the RObject hierarchy altogether.
      *
      * Eventually this class may end up simply as the home of R
      * attributes.
@@ -205,7 +205,6 @@ namespace CXXR
      * <li>No attribute may have a null value: an attempt to set the
      * value of an attribute to null will result in the removal of the
      * attribute altogether.
-     *
      * </ul>
      * The CR code in attrib.cpp applies further consistency
      * conditions on attributes, but these are not yet enforced via
@@ -221,6 +220,122 @@ namespace CXXR
      */
     class RObject : public GCNode
     {
+    public:
+        /** @brief Smart pointer used to control the copying of RObjects.
+         *
+         * This class encapsulates a T* pointer, where T is derived
+         * from RObject, and is used to manage the copying of
+         * subobjects when an RObject is copied.  For most purposes,
+         * it behaves essentially like a T*.  However, when a Handle
+         * is copied, it checks whether the object, \a x say, that it
+         * points to is clonable.  If it is, then the copied Handle
+         * will point to a clone of \a x ; if not, then the copy will
+         * point to \a x itself.
+         *
+         * @param T RObject or a class publicly derived from RObject.
+         */
+        template <class T = RObject>
+        class Handle
+        {
+        public:
+            /** @brief Primary constructor.
+             *
+             * @param ptr The pointer value to be encapsulated by the
+             *          Handle.
+             */
+            explicit Handle(T *ptr = nullptr)
+                : m_ptr(ptr)
+            {
+            }
+
+            /** @brief Copy constructor.
+             *
+             * @param pattern Handle to be copied.  Suppose \a pattern
+             *          points to an object \a x .  If \a x is clonable
+             *          object, i.e. an object of a class that
+             *          non-trivially implements RObject::clone(),
+             *          then the newly created Handle will point to a
+             *          clone of \a x ; otherwise it will point to \a
+             *          x itself.  If \a pattern encapsulates a null
+             *          pointer, so will the created object.
+             *
+             * @param deep Indicator whether to perform deep or shallow copy.
+             */
+            Handle(const Handle<T> &pattern, bool deep = false);
+
+            /** @brief Assignment operator.
+             *
+             * @param rhs Handle to be assigned.  Suppose \a rhs
+             *          points to an object \a x .  If \a x is clonable,
+             *          then after the assignment the Handle assigned
+             *          to (i.e. \c *this ) will point to a clone of
+             *          \a x ; otherwise it will point to \a x
+             *          itself.  If \a rhs encapsulates a null
+             *          pointer, then after the assignment \c *this
+             *          will also encapsulate a null pointer.
+             *
+             * @return A reference to this Handle.
+             */
+            Handle<T> &operator=(const Handle<T> &rhs)
+            {
+                return clone(rhs, true);
+            }
+
+            Handle<T> &clone(const Handle<T> &pattern, bool deep)
+            {
+                Handle<T> cp(pattern, deep);
+                m_ptr = cp.m_ptr;
+                return *this;
+            }
+
+            const T *operator->() const
+            {
+                return m_ptr;
+            }
+
+            T *operator->()
+            {
+                return m_ptr;
+            }
+
+            /** @brief Extract encapsulated pointer (const form)
+             *
+             * @return The encapsulated pointer as a const pointer.
+             */
+            operator const T *() const
+            {
+                return m_ptr;
+            }
+
+            /** @brief Extract encapsulated pointer
+             *
+             * @return The encapsulated pointer.
+             */
+            operator T *()
+            {
+                return m_ptr;
+            }
+
+            /** @brief Change value of encapsulated pointer.
+             *
+             * @param new_target The required new value of the
+             *          encapsulated pointer.
+             *
+             * @note This function does not itself carry out
+             * write-barrier enforcement: the calling code will
+             * usually need to raise the object pointed to by \a
+             * new_target (if any) to the same generation as the node
+             * incorporating the Handle object.
+             */
+            void retarget(T *new_target)
+            {
+                m_ptr = new_target;
+            }
+
+        private:
+            T *m_ptr;
+        };
+
     private:
         SEXPTYPE m_type : FULL_TYPE_BITS;
         bool m_scalar;
@@ -637,25 +752,6 @@ namespace CXXR
             return pattern ? pattern->clone(deep) : nullptr;
         }
 
-        /** @brief Return a pointer to a copy of an object, or failing
-         * that to the object itself.
-         *
-         * @param T RObject or a type derived from RObject.
-         *
-         * @param pattern Either a null pointer or a pointer to the
-         *          object to be cloned.
-         *
-         * @param deep Indicator whether to perform deep or shallow copy.
-         *
-         * @return Pointer to a clone of \a pattern, or \a pattern
-         * itself if \a pattern cannot be cloned or is a null pointer.
-         * On return, the clone will not normally have yet been
-         * exposed to the garbage collector; consequently, the calling
-         * code should arrange for this to happen.
-         */
-        template <class T>
-        static T *cloneElseOrig(T *pattern, bool deep);
-
         void xfix_refcnt(RObject *old, RObject *new_);
         void xfix_binding_refcnt(RObject *old, RObject *new_);
 
@@ -686,17 +782,18 @@ namespace CXXR
     };
 
     template <class T>
-    T *RObject::cloneElseOrig(T *pattern, bool deep)
+    RObject::Handle<T>::Handle(const Handle<T> &pattern, bool deep)
+        : m_ptr(pattern.m_ptr)
     {
-        if (!pattern)
-            return nullptr;
-        if (deep)
+        if (m_ptr)
         {
-            T *t = static_cast<T *>(pattern->clone(deep));
-            return t ? t : pattern;
+            if (deep)
+            {
+                RObject *t = m_ptr->clone(deep);
+                if (t)
+                    m_ptr = static_cast<T *>(t);
+            }
         }
-
-        return pattern;
     }
 
     /* Vector Heap Structure */
@@ -730,7 +827,8 @@ extern "C"
     /** @brief Get object's ::SEXPTYPE.
      *
      * @param x Pointer to CXXR::RObject.
-     * @return ::SEXPTYPE of \a x, or NILSXP if x is a null pointer.
+     *
+     * @return ::SEXPTYPE of \a x, or ::NILSXP if x is a null pointer.
      */
     SEXPTYPE TYPEOF(SEXP x);
 
@@ -807,7 +905,7 @@ extern "C"
      * @param s Pointer to a CXXR::RObject.
      * @return TRUE iff the CXXR::RObject pointed to by \a s is either a null
      *         pointer (i.e. <tt>== R_NilValue</tt> in CXXR), or is a CXXR::RObject
-     *         with SEXPTYPE NILSXP (should not happen in CXXR).
+     *         with SEXPTYPE ::NILSXP (should not happen in CXXR).
      */
     Rboolean Rf_isNull(SEXP s);
 
