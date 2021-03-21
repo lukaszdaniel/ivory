@@ -45,6 +45,7 @@
 #include <CXXR/PairList.hpp>
 #include <Localization.h>
 #include <RContext.h>
+#include <Rinterface.h>
 #include <Defn.h>
 #include <Internal.h>
 #include <cfloat>  /* for DBL_DIG */

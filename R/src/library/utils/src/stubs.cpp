@@ -24,6 +24,7 @@
 #include <CXXR/VectorBase.hpp>
 #include <CXXR/StringVector.hpp>
 #include <CXXR/PairList.hpp>
+#include <R.h>
 #include <Defn.h> /* for checkArity */
 #include <Internal.h>
 #include "localization.h"

@@ -208,7 +208,7 @@ namespace CXXR
         GCRoot<> thisroot(this);
         try
         {
-            m_data = reinterpret_cast<T *>(MemoryBank::allocate(bytes, allocator));
+            m_data = static_cast<T *>(MemoryBank::allocate(bytes, allocator));
         }
         catch (std::bad_alloc &e)
         {

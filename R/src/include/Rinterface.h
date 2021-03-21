@@ -56,9 +56,10 @@ extern void R_RestoreGlobalEnvFromFile(const char *name, Rboolean quiet);
 extern void R_SaveGlobalEnv(void);
 extern void R_SaveGlobalEnvToFile(const char *name);
 extern void R_FlushConsole(void);
-extern void R_ClearerrConsole(void);
+void R_ClearerrConsole(void);
+void R_Busy(int which);
 extern NORET void R_Suicide(const char *s);
-extern char *R_HomeDir(void);
+char *R_HomeDir(void);
 extern int R_DirtyImage;	/* Current image dirty */
 extern const char *R_GUIType;
 extern void R_setupHistory(void);
@@ -75,9 +76,6 @@ NORET void jump_to_toplevel(void);
 void mainloop(void);
 void Rf_onintr(void);
 void onintrNoResume(void);
-#ifndef DEFN_H_
-extern void* R_GlobalContext;    /* Need opaque pointer type for export */
-#endif
 
 void process_site_Renviron(void);
 void process_system_Renviron(void);

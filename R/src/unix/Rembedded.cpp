@@ -23,6 +23,8 @@
 #ifdef HAVE_CONFIG_H
 #include <config.h>
 #endif
+
+#include <Rembedded.h>
 #include <Defn.h>
 
 using namespace R;
@@ -69,7 +71,7 @@ int Rf_initEmbeddedR(int argc, char *argv[])
 void Rf_endEmbeddedR(int fatal)
 {
     R_RunExitFinalizers();
-    CleanEd();
+    R::CleanEd();
     if (!fatal)
         KillAllDevices();
     R_CleanTempDir();

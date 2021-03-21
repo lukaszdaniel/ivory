@@ -14,6 +14,7 @@
 #define R_NO_REMAP
 
 constexpr int MAXNUMPTS = 25000;
+#include <CXXR/RAllocStack.hpp>
 #include <Localization.h>
 /*
  * From u_draw.c
@@ -61,8 +62,8 @@ static bool add_point(double x, double y, pGEDevDesc dd)
 	    error(_("add_point - reached MAXNUMPTS (%d)"),tmp_n);
 	}
 	if (max_points == 0) {
-	    tmp_px = (double *) R_alloc(tmp_n, sizeof(double));
-	    tmp_py = (double *) R_alloc(tmp_n, sizeof(double));
+	    tmp_px = static_cast<double *>(CXXR_alloc(tmp_n, sizeof(double)));
+	    tmp_py = static_cast<double *>(CXXR_alloc(tmp_n, sizeof(double)));
 	} else {
 	    tmp_px = (double *) S_realloc((char *) xpoints,
 					  tmp_n, max_points,

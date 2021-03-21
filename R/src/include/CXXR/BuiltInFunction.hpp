@@ -196,19 +196,19 @@ namespace CXXR
 
 } // namespace CXXR
 
-/** @brief Create a CXXR::BuiltInFunction object.
- *
- * @param offset The required table offset.  (Not
- * range-checked in any way.)
- *
- * @param evaluate true iff this is to be a BUILTINSXP;
- *          otherwise it will be a SPECIALSXP.
- *
- * @return Pointer to the created CXXR::BuiltInFunction object.
- */
 namespace R
 {
-    SEXP mkPRIMSXP(int offset, bool eval);
+    /** @brief Create a CXXR::BuiltInFunction object.
+     *
+     * @param offset The required table offset.  (Not
+     * range-checked in any way.)
+     *
+     * @param evaluate true iff this is to be a BUILTINSXP;
+     *          otherwise it will be a SPECIALSXP.
+     *
+     * @return Pointer to the created CXXR::BuiltInFunction object.
+     */
+    SEXP mkPRIMSXP(int offset, bool evaluate);
 }
 
 #endif /* BUILTINFUNCTION_HPP */

@@ -35,26 +35,10 @@
 
 using namespace CXXR;
 
-/**
- * @brief Create a CXXR::BuiltInFunction object
- * 
- * @param offset offset for the CXXR::BuiltInFunction
- * 
- * @param eval parameter to determine whether CXXR::BuiltInFunction
- *              is a "builtin" or "special"
- * 
- * @return builtin function, either "builtin" or "special"
- * 
- * @note The value produced is cached do avoid the need for GC protection
- *       in cases where a .Primitive is produced by unserializing or
- *       reconstructed after a package has clobbered the value assigned to
- *       a symbol in the base package.
- */
-
-HIDDEN SEXP R::mkPRIMSXP(int offset, bool eval)
+HIDDEN SEXP R::mkPRIMSXP(int offset, bool evaluate)
 {
     SEXP result;
-    SEXPTYPE type = eval ? BUILTINSXP : SPECIALSXP;
+    SEXPTYPE type = evaluate ? BUILTINSXP : SPECIALSXP;
     static SEXP PrimCache = nullptr;
     static int FunTabSize = 0;
 
@@ -75,7 +59,7 @@ HIDDEN SEXP R::mkPRIMSXP(int offset, bool eval)
 
     if (result == R_NilValue)
     {
-        result = new BuiltInFunction(offset, eval);
+        result = new BuiltInFunction(offset, evaluate);
         result->expose();
         SET_VECTOR_ELT(PrimCache, offset, result);
     }
@@ -85,28 +69,11 @@ HIDDEN SEXP R::mkPRIMSXP(int offset, bool eval)
     return result;
 }
 
-/**
- * @brief Create a CXXR::Closure object
- * 
- * @param formals formal arguments to be assigned to the CXXR::Closure
- * 
- * @param body function body to be assigned to the CXXR::Closure
- * 
- * @param rho environment to be assigned to the CXXR::Closure
- * 
- * @return return a closure with formals f, body b, and environment rho
- * 
- * @note This is called by function() {}, where an invalid
- *       body should be impossible. When called from
- *       other places (eg do_asfunction) they
- *       should do this checking in advance.
- */
-
-SEXP R::mkCLOSXP(SEXP formals, SEXP body, SEXP rho)
+SEXP R::mkCLOSXP(SEXP formal_args, SEXP body, SEXP env)
 {
-    GCRoot<const PairList> formalsr(SEXP_downcast<const PairList *>(formals));
+    GCRoot<const PairList> formalsr(SEXP_downcast<const PairList *>(formal_args));
     GCRoot<const RObject> bodyr(body);
-    GCRoot<Environment> rhor(SEXP_downcast<Environment *>(rho));
+    GCRoot<Environment> rhor(SEXP_downcast<Environment *>(env));
 
     switch (TYPEOF(body))
     {
@@ -127,19 +94,9 @@ SEXP R::mkCLOSXP(SEXP formals, SEXP body, SEXP rho)
     return c;
 }
 
-/**
- * @brief Create a CXXR::Symbol object
- * 
- * @param name name of the CXXR::Symbol
- * 
- * @param value value to be assigned
- * 
- * @return symsxp with the string name inserted in the name field
- */
-
 HIDDEN SEXP R::mkSYMSXP(SEXP name, SEXP value)
 {
-    GCRoot<const String> namert(SEXP_downcast<const String *>(name));
+    GCRoot<const CachedString> namert(SEXP_downcast<const CachedString *>(name));
     GCRoot<> valuert(value);
     Symbol *ans = new Symbol(namert, valuert);
     ans->expose();

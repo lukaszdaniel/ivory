@@ -160,6 +160,12 @@ void* GCNode::operator new(size_t bytes)
         ProtectStack::initialize();
     }
 
+    void GCNode::nodeCheck(const GCNode *node)
+    {
+        if (node && node->m_gcgen >= s_num_generations)
+            abort();
+    }
+
     void GCNode::propagateAges()
     {
         for (AgedList::const_iterator it = s_aged_list->begin();

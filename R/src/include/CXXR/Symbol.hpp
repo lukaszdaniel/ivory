@@ -33,7 +33,7 @@
 
 #include <CXXR/RObject.hpp>
 #include <CXXR/BuiltInFunction.hpp>
-#include <CXXR/String.hpp>
+#include <CXXR/CachedString.hpp>
 #include <CXXR/SEXP_downcast.hpp>
 #include <R_ext/Boolean.h>
 
@@ -165,7 +165,7 @@ namespace CXXR
          * @param internal_func Pointer to an internal function to be
          *          denoted by the constructed Symbol.
          */
-        explicit Symbol(const String *the_name, RObject *val = unboundValue(),
+        explicit Symbol(const CachedString *the_name, RObject *val = unboundValue(),
                         const BuiltInFunction *internal_func = nullptr);
 
         /** @brief Access internal function.
@@ -182,7 +182,7 @@ namespace CXXR
          *
          * @return const pointer to the name of this Symbol.
          */
-        const String *name() const
+        const CachedString *name() const
         {
             return m_name;
         }
@@ -290,6 +290,12 @@ namespace CXXR
         static constexpr size_t HSIZE = 49157;
         static std::array<RObject *, HSIZE> R_SymbolTable;
 
+        /** @brief Conduct a visitor to all standard symbols.
+         *
+         * @param v Pointer to the visitor object.
+         */
+        static void visitTable(const_visitor *v);
+
         // Virtual functions of RObject:
         unsigned int packGPBits() const override;
         void unpackGPBits(unsigned int gpbits) override;
@@ -305,7 +311,7 @@ namespace CXXR
         static GCRoot<Symbol> s_current_expression;
         static GCRoot<Symbol> s_in_bc_interpreter;
 
-        const String *m_name;
+        const CachedString *m_name;
         RObject *m_value;
         const BuiltInFunction *m_internalfunc;
         int m_dd_index : 31;
@@ -372,7 +378,7 @@ extern "C"
      *
      * @param x Pointer to a CXXR::Symbol (checked).
      *
-     * @return Pointer to a CXXR::String representings \a x's name.
+     * @return Pointer to a CXXR::CachedString representing \a x's name.
      */
     SEXP PRINTNAME(SEXP x);
 
@@ -380,7 +386,7 @@ extern "C"
      *
      * @param x Pointer to a CXXR::Symbol (checked).
      *
-     * @return Pointer to a CXXR::RObject representings \a x's value.
+     * @return Pointer to a CXXR::RObject representing \a x's value.
      *         Returns R_UnboundValue if no value is currently
      *         associated with the Symbol.
      */
@@ -461,9 +467,9 @@ namespace R
      * @param name Pointer to a CXXR::String object (checked) to be
      *          taken as the name of the constructed symbol.
      *
-     * @param val Pointer to the CXXR::RObject to be considered as
+     * @param value Pointer to the CXXR::RObject to be considered as
      *          the value of the constructed symbol.  A null pointer or
-     *          R_UnboundValue are permissible values of \a val.
+     *          R_UnboundValue are permissible values of \a value.
      *
      * @return Pointer to the created CXXR::Symbol object.
      */

@@ -48,6 +48,7 @@
 #include <CXXR/Symbol.hpp>
 #include <Localization.h>
 #include <RContext.h>
+#include <Rembedded.h>
 #include <Defn.h>
 #include <Internal.h>
 #include <Rinterface.h>

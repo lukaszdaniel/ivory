@@ -129,7 +129,7 @@ namespace CXXR
     }
 
     GCRoot<const String> String::s_na(UncachedString::obtain("NA"), true);
-    GCRoot<const String> String::s_blank(CachedString::obtain(""), true);
+    GCRoot<const CachedString> CachedString::s_blank(CachedString::obtain(""), true);
 
     // String::Comparator::operator()(const String&, const String&) is in
     // sort.cpp
@@ -138,7 +138,7 @@ namespace CXXR
     {
         R_NaString = const_cast<String *>(String::NA());
         SEXP_downcast<String *>(R_NaString)->setCached(); /* Mark it */
-        R_BlankString = const_cast<String *>(String::blank());
+        R_BlankString = const_cast<CachedString *>(CachedString::blank());
     }
 
     void String::checkEncoding(cetype_t encoding)

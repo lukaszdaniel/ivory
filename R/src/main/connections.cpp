@@ -89,6 +89,7 @@
 #include <Defn.h>
 #include <Internal.h>
 #include <Fileio.h>
+#include <Rinterface.h>
 #include <Rconnections.h>
 #include <R_ext/Complex.h>
 #include <R_ext/R-ftp-http.h>

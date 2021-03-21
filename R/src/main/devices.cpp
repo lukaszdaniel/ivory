@@ -350,6 +350,7 @@ void Rf_killDevice(int devNum)
 /* Used by front-ends via R_CleanUp to shutdown all graphics devices
    at the end of a session. Not the same as graphics.off(), and leaves
    .Devices and .Device in an invalid state. */
+extern "C"
 void KillAllDevices(void)
 {
     /* Avoid lots of activation followed by removal of devices

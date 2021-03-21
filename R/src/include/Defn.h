@@ -52,58 +52,33 @@ constexpr int MAXELTSIZE = 8192; /* Used as a default for string buffer sizes, \
 
 #include <R_ext/Complex.h>
 
-namespace R
-{
-    void CoercionWarning(int); /* warning code */
-    int LogicalFromInteger(int, int &);
-    int LogicalFromReal(double, int &);
-    int LogicalFromComplex(Rcomplex, int &);
-    int IntegerFromLogical(int, int &);
-    int IntegerFromReal(double, int &);
-    int IntegerFromComplex(Rcomplex, int &);
-    double RealFromLogical(int, int &);
-    double RealFromInteger(int, int &);
-    double RealFromComplex(Rcomplex, int &);
-    Rcomplex ComplexFromLogical(int, int &);
-    Rcomplex ComplexFromInteger(int, int &);
-    Rcomplex ComplexFromReal(double, int &);
-} // namespace R
-
 #define CALLED_FROM_DEFN_H 1
-#include <Rinternals.h>		/*-> Arith.h, Boolean.h, Complex.h, Error.h,
+#include <Rinternals.h> /*-> Arith.h, Boolean.h, Complex.h, Error.h,
 				  Memory.h, PrtUtil.h, Utils.h */
 #undef CALLED_FROM_DEFN_H
 
-namespace R
-{
-    const char *translateCharFP(SEXP);
-    const char *translateCharFP2(SEXP);
-    const char *trCharUTF8(SEXP);
-} // namespace R
-
 #include <Errormsg.h>
 
-extern "C" void R_ProcessEvents(void);
 #ifdef _WIN32
 extern void R_WaitEvent(void);
 #endif
 
 #ifdef Unix
-# define OSTYPE      "unix"
-# define FILESEP     "/"
+#define OSTYPE "unix"
+#define FILESEP "/"
 #endif /* Unix */
 
 #ifdef _WIN32
-# define OSTYPE      "windows"
-# define FILESEP     "/"
+#define OSTYPE "windows"
+#define FILESEP "/"
 #endif /* Win32 */
 
 #ifdef HAVE_F77_UNDERSCORE
-# define F77_SYMBOL(x)	x ## _
-# define F77_QSYMBOL(x)	#x "_"
+#define F77_SYMBOL(x) x##_
+#define F77_QSYMBOL(x) #x "_"
 #else
-# define F77_SYMBOL(x)	x
-# define F77_QSYMBOL(x) #x
+#define F77_SYMBOL(x) x
+#define F77_QSYMBOL(x) #x
 #endif
 
 /*  Heap and Pointer Protection Stack Sizes.  */
@@ -137,7 +112,7 @@ extern void R_WaitEvent(void);
 
 #include <CXXR/RTypes.hpp>
 
-constexpr double Mega = 1048576.; /* 1 Mega Byte := 2^20 (= 1048576) Bytes */
+constexpr double Mega = 1048576.;    /* 1 Mega Byte := 2^20 (= 1048576) Bytes */
 constexpr double Giga = 1073741824.; /* 1 Giga Byte := 2^30 Bytes */
 
 /*	R_PPSSIZE  The pointer protection stack size  */
@@ -172,12 +147,10 @@ extern int strncasecmp(const char *s1, const char *s2, size_t n);
 /* safer alternative */
 extern char *Rstrdup(const char *s);
 
-
 /* Glibc manages to not define this in -pedantic -ansi */
 #if defined(HAVE_PUTENV) && !defined(putenv) && defined(HAVE_DECL_PUTENV) && !HAVE_DECL_PUTENV
 extern int putenv(char *string);
 #endif
-
 
 /* Maximal length in bytes of an entire path name.
    POSIX has required this to be at least 255/256, and X/Open at least 1024.
@@ -208,7 +181,6 @@ constexpr size_t PATH_MAX = 5000;
 #endif
 #endif
 #endif
-
 
 /* Arithmetic and Relation Operators */
 enum ARITHOP_TYPE
@@ -243,10 +215,10 @@ enum MATPROD_TYPE
 /* File Handling */
 constexpr int R_EOF = -1;
 
-
 /*--- Global Variables ---------------------------------------------------- */
 
-extern "C" {
+extern "C"
+{
 #include <R_ext/libextern.h>
 
 #ifdef __MAIN__
@@ -259,177 +231,173 @@ extern "C" {
 #define extern1 extern
 #endif
 
-LibExtern Rboolean R_interrupts_suspended INI_as(FALSE);
-LibExtern int R_interrupts_pending INI_as(0);
+    LibExtern Rboolean R_interrupts_suspended INI_as(FALSE);
+    LibExtern int R_interrupts_pending INI_as(0);
 
-/* R Home Directory */
-LibExtern char *R_Home;		    /* Root of the R tree */
+    /* R Home Directory */
+    LibExtern char *R_Home; /* Root of the R tree */
 
-/* Memory Management */
-extern0 R_size_t R_NSize  INI_as(R_NSIZE);/* Size of cons cell heap */
-extern0 R_size_t R_VSize  INI_as(R_VSIZE);/* Size of the vector heap */
-extern0 bool	R_GCEnabled INI_as(true);
-extern0 bool	R_in_gc INI_as(false);
-extern0 bool	R_BCIntActive INI_as(false); /* bcEval called more recently than
+    /* Memory Management */
+    extern0 R_size_t R_NSize INI_as(R_NSIZE); /* Size of cons cell heap */
+    extern0 R_size_t R_VSize INI_as(R_VSIZE); /* Size of the vector heap */
+    extern0 bool R_GCEnabled INI_as(true);
+    extern0 bool R_in_gc INI_as(false);
+    extern0 bool R_BCIntActive INI_as(false); /* bcEval called more recently than
                                             eval */
-extern0 void*	R_BCpc INI_as(nullptr);/* current byte code instruction */
-extern0 SEXP	R_BCbody INI_as(nullptr); /* current byte code object */
-extern0 SEXP	R_NHeap;	    /* Start of the cons cell heap */
-extern0 SEXP	R_FreeSEXP;	    /* Cons cell free list */
-extern0 int	R_Is_Running;	    /* for Windows memory manager */
+    extern0 void *R_BCpc INI_as(nullptr);     /* current byte code instruction */
+    extern0 SEXP R_BCbody INI_as(nullptr);    /* current byte code object */
+    extern0 SEXP R_NHeap;                     /* Start of the cons cell heap */
+    extern0 SEXP R_FreeSEXP;                  /* Cons cell free list */
+    extern0 int R_Is_Running;                 /* for Windows memory manager */
 
-/* Evaluation Environment */
-extern0 int	R_EvalDepth	INI_as(0);	/* Evaluation recursion depth */
-extern0 int	R_BrowseLines	INI_as(0);	/* lines/per call in browser :
+    /* Evaluation Environment */
+    extern0 int R_EvalDepth INI_as(0);                      /* Evaluation recursion depth */
+    extern0 int R_BrowseLines INI_as(0);                    /* lines/per call in browser :
 						 * options(deparse.max.lines) */
-extern0 int	R_Expressions	INI_as(5000);	/* options(expressions) */
-extern0 int	R_Expressions_keep INI_as(5000);/* options(expressions) */
-extern0 Rboolean R_KeepSource	INI_as(FALSE);	/* options(keep.source) */
-extern0 Rboolean R_CBoundsCheck	INI_as(FALSE);	/* options(CBoundsCheck) */
-extern0 MATPROD_TYPE R_Matprod	INI_as(MATPROD_DEFAULT);  /* options(matprod) */
-extern0 size_t	R_WarnLength	INI_as(1000);	/* Error/warning max length */
-extern0 int	R_nwarnings	INI_as(50);
+    extern0 int R_Expressions INI_as(5000);                 /* options(expressions) */
+    extern0 int R_Expressions_keep INI_as(5000);            /* options(expressions) */
+    extern0 Rboolean R_KeepSource INI_as(FALSE);            /* options(keep.source) */
+    extern0 Rboolean R_CBoundsCheck INI_as(FALSE);          /* options(CBoundsCheck) */
+    extern0 MATPROD_TYPE R_Matprod INI_as(MATPROD_DEFAULT); /* options(matprod) */
+    extern0 size_t R_WarnLength INI_as(1000);               /* Error/warning max length */
+    extern0 int R_nwarnings INI_as(50);
 
-/* C stack checking */
-extern1 uintptr_t R_CStackLimit	INI_as((uintptr_t)-1);	/* C stack limit */
-extern1 uintptr_t R_OldCStackLimit INI_as((uintptr_t)0); /* Old value while
+    /* C stack checking */
+    extern1 uintptr_t R_CStackLimit INI_as((uintptr_t)-1);   /* C stack limit */
+    extern1 uintptr_t R_OldCStackLimit INI_as((uintptr_t)0); /* Old value while
 							   handling overflow */
-extern1 uintptr_t R_CStackStart	INI_as((uintptr_t)-1);	/* Initial stack address */
-/* Default here is for Windows: set from configure in src/unix/system.cpp */
-extern1 int	R_CStackDir	INI_as(1);	/* C stack direction */
+    extern1 uintptr_t R_CStackStart INI_as((uintptr_t)-1);   /* Initial stack address */
+    /* Default here is for Windows: set from configure in src/unix/system.cpp */
+    extern1 int R_CStackDir INI_as(1); /* C stack direction */
 
-
-/* File Input/Output */
-LibExtern Rboolean R_Interactive INI_as(TRUE);	/* TRUE during interactive use*/
-extern0 Rboolean R_Quiet	INI_as(FALSE);	/* Be as quiet as possible */
-extern1 Rboolean  R_NoEcho	INI_as(FALSE);	/* do not echo R code */
-extern0 Rboolean R_Verbose	INI_as(FALSE);	/* Be verbose */
-/* extern int	R_Console; */	    /* Console active flag */
-/* IoBuffer R_ConsoleIob; : --> ./IOStuff.h */
-/* R_Consolefile is used in the internet module */
-extern1 FILE*	R_Consolefile	INI_as(nullptr);	/* Console output file */
-extern1 FILE*	R_Outputfile	INI_as(nullptr);	/* Output file */
-extern0 int	R_ErrorCon	INI_as(2);	/* Error connection */
-LibExtern char *R_TempDir	INI_as(nullptr);	/* Name of per-session dir */
-extern0 char   *Sys_TempDir	INI_as(nullptr);	/* Name of per-session dir
+    /* File Input/Output */
+    LibExtern Rboolean R_Interactive INI_as(TRUE); /* TRUE during interactive use*/
+    extern0 Rboolean R_Quiet INI_as(FALSE);        /* Be as quiet as possible */
+    extern1 Rboolean R_NoEcho INI_as(FALSE);       /* do not echo R code */
+    extern0 Rboolean R_Verbose INI_as(FALSE);      /* Be verbose */
+    /* extern int	R_Console; */                  /* Console active flag */
+    /* IoBuffer R_ConsoleIob; : --> ./IOStuff.h */
+    /* R_Consolefile is used in the internet module */
+    extern1 FILE *R_Consolefile INI_as(nullptr); /* Console output file */
+    extern1 FILE *R_Outputfile INI_as(nullptr);  /* Output file */
+    extern0 int R_ErrorCon INI_as(2);            /* Error connection */
+    LibExtern char *R_TempDir INI_as(nullptr);   /* Name of per-session dir */
+    extern0 char *Sys_TempDir INI_as(nullptr);   /* Name of per-session dir
 						   if set by R itself */
-extern0 char	R_StdinEnc[31]  INI_as("");	/* Encoding assumed for stdin */
+    extern0 char R_StdinEnc[31] INI_as("");      /* Encoding assumed for stdin */
 
-/* Objects Used In Parsing  */
-LibExtern int	R_ParseError	INI_as(0); /* Line where parse error occurred */
-extern0 int	R_ParseErrorCol;    /* Column of start of token where parse error occurred */
-extern0 SEXP	R_ParseErrorFile;   /* Source file where parse error was seen.  Either a
+    /* Objects Used In Parsing  */
+    LibExtern int R_ParseError INI_as(0);    /* Line where parse error occurred */
+    extern0 int R_ParseErrorCol;             /* Column of start of token where parse error occurred */
+    extern0 SEXP R_ParseErrorFile;           /* Source file where parse error was seen.  Either a
 				       STRSXP or (when keeping srcrefs) a SrcFile ENVSXP */
-constexpr size_t PARSE_ERROR_SIZE = 256;	    /* Parse error messages saved here */
-LibExtern char	R_ParseErrorMsg[PARSE_ERROR_SIZE] INI_as("");
-constexpr size_t PARSE_CONTEXT_SIZE = 256;	    /* Recent parse context kept in a circular buffer */
-LibExtern char	R_ParseContext[PARSE_CONTEXT_SIZE] INI_as("");
-LibExtern int	R_ParseContextLast INI_as(0); /* last character in context buffer */
-LibExtern int	R_ParseContextLine; /* Line in file of the above */
+    constexpr size_t PARSE_ERROR_SIZE = 256; /* Parse error messages saved here */
+    LibExtern char R_ParseErrorMsg[PARSE_ERROR_SIZE] INI_as("");
+    constexpr size_t PARSE_CONTEXT_SIZE = 256; /* Recent parse context kept in a circular buffer */
+    LibExtern char R_ParseContext[PARSE_CONTEXT_SIZE] INI_as("");
+    LibExtern int R_ParseContextLast INI_as(0); /* last character in context buffer */
+    LibExtern int R_ParseContextLine;           /* Line in file of the above */
 
-/* Image Dump/Restore */
-extern1 int R_DirtyImage	INI_as(0);	/* Current image dirty */
+    /* Image Dump/Restore */
+    extern1 int R_DirtyImage INI_as(0); /* Current image dirty */
 
-/* History */
-LibExtern char *R_HistoryFile;	/* Name of the history file */
-LibExtern int	R_HistorySize;	/* Size of the history file */
-LibExtern int	R_RestoreHistory;	/* restore the history file? */
-extern void 	R_setupHistory(void);
+    /* History */
+    LibExtern char *R_HistoryFile;  /* Name of the history file */
+    LibExtern int R_HistorySize;    /* Size of the history file */
+    LibExtern int R_RestoreHistory; /* restore the history file? */
+    extern void R_setupHistory(void);
 
-/* Warnings/Errors */
-extern0 int	R_CollectWarnings INI_as(0);	/* the number of warnings */
-extern0 SEXP	R_Warnings;	    /* the warnings and their calls */
-extern0 bool	R_ShowErrorMessages INI_as(true);	/* show error messages? */
-extern0 SEXP	R_HandlerStack;	/* Condition handler stack */
-extern0 SEXP	R_RestartStack;	/* Stack of available restarts */
-extern0 Rboolean R_warn_partial_match_args   INI_as(FALSE);
-extern0 Rboolean R_warn_partial_match_dollar INI_as(FALSE);
-extern0 Rboolean R_warn_partial_match_attr INI_as(FALSE);
-extern0 Rboolean R_ShowWarnCalls INI_as(FALSE);
-extern0 Rboolean R_ShowErrorCalls INI_as(FALSE);
-extern0 int	R_NShowCalls INI_as(50);
+    /* Warnings/Errors */
+    extern0 int R_CollectWarnings INI_as(0);       /* the number of warnings */
+    extern0 SEXP R_Warnings;                       /* the warnings and their calls */
+    extern0 bool R_ShowErrorMessages INI_as(true); /* show error messages? */
+    extern0 SEXP R_HandlerStack;                   /* Condition handler stack */
+    extern0 SEXP R_RestartStack;                   /* Stack of available restarts */
+    extern0 Rboolean R_warn_partial_match_args INI_as(FALSE);
+    extern0 Rboolean R_warn_partial_match_dollar INI_as(FALSE);
+    extern0 Rboolean R_warn_partial_match_attr INI_as(FALSE);
+    extern0 Rboolean R_ShowWarnCalls INI_as(FALSE);
+    extern0 Rboolean R_ShowErrorCalls INI_as(FALSE);
+    extern0 int R_NShowCalls INI_as(50);
 
-LibExtern bool utf8locale  INI_as(false);  /* is this a UTF-8 locale? */
-LibExtern Rboolean mbcslocale  INI_as(FALSE);  /* is this a MBCS locale? */
-extern0   bool latin1locale INI_as(false); /* is this a Latin-1 locale? */
+    LibExtern bool utf8locale INI_as(false);     /* is this a UTF-8 locale? */
+    LibExtern Rboolean mbcslocale INI_as(FALSE); /* is this a MBCS locale? */
+    extern0 bool latin1locale INI_as(false);     /* is this a Latin-1 locale? */
 #ifdef _WIN32
-LibExtern unsigned int localeCP  INI_as(1252); /* the locale's codepage */
-LibExtern unsigned int systemCP  INI_as(437);  /* the ANSI codepage, GetACP */
-extern0   bool WinUTF8out  INI_as(false);  /* Use UTF-8 for output */
-extern0   void WinCheckUTF8(void);
+    LibExtern unsigned int localeCP INI_as(1252); /* the locale's codepage */
+    LibExtern unsigned int systemCP INI_as(437);  /* the ANSI codepage, GetACP */
+    extern0 bool WinUTF8out INI_as(false);        /* Use UTF-8 for output */
+    extern0 void WinCheckUTF8(void);
 #endif
 
-extern1 const char* OutDec	INI_as(".");  /* decimal point used for output */
-extern0 Rboolean R_DisableNLinBrowser	INI_as(FALSE);
-extern0 char R_BrowserLastCommand	INI_as('n');
+    extern1 const char *OutDec INI_as("."); /* decimal point used for output */
+    extern0 Rboolean R_DisableNLinBrowser INI_as(FALSE);
+    extern0 char R_BrowserLastCommand INI_as('n');
 
-/* Initialization of the R environment when it is embedded */
-extern int Rf_initEmbeddedR(int argc, char *argv[]);
+    /* Initialization of the R environment when it is embedded */
+    extern int Rf_initEmbeddedR(int argc, char *argv[]);
 
-/* GUI type */
+    /* GUI type */
 
-extern1 const char	*R_GUIType	INI_as("unknown");
-extern1 bool R_isForkedChild		INI_as(false); /* was this forked? */
+    extern1 const char *R_GUIType INI_as("unknown");
+    extern1 bool R_isForkedChild INI_as(false); /* was this forked? */
 
-extern0 double cpuLimit			INI_as(-1.0);
-extern0 double cpuLimit2	       	INI_as(-1.0);
-extern0 double cpuLimitValue		INI_as(-1.0);
-extern0 double elapsedLimit		INI_as(-1.0);
-extern0 double elapsedLimit2		INI_as(-1.0);
-extern0 double elapsedLimitValue       	INI_as(-1.0);
+    extern0 double cpuLimit INI_as(-1.0);
+    extern0 double cpuLimit2 INI_as(-1.0);
+    extern0 double cpuLimitValue INI_as(-1.0);
+    extern0 double elapsedLimit INI_as(-1.0);
+    extern0 double elapsedLimit2 INI_as(-1.0);
+    extern0 double elapsedLimitValue INI_as(-1.0);
 
-void resetTimeLimits(void);
+    void resetTimeLimits(void);
 
-extern0 int R_jit_enabled INI_as(0); /* has to be 0 during R startup */
-extern0 int R_compile_pkgs INI_as(0);
-extern0 int R_check_constants INI_as(0);
-extern0 int R_disable_bytecode INI_as(0);
-extern SEXP R_cmpfun1(SEXP); /* unconditional fresh compilation */
-extern void R_init_jit_enabled(void);
-extern void R_initAssignSymbols(void);
-extern SEXP R_getCurrentSrcref();
-extern SEXP R_getBCInterpreterExpression();
+    extern0 int R_jit_enabled INI_as(0); /* has to be 0 during R startup */
+    extern0 int R_compile_pkgs INI_as(0);
+    extern0 int R_check_constants INI_as(0);
+    extern0 int R_disable_bytecode INI_as(0);
+    extern SEXP R_cmpfun1(SEXP); /* unconditional fresh compilation */
+    extern void R_init_jit_enabled(void);
+    extern void R_initAssignSymbols(void);
+    extern SEXP R_getCurrentSrcref();
+    extern SEXP R_getBCInterpreterExpression();
 
+    LibExtern int R_num_math_threads INI_as(1);
+    LibExtern int R_max_num_math_threads INI_as(1);
 
-LibExtern int R_num_math_threads INI_as(1);
-LibExtern int R_max_num_math_threads INI_as(1);
+    /* Pointer type and utilities for dispatch in the methods package */
+    using R_stdGen_ptr_t = SEXP (*)(SEXP, SEXP, SEXP); /* typedef */
+    //R_stdGen_ptr_t R_get_standardGeneric_ptr(void); /* get method */
+    R_stdGen_ptr_t R_set_standardGeneric_ptr(R_stdGen_ptr_t, SEXP); /* set method */
+    LibExtern SEXP R_MethodsNamespace;
+    SEXP R_deferred_default_method(void);
+    SEXP R_set_prim_method(SEXP fname, SEXP op, SEXP code_vec, SEXP fundef, SEXP mlist);
+    SEXP do_set_prim_method(SEXP op, const char *code_string, SEXP fundef, SEXP mlist);
+    void R_set_quick_method_check(R_stdGen_ptr_t);
+    SEXP R_primitive_methods(SEXP op);
+    SEXP R_primitive_generic(SEXP op);
 
-/* Pointer type and utilities for dispatch in the methods package */
-using R_stdGen_ptr_t = SEXP(*)(SEXP, SEXP, SEXP); /* typedef */
-//R_stdGen_ptr_t R_get_standardGeneric_ptr(void); /* get method */
-R_stdGen_ptr_t R_set_standardGeneric_ptr(R_stdGen_ptr_t, SEXP); /* set method */
-LibExtern SEXP R_MethodsNamespace;
-SEXP R_deferred_default_method(void);
-SEXP R_set_prim_method(SEXP fname, SEXP op, SEXP code_vec, SEXP fundef, SEXP mlist);
-SEXP do_set_prim_method(SEXP op, const char *code_string, SEXP fundef, SEXP mlist);
-void R_set_quick_method_check(R_stdGen_ptr_t);
-SEXP R_primitive_methods(SEXP op);
-SEXP R_primitive_generic(SEXP op);
+    /* smallest decimal exponent, needed in format.cpp, set in Init_R_Machine */
+    extern0 int R_dec_min_exponent INI_as(-308);
 
-/* smallest decimal exponent, needed in format.cpp, set in Init_R_Machine */
-extern0 int R_dec_min_exponent		INI_as(-308);
+    /* structure for caching machine accuracy values */
+    struct AccuracyInfo
+    {
+        int ibeta, it, irnd, ngrd, machep, negep, iexp, minexp, maxexp;
+        double eps, epsneg, xmin, xmax;
+    };
 
-/* structure for caching machine accuracy values */
-struct AccuracyInfo
-{
-    int ibeta, it, irnd, ngrd, machep, negep, iexp, minexp, maxexp;
-    double eps, epsneg, xmin, xmax;
-};
+    LibExtern AccuracyInfo R_AccuracyInfo;
 
-LibExtern AccuracyInfo R_AccuracyInfo;
+    extern1 unsigned int max_contour_segments INI_as(25000);
 
-extern1 unsigned int max_contour_segments INI_as(25000);
-
-
-
-/* for PCRE as from R 3.4.0 */
-extern0 bool R_PCRE_use_JIT INI_as(true);
+    /* for PCRE as from R 3.4.0 */
+    extern0 bool R_PCRE_use_JIT INI_as(true);
 #ifdef HAVE_PCRE2
-extern0 int R_PCRE_study INI_as(-2);
+    extern0 int R_PCRE_study INI_as(-2);
 #else
-extern0 int R_PCRE_study INI_as(10);
+    extern0 int R_PCRE_study INI_as(10);
 #endif
-extern0 int R_PCRE_limit_recursion;
+    extern0 int R_PCRE_limit_recursion;
 } // extern "C"
 
 #ifdef __MAIN__
@@ -441,153 +409,30 @@ extern0 int R_PCRE_limit_recursion;
 
 #define checkArity(a, b) Rf_checkArityCall(a, b, call)
 
+#include <wchar.h>
+
 /*--- FUNCTIONS ------------------------------------------------------ */
-#if 0 // #ifndef R_NO_REMAP
-# define allocCharsxp		Rf_allocCharsxp
-# define asVecSize		Rf_asVecSize
-# define asXLength		Rf_asXLength
-# define BindDomain		Rf_BindDomain
-# define check1arg		Rf_check1arg
-# define CheckFormals		Rf_CheckFormals
-# define CleanEd		Rf_CleanEd
-# define CoercionWarning       	Rf_CoercionWarning
-# define ComplexFromInteger	Rf_ComplexFromInteger
-# define ComplexFromLogical	Rf_ComplexFromLogical
-# define ComplexFromReal	Rf_ComplexFromReal
-# define ComplexFromString	Rf_ComplexFromString
-# define copyMostAttribNoTs	Rf_copyMostAttribNoTs
-# define createS3Vars		Rf_createS3Vars
-# define currentTime		Rf_currentTime
-# define CustomPrintValue	Rf_CustomPrintValue
-# define ddfindVar		Rf_ddfindVar
-# define deparse1		Rf_deparse1
-# define deparse1m		Rf_deparse1m
-# define deparse1w		Rf_deparse1w
-# define deparse1line		Rf_deparse1line
-# define deparse1s		Rf_deparse1s
-# define DispatchGroup		Rf_DispatchGroup
-# define DispatchOrEval		Rf_DispatchOrEval
-# define DispatchAnyOrEval      Rf_DispatchAnyOrEval
-# define EncodeChar             Rf_EncodeChar
-# define EncodeRaw              Rf_EncodeRaw
-# define EncodeReal2            Rf_EncodeReal2
-# define EncodeString           Rf_EncodeString
-# define EnsureString 		Rf_EnsureString
-# define errorcall_cpy		Rf_errorcall_cpy
-# define ErrorMessage		Rf_ErrorMessage
-# define evalList		Rf_evalList
-# define evalListKeepMissing	Rf_evalListKeepMissing
-# define findcontext		Rf_findcontext
-# define findVar1		Rf_findVar1
-# define get1index		Rf_get1index
-# define GetOptionCutoff       	Rf_GetOptionCutoff
-# define InitArithmetic		Rf_InitArithmetic
-# define InitConnections	Rf_InitConnections
-# define InitEd			Rf_InitEd
-# define InitFunctionHashing	Rf_InitFunctionHashing
-# define InitGlobalEnv		Rf_InitGlobalEnv
-# define InitGraphics		Rf_InitGraphics
-# define InitMemory		Rf_InitMemory
-# define InitNames		Rf_InitNames
-# define InitOptions		Rf_InitOptions
-# define InitS3DefaultTypes	Rf_InitS3DefaultTypes
-# define InitTempDir		Rf_InitTempDir
-# define InitTypeTables		Rf_InitTypeTables
-# define initStack		Rf_initStack
-# define IntegerFromComplex	Rf_IntegerFromComplex
-# define IntegerFromLogical	Rf_IntegerFromLogical
-# define IntegerFromReal	Rf_IntegerFromReal
-# define IntegerFromString	Rf_IntegerFromString
-# define internalTypeCheck	Rf_internalTypeCheck
-# define isValidName		Rf_isValidName
-# define ItemName		Rf_ItemName
-# define jump_to_toplevel	Rf_jump_to_toplevel
-# define KillAllDevices		Rf_KillAllDevices
-# define LogicalFromComplex	Rf_LogicalFromComplex
-# define LogicalFromInteger	Rf_LogicalFromInteger
-# define LogicalFromReal	Rf_LogicalFromReal
-# define LogicalFromString	Rf_LogicalFromString
-# define mainloop		Rf_mainloop
-# define makeSubscript		Rf_makeSubscript
-# define markKnown		Rf_markKnown
-# define mat2indsub		Rf_mat2indsub
-# define matchArg		Rf_matchArg
-# define matchArgExact		Rf_matchArgExact
-# define matchArgs_NR		Rf_matchArgs_NR
-# define matchArgs_RC		Rf_matchArgs_RC
-# define matchPar		Rf_matchPar
-# define Mbrtowc		Rf_mbrtowc
-# define mbtoucs		Rf_mbtoucs
-# define mbcsToUcs2		Rf_mbcsToUcs2
-# define memtrace_report	Rf_memtrace_report
-# define mkCLOSXP		Rf_mkCLOSXP
-# define mkFalse		Rf_mkFalse
-# define mkPROMISE		Rf_mkPROMISE
-# define mkSYMSXP		Rf_mkSYMSXP
-# define mkTrue			Rf_mkTrue
-# define NewEnvironment		Rf_NewEnvironment
-# define OneIndex		Rf_OneIndex
-# define onintr			Rf_onintr
-# define onintrNoResume		Rf_onintrNoResume
-# define onsigusr1              Rf_onsigusr1
-# define onsigusr2              Rf_onsigusr2
-# define parse			Rf_parse
-# define patchArgsByActuals	Rf_patchArgsByActuals
-# define PrintInit              Rf_PrintInit
-# define PrintDefaults		Rf_PrintDefaults
-# define PrintGreeting		Rf_PrintGreeting
-# define PrintValueEnv		Rf_PrintValueEnv
-# define PrintValueRec		Rf_PrintValueRec
-# define PrintVersion		Rf_PrintVersion
-# define PrintVersion_part_1	Rf_PrintVersion_part_1
-# define PrintVersionString    	Rf_PrintVersionString
-# define PrintWarnings		Rf_PrintWarnings
-# define promiseArgs		Rf_promiseArgs
-# define RealFromComplex	Rf_RealFromComplex
-# define RealFromInteger	Rf_RealFromInteger
-# define RealFromLogical	Rf_RealFromLogical
-# define RealFromString		Rf_RealFromString
-# define Seql			Rf_Seql
-# define sexptype2char		Rf_sexptype2char
-# define Scollate		Rf_Scollate
-# define sortVector		Rf_sortVector
-# define SrcrefPrompt		Rf_SrcrefPrompt
-# define ssort			Rf_ssort
-# define StringFromComplex	Rf_StringFromComplex
-# define StringFromInteger	Rf_StringFromInteger
-# define StringFromLogical	Rf_StringFromLogical
-# define StringFromReal		Rf_StringFromReal
-# define strIsASCII		Rf_strIsASCII
-# define StrToInternal		Rf_StrToInternal
-# define strmat2intmat		Rf_strmat2intmat
-# define TimeToSeed		Rf_TimeToSeed
-# define translateCharFP	Rf_translateCharFP
-# define translateCharFP2	Rf_translateCharFP2
-# define trCharUTF8      	Rf_trCharUTF8
-# define tspgets		Rf_tspgets
-# define type2symbol		Rf_type2symbol
-# define unbindVar		Rf_unbindVar
-# define usemethod		Rf_usemethod
-# define ucstomb		Rf_ucstomb
-# define ucstoutf8		Rf_ucstoutf8
-#ifdef ADJUST_ENVIR_REFCNTS
-# define unpromiseArgs		Rf_unpromiseArgs
-#endif
-# define utf8toucs		Rf_utf8toucs
-# define utf8towcs		Rf_utf8towcs
-# define vectorIndex		Rf_vectorIndex
-# define warningcall		Rf_warningcall
-# define WarningMessage		Rf_WarningMessage
-# define wcstoutf8		Rf_wcstoutf8
-# define wtransChar		Rf_wtransChar
-# define yychar			Rf_yychar
-# define yylval			Rf_yylval
-# define yynerrs		Rf_yynerrs
-# define yyparse		Rf_yyparse
-#endif //R_NO_REMAP
 
 namespace R
 {
+    void CoercionWarning(int); /* warning code */
+    int LogicalFromInteger(int, int &);
+    int LogicalFromReal(double, int &);
+    int LogicalFromComplex(Rcomplex, int &);
+    int IntegerFromLogical(int, int &);
+    int IntegerFromReal(double, int &);
+    int IntegerFromComplex(Rcomplex, int &);
+    double RealFromLogical(int, int &);
+    double RealFromInteger(int, int &);
+    double RealFromComplex(Rcomplex, int &);
+    Rcomplex ComplexFromLogical(int, int &);
+    Rcomplex ComplexFromInteger(int, int &);
+    Rcomplex ComplexFromReal(double, int &);
+
+    const char *translateCharFP(SEXP);
+    const char *translateCharFP2(SEXP);
+    const char *trCharUTF8(SEXP);
+
     /* The maximum length of input line which will be asked for,
    in bytes, including the terminator */
     constexpr int CONSOLE_BUFFER_SIZE = 4096;
@@ -595,19 +440,11 @@ namespace R
     void R_WriteConsole(const char *, int); /* equivalent to R_WriteConsoleEx(a, b, 0) */
     void R_WriteConsoleEx(const char *, int, int);
     void R_ResetConsole(void);
-} // namespace R
-extern "C" void R_FlushConsole(void);
-extern "C" void R_ClearerrConsole(void);
-extern "C" void R_Busy(int);
-namespace R
-{
+
     int R_ShowFiles(int, const char **, const char **, const char *, bool, const char *);
     int R_EditFiles(int, const char **, const char **, const char *);
     size_t R_ChooseFile(int, char *, size_t);
-} // namespace R
-extern "C" char *R_HomeDir(void);
-namespace R
-{
+
     bool R_FileExists(const char *);
     bool R_HiddenFile(const char *);
     double R_FileMtime(const char *);
@@ -736,10 +573,7 @@ namespace R
     void internalTypeCheck(SEXP, SEXP, SEXPTYPE);
     bool isMethodsDispatchOn(void);
     bool isValidName(const char *);
-} // namespace R
-void KillAllDevices(void);
-namespace R
-{
+
     SEXP makeSubscript(SEXP x, SEXP s, R_xlen_t &stretch, SEXP call);
     SEXP markKnown(const char *const s, SEXP ref);
     SEXP mat2indsub(SEXP dims, SEXP s, SEXP call);
@@ -749,9 +583,9 @@ namespace R
     SEXP matchArgs_RC(SEXP formals, SEXP supplied, SEXP call);
     SEXP matchPar(const char *tag, SEXP *list);
     void memtrace_report(void *old, void *_new);
-    SEXP mkCLOSXP(SEXP formals, SEXP body, SEXP rho);
+    SEXP mkCLOSXP(SEXP formal_args, SEXP body, SEXP env);
     SEXP mkFalse(void);
-    SEXP mkPRIMSXP(int offset, bool eval);
+    SEXP mkPRIMSXP(int offset, bool evaluate);
     SEXP mkPROMISE(SEXP expr, SEXP rho);
     SEXP R_mkEVPROMISE(SEXP expr, SEXP val);
     SEXP R_mkEVPROMISE_NR(SEXP expr, SEXP val);
@@ -859,12 +693,7 @@ namespace R
 
     /* main/subassign.cpp */
     SEXP R_subassign3_dflt(SEXP call, SEXP x, SEXP nlist, SEXP val);
-} // namespace R
 
-#include <wchar.h>
-
-namespace R
-{
     /* main/util.cpp */
     NORET void UNIMPLEMENTED_TYPE(const char *s, SEXP x);
     NORET void UNIMPLEMENTED_TYPE(const char *s, const SEXPTYPE t);
@@ -906,18 +735,13 @@ namespace R
     void get_current_mem(size_t &, size_t &, size_t &); /* from memory.cpp */
     unsigned long get_duplicate_counter(void);          /* from duplicate.cpp */
     void reset_duplicate_counter(void);                 /* from duplicate.cpp */
-    void BindDomain(char *);                         /* from main.cpp */
+    void BindDomain(char *);                            /* from main.cpp */
     extern bool LoadInitFile;                           /* from startup.cpp */
 
     // Unix and Windows versions
     double R_getClockIncrement(void);
     void InitDynload(void);
-} // namespace R
 
-extern "C" void R_CleanTempDir(void);
-
-namespace R
-{
 #ifdef _WIN32
     void R_fixslash(char *s);
     void R_fixbackslash(char *s);
@@ -940,18 +764,20 @@ namespace R
     int Scollate(SEXP a, SEXP b);
 
     double R_strtod4(const char *str, char **endptr, char dec, Rboolean NA);
-} // namespace R
 
-double R_strtod(const char *str, char **endptr);
-double R_atof(const char *str);
-
-namespace R
-{
     /* unix/sys-std.cpp, main/options.cpp */
     void set_rl_word_breaks(const char *str);
 
     /* From localecharset.cpp */
     extern const char *locale2charset(const char *);
+
+    Rboolean R_access_X11(void); /* from src/unix/X11.cpp */
+    SEXP R_execMethod(SEXP op, SEXP rho);
+    SEXP Rf_csduplicated(SEXP x); /* from unique.cpp */
+
+    // for reproducibility for now: use exp10 or pown later if accurate enough.
+    template <typename T>
+    inline auto Rexp10(const T &x) { return std::pow(10.0, x); }
 } // namespace R
 
 /*
@@ -963,18 +789,18 @@ namespace R
 #ifdef __GNUC__
 // This covers GNU, Clang and Intel compilers
 // The undef is needed in case some other header, e.g. malloc.h, already did this
-# undef alloca
-# define alloca(x) __builtin_alloca((x))
+#undef alloca
+#define alloca(x) __builtin_alloca((x))
 #else
-# ifdef HAVE_ALLOCA_H
+#ifdef HAVE_ALLOCA_H
 // Needed for native compilers on Solaris and AIX
-#  include <alloca.h>
-# endif
+#include <alloca.h>
+#endif
 // it might have been defined via some other standard header, e.g. stdlib.h
-# if !HAVE_DECL_ALLOCA
-#  include <stddef.h> // for size_t
+#if !HAVE_DECL_ALLOCA
+#include <stddef.h> // for size_t
 extern void *alloca(size_t);
-# endif
+#endif
 #endif
 
 /* Required by C99, but might be slow */
@@ -984,27 +810,11 @@ extern void *alloca(size_t);
    Alternative would be to use intmax_t.
  */
 #ifdef HAVE_INT64_T
-# define LONG_INT int64_t
-# define LONG_INT_MAX INT64_MAX
+#define LONG_INT int64_t
+#define LONG_INT_MAX INT64_MAX
 #elif defined(HAVE_INT_FAST64_T)
-# define LONG_INT int_fast64_t
-# define LONG_INT_MAX INT_FAST64_MAX
+#define LONG_INT int_fast64_t
+#define LONG_INT_MAX INT_FAST64_MAX
 #endif
 
-namespace R
-{
-    Rboolean R_access_X11(void); /* from src/unix/X11.cpp */
-    SEXP R_execMethod(SEXP op, SEXP rho);
-    SEXP Rf_csduplicated(SEXP x); /* from unique.cpp */
-
-    // for reproducibility for now: use exp10 or pown later if accurate enough.
-    template <typename T>
-    inline auto Rexp10(const T &x) { return std::pow(10.0, x); }
-} // namespace R
-
 #endif /* DEFN_H_ */
-/*
- *- Local Variables:
- *- page-delimiter: "^/\\*---"
- *- End:
- */

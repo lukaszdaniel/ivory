@@ -25,6 +25,7 @@
 #define R_NO_REMAP
 #define R_USE_SIGNALS 1
 
+#include <CXXR/RAllocStack.hpp>
 #include <CXXR/String.hpp>
 #include <CXXR/BuiltInFunction.hpp>
 #include <CXXR/PairList.hpp>
@@ -681,8 +682,8 @@ HIDDEN SEXP do_merge(SEXP call, SEXP op, SEXP args, SEXP rho)
 		error(_("'%s' argument must be TRUE or FALSE"), "all.y");
 
 	/* 0. sort the indices */
-    int *ix = (int *) R_alloc((size_t) nx, sizeof(int));
-    int *iy = (int *) R_alloc((size_t) ny, sizeof(int));
+    int *ix = static_cast<int *>(CXXR_alloc(size_t(nx), sizeof(int)));
+    int *iy = static_cast<int *>(CXXR_alloc(size_t(ny), sizeof(int)));
     for(int i = 0; i < nx; i++) ix[i] = i+1;
     for(int i = 0; i < ny; i++) iy[i] = i+1;
     isort_with_index(INTEGER(xi), ix, nx);

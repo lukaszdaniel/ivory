@@ -39,6 +39,7 @@
 #include <CXXR/IntVector.hpp>
 #include <CXXR/PairList.hpp>
 #include <RContext.h>
+#include <Rinterface.h>
 #include <Defn.h>
 #include <cfloat>  /* for DBL_DIG */
 #include <Fileio.h>

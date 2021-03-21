@@ -46,6 +46,14 @@ namespace CXXR
     class CachedString : public String
     {
     public:
+        /** @brief Blank string.
+         * @return <tt>const</tt> pointer to the string "".
+         */
+        static const CachedString *blank()
+        {
+            return s_blank;
+        }
+
         /** @brief Get a pointer to a CachedString object.
          *
          * If no CachedString with the specified text and encoding
@@ -80,6 +88,7 @@ namespace CXXR
         const char *typeName() const override;
 
     private:
+        static GCRoot<const CachedString> s_blank;
         // The first element of the key is the text, the second
         // element the encoding:
         typedef std::pair<std::string, cetype_t> key;

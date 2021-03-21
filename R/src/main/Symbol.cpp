@@ -5,7 +5,7 @@
  *  Copyright (C) 2008-2014  Andrew R. Runnalls.
  *  Copyright (C) 2014 and onwards the Rho Project Authors.
  *
- *  This header file is free software; you can redistribute it and/or modify
+ *  This program is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU Lesser General Public License as published by
  *  the Free Software Foundation; either version 2.1 of the License, or
  *  (at your option) any later version.
@@ -32,6 +32,7 @@
 
 #define R_NO_REMAP
 
+#include <CXXR/GCManager.hpp>
 #include <CXXR/Symbol.hpp>
 #include <CXXR/CachedString.hpp>
 #include <Rinternals.h>
@@ -59,7 +60,7 @@ namespace CXXR
         const auto &SET_DDVALptr = SET_DDVAL;
     } // namespace ForceNonInline
 
-    Symbol::Symbol(const String *the_name, RObject *val, const BuiltInFunction *internal_func)
+    Symbol::Symbol(const CachedString *the_name, RObject *val, const BuiltInFunction *internal_func)
         : RObject(SYMSXP), m_name(the_name), m_value(val), m_internalfunc(internal_func), m_dd_index(-1), m_base_symbol(false), m_special_symbol(false)
     {
         // If this is a ..n symbol, extract the value of n.
@@ -94,8 +95,8 @@ namespace CXXR
     }
 
     GCRoot<Symbol> Symbol::s_unbound_value(new Symbol(), true);
-    GCRoot<Symbol> Symbol::s_missing_arg(new Symbol(String::blank()), true);
-    GCRoot<Symbol> Symbol::s_restart_token(new Symbol(String::blank()), true);
+    GCRoot<Symbol> Symbol::s_missing_arg(new Symbol(CachedString::blank()), true);
+    GCRoot<Symbol> Symbol::s_restart_token(new Symbol(CachedString::blank()), true);
     GCRoot<Symbol> Symbol::s_in_bc_interpreter(new Symbol(CachedString::obtain("<in-bc-interp>")), true);
     GCRoot<Symbol> Symbol::s_current_expression(new Symbol(CachedString::obtain("<current-expression>")), true);
     std::array<RObject *, Symbol::HSIZE> Symbol::R_SymbolTable;
@@ -189,6 +190,19 @@ namespace CXXR
         }
 #endif
     }
+
+    void Symbol::visitTable(const_visitor *v)
+    {
+        if (R_SymbolTable.size()) /* in case of GC during startup */
+            for (size_t i = 0; i < R_SymbolTable.size(); i++)
+            {
+                if (R_SymbolTable[i])
+                    (R_SymbolTable[i])->conductVisitor(v);
+                for (RObject *s = R_SymbolTable[i]; s; s = CDR(s))
+                    if (ATTRIB(CAR(s)))
+                        GCManager::gc_error("****found a symbol with attributes\n");
+            }
+    }
 } // namespace CXXR
 
 // ***** C interface *****
@@ -211,7 +225,7 @@ SEXP PRINTNAME(SEXP x)
         return nullptr;
     Symbol::checkST(x);
     const Symbol *sym = SEXP_downcast<const Symbol *>(x);
-    return const_cast<String *>(sym->name());
+    return const_cast<CachedString *>(sym->name());
 }
 
 SEXP SYMVALUE(SEXP x)

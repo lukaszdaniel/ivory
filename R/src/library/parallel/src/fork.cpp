@@ -31,6 +31,7 @@
 
 #include <CXXR/VectorBase.hpp>
 #include <CXXR/IntVector.hpp>
+#include <R.h>
 #include <Defn.h> /* for R_isForkedChild */
 
 #include "parallel.h"

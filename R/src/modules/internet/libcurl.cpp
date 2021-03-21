@@ -30,6 +30,8 @@
 #include <CXXR/IntVector.hpp>
 #include <CXXR/PairList.hpp>
 #include <RContext.h>
+#include <R.h>
+#include <Rinterface.h>
 #include <Defn.h>
 #include <Localization.h>
 #include <R_ext/Minmax.h>

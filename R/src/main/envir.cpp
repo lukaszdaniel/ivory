@@ -2328,7 +2328,9 @@ HIDDEN bool R::R_isMissing(SEXP symbol, SEXP rho)
 HIDDEN SEXP do_missing(SEXP call, SEXP op, SEXP args, SEXP rho)
 {
     int ddv=0;
-    SEXP rval, t, sym, s;
+    SEXP sym, s;
+    GCRoot<> rval;
+    GCRoot<> t;
 
     checkArity(op, args);
     check1arg(args, call, "x");

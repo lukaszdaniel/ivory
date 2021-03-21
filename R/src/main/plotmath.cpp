@@ -79,14 +79,14 @@ struct mathContext
     mathContext()
         : BoxColor(0), BaseCex(0), ReferenceX(0), ReferenceY(0), CurrentX(0), CurrentY(0), CurrentAngle(0), CosAngle(0), SinAngle(0), CurrentStyle(STYLE::STYLE_SS1){};
     ~mathContext(){};
-    void PMoveAcross(double xamount) { this->CurrentX += xamount; }
-    void PMoveUp(double yamount) { this->CurrentY += yamount; }
+    void PMoveAcross(double xamount) { CurrentX += xamount; }
+    void PMoveUp(double yamount) { CurrentY += yamount; }
     void PMoveTo(double x, double y)
     {
-        this->CurrentX = x;
-        this->CurrentY = y;
+        CurrentX = x;
+        CurrentY = y;
     }
-    STYLE GetStyle() const { return this->CurrentStyle; }
+    STYLE GetStyle() const { return CurrentStyle; }
 };
 
 static GEUnit MetricUnit = GE_INCHES;

@@ -32,6 +32,7 @@
 #include <CXXR/IntVector.hpp>
 #include <Localization.h>
 #include <RContext.h>
+#include <Rinterface.h>
 #include <Defn.h>
 #include <Fileio.h>
 #include <Rconnections.h>

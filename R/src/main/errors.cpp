@@ -42,6 +42,7 @@
 #include <CXXR/Symbol.hpp>
 #include <Localization.h>
 #include <RContext.h>
+#include <R.h>
 #include <Defn.h>
 #include <Internal.h>
 /* -> Errormsg.h */

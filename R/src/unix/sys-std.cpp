@@ -41,6 +41,7 @@
 #include <CXXR/StringVector.hpp>
 #include <R_ext/Minmax.h>
 #include <RContext.h>
+#include <Rembedded.h>
 #include <Defn.h>
 #include <Localization.h>
 #include <Rinterface.h>
@@ -1237,7 +1238,7 @@ HIDDEN NORET void Rstd_CleanUp(SA_TYPE saveact, int status, int runLast)
 	break;
     }
     R_RunExitFinalizers();
-    CleanEd();
+    R::CleanEd();
     if(saveact != SA_SUICIDE) KillAllDevices();
     R_CleanTempDir();
     if(saveact != SA_SUICIDE && R_CollectWarnings)

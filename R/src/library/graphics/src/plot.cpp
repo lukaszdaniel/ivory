@@ -31,6 +31,7 @@
 #include <CXXR/ListVector.hpp>
 #include <CXXR/StringVector.hpp>
 #include <CXXR/RealVector.hpp>
+#include <R.h>
 #include <Defn.h>
 #include "localization.h"
 #include <cfloat>  /* for DBL_MAX */

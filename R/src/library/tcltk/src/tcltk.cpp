@@ -27,6 +27,7 @@
 #include <CXXR/StringVector.hpp>
 #include <CXXR/IntVector.hpp>
 #include <CXXR/RealVector.hpp>
+#include <Rinterface.h>
 #include <Defn.h>
 #include <R_ext/RS.h> // for Calloc
 

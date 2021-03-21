@@ -154,22 +154,6 @@ extern void *Rm_realloc(void * p, size_t n);
    length on a 64-bit system.
 */
 
-/* Report error encountered during garbage collection where for detecting
-   problems it is better to abort, but for debugging (or some production runs,
-   where external validation of results is possible) it may be preferred to
-   continue. Configurable via _R_GC_FAIL_ON_ERROR_. Typically these problems
-   are due to memory corruption.
-*/
-static void gc_error(const char *msg)
-{
-    if (GCManager::gc_fail_on_error())
-        R_Suicide(msg);
-    else if (R_in_gc)
-        REprintf(msg);
-    else
-        error(msg);
-}
-
 /* These are used in profiling to separate out time in GC */
 int R_gc_running() { return R_in_gc; }
 
@@ -426,14 +410,7 @@ void GCNode::gc(unsigned int num_old_gens_to_collect)
     MARK_THRU(&marker, R_print.na_string);
     MARK_THRU(&marker, R_print.na_string_noquote);
 
-    if (Symbol::R_SymbolTable.size()) /* in case of GC during startup */
-        for (size_t i = 0; i < Symbol::R_SymbolTable.size(); i++)
-        { /* Symbol table */
-            MARK_THRU(&marker, Symbol::R_SymbolTable[i]);
-            for (RObject *s = Symbol::R_SymbolTable[i]; s; s = CDR(s))
-                if (ATTRIB(CAR(s)) != R_NilValue)
-                    gc_error("****found a symbol with attributes\n");
-        }
+    Symbol::visitTable(&marker); /* Symbol table */
 
     for (int i = 0; i < R_MaxDevices; i++)
     { /* Device display lists */
@@ -599,18 +576,18 @@ namespace
         if (R_TrueValue && LOGICAL(R_TrueValue)[0] != TRUE)
         {
             LOGICAL(R_TrueValue)[0] = TRUE;
-            gc_error(_("internal TRUE value has been modified"));
+            GCManager::gc_error(_("internal TRUE value has been modified"));
         }
         if (R_FalseValue && LOGICAL(R_FalseValue)[0] != FALSE)
         {
             LOGICAL(R_FalseValue)[0] = FALSE;
-            gc_error(_("internal FALSE value has been modified"));
+            GCManager::gc_error(_("internal FALSE value has been modified"));
         }
         if (R_LogicalNAValue &&
             LOGICAL(R_LogicalNAValue)[0] != NA_LOGICAL)
         {
             LOGICAL(R_LogicalNAValue)[0] = NA_LOGICAL;
-            gc_error(_("internal logical NA value has been modified"));
+            GCManager::gc_error(_("internal logical NA value has been modified"));
         }
     }
 } // namespace

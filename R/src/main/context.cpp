@@ -190,17 +190,17 @@ HIDDEN void RCNTXT::R_run_onexits(RCNTXT *cptr)
 
 void RCNTXT::R_restore_globals()
 {
-    ProtectStack::restoreSize(this->getCStackTop());
-    R_GCEnabled = this->getGCEnabled();
-    R_BCIntActive = this->getBCIntactive();
-    R_BCpc = this->getBCPC();
-    R_BCbody = this->getBCBody();
-    R_EvalDepth = this->getEvalDepth();
-    vmaxset(this->getVMax());
-    R_interrupts_suspended = (Rboolean) this->getIntSusp();
-    R_HandlerStack = this->getHandlerStack();
-    R_RestartStack = this->getRestartStack();
-    while (R_PendingPromises != this->getPrStack()) {
+    ProtectStack::restoreSize(getCStackTop());
+    R_GCEnabled = getGCEnabled();
+    R_BCIntActive = getBCIntactive();
+    R_BCpc = getBCPC();
+    R_BCbody = getBCBody();
+    R_EvalDepth = getEvalDepth();
+    vmaxset(getVMax());
+    R_interrupts_suspended = (Rboolean) getIntSusp();
+    R_HandlerStack = getHandlerStack();
+    R_RestartStack = getRestartStack();
+    while (R_PendingPromises != getPrStack()) {
 	/* The value 2 installed in PRSEEN 2 allows forcePromise in
 	   eval.cpp to signal a warning when asked to evaluate a promise
 	   whose evaluation has been interrupted by a jump. */
@@ -210,9 +210,9 @@ void RCNTXT::R_restore_globals()
     /* Need to reset R_Expressions in case we are jumping after
        handling a stack overflow. */
     R_Expressions = R_Expressions_keep;
-    R_BCNodeStackTop = this->getNodeStack();
-    R_Srcref = this->getSrcRef();
-    R_BCProtReset(this->getBCProtTop());
+    R_BCNodeStackTop = getNodeStack();
+    R_Srcref = getSrcRef();
+    R_BCProtReset(getBCProtTop());
 }
 
 RCNTXT *RCNTXT::first_jump_target(int mask)
@@ -240,7 +240,7 @@ HIDDEN NORET void RCNTXT::R_jumpctxt(int mask, SEXP val)
     /* find the target for the first jump -- either an intermediate
        context with an on.exit action to run or the final target if
        there are no intermediate on.exit actions */
-    cptr = this->first_jump_target(mask);
+    cptr = first_jump_target(mask);
 
     /* run cend code for all contexts down to but not including
        the first jump target */
@@ -284,33 +284,33 @@ void RCNTXT::start(int flags,
                    SEXP syscall, SEXP env, SEXP sysp,
                    SEXP promargs, SEXP callfun)
 {
-    this->setCStackTop(ProtectStack::size());
-    this->setGCEnabled(R_GCEnabled);
-    this->setBCPC(R_BCpc);
-    this->setBCBody(R_BCbody);
-    this->setBCIntactive(R_BCIntActive);
-    this->setEvalDepth(R_EvalDepth);
-    this->setCallFlag(flags);
-    this->setCall(syscall);
-    this->setWorkingEnvironment(env);
-    this->setSysParent(sysp);
-    this->setOnExit(R_NilValue);
-    this->setContextEnd(nullptr);
-    this->setPromiseArgs(promargs);
-    this->setCallFun(callfun);
-    this->setVMax(vmaxget());
-    this->setIntSusp(R_interrupts_suspended);
-    this->setHandlerStack(R_HandlerStack);
-    this->setRestartStack(R_RestartStack);
-    this->setPrStack(R_PendingPromises);
-    this->setNodeStack(R_BCNodeStackTop);
-    this->setBCProtTop(R_BCProtTop);
-    this->setSrcRef(R_Srcref);
-    this->setBrowserFinish(R_GlobalContext->getBrowserFinish());
-    this->setNextContext(R_GlobalContext);
-    this->setReturnValue(nullptr);
-    this->setJumpTarget(nullptr);
-    this->setJumpMask(0);
+    setCStackTop(ProtectStack::size());
+    setGCEnabled(R_GCEnabled);
+    setBCPC(R_BCpc);
+    setBCBody(R_BCbody);
+    setBCIntactive(R_BCIntActive);
+    setEvalDepth(R_EvalDepth);
+    setCallFlag(flags);
+    setCall(syscall);
+    setWorkingEnvironment(env);
+    setSysParent(sysp);
+    setOnExit(R_NilValue);
+    setContextEnd(nullptr);
+    setPromiseArgs(promargs);
+    setCallFun(callfun);
+    setVMax(vmaxget());
+    setIntSusp(R_interrupts_suspended);
+    setHandlerStack(R_HandlerStack);
+    setRestartStack(R_RestartStack);
+    setPrStack(R_PendingPromises);
+    setNodeStack(R_BCNodeStackTop);
+    setBCProtTop(R_BCProtTop);
+    setSrcRef(R_Srcref);
+    setBrowserFinish(R_GlobalContext->getBrowserFinish());
+    setNextContext(R_GlobalContext);
+    setReturnValue(nullptr);
+    setJumpTarget(nullptr);
+    setJumpMask(0);
 
     R_GlobalContext = this;
 }
@@ -323,30 +323,30 @@ void RCNTXT::end()
 {
     void R_FixupExitingHandlerResult(SEXP); /* defined in error.cpp */
     SEXP R_UnwindHandlerStack(SEXP); /* defined in error.cpp */
-    R_HandlerStack = R_UnwindHandlerStack(this->getHandlerStack());
-    R_RestartStack = this->getRestartStack();
-    RCNTXT *jumptarget = this->getJumpTarget();
-    if (this->workingEnvironment() != R_NilValue && this->onExit() != R_NilValue)
+    R_HandlerStack = R_UnwindHandlerStack(getHandlerStack());
+    R_RestartStack = getRestartStack();
+    RCNTXT *jumptarget = getJumpTarget();
+    if (workingEnvironment() != R_NilValue && onExit() != R_NilValue)
     {
-        SEXP s = this->onExit();
+        SEXP s = onExit();
         bool savevis = R_Visible;
         RCNTXT *savecontext = R_ExitContext;
         SEXP saveretval = R_ReturnedValue;
         R_ExitContext = this;
-        this->setOnExit(R_NilValue);  /* prevent recursion */
-        this->setJumpTarget(nullptr); /* in case on.exit expr calls return() */
+        setOnExit(R_NilValue);  /* prevent recursion */
+        setJumpTarget(nullptr); /* in case on.exit expr calls return() */
         PROTECT(saveretval);
         PROTECT(s);
         R_FixupExitingHandlerResult(saveretval);
-        if (this->getReturnValue()) // why is this needed???
-            INCREMENT_LINKS(this->getReturnValue());
+        if (getReturnValue()) // why is this needed???
+            INCREMENT_LINKS(getReturnValue());
         for (; s != R_NilValue; s = CDR(s))
         {
-            this->setOnExit(CDR(s));
-            eval(CAR(s), this->workingEnvironment());
+            setOnExit(CDR(s));
+            eval(CAR(s), workingEnvironment());
         }
-        if (this->getReturnValue()) // why is this needed???
-            DECREMENT_LINKS(this->getReturnValue());
+        if (getReturnValue()) // why is this needed???
+            DECREMENT_LINKS(getReturnValue());
         R_ReturnedValue = saveretval;
         UNPROTECT(2);
         R_ExitContext = savecontext;
@@ -356,10 +356,10 @@ void RCNTXT::end()
         R_ExitContext = nullptr;
     /* continue jumping if this was reached as an intermetiate jump */
     if (jumptarget)
-        /* this->returnValue is undefined */
-        jumptarget->R_jumpctxt(this->getJumpMask(), R_ReturnedValue);
+        /* returnValue is undefined */
+        jumptarget->R_jumpctxt(getJumpMask(), R_ReturnedValue);
 
-    R_GlobalContext = this->nextContext();
+    R_GlobalContext = nextContext();
 }
 
 /* findcontext - find the correct context */
@@ -502,16 +502,16 @@ SEXP RCNTXT::getCallWithSrcref()
 {
     SEXP result;
 
-    PROTECT(result = shallow_duplicate(this->getCall()));
-    if (this->getSrcRef() && !isNull(this->getSrcRef()))
+    PROTECT(result = shallow_duplicate(getCall()));
+    if (getSrcRef() && !isNull(getSrcRef()))
     {
         SEXP sref;
-        if (this->getSrcRef() == R_InBCInterpreter)
+        if (getSrcRef() == R_InBCInterpreter)
             /* FIXME: this is expensive, it might be worth changing sys.call */
             /* to return srcrefs only on request (add `with.source` option) */
             sref = R_findBCInterpreterSrcref(this);
         else
-            sref = this->getSrcRef();
+            sref = getSrcRef();
         setAttrib(result, R_SrcrefSymbol, duplicate(sref));
     }
     UNPROTECT(1);

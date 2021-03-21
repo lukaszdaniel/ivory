@@ -215,6 +215,11 @@ namespace R
     *          closure is to be evaluated.
     *
     * @return pointer to the created closure object.
+    *
+    * @note This is called by function() {}, where an invalid
+    *       body should be impossible. When called from
+    *       other places (eg do_asfunction) they
+    *       should do this checking in advance.
     */
    SEXP mkCLOSXP(SEXP formal_args, SEXP body, SEXP env);
 } // namespace R

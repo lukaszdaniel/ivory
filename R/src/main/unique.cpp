@@ -1450,7 +1450,7 @@ static SEXP subDots(SEXP rho)
 	while (TYPEOF(t) == PROMSXP)
 	    t = PREXPR(t);
 	if( isSymbol(t) || isLanguage(t) )
-	    SETCAR(b, installDDVAL(i));
+	    SETCAR(b, Rf_installDDVAL(i));
 	else
 	    SETCAR(b, t);
     }

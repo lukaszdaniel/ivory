@@ -35,7 +35,7 @@
 
 #include <CXXR/FixedVector.hpp>
 #include <CXXR/GCEdge.hpp>
-#include <CXXR/String.hpp>
+#include <CXXR/CachedString.hpp>
 #include <CXXR/HandleVector.hpp>
 #include <CXXR/SEXP_downcast.hpp>
 
@@ -66,7 +66,7 @@ namespace CXXR
          *          permissible.
          */
         explicit StringVector(size_t sz)
-            : HandleVector<String, STRSXP>(sz, Handle<String>(const_cast<String *>(String::blank())))
+            : HandleVector<String, STRSXP>(sz, Handle<String>(const_cast<CachedString *>(CachedString::blank())))
         {
         }
 

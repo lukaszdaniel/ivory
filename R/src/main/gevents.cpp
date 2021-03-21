@@ -32,6 +32,7 @@
 #include <CXXR/IntVector.hpp>
 #include <CXXR/RealVector.hpp>
 #include <Localization.h>
+#include <R.h>
 #include <Defn.h>
 #include <Rmath.h>
 #include <R_ext/GraphicsEngine.h>

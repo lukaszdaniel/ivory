@@ -930,6 +930,7 @@ SEXP do_sysinfo(SEXP call, SEXP op, SEXP args, SEXP rho)
 #define R_INTERFACE_PTRS 1
 #include <Rinterface.h> /* for ptr_R_ProcessEvents */
 
+extern "C"
 void R_ProcessEvents(void)
 {
 #ifdef HAVE_AQUA
