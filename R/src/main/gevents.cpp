@@ -31,6 +31,7 @@
 #include <CXXR/Expression.hpp>
 #include <CXXR/IntVector.hpp>
 #include <CXXR/RealVector.hpp>
+#include <CXXR/Symbol.hpp>
 #include <Localization.h>
 #include <R.h>
 #include <Defn.h>
@@ -39,6 +40,7 @@
 #include <R_ext/Print.h>
 
 using namespace R;
+using namespace CXXR;
 
 static const char *const mouseHandlers[] =
 	{"onMouseDown", "onMouseUp", "onMouseMove"};
@@ -162,7 +164,7 @@ SEXP do_getGraphicsEvent(SEXP call, SEXP op, SEXP args, SEXP env)
 		if (dd->eventEnv != R_NilValue) {
 		    if (dd->eventHelper) dd->eventHelper(dd, 1);
 		    dd->gettingEvent = TRUE;
-		    defineVar(install("result"), R_NilValue, dd->eventEnv);
+		    defineVar(Symbol::obtain("result"), R_NilValue, dd->eventEnv);
 		    count++;
 		}
 	    }
@@ -190,7 +192,7 @@ SEXP do_getGraphicsEvent(SEXP call, SEXP op, SEXP args, SEXP env)
 		if ((gd = GEgetDevice(devNum)) && (dd = gd->dev)) {
 		    if (dd->eventEnv != R_NilValue) {
 			if (dd->eventHelper) dd->eventHelper(dd, 2);
-			result = findVar(install("result"), dd->eventEnv);
+			result = findVar(Symbol::obtain("result"), dd->eventEnv);
 			if (result != R_NilValue && result != R_UnboundValue) {
 			    break;
 			}
@@ -232,7 +234,7 @@ void Rf_doMouseEvent(pDevDesc dd, R_MouseEvent event,
 	PROTECT(handler);
     }
     if (TYPEOF(handler) == CLOSXP) {
-	SEXP s_which = install("which");
+	SEXP s_which = Symbol::obtain("which");
 	defineVar(s_which, ScalarInteger(ndevNumber(dd)+1), dd->eventEnv);
 	// Be portable: see PR#15793
 	int len = ((buttons & leftButton) != 0)
@@ -249,7 +251,7 @@ void Rf_doMouseEvent(pDevDesc dd, R_MouseEvent event,
 	PROTECT(sy = ScalarReal((y - dd->bottom) / (dd->top - dd->bottom) ));
 	PROTECT(temp = lang4(handler, bvec, sx, sy));
 	PROTECT(result = eval(temp, dd->eventEnv));
-	defineVar(install("result"), result, dd->eventEnv);
+	defineVar(Symbol::obtain("result"), result, dd->eventEnv);
 	UNPROTECT(5);
 	R_FlushConsole();
     }
@@ -279,12 +281,12 @@ void Rf_doKeybd(pDevDesc dd, R_KeyName rkey,
     }
 
     if (TYPEOF(handler) == CLOSXP) {
-	SEXP s_which = install("which");
+	SEXP s_which = Symbol::obtain("which");
 	defineVar(s_which, ScalarInteger(ndevNumber(dd)+1), dd->eventEnv);
 	PROTECT(skey = mkString(keyname ? keyname : keynames[rkey]));
 	PROTECT(temp = lang2(handler, skey));
 	PROTECT(result = eval(temp, dd->eventEnv));
-	defineVar(install("result"), result, dd->eventEnv);
+	defineVar(Symbol::obtain("result"), result, dd->eventEnv);
 	UNPROTECT(3);
 	R_FlushConsole();
     }
@@ -313,11 +315,11 @@ void Rf_doIdle(pDevDesc dd)
     }
 
     if (TYPEOF(handler) == CLOSXP) {
-	SEXP s_which = install("which");
+	SEXP s_which = Symbol::obtain("which");
 	defineVar(s_which, ScalarInteger(ndevNumber(dd)+1), dd->eventEnv);
 	PROTECT(temp = lang1(handler));
 	PROTECT(result = eval(temp, dd->eventEnv));
-	defineVar(install("result"), result, dd->eventEnv);
+	defineVar(Symbol::obtain("result"), result, dd->eventEnv);
 	UNPROTECT(2);
 	R_FlushConsole();
     }

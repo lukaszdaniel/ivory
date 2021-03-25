@@ -818,7 +818,7 @@ static size_t rcvData(void *ptr, size_t size, size_t nitems, void *ctx)
 	    int mult = (int) ceil((double)(ctxt->filled + add)/ctxt->bufsize);
 	    size_t newbufsize = mult * ctxt->bufsize;
 	    void *newbuf = realloc(ctxt->buf, newbufsize);
-	    if (!newbuf) error("Failure in re-allocation in rcvData");
+	    if (!newbuf) error(_("Failure in re-allocation in rcvData"));
 	    ctxt->buf = static_cast<char *>(newbuf); ctxt->bufsize = newbufsize;
 	}
 

@@ -33,6 +33,7 @@
 #include <CXXR/RealVector.hpp>
 #include <CXXR/StringVector.hpp>
 #include <CXXR/PairList.hpp>
+#include <CXXR/Symbol.hpp>
 #include <Localization.h>
 #include <Defn.h>
 #include <Internal.h>
@@ -456,9 +457,9 @@ HIDDEN SEXP do_rep_len(SEXP call, SEXP op, SEXP args, SEXP rho)
     if (isObject(s)) {
 	SEXP rep_call;
 	PROTECT(rep_call = shallow_duplicate(call));
-	SETCAR(rep_call, install("rep"));
-	SET_TAG(CDDR(rep_call), install("length.out"));
-	SET_TAG(CDR(args), install("length.out"));
+	SETCAR(rep_call, Symbol::obtain("rep"));
+	SET_TAG(CDDR(rep_call), Symbol::obtain("length.out"));
+	SET_TAG(CDR(args), Symbol::obtain("length.out"));
 	if (DispatchOrEval(rep_call, op, "rep", args, rho, &a, 0, 0)) {
 	    UNPROTECT(1);
 	    return(a);
@@ -743,9 +744,9 @@ HIDDEN SEXP do_rep(SEXP call, SEXP op, SEXP args, SEXP rho)
        rep(x, times, length.out, each, ...)
     */
     if (do_rep_formals == nullptr)
-	do_rep_formals = allocFormalsList5(install("x"), install("times"),
-					   install("length.out"),
-					   install("each"), R_DotsSymbol);
+	do_rep_formals = allocFormalsList5(Symbol::obtain("x"), Symbol::obtain("times"),
+					   Symbol::obtain("length.out"),
+					   Symbol::obtain("each"), R_DotsSymbol);
     PROTECT(args = matchArgs_NR(do_rep_formals, args, call));
 
     x = CAR(args);
@@ -904,9 +905,9 @@ HIDDEN SEXP do_seq(SEXP call, SEXP op, SEXP args, SEXP rho)
        seq(from, to, by, length.out, along.with, ...)
     */
     if (do_seq_formals == nullptr)
-	do_seq_formals = allocFormalsList6(install("from"), install("to"),
-					   install("by"), install("length.out"),
-					   install("along.with"), R_DotsSymbol);
+	do_seq_formals = allocFormalsList6(Symbol::obtain("from"), Symbol::obtain("to"),
+					   Symbol::obtain("by"), Symbol::obtain("length.out"),
+					   Symbol::obtain("along.with"), R_DotsSymbol);
     PROTECT(args = matchArgs_NR(do_seq_formals, args, call));
 
     from = CAR(args); args = CDR(args);
@@ -1118,7 +1119,7 @@ HIDDEN SEXP do_seq_along(SEXP call, SEXP op, SEXP args, SEXP rho)
 
     /* Store the .Primitive for 'length' for DispatchOrEval to use. */
     if (length_op == nullptr) {
-	SEXP R_lengthSymbol = install("length");
+	SEXP R_lengthSymbol = Symbol::obtain("length");
 	length_op = eval(R_lengthSymbol, R_BaseEnv);
 	if (TYPEOF(length_op) != BUILTINSXP) {
 	    length_op = nullptr;

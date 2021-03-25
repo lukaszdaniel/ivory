@@ -29,6 +29,7 @@
 #include <CXXR/Expression.hpp>
 #include <CXXR/IntVector.hpp>
 #include <CXXR/StringVector.hpp>
+#include <CXXR/Symbol.hpp>
 #include <Localization.h>
 #include <Defn.h>
 #include <Internal.h>
@@ -3126,7 +3127,7 @@ SEXP GEcreateSnapshot(pGEDevDesc dd)
 	}
     PROTECT(engineVersion = allocVector(INTSXP, 1));
     INTEGER(engineVersion)[0] = R_GE_getVersion();
-    setAttrib(snapshot, install("engineVersion"), engineVersion);
+    setAttrib(snapshot, Symbol::obtain("engineVersion"), engineVersion);
     UNPROTECT(2);
     return snapshot;
 }
@@ -3153,7 +3154,7 @@ void GEplaySnapshot(SEXP snapshot, pGEDevDesc dd)
     SEXP snapshotEngineVersion;
     int engineVersion = R_GE_getVersion();
     PROTECT(snapshotEngineVersion = getAttrib(snapshot, 
-                                              install("engineVersion")));
+                                              Symbol::obtain("engineVersion")));
     if (isNull(snapshotEngineVersion)) {
         warning(_("snapshot recorded with different graphics engine version (pre 11 - this is version %d)"),
                 engineVersion);

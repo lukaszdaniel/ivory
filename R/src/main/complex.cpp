@@ -830,7 +830,7 @@ HIDDEN SEXP do_polyroot(SEXP call, SEXP op, SEXP args, SEXP rho)
     }
 #ifdef LONG_VECTOR_SUPPORT
     R_xlen_t nn = XLENGTH(z);
-    if (nn > R_SHORT_LEN_MAX) error("long vectors are not supported");
+    if (nn > R_SHORT_LEN_MAX) error(_("long vectors are not supported"));
     n = (int) nn;
 #else
     n = LENGTH(z);

@@ -30,6 +30,7 @@
 #include <CXXR/IntVector.hpp>
 #include <CXXR/LogicalVector.hpp>
 #include <CXXR/StringVector.hpp>
+#include <CXXR/Symbol.hpp>
 #include <Localization.h>
 #include <Defn.h>
 #include <Internal.h>
@@ -63,7 +64,7 @@ HIDDEN SEXP do_lapply(SEXP call, SEXP op, SEXP args, SEXP rho)
     /* Build call: FUN(XX[[<ind>]], ...) */
 
     SEXP ind = PROTECT(allocVector(realIndx ? REALSXP : INTSXP, 1));
-    SEXP isym = install("i");
+    SEXP isym = Symbol::obtain("i");
     defineVar(isym, ind, rho);
     INCREMENT_NAMED(ind);
 
@@ -149,7 +150,7 @@ HIDDEN SEXP do_vapply(SEXP call, SEXP op, SEXP args, SEXP rho)
 	SEXP ind, tmp;
 	/* Build call: FUN(XX[[<ind>]], ...) */
 
-	SEXP isym = install("i");
+	SEXP isym = Symbol::obtain("i");
 	PROTECT(ind = allocVector(realIndx ? REALSXP : INTSXP, 1));
 	defineVar(isym, ind, rho);
 	INCREMENT_NAMED(ind);
@@ -323,7 +324,7 @@ static SEXP do_one(SEXP X, SEXP FUN, SEXP classes, SEXP deflt,
 	   a variable X in the environment of the rapply closure call
 	   that calls into the rapply .Internal. */
 	SEXP R_fcall; /* could allocate once and preserve for re-use */
-	SEXP Xsym = install("X");
+	SEXP Xsym = Symbol::obtain("X");
 	defineVar(Xsym, X, rho);
 	INCREMENT_NAMED(X);
 	/* PROTECT(R_fcall = lang2(FUN, Xsym)); */

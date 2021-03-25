@@ -34,6 +34,7 @@
 #include <CXXR/StringVector.hpp>
 #include <CXXR/IntVector.hpp>
 #include <CXXR/LogicalVector.hpp>
+#include <CXXR/Symbol.hpp>
 #include <Localization.h>
 #include <Defn.h>
 #include <Internal.h>
@@ -50,6 +51,7 @@
 #include <tre/tre.h>
 
 using namespace R;
+using namespace CXXR;
 
 static void amatch_regaparams(regaparams_t *params, int patlen,
 		  double *bounds, int *costs)
@@ -187,7 +189,7 @@ HIDDEN SEXP do_agrep(SEXP call, SEXP op, SEXP args, SEXP env)
 	return ans;
     }
 
-    SEXP s_nchar = install("nchar");
+    SEXP s_nchar = Symbol::obtain("nchar");
     if(useBytes)
 	PROTECT(call = lang3(s_nchar, pat,
 			     ScalarString(mkChar("bytes"))));
@@ -473,7 +475,7 @@ static SEXP adist_full(SEXP x, SEXP y, double *costs, Rboolean opt_counts)
 	SET_VECTOR_ELT(dimnames, 1, y);
 	SET_VECTOR_ELT(dimnames, 2, names);
 	setAttrib(counts, R_DimNamesSymbol, dimnames);
-	setAttrib(ans, install("counts"), counts);
+	setAttrib(ans, Symbol::obtain("counts"), counts);
 	UNPROTECT(2); /* names, dimnames */
 	if(!isNull(x) || !isNull(y)) {
 	    PROTECT(dimnames = allocVector(VECSXP, 2));
@@ -482,7 +484,7 @@ static SEXP adist_full(SEXP x, SEXP y, double *costs, Rboolean opt_counts)
 	    setAttrib(trafos, R_DimNamesSymbol, dimnames);
 	    UNPROTECT(1); /* dimnames */
 	}
-	setAttrib(ans, install("trafos"), trafos);
+	setAttrib(ans, Symbol::obtain("trafos"), trafos);
 	UNPROTECT(2); /* trafos, counts */
     }
 
@@ -720,7 +722,7 @@ HIDDEN SEXP do_adist(SEXP call, SEXP op, SEXP args, SEXP env)
 	SET_VECTOR_ELT(dimnames, 1, y);
 	SET_VECTOR_ELT(dimnames, 2, names);
 	setAttrib(counts, R_DimNamesSymbol, dimnames);
-	setAttrib(ans, install("counts"), counts);
+	setAttrib(ans, Symbol::obtain("counts"), counts);
 	UNPROTECT(2); /* names, dimnames */
 	PROTECT(dimnames = allocVector(VECSXP, 3));
 	PROTECT(names = allocVector(STRSXP, 2));
@@ -730,7 +732,7 @@ HIDDEN SEXP do_adist(SEXP call, SEXP op, SEXP args, SEXP env)
 	SET_VECTOR_ELT(dimnames, 1, y);
 	SET_VECTOR_ELT(dimnames, 2, names);
 	setAttrib(offsets, R_DimNamesSymbol, dimnames);
-	setAttrib(ans, install("offsets"), offsets);
+	setAttrib(ans, Symbol::obtain("offsets"), offsets);
 	UNPROTECT(4); /* names, dimnames, counts, offsets */
     }
 
@@ -813,7 +815,7 @@ HIDDEN SEXP do_aregexec(SEXP call, SEXP op, SEXP args, SEXP env)
 	}
     }
 
-    SEXP s_nchar = install("nchar");
+    SEXP s_nchar = Symbol::obtain("nchar");
     if(useBytes)
 	PROTECT(call = lang3(s_nchar, pat,
 			     ScalarString(mkChar("bytes"))));
@@ -856,7 +858,7 @@ HIDDEN SEXP do_aregexec(SEXP call, SEXP op, SEXP args, SEXP env)
 //	if ((i+1) % NINTERRUPT == 0) R_CheckUserInterrupt();
 	if(STRING_ELT(vec, i) == NA_STRING) {
 	    PROTECT(matchpos = ScalarInteger(NA_INTEGER));
-	    SEXP s_match_length = install("match.length");
+	    SEXP s_match_length = Symbol::obtain("match.length");
 	    setAttrib(matchpos, s_match_length,
 		      ScalarInteger(NA_INTEGER));
 	    SET_VECTOR_ELT(ans, i, matchpos);
@@ -891,9 +893,9 @@ HIDDEN SEXP do_aregexec(SEXP call, SEXP op, SEXP args, SEXP env)
 		    INTEGER(matchpos)[j] = so + 1;
 		    INTEGER(matchlen)[j] = match.pmatch[j].rm_eo - so;
 		}
-		setAttrib(matchpos, install("match.length"), matchlen);
+		setAttrib(matchpos, Symbol::obtain("match.length"), matchlen);
 		if(useBytes)
-		    setAttrib(matchpos, install("useBytes"),
+		    setAttrib(matchpos, Symbol::obtain("useBytes"),
 			      ScalarLogical(TRUE));
 		SET_VECTOR_ELT(ans, i, matchpos);
 		UNPROTECT(2);
@@ -903,7 +905,7 @@ HIDDEN SEXP do_aregexec(SEXP call, SEXP op, SEXP args, SEXP env)
 		*/
 		PROTECT(matchpos = ScalarInteger(-1));
 		PROTECT(matchlen = ScalarInteger(-1));
-		setAttrib(matchpos, install("match.length"), matchlen);
+		setAttrib(matchpos, Symbol::obtain("match.length"), matchlen);
 		SET_VECTOR_ELT(ans, i, matchpos);
 		UNPROTECT(2);
 	    }

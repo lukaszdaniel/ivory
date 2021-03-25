@@ -143,7 +143,7 @@ namespace CXXR
     {
       VectorBase *vb = dynamic_cast<VectorBase *>(x);
       if (!vb)
-        Rf_error("SET_TRUELENGTH invoked for a non-vector.");
+        Rf_error(_("SET_TRUELENGTH invoked for a non-vector."));
       vb->m_truelength = v;
     }
 
@@ -151,7 +151,7 @@ namespace CXXR
     {
       VectorBase *vb = dynamic_cast<VectorBase *>(x);
       if (!vb)
-        Rf_error("SETLENGTH invoked for a non-vector.");
+        Rf_error(_("SETLENGTH invoked for a non-vector."));
       vb->resize(v);
       x->setScalar(v == 1);
     }
@@ -159,7 +159,7 @@ namespace CXXR
     static inline void set_truelength(RObject *x, R_xlen_t v)
     {
       if (x && x->altrep())
-        Rf_error("can't set ALTREP truelength");
+        Rf_error(_("can't set ALTREP truelength"));
       CXXR::VectorBase::set_stdvec_truelength(x, v);
     }
 

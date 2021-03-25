@@ -113,6 +113,7 @@ extern char *tzname[2];
 #include <CXXR/VectorBase.hpp>
 #include <CXXR/StringVector.hpp>
 #include <CXXR/PairList.hpp>
+#include <CXXR/Symbol.hpp>
 #include <cstdlib> /* for setenv or putenv */
 #include <Localization.h>
 #include <Defn.h>
@@ -122,6 +123,7 @@ extern char *tzname[2];
 #include "Rstrptime.h"
 
 using namespace R;
+using namespace CXXR;
 
 static constexpr int days_in_month[12] =
 	{31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31};
@@ -773,7 +775,7 @@ HIDDEN SEXP do_asPOSIXlt(SEXP call, SEXP op, SEXP args, SEXP env)
     SET_STRING_ELT(klass, 0, mkChar("POSIXlt"));
     SET_STRING_ELT(klass, 1, mkChar("POSIXt"));
     classgets(ans, klass);
-    setAttrib(ans, install("tzone"), tzone);
+    setAttrib(ans, Symbol::obtain("tzone"), tzone);
     SEXP nm = getAttrib(x, R_NamesSymbol);
     if(nm != R_NilValue) setAttrib(VECTOR_ELT(ans, 5), R_NamesSymbol, nm);
     if(settz) reset_tz(oldtz);
@@ -892,7 +894,7 @@ HIDDEN SEXP do_formatPOSIXlt(SEXP call, SEXP op, SEXP args, SEXP env)
     int UseTZ = asLogical(CADDR(args));
     if(UseTZ == NA_LOGICAL)
 	error(_("invalid '%s' argument"), "usetz");
-    SEXP tz = getAttrib(x, install("tzone"));
+    SEXP tz = getAttrib(x, Symbol::obtain("tzone"));
 
     const char *tz1;
     if (!isNull(tz) && strlen(tz1 = CHAR(STRING_ELT(tz, 0)))) {
@@ -1001,7 +1003,7 @@ HIDDEN SEXP do_formatPOSIXlt(SEXP call, SEXP op, SEXP args, SEXP env)
 		*p2 = '\0';
 		ns = *(p+3) - '0';
 		if(ns < 0 || ns > 9) { /* not a digit */
-		    ns = asInteger(GetOption1(install("digits.secs")));
+		    ns = asInteger(GetOption1(Symbol::obtain("digits.secs")));
 		    if(ns == NA_INTEGER) ns = 0;
 		    nused = 3;
 		}
@@ -1195,7 +1197,7 @@ HIDDEN SEXP do_strptime(SEXP call, SEXP op, SEXP args, SEXP env)
     SET_STRING_ELT(klass, 1, mkChar("POSIXt"));
     classgets(ans, klass);
     if(settz) reset_tz(oldtz);
-    if(isString(tzone)) setAttrib(ans, install("tzone"), tzone);
+    if(isString(tzone)) setAttrib(ans, Symbol::obtain("tzone"), tzone);
 
     UNPROTECT(5);
     return ans;
@@ -1254,7 +1256,7 @@ HIDDEN SEXP do_D2POSIXlt(SEXP call, SEXP op, SEXP args, SEXP env)
     SET_STRING_ELT(klass, 0, mkChar("POSIXlt"));
     SET_STRING_ELT(klass, 1, mkChar("POSIXt"));
     classgets(ans, klass);
-    SEXP s_tzone = install("tzone");
+    SEXP s_tzone = Symbol::obtain("tzone");
     setAttrib(ans, s_tzone, mkString("UTC"));
     SEXP nm = getAttrib(x, R_NamesSymbol);
     if(nm != R_NilValue) setAttrib(VECTOR_ELT(ans, 5), R_NamesSymbol, nm);

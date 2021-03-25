@@ -97,7 +97,7 @@ static void (* R_Tcl_do)(void) = nullptr; /* Initialized to be sure */
 void set_R_Tcldo(DO_FUNC ptr)
 {
     if (R_Tcl_do)
-	error("Thief about! Something other than package tcltk has set or is attempting to set R_Tcl_do");
+	error(_("Thief about! Something other than package tcltk has set or is attempting to set R_Tcl_do"));
     R_Tcl_do = ptr;
     return;
 }
@@ -107,7 +107,7 @@ void unset_R_Tcldo(DO_FUNC ptr)
     /* This needs to be a warning not an error, or tcltk will not be able
        to be detached. */
     if (R_Tcl_do != ptr)
-	warning("Thief about! Something other than package tcltk has set or is attempting to unset R_Tcl_do");
+	warning(_("Thief about! Something other than package tcltk has set or is attempting to unset R_Tcl_do"));
     R_Tcl_do = nullptr;
     return;
 }

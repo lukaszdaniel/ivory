@@ -458,7 +458,7 @@ int R_SaveAsTIFF(void  *d, int width, int height,
 
     out = TIFFOpen(outfile, "w");
     if (!out) {
-	warning("unable to open TIFF file '%s'", outfile);
+	warning(_("unable to open TIFF file '%s'"), outfile);
 	return 0;
     }
     TIFFSetField(out, TIFFTAG_IMAGEWIDTH, width);

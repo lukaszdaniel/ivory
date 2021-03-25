@@ -104,9 +104,9 @@ void R::PrintInit(R_PrintData &data, SEXP env)
     data.quote = 1;
     data.right = Rprt_adj_left;
     data.digits = GetOptionDigits();
-    data.scipen = asInteger(GetOption1(install("scipen")));
+    data.scipen = asInteger(GetOption1(Symbol::obtain("scipen")));
     if (data.scipen == NA_INTEGER) data.scipen = 0;
-    data.max = asInteger(GetOption1(install("max.print")));
+    data.max = asInteger(GetOption1(Symbol::obtain("max.print")));
     if (data.max == NA_INTEGER || data.max < 0) data.max = 99999;
     else if(data.max == R_INT_MAX) data.max--; // so we can add
     data.gap = 1;
@@ -352,14 +352,14 @@ static void PrintObjectS4(SEXP s, R_PrintData &data)
     if (methodsNS == R_UnboundValue)
 	error(_("missing methods namespace: this should not happen"));
 
-    SEXP fun = findVarInFrame3(methodsNS, install("show"), TRUE);
+    SEXP fun = findVarInFrame3(methodsNS, Symbol::obtain("show"), TRUE);
     if (TYPEOF(fun) == PROMSXP) {
 	PROTECT(fun);
 	fun = eval(fun, R_BaseEnv);
 	UNPROTECT(1);
     }
     if (fun == R_UnboundValue)
-	error("missing 'show()' in methods namespace: this should not happen");
+	error(_("missing 'show()' in methods namespace: this should not happen"));
 
     SEXP call = PROTECT(lang2(fun, s));
 
@@ -375,12 +375,12 @@ static void PrintObjectS3(SEXP s, R_PrintData &data)
       problems in previous approaches with value duplication and
       evaluating the value, which might be a call object.
     */
-    SEXP xsym = install("x");
+    SEXP xsym = Symbol::obtain("x");
     SEXP mask = PROTECT(NewEnvironment(R_NilValue, R_NilValue, data.env));
     defineVar(xsym, s, mask);
 
     /* Forward user-supplied arguments to print() */
-    SEXP fun = PROTECT(findFun(install("print"), R_BaseNamespace));
+    SEXP fun = PROTECT(findFun(Symbol::obtain("print"), R_BaseNamespace));
     SEXP args = PROTECT(cons(xsym, data.callArgs));
     SEXP call = PROTECT(lcons(fun, args));
 
@@ -440,7 +440,7 @@ static void PrintGenericVector(SEXP s, R_PrintData &data)
 	    if(isObject(tmp)) {
 		const char *str;
 		Rboolean use_fmt = FALSE;
-		SEXP fun = PROTECT(findFun(install("format"),
+		SEXP fun = PROTECT(findFun(Symbol::obtain("format"),
 					   R_BaseNamespace));
 		SEXP call = PROTECT(lang2(fun, tmp));
 		SEXP ans = PROTECT(eval(call, data.env));
@@ -801,13 +801,13 @@ static void PrintSpecial(SEXP s, R_PrintData &data)
     SEXP env, s2;
     PROTECT_INDEX xp;
     PROTECT_WITH_INDEX(env = findVarInFrame3(R_BaseEnv,
-					     install(".ArgsEnv"), TRUE),
+					     Symbol::obtain(".ArgsEnv"), TRUE),
 		       &xp);
     if (TYPEOF(env) == PROMSXP) REPROTECT(env = eval(env, R_BaseEnv), xp);
     s2 = findVarInFrame3(env, install(nm), TRUE);
     if(s2 == R_UnboundValue) {
 	REPROTECT(env = findVarInFrame3(R_BaseEnv,
-					install(".GenericArgsEnv"), TRUE),
+					Symbol::obtain(".GenericArgsEnv"), TRUE),
 		  xp);
 	if (TYPEOF(env) == PROMSXP)
 	    REPROTECT(env = eval(env, R_BaseEnv), xp);

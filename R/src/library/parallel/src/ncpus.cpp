@@ -126,7 +126,7 @@ static Rboolean ncpus_ex(int *ians)
 		         malloc(returnLength);
                 if (!buffer) error(_("memory allocation error"));
             } else
-		error("in reading processor information, probable cause: %d",
+		error(_("in reading processor information, probable cause: %d"),
 		      GetLastError());
         } else done = TRUE;
     }

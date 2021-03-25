@@ -701,8 +701,8 @@ static SEXP S4_extends(SEXP klass, Rboolean use_tab) {
     const void *vmax;
     if(use_tab) vmax = vmaxget();
     if(!s_extends) {
-	s_extends = install("extends");
-	s_extendsForS3 = install(".extendsForS3");
+	s_extends = Symbol::obtain("extends");
+	s_extendsForS3 = Symbol::obtain(".extendsForS3");
 	R_S4_extends_table = R_NewHashedEnv(R_NilValue, ScalarInteger(0));
 	R_PreserveObject(R_S4_extends_table);
     }
@@ -843,7 +843,7 @@ HIDDEN SEXP R::R_data_class2(SEXP obj)
 
 	/* now t == LANGSXP, but check to make sure */
 	if (t != LANGSXP)
-	    error("type must be LANGSXP at this point");
+	    error(_("type must be LANGSXP at this point"));
 	if (n == 0) {
 	    return ScalarString(lang2str(obj, t));
 	}
@@ -1429,7 +1429,7 @@ HIDDEN SEXP do_attr(SEXP call, SEXP op, SEXP args, SEXP env)
     static SEXP do_attr_formals = nullptr;
 
     if (do_attr_formals == nullptr)
-	do_attr_formals = allocFormalsList3(install("x"), install("which"),
+	do_attr_formals = allocFormalsList3(Symbol::obtain("x"), Symbol::obtain("which"),
 					    R_ExactSymbol);
 
     argList = matchArgs_NR(do_attr_formals, args, call);
@@ -1543,12 +1543,12 @@ static void check_slot_assign(SEXP obj, SEXP input, SEXP value, SEXP env)
 	static SEXP checkAt = nullptr;
 	// 'methods' may *not* be in search() ==> do as if calling  methods::checkAtAssignment(..)
 	if (!isMethodsDispatchOn()) { // needed?
-		SEXP e = PROTECT(lang1(install("initMethodDispatch")));
+		SEXP e = PROTECT(lang1(Symbol::obtain("initMethodDispatch")));
 		eval(e, R_MethodsNamespace); // only works with methods loaded
 		UNPROTECT(1);
 	}
 	if (checkAt == nullptr)
-		checkAt = findFun(install("checkAtAssignment"), R_MethodsNamespace);
+		checkAt = findFun(Symbol::obtain("checkAtAssignment"), R_MethodsNamespace);
 	SEXP e = PROTECT(lang4(checkAt, objClass, input, valueClass));
 	eval(e, env);
 	UNPROTECT(3);
@@ -1611,8 +1611,8 @@ HIDDEN SEXP do_attrgets(SEXP call, SEXP op, SEXP args, SEXP env)
 
 	/* argument matching */
 	if (do_attrgets_formals == nullptr)
-	    do_attrgets_formals = allocFormalsList3(install("x"), install("which"),
-						    install("value"));
+	    do_attrgets_formals = allocFormalsList3(Symbol::obtain("x"), Symbol::obtain("which"),
+						    Symbol::obtain("value"));
 	argList = matchArgs_NR(do_attrgets_formals, args, call);
 	PROTECT(argList);
 
@@ -1682,10 +1682,10 @@ static SEXP s_getDataPart;
 static SEXP s_setDataPart;
 
 static void init_slot_handling(void) {
-    s_dot_Data = install(".Data");
-    s_dot_S3Class = install(".S3Class");
-    s_getDataPart = install("getDataPart");
-    s_setDataPart = install("setDataPart");
+    s_dot_Data = Symbol::obtain(".Data");
+    s_dot_S3Class = Symbol::obtain(".S3Class");
+    s_getDataPart = Symbol::obtain("getDataPart");
+    s_setDataPart = Symbol::obtain("setDataPart");
     /* create and preserve an object that is NOT R_NilValue, and is used
        to represent slots that are NULL (which an attribute can not
        be).  The point is not just to store NULL as a slot, but also to
@@ -1693,7 +1693,7 @@ static void init_slot_handling(void) {
 
        The object has to be a symbol if we're going to check identity by
        just looking at referential equality. */
-    pseudo_NULL = install("\001NULL\001");
+    pseudo_NULL = Symbol::obtain("\001NULL\001");
 }
 
 static SEXP data_part(SEXP obj) {
@@ -1893,8 +1893,8 @@ HIDDEN SEXP R_getS4DataSlot(SEXP obj, SEXPTYPE type)
 
   PROTECT_WITH_INDEX(obj, &opi);
   if(!s_xData) {
-    s_xData = install(".xData");
-    s_dotData = install(".Data");
+    s_xData = Symbol::obtain(".xData");
+    s_dotData = Symbol::obtain(".Data");
   }
   if(TYPEOF(obj) != S4SXP || type == S4SXP) {
     SEXP s3class = S3Class(obj);

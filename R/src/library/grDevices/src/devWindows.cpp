@@ -382,7 +382,7 @@ static void init_PS_PDF(void)
 
     initS = findVarInFrame3(grNS, install("initPSandPDFfonts"), TRUE);
     if(initS == R_UnboundValue)
-	error("missing initPSandPDFfonts() in grDevices namespace: this should not happen");
+	error(_("missing initPSandPDFfonts() in grDevices namespace: this should not happen"));
     PROTECT(call = lang1(initS));
     eval(call, R_GlobalEnv);
     UNPROTECT(1);
@@ -719,12 +719,12 @@ static void SetFont(pGEcontext gc, double rot, gadesc *xd)
 				"Arial", fontstyle[face - 1],
 				size, rot, usePoints, quality);
 	    if (!xd->font)
-		error("unable to set or substitute a suitable font");
+		error(_("unable to set or substitute a suitable font"));
 	    xd->fontface = face;
 	    xd->fontsize = size;
 	    xd->fontangle = rot;
 	    strcpy(xd->fontfamily, "Arial");
-	    warning("unable to set font: using Arial");
+	    warning(_("unable to set font: using Arial"));
 	}
     }
 }
@@ -1576,7 +1576,7 @@ static Rboolean setupScreenDevice(pDevDesc dd, gadesc *xd, double w, double h,
 				    Document | StandardWindow | Menubar |
 				    VScrollbar | HScrollbar | CanvasSize)
 		)) {
-	    warning("unable to open window");
+	    warning(_("unable to open window"));
 	    return FALSE;
 	}
     }
@@ -1803,7 +1803,7 @@ static Rboolean GA_Open(pDevDesc dd, gadesc *xd, const char *dsp,
 	xd->fast = 0; /* use scalable line widths */
 	xd->gawin = newprinter(MM_PER_INCH * w, MM_PER_INCH * h, &dsp[10]);
 	if (!xd->gawin) {
-	    warning("unable to open printer");
+	    warning(_("unable to open printer"));
 	    return FALSE;
 	}
     } else if (streqln(dsp, "png:", 4) || streqln(dsp,"bmp:", 4)) {
@@ -1905,7 +1905,7 @@ static Rboolean GA_Open(pDevDesc dd, gadesc *xd, const char *dsp,
 	if (ls > ld)
 	    return FALSE;
 	if (strncmp(dsp, s, ls) || (dsp[ls] && (dsp[ls] != ':'))) {
-	    warning("invalid specification for file name in win.metafile()");
+	    warning(_("invalid specification for file name in win.metafile()"));
 	    return FALSE;
 	}
 	if(ld > ls && strlen(&dsp[ls + 1]) >= 512)
@@ -3256,7 +3256,7 @@ Rboolean GADeviceDriver(pDevDesc dd, const char *display, double width,
 
     /* allocate new device description */
     if (!(xd = (gadesc *) malloc(sizeof(gadesc)))) {
-	warning("allocation failed in GADeviceDriver");
+	warning(_("allocation failed in GADeviceDriver"));
 	return FALSE;
     }
 
@@ -3292,7 +3292,7 @@ Rboolean GADeviceDriver(pDevDesc dd, const char *display, double width,
 
     if (!GA_Open(dd, xd, display, width, height, recording, resize, canvas,
 		 gamma, xpos, ypos, bg)) {
-	warning("opening device failed");
+	warning(_("opening device failed"));
 	free(xd);
 	return FALSE;
     }
@@ -3901,7 +3901,7 @@ static int Load_Rcairo_Dll()
 SEXP devCairo(SEXP args)
 {
     if (!Load_Rcairo_Dll())
-	error("unable to load winCairo.dll: was it built?");
+	error(_("unable to load winCairo.dll: was it built?"));
     else (R_devCairo)(args);
     return R_NilValue;
 }

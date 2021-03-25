@@ -154,9 +154,9 @@ HIDDEN SEXP do_onexit(SEXP call, SEXP op, SEXP args, SEXP rho)
 
     checkArity(op, args);
     if (do_onexit_formals == nullptr)
-        do_onexit_formals = allocFormalsList3(install("expr"),
-                                              install("add"),
-                                              install("after"));
+        do_onexit_formals = allocFormalsList3(Symbol::obtain("expr"),
+                                              Symbol::obtain("add"),
+                                              Symbol::obtain("after"));
 
     PROTECT(argList =  matchArgs_NR(do_onexit_formals, args, call));
     if (CAR(argList) == R_MissingArg) code = R_NilValue;
@@ -227,7 +227,7 @@ HIDDEN SEXP do_args(SEXP call, SEXP op, SEXP args, SEXP rho)
 	PROTECT_INDEX xp;
 
 	PROTECT_WITH_INDEX(env = findVarInFrame3(R_BaseEnv,
-						 install(".ArgsEnv"), TRUE),
+						 Symbol::obtain(".ArgsEnv"), TRUE),
 			   &xp);
 
 	if (TYPEOF(env) == PROMSXP) REPROTECT(env = eval(env, R_BaseEnv), xp);
@@ -240,7 +240,7 @@ HIDDEN SEXP do_args(SEXP call, SEXP op, SEXP args, SEXP rho)
 	    return s;
 	}
 	UNPROTECT(1); /* s2 */
-	REPROTECT(env = findVarInFrame3(R_BaseEnv, install(".GenericArgsEnv"),
+	REPROTECT(env = findVarInFrame3(R_BaseEnv, Symbol::obtain(".GenericArgsEnv"),
 					TRUE), xp);
 	if (TYPEOF(env) == PROMSXP) REPROTECT(env = eval(env, R_BaseEnv), xp);
 	PROTECT(s2 = findVarInFrame3(env, install(nm), TRUE));

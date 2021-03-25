@@ -124,7 +124,7 @@ SEXP setWinProgressBar(SEXP call, SEXP op, SEXP args, SEXP env)
 
     pbar = R_ExternalPtrAddr(ptr);
     if(!pbar)
-	error("invalid progressbar -- has it been closed?");
+	error(_("invalid progressbar -- has it been closed?"));
     value = pbar->val;
     if(!isNull(CADR(args))) {
 	int iv;

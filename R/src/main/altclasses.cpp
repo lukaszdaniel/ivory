@@ -32,6 +32,7 @@
 #include <CXXR/RawVector.hpp>
 #include <CXXR/StringVector.hpp>
 #include <CXXR/RAltRep.hpp>
+#include <CXXR/Symbol.hpp>
 #include <Defn.h>
 #include <Localization.h>
 #include <R_ext/Altrep.h>
@@ -641,7 +642,7 @@ R_INLINE static const char *DEFERRED_STRING_OUTDEC(SEXP x)
        something different at the time the deferred string conversion
        is created then the current value is stored as an attribute. */
     if (R_OutDecSym == nullptr)
-	R_OutDecSym = install("OutDec");
+	R_OutDecSym = Symbol::obtain("OutDec");
     SEXP info = DEFERRED_STRING_INFO(x);
     if (ATTRIB(info) != R_NilValue) {
 	SEXP outdecattr = getAttrib(info, R_OutDecSym);
@@ -904,7 +905,7 @@ HIDDEN SEXP R_deferred_coerceToString(SEXP v, SEXP info)
 		/* non-default OutDec setting -- attach as an attribute */
 		PROTECT(info);
 		if (R_OutDecSym == nullptr)
-		    R_OutDecSym = install("OutDec");
+		    R_OutDecSym = Symbol::obtain("OutDec");
 		setAttrib(info, R_OutDecSym, GetOption1(R_OutDecSym));
 		UNPROTECT(1); /* info */
 	    }

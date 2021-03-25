@@ -47,8 +47,9 @@
 #include <CXXR/LogicalVector.hpp>
 #include <CXXR/RealVector.hpp>
 #include <CXXR/PairList.hpp>
-#include <Localization.h>
 #include <CXXR/Expression.hpp>
+#include <CXXR/Symbol.hpp>
+#include <Localization.h>
 #include <Defn.h>
 #include <Internal.h>
 #include <Rinterface.h>
@@ -274,7 +275,7 @@ static void Init_R_Machine(SEXP rho)
 #endif
 
     setAttrib(ans, R_NamesSymbol, nms);
-    defineVar(install(".Machine"), ans, rho);
+    defineVar(Symbol::obtain(".Machine"), ans, rho);
     UNPROTECT(2);
 }
 
@@ -330,7 +331,7 @@ static void Init_R_Platform(SEXP rho)
     SET_VECTOR_ELT(value, 7, mkString(""));
 #endif
     setAttrib(value, R_NamesSymbol, names);
-    defineVar(install(".Platform"), value, rho);
+    defineVar(Symbol::obtain(".Platform"), value, rho);
     UNPROTECT(2);
 }
 

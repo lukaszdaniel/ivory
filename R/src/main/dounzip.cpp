@@ -29,6 +29,7 @@
 #include <CXXR/IntVector.hpp>
 #include <CXXR/StringVector.hpp>
 #include <CXXR/PairList.hpp>
+#include <CXXR/Symbol.hpp>
 #include <Localization.h>
 #include <Defn.h>
 #include <Fileio.h> /* for R_fopen */
@@ -43,6 +44,7 @@
 #endif
 
 using namespace R;
+using namespace CXXR;
 
 /* cf do_dircreate in platform.cpp */
 static int R_mkdir(char *path)
@@ -393,7 +395,7 @@ SEXP Runzip(SEXP args)
 	}
     PROTECT(ans = ScalarInteger(rc));
     PROTECT(names = lengthgets(names, nnames));
-    setAttrib(ans, install("extracted"), names);
+    setAttrib(ans, Symbol::obtain("extracted"), names);
     UNPROTECT(3); /* old names, ans, names */
     vmaxset(vmax);
     return ans;

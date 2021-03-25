@@ -1308,7 +1308,7 @@ static void SetBit(SEXP term, int whichBit, int value)
 static SEXP AllocTermSetBit1(SEXP var) { // NB: caller must PROTECT
     int whichBit = InstallVar(var);
     if (nwords < int((whichBit - 1)/WORDSIZE) + 1)
-	error("AllocT..Bit1(%s): Need to increment nwords to %d. Should not happen!\n",
+	error(_("AllocT..Bit1(%s): Need to increment nwords to %d. Should not happen!\n"),
 		CHAR(STRING_ELT(deparse1line(var, FALSE), 0)),
 		nwords+1);
     SEXP term = AllocTerm();

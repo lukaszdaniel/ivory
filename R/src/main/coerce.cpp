@@ -2358,8 +2358,8 @@ static bool anyNA(SEXP call, SEXP op, SEXP args, SEXP env)
 
     if (isList && length(args) > 1) recursive = (Rboolean) asLogical(CADR(args));
     if (OBJECT(x) || (isList && !recursive)) {
-	SEXP e0 = PROTECT(lang2(install("is.na"), x));
-	SEXP e = PROTECT(lang2(install("any"), e0));
+	SEXP e0 = PROTECT(lang2(Symbol::obtain("is.na"), x));
+	SEXP e = PROTECT(lang2(Symbol::obtain("any"), e0));
 	SEXP res = PROTECT(eval(e, env));
 	int ans = asLogical(res);
 	UNPROTECT(3);
@@ -2474,7 +2474,7 @@ HIDDEN SEXP do_anyNA(SEXP call, SEXP op, SEXP args, SEXP rho)
 	   But this takes a little time.
 	 */
 	if (do_anyNA_formals == nullptr)
-	    do_anyNA_formals = allocFormalsList2(install("x"),
+	    do_anyNA_formals = allocFormalsList2(Symbol::obtain("x"),
 						 R_RecursiveSymbol);
 	PROTECT(args = matchArgs_NR(do_anyNA_formals, args, call));
 	if(CADR(args) ==  R_MissingArg) SETCADR(args, ScalarLogical(FALSE));
@@ -2888,8 +2888,8 @@ HIDDEN SEXP do_substitute(SEXP call, SEXP op, SEXP args, SEXP rho)
     static SEXP do_substitute_formals = nullptr;
 
     if (do_substitute_formals == nullptr)
-	do_substitute_formals = allocFormalsList2(install("expr"),
-						  install("env"));
+	do_substitute_formals = allocFormalsList2(Symbol::obtain("expr"),
+						  Symbol::obtain("env"));
 
     /* argument matching */
     PROTECT(argList = matchArgs_NR(do_substitute_formals, args, call));

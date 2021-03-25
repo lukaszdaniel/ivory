@@ -31,6 +31,7 @@
 #include <CXXR/PairList.hpp>
 #include <CXXR/LogicalVector.hpp>
 #include <CXXR/Expression.hpp>
+#include <CXXR/Symbol.hpp>
 #include <Localization.h>
 #include <RContext.h>
 #include <Defn.h>
@@ -242,7 +243,7 @@ HIDDEN SEXP do_retracemem(SEXP call, SEXP op, SEXP args, SEXP rho)
     Rboolean visible; 
 
     if (do_retracemem_formals == nullptr)
-	do_retracemem_formals = allocFormalsList2(install("x"),
+	do_retracemem_formals = allocFormalsList2(Symbol::obtain("x"),
 						  R_PreviousSymbol);
 
     PROTECT(argList =  matchArgs_NR(do_retracemem_formals, args, call));

@@ -31,6 +31,7 @@
 #include <CXXR/LogicalVector.hpp>
 #include <CXXR/FunctionBase.hpp>
 #include <CXXR/StringVector.hpp>
+#include <CXXR/Symbol.hpp>
 #include <Localization.h>
 #include <Defn.h>
 #include <Internal.h>
@@ -55,7 +56,7 @@ constexpr int R_MAX_EXPRESSIONS_OPT = 500000;
  *
  *   2) Those used (and sometimes set) from C code;
  *	Either accessing and/or setting a global C variable,
- *	or just accessed by e.g.  GetOption1(install("pager"))
+ *	or just accessed by e.g.  GetOption1(Symbol::obtain("pager"))
  *
  * A (complete?!) list of these (2):
  *
@@ -110,7 +111,7 @@ constexpr int R_MAX_EXPRESSIONS_OPT = 500000;
 static SEXP Options(void)
 {
     static SEXP sOptions = nullptr;
-    if(!sOptions) sOptions = install(".Options");
+    if(!sOptions) sOptions = Symbol::obtain(".Options");
     return sOptions;
 }
 
@@ -170,7 +171,7 @@ size_t Rf_FixupWidth(SEXP width, warn_type warn)
 
 size_t Rf_GetOptionWidth(void)
 {
-    return FixupWidth(GetOption1(install("width")), iWARN);
+    return FixupWidth(GetOption1(Symbol::obtain("width")), iWARN);
 }
 
 int Rf_FixupDigits(SEXP digits, warn_type warn)
@@ -188,14 +189,14 @@ int Rf_FixupDigits(SEXP digits, warn_type warn)
 }
 int Rf_GetOptionDigits(void)
 {
-    return FixupDigits(GetOption1(install("digits")), iWARN);
+    return FixupDigits(GetOption1(Symbol::obtain("digits")), iWARN);
 }
 
 HIDDEN
 int R::GetOptionCutoff(void)
 {
     int w;
-    w = asInteger(GetOption1(install("deparse.cutoff")));
+    w = asInteger(GetOption1(Symbol::obtain("deparse.cutoff")));
     if (w == NA_INTEGER || w <= 0) {
 	warning(_("invalid 'deparse.cutoff', used 60"));
 	w = 60;
@@ -207,7 +208,7 @@ HIDDEN
 Rboolean Rf_GetOptionDeviceAsk(void)
 {
     int ask;
-    ask = asLogical(GetOption1(install("device.ask.default")));
+    ask = asLogical(GetOption1(Symbol::obtain("device.ask.default")));
     if(ask == NA_LOGICAL) {
 	warning(_("invalid value for \"device.ask.default\", using FALSE"));
 	return FALSE;
@@ -263,7 +264,7 @@ HIDDEN int R::R_SetOptionWidth(int w)
     SEXP t, v;
     if (w < R_MIN_WIDTH_OPT) w = R_MIN_WIDTH_OPT;
     if (w > R_MAX_WIDTH_OPT) w = R_MAX_WIDTH_OPT;
-    PROTECT(t = install("width"));
+    PROTECT(t = Symbol::obtain("width"));
     PROTECT(v = ScalarInteger(w));
     v = SetOption(t, v);
     UNPROTECT(2);
@@ -274,7 +275,7 @@ HIDDEN int R::R_SetOptionWarn(int w)
 {
     SEXP t, v;
 
-    t = install("warn");
+    t = Symbol::obtain("warn");
     PROTECT(v = ScalarInteger(w));
     v = SetOption(t, v);
     UNPROTECT(1);
@@ -296,86 +297,86 @@ HIDDEN void R::InitOptions(void)
     PROTECT(v = val = allocList(22));
 #endif
 
-    SET_TAG(v, install("prompt"));
+    SET_TAG(v, Symbol::obtain("prompt"));
     SETCAR(v, mkString("> "));
     v = CDR(v);
 
-    SET_TAG(v, install("continue"));
+    SET_TAG(v, Symbol::obtain("continue"));
     SETCAR(v, mkString("+ "));
     v = CDR(v);
 
-    SET_TAG(v, install("expressions"));
+    SET_TAG(v, Symbol::obtain("expressions"));
     SETCAR(v, ScalarInteger(R_Expressions));
     v = CDR(v);
 
-    SET_TAG(v, install("width"));
+    SET_TAG(v, Symbol::obtain("width"));
     SETCAR(v, ScalarInteger(80));
     v = CDR(v);
 
-    SET_TAG(v, install("deparse.cutoff"));
+    SET_TAG(v, Symbol::obtain("deparse.cutoff"));
     SETCAR(v, ScalarInteger(60));
     v = CDR(v);
 
-    SET_TAG(v, install("digits"));
+    SET_TAG(v, Symbol::obtain("digits"));
     SETCAR(v, ScalarInteger(7));
     v = CDR(v);
 
-    SET_TAG(v, install("echo"));
+    SET_TAG(v, Symbol::obtain("echo"));
     SETCAR(v, ScalarLogical(!R_NoEcho));
     v = CDR(v);
 
-    SET_TAG(v, install("verbose"));
+    SET_TAG(v, Symbol::obtain("verbose"));
     SETCAR(v, ScalarLogical(R_Verbose));
     v = CDR(v);
 
-    SET_TAG(v, install("check.bounds"));
+    SET_TAG(v, Symbol::obtain("check.bounds"));
     SETCAR(v, ScalarLogical(0));	/* no checking */
     v = CDR(v);
 
     p = getenv("R_KEEP_PKG_SOURCE");
     R_KeepSource = (p && streql(p, "yes")) ? TRUE : FALSE;
 
-    SET_TAG(v, install("keep.source")); /* overridden in Common.R */
+    SET_TAG(v, Symbol::obtain("keep.source")); /* overridden in Common.R */
     SETCAR(v, ScalarLogical(R_KeepSource));
     v = CDR(v);
 
-    SET_TAG(v, install("keep.source.pkgs"));
+    SET_TAG(v, Symbol::obtain("keep.source.pkgs"));
     SETCAR(v, ScalarLogical(R_KeepSource));
     v = CDR(v);
 
-    SET_TAG(v, install("keep.parse.data"));
+    SET_TAG(v, Symbol::obtain("keep.parse.data"));
     SETCAR(v, ScalarLogical(TRUE));
     v = CDR(v);
 
     p = getenv("R_KEEP_PKG_PARSE_DATA");
-    SET_TAG(v, install("keep.parse.data.pkgs"));
+    SET_TAG(v, Symbol::obtain("keep.parse.data.pkgs"));
     SETCAR(v, ScalarLogical((p && streql(p, "yes")) ? TRUE : FALSE));
     v = CDR(v);
 
-    SET_TAG(v, install("warning.length"));
+    SET_TAG(v, Symbol::obtain("warning.length"));
     SETCAR(v, ScalarInteger(1000));
     v = CDR(v);
 
-    SET_TAG(v, install("nwarnings"));
+    SET_TAG(v, Symbol::obtain("nwarnings"));
     SETCAR(v, ScalarInteger(50));
     v = CDR(v);
 
-    SET_TAG(v, install("OutDec"));
+    SET_TAG(v, Symbol::obtain("OutDec"));
     SETCAR(v, mkString("."));
     v = CDR(v);
 
-    SET_TAG(v, install("browserNLdisabled"));
+    SET_TAG(v, Symbol::obtain("browserNLdisabled"));
     SETCAR(v, ScalarLogical(FALSE));
     v = CDR(v);
 
     p = getenv("R_C_BOUNDS_CHECK");
     R_CBoundsCheck = (p && streql(p, "yes")) ? TRUE : FALSE;
 
-    SET_TAG(v, install("CBoundsCheck"));
+    SET_TAG(v, Symbol::obtain("CBoundsCheck"));
     SETCAR(v, ScalarLogical(R_CBoundsCheck));
     v = CDR(v);
 
-    SET_TAG(v, install("matprod"));
+    SET_TAG(v, Symbol::obtain("matprod"));
     switch(R_Matprod) {
 	case MATPROD_DEFAULT: p = "default"; break;
 	case MATPROD_INTERNAL: p = "internal"; break;
@@ -385,7 +386,7 @@ HIDDEN void R::InitOptions(void)
     SETCAR(v, mkString(p));
     v = CDR(v);
 
-    SET_TAG(v, install("PCRE_study"));
+    SET_TAG(v, Symbol::obtain("PCRE_study"));
     if (R_PCRE_study == -1)
 	SETCAR(v, ScalarLogical(TRUE));
     else if (R_PCRE_study == -2)
@@ -394,11 +395,11 @@ HIDDEN void R::InitOptions(void)
 	SETCAR(v, ScalarInteger(R_PCRE_study));
     v = CDR(v);
 
-    SET_TAG(v, install("PCRE_use_JIT"));
+    SET_TAG(v, Symbol::obtain("PCRE_use_JIT"));
     SETCAR(v, ScalarLogical(R_PCRE_use_JIT));
     v = CDR(v);
 
-    SET_TAG(v, install("PCRE_limit_recursion"));
+    SET_TAG(v, Symbol::obtain("PCRE_limit_recursion"));
     R_PCRE_limit_recursion = NA_LOGICAL;
     SETCAR(v, ScalarLogical(R_PCRE_limit_recursion));
     v = CDR(v);
@@ -406,12 +407,12 @@ HIDDEN void R::InitOptions(void)
 
 #ifdef HAVE_RL_COMPLETION_MATCHES
     /* value from Rf_initialize_R */
-    SET_TAG(v, install("rl_word_breaks"));
+    SET_TAG(v, Symbol::obtain("rl_word_breaks"));
     SETCAR(v, mkString(" \t\n\"\\'`><=%;,|&{()}"));
     set_rl_word_breaks(" \t\n\"\\'`><=%;,|&{()}");
 #endif
 
-    SET_SYMVALUE(install(".Options"), val);
+    SET_SYMVALUE(Symbol::obtain(".Options"), val);
     UNPROTECT(1);
 }
 

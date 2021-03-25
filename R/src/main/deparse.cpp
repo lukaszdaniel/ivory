@@ -889,9 +889,9 @@ static void deparse2buff(SEXP s, LocalParseData *d)
 	    // computed alternatively, slotNms := names(getClassDef(class)@slots) :
 	    static SEXP R_getClassDef = nullptr, R_slots = nullptr, R_asS3 = nullptr;
 	    if(R_getClassDef == nullptr)
-		R_getClassDef = findFun(install("getClassDef"), R_MethodsNamespace);
-	    if(R_slots == nullptr) R_slots = install("slots");
-	    if(R_asS3  == nullptr) R_asS3  = install("asS3");
+		R_getClassDef = findFun(Symbol::obtain("getClassDef"), R_MethodsNamespace);
+	    if(R_slots == nullptr) R_slots = Symbol::obtain("slots");
+	    if(R_asS3  == nullptr) R_asS3  = Symbol::obtain("asS3");
 	    SEXP e = PROTECT(lang2(R_getClassDef, class_));
 	    cl_def = PROTECT(eval(e, R_BaseEnv)); // correct env?
 	    slotNms = // names( cl_def@slots ) :

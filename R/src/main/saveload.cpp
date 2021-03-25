@@ -2371,7 +2371,7 @@ HIDDEN int R_XDRDecodeInteger(void *buf)
 /* Next two were used in gnomeGUI package, are in Rinterface.h  */
 void R_SaveGlobalEnvToFile(const char *name)
 {
-    SEXP sym = install("sys.save.image");
+    SEXP sym = Symbol::obtain("sys.save.image");
     if (findVar(sym, R_GlobalEnv) == R_UnboundValue) { /* not a perfect test */
 	FILE *fp = R_fopen(name, "wb"); /* binary file */
 	if (!fp) {
@@ -2391,7 +2391,7 @@ void R_SaveGlobalEnvToFile(const char *name)
 
 void R_RestoreGlobalEnvFromFile(const char *name, Rboolean quiet)
 {
-    SEXP sym = install("sys.load.image");
+    SEXP sym = Symbol::obtain("sys.load.image");
     if (findVar(sym, R_GlobalEnv) == R_UnboundValue) { /* not a perfect test */
 	FILE *fp = R_fopen(name, "rb"); /* binary file */
 	if(fp) {

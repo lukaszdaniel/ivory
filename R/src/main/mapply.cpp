@@ -28,10 +28,12 @@
 #include <CXXR/PairList.hpp>
 #include <CXXR/IntVector.hpp>
 #include <CXXR/StringVector.hpp>
+#include <CXXR/Symbol.hpp>
 #include <Localization.h>
 #include <Defn.h>
 
 using namespace R;
+using namespace CXXR;
 
 extern "C"
 HIDDEN SEXP do_mapply(SEXP call, SEXP op, SEXP args, SEXP rho)
@@ -87,7 +89,7 @@ HIDDEN SEXP do_mapply(SEXP call, SEXP op, SEXP args, SEXP rho)
     PROTECT_WITH_INDEX(fcall, &fi);
 
     bool realIndx = (longest > R_INT_MAX);
-    SEXP Dots = install("dots");
+    SEXP Dots = Symbol::obtain("dots");
     for (int j = m - 1; j >= 0; j--) {
 	SET_VECTOR_ELT(mindex, j, ScalarInteger(j + 1));
 	SET_VECTOR_ELT(nindex, j, allocVector(realIndx ? REALSXP : INTSXP, 1));

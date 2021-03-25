@@ -26,6 +26,7 @@
 #include <CXXR/IntVector.hpp>
 #include <CXXR/StringVector.hpp>
 #include <CXXR/LogicalVector.hpp>
+#include <CXXR/Symbol.hpp>
 #include <Localization.h>
 #include <Defn.h>
 #include <Internal.h>
@@ -36,6 +37,7 @@
 #include <Rmodules/Rinternet.h>
 
 using namespace R;
+using namespace CXXR;
 
 static R_InternetRoutines routines, *ptr = &routines;
 
@@ -311,7 +313,7 @@ SEXP Rsocklisten(SEXP ssock)
     SEXP ans = PROTECT(ScalarInteger(sock)); // The socket being listened on
     SEXP host = PROTECT(allocVector(STRSXP, 1));
     SET_STRING_ELT(host, 0, mkChar(buf));
-    setAttrib(ans, install("host"), host);
+    setAttrib(ans, Symbol::obtain("host"), host);
     UNPROTECT(2);
     return ans;
 }

@@ -27,6 +27,7 @@
 #include <CXXR/String.hpp>
 #include <CXXR/StringVector.hpp>
 #include <CXXR/PairList.hpp>
+#include <CXXR/Symbol.hpp>
 #include <Localization.h>
 #include <RContext.h>
 #include <Parse.h> // -> IOStuff.h, Defn.h
@@ -96,7 +97,7 @@ static void getParseFilename(char* buffer, size_t buflen)
     if (R_ParseErrorFile) {
 	if (isEnvironment(R_ParseErrorFile)) {
 	    SEXP filename;
-	    PROTECT(filename = findVar(install("filename"), R_ParseErrorFile));
+	    PROTECT(filename = findVar(Symbol::obtain("filename"), R_ParseErrorFile));
 	    if (isString(filename) && length(filename)) {
 		strncpy(buffer, CHAR(STRING_ELT(filename, 0)), buflen - 1);
 		buffer[buflen - 1] = '\0';

@@ -31,6 +31,7 @@
 #include <CXXR/ComplexVector.hpp>
 #include <CXXR/StringVector.hpp>
 #include <CXXR/PairList.hpp>
+#include <CXXR/Symbol.hpp>
 #include <Localization.h>
 #include <Defn.h>
 #include <Internal.h>
@@ -1013,7 +1014,7 @@ HIDDEN SEXP do_range(SEXP call, SEXP op, SEXP args, SEXP env)
     }
     UNPROTECT(1);
 
-    PROTECT(op = findFun(install("range.default"), env));
+    PROTECT(op = findFun(Symbol::obtain("range.default"), env));
     PROTECT(prargs = promiseArgs(args, R_GlobalEnv));
     for (a = args, b = prargs; a != R_NilValue; a = CDR(a), b = CDR(b))
 	SET_PRVALUE(CAR(b), CAR(a));

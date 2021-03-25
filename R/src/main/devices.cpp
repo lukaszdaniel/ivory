@@ -45,6 +45,7 @@
 #include <R_ext/GraphicsEngine.h>
 
 using namespace R;
+using namespace CXXR;
 
 int baseRegisterIndex = -1;
 
@@ -145,7 +146,7 @@ GEDevDesc *GEcurrentDevice(void)
      * check the options for a "default device".
      * If there is one, start it up. */
     if (NoDevices()) {
-	SEXP defdev = GetOption1(install("device"));
+	SEXP defdev = GetOption1(Symbol::obtain("device"));
 	if (isString(defdev) && length(defdev) > 0) {
 	    SEXP devName = installTrChar(STRING_ELT(defdev, 0));
 	    /*  Not clear where this should be evaluated, since
@@ -164,7 +165,7 @@ GEDevDesc *GEcurrentDevice(void)
 		   as the default setting is in grDevices:::.onLoad.
 		*/
 		SEXP ns = findVarInFrame(R_NamespaceRegistry,
-					 install("grDevices"));
+					 Symbol::obtain("grDevices"));
 		PROTECT(ns);
 		if(ns != R_UnboundValue &&
 		   findVar(devName, ns) != R_UnboundValue) {
@@ -471,7 +472,7 @@ void GEaddDevice2f(GEDevDesc *gdd, const char *name, const char *file)
 {
     SEXP f = PROTECT(mkString(name));
     if(file) {
-      SEXP s_filepath = install("filepath");
+      SEXP s_filepath = Symbol::obtain("filepath");
       setAttrib(f, s_filepath, mkString(file));
     }
     gsetVar(R_DeviceSymbol, f, R_BaseEnv);

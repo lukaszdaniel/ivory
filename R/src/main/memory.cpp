@@ -984,9 +984,9 @@ SEXP Rf_allocVector3(SEXPTYPE type, R_xlen_t length = 1, R_allocator_t *allocato
 /* For future hiding of allocVector(CHARSXP) */
 HIDDEN SEXP R::allocCharsxp(R_len_t length)
 {
-        UncachedString *ans = new UncachedString(length);
-        ans->expose();
-        return ans;
+    UncachedString *ans = new UncachedString(length);
+    ans->expose();
+    return ans;
 }
 
 SEXP Rf_allocList(const int n)
@@ -1275,7 +1275,7 @@ SEXP R_NewPreciousMSet(int initialSize)
     GCRoot<PairList> mset(CXXR_cons(nullptr, tail));
     /* isize is not modified in place */
     if (initialSize < 0)
-        error("'initialSize' must be non-negative");
+        error(_("'initialSize' must be non-negative"));
     isize = ScalarInteger(initialSize);
     SET_TAG(mset, isize);
     return mset;
@@ -1294,7 +1294,7 @@ static void checkMSet(SEXP mset)
          ) ||
         (TYPEOF(isize) != INTSXP || XLENGTH(isize) != 1))
 
-        error("Invalid mset");
+        error(_("Invalid mset"));
 }
 
 /* Add object to multi-set. The object will be protected as long as the
@@ -1320,7 +1320,7 @@ void R_PreserveInMSet(SEXP x, SEXP mset)
     {
         R_xlen_t newsize = 2 * size;
         if (newsize >= R_INT_MAX || newsize < size)
-            error("Multi-set overflow");
+            error(_("Multi-set overflow"));
         GCRoot<> newstore(allocVector(VECSXP, newsize));
         for (R_xlen_t i = 0; i < size; i++)
             SET_VECTOR_ELT(newstore, i, VECTOR_ELT(store, i));
@@ -1594,6 +1594,7 @@ void R_StringBuffer::R_FreeStringBuffer()
         this->data = nullptr;
     }
 }
+
 HIDDEN void R_FreeStringBufferL(R_StringBuffer &buf) { buf.R_FreeStringBufferL(); }
 
 void R_StringBuffer::R_FreeStringBufferL()

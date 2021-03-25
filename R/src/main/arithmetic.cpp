@@ -37,6 +37,7 @@
 #include <CXXR/RealVector.hpp>
 #include <CXXR/FixedVector.hpp>
 #include <CXXR/IntVector.hpp>
+#include <CXXR/Symbol.hpp>
 #include <Defn.h>
 // LDBL_EPSILON
 #include <cfloat>
@@ -62,7 +63,9 @@ constexpr R_xlen_t NINTERRUPT = 10000000;
 
 #include <cerrno>
 #include <limits>
+
 using namespace R;
+using namespace CXXR;
 
 #ifdef HAVE_MATHERR
 
@@ -1716,7 +1719,7 @@ HIDDEN SEXP do_Math2(SEXP call, SEXP op, SEXP args, SEXP env)
     static SEXP R_x_Symbol = nullptr;
     if (! DispatchGroup("Math", call2, op, args, env, &res)) {
 	if(n == 1) {
-	    if(R_x_Symbol == nullptr) R_x_Symbol = install("x");
+	    if(R_x_Symbol == nullptr) R_x_Symbol = Symbol::obtain("x");
 	    // Ensure  we do not call it with a mis-named argument:
 	    if(CAR(args) == R_MissingArg ||
 	       (TAG(args) != R_NilValue && TAG(args) != R_x_Symbol))
@@ -1729,8 +1732,8 @@ HIDDEN SEXP do_Math2(SEXP call, SEXP op, SEXP args, SEXP env)
 	    /* If named, do argument matching by name */
 	    if (TAG(args) != R_NilValue || TAG(CDR(args)) != R_NilValue) {
 		if (do_Math2_formals == nullptr)
-		    do_Math2_formals = allocFormalsList2(install("x"),
-							 install("digits"));
+		    do_Math2_formals = allocFormalsList2(Symbol::obtain("x"),
+							 Symbol::obtain("digits"));
 		PROTECT(args = matchArgs_NR(do_Math2_formals, args, call));
 		nprotect++;
 	    }
@@ -1753,7 +1756,7 @@ HIDDEN SEXP do_log1arg(SEXP call, SEXP op, SEXP args, SEXP env)
 
     if (DispatchGroup("Math", call, op, args, env, &res)) return res;
 
-    SEXP sLog = install("log");
+    SEXP sLog = Symbol::obtain("log");
     if(PRIMVAL(op) == 10) tmp = ScalarReal(10.0);
     if(PRIMVAL(op) == 2)  tmp = ScalarReal(2.0);
 
@@ -1823,7 +1826,7 @@ HIDDEN SEXP do_log_builtin(SEXP call, SEXP op, SEXP args, SEXP env)
     static SEXP do_log_formals = nullptr;
     static SEXP R_x_Symbol = nullptr;
     if (do_log_formals == nullptr) {
-	R_x_Symbol = install("x");
+	R_x_Symbol = Symbol::obtain("x");
 	do_log_formals = allocFormalsList2(R_x_Symbol, R_BaseSymbol);
     }
 

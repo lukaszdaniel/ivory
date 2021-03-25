@@ -1791,7 +1791,7 @@ static SEXP R_FindNamespace1(SEXP info)
     SEXP expr, val, where;
     PROTECT(info);
     where = PROTECT(ScalarString(mkChar(lastname)));
-    SEXP s_getNamespace = install("..getNamespace");
+    SEXP s_getNamespace = Symbol::obtain("..getNamespace");
     PROTECT(expr = LCONS(s_getNamespace,
 			 CONS(info, CONS(where, R_NilValue))));
     val = eval(expr, R_GlobalEnv);

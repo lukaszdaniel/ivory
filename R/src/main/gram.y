@@ -1475,8 +1475,8 @@ void R::InitParser(void)
     ParseState.data = R_NilValue;
     INIT_SVS();
     R_PreserveObject(ParseState.sexps); /* never released in an R session */
-    R_NullSymbol = install("NULL");
-    R_PipeBindSymbol = install("=>");
+    R_NullSymbol = Symbol::obtain("NULL");
+    R_PipeBindSymbol = Symbol::obtain("=>");
 }
 
 static void FinalizeSrcRefStateOnError(void *dummy)
@@ -1674,11 +1674,11 @@ SEXP R::R_Parse1Buffer(IoBuffer *buffer, int gencode, ParseStatus *status)
 
     R_InitSrcRefState(&cntxt);
     if (gencode) {
-    	keepSource = (Rboolean) asLogical(GetOption1(install("keep.source")));
+    	keepSource = (Rboolean) asLogical(GetOption1(Symbol::obtain("keep.source")));
     	if (keepSource) {
     	    ParseState.keepSrcRefs = TRUE;
 	    ParseState.keepParseData =
-		(Rboolean) asLogical(GetOption1(install("keep.parse.data")));
+		(Rboolean) asLogical(GetOption1(Symbol::obtain("keep.parse.data")));
 	    PS_SET_SRCFILE(NewEnvironment(R_NilValue, R_NilValue, R_EmptyEnv));
 	    PS_SET_ORIGINAL(PS_SRCFILE);
 	    PS_SET_SRCREFS(R_NilValue);
@@ -1700,9 +1700,9 @@ SEXP R::R_Parse1Buffer(IoBuffer *buffer, int gencode, ParseStatus *status)
    	    	buf[i] = (char) R_IoBufferGetc(buffer);
 
    	    buf[buflen] = 0;
-	    SEXP s_filename = install("filename");
+	    SEXP s_filename = Symbol::obtain("filename");
 	    defineVar(s_filename, ScalarString(mkChar("")), PS_ORIGINAL);
-	    SEXP s_lines = install("lines");
+	    SEXP s_lines = Symbol::obtain("lines");
 	    defineVar(s_lines, ScalarString(mkChar2(buf)), PS_ORIGINAL);
     	    PROTECT(class_ = allocVector(STRSXP, 2));
             SET_STRING_ELT(class_, 0, mkChar("srcfilecopy"));
@@ -1740,7 +1740,7 @@ static SEXP R_Parse(int n, ParseStatus *status, SEXP srcfile)
     if (isEnvironment(srcfile)) {
     	ParseState.keepSrcRefs = TRUE;
 	ParseState.keepParseData =
-	    (Rboolean) asLogical(GetOption1(install("keep.parse.data")));
+	    (Rboolean) asLogical(GetOption1(Symbol::obtain("keep.parse.data")));
 	PS_SET_SRCREFS(R_NilValue);
     }
 
@@ -1845,13 +1845,13 @@ static const char *Prompt(SEXP prompt, int type)
 {
     if(type == 1) {
 	if(length(prompt) <= 0) {
-	    return CHAR(STRING_ELT(GetOption1(install("prompt")), 0));
+	    return CHAR(STRING_ELT(GetOption1(Symbol::obtain("prompt")), 0));
 	}
 	else
 	    return CHAR(STRING_ELT(prompt, 0));
     }
     else {
-	return CHAR(STRING_ELT(GetOption1(install("continue")), 0));
+	return CHAR(STRING_ELT(GetOption1(Symbol::obtain("continue")), 0));
     }
 }
 
@@ -1881,7 +1881,7 @@ SEXP R::R_ParseBuffer(IoBuffer *buffer, int n, ParseStatus *status, SEXP prompt,
     if (isEnvironment(srcfile)) {
     	ParseState.keepSrcRefs = TRUE;
 	ParseState.keepParseData =
-	    (Rboolean) asLogical(GetOption1(install("keep.parse.data")));
+	    (Rboolean) asLogical(GetOption1(Symbol::obtain("keep.parse.data")));
 	PS_SET_SRCREFS(R_NilValue);
     }
 
@@ -3155,13 +3155,13 @@ static void setParseFilename(SEXP newname) {
     SEXP class_;
 
     if (isEnvironment(PS_SRCFILE)) {
-	SEXP oldname = findVar(install("filename"), PS_SRCFILE);
+	SEXP oldname = findVar(Symbol::obtain("filename"), PS_SRCFILE);
     	if (isString(oldname) && length(oldname) > 0 &&
     	    streql(CHAR(STRING_ELT(oldname, 0)),
     	           CHAR(STRING_ELT(newname, 0)))) return;
 	PS_SET_SRCFILE(NewEnvironment(R_NilValue, R_NilValue, R_EmptyEnv));
-	defineVar(install("filename"), newname, PS_SRCFILE);
-	defineVar(install("original"), PS_ORIGINAL, PS_SRCFILE);
+	defineVar(Symbol::obtain("filename"), newname, PS_SRCFILE);
+	defineVar(Symbol::obtain("original"), PS_ORIGINAL, PS_SRCFILE);
 
 	PROTECT(class_ = allocVector(STRSXP, 2));
 	SET_STRING_ELT(class_, 0, mkChar("srcfilealias"));
@@ -4035,14 +4035,14 @@ static void finalizeData( ){
     INTEGER(dims)[0] = DATA_ROWS ;
     INTEGER(dims)[1] = nloc ;
     setAttrib( newdata, install( "dim" ), dims ) ;
-    setAttrib( newdata, install("tokens"), tokens );
-    setAttrib( newdata, install("text"), newtext );
+    setAttrib( newdata, Symbol::obtain("tokens"), tokens );
+    setAttrib( newdata, Symbol::obtain("text"), newtext );
 
     setAttrib(newdata, R_ClassSymbol, mkString("parseData"));
 
     /* Put it into the srcfile environment */
     if (isEnvironment(PS_SRCFILE))
-	defineVar(install("parseData"), newdata, PS_SRCFILE);
+	defineVar(Symbol::obtain("parseData"), newdata, PS_SRCFILE);
     UNPROTECT(4); /* tokens, newdata, newtext, dims */
 }
 

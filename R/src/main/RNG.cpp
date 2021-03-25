@@ -28,6 +28,7 @@
 #include <CXXR/Expression.hpp>
 #include <CXXR/VectorBase.hpp>
 #include <CXXR/IntVector.hpp>
+#include <CXXR/Symbol.hpp>
 #include <Localization.h>
 #include <Defn.h>
 #include <Internal.h>
@@ -816,7 +817,7 @@ static Int32 KT_next(void)
 static void RNG_Init_R_KT(Int32 seed)
 {
     SEXP fun, sseed, call, ans;
-    PROTECT(fun = findVar1(install(".TAOCP1997init"), R_BaseEnv, CLOSXP, FALSE));
+    PROTECT(fun = findVar1(Symbol::obtain(".TAOCP1997init"), R_BaseEnv, CLOSXP, FALSE));
     if(fun == R_UnboundValue)
 	error(_("function '.TAOCP1997init' is missing"));
     PROTECT(sseed = ScalarInteger((int)(seed % 1073741821)));

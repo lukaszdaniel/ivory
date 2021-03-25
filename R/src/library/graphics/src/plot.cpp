@@ -1822,13 +1822,13 @@ SEXP C_path(SEXP args)
     xx = (double*) R_alloc(nx, sizeof(double));
     yy = (double*) R_alloc(nx, sizeof(double));
     if (!xx || !yy)
-	error("unable to allocate memory (in 'GPath()')");
+	error(_("unable to allocate memory (in 'GPath()')"));
     for (i=0; i<nx; i++) {
         xx[i] = REAL(sx)[i];
         yy[i] = REAL(sy)[i];
         GConvert(&(xx[i]), &(yy[i]), USER, DEVICE, dd);
         if (!(R_FINITE(xx[i]) && R_FINITE(yy[i])))
-            error("invalid 'x' or 'y' arguments (in 'GPath()')");
+            error(_("invalid 'x' or 'y' arguments (in 'GPath()')"));
     }
 
     if (INTEGER(lty)[0] == NA_INTEGER)

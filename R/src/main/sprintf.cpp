@@ -28,6 +28,7 @@
 #include <CXXR/Expression.hpp>
 #include <CXXR/VectorBase.hpp>
 #include <CXXR/StringVector.hpp>
+#include <CXXR/Symbol.hpp>
 #include <Localization.h>
 #include <Defn.h>
 #include <Internal.h>
@@ -38,6 +39,7 @@
 #endif
 
 using namespace R;
+using namespace CXXR;
 
 constexpr size_t MAXLINE = MAXELTSIZE;
 #define MAXNARGS 100
@@ -323,7 +325,7 @@ HIDDEN SEXP do_sprintf(SEXP call, SEXP op, SEXP args, SEXP env)
 				if(TYPEOF(_this) != REALSXP &&
 				   /* no automatic as.double(<string>) : */
 				   TYPEOF(_this) != STRSXP) {
-				    PROTECT(tmp = lang2(install("as.double"), _this));
+				    PROTECT(tmp = lang2(Symbol::obtain("as.double"), _this));
 #define COERCE_THIS_TO_A                           \
 	_this = eval(tmp, env);                        \
 	UNPROTECT(1);                                  \

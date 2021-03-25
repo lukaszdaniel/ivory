@@ -46,6 +46,7 @@
 
 using namespace std;
 using namespace R;
+using namespace CXXR;
 
 #include "RBufferUtils.h"
 static R_StringBuffer cbuff = R_StringBuffer();
@@ -1192,7 +1193,7 @@ HIDDEN SEXP do_bind(SEXP call, SEXP op, SEXP args, SEXP env)
     tryS4 = (anyS4 && (method == R_NilValue));
     if (tryS4) {
 	// keep 'deparse.level' as first arg and *name* it:
-	SET_TAG(args, install("deparse.level"));
+	SET_TAG(args, Symbol::obtain("deparse.level"));
 	// and use methods:::cbind / rbind
 	method = findFun(install(generic), R_MethodsNamespace);
     } else

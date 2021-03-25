@@ -1080,7 +1080,7 @@ const char *getTZinfo(void)
 		return def_tz;
 
 	// call Sys.timezone()
-	SEXP expr = PROTECT(install("Sys.timezone"));
+	SEXP expr = PROTECT(Symbol::obtain("Sys.timezone"));
 	SEXP call = PROTECT(lang1(expr));
 	SEXP ans = PROTECT(eval(call, R_GlobalEnv));
 	if (TYPEOF(ans) == STRSXP && LENGTH(ans) == 1)
@@ -1095,7 +1095,7 @@ const char *getTZinfo(void)
 		}
 	}
 	UNPROTECT(3);
-	warning("system timezone name is unknown: set environment variable TZ");
+	warning(_("system timezone name is unknown: set environment variable TZ"));
 	strcpy(def_tz, "unknown"); // code will then use TZDEFAULT, which is "UTC"
 	return def_tz;
 }
@@ -1486,7 +1486,7 @@ size_t R::wcstoutf8(char *s, const wchar_t *wc, size_t n)
 	    p++;
 	} else {
 	    if (IS_HIGH_SURROGATE(*p) || IS_LOW_SURROGATE(*p))
-		warning("unpaired surrogate Unicode point %x", *p);
+		warning(_("unpaired surrogate Unicode point %x"), *p);
 	    m = Rwcrtomb32(t, (R_wchar_t)(*p), n - res);
 	}
 	if (!m) break;

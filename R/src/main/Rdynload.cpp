@@ -87,6 +87,7 @@
 #include <CXXR/LogicalVector.hpp>
 #include <CXXR/StringVector.hpp>
 #include <CXXR/PairList.hpp>
+#include <CXXR/Symbol.hpp>
 #include <Localization.h>
 #include <Defn.h>
 #include <Rinterface.h>
@@ -131,6 +132,7 @@ static int CountDLL = 0;
 #include <R_ext/Rdynload.h>
 
 using namespace R;
+using namespace CXXR;
 
 /* Allocated in initLoadedDLL at R session start. Never free'd */
 static DllInfo* LoadedDLL = nullptr;
@@ -992,7 +994,7 @@ static SEXP Rf_MakeNativeSymbolRef(DL_FUNC f)
 {
     SEXP ref, klass;
 
-    PROTECT(ref = R_MakeExternalPtrFn(f, install("native symbol"),
+    PROTECT(ref = R_MakeExternalPtrFn(f, Symbol::obtain("native symbol"),
 				      R_NilValue));
     PROTECT(klass = mkString("NativeSymbol"));
     setAttrib(ref, R_ClassSymbol, klass);
@@ -1022,7 +1024,7 @@ static SEXP Rf_MakeRegisteredNativeSymbol(R_RegisteredNativeSymbol *symbol)
     *copy = *symbol;
 
     PROTECT(ref = R_MakeExternalPtr(copy,
-				    install("registered native symbol"),
+				    Symbol::obtain("registered native symbol"),
 				    R_NilValue));
     R_RegisterCFinalizer(ref, freeRegisteredNativeSymbolCopy);
 
@@ -1038,7 +1040,7 @@ static SEXP Rf_makeDllObject(HINSTANCE inst)
 {
     SEXP ans;
 
-    PROTECT(ans = R_MakeExternalPtr(inst, install("DLLHandle"),
+    PROTECT(ans = R_MakeExternalPtr(inst, Symbol::obtain("DLLHandle"),
 				    R_NilValue));
     setAttrib(ans, R_ClassSymbol, mkString("DLLHandle"));
     UNPROTECT(1);
@@ -1050,8 +1052,8 @@ static SEXP Rf_makeDllInfoReference(HINSTANCE inst)
 {
     SEXP ans;
 
-    PROTECT(ans = R_MakeExternalPtr(inst, install("DLLInfo"),
-				    install("DLLInfo")));
+    PROTECT(ans = R_MakeExternalPtr(inst, Symbol::obtain("DLLInfo"),
+				    Symbol::obtain("DLLInfo")));
     setAttrib(ans, R_ClassSymbol, mkString("DLLInfoReference"));
     UNPROTECT(1);
 
@@ -1129,7 +1131,7 @@ HIDDEN SEXP R_getSymbolInfo(SEXP sname, SEXP spackage, SEXP withRegistrationInfo
 	if(TYPEOF(spackage) == STRSXP)
 	    package = translateCharFP(STRING_ELT(spackage, 0));
 	else if(TYPEOF(spackage) == EXTPTRSXP &&
-		R_ExternalPtrTag(spackage) == install("DLLInfo")) {
+		R_ExternalPtrTag(spackage) == Symbol::obtain("DLLInfo")) {
 	    f = R_dlsym((DllInfo *) R_ExternalPtrAddr(spackage), name, &symbol);
 	    package = nullptr;
 	} else
@@ -1308,7 +1310,7 @@ HIDDEN SEXP R_getRegisteredRoutines(SEXP dll)
     const char * const names[] = {".C", ".Call", ".Fortran", ".External"};
 
     if(TYPEOF(dll) != EXTPTRSXP &&
-       R_ExternalPtrTag(dll) != install("DLLInfo"))
+       R_ExternalPtrTag(dll) != Symbol::obtain("DLLInfo"))
 	error(_("'R_getRegisteredRoutines()' expects a DllInfo reference"));
 
     info = (DllInfo *) R_ExternalPtrAddr(dll);
@@ -1348,7 +1350,7 @@ HIDDEN SEXP do_getSymbolInfo(SEXP call, SEXP op, SEXP args, SEXP env)
 	if(TYPEOF(spackage) == STRSXP)
 	    package = translateCharFP(STRING_ELT(spackage, 0));
 	else if(TYPEOF(spackage) == EXTPTRSXP &&
-		R_ExternalPtrTag(spackage) == install("DLLInfo")) {
+		R_ExternalPtrTag(spackage) == Symbol::obtain("DLLInfo")) {
 	    f = R_dlsym((DllInfo *) R_ExternalPtrAddr(spackage), name, &symbol);
 	    package = nullptr;
 	} else
@@ -1402,7 +1404,7 @@ HIDDEN SEXP do_getRegisteredRoutines(SEXP call, SEXP op, SEXP args, SEXP env)
     SEXP dll = CAR(args), ans, snames;
 
     if(TYPEOF(dll) != EXTPTRSXP &&
-       R_ExternalPtrTag(dll) != install("DLLInfo"))
+       R_ExternalPtrTag(dll) != Symbol::obtain("DLLInfo"))
 	error(_("'R_getRegisteredRoutines()' expects a DllInfo reference"));
 
     DllInfo *info = (DllInfo *) R_ExternalPtrAddr(dll);

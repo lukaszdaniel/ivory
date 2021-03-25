@@ -158,10 +158,10 @@ static const char *R_PromptString(int browselevel, int type)
 		snprintf(BrowsePrompt, 20, "Browse[%d]> ", browselevel);
 		return BrowsePrompt;
 	    }
-	    return CHAR(STRING_ELT(GetOption1(install("prompt")), 0));
+	    return CHAR(STRING_ELT(GetOption1(Symbol::obtain("prompt")), 0));
 	}
 	else {
-	    return CHAR(STRING_ELT(GetOption1(install("continue")), 0));
+	    return CHAR(STRING_ELT(GetOption1(Symbol::obtain("continue")), 0));
 	}
     }
 }
@@ -356,7 +356,7 @@ static void check_session_exit()
 	    R_Suicide(_("error during cleanup\n"));
 	else {
 	    exiting = true;
-	    if (GetOption1(install("error")) != R_NilValue) {
+	    if (GetOption1(Symbol::obtain("error")) != R_NilValue) {
 		exiting = false;
 		return;
 	    }
@@ -1022,14 +1022,14 @@ void setup_Rmainloop(void)
     /* At least temporarily unlock some bindings used in graphics */
     R_unLockBinding(R_DeviceSymbol, R_BaseEnv);
     R_unLockBinding(R_DevicesSymbol, R_BaseEnv);
-    R_unLockBinding(install(".Library.site"), R_BaseEnv);
+    R_unLockBinding(Symbol::obtain(".Library.site"), R_BaseEnv);
 
     /* require(methods) if it is in the default packages */
 	R_GlobalContext = R_ToplevelContext = R_SessionContext = &R_Toplevel;
 	// std::cerr << __FILE__ << ":" << __LINE__ << " Entering try/catch for " << &R_Toplevel << std::endl;
 	try
 	{
-		PROTECT(cmd = install(".OptRequireMethods"));
+		PROTECT(cmd = Symbol::obtain(".OptRequireMethods"));
 		R_CurrentExpr = findVar(cmd, R_GlobalEnv);
 		if (R_CurrentExpr != R_UnboundValue &&
 			TYPEOF(R_CurrentExpr) == CLOSXP)
@@ -1063,7 +1063,7 @@ void setup_Rmainloop(void)
     if(!R_Quiet) PrintGreeting();
 
     R_LoadProfile(R_OpenSiteFile(), baseEnv);
-    R_LockBinding(install(".Library.site"), R_BaseEnv);
+    R_LockBinding(Symbol::obtain(".Library.site"), R_BaseEnv);
     R_LoadProfile(R_OpenInitFile(), R_GlobalEnv);
 
     /* This is where we try to load a user's saved data.
@@ -1104,7 +1104,7 @@ void setup_Rmainloop(void)
 	// std::cerr << __FILE__ << ":" << __LINE__ << " Entering try/catch for " << &R_Toplevel << std::endl;
 	try
 	{
-		PROTECT(cmd = install(".First"));
+		PROTECT(cmd = Symbol::obtain(".First"));
 		R_CurrentExpr = findVar(cmd, R_GlobalEnv);
 		if (R_CurrentExpr != R_UnboundValue &&
 			TYPEOF(R_CurrentExpr) == CLOSXP)
@@ -1131,7 +1131,7 @@ void setup_Rmainloop(void)
 	// std::cerr << __FILE__ << ":" << __LINE__ << " Entering try/catch for " << &R_Toplevel << std::endl;
 	try
 	{
-		PROTECT(cmd = install(".First.sys"));
+		PROTECT(cmd = Symbol::obtain(".First.sys"));
 		R_CurrentExpr = findVar(cmd, baseEnv);
 		if (R_CurrentExpr != R_UnboundValue &&
 			TYPEOF(R_CurrentExpr) == CLOSXP)
@@ -1310,7 +1310,7 @@ static int ParseBrowser(SEXP CExpr, SEXP rho)
 	    printwhere();
 	    /* SET_ENV_RDEBUG(rho, 1); */
 	} else if (streql(expr, "r")) {
-	    SEXP hooksym = install(".tryResumeInterrupt");
+	    SEXP hooksym = Symbol::obtain(".tryResumeInterrupt");
 	    if (SYMVALUE(hooksym) != R_UnboundValue) {
 		SEXP hcall;
 		R_Busy(1);
@@ -1328,7 +1328,7 @@ static int ParseBrowser(SEXP CExpr, SEXP rho)
 static void PrintCall(SEXP call, SEXP rho)
 {
 	int old_bl = R_BrowseLines,
-		blines = asInteger(GetOption1(install("deparse.max.lines")));
+		blines = asInteger(GetOption1(Symbol::obtain("deparse.max.lines")));
 	if (blines != NA_INTEGER && blines > 0)
 		R_BrowseLines = blines;
 
@@ -1355,10 +1355,10 @@ HIDDEN SEXP do_browser(SEXP call, SEXP op, SEXP args, SEXP rho)
 
     /* argument matching */
     PROTECT(ap = list4(R_NilValue, R_NilValue, R_NilValue, R_NilValue));
-    SET_TAG(ap,  install("text"));
-    SET_TAG(CDR(ap), install("condition"));
-    SET_TAG(CDDR(ap), install("expr"));
-    SET_TAG(CDDDR(ap), install("skipCalls"));
+    SET_TAG(ap,  Symbol::obtain("text"));
+    SET_TAG(CDR(ap), Symbol::obtain("condition"));
+    SET_TAG(CDDR(ap), Symbol::obtain("expr"));
+    SET_TAG(CDDDR(ap), Symbol::obtain("skipCalls"));
     argList = matchArgs_RC(ap, args, call);
     UNPROTECT(1);
     PROTECT(argList);
@@ -1492,7 +1492,7 @@ void R_dot_Last(void)
     /* Errors here should kick us back into the repl. */
 
     R_GlobalContext = R_ToplevelContext = R_SessionContext = &R_Toplevel;
-    PROTECT(cmd = install(".Last"));
+    PROTECT(cmd = Symbol::obtain(".Last"));
     R_CurrentExpr = findVar(cmd, R_GlobalEnv);
     if (R_CurrentExpr != R_UnboundValue && TYPEOF(R_CurrentExpr) == CLOSXP) {
 	PROTECT(R_CurrentExpr = lang1(cmd));
@@ -1500,7 +1500,7 @@ void R_dot_Last(void)
 	UNPROTECT(1);
     }
     UNPROTECT(1);
-    PROTECT(cmd = install(".Last.sys"));
+    PROTECT(cmd = Symbol::obtain(".Last.sys"));
     R_CurrentExpr = findVar(cmd, R_BaseNamespace);
     if (R_CurrentExpr != R_UnboundValue && TYPEOF(R_CurrentExpr) == CLOSXP) {
 	PROTECT(R_CurrentExpr = lang1(cmd));
@@ -1811,12 +1811,12 @@ Rboolean R_taskCallbackRoutine(SEXP expr, SEXP value, Rboolean succeeded,
     static SEXP R_visibleSym = NULL;
     static SEXP R_dataSym = NULL;
     if (R_cbSym == NULL) {
-	R_cbSym = install("cb");
-	R_exprSym = install("expr");
-	R_valueSym = install("value");
-	R_succeededSym = install("succeeded");
-	R_visibleSym = install("visible");
-	R_dataSym = install("data");
+	R_cbSym = Symbol::obtain("cb");
+	R_exprSym = Symbol::obtain("expr");
+	R_valueSym = Symbol::obtain("value");
+	R_succeededSym = Symbol::obtain("succeeded");
+	R_visibleSym = Symbol::obtain("visible");
+	R_dataSym = Symbol::obtain("data");
     }
     
     SEXP f = (SEXP) userData;

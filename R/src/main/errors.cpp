@@ -223,7 +223,7 @@ static void onintrEx(Rboolean resumeOK)
        user error handler. But we have been, so as a transition,
        continue to use options('error') if options('interrupt') is not
        set */
-    Rboolean tryUserError = (Rboolean) (GetOption1(install("interrupt")) == R_NilValue);
+    Rboolean tryUserError = (Rboolean) (GetOption1(Symbol::obtain("interrupt")) == R_NilValue);
 
     REprintf("\n");
     /* Attempt to save a traceback, show warnings, and reset console;
@@ -488,7 +488,7 @@ static void vwarningcall_dflt(SEXP call, const char *format, va_list ap)
     if (inWarning)
 	return;
 
-    s = GetOption1(install("warning.expression"));
+    s = GetOption1(Symbol::obtain("warning.expression"));
     if( s != R_NilValue ) {
 	if( !isLanguage(s) &&  ! isExpression(s) ) {
 	    error(_("invalid \"%s\" option"), "warning.expression");
@@ -500,7 +500,7 @@ static void vwarningcall_dflt(SEXP call, const char *format, va_list ap)
 	return;
     }
 
-    w = asInteger(GetOption1(install("warn")));
+    w = asInteger(GetOption1(Symbol::obtain("warn")));
 
     if( w == NA_INTEGER ) /* set to a sensible value */
 	w = 0;
@@ -721,7 +721,7 @@ void R::PrintWarnings(const char *hdr)
 	SET_STRING_ELT(t, i, STRING_ELT(names, i));
     }
     setAttrib(s, R_NamesSymbol, t);
-    SET_SYMVALUE(install("last.warning"), s);
+    SET_SYMVALUE(Symbol::obtain("last.warning"), s);
     UNPROTECT(2);
 
     cntxt.end();
@@ -744,11 +744,11 @@ static SEXP GetSrcLoc(SEXP srcref)
 
 	PROTECT(srcref);
 	PROTECT(srcfile = R_GetSrcFilename(srcref));
-	SEXP e2 = PROTECT(lang2(install("basename"), srcfile));
+	SEXP e2 = PROTECT(lang2(Symbol::obtain("basename"), srcfile));
 	PROTECT(srcfile = eval(e2, R_BaseEnv));
 	PROTECT(sep = ScalarString(mkChar("#")));
 	PROTECT(line = ScalarInteger(INTEGER(srcref)[0]));
-	SEXP e = PROTECT(lang4(install("paste0"), srcfile, sep, line));
+	SEXP e = PROTECT(lang4(Symbol::obtain("paste0"), srcfile, sep, line));
 	result = eval(e, R_BaseEnv);
 	UNPROTECT(7);
 	return result;
@@ -829,7 +829,7 @@ NORET static void verrorcall_dflt(SEXP call, const char *format, va_list ap)
 	SEXP srcloc = R_NilValue; // -Wall
 	size_t len = 0;	// indicates if srcloc has been set
 	int nprotect = 0, skip = NA_INTEGER;
-	SEXP opt = GetOption1(install("show.error.locations"));
+	SEXP opt = GetOption1(Symbol::obtain("show.error.locations"));
 	if (!isNull(opt)) {
 	    if (TYPEOF(opt) == STRSXP && length(opt) == 1) {
 	    	if (pmatch(ScalarString(mkChar("top")), opt, FALSE)) skip = 0;
@@ -1048,7 +1048,7 @@ static void jump_to_top_ex(Rboolean traceback,
 	    inError = 1;
 
 	/* now see if options("error") is set */
-	s = GetOption1(install("error"));
+	s = GetOption1(Symbol::obtain("error"));
 	haveHandler = ( s != R_NilValue );
 	if (haveHandler) {
 	    if( !isLanguage(s) &&  ! isExpression(s) ) { /* shouldn't happen */
@@ -1110,9 +1110,9 @@ static void jump_to_top_ex(Rboolean traceback,
 	if (traceback && inError < 2 && inError == oldInError) {
 	    inError = 2;
 	    PROTECT(s = R_GetTracebackOnly(0));
-	    SET_SYMVALUE(install(".Traceback"), s);
+	    SET_SYMVALUE(Symbol::obtain(".Traceback"), s);
 	    /* should have been defineVar
-	       setVar(install(".Traceback"), s, R_GlobalEnv); */
+	       setVar(Symbol::obtain(".Traceback"), s, R_GlobalEnv); */
 	    UNPROTECT(1);
 	    inError = oldInError;
 	}
@@ -1839,7 +1839,7 @@ static void vsignalWarning(SEXP call, const char *format, va_list ap)
     char buf[BUFSIZE];
     SEXP hooksym, hcall, qcall, qfun;
 
-    hooksym = install(".signalSimpleWarning");
+    hooksym = Symbol::obtain(".signalSimpleWarning");
     if (SYMVALUE(hooksym) != R_UnboundValue &&
 	SYMVALUE(R_QuoteSymbol) != R_UnboundValue) {
 	qfun = lang3(R_DoubleColonSymbol, R_BaseSymbol, R_QuoteSymbol);
@@ -1892,7 +1892,7 @@ static void vsignalError(SEXP call, const char *format, va_list ap)
 		   stack gets unwound in case error is protect stack
 		   overflow */
 		PROTECT(oldstack);
-		hooksym = install(".handleSimpleError");
+		hooksym = Symbol::obtain(".handleSimpleError");
 		qfun = lang3(R_DoubleColonSymbol, R_BaseSymbol,
 		             R_QuoteSymbol);
 		PROTECT(qfun);
@@ -2014,7 +2014,7 @@ static void signalInterrupt(void)
     R_HandlerStack = oldstack;
     UNPROTECT(1);
 
-    SEXP h = GetOption1(install("interrupt"));
+    SEXP h = GetOption1(Symbol::obtain("interrupt"));
     if (h != R_NilValue) {
 	SEXP call = PROTECT(LCONS(h, R_NilValue));
 	evalKeepVis(call, R_GlobalEnv);
@@ -2365,7 +2365,7 @@ SEXP R_GetSrcFilename(SEXP srcref)
 	SEXP srcfile = getAttrib(srcref, R_SrcfileSymbol);
 	if (TYPEOF(srcfile) != ENVSXP)
 		return ScalarString(mkChar(""));
-	srcfile = findVar(install("filename"), srcfile);
+	srcfile = findVar(Symbol::obtain("filename"), srcfile);
 	if (TYPEOF(srcfile) != STRSXP)
 		return ScalarString(mkChar(""));
 	return srcfile;
@@ -2540,7 +2540,7 @@ SEXP R_withCallingErrorHandler(SEXP (*body)(void *), void *bdata,
 	R_PreserveObject(wceh_callback);
 	wceh_class = mkChar("error");
 	R_PreserveObject(wceh_class);
-	addr_sym = install("addr");
+	addr_sym = Symbol::obtain("addr");
     }
 
     /* record the C-level handler information */

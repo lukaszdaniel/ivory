@@ -161,7 +161,7 @@ SEXP check_nonASCII(SEXP text, SEXP ignore_quotes)
     char quote= '\0';
     Rboolean ign, inquote = FALSE;
 
-    if(TYPEOF(text) != STRSXP) error("invalid input");
+    if(TYPEOF(text) != STRSXP) error(_("invalid input"));
     ign = (Rboolean) asLogical(ignore_quotes);
     if(ign == NA_LOGICAL) error(_("'%s' argument must be TRUE or FALSE"), "ignore_quotes");
 
@@ -197,7 +197,7 @@ SEXP check_nonASCII2(SEXP text)
     int i, m = 0, m_all = 100, *ind, *ians, yes;
     const char *p;
 
-    if(TYPEOF(text) != STRSXP) error("invalid input");
+    if(TYPEOF(text) != STRSXP) error(_("invalid input"));
     ind = Calloc(m_all, int);
     for (i = 0; i < LENGTH(text); i++) {
 	p = CHAR(STRING_ELT(text, i));

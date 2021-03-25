@@ -32,6 +32,7 @@
 #include <CXXR/String.hpp>
 #include <CXXR/Expression.hpp>
 #include <CXXR/StringVector.hpp>
+#include <CXXR/Symbol.hpp>
 #include <Localization.h>
 #include <RContext.h>
 #include <Defn.h>
@@ -57,6 +58,7 @@ int Rgui_Edit(char *filename, int enc, char *title, int modal);
 #endif
 
 using namespace R;
+using namespace CXXR;
 
 /*
  * ed, vi etc have 3 parameters. the data, a file and an editor
@@ -182,11 +184,11 @@ SEXP do_edit(SEXP call, SEXP op, SEXP args, SEXP rho)
 	errorcall(call, _("problem with running editor %s"), cmd);
 #endif
 
-    if (asLogical(GetOption1(install("keep.source")))) {
-	PROTECT(Rfn = findFun(install("readLines"), R_BaseEnv));
+    if (asLogical(GetOption1(Symbol::obtain("keep.source")))) {
+	PROTECT(Rfn = findFun(Symbol::obtain("readLines"), R_BaseEnv));
 	PROTECT(src = lang2(Rfn, ScalarString(mkChar(R_ExpandFileName(filename)))));
 	PROTECT(src = eval(src, R_BaseEnv));
-	PROTECT(Rfn = findFun(install("srcfilecopy"), R_BaseEnv));
+	PROTECT(Rfn = findFun(Symbol::obtain("srcfilecopy"), R_BaseEnv));
 	PROTECT(srcfile = lang3(Rfn, ScalarString(mkChar("<tmp>")), src));
 	srcfile = eval(srcfile, R_BaseEnv);
 	UNPROTECT(5);

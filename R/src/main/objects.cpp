@@ -177,7 +177,7 @@ static SEXP s_check_S3_for_S4 = nullptr;
 void R_warn_S3_for_S4(SEXP method) {
   SEXP call;
   if(!s_check_S3_for_S4)
-    s_check_S3_for_S4 = install(".checkS3forS4");
+    s_check_S3_for_S4 = Symbol::obtain(".checkS3forS4");
   PROTECT(call = lang2(s_check_S3_for_S4, method));
   eval(call, R_MethodsNamespace);
   UNPROTECT(1);
@@ -295,7 +295,7 @@ SEXP R::R_LookupMethod(SEXP method, SEXP rho, SEXP callrho, SEXP defrho)
     PROTECT_WITH_INDEX(val, &validx);
     /* We assume here that no one registered a non-function */
     if (!s_S3MethodsTable)
-	s_S3MethodsTable = install(".__S3MethodsTable__.");
+	s_S3MethodsTable = Symbol::obtain(".__S3MethodsTable__.");
     SEXP table = findVarInFrame3(defrho, s_S3MethodsTable, TRUE);
     if (TYPEOF(table) == PROMSXP) {
 	PROTECT(table);
@@ -361,7 +361,7 @@ static int match_to_obj(SEXP arg, SEXP obj) {
 int Rf_isBasicClass(const char *ss) {
     static SEXP s_S3table = nullptr;
     if(!s_S3table) {
-      s_S3table = findVarInFrame3(R_MethodsNamespace, install(".S3MethodsClasses"), TRUE);
+      s_S3table = findVarInFrame3(R_MethodsNamespace, Symbol::obtain(".S3MethodsClasses"), TRUE);
       if(s_S3table == R_UnboundValue)
 	error(_("no '.S3MethodsClass' table, cannot use S4 objects with S3 methods ('methods' package not attached?)"));
       if (TYPEOF(s_S3table) == PROMSXP)  /* findVar... ignores lazy data */
@@ -378,7 +378,7 @@ Rboolean R_has_methods_attached(void) {
     return (Rboolean) (
 	isMethodsDispatchOn() &&
 	// based on unlockBinding() in ../library/methods/R/zzz.R  {since 2003}:
-	!R_BindingIsLocked(install(".BasicFunsList"), R_MethodsNamespace));
+	!R_BindingIsLocked(Symbol::obtain(".BasicFunsList"), R_MethodsNamespace));
 }
 
 R_INLINE static SEXP addS3Var(SEXP vars, SEXP name, SEXP value) {
@@ -528,8 +528,8 @@ HIDDEN NORET SEXP do_usemethod(SEXP call, SEXP op, SEXP args, SEXP env)
     char *lookup;
 
     if (do_usemethod_formals == nullptr)
-	do_usemethod_formals = allocFormalsList2(install("generic"),
-						 install("object"));
+	do_usemethod_formals = allocFormalsList2(Symbol::obtain("generic"),
+						 Symbol::obtain("object"));
 
     PROTECT(argList = matchArgs_NR(do_usemethod_formals, args, call));
     if (CAR(argList) == R_MissingArg)
@@ -1089,8 +1089,8 @@ int R_check_class_and_super(SEXP x, const char **valid, SEXP rho)
 	SEXP classExts, superCl, _call;
 	static SEXP s_contains = nullptr, s_selectSuperCl = nullptr;
 	if(!s_contains) {
-	    s_contains      = install("contains");
-	    s_selectSuperCl = install(".selectSuperClasses");
+	    s_contains      = Symbol::obtain("contains");
+	    s_selectSuperCl = Symbol::obtain(".selectSuperClasses");
 	}
 	SEXP classDef = PROTECT(R_getClassDef(class_));
 	PROTECT(classExts = R_do_slot(classDef, s_contains));
@@ -1136,7 +1136,7 @@ int R_check_class_etc(SEXP x, const char **valid)
     static SEXP meth_classEnv = nullptr;
     SEXP cl = getAttrib(x, R_ClassSymbol), rho = R_GlobalEnv, pkg;
     if(!meth_classEnv)
-	meth_classEnv = install(".classEnv");
+	meth_classEnv = Symbol::obtain(".classEnv");
 
     pkg = getAttrib(cl, R_PackageSymbol); /* ==R== packageSlot(class(x)) */
     if(!isNull(pkg)) { /* find  rho := correct class Environment */
@@ -1200,7 +1200,7 @@ static SEXP R_isMethodsDispatchOn(SEXP onOff)
 	    // so not already on
 	    // This may not work correctly: the default arg is incorrect.
 	    warning(_("R_isMethodsDispatchOn(TRUE) called -- may not work correctly"));
-	    SEXP call = PROTECT(lang1(install("initMethodDispatch")));
+	    SEXP call = PROTECT(lang1(Symbol::obtain("initMethodDispatch")));
 	    eval(call, R_MethodsNamespace); // only works with methods loaded
 	    UNPROTECT(1);
 	}
@@ -1346,7 +1346,7 @@ SEXP R_set_prim_method(SEXP fname, SEXP op, SEXP code_vec, SEXP fundef,
 	return value;
     }
     if (!isPrimitive(op)) {
-        SEXP internal = R_do_slot(op, install("internal"));
+        SEXP internal = R_do_slot(op, Symbol::obtain("internal"));
         op = INTERNAL(installTrChar(asChar(internal)));
         if (op == R_NilValue) {
           error(_("'internal' slot does not name an internal function: %s"),
@@ -1487,7 +1487,7 @@ static SEXP get_primitive_methods(SEXP op, SEXP rho)
 	SET_STRING_ELT(f, 0, mkChar(PRIMNAME(op)));
 	PROTECT(e = allocVector(LANGSXP, 2));
 	nprotect++;
-	SETCAR(e, install("getGeneric"));
+	SETCAR(e, Symbol::obtain("getGeneric"));
 	val = CDR(e);
 	SETCAR(val, f);
 	val = eval(e, rho);
@@ -1512,7 +1512,7 @@ static SEXP get_this_generic(SEXP args)
     if(CDR(args) != R_NilValue)
 	return CAR(CDR(args));
     if(!gen_name)
-	gen_name = install("generic");
+	gen_name = Symbol::obtain("generic");
     fname = STRING_ELT(CAR(args), 0); /* type and length checked by caller */
 
     /* check for a matching "generic" slot */
@@ -1550,7 +1550,7 @@ static SEXP deferred_default_object;
 SEXP R_deferred_default_method()
 {
 	if (!deferred_default_object)
-		deferred_default_object = install("__Deferred_Default_Marker__");
+		deferred_default_object = Symbol::obtain("__Deferred_Default_Marker__");
 	return deferred_default_object;
 }
 
@@ -1664,7 +1664,7 @@ SEXP R_do_MAKE_CLASS(const char *what)
     SEXP e, call;
     if(!what)
 	error(_("C level MAKE_CLASS macro called with NULL string pointer"));
-    if(!s_getClass) s_getClass = install("getClass");
+    if(!s_getClass) s_getClass = Symbol::obtain("getClass");
     PROTECT(call = allocVector(LANGSXP, 2));
     SETCAR(call, s_getClass);
     SETCAR(CDR(call), mkString(what));
@@ -1678,7 +1678,7 @@ SEXP R_do_MAKE_CLASS(const char *what)
 SEXP R_getClassDef_R(SEXP what)
 {
     static SEXP s_getClassDef = nullptr;
-    if(!s_getClassDef) s_getClassDef = install("getClassDef");
+    if(!s_getClassDef) s_getClassDef = Symbol::obtain("getClassDef");
     if(!isMethodsDispatchOn()) error(_("'methods' package not yet loaded"));
     SEXP call = PROTECT(lang2(s_getClassDef, what));
     SEXP e = eval(call, R_MethodsNamespace);
@@ -1700,7 +1700,7 @@ Rboolean R_isVirtualClass(SEXP class_def, SEXP env)
 {
     if(!isMethodsDispatchOn()) return(FALSE);
     static SEXP isVCl_sym = nullptr;
-    if(!isVCl_sym) isVCl_sym = install("isVirtualClass");
+    if(!isVCl_sym) isVCl_sym = Symbol::obtain("isVirtualClass");
     SEXP call = PROTECT(lang2(isVCl_sym, class_def));
     SEXP e = PROTECT(eval(call, env));
     // return(LOGICAL(e)[0]);
@@ -1714,7 +1714,7 @@ Rboolean R_extends(SEXP class1, SEXP class2, SEXP env)
 {
     if(!isMethodsDispatchOn()) return(FALSE);
     static SEXP extends_sym = nullptr;
-    if(!extends_sym) extends_sym = install("extends");
+    if(!extends_sym) extends_sym = Symbol::obtain("extends");
     SEXP call = PROTECT(lang3(extends_sym, class1, class2));
     SEXP e = PROTECT(eval(call, env));
     // return(LOGICAL(e)[0]);
@@ -1731,9 +1731,9 @@ SEXP R_do_new_object(SEXP class_def)
     SEXP e, value;
     const void *vmax = vmaxget();
     if(!s_virtual) {
-	s_virtual = install("virtual");
-	s_prototype = install("prototype");
-	s_className = install("className");
+	s_virtual = Symbol::obtain("virtual");
+	s_prototype = Symbol::obtain("prototype");
+	s_className = Symbol::obtain("className");
     }
     if(!class_def)
 	error(_("C level NEW macro called with null class definition pointer"));

@@ -30,9 +30,12 @@
 #include <CXXR/StringVector.hpp>
 #include <CXXR/IntVector.hpp>
 #include <CXXR/PairList.hpp>
+#include <CXXR/Symbol.hpp>
 #include <Defn.h>
 #include <Internal.h>
 #include <Localization.h>
+
+using namespace CXXR;
 
 /* It would be better to find a way to avoid abusing TRUELENGTH, but
    in the meantime replace TRUELENGTH/SET_TRUELENGTH with
@@ -1870,7 +1873,7 @@ HIDDEN SEXP do_radixsort(SEXP call, SEXP op, SEXP args, SEXP rho)
     if (retGrp) {
         int maxgrpn = NA_INTEGER;
         ngrp = gsngrp[flip];
-        SEXP s_ends = install("ends");
+        SEXP s_ends = Symbol::obtain("ends");
         setAttrib(ans, s_ends, x = allocVector(INTSXP, ngrp));
         if (ngrp > 0) {
             INTEGER(x)[0] = gs[flip][0];
@@ -1878,7 +1881,7 @@ HIDDEN SEXP do_radixsort(SEXP call, SEXP op, SEXP args, SEXP rho)
                 INTEGER(x)[i] = INTEGER(x)[i - 1] + gs[flip][i];
             maxgrpn = gsmax[flip];
         }
-        SEXP s_maxgrpn = install("maxgrpn");
+        SEXP s_maxgrpn = Symbol::obtain("maxgrpn");
         setAttrib(ans, s_maxgrpn, ScalarInteger(maxgrpn));
         SEXP nms;
         PROTECT(nms = allocVector(STRSXP, 2));

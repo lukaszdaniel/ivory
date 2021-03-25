@@ -63,6 +63,7 @@ constexpr int NWARN = 5;
 #include <CXXR/StringVector.hpp>
 #include <CXXR/IntVector.hpp>
 #include <CXXR/Logical.hpp>
+#include <CXXR/Symbol.hpp>
 #include <Localization.h>
 #include <Defn.h>
 #include <Internal.h>
@@ -2422,10 +2423,10 @@ gregexpr_Regexc(const regex_t *reg, SEXP sstr, int useBytes, int use_WC,
 	INTEGER(ans)[j] = INTEGER(matchbuf)[j];
 	INTEGER(matchlen)[j] = INTEGER(matchlenbuf)[j];
     }
-    setAttrib(ans, install("match.length"), matchlen);
+    setAttrib(ans, Symbol::obtain("match.length"), matchlen);
     if(useBytes) {
-	setAttrib(ans, install("index.type"), itype);
-	setAttrib(ans, install("useBytes"), R_TrueValue);
+	setAttrib(ans, Symbol::obtain("index.type"), itype);
+	setAttrib(ans, Symbol::obtain("useBytes"), R_TrueValue);
     }
     UNPROTECT(4);
     return ans;
@@ -2504,10 +2505,10 @@ gregexpr_fixed(const char *pattern, const char *string,
 	INTEGER(ans)[j] = INTEGER(matchbuf)[j];
 	INTEGER(matchlen)[j] = INTEGER(matchlenbuf)[j];
     }
-    setAttrib(ans, install("match.length"), matchlen);
+    setAttrib(ans, Symbol::obtain("match.length"), matchlen);
     if(useBytes) {
-	setAttrib(ans, install("index.type"), itype);
-	setAttrib(ans, install("useBytes"), R_TrueValue);
+	setAttrib(ans, Symbol::obtain("index.type"), itype);
+	setAttrib(ans, Symbol::obtain("useBytes"), R_TrueValue);
     }
     UNPROTECT(4);
     return ans;
@@ -2678,12 +2679,12 @@ R_pcre_gregexpr(const char *pattern, const char *string,
 	}
     }
     PROTECT(ans = allocVector(INTSXP, matchIndex + 1));
-    /* Protect in case install("match.length") allocates */
+    /* Protect in case Symbol::obtain("match.length") allocates */
     PROTECT(matchlen = allocVector(INTSXP, matchIndex + 1));
-    setAttrib(ans, install("match.length"), matchlen);
+    setAttrib(ans, Symbol::obtain("match.length"), matchlen);
     if(useBytes) {
-	setAttrib(ans, install("index.type"), itype);
-	setAttrib(ans, install("useBytes"), R_TrueValue);
+	setAttrib(ans, Symbol::obtain("index.type"), itype);
+	setAttrib(ans, Symbol::obtain("useBytes"), R_TrueValue);
     }
     UNPROTECT(1);
     if (foundAny) {
@@ -2715,9 +2716,9 @@ R_pcre_gregexpr(const char *pattern, const char *string,
 	} else
 	    for(int i = 0; i < capture_count; i++)
 		INTEGER(capture)[i] = INTEGER(capturelen)[i] = -1;
-	setAttrib(ans, install("capture.start"), capture);
-	setAttrib(ans, install("capture.length"), capturelen);
-	setAttrib(ans, install("capture.names"), capture_names);
+	setAttrib(ans, Symbol::obtain("capture.start"), capture);
+	setAttrib(ans, Symbol::obtain("capture.length"), capturelen);
+	setAttrib(ans, Symbol::obtain("capture.names"), capture_names);
 	UNPROTECT(3);
     }
     UNPROTECT(5); /* 4 with indices, ans */
@@ -2730,7 +2731,7 @@ static SEXP gregexpr_NAInputAns(void)
     PROTECT(ans = allocVector(INTSXP, 1));
     PROTECT(matchlen = allocVector(INTSXP, 1));
     INTEGER(ans)[0] = INTEGER(matchlen)[0] = R_NaInt;
-    setAttrib(ans, install("match.length"), matchlen);
+    setAttrib(ans, Symbol::obtain("match.length"), matchlen);
     UNPROTECT(2);
     return ans;
 }
@@ -2741,7 +2742,7 @@ static SEXP gregexpr_BadStringAns(void)
     PROTECT(ans = allocVector(INTSXP, 1));
     PROTECT(matchlen = allocVector(INTSXP, 1));
     INTEGER(ans)[0] = INTEGER(matchlen)[0] = -1;
-    setAttrib(ans, install("match.length"), matchlen);
+    setAttrib(ans, Symbol::obtain("match.length"), matchlen);
     UNPROTECT(2);
     return ans;
 }
@@ -2893,12 +2894,12 @@ HIDDEN SEXP do_regexpr(SEXP call, SEXP op, SEXP args, SEXP env)
 	SEXP matchlen, capture_start, capturelen;
 	int *is, *il;
 	PROTECT(ans = allocVector(INTSXP, n));
-	/* Protect in case install("match.length") allocates */
+	/* Protect in case Symbol::obtain("match.length") allocates */
 	PROTECT(matchlen = allocVector(INTSXP, n));
-	setAttrib(ans, install("match.length"), matchlen);
+	setAttrib(ans, Symbol::obtain("match.length"), matchlen);
 	if(useBytes) {
-	    setAttrib(ans, install("index.type"), itype);
-	    setAttrib(ans, install("useBytes"), R_TrueValue);
+	    setAttrib(ans, Symbol::obtain("index.type"), itype);
+	    setAttrib(ans, Symbol::obtain("useBytes"), R_TrueValue);
 	}
 	UNPROTECT(1);
 	if (perl_opt && capture_count) {
@@ -2909,11 +2910,11 @@ HIDDEN SEXP do_regexpr(SEXP call, SEXP op, SEXP args, SEXP env)
 	    SET_VECTOR_ELT(dmn, 1, capture_names);
 	    PROTECT(capture_start = allocMatrix(INTSXP, nn, (int) capture_count));
 	    setAttrib(capture_start, R_DimNamesSymbol, dmn);
-	    setAttrib(ans, install("capture.start"), capture_start);
+	    setAttrib(ans, Symbol::obtain("capture.start"), capture_start);
 	    PROTECT(capturelen = allocMatrix(INTSXP, nn, (int) capture_count));
 	    setAttrib(capturelen, R_DimNamesSymbol, dmn);
-	    setAttrib(ans, install("capture.length"), capturelen);
-	    setAttrib(ans, install("capture.names"), capture_names);
+	    setAttrib(ans, Symbol::obtain("capture.length"), capturelen);
+	    setAttrib(ans, Symbol::obtain("capture.names"), capture_names);
 	    UNPROTECT(3);
 	    is = INTEGER(capture_start);
 	    il = INTEGER(capturelen);
@@ -3164,7 +3165,7 @@ HIDDEN SEXP do_regexec(SEXP call, SEXP op, SEXP args, SEXP env)
 //	if ((i+1) % NINTERRUPT == 0) R_CheckUserInterrupt();
 	if(STRING_ELT(text, i) == NA_STRING) {
 	    PROTECT(matchpos = ScalarInteger(NA_INTEGER));
-	    SEXP s_match_length = install("match.length");
+	    SEXP s_match_length = Symbol::obtain("match.length");
 	    setAttrib(matchpos, s_match_length ,
 		      ScalarInteger(NA_INTEGER));
 	    SET_VECTOR_ELT(ans, i, matchpos);
@@ -3196,10 +3197,10 @@ HIDDEN SEXP do_regexec(SEXP call, SEXP op, SEXP args, SEXP env)
 		    INTEGER(matchpos)[j] = so + 1;
 		    INTEGER(matchlen)[j] = pmatch[j].rm_eo - so;
 		}
-		setAttrib(matchpos, install("match.length"), matchlen);
+		setAttrib(matchpos, Symbol::obtain("match.length"), matchlen);
 		if(useBytes) {
-		    setAttrib(matchpos, install("index.type"), itype);
-		    setAttrib(matchpos, install("useBytes"), R_TrueValue);
+		    setAttrib(matchpos, Symbol::obtain("index.type"), itype);
+		    setAttrib(matchpos, Symbol::obtain("useBytes"), R_TrueValue);
 		}
 		SET_VECTOR_ELT(ans, i, matchpos);
 		UNPROTECT(2);
@@ -3213,10 +3214,10 @@ HIDDEN SEXP do_regexec(SEXP call, SEXP op, SEXP args, SEXP env)
 			    (int) i + 1);
 		PROTECT(matchpos = ScalarInteger(-1));
 		PROTECT(matchlen = ScalarInteger(-1));
-		setAttrib(matchpos, install("match.length"), matchlen);
+		setAttrib(matchpos, Symbol::obtain("match.length"), matchlen);
 		if(useBytes) {
-		    setAttrib(matchpos, install("index.type"), itype);
-		    setAttrib(matchpos, install("useBytes"), R_TrueValue);
+		    setAttrib(matchpos, Symbol::obtain("index.type"), itype);
+		    setAttrib(matchpos, Symbol::obtain("useBytes"), R_TrueValue);
 		}
 		SET_VECTOR_ELT(ans, i, matchpos);
 		UNPROTECT(2);

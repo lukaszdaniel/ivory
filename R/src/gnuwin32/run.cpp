@@ -850,7 +850,7 @@ static Rboolean Wpipe_open(Rconnection con)
     if(io) visible = 1; /* Somewhere to put the output */
     rp = rpipeOpen(con->description, con->enc, visible, nullptr, io, nullptr, nullptr, 0);
     if(!rp) {
-	warning("cannot open cmd `%s'", con->description);
+	warning(_("cannot open cmd '%s'"), con->description);
 	return FALSE;
     }
     ((RWpipeconn)(con->private))->rp = rp;

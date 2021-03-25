@@ -732,7 +732,7 @@ static SEXP xxmarkup2(SEXP header, SEXP body1, SEXP body2, int argcount, int fla
     }
     if (!isNull(body2)) {
     	int flag2;
-	if (argcount < 2) error("internal error: inconsistent argument count");
+	if (argcount < 2) error(_("internal error: inconsistent argument count"));
 	flag2 = getDynamicFlag(body2);
     	SET_VECTOR_ELT(ans, 1, PairToVectorList(CDR(body2)));    
 	RELEASE_SV(body2);

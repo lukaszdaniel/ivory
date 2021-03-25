@@ -151,7 +151,7 @@ static SEXP EnlargeVector(SEXP x, R_xlen_t newlen)
     static SEXP R_CheckBoundsSymbol = nullptr;
 
     if (R_CheckBoundsSymbol == nullptr)
-	R_CheckBoundsSymbol = install("check.bounds");
+	R_CheckBoundsSymbol = Symbol::obtain("check.bounds");
 
     /* Sanity Checks */
     if (!isVector(x))
@@ -313,7 +313,7 @@ static bool dispatch_asvector(SEXP *x, SEXP call, SEXP rho) {
     SEXP args;
     bool ans;
     if (op == nullptr)
-        op = INTERNAL(install("as.vector"));
+        op = INTERNAL(Symbol::obtain("as.vector"));
     PROTECT(args = list2(*x, mkString("any")));
     /* DispatchOrEval internal generic: as.vector */
     ans = DispatchOrEval(call, op, "as.vector", args, rho, x, 0, 1);

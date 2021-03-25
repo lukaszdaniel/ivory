@@ -31,6 +31,7 @@
 #include <CXXR/VectorBase.hpp>
 #include <CXXR/StringVector.hpp>
 #include <CXXR/LogicalVector.hpp>
+#include <CXXR/Symbol.hpp>
 #include <Localization.h>
 #include <R_ext/Minmax.h>
 #include <RContext.h>
@@ -129,8 +130,8 @@ static void checkValidSymbolId(SEXP op, SEXP call, DL_FUNC *fun,
 	static SEXP native_symbol = nullptr;
 	static SEXP registered_native_symbol = nullptr;
 	if (native_symbol == nullptr) {
-	    native_symbol = install("native symbol");
-	    registered_native_symbol = install("registered native symbol");
+	    native_symbol = Symbol::obtain("native symbol");
+	    registered_native_symbol = Symbol::obtain("registered native symbol");
 	}
 	char *p = nullptr;
 	if(R_ExternalPtrTag(op) == native_symbol)
@@ -341,7 +342,7 @@ static bool comparePrimitiveTypes(const R_NativePrimitiveArgType &type, SEXP s)
 		return true;
 
 	if (type == SINGLESXP)
-		return (asLogical(getAttrib(s, install("Csingle"))) == TRUE);
+		return (asLogical(getAttrib(s, Symbol::obtain("Csingle"))) == TRUE);
 
 	return false;
 }
@@ -430,7 +431,7 @@ static SEXP pkgtrim(SEXP args, DllReference *dll)
     SEXP s, ss;
     int pkgused = 0;
 
-    if (PkgSymbol == nullptr) PkgSymbol = install("PACKAGE");
+    if (PkgSymbol == nullptr) PkgSymbol = Symbol::obtain("PACKAGE");
 
     for(s = args ; s != R_NilValue;) {
 	ss = CDR(s);
@@ -813,7 +814,7 @@ static SEXP Rf_getCallingDLL(void)
     }
     if(!found) return R_NilValue;
 
-    PROTECT(e = lang2(install("getCallingDLLe"), rho));
+    PROTECT(e = lang2(Symbol::obtain("getCallingDLLe"), rho));
     ans = eval(e,  R_GlobalEnv);
     UNPROTECT(1);
     return(ans);
@@ -840,7 +841,7 @@ static DL_FUNC R_FindNativeSymbolFromDLL(char *name, DllReference *dll,
 	/* Rprintf("\nsearching for %s\n", name); */
 	if (env != R_NilValue) {
 	    SEXP e;
-	    PROTECT(e = lang2(install("getCallingDLLe"), env));
+	    PROTECT(e = lang2(Symbol::obtain("getCallingDLLe"), env));
 	    dll->obj = eval(e, R_GlobalEnv);
 	    UNPROTECT(1);
 	} else dll->obj = Rf_getCallingDLL();
@@ -894,12 +895,12 @@ HIDDEN SEXP do_dotCode(SEXP call, SEXP op, SEXP args, SEXP env)
     if (length(args) < 1) errorcall(call, _("'%s' is missing"), ".NAME");
     check1arg2(args, call, ".NAME");
     if (NaokSymbol == nullptr || DupSymbol == nullptr || PkgSymbol == nullptr) {
-	NaokSymbol = install("NAOK");
-	DupSymbol = install("DUP");
-	PkgSymbol = install("PACKAGE");
+	NaokSymbol = Symbol::obtain("NAOK");
+	DupSymbol = Symbol::obtain("DUP");
+	PkgSymbol = Symbol::obtain("PACKAGE");
     }
-    if (EncSymbol == nullptr) EncSymbol = install("ENCODING");
-    if (CSingSymbol == nullptr) CSingSymbol = install("Csingle");
+    if (EncSymbol == nullptr) EncSymbol = Symbol::obtain("ENCODING");
+    if (CSingSymbol == nullptr) CSingSymbol = Symbol::obtain("Csingle");
     vmax = vmaxget();
     Fort = PRIMVAL(op);
     if(Fort) symbol.type = R_FORTRAN_SYM;

@@ -201,7 +201,7 @@ static void lineprof(char *buf, SEXP srcref)
 
 		if (!srcfile || TYPEOF(srcfile) != ENVSXP)
 			return;
-		srcfile = findVar(install("filename"), srcfile);
+		srcfile = findVar(Symbol::obtain("filename"), srcfile);
 		if (TYPEOF(srcfile) != STRSXP || !length(srcfile))
 			return;
 		filename = CHAR(STRING_ELT(srcfile, 0));
@@ -909,7 +909,7 @@ void R::SrcrefPrompt(const char *prefix, SEXP srcref)
 	if (TYPEOF(srcref) == VECSXP) srcref = VECTOR_ELT(srcref, 0);
 	SEXP srcfile = getAttrib(srcref, R_SrcfileSymbol);
 	if (TYPEOF(srcfile) == ENVSXP) {
-	    SEXP filename = findVar(install("filename"), srcfile);
+	    SEXP filename = findVar(Symbol::obtain("filename"), srcfile);
 	    if (isString(filename) && length(filename)) {
 		Rprintf(_("%s at %s#%d: "), prefix, CHAR(STRING_ELT(filename, 0)), asInteger(srcref));
 		return;
@@ -1020,7 +1020,7 @@ static void loadCompilerNamespace(void)
     SEXP fun;
 	SEXP arg, expr;
 
-    PROTECT(fun = install("getNamespace"));
+    PROTECT(fun = Symbol::obtain("getNamespace"));
     PROTECT(arg = mkString("compiler"));
     PROTECT(expr = lang2(fun, arg));
     eval(expr, R_GlobalEnv);
@@ -1032,8 +1032,8 @@ static void checkCompilerOptions(int jitEnabled)
     bool old_visible = R_Visible;
     SEXP packsym, funsym, call, fcall, arg;
 
-    packsym = install("compiler");
-    funsym = install("checkCompilerOptions");
+    packsym = Symbol::obtain("compiler");
+    funsym = Symbol::obtain("checkCompilerOptions");
 
     PROTECT(arg = ScalarInteger(jitEnabled));
     PROTECT(fcall = lang3(R_TripleColonSymbol, packsym, funsym));
@@ -1063,7 +1063,7 @@ HIDDEN void R_init_jit_enabled(void)
     /* Need to force the lazy loading promise to avoid recursive
        promise evaluation when JIT is enabled. Might be better to do
        this in baseloader.R. */
-    eval(install(".ArgsEnv"), R_BaseEnv);
+    eval(Symbol::obtain(".ArgsEnv"), R_BaseEnv);
 
     int val = 3; /* turn JIT on by default */
     char *enable = getenv("R_ENABLE_JIT");
@@ -1112,10 +1112,10 @@ HIDDEN void R_init_jit_enabled(void)
     }
 
     /* initialize JIT variables */
-    R_IfSymbol = install("if");
-    R_ForSymbol = install("for");
-    R_WhileSymbol = install("while");
-    R_RepeatSymbol = install("repeat");
+    R_IfSymbol = Symbol::obtain("if");
+    R_ForSymbol = Symbol::obtain("for");
+    R_WhileSymbol = Symbol::obtain("while");
+    R_RepeatSymbol = Symbol::obtain("repeat");
 
     R_PreserveObject(JIT_cache = Rf_allocVector(VECSXP, JIT_CACHE_SIZE));
 }
@@ -1432,8 +1432,8 @@ HIDDEN SEXP R_cmpfun1(SEXP fun)
     bool old_visible = R_Visible;
     SEXP packsym, funsym, call, fcall, val;
 
-    packsym = install("compiler");
-    funsym = install("tryCmpfun");
+    packsym = Symbol::obtain("compiler");
+    funsym = Symbol::obtain("tryCmpfun");
 
     PROTECT(fcall = lang3(R_TripleColonSymbol, packsym, funsym));
     PROTECT(call = lang2(fcall, fun));
@@ -1519,9 +1519,9 @@ static SEXP R_compileExpr(SEXP expr, SEXP rho)
     SEXP packsym, funsym, quotesym;
     SEXP qexpr, call, fcall, val;
 
-    packsym = install("compiler");
-    funsym = install("tryCompile");
-    quotesym = install("quote");
+    packsym = Symbol::obtain("compiler");
+    funsym = Symbol::obtain("tryCompile");
+    quotesym = Symbol::obtain("quote");
 
     PROTECT(fcall = lang3(R_TripleColonSymbol, packsym, funsym));
     PROTECT(qexpr = lang2(quotesym, expr));
@@ -1624,7 +1624,7 @@ inline static Rboolean R_isReplaceSymbol(SEXP fun)
 static void PrintCall(SEXP call, SEXP rho)
 {
     int old_bl = R_BrowseLines,
-        blines = asInteger(GetOption1(install("deparse.max.lines")));
+        blines = asInteger(GetOption1(Symbol::obtain("deparse.max.lines")));
     if(blines != NA_INTEGER && blines > 0)
 	R_BrowseLines = blines;
 
@@ -2771,13 +2771,13 @@ HIDDEN void R_initAssignSymbols(void)
 	R_ReplaceFunsTable = R_NewHashedEnv(R_EmptyEnv, ScalarInteger(1099));
 	R_PreserveObject(R_ReplaceFunsTable);
 
-	R_SubsetSym = install("[");
-	R_SubassignSym = install("[<-");
-	R_Subset2Sym = install("[[");
-	R_Subassign2Sym = install("[[<-");
-	R_DollarGetsSymbol = install("$<-");
-	R_valueSym = install("value");
-	R_AssignSym = install("<-");
+	R_SubsetSym = Symbol::obtain("[");
+	R_SubassignSym = Symbol::obtain("[<-");
+	R_Subset2Sym = Symbol::obtain("[[");
+	R_Subassign2Sym = Symbol::obtain("[[<-");
+	R_DollarGetsSymbol = Symbol::obtain("$<-");
+	R_valueSym = Symbol::obtain("value");
+	R_AssignSym = Symbol::obtain("<-");
 }
 
 inline static SEXP lookupAssignFcnSymbol(SEXP fun)
@@ -4091,32 +4091,32 @@ static SEXP R_ConstantsRegistry = nullptr;
 
 HIDDEN void R_initialize_bcode(void)
 {
-  R_AddSym = install("+");
-  R_SubSym = install("-");
-  R_MulSym = install("*");
-  R_DivSym = install("/");
-  R_ExptSym = install("^");
-  R_SqrtSym = install("sqrt");
-  R_ExpSym = install("exp");
-  R_EqSym = install("==");
-  R_NeSym = install("!=");
-  R_LtSym = install("<");
-  R_LeSym = install("<=");
-  R_GeSym = install(">=");
-  R_GtSym = install(">");
-  R_AndSym = install("&");
-  R_OrSym = install("|");
-  R_NotSym = install("!");
-  R_CSym = install("c");
-  R_LogSym = install("log");
-  R_DotInternalSym = install(".Internal");
-  R_DotExternalSym = install(".External");
-  R_DotExternal2Sym = install(".External2");
-  R_DotExternalgraphicsSym = install(".External.graphics");
-  R_DotCallSym = install(".Call");
-  R_DotCallgraphicsSym = install(".Call.graphics");
-  R_DotFortranSym = install(".Fortran");
-  R_DotCSym = install(".C");
+  R_AddSym = Symbol::obtain("+");
+  R_SubSym = Symbol::obtain("-");
+  R_MulSym = Symbol::obtain("*");
+  R_DivSym = Symbol::obtain("/");
+  R_ExptSym = Symbol::obtain("^");
+  R_SqrtSym = Symbol::obtain("sqrt");
+  R_ExpSym = Symbol::obtain("exp");
+  R_EqSym = Symbol::obtain("==");
+  R_NeSym = Symbol::obtain("!=");
+  R_LtSym = Symbol::obtain("<");
+  R_LeSym = Symbol::obtain("<=");
+  R_GeSym = Symbol::obtain(">=");
+  R_GtSym = Symbol::obtain(">");
+  R_AndSym = Symbol::obtain("&");
+  R_OrSym = Symbol::obtain("|");
+  R_NotSym = Symbol::obtain("!");
+  R_CSym = Symbol::obtain("c");
+  R_LogSym = Symbol::obtain("log");
+  R_DotInternalSym = Symbol::obtain(".Internal");
+  R_DotExternalSym = Symbol::obtain(".External");
+  R_DotExternal2Sym = Symbol::obtain(".External2");
+  R_DotExternalgraphicsSym = Symbol::obtain(".External.graphics");
+  R_DotCallSym = Symbol::obtain(".Call");
+  R_DotCallgraphicsSym = Symbol::obtain(".Call.graphics");
+  R_DotFortranSym = Symbol::obtain(".Fortran");
+  R_DotCSym = Symbol::obtain(".C");
 
 #ifdef THREADED_CODE
   bcEval(nullptr, nullptr, FALSE);
@@ -4343,7 +4343,7 @@ inline static SEXP GETSTACK_PTR_TAG(R_bcstack_t *s)
 
 #ifdef TESTING_WRITE_BARRIER
 #define CHECK_SET_BELOW_PROT(s)					\
-    if ((s) < R_BCProtTop) error("changing stack value below R_BCProt pointer")
+    if ((s) < R_BCProtTop) error(_("changing stack value below R_BCProt pointer"))
 #else
 #define CHECK_SET_BELOW_PROT(s) do { } while (0)
 #endif
@@ -4924,7 +4924,7 @@ inline static double (*getMath1Fun(int i, SEXP call))(double) {
     if (math1funs[i].sym == nullptr)
 	math1funs[i].sym = install(math1funs[i].name);
     if (CAR(call) != math1funs[i].sym)
-	error("math1 compiler/interpreter mismatch");
+	error(_("math1 compiler/interpreter mismatch"));
     return math1funs[i].fun;
 }
 
@@ -5035,7 +5035,7 @@ inline static double (*getMath1Fun(int i, SEXP call))(double) {
 				NEXT();                                    \
 			}                                              \
 		}                                                  \
-		Builtin1(do_seq_along, install("seq_along"), rho); \
+		Builtin1(do_seq_along, Symbol::obtain("seq_along"), rho); \
 	} while (0)
 
 #define DO_SEQ_LEN()                                                     \
@@ -5055,7 +5055,7 @@ inline static double (*getMath1Fun(int i, SEXP call))(double) {
 				NEXT();                                                  \
 			}                                                            \
 		}                                                                \
-		Builtin1(do_seq_len, install("seq_len"), rho);                   \
+		Builtin1(do_seq_len, Symbol::obtain("seq_len"), rho);                   \
 	} while (0)
 
 inline static SEXP getForLoopSeq(int offset, bool &iscompact)
@@ -8558,7 +8558,7 @@ static SEXP disassemble(SEXP bc)
   int nc = LENGTH(consts);
 
   PROTECT(ans = allocVector(VECSXP, expr != R_NilValue ? 4 : 3));
-  SET_VECTOR_ELT(ans, 0, install(".Code"));
+  SET_VECTOR_ELT(ans, 0, Symbol::obtain(".Code"));
   SET_VECTOR_ELT(ans, 1, R_bcDecode(code));
   SET_VECTOR_ELT(ans, 2, allocVector(VECSXP, nc));
   if (expr != R_NilValue)

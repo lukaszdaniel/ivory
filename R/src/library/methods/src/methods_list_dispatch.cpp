@@ -770,7 +770,7 @@ SEXP R_nextMethodCall(SEXP matched_call, SEXP ev)
         if (inherits(op, "internalDispatchMethod")) {
 	    SEXP generic = findVarInFrame3(ev, R_dot_Generic, TRUE);
 	    if(generic == R_UnboundValue)
-	        error("internal error in 'callNextMethod()': '.Generic' was not assigned in the frame of the method call");
+	        error(_("internal error in 'callNextMethod()': '.Generic' was not assigned in the frame of the method call"));
 	    PROTECT(generic);
 	    op = INTERNAL(installTrChar(asChar(generic)));
 	    UNPROTECT(1); /* generic */

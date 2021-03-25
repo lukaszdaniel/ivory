@@ -304,7 +304,7 @@ void QuartzDevice_RestoreSnapshot(QuartzDesc_t desc, void* snap)
     if(nullptr == snap) return; /*Aw, hell no!*/
     PROTECT((SEXP)snap);
     if(R_NilValue == VECTOR_ELT(snap,0))
-        warning("Tried to restore an empty snapshot?");
+        warning(_("Tried to restore an empty snapshot?"));
     qd->redraw = 1;
     GEplaySnapshot((SEXP)snap, gd);
     qd->redraw = 0;
@@ -538,7 +538,7 @@ __attribute__((constructor)) static void RQ_init() {
 	(r = dlsym(RTLD_DEFAULT, "CGFontGetGlyphsForUnichars")) || (r = dlsym(RTLD_DEFAULT, "CGFontGetGlyphsForUnicodes")))
 	RQFontGetGlyphsForUnichars = (RQFontGetGlyphsForUnichars_t) r;
     else
-	error("Cannot load CoreGraphics"); /* this should never be reached but I suppose it's better than a hidden segfault */
+	error(_("Cannot load CoreGraphics")); /* this should never be reached but I suppose it's better than a hidden segfault */
 }
 #define CGFontGetGlyphsForUnichars RQFontGetGlyphsForUnichars
 /* and some missing declarations */

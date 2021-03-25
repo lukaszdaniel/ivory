@@ -31,6 +31,7 @@
 #include <CXXR/LogicalVector.hpp>
 #include <CXXR/RealVector.hpp>
 #include <CXXR/Expression.hpp>
+#include <CXXR/Symbol.hpp>
 #include <Localization.h>
 #include <Defn.h> /* => Utils.h with the protos from here; Rinternals.h */
 #include <Internal.h>
@@ -285,7 +286,7 @@ HIDDEN SEXP do_isunsorted(SEXP call, SEXP op, SEXP args, SEXP rho)
     if(isObject(x)) {
 	SEXP call;
 	PROTECT(call = 	// R>  .gtn(x, strictly) :
-		lang3(install(".gtn"), x, CADR(args)));
+		lang3(Symbol::obtain(".gtn"), x, CADR(args)));
 	ans = eval(call, rho);
 	UNPROTECT(2);
 	return ans;
@@ -858,7 +859,7 @@ static int equal(R_xlen_t i, R_xlen_t j, SEXP x, Rboolean nalast, SEXP rho)
 	SEXP si, sj, call;
 	PROTECT(si = ScalarInteger((int)i+1));
 	PROTECT(sj = ScalarInteger((int)j+1));
-	PROTECT(call = lang4(install(".gt"), x, si, sj));
+	PROTECT(call = lang4(Symbol::obtain(".gt"), x, si, sj));
 	c = asInteger(eval(call, rho));
 	UNPROTECT(3);
     } else {
@@ -896,7 +897,7 @@ static int greater(R_xlen_t i, R_xlen_t j, SEXP x, Rboolean nalast,
 	SEXP si, sj, call;
 	PROTECT(si = ScalarInteger((int)i+1));
 	PROTECT(sj = ScalarInteger((int)j+1));
-	PROTECT(call = lang4(install(".gt"), x, si, sj));
+	PROTECT(call = lang4(Symbol::obtain(".gt"), x, si, sj));
 	c = asInteger(eval(call, rho));
 	UNPROTECT(3);
     } else {
@@ -1637,7 +1638,7 @@ HIDDEN SEXP do_xtfrm(SEXP call, SEXP op, SEXP args, SEXP rho)
     /* DispatchOrEval internal generic: xtfrm */
     if(DispatchOrEval(call, op, "xtfrm", args, rho, &ans, 0, 1)) return ans;
     /* otherwise dispatch the default method */
-    PROTECT(fn = findFun(install("xtfrm.default"), rho));
+    PROTECT(fn = findFun(Symbol::obtain("xtfrm.default"), rho));
     PROTECT(prargs = promiseArgs(args, R_GlobalEnv));
     SET_PRVALUE(CAR(prargs), CAR(args));
     ans = applyClosure(call, fn, prargs, rho, R_NilValue);

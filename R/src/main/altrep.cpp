@@ -30,6 +30,7 @@
 #include <CXXR/RealVector.hpp>
 #include <CXXR/ComplexVector.hpp>
 #include <CXXR/RawVector.hpp>
+#include <CXXR/Symbol.hpp>
 #include <Defn.h>
 #include <Localization.h>
 #include <R_ext/Altrep.h>
@@ -51,9 +52,9 @@ namespace
     void SET_ALTREP_CLASS_SERIALIZED_CLASS(SEXP x, SEXP csym, SEXP psym, SEXP stype)
     {
         GCRoot<PairList> pl(SEXP_downcast<PairList *>(Rf_list3(csym, psym, stype)));
-        SET_TAG(pl, install("Altrep class"));
-        SET_TAG(CDR(pl), install("Package"));              //
-        SET_TAG(CDR(CDR(pl)), install("Underlying type")); //
+        SET_TAG(pl, Symbol::obtain("Altrep class"));
+        SET_TAG(CDR(pl), Symbol::obtain("Package"));              //
+        SET_TAG(CDR(CDR(pl)), Symbol::obtain("Underlying type")); //
         SET_ATTRIB(x, pl);
     }
 #define ALTREP_SERIALIZED_CLASS_CLSSYM(x) (CAR(x))
