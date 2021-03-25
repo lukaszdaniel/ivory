@@ -60,8 +60,10 @@ namespace CXXR
         const auto &SET_DDVALptr = SET_DDVAL;
     } // namespace ForceNonInline
 
-    Symbol::Symbol(const CachedString *the_name, RObject *val, const BuiltInFunction *internal_func)
-        : RObject(SYMSXP), m_name(the_name), m_value(val), m_internalfunc(internal_func), m_dd_index(-1), m_base_symbol(false), m_special_symbol(false)
+    // Symbol::s_special_symbol_names is in names.cpp
+
+    Symbol::Symbol(const CachedString *the_name)
+        : RObject(SYMSXP), m_name(the_name), m_value(unboundValue()), m_internalfunc(nullptr), m_dd_index(-1), m_base_symbol(false), m_special_symbol(false)
     {
         // If this is a ..n symbol, extract the value of n.
         // boost::regex_match (libboost_regex1_36_0-1.36.0-9.5) doesn't
@@ -88,18 +90,29 @@ namespace CXXR
             const_cast<BuiltInFunction *>(m_internalfunc)->incrementRefCount();
     }
 
-    Symbol::Symbol()
-        : RObject(SYMSXP), m_name(nullptr), m_value(s_unbound_value),
-          m_internalfunc(nullptr), m_dd_index(-1), m_base_symbol(false), m_special_symbol(false)
+    Symbol::~Symbol()
     {
+        // nothing needed.
+    }
+
+    Symbol *Symbol::obtain(const CachedString *name)
+    {
+        // return make(name);
+        return (name->m_symbol ? name->m_symbol : make(name));
+    }
+
+    Symbol *Symbol::createUnnamedSymbol()
+    {
+        Symbol *ans = new Symbol(CachedString::blank());
+        ans->expose();
+        return ans;
     }
 
     GCRoot<Symbol> Symbol::s_unbound_value(new Symbol(), true);
-    GCRoot<Symbol> Symbol::s_missing_arg(new Symbol(CachedString::blank()), true);
-    GCRoot<Symbol> Symbol::s_restart_token(new Symbol(CachedString::blank()), true);
+    // GCRoot<Symbol> Symbol::s_missing_arg(new Symbol(CachedString::blank()), true);
+    // GCRoot<Symbol> Symbol::s_restart_token(new Symbol(CachedString::blank()), true);
     GCRoot<Symbol> Symbol::s_in_bc_interpreter(new Symbol(CachedString::obtain("<in-bc-interp>")), true);
     GCRoot<Symbol> Symbol::s_current_expression(new Symbol(CachedString::obtain("<current-expression>")), true);
-    std::array<RObject *, Symbol::HSIZE> Symbol::R_SymbolTable;
 
     namespace
     {
@@ -149,15 +162,11 @@ namespace CXXR
         R_RestartToken = Symbol::restartToken();
         R_InBCInterpreter = Symbol::inBCInterpreter();
         R_CurrentExpression = Symbol::currentExpression();
-        if (!R_SymbolTable.size())
-            R_Suicide(_("couldn't allocate memory for symbol table"));
-        /* Initialize the symbol Table */
-        for (size_t i = 0; i < Symbol::R_SymbolTable.size(); i++)
-            Symbol::R_SymbolTable[i] = nullptr;
-            /* Set up a set of globals so that a symbol table search can be
+
+        /* Set up a set of globals so that a symbol table search can be
        avoided when matching something like dim or dimnames. */
 #define PREDEFINED_SYMBOL(C_NAME, CXXR_NAME, R_NAME) \
-    C_NAME = Rf_install(R_NAME);
+    C_NAME = Symbol::obtain(R_NAME);
 #include <CXXR/PredefinedSymbols.hpp>
 #undef PREDEFINED_SYMBOL
         /* The last value symbol is used by the interpreter for recording
@@ -168,13 +177,146 @@ namespace CXXR
        since the symbol value corresponds to the base environment
        where complex assignments are not allowed.  */
         DISABLE_REFCNT(R_LastvalueSymbol);
-#if CXXR_FALSE
-        for (int i = 0; s_special_symbol_names[i] != nullptr; ++i)
+
+        /* Special base functions */
+        for (const auto &sname : s_special_symbol_names)
         {
-            Symbol *symbol = Symbol::obtain(s_special_symbol_names[i]);
-            symbol->m_is_special_symbol = true;
+            Symbol *symbol = Symbol::obtain(sname);
+            symbol->m_special_symbol = true;
         }
+    }
+
+    Symbol *Symbol::missingArgument()
+    {
+#if CXXR_TRUE
+        static GCRoot<Symbol> missing(createUnnamedSymbol(), true);
+        return missing.get();
+#else
+        return s_missing_arg;
 #endif
+    }
+
+    Symbol *Symbol::unboundValue()
+    {
+#if CXXR_FALSE
+        static GCRoot<Symbol> unbound(createUnnamedSymbol(), true);
+        return unbound.get();
+#else
+        return s_unbound_value;
+#endif
+    }
+
+    Symbol *Symbol::restartToken()
+    {
+#if CXXR_TRUE
+        static GCRoot<Symbol> restartTkn(createUnnamedSymbol(), true);
+        return restartTkn.get();
+#else
+        return s_restart_token;
+#endif
+    }
+
+    Symbol *Symbol::inBCInterpreter()
+    {
+        return s_in_bc_interpreter;
+    }
+
+    Symbol *Symbol::currentExpression()
+    {
+        return s_current_expression;
+    }
+
+    Symbol::Table *Symbol::getTable()
+    {
+        static Table *table = new Table();
+        return table;
+    }
+
+    Symbol *Symbol::make(const CachedString *name)
+    {
+        if (name->size() == 0)
+        {
+            Rf_error(_("attempt to use zero-length variable name"));
+        }
+
+        {
+            /* Even though CachedString uses string + encoding pairs to cache strings
+             * CR's Rf_install and Rf_installNoTrChar use only string part of the key
+             * to obtain the corresponding cached string.
+             *
+             * Below logic replicates such behaviour, i.e. it tries to find corresponding string
+             * regardless of the encoding.
+             */
+            const cetype_t All[] = {CE_NATIVE, CE_UTF8, CE_LATIN1, CE_BYTES, CE_SYMBOL, CE_ANY};
+            for (const auto enc : All)
+            {
+                auto resp = CachedString::findInCache(name->stdstring(), enc);
+                if (resp)
+                {
+                    auto search = getTable()->find(resp);
+                    if (search != getTable()->end())
+                        return search->second;
+                }
+            }
+        }
+
+        std::pair<Table::iterator, bool> pr = getTable()->insert(Table::value_type(name, nullptr));
+        Table::iterator it = pr.first;
+        Table::value_type &val = *it;
+        if (pr.second)
+        {
+            try
+            {
+                val.second = new Symbol(name);
+                name->m_symbol = val.second;
+                val.second->expose();
+            }
+            catch (...)
+            {
+                name->m_symbol = nullptr;
+                getTable()->erase(it);
+                throw;
+            }
+        }
+        return val.second;
+    }
+
+    Symbol *Symbol::obtain(const std::string &name)
+    {
+        return Symbol::obtainCE(name, CE_NATIVE);
+    }
+
+    Symbol *Symbol::obtainCE(const std::string &name, cetype_t enc)
+    {
+        GCRoot<const CachedString> str(CachedString::obtain(name, enc));
+        return Symbol::obtain(str);
+    }
+
+    Symbol *Symbol::obtainS3Signature(const char *className,
+                                      const char *methodName)
+    {
+        assert(className != nullptr);
+        assert(methodName != nullptr);
+
+        std::string signature = std::string(className) + "." + std::string(methodName);
+        constexpr int maxLength = 512;
+        if (signature.length() >= maxLength)
+            Rf_error(_("signature is too long in '%s'"), signature.c_str());
+        return obtain(signature);
+    }
+
+    Symbol *Symbol::obtainDotDotSymbol(unsigned int n)
+    {
+        if (n < 0)
+            Rf_error(_("..n symbol name for a negative n is not permitted"));
+        const std::string ddval = ".." + std::to_string(n);
+        GCRoot<const CachedString> name(CachedString::obtain(ddval));
+        return obtain(name);
+    }
+
+    bool isDotSymbol(const Symbol *symbol)
+    {
+        return symbol && symbol->name()->c_str()[0] == '.';
     }
 
     void Symbol::checkST(const RObject *x)
@@ -193,15 +335,24 @@ namespace CXXR
 
     void Symbol::visitTable(const_visitor *v)
     {
-        if (R_SymbolTable.size()) /* in case of GC during startup */
-            for (size_t i = 0; i < R_SymbolTable.size(); i++)
+        for (Table::iterator it = getTable()->begin(); it != getTable()->end(); ++it)
+        {
+            // Beware that a garbage collection may occur in
+            // Symbol::obtain(), after a new entry has been placed in the
+            // symbol table but not yet made to point to a Symbol.  In
+            // that case we need to visit the table key (i.e. the symbol
+            // name); otherwise we don't bother, because it will be
+            // reached via the Symbol anyway.
+            const Symbol *symbol = (*it).second;
+            if (symbol)
             {
-                if (R_SymbolTable[i])
-                    (R_SymbolTable[i])->conductVisitor(v);
-                for (RObject *s = R_SymbolTable[i]; s; s = CDR(s))
-                    if (ATTRIB(CAR(s)))
-                        GCManager::gc_error("****found a symbol with attributes\n");
+                symbol->conductVisitor(v);
+                if (symbol->attributes())
+                    GCManager::gc_error("****found a symbol with attributes\n");
             }
+            else
+                (*it).first->conductVisitor(v);
+        }
     }
 } // namespace CXXR
 

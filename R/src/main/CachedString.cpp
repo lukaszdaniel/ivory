@@ -101,6 +101,15 @@ namespace CXXR
         return (*it).second;
     }
 
+    CachedString *CachedString::findInCache(const std::string &str, cetype_t enc)
+    {
+        auto search = getCache()->find(key(str, enc));
+        if (search != getCache()->end())
+            return search->second;
+
+        return nullptr;
+    }
+
     const char *CachedString::typeName() const
     {
         return CachedString::staticTypeName();

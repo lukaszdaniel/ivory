@@ -75,6 +75,8 @@ namespace CXXR
          */
         static CachedString *obtain(const std::string &str, cetype_t encoding = CE_NATIVE);
 
+        static CachedString *findInCache(const std::string &str, cetype_t enc);
+
         /** @brief The name by which this type is known in R.
          *
          * @return the name by which this type is known in R.
@@ -88,6 +90,7 @@ namespace CXXR
         const char *typeName() const override;
 
     private:
+        friend class Symbol;
         static GCRoot<const CachedString> s_blank;
         // The first element of the key is the text, the second
         // element the encoding:
@@ -120,9 +123,11 @@ namespace CXXR
         //     map;
 
         map::value_type *m_key_val_pr;
+        mutable Symbol *m_symbol; // Pointer to the Symbol object identified
+                                  // by this String, or a null pointer if none.
 
         explicit CachedString(const std::string &text, cetype_t encoding, bool isAscii)
-            : String(text.size(), encoding, text, isAscii, true /*cached*/)
+            : String(text.size(), encoding, text, isAscii, true /*cached*/), m_key_val_pr(nullptr), m_symbol(nullptr)
         {
         }
 

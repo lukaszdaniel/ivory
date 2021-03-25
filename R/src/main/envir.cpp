@@ -729,7 +729,7 @@ static SEXP R_NamespaceSymbol;
 HIDDEN void R::InitGlobalEnv()
 {
     Environment::initialize();
-    R_NamespaceSymbol = install(".__NAMESPACE__.");
+    R_NamespaceSymbol = Symbol::obtain(".__NAMESPACE__.");
 
     R_MethodsNamespace = R_GlobalEnv; // so it is initialized.
 #ifdef NEW_CODE /* Not used */
@@ -743,7 +743,7 @@ HIDDEN void R::InitGlobalEnv()
 #endif
     R_BaseNamespace = NewEnvironment(R_NilValue, R_NilValue, R_GlobalEnv);
     R_PreserveObject(R_BaseNamespace);
-    SET_SYMVALUE(install(".BaseNamespaceEnv"), R_BaseNamespace);
+    SET_SYMVALUE(Symbol::obtain(".BaseNamespaceEnv"), R_BaseNamespace);
     R_BaseNamespaceName = ScalarString(mkChar("base"));
     R_PreserveObject(R_BaseNamespaceName);
     R_NamespaceRegistry = R_NewHashedEnv(R_NilValue, ScalarInteger(0));
@@ -2733,71 +2733,56 @@ static void HashTableValues(SEXP table, int all, SEXP values, int *indx)
 	FrameValues(VECTOR_ELT(table, i), all, values, indx);
 }
 
+static bool BuiltinTest(const Symbol *sym, bool all, bool intern)
+{
+    if (!sym)
+        return false;
+    if (intern && sym->internalFunction())
+        return true;
+    if ((all || sym->name()->c_str()[0] != '.') && sym->value() != R_UnboundValue)
+        return true;
+    return false;
+}
+
 static int BuiltinSize(bool all, bool intern)
 {
     int count = 0;
-    for (size_t j = 0; j < Symbol::R_SymbolTable.size(); j++) {
-	for (SEXP s = Symbol::R_SymbolTable[j]; s != R_NilValue; s = CDR(s)) {
-	    if (intern) {
-		if (INTERNAL(CAR(s)) != R_NilValue)
-		    count++;
-	    }
-	    else {
-		if ((all || CHAR(PRINTNAME(CAR(s)))[0] != '.')
-		    && SYMVALUE(CAR(s)) != R_UnboundValue)
-		    count++;
-	    }
-	}
+    for (Symbol::const_iterator it = Symbol::begin(); it != Symbol::end(); ++it)
+    {
+        const Symbol *sym = (*it).second;
+        if (BuiltinTest(sym, all, intern))
+            ++count;
     }
     return count;
 }
 
 static void BuiltinNames(int all, int intern, SEXP names, int *indx)
 {
-    for (size_t j = 0; j < Symbol::R_SymbolTable.size(); j++) {
-	for (SEXP s = Symbol::R_SymbolTable[j]; s != R_NilValue; s = CDR(s)) {
-	    if (intern) {
-		if (INTERNAL(CAR(s)) != R_NilValue)
-		    SET_STRING_ELT(names, (*indx)++, PRINTNAME(CAR(s)));
-	    }
-	    else {
-		if ((all || CHAR(PRINTNAME(CAR(s)))[0] != '.')
-		    && SYMVALUE(CAR(s)) != R_UnboundValue)
-		    SET_STRING_ELT(names, (*indx)++, PRINTNAME(CAR(s)));
-	    }
-	}
+    // StringVector *sv = SEXP_downcast<StringVector *>(names);
+    for (Symbol::const_iterator it = Symbol::begin(); it != Symbol::end(); ++it)
+    {
+        const Symbol *sym = (*it).second;
+        if (BuiltinTest(sym, all, intern))
+            SET_STRING_ELT(names, (*indx)++, const_cast<CachedString *>(sym->name()));
     }
 }
 
 static void BuiltinValues(int all, int intern, SEXP values, int *indx)
 {
-    SEXP vl;
-    for (size_t j = 0; j < Symbol::R_SymbolTable.size(); j++) {
-	for (SEXP s = Symbol::R_SymbolTable[j]; s != R_NilValue; s = CDR(s)) {
-	    if (intern) {
-		if (INTERNAL(CAR(s)) != R_NilValue) {
-		    vl = SYMVALUE(CAR(s));
-		    if (TYPEOF(vl) == PROMSXP) {
-			PROTECT(vl);
-			vl = eval(vl, R_BaseEnv);
-			UNPROTECT(1);
-		    }
-		    SET_VECTOR_ELT(values, (*indx)++, lazy_duplicate(vl));
-		}
-	    }
-	    else {
-		if ((all || CHAR(PRINTNAME(CAR(s)))[0] != '.')
-		    && SYMVALUE(CAR(s)) != R_UnboundValue) {
-		    vl = SYMVALUE(CAR(s));
-		    if (TYPEOF(vl) == PROMSXP) {
-			PROTECT(vl);
-			vl = eval(vl, R_BaseEnv);
-			UNPROTECT(1);
-		    }
-		    SET_VECTOR_ELT(values, (*indx)++, lazy_duplicate(vl));
-		}
-	    }
-	}
+    // ListVector *lv = SEXP_downcast<ListVector *>(values);
+    for (Symbol::const_iterator it = Symbol::begin(); it != Symbol::end(); ++it)
+    {
+        Symbol *sym = (*it).second;
+        if (BuiltinTest(sym, all, intern))
+        {
+            RObject *vl = sym->value();
+            if (vl && vl->sexptype() == PROMSXP)
+            {
+                GCRoot<> vlr(vl);
+                vl = eval(vl, R_BaseEnv);
+            }
+            SET_VECTOR_ELT(values, (*indx)++, lazy_duplicate(vl));
+        }
     }
 }
 
@@ -3023,8 +3008,8 @@ HIDDEN SEXP do_eapply(SEXP call, SEXP op, SEXP args, SEXP rho)
     else
 	FrameValues(FRAME(env), all, tmp2, &k2);
 
-    SEXP Xsym = install("X");
-    SEXP isym = install("i");
+    SEXP Xsym = Symbol::obtain("X");
+    SEXP isym = Symbol::obtain("i");
     PROTECT(ind = allocVector(INTSXP, 1));
     /* tmp :=  `[`(<elist>, i) */
     PROTECT(tmp = LCONS(R_Bracket2Symbol,
@@ -3242,7 +3227,7 @@ HIDDEN SEXP do_as_environment(SEXP call, SEXP op, SEXP args, SEXP rho)
     case VECSXP: {
 	/* implement as.environment.list() {isObject(.) is false for a list} */
 	SEXP val;
-	GCRoot<> call(lang4(install("list2env"), arg,
+	GCRoot<> call(lang4(Symbol::obtain("list2env"), arg,
 			     /* envir = */R_NilValue,
 			     /* parent = */R_EmptyEnv));
 	val = eval(call, rho);
@@ -3259,12 +3244,15 @@ void R_LockEnvironment(SEXP env, Rboolean bindings)
     if(IS_S4_OBJECT(env) && (TYPEOF(env) == S4SXP))
 	env = R_getS4DataSlot(env, ANYSXP); /* better be an ENVSXP */
     if (env == R_BaseEnv || env == R_BaseNamespace) {
-	if (bindings) {
-	    for (size_t j = 0; j < Symbol::R_SymbolTable.size(); j++)
-		for (SEXP s = Symbol::R_SymbolTable[j]; s != R_NilValue; s = CDR(s))
-		    if(SYMVALUE(CAR(s)) != R_UnboundValue)
-			LOCK_BINDING(CAR(s));
-	}
+        if (bindings)
+        {
+            for (Symbol::const_iterator it = Symbol::begin(); it != Symbol::end(); ++it)
+            {
+                Symbol *sym = (*it).second;
+                if (sym && sym->value() != R_UnboundValue)
+                    LOCK_BINDING(sym);
+            }
+        }
 #ifdef NOT_YET
 	/* causes problems with Matrix */
 	LOCK_FRAME(env);
@@ -3641,7 +3629,7 @@ SEXP R_FindPackageEnv(SEXP info)
 {
     SEXP val;
     GCRoot<> infor(info);
-    SEXP s_findPackageEnv = install("findPackageEnv");
+    SEXP s_findPackageEnv = Symbol::obtain("findPackageEnv");
     GCRoot<PairList> tail(CXXR_cons(info, R_NilValue));
     GCRoot<> expr(LCONS(s_findPackageEnv, tail));
     val = eval(expr, R_GlobalEnv);
@@ -3656,7 +3644,7 @@ Rboolean R_IsNamespaceEnv(SEXP rho)
 	SEXP info = findVarInFrame3(rho, R_NamespaceSymbol, TRUE);
 	if (info != R_UnboundValue && TYPEOF(info) == ENVSXP) {
 	    GCRoot<> infor(info);
-	    SEXP spec = findVarInFrame3(info, install("spec"), TRUE);
+	    SEXP spec = findVarInFrame3(info, Symbol::obtain("spec"), TRUE);
 	    if (spec != R_UnboundValue &&
 		TYPEOF(spec) == STRSXP && LENGTH(spec) > 0)
 		return TRUE;
@@ -3686,7 +3674,7 @@ SEXP R_NamespaceEnvSpec(SEXP rho)
 	SEXP info = findVarInFrame3(rho, R_NamespaceSymbol, TRUE);
 	if (info != R_UnboundValue && TYPEOF(info) == ENVSXP) {
 	    PROTECT(info);
-	    SEXP spec = findVarInFrame3(info, install("spec"), TRUE);
+	    SEXP spec = findVarInFrame3(info, Symbol::obtain("spec"), TRUE);
 	    UNPROTECT(1);
 	    if (spec != R_UnboundValue &&
 		TYPEOF(spec) == STRSXP && LENGTH(spec) > 0)
@@ -3703,7 +3691,7 @@ SEXP R_FindNamespace(SEXP info)
 {
     SEXP val;
     GCRoot<> infor(info);
-    SEXP s_getNamespace = install("getNamespace");
+    SEXP s_getNamespace = Symbol::obtain("getNamespace");
     GCRoot<PairList> tail(CXXR_cons(info, R_NilValue));
     GCRoot<> expr(LCONS(s_getNamespace, tail));
     val = eval(expr, R_GlobalEnv);
@@ -3817,7 +3805,7 @@ static SEXP callR1(SEXP fun, SEXP arg)
 {
     static SEXP R_xSymbol = NULL;
     if (R_xSymbol == NULL)
-	R_xSymbol = install("x");
+	R_xSymbol = Symbol::obtain("x");
 
     SEXP rho = PROTECT(NewEnvironment(R_NilValue, R_NilValue, R_BaseNamespace));
     defineVar(R_xSymbol, arg, rho);
@@ -3835,10 +3823,10 @@ SEXP attribute_hidden R_getNSValue(SEXP call, SEXP ns, SEXP name, int exported)
     static SEXP R_lazydataSymbol = NULL;
     static SEXP R_getNamespaceNameSymbol = NULL;
     if (R_loadNamespaceSymbol == NULL) {
-	R_loadNamespaceSymbol = install("loadNamespace");
-	R_exportsSymbol = install("exports");
-	R_lazydataSymbol = install("lazydata");
-	R_getNamespaceNameSymbol = install("getNamespaceName");
+	R_loadNamespaceSymbol = Symbol::obtain("loadNamespace");
+	R_exportsSymbol = Symbol::obtain("exports");
+	R_lazydataSymbol = Symbol::obtain("lazydata");
+	R_getNamespaceNameSymbol = Symbol::obtain("getNamespaceName");
     }
 
     if (R_IsNamespaceEnv(ns))
@@ -4116,7 +4104,7 @@ void findFunctionForBodyInNamespace(SEXP body, SEXP nsenv, SEXP nsname) {
     SEXP args = PROTECT(list3(nsenv /* x */,
 	R_TrueValue /* all.names */,
 	R_FalseValue /* sorted */));
-    SEXP env2listOp = INTERNAL(install("env2list"));
+    SEXP env2listOp = INTERNAL(Symbol::obtain("env2list"));
 
     SEXP elist = do_env2list(R_NilValue, env2listOp, args, R_NilValue);
     PROTECT(elist);

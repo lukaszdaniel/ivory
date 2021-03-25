@@ -1036,19 +1036,16 @@ std::vector<CXXR::FUNTAB> R_FunTab =
    non-syntactically-special symbol is added here it would neet to be
    explicitly allowed in the pipe code. */
 
-namespace
-{
-    const std::vector<std::string> Spec_name = {
-        "if", "while", "repeat", "for", "break", "next", "return", "function",
-        "(", "{",
-        "+", "-", "*", "/", "^", "%%", "%/%", "%*%", ":", "::", ":::", "?", "|>",
-        "~", "@", "=>",
-        "==", "!=", "<", ">", "<=", ">=",
-        "&", "|", "&&", "||", "!",
-        "<-", "<<-", "=",
-        "$", "[", "[[",
-        "$<-", "[<-", "[[<-"};
-}
+const std::vector<std::string> Symbol::s_special_symbol_names = {
+    "if", "while", "repeat", "for", "break", "next", "return", "function",
+    "(", "{",
+    "+", "-", "*", "/", "^", "%%", "%/%", "%*%", ":", "::", ":::", "?", "|>",
+    "~", "@", "=>",
+    "==", "!=", "<", ">", "<=", ">=",
+    "&", "|", "&&", "||", "!",
+    "<-", "<<-", "=",
+    "$", "[", "[[",
+    "$<-", "[<-", "[[<-"};
 
 /* also used in eval.cpp */
 HIDDEN SEXP R::R_Primitive(const char *primname)
@@ -1097,33 +1094,19 @@ static void installFunTab(int i)
         SET_SYMVALUE(install(R_FunTab[i].name()), prim);
 }
 
-namespace
-{
-    constexpr int N_DDVAL_SYMBOLS = 65;
-    std::array<SEXP, N_DDVAL_SYMBOLS> DDVALSymbols;
-} // namespace
-
-static SEXP createDDVALSymbol(int n)
-{
-    const std::string ddval = ".." + std::to_string(n);
-    return install(ddval.c_str());
-}
-
 static void initializeDDVALSymbols()
 {
+    constexpr int N_DDVAL_SYMBOLS = 65;
     for (int i = 0; i < N_DDVAL_SYMBOLS; i++)
     {
-        DDVALSymbols[i] = createDDVALSymbol(i);
+        Symbol::obtainDotDotSymbol(i);
     }
 }
 
 /*HIDDEN*/
 SEXP Rf_installDDVAL(int n)
 {
-    if (n < N_DDVAL_SYMBOLS)
-        return DDVALSymbols[n];
-
-    return createDDVALSymbol(n);
+    return Symbol::obtainDotDotSymbol(n);
 }
 
 /* initialize the symbol table */
@@ -1134,7 +1117,7 @@ HIDDEN void R::InitNames()
 
     /* String constants (CHARSXP values) */
     String::initialize(); // NA(), blank()
-    Symbol::initialize(); // R_SymbolTable, R_UnboundValue, R_MissingArg, ...
+    Symbol::initialize(); // R_UnboundValue, R_MissingArg, special symbols, ...
 
     R_print.na_string = R_NaString;
     R_BlankScalarString = Rf_ScalarString(R_BlankString);
@@ -1143,10 +1126,6 @@ HIDDEN void R::InitNames()
     /*  Builtin Functions */
     for (size_t i = 0; i < R_FunTab.size(); i++)
         installFunTab(i);
-
-    /* Special base functions */
-    for (const auto &sname : Spec_name)
-        SET_SPECIAL_SYMBOL(install(sname.c_str()));
 
     R_initAssignSymbols();
     initializeDDVALSymbols();
@@ -1157,27 +1136,15 @@ HIDDEN void R::InitNames()
 /*  install - probe the symbol table */
 /*  If "name" is not found, it is installed in the symbol table.
     The symbol corresponding to the string "name" is returned. */
-SEXP CXXR::install_(const std::string &name) { return Rf_install(name.c_str()); }
 SEXP Rf_install(const char *name)
 {
-    SEXP sym;
-    int i, hashcode;
-
-    hashcode = R_Newhashpjw(name);
-    i = hashcode % Symbol::R_SymbolTable.size();
-    /* Check to see if the symbol is already present;  if it is, return it. */
-    for (sym = Symbol::R_SymbolTable[i]; sym != R_NilValue; sym = CDR(sym))
-        if (strcmp(name, CHAR(PRINTNAME(CAR(sym)))) == 0)
-            return (CAR(sym));
-    /* Create a new symbol node and link it into the table. */
     if (*name == '\0')
-        error(_("attempt to use zero-length variable name"));
+        Rf_error(_("attempt to use zero-length variable name"));
     if (strlen(name) > Symbol::MAXIDSIZE)
-        error(_("variable names are limited to %d bytes"), Symbol::MAXIDSIZE);
-    sym = mkSYMSXP(mkChar(name), R_UnboundValue);
+        Rf_error(_("variable names are limited to %d bytes"), Symbol::MAXIDSIZE);
 
-    Symbol::R_SymbolTable[i] = CONS(sym, Symbol::R_SymbolTable[i]);
-    return (sym);
+    GCRoot<const CachedString> namestr(CachedString::obtain(name));
+    return Symbol::obtain(namestr);
 }
 
 /* This function is equivalent to install(CHAR(charSXP)), but faster.
@@ -1186,78 +1153,31 @@ SEXP Rf_install(const char *name)
 /*HIDDEN*/
 SEXP Rf_installNoTrChar(SEXP charSXP)
 {
-    SEXP sym;
-    int i, hashcode;
-
-    if (!HASHASH(charSXP))
-    {
-        hashcode = R_Newhashpjw(CHAR(charSXP));
-        SET_HASHVALUE(charSXP, hashcode);
-        SET_HASHASH(charSXP, 1);
-    }
-    else
-    {
-        hashcode = HASHVALUE(charSXP);
-    }
-    i = hashcode % Symbol::R_SymbolTable.size();
-    /* Check to see if the symbol is already present;  if it is, return it. */
-    for (sym = Symbol::R_SymbolTable[i]; sym != R_NilValue; sym = CDR(sym))
-        if (streql(CHAR(charSXP), CHAR(PRINTNAME(CAR(sym)))))
-            return (CAR(sym));
-    /* Create a new symbol node and link it into the table. */
     int len = LENGTH(charSXP);
     if (len == 0)
-        error(_("attempt to use zero-length variable name"));
+        Rf_error(_("attempt to use zero-length variable name"));
     if (len > Symbol::MAXIDSIZE)
-        error(_("variable names are limited to %d bytes"), Symbol::MAXIDSIZE);
-    if (IS_ASCII(charSXP) || (IS_UTF8(charSXP) && utf8locale) ||
-        (IS_LATIN1(charSXP) && latin1locale))
-        sym = mkSYMSXP(charSXP, R_UnboundValue);
+        Rf_error(_("variable names are limited to %d bytes"), Symbol::MAXIDSIZE);
+
+    CachedString *name = SEXP_downcast<CachedString *>(charSXP);
+    if (name->isASCII() || (name->isUTF8() && utf8locale) ||
+        (name->isLATIN1() && latin1locale))
+    {
+        return Symbol::obtain(name);
+    }
     else
     {
         /* This branch is to match behaviour of install (which is older):
 	   symbol C-string names are always interpreted as if
 	   in the native locale, even when they are not in the native locale */
-        PROTECT(charSXP);
-        sym = mkSYMSXP(mkChar(CHAR(charSXP)), R_UnboundValue);
-        SET_HASHVALUE(PRINTNAME(sym), hashcode);
-        SET_HASHASH(PRINTNAME(sym), 1);
-        UNPROTECT(1);
+        return Symbol::obtain(name->stdstring());
     }
-
-    Symbol::R_SymbolTable[i] = CONS(sym, Symbol::R_SymbolTable[i]);
-    return (sym);
 }
 
-constexpr int maxLength = 512;
 /*HIDDEN*/
-SEXP Rf_installS3Signature(const char *className, const char *methodName) {
-
-    const char *src;
-    char signature[maxLength];
-
-    int i = 0;
-    for (src = className; *src; src++) {
-        if (i == maxLength)
-            error(_("class name is too long in '%s'"), className);
-        signature[i++] = *src;
-    }
-
-    if (i == maxLength)
-        error(_("class name is too long in '%s'"), className);
-    signature[i++] = '.';
-
-    for (src = methodName; *src; src++) {
-        if (i == maxLength)
-            error(_("class name is too long in '%s'"), className);
-        signature[i++] = *src;
-    }
-
-    if (i == maxLength)
-        error(_("class name is too long in '%s'"), className);
-    signature[i] = 0;
-
-    return install(signature);
+SEXP Rf_installS3Signature(const char *className, const char *methodName)
+{
+    return Symbol::obtainS3Signature(className, methodName);
 }
 
 
@@ -1352,11 +1272,4 @@ HIDDEN SEXP do_tilde(SEXP call, SEXP op, SEXP args, SEXP rho)
         UNPROTECT(2);
         return call;
     }
-}
-
-/* For use in packages */
-
-const char *getPRIMNAME(SEXP object)
-{
-    return PRIMNAME(object);
 }

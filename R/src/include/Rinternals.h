@@ -671,12 +671,6 @@ size_t Rf_GetOptionWidth(void);
 SEXP Rf_GetRowNames(SEXP);
 void Rf_gsetVar(SEXP, SEXP, SEXP);
 SEXP Rf_install(const char *name);
-#ifdef __cplusplus
-namespace CXXR
-{
-    SEXP install_(const std::string &name);
-}
-#endif
 SEXP Rf_installChar(SEXP x);
 SEXP Rf_installNoTrChar(SEXP charSXP);
 SEXP Rf_installTrChar(SEXP x);

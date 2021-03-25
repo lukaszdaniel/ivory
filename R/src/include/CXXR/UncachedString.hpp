@@ -66,7 +66,7 @@ namespace CXXR
             : String(sz, encoding), m_databytes(sz + 1), m_data(m_short_string)
         {
 #ifdef R_MEMORY_PROFILING
-        MemoryBank::R_ReportAllocation(convert2VEC<char>(sz + 1) * sizeof(VECREC));
+            MemoryBank::R_ReportAllocation(convert2VEC<char>(sz + 1) * sizeof(VECREC));
 #endif
             allocData(sz);
         }
@@ -123,9 +123,18 @@ namespace CXXR
 		 * @return Pointer to the encapsulated C-style (null
 		 * terminated) string.
 		 */
-        const char *c_str() const
+        virtual const char *c_str() const override
         {
             return m_data;
+        }
+
+        /** @brief Access encapsulated std::string.
+		 *
+		 * @return The string's value as a std::string.
+		 */
+        virtual std::string stdstring() const override
+        {
+            return std::string(m_data);
         }
 
         /** @brief The name by which this type is known in R.

@@ -97,8 +97,5 @@ SEXP R::mkCLOSXP(SEXP formal_args, SEXP body, SEXP env)
 HIDDEN SEXP R::mkSYMSXP(SEXP name, SEXP value)
 {
     GCRoot<const CachedString> namert(SEXP_downcast<const CachedString *>(name));
-    GCRoot<> valuert(value);
-    Symbol *ans = new Symbol(namert, valuert);
-    ans->expose();
-    return ans;
+    return CXXR::Symbol::obtain(namert);
 }

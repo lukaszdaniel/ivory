@@ -174,7 +174,7 @@ static void linebreak(bool &lbreak, LocalParseData *);
 static void deparse2(SEXP, SEXP, LocalParseData *);
 static size_t DEFAULT_Cutoff() {
 	size_t w;
-    w = Rf_asInteger(Rf_GetOption1(CXXR::install_("width")));
+    w = Rf_asInteger(Rf_GetOption1(CXXR::Symbol::obtain("width")));
     return (w < R_MIN_WIDTH_OPT || w > R_MAX_WIDTH_OPT) ? 80 : w;
 }
 
@@ -207,7 +207,7 @@ SEXP R::deparse1m(SEXP call, bool abbrev, int opts)
 {
     bool backtick = true;
     int old_bl = R_BrowseLines,
-        blines = asInteger(GetOption1(CXXR::install_("deparse.max.lines")));
+        blines = asInteger(GetOption1(CXXR::Symbol::obtain("deparse.max.lines")));
     if (blines != NA_INTEGER && blines > 0)
         R_BrowseLines = blines;
     SEXP result = deparse1WithCutoff(call, abbrev, DEFAULT_Cutoff(), backtick,

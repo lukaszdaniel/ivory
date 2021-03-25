@@ -47,13 +47,13 @@ namespace R
 namespace CXXR
 {
 	/** @brief Base class for RObject representing a character string.
-     *
-     * @note When the method size() of VectorBase is applied to a
-     * String, it returns the number of <tt>char</tt>s that the String
-     * comprises.  If the string uses a multibyte encoding scheme,
-     * this may be different from the number of Unicode characters
-     * represented by the string.
-     */
+	 *
+	 * @note When the method size() of VectorBase is applied to a
+	 * String, it returns the number of <tt>char</tt>s that the String
+	 * comprises.  If the string uses a multibyte encoding scheme,
+	 * this may be different from the number of Unicode characters
+	 * represented by the string.
+	 */
 	class String : public VectorBase
 	{
 	public:
@@ -108,60 +108,69 @@ namespace CXXR
 		 * @return Pointer to the encapsulated C-style (null
 		 * terminated) string.
 		 */
-		const char *c_str() const
+		virtual const char *c_str() const
 		{
 			return m_c_str.c_str();
 		}
 
+		/** @brief Access encapsulated std::string.
+		 *
+		 * @return The string's value as a std::string.
+		 */
+		virtual std::string stdstring() const
+		{
+			return m_c_str;
+		}
+
 		/** @brief Character encoding.
-         *
-         * @return the character encoding.  At present the only types
-         * of encoding are CE_NATIVE, CE_UTF8, CE_LATIN1 and CE_BYTES.
-         */
+		 *
+		 * @return the character encoding.  At present the only types
+		 * of encoding are CE_NATIVE, CE_UTF8, CE_LATIN1 and CE_BYTES.
+		 */
 		cetype_t encoding() const { return m_encoding; }
 
 		/** @brief Extract encoding information from CR's \c gp bits
-         * field.
-         *
-         * This function is used to extract the character encoding
-         * information contained in the <tt>sxpinfo_struct.gp</tt>
-         * field used in CR.  It should be used exclusively for
-         * deserialization.  Refer to the 'R Internals' document for
-         * details of this field.
-         *
-         * @param gpbits the \c gp bits field (within the
-         *          least significant 16 bits).
-         */
+		 * field.
+		 *
+		 * This function is used to extract the character encoding
+		 * information contained in the <tt>sxpinfo_struct.gp</tt>
+		 * field used in CR.  It should be used exclusively for
+		 * deserialization.  Refer to the 'R Internals' document for
+		 * details of this field.
+		 *
+		 * @param gpbits the \c gp bits field (within the
+		 *          least significant 16 bits).
+		 */
 		static cetype_t GPBits2Encoding(unsigned int gpbits);
 
 		/** @brief Is this String pure ASCII?
-         *
-         * @return true iff the String contains only ASCII characters.
-         */
+		 *
+		 * @return true iff the String contains only ASCII characters.
+		 */
 		bool isASCII() const { return m_ascii; }
 
 		/** @brief Is this String encoded in UTF8?
-         *
-         * @return true iff the String is encoded in UTF8.
-         */
+		 *
+		 * @return true iff the String is encoded in UTF8.
+		 */
 		bool isUTF8() const { return encodingEquals(CE_UTF8); }
 
 		/** @brief Is this String encoded in LATIN1?
-         *
-         * @return true iff the String is encoded in LATIN1.
-         */
+		 *
+		 * @return true iff the String is encoded in LATIN1.
+		 */
 		bool isLATIN1() const { return encodingEquals(CE_LATIN1); }
 
 		/** @brief Is this String encoded in BYTES?
-         *
-         * @return true iff the String is encoded in BYTES.
-         */
+		 *
+		 * @return true iff the String is encoded in BYTES.
+		 */
 		bool isBYTES() const { return encodingEquals(CE_BYTES); }
 
 		/** @brief Check if String is encoded in \a t?
-         *
-         * @return true iff the String is encoded in \a t.
-         */
+		 *
+		 * @return true iff the String is encoded in \a t.
+		 */
 		bool encodingEquals(const cetype_t &t) const { return encoding() == t; }
 
 		/** @brief Hash value.
@@ -228,9 +237,9 @@ namespace CXXR
 		}
 
 		/** @brief The name by which this type is known in R.
-         *
-         * @return the name by which this type is known in R.
-         */
+		 *
+		 * @return the name by which this type is known in R.
+		 */
 		static const char *staticTypeName()
 		{
 			return "char";
@@ -328,13 +337,13 @@ namespace CXXR
 	}
 
 	/** @brief Is a std::string entirely ASCII?
-     *
-     * @param str The string to be examined.
-     *
-     * @return false if str contains at least one non-ASCII character,
-     * otherwise true.  In particular the function returns true for an
-     * empty string.
-     */
+	 *
+	 * @param str The string to be examined.
+	 *
+	 * @return false if str contains at least one non-ASCII character,
+	 * otherwise true.  In particular the function returns true for an
+	 * empty string.
+	 */
 	bool isASCII(const std::string &str);
 } // namespace CXXR
 
@@ -362,33 +371,33 @@ extern "C"
 	extern SEXP R_BlankString;
 
 	/**
-     * @param x \c const pointer to a CXXR::String.
-     * @return \c const pointer to character 0 of \a x.
-     */
+	 * @param x \c const pointer to a CXXR::String.
+	 * @return \c const pointer to character 0 of \a x.
+	 */
 	const char *R_CHAR(SEXP x);
 
 	/**
-     * @param x Pointer to a CXXR::String.
-     * @return true iff \a x is marked as having LATIN1 encoding.
-     */
+	 * @param x Pointer to a CXXR::String.
+	 * @return true iff \a x is marked as having LATIN1 encoding.
+	 */
 	int IS_LATIN1(SEXP x);
 
 	/**
-     * @param x Pointer to a CXXR::String.
-     * @return true iff \a x is marked as having UTF8 encoding.
-     */
+	 * @param x Pointer to a CXXR::String.
+	 * @return true iff \a x is marked as having UTF8 encoding.
+	 */
 	int IS_UTF8(SEXP x);
 
 	/**
-     * @param x Pointer to a CXXR::String.
-     * @return true iff \a x is marked as having BYTES encoding.
-     */
+	 * @param x Pointer to a CXXR::String.
+	 * @return true iff \a x is marked as having BYTES encoding.
+	 */
 	int IS_BYTES(SEXP x);
 
 	/**
-     * @param x Pointer to a CXXR::String.
-     * @return true iff \a x is marked as having ASCII encoding.
-     */
+	 * @param x Pointer to a CXXR::String.
+	 * @return true iff \a x is marked as having ASCII encoding.
+	 */
 	int IS_ASCII(SEXP x);
 
 	int ENC_KNOWN(SEXP x);
@@ -396,27 +405,27 @@ extern "C"
 	int IS_CACHED(SEXP x);
 
 	/** @brief Set LATIN1 encoding.
-     *
-     * @param x Pointer to a CXXR::String.
-     */
+	 *
+	 * @param x Pointer to a CXXR::String.
+	 */
 	void SET_LATIN1(SEXP x);
 
 	/** @brief Set UTF8 encoding.
-     *
-     * @param x Pointer to a CXXR::String.
-     */
+	 *
+	 * @param x Pointer to a CXXR::String.
+	 */
 	void SET_UTF8(SEXP x);
 
 	/** @brief Set BYTES encoding.
-     *
-     * @param x Pointer to a CXXR::String.
-     */
+	 *
+	 * @param x Pointer to a CXXR::String.
+	 */
 	void SET_BYTES(SEXP x);
 
 	/** @brief Set ASCII encoding.
-     *
-     * @param x Pointer to a CXXR::String.
-     */
+	 *
+	 * @param x Pointer to a CXXR::String.
+	 */
 	void SET_ASCII(SEXP x);
 
 	void SET_CACHED(SEXP x);

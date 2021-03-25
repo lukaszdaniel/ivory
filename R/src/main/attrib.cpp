@@ -600,14 +600,14 @@ static SEXP lang2str(SEXP obj, SEXPTYPE t)
     lpar_sym, lbrace_sym, call_sym;
   if(!if_sym) {
     /* initialize:  another place for a hash table */
-    if_sym = CXXR::install_("if");
-    while_sym = CXXR::install_("while");
-    for_sym = CXXR::install_("for");
-    eq_sym = CXXR::install_("=");
-    gets_sym = CXXR::install_("<-");
-    lpar_sym = CXXR::install_("(");
-    lbrace_sym = CXXR::install_("{");
-    call_sym = CXXR::install_("call");
+    if_sym = CXXR::Symbol::obtain("if");
+    while_sym = CXXR::Symbol::obtain("while");
+    for_sym = CXXR::Symbol::obtain("for");
+    eq_sym = CXXR::Symbol::obtain("=");
+    gets_sym = CXXR::Symbol::obtain("<-");
+    lpar_sym = CXXR::Symbol::obtain("(");
+    lbrace_sym = CXXR::Symbol::obtain("{");
+    call_sym = CXXR::Symbol::obtain("call");
   }
   if(isSymbol(symb)) {
     if(symb == if_sym || symb == for_sym || symb == while_sym ||

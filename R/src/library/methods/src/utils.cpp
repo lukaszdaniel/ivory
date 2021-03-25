@@ -22,19 +22,15 @@
 #endif
 
 #include <CXXR/VectorBase.hpp>
+#include <CXXR/BuiltInFunction.hpp>
 #include <Defn.h>
 #include "localization.h"
 
-/* no #include "methods.h" because NLS warns of double inclusion */
-/* in names.cpp */
-const char *getPRIMNAME(SEXP object);
-
-
 SEXP R_get_primname(SEXP object)
 {
-    if(TYPEOF(object) != BUILTINSXP && TYPEOF(object) != SPECIALSXP)
-	error(_("'R_get_primname' called on a non-primitive"));
-    return mkString(getPRIMNAME(object));
+    if (TYPEOF(object) != BUILTINSXP && TYPEOF(object) != SPECIALSXP)
+        Rf_error(_("'R_get_primname' called on a non-primitive"));
+    return Rf_mkString(PRIMNAME(object));
 }
 
 /* The main entry point is in Rinternals.h, but we want to register
