@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 3.0.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-03-18 20:01+0100\n"
+"POT-Creation-Date: 2021-03-25 22:07+0100\n"
 "PO-Revision-Date: 2016-01-09 20:36+0100\n"
 "Last-Translator: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
 "Language-Team: \n"
@@ -763,6 +763,11 @@ msgstr "ugyldig værdi for lag.max"
 #, fuzzy
 msgid "invalid power in formula"
 msgstr "ugyldig værdi for lag.max"
+
+#: model.cpp:1311
+#, c-format
+msgid "AllocT..Bit1(%s): Need to increment nwords to %d. Should not happen!\n"
+msgstr ""
 
 #: model.cpp:1637
 #, c-format

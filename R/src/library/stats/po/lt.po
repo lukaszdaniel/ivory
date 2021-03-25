@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-03-18 20:01+0100\n"
+"POT-Creation-Date: 2021-03-25 22:07+0100\n"
 "PO-Revision-Date: \n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -777,6 +777,11 @@ msgstr "netinkama modelio formulė, esanti EncodeVars"
 #: model.cpp:1220 model.cpp:1526
 msgid "invalid power in formula"
 msgstr "neteisinga galia formulėje"
+
+#: model.cpp:1311
+#, c-format
+msgid "AllocT..Bit1(%s): Need to increment nwords to %d. Should not happen!\n"
+msgstr ""
 
 #: model.cpp:1637
 #, c-format

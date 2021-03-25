@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: tools 4.1.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-03-18 20:02+0100\n"
+"POT-Creation-Date: 2021-03-25 22:08+0100\n"
 "PO-Revision-Date: 2021-01-07 23:50+0100\n"
 "Last-Translator: r.zakauskas@gmail.com;gabriele.dauksaite@gmail.com\n"
 "Language-Team: Lithuanian\n"
@@ -113,6 +113,10 @@ msgstr ""
 msgid "Not enough arguments passed to user macro '%s'"
 msgstr "Nepakanka argumentų, perduotų vartotojo makrokomandai '%s'"
 
+#: gramRd.cpp:3117
+msgid "internal error: inconsistent argument count"
+msgstr ""
+
 #: gramRd.cpp:3198 gramRd.cpp:3202
 #, c-format
 msgid "newline within quoted string at %s:%d"
@@ -192,6 +196,11 @@ msgstr "psnice() nepalaikomas šioje platformoje"
 #: text.cpp:75
 msgid "invalid argument type"
 msgstr "neleistinas argumento tipas"
+
+#: text.cpp:164 text.cpp:200
+#, fuzzy
+msgid "invalid input"
+msgstr "neleistinas Rd failas"
 
 #: text.cpp:166
 #, c-format

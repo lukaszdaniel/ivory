@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 3.1.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-03-18 20:00+0100\n"
+"POT-Creation-Date: 2021-03-25 22:06+0100\n"
 "PO-Revision-Date: 2014-03-27 09:07-0600\n"
 "Last-Translator: Chel Hee Lee <chl948@mail.usask.ca>\n"
 "Language-Team:  <chl948@mail.usask.ca>\n"
@@ -201,6 +201,12 @@ msgid ""
 "frame of the method call"
 msgstr ""
 
+#: methods_list_dispatch.cpp:773
+msgid ""
+"internal error in 'callNextMethod()': '.Generic' was not assigned in the "
+"frame of the method call"
+msgstr ""
+
 #: methods_list_dispatch.cpp:898
 #, c-format
 msgid "'%s' must be a single string (got a character vector of length %d)"
@@ -261,7 +267,7 @@ msgstr ""
 msgid "'.SigArgs' is shorter than '.SigLength' says it should be"
 msgstr ""
 
-#: utils.cpp:36
+#: utils.cpp:32
 msgid "'R_get_primname' called on a non-primitive"
 msgstr ""
 

@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.1.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-03-18 20:00+0100\n"
+"POT-Creation-Date: 2021-03-25 22:06+0100\n"
 "PO-Revision-Date: 2015-01-17 15:06+0100\n"
 "Last-Translator: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
 "Language-Team: Italian\n"
@@ -22,6 +22,10 @@ msgstr ""
 #: axis_scales.cpp:38 axis_scales.cpp:39 axis_scales.cpp:57
 #, c-format
 msgid "'%s' must be numeric of length %d"
+msgstr ""
+
+#: chull.cpp:438
+msgid "'x' is not numeric"
 msgstr ""
 
 #: colors.cpp:75
@@ -94,6 +98,14 @@ msgstr "argomento stringa non valido"
 msgid "invalid gray level, must be in [0,1]."
 msgstr ""
 
+#: colors.cpp:522
+msgid "rgb is not a matrix (internally)"
+msgstr ""
+
+#: colors.cpp:524
+msgid "rgb must have 3 rows (internally)"
+msgstr ""
+
 #: colors.cpp:556 devPS.cpp:9635 devPS.cpp:9798 devPS.cpp:9801
 #: devWindows.cpp:3677 devWindows.cpp:3681 devWindows.cpp:3689
 #: devWindows.cpp:3700 devWindows.cpp:3706 devWindows.cpp:3713
@@ -142,6 +154,10 @@ msgstr ""
 #: colors.cpp:1512 colors.cpp:1534
 #, c-format
 msgid "maximum number of colors is %d"
+msgstr ""
+
+#: colors.cpp:1532
+msgid "requires INTSXP argument"
 msgstr ""
 
 #: devCairo.cpp:52 devCairo.cpp:63
@@ -473,6 +489,14 @@ msgstr ""
 msgid "failed to increase 'maxDefns'"
 msgstr "allocazione lista font fallita"
 
+#: devPS.cpp:5981 devPS.cpp:6034
+msgid "Repeat or reflect pattern not supported on PDF device"
+msgstr ""
+
+#: devPS.cpp:6078 devPS.cpp:6157
+msgid "Shading type not yet supported"
+msgstr ""
+
 #: devPS.cpp:6659 devPS.cpp:6662
 #, fuzzy
 msgid "failed to increase 'maxRaster'"
@@ -482,6 +506,11 @@ msgstr "allocazione lista font fallita"
 #, fuzzy
 msgid "unable to allocate raster image"
 msgstr "Impossibile allocare bitmap"
+
+#: devPS.cpp:6742 devPS.cpp:6792
+#, c-format
+msgid "internal error %d in writeRasterXObject"
+msgstr ""
 
 #: devPS.cpp:6875
 #, fuzzy
@@ -493,6 +522,14 @@ msgstr "Encoding caricato danneggiato; il font non viene aggiunto"
 msgid "failed to record device encoding; font not added"
 msgstr ""
 "Registrazione encoding dispositivo non riuscita; il font non verrà aggiunto"
+
+#: devPS.cpp:6973
+msgid "cannot allocate pd->pos"
+msgstr "non posso allocare memoria per pd->pos"
+
+#: devPS.cpp:6981
+msgid "cannot allocate pd->pageobj"
+msgstr "non posso allocare memoria per pd->pageobj"
 
 #: devPS.cpp:7003 devPS.cpp:7410 devPS.cpp:8135
 #, c-format
@@ -551,10 +588,20 @@ msgstr ""
 msgid "failed to load sRGB colorspace file"
 msgstr "caricamento file encoding fallito"
 
+#: devPS.cpp:7993 devPS.cpp:8018 devPS.cpp:8361 devPS.cpp:8404
+#, fuzzy
+msgid "unable to increase object limit: please shutdown the pdf device"
+msgstr ""
+"non posso aumentare il limite pagina: si prega di chiudere il dispositivo pdf"
+
 #: devPS.cpp:8054
 #, fuzzy
 msgid "corrupt encodings in PDF device"
 msgstr "Encoding danneggiato nel dispositivo PDF"
+
+#: devPS.cpp:8238
+msgid "write error"
+msgstr ""
 
 #: devPS.cpp:8268
 #, fuzzy, c-format
@@ -564,6 +611,21 @@ msgstr "non posso aprire il file '%s' in 'pdf'"
 #: devPS.cpp:8274
 msgid "file = \"|cmd\" implies 'onefile = TRUE'"
 msgstr ""
+
+#: devPS.cpp:8335
+msgid "internal read error in PDF_endpage"
+msgstr ""
+
+#: devPS.cpp:8341
+#, c-format
+msgid "internal compression error %d in PDF_endpage"
+msgstr ""
+
+#: devPS.cpp:8396
+#, fuzzy
+msgid "unable to increase page limit: please shutdown the pdf device"
+msgstr ""
+"non posso aumentare il limite pagina: si prega di chiudere il dispositivo pdf"
 
 #: devPS.cpp:8418
 #, fuzzy, c-format
@@ -610,6 +672,14 @@ msgstr "impossibile aprire dispositivo pdf"
 #, fuzzy, c-format
 msgid "unable to start %s() device"
 msgstr "impossibile aprire dispositivo pdf"
+
+#: devQuartz.cpp:307
+msgid "Tried to restore an empty snapshot?"
+msgstr ""
+
+#: devQuartz.cpp:541
+msgid "Cannot load CoreGraphics"
+msgstr ""
 
 #: devQuartz.cpp:668
 #, c-format
@@ -671,6 +741,11 @@ msgstr "Non c'è abbastanza memoria per copiare la finestra grafica"
 msgid "No device available to copy graphics window"
 msgstr "Nessun dispositivo disponibile per copiarci la finestra grafica"
 
+#: devWindows.cpp:385
+msgid ""
+"missing initPSandPDFfonts() in grDevices namespace: this should not happen"
+msgstr ""
+
 #: devWindows.cpp:411 devWindows.cpp:482
 #, c-format
 msgid "'%%' is not allowed in file name"
@@ -701,6 +776,15 @@ msgstr "Specificazione font non valida"
 msgid "font family not found in Windows font database"
 msgstr "Famiglia font non trovata nel databse font di Windows"
 
+#: devWindows.cpp:722
+msgid "unable to set or substitute a suitable font"
+msgstr ""
+
+#: devWindows.cpp:727
+#, fuzzy
+msgid "unable to set font: using Arial"
+msgstr "Caricamento file encoding fallito"
+
 #: devWindows.cpp:1089
 msgid "plot history seems corrupted"
 msgstr "plot history sembra essere danneggiato"
@@ -708,6 +792,16 @@ msgstr "plot history sembra essere danneggiato"
 #: devWindows.cpp:1096
 msgid "no plot history!"
 msgstr "nessuna plot history!"
+
+#: devWindows.cpp:1579
+#, fuzzy
+msgid "unable to open window"
+msgstr "Impossibile aprire file '%s' in scrittura"
+
+#: devWindows.cpp:1806
+#, fuzzy
+msgid "unable to open printer"
+msgstr "Impossibile allocare bitmap"
 
 #: devWindows.cpp:1818 devWindows.cpp:1853 devWindows.cpp:1883
 #, c-format
@@ -724,6 +818,11 @@ msgstr "Impossibile allocare bitmap"
 #, fuzzy, c-format
 msgid "unable to open file '%s' for writing"
 msgstr "Impossibile aprire file '%s' in scrittura"
+
+#: devWindows.cpp:1908
+#, fuzzy
+msgid "invalid specification for file name in win.metafile()"
+msgstr "nome file troppo lungo in win.metafile()"
 
 #: devWindows.cpp:1922
 #, fuzzy, c-format
@@ -764,6 +863,14 @@ msgstr ""
 
 #: devWindows.cpp:3161
 msgid "graphics device closed during call to locator or identify"
+msgstr ""
+
+#: devWindows.cpp:3259
+msgid "allocation failed in GADeviceDriver"
+msgstr ""
+
+#: devWindows.cpp:3295
+msgid "opening device failed"
 msgstr ""
 
 #: devWindows.cpp:3427
@@ -808,6 +915,11 @@ msgstr "Impossibile aprire "
 msgid "invalid 'width' or 'height'"
 msgstr "'width' o 'height' non validi in devWindows"
 
+#: devWindows.cpp:3904
+#, fuzzy
+msgid "unable to load winCairo.dll: was it built?"
+msgstr "Impossibile caricare Rbitmap.dll"
+
 #: devices.cpp:46
 msgid "argument must have positive length"
 msgstr ""
@@ -841,6 +953,11 @@ msgstr ""
 #: qdPDF.cpp:110
 msgid "Quartz R Device"
 msgstr ""
+
+#: winbitmap.cpp:461
+#, fuzzy, c-format
+msgid "unable to open TIFF file '%s'"
+msgstr "Impossibile aprire file '%s' in scrittura"
 
 #, fuzzy
 #~ msgid "cannot open 'postscript' pipe to <command>)"
@@ -881,9 +998,6 @@ msgstr ""
 #~ msgid "filename too long in tiff() call"
 #~ msgstr "nome file troppo lungo in %s()"
 
-#~ msgid "filename too long in win.metafile() call"
-#~ msgstr "nome file troppo lungo in win.metafile()"
-
 #, fuzzy
 #~ msgid "invalid argument"
 #~ msgstr "argomento stringa non valido"
@@ -923,10 +1037,6 @@ msgstr ""
 #~ msgid "Unable to load Rbitmap.dll"
 #~ msgstr "Impossibile caricare Rbitmap.dll"
 
-#, fuzzy
-#~ msgid "Unable to load winCairo.dll: was it built?"
-#~ msgstr "Impossibile caricare Rbitmap.dll"
-
 #~ msgid "unable to start NULL device"
 #~ msgstr "impossibile aprire dispositivo NULL"
 
@@ -939,12 +1049,6 @@ msgstr ""
 #, fuzzy
 #~ msgid "%s not yet implemented for this device"
 #~ msgstr "file = \"|cmd\" non implementato in questa versione"
-
-#~ msgid "cannot allocate pd->pos"
-#~ msgstr "non posso allocare memoria per pd->pos"
-
-#~ msgid "cannot allocate pd->pageobj"
-#~ msgstr "non posso allocare memoria per pd->pageobj"
 
 #, fuzzy
 #~ msgid "invalid 'maxRasters' parameter in %s"

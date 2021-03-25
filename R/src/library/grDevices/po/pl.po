@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R-core\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-03-18 20:00+0100\n"
+"POT-Creation-Date: 2021-03-25 22:06+0100\n"
 "PO-Revision-Date: \n"
 "Last-Translator: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
 "Language-Team: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
@@ -20,6 +20,10 @@ msgstr ""
 #, c-format
 msgid "'%s' must be numeric of length %d"
 msgstr "'%s' musi być liczbą o długości %d"
+
+#: chull.cpp:438
+msgid "'x' is not numeric"
+msgstr ""
 
 #: colors.cpp:75
 #, c-format
@@ -89,6 +93,14 @@ msgstr "niepoprawny wektor 'names'"
 msgid "invalid gray level, must be in [0,1]."
 msgstr "niepoprawny poziom szarości, musi być w przedziale [0, 1]."
 
+#: colors.cpp:522
+msgid "rgb is not a matrix (internally)"
+msgstr ""
+
+#: colors.cpp:524
+msgid "rgb must have 3 rows (internally)"
+msgstr ""
+
 #: colors.cpp:556 devPS.cpp:9635 devPS.cpp:9798 devPS.cpp:9801
 #: devWindows.cpp:3677 devWindows.cpp:3681 devWindows.cpp:3689
 #: devWindows.cpp:3700 devWindows.cpp:3706 devWindows.cpp:3713
@@ -136,6 +148,10 @@ msgstr "nieznana paleta (potrzeba >= 2 kolory)"
 #, c-format
 msgid "maximum number of colors is %d"
 msgstr "maksymalna liczba kolorów wynosi %d"
+
+#: colors.cpp:1532
+msgid "requires INTSXP argument"
+msgstr ""
 
 #: devCairo.cpp:52 devCairo.cpp:63
 msgid "failed to load cairo DLL"
@@ -461,6 +477,14 @@ msgstr ""
 msgid "failed to increase 'maxDefns'"
 msgstr "nie udało się zwiększyć 'maxRaster'"
 
+#: devPS.cpp:5981 devPS.cpp:6034
+msgid "Repeat or reflect pattern not supported on PDF device"
+msgstr ""
+
+#: devPS.cpp:6078 devPS.cpp:6157
+msgid "Shading type not yet supported"
+msgstr ""
+
 #: devPS.cpp:6659 devPS.cpp:6662
 msgid "failed to increase 'maxRaster'"
 msgstr "nie udało się zwiększyć 'maxRaster'"
@@ -468,6 +492,11 @@ msgstr "nie udało się zwiększyć 'maxRaster'"
 #: devPS.cpp:6674
 msgid "unable to allocate raster image"
 msgstr "nie można przydzielić obrazu rastrowego"
+
+#: devPS.cpp:6742 devPS.cpp:6792
+#, c-format
+msgid "internal error %d in writeRasterXObject"
+msgstr ""
 
 #: devPS.cpp:6875
 msgid "corrupt loaded encodings;  font not added"
@@ -477,6 +506,14 @@ msgstr "załadowane kodowania są uszkodzone; czcionka nie została dodana"
 msgid "failed to record device encoding; font not added"
 msgstr ""
 "nie udało się zarejestrować kodowania urządzenia; czcionka nie została dodana"
+
+#: devPS.cpp:6973
+msgid "cannot allocate pd->pos"
+msgstr ""
+
+#: devPS.cpp:6981
+msgid "cannot allocate pd->pageobj"
+msgstr ""
 
 #: devPS.cpp:7003 devPS.cpp:7410 devPS.cpp:8135
 #, c-format
@@ -529,9 +566,18 @@ msgstr "nieznany 'colormodel', używanie 'srgb'"
 msgid "failed to load sRGB colorspace file"
 msgstr "nie udało się załadować pliku przestrzeni kolorów sRGB"
 
+#: devPS.cpp:7993 devPS.cpp:8018 devPS.cpp:8361 devPS.cpp:8404
+msgid "unable to increase object limit: please shutdown the pdf device"
+msgstr ""
+
 #: devPS.cpp:8054
 msgid "corrupt encodings in PDF device"
 msgstr "uszkodzone kodowania w urządzeniu PDF"
+
+#: devPS.cpp:8238
+#, fuzzy
+msgid "write error"
+msgstr "zapis nie powiódł się"
 
 #: devPS.cpp:8268
 #, c-format
@@ -541,6 +587,19 @@ msgstr "nie można otworzyć kanału 'pdf' w '%s'"
 #: devPS.cpp:8274
 msgid "file = \"|cmd\" implies 'onefile = TRUE'"
 msgstr "file = \"|cmd\" sugeruje, że 'onefile = TRUE'"
+
+#: devPS.cpp:8335
+msgid "internal read error in PDF_endpage"
+msgstr ""
+
+#: devPS.cpp:8341
+#, c-format
+msgid "internal compression error %d in PDF_endpage"
+msgstr ""
+
+#: devPS.cpp:8396
+msgid "unable to increase page limit: please shutdown the pdf device"
+msgstr ""
 
 #: devPS.cpp:8418
 #, c-format
@@ -587,6 +646,14 @@ msgstr "nie można uruchomić urządzenia '%s'"
 #, c-format
 msgid "unable to start %s() device"
 msgstr "nie można uruchomić urządzenia '%s()'"
+
+#: devQuartz.cpp:307
+msgid "Tried to restore an empty snapshot?"
+msgstr ""
+
+#: devQuartz.cpp:541
+msgid "Cannot load CoreGraphics"
+msgstr ""
 
 #: devQuartz.cpp:668
 #, c-format
@@ -644,6 +711,11 @@ msgstr "Zbyt mało pamięci aby skopiować okno grafiki"
 msgid "No device available to copy graphics window"
 msgstr "Brak dostępnego urządzenia aby skopiować okno grafiki"
 
+#: devWindows.cpp:385
+msgid ""
+"missing initPSandPDFfonts() in grDevices namespace: this should not happen"
+msgstr ""
+
 #: devWindows.cpp:411 devWindows.cpp:482
 #, c-format
 msgid "'%%' is not allowed in file name"
@@ -672,6 +744,15 @@ msgid "font family not found in Windows font database"
 msgstr ""
 "rodzina czcionek nie została znaleziona w bazie czcionek systemu Windows"
 
+#: devWindows.cpp:722
+msgid "unable to set or substitute a suitable font"
+msgstr ""
+
+#: devWindows.cpp:727
+#, fuzzy
+msgid "unable to set font: using Arial"
+msgstr "nie można użyć strony kodowej '%s'"
+
 #: devWindows.cpp:1089
 msgid "plot history seems corrupted"
 msgstr "historia wykresu wygląda na uszkodzoną"
@@ -679,6 +760,16 @@ msgstr "historia wykresu wygląda na uszkodzoną"
 #: devWindows.cpp:1096
 msgid "no plot history!"
 msgstr "brak historii wykresu!"
+
+#: devWindows.cpp:1579
+#, fuzzy
+msgid "unable to open window"
+msgstr "nie można otworzyć pliku '%s' do zapisu"
+
+#: devWindows.cpp:1806
+#, fuzzy
+msgid "unable to open printer"
+msgstr "nie można przydzielić obrazu rastrowego"
 
 #: devWindows.cpp:1818 devWindows.cpp:1853 devWindows.cpp:1883
 #, c-format
@@ -694,6 +785,11 @@ msgstr "nie można przydzielić bitmapy"
 #, c-format
 msgid "unable to open file '%s' for writing"
 msgstr "nie można otworzyć pliku '%s' do zapisu"
+
+#: devWindows.cpp:1908
+#, fuzzy
+msgid "invalid specification for file name in win.metafile()"
+msgstr "nazwa pliku w wywołaniu 'win.metafile()' jest zbyt długa"
 
 #: devWindows.cpp:1922
 #, c-format
@@ -737,6 +833,14 @@ msgstr ""
 "urządzenie graficzne zostało zamknięte podczas wywołania lokatora lub "
 "identyfikacji"
 
+#: devWindows.cpp:3259
+msgid "allocation failed in GADeviceDriver"
+msgstr ""
+
+#: devWindows.cpp:3295
+msgid "opening device failed"
+msgstr ""
+
 #: devWindows.cpp:3427
 msgid "option 'windowsTimeouts' should be integer"
 msgstr "opcja 'windowsTimeouts' powinna być liczba całkowitą"
@@ -774,6 +878,11 @@ msgstr "Nie można otworzyć "
 msgid "invalid 'width' or 'height'"
 msgstr "niepoprawna wartość 'width' lub 'height'"
 
+#: devWindows.cpp:3904
+#, fuzzy
+msgid "unable to load winCairo.dll: was it built?"
+msgstr "Nie można załadować 'winCairo.dll': czy został zbudowany?"
+
 #: devices.cpp:46
 msgid "argument must have positive length"
 msgstr "argument musi mieć dodatnią długość"
@@ -808,6 +917,11 @@ msgstr ""
 msgid "Quartz R Device"
 msgstr "Urządzenie R Quartz"
 
+#: winbitmap.cpp:461
+#, fuzzy, c-format
+msgid "unable to open TIFF file '%s'"
+msgstr "nie można otworzyć pliku '%s' do zapisu"
+
 #, fuzzy
 #~ msgid "cannot open 'postscript' pipe to <command>)"
 #~ msgstr "nie można otworzyć kanału 'postscript' w '%s'"
@@ -835,9 +949,6 @@ msgstr "Urządzenie R Quartz"
 
 #~ msgid "filename too long in tiff() call"
 #~ msgstr "nazwa pliku w wywołaniu 'tiff()' jest zbyt długa"
-
-#~ msgid "filename too long in win.metafile() call"
-#~ msgstr "nazwa pliku w wywołaniu 'win.metafile()' jest zbyt długa"
 
 #~ msgid "invalid argument"
 #~ msgstr "niepoprawny argument"
@@ -871,6 +982,3 @@ msgstr "Urządzenie R Quartz"
 
 #~ msgid "Unable to load Rbitmap.dll"
 #~ msgstr "Nie można załadować 'Rbitmap.dll'"
-
-#~ msgid "Unable to load winCairo.dll: was it built?"
-#~ msgstr "Nie można załadować 'winCairo.dll': czy został zbudowany?"

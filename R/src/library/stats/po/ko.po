@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.2.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-03-18 20:01+0100\n"
+"POT-Creation-Date: 2021-03-25 22:07+0100\n"
 "PO-Revision-Date: 2012-03-08 20:50+0200\n"
 "Last-Translator: Chel Hee Lee <chl948@mail.usask.ca>\n"
 "Language-Team: The Korean R Translation Council <gnustats@gmail.com>\n"
@@ -762,6 +762,11 @@ msgstr "EncodeVars의 모델식이 잘못되었습니다"
 #: model.cpp:1220 model.cpp:1526
 msgid "invalid power in formula"
 msgstr "모델식에 잘못된 지수가 있습니다"
+
+#: model.cpp:1311
+#, c-format
+msgid "AllocT..Bit1(%s): Need to increment nwords to %d. Should not happen!\n"
+msgstr ""
 
 #: model.cpp:1637
 #, c-format

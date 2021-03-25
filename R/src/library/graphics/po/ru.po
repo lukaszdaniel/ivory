@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.11.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-03-18 20:00+0100\n"
+"POT-Creation-Date: 2021-03-25 22:06+0100\n"
 "PO-Revision-Date: 2015-01-17 15:10+0100\n"
 "Last-Translator: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
 "Language-Team: Russian\n"
@@ -99,6 +99,15 @@ msgstr "неправильное графическое состояние"
 msgid "graphics device closed during call to locator or identify"
 msgstr ""
 
+#: graphics.cpp:2841
+msgid "unable to allocate memory (in GPolygon)"
+msgstr "не могу разместить память (в GPolygon)"
+
+#: graphics.cpp:2877
+#, fuzzy
+msgid "unable to allocate memory (in GPolyline)"
+msgstr "не могу разместить память (в GPolygon)"
+
 #: graphics.cpp:3060
 msgid "zero-length arrow is of indeterminate angle and so skipped"
 msgstr "стрелка нулевой длины имеет неопределенный угол и поэтому пропущена"
@@ -185,303 +194,313 @@ msgstr "слишком много колонок в разметке, надо �
 msgid "too many cells in layout, limit %d"
 msgstr "слишком много ячеек в разметке, надо не больше %d"
 
-#: plot.cpp:50 plot3d.cpp:43
+#: plot.cpp:51 plot3d.cpp:43
 msgid "invalid type passed to graphics function"
 msgstr ""
 
-#: plot.cpp:73
+#: plot.cpp:74
 #, fuzzy
 msgid "invalid color specification"
 msgstr "неправильное указание шрифта"
 
-#: plot.cpp:139
+#: plot.cpp:140
 msgid "only NA allowed in logical plotting symbol"
 msgstr "только NA разрешены в логических графических символах"
 
-#: plot.cpp:141
+#: plot.cpp:142
 msgid "invalid plotting symbol"
 msgstr "неправильный графический символ"
 
-#: plot.cpp:230 plot.cpp:2815 plot3d.cpp:1182 plot3d.cpp:1186
+#: plot.cpp:231 plot.cpp:2816 plot3d.cpp:1182 plot3d.cpp:1186
 #, c-format
 msgid "invalid '%s' specification"
 msgstr "неправильное определение '%s'"
 
-#: plot.cpp:289 plot.cpp:303 plot.cpp:489 plot.cpp:494 plot.cpp:2146
-#: plot.cpp:2153 plot.cpp:3176 plot.cpp:3178 plot.cpp:3180 plot.cpp:3341
+#: plot.cpp:290 plot.cpp:304 plot.cpp:490 plot.cpp:495 plot.cpp:2147
+#: plot.cpp:2154 plot.cpp:3177 plot.cpp:3179 plot.cpp:3181 plot.cpp:3342
 #: plot3d.cpp:1166 plot3d.cpp:1170 plot3d.cpp:1172 plot3d.cpp:1900
 #, c-format
 msgid "invalid '%s' value"
 msgstr "неправильное значение '%s'"
 
-#: plot.cpp:306
+#: plot.cpp:307
 #, fuzzy, c-format
 msgid "invalid 'vfont' value [typeface %d]"
 msgstr "неправильный значение 'vfont' [typeface]"
 
-#: plot.cpp:330
+#: plot.cpp:331
 #, c-format
 msgid "invalid 'vfont' value [typeface = %d, fontindex = %d]"
 msgstr "неправильное значение 'vfont' [typeface = %d, fontindex = %d]"
 
-#: plot.cpp:403
+#: plot.cpp:404
 msgid "invalid graphics parameter"
 msgstr "неправильный графический параметр"
 
-#: plot.cpp:485
+#: plot.cpp:486
 #, fuzzy
 msgid "at least 3 arguments are required"
 msgstr "требуется не менее 3 аргументов"
 
-#: plot.cpp:499
+#: plot.cpp:500
 msgid "\"log=\" specification must be character"
 msgstr "указание \"log=\" должно быть текстом"
 
-#: plot.cpp:512
+#: plot.cpp:513
 #, c-format
 msgid "invalid \"log=%s\" specification"
 msgstr "неправильное указание \"log=%s\""
 
-#: plot.cpp:528 plot.cpp:540
+#: plot.cpp:529 plot.cpp:541
 #, fuzzy, c-format
 msgid "NA values are not allowed in '%s'"
 msgstr "NA не разрешены в 'xlim'"
 
-#: plot.cpp:534 plot.cpp:546
+#: plot.cpp:535 plot.cpp:547
 #, fuzzy, c-format
 msgid "'%s' needs finite values"
 msgstr "нужны конечные значения 'xlim'"
 
-#: plot.cpp:552
+#: plot.cpp:553
 msgid "Logarithmic axis must have positive limits"
 msgstr "Логарифмическая ось должна иметь положительные границы"
 
-#: plot.cpp:676
+#: plot.cpp:677
 msgid "invalid type for axis labels"
 msgstr "неправильный тип меток осей"
 
-#: plot.cpp:764 plot.cpp:1339 plot.cpp:1655 plot.cpp:1720 plot.cpp:1795
-#: plot.cpp:1861 plot.cpp:1935 plot.cpp:2030 plot.cpp:2106 plot.cpp:2384
-#: plot.cpp:2558 plot.cpp:2774 plot.cpp:3322 plot.cpp:3463 plot.cpp:3539
-#: plot.cpp:3704 plot.cpp:3984 plot3d.cpp:1869
+#: plot.cpp:765 plot.cpp:1340 plot.cpp:1656 plot.cpp:1721 plot.cpp:1796
+#: plot.cpp:1862 plot.cpp:1936 plot.cpp:2031 plot.cpp:2107 plot.cpp:2385
+#: plot.cpp:2559 plot.cpp:2775 plot.cpp:3323 plot.cpp:3464 plot.cpp:3540
+#: plot.cpp:3705 plot.cpp:3985 plot3d.cpp:1869
 msgid "too few arguments"
 msgstr "слишком мало аргументов"
 
-#: plot.cpp:775
+#: plot.cpp:776
 #, c-format
 msgid "invalid axis number %d"
 msgstr "неправильное количество осей %d"
 
-#: plot.cpp:862 plot.cpp:874
+#: plot.cpp:863 plot.cpp:875
 #, fuzzy, c-format
 msgid "'%s' argument must be of length 1"
 msgstr "'hadj' должен быть единичной длины"
 
-#: plot.cpp:869 plot.cpp:2118 plot.cpp:2395 plot.cpp:2401 plot.cpp:2408
-#: plot.cpp:2416 plot.cpp:2423 plot.cpp:2430 plot.cpp:2437 plot.cpp:2444
-#: plot.cpp:2452 plot.cpp:2459 plot.cpp:3183
+#: plot.cpp:870 plot.cpp:2119 plot.cpp:2396 plot.cpp:2402 plot.cpp:2409
+#: plot.cpp:2417 plot.cpp:2424 plot.cpp:2431 plot.cpp:2438 plot.cpp:2445
+#: plot.cpp:2453 plot.cpp:2460 plot.cpp:3184
 #, fuzzy, c-format
 msgid "zero-length '%s' specified"
 msgstr "указана нулевая длина 'side'"
 
-#: plot.cpp:904
+#: plot.cpp:905
 #, fuzzy, c-format
 msgid "'%s' argument must be NA or a finite number"
 msgstr "'hadj' должен быть единичной длины"
 
-#: plot.cpp:956
+#: plot.cpp:957
 #, fuzzy
 msgid "'labels' argument is supplied and not 'at' argument"
 msgstr "есть 'labels', но нет 'at'"
 
-#: plot.cpp:960
+#: plot.cpp:961
 #, fuzzy, c-format
 msgid "'at' and 'labels' argument lengths differ, %d != %d"
 msgstr "'at' и 'label' различаются по длине, %d != %d"
 
-#: plot.cpp:979
+#: plot.cpp:980
 msgid "no locations are finite"
 msgstr "нет конечных местоположений"
 
-#: plot.cpp:1357
+#: plot.cpp:1358
 msgid "invalid plotting structure"
 msgstr "неправильная структура графика"
 
-#: plot.cpp:1359
+#: plot.cpp:1360
 #, fuzzy, c-format
 msgid "'x' and 'y' argument lengths differ in '%s' function"
 msgstr "длины 'x' и 'y' в %s() различаются"
 
-#: plot.cpp:1567
+#: plot.cpp:1568
 #, c-format
 msgid "invalid plot type '%c'"
 msgstr "неправильный тип графика '%c'"
 
-#: plot.cpp:1610
+#: plot.cpp:1611
 msgid "invalid first argument"
 msgstr "неправильный первый аргумент"
 
-#: plot.cpp:1617
+#: plot.cpp:1618
 msgid "invalid second argument"
 msgstr "неправильный второй аргумент"
 
-#: plot.cpp:1625
+#: plot.cpp:1626
 msgid "invalid third argument"
 msgstr "неправильный третий аргумент"
 
-#: plot.cpp:1633
+#: plot.cpp:1634
 msgid "invalid fourth argument"
 msgstr "неправильный четвертый аргумент"
 
-#: plot.cpp:1641
+#: plot.cpp:1642
 msgid "cannot mix zero-length and non-zero-length coordinates"
 msgstr "не могу смешивать координаты нулевой длины с ненулевыми"
 
-#: plot.cpp:1866
+#: plot.cpp:1825
+#, fuzzy
+msgid "unable to allocate memory (in 'GPath()')"
+msgstr "не могу разместить память (в GPath)"
+
+#: plot.cpp:1831
+#, fuzzy
+msgid "invalid 'x' or 'y' arguments (in 'GPath()')"
+msgstr "неправильный x или y (в GPath)"
+
+#: plot.cpp:1867
 msgid "Empty raster"
 msgstr ""
 
-#: plot.cpp:1948
+#: plot.cpp:1949
 msgid "invalid arrow head length"
 msgstr "неправильная длина наконечника стрелки"
 
-#: plot.cpp:1953
+#: plot.cpp:1954
 msgid "invalid arrow head angle"
 msgstr "неправильный угол наконечника стрелки"
 
-#: plot.cpp:1958
+#: plot.cpp:1959
 msgid "invalid arrow head specification"
 msgstr "неправильное определение наконечника стрелки"
 
-#: plot.cpp:2192
+#: plot.cpp:2193
 msgid "no coordinates were supplied"
 msgstr "не указаны координаты"
 
-#: plot.cpp:2824
+#: plot.cpp:2825
 #, fuzzy
 msgid "'a' and 'b' arguments must be finite"
 msgstr "'a' и 'b' должны быть конечными"
 
-#: plot.cpp:2960 plot.cpp:4075 plot.cpp:4078 plot.cpp:4081 plot.cpp:4084
-#: plot.cpp:4104 plot.cpp:4108 plot.cpp:4111 plot.cpp:4131 plot.cpp:4135
-#: plot.cpp:4138 plot3d.cpp:1088 plot3d.cpp:1092 plot3d.cpp:1097
+#: plot.cpp:2961 plot.cpp:4076 plot.cpp:4079 plot.cpp:4082 plot.cpp:4085
+#: plot.cpp:4105 plot.cpp:4109 plot.cpp:4112 plot.cpp:4132 plot.cpp:4136
+#: plot.cpp:4139 plot3d.cpp:1088 plot3d.cpp:1092 plot3d.cpp:1097
 #: plot3d.cpp:1101 plot3d.cpp:1105 plot3d.cpp:1109 stem.cpp:153 stem.cpp:154
 #: stem.cpp:156 stem.cpp:157 stem.cpp:202 stem.cpp:203
 #, c-format
 msgid "invalid '%s' argument"
 msgstr "неправильный аргумент '%s'"
 
-#: plot.cpp:3032 plot.cpp:3172
+#: plot.cpp:3033 plot.cpp:3173
 #, fuzzy, c-format
 msgid "invalid number of points in '%s' function"
 msgstr "неправильное количество точек в locator()"
 
-#: plot.cpp:3037
+#: plot.cpp:3038
 msgid "invalid plot type"
 msgstr "неправильный тип графика"
 
-#: plot.cpp:3174
+#: plot.cpp:3175
 msgid "incorrect argument type"
 msgstr "неправильный аргумент 'type'"
 
-#: plot.cpp:3186
+#: plot.cpp:3187
 msgid "different argument lengths"
 msgstr "различные длины аргументов"
 
-#: plot.cpp:3188
+#: plot.cpp:3189
 #, fuzzy
 msgid "more labels than points"
 msgstr "'labels' больше чем точек"
 
-#: plot.cpp:3240
+#: plot.cpp:3241
 #, c-format
 msgid "warning: no point within %.2f inches\n"
 msgstr "предупреждение: нет точки в пределах %.2f дюйма\n"
 
-#: plot.cpp:3246
+#: plot.cpp:3247
 #, fuzzy
 msgid "warning: nearest point is already identified\n"
 msgstr "предупреждение: ближайшая точка уже определена\n"
 
-#: plot.cpp:3333
+#: plot.cpp:3334
 msgid "invalid units"
 msgstr "неправильные единицы"
 
-#: plot.cpp:3523 plot.cpp:3630
+#: plot.cpp:3524 plot.cpp:3631
 msgid "invalid dendrogram input"
 msgstr "неправильный ввод дендрограммы"
 
-#: plot.cpp:3686
+#: plot.cpp:3687
 msgid "invalid symbol parameter vector"
 msgstr "неправильный вектор символьных параметров"
 
-#: plot.cpp:3709
+#: plot.cpp:3710
 msgid "invalid symbol coordinates"
 msgstr "неправильные символьные координаты"
 
-#: plot.cpp:3717
+#: plot.cpp:3718
 msgid "x/y/parameter length mismatch"
 msgstr "несоответствие длин x/y/параметров"
 
-#: plot.cpp:3736
+#: plot.cpp:3737
 msgid "invalid circles data"
 msgstr "неправильные данные о кругах"
 
-#: plot.cpp:3738 plot.cpp:3759 plot.cpp:3784 plot.cpp:3814
+#: plot.cpp:3739 plot.cpp:3760 plot.cpp:3785 plot.cpp:3815
 msgid "invalid symbol parameter"
 msgstr "неправильный символьный параметр"
 
-#: plot.cpp:3757
+#: plot.cpp:3758
 msgid "invalid squares data"
 msgstr "неправильные данные о квадратах"
 
-#: plot.cpp:3782
+#: plot.cpp:3783
 msgid "invalid rectangles data (need 2 columns)"
 msgstr "неправильные данные о прямоугольниках (нужны 2 колонки)"
 
-#: plot.cpp:3812
+#: plot.cpp:3813
 msgid "invalid stars data"
 msgstr "неправильные данные о звездочках"
 
-#: plot.cpp:3854
+#: plot.cpp:3855
 msgid "invalid thermometers data (need 3 or 4 columns)"
 msgstr "неправильные данные о градусниках (нужно 3 или 4 колонки)"
 
-#: plot.cpp:3857 plot.cpp:3863
+#: plot.cpp:3858 plot.cpp:3864
 #, fuzzy, c-format
 msgid "invalid 'thermometers[, %s]'"
 msgstr "неправильные 'thermometers[,%s]'"
 
-#: plot.cpp:3860
+#: plot.cpp:3861
 #, fuzzy, c-format
 msgid "'thermometers[, %s]' not in [0,1] -- may look funny"
 msgstr "'thermometers[,%s]' вне [0,1] -- может странно выглядеть"
 
-#: plot.cpp:3902
+#: plot.cpp:3903
 #, fuzzy
 msgid "invalid 'boxplots' data (need 5 columns)"
 msgstr "неправильные данные о ящиках-с-усами (нужно 5 колонок)"
 
-#: plot.cpp:3911
+#: plot.cpp:3912
 #, fuzzy
 msgid "'boxplots[, 5]' outside [0,1] -- may look funny"
 msgstr "'boxplots[,5]' вне [0,1] -- может странно выглядеть"
 
-#: plot.cpp:3913
+#: plot.cpp:3914
 #, fuzzy
 msgid "invalid 'boxplots[, 1:4]'"
 msgstr "неправильные 'boxplots[, 1:4]'"
 
-#: plot.cpp:3959
+#: plot.cpp:3960
 msgid "invalid symbol type"
 msgstr "неправильный тип символа"
 
-#: plot.cpp:3997 plot.cpp:3999 plot.cpp:4004 plot.cpp:4006
+#: plot.cpp:3998 plot.cpp:4000 plot.cpp:4005 plot.cpp:4007
 #, c-format
 msgid "incorrect length for '%s' argument"
 msgstr "неправильная длина аргумента '%s''"
 
-#: plot.cpp:4023
+#: plot.cpp:4024
 #, fuzzy
 msgid "unable to allocate memory (in 'xspline()')"
 msgstr "не могу разместить память (в xspline)"
@@ -671,20 +690,11 @@ msgstr ""
 #~ msgid "increasing 'y' values expected"
 #~ msgstr "нужны увеличивающиеся значения 'y'"
 
-#~ msgid "unable to allocate memory (in GPolygon)"
-#~ msgstr "не могу разместить память (в GPolygon)"
-
 #~ msgid "invalid number of points in identify()"
 #~ msgstr "неправильное количество точек в identify()"
 
 #~ msgid "zero length 'padj' specified"
 #~ msgstr "указан 'padj' нулевой длины"
-
-#~ msgid "unable to allocate memory (in GPath)"
-#~ msgstr "не могу разместить память (в GPath)"
-
-#~ msgid "invalid x or y (in GPath)"
-#~ msgstr "неправильный x или y (в GPath)"
 
 #~ msgid "zero length 'labels'"
 #~ msgstr "нулевые 'labels'"

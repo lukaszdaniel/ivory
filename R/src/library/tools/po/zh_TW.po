@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 3.5.1\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-03-18 20:02+0100\n"
+"POT-Creation-Date: 2021-03-25 22:08+0100\n"
 "PO-Revision-Date: 2018-09-16 23:38+0800\n"
 "Last-Translator: Wei-Lun Chao <bluebat@member.fsf.org>\n"
 "Language-Team: Chinese (traditional) <zh-l10n@linux.org.tw>\n"
@@ -107,6 +107,10 @@ msgstr ""
 msgid "Not enough arguments passed to user macro '%s'"
 msgstr "使用者定義的巨集最多只允許四個引數"
 
+#: gramRd.cpp:3117
+msgid "internal error: inconsistent argument count"
+msgstr ""
+
 #: gramRd.cpp:3198 gramRd.cpp:3202
 #, c-format
 msgid "newline within quoted string at %s:%d"
@@ -185,6 +189,11 @@ msgstr "這個平臺不支援 psnice()"
 #: text.cpp:75
 msgid "invalid argument type"
 msgstr "引數種類無效"
+
+#: text.cpp:164 text.cpp:200
+#, fuzzy
+msgid "invalid input"
+msgstr "Rd 檔案無效"
 
 #: text.cpp:166
 #, c-format

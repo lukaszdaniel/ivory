@@ -39,10 +39,10 @@ src/gnuwin32/windlgs/src/ttest.c
 src/include/Errormsg.h
 src/include/Localization.h
 src/include/Rdefines.h
-src/include/Rinlinedfuns.h
 src/include/Rinterface.h
 src/include/CXXR/FixedVector.hpp
 src/include/CXXR/HandleVector.hpp
+src/include/CXXR/PairList.hpp
 src/include/CXXR/VectorBase.hpp
 src/main/agrep.cpp
 src/main/altclasses.cpp
@@ -55,10 +55,12 @@ src/main/bind.cpp
 src/main/builtin.cpp
 src/main/CachedString.cpp
 src/main/character.cpp
+src/main/Closure.cpp
 src/main/coerce.cpp
 src/main/colors.cpp
 src/main/CommandLineArgs.cpp
 src/main/complex.cpp
+src/main/ComplexVector.cpp
 src/main/connections.cpp
 src/main/ConsCell.cpp
 src/main/context.cpp
@@ -78,6 +80,7 @@ src/main/engine.cpp
 src/main/envir.cpp
 src/main/errors.cpp
 src/main/eval.cpp
+src/main/ExpressionVector.cpp
 src/main/GCManager.cpp
 src/main/gevents.cpp
 src/main/gram.cpp
@@ -88,7 +91,10 @@ src/main/gzio.h
 src/main/identical.cpp
 src/main/inspect.cpp
 src/main/internet.cpp
+src/main/IntVector.cpp
 src/main/lapack.cpp
+src/main/ListVector.cpp
+src/main/LogicalVector.cpp
 src/main/logic.cpp
 src/main/main.cpp
 src/main/mapply.cpp
@@ -97,6 +103,7 @@ src/main/memory.cpp
 src/main/names.cpp
 src/main/objects.cpp
 src/main/options.cpp
+src/main/PairList.cpp
 src/main/paste.cpp
 src/main/patterns.cpp
 src/main/platform.cpp
@@ -112,7 +119,9 @@ src/main/radixsort.cpp
 src/main/RAllocStack.cpp
 src/main/random.cpp
 src/main/raw.cpp
+src/main/RawVector.cpp
 src/main/Rdynload.cpp
+src/main/RealVector.cpp
 src/main/relop.cpp
 src/main/Renviron.cpp
 src/main/RNG.cpp
@@ -131,10 +140,12 @@ src/main/split-incl.cpp
 src/main/sprintf.cpp
 src/main/startup.cpp
 src/main/String.cpp
+src/main/StringVector.cpp
 src/main/subassign.cpp
 src/main/subscript.cpp
 src/main/subset.cpp
 src/main/summary.cpp
+src/main/Symbol.cpp
 src/main/sysutils.cpp
 src/main/unique.cpp
 src/main/util.cpp

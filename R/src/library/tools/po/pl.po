@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R-core\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-03-18 20:02+0100\n"
+"POT-Creation-Date: 2021-03-25 22:08+0100\n"
 "PO-Revision-Date: \n"
 "Last-Translator: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
 "Language-Team: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
@@ -111,6 +111,12 @@ msgstr ""
 msgid "Not enough arguments passed to user macro '%s'"
 msgstr "Zbyt mało argumentów przekazanych do makra użytkownika '%s'"
 
+#: gramRd.cpp:3117
+#, fuzzy
+msgid "internal error: inconsistent argument count"
+msgstr ""
+"błąd wewnętrzny: niepoprawny argument przekazany do funkcji 'xxusermacro()'"
+
 #: gramRd.cpp:3198 gramRd.cpp:3202
 #, c-format
 msgid "newline within quoted string at %s:%d"
@@ -193,6 +199,11 @@ msgstr "funkcja '%s' nie jest wspierany na tej platformie"
 #: text.cpp:75
 msgid "invalid argument type"
 msgstr "niepoprawny typ argumentu"
+
+#: text.cpp:164 text.cpp:200
+#, fuzzy
+msgid "invalid input"
+msgstr "niepoprawny plik Rd"
 
 #: text.cpp:166
 #, c-format

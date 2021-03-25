@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.4.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-03-18 20:00+0100\n"
+"POT-Creation-Date: 2021-03-25 22:06+0100\n"
 "PO-Revision-Date: 2015-01-17 15:08+0100\n"
 "Last-Translator: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
 "Language-Team: Chinese\n"
@@ -23,6 +23,10 @@ msgstr ""
 #, c-format
 msgid "'%s' must be numeric of length %d"
 msgstr "'%s'必需是长度为%d的数值"
+
+#: chull.cpp:438
+msgid "'x' is not numeric"
+msgstr ""
 
 #: colors.cpp:75
 #, c-format
@@ -94,6 +98,14 @@ msgstr "'file'参数不对"
 msgid "invalid gray level, must be in [0,1]."
 msgstr ""
 
+#: colors.cpp:522
+msgid "rgb is not a matrix (internally)"
+msgstr ""
+
+#: colors.cpp:524
+msgid "rgb must have 3 rows (internally)"
+msgstr ""
+
 #: colors.cpp:556 devPS.cpp:9635 devPS.cpp:9798 devPS.cpp:9801
 #: devWindows.cpp:3677 devWindows.cpp:3681 devWindows.cpp:3689
 #: devWindows.cpp:3700 devWindows.cpp:3706 devWindows.cpp:3713
@@ -142,6 +154,10 @@ msgstr ""
 #: colors.cpp:1512 colors.cpp:1534
 #, c-format
 msgid "maximum number of colors is %d"
+msgstr ""
+
+#: colors.cpp:1532
+msgid "requires INTSXP argument"
 msgstr ""
 
 #: devCairo.cpp:52 devCairo.cpp:63
@@ -476,6 +492,14 @@ msgstr "无法增加页数限制: 请关闭pdf装置"
 msgid "failed to increase 'maxDefns'"
 msgstr "无法增加’maxRaster’"
 
+#: devPS.cpp:5981 devPS.cpp:6034
+msgid "Repeat or reflect pattern not supported on PDF device"
+msgstr ""
+
+#: devPS.cpp:6078 devPS.cpp:6157
+msgid "Shading type not yet supported"
+msgstr ""
+
 #: devPS.cpp:6659 devPS.cpp:6662
 msgid "failed to increase 'maxRaster'"
 msgstr "无法增加’maxRaster’"
@@ -484,6 +508,11 @@ msgstr "无法增加’maxRaster’"
 #, fuzzy
 msgid "unable to allocate raster image"
 msgstr "无法分配光栅图像"
+
+#: devPS.cpp:6742 devPS.cpp:6792
+#, c-format
+msgid "internal error %d in writeRasterXObject"
+msgstr ""
 
 #: devPS.cpp:6875
 #, fuzzy
@@ -494,6 +523,14 @@ msgstr "载入的编码坏了; 字体没有加入"
 #, fuzzy
 msgid "failed to record device encoding; font not added"
 msgstr "无法记录装置编码; 字体没有加入"
+
+#: devPS.cpp:6973
+msgid "cannot allocate pd->pos"
+msgstr "无法分配pd->pos"
+
+#: devPS.cpp:6981
+msgid "cannot allocate pd->pageobj"
+msgstr "无法分配pd->pageobj"
 
 #: devPS.cpp:7003 devPS.cpp:7410 devPS.cpp:8135
 #, fuzzy, c-format
@@ -550,10 +587,20 @@ msgstr "没有这种'colormodel'，用'srgb'"
 msgid "failed to load sRGB colorspace file"
 msgstr "无法载入sRGB色彩文件"
 
+#: devPS.cpp:7993 devPS.cpp:8018 devPS.cpp:8361 devPS.cpp:8404
+#, fuzzy
+msgid "unable to increase object limit: please shutdown the pdf device"
+msgstr "无法增加页数限制: 请关闭pdf装置"
+
 #: devPS.cpp:8054
 #, fuzzy
 msgid "corrupt encodings in PDF device"
 msgstr "PDF装置里的编码坏了"
+
+#: devPS.cpp:8238
+#, fuzzy
+msgid "write error"
+msgstr "讀寫失败"
 
 #: devPS.cpp:8268
 #, fuzzy, c-format
@@ -563,6 +610,20 @@ msgstr "无法打开'pdf'文本参数'%s'"
 #: devPS.cpp:8274
 msgid "file = \"|cmd\" implies 'onefile = TRUE'"
 msgstr "file = \"|cmd\"意味着'onefile = TRUE'"
+
+#: devPS.cpp:8335
+msgid "internal read error in PDF_endpage"
+msgstr ""
+
+#: devPS.cpp:8341
+#, c-format
+msgid "internal compression error %d in PDF_endpage"
+msgstr ""
+
+#: devPS.cpp:8396
+#, fuzzy
+msgid "unable to increase page limit: please shutdown the pdf device"
+msgstr "无法增加页数限制: 请关闭pdf装置"
 
 #: devPS.cpp:8418
 #, c-format
@@ -609,6 +670,14 @@ msgstr "无法启动%s()装置"
 #, c-format
 msgid "unable to start %s() device"
 msgstr "无法启动%s()装置"
+
+#: devQuartz.cpp:307
+msgid "Tried to restore an empty snapshot?"
+msgstr ""
+
+#: devQuartz.cpp:541
+msgid "Cannot load CoreGraphics"
+msgstr ""
 
 #: devQuartz.cpp:668
 #, c-format
@@ -668,6 +737,11 @@ msgstr "内存不够，无法拷贝图形窗"
 msgid "No device available to copy graphics window"
 msgstr "没有装置来拷贝图形窗"
 
+#: devWindows.cpp:385
+msgid ""
+"missing initPSandPDFfonts() in grDevices namespace: this should not happen"
+msgstr ""
+
 #: devWindows.cpp:411 devWindows.cpp:482
 #, c-format
 msgid "'%%' is not allowed in file name"
@@ -698,6 +772,15 @@ msgstr "字体设置出错"
 msgid "font family not found in Windows font database"
 msgstr "Windows字体数据库里没有字体系列"
 
+#: devWindows.cpp:722
+msgid "unable to set or substitute a suitable font"
+msgstr ""
+
+#: devWindows.cpp:727
+#, fuzzy
+msgid "unable to set font: using Arial"
+msgstr "无法用编码'%s'"
+
 #: devWindows.cpp:1089
 msgid "plot history seems corrupted"
 msgstr "绘图历史好象坏了"
@@ -705,6 +788,16 @@ msgstr "绘图历史好象坏了"
 #: devWindows.cpp:1096
 msgid "no plot history!"
 msgstr "没有绘图历史!"
+
+#: devWindows.cpp:1579
+#, fuzzy
+msgid "unable to open window"
+msgstr "无法打开'%s'文本来进行读写"
+
+#: devWindows.cpp:1806
+#, fuzzy
+msgid "unable to open printer"
+msgstr "无法分配光栅图像"
 
 #: devWindows.cpp:1818 devWindows.cpp:1853 devWindows.cpp:1883
 #, c-format
@@ -721,6 +814,11 @@ msgstr "无法分配bitmap"
 #, fuzzy, c-format
 msgid "unable to open file '%s' for writing"
 msgstr "无法打开'%s'文本来进行读写"
+
+#: devWindows.cpp:1908
+#, fuzzy
+msgid "invalid specification for file name in win.metafile()"
+msgstr "win.metafile()調用里的文本名字太长"
 
 #: devWindows.cpp:1922
 #, fuzzy, c-format
@@ -760,6 +858,14 @@ msgstr "调用dev.hold()后不能再用定位器"
 
 #: devWindows.cpp:3161
 msgid "graphics device closed during call to locator or identify"
+msgstr ""
+
+#: devWindows.cpp:3259
+msgid "allocation failed in GADeviceDriver"
+msgstr ""
+
+#: devWindows.cpp:3295
+msgid "opening device failed"
 msgstr ""
 
 #: devWindows.cpp:3427
@@ -803,6 +909,11 @@ msgstr "无法打开"
 msgid "invalid 'width' or 'height'"
 msgstr "'width'或'height'的值不对"
 
+#: devWindows.cpp:3904
+#, fuzzy
+msgid "unable to load winCairo.dll: was it built?"
+msgstr "无法载入winCairo.dll: 构建了这个动态链接库没有？"
+
 #: devices.cpp:46
 msgid "argument must have positive length"
 msgstr ""
@@ -838,6 +949,11 @@ msgstr ""
 msgid "Quartz R Device"
 msgstr ""
 
+#: winbitmap.cpp:461
+#, fuzzy, c-format
+msgid "unable to open TIFF file '%s'"
+msgstr "无法打开'%s'文本来进行读写"
+
 #, fuzzy
 #~ msgid "cannot open 'postscript' pipe to <command>)"
 #~ msgstr "无法打开'postscript'管道至'%s'"
@@ -871,9 +987,6 @@ msgstr ""
 
 #~ msgid "filename too long in tiff() call"
 #~ msgstr "tiff()調用里的文本名字太长"
-
-#~ msgid "filename too long in win.metafile() call"
-#~ msgstr "win.metafile()調用里的文本名字太长"
 
 #, fuzzy
 #~ msgid "invalid argument"
@@ -920,9 +1033,6 @@ msgstr ""
 #~ msgid "Unable to load Rbitmap.dll"
 #~ msgstr "无法载入Rbitmap.dll"
 
-#~ msgid "Unable to load winCairo.dll: was it built?"
-#~ msgstr "无法载入winCairo.dll: 构建了这个动态链接库没有？"
-
 #~ msgid "unable to start NULL device"
 #~ msgstr "无法启动NULL装置"
 
@@ -940,12 +1050,6 @@ msgstr ""
 
 #~ msgid "Too many raster images"
 #~ msgstr "光栅图像太多了"
-
-#~ msgid "cannot allocate pd->pos"
-#~ msgstr "无法分配pd->pos"
-
-#~ msgid "cannot allocate pd->pageobj"
-#~ msgstr "无法分配pd->pageobj"
 
 #~ msgid "invalid 'maxRasters' parameter in %s"
 #~ msgstr "%s里的'maxRasters'参数不对"

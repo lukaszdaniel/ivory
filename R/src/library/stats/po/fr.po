@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.12.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-03-18 20:01+0100\n"
+"POT-Creation-Date: 2021-03-25 22:07+0100\n"
 "PO-Revision-Date: 2012-03-06 21:47+0100\n"
 "Last-Translator: Philippe Grosjean <phgrosjean@sciviews.org>\n"
 "Language-Team: French <R-core@r-project.org>\n"
@@ -764,6 +764,11 @@ msgstr "formule de modèle incorrecte dans EncodeVars"
 #: model.cpp:1220 model.cpp:1526
 msgid "invalid power in formula"
 msgstr "puissance incorrecte dans une formule de modèle"
+
+#: model.cpp:1311
+#, c-format
+msgid "AllocT..Bit1(%s): Need to increment nwords to %d. Should not happen!\n"
+msgstr ""
 
 #: model.cpp:1637
 #, c-format

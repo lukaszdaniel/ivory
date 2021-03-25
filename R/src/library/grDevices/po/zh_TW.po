@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 3.5.1\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-03-18 20:00+0100\n"
+"POT-Creation-Date: 2021-03-25 22:06+0100\n"
 "PO-Revision-Date: 2018-09-16 23:38+0800\n"
 "Last-Translator: Wei-Lun Chao <bluebat@member.fsf.org>\n"
 "Language-Team: Chinese (traditional) <zh-l10n@linux.org.tw>\n"
@@ -22,6 +22,10 @@ msgstr ""
 #, c-format
 msgid "'%s' must be numeric of length %d"
 msgstr "'%s' 必須是長度為 %d 的數值"
+
+#: chull.cpp:438
+msgid "'x' is not numeric"
+msgstr ""
 
 #: colors.cpp:75
 #, fuzzy, c-format
@@ -91,6 +95,14 @@ msgstr "'names' 向量無效"
 msgid "invalid gray level, must be in [0,1]."
 msgstr "灰色水平不對，必須在[0,1]。"
 
+#: colors.cpp:522
+msgid "rgb is not a matrix (internally)"
+msgstr ""
+
+#: colors.cpp:524
+msgid "rgb must have 3 rows (internally)"
+msgstr ""
+
 #: colors.cpp:556 devPS.cpp:9635 devPS.cpp:9798 devPS.cpp:9801
 #: devWindows.cpp:3677 devWindows.cpp:3681 devWindows.cpp:3689
 #: devWindows.cpp:3700 devWindows.cpp:3706 devWindows.cpp:3713
@@ -138,6 +150,10 @@ msgstr "不明的調色盤(至少需要兩種顏色"
 #, c-format
 msgid "maximum number of colors is %d"
 msgstr "最大顏色數是 %d"
+
+#: colors.cpp:1532
+msgid "requires INTSXP argument"
+msgstr ""
 
 #: devCairo.cpp:52 devCairo.cpp:63
 #, fuzzy
@@ -457,6 +473,14 @@ msgstr ""
 msgid "failed to increase 'maxDefns'"
 msgstr "無法增加 'maxRaster'"
 
+#: devPS.cpp:5981 devPS.cpp:6034
+msgid "Repeat or reflect pattern not supported on PDF device"
+msgstr ""
+
+#: devPS.cpp:6078 devPS.cpp:6157
+msgid "Shading type not yet supported"
+msgstr ""
+
 #: devPS.cpp:6659 devPS.cpp:6662
 msgid "failed to increase 'maxRaster'"
 msgstr "無法增加 'maxRaster'"
@@ -465,6 +489,11 @@ msgstr "無法增加 'maxRaster'"
 msgid "unable to allocate raster image"
 msgstr "無法指派光柵圖像"
 
+#: devPS.cpp:6742 devPS.cpp:6792
+#, c-format
+msgid "internal error %d in writeRasterXObject"
+msgstr ""
+
 #: devPS.cpp:6875
 msgid "corrupt loaded encodings;  font not added"
 msgstr "載入的編碼壞了 ; 字型沒有加入"
@@ -472,6 +501,14 @@ msgstr "載入的編碼壞了 ; 字型沒有加入"
 #: devPS.cpp:6885
 msgid "failed to record device encoding; font not added"
 msgstr "無法記錄裝置編碼 ; 字型沒有加入"
+
+#: devPS.cpp:6973
+msgid "cannot allocate pd->pos"
+msgstr ""
+
+#: devPS.cpp:6981
+msgid "cannot allocate pd->pageobj"
+msgstr ""
 
 #: devPS.cpp:7003 devPS.cpp:7410 devPS.cpp:8135
 #, fuzzy, c-format
@@ -524,9 +561,18 @@ msgstr "不明的 'colormodel'，用 'srgb'"
 msgid "failed to load sRGB colorspace file"
 msgstr "無法載入 sRGB 色彩檔案"
 
+#: devPS.cpp:7993 devPS.cpp:8018 devPS.cpp:8361 devPS.cpp:8404
+msgid "unable to increase object limit: please shutdown the pdf device"
+msgstr ""
+
 #: devPS.cpp:8054
 msgid "corrupt encodings in PDF device"
 msgstr "PDF 裝置裡的編碼壞了"
+
+#: devPS.cpp:8238
+#, fuzzy
+msgid "write error"
+msgstr "讀寫失敗"
 
 #: devPS.cpp:8268
 #, c-format
@@ -536,6 +582,19 @@ msgstr "無法開啟通到 '%s' 的 'pdf' 管道"
 #: devPS.cpp:8274
 msgid "file = \"|cmd\" implies 'onefile = TRUE'"
 msgstr "file = \"|cmd\"意味着 'onefile = TRUE'"
+
+#: devPS.cpp:8335
+msgid "internal read error in PDF_endpage"
+msgstr ""
+
+#: devPS.cpp:8341
+#, c-format
+msgid "internal compression error %d in PDF_endpage"
+msgstr ""
+
+#: devPS.cpp:8396
+msgid "unable to increase page limit: please shutdown the pdf device"
+msgstr ""
 
 #: devPS.cpp:8418
 #, c-format
@@ -580,6 +639,14 @@ msgstr "無法啟動 %s()裝置"
 #, c-format
 msgid "unable to start %s() device"
 msgstr "無法啟動 %s()裝置"
+
+#: devQuartz.cpp:307
+msgid "Tried to restore an empty snapshot?"
+msgstr ""
+
+#: devQuartz.cpp:541
+msgid "Cannot load CoreGraphics"
+msgstr ""
 
 #: devQuartz.cpp:668
 #, c-format
@@ -636,6 +703,11 @@ msgstr "記憶體不足，無法拷貝圖形窗"
 msgid "No device available to copy graphics window"
 msgstr "沒有裝置來拷貝圖形窗"
 
+#: devWindows.cpp:385
+msgid ""
+"missing initPSandPDFfonts() in grDevices namespace: this should not happen"
+msgstr ""
+
 #: devWindows.cpp:411 devWindows.cpp:482
 #, c-format
 msgid "'%%' is not allowed in file name"
@@ -664,6 +736,15 @@ msgstr "字型設定發生錯誤"
 msgid "font family not found in Windows font database"
 msgstr "Windows 字型資料庫裡不明的字型系列"
 
+#: devWindows.cpp:722
+msgid "unable to set or substitute a suitable font"
+msgstr ""
+
+#: devWindows.cpp:727
+#, fuzzy
+msgid "unable to set font: using Arial"
+msgstr "不可使用編碼 '%s'"
+
 #: devWindows.cpp:1089
 msgid "plot history seems corrupted"
 msgstr "繪圖命令歷程好像壞了"
@@ -671,6 +752,16 @@ msgstr "繪圖命令歷程好像壞了"
 #: devWindows.cpp:1096
 msgid "no plot history!"
 msgstr "沒有繪圖命令歷程！"
+
+#: devWindows.cpp:1579
+#, fuzzy
+msgid "unable to open window"
+msgstr "無法開啟 '%s' 文字寫入"
+
+#: devWindows.cpp:1806
+#, fuzzy
+msgid "unable to open printer"
+msgstr "無法指派光柵圖像"
 
 #: devWindows.cpp:1818 devWindows.cpp:1853 devWindows.cpp:1883
 #, c-format
@@ -686,6 +777,11 @@ msgstr "無法指派 bitmap"
 #, c-format
 msgid "unable to open file '%s' for writing"
 msgstr "無法開啟 '%s' 文字寫入"
+
+#: devWindows.cpp:1908
+#, fuzzy
+msgid "invalid specification for file name in win.metafile()"
+msgstr "win.metafile()調用裡的文字名稱太長"
 
 #: devWindows.cpp:1922
 #, c-format
@@ -724,6 +820,14 @@ msgstr "呼叫 dev.hold()後不能再用定位器"
 #: devWindows.cpp:3161
 msgid "graphics device closed during call to locator or identify"
 msgstr "在呼叫定位器或識別期間，繪圖裝置已關閉"
+
+#: devWindows.cpp:3259
+msgid "allocation failed in GADeviceDriver"
+msgstr ""
+
+#: devWindows.cpp:3295
+msgid "opening device failed"
+msgstr ""
 
 #: devWindows.cpp:3427
 msgid "option 'windowsTimeouts' should be integer"
@@ -766,6 +870,10 @@ msgstr "無法開啟"
 msgid "invalid 'width' or 'height'"
 msgstr "'width' 或 'height' 的值無效"
 
+#: devWindows.cpp:3904
+msgid "unable to load winCairo.dll: was it built?"
+msgstr ""
+
 #: devices.cpp:46
 msgid "argument must have positive length"
 msgstr "引數的長度必須是下的"
@@ -800,6 +908,11 @@ msgstr ""
 msgid "Quartz R Device"
 msgstr ""
 
+#: winbitmap.cpp:461
+#, fuzzy, c-format
+msgid "unable to open TIFF file '%s'"
+msgstr "無法開啟 '%s' 文字寫入"
+
 #~ msgid "unknown encoding '%s' in 'PostScriptMetricInfo'"
 #~ msgstr "'PostScriptMetricInfo' 裡沒有 '%s' 編碼"
 
@@ -826,9 +939,6 @@ msgstr ""
 
 #~ msgid "filename too long in tiff() call"
 #~ msgstr "tiff()調用裡的文字名稱太長"
-
-#~ msgid "filename too long in win.metafile() call"
-#~ msgstr "win.metafile()調用裡的文字名稱太長"
 
 #~ msgid "invalid argument"
 #~ msgstr "引數無效"

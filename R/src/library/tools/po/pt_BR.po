@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.2.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-03-18 20:02+0100\n"
+"POT-Creation-Date: 2021-03-25 22:08+0100\n"
 "PO-Revision-Date: 2015-01-17 15:54+0100\n"
 "Last-Translator: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
 "Language-Team: http://www.feferraz.net/br/P/Projeto_Traducao_R_Portugues\n"
@@ -107,6 +107,10 @@ msgstr ""
 msgid "Not enough arguments passed to user macro '%s'"
 msgstr ""
 
+#: gramRd.cpp:3117
+msgid "internal error: inconsistent argument count"
+msgstr ""
+
 #: gramRd.cpp:3198 gramRd.cpp:3202
 #, c-format
 msgid "newline within quoted string at %s:%d"
@@ -185,6 +189,10 @@ msgstr ""
 #: text.cpp:75
 msgid "invalid argument type"
 msgstr "tipo de argumento inválido"
+
+#: text.cpp:164 text.cpp:200
+msgid "invalid input"
+msgstr ""
 
 #: text.cpp:166
 #, c-format

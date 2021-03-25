@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: utils 3.6.3\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-03-18 20:03+0100\n"
+"POT-Creation-Date: 2021-03-25 22:09+0100\n"
 "PO-Revision-Date: \n"
 "Last-Translator: Daniele Medri <dmedri@gmail.com>\n"
 "Language-Team: Italian https://github.com/dmedri/R-italian-lang\n"
@@ -18,10 +18,10 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Generator: Poedit 2.2.1\n"
 
-#: io.cpp:329 io.cpp:333 io.cpp:343 io.cpp:571 io.cpp:770 io.cpp:822 io.cpp:836
-#: io.cpp:840 io.cpp:846 io.cpp:847 io.cpp:1088 io.cpp:1089 io.cpp:1091
-#: io.cpp:1092 io.cpp:1093 io.cpp:1094 io.cpp:1095 io.cpp:1096 stubs.cpp:44
-#: stubs.cpp:64 windows/dialogs.cpp:169 windows/dialogs.cpp:194
+#: io.cpp:330 io.cpp:334 io.cpp:344 io.cpp:572 io.cpp:771 io.cpp:823 io.cpp:837
+#: io.cpp:841 io.cpp:847 io.cpp:848 io.cpp:1089 io.cpp:1090 io.cpp:1092
+#: io.cpp:1093 io.cpp:1094 io.cpp:1095 io.cpp:1096 io.cpp:1097 stubs.cpp:45
+#: stubs.cpp:65 windows/dialogs.cpp:169 windows/dialogs.cpp:194
 #: windows/dialogs.cpp:197 windows/dialogs.cpp:241 windows/dialogs.cpp:278
 #: windows/dialogs.cpp:289 windows/dialogs.cpp:313 windows/dialogs.cpp:321
 #: windows/util.cpp:121 windows/widgets.cpp:75 windows/widgets.cpp:78
@@ -30,127 +30,131 @@ msgstr ""
 msgid "invalid '%s' argument"
 msgstr "argomento '%s' non valido"
 
-#: io.cpp:352 io.cpp:833
+#: io.cpp:353 io.cpp:834
 msgid "invalid quote symbol set"
 msgstr "simbolo di citazione non valido"
 
-#: io.cpp:364 io.cpp:856 io.cpp:1076
+#: io.cpp:365 io.cpp:857 io.cpp:1077
 msgid "cannot open the connection"
 msgstr "non è possibile aprire la connessione"
 
-#: io.cpp:367 io.cpp:371
+#: io.cpp:368 io.cpp:372
 msgid "cannot read from this connection"
 msgstr "non posso leggere da questa connessione"
 
-#: io.cpp:418 io.cpp:436
+#: io.cpp:419 io.cpp:437
 #, c-format
 msgid "quoted string on line %d terminated by EOF"
 msgstr "la stringa tra apici alla linea %d termina con EOF"
 
-#: io.cpp:567
+#: io.cpp:568
 msgid "the first argument must be of mode character"
 msgstr "il primo argomento dev'essere in modalità caratteri"
 
-#: io.cpp:597
+#: io.cpp:598
 #, c-format
 msgid "invalid 'numerals' string: \"%s\""
 msgstr "stringa 'numerals' non valida: \"%s\""
 
-#: io.cpp:772
+#: io.cpp:773
 #, c-format
 msgid "Selection: "
 msgstr "Selezione: "
 
-#: io.cpp:866 io.cpp:881
+#: io.cpp:867 io.cpp:882
 msgid "cannot allocate buffer in 'readTableHead'"
 msgstr "non posso allocare il buffer in 'readTableHead'"
 
-#: io.cpp:894
+#: io.cpp:895
 msgid "\\ followed by EOF"
 msgstr "\\ seguito da EOF"
 
-#: io.cpp:933
+#: io.cpp:934
 #, c-format
 msgid "line %d appears to contain embedded nulls"
 msgstr ""
 
-#: io.cpp:946 io.cpp:950
+#: io.cpp:947 io.cpp:951
 #, c-format
 msgid "incomplete final line found by readTableHeader on '%s'"
 msgstr "trovata linea finale incompleta da readTableHeader su '%s'"
 
-#: io.cpp:1006
+#: io.cpp:1007
 msgid "index out of range"
 msgstr "indice fuori campo di variazione"
 
-#: io.cpp:1044
+#: io.cpp:1045
 #, c-format
 msgid "Problem closing connection:  %s"
 msgstr "Problema riscontrato durante la chiusura della connessione: %s"
 
-#: io.cpp:1046
+#: io.cpp:1047
 msgid "Problem closing connection"
 msgstr "Problema riscontrato durante la chiusura della connessione"
 
-#: io.cpp:1069
+#: io.cpp:1070
 #, fuzzy
 msgid "'file' argument is not a connection"
 msgstr "'file' non è una connessione"
 
-#: io.cpp:1072
+#: io.cpp:1073
 msgid "cannot write to this connection"
 msgstr "non è possibile scrivere su questa connessione"
 
-#: io.cpp:1102
+#: io.cpp:1103
 #, fuzzy
 msgid "'dec' argument must be a single character"
 msgstr "'dec' dev'essere un singolo carattere"
 
-#: io.cpp:1126
+#: io.cpp:1127
 #, fuzzy, c-format
 msgid "corrupt data frame -- length of column %d does not match nrows"
 msgstr ""
 "data frame corrotto -- la lunghezza della colonna %d non corrisponde con "
 "nrows"
 
-#: io.cpp:1154
+#: io.cpp:1155
 #, c-format
 msgid "column %s claims to be a factor but does not have numeric codes"
 msgstr "la colonna %s si presenta come un factor ma non ha codici numerici"
 
-#: io.cpp:1171
+#: io.cpp:1172
 #, fuzzy
 msgid "corrupt matrix -- dims do not match length"
 msgstr "matrice corrotta -- le dimensioni non corrispondono con la lunghezza"
 
-#: stubs.cpp:53
+#: stubs.cpp:54
 msgid "'savehistory' can only be used in Rgui and Rterm"
 msgstr "'savehistory' può essere utilizzata in Rgui e Rterm"
 
-#: stubs.cpp:70
+#: stubs.cpp:71
 msgid "'loadhistory' can only be used in Rgui and Rterm"
 msgstr "'loadhistory' può essere utilizzata in Rgui e Rterm"
 
-#: stubs.cpp:82
+#: stubs.cpp:83
 msgid "invalid timestamp"
 msgstr "timestamp non valido"
 
-#: stubs.cpp:148 stubs.cpp:156
+#: stubs.cpp:149 stubs.cpp:157
 msgid "X11 dataentry cannot be loaded"
 msgstr "La dataentry X11 non può essere caricata"
 
-#: stubs.cpp:152 stubs.cpp:181 stubs.cpp:187
+#: stubs.cpp:153 stubs.cpp:182 stubs.cpp:188
 msgid "X11 is not available"
 msgstr "X11 non è disponibile"
 
-#: stubs.cpp:245 stubs.cpp:248
+#: stubs.cpp:246 stubs.cpp:249
 #, c-format
 msgid "invalid '%s' specification"
 msgstr "specificazione '%s' non valida"
 
-#: stubs.cpp:251
+#: stubs.cpp:252
 #, c-format
 msgid "'%s' contains missing values"
+msgstr ""
+
+#: stubs.cpp:318
+msgid "size must be finite and >= 0"
 msgstr ""
 
 #: utils.cpp:79
@@ -199,6 +203,10 @@ msgstr "'gethostbyname' ha restituito un formato sconosciuto"
 msgid "'nsl()' is not supported on this platform"
 msgstr "nls() non è supportata su questa piattaforma"
 
+#: windows/dialogs.cpp:127
+msgid "invalid progressbar -- has it been closed?"
+msgstr ""
+
 #: windows/dialogs.cpp:181
 msgid "unknown type"
 msgstr "tipo sconosciuto"
@@ -238,6 +246,16 @@ msgstr "non è possibile eliminare la voce di menu (%s)"
 msgid "invalid '%s' value"
 msgstr "valore '%s' non valido"
 
+#: windows/registry.cpp:145 windows/registry.cpp:149
+#, c-format
+msgid "unhandled key type %s\n"
+msgstr ""
+
+#: windows/registry.cpp:153
+#, c-format
+msgid "unhandled key type %d\n"
+msgstr ""
+
 #: windows/registry.cpp:176
 #, c-format
 msgid "RegQueryInfoKey error code %d: '%s'"
@@ -248,18 +266,23 @@ msgstr ""
 msgid "Registry key '%ls' not found"
 msgstr "Chiave registro '%ls' non trovata"
 
+#: windows/registry.cpp:267
+#, c-format
+msgid "RegOpenKeyEx error code %d: '%s'"
+msgstr ""
+
 #: windows/util.cpp:46
 msgid "unsupported version of Windows"
 msgstr "versione non supportata di Windows"
+
+#: windows/util.cpp:264 windows/util.cpp:298
+msgid "'raw = FALSE' and format is a not a known text format"
+msgstr ""
 
 #: windows/util.cpp:285
 #, fuzzy, c-format
 msgid "'%s' argument must be a character vector or a raw vector"
 msgstr "l'argomento dev'essere un vettore di caratteri o un vettore raw"
-
-#: windows/util.cpp:298
-msgid "'raw = FALSE' and format is a not a known text format"
-msgstr ""
 
 #: windows/util.cpp:324
 msgid "unable to open the clipboard"
