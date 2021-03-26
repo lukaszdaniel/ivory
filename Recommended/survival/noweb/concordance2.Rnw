@@ -50,7 +50,7 @@ concordance.formula <- function(formula, data,
                                 influence=FALSE, id, reverse) {
     Call <- match.call()  # save a copy of of the call, as documentation
     timewt <- match.arg(timewt)
-    
+
     index <- match(c("formula", "data", "weights", "subset", "na.action", 
                      "group"),
                    names(Call), nomatch=0)
@@ -81,7 +81,7 @@ concordance.formula <- function(formula, data,
         Terms <- Terms[-stemp$terms]
     }
     else strat <- NULL
-    
+
     id <- model.extract(mf, "id")
     cluster<- attr(Terms, "specials")$cluster
     if (length(cluster)) {
@@ -94,7 +94,7 @@ concordance.formula <- function(formula, data,
         Terms <- Terms[-tempc$terms]  # toss it away
     }
     else if (length(id)) cluster <- id
-                                            
+
     x <- model.matrix(Terms, m)[,-1, drop=FALSE]  #remove the intercept
     if (ncol(x) > 1) stop("only one predictor variable allowed")
 
@@ -102,10 +102,10 @@ concordance.formula <- function(formula, data,
         stop("ymin must be a single number")
     if (!is.null(ymax) & (length(ymax)> 1 || !is.numeric(ymax)))
         stop("ymax must be a single number")
-    
+
     cfit <- concordance.fit(Y, x, strat, wt, ymin, ymax, timewt, influence,
                              cluster)
-    
+
     concordance <- (cfit$tau +1)/2
     if (missing(reverse)) reverse <- (concordance < .5)
     if (!is.logical(reverse)) 
@@ -181,7 +181,7 @@ concordance.fit <- function(y, x, strata, weight, ymin, ymax, timewt,
         if (timewt %in% c("S/G", "n/G", "n/G2")) {
             if (type != "right")
                 stop("weights involving 1/G are only valid for right censored data")
-            
+
             y2 <-y
             y2[,2)] <- 1- y[,2]
             gfit <- survfitKM(strata, y2, wt, se.fit=FALSE)
@@ -197,7 +197,7 @@ concordance.fit <- function(y, x, strata, weight, ymin, ymax, timewt,
             strata <- strata[ord]
         }
     }
-     
+
     # weights involve S(t) and G(t-), so we need to interpolate G per
     #  stratum
     nstrat <- max(stratum)
@@ -220,7 +220,7 @@ concordance.fit <- function(y, x, strata, weight, ymin, ymax, timewt,
         "n/G"= nwt/gwt,
         "n/G2" = nwt/gwt^2
     }
-    
+
     # match each score to the unique set (to deal with ties)
     uindex <- lapply(1:nstrat, function(i) {
         temp <- x[strata==i]
@@ -232,10 +232,10 @@ concordance.fit <- function(y, x, strata, weight, ymin, ymax, timewt,
     temp <- btree(max(nindx))
     parent <- as.integer(temp/2L)  # node number of parent
     rchild <- as.integer(temp %%2) # is this node the right child? 
-                  
+
     parent <- unlist(lapply(unidex, function(i) parent[i]))
     rchild <- unlist(lapply(unidex, function(i) rchild[i]))             
-  
+
     if (ncol(y) ==3) 
         counts <- .Call(Cconcordance1, stime, x, wts,
                         parent, child)
@@ -426,7 +426,7 @@ as
 \end{equation*}
 These correspond to the midpoints of the rise on an empirical CDF, and
 for unweighted data without ties gives ranks of .5, 1.5, \ldots, $n-.5$.
-   
+
 Assume we have just added obs $k$ to the tree.
 Since the mean rank = $\mu_g = \sum(w_i)/2$ the grand mean increases by
     $w_k/2$.
@@ -522,18 +522,18 @@ SEXP concordance1(SEXP y, SEXP wt2,  SEXP indx2, SEXP ntree2) {
     double *twt, *nwt, *count;
     double vss, myrank, wsum1, wsum2, wsum3; /*sum of wts below, tied, above*/
     double lmean, umean, oldmean, newmean;
-        
+
     double ndeath;   /* weighted number of deaths at this point */
-    
+
     SEXP count2;
     double *wt;
     int    *indx;
-    
+
     n = nrows(y);
     ntree = asInteger(ntree2);
     wt = REAL(wt2);
     indx = INTEGER(indx2);
-    
+
     time = REAL(y);
     status = time + n;
     PROTECT(count2 = allocVector(REALSXP, 5));
@@ -545,7 +545,7 @@ SEXP concordance1(SEXP y, SEXP wt2,  SEXP indx2, SEXP ntree2) {
     vss=0;
 
     <<concordance1-work>>
-        
+
     UNPROTECT(1);
     return(count2);
 }
@@ -597,7 +597,7 @@ for (i=n-1; i>=0; ) {
 	    child++;
 	    if (child < ntree)
                 count[1] += wt[j] * twt[child]; /*right children */
-	    
+
             while (index >0) {  /* walk up the tree  */
 		parent = (index-1)/2;
 		if (index & 1)   /* I am the left child */
@@ -608,7 +608,7 @@ for (i=n-1; i>=0; ) {
 	    }
 	}                    
     else j = i-1;
-    
+
     /* Add the weights for these obs into the tree and update variance*/
     for (; i>j; i--) {
         wsum1=0; 
@@ -661,14 +661,14 @@ SEXP concordance2(SEXP y,     SEXP wt2,  SEXP indx2, SEXP ntree2,
     SEXP count2;
     double *wt;
     int    *indx;
-    
+
     n = nrows(y);
     ntree = asInteger(ntree2);
     wt = REAL(wt2);
     indx = INTEGER(indx2);
     sort2 = INTEGER(sortstop);
     sort1 = INTEGER(sortstart);
-    
+
     time1 = REAL(y);
     time2 = time1 + n;
     status= time2 + n;
@@ -680,7 +680,7 @@ SEXP concordance2(SEXP y,     SEXP wt2,  SEXP indx2, SEXP ntree2,
     for (i=0; i<5; i++) count[i]=0.0;
     vss =0;
     <<concordance2-work>>
-        
+
     UNPROTECT(1);
     return(count2);
 }
@@ -736,7 +736,7 @@ for (i=0; i<n; ) {
             vss += wsum3*(newmean+ oldmean -2*umean) * (newmean-oldmean);
 	    vss -= wt[jptr]* (myrank -newmean)*(myrank -newmean);
             }
-	    
+
 	/* Process deaths */
 	for (j=i; j <n && status[sort2[j]]==1 && time2[sort2[j]]==dtime; j++) {
 	    jptr =  sort2[j];
@@ -812,7 +812,7 @@ survConcordance.fit <- function(y, x, strata, weight) {
     #  routine below
     if (any(is.na(x)) || any(is.na(y))) return(NULL)   
     <<btree>>
-        
+
     docount <- function(stime, risk, wts) {
         if (attr(stime, 'type') == 'right') {
             ord <- order(stime[,1], -stime[,2])
@@ -840,11 +840,11 @@ survConcordance.fit <- function(y, x, strata, weight) {
         }
         else stop("Invalid survival type for concordance")
     }
-        
+
     if (missing(weight) || length(weight)==0)
         weight <- rep(1.0, length(x))
     storage.mode(y) <- "double"
-    
+
     if (missing(strata) || length(strata)==0) {
         count <- docount(y, x, weight)
         if (count[1]==0 && count[2]==0) count[5]<-0
@@ -860,7 +860,7 @@ survConcordance.fit <- function(y, x, strata, weight) {
             keep <- which(strata == ustrat[i])
             count[i,] <- docount(y[keep,,drop=F], x[keep], weight[keep])
         }
-        
+
         count[,5] <- 2*sqrt(ifelse(count[,1]+count[,2]==0, 0, count[,5]))
         dimnames(count) <- list(ustrat,  c("concordant", "discordant",
                                            "tied.risk", "tied.time",

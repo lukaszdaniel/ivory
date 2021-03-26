@@ -58,7 +58,7 @@ system(command, intern = FALSE,
   This interface has become rather complicated over the years: see
   \code{\link{system2}} for a more portable and flexible interface
   which is recommended for new code.
-  
+
   \code{command} is parsed as a command plus arguments separated by
   spaces.  So if the path to the command (or a single argument such as a
   file path) contains spaces, it must be quoted e.g.\sspace{}by

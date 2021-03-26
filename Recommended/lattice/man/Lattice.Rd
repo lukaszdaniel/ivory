@@ -110,7 +110,7 @@
   of Trellis graphics; these provide a holistic introduction to
   the Trellis paradigm:
   \url{http://web.archive.org/web/20081020164041/http://cm.bell-labs.com/cm/ms/departments/sia/project/trellis/display.writing.html}
-  
+
 }
 
 \seealso{
@@ -156,13 +156,13 @@
     \item{\code{\link{cloud}}:}{ Three-dimensional scatter plots. }
     \item{\code{\link{wireframe}}:}{ Three-dimensional surface plots (similar to \code{\link{persp}} plots). }
   }
-  
+
   \bold{Hypervariate:}
   \describe{
     \item{\code{\link{splom}}:}{ Scatterplot matrices. }
     \item{\code{\link{parallel}}:}{ Parallel coordinate plots. }
   }
-  
+
   \bold{Miscellaneous:}
   \describe{
     \item{\code{\link{rfs}}:}{ Residual and fitted value plots (also see \code{\link{oneway}}). }

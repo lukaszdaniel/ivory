@@ -151,7 +151,7 @@
   An \R installation can support more than one sub-architecture:
   currently this is most commonly used for 32- and 64-bit builds on
   Windows.
-  
+
   For such installations, the default behaviour is to try to install
   source packages for all installed sub-architectures unless the package
   has a configure script or a \file{src/Makefile} (or

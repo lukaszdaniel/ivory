@@ -41,7 +41,7 @@ rsignrank(nn, n)
   The length of the result is determined by \code{nn} for
   \code{rsignrank}, and is the maximum of the lengths of the
   numerical arguments for the other functions.  
-  
+
   The numerical arguments other than \code{nn} are recycled to the
   length of the result.  Only the first elements of the logical
   arguments are used.

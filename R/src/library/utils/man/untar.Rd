@@ -67,7 +67,7 @@ untar(tarfile, files = NULL, list = FALSE, exdir = ".",
     second, and can only be restored to the resolution supported by the
     file system (which on a FAT system is 2 seconds).
   }
-  
+
   %% even RHEL6 had GNU tar 1.23, Ububtu 14.04 has 1.27
   %% macOS has bsdtar from 2010: this supports xz but does not docuemnt it.
   %% bsdtar had lzma/xz supoort before April 2009 when it added
@@ -96,10 +96,10 @@ untar(tarfile, files = NULL, list = FALSE, exdir = ".",
   \code{tarfile} is a connection or if the argument \code{tar} is
   \code{"internal"} or \code{""} (except on Windows, when
   \command{tar.exe} is tried first).
-  
+
   Unless otherwise stated three types of compression of the tar file are
   supported: \command{gzip}, \command{bzip2} and \command{xz}.
-  
+
   What options are supported will depend on the \command{tar}
   implementation used: the \code{"internal"} one is intended to provide
   support for most in a platform-independent way.
@@ -155,7 +155,7 @@ untar(tarfile, files = NULL, list = FALSE, exdir = ".",
   "--use-compress-program lz4"}.  Most commands will detect (the
   nowadays rarely seen) \file{.tar.Z} archives compressed by
   \code{compress}.
-  
+
   The internal implementation restores symbolic links as links on a
   Unix-alike, and as file copies on Windows (which works only for
   existing files, not for directories), and hard links as links.  If the

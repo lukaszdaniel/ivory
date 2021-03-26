@@ -469,7 +469,7 @@ b 1.2+11i 2.4+23.141593i
  Mean   :14.74   Mean   :6.084  
  3rd Qu.:20.00   3rd Qu.:6.600  
  Max.   :23.00   Max.   :7.700  
-                                
+
                                                                            station   
  abcdefghijklmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyz:  5  
  1028                                                                          :  4  
@@ -485,7 +485,7 @@ b 1.2+11i 2.4+23.141593i
  Mean   : 45.60   Mean   :0.15422  
  3rd Qu.: 47.55   3rd Qu.:0.21925  
  Max.   :370.00   Max.   :0.81000  
-                                   
+
 > ## in 1.7.0, things were split to more lines
 > 
 > ## format.default(*, nsmall > 0)  -- for real and complex

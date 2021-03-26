@@ -55,7 +55,7 @@
     Other arguments, passed to the underlying \code{formula} method.
   }
 }
-  
+
 \details{
 
   The first dimension is used as the variable on the categorical axis.

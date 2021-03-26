@@ -12,7 +12,7 @@ concordance.formula <- function(object, data,
     timewt <- match.arg(timewt)
     if (missing(ymin)) ymin <- NULL
     if (missing(ymax)) ymax <- NULL
-    
+
     index <- match(c("data", "weights", "subset", "na.action", 
                      "cluster"),
                    names(Call), nomatch=0)
@@ -37,7 +37,7 @@ concordance.formula <- function(object, data,
         if (timefix) Y <- aeqSurv(Y)
     }
     n <- nrow(Y)
-    
+
     wt <- model.weights(mf)
     offset<- attr(Terms, "offset")
     if (length(offset)>0) stop("Offset terms not allowed")
@@ -49,7 +49,7 @@ concordance.formula <- function(object, data,
         Terms <- Terms[-stemp$terms]
     }
     else strat <- NULL
-    
+
     # if "cluster" was an argument, use it, otherwise grab it from the model
     group <- model.extract(mf, "cluster")
     cluster<- attr(Terms, "specials")$cluster
@@ -61,7 +61,7 @@ concordance.formula <- function(object, data,
         Terms <- Terms[-tempc$terms]  # toss it away
     }
     if (length(group)) cluster <- group
-                                            
+
     x <- model.matrix(Terms, mf)[,-1, drop=FALSE]  #remove the intercept
     if (ncol(x) > 1) stop("only one predictor variable allowed")
 
@@ -71,7 +71,7 @@ concordance.formula <- function(object, data,
         stop("ymax must be a single number")
     if (!is.logical(reverse)) 
         stop ("the reverse argument must be TRUE/FALSE")
- 
+
     fit <- concordancefit(Y, x, strat, wt, ymin, ymax, timewt, cluster,
                            influence, ranks, reverse, keepstrata=keepstrata)
     na.action <- attr(mf, "na.action")
@@ -93,7 +93,7 @@ print.concordance <- function(x, digits= max(1L, getOption("digits") - 3L),
     if(length(omit))
         cat("n=", x$n, " (", naprint(omit), ")\n", sep = "")
     else cat("n=", x$n, "\n")
-    
+
     if (length(x$concordance) > 1) {
         # result of a call with multiple fits
         tmat <- cbind(concordance= x$concordance, se=sqrt(diag(x$var)))
@@ -174,11 +174,11 @@ concordancefit <- function(y, x, strata, weights, ymin=NULL, ymax=NULL,
         #  only 1 event per stratum occurs.  All time weightings are the same
         # don't waste time even if the user asked for something different
         if (sum(y[,ncol(y)]) <2) timeopt <- 'n'
-        
+
         sfit <- survfit(y~1, weights=wts, se.fit=FALSE, timefix=timefix)
         etime <- sfit$time[sfit$n.event > 0]
         esurv <- sfit$surv[sfit$n.event > 0]
-        
+
         if (length(etime)==0) {
             # the special case of a stratum with no events (it happens)
             # No need to do any more work
@@ -216,12 +216,12 @@ concordancefit <- function(y, x, strata, weights, ymin=NULL, ymax=NULL,
             sort.stop  <- order(-y[,2], y[,3], risk) -1L   #order by endpoint
             sort.start <- order(-y[,1]) -1L       
         }
- 
+
         # match each prediction score to the unique set of scores
         # (to deal with ties)
         utemp <- match(risk, sort(unique(risk)))
         bindex <- btree(max(utemp))[utemp]
-        
+
         storage.mode(y) <- "double"  # just in case y is integer
         storage.mode(wts) <- "double"
         if (ncol(y) ==2)
@@ -243,7 +243,7 @@ concordancefit <- function(y, x, strata, weights, ymin=NULL, ymax=NULL,
         }
         fit
     }
-    
+
     if (nstrat < 2) {
         fit <- docount(y, x, weights, timewt, timefix=timefix)
         count2 <- fit$count[1:5]
@@ -295,7 +295,7 @@ concordancefit <- function(y, x, strata, weights, ymin=NULL, ymax=NULL,
 
     if (influence == 1 || influence==3) rval$dfbeta <- dfbeta/2
     if (influence >=2) rval$influence <- imat
-         
+
     if (ranks) rval$ranks <- resid
     if (reverse) {
         # flip concordant/discordant values but not the labels
@@ -341,7 +341,7 @@ cord.getdata <- function(object, newdata=NULL, cluster=NULL, need.wt, timefix=TR
     specials <- attr(Terms, "specials")
     if (!is.null(specials$tt)) 
         stop("cannot yet handle models with tt terms")
- 
+
     if (!is.null(newdata)) {
         mf <- model.frame(object, data=newdata)
         y <- model.response(mf)
@@ -371,7 +371,7 @@ cord.getdata <- function(object, newdata=NULL, cluster=NULL, need.wt, timefix=TR
         if (is.null(x)) {object$na.action <- NULL; x <- predict(object)}
         rval <- list(y = y, x= x)
     }
-        
+
     if (need.wt) {
         if (is.null(mf)) mf <- model.frame(object)
         rval$weights <- model.weights(mf)
@@ -383,7 +383,7 @@ cord.getdata <- function(object, newdata=NULL, cluster=NULL, need.wt, timefix=TR
         if (length(stemp$vars)==1) rval$strata <- mf[[stemp$vars]]
         else rval$strata <- strata(mf[,stemp$vars], shortlabel=TRUE)
     } 
- 
+
     if (is.null(cluster)) {
         if (!is.null(specials$cluster)) {
             if (is.null(mf)) mf <- model.frame(object)
@@ -418,16 +418,16 @@ concordance.lm <- function(object, ..., newdata, cluster, ymin, ymax,
         temp <- ifelse(id2 %in% c("","object"), fname, id2)
         stop(temp, " argument is not an appropriate fit object")
     }
-        
+
     cargs <- c("ymin", "ymax","influence", "ranks", "keepstrata")
     cfun <- Call[c(1, match(cargs, names(Call), nomatch=0))]
     cfun[[1]] <- cord.work   # or quote(survival:::cord.work)
     cfun$fname <- fname
-    
+
     if (missing(newdata)) newdata <- NULL
     if (missing(cluster)) cluster <- NULL
     need.wt <- any(sapply(fits, function(x) !is.null(x$call$weights)))
-    
+
     cfun$data <- lapply(fits, cord.getdata, newdata=newdata, cluster=cluster,
                         need.wt=need.wt, timefix=timefix)
     rval <- eval(cfun, parent.frame())
@@ -455,23 +455,23 @@ concordance.survreg <- function(object, ..., newdata, cluster, ymin, ymax,
         temp <- ifelse(id2 %in% c("","object"), fname, id2)
         stop(temp, " argument is not an appropriate fit object")
     }
-        
+
     cargs <- c("ymin", "ymax","influence", "ranks", "timewt", "keepstrata")
     cfun <- Call[c(1, match(cargs, names(Call), nomatch=0))]
     cfun[[1]] <- cord.work
     cfun$fname <- fname
-    
+
     if (missing(newdata)) newdata <- NULL
     if (missing(cluster)) cluster <- NULL
     need.wt <- any(sapply(fits, function(x) !is.null(x$call$weights)))
-    
+
     cfun$data <- lapply(fits, cord.getdata, newdata=newdata, cluster=cluster,
                         need.wt=need.wt, timefix=timefix)
     rval <- eval(cfun, parent.frame())
     rval$call <- Call
     rval
 }
-    
+
 concordance.coxph <- function(object, ..., newdata, cluster, ymin, ymax, 
                                timewt=c("n", "S", "S/G", "n/G", "n/G2", "I"),
                                influence=0, ranks=FALSE, timefix=FALSE,
@@ -492,7 +492,7 @@ concordance.coxph <- function(object, ..., newdata, cluster, ymin, ymax,
         temp <- ifelse(id2 %in% c("","object"), fname, id2)
         stop(temp, " argument is not an appropriate fit object")
     }
-        
+
     # the cargs trick is a nice one, but it only copies over arguments that
     #  are present.  If 'ranks' was not specified, the default of FALSE is
     #  not set.  We keep it in the arg list only to match the documentation.
@@ -505,7 +505,7 @@ concordance.coxph <- function(object, ..., newdata, cluster, ymin, ymax,
     if (missing(newdata)) newdata <- NULL
     if (missing(cluster)) cluster <- NULL
     need.wt <- any(sapply(fits, function(x) !is.null(x$call$weights)))
-    
+
     cfun$data <- lapply(fits, cord.getdata, newdata=newdata, cluster=cluster,
                         need.wt=need.wt, timefix=timefix)
     rval <- eval(cfun, parent.frame())
@@ -537,14 +537,14 @@ cord.work <- function(data, timewt, ymin, ymax, influence=0, ranks=FALSE,
         for (i in 2:nfit) {
             if (length(data[[i]]$x) != n)
                 stop("all models must have the same sample size")
-            
+
             if (!identical(data[[1]]$y, data[[i]]$y))
                 warning("models do not have the same response vector")
-            
+
             if (!identical(data[[1]]$weights, data[[i]]$weights))
                 stop("all models must have the same weight vector")
         }
-        
+
         if (influence==2) fcall$influence <-3 else fcall$influence <- 1
         flist <- lapply(data, function(d) {
                          temp <- fcall
@@ -555,7 +555,7 @@ cord.work <- function(data, timewt, ymin, ymax, influence=0, ranks=FALSE,
                          temp$cluster <- d$cluster
                          eval(temp, parent.frame())
                      })
-            
+
         for (i in 2:nfit) {
             if (length(flist[[1]]$dfbeta) != length(flist[[i]]$dfbeta))
                 stop("models must have identical clustering")
@@ -582,7 +582,7 @@ cord.work <- function(data, timewt, ymin, ymax, influence=0, ranks=FALSE,
             rval$influence <- array(temp, 
                                     dim=c(dim(flist[[1]]$influence), nfit))
         }
-        
+
         if (ranks) {
             temp <- lapply(flist, function(x) x$ranks)
             rdat <- data.frame(fit= rep(fname, sapply(temp, nrow)),
@@ -591,7 +591,7 @@ cord.work <- function(data, timewt, ymin, ymax, influence=0, ranks=FALSE,
             rval$ranks <- rdat
         }
      }
-    
+
     class(rval) <- "concordance"
     rval
 }

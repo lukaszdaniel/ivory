@@ -85,7 +85,7 @@ replicates of the variable of interest.
   plotted.  For the normal, this will have intercept \code{mean(t)} and
   slope \code{sqrt(var(t))} while for the chi-squared it has intercept 0
   and slope 1.
-  
+
   If \code{jack} is \code{TRUE} a third plot is produced beneath these
   two.  That plot is the jackknife-after-bootstrap plot.  This plot may
   only be requested when nonparametric simulation has been used.  See

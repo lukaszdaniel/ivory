@@ -85,7 +85,7 @@ print.survreg.penal <-  function(x, terms=FALSE, maxlabel=25,
     dimnames(temp) <- list(substring(pname1,1, maxlabel), 
 			     c("coef","se(coef)", "se2", "Chisq","DF","p"))
     print(temp, quote=FALSE)
-	
+
     #
     # Write out the remaider of the info
     #

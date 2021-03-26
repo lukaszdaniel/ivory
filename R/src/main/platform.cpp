@@ -142,7 +142,7 @@ static void Init_R_Machine(SEXP rho)
     */
     int MACH_SIZE = 18;
     if (sizeof(LDOUBLE) > sizeof(double)) MACH_SIZE += 10;
-    
+
     SEXP ans = PROTECT(allocVector(VECSXP, MACH_SIZE)),
 	 nms = PROTECT(allocVector(STRSXP, MACH_SIZE));
 
@@ -230,7 +230,7 @@ static void Init_R_Machine(SEXP rho)
 		  &R_LD_AccuracyInfo.epsneg,
 		  &R_LD_AccuracyInfo.xmin,
 		  &R_LD_AccuracyInfo.xmax);
- 
+
 	SET_STRING_ELT(nms, 18+0, mkChar("longdouble.eps"));
 	SET_VECTOR_ELT(ans, 18+0, ScalarReal((double) R_LD_AccuracyInfo.eps));
 

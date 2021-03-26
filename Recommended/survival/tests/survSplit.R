@@ -56,4 +56,4 @@ all.equal(rname, as.character(pfit2$ayear))
 cname <- colnames(pfit$pyears)[col(pfit$pyears)[keep]]
 all.equal(cname, as.character(pfit2$ftime))
 
-                   
+

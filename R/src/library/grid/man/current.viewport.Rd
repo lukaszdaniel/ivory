@@ -16,7 +16,7 @@
   returns the viewport that Grid is going to draw into.
 
   \code{current.parent} returns the parent of the current viewport.
-  
+
   \code{current.vpTree} returns the entire Grid viewport tree.
 
   \code{current.vpPath} returns the viewport path to the current viewport.
@@ -42,10 +42,10 @@ current.transform()
 \details{
   It is possible to get the grandparent of the current viewport
   (or higher) using the \code{n} argument to \code{current.parent()}.
-  
+
   The parent of the ROOT viewport is \code{NULL}.
   It is an error to request the grandparent of the ROOT viewport.
-  
+
   If \code{all} is \code{FALSE} then
   \code{current.vpTree} only returns the subtree below
   the current viewport.

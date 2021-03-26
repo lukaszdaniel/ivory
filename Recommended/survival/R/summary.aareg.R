@@ -49,7 +49,7 @@ summary.aareg <- function(object, maxtime, test=c('aalen', 'nrisk'), scale=1,...
 	# Compute the test statistic
 	test.stat <- apply(tx, 2, sum)  #sum of tested coefficients
 	test.var  <- t(tx) %*% tx	#std Poisson, ind coefficients variance
-	
+
 	if (!is.null(object$dfbeta)) {
 	    dd <- dim(object$dfbeta)
 	    indx <- match(unique(times), object$times)
@@ -94,7 +94,7 @@ summary.aareg <- function(object, maxtime, test=c('aalen', 'nrisk'), scale=1,...
 		 test.var=test.var, test.var2=test.var2, chisq=chi,
 		 n = c(object$n[1], length(unique(times)), object$n[3]))
 
-    
+
     class(temp) <- 'summary.aareg'
     temp
     }

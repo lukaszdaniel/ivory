@@ -81,13 +81,13 @@ mvn <- function(d=2) {
   for (i in seq_len(d)) {
     stats[[i]] <- make.link("identity") 
   }
-  
+
   ##env <- new.env(parent = .GlobalEnv)
   validmu <- function(mu) all(is.finite(mu))
 
   ## initialization has to add in the extra parameters of 
   ## the cov matrix...
-  
+
 
    preinitialize <- function(G) {
       ## G is a gam pre-fit object. Pre-initialize can manipulate some of its
@@ -142,7 +142,7 @@ mvn <- function(d=2) {
       rsd <- R%*%(t(object$y)-colMeans(object$y))
       object$null.deviance <- sum(rsd^2)
     })
-    
+
     initialize <- expression({
       ## called in gam.fit5 and initial.spg
         n <- rep(1, nobs)

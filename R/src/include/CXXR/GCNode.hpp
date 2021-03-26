@@ -124,7 +124,7 @@ namespace CXXR
      * exposed to garbage collection during construction).</li>
      *
      * </ul>
-     * 
+     *
      * \par
      * It is the responsibility of any code that creates an object of
      * a class derived from GCNode to ensure that, under normal

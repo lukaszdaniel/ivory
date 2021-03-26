@@ -82,7 +82,7 @@
   current implementation uses numerical order of the encoding, normally a
   single-byte encoding or Unicode points.)
   %% but see the comment in tre-parse.c l.300.
-  
+
   Certain named classes of characters are predefined.  Their
   interpretation depends on the \emph{locale} (see \link{locales}); the
   interpretation below is that of the POSIX locale.

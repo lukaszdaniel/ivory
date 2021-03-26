@@ -83,7 +83,7 @@ temp[,1,1] <- ffit$coef         # "EV Location" in SAS manual
 temp[,2,1] <- ffit$scale        # "EV scale"
 temp[,3,1] <- exp(ffit$coef)    # "Weibull Scale"
 temp[,4,1] <- 1/ffit$scale      # "Weibull Shape"
- 
+
 temp[,1,2] <- sqrt(diag(ffit$var))[1:4]   #standard error
 temp[,2,2] <- sqrt(diag(ffit$var))[5:8] * ffit$scale
 temp[,3,2] <- temp[,1,2] * temp[,3,1]
@@ -203,7 +203,7 @@ print(temp, digits=2)
 #  better (one could defend both sides): SAS the more standard estimate found
 #  in the reliability literature, mine the estimate from statistics literature
 rm(temp, kfit, xx)
-                    
+
 ######################################################
 # Turbine data, lognormal fit
 turbine <- read.table('data.turbine', 

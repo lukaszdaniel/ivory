@@ -37,7 +37,7 @@ popViewport()
 HersheyLabel("push two circles clipping path
 rect
 two circles")
-    
+
 ## Clip to a polygon
 grid.newpage()
 pushViewport(viewport(width=.5, height=.5,

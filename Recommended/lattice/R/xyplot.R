@@ -278,7 +278,7 @@ xyplot.formula <-
 
     if (!is.function(panel)) panel <- eval(panel)
     if (!is.function(strip)) strip <- eval(strip)
-    
+
     if ("subscripts" %in% names(formals(panel))) subscripts <- TRUE
     if (subscripts) subscr <- form$subscr
     cond <- form$condition
@@ -377,7 +377,7 @@ xyplot.formula <-
         y <- log(y, ybase)
         if (have.ylim) ylim <- logLimits(ylim, ybase)
     }
-    
+
     ## Step 5: Process cond
 
     cond.max.level <- unlist(lapply(cond, nlevels))

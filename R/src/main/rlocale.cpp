@@ -204,7 +204,7 @@ static cjk_locale_name_t cjk_locale_name[] = {
 
    Unlike the POSIX description this does not return -1 for
    non-printable Unicode points.
-   
+
    NB: Windows (at least MinGW-W64) does not have this function.
 */
 int Ri18n_wcwidth(R_wchar_t c)
@@ -239,10 +239,10 @@ int Ri18n_wcwidth(R_wchar_t c)
 }
 
 /* Used in character.cpp, errors.cpp, ../gnuwin32/console.cpp (for an MBCS locale)
-   
+
    Strings in R are restricted to 2^31-1 bytes but could conceivably
    have a width exceeding that.
-   
+
    Unlike the POSIX description this does not return -1 for strings
    containing non-printable Unicode points.
 

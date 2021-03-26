@@ -6,7 +6,7 @@
 \title{Read Stata Binary Files}
 \description{
   Reads a file in Stata version 5--12 binary format into a data frame. 
-  
+
   Frozen: will not support Stata formats after 12.
 }
 \usage{
@@ -32,7 +32,7 @@ read.dta(file, convert.dates = TRUE, convert.factors = TRUE,
   \samp{ftp:} or \samp{https:}) the URL is first downloaded to a
   temporary file and then read.  (\samp{https:} is only supported on
   some platforms.)
-  
+
   The variables in the Stata data set become the columns of the data
   frame.  Missing values are correctly handled.  The data label,
   variable labels, timestamp, and variable/dataset characteristics
@@ -47,7 +47,7 @@ read.dta(file, convert.dates = TRUE, convert.factors = TRUE,
   data frame.  Stata's date formats are sketchily documented: if
   necessary use \code{convert.dates = FALSE} and examine the attributes
   to work out how to post-process the dates.
-  
+
   Stata 8 introduced a system of 27 different missing data values.  If
   \code{missing.type} is \code{TRUE} a separate list is created with the
   same variable names as the loaded data.  For string variables the list
@@ -68,7 +68,7 @@ read.dta(file, convert.dates = TRUE, convert.factors = TRUE,
   \code{-7} (Stata 7SE, \sQuote{format-111}), \code{8} (Stata 8 and 9,
   \sQuote{format-113}), \code{10} (Stata 10 and 11, \sQuote{format-114}).
   and \code{12} (Stata 12, \sQuote{format-115}).
-  
+
   The value labels in attribute \code{"val.labels"} name a table for
   each variable, or are an empty string.  The tables are elements of the
   named list attribute \code{"label.table"}: each is an integer vector with

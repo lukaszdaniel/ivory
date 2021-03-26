@@ -42,7 +42,7 @@ survfit0(x, start.time=0)
   If the original \code{survfit} call
   included a \code{start.time} argument, that value is of course
   retained.
-    
+
   One problem with this choice is that some functions must choose a
   starting point, plots for example.
   This utility function is used by \code{plot.survfit} and

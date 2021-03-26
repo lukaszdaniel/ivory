@@ -5,7 +5,7 @@ summary.survreg<- function(object, correlation = FALSE,...)
 	warning(gettext(" Survreg failed."), object$fail, gettext("   No summary provided\n"))
 	return(invisible(object))
 	}
-    
+
     nvar0 <- length(object$coefficients)
     nvar <- nrow(object$var)
     if (nvar > nvar0) {

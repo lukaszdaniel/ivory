@@ -41,7 +41,7 @@ The result will be a matrix of survival curves, one for each event type.
 If no initial state is specified then subjects are assumed
 to start in a "null" state, which gets listed last and by default will
 not be printed or plotted.  (But it is present, with a name of `');
-  
+
 The first part of the code is standard, parsing out options and
 checking the data.
 <<survfitCI>>= 
@@ -82,7 +82,7 @@ survfitCI <- function(X, Y, weights, id, cluster, robust, istate,
         conf.int <- .95
     }
 
- 
+
     if (is.logical(influence)) {
         # TRUE/FALSE is treated as all or nothing
         if (!influence) influence <- 0L
@@ -92,7 +92,7 @@ survfitCI <- function(X, Y, weights, id, cluster, robust, istate,
         stop("influence argument must be numeric or logical")
     if (!(influence %in% 0:3)) stop("influence argument must be 0, 1, 2, or 3")
     else influence <- as.integer(influence)
- 
+
     if (!se.fit) {
         # if the user asked for no standard error, skip any robust computation
         ncluster <- 0L
@@ -103,7 +103,7 @@ survfitCI <- function(X, Y, weights, id, cluster, robust, istate,
     # This line should be unreachable, unless they call "surfitCI" directly
     if (type !='mright' && type!='mcounting')
          stop(gettextf("multi-state computation doesn't support \"%s\" survival data", type))
-    
+
     # If there is a start.time directive, start by removing any prior events
     if (!missing(start.time)) {
         if (!is.numeric(start.time) || length(start.time) !=1
@@ -123,7 +123,7 @@ survfitCI <- function(X, Y, weights, id, cluster, robust, istate,
     n <- nrow(Y)
     status <- Y[,ncol(Y)]
     ncurve <- length(levels(X))
-    
+
     # The user can call with cluster, id, robust or any combination.
     # If only id, treat it as the cluster too
     if (missing(robust) || length(robust)==0) robust <- TRUE
@@ -188,12 +188,12 @@ survfitCI <- function(X, Y, weights, id, cluster, robust, istate,
             stop("p0 must be a numeric vector that adds to 1")
     } else p0 <- NULL
 @
- 
+
 The status vector will have values of 0 for censored.
 <<survfitCI>>=
     curves <- vector("list", ncurve)
     names(curves) <- levels(X)
-                            
+
     if (ncol(Y)==2) {  # 1 transition per subject
         # dummy entry time that is < any event time
         t0 <- min(0, Y[,1])
@@ -214,7 +214,7 @@ The status vector will have values of 0 for censored.
     <<survfitCI-finish>>
 }
 @         
-        
+
 In the multi-state case we can calculate the current P(state)
 vector $p(t)$ using the product-limit form, while the cumulative hazard
 $c(t)$ is a sum.
@@ -360,7 +360,7 @@ for (i in levels(X)) {
                             influence, p0)
 }
 @ 
-            
+
 <<survfitCI-finish>>= 
 # Turn the result into a survfit type object
 grabit <- function(clist, element) {
@@ -420,7 +420,7 @@ else {
     kfit$cumhaz <- do.call(rbind, lapply(curves, function(x)
         t(x$cumhaz[ckeep,,drop=FALSE])))
     colnames(kfit$cumhaz) <- names(ckeep)
- 
+
     if (influence) kfit$influence.pstate <- 
         lapply(curves, function(x) x$influence.pstate)
 }                         
@@ -512,7 +512,7 @@ docurve2 <- function(entry, etime, status, istate, wt, states, id,
         for (j in seq_len(nstate)) 
             i0[who,j] <- (ifelse(istate[at.zero]==states[j], 1, 0) - p0[j])/wtsum
     }
-     
+
     storage.mode(cstate) <- "integer"
     storage.mode(status) <- "integer"
     # C code has 0 based subscripts

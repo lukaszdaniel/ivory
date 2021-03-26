@@ -139,7 +139,7 @@ psi.bisquare(u, c = 4.685, deriv = 0)
   Note that the \code{df.residual} component is deliberately set to
   \code{NA} to avoid inappropriate estimation of the residual scale from
   the residual mean square by \code{"lm"} methods.
-  
+
   The additional components not in an \code{lm} object are
 
   \item{s}{

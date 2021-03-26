@@ -27,7 +27,7 @@
 
    https://www.unicode.org/Public/UCD/latest/ucd/UnicodeData.txt
    (described in http://www.unicode.org/L2/L1999/UnicodeData.html)
-   
+
    with the help of Marcus Kuhn's 'uniset' Perl script
    (https://www.cl.cam.ac.uk/~mgk25/download/uniset.tar.gz: update the
    tables it contains to current Unicode) and some ideas are mentioned
@@ -783,7 +783,7 @@ static const int table_wdigit_count =
 
    The iswgraph function tests for any wide character for which
    iswprint is true and iswspace is false
-   
+
    glibc has
 
     return (UNICODE_ATTRIBUTES[code_point]['name']

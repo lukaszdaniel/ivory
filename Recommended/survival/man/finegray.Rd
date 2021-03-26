@@ -77,7 +77,7 @@ finegray(formula, data, weights, subset, na.action= na.pass, etype,
   the 3 intervals 50-60, 60-70, and 80-100, but because the middle
   interval does not span any event times the subsequent Cox model will
   never use that row.  The \code{finegray} output omits such rows.
-  
+
   See the competing risks vignette for more details.
 }
 \value{a data frame}

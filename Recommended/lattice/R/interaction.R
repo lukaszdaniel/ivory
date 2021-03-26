@@ -216,7 +216,7 @@ panel.identify.cloud <-
 
     if (length(subscripts) == 0)  ## nothing to do
         return (integer(0))
-    
+
     xlabelinfo <-
         calculateAxisComponents(xlim,
                                 at = scales.3d$x$at,
@@ -404,7 +404,7 @@ trellis.focus <-
     trellis.unfocus()
     if (!missing(prefix)) lattice.setStatus(current.prefix = prefix)
     else prefix <- lattice.getStatus("current.prefix")
-    
+
     if (missing(name) && missing(column) && missing(row))
         return(trellis.clickFocus(clip.off = clip.off,
                                   highlight = highlight,

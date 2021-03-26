@@ -26,7 +26,7 @@ survfit.matrix <- function(formula, p0, method=c("discrete", "matexp"),
             stop("input must be a square matrix of survival curves")
     if (sum(nonzero) < 2)
         stop("input must have at least 2 transitions")
- 
+
     classes <- lapply(curves, class)
     # Make sure we were sent the right things.  If any of the curves inherit
     #  from "survfitms", they are the result of a prior AJ computation;
@@ -61,13 +61,13 @@ survfit.matrix <- function(formula, p0, method=c("discrete", "matexp"),
         else if (temp[1] > start.time) 
             warning("curves have a larger start.time than the parameter, start.time parameter value was ignored")
     } 
-        
+
     if (missing(method)) {
         if (type=='survfit.cox') method <- "matexp"
         else method <- "discrete"
     }
     else method <- match.arg(method)
-    
+
     if (missing(p0)) p0 <- c(1, rep(0, nstate-1))
     if (!is.matrix(p0)) p0 <- matrix(rep(p0, ncurve), ncol=nstate, byrow=TRUE)
     else if (nrow(p0) != ncurve) stop("wrong number of rows for p0")
@@ -84,7 +84,7 @@ survfit.matrix <- function(formula, p0, method=c("discrete", "matexp"),
         jumps <- matrix(unlist(lapply(cumhaz, function(x) diff(c(0, x)))),
                         ncol= sum(nonzero))
         Tmat <- diag(nstate)
-        
+
         # deal with the start time argument
         if (is.null(start.time)) stime <- min(c(0, utime))
         else stime <- start.time
@@ -132,7 +132,7 @@ survfit.matrix <- function(formula, p0, method=c("discrete", "matexp"),
         list(n = z[[1]]$n, time = utime, pstate= pstate, 
              n.risk= n.risk, n.event=n.event)
     }
-        
+
     # The output will have nstate columns, one for each state, and 
     #  prod(dim(curves)) strata.  If the input has strata and
     #  columns, the output strata will repeat the original strata, once
@@ -159,7 +159,7 @@ survfit.matrix <- function(formula, p0, method=c("discrete", "matexp"),
             }
         }
     }
-        
+
     fit <- list()
     fit$n <- tlist[[1]]$n
     fit$time <- unlist(lapply(tlist, function(x) x$time))

@@ -27,7 +27,7 @@ royston <- function(fit, newdata, ties=TRUE, adjust=FALSE) {
     # score to which it matches
     if (ties && any(duplicated(eta))) {
         z <- qnorm((1:n - 3/8)/(n + .25))
-        
+
         # per the paper, take the average z over any ties
         index1 <- match(eta, sort(unique(eta)))
         index2 <- rank(eta, ties.method='first')

@@ -765,7 +765,7 @@ namespace eval ::Widget::Hierarchy {;
     } else {
 	set xcnp [lrange $cnp 1 end]
     }
-    
+
     # Run through the children, recursively calculating their usage of
     # stack real-estate, and allocating an intial placement for each child
     #
@@ -868,12 +868,12 @@ namespace eval ::Widget::Hierarchy {;
 	set knp "$np [list $k]"
 	set kid_stkpos [expr {$stkpos+$data(:$knp,offset)}]
 	Redraw_aux $w $knp $kid_deppos $kid_stkpos
-	
+
 	if {$data(-decoration)} {
 	    if {$kid_stkpos<$minkid_stkpos} {set minkid_stkpos $kid_stkpos}
 	    set kid_stkpos [expr {$kid_stkpos+$data(:$knp,stack)/2}]
 	    if {$kid_stkpos>$maxkid_stkpos} {set maxkid_stkpos $kid_stkpos}
-	    
+
 	    $c create line $bar_deppos $kid_stkpos $kid_deppos $kid_stkpos \
 		    -width 1 -tags decor
 	}

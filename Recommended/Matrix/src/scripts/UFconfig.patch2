@@ -3,7 +3,7 @@
 @@ -44,6 +44,10 @@
  #include <limits.h>
  #include <stdlib.h>
- 
+
 +// For use with R package 'Matrix'
 +#include <R_ext/Print.h>
 +#define printf Rprintf

@@ -44,7 +44,7 @@ obvious way.
 Suppose that our model was \code{coxph(Surv(time, status) ~ age*sex + ph.ecog)}.
 Someone might want the population matrix for age, sex, ph.ecog, or age+ sex.
 For the last it doesn't matter if they say age+sex, age*sex, or age:sex.
-  
+
 <<yates>>=
 cmatrix <- function(fit, term, 
                     test =c("global", "trend", "pairwise", "mean"),
@@ -78,7 +78,7 @@ cmatrix <- function(fit, term,
     indx <- match(termname, all.vars(Tatt$variables))
     if (any(is.na(indx))) 
         stop("variable ", termname[is.na(indx)], " not found in the formula")
-    
+
     # What kind of term is being tested?  It can be categorical, continuous,
     #  an interaction of only categorical terms, interaction of only continuous
     #  terms, or a mixed interaction.
@@ -158,7 +158,7 @@ cmatrix <- function(fit, term,
         if (any(is.na(temp)))
             stop("invalid level for term", termname[i])
     }
-    
+
     rval <- list(levels=levels, termname=termname)
     # Now add the contrast matrix between the levels, if needed
     if (test=="global") {
@@ -313,7 +313,7 @@ estfun <- function(cmat, beta, varmat) {
              var = cmat %*% varmat %*% t(cmat))
     }
 }
-             
+
 testfun <- function(cmat, beta, varmat, sigma2) {
     nabeta <- is.na(beta)
     if (any(nabeta)) {

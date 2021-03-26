@@ -41,7 +41,7 @@ Sys.Date()
   string.
 
   \code{\link{Sys.timezone}}.
-  
+
   \code{\link{system.time}} for measuring elapsed/CPU time of expressions.
 }
 \examples{\donttest{

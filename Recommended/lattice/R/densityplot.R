@@ -253,9 +253,9 @@ densityplot.formula <-
     darg$to <- to
     darg$cut <- cut
     darg$na.rm <- na.rm
-    
+
     ## Step 1: Evaluate x, y, etc. and do some preprocessing
-    
+
     form <-
         latticeParseFormula(formula, data, subset = subset,
                             groups = groups, multiple = allow.multiple,
@@ -310,7 +310,7 @@ densityplot.formula <-
     foo <- c(foo, do.call("construct.scales", scales))
 
     ## Step 3: Decide if limits were specified in call:
-    
+
     have.xlim <- !missing(xlim)
     if (!is.null(foo$x.scales$limits)) {
         have.xlim <- TRUE
@@ -333,7 +333,7 @@ densityplot.formula <-
             if (is.logical(xlog)) 10
             else if (is.numeric(xlog)) xlog
             else if (xlog == "e") exp(1)
-        
+
         x <- log(x, xbase)
         if (have.xlim) xlim <- logLimits(xlim, xbase)
     }

@@ -40,7 +40,7 @@
   the same behavior as on Linux, which may be a good thing for testing (C++
   destructors not called on long jumps), also it could be faster.
 */
-   
+
 #if defined(__MINGW64__)
   #undef setjmp
   #ifdef _UCRT

@@ -103,7 +103,7 @@ agexact.fit <- function(x, y, strata, offset, init, control,
         resid <- double(n)
         resid[sorted] <- agres$resid
         names(resid) <- rownames
- 
+
         rval <- list(coefficients  = coef,
                      var    = var,
                      loglik = agfit$loglik,

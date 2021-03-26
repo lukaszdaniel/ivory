@@ -119,7 +119,7 @@ pade <- function(A, deriv) {
         else if (s>0) for (t in 1:s) {
                  X <- X %*% X
         }
-        
+
     }
     if (nderiv > 0) list(P=X, dmat=dmat)
     else X

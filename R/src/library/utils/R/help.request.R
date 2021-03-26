@@ -105,11 +105,11 @@ help.request <- function (subject = "", address = "r-help@R-project.org",
     	}
     } else
     	warning("Unable to connect to CRAN to check R version.")
-    
+
     if ("otherPkgs" %in% names(inf)) {
         checkPkgs(inf$otherPkgs)
     }
-    
+
     ## A long prompt!
     code <- askYesNo(paste0("Have you written example code that is\n",
 	" - minimal\n - reproducible\n - self-contained\n - commented",

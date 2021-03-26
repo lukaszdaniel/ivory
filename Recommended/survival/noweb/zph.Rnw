@@ -69,7 +69,7 @@ cox.zph <- function(fit, transform='km', terms=TRUE, singledf =FALSE,
     # if terms==FALSE the singledf argument is moot, but setting a value
     #   leads to a simpler path through the code
     if (!terms) singledf <- FALSE 
-    
+
     <<zph-setup>>
     <<zph-transform>>
     <<zph-terms>>
@@ -152,7 +152,7 @@ term.
   \item frailties and penalized coxme coefficients are ignored: remove
     their element from the asgn list
 \end{itemize} 
-   
+
 For random effects models, including both frailty and coxme results, the
 random effect is included in the linear.predictors component of the 
 fit.  This allows us to do score tests for the other terms while effectively
@@ -179,7 +179,7 @@ else if (inherits(fit, "coxme")) {
         eta <- fit$linear.predictor
 }
 else   asgn <- fit$assign
-    
+
 if (!is.list(asgn)) stop ("unexpected assign component")
 
 frail <- grepl("frailty(", names(asgn), fixed=TRUE)
@@ -318,7 +318,7 @@ for (i in asgn) {
     if (length(i) > 1 && any(used[,i] ==0)) 
         used[,i] <- apply(used[,i,drop=FALSE], 1, max)
 }
-    
+
 # Make the weight matrix
 wtmat <- matrix(0, nvar, nvar)
 for (i in seq_len(nrow(used)))

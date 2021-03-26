@@ -32,7 +32,7 @@ motors
   Kalbfleisch, J. D. and Prentice, R. L. (1980)
   \emph{The Statistical Analysis of Failure Time Data.}
   New York: Wiley.
-  
+
   taken from
 
   Nelson, W. D. and Hahn, G. J. (1972)

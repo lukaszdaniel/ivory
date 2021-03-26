@@ -57,10 +57,10 @@ survcheck <- function(formula, data, subset, na.action,  id, istate,
     if (!is.logical(timefix) || length(timefix) > 1)
         stop("invalid value for timefix option")
     if (timefix) Y <- aeqSurv(Y)
-    
+
     if (is.null(id)) stop("an id argument is required")
     else if (length(id) !=n) stop("wrong length for id")
-     
+
     if (!is.null(istate) && length(istate) !=n) stop("wrong length for istate")
 
     fit <- survcheck2(Y, id, istate, istate0)
@@ -132,7 +132,7 @@ survcheck2 <- function(y, id, istate=NULL, istate0="(s0)") {
         any(y[,ncol(y)] > length(attr(y, "states"))))
         stop("survcheck2 called with an invalid y argument")
     to.names <- c(attr(y, "states"), "(censored)")
- 
+
     if (length(istate)==0) {
         inull<- TRUE
         cstate <- factor(rep(istate0, n))
@@ -218,7 +218,7 @@ survcheck2 <- function(y, id, istate=NULL, istate0="(s0)") {
     #  uses "last state carried forward" in Cmultistate, which also
     #  sets the "gap" to 0 for the first obs of a subject
     mismatch <- (as.numeric(cstate2) != check$cstate)
-                 
+
     # gap = 0   (0, 10], (10, 15]
     # gap = 1   (0, 10], (12, 15]  # a hole in the time
     # gap = -1  (0, 10], (9, 15]   # overlapping times
@@ -230,7 +230,7 @@ survcheck2 <- function(y, id, istate=NULL, istate0="(s0)") {
     rval <- list(states=states, transitions=transitions,
                  events= t(events), flag=flag, 
                  istate= factor(check$cstate, seq(along=states), states))
- 
+
     # add error details, if necessary
     if (flag["overlap"] > 0) {
         j <- which(check$gap < 0)
@@ -251,4 +251,4 @@ survcheck2 <- function(y, id, istate=NULL, istate0="(s0)") {
 
     rval
 }
-    
+

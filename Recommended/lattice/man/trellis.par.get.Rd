@@ -123,7 +123,7 @@ show.settings(x = NULL)
   and
 
   \code{trellis.par.set(add.line = list(col = "red"))}
-  
+
 
   The actual list of the components in \code{trellis.settings} has not
   been finalized, so I'm not attempting to list them here. The current
@@ -154,7 +154,7 @@ show.settings(x = NULL)
   Most of the settings are graphical parameters that control various
   elements of a lattice plot.  For details, see the examples below.  The
   more unusual settings are described here.
-  
+
   \describe{
     \item{grid.pars}{ Grid graphical parameters that are in effect
       globally unless overridden by specific settings.}

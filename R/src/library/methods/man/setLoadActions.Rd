@@ -91,7 +91,7 @@ evalqOnLoad(expr, where=, aname=)
   assigned have metadata names constructed from the names supplied in the
   call; unnamed arguments are taken to be named by their position in the
   list of actions (\code{".1"}, etc.).
-  
+
   Multiple calls to \code{setLoadAction()} or \code{setLoadActions()}
   can be used in a package's code; the actions will be scheduled after any
   previously specified, except if the name given to \code{setLoadAction()}

@@ -10,7 +10,7 @@
 \description{
   Compute a lagged version of a time series, shifting the time base
   back by a given number of observations.
-  
+
   \code{lag} is a generic function; this page documents its default
   method.
   }

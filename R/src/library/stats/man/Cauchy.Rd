@@ -36,11 +36,11 @@ rcauchy(n, location = 0, scale = 1)
   the density, distribution function and quantile function of the Cauchy
   distribution.  \code{rcauchy} generates random deviates from the
   Cauchy.
-  
+
   The length of the result is determined by \code{n} for
   \code{rcauchy}, and is the maximum of the lengths of the
   numerical arguments for the other functions.  
-  
+
   The numerical arguments other than \code{n} are recycled to the
   length of the result.  Only the first elements of the logical
   arguments are used.    

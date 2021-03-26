@@ -55,7 +55,7 @@
   If \code{se.fit = FALSE}, a vector or matrix of predictions.
   For \code{type = "terms"} this is a matrix with a column per term, and
   may have an attribute \code{"constant"}.
-  
+
   If \code{se.fit = TRUE}, a list with components
   \item{fit}{Predictions, as for \code{se.fit = FALSE}.}
   \item{se.fit}{Estimated standard errors.}

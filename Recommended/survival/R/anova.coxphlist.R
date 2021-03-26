@@ -8,7 +8,7 @@ anova.coxphlist <- function (object, test =  'Chisq' ,...) {
 
     is.robust <- sapply(object, function(x) !is.null(x$rscore))
     if (any(is.robust)) stop("Can't do anova tables with robust variances")
-    
+
     ties <- sapply(object, function(x) x$method)
     if (any(ties != ties[1]))
         stop("all models must have the same ties option")

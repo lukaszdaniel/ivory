@@ -59,7 +59,7 @@ survregDtest <- function(dlist, verbose=F) {
 	         errlist <- c(errlist, 
 			     gettext("density function must return a 5 column matrix"))
 	    }
-	
+
 	if (!is.function(dlist$quantile))
 	    errlist <- c(errlist, gettextf("missing or invalid '%s' function", "quantile"))
 	}

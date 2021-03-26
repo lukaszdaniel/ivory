@@ -43,7 +43,7 @@ fdata$age2 <- cut(fdata$age, c(0,54, 59,64, 69,74,79, 89, 110),
 fdata$group <- factor(1+ 1*(fdata$flc.grp >7) + 1*(fdata$flc.grp >9),
                       levels=1:3, 
                       labels=c("FLC < 3.38", "3.38 - 4.71", "FLC > 4.71"))
-		      
+
 sfit1 <- survfit(Surv(futime, death) ~ group, fdata)
 plot(sfit1, mark.time=F, col=c(1,2,4), lty=1, lwd=2,
      xscale=365.25, xlab="Years from Sample", 

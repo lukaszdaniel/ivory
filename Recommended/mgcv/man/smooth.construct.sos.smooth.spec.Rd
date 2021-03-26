@@ -15,7 +15,7 @@ Wendelberger's (1981) method. \code{m = -1} results in a \code{\link{Duchon.spli
 used (with m=2 and s=1/2), following an unpublished suggestion of Jean Duchon.
 
 \code{k} (default 50) is the basis dimension.
- 
+
 
 }
 
@@ -64,7 +64,7 @@ contour plot. lat, lon gridlines are also plotted.
 
 \code{scheme==1} is as \code{scheme==0}, but in black and white, without the image plot. \code{scheme>1} calls the default 
 plotting method with \code{scheme} decremented by 2.
- 
+
 }
 \seealso{\code{\link{Duchon.spline}}}
 

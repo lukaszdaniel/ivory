@@ -162,7 +162,7 @@ mfit3  <- survfit(Surv(t1, t2, st) ~ 1, tdata, id=id, istate=i0,
                   weights=wt, influence=TRUE)
 aeq(mfit3$p0, p0(1:10)[swap])
 aeq(mfit3$pstate, dopstate(1:10)[,swap])
-    
+
 
 # The derivative of a matrix product AB is (dA)B + A(dB) where dA is the
 #  elementwise derivative of A and etc for B.
@@ -184,7 +184,7 @@ dp0 <- function(w) {
         c(0, 1, 0, 0) - p)/   # subject 5 affects p[2]
       sum(w0)
 }
-  
+
 
 dp2 <- function(w) {
     h2 <- aj2(w)   # H matrix at time 2
@@ -269,7 +269,7 @@ temp[indx1, indx2] <- mfit3$transitions[, indx2>0]
 # temp is an nstate by nstate version of the transitions matrix
 from <- row(temp)[temp>0]
 to   <- col(temp)[temp>0]
- 
+
 all.equal(colnames(mfit3$cumhaz), paste(from, to, sep='.'))
 
 

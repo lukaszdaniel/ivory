@@ -80,7 +80,7 @@ aareg <- function(formula, data, weights, subset, na.action,
     type <- attr(Y, "type")
     if (type!='right' && type!='counting')
 	stop(gettextf("Aalen model doesn't support \"%s\" survival data", type))
-   
+
     # Get the peices that I need from the coxdetail routine
     #  1. It expects a "counting process" type of Y
     if (ncol(Y)==2) {
@@ -147,7 +147,7 @@ aareg <- function(formula, data, weights, subset, na.action,
         }
     if (ndeath<=1) 
 	    stop("The threshold 'nmin' is too high, no model can be fit")
-    
+
     # This matches the death times in the data set to the
     #  sorted list of unique death times.  "0" = not a death 
     index <- match(times, dt$time[seq_len(ndeath)], nomatch=0) * status
@@ -213,7 +213,7 @@ aareg <- function(formula, data, weights, subset, na.action,
 		test.dfbeta <- cbind(apply(temp0*twt[,1], 2, sum),
 				     apply(temp1*twt[,2], 2, sum))
 		}
-		
+
             # Now collapse dfbeta, first on the deaths, and then on the cluster
             if (nevent > ndeath) {
                 temp1 <- rowsum(temp1, times[deaths], reorder=FALSE)
@@ -243,7 +243,7 @@ aareg <- function(formula, data, weights, subset, na.action,
 	    test.var[1,2] <- test.var[2,1] <- sum(temp[,1]*temp[,2])
 	    }
 	}
-    
+
     else { # 2 or more covariates
 	coefficient <- matrix(0,nevent, nvar)
 	twt <-  matrix(0, nevent, nvar+1)

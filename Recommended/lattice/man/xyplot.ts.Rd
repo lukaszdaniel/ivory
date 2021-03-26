@@ -124,7 +124,7 @@
   The \code{screens} argument can be specified in a similar way.
 
   %% TODO: explain details of style settings, groups, etc?
-  
+
   Some examples are given below.
 }
 

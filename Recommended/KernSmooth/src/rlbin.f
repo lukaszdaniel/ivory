@@ -43,7 +43,7 @@ c        Find integer part of "lxi"
             xcnts(1) = xcnts(1) + 1
             ycnts(1) = ycnts(1) + y(i)
          endif      
-  
+
          if (li.ge.M.and.trun.eq.0) then 
                xcnts(M) = xcnts(M) + 1
                ycnts(M) = ycnts(M) + y(i)

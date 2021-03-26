@@ -442,7 +442,7 @@ void get_detS2(double *sp,double *sqrtS, int *rSncol, int *q,int *M, int * deriv
     for (p=R,p1=R + *q * r;p<p1;p++) *p=0.0; /* clear R */
     for (i=0;i<r;i++) for (j=i;j<*q;j++) R[i + pivot[j] * r] = Sb[i + j * Q]; 
 
- 
+
   /* Form the sum over the elements in gamma1, Sg */
 
     for (p=Sg,p1=p + *q * Q;p<p1;p++) *p=0.0; /* clear Sg */

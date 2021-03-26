@@ -64,7 +64,7 @@ tar(tarfile, files = NULL,
   not be used.)
   For libarchive's \command{bsdtar}, \option{--format=ustar} is more
   portable than the default.
-  
+
   %% This uses -T, not supported by Solaris nor Heirloom Toolchest.
   One issue which can cause an external command to fail is a command
   line too long for the system shell: as from \R 3.5.0 this is worked
@@ -149,7 +149,7 @@ tar(tarfile, files = NULL,
   (10KB).  Implementations which pad differ on whether the block padding
   should occur before or after compression (or both): padding was
   designed for improved performance on physical tape drives.
-  
+
   The \sQuote{ustar} format records file modification times to a
   resolution of 1 second: on file systems with higher resolution it is
   conventional to discard fractional seconds.
@@ -166,7 +166,7 @@ tar(tarfile, files = NULL,
   \option{--lz4}, \option{--lzop} and \option{--lrzip} or an external
   compressor \emph{via} \code{--use-compress-program lz4}: these could
   be supplied in \code{extra_flags}.
-  
+
   NetBSD prior to 8.0 used flag \option{--xz} rather than \option{-J},
   so this should be used \emph{via} \code{extra_flags = "--xz"} rather
   than \code{compression = "xz"}.  The commands from OpenBSD and the

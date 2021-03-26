@@ -43,15 +43,15 @@ rnorm(n, mean = 0, sd = 1)
   \code{pnorm} gives the distribution function,
   \code{qnorm} gives the quantile function, and
   \code{rnorm} generates random deviates.
-  
+
   The length of the result is determined by \code{n} for
   \code{rnorm}, and is the maximum of the lengths of the
   numerical arguments for the other functions.  
-  
+
   The numerical arguments other than \code{n} are recycled to the
   length of the result.  Only the first elements of the logical
   arguments are used.
-  
+
   For \code{sd = 0} this gives the limit as \code{sd} decreases to 0, a
   point mass at \code{mu}.
   \code{sd < 0} is an error and returns \code{NaN}.

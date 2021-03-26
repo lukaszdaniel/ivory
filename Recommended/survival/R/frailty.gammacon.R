@@ -8,7 +8,7 @@ frailty.gammacon <- function(d, nu) {
     maxd <- max(d)
     if (nu > 1e7*maxd) term1 <- sum(d*d)/nu  #second order Taylor series
     else               term1 <- sum(d + nu*log(nu/(nu+d)))  #easy part
-   
+
     tbl <- table(factor(d[d>0], levels = seq_len(maxd)))
     ctbl<- rev(cumsum(rev(tbl)))   
     dlev<- seq_len(maxd)

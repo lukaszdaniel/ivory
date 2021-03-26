@@ -35,7 +35,7 @@ isClassUnion(Class)
       union, as shown in the example below. Class unions can be
       members of other class unions.
 
- 
+
   Class unions are the only way to create a new superclass of
       a class whose definition is sealed.  The namespace of all
       packages is sealed when the package is loaded, protecting the

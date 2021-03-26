@@ -72,7 +72,7 @@ b <- bam(y ~ s(x0,bs=bs,k=k)+s(x1,bs=bs,k=k)+s(x2,bs=bs,k=k)+
 b1 <- bam.update(b,dat1)
 
 b2 <- bam.update(bam.update(b,dat1[1:500,]),dat1[501:1000,])
- 
+
 b3 <- bam(y ~ s(x0,bs=bs,k=k)+s(x1,bs=bs,k=k)+s(x2,bs=bs,k=k)+
            s(x3,bs=bs,k=k),data=dat,method=method)
 b1;b2;b3

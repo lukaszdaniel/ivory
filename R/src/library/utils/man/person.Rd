@@ -164,7 +164,7 @@ person(given = NULL, family = NULL, middle = NULL,
   information), and be displayed as the corresponding URIs by the
   \code{print()} and \code{format()} methods (see \bold{Examples}
   below).
-  
+
 }
 \seealso{
   \code{\link{citation}}

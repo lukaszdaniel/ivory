@@ -43,7 +43,7 @@ stacker <- function(cmap, smap, istate, X, Y, strata, states) {
     for (i in 1:nblock) {
         n.perblock[i] <- sum(istate == from.state[i]) # can participate
     }
-    
+
     # The constructed X matrix has a block of rows for each column of cmap
     n2 <- sum(n.perblock)  # number of rows in new data
     newX <- matrix(0, nrow=n2, ncol=max(cmap))
@@ -61,7 +61,7 @@ stacker <- function(cmap, smap, istate, X, Y, strata, states) {
             nc <- nc[1:Xcols]
         }
         newX[nr, nc[nc>0]] <- X[subject, which(nc>0)] # row of cmap= col of X
-        
+
         event.that.counts <- (endpoint[subject] == to.state[i])
         newstat[nr] <- ifelse(event.that.counts, 1L, 0L)
         k <- max(nr)
@@ -105,7 +105,7 @@ stacker <- function(cmap, smap, istate, X, Y, strata, states) {
         temp <- mult * newstrat + ifelse(smap[2,transition]==0, 0L, strata[rindex] -1L)
         newstrat <- match(temp, sort(unique(temp)))
     }       
- 
+
     # give variable names to the new data  (some names get used more than once)
 #    vname <- rep("", ncol(newX))
 #    vname[cmap[cmap>0]] <- colnames(X)[row(cmap)[cmap>0]]

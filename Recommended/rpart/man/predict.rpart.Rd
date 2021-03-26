@@ -52,7 +52,7 @@
   For regression trees this is the mean response at the node, for Poisson
   trees it is the estimated response rate, and for classification trees
   it is the predicted class (as a number).
-  
+
   If \code{type = "prob"}:\cr
   (for a classification tree) a matrix of class probabilities.
 

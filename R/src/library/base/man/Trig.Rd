@@ -56,7 +56,7 @@ tanpi(x)
   All except \code{atan2} are \link{internal generic} \link{primitive}
   functions: methods can be defined for them individually or via the
   \code{\link[=S3groupGeneric]{Math}} group generic.
-  
+
   These are all wrappers to system calls of the same name (with prefix
   \code{c} for complex arguments) where available.  (\code{cospi},
   \code{sinpi}, and \code{tanpi} are part of a C11 extension
@@ -109,7 +109,7 @@ tanpi(x)
   For \code{cospi}, \code{sinpi}, and \code{tanpi} the C11 extension
   ISO/IEC TS 18661-4:2015 (draft at
   \url{http://www.open-std.org/jtc1/sc22/wg14/www/docs/n1950.pdf}).
-  
+
 }
 \examples{
 x <- seq(-3, 7, by = 1/8)

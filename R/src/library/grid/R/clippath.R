@@ -37,7 +37,7 @@ resolvedClipPath.GridResolvedClipPath <- function(path, ref) {
 unresolveClipPath <- function(path) {
     UseMethod("unresolveClipPath")
 }
-    
+
 ## Unresolved clipPaths just pass through
 unresolveClipPath.GridClipPath <- function(path) {
     path

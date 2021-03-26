@@ -29,7 +29,7 @@ byhand <- function(beta, newx=0) {
               cumsum(hazard)[4:5])
     risk <- c(r^2, 1,r,r,1,r,1,r,1)
     expected <- risk* temp[c(1,1,2,2,2,3,3,4,4)]
-    
+
     # The matrix of weights, one row per obs, one col per death
     #   deaths at 1,2,2,2, and 4
     riskmat <- matrix(c(1,1,1,1,1,1,1,1,1,

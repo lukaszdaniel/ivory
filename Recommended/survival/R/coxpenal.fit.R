@@ -86,7 +86,7 @@ coxpenal.fit <- function(x, y, strata, offset, init, control,
 	pcols <- pcols[temp]
 	pattr <- pattr[temp]
 	}
-    
+
     # ptype= 1 or 3 if a sparse term exists, 2 or 3 if a non-sparse exists
     ptype <- any(sparse) + 2*(any(!sparse))
 
@@ -138,7 +138,7 @@ coxpenal.fit <- function(x, y, strata, offset, init, control,
 	    coxlist1
         }
         if (!is.null(getOption("survdebug"))) debug(f.expr1)
-        
+
 	coxlist1 <- list(coef=double(nfrail), first=double(nfrail), 
 			 second=double(nfrail), penalty=0.0, flag=FALSE)
         ## we pass f.expr1 in as an argument in R
@@ -265,7 +265,7 @@ coxpenal.fit <- function(x, y, strata, offset, init, control,
 	    if (any(is.na(temp))) stop(gettextf("%s was not matched", (cargs[[i]])[is.na(temp)]))
 	    if (sparse[i]) temp4 <- paste(temp2b[temp], collapse=',')
 	    else           temp4 <- paste(temp3b[temp], collapse=',')
-	    
+
 	    calls[i] <- parse(text=paste(paste(tempchar,temp4,sep=','),')'))
 	    }
         }
@@ -400,7 +400,7 @@ coxpenal.fit <- function(x, y, strata, offset, init, control,
 	    else 	  temp1 <- 0
 	    if (ptype>1)  temp2 <- coxlist2$second
 	    else          temp2 <- 0
-					
+
 	    dftemp <-coxpenal.df(matrix(coxfit$hmat, ncol=nvar),  
 			         matrix(coxfit$hinv, ncol=nvar), fdiag, 
 				 assign, ptype, nvar,
@@ -455,7 +455,7 @@ coxpenal.fit <- function(x, y, strata, offset, init, control,
 	    thetasave <- cbind(thetasave, temp)
 	    }
         }
- 
+
    if (nfrail >0) {
        lp <- offset + coxfit$fcoef[frailx]
        	if (nvar >0)    #sparse frailties and covariates
@@ -493,7 +493,7 @@ coxpenal.fit <- function(x, y, strata, offset, init, control,
 	else 	      temp1 <- 0
 	if (ptype>1)  temp2 <- coxlist2$second
 	else          temp2 <- 0
-					
+
 	dftemp <-coxpenal.df(matrix(coxfit$hmat,ncol=nvar),  
 			     matrix(coxfit$hinv,ncol=nvar),  fdiag, 
 		             assign, ptype, nvar, 
@@ -507,7 +507,7 @@ coxpenal.fit <- function(x, y, strata, offset, init, control,
     if (control$iter.max >1 && length(iterfail)>0)
 	    warning(gettextf("inner loop failed to coverge for iterations %s", paste(sQuote(iterfail), collapse = ", ")))
     which.sing <- (fdiag[nfrail + seq_len(nvar)] ==0)
-    
+
     coef <- coxfit$coef
     names(coef) <- varnames
     coef[which.sing] <- NA

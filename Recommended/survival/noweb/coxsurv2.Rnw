@@ -182,7 +182,7 @@ want the quadratic form $d_i V d_i'$.  The first matrix product can     %'
 be done for all rows at once: found in the inner parenthesis.
 Ordinary (not matrix) multiplication followed by rowsums does the rest
 in one fell swoop.
-    
+
 Now, if \code{id2} is missing we can simply apply the \code{expand} function
 to each strata.
 For the case with \code{id2} not missing, we create a single survival
@@ -237,10 +237,10 @@ else {
                 time[[i]] <- diff(c(y2[i,1], slist$time[indx])) #time increments
                 time[[i]][1] <- time[[i]][1] + timeforward
                 timeforward <- y2[i,2] - max(slist$time[indx])
-            
+
                 hazard[[i]] <- slist$hazard[indx]*risk2[i]
                 if (survtype==1) surv[[i]] <- slist$surv[indx]^risk2[i]
-                
+
                 n.event[[i]] <- slist$n.event[indx]
                 n.risk[[i]]  <- slist$n.risk[indx]
                 n.censor[[i]]<- slist$n.censor[indx]
@@ -384,7 +384,7 @@ agsurv <- function(y, x, wt, risk, survtype, vartype) {
         xin  <- apply(rowsum(wrisk*x, dtime), 2, rcumsum) # dtime or alive
         xsum  <- xin - (rbind(xout,0))[indx,,drop=F]
         }
-        
+
     ndeath <- rowsum(status, dtime)  #unweighted death count
 @ 
 
@@ -456,7 +456,7 @@ void agsurv4(Sint   *ndeath,   double *risk,    double *wt,
     int i,j,k, l;
     int n;  /* number of unique death times */
     double sumt, guess, inc;    
-    
+
     n = *sn;
     j =0;
     for (i=0; i<n; i++) {
@@ -531,7 +531,7 @@ void agsurv5(Sint *n2,     Sint *nvar2,  Sint *dd, double *x1,
     int i,j, k, kk;
     double d;
     int n, nvar;
-    
+
     n = n2[0];
     nvar = nvar2[0];
 

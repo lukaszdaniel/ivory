@@ -10,7 +10,7 @@ survexpmsetup <- function(rmat) {
     nc <- ncol(rmat)
     lower <- row(rmat) > col(rmat)
     if (all(rmat[lower] ==0))  return(0)  # already in order
-    
+
     # score each state by (number of states it follows) - (number it precedes)
     temp <- 1*(rmat >0) # 0/1 matrix
     indx <- order(colSums(temp) - rowSums(temp))
@@ -52,7 +52,7 @@ derivative <- function(rmat, time, dR, setup, eps=1e-8) {
     else dlist <- .Call(Ccdecomp, rmat[setup, setup], time)
     ncoef <- dim(dR)[3]
     nstate <- nrow(rmat)
-    
+
     dmat <- array(0.0, dim=c(nstate, nstate, ncoef))
     vtemp <- outer(dlist$d, dlist$d,
                    function(a, b) {
@@ -66,13 +66,13 @@ derivative <- function(rmat, time, dR, setup, eps=1e-8) {
         dmat[,,i] <- dlist$A %*% V %*% dlist$Ainv
     }
     dlist$dmat <- dmat
-    
+
     # undo the reordering, if needed
     if (setup[1] >0) {
         indx <- order(setup)
         dlist <- list(P = dlist$P[indx, indx],
                       dmat = apply(dmat,1:2, function(x) x[indx, indx]))
     }
-                      
+
     dlist
 }

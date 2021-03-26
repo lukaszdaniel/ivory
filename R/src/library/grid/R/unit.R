@@ -253,7 +253,7 @@ upgradeUnit.unit.arithmetic <- function(x) {
     if (inherits(arg1, "unit")) arg1 <- upgradeUnit(arg1)
     arg2 <- .subset2(x, "arg2")
     if (inherits(arg2, "unit")) arg2 <- upgradeUnit(arg2)
-    
+
     do.call(fun, list(arg1, arg2))
 }
 upgradeUnit.default <- function(x) {
@@ -317,7 +317,7 @@ Summary.unit <- function(..., na.rm=FALSE) {
     matchUnits <- .Call(C_matchUnit, x, ok)
     x <- unclass(x)
     nMatches <- length(matchUnits)
-    
+
     if (nMatches != 0) {
         data <- lapply(x, .subset2, 2L)
         amount <- vapply(x, .subset2, numeric(1), 1L)[matchUnits]

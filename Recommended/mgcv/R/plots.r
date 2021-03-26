@@ -137,7 +137,7 @@ qq.gam <- function(object, rep=0, level=.9,s.rep=10,
       }
       # n <- length(D)
       Dq <- quantile(as.numeric(dm),(seq_len(n) - .5)/n) 
-    
+
       ## now get simulation limits on QQ plot
       #dm <- matrix(d,length(Dq),rep)
       alpha <- (1-level)/2
@@ -161,7 +161,7 @@ qq.gam <- function(object, rep=0, level=.9,s.rep=10,
       Dq <- sort(rowMeans(dm))
     }
   }
- 
+
   if (!is.null(Dq))  
   { qqplot(Dq,D,ylab=ylab,xlab=gettext("theoretical quantiles", domain = "R-mgcv"), ylim=range(c(lim,D)),
            pch=pch,...)
@@ -186,7 +186,7 @@ k.check <- function(b,subsample=5000,n.rep=400) {
   m <- length(b$smooth)
   if (m==0) return(NULL)
   rsd <- residuals(b)
- 
+
   ve <- rep(0,n.rep)
   p.val<-v.obs <- kc <- edf<- rep(0,m)
   snames <- rep("",m)
@@ -316,7 +316,7 @@ gam.check <- function(b, old.style=FALSE,
           cat("\n", gettext("Model required no smoothing parameter selection", domain = "R-mgcv"), sep = "")
         else { 
           cat("\n", sprintf(ngettext(b$mgcv.conv$iter, "Smoothing parameter selection converged after %d iteration", "Smoothing parameter selection converged after %d iterations", domain = "R-mgcv"), b$mgcv.conv$iter), sep = "")
-         
+
           if (!b$mgcv.conv$fully.converged)
           cat(gettext(" by steepest\ndescent step failure.", domain = "R-mgcv"), "\n") else cat(".\n") #LUKI
           cat(gettextf("The RMS %s score gradient at convergence was %s.", b$method, b$mgcv.conv$rms.grad, domain = "R-mgcv"), "\n", sep = "")
@@ -351,7 +351,7 @@ plot.random.effect <- function(x,P=NULL,data=NULL,label="",se1.mult=1,se2.mult=2
                      ylim=NULL,xlim=NULL,too.far=0.1,shade=FALSE,shade.col="gray80",
                      shift=0,trans=I,by.resids=FALSE,scheme=0,...) {
 ## plot method for a "random.effect" smooth class
- 
+
   if (is.null(P)) { ## get plotting information...
     if (!x$plot.me) return(NULL) else { ## shouldn't or can't plot 
       raw <- data[x$term][[1]]
@@ -379,7 +379,7 @@ repole <- function(lo,la,lop,lap) {
   yp <- sin(lap)
   xp <- cos(lap)*sin(lop)
   zp <- cos(lap)*cos(lop)
-  
+
   ## x,y,z location of meridian point for pole - i.e. point lat pi/2
   ## from pole on pole's lon.
 
@@ -410,7 +410,7 @@ repole <- function(lo,la,lop,lap) {
   theta <- (1+cos(phi)^2-d^2)/(2*cos(phi))
   theta[theta < -1] <- -1; theta[theta > 1] <- 1
   theta <- acos(theta)
-  
+
   ## now decide which side of meridian plane...
 
   ## get points at extremes of hemispheres on either side
@@ -428,7 +428,7 @@ repole <- function(lo,la,lop,lap) {
 
   ii <- d0 < d1 ## index -ve lon hemisphere 
   theta[ii] <- -theta[ii]
-  
+
   list(lo=theta,la=phi)
 } ## end of repole
 
@@ -462,11 +462,11 @@ plot.sos.smooth <- function(x,P=NULL,data=NULL,label="",se1.mult=2,se2.mult=1,
   ## convert location of pole in plotting grid to radians
   phi <- phi*pi/180
   theta <- theta*pi/180
-  
+
   ## re-map to sensible values...
   theta <- theta%%(2*pi)
   if (theta>pi) theta <- theta - 2*pi
- 
+
   phi <- phi%%(2*pi)
   if (phi > pi) phi <- phi - 2*pi
   if (phi > pi/2) phi <- pi - phi
@@ -495,7 +495,7 @@ plot.sos.smooth <- function(x,P=NULL,data=NULL,label="",se1.mult=2,se2.mult=1,
     lo <- asin(gr$x[ind]/lo)
 
     um <- repole(lo,la,theta,phi)
- 
+
     dat <- data.frame(la=um$la*180/pi,lo=um$lo*180/pi)
     names(dat) <- x$term
     if (x$by!="NA") dat[[x$by]] <- la*0+1    
@@ -573,7 +573,7 @@ polys.plot <- function(pc,z=NULL,scheme="heat",lab="",...) {
 ## pc[[i]] is the 2 col matrix of vertex co-ords for polygons defining 
 ## boundary of area i
 ## z gives the value associated with the area
-  
+
   ## first find the axes ranges...
 
   for (i in seq_len(length(pc))) {
@@ -600,7 +600,7 @@ polys.plot <- function(pc,z=NULL,scheme="heat",lab="",...) {
        poly2(pc[[i]],col=NA)
      }
   } else {
-    
+
     nz <- names(z)
     npc <- names(pc)
     if (!is.null(nz)&&!is.null(npc)) { ## may have to re-order z into pc order.
@@ -614,7 +614,7 @@ polys.plot <- function(pc,z=NULL,scheme="heat",lab="",...) {
     n.col <- 100
     if (scheme=="heat") scheme <- heat.colors(n.col+1) else 
     scheme <- gray(0:n.col/n.col)
-   
+
     zlim <- range(pretty(z))
 
     ## Now want a grey or color scale up the lhs of plot
@@ -622,14 +622,14 @@ polys.plot <- function(pc,z=NULL,scheme="heat",lab="",...) {
 
     for (i in seq_len(length(pc))) pc[[i]][,2] <- zlim[1] + 
          (zlim[2]-zlim[1])*(pc[[i]][,2]-ylim[1])/(ylim[2]-ylim[1])
-  
+
     ylim <- zlim
     plot(0,0,ylim=ylim,xlim=xlim,type="n",xaxt="n",bty="n",xlab="",ylab=lab,...)
     for (i in seq_len(length(pc))) {
       coli <- round((z[i] - zlim[1])/(zlim[2]-zlim[1])*n.col)+1    
       poly2(pc[[i]],col=scheme[coli])
     }
-  
+
     ## now plot the scale bar...
 
     xmin <- min(c(axTicks(1),xlim[1]))
@@ -768,7 +768,7 @@ plot.mgcv.smooth <- function(x,P=NULL,data=NULL,label="",se1.mult=2,se2.mult=1,
     do.call("plot",args)
 
     cs<-(yr/10)/strheight(zlab);if (cs>1) cs<-1 # text scaling based on height  
-  
+
     tl<-strwidth(zlab);  
     if (tl*cs>3*xr/10) cs<-(3*xr/10)/tl  
     args <- as.list(substitute(list(...)))[-1]
@@ -781,7 +781,7 @@ plot.mgcv.smooth <- function(x,P=NULL,data=NULL,label="",se1.mult=2,se2.mult=1,
     if (!"axes"%in%n.args) args$axes <- FALSE
     if (!"add"%in%n.args) args$add <- TRUE
     do.call("contour",args)
-  
+
     if (is.null(args$cex.main)) cm <- 1 else cm <- args$cex.main
     if (titleOnly)  title(zlab,cex.main=cm) else 
     { xpos<-xrange[1]+3*xr/10  
@@ -814,7 +814,7 @@ plot.mgcv.smooth <- function(x,P=NULL,data=NULL,label="",se1.mult=2,se2.mult=1,
     zz <- trans(z - zse+shift)
     args$z<-substitute(zz)
     do.call("contour",args)
-    
+
     if (!titleOnly) {
       xpos<-xrange[2]-xr/5  
       xl<-c(xpos,xpos+xr/10);  
@@ -940,7 +940,7 @@ plot.mgcv.smooth <- function(x,P=NULL,data=NULL,label="",se1.mult=2,se2.mult=1,
           }
         }
         ylimit <- if (is.null(ylim)) ylimit <- trans(ylimit + shift) else ylim
-         
+
         ## plot the smooth... 
         if (shade) { 
           plot(P$x,trans(P$fit+shift),type="n",xlab=P$xlab,ylim=ylimit,
@@ -959,7 +959,7 @@ plot.mgcv.smooth <- function(x,P=NULL,data=NULL,label="",se1.mult=2,se2.mult=1,
             lines(P$x,trans(ll+shift),...)
           }
         } ## ... smooth plotted
-       
+
         if (partial.resids&&(by.resids||x$by=="NA")) { ## add any partial residuals
           if (length(P$raw)==length(P$p.resid)) {
             if (is.null(list(...)[["pch"]]))
@@ -969,7 +969,7 @@ plot.mgcv.smooth <- function(x,P=NULL,data=NULL,label="",se1.mult=2,se2.mult=1,
             warning("Partial residuals do not have a natural x-axis location for linear functional terms")
           }
         } ## partial residuals finished 
-	 
+
         if (rug) { 
           if (jit) rug(jitter(as.numeric(P$raw)),...)
           else rug(as.numeric(P$raw),...)
@@ -1012,7 +1012,7 @@ plot.mgcv.smooth <- function(x,P=NULL,data=NULL,label="",se1.mult=2,se2.mult=1,
           if (partial.resids) ylimit <- range(P$p.resid,na.rm=TRUE) else ylimit <-range(P$fit)
         }
         ylimit <- if (is.null(ylim)) ylimit <- trans(ylimit + shift) else ylim
-        
+
         plot(P$x,trans(P$fit+shift),type="l",xlab=P$xlab,
              ylab=P$ylab,ylim=ylimit,xlim=P$xlim,main=P$main,...)
         if (rug) { 
@@ -1210,12 +1210,12 @@ plot.gam <- function(x,residuals=FALSE,rug=NULL,se=TRUE,pages=0,select=NULL,scal
   if (all.terms) # plot parametric terms as well
   n.para <- sum(order==1) # plotable parametric terms   
   else n.para <- 0 
- 
+
   if (se) ## sort out CI widths for 1 and 2D
   { if (is.numeric(se)) se2.mult <- se1.mult <- se else { se1.mult <- 2;se2.mult <- 1} 
     if (se1.mult<0) se1.mult<-0;if (se2.mult < 0) se2.mult <- 0
   } else se1.mult <- se2.mult <-1
-  
+
   if (se && x$Vp[1,1] < 0) ## check that variances are actually available
   { se <- FALSE
     warning("No variance estimates available")
@@ -1284,7 +1284,7 @@ plot.gam <- function(x,residuals=FALSE,rug=NULL,se=TRUE,pages=0,select=NULL,scal
     }
   } ## end of data setup loop through smooths
 
-  
+
   ##############################################
   ## sort out number of pages and plots per page 
   ##############################################
@@ -1309,10 +1309,10 @@ plot.gam <- function(x,residuals=FALSE,rug=NULL,se=TRUE,pages=0,select=NULL,scal
     if (c*r < ppp) c <- c + 1
     if (c*r < ppp) r <- r + 1  
     oldpar<-par(mfrow=c(r,c))
-  
+
   } else
   { ppp<-1;oldpar<-par()}
-  
+
 
   #####################################
   ## get a common scale, if required...
@@ -1347,18 +1347,18 @@ plot.gam <- function(x,residuals=FALSE,rug=NULL,se=TRUE,pages=0,select=NULL,scal
     } ## loop end 
     ylim <- trans(ylim+shift)
   } ## end of common scale computation
-  
+
   ##############################################################
   ## now plot smooths, by calling plot methods with plot data...
   ##############################################################
 
   if ((pages==0&&prod(par("mfcol"))<n.plots&&dev.interactive())||
        pages>1&&dev.interactive()) ask <- TRUE else ask <- FALSE 
-  
+
   if (!is.null(select)) {
     ask <- FALSE
   }
- 
+
 #  if (ask) { ## asks before plotting
 #    oask <- devAskNewPage(TRUE)
 #    on.exit(devAskNewPage(oask))
@@ -1376,7 +1376,7 @@ plot.gam <- function(x,residuals=FALSE,rug=NULL,se=TRUE,pages=0,select=NULL,scal
    }
 
   } ## end of smooth plotting loop
-  
+
   ####################################################
   ## Finally deal with any parametric term plotting...
   ####################################################
@@ -1428,7 +1428,7 @@ exclude.too.far <- function(g1,g2,d1,d2,dist)
   distance<-array(0,n)
   o<-.C(C_MinimumSeparation,x=as.double(cbind(g1,g2)),n=as.integer(n), d=as.integer(2),
                             t=as.double(cbind(d1,d2)),m=as.integer(m),distance=as.double(distance))
- 
+
   res <- rep(FALSE,n)
   res[o$distance > dist] <-TRUE
   res
@@ -1498,7 +1498,7 @@ vis.gam <- function(x,view=NULL,cond=list(),n.grid=30,too.far=0,col=NA,color="he
   }
   if (!ok) stop(gettextf("View variables must contain more than one value. view = c(%s,%s).",
                 view[1], view[2]))
- 
+
   # now get the values of the variables which are not the arguments of the plotted surface
 
   # Make dataframe....
@@ -1509,7 +1509,7 @@ vis.gam <- function(x,view=NULL,cond=list(),n.grid=30,too.far=0,col=NA,color="he
   m2<-fac.seq(x$var.summary[[view[2]]],n.grid)
   else { r2<-range(x$var.summary[[view[2]]]);m2<-seq(r2[1],r2[2],length=n.grid)}
   v1<-rep(m1,n.grid);v2<-rep(m2,rep(n.grid,n.grid))
-  
+
   newd <- data.frame(matrix(0,n.grid*n.grid,0)) ## creating prediction data frame full of conditioning values
   for (i in seq_len(length(x$var.summary))) { 
     ma <- cond[[v.names[i]]]
@@ -1641,7 +1641,7 @@ vis.gam <- function(x,view=NULL,cond=list(),n.grid=30,too.far=0,col=NA,color="he
 
     par(new=TRUE) # don't clean device
     z<-fv$fit+se*fv$se.fit;z<-matrix(z,n.grid,n.grid)
-    
+
     txt <- paste("persp(m1,m2,z,col=col,zlim=zlim",
                  ifelse("border" %in% dnm, "" ,",border=hi.col"),
                  stub,sep="")

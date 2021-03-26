@@ -86,7 +86,7 @@ temp <- c(0, 0,sum(m1$n.censor[m1$time <= 100]),
                sum(m1$n.censor[m1$time <= 200]),
                sum(m1$n.censor[m1$time <= 300]))
 all.equal(s1$n.censor, diff(temp))
-              
+
 # check the same with survfit objects
 s1 <- summary(fit[1], times=c(0, 200, 400, 600))
 s2 <- summary(fit[2], times=c(0, 200, 400, 600))

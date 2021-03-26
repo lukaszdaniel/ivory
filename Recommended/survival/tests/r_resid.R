@@ -35,7 +35,7 @@ if (exists('censorReg')) {  #true for Splus, not R
 #   These tests should all be true
 #
 aeq(fit1$coef, fit4$coef)
- 
+
 resid(fit1, type='working')
 resid(fit1, type='response')
 resid(fit1, type='deviance')

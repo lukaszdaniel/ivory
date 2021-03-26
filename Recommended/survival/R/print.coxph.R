@@ -31,7 +31,7 @@ print.coxph <-
 	dimnames(tmp) <- list(names(coef), c("coef", "exp(coef)",
 	    "se(coef)", "robust se", "z", "p"))
 	}
-    
+
     if (inherits(x, "coxphms")) {
         # print it group by group
         # lazy: I don't want to type x$cmap many times
@@ -94,4 +94,4 @@ coef.coxphms <- function(object, matrix=FALSE, ...){
     else NextMethod(object, ...)
 }
 
-        
+

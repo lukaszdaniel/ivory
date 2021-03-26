@@ -63,7 +63,7 @@ is.character(x)
 \seealso{
   \code{\link{options}}: option \code{scipen} affects the conversion of
   numbers.
-  
+
   \code{\link{paste}}, \code{\link{substr}} and \code{\link{strsplit}}
   for character concatenation and splitting,
   \code{\link{chartr}} for character translation and casefolding (e.g.,

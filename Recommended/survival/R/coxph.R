@@ -26,7 +26,7 @@ coxph <- function(formula, data, weights, subset, na.action,
     #  a local copy, doing otherwise messes up future use of update() on
     #  the model object for a user stuck in "+ cluster()" mode.
     if (missing(formula)) stop("a formula argument is required")
-    
+
     ss <- c("cluster", "offset")
     if (is.list(formula))
         Terms <- if (missing(data)) terms(formula[[1]], specials=ss) else
@@ -69,9 +69,9 @@ coxph <- function(formula, data, weights, subset, na.action,
         else formula[[3]]      <- reformulate(temp[1-tcl])[[2]]
 
         Call$formula <- formula
-        
+
     }
-    
+
     # create a call to model.frame() that contains the formula (required)
     #  and any other of the relevant optional arguments
     #  but don't evaluate it just yet
@@ -178,7 +178,7 @@ coxph <- function(formula, data, weights, subset, na.action,
         if (any(!is.na(match(xtemp, ytemp))))
             warning("a variable appears on both the left and right sides of the formula")
     }
-        
+
     # The time transform will expand the data frame mf.  To do this
     #  it needs Y and the strata.  Everything else (cluster, offset, weights)
     #  should be extracted after the transform
@@ -223,7 +223,7 @@ coxph <- function(formula, data, weights, subset, na.action,
              }
          }
          if (is.function(tt)) tt <- list(tt)  #single function becomes a list
-             
+
          if (is.list(tt)) {
              if (any(!sapply(tt, is.function))) 
                  stop(gettextf("'%s' argument must contain a function or list of functions", "tt"))
@@ -296,7 +296,7 @@ coxph <- function(formula, data, weights, subset, na.action,
          }
          attr(Terms, "predvars") <- pvars
         }
-   
+
     xlevels <- .getXlevels(Terms, mf)
 
     # grab the cluster, if present.  Using cluster() in a formula is no
@@ -355,7 +355,7 @@ coxph <- function(formula, data, weights, subset, na.action,
         if (ncol(Y) ==2 || !has.robust) cluster <- seq.int(1, nrow(mf))
         else stop("one of cluster or id is needed") 
     }
-    
+
     contrast.arg <- NULL  #due to shared code with model.matrix.coxph
     attr(Terms, "intercept") <- 1  # always have a baseline hazard
 
@@ -446,7 +446,7 @@ coxph <- function(formula, data, weights, subset, na.action,
     if (is.null(offset) | all(offset==0)) offset <- rep(0., nrow(mf))
     else if (any(!is.finite(offset) | !is.finite(exp(offset)))) 
         stop("offsets must lead to a finite risk score")
-        
+
     weights <- model.weights(mf)
     if (!is.null(weights) && any(!is.finite(weights)))
         stop("weights must be finite")   
@@ -513,13 +513,13 @@ coxph <- function(formula, data, weights, subset, na.action,
                             paste(row.names(t2)[r2], colnames(cmap)[c2], sep="_"))
         assign <- a2
     }
- 
+
     # infinite covariates are not screened out by the na.omit routines
     #  But this needs to be done after the multi-X part
     if (!all(is.finite(X)))
         stop("data contains an infinite predictor")
 
-   
+
     # init is checked after the final X matrix has been made
     if (missing(init)) init <- NULL
     else {
@@ -530,7 +530,7 @@ coxph <- function(formula, data, weights, subset, na.action,
         if (any(exp(temp) > .Machine$double.xmax) || all(exp(temp)==0))
         stop("initial values lead to overflow or underflow of the exp function")
     }
-    
+
     pterms <- sapply(mf, inherits, 'coxph.penalty')
     if (any(pterms)) {
         pattr <- lapply(mf[pterms], attributes)
@@ -540,7 +540,7 @@ coxph <- function(formula, data, weights, subset, na.action,
         ord <- attr(Terms, "order")[match(pname, attr(Terms, 'term.labels'))]
         if (any(ord>1)) stop('Penalty terms cannot be in an interaction')
         pcols <- assign[match(pname, names(assign))] 
-        
+
         fit <- coxpenal.fit(X, Y, istrat, offset, init=init,
                             control,
                             weights=weights, method=method,
@@ -642,7 +642,7 @@ coxph <- function(formula, data, weights, subset, na.action,
                                   std=sqrt(temp$var))
         else fit$concordance <- c(temp$count, concordance=temp$concordance, 
                                   std=sqrt(temp$var))
-     
+
         na.action <- attr(mf, "na.action")
         if (length(na.action)) fit$na.action <- na.action
         if (model) {
@@ -677,7 +677,7 @@ coxph <- function(formula, data, weights, subset, na.action,
         class(fit) <- c("coxphms", class(fit))
     }
     names(fit$means) <- names(fit$coefficients)
-     
+
     fit$formula <- formula(Terms)
     if (length(xlevels) >0) fit$xlevels <- xlevels
     fit$contrasts <- contr.save

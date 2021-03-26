@@ -3,7 +3,7 @@ residuals.coxph.penal <- function(object,
             type=c("martingale", "deviance", "score", "schoenfeld",
 			  "dfbeta", "dfbetas", "scaledsch","partial"),
 	    collapse=FALSE, weighted=FALSE, ...) {
-      
+
     type <- match.arg(type)
     # Are there any sparse terms, and if so do I need the X matrix?
     if (any(object$pterms==2) && !(type=='martingale' || type=='deviance')){
@@ -22,7 +22,7 @@ residuals.coxph.penal <- function(object,
 	    x <- temp$x
 	    }
 	object$x <- x[, -match(sparsename, dimnames(x)[[2]]), drop=FALSE]
-    
+
 	temp <- attr(object$terms, 'term.labels')
 	object$terms <- object$terms[-match(sparsename, temp)]
 	}

@@ -22,7 +22,7 @@ trichol(ld,sd)
 \details{Calls \code{dpttrf} from \code{LAPACK}. The point of this is that it has \eqn{O(n)}{O(n)} computational cost, rather than the \eqn{O(n^3)}{O(n^3)} required by dense matrix methods.
 
 }
- 
+
 \seealso{\code{\link{bandchol}}}
 
 \author{ Simon N. Wood \email{simon.wood@r-project.org}}

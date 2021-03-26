@@ -128,7 +128,7 @@ Trying some Matrix objects, too
 > D5N[5, 5] <- NA
 > (Z32 <- Matrix(0, 3, 2))
 3 x 2 sparse Matrix of class "dgCMatrix"
-        
+
 [1,] . .
 [2,] . .
 [3,] . .
@@ -145,7 +145,7 @@ Trying some Matrix objects, too
 [2,]    .    0
 > (Z22s <- Matrix(0, 2, 2, doDiag = FALSE))
 2 x 2 sparse Matrix of class "dsCMatrix"
-        
+
 [1,] . .
 [2,] . .
 > (Z22d <- Matrix(0, 2, 2, sparse = FALSE, doDiag = FALSE))
@@ -170,7 +170,7 @@ Trying some Matrix objects, too
 > l3 <- upper.tri(matrix(, 3, 3))
 > (M <- Matrix(l3))
 3 x 3 sparse Matrix of class "ltCMatrix"
-          
+
 [1,] . | |
 [2,] . . |
 [3,] . . .
@@ -182,7 +182,7 @@ Trying some Matrix objects, too
 [3,]  TRUE  TRUE  TRUE
 > (l3s <- as(l3, "CsparseMatrix"))
 3 x 3 sparse Matrix of class "lgCMatrix"
-          
+
 [1,] . | |
 [2,] . . |
 [3,] . . .

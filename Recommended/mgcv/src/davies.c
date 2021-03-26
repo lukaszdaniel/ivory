@@ -65,7 +65,7 @@ double ctff(double accx, double *upn,double mean,double lmin,double lmax,double 
   double u2,u1,u,c1,c2,rb,cst;
   u2 = *upn; u1 = 0.0; c1 = mean;
   if (u2>0) rb = 2*lmax; else rb = 2*lmin;
-  
+
   while (1) {
     if (errbd(u2/(1+u2*rb),&c2,sigsq,r,n,lb,nc)<=accx) break;
     u1=u2;c1=c2;u2 = u2*2;
@@ -200,7 +200,7 @@ void davies(double *lb,double *nc,int *n,int *r,double *sigma,double *c,int *lim
 /* Evaluate Pr(Q<c) where Q = \sum_j^r lb[j] * X_j + \sigma X_0
    X_j is a chi^2_n[j](nc[j]) [i.e. n[j] is DoF and nc[j] non-centrality param delta_j^2]
    X_0 ~ N(0,1). 'lim' is upper bound on terms in integral. 'acc' is error bound.
-   
+
    trace is a 7 vector of algorithm information: 
    {abs val sum, integration terms, number of integrations, main integration interval,
     truncation point in initial integral, sd of cov factor term, cycles to locate integration params}

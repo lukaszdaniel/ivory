@@ -82,7 +82,7 @@ USRegionalMortality
   Mortality Differences_, August 2015 Bethesda, MD. 
   \url{https://ruralhealth.und.edu/projects/health-reform-policy-research-center/rural-urban-mortality}
 
-  
+
 }
 
 \examples{

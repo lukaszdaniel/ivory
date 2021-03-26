@@ -70,7 +70,7 @@ do.breaks(endpoints, nint)
 \arguments{
   \item{x}{
     The object on which method dispatch is carried out.
-    
+
     For the \code{formula} method, \code{x} can be a formula of the form
     \code{~ x | g1 * g2 * \dots}, indicating that histograms or kernel
     density estimates of the \code{x} variable should be produced
@@ -78,14 +78,14 @@ do.breaks(endpoints, nint)
     \code{g2}, \dots.  \code{x} should be numeric (or possibly a factor
     in the case of \code{histogram}), and each of \code{g1}, \code{g2},
     \dots should be either factors or shingles.
-  
+
     As a special case, the right hand side of the formula can contain
     more than one term separated by \sQuote{+} signs (e.g., \code{~ x1 +
     x2 | g1 * g2}).  What happens in this case is described in the
     documentation for \code{\link{xyplot}}.  Note that in either form,
     all the terms in the formula must have the same length after
     evaluation.
-    
+
     For the \code{numeric} and \code{factor} methods, \code{x} is the
     variable whose histogram or Kernel density estimate is drawn.
     Conditioning is not allowed in these cases.
@@ -239,7 +239,7 @@ do.breaks(endpoints, nint)
   estimate, and all arguments accepted by \code{density} can be
   specified in the call to \code{densityplot} to control the output.
   See documentation of \code{density} for details.
-  
+
   These and all other high level Trellis functions have several
   arguments in common. These are extensively documented only in the
   help page for \code{xyplot}, which should be consulted to learn more

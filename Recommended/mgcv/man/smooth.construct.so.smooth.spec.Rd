@@ -12,7 +12,7 @@ constructing a 2-D smooth as a film of soap connecting a smoothly varying
 closed boundary. Unless smoothing very heavily, the film is distorted towards
 the data. The smooths are designed not to smooth across boundary features (peninsulas,
 for example).
- 
+
 The \code{so} version sets up the full smooth. The \code{sf} version sets up just the boundary interpolating 
 soap film, while the \code{sw} version sets up the wiggly component of a soap film (zero on the boundary).
 The latter two are useful for forming tensor products with soap films, and can be used with \code{\link{gamm}} and \code{gamm4}. To use these to simply set up a basis, then call via the wrapper  \code{\link{smooth.construct2}} or \code{\link{smoothCon}}.
@@ -170,7 +170,7 @@ points(v,w,pch=".");
 
 ## Now fit the soap film smoother. 'k' is dimension of boundary smooth.
 ## boundary supplied in 'xt', and knots in 'knots'...
- 
+
 nmax <- 100 ## reduced from default for speed.
 b <- gam(y~s(v,w,k=30,bs="so",xt=list(bnd=fsb,nmax=nmax)),knots=knots)
 
@@ -192,7 +192,7 @@ b1 <- gam(y~s(v,w,k=30,bs="sf",xt=list(bnd=fsb,nmax=nmax))+
             s(v,w,k=30,bs="sw",xt=list(bnd=fsb,nmax=nmax)) ,knots=knots)
 vis.gam(b,plot.type="contour")
 plot(b1)
- 
+
 ##################################################
 ## Now an example with known boundary condition...
 ##################################################

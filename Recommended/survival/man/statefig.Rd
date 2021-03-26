@@ -46,7 +46,7 @@ statefig(layout, connect, margin = 0.03, box = TRUE, cex = 1, col = 1,
   in which case they are recycled as needed.  Boxes and text are drawn
   in the order of the rownames of \code{connect}, and arrows are drawn
   in the usual R matrix order. 
-  
+
   The \code{layout} argument is normally a vector of integers, e.g., the
   vector (1, 3, 2) describes a layout with 3 columns.  The first has a
   single state, the second column has 3 states and the third has 2.

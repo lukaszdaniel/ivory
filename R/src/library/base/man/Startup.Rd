@@ -143,7 +143,7 @@
 \note{
   It is not intended that there be interaction with the user during
   startup code.  Attempting to do so can crash the \R process.
-  
+
 #ifdef unix
   On Unix versions of \R there is also a  file
   \file{\var{\link{R_HOME}}/etc/Renviron} which is read very early in

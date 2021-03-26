@@ -97,7 +97,7 @@ prepanel.default.levelplot <-
     else
         prepanel.null()
 }
-    
+
 
 
 panel.contourplot <- function(...) panel.levelplot(...)
@@ -293,11 +293,11 @@ panel.levelplot <-
                          levels = at)
 
         ccount <- 0
-        
+
         for (val in clines) {
 
             ccount <- ccount + 1
-            
+
             ## each val looks like:
 
             ## $ :List of 3
@@ -686,7 +686,7 @@ levelplot.formula <-
         at <-
             if (pretty) pretty(zrng, cuts)
             else seq(zrng[1], zrng[2], length.out = cuts + 2)
-    
+
 
     ## create a skeleton trellis object with the
     ## less complicated components:
@@ -705,7 +705,7 @@ levelplot.formula <-
                        lattice.options = lattice.options), dots),
                 quote = TRUE)
 
-    
+
     dots <- foo$dots # arguments not processed by trellis.skeleton
     foo <- foo$foo
     foo$call <- sys.call(sys.parent()); foo$call[[1]] <- quote(levelplot)
@@ -759,7 +759,7 @@ levelplot.formula <-
         y <- log(y, ybase)
         if (have.ylim) ylim <- logLimits(ylim, ybase)
     }
-    
+
     ## Step 5: Process cond
 
     cond.max.level <- unlist(lapply(cond, nlevels))

@@ -38,7 +38,7 @@ data(cancer, package="survival")
   The policy became a habit, as is often the case; and the 1/2 coding
   endured long beyond the demise of punch cards and Fortran.
 }
-  
+
 
 \source{Terry Therneau}
 \references{

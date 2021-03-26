@@ -136,7 +136,7 @@ function(db, verbose = FALSE, parallel = FALSE, pool = NULL)
 
     if(parallel && is.null(pool))
         pool <- curl::new_pool()    
-    
+
     .gather <- function(d = character(),
                         p = list(),
                         s = rep.int("", length(d)),

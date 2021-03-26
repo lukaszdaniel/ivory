@@ -48,7 +48,7 @@ switch(EXPR, \dots)
 
   A warning is signaled if no alternatives are provided, as this is
   usually a coding error.
-  
+
   This is implemented as a \link{primitive} function that only evaluates
   its first argument and one other if one is selected.
 }

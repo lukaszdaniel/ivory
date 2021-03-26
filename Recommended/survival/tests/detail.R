@@ -66,4 +66,4 @@ fit1 <- coxph(Surv(start, stop, event) ~x, test2,init=-1, iter=0)
 temp <- coxph.detail(fit1)
 temp2 <- byhand(fit1$coef, fit1$means)
 aeq(temp$haz, c(temp2$haz[1:5], sum(temp2$haz[6:7])))
-                  
+

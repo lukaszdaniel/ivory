@@ -83,7 +83,7 @@ double *wt;         /* weight for each observation */
 double *i0;         /* initial influence */
 int *id;            /* for each obs, which subject is it */
 int sefit;
-    
+
 /* returned objects */
 SEXP rlist;         /* the returned list and variable names of same */  
 const char *rnames[]= {"nrisk","nevent","ncensor", "p", 
@@ -242,10 +242,10 @@ for (i=0; i<n; ) {
 	}
 	else break;
     }
-        
+
     <<survfitci-compute-matrices>>
     <<survfitci-compute-update>>
-  
+
     /* Take the current events and censors out of the risk set */
     for (; i<n; i++) {
 	j= sort2[i];
@@ -261,7 +261,7 @@ for (i=0; i<n; ) {
     itime++;  
 }  
 @
- 
+
 The key variables for the computation are the matrix $H$ and the
 current prevalence vector $P$.
 $H$ is created anew at each unique time point.
@@ -304,7 +304,7 @@ for (j=i; j<n; j++) {
     }
     else break;
  }
-        
+
 if (wevent > 0) {  /* there was at least one move with weight > 0 */
     /* finish computing H */
     for (j=0; j<nstate; j++) {
@@ -317,7 +317,7 @@ if (wevent > 0) {  /* there was at least one move with weight > 0 */
 	    hmat[j][j] =1 -temp/ws[j]; /*rows sum to one */
 	}
 	else hmat[j][j] =1.0; 
- 
+
     }
     if (sefit >0) {
 	<<survfitci-compute-U>>

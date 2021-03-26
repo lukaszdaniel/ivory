@@ -55,7 +55,7 @@ frailty.gaussian <- function(x, sparse=(nclass >5), theta, df,
 	if (!is.null(history$history)) 
 	     theta <- history$history[nrow(history$history),1]
 	else theta <- history$theta
-		
+
 	if (is.matrix(var)) test <- coxph.wtest(var, coef)$test
 	else 		    test <- sum(coef^2/var)
 	df2 <- max(df, .5)      # Stop silly p-values

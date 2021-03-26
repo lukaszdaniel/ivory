@@ -46,7 +46,7 @@ summary.ratetable <- function(object, ...) {
                 }
             }
         }
-            
+
     invisible(att)
     }
 

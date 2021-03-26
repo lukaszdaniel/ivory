@@ -15,7 +15,7 @@ write.jagslp <- function(resp,family,file,use.weights,offset=FALSE) {
     c("eta[i]","exp(eta[i])","ilogit(eta[i])","phi(eta[i])","1/eta[i]","eta[i]^2")
   names(iltab) <- c("identity","log","logit","probit","inverse","sqrt")
   if (!family$link%in%names(iltab)) stop("sorry link not yet handled")
-  
+
   ## code linear predictor and expected response...
   if (family$link=="identity") {
     if (offset) cat("  mu <- X %*% b + offset ## expected response\n",file=file,append=TRUE)
@@ -119,7 +119,7 @@ sp.prior = "gamma",diagonalize=FALSE) {
             family <- family()
   if (is.null(family$family))
             stop("family not recognized")
- 
+
   gp <- interpret.gam(formula) # interpret the formula 
   cl <- match.call() # call needed in gam object for update to work
   mf <- match.call(expand.dots=FALSE)
@@ -129,12 +129,12 @@ sp.prior = "gamma",diagonalize=FALSE) {
   mf$drop.unused.levels <- drop.unused.levels
   mf[[1]] <- quote(stats::model.frame) ##as.name("model.frame")
   pmf <- mf
- 
+
   pmf$formula <- gp$pf
   pmf <- eval(pmf, parent.frame()) # pmf contains all data for parametric part
   pterms <- attr(pmf,"terms") ## pmf only used for this
   rm(pmf)
- 
+
   mf <- eval(mf, parent.frame()) # the model frame now contains all the data 
   if (nrow(mf)<2) stop("Not enough (non-NA) data to do anything meaningful")
   terms <- attr(mf,"terms")
@@ -174,7 +174,7 @@ sp.prior = "gamma",diagonalize=FALSE) {
   if (use.weights) jags.stuff$w <- weights
 
   if (family$family == "binomial") jags.stuff$y <- G$y*weights ## JAGS not expecting observed prob!!
- 
+
   ## get initial values, for use by JAGS, and to guess suitable values for
   ## uninformative priors...
 

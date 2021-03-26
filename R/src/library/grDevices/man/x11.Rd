@@ -241,7 +241,7 @@ X11.options(\dots, reset = FALSE)
   systems, users should specify a different font via
   \code{symbolfamily}.  The default can also be changed via
   \code{X11.options}. 
-  
+
   %  https://bugs.launchpad.net/ubuntu/+source/fontconfig/+bug/551977
   Problems with incorrect rendering of symbols (e.g., of
   \code{quote(pi)} and \code{expression(10^degree)})

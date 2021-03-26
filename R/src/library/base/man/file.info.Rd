@@ -36,9 +36,9 @@ file.size(\dots)
   digits summarizing the permissions for the file owner, the owner's
   group and for anyone respectively.  Each digit is the logical
   \emph{or} of read (4), write (2) and execute/search (1) permissions.
-  
+
   See \link{files} for how file paths with marked encodings are interpreted.
-  
+
 #ifdef unix
   On most systems symbolic links are followed, so information is given
   about the file to which the link points rather than about the link.
@@ -85,7 +85,7 @@ file.size(\dots)
   returned: as these can all be found from a single C system call this
   can be faster.  (However, properly configured systems will use a
   \sQuote{name service cache daemon} to speed up the name lookups.)
-  
+
   Entries for non-existent or non-readable files will be \code{NA}.
 #ifdef unix
   The \code{uid}, \code{gid}, \code{uname} and \code{grname} columns
@@ -103,7 +103,7 @@ file.size(\dots)
   some systems.  However, many file systems only record times in
   seconds, and some (e.g., modification time on FAT systems) are recorded
   in increments of 2 or more seconds.
-  
+
   \code{file.mode}, \code{file.mtime} and \code{file.size} are
   convenience wrappers returning just one of the columns.
 }

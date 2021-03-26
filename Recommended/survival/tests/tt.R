@@ -20,11 +20,11 @@ mkdata <- function(n, beta) {
         c.age <- age + dtime
         age2 <- pmin(30, pmax(0, c.age-40))
         xbeta <- beta[1]*x + beta[2]*age2
-        
+
         # Select a death according to risk
         risk <- ifelse(atrisk, exp(xbeta), 0)
         dead <- sample(1:n, 1, prob=risk/sum(risk))
-        
+
         futime[dead] <- dtime[i]
         status[dead] <- 1
     }

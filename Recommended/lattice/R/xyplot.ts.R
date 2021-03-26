@@ -133,7 +133,7 @@ xyplot.ts <-
 
     needStyles <-
         (any(sapply(list(col, lty, lwd, pch, cex, fill), length) > 1))
-    
+
     ## If all series are plotted in separate panels AND
     ## all have the same style, then we don't need 'groups'.
     ## (this avoids using spurious styles when 'panel' is overridden)
@@ -176,7 +176,7 @@ xyplot.ts <-
 
     unlistIfSimple <- function(z)
         if (all(sapply(z, length) == 1)) unlist(z) else z
-    
+
     if (!is.null(col)) {
         col <- make.par.list(cn, col, NROW(x), NCOL(x), plot.line$col)
         tmpcall$col <- unlistIfSimple(col)

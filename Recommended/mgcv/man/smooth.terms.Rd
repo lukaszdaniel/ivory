@@ -89,7 +89,7 @@ penalties of the marginal smooths. Wood (2006b) and Wood, Scheipl and Faraway (2
 Tensor product smooths often perform better than isotropic smooths when the covariates of a smooth are not naturally
 on the same scale, so that their relative scaling is arbitrary. For example, if smoothing with repect to time and 
 distance, an isotropic smoother will give very different results if the units are cm and minutes compared to if the units are metres and seconds: a tensor product smooth will  give the same answer in both cases (see \code{\link{te}} for an example of this). Note that \code{te} terms are knot based, and the thin plate splines seem to offer no advantage over cubic or P-splines as  marginal bases.
- 
+
 Some further specialist smoothers that are not suitable for use in tensor products are also available.
 \describe{
 \item{Adaptive smoothers}{\code{bs="ad"}

@@ -40,7 +40,7 @@ trellis.last.object <- function(..., prefix = lattice.getStatus("current.prefix"
 }
 
 
- 
+
 ## Not all arguments to xyplot etc can be supplied to
 ## update.trellis. Generally speaking, anything that needs to change
 ## the data within each panel is a no-no. Everything else is
@@ -291,7 +291,7 @@ update.trellis <-
                 object$legend <- c(object$legend, new.insides)
             }
         }
-        
+
     }
     if (!missing(key))
     {

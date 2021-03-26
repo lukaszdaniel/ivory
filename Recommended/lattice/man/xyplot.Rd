@@ -1128,7 +1128,7 @@ bwplot(x, data, \dots)
 
 	%% Example: xyplot(yield~year|site, barley, layout = c(0, 5))
 	%% OK with some par("din"), but not others (e.g., square)
-	
+
 	%% NO LONGER TRUE: In general, giving a high value of
         %% \code{layout[3]} is not wasteful because blank pages are
         %% never created.

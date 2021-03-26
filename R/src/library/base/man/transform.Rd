@@ -36,7 +36,7 @@ transform(`_data`, \dots)
   programming it is better to use the standard subsetting arithmetic functions,
   and in particular the non-standard evaluation of
   argument \code{transform} can have unanticipated consequences.
-  
+
 }
 \author{Peter Dalgaard}
 \note{

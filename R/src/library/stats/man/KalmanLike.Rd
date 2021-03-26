@@ -34,7 +34,7 @@ makeARIMA(phi, theta, Delta, kappa = 1e6,
     returned as attribute \code{"mod"} of the result.}
   \item{n.ahead}{the number of steps ahead for which prediction is
     required.}
-  
+
   \item{phi, theta}{numeric vectors of length \eqn{\ge 0} giving AR
     and MA parameters.}
   \item{Delta}{vector of differencing coefficients, so an ARMA model is

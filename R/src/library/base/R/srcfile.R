@@ -50,12 +50,12 @@ summary.srcfile <- function(object, ...) {
     if (inherits(object$timestamp, "POSIXt"))
     	cat(gettextf("Timestamp: %s", format(object$timestamp, usetz=TRUE), domain = "R-base"), "\n", sep = "")
 
-    
+
     if (!is.null(object$Enc) && object$Enc != object$encoding && object$Enc != "unknown")
       cat(gettextf("Encoding: %s, re-encoded to %s", dQuote(object$encoding), dQuote(object$Enc), domain = "R-base"), "\n", sep = "")
 	else
 	  cat(gettextf("Encoding: %s", dQuote(object$encoding), domain = "R-base"), "\n", sep = "")
-	
+
 
 
     invisible(object)

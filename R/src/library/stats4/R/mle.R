@@ -78,13 +78,13 @@ mle <- function(minuslogl, start, optim = stats::optim,
         names(v) <- make.unique(names(v))
         v
     }
-    
+
     v2l <- function(v)
         split(v, sigindex)
-        
+
     if (is.list(fixed))      
         fixed <- l2v(fixed)
-    
+
     isfixed <- !is.na(fixed)
 
     if (missing(start))
@@ -99,7 +99,7 @@ mle <- function(minuslogl, start, optim = stats::optim,
     }
     if (length(start) != npars)
         stop ("Mismatch in length of start values")
-            
+
     start <- start[!isfixed]
 
     ## "Onion skin" routine:
@@ -190,7 +190,7 @@ setMethod("profile", "mle",
         fix[[ixfix]] <- bi
 
         call$fixed <- fix
-        
+
         pfit <- tryCatch(eval.parent(call, 2L), error = identity)
         if(inherits(pfit, "error")) return(NA)
         else {

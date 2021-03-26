@@ -87,4 +87,4 @@ void R_init_survival(DllInfo *dll){
     R_forceSymbols(dll, TRUE);
 #endif
 }
-    
+

@@ -110,12 +110,12 @@ survfit.formula <- function(formula, data, weights, subset,
             Y <- Surv(Y[,1], Y[,2], status, type="mstate")
         else stop("'etype' argument incompatable with survival type")
     }
-                         
+
     # Deal with the near-ties problem
     if (!is.logical(timefix) || length(timefix) > 1)
         stop(gettextf("invalid value for '%s' option", "timefix"))
     if (timefix) newY <- aeqSurv(Y) else newY <- Y
-    
+
     if (missing(robust)) robust <- NULL
     # Call the appropriate helper function
     if (attr(Y, 'type') == 'left' || attr(Y, 'type') == 'interval')
@@ -152,7 +152,7 @@ dim.survfit <- function(x) {
     if (is.null(x$strata))  {d1 <- d1name <- NULL} else d1 <- length(x$strata)
     if (is.null(x$newdata)) {d2 <- d2name <- NULL} else d2 <- nrow(x$newdata)
     if (is.null(x$states))  {d3 <- d3name <- NULL} else d3 <- length(x$states)
-    
+
     if (inherits(x, "survfitcox") && is.null(d2) && is.null(d3) &&
         is.matrix(x$surv)) {
         # older style survfit.coxph object, before I added newdata to the output
@@ -175,7 +175,7 @@ dim.survfit <- function(x) {
         names(temp) <- target
         temp[indx]
     }
-    
+
     if (!inherits(x, "survfit")) stop("[.survfit called on non-survfit object")
     ndots <- ...length()      # the simplest, but not avail in R 3.4
     # ndots <- length(list(...))# fails if any are missing, e.g. fit[,2]
@@ -188,7 +188,7 @@ dim.survfit <- function(x) {
 
     if (ndots >0 && !missing(..1)) i <- ..1 else i <- NULL
     if (ndots> 1 && !missing(..2)) j <- ..2 else j <- NULL
-    
+
     if (ndots > length(dd)) 
         stop("incorrect number of dimensions")
     if (length(dtype) > 2) stop("invalid survfit object")  # should never happen
@@ -196,7 +196,7 @@ dim.survfit <- function(x) {
         # called with no subscripts given -- return x untouched
         return(x)
     }
-    
+
     # Code below is easier if "i" is always the strata
     if (dtype[1] !=1) {
         dtype <- c(1, dtype)
@@ -211,7 +211,7 @@ dim.survfit <- function(x) {
     for (k in c("logse", "version", "conf.int", "conf.type", "type", "call"))
         if (!is.null(x[[k]])) newx[[k]] <- x[[k]]
     class(newx) <- class(x)
-    
+
     if (ndots== 1 && length(dd)==2) {
         # one subscript given for a two dimensional object
         # If one of the dimensions is 1, it is easier for me to fill in i and j
@@ -232,7 +232,7 @@ dim.survfit <- function(x) {
                           rep(seq_along(x$strata), x$strata))
             indx1 <- unlist(temp[ii])   # rows of the surv object
             indx2 <- rep(jj, x$strata[ii])
-        
+
             # return with each curve as a separate strata
             newx$n <- x$n[ii]
             for (k in c("time", "n.risk", "n.event", "n.censor", "n.enter"))
@@ -247,7 +247,7 @@ dim.survfit <- function(x) {
             return(newx)
         }
     }
-    
+
     # irow will be the rows that need to be taken
     #  j the columns (of present)
     if (is.null(x$strata)) {
@@ -265,7 +265,7 @@ dim.survfit <- function(x) {
         temp <- split(seq(along=x$time), 
                       rep(seq_along(x$strata), x$strata))
         irow <- unlist(temp[indx])
-        
+
         if (length(indx) <=1 && drop) newx$strata <- NULL
         else               newx$strata  <- x$strata[i]
 
@@ -280,7 +280,7 @@ dim.survfit <- function(x) {
                "influence.surv", "influence.chaz"))
             if (!is.null(x[[k]])) newx[[k]] <- (x[[k]])[irow]
     }
-       
+
     else { # 2 dimensional object
         if (is.null(j)) j <- seq.int(ncol(x$surv))
         # If the curve has been selected by strata and keep has only
@@ -328,7 +328,7 @@ survfit_confint <- function(p, se, logse=TRUE, conf.type, conf.int,
     else if (conf.type=='logit') {
         xx <- ifelse(p==0, NA, p)  # avoid log(0) messages
         se2 <- zval * se *(1 + xx/(1-xx))
- 
+
         temp1 <- 1- 1/(1+exp(log(p/(1-p)) - se2*scale))
         temp2 <- 1- 1/(1+exp(log(p/(1-p)) + se2))
         list(lower = temp1, upper=temp2)

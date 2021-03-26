@@ -28,7 +28,7 @@ summary.coxph <- function(object,  conf.int = 0.95, scale = 1, ...) {
                                "se(coef)", "robust se", "z", "Pr(>|z|)"))
         }
     rval$coefficients <- tmp
-     
+
     if (conf.int) {
         z <- qnorm((1 + conf.int)/2, 0, 1)
         tmp <- cbind(exp(beta), exp(-beta), exp(beta - z * se),

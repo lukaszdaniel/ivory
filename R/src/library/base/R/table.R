@@ -253,8 +253,8 @@ marginSums <- function (x, margin = NULL)
    if (!is.array(x)) 
       if (is.numeric(x)) dim(x) <- length(x)
       else stop(gettextf("'%s' argument is not an array", "x"))
-   
-      
+
+
    if (length(margin)) {
       z <- apply(x, margin, sum)
       ## apply() may lose dims, in which case we need to put them

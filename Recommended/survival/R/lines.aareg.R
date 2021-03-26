@@ -27,7 +27,7 @@ lines.aareg <- function(x, se=FALSE, maxtime, type='s', ...) {
 	    }
 	ncurve <- ncol(yy)
 	}
-    
+
     else {
 	# this is the branch most often called, when someone has done
 	#   plot(fit[3]), so that only 1 coefficient remains
@@ -43,9 +43,9 @@ lines.aareg <- function(x, se=FALSE, maxtime, type='s', ...) {
 	    }
 	ncurve <- 1
 	}
-   
+
     xx <- c(0, x$time[keep])
-	
+
     # There may be multiplicities in x$times.  Only plot the last of
     #  each of them
     indx <- 1 + length(xx) - rev(match(unique(rev(xx)), rev(xx)))

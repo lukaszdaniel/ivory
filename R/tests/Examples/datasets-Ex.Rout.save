@@ -1755,7 +1755,7 @@ x4          0.4999091  0.1178189 4.243028 0.002164602
  Mean   :0.15422  
  3rd Qu.:0.21925  
  Max.   :0.81000  
-                  
+
 > pairs(attenu, main = "attenu data")
 > coplot(accel ~ dist | as.factor(event), data = attenu, show.given = FALSE)
 > coplot(log(accel) ~ log(dist) | as.factor(event),

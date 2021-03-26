@@ -37,13 +37,13 @@ dtest <- function(x, tmat, time= 1.3, eps=1e-8) {
     }       
     list(d1=d1, d2=d2)
 }   
-    
+
 for (i in 1:nfun) {
     j <- sexpm[[i]]
     tmat <- matrix(0, j$nstate, j$nstate)
     tmat[j$nonzero] <- runif(length(j$nonzero), .1, 4)
     diag(tmat) <- -rowSums(tmat)
-    
+
     dtemp <- logical(length(j$nonzero))
     for (k in 1:length(times)) {
         m1 <- j$mexp(tmat, times[k])

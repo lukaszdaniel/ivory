@@ -30,7 +30,7 @@ write.dbf(dataframe, file, factor2char = TRUE, max_nchar = 254)
   \code{"integer"}, \code{"character"}, \code{"factor"} and
   \code{"Date"} can be written.  Other columns should be converted to
   one of these.
-  
+
   Maximum precision (number of digits including minus sign and decimal
   sign) for numeric is 19 - scale (digits after the decimal sign) which is
   calculated internally based on the number of digits before the decimal

@@ -10,7 +10,7 @@ print.survcheck <- function(x, ...){
     if(!is.null(x$na.action)){
         cat(length(x$na.action), "observations removed due to missing","\n")
     } 
-    
+
     cat("\nTransitions table:\n")
     print(x$transitions)
     cat('\n')
@@ -19,7 +19,7 @@ print.survcheck <- function(x, ...){
     cat("Number of subjects with 0, 1, ... transitions to each state:\n")
     print(x$events)
     cat("\n")
-    
+
     if(x$flag["overlap"]>0) {
         cat("Overlap check: ", 
             length(x$overlap$id),
@@ -72,7 +72,7 @@ summary.survcheck <- function(object, max.show=5, ...){
     if(!is.null(object$na.action)){
         cat(length(object$na.action), "observations removed due to missing","\n")
     }
-    
+
     ## change between states
     cat("Transitions table:\n")
     print(object$transitions)
@@ -82,7 +82,7 @@ summary.survcheck <- function(object, max.show=5, ...){
     cat("Number of subjects with 1, 2, ... copies of each state:\n")
     print(object$events)
     cat("\n")
-    
+
     if(object$flag["overlap"]>0) {
         cat("Overlap: ", 
             length(object$overlap$id),
@@ -117,7 +117,7 @@ summary.survcheck <- function(object, max.show=5, ...){
         print(tdat[tdat[,1] %in% object$teleport$id[1:nshow],])
         cat('\n')
     } 
- 
+
    if(object$flag["jump"] >0){
         cat("Jump: ", 
             length(object$jump$id),

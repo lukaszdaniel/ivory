@@ -91,7 +91,7 @@ strsplit(x, split, fixed = FALSE, perl = FALSE, useBytes = FALSE)
 
   \sQuote{\link{regular expression}} for the details of the pattern
   specification.
-  
+
   Option \code{PCRE_use_JIT} controls the details when \code{perl = TRUE}.
 }
 \examples{

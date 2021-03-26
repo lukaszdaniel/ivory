@@ -232,7 +232,7 @@ plot.survfit<- function(x, conf.int,  mark.time=FALSE,
         }
         else if (is.function(fun)) tfun <- fun
         else stop(gettextf("invalid '%s' argument", "fun"))
-        
+
         ssurv <- tfun(ssurv )
         if (!is.null(supper)) {
             supper <- tfun(supper)
@@ -263,10 +263,10 @@ plot.survfit<- function(x, conf.int,  mark.time=FALSE,
         else if (length(lty) <= ncurve)
             lty <- rep(rep(lty, each=3), length.out=(ncurve*3))
         else lty <- rep(lty, length.out= ncurve*3)
-        
+
         if (length(col) <= ncurve) col <- rep(rep(col, each=3), length.out=3*ncurve)
         else col <- rep(col, length.out=3*ncurve)
-        
+
         if (length(lwd) <= ncurve) lwd <- rep(rep(lwd, each=3), length.out=3*ncurve)
         else lwd <- rep(lwd, length.out=3*ncurve)
     }
@@ -294,7 +294,7 @@ plot.survfit<- function(x, conf.int,  mark.time=FALSE,
         temp <-  stime[is.finite(stime)]
         if (!missing(xmax) && missing(xlim)) temp <- pmin(temp, xmax)
         else xmax <- NULL
-        
+
         if (xaxs=='S') {
             rtemp <- range(temp)
             delta <- diff(rtemp)
@@ -428,7 +428,7 @@ plot.survfit<- function(x, conf.int,  mark.time=FALSE,
                 xx[xn] <- xmax
                 yy[xn] <- yy[xn-1]
             }
-                
+
 
             if (plot.surv) {
                 if (type=='s')
@@ -456,7 +456,7 @@ plot.survfit<- function(x, conf.int,  mark.time=FALSE,
                     segments(x2-temp.cap, temphigh, x2+temp.cap, temphigh,
                               lty=lty[c2], col=col[c2], lwd=lwd[c2])
                 }
-               
+
             }
             c1 <- c1 +1
             c2 <- c2 +1
@@ -690,7 +690,7 @@ lines.survfit <- function(x, type='s',
         }
         else if (is.function(fun)) tfun <- fun
         else stop(gettextf("invalid '%s' argument", "fun"))
-        
+
         ssurv <- tfun(ssurv )
         if (!is.null(supper)) {
             supper <- tfun(supper)
@@ -721,10 +721,10 @@ lines.survfit <- function(x, type='s',
         else if (length(lty) <= ncurve)
             lty <- rep(rep(lty, each=3), length.out=(ncurve*3))
         else lty <- rep(lty, length.out= ncurve*3)
-        
+
         if (length(col) <= ncurve) col <- rep(rep(col, each=3), length.out=3*ncurve)
         else col <- rep(col, length.out=3*ncurve)
-        
+
         if (length(lwd) <= ncurve) lwd <- rep(rep(lwd, each=3), length.out=3*ncurve)
         else lwd <- rep(lwd, length.out=3*ncurve)
     }
@@ -813,7 +813,7 @@ lines.survfit <- function(x, type='s',
                 xx[xn] <- xmax
                 yy[xn] <- yy[xn-1]
             }
-                
+
 
             if (plot.surv) {
                 if (type=='s')
@@ -841,7 +841,7 @@ lines.survfit <- function(x, type='s',
                     segments(x2-temp.cap, temphigh, x2+temp.cap, temphigh,
                               lty=lty[c2], col=col[c2], lwd=lwd[c2])
                 }
-               
+
             }
             c1 <- c1 +1
             c2 <- c2 +1
@@ -1038,14 +1038,14 @@ points.survfit <- function(x, fun, censor=FALSE,
         }
         else if (is.function(fun)) tfun <- fun
         else stop(gettextf("invalid '%s' argument", "fun"))
-        
+
         ssurv <- tfun(ssurv )
         if (!is.null(supper)) {
             supper <- tfun(supper)
             slower <- tfun(slower)
         }
     }
-    
+
     if (ncurve==1 || (length(col)==1 && missing(pch))) {
         if (censor) points(stime, ssurv, ...)
         else points(stime[x$n.event>0], ssurv[x$n.event>0], ...)

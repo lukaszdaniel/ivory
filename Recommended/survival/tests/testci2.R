@@ -12,7 +12,7 @@ tdata <- data.frame(id=c(1,1,1,1, 2,2,2, 3,3, 4,4,4,4, 5, 6, 6),
                     stringsAsFactors=TRUE)
 tdata$stat2 <- factor(tdata$status * as.numeric(tdata$event),
                       labels=c("censor", levels(tdata$event)))
-         
+
 fit <- survfit(Surv(time1, time2, stat2) ~1, id=id, weight=wt, tdata,
                influence=TRUE)
 

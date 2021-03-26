@@ -201,7 +201,7 @@ parallelplot.formula <-
     }
 
     ## Step 1: Evaluate x, y, etc. and do some preprocessing
-    
+
     ## right.name <- deparse(substitute(x))
     ## x <- eval(substitute(x), data, environment(formula))
     form <-
@@ -274,11 +274,11 @@ parallelplot.formula <-
                       at = seq_len(ncol(x)), labels = varnames))
         if (!horizontal.axis) names(default.scales) <- c("y", "x")
     }
-    
+
     if (is.character(scales)) scales <- list(relation = scales)
     scales <- updateList(default.scales, scales)
     foo <- c(foo, do.call("construct.scales", scales))
-    
+
     ## Step 3: Decide if limits were specified in call:
 
     have.xlim <- !missing(xlim)
@@ -315,7 +315,7 @@ parallelplot.formula <-
         warning("cannot have log y-scale")
         foo$y.scales$log <- FALSE
     }
-    
+
     ## Step 5: Process cond
 
     cond.max.level <- unlist(lapply(cond, nlevels))
@@ -393,7 +393,7 @@ parallelplot.formula <-
         if (!is.null(foo$legend[[1]]$args$space))
             names(foo$legend) <- foo$legend[[1]]$args$space
     }
-    
+
     class(foo) <- "trellis"
     foo
 }

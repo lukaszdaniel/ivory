@@ -713,7 +713,7 @@ This is an important concept, and so we work it out below.
 
 1. The starting point is the column vector
       $p(0) = (1, 0, 0, 0)$, everyone starts in the first state.
-    
+
 2. At time 1, the first event time, form the 4 by 4 transition matrix $T_1$
 \begin{align*}
  T(1)  &= \left( \begin{array}{cccc}
@@ -1125,7 +1125,7 @@ to the side of the terminal when creating a data set and plots.
   of subjects transplanted.}
  \label{badfit}
 \end{figure}
- 
+
 Figure \ref{badfit} shows the transplant curves overlaid with the naive KM that
 censors subjects at death.  There is no difference in the initial portion as
 no deaths have yet intervened, but the final portion overstates the 
@@ -1509,7 +1509,7 @@ standard graphical options of color, line type, etc.
     The lines connecting the states can be straight or curved, see the
     help file for an example.
 \end{enumerate}
- 
+
 The first few state space diagrams were competing risk models, which use
 the following helper function.  It accepts a vector of state names,
 where the first name is the starting state and the remainder are the
@@ -2356,7 +2356,7 @@ cumevent <- function(id, time, status, istate) {
     indx <- match(id2, id2)
     cstat<- csum + stat2[indx] - csum[indx]  
     cstat[stat2==0] <- 0
-          
+
     if (!missing(istate)) cstat[firstid] <- istate
 
     keep <- (firstid | (!is.na(stat2)& stat2 !=0))
@@ -2490,7 +2490,7 @@ fit2 <- coxph(Surv(tstart, time, status) ~ trt + celltype + karno +
               tt(karno), data =newdata,
               tt = function(x, t,...) x*t)
 @ 
- 
+
 There are 4 issues with the constructed variable approach.
 \begin{enumerate}
   \item The choice $\beta(t) \approx a + bt$ was arbitrary.  Perhaps the true
@@ -2697,7 +2697,7 @@ What we see is that
     while the standard error of the original coefficient is 0.96;
     i.e. a shift that is statistically immaterial.
 \end{itemize}
-    
+
 <<coarsen,fig=TRUE>>=
 tdata <- subset(colon, etype==1)   # progression or death
 cmat <- matrix(0, 7, 6)
@@ -2908,7 +2908,7 @@ The same fit (but not as nice a printout) can be obtained from
 \begin{verbatim}
  Surv(time,status) ~ sex + (age + ph.karno)*strata(sex)
 \end{verbatim}
- 
+
 \subsection{Penalized models}
 Let the linear predictor for a \code{survreg} model be
 $\eta = X\beta + Z\omega$, and consider maximizing the penalized
@@ -3500,7 +3500,7 @@ Distribution & \multicolumn{1}{c}{Hazard} \\ \hline
     Makeham&          $ a + b c^t$  \\
 \end{tabular}
 \end{center}
-         
+
 
 The Makeham hazard seems to fit human mortality experience beyond
 infancy quite well, where $a$ is a constant mortality which is

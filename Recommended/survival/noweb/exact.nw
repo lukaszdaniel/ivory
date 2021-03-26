@@ -51,7 +51,7 @@ The intial condition $D(0,n)=1$ is important to all three routines.
 double coxd0(int d, int n, double *score, double *dmat,
              int dmax) {
     double *dn;
-    
+
     if (d==0) return(1.0);
     dn = dmat + (n-1)*dmax + d -1;  /* pointer to dmat[d,n] */
 
@@ -80,7 +80,7 @@ This case is essentially nonexistent in real data, however.
 double coxd1(int d, int n, double *score, double *dmat, double *d1,
 	     double *covar, int dmax) {
     int indx;
-    
+
     indx = (n-1)*dmax + d -1;  /*index to the current array member d1[d.n]*/
     if (d1[indx] ==0) { /* still to be computed */
 	d1[indx] = score[n-1]* covar[n-1]* coxd0(d-1, n-1, score, dmat, dmax);
@@ -95,7 +95,7 @@ double coxd2(int d, int n, double *score, double *dmat, double *d1j,
              double *d1k, double *d2, double *covarj, double *covark,
              int dmax) {
     int indx;
-    
+
     indx = (n-1)*dmax + d -1;  /*index to the current array member d1[d,n]*/
     if (d2[indx] ==0) { /*still to be computed */
 	d2[indx] = coxd0(d-1, n-1, score, dmat, dmax)*score[n-1] *
@@ -110,7 +110,7 @@ double coxd2(int d, int n, double *score, double *dmat, double *d1j,
     return(d2[indx]);
 }
 @ 
-    
+
 Now for the main body.  Start with the dull part of the code:
 declarations.
 I use [[maxiter2]] for the
@@ -131,7 +131,7 @@ SEXP coxexact(SEXP maxiter2,  SEXP y2,
 	      SEXP ibeta,     SEXP eps2,    SEXP toler2) {
     int i,j,k;
     int     iter;
-    
+
     double **covar, **imat;  /*ragged arrays */
     double *time, *status;   /* input data */
     double *offset;
@@ -154,17 +154,17 @@ SEXP coxexact(SEXP maxiter2,  SEXP y2,
     double *dtemp;   /* used for zeroing the memory */
     double *d1;     /* current first derivatives from coxd1 */
     double d0;      /* global sum from coxc0 */
-        
+
     /* copies of scalar input arguments */
     int     nused, nvar, maxiter;
     double  eps, toler;
-    
+
     /* returned objects */
     SEXP imat2, beta2, u2, loglik2;
     double *beta, *u, *loglik;
     SEXP rlist, rlistnames;
     int nprotect;  /* number of protect calls I have issued */
-    
+
     <<excox-setup>>
     <<excox-strata>>	  
     <<excox-iter0>>
@@ -312,7 +312,7 @@ for (i=0; i<nused; ) {
 	sstart =i;
 	nrisk =0;
     }
-    
+
     dtime = time[i];  /*current unique time */
     ndeath =0;
     while (time[i] == dtime) {
@@ -352,7 +352,7 @@ for (i=0; i<nused; ) {
     }
  }
 @ 
-        
+
 Do the first iteration of the solution.  The first iteration is
 different in 3 ways: it is used to set the initial log-likelihood,
 to compute the score test, and
@@ -426,7 +426,7 @@ for (iter=1; iter<=maxiter; iter++) {
     	    imat[i][j] =0;
         }
     <<excox-addup>>
-       	
+
     /* am I done?
     **   update the betas and test for convergence
     */

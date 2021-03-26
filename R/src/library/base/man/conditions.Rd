@@ -132,7 +132,7 @@ allowInterrupts(expr)
    used to construct error conditions of a particular class with
    additional fields specified as the \code{\dots} argument.
    \code{warningCondition} is analogous for warnings.
-   
+
    Conditions are signaled by \code{signalCondition}.  In addition,
    the \code{stop} and \code{warning} functions have been modified to
    also accept condition arguments.

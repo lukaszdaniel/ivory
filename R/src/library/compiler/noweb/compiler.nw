@@ -818,7 +818,7 @@ core functions like the sequencing function [[{]] and the conditional
   be addressed by defining inlining rules that allow functions like
   [[{]] and [[if]] to be compiled properly.
 
-  
+
 \section{The code buffer}
 \label{sec:codebuf}
 The code buffer is a collection of closures that accumulate code and
@@ -4252,7 +4252,7 @@ f(x, y[] <- 1) <- 3
   to ensure that the variable is removed in the event of a non-local
   exit. Implementing this in the compiler would introduce significant
   overhead.
-  
+
 \item The asymmetry of handling the pre-evaluated right hand side
   value via an evaluated promise and the pre-evaluated left hand side
   via a temporary variable makes the code harder to understand and the

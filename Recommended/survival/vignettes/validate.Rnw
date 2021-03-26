@@ -41,12 +41,12 @@ library(survival, quietly=TRUE)
 \begin{quotation}
  `When I use a word,' Humpty Dumpty said, in rather a scornful tone, 
   `it means just what I choose it to mean - neither more nor less.'
-  
+
  `The question is,' said Alice, `whether you can make words mean so 
   many different things.'
 
   `The question is,' said Humpty Dumpty, `which is to be master - that's all.'
-  
+
   -Lewis Caroll, \emph{Through the Looking Glass}
 \end{quotation}
 
@@ -260,7 +260,7 @@ Subject &\multicolumn{1}{c}{$\Lambda_0$} & $\Mhat(0)$ & $\Mhat(\bhat)$ \\
 \end{tabular}
 \end{center}
 
- 
+
 The score statistic $U$ can be written as a two way sum
 involving the covariate(s) and the martingale residuals
 \begin{equation}

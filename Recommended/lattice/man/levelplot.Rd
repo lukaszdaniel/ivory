@@ -160,20 +160,20 @@ contourplot(x, data, \dots)
     contain the following components:
 
     \describe{
-    
+
       \item{\code{space}:}{
         location of the colorkey, can be one of \code{"left"},
 	\code{"right"}, \code{"top"} and \code{"bottom"}.  Defaults to
 	\code{"right"}.
       }
-      
+
       \item{\code{x}, \code{y}:}{ location, currently unused }
 
       \item{\code{col}:}{
 	A color ramp specification, as in the \code{col.regions}
 	argument in \code{\link{level.colors}}
       }
-      
+
       \item{\code{at}:}{
         numeric vector specifying where the colors change. must be of
         length 1 more than the col vector.
@@ -272,7 +272,7 @@ contourplot(x, data, \dots)
     function from \code{\link{panel.levelplot}} to
     \code{\link{panel.levelplot.raster}}, and sets the default value of
     \code{colorkey$raster} to \code{TRUE}.
-    
+
     Note that \code{\link{panel.levelplot.raster}} provides only a
     subset of the features of \code{\link{panel.levelplot}}, but setting
     \code{useRaster=TRUE} will not check whether any of the additional

@@ -29,7 +29,7 @@ data(nafld, package="survival")
     \item{\code{futime}}{time to death or last follow-up}
     \item{\code{status}}{0= alive at last follow-up, 1=dead}
   }
-  
+
   \code{nafld2} is a data frame with 400123 observations and 4 variables
   containing laboratory data
   \describe{
@@ -38,7 +38,7 @@ data(nafld, package="survival")
     \item{\code{test}}{the type of value recorded}
     \item{\code{value}}{the numeric value}
   }
-  
+
   \code{nafld3} is a data frame with 34340 observations and 3 variables
   containing outcomes
   \describe{

@@ -30,7 +30,7 @@ uniquecombs(x,ordered=FALSE)
   still quicker for large n than the C based code that used to be called by this routine, which 
   had O(nlog(n)) cost. In principle a hash table based solution in C 
   would be only O(n) and much quicker in the multicolumn case. 
-   
+
  \code{\link{unique}} and \code{\link{duplicated}}, can be used 
  in place of this, if the full index is not needed. Relative performance is variable. 
 
@@ -42,7 +42,7 @@ A matrix or data frame consisting of the unique rows of \code{x} (in arbitrary o
 
 The matrix or data frame has an \code{"index"} attribute. \code{index[i]} gives the row of the returned 
 matrix that contains row i of the original matrix. 
- 
+
 }
 
 \seealso{\code{\link{unique}}, \code{\link{duplicated}}, \code{\link{match}}.}

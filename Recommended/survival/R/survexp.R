@@ -7,14 +7,14 @@ survexp <- function(formula, data,
         ratetable=survival::survexp.us, scale=1, se.fit,
         model=FALSE, x=FALSE, y=FALSE) {
     Call <- match.call()
-        
+
     # keep the first element (the call), and the following selected arguments
     indx <- match(c('formula', 'data', 'weights', 'subset', 'na.action'),
                       names(Call), nomatch=0)
     if (indx[1] ==0) stop(gettextf("'%s' argument is required", "formula"))
     tform <- Call[c(1,indx)]  # only keep the arguments we wanted
     tform[[1L]] <- quote(stats::model.frame)  # change the function called
-        
+
     Terms <- if(missing(data)) terms(formula, 'ratetable')
              else              terms(formula, 'ratetable',data=data)
     rate <- attr(Terms, "specials")$ratetable                   
@@ -52,7 +52,7 @@ survexp <- function(formula, data,
     temp <- match(names(rcall)[-1], varlist) # 2,3,... are the argument names
     if (any(is.na(temp)))
         stop(gettextf("Variable not found in the ratetable: %s", (names(rcall))[is.na(temp)]))
-        
+
     if (any(!(varlist %in% names(rcall)))) {
         to.add <- varlist[!(varlist %in% names(rcall))]
         temp1 <- paste(text=paste(to.add, to.add, sep='='), collapse=',')

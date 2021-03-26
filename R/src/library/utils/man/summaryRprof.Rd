@@ -43,7 +43,7 @@ summaryRprof(filename = "Rprof.out", chunksize = 5000,
 \section{Memory profiling}{
   Options other than \code{memory = "none"} apply only to files produced
   by \code{\link{Rprof}(memory.profiling =  TRUE)}.
-  
+
   When called with \code{memory.profiling = TRUE}, the profiler writes
   information on three aspects of memory use: vector memory in small
   blocks on the R heap, vector memory in large blocks (from
@@ -77,15 +77,15 @@ summaryRprof(filename = "Rprof.out", chunksize = 5000,
   some other way), then information about the origin of lines is
   recorded during profiling.  By default this is not displayed, but
   the \code{lines} parameter can enable the display.
-  
+
   If \code{lines = "show"}, line locations will be used in preference
   to the usual function name information, and the results
   will be displayed ordered by location in addition to the other orderings.
-  
+
   If \code{lines = "both"}, line locations will be mixed with function
   names in a combined display.  
 }
-  
+
 
 \value{
   If \code{memory = "none"} and \code{lines = "hide"}, a list with components
@@ -99,7 +99,7 @@ summaryRprof(filename = "Rprof.out", chunksize = 5000,
   seconds and percentages of the total time spent executing code in that
   function and code in that function or called from that function,
   respectively.
-  
+
   If \code{lines = "show"}, an additional component is added to the list:
   \item{by.line}{A data frame of timings sorted by source location.}
 
@@ -111,7 +111,7 @@ summaryRprof(filename = "Rprof.out", chunksize = 5000,
 
   If \code{memory = "stats"} a \code{\link{by}} object giving memory statistics
   by function. Memory usage is in bytes.
-  
+
   If no events were recorded, a zero-row data frame is returned.
 }
 

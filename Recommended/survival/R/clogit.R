@@ -5,7 +5,7 @@
 clogit <- function(formula, data, weights, subset, na.action,
                  method=c("exact","approximate", "efron", "breslow"),
                  ... ) {
-    
+
     Call <- match.call()  # how we were called
 
     # Create a call to model.frame() that contains the formula (required)
@@ -18,7 +18,7 @@ clogit <- function(formula, data, weights, subset, na.action,
     mf[[1L]] <- quote(stats::model.frame)
     mf$na.action <- "na.pass"
     nrows<-NROW(eval(mf, parent.frame()))
- 
+
     # Now build a call to coxph with the formula fixed up to have
     #  our special left hand side.
     coxcall <- Call
@@ -34,7 +34,7 @@ clogit <- function(formula, data, weights, subset, na.action,
     coxcall$method <- switch(method, exact="exact",
                              efron="efron",
                              "breslow")
- 
+
     # If the method is "exact", then case weights nor robust variance are
     #  possible
     if (method =="exact") {
@@ -50,7 +50,7 @@ clogit <- function(formula, data, weights, subset, na.action,
     }   
     coxcall<-eval(coxcall, sys.frame(sys.parent()))
     coxcall$userCall<-sys.call()
-    
+
     class(coxcall)<-c("clogit","coxph")
     coxcall
 }

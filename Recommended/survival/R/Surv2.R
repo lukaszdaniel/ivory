@@ -16,13 +16,13 @@ Surv2 <- function(time, event, repeated=FALSE) {
     states <- levels(event)[-1]
     status <- as.integer(event) -1L # usually time is not integer, but
     ss <- cbind(time=time, status=status) # sometimes it is
- 
+
     # In rare cases there are no column names, and I have discovered that
     #  people depend on them.
     cname <- dimnames(ss)[[2]]
     if (length(cname) ==0) cname <- c("time", "status")
     dimnames(ss) <- list(NULL, cname)  #kill extraneous row names
-                                           
+
     if (any(is.na(states) | states=='') )
         stop("each state must have a non-blank name")
     attr(ss, "states") <- states
@@ -167,7 +167,7 @@ c.Surv2 <- function(...) {
     if (!is.null(states[[1]]) && 
                  !all(sapply(states, function(x) all.equal(x, states[[1]]))))
             stop("all elements must have the same list of states")
-  
+
     new <- do.call("rbind", lapply(slist, as.matrix))
     att1 <- attributes(slist[[1]])
     att1 <- att1[is.na(match(names(att1), c("dim","dimnames")))]

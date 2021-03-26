@@ -23,7 +23,7 @@ survfit.coxph <-
               temp1 <- c("kalbfleisch-prentice", "aalen", "efron",
                          "kaplan-meier", "breslow", "fleming-harrington",
                          "greenwood", "tsiatis", "exact")
-              
+
               survtype <- match(match.arg(type, temp1), temp1)
               stype <- c(1,2,2,1,2,2,2,2,2)[survtype]
               if (stype!=1) ctype <-c(1,1,2,1,1,2,1,1,1)[survtype]
@@ -79,7 +79,7 @@ survfit.coxph <-
           !is.null(object$call$weights) || !is.null(object$call$id) ||
           (has.strata && is.null(object$strata)) ||
           !is.null(attr(object$terms, 'offset'))) {
-          
+
           mf <- stats::model.frame(object)
           }
       else mf <- NULL  #useful for if statements later
@@ -166,7 +166,7 @@ survfit.coxph <-
              keep <- !grepl("frailty(", dimnames(X)[[2]], fixed=TRUE)
              X <- X[,keep, drop=F]
           }
-              
+
           if (is.null(offset)) risk <- c(exp(X%*% beta - xcenter))
           else     risk <- c(exp(X%*% beta + offset - xcenter))
       }
@@ -178,7 +178,7 @@ survfit.coxph <-
           #   or cluster term).
           if (any(attr(Terms, "order") > 1) )
               warning("the model contains interactions; the default curve based on columm means of the X matrix is almost certainly not useful. Consider adding a newdata argument.")
-          
+
           if (length(object$means)) {
               mf2 <- as.list(object$means)   #create a dummy newdata
               names(mf2) <- names(object$coefficients)
@@ -218,7 +218,7 @@ survfit.coxph <-
                       any(unlist(lapply(temp, class))== "function"))
                       found.strata <- FALSE
               }
-              
+
               if (!found.strata) {
                   ss <- untangle.specials(Terms2, "strata")
                   Terms2 <- Terms2[-ss$terms]
@@ -255,13 +255,13 @@ survfit.coxph <-
               if (is.null(id2)) stop("'id=NULL' is an invalid argument")
               }
           else id2 <- rep(1, nrow(mf2))
-          
+
           x2 <- model.matrix(Terms2, mf2)[,-1, drop=FALSE]  #no intercept
           if (length(x2)==0) stop("Individual survival but no variables")
 
           offset2 <- model.offset(mf2)
           if (length(offset2) ==0) offset2 <- 0
-                       
+
           y2 <- model.extract(mf2, 'response')
           if (attr(y2,'type') != type)
               stop("Survival type of newdata does not match the fitted model")

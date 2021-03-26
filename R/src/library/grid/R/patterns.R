@@ -89,7 +89,7 @@ pattern <- function(grob,
         height <- unit(height, default.units)
     hjust = resolveHJust(just, hjust)
     vjust = resolveVJust(just, vjust)
-    
+
     force(grob)
     ## Do NOT want x$gp$fill to be NULL because that would mean
     ## that 'x' inherits its fill from the grob that it is
@@ -227,7 +227,7 @@ unresolveFill.GridPattern <- function(fill) {
 unresolvePattern <- function(pattern) {
     UseMethod("unresolvePattern")
 }
-    
+
 ## Unresolved patterns just pass through
 unresolvePattern.GridPattern <- function(pattern) {
     pattern

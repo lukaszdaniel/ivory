@@ -419,7 +419,7 @@ function(db, remote = TRUE, verbose = FALSE, parallel = FALSE, pool = NULL)
         class(y) <- c("check_url_db", "data.frame")
         y
     }
-    
+
     .fetch_headers <-
         if(parallel)
             function(urls)
@@ -767,7 +767,7 @@ function(x, ...)
     }
 
     curl::multi_run(pool = pool)
-   
+
     out <- vector("list", length(hs))
     for(i in seq_along(out)) {
         if(inherits(hs[[i]], "error")) {
@@ -779,10 +779,10 @@ function(x, ...)
             attr(out[[i]], "status") <- hs[[i]]$status_code
         }
     }
-        
+
     out
 }
-    
+
 .curl_GET_status <-
 function(u, verbose = FALSE)
 {

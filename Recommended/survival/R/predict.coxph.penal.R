@@ -2,7 +2,7 @@ predict.coxph.penal <- function(object,  newdata,
 				type=c("lp", "risk", "expected", "terms"),
 				se.fit=FALSE, terms=names(object$assign), 
 				collapse, safe=FALSE, ...) {
- 
+
     type <- match.arg(type)
     n <- object$n
     pterms <- object$pterms
@@ -36,7 +36,7 @@ predict.coxph.penal <- function(object,  newdata,
 	    indx <- as.numeric(as.factor(x[,xvar]))
 	    object$x <- x[, -xvar, drop=FALSE]
 	    }
-	
+
 	if (nvar==1) {
 	    # Only the sparse term!
 	    if (!missing(newdata)) {
@@ -62,7 +62,7 @@ predict.coxph.penal <- function(object,  newdata,
 	    object$terms <- object$terms[-match(sparsename, temp)]
             pred <- NextMethod('predict',object,terms=terms,...)
             object$terms<- oldTerms
-	  
+
 	    if (se.fit) {
 		se <- pred$se.fit
 		pred <- pred$fit
@@ -115,6 +115,6 @@ predict.coxph.penal <- function(object,  newdata,
 	else pred
 	}
     }
-		
+
 
 

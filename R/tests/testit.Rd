@@ -11,12 +11,12 @@ foo(\var{x}, \var{y})
   Escaped backslash \code{\\x}.
 
   \code{\%\{\}}
-  
+
   \link{a link} and one to a known destination:
   \link[stats]{weighted.mean}
-  
+
   var in \var{text}.
-  
+
   \code{foo(\var{x}, \var{y})}.
   \preformatted{
   Escaped backslash \\x.
@@ -24,9 +24,9 @@ foo(\var{x}, \var{y})
   \%\{\}
 
   var in \var{text}.
-  
+
   foo(\var{x}, \var{y}).
-  
+
   From gap: pedtodot.Rd -- n=split(m,par,"\034") 
   }
   Yihui Xie's example:

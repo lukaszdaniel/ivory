@@ -54,7 +54,7 @@ predict.survreg <-
 	else strata.keep <- strata(mf[,temp$vars], shortlabel=TRUE)
 	strata <- as.numeric(strata.keep)
 	nstrata <- max(strata)
-	    
+
 	if (missing(newdata) && need.x){  #need the old x
 	    x <- object[['x']] 
 	    if (is.null(x)) x <- model.matrix(object, mf)
@@ -75,7 +75,7 @@ predict.survreg <-
             strata <- rep(1L, n)
             if (need.x) x <- model.matrix(object)
         }
-	
+
         else {
             x <- model.matrix(object, newframe)
             strata <- rep(1L, nrow(x))
@@ -212,7 +212,7 @@ predict.survreg <-
 	pred <- naresid(na.action.used, pred)
 	if(se.fit) se <- naresid(na.action.used, se)
 
-	
+
     }
     if (se.fit) list(fit=pred, se.fit=se)
     else pred

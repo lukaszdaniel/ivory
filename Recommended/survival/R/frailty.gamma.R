@@ -10,7 +10,7 @@ frailty.gamma <- function(x, sparse=(nclass >5), theta, df, eps= 1e-5,
 	attr(x,'contrasts') <- contr.treatment(nclass, contrasts=FALSE)
                 }
     class(x) <- c("coxph.penalty",class(x))
-   
+
     # Check for consistency of the arguments
     if (missing(method)) {
 	if (!missing(theta)) {
@@ -48,7 +48,7 @@ frailty.gamma <- function(x, sparse=(nclass >5), theta, df, eps= 1e-5,
 	     theta <- history$history[nrow(history$history),1]
 	else theta <- history$theta
 	clog  <- history$c.loglik
-	
+
 	if (is.matrix(var)) test <- coxph.wtest(var, coef)$test
 	else 		    test <- sum(coef^2/var)
 	df2 <- max(df, .5)      # Stop silly p-values
@@ -82,7 +82,7 @@ frailty.gamma <- function(x, sparse=(nclass >5), theta, df, eps= 1e-5,
 		     cfun = frailty.controlgam,
 		     cparm= c(list(eps=eps), ...))
 	}
-    
+
     else if (method=='aic') {
 	temp <- list(pfun=pfun,
 		     printfun=printfun,

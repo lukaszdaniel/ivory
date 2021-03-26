@@ -20,7 +20,7 @@ unconstrain <- function(object,beta) {
     } 
     beta <- beta.full
   } ## end of del.index handling
-  
+
   qrc <- attr(object,"qrc")
   if (!is.null(qrc)) { ## then smoothCon absorbed constraints
     j <- attr(object,"nCons")
@@ -171,7 +171,7 @@ crunch.knots <- function(G,knots,x0,y0,dx,dy)
 setup.soap <- function(bnd,knots,nmax=100,k=10,bndSpec=NULL) {
 ## setup soap film  smooth - nmax is number of grid cells for longest side
 ## it's important that grid cells are square!
- 
+
   ## check boundary...
 
   if (!inherits(bnd,"list")) stop("bnd must be a list")
@@ -190,7 +190,7 @@ setup.soap <- function(bnd,knots,nmax=100,k=10,bndSpec=NULL) {
     x0 <- min(c(x0,bnd[[i]]$x)); x1 <- max(c(x1,bnd[[i]]$x))
     y0 <- min(c(y0,bnd[[i]]$y)); y1 <- max(c(y1,bnd[[i]]$y))
   } ## now got the grid limits, can set it up
- 
+
   if (x1-x0>y1-y0) { ## x is longest side
     dy <- dx <- (x1-x0) /(nmax-1)
     nx <- nmax
@@ -286,7 +286,7 @@ soap.basis <- function(sd,x=NA,y=NA,film=TRUE,wiggly=TRUE,penalty=TRUE,plot=FALS
   nc <- length(sd$ki)*as.numeric(wiggly) ## number of interior knots 
   nb <- 0 ## boundary basis dimension
   offset <- NULL
- 
+
   if (film) {
     stop <- 0
     for (i in seq_len(length(sd$bc))) { ## work through boundary loops
@@ -336,7 +336,7 @@ soap.basis <- function(sd,x=NA,y=NA,film=TRUE,wiggly=TRUE,penalty=TRUE,plot=FALS
       }
     }
   } ## finished preliminary if (film)
-  
+
   if (!plot) {
     X <- matrix(0,n,nb+nc) ## model matrix
     if (penalty) { S <- list();off <- 1;nS=0} else {off <- S <- NULL}
@@ -370,7 +370,7 @@ soap.basis <- function(sd,x=NA,y=NA,film=TRUE,wiggly=TRUE,penalty=TRUE,plot=FALS
              Xj <- .C(C_gridder,z=as.double(x),as.double(x),as.double(y),as.integer(length(x)),as.double(z),
                    as.integer(sd$G),nx=as.integer(ncol(sd$G)),ny=as.integer(nrow(sd$G)),as.double(sd$x0), 
                    as.double(sd$y0),as.double(sd$dx),as.double(sd$dy),as.double(NAcode*2))$z
-           
+
              Xj[Xj>NAcode] <- NA;X[,k] <- Xj;
            }
            k <- k + 1
@@ -421,7 +421,7 @@ smooth.construct.so.smooth.spec<-function(object,data,knots)
 
   x <- data[[object$term[1]]]
   y <- data[[object$term[2]]]
-  
+
   knt <- list(x=knots[[object$term[1]]],y=knots[[object$term[2]]])
 
   if (length(knt$x)<1) stop("need at least one interior knot")  
@@ -434,7 +434,7 @@ smooth.construct.so.smooth.spec<-function(object,data,knots)
   kin <- in.out(bnd,cbind(knt[[1]],knt[[2]]))
   if (any(!kin)) warning("dropping soap knots not inside boundary - use 'in.out' to investigate.")
   knt[[1]] <- knt[[1]][kin];knt[[2]] <- knt[[2]][kin] 
-  
+
   for (i in seq_len(length(bnd))) { ## re-lable boundary
     nm <- names(bnd[[i]])
     ind <- nm==object$term[1]
@@ -511,13 +511,13 @@ smooth.construct.so.smooth.spec<-function(object,data,knots)
   if (!need.con)  object$C <- matrix(0,0,ncol(object$X)) ## no con
 
   object$df <- ncol(object$X) # -nrow(object$C)
-  
+
   for (i in seq_len(length(sd$bc))) {
     sd$bc[[i]]$bsm <- sd$bc[[i]]$S <- NULL
   }
-  
+
   object$sd <- sd
-  
+
   class(object)<-"soap.film"  # Give object a class
   object
 } ## end of full soap constructor
@@ -532,7 +532,7 @@ smooth.construct.sf.smooth.spec<-function(object,data,knots)
 
   x <- data[[object$term[1]]]
   y <- data[[object$term[2]]]
-  
+
   knt <- list(x=knots[[object$term[1]]],y=knots[[object$term[2]]])
 
   ## if (length(knt$x)<1) stop("need at least one interior knot")  
@@ -540,7 +540,7 @@ smooth.construct.sf.smooth.spec<-function(object,data,knots)
   bnd <- object$xt$bnd
   if (is.null(bnd)) stop("can't soap smooth without a boundary")
   if (!inherits(bnd,"list")) stop("bnd must be a list of boundary loops")
-  
+
   for (i in seq_len(length(bnd))) { ## re-lable boundary
     nm <- names(bnd[[i]])
     ind <- nm==object$term[1]
@@ -617,11 +617,11 @@ smooth.construct.sf.smooth.spec<-function(object,data,knots)
   if (!need.con)  object$C <- matrix(0,0,ncol(object$X)) ## no con
 
   object$df <- ncol(object$X) # -nrow(object$C)
-  
+
   for (i in seq_len(length(sd$bc))) {
     sd$bc[[i]]$bsm <- sd$bc[[i]]$S <- NULL
   }
-  
+
   object$sd <- sd
 
   class(object)<-c("sf","soap.film")  # Give object a class
@@ -637,7 +637,7 @@ smooth.construct.sw.smooth.spec<-function(object,data,knots)
 
   x <- data[[object$term[1]]]
   y <- data[[object$term[2]]]
-  
+
   knt <- list(x=knots[[object$term[1]]],y=knots[[object$term[2]]])
 
   if (length(knt$x)<1) stop("need at least one interior knot")  
@@ -645,7 +645,7 @@ smooth.construct.sw.smooth.spec<-function(object,data,knots)
   bnd <- object$xt$bnd
   if (is.null(bnd)) stop("can't soap smooth without a boundary")
   if (!inherits(bnd,"list")) stop("bnd must be a list of boundary loops")
-  
+
   for (i in seq_len(length(bnd))) { ## re-lable boundary
     nm <- names(bnd[[i]])
     ind <- nm==object$term[1]
@@ -661,7 +661,7 @@ smooth.construct.sw.smooth.spec<-function(object,data,knots)
     if (length(object$bs.dim)==length(bnd)) k <- object$bs.dim else
     stop("lengths of 'bs.dim' and 'bnd' components of 'object' argument are inconsistent")
   }
-  
+
   if (is.null(object$xt$nmax)) nmax <- 200 else nmax <- object$xt$nmax
 
   ## setup the soap defining structures
@@ -674,7 +674,7 @@ smooth.construct.sw.smooth.spec<-function(object,data,knots)
 
   object$null.space.dim <- 0 ## penalty is full rank, for this case
 
- 
+
   ## rescale basis for nice conditioning....
   irng <- 1/as.numeric(apply(b$X,2,max)-apply(b$X,2,min))
   b$X <- t(t(b$X)*irng)  
@@ -704,13 +704,13 @@ smooth.construct.sw.smooth.spec<-function(object,data,knots)
   rr[length(rr)] <- rr[length(rr)]+1
   object$rank <- rr # penalty ranks
 
-  
+
   object$df <- ncol(object$X) # -nrow(object$C)
-  
+
   for (i in seq_len(length(sd$bc))) {
     sd$bc[[i]]$bsm <- sd$bc[[i]]$S <- NULL
   }
-  
+
   object$sd <- sd
   object$C <- matrix(0,0,ncol(object$X)) ## this is tied to zero
 
@@ -762,7 +762,7 @@ plot.soap.film <- function(x,P=NULL,data=NULL,label="",se1.mult=1,se2.mult=2,
     if (is.null(P)) outline <- FALSE else outline <- TRUE   
             if (is.null(xlim)) xlim <- c(x$sd$x0,x$sd$x0+ncol(x$sd$G)*x$sd$dx)
             if (is.null(ylim)) ylim <- c(x$sd$y0,x$sd$y0+nrow(x$sd$G)*x$sd$dy)
-       
+
             P0 <- plot.mgcv.smooth(x=x,P=P,data=data,label=label,se1.mult=se1.mult,se2.mult=se2.mult,
                      partial.resids=partial.resids,rug=rug,se=se,scale=scale,n=n,n2=n2,
                      pers=pers,theta=theta,phi=phi,jit=jit,xlab=xlab,ylab=ylab,main=main,
@@ -823,7 +823,7 @@ fs.test <- function(x,y,r0=.1,r=.5,l=3,b=1,exclude=TRUE)
 
   ## convert x,y to along curve and distance to curve (a,d) 
   ## co-ordinates. 0 distance along is at (x=-r,y=0)  
-  
+
   ind <- x>=0 & y>0
   a[ind] <- q + x[ind]
   d[ind] <- y[ind]-r
@@ -831,19 +831,19 @@ fs.test <- function(x,y,r0=.1,r=.5,l=3,b=1,exclude=TRUE)
   ind <- x>=0 & y<=0
   a[ind] <- -q - x[ind]
   d[ind] <- -r - y[ind]
-  
-  
+
+
   ind <- x < 0 
   a[ind] <- -atan(y[ind]/x[ind])*r
   d[ind] <- sqrt(x[ind]^2+y[ind]^2) - r
-  
+
   ## create exclusion index
-  
+
   ind <- abs(d)>r-r0 | (x>l & (x-l)^2+d^2 > (r-r0)^2)
 
  # f <- a*b # the original
   f <- a*b+d^2
-  
+
   if (exclude) f[ind] <- NA
   attr(f,"exclude") <- ind
   f
@@ -855,10 +855,10 @@ fs.boundary <- function(r0=.1,r=.5,l=3,n.theta=20)
 { rr <- r+(r-r0)
   theta <- seq(pi,pi/2,length=n.theta)
   x <- rr*cos(theta); y <- rr*sin(theta)
-  
+
   theta <- seq(pi/2,-pi/2,length=2*n.theta)
   x <- c(x,(r-r0)*cos(theta)+l); y <- c(y,(r-r0)*sin(theta)+r)
-  
+
   theta <- seq(pi/2,pi,length=n.theta)
   x <- c(x,r0*cos(theta)); y <- c(y,r0*sin(theta))
 

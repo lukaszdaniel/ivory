@@ -1288,7 +1288,7 @@ proc Widget::copyinit { class templatepath path options } {
 proc Widget::parseArgs {class options} {
     upvar 0 ${class}::opt classopt
     upvar 0 ${class}::map classmap
-    
+
     foreach {option val} $options {
 	if { ![info exists classopt($option)] } {
 	    error "unknown option \"$option\""
@@ -1305,7 +1305,7 @@ proc Widget::parseArgs {class options} {
 	    Widget::_get_tkwidget_options [lindex [lindex $optdesc 3] 0]
 	}
 	set val [$Widget::_optiontype($type) $option $val [lindex $optdesc 3]]
-		
+
 	if { [info exists classmap($option)] } {
 	    foreach {subpath subclass realopt} $classmap($option) {
 		lappend maps($subpath) $realopt $val

@@ -53,7 +53,7 @@
 namespace CXXR
 {
 	/** @brief Class to manage memory allocation and deallocation for R.
-     * 
+     *
      * Small objects are quickly allocated from pools of various cell
      * sizes; large objects are obtained directly from the main heap.
      */

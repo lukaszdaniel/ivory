@@ -152,7 +152,7 @@ rbind(\dots, deparse.level = 1)
   \enumerate{
     \item For each argument we get the list of possible class
     memberships from the class attribute.
-    
+
     \item We inspect each class in turn to see if there is an
     applicable method.
 

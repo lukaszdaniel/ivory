@@ -11,7 +11,7 @@
   S. Peterson (1973):
   \emph{A Statistical History of the American Presidential Elections}.
   New York: Frederick Ungar Publishing Co.
-  
+
   Data from 1964 to 1976 is from R. M. Scammon, 
   \emph{American Votes 12}, Congressional Quarterly.
 }

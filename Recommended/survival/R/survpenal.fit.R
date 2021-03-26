@@ -47,7 +47,7 @@ survpenal.fit<- function(x, y, weights, offset, init, controlvals, dist,
         #  values.
 	dnum <- 4  # flag for the C routine
 	n2 <- n + sum(y[,ny]==3)  
-        
+
 	#
         # Create an expression that will be evaluated by the C-code,
         #   but with knowledge of some current variables
@@ -59,7 +59,7 @@ survpenal.fit<- function(x, y, weights, offset, init, controlvals, dist,
 	fdensity <- quote({
 	    if (length(parms)) temp <- sd$density(z, parms)
             else               temp <- sd$density(z)
-	    
+
 	    if (!is.matrix(temp) || any(dim(temp) != c(n2,5)) ||
                 !is.numeric(temp))
 		    stop("density function returned an invalid matrix")
@@ -115,7 +115,7 @@ survpenal.fit<- function(x, y, weights, offset, init, controlvals, dist,
 	    stop(gettextf("invalid '%s' or '%s' argument", "pcols", "pattr"))
     sparse <- sapply(pattr, function(x) !is.null(x$sparse) &&  x$sparse)
     if (sum(sparse) >1) stop("only one sparse penalty term allowed")
-        
+
     #
     # Create a marking vector for the terms, the same length as assign
     #    with pterms == 0=ordinary term, 1=penalized, 2=sparse,
@@ -147,7 +147,7 @@ survpenal.fit<- function(x, y, weights, offset, init, controlvals, dist,
 	}
     # ptype= 1 or 3 if a sparse term exists, 2 or 3 if a non-sparse exists
     ptype <- any(sparse) + 2*(any(!sparse))
-        
+
     if (any(sparse)) {
 	sparse.attr <- (pattr[sparse])[[1]]  #can't use [[sparse]] directly
 	                                     # if 'sparse' is a T/F vector
@@ -169,7 +169,7 @@ survpenal.fit<- function(x, y, weights, offset, init, controlvals, dist,
 	frailx <- match(frailx, sort(unique(frailx)))
 	nfrail <- max(frailx)
 	nvar <- nvar - 1
-        
+
 	#Set up the callback for the sparse frailty term
 	#  (At most one sparse term is allowed).  The calling code will
 	#  first set 'coef1' to the current value of the sparse coefficients,
@@ -247,7 +247,7 @@ survpenal.fit<- function(x, y, weights, offset, init, controlvals, dist,
                     second=double(nvar), penalty= 0.0, flag=rep(FALSE,nvar))
             length2 <- c(nvar, nvar, nvar, 1, nvar)
             }
-        
+
 	# The C code will set the variable coef2, containing the concatonation
 	#  of all the non-sparse penalized coefs.  Think of the below as
 	#  a function of coef (from the C code), thetalist (set further
@@ -294,7 +294,7 @@ survpenal.fit<- function(x, y, weights, offset, init, controlvals, dist,
 	coxlist2 <- NULL
 	ipenal <- NULL
 	}
-    
+
 
     # Create the frame for penalized evaluation
     rho <- new.env()  
@@ -343,7 +343,7 @@ survpenal.fit<- function(x, y, weights, offset, init, controlvals, dist,
 	    if (any(is.na(temp))) stop(gettextf("%s was not matched", sQuote(cargs[[i]][is.na(temp)])))
 	    if (sparse[i]) temp4 <- paste(temp2b[temp], collapse=',')
 	    else           temp4 <- paste(temp3b[temp], collapse=',')
-	    
+
 	    calls[i] <- parse(text=paste(paste(tempchar,temp4,sep=','),')'))
 	    }
         }
@@ -357,7 +357,7 @@ survpenal.fit<- function(x, y, weights, offset, init, controlvals, dist,
 	if (!is.null(pattr[[i]]$varname))
 		varnames[pcols[[i]]] <- pattr[[i]]$varname
         }
-        
+
     nvar2 <- nvar + nstrat2
     nvar3 <- nvar2 + nfrail
     #
@@ -465,7 +465,7 @@ survpenal.fit<- function(x, y, weights, offset, init, controlvals, dist,
         #  evaluation area of f.expr1 and f.expr2
         if (nfrail >0) coxlist1 <- get('coxlist1', envir=rho)
         if (ptype >1 ) coxlist2 <- get('coxlist2', envir=rho)
-	
+
 	# If any penalties were infinite, the C code has made hdiag=1 out
 	#  of self-preservation (avoid zero divides).  But such coefs are 
 	#  guarranteed to be zero so the variance should be too.
@@ -486,7 +486,7 @@ survpenal.fit<- function(x, y, weights, offset, init, controlvals, dist,
 		else  temp2 <- diag(c(coxlist2$second, rep(0, nstrat2)))
 		}
 	    else          temp2 <- 0
-					
+
 	    dftemp <-coxpenal.df(matrix(fit$hmat, ncol=nvar2),  
 			         matrix(fit$hinv, ncol=nvar2), hdiag, 
 				 assign, ptype, nvar2,
@@ -531,7 +531,7 @@ survpenal.fit<- function(x, y, weights, offset, init, controlvals, dist,
 	    thetasave <- cbind(thetasave, temp)
 	    }
         }   #end of the iteration loop
-        
+
    if (!need.df) {  #didn't need it iteration by iteration, but do it now
         #get the penalty portion of the second derive matrix
 	if (nfrail>0) temp1 <- coxlist1$second
@@ -544,7 +544,7 @@ survpenal.fit<- function(x, y, weights, offset, init, controlvals, dist,
 		else  temp2 <- diag(c(coxlist2$second, rep(0, nstrat2)))
 		}
 	else  temp2 <- 0
-					
+
 	dftemp <-coxpenal.df(matrix(fit$hmat,ncol=nvar2),  
 			     matrix(fit$hinv,ncol=nvar2),  hdiag, 
 		             assign, ptype, nvar2, 
@@ -554,7 +554,7 @@ survpenal.fit<- function(x, y, weights, offset, init, controlvals, dist,
 	var <- dftemp$var
 	var2  <- dftemp$var2
         }
-        
+
     if (iter.max >1 && length(iterfail)>0)
 	    warning(gettextf("inner loop failed to coverge for iterations %s", paste(sQuote(iterfail), collapse = ", ")))
     which.sing <- (hdiag[nfrail + seq_len(nvar)] ==0)

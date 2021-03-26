@@ -37,7 +37,7 @@
 namespace CXXR
 {
 	/** @brief Class to manage a pool of memory cells of a fixed size.
-     * 
+     *
      * This class, based closely on Item 10 of Scott Meyers' 'Effective
      * C++ (2nd edition)' manages a collection of memory cells of a
      * specified size, and is intended as a back-end to implementations of

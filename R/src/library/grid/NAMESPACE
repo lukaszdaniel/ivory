@@ -46,7 +46,7 @@ export(
        "resolveRasterSize",
 
        "linearGradient", "radialGradient", "pattern",
-    
+
        "viewport", "vpList", "vpStack", "vpTree", "vpPath",
        "pop.viewport", "push.viewport",
        "popViewport", "pushViewport",
@@ -105,7 +105,7 @@ export(
        "xsplinePoints", "bezierPoints",
 
        "grobCoords", "grobPoints", "emptyCoords", "isEmptyCoords",
-    
+
        "grid.xaxis", "grid.yaxis",
        "xaxisGrob", "yaxisGrob",
 

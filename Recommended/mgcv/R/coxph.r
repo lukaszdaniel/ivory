@@ -20,11 +20,11 @@ cox.ph <- function (link = "identity") {
   env <- new.env(parent = .GlobalEnv)
   validmu <- function(mu) all(is.finite(mu))
 
-    
+
 
     ## initialization is tough here... need data frame in reverse time order,
     ## and intercept removed from X...
-  
+
 
     preinitialize <- function(G) {
       ## G is a gam pre-fit object. Pre-initialize can manipulate some of its
@@ -44,7 +44,7 @@ cox.ph <- function (link = "identity") {
       G$offset <- G$offset[y.order]
       list(family=G$family,y=G$y,X=G$X,w=G$w,offset=G$offset)
     } ##  preinitialize
-    
+
     postproc <- expression({
     ## code to evaluate in estimate.gam, to do with data ordering and 
     ## baseline hazard estimation...
@@ -70,7 +70,7 @@ cox.ph <- function (link = "identity") {
       object$family$data$Rs[y.order,] <- object$family$data$Rs
       object$family$data$Rc[y.order,] <- object$family$data$Rc
     })
-    
+
     initialize <- expression({
         n <- rep(1, nobs)
         if (is.null(start)) start <- rep(0,ncol(x))
@@ -80,7 +80,7 @@ cox.ph <- function (link = "identity") {
     ## get the baseline hazard function information, given times in descending order in y
     ## model matrix (same ordering) in X, coefs in beta and censoring in wt (1 = death, 0
     ## = censoring)
-    
+
       if (is.matrix(y)) { 
         ## first column is time, second is *numeric* code indicating strata
         strat <- y[,2] ## stratification variable
@@ -259,7 +259,7 @@ cox.ph <- function (link = "identity") {
     ##    or its Choleski factor
     ## D is the diagonal pre-conditioning matrix used to obtain Hp
     ##   if Hr is the raw Hp then Hp = D*t(D*Hr)
-      
+
       if (is.matrix(y)) {
         ## first column is time, second is *numeric* code indicating strata
         strat <- y[,2] ## stratification variable
@@ -267,7 +267,7 @@ cox.ph <- function (link = "identity") {
 	strat.lev <- unique(strat) 
 	ns <- length(strat.lev) ## number of strata
       }	else ns <- 1
-     
+
       p <- ncol(X)
       deriv <- deriv - 1
       mu <- X%*%coef + offset

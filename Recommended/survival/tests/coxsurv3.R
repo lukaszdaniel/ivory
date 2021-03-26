@@ -95,5 +95,5 @@ tlam <- c(true1$lambda[1:2]* exp(fit2$coef * data5$x[5]),
           true2$lambda[3:4]* exp(fit2$coef * data5$x[7]))
 aeq(-log(surv5[2]$surv), cumsum(tlam))
 
-                          
-                          
+
+

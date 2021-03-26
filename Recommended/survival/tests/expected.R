@@ -68,7 +68,7 @@ zz <- ratewalk(c(20.4*365.25, 1, as.Date("1960/09/07")), 200)
 all.equal(zz$hazard[1], -(116/365.25)*log(1-.00169))
 all.equal(zz$days, c(116,84))
 
-        
+
 #
 # Simple case 1: a single male subject, born 1/1/36 and entered on study 1/2/55
 #
@@ -140,7 +140,7 @@ for (i in 1:length(temp1)){
                         times=c(366, 1827, 3653, 4383), subset=i)$surv
     }
 
-             
+
 print(aeq(exp2$surv, exp3))
 print(all.equal(exp1$surv, apply(exp2$surv, 1, mean)))
 

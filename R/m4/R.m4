@@ -4389,7 +4389,7 @@ int main() {
     volatile int n = 8;
     double x[8], s;
     int i;
-    
+
     for(i = 0; i < 8; i++) x[i] = xv[i];
     s = ssum(x, n);
     if (s == 36) exit(0);
@@ -4550,7 +4550,7 @@ int main(int ac, char **av)
 {
     int i;
     dummy_ii_ptr = dummy_ii;
-        
+
     /* call dummy_ii via a volatile function pointer to prevent inlinining in
        case the tests are accidentally built with LTO */
     uintptr_t ii = dummy_ii_ptr();

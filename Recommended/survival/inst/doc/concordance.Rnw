@@ -103,7 +103,7 @@ almost no medical knowledge could do nearly
 that well by marking those pairs and using a coin flip for the rest.
 Values of less than 1/2 are possible --- some stock market analysts come to 
 mind.
-   
+
 For survival data any pairs which cannot be ranked with certainty are
 also considered incomparable.
 For instance is $y_i$ is censored at time 10 and $y_j$ is an event (or censor) 

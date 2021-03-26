@@ -24,7 +24,7 @@ panel.stackedDens <-
              to = NULL,
              cut = NULL,
              na.rm = TRUE,
-             
+
              ...)
 {
     if (all(is.na(x) | is.na(y))) return()
@@ -64,7 +64,7 @@ panel.stackedDens <-
     if (varwidth) max.d[] <- max(max.d)
 
     ##str(max.d)
-    
+
     xscale <- current.panel.limits()$xlim
     yscale <- current.panel.limits()$ylim
     height <- (1 + overlap)

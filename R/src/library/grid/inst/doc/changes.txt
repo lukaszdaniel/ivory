@@ -82,7 +82,7 @@ Changes from grid_3.5.* to grid_3.6.0:
 
 8.  Internal changes to graphical parameter setting to speed things
     up a bit.  
-    
+
     Contributed by Thomas Lin Pedersen.
 
 
@@ -137,7 +137,7 @@ Changes from grid_3.2.* to grid_3.3.0:
 
 4.  Modified grid.ls() so that it returns nothing if there are no
     active devices (rather than opening a new device).
-  
+
 5.  Modified grid.grep() so that it returns an empty list (rather than
     throwing an error) when the 'grid' display list is empty.
 
@@ -348,7 +348,7 @@ Changes from grid_2.10.0 to grid_2.11.0:
 
 5.  Fixed multiple problems in rep.unit() and unit subsetting.
     Motivated by PR#14170.  Thanks to Bert Gunter.
-    
+
 
 Changes from grid_2.9.0 to grid_2.10.0:
 --------------------------------------
@@ -361,7 +361,7 @@ Changes from grid_2.9.0 to grid_2.10.0:
 3.  Modified behaviour of editGrob() and addGrob() so that they 
     return the original grob if the specified gPath does not exist,
     and issue a warning (if new argument 'warn' is TRUE).
-    
+
 
 Changes from grid_2.8.0 to grid_2.9.0:
 -------------------------------------
@@ -598,7 +598,7 @@ Changes from grid_2.2.0 to grid_2.3.0:
 
 15. Bug fix for grid.rect() and grid.circle() with gpar(lty="blank").
     (problem was actually in the graphics engine).
-    
+
     Reported by John Braun (private correspondence).
 
 
@@ -653,7 +653,7 @@ Changes from grid_2.0.1 to grid_2.1.0:
 
     This means that you do not need to worry about specifying
     recording=FALSE within these methods.
-    
+
 5.  Grid should recover better from errors or user-interrupts
     during drawing (i.e., not leave you in a strange viewport
     or with strange graphical parameter settings).
@@ -695,7 +695,7 @@ Changes from grid_2.0.1 to grid_2.1.0:
     ... if you just want a rectangle that fills the space available.
 
 9.  New arguments "warn" and "wrap" for function grid.grab()
-    
+
     If warn>0 will warn if know (or, if warn>1,  if even suspect) 
     that the grab has not faithfully captured the output.  
 
@@ -744,7 +744,7 @@ Changes from grid_2.0.1 to grid_2.1.0:
     annotation (instead of just expressions).  For example ...
 
       grid.text(call("sin", pi))
- 
+
 15. plotViewport() has default value for "margins" argument (that match
     the default value for par(mar)).
 
@@ -836,7 +836,7 @@ Changes from grid_1.9.0 to grid_2.0.0:
     graphics devices.
 
     The alpha setting is also cumulative.  For example, ...
-      
+
       grid.rect(width=0.5, height=0.5, 
                 gp=gpar(fill="blue"))              # alpha = 1
       pushViewport(viewport(gp=gpar(alpha=0.5)))
@@ -849,9 +849,9 @@ Changes from grid_1.9.0 to grid_2.0.0:
       grid.lines(name="line")
       grid.edit("line", gp=gpar(col="red")) # line turns red
       grid.edit("line", gp=gpar(lwd=3)) # line becomes thick AND STAYS red
-      
+
 8.  The "cex" gpar is now cumulative.  For example ...
-      
+
       grid.rect(height=unit(4, "char")) # cex = 1
       pushViewport(viewport(gp=gpar(cex=0.5)))
       grid.rect(height=unit(4, "char")) # cex = 0.5
@@ -922,7 +922,7 @@ Changes from grid_1.8.0 to grid_1.9.0:
 
 5.  Added vpPath() to allow specification of viewport path
     in downViewport() and seekViewport().
-    
+
     See ?viewports for an example of its use.
 
     NOTE: it is also possible to specify a path directly,
@@ -1075,7 +1075,7 @@ Changes from grid_1.8.0 to grid_1.8.1:
       push.viewport(viewport())
       grid.points()
       grid.points(gp = gpar(cex = 2))
-      
+
     Another demonstration from the original bug report from David Hinds:
 
       xyplot(1:4~1:4, cex=1:4, pch=1)
@@ -1091,7 +1091,7 @@ Changes from grid_1.8.0 to grid_1.8.1:
 
       grid.segments(x0=1:3/4, y0=0.1, x1=1:3/4,
                     y1=unit(1:3/4, "npc"))
-      
+
 
 Changes from grid_0.7-4 to grid_1.8.0:
 ------------------------------------
@@ -1169,7 +1169,7 @@ Changes from grid_0.7-4 to grid_1.8.0:
         unit(1:4, "npc")[1:4 == 3]
 
 11. Fixed detaching/reloading of grid package (was causing an error).
- 
+
 12. There is a new grid.arrows() primitive.  
 
     See the help file for example usage.
@@ -1243,9 +1243,9 @@ Changes from grid_0.7-2 to grid_0.7-3:
      units in valid.data).
 
     The bug could be produced by ...
-    
+
         grid.rect(w=unit(1, "grobwidth", data=grid.text(5)))
-    
+
 
 Changes from grid_0.7-1 to grid_0.7-2:
 -------------------------------------
@@ -1271,7 +1271,7 @@ Changes from grid_0.6 to grid_0.7:
 ------------------------------------
 
 1.  The web pages for grid have moved to ...
-   
+
 	http://www.stat.auckland.ac.nz/~paul/grid/grid.html
 
 2.  Mathematical annotation is now available in grid.
@@ -1316,7 +1316,7 @@ Changes from grid_0.6 to grid_0.7:
     Multiple-line text (i.e., text with "\n"s in it) is now correctly
     spaced vertically (i.e., takes notice of the current value of 
     "fontsize").
-    
+
     NOTE, however, that multiple-line text still takes no notice of the
     current value of "lineheight".
 
@@ -1387,7 +1387,7 @@ Changes from grid_0.5 to grid_0.5-1:
 ------------------------------------
 
 1.  Fix for some grid bugs.
-    
+
     The problems were:
 	(i)   grid output could not be saved in metafile format 
 	(ii)  non-grid output could not be saved in metafile format when
@@ -1420,7 +1420,7 @@ Changes from grid_0.2 to grid_0.5:
     used in Windows with plot history recording turned on (although
     "add"ing individual grid "plots" to the plot history should still
     work).
-    
+
 2.  Added "mystrwidth" and "mystrheight" units;  basically these just
     complete the set of units which depend on font, fontsize, and/or 
     lineheight and therefore may refer to the current viewport settings
@@ -1446,7 +1446,7 @@ Changes from grid_0.2 to grid_0.5:
     If a viewport is rotated (because of its own "angle" setting
     or because it is within another viewport which is rotated) then
     the "clip" flag is ignored.
-  
+
 6.  The functions grid.start() and grid.stop() have been removed.
     grid automatically "registers" with devices.
 
@@ -1522,7 +1522,7 @@ Changes from grid_0.1 to grid_0.2:
 	pop.viewport(current.viewport())
 
     ... becomes ...
-    
+
         push.viewport(viewport())
 	pop.viewport()
 
@@ -1539,7 +1539,7 @@ Changes from grid_0.1 to grid_0.2:
 	vp2 <- viewport()
 	push.viewport(vp1, vp2)
 	pop.viewport(2)
-	
+
 12. Speed-up of pushing and popping viewports.  This will probably not
     be noticeable in normal usage, but makes a big difference for 
     frames and packing.
@@ -1572,7 +1572,7 @@ Changes from lattice_0.2 to grid_0.1:
        grid.edit(<grob>, grid.prop.list(col="red", lty="dashed"))
 
    ... rather than ...
-   
+
        grid.edit(<grob>, list(col="red", lty="dashed"))
 
 4. Added a new grid.frame() grob.  This acts a bit like a simple 
@@ -1585,7 +1585,7 @@ Changes from lattice_0.2 to grid_0.1:
    for each different type of grob.  
 
    For example, instead of the old ...
-   
+
        grid.rect(w=.8, h=.8, border="red")
 
    ... we have the new ...

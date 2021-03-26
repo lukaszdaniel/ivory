@@ -105,7 +105,7 @@ panel.mathdensity(dmath = dnorm, args = list(mean=0, sd=1),
     will be used to select an appropriate method for
     \code{\link{pretty}}.  This is particularly useful while plotting
     date-time objects.
-    
+
   }
 
   \item{reference}{ A logical flag determining whether the default

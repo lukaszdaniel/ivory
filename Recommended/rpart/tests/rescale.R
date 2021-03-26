@@ -23,5 +23,5 @@ aeq(fit2$y[,1], approx(c(0,3,4,7,9), cumhaz, tdata$time)$y)
 
 
 
- 
+
 

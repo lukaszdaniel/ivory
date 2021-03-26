@@ -37,7 +37,7 @@ qtukey(p, nmeans, df, nranges = 1, lower.tail = TRUE, log.p = FALSE)
 \value{
   \code{ptukey} gives the distribution function and \code{qtukey} its
   inverse, the quantile function.
-  
+
   The length of the result is the maximum of the lengths of the
   numerical arguments.  The other numerical arguments are recycled
   to that length.  Only the first elements of the logical arguments

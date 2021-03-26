@@ -161,12 +161,12 @@ Sl.setup <- function(G,cholesky=FALSE,no.repara=FALSE,sparse=FALSE) {
 
     if (m==0) {} else ## fixed block
     if (m==1) { ## singleton
-     
+
         Sl[[b]]$rank <- G$smooth[[i]]$rank  
         Sl[[b]]$S <- G$smooth[[i]]$S
 	Sl[[b]]$lambda <- 1
         b <- b + 1
-     
+
     } else { ## additive block...
       ## first test whether block can *easily* be split up into singletons
       ## easily here means no overlap in penalties 
@@ -233,7 +233,7 @@ Sl.setup <- function(G,cholesky=FALSE,no.repara=FALSE,sparse=FALSE) {
   ## In dense case E is a dense matrix and its block get filled in. In sparse
   ## case E is a list of lists of rows (i), cols (j) and elements (x) defining each
   ## block. So E$i[[b]],E$j[[b]],E$x[[b]] defines block b...
-  
+
   E <- if (sparse) list(i=list(),j=list(),x=list()) else matrix(0,np,np) ## well scaled square root penalty
   lambda <- rep(0,0)
 
@@ -366,7 +366,7 @@ Sl.setup <- function(G,cholesky=FALSE,no.repara=FALSE,sparse=FALSE) {
       }	
       #Sl[[b]]$ind <- rep(FALSE,ncol(Sl[[b]]$S[[1]]))
       Sl[[b]]$ind[ind] <- TRUE ## index penalized within sub-range
-     
+
       ## now compute well scaled sqrt
       S.norm <- norm(Sl[[b]]$S[[1]])
       St <- Sl[[b]]$S[[1]]/S.norm
@@ -748,9 +748,9 @@ ldetS <- function(Sl,rho,fixed,np,root=FALSE,repara=TRUE,nt=1,deriv=2,sparse=FAL
   ## block. So E$i[[b]],E$j[[b]],E$x[[b]] defines block b...
 
   if (root) { E <- if (sparse) list(i=list(),j=list(),x=list()) else matrix(0,np,np) } else E <- NULL
-  
+
   if (length(Sl)>0) for (b in seq_along(Sl)) { ## work through blocks
-    
+
     if (!Sl[[b]]$linear) { ## non-linear block
       ind <- k.sp + 1:Sl[[b]]$n.sp - 1 ## smoothing param index
       Sl[[b]] <- Sl[[b]]$updateS(rho[ind],Sl[[b]]) ## update the block with current params 
@@ -1234,7 +1234,7 @@ Sl.ift <- function(Sl,R,X,y,beta,piv,rp) {
   np <- length(beta)
   db <- matrix(0,np,nd)
   rss1 <- bSb1 <- rep(0,nd)  
-  
+
   for (i in seq_len(nd)) { ## compute the first derivatives
     db[,i] <- -backsolve(R,forwardsolve(t(R),Skb[[i]][piv]))[rp] ## d beta/ d rho_i
     ## rss1[i] <- 0* 2 * sum(db[,i]*Xrsd)                      ## d rss / d rho_i
@@ -1250,7 +1250,7 @@ Sl.ift <- function(Sl,R,X,y,beta,piv,rp) {
       rss2[j,k] <- rss2[k,j] <- 2 * sum(db[,j]*XX.db[,k]) ## + 2 * sum(d2b*Xrsd) 
       bSb2[j,k] <- bSb2[k,j] <-  (k==j)*sum(beta*Skb[[k]])  + 2*(sum(db[,k]*(Skb[[j]]+S.db[,j])) + 
                                  sum(db[,j]*Skb[[k]])) ## + 2 * (sum(d2b*Sb)   
-                               
+
     }
   }
   list(bSb=sum(beta*Sb),bSb1=bSb1,bSb2=bSb2,d1b=db,rss =sum(rsd^2),rss1=rss1,rss2=rss2)
@@ -1312,12 +1312,12 @@ Sl.iftChol <- function(Sl,XX,R,d,beta,piv,nt=1) {
     D1 <- .Call(C_mgcv_Rpforwardsolve,R,D[piv,]/d[piv],nt) ## note R transposed internally unlike forwardsolve
     db[piv,] <- -.Call(C_mgcv_Rpbacksolve,R,D1,nt)/d[piv]
   }
-  
+
   if (is.null(XX)) return(list(bSb1=bSb1,db=db)) ## return early
-  
+
   ## XX.db <- XX%*%db
   XX.db <- .Call(C_mgcv_pmmult2,XX,db,0,0,nt)
- 
+
   S.db <- Sl.mult(Sl,db,k=0)
 
   rss2 <- 2 * .Call(C_mgcv_pmmult2,db,XX.db,1,0,nt)
@@ -1342,7 +1342,7 @@ Sl.fitChol <- function(Sl,XX,f,rho,yy=0,L=NULL,rho0=0,log.phi=0,phi.fixed=TRUE,
   ## get log|S|_+ without stability transform... 
   fixed <- rep(FALSE,length(rho))
   ldS <- ldetS(Sl,rho,fixed,np=ncol(XX),root=FALSE,repara=FALSE,nt=nt[1])
-  
+
   ## now the Cholesky factor of the penalized Hessian... 
   #XXp <- XX+crossprod(ldS$E) ## penalized Hessian
   XXp <- Sl.addS(Sl,XX,rho)
@@ -1360,10 +1360,10 @@ Sl.fitChol <- function(Sl,XX,f,rho,yy=0,L=NULL,rho0=0,log.phi=0,phi.fixed=TRUE,
   }
   beta <- rep(0,p)
   beta[piv] <- backsolve(R,(forwardsolve(t(R),f[piv]/d[piv])))/d[piv]
- 
+
   ## get component derivatives based on IFT (noting that ldS$Sl has s.p.s updated to current)
   dift <- Sl.iftChol(ldS$Sl,XX,R,d,beta,piv,nt=nt[1])
- 
+
   ## now the derivatives of log|X'X+S|
   PP <- matrix(0,p,p)
   if (nt[2]>1) {
@@ -1381,7 +1381,7 @@ Sl.fitChol <- function(Sl,XX,f,rho,yy=0,L=NULL,rho0=0,log.phi=0,phi.fixed=TRUE,
 
   reml2 <- (dXXS$d2[!fixed,!fixed] - ldS$ldet2 +  
            (dift$rss2[!fixed,!fixed] + dift$bSb2[!fixed,!fixed])/(phi*gamma))/2 
- 
+
   if (!phi.fixed) {
     n <- length(reml1)
     rss.bSb <- yy - sum(beta*f) ## use identity ||y-Xb|| + b'Sb = y'y - b'X'y (b is minimizer)
@@ -1486,7 +1486,7 @@ fast.REML.fit <- function(Sl,X,y,rho,L=NULL,rho.0=NULL,log.phi=0,phi.fixed=TRUE,
 ## structurally un-identifiable coefficients. 
 ## Note that lower bounds on smoothing parameters are not handled.
   maxNstep <- 5  
-  
+
   if (is.null(nobs)) nobs <- nrow(X)
   np <- ncol(X)
   if (nrow(X) > np) { ## might as well do an initial QR step
@@ -1508,12 +1508,12 @@ fast.REML.fit <- function(Sl,X,y,rho,L=NULL,rho.0=NULL,log.phi=0,phi.fixed=TRUE,
   }
 
   fixed <- rep(FALSE,nrow(L))
- 
-  
+
+
   best <- Sl.fit(Sl,X,y,L%*%rho+rho.0,fixed,log.phi,phi.fixed,rss.extra,nobs,Mp,nt=nt,gamma=gamma)
   ## get a typical scale for the reml score... 
   reml.scale <- abs(best$reml) + best$rss/best$nobs
- 
+
   nr <- length(rho.0)
   if (!phi.fixed) { 
     rho <- c(rho,log.phi) ## append log.phi for fitting
@@ -1551,7 +1551,7 @@ fast.REML.fit <- function(Sl,X,y,rho,L=NULL,rho.0=NULL,log.phi=0,phi.fixed=TRUE,
     eh$values[ind] <- thresh 
     ## get the Newton direction, -ve inverse hessian times gradient
     uc.step <- - eh$vectors%*%((t(eh$vectors)%*%grad)/eh$values)
-    
+
     ## now make sure step is not too far...
     ms <- max(abs(uc.step))
     if (ms>maxNstep) uc.step <- maxNstep * uc.step/ms
@@ -1721,7 +1721,7 @@ Sl.postproc <- function(Sl,fit,undrop,X0,cov=FALSE,scale = -1,L,nt=1) {
   beta <- rep(0,np)
   beta[undrop] <- Sl.repara(fit$rp,fit$beta,inverse=TRUE)
   beta <- Sl.initial.repara(Sl,beta,inverse=TRUE,both.sides=TRUE,cov=TRUE,nt=nt)
- 
+
   if (cov) { 
     d1b <- matrix(0,np,ncol(fit$d1b))
     ## following construction a bit ugly due to Sl.repara assumptions...

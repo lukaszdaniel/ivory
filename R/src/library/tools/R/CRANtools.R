@@ -605,7 +605,7 @@ function(packages)
 {
     repos <- getOption("repos")
     ## Alternatively, use .get_standard_repository_URLs()
-    
+
     a <- utils::available.packages(filters = list(), repos = repos)
 
     v <- read_CRAN_object(CRAN_baseurl_for_src_area(),

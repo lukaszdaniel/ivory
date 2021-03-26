@@ -77,7 +77,7 @@ grid.revert(x, ...)
   \code{grid.force()}, so will not normally be called directly by
   the user.  It is exported so that methods can be written for
   custom grob classes if necessary.
-  
+
   The \code{grid.revert()} function reverses the effect of
   \code{grid.force()}, replacing forced content with the original
   grob.

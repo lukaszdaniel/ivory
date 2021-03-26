@@ -38,13 +38,13 @@ read.fwf(file, widths, header = FALSE, sep = "\t",
   \item{n}{the maximum number of records (lines) to be read, defaulting
     to no limit.}
   \item{buffersize}{Maximum number of lines to read at one time}
-  
+
   \item{fileEncoding}{character string: if non-empty declares the
     encoding used on a file (not a connection) so the character data can
     be re-encoded.  See the \sQuote{Encoding} section of the help for
     \code{\link{file}}, the \sQuote{R Data Import/Export} manual and
     \sQuote{Note}.}
-  
+
   \item{\dots}{further arguments to be passed to
     \code{\link{read.table}}.  Useful such arguments include
     \code{as.is}, \code{na.strings}, \code{colClasses} and \code{strip.white}.}
@@ -67,7 +67,7 @@ read.fwf(file, widths, header = FALSE, sep = "\t",
   Reducing the \code{buffersize} argument may reduce memory use when
   reading large files with long lines.  Increasing \code{buffersize} may
   result in faster processing when enough memory is available.
-  
+
   Note that \code{read.fwf} (not \code{read.table}) reads the supplied
   file, so the latter's argument \code{encoding} will not be useful.
 }
@@ -76,7 +76,7 @@ read.fwf(file, widths, header = FALSE, sep = "\t",
 }
 \seealso{
   \code{\link{scan}} and \code{\link{read.table}}.
-  
+
   \code{\link{read.fortran}} for another style of fixed-format files.
 }
 \examples{

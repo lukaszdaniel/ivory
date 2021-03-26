@@ -38,7 +38,7 @@ replayPlot(x, reloadPkgs=FALSE)
   The format of recorded plots may change between \R versions, so
   recorded plots should \strong{not} be used as a permanent
   storage format for \R plots.
-  
+
   As of \R 3.3.0, it is possible (again)
   to replay a plot from another \R session using, for example,
   \code{\link{saveRDS}} and \code{\link{readRDS}}.

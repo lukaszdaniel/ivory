@@ -2,7 +2,7 @@ residuals.coxph <-
   function(object, type=c("martingale", "deviance", "score", "schoenfeld",
 			  "dfbeta", "dfbetas", "scaledsch","partial"),
 	    collapse=FALSE, weighted=(type %in% c("dfbeta", "dfbetas")), ...) {
-      
+
     type <- match.arg(type)
     otype <- type
     if (type=='dfbeta' || type=='dfbetas') {
@@ -128,7 +128,7 @@ residuals.coxph <-
                            weights[ord],
                            as.integer(method=='efron'))
         }
-        
+
 	if (nvar >1) {
 	    rr <- matrix(0, n, nvar)
 	    rr[ord,] <- resid
@@ -146,12 +146,12 @@ residuals.coxph <-
 	    else                rr <- rr * sqrt(vv)
         }
     }
-    
+
     #
     # Multiply up by case weights (which will be 1 for unweighted)
     #
     if (weighted) rr <- rr * weights
-    
+
     #Expand out the missing values in the result
     if (!is.null(object$na.action)) {
 	rr <- naresid(object$na.action, rr)
@@ -159,7 +159,7 @@ residuals.coxph <-
 	else               n <- length(rr)
 	if (type=='deviance') status <- naresid(object$na.action, status)
     }
-    
+
     if (type=="partial"){
 	# This needs to be done after the naresid expansion, since the
 	#   predict function will have done naresid expansion, so that
@@ -180,7 +180,7 @@ residuals.coxph <-
 			      ifelse(status==0, 0, status*log(status-rr))))
     else rr
 }
-    
+
 
 # Much of this may be folded directly into residuals.coxph, later
 

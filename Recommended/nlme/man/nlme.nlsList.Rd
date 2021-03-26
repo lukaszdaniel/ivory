@@ -104,7 +104,7 @@
  B.D. (2002). The use of variance functions for linear and nonlinear
  mixed effects models is presented in detail in Davidian, M. and
  Giltinan, D.M. (1995).
- 
+
  Box, G.E.P., Jenkins, G.M., and Reinsel G.C. (1994) "Time Series
  Analysis: Forecasting and Control", 3rd Edition, Holden-Day. 
 

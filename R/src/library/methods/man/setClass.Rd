@@ -53,10 +53,10 @@ setClass(Class, representation, prototype, contains=character(),
       of these slots.  This argument
       must be supplied by name, \code{contains=}, in the call, for back compatibility
       with other arguments no longer recommended.
-      
+
       See the section \sQuote{Virtual Classes} for the special
       superclass  \code{"VIRTUAL"}.
-      
+
     }
   \item{prototype, where, validity, sealed, package}{
       \emph{These arguments are currently allowed, but either they are unlikely to be
@@ -95,7 +95,7 @@ setClass(Class, representation, prototype, contains=character(),
 
     \code{access} and \code{version} are included for
     historical compatibility with S-Plus, but ignored.
- 
+
     \code{S3methods} is a flag indicating that old-style methods
     will be written involving this class; ignored now.
   }

@@ -142,7 +142,7 @@ Prentice <- function(tenter, texit, cc,  id, X, ntot,robust, delta){
     fit$phase2var<-(1-(nc/ntot))*t(db)%*%(db)
     fit$naive.var <- fit$naive.var+fit$phase2var
     fit$var<-fit$naive.var
-    
+
     fit$coefficients <- fit$coef <- fit1$coefficients
     fit
 }
@@ -337,7 +337,7 @@ vcov.cch<-function(object,...) object$var
     coefficients[, 3] <- Z
     coefficients[, 4] <- 2*(1-p)
 
- 
+
     if (x$stratified){
         cat(gettextf("Exposure-stratified case-cohort analysis, %s method.", x$method, domain = "R-survival"), "\n", sep = "")
         m<-rbind(subcohort=x$subcohort.size, cohort=x$cohort.size)

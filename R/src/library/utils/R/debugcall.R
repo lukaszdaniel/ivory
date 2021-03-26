@@ -19,7 +19,7 @@
 .debugcall <- function(call, op) {
     funsym <- deparse(call[[1L]])
     func <- get(funsym, parent.frame(2L), mode="function")
-    
+
     have.methods <- isNamespaceLoaded("methods")
     func <- if(is.primitive(func)) {
         if (have.methods) methods::getGeneric(func)

@@ -102,13 +102,13 @@ Sys.umask(mode = NA)
   (although their documentation is often written assuming a POSIX file
   system).  So treat documentation cautiously if you are using, say, a
   FAT/FAT32 or network-mounted file system.
-  
+
   See \link{files} for how file paths with marked encodings are interpreted.  
 }
 \value{
   \code{dir.exists} returns a logical vector of \code{TRUE} or
   \code{FALSE} values (without names).
-  
+
   \code{dir.create} and \code{Sys.chmod} return invisibly a logical vector
   indicating if the operation succeeded for each of the files attempted.
   Using a missing value for a path name will always be regarded as a

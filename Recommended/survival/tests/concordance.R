@@ -44,7 +44,7 @@ allpair <- function(x, time, status, wt, all=FALSE) {
 # The std of C = std(numerator)/(number of comparable pairs)
 # The information matrix of a Cox model is = to the var(C-D)
 cfun <- function(fit) fit$cvar * sum(fit$count[1:3])^2
-                
+
 tdata <- aml[aml$x=='Maintained', c("time", "status")]
 tdata$x <- c(1,6,2,7,3,7,3,8,4,4,5)
 tdata$wt <- c(1,2,3,2,1,2,3,4,3,2,1)

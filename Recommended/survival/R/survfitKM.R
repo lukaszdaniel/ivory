@@ -8,7 +8,7 @@ survfitKM <- function(x, y, weights=rep(1.0,length(x)),
                       conf.lower=c('usual', 'peto', 'modified'),
                       start.time, id, cluster, robust, influence=FALSE,
                       type) {
-    
+
     if (!missing(type)) {
         if (!is.character(type)) stop("type argument must be character")
         # older style argument is allowed
@@ -21,7 +21,7 @@ survfitKM <- function(x, y, weights=rep(1.0,length(x)),
         if (!(stype %in% 1:2)) stop("stype must be 1 or 2")
         type <- as.integer(2*stype + ctype  -2)
     }
- 
+
     conf.type <- match.arg(conf.type)
     conf.lower<- match.arg(conf.lower)
     if (is.logical(conf.int)) {
@@ -30,7 +30,7 @@ survfitKM <- function(x, y, weights=rep(1.0,length(x)),
         if (!conf.int) conf.type <- "none"
         conf.int <- .95
     }
-      
+
     if (!is.Surv(y)) gettextf("'%s' argument is not an object of class %s", "y", dQuote("Surv"))
     if (attr(y, 'type') != 'right' && attr(y, 'type') != 'counting')
             stop("Can only handle right censored or counting data")
@@ -102,7 +102,7 @@ survfitKM <- function(x, y, weights=rep(1.0,length(x)),
         }   
         else stop("id or cluster option required")
     } else ncluster <- 0
- 
+
     if (is.logical(influence)) {
         # TRUE/FALSE is treated as all or nothing
         if (!influence) influence <- 0L
@@ -116,7 +116,7 @@ survfitKM <- function(x, y, weights=rep(1.0,length(x)),
         warning("robust=FALSE implies influence=FALSE")
         influence <- 0L
     }       
-  
+
     if (!se.fit) {
         # if the user asked for no standard error, skip any robust computation
         ncluster <- 0L
@@ -180,7 +180,7 @@ survfitKM <- function(x, y, weights=rep(1.0,length(x)),
                 sort2 <- order(ytemp[,2])
                 sort1 <- order(ytemp[,1])
             }
-     
+
             # Cluster is a nuisance: every curve might have a different set
             #  We need to relabel them from 1 to "number of unique clusters in this
             #  curve for the C routine
@@ -193,7 +193,7 @@ survfitKM <- function(x, y, weights=rep(1.0,length(x)),
                     clusterid[[i]] <-c.unique
                 }
             }
-            
+
             if (ncluster > 0) 
                 cfit[[i]] <- .Call(Csurvfitkm, ytemp, weights[keep], sort1 -1L, 
                                sort2 -1L, type,
@@ -230,7 +230,7 @@ survfitKM <- function(x, y, weights=rep(1.0,length(x)),
                       strata=strata)
           if (ny==3) rval$n.enter <- unlist(lapply(cfit, function(x) x$n[,8]))
     }
-        
+
     if (ny ==3) {
             rval$n.enter <- cfit$n[,8]
             rval$type <- "counting"
@@ -259,7 +259,7 @@ survfitKM <- function(x, y, weights=rep(1.0,length(x)),
                           'usual' = rval$std.err,
                           'peto' = sqrt((1-rval$surv)/ rval$n.risk),
                           'modified' = rval$std.err * sqrt(n.lag/rval$n.risk))
-            
+
         if (conf.type != "none") {
             ci <- survfit_confint(rval$surv, rval$std.err, logse=rval$logse,
                                   conf.type, conf.int, std.low)
@@ -316,10 +316,10 @@ survfitKM <- function(x, y, weights=rep(1.0,length(x)),
                     row.names(temp[[i]]) <- clname[clusterid[[i]]]
                 }
             }
-            
+
             if (influence==2 || influence ==3)
                 rval$influence.chaz <- temp
-          
+
             if (influence==1 || influence==3) {
                 # if an obs moves the cumulative hazard up, then it moves S down
                 if (length(xlev) ==1) 

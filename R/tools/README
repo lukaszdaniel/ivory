@@ -32,7 +32,7 @@ The files are as follows.
 	be improved].  Used by configure.
   GETVERSION
 	create API 'Rversion.h' from 'VERSION' and 'SVN-REVISION'.
-  
+
   copy-if-change
 	copy a file if changed; otherwise, do nothing.
 
@@ -46,7 +46,7 @@ The files are as follows.
 	generate simple manual pages from program output.  Taken from
 	the GNU help2man package (ftp://ftp.gnu.org/gnu/help2man/).
 	Used for a maintainer-mode build only: requires Perl.
-	
+
   ldAIX4
 	writes an export file, assembling the exported symbols by
 	reading the output of nm.  This file is needed on AIX (4.2 and

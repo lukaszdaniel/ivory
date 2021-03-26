@@ -59,7 +59,7 @@ SEXP survfitresid(SEXP Y2,      SEXP sort12,  SEXP sort22,  SEXP cstate2,
     double *i0;         /* initial influence */
     double *otime;         /* requested output times */
     SEXP setemp;        /* a temp for variables on the list */
-        
+
     /* returned objects */
     SEXP rlist;         /* the returned list and variable names of same */  
     const char *rnames[]= {"influence.pstate", "influence.auc", ""}; 
@@ -97,7 +97,7 @@ SEXP survfitresid(SEXP Y2,      SEXP sort12,  SEXP sort22,  SEXP cstate2,
 	setemp = SET_VECTOR_ELT(rlist, 1, allocMatrix(REALSXP, nobs, nout*nstate));
 	infa   = dmatrix(REAL(setemp), nobs, nstate); /* influence for AUC */
     }
-    
+
     /* allocate space for scratch vectors */
     ws = (double *) R_alloc(3*nstate, sizeof(double)); /*weighted number in state */
     pstate = ws + nstate;
@@ -139,12 +139,12 @@ SEXP survfitresid(SEXP Y2,      SEXP sort12,  SEXP sort22,  SEXP cstate2,
 	    }
 	}
     }
-    
+
     for (j=0; j<nstate; j++) { /* initialize infp and infa */
 	for (i=0; i<nobs; i++) infp[j][i] = *dptr++;
 	if (doauc==1) for (i=0; i<nobs; i++) infa[j][i] = 0;
     } 
-    
+
     if (ncolY ==3) {
 	eptr  = 0; /*index to sort1, the entry times */
 	for (i=0; i< nobs; i++) atrisk[i] =0;
@@ -177,7 +177,7 @@ SEXP survfitresid(SEXP Y2,      SEXP sort12,  SEXP sort22,  SEXP cstate2,
 		}
 		starttime = otime[itime];
 	    }
-	    
+
 	    /* Copy it forward to the next output time 
 	    ** The matrix indices infa and infp point to the n x nstate
 	    **  influences for the current output time.  We copy forward
@@ -201,7 +201,7 @@ SEXP survfitresid(SEXP Y2,      SEXP sort12,  SEXP sort22,  SEXP cstate2,
 	    }
 	}
 	if (itime== nout) break;  /* no need to go past last output time*/
-	
+
 	/* Add subjects whose entry time is < ctime into the counts */
 	if (ncolY ==3) {
 	    for (; eptr<nobs; eptr++) {
@@ -249,7 +249,7 @@ SEXP survfitresid(SEXP Y2,      SEXP sort12,  SEXP sort22,  SEXP cstate2,
 	    }
 	    starttime = ctime;
 	}
-	
+
 	/* Update the derivative
 	**   Each obs i that has moved from state j to state k has added 
 	**    -wt[i]/ws[j] to cmat[j,j] and wt[i]/ws[j] to cmat[j,k]
@@ -273,7 +273,7 @@ SEXP survfitresid(SEXP Y2,      SEXP sort12,  SEXP sort22,  SEXP cstate2,
 		infp[newstate][j] += temp* infp[oldstate][j];
 		infp[oldstate][j] -= temp* infp[oldstate][j];
             }
-	    
+
 	    /* add C/wt[i], which affects all those in oldstate*/
 	    temp2 = pstate[oldstate]/ws[oldstate];   /* S(t)/ wt */
 	    infp[newstate][psave] += temp2; /* the obs which moved */
@@ -295,7 +295,7 @@ SEXP survfitresid(SEXP Y2,      SEXP sort12,  SEXP sort22,  SEXP cstate2,
 		}  
 		for (k=0; k<nstate; k++) infp[k][j] += tempvec[k];
             }
-	    
+
 	    /* step 2, add in dH term 
 	    ** the set of obs with i <= j are the set who have not yet been
 	    **  removed from the risk set, those with atrisk=0 have not yet
@@ -332,7 +332,7 @@ SEXP survfitresid(SEXP Y2,      SEXP sort12,  SEXP sort22,  SEXP cstate2,
 		tempvec[j] += pstate[k] * cmat[k][j];
 	}	
 	for (j=0; j<nstate; j++) pstate[j] += tempvec[j];
-		
+
 	/* Take the current events and censors out of the risk set */
 	for (; i<nobs; i++) {
 	    p2 = sort2[i];
@@ -355,7 +355,7 @@ SEXP survfitresid(SEXP Y2,      SEXP sort12,  SEXP sort22,  SEXP cstate2,
 		}	
 		starttime = otime[itime];
 	    }	
-	
+
 	if ((itime+1)<nout) {
 	    /* there is yet one more reporting time after this one */
 	    for (k=0; k<nstate; k++){
@@ -374,7 +374,7 @@ SEXP survfitresid(SEXP Y2,      SEXP sort12,  SEXP sort22,  SEXP cstate2,
 	    }
 	}
     }
-	
+
     UNPROTECT(1);
     return(rlist);
 }

@@ -8,13 +8,13 @@ SEXP agfit4(SEXP nused2, SEXP surv2,      SEXP covar2,    SEXP strata2,
             SEXP sort12,     SEXP sort22,    SEXP method2,
             SEXP maxiter2,   SEXP  eps2,     SEXP tolerance2,
             SEXP doscale2) { 
-                
+
     int i,j,k, person;
     int indx1, istrat, p, p1;
     int nrisk, nr;
     int nused, nvar;
     int rank=0, rank2, fail;  /* =0 to keep -Wall happy */
-   
+
     double **covar, **cmat, **imat;  /*ragged array versions*/
     double *a, *oldbeta;
     double *scale;
@@ -59,7 +59,7 @@ SEXP agfit4(SEXP nused2, SEXP surv2,      SEXP covar2,    SEXP strata2,
     tol_chol = asReal(tolerance2);
     maxiter = asInteger(maxiter2);
     doscale = INTEGER(doscale2);
-  
+
     /* input arguments */
     start = REAL(surv2);
     tstop  = start + nr;
@@ -81,7 +81,7 @@ SEXP agfit4(SEXP nused2, SEXP surv2,      SEXP covar2,    SEXP strata2,
     a2= a + nvar;
     scale  = a2 + nvar;
     oldbeta = scale + nvar;
-            
+
     /*
     **  Set up the ragged arrays
     **  covar2 might not need to be duplicated, even though
@@ -121,7 +121,7 @@ SEXP agfit4(SEXP nused2, SEXP surv2,      SEXP covar2,    SEXP strata2,
 
     iter2  =  SET_VECTOR_ELT(rlist, 6, allocVector(INTSXP, 1));
     iter = INTEGER(iter2);
-                
+
     /*
     ** Subtract the mean from each covar, as this makes the variance
     **  computation more stable.  The mean is taken per stratum,
@@ -167,7 +167,7 @@ SEXP agfit4(SEXP nused2, SEXP surv2,      SEXP covar2,    SEXP strata2,
     }
 
     for (i=0; i<nvar; i++) beta[i] /= scale[i]; /* rescale initial betas */
-             
+
     /* main loop */
     halving =0 ;             /* =1 when in the midst of "step halving" */
     fail =0;
@@ -275,7 +275,7 @@ SEXP agfit4(SEXP nused2, SEXP surv2,      SEXP covar2,    SEXP strata2,
                     cmat2[i][j]=0;
                 }
             }
-            
+
             for (; person <nused; person++) {
                 p = sort2[person];
                 if (strata[p] != istrat || tstop[p] < dtime) break;/*no more to add*/
@@ -299,7 +299,7 @@ SEXP agfit4(SEXP nused2, SEXP surv2,      SEXP covar2,    SEXP strata2,
                     if (denom > 0) {
                         /* we can skip this if there is no one at risk */
                         if (fabs(temp) > 709) error("exp overflow due to covariates\n");
-                             
+
                         temp = exp(-temp);  /* the change in scale, for all the weights */
                         denom *= temp;
                         for (i=0; i<nvar; i++) {
@@ -311,7 +311,7 @@ SEXP agfit4(SEXP nused2, SEXP surv2,      SEXP covar2,    SEXP strata2,
                     }       
                 }
                 risk = exp(eta[p] - recenter) * weights[p];
-                
+
                 if (event[p] ==1 ){
                     deaths++;
                     denom2 += risk;
@@ -383,7 +383,7 @@ SEXP agfit4(SEXP nused2, SEXP surv2,      SEXP covar2,    SEXP strata2,
             /* it almost takes malice to give a starting estimate with infinite
             **  loglik.  But if so, just give up now */
             if (fail>0) break;
-            
+
             for (i=0; i<nvar; i++) {
                   oldbeta[i] = beta[i];
                 beta[i] += a[i];
@@ -395,7 +395,7 @@ SEXP agfit4(SEXP nused2, SEXP surv2,      SEXP covar2,    SEXP strata2,
                 if (isfinite(imat[i][i]) ==0) fail++;
             rank2 = cholesky2(imat, nvar, tol_chol);
             fail = fail + isnan(newlk) + isinf(newlk) + abs(rank-rank2);
-     
+
             if (fail ==0 && halving ==0 &&
                 fabs(1-(loglik[1]/newlk)) <= eps) break;  /* success! */
 
@@ -515,7 +515,7 @@ SEXP agfit4(SEXP nused2, SEXP surv2,      SEXP covar2,    SEXP strata2,
                                cmat2[i][j]=0;
                            }
                        }
-                       
+
                        for (; person <nused; person++) {
                            p = sort2[person];
                            if (strata[p] != istrat || tstop[p] < dtime) break;/*no more to add*/
@@ -539,7 +539,7 @@ SEXP agfit4(SEXP nused2, SEXP surv2,      SEXP covar2,    SEXP strata2,
                                if (denom > 0) {
                                    /* we can skip this if there is no one at risk */
                                    if (fabs(temp) > 709) error("exp overflow due to covariates\n");
-                                        
+
                                    temp = exp(-temp);  /* the change in scale, for all the weights */
                                    denom *= temp;
                                    for (i=0; i<nvar; i++) {
@@ -551,7 +551,7 @@ SEXP agfit4(SEXP nused2, SEXP surv2,      SEXP covar2,    SEXP strata2,
                                }       
                            }
                            risk = exp(eta[p] - recenter) * weights[p];
-                           
+
                            if (event[p] ==1 ){
                                deaths++;
                                denom2 += risk;
@@ -610,7 +610,7 @@ SEXP agfit4(SEXP nused2, SEXP surv2,      SEXP covar2,    SEXP strata2,
                    }
                break;
             }
-            
+
             if (fail >0 || newlk < loglik[1]) {
                 /* 
                 ** The routine has not made progress past the last good value.

@@ -62,7 +62,7 @@ infoRDS(file)
   \code{\link{file}}.  Only for the exception are marked encodings of
   \code{file} which cannot be translated to the native encoding handled
   on Windows.
-  
+
   Compression is handled by the connection opened when \code{file} is a
   file name, so is only possible when \code{file} is a connection if
   handled by the connection.  So e.g.\sspace{}\code{\link{url}}

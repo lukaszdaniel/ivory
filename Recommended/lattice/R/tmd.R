@@ -212,5 +212,5 @@ tmd.trellis <-
            prepanel = prepanel,
            ...)
 }
-                
+
 

@@ -51,7 +51,7 @@ chol(x, \dots)
   is true that \code{t(Q[, oo]) \%*\% Q[, oo]} equals \code{x},
   or, alternatively, \code{t(Q) \%*\% Q} equals \code{x[pivot,
     pivot]}.  See the examples.
-  
+
   The value of \code{tol} is passed to LAPACK, with negative values
   selecting the default tolerance of (usually) \code{nrow(x) *
   .Machine$double.neg.eps * max(diag(x))}.  The algorithm terminates once

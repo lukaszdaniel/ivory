@@ -10,7 +10,7 @@ fit4 <- survreg(Surv(log(futime), fustat) ~age + ecog.ps, ovarian,
 		dist='extreme')
 aeq(fit1$coef, fit4$coef)
 aeq(fit1$var, fit4$var)
- 
+
 resid(fit1, type='working')
 resid(fit1, type='response')
 resid(fit1, type='deviance')

@@ -30,7 +30,7 @@ not invalidated by the trick,
 unless parameter estimates end up close to the effective zero or effective
 infinity: but if this is the case then the asymptotics would also have been invalid
 for a conventional monotonic parameterization.
- 
+
 This reparameterization was made necessary by some modifications to the
 underlying optimization method in  \code{lme} introduced in nlme 3.1-62. It is
 possible that future releases will return to the \code{\link{notExp}} parameterization.

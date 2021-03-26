@@ -66,7 +66,7 @@ installed.packages(lib.loc = NULL, priority = NULL,
 \note{
   This needs to read several files per installed package, which will be
   slow on Windows and on some network-mounted file systems.
-  
+
   It will be slow when thousands of packages are installed, so do not
   use it to find out if a named package is installed (use
   \code{\link{find.package}} or \code{\link{system.file}}) nor to find

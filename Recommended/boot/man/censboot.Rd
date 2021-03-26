@@ -161,7 +161,7 @@ censboot(data, statistic, R, F.surv, G.surv, strata = matrix(1,n,2),
   the estimated censoring distribution (\code{sim = "model"}) or from the
   conditional censoring distribution as in the previous paragraph
   (\code{sim = "cond"}).
-  
+
   The weird bootstrap holds the censored observations as fixed and also
   the observed failure times.  It then generates the number of events at
   each failure time using a binomial distribution with mean 1 and

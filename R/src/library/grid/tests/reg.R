@@ -153,7 +153,7 @@ testWidth(grobWidth(circleGrob(x=unit(.5, "npc") +
                                unit(c(-.25, .25), "inches"),
                                r=unit(.25, "inches"))),
           unit(1, "inches"))          
-                    
+
 # A = Height;  B = circle; C = ALL; D = BOTH
 testHeight(grobHeight(circleGrob(r=unit(.5, "inches"))),
           unit(1, "inches"))
@@ -163,7 +163,7 @@ testHeight(grobHeight(circleGrob(x=unit(.5, "npc") +
                                  unit(c(-.25, .25), "inches"),
                                  r=unit(.25, "inches"))),
            unit(1, "inches"))          
-                    
+
 ########
 # RECT
 ########
@@ -230,7 +230,7 @@ testWidth(grobWidth(rectGrob(x=unit(.5, "npc") +
                              width=unit(.5, "inches"),
                              height=unit(.5, "inches"))),
           unit(1, "inches"))          
-                    
+
 # A = Height;  B = rect; C = ALL; D = BOTH
 testHeight(grobHeight(rectGrob(width=unit(1, "inches"),
                                height=unit(1, "inches"))),
@@ -242,7 +242,7 @@ testHeight(grobHeight(rectGrob(x=unit(.5, "npc") +
                                width=unit(.5, "inches"),
                                height=unit(.5, "inches"))),
            unit(1, "inches"))          
-                    
+
 ########
 # polygon
 # Four locations in a diamond
@@ -335,7 +335,7 @@ testWidth(grobWidth(polygonGrob(x=unit(.5, "npc") +
                                    .25, 0, .25, .5), "inches"),
                             id=rep(1:2, each=4))),
           unit(1, "inches"))          
-                    
+
 # A = Height;  B = polygon; C = ALL; D = BOTH
 testHeight(grobHeight(polygonGrob(x=unit(.5, "npc") +
                             unit(c(-.5, 0, .5, 0), "inches"),
@@ -350,7 +350,7 @@ testHeight(grobHeight(polygonGrob(x=unit(.5, "npc") +
                                    .25, 0, .25, .5), "inches"),
                             id=rep(1:2, each=4))),
            unit(1, "inches"))          
-                    
+
 ########
 # TEXT
 ########
@@ -417,7 +417,7 @@ testWidth(grobWidth(textGrob(str,
                              y=unit(.5, "npc") + unit(c(-.5, .5), "inches"),
                              hjust=c(0, 1), vjust=c(0, 1))),
           unit(1, "inches"))          
-                    
+
 # A = Height;  B = text; C = ALL; D = BOTH
 testHeight(grobHeight(textGrob(str)),
           strh)

@@ -130,7 +130,7 @@ strip.custom(\dots)
   \code{strip.default}, but with different defaults for the arguments
   specified in the call.
 }
-  
+
 
 \details{ default strip function for trellis functions. Useful 
   mostly because of the \code{style} argument --- non-default styles

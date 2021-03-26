@@ -5001,7 +5001,7 @@ sp +=
 sq = $(subst $(sp),\ ,$1)
 include $(call sq,$@{R_HOME@}/etc$@{R_ARCH@}/Makeconf)
 @end example
- 
+
 A portable and the recommended way to avoid the problem of spaces in
 @code{$@{R_HOME@}} is using option @code{-f} of @command{make}.  This is
 easy to do with recursive invocation of @command{make}, which is also the
@@ -15605,7 +15605,7 @@ invocation of @command{make}, see @ref{Writing portable packages}.
 all:
       $(MAKE) -f "$@{R_HOME@}/etc$@{R_ARCH@}/Makeconf" -f Makefile.inner
 @end example
-  
+
 Additional flags which @code{$(MAIN_LINK)} includes are, amongst others,
 those to select OpenMP and @option{--export-dynamic} for the GNU linker
 on some platforms.  In principle @code{$(LIBS)} is not needed

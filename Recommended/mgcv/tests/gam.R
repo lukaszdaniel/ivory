@@ -40,7 +40,7 @@ b5<-gam(y~s(x0)+s(x1)+s(x2)+s(x3),family=poisson,
         data=dat,method="REML")
 plot(b5,pages=1)
 
- 
+
 ## a binary example (see ?gam.models for large dataset version)...
 
 dat <- gamSim(1,n=400,dist="binary",scale=.33)

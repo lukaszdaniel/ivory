@@ -18,7 +18,7 @@ polys.plot(pc,z=NULL,scheme="heat",lab="",...)
    of \code{z}.}
 
   \item{lab}{label for plot.}
-   
+
   \item{...}{other arguments to pass to plot (currently only if \code{z} is \code{NULL}).}
 
 

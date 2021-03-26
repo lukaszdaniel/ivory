@@ -323,7 +323,7 @@ const static struct {
 #ifdef DEBUG
 # include <stdio.h>
 #endif
-    
+
 
 extern void Rf_warning(const char *, ...);
 
@@ -385,7 +385,7 @@ static const char *reg2Olson(const wchar_t *s)
 	    if (!wcscmp(s, (wchar_t *) regdata))  return TZtable[i].Olson;
 	}
     }
-    
+
     Rf_warning(_("unable to identify current timezone '%s':\nplease set environment variable 'TZ'"), s);
     return "unknown";
 }

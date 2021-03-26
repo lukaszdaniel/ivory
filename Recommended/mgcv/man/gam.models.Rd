@@ -11,7 +11,7 @@ Specifically let \eqn{y_i}{y_i} denote an independent random variable
 with mean \eqn{\mu_i}{mu_i} and an exponential family distribution, or failing 
 that a known mean variance relationship suitable for use of quasi-likelihood methods. 
 Then the the linear predictor of a GAM has a structure something like
- 
+
 \deqn{g(\mu_i) = {\bf X}_i{\beta} + f_1(x_{1i},x_{2i}) + f_2(x_{3i}) + L_i f_3(x_4) + 
 \ldots}{g(mu_i)=X_i b + f_1(x_1i,x_2i) + f_2(x_3i) + L_i f_3(x_4) + ...}
 
@@ -123,7 +123,7 @@ way, except that no smooth is generated for the first level of the ordered facto
 This is useful for setting up 
 identifiable models when the same smooth occurs more than once in a model, with different factor \code{by} variables.
 
- 
+
 As an example, consider the model
 \deqn{E(y_i) = \beta_0+ f(x_i)z_i}{E(y_i) = b_0 + f(x_i)z_i}
 where \eqn{f}{f} is a smooth function, and \eqn{z_i}{z_i} is a numeric variable.
@@ -369,7 +369,7 @@ par(op)
 rm(dat)
 
 ## A Gamma example, by modify `gamSim' output...
- 
+
 dat <- gamSim(1,n=400,dist="normal",scale=1)
 dat$f <- dat$f/4 ## true linear predictor 
 Ey <- exp(dat$f);scale <- .5 ## mean and GLM scale parameter

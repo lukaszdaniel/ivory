@@ -4,11 +4,11 @@ parsecovar1 <- function(flist, statedata) {
         stop("an element of the formula list is not a formula")
     if (any(sapply(flist, length) != 3))
         stop("all formulas must have a left and right side")
-    
+
     # split the formulas into a right hand and left hand side
     lhs <- lapply(flist, function(x) x[-3])   # keep the ~
     rhs <- lapply(flist, function(x) x[[3]])  # don't keep the ~
-    
+
     rhs <- parse_rightside(rhs)
     # deal with the left hand side of the formula
     # the next routine cuts at '+' signs
@@ -131,7 +131,7 @@ parsecovar2 <- function(covar1, statedata, dformula, Terms, transitions,states) 
                  states[indx1==0])
         statedata <- statedata[indx1,]   # put it in order
     }
-    
+
     # Statedata might have rows for states that are not in the data set,
     #  for instance if the coxph call had used a subset argument.  Any of
     #  those were eliminated above.
@@ -156,7 +156,7 @@ parsecovar2 <- function(covar1, statedata, dformula, Terms, transitions,states) 
         for (i in seq_along(covar1$rhs)) {  
             rhs <- covar1$rhs[[i]]
             lhs <- covar1$lhs[[i]]  # one rhs and one lhs per formula
-          
+
             state1 <- state2 <- NULL
             for (x in lhs) {
                 # x is one term
@@ -187,7 +187,7 @@ parsecovar2 <- function(covar1, statedata, dformula, Terms, transitions,states) 
                     if (any(is.na(k))) stop(gettextf("%s: state not found", x$left[is.na(k)]))
                     temp1 <- which(statedata$state %in% x$left)
                 }
-                
+
                 # right of colon
                 if (!is.list(x$right) && length(x$right) ==1 && x$right ==0) 
                     temp2 <- 1:nrow(statedata)
@@ -244,12 +244,12 @@ parsecovar2 <- function(covar1, statedata, dformula, Terms, transitions,states) 
             if (length(rhs$ival)) 
                 inits <- c(inits, list(term=rindex, state1=state1, 
                                        state2= state2, init= rhs$ival))
-            
+
             # adding -1 to the front is a trick, to check if there is a "+1" term
             dummy <- ~ -1 + x
             dummy[[2]][[3]] <- rhs$formula
             if (attr(terms(dummy), "intercept") ==1) rindex <- c(1L, rindex)
-         
+
             # an update of "- sex" won't generate anything to add
             # dmap is simply an indexed set of unique values to pull from, so that
             #  no number is used twice
@@ -293,10 +293,10 @@ parsecovar2 <- function(covar1, statedata, dformula, Terms, transitions,states) 
     temp <- tmap2[1,]
     tmap2[1,] <- match(abs(tmap2[1,]), unique(abs(temp)))
     phbaseline <- ifelse(temp<0, tmap2[1,], 0)
-                      
+
     if (nrow(tmap2) > 1)
         tmap2[-1,] <- match(tmap2[-1,], unique(c(0L, tmap2[-1,]))) -1L
-      
+
     dimnames(tmap2) <- list(c("(Baseline)", colnames(allterm)),
                                 paste(indx1[trow], indx2[tcol], sep=':')) 
     # mapid gives the from,to for each realized state
@@ -312,7 +312,7 @@ parsecovar3 <- function(tmap, Xcol, Xassign, phbaseline=NULL) {
     nph.row  <- length(unique(ptemp))
     cmap <- matrix(0L, length(Xcol) + nph.row - hasintercept, ncol(tmap))
     uterm <- unique(Xassign[Xassign != 0])   # terms that will have coefficients
-    
+
     xcount <- table(factor(Xassign, levels=1:max(Xassign)))
     mult <- 1+ max(xcount)  # temporary scaling
 
@@ -333,7 +333,7 @@ parsecovar3 <- function(tmap, Xcol, Xassign, phbaseline=NULL) {
 
     # renumber coefs as 1, 2, 3, ...
     cmap[,] <- match(cmap, sort(unique(c(0L, cmap)))) -1L
-    
+
     colnames(cmap) <- colnames(tmap)
     if (hasintercept) rownames(cmap) <- c(Xcol[-1], newname)
     else rownames(cmap) <- c(Xcol, newname)

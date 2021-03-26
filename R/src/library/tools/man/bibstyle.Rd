@@ -69,7 +69,7 @@ getBibstyle(all = FALSE)
   \code{\link{unclass}}'ed entry from the \code{\link{bibentry}} vector
   passed to the renderer, and should produce a single element character
   vector (possibly containing newlines).
-  
+
   The other routines are as follows.  \code{sortKeys}, a function to
   produce a sort key to sort the entries, is passed the original
   \code{\link{bibentry}} vector and should produce a sortable vector of

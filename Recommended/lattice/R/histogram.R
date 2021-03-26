@@ -118,7 +118,7 @@ panel.histogram <-
 ##                y = unit(c(0,0), "native"),
 ##                gp = gpar(col = border, lty = lty, lwd = lwd, alpha = alpha),
 ##                default.units = "npc")
-        
+
     if (length(x) > 0)
     {
         if (is.null(breaks))
@@ -269,7 +269,7 @@ histogram.formula <-
                        ylab.default = "dummy",
                        lattice.options = lattice.options), dots),
                 quote = TRUE)
-                          
+
     dots <- foo$dots # arguments not processed by trellis.skeleton
     foo <- foo$foo
     foo$call <- sys.call(sys.parent()); foo$call[[1]] <- quote(histogram)
@@ -281,7 +281,7 @@ histogram.formula <-
     foo <- c(foo, do.call("construct.scales", scales))
 
     ## Step 3: Decide if limits were specified in call:
-    
+
     have.xlim <- !missing(xlim)
     if (!is.null(foo$x.scales$limits))
     {
@@ -306,7 +306,7 @@ histogram.formula <-
             if (is.logical(xlog)) 10
             else if (is.numeric(xlog)) xlog
             else if (xlog == "e") exp(1)
-        
+
         x <- log(x, xbase)
         if (have.xlim) xlim <- logLimits(xlim, xbase)
     }
@@ -342,7 +342,7 @@ histogram.formula <-
     ## equispaced breaks in that case).  Ideally, the prepanel
     ## function should check if type!=density and warn if necessary
     ## when breaks is a function.
-    
+
     prefer.density <- 
         (is.function(breaks) || 
          (is.null(breaks) && !equal.widths) ||

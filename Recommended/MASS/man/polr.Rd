@@ -141,7 +141,7 @@ polr(formula, data, weights, start, \dots, subset, na.action,
 }
 \references{
   Agresti, A. (2002) \emph{Categorical Data.} Second edition.  Wiley.
-  
+
   Venables, W. N. and Ripley, B. D. (2002)
   \emph{Modern Applied Statistics with S.} Fourth edition.  Springer.
 }

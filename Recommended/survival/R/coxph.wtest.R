@@ -12,7 +12,7 @@ coxph.wtest <- function(var, b, toler.chol=1e-9) {
         nvar <- length(b)
         ntest <- 1
         }
-    
+
     if (length(var) == 0) { #special case added by Tom Lumley
 	if (nvar == 0) return(list(test=numeric(0), df=0, solve=0))
 	else stop(gettextf("'%s' and '%s' arguments are of different lengths", "var", "b"))

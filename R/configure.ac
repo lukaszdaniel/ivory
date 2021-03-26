@@ -1449,7 +1449,7 @@ rm -f libconftest${DYLIB_EXT} conftest.c
        shlib_ldflags="-dynamiclib -flat_namespace -undefined suppress -single_module -multiply_defined suppress"
        dylib_undefined_allowed=yes
     fi
-	
+
     ## we use the same method for shlib and dylib now
     darwin_dylib_ldflags="${shlib_ldflags}"
     ## side note: we could use flat namespace instead, but there is an exception:
@@ -2502,7 +2502,7 @@ R_SYS_POSIX_LEAPSECONDS
 
 ## stat times
 gl_STAT_TIME
- 
+
 ## R profiling.
 if test "${want_R_profiling}" = yes; then
   AC_CHECK_FUNCS(setitimer,

@@ -37,7 +37,7 @@ survfit0 <- function(x, start.time=0) {
         # i = where to add, z = what to add
         n.add <- length(i)
         i2 <- i + 1:n.add -1
-        
+
         if (is.matrix(x)) {
             # indx is the new rows that are equal to the old ones
             indx <- seq(1, n.add + nrow(x))[ -i2]
@@ -63,7 +63,7 @@ survfit0 <- function(x, start.time=0) {
         }   
         newx
     }
-    
+
     # I want the result to be a list in the same order
     # change on 12/2020: p0 and sp0 will be redundant, but leave them in
     #  anyway.  It makes it easier for survfitCI and residuals.survfit.
@@ -106,7 +106,7 @@ survfit0 <- function(x, start.time=0) {
         else if (i %in% add1) new[[i]] <- addto(x[[i]], insert, 1L)
         else new[[i]] <- x[[i]]
     }
-    
+
     if (!inherits(x, "survfitms")) {
         addcol <- function(x) cbind(0, x)
         # we need to fix up influence objects, which have subjects as the
@@ -119,13 +119,13 @@ survfit0 <- function(x, start.time=0) {
             }
         }
     }
-                     
+
     if (is.null(new$logse)) {
         # reprise the logic of the older code
         if (inherits(x, "survfitms")) x$logse <- FALSE
         else x$logse <- TRUE
     }
-    
+
     if (is.null(x$cumhaz) && class(x)[1] == "survfit") {  # fill it in!
         new$cumhaz <- -log(new$surv)
         if (!is.null(x$std.err)) {

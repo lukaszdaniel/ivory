@@ -12,7 +12,7 @@
   Because cirrhosis is a feature only of advanced disease, a change of
   its name to "primary biliary cholangitis" was proposed by patient
   advocacy groups in 2014.
-  
+
 This data is from the Mayo Clinic trial in PBC conducted between 1974
 and 1984.  
 A total of 424 PBC patients, referred to Mayo Clinic during that ten-year
@@ -23,7 +23,7 @@ additional 112 cases did not participate in the clinical trial, but consented
 to have basic measurements recorded and to be followed for survival.  Six of
 those cases were lost to follow-up shortly after diagnosis, so the data here
 are on an additional 106 cases as well as the 312 randomized participants.
-    
+
 A nearly identical data set found in appendix D of Fleming and Harrington;
 this version has fewer missing values.
 

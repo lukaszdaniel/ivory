@@ -29,19 +29,19 @@ _D_e_t_a_i_l_s:
      if we do escape: \$ \# \_ , and with three backslashes, \\#.
 
                              a < b > c | d, x^y                         
-     
+
                             \$k > \#k, x_y, x\_y                        
-     
+
      group-weighting from $[N_iP_i(1-P_i)]$
 
-     
-     
+
+
          % a
          \
          \% c
          {
          \{
-       
+
 
 _U_R_L_s _a_n_d _e_m_a_i_l_s:
 
@@ -55,4 +55,4 @@ _U_R_L_s _a_n_d _e_m_a_i_l_s:
 _E_x_a_m_p_l_e_s:
 
      "\\r\\n"
-     
+

@@ -29,7 +29,7 @@ The density function of the shash family is
          \code{shash} can model skewness to either side, depending on the sign of \eqn{\epsilon}. 
          Also, shash can have tails that are lighter (\eqn{\delta>1}) or heavier (\eqn{0<\delta<1}) that a normal.
          For fitting purposes, here we are using \eqn{\tau = log(\sigma)} and \eqn{\phi = log(\delta)}.
-         
+
 The link function used for \eqn{\tau} is logeb with is \eqn{\eta = log{exp(\tau)-b}} so that the inverse link is
 \eqn{\tau = log(\sigma) = log{exp(\eta)+b}}. The point is that we are don't allow \eqn{\sigma} to become smaller
 than a small constant b. The likelihood includes a ridge penalty \eqn{- phiPen * \phi^2}, which shrinks \eqn{\phi} toward zero. When sufficient data is available the ridge penalty does not change the fit much, but it is useful to include it when fitting the model to small data sets, to avoid \eqn{\phi} diverging to +infinity (a problem already identified by Jones and Pewsey (2009)). 

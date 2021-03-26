@@ -171,7 +171,7 @@ panel.pairs <-
             if (is.list(pscales) && !is.null(pscales[[i]]$lim))
                 pscales[[i]]$lim
             else prepanel.limits(z[,i])
-    
+
     ## maybe (ideally) this should be affected by scales
 
     if (length(subscripts))
@@ -201,7 +201,7 @@ panel.pairs <-
                                           clip = trellis.par.get("clip")$panel,
                                           xscale = as.numeric(extend.limits(lim[[j]])),
                                           yscale = as.numeric(extend.limits(lim[[i]]))))
-                                          
+
                                           ## xscale = if (is.character(lim[[j]]))
                                           ## c(0, length(lim[[j]]) + 1) else lim[[j]],
                                           ## yscale = if (is.character(lim[[i]]))
@@ -304,7 +304,7 @@ panel.pairs <-
                         checkArgsAndCall(if (i > j) lower.panel else upper.panel, pargs)
                     else
                         checkArgsAndCall(if (i < j) lower.panel else upper.panel, pargs)
-                    
+
                     grid.rect(name = trellis.grobname("pairs.border",
                                 type="panel"),
                               gp =
@@ -468,7 +468,7 @@ splom.formula <-
         have.ylim <- TRUE
         ylim <- foo$y.scales$limits
     }
-    
+
     ## Step 4: Decide if log scales are being used (has to be NO):
 
     ## have.xlog <- !is.logical(foo$x.scales$log) || foo$x.scales$log

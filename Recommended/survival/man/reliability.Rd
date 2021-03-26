@@ -58,7 +58,7 @@ Meeker and Escobar.
       \item time: time to failure or censoring
       \item status: 0=censored, 1=failed
     }
-  
+
     \item Data set \code{turbine}:
     Each of 432 turbine wheels was inspected
     once to determine whether a crack had developed in the wheel or not.

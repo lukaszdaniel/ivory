@@ -30,7 +30,7 @@ survConcordance <- function(formula, data,
         Terms <- Terms[-stemp$terms]
     }
     else strat <- NULL
-    
+
     x <- model.matrix(Terms, m)[,-1, drop=FALSE]  #remove the intercept
     if (ncol(x) > 1) stop("only one predictor variable allowed")
 

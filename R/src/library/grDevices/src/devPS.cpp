@@ -6299,7 +6299,7 @@ static SEXP addTiling(SEXP pattern, PDFDesc *pd)
 {
     SEXP ref = R_NilValue;
     int defNum = newTiling(pattern, pd);
-    
+
     if (defNum >= 0) {
         PROTECT(ref = allocVector(INTSXP, 1));
         INTEGER(ref)[0] = defNum;
@@ -6395,7 +6395,7 @@ static int newMask(SEXP path, PDFDesc *pd)
     char buf[100];
     int defNum = growDefinitions(pd);
     initDefn(defNum, PDFsoftMask, pd);
-    
+
     /* Use temporary definition to store the mask content
      * so we can determine length of the content
      */
@@ -6524,7 +6524,7 @@ static int PDFwrite(char *buf, size_t size, const char *fmt, PDFDesc *pd, ...)
 {
     int val;
     va_list ap;
-    
+
     va_start(ap, pd);
     val = vsnprintf(buf, size, fmt, ap);
     va_end(ap);
@@ -6539,7 +6539,7 @@ static int PDFwrite(char *buf, size_t size, const char *fmt, PDFDesc *pd, ...)
     } else {
         fputs(buf, pd->pdffp);
     }
-    
+
     return val;
 }
 
@@ -8513,7 +8513,7 @@ static void PDF_Rect(double x0, double y0, double x1, double y1,
          *    Do NOT stroke or fill
          *
          * IF there is a pattern fill, use that instead of fill
-         * 
+         *
          * IF there is a mask apply that
          *
          * PDFwrite writes to ...

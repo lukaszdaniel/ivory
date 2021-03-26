@@ -34,7 +34,7 @@ Vectorize(FUN, vectorize.args = arg.names, SIMPLIFY = TRUE,
 
   \code{Vectorize} cannot be used with primitive functions as they do
   not have a value for \code{\link{formals}}.
-  
+
   It also cannot be used with functions that have arguments named
   \code{FUN}, \code{vectorize.args}, \code{SIMPLIFY} or
   \code{USE.NAMES}, as they will interfere with the \code{Vectorize}

@@ -77,7 +77,7 @@ models. Journal of the Royal Statistical Society (B) 73(1):3-36
   dat$a <- a;dat$b <- b
 
   ## Fit the model using "re" terms, and smoother linkage  
-  
+
   mod <- gam(y~s(a,bs="re")+s(b,bs="re")+s(a,b,bs="re")+s(x0,id=1)+s(x1,id=1)+
                s(x2,k=15)+s(x3),data=dat,method="ML")
 

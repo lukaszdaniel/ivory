@@ -185,14 +185,14 @@ afun <- function(fit, times) {
 
     temp <- xfun(summary(fit, rmean=times[1]))
     if (ntime==1) return(temp)
-    
+
     result <- matrix(0, ntime, length(temp))
     result[1,] <- temp
     for (i in 2:ntime) 
         result[i,] <- xfun(summary(fit, rmean=times[i]))
     drop(result)
 }
-    
+
 sv1 <- afun(fit1, tvec)
 
 # one time point  

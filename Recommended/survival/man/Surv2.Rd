@@ -26,7 +26,7 @@ Surv2(time, event, repeated=FALSE)
 
 \details{
   This function is still experimental. 
-  
+
   When used in a \code{coxph} or \code{survfit} model,
   Surv2 acts as a trigger to internally convert a timeline style data
   set into counting process style data, which is then acted on by the

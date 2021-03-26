@@ -10,7 +10,7 @@ strata <- function(..., na.group=FALSE, shortlabel, sep=', ') {
     #  it instead
     if(length(allf) == 1 && is.list(ttt <- unclass(allf[[1]]))) allf <- ttt
     nterms <- length(allf)
- 
+
     # Keep the names of named args as their label, what was typed otherwise
     if (is.null(names(allf))) {
         argname <- words[seq_len(nterms)]

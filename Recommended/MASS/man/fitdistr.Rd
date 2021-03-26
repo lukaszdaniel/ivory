@@ -65,7 +65,7 @@ fitdistr(x, densfun, start, \dots)
 
   For the \code{"t"} named distribution the density is taken to be the
   location-scale family with location \code{m} and scale \code{s}.
-  
+
   For the following named distributions, reasonable starting values will
   be computed if \code{start} is omitted or only partially specified:
   \code{"cauchy"}, \code{"gamma"}, \code{"logistic"},

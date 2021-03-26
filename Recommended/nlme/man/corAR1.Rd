@@ -38,7 +38,7 @@ corAR1(value, form, fixed)
 \references{
   Box, G.E.P., Jenkins, G.M., and Reinsel G.C. (1994) "Time Series
   Analysis: Forecasting and Control", 3rd Edition, Holden-Day.
-  
+
   Pinheiro, J.C., and Bates, D.M. (2000) "Mixed-Effects Models
   in S and S-PLUS", Springer, esp. pp. 235, 397.  
 }

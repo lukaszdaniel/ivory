@@ -206,9 +206,9 @@ qqmath.formula <-
         oopt <- lattice.options(lattice.options)
         on.exit(lattice.options(oopt), add = TRUE)
     }
-    
+
     ## Step 1: Evaluate x, y, etc. and do some preprocessing
-    
+
     form <-
         latticeParseFormula(formula, data, subset = subset,
                             groups = groups, multiple = allow.multiple,
@@ -262,7 +262,7 @@ qqmath.formula <-
     foo <- c(foo, do.call("construct.scales", scales))
 
     ## Step 3: Decide if limits were specified in call:
-    
+
     have.xlim <- !missing(xlim)
     if (!is.null(foo$x.scales$limits))
     {
@@ -296,7 +296,7 @@ qqmath.formula <-
             if (is.logical(ylog)) 10
             else if (is.numeric(ylog)) ylog
             else if (ylog == "e") exp(1)
-        
+
         x <- log(x, ybase)
         if (have.ylim) ylim <- logLimits(ylim, ybase)
     }

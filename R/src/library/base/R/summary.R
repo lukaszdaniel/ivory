@@ -139,7 +139,7 @@ summary.factor <- function(object, maxsum = 100L, ...)
 	tt <- c(tt[o[ - drop]], sum(tt[o[drop]]))
         names(tt) <- c(names(tt)[ - drop], gettext("(Other)"))
 	tt
-	
+
     }
     if(ana) {
 	tt2 <- c(tt, sum(nas))

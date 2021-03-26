@@ -141,7 +141,7 @@ check_packages_in_dir_details(dir, logs = NULL, drop_ok = TRUE, ...)
   processing, providing check name, status and output for every check
   performed and not dropped according to status tag (via variables
   \code{Check}, \code{Status} and \code{Output}, respectively).
-  
+
   Environment variable \env{_R_CHECK_ELAPSED_TIMEOUT_} can be used to
   set a limit on the elapsed time of each \command{check} run.  See the
   \sQuote{R Internals} manual for how the value is interpreted and for

@@ -3,7 +3,7 @@
 # The control function for a single Gamma frailty term.
 #
 frailty.controlgam <- function(opt, iter, old, group, status, loglik){
-    
+
     if (iter == 0) {
 	# initial call
 	if (!is.null(opt$theta)) theta <- opt$theta  #fixed theta case
@@ -13,13 +13,13 @@ frailty.controlgam <- function(opt, iter, old, group, status, loglik){
 	    }
 	list(theta = theta)
         }
-    
+
     else {
 	if (is.null(opt$trace)) trace <-FALSE
 	else trace <- opt$trace
 
 	theta <- old$theta
-	
+
 	#compute correction to the loglik
 	if (theta == 0) correct <- 0
 	else {
@@ -37,7 +37,7 @@ frailty.controlgam <- function(opt, iter, old, group, status, loglik){
 	    else history <- rbind(old$history, 
 			 as.vector(c(theta, loglik, 
 				     loglik + correct)))
-	
+
 	    if (iter == 1) {
 		if (is.null(opt$init )) theta <-1
 		else                    theta <- opt$init[2]

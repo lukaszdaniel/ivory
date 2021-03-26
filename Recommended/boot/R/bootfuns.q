@@ -766,7 +766,7 @@ jack.after.boot <- function(boot.out, index=1, t=NULL, L=NULL,
 	}	
 
 
-	
+
 	top <- max(percentiles)
     bot <- min(percentiles)
     ylts <- c(bot - 0.35 * (top - bot), top + 0.1 * (top - bot))

@@ -31,11 +31,11 @@ byhand <- function() {
     u3[4:8,3] <- u3[4:8,3]  -p2[1]*2/25
     u3[4,] <- u3[4,] + c(-p2[1]/5, 0, p2[1]/5)
     u3[6,] <- u3[4,]
- 
+
     p6 <- c(0, 1/7, 6/7) # 0-2 at time 6, 1 at risk
     h6 <- matrix(c(-1,0,1,0,1,0,0,1,0), byrow=T, ncol=3)
     u6 <- cbind(0, u3[,2], -u3[,2])
-    
+
     V <- rbind(0, colSums(u2^2), 
                   colSums(u3^2),
                   colSums(u3^2),
@@ -121,4 +121,4 @@ if (FALSE) {
 temp1 <- tapply(gray1[[1]]$est, gray1[[1]]$time, max)[-1]  #toss time 0
 indx1 <- match(names(temp1), fit2$time)
 aeq(temp1, fit2$pstate[indx1,2])
-    
+

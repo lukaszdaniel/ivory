@@ -49,7 +49,7 @@ pulmonary exacerbations, along with measures of lung volume and flow.
 The primary endpoint was the time until
 first pulmonary exacerbation; however, data on all exacerbations were
 collected for 169 days.
- 
+
 The definition of an exacerbation was an infection that required the use
 of intravenous (IV) antibiotics.  Subjects had 0--5 such episodes during
 the trial, those with more than one have multiple rows in the data

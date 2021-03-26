@@ -113,4 +113,3 @@
  }
  \seealso{ \code{\link{Surv}}}
  \keyword{survival}
- 

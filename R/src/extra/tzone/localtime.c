@@ -395,7 +395,7 @@ tzload(const char * name, struct state * const sp, const int doextend)
 	name = getTZinfo();
 	if( strcmp(name, "unknown") == 0 ) name = TZDEFAULT;
     }
-	
+
     {
 	int  doaccess;
 	/*
@@ -448,7 +448,7 @@ tzload(const char * name, struct state * const sp, const int doextend)
 	    Rf_warning(_("unknown timezone '%s'"), sname);
 	    return -1;
 	}
-		
+
     }
     nread = read(fid, up->buf, sizeof up->buf);
     if (close(fid) < 0 || nread <= 0)
@@ -1880,7 +1880,7 @@ time1(stm *const tmp,
     /* R change.  This appears to be required by POSIX (it says
        the setting is used 'initially') and is documented for
        Solaris.
-	
+
        Try unknown DST setting, if it was set.
     */
     if (tmp->tm_isdst >= 0) {
@@ -1889,7 +1889,7 @@ time1(stm *const tmp,
 	t = time2(tmp, funcp, offset, &okay);
 	if (okay) return t;
     }
-	
+
     /*
     ** We're supposed to assume that somebody took a time of one type
     ** and did some math on it that yielded a "struct tm" that's bad.

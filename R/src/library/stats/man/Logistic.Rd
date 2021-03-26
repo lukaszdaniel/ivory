@@ -39,11 +39,11 @@ rlogis(n, location = 0, scale = 1)
   \code{plogis} gives the distribution function,
   \code{qlogis} gives the quantile function, and
   \code{rlogis} generates random deviates.
-  
+
   The length of the result is determined by \code{n} for
   \code{rlogis}, and is the maximum of the lengths of the
   numerical arguments for the other functions.  
-  
+
   The numerical arguments other than \code{n} are recycled to the
   length of the result.  Only the first elements of the logical
   arguments are used.

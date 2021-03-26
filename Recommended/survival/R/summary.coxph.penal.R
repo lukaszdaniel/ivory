@@ -1,6 +1,6 @@
 summary.coxph.penal <-  function(object, conf.int = 0.95, scale=1,
                                  terms=FALSE, maxlabel=25, ...) {
-    
+
     beta <- object$coefficients
     if (length(beta)==0 && length(object$frail)==0)
             stop("penalized summary function can't be used for a null model")
@@ -77,7 +77,7 @@ summary.coxph.penal <-  function(object, conf.int = 0.95, scale=1,
                      "iter", "df"), names(object), nomatch=0)]
     rval$coefficients <- print1
     rval$print2 <- print2
-                   
+
     if(conf.int & length(beta) >0 ) {
         z <- qnorm((1 + conf.int)/2, 0, 1)
         beta <- beta * scale
@@ -95,7 +95,7 @@ summary.coxph.penal <-  function(object, conf.int = 0.95, scale=1,
     logtest <- -2 * (object$loglik[1] - object$loglik[2])
     rval$logtest <- c(test = logtest, df=df, 
                       pvalue= pchisq(logtest,df, lower.tail=FALSE))
-    
+
     if (!is.null(object$waldtest)) 
         rval$waldtest <- c(test= object$wald.test, df=df,
                        pvalue = pchisq(object$wald.test, df, lower.tail=FALSE))
@@ -106,7 +106,7 @@ summary.coxph.penal <-  function(object, conf.int = 0.95, scale=1,
        rval$concordance <- ctemp[c("concordance", "std")]
        names(rval$concordance) <- c("C", "se(C)")
     }
- 
+
     class(rval) <- "summary.coxph.penal"
     rval
     }

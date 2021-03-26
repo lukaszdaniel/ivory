@@ -74,7 +74,7 @@ corSpatial(value, form, nugget, type, metric, fixed)
 
   Venables, W.N. and Ripley, B.D. (2002) "Modern Applied Statistics with
   S", 4th Edition, Springer-Verlag.
-  
+
   Littel, Milliken, Stroup, and Wolfinger (1996) "SAS Systems for Mixed
   Models", SAS Institute.
 }

@@ -6,7 +6,7 @@ pyears <- function(formula, data,
 
     expect <- match.arg(expect)
     Call <- match.call()
-        
+
     # create a call to model.frame() that contains the formula (required)
     #  and any other of the relevant optional arguments
     # then evaluate it in the proper frame
@@ -60,7 +60,7 @@ pyears <- function(formula, data,
         temp <- match(names(rcall)[-1], varlist) # 2,3,... are the argument names
         if (any(is.na(temp)))
             stop(gettextf("Variable not found in the ratetable: %s", (names(rcall))[is.na(temp)]))
-            
+
         if (any(!(varlist %in% names(rcall)))) {
             to.add <- varlist[!(varlist %in% names(rcall))]
             temp1 <- paste(text=paste(to.add, to.add, sep='='), collapse=',')
@@ -202,7 +202,7 @@ pyears <- function(formula, data,
             byear <- format(bdate, "%Y")
             offset <- as.numeric(bdate - as.Date(paste0(byear, "-01-01")))
             R[,cols[2]] <- R[,cols[2]] - offset
-       
+
             # Doctor up "cutpoints" - only needed for (very) old style rate tables
             #  for which the C code does interpolation on the fly
             if (any(rfac >1)) {

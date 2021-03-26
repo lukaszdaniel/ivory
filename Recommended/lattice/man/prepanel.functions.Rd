@@ -43,7 +43,7 @@ prepanel.spline(x, y, npoints = 101,
 
   \item{keep.data}{ Ignored. Present to capture argument of the same
     name in \code{\link{smooth.spline}}. }
-  
+
   \item{groups, subscripts}{ See \code{\link{xyplot}}.  Whenever
     appropriate, calculations are done separately for each group and
     then combined.  }

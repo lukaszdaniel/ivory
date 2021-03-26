@@ -15,7 +15,7 @@ print.survreg <- function(x, ...)
         }
     else cat("\n", gettext("Coefficients:", domain = "R-survival"), "\n", sep = "")
     print(coef, ...)
-    
+
     if (nrow(x$var)==length(coef)) 
 	    cat("\n", gettextf("Scale fixed at %s",format(x$scale), domain = "R-survival"), "\n", sep = "") 
     else if (length(x$scale)==1) cat("\n", gettextf("Scale= %s", format(x$scale), domain = "R-survival"), "\n", sep = "")

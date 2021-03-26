@@ -11,7 +11,7 @@ nsk <- function(x, df=NULL, knots=NULL, intercept=FALSE, b=.05,
     kx <- sort(c(knots, Boundary.knots))
     kbasis <- ns(kx, df=df, knots=knots, intercept=intercept,
                 Boundary.knots = Boundary.knots)   
-        
+
     # 
     # We know that gamma = Kbasis *beta = yhat at knots
     # then (basis* K-inverse) gamma =  basis * beta
@@ -19,7 +19,7 @@ nsk <- function(x, df=NULL, knots=NULL, intercept=FALSE, b=.05,
     #
     if (intercept) ibasis <- basis %*% solve(kbasis)
     else ibasis <- (cbind(1, basis) %*% solve(cbind(1, kbasis)))[, -1]
- 
+
     attributes(ibasis) <- attributes(basis)  # retain the attributes of ns
     class(ibasis) <- c("nsk", class(basis))
     ibasis

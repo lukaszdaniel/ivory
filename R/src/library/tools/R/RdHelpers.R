@@ -93,7 +93,7 @@ function(pkg, lib.loc = Sys.getenv("R_BUILD_TEMPLIB"))
     else {    
     	tabular <- function(col1, col2)
     	    c("\\tabular{ll}{", paste0(col1, " \\tab ", col2, "\\cr"), "}")
-    
+
         info <- library(help = pkg, lib.loc = lib.loc,
 	  	    character.only = TRUE)
 

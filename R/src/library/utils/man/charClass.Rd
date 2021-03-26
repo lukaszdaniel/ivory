@@ -65,7 +65,7 @@ charClass(x, class)
 \note{
   Non-ASCII digits are excluded by the C99 standard from the class
   \code{"digit"}: most platforms will have them as alphabetic.
-  
+
   It is an assumption that the system's wide character classification
   functions are coded in Unicode points, but this is known to be true
   for all recent platforms.
@@ -75,7 +75,7 @@ charClass(x, class)
 }
 \seealso{
   Character classes are used in \link{regular expression}s.
-  
+
   The OS's \command{man} pages for \code{iswctype} and \code{wctype}.
 }
 \examples{

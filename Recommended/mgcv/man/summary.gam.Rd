@@ -215,7 +215,7 @@ abline(0,1,col=2)
 ks.test(p,"punif") ## how close to uniform are the p-values?
 
 ## A Gamma example, by modify `gamSim' output...
- 
+
 dat <- gamSim(1,n=400,dist="normal",scale=1)
 dat$f <- dat$f/4 ## true linear predictor 
 Ey <- exp(dat$f);scale <- .5 ## mean and GLM scale parameter

@@ -35,7 +35,7 @@ finegray <- function(formula, data, weights, subset, na.action= na.pass,
         mf[stemp$vars] <- NULL
         }
     else istrat <- rep(1, nrow(mf))
-    
+
     id <- model.extract(mf, "id")
     if (!is.null(id)) mf["(id)"] <- NULL  # don't leave it in result
     user.weights <- model.weights(mf)
@@ -45,7 +45,7 @@ finegray <- function(formula, data, weights, subset, na.action= na.pass,
     if (length(cluster)) {
         stop("a cluster() term is not valid")
     }
-    
+
     # If there is start-stop data, then there needs to be an id
     #  also check that this is indeed a competing risks form of data.
     # Mark the first and last obs of each subject, as we need it later.
@@ -80,11 +80,11 @@ finegray <- function(formula, data, weights, subset, na.action= na.pass,
         enum <- index[1]
         if (length(index) > 1) warning("only the first endpoint was used")
     }
-    
+
     # make sure count, if present is syntactically valid
     if (!missing(count)) count <- make.names(count) else count <- NULL
     oname <- paste0(prefix, c("start", "stop", "status", "wt"))
-        
+
     if (ncol(Y) ==2) {
         temp <- min(Y[,1], na.rm=TRUE)
         if (temp >0) zero <- 0
@@ -129,7 +129,7 @@ finegray <- function(formula, data, weights, subset, na.action= na.pass,
             ctime <- utime[Gtemp$time[Gtemp$n.event > 0]]
             cprob <- Gtemp$surv[Gtemp$n.event > 0]
         }
-        
+
         ct2 <- c(ctime, maxtime)
         cp2 <- c(1.0, cprob)
         index <- findInterval(times, ct2, left.open=TRUE)

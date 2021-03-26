@@ -23,7 +23,7 @@ cch <- function(formula, data, weights, subset, na.action,
                 robust=FALSE){
     Call <- match.call()
     method <- match.arg(method)
-    
+
     <<cch-process-args>>
     <<cch-setup-data>>
     <<cch-fit>>
@@ -67,7 +67,7 @@ if (!missing(stratum)) {
 
 newform <- formula
 for (i in newterm) newform <- addterm(newform, newterm)
-    
+
 # Formulas can also have cluster and strata terms in them
 # The next few lines are standard and almost identical to coxph
 indx <- match(c("formula", "data", "weights", "subset", "na.action"),
@@ -75,7 +75,7 @@ indx <- match(c("formula", "data", "weights", "subset", "na.action"),
 if (indx[1] ==0) stop(gettextf("'%s' argument is required", "formula"))
 temp <- Call[c(1,indx)]  # only keep the arguments we wanted
 temp[[1]] <-  quote(stats::model.frame)  # change the function called
-    
+
 special <- c("strata", "cluster")
 temp$formula <- if(missing(data)) terms(newform, special)
                 else              terms(newform, special, data=data)
@@ -110,7 +110,7 @@ if (!is.null(attr(Terms, "specials")$strata)) {
 else strata <- mf[[extras["stratum"]]]
 
 subcoh <- mf[[extras["subcoh"]]]
-                  
+
 Terms <- Terms[-tdrop]
 @ 
 
@@ -239,7 +239,7 @@ Prentice <- function(tenter, texit, cc,  id, X, ntot,robust){
     fit$phase2var<-(1-(nc/ntot))*t(db)%*%(db)
     fit$naive.var <- fit$naive.var+fit$phase2var
     fit$var<-fit$naive.var
-    
+
     fit$coefficients <- fit$coef <- fit1$coefficients
     fit
 }
@@ -438,7 +438,7 @@ vcov.cch<-function(object,...) object$var
     coefficients[, 3] <- Z
     coefficients[, 4] <- 2*(1-p)
 
- 
+
     if (x$stratified){
         cat("Exposure-stratified case-cohort analysis,", x$method, "method.\n")
         m<-rbind(subcohort=x$subcohort.size, cohort=x$cohort.size)

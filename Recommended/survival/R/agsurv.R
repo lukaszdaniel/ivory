@@ -28,7 +28,7 @@ agsurv <- function(y, x, wt, risk, survtype, vartype) {
         xin  <- apply(rowsum(wrisk*x, dtime), 2, rcumsum) # dtime or alive
         xsum  <- xin - (rbind(xout,0))[indx,,drop=F]
         }
-        
+
     ndeath <- rowsum(status, dtime)  #unweighted death count
     ntime  <- length(time)        
     if (survtype ==1) {  #Kalbfleisch-Prentice

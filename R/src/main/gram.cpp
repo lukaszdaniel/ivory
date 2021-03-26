@@ -3207,7 +3207,7 @@ static SEXP xxpipe(SEXP lhs, SEXP rhs)
 	}
 
 	check_rhs(rhs);
-	
+
         SEXP fun = CAR(rhs);
         SEXP args = CDR(rhs);
 	PRESERVE_SV(ans = lcons(fun, lcons(lhs, args)));
@@ -6095,7 +6095,7 @@ static void NORET signal_ph_error(SEXP rhs, SEXP ph) {
     errorcall(rhs, _("pipe placeholder must only appear as a top-level "
 		     "argument in the RHS call"));
 }
-    
+
 static SEXP findPlaceholderCell(SEXP placeholder, SEXP rhs)
 {
     SEXP phcell = NULL;

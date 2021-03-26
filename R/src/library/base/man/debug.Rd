@@ -61,7 +61,7 @@ debuggingState(on = NULL)
   function is removed and replaced the debug state is not preserved).
   Use \code{debugonce()} to enter the debugger only the next time the
   function is invoked.
-  
+
   To debug an S4 method by explicit signature, use
   \code{signature}. When specified, signature indicates the method of
   \code{fun} to be debugged. Note that debugging is implemented slightly
@@ -71,13 +71,13 @@ debuggingState(on = NULL)
   which implement the \code{.local} rematching mechanism, the
   \code{.local} closure itself is the one that will be ultimately
   debugged (see \code{\link[methods:RMethodUtils]{isRematched}}).
-  
+
   \code{isdebugged} returns \code{TRUE} if a) \code{signature} is \code{NULL}
   and the closure \code{fun} has been debugged, or b) \code{signature} is not
   \code{NULL}, \code{fun} is an S4 generic, and the method of \code{fun}
   for that signature has been debugged. In all other cases, it returns
   \code{FALSE}.
-  
+
   The number of lines printed for the deparsed call when a function is
   entered for debugging can be limited by setting
   \code{\link{options}(deparse.max.lines)}.

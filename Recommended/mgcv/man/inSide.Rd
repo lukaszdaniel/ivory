@@ -33,7 +33,7 @@ inSide(bnd,x,y)
   interior point. Hence in geographic applications it would be usual to have
   an outer boundary loop, possibly with some inner `islands' completely
   enclosed in the outer loop. 
- 
+
   The routine calls compiled C code and operates by an exhaustive search for
   each point in \code{x, y}.
 
@@ -45,7 +45,7 @@ inSide(bnd,x,y)
 inside the boundary.
 
 }
-   
+
 \references{
 
 \url{https://www.maths.ed.ac.uk/~swood34/}

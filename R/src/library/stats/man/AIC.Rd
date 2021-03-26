@@ -35,7 +35,7 @@ BIC(object, \dots)
 \details{
   When comparing models fitted by maximum likelihood to the same data,
   the smaller the AIC or BIC, the better the fit.
-  
+
   The theory of AIC requires that the log-likelihood has been maximized:
   whereas AIC can be computed for models not fitted by maximum
   likelihood, their AIC values should not be compared.
@@ -44,7 +44,7 @@ BIC(object, \dots)
   response is transformed (accelerated-life models are fitted to
   log-times) and where contingency tables have been used to summarize
   data.
-  
+
   These are generic functions (with S4 generics defined in package
   \pkg{stats4}): however methods should be defined for the
   log-likelihood function \code{\link{logLik}} rather than these

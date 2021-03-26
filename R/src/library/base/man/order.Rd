@@ -70,7 +70,7 @@ sort.list(x, partial = NULL, na.last = TRUE, decreasing = FALSE,
   \code{"quick"} for \code{sort.list} is only supported for numeric
   \code{x} with \code{na.last = NA}, is not stable, and is slower than
   \code{"radix"}. 
-  
+
   \code{partial = NULL} is supported for compatibility with other
   implementations of S, but no other values are accepted and ordering is
   always complete.

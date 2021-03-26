@@ -1870,7 +1870,7 @@ Warning in command 'dt((x - m)/s, df, log = TRUE)': NaN values produced
 +     lot2 = c(69,35,26,21,18,16,13,12,12))
 > clot1 <- glm(lot1 ~ log(u), data = clotting, family = Gamma)
 > gamma.shape(clot1)
-               
+
 Alpha: 538.1315
 SE:    253.5991
 > 
@@ -1883,7 +1883,7 @@ Iter. 1 Alpha: 1.238408
 Iter. 2 Alpha: 1.276997
 Iter. 3 Alpha: 1.278343
 Iter. 4 Alpha: 1.278345
-                
+
 Alpha: 1.2783449
 SE:    0.1345175
 > summary(gm, dispersion = gamma.dispersion(gm))  # better summary
@@ -2831,7 +2831,7 @@ Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’
 > model.tables(immer.aov, type = "means", se = TRUE, cterms = "Var")
 Tables of means
 Grand mean
-       
+
 101.09 
 
  Var 
@@ -3643,7 +3643,7 @@ F-statistic: 5.772 on 7 and 16 DF,  p-value: 0.001805
 > model.tables(npk.aov1, type = "means", se = TRUE)
 Tables of means
 Grand mean
-       
+
 54.875 
 
  block 
@@ -3740,7 +3740,7 @@ Warning in command 'model.tables.aovlist(oats.aov2, type = "means", se = TRUE)':
   SE's for type 'means' are not yet implemented
 Tables of means
 Grand mean
-         
+
 103.9722 
 
  N 

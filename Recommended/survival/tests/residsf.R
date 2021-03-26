@@ -103,7 +103,7 @@ test2b <-test2[reord,]
 s5 <- survfit(Surv(t1, t2, event) ~x, test2b, influence=TRUE)
 r9 <- resid(s5, time=c(4, 8, 10), type="surv")
 aeq(r6[reord,], r9)
- 
+
 # 
 # For multistate use the same data set as mstate.R, where results have been
 #  worked out by hand.
@@ -119,7 +119,7 @@ tdata$st <- factor(tdata$st, c(0:3),
                     labels=c("censor", "a", "b", "c"))
 tdata$i0 <- factor(tdata$i0, 1:4,
                     labels=c("entry", "a", "b", "c"))  
- 
+
 tfun <- function(data=tdata) {
     reorder <- c(10, 9, 1, 2, 5, 4, 3, 7, 8, 6)
     new <- data[reorder,]

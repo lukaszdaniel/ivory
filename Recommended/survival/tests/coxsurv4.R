@@ -42,4 +42,4 @@ surv4 <- survfit(fit4, newdata=list(wt.loss=c(15,20,25), age=c(70,40,21)))
 aeq(surv1[5:7]$surv, surv4$surv)
 aeq(surv1[5:7]$std.err, surv4$std.err)
 aeq(surv1[5]$n.risk, surv4$n.risk)
-             
+

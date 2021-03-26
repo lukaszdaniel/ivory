@@ -22,7 +22,7 @@ survConcordance.fit <- function(y, x, strata, weight) {
         }
         ranks
     }
-        
+
     docount <- function(stime, risk, wts) {
         if (attr(stime, 'type') == 'right') {
             ord <- order(stime[,1], -stime[,2])
@@ -50,11 +50,11 @@ survConcordance.fit <- function(y, x, strata, weight) {
         }
         else stop("Invalid survival type for concordance")
     }
-        
+
     if (missing(weight) || length(weight)==0)
         weight <- rep(1.0, length(x))
     storage.mode(y) <- "double"
-    
+
     if (missing(strata) || length(strata)==0) {
         count <- docount(y, x, weight)
         if (count[1]==0 && count[2]==0) count[5]<-0
@@ -70,7 +70,7 @@ survConcordance.fit <- function(y, x, strata, weight) {
             keep <- which(strata == ustrat[i])
             count[i,] <- docount(y[keep,,drop=F], x[keep], weight[keep])
         }
-        
+
         count[,5] <- 2*sqrt(ifelse(count[,1]+count[,2]==0, 0, count[,5]))
         dimnames(count) <- list(ustrat,  c("concordant", "discordant",
                                            "tied.risk", "tied.time",

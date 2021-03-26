@@ -9,7 +9,7 @@ survfitTurnbull <- function(x, y, weights,
                                    'logit', 'arcsin'),
                        conf.lower=c('usual', 'peto', 'modified'),
 		       start.time) {
-			     
+
     type <- match.arg(type)
     error <- match.arg(error)
     conf.type <- match.arg(conf.type)
@@ -227,7 +227,7 @@ survfitTurnbull <- function(x, y, weights,
     surv   <- vector('list', nstrat)
     n.cens <- vector('list', nstrat)
     n.event<- vector('list', nstrat)
- 
+
     uniquex <- sort(unique(x))
     for (i in seq_len(nstrat)) {
 	who <- (x== uniquex[i])
@@ -260,7 +260,7 @@ survfitTurnbull <- function(x, y, weights,
 		 n.censor = unlist(n.cens),
 		 surv = unlist(surv),
 		 type='right')
-    
+
     if (nstrat >1) {
         strata <- unlist(lapply(time, length))
 	names(strata) <- xlev[sort(unique(x))]

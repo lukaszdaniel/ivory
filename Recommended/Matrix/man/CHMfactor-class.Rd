@@ -100,7 +100,7 @@ isLDL(x)
       \eqn{LL'} one.}
     \item{coerce}{\code{signature(from = "CHMfactor", to = "sparseMatrix")} 
       (or equivalently, \code{to = "Matrix"} or \code{to = "triangularMatrix"})
-      
+
       \code{as(*, "sparseMatrix")} returns the lower triangular factor
       \eqn{L} from the \eqn{LL'} form of the Cholesky factorization.
       Note that (currently) the factor from the \eqn{LL'} form is always

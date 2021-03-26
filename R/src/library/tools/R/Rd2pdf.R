@@ -59,8 +59,8 @@
         }
         x
     }
-    
-    
+
+
     desc <- read.dcf(descfile)[1L, ]
     ## Using
     ##   desc <- .read_description(descfile)

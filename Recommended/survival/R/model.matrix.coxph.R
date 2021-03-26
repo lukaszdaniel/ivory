@@ -23,7 +23,7 @@ model.matrix.coxph <- function(object, data=NULL,
         dropterms <- temp$terms
     }
     else dropterms <- NULL
-    
+
     strats <- attr(Terms, "specials")$strata
     hasinteractions <- FALSE
     if (length(strats)) {
@@ -81,7 +81,7 @@ model.frame.coxph <- function(formula, ...) {
                         "cluster", "id", "istate"),
                   names(fcall), nomatch=0) 
         if (indx[1] ==0) stop("The coxph call is missing a formula!")
-   
+
         temp <- fcall[c(1,indx)]  # only keep the arguments we wanted
         temp[[1]] <- quote(stats::model.frame)  # change the function called
         temp$xlev <- formula$xlevels  # this will turn strings to factors
@@ -106,7 +106,7 @@ model.frame.coxph <- function(formula, ...) {
 
         if (!is.null(attr(formula$terms, "dataClasses")))
             .checkMFClasses(attr(formula$terms, "dataClasses"), mf)
-       
+
         if (is.null(attr(Terms, "specials")$tt)) return(mf)
         else {
             # Do time transform
@@ -119,7 +119,7 @@ model.frame.coxph <- function(formula, ...) {
                 else strata.keep <- strata(mf[,stemp$vars], shortlabel=TRUE)
                 istrat <- as.numeric(strata.keep)
             }
-            
+
             timetrans <- untangle.specials(Terms, 'tt')
             ntrans <- length(timetrans$terms)
 
@@ -133,7 +133,7 @@ model.frame.coxph <- function(formula, ...) {
                 }
             }
             if (is.function(tt)) tt <- list(tt)  #single function becomes a list
-                
+
             if (is.list(tt)) {
                 if (any(!sapply(tt, is.function))) 
                     stop(gettextf("'%s' argument must contain a function or list of functions", "tt"))

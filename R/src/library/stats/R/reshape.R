@@ -93,7 +93,7 @@ reshape <-
 
             if (is.null(v.names))
                 v.names <- vapply(varying, `[`, 1L, FUN.VALUE=character(1L))
-                
+
             rval <- do.call(rbind, lapply(seq_along(times), function(i) {
                 d[, timevar] <- times[i]
                 varying.i <- vapply(varying, `[`, i, FUN.VALUE=character(1L))

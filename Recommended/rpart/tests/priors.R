@@ -61,7 +61,7 @@ gfun <- function(n) {  #The gini loss for a node, given the counts
     temp <- phat2(n)
     sum(temp) * gini(temp/sum(temp))
     }
-           
+
 # These are in order x3, x2, x1 (best split to worst)
 # Note that for x3, missing values cause the "parent" to be viewed as
 #   having 12 obs instead of 15.

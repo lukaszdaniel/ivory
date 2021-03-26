@@ -53,7 +53,7 @@ and Hall/CRC Press.
 
 \examples{
 ## see smooth.construct
- 
+
 
 }
 \keyword{models} \keyword{regression}%-- one or more ..

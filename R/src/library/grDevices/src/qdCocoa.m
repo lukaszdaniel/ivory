@@ -98,7 +98,7 @@ static QuartzFunctions_t *qf;
 	[window setBackgroundColor:canvasColor ? canvasColor : [NSColor colorWithCalibratedRed:1.0 green:1.0 blue:1.0 alpha:0.5]];
 	[window setOpaque:NO];
 	ci->window = window;
-	
+
 	[window setDelegate: view];
 	[window setContentView: view];
 	[window setInitialFirstResponder: view];
@@ -132,7 +132,7 @@ static QuartzFunctions_t *qf;
 	    [menu addItem:[NSMenuItem separatorItem]];
 	    menuItem = [[NSMenuItem alloc] initWithTitle:@"Page Setup…" action:@selector(runPageLayout:) keyEquivalent:@"P"]; [menu addItem:menuItem]; [menuItem release];
 	    menuItem = [[NSMenuItem alloc] initWithTitle:@"Print" action:@selector(printDocument:) keyEquivalent:@"p"]; [menu addItem:menuItem]; [menuItem release];   
-	    
+
             menuItem = [[NSMenuItem alloc] initWithTitle:[menu title] action:nil keyEquivalent:@""]; /* the "Quartz" item in the main menu */
             [menuItem setSubmenu:menu];
 	    [mainMenu insertItem: menuItem atIndex:0];
@@ -160,7 +160,7 @@ static QuartzFunctions_t *qf;
 	    menuItem = [[NSMenuItem alloc] initWithTitle:@"Delete" action:@selector(delete:) keyEquivalent:@""]; [menu addItem:menuItem]; [menuItem release];   
 	    [menu addItem:[NSMenuItem separatorItem]];
 	    menuItem = [[NSMenuItem alloc] initWithTitle:@"Activate" action:@selector(activateQuartzDevice:) keyEquivalent:@"A"]; [menu addItem:menuItem]; [menuItem release];   
-	    
+
             menuItem = [[NSMenuItem alloc] initWithTitle:[menu title] action:nil keyEquivalent:@""]; /* the "Quartz" item in the main menu */
             [menuItem setSubmenu:menu];
 	    if ([mainMenu numberOfItems] > 0)
@@ -168,14 +168,14 @@ static QuartzFunctions_t *qf;
 	    else /* this should never be the case because we have added "File" menu, but just in case something goes wrong ... */
 		[mainMenu addItem: menuItem];
 	}
-	
+
         if ([mainMenu indexOfItemWithTitle:@"Quartz"] < 0) { /* Quartz menu - if it doesn't exist, add it */
             unichar leftArrow = NSLeftArrowFunctionKey, rightArrow = NSRightArrowFunctionKey;
             menu = [[NSMenu alloc] initWithTitle:@"Quartz"];
             menuItem = [[NSMenuItem alloc] initWithTitle:@"Back" action:@selector(historyBack:) keyEquivalent:[NSString stringWithCharacters:&leftArrow length:1]]; [menu addItem:menuItem]; [menuItem release];
             menuItem = [[NSMenuItem alloc] initWithTitle:@"Forward" action:@selector(historyForward:) keyEquivalent:[NSString stringWithCharacters:&rightArrow length:1]]; [menu addItem:menuItem]; [menuItem release];
             menuItem = [[NSMenuItem alloc] initWithTitle:@"Clear History" action:@selector(historyFlush:) keyEquivalent:@"L"]; [menu addItem:menuItem]; [menuItem release];
-	    
+
             menuItem = [[NSMenuItem alloc] initWithTitle:[menu title] action:nil keyEquivalent:@""]; /* the "Quartz" item in the main menu */
             [menuItem setSubmenu:menu];
 
@@ -191,10 +191,10 @@ static QuartzFunctions_t *qf;
         }
         if (soleMenu) { /* those should be standard if we have some menu */
             menu = [[NSMenu alloc] initWithTitle:@"Window"];
-            
+
             menuItem = [[NSMenuItem alloc] initWithTitle:@"Minimize" action:@selector(performMiniaturize:) keyEquivalent:@"m"]; [menu addItem:menuItem];
             menuItem = [[NSMenuItem alloc] initWithTitle:@"Zoom" action:@selector(performZoom:) keyEquivalent:@""]; [menu addItem:menuItem];
-            
+
             /* Add to menubar */
             menuItem = [[NSMenuItem alloc] initWithTitle:@"Window" action:nil keyEquivalent:@""];
             [menuItem setSubmenu:menu];
@@ -313,12 +313,12 @@ static QuartzFunctions_t *qf;
 {
     NSPrintInfo *printInfo;
     NSPrintOperation *printOp;
-    
+
     printInfo = [[NSPrintInfo alloc] initWithDictionary: [[NSPrintInfo sharedPrintInfo] dictionary]];
     [printInfo setHorizontalPagination: NSFitPagination];
     [printInfo setVerticalPagination: NSAutoPagination];
     [printInfo setVerticallyCentered:NO];
-    
+
     ci->pdfMode = YES;
     @try {
 	printOp = [NSPrintOperation printOperationWithView:self 
@@ -345,7 +345,7 @@ static QuartzFunctions_t *qf;
     ci->context = ctx;
     ci->bounds = [self bounds];        
     rect = CGRectMake(0.0, 0.0, ci->bounds.size.width, ci->bounds.size.height);
-    
+
     if (ci->pdfMode) {
 	qf->ReplayDisplayList(ci->qd);
 	return;
@@ -368,7 +368,7 @@ static QuartzFunctions_t *qf;
         /* Rprintf(" - have layer %p\n", ci->layer); */
         if (size.width != rect.size.width || size.height != rect.size.height) { /* resize */
             /* Rprintf(" - but wrong size (%f x %f vs %f x %f; drawing scaled version\n", size.width, size.height, rect.size.width, rect.size.height); */
-            
+
             /* if we are in live resize, skip this all */
             if (![self inLiveResize]) {
                 /* first draw a rescaled version */
@@ -476,11 +476,11 @@ static void QuartzCocoa_SaveHistory(QuartzCocoaDevice *ci, int last) {
         return;
     if (qf->GetDirty(ci->qd)) /* save the current snapshot if it is dirty */
         QuartzCocoa_SaveHistory(ci, 0);
-    
+
     ci->inHistory = hp;
     /* Rprintf("(activating history entry %d)\n", hp); */
     ci->inHistoryRecall = YES;
-    
+
     CGLayerRelease(ci->layer);
     ci->layer = 0;
     ci->layerContext = 0;
@@ -567,7 +567,7 @@ static void cocoa_process_events() {
 
 static void input_handler(void *data) {
     char buf[16];
-    
+
     read(el_ifd, buf, 16);
     cocoa_process_events();
     el_fired = NO;
@@ -582,7 +582,7 @@ static void input_handler(void *data) {
 {
     NSAutoreleasePool *pool = [[NSAutoreleasePool alloc] init];
     char buf[16];
-    
+
     while (el_active) {
         millisleep(el_sleep);
         el_serial++;
@@ -591,7 +591,7 @@ static void input_handler(void *data) {
             write(el_ofd, buf, 1);
         }
     }
-    
+
     [pool release];
     return 0;
 }
@@ -611,7 +611,7 @@ void QuartzCocoa_SetupEventLoop(int flags, unsigned long latency) {
             ptr_R_ProcessEvents = cocoa_process_events;
 
         el_sleep = latency;
-        
+
         addInputHandler(R_InputHandlers, el_ifd, &input_handler, 31);
 
         el_obj = [[ELThread alloc] init];
@@ -621,7 +621,7 @@ void QuartzCocoa_SetupEventLoop(int flags, unsigned long latency) {
         void CPSEnableForegroundOperation(ProcessSerialNumber* psn);
         ProcessSerialNumber myProc, frProc;
         Boolean sameProc;
-        
+
         if (GetFrontProcess(&frProc) == noErr) {
             if (GetCurrentProcess(&myProc) == noErr) {
                 if (SameProcess(&frProc, &myProc, &sameProc) == noErr && !sameProc) {
@@ -631,7 +631,7 @@ void QuartzCocoa_SetupEventLoop(int flags, unsigned long latency) {
             }
         }
     }
-    
+
 }
 
 /* set Cocoa event loop latency in ms */
@@ -674,7 +674,7 @@ static void initialize_cocoa() {
     if (!ptr_R_ProcessEvents)
         QuartzCocoa_SetupEventLoop(QCF_SET_PEPTR|QCF_SET_FRONT, 100);
 
-    
+
     [NSApplication sharedApplication];
     cocoa_process_events();
     cocoa_initialized = 1;
@@ -687,11 +687,11 @@ static CGContextRef QuartzCocoa_GetCGContext(QuartzDesc_t dev, void *userInfo) {
 
 static void QuartzCocoa_Close(QuartzDesc_t dev,void *userInfo) {
     QuartzCocoaDevice *ci = (QuartzCocoaDevice*)userInfo;
-	
+
     /* cancel any locator events */
     ci->inLocator = NO;
     ci->locator[0] = -1.0;
-	
+
     /* release all history objects */
     ci->inHistory = -1;
     ci->inHistoryRecall = NO;
@@ -723,7 +723,7 @@ static void QuartzCocoa_Close(QuartzDesc_t dev,void *userInfo) {
     /* close the window (if it's not already closing) */
     if (ci && ci->view && !ci->closing)
         [[ci->view window] close];
-	
+
     if (ci->view) [ci->view release]; /* this is our own release, the window should still have a copy */
     if (ci->window) [ci->window release]; /* that should close it all */
     ci->view = nil;
@@ -732,13 +732,13 @@ static void QuartzCocoa_Close(QuartzDesc_t dev,void *userInfo) {
 
 static int QuartzCocoa_Locator(QuartzDesc_t dev, void* userInfo, double *x, double*y) {
     QuartzCocoaDevice *ci = (QuartzCocoaDevice*)userInfo;
-    
+
     if (!ci || !ci->view || ci->inLocator) return FALSE;
-    
+
     ci->locator[0] = -1.0;
     ci->inLocator = YES;
     [[ci->view window] invalidateCursorRectsForView: ci->view];
-    
+
     while (ci->inLocator && !ci->closing) {
         NSEvent *event = [NSApp nextEventMatchingMask:NSAnyEventMask
                                             untilDate:[NSDate dateWithTimeIntervalSinceNow:0.2]
@@ -810,7 +810,7 @@ static void* QuartzCocoa_Cap(QuartzDesc_t dev, void *userInfo) {
         SEXP dim;
         NSSize size = [ci->view frame].size;
 	pixels = size.width * size.height;
-	
+
 	// make sure the view is up-to-date (fix for PR#14260)
 	[ci->view display];
 
@@ -854,17 +854,17 @@ static void* QuartzCocoa_Cap(QuartzDesc_t dev, void *userInfo) {
 		rint[i] = R_RGB(screenData[j + 0], screenData[j + 1], screenData[j + 2]);
 
 	[rep release];
-	
+
 	PROTECT(dim = allocVector(INTSXP, 2));
         INTEGER(dim)[0] = size.height;
         INTEGER(dim)[1] = size.width;
         setAttrib(raster, R_DimSymbol, dim);
-	
+
         UNPROTECT(2);
 
         [ci->view unlockFocus];
     }
-    
+
     return (void *) raster;
 }
 
@@ -875,9 +875,9 @@ QuartzDesc_t QuartzCocoa_DeviceCreate(void *dd, QuartzFunctions_t *fn, QuartzPar
     double mydpi[2] = { 72.0, 72.0 };
     double scalex = 1.0, scaley = 1.0;
     QuartzCocoaDevice *dev;
-	
+
     if (!qf) qf = fn;
-    
+
     { /* check whether we have access to a display at all */
 	CGDisplayCount dcount = 0;
 	CGGetOnlineDisplayList(255, NULL, &dcount);
@@ -931,14 +931,14 @@ QuartzDesc_t QuartzCocoa_DeviceCreate(void *dd, QuartzFunctions_t *fn, QuartzPar
 	QuartzCocoa_Sync,
         QuartzCocoa_Cap,
     };
-    
+
     qd = qf->Create(dd, &qdef);
     if (!qd) {
 	free(dev);
 	return NULL;
     }
     dev->qd = qd;
-    
+
     /* copy parameters for later */
     memcpy(&dev->pars, par, (par->size < sizeof(QuartzParameters_t))? par->size : sizeof(QuartzParameters_t));
     if (par->size > sizeof(QuartzParameters_t)) dev->pars.size = sizeof(QuartzParameters_t);
@@ -946,7 +946,7 @@ QuartzDesc_t QuartzCocoa_DeviceCreate(void *dd, QuartzFunctions_t *fn, QuartzPar
     if (par->family) dev->pars.family = strdup(par->family);
     if (par->title) dev->pars.title = strdup(par->title);
     if (par->file) dev->pars.file = strdup(par->file);
-    
+
     /* we cannot substitute the device number as it is not yet known at this point */
     dev->title = strdup(par->title);
     {

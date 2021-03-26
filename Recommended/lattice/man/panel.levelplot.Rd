@@ -65,9 +65,9 @@ panel.levelplot.raster(x, y, z,
     drawn, or a character or expression vector giving the labels
     associated with the \code{at} values.  Alternatively, \code{labels}
     can be a list with the following components:
-    
+
     \describe{
-    
+
       \item{\code{labels}:}{ a character or expression vector giving the
 	labels.  This can be omitted, in which case the defaults will be
 	used. }
@@ -78,7 +78,7 @@ panel.levelplot.raster(x, y, z,
       \item{\code{fontfamily, fontface, font}:}{ font used for the
 	labels }
     }
-    
+
   }
   \item{label.style}{
     Controls how label positions and rotation are determined.  A value

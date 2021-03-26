@@ -37,7 +37,7 @@ as(object, Class) <- value
       \code{showMethods(coerce)} for a list of all currently defined methods, as in the
       example below.
 
- 
+
   }
 \arguments{
   \item{object}{any \R object.}

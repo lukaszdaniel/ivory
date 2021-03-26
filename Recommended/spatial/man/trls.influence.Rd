@@ -33,7 +33,7 @@ trls.influence(object)
 }
 \value{
   \code{trls.influence} returns a list with components:
-  
+
   \item{r}{
     raw residuals as given by \code{residuals.trls}
   }

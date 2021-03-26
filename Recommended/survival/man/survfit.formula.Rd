@@ -57,7 +57,7 @@
   \item{robust}{logical, should the function compute a robust variance.
     For multi-state survival curves this is true by default.
     For single state data see details, below.}
- 
+
   \item{istate}{for multi-state models, identifies the initial state of
     each subject or observation}
 
@@ -103,7 +103,7 @@
 	m is the number at risk at the last death time.  (The bands thus agree 
 	with the un-modified bands at each death time.) 
 	This is especially useful for survival curves with a long flat tail. 
-	
+
 	The Peto lower limit is based on the same "effective n" argument as the 
 	modified limit, but also replaces the usual Greenwood variance term with 
 	a simple approximation.  It is known to be conservative. 
@@ -173,7 +173,7 @@ details. Methods defined for survfit objects are
   for competing risks data the AJ reduces to the cumulative incidence (CI)
   estimator.
   For backward compatability the \code{type} argument can be used instead.
-  
+
 
   When the data set includes left censored or interval censored data (or both),
   then the EM approach of Turnbull is used to compute the overall curve.
@@ -195,7 +195,7 @@ details. Methods defined for survfit objects are
   data the routine is at an impasse: a robust variance likely is called
   for, but requires either \code{id} or \code{cluster} information to be
   done correctly; it will default to robust=FALSE.
- 
+
   With the IJ estimate, the leverage values themselves can be returned
   as arrays with dimensions: number of subjects, number of unique times,
   and for a multi-state model, the number of unique states.

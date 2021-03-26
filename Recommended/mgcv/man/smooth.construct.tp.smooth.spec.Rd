@@ -35,7 +35,7 @@ If \code{m} is a vector of length 2 and the second element is zero, then the pen
  The \code{"ts"} smooths are t.p.r.s. with the penalty modified so that the term is shrunk to zero 
 for high enough smoothing parameter, rather than being shrunk towards a function in the 
 penalty null space (see details).
- 
+
 }
 
 \usage{

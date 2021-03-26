@@ -2819,7 +2819,7 @@ Rboolean X11DeviceDriver(pDevDesc dd,
 	case 3: xd->antialias = CAIRO_ANTIALIAS_GRAY; break;
 	case 4: xd->antialias = CAIRO_ANTIALIAS_SUBPIXEL; break;
 	}
-        
+
     }
 #else
     /* Currently this gets caught at R level */

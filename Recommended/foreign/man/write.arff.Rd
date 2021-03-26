@@ -23,7 +23,7 @@ write.arff(x, file, eol = "\n", relation = deparse(substitute(x)))
   writing to the file, in an attempt to it them acceptable to Weka, and
   column names what do not start with an alphabetic character will have
   \code{X} prepended.
-  
+
   However, the references say that ARFF files are ASCII files, and that
   encoding is not enforced.
 }

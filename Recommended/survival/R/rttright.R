@@ -41,7 +41,7 @@ rttright <- function(formula, data, weights, subset, na.action, times,
     type <- attr(Y, "type")
     if (!(type %in% c("right", "mright", "counting", "mcounting")))
         stop("response must be right censored")
-    
+
     casewt <- model.extract(mf, "weights")
     if (is.null(casewt)) casewt <- rep(1, n)
     else {
@@ -66,7 +66,7 @@ rttright <- function(formula, data, weights, subset, na.action, times,
     if (!is.logical(timefix) || length(timefix) > 1)
         stop("invalid value for timefix option")
     if (timefix) Y <- aeqSurv(Y) 
-        
+
     id <- model.extract(mf, "id")
     if (ny==3 && is.null(id)) stop("id is required for start-stop data")
     # Finally, it's time to do the actual work.  
@@ -140,7 +140,7 @@ rttright <- function(formula, data, weights, subset, na.action, times,
         }
         unname(new)
     } 
-            
+
     if (missing(times)) times <- 2*max(abs(G$time)) +1  # past the last
     wtmat <- matrix(casewt, n, length(times))
     for (i in 1:nstrat) {

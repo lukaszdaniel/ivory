@@ -253,7 +253,7 @@ components to be penalized via argument \code{paraPen} and allows the linear pre
 general linear functionals of smooths, via the summation convention mechanism described in 
 \code{\link{linear.functional.terms}}. \code{link{family.mgcv}} details what is available beyond GLMs 
 and the exponential family.
-     
+
 Details of the default underlying fitting methods are given in Wood (2011
 and 2004). Some alternative methods are discussed in Wood (2000 and 2006). 
 
@@ -327,7 +327,7 @@ mgcv paper, but no longer the default methods.]
 Background References:
 
 Green and Silverman (1994) Nonparametric Regression and Generalized  Linear Models. Chapman and Hall.
-  
+
 Gu and Wahba (1991) Minimizing GCV/GML scores with multiple smoothing parameters via
 the Newton method. SIAM J. Sci. Statist. Comput. 12:383-398
 
@@ -340,7 +340,7 @@ functions in generalized linear models.
 J. Am. Statist.Ass. 81:96-103 
 
 Wood (2001) mgcv:GAMs and Generalized Ridge Regression for R. R News 1(2):20-25
-   
+
 Wood and Augustin (2002) GAMs with integrated model selection using penalized regression splines and applications 
 to environmental modelling. Ecological Modelling 157:157-177
 
@@ -498,7 +498,7 @@ b5<-gam(y~s(x0)+s(x1)+s(x2)+s(x3),family=poisson,
         data=dat,method="REML")
 plot(b5,pages=1)
 
- 
+
 ## a binary example (see ?gam.models for large dataset version)...
 
 dat <- gamSim(1,n=400,dist="binary",scale=.33)

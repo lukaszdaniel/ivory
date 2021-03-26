@@ -42,7 +42,7 @@ their values with
 
 These do not check or set the type tag. To create and initialize a new
 immediate binding in a cell use
-	  
+
 - `INTSXP`: `NEW_BNDCELL_IVAL(cell, val)`
 - `LGLSXP`: `NEW_BNDCELL_LVAL(cell, val)`
 - `REALSXP`:`NEW_BNDCELL_DVAL(cell, val)`
@@ -89,13 +89,13 @@ without signaling an error.
     If immediate values were to be supported more widely it would
     probably be necessary to suspend the GC when boxing values in
     `R_expand_binding_value`.
-  
+
   - Serialization handles environment frames with standard pairlist
     code, so the code not checks for an immediate binding and boxes
     the value if necessary. An alternative would be to update the
     serialization format to support immediate bindings. But given how
     challenging it is to change the format it seemed best just to box.
-  
+
   - Only unlocked standard environment bindings that can be cached can
     be turned into immediate bindings. Symbol bindings for the base
     environment are not cached, and bindings for user data bases are

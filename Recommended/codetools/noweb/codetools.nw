@@ -1441,7 +1441,7 @@ addCollectUsageHandler("for", "base", function(e, w) {
 addCollectUsageHandler("{", "base", function(e, w) {
     w$enterGlobal("function", "{", e, w)
     w$srcfile <- attr(e, "srcfile")$filename
-    
+
     if (length(e)>1){
         for ( i in 2 : length(e)){      
             if ( !is.null(attr(e, "srcref")[[i]])){
@@ -2092,7 +2092,7 @@ tmp2 <- g(tmp1, 2)
 tmpv <- "f<-"(tmp2, 1, value = y))
 tmpv <- "g<-"(tmp1, 2, value = tmpv)
 "h<-"(x, 3, value = *tmp*)
-    
+
 
 f(g(h(k(x, 4), 3), 2) 1) <- y
 
@@ -2271,7 +2271,7 @@ addPEhandler("if", function(e, w) {
     else if (identical(args[[1]], FALSE))
         args[[3]]
     else as.call(c(list(get("if", envir = NULL)), args))})
-     
+
 
 
 simpleInternal <- function(e) {
@@ -2339,7 +2339,7 @@ findAssignFuns <- function(e) {
     }
     unique(c(as.character(checkSymOrString(e)), funs))
 }
-    
+
 @ %def
 
 **** find global functions, variables used (recursively also)
@@ -2626,7 +2626,7 @@ tmp1 <- h(x, 3)
 tmpv <- "f<-"(g(tmp1, 2), 1, value = y))
 tmpv <- "g<-"(tmp1, 2, value = tmpv)
 "h<-"(x, 3, value = *tmp*)
-    
+
 
 f(g(h(k(x, 4), 3), 2) 1) <- y
 

@@ -168,7 +168,7 @@ empty list for any other object.
   For example, an S4 class might contain the S3 class \code{"lm"}, but
   an object from the class might contain an object from class
   \code{"mlm"}, as in the \code{"xlm"}example below.
-  
+
   \R is somewhat arbitrary about what
   it treats as an S3 class: \code{"ts"} is, but \code{"matrix"} and \code{"array"}
   are not.

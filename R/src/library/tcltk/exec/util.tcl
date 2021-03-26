@@ -719,7 +719,7 @@ interp alias {} ::Utility::dir {} namespace inscope ::Utility ls
 	    } else {
 		set fmt $c
 	    }
-	    
+
 	}
 	echo $regform $format $val
 	set result [string match $regform $val]

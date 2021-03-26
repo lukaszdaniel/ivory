@@ -46,7 +46,7 @@ Confidence Intervals for Model Parameters
 }
 \details{
   \code{\link[stats]{confint}} is a generic function in package \code{stats}.
-  
+
   These \code{confint} methods call the appropriate profile method,
   then find the confidence intervals by interpolation in the profile
   traces.  If the profile object is already available it should be used

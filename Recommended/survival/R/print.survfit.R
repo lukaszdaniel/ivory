@@ -47,7 +47,7 @@ print.survfit <- function(x, scale=1,
             if (length(rmean)==0) stop(gettextf("invalid value for '%s' option", "rmean"))
         }
     }
-    
+
     temp <- survmean(x, scale=scale, rmean)
     # If the first columns of survmean are identical, suppress duplicates
     #
@@ -86,7 +86,7 @@ survmean <- function(x, scale=1, rmean) {
     # The starting point for the integration of the AUC
     if (!is.null(x$start.time)) start.time <- x$start.time
     else                        start.time <- min(0, x$time)
-    
+
     #
     # The function below is called once for each line of output,
     #  i.e., once per curve.  It creates the line of output
@@ -181,7 +181,7 @@ survmean <- function(x, scale=1, rmean) {
                   "*rmean", "*se(rmean)", "median",
               paste(x$conf.int, c("LCL", "UCL"), sep=''))  #col labels
     ncols <- 9    #number of columns in the output
-    
+
 
     #Four cases: strata Y/N  by  ncol(surv)>1 Y/N
     #  Repeat the code, with minor variations, for each one

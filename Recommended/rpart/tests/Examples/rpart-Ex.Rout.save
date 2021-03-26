@@ -562,7 +562,7 @@ node), split, n, loss, yval, (yprob)
     6) Petal.Length< 4.85 26  2 versicolor (0.00000000 0.92307692 0.07692308) *
     7) Petal.Length>=4.85 24  1 virginica (0.00000000 0.04166667 0.95833333) *
 > table(predict(fit, iris[-sub,], type = "class"), iris[-sub, "Species"])
-            
+
              setosa versicolor virginica
   setosa         25          0         0
   versicolor      0         22         1

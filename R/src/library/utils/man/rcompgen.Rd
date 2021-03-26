@@ -256,7 +256,7 @@ rc.options(\dots)
   If \code{rc.settings} is called without any arguments, it returns the
   current settings as a named logical vector.  Otherwise, it returns
   \code{NULL} invisibly. 
-  
+
   \code{rc.status} returns, as a list, the contents of an internal
   (unexported) environment that is used to record the results of the
   last completion attempt.  This can be useful for debugging.  For such

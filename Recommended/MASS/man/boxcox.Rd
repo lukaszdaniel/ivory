@@ -56,7 +56,7 @@ log-likelihood vector, invisibly if the result is plotted.
   Box, G. E. P. and Cox, D. R. (1964)
   An analysis of transformations (with discussion).
   \emph{Journal of the Royal Statistical Society B}, \bold{26}, 211--252.
-  
+
   Venables, W. N. and Ripley, B. D. (2002)
   \emph{Modern Applied Statistics with S.} Fourth edition.  Springer.
 }

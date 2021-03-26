@@ -71,7 +71,7 @@ shrinks the fitted coefficients towards zero.
     stop:\tab recurrence or censoring time\cr
     enum:\tab which recurrence (up to 4)\cr
   }
-  
+
 }
 \source{
   Andrews DF, Hertzberg AM (1985), 

@@ -32,7 +32,7 @@ pattern <- function(type, ...) {
     type <- match(type, patternTypes)
     if (is.na(type))
         stop("Invalid pattern type")
-    
+
     pattern <- c(list(type=as.integer(type)), list(...))
     class(pattern) <- c(type, "Pattern")
     pattern
@@ -51,12 +51,12 @@ pattern <- function(type, ...) {
     extend <- match(extend, extendOptions)
     if (is.na(extend))
         stop("Invalid 'extend' value")
-    
+
     ## Make sure we really have colours in some form
     ## AND convert to "#RRGGBB" format
     RGBA <- col2rgb(colours, alpha=TRUE)
     colours <- rgb(t(RGBA[1:3,]), alpha=RGBA[4,], maxColorValue=255)
-    
+
     pattern("LinearGradient",
             x1 = as.numeric(x1), y1 = as.numeric(y1),
             x2 = as.numeric(x2), y2 = as.numeric(y2),
@@ -78,12 +78,12 @@ pattern <- function(type, ...) {
     extend <- match(extend, extendOptions)
     if (is.na(extend))
         stop("Invalid 'extend' value")
-    
+
     ## Make sure we really have colours in some form
     ## AND convert to "#RRGGBB" format
     RGBA <- col2rgb(colours, alpha=TRUE)
     colours <- rgb(t(RGBA[1:3,]), alpha=RGBA[4,], maxColorValue=255)
-    
+
     pattern("RadialGradient",
             cx1 = as.numeric(cx1), cy1 = as.numeric(cy1),
             r1 = as.numeric(r1),
@@ -98,7 +98,7 @@ pattern <- function(type, ...) {
     extend <- match(extend, extendOptions)
     if (is.na(extend))
         stop("Invalid 'extend' value")
-    
+
     pattern("TilingPattern",
             f = fun,
             x = as.numeric(x), y = as.numeric(y),

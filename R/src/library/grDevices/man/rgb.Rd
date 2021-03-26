@@ -52,7 +52,7 @@ rgb(red, green, blue, alpha, names = NULL, maxColorValue = 1)
 
   Most other graphics devices plot semi-transparent colors as fully
   transparent, usually with a warning when first encountered.
-  
+
   \code{NA} values are not allowed for any of \code{red}, \code{blue}, 
   \code{green} or \code{alpha}.
 }

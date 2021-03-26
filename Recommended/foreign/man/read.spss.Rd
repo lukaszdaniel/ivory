@@ -83,7 +83,7 @@ read.spss(file, use.value.labels = TRUE, to.data.frame = FALSE,
   or a named character vector.  Attribute \code{"variable.labels"} is a
   named character vector with names the short variable names and
   elements the long names.
-  
+
   If there are user-defined missing values, there will be a attribute
   \code{"Missings"}.  This is a named list with one list element per
   variable.  Each element has an element \code{type}, a length-one
@@ -106,14 +106,14 @@ read.spss(file, use.value.labels = TRUE, to.data.frame = FALSE,
   temporary file and then read.  (\samp{https:} is supported where
   supported by \code{\link{download.file}} with its current default
   \code{method}.)
-  
+
   Occasionally in SPSS, value labels will be added to some values of a
   continuous variable (e.g. to distinguish different types of missing
   data), and you will not want these variables converted to factors.  By
   setting \code{max.value.labels} you can specify that variables with a
   large number of distinct values are not converted to factors even if
   they have value labels.  
-  
+
   If SPSS variable labels are present, they are returned as the
   \code{"variable.labels"} attribute of the answer.
 
@@ -124,7 +124,7 @@ read.spss(file, use.value.labels = TRUE, to.data.frame = FALSE,
   strings and the value labels had different amounts of padding.  See
   the examples for \code{\link{sub}} for ways to remove trailing spaces
   in character data.
-  
+
   URL \url{https://docs.microsoft.com/en-us/windows/win32/intl/code-page-identifiers}
   provides a list of translations from Windows codepage numbers to
   encoding names that \code{\link{iconv}} is likely to know about and so
@@ -195,7 +195,7 @@ levels(x.condense$factor_n_duplicated)
 as.numeric(x.append$factor_n_duplicated)
 as.numeric(x.condense$factor_n_duplicated)
 
-    
+
 ## Long Strings (>255 chars) are imported in consecutive separate variables 
 ## (see warning about subtype 14):
 x <- read.spss(file=sav, to.data.frame=TRUE, stringsAsFactors=FALSE)

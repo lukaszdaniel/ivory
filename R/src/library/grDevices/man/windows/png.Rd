@@ -134,7 +134,7 @@ tiff(filename = "Rplot\%03d.tif",
   horizontal differencing (\sQuote{differencing predictor}, section 14
   of the TIFF specification) in combination with the compression method,
   which is effective for continuous-tone images, especially colour ones.
-  
+
   Unknown resolutions in BMP files are recorded as 72 ppi.
 }
 
@@ -195,7 +195,7 @@ tiff(filename = "Rplot\%03d.tif",
 
 \references{
   The PNG specification, \url{http://www.w3.org/TR/PNG/}.
-  
+
   The TIFF specification, including extensions, at
   \url{https://partners.adobe.com/public/developer/tiff/}.
 }

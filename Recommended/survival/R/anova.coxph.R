@@ -17,7 +17,7 @@ anova.coxph <- function (object, ...,  test = 'Chisq') {
         warning(gettextf("the following arguments passed to 'anova.coxph()' are invalid and dropped: %s", tmp_n))
 	}
     dotargs <- dotargs[!named]
-    
+
     single <- (inherits(object, "coxph") || inherits(object, "coxme"))
     if (length(dotargs) >0  || !single) {
         # there are multiple arguments, either the object itself is a list
@@ -30,7 +30,7 @@ anova.coxph <- function (object, ...,  test = 'Chisq') {
         is.coxme <-  sapply(object, function(x) inherits(x, "coxme"))
         is.multi <-  sapply(object, function(x) inherits(x, "coxphms"))
         if (any(is.multi)) return(anova.coxphms(object, test=test))
-        
+
         if (any(is.coxme)) {
             # We need the anova.coxmelist function from coxme
             # If coxme is not loaded the line below returns NULL
@@ -54,7 +54,7 @@ anova.coxph <- function (object, ...,  test = 'Chisq') {
     if (inherits(object, "coxphms")) return(anova.coxphms(object, test=test))
     if (length(object$rscore)>0)
         stop("cannot do anova tables with robust variances")
-    
+
     has.strata <- !is.null(attr(terms(object), "specials")$strata)
     if (is.null(object[['y']]) || (has.strata && is.null(object$strata))) {
         # We need the model frame
@@ -85,7 +85,7 @@ anova.coxph <- function (object, ...,  test = 'Chisq') {
     loglik[nmodel+1] <- object$loglik[2]
     df[1] <- 0
     loglik[1] <- object$loglik[1]
-    
+
     # Now refit intermediate models
     for (i in seq.int(1, length.out =nmodel-1)){
         if (length(object$offset)) {
@@ -104,7 +104,7 @@ anova.coxph <- function (object, ...,  test = 'Chisq') {
         df[i+1] <- sum(!is.na(tfit$coefficients))
         loglik[i+1] <- tfit$loglik[2]
     }
-                              
+
     table <- data.frame(loglik=loglik, Chisq=c(NA, 2*diff(loglik)), 
                         Df=c(NA, diff(df))) 
 
@@ -114,7 +114,7 @@ anova.coxph <- function (object, ...,  test = 'Chisq') {
     if (length(test) >0 && test[1]=='Chisq') {
         table[['Pr(>|Chi|)']] <- pchisq(table$Chisq, table$Df, lower.tail=FALSE)
         }
-  
+
     temp <- attr(terms(object), "term.labels")
     if (has.strata && length(stemp$terms)>0 ) temp <- temp[-stemp$terms]
     row.names(table) <- c('NULL', temp)

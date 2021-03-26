@@ -29,7 +29,7 @@
 
 2013 Dec 10	4.1-4	Change pre-defined structure sizes to mitigate 
 	                false positives from Undefined Behaviour Sanitizer.
-	
+
 2013 Sep 01	4.1-3	Document TMT change to predict() output.
 
 2013 Aug 15	4.1-2	Replace calls to as.name().
@@ -41,9 +41,9 @@
 2013 Mar 20	4.1-1	Add ko translations, update reference output for 3.0.0.
 
 2012 Nov 29	4.1-0	Remove rpconvert() (converted rpart2 trees).
-	
+
 			Clean up a lot of the R code.
-	
+
 			C code reformatted with GNU indent and
 			-i4 -nut -ncdb -d1 -br -ce -il0 -npcs -brs
 			then use whitespace-cleanup in Emacs.
@@ -127,7 +127,7 @@
 2009 Jul 28	3.1-45	Add rpart-Ex.Rout.save file
 
 2009 May 18	3.1-44	Add German translations
-	
+
 2009 Mar 09	3.1-43	Spelling in man/snip.rpart.Rd.
 			Spacing issue in tests/testall.Rout.save
 			Remove environments from fit$functions if basic
@@ -260,7 +260,7 @@
 			Change na.rpart to make use of passing down the
 			  terms attribute in R 1.3.0.
 			Explicitly get/set .rpart.parms* in user workspace.
-			
+
 2001 Mar 31	2.0-3	Add priority: recommended
 			Re-licence under GPL2
 
@@ -422,6 +422,6 @@ to select the largest value, there was no practical impact.
 
 17Jun05: Fix offset bug -- the line in rpart.s didn't actually get
 the offset, but rather the variable number of the offset.
- 
+
 27March05: Finish up the test suite for priors.  Run test suite.  Code is
 ready for distribution.

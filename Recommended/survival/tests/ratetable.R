@@ -30,8 +30,8 @@ attributes(temp) <- list(dim=c(21,2,4),
     cutpoints=list(c(75:95), NULL, mdy.date(1,1,2000) +c(0:4)*366.25),
     class='ratetable')
 is.ratetable(temp, verbose=T)
- 
-                    
+
+
 # missing dimid attribute + unsorted cutpoint
 attributes(temp) <- list(dim=c(21,2,4),
     dimnames=list(c(as.character(75:95)), c("male","female"),

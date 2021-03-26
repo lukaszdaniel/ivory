@@ -28,7 +28,7 @@
  attribute.
  }
  \value{an object of class \code{logLik}}
- 
+
  \references{
    Robert E. Kass and Adrian E. Raftery (1995). "Bayes Factors". J.
    American Statistical Assoc. 90 (430): 791.

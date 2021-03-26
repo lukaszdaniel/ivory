@@ -26,7 +26,7 @@ Choleski routine. It is primarily of use for turning penalized regression
 problems into ordinary regression problems.} 
 \value{ A matrix, \eqn{ {\bf B}}{B} with as many columns as the rank of 
 \eqn{ {\bf A}}{A}, and such that \eqn{ {\bf A} = {\bf BB}^\prime}{A=BB'}.}
- 
+
 
 \author{ Simon N. Wood \email{simon.wood@r-project.org}}
 

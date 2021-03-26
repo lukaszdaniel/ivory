@@ -144,7 +144,7 @@ the term is a function of.}
 \item{fx}{ logical array with element for each penalty of the term
 (tensor product smooths have multiple penalties). \code{TRUE} if the penalty is to 
 be ignored, \code{FALSE}, otherwise. }
-  
+
 
 \item{label}{A suitable text label for this smooth term.}
 
@@ -175,7 +175,7 @@ Alternative approaches to functional ANOVA decompositions,
 Belitz and Lang (2008) Simultaneous selection of variables and smoothing parameters in structured additive regression models. Computational Statistics & Data Analysis, 53(1):61-81
 
 Lee, D-J and M. Durban (2011) P-spline ANOVA type interaction models for spatio-temporal smoothing. Statistical Modelling, 11:49-69
- 
+
 Wood, S.N. (2006) Low-Rank Scale-Invariant Tensor Product Smooths for Generalized Additive Mixed Models. Biometrics 62(4): 1025-1036.
 
 }

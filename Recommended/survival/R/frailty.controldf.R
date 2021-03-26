@@ -44,7 +44,7 @@ frailty.controldf <- function(parms, iter, old, df) {
 	# How am I doing
 	if ( abs( (y[nx]-target)/(y[nx-1]-target)) > .6) doing.well <- FALSE
 	else doing.well <- TRUE
-	
+
 	ord <- order(x)
 	if ((x[1]-x[2])*(y[1]-y[2]) >0)  y <- y[ord]  #monotone up
 	else  { #monotone down

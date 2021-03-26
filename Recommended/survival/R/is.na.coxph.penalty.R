@@ -19,7 +19,7 @@
     oldClass(x) <- attlist$class
     return(x)
 }
-			  
+
 
 is.na.coxph.penalty <- function(x) {
     if (is.matrix(x))

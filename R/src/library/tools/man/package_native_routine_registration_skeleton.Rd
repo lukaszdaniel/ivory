@@ -59,7 +59,7 @@ package_native_routine_registration_skeleton(dir, con = stdout(),
   need to be included (they may exist earlier in that file if appending
   to a file, or in a header file which can be included in
   \file{init.c}).
-  
+
   The default value of \code{character_only} is appropriate when working
   on a package without any existing registration:
   \code{character_only = FALSE}
@@ -84,7 +84,7 @@ package_native_routine_registration_skeleton(dir, con = stdout(),
   native routines not included in the package, which will lead to a
   \sQuote{loading failed} error during package installation when the
   registration C code is added.
-  
+
   Calls which do not name a routine such as \code{.Call(\dots)} will be
   silently ignored.
 }
@@ -96,7 +96,7 @@ package_native_routine_registration_skeleton(dir, con = stdout(),
 \note{
   This only examines the \file{R} directory: it will not find
   e.g.\sspace\code{.Call} calls used directly in examples, tests \emph{etc}.
-  
+
   Static code analysis is used to find the \code{.C} etc calls: it
   \emph{will} find those in parts of the \R code \sQuote{commented out}
   by inclusion in \code{if(FALSE) \{ \dots \}}.
@@ -129,7 +129,7 @@ package_native_routine_registration_skeleton(dir, con = stdout(),
   \preformatted{
     cproto -I/path/to/R/include -e *.c
   }
-  
+
   \command{ctags} (commonly distributed with the OS)
   covers C and C++., using something like
   \preformatted{

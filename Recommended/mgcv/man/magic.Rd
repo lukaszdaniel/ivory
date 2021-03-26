@@ -34,7 +34,7 @@ contains the logs of the smoothing parameters that actually multiply the penalty
 Any \code{sp} values that are negative are autoinitialized, otherwise they are taken as supplying 
 starting values. A supplied starting value will be reset to a default starting value if the
 gradient of the GCV/UBRE score is too small at the supplied value.  }
- 
+
 \item{S}{ is a list of of penalty matrices. \code{S[[i]]} is the ith penalty matrix, but note
 that it is not stored as a full matrix, but rather as the smallest square matrix including all 
 the non-zero elements of the penalty matrix. Element 1,1 of \code{S[[i]]}  occupies 

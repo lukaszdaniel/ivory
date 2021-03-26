@@ -1359,7 +1359,7 @@ AIC: 170.07
 Number of Fisher Scoring iterations: 4
 
 Correlation of Coefficients:
-                                                           
+
 (Intercept)                 1                              
 M.userY                     , 1                            
 TempHigh                    , . 1                          

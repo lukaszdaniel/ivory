@@ -21,7 +21,7 @@ Rrank(R,tol=.Machine$double.eps^.9)
 
 \details{ The method is based on Cline et al. (1979) as described in Golub and van Loan (1996).
 }
- 
+
 
 \author{ Simon N. Wood \email{simon.wood@r-project.org}}
 

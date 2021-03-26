@@ -37,7 +37,7 @@ TukeyHSD(x, which, ordered = FALSE, conf.level = 0.95, \dots)
 \details{
   This is a generic function: the description here applies to the method
   for fits of class \code{"aov"}.
-  
+
   When comparing the means for the levels of a factor in an analysis of
   variance, a simple comparison using t-tests will inflate the
   probability of declaring a significant difference when it is not in

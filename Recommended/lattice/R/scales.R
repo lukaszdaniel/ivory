@@ -37,7 +37,7 @@ complete_names <- function(x, template, allow.invalid = FALSE)
     x
 }
 
-    
+
 ## FIXME: how should we handle unrecognized arguments?
 
 construct.scales <-

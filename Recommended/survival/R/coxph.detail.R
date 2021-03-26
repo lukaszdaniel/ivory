@@ -42,8 +42,8 @@ coxph.detail <-  function(object, riskmat=FALSE, rorder=c("data", "time")) {
 	rmat <- integer(ndeath*n)
 	}
     else rmat <- as.integer(1)
-    
-    
+
+
     ff <- .C(Ccoxdetail, as.integer(n),
 			  as.integer(nvar),
 			  ndeath= as.integer(ndeath),

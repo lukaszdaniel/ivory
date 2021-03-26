@@ -116,7 +116,7 @@
   Notice that some plots may not make much sense for the \code{glm}
   case; e.g., the normal Q-Q plot only makes sense if the distribution
   is approximately normal.
-    
+
 }
 \references{
   Belsley, D. A., Kuh, E. and Welsch, R. E. (1980).

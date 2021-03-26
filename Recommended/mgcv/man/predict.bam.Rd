@@ -22,7 +22,7 @@ for quantities derived from the model (e.g. derivatives of smooths), and for loo
 }
 %- maybe also `usage' for other objects documented here.
 \arguments{ 
-  
+
  \item{object}{ a fitted \code{bam} object as produced by \code{\link{bam}}.
                 }
  \item{newdata}{ A data frame or list containing the values of the model covariates at which predictions
@@ -30,7 +30,7 @@ for quantities derived from the model (e.g. derivatives of smooths), and for loo
                 original data are returned. If \code{newdata} is provided then
                 it should contain all the variables needed for prediction: a
                 warning is generated if not. } 
- 
+
 \item{type}{ When this has the value \code{"link"} (default) the linear predictor (possibly with
 associated standard errors) is returned. When \code{type="terms"} each component of the 
 linear predictor is returned seperately (possibly with standard errors): this includes 

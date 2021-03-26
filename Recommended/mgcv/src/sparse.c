@@ -4,11 +4,11 @@
    In particular provides sparse discrete method routines:
    sXWXd, sdiagXWXt, sXbd & sXyd as well as sparse row tensor product
    routine stmm.
-   
+
    Note that there is little attempt to hand optimize the code at the basic
    avoiding-look-up level. Also sdiagXWXt is not optimized and is single threaded 
    at present.
-  
+
 */
 #include <stdlib.h>
 #include <stdio.h>
@@ -66,7 +66,7 @@ void tri_to_cs(int *Ti,int *Tj,double *Tx,int *Cp,int *Ci,double *Cx,int *w, int
    Algorithm is essentially the one given in Davis (2006) 2.4.  
 */
   int i,j;
-  
+
   for (i=0;i<nz;i++) w[Tj[i]]++; /* count the entries per column */
   /* form cumsum of w to get the indices of the column starts in Ci and Cx... */ 
   for (j=0,i=0;i<c;i++) {
@@ -445,7 +445,7 @@ void sXWXdij(double *w, double *d,spMat *Xs,spMat *Xt,int rb,int cb,int r,int c,
   double x,*Wx,*Xsx;
   int q,qr,qc,qt,l,i,k,ri,ci,ii,jj,k1,j,j1,first_mat,
     first_col=0,first_s=0,*kr,*kc,n,Wnz,*Wi,*Wj,*Xsi,*Xsr,*Xsoff,s,t,r0,qr0,qc0,c0;
-  
+
   n = Xs[0].n;
   ri = ts[rb]; /* element of Xs at which term rb starts */
   if (dt[rb]==1) qr=0; else 
@@ -515,7 +515,7 @@ void sXWXdij(double *w, double *d,spMat *Xs,spMat *Xt,int rb,int cb,int r,int c,
       }
       q++; /* update total column counter */
     } /* cb term pre-final column loop */
-  
+
     /* now clear dn and d back to zero */
     if (qt) {
       Xsi = Xs[first_mat].i;Xsr = Xs[first_mat].r+first_s*n;
@@ -557,15 +557,15 @@ void sXWXdij(double *w, double *d,spMat *Xs,spMat *Xt,int rb,int cb,int r,int c,
      When the switch is 0 then the memory supplied is assumed to be adequate. Hence memory can 
      be allocated at first call, and assumed correct at subsequent calls.  
     */
-   
+
     W->m = r;W->c= Xs[ts[cb]+dt[cb]-1].c;
     /* iwork and xwork are V->m vectors ... */
     j  = *init; if (j==1) j = 2; // signal that W is not to be shrunk, only expanded (matters above!)...
     cs_mult(V,Xs+ts[cb]+dt[cb]-1,W,iwork, xwork,j); /* W=\bar W B where B is final marginal of term cb */
-   
+
     /* V->i and V->x must be at least as large as A->i and A->x, but will be if it meets requirements given
        at start... */
-  
+
     if (!s && !t) cs_mult(Xt+ts[rb]+dt[rb]-1,W,XWX,iwork, xwork,*init); else {
       V->m = Xs[ts[rb]+dt[rb]-1].c;V->c = W->c;
       cs_mult(Xt+ts[rb]+dt[rb]-1,W,V,iwork, xwork,j);
@@ -641,7 +641,7 @@ SEXP sXWXd(SEXP X,SEXP W,SEXP LT, SEXP RT,SEXP NT) {
   KS = getListEl(X,"ks");
   KS = PROTECT(coerceVector(KS,INTSXP));nprot++;
   ks = INTEGER(KS);
-  
+
   mx = length(Xd); /* list length */
   /* read sparse matrix list into structure suitable for passing on to 
      other routines */
@@ -699,7 +699,7 @@ SEXP sXWXd(SEXP X,SEXP W,SEXP LT, SEXP RT,SEXP NT) {
   */
   sub_blocks = (int *)CALLOC((size_t)nt,sizeof(int)); /* number of sub-blocks for this term */
   block_size = (int *)CALLOC((size_t)nt,sizeof(int)); 
-  
+
   for (p=0,i=0;i<nt;i++) { /* term loop (all, not just lt,rt selected) */
     sub_blocks[i] = 1;
     if (dt[i]>1) for (j=ts[i];j<ts[i]+dt[i]-1;j++) sub_blocks[i] *= Xs[j].c;
@@ -720,7 +720,7 @@ SEXP sXWXd(SEXP X,SEXP W,SEXP LT, SEXP RT,SEXP NT) {
      cross-product */
   nr = j;nc=k; 
   str = (int *)CALLOC((size_t)nr*nc,sizeof(int)); 
-  
+
   /* next create an array storing the sub-block information. i.e.
      rb,cb - the term block row and col.
      r,c - the sub block within the current term block.
@@ -730,9 +730,9 @@ SEXP sXWXd(SEXP X,SEXP W,SEXP LT, SEXP RT,SEXP NT) {
      required to then to place it correctly in the final result (the remaining information
      has to wait until the NZP for all blocks is known).  
   */ 
-  
+
   block = (XWXblock *)CALLOC((size_t)nb,sizeof(XWXblock)); // NOTE: free this
-  
+
   brs1=rcum0=0; 
   for (ii=0,blp = block,i=0;i<nlt;i++) { // term block-rows
     if (symmetric) i1 = i+1; else i1 = nrt;
@@ -817,7 +817,7 @@ SEXP sXWXd(SEXP X,SEXP W,SEXP LT, SEXP RT,SEXP NT) {
     }
   }
   ncc = b/nrc; // columns of constraint matrix
-  
+
   if (nr*nc != b) { /* then there is block merging to do */
     stc = (int *)CALLOC((size_t)b,sizeof(int)); /* constrained structure matrix */
     for (i=0;i<b;i++) stc[i] = -1; /* unfilled signal for checking */
@@ -924,7 +924,7 @@ SEXP sXWXd(SEXP X,SEXP W,SEXP LT, SEXP RT,SEXP NT) {
       } // j loop (term block cols)
       is0 += sub_blocks[rb];  // str row start update
       if (qc[rb]) ic0++; else ic0 += sub_blocks[rb];// stc row start update
-      
+
     } // i loop  (term block rows)
     /* now run through stc enforcing consistency of block starts */
     k = stc[0];
@@ -957,7 +957,7 @@ SEXP sXWXd(SEXP X,SEXP W,SEXP LT, SEXP RT,SEXP NT) {
   }
 
   /* write out results to a sparse matrix for return */
-  
+
   if (symmetric) {
     XWX = PROTECT(R_do_new_object(PROTECT(R_getClassDef("dsCMatrix"))));nprot++;nprot++; // create symmetric sparse matrix
     SET_STRING_ELT(PROTECT(R_do_slot(XWX,ul_sym)),0,PROTECT(mkChar("L")));nprot++;nprot++; // set to lower triangle storage - note charecter setting special
@@ -975,7 +975,7 @@ SEXP sXWXd(SEXP X,SEXP W,SEXP LT, SEXP RT,SEXP NT) {
   }  
   R_do_slot_assign(XWX,p_sym,allocVector(INTSXP,dim[1]+1));
   XWXp = INTEGER(R_do_slot(XWX,p_sym));
-  
+
   /* Need to work through column by column, employing the nr by nc (constrained) structure matrix to get 
      the right components.... */
   XWXp[0]= 0;
@@ -1061,7 +1061,7 @@ SEXP sXyd(SEXP X,SEXP Y,SEXP LT) {
   KS = getListEl(X,"ks");
   KS = PROTECT(coerceVector(KS,INTSXP));
   ks = INTEGER(KS);
-  
+
   mx = length(Xd); /* list length */
   /* read sparse matrix list into structure suitable for passing on to 
      other routines */
@@ -1111,7 +1111,7 @@ SEXP sXyd(SEXP X,SEXP Y,SEXP LT) {
     if (Xs[ts[b]+dt[b]-1].m > bb) bb = Xs[ts[b]+dt[b]-1].m; /* max number of rows in a final marginal */ 
     if (ii<dt[b]) ii=dt[b]; /* maximum number of marginals */
   }  
- 
+
   Xy = (double *) CALLOC((size_t) no*cy,sizeof(double));
   yb = (double *) CALLOC((size_t) bb,sizeof(double));
   c = (int *) CALLOC((size_t)ii,sizeof(int)); 
@@ -1168,7 +1168,7 @@ SEXP sXyd(SEXP X,SEXP Y,SEXP LT) {
 	      }  
 	    }
 	  }  
-	
+
 	  spMtv(Xs + ts[b]+dt[b]-1,yb,Xy + yj*no + out_start,s); /* clear at s=0, add thereafter */
 	  out_start += Xs[ts[b]+dt[b]-1].c; 
 	  /* now update the column counter and figure out which partial products
@@ -1206,7 +1206,7 @@ SEXP sXyd(SEXP X,SEXP Y,SEXP LT) {
       for (j=tps[bb];j<tps[bb+1];j++,i++) Xyo[i] = yp[j];
     }  
   }  
-  
+
   FREE(Xy);FREE(Xs);FREE(v);FREE(yb);FREE(c);FREE(p);FREE(My);FREE(tps);FREE(dn);
   UNPROTECT(9);
   return(XY);
@@ -1329,11 +1329,11 @@ void sXbsdwork(double *Xb,double *a,spMat beta0,int bp,spMat *Xs,double **v,int 
       q += dim[i];k += dim[i];
     }
   }
-  
+
   beta.p[1] = j1;beta.p[0]=0;  
- 
+
   d = work; work += n*maxd; /* partial product array */
-  
+
   p = worki;worki += maxd;
   c = worki;worki += maxd;
   c0 = worki;worki += maxd; 
@@ -1489,10 +1489,10 @@ void sXbdwork(double *Xb,double *a,double *beta0,int bp,spMat *Xs,double **v,int
     }  
   }
   d = work;//(double *)CALLOC((size_t) n*maxd, sizeof(double)); /* partial product array */
-  
+
   p = worki;worki += maxd;//(int *)CALLOC((size_t)maxd,sizeof(int));
   c = worki;//(int *)CALLOC((size_t)maxd,sizeof(int));
-  
+
   for (bb=0;bb<nlt;bb++) { // now actually do the multiplying.
     b = lt[bb];
     if (dt[b]==1) { // singleton
@@ -1531,7 +1531,7 @@ void sXbdwork(double *Xb,double *a,double *beta0,int bp,spMat *Xs,double **v,int
 	      }  
 	    }	
           } /* m loop */
-	 
+
 	  /* update the marginal column indices and downdate dn accordingly */
 	  k = dt[b]-2;ok = 0;
 	  while (!ok) {
@@ -1582,12 +1582,12 @@ SEXP sXbd(SEXP X,SEXP BETA,SEXP LT) {
   OFFS =  getListEl(X,"offstart"); /* the start points in the offset array */
   OFFS = PROTECT(coerceVector(OFFS,INTSXP));
   off_start = INTEGER(OFFS);
- 
+
   /* get the matrix defining the range of k vectors for each matrix */
   KS = getListEl(X,"ks");
   KS = PROTECT(coerceVector(KS,INTSXP));
   ks = INTEGER(KS);
-  
+
   mx = length(Xd); /* list length */
   /* read sparse matrix list into structure suitable for passing on to 
      other routines */
@@ -1635,7 +1635,7 @@ SEXP sXbd(SEXP X,SEXP BETA,SEXP LT) {
   PROTECT(XB=allocVector(REALSXP,n*bc)); /* vector for X beta */
   Xb=REAL(XB);
   for (i=0;i<n*bc;i++) Xb[i] = 0.0;
- 
+
   //k = n*maxd+2*(bp+nc) + maxm; // sparse version
   k = n*maxd+bp+nc; // dense version 
   work = (double *)CALLOC((size_t) k,sizeof(double));
@@ -1654,7 +1654,7 @@ SEXP sXbd(SEXP X,SEXP BETA,SEXP LT) {
   */
   for (j=0;j<bc;j++,beta0 += bp,Xb += n) 
     sXbdwork(Xb,&a,beta0,bp,Xs,v,qc,nt,ts,dt,lt,nlt,n,work,worki,1);
-  
+
   FREE(worki);FREE(work);
   UNPROTECT(9);
   return(XB);
@@ -1693,7 +1693,7 @@ SEXP sdiagXVXt(SEXP X, SEXP V, SEXP LT, SEXP RT) {
   KS = getListEl(X,"ks");
   KS = PROTECT(coerceVector(KS,INTSXP));
   ks = INTEGER(KS);
-  
+
   mx = length(Xd); /* list length */
   /* read sparse matrix list into structure suitable for passing on to 
      other routines */
@@ -1719,7 +1719,7 @@ SEXP sdiagXVXt(SEXP X, SEXP V, SEXP LT, SEXP RT) {
   Vs.i = INTEGER(R_do_slot(V,i_sym)); // row index for each non-zero element
   dim = INTEGER(R_do_slot(V,dim_sym));
   p = Vs.m = dim[0];Vs.c = dim[1]; // matrix is .m by .c
-  
+
   /* now deal with the smooth term information... */
   TS = getListEl(X,"ts");
   nt = length(TS); // number of smooth terms
@@ -1959,7 +1959,7 @@ SEXP isa1p(SEXP L,SEXP S,SEXP NT) {
    (always the smaller) in the summation. Bisection is then used within the 
    search bracket. It's only about 10% faster than simple bisection in reality!
 */
-  
+
   SEXP i_sym,x_sym,dim_sym,p_sym,kr;
   int *Lp,*Li,*Sp,*Si,i,j,k,q,*dim,s,k0,k1,l0,l1,n,mm,
     *li0,*li1,s0,s1,s2,m,*ul,*ll,*ul0,*ll0,kk,*ulq,*llq,*llq1,*liq,nt,tid;
@@ -1991,7 +1991,7 @@ SEXP isa1p(SEXP L,SEXP S,SEXP NT) {
   /* allocate storage for the search interval limits... */
   ll0 = ll = (int *)CALLOC((size_t)mm*nt,sizeof(int));
   ul0 = ul = (int *)CALLOC((size_t)mm*nt,sizeof(int));
-  
+
   for (i=n-1;i>=0;i--) { /* work down columns */
     Lii = Lx[Lp[i]]; /* Lii is first element in ith col of L */
     l0 = Lp[i]+1;l1 = Lp[i+1]; /* limits of L[,i] over which to sum */
@@ -2026,7 +2026,7 @@ SEXP isa1p(SEXP L,SEXP S,SEXP NT) {
       for (q=0;q<m;q++) { /* fill out initial search bracket ends */
         ul[q] = s1;ll[q] = s;
       }
-     	
+
       kk = 0; /* interval we are working on */
 
       while (kk<m-1) { /* iterate for bracketing intervals */
@@ -2064,7 +2064,7 @@ SEXP isa1p(SEXP L,SEXP S,SEXP NT) {
     } /* parallel section end */ 
     /* now do k0, to fill in S[i,i] */
     ul=ul0;ll=ll0;
-      
+
     /* Now compute S[i,j] which is S[j,i] which is in Sx[k] */
     /* Loop over the ith column of L */
     m = l1-l0; /* number of non zero elements in L[,i] */
@@ -2075,7 +2075,7 @@ SEXP isa1p(SEXP L,SEXP S,SEXP NT) {
     for (q=0;q<m;q++) { /* fill out initial search bracket ends */
       ul[q] = s1;ll[q] = s;
     }
-     	
+
     kk = 0; /* interval we are working on */
 
     while (kk<m-1) { /* iterate for bracketing intervals */
@@ -2107,7 +2107,7 @@ SEXP isa1p(SEXP L,SEXP S,SEXP NT) {
     x += 1/Lii;
     x /= Lii;//ops++;
     Sx[k0] = x; /* S[j,i] */
-    
+
   }
   FREE(ul0);FREE(ll0);
   PROTECT(kr=allocVector(REALSXP,1));

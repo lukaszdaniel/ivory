@@ -123,7 +123,7 @@ function(x, MARGIN)
     d <- dim(x)
     dn <- dimnames(x)
     ds <- seq_len(dl)
-    
+
     ## Extract the margins and associated dimnames
 
     if (is.character(MARGIN)) {

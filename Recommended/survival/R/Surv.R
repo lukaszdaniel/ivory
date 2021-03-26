@@ -19,7 +19,7 @@ Surv <- function(time, time2, event,
     # "Surv(a,b)" has the variable b matched to event rather than time2.
     #
     mtype <- match.arg(type)
-    
+
     # If type is missing or it is "mstate", I need to figure out for myself
     #  whether I have (time, time2, status) or (time, status) data
     if (missing(type) || mtype=="mstate") {
@@ -169,7 +169,7 @@ Surv <- function(time, time2, event,
         else cname <- c("time1", "time2", "status")
     }
     dimnames(ss) <- list(NULL, cname)  #kill extraneous row names
-                                           
+
     attr(ss, "type")  <- type
     if (type=="mright" || type=="mcounting") {
         states <- levels(mstat)[-1]

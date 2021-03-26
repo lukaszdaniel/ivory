@@ -242,9 +242,9 @@ smooth.construct.tr.smooth.spec<-function(object,data,knots) {
   object$null.space.dim <- m+1  # dim. of unpenalized space
   ## store "tr" specific stuff ...
   object$knots<-k;object$m<-m;object$x.shift <- x.shift
- 
+
   object$df<-ncol(object$X)     # maximum DoF (if unconstrained)
- 
+
   class(object)<-"tr.smooth"  # Give object a class
   object
 }

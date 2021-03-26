@@ -63,7 +63,7 @@ c   Handle hat == 1 case, Nov 2005.
 c   Argument 'tol' was real not double precision, Aug 2007
 c   'q' for multivariate (mlm) models added Sep, 2018;  Martin Maechler.
 c    docoef replaced by R code and removed Nov 2019.
-      
+
       subroutine lminfl(x, ldx, n, k, q, qraux, resid,
      +     hat, sigma, tol)
       integer ldx, n, k, q

@@ -85,7 +85,7 @@ is.Surv(x)
    treated as a factor.  The first level of the factor is taken to
    represent censoring and remaining ones a transition to the given
    state.  (If the status variable is a factor then \code{mstate} is assumed.)
-   
+
     Interval censored data can be represented in two ways.  For the first
    use \code{type = "interval"} and the codes shown above.  In that usage the
    value of the \code{time2} argument is ignored unless event=3.
@@ -142,7 +142,7 @@ the default behavior for subscripting matrices.
   At the time \code{Surv} was written many Mayo data sets still used this
   convention, e.g., the 1994 \code{lung} data set found in the package.
 }   
-  
+
 \seealso{
 \code{\link{coxph}},  
 \code{\link{survfit}},  

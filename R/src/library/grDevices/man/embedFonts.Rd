@@ -53,7 +53,7 @@ embedFonts(file, format, outfile = file,
   "epswrite"} can be used: as from 9.14 \code{format = "eps2write"} is
   also available.  If an invalid device is given, the error message will
   list the available devices.
-  
+
   Note that Ghostscript may do font substitution, so the font embedded
   may differ from that specified in the original file.
 

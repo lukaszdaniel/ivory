@@ -536,7 +536,7 @@ SEXP R::R_listCompact(SEXP s, bool keep_initial)
     // skip initial NULL values
 	while (s != R_NilValue && CAR(s) == R_NilValue)
 	    s = CDR(s);
-    
+
     SEXP val = s;
     SEXP prev = s;
     while (s != R_NilValue) {

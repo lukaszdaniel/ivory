@@ -19,7 +19,7 @@
 If argument \code{test} is
   \code{TRUE}, the errors are returned as a character vector rather
   than generating an error.
-  
+
 
   When an object from a class is initialized, the default method for
   \code{\link{initialize}()} calls \code{validObject}.

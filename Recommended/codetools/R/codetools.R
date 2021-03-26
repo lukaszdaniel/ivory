@@ -595,7 +595,7 @@ addCollectUsageHandler("for", "base", function(e, w) {
 addCollectUsageHandler("{", "base", function(e, w) {
     w$enterGlobal("function", "{", e, w)
     w$srcfile <- attr(e, "srcfile")$filename
-    
+
     if (length(e)>1){
         for ( i in 2 : length(e)){      
             if ( !is.null(attr(e, "srcref")[[i]])){

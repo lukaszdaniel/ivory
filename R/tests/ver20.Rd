@@ -16,7 +16,7 @@
 
 \details{
   \R \R{} \\R \eqn{\alpha\beta\Gamma}
-  
+
   In code, all that needs to be escaped is percent, backslash and unpaired
   braces: \code{\% \\ \{}. Unescaped: \code{$ # _ ^ ~ < > |}, and as a
   pair, \code{{...}}.  If we escape: \code{ \_ \# \$ \& \{ \} \\ }
@@ -24,7 +24,7 @@
   give one, one, two, two backslashes.
 
   How about \ (that is backslash space) in text?
-  
+
   Elsewhere, \{ \} \% \\ need to be escaped, but not $ # _ ^ ~ < > | .
   Let's try that again in \code{\\samp}: \samp{ \{ \} \% \\ $ # _ ^ ~ < > |}.
   And if we do escape: \$ \# \_ , and with three backslashes, \\\#.
@@ -34,7 +34,7 @@
 
   % From BaM/man/hanjack.Rd
   group-weighting from $[N_iP_i(1-P_i)]$
-  
+
   \preformatted{
     \% a
     \\% b
@@ -49,7 +49,7 @@
 
   Markus Kuhn, \dQuote{ASCII and Unicode quotation marks}.
   \url{http://www.cl.cam.ac.uk/~mgk25/ucs/quotes.html}
-  
+
   No escape is needed in \email{Micah_Altman@harvard.edu}
 }
 

@@ -9,7 +9,7 @@ survreg <- function(formula, data, weights, subset, na.action,
     #  a local copy, doing otherwise messes up future use of update() on
     #  the model object for a user stuck in "+ cluster()" mode.
     if (missing(formula)) stop("a formula argument is required")
-    
+
     ss <- c("cluster", "offset")
     Terms <- if (missing(data)) terms(formula, specials=ss) else
                  terms(formula, specials=ss, data=data)
@@ -69,14 +69,14 @@ survreg <- function(formula, data, weights, subset, na.action,
         stop ("start-stop type Surv objects are not supported")
     if (type=="mright" || type=="mcounting") 
         stop("multi-state survival is not supported")
-   
+
     cluster <- model.extract(m, "cluster")
     if (length(cluster)) {
         if (missing(robust)) robust <- TRUE
         cluster <- as.numeric(as.factor(cluster))
         }
     else if (robust) cluster <- 1:nrow(Y)
-   
+
     strats <- attr(Terms, "specials")$strata
     dropx <- NULL
     if (length(strats)) {
@@ -102,16 +102,16 @@ survreg <- function(formula, data, weights, subset, na.action,
     assign <- lapply(attrassign(X, newTerms)[-1], function(x) x-1)
     xlevels <- .getXlevels(newTerms, m)
     contr.save <- attr(X, 'contrasts')
-    
+
     if (!all(is.finite(X)))
         stop("data contains an infinite predictor")
-        
+
     n <- nrow(X)
     nvar <- ncol(X)
 
     offset<- model.offset(m) # R returns NULL if no offset, Splus a zero
     if (length(offset)==0 || all(offset==0)) offset <- rep(0.,n)
-    
+
     # The user can either give a distribution name, in which the distribution
     #   is found in the object survreg.distributions, or include a list object
     #   of the same format as is found there.
@@ -167,7 +167,7 @@ survreg <- function(formula, data, weights, subset, na.action,
     if (!is.null(dlist$dist))
         if (is.atomic(dlist$dist)) dlist <- survreg.distributions[[dlist$dist]]
         else                       dlist <- dlist$dist
-    
+
     # check for parameters
     ptemp <- dlist$parms
     if (is.null(ptemp)) {
@@ -217,7 +217,7 @@ survreg <- function(formula, data, weights, subset, na.action,
 	ord <- attr(Terms, 'order')[temp]
 	if (any(ord>1)) stop("penalty terms cannot be in an interaction")
 
-        
+
         assign <- attrassign(X, newTerms)
         pcols <- assign[match(names(pterms[pterms]), names(assign))] 
 

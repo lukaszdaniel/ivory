@@ -31,11 +31,11 @@ null.space.dimension(d,m)
 
   which is the value returned.
 
-  
+
 }
 \value{An integer (array), the null space dimension
 \eqn{M}{M}.
- 
+
 }
 
 \author{ Simon N. Wood \email{simon.wood@r-project.org}}

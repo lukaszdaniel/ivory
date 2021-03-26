@@ -71,7 +71,7 @@ update_PACKAGES <- function(dir = ".", fields = NULL,
         calldown <- TRUE
     }
     okfields <- names(retdat)
-    
+
     ## can't update PACKAGES file if existing entries don't have all
     ## the required fields
     if(!calldown && !is.null(fields) && !all(fields %in% okfields)) {
@@ -79,7 +79,7 @@ update_PACKAGES <- function(dir = ".", fields = NULL,
                 paste(setdiff(fields, okfields), collapse = " "))
         calldown <- TRUE
     }
-    
+
     ## call straight down to write_PACKAGES if:
     ## 1. type is win.binary and strict is TRUE (no MD5 sums to check against,
     ##    only way to get full strictness is write_PACKAGES
@@ -102,15 +102,15 @@ update_PACKAGES <- function(dir = ".", fields = NULL,
         message(sprintf(ngettext(nrow(retdat), "Updating existing repository [strict mode: OFF]\nDetected PACKAGES file with %d entry at %s", "Updating existing repository [strict mode: OFF]\nDetected PACKAGES file with %d entries at %s", domain = "R-tools"), nrow(retdat), PKGSfile), domain = NA)
 	    }
     }
-    
+
     if(!is.null(fields))
         retdat <- retdat[, fields]
-    
+
     pkgfiles <- list.files(dir, pattern = .get_pkg_file_pattern(type),
                            full.names = TRUE)
     if(length(pkgfiles) == 0L)
         stop(gettextf("unable to find any package tarballs in %s", dir))
-    
+
     if(is.null(retdat$File)) {
         tbmatches <- match(paste(retdat$Package,
                                  retdat$Version,
@@ -148,7 +148,7 @@ update_PACKAGES <- function(dir = ".", fields = NULL,
         }
         retdat <- retdat[-toonew, ]
     }
-    
+
     ## If in strict mode we confirm that the MD5 sums match for
     ## tarballs which match pre-existing PACKAGES entries.
     ##
@@ -183,10 +183,10 @@ update_PACKAGES <- function(dir = ".", fields = NULL,
             retdat <- retdat[-notokinds,]
         }
     }
-    
+
     newpkgfiles <- setdiff(normalizePath(pkgfiles),
                            normalizePath(retdat$tarball))
-    
+
     ## If we're willing to assume the filenames are honest and
     ## accurate, we can skip non-newest package versions without
     ## ever untaring them and reading their DESCRIPTION files.
@@ -212,7 +212,7 @@ update_PACKAGES <- function(dir = ".", fields = NULL,
         ## These dummy db rows will all be replaced by the
         ## real data later in the process before the
         ## new PACKAGES files are written.
-        
+
         newpkgdf <- newpkgdf[,1:2]
         names(newpkgdf) <- c("Package", "Version")
         newpkgdf <- .filldfcols(newpkgdf, retdat)
@@ -227,14 +227,14 @@ update_PACKAGES <- function(dir = ".", fields = NULL,
         retdat <- .remove_stale_dups(retdat)
         newpkgfiles <- retdat$tarball[retdat$IsNew]
     }
-    
+
     ## Do any packages/package versions need to be added?
     numnew <- length(newpkgfiles)
     if(numnew > 0L) {
         if(verbose.level > 0L) {
             message(sprintf(ngettext(numnew, "Found %d package version to process.", "Found %d package versions to process.", domain = "R-tools"), numnew), domain = NA)
         }
-        
+
         ## returns a list of character vectors suitable for construction
         ## into a read.dcf output-style character matrix
         newpkgdat <- .process_package_files_for_repository_db(newpkgfiles,
@@ -246,9 +246,9 @@ update_PACKAGES <- function(dir = ".", fields = NULL,
                                                               addFiles,
                                                               addPaths = FALSE, 
                                                               latestOnly)
-        
+
         newpkgdf <- as.data.frame(newpkgdat, stringsAsFactors = FALSE)
-           
+
         if(!identical(names(newpkgdf), names(retdat))) {
             ## make sure we catch columns only present in one or
             ## the other in both directions.
@@ -260,14 +260,14 @@ update_PACKAGES <- function(dir = ".", fields = NULL,
             newpkgdf <- .filldfcols(newpkgdf, retdat)
             retdat <- .filldfcols(retdat, newpkgdf)
         }
-        
+
         if(verbose.level > 0L) {
             message(sprintf(ngettext(nrow(newpkgdf), "Processed %d entry from package tarballs.", "Processed %d entries from package tarballs.", domain = "R-tools"), nrow(newpkgdf)), domain = NA)
         }
-        
+
         ## just for accounting purposes
         ## taken back off later
-        
+
         newpkgdf$IsNew <- TRUE
         retdat <- rbind(retdat[!retdat$IsNew,],
                         newpkgdf)
@@ -279,11 +279,11 @@ update_PACKAGES <- function(dir = ".", fields = NULL,
                          sprintf(ngettext(sum(!retdat$IsNew), "%d entry retained unchanged.", "%d entries retained unchanged.", domain = "R-tools"), sum(!retdat$IsNew)), sep = "")
             message(msg, domain = NA)
         }
-        
+
     } else if (verbose.level > 0L) {
         message("No new packages or updated package versions detected")
     }
-    
+
     if(verbose.level > 0L) {
         message(sprintf(ngettext(nrow(retdat), "Final updated PACKAGES db contains %d entry" , "Final updated PACKAGES db contains %d entries", domain = "R-tools"), nrow(retdat)), domain = NA)
     }
@@ -305,7 +305,7 @@ update_PACKAGES <- function(dir = ".", fields = NULL,
     canonfs <- fieldorder[fieldorder %in% names(retdat)]
     retdat <- retdat[,c(canonfs, noncanonfs)]
 
-    
+
     if(dryrun) {
         if(verbose.level > 0L)
             message("[dryrun mode] Dryrun complete.")

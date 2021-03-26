@@ -42,7 +42,7 @@ corCAR1(value, form, fixed)
 
   Jones, R.H. (1993) "Longitudinal Data with Serial Correlation: A
   State-space Approach", Chapman and Hall.
-  
+
   Pinheiro, J.C., and Bates, D.M. (2000) "Mixed-Effects Models
   in S and S-PLUS", Springer, esp. pp. 236, 243.  
 }

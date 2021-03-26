@@ -18,7 +18,7 @@ logLik.coxph.null <- function(object, ...) {
     class(out) <- "logLik"
     out
 }
-    
+
 logLik.survreg <- function(object, ...) {
     out <- object$loglik[2]
     dd <- diag(object$var)

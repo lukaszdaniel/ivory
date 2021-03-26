@@ -37,7 +37,7 @@
 \item{collapse}{
   logical. The returned set of labels is always of the same length as
   the number of nodes in the tree.
-  
+
   If \code{collapse = TRUE} (default), 
   the returned value is a vector of labels for the branch leading into
   each node, with \code{"root"} as the label for the top node.

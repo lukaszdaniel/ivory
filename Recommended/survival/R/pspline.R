@@ -27,12 +27,12 @@ pspline <- function(x, df=4, theta, nterm=2.5*df, degree=3, eps=0.1,
                                    # Boundary.knots, so the default works
     nterm <- round(nterm)
     if (nterm < 3) stop("too few basis functions")
-    
+
     if (!missing(Boundary.knots)) {
         if (!is.numeric(Boundary.knots) || length(Boundary.knots) !=2 ||
             Boundary.knots[1] >= Boundary.knots[2])
             stop(gettextf("invalid '%s' argument", "Boundary.knots"))
-            
+
         # Check for data values outside the knot range
         outl <- (x < Boundary.knots[1])
         outr<- (x > Boundary.knots[2])
@@ -153,7 +153,7 @@ pspline <- function(x, df=4, theta, nterm=2.5*df, degree=3, eps=0.1,
     temp$cbase <- knots[2:nvar] + (Boundary.knots[1] -knots[1]) 
     formals(printfun) <- temp
     environment(printfun) <- .GlobalEnv
-	
+
     if (method=='fixed') {
 	temp <- list(pfun=pfun,
 		     printfun=printfun,
@@ -187,7 +187,7 @@ pspline <- function(x, df=4, theta, nterm=2.5*df, degree=3, eps=0.1,
 		     varname=xnames,
 		     cfun = frailty.controlaic)
 	}
-    
+
     attributes(newx) <- c(attributes(newx), temp,
                           list(intercept=intercept, nterm=nterm,
                           Boundary.knots=Boundary.knots))
@@ -207,7 +207,7 @@ makepredictcall.pspline <- function(var, call) {
 
     newcall
 }
-    
+
 predict.pspline <- function(object, newx, ...) {
     if (missing(newx)) return(object)
     indx <- match(c("nterm", "intercept", "Boundary.knots", "combine"),

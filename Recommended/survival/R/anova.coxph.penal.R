@@ -24,7 +24,7 @@ anova.coxph.penal <- function (object, ...,  test = 'Chisq') {
         is.coxme <- unlist(lapply(dotargs, function(x) inherits(x, "coxme")))
         if (!all(is.coxmodel | is.coxme))
             stop(gettextf("all arguments must be an objects of class %s or %s", dQuote("coxph"), dQuote("coxme")))
-        
+
         if (any(sapply(dotargs, has.frailty)))
             stop("anova command does not handle frailty terms")
 
@@ -83,7 +83,7 @@ anova.coxph.penal <- function (object, ...,  test = 'Chisq') {
     loglik[nmodel+1] <- object$loglik[2]
     df[1] <- 0
     loglik[1] <- object$loglik[1]
-    
+
     # Now refit intermediate models
     assign2 <- assign[!(assign %in% pindex)]
     pform   <- paste("mf[['", pname, "']]", sep='')
@@ -91,18 +91,18 @@ anova.coxph.penal <- function (object, ...,  test = 'Chisq') {
         j <- assign2[assign2 <= alevels[i]]
         if (length(j)) form <- "Y ~ X[,j]"
         else           form <- "Y ~"
-        
+
         form <- paste(c(form, pform[pindex <= i]), collapse=" +") 
         if (length(object$offset)) 
             form <- paste(form, " + offset(object$offset")
         if (has.strata) form <- paste(form, " + strata(strats)")
-                                      
+
         tfit <- coxph(as.formula(form))
         df[i+1] <- if (!is.null(tfit$df)) sum(tfit$df)
                        else sum(!is.na(tfit$coefficients))
         loglik[i+1] <- tfit$loglik[2]
     }
-                              
+
     table <- data.frame(loglik=loglik, Chisq=c(NA, 2*diff(loglik)), 
                         Df=c(NA, diff(df))) 
 

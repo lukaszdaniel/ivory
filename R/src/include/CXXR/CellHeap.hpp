@@ -58,7 +58,7 @@
 namespace CXXR
 {
 	/** @brief Class to manage a pool of memory cells of a fixed size.
-     * 
+     *
      * This class manages a collection of memory cells of a
      * specified size, and is intended as a back-end to implementations of
      * operator new and operator delete to enable the allocation and

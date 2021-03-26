@@ -37,7 +37,7 @@ outside the boundary. \code{fs.boundary} returns a list of \code{x,y} points
 to be jointed up in order to define/draw the boundary.
 
 }
- 
+
 \references{
 Tim Ramsay (2002) "Spline smoothing over difficult regions" J.R.Statist. Soc. B  64(2):307-319 
 

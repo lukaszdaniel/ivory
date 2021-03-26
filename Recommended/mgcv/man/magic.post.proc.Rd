@@ -48,7 +48,7 @@ it is sometimes useful for testing terms for equality to zero.
 \item{edf}{the array giving the estimated degrees of freedom associated 
 with each parameter.}
 }
- 
+
 \seealso{\code{\link{magic}}}
 
 \author{ Simon N. Wood \email{simon.wood@r-project.org}}

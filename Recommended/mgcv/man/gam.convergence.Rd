@@ -16,7 +16,7 @@ fit. \code{\link{bam}} opts for speed.
  derivatives of the smoothness selection criterion can be obtained, as required by the outer iteration.
  This approach is less expensive than it at first appears, since excellent starting values for the inner
  iteration are available as soon as the smoothing parameters start to converge. See Wood (2011) and Wood, Pya and Saefken (2016).  
- 
+
 
 \code{\link{bam}} uses an alternative approach similar to `performance iteration' or `PQL'. A single PIRLS iteration is run to find the model coefficients. At each step this requires the estimation of a working penalized linear model. Smoothing parameter selection is applied directly to this working model at each step (as if it were a Gaussian additive model). This approach is more straightforward to code and in principle less costly than the nested approach. However it is not guaranteed to converge, since the smoothness selection criterion is changing at each iteration. It is sometimes possible for the algorithm to cycle around a small set of smoothing parameter, coefficient combinations without ever converging. \code{\link{bam}} includes some checks to limit this behaviour, and the further checks in the algorithm used by \code{bam(...,discrete=TRUE)} actually guarantee convergence in some cases, but in general guarantees are not possible. See Wood, Goude and Shaw (2015) and  Wood et al. (2017). 
 
@@ -52,7 +52,7 @@ obviously changes the model being fitted somewhat.
 
 Usually, a major contributer to fitting difficulties is that the
 model is a very poor description of the data.  
- 
+
 Please report convergence problems, especially if you there is no obvious pathology in the data/model that
 suggests convergence should fail. 
 }

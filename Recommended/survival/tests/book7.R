@@ -16,7 +16,7 @@ byhand7 <- function(beta) {
     u <- 2/(r+1)
     imat <- 2*r/(r+1)^2
     haz <- c(1/(3*r+3), 2/(r+3), 0, 1 )
-                 
+
     ties <- c(1,1,2,2,3,4)
     wt <- c(r,r,r,1,1,1)
     mart <- c(1,0,1,1,0,1) -  wt* (cumsum(haz))[ties]  #martingale residual

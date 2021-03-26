@@ -30,7 +30,7 @@
   Graphs in statistical analysis.
   \emph{The American Statistician}, \bold{27}, 17--21.
   \doi{10.2307/2682899}.
-  
+
 }
 \examples{
 require(stats); require(graphics)

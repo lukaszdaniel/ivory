@@ -125,7 +125,7 @@ Sys.junction(from, to)
   files on NTFS file systems and concepts related to symbolic links on
   recent versions: see the section below on the Windows version of this
   help page.  What happens on a FAT or SMB-mounted file system is OS-specific.)
-  
+
   File arguments with a marked encoding (see \code{\link{Encoding}} are
   if possible translated to the native encoding, except on Windows where
   Unicode file operations are used (so marking as UTF-8 can be used to

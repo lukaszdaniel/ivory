@@ -45,7 +45,7 @@ there would be some savings to be made by not always returning eigenvectors.
 \code{iter} (number of iterations required).
 
 }
- 
+
 \references{
 Demmel, J. (1997) Applied Numerical Linear Algebra. SIAM
 
@@ -60,11 +60,11 @@ Demmel, J. (1997) Applied Numerical Linear Algebra. SIAM
  ## create some x's and knots...
  set.seed(1);
  n <- 700;A <- matrix(runif(n*n),n,n);A <- A+t(A)
- 
+
  ## compare timings of slanczos and eigen
  system.time(er <- slanczos(A,10))
  system.time(um <- eigen(A,symmetric=TRUE))
- 
+
  ## confirm values are the same...
  ind <- c(1:6,(n-3):n)
  range(er$values-um$values[ind]);range(abs(er$vectors)-abs(um$vectors[,ind]))

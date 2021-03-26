@@ -23,17 +23,17 @@ survSplit <- function(formula, data, subset, na.action=na.pass,
         if (!(is.character(end) && length(end) ==1 &&
               end %in% names(data)))
             stop(gettextf("'%s' argument must be a variable name in the data set", "end"))
-    
+
         if (!(is.character(start) && length(start)==1))
             stop(gettextf("'%s' argument must be a variable name", "start"))
         if (start %in% names(data)) temp <- paste(start, end, event, sep=',')
         else temp <- paste(end, event, sep=',')
-        
+
         formula <- as.formula(paste("Surv(", temp, ")~ ."))
     }
     else if (missing(formula)) 
         stop(gettextf("'%s' or '%s' and '%s arguments are required", "formula", "end", "event"))
- 
+
     # create a call to model.frame() that contains the formula (required)
     #  and any other of the relevant optional arguments
     # then evaluate it in the proper frame
@@ -59,7 +59,7 @@ survSplit <- function(formula, data, subset, na.action=na.pass,
     }
     temp <- (Y[!ymiss,1] >= Y[!ymiss,2])
     if (any(temp)) stop("start time must be < stop time")
-        
+
     if (!is.numeric(cut) || any(!is.finite(cut)))
         stop("'cut' argument must be a vector of finite numbers")
     cut <- unique(sort(cut))
@@ -97,7 +97,7 @@ survSplit <- function(formula, data, subset, na.action=na.pass,
             if (missing(end) && !is.null(temp[["time"]]) 
                 && is.name(temp[["time"]]))
                 end <- as.character(temp[["time"]])  # $time might match 'time2'
-             
+
             if (missing(event) && !is.null(temp$time2) && is.name(temp$time2)) 
                 event <- as.character(temp$time2)
             if (missing(event) && !is.null(temp$event) && is.name(temp$event))

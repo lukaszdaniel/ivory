@@ -55,13 +55,13 @@ concordance(object, \ldots)
 
   \item{\ldots}{multiple fitted models are allowed.  Only applicable if
     \code{object} is a model object.}
-  
+
   \item{newdata}{optional, a new data frame in which to evaluate (but
     not refit) the models}
-  
+
   \item{cluster}{optional grouping vector for calculating the robust
     variance}
-  
+
   \item{ymin, ymax}{compute the concordance over the restricted range
      ymin <= y <= ymax.  (For survival data this is a time range.)
   }
@@ -136,7 +136,7 @@ concordance(object, \ldots)
      proportional hazards model information matrix).
      A weighted mean of the ranks equals Somer's d.}
  }
-  
+
 \author{Terry Therneau}
 \seealso{\code{\link{coxph}}}
 \examples{

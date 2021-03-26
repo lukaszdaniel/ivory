@@ -21,7 +21,7 @@ getCRANmirrors(all = FALSE, local.only = FALSE)
     the macOS GUI use a list box, and on a Unix-alike  use a Tk widget if
     package \pkg{tcltk} and an X server are available.  Otherwise use a
     text \code{\link{menu}}.}
-  
+
   \item{ind}{Optional numeric value giving which entry to select.}
   \item{all}{Logical, get all known mirrors or only the ones flagged as OK.}
   \item{local.only}{Logical, try to get most recent list from the CRAN
@@ -36,7 +36,7 @@ getCRANmirrors(all = FALSE, local.only = FALSE)
   This function is called by a Windows GUI menu item and by
   \code{\link{contrib.url}} if it finds the initial dummy value of
   \code{\link{options}("repos")}.
-  
+
   HTTPS mirrors with mirroring over \command{ssh} will be offered in
   preference to other mirrors (which are listed in a sub-menu).
 

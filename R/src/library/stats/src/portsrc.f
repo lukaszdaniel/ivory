@@ -2,7 +2,7 @@ C     Dummy for R
       LOGICAL FUNCTION STOPX()
       STOPX = .FALSE.
       END
-      
+
 C     Minimally modernized in 2018-09, so is fixed-form F90, not F77
 
       SUBROUTINE  DRN2G(D, DR, IV, LIV, LV, N, ND, N1, N2, P, R,

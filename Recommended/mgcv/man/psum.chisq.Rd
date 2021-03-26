@@ -28,7 +28,7 @@ If the Davies algorithm returns an error then an attempt will be made to use the
 
 If \code{trace} is set to \code{TRUE} then the result will have two attributes. \code{"ifault"} is 0 for no problem, 1 if the desired accuracy can not be obtained, 2 if round-off error may be significant, 3 is invalid parameters have been supplied or 4 if integration parameters can not be located. \code{"trace"} is a 7 element vector: 1. absolute value sum; 2. total number of integration terms; 3. number of integrations; 4. integration interval in main integration; 5. truncation point in initial integration; 6. sd of convergence factor term; 7. number of cycles to locate integration parameters. See Davies (1980) for more details. Note that for vector \code{q} these attributes relate to the final element of \code{q}.
 }
- 
+
 \references{
 Davies, R. B. (1973). Numerical inversion of a characteristic function. Biometrika, 60(2), 415-417.
 
@@ -50,14 +50,14 @@ Liu, H.; Tang, Y. & Zhang, H. H (2009) A new chi-square approximation to the dis
   psum.chisq(q,lb,df,nc)
 
   ## same by simulation...
-  
+
   psc.sim <- function(q,lb,df=lb*0+1,nc=df*0,ns=10000) {
     r <- length(lb);p <- q
     X <- rowSums(rep(lb,each=ns) *
          matrix(rchisq(r*ns,rep(df,each=ns),rep(nc,each=ns)),ns,r))
     apply(matrix(q),1,function(q) mean(X>q))	 
   } ## psc.sim
-  
+
   psum.chisq(q,lb,df,nc)
   psc.sim(q,lb,df,nc,100000)
 }

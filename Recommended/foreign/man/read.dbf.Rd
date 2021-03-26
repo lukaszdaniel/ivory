@@ -53,7 +53,7 @@ read.dbf(file, as.is = FALSE)
 
 \references{
   \url{http://shapelib.maptools.org/}.
-  
+
 % site is 'unavailable' in Aug 2015.
 %  The Borland file specification \emph{via} \url{http://www.wotsit.org},
 %  currently at \url{http://www.wotsit.org/list.asp?fc=6}.

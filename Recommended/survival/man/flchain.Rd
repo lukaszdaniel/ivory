@@ -50,7 +50,7 @@ data(flchain, package="survival")
   appointments, with a final random sample of those who had not yet
   had a visit since the study began.  An interesting side question is
   whether there are differences between early, mid, and late recruits.
-  
+
   This data set contains an age and sex stratified random sample that
   includes 7874 of the original 15759 subjects.  The original subject
   identifiers and dates have been removed to protect patient identity.

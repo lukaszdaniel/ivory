@@ -63,7 +63,7 @@ function(cfile, installed = FALSE)
         encoding <- NULL
     .parse_CITATION_file(cfile, encoding)
 }
-    
+
 BibTeX_entry_field_db <-
     list(Article = c("author", "title", "journal", "year"),
          Book = c("author|editor", "title", "publisher", "year"),

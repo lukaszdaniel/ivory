@@ -144,7 +144,7 @@ col.whitebg()
 \seealso{
 
   \code{\link{Lattice}} for an overview of the \code{lattice} package.
-  
+
   \code{\link{Devices}} for valid choices of \code{device} on your
   platform.
 

@@ -40,14 +40,14 @@ diff -ru intl/dcigettext.c ../extra/intl/dcigettext.c
  # ifndef HAVE_STPCPY
 @@ -269,6 +272,9 @@
    size_t translation_length;
- 
+
    /* Pointer to the string in question.  */
 +#ifdef __GNUC__
 +  __extension__
 +#endif
    char msgid[ZERO];
  };
- 
+
 @@ -1535,6 +1541,22 @@
  	  locale_defaulted = 1;
  	}
@@ -70,12 +70,12 @@ diff -ru intl/dcigettext.c ../extra/intl/dcigettext.c
 +#  endif
  # endif
  #endif
- 
+
 diff -ru intl/dgettext.c ../extra/intl/dgettext.c
 --- intl/dgettext.c	2005-05-20 22:05:58.000000000 +0100
 +++ ../extra/intl/dgettext.c	2007-05-12 05:55:38.000000000 +0100
 @@ -46,7 +46,10 @@
- 
+
  /* Look up MSGID in the DOMAINNAME message catalog of the current
     LC_MESSAGES locale.  */
 -char *
@@ -97,12 +97,12 @@ diff -ru intl/finddomain.c ../extra/intl/finddomain.c
    const char *alias_value;
 +#endif
    int mask;
- 
+
    /* LOCALE can consist of up to four recognized parts for the XPG syntax:
 @@ -120,6 +122,7 @@
        /* NOTREACHED */
      }
- 
+
 +#ifdef NOT_USED /* R change */
    /* See whether the locale value is an alias.  If yes its value
       *overwrites* the alias name.  No test for the original value is
@@ -112,20 +112,20 @@ diff -ru intl/finddomain.c ../extra/intl/finddomain.c
  #endif
      }
 +#endif
- 
+
    /* Now we determine the single parts of the locale name.  First
       look for the language.  Termination symbols are `_', '.', and `@'.  */
 @@ -178,9 +182,12 @@
  	}
      }
- 
+
 +
 +#ifdef NOT_USED
    /* The room for an alias was dynamically allocated.  Free it now.  */
    if (alias_value != NULL)
      free (locale);
 +#endif
- 
+
  out:
    /* The space for normalized_codeset is dynamically allocated.  Free it.  */
 diff -ru intl/gettext.c ../extra/intl/gettext.c
@@ -153,7 +153,7 @@ diff -ru intl/gettextP.h ../extra/intl/gettextP.h
 +#endif
    char domainname[ZERO];
  };
- 
+
 diff -ru intl/l10nflist.c ../extra/intl/l10nflist.c
 --- intl/l10nflist.c	2006-06-23 17:29:25.000000000 +0100
 +++ ../extra/intl/l10nflist.c	2007-08-21 09:38:31.656250000 +0100
@@ -163,7 +163,7 @@ diff -ru intl/l10nflist.c ../extra/intl/l10nflist.c
  	    /* Iterate over all elements of the DIRLIST.  */
 -	    char *dir = NULL;
 +	    char *dir = NULL, *nd = (char *) dirlist;
- 
+
 -	    while ((dir = __argz_next ((char *) dirlist, dirlist_len, dir))
 -		   != NULL)
 +	    while ((dir = __argz_next (nd, dirlist_len, dir)) != NULL)
@@ -174,27 +174,27 @@ diff -ru intl/localcharset.c ../extra/intl/localcharset.c
 --- intl/localcharset.c	2006-10-18 12:56:41.000000000 +0100
 +++ ../extra/intl/localcharset.c	2008-01-13 14:36:25.171875000 +0000
 @@ -19,7 +19,9 @@
- 
+
  /* Written by Bruno Haible <bruno@clisp.org>.  */
- 
+
 -#include <config.h>
 +#ifdef HAVE_CONFIG_H
 +# include <config.h>
 +#endif
- 
+
  /* Specification.  */
  #include "localcharset.h"
 @@ -65,10 +67,12 @@
  # define relocate(pathname) (pathname)
  #endif
- 
+
 +#if 0
  /* Get LIBDIR.  */
  #ifndef LIBDIR
  # include "configmake.h"
  #endif
 +#endif
- 
+
  #if defined _WIN32 || defined __WIN32__ || defined __CYGWIN__ || defined __EMX__ || defined __DJGPP__
    /* Win32, Cygwin, OS/2, DOS */
 @@ -112,6 +116,9 @@
@@ -208,34 +208,34 @@ diff -ru intl/localcharset.c ../extra/intl/localcharset.c
        const char *dir;
        const char *base = "charset.alias";
 @@ -209,7 +216,7 @@
- 
+
        if (file_name != NULL)
  	free (file_name);
 -
 +#endif
  #else
- 
+
  # if defined VMS
 @@ -280,6 +287,8 @@
     If the canonical name cannot be determined, the result is a non-canonical
     name.  */
- 
+
 +extern unsigned int localeCP; /* from Defn.h */
 +
  #ifdef STATIC
  STATIC
  #endif
 @@ -377,8 +386,9 @@
- 
+
    static char buf[2 + 10 + 1];
- 
+
 -  /* Woe32 has a function returning the locale's codepage as a number.  */
 -  sprintf (buf, "CP%u", GetACP ());
 +  /* Woe32 has a function returning the locale's codepage as a number.
 +  sprintf (buf, "CP%u", GetACP ()); */
 +  sprintf (buf, "CP%u", localeCP);
    codeset = buf;
- 
+
  #elif defined OS2
 diff -ru intl/localename.c ../extra/intl/localename.c
 --- intl/localename.c	2007-06-07 20:49:32.000000000 +0100
@@ -243,24 +243,24 @@ diff -ru intl/localename.c ../extra/intl/localename.c
 @@ -20,7 +20,9 @@
  /* Win32 code written by Tor Lillqvist <tml@iki.fi>.  */
  /* MacOS X code written by Bruno Haible <bruno@clisp.org>.  */
- 
+
 -#include <config.h>
 +#ifdef HAVE_CONFIG_H
 +# include <config.h>
 +#endif
- 
+
  /* Specification.  */
  #ifdef IN_LIBINTL
 diff -ru intl/lock.c ../extra/intl/lock.c
 --- intl/lock.c	2006-10-09 13:00:44.000000000 +0100
 +++ ../extra/intl/lock.c	2007-09-02 04:56:00.338369300 +0100
 @@ -359,7 +359,7 @@
- 
+
  /* -------------------------- gl_once_t datatype -------------------------- */
- 
+
 -static const pthread_once_t fresh_once = PTHREAD_ONCE_INIT;
 +static const pthread_once_t fresh_once = {PTHREAD_ONCE_INIT};
- 
+
  int
  glthread_once_singlethreaded (pthread_once_t *once_control)
 diff -ru intl/ngettext.c ../extra/intl/ngettext.c
@@ -283,12 +283,12 @@ Index: localcharset.c
 +++ localcharset.c	(working copy)
 @@ -288,6 +288,9 @@
     name.  */
- 
+
  extern unsigned int localeCP; /* from Defn.h */
 +#if __APPLE__ /* others could use this, too ... */
 +extern const char *locale2charset(char*);
 +#endif
- 
+
  #ifdef STATIC
  STATIC
 @@ -295,6 +298,9 @@
@@ -300,10 +300,10 @@ Index: localcharset.c
 +#else
    const char *codeset;
    const char *aliases;
- 
+
 @@ -468,4 +474,5 @@
      codeset = "ASCII";
- 
+
    return codeset;
 +#endif /* ! __APPLE__ */
  }

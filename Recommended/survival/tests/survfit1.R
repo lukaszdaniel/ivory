@@ -31,7 +31,7 @@ byhand <- function(time, status, weights, id) {
     n.risk <- n.event <- surv <- cumhaz <- double(ntime)
     KM <- 1; nelson <-0; 
     kvar <- 0; hvar<-0;
-        
+
     U <- matrix(0, nid, 2)  # the two robust influence estimates
     V <- matrix(0, ntime, 4)  # variances
     usave <- array(0., dim=c(nid, 2, ntime))
@@ -42,12 +42,12 @@ byhand <- function(time, status, weights, id) {
         n.risk[i] <- sum(weights[atrisk])
         deaths <- (time==utime[i] & status==1)                 
         n.event[i] <- sum(weights[deaths])
- 
+
         haz <- n.event[i]/n.risk[i]
         dhaz <- (ifelse(deaths,1,0) - ifelse(atrisk, haz, 0))/n.risk[i]
         U[,1] <- U[,1]*(1-haz) - KM*tapply(dhaz*weights, id, sum)
         V[i,1] <- sum(U[,1]^2)
-            
+
         U[,2] <- U[,2] + tapply(dhaz* weights, id, sum) #result in 'id' order
         V[i,2] <- sum(U[,2]^2)
         usave[,,i] <- U
@@ -58,7 +58,7 @@ byhand <- function(time, status, weights, id) {
             kvar <- kvar + n.event[i]/(n.risk[i] * (n.risk[i] - n.event[i]))
             hvar <- hvar + n.event[i]/(n.risk[i]^2)
         }
-            
+
         V[i,3] <- kvar   # var of log(S)
         V[i,4] <- hvar
         estimate[i,] <- c(KM, nelson)

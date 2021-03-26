@@ -484,7 +484,7 @@ show.settings <- function(x = NULL)
                    lty = par.box$lty,
                    lwd = par.box$lwd)
     }
-    
+
     xyplot(d ~ d | d,
            prepanel = function(x, y) {
                list(ylim = c(0, 1),
@@ -1015,7 +1015,7 @@ lattice.options <- function(...)
          prepanel.default.barchart = "prepanel.default.bwplot",
          prepanel.default.wireframe = "prepanel.default.cloud",
          prepanel.default.contourplot = "prepanel.default.levelplot",
-         
+
          ## Axis units.  Rather than messing with these, end-users
          ## should manipulate corresponding settings via
          ## trellis.par.set()

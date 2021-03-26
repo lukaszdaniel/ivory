@@ -19,9 +19,9 @@ chooseBioCmirror(graphics = getOption("menu.graphics"), ind = NULL,
     the macOS GUI use a list box, and on a Unix-alike use a Tk widget if
     package \pkg{tcltk} and an X server are available.  Otherwise use a
     text \code{\link{menu}}.}
-  
+
   \item{ind}{Optional numeric value giving which entry to select.}
-  
+
   \item{local.only}{Logical, try to get most recent list from the
     Bioconductor master or use file on local disk only.}
 }

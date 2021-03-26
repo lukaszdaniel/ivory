@@ -169,7 +169,7 @@ function(pattern, fields = c("alias", "concept", "title"),
 	stop("incorrect type specification")
     else
 	types <- hsearch_db_types[i]
-    
+
     ### Set up the hsearch db.
     db <- hsearch_db(package, lib.loc, types, verbose, rebuild,
                      use_UTF8)
@@ -186,7 +186,7 @@ function(pattern, fields = c("alias", "concept", "title"),
                        e[!is.na(match(e$ID, db$Base$ID)), ]
                    })
     }
-        
+
     if(!is.null(package)) {
 	## Argument 'package' was given.  Need to check that all given
 	## packages exist in the db, and only search the given ones.

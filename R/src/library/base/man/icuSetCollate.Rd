@@ -89,11 +89,11 @@ icuGetCollate(type = c("actual", "valid"))
   a valid locale (at least on some platforms), it contains no special
   rules for collation.  Note that \code{"C"} is not a supported ICU locale
   and hence \env{R_ICU_LOCALE} should never be set to \code{"C"}.
-  
+
   Some examples are \code{case_level = "on", strength = "primary"} to ignore
   accent differences and \code{alternate_handling = "shifted"} to ignore
   space and punctuation characters.
-  
+
   Initially ICU will not be used for collation if the OS is set to use the
   \code{C} locale for collation and \env{R_ICU_LOCALE} is not set.  Once
   this function is called with a value for \code{locale}, ICU will be used

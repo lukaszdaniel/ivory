@@ -20,7 +20,7 @@ A multi-threaded BLAS is often no faster than a single-threaded BLAS, while judi
 The MKL BLAS is mutlithreaded by default. Under linux setting environment variable \code{MKL_NUM_THREADS=1} before starting R gives single threaded operation. 
 
 }
- 
+
 
 
 

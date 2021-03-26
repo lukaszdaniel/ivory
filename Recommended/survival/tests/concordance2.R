@@ -196,7 +196,7 @@ for (i in 1:length(u.inst)) {
                  allpair(time, status-1, -tpred, wt))
 }
 aeq(temp, cm4$count)
-    
+
 eps <- 1e-6
 keep <- (1:nrow(tdata))[-tfit$na.action]  # the obs that are not tossed
 lmat <- matrix(0., length(keep), 5)

@@ -1197,7 +1197,7 @@ static char * determine_domain_gettext(SEXP domain_, SEXP rho)
 	buf = R_alloc(strlen(domain) + 1, sizeof(char));
 	strcpy(buf, domain);
 	return buf;
-	
+
     } else if(isLogical(domain_) && LENGTH(domain_) == 1 && LOGICAL(domain_)[0] == NA_LOGICAL)
 	return NULL;
     else error(_("invalid '%s' value"), "domain");

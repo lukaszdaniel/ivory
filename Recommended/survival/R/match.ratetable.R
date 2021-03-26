@@ -35,7 +35,7 @@ match.ratetable <- function(R, ratetable) {
         levlist<- lapply(R, levels)
         isDate <- sapply(R, datecheck)
     }
-   
+
     ord <- match(dimid, Rnames)
     # This should have already been checked in pyears or survexp
     if (any(is.na(ord)))
@@ -47,7 +47,7 @@ match.ratetable <- function(R, ratetable) {
     R <- R[,ord,drop=FALSE]  #put cols in same order as the ratetable
     levlist<- levlist[ord]
     isDate <- isDate[ord]
- 
+
     # Now, go through the dimensions of the ratetable 1 by 1, and
     #  verify that the user's variable is compatable
     #  with the rate table's dimensions

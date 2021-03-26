@@ -26,9 +26,9 @@ statefig <- function(layout, connect, margin=.03, box=TRUE,
     bcol <- rep(bcol, length=nstate)
     lty  <- rep(lty, length=nstate)
     lwd  <- rep(lwd, length=nstate)
-    
+
     col <- rep(col, length=nstate)  # text colors
- 
+
     if (is.matrix(layout) && ncol(layout)==2 && nrow(layout) > 1) {
         # the user provided their own
         if (any(layout <0) || any(layout >1))
@@ -44,7 +44,7 @@ statefig <- function(layout, connect, margin=.03, box=TRUE,
         if (sum(layout) != nstate) stop("number of boxes != number of states")
         cbox <- matrix(0, ncol=2, nrow=nstate)  #coordinates will be here
         n <- length(layout)
-     
+
         ix <- rep(seq(along=layout), layout) 
         if (is.vector(layout) || ncol(layout)> 1) { #left to right     
             cbox[,1] <- space(n)[ix]
@@ -131,7 +131,7 @@ statefig <- function(layout, connect, margin=.03, box=TRUE,
             }
         }
     }
-    
+
     dimnames(cbox) <- list(statenames, c("x", "y"))
     invisible(cbox)
 }

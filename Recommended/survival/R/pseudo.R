@@ -126,7 +126,7 @@ pseudo <- function(fit, times, type, addNA=TRUE, data.frame=FALSE,
              } 
          }
     }
-        
+
     if (missing(addNA) && !is.null(id) && 
                (length(id) > length(cluster))) addNA <- FALSE
     if (addNA && length(fit$na.action) >0) {
@@ -179,7 +179,7 @@ pexpand <- function (omit, x)
     n <- NROW(x)
     keep <- rep.int(NA, n + length(omit))
     keep[-omit] <- 1:n
-        
+
     if (is.matrix(x)) {
         x <- x[keep, , drop = FALSE]
         temp <- rownames(x)

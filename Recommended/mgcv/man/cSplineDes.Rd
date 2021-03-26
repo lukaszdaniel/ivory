@@ -25,7 +25,7 @@ last knot locations.}
 \value{ A matrix with \code{length(x)} rows and \code{length(knots)-1} columns.
 
 }
- 
+
 
 \author{ Simon N. Wood \email{simon.wood@r-project.org}}
 
@@ -44,7 +44,7 @@ last knot locations.}
  tol <- .Machine$double.eps^.75
  if (all.equal(ee,ee*0,tolerance=tol)!=TRUE) 
    stop("cyclic spline ends don't match!")
- 
+
  ## similar with uneven data spacing...
  x <- sort(runif(n)) + 1 ## sorting just makes end checking easy
  k <- seq(min(x),max(x),length=8) ## create knots

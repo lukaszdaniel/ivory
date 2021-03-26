@@ -9,7 +9,7 @@
 findq <- function(x, y, p, tol) {
     # This case occurs for a survival curve whose upper limit never drops below 1
     if (max(y, na.rm=T) < min(p)) return(rep(NA, length(p)))
-        
+
     # Remove duplicate y values, i.e., the censors, since dups cause
     #  issues for approx
     xmax <- x[length(x)]
@@ -103,7 +103,7 @@ quantile.survfit <- function(x, probs=c(.25, .5, .75), conf.int=TRUE,
             }
         }
     }
-    
+
     else {  
         nstrat <- length(x$strata)
         if (is.matrix(x$surv) && ncol(x$surv) >1) {

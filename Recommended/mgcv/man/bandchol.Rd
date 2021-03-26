@@ -19,7 +19,7 @@ bandchol(B)
 \details{Calls \code{dpbtrf} from \code{LAPACK}. The point of this is that it has \eqn{O(k^2n)}{O(k^2n)} computational cost, rather than the \eqn{O(n^3)}{O(n^3)} required by dense matrix methods.
 
 }
- 
+
 
 \author{ Simon N. Wood \email{simon.wood@r-project.org}}
 

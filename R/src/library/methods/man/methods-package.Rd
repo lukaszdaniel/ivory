@@ -42,7 +42,7 @@ other programming tools, as described in the references.
          }
     \item{Class unions; virtual classes}{See \code{\link{setClassUnion}}.
          }
- 
+
 }
 These pages will have additional links to related topics.
 

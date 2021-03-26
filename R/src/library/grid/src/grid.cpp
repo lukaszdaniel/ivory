@@ -906,7 +906,7 @@ SEXP L_unsetviewport(SEXP n)
     SEXP gvp = gridStateElement(dd, GSS_VP);
     /* NOTE that the R code has already checked that .grid.viewport$parent
      * is non-NULL
-     * 
+     *
      * BUT this may not be called from R code !!
      * (e.g., when the graphics engine display list is replayed;
      *  problems can occur when grid output is mixed with base output;
@@ -1293,7 +1293,7 @@ SEXP L_newpage()
         dd->recordGraphics = TRUE;
 	GENewPage(&gc, dd);
     }
-    
+
     /* Clear all device patterns */
     dd->dev->releasePattern(R_NilValue, dd->dev);
     /* Clear all clip paths */
@@ -1419,7 +1419,7 @@ SEXP L_convert(SEXP x, SEXP whatfrom,
          * Special case: FROM unit is just a plain, relative unit AND
          *               TO unit is relative AND
          *               NOT converting from 'x' to 'y' (or vice versa) ...
-         * 
+         *
          *               ... AND relevant widthCM or heightCM is zero
          *
          * In these cases do NOT transform thru INCHES 

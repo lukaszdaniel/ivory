@@ -3,7 +3,7 @@
 /* See http://developer.r-project.org/blosxom.cgi/R-devel/2019/08/29#n2019-08-29
    for what USE_FC_LEN_T is doing and for why see
    https://developer.r-project.org/Blog/public/2019/05/15/gfortran-issues-with-lapack/index.html 
-   
+
    In a nutshell, the mechanism used to call BLAS/LAPACK from C (by everyone, not just R) is not 
    technically supported by the Fortran standard. Fortran needs to know how long strings are (they 
    are not null terminated) so the lengths are passed as hidden extra function arguments. BLAS/LAPACK

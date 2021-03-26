@@ -47,7 +47,7 @@ rttright(formula, data, weights, subset, na.action, times, id, timefix = TRUE)
 \details{
   The \code{formula} argument is treated exactly the same as in the
   \code{survfit} function.
-  
+
   Redistribution is recursive: redistribute the weight of the smallest
   censored observation to all those with longer time, which may include
   other censored observations.  Then redistribute the next smallest and

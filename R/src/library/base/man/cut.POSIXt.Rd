@@ -56,7 +56,7 @@
 \value{
   A factor is returned, unless \code{labels = FALSE} which returns
   the integer level codes.
-  
+
   Values which fall outside the range of \code{breaks} are coded as
   \code{NA}, as are and \code{NA} values.
 }

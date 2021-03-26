@@ -144,7 +144,7 @@ help.search(pattern, fields = c("alias", "concept", "title"),
   \code{\link{hsearch_db}} for more information on the help search
   database employed, and for utilities to inspect available concepts and
   keywords.
-  
+
   \code{\link{help}};
   \code{\link{help.start}} for starting the hypertext (currently HTML)
   version of \R's online documentation, which offers a similar search

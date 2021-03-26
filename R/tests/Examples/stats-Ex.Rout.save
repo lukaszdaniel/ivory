@@ -6630,7 +6630,7 @@ y 2.4
 > npk.aov <- aov(yield ~ block + N*P*K, npk)
 > dummy.coef(npk.aov)
 Full coefficients are:
-                                                                               
+
 (Intercept):        54.875                                                     
 block:                   1          2          3          4      5      6      
                     -0.850      2.575      5.900     -4.750 -4.350  1.475      
@@ -6648,22 +6648,22 @@ P:K:                   0:0        1:0        0:1        1:1
                  0.1416667 -0.1416667 -0.1416667  0.1416667                    
 N:P:K:               0:0:0      1:0:0      0:1:0      1:1:0  0:0:1  1:0:1 0:1:1
                          0          0          0          0      0      0     0
-                     
+
 (Intercept):         
 block:               
-                     
+
 N:                   
-                     
+
 P:                   
-                     
+
 K:                   
-                     
+
 N:P:                 
-                     
+
 N:K:                 
-                     
+
 P:K:                 
-                     
+
 N:P:K:          1:1:1
                     0
 > 
@@ -6671,19 +6671,19 @@ N:P:K:          1:1:1
 > dummy.coef(npk.aovE)
 
      Error: (Intercept)
-                      
+
 (Intercept):    54.875
 
      Error: block
-                                                                               
+
 N:P:K:        0:0:0     1:0:0     0:1:0     1:1:0     0:0:1     1:0:1     0:1:1
           -1.241667  1.241667  1.241667 -1.241667  1.241667 -1.241667 -1.241667
-                   
+
 N:P:K:        1:1:1
            1.241667
 
      Error: Within
-                                                   
+
 N:               0          1                      
          -2.808333   2.808333                      
 P:               0          1                      
@@ -7857,7 +7857,7 @@ Crew  Male   Child No          0
                    Yes        20
 > (f10 <- ftable(Titanic, col.vars= 1, row.vars= .))
 Class 1st 2nd 3rd Crew
-                      
+
       325 285 706  885
 > (f01 <- ftable(Titanic, col.vars= ., row.vars= 1))
 Class     
@@ -7866,7 +7866,7 @@ Class
 3rd    706
 Crew   885
 > (f00 <- ftable(Titanic, col.vars= ., row.vars= .))
-     
+
  2201
 > stopifnot(
 +   dim(f04) == c(32,1),
@@ -17084,7 +17084,7 @@ attr(,"legend")
 > pascal <- t(sapply(0:N, function(n) round(choose(n, 0:N - (N-n)%/%2))))
 > rownames(pascal) <- rep("", 1+N) # <-- to improve "graphic"
 > symnum(pascal %% 2, symbols = c(" ", "A"), numeric.x = FALSE)
-                                                                              
+
                                        A                                      
                                      A A                                      
                                      A   A                                    
@@ -17138,7 +17138,7 @@ advance          . . .
 attr(,"legend")
 [1] 0 ‘ ’ 0.3 ‘.’ 0.6 ‘,’ 0.8 ‘+’ 0.9 ‘*’ 0.95 ‘B’ 1
 > symnum(cor(attitude), abbr.colnames = NULL)
-                        
+
 rating     1            
 complaints + 1          
 privileges . . 1        
@@ -17172,7 +17172,7 @@ attr(,"legend")
 [1] 0 ‘ ’ 0.3 ‘.’ 0.6 ‘,’ 0.8 ‘+’ 0.9 ‘*’ 0.95 ‘B’ 1
 > 
 > symnum(cor(rbind(1, rnorm(25), rnorm(25)^2)))
-                                                       
+
  [1,] 1                                                
  [2,] + 1                                              
  [3,] .   1                                            
@@ -17201,7 +17201,7 @@ attr(,"legend")
 attr(,"legend")
 [1] 0 ‘ ’ 0.3 ‘.’ 0.6 ‘,’ 0.8 ‘+’ 0.9 ‘*’ 0.95 ‘B’ 1
 > symnum(cor(matrix(rexp(30, 1), 5, 18))) # <<-- PATTERN ! --
-                                         
+
  [1,] 1                                  
  [2,] . 1                                
  [3,]     1                              
@@ -17223,7 +17223,7 @@ attr(,"legend")
 attr(,"legend")
 [1] 0 ‘ ’ 0.3 ‘.’ 0.6 ‘,’ 0.8 ‘+’ 0.9 ‘*’ 0.95 ‘B’ 1
 > symnum(cm1 <- cor(matrix(rnorm(90) ,  5, 18))) # < White Noise SMALL n
-                                         
+
  [1,] 1                                  
  [2,] . 1                                
  [3,] . . 1                              
@@ -17245,7 +17245,7 @@ attr(,"legend")
 attr(,"legend")
 [1] 0 ‘ ’ 0.3 ‘.’ 0.6 ‘,’ 0.8 ‘+’ 0.9 ‘*’ 0.95 ‘B’ 1
 > symnum(cm1, diag.lower.tri = FALSE)
-                                        
+
  [1,]                                   
  [2,] .                                 
  [3,] . .                               
@@ -17267,7 +17267,7 @@ attr(,"legend")
 attr(,"legend")
 [1] 0 ‘ ’ 0.3 ‘.’ 0.6 ‘,’ 0.8 ‘+’ 0.9 ‘*’ 0.95 ‘B’ 1
 > symnum(cm2 <- cor(matrix(rnorm(900), 50, 18))) # < White Noise "BIG" n
-                                         
+
  [1,] 1                                  
  [2,]   1                                
  [3,]     1                              
@@ -17289,7 +17289,7 @@ attr(,"legend")
 attr(,"legend")
 [1] 0 ‘ ’ 0.3 ‘.’ 0.6 ‘,’ 0.8 ‘+’ 0.9 ‘*’ 0.95 ‘B’ 1
 > symnum(cm2, lower.triangular = FALSE)
-                                         
+
  [1,] 1                                  
  [2,]   1                                
  [3,]     1                              
@@ -17314,7 +17314,7 @@ attr(,"legend")
 > ## NA's:
 > Cm <- cor(matrix(rnorm(60),  10, 6)); Cm[c(3,6), 2] <- NA
 > symnum(Cm, show.max = NULL)
-               
+
 [1,]           
 [2,]           
 [3,] . ?       

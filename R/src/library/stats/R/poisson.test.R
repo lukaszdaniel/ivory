@@ -143,12 +143,12 @@ poisson.test <- function(x, T = 1, r = 1, alternative =
         names(ESTIMATE) <-
             names(r) <- gettext("event rate", domain = "R-stats") # or simply "p" ??
 		METHOD <- gettext("Exact Poisson test", domain = "R-stats")
-       
+
        alt.name <- switch(alternative,
                            two.sided = gettextf("true event rate is not equal to %s", r, domain = "R-stats"),
                            less = gettextf("true event rate is less than %s", r, domain = "R-stats"),
                            greater = gettextf("true event rate is greater than %s", r, domain = "R-stats"))
-	
+
         RVAL <- list(statistic = x,
                        parameter = T,
                        p.value = PVAL,

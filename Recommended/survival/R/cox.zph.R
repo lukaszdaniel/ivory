@@ -20,7 +20,7 @@ cox.zph <- function(fit, transform='km', terms=TRUE, singledf =FALSE,
     # if terms==FALSE the singledf argument is moot, but setting a value
     #   leads to a simpler path through the code
     if (!terms) singledf <- FALSE 
-    
+
     eta <- fit$linear.predictors
     X <- cget$x
     varnames <- names(fit$coefficients)
@@ -38,7 +38,7 @@ cox.zph <- function(fit, transform='km', terms=TRUE, singledf =FALSE,
             eta <- fit$linear.predictor
     }
     else   asgn <- fit$assign
-        
+
     if (!is.list(asgn)) stop ("unexpected assign component")
 
     frail <- grepl("frailty(", names(asgn), fixed=TRUE)
@@ -160,7 +160,7 @@ cox.zph <- function(fit, transform='km', terms=TRUE, singledf =FALSE,
         if (length(i) > 1 && any(used[,i] ==0)) 
             used[,i] <- apply(used[,i,drop=FALSE], 1, max)
     }
-        
+
     # Make the weight matrix
     wtmat <- matrix(0, nvar, nvar)
     for (i in seq_len(nrow(used)))

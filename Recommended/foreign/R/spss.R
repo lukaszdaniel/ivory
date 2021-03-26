@@ -176,7 +176,7 @@ read.spss <- function(file, use.value.labels = TRUE, to.data.frame = FALSE,
             vl[[v]] <- vlv <- iconv(vlv, cp, "", sub=sub)
             names(vl[[v]]) <- names(vlv) <- iconv(nm2, cp, "", sub=sub)
         }
-        
+
         newlevels <- rev(trim(vlv, trim_values))
         newrval <- trim(rval[[nm]], trim_values)
 

@@ -58,7 +58,7 @@ plot.cox.zph <- function(x, resid=TRUE, se=TRUE, df=4, nsmo=40,
 	y <- yy[,i]
         keep <- !is.na(y)
         if (!all(keep)) y <- y[keep]
-        
+
         qmat <- qr(xmat[keep,])
         if (qmat$rank < df) {
             warning(gettextf("spline fit is singular, variable %d skipped", i))
@@ -73,7 +73,7 @@ plot.cox.zph <- function(x, resid=TRUE, se=TRUE, df=4, nsmo=40,
             bk <- backsolve(qmat$qr[seq_len(df), seq_len(df)], diag(df))
             xtx <- bk %*% t(bk)
             seval <- ((pmat%*% xtx) *pmat) %*% rep(1, df)
-    
+
 	    temp <- 2* sqrt(x$var[i,i]*seval)
 	    yup <- yhat + temp
 	    ylow<- yhat - temp

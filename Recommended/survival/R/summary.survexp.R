@@ -140,11 +140,11 @@ summary.survexp <- function(object, times, scale=1, ...) {
     if (!is.null(fit$strata)) {
 	temp$strata <- strata
 	}
-    
+
     temp$method <- fit$method
     temp$call <- fit$call
     if (!is.null(fit$na.action)) temp$na.action <- fit$na.action
-  
+
     class(temp) <- "summary.survexp"
     temp
     }

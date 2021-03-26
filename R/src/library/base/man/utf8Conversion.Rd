@@ -34,7 +34,7 @@ intToUtf8(x, multiple = FALSE, allow_surrogate_pairs = FALSE)
   they run from \code{0} to \code{0x10FFFF} (with about 5\% being
   assigned by version 13.0 of the Unicode standard and 7\% reserved for
   \sQuote{private use}).
-  
+
   \code{intToUtf8} does not by default handle surrogate pairs: inputs in
   the surrogate ranges are mapped to \code{NA}.  They might occur if a
   UTF-16 byte stream has been read as 2-byte integers (in the correct
@@ -76,7 +76,7 @@ intToUtf8(x, multiple = FALSE, allow_surrogate_pairs = FALSE)
 }
 \references{
   \url{https://tools.ietf.org/html/rfc3629}, the current standard for UTF-8.
-  
+
   \url{https://www.unicode.org/versions/corrigendum9.html} for non-characters.
 }
 \examples{\donttest{

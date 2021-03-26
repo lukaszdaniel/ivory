@@ -156,7 +156,7 @@ parallelplot(x, data, \dots)
 
   \code{\link{parallelplot}} draws Parallel Coordinate Plots. (Difficult to
   describe, see example.)
-  
+
   These and all other high level Trellis functions have several
   arguments in common. These are extensively documented only in the
   help page for \code{xyplot}, which should be consulted to learn more

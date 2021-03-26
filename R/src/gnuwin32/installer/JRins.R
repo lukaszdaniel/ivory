@@ -107,13 +107,13 @@
 
         if (component == "x64" && !have64bit) next
         if (component == "i386" && !have32bit) next
-        
+
         # Skip the /bin front ends, they are installed below
         if (grepl("bin/R.exe$", f)) next
         if (grepl("bin/Rscript.exe$", f)) next
-        
+
         f <- gsub("/", "\\", f, fixed = TRUE)   
-        
+
         # The /bin front ends are installed according to this rule:
         #  - If x64 is installed, use that version of Rfe
         #  - Otherwise, use the i386 version
@@ -149,9 +149,9 @@
         if(f %in% c("etc\\Rprofile.site", "etc\\Rconsole"))
             cat("; AfterInstall: EditOptions()", file = con)
         cat("\n", file = con)
-        
 
-        
+
+
     }
 
     close(con)

@@ -7,16 +7,16 @@ survexp.cfit <- function(group, ndata, y, method, coxfit, weights) {
         temp <- predict(coxfit, newdata=ndata, type='expect', se=FALSE)
         return(list(surv= exp(-temp)))
     }
- 
+
     # Get the set of survival curves on which I'll base my work
     # There is no id statement allowed yet, so no survexp for time-dependent
     #  covariates
     sfit <- survfit.coxph(coxfit, newdata=ndata, se.fit=FALSE, censor=FALSE)
-    
+
     # rare case: someone called survexp with a single-obs newdata
     #  The average of n curves is just the curve, when n=1
     if (length(group)==1) return(sfit)
-    
+
     # number of curves to create & number of subjects
     ncurve <- max(group)  #group was preset to contain integer group number
     n <- length(group)    # matches nrow(ndata)
@@ -32,7 +32,7 @@ survexp.cfit <- function(group, ndata, y, method, coxfit, weights) {
     #   surv = matrix with 1 column per created curve (often just 1)
     #   n = same shape as surv, containing the number of obs from ndata
     #     that contribute to each row.
-    
+
     newtime <- sort(unique(sfit$time)) # all of the unique times
     ntime <- length(newtime)
     newsurv <- list(time=newtime)
@@ -71,7 +71,7 @@ survexp.cfit <- function(group, ndata, y, method, coxfit, weights) {
         newsurv$n <- matrix(rep(table(group), each=ntime), nrow=ntime)
         newsurv$surv <- ssurv %*% gmat
     }
-    
+
     else {
         # These are rarely used, so are implemented in S code rather than
         #   C, even though it involves a loop over time points.

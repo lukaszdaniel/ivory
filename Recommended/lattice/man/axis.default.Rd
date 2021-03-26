@@ -107,7 +107,7 @@ axis.default(side = c("top", "bottom", "left", "right"),
   \code{yscale.components.default} are \code{left} and \code{right}.
   Their interpretations are analogous to (respectively) the
   \code{bottom} and \code{top} components described above.
-  
+
 }
 
 \details{
@@ -194,7 +194,7 @@ yscale.components.CF <-
         parse(text = sprintf("\%s ~ degree * C", prettyC))
     ans
 }
-      
+
 
 xyplot(nhtemp ~ time(nhtemp), aspect = "xy", type = "o",
        scales = list(y = list(alternating = 3)),

@@ -25,7 +25,7 @@ surv2data <- function(mf, check=FALSE) {
     # relax this some later day (or not?)
     if (any(is.na(id)) || any(is.na(y[,1])))
         stop("id and time cannot be missing")
-    
+
     isort <- order(id, y[,1])
     id2 <- id[isort]
     y2  <- y[isort,]
@@ -74,7 +74,7 @@ surv2data <- function(mf, check=FALSE) {
                 else mf2[[i]][update] <- (mf2[[i]])[k[update]]
             }
         }}      
-    
+
     # create the current state vector
     #  this is simply the non-lagged y -- except, we need to lag the state
     #  over missing values.  Do that with survcheck.
@@ -97,7 +97,7 @@ surv2data <- function(mf, check=FALSE) {
         else temp <- survcheck(y3~1, id=id3, 
                                istate=factor(itemp, 1:length(states), states))
     }
-     
+
     # Treat any repeated events as censors
     if (!repeated) {
         ny <- ncol(y3)
@@ -108,7 +108,7 @@ surv2data <- function(mf, check=FALSE) {
         }
         if (any(stutter)) y3[stutter, ny] <- 0L
     }
-        
+
     if (check) list(y=y3, id=id3, istate= temp$istate, mf= mf2, isort=isort,
                     last=last)
     else { #put the data back into the original order
@@ -116,7 +116,7 @@ surv2data <- function(mf, check=FALSE) {
         list(y=y3[jj,], id=id3[jj], istate= temp$istate[jj], mf= mf2[jj,])
     }
 }
-   
+
 # User callable version
 Surv2data <- function(formula, data, subset, id){
     Call <- match.call()
@@ -129,7 +129,7 @@ Surv2data <- function(formula, data, subset, id){
     tform[[1L]] <- quote(stats::model.frame)
     mf <- eval(tform, parent.frame())
     temp <- surv2data(mf, check=FALSE)
-    
+
     mf2 <- temp$mf
     mf2[['Surv2.y']] <- temp$y
     index <- match(as.character(Call$id), names(mf2), nomatch=0)
@@ -140,4 +140,4 @@ Surv2data <- function(formula, data, subset, id){
     mf2
 }
 
-    
+

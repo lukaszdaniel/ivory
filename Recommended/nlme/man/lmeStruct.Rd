@@ -15,7 +15,7 @@ lmeStruct(reStruct, corStruct, varStruct)
    correlation structure. Default is \code{NULL}.}
  \item{varStruct}{an optional \code{varFunc} object, representing a
    variance function structure. Default is \code{NULL}.}
-   
+
 }
 \description{
   A linear mixed-effects structure is a list of model components

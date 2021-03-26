@@ -256,7 +256,7 @@ trellis.panelArgs(x, packet.number)
   with the display produced by \code{\link{cloud}}.  It would be unusual
   to call them except in a context where default panel function
   arguments are available through \code{trellis.panelArgs} (see below).
-  
+
   One way in which \code{panel.identify} etc. are different from
   \code{\link{identify}} is in how it uses the \code{subscripts}
   argument.  In general, when one identifies points in a panel, one
@@ -308,7 +308,7 @@ trellis.panelArgs(x, packet.number)
   panels and strips, they would be preserved even when the user switches
   to some other viewport (where row/column is irrelevant) and then
   switches back.
-  
+
   Once a panel or strip is in focus, \code{trellis.panelArgs} can be
   used to retrieve the arguments that were available to the panel
   function at that position.  In this case, it can be called without
@@ -352,7 +352,7 @@ trellis.panelArgs(x, packet.number)
   \code{NULL}.  If click was outside a panel, both \code{col} and
   \code{row} are set to 0.
 }
-  
+
 \note{
 
   The viewports created by lattice are accessible to the user through

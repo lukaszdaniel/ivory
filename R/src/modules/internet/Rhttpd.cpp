@@ -839,7 +839,7 @@ static char *remove_dot_segments(char *p) {
 	error(_("allocation error in remove_dot_segments"));
     char *out = outbuf; /* last byte (terminator) of output buffer */
     *out = '\0';
-    
+
     while(*in) {
 /*
        A.  If the input buffer begins with a prefix of "../" or "./",

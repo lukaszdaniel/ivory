@@ -7,7 +7,7 @@ library(survival)
 #  in closed form
 #
 aeq <- function(x,y, ...) all.equal(as.vector(x), as.vector(y), ...)
-   
+
 test1 <- data.frame(time=  c(4, 3,1,1,2,2,3),
                     status=c(1,NA,1,0,1,1,0),
                     x=     c(0, 2,1,1,1,0,0),
@@ -122,7 +122,7 @@ for (i in c(2,5,27,54,101, 135)) {
     df <- t(zzinv %*% t(zz)  %*% rr)
     cat(" dfbeta=", aeq(df, afit$dfbeta[lwho,,i]), "\n")
     }
-	  
+
 
 # Repeat it with case weights
 ww <- rep(1:5, length=nrow(lung))/ 3.0
@@ -145,11 +145,11 @@ for (i in c(2,5,27,54,101, 135)) {
     zz <- cbind(1,x)
     zzinv <- solve(t(zz)%*% (w*zz))
     cat(" twt=", aeq(1/(diag(zzinv)), afit$tweight[indx[i],]))
- 
+
     df <- t(zzinv %*% t(zz) %*% (w*rr))
     cat(" dfbeta=", aeq(df, afit$dfbeta[who,,i]), "\n")
     }
-	  
+
 #
 # Check that the test statistic computed within aareg and
 #  the one recomputed within summary.aareg are the same.

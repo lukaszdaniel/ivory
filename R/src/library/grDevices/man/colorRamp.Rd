@@ -46,7 +46,7 @@ colorRampPalette(colors, \dots)
   \code{colorRamp} returns a \code{\link{function}} with argument a
   vector of values between 0 and 1 that are mapped to a numeric matrix
   of RGB color values with one row per color and 3 or 4 columns.
-  
+
   \code{colorRampPalette} returns a function that takes an integer
   argument (the required number of colors) and returns a character
   vector of colors (see \code{\link{rgb}}) interpolating the given sequence

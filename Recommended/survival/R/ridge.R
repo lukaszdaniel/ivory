@@ -44,7 +44,7 @@ ridge <- function(..., theta, df=nvar/2, eps=.1, scale=TRUE) {
 		     pparm= vars,
 		     varname=paste('ridge(', xname, ')', sep=''))
 	}
-	
+
     attributes(x) <- c(attributes(x), temp)
     x
     }

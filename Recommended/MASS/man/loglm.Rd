@@ -47,7 +47,7 @@ loglm(formula, data, subset, na.action, \dots)
     array of frequencies; in the second it provides the data frame
     from which the variables occurring in the formula are
     preferentially obtained in the usual way.
-    
+
     This argument may be the result of a call to \code{\link{xtabs}}.
   }
   \item{subset}{
@@ -100,7 +100,7 @@ loglm(formula, data, subset, na.action, \dots)
   model matrix, but since iterative proportional scaling methods
   are developed largely to avoid constructing the model matrix
   explicitly, the computation is at least difficult.)
-  
+
   When structural zeros (or zero fitted values) are present the
   estimated coefficients will not be available due to infinite
   estimates.  The deviances will normally continue to be correct, though.

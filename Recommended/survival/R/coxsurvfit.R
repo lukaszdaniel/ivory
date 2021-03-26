@@ -73,10 +73,10 @@ coxsurv.fit <- function(ctype, stype, se.fit, varmat, cluster,
                     time[[i]] <- diff(c(y2[i,1], slist$time[indx])) #time increments
                     time[[i]][1] <- time[[i]][1] + timeforward
                     timeforward <- y2[i,2] - max(slist$time[indx])
-                
+
                     hazard[[i]] <- slist$hazard[indx]*risk2[i]
                     if (survtype==1) surv[[i]] <- slist$surv[indx]^risk2[i]
-                    
+
                     n.event[[i]] <- slist$n.event[indx]
                     n.risk[[i]]  <- slist$n.risk[indx]
                     n.censor[[i]]<- slist$n.censor[indx]

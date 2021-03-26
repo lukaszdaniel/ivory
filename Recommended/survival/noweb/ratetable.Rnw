@@ -223,7 +223,7 @@ for (i in seq_along(iyears)) {
             }
         }
     }
- 
+
 # Partition out the total 1 year hazard, and then rescale to daily hazards
 usy <- array(0., dim=c(113, 2,3, nsingle))
 indx <- match(singleyear, iyears)
@@ -324,10 +324,10 @@ if (exists('as.Date')) { # R
     datecut <- as.Date(paste(years, '/01/01', sep=''))-
                as.Date('1960/01/01')
     datecut <- as.integer(datecut)
-    
+
 }else if (exists('month.day.year')) { #Splus
     datecut <- julian(1,1, years, origin=c(1,1,1960))
-    
+
 }else stop("Cannot find appropriate routine for dates")
 @
 
@@ -361,7 +361,7 @@ attributes(survexp.us) <- list(
               " male:", x[3], " female:", x[4], "\n",
               " date of entry from", x2[1], "to", x2[2], "\n")
         })
-    
+
 class(survexp.us) <- 'ratetable'
 @ 
 
@@ -387,7 +387,7 @@ temp[,,1,] <- decdata$q[decdata$race=='white']
 temp[,,2,c(1,4,5,6,7)] <- decdata$q[decdata$race=='black']
 temp[,,2, 2:3] <- decdata$q[decdata$race=='nonwhite' & 
                             (decdata$year==1950 |decdata$year==1970)]
-    
+
 usd      <- -log(1- temp)
 usd[4,,,] <- usd[4,,,] - (usd[1,,,] + usd[2,,,] + usd[3,,,])
 usd[2,,,] <- usd[2,,,]/6      #days 2-7
@@ -408,7 +408,7 @@ for (i in 1:113) {
             }
         }
     }
-   
+
 attributes(survexp.usr) <- list(
         dim= c(113,2,2, length(years)),
         dimnames = list(c('0-1d','1-7d', '7-28d', '28-365d', 

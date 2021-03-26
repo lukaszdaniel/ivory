@@ -222,7 +222,7 @@ boot(data, statistic, R, sim = "ordinary", stype = c("i", "f", "w"),
     \code{"parametric"}.  It is omitted for all other values of
     \code{sim}.
   }
-  
+
   There are \code{c}, \code{plot} and \code{print} methods for this class.
 }
 \details{
@@ -232,7 +232,7 @@ boot(data, statistic, R, sim = "ordinary", stype = c("i", "f", "w"),
   weights.  \code{statistic} is treated as a black box by the
   \code{boot} function and is not checked to ensure that these
   conditions are met.
-    
+
   The first order balanced bootstrap is described in Davison, Hinkley
   and Schechtman (1986).  The antithetic bootstrap is described by
   Hall (1989) and is experimental, particularly when used with strata.
@@ -240,7 +240,7 @@ boot(data, statistic, R, sim = "ordinary", stype = c("i", "f", "w"),
   (possibly with unequal probabilities), and permutation which returns
   random permutations of cases. All of these methods work
   independently within strata if that argument is supplied.
-    
+
   For the parametric bootstrap it is necessary for the user to specify
   how the resampling is to be conducted.  The best way of
   accomplishing this is to specify the function \code{ran.gen} which
@@ -284,11 +284,11 @@ boot(data, statistic, R, sim = "ordinary", stype = c("i", "f", "w"),
   results will be reproducible if \code{ncpus} is unchanged, and for
   \code{parallel = "multicore"} if \code{parallel::\link{mc.reset.stream}()} is
   called: see the examples for \code{\link{mclapply}}.
-  
+
   Note that loading the \pkg{parallel} namespace may change the random
   seed, so for maximum reproducibility this should be done before
   calling this function.
-  
+
 }
 \references{
   There are many references explaining the bootstrap and its variations.

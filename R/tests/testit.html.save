@@ -37,9 +37,9 @@ weighted.mean
   %{}
 
   var in \var{text}.
-  
+
   foo(\var{x}, \var{y}).
-  
+
   From gap: pedtodot.Rd -- n=split(m,par,"\034") 
   </PRE>
 Yihui Xie's example:

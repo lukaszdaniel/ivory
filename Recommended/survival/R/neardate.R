@@ -20,7 +20,7 @@ neardate <- function(id1, id2, y1, y2, best=c("after", "prior"),
             stop(gettextf("'%s' and '%s' arguments are of different lengths", "id2", "y2"))
 
     best <- match.arg(best)
-        
+
     # This check could be more sophisticated (though I don't see how to do it)
     #  We want to make sure that the "alldate" line below makes sense for the 
     #  data types that the user passed in.
@@ -55,7 +55,7 @@ neardate <- function(id1, id2, y1, y2, best=c("after", "prior"),
         indx1 <- indx1[!toss]
         rowid <- rowid[!toss]
     }
-    
+
     n2 <- length(y2)
     if (n2 ==0) stop("No valid entries in data set 2")
 

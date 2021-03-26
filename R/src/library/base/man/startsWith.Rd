@@ -24,7 +24,7 @@ startsWith(x, prefix)
   where \code{prefix} is not to contain special regular expression
   characters (and for \code{grepl}, \code{x} does not contain missing
   values, see below).
- 
+
   The code has an optimized branch for the most common usage in which
   \code{prefix} or \code{suffix} is of length one, and is further
   optimized in a UTF-8 or 8-byte locale if that is an ASCII string.

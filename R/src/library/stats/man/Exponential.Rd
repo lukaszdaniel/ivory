@@ -40,7 +40,7 @@ rexp(n, rate = 1)
   The length of the result is determined by \code{n} for
   \code{rexp}, and is the maximum of the lengths of the
   numerical arguments for the other functions.  
-  
+
   The numerical arguments other than \code{n} are recycled to the
   length of the result.  Only the first elements of the logical
   arguments are used.

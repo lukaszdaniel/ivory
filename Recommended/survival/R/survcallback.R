@@ -13,7 +13,7 @@ survcallback <- function(pcols, pattr, assign, x) {
 	    stop(gettextf("invalid '%s' or '%s' argument", "pcols", "pattr"))
     sparse <- sapply(pattr, function(x) !is.null(x$sparse) &&  x$sparse)
     if (sum(sparse) >1) stop("only one sparse penalty term allowed")
-        
+
     #
     # Create a marking vector for the terms, the same length as assign
     #    with pterms == 0=ordinary term, 1=penalized, 2=sparse,
@@ -45,7 +45,7 @@ survcallback <- function(pcols, pattr, assign, x) {
 	}
     # ptype= 1 or 3 if a sparse term exists, 2 or 3 if a non-sparse exists
     ptype <- any(sparse) + 2*(any(!sparse))
-        
+
     if (any(sparse)) {
 	sparse.attr <- (pattr[sparse])[[1]]  #can't use [[sparse]] directly
 	                                     # if 'sparse' is a T/F vector
@@ -67,7 +67,7 @@ survcallback <- function(pcols, pattr, assign, x) {
 	frailx <- match(frailx, sort(unique(frailx)))
 	nfrail <- max(frailx)
 	nvar <- nvar - 1
-        
+
 	#Set up the callback for the sparse frailty term
 	#  (At most one sparse term is allowed).  The calling code will
 	#  first set 'coef' to the current value of the sparse coefficients,
@@ -145,7 +145,7 @@ survcallback <- function(pcols, pattr, assign, x) {
                     second=double(nvar), penalty= 0.0, flag=rep(FALSE,nvar))
             length2 <- c(nvar, nvar, nvar, 1, nvar)
             }
-        
+
 	# The C code will set the variable coef, containing the concatonation
 	#  of all the non-sparse penalized coefs.  Think of the below as
 	#  a function of coef (from the C code), thetalist (set further
@@ -192,7 +192,7 @@ survcallback <- function(pcols, pattr, assign, x) {
 	coxlist2 <- NULL
 	ipenal <- NULL
 	}
-    
+
     list(f.expr1=f.expr1,   f.expr2=f.expr2, 
 	 coxlist1=coxlist1, coxlist2=coxlist2,
 	 full.imat=full.imat, ipenal=ipenal, length2=length2,

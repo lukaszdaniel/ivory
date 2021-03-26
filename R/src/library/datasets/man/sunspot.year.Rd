@@ -27,7 +27,7 @@ sunspot.year
 \seealso{
   For \emph{monthly} sunspot numbers, see \code{\link{sunspot.month}}
   and \code{\link{sunspots}}.
-  
+
   Regularly updated yearly sunspot numbers are available from
   WDC-SILSO, Royal Observatory of Belgium, at
   \url{http://www.sidc.be/silso/datafiles}

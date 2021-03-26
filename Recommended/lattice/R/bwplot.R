@@ -157,7 +157,7 @@ panel.barchart <-
                 reference <- FALSE
             }
             height <- box.width # box.ratio / (1 + box.ratio)
-        
+
             if (reference)
                 panel.abline(v = origin,
                              col = reference.line$col,
@@ -181,7 +181,7 @@ panel.barchart <-
         {
             if (!is.null(origin) && origin != 0)
                 warning("'origin' forced to 0 for stacked bars")
- 
+
 ##             vals <- seq_len(nlevels(groups))
 ##             groups <- as.numeric(groupSub(groups, ...))
 ##             ## vals <- sort(unique(groups))
@@ -277,7 +277,7 @@ panel.barchart <-
             }
         }
     }
-    
+
     ## if not horizontal
 
     else
@@ -633,7 +633,7 @@ panel.bwplot <-
                      fontface = chooseFace(plot.symbol$fontface, plot.symbol$font),
                      fontsize = fontsize.points,
                      identifier = paste(identifier, "outlier", sep="."))
-                     
+
     }
     else
     {
@@ -790,7 +790,7 @@ panel.violin <-
              to = NULL,
              cut = NULL,
              na.rm = TRUE,
-             
+
              ...,
              identifier = "violin")
 {
@@ -1310,7 +1310,7 @@ bwplot.formula <-
         y <- log(y, ybase)
         if (have.ylim) ylim <- logLimits(ylim, ybase)
     }
-    
+
     ## Step 5: Process cond
 
     cond.max.level <- unlist(lapply(cond, nlevels))

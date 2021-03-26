@@ -64,7 +64,7 @@ frailty.t <- function(x, sparse=(nclass>5), theta, df, eps= 1e-5,  tdf=5,
 	if (!is.null(history$history)) 
 	     theta <- history$history[nrow(history$history),1]
 	else theta <- history$theta
-	
+
 	if (is.matrix(var)) test <- coxph.wtest(var, coef)$test
 	else 		    test <- sum(coef^2/var)
 	df2 <- max(df, .5)      # Stop silly p-values
@@ -87,7 +87,7 @@ frailty.t <- function(x, sparse=(nclass>5), theta, df, eps= 1e-5,  tdf=5,
 		          list(theta=parms$theta, done=TRUE)},
 		     cparm= list(theta=theta, ...))
         }
-    
+
     else if (method=='aic') {
 	temp <- list(pfun=pfun, pparm=tdf,
 		     printfun=printfun,
@@ -119,6 +119,6 @@ frailty.t <- function(x, sparse=(nclass>5), theta, df, eps= 1e-5,  tdf=5,
     x
     }
 
-			  
-			   
-			   
+
+
+

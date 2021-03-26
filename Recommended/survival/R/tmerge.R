@@ -58,7 +58,7 @@ tmerge <- function(data1, data2, id, ..., tstart, tstop, options) {
         attr(data1, "tm.retain") <- tm.retain
         class(data1) <- c("tmerge", class(data1))
     }
-                          
+
     if (inherits(data1, "tmerge")) {
         tm.retain <- attr(data1, "tm.retain")
         firstcall <- FALSE
@@ -157,11 +157,11 @@ tmerge <- function(data1, data2, id, ..., tstart, tstop, options) {
     dotarg[[1]] <- as.name("list")  # The as-yet dotarg arguments
     if (missing(data2)) args <- eval(dotarg, envir=new)
     else  args <- eval(dotarg, data2, enclos=new)
-        
+
     argclass <- sapply(args, function(x) (class(x))[1])
     argname <- names(args)
     if (any(argname== "")) stop("all additional arguments must have a name")
-           
+
     check <- match(argclass, c("tdc", "cumtdc", "event", "cumevent"))
     if (any(is.na(check)))
         stop(gettextf("argument(s) %s not a recognized type", argname[is.na(check)]))
@@ -181,7 +181,7 @@ tmerge <- function(data1, data2, id, ..., tstart, tstop, options) {
         idname <- Call[["id"]]
         if (!is.name(idname)) 
             stop("on the first call 'id' must be a single variable name")
-     
+
         # The line below finds tstop and tstart variables in data1
         indx <- match(c(topt$idname, topt$tstartname, topt$tstopname), names(data1), 
                       nomatch=0)
@@ -189,7 +189,7 @@ tmerge <- function(data1, data2, id, ..., tstart, tstop, options) {
             overwrite <- c(topt$tstartname, topt$tstopname)[indx[2:3]]
             warning(gettextf("overwriting data1 variables %s", paste(overwrite, collapse = " ")))
             }
-        
+
         temp <- as.character(idname)
         if (!is.na(match(temp, names(data1)))) {
                 data1[[topt$idname]] <- data1[[temp]]
@@ -224,7 +224,7 @@ tmerge <- function(data1, data2, id, ..., tstart, tstop, options) {
                 newdata <- data1[indx2,]
             }
         }
-          
+
         if (any(is.na(tstop))) 
             stop("missing time value, when that variable defines the span")
         if (missing(tstart)) {
@@ -261,7 +261,7 @@ tmerge <- function(data1, data2, id, ..., tstart, tstop, options) {
         dstart <- newdata[[topt$tstartname]]
         dstop  <- newdata[[topt$tstopname]]
         argcen <- argi$censor
-        
+
         # if an event time is missing then skip that obs.  Also toss obs that 
         #  whose id does not match anyone in data1
         etime <- argi$time
@@ -294,7 +294,7 @@ tmerge <- function(data1, data2, id, ..., tstart, tstop, options) {
         if (!is.null(argi$value))
             yinc <- argi$value[indx]
         else yinc <- NULL
-            
+
         # indx1 points to the closest start time in the baseline data (data1)
         #  that is <= etime.  indx2 to the closest end time that is >=etime.
         # If etime falls into a (tstart, tstop) interval, indx1 and indx2
@@ -306,7 +306,7 @@ tmerge <- function(data1, data2, id, ..., tstart, tstop, options) {
             index <- match(id, names(mintime))
             etime <- ifelse(etime <= mintime[index], etime, etime+ topt$delay)
         }
-        
+
         indx1 <- neardate(id, baseid, etime, dstart, best="prior")
         indx2 <- neardate(id, baseid, etime, dstop, best="after")
 
@@ -348,7 +348,7 @@ tmerge <- function(data1, data2, id, ..., tstart, tstop, options) {
             # the icount data frame will be sorted by second column within first
             #  so rle is faster than table
             n.add <- rle(icount$irow)$length # number of rows to add for each id
-            
+
             # expand the data 
             irep <- rep.int(1L, nrow(newdata))
             erow <- unique(indx1[indx4])   # which rows in newdata to be expanded
@@ -364,7 +364,7 @@ tmerge <- function(data1, data2, id, ..., tstart, tstop, options) {
             iend <- (cumsum(irep))[irep >1]  #end row of each duplication set
             for (j in seq_len(nfix)) temp[[j]] <-  -(seq(n.add[j] -1, 0)) + iend[j]
             newrows <- unlist(temp)
-            
+
             dstart[newrows] <- dstop[newrows-1] <- icount$etime
             newdata[[topt$tstartname]] <- dstart
             newdata[[topt$tstopname]]  <- dstop
@@ -466,11 +466,11 @@ tmerge <- function(data1, data2, id, ..., tstart, tstop, options) {
                 else if (is.logical(yinc)) newvar <- rep(FALSE, nrow(newdata))
                 else stop("invalid value for a status variable")
             }
-         
+
             keep <- (subtype==1 | subtype==3) # all other events are thrown away
             if (argclass[ii] == "cumevent") keep <- (keep & ykeep)
             newvar[indx2[keep]] <- yinc[keep]
-            
+
             # add this into our list of 'this is an event type variable'
             if (!(argname[ii] %in% tevent)) {
                 tevent <- c(tevent, argname[[ii]])
@@ -491,7 +491,7 @@ tmerge <- function(data1, data2, id, ..., tstart, tstop, options) {
             keep <- itype != 2  # changes after the last interval are ignored
             indx <- ifelse(subtype==1, indx1, 
                            ifelse(subtype==3, indx2+1L, indx2))
-            
+
             # we want to pass the right kind of NA to the C code
             default <- argi$default
             if (is.null(default)) default <- as.numeric(topt$tdcstart)
@@ -503,7 +503,7 @@ tmerge <- function(data1, data2, id, ..., tstart, tstop, options) {
                 if (is.null(argi$value)) newvar <- rep(0.0, nrow(newdata))
                 else newvar <- rep(default, nrow(newdata))
             }
-            
+
             # the increment must be numeric
             if (!is.numeric(newvar)) 
                 stop("data and starting value do not agree on data type")

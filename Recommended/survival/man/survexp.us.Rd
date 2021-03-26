@@ -26,7 +26,7 @@ data(survexp, package="survival")
       total Minnesota population, by age and sex, 1970 to 2013.
     }
    }
-  
+
   Each of these tables contains the daily hazard rate for a matched
   subject from the population, defined as \eqn{-\log(1-q)/365.25} where
   \eqn{q} is the 1 year probability of death as reported in the original
@@ -35,7 +35,7 @@ data(survexp, package="survival")
   probability that a subject who becomes 25 years of age in 1970 will
   achieve his/her 26th birthday.  The tables are recast in terms of
   hazard per day for computational convenience.
-  
+
   Each table is stored as an array, with additional attributes, and
   can be subset and manipulated as standard R arrays.
   See the help page for \code{ratetable} for details.

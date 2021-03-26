@@ -73,7 +73,7 @@ get.gpar(names = NULL)
 
   The \code{fill} setting can also be a linear gradient or a radial
   gradient or a pattern (see \link[=pattern]{patterns}).
-  
+
   The size of text is \code{fontsize}*\code{cex}.  The size of a line
   is \code{fontsize}*\code{cex}*\code{lineheight}.
 

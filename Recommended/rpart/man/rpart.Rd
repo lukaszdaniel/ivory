@@ -16,19 +16,19 @@ rpart(formula, data, weights, subset, na.action = na.rpart, method,
     terms.  If this a a data frame, that is taken as the model frame
     (see \code{\link{model.frame}).}
   }
-  
+
   \item{data}{an optional data frame in which to interpret the variables
     named in the formula.} 
-  
+
   \item{weights}{optional case weights.}
-  
+
   \item{subset}{optional expression saying that only a subset of the
     rows of the data should be used in the fit.}
-  
+
   \item{na.action}{the default action deletes all observations for which
     \code{y} is missing, but keeps those in which one or more predictors
     are missing.}
-  
+
   \item{method}{one of \code{"anova"}, \code{"poisson"}, \code{"class"}
     or \code{"exp"}.  If \code{method} is missing then the routine tries
     to make an intelligent guess.
@@ -43,16 +43,16 @@ rpart(formula, data, weights, subset, na.action = na.rpart, method,
     \code{init}, \code{split} and \code{eval}.  Examples are given in
     the file \file{tests/usersplits.R} in the sources, and in the
     vignettes \sQuote{User Written Split Functions}.}
-  
+
   \item{model}{if logical: keep a copy of the model frame in the result?
     If the input value for \code{model} is a model frame (likely from an
     earlier call to the \code{rpart} function), then this frame is used
     rather than constructing new data.}
   \item{x}{keep a copy of the \code{x} matrix in the result.}
-  
+
   \item{y}{keep a copy of the dependent variable in the result.  If
     missing and \code{model} is supplied this defaults to \code{FALSE}.}
-  
+
   \item{parms}{optional parameters for the splitting function.\cr
     Anova splitting has no parameters.\cr
     Poisson splitting has a single parameter, the coefficient of variation of
@@ -67,16 +67,16 @@ rpart(formula, data, weights, subset, na.action = na.rpart, method,
     \code{information}.  The default priors are proportional to the data
     counts, the losses default to 1, and the split defaults to
     \code{gini}.}
-  
+
   \item{control}{a list of options that control details of the
     \code{rpart} algorithm.  See \code{\link{rpart.control}}.}
-  
+
   \item{cost}{a vector of non-negative costs, one for each variable in
     the model. Defaults to one for all variables.  These are scalings to
     be applied when considering splits, so the improvement on splitting
     on a variable is divided by its cost in deciding which split to
     choose.}
-  
+
   \item{\dots}{arguments to \code{\link{rpart.control}} may also be
     specified in the call to \code{rpart}.  They are checked against the
     list of valid arguments.}

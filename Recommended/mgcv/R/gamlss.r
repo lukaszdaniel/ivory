@@ -144,7 +144,7 @@ gamlss.etamu <- function(l1,l2,l3=NULL,l4=NULL,ig1,g2,g3=NULL,g4=NULL,i2,i3=NULL
                 ig1[,k1]*ig1[,k2]^2
     } 
   } ## 3rd order transform done
-  
+
   k <- 0
   d4 <- l4
   if (deriv>2) for (i in seq_len(K)) for (j in i:K) for (l in j:K) for (m in l:K) {
@@ -226,7 +226,7 @@ gamlss.gH <- function(X,jj,l1,l2,i2,l3=0,i3=0,l4=0,i4=0,d1b=0,d2b=0,deriv=0,fh=N
     lb[jj[[i]]] <- lb[jj[[i]]] + if (discrete) XWyd(X$Xd,rep(1,n),l1[,i],X$kd,X$ks,X$ts,X$dt,X$v,X$qc,X$drop,lt=X$lpid[[i]]) else
                    colSums(l1[,i]*X[,jj[[i]],drop=FALSE]) ## !
   }
-  
+
   ## the Hessian...
   lbb <- if (sparse) Matrix(0,p,p) else matrix(0,p,p)
   for (i in seq_len(K)) for (j in i:K) {
@@ -433,7 +433,7 @@ gaulss <- function(link=list("identity","logb"),b=0.01) {
 ##    via a call to gamlss.gH  
 ## the first derivatives of the log likelihood w.r.t
 ## the first and second parameters...
-  
+
   ## first deal with links and their derivatives...
   if (length(link)!=2) stop(gettextf("'%s' function requires 2 links specified as character strings", "gaulss()"))
   okLinks <- list(c("inverse", "log", "identity","sqrt"),"logb")
@@ -462,14 +462,14 @@ gaulss <- function(link=list("identity","logb"),b=0.01) {
     stats[[2]]$d4link <-  eval(parse(text=
     paste("function(mu) { mub <- pmax(1 - mu *",b,",.Machine$double.eps);(((24*mub-36)*mub+24)*mub-6)/(mub*mu)^4}")))
   } else stop(gettextf("\"%s\" link not available for precision parameter of gaulss", link[[2]]))
-  
+
   residuals <- function(object,type=c("deviance","pearson","response")) {
       type <- match.arg(type)
       rsd <- object$y-object$fitted[,1]
       if (type=="response") return(rsd) else
       return((rsd*object$fitted[,2])) ## (y-mu)/sigma 
     }
-    
+
   postproc <- expression({
     ## code to evaluate in estimate.gam, to evaluate null deviance
     ## in principle the following seems reasonable, but because no
@@ -497,11 +497,11 @@ gaulss <- function(link=list("identity","logb"),b=0.01) {
     eta1 <- if (discrete) Xbd(X$Xd,coef,k=X$kd,ks=X$ks,ts=X$ts,dt=X$dt,v=X$v,qc=X$qc,drop=X$drop,lt=X$lpid[[2]]) else X[,jj[[2]],drop=FALSE]%*%coef[jj[[2]]]
     if (!is.null(offset[[2]])) eta1 <- eta1 + offset[[2]]
     tau <-  family$linfo[[2]]$linkinv(eta1) ## tau = 1/sig here
-    
+
     n <- length(y)
     l1 <- matrix(0,n,2)
     ymu <- y-mu;ymu2 <- ymu^2;tau2 <- tau^2
- 
+
     l <- sum(-.5 * ymu2 * tau2 - .5 * log(2*pi) + log(tau))
 
     if (deriv>0) {
@@ -510,7 +510,7 @@ gaulss <- function(link=list("identity","logb"),b=0.01) {
       l1[,2] <- 1/tau - tau*ymu2  
 
       ## the second derivatives
-    
+
       l2 <- matrix(0,n,3)
       ## order mm,ms,ss
       l2[,1] <- -tau2
@@ -521,7 +521,7 @@ gaulss <- function(link=list("identity","logb"),b=0.01) {
       ig1 <- cbind(family$linfo[[1]]$mu.eta(eta),family$linfo[[2]]$mu.eta(eta1))
       g2 <- cbind(family$linfo[[1]]$d2link(mu),family$linfo[[2]]$d2link(tau))
     }
- 
+
     l3 <- l4 <- g3 <- g4 <- 0 ## defaults
 
     if (deriv>1) {
@@ -549,7 +549,7 @@ gaulss <- function(link=list("identity","logb"),b=0.01) {
     if (deriv) {
       i2 <- family$tri$i2; i3 <- family$tri$i3
       i4 <- family$tri$i4
-   
+
       ## transform derivates w.r.t. mu to derivatives w.r.t. eta...
       de <- gamlss.etamu(l1,l2,l3,l4,ig1,g2,g3,g4,i2,i3,i4,deriv-1)
 
@@ -660,10 +660,10 @@ multinom <- function(K=1) {
 ##    via a call to gamlss.gH  
 ## the first derivatives of the log likelihood w.r.t
 ## the first and second parameters...
- 
+
   if (K<1) stop("number of categories must be at least 2") 
    stats <- list()
-  
+
   for (i in seq_len(K)) {
     stats[[i]] <- make.link("identity")
     fam <- structure(list(link="identity",canonical="none",linkfun=stats[[i]]$linkfun,
@@ -721,7 +721,7 @@ multinom <- function(K=1) {
         }
         if (!is.null(off[[i]])) eta[,i] <- eta[,i] + off[[i]]
         if (se) { ## variance and covariances for kth l.p.
-	  
+
           ve[,i] <- if (discrete) diagXVXd(X$Xd,Vb,k=X$kd,ks=X$ks,ts=X$ts,dt=X$dt,v=X$v,qc=X$qc,drop=X$drop,nthreads=1,
 	                   lt=X$lpid[[i]],rt=X$lpid[[i]]) else drop(pmax(0,rowSums((Xi%*%Vb[lpi[[i]],lpi[[i]]])*Xi)))
           ii <- 0
@@ -798,24 +798,24 @@ multinom <- function(K=1) {
       for (i in seq_len(K)) eta[,i+1] <- offset[[i]] + if (discrete) Xbd(X$Xd,coef,k=X$kd,ks=X$ks,ts=X$ts,dt=X$dt,v=X$v,qc=X$qc,
                                   drop=X$drop,lt=X$lpid[[i]]) else X[,jj[[i]],drop=FALSE]%*%coef[jj[[i]]]
     } else { l2 <- 0;K <- ncol(eta);eta <- cbind(1,eta); return.l <- TRUE}
- 
+
     if (K!=family$nlp) stop("number of linear predictors doesn't match")
     y <- round(y) ## just in case
     if (min(y)<0||max(y)>K) stop("response not in 0 to number of predictors + 1")
-    
+
     ee <- exp(eta[,-1,drop=FALSE])
     beta <- 1 + rowSums(ee); alpha <- log(beta)
-    
+
     l0 <- eta[seq_len(n)+y*n] - alpha ## log likelihood
     l <- sum(l0)    
 
     l1 <- matrix(0,n,K) ## first deriv matrix
- 
+
     if (deriv>0) {
       for (i in seq_len(K)) l1[,i] <- ee[,i]/beta ## alpha1
-    
+
       ## the second derivatives...
-    
+
       l2 <- matrix(0,n,K*(K+1)/2)
       ii <- 0; b2 <- beta^2
       for (i in seq_len(K)) for (j in i:K) {
@@ -827,10 +827,10 @@ multinom <- function(K=1) {
       for (i in seq_len(K)) l1[,i] <- as.numeric(y==i) - l1[,i] 
 
     } ## if (deriv>0)
- 
+
     l3 <- l4 <- 0 ## defaults
     tri <- family$tri ## indices to facilitate access to earlier results
-    
+
     if (deriv>1) { ## the third derivatives...
       l3 <- matrix(0,n,(K*(K+3)+2)*K/6)
       ii <- 0; b3 <- b2 * beta
@@ -891,7 +891,7 @@ multinom <- function(K=1) {
 
   initialize <- expression({
   ## Binarize each category and lm on 6*y-3 by category.
- 
+
       n <- rep(1, nobs)
       ## should E be used unscaled or not?..
       use.unscaled <- if (!is.null(attr(E,"use.unscaled"))) TRUE else FALSE
@@ -915,7 +915,7 @@ multinom <- function(K=1) {
             startji[piv] <- backsolve(R,forwardsolve(t(R),Xty[piv]))
 	    startji[!is.finite(startji)] <- 0
 	    start[jj[[k]]] <- startji
-            
+
           } ## lp loop
         } else { ## regular case
           start <- rep(0,ncol(x))
@@ -1074,7 +1074,7 @@ ldg <- function(g,deriv=4) {
     l4 <- a*(6*a^3 - 12*(eg+1)*a^2+4*eg*a+7*(eg+1)^2*a-(4+3*eg)*eg -(eg+1)^3)
     l4[ind] <- a[ind]*(6*b*(3+3*b+b^2) - 12*egi*(1+2*b+b^2) - 12*b*(2-b) + 4*egi*(1+b)+
                      7*(egi^2+2*egi+b*egi^2+2*b*egi+b)-(4+3*egi)*egi-egi*(3+3*egi+egi^2))
-   
+
     l4[ii] <- -exp(g[ii])
   }
   l1=-a
@@ -1340,7 +1340,7 @@ ziplss <-  function(link=list("identity","identity")) {
     my <- mean(object$y[object$y>0])
     lnull <- lnull + optimize(flam,interval=c(my/2,my*2),y=object$y,maximum=TRUE)$objective
     object$null.deviance <- 2*(sum(ls(object$y)) - lnull)
-   
+
   }) ## postproc
 
 
@@ -1360,7 +1360,7 @@ ziplss <-  function(link=list("identity","identity")) {
     lambda <- family$linfo[[1]]$linkinv(eta)
     eta1 <- X[,jj[[2]],drop=FALSE]%*%coef[jj[[2]]] +offset[[2]]
     p <-  family$linfo[[2]]$linkinv(eta1) 
-    
+
     ##n <- length(y)
     ## l1 <- matrix(0,n,2)
     zl <- zipll(y,lambda,p,deriv)
@@ -1370,7 +1370,7 @@ ziplss <-  function(link=list("identity","identity")) {
       ig1 <- cbind(family$linfo[[1]]$mu.eta(eta),family$linfo[[2]]$mu.eta(eta1))
       g2 <- cbind(family$linfo[[1]]$d2link(lambda),family$linfo[[2]]$d2link(p))
     }
- 
+
     ## l3 <- l4 <- 
     g3 <- g4 <- 0 ## defaults
 
@@ -1388,7 +1388,7 @@ ziplss <-  function(link=list("identity","identity")) {
     if (deriv) {
       i2 <- family$tri$i2; i3 <- family$tri$i3
       i4 <- family$tri$i4
-   
+
       ## transform derivates w.r.t. mu to derivatives w.r.t. eta...
       de <- gamlss.etamu(zl$l1,zl$l2,zl$l3,zl$l4,ig1,g2,g3,g4,i2,i3,i4,deriv-1)
 
@@ -1470,7 +1470,7 @@ gevlss <- function(link=list("identity","identity","logit")) {
 ## 3. transform derivs to derivs wrt eta (gamlss.etamu).
 ## 4. get the grad and Hessian etc for the model
 ##    via a call to gamlss.gH  
-  
+
   ## first deal with links and their derivatives...
   if (length(link)!=3) stop("gevlss requires 3 links specified as character strings")
   okLinks <- list(c("log", "identity"),"identity",c("identity","logit"))
@@ -1517,14 +1517,14 @@ gevlss <- function(link=list("identity","identity","logit")) {
       }
       rsd
     }
-    
+
   postproc <- expression({
     ## code to evaluate in estimate.gam, to evaluate null deviance
     ## It's difficult to define a sensible version of this that ensures
     ## that the data fall in the support of the null model, whilst being
     ## somehow equivalent to the full fit
     object$null.deviance <- NA
-    
+
   })
 
   ll <- function(y,X,coef,wt,family,offset=NULL,deriv=0,d1b=0,d2b=0,Hp=NULL,rank=0,fh=NULL,D=NULL) {
@@ -1546,18 +1546,18 @@ gevlss <- function(link=list("identity","identity","logit")) {
     etax <- if (discrete) Xbd(X$Xd,coef,k=X$kd,ks=X$ks,ts=X$ts,dt=X$dt,v=X$v,qc=X$qc,drop=X$drop,lt=X$lpid[[3]]) else X[,jj[[3]],drop=FALSE]%*%coef[jj[[3]]] ## shape parameter
     if (!is.null(offset[[3]])) etax <- etax + offset[[3]]
     xi <- family$linfo[[3]]$linkinv(etax) ## shape parameter
-    
+
     ## Avoid xi == 0 - using a separate branch for xi==0 requires
     ## seperate treatment of derivative w.r.t. xi, and statistically
     ## brings us nothing. 
     eps <- 1e-7 
- 
+
     xi[xi>=0&xi<eps] <- eps
     xi[xi<0&xi>-eps] <- -eps
 
     n <- length(y)
     l1 <- matrix(0,n,3)
-    
+
     ## note that the derivative code is largely auto-generated, and
     ## auto-simplified. Optimized Maxima derivs exported as Maxima
     ## code, translated to R code in R, then processed in R to
@@ -1587,11 +1587,11 @@ gevlss <- function(link=list("identity","identity","logit")) {
       ## first derivatives m, r, x...
       bb1 <- 1/exp1^rho;
       bb2 <- bb1*xi*ymu+1;
-     
+
       l1[,1]  <-  (bb1*(xi+1))/bb2-bb1*bb2^((-1/xi)-1);
       cc2 <- ymu;
       cc0 <- bb1*xi*cc2 ## added
-      
+
       log.cc3 <- log1p(cc0) ## added
       cc3 <- cc0 + 1 ##bb1*xi*cc2+1;
       l1[,2]  <-  (-bb1*cc2*cc3^((-1/xi)-1))+(bb1*(xi+1)*cc2)/cc3-1;
@@ -1603,7 +1603,7 @@ gevlss <- function(link=list("identity","identity","logit")) {
                  aa2*dd7-bb1*aa2*dd3*cc2*dd6;
 
       ## the second derivatives mm mr mx rr rx xx
-    
+
       l2 <- matrix(0,n,6)
       ee1 <- 1/exp1^(2*rho);
       ee3 <- -1/xi;
@@ -1632,7 +1632,7 @@ gevlss <- function(link=list("identity","identity","logit")) {
       g2 <- cbind(family$linfo[[1]]$d2link(mu),family$linfo[[2]]$d2link(rho),
                   family$linfo[[3]]$d2link(xi))
     }
- 
+
     l3 <- l4 <- g3 <- g4 <- 0 ## defaults
 
     if (deriv>1) {
@@ -1685,7 +1685,7 @@ gevlss <- function(link=list("identity","identity","logit")) {
 	      6*tt16*dd7)+6*tt16*dd3*dd7-6*jj12*dd7-6*bb1*jj12*dd3*cc2*dd6+
 	      6*bb1*dd8*cc2*dd6-3*ee1*dd8*dd3*hh4*jj08+3*ee1*aa2*hh4*jj08-
 	      2*kk1*aa2*dd3*qq05*tt08;
- 
+
       g3 <- cbind(family$linfo[[1]]$d3link(mu),family$linfo[[2]]$d3link(rho),
                   family$linfo[[3]]$d3link(xi))
     }
@@ -1781,14 +1781,14 @@ gevlss <- function(link=list("identity","identity","logit")) {
 		  24*aj20*dd3*dd7+24*tt16*dd7+24*bb1*tt16*dd3*cc2*dd6-
 		  24*bb1*jj12*cc2*dd6+12*ee1*jj12*dd3*hh4*jj08-12*ee1*dd8*hh4*jj08+
 		  8*kk1*dd8*dd3*qq05*tt08-8*kk1*aa2*qq05*tt08+6*uu1*aa2*dd3*af05*aj08;
-   
+
       g4 <- cbind(family$linfo[[1]]$d4link(mu),family$linfo[[2]]$d4link(rho),
                   family$linfo[[3]]$d4link(xi))
     }
     if (deriv) {
       i2 <- family$tri$i2; i3 <- family$tri$i3
       i4 <- family$tri$i4
-   
+
       ## transform derivates w.r.t. mu to derivatives w.r.t. eta...
       de <- gamlss.etamu(l1,l2,l3,l4,ig1,g2,g3,g4,i2,i3,i4,deriv-1)
 
@@ -1956,7 +1956,7 @@ twlss <- function(link=list("log","identity","identity"),a=1.01,b=1.99) {
 ## 3. transform derivs to derivs wrt eta (gamlss.etamu).
 ## 4. get the grad and Hessian etc for the model
 ##    via a call to gamlss.gH  
-  
+
   ## first deal with links and their derivatives...
   if (length(link)!=3) stop("gevlss requires 3 links specified as character strings")
   okLinks <- list(c("log", "identity", "sqrt"),"identity",c("identity"))
@@ -1977,7 +1977,7 @@ twlss <- function(link=list("log","identity","identity"),a=1.01,b=1.99) {
   assign(".a",a, envir = env);assign(".b",b, envir = env)
 
   residuals <- function(object,type=c("deviance","pearson","response")) {
-      
+
       a <- get(".a");b <- get(".b")
       type <- match.arg(type)
       mu <- object$fitted.values[,1]
@@ -1997,7 +1997,7 @@ twlss <- function(link=list("log","identity","identity"),a=1.01,b=1.99) {
       }
       return(rsd) ## (y-mu)/sigma 
     }
-    
+
   postproc <- expression({
     ## code to evaluate in estimate.gam, to evaluate null deviance
     ## used for dev explained - really a mean scale concept.
@@ -2025,7 +2025,7 @@ twlss <- function(link=list("log","identity","identity"),a=1.01,b=1.99) {
     theta <- X[,jj[[2]],drop=FALSE]%*%coef[jj[[2]]] +offset[[2]] ## transformed p
     rho <- X[,jj[[3]],drop=FALSE]%*%coef[jj[[3]]] +offset[[3]] ## log scale parameter
     a <- get(".a");b <- get(".b")
-   
+
     ld <- ldTweedie(y,mu=mu,p=NA,phi=NA,rho=rho,theta=theta,a=a,b=b,all.derivs=TRUE)
     ## m, t, r ; mm, mt, mr, tt, tr, rr
     l <- sum(ld[,1])
@@ -2038,14 +2038,14 @@ twlss <- function(link=list("log","identity","identity"),a=1.01,b=1.99) {
                   family$linfo[[3]]$d2link(rho))
 
     n <- length(y)
-    
+
     l3 <- l4 <- g3 <- g4 <- 0 ## defaults
 
 
     if (deriv) {
       i2 <- family$tri$i2;#i3 <- i4 <- 0
       i3 <- family$tri$i3;i4 <- family$tri$i4
-   
+
       ## transform derivates w.r.t. mu to derivatives w.r.t. eta...
       de <- gamlss.etamu(l1,l2,l3,l4,ig1,g2,g3,g4,i2,i3,i4,0)
 
@@ -2132,7 +2132,7 @@ gammals <- function(link=list("identity","log"),b=-7) {
 ## 3. transform derivs to derivs wrt eta (gamlss.etamu).
 ## 4. get the grad and Hessian etc for the model
 ##    via a call to gamlss.gH  
-  
+
   ## first deal with links and their derivatives...
   if (length(link)!=2) stop("gammals requires 2 links specified as character strings")
   okLinks <- list(c("identity"),c("identity","log"))
@@ -2180,7 +2180,7 @@ gammals <- function(link=list("identity","log"),b=-7) {
       "if (any(ii)) { ei <- eta[ii]; eta[ii] <- (2*ei^2+ei)*(ei+1) }\n",
       "ii <- !ii;if (any(ii)) { ei <- eta[ii]; eta[ii] <- (2+ei)*(1+ei)/ei^3 }\n",
       "eta }\n")))
-    
+
     stats[[2]]$d4link <- eval(parse(text=paste("function(mu,b=",b,") {\n",
       "eta <- lb.linkfun(mu,b=b);ii <- eta > 0\n",
       "eta <- exp(-eta*sign(eta))\n",
@@ -2204,7 +2204,7 @@ gammals <- function(link=list("identity","log"),b=-7) {
       }
       rsd
     }
-    
+
   postproc <- expression({
     ## code to evaluate in estimate.gam, to evaluate null deviance
     ## It's difficult to define a sensible version of this that ensures
@@ -2232,7 +2232,7 @@ gammals <- function(link=list("identity","log"),b=-7) {
     etat <- if (discrete) Xbd(X$Xd,coef,k=X$kd,ks=X$ks,ts=X$ts,dt=X$dt,v=X$v,qc=X$qc,drop=X$drop,lt=X$lpid[[2]]) else X[,jj[[2]],drop=FALSE]%*%coef[jj[[2]]]
     if (!is.null(offset[[2]])) etat <- etat + offset[[2]] 
     th <-  family$linfo[[2]]$linkinv(etat) ## log sigma
- 
+
     eth <- exp(-th) ## 1/exp1^th;
     logy <- log(y);
     ethmu <- exp(-th-mu)
@@ -2244,16 +2244,16 @@ gammals <- function(link=list("identity","log"),b=-7) {
 
     if (deriv>0) {
       l1 <- matrix(0,n,2)
-     
+
       l1[,1]  <- ethmuy-eth ## lm
       digeth <- digamma(eth)
       l1[,2]  <- -etlymt+ethmuy+eth*digeth-eth; ## lt 
 
       ## the second derivatives
-    
+
       l2 <- matrix(0,n,3)
       ## order mm,mt,tt
-     
+
       l2[,1]  <- -ethmuy; ## lmm
       l2[,2]  <-  eth-ethmuy; ## lmt
       eth2 <- eth^2;treth <- trigamma(eth)
@@ -2294,7 +2294,7 @@ gammals <- function(link=list("identity","log"),b=-7) {
     if (deriv) {
       i2 <- family$tri$i2; i3 <- family$tri$i3
       i4 <- family$tri$i4
-   
+
       ## transform derivates w.r.t. mu to derivatives w.r.t. eta...
       de <- gamlss.etamu(l1,l2,l3,l4,ig1,g2,g3,g4,i2,i3,i4,deriv-1)
 
@@ -2411,7 +2411,7 @@ gammals <- function(link=list("identity","log"),b=-7) {
       se <- FALSE
     }
     gamma <- cbind(exp(eta[,1]),family$linfo[[2]]$linkinv(eta[,2]))
-   
+
     if (se) { ## need to loop to find se of probabilities...
       vp <- gamma
       vp[,1] <- abs(gamma[,1])*sqrt(ve[,1])
@@ -2444,7 +2444,7 @@ gumbls <- function(link=list("identity","log"),b=-7) {
 ## 3. transform derivs to derivs wrt eta (gamlss.etamu).
 ## 4. get the grad and Hessian etc for the model
 ##    via a call to gamlss.gH  
-  
+
   ## first deal with links and their derivatives...
   if (length(link)!=2) stop("gumbls requires 2 links specified as character strings")
   okLinks <- list(c("identity"),c("identity","log"))
@@ -2492,7 +2492,7 @@ gumbls <- function(link=list("identity","log"),b=-7) {
       "if (any(ii)) { ei <- eta[ii]; eta[ii] <- (2*ei^2+ei)*(ei+1) }\n",
       "ii <- !ii;if (any(ii)) { ei <- eta[ii]; eta[ii] <- (2+ei)*(1+ei)/ei^3 }\n",
       "eta }\n")))
-    
+
     stats[[2]]$d4link <- eval(parse(text=paste("function(mu,b=",b,") {\n",
       "eta <- lb.linkfun(mu,b=b);ii <- eta > 0\n",
       "eta <- exp(-eta*sign(eta))\n",
@@ -2520,7 +2520,7 @@ gumbls <- function(link=list("identity","log"),b=-7) {
       }
       rsd
     }
-    
+
   postproc <- expression({
     ## code to evaluate in estimate.gam, to evaluate null deviance
     ## It's difficult to define a sensible version of this that ensures
@@ -2556,12 +2556,12 @@ gumbls <- function(link=list("identity","log"),b=-7) {
     ez <- exp(-z)
     l <- sum(-beta - z - ez)
     n <- length(y)
-     
+
     if (deriv>0) {
       lz <- ez - 1 ## e^{-z} - 1
       zm <- -eb   ## -e^{-b}
       zb <- -z
-     
+
       l1 <- matrix(0,n,2)
       l1[,1] <- lz*zm    ## lm
       l1[,2] <- lz*zb - 1 ## lb
@@ -2607,7 +2607,7 @@ gumbls <- function(link=list("identity","log"),b=-7) {
     if (deriv) {
       i2 <- family$tri$i2; i3 <- family$tri$i3
       i4 <- family$tri$i4
-   
+
       ## transform derivates w.r.t. mu to derivatives w.r.t. eta...
       de <- gamlss.etamu(l1,l2,l3,l4,ig1,g2,g3,g4,i2,i3,i4,deriv-1)
 
@@ -2727,7 +2727,7 @@ gumbls <- function(link=list("identity","log"),b=-7) {
       se <- FALSE
     }
     gamma <- cbind(eta[,1],family$linfo[[2]]$linkinv(eta[,2]))
-   
+
     if (se) { ## need to loop to find se of probabilities...
       vp <- gamma
       vp[,1] <- sqrt(ve[,1])
@@ -2771,7 +2771,7 @@ shash <- function(link = list("identity", "logeb", "identity", "identity"), b = 
     stats[[i]]$d3link <- fam$d3link
     stats[[i]]$d4link <- fam$d4link
   } 
-  
+
   # Tau=log(sigma) uses the link: eta = log(exp(tau) - b)
   if (link[[2]] %in% okLinks[[2]]) { ## creating the logeb link
     stats[[2]] <- list()
@@ -2788,50 +2788,50 @@ shash <- function(link = list("identity", "logeb", "identity", "identity"), b = 
     stats[[2]]$d4link <-  eval(parse(text=
                                        paste("function(mu) { em<-exp(mu); b<-",b,"; -b*em*(b^2+4*b*em+em^2)/(em-b)^4 }",sep='')))
   } else stop(link[[2]]," link not available for scale parameter of shash")
-  
+
   # variance <- function(mu) exp(get(".Theta"))  ##### XXX ##### Necessary?
-  
+
   # validmu <- function(mu) all( is.finite(mu) )
-  
+
   residuals <- function(object, type = c("deviance", "response")) {
-    
+
     mu <-  object$fitted[ , 1, drop = TRUE]
     tau <- object$fitted[ , 2, drop = TRUE]
     eps <- object$fitted[ , 3, drop = TRUE]
     phi <- object$fitted[ , 4, drop = TRUE]
-    
+
     sig <- exp( tau )
     del <- exp( phi )
-    
+
     type <- match.arg(type)
-    
+
     # raw residuals  
     rsd <- object$y - mu - sig*del*exp(0.25)*(besselK(0.25, nu = (1/del+1)/2)+besselK(0.25, nu = (1/del-1)/2))/sqrt(8*pi)
-    
+
     if (type=="response"){ 
       return(rsd)
     }
     else { ## compute deviance residuals
       sgn <- sign(rsd)
-      
+
       z <- (object$y - mu) / (sig*del)
-      
+
       dTasMe <- del*asinh(z) - eps
       CC <- cosh( dTasMe )
       SS <- sinh( dTasMe )
-      
+
       l <- - tau - 0.5*log(2*pi) + log(CC) - 0.5*log1p(z^2) - 0.5*SS^2
-      
+
       # By putting ls to zero we are using only log-likelihood
       ls <- 0
-      
+
       rsd <- pmax(0, 2*(ls - l))
-      
+
       rsd <- sqrt(rsd)*sgn
     }
     rsd
   } ## residuals
-  
+
   ll <- function(y, X, coef, wt, family, offset = NULL, deriv=0, d1b=0, d2b=0, Hp=NULL, rank=0, fh=NULL, D=NULL) {
     ## function defining the shash model log lik. 
     ## deriv: 0 - eval
@@ -2839,7 +2839,7 @@ shash <- function(link = list("identity", "logeb", "identity", "identity"), b = 
     ##        2 - diagonal of first deriv of Hess
     ##        3 - first deriv of Hess
     ##        4 - everything.
-    
+
     ##### We need some helper functions
     # Calculates \code{log(1+exp(x))} in a numerically stable fashion.
     .log1pexp <- function(x)
@@ -2853,7 +2853,7 @@ shash <- function(link = list("identity", "logeb", "identity", "identity"), b = 
       if( length(kk) ){  x[kk] <- x[kk] + exp(-x[kk]) }
       return(x)
     }
-    
+
     # Compute sqrt(x^2 + m) when |x| >> 0 and m is reasonably small (e.g. + 1 or - 1)
     .sqrtX2pm <- function(x, m){ 
       x <- abs(x)
@@ -2863,7 +2863,7 @@ shash <- function(link = list("identity", "logeb", "identity", "identity"), b = 
       }
       return(x)
     }
-    
+
     # Compute (a*x^2 + m1) / (x^2 + m2)^2 when |x| >> 0 and m1, m2 are reasonably small (e.g. + 1 or - 1)
     .ax2m1DivX2m2SQ <- function(x, m1, m2, a = 1){
       if(a < 0){ stop("'a' has to be positive")  }
@@ -2878,51 +2878,51 @@ shash <- function(link = list("identity", "logeb", "identity", "identity"), b = 
       }
       return(o)
     }
-  
+
     # If offset is not null or a vector of zeros, give an error
     if( !is.null(offset[[1]]) && sum(abs(offset)) )  stop("offset not still available for this family")
-    
+
     jj <- attr(X, "lpi") ## extract linear predictor index
-    
+
     npar <- 4
     n <- length(y)
-    
+
     eta <-  drop( X[ , jj[[1]], drop=FALSE] %*% coef[jj[[1]]] )
     eta1 <- drop( X[ , jj[[2]], drop=FALSE] %*% coef[jj[[2]]] )
     eta2 <- drop( X[ , jj[[3]], drop=FALSE] %*% coef[jj[[3]]] )
     eta3 <- drop( X[ , jj[[4]], drop=FALSE] %*% coef[jj[[4]]] )
-    
+
     mu <-  family$linfo[[1]]$linkinv( eta )
     tau <- family$linfo[[2]]$linkinv( eta1 )
     eps <- family$linfo[[3]]$linkinv( eta2 )
     phi <- family$linfo[[4]]$linkinv( eta3 )
-    
+
     sig <- exp( tau )
     del <- exp( phi )
-    
+
     z <- (y - mu) / (sig*del)
-    
+
     dTasMe <- del*asinh(z) - eps
     g <- -dTasMe
     CC <- cosh( dTasMe )
     SS <- sinh( dTasMe )
-    
+
     l <- sum( - tau - 0.5*log(2*pi) + log(CC) - 0.5*.log1pexp(2*log(abs(z))) - 0.5*SS^2 - phiPen*phi^2 ) 
-  
+
     if (deriv>0) {
-      
+
       zsd <- z*sig*del
       sSp1 <- .sqrtX2pm(z, 1) # sqrt(z^2+1)
       asinhZ <- asinh(z)
-      
+
       ## First derivatives 
       De <- tanh(g) - 0.5*sinh(2*g)
       Dm <- 1/(del*sig*sSp1)*(del*(De)+z/sSp1)
       Dt <- zsd*Dm - 1
       Dp <- Dt + 1 - del*asinhZ*De - 2*phiPen*phi
-      
+
       L1 <- cbind(Dm,Dt,De,Dp)
-      
+
       ## the second derivatives  
       Dme <- (sech(g)^2 - cosh(2*g)) / (sig*sSp1)
       Dte <- zsd*Dme
@@ -2934,21 +2934,21 @@ shash <- function(link = list("identity", "logeb", "identity", "identity"), b = 
       Dmp <- Dmt + De/(sig*sSp1) - del*asinhZ*Dme
       Dtp <- zsd*Dmp
       Dpp <- Dtp - del*asinhZ*Dep + del*(z/sSp1-asinhZ)*De - 2*phiPen
-      
+
       # Put them in matrix form
       L2 <- cbind(Dmm, Dmt, Dme, Dmp, Dtt, Dte ,Dtp ,Dee ,Dep ,Dpp)  
-      
+
       ## need some link derivatives for derivative transform
       IG1 <- cbind(family$linfo[[1]]$mu.eta(eta), family$linfo[[2]]$mu.eta(eta1), 
                    family$linfo[[3]]$mu.eta(eta2), family$linfo[[4]]$mu.eta(eta3))
       G2 <- cbind(family$linfo[[1]]$d2link(mu), family$linfo[[2]]$d2link(tau), 
                   family$linfo[[3]]$d2link(eps), family$linfo[[4]]$d2link(phi))
     }
-    
+
     L3 <- L4 <- G3 <- G4 <- 0 ## defaults
-    
+
     if (deriv>1) {
-      
+
       ## the third derivatives
       Deee <-  -2*(sinh(2*g)+sech(g)^2*tanh(g))
       Dmee <- Deee/(sig*sSp1)
@@ -2973,15 +2973,15 @@ shash <- function(link = list("identity", "logeb", "identity", "identity"), b = 
         del*asinhZ*Dmep + del*Dme*(z/sSp1 - asinhZ)
       Dtpp <- zsd*Dmpp
       Dppp <- Dtpp - del*asinhZ*Depp + del*(z/sSp1-asinhZ)*(2*Dep + De) + del*(z/sSp1)^3 * De
-      
+
       ## Put them in matrix form
       L3 <- cbind(Dmmm,Dmmt,Dmme,Dmmp,Dmtt,Dmte,Dmtp,Dmee,Dmep,Dmpp,
                   Dttt,Dtte,Dttp,Dtee,Dtep,Dtpp,Deee,Deep,Depp,Dppp)
-      
+
       G3 <- cbind(family$linfo[[1]]$d3link(mu), family$linfo[[2]]$d3link(tau), 
                   family$linfo[[3]]$d3link(eps), family$linfo[[4]]$d3link(phi))
     }
-    
+
     if (deriv>3) {
       ## the fourth derivatives
       ## 35 4th derivatives:  mmmm,mmmt,mmme,mmmp,mmtt,mmte,mmtp,mmee,mmep,mmpp,
@@ -3056,8 +3056,8 @@ shash <- function(link = list("identity", "logeb", "identity", "identity"), b = 
       bhh14 <- ann05*ann06; ## aaa3 + e
       bii11 <- aii11+aoo09;
       bii15 <- aii11+aoo09-aff14*ajj15*aii17;
-      
-      
+
+
       bjj07 <- 4*abb5;
       bjj08 <- exp1^(app02+bjj07);
       bjj11 <- 1/abb7^3;
@@ -3346,32 +3346,32 @@ shash <- function(link = list("identity", "logeb", "identity", "identity"), b = 
         crr25*abb8*abb9-12*crr28*bii15*ass23*abb9+crr25*ass23*abb9-3*crr21*aff13-4*crr19*aff13-4*bii11*crr18*aff13+
         3*crr21-2*crr19+4*bii11*crr18-(8*abb1*abb3)/aff04+(56*exp1^((-4*t)-4*p)*aaa2^4)/aff04^2-
         (96*exp1^((-6*t)-6*p)*aaa2^6)/aff04^3+(48*exp1^((-8*t)-8*p)*aaa2^8)/aff04^4;
-      
+
       ## .... end auto code
-      
+
       L4 <- cbind(j2,k2,l2,m2,n2,o2,p2,q2,r2,s2,t2,u2,v2,w2,x2,y2,z2,a3,
                   b3,c3,d3,e3,f3,g3,h3,i3,j3,k3,l3,m3,n3,o3,p3,q3,r3)
-      
+
       G4 <- cbind(family$linfo[[1]]$d4link(mu), family$linfo[[2]]$d4link(tau), 
                   family$linfo[[3]]$d4link(eps), family$linfo[[4]]$d4link(phi))
     }
-    
+
     if (deriv) {
       I2 <- family$tri$i2
       I3 <- family$tri$i3
       I4 <- family$tri$i4
-      
+
       ## transform derivates w.r.t. mu to derivatives w.r.t. eta...
       de <- gamlss.etamu(L1,L2,L3,L4,IG1,G2,G3,G4,I2,I3,I4,deriv-1)
-      
+
       ## get the gradient and Hessian...
       ret <- gamlss.gH(X,jj,de$l1,de$l2,I2,l3=de$l3,i3=I3,l4=de$l4,i4=I4,
                        d1b=d1b,d2b=d2b,deriv=deriv-1,fh=fh,D=D) 
-      
+
     } else ret <- list()
     ret$l <- l; ret
   } ## end ll
-  
+
   initialize <- expression({
     ## idea is to regress g(y) on model matrix for mean, and then 
     ## to regress the corresponding log absolute residuals on 
@@ -3397,7 +3397,7 @@ shash <- function(link = list("identity", "logeb", "identity", "identity"), b = 
         startMu[ !is.finite(startMu) ] <- 0       
       } else { startMu <- pen.reg(x1, e1, yt1) }
       start[jj[[1]]] <- startMu
-      
+
       # 2) Ridge regression using log absolute residuals
       lres1 <- log( abs(y-drop(family$linfo[[1]]$linkinv(x[,jj[[1]],drop=FALSE]%*%startMu))) )
       x1 <-  x[,jj[[2]],drop=FALSE]; e1 <- E[,jj[[2]],drop=FALSE]
@@ -3408,22 +3408,22 @@ shash <- function(link = list("identity", "logeb", "identity", "identity"), b = 
         startTau[!is.finite(startTau)] <- 0
       } else { startTau <- pen.reg(x1,e1,lres1) }
       start[jj[[2]]] <- startTau
-      
+
       # 3) Skewness and kurtosis as for Gaussian density: skewness set to zero (identity link)
       # and log-kurtosis set to zero.
       x1 <-  x[ , jj[[3]],drop=FALSE]
       startji <- qr.coef(qr(x1), c(rep(family$linfo[[3]]$linkfun(0),nrow(x1))))   
       startji[!is.finite(startji)] <- 0
       start[jj[[3]]] <- startji
-      
+
       x1 <-  x[ , jj[[4]],drop=FALSE]
       startji <- qr.coef(qr(x1), c(rep(family$linfo[[4]]$linkfun(0),nrow(x1))))   
       startji[!is.finite(startji)] <- 0
       start[jj[[4]]] <- startji
-      
+
       }
   }) ## initialize 
-  
+
   rd <- function(mu, wt, scale) { 
     mu <- as.matrix(mu)
     if(ncol(mu)==1){ mu <- t(mu) }
@@ -3432,12 +3432,12 @@ shash <- function(link = list("identity", "logeb", "identity", "identity"), b = 
     epsE <- mu[ , 3, drop = TRUE]
     delE <- exp(mu[ , 4, drop = TRUE])
     n <- length(muE)
-    
+
     .r <- muE + (delE * sigE) * sinh((1/delE) * asinh(qnorm(runif(n))) + (epsE/delE))
-    
+
     return( .r )
   }
-  
+
   qf <- function(p, mu, wt, scale) {
     mu <- as.matrix(mu)
     if(ncol(mu)==1){ mu <- t(mu) }
@@ -3445,12 +3445,12 @@ shash <- function(link = list("identity", "logeb", "identity", "identity"), b = 
     sigE <- exp(mu[ , 2, drop = TRUE])
     epsE <- mu[ , 3, drop = TRUE]
     delE <- exp(mu[ , 4, drop = TRUE])
-    
+
     q <- muE + (delE * sigE) * sinh((1/delE) * asinh(qnorm(p)) + (epsE/delE))
-    
+
     return( q)
   }
-  
+
   cdf <- function(q, mu, wt, scale, logp) {
     mu <- as.matrix(mu)
     if(ncol(mu)==1){ mu <- t(mu) }
@@ -3458,13 +3458,13 @@ shash <- function(link = list("identity", "logeb", "identity", "identity"), b = 
     sigE <- exp(mu[ , 2, drop = TRUE])
     epsE <- mu[ , 3, drop = TRUE]
     delE <- exp(mu[ , 4, drop = TRUE])
-    
+
     p <- pnorm( sinh((asinh( (q-muE)/(delE * sigE) )  - epsE/delE) * delE), log.p = logp )
-    
+
     return( p )
   }
-  
-  
+
+
   structure(list(family="shash",ll=ll, link=paste(link), nlp=npar,
                  tri = trind.generator(npar), ## symmetric indices for accessing derivative arrays
                  initialize=initialize,

@@ -24,7 +24,7 @@ replications(formula, data = NULL, na.action)
 \details{
   If \code{formula} is a data frame and \code{data} is missing,
   \code{formula} is used for \code{data} with the formula \code{~ .}.
-  
+
   Any character vectors in the formula are coerced to factors.
 }
 \value{

@@ -170,7 +170,7 @@ strptime(x, format, tz = "")
       \url{https://en.wikipedia.org/wiki/0_(year)}.  However, the standards
       also say that years before 1582 in its calendar should only be used
       with agreement of the parties involved.
-  
+
       For input, only years \code{0:9999} are accepted.}
     \item{\code{\%z}}{Signed offset in hours and minutes
       from UTC, so \code{-0800} is 8 hours behind UTC. Values up to
@@ -196,7 +196,7 @@ strptime(x, format, tz = "")
   When \code{\%z} or \code{\%Z} is used for output with an
   object with an assigned time zone an attempt is made to use the values
   for that time zone --- but it is not guaranteed to succeed.
-  
+
   Not in the standards and less widely implemented are
   \describe{
     \item{\code{\%k}}{The 24-hour clock time with single digits preceded
@@ -252,7 +252,7 @@ strptime(x, format, tz = "")
   digits, but the standards do not define what is to be done outside
   that range.  For years 0 to 999 most OSes pad with zeros or spaces to
   4 characters, and Linux outputs just the number.
-  
+
   OS facilities will probably not print years before 1 CE (aka 1 AD)
   \sQuote{correctly} (they tend to assume the existence of a year 0: see
   \url{https://en.wikipedia.org/wiki/0_(year)}, and some OSes get them
@@ -281,7 +281,7 @@ strptime(x, format, tz = "")
   1972), offsets are usually treated as whole numbers of minutes, and
   are most often seen in RFC 5322 email headers in forms like
   \code{-0800} (e.g., used on the Pacific coast of the USA in winter).
-  
+
   Format \code{\%z} can be used for input or output: it is a character
   string, conventionally plus or minus followed by two digits for
   hours and two for minutes: the standards say that an empty string
@@ -314,7 +314,7 @@ strptime(x, format, tz = "")
   conversion by \code{\link{as.POSIXct}} will do so.  Conversion by
   \code{strftime} and formatting/printing uses OS facilities and may
   return nonsensical results for non-existent times at DST transitions.
-  
+
   In a C locale \code{\%c} is required to be
   \code{"\%a \%b \%e \%H:\%M:\%S \%Y"}.  As Windows does not comply (and
   uses a date format not understood outside N. America), that format is

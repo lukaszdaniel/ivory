@@ -35,4 +35,4 @@ aareg.taper <- function(taper, imat, nevent) {
     array(imat, dim=dd)
     }
 
-            
+

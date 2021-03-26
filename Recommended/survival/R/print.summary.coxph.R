@@ -37,12 +37,12 @@ print.summary.coxph <-
             if (!printed[i]) { # this column hasn't been printed
                 j <- apply(tmap, 2, function(x) all(x == tmap[,i])) 
                 printed[j] <- TRUE  # mark all that match as 'printed'
-               
+
                 tmp2 <- x$coefficients[tmap[,i],, drop=FALSE]
                 names(dimnames(tmp2)) <- c(paste(cname[j], collapse=", "), "")
                 # restore character row names
                 rownames(tmp2) <- rownames(tmap)[tmap[,i]>0]
- 
+
                 printCoefmat(tmp2, digits=digits, P.values=TRUE, 
                              has.Pvalue=TRUE, signif.legend=FALSE,
                              signif.stars = signif.stars, ...)

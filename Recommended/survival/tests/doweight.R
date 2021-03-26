@@ -190,7 +190,7 @@ aeq(fit0$var, 1/ifun(0))
 aeq(fit$var, 1/ifun(fit$coef))
 
 
-      
+
 # Make sure that the weights pass through the residuals correctly
 rr1 <- resid(fit, type='mart')
 rr2 <- resid(fit, type='mart', weighted=T)
@@ -224,7 +224,7 @@ testx <- data.frame(time=  c(4,4,4,1,1,2,2,3),
                     x=     c(0,0,0,1,1,1,0,0),
 		    wt=    c(1,1,1,1,1,1,1,1),
                     id=    1:8)
- 
+
 fit1 <- coxph(Surv(time, status) ~x, cluster=id, test1, ties='breslow',
               weights=wt)
 fit2 <- coxph(Surv(time, status) ~x, cluster=id, testx, ties='breslow')

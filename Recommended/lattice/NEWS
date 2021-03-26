@@ -61,7 +61,7 @@ Changes in lattice 0.19
    (additional) data specified in the original scale.
 
  o 'varnames' can now be expressions in splom()/parallel().
- 
+
  o Added support for 'xlab.top' and 'ylab.right' arguments.
 
  o Improved axis labelling in splom(), including support for date-time

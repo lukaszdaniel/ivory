@@ -27,9 +27,9 @@ var in \var{text}.
   %\{\}
 
   var in \bsl{}var\{text\}.
-  
+
   foo(\bsl{}var\{x\}, \bsl{}var\{y\}).
-  
+
   From gap: pedtodot.Rd -- n=split(m,par,"\bsl{}034") 
   \end{alltt}
 

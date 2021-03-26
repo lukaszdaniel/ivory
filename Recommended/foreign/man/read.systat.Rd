@@ -47,7 +47,7 @@ read.systat(file, to.data.frame = TRUE)
 
 \references{
   Systat Manual, 1987, 1989\cr
- 
+
   Bivand, R. S. (1992)
   SYSTAT-compatible software for modelling spatial dependence among
   observations. \emph{Computers and Geosciences} \bold{18}, 951--963.

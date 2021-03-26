@@ -59,7 +59,7 @@ sort.int(x, partial = NULL, na.last = NA, decreasing = FALSE,
   The \code{"auto"} method selects \code{"radix"} for short (less than
   \eqn{2^{31}}{2^31} elements) numeric vectors, integer vectors, logical
   vectors and factors; otherwise, \code{"shell"}.
-  
+
   Except for method \code{"radix"},
   the sort order for character vectors will depend on the collating
   sequence of the locale in use: see \code{\link{Comparison}}.
@@ -93,7 +93,7 @@ sort.int(x, partial = NULL, na.last = NA, decreasing = FALSE,
   performance in the rare worst case.  (Peto's modification using a
   pseudo-random midpoint is used to make the worst case rarer.)  This is
   not a stable sort, and ties may be reordered.
-  
+
   Method \code{"radix"} relies on simple hashing to scale time linearly
   with the input size, i.e., its asymptotic time complexity is O(n). The
   specific variant and its implementation originated from the data.table
@@ -165,7 +165,7 @@ sort.int(x, partial = NULL, na.last = NA, decreasing = FALSE,
   \emph{The Art of Computer Programming, Volume 3: Sorting and
     Searching}, 2nd ed.
   Addison-Wesley.
-  
+
   Sedgewick, R. (1986).
   A new upper bound for Shellsort.
   \emph{Journal of Algorithms}, \bold{7}, 159--173.

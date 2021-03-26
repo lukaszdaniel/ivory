@@ -583,7 +583,7 @@ namespace import -force ::Utility::get_opts*
     catch {rename ::\$w {}}
     catch {unset data}
     return\n"
-    
+
     if {[string match {} [info commands ${namesp}::destruct]]} {
 	## The user can optionally provide a special destroy handler
 	;proc ${namesp}::destruct {w args} {

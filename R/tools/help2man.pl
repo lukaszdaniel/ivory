@@ -1,5 +1,5 @@
 # Generate a short man page from --help and --version output.
-# Copyright © 1997, 98, 99 Free Software Foundation, Inc.
+# Copyright ï¿½ 1997, 98, 99 Free Software Foundation, Inc.
 
 # This program is free software; you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
@@ -482,7 +482,7 @@ for (@pre, (grep ! /^($filter)$/o, @include), @post)
     {
 	my $quote = /\W/ ? '"' : '';
 	print ".SH $quote$_$quote\n";
-	
+
 	for ($include{$_})
 	{
 	    # Replace leading dot an backslash tokens.

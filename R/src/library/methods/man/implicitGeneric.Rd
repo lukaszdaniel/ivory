@@ -66,7 +66,7 @@ registerImplicitGenerics(what, where)
   to do this, the alternative is to define the correct generic,
   save it in a special table and restore the non-generic version by
   calling \code{setGenericImplicit}.
-  
+
 
   Note that the package containing the function can define methods for the implicit generic as
   well; when the implicit generic is made a real generic, those methods

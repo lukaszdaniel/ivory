@@ -9,7 +9,7 @@ citEntry(entry="Book",
          year         = 2008,
          note         = "ISBN 978-0-387-75968-5",
          url          = "http://lmdvr.r-forge.r-project.org",
-         
+
          textVersion = 
          paste("Sarkar, Deepayan (2008)", 
                "Lattice: Multivariate Data Visualization with R.",

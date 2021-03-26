@@ -16,7 +16,7 @@ This is a method for the function \code{print()} to print objects of class
     \code{saddle.distn}.
   }
   \item{\dots}{further arguments passed to or from other methods.}
- 
+
 }
 \value{
 The input is returned invisibly.

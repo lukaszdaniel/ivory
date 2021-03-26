@@ -69,7 +69,7 @@ For \code{lme} see:
 Pinheiro J.C. and Bates, D.M. (2000) Mixed effects Models in S and S-PLUS. Springer
 
 For details of how GAMMs are set up here for estimation using \code{lme} see:
- 
+
 Wood, S.N. (2006) Low rank scale invariant tensor product smooths for
 Generalized Additive Mixed Models. Biometrics 62(4):1025-1036
 

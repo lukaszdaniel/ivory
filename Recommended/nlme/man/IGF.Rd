@@ -33,7 +33,7 @@
 \source{
     Davidian, M. and Giltinan, D. M. (1995), \emph{Nonlinear Models for
         Repeated Measurement Data},  Chapman and Hall, London.
-    
+
     Pinheiro, J. C. and Bates, D. M. (2000), \emph{Mixed-Effects Models in S
         and S-PLUS}, Springer, New York.  (Appendix A.11)
 }

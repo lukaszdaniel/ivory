@@ -42,7 +42,7 @@ survreg.fit<- function(x, y, weights, offset, init, controlvals, dist,
         #  values.
 	dnum <- 4  # flag for the C routine
 	n2 <- n + sum(y[,ny]==3)  # not needed, keep for documentation
-        
+
 	#
         # Create an expression that will be evaluated by the C-code,
         #   but with knowledge of some current variables
@@ -59,7 +59,7 @@ survreg.fit<- function(x, y, weights, offset, init, controlvals, dist,
 		    stop("density function returned an invalid matrix")
                 as.vector(as.double(temp))
                 })
-       
+
         # create an isolated sandbox (frame or environment) in which
 	#  we can do the evaluation without endangering local objects
 	#  but still with knowlege of sd, parms, and n2
@@ -143,12 +143,12 @@ survreg.fit<- function(x, y, weights, offset, init, controlvals, dist,
 	if (scale >0) vars <- log(scale)
 	else vars <- log(4*coef[2])/2    # log(2*sqrt(variance)) = log(4*var)/2
 	coef <- c(coef[1], rep(vars, nstrat))
-	
+
 	# get a better initial value for the mean using the "glim" trick
 	deriv <- derfun(y, yy, exp(vars), sd$density, parms)
 	wt <-  -1*deriv$ddg*weights
 	coef[1] <- sum(weights*deriv$dg + wt*(yy -offset)) / sum(wt)
-        
+
 	# Now the fit proper (intercept only)
 	fit0 <- .Call(Csurvreg6,
 		       iter = as.integer(20),

@@ -140,7 +140,7 @@ Check that the parameters of the priors on the parameters are fit for your purpo
 ## the following illustrates a typical workflow. To run the 
 ## 'Not run' code you need rjags (and JAGS) to be installed.
 require(mgcv)
-  
+
 set.seed(2) ## simulate some data... 
 n <- 400
 dat <- gamSim(1,n=n,dist="normal",scale=2)

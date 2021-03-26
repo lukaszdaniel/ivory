@@ -111,7 +111,7 @@ lme(fixed, data, random, correlation, weights, subset, method,
   of one.
 }
 \references{
- 
+
   The computational methods follow the general framework of Lindstrom
   and Bates (1988). The model formulation is described in Laird and Ware
   (1982).  The variance-covariance parametrizations are described in

@@ -26,14 +26,14 @@ other choices result in no test being done.}
   In this case a comparison of likelihood values does not make
   sense (differences no longer have a chi-square distribution),
   and \code{anova} will refuse to print results.
-  
+
   If more than one object is specified, the table has a row for the
   degrees of freedom and loglikelihood for each model. For all
   but the first model, the change in degrees of freedom and loglik
   is also given. (This only make statistical sense if the models are
   nested.)  It is conventional to list the models from smallest to
   largest, but this is up to the user.
-  
+
   The table will optionally contain test statistics (and P values)
   comparing the reduction in loglik for each row.
 }

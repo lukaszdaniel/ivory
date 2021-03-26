@@ -795,7 +795,7 @@ static void Cairo_Polyline(int n, /*const*/ double *x, /*const*/ double *y,
 
 	cairo_move_to(xd->cc, x[0], y[0]);
 	for(i = 0; i < n; i++) cairo_line_to(xd->cc, x[i], y[i]);
-        
+
         if (!xd->appending) {
             cairo_stroke(xd->cc);
             if (xd->currentMask >= 0) {
@@ -967,7 +967,7 @@ static void Cairo_Raster(unsigned int *raster, int w, int h,
      */
     if (xd->appending) 
         return;
-    
+
     cairo_save(xd->cc);
 
     if (xd->currentMask >= 0) {
@@ -1244,7 +1244,7 @@ PangoCairo_Text(double x, double y,
 		const pGEcontext gc, pDevDesc dd)
 {
     pX11Desc xd = (pX11Desc) dd->deviceSpecific;
-    
+
     /*
      * Pango text does not add to clipping path (yet ?)
      */

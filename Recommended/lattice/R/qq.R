@@ -89,7 +89,7 @@ qq.formula <-
     }
 
     ## Step 1: Evaluate x, y, etc. and do some preprocessing
-    
+
     form <-
         latticeParseFormula(formula, data, subset = subset,
                             groups = groups, subscripts = TRUE,
@@ -120,7 +120,7 @@ qq.formula <-
     if(missing(xlab)) xlab <-
         if (is.f.y) unique(levels(y))[1]
         else paste("y:", as.character(unique(levels(y)[[1]])))
-    
+
     if(missing(ylab)) ylab <-
         if (is.f.y) unique(levels(y))[2]
         else paste("y:", as.character(unique(levels(y)[[2]])))
@@ -196,7 +196,7 @@ qq.formula <-
         ## y <- log(y, ybase)
         if (have.ylim) ylim <- logLimits(ylim, ybase)
     }
-    
+
     ## Step 5: Process cond
 
     cond.max.level <- unlist(lapply(cond, nlevels))

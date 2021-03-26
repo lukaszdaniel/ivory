@@ -110,7 +110,7 @@ predict.coxph <- function(object, newdata,
         tcall$formula <- Terms2  #version with no response
         tcall$na.action <- na.action #always present, since there is a default
         tcall[[1L]] <- quote(stats::model.frame)  # change the function called
-        
+
         if (!is.null(attr(Terms, "specials")$strata) && !has.strata) {
            temp.lev <- object$xlevels
            temp.lev[[strat.term$vars]] <- NULL
@@ -121,7 +121,7 @@ predict.coxph <- function(object, newdata,
 
         collapse <- model.extract(mf2, "collapse")
         n2 <- nrow(mf2)
-        
+
         if (has.strata) {
             if (length(strat.term$vars)==1) newstrat <- mf2[[strat.term$vars]]
             else newstrat <- strata(mf2[,strat.term$vars], shortlabel=TRUE)
@@ -224,7 +224,7 @@ predict.coxph <- function(object, newdata,
                                    method="constant", rule=2, f=0)$y
                         chaz2 <-c(0, afit$cumhaz)[j2+1]
                         pred[indx2] <- (chaz2 - chaz) * newrisk[indx2]
-                    
+
                         if (se.fit) {
                             varh2 <- c(0, cumsum(afit$varhaz))[j1+1]
                             xbar2 <- rbind(0, afit$xbar)[j1+1,,drop=F]
@@ -292,7 +292,7 @@ predict.coxph <- function(object, newdata,
             pred<-matrix(ncol=nterms,nrow=NROW(newx))
             dimnames(pred) <- list(rownames(newx), names(asgn))
             if (se.fit) se <- pred
-            
+
             for (i in seq_len(nterms)) {
                 tt <- asgn[[i]]
                 tt <- tt[!is.na(object$coefficients[tt])]
@@ -303,7 +303,7 @@ predict.coxph <- function(object, newdata,
                 }
             pred <- pred[,terms, drop=F]
             if (se.fit) se <- se[,terms, drop=F]
-            
+
             attr(pred, 'constant') <- sum(object$coefficients*object$means, na.rm=T)
             }
         }

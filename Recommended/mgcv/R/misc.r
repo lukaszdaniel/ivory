@@ -178,7 +178,7 @@ XWXd <- function(X,w,k,ks,ts,dt,v,qc,nthreads=1,drop=NULL,ar.stop=-1,ar.row=-1,a
   nx <- length(X);nt <- length(ts)
   n <- length(w);pt <- 0;
   for (i in seq_len(nt)) pt <- pt + prod(p[ts[i]:(ts[i]+dt[i]-1)]) - as.numeric(qc[i]>0)
- 
+
   if (inherits(X[[1]],"dgCMatrix")) { ## the marginals are sparse
     if (length(ar.stop)>1||ar.stop!=-1) warning("AR not available with sparse marginals")
     ## create list for passing to C
@@ -267,7 +267,7 @@ XWXd <- function(X,w,k,ks,ts,dt,v,qc,nthreads=1,drop=NULL,ar.stop=-1,ar.row=-1,a
 #           ns=as.integer(nx), ts=as.integer(ts-1), as.integer(dt), nt=as.integer(nt),
 #           v = as.double(unlist(v)),qc=as.integer(qc),nthreads=as.integer(nthreads),
 #           ar.stop=as.integer(ar.stop-1),ar.row=as.integer(ar.row-1),ar.weights=as.double(ar.w)))
-  
+
 #  XWX <- matrix(oo$XWX[1:pt^2],pt,pt)
 #  XWX0 <- matrix(ooo$XWX[1:pt^2],pt,pt)
 #  plot(XWX0,XWX,pch=".",main=range(XWX-XWX0));abline(0,1,col=2)
@@ -336,7 +336,7 @@ Xbd <- function(X,beta,k,ks,ts,dt,v,qc,drop=NULL,lt=NULL) {
     beta <- b
   }
   if (is.null(lt)) lt <- seq_len(nt)
- 
+
   bc <- if (is.matrix(beta)) ncol(beta) else 1 ## number of columns in beta
   ## The C code mechanism for dealing with lt is very basic, and requires that beta is re-ordered and
   ## truncated to relate only to the selected terms, in the order they are selected.  
@@ -359,7 +359,7 @@ Xbd <- function(X,beta,k,ks,ts,dt,v,qc,drop=NULL,lt=NULL) {
     Xb <- .Call(C_sXbd,m,beta,lt)
     if (bc>1) Xb <- matrix(Xb,ncol=bc)
   } else { ## dense marginals case
-  
+
     oo <- .C(C_Xbd,f=as.double(rep(0,n*bc)),beta=as.double(beta),X=as.double(unlist(X)),k=as.integer(k-1),
            ks = as.integer(ks-1), 
            m=as.integer(m),p=as.integer(p), n=as.integer(n), nx=as.integer(nx), ts=as.integer(ts-1), 
@@ -388,7 +388,7 @@ diagXVXd <- function(X,V,k,ks,ts,dt,v,qc,drop=NULL,nthreads=1,lt=NULL,rt=NULL) {
     m$off <- unlist(m$off)
     ## Now C base all indices...
     m$ks <- m$ks - 1; m$kd <- m$kd - 1; m$r <- m$r - 1; m$ts <- m$ts-1
-    
+
     if (!is.null(drop)) {
       D <- Diagonal(ncol(V)+length(drop),1)[-drop,]
       V <- t(D) %*% V %*% D

@@ -43,7 +43,7 @@ explantation here.
 <<pyears-setup>>=
 expect <- match.arg(expect)
 Call <- match.call()
-    
+
 # create a call to model.frame() that contains the formula (required)
 #  and any other of the relevant optional arguments
 # then evaluate it in the proper frame
@@ -246,7 +246,7 @@ if (has.ratetable) {  #include expected
         byear <- format(bdate, "%Y")
         offset <- as.numeric(bdate - as.Date(paste0(byear, "-01-01")))
         R[,cols[2]] <- R[,cols[2]] - offset
-   
+
         # Doctor up "cutpoints" - only needed for (very) old style rate tables
         #  for which the C code does interpolation on the fly
         if (any(rfac >1)) {

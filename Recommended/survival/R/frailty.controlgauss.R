@@ -13,7 +13,7 @@ frailty.controlgauss <- function(opt, iter, old, fcoef, trH, loglik){
 	    }
 	list(theta=theta)
         }
-    
+
     else {
 	if (is.null(opt$trace)) trace <-FALSE
 	else trace <- opt$trace

@@ -7,7 +7,7 @@
 frailty.brent <- function(x, y, lower, upper) {
     n <- length(x)
     if (length(y) != n) stop(gettextf("'%s' and '%s' arguments are of different lengths", "x", "y"))
- 
+
     if (n<3) return(mean(x))
 
     # First, is the solution bracketed?
@@ -46,4 +46,4 @@ frailty.brent <- function(x, y, lower, upper) {
 	}
     else return(new)
     }
-    
+

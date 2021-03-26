@@ -61,7 +61,7 @@ promptImport(object, filename = NULL, name = NULL,
 
   When \code{prompt} is used in \code{\link{for}} loops or scripts, the
   explicit \code{name} specification will be useful.
-  
+
   The \code{importPage} argument for \code{promptImport} needs to give 
   the base of the name of the
   help file of the original help page.  For example,

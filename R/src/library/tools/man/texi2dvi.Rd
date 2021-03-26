@@ -59,7 +59,7 @@ texi2pdf(file, clean = FALSE, quiet = TRUE,
   \env{R_TEXI2DVICMD}, and the default for that is set from environment
   variable \env{TEXI2DVI} or if that is unset, from a value chosen when
   \R is configured.
-  
+
   %% issues included not re-running latex in texinfo 6.1 and bashisms in
   %% the /bin/sh script in <= 6.0.
   A shell script \command{texi2dvi} is part of GNU's \pkg{texinfo}.
@@ -103,16 +103,16 @@ texi2pdf(file, clean = FALSE, quiet = TRUE,
   Unix-alike \code{texi2dvi} script removes ancillary files that already
   exist but the other two approaches do not (and may get confused by
   such files).
-  
+
   Where supported (\command{texi2dvi} 5.0 and later;
   \command{texify.exe} from MiKTeX), option \option{--max-iterations=20}
   is used to avoid infinite retries.
-  
+
   The emulation mode supports \code{quiet = TRUE} from \R 3.2.3 only.
   Currently \code{clean = TRUE} only cleans up in this mode if the
   conversion was successful---this gives users a chance to examine log
   files in the event of error.
-  
+
   All the approaches should respect the values of environment variables
   \env{LATEX}, \env{PDFLATEX}, \env{MAKEINDEX} and \env{BIBTEX} for the
   full paths to the corresponding commands.

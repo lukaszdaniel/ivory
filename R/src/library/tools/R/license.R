@@ -869,7 +869,7 @@ function(file, keep = TRUE)
 {
     ## See
     ## <https://www.debian.org/doc/packaging-manuals/copyright-format/1.0/>.
-    
+
     select <- function(x, i, vars, keep = TRUE) {
         pos <- match(vars, colnames(x), nomatch = 0L)
         if(keep && any(!pos)) {
@@ -888,7 +888,7 @@ function(file, keep = TRUE)
         c("Files", "Copyright", "License", "Comment")
     fields_in_license_para <-
         c("License", "Comment")
-    
+
     x <- tryCatch(read.dcf(file, keep.white = TRUE),
                   error = identity)
     if(inherits(x, "error") || !length(x)) return()

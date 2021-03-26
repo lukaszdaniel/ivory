@@ -218,7 +218,7 @@ ginla <- function(G,A=NULL,nk=16,nb=100,J=1,interactive=FALSE,int=0,approx=0) {
     int <- 0
     warning("integration not available with this family - insufficient derivatives")
   }
-  
+
   ## Gaussian approximation is that log(sp) ~ N(lsp,V)
   if (int>0) { ## integration requested
     rV <- chol(V) ## Rv'z + lsp gives trial sp
@@ -285,7 +285,7 @@ ginla <- function(G,A=NULL,nk=16,nb=100,J=1,interactive=FALSE,int=0,approx=0) {
     } else max.reml <- -b$gcv.ubre ## maximum LAML
     G$family <- b$family
     G$sig2 <- b$sig2
-    
+
     beta <- coef(b)
     if (!is.null(B$B)) { ## a transformation of original parameters is required
       b$Vp <- B$B%*%b$Vp%*%t(B$B)

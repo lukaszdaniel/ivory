@@ -15,7 +15,7 @@ rtfun <- function(x) {
     class(y) <- "rtabledate"
     y
 }
-    
+
 # Normally used in R
 ratetableDate.Date <- function(x) 
     rtfun(x)

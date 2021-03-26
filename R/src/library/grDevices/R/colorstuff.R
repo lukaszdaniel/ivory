@@ -178,7 +178,7 @@ palette <- function (value)
 {
     ## if value missing return current palette (visibly)
     if (missing(value)) return(.Call(C_palette, character()))
-    
+
     ## in case value is just a single string, select the corresponding set
     ## colors with "default" handled at C level
     if (length(value) == 1L && value != "default") {
@@ -211,7 +211,7 @@ palette.colors <- function(n = NULL, palette = "Okabe-Ito",
     p <- palette.match(palette)
     if (is.na(p)) stop("'palette' does not match any given palette")
     if (p < 1L) stop("'palette' is ambiguous")
- 
+
     ## select n colors from palette
     nc <- length(cols <- .palette_colors_hex[[p]])
     if (is.null(n))
@@ -300,7 +300,7 @@ palette.colors <- function(n = NULL, palette = "Okabe-Ito",
         lightgray = "#BAB0AC"),
     "Classic Tableau" = c("#1F77B4", "#FF7F0E", "#2CA02C", "#D62728", "#9467BD",
         "#8C564B", "#E377C2", "#7F7F7F", "#BCBD22", "#17BECF"),
-	
+
     ## Polychrome
     ## (Kevin R. Coombes, Guy Brock, Zachary B. Abrams, Lynne V. Abruzzo)
     ## https://doi.org/10.18637/jss.v090.c01

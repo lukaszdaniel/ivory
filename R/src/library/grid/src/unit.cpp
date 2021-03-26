@@ -439,7 +439,7 @@ double evaluateGrobUnit(double value, SEXP grob,
      * enforced gpar settings, SO we need to re-establish the
      * current viewport and gpar settings before evaluating the
      * width unit.
-     * 
+     *
      * NOTE:  we are really relying on the grid state to be coherent
      * when we do stuff like this (i.e., not to have changed since
      * we started evaluating the unit [other than the changes we may

@@ -9,7 +9,7 @@ survfitcoxph.fit <- function(y, x, wt, x2, risk, newrisk, strata, se.fit,
     # soon, but not at first issue
     # .Deprecated("coxsurv.fit", "survival")
     Call <- match.call()
-    
+
     if (missing(survtype)) {
         stype <- 1
         ctype <- 1

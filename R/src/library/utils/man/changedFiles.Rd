@@ -25,7 +25,7 @@ changedFiles(before, after, path = before$path, timestamp = before$timestamp,
 	    check.file.info = c("size", "isdir", "mode", "mtime"), 
 	    md5sum = before$md5sum, digest = before$digest, 
 	    full.names = before$full.names, ...)
-	    
+
 \S3method{print}{fileSnapshot}(x, verbose = FALSE, ...)
 
 \S3method{print}{changedFiles}(x, verbose = FALSE, ...) 

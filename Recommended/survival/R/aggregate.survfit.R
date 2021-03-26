@@ -4,7 +4,7 @@
 #
 aggregate.survfit <- function(x, by=NULL, FUN= mean, ...) {
     if (!inherits(x, "survfit")) stop("x must be a survfit object")
-    
+
     dd <- dim(x)
     dd.data <- dd["data"]
     if (is.null(dd.data)) stop("survfit object does not have a 'data' margin")
@@ -65,7 +65,7 @@ aggregate.survfit <- function(x, by=NULL, FUN= mean, ...) {
         }
     }    
 
-    
+
     if (is.null(by)) newx$newdata <- NULL
     else { # get useful labels for the groups
         if (length(by)==1 && is.null(names(by))) 

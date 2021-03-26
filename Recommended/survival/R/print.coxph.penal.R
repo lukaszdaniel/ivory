@@ -89,7 +89,7 @@ print.coxph.penal <-  function(x, terms=FALSE, maxlabel=25,
                               c("coef","se(coef)", "se2", "Chisq","DF","p"))
     printCoefmat(print1, signif.stars=FALSE, P.values=TRUE, has.Pvalue=TRUE,
                  digits = digits, na.print="")
-	
+
     #
     # Write out the remaider of the info
     #

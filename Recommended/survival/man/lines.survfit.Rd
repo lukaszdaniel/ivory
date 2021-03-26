@@ -46,7 +46,7 @@ for \code{lines.survfit}.
 \item{censor}{should censoring times be displayed for the \code{points}
   function?
 }  
-  
+
 \item{mark.time}{
 controls the labeling of the curves.   
 If \code{FALSE}, no labeling is done.   

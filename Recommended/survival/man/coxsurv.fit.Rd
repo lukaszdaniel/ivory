@@ -20,11 +20,11 @@ coxsurv.fit(ctype, stype, se.fit, varmat, cluster,
     hazard)}
   \item{ctype}{cumulative hazard computation: 1=Breslow, 2=Efron}
   \item{se.fit}{if TRUE, compute standard errors}
-  
+
   \item{varmat}{the variance matrix of the coefficients
   }
   \item{cluster}{vector to control robust variance}
-  
+
   \item{y}{the response variable used in the Cox model.  (Missing values
     removed of course.)
   }

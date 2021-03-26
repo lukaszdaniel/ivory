@@ -885,7 +885,7 @@ cumevent <- function(id, time, status, istate) {
     indx <- match(id2, id2)
     cstat<- csum + stat2[indx] - csum[indx]  
     cstat[stat2==0] <- 0
-          
+
     if (!missing(istate)) cstat[firstid] <- istate
 
     keep <- (firstid | (!is.na(stat2)& stat2 !=0))

@@ -32,7 +32,7 @@ grouping(\dots)
   encodings and lack of support for \link{long vectors} (those with
   \eqn{2^{31}}{2^31} or more elements). Real-valued numbers are slightly
   rounded to account for numerical imprecision.
-  
+
   Like \code{order}, for a classed \R object the grouping is based on
   the result of \code{\link{xtfrm}}.
 }

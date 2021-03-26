@@ -102,7 +102,7 @@ mccollect <- function(jobs, wait = TRUE, timeout = 0, intermediate = FALSE)
                 if (all(is.na(match(pids, processID(children()))))) break
         }
 	expected.result <- length(pids)
-        
+
     }
     nores <- expected.result - delivered.result
     if (nores > 0)

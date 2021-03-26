@@ -75,7 +75,7 @@ control(boot.out, L = NULL, distn = NULL, index = 1, t0 = NULL,
 
   If \code{bias.adj} is \code{FALSE} then the returned value is a list
   with the following components
-  
+
   \item{L}{
     The empirical influence values used.  These are the input values if
     supplied, and otherwise they are the values calculated by
@@ -124,7 +124,7 @@ control(boot.out, L = NULL, distn = NULL, index = 1, t0 = NULL,
 \references{
   Davison, A.C. and Hinkley, D.V. (1997) 
   \emph{Bootstrap Methods and Their Application}. Cambridge University Press.
-  
+
   Davison, A.C., Hinkley, D.V. and Schechtman, E. (1986) Efficient bootstrap 
   simulation. \emph{Biometrika}, \bold{73}, 555--566.
 

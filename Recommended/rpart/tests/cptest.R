@@ -20,4 +20,4 @@ tfit2 <- rpart(income ~ population + illiteracy + murder + hs.grad + region,
                minsplit=400, minbucket=140)
 
 all.equal(tfit1$splits[,-1], tfit2$splits[,-1])
- 
+

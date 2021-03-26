@@ -12,7 +12,7 @@ Sugar-cane Disease Data
   resistant, intermediate and susceptible to a disease called "coal of
   sugar-cane" (carvao da cana-de-acucar).  This is a disease that is
   common in sugar-cane plantations in certain areas of Brazil.
-  
+
   For each plot, fifty pieces of sugar-cane stem were put in a solution
   containing the disease agent and then some were planted in the plot.
   After a fixed period of time, the total number of shoots and the number

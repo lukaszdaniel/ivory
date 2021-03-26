@@ -1543,7 +1543,7 @@ returns a handle used for subsequent access to the database.  Printing a
 connection will provide some details of the ODBC connection, and calling
 @code{odbcGetInfo} will give details on the client and server.
 
- 
+
 @findex odbcClose
 @findex close
 A connection is closed by a call to @code{close} or @code{odbcClose},

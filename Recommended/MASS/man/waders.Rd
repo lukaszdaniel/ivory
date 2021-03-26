@@ -76,7 +76,7 @@ waders
   }
 
   The rows are the sites:
-  
+
 A = Namibia North coast\cr
 B = Namibia North wetland\cr
 C = Namibia South coast\cr

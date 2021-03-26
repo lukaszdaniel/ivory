@@ -36,7 +36,7 @@ docurve2 <- function(entry, etime, status, istate, wt, states, id,
         for (j in seq_len(nstate)) 
             i0[who,j] <- (ifelse(istate[at.zero]==states[j], 1, 0) - p0[j])/wtsum
     }
-     
+
     storage.mode(cstate) <- "integer"
     storage.mode(status) <- "integer"
     # C code has 0 based subscripts
@@ -111,7 +111,7 @@ survfitCI <- function(X, Y, weights, id, cluster, robust, istate,
         conf.int <- .95
     }
 
- 
+
     if (is.logical(influence)) {
         # TRUE/FALSE is treated as all or nothing
         if (!influence) influence <- 0L
@@ -121,7 +121,7 @@ survfitCI <- function(X, Y, weights, id, cluster, robust, istate,
         stop("influence argument must be numeric or logical")
     if (!(influence %in% 0:3)) stop("influence argument must be 0, 1, 2, or 3")
     else influence <- as.integer(influence)
- 
+
     if (!se.fit) {
         # if the user asked for no standard error, skip any robust computation
         ncluster <- 0L
@@ -132,7 +132,7 @@ survfitCI <- function(X, Y, weights, id, cluster, robust, istate,
     # This line should be unreachable, unless they call "surfitCI" directly
     if (type !='mright' && type!='mcounting')
          stop(gettextf("multi-state computation doesn't support \"%s\" survival data", type))
-    
+
     # If there is a start.time directive, start by removing any prior events
     if (!missing(start.time)) {
         if (!is.numeric(start.time) || length(start.time) !=1
@@ -152,7 +152,7 @@ survfitCI <- function(X, Y, weights, id, cluster, robust, istate,
     n <- nrow(Y)
     status <- Y[,ncol(Y)]
     ncurve <- length(levels(X))
-    
+
     # The user can call with cluster, id, robust or any combination.
     # If only id, treat it as the cluster too
     if (missing(robust) || length(robust)==0) robust <- TRUE
@@ -218,7 +218,7 @@ survfitCI <- function(X, Y, weights, id, cluster, robust, istate,
     } else p0 <- NULL
     curves <- vector("list", ncurve)
     names(curves) <- levels(X)
-                            
+
     if (ncol(Y)==2) {  # 1 transition per subject
         # dummy entry time that is < any event time
         t0 <- min(0, Y[,1])
@@ -319,7 +319,7 @@ survfitCI <- function(X, Y, weights, id, cluster, robust, istate,
         kfit$cumhaz <- do.call(rbind, lapply(curves, function(x)
             t(x$cumhaz[ckeep,,drop=FALSE])))
         colnames(kfit$cumhaz) <- names(ckeep)
-     
+
         if (influence) kfit$influence.pstate <- 
             lapply(curves, function(x) x$influence.pstate)
     }                         

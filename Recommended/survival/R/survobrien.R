@@ -68,7 +68,7 @@ survobrien <- function(formula, data, subset,
     keepers <- factors | protected  #variables to be left alone
 
     if (all(keepers)) stop("no continuous variables to modify")
-    
+
     if (ncol(y) ==3) {
         # counting process data
         if (is.null(strata.keep)) {
@@ -83,7 +83,7 @@ survobrien <- function(formula, data, subset,
                           which(y[,1] < temp[x,1] & y[,2]>= temp[x,1] &
                                 !strata.keep == temp[x,2]))
         }
-        
+
     }
     else {
         # Simple survival data

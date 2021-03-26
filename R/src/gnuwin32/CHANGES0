@@ -20,7 +20,7 @@ BUG FIXES
 
     o	If a nonstandard font were specified in Rconsole, the GUI
     	preferences dialog would crash R.
-    	
+
 
 
 		CHANGES IN R VERSION 2.9.2
@@ -40,8 +40,8 @@ NEW FEATURES
     o 	Sys.glob() attempts to handle UNC paths starting with \\ (which
 	according to the globbing rules is escaped \), thanks to a patch
 	from Tony Plate.
-	
-	
+
+
 BUG FIXES
 
     o	Topics marked as "internal" in help files were not visible
@@ -61,7 +61,7 @@ BUG FIXES
 BUG FIXES
 
     o	memory.limit(size) gave a spurious error message.
-    
+
     o	file.choose() and the save console dialog did not set the
 	file filters properly.
 
@@ -80,7 +80,7 @@ BUG FIXES
     o	capabilities("tiff") was incorrectly being reported as FALSE
 	(due to an error in the Windows-specific config.h file).
 
-    
+
 
     		CHANGES IN R VERSION 2.9.0
 
@@ -88,7 +88,7 @@ BUG FIXES
 NEW FEATURES
 
     o	memory.size() and memory.limit() now return rounded values.
-    
+
     o	The Rgui preferences dialog now allows more flexible colour
     	settings, and shows a sample of what will be displayed.
 
@@ -228,13 +228,13 @@ BUG FIXES
     o	The windows() device now works around the total clipping of
  	semi-transparent rectangles and circles that extend outside
  	the device region.
- 	
+
     o	The script editor did not respect user preferences for the
 	background colour.
-	
+
     o	normalizePath() no longer returns a garbage string when the
     	input is bad; it now signals an error. (PR#13199)
-    	
+
     o	File share/sh/dcf.sh was not distributed with the binary
     	build. (PR#13200)
 
@@ -321,10 +321,10 @@ BUG FIXES
 
     o	The Korean translation of the Rgui menus has been corrected
     	and restored.  (Thanks to June Kim and Seung-ho Kang.)
-    	
+
     o	The list of hives in the readRegistry() defaults contained
     	a typo; error messages were incomplete. (PR#12937)
-    	
+
     o	The custom install options were not saved/restored when the
     	installer was run with /SAVEINF or /LOADINF respectively.
 
@@ -385,7 +385,7 @@ NEW FEATURES
 BUG FIXES
 
     o	Saving a graph in TIFF format could crash R (PR#11804).
-    
+
     o	Rterm in interactive use did not implement R_FlushConsole() fully.
 
     o	getGraphicsEvent() did not return onMouseMove events while a
@@ -461,7 +461,7 @@ BUG FIXES
 
     o	memory.size() no longer wraps around allocations greater than
 	2Gb.  (PR#11596)
-	
+
     o	file.choose() in SDI mode now restores the window focus
     	properly.
 
@@ -501,7 +501,7 @@ INTERNATIONALIZATION
 	gives a Greek small beta and "\u2642" a 'male sign'.  Such
 	strings will be printed as e.g. <U+2642> except in the Rgui
 	console (see below).
-	
+
     o	Rgui has been re-written to work internally in Unicode.  This
 	means that copy and paste will be done in Unicode, and should
 	now work correctly if R is being run in a different locale
@@ -673,7 +673,7 @@ OTHERS
 
     o	The progress bar in download.file() is now supressed by
     	quiet=TRUE (as it has long been on Unix).
-    	
+
     o	RSetReg now uses full pathnames, the same as the regular
     	installer.
 
@@ -732,7 +732,7 @@ BUG FIXES
 	not always working correctly, at least on Windows XP -- this
 	affected e.g. Alt-M plus 'i' for 'List search path', where the
 	second 's' was being underlined.  (PR#11036)
-	
+
     o	The winDialogString() dialog now releases CPU cycles while
     	waiting for input. (PR#11045)
 
@@ -801,7 +801,7 @@ BUG FIXES
 
     o	If a graphics window was opened in MDI mode while the console
 	was zoomed, it would not be initialized properly.
-	
+
     o	The graphics window placement parameters on the GUI preferences
     	dialog were being ignored.
 
@@ -811,7 +811,7 @@ BUG FIXES
 
     o	If Rterm is invoked as 'R', the status code (as passed to q())
 	is now returned (rather than 0 or 1).
-	
+
     o	Double clicking on a saved workspace (or dragging and dropping it
 	onto Rgui.exe) failed to open it if the Rprofile or Rprofile.site file
 	changed the working directory.

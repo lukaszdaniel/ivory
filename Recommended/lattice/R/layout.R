@@ -417,7 +417,7 @@ calculateGridLayout <-
                          tick.unit + pad1.unit + pad2.unit)
             }
 
-            
+
             ## bottom
             lab.comps.bottom <- lab.comps$bottom
             lab <- lab.comps.bottom$labels$labels
@@ -564,7 +564,7 @@ calculateGridLayout <-
                                     format.posixt = x$y.scales$format,
                                     n = x$y.scales$tick.number)
 
-            
+
             ## right
 
             if (is.logical(lab.comps$right) && !lab.comps$right)
@@ -840,7 +840,7 @@ packet.panel.default <-
         skip <- rep(skip, page)
     }
     ## This covers current page, which is all we care about. 
-    
+
     panel.number <- 1 + 
         (page - 1) * panels.per.page +
             (row - 1) * panels.per.row +

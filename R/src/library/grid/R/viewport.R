@@ -32,7 +32,7 @@ vpObject <- function(x, y, width, height, just,
                      xscale, yscale, angle,
                      layout, layout.pos.row, layout.pos.col,
                      name) {
-    
+
     vp <- list(x = x, y = y, width = width, height = height,
                justification = just,
                gp = gp,

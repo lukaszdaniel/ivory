@@ -422,7 +422,7 @@ extern "C"
      *
      * Return a dotted pair with the given CAR and CDR.
      * The (R) TAG slot on the cell is set to NULL.
-     * 
+     *
      * @param list SEXP object.
      * @param i i-th element of that object.
      *

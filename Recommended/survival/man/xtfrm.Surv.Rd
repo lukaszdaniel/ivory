@@ -21,7 +21,7 @@
   For counting process data \code{(tstart, tstop, status)} the ordering
   is by stop time, status, and start time, again with censoring last.
   Interval censored data is sorted using the midpoint of each interval.
-  
+
   The \code{xtfrm} routine is used internally by \code{order} and
   \code{sort}, so these results carry over to those routines.
 }

@@ -45,7 +45,7 @@ constraints as equality constraints.}
 \details{ 
 
   This solves the problem:
- 
+
 \deqn{ minimise~ \| { \bf W}^{1/2} ({ \bf Xp - y} ) \|^2  +  \sum_{i=1}^m
 \lambda_i {\bf p^\prime S}_i{\bf p} }{ min || W^0.5 (Xp-y) ||^2 + 
 lambda_1 p'S_1 p + lambda_1 p'S_2 p + . . .}
@@ -71,7 +71,7 @@ Gill et al. 1981.
 }
 \value{ The function returns an array containing the estimated parameter
   vector. 
-   
+
 }
 \references{
 

@@ -22,7 +22,7 @@ hazards model.
     a data frame with the same variable names as those that appear 
     in the \code{coxph} formula.  It is also valid to use a vector, if
     the data frame would consist of a single row.
-    
+
     The curve(s) produced will be representative of a cohort whose 
     covariates correspond to the values in \code{newdata}. 
     Default is the mean of the covariates used in the 

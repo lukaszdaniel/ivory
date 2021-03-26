@@ -171,7 +171,7 @@ bitmap imagetobitmap(image img)
     */
     GAbyte *block = array(size, GAbyte);
     BITMAPINFO *bmi = (BITMAPINFO *) block;
-	
+
 
     /* assign header info */
     bmi->bmiHeader.biSize = sizeof(BITMAPINFOHEADER);

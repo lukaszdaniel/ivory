@@ -10,7 +10,7 @@ frailty.controlaic <- function(parms, iter, old, n, df, loglik) {
 	else theta <- parms$init[1]
 	return(list(theta = theta, done = FALSE))
 	}
-    
+
     # by default, do the corrected AIC
     if (length(parms$caic)) correct <- parms$caic
     else correct <- FALSE
@@ -26,7 +26,7 @@ frailty.controlaic <- function(parms, iter, old, n, df, loglik) {
 	}
 
     history <- rbind(old$history,c(old$theta, loglik, df, loglik - df, loglik - dfc))
-    
+
     if (iter == 2) {  #Third guess
 	theta <- mean(history[,1])
 	return(list(theta = theta, done = FALSE, history = history))
@@ -40,11 +40,11 @@ frailty.controlaic <- function(parms, iter, old, n, df, loglik) {
 
     done <- (abs(1- aic[iter]/aic[iter-1]) < parms$eps)
     x <- history[,1]
-    
+
     if (x[iter] == max(aic) && x[iter] == max(x)) 
 	    newtheta <- 2* max(x)
     else  newtheta <- frailty.brent(x, aic, lower = parms$lower, upper = parms$upper)
-    
+
     if (length(parms$trace) && parms$trace) {
 	print(history)
 	cat("    ", gettextf("new theta= %s", format(newtheta), domain = "R-survival"), "\n\n", sep = "")

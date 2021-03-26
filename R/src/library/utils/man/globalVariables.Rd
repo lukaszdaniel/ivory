@@ -21,7 +21,7 @@
   which appear to be global objects to \code{codetools}.
   (This case is handled automatically by \code{\link{setRefClass}()} and
   friends, using the supplied field and method names.)
-  
+
   For \code{suppressForeignCheck}, the names supplied are of variables
   used as \code{.NAME} in foreign function calls which should not be
   checked by \code{\link{checkFF}(registration = TRUE)}.  Without this
@@ -74,7 +74,7 @@ suppressForeignCheck(names, package, add = TRUE)
 \value{
   \code{globalVariables} returns the current list of declared global
   variables, possibly modified by this call.
-  
+
   \code{suppressForeignCheck} returns the current list of native
   symbol objects which are not to be checked.  
 }

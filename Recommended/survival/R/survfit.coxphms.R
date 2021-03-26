@@ -28,7 +28,7 @@ function(formula, newdata, se.fit=TRUE, conf.int=.95, individual=FALSE,
             baselinecoef[2, index] <- exp(object$coef[ctemp[index]])
         }
     } else phbase <- rep(FALSE, nrow(object$cmap))
-      
+
     # process options, set up Y and the model frame, deal with start.time
     Terms  <- terms(object)
     robust <- !is.null(object$naive.var)   # did the coxph model use robust var?
@@ -43,7 +43,7 @@ function(formula, newdata, se.fit=TRUE, conf.int=.95, individual=FALSE,
             temp1 <- c("kalbfleisch-prentice", "aalen", "efron",
                        "kaplan-meier", "breslow", "fleming-harrington",
                        "greenwood", "tsiatis", "exact")
-            
+
             survtype <- match(match.arg(type, temp1), temp1)
             stype <- c(1,2,2,1,2,2,2,2,2)[survtype]
             if (stype!=1) ctype <-c(1,1,2,1,1,2,1,1,1)[survtype]
@@ -99,7 +99,7 @@ function(formula, newdata, se.fit=TRUE, conf.int=.95, individual=FALSE,
         !is.null(object$call$weights) || !is.null(object$call$id) ||
         (has.strata && is.null(object$strata)) ||
         !is.null(attr(object$terms, 'offset'))) {
-        
+
         mf <- stats::model.frame(object)
         }
     else mf <- NULL  #useful for if statements later
@@ -224,7 +224,7 @@ function(formula, newdata, se.fit=TRUE, conf.int=.95, individual=FALSE,
            keep <- !grepl("frailty(", dimnames(X)[[2]], fixed=TRUE)
            X <- X[,keep, drop=F]
         }
-            
+
         if (is.null(offset)) risk <- c(exp(X%*% beta - xcenter))
         else     risk <- c(exp(X%*% beta + offset - xcenter))
     }
@@ -236,7 +236,7 @@ function(formula, newdata, se.fit=TRUE, conf.int=.95, individual=FALSE,
         #   or cluster term).
         if (any(attr(Terms, "order") > 1) )
             warning("the model contains interactions; the default curve based on columm means of the X matrix is almost certainly not useful. Consider adding a newdata argument.")
-        
+
         if (length(object$means)) {
             mf2 <- as.list(object$means)   #create a dummy newdata
             names(mf2) <- names(object$coefficients)
@@ -276,7 +276,7 @@ function(formula, newdata, se.fit=TRUE, conf.int=.95, individual=FALSE,
                     any(unlist(lapply(temp, class))== "function"))
                     found.strata <- FALSE
             }
-            
+
             if (!found.strata) {
                 ss <- untangle.specials(Terms2, "strata")
                 Terms2 <- Terms2[-ss$terms]
@@ -313,13 +313,13 @@ function(formula, newdata, se.fit=TRUE, conf.int=.95, individual=FALSE,
             if (is.null(id2)) stop("'id=NULL' is an invalid argument")
             }
         else id2 <- rep(1, nrow(mf2))
-        
+
         x2 <- model.matrix(Terms2, mf2)[,-1, drop=FALSE]  #no intercept
         if (length(x2)==0) stop("Individual survival but no variables")
 
         offset2 <- model.offset(mf2)
         if (length(offset2) ==0) offset2 <- 0
-                     
+
         y2 <- model.extract(mf2, 'response')
         if (attr(y2,'type') != type)
             stop("Survival type of newdata does not match the fitted model")
@@ -446,7 +446,7 @@ multihaz <- function(y, x, position, weight, risk, istrat, ctype, stype,
     if (se.fit) v2 <- h2
     S <- double(nstate)  # survival at the current time
     S2 <- array(0, dim=c(nrow(hazard), nx2, nstate))
- 
+
     H <- matrix(0, nstate, nstate)
     if (stype==2) {
         H[hfill] <- colMeans(hazard)

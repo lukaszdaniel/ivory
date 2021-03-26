@@ -1606,7 +1606,7 @@ guess_category_value (int category, const char *categoryname)
       {"trk", "tr_TR"},
       {NULL, ""}
   };
-  
+
   /* Two-letter abbreviations of full names work on XP, but not on Vista */
   const static struct {
       const char * const win;
@@ -1629,7 +1629,7 @@ guess_category_value (int category, const char *categoryname)
       {"sw", "sv_SE"},
       {NULL, ""}
   };
-  
+
   int i;
   for (i = 0; FullNames[i].win; i++)
       if (strcmp(locale, FullNames[i].win) == 0) {

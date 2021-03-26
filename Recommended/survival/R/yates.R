@@ -31,7 +31,7 @@ cmatrix <- function(fit, term,
     indx <- match(termname, all.vars(Tatt$variables))
     if (any(is.na(indx))) 
         stop(gettextf("variable %s not found in the formula", termname[is.na(indx)]))
-    
+
     # What kind of term is being tested?  It can be categorical, continuous,
     #  an interaction of only categorical terms, interaction of only continuous
     #  terms, or a mixed interaction.
@@ -111,7 +111,7 @@ cmatrix <- function(fit, term,
         if (any(is.na(temp)))
             stop(gettextf("invalid level for term %s", termname[i]))
     }
-    
+
     rval <- list(levels=levels, termname=termname)
     # Now add the contrast matrix between the levels, if needed
     if (test=="global") {
@@ -215,7 +215,7 @@ estfun <- function(cmat, beta, varmat) {
              var = cmat %*% varmat %*% t(cmat))
     }
 }
-             
+
 testfun <- function(cmat, beta, varmat, sigma2) {
     nabeta <- is.na(beta)
     if (any(nabeta)) {
@@ -250,7 +250,7 @@ yates <- function(fit, term, population=c("data", "factorial", "sas"),
     Tatt <- attributes(Terms)
     # a flaw in delete.response: it doesn't subset dataClasses
     Tatt$dataClasses <- Tatt$dataClasses[row.names(Tatt$factors)]
-    
+
     if (inherits(fit, "coxphms")) stop("multi-state coxph not yet supported")
     if (is.list(predict) || is.function(predict)) { 
         # someone supplied their own
@@ -272,14 +272,14 @@ yates <- function(fit, term, population=c("data", "factorial", "sas"),
         xassign <- attr(Xold, "assign")
     }
     else xassign <- fit$assign 
-    
+
 
     nvar <- length(xassign)
     nterm <- length(Tatt$term.names)
     termname <- rownames(Tatt$factors)
     iscat <- sapply(Tatt$dataClasses, 
                     function(x) x %in% c("character", "factor"))
-    
+
     method <- match.arg(casefold(method), c("direct", "sgtt")) #allow SGTT
     if (method=="sgtt" && missing(population)) population <- "sas"
 
@@ -294,7 +294,7 @@ yates <- function(fit, term, population=c("data", "factorial", "sas"),
     }
     else stop("the population argument must be a data frame or character")
     test <- match.arg(test)
-    
+
     if (popframe || population != "data") weight <- NULL
     else {
         weight <- model.extract(mframe, "weights")
@@ -317,22 +317,22 @@ yates <- function(fit, term, population=c("data", "factorial", "sas"),
         # a vcov method that does not obey the complete argument
         vmat <- vmat[!nabeta, !nabeta]
     }
-    
+
     # grab the dispersion, needed for the writing an SS in linear models
     if (class(fit)[1] =="lm") sigma <- summary(fit)$sigma
     else sigma <- NULL   # don't compute an SS column
-    
+
     # process the term argument and check its legality
     if (missing(levels)) 
         contr <- cmatrix(fit, term, test, assign= xassign)
     else contr <- cmatrix(fit, term, test, assign= xassign, levels = levels)
     x1data <- as.data.frame(contr$levels)  # labels for the PMM values
-    
+
     # Make the list of X matrices that drive everything: xmatlist
     #  (Over 1/2 the work of the whole routine)
     xmatlist <- yates_xmat(Terms, Tatt, contr, population, mframe, fit,
                                 iscat)
- 
+
     # check rows of xmat for estimability
     if (any(is.na(beta)) && (popframe || population != "none")) {
         Xu <- unique(Xold)  # we only need unique rows, saves time to do so
@@ -345,7 +345,7 @@ yates <- function(fit, term, population=c("data", "factorial", "sas"),
         }
         estimable <- sapply(xmatlist, estimcheck)
     } else estimable <- rep(TRUE, length(xmatlist))
-    
+
     # Drop missing coefficients, and use xmatlist to compute the results
     beta <- beta[!nabeta]
     if (predict == "linear" || is.null(mfun)) {
@@ -357,7 +357,7 @@ yates <- function(fit, term, population=c("data", "factorial", "sas"),
         meanfun <- if (is.null(weight)) colMeans else function(x) {
             colSums(x*weight)/ sum(weight)}
         Cmat <- t(sapply(xmatlist, meanfun))[,!nabeta]
-                  
+
         # coxph model: the X matrix is built as though an intercept were there (the
         #  baseline hazard plays that role), but then drop it from the coefficients
         #  before computing estimates and tests.
@@ -366,7 +366,7 @@ yates <- function(fit, term, population=c("data", "factorial", "sas"),
             offset <- -sum(fit$means[!nabeta] * beta)  # recenter the predictions too
             }
         else offset <- 0
-            
+
         # Get the PMM estimates, but only for estimable ones
         estimate <- cbind(x1data, pmm=NA, std=NA)
         if (any(estimable)) {
@@ -374,7 +374,7 @@ yates <- function(fit, term, population=c("data", "factorial", "sas"),
             estimate$pmm[estimable] <- etemp$estimate + offset
             estimate$std[estimable] <- sqrt(diag(etemp$var))
         }
-            
+
         # Now do tests on the PMM estimates, one by one
         if (method=="sgtt") {
                 # It would be simplest to have the contrasts.arg to be a list of function names.
@@ -399,7 +399,7 @@ yates <- function(fit, term, population=c("data", "factorial", "sas"),
                 sasX <- model.matrix(formula(fit),  data=mframe, xlev=fit$xlevels,
                                       contrasts.arg=temp)
                 sas.assign <- attr(sasX, "assign")
-                    
+
                 # create the dependency matrix D.  The lm routine is unhappy if it thinks
                 #  the right hand and left hand sides are the same, fool it with I().
                 # We do this using the entire X matrix even though only categoricals will
@@ -408,7 +408,7 @@ yates <- function(fit, term, population=c("data", "factorial", "sas"),
                 dimnames(D)[[1]] <- dimnames(D)[[2]] #get rid if the I() names
                 zero <- is.na(D[,1])  # zero rows, we'll get rid of these later
                 D <- ifelse(is.na(D), 0, D) 
-                    
+
                 # make each row orthagonal to rows for other terms that contain it
                 #  Containing blocks, if any, will always be below
                 # this is easiest to do with the transposed matrix
@@ -420,7 +420,7 @@ yates <- function(fit, term, population=c("data", "factorial", "sas"),
                     tcat <- (colSums(Tatt$factors[!iscat,,drop=FALSE]) == 0)
                 }
                 else tcat <- rep(TRUE, max(sas.assign)) # all vars are categorical
-                   
+
                 B <- t(D)
                 dimnames(B)[[2]] <- paste0("L", seq_len(ncol(B)))  # for the user
                 if (ncol(Tatt$factors) > 1) {
@@ -516,7 +516,7 @@ yates <- function(fit, term, population=c("data", "factorial", "sas"),
         sims <- array(0., dim=c(nsim, nrow(pmm), ncol(pmm)))
         if (inherits(fit, 'coxph')) offset <- bmat %*% fit$means[!nabeta]
         else offset <- rep(0., nsim)
-           
+
         for (i in seq_len(nsim))
             sims[i,,] <- rowsum(predfun(xall %*% bmat[i,] - offset[i]), index, 
                                 reorder=FALSE)/n1
@@ -616,7 +616,7 @@ yates_xmat <- function(Terms, Tatt, contr, population, mframe, fit,
         # pdata is a model frame, convert x1data
         # if the name and the class agree we go forward simply
         index <- match(names(x1data), names(pdata), nomatch=0)
-            
+
         if (all(index >0) && 
             identical(lapply(x1data, class), lapply(pdata, class)[index]) &
             identical(sapply(x1data, ncol) , sapply(pdata, ncol)[index]))
@@ -646,7 +646,7 @@ yates_xmat <- function(Terms, Tatt, contr, population, mframe, fit,
             }
         }
     }      
-    
+
     xmatlist
 }
 yates_factorial_pop <- function(mframe, terms, x2indx, xlevels) {
@@ -654,7 +654,7 @@ yates_factorial_pop <- function(mframe, terms, x2indx, xlevels) {
     dclass <- attr(terms, "dataClasses")[x2name]
     if (!all(dclass %in% c("character", "factor")))
         stop("population=factorial only applies if all the adjusting terms are categorical")
-   
+
     nvar <- length(x2name)
     n2 <- sapply(xlevels[x2name], length)  # number of levels for each
     n <- prod(n2)                          # total number of rows needed
@@ -689,7 +689,7 @@ print.yates <- function(x, digits = max(3, getOption("digits") -2),
     temp2$chisq <- format(temp2$chisq, digits= dig.tst)
     temp2$df <- format(temp2$df)
     if (!is.null(temp2$ss)) temp2$ss <- format(temp2$ss, digits=digits)
-    
+
     if (nrow(temp1) > nrow(temp2)) {
         dummy <- temp2[1,]
         dummy[1,] <- ""
@@ -699,7 +699,7 @@ print.yates <- function(x, digits = max(3, getOption("digits") -2),
         # get rid of any factors before padding
         for (i in which(sapply(temp1, is.factor))) 
             temp1[[i]] <- as.character(temp1[[i]])
-        
+
         dummy <- temp1[1,]
         dummy[1,] <- ""
         temp1 <- rbind(temp1, dummy[rep(1, nrow(temp2)- nrow(temp1)),])
@@ -745,7 +745,7 @@ yates_setup.coxph <- function(fit, predict = c("lp", "risk", "expected",
             stop("stratified models not yet supported")
         cumhaz <- c(0, baseline$cumhaz)
         tt <- c(diff(c(0, pmin(rmean, baseline$time))), 0)
-         
+
         predict <- function(eta, ...) {
             c2 <- outer(exp(drop(eta)), cumhaz)  # matrix of values
             surv <- exp(-c2)
@@ -768,4 +768,4 @@ yates_setup.coxph <- function(fit, predict = c("lp", "risk", "expected",
      }
     else stop("type expected is not supported")
 }
-    
+

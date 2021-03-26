@@ -57,7 +57,7 @@ SEXP tmerge(SEXP id2,  SEXP time1x, SEXP newx2,
 	    csum += x[k];
 	    hasone = 1;
 	}
-	
+
 	if (hasone ==1) {
 	    if (ISNA(newx[i])) newx[i] = csum;  /* an NA is replaced */
 	    else  newx[i] = newx[i] + csum;     /* otherwise incremented */

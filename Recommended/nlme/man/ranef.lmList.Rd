@@ -70,7 +70,7 @@
   \code{\link{lmList}}, 
   \code{\link{random.effects}}
 }
- 
+
 \examples{
 fm1 <- lmList(distance ~ age | Subject, Orthodont)
 ranef(fm1)

@@ -94,7 +94,7 @@ will have no identifiability constraints. Only use this if you really understand
 \item{pc}{If not \code{NULL}, signals a point constraint: the smooth should pass through zero at the
 point given here (as a vector or list with names corresponding to the smooth names). Never ignored
 if supplied. See \code{\link{identifiability}}. }
-  
+
 }
 
 \details{ Smooths of several covariates can be constructed from tensor products of the bases
@@ -103,7 +103,7 @@ are produced with associated model matrices and penalty matrices, and these are 
 manner described in \code{\link{tensor.prod.model.matrix}} and \code{\link{tensor.prod.penalties}}, to produce 
 a single model matrix for the smooth, but multiple penalties (one for each marginal basis). The basis dimension 
 of the whole smooth is the product of the basis dimensions of the marginal smooths.
- 
+
 An option for operating with a single penalty (The Kronecker product of the marginal penalties) is provided, but 
 it is rarely of practical use, and is deprecated: the penalty is typically so rank deficient that 
 even the smoothest resulting model will have rather high estimated degrees of freedom. 
@@ -149,7 +149,7 @@ the term is a function of.}
 \item{fx}{ logical array with element for each penalty of the term
 (tensor product smooths have multiple penalties). \code{TRUE} if the penalty is to 
 be ignored, \code{FALSE}, otherwise. }
-  
+
 
 \item{label}{A suitable text label for this smooth term.}
 

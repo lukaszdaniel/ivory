@@ -147,7 +147,7 @@ getDefaultCluster()
   \sQuote{Are all the hosts running identical setups?}, but this was
   apparently more restrictive than its author intended and not required
   by the code.
-  
+
   The current interpretation of \code{homogeneous = TRUE} is that
   \command{Rscript} can be launched using the same path on each worker.
   That path is given by the option \code{rscript} and defaults to the
@@ -157,7 +157,7 @@ getDefaultCluster()
 
   For \code{homogeneous = FALSE}, \command{Rscript} on the workers is
   found on their default shell's path.
-  
+
   For the very common usage of running both master and worker on a
   single multi-core host, the default settings are the appropriate ones.
 }

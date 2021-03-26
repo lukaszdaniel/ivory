@@ -27,7 +27,7 @@ rpartco(tree, parms)
 }
 \value{
   For \code{rpartco} the x,y plotting coordinates of the nodes.
-  
+
   \code{rpart.anova}, \code{rpart.class} and
   \code{rpart.poisson} return a list with components
   \item{y}{(adjusting for \code{offset} if necessary),}

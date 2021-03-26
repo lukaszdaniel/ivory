@@ -44,7 +44,7 @@ The \code{"lpip"} attribute of \code{X} is a list of the coefficient indices for
 
 \code{X} can be a list of sparse matrices of class \code{"dgCMatrix"}, in which case reverse indices are needed, mapping stored matrix rows to rows in the full matrix (that is the reverse of \code{k} which maps full matrix rows to the stored unique matrix rows). \code{r} is the same dimension as \code{k} while \code{off} is a list with as many elements as \code{k} has columns. \code{r} and  \code{off} are supplied as attributes to \code{X} . For simplicity let \code{r} and code{off} denote a single column and element corresponding to each other: then code{r[off[j]:(off[j+1]-1)]} contains the rows of the full matrix corresponding to row \code{j} of the stored matrix. The reverse indices are essential for efficient computation with sparse matrices. See the example code for how to create them efficiently from the forward index matrix, \code{k}.    
 }
- 
+
 
 \references{
 Wood, S.N., Li, Z., Shaddick, G. & Augustin N.H. (2017) Generalized additive models for gigadata: modelling the UK black smoke network daily data. Journal of the American Statistical Association. 112(519):1199-1210
@@ -89,7 +89,7 @@ Li, Z & S.N. Wood (2019) Faster model matrix crossproducts for large generalized
   Xb0 <- Xbd(G$Xd,bb,G$kd,G$ks,G$ts,G$dt,G$v,G$qc)
   Xb1 <- Xbd(Xs,bb,G$kd,G$ks,G$ts,G$dt,G$v,G$qc)
   range(Xb0-Xb1);plot(Xb0,Xb1,pch=".")
-  
+
   w <- runif(n)
   XWy0 <- XWyd(G$Xd,w,y=dat$y,G$kd,G$ks,G$ts,G$dt,G$v,G$qc) 
   XWy1 <- XWyd(Xs,w,y=dat$y,G$kd,G$ks,G$ts,G$dt,G$v,G$qc)

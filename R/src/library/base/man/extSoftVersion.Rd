@@ -63,7 +63,7 @@ extSoftVersion()
 }
 \seealso{
   \code{\link{libcurlVersion}} for the version of \code{libCurl}.
-  
+
   \code{\link{La_version}} for the version of LAPACK in use.
 
   \code{\link{La_library}} for binary/executable file with LAPACK in use.
@@ -71,7 +71,7 @@ extSoftVersion()
   \code{\link{grSoftVersion}} for third-party graphics software.
 
   \code{\link{tclVersion}} for the version of Tcl/Tk.
-  
+
   \code{\link{pcre_config}} for PCRE configuration options.
 }
 \examples{

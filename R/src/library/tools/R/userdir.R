@@ -66,6 +66,6 @@ function(package, which = c("data", "config", "cache"))
                    else
                        file.path(home, ".cache")
                })
-        
+
     file.path(path, "R", package)
 }

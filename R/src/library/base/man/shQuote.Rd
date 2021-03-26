@@ -36,7 +36,7 @@ shQuote(string, type = c("sh", "csh", "cmd", "cmd2"))
   exclamation mark and double quote).  As a last resort, we need to
   split the string into pieces not containing single quotes and surround
   each with single quotes, and the single quotes with double quotes.
-  
+
   In Windows, command line interpretation is done by the application
   as well as the shell.  It may depend on the compiler used:
   Microsoft's rules for the C run-time are given at 
@@ -54,10 +54,10 @@ shQuote(string, type = c("sh", "csh", "cmd", "cmd2"))
   used:  first for the application, and then \code{type = "cmd2"} 
   for \command{cmd.exe}.  See the examples below.  
 }
-  
+
 \references{ Loukides, M. \emph{et al} (2002) \emph{Unix Power Tools}
   Third Edition. O'Reilly.  Section 27.12.
-  
+
   Discussion in \PR{16636}.
 
 % gone in Jan 2015  

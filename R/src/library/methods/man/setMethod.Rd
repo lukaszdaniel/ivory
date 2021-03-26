@@ -44,7 +44,7 @@ setMethod(f, signature=character(), definition,
 }
 \value{
   The function exists for its side-effect. The definition will be stored in a special metadata object and incorporated in the generic function when the corresponding package is loaded into an R session. 
-  
+
 }
 \section{Method Selection: Avoiding Ambiguity}{
 When defining methods, it's important to ensure that methods are

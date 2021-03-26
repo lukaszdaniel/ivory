@@ -90,7 +90,7 @@ The routine is written for relatively expert users.
 
   ## Now use ginla to get posteriors of estimated effect values
   ## at evenly spaced times. Create A matrix for this...
-  
+
   rat <- range(mcycle$times)
   pd0 <- data.frame(times=seq(rat[1],rat[2],length=20))
   X0 <- predict(b,newdata=pd0,type="lpmatrix")
@@ -103,7 +103,7 @@ The routine is written for relatively expert users.
   ## call ginla. Set int to 1 for integrated version.
   ## Set interactive = 1 or 2 to plot marginal posterior distributions
   ## (red) and simple Gaussian approximation (black).
- 
+
   inla <- ginla(G,A,int=0)
 
   par(mfrow=c(1,2),mar=c(5,5,1,1))

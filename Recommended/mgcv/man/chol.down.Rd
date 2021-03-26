@@ -41,7 +41,7 @@ Golub GH and CF Van Loan (2013) Matrix Computations (4th edition) Johns Hopkins
   Rd <- choldrop(R0,k)
   range(Rd-chol(A[-k,-k]))
   Rd;chol(A[-k,-k])
-  
+
   ## same but using lower triangular factor A = LL'
   L <- t(R0)
   Ld <- choldrop(L,k)
@@ -59,7 +59,7 @@ Golub GH and CF Van Loan (2013) Matrix Computations (4th edition) Johns Hopkins
   Rd <-  cholup(R,u,FALSE)
   R0;Rd
   range(R-Ru)
-  
+
 }
 
 \keyword{models} \keyword{smooth} \keyword{regression}%-- one or more ..

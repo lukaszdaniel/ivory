@@ -1274,7 +1274,7 @@ CHANGES IN R 3.5.0:
 
          x <- rlnorm(99)
          isTRUE(median(x) == quantile(x)["50%"])
-      
+
       New function isFALSE() defined analogously to isTRUE().
 
     • The default symbol table size has been increased from 4119 to
@@ -2520,14 +2520,14 @@ CHANGES IN R 3.4.0:
       Rmath.h still declare
 
       use namespace std;
-      
+
       when included on Solaris.
 
     • When included from C++, the R headers now use forms such as
       std::FILE directly rather than including the line
 
       using std::FILE;
-      
+
       C++ code including these headers might be relying on the latter.
 
     • Headers R_ext/BLAS.h and R_ext/Lapack.h have many improved
@@ -5761,7 +5761,7 @@ CHANGES IN R 3.1.0:
     • In the DESCRIPTION file,
 
           License: X11
-      
+
       is no longer recognized as valid.  Use MIT or BSD_2_clause
       instead, both of which need + file LICENSE.
 
@@ -6428,7 +6428,7 @@ CHANGES IN R 3.0.2:
       possible to use
 
       R CMD javareconf JAVA_HOME=/usr/lib/jvm/java-1.7.0
-      
+
       on a Linux system and record that value rather than the
       frequently-changing full path such as
       /usr/lib/jvm/java-1.7.0-openjdk-1.7.0.25.x86_64.
@@ -7430,7 +7430,7 @@ CHANGES IN R 3.0.0:
     • Packages can specify in their DESCRIPTION file a line like
 
            Biarch: yes
-      
+
       to be installed on Windows with --force-biarch.
 
     • Package vignettes can now be processed by other engines besides
@@ -7591,7 +7591,7 @@ CHANGES IN R 3.0.0:
     • In a package's DESCRIPTION file,
 
           License: X11
-      
+
       is deprecated, since it includes ‘Copyright (C) 1996 X
       Consortium’ which cannot be appropriate for a current R package.
       Use ‘MIT’ or ‘BSD_2_clause’ instead.

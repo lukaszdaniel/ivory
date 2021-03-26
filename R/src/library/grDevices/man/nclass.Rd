@@ -62,7 +62,7 @@ nclass.FD(x)
   \emph{Journal of the American Statistical Association}, \bold{21},
   65--66.
   \doi{10.1080/01621459.1926.10502161}.
-  
+
 }
 \seealso{
   \code{\link{hist}} and \code{\link[MASS]{truehist}} (package

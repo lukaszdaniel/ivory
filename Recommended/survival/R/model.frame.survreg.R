@@ -34,7 +34,7 @@ model.matrix.survreg <- function(object, data,  ...) {
             tempc <- untangle.specials(Terms, 'cluster', 1:10)
             dropx <- tempc$terms
         }
-        
+
         if (length(strats)) {
             temp <- untangle.specials(Terms, 'strata', 1)
             dropx <- c(dropx, temp$terms)

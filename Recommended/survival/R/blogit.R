@@ -39,4 +39,4 @@ blog <- function(edge= .05) {
     new$name <- "blog"
     new
 }
-   
+

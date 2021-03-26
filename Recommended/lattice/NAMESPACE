@@ -68,7 +68,7 @@ export(
        panel.splom,       diag.panel.splom,
        panel.parallel,
        panel.tmd.default, panel.tmd.qqmath,
-       
+
        panel.error,
 
        ## Components for use in custom panel functions:
@@ -78,7 +78,7 @@ export(
        panel.superpose,
        panel.superpose.2,
        panel.superpose.plain,
-       
+
        ## data-driven (usually summary of some sort)
 
        panel.smoothScatter,
@@ -192,11 +192,11 @@ export(
        standard.theme,
        col.whitebg,
        simpleTheme,
-       
+
 
 
        ## interaction etc
-       
+
        panel.identify,
        panel.identify.qqmath,
        panel.identify.cloud,

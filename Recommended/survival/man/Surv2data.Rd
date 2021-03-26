@@ -24,7 +24,7 @@ Surv2data(formula, data, subset, id)
   \item{S2.y}{the constructed response variable}
   \item{S2.state}{the current state for each of the rows}
 }
-  
+
 \details{
 For timeline style data, each row is uniquely identified by an
 (identifier, time) pair.  The time could be a date, time from entry to a

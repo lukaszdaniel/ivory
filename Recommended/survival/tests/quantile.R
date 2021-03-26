@@ -17,7 +17,7 @@ test1 <- data.frame(time=  c(9, 3,1,1,6,6,8, 10),
 #   and exact intersections with the "flats" of the curve.
 #   
 qq <- c(13/14, 6/7, 2/3, .5, 9/35, .1)
- 
+
 # Nothing on the right hand side, simple survival (no strata)
 fit1 <- survfit(Surv(time, status) ~ 1, test1, conf.type='none')
 aeq(quantile(fit1, 1-qq), c(1, 3.5, 6, 9, 9.5, NA))  #without conf.int

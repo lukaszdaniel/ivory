@@ -310,7 +310,7 @@ print.smooth.spline <- function(x, digits = getOption("digits"), ...)
 			 format(x$lambda, digits=digits), ip["iter"]), sep = "")
       else
       cat("\n", gettextf("Smoothing Parameter  spar=%s lambda=%s", format(x$spar, digits=digits), format(x$lambda, digits=digits), domain = "R-stats"), sep = "")
-     
+
     cat("\n")
     cat(gettextf("Equivalent Degrees of Freedom (Df): %s", format(x$df,digits=digits), domain = "R-stats"))
     cat("\n")

@@ -17,7 +17,7 @@
   non-generic function.
 
   Standard calls will be of the form:
-  
+
   \code{setGeneric(name)}
 
   where \code{name} specifies an existing function, possibly in another
@@ -107,7 +107,7 @@ setGeneric(name, def= , group=list(), valueClass=character(),
   \item{package}{ The name of the package with which this function is
     associated.  Should be determined automatically from the
     non-generic version.
-     
+
   }
   \item{where}{ Where to store the resulting objects as side effects.
       The default, to store in the package's namespace, is the only

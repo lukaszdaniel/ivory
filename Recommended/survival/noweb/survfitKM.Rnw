@@ -19,7 +19,7 @@ survfitKM <- function(x, y, weights=rep(1.0,length(x)),
                       conf.lower=c('usual', 'peto', 'modified'),
                       start.time, id, cluster, robust, influence=FALSE,
                       type) {
-    
+
     if (!missing(type)) {
         if (!is.character(type)) stop("type argument must be character")
         # older style argument is allowed
@@ -32,7 +32,7 @@ survfitKM <- function(x, y, weights=rep(1.0,length(x)),
         if (!(stype %in% 1:2)) stop("stype must be 1 or 2")
         type <- as.integer(2*stype + ctype  -2)
     }
- 
+
     conf.type <- match.arg(conf.type)
     conf.lower<- match.arg(conf.lower)
     if (is.logical(conf.int)) {
@@ -41,7 +41,7 @@ survfitKM <- function(x, y, weights=rep(1.0,length(x)),
         if (!conf.int) conf.type <- "none"
         conf.int <- .95
     }
-      
+
     if (!is.Surv(y)) gettextf("'%s' argument is not an object of class %s", "y", dQuote("Surv"))
     if (attr(y, 'type') != 'right' && attr(y, 'type') != 'counting')
 	    stop("Can only handle right censored or counting data")
@@ -113,7 +113,7 @@ survfitKM <- function(x, y, weights=rep(1.0,length(x)),
         }   
         else stop("id or cluster option required")
     } else ncluster <- 0
- 
+
     if (is.logical(influence)) {
         # TRUE/FALSE is treated as all or nothing
         if (!influence) influence <- 0L
@@ -127,7 +127,7 @@ survfitKM <- function(x, y, weights=rep(1.0,length(x)),
         warning("robust=FALSE implies influence=FALSE")
         influence <- 0L
     }       
-  
+
     if (!se.fit) {
         # if the user asked for no standard error, skip any robust computation
         ncluster <- 0L
@@ -256,7 +256,7 @@ if (length(xlev) ==1) {# only one group
             sort2 <- order(ytemp[,2])
             sort1 <- order(ytemp[,1])
         }
- 
+
         # Cluster is a nuisance: every curve might have a different set
         #  We need to relabel them from 1 to "number of unique clusters in this
         #  curve for the C routine
@@ -269,7 +269,7 @@ if (length(xlev) ==1) {# only one group
                 clusterid[[i]] <-c.unique
             }
         }
-        
+
         if (ncluster > 0) 
             cfit[[i]] <- .Call(Csurvfitkm, ytemp, weights[keep], sort1 -1L, 
                            sort2 -1L, type,
@@ -309,7 +309,7 @@ if (length(n.used) == 1) {
                   strata=strata)
       if (ny==3) rval$n.enter <- unlist(lapply(cfit, function(x) x$n[,8]))
 }
-    
+
 if (ny ==3) {
         rval$n.enter <- cfit$n[,8]
         rval$type <- "counting"
@@ -338,7 +338,7 @@ if (se.fit) {
                       'usual' = rval$std.err,
                       'peto' = sqrt((1-rval$surv)/ rval$n.risk),
                       'modified' = rval$std.err * sqrt(n.lag/rval$n.risk))
-        
+
     if (conf.type != "none") {
         ci <- survfit_confint(rval$surv, rval$std.err, logse=rval$logse,
                               conf.type, conf.int, std.low)
@@ -395,10 +395,10 @@ if (influence > 0) {
                 row.names(temp[[i]]) <- clname[clusterid[[i]]]
             }
         }
-        
+
         if (influence==2 || influence ==3)
             rval$influence.chaz <- temp
-      
+
         if (influence==1 || influence==3) {
             # if an obs moves the cumulative hazard up, then it moves S down
             if (length(xlev) ==1) 
@@ -429,7 +429,7 @@ works with.
 SEXP survfitkm(SEXP y2, SEXP weight2,  SEXP sort12, SEXP sort22, 
                SEXP type2, SEXP id2, SEXP nid2,   SEXP position2,
                SEXP influence2) {
-              
+
     int i, i1, i2, j, k, person1, person2;
     int nused, nid, type, influence;
     int ny, ntime;
@@ -445,7 +445,7 @@ SEXP survfitkm(SEXP y2, SEXP weight2,  SEXP sort12, SEXP sort22,
     int n1, n2, n3, n4;
     int *position=0, hasid;
     double wt1, wt2, wt3, wt4;
-		      
+
     /* output variables */
     double  *n[10],  *dtime,
 	    *kvec, *nvec, *std[2], *imat1=0, *imat2=0; /* =0 to silence -Wall*/
@@ -464,7 +464,7 @@ SEXP survfitkm(SEXP y2, SEXP weight2,  SEXP sort12, SEXP sort22,
     wt = REAL(weight2);
     sort2 = INTEGER(sort22);
     nused = LENGTH(sort22);
-                   
+
     type = asInteger(type2);
     nid = asInteger(nid2);
     if (LENGTH(position2) > 0) {
@@ -523,7 +523,7 @@ for.
         number added to the risk set (when ny=3)
     */
     PROTECT(rlist = mkNamed(VECSXP, outnames));
-    
+
     dtime  = REAL(SET_VECTOR_ELT(rlist, 0, allocVector(REALSXP, ntime)));
     if (ny==2) j=7;  else j=9;
     n[0]  = REAL(SET_VECTOR_ELT(rlist, 1, allocMatrix(REALSXP, ntime, j)));
@@ -533,7 +533,7 @@ for.
     nvec  = kvec + ntime;  /* Nelson-Aalen estimate */
     std[0] = REAL(SET_VECTOR_ELT(rlist, 3, allocMatrix(REALSXP, ntime,2)));
     std[1] = std[0] + ntime;
-  
+
     if (nid >0 ) { /* robust variance */
 	gcount = (int *) R_alloc(nid, sizeof(int));
 	if (type <3) {  /* working vectors for the influence */
@@ -573,7 +573,7 @@ for.
 
     <<survfitkm-pass2>>
     <<survfitkm-pass3>>
-    
+
     UNPROTECT(1);
     return(rlist);
 }
@@ -609,7 +609,7 @@ for (k=ntime-1; k>=0; k--) {
 	    wt3 += wt[i2];
         }
     }
-    
+
     if (ny==3) { /* remove any with start time >=dtime*/
 	n4 =0; wt4 =0;
         for (; person1 >=0; person1--) {
@@ -855,7 +855,7 @@ if (ny==3) {
         gwt[i2] += wt[i];
     }
 }
-    
+
 if (type==1) {
     for (i=0; i< ntime; i++) {
         if (ny==3) {
@@ -868,7 +868,7 @@ if (type==1) {
                 gwt[id[i1]] += wt[i1];
             }
         }
- 
+
         if (n[1][i] > 0 && n[4][i]>0) { /* need to update the sums */
             haz = n[4][i]/n[3][i];
             for (k=0; k< nid; k++) {
@@ -888,7 +888,7 @@ if (type==1) {
             }
             km *= (1-haz);
             nelson += haz;
-           
+
             v1=0; v2=0;
             for (k=0; k<nid; k++) {
                 v1 += inf1[k]*inf1[k];
@@ -903,7 +903,7 @@ if (type==1) {
                 else gwt[id[i2]] -= wt[i2];
             }
         }
- 
+
         kvec[i] = km;
         nvec[i] = nelson;
         std[0][i] = sqrt(v1);
@@ -925,7 +925,7 @@ else if (type==2) {  /* KM survival, Fleming-Harrington hazard */
                 gwt[id[i1]] += wt[i1];
             }
         }
- 
+
         if (n[1][i] > 0 && n[4][i] >0) { /* need to update the sums */
             dtemp =0;  /* the working denominator */
             dtemp2=0;  /* sum of squares */
@@ -964,7 +964,7 @@ else if (type==2) {  /* KM survival, Fleming-Harrington hazard */
                 else gwt[id[i2]] -= wt[i2];
             }
             km *= (1-haz);
-            
+
             v1=0; v2=0;
             for (k=0; k<nid; k++) {
                 v1 += inf1[k]*inf1[k];
@@ -979,7 +979,7 @@ else if (type==2) {  /* KM survival, Fleming-Harrington hazard */
                 else gwt[id[i2]] -= wt[i2];
             }
         }
- 
+
         kvec[i] = km;
         nvec[i] = nelson;
         std[0][i] = sqrt(v1);
@@ -1003,7 +1003,7 @@ else if (type==3) {  /* exp() survival, NA hazard */
                 gwt[id[i1]] += wt[i1];
             }
         }
-         
+
         if (n[1][i] > 0 && n[4][i]>0) { /* need to update the sums */
             haz = n[4][i]/n[3][i];
             for (k=0; k< nid; k++) {
@@ -1021,7 +1021,7 @@ else if (type==3) {  /* exp() survival, NA hazard */
                 else gwt[id[i2]] -= wt[i2];
             }
             nelson += haz;
-           
+
             v2=0;
             for (k=0; k<nid; k++) {
                 v2 += inf2[k]*inf2[k];
@@ -1035,12 +1035,12 @@ else if (type==3) {  /* exp() survival, NA hazard */
                 else gwt[id[i2]] -= wt[i2];
             }
         }
- 
+
         kvec[i] = exp(-nelson);
         nvec[i] = nelson;
         std[1][i] = sqrt(v2);
         std[0][i] = sqrt(v2);
-        
+
         if (influence>0)
             for (k=0; k<nid; k++) *imat2++ = inf2[k];
     }
@@ -1068,7 +1068,7 @@ else if (type==3) {  /* exp() survival, NA hazard */
                 dtemp2 += btemp*btemp*frac;
                 dtemp3 += btemp*btemp;    /* non-death deriv */
             } 
-            
+
             dtemp /=  n[1][i];        /* average denominator */
             if (n[4][i] != n[1][i]) { /* case weights */
                 dtemp2 *= n[4][i]/ n[1][i];
@@ -1089,7 +1089,7 @@ else if (type==3) {  /* exp() survival, NA hazard */
                 if (gcount[id[i2]] ==0) gwt[id[i2]] = 0.0;
                 else gwt[id[i2]] -= wt[i2];
             }
-    
+
             v2=0;
             for (k=0; k<nid; k++) v2 += inf2[k]*inf2[k];
         }
@@ -1102,12 +1102,12 @@ else if (type==3) {  /* exp() survival, NA hazard */
                 else gwt[id[i2]] -= wt[i2];
             }
         }
-        
+
         kvec[i] = exp(-nelson);
         nvec[i] = nelson;
         std[1][i] = sqrt(v2);
         std[0][i] = sqrt(v2);
-        
+
         if (influence>0)
             for (k=0; k<nid; k++) *imat2++ = inf2[k];
     }

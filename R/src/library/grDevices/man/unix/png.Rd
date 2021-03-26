@@ -68,7 +68,7 @@ tiff(filename = "Rplot\%03d.tiff",
     For types \code{"cairo"} and \code{"quartz"}, the \code{family}
     argument can be supplied.  See the \sQuote{Cairo fonts}
     section in the help for \code{\link{X11}}.
-    
+
     For type \code{"cairo"}, the \code{symbolfamily}
     argument can be supplied.  See \code{\link{X11.options}}.
   }
@@ -146,7 +146,7 @@ tiff(filename = "Rplot\%03d.tiff",
   Quartz-produced PNG and TIFF plots with a transparent background are
   recorded with a dark grey matte which will show up in some viewers,
   including \command{Preview} on macOS.
-  
+
   Unknown resolutions in BMP files are recorded as 72 ppi.
 }
 
@@ -203,7 +203,7 @@ tiff(filename = "Rplot\%03d.tiff",
 
 \references{
   The PNG specification, \url{https://www.w3.org/TR/PNG/}.
-  
+
   The TIFF specification,
   \url{https://www.iso.org/standard/34342.html}.
   See also \url{https://en.wikipedia.org/wiki/TIFF}.

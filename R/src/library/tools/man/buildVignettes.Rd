@@ -54,7 +54,7 @@ pkgVignettes(package, dir, subdirs = NULL, lib.loc = NULL,
 \details{
   \code{buildVignettes} is used by \command{R CMD build} and
   \command{R CMD check} to (re-)build vignette outputs from their sources. 
-    
+
   As from \R 3.4.1, both of these functions ignore files that are listed in
   the \file{.Rbuildignore} file in \code{dir}.
 }

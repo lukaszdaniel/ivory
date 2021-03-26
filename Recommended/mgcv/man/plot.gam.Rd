@@ -16,7 +16,7 @@
 }
 %- maybe also `usage' for other objects documented here.
 \arguments{ 
-  
+
 \item{x}{ a fitted \code{gam} object as produced by \code{gam()}.}
 
 \item{residuals}{If \code{TRUE} then partial residuals are added to plots of 1-D smooths. If \code{FALSE} 
@@ -32,7 +32,7 @@ estimates fixed (i.e. the estimates for the term plus the residuals).}
  covariates are plotted as points on the contour plot representing a 2-d
  smooth. The default of \code{NULL} sets \code{rug} to \code{TRUE} when the dataset size
  is <= 10000 and \code{FALSE} otherwise.} 
-  
+
 \item{se}{ when TRUE (default) upper and lower lines are added to the
   1-d plots at 2 standard errors
         above and below the estimate of the smooth being plotted while for
@@ -145,7 +145,7 @@ estimate. If \code{se} is a positive number then contour plots are at plus or mi
 by the s.e. Contour levels are chosen to try and ensure reasonable
 separation of the contours of the different plots, but this is not
 always easy to achieve. Note that these plots can not be modified to the same extent as the other plot. 
-   
+
 For 2-d smooths \code{scheme==1} produces a perspective plot, while \code{scheme==2} produces a heatmap, 
 with overlaid contours and \code{scheme==3} a greyscale heatmap (\code{contour.col} controls the
 contour colour).

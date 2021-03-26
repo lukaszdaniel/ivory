@@ -36,7 +36,7 @@ SEXP collapse(SEXP y2,  SEXP x2, SEXP istate2, SEXP id2, SEXP wt2,
 
     i1= (int *) R_alloc(2*n, sizeof(int));
     i2 = i1 + n;
-	
+
     j=0; i=0;
     while (i<n) {
 	k1 = order[i];
@@ -54,7 +54,7 @@ SEXP collapse(SEXP y2,  SEXP x2, SEXP istate2, SEXP id2, SEXP wt2,
 	i++;
 	j++;
     }
-	
+
     /* j is now the number of chains that were found */
     outmat = allocMatrix(INTSXP, j, 2);
     id = INTEGER(outmat);   /* reused id as a temp */
@@ -62,6 +62,6 @@ SEXP collapse(SEXP y2,  SEXP x2, SEXP istate2, SEXP id2, SEXP wt2,
 	id[i] = i1[i] +1;    /* +1 for R indexing */
 	id[i+j] = i2[i] +1;
     }	
-	
+
     return(outmat);
 }

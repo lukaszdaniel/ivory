@@ -8,5 +8,5 @@ array(c(32, 53, 10, 3, 11, 50, 10, 30, 10, 25, 7, 5, 3, 15, 7, 8,
       list(Hair = c("Black", "Brown", "Red", "Blond"),
            Eye = c("Brown", "Blue", "Hazel", "Green"),
            Sex = c("Male", "Female")))
-           
+
 class(HairEyeColor) <- "table"

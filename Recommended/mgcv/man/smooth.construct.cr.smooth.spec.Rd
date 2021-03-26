@@ -104,7 +104,7 @@ and Hall/CRC Press.
   par(mfrow=c(2,2))
   plot(x,y);plot(b,select=1,shade=TRUE);lines(x,f-mean(f),col=2)
   plot(b,select=2,shade=TRUE);plot(fitted(b),residuals(b))
-  
+
 
 }
 \keyword{models} \keyword{regression}%-- one or more ..

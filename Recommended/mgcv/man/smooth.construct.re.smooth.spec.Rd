@@ -50,7 +50,7 @@ subject to ridge penalties.
 If the random effect precision matrix is of the form \eqn{\sum_j \lambda_j S_j}{sum_j p_j S_j} for known matrices \eqn{S_j}{S_j} and unknown parameters \eqn{\lambda_j}{p_j}, then a list containing the \eqn{S_j}{S_j} can be supplied in the \code{xt} argument of 
 \code{\link{s}}. In this case an array \code{rank} should also be supplied in \code{xt} giving the ranks of the \eqn{S_j}{S_j} matrices. See simple example below. 
 
-  
+
 Note that smooth \code{id}s are not supported for random effect terms. Unlike most smooth terms, side 
 conditions are never applied to random effect terms in the event of nesting (since they are identifiable 
 without side conditions).

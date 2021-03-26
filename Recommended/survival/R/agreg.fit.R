@@ -56,7 +56,7 @@ agreg.fit <- function(x, y, strata, offset, init, control,
     else {
         nullmodel <- FALSE
         maxiter <- control$iter.max
-        
+
         if (is.null(init)) init <- rep(0., nvar)
         if (length(init) != nvar) stop("Wrong length for inital values")
         }
@@ -131,7 +131,7 @@ agreg.fit <- function(x, y, strata, offset, init, control,
         if (maxiter > 0) coef[which.sing] <- NA  # always leave iter=0 alone
         flag <- agfit$flag
         names(flag) <- c("rank", "rescale", "step halving", "convergence")
-        
+
         if (resid) {
             rval <- list(coefficients  = coef,
                          var    = vmat,

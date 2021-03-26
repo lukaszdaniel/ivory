@@ -27,12 +27,12 @@ tri.pen <- function(X,T) {
   oo <- .C(C_nei_penalty,as.double(X),as.integer(n),as.integer(d),D=as.double(D),
            ni=as.integer(nn$ni-1),ii=as.integer(nn$ni*0),off=as.integer(nn$off),
            as.integer(2),as.integer(0),kappa=as.double(rep(0,n)));
-  
+
   ## unpack into sparse matrices...
   ni <- oo$off[n]
   ii <- c(seq_len(n),oo$ii[seq_len(ni)]+1) ## row index
   jj <- c(seq_len(n),oo$ni[seq_len(ni)]+1) ## col index
-  
+
   ni <- length(ii)
   Kx <- sparseMatrix(i=ii,j=jj,x=oo$D[seq_len(ni)],dims=c(n,n))
   Kz <- sparseMatrix(i=ii,j=jj,x=oo$D[seq_len(ni)+ni],dims=c(n,n))
@@ -138,7 +138,7 @@ nearest <- function(k,X,gt.zero = FALSE,get.a=FALSE) {
 ## ties are broken arbitrarily.
 ## gt.zero indicates that neighbours must have distances greater
 ## than zero...
- 
+
   if (gt.zero) {
     Xu <- uniquecombs(X);ind <- attr(Xu,"index") ## Xu[ind,] == X
   } else { Xu <- X; ind <- seq_len(nrow(X))}
@@ -306,7 +306,7 @@ spasm.construct.cus <- function(object,data) {
   }
   object$nblock <- nb
   object$ind <- ind
- 
+
   ## so ind[[i]] indexes the elements operated on by the ith smoother.
   object$spl <- list()
   object$edf0 <- 2*nb;object$edf1 <- edf1
@@ -405,7 +405,7 @@ spasm.construct.default <- function(object,data) {
   }
   object$nblock <- nb
   object$ind <- ind
- 
+
   ## so ind[[i]] indexes the elements operated on by the ith smoother.
   class(object) <- "default"
   object

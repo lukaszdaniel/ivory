@@ -1692,7 +1692,7 @@ Alias:  Amiga1251
 Alias:  Ami-1251
 (Aliases are provided for historical reasons and should not be used)
                                                               [Malyshev]
-															  
+
 Name:  KOI7-switched
 MIBenum:  2105
 Source:  See <http://www.iana.org/assignments/charset-reg/KOI7-switched>

@@ -58,7 +58,7 @@
     The quantiles will be a vector if the \code{survfit} object contains
     only a single curve, otherwise it will be a matrix or array.  In
     this case the last dimension will index the quantiles.
-    
+
     If confidence limits are requested, then result will be a list with
     components
     \code{quantile}, \code{lower}, and \code{upper}, otherwise it is the

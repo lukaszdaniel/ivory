@@ -28,7 +28,7 @@ OlsonNames(tzdir = NULL)
 
 \arguments{
   \item{location}{logical: defunct: ignored, with a warning for false values.}
-  
+
   \item{tzdir}{The time-zone database to be used: the default is to try
     known locations until one is found.}
 }
@@ -52,7 +52,7 @@ OlsonNames(tzdir = NULL)
   override the OS setting or if the \sQuote{try} does not get this
   right, it should be set before the \R process is started or (probably
   early enough) in file \code{\link{.Rprofile}}).
-  
+
   %% glibc silently uses UTC but uses the invalid name as the
   %% abbreviations.  tzcode as used by R warns and uses UTC.
   If \env{TZ} is set but invalid, most platforms default to \samp{UTC},
@@ -229,7 +229,7 @@ OlsonNames(tzdir = NULL)
   (abbreviated) time-zone names which can be as low as 6 (as required by
   POSIX).  Some OSes allow the setting of time zones with names which
   exceed their limit, and that can crash the \R session.
-  
+
   \code{OlsonNames} tries to find an Olson database in known locations.
   It might not succeed (when it returns an empty vector with a warning)
   and even if it does it might not locate the database used by the

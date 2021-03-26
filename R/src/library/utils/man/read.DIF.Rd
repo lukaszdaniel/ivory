@@ -117,7 +117,7 @@ read.DIF(file, header = FALSE,
     interpretation should be transposed.  Microsoft's Excel has been
     known to produce (non-standard conforming) DIF files which would
     need \code{transpose = TRUE} to be read correctly.}
-  
+
   \item{fileEncoding}{character string: if non-empty declares the
     encoding used on a file (not a connection or clipboard) so the
     character data can be re-encoded.  See the \sQuote{Encoding} section

@@ -60,7 +60,7 @@ areas of modeling and testing.
 The subtopic of how to create honest survival curve estimates in the
 presence of confounders is less well known, and is the focus
 of this note.
-   
+
 Assume that we have an effect of interest, treatment say, 
 and a set of possible confounding variables. 
 Creation a pair of adjusted survival curves has two parts:
@@ -226,7 +226,7 @@ fdata$age2 <- cut(fdata$age, c(0,54, 59,64, 69,74,79, 89, 110),
 fdata$group <- factor(1+ 1*(fdata$flc.grp >7) + 1*(fdata$flc.grp >9),
                       levels=1:3, 
                       labels=c("FLC < 3.38", "3.38 - 4.71", "FLC > 4.71"))
-		      
+
 sfit1 <- survfit(Surv(futime, death) ~ group, fdata)
 plot(sfit1, mark.time=F, col=c(1,2,4), lty=1, lwd=2,
      xscale=365.25, xlab="Years from Sample", 
@@ -619,7 +619,7 @@ How well does this work?
 Since the goal of reweighting is to standardize the ages,
 a reasonable check is to compute and plot the reweighted 
 age distribution for each flc group.
- 
+
 \begin{figure}[tb]
   \myfig{flc4}
   \caption{The re-weighted age distribution using logistic regression

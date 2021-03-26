@@ -935,11 +935,11 @@ fileCompletions <- function(token)
     ## need to delete extra part
     if (pfilename != token)
         comps <- substring(comps, nchar(pfilename) - nchar(token) + 1L, 1000L)
-        
+
     ## In Win32, we often have backslashes in names. Also possible on 
     ## Unix, though unlikely.  Add escapes for those and for quotes.
     comps <- gsub("([\\\\'\"])", "\\\\\\1", comps)
-    
+
     comps
 }
 
@@ -1334,7 +1334,7 @@ fileCompletions <- function(token)
           "SweaveHooks", "SweaveSyntax", "topLevelEnvironment")
 
     .addFunctionInfo(par = par, options = options)
-      
+
     ## read.csv etc (... passed to read.table)
     readTable <- 
         c("file", "header", "sep", "quote", "dec", "numerals",
@@ -1343,14 +1343,14 @@ fileCompletions <- function(token)
           "strip.white", "blank.lines.skip", "comment.char",
           "allowEscapes", "flush", "stringsAsFactors", "fileEncoding",
           "encoding", "text", "skipNul")
-      
+
     .addFunctionInfo(read.csv = readTable, read.csv2 = readTable,
                      read.delim = readTable, read.delim2 = readTable)
-      
+
     ## c() because it is primitive c(...) and there is no proper
     ## c.default even though docs say it is
     ## c.default(..., recursive = FALSE, use.names = TRUE)
-    
+
     .addFunctionInfo(c = c("recursive", "use.names"))
 }
 

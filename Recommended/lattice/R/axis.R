@@ -364,7 +364,7 @@ formattedTicksAndLabels.default <-
     check.overlap <-
         if (is.logical(at) && is.logical(labels)) TRUE
         else FALSE
-        
+
     if (is.logical(at)) ## at not explicitly specified
     {
         at <-
@@ -419,7 +419,7 @@ formattedTicksAndLabels.date <-
     check.overlap <-
         if (is.logical(at) && is.logical(labels)) TRUE
         else FALSE
-        
+
     if (is.logical(at)) ## at not explicitly specified
     {
         at <- as.integer(pretty(x[is.finite(x)], ...))
@@ -518,7 +518,7 @@ prettyDate_TMP <-
     zz <- range(x, na.rm = TRUE)
     if (diff(as.numeric(zz)) == 0)# one value only
         zz <- zz + c(0,60)
-    
+
     ## specify the set of pretty timesteps
     MIN <- 60
     HOUR <- MIN * 60

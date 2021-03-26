@@ -64,7 +64,7 @@ convertColor(color, from, to, from.ref.white, to.ref.white,
   The RGB color spaces are specific to a particular class of display.
   An RGB space cannot represent all colors, and the \code{clip} option
   controls what is done to out-of-range colors.
-  
+
   For the named color spaces \code{color} must be a matrix of values in
   the \code{from} color space: in particular opaque colors.
 }

@@ -11,7 +11,7 @@ survdiff <- function(formula, data, subset, na.action, rho=0, timefix=TRUE) {
     m$formula <- Terms
     m[[1L]] <- quote(stats::model.frame)
     m <- eval(m, parent.frame())
-    
+
     y <- model.extract(m, "response")
     if (!inherits(y, "Surv")) stop(gettextf("response is not an object of class %s", dQuote("Surv")))
     if (attr(y, 'type') != 'right') stop("right censored data only")
@@ -22,7 +22,7 @@ survdiff <- function(formula, data, subset, na.action, rho=0, timefix=TRUE) {
     if (!is.logical(timefix) || length(timefix) > 1)
         stop("invalid value for timefix option")
     if (timefix) y <- aeqSurv(y) 
- 
+
     offset<- attr(Terms, "offset")
     if (!is.null(offset)) {
 	#one sample test

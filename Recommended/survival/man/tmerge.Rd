@@ -23,7 +23,7 @@ tmerge(data1, data2,  id,\dots, tstart, tstop, options)
     each subject, only used on an initial call}
    \item{tstop}{optional variable to define the valid time range for
     each subject, only used on an initial call}
-  
+
   \item{options}{a list of options.  Valid ones are idname, tstartname,
     tstopname, delay, na.rm, and tdcstart.  See the explanation below.}
 }

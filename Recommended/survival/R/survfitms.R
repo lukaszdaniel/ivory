@@ -30,7 +30,7 @@ summary.survfit <- function(object, times, censored=FALSE,
     temp <- survmean(fit0, scale=scale, rmean)  
     table <- temp$matrix  #for inclusion in the output list
     rmean.endtime <- temp$end.time
-    
+
     if (!is.null(fit$strata)) {
         nstrat <-  length(fit$strata)
     }    
@@ -105,7 +105,7 @@ summary.survfit <- function(object, times, censored=FALSE,
                 ptimes <- ptimes[ptimes <= maxtime]
             }
             ntime <- length(fit$time)
-            
+
             index1 <- findInterval(ptimes, fit$time) 
             index2 <- 1 + findInterval(ptimes, fit$time, left.open=TRUE)
             if (length(index1) ==0)
@@ -118,7 +118,7 @@ summary.survfit <- function(object, times, censored=FALSE,
                         "std.chaz")) {
                 if (!is.null(fit[[i]])) fit[[i]] <- ssub(fit[[i]], index1)
             }
-            
+
             if (is.matrix(fit$n.risk)) {
                 # Every observation in the data has to end with a censor or event.
                 #  So by definition the number at risk after the last observed time
@@ -176,7 +176,7 @@ summary.survfit <- function(object, times, censored=FALSE,
 
     # A survfit object may contain std(log S) or std(S), summary always std(S)
     if (!is.null(fit$std.err) && fit$logse) fit$std.err <- fit$std.err * fit$surv 
- 
+
     # Expand the strata
     if (!is.null(fit$strata)) 
         fit$strata <- factor(rep(seq_len(nstrat), fit$strata), seq_len(nstrat),
@@ -299,7 +299,7 @@ summary.survfitms <- function(object, times, censored=FALSE,
                 ptimes <- ptimes[ptimes <= maxtime]
             }
             ntime <- length(fit$time)
-            
+
             index1 <- findInterval(ptimes, fit$time) 
             index2 <- 1 + findInterval(ptimes, fit$time, left.open=TRUE)
             if (length(index1) ==0)
@@ -312,7 +312,7 @@ summary.survfitms <- function(object, times, censored=FALSE,
                         "std.chaz")) {
                 if (!is.null(fit[[i]])) fit[[i]] <- ssub(fit[[i]], index1)
             }
-            
+
             if (is.matrix(fit$n.risk)) {
                 # Every observation in the data has to end with a censor or event.
                 #  So by definition the number at risk after the last observed time
@@ -451,7 +451,7 @@ survmean2 <- function(x, scale=1, rmean) {
         outmat <- matrix(0., nrow=nstate*ngrp , ncol=2)
         outmat[,1] <- rep(x$n, nstate)
         outmat[seq_along(nevent), 2] <- c(nevent)
-        
+
         if (ngrp >1) 
             rowname <- c(outer(rname, x$states, paste, sep=", "))
         else rowname <- x$states
@@ -460,7 +460,7 @@ survmean2 <- function(x, scale=1, rmean) {
         outmat <- matrix(0., nrow=nstate*ndata*ngrp, ncol=2)
         outmat[,1] <- rep(x$n, nstate*ndata)
         outmat[, 2] <- rep(c(nevent), each=ndata)
-       
+
         temp <- outer(seq_len(ndata), x$states, paste, sep=", ")
         if (ngrp >1) 
             rowname <- c(outer(rname, temp, paste, sep=", "))
@@ -473,7 +473,7 @@ survmean2 <- function(x, scale=1, rmean) {
         if (is.numeric(rmean)) maxtime <- rep(rmean, ngrp)
         else if (rmean=="common") maxtime <- rep(max(x$time), ngrp)
         else maxtime <- tapply(x$time, igrp, max)
-    
+
         meantime <- matrix(0., ngrp, nstate)
         if (!is.null(x$influence)) stdtime <- meantime
         for (i in seq_len(ngrp)) {
@@ -487,7 +487,7 @@ survmean2 <- function(x, scale=1, rmean) {
             else temp <- matrix(x$pstate[igrp==i], ncol=1)
 
             tt <- x$time[igrp==i]
- 
+
             # Now cut it off at maxtime
             delta <- diff(c(tt[tt<maxtime[i]], maxtime[i]))
             if (length(delta) > nrow(temp)) delta <- delta[seq_len(nrow(temp))]
@@ -533,7 +533,7 @@ survmean2 <- function(x, scale=1, rmean) {
     ndots <- ...length()      # the simplest, but not avail in R 3.4
     # ndots <- length(list(...))# fails if any are missing, e.g. fit[,2]
     # ndots <- if (missing(drop)) nargs()-1 else nargs()-2  # a workaround
- 
+
     dd <- dim(x)
     dmatch <- match(c("strata", "data", "states"), names(dd), nomatch=0)
     if (is.null(x$states)) stop("survfitms object has no states component")
@@ -545,7 +545,7 @@ survmean2 <- function(x, scale=1, rmean) {
     if (ndots> 1 && !missing(..2)) j <- ..2 else j <- NULL
     if (ndots> 2 && !missing(..3)) k <- ..3 else k <- NULL
     if (is.null(i) & is.null(j) & is.null(k)) return(x) # only one curve
-    
+
     # Make a new object
     newx <- vector("list", length(x))
     names(newx) <- names(x)
@@ -563,12 +563,12 @@ survmean2 <- function(x, scale=1, rmean) {
         # when subscripting a mix, these don't endure
         newx$cumhaz <- newx$std.chaz <- newx$influence.chaz <- NULL
         newx$transitions <- newx$states <- newx$newdata <- NULL
-        
+
         # what strata and columns do I need?
         itemp <- matrix(seq_len(prod(dd)), nrow=dd[1])
         jj <- (col(itemp))[i]    # columns
         ii <- (row(itemp))[i]    # this is now the strata id
-        
+
         if (dtype[1]!=1 || dd[1]==1) # no strata or only 1
             irow <- rep(seq_along(x$time), length(ii))
         else {
@@ -577,7 +577,7 @@ survmean2 <- function(x, scale=1, rmean) {
         }
         inum <- x$strata[ii]        # number of rows in each ii
         indx <- cbind(irow, rep(jj,ii))      # matrix index for pstate
-        
+
         # The n.risk, n.event, .. matrices dont have a newdata dimension.
         if (all(dtype!=2) || dd["data"]==1) kk <- jj
         else {  # both data and states
@@ -591,13 +591,13 @@ survmean2 <- function(x, scale=1, rmean) {
             if (!is.null(x[[z]])) newx[[z]] <- (x[[z]])[indx2]
         for (z in c("pstate", "std.err", "upper", "lower"))
             if (!is.null(x[[z]])) newx[[z]] <- (x[[z]])[indx]
-        
+
         newx$strata <- x$strata[ii]
         names(newx$strata) <- seq(along=ii)
-        
+
         return(newx)
     }
-        
+
     # not a single subscript, i.e., the usual case
     # Backwards compatability: If x$strata=NULL, it is a semantic argument
     #  of whether there is still "1 stratum".  I have used the second
@@ -640,7 +640,7 @@ survmean2 <- function(x, scale=1, rmean) {
     # The n.censor and n.enter values do not repeat with multiple X values
     for (z in c("n.censor", "n.enter"))
         if (!is.null(x[[z]])) newx[[z]] <- (x[[z]])[irow, drop=FALSE]
-    
+
     # two cases: with newx or without newx  (pstate is always present)
     nstate <- length(x$states)
     if (dtype[2] !=2) {  # j indexes the states, there is no data dimension
@@ -655,7 +655,7 @@ survmean2 <- function(x, scale=1, rmean) {
         if (!is.null(x$sp0)) {
             if (is.matrix(x$sp0)) newx$sp0 <- x$p0[i,j] else newx$sp0 <- x$sp0[j]
         }   
-        
+
         # in the rare case of a single strata with 1 obs, don't drop dims
         if (length(irow)==1 && length(j) > 1) drop2 <- FALSE 
         else drop2 <- drop
@@ -727,7 +727,7 @@ survmean2 <- function(x, scale=1, rmean) {
             if (!is.null(x[[z]])) newx[[z]] <- (x[[z]])[irow, k, drop=drop3]
         for (z in c("pstate", "std.err", "upper", "lower"))
             if (!is.null(x[[z]])) newx[[z]] <- (x[[z]])[irow,j,k, drop=drop2]
-  
+
         if (!is.null(x$influence.pstate)) {
             if (is.list(x$influence.pstate)) {
                 if (length(i)==1) 
@@ -763,7 +763,7 @@ survmean2 <- function(x, scale=1, rmean) {
 
         if (length(j)==1 && drop) newx$newdata <- NULL
         else newx$newdata <- x$newdata[j,,drop=FALSE]  #newdata is a data frame
- 
+
     }
     newx
 }

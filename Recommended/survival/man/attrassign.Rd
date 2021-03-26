@@ -36,7 +36,7 @@ S-plus is sometimes useful.
   of the terms, the second column of X goes with term 1 of the model
   equation, the third column of X with term 2, and columns 4-6 with
   term 3''.
- 
+
   The alternate (S-Plus default) form is a list
   \preformatted{
        $(Intercept)     1
@@ -45,7 +45,7 @@ S-plus is sometimes useful.
        $factor(ph.ecog) 4 5 6
      }
    }
-   
+
 \seealso{\code{\link{terms}},\code{\link{model.matrix}}}
 
 \examples{

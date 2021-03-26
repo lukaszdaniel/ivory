@@ -125,7 +125,7 @@ simpleKey <-
                    Rows(trellis.par.get("superpose.line"), foo))
     ans
 }
-             
+
 
 
 componentName <- function(name, x, y) {
@@ -136,7 +136,7 @@ componentName <- function(name, x, y) {
 draw.key <- function(key, draw = FALSE, vp = NULL, ...)
 {
     if (!is.list(key)) stop(gettextf("'%s' must be a list", "key"))
-    
+
     max.length <- 0
 
     ## maximum of the `row-lengths' of the above
@@ -148,7 +148,7 @@ draw.key <- function(key, draw = FALSE, vp = NULL, ...)
     ## (Strangely enough, S+ accepts lines=list()
     ## if col (etc) is NOT specified outside, but not
     ## if it is)
-    
+
     process.key <-
         function(reverse.rows = FALSE, ## invert rows (e.g. for barchart, stack = FALSE)
                  between = 2,
@@ -184,7 +184,7 @@ draw.key <- function(key, draw = FALSE, vp = NULL, ...)
 
                  ## to avoid partial matching, anything starting with
                  ## lines, points, rect, text must come after ...
-                 
+
                  ...,
                  lines.title = 2)
         {
@@ -373,7 +373,7 @@ draw.key <- function(key, draw = FALSE, vp = NULL, ...)
     rows.per.block <- ceiling(max.length/column.blocks)
     if (column.blocks > max.length) warning("not enough rows for columns")
     key$between <- rep(key$between, length.out = number.of.components)
-    
+
     if (key$align)
     {
 
@@ -454,7 +454,7 @@ draw.key <- function(key, draw = FALSE, vp = NULL, ...)
         }
 
         ## Need to adjust the heights and widths 
-        
+
         ## adjusting heights
         heights.insertlist.position <- 0
         heights.insertlist.unit <- unit(1, "null")
@@ -544,7 +544,7 @@ draw.key <- function(key, draw = FALSE, vp = NULL, ...)
                                    name = trellis.grobname("title",
                                                            type="key")),
                           row = 1, col = NULL)
-        
+
         for (i in seq_len(number.of.components))
         {
             cur <- components[[i]]
@@ -562,7 +562,7 @@ draw.key <- function(key, draw = FALSE, vp = NULL, ...)
                     key.gf <-
                         placeGrob(key.gf, 
                                   textGrob(x = cur$pars$adj[j],
-                                           
+
                                            hjust = cur$pars$adj[j],
 
 ##                                            just = c(
@@ -606,7 +606,7 @@ draw.key <- function(key, draw = FALSE, vp = NULL, ...)
                         key.gf <-
                             placeGrob(key.gf,
                                       linesGrob(x = c(0,1) * cur$pars$size[j] / max(cur$pars$size),
-                                                
+
                                                 ## ^^ FIXME: this
                                                 ## should be centered
                                                 ## as well, but since
@@ -745,7 +745,7 @@ draw.key <- function(key, draw = FALSE, vp = NULL, ...)
 draw.colorkey <- function(key, draw = FALSE, vp = NULL)
 {
     if (!is.list(key)) stop(gettextf("'%s' must be a list", "key"))
-    
+
     process.key <-
         function(col = regions$col,
                  alpha = regions$alpha,
@@ -788,7 +788,7 @@ draw.colorkey <- function(key, draw = FALSE, vp = NULL)
 
     ## made FALSE later if labels explicitly specified
     check.overlap <- TRUE
-    
+
 
     ## Note: there are two 'at'-s here, one is key$at, which specifies
     ## the breakpoints of the rectangles, and the other is key$lab$at
@@ -849,7 +849,7 @@ draw.colorkey <- function(key, draw = FALSE, vp = NULL)
             key[["lab"]][["labels"]] <- NULL
         }
     }
-    
+
     if (is.null(key$lab))
     {
         at <- lpretty(atrange, key$tick.number)
@@ -877,7 +877,7 @@ draw.colorkey <- function(key, draw = FALSE, vp = NULL)
         if (!is.null(key$lab$fontfamily)) fontfamily <- key$lab$fontfamily
         if (!is.null(key$lab$lineheight)) lineheight <- key$lab$lineheight
         if (!is.null(key$lab$rot)) rot <- key$lab$rot
-        
+
     }
     else stop("malformed colorkey")
 
@@ -937,7 +937,7 @@ draw.colorkey <- function(key, draw = FALSE, vp = NULL)
         widths.x <- c(0.6 * key$width, do.labels * (0.3 + key$tck * 0.3), do.labels * 1)
         widths.units <- c("lines", "lines", "grobwidth")
         widths.data <- list(NULL, NULL, labelsGrob)
-        
+
         key.layout <-
             grid.layout(nrow = 5, ncol = 3,
                         heights = unit(heights.x, heights.units),
@@ -1078,7 +1078,7 @@ draw.colorkey <- function(key, draw = FALSE, vp = NULL)
         widths.x <- c(do.labels * 1, do.labels * (0.3 + key$tck * 0.3), 0.6 * key$width)
         widths.units <- c("grobwidth", "lines", "lines")
         widths.data <- list(labelsGrob, NULL, NULL)
-        
+
         key.layout <-
             grid.layout(nrow = 3, ncol = 3,
                         heights = unit(heights.x, heights.units),
@@ -1174,13 +1174,13 @@ draw.colorkey <- function(key, draw = FALSE, vp = NULL)
         heights.x <- c(do.labels * 1, do.labels * (0.3 + key$tck * 0.3), 0.6 * key$width)
         heights.units <- c("grobheight", "lines", "lines")
         heights.data <- list(labelsGrob, NULL, NULL)
-        
+
         key.layout <-
             grid.layout(nrow = 3, ncol = 3,
                         heights = unit(heights.x, heights.units, data = heights.data),
                         widths = unit(widths.x, widths.units),
                         respect = TRUE)
-        
+
         key.gf <- frameGrob(layout = key.layout, vp = vp,
                             name = trellis.grobname("frame",
                               type="colorkey"))
@@ -1270,13 +1270,13 @@ draw.colorkey <- function(key, draw = FALSE, vp = NULL)
         heights.x <- c(0.6 * key$width, do.labels * (0.3 + key$tck * 0.3), do.labels * 1)
         heights.units <- c("lines", "lines", "grobheight")
         heights.data <- list(NULL, NULL, labelsGrob)
-        
+
         key.layout <-
             grid.layout(nrow = 3, ncol = 3,
                         heights = unit(heights.x, heights.units, data = heights.data),
                         widths = unit(widths.x, widths.units),
                         respect = TRUE)
-        
+
         key.gf <- frameGrob(layout = key.layout, vp = vp,
                             name = trellis.grobname("frame",
                               type="colorkey"))

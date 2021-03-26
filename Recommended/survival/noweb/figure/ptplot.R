@@ -10,7 +10,7 @@ ptplot <- function(x, depth=0, ...) {
             for (i in 2:length(ypos)) 
                 ypos[[i]] <- ypos[[i]] + offset[i]
             }
-            
+
         mypos = mean(unlist(lapply(ypos, function(x) x[1])))
         rlist <- list(pos= c(mypos, unlist(ypos)),
              depth=c(depth, unlist(lapply(temp, function(x) x$depth))),
@@ -52,7 +52,7 @@ ptplot <- function(x, depth=0, ...) {
         pdepth <- -1 * rlist$depth  # plot larger depths lower on the graph
         par(usr=c(range(rlist$pos), range(pdepth))+ c(-.8,.8,-.5, .5))
         text(rlist$pos, pdepth, rlist$string, ...)
-        
+
         j <- 0
         for (i in 1:length(rlist$pos)) {
             k <- rlist$connect.n[i]

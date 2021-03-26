@@ -152,7 +152,7 @@ new.packages(lib.loc = NULL, repos = getOption("repos"),
 
   The options listed for \code{install.packages} under
   \code{\link{options}}.
-  
+
   See \code{\link{download.file}} for how to handle proxies and
   other options to monitor file transfers.
 

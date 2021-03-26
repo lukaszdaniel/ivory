@@ -82,7 +82,7 @@ par(mfrow=c(2,2))
 b <- gam(y~s(x,bs="ad",k=40,m=5)) ## adaptive
 plot(b,shade=TRUE,main=round(cor(fitted(b),mu),digits=4))
 lines(x,mu-mean(mu),col=2)
- 
+
 b <- gam(y~s(x,k=40))             ## non-adaptive
 plot(b,shade=TRUE,main=round(cor(fitted(b),mu),digits=4))
 lines(x,mu-mean(mu),col=2)

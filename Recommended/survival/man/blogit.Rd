@@ -29,7 +29,7 @@ blog(edge=.05)
   But this will fail.
   The reason is that the \code{family} object has a component
   \code{linkfun} that does not accept values outside of (0,1).
-  
+
   This function is only used to create initial values for the iteration
   step, however. Mapping the offending input argument into the range
   of (egde, 1-edge) before computing the link results in starting

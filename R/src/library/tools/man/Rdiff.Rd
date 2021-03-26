@@ -26,7 +26,7 @@ Rdiff(from, to, useDiff = FALSE, forEx = FALSE,
     differences found?}
 }
 \details{
-  
+
   The \R startup banner and any timing information from \command{R CMD
     BATCH} are removed from both files, together with lines about
   loading packages.  UTF-8 fancy quotes (see \code{\link{sQuote}}) and

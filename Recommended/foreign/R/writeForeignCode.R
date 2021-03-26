@@ -68,7 +68,7 @@ writeForeignSPSS <- function(df, datafile, codefile, varnames = NULL, maxchars =
         star <- ifelse(c(FALSE, diff(chv | fav) == 1)[chv | fav], " *", " ")
         dl.varnames[chv | fav] <- paste(star,  dl.varnames[chv | fav])
     }
-  
+
     cat("SET DECIMAL=DOT.\n\n", file = codefile) # required if SPSS runs in a locale with DECIMAL=comma
     cat("DATA LIST FILE=", adQuote(datafile), " free (\",\")\n",
         file = codefile, append = TRUE)
@@ -97,13 +97,13 @@ writeForeignSPSS <- function(df, datafile, codefile, varnames = NULL, maxchars =
       cat("VARIABLE LEVEL", 
         paste(strwrap(paste(varnames[ord], collapse = ", "), width=70), "\n"), 
         "(ordinal).\n", file = codefile, append = TRUE)
-    
+
     num <- vapply(df, is.numeric, NA)
     if(any(num)) 
       cat("VARIABLE LEVEL", 
         paste(strwrap(paste(varnames[num], collapse = ", "), width=70), "\n"), 
         "(scale).\n", file = codefile, append = TRUE)
-    
+
     cat("\nEXECUTE.\n", file = codefile, append = TRUE)
 }
 

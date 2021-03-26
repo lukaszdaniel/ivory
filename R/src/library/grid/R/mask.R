@@ -46,7 +46,7 @@ resolvedMask.GridResolvedMask <- function(mask, ref) {
 unresolveMask <- function(mask) {
     UseMethod("unresolveMask")
 }
-    
+
 ## Unresolved masks just pass through
 unresolveMask.GridMask <- function(mask) {
     mask

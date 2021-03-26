@@ -114,7 +114,7 @@ assignments has several components:
   `bcEval` call and restored at the end. This means that top level
   complex assignments in byte compiled code need no further
   protection.
-	
+
 - The protection pointer does need to be raised around non-top-level
   complex assignments. This is done by `INCLNKSTK` and `DECLNKSTK`
   instructions emitted by the compiler for non-top-level complex

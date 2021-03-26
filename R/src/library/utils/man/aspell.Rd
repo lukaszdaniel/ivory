@@ -57,7 +57,7 @@ aspell(files, filter, control = list(), encoding = "unknown",
   \code{\link{ngettext}} (the unnamed string constants for the first
   five, and \code{fmt} and \code{msg1}/\code{msg2} string constants,
   respectively, for the latter two).
-  
+
   Filter \code{"pot"} is for message string catalog \file{.pot} files.
   Both have an argument \code{ignore} allowing to give regular
   expressions for parts of message strings to be ignored for spell

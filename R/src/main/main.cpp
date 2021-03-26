@@ -1818,7 +1818,7 @@ Rboolean R_taskCallbackRoutine(SEXP expr, SEXP value, Rboolean succeeded,
 	R_visibleSym = Symbol::obtain("visible");
 	R_dataSym = Symbol::obtain("data");
     }
-    
+
     SEXP f = (SEXP) userData;
     SEXP e, val, cur, rho;
     int errorOccurred;

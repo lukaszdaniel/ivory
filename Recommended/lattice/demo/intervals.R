@@ -48,7 +48,7 @@ names(singer.ucl) <- c("median", "lower", "upper")
 singer.ucl$voice.part <-
     factor(rownames(singer.ucl),
            levels = rownames(singer.ucl))
-    
+
 singer.ucl
 
 
@@ -75,7 +75,7 @@ names(singer.ucl) <- c("median", "lower", "upper")
 singer.ucl$voice.part <-
     factor(rownames(singer.ucl),
            levels = rownames(singer.ucl))
-    
+
 singer.ucl
 
 

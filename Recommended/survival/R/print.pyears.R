@@ -57,7 +57,7 @@ summary.pyears <- function(object, header=TRUE, call=header,
         stop("conf.level must be a single numeric between 0 and 1")
     if (is.na(scale) || !is.numeric(scale) || length(scale) !=1 || scale <=0)
         stop("scale must be a value > 0")
-    
+
     vname <- attr(terms(object), "term.labels")  #variable names
 
     if (!is.null(object$data)) {
@@ -90,7 +90,7 @@ summary.pyears <- function(object, header=TRUE, call=header,
         rr <- FALSE
         ci.rr <- FALSE
     }
-        
+
     # print out the front matter
     if (call && !is.null(object$call)) {
         cat("Call: ") 
@@ -106,7 +106,7 @@ summary.pyears <- function(object, header=TRUE, call=header,
             cat(gettext(" Total time lost (off table) ", domain = "R-survival"), format(object$offtable), "\n", sep = "")
         cat("\n")
     }
-    
+
     # Add in totals if requested
     if (totals) {
         # if the pyear object was based on any time dependent cuts, then
@@ -117,7 +117,7 @@ summary.pyears <- function(object, header=TRUE, call=header,
         if (event) object$event <- pytot(object$event)
         if (expected) object$expected <- pytot(object$expected)
     }
-        
+
     dd <- dim(object$n)
     vname <- attr(terms(object), "term.labels")  #variable names
     # Put the elements to be printed onto a list
@@ -273,7 +273,7 @@ pybox <- function(plist, dd, nastring, ...) {
     real<- (!ci & !int)
     nc <- prod(dd)
     final <- matrix("", nrow=nc, ncol=length(ci))
-    
+
     if (any(int)) { # integers
         if (any(sapply(plist[int], length) != nc))
             stop("programming length error, notify package author")
@@ -287,7 +287,7 @@ pybox <- function(plist, dd, nastring, ...) {
         final[,real] <- ifelse(is.na(temp), nastring, 
                                format(temp,  ...))
     }
-    
+
     if (any(ci)) {
         if (any(sapply(plist[ci], length) != nc*2))
             stop("programming length error, notify package author")
@@ -374,7 +374,7 @@ pytot <- function(x, na=FALSE) {
             sum2 <- apply(x, index[-2], sum)    # col sums
             sum3 <- apply(x, index[-(1:2)], sum) # total sums
             }
-        
+
         # create a new matrix and then fill it in
         d2 <- dd
         d2[1:2] <- dd[1:2] +1

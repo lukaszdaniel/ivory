@@ -10,7 +10,7 @@ residuals.survreg <- function(object, type=c('response', 'deviance',
     Terms <- object$terms
     if(!inherits(Terms, "terms"))
             stop("invalid terms component of object")
-    
+
     # If the variance wasn't estimated then it has no error
     if (nrow(object$var) == length(object$coefficients)) rsigma <- FALSE
 
@@ -51,7 +51,7 @@ residuals.survreg <- function(object, type=c('response', 'deviance',
         nstrata <- 1
         sigma <- object$scale
         }
-            
+
     if (need.x) { 
        x <- object[['x']]  #don't grab xlevels component
        if (is.null(x)) 
@@ -70,7 +70,7 @@ residuals.survreg <- function(object, type=c('response', 'deviance',
     else {
         itrans <- dd$itrans
         dtrans <- dd$dtrans
-        
+
         # reprise the work done in survreg to create a transformed y
         tranfun <- dd$trans
         exactsurv <- y[,ncol(y)] ==1

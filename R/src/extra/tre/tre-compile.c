@@ -1823,7 +1823,7 @@ tre_ast_to_tnfa_iter(tre_stack_t *stack, tre_ast_node_t *node, tre_tnfa_transiti
 				 transitions, counts, offs);
 	if (errcode != REG_OK)
 	  return errcode;
-	
+
 	STACK_PUSHR(stack, voidptr, cat->right);
 	STACK_PUSHR(stack, voidptr, cat->left);
 	break;

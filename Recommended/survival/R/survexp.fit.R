@@ -23,7 +23,7 @@ survexp.fit <- function(group, x, y, times, death, ratetable) {
         inherits(x, c("Date", "POSIXt", "date", "chron"))
     cuts <- lapply(attr(ratetable, "cutpoints"), function(x)
         if (!is.null(x) & datecheck(x)) ratetableDate(x) else x)
-              
+
     if (is.null(atts$type)) {
         # old style rate table
         rfac <- atts$factor
@@ -52,7 +52,7 @@ survexp.fit <- function(group, x, y, times, death, ratetable) {
         byear <- format(bdate, "%Y")
         offset <- as.numeric(bdate - as.Date(paste0(byear, "-01-01")))
         x[,cols[2]] <- x[,cols[2]] - offset
-       
+
 	# Doctor up "cutpoints" - only needed for (very) old style rate tables
         #  for which the C code does interpolation on the fly
         if (any(rfac >1)) {

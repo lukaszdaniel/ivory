@@ -35,7 +35,7 @@ scale = 1, ...)
   \item{scale}{a scaling factor for printed rates}
   \item{\dots}{optional arguments which will be passed to the
     \code{format} function; common choices would be digits=2 or nsmall=1.}
-  
+
 }
 
 \details{
