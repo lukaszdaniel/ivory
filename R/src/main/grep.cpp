@@ -1943,8 +1943,8 @@ HIDDEN SEXP do_gsub(SEXP call, SEXP op, SEXP args, SEXP env)
     if (STRING_ELT(pat, 0) == NA_STRING) {
 	PROTECT(ans = allocVector(STRSXP, n));
 	for (i = 0; i < n; i++)  SET_STRING_ELT(ans, i, NA_STRING);
-	UNPROTECT(1);
-	return ans;
+
+	goto exit_gsub;
     }
 
     if (!useBytes) 
@@ -2325,8 +2325,10 @@ HIDDEN SEXP do_gsub(SEXP call, SEXP op, SEXP args, SEXP env)
 	pcre_free((unsigned char *) tables);
 #endif
     } else tre_regfree(&reg);
+
+  exit_gsub: 
     SHALLOW_DUPLICATE_ATTRIB(ans, text);
-    /* This copied the class, if any */
+    /* This also copied the class, if any */
     UNPROTECT(1);
     return ans;
 }

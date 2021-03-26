@@ -167,11 +167,9 @@
       \item \R{} now provides a simple native forward pipe syntax
       \code{|>}.  The simple form of the forward pipe inserts the
       left-hand side as the first argument in the right-hand side call.
-      A syntax is also provided for passing the left-hand side as an
-      argument other than the first.  The pipe implementation as a
-      syntax transformation was motivated by suggestions from Jim Hester
-      and Lionel Henry.  This feature is experimental and may change
-      prior to release.
+      The pipe implementation as a syntax transformation was motivated
+      by suggestions from Jim Hester and Lionel Henry.  This feature is
+      experimental and may change prior to release.
 
       \item \code{all.equal(f, g)} for \code{function}s now by default also
       compares their \code{environment(.)}s, notably via new
@@ -220,6 +218,14 @@
       \item The names of \code{quantile()}'s result no longer depend on the
       global \code{getOption("digits")}, but \code{quantile()} gets a new
       optional argument \code{digits = 7} instead.
+
+      \item \code{grep()}, \code{sub()}, \code{regexp} and variants work
+      considerably faster for long factors with few levels.  (Thanks to
+      Michael Chirico's \PR{18063}.)
+
+      \item Provide grouping of \code{x11()} graphics windows within
+      a window manager such as \code{Gnome} or \code{Unity}; thanks to a
+      patch by Ivan Krylov posted to R-devel.
     }
   }
 
@@ -417,9 +423,23 @@
       Meyer). This check can be activated via the new environment
       variable \env{_R_CHECK_BOGUS_RETURN_}, true for \code{--as-cran}.
 
-      \item \command{R CMD build} now omits tarballs and binaries of
-      previous builds from the top-level package directory.  (\PR{17828},
-      patch by Sebastian Meyer.)
+      \item \command{R CMD build} omits tarballs and binaries of
+      previous builds from the top-level package directory.
+      (\PR{17828}, patch by Sebastian Meyer.)
+
+      \item \command{R CMD check} now runs sanity checks on the use of
+      \samp{LazyData}, for example that a \file{data} directory is
+      present, that \samp{LazyDataCompression} is not specified without
+      \samp{LazyData} or that \samp{LazyDataCompression} is specified
+      with a default value.  For packages with large LazyData databases
+      without specifying \samp{LazyDataCompression}, there is a
+      reference to the code given in \sQuote{Writing R Extensions}
+      §1.1.6 to test the choice of compression (in all \acronym{CRAN}
+      packages tested a non-default method was optimal).
+
+      \item \command{R CMD build} removes \samp{LazyData} and
+      \samp{LazyDataCompression} fields from the \file{DESCRIPTION} file
+      of packages without a \file{data} directory.
     }
   }
 
@@ -613,11 +633,19 @@
       such as \samp{en_US} (which is UTF-8) had been broken by a macOS
       change: fortunately these are now rarely used with
       \samp{en_US.UTF-8} being preferred.
+
+      \item \code{sub()} and \code{gsub(pattern, repl, x, *)} now keep
+      attributes of \code{x} such as \code{names()} also when
+      \code{pattern} is \code{NA} (\PR{18079}).
+
+      \item Time differences (\code{"difftime"} objects) get a replacement
+      and a \code{rep()} method to keep "units" consistent.
+      (Thanks to a report and patch by Nicolas Bennett in \PR{18066}.)
     }
   }
 }
 
-\section{\Rlogo CHANGES IN R 4.0.4 patched}{
+\section{\Rlogo CHANGES IN R 4.0.5}{
   \subsection{BUG FIXES}{
     \itemize{
       \item The change to the internal table in \R 4.0.4 for
@@ -627,7 +655,7 @@
       \item For packages using \samp{LazyData}, \command{R CMD build}
       ignored the \option{--resave-data} option and the
       \samp{BuildResaveData} field of the \file{DESCRIPTION} file (in \R
-      versions 4.0.0 to 4.0.4). 
+      versions 4.0.0 to 4.0.4).
     }
   }
 }

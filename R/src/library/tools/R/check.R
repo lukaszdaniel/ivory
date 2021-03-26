@@ -2429,6 +2429,42 @@ add_dummies <- function(dir, Log)
             } else resultLog(Log, gettext("OK", domain = "R-tools"))
         }
 
+        if(!is_base_pkg) {
+            desc <- .read_description("DESCRIPTION")
+            thislazy <- parse_description_field(desc, "LazyData", default = FALSE)
+            lazyz <- desc["LazyDataCompression"]
+            lazyz0 <- !is.na(lazyz)
+            if(thislazy || lazyz0) {
+                checkingLog(Log, "LazyData")
+                if (thislazy && !dir.exists("data")) {
+                    noteLog(Log)
+                    printLog0(Log,
+                              gettext("  'LazyData' is specified without a 'data' directory\n", domain = "R-tools"))
+                    if(lazyz0)
+                        printLog0(Log,
+                                  gettext("  'LazyDataCompression' is specified without a 'data' directory\n", domain = "R-tools"))
+                } else if (!thislazy && lazyz0) {
+                    noteLog(Log)
+                    printLog0(Log,
+                              gettext("  'LazyDataCompression' is specified without 'LazyData'\n", domain = "R-tools"))
+                ## Allow "gzip" to indicate that the issue has been considered.
+                ## } else if (lazyz %in% c("gzip", "yes")) {
+                ##     noteLog(Log)
+                ##     printLog0(Log,
+                ##               "  'LazyDataCompression' has its default value so would better be omitted\n")
+                } else if (thislazy && !lazyz0 && do_install) {
+                    f <- file.path(libdir, pkgname, "data", "Rdata.rdb")
+                    if (file.exists(f) &&
+                        (fs <- file.size(f)) > 5*1024^2) {
+                        warningLog(Log)
+                        printLog0(Log,
+                                  gettextf("  LazyData DB of %.1f MB without LazyDataCompression set\n", fs/1024^2),
+                                  "  See \u{00a7}1.1.6 of 'Writing R Extensions'\n")
+                    } else resultLog(Log, gettext("OK", domain = "R-tools"))
+                } else resultLog(Log, gettext("OK", domain = "R-tools"))
+            }
+        }
+
         ## Check for ASCII and uncompressed/unoptimized saves in 'data'
         if (!is_base_pkg && R_check_compact_data && dir.exists("data")) {
             checkingLog(Log, gettext("checking data for ASCII and uncompressed saves ...", domain = "R-tools"))
@@ -2453,7 +2489,7 @@ add_dummies <- function(dir, Log)
                 printLog0(Log, .format_lines_with_indent(out), "\n")
             } else resultLog(Log, gettext("OK", domain = "R-tools"))
         }
-   }
+    }
 
     check_doc_contents <- function()
     {

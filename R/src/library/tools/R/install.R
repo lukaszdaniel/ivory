@@ -1404,6 +1404,7 @@ if(FALSE) {
                                                 "gzip" = TRUE,
                                                 "bzip2" = 2L,
                                                 "xz" = 3L,
+                                                "yes" = TRUE, ## used in a package
                                                 TRUE)  # default to gzip
 		    res <- try(data2LazyLoadDB(pkg_name, lib,
 					       compress = data_compress))

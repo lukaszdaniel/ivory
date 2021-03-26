@@ -443,6 +443,7 @@ static SEXP	xxnxtbrk(SEXP);
 static SEXP	xxfuncall(SEXP, SEXP);
 static SEXP	xxdefun(SEXP, SEXP, SEXP, YYLTYPE *);
 static SEXP	xxpipe(SEXP, SEXP);
+static SEXP	xxpipebind(SEXP, SEXP, SEXP);
 static SEXP	xxunary(SEXP, SEXP);
 static SEXP	xxbinary(SEXP, SEXP, SEXP);
 static SEXP	xxparen(SEXP, SEXP);
@@ -1094,16 +1095,16 @@ static const yytype_int8 yytranslate[] =
   /* YYRLINE[YYN] -- Source line where rule number YYN was defined.  */
 static const yytype_int16 yyrline[] =
 {
-       0,   434,   434,   435,   436,   437,   438,   441,   442,   443,
-     446,   447,   450,   451,   452,   453,   455,   456,   458,   459,
-     460,   461,   462,   464,   465,   466,   467,   468,   469,   470,
-     471,   472,   473,   474,   475,   476,   477,   478,   479,   480,
-     481,   482,   483,   484,   485,   486,   488,   489,   490,   491,
-     492,   493,   494,   495,   496,   497,   498,   499,   500,   501,
-     502,   503,   504,   505,   506,   507,   508,   509,   510,   514,
-     517,   520,   524,   525,   526,   527,   528,   529,   532,   533,
-     536,   537,   538,   539,   540,   541,   542,   543,   546,   547,
-     548,   549,   550,   554
+       0,   435,   435,   436,   437,   438,   439,   442,   443,   444,
+     447,   448,   451,   452,   453,   454,   456,   457,   459,   460,
+     461,   462,   463,   465,   466,   467,   468,   469,   470,   471,
+     472,   473,   474,   475,   476,   477,   478,   479,   480,   481,
+     482,   483,   484,   485,   486,   487,   489,   490,   491,   492,
+     493,   494,   495,   496,   497,   498,   499,   500,   501,   502,
+     503,   504,   505,   506,   507,   508,   509,   510,   511,   515,
+     518,   521,   525,   526,   527,   528,   529,   530,   533,   534,
+     537,   538,   539,   540,   541,   542,   543,   544,   547,   548,
+     549,   550,   551,   555
 };
 #endif
 
@@ -2127,7 +2128,7 @@ yyreduce:
     break;
 
   case 42: /* expr: expr PIPEBIND expr  */
-                                                { yyval = xxbinary(yyvsp[-1],yyvsp[-2],yyvsp[0]);	setId((yyloc)); }
+                                                { yyval = xxpipebind(yyvsp[-1],yyvsp[-2],yyvsp[0]);	setId((yyloc)); }
     break;
 
   case 43: /* expr: expr LEFT_ASSIGN expr  */
@@ -3217,6 +3218,20 @@ static SEXP xxpipe(SEXP lhs, SEXP rhs)
     RELEASE_SV(lhs);
     RELEASE_SV(rhs);
     return ans;
+}
+
+static SEXP xxpipebind(SEXP fn, SEXP lhs, SEXP rhs)
+{
+    static int use_pipebind = 0;
+    if (use_pipebind != 1) {
+	char *lookup = getenv("_R_USE_PIPEBIND_");
+	use_pipebind = ((lookup != NULL) && StringTrue(lookup)) ? 1 : 0;
+    }
+
+    if (use_pipebind)
+	return xxbinary(fn, lhs, rhs);
+    else
+	error(_("'=>' is disabled; set '_R_USE_PIPEBIND_' envvar to a true value to enable it"));
 }
 
 static SEXP xxparen(SEXP n1, SEXP n2)
