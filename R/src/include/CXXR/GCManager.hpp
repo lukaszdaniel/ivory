@@ -42,22 +42,63 @@
 namespace CXXR
 {
 	/** @brief Class for managing garbage collection.
-     * 
-     * This class only has static members.  When CXXR::MemoryBank indicates
-     * that it is on the point of requesting additional memory from
-     * the operating system, the class decides whether to initiate a
-     * garbage collection, and if so how many levels to collect.
-     *
-     * In the current implementation of GCManager, when cued by R
-     * as above, a garbage collection will be carried out if the
-     * number of bytes currently allocated via CXXR::MemoryBank is at least
-     * as great as a threshold value.  This threshold value varies
-     * during the run, subject to a minimum value specified in the
-     * enableGC() method.
-     */
+	 *
+	 * This class only has static members.  When CXXR::MemoryBank indicates
+	 * that it is on the point of requesting additional memory from
+	 * the operating system, the class decides whether to initiate a
+	 * garbage collection, and if so how many levels to collect.
+	 *
+	 * In the current implementation of GCManager, when cued by R
+	 * as above, a garbage collection will be carried out if the
+	 * number of bytes currently allocated via CXXR::MemoryBank is at least
+	 * as great as a threshold value.  This threshold value varies
+	 * during the run, subject to a minimum value specified in the
+	 * enableGC() method.
+	 */
 	class GCManager
 	{
 	public:
+		/** @brief Not for general use.
+		 *
+		 * All garbage collection will be inhibited while any object
+		 * of this type exists.
+		 *
+		 * @deprecated This class is provided for use in implementing
+		 * functions (such as SET_ATTRIB()) in the Rinternals.h
+		 * interface which would not give rise to any memory
+		 * allocations as implemented in CR but may do so as
+		 * implemented in rho.  It is also used within the GCNode
+		 * class to handle reentrant calls to gclite() and gc().  Its
+		 * use for other purposes is deprecated: use instead more
+		 * selective protection against garbage collection such as
+		 * that provided by class GCStackRoot<T>.
+		 *
+		 * @note GC inhibition is implemented as an object type to
+		 * facilitate reinstatement of garbage collection when an
+		 * exception is thrown.
+		 */
+		struct GCInhibitor
+		{
+			GCInhibitor()
+			{
+				++s_inhibitor_count;
+			}
+
+			~GCInhibitor()
+			{
+				--s_inhibitor_count;
+			}
+
+			/** @brief Is inhibition currently in effect?
+			 *
+			 * @return true iff garbage collection is currently inhibited.
+			 */
+			static bool active()
+			{
+				return s_inhibitor_count != 0;
+			}
+		};
+
 		/** @brief Adjust the garbage collection threshold.
 		 *
 		 *  Adjust the garbage collection threshold in the light of
@@ -297,6 +338,9 @@ namespace CXXR
 		 *          the position in the rota is advanced accordingly.
 		 */
 		static unsigned int genRota(unsigned int minlevel);
+
+		static unsigned int s_inhibitor_count; // Number of GCInhibitor
+											   // objects in existence.
 
 		static std::ostream *s_os; // Pointer to output stream for GC
 								   // reporting, or NULL.

@@ -41,6 +41,7 @@
 #include <Defn.h>
 #include <Rinterface.h>
 #include <Rinternals.h>
+#include <Localization.h>
 
 using namespace std;
 using namespace CXXR;
@@ -49,6 +50,8 @@ constexpr int LEVEL_0_FREQ = 20;
 constexpr int LEVEL_1_FREQ = 5;
 const unsigned int GCManager::s_collect_counts_max[s_num_old_generations] = {LEVEL_0_FREQ, LEVEL_1_FREQ};
 unsigned int GCManager::s_gen_gc_counts[s_num_old_generations + 1];
+
+unsigned int GCManager::s_inhibitor_count = 0;
 
 size_t GCManager::s_threshold = R_VSIZE;
 size_t GCManager::s_max_threshold = R_SIZE_T_MAX;
@@ -319,6 +322,12 @@ void GCManager::gc(size_t bytes_wanted, bool full)
     if (running_finalizers)
         return;
 
+    if (GCInhibitor::active())
+    {
+        s_gc_pending = true;
+        return;
+    }
+
     R_CHECK_THREAD;
     if (!R_GCEnabled || R_in_gc)
     {
@@ -332,7 +341,7 @@ void GCManager::gc(size_t bytes_wanted, bool full)
             R_size_t expand = bytes_wanted - s_threshold + MemoryBank::bytesAllocated();
             if (s_threshold + expand > s_max_threshold)
             {
-                Rf_errorcall(nullptr, "vector memory exhausted (limit reached?)");
+                Rf_errorcall(nullptr, _("vector memory exhausted (limit reached?)"));
             }
             s_threshold += expand;
         }

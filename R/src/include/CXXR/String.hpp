@@ -46,9 +46,12 @@ namespace R
 
 namespace CXXR
 {
-	/** @brief Base class for RObject representing a character string.
+	/** @brief RObject representing a character string.
 	 *
-	 * @note When the method size() of VectorBase is applied to a
+	 * At any one time, at most one String object with a particular
+	 * text and encoding may exist.
+	 *
+	 * @note When the method size() is applied to a
 	 * String, it returns the number of <tt>char</tt>s that the String
 	 * comprises.  If the string uses a multibyte encoding scheme,
 	 * this may be different from the number of Unicode characters
@@ -57,7 +60,7 @@ namespace CXXR
 	class String : public VectorBase
 	{
 	public:
-		/* @brief Comparison object for CXXR::String.
+		/** @brief Comparison object for CXXR::String.
 		 *
 		 * STL-compatible comparison class for comparing CXXR::String
 		 * objects.
@@ -77,8 +80,11 @@ namespace CXXR
 			}
 
 			/** @brief Comparison operation.
-			 * @param l const reference to a string.
-			 * @param r const reference to a string.
+			 *
+			 * @param l non-null pointer to a String.
+			 *
+			 * @param r non-null pointer to a String.
+			 *
 			 * @return true iff \a l < \a r in the defined ordering.
 			 */
 			bool operator()(const String *l, const String *r) const;
@@ -93,14 +99,17 @@ namespace CXXR
 		}
 
 		/** @brief Read-only character access.
+		 *
 		 * @param index Index of required character (counting from
 		 *          zero).  No bounds checking is applied.
+		 *
 		 * @return the specified character.
+		 *
 		 * @note For CXXR internal use only.
 		 */
 		char operator[](R_xlen_t index) const
 		{
-			return m_c_str[index];
+			return m_data[index];
 		}
 
 		/** @brief Access encapsulated C-style string.
@@ -110,7 +119,7 @@ namespace CXXR
 		 */
 		virtual const char *c_str() const
 		{
-			return m_c_str.c_str();
+			return m_data.c_str();
 		}
 
 		/** @brief Access encapsulated std::string.
@@ -119,7 +128,7 @@ namespace CXXR
 		 */
 		virtual std::string stdstring() const
 		{
-			return m_c_str;
+			return m_data;
 		}
 
 		/** @brief Character encoding.
@@ -228,12 +237,12 @@ namespace CXXR
 
 		virtual void *data() override
 		{
-			return const_cast<char *>(m_c_str.c_str());
+			return const_cast<char *>(m_data.c_str());
 		}
 
 		virtual const void *data() const override
 		{
-			return m_c_str.c_str();
+			return m_data.c_str();
 		}
 
 		/** @brief The name by which this type is known in R.
@@ -277,7 +286,7 @@ namespace CXXR
 		 *          class object by calling setCString().
 		 */
 		String(size_t sz, cetype_t encoding, const std::string &c_string = "", bool isAscii = false, bool isCached = false)
-			: VectorBase(CHARSXP, sz), m_c_str(c_string), m_encoding(encoding), m_ascii(isAscii), m_cached(isCached), m_hash(-1)
+			: VectorBase(CHARSXP, sz), m_data(c_string), m_encoding(encoding), m_ascii(isAscii), m_cached(isCached), m_hash(-1)
 		{
 			if (encoding)
 				checkEncoding(encoding);
@@ -297,7 +306,7 @@ namespace CXXR
 		 */
 		void setCString(const char *c_string)
 		{
-			m_c_str = std::string(c_string);
+			m_data = std::string(c_string);
 		}
 
 		/** @brief Mark the hash value as invalid.
@@ -312,7 +321,7 @@ namespace CXXR
 
 	private:
 		static GCRoot<const String> s_na;
-		std::string m_c_str;
+		std::string m_data;
 		cetype_t m_encoding;
 		bool m_ascii;
 		bool m_cached;
@@ -382,24 +391,37 @@ extern "C"
 	 */
 	int IS_LATIN1(SEXP x);
 
-	/**
-	 * @param x Pointer to a CXXR::String.
+	/** @brief Does a rho::String have UTF8 encoding?
+	 *
+	 * @param x Pointer to a rho::String (checked).
+	 *
 	 * @return true iff \a x is marked as having UTF8 encoding.
 	 */
 	int IS_UTF8(SEXP x);
 
-	/**
-	 * @param x Pointer to a CXXR::String.
+	/** @brief Does a rho::String have bytecode encoding?
+	 *
+	 * @param x Pointer to a rho::String.
+	 *
 	 * @return true iff \a x is marked as having BYTES encoding.
 	 */
 	int IS_BYTES(SEXP x);
 
-	/**
-	 * @param x Pointer to a CXXR::String.
-	 * @return true iff \a x is marked as having ASCII encoding.
+	/** @brief Is a rho::String pure ASCII?
+	 *
+	 * @param x Pointer to a rho::String.
+	 *
+	 * @return true iff \a x contains only ASCII characters.
 	 */
 	int IS_ASCII(SEXP x);
 
+	/** @brief Is the encoding of a rho::String known?
+	 *
+	 * @param x Pointer to a rho::String.
+	 *
+	 * @return a non-zero value iff \a x is marked as having either
+	 * LATIN1 encoding or UTF8 encoding.
+	 */
 	int ENC_KNOWN(SEXP x);
 
 	int IS_CACHED(SEXP x);
