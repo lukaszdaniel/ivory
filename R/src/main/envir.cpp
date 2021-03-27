@@ -2509,14 +2509,16 @@ HIDDEN SEXP do_attach(SEXP call, SEXP op, SEXP args, SEXP env)
     for (t = R_GlobalEnv; ENCLOS(t) != R_BaseEnv && pos > 2; t = ENCLOS(t))
 	pos--;
 
-    if (ENCLOS(t) == R_BaseEnv) {
-	SET_ENCLOS(t, s);
-	SET_ENCLOS(s, R_BaseEnv);
+    if (ENCLOS(t) == R_BaseEnv)
+    {
+        SET_ENCLOS(t, s);
+        SET_ENCLOS(s, R_BaseEnv);
     }
-    else {
-	x = ENCLOS(t);
-	SET_ENCLOS(t, s);
-	SET_ENCLOS(s, x);
+    else
+    {
+        x = ENCLOS(t);
+        SET_ENCLOS(t, s);
+        SET_ENCLOS(s, x);
     }
 
     if(!isSpecial) { /* Temporary: need to remove the elements identified by objects(CAR(args)) */

@@ -189,7 +189,7 @@ namespace CXXR
     {
         R_xlen_t sz = size();
 #ifdef R_MEMORY_PROFILING
-            MemoryBank::R_ReportAllocation(convert2VEC<T>(sz) * sizeof(VECREC));
+        MemoryBank::R_ReportAllocation(convert2VEC<T>(sz) * sizeof(VECREC));
 #endif
         if (sz > 1)
         {
@@ -208,7 +208,7 @@ namespace CXXR
         GCRoot<> thisroot(this);
         try
         {
-            m_data = static_cast<T *>(MemoryBank::allocate(bytes, allocator));
+            m_data = static_cast<T *>(MemoryBank::allocate(bytes, true, allocator));
         }
         catch (std::bad_alloc &e)
         {

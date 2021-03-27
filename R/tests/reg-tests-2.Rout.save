@@ -7122,8 +7122,8 @@ g(y)(x)
 > str(d)
 'data.frame':	3 observations of 3 variables:
  $ A      : integer  1 2 3
- $ Bï¿½  : Factor w/ 1 level "B": 1 1 1
- $ Cï¿½cd: numeric  4 4 4
+ $ Bº  : Factor w/ 1 level "B": 1 1 1
+ $ C«cd: numeric  4 4 4
 > ## gave an error in R <= 3.0.0
 > 
 > 

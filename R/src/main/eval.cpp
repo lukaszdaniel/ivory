@@ -675,126 +675,138 @@ HIDDEN void R_BCProtReset(R_bcstack_t *ptop)
 /* some places, e.g. deparse2buff, call this with a promise and rho = nullptr */
 SEXP Rf_eval(SEXP e, SEXP rho)
 {
-    SEXP op, tmp;
-    static int evalcount = 0;
+	SEXP op, tmp;
+	static int evalcount = 0;
 
-    R_Visible = true;
+	R_Visible = true;
 
-    /* this is needed even for self-evaluating objects or something like
+	/* this is needed even for self-evaluating objects or something like
        'while (TRUE) NULL' will not be interruptable */
-    if (++evalcount > 1000) { /* was 100 before 2.8.0 */
-	R_CheckUserInterrupt();
+	if (++evalcount > 1000)
+	{ /* was 100 before 2.8.0 */
+		R_CheckUserInterrupt();
 #ifndef IMMEDIATE_FINALIZERS
-	/* finalizers are run here since this should only be called at
+		/* finalizers are run here since this should only be called at
 	   points where running arbitrary code should be safe */
-	R_RunPendingFinalizers();
+		R_RunPendingFinalizers();
 #endif
-	evalcount = 0 ;
-    }
+		evalcount = 0;
+	}
 
-    /* handle self-evaluating objects with minimal overhead */
-    switch (TYPEOF(e)) {
-    case NILSXP:
-    case LISTSXP:
-    case LGLSXP:
-    case INTSXP:
-    case REALSXP:
-    case STRSXP:
-    case CPLXSXP:
-    case RAWSXP:
-    case S4SXP:
-    case SPECIALSXP:
-    case BUILTINSXP:
-    case ENVSXP:
-    case CLOSXP:
-    case VECSXP:
-    case EXTPTRSXP:
-    case WEAKREFSXP:
-    case EXPRSXP:
-	/* Make sure constants in expressions are NAMED before being
+	/* handle self-evaluating objects with minimal overhead */
+	switch (TYPEOF(e))
+	{
+	case NILSXP:
+	case LISTSXP:
+	case LGLSXP:
+	case INTSXP:
+	case REALSXP:
+	case STRSXP:
+	case CPLXSXP:
+	case RAWSXP:
+	case S4SXP:
+	case SPECIALSXP:
+	case BUILTINSXP:
+	case ENVSXP:
+	case CLOSXP:
+	case VECSXP:
+	case EXTPTRSXP:
+	case WEAKREFSXP:
+	case EXPRSXP:
+		/* Make sure constants in expressions are NAMED before being
 	   used as values.  Setting NAMED to NAMEDMAX makes sure weird calls
 	   to replacement functions won't modify constants in
 	   expressions.  */
-	ENSURE_NAMEDMAX(e);
-	return e;
-    default: break;
-    }
+		ENSURE_NAMEDMAX(e);
+		return e;
+	default:
+		break;
+	}
 
-    bool bcintactivesave = R_BCIntActive;
-    R_BCIntActive = false;
+	bool bcintactivesave = R_BCIntActive;
+	R_BCIntActive = false;
 
-    if (!rho)
-	error(_("'rho' argument cannot be C NULL: detected in C-level '%s' function"), "eval");
-    if (!isEnvironment(rho))
-	error(_("'rho' argument must be an environment not %s: detected in C-level '%s' function"), type2char(TYPEOF(rho)), "eval");
+	if (!rho)
+		error(_("'rho' argument cannot be C NULL: detected in C-level '%s' function"), "eval");
+	if (!isEnvironment(rho))
+		error(_("'rho' argument must be an environment not %s: detected in C-level '%s' function"), type2char(TYPEOF(rho)), "eval");
 
-    /* Save the current srcref context. */
+	/* Save the current srcref context. */
 
-    SEXP srcrefsave = R_Srcref;
+	SEXP srcrefsave = R_Srcref;
 
-    /* The use of depthsave below is necessary because of the
+	/* The use of depthsave below is necessary because of the
        possibility of non-local returns from evaluation.  Without this
        an "expression too complex error" is quite likely. */
 
-    int depthsave = R_EvalDepth++;
+	int depthsave = R_EvalDepth++;
 
-    /* We need to explicit set a NULL call here to circumvent attempts
+	/* We need to explicit set a NULL call here to circumvent attempts
        to deparse the call in the error-handler */
-    if (R_EvalDepth > R_Expressions) {
-	R_Expressions = R_Expressions_keep + 500;
-	errorcall(R_NilValue, _("evaluation is nested too deeply: infinite recursion / options(expressions=)?"));
-    }
-    R_CheckStack();
+	if (R_EvalDepth > R_Expressions)
+	{
+		R_Expressions = R_Expressions_keep + 500;
+		errorcall(R_NilValue, _("evaluation is nested too deeply: infinite recursion / options(expressions=)?"));
+	}
+	R_CheckStack();
 
-    tmp = R_NilValue;		/* -Wall */
+	tmp = R_NilValue; /* -Wall */
 #ifdef _WIN32
-    /* This is an inlined version of Rwin_fpreset (src/gnuwin/extra.cpp)
+	/* This is an inlined version of Rwin_fpreset (src/gnuwin/extra.cpp)
        and resets the precision, rounding and exception modes of a ix86
        fpu.
      */
-    __asm__ ( "fninit" );
+	__asm__("fninit");
 #endif
 
-    switch (TYPEOF(e)) {
-    case BCODESXP:
-	tmp = bcEval(e, rho, TRUE);
-	    break;
-    case SYMSXP:
-	if (e == R_DotsSymbol)
-	    error(_("'...' used in an incorrect context"));
-	if( DDVAL(e) )
-	    tmp = ddfindVar(e,rho);
-	else
-	    tmp = findVar(e, rho);
-	if (tmp == R_UnboundValue)
-	    error(_("object '%s' was not found"), EncodeChar(PRINTNAME(e)));
-	/* if ..d is missing then ddfindVar will signal */
-	else if (tmp == R_MissingArg && !DDVAL(e) ) {
-	    const char *n = CHAR(PRINTNAME(e));
-	    if(*n) error(_("'%s' argument is missing, with no default"), CHAR(PRINTNAME(e)));
-	    else error(_("'%s' argument is missing, with no default"), "expr");
-	}
-	else if (TYPEOF(tmp) == PROMSXP) {
-	    if (PRVALUE(tmp) == R_UnboundValue) {
-		/* not sure the PROTECT is needed here but keep it to
+	switch (TYPEOF(e))
+	{
+	case BCODESXP:
+		tmp = bcEval(e, rho, TRUE);
+		break;
+	case SYMSXP:
+		if (e == R_DotsSymbol)
+			error(_("'...' used in an incorrect context"));
+		if (DDVAL(e))
+			tmp = ddfindVar(e, rho);
+		else
+			tmp = findVar(e, rho);
+		if (tmp == R_UnboundValue)
+			error(_("object '%s' was not found"), EncodeChar(PRINTNAME(e)));
+		/* if ..d is missing then ddfindVar will signal */
+		else if (tmp == R_MissingArg && !DDVAL(e))
+		{
+			const char *n = CHAR(PRINTNAME(e));
+			if (*n)
+				error(_("'%s' argument is missing, with no default"), CHAR(PRINTNAME(e)));
+			else
+				error(_("'%s' argument is missing, with no default"), "expr");
+		}
+		else if (TYPEOF(tmp) == PROMSXP)
+		{
+			if (PRVALUE(tmp) == R_UnboundValue)
+			{
+				/* not sure the PROTECT is needed here but keep it to
 		   be on the safe side. */
-		PROTECT(tmp);
-		tmp = forcePromise(tmp);
-		UNPROTECT(1);
-	    }
-	    else tmp = PRVALUE(tmp);
-	    ENSURE_NAMEDMAX(tmp);
-	}
-	else ENSURE_NAMED(tmp); /* should not really be needed - LT */
-	break;
-    case PROMSXP:
-	if (PRVALUE(e) == R_UnboundValue)
-	    /* We could just unconditionally use the return value from
+				PROTECT(tmp);
+				tmp = forcePromise(tmp);
+				UNPROTECT(1);
+			}
+			else
+				tmp = PRVALUE(tmp);
+			ENSURE_NAMEDMAX(tmp);
+		}
+		else
+			ENSURE_NAMED(tmp); /* should not really be needed - LT */
+		break;
+	case PROMSXP:
+		if (PRVALUE(e) == R_UnboundValue)
+			/* We could just unconditionally use the return value from
 	       forcePromise; the test avoids the function call if the
 	       promise is already evaluated. */
-	    forcePromise(e);
-	tmp = PRVALUE(e);
-	/* This does _not_ change the value of NAMED on the value tmp,
+			forcePromise(e);
+		tmp = PRVALUE(e);
+		/* This does _not_ change the value of NAMED on the value tmp,
 	   in contrast to the handling of promises bound to symbols in
 	   the SYMSXP case above.  The reason is that one (typically
 	   the only) place promises appear in source code is as
@@ -807,98 +819,110 @@ SEXP Rf_eval(SEXP e, SEXP rho)
 	   replacement functions will get the value via the SYMSXP case
 	   from evaluating their 'value' argument so the value will
 	   end up getting duplicated if NAMED > 1.) LT */
-	break;
-    case LANGSXP:
-	if (TYPEOF(CAR(e)) == SYMSXP) {
-	    /* This will throw an error if the function is not found */
-	    SEXP ecall = e;
+		break;
+	case LANGSXP:
+		if (TYPEOF(CAR(e)) == SYMSXP)
+		{
+			/* This will throw an error if the function is not found */
+			SEXP ecall = e;
 
-	    /* This picks the correct/better error expression for
+			/* This picks the correct/better error expression for
 	       replacement calls running in the AST interpreter. */
-	    if (R_GlobalContext &&
-		    (R_GlobalContext->getCallFlag() == CTXT_CCODE))
-		ecall = R_GlobalContext->getCall();
-	    PROTECT(op = findFun3(CAR(e), rho, ecall));
-	} else
-	    PROTECT(op = eval(CAR(e), rho));
+			if (R_GlobalContext &&
+				(R_GlobalContext->getCallFlag() == CTXT_CCODE))
+				ecall = R_GlobalContext->getCall();
+			PROTECT(op = findFun3(CAR(e), rho, ecall));
+		}
+		else
+			PROTECT(op = eval(CAR(e), rho));
 
-	if(RTRACE(op) && R_current_trace_state()) {
-	    Rprintf(_("trace: "));
-	    PrintValue(e);
-	}
-	if (TYPEOF(op) == SPECIALSXP) {
-	    auto save = ProtectStack::size();
-		int flag = PRIMPRINT(op);
-	    const void *vmax = vmaxget();
-	    PROTECT(e);
-	    R_Visible = (flag != 1);
-	    tmp = PRIMFUN(op) (e, op, CDR(e), rho);
+		if (RTRACE(op) && R_current_trace_state())
+		{
+			Rprintf(_("trace: "));
+			PrintValue(e);
+		}
+		if (TYPEOF(op) == SPECIALSXP)
+		{
+			auto save = ProtectStack::size();
+			int flag = PRIMPRINT(op);
+			const void *vmax = vmaxget();
+			PROTECT(e);
+			R_Visible = (flag != 1);
+			tmp = PRIMFUN(op)(e, op, CDR(e), rho);
 #ifdef CHECK_VISIBILITY
-	    if(flag < 2 && R_Visible == flag) {
-		char *nm = PRIMNAME(op);
-		if(strcmp(nm, "for")
-		   && strcmp(nm, "repeat") && strcmp(nm, "while")
-		   && strcmp(nm, "[[<-") && strcmp(nm, "on.exit"))
-		    printf(_("vis: special %s\n", nm));
-	    }
+			if (flag < 2 && R_Visible == flag)
+			{
+				char *nm = PRIMNAME(op);
+				if (strcmp(nm, "for") && strcmp(nm, "repeat") && strcmp(nm, "while") && strcmp(nm, "[[<-") && strcmp(nm, "on.exit"))
+					printf(_("vis: special %s\n", nm));
+			}
 #endif
-	    if (flag < 2) R_Visible = (flag != 1);
-	    UNPROTECT(1);
-	    check_stack_balance(op, save);
-	    vmaxset(vmax);
-	}
-	else if (TYPEOF(op) == BUILTINSXP) {
-	    auto save = ProtectStack::size();
-		int flag = PRIMPRINT(op);
-	    const void *vmax = vmaxget();
-	    RCNTXT cntxt;
-	    PROTECT(tmp = evalList(CDR(e), rho, e, 0));
-	    if (flag < 2) R_Visible = (flag != 1);
-	    /* We used to insert a context only if profiling,
+			if (flag < 2)
+				R_Visible = (flag != 1);
+			UNPROTECT(1);
+			check_stack_balance(op, save);
+			vmaxset(vmax);
+		}
+		else if (TYPEOF(op) == BUILTINSXP)
+		{
+			auto save = ProtectStack::size();
+			int flag = PRIMPRINT(op);
+			const void *vmax = vmaxget();
+			RCNTXT cntxt;
+			PROTECT(tmp = evalList(CDR(e), rho, e, 0));
+			if (flag < 2)
+				R_Visible = (flag != 1);
+			/* We used to insert a context only if profiling,
 	       but helps for tracebacks on .C etc. */
-	    if (R_Profiling || (PPINFO(op).kind == PP_FOREIGN)) {
-		SEXP oldref = R_Srcref;
-		cntxt.start(CTXT_BUILTIN, e, R_BaseEnv, R_BaseEnv, R_NilValue, R_NilValue);
-		R_Srcref = nullptr;
-		tmp = PRIMFUN(op) (e, op, tmp, rho);
-		R_Srcref = oldref;
-		cntxt.end();
-	    } else {
-		tmp = PRIMFUN(op) (e, op, tmp, rho);
-	    }
+			if (R_Profiling || (PPINFO(op).kind == PP_FOREIGN))
+			{
+				SEXP oldref = R_Srcref;
+				cntxt.start(CTXT_BUILTIN, e, R_BaseEnv, R_BaseEnv, R_NilValue, R_NilValue);
+				R_Srcref = nullptr;
+				tmp = PRIMFUN(op)(e, op, tmp, rho);
+				R_Srcref = oldref;
+				cntxt.end();
+			}
+			else
+			{
+				tmp = PRIMFUN(op)(e, op, tmp, rho);
+			}
 #ifdef CHECK_VISIBILITY
-	    if(flag < 2 && R_Visible == flag) {
-		char *nm = PRIMNAME(op);
-		printf(_("vis: builtin %s\n"), nm);
-	    }
+			if (flag < 2 && R_Visible == flag)
+			{
+				char *nm = PRIMNAME(op);
+				printf(_("vis: builtin %s\n"), nm);
+			}
 #endif
-	    if (flag < 2) R_Visible = (flag != 1);
-	    UNPROTECT(1);
-	    check_stack_balance(op, save);
-	    vmaxset(vmax);
-	}
-	else if (TYPEOF(op) == CLOSXP) {
-	    SEXP pargs = promiseArgs(CDR(e), rho);
-	    PROTECT(pargs);
-	    tmp = applyClosure(e, op, pargs, rho, R_NilValue);
+			if (flag < 2)
+				R_Visible = (flag != 1);
+			UNPROTECT(1);
+			check_stack_balance(op, save);
+			vmaxset(vmax);
+		}
+		else if (TYPEOF(op) == CLOSXP)
+		{
+			SEXP pargs = promiseArgs(CDR(e), rho);
+			PROTECT(pargs);
+			tmp = applyClosure(e, op, pargs, rho, R_NilValue);
 #ifdef ADJUST_ENVIR_REFCNTS
-	    unpromiseArgs(pargs);
+			unpromiseArgs(pargs);
 #endif
-	    UNPROTECT(1);
+			UNPROTECT(1);
+		}
+		else
+			error(_("attempt to apply non-function"));
+		UNPROTECT(1);
+		break;
+	case DOTSXP:
+		error(_("'...' used in an incorrect context"));
+	default:
+		UNIMPLEMENTED_TYPE("eval()", e);
 	}
-	else
-	    error(_("attempt to apply non-function"));
-	UNPROTECT(1);
-	break;
-    case DOTSXP:
-	error(_("'...' used in an incorrect context"));
-    default:
-	UNIMPLEMENTED_TYPE("eval()", e);
-    }
-    R_EvalDepth = depthsave;
-    R_Srcref = srcrefsave;
-    R_BCIntActive = bcintactivesave;
-    return (tmp);
+	R_EvalDepth = depthsave;
+	R_Srcref = srcrefsave;
+	R_BCIntActive = bcintactivesave;
+	return (tmp);
 }
 
 HIDDEN

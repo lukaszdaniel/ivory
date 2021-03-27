@@ -28,14 +28,13 @@
  */
 
 #include <CXXR/MemoryBank.hpp>
+#include <CXXR/GCManager.hpp>
 
 #include <iostream>
 #include <limits>
 #include <iterator>
 
-#ifdef R_MEMORY_PROFILING
 #include <limits>
-#endif
 
 using namespace std;
 using namespace CXXR;
@@ -52,7 +51,8 @@ const size_t MemoryBank::s_new_threshold = 193;
 
 size_t MemoryBank::s_blocks_allocated = 0;
 size_t MemoryBank::s_bytes_allocated = 0;
-bool (*MemoryBank::s_cue_gc)(size_t, bool) = nullptr;
+size_t MemoryBank::s_gc_threshold = numeric_limits<size_t>::max();
+size_t (*MemoryBank::s_cue_gc)(size_t) = nullptr;
 #ifdef R_MEMORY_PROFILING
 void (*MemoryBank::s_monitor)(size_t) = 0;
 size_t MemoryBank::s_monitor_threshold = numeric_limits<size_t>::max();
@@ -111,7 +111,7 @@ void MemoryBank::adjustFreedSize(size_t original, size_t actual)
 #endif
 }
 
-void *MemoryBank::allocate(size_t bytes, R_allocator_t *allocator)
+void *MemoryBank::allocate(size_t bytes, bool allow_gc, R_allocator_t *allocator)
 {
     notifyAllocation(bytes);
     if (allocator)
@@ -119,9 +119,9 @@ void *MemoryBank::allocate(size_t bytes, R_allocator_t *allocator)
     void *p;
     if (bytes >= s_new_threshold)
     {
-        if (s_cue_gc)
+        if (s_cue_gc && allow_gc && (GCManager::FORCE_GC() || (s_bytes_allocated + bytes > s_gc_threshold)))
         {
-            s_cue_gc(bytes, false);
+            s_gc_threshold = s_cue_gc(bytes);
         }
         p = ::operator new(bytes);
     }
@@ -172,6 +172,12 @@ void MemoryBank::initialize()
     s_pools[7].initialize(12, 42);
     s_pools[8].initialize(16, 31);
     s_pools[9].initialize(24, 21);
+}
+
+void MemoryBank::setGCCuer(size_t (*cue_gc)(size_t), size_t threshold)
+{
+    s_cue_gc = cue_gc;
+    s_gc_threshold = (cue_gc ? threshold : numeric_limits<size_t>::max());
 }
 
 void MemoryBank::notifyAllocation(size_t bytes)

@@ -36,20 +36,7 @@ namespace
 
     void out_of_memory(CellHeap *);
 
-    CellHeap heap(1, 5, out_of_memory);
-
-    void out_of_memory(CellHeap * /*ignored*/)
-    {
-        cout << "Out of memory";
-        if (dptrs[1])
-        {
-            cout << ": freeing dptrs[1]";
-            heap.deallocate(dptrs[1]);
-            dptrs[1] = 0;
-        }
-        cout << endl;
-        prev_ = nullptr;
-    }
+    CellHeap heap(1, 5);
 
     void seq_check(double *block)
     {
@@ -73,12 +60,12 @@ int main()
     for (int i = 0; i < 10; ++i)
     {
         cout << "Allocating dptrs[" << i << "]\n";
-        dptrs[i] = reinterpret_cast<double *>(heap.allocate());
+        dptrs[i] = static_cast<double *>(heap.allocate());
         seq_check(dptrs[i]);
     }
     heap.check();
     cout << "Cells allocated: " << heap.cellsAllocated() << endl;
-    for (int i = 3; i < 10; i += 2)
+    for (int i = 1; i < 10; i += 2)
     {
         cout << "Deallocating dptrs[" << i << "]\n";
         heap.deallocate(dptrs[i]);
@@ -87,7 +74,7 @@ int main()
     cout << "Cells allocated: " << heap.cellsAllocated() << endl;
     prev_ = nullptr;
     for (int i = 1;
-         (dptrs[i] = reinterpret_cast<double *>(heap.easyAllocate()));
+         (dptrs[i] = static_cast<double *>(heap.easyAllocate()));
          i += 2)
     {
         cout << "Allocated dptrs[" << i << "]\n";
@@ -98,7 +85,7 @@ int main()
     for (int i = 11; i < 16; i += 2)
     {
         cout << "Allocating dptrs[" << i << "]\n";
-        dptrs[i] = reinterpret_cast<double *>(heap.allocate());
+        dptrs[i] = static_cast<double *>(heap.allocate());
         seq_check(dptrs[i]);
     }
     heap.check();

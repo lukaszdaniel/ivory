@@ -43,6 +43,11 @@ void CXXR::GCNode::initialize()
     cout << "GCNode::initialize()\n";
 }
 
+bool CXXR::GCManager::FORCE_GC()
+{
+	return false;
+}
+
 int main()
 {
     cout << "Size of various types used in R (in bytes):\n\n";

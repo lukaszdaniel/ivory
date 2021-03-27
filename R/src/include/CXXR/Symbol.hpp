@@ -91,7 +91,12 @@ namespace CXXR
     private:
         // This table is used to ensure that, for standard symbols,
         // there is at most one Symbol object with a particular name.
-        typedef std::unordered_map<const CachedString *, Symbol *> Table;
+        typedef std::unordered_map<const CachedString *, Symbol *,
+                                   std::hash<const CachedString *>,
+                                   std::equal_to<const CachedString *>,
+                                   CXXR::Allocator<std::pair<const CachedString *,
+                                                             Symbol *>>>
+            Table;
 
     public:
         /** @brief const_iterator for iterating over all standard Symbols.

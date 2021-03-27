@@ -146,7 +146,6 @@ void GCNode::gc(unsigned int num_old_gens)
         allocs.pop_back();
         cout << "Released " << pr.first << " bytes (Allocated " << MemoryBank::bytesAllocated() << ")\n";
     }
-    // cout << MemoryBank::bytesAllocated() << " bytes allocated at end\n";
 }
 
 void GCNode::initialize()
@@ -175,8 +174,8 @@ int main()
     ios_base::sync_with_stdio();
     srandom(0);
     GCManager::setMonitors(gcstart, gcend);
-    GCManager::enableGC(1000000, 1000000);
     GCManager::setReporting(&cout);
+    GCManager::enableGC(1000000, 1000000);
     //    GCManager::setMaxTrigger(8000000);
     for (int k = 0; k < 100; ++k)
         alloc(200000.0);

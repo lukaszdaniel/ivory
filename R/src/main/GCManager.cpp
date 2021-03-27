@@ -284,15 +284,10 @@ bool GCManager::gc_inhibit_release()
     return s_gc_inhibit_release;
 }
 
-bool GCManager::cue(size_t bytes_wanted, bool force)
+size_t GCManager::cue(size_t bytes_wanted)
 {
-    if (force || FORCE_GC() || /*(GCNode::numNodes() >= s_node_threshold) ||*/ (s_threshold < bytes_wanted + MemoryBank::bytesAllocated()))
-    {
-        gc(bytes_wanted, false);
-        return true;
-    }
-
-    return false;
+    gc(bytes_wanted);
+    return s_threshold;
 }
 
 void GCManager::gc_error(const char *msg)
@@ -312,7 +307,7 @@ void GCManager::enableGC(size_t initial_threshold, size_t initial_node_threshold
     gc_count = 0;
     for (unsigned int i = 0; i <= s_num_old_generations; ++i)
         s_gen_gc_counts[i] = 0;
-    MemoryBank::setGCCuer(cue);
+    MemoryBank::setGCCuer(cue, s_threshold);
 }
 
 void GCManager::gc(size_t bytes_wanted, bool full)
@@ -341,7 +336,7 @@ void GCManager::gc(size_t bytes_wanted, bool full)
             R_size_t expand = bytes_wanted - s_threshold + MemoryBank::bytesAllocated();
             if (s_threshold + expand > s_max_threshold)
             {
-                Rf_errorcall(nullptr, _("vector memory exhausted (limit reached?)"));
+                Rf_errorcall(nullptr, "vector memory exhausted (limit reached?)");
             }
             s_threshold += expand;
         }

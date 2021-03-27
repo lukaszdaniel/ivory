@@ -95,7 +95,7 @@ namespace CXXR
 		// allocate but don't initialize num elements of type T
 		pointer allocate(size_type num, const void * /*hint*/ = nullptr)
 		{
-			return static_cast<pointer>(MemoryBank::allocate(num * sizeof(T)));
+			return static_cast<pointer>(MemoryBank::allocate(num * sizeof(T), false));
 		}
 
 		// initialize elements of allocated storage p with value value
