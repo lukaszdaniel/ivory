@@ -1387,21 +1387,8 @@ static SEXP findVar1mode(SEXP symbol, SEXP rho, SEXPTYPE mode, int inherits,
 */
 static int ddVal(SEXP symbol)
 {
-    const char *buf;
-    char *endp;
-    int rval;
-
-    buf = CHAR(PRINTNAME(symbol));
-    if (streqln(buf, "..", 2) && strlen(buf) > 2)
-    {
-        buf += 2;
-        rval = (int)strtol(buf, &endp, 10);
-        if (*endp != '\0')
-            return 0;
-        else
-            return rval;
-    }
-    return 0;
+    Symbol *sym = SEXP_downcast<Symbol *>(symbol);
+    return sym->dotDotIndex();
 }
 
 inline static R_len_t length_DOTS(SEXP _v_) { return (TYPEOF(_v_) == DOTSXP ? Rf_length(_v_) : 0); }

@@ -240,7 +240,7 @@ extern "C"
    *  do_makevector().
    *  Regular Rf_allocVector() as a special case of allocVector3()
    *  with no custom allocator.
-   * 
+   *
    * @param stype The type of vector required.
    * @param length The length of the vector to be created.
    * @return Pointer to the created vector.
@@ -254,7 +254,7 @@ extern "C"
    *  ::SEXPTYPE values representing lists (as the elements must be
    *  initialized).  Initializing of other vector types is done in
    *  do_makevector().
-   * 
+   *
    * @param stype The type of vector required.
    * @param length The length of the vector to be created.
    * @param length Custom allocator to be used.
