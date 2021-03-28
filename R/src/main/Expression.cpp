@@ -65,8 +65,8 @@ namespace CXXR
         return staticTypeName();
     }
 
-    GCRoot<> R_CurrentExpr(nullptr);
-    GCRoot<> R_ReturnedValue(nullptr);
+    GCStackRoot<> R_CurrentExpr(nullptr);
+    GCStackRoot<> R_ReturnedValue(nullptr);
     bool R_Visible = false;
 } // namespace CXXR
 
@@ -84,35 +84,35 @@ SEXP Rf_lang1(SEXP s)
 
 SEXP Rf_lang2(SEXP s, SEXP t)
 {
-    GCRoot<> ss(s);
+    GCStackRoot<> ss(s);
     s = Rf_lcons(s, Rf_list1(t));
     return s;
 }
 
 SEXP Rf_lang3(SEXP s, SEXP t, SEXP u)
 {
-    GCRoot<> ss(s);
+    GCStackRoot<> ss(s);
     s = Rf_lcons(s, Rf_list2(t, u));
     return s;
 }
 
 SEXP Rf_lang4(SEXP s, SEXP t, SEXP u, SEXP v)
 {
-    GCRoot<> ss(s);
+    GCStackRoot<> ss(s);
     s = Rf_lcons(s, Rf_list3(t, u, v));
     return s;
 }
 
 SEXP Rf_lang5(SEXP s, SEXP t, SEXP u, SEXP v, SEXP w)
 {
-    GCRoot<> ss(s);
+    GCStackRoot<> ss(s);
     s = Rf_lcons(s, Rf_list4(t, u, v, w));
     return s;
 }
 
 SEXP Rf_lang6(SEXP s, SEXP t, SEXP u, SEXP v, SEXP w, SEXP x)
 {
-    GCRoot<> ss(s);
+    GCStackRoot<> ss(s);
     s = Rf_lcons(s, Rf_list5(t, u, v, w, x));
     return s;
 }

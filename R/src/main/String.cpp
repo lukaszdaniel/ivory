@@ -128,8 +128,8 @@ namespace CXXR
 #endif
     }
 
-    GCRoot<const String> String::s_na(UncachedString::obtain("NA"), true);
-    GCRoot<const CachedString> CachedString::s_blank(CachedString::obtain(""), true);
+    GCStackRoot<const String> String::s_na(UncachedString::obtain("NA"), true);
+    GCStackRoot<const CachedString> CachedString::s_blank(CachedString::obtain(""), true);
 
     // String::Comparator::operator()(const String&, const String&) is in
     // sort.cpp

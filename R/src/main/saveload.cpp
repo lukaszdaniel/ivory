@@ -1372,10 +1372,10 @@ static SEXP NewReadItem(SEXP sym_table, SEXP env_table, FILE *fp,
 	break;
     case PROMSXP:
     {
-        GCRoot<Environment> env(SEXP_downcast<Environment *>(NewReadItem(sym_table, env_table, fp, m, d)));
-        GCRoot<> val(NewReadItem(sym_table, env_table, fp, m, d));
-        GCRoot<> valgen(NewReadItem(sym_table, env_table, fp, m, d));
-        GCRoot<Promise> prom(new Promise(valgen, env), true);
+        GCStackRoot<Environment> env(SEXP_downcast<Environment *>(NewReadItem(sym_table, env_table, fp, m, d)));
+        GCStackRoot<> val(NewReadItem(sym_table, env_table, fp, m, d));
+        GCStackRoot<> valgen(NewReadItem(sym_table, env_table, fp, m, d));
+        GCStackRoot<Promise> prom(new Promise(valgen, env), true);
         prom->setValue(val);
         PROTECT(s = prom);
     }

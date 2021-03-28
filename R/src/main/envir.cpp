@@ -2316,8 +2316,8 @@ HIDDEN SEXP do_missing(SEXP call, SEXP op, SEXP args, SEXP rho)
 {
     int ddv=0;
     SEXP sym, s;
-    GCRoot<> rval;
-    GCRoot<> t;
+    GCStackRoot<> rval;
+    GCStackRoot<> t;
 
     checkArity(op, args);
     check1arg(args, call, "x");
@@ -2438,7 +2438,7 @@ HIDDEN SEXP do_attach(SEXP call, SEXP op, SEXP args, SEXP env)
 	    for (x = CAR(args); x != R_NilValue; x = CDR(x))
 		if (TAG(x) == R_NilValue)
 		    error(_("all elements of a list must be named"));
-	    GCRoot<PairList> dupcar(SEXP_downcast<PairList*>(shallow_duplicate(CAR(args))));
+	    GCStackRoot<PairList> dupcar(SEXP_downcast<PairList*>(shallow_duplicate(CAR(args))));
         PROTECT(s = new Environment(nullptr, dupcar));
 	    s->expose();
 	} else if (isEnvironment(CAR(args))) {
@@ -2767,7 +2767,7 @@ static void BuiltinValues(int all, int intern, SEXP values, int *indx)
             RObject *vl = sym->value();
             if (vl && vl->sexptype() == PROMSXP)
             {
-                GCRoot<> vlr(vl);
+                GCStackRoot<> vlr(vl);
                 vl = eval(vl, R_BaseEnv);
             }
             SET_VECTOR_ELT(values, (*indx)++, lazy_duplicate(vl));
@@ -3081,7 +3081,7 @@ HIDDEN SEXP do_builtins(SEXP call, SEXP op, SEXP args, SEXP rho)
     if (intern == NA_INTEGER)
         intern = 0;
     nelts = BuiltinSize(true, intern);
-    GCRoot<> ans(allocVector(STRSXP, nelts));
+    GCStackRoot<> ans(allocVector(STRSXP, nelts));
     nelts = 0;
     BuiltinNames(1, intern, ans, &nelts);
     sortVector(ans, true);
@@ -3139,7 +3139,7 @@ HIDDEN SEXP do_pos2env(SEXP call, SEXP op, SEXP args, SEXP rho)
     checkArity(op, args);
     check1arg(args, call, "x");
 
-    GCRoot<> pos(Rf_coerceVector(CAR(args), INTSXP));
+    GCStackRoot<> pos(Rf_coerceVector(CAR(args), INTSXP));
     npos = length(pos);
     if (npos <= 0)
         Rf_errorcall(call, _("invalid '%s' argument"), "pos");
@@ -3150,7 +3150,7 @@ HIDDEN SEXP do_pos2env(SEXP call, SEXP op, SEXP args, SEXP rho)
     }
     else
     {
-        GCRoot<> env(Rf_allocVector(VECSXP, npos));
+        GCStackRoot<> env(Rf_allocVector(VECSXP, npos));
         for (i = 0; i < npos; i++)
         {
             SET_VECTOR_ELT(env, i, pos2env(INTEGER(pos)[i], call));
@@ -3216,7 +3216,7 @@ HIDDEN SEXP do_as_environment(SEXP call, SEXP op, SEXP args, SEXP rho)
     case VECSXP: {
 	/* implement as.environment.list() {isObject(.) is false for a list} */
 	SEXP val;
-	GCRoot<> call(lang4(Symbol::obtain("list2env"), arg,
+	GCStackRoot<> call(lang4(Symbol::obtain("list2env"), arg,
 			     /* envir = */R_NilValue,
 			     /* parent = */R_EmptyEnv));
 	val = eval(call, rho);
@@ -3617,10 +3617,10 @@ SEXP R_PackageEnvName(SEXP rho)
 SEXP R_FindPackageEnv(SEXP info)
 {
     SEXP val;
-    GCRoot<> infor(info);
+    GCStackRoot<> infor(info);
     SEXP s_findPackageEnv = Symbol::obtain("findPackageEnv");
-    GCRoot<PairList> tail(CXXR_cons(info, R_NilValue));
-    GCRoot<> expr(LCONS(s_findPackageEnv, tail));
+    GCStackRoot<PairList> tail(CXXR_cons(info, R_NilValue));
+    GCStackRoot<> expr(LCONS(s_findPackageEnv, tail));
     val = eval(expr, R_GlobalEnv);
     return val;
 }
@@ -3632,7 +3632,7 @@ Rboolean R_IsNamespaceEnv(SEXP rho)
     else if (TYPEOF(rho) == ENVSXP) {
 	SEXP info = findVarInFrame3(rho, R_NamespaceSymbol, TRUE);
 	if (info != R_UnboundValue && TYPEOF(info) == ENVSXP) {
-	    GCRoot<> infor(info);
+	    GCStackRoot<> infor(info);
 	    SEXP spec = findVarInFrame3(info, Symbol::obtain("spec"), TRUE);
 	    if (spec != R_UnboundValue &&
 		TYPEOF(spec) == STRSXP && LENGTH(spec) > 0)
@@ -3679,10 +3679,10 @@ SEXP R_NamespaceEnvSpec(SEXP rho)
 SEXP R_FindNamespace(SEXP info)
 {
     SEXP val;
-    GCRoot<> infor(info);
+    GCStackRoot<> infor(info);
     SEXP s_getNamespace = Symbol::obtain("getNamespace");
-    GCRoot<PairList> tail(CXXR_cons(info, R_NilValue));
-    GCRoot<> expr(LCONS(s_getNamespace, tail));
+    GCStackRoot<PairList> tail(CXXR_cons(info, R_NilValue));
+    GCStackRoot<> expr(LCONS(s_getNamespace, tail));
     val = eval(expr, R_GlobalEnv);
     return val;
 }

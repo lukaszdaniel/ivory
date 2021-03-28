@@ -31,7 +31,7 @@
 #ifndef SYMBOL_HPP
 #define SYMBOL_HPP
 
-#include <CXXR/GCRoot.hpp>
+#include <CXXR/GCStackRoot.hpp>
 #include <CXXR/RObject.hpp>
 #include <CXXR/BuiltInFunction.hpp>
 #include <CXXR/CachedString.hpp>
@@ -380,11 +380,11 @@ namespace CXXR
         static Symbol *createUnnamedSymbol();
 
     private:
-        // static GCRoot<Symbol> s_missing_arg;
-        // static GCRoot<Symbol> s_restart_token;
-        static GCRoot<Symbol> s_unbound_value;
-        static GCRoot<Symbol> s_current_expression;
-        static GCRoot<Symbol> s_in_bc_interpreter;
+        // static GCStackRoot<Symbol> s_missing_arg;
+        // static GCStackRoot<Symbol> s_restart_token;
+        static GCStackRoot<Symbol> s_unbound_value;
+        static GCStackRoot<Symbol> s_current_expression;
+        static GCStackRoot<Symbol> s_in_bc_interpreter;
 
         static Table *getTable(); // Vector of
                                   // pointers to all Symbol objects in existence, other than

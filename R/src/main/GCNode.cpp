@@ -29,6 +29,7 @@
 #include <CXXR/RAllocStack.hpp>
 #include <CXXR/ProtectStack.hpp>
 #include <CXXR/GCManager.hpp>
+#include <CXXR/GCStackRoot.hpp>
 #include <CXXR/GCRoot.hpp>
 #include <iostream>
 
@@ -134,6 +135,7 @@ void* GCNode::operator new(size_t bytes)
     void GCNode::cleanup()
     {
         ProtectStack::cleanup();
+        GCStackRootBase::cleanup();
         GCRootBase::cleanup();
         delete s_aged_list;
         delete[] s_gencount;
@@ -157,6 +159,7 @@ void* GCNode::operator new(size_t bytes)
         s_next_gen[0] = 0;
         s_next_gen[s_num_generations - 1] = s_num_generations - 1;
         GCRootBase::initialize();
+        GCStackRootBase::initialize();
         ProtectStack::initialize();
     }
 

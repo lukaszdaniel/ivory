@@ -1568,7 +1568,7 @@ static SEXP listRemove(SEXP x, SEXP s, int ind)
 		R_xlen_t stretch = 0;
 		if (TYPEOF(s) == REALSXP)
 		{
-			GCRoot<RealVector> rv(SEXP_downcast<RealVector *>(makeSubscript(x, GetOneIndex(s, ind), stretch, nullptr)));
+			GCStackRoot<RealVector> rv(SEXP_downcast<RealVector *>(makeSubscript(x, GetOneIndex(s, ind), stretch, nullptr)));
 			int ns = rv->size();
 
 			for (int i = 0; i < ns; i++)
@@ -1580,7 +1580,7 @@ static SEXP listRemove(SEXP x, SEXP s, int ind)
 		}
 		else
 		{
-			GCRoot<IntVector> iv(SEXP_downcast<IntVector *>(makeSubscript(x, GetOneIndex(s, ind), stretch, nullptr)));
+			GCStackRoot<IntVector> iv(SEXP_downcast<IntVector *>(makeSubscript(x, GetOneIndex(s, ind), stretch, nullptr)));
 			int ns = iv->size();
 			for (int i = 0; i < ns; ++i)
 			{
@@ -1780,8 +1780,8 @@ HIDDEN SEXP do_subassign_dflt(SEXP call, SEXP op, SEXP args, SEXP rho)
 
     if (oldtype == LANGSXP) {
 	if(Rf_length(x)) {
-	    GCRoot<PairList> xlr(static_cast<PairList*>(VectorToPairList(x)));
-	    GCRoot<Expression> xr(ConsCell::convert<Expression>(xlr));
+	    GCStackRoot<PairList> xlr(static_cast<PairList*>(VectorToPairList(x)));
+	    GCStackRoot<Expression> xr(ConsCell::convert<Expression>(xlr));
 	    x = xr;
 	} else
 	    error(_("result is zero-length and so cannot be a language object"));

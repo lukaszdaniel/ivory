@@ -40,7 +40,7 @@
 
 #define R_NO_REMAP
 
-#include <CXXR/GCRoot.hpp>
+#include <CXXR/GCStackRoot.hpp>
 #include <CXXR/String.hpp>
 #include <CXXR/StringVector.hpp>
 #include <CXXR/IntVector.hpp>

@@ -23,7 +23,7 @@
 #include <config.h>
 #endif
 
-#include <CXXR/GCRoot.hpp>
+#include <CXXR/GCStackRoot.hpp>
 #include <CXXR/VectorBase.hpp>
 #include <CXXR/FixedVector.hpp>
 #include <CXXR/IntVector.hpp>

@@ -68,7 +68,7 @@ SEXP CXXR_deep_duplicate(SEXP s)
 {
 	if (!s)
 		return nullptr;
-	GCRoot<> srt(s);
+	GCStackRoot<> srt(s);
 
 #ifdef R_PROFILING
 	++duplicate_counter;

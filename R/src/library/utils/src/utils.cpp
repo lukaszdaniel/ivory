@@ -22,7 +22,7 @@
 #endif
 
 #include <cstring>
-#include <CXXR/GCRoot.hpp>
+#include <CXXR/GCStackRoot.hpp>
 #include <CXXR/RObject.hpp>
 #include <CXXR/String.hpp>
 #include <CXXR/StringVector.hpp>
@@ -72,7 +72,7 @@ namespace R
 SEXP charClass(SEXP x, SEXP scl)
 {
     R_xlen_t n;
-    GCRoot<> xx(x);
+    GCStackRoot<> xx(x);
     const int *px;
     if (isString(x)) {
 	if (XLENGTH(x) != 1)

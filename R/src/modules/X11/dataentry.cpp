@@ -38,7 +38,7 @@
 #define R_USE_SIGNALS 1
 
 #include <CXXR/String.hpp>
-#include <CXXR/GCRoot.hpp>
+#include <CXXR/GCStackRoot.hpp>
 #include <CXXR/Expression.hpp>
 #include <Localization.h>
 #include <RContext.h>

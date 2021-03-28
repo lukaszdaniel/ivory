@@ -340,7 +340,7 @@ HIDDEN SEXP R::matchArgs_NR(SEXP formals, SEXP supplied, SEXP call)
 	for(a = supplied; a != R_NilValue ; a = CDR(a)) if(!ARGUSED(a)) i++;
 
 	if (i) {
-	    GCRoot<PairList> tl(PairList::makeList(i - 1));
+	    GCStackRoot<PairList> tl(PairList::makeList(i - 1));
 	    a = new DottedArgs(nullptr, tl);
 	    a->expose();
 	    f = a;

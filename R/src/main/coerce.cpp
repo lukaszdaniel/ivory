@@ -1077,7 +1077,7 @@ static SEXP coerceVectorList(SEXP v, SEXPTYPE type)
 
 	if (type == EXPRSXP && TYPEOF(v) == VECSXP)
 	{
-		GCRoot<ListVector> lv(static_cast<ListVector *>(v));
+		GCStackRoot<ListVector> lv(static_cast<ListVector *>(v));
 		ExpressionVector *ans = new ExpressionVector(*lv);
 		ans->expose();
 		return ans;
@@ -1741,7 +1741,7 @@ HIDDEN SEXP do_ascall(SEXP call, SEXP op, SEXP args, SEXP rho)
 		if (n == 0)
 			errorcall(call, _("invalid argument of length 0"));
 		SEXP names = PROTECT(getAttrib(args, R_NamesSymbol)), ap;
-		GCRoot<PairList> tl(PairList::makeList(n - 1));
+		GCStackRoot<PairList> tl(PairList::makeList(n - 1));
 		PROTECT(ap = ans = new Expression(nullptr, tl));
 		ans->expose();
 		for (int i = 0; i < n; i++)
@@ -1760,7 +1760,7 @@ HIDDEN SEXP do_ascall(SEXP call, SEXP op, SEXP args, SEXP rho)
 		if (n == 0)
 			errorcall(call, _("invalid argument of length 0"));
 		SEXP names = PROTECT(getAttrib(args, R_NamesSymbol)), ap;
-		GCRoot<PairList> tl(PairList::makeList(n - 1));
+		GCStackRoot<PairList> tl(PairList::makeList(n - 1));
 		PROTECT(ap = ans = new Expression(nullptr, tl));
 		ans->expose();
 		for (int i = 0; i < n; i++)
@@ -1776,7 +1776,7 @@ HIDDEN SEXP do_ascall(SEXP call, SEXP op, SEXP args, SEXP rho)
     case LISTSXP:
 	{
 		ConsCell *cc = SEXP_downcast<ConsCell *>(args);
-		GCRoot<Expression> ansr(ConsCell::convert<Expression>(cc));
+		GCStackRoot<Expression> ansr(ConsCell::convert<Expression>(cc));
 		ans = ansr;
 		break;
 	}
@@ -2750,7 +2750,7 @@ HIDDEN SEXP do_docall(SEXP call, SEXP op, SEXP args, SEXP rho)
     n = length(args);
     PROTECT(names = getAttrib(args, R_NamesSymbol));
 
-    GCRoot<PairList> tl(PairList::makeList(n));
+    GCStackRoot<PairList> tl(PairList::makeList(n));
     PROTECT(c = call = new Expression(nullptr, tl));
     call->expose();
     if( isString(fun) ) {

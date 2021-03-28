@@ -32,7 +32,7 @@
 #define R_NO_REMAP
 
 #include <CXXR/BuiltInFunction.hpp>
-#include <CXXR/GCRoot.hpp>
+#include <CXXR/GCStackRoot.hpp>
 #include <CXXR/Expression.hpp>
 #include <CXXR/RealVector.hpp>
 #include <CXXR/FixedVector.hpp>

@@ -31,7 +31,7 @@
 #include <CXXR/LogicalVector.hpp>
 #include <CXXR/RealVector.hpp>
 #include <CXXR/StringVector.hpp>
-#include <CXXR/GCRoot.hpp>
+#include <CXXR/GCStackRoot.hpp>
 #include <CXXR/PairList.hpp>
 #include <Localization.h>
 #include <Defn.h>

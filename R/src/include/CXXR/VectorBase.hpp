@@ -31,7 +31,7 @@
 #ifndef VECTORBASE_HPP
 #define VECTORBASE_HPP
 
-#include <CXXR/GCRoot.hpp>
+#include <CXXR/GCStackRoot.hpp>
 #include <CXXR/RObject.hpp>
 #include <CXXR/SEXP_downcast.hpp>
 #include <Localization.h>

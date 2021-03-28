@@ -62,7 +62,7 @@ namespace CXXR
 
     void UncachedString::allocData(size_t sz)
     {
-        GCRoot<> thisroot(this);
+        GCStackRoot<> thisroot(this);
         if (sz > s_short_strlen)
             m_data = static_cast<char *>(MemoryBank::allocate(m_databytes));
         // Insert trailing null byte:

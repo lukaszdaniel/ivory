@@ -93,11 +93,11 @@ namespace CXXR
 
    /** @brief Pointer to expression currently being evaluated.
     */
-   extern GCRoot<> R_CurrentExpr;
+   extern GCStackRoot<> R_CurrentExpr;
 
    /** @brief Slot for return-ing values.
     */
-   extern GCRoot<> R_ReturnedValue;
+   extern GCStackRoot<> R_ReturnedValue;
 
    /** @brief Value visibility flag.
     */

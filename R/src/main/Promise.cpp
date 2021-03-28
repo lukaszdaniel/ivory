@@ -29,6 +29,8 @@
  */
 
 #include <CXXR/Promise.hpp>
+#include <RContext.h>
+#include <Localization.h>
 #include <Rinternals.h>
 
 using namespace CXXR;

@@ -50,6 +50,7 @@
 #include <R_ext/RS.h> /* for S4 allocation */
 #include <CXXR/GCEdge.hpp>
 #include <CXXR/GCManager.hpp>
+#include <CXXR/GCStackRoot.hpp>
 #include <CXXR/GCRoot.hpp>
 #include <CXXR/ProtectStack.hpp>
 #include <CXXR/GCNode.hpp>
@@ -341,13 +342,6 @@ HIDDEN SEXP do_maxNSize(SEXP call, SEXP op, SEXP args, SEXP rho)
         return ScalarReal(R_GetMaxNSize());
 }
 
-namespace
-{
-    /** @brief List of Persistent Objects
-     */
-    GCRoot<> R_PreciousList(nullptr);
-} // namespace
-
 /* R interface function */
 
 HIDDEN SEXP do_regFinaliz(SEXP call, SEXP op, SEXP args, SEXP rho)
@@ -383,7 +377,7 @@ namespace
 } // namespace
 
 // The MARK_THRU invocations below could be eliminated by
-// encapsulating the pointers concerned in GCRoot<> objects declared
+// encapsulating the pointers concerned in GCStackRoot<> objects declared
 // at file/global/static scope.
 
 void GCNode::gc(unsigned int num_old_gens_to_collect)
@@ -396,6 +390,7 @@ void GCNode::gc(unsigned int num_old_gens_to_collect)
 
     GCNode::Marker marker(num_old_gens_to_collect + 1);
     GCRootBase::visitRoots(&marker);
+    GCStackRootBase::visitRoots(&marker);
     ProtectStack::visitRoots(&marker);
     MARK_THRU(&marker, R_BlankScalarString); /* Builtin constants */
 
@@ -606,7 +601,7 @@ HIDDEN SEXP do_gc(SEXP call, SEXP op, SEXP args, SEXP rho)
 
     GCManager::setReporting(report_os);
     /*- now return the [used , gc trigger size] for cells and heap */
-    GCRoot<> value(allocVector(REALSXP, 14));
+    GCStackRoot<> value(allocVector(REALSXP, 14));
     REAL(value)[0] = GCNode::numNodes();
     REAL(value)[1] = MemoryBank::bytesAllocated();
     REAL(value)[4] = GCManager::nodeTriggerLevel();
@@ -710,9 +705,6 @@ HIDDEN void R::InitMemory()
 
     R_HandlerStack = R_RestartStack = R_NilValue;
 
-    /*  Unbound values which are to be preserved through GCs */
-    R_PreciousList = R_NilValue;
-
     /*  The current source line */
     R_Srcref = R_NilValue;
 }
@@ -800,8 +792,8 @@ SEXP Rf_cons(SEXP car, SEXP cdr)
 
 HIDDEN SEXP CONS_NR(SEXP car, SEXP cdr)
 {
-    GCRoot<> crr(car);
-    GCRoot<PairList> tlr(SEXP_downcast<CXXR::PairList *>(cdr));
+    GCStackRoot<> crr(car);
+    GCStackRoot<PairList> tlr(SEXP_downcast<CXXR::PairList *>(cdr));
     SEXP s = new PairList();
     s->expose();
 
@@ -813,8 +805,8 @@ HIDDEN SEXP CONS_NR(SEXP car, SEXP cdr)
 
 SEXP Rf_lcons(SEXP cr, SEXP tl)
 {
-    GCRoot<> crr(cr);
-    GCRoot<PairList> tlr(SEXP_downcast<PairList *>(tl));
+    GCStackRoot<> crr(cr);
+    GCStackRoot<PairList> tlr(SEXP_downcast<PairList *>(tl));
     Expression *ans = new Expression(crr, tlr);
     ans->expose();
     return ans;
@@ -850,9 +842,9 @@ SEXP R::NewEnvironment(SEXP namelist, SEXP valuelist, SEXP rho)
         n = CDR(n);
     }
 
-    GCRoot<> namelistr(namelist);
-    GCRoot<PairList> namevalr(SEXP_downcast<PairList *>(valuelist));
-    GCRoot<Environment> rhor(SEXP_downcast<Environment *>(rho));
+    GCStackRoot<> namelistr(namelist);
+    GCStackRoot<PairList> namevalr(SEXP_downcast<PairList *>(valuelist));
+    GCStackRoot<Environment> rhor(SEXP_downcast<Environment *>(rho));
     Environment *ans = new Environment(rhor, namevalr);
     ans->expose();
     return ans;
@@ -862,8 +854,8 @@ SEXP R::NewEnvironment(SEXP namelist, SEXP valuelist, SEXP rho)
    unless a GC will actually occur. */
 HIDDEN SEXP R::mkPROMISE(SEXP expr, SEXP rho)
 {
-    GCRoot<> exprt(expr);
-    GCRoot<Environment> rhort(SEXP_downcast<Environment *>(rho));
+    GCStackRoot<> exprt(expr);
+    GCStackRoot<Environment> rhort(SEXP_downcast<Environment *>(rho));
 
     /* precaution to ensure code does not get modified via
        substitute() and the like */
@@ -962,7 +954,7 @@ SEXP Rf_allocVector3(SEXPTYPE type, R_xlen_t length = 1, R_allocator_t *allocato
 #endif
         if (length == 0)
             return nullptr;
-        GCRoot<PairList> tl(PairList::makeList(length - 1));
+        GCStackRoot<PairList> tl(PairList::makeList(length - 1));
         s = new Expression(nullptr, tl);
         break;
     }
@@ -1087,8 +1079,8 @@ HIDDEN SEXP do_memoryprofile(SEXP call, SEXP op, SEXP args, SEXP env)
     int tmp;
     constexpr int n = 24;
     checkArity(op, args);
-    GCRoot<> ans(allocVector(INTSXP, n));
-    GCRoot<> nms(allocVector(STRSXP, n));
+    GCStackRoot<> ans(allocVector(INTSXP, n));
+    GCStackRoot<> nms(allocVector(STRSXP, n));
     for (int i = 0; i < n; i++) {
 	INTEGER(ans)[i] = 0;
     SET_STRING_ELT(nms, i, Rf_type2str(SEXPTYPE(i > LGLSXP ? i + 2 : i)));
@@ -1144,103 +1136,10 @@ void R_chk_free(void *ptr)
 {
     /* S-PLUS warns here, but there seems no reason to do so */
     /* if(!ptr) warning(_("attempt to free NULL pointer by Free")); */
-    if(ptr) free(ptr); /* ANSI C says free has no effect on nullptr, but
+    if (ptr)
+        free(ptr); /* ANSI C says free has no effect on nullptr, but
 			  better to be safe here */
 }
-
-/* This code keeps a list of objects which are not assigned to variables
-   but which are required to persist across garbage collections.  The
-   objects are registered with R_PreserveObject and deregistered with
-   R_ReleaseObject. */
-
-static SEXP DeleteFromList(SEXP object, SEXP list)
-{
-    if (CAR(list) == object)
-        return CDR(list);
-    else
-    {
-        SEXP last = list;
-        for (SEXP head = CDR(list); head != R_NilValue; head = CDR(head))
-        {
-            if (CAR(head) == object)
-            {
-                SETCDR(last, CDR(head));
-                return list;
-            }
-            else
-                last = head;
-        }
-        return list;
-    }
-}
-
-#define ALLOW_PRECIOUS_HASH
-#ifdef ALLOW_PRECIOUS_HASH
-/* This allows using a fixed size hash table. This makes deleting mush
-   more efficient for applications that don't follow the "sparing use"
-   advice in R-exts.texi. Using the hash table is enabled by starting
-   R with the environment variable R_HASH_PRECIOUS set.
-
-   Pointer hashing as used here isn't entirely portable (we do it in
-   at least one othe rplace, in serialize.cpp) but it could be made so
-   by computing a unique value based on the allocation page and
-   position in the page. */
-
-#define PHASH_SIZE 1069
-#define PTRHASH(obj) (((R_size_t) (obj)) >> 3)
-
-static bool use_precious_hash = false;
-static bool precious_inited = false;
-
-void R_PreserveObject(SEXP object)
-{
-    R_CHECK_THREAD;
-    if (!precious_inited)
-    {
-        precious_inited = true;
-        if (getenv("R_HASH_PRECIOUS"))
-            use_precious_hash = true;
-    }
-    if (use_precious_hash)
-    {
-        if (!R_PreciousList)
-            R_PreciousList = allocVector(VECSXP, PHASH_SIZE);
-        int bin = PTRHASH(object) % PHASH_SIZE;
-        SET_VECTOR_ELT(R_PreciousList, bin, CONS(object, VECTOR_ELT(R_PreciousList, bin)));
-    }
-    else
-        R_PreciousList = CONS(object, R_PreciousList);
-}
-
-void R_ReleaseObject(SEXP object)
-{
-    R_CHECK_THREAD;
-    if (!precious_inited)
-        return; /* can't be anything to delete yet */
-    if (use_precious_hash)
-    {
-        int bin = PTRHASH(object) % PHASH_SIZE;
-        SET_VECTOR_ELT(R_PreciousList, bin,
-                       DeleteFromList(object,
-                                      VECTOR_ELT(R_PreciousList, bin)));
-    }
-    else
-        R_PreciousList = DeleteFromList(object, R_PreciousList);
-}
-#else
-void R_PreserveObject(SEXP object)
-{
-    R_CHECK_THREAD;
-    R_PreciousList = CONS(object, R_PreciousList);
-}
-
-void R_ReleaseObject(SEXP object)
-{
-    R_CHECK_THREAD;
-    R_PreciousList = DeleteFromList(object, R_PreciousList);
-}
-#endif
-
 
 /* This code is similar to R_PreserveObject/R_ReleasObject, but objects are
    kept in a provided multi-set (which needs to be itself protected).
@@ -1271,8 +1170,8 @@ SEXP R_NewPreciousMSet(int initialSize)
     /* npreserved is modified in place */
     npreserved = allocVector(INTSXP, 1);
     SET_INTEGER_ELT(npreserved, 0, 0);
-    GCRoot<PairList> tail(CXXR_cons(npreserved, nullptr));
-    GCRoot<PairList> mset(CXXR_cons(nullptr, tail));
+    GCStackRoot<PairList> tail(CXXR_cons(npreserved, nullptr));
+    GCStackRoot<PairList> mset(CXXR_cons(nullptr, tail));
     /* isize is not modified in place */
     if (initialSize < 0)
         error(_("'initialSize' must be non-negative"));
@@ -1303,7 +1202,7 @@ void R_PreserveInMSet(SEXP x, SEXP mset)
 {
     if (x == R_NilValue || isSymbol(x))
         return; /* no need to preserve */
-    GCRoot<> xx(x);
+    GCStackRoot<> xx(x);
     checkMSet(mset);
     SEXP store = CAR(mset);
     int *n = INTEGER(CADR(mset));
@@ -1321,7 +1220,7 @@ void R_PreserveInMSet(SEXP x, SEXP mset)
         R_xlen_t newsize = 2 * size;
         if (newsize >= R_INT_MAX || newsize < size)
             error(_("Multi-set overflow"));
-        GCRoot<> newstore(allocVector(VECSXP, newsize));
+        GCStackRoot<> newstore(allocVector(VECSXP, newsize));
         for (R_xlen_t i = 0; i < size; i++)
             SET_VECTOR_ELT(newstore, i, VECTOR_ELT(store, i));
         SETCAR(mset, newstore);

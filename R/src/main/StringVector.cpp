@@ -30,7 +30,7 @@
  */
 
 #include <CXXR/StringVector.hpp>
-#include <CXXR/GCRoot.hpp>
+#include <CXXR/GCStackRoot.hpp>
 #include <Rinternals.h>
 #include <iostream>
 
@@ -163,7 +163,7 @@ Rboolean Rf_isValidStringF(SEXP x)
 SEXP Rf_ScalarString(SEXP x)
 {
     SEXP ans;
-    CXXR::GCRoot<> xx(x);
+    CXXR::GCStackRoot<> xx(x);
     ans = Rf_allocVector(STRSXP, (R_xlen_t)1);
     SET_STRING_ELT(ans, (R_xlen_t)0, x);
     return ans;

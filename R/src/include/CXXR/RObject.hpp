@@ -147,11 +147,6 @@
 
 constexpr int NAMED_BITS = 16;
 
-/** @brief Namespace for the CXXR project.
- *
- * CXXR is a project to refactorize the R interpreter into C++.
- */
-
 /*
 Triplet's translation table:
 ---- LIST ----- ENV ---------- CLO ---------- PROM --------- SYM
@@ -164,10 +159,17 @@ Triplet's translation table:
 constexpr int REFCNTMAX = ((1 << NAMED_BITS) - 1);
 #endif
 
+/** @brief Namespace for the CXXR project.
+ *
+ * CXXR is a project to refactorize the R interpreter into C++.
+ */
 namespace CXXR
 {
+    class ConsCell;
+    class Environment;
     class PairList;
     class Symbol;
+
     /** @brief Replacement for CR's SEXPREC.
      *
      * This class is the rough equivalent within CXXR of the SEXPREC
@@ -210,13 +212,65 @@ namespace CXXR
      * conditions on attributes, but these are not yet enforced via
      * the class interface.
      *
+     * @par <tt>const RObject*</tt> policy:
+     * There is an inherent tension between the way CR is implemented
+     * and the 'const-correctness' that C++ programmers seek, and this
+     * particularly arises in connection with pointers to objects of
+     * classes derived from RObject.  CR accesses such objects
+     * exclusively using ::SEXP, which is a non-const pointer.  (The
+     * occasional use within the CR code of <tt>const SEXP</tt> is
+     * misguided: the compiler interprets this in effect as
+     * <tt>RObject* const</tt>, not as <tt>const RObject*</tt>.)  One
+     * possible policy would be simply never to use <tt>const T*</tt>,
+     * where \c T is \c RObject* or a class inheriting from it: that
+     * would remove any need for <tt>const_cast</tt>s at the interface
+     * between new CXXR code and code inherited from CR.  But CXXR
+     * tries to move closer to C++ idiom than that, notwithstanding
+     * the resulting need for <tt>const_cast</tt>s at the interface,
+     * and applies a policy driven by the following considerations:
+     * <ol>
+     *
+     * <li>RObject::evaluate() cannot return a <code>const
+     * RObject*</code>, because some functions return a pointer to an
+     * <code>Environment</code>, which may well need subsequently to
+     * be modified e.g. by inserting or changing bindings.</li>
+     *
+     * <li>This in turn means that RObject::evaluate() cannot itself
+     * be a <code>const</code> function, because the default
+     * implementation returns <code>this</code>. (Another view would
+     * be that the default implementation is an elided copy.)  Also,
+     * Promise objects change internally when they are evaluated
+     * (though this might conceivably be swept up by
+     * <code>mutable</code>).</li>
+     *
+     * <li>It is a moot point whether FunctionBase::apply() can be
+     * <code>const</code>.  Closure::apply() entails evaluating the
+     * body, and if the body is regarded as part of the Closure
+     * object, that would point to <code>apply()</code> not being
+     * <code>const</code>. (Note that some of the types which
+     * Rf_mkCLOSXP() accepts as a Closure body use the default
+     * RObject::evaluate(), so Point&nbsp;2 definitely applies.)</li>
+     *
+     * <li>Should PairList objects and suchlike emulate (roughly
+     * speaking) (a) <code>list&lt;pair&lt;const RObject*, const
+     * RObject*&gt; &gt;</code> (where the first element of the pair
+     * is the tag and the second the 'car'),
+     * (b) <code>list&lt;pair&lt;const RObject*, RObject*&gt;
+     * &gt;</code> or (c) <code>list&lt;pair&lt;RObject*, RObject*&gt;
+     * &gt;</code> ? Since the 'cars' of list elements will often need
+     * to be evaluated, Point 2 rules out (a).  At present CXXR
+     * follows (b).</li>
+     *
+     * <li>Since Symbol objects may well need to be evaluated,
+     * Symbol::obtain() returns a non-const pointer; similarly,
+     * String::obtain() returns a non-const pointer to a
+     * String object.</li>
+     * </ol>
+     *
      * @todo Incorporate further attribute consistency checks within
      * the class interface.  Possibly make setAttribute() virtual so
      * that these consistency checks can be tailored according to the
      * derived class.
-     *
-     * @todo Possibly key attributes on (cached) strings rather than
-     * Symbol objects.
      */
     class RObject : public GCNode
     {
@@ -352,7 +406,7 @@ namespace CXXR
         // in here are used only in connection with objects of class
         // PairList (and only rarely then), so they would more
         // logically be placed in that class (and formerly were within
-        // rho).
+        // CXXR).
 
         // Used when the contents of an Environment are represented as
         // a PairList, for example during serialization and
@@ -382,14 +436,7 @@ namespace CXXR
 
         /** @brief Remove all attributes.
          */
-        void clearAttributes()
-        {
-            if (m_attrib)
-            {
-                m_attrib = nullptr;
-                m_has_class = false;
-            }
-        }
+        void clearAttributes();
 
         /** @brief Get the value a particular attribute.
          *
@@ -851,43 +898,55 @@ extern "C"
      * Note that the Dim, Dimnames and Names attributes are not
      * copied: these should have been assigned elsewhere.  The
      * function also copies the S4 object status.
+     *
      * @param inp Pointer to the CXXR::RObject from which attributes are to
      *          be copied.
+     *
      * @param ans Pointer to the CXXR::RObject to which attributes are to be
      *          copied.
+     *
      * @note The above documentation is probably incomplete: refer to the
      *       source code for further details.
      */
     void Rf_copyMostAttrib(SEXP inp, SEXP ans);
 
     /** @brief Access a named attribute.
+     *
      * @param vec Pointer to the CXXR::RObject whose attributes are to be
      *          accessed.
+     *
      * @param name Either a pointer to the symbol representing the
      *          required attribute, or a pointer to a CXXR::StringVector
      *          containing the required symbol name as element 0; in
      *          the latter case, as a side effect, the corresponding
      *          symbol is installed if necessary.
+     *
      * @return Pointer to the requested attribute, or a null pointer
      *         if there is no such attribute.
+     *
      * @note The above documentation is incomplete: refer to the
      *       source code for further details.
      */
     SEXP Rf_getAttrib(SEXP vec, SEXP name);
 
     /** @brief Set or remove a named attribute.
+     *
      * @param vec Pointer to the CXXR::RObject whose attributes are to be
      *          modified.
+     *
      * @param name Either a pointer to the symbol representing the
      *          required attribute, or a pointer to a CXXR::StringVector
      *          containing the required symbol name as element 0; in
      *          the latter case, as a side effect, the corresponding
      *          symbol is installed if necessary.
+     *
      * @param val Either the value to which the attribute is to be
      *          set, or a null pointer.  In the latter case the
      *          attribute (if present) is removed.
+     *
      * @return Refer to source code.  (Sometimes \a vec, sometimes \a
-     *         val, sometime a null pointer ...)
+     * val, sometime a null pointer ...)
+     *
      * @note The above documentation is probably incomplete: refer to the
      *       source code for further details.
      */
@@ -896,44 +955,50 @@ extern "C"
     /** @brief Does an object have a class attribute?
      *
      * @param x Pointer to a CXXR::RObject.
+     *
      * @return true iff \a x has a class attribute.  Returns false if \a x
-     *         is 0.
+     * is 0.
      */
     int OBJECT(SEXP x);
 
-    /**
+    /** @brief Is this the null object pointer?
+     *
      * @param s Pointer to a CXXR::RObject.
+     *
      * @return TRUE iff the CXXR::RObject pointed to by \a s is either a null
-     *         pointer (i.e. <tt>== R_NilValue</tt> in CXXR), or is a CXXR::RObject
-     *         with SEXPTYPE ::NILSXP (should not happen in CXXR).
+     * pointer (i.e. <tt>== R_NilValue</tt> in CXXR), or is a CXXR::RObject
+     * with ::SEXPTYPE ::NILSXP (should not happen in CXXR).
      */
     Rboolean Rf_isNull(SEXP s);
 
     /** @brief Does an object have a class attribute?
      *
      * @param s Pointer to a CXXR::RObject.
-     * @return TRUE iff the CXXR::RObject pointed to by \a s has a class attribute.
+     *
+     * @return TRUE iff the CXXR::RObject pointed to by \a s has a
+     * class attribute.
      */
     Rboolean Rf_isObject(SEXP s);
 
     /** @brief Get the attributes of a CXXR::RObject.
      *
      * @param x Pointer to the CXXR::RObject whose attributes are required.
+     *
      * @return Pointer to the attributes object of \a x , or 0 if \a x is
-     *         a null pointer.
+     * a null pointer.
      */
     SEXP ATTRIB(SEXP x);
 
     /** @brief (For use only in serialization.)
-     *
      */
     int LEVELS(SEXP x);
 
     /** @brief Get object copying status.
      *
      * @param x Pointer to CXXR::RObject.
+     *
      * @return Refer to 'R Internals' document.  Returns 0 if \a x is a
-     *         null pointer.
+     * null pointer.
      */
     int NAMED(SEXP x);
 
@@ -981,7 +1046,10 @@ extern "C"
 
     /** @brief Replace the attributes of \a to by those of \a from.
      *
+     * The status of \a to as an S4 Object is also copied from \a from .
+     *
      * @param to Pointer to CXXR::RObject.
+     *
      * @param from Pointer to another CXXR::RObject.
      */
     void DUPLICATE_ATTRIB(SEXP to, SEXP from);
@@ -1039,9 +1107,49 @@ extern "C"
     void(MARK_NOT_MUTABLE)(SEXP x);
     int IS_ASSIGNMENT_CALL(SEXP x);
     void MARK_ASSIGNMENT_CALL(SEXP x);
+
+    /** @brief Set object max copying status.
+     *
+     * @param x Pointer to CXXR::RObject.  The function does nothing
+     *          if \a x is a null pointer.
+     *
+     * @param v Refer to 'R Internals' document.
+     *
+     * @deprecated Ought to be private.
+     */
     void ENSURE_NAMEDMAX(SEXP x);
+
+    /** @brief Set object copying status to one.
+     *
+     * @param x Pointer to CXXR::RObject.  The function does nothing
+     *          if \a x is a null pointer.
+     *
+     * @param v Refer to 'R Internals' document.
+     *
+     * @deprecated Ought to be private.
+     */
     void ENSURE_NAMED(SEXP x);
+
+    /** @brief Set object copying status to zero.
+     *
+     * @param x Pointer to CXXR::RObject.  The function does nothing
+     *          if \a x is a null pointer.
+     *
+     * @param v Refer to 'R Internals' document.
+     *
+     * @deprecated Ought to be private.
+     */
     void SETTER_CLEAR_NAMED(SEXP x);
+
+    /** @brief Raise object copying status if possible.
+     *
+     * @param x Pointer to CXXR::RObject.  The function does nothing
+     *          if \a x is a null pointer.
+     *
+     * @param v Refer to 'R Internals' document.
+     *
+     * @deprecated Ought to be private.
+     */
     void RAISE_NAMED(SEXP x, int n);
 } // extern "C"
 

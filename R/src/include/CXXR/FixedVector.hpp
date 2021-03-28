@@ -205,7 +205,7 @@ namespace CXXR
         // Check for integer overflow:
         if (R_xlen_t(bytes / sizeof(T)) != sz)
             Rf_error(_("Request to create impossibly large vector."));
-        GCRoot<> thisroot(this);
+        GCStackRoot<> thisroot(this);
         try
         {
             m_data = static_cast<T *>(MemoryBank::allocate(bytes, true, allocator));

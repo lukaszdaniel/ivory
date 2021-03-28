@@ -56,7 +56,7 @@ As from R 4.1.0 we translate latin1 strings in a non-latin1-locale to UTF-8.
 /* How many encoding warnings to give */
 constexpr int NWARN = 5;
 
-#include <CXXR/GCRoot.hpp>
+#include <CXXR/GCStackRoot.hpp>
 #include <CXXR/BuiltInFunction.hpp>
 #include <CXXR/String.hpp>
 #include <CXXR/PairList.hpp>

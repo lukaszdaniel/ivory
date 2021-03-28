@@ -84,9 +84,9 @@ namespace CXXR
         m_globally_cached = ((gpbits & GLOBAL_FRAME_MASK) != 0);
     }
 
-    GCRoot<Environment> Environment::s_empty_env(new Environment(), true);
-    GCRoot<Environment> Environment::s_base_env(new Environment(s_empty_env), true);
-    GCRoot<Environment> Environment::s_global_env(SEXP_downcast<Environment *>(R::R_NewHashedEnv(s_base_env, Rf_ScalarInteger(0))), true);
+    GCStackRoot<Environment> Environment::s_empty_env(new Environment(), true);
+    GCStackRoot<Environment> Environment::s_base_env(new Environment(s_empty_env), true);
+    GCStackRoot<Environment> Environment::s_global_env(SEXP_downcast<Environment *>(R::R_NewHashedEnv(s_base_env, Rf_ScalarInteger(0))), true);
 
     void Environment::initialize()
     {

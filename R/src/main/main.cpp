@@ -38,7 +38,7 @@
 #define R_NO_REMAP
 #define R_USE_SIGNALS 1
 
-#include <CXXR/GCRoot.hpp>
+#include <CXXR/GCStackRoot.hpp>
 #include <CXXR/ProtectStack.hpp>
 #include <CXXR/JMPException.hpp>
 #include <CXXR/Expression.hpp>

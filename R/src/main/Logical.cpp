@@ -23,7 +23,7 @@
 
 #include <CXXR/Logical.hpp>
 
-#include <CXXR/GCRoot.hpp>
+#include <CXXR/GCStackRoot.hpp>
 #include <CXXR/LogicalVector.hpp>
 #include <Defn.h>
 
@@ -35,15 +35,15 @@ namespace CXXR
 
     void Logical::initialize()
     {
-        static GCRoot<LogicalVector> trueValue(new LogicalVector(1));
+        static GCStackRoot<LogicalVector> trueValue(new LogicalVector(1));
         (*trueValue)[0] = true;
         MARK_NOT_MUTABLE(trueValue.get());
 
-        static GCRoot<LogicalVector> falseValue(new LogicalVector(1));
+        static GCStackRoot<LogicalVector> falseValue(new LogicalVector(1));
         (*falseValue)[0] = false;
         MARK_NOT_MUTABLE(falseValue.get());
 
-        static GCRoot<LogicalVector> naValue(new LogicalVector(1));
+        static GCStackRoot<LogicalVector> naValue(new LogicalVector(1));
         (*naValue)[0] = NA();
         MARK_NOT_MUTABLE(naValue.get());
 

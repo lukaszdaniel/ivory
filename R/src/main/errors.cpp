@@ -29,7 +29,7 @@
 #define R_NO_REMAP
 #define R_USE_SIGNALS 1
 
-#include <CXXR/GCRoot.hpp>
+#include <CXXR/GCStackRoot.hpp>
 #include <CXXR/JMPException.hpp>
 #include <CXXR/RObject.hpp>
 #include <CXXR/String.hpp>

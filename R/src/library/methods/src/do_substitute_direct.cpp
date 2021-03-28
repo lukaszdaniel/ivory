@@ -21,7 +21,7 @@
 #include <config.h>
 #endif
 
-#include <CXXR/GCRoot.hpp>
+#include <CXXR/GCStackRoot.hpp>
 #include <Defn.h>
 
 #include "methods.h"

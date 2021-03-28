@@ -97,7 +97,7 @@
 #define R_USE_SIGNALS 1
 
 #include <RContext.h>
-#include <CXXR/GCRoot.hpp>
+#include <CXXR/GCStackRoot.hpp>
 #include <CXXR/Expression.hpp>
 #include <CXXR/IntVector.hpp>
 #include <CXXR/RealVector.hpp>

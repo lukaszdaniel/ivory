@@ -40,7 +40,7 @@
 #define PAIRLIST_HPP
 
 #include <CXXR/ConsCell.hpp>
-#include <CXXR/GCRoot.hpp>
+#include <CXXR/GCStackRoot.hpp>
 #include <R_ext/Boolean.h>
 #include <Rinternals.h>
 #include <Localization.h>
@@ -147,8 +147,8 @@ namespace CXXR
     private:
         // Permanent GCRoots used to implement construct() without pushing
         // and popping:
-        static GCRoot<> s_cons_car;
-        static GCRoot<PairList> s_cons_cdr;
+        static GCStackRoot<> s_cons_car;
+        static GCStackRoot<PairList> s_cons_cdr;
 
         // Tailless copy constructor.  Copies the node without copying
         // its tail.  Used in implementing the copy constructor

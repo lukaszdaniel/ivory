@@ -1495,9 +1495,9 @@ R_INLINE static SEXP WRAPPER_WRAPPED_RW(SEXP x)
 static SEXP wrapper_Serialized_state(SEXP x)
 {
 #ifdef CXXR_OLD_ALTREP_IMPL
-    GCRoot<> ans(CONS(WRAPPER_WRAPPED(x), WRAPPER_METADATA(x)));
+    GCStackRoot<> ans(CONS(WRAPPER_WRAPPED(x), WRAPPER_METADATA(x)));
 #else
-    GCRoot<AltRep> ans(CXXR_cons<AltRep>(WRAPPER_WRAPPED(x), CXXR_cons<AltRep>(CAR(WRAPPER_METADATA(x)), CDR(WRAPPER_METADATA(x)))));
+    GCStackRoot<AltRep> ans(CXXR_cons<AltRep>(WRAPPER_WRAPPED(x), CXXR_cons<AltRep>(CAR(WRAPPER_METADATA(x)), CDR(WRAPPER_METADATA(x)))));
 #endif
     return ans;
 }
@@ -1507,9 +1507,9 @@ static SEXP make_wrapper(SEXP, SEXP);
 static SEXP wrapper_Unserialize(SEXP class_, SEXP state)
 {
 #ifdef CXXR_OLD_ALTREP_IMPL
-    GCRoot<> ans(make_wrapper(CAR(state), CDR(state)));
+    GCStackRoot<> ans(make_wrapper(CAR(state), CDR(state)));
 #else
-    GCRoot<AltRep> ans(static_cast<AltRep*>(make_wrapper(CAR(state), CDR(state))));
+    GCStackRoot<AltRep> ans(static_cast<AltRep*>(make_wrapper(CAR(state), CDR(state))));
 #endif
     return ans;
 }
@@ -2041,7 +2041,7 @@ SEXP R_tryUnwrap(SEXP x)
 	       still live. */
 	    // Convert x to a PairList:
 	    {
-            GCRoot<ConsCell> cc(SEXP_downcast<ConsCell *>(x));
+            GCStackRoot<ConsCell> cc(SEXP_downcast<ConsCell *>(x));
             x = ConsCell::convert<PairList>(cc);
 	    }
 	    x->clearAttributes();

@@ -23,7 +23,7 @@
 
 #define R_NO_REMAP
 
-#include <CXXR/GCRoot.hpp>
+#include <CXXR/GCStackRoot.hpp>
 #include <CXXR/Expression.hpp>
 #include <CXXR/PairList.hpp>
 #include <CXXR/IntVector.hpp>

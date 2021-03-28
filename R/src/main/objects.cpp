@@ -30,7 +30,7 @@
 #define R_USE_SIGNALS 1
 
 #include <CXXR/BuiltInFunction.hpp>
-#include <CXXR/GCRoot.hpp>
+#include <CXXR/GCStackRoot.hpp>
 #include <CXXR/ProtectStack.hpp>
 #include <CXXR/PairList.hpp>
 #include <CXXR/Expression.hpp>
@@ -759,7 +759,7 @@ HIDDEN SEXP do_nextmethod(SEXP call, SEXP op, SEXP args, SEXP env)
 	if (t != R_NilValue && t != R_MissingArg) {
 		// Convert t to a PairList:
 		{
-			GCRoot<ConsCell> cc(SEXP_downcast<ConsCell *>(t));
+			GCStackRoot<ConsCell> cc(SEXP_downcast<ConsCell *>(t));
 			t = ConsCell::convert<PairList>(cc);
 		}
 		s = matchmethargs(matchedarg, t);
@@ -1749,7 +1749,7 @@ SEXP R_do_new_object(SEXP class_def)
     if((TYPEOF(value) == S4SXP || getAttrib(e, R_PackageSymbol) != R_NilValue) &&
        !xDataType)
 	{
-		GCRoot<> valrt(value);
+		GCStackRoot<> valrt(value);
 		setAttrib(value, R_ClassSymbol, e);
 		SET_S4_OBJECT(value);
 	}

@@ -24,7 +24,7 @@
 
 #define R_NO_REMAP
 
-#include <CXXR/GCRoot.hpp>
+#include <CXXR/GCStackRoot.hpp>
 #include <CXXR/VectorBase.hpp>
 #include <CXXR/String.hpp>
 #include <Localization.h>
@@ -59,8 +59,8 @@ HIDDEN SEXP do_version(SEXP call, SEXP op, SEXP args, SEXP env)
     char buf[128];
 
     checkArity(op, args);
-    GCRoot<> value(allocVector(VECSXP,15));
-    GCRoot<> names(allocVector(STRSXP,15));
+    GCStackRoot<> value(allocVector(VECSXP,15));
+    GCStackRoot<> names(allocVector(STRSXP,15));
 
     SET_STRING_ELT(names, 0, mkChar("platform"));
     SET_VECTOR_ELT(value, 0, mkString(R_PLATFORM));

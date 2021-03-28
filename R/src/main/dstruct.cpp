@@ -71,9 +71,9 @@ HIDDEN SEXP R::mkPRIMSXP(int offset, bool evaluate)
 
 SEXP R::mkCLOSXP(SEXP formal_args, SEXP body, SEXP env)
 {
-    GCRoot<const PairList> formalsr(SEXP_downcast<const PairList *>(formal_args));
-    GCRoot<const RObject> bodyr(body);
-    GCRoot<Environment> rhor(SEXP_downcast<Environment *>(env));
+    GCStackRoot<const PairList> formalsr(SEXP_downcast<const PairList *>(formal_args));
+    GCStackRoot<const RObject> bodyr(body);
+    GCStackRoot<Environment> rhor(SEXP_downcast<Environment *>(env));
 
     switch (TYPEOF(body))
     {
@@ -96,6 +96,6 @@ SEXP R::mkCLOSXP(SEXP formal_args, SEXP body, SEXP env)
 
 HIDDEN SEXP R::mkSYMSXP(SEXP name, SEXP value)
 {
-    GCRoot<const CachedString> namert(SEXP_downcast<const CachedString *>(name));
+    GCStackRoot<const CachedString> namert(SEXP_downcast<const CachedString *>(name));
     return CXXR::Symbol::obtain(namert);
 }

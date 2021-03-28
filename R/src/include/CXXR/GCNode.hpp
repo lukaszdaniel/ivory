@@ -138,7 +138,7 @@ namespace CXXR
      * elements, with \c first as the 'car' of the first element and
      * \c second as the 'car' of the second element:
      * \code
-     * CXXR::GCRoot<CXXR::PairList>
+     * CXXR::GCStackRoot<CXXR::PairList>
      *   pl2(new CXXR::PairList(first, new CXXR::PairList(second)));
      * \endcode
      * Is this code sound?  You might suppose that there is a risk
@@ -394,6 +394,7 @@ namespace CXXR
     public: // private:
         friend class WeakRef;
         friend class GCRootBase;
+        friend class GCStackRootBase;
         template <class T>
         friend class GCEdge;
 

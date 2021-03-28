@@ -1399,13 +1399,13 @@ static SEXP ExpandDots(SEXP s, int expdots)
 {
     SEXP r;
     // The call to ConsCell::convert below will allocate memory:
-    GCRoot<> sr(s);
+    GCStackRoot<> sr(s);
 	if (s == R_NilValue)
 		return s;
 	if (TYPEOF(CAR(s)) == DOTSXP ) {
         // Convert CAR(s) to a PairList:
         {
-            GCRoot<ConsCell> cc(SEXP_downcast<ConsCell *>(CAR(s)));
+            GCStackRoot<ConsCell> cc(SEXP_downcast<ConsCell *>(CAR(s)));
 			SETCAR(s, ConsCell::convert<PairList>(cc));
         }
 	if (expdots) {

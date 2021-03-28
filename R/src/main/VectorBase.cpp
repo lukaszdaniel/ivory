@@ -298,8 +298,8 @@ SEXP Rf_mkNamed(SEXPTYPE TYP, const char **names)
     for (n = 0; strlen(names[n]) > 0; ++n)
     {
     }
-    CXXR::GCRoot<> ans(Rf_allocVector(TYP, n));
-    CXXR::GCRoot<> nms(Rf_allocVector(STRSXP, n));
+    CXXR::GCStackRoot<> ans(Rf_allocVector(TYP, n));
+    CXXR::GCStackRoot<> nms(Rf_allocVector(STRSXP, n));
     for (R_xlen_t i = 0; i < n; ++i)
         SET_STRING_ELT(nms, i, Rf_mkChar(names[i]));
     Rf_setAttrib(ans, R_NamesSymbol, nms);
@@ -308,7 +308,7 @@ SEXP Rf_mkNamed(SEXPTYPE TYP, const char **names)
 
 SEXP Rf_mkString(const char *s)
 {
-    CXXR::GCRoot<> t(Rf_allocVector(STRSXP, (R_xlen_t)1));
+    CXXR::GCStackRoot<> t(Rf_allocVector(STRSXP, (R_xlen_t)1));
     SET_STRING_ELT(t, (R_xlen_t)0, Rf_mkChar(s));
     return t;
 }

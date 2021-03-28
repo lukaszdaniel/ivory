@@ -912,7 +912,7 @@ HIDDEN SEXP do_namesgets(SEXP call, SEXP op, SEXP args, SEXP env)
     SEXP names = CADR(args);
     if (names != R_NilValue &&
 	! (TYPEOF(names) == STRSXP && ATTRIB(names) == R_NilValue)) {
-	GCRoot<PairList> tl(new PairList(), true);
+	GCStackRoot<PairList> tl(new PairList(), true);
 	PROTECT(call = new Expression(nullptr, tl));
 	call->expose();
 	SETCAR(call, R_AsCharacterSymbol);
@@ -1245,7 +1245,7 @@ HIDDEN SEXP do_attributes(SEXP call, SEXP op, SEXP args, SEXP env)
     if (TYPEOF(CAR(args)) == ENVSXP)
 	R_CheckStack(); /* in case attributes might lead to a cycle */
 
-    GCRoot<> attrs(ATTRIB(CAR(args)));
+    GCStackRoot<> attrs(ATTRIB(CAR(args)));
 	SEXP namesattr;
     int nvalues = length(attrs);
     if (isList(CAR(args))) {

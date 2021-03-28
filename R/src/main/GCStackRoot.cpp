@@ -22,12 +22,12 @@
  *  https://www.R-project.org/Licenses/
  */
 
-/** @file GCRoot.cpp
+/** @file GCStackRoot.cpp
  *
- * Implementation of class GCRootBase.
+ * Implementation of class GCStackRootBase.
  */
 
-#include <CXXR/GCRoot.hpp>
+#include <CXXR/GCStackRoot.hpp>
 #include <CXXR/RObject.hpp>
 
 #include <cstdlib>
@@ -46,25 +46,34 @@ namespace CXXR
     {
     } // namespace ForceNonInline
 
-    GCRootBase::List *GCRootBase::s_roots;
+    vector<const GCNode *> *GCStackRootBase::s_roots;
 
-    GCRootBase::GCRootBase(const GCNode *node)
-        : m_it(s_roots->insert(s_roots->end(), node))
+    GCStackRootBase::GCStackRootBase(const GCNode *node, bool expose)
+        : m_index(s_roots->size())
     {
-        // GCNode::maybeCheckExposed(node);
+        s_roots->push_back(node);
+        if (expose && node)
+            node->expose();
     }
 
-    void GCRootBase::cleanup()
+    GCStackRootBase::GCStackRootBase(const GCStackRootBase &source)
+        : m_index(s_roots->size())
     {
-        delete s_roots;
+        s_roots->push_back((*s_roots)[source.m_index]);
     }
 
-    void GCRootBase::initialize()
+    void GCStackRootBase::initialize()
     {
-        s_roots = new List();
+        s_roots = new vector<const GCNode *>;
     }
 
-    void GCRootBase::visitRoots(GCNode::const_visitor *v)
+    void GCStackRootBase::seq_error()
+    {
+        std::cerr << "Fatal error: GCStackRoots must be destroyed in reverse order of creation\n";
+        abort();
+    }
+
+    void GCStackRootBase::visitRoots(GCNode::const_visitor *v)
     {
         for (auto &n : *s_roots)
         {
@@ -73,21 +82,3 @@ namespace CXXR
         }
     }
 } // namespace CXXR
-
-// ***** C interface *****
-
-/** @brief List of Persistent Objects
- *
- * @note This is not a busy list, so we don't bother to use Allocator.
- */
-static unordered_map<const RObject *, GCRoot<>> precious;
-
-void R_PreserveObject(SEXP object)
-{
-    precious[object] = GCRoot<>(object);
-}
-
-void R_ReleaseObject(SEXP object)
-{
-    precious.erase(object);
-}

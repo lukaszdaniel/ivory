@@ -35,7 +35,7 @@
 // #include <CXXR/GCEdge.hpp>
 #include <CXXR/Environment.hpp>
 #include <CXXR/Expression.hpp>
-#include <CXXR/GCRoot.hpp>
+#include <CXXR/GCStackRoot.hpp>
 #include <CXXR/ProtectStack.hpp>
 #include <CXXR/JMPException.hpp>
 #include <CXXR/WeakRef.hpp>
@@ -330,9 +330,9 @@ namespace CXXR
 			RCNTXT thiscontext;
 			RCNTXT *volatile saveToplevelContext;
 			volatile bool oldvis;
-			GCRoot<> oldHStack(R_HandlerStack);
-			GCRoot<> oldRStack(R_RestartStack);
-			GCRoot<> oldRVal(R_ReturnedValue);
+			GCStackRoot<> oldHStack(R_HandlerStack);
+			GCStackRoot<> oldRStack(R_RestartStack);
+			GCStackRoot<> oldRVal(R_ReturnedValue);
 			oldvis = R_Visible;
 			R_HandlerStack = nullptr;
 			R_RestartStack = nullptr;
@@ -343,7 +343,7 @@ namespace CXXR
 			 */
 			thiscontext.start(CTXT_TOPLEVEL, nullptr, R_GlobalEnv, Environment::base(), nullptr, nullptr);
 			saveToplevelContext = R_ToplevelContext;
-			GCRoot<> topExp(R_CurrentExpr);
+			GCStackRoot<> topExp(R_CurrentExpr);
 			auto savestack = ProtectStack::size();
 
 			bool redo = false;
@@ -440,8 +440,8 @@ namespace CXXR
 	void WeakRef::finalize()
 	{
 		R_CFinalizer_t Cfin = m_Cfinalizer;
-		GCRoot<> key(m_key);
-		GCRoot<> Rfin(m_Rfinalizer);
+		GCStackRoot<> key(m_key);
+		GCStackRoot<> Rfin(m_Rfinalizer);
 		// Do this now to ensure that finalizer is run only once, even if
 		// an error occurs:
 		tombstone();
@@ -449,8 +449,8 @@ namespace CXXR
 			Cfin(key);
 		else if (Rfin)
 		{
-			GCRoot<PairList> tail(CXXR_cons(key, nullptr));
-			GCRoot<Expression> e(new Expression(Rfin, tail), true);
+			GCStackRoot<PairList> tail(CXXR_cons(key, nullptr));
+			GCStackRoot<Expression> e(new Expression(Rfin, tail), true);
 			Rf_eval(e, Environment::global());
 		}
 	}

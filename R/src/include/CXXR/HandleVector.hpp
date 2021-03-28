@@ -29,7 +29,7 @@
 
 #include <CXXR/Allocator.hpp>
 #include <CXXR/Allocator.hpp>
-#include <CXXR/GCRoot.hpp>
+#include <CXXR/GCStackRoot.hpp>
 #include <CXXR/VectorBase.hpp>
 #include <Localization.h>
 #include <R_ext/Error.h>

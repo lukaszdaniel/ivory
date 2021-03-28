@@ -28,7 +28,7 @@
  */
 
 #include <CXXR/ExternalPointer.hpp>
-#include <CXXR/GCRoot.hpp>
+#include <CXXR/GCStackRoot.hpp>
 #include <Rinternals.h>
 #include <Localization.h>
 
@@ -75,10 +75,10 @@ void *EXTPTR_PTR(SEXP x)
 /* External Pointer Objects */
 SEXP R_MakeExternalPtr(void *p, SEXP tag, SEXP prot)
 {
-    GCRoot<> tagr(tag);
+    GCStackRoot<> tagr(tag);
     if (tag)
         tag->incrementRefCount();
-    GCRoot<> protr(prot);
+    GCStackRoot<> protr(prot);
     if (prot)
         prot->incrementRefCount();
     ExternalPointer *ans = new ExternalPointer(p, tag, prot);

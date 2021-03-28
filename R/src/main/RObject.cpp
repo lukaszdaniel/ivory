@@ -152,6 +152,15 @@ namespace CXXR
         return Rf_type2char(sexptype());
     }
 
+    void RObject::clearAttributes()
+    {
+        if (m_attrib)
+        {
+            m_attrib = nullptr;
+            m_has_class = false;
+        }
+    }
+
     RObject *RObject::getAttribute(const Symbol *name)
     {
         for (PairList *node = m_attrib; node; node = node->tail())
@@ -215,8 +224,8 @@ namespace CXXR
             /* The usual convention is that the caller protects,
                but a lot of existing code depends assume that
                setAttrib/installAttrib protects its arguments */
-            GCRoot<Symbol> namer(name);
-            GCRoot<> valuer(value);
+            GCStackRoot<Symbol> namer(name);
+            GCStackRoot<> valuer(value);
             if (MAYBE_REFERENCED(value))
                 ENSURE_NAMEDMAX(value);
             PairList *newnode = PairList::construct(value, nullptr, name);
@@ -405,7 +414,7 @@ void SET_ATTRIB(SEXP x, SEXP v)
     if (v && v->sexptype() != LISTSXP)
         Rf_error(_("value of 'SET_ATTRIB' must be a pairlist or nullptr, not a '%s'"),
                  Rf_type2char(v->sexptype()));
-    GCRoot<PairList> pl(SEXP_downcast<PairList *>(v));
+    GCStackRoot<PairList> pl(SEXP_downcast<PairList *>(v));
     x->setAttributes(pl);
 }
 
@@ -642,7 +651,7 @@ Rboolean Rf_isFrame(SEXP s)
 Rboolean Rf_conformable(SEXP x_, SEXP y)
 {
     int n;
-    GCRoot<> x(Rf_getAttrib(x_, R_DimSymbol));
+    GCStackRoot<> x(Rf_getAttrib(x_, R_DimSymbol));
     y = Rf_getAttrib(y, R_DimSymbol);
     if ((n = Rf_length(x)) != Rf_length(y))
         return FALSE;

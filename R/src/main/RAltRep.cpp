@@ -43,7 +43,7 @@ namespace CXXR
 
     AltRep *AltRep::clone(bool deep) const
     {
-        GCRoot<const AltRep> thisroot(this); /* the methods should protect, but ... */
+        GCStackRoot<const AltRep> thisroot(this); /* the methods should protect, but ... */
         SEXP ans = ALTREP_DUPLICATE_EX(const_cast<AltRep *>(this), Rboolean(deep));
         if (ans)
         {
@@ -51,7 +51,7 @@ namespace CXXR
         }
         else
         {
-            GCRoot<RObject> t;
+            GCStackRoot<RObject> t;
             if (altsexptype() == STRSXP)
             {
                 R_xlen_t sz = XLENGTH(const_cast<AltRep *>(this));

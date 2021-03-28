@@ -1104,7 +1104,7 @@ static void WriteItem(SEXP s, SEXP ref_table, R_outpstream_t stream)
 	    OutInteger(stream, ENVSXP);
 	    OutInteger(stream, R_EnvironmentIsLocked(s) ? 1 : 0);
 	    WriteItem(ENCLOS(s), ref_table, stream);
-		GCRoot<> frame_pairlist(FRAME(s));
+		GCStackRoot<> frame_pairlist(FRAME(s));
 	    WriteItem(frame_pairlist, ref_table, stream);
 	    WriteItem(HASHTAB(s), ref_table, stream);
 	    WriteItem(ATTRIB(s), ref_table, stream);
@@ -1950,7 +1950,7 @@ static SEXP ReadItem(SEXP ref_table, R_inpstream_t stream)
 		R_ReadItemDepth--; /* do this early because of the recursion. */
 		// Convert tail to PairList if necessary:
 		{
-			GCRoot<ConsCell> cc(SEXP_downcast<ConsCell *>(ReadItem(ref_table, stream)));
+			GCStackRoot<ConsCell> cc(SEXP_downcast<ConsCell *>(ReadItem(ref_table, stream)));
 			SETCDR(s, ConsCell::convert<PairList>(cc));
 		}
 		if (set_lastname)
@@ -1983,7 +1983,7 @@ static SEXP ReadItem(SEXP ref_table, R_inpstream_t stream)
 		R_ReadItemDepth--; /* do this early because of the recursion. */
 		// Convert tail to PairList if necessary:
 		{
-			GCRoot<ConsCell>
+			GCStackRoot<ConsCell>
 				cc(SEXP_downcast<ConsCell *>(ReadItem(ref_table, stream)));
 			SETCDR(s, ConsCell::convert<PairList>(cc));
 		}

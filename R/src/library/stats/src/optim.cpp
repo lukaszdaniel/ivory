@@ -21,7 +21,7 @@
 #include <config.h>
 #endif
 
-#include <CXXR/GCRoot.hpp>
+#include <CXXR/GCStackRoot.hpp>
 #include <CXXR/Expression.hpp>
 #include <CXXR/VectorBase.hpp>
 #include <CXXR/FunctionBase.hpp>

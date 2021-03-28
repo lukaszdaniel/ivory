@@ -52,6 +52,7 @@
 // Garbage Collection
 #include <CXXR/GCManager.hpp>
 #include <CXXR/GCRoot.hpp>
+#include <CXXR/GCStackRoot.hpp>
 
 // Various utilities
 #include <CXXR/SchwarzCounter.hpp>
@@ -63,6 +64,7 @@
 #include <CXXR/GCNode.hpp>
 #include <CXXR/RObject.hpp>
 #include <CXXR/Frame.hpp>
+#include <CXXR/Evaluator.hpp>
 
 // Generic Vector class
 #include <CXXR/VectorBase.hpp>
@@ -122,12 +124,10 @@
 #include <CXXR/ElementTraits.hpp>
 #include <CXXR/errors.hpp>
 #include <CXXR/Evaluator_Context.hpp>
-#include <CXXR/Evaluator.hpp>
 #include <CXXR/FrameDescriptor.hpp>
 #include <CXXR/FunctionContext.hpp>
 #include <CXXR/GCNodeAllocator.hpp>
 #include <CXXR/GCStackFrameBoundary.hpp>
-#include <CXXR/GCStackRoot.hpp>
 #include <CXXR/LoopBailout.hpp>
 #include <CXXR/LoopException.hpp>
 #include <CXXR/NodeStack.hpp>

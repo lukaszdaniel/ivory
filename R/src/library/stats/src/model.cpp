@@ -486,7 +486,7 @@ SEXP modelmatrix(SEXP call, SEXP op, SEXP args, SEXP rho)
 
     PROTECT(contr1 = allocVector(VECSXP, nVar));
     PROTECT(contr2 = allocVector(VECSXP, nVar));
-    GCRoot<PairList> tl(PairList::makeList(2));
+    GCStackRoot<PairList> tl(PairList::makeList(2));
 
     PROTECT(expr = new Expression(nullptr, tl));
     expr->expose();
@@ -1819,7 +1819,7 @@ SEXP termsform(SEXP args)
     if (allowDot == NA_LOGICAL) allowDot = 0;
 
     // a := attributes(<answer>)
-    GCRoot<> attributes(allocList((specials == R_NilValue) ? 8 : 9));
+    GCStackRoot<> attributes(allocList((specials == R_NilValue) ? 8 : 9));
     a = attributes;
 
     /* Step 1: Determine the ``variables'' in the model :

@@ -287,9 +287,9 @@ namespace CXXR
       void visitChildren(const_visitor *v) const override;
 
    private:
-      static GCRoot<Environment> s_empty_env;
-      static GCRoot<Environment> s_base_env;
-      static GCRoot<Environment> s_global_env;
+      static GCStackRoot<Environment> s_empty_env;
+      static GCStackRoot<Environment> s_base_env;
+      static GCStackRoot<Environment> s_global_env;
 
       Environment *m_enclosing;
       PairList *m_frame;

@@ -36,6 +36,7 @@
 #include <CXXR/Environment.hpp>
 #include <CXXR/Symbol.hpp>
 #include <CXXR/SEXP_downcast.hpp>
+#include <RContext.h>
 
 namespace CXXR
 {
@@ -72,7 +73,7 @@ namespace CXXR
          *
          * @param env Environment in which \a valgen is to be evaluated.
          */
-        Promise(const RObject *valgen, const Environment *env)
+        Promise(const RObject *valgen, Environment *env)
             : RObject(PROMSXP), m_value(Symbol::unboundValue()),
               m_valgen(valgen), m_environment(env), m_seen(false),
               m_interrupted(false)
@@ -89,7 +90,7 @@ namespace CXXR
          * will be a null pointer after the promise has been
          * evaluated.
          */
-        const Environment *environment() const
+        Environment *environment() const
         {
             return m_environment;
         }
@@ -146,8 +147,8 @@ namespace CXXR
          *
          * @param val Value to be associated with the Promise.
          *
-         * @todo Replace this with a method to evaluate the promise.
-         * Possibly have method value() itself force the promise.
+         * @todo Should be private (or removed entirely), but current
+         * still used in saveload.cpp.
          */
         void setValue(RObject *val);
 
@@ -193,7 +194,7 @@ namespace CXXR
     private:
         RObject *m_value;
         const RObject *m_valgen;
-        const Environment *m_environment;
+        Environment *m_environment;
         bool m_seen;
         bool m_interrupted;
         // Declared private to ensure that Environment objects are

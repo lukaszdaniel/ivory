@@ -1143,7 +1143,7 @@ SEXP Rf_install(const char *name)
     if (strlen(name) > Symbol::MAXIDSIZE)
         Rf_error(_("variable names are limited to %d bytes"), Symbol::MAXIDSIZE);
 
-    GCRoot<const CachedString> namestr(CachedString::obtain(name));
+    GCStackRoot<const CachedString> namestr(CachedString::obtain(name));
     return Symbol::obtain(namestr);
 }
 

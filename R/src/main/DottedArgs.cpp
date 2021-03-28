@@ -28,6 +28,7 @@
  */
 
 #include <CXXR/DottedArgs.hpp>
+#include <Localization.h>
 
 using namespace std;
 using namespace CXXR;

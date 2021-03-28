@@ -489,7 +489,7 @@ static SEXP D(SEXP expr, SEXP var)
 	    UNPROTECT(4);
 	}
 	else if (CAR(expr) == SqrtSymbol) {
-	    GCRoot<PairList> tl(PairList::makeList(2));
+	    GCStackRoot<PairList> tl(PairList::makeList(2));
 	    PROTECT(expr1 = new Expression(nullptr, tl));
 	    expr1->expose();
 	    SETCAR(expr1, PowerSymbol);

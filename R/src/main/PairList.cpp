@@ -48,8 +48,8 @@ namespace CXXR
         const auto &consptr = Rf_cons;
     } // namespace ForceNonInline
 
-    GCRoot<> PairList::s_cons_car;
-    GCRoot<PairList> PairList::s_cons_cdr;
+    GCStackRoot<> PairList::s_cons_car;
+    GCStackRoot<PairList> PairList::s_cons_cdr;
 
     PairList::PairList(const PairList &pattern, bool deep, int)
         : ConsCell(pattern, deep, 0), m_argused(0)
@@ -249,35 +249,35 @@ SEXP Rf_list1(SEXP s)
 
 SEXP Rf_list2(SEXP s, SEXP t)
 {
-    GCRoot<> ss(s);
+    GCStackRoot<> ss(s);
     s = Rf_cons(s, Rf_list1(t));
     return s;
 }
 
 SEXP Rf_list3(SEXP s, SEXP t, SEXP u)
 {
-    GCRoot<> ss(s);
+    GCStackRoot<> ss(s);
     s = Rf_cons(s, Rf_list2(t, u));
     return s;
 }
 
 SEXP Rf_list4(SEXP s, SEXP t, SEXP u, SEXP v)
 {
-    GCRoot<> ss(s);
+    GCStackRoot<> ss(s);
     s = Rf_cons(s, Rf_list3(t, u, v));
     return s;
 }
 
 SEXP Rf_list5(SEXP s, SEXP t, SEXP u, SEXP v, SEXP w)
 {
-    GCRoot<> ss(s);
+    GCStackRoot<> ss(s);
     s = Rf_cons(s, Rf_list4(t, u, v, w));
     return s;
 }
 
 SEXP Rf_list6(SEXP s, SEXP t, SEXP u, SEXP v, SEXP w, SEXP x)
 {
-    GCRoot<> ss(s);
+    GCStackRoot<> ss(s);
     s = Rf_cons(s, Rf_list5(t, u, v, w, x));
     return s;
 }

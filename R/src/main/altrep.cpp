@@ -51,7 +51,7 @@ namespace
 #define ALTREP_CLASS_SERIALIZED_CLASS(x) ATTRIB(x)
     void SET_ALTREP_CLASS_SERIALIZED_CLASS(SEXP x, SEXP csym, SEXP psym, SEXP stype)
     {
-        GCRoot<PairList> pl(SEXP_downcast<PairList *>(Rf_list3(csym, psym, stype)));
+        GCStackRoot<PairList> pl(SEXP_downcast<PairList *>(Rf_list3(csym, psym, stype)));
         SET_TAG(pl, Symbol::obtain("Altrep class"));
         SET_TAG(CDR(pl), Symbol::obtain("Package"));              //
         SET_TAG(CDR(CDR(pl)), Symbol::obtain("Underlying type")); //

@@ -42,7 +42,7 @@
 #include <stdexcept>
 #include <CXXR/RObject.hpp>
 #include <CXXR/GCManager.hpp>
-#include <CXXR/GCRoot.hpp>
+#include <CXXR/GCStackRoot.hpp>
 #include <CXXR/SEXP_downcast.hpp>
 
 #if (SIZEOF_SIZE_T < SIZEOF_DOUBLE)

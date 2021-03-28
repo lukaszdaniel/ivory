@@ -31,7 +31,7 @@
 #define R_NO_REMAP
 #define R_USE_SIGNALS 1
 
-#include <CXXR/GCRoot.hpp>
+#include <CXXR/GCStackRoot.hpp>
 #include <CXXR/ProtectStack.hpp>
 #include <CXXR/JMPException.hpp>
 #include <CXXR/BuiltInFunction.hpp>
@@ -45,6 +45,8 @@
 #include <CXXR/StringVector.hpp>
 #include <CXXR/RawVector.hpp>
 #include <CXXR/Symbol.hpp>
+#include <CXXR/Environment.hpp>
+#include <CXXR/Promise.hpp>
 #include <Localization.h>
 #include <RContext.h>
 #include <Defn.h>
@@ -559,7 +561,6 @@ HIDDEN void check_stack_balance(SEXP op, size_t save)
     REprintf(_("Warning: stack imbalance in '%s', current %d, expected %d\n"), PRIMNAME(op), save, ProtectStack::size());
 }
 
-
 static SEXP forcePromise(SEXP e)
 {
     if (PRVALUE(e) == R_UnboundValue) {
@@ -598,7 +599,6 @@ static SEXP forcePromise(SEXP e)
     }
     return PRVALUE(e);
 }
-
 
 /*
  * Protecting the Stack During Possibly Mutating Operations
@@ -2208,7 +2208,7 @@ static SEXP replaceCall(SEXP fun, SEXP val, SEXP args, SEXP rhs)
     PROTECT(args);
     PROTECT(rhs);
     PROTECT(val);
-    GCRoot<PairList> tl(PairList::makeList(length(args) + 2));
+    GCStackRoot<PairList> tl(PairList::makeList(length(args) + 2));
     ptmp = tmp = new Expression(nullptr, tl);
     tmp->expose();
 	UNPROTECT(4);
@@ -2744,7 +2744,7 @@ static SEXP evalseq(SEXP expr, SEXP rho, int forcelocal,  R_varloc_t tmploc,
 	if (maybe_in_assign || MAYBE_SHARED(nval))
 	    nval = shallow_duplicate(nval);
 	UNPROTECT(1);
-	GCRoot<PairList> pl(SEXP_downcast<PairList*>(CONS_NR(expr, nullptr)));
+	GCStackRoot<PairList> pl(SEXP_downcast<PairList*>(CONS_NR(expr, nullptr)));
 	PairList *ans = SEXP_downcast<PairList *>(CONS_NR(nval, pl));
 	return ans;
     }
@@ -8523,8 +8523,8 @@ HIDDEN SEXP do_mkcode(SEXP call, SEXP op, SEXP args, SEXP rho)
 	checkArity(op, args);
 	bytes = CAR(args);
 	consts = CADR(args);
-	GCRoot<> enc(R_bcEncode(bytes));
-	GCRoot<PairList> pl(SEXP_downcast<PairList *>(consts));
+	GCStackRoot<> enc(R_bcEncode(bytes));
+	GCStackRoot<PairList> pl(SEXP_downcast<PairList *>(consts));
 	ans = new ByteCode(enc, pl);
 	ans->expose();
 	R_registerBC(bytes, ans);

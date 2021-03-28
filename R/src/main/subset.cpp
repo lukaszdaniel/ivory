@@ -916,7 +916,7 @@ HIDDEN SEXP do_subset_dflt(SEXP call, SEXP op, SEXP args, SEXP rho)
 		size_t len = LENGTH(ax);
 		if (len > 0)
 		{
-			GCRoot<PairList> tl(PairList::makeList(len - 1));
+			GCStackRoot<PairList> tl(PairList::makeList(len - 1));
 			ans = new Expression(nullptr, tl);
 		}
 		PROTECT(ans);

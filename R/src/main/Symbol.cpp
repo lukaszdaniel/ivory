@@ -35,6 +35,8 @@
 #include <CXXR/GCManager.hpp>
 #include <CXXR/Symbol.hpp>
 #include <CXXR/CachedString.hpp>
+#include <CXXR/Environment.hpp>
+#include <CXXR/Promise.hpp>
 #include <Rinternals.h>
 #include <Rinterface.h>
 #include <boost/regex.hpp>
@@ -108,11 +110,11 @@ namespace CXXR
         return ans;
     }
 
-    GCRoot<Symbol> Symbol::s_unbound_value(new Symbol(), true);
-    // GCRoot<Symbol> Symbol::s_missing_arg(new Symbol(CachedString::blank()), true);
-    // GCRoot<Symbol> Symbol::s_restart_token(new Symbol(CachedString::blank()), true);
-    GCRoot<Symbol> Symbol::s_in_bc_interpreter(new Symbol(CachedString::obtain("<in-bc-interp>")), true);
-    GCRoot<Symbol> Symbol::s_current_expression(new Symbol(CachedString::obtain("<current-expression>")), true);
+    GCStackRoot<Symbol> Symbol::s_unbound_value(new Symbol(), true);
+    // GCStackRoot<Symbol> Symbol::s_missing_arg(new Symbol(CachedString::blank()), true);
+    // GCStackRoot<Symbol> Symbol::s_restart_token(new Symbol(CachedString::blank()), true);
+    GCStackRoot<Symbol> Symbol::s_in_bc_interpreter(new Symbol(CachedString::obtain("<in-bc-interp>")), true);
+    GCStackRoot<Symbol> Symbol::s_current_expression(new Symbol(CachedString::obtain("<current-expression>")), true);
 
     namespace
     {
@@ -189,7 +191,7 @@ namespace CXXR
     Symbol *Symbol::missingArgument()
     {
 #if CXXR_TRUE
-        static GCRoot<Symbol> missing(createUnnamedSymbol(), true);
+        static GCStackRoot<Symbol> missing(createUnnamedSymbol(), true);
         return missing.get();
 #else
         return s_missing_arg;
@@ -199,7 +201,7 @@ namespace CXXR
     Symbol *Symbol::unboundValue()
     {
 #if CXXR_FALSE
-        static GCRoot<Symbol> unbound(createUnnamedSymbol(), true);
+        static GCStackRoot<Symbol> unbound(createUnnamedSymbol(), true);
         return unbound.get();
 #else
         return s_unbound_value;
@@ -209,7 +211,7 @@ namespace CXXR
     Symbol *Symbol::restartToken()
     {
 #if CXXR_TRUE
-        static GCRoot<Symbol> restartTkn(createUnnamedSymbol(), true);
+        static GCStackRoot<Symbol> restartTkn(createUnnamedSymbol(), true);
         return restartTkn.get();
 #else
         return s_restart_token;
@@ -288,7 +290,7 @@ namespace CXXR
 
     Symbol *Symbol::obtainCE(const std::string &name, cetype_t enc)
     {
-        GCRoot<const CachedString> str(CachedString::obtain(name, enc));
+        GCStackRoot<const CachedString> str(CachedString::obtain(name, enc));
         return Symbol::obtain(str);
     }
 
@@ -310,7 +312,7 @@ namespace CXXR
         if (n < 0)
             Rf_error(_("..n symbol name for a negative n is not permitted"));
         const std::string ddval = ".." + std::to_string(n);
-        GCRoot<const CachedString> name(CachedString::obtain(ddval));
+        GCStackRoot<const CachedString> name(CachedString::obtain(ddval));
         return obtain(name);
     }
 
