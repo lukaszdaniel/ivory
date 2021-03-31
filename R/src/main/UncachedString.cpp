@@ -55,9 +55,7 @@ namespace CXXR
 
     UncachedString *UncachedString::obtain(const std::string &str, cetype_t encoding)
     {
-        UncachedString *ans = new UncachedString(str, encoding);
-        ans->expose();
-        return ans;
+        return GCNode::expose(new UncachedString(str, encoding));
     }
 
     void UncachedString::allocData(size_t sz)

@@ -31,6 +31,7 @@
 #ifndef ENVIRONMENT_HPP
 #define ENVIRONMENT_HPP
 
+#include <CXXR/GCRoot.hpp>
 #include <CXXR/RObject.hpp>
 #include <CXXR/ListVector.hpp>
 #include <CXXR/PairList.hpp>
@@ -287,9 +288,9 @@ namespace CXXR
       void visitChildren(const_visitor *v) const override;
 
    private:
-      static GCStackRoot<Environment> s_empty_env;
-      static GCStackRoot<Environment> s_base_env;
-      static GCStackRoot<Environment> s_global_env;
+      static GCRoot<Environment> s_empty_env;
+      static GCRoot<Environment> s_base_env;
+      static GCRoot<Environment> s_global_env;
 
       Environment *m_enclosing;
       PairList *m_frame;

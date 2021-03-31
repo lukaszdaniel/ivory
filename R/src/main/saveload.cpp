@@ -548,16 +548,13 @@ static void RemakeNextSEXP(FILE *fp, NodeInfo &node, int version, InputRoutines 
     /* ATTRIB(s) = */ m.InInteger(fp, d);
     switch (type) {
     case LISTSXP:
-	s = new PairList();
-	s->expose();
+	s = GCNode::expose(new PairList());
 	break;
     case LANGSXP:
-	s = new Expression();
-	s->expose();
+	s = GCNode::expose(new Expression());
 	break;
     case CLOSXP:
-	s = new Closure();
-	s->expose();
+	s = GCNode::expose(new Closure());
 	/* skip over CAR, CDR, and TAG */
 	/* CAR(s) = */ m.InInteger(fp, d);
 	/* CDR(s) = */ m.InInteger(fp, d);
@@ -571,8 +568,7 @@ static void RemakeNextSEXP(FILE *fp, NodeInfo &node, int version, InputRoutines 
 	/* TAG(s) = */ m.InInteger(fp, d);
 	break;
     case ENVSXP:
-	s = new Environment();
-	s->expose();
+	s = GCNode::expose(new Environment());
 	/* skip over CAR, CDR, and TAG */
 	/* CAR(s) = */ m.InInteger(fp, d);
 	/* CDR(s) = */ m.InInteger(fp, d);
@@ -582,15 +578,13 @@ static void RemakeNextSEXP(FILE *fp, NodeInfo &node, int version, InputRoutines 
 	/* skip over length and name fields */
 	/* length = */ m.InInteger(fp, d);
 	R_AllocStringBuffer(MAXELTSIZE - 1, (d->buffer));
-	s = new BuiltInFunction(StrToInternal(m.InString(fp, d)), false);
-	s->expose();
+	s = GCNode::expose(new BuiltInFunction(StrToInternal(m.InString(fp, d)), false));
 	break;
     case BUILTINSXP:
 	/* skip over length and name fields */
 	/* length = */ m.InInteger(fp, d);
 	R_AllocStringBuffer(MAXELTSIZE - 1, (d->buffer));
-	s = new BuiltInFunction(StrToInternal(m.InString(fp, d)));
-	s->expose();
+	s = GCNode::expose(new BuiltInFunction(StrToInternal(m.InString(fp, d))));
 	break;
     case CHARSXP:
 	len = m.InInteger(fp, d);
@@ -1339,32 +1333,28 @@ static SEXP NewReadItem(SEXP sym_table, SEXP env_table, FILE *fp,
 	PROTECT(s = pos ? VECTOR_ELT(env_table, pos - 1) : R_NilValue);
 	break;
     case LISTSXP:
-	PROTECT(s = new PairList());
-	s->expose();
+	PROTECT(s = GCNode::expose(new PairList()));
 	SET_TAG(s, NewReadItem(sym_table, env_table, fp, m, d));
 	SETCAR(s, NewReadItem(sym_table, env_table, fp, m, d));
 	SETCDR(s, NewReadItem(sym_table, env_table, fp, m, d));
 	/*UNPROTECT(1);*/
 	break;
     case LANGSXP:
-	PROTECT(s = new Expression());
-	s->expose();
+	PROTECT(s = GCNode::expose(new Expression()));
 	SET_TAG(s, NewReadItem(sym_table, env_table, fp, m, d));
 	SETCAR(s, NewReadItem(sym_table, env_table, fp, m, d));
 	SETCDR(s, NewReadItem(sym_table, env_table, fp, m, d));
 	/*UNPROTECT(1);*/
 	break;
     case DOTSXP:
-	PROTECT(s = new DottedArgs());
-	s->expose();
+	PROTECT(s = GCNode::expose(new DottedArgs()));
 	SET_TAG(s, NewReadItem(sym_table, env_table, fp, m, d));
 	SETCAR(s, NewReadItem(sym_table, env_table, fp, m, d));
 	SETCDR(s, NewReadItem(sym_table, env_table, fp, m, d));
 	/*UNPROTECT(1);*/
 	break;
     case CLOSXP:
-	PROTECT(s = new Closure());
-	s->expose();
+	PROTECT(s = GCNode::expose(new Closure()));
 	SET_CLOENV(s, NewReadItem(sym_table, env_table, fp, m, d));
 	SET_FORMALS(s, NewReadItem(sym_table, env_table, fp, m, d));
 	SET_BODY(s, NewReadItem(sym_table, env_table, fp, m, d));
@@ -1381,8 +1371,7 @@ static SEXP NewReadItem(SEXP sym_table, SEXP env_table, FILE *fp,
     }
     break;
     case EXTPTRSXP:
-	PROTECT(s = new ExternalPointer());
-	s->expose();
+	PROTECT(s = GCNode::expose(new ExternalPointer()));
 	R_SetExternalPtrAddr(s, nullptr);
 	R_SetExternalPtrProtected(s, NewReadItem(sym_table, env_table, fp, m, d));
 	R_SetExternalPtrTag(s, NewReadItem(sym_table, env_table, fp, m, d));

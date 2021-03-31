@@ -40,6 +40,7 @@
 #include <CXXR/IntVector.hpp>
 #include <CXXR/LogicalVector.hpp>
 #include <CXXR/Symbol.hpp>
+#include <CXXR/Evaluator.hpp>
 #include <Localization.h>
 #include <RContext.h>
 #include <R.h>
@@ -58,15 +59,15 @@ using namespace std;
 using namespace R;
 using namespace CXXR;
 
-/* eval() sets R_Visible = true. Thas may not be wanted when eval() is
+/* eval() sets Evaluator::enableResultPrinting(true). Thas may not be wanted when eval() is
    used in C code. This is a version that saves/restores R_Visible.
    This should probably be moved to eval.cpp, be make public, and used
    in  more places. LT */
 static SEXP evalKeepVis(SEXP e, SEXP rho)
 {
-    bool oldvis = R_Visible;
+    bool oldvis = Evaluator::resultPrinted();
     SEXP val = eval(e, rho);
-    R_Visible = oldvis;
+    Evaluator::enableResultPrinting(oldvis);
     return val;
 }
 
@@ -200,7 +201,7 @@ static void onintrEx(Rboolean resumeOK)
 			{
 				SET_ENV_RDEBUG(rho, dbflag); /* in case browser() has messed with it */
 				R_ReturnedValue = R_NilValue;
-				R_Visible = false;
+				Evaluator::enableResultPrinting(false);
 				restartcontext.end();
 				return;
 			}
@@ -770,7 +771,7 @@ static void restore_inError(void *data)
 {
 	int *poldval = (int *)data;
 	inError = *poldval;
-	R_Expressions = R_Expressions_keep;
+	Evaluator::extraDepth(false);
 }
 
 /* Do not check constants on error more than this number of times per one
@@ -810,7 +811,7 @@ NORET static void verrorcall_dflt(SEXP call, const char *format, va_list ap)
 	    REprintf("\n");
 	}
 	REprintf(_("Error: no more error handlers available (recursive errors?); invoking 'abort' restart\n"));
-	R_Expressions = R_Expressions_keep;
+	Evaluator::extraDepth(false);
 	jump_to_top_ex(FALSE, FALSE, FALSE, FALSE, FALSE);
     }
 
@@ -1670,14 +1671,14 @@ namespace
 static SEXP mkHandlerEntry(SEXP klass, SEXP parentenv, SEXP handler, SEXP rho,
 						   SEXP result, int calling)
 {
-	HandlerEntry *entry = new HandlerEntry();
+	HandlerEntry *entry = GCNode::expose(new HandlerEntry());
 	entry->m_class = SEXP_downcast<String *>(klass);
 	entry->m_parent_environment = SEXP_downcast<Environment *>(parentenv);
 	entry->m_handler = handler;
 	entry->m_environment = SEXP_downcast<Environment *>(rho);
 	entry->m_result = SEXP_downcast<ListVector *>(result);
 	entry->m_calling = (calling != 0);
-	entry->expose();
+
 	return entry;
 }
 
@@ -1745,7 +1746,7 @@ HIDDEN SEXP R_UnwindHandlerStack(SEXP target)
 
 constexpr R_xlen_t RESULT_SIZE = 4;
 
-static SEXP R_HandlerResultToken = nullptr;
+static GCRoot<> R_HandlerResultToken(nullptr);
 
 HIDDEN void R_FixupExitingHandlerResult(SEXP result)
 {
@@ -2418,7 +2419,7 @@ static SEXP default_tryCatch_handler(SEXP cond, void *data)
 
 static void default_tryCatch_finally(void *data) { }
 
-static SEXP trycatch_callback = nullptr;
+static GCRoot<> trycatch_callback(nullptr);
 static const char* trycatch_callback_source =
     "function(addr, classes, fin) {\n"
     "    handler <- function(cond)\n"
@@ -2528,9 +2529,9 @@ SEXP R_withCallingErrorHandler(SEXP (*body)(void *), void *bdata,
     static const char* wceh_callback_source =
 	"function(cond) .Internal(C_tryCatchHelper(addr, 1L, cond))";
 
-    static SEXP wceh_callback = nullptr;
-    static SEXP wceh_class = nullptr;
-    static SEXP addr_sym = nullptr;
+    static GCRoot<> wceh_callback(nullptr);
+    static GCRoot<CachedString> wceh_class(nullptr);
+    static GCRoot<Symbol> addr_sym(nullptr);
 
     if (body == nullptr) error(_("must supply a body function"));
 
@@ -2538,7 +2539,7 @@ SEXP R_withCallingErrorHandler(SEXP (*body)(void *), void *bdata,
 	wceh_callback = R_ParseEvalString(wceh_callback_source,
 					  R_BaseNamespace);
 	R_PreserveObject(wceh_callback);
-	wceh_class = mkChar("error");
+	wceh_class = CachedString::obtain("error");
 	R_PreserveObject(wceh_class);
 	addr_sym = Symbol::obtain("addr");
     }

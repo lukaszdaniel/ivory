@@ -342,6 +342,13 @@ HIDDEN SEXP do_maxNSize(SEXP call, SEXP op, SEXP args, SEXP rho)
         return ScalarReal(R_GetMaxNSize());
 }
 
+namespace
+{
+    /** @brief List of Persistent Objects
+     */
+    GCRoot<> R_PreciousList(nullptr);
+} // namespace
+
 /* R interface function */
 
 HIDDEN SEXP do_regFinaliz(SEXP call, SEXP op, SEXP args, SEXP rho)
@@ -705,6 +712,9 @@ HIDDEN void R::InitMemory()
 
     R_HandlerStack = R_RestartStack = R_NilValue;
 
+    /*  Unbound values which are to be preserved through GCs */
+    R_PreciousList = R_NilValue;
+
     /*  The current source line */
     R_Srcref = R_NilValue;
 }
@@ -755,31 +765,31 @@ SEXP Rf_allocSExp(SEXPTYPE t)
     switch (t)
     {
     case LISTSXP:
-        ans = new PairList();
+        ans = GCNode::expose(new PairList());
         break;
     case LANGSXP:
-        ans = new Expression();
+        ans = GCNode::expose(new Expression());
         break;
     case DOTSXP:
-        ans = new DottedArgs();
+        ans = GCNode::expose(new DottedArgs());
         break;
     case BCODESXP:
-        ans = new ByteCode();
+        ans = GCNode::expose(new ByteCode());
         break;
     case CLOSXP:
-        ans = new Closure();
+        ans = GCNode::expose(new Closure());
         break;
     case ENVSXP:
-        ans = new Environment();
+        ans = GCNode::expose(new Environment());
         break;
     // case PROMSXP:
-    //     ans = new Promise();
+    //     ans = GCNode::expose(new Promise());
     //     break;
     default:
         std::cerr << "Inappropriate SEXPTYPE (" << sexptype2char(t) << ") for ConsCell." << std::endl;
         abort();
     }
-    ans->expose();
+
     return ans;
 }
 
@@ -794,8 +804,7 @@ HIDDEN SEXP CONS_NR(SEXP car, SEXP cdr)
 {
     GCStackRoot<> crr(car);
     GCStackRoot<PairList> tlr(SEXP_downcast<CXXR::PairList *>(cdr));
-    SEXP s = new PairList();
-    s->expose();
+    SEXP s = GCNode::expose(new PairList());
 
     DISABLE_REFCNT(s);
     SETCAR(s, car);
@@ -807,9 +816,7 @@ SEXP Rf_lcons(SEXP cr, SEXP tl)
 {
     GCStackRoot<> crr(cr);
     GCStackRoot<PairList> tlr(SEXP_downcast<PairList *>(tl));
-    Expression *ans = new Expression(crr, tlr);
-    ans->expose();
-    return ans;
+    return GCNode::expose(new Expression(crr, tlr));
 }
 
 /*----------------------------------------------------------------------
@@ -845,9 +852,7 @@ SEXP R::NewEnvironment(SEXP namelist, SEXP valuelist, SEXP rho)
     GCStackRoot<> namelistr(namelist);
     GCStackRoot<PairList> namevalr(SEXP_downcast<PairList *>(valuelist));
     GCStackRoot<Environment> rhor(SEXP_downcast<Environment *>(rho));
-    Environment *ans = new Environment(rhor, namevalr);
-    ans->expose();
-    return ans;
+    return GCNode::expose(new Environment(rhor, namevalr));
 }
 
 /* mkPROMISE is defined directly do avoid the need to protect its arguments
@@ -861,8 +866,7 @@ HIDDEN SEXP R::mkPROMISE(SEXP expr, SEXP rho)
        substitute() and the like */
     ENSURE_NAMEDMAX(expr);
 
-    Promise *s = new Promise(exprt, rhort);
-    s->expose();
+    Promise *s = GCNode::expose(new Promise(exprt, rhort));
     SET_PRSEEN(s, 0);
     return s;
 }
@@ -906,44 +910,44 @@ SEXP Rf_allocVector3(SEXPTYPE type, R_xlen_t length = 1, R_allocator_t *allocato
         return nullptr;
     case RAWSXP:
     {
-        s = new RawVector(length, allocator);
+        s = GCNode::expose(new RawVector(length, allocator));
         break;
     }
     case CHARSXP:
         Rf_error(_("use of allocVector(CHARSXP ...) is defunct\n"));
     case LGLSXP:
     {
-        s = new LogicalVector(length, allocator);
+        s = GCNode::expose(new LogicalVector(length, allocator));
         break;
     }
     case INTSXP:
     {
-        s = new IntVector(length, allocator);
+        s = GCNode::expose(new IntVector(length, allocator));
         break;
     }
     case REALSXP:
     {
-        s = new RealVector(length, allocator);
+        s = GCNode::expose(new RealVector(length, allocator));
         break;
     }
     case CPLXSXP:
     {
-        s = new ComplexVector(length, allocator);
+        s = GCNode::expose(new ComplexVector(length, allocator));
         break;
     }
     case STRSXP:
     {
-        s = new StringVector(length);
+        s = GCNode::expose(new StringVector(length));
         break;
     }
     case EXPRSXP:
     {
-        s = new ExpressionVector(length);
+        s = GCNode::expose(new ExpressionVector(length));
         break;
     }
     case VECSXP:
     {
-        s = new ListVector(length);
+        s = GCNode::expose(new ListVector(length));
         break;
     }
     case LANGSXP:
@@ -955,7 +959,7 @@ SEXP Rf_allocVector3(SEXPTYPE type, R_xlen_t length = 1, R_allocator_t *allocato
         if (length == 0)
             return nullptr;
         GCStackRoot<PairList> tl(PairList::makeList(length - 1));
-        s = new Expression(nullptr, tl);
+        s = GCNode::expose(new Expression(nullptr, tl));
         break;
     }
     case LISTSXP:
@@ -969,16 +973,14 @@ SEXP Rf_allocVector3(SEXPTYPE type, R_xlen_t length = 1, R_allocator_t *allocato
     default:
         Rf_error(_("invalid type/length (%s/%d) in vector allocation"), type2char(type), length);
     }
-    s->expose();
+
     return s;
 }
 
 /* For future hiding of allocVector(CHARSXP) */
 HIDDEN SEXP R::allocCharsxp(R_len_t length)
 {
-    UncachedString *ans = new UncachedString(length);
-    ans->expose();
-    return ans;
+    return GCNode::expose(new UncachedString(length));
 }
 
 SEXP Rf_allocList(const int n)
@@ -1050,7 +1052,7 @@ void R_gc(void)
 }
 
 #ifdef THREADCHECK
-# if !defined(Win32) && defined(HAVE_PTHREAD)
+# if !defined(_WIN32) && defined(HAVE_PTHREAD)
 #   include <pthread.h>
 HIDDEN void R_check_thread(const char *s)
 {
@@ -1140,6 +1142,99 @@ void R_chk_free(void *ptr)
         free(ptr); /* ANSI C says free has no effect on nullptr, but
 			  better to be safe here */
 }
+
+/* This code keeps a list of objects which are not assigned to variables
+   but which are required to persist across garbage collections.  The
+   objects are registered with R_PreserveObject and deregistered with
+   R_ReleaseObject. */
+
+static SEXP DeleteFromList(SEXP object, SEXP list)
+{
+    if (CAR(list) == object)
+        return CDR(list);
+    else
+    {
+        SEXP last = list;
+        for (SEXP head = CDR(list); head != R_NilValue; head = CDR(head))
+        {
+            if (CAR(head) == object)
+            {
+                SETCDR(last, CDR(head));
+                return list;
+            }
+            else
+                last = head;
+        }
+        return list;
+    }
+}
+
+#define ALLOW_PRECIOUS_HASH
+#ifdef ALLOW_PRECIOUS_HASH
+/* This allows using a fixed size hash table. This makes deleting mush
+   more efficient for applications that don't follow the "sparing use"
+   advice in R-exts.texi. Using the hash table is enabled by starting
+   R with the environment variable R_HASH_PRECIOUS set.
+
+   Pointer hashing as used here isn't entirely portable (we do it in
+   at least one othe rplace, in serialize.cpp) but it could be made so
+   by computing a unique value based on the allocation page and
+   position in the page. */
+
+#define PHASH_SIZE 1069
+#define PTRHASH(obj) (((R_size_t) (obj)) >> 3)
+
+static bool use_precious_hash = false;
+static bool precious_inited = false;
+
+void R_PreserveObject(SEXP object)
+{
+    R_CHECK_THREAD;
+    if (!precious_inited)
+    {
+        precious_inited = true;
+        if (getenv("R_HASH_PRECIOUS"))
+            use_precious_hash = true;
+    }
+    if (use_precious_hash)
+    {
+        if (!R_PreciousList)
+            R_PreciousList = allocVector(VECSXP, PHASH_SIZE);
+        int bin = PTRHASH(object) % PHASH_SIZE;
+        SET_VECTOR_ELT(R_PreciousList, bin, CONS(object, VECTOR_ELT(R_PreciousList, bin)));
+    }
+    else
+        R_PreciousList = CONS(object, R_PreciousList);
+}
+
+void R_ReleaseObject(SEXP object)
+{
+    R_CHECK_THREAD;
+    if (!precious_inited)
+        return; /* can't be anything to delete yet */
+    if (use_precious_hash)
+    {
+        int bin = PTRHASH(object) % PHASH_SIZE;
+        SET_VECTOR_ELT(R_PreciousList, bin,
+                       DeleteFromList(object,
+                                      VECTOR_ELT(R_PreciousList, bin)));
+    }
+    else
+        R_PreciousList = DeleteFromList(object, R_PreciousList);
+}
+#else
+void R_PreserveObject(SEXP object)
+{
+    R_CHECK_THREAD;
+    R_PreciousList = CONS(object, R_PreciousList);
+}
+
+void R_ReleaseObject(SEXP object)
+{
+    R_CHECK_THREAD;
+    R_PreciousList = DeleteFromList(object, R_PreciousList);
+}
+#endif
 
 /* This code is similar to R_PreserveObject/R_ReleasObject, but objects are
    kept in a provided multi-set (which needs to be itself protected).

@@ -43,12 +43,14 @@
 #include <config.h>
 #endif
 
+#include <CXXR/GCRoot.hpp>
 #include <CXXR/PairList.hpp>
 #include <CXXR/Expression.hpp>
 #include <CXXR/VectorBase.hpp>
 #include <CXXR/String.hpp>
 #include <CXXR/StringVector.hpp>
 #include <CXXR/IntVector.hpp>
+#include <CXXR/Symbol.hpp>
 #include <Localization.h>
 #include <Defn.h>
 #include <Fileio.h>
@@ -61,6 +63,7 @@
 #include <Rmodules/Rinternet.h>
 
 using namespace R;
+using namespace CXXR;
 
 #define HttpdServerActivity 8
 #define HttpdWorkerActivity 9
@@ -517,7 +520,7 @@ static SEXP parse_query(char *query)
     return res;
 }
 
-static SEXP R_ContentTypeName, R_HandlersName;
+static GCRoot<Symbol> R_ContentTypeName, R_HandlersName;
 
 /* create an object representing the request body. It is NULL if the body is empty (or zero length).
  * In the case of a URL encoded form it will have the same shape as the query string (named string vector).
@@ -540,7 +543,7 @@ static SEXP parse_request_body(httpd_conn_t *c)
 		if (c->content_type)
 		{ /* attach the content type so it can be interpreted */
 			if (!R_ContentTypeName)
-				R_ContentTypeName = install("content-type");
+				R_ContentTypeName = Symbol::obtain("content-type");
 			setAttrib(res, R_ContentTypeName, mkString(c->content_type));
 		}
 		UNPROTECT(1);
@@ -580,7 +583,7 @@ static void fin_request(httpd_conn_t *c)
 	c->attr |= CONNECTION_CLOSE;
 }
 
-static SEXP custom_handlers_env;
+static GCRoot<> custom_handlers_env;
 
 /* returns a httpd handler (closure) for a given path. As a special case
  * it can return a symbol that will be resolved in the "tools" namespace.
@@ -598,7 +601,7 @@ static SEXP handler_for_path(const char *path) {
 	    DBG(Rprintf("handler_for_path('%s'): looking up custom handler '%s'\n", path, fn));
 	    /* we cache custom_handlers_env so in case it has not been loaded yet, fetch it */
 	    if (!custom_handlers_env) {
-		if (!R_HandlersName) R_HandlersName = install(".httpd.handlers.env");
+		if (!R_HandlersName) R_HandlersName = Symbol::obtain(".httpd.handlers.env");
 		SEXP toolsNS = PROTECT(R_FindNamespace(mkString("tools")));
 		custom_handlers_env = eval(R_HandlersName, toolsNS);
 		UNPROTECT(1); /* toolsNS */

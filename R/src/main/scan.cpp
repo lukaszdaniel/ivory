@@ -56,11 +56,12 @@
 
 #include <rlocale.h> /* for btowc */
 
-#ifdef Win32
+#ifdef _WIN32
 #include <trioremap.h> /* for %lld */
 #endif
 
 using namespace R;
+using namespace CXXR;
 
 /* The size of vector initially allocated by scan */
 constexpr int SCAN_BLOCKSIZE = 1000;

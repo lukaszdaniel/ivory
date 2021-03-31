@@ -26,6 +26,8 @@
 #include <config.h>
 #endif
 
+#include <CXXR/GCRoot.hpp>
+#include <CXXR/Symbol.hpp>
 #include <CXXR/Expression.hpp>
 #include <CXXR/VectorBase.hpp>
 #include <CXXR/FixedVector.hpp>
@@ -38,46 +40,46 @@
 using namespace R;
 using namespace CXXR;
 
-static SEXP ParenSymbol;
-static SEXP PlusSymbol;
-static SEXP MinusSymbol;
-static SEXP TimesSymbol;
-static SEXP DivideSymbol;
-static SEXP PowerSymbol;
-static SEXP ExpSymbol;
-static SEXP LogSymbol;
-static SEXP SinSymbol;
-static SEXP CosSymbol;
-static SEXP TanSymbol;
-static SEXP SinhSymbol;
-static SEXP CoshSymbol;
-static SEXP TanhSymbol;
-static SEXP SqrtSymbol;
-static SEXP PnormSymbol;
-static SEXP DnormSymbol;
-static SEXP AsinSymbol;
-static SEXP AcosSymbol;
-static SEXP AtanSymbol;
-static SEXP GammaSymbol;
-static SEXP LGammaSymbol;
-static SEXP DiGammaSymbol;
-static SEXP TriGammaSymbol;
-static SEXP PsiSymbol;
+static GCRoot<Symbol> ParenSymbol;
+static GCRoot<Symbol> PlusSymbol;
+static GCRoot<Symbol> MinusSymbol;
+static GCRoot<Symbol> TimesSymbol;
+static GCRoot<Symbol> DivideSymbol;
+static GCRoot<Symbol> PowerSymbol;
+static GCRoot<Symbol> ExpSymbol;
+static GCRoot<Symbol> LogSymbol;
+static GCRoot<Symbol> SinSymbol;
+static GCRoot<Symbol> CosSymbol;
+static GCRoot<Symbol> TanSymbol;
+static GCRoot<Symbol> SinhSymbol;
+static GCRoot<Symbol> CoshSymbol;
+static GCRoot<Symbol> TanhSymbol;
+static GCRoot<Symbol> SqrtSymbol;
+static GCRoot<Symbol> PnormSymbol;
+static GCRoot<Symbol> DnormSymbol;
+static GCRoot<Symbol> AsinSymbol;
+static GCRoot<Symbol> AcosSymbol;
+static GCRoot<Symbol> AtanSymbol;
+static GCRoot<Symbol> GammaSymbol;
+static GCRoot<Symbol> LGammaSymbol;
+static GCRoot<Symbol> DiGammaSymbol;
+static GCRoot<Symbol> TriGammaSymbol;
+static GCRoot<Symbol> PsiSymbol;
 /* new symbols in R 3.4.0: */
-static SEXP PiSymbol;
-static SEXP ExpM1Symbol;
-static SEXP Log1PSymbol;
-static SEXP Log2Symbol;
-static SEXP Log10Symbol;
-static SEXP SinPiSymbol;
-static SEXP CosPiSymbol;
-static SEXP TanPiSymbol;
-static SEXP FactorialSymbol;
-static SEXP LFactorialSymbol;
+static GCRoot<Symbol> PiSymbol;
+static GCRoot<Symbol> ExpM1Symbol;
+static GCRoot<Symbol> Log1PSymbol;
+static GCRoot<Symbol> Log2Symbol;
+static GCRoot<Symbol> Log10Symbol;
+static GCRoot<Symbol> SinPiSymbol;
+static GCRoot<Symbol> CosPiSymbol;
+static GCRoot<Symbol> TanPiSymbol;
+static GCRoot<Symbol> FactorialSymbol;
+static GCRoot<Symbol> LFactorialSymbol;
 /* possible future symbols
-static SEXP Log1PExpSymbol;
-static SEXP Log1MExpSymbol;
-static SEXP Log1PMxSymbol;
+static GCRoot<Symbol> Log1PExpSymbol;
+static GCRoot<Symbol> Log1MExpSymbol;
+static GCRoot<Symbol> Log1PMxSymbol;
 */
 
 static Rboolean Initialized = FALSE;
@@ -87,46 +89,46 @@ static void InitDerivSymbols(void)
 {
     /* Called from doD() and deriv() */
     if(Initialized) return;
-    ParenSymbol = install("(");
-    PlusSymbol = install("+");
-    MinusSymbol = install("-");
-    TimesSymbol = install("*");
-    DivideSymbol = install("/");
-    PowerSymbol = install("^");
-    ExpSymbol = install("exp");
-    LogSymbol = install("log");
-    SinSymbol = install("sin");
-    CosSymbol = install("cos");
-    TanSymbol = install("tan");
-    SinhSymbol = install("sinh");
-    CoshSymbol = install("cosh");
-    TanhSymbol = install("tanh");
-    SqrtSymbol = install("sqrt");
-    PnormSymbol = install("pnorm");
-    DnormSymbol = install("dnorm");
-    AsinSymbol = install("asin");
-    AcosSymbol = install("acos");
-    AtanSymbol = install("atan");
-    GammaSymbol = install("gamma");
-    LGammaSymbol = install("lgamma");
-    DiGammaSymbol = install("digamma");
-    TriGammaSymbol = install("trigamma");
-    PsiSymbol = install("psigamma");
+    ParenSymbol = Symbol::obtain("(");
+    PlusSymbol = Symbol::obtain("+");
+    MinusSymbol = Symbol::obtain("-");
+    TimesSymbol = Symbol::obtain("*");
+    DivideSymbol = Symbol::obtain("/");
+    PowerSymbol = Symbol::obtain("^");
+    ExpSymbol = Symbol::obtain("exp");
+    LogSymbol = Symbol::obtain("log");
+    SinSymbol = Symbol::obtain("sin");
+    CosSymbol = Symbol::obtain("cos");
+    TanSymbol = Symbol::obtain("tan");
+    SinhSymbol = Symbol::obtain("sinh");
+    CoshSymbol = Symbol::obtain("cosh");
+    TanhSymbol = Symbol::obtain("tanh");
+    SqrtSymbol = Symbol::obtain("sqrt");
+    PnormSymbol = Symbol::obtain("pnorm");
+    DnormSymbol = Symbol::obtain("dnorm");
+    AsinSymbol = Symbol::obtain("asin");
+    AcosSymbol = Symbol::obtain("acos");
+    AtanSymbol = Symbol::obtain("atan");
+    GammaSymbol = Symbol::obtain("gamma");
+    LGammaSymbol = Symbol::obtain("lgamma");
+    DiGammaSymbol = Symbol::obtain("digamma");
+    TriGammaSymbol = Symbol::obtain("trigamma");
+    PsiSymbol = Symbol::obtain("psigamma");
 /* new symbols */
-    PiSymbol = install("pi");
-    ExpM1Symbol = install("expm1");
-    Log1PSymbol = install("log1p");
-    Log2Symbol = install("log2");
-    Log10Symbol = install("log10");
-    SinPiSymbol = install("sinpi");
-    CosPiSymbol = install("cospi");
-    TanPiSymbol = install("tanpi");
-    FactorialSymbol = install("factorial");
-    LFactorialSymbol = install("lfactorial");
+    PiSymbol = Symbol::obtain("pi");
+    ExpM1Symbol = Symbol::obtain("expm1");
+    Log1PSymbol = Symbol::obtain("log1p");
+    Log2Symbol = Symbol::obtain("log2");
+    Log10Symbol = Symbol::obtain("log10");
+    SinPiSymbol = Symbol::obtain("sinpi");
+    CosPiSymbol = Symbol::obtain("cospi");
+    TanPiSymbol = Symbol::obtain("tanpi");
+    FactorialSymbol = Symbol::obtain("factorial");
+    LFactorialSymbol = Symbol::obtain("lfactorial");
 /* possible future symbols
-    Log1PExpSymbol = install("log1pexp");    # log(1+exp(x))
-    Log1MExpSymbol = install("log1mexp");    # log(1-exp(-x)), for x > 0
-    Log1PMxSymbol = install("log1pmx");      # log1p(x)-x
+    Log1PExpSymbol = Symbol::obtain("log1pexp");    # log(1+exp(x))
+    Log1MExpSymbol = Symbol::obtain("log1mexp");    # log(1-exp(-x)), for x > 0
+    Log1PMxSymbol = Symbol::obtain("log1pmx");      # log1p(x)-x
 */
 
     Initialized = TRUE;
@@ -490,8 +492,7 @@ static SEXP D(SEXP expr, SEXP var)
 	}
 	else if (CAR(expr) == SqrtSymbol) {
 	    GCStackRoot<PairList> tl(PairList::makeList(2));
-	    PROTECT(expr1 = new Expression(nullptr, tl));
-	    expr1->expose();
+	    PROTECT(expr1 = GCNode::expose(new Expression(nullptr, tl)));
 	    SETCAR(expr1, PowerSymbol);
 	    SETCADR(expr1, CADR(expr));
 	    SETCADDR(expr1, Constant(0.5));

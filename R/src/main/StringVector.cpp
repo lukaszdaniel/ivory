@@ -47,6 +47,7 @@ namespace CXXR
 
     StringVector *StringVector::clone(bool deep) const
     {
+        // return GCNode::expose(new StringVector(*this, deep));
         return new StringVector(*this, deep);
     }
 

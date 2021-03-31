@@ -74,6 +74,7 @@ namespace CXXR
 
     PairList *PairList::clone(bool deep) const
     {
+        // return GCNode::expose(new PairList(*this, deep));
         return new PairList(*this, deep);
     }
 

@@ -22,6 +22,7 @@
 #include <config.h>
 #endif
 
+#include <CXXR/GCRoot.hpp>
 #include <CXXR/Expression.hpp>
 #include <CXXR/FixedVector.hpp>
 #include <CXXR/IntVector.hpp>
@@ -488,8 +489,7 @@ SEXP modelmatrix(SEXP call, SEXP op, SEXP args, SEXP rho)
     PROTECT(contr2 = allocVector(VECSXP, nVar));
     GCStackRoot<PairList> tl(PairList::makeList(2));
 
-    PROTECT(expr = new Expression(nullptr, tl));
-    expr->expose();
+    PROTECT(expr = GCNode::expose(new Expression(nullptr, tl)));
     SETCAR(expr, install("contrasts"));
     SETCADDR(expr, allocVector(LGLSXP, 1));
 
@@ -769,16 +769,16 @@ SEXP modelmatrix(SEXP call, SEXP op, SEXP args, SEXP rho)
 /* updateform() :  Update a model formula by the replacement of "." templates.
    ---------------------------------------------------------------------------
  */
-static SEXP tildeSymbol = nullptr;
-static SEXP plusSymbol  = nullptr;
-static SEXP minusSymbol = nullptr;
-static SEXP timesSymbol = nullptr;
-static SEXP slashSymbol = nullptr;
-static SEXP colonSymbol = nullptr;
-static SEXP powerSymbol = nullptr;
-static SEXP dotSymbol   = nullptr;
-static SEXP parenSymbol = nullptr;
-static SEXP inSymbol    = nullptr;
+static GCRoot<> tildeSymbol(nullptr);
+static GCRoot<> plusSymbol(nullptr);
+static GCRoot<> minusSymbol(nullptr);
+static GCRoot<> timesSymbol(nullptr);
+static GCRoot<> slashSymbol(nullptr);
+static GCRoot<> colonSymbol(nullptr);
+static GCRoot<> powerSymbol(nullptr);
+static GCRoot<> dotSymbol(nullptr);
+static GCRoot<> parenSymbol(nullptr);
+static GCRoot<> inSymbol(nullptr);
 
 static SEXP ExpandDots(SEXP object, SEXP value)
 {
@@ -1006,9 +1006,9 @@ static int // 0/1 (Boolean) :
     parity,		//  +/- parity
     response;		//  1: response term in the model
 static int nwords;		/* # of words (ints) to code a term */
-static SEXP varlist;		/* variables in the model */
+static GCRoot<> varlist;		/* variables in the model */
 static PROTECT_INDEX vpi;
-static SEXP framenames;		/* variables names for specified frame */
+static GCRoot<> framenames;		/* variables names for specified frame */
 static bool haveDot;	/* does RHS of formula contain `.'? */
 
 static bool isZeroOne(SEXP x)

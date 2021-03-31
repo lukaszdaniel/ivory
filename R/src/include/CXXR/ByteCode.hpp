@@ -61,7 +61,8 @@ namespace CXXR
             return "bytecode";
         }
 
-        // Virtual function of RObject:
+        // Virtual functions of RObject:
+        RObject *evaluate(Environment *env) override;
         const char *typeName() const override;
 
     private:

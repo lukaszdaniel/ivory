@@ -81,7 +81,7 @@ abbreviate chartr make.names strtrim tolower toupper give error.
 /* Used to indicate that we can safely converted marked UTF-8 strings
    to wchar_t* -- not currently used.
 */
-#if defined(Win32) || defined(__STDC_ISO_10646__) || defined(__APPLE__) || defined(__FreeBSD__) || defined(__sun)
+#if defined(_WIN32) || defined(__STDC_ISO_10646__) || defined(__APPLE__) || defined(__FreeBSD__) || defined(__sun)
 #define TO_WCS_OK 1
 #else
 /*

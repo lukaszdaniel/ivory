@@ -25,6 +25,7 @@
 
 #define R_USE_SIGNALS 1
 
+#include <CXXR/GCRoot.hpp>
 #include <CXXR/VectorBase.hpp>
 #include <CXXR/IntVector.hpp>
 #include <CXXR/StringVector.hpp>
@@ -42,6 +43,7 @@
 
 using namespace std;
 using namespace R;
+using namespace CXXR;
 
 /* bison creates a non-static symbol yylloc (and other) in both gramLatex.o
    and gramRd.o, so remap */   
@@ -158,7 +160,7 @@ static ParseState parseState;
 #define COMMENTMODE 5   /* only used in deparsing */
 #define UNKNOWNMODE 6   /* ditto */
 
-static SEXP     SrcFile;  /* parse_Rd will *always* supply a srcfile */
+static GCRoot<>     SrcFile;  /* parse_Rd will *always* supply a srcfile */
 
 /* Routines used to build the parse tree */
 
@@ -191,11 +193,11 @@ static int	mkText(int);
 static int	mkVerb(int);
 static int 	mkComment(int);
 
-static SEXP R_RdTagSymbol = nullptr;
-static SEXP R_RdOptionSymbol = nullptr;
-static SEXP R_DefinitionSymbol = nullptr;
-static SEXP R_DynamicFlagSymbol = nullptr;
-static SEXP R_MacroSymbol = nullptr;
+static GCRoot<Symbol> R_RdTagSymbol(nullptr);
+static GCRoot<Symbol> R_RdOptionSymbol(nullptr);
+static GCRoot<Symbol> R_DefinitionSymbol(nullptr);
+static GCRoot<Symbol> R_DynamicFlagSymbol(nullptr);
+static GCRoot<Symbol> R_MacroSymbol(nullptr);
 
 #define YYSTYPE		SEXP
 
@@ -994,15 +996,15 @@ static void GrowList(SEXP l, SEXP s)
 static void InitSymbols(void)
 {
     if (!R_RdTagSymbol)
-	R_RdTagSymbol = install("Rd_tag");
+	R_RdTagSymbol = Symbol::obtain("Rd_tag");
     if (!R_RdOptionSymbol)
-	R_RdOptionSymbol = install("Rd_option");
+	R_RdOptionSymbol = Symbol::obtain("Rd_option");
     if (!R_DefinitionSymbol)
-	R_DefinitionSymbol = install("definition");
+	R_DefinitionSymbol = Symbol::obtain("definition");
     if (!R_DynamicFlagSymbol)
-	R_DynamicFlagSymbol = install("dynamicFlag");
+	R_DynamicFlagSymbol = Symbol::obtain("dynamicFlag");
     if (!R_MacroSymbol)
-	R_MacroSymbol = install("macro");
+	R_MacroSymbol = Symbol::obtain("macro");
 }
 
 static SEXP ParseRd(ParseStatus *status, SEXP srcfile, bool fragment, SEXP macros)

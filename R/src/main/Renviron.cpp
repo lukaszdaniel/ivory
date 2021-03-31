@@ -39,7 +39,7 @@
 #include <Fileio.h>
 #include <cctype>		/* for isspace */
 
-#ifdef Win32
+#ifdef _WIN32
 #include <trioremap.h> /* to ensure snprintf result is null terminated */
 #endif
 

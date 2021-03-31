@@ -68,6 +68,8 @@ namespace CXXR
                 std::cerr << "Cloning not implemented yet (" << altsexptype() << ")" << std::endl;
                 abort();
             }
+            // if (t)
+            //     t->expose();
             return static_cast<AltRep *>(t.get());
         }
     }

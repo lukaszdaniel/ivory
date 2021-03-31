@@ -125,7 +125,7 @@ using namespace CXXR;
 #define PARSE_CONTEXT_SIZE 256	    /* Recent parse context kept in a circular buffer */
 
 static Rboolean busy = FALSE;
-static SEXP R_NullSymbol = nullptr;
+static GCRoot<Symbol> R_NullSymbol(nullptr);
 
 static int identifier;
 static void incrementId(void);
@@ -142,7 +142,7 @@ static FILE *fp_parse;
 static int (*ptr_getc)(void);
 
 static int	SavedToken;
-static SEXP	SavedLval;
+static GCRoot<>	SavedLval;
 
 #define yyconst const
 
@@ -274,7 +274,7 @@ static void	NextArg(SEXP, SEXP, SEXP); /* add named element to list end */
 static SEXP	TagArg(SEXP, SEXP, YYLTYPE *);
 static int 	processLineDirective(int *);
 
-static SEXP R_PipeBindSymbol = NULL;
+static GCRoot<Symbol> R_PipeBindSymbol(nullptr);
 
 /* These routines allocate constants */
 
@@ -3456,7 +3456,7 @@ static SEXP SrcRefsToVectorList() {
 
 #define CONTEXTSTACK_SIZE 50
 //static int	SavedToken;
-//static SEXP	SavedLval;
+//static GCRoot<>	SavedLval;
 static char	contextstack[CONTEXTSTACK_SIZE], *contextp;
 
 static void PutSrcRefState(SrcRefState *state);
@@ -4303,7 +4303,7 @@ static int SkipSpace(void)
 	blankwct = Ri18n_wctype("blank");
 #endif
 
-#ifdef Win32
+#ifdef _WIN32
     if(!mbcslocale) { /* 0xa0 is NBSP in all 8-bit Windows locales */
 	while ((c = xxgetc()) == ' ' || c == '\t' || c == '\f' ||
 	       (unsigned int) c == 0xa0) ;
@@ -4570,7 +4570,7 @@ static int NumericValue(int c)
    define it: we override macOS and FreeBSD earlier in this file.
 */
 
-#if defined(Win32) || defined(__STDC_ISO_10646__)
+#if defined(_WIN32) || defined(__STDC_ISO_10646__)
 typedef wchar_t ucs_t;
 #define mbcs_get_next2 mbcs_get_next
 #else
@@ -4624,7 +4624,7 @@ static SEXP mkStringUTF8(const ucs_t *wcs, int cnt)
     int nb;
 
 /* NB: cnt includes the terminator */
-#ifdef Win32
+#ifdef _WIN32
     nb = cnt*4; /* UCS-2/UTF-16 so max 4 bytes per wchar_t */
 #else
     nb = cnt*6;
@@ -4803,7 +4803,7 @@ static int StringValue(int c, Rboolean forSymbol)
 			error(_("invalid %s value %6x (line %d)"), "\\Uxxxxxxxx",
 			      val, ParseState.xxlineno);
 		}
-#ifdef Win32
+#ifdef _WIN32
 		if (0x010000 <= val && val <= 0x10FFFF) {   /* Need surrogate pair in Windows */
 		    val = val - 0x010000;
 		    WTEXT_PUSH( 0xD800 | (val >> 10) );

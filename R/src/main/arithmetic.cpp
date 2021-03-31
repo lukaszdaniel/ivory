@@ -324,7 +324,7 @@ extern "C"
 
 #if 0
 static int naflag;
-static SEXP lcall;
+static GCRoot<> lcall;
 #endif
 
 /* Integer arithmetic support */
@@ -408,7 +408,7 @@ R_INLINE static int R_integer_times(int x, int y, Rboolean *pnaflag)
     }
 }
 
-R_INLINE static double R_integer_divide(int x, int y)
+inline static double R_integer_divide(int x, int y)
 {
 	if (x == NA_INTEGER || y == NA_INTEGER)
 		return NA_REAL;
@@ -416,7 +416,7 @@ R_INLINE static double R_integer_divide(int x, int y)
 	return (double)x / (double)y;
 }
 
-R_INLINE static SEXP ScalarValue1(SEXP x)
+inline static SEXP ScalarValue1(SEXP x)
 {
 	if (NO_REFERENCES(x))
 		return x;
@@ -424,7 +424,7 @@ R_INLINE static SEXP ScalarValue1(SEXP x)
 	return allocVector(TYPEOF(x), 1);
 }
 
-R_INLINE static SEXP ScalarValue2(SEXP x, SEXP y)
+inline static SEXP ScalarValue2(SEXP x, SEXP y)
 {
 	if (NO_REFERENCES(x))
 		return x;
@@ -1697,7 +1697,7 @@ HIDDEN SEXP do_Math2(SEXP call, SEXP op, SEXP args, SEXP env)
 {
     SEXP res, call2;
     int n, nprotect = 2;
-    static SEXP do_Math2_formals = nullptr;
+    static GCRoot<> do_Math2_formals(nullptr);
 
     if (length(args) >= 2 &&
 	isSymbol(CADR(args)) && R_isMissing(CADR(args), env)) {
@@ -1716,7 +1716,7 @@ HIDDEN SEXP do_Math2(SEXP call, SEXP op, SEXP args, SEXP env)
 	error(n_("%d argument passed to '%s' function which requires 1 or 2 arguments", "%d arguments passed to '%s' function which requires 1 or 2 arguments", n),
 	      n, PRIMNAME(op));
 
-    static SEXP R_x_Symbol = nullptr;
+    static GCRoot<Symbol> R_x_Symbol(nullptr);
     if (! DispatchGroup("Math", call2, op, args, env, &res)) {
 	if(n == 1) {
 	    if(R_x_Symbol == nullptr) R_x_Symbol = Symbol::obtain("x");
@@ -1823,8 +1823,8 @@ HIDDEN SEXP do_log_builtin(SEXP call, SEXP op, SEXP args, SEXP env)
 	}
     }
 
-    static SEXP do_log_formals = nullptr;
-    static SEXP R_x_Symbol = nullptr;
+    static GCRoot<> do_log_formals(nullptr);
+    static GCRoot<Symbol> R_x_Symbol(nullptr);
     if (do_log_formals == nullptr) {
 	R_x_Symbol = Symbol::obtain("x");
 	do_log_formals = allocFormalsList2(R_x_Symbol, R_BaseSymbol);

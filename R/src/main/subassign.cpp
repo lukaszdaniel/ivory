@@ -123,7 +123,7 @@ using namespace CXXR;
 #define CLEAR_VECTOR_ELT(x, i) do { } while (0)
 #endif
 
-R_INLINE static SEXP getNames(SEXP x)
+inline static SEXP getNames(SEXP x)
 {
     /* defer to getAttrib if a 'dim' attribute is present */
     for (SEXP attr = ATTRIB(x); attr != R_NilValue; attr = CDR(attr))
@@ -148,7 +148,7 @@ static SEXP EnlargeVector(SEXP x, R_xlen_t newlen)
 {
     R_xlen_t len, newtruelen;
     SEXP newx, names;
-    static SEXP R_CheckBoundsSymbol = nullptr;
+    static GCRoot<Symbol> R_CheckBoundsSymbol(nullptr);
 
     if (R_CheckBoundsSymbol == nullptr)
 	R_CheckBoundsSymbol = Symbol::obtain("check.bounds");
@@ -309,7 +309,7 @@ static SEXP embedInVector(SEXP v, SEXP call)
 }
 
 static bool dispatch_asvector(SEXP *x, SEXP call, SEXP rho) {
-    static SEXP op = nullptr;
+    static GCRoot<> op(nullptr);
     SEXP args;
     bool ans;
     if (op == nullptr)
@@ -584,7 +584,7 @@ static SEXP DeleteListElements(SEXP x, SEXP which)
     return xnew;
 }
 
-R_INLINE static SEXP VECTOR_ELT_FIX_NAMED(SEXP y, R_xlen_t i) {
+inline static SEXP VECTOR_ELT_FIX_NAMED(SEXP y, R_xlen_t i) {
     /* if RHS (container or element) has NAMED > 0 set NAMED = NAMEDMAX.
        Duplicating might be safer/more consistent (PR15098) */
     SEXP val = VECTOR_ELT(y, i);

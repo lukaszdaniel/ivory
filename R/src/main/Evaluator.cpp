@@ -29,6 +29,7 @@
 
 #include <CXXR/Evaluator.hpp>
 #include <CXXR/Environment.hpp>
+#include <Localization.h>
 
 using namespace std;
 using namespace CXXR;
@@ -40,5 +41,39 @@ namespace CXXR
     namespace ForceNonInline
     {
         const auto &evalp = Rf_eval;
+    }
+
+    bool Evaluator::s_visible = false; // R_Visible
+
+    unsigned int Evaluator::s_depth = 0;              // R_EvalDepth, Evaluation recursion depth
+    unsigned int Evaluator::s_depth_threshold = 5000; // R_Expressions, options(expressions)
+    unsigned int Evaluator::s_depth_limit = 5000;     // R_Expressions_keep, options(expressions)
+    unsigned int Evaluator::s_countdown = 1000;
+    unsigned int Evaluator::s_countdown_start = 1000;
+
+    namespace
+    {
+        constexpr int R_MIN_EXPRESSIONS_OPT = 25;
+        constexpr int R_MAX_EXPRESSIONS_OPT = 500000;
+    }
+
+    // Implementation of Evaluator::evaluate() is in eval.cpp (for the time being)
+
+    void Evaluator::setDepthLimit(int depth)
+    {
+        if (depth < R_MIN_EXPRESSIONS_OPT || depth > R_MAX_EXPRESSIONS_OPT)
+            Rf_error(_("'expressions' parameter invalid, allowed %d...%d"),
+                     R_MIN_EXPRESSIONS_OPT, R_MAX_EXPRESSIONS_OPT);
+        s_depth_threshold = s_depth_limit = depth;
+    }
+
+    void Evaluator::enableResultPrinting(bool on)
+    {
+        s_visible = on;
+    }
+
+    bool Evaluator::resultPrinted()
+    {
+        return s_visible;
     }
 } // namespace CXXR

@@ -26,6 +26,7 @@
 #include <config.h>
 #endif
 
+#include <CXXR/Evaluator.hpp>
 #include <Defn.h>
 #include <Localization.h>
 #include <Internal.h>
@@ -335,7 +336,7 @@ SEXP do_system(SEXP call, SEXP op, SEXP args, SEXP rho)
 	return rval;
     } else {
 	rval = ScalarInteger(ll);
-	R_Visible = 0;
+	Evaluator::enableResultPrinting(false);
 	return rval;
     }
 }

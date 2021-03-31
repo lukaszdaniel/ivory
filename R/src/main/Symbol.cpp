@@ -33,6 +33,7 @@
 #define R_NO_REMAP
 
 #include <CXXR/GCManager.hpp>
+#include <CXXR/GCRoot.hpp>
 #include <CXXR/Symbol.hpp>
 #include <CXXR/CachedString.hpp>
 #include <CXXR/Environment.hpp>
@@ -43,6 +44,17 @@
 #include <sstream>
 
 using namespace CXXR;
+
+extern "C"
+{
+    SEXP Rf_findVar(SEXP symbol, SEXP rho);
+}
+
+namespace R
+{
+    SEXP ddfindVar(SEXP symbol, SEXP rho);
+    const char *EncodeChar(SEXP x);
+}
 
 namespace CXXR
 {
@@ -105,16 +117,14 @@ namespace CXXR
 
     Symbol *Symbol::createUnnamedSymbol()
     {
-        Symbol *ans = new Symbol(CachedString::blank());
-        ans->expose();
-        return ans;
+        return GCNode::expose(new Symbol());
     }
 
-    GCStackRoot<Symbol> Symbol::s_unbound_value(new Symbol(), true);
-    // GCStackRoot<Symbol> Symbol::s_missing_arg(new Symbol(CachedString::blank()), true);
-    // GCStackRoot<Symbol> Symbol::s_restart_token(new Symbol(CachedString::blank()), true);
-    GCStackRoot<Symbol> Symbol::s_in_bc_interpreter(new Symbol(CachedString::obtain("<in-bc-interp>")), true);
-    GCStackRoot<Symbol> Symbol::s_current_expression(new Symbol(CachedString::obtain("<current-expression>")), true);
+    GCStackRoot<Symbol> Symbol::s_unbound_value(GCNode::expose(new Symbol()));
+    // GCRoot<Symbol> Symbol::s_missing_arg(GCNode::expose(new Symbol()));
+    // GCRoot<Symbol> Symbol::s_restart_token(GCNode::expose(new Symbol()));
+    // GCRoot<Symbol> Symbol::s_in_bc_interpreter(GCNode::expose(new Symbol(CachedString::obtain("<in-bc-interp>"))));
+    // GCRoot<Symbol> Symbol::s_current_expression(GCNode::expose(new Symbol(CachedString::obtain("<current-expression>"))));
 
     namespace
     {
@@ -156,6 +166,40 @@ namespace CXXR
             m_internalfunc->conductVisitor(v);
     }
 
+    RObject *Symbol::evaluate(Environment *env)
+    {
+        if (this == R_DotsSymbol)
+            Rf_error(_("'...' used in an incorrect context"));
+        GCStackRoot<> val;
+        if (isDotDotSymbol())
+            val = R::ddfindVar(this, env);
+        else
+            val = Rf_findVar(this, env);
+        if (val == unboundValue())
+            Rf_error(_("object '%s' was not found"), R::EncodeChar(PRINTNAME(this)));
+        /* if ..d is missing then ddfindVar will signal */
+        else if (val == R_MissingArg && !isDotDotSymbol())
+        {
+            if (name())
+                Rf_error(_("'%s' argument is missing, with no default"), name()->c_str());
+            else
+                Rf_error(_("'%s' argument is missing, with no default"), "expr");
+        }
+        else if (TYPEOF(val) == PROMSXP)
+        {
+            if (PRVALUE(val) == unboundValue())
+            {
+                val = SEXP_downcast<Promise *>(val.get())->force();
+            }
+            else
+                val = PRVALUE(val);
+            ENSURE_NAMEDMAX(val);
+        }
+        else
+            ENSURE_NAMED(val); /* should not really be needed - LT */
+        return val;
+    }
+
     void Symbol::initialize()
     {
         /* Create marker values */
@@ -191,7 +235,7 @@ namespace CXXR
     Symbol *Symbol::missingArgument()
     {
 #if CXXR_TRUE
-        static GCStackRoot<Symbol> missing(createUnnamedSymbol(), true);
+        static GCRoot<Symbol> missing(GCNode::expose(createUnnamedSymbol()));
         return missing.get();
 #else
         return s_missing_arg;
@@ -201,7 +245,7 @@ namespace CXXR
     Symbol *Symbol::unboundValue()
     {
 #if CXXR_FALSE
-        static GCStackRoot<Symbol> unbound(createUnnamedSymbol(), true);
+        static GCRoot<Symbol> unbound(GCNode::expose(createUnnamedSymbol()));
         return unbound.get();
 #else
         return s_unbound_value;
@@ -211,7 +255,7 @@ namespace CXXR
     Symbol *Symbol::restartToken()
     {
 #if CXXR_TRUE
-        static GCStackRoot<Symbol> restartTkn(createUnnamedSymbol(), true);
+        static GCRoot<Symbol> restartTkn(GCNode::expose(createUnnamedSymbol()));
         return restartTkn.get();
 #else
         return s_restart_token;
@@ -220,12 +264,22 @@ namespace CXXR
 
     Symbol *Symbol::inBCInterpreter()
     {
+#if CXXR_TRUE
+        static GCRoot<Symbol> InBCInterpreter(GCNode::expose(new Symbol(CachedString::obtain("<in-bc-interp>"))));
+        return InBCInterpreter.get();
+#else
         return s_in_bc_interpreter;
+#endif
     }
 
     Symbol *Symbol::currentExpression()
     {
+#if CXXR_TRUE
+        static GCRoot<Symbol> CurrentExpression(GCNode::expose(new Symbol(CachedString::obtain("<current-expression>"))));
+        return CurrentExpression.get();
+#else
         return s_current_expression;
+#endif
     }
 
     Symbol::Table *Symbol::getTable()
@@ -269,9 +323,8 @@ namespace CXXR
         {
             try
             {
-                val.second = new Symbol(name);
+                val.second = GCNode::expose(new Symbol(name));
                 name->m_symbol = val.second;
-                val.second->expose();
             }
             catch (...)
             {

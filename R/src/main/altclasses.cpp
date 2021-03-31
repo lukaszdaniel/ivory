@@ -40,7 +40,7 @@
 #include <Print.h> /* for R_print */
 #include <R_ext/Itermacros.h>
 
-#ifdef Win32
+#ifdef _WIN32
 #include <trioremap.h> /* for %lld */
 #endif
 
@@ -634,7 +634,7 @@ HIDDEN SEXP R_compact_intrange(R_xlen_t n1, R_xlen_t n2)
         }                                                            \
     } while (0)
 
-static SEXP R_OutDecSym = nullptr;
+static GCRoot<Symbol> R_OutDecSym(nullptr);
 
 R_INLINE static const char *DEFERRED_STRING_OUTDEC(SEXP x)
 {
@@ -688,7 +688,7 @@ static Rboolean deferred_string_Inspect(SEXP x, int pre, int deep, int pvec,
     return TRUE;
 }
 
-R_INLINE static R_xlen_t deferred_string_Length(SEXP x)
+inline static R_xlen_t deferred_string_Length(SEXP x)
 {
     SEXP state = DEFERRED_STRING_STATE(x);
     return state == R_NilValue ?
@@ -696,7 +696,7 @@ R_INLINE static R_xlen_t deferred_string_Length(SEXP x)
 	XLENGTH(DEFERRED_STRING_STATE_ARG(state));
 }
 
-R_INLINE static SEXP ExpandDeferredStringElt(SEXP x, R_xlen_t i)
+inline static SEXP ExpandDeferredStringElt(SEXP x, R_xlen_t i)
 {
     /* make sure the STRSXP for the expanded string is allocated */
     /* not yet expanded strings are NULL in the STRSXP */
@@ -952,7 +952,7 @@ HIDDEN SEXP R_deferred_coerceToString(SEXP v, SEXP info)
    state object.
  */
 
-#ifndef Win32
+#ifndef _WIN32
 static SEXP make_mmap_state(SEXP file, size_t size, SEXPTYPE type,
 			    Rboolean ptrOK, Rboolean wrtOK, Rboolean serOK)
 {
@@ -1003,7 +1003,7 @@ static R_altrep_class_t mmap_real_class;
    pointer for use by the finalizer.
 */
 
-#ifndef Win32
+#ifndef _WIN32
 static void register_mmap_eptr(SEXP eptr);
 static SEXP make_mmap(void *p, SEXP file, size_t size, SEXPTYPE type,
 		      Rboolean ptrOK, Rboolean wrtOK, Rboolean serOK)
@@ -1059,8 +1059,8 @@ R_INLINE static void *MMAP_ADDR(SEXP x)
    instruction. */
 
 
-#ifndef Win32
-static SEXP mmap_list = nullptr;
+#ifndef _WIN32
+static GCRoot<ConsCell> mmap_list(nullptr);
 
 constexpr int MAXCOUNT = 10;
 
@@ -1068,7 +1068,7 @@ static void mmap_finalize(SEXP eptr);
 static void register_mmap_eptr(SEXP eptr)
 {
     if (mmap_list == nullptr) {
-	mmap_list = CONS(R_NilValue, R_NilValue);
+	mmap_list = CXXR_cons(R_NilValue, R_NilValue);
 	R_PreserveObject(mmap_list);
     }
 
@@ -1287,7 +1287,7 @@ static void InitMmapRealClass(DllInfo *dll)
  * Constructor
  */
 
-#ifdef Win32
+#ifdef _WIN32
 /* unused
 static void mmap_finalize(SEXP eptr)
 {
@@ -1466,7 +1466,7 @@ static R_altrep_class_t wrap_string_class;
 #define WRAPPER_SORTED(x) INTEGER(WRAPPER_METADATA(x))[0]
 #define WRAPPER_NO_NA(x) INTEGER(WRAPPER_METADATA(x))[1]
 
-R_INLINE static SEXP WRAPPER_WRAPPED_RW(SEXP x)
+inline static SEXP WRAPPER_WRAPPED_RW(SEXP x)
 {
     /* If the data might be shared and is accessed for possible
        modification, then it needs to be duplicated now. */

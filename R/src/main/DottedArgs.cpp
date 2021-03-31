@@ -37,7 +37,14 @@ namespace CXXR
 {
     DottedArgs *DottedArgs::clone(bool deep) const
     {
+        // return GCNode::expose(new DottedArgs(*this, deep));
         return new DottedArgs(*this, deep);
+    }
+
+    RObject *DottedArgs::evaluate(Environment *env)
+    {
+        Rf_error(_("'...' used in an incorrect context"));
+        return nullptr;
     }
 
     const char *DottedArgs::typeName() const

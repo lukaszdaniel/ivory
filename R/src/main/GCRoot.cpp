@@ -76,6 +76,7 @@ namespace CXXR
 
 // ***** C interface *****
 
+#if CXXR_FALSE
 /** @brief List of Persistent Objects
  *
  * @note This is not a busy list, so we don't bother to use Allocator.
@@ -91,3 +92,4 @@ void R_ReleaseObject(SEXP object)
 {
     precious.erase(object);
 }
+#endif

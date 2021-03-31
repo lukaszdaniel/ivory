@@ -746,7 +746,7 @@ const char *R::EncodeString(SEXP s, int w, int quote, Rprt_adj justify)
 			*/
 			for(int j = 0; j < res; j++) *q++ = *p++;
 		    } else {
-# if !defined (__STDC_ISO_10646__) && !defined (Win32)
+# if !defined (__STDC_ISO_10646__) && !defined (_WIN32)
 			if(!use_ucs) Unicode_warning = TRUE;
 # endif
 			if(k > 0xffff)

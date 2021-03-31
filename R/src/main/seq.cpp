@@ -729,7 +729,7 @@ HIDDEN SEXP do_rep(SEXP call, SEXP op, SEXP args, SEXP rho)
 {
     SEXP ans, x, times = R_NilValue;
     R_xlen_t i, lx, len = NA_INTEGER, each = 1, nt;
-    static SEXP do_rep_formals = nullptr;
+    static GCRoot<> do_rep_formals(nullptr);
 
     /* includes factors, POSIX[cl]t, Date */
     /* DispatchOrEval internal generic: rep */
@@ -894,7 +894,7 @@ HIDDEN SEXP do_seq(SEXP call, SEXP op, SEXP args, SEXP rho)
     int nargs = length(args), lf;
     Rboolean One = (Rboolean) (nargs == 1);
     R_xlen_t i, lout = NA_INTEGER;
-    static SEXP do_seq_formals = nullptr;
+    static GCRoot<> do_seq_formals(nullptr);
 
     /* DispatchOrEval internal generic: seq.int */
     if (DispatchOrEval(call, op, "seq", args, rho, &ans, 0, 1))
@@ -1115,7 +1115,7 @@ HIDDEN SEXP do_seq_along(SEXP call, SEXP op, SEXP args, SEXP rho)
 {
     SEXP ans;
     R_xlen_t len;
-    static SEXP length_op = nullptr;
+    static GCRoot<> length_op(nullptr);
 
     /* Store the .Primitive for 'length' for DispatchOrEval to use. */
     if (length_op == nullptr) {

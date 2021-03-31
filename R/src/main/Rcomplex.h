@@ -31,7 +31,7 @@
 #ifdef __cplusplus
 #include <complex>
 #define I std::complex<double>(0,1)
-#elif defined(__GNUC__) && (defined(__sun__) || defined(__hpux__) || defined(Win32))
+#elif defined(__GNUC__) && (defined(__sun__) || defined(__hpux__) || defined(_WIN32))
 # undef  I
 # define I (__extension__ 1.0iF)
 #endif

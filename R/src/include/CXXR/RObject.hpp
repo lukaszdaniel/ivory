@@ -799,6 +799,15 @@ namespace CXXR
             return pattern ? pattern->clone(deep) : nullptr;
         }
 
+        /** @brief Evaluate object in a specified Environment.
+         *
+         * @param env Pointer to the environment in which evaluation
+         *          is to take place.
+         *
+         * @return Pointer to the result of evaluation.
+         */
+        virtual RObject *evaluate(Environment *env);
+
         void xfix_refcnt(RObject *old, RObject *new_);
         void xfix_binding_refcnt(RObject *old, RObject *new_);
 

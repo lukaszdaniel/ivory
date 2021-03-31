@@ -1557,8 +1557,7 @@ HIDDEN SEXP do_matchcall(SEXP call, SEXP op, SEXP args, SEXP env)
 
     rlist = StripUnmatched(rlist);
 
-    PROTECT(rval = new Expression());
-    rval->expose();
+    PROTECT(rval = GCNode::expose(new Expression()));
     SETCAR(rval, lazy_duplicate(CAR(funcall)));
     SETCDR(rval, rlist);
     UNPROTECT(3);

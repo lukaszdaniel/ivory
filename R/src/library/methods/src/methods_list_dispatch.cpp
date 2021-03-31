@@ -25,6 +25,7 @@
 #include <config.h>
 #endif
 
+#include <CXXR/GCRoot.hpp>
 #include <CXXR/Expression.hpp>
 #include <CXXR/VectorBase.hpp>
 #include <CXXR/FunctionBase.hpp>
@@ -37,6 +38,7 @@
 #include <Rinternals.h>
 
 using namespace R;
+using namespace CXXR;
 
 #define STRING_VALUE(x)		CHAR(asChar(x))
 
@@ -54,25 +56,26 @@ static SEXP R_selectByPackage(SEXP f, SEXP classes, int nargs);
 
 /* objects, mostly symbols, that are initialized once to save a little time */
 static int initialized = 0;
-static SEXP s_dot_Methods, s_skeleton, s_expression, s_function,
+static GCRoot<Symbol> s_dot_Methods, s_skeleton, s_expression, s_function,
     s_getAllMethods, s_objectsEnv, s_MethodsListSelect,
     s_sys_dot_frame, s_sys_dot_call, s_sys_dot_function, s_generic,
-    s_missing, s_generic_dot_skeleton, s_subset_gets, s_element_gets,
-    s_argument, s_allMethods, s_base;
-static SEXP R_FALSE, R_TRUE;
+    s_generic_dot_skeleton, s_subset_gets, s_element_gets,
+    s_argument, s_allMethods;
+static GCRoot<> s_missing, s_base;
+static GCRoot<> R_FALSE, R_TRUE;
 static Rboolean table_dispatch_on = TRUE;
 
 /* precomputed skeletons for special primitive calls */
-static SEXP R_short_skeletons, R_empty_skeletons;
-static SEXP f_x_i_skeleton, fgets_x_i_skeleton, f_x_skeleton, fgets_x_skeleton;
+static GCRoot<> R_short_skeletons, R_empty_skeletons;
+static GCRoot<> f_x_i_skeleton, fgets_x_i_skeleton, f_x_skeleton, fgets_x_skeleton;
 
 
 SEXP R_quick_method_check(SEXP object, SEXP fsym, SEXP fdef);
 
-static SEXP R_target, R_defined, R_nextMethod, R_dot_nextMethod,
+static GCRoot<Symbol> R_target, R_defined, R_nextMethod, R_dot_nextMethod,
     R_loadMethod_name, R_methods_name, R_tripleColon_name;
 
-static SEXP Methods_Namespace = nullptr;
+static GCRoot<> Methods_Namespace(nullptr);
 
 static const char *check_single_string(SEXP, Rboolean, const char *);
 static const char *check_symbol_or_string(SEXP obj, Rboolean nonEmpty, const char *what);
@@ -144,13 +147,13 @@ static SEXP R_conditionMessage(SEXP cond)
 
 static void init_loadMethod()
 {
-    R_target = install("target");
-    R_defined = install("defined");
-    R_nextMethod = install("nextMethod");
-    R_loadMethod_name = install("loadMethod");
-    R_dot_nextMethod = install(".nextMethod");
-    R_methods_name = install("methods");
-    R_tripleColon_name = install(":::");
+    R_target = Symbol::obtain("target");
+    R_defined = Symbol::obtain("defined");
+    R_nextMethod = Symbol::obtain("nextMethod");
+    R_loadMethod_name = Symbol::obtain("loadMethod");
+    R_dot_nextMethod = Symbol::obtain(".nextMethod");
+    R_methods_name = Symbol::obtain("methods");
+    R_tripleColon_name = Symbol::obtain(":::");
 }
 
 
@@ -163,22 +166,22 @@ SEXP R_initMethodDispatch(SEXP envir)
     if(initialized)
 	return(envir);
 
-    s_dot_Methods = install(".Methods");
-    s_skeleton = install("skeleton");
-    s_expression = install("expression");
-    s_function = install("function");
-    s_getAllMethods = install("getAllMethods");
-    s_objectsEnv = install("objectsEnv");
-    s_MethodsListSelect = install("MethodsListSelect");
-    s_sys_dot_frame = install("sys.frame");
-    s_sys_dot_call = install("sys.call");
-    s_sys_dot_function = install("sys.function");
-    s_generic = install("generic");
-    s_generic_dot_skeleton = install("generic.skeleton");
-    s_subset_gets = install("[<-");
-    s_element_gets = install("[[<-");
-    s_argument = install("argument");
-    s_allMethods = install("allMethods");
+    s_dot_Methods = Symbol::obtain(".Methods");
+    s_skeleton = Symbol::obtain("skeleton");
+    s_expression = Symbol::obtain("expression");
+    s_function = Symbol::obtain("function");
+    s_getAllMethods = Symbol::obtain("getAllMethods");
+    s_objectsEnv = Symbol::obtain("objectsEnv");
+    s_MethodsListSelect = Symbol::obtain("MethodsListSelect");
+    s_sys_dot_frame = Symbol::obtain("sys.frame");
+    s_sys_dot_call = Symbol::obtain("sys.call");
+    s_sys_dot_function = Symbol::obtain("sys.function");
+    s_generic = Symbol::obtain("generic");
+    s_generic_dot_skeleton = Symbol::obtain("generic.skeleton");
+    s_subset_gets = Symbol::obtain("[<-");
+    s_element_gets = Symbol::obtain("[[<-");
+    s_argument = Symbol::obtain("argument");
+    s_allMethods = Symbol::obtain("allMethods");
 
     R_FALSE = ScalarLogical(FALSE);
     R_PreserveObject(R_FALSE);
@@ -186,10 +189,10 @@ SEXP R_initMethodDispatch(SEXP envir)
     R_PreserveObject(R_TRUE);
 
     /* some strings (NOT symbols) */
-    s_missing = mkString("missing");
+    s_missing = Rf_mkString("missing");
     setAttrib(s_missing, R_PackageSymbol, mkString("methods"));
     R_PreserveObject(s_missing);
-    s_base = mkString("base");
+    s_base = Rf_mkString("base");
     R_PreserveObject(s_base);
     /*  Initialize method dispatch, using the static */
     R_set_standardGeneric_ptr(
@@ -325,14 +328,14 @@ SEXP R_quick_method_check(SEXP args, SEXP mlist, SEXP fdef)
 SEXP R_quick_dispatch(SEXP args, SEXP genericEnv, SEXP fdef)
 {
     /* Match the list of (possibly promised) args to the methods table. */
-    static SEXP  R_allmtable = nullptr, R_siglength;
+    static GCRoot<Symbol> R_allmtable(nullptr), R_siglength;
     SEXP object, value, mtable;
     const char *class_; int nsig, nargs;
 #define NBUF 200
     char buf[NBUF]; char *ptr;
     if(!R_allmtable) {
-	R_allmtable = install(".AllMTable");
-	R_siglength = install(".SigLength");
+	R_allmtable = Symbol::obtain(".AllMTable");
+	R_siglength = Symbol::obtain(".SigLength");
     }
     if(!genericEnv || TYPEOF(genericEnv) != ENVSXP)
 	return R_NilValue; /* a bug or not initialized yet */
@@ -991,11 +994,11 @@ SEXP R_getClassFromCache(SEXP class_, SEXP table)
 
 static SEXP do_inherited_table(SEXP class_objs, SEXP fdef, SEXP mtable, SEXP ev)
 {
-    static SEXP f = nullptr;
+    static GCRoot<> f(nullptr);
     SEXP e, ee;
 
     if(f == nullptr) {
-	SEXP dotFind = install(".InheritForDispatch");
+	SEXP dotFind = Symbol::obtain(".InheritForDispatch");
 	/* NOTE: the call to findFun can lead to recursive (but it seems only one)
 	   invocation of do_inherited_table(), and hence this initialization
 	   (PR#17923). */
@@ -1014,12 +1017,12 @@ static SEXP do_inherited_table(SEXP class_objs, SEXP fdef, SEXP mtable, SEXP ev)
 
 static SEXP dots_class(SEXP ev, void *cleandata)
 {
-    static SEXP call = nullptr; SEXP  ee;
+    static GCRoot<> call(nullptr); SEXP  ee;
     if(call == nullptr) {
 	SEXP dotFind, f, R_dots;
 	dotFind = install(".dotsClass");
 	PROTECT(f = findFun(dotFind, R_MethodsNamespace));
-	R_dots = install("...");
+	R_dots = Symbol::obtain("...");
 	call = allocVector(LANGSXP, 2);
 	R_PreserveObject(call);
 	SETCAR(call,f); ee = CDR(call);
@@ -1031,9 +1034,10 @@ static SEXP dots_class(SEXP ev, void *cleandata)
 
 static SEXP do_mtable(SEXP fdef, SEXP ev)
 {
-    static SEXP dotFind = nullptr, f; SEXP  e, ee;
+    static GCRoot<Symbol> dotFind(nullptr);
+    static GCRoot<> f; SEXP  e, ee;
     if(dotFind == nullptr) {
-	dotFind = install(".getMethodsTable");
+	dotFind = Symbol::obtain(".getMethodsTable");
 	f = findFun(dotFind, R_MethodsNamespace);
 	R_PreserveObject(f);
     }
@@ -1047,7 +1051,7 @@ static SEXP do_mtable(SEXP fdef, SEXP ev)
 
 SEXP R_dispatchGeneric(SEXP fname, SEXP ev, SEXP fdef)
 {
-    static SEXP R_mtable = nullptr, R_allmtable, R_sigargs, R_siglength, R_dots;
+    static GCRoot<Symbol> R_mtable(nullptr), R_allmtable, R_sigargs, R_siglength, R_dots;
     int nprotect = 0;
     SEXP mtable, classes, thisClass = R_NilValue /* -Wall */, sigargs,
 	siglength, f_env = R_NilValue, method, f, val = R_NilValue;
@@ -1055,11 +1059,11 @@ SEXP R_dispatchGeneric(SEXP fname, SEXP ev, SEXP fdef)
     int nargs, i, lwidth = 0;
 
     if(!R_mtable) {
-	R_mtable = install(".MTable");
-	R_allmtable = install(".AllMTable");
-	R_sigargs = install(".SigArgs");
-	R_siglength = install(".SigLength");
-	R_dots = install("...");
+	R_mtable = Symbol::obtain(".MTable");
+	R_allmtable = Symbol::obtain(".AllMTable");
+	R_sigargs = Symbol::obtain(".SigArgs");
+	R_siglength = Symbol::obtain(".SigLength");
+	R_dots = Symbol::obtain("...");
     }
     switch(TYPEOF(fdef)) {
     case CLOSXP:

@@ -162,7 +162,7 @@ namespace
 }
 /* use the same bits (15 and 14) in symbols and bindings */
 static SEXP getActiveValue(SEXP);
-R_INLINE static SEXP BINDING_VALUE(SEXP b)
+inline static SEXP BINDING_VALUE(SEXP b)
 {
     if (BNDCELL_TAG(b)) {
 	R_expand_binding_value(b);
@@ -721,10 +721,10 @@ namespace
 
 #define INITIAL_CACHE_SIZE 1000
 
-static SEXP R_GlobalCache, R_GlobalCachePreserve;
+static GCRoot<> R_GlobalCache, R_GlobalCachePreserve;
 #endif
-static SEXP R_BaseNamespaceName;
-static SEXP R_NamespaceSymbol;
+static GCRoot<> R_BaseNamespaceName;
+static GCRoot<Symbol> R_NamespaceSymbol;
 
 HIDDEN void R::InitGlobalEnv()
 {
@@ -935,8 +935,7 @@ static SEXP findVarLocInFrame(SEXP rho, SEXP symbol, Rboolean *canCache)
 	       a user database, or maybe use an active binding
 	       mechanism to allow setting a new value to get back to
 	       the data base. */
-	    tmp = new PairList(val, nullptr, symbol);
-	    tmp->expose();
+	    tmp = GCNode::expose(new PairList(val, nullptr, symbol));
 	    /* If the database has a canCache method, then call that.
 	       Otherwise, we believe the setting for canCache. */
 	    if(canCache && table->canCache) {
@@ -1216,7 +1215,7 @@ static SEXP findGlobalVarLoc(SEXP symbol)
     return R_NilValue;
 }
 
-R_INLINE static SEXP findGlobalVar(SEXP symbol)
+inline static SEXP findGlobalVar(SEXP symbol)
 {
     SEXP loc = findGlobalVarLoc(symbol);
     switch (TYPEOF(loc)) {
@@ -2439,13 +2438,11 @@ HIDDEN SEXP do_attach(SEXP call, SEXP op, SEXP args, SEXP env)
 		if (TAG(x) == R_NilValue)
 		    error(_("all elements of a list must be named"));
 	    GCStackRoot<PairList> dupcar(SEXP_downcast<PairList*>(shallow_duplicate(CAR(args))));
-        PROTECT(s = new Environment(nullptr, dupcar));
-	    s->expose();
+        PROTECT(s = GCNode::expose(new Environment(nullptr, dupcar)));
 	} else if (isEnvironment(CAR(args))) {
 	    SEXP p, loadenv = CAR(args);
 
-	    PROTECT(s = new Environment());
-	    s->expose();
+	    PROTECT(s = GCNode::expose(new Environment()));
 	    if (HASHTAB(loadenv) != R_NilValue) {
 		int i, n;
 		n = length(HASHTAB(loadenv));
@@ -2486,8 +2483,7 @@ HIDDEN SEXP do_attach(SEXP call, SEXP op, SEXP args, SEXP env)
 	R_ObjectTable *tb = (R_ObjectTable*) R_ExternalPtrAddr(CAR(args));
 	if(tb->onAttach)
 	    tb->onAttach(tb);
-	PROTECT(s = new Environment());
-	s->expose();
+	PROTECT(s = GCNode::expose(new Environment()));
 	SET_HASHTAB(s, CAR(args));
 	setAttrib(s, R_ClassSymbol, getAttrib(HASHTAB(s), R_ClassSymbol));
     }
@@ -3792,8 +3788,8 @@ static SEXP checkVarName(SEXP call, SEXP name)
 
 static SEXP callR1(SEXP fun, SEXP arg)
 {
-    static SEXP R_xSymbol = NULL;
-    if (R_xSymbol == NULL)
+    static GCRoot<Symbol> R_xSymbol(nullptr);
+    if (R_xSymbol == nullptr)
 	R_xSymbol = Symbol::obtain("x");
 
     SEXP rho = PROTECT(NewEnvironment(R_NilValue, R_NilValue, R_BaseNamespace));
@@ -3807,11 +3803,11 @@ static SEXP callR1(SEXP fun, SEXP arg)
 
 SEXP attribute_hidden R_getNSValue(SEXP call, SEXP ns, SEXP name, int exported)
 {
-    static SEXP R_loadNamespaceSymbol = NULL;
-    static SEXP R_exportsSymbol = NULL;
-    static SEXP R_lazydataSymbol = NULL;
-    static SEXP R_getNamespaceNameSymbol = NULL;
-    if (R_loadNamespaceSymbol == NULL) {
+    static GCRoot<Symbol> R_loadNamespaceSymbol(nullptr);
+    static GCRoot<Symbol> R_exportsSymbol(nullptr);
+    static GCRoot<Symbol> R_lazydataSymbol(nullptr);
+    static GCRoot<Symbol> R_getNamespaceNameSymbol(nullptr);
+    if (R_loadNamespaceSymbol == nullptr) {
 	R_loadNamespaceSymbol = Symbol::obtain("loadNamespace");
 	R_exportsSymbol = Symbol::obtain("exports");
 	R_lazydataSymbol = Symbol::obtain("lazydata");

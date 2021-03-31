@@ -83,7 +83,7 @@
 #include <CXXR/StringVector.hpp>
 #include <CXXR/PairList.hpp>
 #include <CXXR/Symbol.hpp>
-#include <CXXR/Expression.hpp>
+#include <CXXR/Evaluator.hpp>
 #include <Localization.h>
 #include <RContext.h>
 #include <Defn.h>
@@ -150,7 +150,7 @@ constexpr int NCONNECTIONS = 128; /* need one per cluster node */
 constexpr int NSINKS = 21;
 
 static Rconnection Connections[NCONNECTIONS];
-static SEXP OutTextData;
+static GCRoot<> OutTextData;
 
 static int R_SinkNumber;
 static int SinkCons[NSINKS], SinkConsClose[NSINKS], R_SinkSplit[NSINKS];
@@ -731,7 +731,7 @@ static Rboolean isDir(FILE *fd)
 static Rboolean isDirPath(const char *path)
 {
 #ifdef HAVE_SYS_STAT_H
-#ifdef Win32
+#ifdef _WIN32
     struct _stati64 sb;
     if (!_stati64(path, &sb) && (sb.st_mode & S_IFDIR))
         return TRUE;
@@ -802,7 +802,7 @@ static Rboolean file_open(Rconnection con)
     } else {  /* use file("stdin") to refer to the file and not the console */
 #ifdef HAVE_FDOPEN
 	int dstdin = dup(0);
-# ifdef Win32
+# ifdef _WIN32
 	if (strchr(con->mode, 'b'))
 	    /* fdopen won't set dstdin to binary mode */
 	    setmode(dstdin, _O_BINARY);
@@ -1063,7 +1063,7 @@ static Rconnection newfile(const char *description, int enc, const char *mode,
 	/* for Solaris 12.5 */ newconn = nullptr;
     }
     ((Rfileconn) (newconn->connprivate))->raw = (Rboolean) raw;
-#ifdef Win32
+#ifdef _WIN32
     ((Rfileconn) (newconn->connprivate))->use_fgetwc = FALSE;
 #endif
     return newconn;
@@ -4696,8 +4696,8 @@ HIDDEN SEXP do_writebin(SEXP call, SEXP op, SEXP args, SEXP env)
     }
     if(isRaw) {
 	UNPROTECT(1);
-	R_Visible = true;
-    } else R_Visible = false;
+	Evaluator::enableResultPrinting(true);
+    } else Evaluator::enableResultPrinting(false);
     return ans;
 }
 
@@ -5040,10 +5040,10 @@ HIDDEN SEXP do_writechar(SEXP call, SEXP op, SEXP args, SEXP env)
     }
     if(isRaw) {
 	UNPROTECT(1);
-	R_Visible = true;
+	Evaluator::enableResultPrinting(true);
     } else {
 	ans = R_NilValue;
-	R_Visible = false;
+	Evaluator::enableResultPrinting(false);
     }
     return ans;
 }

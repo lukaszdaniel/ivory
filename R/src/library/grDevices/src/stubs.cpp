@@ -23,7 +23,7 @@
 
 #include <CXXR/VectorBase.hpp>
 #include <CXXR/PairList.hpp>
-#include <CXXR/Expression.hpp>
+#include <CXXR/Evaluator.hpp>
 #include <Defn.h>
 #include <Internal.h>
 #include "grDevices.h"
@@ -112,8 +112,8 @@ SEXP devAskNewPage(SEXP call, SEXP op, SEXP args, SEXP env)
 	ask = asLogical(CAR(args));
 	if (ask == NA_LOGICAL) error(_("invalid '%s' argument"), "ask");
 	gdd->ask = Rboolean(ask);
-	R_Visible = FALSE;
-    } else R_Visible = TRUE;
+	Evaluator::enableResultPrinting(false);
+    } else Evaluator::enableResultPrinting(true);
 
     return ScalarLogical(oldask);
 }

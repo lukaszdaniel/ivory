@@ -30,6 +30,7 @@
 #include <CXXR/IntVector.hpp>
 #include <CXXR/StringVector.hpp>
 #include <CXXR/Symbol.hpp>
+#include <CXXR/Evaluator.hpp>
 #include <Localization.h>
 #include <Defn.h>
 #include <Internal.h>
@@ -1825,7 +1826,7 @@ void GEText(double x, double y, const char * const str, cetype_t enc,
 	R_GE_VText(x, y, str, enc, xc, yc, rot, gc, dd);
     } else {
 	/* PR#7397: this seemed to reset R_Visible */
-	bool savevis = R_Visible;
+	bool savevis = Evaluator::resultPrinted();
 	int noMetricInfo = -1;
 	char *sbuf = nullptr;
 	if(str && *str) {
@@ -2036,7 +2037,7 @@ void GEText(double x, double y, const char * const str, cetype_t enc,
 	    }
 	    vmaxset(vmax);
 	}
-	R_Visible = savevis;
+	Evaluator::enableResultPrinting(savevis);
     }
 }
 
@@ -3339,7 +3340,7 @@ void GEonExit()
 int GEstring_to_pch(SEXP pch)
 {
     int ipch = NA_INTEGER;
-    static SEXP last_pch = nullptr;
+    static GCRoot<> last_pch(nullptr);
     static int last_ipch = 0;
 
     if (pch == NA_STRING) return NA_INTEGER;

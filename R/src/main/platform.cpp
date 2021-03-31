@@ -47,7 +47,7 @@
 #include <CXXR/LogicalVector.hpp>
 #include <CXXR/RealVector.hpp>
 #include <CXXR/PairList.hpp>
-#include <CXXR/Expression.hpp>
+#include <CXXR/Evaluator.hpp>
 #include <CXXR/Symbol.hpp>
 #include <Localization.h>
 #include <Defn.h>
@@ -74,7 +74,7 @@
 #include <sys/stat.h>
 #endif
 
-#ifdef Win32
+#ifdef _WIN32
 /* Mingw-w64 defines this to be 0x0502 */
 #ifndef _WIN32_WINNT
 #define _WIN32_WINNT 0x0500 /* for CreateHardLink */
@@ -322,7 +322,7 @@ static void Init_R_Platform(SEXP rho)
 #endif
 #ifdef _WIN32
     SET_VECTOR_ELT(value, 6, mkString(";"));
-#else /* not Win32 */
+#else /* not _WIN32 */
     SET_VECTOR_ELT(value, 6, mkString(":"));
 #endif
 #ifdef R_ARCH
@@ -1038,7 +1038,7 @@ HIDDEN SEXP do_fileinfo(SEXP call, SEXP op, SEXP args, SEXP rho)
 	    REAL(atime)[i] = (double) STAT_TIMESPEC(sb, st_atim).tv_sec
 		+ 1e-9 * (double) STAT_TIMESPEC(sb, st_atim).tv_nsec;
 #else
-#ifdef Win32
+#ifdef _WIN32
 #define WINDOWS_TICK 10000000
 #define SEC_TO_UNIX_EPOCH 11644473600LL
 	    {
@@ -1571,7 +1571,7 @@ HIDDEN SEXP do_fileaccess(SEXP call, SEXP op, SEXP args, SEXP rho)
     PROTECT(ans = allocVector(INTSXP, n));
     for (i = 0; i < n; i++)
 	if (STRING_ELT(fn, i) != NA_STRING) {
-#ifdef Win32
+#ifdef _WIN32
 	    INTEGER(ans)[i] =
 		winAccessW(filenameToWchar(STRING_ELT(fn, i), TRUE), modemask);
 #else
@@ -2385,7 +2385,7 @@ end:
 	warning(_("cannot create directory '%s', reason '%s'"), dir, strerror(serrno));
     return ScalarLogical(res == 0);
 }
-#else /* Win32 */
+#else /* _WIN32 */
 #include <io.h> /* mkdir is defined here */
 HIDDEN SEXP do_dircreate(SEXP call, SEXP op, SEXP args, SEXP env)
 {
@@ -3035,7 +3035,7 @@ HIDDEN SEXP do_sysumask(SEXP call, SEXP op, SEXP args, SEXP env)
     PROTECT(ans = ScalarInteger(res));
     setAttrib(ans, R_ClassSymbol, mkString("octmode"));
     UNPROTECT(1);
-    R_Visible = visible;
+    Evaluator::enableResultPrinting(visible);
     return ans;
 }
 
@@ -3080,7 +3080,7 @@ HIDDEN SEXP do_Cstack_info(SEXP call, SEXP op, SEXP args, SEXP rho)
     INTEGER(ans)[1] = (R_CStackLimit == (uintptr_t) -1) ? NA_INTEGER : (int)
 	(R_CStackDir * (R_CStackStart - (uintptr_t) &ans));
     INTEGER(ans)[2] = R_CStackDir;
-    INTEGER(ans)[3] = R_EvalDepth;
+    INTEGER(ans)[3] = Evaluator::depth();
     SET_STRING_ELT(nms, 0, mkChar("size"));
     SET_STRING_ELT(nms, 1, mkChar("current"));
     SET_STRING_ELT(nms, 2, mkChar("direction"));

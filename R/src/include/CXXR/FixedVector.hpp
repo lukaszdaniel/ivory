@@ -227,6 +227,7 @@ namespace CXXR
     template <typename T, SEXPTYPE ST>
     FixedVector<T, ST> *FixedVector<T, ST>::clone(bool deep) const
     {
+        // return GCNode::expose(new FixedVector<T, ST>(*this, deep));
         return new FixedVector<T, ST>(*this, deep);
     }
 

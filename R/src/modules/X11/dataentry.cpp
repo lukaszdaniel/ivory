@@ -38,7 +38,7 @@
 #define R_USE_SIGNALS 1
 
 #include <CXXR/String.hpp>
-#include <CXXR/GCStackRoot.hpp>
+#include <CXXR/GCRoot.hpp>
 #include <CXXR/Expression.hpp>
 #include <Localization.h>
 #include <RContext.h>
@@ -73,6 +73,7 @@
 
 using namespace std;
 using namespace R;
+// using namespace CXXR;
 
 #ifndef HAVE_KEYSYM
 #define KeySym int
@@ -181,7 +182,7 @@ static CellType get_col_type(DEstruct, int col);
 static void calc_pre_edit_pos(DEstruct DE);
 static int last_wchar_bytes(char *);
 static SEXP ssNewVector(SEXPTYPE, int);
-static SEXP ssNA_STRING;
+static CXXR::GCRoot<> ssNA_STRING;
 
 /* only used in the editor */
 static Atom _XA_WM_PROTOCOLS = 0;

@@ -43,7 +43,9 @@
 
 #include <complex>
 #include <Rcomplex.h>	/* toC99 */
+
 using namespace R;
+using namespace CXXR;
 
 /* "GetRowNames" and "GetColNames" are utility routines which
  * locate and return the row names and column names from the
@@ -478,7 +480,7 @@ HIDDEN R_len_t R::dispatch_length(SEXP x, SEXP call, SEXP rho)
 }
 
 HIDDEN R_xlen_t R::dispatch_xlength(SEXP x, SEXP call, SEXP rho) {
-    static SEXP length_op = nullptr;
+    static GCRoot<> length_op(nullptr);
     if (isObject(x)) {
         SEXP len, args;
         if (length_op == nullptr)

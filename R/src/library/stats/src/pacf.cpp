@@ -21,6 +21,8 @@
 #include <config.h>
 #endif
 
+#include <CXXR/GCRoot.hpp>
+#include <CXXR/Symbol.hpp>
 #include <R_ext/Minmax.h>
 
 #include <R.h>
@@ -28,6 +30,7 @@
 #include "localization.h"
 
 using namespace std;
+using namespace CXXR;
 
 /* Internal */
 static void partrans(int np, double *raw, double *new_);
@@ -76,7 +79,7 @@ SEXP pacf1(SEXP acf, SEXP lmax)
 
 /* Use an external reference to store the structure we keep allocated
    memory in */
-static SEXP Starma_tag;
+static GCRoot<Symbol> Starma_tag;
 
 #define GET_STARMA \
     Starma G; \
@@ -124,7 +127,7 @@ SEXP setup_starma(SEXP na, SEXP x, SEXP pn, SEXP xreg, SEXP pm,
     G->delta = asReal(dt);
     for(i = 0; i < n; i++) G->w[i] = G->wkeep[i] = rx[i];
     for(i = 0; i < n*m; i++) G->reg[i] = rxreg[i];
-    Starma_tag = install("STARMA_TAG");
+    Starma_tag = Symbol::obtain("STARMA_TAG");
     res = R_MakeExternalPtr(G, Starma_tag, R_NilValue);
     return res;
 }

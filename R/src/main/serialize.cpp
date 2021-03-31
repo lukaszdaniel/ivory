@@ -1863,8 +1863,7 @@ static SEXP ReadItem(SEXP ref_table, R_inpstream_t stream)
 	{
 	    int locked = InInteger(stream);
 
-	    PROTECT(s = new Environment());
-	    s->expose();
+	    PROTECT(s = GCNode::expose(new Environment()));
 
 	    /* MUST register before filling in */
 	    AddReadRef(ref_table, s);
@@ -1898,8 +1897,7 @@ static SEXP ReadItem(SEXP ref_table, R_inpstream_t stream)
 	   is worth to write the code to handle this now, but if it
 	   becomes necessary we can do it without needing to change
 	   the save format. */
-		PROTECT(s = new PairList());
-		s->expose();
+		PROTECT(s = GCNode::expose(new PairList()));
 		SETLEVELS(s, levs);
 		SET_OBJECT(s, objf);
 		R_ReadItemDepth++;
@@ -1927,8 +1925,7 @@ static SEXP ReadItem(SEXP ref_table, R_inpstream_t stream)
 	}
     case LANGSXP:
 	{
-		PROTECT(s = new Expression());
-		s->expose();
+		PROTECT(s = GCNode::expose(new Expression()));
 		SETLEVELS(s, levs);
 		SET_OBJECT(s, objf);
 		R_ReadItemDepth++;
@@ -1960,8 +1957,7 @@ static SEXP ReadItem(SEXP ref_table, R_inpstream_t stream)
 	}
     case DOTSXP:
 	{
-		PROTECT(s = new DottedArgs());
-		s->expose();
+		PROTECT(s = GCNode::expose(new DottedArgs()));
 		SETLEVELS(s, levs);
 		SET_OBJECT(s, objf);
 		R_ReadItemDepth++;
@@ -1994,8 +1990,7 @@ static SEXP ReadItem(SEXP ref_table, R_inpstream_t stream)
 	}
     case CLOSXP:
 	{
-		PROTECT(s = new Closure());
-		s->expose();
+		PROTECT(s = GCNode::expose(new Closure()));
 		SETLEVELS(s, levs);
 		SET_OBJECT(s, objf);
 		R_ReadItemDepth++;
@@ -2026,8 +2021,7 @@ static SEXP ReadItem(SEXP ref_table, R_inpstream_t stream)
 	}
     case PROMSXP:
 	{
-		PROTECT(s = new Promise(nullptr, nullptr));
-		s->expose();
+		PROTECT(s = GCNode::expose(new Promise(nullptr, nullptr)));
 		SETLEVELS(s, levs);
 		SET_OBJECT(s, objf);
 		R_ReadItemDepth++;
@@ -2062,8 +2056,7 @@ static SEXP ReadItem(SEXP ref_table, R_inpstream_t stream)
 	   newly allocated value PROTECTed */
 	switch (type) {
 	case EXTPTRSXP:
-	    PROTECT(s = new ExternalPointer());
-	    s->expose();
+	    PROTECT(s = GCNode::expose(new ExternalPointer()));
 	    AddReadRef(ref_table, s);
 	    R_SetExternalPtrAddr(s, nullptr);
 	    R_ReadItemDepth++;
@@ -2299,8 +2292,7 @@ static SEXP ReadBCConsts(SEXP ref_table, SEXP reps, R_inpstream_t stream)
 static SEXP ReadBC1(SEXP ref_table, SEXP reps, R_inpstream_t stream)
 {
     SEXP s;
-    PROTECT(s = new ByteCode());
-    s->expose();
+    PROTECT(s = GCNode::expose(new ByteCode()));
     R_ReadItemDepth++;
     SETCAR(s, ReadItem(ref_table, stream)); /* code */
     R_ReadItemDepth--;

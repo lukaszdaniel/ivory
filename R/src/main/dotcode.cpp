@@ -60,11 +60,11 @@ static void check1arg2(SEXP arg, SEXP call, const char *formal)
 
 /* These are set during the first call to do_dotCode() below. */
 
-static SEXP NaokSymbol = nullptr;
-static SEXP DupSymbol = nullptr;
-static SEXP PkgSymbol = nullptr;
-static SEXP EncSymbol = nullptr;
-static SEXP CSingSymbol = nullptr;
+static GCRoot<Symbol> NaokSymbol(nullptr);
+static GCRoot<Symbol> DupSymbol(nullptr);
+static GCRoot<Symbol> PkgSymbol(nullptr);
+static GCRoot<Symbol> EncSymbol(nullptr);
+static GCRoot<Symbol> CSingSymbol(nullptr);
 
 #include <Rdynpriv.h>
 
@@ -127,8 +127,8 @@ static void checkValidSymbolId(SEXP op, SEXP call, DL_FUNC *fun,
     if (isValidString(op)) return;
 
     if(TYPEOF(op) == EXTPTRSXP) {
-	static SEXP native_symbol = nullptr;
-	static SEXP registered_native_symbol = nullptr;
+	static GCRoot<Symbol> native_symbol(nullptr);
+	static GCRoot<Symbol> registered_native_symbol(nullptr);
 	if (native_symbol == nullptr) {
 	    native_symbol = Symbol::obtain("native symbol");
 	    registered_native_symbol = Symbol::obtain("registered native symbol");
@@ -1506,8 +1506,7 @@ void call_R(char *func, long nargs, void **arguments, char **modes,
     if (nres < 0)
 	error(_("invalid return value count in 'call_R()'"));
     GCStackRoot<PairList> tl(PairList::makeList(nargs));
-    PROTECT(pcall = call = new Expression(nullptr, tl));
-    call->expose();
+    PROTECT(pcall = call = GCNode::expose(new Expression(nullptr, tl)));
     SETCAR(pcall, (SEXP)func);
     s = R_NilValue;		/* -Wall */
     for (i = 0 ; i < nargs ; i++) {

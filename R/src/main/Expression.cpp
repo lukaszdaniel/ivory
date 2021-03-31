@@ -57,6 +57,7 @@ namespace CXXR
 
     Expression *Expression::clone(bool deep) const
     {
+        // return GCNode::expose(new Expression(*this, deep));
         return new Expression(*this, deep);
     }
 
@@ -65,9 +66,8 @@ namespace CXXR
         return staticTypeName();
     }
 
-    GCStackRoot<> R_CurrentExpr(nullptr);
-    GCStackRoot<> R_ReturnedValue(nullptr);
-    bool R_Visible = false;
+    GCRoot<> R_CurrentExpr(nullptr);
+    GCRoot<> R_ReturnedValue(nullptr);
 } // namespace CXXR
 
 // ***** C interface *****

@@ -38,6 +38,7 @@
 #include <CXXR/StringVector.hpp>
 #include <CXXR/LogicalVector.hpp>
 #include <CXXR/Symbol.hpp>
+#include <CXXR/Evaluator.hpp>
 #include <RContext.h>
 #include <Defn.h>
 #include <Localization.h>
@@ -110,9 +111,9 @@ static SEXP applyMethod(SEXP call, SEXP op, SEXP args, SEXP rho, SEXP newvars)
 	auto save = ProtectStack::size();
 	int flag = PRIMPRINT(op);
 	const void *vmax = vmaxget();
-	R_Visible = (flag != 1);
+	Evaluator::enableResultPrinting(flag != 1);
 	ans = PRIMFUN(op) (call, op, args, rho);
-	if (flag < 2) R_Visible = (flag != 1);
+	if (flag < 2) Evaluator::enableResultPrinting(flag != 1);
 	check_stack_balance(op, save);
 	vmaxset(vmax);
     }
@@ -126,9 +127,9 @@ static SEXP applyMethod(SEXP call, SEXP op, SEXP args, SEXP rho, SEXP newvars)
 	int flag = PRIMPRINT(op);
 	const void *vmax = vmaxget();
 	PROTECT(args = evalList(args, rho, call, 0));
-	R_Visible = (flag != 1);
+	Evaluator::enableResultPrinting(flag != 1);
 	ans = PRIMFUN(op) (call, op, args, rho);
-	if (flag < 2) R_Visible = (flag != 1);
+	if (flag < 2) Evaluator::enableResultPrinting(flag != 1);
 	UNPROTECT(1);
 	check_stack_balance(op, save);
 	vmaxset(vmax);
@@ -173,7 +174,7 @@ static SEXP matchmethargs(SEXP oldargs, SEXP newargs)
    loaded, and back to R_GlobalEnv when it is unloaded. */
 
 #ifdef S3_for_S4_warn /* not currently used */
-static SEXP s_check_S3_for_S4 = nullptr;
+static GCRoot<Symbol> s_check_S3_for_S4(nullptr);
 void R_warn_S3_for_S4(SEXP method) {
   SEXP call;
   if(!s_check_S3_for_S4)
@@ -251,7 +252,7 @@ HIDDEN
 SEXP R::R_LookupMethod(SEXP method, SEXP rho, SEXP callrho, SEXP defrho)
 {
     SEXP val, top = R_NilValue;	/* -Wall */
-    static SEXP s_S3MethodsTable = nullptr;
+    static GCRoot<Symbol> s_S3MethodsTable(nullptr);
     static int lookup_baseenv_after_globalenv = -1;
     static int lookup_report_search_path_uses = -1;
     char *lookup;
@@ -359,7 +360,7 @@ static int match_to_obj(SEXP arg, SEXP obj) {
    to an object from an S4 subclass.
 */
 int Rf_isBasicClass(const char *ss) {
-    static SEXP s_S3table = nullptr;
+    static GCRoot<> s_S3table(nullptr);
     if(!s_S3table) {
       s_S3table = findVarInFrame3(R_MethodsNamespace, Symbol::obtain(".S3MethodsClasses"), TRUE);
       if(s_S3table == R_UnboundValue)
@@ -381,7 +382,7 @@ Rboolean R_has_methods_attached(void) {
 	!R_BindingIsLocked(Symbol::obtain(".BasicFunsList"), R_MethodsNamespace));
 }
 
-R_INLINE static SEXP addS3Var(SEXP vars, SEXP name, SEXP value) {
+inline static SEXP addS3Var(SEXP vars, SEXP name, SEXP value) {
 
     SEXP res = CONS(value, vars);
     SET_TAG(res, name);
@@ -522,7 +523,7 @@ HIDDEN NORET SEXP do_usemethod(SEXP call, SEXP op, SEXP args, SEXP env)
     SEXP callenv, defenv;
     SEXP argList;
     RCNTXT *cptr;
-    static SEXP do_usemethod_formals = nullptr;
+    static GCRoot<> do_usemethod_formals(nullptr);
 
     static int lookup_use_topenv_as_defenv = -1;
     char *lookup;
@@ -658,7 +659,7 @@ static bool equalS3Signature(const char *signature, const char *left,
 }
 
 
-R_INLINE static SEXP getPrimitive(SEXP symbol)
+inline static SEXP getPrimitive(SEXP symbol)
 {
     SEXP value = SYMVALUE(symbol);
     if (TYPEOF(value) == PROMSXP) {
@@ -1087,7 +1088,7 @@ int R_check_class_and_super(SEXP x, const char **valid, SEXP rho)
 	/* now try the superclasses, i.e.,  try   is(x, "....");  superCl :=
 	   .selectSuperClasses(getClass("....")@contains, dropVirtual=TRUE)  */
 	SEXP classExts, superCl, _call;
-	static SEXP s_contains = nullptr, s_selectSuperCl = nullptr;
+	static GCRoot<Symbol> s_contains(nullptr), s_selectSuperCl(nullptr);
 	if(!s_contains) {
 	    s_contains      = Symbol::obtain("contains");
 	    s_selectSuperCl = Symbol::obtain(".selectSuperClasses");
@@ -1133,7 +1134,7 @@ int R_check_class_and_super(SEXP x, const char **valid, SEXP rho)
  */
 int R_check_class_etc(SEXP x, const char **valid)
 {
-    static SEXP meth_classEnv = nullptr;
+    static GCRoot<Symbol> meth_classEnv(nullptr);
     SEXP cl = getAttrib(x, R_ClassSymbol), rho = R_GlobalEnv, pkg;
     if(!meth_classEnv)
 	meth_classEnv = Symbol::obtain(".classEnv");
@@ -1504,7 +1505,7 @@ argument to standardGeneric.
 */
 static SEXP get_this_generic(SEXP args)
 {
-    static SEXP gen_name = nullptr;
+    static GCRoot<Symbol> gen_name(nullptr);
     RCNTXT *cptr;
     SEXP fname;
 
@@ -1545,7 +1546,7 @@ HIDDEN bool R::R_has_methods(SEXP op)
 	return true;
 }
 
-static SEXP deferred_default_object;
+static GCRoot<Symbol> deferred_default_object;
 
 SEXP R_deferred_default_method()
 {
@@ -1660,7 +1661,7 @@ HIDDEN std::pair<bool, SEXP> R::R_possible_dispatch(SEXP call, SEXP op, SEXP arg
 
 SEXP R_do_MAKE_CLASS(const char *what)
 {
-    static SEXP s_getClass = nullptr;
+    static GCRoot<Symbol> s_getClass(nullptr);
     SEXP e, call;
     if(!what)
 	error(_("C level MAKE_CLASS macro called with NULL string pointer"));
@@ -1677,7 +1678,7 @@ SEXP R_do_MAKE_CLASS(const char *what)
 // and 'what' is never checked
 SEXP R_getClassDef_R(SEXP what)
 {
-    static SEXP s_getClassDef = nullptr;
+    static GCRoot<Symbol> s_getClassDef(nullptr);
     if(!s_getClassDef) s_getClassDef = Symbol::obtain("getClassDef");
     if(!isMethodsDispatchOn()) error(_("'methods' package not yet loaded"));
     SEXP call = PROTECT(lang2(s_getClassDef, what));
@@ -1699,7 +1700,7 @@ SEXP R_getClassDef(const char *what)
 Rboolean R_isVirtualClass(SEXP class_def, SEXP env)
 {
     if(!isMethodsDispatchOn()) return(FALSE);
-    static SEXP isVCl_sym = nullptr;
+    static GCRoot<Symbol> isVCl_sym(nullptr);
     if(!isVCl_sym) isVCl_sym = Symbol::obtain("isVirtualClass");
     SEXP call = PROTECT(lang2(isVCl_sym, class_def));
     SEXP e = PROTECT(eval(call, env));
@@ -1713,7 +1714,7 @@ Rboolean R_isVirtualClass(SEXP class_def, SEXP env)
 Rboolean R_extends(SEXP class1, SEXP class2, SEXP env)
 {
     if(!isMethodsDispatchOn()) return(FALSE);
-    static SEXP extends_sym = nullptr;
+    static GCRoot<Symbol> extends_sym(nullptr);
     if(!extends_sym) extends_sym = Symbol::obtain("extends");
     SEXP call = PROTECT(lang3(extends_sym, class1, class2));
     SEXP e = PROTECT(eval(call, env));
@@ -1727,7 +1728,7 @@ Rboolean R_extends(SEXP class1, SEXP class2, SEXP env)
 /* in Rinternals.h */
 SEXP R_do_new_object(SEXP class_def)
 {
-    static SEXP s_virtual = nullptr, s_prototype, s_className;
+    static GCRoot<Symbol> s_virtual(nullptr), s_prototype, s_className;
     SEXP e, value;
     const void *vmax = vmaxget();
     if(!s_virtual) {

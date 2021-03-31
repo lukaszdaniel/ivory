@@ -29,6 +29,7 @@
  */
 
 #include <CXXR/Promise.hpp>
+#include <CXXR/Evaluator.hpp>
 #include <RContext.h>
 #include <Localization.h>
 #include <Rinternals.h>
@@ -48,6 +49,8 @@ namespace CXXR
         const auto &SETPRSEENptr = SET_PRSEEN;
         const auto &SET_PRVALUEptr = SET_PRVALUE;
     } // namespace ForceNonInline
+
+    struct RPRSTACK *R_PendingPromises = nullptr; /* Pending promise stack */
 
     void Promise::setValue(RObject *val)
     {
@@ -87,6 +90,49 @@ namespace CXXR
         if (m_environment)
             m_environment->conductVisitor(v);
     }
+
+    RObject *Promise::evaluate(Environment * /*env*/)
+    {
+        if (m_value == Symbol::unboundValue())
+        {
+            RPRSTACK prstack;
+
+            if (PRSEEN(this))
+            {
+                if (PRSEEN(this) == 1)
+                    Rf_errorcall(R_GlobalContext->getCall(),
+                                 _("promise is already under evaluation: recursive default argument reference or earlier problems?"));
+                else
+                {
+                    /* set PRSEEN to 1 to avoid infinite recursion */
+                    SET_PRSEEN(this, 1);
+                    warningcall(R_GlobalContext->getCall(),
+                                _("restarting interrupted promise evaluation"));
+                }
+            }
+            /* Mark the promise as under evaluation and push it on a stack
+               that can be used to unmark pending promises if a jump out
+               of the evaluation occurs. */
+            SET_PRSEEN(this, 1);
+            prstack.promise = this;
+            prstack.next = R_PendingPromises;
+            R_PendingPromises = &prstack;
+
+            RObject *val = Evaluator::evaluate(const_cast<RObject *>(valueGenerator()), environment());
+
+            /* Pop the stack, unmark the promise and set its value field.
+               Also set the environment to R_NilValue to allow GC to
+               reclaim the promise environment; this is also useful for
+               fancy games with delayedAssign() */
+            R_PendingPromises = prstack.next;
+            SET_PRSEEN(this, 0);
+            setValue(val);
+            ENSURE_NAMEDMAX(val);
+            setEnvironment(nullptr);
+        }
+        return const_cast<RObject *>(value());
+    }
+
     void Promise::checkST(const RObject *x)
     {
 #ifdef ENABLE_ST_CHECKS

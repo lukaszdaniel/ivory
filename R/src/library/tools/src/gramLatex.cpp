@@ -94,6 +94,7 @@
 
 #define R_USE_SIGNALS 1
 
+#include <CXXR/GCRoot.hpp>
 #include <CXXR/VectorBase.hpp>
 #include <CXXR/StringVector.hpp>
 #include <CXXR/PairList.hpp>
@@ -106,7 +107,9 @@
 #include <cctype>
 #include <R_ext/Print.h>
 #include "localization.h"
+
 using namespace R;
+using namespace CXXR;
 
 /* bison creates a non-static symbol yylloc (and other) in both gramLatex.o
    and gramRd.o, so remap */
@@ -222,7 +225,7 @@ static int 	mkComment(int);
 static int      mkVerb(int);
 static int      mkVerbEnv();
 
-static SEXP R_LatexTagSymbol = nullptr;
+static GCRoot<Symbol> R_LatexTagSymbol(nullptr);
 
 #define YYSTYPE		SEXP
 
@@ -2233,8 +2236,8 @@ static void UseState(ParseState *state) {
 
 static void InitSymbols(void)
 {
-    if (!R_LatexTagSymbol)
-	R_LatexTagSymbol = install("latex_tag");
+  if (!R_LatexTagSymbol)
+    R_LatexTagSymbol = Symbol::obtain("latex_tag");
 }
 
 static SEXP ParseLatex(ParseStatus *status, SEXP srcfile)

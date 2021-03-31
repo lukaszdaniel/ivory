@@ -32,6 +32,7 @@
 #define EXPRESSION_HPP
 
 #include <CXXR/PairList.hpp>
+#include <CXXR/GCRoot.hpp>
 
 namespace CXXR
 {
@@ -79,6 +80,7 @@ namespace CXXR
 
       // Virtual functions of RObject:
       Expression *clone(bool deep) const override;
+      RObject *evaluate(Environment *env) override;
       const char *typeName() const override;
 
    private:
@@ -93,15 +95,11 @@ namespace CXXR
 
    /** @brief Pointer to expression currently being evaluated.
     */
-   extern GCStackRoot<> R_CurrentExpr;
+   extern GCRoot<> R_CurrentExpr;
 
    /** @brief Slot for return-ing values.
     */
-   extern GCStackRoot<> R_ReturnedValue;
-
-   /** @brief Value visibility flag.
-    */
-   extern bool R_Visible;
+   extern GCRoot<> R_ReturnedValue;
 
    /** @brief Expression currently being evaluated.
     *

@@ -32,6 +32,7 @@
 #include <CXXR/FunctionBase.hpp>
 #include <CXXR/StringVector.hpp>
 #include <CXXR/Symbol.hpp>
+#include <CXXR/Evaluator.hpp>
 #include <Localization.h>
 #include <Defn.h>
 #include <Internal.h>
@@ -40,10 +41,6 @@
 
 using namespace R;
 using namespace CXXR;
-
-/* The global var. R_Expressions is in Defn.h */
-constexpr int R_MIN_EXPRESSIONS_OPT = 25;
-constexpr int R_MAX_EXPRESSIONS_OPT = 500000;
 
 /* Interface to the (polymorphous!)  options(...)  command.
  *
@@ -110,7 +107,7 @@ constexpr int R_MAX_EXPRESSIONS_OPT = 500000;
 
 static SEXP Options(void)
 {
-    static SEXP sOptions = nullptr;
+    static GCRoot<Symbol> sOptions(nullptr);
     if(!sOptions) sOptions = Symbol::obtain(".Options");
     return sOptions;
 }
@@ -130,8 +127,7 @@ static SEXP FindTaggedItem(SEXP lst, SEXP tag)
 static SEXP makeErrorCall(SEXP fun)
 {
   SEXP call;
-  PROTECT(call = new Expression());
-  call->expose();
+  PROTECT(call = GCNode::expose(new Expression()));
   SETCAR(call, fun);
   UNPROTECT(1);
   return call;
@@ -306,7 +302,7 @@ HIDDEN void R::InitOptions(void)
     v = CDR(v);
 
     SET_TAG(v, Symbol::obtain("expressions"));
-    SETCAR(v, ScalarInteger(R_Expressions));
+    SETCAR(v, ScalarInteger(Evaluator::depthLimit()));
     v = CDR(v);
 
     SET_TAG(v, Symbol::obtain("width"));
@@ -473,7 +469,7 @@ HIDDEN SEXP do_options(SEXP call, SEXP op, SEXP args, SEXP rho)
 	}
 	setAttrib(value2, R_NamesSymbol, names2);
 	UNPROTECT(5);
-	R_Visible = true;
+	Evaluator::enableResultPrinting(true);
 	return value2;
     }
 
@@ -569,10 +565,7 @@ HIDDEN SEXP do_options(SEXP call, SEXP op, SEXP args, SEXP rho)
 	    }
 	    else if (streql(CHAR(namei), "expressions")) {
 		int k = asInteger(argi);
-		if (k < R_MIN_EXPRESSIONS_OPT || k > R_MAX_EXPRESSIONS_OPT)
-		    error(_("invalid '%s' parameter, allowed %d...%d"), CHAR(namei),
-			  R_MIN_EXPRESSIONS_OPT, R_MAX_EXPRESSIONS_OPT);
-		R_Expressions = R_Expressions_keep = k;
+		Evaluator::setDepthLimit(k);
 		SET_VECTOR_ELT(value, i, SetOption(tag, ScalarInteger(k)));
 	    }
 	    else if (streql(CHAR(namei), "keep.source")) {
@@ -863,6 +856,6 @@ HIDDEN SEXP do_options(SEXP call, SEXP op, SEXP args, SEXP rho)
     } /* for() */
     setAttrib(value, R_NamesSymbol, names);
     UNPROTECT(3); /* value, names, argnames */
-    R_Visible = visible;
+    Evaluator::enableResultPrinting(visible);
     return value;
 }

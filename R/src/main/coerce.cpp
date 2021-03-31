@@ -52,7 +52,7 @@
 #include <Rmath.h>
 #include <Print.h>
 
-#ifdef Win32
+#ifdef _WIN32
 #include <trioremap.h> /* for %lld */
 #endif
 
@@ -324,7 +324,7 @@ HIDDEN SEXP R::StringFromLogical(int x, int &warn)
 
 /* The conversions for small non-negative integers are saved in a chache. */
 constexpr int SFI_CACHE_SIZE = 512;
-static SEXP sficache = nullptr;
+static GCRoot<> sficache(nullptr);
 
 HIDDEN SEXP R::StringFromInteger(int x, int &warn)
 {
@@ -1070,17 +1070,13 @@ static SEXP coerceVectorList(SEXP v, SEXPTYPE type)
 	{
 		/* This is sneaky but saves us rewriting a lot of the duplicate code */
 		ExpressionVector *ev = static_cast<ExpressionVector *>(v);
-		ListVector *ans = new ListVector(*ev);
-		ans->expose();
-		return ans;
+		return GCNode::expose(new ListVector(*ev));
 	}
 
 	if (type == EXPRSXP && TYPEOF(v) == VECSXP)
 	{
 		GCStackRoot<ListVector> lv(static_cast<ListVector *>(v));
-		ExpressionVector *ans = new ExpressionVector(*lv);
-		ans->expose();
-		return ans;
+		return GCNode::expose(new ExpressionVector(*lv));
 	}
 
     if (type == STRSXP) {
@@ -1742,8 +1738,7 @@ HIDDEN SEXP do_ascall(SEXP call, SEXP op, SEXP args, SEXP rho)
 			errorcall(call, _("invalid argument of length 0"));
 		SEXP names = PROTECT(getAttrib(args, R_NamesSymbol)), ap;
 		GCStackRoot<PairList> tl(PairList::makeList(n - 1));
-		PROTECT(ap = ans = new Expression(nullptr, tl));
-		ans->expose();
+		PROTECT(ap = ans = GCNode::expose(new Expression(nullptr, tl)));
 		for (int i = 0; i < n; i++)
 		{
 			SETCAR(ap, VECTOR_ELT(args, i));
@@ -1761,8 +1756,7 @@ HIDDEN SEXP do_ascall(SEXP call, SEXP op, SEXP args, SEXP rho)
 			errorcall(call, _("invalid argument of length 0"));
 		SEXP names = PROTECT(getAttrib(args, R_NamesSymbol)), ap;
 		GCStackRoot<PairList> tl(PairList::makeList(n - 1));
-		PROTECT(ap = ans = new Expression(nullptr, tl));
-		ans->expose();
+		PROTECT(ap = ans = GCNode::expose(new Expression(nullptr, tl)));
 		for (int i = 0; i < n; i++)
 		{
 			SETCAR(ap, XVECTOR_ELT(args, i));
@@ -2457,7 +2451,7 @@ static bool anyNA(SEXP call, SEXP op, SEXP args, SEXP env)
 HIDDEN SEXP do_anyNA(SEXP call, SEXP op, SEXP args, SEXP rho)
 {
     SEXP ans;
-    static SEXP do_anyNA_formals = nullptr;
+    static GCRoot<> do_anyNA_formals(nullptr);
 
     if (length(args) < 1 || length(args) > 2)
 	errorcall(call, _("'anyNA()' function takes 1 or 2 arguments"));
@@ -2751,8 +2745,7 @@ HIDDEN SEXP do_docall(SEXP call, SEXP op, SEXP args, SEXP rho)
     PROTECT(names = getAttrib(args, R_NamesSymbol));
 
     GCStackRoot<PairList> tl(PairList::makeList(n));
-    PROTECT(c = call = new Expression(nullptr, tl));
-    call->expose();
+    PROTECT(c = call = GCNode::expose(new Expression(nullptr, tl)));
     if( isString(fun) ) {
 	const char *str = translateChar(STRING_ELT(fun, 0));
 	if (streql(str, ".Internal")) error(_("illegal usage"));
@@ -2885,7 +2878,7 @@ HIDDEN SEXP R::substituteList(SEXP el, SEXP rho)
 HIDDEN SEXP do_substitute(SEXP call, SEXP op, SEXP args, SEXP rho)
 {
     SEXP argList, env, s, t;
-    static SEXP do_substitute_formals = nullptr;
+    static GCRoot<> do_substitute_formals(nullptr);
 
     if (do_substitute_formals == nullptr)
 	do_substitute_formals = allocFormalsList2(Symbol::obtain("expr"),

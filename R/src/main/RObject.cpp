@@ -161,6 +161,16 @@ namespace CXXR
         }
     }
 
+    RObject *RObject::evaluate(Environment *env)
+    {
+        /* Make sure constants in expressions are NAMED before being
+           used as values.  Setting NAMED to NAMEDMAX makes sure weird calls
+           to replacement functions won't modify constants in
+           expressions.  */
+        ENSURE_NAMEDMAX(this);
+        return this;
+    }
+
     RObject *RObject::getAttribute(const Symbol *name)
     {
         for (PairList *node = m_attrib; node; node = node->tail())

@@ -280,6 +280,24 @@ namespace CXXR
             conductVisitor(&exposer);
         }
 
+        /** @brief Exposes node to the garbage collector.
+         *
+         * @param T GCNode or any class derived from it, possibly
+         *          qualified by const.
+         *
+         * @param node Pointer to the node to be exposed to garbage
+         *          collection by terminating its infant immunity.
+         *
+         * @return the pointer \a node itself.
+         */
+        template <class T>
+        static T *expose(T *node)
+        {
+            if (node)
+                node->expose();
+            return node;
+        }
+
         /** @brief Initiate a garbage collection.
          *
          * @param num_old_gens The number of old generations to

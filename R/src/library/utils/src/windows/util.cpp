@@ -464,7 +464,7 @@ SEXP getWindowsHandle(SEXP which)
 	return R_NilValue;
 }
 
-static SEXP          EnumResult;
+static GCRoot<>      EnumResult;
 static int           EnumCount;
 static PROTECT_INDEX EnumIndex;
 static int           EnumMinimized;

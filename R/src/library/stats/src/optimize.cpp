@@ -201,10 +201,10 @@ double Brent_fmin(double ax, double bx, double (*f)(double, void *),
 struct callinfo {
   SEXP R_fcall;
   SEXP R_env;
-} ;
+};
 
-/*static SEXP R_fcall1;
-  static SEXP R_env1; */
+/*static GCRoot<> R_fcall1;
+  static GCRoot<> R_env1; */
 
 static double fcn1(double x, struct callinfo *info)
 {

@@ -36,9 +36,11 @@
 
 #define R_USE_SIGNALS 1
 
+#include <CXXR/GCRoot.hpp>
 #include <CXXR/Expression.hpp>
 #include <CXXR/IntVector.hpp>
 #include <CXXR/StringVector.hpp>
+#include <CXXR/Symbol.hpp>
 #include <R_ext/Minmax.h>
 #include <RContext.h>
 #include <Rembedded.h>
@@ -60,6 +62,7 @@
 #include <R_ext/RS.h> // for Calloc
 
 using namespace R;
+using namespace CXXR;
 
 #define __SYSTEM__
 /* includes <sys/select.h> and <sys/time.h> */
@@ -744,7 +747,7 @@ HIDDEN void R::set_rl_word_breaks(const char *str)
 /* Tell the GNU Readline library how to complete. */
 
 static int rcompgen_active = -1;
-static SEXP rcompgen_rho;
+static GCRoot<> rcompgen_rho;
 
 #include <R_ext/Parse.h>
 static void initialize_rlcompletion(void)
@@ -1050,9 +1053,9 @@ HIDDEN int Rstd_ReadConsole(const char *prompt, unsigned char *buf, size_t len,
 		int height, width;
 		rl_get_screen_size(&height,&width);
 		if (oldwidth >= 0 && oldwidth != width) {
-		    static SEXP opsym = nullptr;
+		    static GCRoot<Symbol> opsym(nullptr);
 		    if (! opsym)
-			opsym = install("setWidthOnResize");
+			opsym = Symbol::obtain("setWidthOnResize");
 		    Rboolean setOK = (Rboolean) asLogical(GetOption1(opsym));
 		    oldwidth = width;
 		    if (setOK != NA_LOGICAL && setOK)

@@ -61,6 +61,7 @@ namespace CXXR
 
     ListVector *ListVector::clone(bool deep) const
     {
+        // return GCNode::expose(new ListVector(*this, deep));
         return new ListVector(*this, deep);
     }
 } // namespace CXXR

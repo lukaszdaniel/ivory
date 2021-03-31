@@ -177,8 +177,7 @@ namespace CXXR
                 return nullptr;
             if (T *ccc = dynamic_cast<T *>(cc))
                 return ccc;
-            T *ans = new T(cc->car(), cc->tail(), cc->tag());
-            ans->expose();
+            T *ans = GCNode::expose(new T(cc->car(), cc->tail(), cc->tag()));
             ans->setAttributes(cc->attributes());
             return ans;
         }

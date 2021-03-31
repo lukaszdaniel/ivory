@@ -30,7 +30,7 @@
 #include <CXXR/StringVector.hpp>
 #include <CXXR/PairList.hpp>
 #include <CXXR/LogicalVector.hpp>
-#include <CXXR/Expression.hpp>
+#include <CXXR/Evaluator.hpp>
 #include <CXXR/Symbol.hpp>
 #include <Localization.h>
 #include <RContext.h>
@@ -239,7 +239,7 @@ HIDDEN SEXP do_retracemem(SEXP call, SEXP op, SEXP args, SEXP rho)
 #ifdef R_MEMORY_PROFILING
     SEXP object, previous, ans, argList;
     char buffer[21];
-    static SEXP do_retracemem_formals = nullptr;
+    static GCRoot<> do_retracemem_formals(nullptr);
     Rboolean visible; 
 
     if (do_retracemem_formals == nullptr)
@@ -280,10 +280,10 @@ HIDDEN SEXP do_retracemem(SEXP call, SEXP op, SEXP args, SEXP rho)
 	}
     }
     UNPROTECT(1);
-    R_Visible = visible;
+    Evaluator::enableResultPrinting(visible);
     return ans;
 #else
-    R_Visible = false; /* for consistency with other case */
+    Evaluator::enableResultPrinting(false); /* for consistency with other case */
     return R_NilValue;
 #endif
 }

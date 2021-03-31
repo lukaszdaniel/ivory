@@ -77,6 +77,7 @@ namespace CXXR
 
     Closure *Closure::clone(bool deep) const
     {
+        // return GCNode::expose(new Closure(*this, deep));
         return new Closure(*this, deep);
     }
 

@@ -81,9 +81,8 @@ SEXP R_MakeExternalPtr(void *p, SEXP tag, SEXP prot)
     GCStackRoot<> protr(prot);
     if (prot)
         prot->incrementRefCount();
-    ExternalPointer *ans = new ExternalPointer(p, tag, prot);
-    ans->expose();
-    return ans;
+
+    return GCNode::expose(new ExternalPointer(p, tag, prot));
 }
 
 void *R_ExternalPtrAddr(SEXP s)

@@ -46,6 +46,7 @@ namespace CXXR
 
     S4Object *S4Object::clone(bool deep) const
     {
+        // return GCNode::expose(new S4Object(*this, deep));
         return new S4Object(*this, deep);
     }
 
@@ -100,7 +101,5 @@ void SET_S4TAG(SEXP x, SEXP v)
 
 SEXP Rf_allocS4Object()
 {
-    SEXP ans = new CXXR::S4Object();
-    ans->expose();
-    return ans;
+    return GCNode::expose(new CXXR::S4Object());
 }

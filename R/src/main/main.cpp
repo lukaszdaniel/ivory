@@ -46,6 +46,7 @@
 #include <CXXR/LogicalVector.hpp>
 #include <CXXR/String.hpp>
 #include <CXXR/Symbol.hpp>
+#include <CXXR/Evaluator.hpp>
 #include <Localization.h>
 #include <RContext.h>
 #include <Rembedded.h>
@@ -113,15 +114,15 @@ static void R_ReplFile(FILE *fp, SEXP rho)
 	case PARSE_NULL:
 	    break;
 	case PARSE_OK:
-	    R_Visible = false;
-	    R_EvalDepth = 0;
+	    Evaluator::enableResultPrinting(false);
+	    Evaluator::setDepth(0);
 	    resetTimeLimits();
 	    count++;
 	    PROTECT(R_CurrentExpr);
 	    R_CurrentExpr = eval(R_CurrentExpr, rho);
 	    SET_SYMVALUE(R_LastvalueSymbol, R_CurrentExpr);
 	    UNPROTECT(1);
-	    if (R_Visible)
+	    if (Evaluator::resultPrinted())
 		PrintValueEnv(R_CurrentExpr, rho);
 	    if( R_CollectWarnings )
 		PrintWarnings();
@@ -277,15 +278,15 @@ int Rf_ReplIteration(SEXP rho, int savestack, int browselevel, R_ReplState *stat
 	       The 'S' will be changed back to 's' after the next eval. */
 	    if (R_BrowserLastCommand == 's') R_BrowserLastCommand = 'S';
 	}
-	R_Visible = false;
-	R_EvalDepth = 0;
+	Evaluator::enableResultPrinting(false);
+	Evaluator::setDepth(0);
 	resetTimeLimits();
 	PROTECT(thisExpr = R_CurrentExpr);
 	R_Busy(1);
 	PROTECT(value = eval(thisExpr, rho));
 	SET_SYMVALUE(R_LastvalueSymbol, value);
-	wasDisplayed = R_Visible;
-	if (R_Visible)
+	wasDisplayed = Evaluator::resultPrinted();
+	if (Evaluator::resultPrinted())
 	    PrintValueEnv(value, rho);
 	if (R_CollectWarnings)
 	    PrintWarnings();
@@ -426,16 +427,16 @@ int R_ReplDLLdo1(void)
     case PARSE_OK:
 	R_IoBufferReadReset(&R_ConsoleIob);
 	R_CurrentExpr = R_Parse1Buffer(&R_ConsoleIob, 1, &status);
-	R_Visible = false;
-	R_EvalDepth = 0;
+	Evaluator::enableResultPrinting(false);
+	Evaluator::setDepth(0);
 	resetTimeLimits();
 	PROTECT(R_CurrentExpr);
 	R_Busy(1);
 	lastExpr = R_CurrentExpr;
 	R_CurrentExpr = eval(R_CurrentExpr, rho);
 	SET_SYMVALUE(R_LastvalueSymbol, R_CurrentExpr);
-	wasDisplayed = R_Visible;
-	if (R_Visible)
+	wasDisplayed = Evaluator::resultPrinted();
+	if (Evaluator::resultPrinted())
 	    PrintValueEnv(R_CurrentExpr, rho);
 	if (R_CollectWarnings)
 	    PrintWarnings();
@@ -886,7 +887,7 @@ void setup_Rmainloop(void)
 	strcat(Rarch, R_ARCH);
 	putenv(Rarch);
     }
-#else /* not Win32 */
+#else /* not _WIN32 */
     if(!setlocale(LC_CTYPE, ""))
 	snprintf(deferred_warnings[ndeferred_warnings++], 250, _("Setting LC_CTYPE failed, using \"C\"\n"));
     if(!setlocale(LC_COLLATE, ""))
@@ -910,7 +911,7 @@ void setup_Rmainloop(void)
     if(!setlocale(LC_MEASUREMENT, ""))
 	snprintf(deferred_warnings[ndeferred_warnings++], 250, _("Setting LC_MEASUREMENT failed, using \"C\"\n"));
 #endif
-#endif /* not Win32 */
+#endif /* not _WIN32 */
 #endif
 
     /* make sure srand is called before R_tmpnam, PR#14381 */
@@ -1441,7 +1442,7 @@ HIDDEN SEXP do_browser(SEXP call, SEXP op, SEXP args, SEXP rho)
 						{
 							thiscontext.setRestartBitOn();
 							R_ReturnedValue = R_NilValue;
-							R_Visible = false;
+							Evaluator::enableResultPrinting(false);
 							R_GlobalContext = &thiscontext;
 							RCNTXT::R_InsertRestartHandlers(&thiscontext, "browser");
 							R_ReplConsole(rho, savestack + 1, browselevel + 1);
@@ -1804,13 +1805,13 @@ Rboolean R_taskCallbackRoutine(SEXP expr, SEXP value, Rboolean succeeded,
 		      Rboolean visible, void *userData)
 {
     /* install some symbols */
-    static SEXP R_cbSym = NULL;
-    static SEXP R_exprSym = NULL;
-    static SEXP R_valueSym = NULL;
-    static SEXP R_succeededSym = NULL;
-    static SEXP R_visibleSym = NULL;
-    static SEXP R_dataSym = NULL;
-    if (R_cbSym == NULL) {
+    static GCRoot<Symbol> R_cbSym(nullptr);
+    static GCRoot<Symbol> R_exprSym(nullptr);
+    static GCRoot<Symbol> R_valueSym(nullptr);
+    static GCRoot<Symbol> R_succeededSym(nullptr);
+    static GCRoot<Symbol> R_visibleSym(nullptr);
+    static GCRoot<Symbol> R_dataSym(nullptr);
+    if (R_cbSym == nullptr) {
 	R_cbSym = Symbol::obtain("cb");
 	R_exprSym = Symbol::obtain("expr");
 	R_valueSym = Symbol::obtain("value");

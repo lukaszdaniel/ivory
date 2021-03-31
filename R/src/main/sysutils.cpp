@@ -1184,7 +1184,7 @@ HIDDEN const char *R::trCharUTF8(SEXP x)
 #endif
     obj = Riconv_open("UTF-8", from);
     if(obj == (void *)(-1))
-#ifdef Win32
+#ifdef _WIN32
 	error(_("unsupported conversion from '%s' in codepage %d"),
 	      from, localeCP);
 #else

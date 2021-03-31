@@ -69,7 +69,7 @@ namespace
 #define ALTREP_CLASS_BASE_TYPE(x) \
     ALTREP_SERIALIZED_CLASS_TYPE(ALTREP_CLASS_SERIALIZED_CLASS(x))
 } // namespace
-static SEXP Registry = nullptr;
+static GCRoot<ConsCell> Registry(nullptr);
 
 static SEXP LookupClassEntry(SEXP csym, SEXP psym)
 {
@@ -84,7 +84,7 @@ static void RegisterClass(SEXP class_, int type, const char *cname, const char *
 {
     PROTECT(class_);
     if (Registry == nullptr) {
-	Registry = CONS(R_NilValue, R_NilValue);
+	Registry = CXXR_cons(R_NilValue, R_NilValue);
 	R_PreserveObject(Registry);
     }
 

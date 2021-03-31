@@ -91,7 +91,7 @@ namespace CXXR
 
     private:
         friend class Symbol;
-        static GCStackRoot<const CachedString> s_blank;
+        static GCRoot<const CachedString> s_blank;
         // The first element of the key is the text, the second
         // element the encoding:
         typedef std::pair<std::string, cetype_t> key;

@@ -83,7 +83,7 @@ Rboolean Rf_psmatch(const char *f, const char *t, Rboolean exact)
 
 /* Matching formals and arguments */
 
-R_INLINE static SEXP charFromSexp(SEXP s)
+inline static SEXP charFromSexp(SEXP s)
 {
 	switch (TYPEOF(s))
 	{
@@ -341,8 +341,7 @@ HIDDEN SEXP R::matchArgs_NR(SEXP formals, SEXP supplied, SEXP call)
 
 	if (i) {
 	    GCStackRoot<PairList> tl(PairList::makeList(i - 1));
-	    a = new DottedArgs(nullptr, tl);
-	    a->expose();
+	    a = GCNode::expose(new DottedArgs(nullptr, tl));
 	    f = a;
 	    for(b = supplied; b != R_NilValue; b = CDR(b))
 		if(!ARGUSED(b)) {

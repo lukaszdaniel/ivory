@@ -35,6 +35,7 @@
 // #include <CXXR/GCEdge.hpp>
 #include <CXXR/Environment.hpp>
 #include <CXXR/Expression.hpp>
+#include <CXXR/Evaluator.hpp>
 #include <CXXR/GCStackRoot.hpp>
 #include <CXXR/ProtectStack.hpp>
 #include <CXXR/JMPException.hpp>
@@ -333,7 +334,7 @@ namespace CXXR
 			GCStackRoot<> oldHStack(R_HandlerStack);
 			GCStackRoot<> oldRStack(R_RestartStack);
 			GCStackRoot<> oldRVal(R_ReturnedValue);
-			oldvis = R_Visible;
+			oldvis = Evaluator::resultPrinted();
 			R_HandlerStack = nullptr;
 			R_RestartStack = nullptr;
 
@@ -378,7 +379,7 @@ namespace CXXR
 			R_HandlerStack = oldHStack;
 			R_RestartStack = oldRStack;
 			R_ReturnedValue = oldRVal;
-			R_Visible = oldvis;
+			Evaluator::enableResultPrinting(oldvis);
 		}
 		running = false;
 		return finalizer_run;
@@ -488,17 +489,14 @@ SEXP R_MakeWeakRef(SEXP key, SEXP val, SEXP fin, Rboolean onexit)
 	default:
 		Rf_error(_("finalizer must be a function or NULL"));
 	}
-	WeakRef *ans = new WeakRef(key, val, fin, onexit);
-	ans->expose();
-	return ans;
+
+	return GCNode::expose(new WeakRef(key, val, fin, onexit));
 }
 
 SEXP R_MakeWeakRefC(SEXP key, SEXP val, R_CFinalizer_t fin, Rboolean onexit)
 {
 	checkKey(key);
-	WeakRef *ans = new WeakRef(key, val, fin, onexit);
-	ans->expose();
-	return ans;
+	return GCNode::expose(new WeakRef(key, val, fin, onexit));
 }
 
 SEXP R_WeakRefKey(SEXP w)

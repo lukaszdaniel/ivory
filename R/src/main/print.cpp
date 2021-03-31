@@ -995,7 +995,7 @@ done:
 	cntxt.end();
     print_cleanup(&saveWinUTF8out);
 #endif
-    return; /* needed when Win32 is not defined */
+    return; /* needed when _WIN32 is not defined */
 }
 
 /* 2000-12-30 PR#715: remove list tags from tagbuf here

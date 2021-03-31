@@ -58,6 +58,7 @@ namespace CXXR
 
     ExpressionVector *ExpressionVector::clone(bool deep) const
     {
+        // return GCNode::expose(new ExpressionVector(*this, deep));
         return new ExpressionVector(*this, deep);
     }
 } // namespace CXXR

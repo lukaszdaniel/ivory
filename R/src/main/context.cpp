@@ -118,6 +118,8 @@
 #include <CXXR/IntVector.hpp>
 #include <CXXR/RawVector.hpp>
 #include <CXXR/Symbol.hpp>
+#include <CXXR/Evaluator.hpp>
+#include <CXXR/Promise.hpp>
 #include <Localization.h>
 #include <RContext.h>
 #include <Defn.h>
@@ -126,13 +128,11 @@
 using namespace R;
 using namespace CXXR;
 
-RContext R_Toplevel;         /* Storage for the toplevel context */
-RContext *R_ToplevelContext; /* The toplevel context */
-RContext *R_GlobalContext;   /* The global context */
-RContext *R_SessionContext;  /* The session toplevel context */
-RContext *R_ExitContext;     /* The active context for on.exit processing */
-
-struct RPRSTACK *R_PendingPromises = nullptr; /* Pending promise stack */
+RContext CXXR::R_Toplevel;         /* Storage for the toplevel context */
+RContext *CXXR::R_ToplevelContext; /* The toplevel context */
+RContext *CXXR::R_GlobalContext;   /* The global context */
+RContext *CXXR::R_SessionContext;  /* The session toplevel context */
+RContext *CXXR::R_ExitContext;     /* The active context for on.exit processing */
 
 /* R_run_onexits - runs the conexit/cend code for all contexts from
    R_GlobalContext down to but not including the argument context.
@@ -169,7 +169,7 @@ HIDDEN void RCNTXT::R_run_onexits(RCNTXT *cptr)
 	       evaluation stack in case the jump is from handling a
 	       stack overflow. To be safe it is good to also call
 	       R_CheckStack. LT */
-	    R_Expressions = R_Expressions_keep + 500;
+	    Evaluator::extraDepth(true);
 	    R_CheckStack();
 	    for (; s != R_NilValue; s = CDR(s)) {
 		c->setOnExit(CDR(s));
@@ -195,7 +195,7 @@ void RCNTXT::R_restore_globals()
     R_BCIntActive = getBCIntactive();
     R_BCpc = getBCPC();
     R_BCbody = getBCBody();
-    R_EvalDepth = getEvalDepth();
+    Evaluator::setDepth(getEvalDepth());
     vmaxset(getVMax());
     R_interrupts_suspended = (Rboolean) getIntSusp();
     R_HandlerStack = getHandlerStack();
@@ -209,7 +209,7 @@ void RCNTXT::R_restore_globals()
     }
     /* Need to reset R_Expressions in case we are jumping after
        handling a stack overflow. */
-    R_Expressions = R_Expressions_keep;
+    Evaluator::extraDepth(false);
     R_BCNodeStackTop = getNodeStack();
     R_Srcref = getSrcRef();
     R_BCProtReset(getBCProtTop());
@@ -234,7 +234,7 @@ RCNTXT *RCNTXT::first_jump_target(int mask)
 
 HIDDEN NORET void RCNTXT::R_jumpctxt(int mask, SEXP val)
 {
-    bool savevis = R_Visible;
+    bool savevis = Evaluator::resultPrinted();
     RCNTXT *cptr;
 
     /* find the target for the first jump -- either an intermediate
@@ -245,7 +245,7 @@ HIDDEN NORET void RCNTXT::R_jumpctxt(int mask, SEXP val)
     /* run cend code for all contexts down to but not including
        the first jump target */
     RCNTXT::R_run_onexits(cptr);
-    R_Visible = savevis;
+    Evaluator::enableResultPrinting(savevis);
 
     R_ReturnedValue = val;
     R_GlobalContext = cptr;
@@ -289,7 +289,7 @@ void RCNTXT::start(int flags,
     setBCPC(R_BCpc);
     setBCBody(R_BCbody);
     setBCIntactive(R_BCIntActive);
-    setEvalDepth(R_EvalDepth);
+    setEvalDepth(Evaluator::depth());
     setCallFlag(flags);
     setCall(syscall);
     setWorkingEnvironment(env);
@@ -321,15 +321,13 @@ void RCNTXT::endcontext(RCNTXT &cptr) { cptr.end(); }
 
 void RCNTXT::end()
 {
-    void R_FixupExitingHandlerResult(SEXP); /* defined in error.cpp */
-    SEXP R_UnwindHandlerStack(SEXP); /* defined in error.cpp */
     R_HandlerStack = R_UnwindHandlerStack(getHandlerStack());
     R_RestartStack = getRestartStack();
     RCNTXT *jumptarget = getJumpTarget();
     if (workingEnvironment() != R_NilValue && onExit() != R_NilValue)
     {
         SEXP s = onExit();
-        bool savevis = R_Visible;
+        bool savevis = Evaluator::resultPrinted();
         RCNTXT *savecontext = R_ExitContext;
         SEXP saveretval = R_ReturnedValue;
         R_ExitContext = this;
@@ -350,7 +348,7 @@ void RCNTXT::end()
         R_ReturnedValue = saveretval;
         UNPROTECT(2);
         R_ExitContext = savecontext;
-        R_Visible = savevis;
+        Evaluator::enableResultPrinting(savevis);
     }
     if (R_ExitContext == this)
         R_ExitContext = nullptr;
@@ -812,7 +810,7 @@ Rboolean R_ToplevelExec(void (*fun)(void *), void *data)
     PROTECT(oldHStack = R_HandlerStack);
     PROTECT(oldRStack = R_RestartStack);
     PROTECT(oldRVal = R_ReturnedValue);
-    oldvis = R_Visible;
+    oldvis = Evaluator::resultPrinted();
     R_HandlerStack = R_NilValue;
     R_RestartStack = R_NilValue;
     saveToplevelContext = R_ToplevelContext;
@@ -855,7 +853,7 @@ Rboolean R_ToplevelExec(void (*fun)(void *), void *data)
     R_HandlerStack = oldHStack;
     R_RestartStack = oldRStack;
     R_ReturnedValue = oldRVal;
-    R_Visible = oldvis;
+    Evaluator::enableResultPrinting(oldvis);
     UNPROTECT(4);
 
     return result;

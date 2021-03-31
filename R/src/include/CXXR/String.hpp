@@ -33,7 +33,7 @@
 
 #include <Rinternals.h>
 #include <CXXR/Allocator.hpp>
-#include <CXXR/GCStackRoot.hpp>
+#include <CXXR/GCRoot.hpp>
 #include <CXXR/SEXP_downcast.hpp>
 #include <CXXR/VectorBase.hpp>
 #include <string>
@@ -320,7 +320,7 @@ namespace CXXR
 		}
 
 	private:
-		static GCStackRoot<const String> s_na;
+		static GCRoot<const String> s_na;
 		std::string m_data;
 		cetype_t m_encoding;
 		bool m_ascii;

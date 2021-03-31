@@ -573,6 +573,27 @@ static bool curlyahead(SEXP s)
     return false;
 }
 
+#if CXXR_FALSE
+// In CXXR, BuiltInFunction::PPinfo is (deliberately) private, so as
+// not to expose the function table format outside the BuiltInFunction
+// class.  We now declare introduce local definitions to keep the CR
+// code working.
+
+struct PPinfo
+{
+	BuiltInFunction::Kind kind;
+	BuiltInFunction::Precedence precedence;
+	unsigned int rightassoc;
+};
+
+static PPinfo PPINFO(SEXP s)
+{
+	BuiltInFunction *bif = SEXP_downcast<BuiltInFunction *>(s);
+	PPinfo ans = {bif->kind(), bif->precedence(), bif->rightAssociative()};
+	return ans;
+}
+#endif
+
 /* needsparens looks at an arg to a unary or binary operator to
    determine if it needs to be parenthesized when deparsed
    mainop is a unary or binary operator,
@@ -887,7 +908,8 @@ static void deparse2buff(SEXP s, LocalParseData *d)
 	    print2buff("\", ", d);
 	    SEXP slotNms; // ---- slotNms := methods::.slotNames(s)  ---------
 	    // computed alternatively, slotNms := names(getClassDef(class)@slots) :
-	    static SEXP R_getClassDef = nullptr, R_slots = nullptr, R_asS3 = nullptr;
+	    static GCRoot<> R_getClassDef(nullptr);
+	    static GCRoot<Symbol> R_slots(nullptr), R_asS3(nullptr);
 	    if(R_getClassDef == nullptr)
 		R_getClassDef = findFun(Symbol::obtain("getClassDef"), R_MethodsNamespace);
 	    if(R_slots == nullptr) R_slots = Symbol::obtain("slots");

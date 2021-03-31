@@ -62,6 +62,7 @@
 #include "Runix.h"
 
 using namespace R;
+using namespace CXXR;
 
 HIDDEN FILE *ifp = nullptr; /* used in sys-std.cpp */
 

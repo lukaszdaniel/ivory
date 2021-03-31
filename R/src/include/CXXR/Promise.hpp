@@ -36,7 +36,6 @@
 #include <CXXR/Environment.hpp>
 #include <CXXR/Symbol.hpp>
 #include <CXXR/SEXP_downcast.hpp>
-#include <RContext.h>
 
 namespace CXXR
 {
@@ -103,6 +102,19 @@ namespace CXXR
         bool evaluationInterrupted() const
         {
             return m_interrupted;
+        }
+
+        /** @brief Force the Promise.
+         *
+         * i.e. evaluate the Promise within its environment.
+         * Following this, the environment pointer is set null, thus
+         * possibly allowing the Environment to be garbage-collected.
+         *
+         * @return The result of evaluating the promise.
+         */
+        RObject *force()
+        {
+            return evaluate(nullptr);
         }
 
         /** @brief Indicate whether evaluation has been interrupted.
@@ -187,6 +199,7 @@ namespace CXXR
 
         // Virtual function of RObject:
         const char *typeName() const;
+        RObject *evaluate(Environment *env) override;
 
         // Virtual function of GCNode:
         void visitChildren(const_visitor *v) const;
@@ -206,6 +219,15 @@ namespace CXXR
         Promise(const Promise &);
         Promise &operator=(const Promise &);
     };
+
+    /* Stack entry for pending promises */
+    struct RPRSTACK
+    {
+        RObject *promise;
+        RPRSTACK *next;
+    };
+
+    extern struct RPRSTACK *R_PendingPromises; // INI_as(nullptr); /* Pending promise stack */
 } // namespace CXXR
 
 namespace R

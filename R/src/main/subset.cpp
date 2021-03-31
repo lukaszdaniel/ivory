@@ -917,11 +917,9 @@ HIDDEN SEXP do_subset_dflt(SEXP call, SEXP op, SEXP args, SEXP rho)
 		if (len > 0)
 		{
 			GCStackRoot<PairList> tl(PairList::makeList(len - 1));
-			ans = new Expression(nullptr, tl);
+			ans = GCNode::expose(new Expression(nullptr, tl));
 		}
 		PROTECT(ans);
-		if (ans)
-			ans->expose();
 	}
 	if ( LENGTH(ax) > 0 ) {
 	    for(px = ans, i = 0 ; px != R_NilValue ; px = CDR(px))
@@ -1170,7 +1168,7 @@ HIDDEN SEXP do_subset2_dflt(SEXP call, SEXP op, SEXP args, SEXP rho)
 
 HIDDEN SEXP R::dispatch_subset2(SEXP x, R_xlen_t i, SEXP call, SEXP rho)
 {
-    static SEXP bracket_op = nullptr;
+    static GCRoot<> bracket_op(nullptr);
     SEXP args, x_elt;
     if (isObject(x)) {
         if (bracket_op == nullptr)

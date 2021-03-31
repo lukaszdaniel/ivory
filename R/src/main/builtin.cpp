@@ -33,7 +33,7 @@
 #include <CXXR/IntVector.hpp>
 #include <CXXR/StringVector.hpp>
 #include <CXXR/Symbol.hpp>
-#include <CXXR/Expression.hpp>
+#include <CXXR/Evaluator.hpp>
 #include <RContext.h>
 #include <Defn.h>
 #include <Localization.h>
@@ -150,7 +150,7 @@ HIDDEN SEXP do_onexit(SEXP call, SEXP op, SEXP args, SEXP rho)
     SEXP code, oldcode, argList;
     int addit = FALSE;
     int after = TRUE;
-    static SEXP do_onexit_formals = nullptr;
+    static GCRoot<> do_onexit_formals(nullptr);
 
     checkArity(op, args);
     if (do_onexit_formals == nullptr)
@@ -1080,7 +1080,7 @@ HIDDEN SEXP do_switch(SEXP call, SEXP op, SEXP args, SEXP rho)
 			}
 			if (y == R_NilValue) {
 			    UNPROTECT(2);
-			    R_Visible = false;
+			    Evaluator::enableResultPrinting(false);
 			    return R_NilValue;
 			}
 			/* Check for multiple defaults following y.  This loop
@@ -1120,6 +1120,6 @@ HIDDEN SEXP do_switch(SEXP call, SEXP op, SEXP args, SEXP rho)
 	warningcall(call, _("'switch()' function with no alternatives"));
     /* an error */
     UNPROTECT(1); /* x */
-    R_Visible = false;
+    Evaluator::enableResultPrinting(false);
     return R_NilValue;
 }

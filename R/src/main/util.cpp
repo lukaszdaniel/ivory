@@ -49,6 +49,7 @@
 
 using namespace std;
 using namespace R;
+using namespace CXXR;
 
 #undef COMPILING_R
 
@@ -1101,7 +1102,7 @@ const char *getTZinfo(void)
 }
 #endif
 
-#endif // not Win32
+#endif // not _WIN32
 
 
 #ifdef _WIN32

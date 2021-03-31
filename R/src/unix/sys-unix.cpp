@@ -36,7 +36,7 @@
 #include <CXXR/IntVector.hpp>
 #include <CXXR/StringVector.hpp>
 #include <CXXR/PairList.hpp>
-#include <CXXR/Expression.hpp>
+#include <CXXR/Evaluator.hpp>
 #include <Localization.h>
 #include <RContext.h>
 #include <Defn.h>
@@ -849,7 +849,7 @@ HIDDEN SEXP do_system(SEXP call, SEXP op, SEXP args, SEXP rho)
 	R_Busy(0);
 #endif
 	UNPROTECT(1);
-	R_Visible = FALSE;
+	Evaluator::enableResultPrinting(false);
 	return tlist;
     }
 }

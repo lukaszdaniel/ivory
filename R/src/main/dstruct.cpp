@@ -39,7 +39,7 @@ HIDDEN SEXP R::mkPRIMSXP(int offset, bool evaluate)
 {
     SEXP result;
     SEXPTYPE type = evaluate ? BUILTINSXP : SPECIALSXP;
-    static SEXP PrimCache = nullptr;
+    static GCRoot<> PrimCache(nullptr);
     static int FunTabSize = 0;
 
     if (PrimCache == nullptr)
@@ -59,8 +59,7 @@ HIDDEN SEXP R::mkPRIMSXP(int offset, bool evaluate)
 
     if (result == R_NilValue)
     {
-        result = new BuiltInFunction(offset, evaluate);
-        result->expose();
+        result = GCNode::expose(new BuiltInFunction(offset, evaluate));
         SET_VECTOR_ELT(PrimCache, offset, result);
     }
     else if (TYPEOF(result) != type)
@@ -88,10 +87,7 @@ SEXP R::mkCLOSXP(SEXP formal_args, SEXP body, SEXP env)
         break;
     }
 
-    Closure *c = new Closure(formalsr, bodyr, rhor);
-    c->expose();
-
-    return c;
+    return GCNode::expose(new Closure(formalsr, bodyr, rhor));
 }
 
 HIDDEN SEXP R::mkSYMSXP(SEXP name, SEXP value)

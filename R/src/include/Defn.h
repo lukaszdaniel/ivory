@@ -251,11 +251,8 @@ extern "C"
     extern0 int R_Is_Running;                 /* for Windows memory manager */
 
     /* Evaluation Environment */
-    extern0 int R_EvalDepth INI_as(0);                      /* Evaluation recursion depth */
     extern0 int R_BrowseLines INI_as(0);                    /* lines/per call in browser :
 						 * options(deparse.max.lines) */
-    extern0 int R_Expressions INI_as(5000);                 /* options(expressions) */
-    extern0 int R_Expressions_keep INI_as(5000);            /* options(expressions) */
     extern0 Rboolean R_KeepSource INI_as(FALSE);            /* options(keep.source) */
     extern0 Rboolean R_CBoundsCheck INI_as(FALSE);          /* options(CBoundsCheck) */
     extern0 MATPROD_TYPE R_Matprod INI_as(MATPROD_DEFAULT); /* options(matprod) */
@@ -679,7 +676,7 @@ namespace R
     const char *EncodeRaw(Rbyte, const char *);
     const char *EncodeString(SEXP, int, int, Rprt_adj);
     const char *EncodeReal2(double, int, int, int);
-    const char *EncodeChar(SEXP);
+    const char *EncodeChar(SEXP x);
 
     /* main/raw.cpp */
     int mbrtoint(int &w, const char *s);

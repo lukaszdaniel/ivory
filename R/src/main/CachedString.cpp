@@ -88,8 +88,7 @@ namespace CXXR
             try
             {
                 map::value_type &val = *it;
-                val.second = new CachedString(str, encoding, ascii);
-                val.second->expose();
+                val.second = GCNode::expose(new CachedString(str, encoding, ascii));
                 val.second->m_key_val_pr = &*it;
             }
             catch (...)

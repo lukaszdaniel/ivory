@@ -537,7 +537,7 @@ SEXP Rf_classgets(SEXP vec, SEXP klass)
 		if(!isNull(cld)) {
 		    PROTECT(cld);
 		    /* More efficient? can we protect? -- rather *assign* in method-ns?
-		       static SEXP oldCl = nullptr;
+		       static GCRoot<> oldCl = nullptr;
 		       if(!oldCl) oldCl = R_getClassDef("oldClass");
 		       if(!oldCl) oldCl = mkString("oldClass");
 		       PROTECT(oldCl);
@@ -596,7 +596,7 @@ static SEXP lang2str(SEXP obj, SEXPTYPE t)
 {
   SEXP symb = CAR(obj);
 
-  static SEXP if_sym = nullptr, while_sym, for_sym, eq_sym, gets_sym,
+  static GCRoot<Symbol> if_sym(nullptr), while_sym, for_sym, eq_sym, gets_sym,
     lpar_sym, lbrace_sym, call_sym;
   if(!if_sym) {
     /* initialize:  another place for a hash table */
@@ -675,9 +675,9 @@ SEXP R::R_data_class(SEXP obj, bool singleString)
     return value;
 }
 
-static SEXP s_dot_S3Class = nullptr;
+static GCRoot<Symbol> s_dot_S3Class(nullptr);
 
-static SEXP R_S4_extends_table = nullptr;
+static GCRoot<> R_S4_extends_table(nullptr);
 
 
 static SEXP cache_class(const char *class_, SEXP klass)
@@ -696,7 +696,7 @@ static SEXP cache_class(const char *class_, SEXP klass)
 }
 
 static SEXP S4_extends(SEXP klass, Rboolean use_tab) {
-    static SEXP s_extends = nullptr, s_extendsForS3;
+    static GCRoot<Symbol> s_extends(nullptr), s_extendsForS3;
     SEXP e, val; const char *class_;
     const void *vmax;
     if(use_tab) vmax = vmaxget();
@@ -913,8 +913,7 @@ HIDDEN SEXP do_namesgets(SEXP call, SEXP op, SEXP args, SEXP env)
     if (names != R_NilValue &&
 	! (TYPEOF(names) == STRSXP && ATTRIB(names) == R_NilValue)) {
 	GCStackRoot<PairList> tl(new PairList(), true);
-	PROTECT(call = new Expression(nullptr, tl));
-	call->expose();
+	PROTECT(call = GCNode::expose(new Expression(nullptr, tl)));
 	SETCAR(call, R_AsCharacterSymbol);
 	SETCADR(call, names);
 	names = eval(call, env);
@@ -1426,7 +1425,7 @@ HIDDEN SEXP do_attr(SEXP call, SEXP op, SEXP args, SEXP env)
     const char *str;
     int nargs = length(args), exact = 0;
     enum { NONE, PARTIAL, PARTIAL2, FULL } match = NONE;
-    static SEXP do_attr_formals = nullptr;
+    static GCRoot<> do_attr_formals(nullptr);
 
     if (do_attr_formals == nullptr)
 	do_attr_formals = allocFormalsList3(Symbol::obtain("x"), Symbol::obtain("which"),
@@ -1540,7 +1539,7 @@ static void check_slot_assign(SEXP obj, SEXP input, SEXP value, SEXP env)
 	SEXP
 		valueClass = PROTECT(R_data_class(value, false)),
 		objClass   = PROTECT(R_data_class(obj, false));
-	static SEXP checkAt = nullptr;
+	static GCRoot<> checkAt(nullptr);
 	// 'methods' may *not* be in search() ==> do as if calling  methods::checkAtAssignment(..)
 	if (!isMethodsDispatchOn()) { // needed?
 		SEXP e = PROTECT(lang1(Symbol::obtain("initMethodDispatch")));
@@ -1600,7 +1599,7 @@ HIDDEN SEXP do_attrgets(SEXP call, SEXP op, SEXP args, SEXP env)
     }
     else { // attr(obj, "name") <- value :
 	SEXP argList;
-	static SEXP do_attrgets_formals = nullptr;
+	static GCRoot<> do_attrgets_formals(nullptr);
 
 	obj = CAR(args);
 	if (MAYBE_SHARED(obj) ||
@@ -1675,11 +1674,11 @@ SEXP Rf_GetArrayDimnames(SEXP x)
    an error to get a slot that doesn't exist. */
 
 
-static SEXP pseudo_NULL = 0;
+static GCRoot<Symbol> pseudo_NULL(nullptr);
 
-static SEXP s_dot_Data;
-static SEXP s_getDataPart;
-static SEXP s_setDataPart;
+static GCRoot<Symbol> s_dot_Data;
+static GCRoot<Symbol> s_getDataPart;
+static GCRoot<Symbol> s_setDataPart;
 
 static void init_slot_handling(void) {
     s_dot_Data = Symbol::obtain(".Data");
@@ -1888,7 +1887,7 @@ HIDDEN SEXP do_AT(SEXP call, SEXP op, SEXP args, SEXP env)
 */
 HIDDEN SEXP R_getS4DataSlot(SEXP obj, SEXPTYPE type)
 {
-  static SEXP s_xData, s_dotData; SEXP value = R_NilValue;
+  static GCRoot<Symbol> s_xData, s_dotData; SEXP value = R_NilValue;
   PROTECT_INDEX opi;
 
   PROTECT_WITH_INDEX(obj, &opi);

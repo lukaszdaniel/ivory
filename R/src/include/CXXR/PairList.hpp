@@ -98,10 +98,9 @@ namespace CXXR
         {
             s_cons_car = cr;
             s_cons_cdr = tl;
-            T *ans = new T(cr, tl, tg);
+            T *ans = GCNode::expose(new T(cr, tl, tg));
             s_cons_cdr = nullptr;
             s_cons_car = nullptr;
-            ans->expose();
             return ans;
         }
 
