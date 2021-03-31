@@ -3452,13 +3452,13 @@ HIDDEN SEXP do_textconvalue(SEXP call, SEXP op, SEXP args, SEXP env)
 /* ------------------- socket connections  --------------------- */
 
 
-/* socketConnection(host, port, server, blocking, open, encoding, timeout) */
-/* socketAccept(socket, blocking, open, encoding, timeout) */
+/* socketConnection(host, port, server, blocking, open, encoding, timeout, options) */
+/* socketAccept(socket, blocking, open, encoding, timeout, options) */
 HIDDEN SEXP do_sockconn(SEXP call, SEXP op, SEXP args, SEXP env)
 {
     SEXP scmd, sopen, ans, concl, enc;
     const char *host, *open;
-    int ncon, port, server, blocking, timeout, serverfd;
+    int ncon, port, server, blocking, timeout, serverfd, options = 0;
     Rconnection con = nullptr;
     Rservsockconn scon = nullptr;
 
@@ -3500,9 +3500,22 @@ HIDDEN SEXP do_sockconn(SEXP call, SEXP op, SEXP args, SEXP env)
 	error(_("invalid '%s' argument"), "encoding");
     args = CDR(args);
     timeout = asInteger(CAR(args));
+    args = CDR(args);
+    /* we don't issue errors/warnings on unknown options to allow for
+       future extensions */
+    if (isString(CAR(args))) {
+	SEXP sOpts = CAR(args);
+	int i = 0, n = LENGTH(sOpts);
+	while (i < n) {
+	    const char *opt = CHAR(STRING_ELT(sOpts, i));
+	    if (!strcmp("no-delay", opt))
+		options |= RSC_SET_TCP_NODELAY;
+	    i++;
+	}
+    }
 
     ncon = Rconn::NextConnection();
-    con = R_newsock(host, port, server, serverfd, open, timeout);
+    con = R_newsock(host, port, server, serverfd, open, timeout, options);
     Connections[ncon] = con;
     con->blocking = (Rboolean) blocking;
     strncpy(con->encname, CHAR(STRING_ELT(enc, 0)), 100); /* ASCII */

@@ -39,6 +39,9 @@ typedef struct urlconn {
     char *headers;
 } *Rurlconn;
 
+/* socket options */
+#define RSC_SET_TCP_NODELAY   1
+
 /* used in internet module */
 typedef struct sockconn {
     int port;
@@ -48,6 +51,7 @@ typedef struct sockconn {
     char *host;
     char inbuf[4096], *pstart, *pend;
     int serverfd;
+    int options;
 } *Rsockconn;
 
 typedef struct servsockconn {
@@ -79,8 +83,8 @@ void Rf_init_con(Rconnection newconn, const char *description, int enc,
 	      const char * const mode);
 Rconnection R_newurl(const char *description, const char * const mode,
 		     SEXP headers, int type);
-Rconnection R_newsock(const char *host, int port, int server, int serverfd, const char * const mode, int timeout);
-Rconnection in_R_newsock(const char *host, int port, int server, int serverfd, const char *const mode, int timeout);
+Rconnection R_newsock(const char *host, int port, int server, int serverfd, const char * const mode, int timeout, int options);
+Rconnection in_R_newsock(const char *host, int port, int server, int serverfd, const char *const mode, int timeout, int options);
 Rconnection R_newservsock(int port);
 Rconnection in_R_newservsock(int port);
 

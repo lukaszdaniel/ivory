@@ -4808,7 +4808,7 @@ check_regexetc <- function(txt, fx.ptn, s.ptn, gr.ptn, msg = stop) {
     chkString( s.ptn)
     chkString(gr.ptn)
 
-    a2_fns <- expression(grep, grepl,  regexpr, gregexpr,  regexec) # plus possibly:
+    a2_fns <- expression(grepl,  regexpr, gregexpr,  regexec) # plus possibly:
     if(getRversion() >= "4.1") a2_fns <- c(a2_fns, expression(gregexec))
 
     exclude <- NA # (the default, used in  factor(.., exclude=*)
@@ -4820,6 +4820,7 @@ check_regexetc <- function(txt, fx.ptn, s.ptn, gr.ptn, msg = stop) {
             exclude <- NULL
         }
         txt_fkt <- factor(txt, exclude = exclude)
+        txt_fkt_ch <- as.character(txt_fkt) # is not identical to 'txt'
         cat("txt_i = ", txt_i,"; str(<factor>):\n", sep="") ; str(txt_fkt)
 
         for (ptn in c(fx.ptn, s.ptn, gr.ptn, NA_character_)) {
@@ -4834,15 +4835,15 @@ check_regexetc <- function(txt, fx.ptn, s.ptn, gr.ptn, msg = stop) {
                 if(is.na(ptn) && !(f_2s %in% c("grep", "grepl"))) next
                 cat(f_2s,"")
                 if(!identical(
-                    f_2(ptn, txt_fkt, fixed = fixed, perl = perl),
-                    f_2(ptn, txt,     fixed = fixed, perl = perl)
+                    f_2(ptn, txt_fkt,    fixed = fixed, perl = perl),
+                    f_2(ptn, txt_fkt_ch, fixed = fixed, perl = perl)
                     )) msg(sprintf(
                            "not identical: %s(%s, txt*, fixed=%s, perl=%s)",
                            f_2s, ptn_ch, fixed, perl))
             }
 
-            cat("grep(*, invert=FALSE/TRUE, value = FALSE/TRUE): ")
-            for(iv in list(c(TRUE,FALSE), c(FALSE,TRUE), c(TRUE,TRUE)))
+            cat("\n\t grep(*, invert=F/T, value = F/T): ")
+            for(iv in list(c(FALSE,FALSE), c(TRUE,FALSE), c(FALSE,TRUE), c(TRUE,TRUE)))
               if(!identical(
                 grep(ptn, txt_fkt, fixed = fixed, perl = perl, invert=iv[1], value = iv[2]),
                 grep(ptn, txt,     fixed = fixed, perl = perl, invert=iv[1], value = iv[2])
@@ -4856,8 +4857,8 @@ check_regexetc <- function(txt, fx.ptn, s.ptn, gr.ptn, msg = stop) {
                 f_3s <- as.character(e_3)
                 cat(f_3s,"")
                 if(!identical(
-                    f_3(ptn, "@@", txt_fkt, fixed = fixed, perl = perl),
-                    f_3(ptn, "@@", txt,     fixed = fixed, perl = perl)
+                    f_3(ptn, "@@", txt_fkt,    fixed = fixed, perl = perl),
+                    f_3(ptn, "@@", txt_fkt_ch, fixed = fixed, perl = perl)
                 )) msg(sprintf(
                     "not identical: %s(%s, \"@@\", txt*, fixed=%s, perl=%s)",
                     f_3s, ptn_ch, fixed, perl))
