@@ -83,7 +83,6 @@ namespace CXXR
             m_enclosing->incrementRefCount();
          if (m_frame)
             m_frame->incrementRefCount();
-
       }
 
       /** @brief Base environment.
@@ -106,9 +105,9 @@ namespace CXXR
 
       /** @brief Empty environment.
        *
-       * @return const pointer to the standard empty environment.
+       * @return pointer to the standard empty environment.
        */
-      static const Environment *emptyEnvironment()
+      static Environment *emptyEnvironment()
       {
          return s_empty_env;
       }

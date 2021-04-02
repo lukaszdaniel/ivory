@@ -258,7 +258,6 @@ HIDDEN NORET void RCNTXT::R_jumpctxt(int mask, SEXP val)
 	R_OldCStackLimit = 0;
     }
 
-    // std::cerr << __FILE__ << ":" << __LINE__ << " About to throw JMPException(" << cptr << ", " << mask << ")" << std::endl;
     throw JMPException(cptr, mask);
 }
 
@@ -821,7 +820,6 @@ Rboolean R_ToplevelExec(void (*fun)(void *), void *data)
     do
     {
         redo = false;
-        // std::cerr << __FILE__ << ":" << __LINE__ << " Entering try/catch for " << &thiscontext << std::endl;
 
         try
         {
@@ -839,13 +837,11 @@ Rboolean R_ToplevelExec(void (*fun)(void *), void *data)
         }
         catch (CXXR::JMPException &e)
         {
-            // std::cerr << __FILE__ << ":" << __LINE__ << " Seeking  " << e.context() << "; in " << &thiscontext << std::endl;
             if (e.context() != &thiscontext)
                 throw;
             redo = true;
             jumped = true;
         }
-        // std::cerr << __FILE__ << ":" << __LINE__ << " Exiting  try/catch for " << &thiscontext << std::endl;
     } while (redo);
 
     R_ToplevelContext = saveToplevelContext;
@@ -1003,7 +999,6 @@ SEXP R_UnwindProtect(SEXP (*fun)(void *data), void *data,
     do
     {
         redo = false;
-        // std::cerr << __FILE__ << ":" << __LINE__ << " Entering try/catch for " << &thiscontext << std::endl;
         try
         {
             if (!jumped)
@@ -1025,13 +1020,11 @@ SEXP R_UnwindProtect(SEXP (*fun)(void *data), void *data,
         }
         catch (CXXR::JMPException &e)
         {
-            // std::cerr << __FILE__ << ":" << __LINE__ << " Seeking  " << e.context() << "; in " << &thiscontext << std::endl;
             if (e.context() != &thiscontext)
                 throw;
             redo = true;
             jumped = true;
         }
-        // std::cerr << __FILE__ << ":" << __LINE__ << " Exiting  try/catch for " << &thiscontext << std::endl;
     } while (redo);
 
     cleanfun(cleandata, jump);

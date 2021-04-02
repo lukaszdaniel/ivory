@@ -1226,7 +1226,7 @@ HIDDEN bool R::isMethodsDispatchOn(void)
 HIDDEN
 SEXP do_S4on(SEXP call, SEXP op, SEXP args, SEXP env)
 {
-    if(length(args) == 0) return ScalarLogical(isMethodsDispatchOn());
+    if(Rf_length(args) == 0) return ScalarLogical(isMethodsDispatchOn());
     return R_isMethodsDispatchOn(CAR(args));
 }
 
@@ -1240,22 +1240,26 @@ static SEXP dispatchNonGeneric(SEXP name, SEXP env, SEXP fdef)
 
     /* find a non-generic function */
     symbol = installTrChar(asChar(name));
-    for(rho = ENCLOS(env); rho != R_EmptyEnv;
-	rho = ENCLOS(rho)) {
-	fun = findVarInFrame3(rho, symbol, TRUE);
-	if(fun == R_UnboundValue) continue;
-	switch(TYPEOF(fun)) {
-	case CLOSXP:
-	    value = findVarInFrame3(CLOENV(fun), R_dot_Generic, TRUE);
-	    if(value == R_UnboundValue) break;
-	case BUILTINSXP:  case SPECIALSXP:
-	default:
-	    /* in all other cases, go on to the parent environment */
-	    break;
+	for (rho = ENCLOS(env); rho != R_EmptyEnv; rho = ENCLOS(rho))
+	{
+		fun = Rf_findVarInFrame3(rho, symbol, TRUE);
+		if (fun == R_UnboundValue)
+			continue;
+		switch (TYPEOF(fun))
+		{
+		case CLOSXP:
+			value = findVarInFrame3(CLOENV(fun), R_dot_Generic, TRUE);
+			if (value == R_UnboundValue)
+				break;
+		case BUILTINSXP:
+		case SPECIALSXP:
+		default:
+			/* in all other cases, go on to the parent environment */
+			break;
+		}
+		fun = R_UnboundValue;
 	}
-	fun = R_UnboundValue;
-    }
-    fun = SYMVALUE(symbol);
+	fun = SYMVALUE(symbol);
     if(fun == R_UnboundValue)
 	error(_("unable to find a non-generic version of function '%s'"), translateChar(asChar(name)));
     cptr = R_GlobalContext;

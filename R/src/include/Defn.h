@@ -232,7 +232,7 @@ extern "C"
 #endif
 
     LibExtern Rboolean R_interrupts_suspended INI_as(FALSE);
-    LibExtern int R_interrupts_pending INI_as(0);
+    LibExtern Rboolean R_interrupts_pending INI_as(FALSE);
 
     /* R Home Directory */
     LibExtern char *R_Home; /* Root of the R tree */

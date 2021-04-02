@@ -10,7 +10,7 @@ CPPFLAGS = -I. -I../include -DHAVE_CONFIG_H -DR_DLL_BUILD $(WERROR_FLAGS) $(arch
 
 CSOURCES = 
 CXXSOURCES = \
-	CellHeap.cpp CellPool.cpp CommandLineArgs.cpp MemoryBank.cpp RAllocStack.cpp \
+	CellHeap.cpp CellPool.cpp CommandLineArgs.cpp MemoryBank.cpp RAllocStack.cpp allocstats.cpp \
 	Rdynload.cpp Renviron.cpp RNG.cpp \
 	GCManager.cpp GCNode.cpp GCRoot.cpp GCStackRoot.cpp Logical.cpp String.cpp ComplexVector.cpp IntVector.cpp LogicalVector.cpp RawVector.cpp \
 	RealVector.cpp StringVector.cpp RObject.cpp ConsCell.cpp BuiltInFunction.cpp Expression.cpp ExternalPointer.cpp FunctionBase.cpp \

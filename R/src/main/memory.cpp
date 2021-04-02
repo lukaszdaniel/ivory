@@ -1554,8 +1554,8 @@ void *R_AllocStringBuffer(size_t blen, R_StringBuffer &buf)
     size_t blen1, bsize = buf.defaultSize;
 
     /* for backwards compatibility, this used to free the buffer */
-    if(blen == (size_t)-1)
-	error(_("'R_AllocStringBuffer( (size_t)-1 )' function is no longer allowed"));
+    if (blen == (size_t)-1)
+        error(_("'R_AllocStringBuffer( (size_t)-1 )' function is no longer allowed"));
 
     if(blen * sizeof(char) < buf.bufsize) return buf.data;
     blen1 = blen = (blen + 1) * sizeof(char);
@@ -1571,8 +1571,7 @@ void *R_AllocStringBuffer(size_t blen, R_StringBuffer &buf)
     buf.bufsize = blen;
     if(!buf.data) {
 	buf.bufsize = 0;
-	/* don't translate internal error message */
-	error(_("could not allocate memory (%u Mb) in 'R_AllocStringBuffer()' function"),
+	error(_("could not allocate memory (%u MB) in 'R_AllocStringBuffer()' function"),
 	      (unsigned int) blen/1024/1024);
     }
     return buf.data;

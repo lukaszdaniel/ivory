@@ -63,7 +63,7 @@ namespace CXXR
 
     void Promise::setEnvironment(Environment *val)
     {
-        xfix_refcnt(const_cast<Environment *>(m_environment), val);
+        xfix_refcnt(m_environment, val);
         m_environment = val;
         propagateAge(m_environment);
     }

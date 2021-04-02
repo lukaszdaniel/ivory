@@ -236,7 +236,7 @@ extern "C"
      * suspended, this is set non-zero.  The interrupt is then
      * services when the period of suspension ends.
      */
-    extern int R_interrupts_pending;
+    extern Rboolean R_interrupts_pending;
 
     /** @brief Are interrupts currently suspended?
      */

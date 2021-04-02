@@ -174,10 +174,10 @@ static SEXP getInterruptCondition();
 static void onintrEx(Rboolean resumeOK)
 {
     if (R_interrupts_suspended) {
-	R_interrupts_pending = 1;
+	R_interrupts_pending = TRUE;
 	return;
     }
-    else R_interrupts_pending = 0;
+    else R_interrupts_pending = FALSE;
 
     if (resumeOK) {
 	SEXP rho = R_GlobalContext->workingEnvironment();
@@ -189,7 +189,6 @@ static void onintrEx(Rboolean resumeOK)
 	do
 	{
 		redo = false;
-		// std::cerr << __FILE__ << ":" << __LINE__ << " Entering try/catch for " << &restartcontext << std::endl;
 		try
 		{
 			if (!jumped)
@@ -209,13 +208,11 @@ static void onintrEx(Rboolean resumeOK)
 		}
 		catch (CXXR::JMPException &e)
 		{
-			// std::cerr << __FILE__ << ":" << __LINE__ << " Seeking  " << e.context() << "; in " << &restartcontext << std::endl;
 			if (e.context() != &restartcontext)
 				throw;
 			redo = true;
 			jumped = true;
 		}
-		// std::cerr << __FILE__ << ":" << __LINE__ << " Exiting  try/catch for " << &restartcontext << std::endl;
 	} while (redo);
     }
     else signalInterrupt();

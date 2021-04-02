@@ -375,20 +375,17 @@ void R_ReplDLLinit(void)
 	{
 		redo = false;
 		R_GlobalContext = R_ToplevelContext = R_SessionContext = &R_Toplevel;
-		// std::cerr << __FILE__ << ":" << __LINE__ << " Entering try/catch for " << &R_Toplevel << std::endl;
 		try
 		{
 			R_IoBufferWriteReset(&R_ConsoleIob);
 		}
 		catch (CXXR::JMPException &e)
 		{
-			// std::cerr << __FILE__ << ":" << __LINE__ << " Seeking " << e.context() << "; in " << &R_Toplevel << std::endl;
 			if (e.context() != &R_Toplevel)
 				throw;
 			check_session_exit();
 			redo = true;
 		}
-		// std::cerr << __FILE__ << ":" << __LINE__ << " Exiting  try/catch for " << &R_Toplevel << std::endl;
 	} while (redo);
 
     prompt_type = 1;
@@ -469,7 +466,7 @@ int R_ReplDLLdo1(void)
 
 static RETSIGTYPE handleInterrupt(int dummy)
 {
-    R_interrupts_pending = 1;
+    R_interrupts_pending = TRUE;
     signal(SIGINT, handleInterrupt);
 }
 
@@ -749,7 +746,6 @@ static void R_LoadProfile(FILE *fparg, SEXP env)
 {
     FILE * volatile fp = fparg; /* is this needed? */
     if (fp) {
-		// std::cerr << __FILE__ << ":" << __LINE__ << " Entering try/catch for " << &R_Toplevel << std::endl;
 		try
 		{
 			R_GlobalContext = R_ToplevelContext = R_SessionContext = &R_Toplevel;
@@ -757,12 +753,10 @@ static void R_LoadProfile(FILE *fparg, SEXP env)
 		}
 		catch (CXXR::JMPException &e)
 		{
-			// std::cerr << __FILE__ << ":" << __LINE__ << " Seeking " << e.context() << "; in " << &R_Toplevel << std::endl;
 			if (e.context() != &R_Toplevel)
 				throw;
 			check_session_exit();
 		}
-		// std::cerr << __FILE__ << ":" << __LINE__ << " Exiting  try/catch for " << &R_Toplevel << std::endl;
 
 	fclose(fp);
     }
@@ -987,7 +981,6 @@ void setup_Rmainloop(void)
 		R_Suicide(_("unable to open the base package\n"));
 
 	R_GlobalContext = R_ToplevelContext = R_SessionContext = &R_Toplevel;
-	// std::cerr << __FILE__ << ":" << __LINE__ << " Entering try/catch for " << &R_Toplevel << std::endl;
 	try
 	{
 		if (R_SignalHandlers)
@@ -996,7 +989,6 @@ void setup_Rmainloop(void)
 	}
 	catch (CXXR::JMPException &e)
 	{
-		// std::cerr << __FILE__ << ":" << __LINE__ << " Seeking " << e.context() << "; in " << &R_Toplevel << std::endl;
 		if (e.context() != &R_Toplevel)
 			throw;
 		check_session_exit();
@@ -1004,7 +996,6 @@ void setup_Rmainloop(void)
 		if (R_SignalHandlers)
 			init_signal_handlers();
 	}
-	// std::cerr << __FILE__ << ":" << __LINE__ << " Exiting  try/catch for " << &R_Toplevel << std::endl;
     fclose(fp);
 #endif
 
@@ -1027,7 +1018,6 @@ void setup_Rmainloop(void)
 
     /* require(methods) if it is in the default packages */
 	R_GlobalContext = R_ToplevelContext = R_SessionContext = &R_Toplevel;
-	// std::cerr << __FILE__ << ":" << __LINE__ << " Entering try/catch for " << &R_Toplevel << std::endl;
 	try
 	{
 		PROTECT(cmd = Symbol::obtain(".OptRequireMethods"));
@@ -1043,13 +1033,11 @@ void setup_Rmainloop(void)
 	}
 	catch (CXXR::JMPException &e)
 	{
-		// std::cerr << __FILE__ << ":" << __LINE__ << " Seeking " << e.context() << "; in " << &R_Toplevel << std::endl;
 		if (e.context() != &R_Toplevel)
 			throw;
 		check_session_exit();
 		R_GlobalContext = R_ToplevelContext = R_SessionContext = &R_Toplevel;
 	}
-	// std::cerr << __FILE__ << ":" << __LINE__ << " Exiting  try/catch for " << &R_Toplevel << std::endl;
 
     if (streql(R_GUIType, "Tk")) {
 	char buf[PATH_MAX];
@@ -1074,14 +1062,12 @@ void setup_Rmainloop(void)
        or dropped on the application.
     */
 	R_GlobalContext = R_ToplevelContext = R_SessionContext = &R_Toplevel;
-	// std::cerr << __FILE__ << ":" << __LINE__ << " Entering try/catch for " << &R_Toplevel << std::endl;
 	try
 	{
 		R_InitialData();
 	}
 	catch (CXXR::JMPException &e)
 	{
-		// std::cerr << __FILE__ << ":" << __LINE__ << " Seeking " << e.context() << "; in " << &R_Toplevel << std::endl;
 		if (e.context() != &R_Toplevel)
 			throw;
 		try
@@ -1090,19 +1076,16 @@ void setup_Rmainloop(void)
 		}
 		catch (CXXR::JMPException &e)
 		{
-			// std::cerr << __FILE__ << ":" << __LINE__ << " Seeking " << e.context() << "; in " << &R_Toplevel << std::endl;
 			if (e.context() != &R_Toplevel)
 				throw;
 			check_session_exit();
 		}
 	}
-	// std::cerr << __FILE__ << ":" << __LINE__ << " Exiting  try/catch for " << &R_Toplevel << std::endl;
 
     /* Initial Loading is done.
        At this point we try to invoke the .First Function.
        If there is an error we continue. */
 	R_GlobalContext = R_ToplevelContext = R_SessionContext = &R_Toplevel;
-	// std::cerr << __FILE__ << ":" << __LINE__ << " Entering try/catch for " << &R_Toplevel << std::endl;
 	try
 	{
 		PROTECT(cmd = Symbol::obtain(".First"));
@@ -1118,18 +1101,15 @@ void setup_Rmainloop(void)
 	}
 	catch (CXXR::JMPException &e)
 	{
-		// std::cerr << __FILE__ << ":" << __LINE__ << " Seeking " << e.context() << "; in " << &R_Toplevel << std::endl;
 		if (e.context() != &R_Toplevel)
 			throw;
 		check_session_exit();
 		R_GlobalContext = R_ToplevelContext = R_SessionContext = &R_Toplevel;
 	}
-	// std::cerr << __FILE__ << ":" << __LINE__ << " Exiting  try/catch for " << &R_Toplevel << std::endl;
 
     /* Try to invoke the .First.sys function, which loads the default packages.
        If there is an error we continue. */
 	R_GlobalContext = R_ToplevelContext = R_SessionContext = &R_Toplevel;
-	// std::cerr << __FILE__ << ":" << __LINE__ << " Entering try/catch for " << &R_Toplevel << std::endl;
 	try
 	{
 		PROTECT(cmd = Symbol::obtain(".First.sys"));
@@ -1145,13 +1125,11 @@ void setup_Rmainloop(void)
 	}
 	catch (CXXR::JMPException &e)
 	{
-		// std::cerr << __FILE__ << ":" << __LINE__ << " Seeking " << e.context() << "; in " << &R_Toplevel << std::endl;
 		if (e.context() != &R_Toplevel)
 			throw;
 		check_session_exit();
 		R_GlobalContext = R_ToplevelContext = R_SessionContext = &R_Toplevel;
 	}
-	// std::cerr << __FILE__ << ":" << __LINE__ << " Exiting  try/catch for " << &R_Toplevel << std::endl;
 
     {
 	int i;
@@ -1166,21 +1144,18 @@ void setup_Rmainloop(void)
 
 	/* trying to do this earlier seems to run into bootstrapping issues. */
 	R_GlobalContext = R_ToplevelContext = R_SessionContext = &R_Toplevel;
-	// std::cerr << __FILE__ << ":" << __LINE__ << " Entering try/catch for " << &R_Toplevel << std::endl;
 	try
 	{
 		R_init_jit_enabled();
 	}
 	catch (CXXR::JMPException &e)
 	{
-		// std::cerr << __FILE__ << ":" << __LINE__ << " Seeking " << e.context() << "; in " << &R_Toplevel << std::endl;
 		if (e.context() != &R_Toplevel)
 			throw;
 		check_session_exit();
 		R_GlobalContext = R_ToplevelContext = R_SessionContext = &R_Toplevel;
 		R_Suicide(_("unable to initialize the JIT\n"));
 	}
-	// std::cerr << __FILE__ << ":" << __LINE__ << " Exiting  try/catch for " << &R_Toplevel << std::endl;
     R_Is_Running = 2;
 }
 
@@ -1204,7 +1179,6 @@ void run_Rmainloop(void)
 	do
 	{
 		redo = false;
-		// std::cerr << __FILE__ << ":" << __LINE__ << " Entering try/catch for " << &R_Toplevel << std::endl;
 		try
 		{
 			R_GlobalContext = R_ToplevelContext = R_SessionContext = &R_Toplevel;
@@ -1213,16 +1187,11 @@ void run_Rmainloop(void)
 		}
 		catch (CXXR::JMPException &e)
 		{
-			// std::cerr << __FILE__ << ":" << __LINE__ << " Seeking " << e.context() << "; in " << &R_Toplevel << std::endl;
 			if (e.context() != &R_Toplevel)
 				throw;
 			check_session_exit();
 			redo = true;
 		}
-		//	catch (...) {
-		//	    std::cout << "Non-JMPException caught" << std::endl;
-		//	}
-		// std::cerr << __FILE__ << ":" << __LINE__ << " Exiting  try/catch for " << &R_Toplevel << std::endl;
 	} while (redo);
 }
 
@@ -1420,7 +1389,6 @@ HIDDEN SEXP do_browser(SEXP call, SEXP op, SEXP args, SEXP rho)
 	do
 	{
 		redo = false;
-		// std::cerr << __FILE__ << ":" << __LINE__ << " Entering try/catch for " << &returncontext << std::endl;
 		try
 		{
 			if (!jumped)
@@ -1429,7 +1397,6 @@ HIDDEN SEXP do_browser(SEXP call, SEXP op, SEXP args, SEXP rho)
 				do
 				{
 					redo2 = false;
-					// std::cerr << __FILE__ << ":" << __LINE__ << " Entering try/catch for " << &thiscontext << std::endl;
 					try
 					{
 						if (!jumped2)
@@ -1451,26 +1418,22 @@ HIDDEN SEXP do_browser(SEXP call, SEXP op, SEXP args, SEXP rho)
 					}
 					catch (CXXR::JMPException &e)
 					{
-						// std::cerr << __FILE__ << ":" << __LINE__ << " Seeking " << e.context() << "; in " << &thiscontext << std::endl;
 						if (e.context() != &thiscontext)
 							throw;
 						jumped2 = true;
 						redo2 = true;
 					}
-					// std::cerr << __FILE__ << ":" << __LINE__ << " Exiting  try/catch for " << &thiscontext << std::endl;
 				} while (redo2);
 			}
 			returncontext.end();
 		}
 		catch (CXXR::JMPException &e)
 		{
-			// std::cerr << __FILE__ << ":" << __LINE__ << " Seeking " << e.context() << "; in " << &returncontext << std::endl;
 			if (e.context() != &returncontext)
 				throw;
 			jumped = true;
 			redo = true;
 		}
-		// std::cerr << __FILE__ << ":" << __LINE__ << " Exiting  try/catch for " << &returncontext << std::endl;
 	} while (redo);
 
     /* Reset the interpreter state. */

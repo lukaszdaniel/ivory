@@ -101,32 +101,32 @@ namespace CXXR
         JMP_BUF m_cjmpbuf;       /* C stack and register information */
         size_t m_cstacktop;      /* Top of the pointer protection stack */
         int m_evaldepth;         /* evaluation depth at inception */
-        SEXP m_promargs;         /* Promises supplied to closure */
-        SEXP m_callfun;          /* The closure called */
-        SEXP m_sysparent;        /* environment the closure was called from */
-        SEXP m_call;             /* The call that effected this context*/
-        SEXP m_cloenv;           /* The environment */
-        SEXP m_conexit;          /* Interpreted "on.exit" code */
+        RObject *m_promargs;     /* Promises supplied to closure */
+        RObject *m_callfun;      /* The closure called */
+        RObject *m_sysparent;    /* environment the closure was called from */
+        RObject *m_call;         /* The call that effected this context*/
+        RObject *m_cloenv;       /* The environment */
+        RObject *m_conexit;      /* Interpreted "on.exit" code */
         void (*m_cend)(void *);  /* C "on.exit" thunk */
         void *m_cenddata;        /* data for C "on.exit" thunk */
         void *m_vmax;            /* top of R_alloc stack */
         int m_intsusp;           /* interrupts are suspended */
         bool m_gcenabled;        /* R_GCEnabled value */
         bool m_bcintactive;      /* R_BCIntActive value */
-        SEXP m_bcbody;           /* R_BCbody value */
+        RObject *m_bcbody;       /* R_BCbody value */
         void *m_bcpc;            /* R_BCpc value */
-        SEXP m_handlerstack;     /* condition handler stack */
-        SEXP m_restartstack;     /* stack of available restarts */
+        RObject *m_handlerstack; /* condition handler stack */
+        RObject *m_restartstack; /* stack of available restarts */
         RPRSTACK *m_prstack;     /* stack of pending promises */
         R_bcstack_t *m_nodestack;
         R_bcstack_t *m_bcprottop;
-        SEXP m_srcref;          /* The source line in effect */
+        RObject *m_srcref;      /* The source line in effect */
         bool m_browserfinish;   /* should browser finish this context without
                                    stopping */
-        SEXP m_returnValue;     /* only set during on.exit calls */
+        RObject *m_returnValue; /* only set during on.exit calls */
         RContext *m_jumptarget; /* target for a continuing jump */
         int m_jumpmask;         /* associated JMPException argument */
-        SEXP getCallWithSrcref();
+        RObject *getCallWithSrcref();
         RContext *first_jump_target(int mask);
 
     public:
@@ -136,16 +136,16 @@ namespace CXXR
                      m_restartstack(nullptr), m_prstack(nullptr), m_nodestack(nullptr), m_bcprottop(nullptr), m_srcref(nullptr), m_browserfinish(false),
                      m_returnValue(nullptr), m_jumptarget(nullptr), m_jumpmask(0){};
         ~RContext(){};
-        SEXP getHandlerStack() const { return m_handlerstack; }
-        void setHandlerStack(SEXP handler) { m_handlerstack = handler; }
-        SEXP onExit() const { return m_conexit; }
-        void setOnExit(SEXP x) { m_conexit = x; }
-        SEXP workingEnvironment() const { return m_cloenv; }
-        void setWorkingEnvironment(SEXP x) { m_cloenv = x; }
+        RObject *getHandlerStack() const { return m_handlerstack; }
+        void setHandlerStack(RObject *handler) { m_handlerstack = handler; }
+        RObject *onExit() const { return m_conexit; }
+        void setOnExit(RObject *x) { m_conexit = x; }
+        RObject *workingEnvironment() const { return m_cloenv; }
+        void setWorkingEnvironment(RObject *x) { m_cloenv = x; }
         RContext *nextContext() const { return m_nextcontext; }
         void setNextContext(RContext *ctxt) { m_nextcontext = ctxt; }
-        SEXP getReturnValue() const { return m_returnValue; }
-        void setReturnValue(SEXP rv) { m_returnValue = rv; }
+        RObject *getReturnValue() const { return m_returnValue; }
+        void setReturnValue(RObject *rv) { m_returnValue = rv; }
         void *getContextEndData() const { return m_cenddata; };
         void setContextEndData(void *data = nullptr) { m_cenddata = data; }
         void setContextEnd(void (*cendf)(void *) = nullptr) { m_cend = cendf; }
@@ -158,10 +158,10 @@ namespace CXXR
         int &getCallFlag() { return m_callflag; }
         int getCallFlag() const { return m_callflag; }
         void setCallFlag(int cflag) { m_callflag = cflag; }
-        SEXP getSysParent() const { return m_sysparent; }
-        void setSysParent(SEXP sp) { m_sysparent = sp; }
-        SEXP getRestartStack() const { return m_restartstack; }
-        void setRestartStack(SEXP rs) { m_restartstack = rs; }
+        RObject *getSysParent() const { return m_sysparent; }
+        void setSysParent(RObject *sp) { m_sysparent = sp; }
+        RObject *getRestartStack() const { return m_restartstack; }
+        void setRestartStack(RObject *rs) { m_restartstack = rs; }
         int getCStackTop() const { return m_cstacktop; }
         void setCStackTop(int stacktop) { m_cstacktop = stacktop; }
         bool getGCEnabled() const { return m_gcenabled; }
@@ -170,8 +170,8 @@ namespace CXXR
         void setBCIntactive(bool active) { m_bcintactive = active; }
         void *getBCPC() const { return m_bcpc; }
         void setBCPC(void *bc) { m_bcpc = bc; }
-        SEXP getBCBody() const { return m_bcbody; }
-        void setBCBody(SEXP body) { m_bcbody = body; }
+        RObject *getBCBody() const { return m_bcbody; }
+        void setBCBody(RObject *body) { m_bcbody = body; }
         int getEvalDepth() const { return m_evaldepth; }
         void setEvalDepth(int depth) { m_evaldepth = depth; }
         int getIntSusp() const { return m_intsusp; }
@@ -186,34 +186,34 @@ namespace CXXR
         void setJumpMask(int mask) { m_jumpmask = mask; }
         R_bcstack_t *getNodeStack() const { return m_nodestack; }
         void setNodeStack(R_bcstack_t *stack) { m_nodestack = stack; }
-        SEXP getSrcRef() const { return m_srcref; }
-        void setSrcRef(SEXP src) { m_srcref = src; }
+        RObject *getSrcRef() const { return m_srcref; }
+        void setSrcRef(RObject *src) { m_srcref = src; }
         R_bcstack_t *getBCProtTop() const { return m_bcprottop; }
         void setBCProtTop(R_bcstack_t *stack) { m_bcprottop = stack; }
         auto getCJmpBuf() { return m_cjmpbuf; }
-        SEXP getCallFun() const { return m_callfun; }
-        void setCallFun(SEXP cfun) { m_callfun = cfun; }
-        SEXP getPromiseArgs() const { return m_promargs; }
-        void setPromiseArgs(SEXP pargs) { m_promargs = pargs; }
-        SEXP getCall() const { return m_call; }
-        void setCall(SEXP call) { m_call = call; }
+        RObject *getCallFun() const { return m_callfun; }
+        void setCallFun(RObject *cfun) { m_callfun = cfun; }
+        RObject *getPromiseArgs() const { return m_promargs; }
+        void setPromiseArgs(RObject *pargs) { m_promargs = pargs; }
+        RObject *getCall() const { return m_call; }
+        void setCall(RObject *call) { m_call = call; }
         bool getBrowserFinish() const { return m_browserfinish; }
         void setBrowserFinish(bool finish) { m_browserfinish = finish; }
         bool isRestartBitSet() const { return (m_callflag & CTXT_RESTART); }
         void setRestartBitOn() { m_callflag |= CTXT_RESTART; }
         void setRestartBitOff() { m_callflag &= ~CTXT_RESTART; }
         int R_sysparent(int n);
-        SEXP R_sysfunction(int n);
-        SEXP R_syscall(int n);
+        RObject *R_sysfunction(int n);
+        RObject *R_syscall(int n);
         void R_restore_globals();
         static void R_run_onexits(RContext *cptr = nullptr);
-        NORET void R_jumpctxt(int mask, SEXP val);
-        SEXP R_sysframe(int n);
+        NORET void R_jumpctxt(int mask, RObject *val);
+        RObject *R_sysframe(int n);
         int Rf_framedepth();
         void start(int, SEXP, SEXP, SEXP, SEXP, SEXP);
         static void begincontext(RContext &, int, SEXP, SEXP, SEXP, SEXP, SEXP);
         static void begincontext(RContext *, int, SEXP, SEXP, SEXP, SEXP, SEXP);
-        static SEXP dynamicfindVar(SEXP, RContext *);
+        static RObject *dynamicfindVar(SEXP, RContext *);
         void end();
         static void endcontext(RContext &);
         static void endcontext(RContext *);

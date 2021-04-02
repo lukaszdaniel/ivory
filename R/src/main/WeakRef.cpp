@@ -352,7 +352,6 @@ namespace CXXR
 			do
 			{
 				redo = false;
-				// std::cerr << __FILE__ << ":" << __LINE__ << " Entering try/catch for " << &thiscontext << std::endl;
 				try
 				{
 					if (!jumped)
@@ -364,13 +363,11 @@ namespace CXXR
 				}
 				catch (CXXR::JMPException &e)
 				{
-					// std::cerr << __FILE__ << ":" << __LINE__ << " Seeking " << e.context() << "; in " << &thiscontext << std::endl;
 					if (e.context() != &thiscontext)
 						throw;
 					redo = true;
 					jumped = true;
 				}
-				// std::cerr << __FILE__ << ":" << __LINE__ << " Exiting  try/catch for " << &thiscontext << std::endl;
 			} while (redo);
 
 			R_ToplevelContext = saveToplevelContext;

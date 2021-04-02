@@ -90,14 +90,11 @@ namespace CXXR
 
     void Environment::initialize()
     {
-        // R_EmptyEnv = empty();
-        R_EmptyEnv = const_cast<Environment *>(Environment::emptyEnvironment());
-        // R_BaseEnv = base();
-        R_BaseEnv = Environment::base();
+        R_EmptyEnv = emptyEnvironment();
+        R_BaseEnv = base();
 
         // base()->setOnSearchPath(true);
-        // R_GlobalEnv = global();
-        R_GlobalEnv = Environment::global();
+        R_GlobalEnv = global();
 
         // global()->setOnSearchPath(true);
 
