@@ -81,8 +81,9 @@ function(pattern, replacement, x, ignore.case = FALSE,
          perl = FALSE, fixed = FALSE, useBytes = FALSE)
 {
     if(is.factor(x) && length(levels(x)) < length(x)) {
-        .Internal(sub(as.character(pattern), as.character(replacement),
+        r <- .Internal(sub(as.character(pattern), as.character(replacement),
                       levels(x), ignore.case, perl, fixed, useBytes))[x]
+        if(is.null(nx <- names(x))) r else `names<-`(r, nx)
     } else {
         if (!is.character(x)) x <- as.character(x)
         .Internal(sub(as.character(pattern), as.character(replacement), x,
@@ -94,9 +95,10 @@ gsub <-
 function(pattern, replacement, x, ignore.case = FALSE,
          perl = FALSE, fixed = FALSE, useBytes = FALSE)
 {
-    if(is.factor(x) && length(length(levels(x)) < length(x))) {
-        .Internal(gsub(as.character(pattern), as.character(replacement),
+    if(is.factor(x) && length(levels(x)) < length(x)) {
+        r <- .Internal(gsub(as.character(pattern), as.character(replacement),
                        levels(x), ignore.case, perl, fixed, useBytes))[x]
+        if(is.null(nx <- names(x))) r else `names<-`(r, nx)
     } else {
         if (!is.character(x)) x <- as.character(x)
         .Internal(gsub(as.character(pattern), as.character(replacement), x,
@@ -486,7 +488,7 @@ function(x, m, invert = FALSE)
                         return(character())
                 }
                 tmp <- substring(u, so, so + ml - 1L)
-                ## Copy dims and dimnames from gregexec, and names 
+                ## Copy dims and dimnames from gregexec, and names
                 ## from regexec.  These may appear with perl=TRUE.
                 dim(tmp) <- dim(so)
                 dimnames(tmp) <- dimnames(so)
