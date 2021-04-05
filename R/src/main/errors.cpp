@@ -2133,7 +2133,7 @@ NORET static void invokeRestart(SEXP r, SEXP arglist)
 	    if (exit == RESTART_EXIT(CAR(R_RestartStack))) {
 		R_RestartStack = CDR(R_RestartStack);
 		if (TYPEOF(exit) == EXTPTRSXP) {
-		    RCNTXT *c = (RCNTXT *) R_ExternalPtrAddr(exit);
+		    RCNTXT *c = static_cast<RCNTXT *>(R_ExternalPtrAddr(exit));
 		    RCNTXT::R_JumpToContext(c, CTXT_RESTART, R_RestartToken);
 		}
 		else findcontext(CTXT_FUNCTION, exit, arglist);
@@ -2193,9 +2193,9 @@ HIDDEN void R_BadValueInRCode(SEXP value, SEXP call, SEXP rho, const char *rawms
 {
     /* disable GC so that use of this temporary checking code does not
        introduce new PROTECT errors e.g. in asLogical() use */
+	GCManager::GCInhibitor no_gc;
     R_CHECK_THREAD;
-    bool enabled = R_GCEnabled;
-    R_GCEnabled = false;
+
     int nprotect = 0;
     char *check = getenv(varname);
     const void *vmax = vmaxget();
@@ -2322,7 +2322,6 @@ HIDDEN void R_BadValueInRCode(SEXP value, SEXP call, SEXP rho, const char *rawms
 	warningcall(call, warnmsg);
     vmaxset(vmax);
     UNPROTECT(nprotect);
-    R_GCEnabled = enabled;
 }
 
 
@@ -2461,7 +2460,7 @@ SEXP R_tryCatch(SEXP (*body)(void *), void *bdata,
 
     if (conds == nullptr) conds = allocVector(STRSXP, 0);
     PROTECT(conds);
-    SEXP fin = finally ? R_TrueValue : R_FalseValue;
+    LogicalVector *fin = finally ? R_TrueValue : R_FalseValue;
     SEXP tcdptr = R_MakeExternalPtr(&tcd, R_NilValue, R_NilValue);
     SEXP expr = lang4(trycatch_callback, tcdptr, conds, fin);
     PROTECT(expr);

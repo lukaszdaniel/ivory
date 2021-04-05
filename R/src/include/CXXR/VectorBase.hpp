@@ -31,11 +31,11 @@
 #ifndef VECTORBASE_HPP
 #define VECTORBASE_HPP
 
+#include <cstddef>
 #include <CXXR/GCStackRoot.hpp>
 #include <CXXR/RObject.hpp>
 #include <CXXR/SEXP_downcast.hpp>
 #include <Localization.h>
-#include <cstddef>
 
 namespace CXXR
 {
@@ -44,7 +44,7 @@ namespace CXXR
   class VectorBase : public RObject
   {
   public:
-    typedef std::size_t size_type;
+    using size_type = R_xlen_t;
     /**
      * @param stype The required ::SEXPTYPE.
      * @param sz The required number of elements in the vector.
@@ -327,7 +327,7 @@ extern "C"
   R_xlen_t Rf_XLENGTH(SEXP x);
 } // extern "C"
 
-#if defined(R_NO_REMAP) && defined(COMPILING_IVORY) && defined(__cplusplus)
+#if (defined(R_NO_REMAP) && defined(COMPILING_IVORY)) && defined(__cplusplus)
 const auto allocVector = Rf_allocVector;
 const auto allocVector3 = Rf_allocVector3;
 const auto mkNamed = Rf_mkNamed;

@@ -48,6 +48,7 @@
 
 #include <cmath>
 #include <cfloat>
+#include <Rinternals.h>
 #include <R_ext/Applic.h>
 #include <Rmath.h>
 #include <R_ext/Error.h>

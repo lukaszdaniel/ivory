@@ -84,7 +84,7 @@ extern "C"
     SEXP Rf_ScalarInteger(int x);
 } // extern "C"
 
-#if defined(R_NO_REMAP) && defined(COMPILING_IVORY) && defined(__cplusplus)
+#if (defined(R_NO_REMAP) && defined(COMPILING_IVORY)) && defined(__cplusplus)
 const auto isFactor = Rf_isFactor;
 const auto isInteger = Rf_isInteger;
 const auto nlevels = Rf_nlevels;

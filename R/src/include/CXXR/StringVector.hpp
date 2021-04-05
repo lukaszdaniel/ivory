@@ -177,7 +177,7 @@ extern "C"
     SEXP Rf_ScalarString(SEXP x);
 } // extern "C"
 
-#if defined(R_NO_REMAP) && defined(COMPILING_IVORY) && defined(__cplusplus)
+#if (defined(R_NO_REMAP) && defined(COMPILING_IVORY)) && defined(__cplusplus)
 const auto stringPositionTr = Rf_stringPositionTr;
 const auto isValidString = Rf_isValidString;
 const auto isValidStringF = Rf_isValidStringF;

@@ -60,6 +60,7 @@ size_t GCManager::s_max_node_threshold = R_SIZE_T_MAX;
 size_t GCManager::s_min_threshold = s_threshold;
 size_t GCManager::s_min_node_threshold = s_node_threshold;
 bool GCManager::s_gc_fail_on_error = false;
+bool GCManager::s_R_in_gc = false;
 bool GCManager::s_gc_pending = false;
 int GCManager::s_gc_force_wait = 0;
 int GCManager::s_gc_force_gap = 0;
@@ -169,13 +170,12 @@ void GCManager::adjustThreshold(R_size_t bytes_wanted)
     size_t R_MinNFree = size_t(s_min_node_threshold * R_MinFreeFrac);
     size_t NNeeded = GCNode::numNodes() + R_MinNFree;
 
-    double vect_occup = ((double)VNeeded) / s_threshold;
-    double node_occup = ((double)NNeeded) / s_node_threshold;
+    double vect_occup = static_cast<double>(VNeeded) / s_threshold;
+    double node_occup = static_cast<double>(NNeeded) / s_node_threshold;
 
     if (node_occup > R_NGrowFrac)
     {
-        size_t change =
-            size_t(R_NGrowIncrMin + R_NGrowIncrFrac * s_node_threshold);
+        size_t change = size_t(R_NGrowIncrMin + R_NGrowIncrFrac * s_node_threshold);
 
         /* for early andjustments grow more agressively */
         static R_size_t last_in_use = 0;
@@ -189,7 +189,7 @@ void GCManager::adjustThreshold(R_size_t bytes_wanted)
             last_in_use = GCNode::numNodes();
 
             /* try to achieve and occupancy rate of R_NGrowFrac */
-            R_size_t next_nsize = (R_size_t)(next_in_use / R_NGrowFrac);
+            R_size_t next_nsize = R_size_t(next_in_use / R_NGrowFrac);
             if (next_nsize > s_node_threshold + change)
                 change = next_nsize - s_node_threshold;
         }
@@ -199,7 +199,7 @@ void GCManager::adjustThreshold(R_size_t bytes_wanted)
     }
     else if (node_occup < R_NShrinkFrac)
     {
-        s_node_threshold -= (R_size_t)(R_NShrinkIncrMin + R_NShrinkIncrFrac * s_node_threshold);
+        s_node_threshold -= R_size_t(R_NShrinkIncrMin + R_NShrinkIncrFrac * s_node_threshold);
         if (s_node_threshold < NNeeded)
             s_node_threshold = min(NNeeded, s_max_node_threshold);
         s_node_threshold = max(s_node_threshold, s_min_node_threshold);
@@ -284,6 +284,11 @@ bool GCManager::gc_inhibit_release()
     return s_gc_inhibit_release;
 }
 
+bool GCManager::R_in_gc()
+{
+    return s_R_in_gc;
+}
+
 size_t GCManager::cue(size_t bytes_wanted)
 {
     gc(bytes_wanted);
@@ -294,7 +299,7 @@ void GCManager::gc_error(const char *msg)
 {
     if (s_gc_fail_on_error)
         R_Suicide(msg);
-    else if (R_in_gc)
+    else if (s_R_in_gc)
         REprintf(msg);
     else
         Rf_error(msg);
@@ -317,16 +322,10 @@ void GCManager::gc(size_t bytes_wanted, bool full)
     if (running_finalizers)
         return;
 
-    if (GCInhibitor::active())
-    {
-        s_gc_pending = true;
-        return;
-    }
-
     R_CHECK_THREAD;
-    if (!R_GCEnabled || R_in_gc)
+    if (GCInhibitor::active() || s_R_in_gc)
     {
-        if (R_in_gc)
+        if (s_R_in_gc)
             gc_error("*** recursive gc invocation\n");
         // if (GCNode::numNodes() >= s_node_threshold)
         //     GCManager::s_node_threshold = GCNode::numNodes() + 1;
@@ -380,8 +379,7 @@ void GCManager::gcGenController(size_t bytes_wanted, bool full)
     s_max_nodes = max(s_max_nodes, GCNode::numNodes());
     s_max_bytes = max(s_max_bytes, MemoryBank::bytesAllocated());
 
-    /* BEGIN_SUSPEND_INTERRUPTS { */
-    R_in_gc = true;
+    s_R_in_gc = true;
     if (s_pre_gc)
         (*s_pre_gc)();
 
@@ -418,8 +416,7 @@ void GCManager::gcGenController(size_t bytes_wanted, bool full)
     }
     if (s_post_gc)
         (*s_post_gc)();
-    R_in_gc = false;
-    /* } END_SUSPEND_INTERRUPTS; */
+    s_R_in_gc = false;
 
     if (R_check_constants > 2 ||
         (R_check_constants > 1 && gens_collected == s_num_old_generations))

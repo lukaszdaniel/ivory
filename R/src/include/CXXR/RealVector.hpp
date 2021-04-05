@@ -31,11 +31,11 @@
 #ifndef REALVECTOR_HPP
 #define REALVECTOR_HPP
 
-#include <R_ext/Arith.h>
+#include <cmath>
 #include <CXXR/FixedVector.hpp>
 #include <CXXR/SEXP_downcast.hpp>
 #include <CXXR/VectorBase.hpp>
-#include <cmath>
+#include <R_ext/Arith.h>
 
 namespace CXXR
 {
@@ -86,7 +86,7 @@ extern "C"
     SEXP Rf_ScalarReal(double x);
 } // extern "C"
 
-#if defined(R_NO_REMAP) && defined(COMPILING_IVORY) && defined(__cplusplus)
+#if (defined(R_NO_REMAP) && defined(COMPILING_IVORY)) && defined(__cplusplus)
 const auto ScalarReal = Rf_ScalarReal;
 #endif
 

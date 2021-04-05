@@ -43,9 +43,15 @@ void 	R_ShowMessage(const char *s);
 } //extern "C"
 #endif
 
-#ifndef R_NO_REMAP
+#ifdef R_NO_REMAP
+#else
 #define error Rf_error
 #define warning Rf_warning
+#endif
+
+#if (defined(R_NO_REMAP) && defined(COMPILING_IVORY)) && defined(__cplusplus)
+const auto error = Rf_error;
+const auto warning = Rf_warning;
 #endif
 
 #endif /* R_ERROR_H_ */

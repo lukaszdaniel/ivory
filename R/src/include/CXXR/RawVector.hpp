@@ -82,7 +82,7 @@ extern "C"
     SEXP Rf_ScalarRaw(Rbyte x);
 } // extern "C"
 
-#if defined(R_NO_REMAP) && defined(COMPILING_IVORY) && defined(__cplusplus)
+#if (defined(R_NO_REMAP) && defined(COMPILING_IVORY)) && defined(__cplusplus)
 const auto ScalarRaw = Rf_ScalarRaw;
 #endif
 

@@ -26,6 +26,7 @@
 #include <config.h>
 #endif
 
+#include <cctype> /* for isalpha */
 #include <CXXR/Evaluator.hpp>
 #include <Defn.h>
 #include <Localization.h>
@@ -33,7 +34,6 @@
 #include <Fileio.h>
 #include <Startup.h>
 
-#include <cctype> /* for isalpha */
 
 /*
  *  4) INITIALIZATION AND TERMINATION ACTIONS

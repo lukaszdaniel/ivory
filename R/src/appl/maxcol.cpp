@@ -30,6 +30,7 @@
 #include <config.h>
 #endif
 
+#include <R_ext/Error.h>
 #include <R_ext/Arith.h>	/* NA handling */
 #include <Rmath.h>		/* fmax2 */
 #include <R_ext/Random.h>	/* ..RNGstate */

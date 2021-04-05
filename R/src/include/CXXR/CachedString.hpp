@@ -31,10 +31,10 @@
 #ifndef CACHEDSTRING_HPP
 #define CACHEDSTRING_HPP
 
-#include <CXXR/String.hpp>
-#include <CXXR/Allocator.hpp>
 #include <unordered_map>
 #include <string>
+#include <CXXR/String.hpp>
+#include <CXXR/Allocator.hpp>
 
 namespace CXXR
 {

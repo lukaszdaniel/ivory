@@ -27,11 +27,11 @@
 #include <cstdlib>
 #include <iostream>
 #include <vector>
-#include <Rinterface.h>
-#include <Rinternals.h>
 #include <CXXR/GCManager.hpp>
 #include <CXXR/GCNode.hpp>
 #include <CXXR/WeakRef.hpp>
+#include <Rinterface.h>
+#include <Rinternals.h>
 
 using namespace std;
 using namespace CXXR;
@@ -90,8 +90,6 @@ namespace
 } // namespace
 
 // Stubs required for GCManager:
-bool R_GCEnabled = true;
-bool R_in_gc = false;
 int R_check_constants = 0;
 
 #ifdef THREADCHECK

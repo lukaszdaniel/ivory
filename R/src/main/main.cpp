@@ -925,7 +925,7 @@ void setup_Rmainloop(void)
     InitS3DefaultTypes();
     PrintDefaults();
 
-    R_Is_Running = 1;
+    R_Is_Running = RStatus::INITIALIZED;
     R_check_locale();
 
     /* Initialize the global context for error handling. */
@@ -935,13 +935,12 @@ void setup_Rmainloop(void)
     R_Toplevel.setNextContext(nullptr);
     R_Toplevel.setCallFlag(CTXT_TOPLEVEL);
     R_Toplevel.setCStackTop(0);
-    R_Toplevel.setGCEnabled(R_GCEnabled);
-    R_Toplevel.setPromiseArgs(R_NilValue);
-    R_Toplevel.setCallFun(R_NilValue);
-    R_Toplevel.setCall(R_NilValue);
+    R_Toplevel.setPromiseArgs(nullptr);
+    R_Toplevel.setCallFun(nullptr);
+    R_Toplevel.setCall(nullptr);
     R_Toplevel.setWorkingEnvironment(R_BaseEnv);
     R_Toplevel.setSysParent(R_BaseEnv);
-    R_Toplevel.setOnExit(R_NilValue);
+    R_Toplevel.setOnExit(nullptr);
     R_Toplevel.setVMax(nullptr);
     R_Toplevel.setNodeStack(R_BCNodeStackTop);
     R_Toplevel.setBCProtTop(R_BCProtTop);
@@ -949,7 +948,7 @@ void setup_Rmainloop(void)
     R_Toplevel.setIntSusp(FALSE);
     R_Toplevel.setHandlerStack(R_HandlerStack);
     R_Toplevel.setRestartStack(R_RestartStack);
-    R_Toplevel.setSrcRef(R_NilValue);
+    R_Toplevel.setSrcRef(nullptr);
     R_Toplevel.setPrStack(nullptr);
     R_Toplevel.setReturnValue(nullptr);
     R_Toplevel.setEvalDepth(0);
@@ -957,7 +956,7 @@ void setup_Rmainloop(void)
     R_GlobalContext = R_ToplevelContext = R_SessionContext = &R_Toplevel;
     R_ExitContext = nullptr;
 
-    R_Warnings = R_NilValue;
+    R_Warnings = nullptr;
 
     /* This is the same as R_BaseEnv, but this marks the environment
        of functions as the namespace and not the package. */
@@ -1156,7 +1155,7 @@ void setup_Rmainloop(void)
 		R_GlobalContext = R_ToplevelContext = R_SessionContext = &R_Toplevel;
 		R_Suicide(_("unable to initialize the JIT\n"));
 	}
-    R_Is_Running = 2;
+    R_Is_Running = RStatus::STARTED;
 }
 
 extern SA_TYPE SaveAction; /* from src/main/startup.cpp */
@@ -1250,12 +1249,12 @@ static int ParseBrowser(SEXP CExpr, SEXP rho)
 	    SET_ENV_RDEBUG(rho, 0);
 	} else if (streql(expr, "f")) {
 	    rval = 1;
-	    RCNTXT *cntxt = R_GlobalContext;
-	    while (cntxt != R_ToplevelContext
-		      && !(cntxt->getCallFlag() & (CTXT_RETURN | CTXT_LOOP))) {
-		cntxt = cntxt->nextContext();
+	    RCNTXT *cptr = R_GlobalContext;
+	    while (cptr != R_ToplevelContext
+		      && !(cptr->getCallFlag() & (CTXT_RETURN | CTXT_LOOP))) {
+		cptr = cptr->nextContext();
 	    }
-	    cntxt->setBrowserFinish(true);
+	    cptr->setBrowserFinish(true);
 	    SET_ENV_RDEBUG(rho, 1);
 	    R_BrowserLastCommand = 'f';
 	} else if (streql(expr, "help")) {

@@ -40,6 +40,7 @@
 #include <CXXR/String.hpp>
 #include <CXXR/GCRoot.hpp>
 #include <CXXR/Expression.hpp>
+#include <CXXR/LogicalVector.hpp>
 #include <Localization.h>
 #include <RContext.h>
 #include <Defn.h>

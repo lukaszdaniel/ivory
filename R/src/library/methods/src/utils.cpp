@@ -24,6 +24,7 @@
 #include <CXXR/VectorBase.hpp>
 #include <CXXR/BuiltInFunction.hpp>
 #include <Defn.h>
+#include <Rinternals.h>
 #include "localization.h"
 
 SEXP R_get_primname(SEXP object)

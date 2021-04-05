@@ -29,6 +29,7 @@
 #endif
 
 #include <Defn.h>
+#include <Rinternals.h>
 #include "localization.h"
 #include <cfloat> /* for DBL_EPSILON etc */
 #include <Graphics.h>

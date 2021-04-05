@@ -28,6 +28,7 @@
 
 #include <Localization.h>
 #include <Defn.h>
+#include <Rinternals.h>
 #include <R_ext/GraphicsEngine.h>
 
 /* same as src/library/grDevices/src/colors.cpp */

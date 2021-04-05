@@ -361,16 +361,13 @@ R_xlen_t ALTREP_TRUELENGTH(SEXP x) { return 0; }
 R_INLINE static void *ALTVEC_DATAPTR_EX(SEXP x, Rboolean writeable)
 {
     /**** move GC disabling into methods? */
-    if (R_in_gc)
-	error(_("cannot get ALTVEC DATAPTR during GC"));
+    if (GCManager::R_in_gc())
+        Rf_error(_("cannot get ALTVEC DATAPTR during GC"));
+
+    GCManager::GCInhibitor no_gc;
     R_CHECK_THREAD;
-    bool enabled = R_GCEnabled;
-    R_GCEnabled = false;
 
-    void *val = ALTVEC_DISPATCH(Dataptr, x, writeable);
-
-    R_GCEnabled = enabled;
-    return val;
+    return ALTVEC_DISPATCH(Dataptr, x, writeable);
 }
 
 void *ALTVEC_DATAPTR(SEXP x)
@@ -522,33 +519,26 @@ R_xlen_t COMPLEX_GET_REGION(SEXP sx, R_xlen_t i, R_xlen_t n, Rcomplex *buf)
 /*HIDDEN*/
 SEXP ALTSTRING_ELT(SEXP x, R_xlen_t i)
 {
-    SEXP val = nullptr;
-
     /**** move GC disabling into method? */
-    if (R_in_gc)
-	error(_("cannot get ALTSTRING_ELT during GC"));
+    if (GCManager::R_in_gc())
+        Rf_error(_("cannot get ALTSTRING_ELT during GC"));
+
+    GCManager::GCInhibitor no_gc;
     R_CHECK_THREAD;
-    bool enabled = R_GCEnabled;
-    R_GCEnabled = false;
 
-    val = ALTSTRING_DISPATCH(Elt, x, i);
-
-    R_GCEnabled = enabled;
-    return val;
+    return ALTSTRING_DISPATCH(Elt, x, i);
 }
 
 HIDDEN void ALTSTRING_SET_ELT(SEXP x, R_xlen_t i, SEXP v)
 {
     /**** move GC disabling into method? */
-    if (R_in_gc)
-	error(_("cannot set ALTSTRING_ELT during GC"));
+    if (GCManager::R_in_gc())
+        Rf_error(_("cannot set ALTSTRING_ELT during GC"));
+
+    GCManager::GCInhibitor no_gc;
     R_CHECK_THREAD;
-    bool enabled = R_GCEnabled;
-    R_GCEnabled = false;
 
     ALTSTRING_DISPATCH(Set_elt, x, i, v);
-
-    R_GCEnabled = enabled;
 }
 
 int STRING_IS_SORTED(SEXP x)

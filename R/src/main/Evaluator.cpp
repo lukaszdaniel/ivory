@@ -41,7 +41,7 @@ namespace CXXR
     namespace ForceNonInline
     {
         const auto &evalp = Rf_eval;
-    }
+    } // namespace ForceNonInline
 
     bool Evaluator::s_visible = false; // R_Visible
 
@@ -77,3 +77,9 @@ namespace CXXR
         return s_visible;
     }
 } // namespace CXXR
+
+extern "C"
+{
+    Rboolean R_interrupts_suspended = FALSE;
+    Rboolean R_interrupts_pending = FALSE;
+}

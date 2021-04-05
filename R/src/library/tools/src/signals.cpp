@@ -21,9 +21,10 @@
 #include <config.h>
 #endif
 
+#include <csignal> // C99
+#include <CXXR/IntVector.hpp>
 #include "tools.h"
 #include "localization.h"
-#include <csignal> // C99
 
 #ifdef _WIN32
 #define WIN32_LEAN_AND_MEAN

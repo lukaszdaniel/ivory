@@ -23,17 +23,17 @@
 #include <config.h>
 #endif
 
-#include <CXXR/Expression.hpp>
-#include <CXXR/VectorBase.hpp>
-#include <CXXR/StringVector.hpp>
-#include <Defn.h>
-
 #include <cstdio>
 #include <cctype>
 #include <climits> /* required for MB_LEN_MAX */
 
 #include <cwchar>
 #include <cwctype>
+#include <CXXR/Expression.hpp>
+#include <CXXR/VectorBase.hpp>
+#include <CXXR/StringVector.hpp>
+#include <Defn.h>
+
 static void mbcsToSbcs(const char *in, char *out, const char *encoding, int enc);
 
 

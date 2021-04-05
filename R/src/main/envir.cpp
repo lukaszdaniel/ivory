@@ -732,23 +732,24 @@ HIDDEN void R::InitGlobalEnv()
     R_NamespaceSymbol = Symbol::obtain(".__NAMESPACE__.");
 
     R_MethodsNamespace = R_GlobalEnv; // so it is initialized.
-#ifdef NEW_CODE /* Not used */
+#ifdef NEW_CODE                       /* Not used */
     HASHTAB(R_GlobalEnv) = R_NewHashTable(100);
 #endif
 #ifdef USE_GLOBAL_CACHE
     MARK_AS_GLOBAL_FRAME(R_GlobalEnv);
     R_GlobalCache = R_NewHashTable(INITIAL_CACHE_SIZE);
-    R_GlobalCachePreserve = CONS(R_GlobalCache, R_NilValue);
+    R_GlobalCachePreserve = CXXR_cons(R_GlobalCache, nullptr);
     R_PreserveObject(R_GlobalCachePreserve);
 #endif
-    R_BaseNamespace = NewEnvironment(R_NilValue, R_NilValue, R_GlobalEnv);
+    R_BaseNamespace = NewEnvironment(nullptr, nullptr, R_GlobalEnv);
     R_PreserveObject(R_BaseNamespace);
     SET_SYMVALUE(Symbol::obtain(".BaseNamespaceEnv"), R_BaseNamespace);
-    R_BaseNamespaceName = ScalarString(mkChar("base"));
+    R_BaseNamespaceName = ScalarString(CachedString::obtain("base"));
     R_PreserveObject(R_BaseNamespaceName);
-    R_NamespaceRegistry = R_NewHashedEnv(R_NilValue, ScalarInteger(0));
+    GCStackRoot<> zero(Rf_ScalarInteger(0));
+    R_NamespaceRegistry = R_NewHashedEnv(nullptr, zero);
     R_PreserveObject(R_NamespaceRegistry);
-    defineVar(R_BaseSymbol, R_BaseNamespace, R_NamespaceRegistry);
+    Rf_defineVar(R_BaseSymbol, R_BaseNamespace, R_NamespaceRegistry);
     /**** needed to properly initialize the base namespace */
 }
 

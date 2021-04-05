@@ -1347,7 +1347,7 @@ void R_BadValueInRCode(SEXP value, SEXP call, SEXP rho, const char *rawmsg,
 }
 #endif
 
-#if defined(R_NO_REMAP) && defined(COMPILING_IVORY) && defined(__cplusplus)
+#if (defined(R_NO_REMAP) && defined(COMPILING_IVORY)) && defined(__cplusplus)
 const auto acopy_string = Rf_acopy_string;
 const auto addMissingVarsToNewEnv = Rf_addMissingVarsToNewEnv;
 const auto alloc3DArray = Rf_alloc3DArray;
@@ -1376,8 +1376,6 @@ const auto asS4	= Rf_asS4;
 const auto classgets = Rf_classgets;
 const auto coerceVector = Rf_coerceVector;
 const auto cons = Rf_cons;
-const auto error = Rf_error;
-const auto warning = Rf_warning;
 const auto fixSubset3Args = Rf_fixSubset3Args;
 const auto copyListMatrix = Rf_copyListMatrix;
 const auto copyMatrix = Rf_copyMatrix;

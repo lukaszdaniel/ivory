@@ -111,7 +111,6 @@ namespace CXXR
         void *m_cenddata;        /* data for C "on.exit" thunk */
         void *m_vmax;            /* top of R_alloc stack */
         int m_intsusp;           /* interrupts are suspended */
-        bool m_gcenabled;        /* R_GCEnabled value */
         bool m_bcintactive;      /* R_BCIntActive value */
         RObject *m_bcbody;       /* R_BCbody value */
         void *m_bcpc;            /* R_BCpc value */
@@ -132,7 +131,7 @@ namespace CXXR
     public:
         RContext() : m_nextcontext(nullptr), m_callflag(0), m_cjmpbuf(), m_cstacktop(0), m_evaldepth(0), m_promargs(nullptr),
                      m_callfun(nullptr), m_sysparent(nullptr), m_call(nullptr), m_cloenv(nullptr), m_conexit(nullptr), m_cend(nullptr), m_cenddata(nullptr),
-                     m_vmax(nullptr), m_intsusp(0), m_gcenabled(false), m_bcintactive(false), m_bcbody(nullptr), m_bcpc(nullptr), m_handlerstack(nullptr),
+                     m_vmax(nullptr), m_intsusp(0), m_bcintactive(false), m_bcbody(nullptr), m_bcpc(nullptr), m_handlerstack(nullptr),
                      m_restartstack(nullptr), m_prstack(nullptr), m_nodestack(nullptr), m_bcprottop(nullptr), m_srcref(nullptr), m_browserfinish(false),
                      m_returnValue(nullptr), m_jumptarget(nullptr), m_jumpmask(0){};
         ~RContext(){};
@@ -164,8 +163,6 @@ namespace CXXR
         void setRestartStack(RObject *rs) { m_restartstack = rs; }
         int getCStackTop() const { return m_cstacktop; }
         void setCStackTop(int stacktop) { m_cstacktop = stacktop; }
-        bool getGCEnabled() const { return m_gcenabled; }
-        void setGCEnabled(bool enabled) { m_gcenabled = enabled; }
         bool getBCIntactive() const { return m_bcintactive; }
         void setBCIntactive(bool active) { m_bcintactive = active; }
         void *getBCPC() const { return m_bcpc; }

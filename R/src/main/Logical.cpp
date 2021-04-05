@@ -29,9 +29,9 @@
 
 namespace CXXR
 {
-    SEXP R_TrueValue = nullptr;
-    SEXP R_FalseValue = nullptr;
-    SEXP R_LogicalNAValue = nullptr;
+    LogicalVector *R_TrueValue = nullptr;
+    LogicalVector *R_FalseValue = nullptr;
+    LogicalVector *R_LogicalNAValue = nullptr;
 
     void Logical::initialize()
     {

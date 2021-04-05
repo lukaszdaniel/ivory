@@ -146,7 +146,7 @@ HIDDEN SEXP do_makelazy(SEXP call, SEXP op, SEXP args, SEXP rho)
 /* This is a primitive SPECIALSXP */
 HIDDEN SEXP do_onexit(SEXP call, SEXP op, SEXP args, SEXP rho)
 {
-    RCNTXT *ctxt;
+    RCNTXT *cptr;
     SEXP code, oldcode, argList;
     int addit = FALSE;
     int after = TRUE;
@@ -175,29 +175,29 @@ HIDDEN SEXP do_onexit(SEXP call, SEXP op, SEXP args, SEXP rho)
             errorcall(call, _("invalid '%s' argument"), "lifo");
     }
 
-    ctxt = R_GlobalContext;
+    cptr = R_GlobalContext;
     /* Search for the context to which the on.exit action is to be
        attached. Lexical scoping is implemented by searching for the
        first closure call context with an environment matching the
        expression evaluation environment. */
-    while (ctxt != R_ToplevelContext &&
-	   !((ctxt->getCallFlag() & CTXT_FUNCTION) && ctxt->workingEnvironment() == rho) )
-	ctxt = ctxt->nextContext();
-    if (ctxt->getCallFlag() & CTXT_FUNCTION)
+    while (cptr != R_ToplevelContext &&
+	   !((cptr->getCallFlag() & CTXT_FUNCTION) && cptr->workingEnvironment() == rho) )
+	cptr = cptr->nextContext();
+    if (cptr->getCallFlag() & CTXT_FUNCTION)
     {
 	if (code == R_NilValue && ! addit)
-	    ctxt->setOnExit(R_NilValue);
+	    cptr->setOnExit(R_NilValue);
 	else {
-	    oldcode = ctxt->onExit();
+	    oldcode = cptr->onExit();
 	    if (oldcode == R_NilValue || ! addit)
-                ctxt->setOnExit(CONS(code, R_NilValue));
+                cptr->setOnExit(CONS(code, R_NilValue));
 	    else {
                 if (after) {
                     SEXP codelist = PROTECT(CONS(code, R_NilValue));
-                    ctxt->setOnExit(listAppend(shallow_duplicate(oldcode), codelist));
+                    cptr->setOnExit(listAppend(shallow_duplicate(oldcode), codelist));
                     UNPROTECT(1);
                 } else {
-                    ctxt->setOnExit(CONS(code, oldcode));
+                    cptr->setOnExit(CONS(code, oldcode));
                 }
 	    }
 	}

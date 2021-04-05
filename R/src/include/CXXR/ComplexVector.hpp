@@ -83,7 +83,7 @@ extern "C"
     SEXP Rf_ScalarComplex(Rcomplex x);
 } // extern "C"
 
-#if defined(R_NO_REMAP) && defined(COMPILING_IVORY) && defined(__cplusplus)
+#if (defined(R_NO_REMAP) && defined(COMPILING_IVORY)) && defined(__cplusplus)
 const auto ScalarComplex = Rf_ScalarComplex;
 #endif
 

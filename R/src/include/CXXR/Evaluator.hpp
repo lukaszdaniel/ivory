@@ -32,10 +32,10 @@
 #ifndef EVALUATOR_HPP
 #define EVALUATOR_HPP
 
-#include <R_ext/Boolean.h>
+#include <utility>
 #include <CXXR/Environment.hpp>
 #include <CXXR/PairList.hpp>
-#include <utility>
+#include <R_ext/Boolean.h>
 
 namespace CXXR
 {

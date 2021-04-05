@@ -21,15 +21,16 @@
 #include <config.h>
 #endif
 
+#include <cmath>
 #include <CXXR/GCStackRoot.hpp>
 #include <CXXR/VectorBase.hpp>
 #include <CXXR/String.hpp>
 #include <Localization.h>
 #include <Defn.h>
+#include <Rinternals.h>
 #include <R_ext/Random.h> /* for the random number generation in samin() */
 #include <R_ext/Applic.h>
 #include <R_ext/Print.h>	/* for Rprintf */
-#include <cmath>
 
 using namespace std;
 using namespace R;

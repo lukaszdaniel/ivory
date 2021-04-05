@@ -18,6 +18,7 @@
  *
  */
 
+#include <CXXR/IntVector.hpp>
 #include <Rinternals.h>
 #include "tools.h"
 #include "localization.h"

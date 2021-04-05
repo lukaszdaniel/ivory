@@ -27,12 +27,8 @@
  * @brief Class Expression and associated C interface.
  */
 
-#include <CXXR/Expression.hpp>
-
 #include <iostream>
-
-#include <R_ext/Error.h>
-#include <Localization.h>
+#include <CXXR/Expression.hpp>
 #include <CXXR/BuiltInFunction.hpp>
 #include <CXXR/Closure.hpp>
 #include <CXXR/Environment.hpp>
@@ -40,6 +36,8 @@
 #include <CXXR/RAllocStack.hpp>
 #include <CXXR/Symbol.hpp>
 #include <Rinternals.h>
+#include <R_ext/Error.h>
+#include <Localization.h>
 
 #undef match
 
@@ -53,7 +51,7 @@ namespace CXXR
     namespace ForceNonInline
     {
         const auto &lconsptr = Rf_lcons;
-    }
+    } // namespace ForceNonInline
 
     Expression *Expression::clone(bool deep) const
     {

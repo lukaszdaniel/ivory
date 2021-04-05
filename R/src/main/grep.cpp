@@ -62,7 +62,7 @@ constexpr int NWARN = 5;
 #include <CXXR/PairList.hpp>
 #include <CXXR/StringVector.hpp>
 #include <CXXR/IntVector.hpp>
-#include <CXXR/Logical.hpp>
+#include <CXXR/LogicalVector.hpp>
 #include <CXXR/Symbol.hpp>
 #include <Localization.h>
 #include <Defn.h>

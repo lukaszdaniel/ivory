@@ -33,6 +33,7 @@
 
 #define R_USE_SIGNALS 1
 
+#include <CXXR/VectorBase.hpp>
 #include <CXXR/IntVector.hpp>
 #include <CXXR/StringVector.hpp>
 #include <CXXR/PairList.hpp>

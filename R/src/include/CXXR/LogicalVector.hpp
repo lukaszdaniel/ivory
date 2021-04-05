@@ -31,11 +31,11 @@
 #ifndef LOGICALVECTOR_HPP
 #define LOGICALVECTOR_HPP
 
-#include <R_ext/Arith.h>
 #include <CXXR/VectorBase.hpp>
 #include <CXXR/FixedVector.hpp>
 #include <CXXR/Logical.hpp>
 #include <CXXR/SEXP_downcast.hpp>
+#include <R_ext/Arith.h>
 
 namespace CXXR
 {
@@ -52,6 +52,11 @@ namespace CXXR
     {
         return static_cast<const int *>(DATAPTR_RO(x));
     }
+
+    /* pre-allocated boolean values */
+    extern LogicalVector *R_TrueValue;
+    extern LogicalVector *R_FalseValue;
+    extern LogicalVector *R_LogicalNAValue;
 } // namespace CXXR
 
 extern "C"
@@ -88,7 +93,7 @@ extern "C"
     SEXP Rf_ScalarLogical(int x);
 } // extern "C"
 
-#if defined(R_NO_REMAP) && defined(COMPILING_IVORY) && defined(__cplusplus)
+#if (defined(R_NO_REMAP) && defined(COMPILING_IVORY)) && defined(__cplusplus)
 const auto ScalarLogical = Rf_ScalarLogical;
 #endif
 

@@ -1169,7 +1169,7 @@ inline R_len_t length(SEXP s)
     return Rf_length(s);
 }
 
-#if defined(R_NO_REMAP) && defined(COMPILING_IVORY) && defined(__cplusplus)
+#if (defined(R_NO_REMAP) && defined(COMPILING_IVORY)) && defined(__cplusplus)
 const auto xlength = Rf_xlength;
 const auto isFrame = Rf_isFrame;
 const auto conformable = Rf_conformable;

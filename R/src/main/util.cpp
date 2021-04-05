@@ -1516,6 +1516,12 @@ size_t wcs4toutf8(char *s, const R_wchar_t *wc, size_t n)
     return res + 1;
 }
 
+
+bool operator!(const RStatus &status)
+{
+	return status == RStatus::NOT_STARTED;
+}
+
 /* A version that reports failure as an error */
 size_t R::Mbrtowc(wchar_t *wc, const char *s, size_t n, mbstate_t *ps)
 {

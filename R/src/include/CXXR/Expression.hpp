@@ -144,7 +144,7 @@ extern "C"
    Rboolean Rf_isLanguage(SEXP s);
 } // extern "C"
 
-#if defined(R_NO_REMAP) && defined(COMPILING_IVORY) && defined(__cplusplus)
+#if (defined(R_NO_REMAP) && defined(COMPILING_IVORY)) && defined(__cplusplus)
 const auto lang1 = Rf_lang1;
 const auto lang2 = Rf_lang2;
 const auto lang3 = Rf_lang3;

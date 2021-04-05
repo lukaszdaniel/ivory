@@ -33,11 +33,10 @@
 
 #include <vector>
 #include <iostream>
-
-#include <CXXR/Allocator.hpp>
-#include <CXXR/RObject.hpp>
-#include <CXXR/GCNode.hpp>
 #include <list>
+#include <CXXR/Allocator.hpp>
+#include <CXXR/GCNode.hpp>
+#include <CXXR/RObject.hpp>
 
 namespace CXXR
 {

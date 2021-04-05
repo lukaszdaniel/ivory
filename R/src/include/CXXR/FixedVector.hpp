@@ -30,9 +30,9 @@
 #ifndef FIXEDVECTOR_HPP
 #define FIXEDVECTOR_HPP
 
-#include <Rinternals.h>
 #include <CXXR/VectorBase.hpp>
 #include <CXXR/MemoryBank.hpp>
+#include <Rinternals.h>
 #include <Localization.h>
 
 namespace CXXR
@@ -53,12 +53,29 @@ namespace CXXR
     template <typename T, SEXPTYPE ST>
     class FixedVector : public VectorBase
     {
-
     public:
+        typedef T value_type;
+        typedef T *iterator;
+        typedef const T *const_iterator;
+
         /** @brief Create a vector, leaving its contents
-         *         uninitialized. 
+         *         uninitialized (for POD types) or default
+         *         constructed.
+         *
          * @param sz Number of elements required.  Zero is
          *          permissible.
+         *
+         * @param allocator Custom allocator.
+         */
+        static FixedVector *create(size_type sz, R_allocator_t *allocator = nullptr);
+
+        /** @brief Create a vector, leaving its contents
+         *         uninitialized.
+         *
+         * @param sz Number of elements required.  Zero is
+         *          permissible.
+         *
+         * @param allocator Custom allocator.
          */
         FixedVector(R_xlen_t sz, R_allocator_t *allocator = nullptr)
             : VectorBase(ST, sz), m_data(&m_singleton), m_allocator(allocator)
@@ -71,11 +88,15 @@ namespace CXXR
         }
 
         /** @brief Create a vector, and fill with a specified initial
-         *         value. 
+         *         value.
+         *
          * @param sz Number of elements required.  Zero is
          *          permissible.
+         *
          * @param initializer Initial value to be assigned to every
          *          element.
+         *
+         * @param allocator Custom allocator.
          */
         FixedVector(R_xlen_t sz, const T &initializer, R_allocator_t *allocator = nullptr)
             : VectorBase(ST, sz), m_data(&m_singleton),
@@ -97,6 +118,7 @@ namespace CXXR
         FixedVector(const FixedVector<T, ST> &pattern, bool deep);
 
         /** @brief Element access.
+         *
          * @param index Index of required element (counting from
          *          zero).  No bounds checking is applied.
          *
@@ -119,6 +141,34 @@ namespace CXXR
             return m_data[index];
         }
 
+        /** @brief Iterator designating first element.
+         *
+         * @return An iterator designating the first element of the
+         * vector.  Returns end() if the vector is empty.
+         */
+        iterator begin() { return m_data; }
+
+        /** @brief Const iterator designating first element.
+         *
+         * @return A const_iterator designating the first element of
+         * the vector.  Returns end() if the vector is empty.
+         */
+        const_iterator begin() const { return m_data; }
+
+        /** @brief One-past-the-end iterator.
+         *
+         * @return An iterator designating a position 'one past the
+         * end' of the vector.
+         */
+        iterator end() { return begin() + size(); }
+
+        /** @brief One-past-the-end const_iterator.
+         *
+         * @return A const_iterator designating a position 'one past
+         * the end' of the vector.
+         */
+        const_iterator end() const { return begin() + size(); }
+
         virtual void *data() override
         {
             return m_data;
@@ -140,7 +190,7 @@ namespace CXXR
          */
         static const char *staticTypeName();
 
-        // Virtual function of RObject:
+        // Virtual functions of RObject:
         FixedVector<T, ST> *clone(bool deep) const override;
         const char *typeName() const override;
 
@@ -225,6 +275,12 @@ namespace CXXR
     }
 
     template <typename T, SEXPTYPE ST>
+    FixedVector<T, ST> *FixedVector<T, ST>::create(size_type sz, R_allocator_t *allocator)
+    {
+        return GCNode::expose(new FixedVector(sz, allocator));
+    }
+
+    template <typename T, SEXPTYPE ST>
     FixedVector<T, ST> *FixedVector<T, ST>::clone(bool deep) const
     {
         // return GCNode::expose(new FixedVector<T, ST>(*this, deep));
@@ -255,7 +311,7 @@ extern "C"
     Rboolean Rf_isNumber(SEXP s);
 } // extern "C"
 
-#if defined(R_NO_REMAP) && defined(COMPILING_IVORY) && defined(__cplusplus)
+#if (defined(R_NO_REMAP) && defined(COMPILING_IVORY)) && defined(__cplusplus)
 const auto isNumeric = Rf_isNumeric;
 const auto isNumber = Rf_isNumber;
 #endif

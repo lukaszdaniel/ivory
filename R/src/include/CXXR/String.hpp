@@ -31,13 +31,13 @@
 #ifndef CXXR_STRING_HPP
 #define CXXR_STRING_HPP
 
-#include <Rinternals.h>
+#include <string>
+#include <unordered_map>
 #include <CXXR/Allocator.hpp>
 #include <CXXR/GCRoot.hpp>
 #include <CXXR/SEXP_downcast.hpp>
 #include <CXXR/VectorBase.hpp>
-#include <string>
-#include <unordered_map>
+#include <Rinternals.h>
 
 namespace R
 {

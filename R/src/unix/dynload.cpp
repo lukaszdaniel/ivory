@@ -31,6 +31,7 @@
 #endif
 
 #include <Defn.h>
+#include <Rinternals.h>
 #include <Localization.h>
 #include <Rdynpriv.h>
 

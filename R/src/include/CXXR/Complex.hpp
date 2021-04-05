@@ -31,8 +31,8 @@
 #ifndef CXXR_COMPLEX_VECTOR_HPP
 #define CXXR_COMPLEX_VECTOR_HPP
 
-#include <R_ext/Complex.h>
 #include <CXXR/Logical.hpp>
+#include <R_ext/Complex.h>
 
 namespace CXXR
 {

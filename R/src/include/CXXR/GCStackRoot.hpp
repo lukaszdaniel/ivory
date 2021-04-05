@@ -34,8 +34,8 @@
 #include <vector>
 #include <iostream>
 
-#include <CXXR/RObject.hpp>
 #include <CXXR/GCNode.hpp>
+#include <CXXR/RObject.hpp>
 
 namespace CXXR
 {

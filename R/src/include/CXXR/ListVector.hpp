@@ -134,7 +134,7 @@ extern "C"
     Rboolean Rf_isNewList(SEXP s);
 } // extern "C"
 
-#if defined(R_NO_REMAP) && defined(COMPILING_IVORY) && defined(__cplusplus)
+#if (defined(R_NO_REMAP) && defined(COMPILING_IVORY)) && defined(__cplusplus)
 const auto isNewList = Rf_isNewList;
 #endif
 

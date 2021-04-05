@@ -40,10 +40,10 @@
 #include <R_ext/GraphicsEngine.h>
 #include "localization.h"
 
-#define checkArity_length 			\
-    args = CDR(args);		       	       	\
-    if(!LENGTH(CAR(args)))	       	       	\
-	error(_("argument must have positive length"))
+#define checkArity_length   \
+    args = CDR(args);       \
+    if (!LENGTH(CAR(args))) \
+    error(_("argument must have positive length"))
 
 SEXP devcontrol(SEXP args)
 {

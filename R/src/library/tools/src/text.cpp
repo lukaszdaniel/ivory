@@ -22,13 +22,13 @@
 */
 
 #include <cstring>
+#include <cstdlib> /* for MB_CUR_MAX */
+#include <cwchar>
 #include <CXXR/StringVector.hpp>
+#include <CXXR/LogicalVector.hpp>
 #include <R.h>
 #include "tools.h"
 #include "localization.h"
-
-#include <cstdlib> /* for MB_CUR_MAX */
-#include <cwchar>
 
 LibExtern Rboolean mbcslocale;
 

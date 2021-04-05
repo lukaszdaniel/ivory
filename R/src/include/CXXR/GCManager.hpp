@@ -268,6 +268,7 @@ namespace CXXR
 		static int gc_force_wait();
 		static int gc_force_gap();
 		static bool gc_inhibit_release();
+		static bool R_in_gc();
 
 	private:
 		static const size_t s_num_old_generations = 2;
@@ -281,6 +282,7 @@ namespace CXXR
 		static size_t s_max_node_threshold;
 		static bool s_gc_pending;
 		static bool s_gc_fail_on_error;
+		static bool s_R_in_gc;
 		/* **** if the user specified a wait before starting to force
    		**** collections it might make sense to also wait before starting
    		**** to inhibit releases */

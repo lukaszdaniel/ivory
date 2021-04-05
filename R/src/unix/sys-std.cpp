@@ -41,6 +41,7 @@
 #include <CXXR/IntVector.hpp>
 #include <CXXR/StringVector.hpp>
 #include <CXXR/Symbol.hpp>
+#include <CXXR/Evaluator.hpp>
 #include <R_ext/Minmax.h>
 #include <RContext.h>
 #include <Rembedded.h>

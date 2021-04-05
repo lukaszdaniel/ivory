@@ -103,25 +103,23 @@
    For Win32, Valgrind is useful only if running under Wine.
 */
 #ifdef _WIN32
-# ifndef USE_VALGRIND_FOR_WINE
+#ifndef USE_VALGRIND_FOR_WINE
 #define NVALGRIND 1
 #endif
 #endif
-
 
 #ifndef VALGRIND_LEVEL
 #define VALGRIND_LEVEL 0
 #endif
 
 #ifndef NVALGRIND
-# ifdef HAVE_VALGRIND_MEMCHECK_H
-#  include "valgrind/memcheck.h"
-# else
+#ifdef HAVE_VALGRIND_MEMCHECK_H
+#include "valgrind/memcheck.h"
+#else
 // internal version of headers
-#  include "vg/memcheck.h"
-# endif
+#include "vg/memcheck.h"
 #endif
-
+#endif
 
 #include <Defn.h>
 #include <Localization.h>
@@ -141,8 +139,8 @@ using namespace CXXR;
 #if defined(_WIN32)
 extern void *Rm_malloc(size_t n);
 extern void *Rm_calloc(size_t n_elements, size_t element_size);
-extern void Rm_free(void * p);
-extern void *Rm_realloc(void * p, size_t n);
+extern void Rm_free(void *p);
+extern void *Rm_realloc(void *p, size_t n);
 #define calloc Rm_calloc
 #define malloc Rm_malloc
 #define realloc Rm_realloc
@@ -156,7 +154,7 @@ extern void *Rm_realloc(void * p, size_t n);
 */
 
 /* These are used in profiling to separate out time in GC */
-int R_gc_running() { return R_in_gc; }
+int R_gc_running() { return GCManager::R_in_gc(); }
 
 #ifdef TESTING_WRITE_BARRIER
 #define PROTECTCHECK
@@ -173,8 +171,10 @@ int R_gc_running() { return R_in_gc; }
  */
 
 HIDDEN
-const char *R::sexptype2char(const SEXPTYPE type) {
-    switch (type) {
+const char *R::sexptype2char(const SEXPTYPE type)
+{
+    switch (type)
+    {
     case NILSXP:	return "NILSXP";
     case SYMSXP:	return "SYMSXP";
     case LISTSXP:	return "LISTSXP";
@@ -230,48 +230,56 @@ static void init_gc_grow_settings()
     char *arg;
 
     arg = getenv("R_GC_MEM_GROW");
-    if (arg) {
-	int which = (int) atof(arg);
-	switch (which) {
-	case 0: /* very conservative -- the SMALL_MEMORY settings */
-        GCManager::setGCGrowIncrParameters(0.0, 0.0);
-	    break;
-	case 1: /* default */
-	    break;
-	case 2: /* somewhat aggressive */
-        GCManager::setGCGrowIncrParameters(0.3, 0.3);
-	    break;
-	case 3: /* more aggressive */
-        GCManager::setGCGrowIncrParameters(0.4, 0.4);
-        GCManager::setGCGrowParameters(0.5, 0.5);
-	    break;
-	}
+    if (arg)
+    {
+        int which = (int)atof(arg);
+        switch (which)
+        {
+        case 0: /* very conservative -- the SMALL_MEMORY settings */
+            GCManager::setGCGrowIncrParameters(0.0, 0.0);
+            break;
+        case 1: /* default */
+            break;
+        case 2: /* somewhat aggressive */
+            GCManager::setGCGrowIncrParameters(0.3, 0.3);
+            break;
+        case 3: /* more aggressive */
+            GCManager::setGCGrowIncrParameters(0.4, 0.4);
+            GCManager::setGCGrowParameters(0.5, 0.5);
+            break;
+        }
     }
     arg = getenv("R_GC_GROWFRAC");
-    if (arg) {
-	double frac = atof(arg);
-	if (0.35 <= frac && frac <= 0.75) {
-        GCManager::setGCGrowParameters(frac, frac);
-	}
+    if (arg)
+    {
+        double frac = atof(arg);
+        if (0.35 <= frac && frac <= 0.75)
+        {
+            GCManager::setGCGrowParameters(frac, frac);
+        }
     }
     arg = getenv("R_GC_GROWINCRFRAC");
-    if (arg) {
-	double frac = atof(arg);
-	if (0.05 <= frac && frac <= 0.80) {
-        GCManager::setGCGrowIncrParameters(frac, frac);
-	}
+    if (arg)
+    {
+        double frac = atof(arg);
+        if (0.05 <= frac && frac <= 0.80)
+        {
+            GCManager::setGCGrowIncrParameters(frac, frac);
+        }
     }
     arg = getenv("R_GC_NGROWINCRFRAC");
-    if (arg) {
-	double frac = atof(arg);
-	if (0.05 <= frac && frac <= 0.80)
-        GCManager::setGCGrowIncrParameters(frac, 0.2);
+    if (arg)
+    {
+        double frac = atof(arg);
+        if (0.05 <= frac && frac <= 0.80)
+            GCManager::setGCGrowIncrParameters(frac, 0.2);
     }
     arg = getenv("R_GC_VGROWINCRFRAC");
-    if (arg) {
-	double frac = atof(arg);
-	if (0.05 <= frac && frac <= 0.80)
-        GCManager::setGCGrowIncrParameters(0.2, frac);
+    if (arg)
+    {
+        double frac = atof(arg);
+        if (0.05 <= frac && frac <= 0.80)
+            GCManager::setGCGrowIncrParameters(0.2, frac);
     }
 }
 
@@ -285,14 +293,17 @@ static void init_gc_grow_settings()
 
 HIDDEN R_size_t R::R_GetMaxVSize(void)
 {
-    if (GCManager::maxTriggerLevel() == R_SIZE_T_MAX) return R_SIZE_T_MAX;
+    if (GCManager::maxTriggerLevel() == R_SIZE_T_MAX)
+        return R_SIZE_T_MAX;
     return GCManager::maxTriggerLevel() * sizeof(VECREC);
 }
 
 HIDDEN void R::R_SetMaxVSize(R_size_t size)
 {
-    if (size == R_SIZE_T_MAX) return;
-    if (size/sizeof(VECREC) >= GCManager::triggerLevel()) GCManager::setMaxTriggerLevel((size + 1)/sizeof(VECREC));
+    if (size == R_SIZE_T_MAX)
+        return;
+    if (size / sizeof(VECREC) >= GCManager::triggerLevel())
+        GCManager::setMaxTriggerLevel((size + 1) / sizeof(VECREC));
 }
 
 HIDDEN R_size_t R::R_GetMaxNSize(void)
@@ -302,7 +313,8 @@ HIDDEN R_size_t R::R_GetMaxNSize(void)
 
 HIDDEN void R::R_SetMaxNSize(R_size_t size)
 {
-    if (size >= GCManager::nodeTriggerLevel()) GCManager::setMaxNodeTriggerLevel(size);
+    if (size >= GCManager::nodeTriggerLevel())
+        GCManager::setMaxNodeTriggerLevel(size);
 }
 
 HIDDEN SEXP do_maxVSize(SEXP call, SEXP op, SEXP args, SEXP rho)
@@ -525,25 +537,31 @@ HIDDEN SEXP do_gctorture2(SEXP call, SEXP op, SEXP args, SEXP rho)
 static void init_gctorture(void)
 {
     char *arg = getenv("R_GCTORTURE");
-    if (arg) {
-	int gap = atoi(arg);
-	if (gap > 0) {
-        GCManager::setTortureParameters(gap, gap, false);
-	    arg = getenv("R_GCTORTURE_WAIT");
-	    if (arg) {
-		int wait = atoi(arg);
-		if (wait > 0)
-            GCManager::setTortureParameters(gap, wait, false);
-	    }
+    if (arg)
+    {
+        int gap = atoi(arg);
+        if (gap > 0)
+        {
+            GCManager::setTortureParameters(gap, gap, false);
+            arg = getenv("R_GCTORTURE_WAIT");
+            if (arg)
+            {
+                int wait = atoi(arg);
+                if (wait > 0)
+                    GCManager::setTortureParameters(gap, wait, false);
+            }
 #ifdef PROTECTCHECK
-	    arg = getenv("R_GCTORTURE_INHIBIT_RELEASE");
-	    if (arg) {
-		int inhibit = atoi(arg);
-		if (inhibit > 0) GCManager::setInhibitor(true);
-		else GCManager::setInhibitor(false);
-	    }
+            arg = getenv("R_GCTORTURE_INHIBIT_RELEASE");
+            if (arg)
+            {
+                int inhibit = atoi(arg);
+                if (inhibit > 0)
+                    GCManager::setInhibitor(true);
+                else
+                    GCManager::setInhibitor(false);
+            }
 #endif
-	}
+        }
     }
 }
 
@@ -597,7 +615,7 @@ namespace
 HIDDEN SEXP do_gc(SEXP call, SEXP op, SEXP args, SEXP rho)
 {
     checkArity(op, args);
-    std::ostream* report_os = GCManager::setReporting(Rf_asLogical(CAR(args)) ? &std::cerr : nullptr);
+    std::ostream *report_os = GCManager::setReporting(Rf_asLogical(CAR(args)) ? &std::cerr : nullptr);
     bool reset_max = asLogical(CADR(args));
     bool full = asLogical(CADDR(args));
     GCManager::gc(0, full);
@@ -614,19 +632,20 @@ HIDDEN SEXP do_gc(SEXP call, SEXP op, SEXP args, SEXP rho)
     REAL(value)[4] = GCManager::nodeTriggerLevel();
     REAL(value)[5] = GCManager::triggerLevel();
     /* next four are in 0.1MB, rounded up */
-    REAL(value)[2] = NA_REAL;  // in CXXR, cells don't have a fixed size
-    REAL(value)[3] = 0.1*ceil(10. * (MemoryBank::bytesAllocated())/Mega);
+    REAL(value)[2] = NA_REAL; // in CXXR, cells don't have a fixed size
+    REAL(value)[3] = 0.1 * ceil(10. * (MemoryBank::bytesAllocated()) / Mega);
     REAL(value)[6] = NA_REAL; // in CXXR, cells don't have a fixed size
-    REAL(value)[7] = 0.1*ceil(10. * GCManager::triggerLevel()/Mega);
+    REAL(value)[7] = 0.1 * ceil(10. * GCManager::triggerLevel() / Mega);
     REAL(value)[8] = NA_REAL; // in CXXR, cells don't have a fixed size
-    REAL(value)[9] = (GCManager::maxTriggerLevel() < R_SIZE_T_MAX) ? 0.1*ceil(10. * GCManager::maxTriggerLevel()/Mega) : NA_REAL;
-    if (reset_max){
+    REAL(value)[9] = (GCManager::maxTriggerLevel() < R_SIZE_T_MAX) ? 0.1 * ceil(10. * GCManager::maxTriggerLevel() / Mega) : NA_REAL;
+    if (reset_max)
+    {
         GCManager::resetMaxTallies();
     }
     REAL(value)[10] = GCManager::maxNodes();
     REAL(value)[11] = GCManager::maxBytes();
-    REAL(value)[12] = NA_REAL;  // in CXXR, cells don't have a fixed size
-    REAL(value)[13] = 0.1*ceil(10. * GCManager::maxBytes()/Mega);
+    REAL(value)[12] = NA_REAL; // in CXXR, cells don't have a fixed size
+    REAL(value)[13] = 0.1 * ceil(10. * GCManager::maxBytes() / Mega);
 
     return value;
 }
@@ -640,10 +659,11 @@ HIDDEN SEXP do_gctime(SEXP call, SEXP op, SEXP args, SEXP env)
     SEXP ans;
 
     if (args == R_NilValue)
-	gctime_enabled = true;
-    else {
-	check1arg(args, call, "on");
-	gctime_enabled = asLogical(CAR(args));
+        gctime_enabled = true;
+    else
+    {
+        check1arg(args, call, "on");
+        gctime_enabled = asLogical(CAR(args));
     }
     ans = allocVector(REALSXP, 5);
     REAL(ans)[0] = gctimes[0];
@@ -662,23 +682,24 @@ static void gc_start_timing(void)
 
 static void gc_end_timing(void)
 {
-    if (gctime_enabled) {
-	double times[5], delta;
-	R_getProcTime(times);
+    if (gctime_enabled)
+    {
+        double times[5], delta;
+        R_getProcTime(times);
 
-	/* add delta to compensate for timer resolution */
+        /* add delta to compensate for timer resolution */
 #if 0
 	/* this seems to over-compensate too */
 	delta = R_getClockIncrement();
 #else
-	delta = 0;
+        delta = 0;
 #endif
 
-	gctimes[0] += times[0] - gcstarttimes[0] + delta;
-	gctimes[1] += times[1] - gcstarttimes[1] + delta;
-	gctimes[2] += times[2] - gcstarttimes[2];
-	gctimes[3] += times[3] - gcstarttimes[3];
-	gctimes[4] += times[4] - gcstarttimes[4];
+        gctimes[0] += times[0] - gcstarttimes[0] + delta;
+        gctimes[1] += times[1] - gcstarttimes[1] + delta;
+        gctimes[2] += times[2] - gcstarttimes[2];
+        gctimes[3] += times[3] - gcstarttimes[3];
+        gctimes[4] += times[4] - gcstarttimes[4];
     }
 }
 
@@ -703,23 +724,21 @@ HIDDEN void R::InitMemory()
     else if (arg && StringFalse(arg))
         GCManager::set_gc_fail_on_error(false);
 
-    R_BCNodeStackBase = (R_bcstack_t *) malloc(R_BCNODESTACKSIZE * sizeof(R_bcstack_t));
-    if (R_BCNodeStackBase == nullptr)
+    R_BCNodeStackBase = (R_bcstack_t *)malloc(R_BCNODESTACKSIZE * sizeof(R_bcstack_t));
+    if (!R_BCNodeStackBase)
         R_Suicide(_("couldn't allocate node stack"));
     R_BCNodeStackTop = R_BCNodeStackBase;
     R_BCNodeStackEnd = R_BCNodeStackBase + R_BCNODESTACKSIZE;
     R_BCProtTop = R_BCNodeStackTop;
 
-    R_HandlerStack = R_RestartStack = R_NilValue;
+    R_HandlerStack = R_RestartStack = nullptr;
 
     /*  Unbound values which are to be preserved through GCs */
-    R_PreciousList = R_NilValue;
+    R_PreciousList = nullptr;
 
     /*  The current source line */
-    R_Srcref = R_NilValue;
+    R_Srcref = nullptr;
 }
-
-
 
 /* Allocation functions that GC on initial failure */
 
@@ -755,7 +774,6 @@ void *R_realloc_gc(void *p, size_t n)
     }
     return np;
 }
-
 
 /* "allocSExp" allocate a RObject */
 
@@ -910,29 +928,29 @@ SEXP Rf_allocVector3(SEXPTYPE type, R_xlen_t length = 1, R_allocator_t *allocato
         return nullptr;
     case RAWSXP:
     {
-        s = GCNode::expose(new RawVector(length, allocator));
+        s = RawVector::create(length, allocator);
         break;
     }
     case CHARSXP:
         Rf_error(_("use of allocVector(CHARSXP ...) is defunct\n"));
     case LGLSXP:
     {
-        s = GCNode::expose(new LogicalVector(length, allocator));
+        s = LogicalVector::create(length, allocator);
         break;
     }
     case INTSXP:
     {
-        s = GCNode::expose(new IntVector(length, allocator));
+        s = IntVector::create(length, allocator);
         break;
     }
     case REALSXP:
     {
-        s = GCNode::expose(new RealVector(length, allocator));
+        s = RealVector::create(length, allocator);
         break;
     }
     case CPLXSXP:
     {
-        s = GCNode::expose(new ComplexVector(length, allocator));
+        s = ComplexVector::create(length, allocator);
         break;
     }
     case STRSXP:
@@ -968,7 +986,7 @@ SEXP Rf_allocVector3(SEXPTYPE type, R_xlen_t length = 1, R_allocator_t *allocato
         if (length > R_SHORT_LEN_MAX)
             Rf_error(_("invalid length for pairlist"));
 #endif
-        return Rf_allocList((int)length);
+        return Rf_allocList(int(length));
     }
     default:
         Rf_error(_("invalid type/length (%s/%d) in vector allocation"), type2char(type), length);
@@ -1052,28 +1070,30 @@ void R_gc(void)
 }
 
 #ifdef THREADCHECK
-# if !defined(_WIN32) && defined(HAVE_PTHREAD)
-#   include <pthread.h>
+#if !defined(_WIN32) && defined(HAVE_PTHREAD)
+#include <pthread.h>
 HIDDEN void R_check_thread(const char *s)
 {
     static Rboolean main_thread_inited = FALSE;
     static pthread_t main_thread;
-    if (! main_thread_inited) {
+    if (!main_thread_inited)
+    {
         main_thread = pthread_self();
         main_thread_inited = TRUE;
     }
-    if (! pthread_equal(main_thread, pthread_self())) {
+    if (!pthread_equal(main_thread, pthread_self()))
+    {
         char buf[1024];
-	size_t bsize = sizeof buf;
-	memset(buf, 0, bsize);
+        size_t bsize = sizeof buf;
+        memset(buf, 0, bsize);
         snprintf(buf, bsize - 1, "Wrong thread calling '%s'", s);
         R_Suicide(buf);
     }
 }
-# else
-/* This could be implemented for Windows using their threading API */ 
+#else
+/* This could be implemented for Windows using their threading API */
 HIDDEN void R_check_thread(const char *s) {}
-# endif
+#endif
 #endif
 
 HIDDEN SEXP do_memoryprofile(SEXP call, SEXP op, SEXP args, SEXP env)
@@ -1083,24 +1103,31 @@ HIDDEN SEXP do_memoryprofile(SEXP call, SEXP op, SEXP args, SEXP env)
     checkArity(op, args);
     GCStackRoot<> ans(allocVector(INTSXP, n));
     GCStackRoot<> nms(allocVector(STRSXP, n));
-    for (int i = 0; i < n; i++) {
-	INTEGER(ans)[i] = 0;
-    SET_STRING_ELT(nms, i, Rf_type2str(SEXPTYPE(i > LGLSXP ? i + 2 : i)));
+    for (int i = 0; i < n; i++)
+    {
+        INTEGER(ans)[i] = 0;
+        SET_STRING_ELT(nms, i, Rf_type2str(SEXPTYPE(i > LGLSXP ? i + 2 : i)));
     }
     setAttrib(ans, R_NamesSymbol, nms);
 
-    BEGIN_SUSPEND_INTERRUPTS {
+    BEGIN_SUSPEND_INTERRUPTS
+    {
 
-      for (unsigned int gen = 0; gen < GCNode::numGenerations(); ++gen) {
-	  for (const GCNode *s = GCNode::s_generation[gen]; s; s = s->next()) {
-               if (const RObject* ob = SEXP_downcast<const RObject*>(s, false)) {
-	      tmp = ob->sexptype();
-	      if(tmp > LGLSXP) tmp -= 2;
-	      INTEGER(ans)[tmp]++;
-               }
-	  }
-      }
-    } END_SUSPEND_INTERRUPTS;
+        for (unsigned int gen = 0; gen < GCNode::numGenerations(); ++gen)
+        {
+            for (const GCNode *s = GCNode::s_generation[gen]; s; s = s->next())
+            {
+                if (const RObject *ob = SEXP_downcast<const RObject *>(s, false))
+                {
+                    tmp = ob->sexptype();
+                    if (tmp > LGLSXP)
+                        tmp -= 2;
+                    INTEGER(ans)[tmp]++;
+                }
+            }
+        }
+    }
+    END_SUSPEND_INTERRUPTS;
     return ans;
 }
 
@@ -1111,13 +1138,13 @@ void *R_chk_calloc(size_t nelem, size_t elsize)
 {
     void *p;
 #ifndef HAVE_WORKING_CALLOC
-    if(nelem == 0)
-	return(nullptr);
+    if (nelem == 0)
+        return (nullptr);
 #endif
     p = calloc(nelem, elsize);
-    if(!p) /* problem here is that we don't have a format for size_t. */
-	error(_("'Calloc()' function could not allocate memory (%.0f of %u bytes)"), (double) nelem, elsize);
-    return(p);
+    if (!p) /* problem here is that we don't have a format for size_t. */
+        error(_("'Calloc()' function could not allocate memory (%.0f of %u bytes)"), (double)nelem, elsize);
+    return (p);
 }
 
 void *R_chk_realloc(void *ptr, size_t size)
@@ -1182,7 +1209,7 @@ static SEXP DeleteFromList(SEXP object, SEXP list)
    position in the page. */
 
 #define PHASH_SIZE 1069
-#define PTRHASH(obj) (((R_size_t) (obj)) >> 3)
+#define PTRHASH(obj) (((R_size_t)(obj)) >> 3)
 
 static bool use_precious_hash = false;
 static bool precious_inited = false;
@@ -1390,7 +1417,7 @@ SEXP R_MakeExternalPtrFn(DL_FUNC p, SEXP tag, SEXP prot)
 DL_FUNC R_ExternalPtrAddrFn(SEXP s)
 {
     fn_ptr tmp;
-    tmp.p =  EXTPTR_PTR(s);
+    tmp.p = EXTPTR_PTR(s);
     return tmp.fn;
 }
 
@@ -1400,31 +1427,34 @@ HIDDEN void R::R_expand_binding_value(SEXP b)
     SET_BNDCELL_TAG(b, 0);
 #else
     int typetag = BNDCELL_TAG(b);
-    if (typetag) {
-	union {
-	    SEXP sxpval;
-	    double dval;
-	    int ival;
-	} vv;
-	SEXP val;
-	vv.sxpval = CAR0(b);
-	switch (typetag) {
-	case REALSXP:
-	    val = ScalarReal(vv.dval);
-	    SET_BNDCELL(b, val);
-	    INCREMENT_NAMED(val);
-	    break;
-	case INTSXP:
-	    val = ScalarInteger(vv.ival);
-	    SET_BNDCELL(b, val);
-	    INCREMENT_NAMED(val);
-	    break;
-	case LGLSXP:
-	    val = ScalarLogical(vv.ival);
-	    SET_BNDCELL(b, val);
-	    INCREMENT_NAMED(val);
-	    break;
-	}
+    if (typetag)
+    {
+        union
+        {
+            SEXP sxpval;
+            double dval;
+            int ival;
+        } vv;
+        SEXP val;
+        vv.sxpval = CAR0(b);
+        switch (typetag)
+        {
+        case REALSXP:
+            val = ScalarReal(vv.dval);
+            SET_BNDCELL(b, val);
+            INCREMENT_NAMED(val);
+            break;
+        case INTSXP:
+            val = ScalarInteger(vv.ival);
+            SET_BNDCELL(b, val);
+            INCREMENT_NAMED(val);
+            break;
+        case LGLSXP:
+            val = ScalarLogical(vv.ival);
+            SET_BNDCELL(b, val);
+            INCREMENT_NAMED(val);
+            break;
+        }
     }
 #endif
 }
@@ -1436,16 +1466,17 @@ HIDDEN void R::R_args_enable_refcnt(SEXP args)
        make sure it is reference counting. Should be able to get rid
        of this function if we reduce use of CONS_NR. */
     for (SEXP a = args; a != R_NilValue; a = CDR(a))
-	if (a && !TRACKREFS(a)) {
-	    ENABLE_REFCNT(a);
-	    INCREMENT_REFCNT(CAR(a));
-	    INCREMENT_REFCNT(CDR(a));
+        if (a && !TRACKREFS(a))
+        {
+            ENABLE_REFCNT(a);
+            INCREMENT_REFCNT(CAR(a));
+            INCREMENT_REFCNT(CDR(a));
 #ifdef TESTING_WRITE_BARRIER
-	    /* this should not see non-tracking arguments */
-	    if (CAR(a) && !TRACKREFS(CAR(a)))
-		error(_("argument not tracking references"));
+            /* this should not see non-tracking arguments */
+            if (CAR(a) && !TRACKREFS(CAR(a)))
+                error(_("argument not tracking references"));
 #endif
-	}
+        }
 #endif
 }
 
@@ -1557,22 +1588,27 @@ void *R_AllocStringBuffer(size_t blen, R_StringBuffer &buf)
     if (blen == (size_t)-1)
         error(_("'R_AllocStringBuffer( (size_t)-1 )' function is no longer allowed"));
 
-    if(blen * sizeof(char) < buf.bufsize) return buf.data;
+    if (blen * sizeof(char) < buf.bufsize)
+        return buf.data;
     blen1 = blen = (blen + 1) * sizeof(char);
     blen = (blen / bsize) * bsize;
-    if(blen < blen1) blen += bsize;
+    if (blen < blen1)
+        blen += bsize;
 
-    if(buf.data == nullptr) {
-	buf.data = (char *) malloc(blen);
-	if(buf.data)
-	    buf.data[0] = '\0';
-    } else
-	buf.data = (char *) realloc(buf.data, blen);
+    if (buf.data == nullptr)
+    {
+        buf.data = (char *)malloc(blen);
+        if (buf.data)
+            buf.data[0] = '\0';
+    }
+    else
+        buf.data = (char *)realloc(buf.data, blen);
     buf.bufsize = blen;
-    if(!buf.data) {
-	buf.bufsize = 0;
-	error(_("could not allocate memory (%u MB) in 'R_AllocStringBuffer()' function"),
-	      (unsigned int) blen/1024/1024);
+    if (!buf.data)
+    {
+        buf.bufsize = 0;
+        error(_("could not allocate memory (%u MB) in 'R_AllocStringBuffer()' function"),
+              (unsigned int)blen / 1024 / 1024);
     }
     return buf.data;
 }

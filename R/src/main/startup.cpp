@@ -29,6 +29,7 @@
 #define R_NO_REMAP
 
 #include <Defn.h>
+#include <Rinternals.h>
 #include <Localization.h>
 #include <Rinterface.h>
 #include <Fileio.h> /* for R_fopen */

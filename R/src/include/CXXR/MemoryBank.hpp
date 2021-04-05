@@ -35,8 +35,8 @@
 #include <CXXR/RTypes.hpp>
 #include <CXXR/CellPool.hpp>
 #include <CXXR/SEXPTYPE.hpp>
-#include <R_ext/Rallocators.h>
 #include <CXXR/SchwarzCounter.hpp>
+#include <R_ext/Rallocators.h>
 
 #ifdef __GNUC__
 #ifdef __i386__

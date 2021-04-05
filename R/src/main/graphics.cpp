@@ -32,6 +32,7 @@
 
 #include <Localization.h>
 #include <Defn.h>
+#include <Rinternals.h>
 #include <cfloat> /* for DBL_EPSILON etc */
 #include <Graphics.h>
 // --> R_ext/GraphicsEngine.h + Rgraphics.h

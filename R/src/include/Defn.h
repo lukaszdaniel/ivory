@@ -45,19 +45,15 @@
 #define TESTING_WRITE_BARRIER
 #endif
 
+#include <CXXR/SEXPTYPE.hpp>
+#include <R_ext/Boolean.h>
 #include <R_ext/Visibility.h>
+#include <R_ext/Complex.h>
+#include <Errormsg.h>
 
 constexpr int MAXELTSIZE = 8192; /* Used as a default for string buffer sizes, \
                and occasionally as a limit. */
 
-#include <R_ext/Complex.h>
-
-#define CALLED_FROM_DEFN_H 1
-#include <Rinternals.h> /*-> Arith.h, Boolean.h, Complex.h, Error.h,
-				  Memory.h, PrtUtil.h, Utils.h */
-#undef CALLED_FROM_DEFN_H
-
-#include <Errormsg.h>
 
 #ifdef _WIN32
 extern void R_WaitEvent(void);
@@ -231,24 +227,25 @@ extern "C"
 #define extern1 extern
 #endif
 
-    LibExtern Rboolean R_interrupts_suspended INI_as(FALSE);
-    LibExtern Rboolean R_interrupts_pending INI_as(FALSE);
-
     /* R Home Directory */
     LibExtern char *R_Home; /* Root of the R tree */
 
     /* Memory Management */
     extern0 R_size_t R_NSize INI_as(R_NSIZE); /* Size of cons cell heap */
     extern0 R_size_t R_VSize INI_as(R_VSIZE); /* Size of the vector heap */
-    extern0 bool R_GCEnabled INI_as(true);
-    extern0 bool R_in_gc INI_as(false);
     extern0 bool R_BCIntActive INI_as(false); /* bcEval called more recently than
                                             eval */
     extern0 void *R_BCpc INI_as(nullptr);     /* current byte code instruction */
     extern0 SEXP R_BCbody INI_as(nullptr);    /* current byte code object */
     extern0 SEXP R_NHeap;                     /* Start of the cons cell heap */
     extern0 SEXP R_FreeSEXP;                  /* Cons cell free list */
-    extern0 int R_Is_Running;                 /* for Windows memory manager */
+    enum class RStatus
+    {
+        NOT_STARTED = 0,
+        INITIALIZED = 1,
+        STARTED = 2
+    };
+    extern0 RStatus R_Is_Running INI_as(RStatus::NOT_STARTED);                 /* for Windows memory manager */
 
     /* Evaluation Environment */
     extern0 int R_BrowseLines INI_as(0);                    /* lines/per call in browser :

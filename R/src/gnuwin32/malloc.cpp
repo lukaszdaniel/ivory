@@ -647,7 +647,7 @@ extern "C" {
 /* R Specific declarations here */
 
 extern size_t R_max_memory;
-extern int R_Is_Running;
+extern RStatus R_Is_Running;
 static size_t R_used = 0;
 
 #if !ONLY_MSPACES

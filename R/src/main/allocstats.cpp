@@ -47,13 +47,10 @@ SEXP allocstats(void)
     std::copy(std::begin(free_counts), std::end(free_counts), std::begin(frees));
 
     // GCStackRoot<ListVector> ans(ListVector::create(3));
-    // GCStackRoot<IntVector> size_column(IntVector::create(nbins));
-    // GCStackRoot<IntVector> alloc_column(IntVector::create(nbins));
-    // GCStackRoot<IntVector> free_column(IntVector::create(nbins));
+    GCStackRoot<IntVector> size_column(IntVector::create(nbins));
+    GCStackRoot<IntVector> alloc_column(IntVector::create(nbins));
+    GCStackRoot<IntVector> free_column(IntVector::create(nbins));
     GCStackRoot<ListVector> ans(GCNode::expose(new ListVector(3)));
-    GCStackRoot<IntVector> size_column(GCNode::expose(new IntVector(nbins)));
-    GCStackRoot<IntVector> alloc_column(GCNode::expose(new IntVector(nbins)));
-    GCStackRoot<IntVector> free_column(GCNode::expose(new IntVector(nbins)));
 
     for (int i = 0; i < nbins; ++i)
     {

@@ -1203,7 +1203,7 @@ HIDDEN SEXP do_internal(SEXP call, SEXP op, SEXP args, SEXP env)
 		  CHAR(PRINTNAME(fun)));
 
 #ifdef CHECK_INTERNALS
-    if(R_Is_Running > 1 && getenv("_R_CHECK_INTERNALS2_")) {
+    if(R_Is_Running > RStatus::INITIALIZED && getenv("_R_CHECK_INTERNALS2_")) {
 	// find out if we were called from a namespace.
 	// inlining by the compiler can defeat this.
 	const char *ns = "";

@@ -31,11 +31,11 @@
 #ifndef RFRAME_HPP
 #define RFRAME_HPP
 
+#include <unordered_map>
 #include <CXXR/Allocator.hpp>
 #include <CXXR/GCNode.hpp>
 #include <CXXR/Promise.hpp>
 #include <CXXR/Symbol.hpp>
-#include <unordered_map>
 
 namespace CXXR
 {

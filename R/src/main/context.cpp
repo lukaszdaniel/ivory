@@ -191,7 +191,6 @@ HIDDEN void RCNTXT::R_run_onexits(RCNTXT *cptr)
 void RCNTXT::R_restore_globals()
 {
     ProtectStack::restoreSize(getCStackTop());
-    R_GCEnabled = getGCEnabled();
     R_BCIntActive = getBCIntactive();
     R_BCpc = getBCPC();
     R_BCbody = getBCBody();
@@ -284,7 +283,6 @@ void RCNTXT::start(int flags,
                    SEXP promargs, SEXP callfun)
 {
     setCStackTop(ProtectStack::size());
-    setGCEnabled(R_GCEnabled);
     setBCPC(R_BCpc);
     setBCBody(R_BCbody);
     setBCIntactive(R_BCIntActive);

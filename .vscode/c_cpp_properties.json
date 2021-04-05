@@ -14,7 +14,8 @@
                 "ENABLE_NLS",
                 "USE_ICU",
                 "R_USE_SIGNALS",
-                "LONG_VECTOR_SUPPORT"
+                "LONG_VECTOR_SUPPORT",
+                "SIZEOF_SIZE_T=8"
             ],
             "cStandard": "c11",
             "cppStandard": "c++17"

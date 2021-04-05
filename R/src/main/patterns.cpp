@@ -27,6 +27,7 @@
 
 #include <CXXR/RObject.hpp>
 #include <Defn.h>
+#include <Rinternals.h>
 #include <Localization.h>
 #include <R_ext/GraphicsEngine.h>
 

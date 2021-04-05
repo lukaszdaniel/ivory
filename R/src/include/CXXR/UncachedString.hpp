@@ -31,8 +31,8 @@
 #ifndef UNCACHEDSTRING_HPP
 #define UNCACHEDSTRING_HPP
 
-#include <CXXR/String.hpp>
 #include <string>
+#include <CXXR/String.hpp>
 
 namespace CXXR
 {

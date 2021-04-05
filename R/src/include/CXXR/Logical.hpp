@@ -28,9 +28,9 @@
 #ifndef CXXR_LOGICAL_HPP
 #define CXXR_LOGICAL_HPP
 
+#include <cassert>
 #include <CXXR/RTypes.hpp>
 #include <R_ext/Arith.h>
-#include <cassert>
 
 namespace CXXR
 {
@@ -135,11 +135,6 @@ namespace CXXR
 		}
 		return true;
 	}
-
-	/* pre-allocated boolean values */
-	extern SEXP R_TrueValue;
-	extern SEXP R_FalseValue;
-	extern SEXP R_LogicalNAValue;
 } // namespace CXXR
 
 #endif // CXXR_LOGICAL_HPP

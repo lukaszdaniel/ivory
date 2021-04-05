@@ -19,7 +19,7 @@
  */
 
 /* These are the R interface routines to the plain FFT code
-   fft_factor() & fft_work() in fft.c. */
+   fft_factor() & fft_work() in fft.cpp. */
 
 
 
@@ -30,6 +30,7 @@
 #include <cinttypes> // for PRIu64
 #include <CXXR/VectorBase.hpp>
 #include <Defn.h>
+#include <Rinternals.h>
 #include "localization.h"
 #include "statsR.h"
 

@@ -319,10 +319,6 @@ void* GCNode::operator new(size_t bytes)
 
     bool GCNode::Marker::operator()(const GCNode *node)
     {
-        /*
-    if (node->m_gcgen == 0)
-	cerr << "Warning: Marker encountered gen 0 node.\n";
-    */
         if (!node->isMarked() && node->m_gcgen <= m_maxgen) // node is not yet marked and is below the number of generations to be collected
         {
             node->mark();

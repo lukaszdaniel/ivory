@@ -18,7 +18,6 @@
  */
 
 #include <iostream>
-#include <R_ext/Boolean.h>
 #include <CXXR/RObject.hpp>
 #include <CXXR/Environment.hpp>
 #include <CXXR/IntVector.hpp>
@@ -27,6 +26,7 @@
 #include <CXXR/Expression.hpp>
 #include <CXXR/ListVector.hpp>
 #include <CXXR/Symbol.hpp>
+#include <R_ext/Boolean.h>
 
 using namespace std;
 using namespace CXXR;

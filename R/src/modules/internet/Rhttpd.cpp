@@ -43,6 +43,9 @@
 #include <config.h>
 #endif
 
+#include <cstdlib>
+#include <cstdio>
+#include <cstring>
 #include <CXXR/GCRoot.hpp>
 #include <CXXR/PairList.hpp>
 #include <CXXR/Expression.hpp>
@@ -50,16 +53,12 @@
 #include <CXXR/String.hpp>
 #include <CXXR/StringVector.hpp>
 #include <CXXR/IntVector.hpp>
+#include <CXXR/LogicalVector.hpp>
 #include <CXXR/Symbol.hpp>
 #include <Localization.h>
 #include <Defn.h>
 #include <Fileio.h>
 #include <Rconnections.h>
-
-#include <cstdlib>
-#include <cstdio>
-#include <cstring>
-
 #include <Rmodules/Rinternet.h>
 
 using namespace R;
