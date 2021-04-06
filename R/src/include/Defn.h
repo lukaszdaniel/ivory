@@ -630,9 +630,7 @@ namespace R
     SEXP type2symbol(SEXPTYPE t);
     void unbindVar(SEXP symbol, SEXP rho);
 
-#ifdef ADJUST_ENVIR_REFCNTS
     void unpromiseArgs(SEXP pargs);
-#endif
     SEXP R_LookupMethod(SEXP method, SEXP rho, SEXP callrho, SEXP defrho);
     bool usemethod(const char *generic, SEXP obj, SEXP call, SEXP args, SEXP rho, SEXP callrho, SEXP defrho, SEXP *ans);
     SEXP vectorIndex(SEXP x, SEXP thesub, int start, int stop, int pok, SEXP call, bool dup);

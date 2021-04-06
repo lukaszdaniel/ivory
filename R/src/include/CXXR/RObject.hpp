@@ -32,8 +32,18 @@
 #ifndef ROBJECT_HPP
 #define ROBJECT_HPP
 
+#ifndef SWITCH_TO_REFCNT
 #define SWITCH_TO_REFCNT
+#endif
+
+#ifndef COMPUTE_REFCNT_VALUES
 #define COMPUTE_REFCNT_VALUES
+#endif
+
+#ifndef ADJUST_ENVIR_REFCNTS
+#define ADJUST_ENVIR_REFCNTS
+#endif
+
 // #define ENABLE_ST_CHECKS
 #define CXXR_OLD_ALTREP_IMPL
 
@@ -86,7 +96,6 @@
 #define MARK_ASSIGNMENT_CALL_MACRO(call) SET_ASSIGNMENT_PENDING(call, TRUE)
 #define IS_ASSIGNMENT_CALL_MACRO(call) ASSIGNMENT_PENDING(call)
 
-#ifdef SWITCH_TO_REFCNT
 /* no definition for SET_NAMED; any calls will use the one in memory.cpp */
 #define ENSURE_NAMEDMAX_MACRO(v) \
     do                           \
@@ -96,23 +105,7 @@
     do                        \
     {                         \
     } while (0)
-#else
-#define ENSURE_NAMEDMAX_MACRO(v)            \
-    do                                      \
-    {                                       \
-        CXXR::RObject *__enm_v__ = (v);     \
-        if (NAMED(__enm_v__) < NAMEDMAX)    \
-            SET_NAMED(__enm_v__, NAMEDMAX); \
-    } while (0)
-#define ENSURE_NAMED_MACRO(v) \
-    do                        \
-    {                         \
-        if (NAMED(v) == 0)    \
-            SET_NAMED(v, 1);  \
-    } while (0)
-#endif
 
-#ifdef SWITCH_TO_REFCNT
 #define SETTER_CLEAR_NAMED_MACRO(x) \
     do                              \
     {                               \
@@ -121,23 +114,6 @@
     do                          \
     {                           \
     } while (0)
-#else
-#define SETTER_CLEAR_NAMED_MACRO(x) \
-    do                              \
-    {                               \
-        RObject *__x__ = (x);       \
-        if (NAMED(__x__) == 1)      \
-            SET_NAMED(__x__, 0);    \
-    } while (0)
-#define RAISE_NAMED_MACRO(x, n)      \
-    do                               \
-    {                                \
-        RObject *__x__ = (x);        \
-        int __n__ = (n);             \
-        if (NAMED(__x__) < __n__)    \
-            SET_NAMED(__x__, __n__); \
-    } while (0)
-#endif
 
 /* This is intended for use only within R itself.
  * It defines internal structures that are otherwise only accessible
@@ -155,9 +131,7 @@ Triplet's translation table:
      (SET_)TAG  (SET_)HASHTAB  (SET_)CLOENV   (SET_)PRENV    (SET_)INTERNAL
 */
 
-#ifdef SWITCH_TO_REFCNT
 constexpr int REFCNTMAX = ((1 << NAMED_BITS) - 1);
-#endif
 
 /** @brief Namespace for the CXXR project.
  *
@@ -576,38 +550,28 @@ namespace CXXR
 
         bool trackrefs() const
         {
-#ifdef COMPUTE_REFCNT_VALUES
             return (sexptype() == CLOSXP ? true : !m_spare);
-#else
-            return false;
-#endif
         }
 
         void setTrackrefs(bool on)
         {
-#ifdef COMPUTE_REFCNT_VALUES
 #ifdef EXTRA_REFCNT_FIELDS
             m_spare = on;
 #else
             m_spare = !on;
 #endif
-#endif
         }
 
         void incrementRefCount()
         {
-#ifdef COMPUTE_REFCNT_VALUES
             if (refcnt() < REFCNTMAX)
                 setRefCnt(refcnt() + 1);
-#endif
         }
 
         void decrementRefCount()
         {
-#ifdef COMPUTE_REFCNT_VALUES
             if (refcnt() > 0 && refcnt() < REFCNTMAX)
                 setRefCnt(refcnt() - 1);
-#endif
         }
 
         bool isScalarOfType(SEXPTYPE type) const
@@ -632,18 +596,12 @@ namespace CXXR
 
         unsigned int refcnt() const
         {
-#ifdef COMPUTE_REFCNT_VALUES
             return m_named;
-#else
-            return 0;
-#endif
         }
 
         void setRefCnt(unsigned int v)
         {
-#ifdef COMPUTE_REFCNT_VALUES
             m_named = v;
-#endif
         }
 
         bool trace() const
@@ -735,9 +693,6 @@ namespace CXXR
 
         void setNamed(unsigned int v)
         {
-#ifndef SWITCH_TO_REFCNT
-            m_named = v;
-#endif
         }
 
         /** @brief Name within R of this type of object.

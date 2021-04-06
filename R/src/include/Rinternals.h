@@ -103,16 +103,15 @@ extern "C" {
 #include <CXXR/SEXPTYPE.hpp>
 
 
-/* Define SWITCH_TO_NAMED to use the 'NAMED' mechanism instead of
-   reference counting. */
-#if (!defined(SWITCH_TO_NAMED) && !defined(SWITCH_TO_REFCNT)) || defined(COMPILING_IVORY)
+/* CXXR uses reference counting mechanism only */
+#ifndef SWITCH_TO_REFCNT
 #define SWITCH_TO_REFCNT
 #endif
 
-#if defined(SWITCH_TO_REFCNT) && !defined(COMPUTE_REFCNT_VALUES)
+#ifndef COMPUTE_REFCNT_VALUES
 #define COMPUTE_REFCNT_VALUES
 #endif
-#if defined(SWITCH_TO_REFCNT) && !defined(ADJUST_ENVIR_REFCNTS)
+#ifndef ADJUST_ENVIR_REFCNTS
 #define ADJUST_ENVIR_REFCNTS
 #endif
 
@@ -174,18 +173,10 @@ int SIMPLE_SCALAR_TYPE(SEXP x);
     } while (0)
 
 /* Macros for some common idioms. */
-#ifdef SWITCH_TO_REFCNT
-# define MAYBE_SHARED(x) (REFCNT(x) > 1)
-# define NO_REFERENCES(x) (REFCNT(x) == 0)
-# if defined(USE_RINTERNALS) || defined(COMPILING_IVORY)
-#  define MARK_NOT_MUTABLE(x) SET_REFCNT(x, REFCNTMAX)
-# endif
-#else
-# define MAYBE_SHARED(x) (NAMED(x) > 1)
-# define NO_REFERENCES(x) (NAMED(x) == 0)
-# if defined(USE_RINTERNALS) || defined(COMPILING_IVORY)
-#  define MARK_NOT_MUTABLE(x) SET_NAMED(x, NAMEDMAX)
-# endif
+#define MAYBE_SHARED(x) (REFCNT(x) > 1)
+#define NO_REFERENCES(x) (REFCNT(x) == 0)
+#if defined(USE_RINTERNALS) || defined(COMPILING_IVORY)
+#define MARK_NOT_MUTABLE(x) SET_REFCNT(x, REFCNTMAX)
 #endif
 #define MAYBE_REFERENCED(x) (! NO_REFERENCES(x))
 #define NOT_SHARED(x) (! MAYBE_SHARED(x))

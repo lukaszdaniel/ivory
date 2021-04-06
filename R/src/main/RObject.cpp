@@ -73,10 +73,8 @@ namespace CXXR
                                        m_trace(false), m_spare(false), m_named(0), m_extra(0), m_s4_object(stype == S4SXP),
                                        m_active_binding(false), m_binding_locked(false), m_assignment_pending(false), m_attrib(nullptr)
     {
-#ifdef COMPUTE_REFCNT_VALUES
         setRefCnt(0);
         setTrackrefs(true);
-#endif
     }
 
     RObject::RObject(const RObject &pattern, bool deep)
@@ -306,7 +304,6 @@ namespace CXXR
 
     void RObject::xfix_refcnt(RObject *old, RObject *new_)
     {
-#ifdef COMPUTE_REFCNT_VALUES
         if (!trackrefs())
             return;
         if (old == new_)
@@ -316,12 +313,10 @@ namespace CXXR
             old->decrementRefCount();
         if (new_)
             new_->incrementRefCount();
-#endif
     }
 
     void RObject::xfix_binding_refcnt(RObject *old, RObject *new_)
     {
-#ifdef COMPUTE_REFCNT_VALUES
         if (!trackrefs())
             return;
         if (old == new_)
@@ -336,10 +331,6 @@ namespace CXXR
         }
         if (new_)
             new_->incrementRefCount();
-#else
-        if (assignmentPending() && old && old != new_)
-            setAssignmentPending(false);
-#endif
     }
 } // namespace CXXR
 
@@ -378,11 +369,7 @@ void SETALTREP(SEXP x, int v)
 
 int NAMED(SEXP x)
 {
-#ifdef SWITCH_TO_REFCNT
     return REFCNT(x);
-#else
-    return x ? x->named() : 0;
-#endif
 }
 
 int LEVELS(SEXP x)
