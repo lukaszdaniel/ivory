@@ -156,6 +156,7 @@ namespace CXXR
     {
         if (m_attrib)
         {
+            m_attrib->decrementRefCount();
             m_attrib = nullptr;
             m_has_class = false;
         }
@@ -226,7 +227,11 @@ namespace CXXR
                 prev->setTail(node->tail());
             }
             else
+            {
+                xfix_refcnt(m_attrib, node->tail());
                 m_attrib = node->tail();
+                propagateAge(m_attrib);
+            }
         }
         else if (value)
         {
@@ -243,6 +248,7 @@ namespace CXXR
                 prev->setTail(newnode);
             else
             { // No preexisting attributes at all:
+                xfix_refcnt(m_attrib, newnode);
                 m_attrib = newnode;
                 propagateAge(m_attrib);
             }
@@ -255,13 +261,34 @@ namespace CXXR
     void RObject::setAttributes(PairList *new_attributes)
     {
         xfix_refcnt(m_attrib, new_attributes);
-        clearAttributes();
+#if CXXR_TRUE // temporarily
+        m_attrib = new_attributes;
+        while (new_attributes)
+        {
+            Symbol *name = SEXP_downcast<Symbol *>(new_attributes->tag());
+            if (name == R_ClassSymbol)
+            {
+                m_has_class = (new_attributes->car() != nullptr);
+                break;
+            }
+            new_attributes = new_attributes->tail();
+        }
+        propagateAge(m_attrib);
+#else
+        // Below code results in installation error for package "vctrs".
+        // Error: Can't bind data because some elements are not named.
+        // Error: unable to load R code in package ‘vctrs’
+
+        // clearAttributes();
+        m_attrib = nullptr;
+        m_has_class = false;
         while (new_attributes)
         {
             Symbol *name = SEXP_downcast<Symbol *>(new_attributes->tag());
             setAttribute(name, new_attributes->car());
             new_attributes = new_attributes->tail();
         }
+#endif
     }
 
     void RObject::lockBinding()
