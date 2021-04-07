@@ -279,7 +279,7 @@ namespace CXXR
         static void checkST(const RObject *);
 
         // Virtual function of GCNode:
-        void visitChildren(const_visitor *v) const override;
+        void visitReferents(const_visitor *v) const override;
 
         /* List Access Methods */
         static double bndcell_dval(const RObject *x);

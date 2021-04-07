@@ -92,7 +92,7 @@ namespace CXXR
      *
      * <li>If the derived class contains any pointers or references to
      * other objects derived from GCNode, it should reimplement the
-     * method visitChildren() appropriately.</li>
+     * method visitReferents() appropriately.</li>
      *
      * <li>If the derived class contains any pointers to other objects
      * derived from GCNode, then any post-construction operation that
@@ -109,7 +109,7 @@ namespace CXXR
      * under construction, it is effectively immune from the garbage
      * collector.  Not only does this greatly simplify the coding of
      * the constructors themselves, it also means that in implementing
-     * the virtual method visitChildren(), it is not necessary to
+     * the virtual method visitReferents(), it is not necessary to
      * consider the possibility that the garbage collector will invoke
      * this method for a node whose construction is not yet complete.
      *
@@ -273,7 +273,7 @@ namespace CXXR
         {
             if (!(*v)(this))
                 return false;
-            visitChildren(v);
+            visitReferents(v);
             return true;
         }
 
@@ -387,26 +387,21 @@ namespace CXXR
          */
         static size_t slaughterInfants();
 
-        /** @brief Conduct a visitor to the children of this node.
+        /** @brief Conduct a visitor to the nodes referred to by this
+         * one.
          *
-         * The children of this node are those objects derived from
-         * GCNode to which this node contains a pointer or a
-         * reference.
+         * The referents of this node are those objects (derived from
+         * GCNode) designated by a GCEdge within this object.
          *
          * @param v Pointer to the visitor object.
          *
-         * @note The metaphor 'children' in this function's name is
-         * rather at odds with the metaphor of garbage-collection
-         * 'generations': the children of a node will always be of a
-         * generation at least as old as the node itself!
-         *
          * @note If this method is reimplemented in a derived class,
          * the reimplemented version must remember to invoke
-         * visitChildren() for the immediate base class of the derived
-         * class, to ensure that \e all children of the object get
-         * visited.
+         * visitReferents() for the immediate base class of the
+         * derived class, to ensure that \e all referents of the
+         * object get visited.
          */
-        virtual void visitChildren(const_visitor *v) const {}
+        virtual void visitReferents(const_visitor *v) const {}
 
         static unsigned int gcgen(const GCNode *v);
         static void set_gcgen(const GCNode *v, unsigned int x);

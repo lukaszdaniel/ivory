@@ -106,9 +106,9 @@ namespace CXXR
         return staticTypeName();
     }
 
-    void Environment::visitChildren(const_visitor *v) const
+    void Environment::visitReferents(const_visitor *v) const
     {
-        RObject::visitChildren(v);
+        RObject::visitReferents(v);
         if (m_enclosing)
             m_enclosing->conductVisitor(v);
         if (m_frame)

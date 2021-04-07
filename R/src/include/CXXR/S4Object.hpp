@@ -98,7 +98,7 @@ namespace CXXR
 		}
 
 		// Virtual function of GCNode:
-		void visitChildren(const_visitor *v) const override;
+		void visitReferents(const_visitor *v) const override;
 
 		/** @brief The name by which this type is known in R.
 		 *

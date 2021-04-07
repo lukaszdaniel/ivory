@@ -503,7 +503,7 @@ namespace CXXR
         void setAttributes(PairList *new_attributes);
 
         // Virtual function of GCNode:
-        void visitChildren(const_visitor *v) const override;
+        void visitReferents(const_visitor *v) const override;
 
         /** @brief Get an object's ::SEXPTYPE.
          *

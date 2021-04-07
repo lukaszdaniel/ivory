@@ -202,7 +202,7 @@ namespace CXXR
         RObject *evaluate(Environment *env) override;
 
         // Virtual function of GCNode:
-        void visitChildren(const_visitor *v) const;
+        void visitReferents(const_visitor *v) const;
 
     private:
         RObject *m_value;

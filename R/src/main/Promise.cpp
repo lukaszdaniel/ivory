@@ -80,9 +80,9 @@ namespace CXXR
         return staticTypeName();
     }
 
-    void Promise::visitChildren(const_visitor *v) const
+    void Promise::visitReferents(const_visitor *v) const
     {
-        RObject::visitChildren(v);
+        RObject::visitReferents(v);
         if (m_value)
             m_value->conductVisitor(v);
         if (m_valgen)

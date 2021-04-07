@@ -180,7 +180,7 @@ namespace CXXR
       const char *typeName() const override;
 
       // Virtual function of GCNode:
-      void visitChildren(const_visitor *v) const override;
+      void visitReferents(const_visitor *v) const override;
 
    private:
       const PairList *m_formals;

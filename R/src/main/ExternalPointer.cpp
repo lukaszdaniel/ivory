@@ -52,9 +52,9 @@ namespace CXXR
         return ExternalPointer::staticTypeName();
     }
 
-    void ExternalPointer::visitChildren(const_visitor *v) const
+    void ExternalPointer::visitReferents(const_visitor *v) const
     {
-        RObject::visitChildren(v);
+        RObject::visitReferents(v);
         if (m_protege)
             m_protege->conductVisitor(v);
         if (m_tag)

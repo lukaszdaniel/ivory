@@ -110,9 +110,9 @@ namespace CXXR
         return staticTypeName();
     }
 
-    void Closure::visitChildren(const_visitor *v) const
+    void Closure::visitReferents(const_visitor *v) const
     {
-        RObject::visitChildren(v);
+        RObject::visitReferents(v);
         if (m_formals)
             m_formals->conductVisitor(v);
         if (m_body)

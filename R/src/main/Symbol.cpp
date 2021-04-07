@@ -155,9 +155,9 @@ namespace CXXR
         return staticTypeName();
     }
 
-    void Symbol::visitChildren(const_visitor *v) const
+    void Symbol::visitReferents(const_visitor *v) const
     {
-        RObject::visitChildren(v);
+        RObject::visitReferents(v);
         if (m_name)
             m_name->conductVisitor(v);
         if (m_value)

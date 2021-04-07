@@ -55,9 +55,9 @@ namespace CXXR
         return S4Object::staticTypeName();
     }
 
-    void S4Object::visitChildren(const_visitor *v) const
+    void S4Object::visitReferents(const_visitor *v) const
     {
-        RObject::visitChildren(v);
+        RObject::visitReferents(v);
         if (tag())
             tag()->conductVisitor(v);
     }

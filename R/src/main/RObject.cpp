@@ -63,7 +63,7 @@ namespace CXXR
     {
     }
 
-    void RObject::visitChildren(const_visitor *v) const
+    void RObject::visitReferents(const_visitor *v) const
     {
         if (m_attrib && (m_type != CHARSXP || m_attrib->m_type != CHARSXP))
             m_attrib->conductVisitor(v);

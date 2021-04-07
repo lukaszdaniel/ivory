@@ -204,10 +204,10 @@ namespace CXXR
         }
     }
 
-    void ConsCell::visitChildren(const_visitor *v) const
+    void ConsCell::visitReferents(const_visitor *v) const
     {
 #if CXXR_TRUE
-        RObject::visitChildren(v);
+        RObject::visitReferents(v);
         if (altrep())
         {
             if (bndcellTag())
@@ -234,7 +234,7 @@ namespace CXXR
         const ConsCell *p = this;
         do
         {
-            p->RObject::visitChildren(v);
+            p->RObject::visitReferents(v);
             if (p->m_tail && !(p->m_tail->sexptype() == LISTSXP || p->m_tail->sexptype() == LANGSXP || p->m_tail->sexptype() == DOTSXP || p->m_tail->sexptype() == BCODESXP))
             {
                 std::cerr << LOCATION << Rf_type2char(p->m_tail->sexptype()) << " : " << R::typeName(p->m_tail) << std::endl;

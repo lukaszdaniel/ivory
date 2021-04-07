@@ -108,7 +108,7 @@ void* GCNode::operator new(size_t bytes)
                 // Don't try visiting children of nodes in Generation
                 // 0, because these nodes may still be under construction:
                 if (gen > 0 && !node->m_aged)
-                    node->visitChildren(&o2n);
+                    node->visitReferents(&o2n);
             }
         }
         // Check generation counts:
@@ -181,7 +181,7 @@ void* GCNode::operator new(size_t bytes)
             if (node->m_aged)
             {
                 Ager ager(node->m_gcgen);
-                node->visitChildren(&ager);
+                node->visitReferents(&ager);
                 node->m_aged = false;
             }
         }

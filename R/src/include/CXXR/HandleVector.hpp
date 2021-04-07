@@ -252,7 +252,7 @@ namespace CXXR
         const char *typeName() const override;
 
         // Virtual function of GCNode:
-        void visitChildren(const_visitor *v) const override;
+        void visitReferents(const_visitor *v) const override;
 
     protected:
         /**
@@ -278,9 +278,9 @@ namespace CXXR
     }
 
     template <typename T, SEXPTYPE ST>
-    void HandleVector<T, ST>::visitChildren(const_visitor *v) const
+    void HandleVector<T, ST>::visitReferents(const_visitor *v) const
     {
-        VectorBase::visitChildren(v);
+        VectorBase::visitReferents(v);
         for (R_xlen_t i = 0; i < size(); ++i)
         {
             const T *ptr = (*this)[i];

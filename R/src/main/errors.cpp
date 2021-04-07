@@ -1646,12 +1646,12 @@ namespace
 		}
 
 		// Virtual function of GCNode:
-		void visitChildren(const_visitor *v) const override;
+		void visitReferents(const_visitor *v) const override;
 	};
 
-	void HandlerEntry::visitChildren(const_visitor *v) const
+	void HandlerEntry::visitReferents(const_visitor *v) const
 	{
-		RObject::visitChildren(v);
+		RObject::visitReferents(v);
 		if (m_class)
 			m_class->conductVisitor(v);
 		if (m_parent_environment)

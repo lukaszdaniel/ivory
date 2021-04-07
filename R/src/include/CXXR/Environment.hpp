@@ -284,7 +284,7 @@ namespace CXXR
       const char *typeName() const override;
 
       // Virtual function of GCNode:
-      void visitChildren(const_visitor *v) const override;
+      void visitReferents(const_visitor *v) const override;
 
    private:
       static GCRoot<Environment> s_empty_env;
