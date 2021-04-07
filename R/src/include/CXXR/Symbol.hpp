@@ -172,6 +172,8 @@ namespace CXXR
         void setValue(RObject *val)
         {
             xfix_binding_refcnt(m_value, val);
+            if (m_value && assignmentPending())
+                setAssignmentPending(false);
             m_value = val;
             propagateAge(m_value);
         }

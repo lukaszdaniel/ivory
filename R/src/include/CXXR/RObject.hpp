@@ -32,18 +32,6 @@
 #ifndef ROBJECT_HPP
 #define ROBJECT_HPP
 
-#ifndef SWITCH_TO_REFCNT
-#define SWITCH_TO_REFCNT
-#endif
-
-#ifndef COMPUTE_REFCNT_VALUES
-#define COMPUTE_REFCNT_VALUES
-#endif
-
-#ifndef ADJUST_ENVIR_REFCNTS
-#define ADJUST_ENVIR_REFCNTS
-#endif
-
 // #define ENABLE_ST_CHECKS
 #define CXXR_OLD_ALTREP_IMPL
 
@@ -121,8 +109,6 @@
  * (which are always defined).
  */
 
-constexpr int NAMED_BITS = 16;
-
 /*
 Triplet's translation table:
 ---- LIST ----- ENV ---------- CLO ---------- PROM --------- SYM
@@ -130,8 +116,6 @@ Triplet's translation table:
      (SET)CDR   (SET_)ENCLOS   (SET_)BODY     (SET_)PRCODE   (SET_)SYMVALUE
      (SET_)TAG  (SET_)HASHTAB  (SET_)CLOENV   (SET_)PRENV    (SET_)INTERNAL
 */
-
-constexpr int REFCNTMAX = ((1 << NAMED_BITS) - 1);
 
 /** @brief Namespace for the CXXR project.
  *
@@ -548,30 +532,14 @@ namespace CXXR
             m_alt = on;
         }
 
-        bool trackrefs() const
-        {
-            return (sexptype() == CLOSXP ? true : !m_spare);
-        }
-
-        void setTrackrefs(bool on)
-        {
-#ifdef EXTRA_REFCNT_FIELDS
-            m_spare = on;
-#else
-            m_spare = !on;
-#endif
-        }
-
         void incrementRefCount()
         {
-            if (refcnt() < REFCNTMAX)
-                setRefCnt(refcnt() + 1);
+            GCNode::incRefCount(this);
         }
 
         void decrementRefCount()
         {
-            if (refcnt() > 0 && refcnt() < REFCNTMAX)
-                setRefCnt(refcnt() - 1);
+            GCNode::decRefCount(this);
         }
 
         bool isScalarOfType(SEXPTYPE type) const
@@ -592,16 +560,6 @@ namespace CXXR
         unsigned int named() const
         {
             return m_named;
-        }
-
-        unsigned int refcnt() const
-        {
-            return m_named;
-        }
-
-        void setRefCnt(unsigned int v)
-        {
-            m_named = v;
         }
 
         bool trace() const
@@ -1054,10 +1012,6 @@ extern "C"
     Rboolean Rf_isRaw(SEXP s);
     int ALTREP(SEXP x);
     void SETALTREP(SEXP x, int v);
-    int REFCNT(SEXP x);
-    void SET_REFCNT(SEXP x, unsigned int v);
-    int TRACKREFS(SEXP x);
-    void SET_TRACKREFS(SEXP x, bool v);
     int IS_SCALAR(SEXP x, SEXPTYPE type);
     int SIMPLE_SCALAR_TYPE(SEXP x);
     void DECREMENT_REFCNT(SEXP x);

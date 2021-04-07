@@ -5,6 +5,10 @@
  *  Copyright (C) 2008-2014  Andrew R. Runnalls.
  *  Copyright (C) 2014 and onwards the Rho Project Authors.
  *
+ *  Rho is not part of the R project, and bugs and other issues should
+ *  not be reported via r-bugs or other R project channels; instead refer
+ *  to the Rho website.
+ *
  *  This program is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU Lesser General Public License as published by
  *  the Free Software Foundation; either version 2.1 of the License, or
@@ -30,11 +34,26 @@
 #include <assert.h>
 #include <functional>
 #include <sstream>
+#include <vector>
 #include <CXXR/MemoryBank.hpp>
 #include <CXXR/SchwarzCounter.hpp>
 #include <CXXR/RTypes.hpp>
 
-#define EXPEL_OLD_TO_NEW
+#ifndef SWITCH_TO_REFCNT
+#define SWITCH_TO_REFCNT
+#endif
+
+#ifndef COMPUTE_REFCNT_VALUES
+#define COMPUTE_REFCNT_VALUES
+#endif
+
+#ifndef ADJUST_ENVIR_REFCNTS
+#define ADJUST_ENVIR_REFCNTS
+#endif
+
+constexpr int NAMED_BITS = 16;
+
+constexpr int REFCNTMAX = ((1 << NAMED_BITS) - 1);
 
 /* Comment formerly in memory.cpp:
 
@@ -196,7 +215,7 @@ namespace CXXR
         };
 
         GCNode()
-            : m_next(s_generation[0]), m_gcgen(0), m_marked(false), m_aged(false)
+            : m_next(s_generation[0]), m_gcgen(0), m_refcnt(0), m_trackrefs(true), m_marked(false), m_aged(false)
         {
             s_generation[0] = this;
             if (m_next == this)
@@ -210,7 +229,7 @@ namespace CXXR
          * Allocates memory for a new object of a class derived from
          * GCNode.
          *
-         *@param bytes Number of bytes of memory required.
+         * @param bytes Number of bytes of memory required.
          *
          * @return Pointer to the allocated memory block.
          */
@@ -368,7 +387,7 @@ namespace CXXR
          */
         static size_t slaughterInfants();
 
-        /** Conduct a visitor to the children of this node.
+        /** @brief Conduct a visitor to the children of this node.
          *
          * The children of this node are those objects derived from
          * GCNode to which this node contains a pointer or a
@@ -410,9 +429,10 @@ namespace CXXR
         }
 
     public: // private:
-        friend class WeakRef;
         friend class GCRootBase;
         friend class GCStackRootBase;
+        // friend class NodeStack;
+        friend class WeakRef;
         template <class T>
         friend class GCEdge;
 
@@ -521,6 +541,8 @@ namespace CXXR
 
         mutable const GCNode *m_next;
         mutable unsigned int m_gcgen;
+        mutable unsigned int m_refcnt;
+        mutable bool m_trackrefs;
         mutable bool m_marked;
         mutable bool m_aged; // true if the generation number
             // of this node has been changed (otherwise
@@ -557,6 +579,52 @@ namespace CXXR
 
         // Clean up static data at end of run:
         static void cleanup();
+
+        /** @brief Decrement the reference count.
+         */
+        static void decRefCount(const GCNode *node)
+        {
+            if (node)
+            {
+                if (node->m_refcnt > 0 && node->m_refcnt < REFCNTMAX)
+                    --(node->m_refcnt);
+            }
+        }
+
+        /** @brief Increment the reference count.
+         */
+        static void incRefCount(const GCNode *node)
+        {
+            if (node)
+            {
+                if (node->m_refcnt < REFCNTMAX)
+                    ++(node->m_refcnt);
+            }
+        }
+
+        unsigned int refcnt() const
+        {
+            return m_refcnt;
+        }
+
+        void setRefCnt(unsigned int v)
+        {
+            m_refcnt = v;
+        }
+
+        bool trackrefs() const
+        {
+            return m_trackrefs;
+        }
+
+        void setTrackrefs(bool on)
+        {
+#ifdef EXTRA_REFCNT_FIELDS
+            m_trackrefs = !on;
+#else
+            m_trackrefs = on;
+#endif
+        }
 
         /** @brief Initialize static members.
          *
@@ -631,6 +699,10 @@ extern "C"
      * is nullptr.
      */
     int MARK(SEXP x);
+    int REFCNT(SEXP x);
+    void SET_REFCNT(SEXP x, unsigned int v);
+    int TRACKREFS(SEXP x);
+    void SET_TRACKREFS(SEXP x, bool v);
 }
 
 #endif /* GCNODE_HPP */

@@ -95,7 +95,7 @@ union R_bndval_t
     do                                 \
     {                                  \
         if (BNDCELL_TAG(cell) == 0)    \
-            SETCAR(cell, nullptr);  \
+            SETCAR(cell, nullptr);     \
         SET_BNDCELL_TAG(cell, type);   \
         SET_MISSING(cell, 0);          \
     } while (0)
@@ -194,6 +194,8 @@ namespace CXXR
                 return;
 
             xfix_binding_refcnt(m_car, cr);
+            if (m_car && assignmentPending())
+                setAssignmentPending(false);
             m_car.retarget(cr);
             propagateAge(m_car);
         }

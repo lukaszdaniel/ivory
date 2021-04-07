@@ -43,7 +43,7 @@ namespace CXXR
     GCNode::AgedList *GCNode::s_aged_list;
 
     GCNode::GCNode(int)
-        : m_next(nullptr), m_gcgen(0), m_marked(false), m_aged(false)
+        : m_next(nullptr), m_gcgen(0), m_refcnt(0), m_trackrefs(true), m_marked(false), m_aged(false)
     {
         ++s_gencount[0];
         ++s_num_nodes;
@@ -395,4 +395,26 @@ void* GCNode::operator new(size_t bytes)
 int MARK(SEXP x)
 {
     return CXXR::GCNode::is_marked(static_cast<CXXR::GCNode *>(x));
+}
+
+int REFCNT(SEXP x)
+{
+    return x ? x->refcnt() : 0;
+}
+
+void SET_REFCNT(SEXP x, unsigned int v)
+{
+    if (x)
+        x->setRefCnt(v);
+}
+
+int TRACKREFS(SEXP x)
+{
+    return x ? x->trackrefs() : false;
+}
+
+void SET_TRACKREFS(SEXP x, bool v)
+{
+    if (x)
+        x->setTrackrefs(x->sexptype() == CLOSXP ? true : v);
 }

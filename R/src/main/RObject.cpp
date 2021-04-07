@@ -73,8 +73,6 @@ namespace CXXR
                                        m_trace(false), m_spare(false), m_named(0), m_extra(0), m_s4_object(stype == S4SXP),
                                        m_active_binding(false), m_binding_locked(false), m_assignment_pending(false), m_attrib(nullptr)
     {
-        setRefCnt(0);
-        setTrackrefs(true);
     }
 
     RObject::RObject(const RObject &pattern, bool deep)
@@ -375,28 +373,6 @@ int NAMED(SEXP x)
 int LEVELS(SEXP x)
 {
     return x ? x->packGPBits() : 0;
-}
-
-int REFCNT(SEXP x)
-{
-    return x ? x->refcnt() : 0;
-}
-
-void SET_REFCNT(SEXP x, unsigned int v)
-{
-    if (x)
-        x->setRefCnt(v);
-}
-
-int TRACKREFS(SEXP x)
-{
-    return x ? x->trackrefs() : false;
-}
-
-void SET_TRACKREFS(SEXP x, bool v)
-{
-    if (x)
-        x->setTrackrefs(v);
 }
 
 int IS_SCALAR(SEXP x, SEXPTYPE type)

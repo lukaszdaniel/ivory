@@ -1646,7 +1646,7 @@ namespace
 		}
 
 		// Virtual function of GCNode:
-		void visitChildren(const_visitor *v) const;
+		void visitChildren(const_visitor *v) const override;
 	};
 
 	void HandlerEntry::visitChildren(const_visitor *v) const

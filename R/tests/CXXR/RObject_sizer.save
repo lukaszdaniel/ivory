@@ -12,7 +12,7 @@ sizeof(R_xlen_t): 8
 sizeof(double): 8
 sizeof(RObject*): 8
 sizeof(ListVector*): 8
-sizeof(GCNode): 24
+sizeof(GCNode): 32
 sizeof(RObject): 48
 sizeof(VectorBase): 72
 sizeof(ConsCell): 80

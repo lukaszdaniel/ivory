@@ -37,23 +37,23 @@ namespace CXXR
 	class RObject;
 
 	/** @brief Directed edge in the graph whose nodes are GCNode objects.
-     *
-     * This class encapsulates a pointer from one GCNode to another,
-     * and carries out housekeeping required by the garbage collection
-     * scheme.  The class name reflects the fact that these objects
-     * represent directed edges in the directed graph with the GCNode
-     * objects as its nodes.
-     *
-     * Whenever an object of a type derived from GCNode needs to refer
-     * to another such object, it should do so by containing a GCEdge
-     * object, rather than by containing a pointer or reference
-     * directly.
-     *
-     * @tparam T GCNode or a type publicly derived from GCNode.  This
-     *          may be qualified by const, so for example a const
-     *          String* may be encapsulated in a GCEdge using the type
-     *          GCEdge<const String>.
-     */
+	 *
+	 * This class encapsulates a pointer from one GCNode to another,
+	 * and carries out housekeeping required by the garbage collection
+	 * scheme.  The class name reflects the fact that these objects
+	 * represent directed edges in the directed graph with the GCNode
+	 * objects as its nodes.
+	 *
+	 * Whenever an object of a type derived from GCNode needs to refer
+	 * to another such object, it should do so by containing a GCEdge
+	 * object, rather than by containing a pointer or reference
+	 * directly.
+	 *
+	 * @tparam T GCNode or a type publicly derived from GCNode.  This
+	 *          may be qualified by const, so for example a const
+	 *          String* may be encapsulated in a GCEdge using the type
+	 *          GCEdge<const String>.
+	 */
 	template <class T = RObject>
 	class GCEdge
 	{
@@ -109,7 +109,7 @@ namespace CXXR
 				m_target->conductVisitor(v);
 		}
 
-		/** Redirect the GCEdge to point at a (possibly) different node.
+		/** @brief Redirect the GCEdge to point at a (possibly) different node.
 		 *
 		 * @param from This \e must point to the GCNode object that
 		 *          contains this GCEdge object.
