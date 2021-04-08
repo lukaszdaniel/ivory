@@ -72,15 +72,11 @@ namespace CXXR
        */
       Closure(const Closure &pattern, bool deep)
           : FunctionBase(pattern, deep),
-            m_formals(pattern.m_formals), m_body(pattern.m_body),
-            m_environment(pattern.m_environment ? pattern.m_environment : Environment::global()), m_no_jit(pattern.m_no_jit), m_maybe_jit(pattern.m_maybe_jit)
+            m_no_jit(pattern.m_no_jit), m_maybe_jit(pattern.m_maybe_jit)
       {
-         if (m_formals)
-            const_cast<PairList *>(m_formals)->incrementRefCount();
-         if (m_body)
-            const_cast<RObject *>(m_body)->incrementRefCount();
-         if (m_environment)
-            m_environment->incrementRefCount();
+         m_formals = pattern.m_formals;
+         m_body = pattern.m_body;
+         m_environment = pattern.m_environment ? pattern.m_environment : Environment::global();
       }
 
       /** @brief Access the body of the Closure.
@@ -118,23 +114,20 @@ namespace CXXR
        */
       void setEnvironment(Environment *new_env)
       {
-         xfix_refcnt(m_environment, new_env);
          m_environment = new_env;
-         propagateAge(m_environment);
+         m_environment.propagateAge(this);
       }
 
       void setFormalArgs(PairList *formal_args)
       {
-         xfix_refcnt(const_cast<PairList *>(m_formals), formal_args);
          m_formals = formal_args;
-         propagateAge(m_formals);
+         m_formals.propagateAge(this);
       }
 
       void setBody(RObject *body)
       {
-         xfix_refcnt(const_cast<RObject *>(m_body), body);
          m_body = body;
-         propagateAge(m_body);
+         m_body.propagateAge(this);
       }
 
       bool noJIT() const
@@ -183,9 +176,9 @@ namespace CXXR
       void visitReferents(const_visitor *v) const override;
 
    private:
-      const PairList *m_formals;
-      const RObject *m_body;
-      Environment *m_environment;
+      GCEdge<const PairList> m_formals;
+      GCEdge<const RObject> m_body;
+      GCEdge<Environment> m_environment;
       bool m_no_jit;
       bool m_maybe_jit;
 

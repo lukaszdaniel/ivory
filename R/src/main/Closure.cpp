@@ -49,8 +49,7 @@ namespace CXXR
 
     Closure::Closure(const PairList *formal_args, const RObject *body,
                      Environment *env)
-        : FunctionBase(CLOSXP), m_formals(formal_args), m_body(body),
-          m_environment(env ? env : Environment::global()), m_no_jit(false), m_maybe_jit(false)
+        : FunctionBase(CLOSXP), m_no_jit(false), m_maybe_jit(false)
     {
         if (body)
         {
@@ -67,12 +66,10 @@ namespace CXXR
                 break;
             }
         }
-        if (m_formals)
-            const_cast<PairList *>(m_formals)->incrementRefCount();
-        if (m_body)
-            const_cast<RObject *>(m_body)->incrementRefCount();
-        if (m_environment)
-            m_environment->incrementRefCount();
+
+        m_formals = formal_args;
+        m_body = body;
+        m_environment = env ? env : Environment::global();
     }
 
     Closure *Closure::clone(bool deep) const

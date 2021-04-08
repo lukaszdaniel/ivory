@@ -158,9 +158,8 @@ namespace CXXR
          */
         void setInternalFunction(const BuiltInFunction *fun)
         {
-            xfix_refcnt(const_cast<BuiltInFunction *>(m_internalfunc), const_cast<BuiltInFunction *>(fun));
             m_internalfunc = fun;
-            propagateAge(m_internalfunc);
+            m_internalfunc.propagateAge(this);
         }
 
         /** @brief Set value.
@@ -171,11 +170,10 @@ namespace CXXR
          */
         void setValue(RObject *val)
         {
-            xfix_binding_refcnt(m_value, val);
             if (m_value && assignmentPending())
                 setAssignmentPending(false);
             m_value = val;
-            propagateAge(m_value);
+            m_value.propagateAge(this);
         }
 
         /** @brief Access value.
@@ -394,9 +392,9 @@ namespace CXXR
                                   // pointers to all Symbol objects in existence, other than
                                   // psuedo-symbols and deserialization temporaries, used to
                                   // protect them against garbage collection.
-        const CachedString *m_name;
-        RObject *m_value;
-        const BuiltInFunction *m_internalfunc;
+        GCEdge<const CachedString> m_name;
+        GCEdge<> m_value;
+        GCEdge<const BuiltInFunction> m_internalfunc;
         int m_dd_index : 31;
         bool m_base_symbol;
         bool m_special_symbol;

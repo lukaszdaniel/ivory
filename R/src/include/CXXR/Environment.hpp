@@ -76,13 +76,11 @@ namespace CXXR
        * checked.
        */
       explicit Environment(Environment *enclosing = nullptr, PairList *namevals = nullptr)
-          : RObject(ENVSXP), m_enclosing(enclosing), m_frame(namevals), m_hashtable(nullptr), m_single_stepping(false),
+          : RObject(ENVSXP), m_hashtable(nullptr), m_single_stepping(false),
             m_globally_cached(false), m_locked(false)
       {
-         if (m_enclosing)
-            m_enclosing->incrementRefCount();
-         if (m_frame)
-            m_frame->incrementRefCount();
+         m_enclosing = enclosing;
+         m_frame = namevals;
       }
 
       /** @brief Base environment.
@@ -185,9 +183,8 @@ namespace CXXR
        */
       void setEnclosingEnvironment(Environment *new_enclos)
       {
-         xfix_refcnt(m_enclosing, new_enclos);
          m_enclosing = new_enclos;
-         propagateAge(m_enclosing);
+         m_enclosing.propagateAge(this);
       }
 
       /** @brief Replace the frame.
@@ -199,9 +196,8 @@ namespace CXXR
        */
       void setFrame(PairList *new_frame)
       {
-         xfix_refcnt(m_frame, new_frame);
          m_frame = new_frame;
-         propagateAge(m_frame);
+         m_frame.propagateAge(this);
       }
 
       /** @brief Replace the hash table.
@@ -291,8 +287,8 @@ namespace CXXR
       static GCRoot<Environment> s_base_env;
       static GCRoot<Environment> s_global_env;
 
-      Environment *m_enclosing;
-      PairList *m_frame;
+      GCEdge<Environment> m_enclosing;
+      GCEdge<PairList> m_frame;
       ListVector *m_hashtable;
       bool m_single_stepping;
       bool m_globally_cached;

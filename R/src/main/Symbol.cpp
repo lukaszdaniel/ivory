@@ -77,8 +77,12 @@ namespace CXXR
     // Symbol::s_special_symbol_names is in names.cpp
 
     Symbol::Symbol(const CachedString *the_name)
-        : RObject(SYMSXP), m_name(the_name), m_value(unboundValue()), m_internalfunc(nullptr), m_dd_index(-1), m_base_symbol(false), m_special_symbol(false)
+        : RObject(SYMSXP), m_dd_index(-1), m_base_symbol(false), m_special_symbol(false)
     {
+        m_name = the_name;
+        m_value = unboundValue();
+        m_internalfunc = nullptr;
+
         // If this is a ..n symbol, extract the value of n.
         // boost::regex_match (libboost_regex1_36_0-1.36.0-9.5) doesn't
         // seem comfortable with empty strings, hence the size check.
@@ -98,10 +102,6 @@ namespace CXXR
                 m_dd_index = n;
             }
         }
-        if (m_value)
-            m_value->incrementRefCount();
-        if (m_internalfunc)
-            const_cast<BuiltInFunction *>(m_internalfunc)->incrementRefCount();
     }
 
     Symbol::~Symbol()

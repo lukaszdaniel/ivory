@@ -73,14 +73,12 @@ namespace CXXR
          * @param env Environment in which \a valgen is to be evaluated.
          */
         Promise(const RObject *valgen, Environment *env)
-            : RObject(PROMSXP), m_value(Symbol::unboundValue()),
-              m_valgen(valgen), m_environment(env), m_seen(false),
+            : RObject(PROMSXP), m_under_evaluation(false),
               m_interrupted(false)
         {
-            if (m_valgen)
-                const_cast<RObject *>(m_valgen)->incrementRefCount();
-            if (m_environment)
-                const_cast<Environment *>(m_environment)->incrementRefCount();
+            m_value = Symbol::unboundValue();
+            m_valgen = valgen;
+            m_environment = env;
         }
 
         /** @brief Access the environment of the Promise.
@@ -138,7 +136,7 @@ namespace CXXR
          */
         void markUnderEvaluation(bool on)
         {
-            m_seen = on;
+            m_under_evaluation = on;
         }
 
         /** @brief RObject to be evaluated by the Promise.
@@ -159,7 +157,7 @@ namespace CXXR
          *
          * @param val Value to be associated with the Promise.
          *
-         * @todo Should be private (or removed entirely), but current
+         * @todo Should be private (or removed entirely), but currently
          * still used in saveload.cpp.
          */
         void setValue(RObject *val);
@@ -182,7 +180,7 @@ namespace CXXR
          */
         bool underEvaluation() const
         {
-            return m_seen;
+            return m_under_evaluation;
         }
 
         /** @brief Access the value of a Promise.
@@ -205,10 +203,10 @@ namespace CXXR
         void visitReferents(const_visitor *v) const;
 
     private:
-        RObject *m_value;
-        const RObject *m_valgen;
-        Environment *m_environment;
-        bool m_seen;
+        GCEdge<> m_value;
+        GCEdge<const RObject> m_valgen;
+        GCEdge<Environment> m_environment;
+        bool m_under_evaluation;
         bool m_interrupted;
         // Declared private to ensure that Environment objects are
         // created only using 'new':

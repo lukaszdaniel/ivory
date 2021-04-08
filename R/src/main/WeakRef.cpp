@@ -65,22 +65,19 @@ namespace CXXR
 
 	WeakRef::WeakRef(RObject *key, RObject *value, RObject *R_finalizer,
 					 bool finalize_on_exit)
-		: RObject(WEAKREFSXP), m_key(key), m_value(value), m_Rfinalizer(R_finalizer), m_Cfinalizer(nullptr),
+		: RObject(WEAKREFSXP), m_Cfinalizer(nullptr),
 		  m_ready_to_finalize(false),
 		  m_finalize_on_exit(finalize_on_exit)
 	{
+		m_key = key;
+		m_value = value;
+		m_Rfinalizer = R_finalizer;
+
 		expose();
 		if (m_key)
 			m_key->expose();
 		else
 			tombstone();
-
-		if (m_key)
-		{
-			// Force old-to-new checks:
-			m_key->propagateAge(m_value);
-			m_key->propagateAge(m_Rfinalizer);
-		}
 
 		getLive()->push_back(this);
 		m_lit = std::prev(getLive()->end());
@@ -102,20 +99,18 @@ namespace CXXR
 
 	WeakRef::WeakRef(RObject *key, RObject *value, R_CFinalizer_t C_finalizer,
 					 bool finalize_on_exit)
-		: RObject(WEAKREFSXP), m_key(key), m_value(value), m_Rfinalizer(nullptr), m_Cfinalizer(C_finalizer),
+		: RObject(WEAKREFSXP), m_Cfinalizer(C_finalizer),
 		  m_ready_to_finalize(false), m_finalize_on_exit(finalize_on_exit)
 	{
+		m_key = key;
+		m_value = value;
+		m_Rfinalizer = nullptr;
+
 		expose();
 		if (m_key)
 			m_key->expose();
 		else
 			tombstone();
-
-		if (m_key)
-		{
-			// Force old-to-new check:
-			m_key->propagateAge(m_value);
-		}
 
 		getLive()->push_back(this);
 		m_lit = std::prev(getLive()->end());
