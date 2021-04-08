@@ -1096,38 +1096,54 @@ HIDDEN void R_check_thread(const char *s) {}
 #endif
 #endif
 
-HIDDEN SEXP do_memoryprofile(SEXP call, SEXP op, SEXP args, SEXP env)
+namespace CXXR
 {
-    int tmp;
-    constexpr int n = 24;
-    checkArity(op, args);
-    GCStackRoot<> ans(allocVector(INTSXP, n));
-    GCStackRoot<> nms(allocVector(STRSXP, n));
-    for (int i = 0; i < n; i++)
+    GCNode *GCNode::countObjects()
     {
-        INTEGER(ans)[i] = 0;
-        SET_STRING_ELT(nms, i, Rf_type2str(SEXPTYPE(i > LGLSXP ? i + 2 : i)));
-    }
-    setAttrib(ans, R_NamesSymbol, nms);
+        constexpr int n = 24;
+        int tmp;
+        GCStackRoot<> ans(IntVector::create(n));
 
-    BEGIN_SUSPEND_INTERRUPTS
-    {
-
-        for (unsigned int gen = 0; gen < GCNode::numGenerations(); ++gen)
+        for (int i = 0; i < n; i++)
         {
-            for (const GCNode *s = GCNode::s_generation[gen]; s; s = s->next())
+            INTEGER(ans)[i] = 0;
+        }
+
+        BEGIN_SUSPEND_INTERRUPTS
+        {
+            for (unsigned int gen = 0; gen < GCNode::numGenerations(); ++gen)
             {
-                if (const RObject *ob = SEXP_downcast<const RObject *>(s, false))
+                for (const GCNode *s = GCNode::s_generation[gen]; s; s = s->next())
                 {
-                    tmp = ob->sexptype();
-                    if (tmp > LGLSXP)
-                        tmp -= 2;
-                    INTEGER(ans)[tmp]++;
+                    if (const RObject *ob = SEXP_downcast<const RObject *>(s, false))
+                    {
+                        tmp = ob->sexptype();
+                        if (tmp > LGLSXP)
+                            tmp -= 2;
+                        INTEGER(ans)[tmp]++;
+                    }
                 }
             }
         }
+        END_SUSPEND_INTERRUPTS;
+        return ans;
     }
-    END_SUSPEND_INTERRUPTS;
+} // namespace CXXR
+
+HIDDEN SEXP do_memoryprofile(SEXP call, SEXP op, SEXP args, SEXP env)
+{
+    constexpr int n = 24;
+    checkArity(op, args);
+
+    GCStackRoot<> ans(SEXP_downcast<IntVector *>(GCNode::countObjects()));
+    GCStackRoot<> nms(Rf_allocVector(STRSXP, n));
+
+    for (int i = 0; i < n; i++)
+    {
+        SET_STRING_ELT(nms, i, Rf_type2str(SEXPTYPE(i > LGLSXP ? i + 2 : i)));
+    }
+    Rf_setAttrib(ans, R_NamesSymbol, nms);
+
     return ans;
 }
 

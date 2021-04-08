@@ -403,6 +403,53 @@ namespace CXXR
          */
         virtual void visitReferents(const_visitor *v) const {}
 
+        /** @brief Decrement the reference count.
+         */
+        static void decRefCount(const GCNode *node)
+        {
+            if (node)
+            {
+                if (node->m_refcnt > 0 && node->m_refcnt < REFCNTMAX)
+                    --(node->m_refcnt);
+            }
+        }
+
+        /** @brief Increment the reference count.
+         */
+        static void incRefCount(const GCNode *node)
+        {
+            if (node)
+            {
+                if (node->m_refcnt < REFCNTMAX)
+                    ++(node->m_refcnt);
+            }
+        }
+
+        unsigned int refcnt() const
+        {
+            return m_refcnt;
+        }
+
+        void setRefCnt(unsigned int v)
+        {
+            m_refcnt = v;
+        }
+
+        bool trackrefs() const
+        {
+            return m_trackrefs;
+        }
+
+        void setTrackrefs(bool on)
+        {
+#ifdef EXTRA_REFCNT_FIELDS
+            m_trackrefs = !on;
+#else
+            m_trackrefs = on;
+#endif
+        }
+
+        static GCNode *countObjects();
         static unsigned int gcgen(const GCNode *v);
         static void set_gcgen(const GCNode *v, unsigned int x);
         static const GCNode *next_node(const GCNode *s);
@@ -423,7 +470,7 @@ namespace CXXR
             --s_gencount[m_gcgen];
         }
 
-    public: // private:
+    private:
         friend class GCRootBase;
         friend class GCStackRootBase;
         // friend class NodeStack;
@@ -574,52 +621,6 @@ namespace CXXR
 
         // Clean up static data at end of run:
         static void cleanup();
-
-        /** @brief Decrement the reference count.
-         */
-        static void decRefCount(const GCNode *node)
-        {
-            if (node)
-            {
-                if (node->m_refcnt > 0 && node->m_refcnt < REFCNTMAX)
-                    --(node->m_refcnt);
-            }
-        }
-
-        /** @brief Increment the reference count.
-         */
-        static void incRefCount(const GCNode *node)
-        {
-            if (node)
-            {
-                if (node->m_refcnt < REFCNTMAX)
-                    ++(node->m_refcnt);
-            }
-        }
-
-        unsigned int refcnt() const
-        {
-            return m_refcnt;
-        }
-
-        void setRefCnt(unsigned int v)
-        {
-            m_refcnt = v;
-        }
-
-        bool trackrefs() const
-        {
-            return m_trackrefs;
-        }
-
-        void setTrackrefs(bool on)
-        {
-#ifdef EXTRA_REFCNT_FIELDS
-            m_trackrefs = !on;
-#else
-            m_trackrefs = on;
-#endif
-        }
 
         /** @brief Initialize static members.
          *
