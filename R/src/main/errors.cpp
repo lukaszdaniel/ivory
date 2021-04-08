@@ -1633,12 +1633,24 @@ namespace
 {
 	struct HandlerEntry : RObject
 	{
-		String *m_class;
-		Environment *m_parent_environment;
-		RObject *m_handler;
-		Environment *m_environment;
-		ListVector *m_result;
+		GCEdge<String> m_class;
+		GCEdge<Environment> m_parent_environment;
+		GCEdge<> m_handler;
+		GCEdge<Environment> m_environment;
+		GCEdge<ListVector> m_result;
 		bool m_calling;
+
+		HandlerEntry(String *the_class, Environment *parent_env,
+					 RObject *handler, Environment *environment,
+					 ListVector *result, bool calling)
+			: m_calling(calling)
+		{
+			m_class = the_class;
+			m_parent_environment = parent_env;
+			m_handler = handler;
+			m_environment = environment;
+			m_result = result;
+		}
 
 		static const char *staticTypeName()
 		{
@@ -1668,14 +1680,11 @@ namespace
 static SEXP mkHandlerEntry(SEXP klass, SEXP parentenv, SEXP handler, SEXP rho,
 						   SEXP result, int calling)
 {
-	HandlerEntry *entry = GCNode::expose(new HandlerEntry());
-	entry->m_class = SEXP_downcast<String *>(klass);
-	entry->m_parent_environment = SEXP_downcast<Environment *>(parentenv);
-	entry->m_handler = handler;
-	entry->m_environment = SEXP_downcast<Environment *>(rho);
-	entry->m_result = SEXP_downcast<ListVector *>(result);
-	entry->m_calling = (calling != 0);
-
+	HandlerEntry *entry = GCNode::expose(new HandlerEntry(SEXP_downcast<String *>(klass),
+														  SEXP_downcast<Environment *>(parentenv), handler,
+														  SEXP_downcast<Environment *>(rho),
+														  SEXP_downcast<ListVector *>(result),
+														  (calling != 0)));
 	return entry;
 }
 
@@ -1691,10 +1700,12 @@ namespace
 	{
 		return SEXP_downcast<HandlerEntry *>(e)->m_class;
 	}
+
 	// Environment *ENTRY_CALLING_ENVIR(SEXP e)
 	// {
 	// 	return SEXP_downcast<HandlerEntry *>(e)->m_parent_environment;
 	// }
+
 	RObject *ENTRY_HANDLER(SEXP e)
 	{
 		return SEXP_downcast<HandlerEntry *>(e)->m_handler;
@@ -1709,10 +1720,12 @@ namespace
 	{
 		return SEXP_downcast<HandlerEntry *>(e)->m_result;
 	}
+
 	void CLEAR_ENTRY_CALLING_ENVIR(SEXP e)
 	{
 		SEXP_downcast<HandlerEntry *>(e)->m_parent_environment = nullptr;
 	}
+
 	void CLEAR_ENTRY_TARGET_ENVIR(SEXP e)
 	{
 		SEXP_downcast<HandlerEntry *>(e)->m_environment = nullptr;

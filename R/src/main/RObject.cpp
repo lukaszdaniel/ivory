@@ -71,25 +71,23 @@ namespace CXXR
 
     RObject::RObject(SEXPTYPE stype) : GCNode(), m_type(stype), m_scalar(false), m_has_class(false), m_alt(false), /*m_gpbits(0),*/
                                        m_trace(false), m_spare(false), m_named(0), m_extra(0), m_s4_object(stype == S4SXP),
-                                       m_active_binding(false), m_binding_locked(false), m_assignment_pending(false), m_attrib(nullptr)
+                                       m_active_binding(false), m_binding_locked(false), m_assignment_pending(false)
     {
+        m_attrib = nullptr;
     }
 
     RObject::RObject(const RObject &pattern, bool deep)
         : GCNode(), m_type(pattern.m_type), m_scalar(pattern.m_scalar), m_has_class(pattern.m_has_class), m_alt(pattern.m_alt), /*m_gpbits(pattern.m_gpbits),*/
           m_trace(false), m_spare(false), m_named(0), m_extra(0), m_s4_object(pattern.m_s4_object),
           m_active_binding(false),
-          m_binding_locked(false), m_assignment_pending(false), m_attrib(clone(pattern.m_attrib, deep))
+          m_binding_locked(false), m_assignment_pending(false)
     {
-        if (m_attrib)
-            m_attrib->incrementRefCount();
+        m_attrib = clone(pattern.m_attrib.get(), deep);
     }
 
     void RObject::cloneAttributes(const RObject &source, bool deep)
     {
-        m_attrib = RObject::clone(source.m_attrib, deep);
-        if (m_attrib)
-            m_attrib->incrementRefCount();
+        m_attrib = RObject::clone(source.m_attrib.get(), deep);
         m_has_class = source.m_has_class;
     }
 
@@ -152,7 +150,6 @@ namespace CXXR
     {
         if (m_attrib)
         {
-            m_attrib->decrementRefCount();
             m_attrib = nullptr;
             m_has_class = false;
         }
@@ -224,9 +221,7 @@ namespace CXXR
             }
             else
             {
-                xfix_refcnt(m_attrib, node->tail());
                 m_attrib = node->tail();
-                propagateAge(m_attrib);
             }
         }
         else if (value)
@@ -244,9 +239,10 @@ namespace CXXR
                 prev->setTail(newnode);
             else
             { // No preexisting attributes at all:
-                xfix_refcnt(m_attrib, newnode);
                 m_attrib = newnode;
-                propagateAge(m_attrib);
+                // TODO: Such propagateAge is needed here because RObject might be in older
+                // generation than the newly created newnode (which is in gen. 1)
+                m_attrib.propagateAge(this);
             }
         }
         return value;
@@ -256,12 +252,14 @@ namespace CXXR
     // we assume n is very small.
     void RObject::setAttributes(PairList *new_attributes)
     {
-        xfix_refcnt(m_attrib, new_attributes);
 #if CXXR_TRUE // temporarily
         m_attrib = nullptr;
         m_has_class = false;
         m_attrib = new_attributes;
-        propagateAge(m_attrib);
+        // TODO: Such propagateAge is needed here because RObject might be in older
+        // generation than the newly assigned new_attributes
+        m_attrib.propagateAge(this);
+
         for (PairList *node = m_attrib; node; node = node->tail())
             if (node->tag() == R_ClassSymbol)
             {
@@ -305,10 +303,8 @@ namespace CXXR
         if (old == new_)
             return;
 
-        if (old)
-            old->decrementRefCount();
-        if (new_)
-            new_->incrementRefCount();
+        GCNode::decRefCount(old);
+        GCNode::incRefCount(new_);
     }
 
     void RObject::xfix_binding_refcnt(RObject *old, RObject *new_)
@@ -323,10 +319,9 @@ namespace CXXR
             if (assignmentPending())
                 setAssignmentPending(false);
             else
-                old->decrementRefCount();
+                GCNode::decRefCount(old);
         }
-        if (new_)
-            new_->incrementRefCount();
+        GCNode::incRefCount(new_);
     }
 } // namespace CXXR
 

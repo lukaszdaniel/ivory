@@ -54,6 +54,7 @@ namespace CXXR
 		S4Object()
 			: RObject(S4SXP)
 		{
+			m_tag = nullptr;
 			setS4Object(true);
 		}
 
@@ -92,9 +93,8 @@ namespace CXXR
          */
 		void setTag(RObject *tg)
 		{
-			xfix_refcnt(m_tag, tg);
 			m_tag = tg;
-			propagateAge(m_tag);
+			m_tag.propagateAge(this);
 		}
 
 		// Virtual function of GCNode:
@@ -114,7 +114,7 @@ namespace CXXR
 		const char *typeName() const override;
 
 	private:
-		RObject *m_tag;
+		GCEdge<> m_tag;
 		// Declared private to ensure that S4Objects are allocated
 		// only using 'new':
 		~S4Object() {}

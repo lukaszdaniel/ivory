@@ -41,6 +41,7 @@
 #include <CXXR/SEXPTYPE.hpp>
 #include <CXXR/RTypes.hpp>
 #include <CXXR/GCNode.hpp>
+#include <CXXR/GCEdge.hpp>
 #include <R_ext/Error.h>
 #include <R_ext/Complex.h>
 #include <R_ext/Boolean.h>
@@ -373,7 +374,7 @@ namespace CXXR
         bool m_active_binding : 1;
         bool m_binding_locked : 1;
         bool m_assignment_pending : 1;
-        PairList *m_attrib;
+        GCEdge<PairList> m_attrib;
 
     public:
         /** @brief Get object attributes.

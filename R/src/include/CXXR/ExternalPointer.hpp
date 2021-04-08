@@ -68,12 +68,10 @@ namespace CXXR
          */
         explicit ExternalPointer(void *ptr = nullptr, RObject *tag = nullptr,
                                  RObject *prot = nullptr)
-            : RObject(EXTPTRSXP), m_ptr(ptr), m_tag(tag), m_protege(prot)
+            : RObject(EXTPTRSXP), m_ptr(ptr)
         {
-            if (m_tag)
-                m_tag->incrementRefCount();
-            if (m_protege)
-                m_protege->incrementRefCount();
+            m_tag = tag;
+            m_protege = prot;
         }
 
         /** @brief Get const pointer to protege object.
@@ -121,9 +119,8 @@ namespace CXXR
          */
         void setProtege(RObject *prot)
         {
-            xfix_refcnt(m_protege, prot);
             m_protege = prot;
-            propagateAge(m_protege);
+            m_protege.propagateAge(this);
         }
 
         /** @brief Set the value of the encapsulated pointer
@@ -142,9 +139,8 @@ namespace CXXR
          */
         void setTag(RObject *tag)
         {
-            xfix_refcnt(m_tag, tag);
             m_tag = tag;
-            propagateAge(m_tag);
+            m_tag.propagateAge(this);
         }
 
         // Virtual function of RObject:
@@ -182,8 +178,8 @@ namespace CXXR
 
     private:
         void *m_ptr;
-        RObject *m_tag;
-        RObject *m_protege;
+        GCEdge<> m_tag;
+        GCEdge<> m_protege;
 
         // Declared private to ensure that ExternalPointer objects are
         // allocated only using 'new':

@@ -84,6 +84,48 @@ namespace CXXR
 		 */
 		GCEdge() : m_target(nullptr) {}
 
+		/** @brief Present the target (if any) of this GCEdge to a
+		 *  visitor.
+		 *
+		 * @param v Reference to the visitor object.
+		 */
+		void conductVisitor(GCNode::const_visitor *v) const
+		{
+			if (m_target)
+				m_target->conductVisitor(v);
+		}
+
+		/** @brief Copy constructor.
+		 *
+		 * @param source GCEdge to be copied.  The constructed GCEdge
+		 * will point to the same object (if any) as \a source.
+		 */
+		GCEdge(const GCEdge<T> &source) : m_target(source.m_target)
+		{
+			static_assert(sizeof(T) >= 0, "T must be a complete type");
+			GCNode::incRefCount(m_target);
+			if (get())
+				get()->propagateAge(m_target);
+		}
+
+		~GCEdge()
+		{
+			check_complete_type();
+			GCNode::decRefCount(m_target);
+		}
+
+		GCEdge<T> &operator=(const GCEdge<T> &source)
+		{
+			retarget(source);
+			return *this;
+		}
+
+		GCEdge<T> &operator=(T *newtarget)
+		{
+			retarget(newtarget);
+			return *this;
+		}
+
 		T *operator->() const { return get(); }
 
 		/** @brief Extract encapsulated pointer
@@ -98,38 +140,53 @@ namespace CXXR
 		 */
 		T *get() const { return m_target; }
 
-		/** @brief Present the target (if any) of this GCEdge to a
-		 *  visitor.
-		 *
-		 * @param v Reference to the visitor object.
-		 */
-		void conductVisitor(GCNode::const_visitor *v) const
+		void detach()
 		{
-			if (m_target)
-				m_target->conductVisitor(v);
+			check_complete_type();
+			GCNode::decRefCount(m_target);
+			m_target = nullptr;
 		}
 
-		/** @brief Redirect the GCEdge to point at a (possibly) different node.
+		/** @brief Propagate age to prevent old-to-new references.
 		 *
 		 * @param from This \e must point to the GCNode object that
 		 *          contains this GCEdge object.
 		 *
-		 * @param to Pointer to the object to which reference is now
-		 *           to be made.
+		 * @note To be removed in future.
 		 */
-		void retarget(GCNode *from, T *to)
+		void propagateAge(GCNode *from)
 		{
-			m_target = to;
-			// from->propagateAge(to);
+			from->propagateAge(m_target);
 		}
 
 	private:
 		T *m_target;
 
-		// Not implemented (yet).  Declared to prevent
-		// compiler-generated versions:
-		GCEdge(const GCEdge &);
-		GCEdge &operator=(const GCEdge &);
+		/** @brief Redirect the GCEdge to point at a (possibly) different node.
+		 *
+		 * @param newtarget Pointer to the object to which reference is now
+		 *           to be made.
+		 */
+		void retarget(T *newtarget)
+		{
+			check_complete_type();
+			if (m_target == newtarget)
+				return;
+			GCNode::incRefCount(newtarget);
+			T *oldtarget = m_target;
+			m_target = newtarget;
+			GCNode::decRefCount(oldtarget);
+			if (get())
+				get()->propagateAge(m_target);
+		}
+
+		// A GCEdge is a pointer, not an array.
+		T &operator[](size_t) const = delete;
+
+		static void check_complete_type()
+		{
+			static_assert(sizeof(T) >= 0, "T must be a complete type");
+		}
 	};
 } // namespace CXXR
 
