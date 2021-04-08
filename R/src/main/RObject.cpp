@@ -252,9 +252,8 @@ namespace CXXR
     // we assume n is very small.
     void RObject::setAttributes(PairList *new_attributes)
     {
+        clearAttributes();
 #if CXXR_TRUE // temporarily
-        m_attrib = nullptr;
-        m_has_class = false;
         m_attrib = new_attributes;
         // TODO: Such propagateAge is needed here because RObject might be in older
         // generation than the newly assigned new_attributes
@@ -270,10 +269,8 @@ namespace CXXR
         // TODO: Below code results in installation error for package "vctrs".
         // Error: Can't bind data because some elements are not named.
         // Error: unable to load R code in package ‘vctrs’
-
-        // clearAttributes();
-        m_attrib = nullptr;
-        m_has_class = false;
+        // This is because vctrs package modifies the attributes 
+        // after SET_ATTRIB has been called.
         while (new_attributes)
         {
             Symbol *name = SEXP_downcast<Symbol *>(new_attributes->tag());

@@ -1843,7 +1843,7 @@ inline static SEXP R_execClosure(SEXP call, SEXP newrho, SEXP sysparent,
 					if (R_ReturnedValue == R_RestartToken)
 					{
 						cntxt.setCallFlag(CTXT_RETURN); /* turn restart off */
-						R_ReturnedValue = R_NilValue;	/* remove restart token */
+						R_ReturnedValue = nullptr;	/* remove restart token */
 						cntxt.setReturnValue(eval(body, newrho));
 					}
 					else
@@ -1873,7 +1873,7 @@ inline static SEXP R_execClosure(SEXP call, SEXP newrho, SEXP sysparent,
     }
 
     /* clear R_ReturnedValue to allow GC to reclaim old value */
-    R_ReturnedValue = R_NilValue;
+    R_ReturnedValue = nullptr;
 
     return cntxt.getReturnValue();
 }

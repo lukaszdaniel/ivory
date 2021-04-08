@@ -1372,7 +1372,7 @@ HIDDEN SEXP do_browser(SEXP call, SEXP op, SEXP args, SEXP rho)
 	R_BrowseLines = 0;
     }
 
-    R_ReturnedValue = R_NilValue;
+    R_ReturnedValue = nullptr;
 
     /* Here we establish two contexts.  The first */
     /* of these provides a target for return */
@@ -1407,7 +1407,7 @@ HIDDEN SEXP do_browser(SEXP call, SEXP op, SEXP args, SEXP rho)
 						else
 						{
 							thiscontext.setRestartBitOn();
-							R_ReturnedValue = R_NilValue;
+							R_ReturnedValue = nullptr;
 							Evaluator::enableResultPrinting(false);
 							R_GlobalContext = &thiscontext;
 							RCNTXT::R_InsertRestartHandlers(&thiscontext, "browser");

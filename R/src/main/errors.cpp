@@ -199,7 +199,7 @@ static void onintrEx(Rboolean resumeOK)
 			else
 			{
 				SET_ENV_RDEBUG(rho, dbflag); /* in case browser() has messed with it */
-				R_ReturnedValue = R_NilValue;
+				R_ReturnedValue = nullptr;
 				Evaluator::enableResultPrinting(false);
 				restartcontext.end();
 				return;
