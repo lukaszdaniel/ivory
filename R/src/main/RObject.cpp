@@ -258,20 +258,18 @@ namespace CXXR
     {
         xfix_refcnt(m_attrib, new_attributes);
 #if CXXR_TRUE // temporarily
+        m_attrib = nullptr;
+        m_has_class = false;
         m_attrib = new_attributes;
-        while (new_attributes)
-        {
-            Symbol *name = SEXP_downcast<Symbol *>(new_attributes->tag());
-            if (name == R_ClassSymbol)
-            {
-                m_has_class = (new_attributes->car() != nullptr);
-                break;
-            }
-            new_attributes = new_attributes->tail();
-        }
         propagateAge(m_attrib);
+        for (PairList *node = m_attrib; node; node = node->tail())
+            if (node->tag() == R_ClassSymbol)
+            {
+                m_has_class = (node->car() != nullptr);
+                return;
+            }
 #else
-        // Below code results in installation error for package "vctrs".
+        // TODO: Below code results in installation error for package "vctrs".
         // Error: Can't bind data because some elements are not named.
         // Error: unable to load R code in package ‘vctrs’
 
