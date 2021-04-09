@@ -167,14 +167,13 @@ namespace CXXR
 
     inline void ConsCell::setTail(PairList *tl)
     {
-        xfix_refcnt(m_tail, tl);
 #ifdef TESTING_WRITE_BARRIER
         /* this should not add a non-tracking CDR to a tracking cell */
         if (trackrefs() && tl && !tl->trackrefs())
             Rf_error(_("inserting non-tracking CDR in tracking cell"));
 #endif
         m_tail = tl;
-        propagateAge(m_tail);
+        m_tail.propagateAge(this);
     }
 
     template <class T = PairList>

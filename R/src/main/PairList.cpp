@@ -65,8 +65,6 @@ namespace CXXR
         while (pl)
         {
             c->m_tail = new PairList(*pl, deep, 0);
-            if (c->m_tail)
-                c->m_tail->incrementRefCount();
             c = c->m_tail;
             pl = pl->m_tail;
         }

@@ -76,11 +76,7 @@ void *EXTPTR_PTR(SEXP x)
 SEXP R_MakeExternalPtr(void *p, SEXP tag, SEXP prot)
 {
     GCStackRoot<> tagr(tag);
-    if (tag)
-        tag->incrementRefCount();
     GCStackRoot<> protr(prot);
-    if (prot)
-        prot->incrementRefCount();
 
     return GCNode::expose(new ExternalPointer(p, tag, prot));
 }

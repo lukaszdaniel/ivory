@@ -32,6 +32,7 @@
 #define BYTECODE_HPP
 
 #include <CXXR/ConsCell.hpp>
+#include <CXXR/PairList.hpp>
 
 namespace CXXR
 {

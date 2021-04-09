@@ -63,37 +63,32 @@ namespace CXXR
     } // namespace ForceNonInline
 
     ConsCell::ConsCell(SEXPTYPE st, RObject *cr, PairList *tl, RObject *tg)
-        : RObject(st), m_car(cr), m_tail(tl), m_tag(tg), m_missing(0)
+        : RObject(st), m_car(cr), m_missing(0)
     {
         checkST(st);
+        m_tail = tl;
+        m_tag = tg;
         if (m_car)
             m_car->incrementRefCount();
-        if (m_tail)
-            m_tail->incrementRefCount();
-        if (m_tag)
-            m_tag->incrementRefCount();
     }
 
     ConsCell::ConsCell(const ConsCell &pattern, bool deep)
         : RObject(pattern, deep), m_car(pattern.m_car, deep),
-          m_tail(clone(pattern.tail(), deep)), m_tag(pattern.tag()), m_missing(0)
+          m_missing(0)
     {
+        m_tail = clone(pattern.tail(), deep);
+        m_tag = pattern.tag();
         if (m_car)
             m_car->incrementRefCount();
-        if (m_tag)
-            m_tag->incrementRefCount();
-        if (m_tail)
-            m_tail->incrementRefCount();
     }
 
     ConsCell::ConsCell(const ConsCell &pattern, bool deep, int)
-        : RObject(pattern, deep), m_car(pattern.m_car, deep), m_tail(nullptr),
-          m_tag(pattern.tag()), m_missing(0)
+        : RObject(pattern, deep), m_car(pattern.m_car, deep), m_missing(0)
     {
+        m_tail = nullptr;
+        m_tag = pattern.tag();
         if (m_car)
             m_car->incrementRefCount();
-        if (m_tag)
-            m_tag->incrementRefCount();
     }
 
     namespace

@@ -212,9 +212,8 @@ namespace CXXR
          */
         void setTag(RObject *tg)
         {
-            xfix_refcnt(m_tag, tg);
             m_tag = tg;
-            propagateAge(m_tag);
+            m_tag.propagateAge(this);
         }
 
         /** @brief Set the 'tail' value.
@@ -346,25 +345,11 @@ namespace CXXR
          */
         ~ConsCell() {}
 
-        /** @brief Set the 'tail' value during construction.
-         *
-         * This method should only be used during the construction of
-         * an object of a class derived from ConsCell, because it
-         * skips write-barrier checks.
-         *
-         * @param tl Pointer to the new tail list (or a null
-         *           pointer).
-         */
-        void constructTail(PairList *tl)
-        {
-            m_tail = tl;
-        }
-
     private:
         friend class PairList;
         Handle<> m_car;
-        PairList *m_tail;
-        RObject *m_tag;
+        GCEdge<PairList> m_tail;
+        GCEdge<> m_tag;
 
         // Not implemented yet.  Declared to prevent
         // compiler-generated version:
