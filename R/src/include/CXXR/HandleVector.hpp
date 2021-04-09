@@ -69,7 +69,7 @@ namespace CXXR
         class ElementProxy
         {
         public:
-            /** Copy the value of the proxied element from another
+            /** @brief Copy the value of the proxied element from another
              *  proxied element.
              *
              * @param rhs Proxied element whose value is to be copied.
@@ -84,7 +84,7 @@ namespace CXXR
                 return *this;
             }
 
-            /** Redirect the pointer encapsulated by the proxied element.
+            /** @brief Redirect the pointer encapsulated by the proxied element.
              *
              * @param s New pointer value.
              *

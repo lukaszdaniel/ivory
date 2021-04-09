@@ -381,12 +381,14 @@ extern "C"
 
 	/**
 	 * @param x \c const pointer to a CXXR::String.
+	 *
 	 * @return \c const pointer to character 0 of \a x.
 	 */
 	const char *R_CHAR(SEXP x);
 
 	/**
 	 * @param x Pointer to a CXXR::String.
+	 *
 	 * @return true iff \a x is marked as having LATIN1 encoding.
 	 */
 	int IS_LATIN1(SEXP x);

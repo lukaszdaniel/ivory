@@ -63,6 +63,7 @@ extern "C"
 {
     /**
      * @param s Pointer to a CXXR::RObject.
+     *
      * @return TRUE iff the CXXR::RObject pointed to by \a s is a logical vector.
      */
     Rboolean Rf_isLogical(SEXP s);
@@ -72,6 +73,7 @@ extern "C"
      *          R logical or integer vector).
      *          An error is generated if \a x is not pointer to a \c
      *          CXXR::LogicalVector or an CXXR::IntVector.
+     *
      * @return Pointer to element 0 of \a x.
      */
     int *LOGICAL(SEXP x);
@@ -81,6 +83,7 @@ extern "C"
      *          R logical or integer vector).
      *          An error is generated if \a x is not pointer to a \c
      *          CXXR::LogicalVector or an CXXR::IntVector.
+     *
      * @return Pointer to constant element 0 of \a x.
      */
     const int *LOGICAL_RO(SEXP x);

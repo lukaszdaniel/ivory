@@ -47,6 +47,7 @@ namespace CXXR
     using size_type = R_xlen_t;
     /**
      * @param stype The required ::SEXPTYPE.
+     *
      * @param sz The required number of elements in the vector.
      */
     VectorBase(SEXPTYPE stype, R_xlen_t sz)
@@ -210,6 +211,7 @@ extern "C"
 
   /**
    * @param x Pointer to a CXXR::VectorBase.
+   *
    * @return The 'true length' of \a x.  According to the R Internals
    *         document for R 2.4.1, this is only used for certain hash
    *         tables, and signifies the number of used slots in the
@@ -217,22 +219,23 @@ extern "C"
    */
   R_xlen_t(TRUELENGTH)(SEXP x);
 
-  /**
-   * Set length of vector.
+  /** @brief Set length of vector.
+   *
    * @param x Pointer to a CXXR::VectorBase.
+   *
    * @param v The required new length.
    */
   void SETLENGTH(SEXP x, R_xlen_t v);
 
-  /**
-   * Set 'true length' of vector.
+  /** @brief Set 'true length' of vector.
+   *
    * @param x Pointer to a CXXR::VectorBase.
+   *
    * @param v The required new 'true length'.
    */
   void SET_TRUELENGTH(SEXP x, R_xlen_t v);
 
-  /**
-   * @brief Create a vector object.
+  /** @brief Create a vector object.
    *
    *  Allocate a vector object.  This ensures only validity of
    *  ::SEXPTYPE values representing lists (as the elements must be
@@ -242,13 +245,14 @@ extern "C"
    *  with no custom allocator.
    *
    * @param stype The type of vector required.
+   *
    * @param length The length of the vector to be created.
+   *
    * @return Pointer to the created vector.
    */
   SEXP Rf_allocVector(SEXPTYPE type, R_xlen_t length);
 
-  /**
-   * @brief Create a vector object.
+  /** @brief Create a vector object.
    *
    *  Allocate a vector object.  This ensures only validity of
    *  ::SEXPTYPE values representing lists (as the elements must be
@@ -256,8 +260,11 @@ extern "C"
    *  do_makevector().
    *
    * @param stype The type of vector required.
+   *
    * @param length The length of the vector to be created.
+   *
    * @param length Custom allocator to be used.
+   *
    * @return Pointer to the created vector.
    */
   SEXP Rf_allocVector3(SEXPTYPE type, R_xlen_t length, R_allocator_t *allocator);
@@ -270,19 +277,19 @@ extern "C"
    *          mkNamed(VECSXP, nms);  =~= R  list(xi=, yi=, zi=)
    *
    * @param TYP a vector SEXP type (e.g. REALSXP)
+   *
    * @param names names of list elements with null string appended
    *
    * @return (pointer to a) named vector of type TYP
    */
   SEXP Rf_mkNamed(SEXPTYPE TYP, const char **names);
 
-  /**
-   * @brief shortcut for ScalarString(Rf_mkChar(s))
+  /** @brief shortcut for ScalarString(Rf_mkChar(s))
    *
    * @return string scalar
    *
    * @note from gram.y
- */
+   */
   SEXP Rf_mkString(const char *s);
 
   Rboolean Rf_isVectorList(SEXP s);
@@ -297,8 +304,7 @@ extern "C"
   void *DATAPTR(SEXP x);
   void *STDVEC_DATAPTR(SEXP x);
 
-  /**
-   * @brief The general (read only) data pointer function
+  /** @brief The general (read only) data pointer function
    *
    * Function works as a dispatcher between ALTREP
    * or STDVEC representation of data.

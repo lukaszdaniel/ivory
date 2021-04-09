@@ -181,7 +181,7 @@ namespace CXXR
 
 		void finalize();
 
-		/** Mark nodes reachable via weak references.
+		/** @brief Mark nodes reachable via weak references.
 		 *
 		 * This function implements the algorithm in Sec. 6.2 of the
 		 * Peyton-Jones et al. paper.  If a WeakRef has a marked key,

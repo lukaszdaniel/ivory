@@ -321,7 +321,7 @@ namespace CXXR
 		// here.
 		static void gcGenController(size_t bytes_wanted, bool full);
 
-		/** Choose how many generations to collect according to a rota.
+		/** @brief Choose how many generations to collect according to a rota.
 		 *
 		 * There are three levels of collections.  Level 0 collects only
 		 * the youngest generation, Level 1 collects the two youngest

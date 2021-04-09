@@ -118,6 +118,7 @@ extern "C"
 {
     /**
      * @param s Pointer to a CXXR::RObject.
+     *
      * @return TRUE iff the CXXR::RObject pointed to by \a s is a vector of strings.
      */
     Rboolean Rf_isString(SEXP s);
@@ -125,16 +126,20 @@ extern "C"
     /** @brief Set element of CXXR::StringVector.
      *
      * @param x Pointer to a CXXR::StringVector.
+     *
      * @param i Index of the required element.  There is no bounds checking.
+     *
      * @param v Pointer to CXXR::RObject representing the new value.
      */
     void SET_STRING_ELT(SEXP x, R_xlen_t i, SEXP v);
 
-    /**
-     * @brief Examine element of a CXXR::StringVector.
+    /** @brief Examine element of a CXXR::StringVector.
+     *
      * @param x Pointer to a CXXR::StringVector.  An error is raised if \a x
      *          is not a pointer to a StringVector.
+     *
      * @param i Index of the required element.  There is no bounds checking.
+     *
      * @return Pointer to extracted \a i 'th element.
      */
     SEXP STRING_ELT(SEXP x, R_xlen_t i);
@@ -155,16 +160,17 @@ extern "C"
     /**
      * @param x Pointer to a CXXR::StringVector; an error is raised if \a x
      *          is not a pointer to a CXXR::StringVector.
+     *
      * @return Constant pointer to the start of \a x 's data, interpreted (riskily)
      *         as an array of CXXR::String*.
+     *
      * @deprecated This function puts the integrity of the write barrier
      * at the mercy of callers.  It is deliberately not made visible
      * to C code.
      */
     const SEXP *STRING_PTR_RO(SEXP x);
 
-    /**
-     * @brief Obtaing index of a string vector
+    /** @brief Obtaing index of a string vector
      *
      * @return index of a given C string in (translated) R string vector
      */

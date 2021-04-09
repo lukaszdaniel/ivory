@@ -216,7 +216,9 @@ extern "C"
 	/**
 	 * Check that the C pointer protection stack has the expected size,
 	 * and print a warning if not.
+	 *
 	 * @param op Operation being performed.
+	 *
 	 * @param save The expected size of the pointer protection stack.
 	 *
 	 * @todo A warning seems too mild a response in this eventuality.

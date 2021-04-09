@@ -40,7 +40,7 @@ namespace CXXR
      */
     NORET void SEXP_downcast_error(const char *given, const char *wanted);
 
-    /** Down cast within the RObject class tree.
+    /** @brief Down cast within the RObject class tree.
      *
      * @tparam PtrOut Cast the pointer to type \a PtrOut, where \a
      *          PtrOut is a pointer or const pointer to RObject or a

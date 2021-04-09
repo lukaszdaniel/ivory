@@ -407,15 +407,16 @@ extern "C"
     /** @brief Get tag of CXXR::ConsCell.
      *
      * @param e Pointer to a CXXR::ConsCell (checked), or a null pointer.
+     *
      * @return Pointer to the tag of the list element, or 0 if \a e is
      * a null pointer.
      */
     SEXP TAG(SEXP e);
 
-    /**
-     * @brief Set the tag of a CXXR::ConsCell.
+    /** @brief Set the tag of a CXXR::ConsCell.
      *
      * @param x Pointer to a CXXR::ConsCell (checked).
+     *
      * @param y Pointer a CXXR::RObject representing the new tag of
      *          the CXXR::ConsCell.
      */

@@ -55,6 +55,7 @@ extern "C"
 {
     /**
      * @param s Pointer to an RObject.
+     *
      * @return TRUE iff the RObject pointed to by \a s is a complex vector.
      */
     Rboolean Rf_isComplex(SEXP s);
@@ -63,6 +64,7 @@ extern "C"
      * @param x Pointer to a CXXR::ComplexVector (i.e. an R complex vector).
      *          An error is generated if \a x is not pointer to a
      *          CXXR::ComplexVector.
+     *
      * @return Pointer to element 0 of \a x.
      */
     Rcomplex *COMPLEX(SEXP x);
@@ -71,6 +73,7 @@ extern "C"
      * @param x Pointer to a CXXR::ComplexVector (i.e. an R complex vector).
      *          An error is generated if \a x is not pointer to a
      *          CXXR::ComplexVector.
+     *
      * @return Pointer to constant element 0 of \a x.
      */
     const Rcomplex *COMPLEX_RO(SEXP x);

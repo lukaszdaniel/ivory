@@ -58,17 +58,17 @@
 namespace CXXR
 {
 	/** @brief Class to manage a pool of memory cells of a fixed size.
-     *
-     * This class manages a collection of memory cells of a
-     * specified size, and is intended as a back-end to implementations of
-     * operator new and operator delete to enable the allocation and
-     * deallocation of small objects quickly.  It differs from
-     * CellPool in that it always allocates the cell with the minimum
-     * address from among the currently available cells.  This is
-     * achieved using a skew heap data structure (Sleator and Tarjan
-     * 1986).  This data structure works most efficiently if cells are
-     * as far as possible released in the reverse order of allocation.
-     */
+	 *
+	 * This class manages a collection of memory cells of a
+	 * specified size, and is intended as a back-end to implementations of
+	 * operator new and operator delete to enable the allocation and
+	 * deallocation of small objects quickly.  It differs from
+	 * CellPool in that it always allocates the cell with the minimum
+	 * address from among the currently available cells.  This is
+	 * achieved using a skew heap data structure (Sleator and Tarjan
+	 * 1986).  This data structure works most efficiently if cells are
+	 * as far as possible released in the reverse order of allocation.
+	 */
 	class CellHeap
 	{
 	public:
@@ -109,7 +109,7 @@ namespace CXXR
 #endif
 		}
 
-		/** Destructor
+		/** @brief Destructor
 		 *
 		 * It is up to the user to check that any cells allocated from
 		 * the heap have been freed before this destructor is
@@ -119,8 +119,7 @@ namespace CXXR
 		 */
 		~CellHeap();
 
-		/**
-		 * @brief Allocate a cell from the heap.
+		/** @brief Allocate a cell from the heap.
 		 *
 		 * @return a pointer to the allocated cell.
 		 *

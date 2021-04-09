@@ -40,12 +40,12 @@
 namespace CXXR
 {
 	/** @brief S4 object.
-     *
-     * This class is used to implement S4 classes that do not extend
-     * objects of another R type, and corresponds to the ::SEXPTYPE
-     * S4SXP.
-     *
-     */
+	 *
+	 * This class is used to implement S4 classes that do not extend
+	 * objects of another R type, and corresponds to the ::SEXPTYPE
+	 * S4SXP.
+	 *
+	 */
 	class S4Object : public RObject
 	{
 	public:
@@ -70,27 +70,27 @@ namespace CXXR
 		}
 
 		/**
-         * @return a const pointer to the 'tag' of this S4Object
-         * element.
-         */
+		 * @return a const pointer to the 'tag' of this S4Object
+		 * element.
+		 */
 		const RObject *tag() const
 		{
 			return m_tag;
 		}
 
 		/**
-         * @return a pointer to the 'tag' of this S4Object.
-         */
+		 * @return a pointer to the 'tag' of this S4Object.
+		 */
 		RObject *tag()
 		{
 			return m_tag;
 		}
 
 		/** @brief Set the 'tag' value.
-         *
-         * @param tg Pointer to the new tag object (or a null
-         *           pointer).
-         */
+		 *
+		 * @param tg Pointer to the new tag object (or a null
+		 *           pointer).
+		 */
 		void setTag(RObject *tg)
 		{
 			m_tag = tg;
@@ -127,44 +127,46 @@ namespace CXXR
 extern "C"
 {
 	/** @brief Get tag of CXXR::S4Object.
-     *
-     * @param e Pointer to a CXXR::S4Object (checked), or a null pointer.
-     * @return Pointer to the tag of the list element, or 0 if \a e is
-     * a null pointer.
-     */
+	 *
+	 * @param e Pointer to a CXXR::S4Object (checked), or a null pointer.
+	 *
+	 * @return Pointer to the tag of the list element, or 0 if \a e is
+	 * a null pointer.
+	 */
 	SEXP S4TAG(SEXP e);
 
-	/**
-     * @brief Set the tag of a CXXR::S4Object.
-     *
-     * @param x Pointer to a CXXR::S4Object (checked).
-     * @param y Pointer a CXXR::RObject representing the new tag of
-     *          the CXXR::S4Object.
-     */
+	/** @brief Set the tag of a CXXR::S4Object.
+	 *
+	 * @param x Pointer to a CXXR::S4Object (checked).
+	 *
+	 * @param y Pointer a CXXR::RObject representing the new tag of
+	 *          the CXXR::S4Object.
+	 */
 	void SET_S4TAG(SEXP x, SEXP y);
 
 	/** @brief Is this an S4 object?
-     *
-     * @param x Pointer to \c RObject.
-     * @return true iff \a x is an S4 object.  Returns false if \a x
-     * is 0.
-     */
+	 *
+	 * @param x Pointer to \c RObject.
+	 *
+	 * @return true iff \a x is an S4 object.  Returns false if \a x
+	 * is 0.
+	 */
 	int IS_S4_OBJECT(SEXP x);
 
 	/**
-     * @deprecated Ought to be private.
-     */
+	 * @deprecated Ought to be private.
+	 */
 	void SET_S4_OBJECT(SEXP x);
 
 	/**
-     * @deprecated Ought to be private.
-     */
+	 * @deprecated Ought to be private.
+	 */
 	void UNSET_S4_OBJECT(SEXP x);
 
 	/** @brief Create an S4 object.
-     *
-     * @return Pointer to the created object.
-     */
+	 *
+	 * @return Pointer to the created object.
+	 */
 	SEXP Rf_allocS4Object();
 } // extern "C"
 

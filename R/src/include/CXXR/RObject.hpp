@@ -992,8 +992,7 @@ extern "C"
     SEXP R_FixupRHS(SEXP x, SEXP y);
     Rboolean Rf_isFrame(SEXP s);
 
-    /**
-     * @brief Check to see if the arrays "x" and "y" have the identical extents
+    /** @brief Check to see if the arrays "x" and "y" have the identical extents
      */
     Rboolean Rf_conformable(SEXP x, SEXP y);
 

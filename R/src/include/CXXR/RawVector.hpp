@@ -54,6 +54,7 @@ extern "C"
 {
     /**
      * @param s Pointer to an RObject.
+     *
      * @return TRUE iff the RObject pointed to by \a s is a raw vector.
      */
     Rboolean Rf_isRaw(SEXP s);
@@ -62,6 +63,7 @@ extern "C"
      * @param x Pointer to a CXXR::RawVector (i.e. a RAWSXP).
      *          An error is generated if \a x is not pointer to a
      *          CXXR::RawVector.
+     *
      * @return Pointer to element 0 of \a x.
      */
     Rbyte *RAW(SEXP x);
@@ -70,6 +72,7 @@ extern "C"
      * @param x Pointer to a CXXR::RawVector (i.e. a RAWSXP).
      *          An error is generated if \a x is not pointer to a
      *          CXXR::RawVector.
+     *
      * @return Pointer to constant element 0 of \a x.
      */
     const Rbyte *RAW_RO(SEXP x);

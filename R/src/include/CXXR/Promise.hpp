@@ -272,13 +272,16 @@ extern "C"
 
     /**
      * @param x Pointer to a CXXR::Promise.
+     *
      * @return ?
+     *
      * @deprecated Will need to be fixed.
      */
     int PRSEEN(SEXP x);
 
     /**
      * @param x Pointer to a CXXR::Promise.
+     *
      * @deprecated Will need to be fixed.
      */
     void SET_PRSEEN(SEXP x, int v);
@@ -286,8 +289,10 @@ extern "C"
     /** @brief Set the environment of a CXXR::Promise.
      *
      * @param x Pointer to a CXXR::Promise (checked).
+     *
      * @param v Pointer to the environment in which the expression is to
      *          be evaluated.
+     *
      * @todo Probably ought to be private or done in the constructor.
      */
     void SET_PRENV(SEXP x, SEXP v);

@@ -61,8 +61,10 @@ namespace CXXR
         /**
          * @param ptr The pointer that the ExternalPointer object is
          *          to encapsulate.
+         *
          * @param tag Pointer to the tag object.  May be null (and
-         *          often is). 
+         *          often is).
+         *
          * @param prot Pointer to the protege object.  May be null
          *          (and often is).
          */

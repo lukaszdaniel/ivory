@@ -204,6 +204,7 @@ extern "C"
     /** @brief Get car of CXXR::ConsCell.
      *
      * @param e Pointer to a CXXR::ConsCell (checked), or a null pointer.
+     *
      * @return Pointer to the value of the list car, or 0 if \a e is
      * a null pointer.
      */
@@ -211,6 +212,7 @@ extern "C"
 
     /**
      * @param e Pointer to a list.
+     *
      * @return Pointer to the value of the list head, or 0 if \a e is
      * a null pointer.
      */
@@ -219,69 +221,60 @@ extern "C"
     /** @brief Get tail of CXXR::ConsCell.
      *
      * @param e Pointer to a CXXR::ConsCell (checked), or a null pointer.
+     *
      * @return Pointer to the tail of the list, or 0 if \a e is
      * a null pointer.
      */
     SEXP CDR(SEXP e);
 
-    /**
-     * @brief Equivalent to CAR(CAR(e)).
+    /** @brief Equivalent to CAR(CAR(e)).
      */
     SEXP CAAR(SEXP e);
 
-    /**
-     * @brief Equivalent to CDR(CAR(e)).
+    /** @brief Equivalent to CDR(CAR(e)).
      */
     SEXP CDAR(SEXP e);
 
-    /**
-     * @brief Equivalent to CAR(CDR(e)).
+    /** @brief Equivalent to CAR(CDR(e)).
      */
     SEXP CADR(SEXP e);
 
-    /**
-     * @brief Equivalent to CDR(CDR(e)).
+    /** @brief Equivalent to CDR(CDR(e)).
      */
     SEXP CDDR(SEXP e);
 
-    /**
-     * @brief Equivalent to CDR(CDR(CDR(e))).
+    /** @brief Equivalent to CDR(CDR(CDR(e))).
      */
     SEXP CDDDR(SEXP e);
 
-    /**
-     * @brief Equivalent to CDR(CDR(CDR(CDR(e)))).
+    /** @brief Equivalent to CDR(CDR(CDR(CDR(e)))).
      */
     SEXP CD4R(SEXP e);
 
-    /**
-     * @brief Equivalent to CAR(CDR(CDR(e))).
+    /** @brief Equivalent to CAR(CDR(CDR(e))).
      */
     SEXP CADDR(SEXP e);
 
-    /**
-     * @brief Equivalent to CAR(CDR(CDR(CDR(e)))).
+    /** @brief Equivalent to CAR(CDR(CDR(CDR(e)))).
      */
     SEXP CADDDR(SEXP e);
 
-    /**
-     * @brief Equivalent to CAR(CDR(CDR(CDR(e)))).
+    /** @brief Equivalent to CAR(CDR(CDR(CDR(e)))).
      */
     SEXP CAD3R(SEXP e);
 
-    /**
-     * @brief Equivalent to CAR(CDR(CDR(CDR(CDR(e))))).
+    /** @brief Equivalent to CAR(CDR(CDR(CDR(CDR(e))))).
      */
     SEXP CAD4R(SEXP e);
 
-    /**
-     * @brief Equivalent to CAR(CDR(CDR(CDR(CDR(CDR(e)))))).
+    /** @brief Equivalent to CAR(CDR(CDR(CDR(CDR(CDR(e)))))).
      */
     SEXP CAD5R(SEXP e);
 
-    /**
-     * @brief Set the 'car' value of a CXXR::ConsCell.
+    /** @brief Set the 'car' value of a CXXR::ConsCell.
+     *
      * @param x Pointer to a CXXR::ConsCell (checked).
+     *
      * @param y Pointer a CXXR::RObject representing the new value of the
      *          list car.
      *
@@ -289,19 +282,21 @@ extern "C"
      */
     SEXP SETCAR(SEXP x, SEXP y);
 
-    /**
-     * @brief Replace the tail of a CXXR::ConsCell.
+    /** @brief Replace the tail of a CXXR::ConsCell.
+     *
      * @param x Pointer to a CXXR::ConsCell (checked).
+     *
      * @param y Pointer a CXXR::RObject representing the new tail of the list.
      *
      * @returns \a y.
      */
     SEXP SETCDR(SEXP x, SEXP y);
 
-    /**
-     * @brief Set the 'car' value of the second element of list.
+    /** @brief Set the 'car' value of the second element of list.
+     *
      * @param x Pointer to a CXXR::ConsCell with at least one successor
      *          (checked).
+     *
      * @param y Pointer a CXXR::RObject representing the new value of the
      *          second element of the list.
      *
@@ -309,10 +304,11 @@ extern "C"
      */
     SEXP SETCADR(SEXP x, SEXP y);
 
-    /**
-     * @brief Set the 'car' value of the third element of list.
+    /** @brief Set the 'car' value of the third element of list.
+     *
      * @param x Pointer to a CXXR::ConsCell with at least two
      *          successors (checked).
+     *
      * @param y Pointer a CXXR::RObject representing the new value of the
      *          third element of the list.
      *
@@ -320,10 +316,11 @@ extern "C"
      */
     SEXP SETCADDR(SEXP x, SEXP y);
 
-    /**
-     * @brief Set the 'car' value of the fourth element of list.
+    /** @brief Set the 'car' value of the fourth element of list.
+     *
      * @param x Pointer to a CXXR::ConsCell with at least three
      *          successors (checked).
+     *
      * @param y Pointer a CXXR::RObject representing the new value of the
      *          fourth element of the list.
      *
@@ -331,10 +328,11 @@ extern "C"
      */
     SEXP SETCADDDR(SEXP x, SEXP y);
 
-    /**
-     * @brief Set the 'car' value of the fifth element of list.
+    /** @brief Set the 'car' value of the fifth element of list.
+     *
      * @param x Pointer to a CXXR::ConsCell with at least four
      *          successors (checked).
+     *
      * @param y Pointer a CXXR::RObject representing the new value of the
      *          fifth element of the list.
      *
@@ -351,7 +349,7 @@ extern "C"
      *          function returns FALSE.  Otherwise \a b should point
      *          to a PairList object representing a Frame::Binding
      *          (e.g. because it was produced using
-     *          Frame::asPairList() ).
+     *          Frame::asPairList()).
      *
      * @return true iff this is an active Binding.
      */
@@ -361,7 +359,7 @@ extern "C"
      *
      * @param b Pointer to a PairList object (checked) representing a
      *          Frame::Binding (e.g. because it was produced using
-     *          Frame::asPairList() ).
+     *          Frame::asPairList()).
      *
      * @return true iff this Binding is locked.
      */
@@ -372,7 +370,7 @@ extern "C"
      *
      * @param b Pointer to a PairList object (checked) representing a
      *          Frame::Binding (e.g. because it was produced using
-     *          Frame::asPairList() ).
+     *          Frame::asPairList()).
      */
     void SET_ACTIVE_BINDING_BIT(SEXP b);
 
@@ -380,7 +378,7 @@ extern "C"
      *
      * @param b Pointer to a PairList object (checked) representing a
      *          Frame::Binding (e.g. because it was produced using
-     *          Frame::asPairList() ).
+     *          Frame::asPairList()).
      */
     void LOCK_BINDING(SEXP b);
 
@@ -388,7 +386,7 @@ extern "C"
      *
      * @param b Pointer to a PairList object (checked) representing a
      *          Frame::Binding (e.g. because it was produced using
-     *          Frame::asPairList() ).
+     *          Frame::asPairList()).
      */
     void UNLOCK_BINDING(SEXP b);
 
@@ -423,6 +421,7 @@ extern "C"
      * The (R) TAG slot on the cell is set to NULL.
      *
      * @param list SEXP object.
+     *
      * @param i i-th element of that object.
      *
      * @return i-th element.
@@ -431,8 +430,7 @@ extern "C"
      */
     SEXP Rf_elt(SEXP list, int i);
 
-    /**
-     * @brief Return the last element of a list
+    /** @brief Return the last element of a list
      */
     SEXP Rf_lastElt(SEXP list);
 
@@ -445,13 +443,13 @@ extern "C"
     SEXP Rf_list5(SEXP s, SEXP t, SEXP u, SEXP v, SEXP w);
     SEXP Rf_list6(SEXP s, SEXP t, SEXP u, SEXP v, SEXP w, SEXP x);
 
-    /**
-     * @brief Destructive list append
+    /** @brief Destructive list append
+     *
      * @note See also ``append''
      */
     SEXP Rf_listAppend(SEXP s, SEXP t);
-    /**
-     * @brief Check to see if a list can be made into a vector.
+
+    /** @brief Check to see if a list can be made into a vector.
      *
      * @note it must have every element being a vector of length 1.
      *       BUT it does not exclude 0!

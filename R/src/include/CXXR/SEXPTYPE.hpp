@@ -27,8 +27,7 @@
 #ifndef SEXPTYPE_HPP
 #define SEXPTYPE_HPP
 
-/**
- * @brief CR's object type identification.
+/** @brief CR's object type identification.
  *
  * @enum SEXPTYPE This enumeration is used within CR to identify different types
  * of R object.

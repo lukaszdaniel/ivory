@@ -53,10 +53,10 @@
 namespace CXXR
 {
 	/** @brief Class to manage memory allocation and deallocation for R.
-     *
-     * Small objects are quickly allocated from pools of various cell
-     * sizes; large objects are obtained directly from the main heap.
-     */
+	 *
+	 * Small objects are quickly allocated from pools of various cell
+	 * sizes; large objects are obtained directly from the main heap.
+	 */
 	class MemoryBank
 	{
 	public:
@@ -157,7 +157,7 @@ namespace CXXR
 		static void setGCCuer(size_t (*cue_gc)(size_t), size_t initial_threshold);
 
 #ifdef R_MEMORY_PROFILING
-		/** Set a callback to monitor allocations exceeding a threshold size.
+		/** @brief Set a callback to monitor allocations exceeding a threshold size.
 		 *
 		 * @param monitor This is a pointer to a function that this
 		 *          class will call when it allocates a block
@@ -210,15 +210,15 @@ namespace CXXR
 		friend class FixedVector;
 
 		/** @brief Adjust the freed block statistics.
-         *
-         * This should be used when the entire size of a freed block is not
-         * passed to the delete operator, causing inconsistent statistics for
-         * free counts.
-         *
-         * @param original The previously logged freed block size.
-         *
-         * @param actual The actual size of the freed block.
-         */
+		 *
+		 * This should be used when the entire size of a freed block is not
+		 * passed to the delete operator, causing inconsistent statistics for
+		 * free counts.
+		 *
+		 * @param original The previously logged freed block size.
+		 *
+		 * @param actual The actual size of the freed block.
+		 */
 		static void adjustFreedSize(size_t original, size_t actual);
 
 		static void adjustBytesAllocated(size_t bytes)

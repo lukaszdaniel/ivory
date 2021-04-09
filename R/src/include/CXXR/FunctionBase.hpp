@@ -135,8 +135,7 @@ extern "C"
      */
     int RDEBUG(SEXP x);
 
-    /**
-     * Set the debugging state of a CXXR::FunctionBase object.
+    /** @brief Set the debugging state of a CXXR::FunctionBase object.
      *
      * @param x Pointer a CXXR::FunctionBase object (checked).
      *

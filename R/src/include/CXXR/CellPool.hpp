@@ -37,51 +37,50 @@
 namespace CXXR
 {
 	/** @brief Class to manage a pool of memory cells of a fixed size.
-     *
-     * This class, based closely on Item 10 of Scott Meyers' 'Effective
-     * C++ (2nd edition)' manages a collection of memory cells of a
-     * specified size, and is intended as a back-end to implementations of
-     * operator new and operator delete to enable the allocation and
-     * deallocation of small objects quickly.
-     *
-     * Class CellPool operates a last-in-first-out allocation
-     * policy; that is to say, if there are cells that have been
-     * deallocated and not yet reallocated, the next one to be
-     * reallocated will be the one that was most recently
-     * deallocated.  This makes for efficient utilisation of the
-     * processor caches.
-     */
+	 *
+	 * This class, based closely on Item 10 of Scott Meyers' 'Effective
+	 * C++ (2nd edition)' manages a collection of memory cells of a
+	 * specified size, and is intended as a back-end to implementations of
+	 * operator new and operator delete to enable the allocation and
+	 * deallocation of small objects quickly.
+	 *
+	 * Class CellPool operates a last-in-first-out allocation
+	 * policy; that is to say, if there are cells that have been
+	 * deallocated and not yet reallocated, the next one to be
+	 * reallocated will be the one that was most recently
+	 * deallocated.  This makes for efficient utilisation of the
+	 * processor caches.
+	 */
 	class CellPool
 	{
 	public:
 		/** @brief Constructor.
-         *
-         * Note that CellPool objects must be initialized by calling
-         * initialize() before being used.
-         */
+		 *
+		 * Note that CellPool objects must be initialized by calling
+		 * initialize() before being used.
+		 */
 		CellPool()
 			: m_free_cells(nullptr),
 			  m_admin(nullptr)
 		{
 		}
 
-		/** Destructor
-         *
-         * It is up to the user to check that any cells allocated from
-         * the pool have been freed before this destructor is
-         * invoked.  (Although the destructor could check this for
-         * itself and issue an error message, this message would
-         * probably be a nuisance if it occurred during program shutdown.)
-         */
+		/** @brief Destructor
+		 *
+		 * It is up to the user to check that any cells allocated from
+		 * the pool have been freed before this destructor is
+		 * invoked.  (Although the destructor could check this for
+		 * itself and issue an error message, this message would
+		 * probably be a nuisance if it occurred during program shutdown.)
+		 */
 		~CellPool();
 
-		/**
-         * @brief Allocate a cell from the pool.
-         *
-         * @return a pointer to the allocated cell.
-         *
-         * @throws bad_alloc if a cell cannot be allocated.
-         */
+		/** @brief Allocate a cell from the pool.
+		 *
+		 * @return a pointer to the allocated cell.
+		 *
+		 * @throws bad_alloc if a cell cannot be allocated.
+		 */
 		void *allocate()
 		{
 			if (!m_free_cells)
@@ -92,41 +91,41 @@ namespace CXXR
 		}
 
 		/** @brief Size of cells.
-         *
-         * @return the size of each cell in bytes (well, strictly as a
-         * multiple of sizeof(char)).
-         */
+		 *
+		 * @return the size of each cell in bytes (well, strictly as a
+		 * multiple of sizeof(char)).
+		 */
 		size_t cellSize() const
 		{
 			return m_admin->m_cellsize;
 		}
 
 		/** @brief Number of cells allocated from this CellPool.
-         *
-         * @return the number of cells currently allocated from this
-         * pool.
-         */
+		 *
+		 * @return the number of cells currently allocated from this
+		 * pool.
+		 */
 		size_t cellsAllocated() const
 		{
 			return m_admin->cellsExisting() - cellsFree();
 		}
 
 		/** @brief Integrity check.
-         *
-         * Aborts the program with an error message if the object is
-         * found to be internally inconsistent.
-         *
-         * @return true, if it returns at all.  The return value is to
-         * facilitate use with \c assert .
-         */
+		 *
+		 * Aborts the program with an error message if the object is
+		 * found to be internally inconsistent.
+		 *
+		 * @return true, if it returns at all.  The return value is to
+		 * facilitate use with \c assert .
+		 */
 		bool check() const;
 
 		/** @brief Deallocate a cell
-         *
-         * @param p Pointer to a block of memory previously allocated
-         * from this pool, or a null pointer (in which case method
-         * does nothing).
-         */
+		 *
+		 * @param p Pointer to a block of memory previously allocated
+		 * from this pool, or a null pointer (in which case method
+		 * does nothing).
+		 */
 		void deallocate(void *p)
 		{
 			if (!p)
@@ -140,36 +139,36 @@ namespace CXXR
 		}
 
 		/** @brief Reorganise list of free cells within the CellPool.
-         *
-         * This is done with a view to increasing the probability that
-         * successive allocations will lie within the same cache line
-         * or (less importantly nowadays) memory page.
-         */
+		 *
+		 * This is done with a view to increasing the probability that
+		 * successive allocations will lie within the same cache line
+		 * or (less importantly nowadays) memory page.
+		 */
 		void defragment();
 
 		/** @brief Initialize the CellPool.
-         *
-         * This function must be called exactly once for each
-         * CellPool, before any allocation is made from it.
-         *
-         * @param dbls_per_cell (must be >= 1). Size of cells,
-         *         expressed as a multiple of sizeof(double).  For
-         *         example, if you require cells large enough to
-         *         contain one double, put dbls_per_cell as 1.  (NB:
-         *         cells can contain anything, not just doubles; we
-         *         work in doubles because these are likely to have
-         *         the most stringent address alignment requirements.)
-         *
-         * @param cells_per_superblock (must be >= 1).  Memory for cells is
-         *         obtained from the main heap in 'superblocks'
-         *         sufficient to contain this many cells.
-         */
+		 *
+		 * This function must be called exactly once for each
+		 * CellPool, before any allocation is made from it.
+		 *
+		 * @param dbls_per_cell (must be >= 1). Size of cells,
+		 *         expressed as a multiple of sizeof(double).  For
+		 *         example, if you require cells large enough to
+		 *         contain one double, put dbls_per_cell as 1.  (NB:
+		 *         cells can contain anything, not just doubles; we
+		 *         work in doubles because these are likely to have
+		 *         the most stringent address alignment requirements.)
+		 *
+		 * @param cells_per_superblock (must be >= 1).  Memory for cells is
+		 *         obtained from the main heap in 'superblocks'
+		 *         sufficient to contain this many cells.
+		 */
 		void initialize(size_t dbls_per_cell, size_t cells_per_superblock);
 
 		/**
-         * @return The size in bytes of the superblocks from which
-         *         cells are allocated.
-         */
+		 * @return The size in bytes of the superblocks from which
+		 *         cells are allocated.
+		 */
 		size_t superblockSize() const
 		{
 			return m_admin->m_superblocksize;

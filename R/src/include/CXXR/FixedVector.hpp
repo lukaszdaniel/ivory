@@ -297,16 +297,14 @@ namespace CXXR
 
 extern "C"
 {
-    /**
-     * @brief Is an object of numeric type.
+    /** @brief Is an object of numeric type.
      *
      * @todo the LGLSXP case should be excluded here
      *       (really? in many places we affirm they are treated like INTs)
      */
     Rboolean Rf_isNumeric(SEXP s);
 
-    /**
-     *  @brief Is an object "Numeric" or  complex
+    /** @brief Is an object "Numeric" or  complex
      */
     Rboolean Rf_isNumber(SEXP s);
 } // extern "C"

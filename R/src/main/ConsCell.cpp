@@ -27,8 +27,8 @@
  * @brief Class CXXR::ConsCell and associated C interface.
  */
 
-#include <CXXR/ConsCell.hpp>
 #include <iostream>
+#include <CXXR/ConsCell.hpp>
 #include <CXXR/ByteCode.hpp>
 #include <CXXR/DottedArgs.hpp>
 #include <CXXR/Expression.hpp>

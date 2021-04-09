@@ -24,6 +24,7 @@
 #ifndef JMPEXCEPTION_HPP
 #define JMPEXCEPTION_HPP
 
+#include <CXXR/GCRoot.hpp>
 #include <RContext.h>
 
 namespace CXXR
@@ -47,10 +48,14 @@ namespace CXXR
          * @param the_context Pointer to the context within which the
          *          exception is to be caught.  (catch blocks within
          *          other contexts should rethrow the exception.)
+         *
          * @param the_mask Context mask, or zero.
+         *
+         * @param the_value Pointer, possibly null, to the RObject to
+         *          be conveyed back to the target Context.
          */
-        JMPException(RContext *the_context = nullptr, int the_mask = 0)
-            : m_context(the_context), m_mask(the_mask)
+        JMPException(RContext *the_context = nullptr, int the_mask = 0, RObject *the_value = nullptr)
+            : m_context(the_context), m_mask(the_mask), m_value(the_value)
         {
         }
 
@@ -69,9 +74,20 @@ namespace CXXR
             return m_mask;
         }
 
+        /** @brief Payload of this JMPException.
+         *
+         * @return Pointer, possibly null, to the RObject conveyed to
+         * the target Context by this JMPException.
+         */
+        RObject *value() const
+        {
+            return m_value;
+        }
+
     private:
         RContext *m_context;
         int m_mask;
+        GCRoot<> m_value;
     };
 } // namespace CXXR
 

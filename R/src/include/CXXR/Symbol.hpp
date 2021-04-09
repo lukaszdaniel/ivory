@@ -493,7 +493,7 @@ extern "C"
      */
     Rboolean Rf_isSymbol(SEXP s);
 
-    /** Find value of a <tt>..<em>n</em></tt> Symbol.
+    /** @brief Find value of a <tt>..<em>n</em></tt> Symbol.
      *
      * @param symbol Pointer to a Symbol (checked) whose name is of
      *          the form <tt>..<em>n</em></tt>, where <em>n</em> is a

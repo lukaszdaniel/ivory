@@ -156,7 +156,36 @@ namespace CXXR
 		 */
 		void propagateAge(GCNode *from)
 		{
-			from->propagateAge(m_target);
+			if (from)
+				from->propagateAge(m_target);
+		}
+
+		/** @brief Redirect the GCEdge to point at a (possibly) different node.
+		 *
+		 * @param from This \e must point to the GCNode object that
+		 *          contains this GCEdge object.
+		 *
+		 * @param to Pointer to the object to which reference is now
+		 *           to be made.
+		 */
+		void retarget(GCNode *from, T *to)
+		{
+			retarget(to);
+			propagateAge(from);
+		}
+
+	protected:
+		/** @brief Designate the node to be pointed to by this GCEdge.
+		 *
+		 * This function is like retarget(), but skips age
+		 * propagation.  It should be used only in the constructors of
+		 * derived classes.
+		 *
+		 * @param to Pointer to the object to this GCEdge is to refer.
+		 */
+		void setTarget(T *to)
+		{
+			m_target = to;
 		}
 
 	private:
