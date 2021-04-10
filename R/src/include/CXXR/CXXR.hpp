@@ -53,6 +53,7 @@
 #include <CXXR/GCManager.hpp>
 #include <CXXR/GCRoot.hpp>
 #include <CXXR/GCStackRoot.hpp>
+#include <CXXR/NodeStack.hpp>
 
 // Various utilities
 #include <CXXR/SchwarzCounter.hpp>
@@ -130,7 +131,6 @@
 #include <CXXR/GCStackFrameBoundary.hpp>
 #include <CXXR/LoopBailout.hpp>
 #include <CXXR/LoopException.hpp>
-#include <CXXR/NodeStack.hpp>
 #include <CXXR/PlainContext.hpp>
 #include <CXXR/ProtectStack.hpp>
 #include <CXXR/Provenance.hpp>

@@ -473,7 +473,7 @@ namespace CXXR
     private:
         friend class GCRootBase;
         friend class GCStackRootBase;
-        // friend class NodeStack;
+        friend class NodeStack;
         friend class WeakRef;
         template <class T>
         friend class GCEdge;

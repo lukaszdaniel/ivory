@@ -104,8 +104,8 @@ namespace CXXR
 		{
 			static_assert(sizeof(T) >= 0, "T must be a complete type");
 			GCNode::incRefCount(m_target);
-			if (get())
-				get()->propagateAge(m_target);
+			if (m_target)
+				m_target->propagateAge(m_target);
 		}
 
 		~GCEdge()
@@ -185,6 +185,8 @@ namespace CXXR
 		 */
 		void setTarget(T *to)
 		{
+			GCNode::incRefCount(to);
+			GCNode::decRefCount(m_target);
 			m_target = to;
 		}
 
@@ -205,8 +207,8 @@ namespace CXXR
 			T *oldtarget = m_target;
 			m_target = newtarget;
 			GCNode::decRefCount(oldtarget);
-			if (get())
-				get()->propagateAge(m_target);
+			if (m_target)
+				m_target->propagateAge(m_target);
 		}
 
 		// A GCEdge is a pointer, not an array.
