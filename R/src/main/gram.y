@@ -205,7 +205,7 @@ static void	NextArg(SEXP, SEXP, SEXP); /* add named element to list end */
 static SEXP	TagArg(SEXP, SEXP, YYLTYPE *);
 static int 	processLineDirective(int *);
 
-static GCRoot<> R_PipeBindSymbol = NULL;
+static GCRoot<Symbol> R_PipeBindSymbol(nullptr);
 
 /* These routines allocate constants */
 
@@ -2479,6 +2479,12 @@ static int NumericValue(int c)
 		if (nd == 0) return ERROR;
 	    }
             if (seendot && !seenexp) return ERROR;
+	    if (c == 'L') /* for getParseData */
+	    {
+		// seenexp will be checked later
+		YYTEXT_PUSH(c, yyp);
+		break;
+	    }
 	    break;
 	}
 	if (c == 'E' || c == 'e') {

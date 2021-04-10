@@ -226,6 +226,12 @@
       \item Provide grouping of \code{x11()} graphics windows within
       a window manager such as \code{Gnome} or \code{Unity}; thanks to a
       patch by Ivan Krylov posted to R-devel.
+
+      \item The \code{split()} method for class \code{data.frame} now
+      allows the \code{f} argument to be specified as a formula.
+
+      \item \code{sprintf} now warns on arguments unused by the format
+      string.
     }
   }
 
@@ -362,6 +368,9 @@
 	\item There is experimental support for cross-building \R
 	packages with C, C++ and/or Fortran code.
       }
+
+      \item The R installer can now be optionally built to support a single
+      architecture (only 64-bit or only 32-bit).
     }
   }
 
@@ -486,6 +495,11 @@
       work with Unicode characters beyond the Basic Multilingual Plane
       where not supported by system functions (e.g. on Solaris where it
       is the new default).
+
+      \item R is more careful when truncating UTF-8 and other multi-byte
+      strings that are too long to be printed, passed to the system or
+      libraries or placed into an internal buffer.  Truncation will no
+      longer produce incomplete multibyte characters.
     }
   }
 
@@ -646,6 +660,20 @@
       options in an Rd file, had been ineffective since \R 2.12.0: it
       now works again.
       (Thanks to a report and patch by Sebastian Meyer in \PR{18073}.)
+
+      \item \code{mclapply} and \code{pvec} no longer accidentally terminate
+      parallel processes started before by \code{mcparallel} or related
+      calls in package \pkg{parallel} (\PR{18078}).
+
+      \item \code{grep} and other functions for evaluating (extended)
+      regular expressions handle in Unicode also strings not explicitly
+      flagged UTF-8, but flagged native when running in UTF-8 locale.
+
+      \item Fixed a crash in \code{fifo} implementation on Windows
+      (\PR{18031}).
+
+      \item Binary mode in \code{fifo} on Windows is now properly detected
+      from argument \code{open} (\PR{15600}, \PR{18031}).
     }
   }
 }
