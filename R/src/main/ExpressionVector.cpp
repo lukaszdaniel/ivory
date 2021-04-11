@@ -74,8 +74,7 @@ SEXP SET_XVECTOR_ELT(SEXP x, R_xlen_t i, SEXP v)
     }
     if (i < 0 || i >= XLENGTH(x))
         Rf_error(_("attempt to set index %ld/%ld in 'SET_XVECTOR_ELT()' function"), (long long)i, (long long)XLENGTH(x));
-    if (x)
-        x->xfix_refcnt(XVECTOR_ELT(x, i), v);
+
     // EXPRVECTOR_ELT(x, i) = v;
     ExpressionVector *ev = CXXR::SEXP_downcast<ExpressionVector *>(x, false);
     (*ev)[i] = v;

@@ -193,16 +193,17 @@ namespace CXXR
             if (m_car == cr)
                 return;
 
-            xfix_binding_refcnt(m_car, cr);
-            if (m_car && assignmentPending())
+            if (trackrefs() && m_car && m_car != cr && assignmentPending())
+            {
                 setAssignmentPending(false);
-            m_car.retarget(cr);
-            propagateAge(m_car);
+                GCNode::incRefCount(m_car);
+            }
+            m_car.retarget(this, cr);
         }
 
         void clearCar()
         {
-            m_car.retarget(nullptr);
+            m_car.clearCar();
         }
 
         /** @brief Set the 'tag' value.

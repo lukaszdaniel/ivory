@@ -63,13 +63,12 @@ namespace CXXR
     } // namespace ForceNonInline
 
     ConsCell::ConsCell(SEXPTYPE st, RObject *cr, PairList *tl, RObject *tg)
-        : RObject(st), m_car(cr), m_missing(0)
+        : RObject(st), m_missing(0)
     {
         checkST(st);
+        m_car.retarget(this, cr);
         m_tail = tl;
         m_tag = tg;
-        if (m_car)
-            m_car->incrementRefCount();
     }
 
     ConsCell::ConsCell(const ConsCell &pattern, bool deep)
@@ -78,8 +77,6 @@ namespace CXXR
     {
         m_tail = clone(pattern.tail(), deep);
         m_tag = pattern.tag();
-        if (m_car)
-            m_car->incrementRefCount();
     }
 
     ConsCell::ConsCell(const ConsCell &pattern, bool deep, int)
@@ -87,8 +84,6 @@ namespace CXXR
     {
         m_tail = nullptr;
         m_tag = pattern.tag();
-        if (m_car)
-            m_car->incrementRefCount();
     }
 
     namespace

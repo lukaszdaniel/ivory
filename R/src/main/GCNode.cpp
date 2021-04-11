@@ -418,3 +418,23 @@ void SET_TRACKREFS(SEXP x, bool v)
     if (x)
         x->setTrackrefs(x->sexptype() == CLOSXP ? true : v);
 }
+
+void DECREMENT_REFCNT(SEXP x)
+{
+    CXXR::GCNode::decRefCount(x);
+}
+
+void INCREMENT_REFCNT(SEXP x)
+{
+    CXXR::GCNode::incRefCount(x);
+}
+
+void DISABLE_REFCNT(SEXP x)
+{
+    SET_TRACKREFS(x, false);
+}
+
+void ENABLE_REFCNT(SEXP x)
+{
+    SET_TRACKREFS(x, true);
+}

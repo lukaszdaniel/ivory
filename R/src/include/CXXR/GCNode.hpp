@@ -407,7 +407,7 @@ namespace CXXR
          */
         static void decRefCount(const GCNode *node)
         {
-            if (node)
+            if (node && node->m_trackrefs)
             {
                 if (node->m_refcnt > 0 && node->m_refcnt < REFCNTMAX)
                     --(node->m_refcnt);
@@ -418,7 +418,7 @@ namespace CXXR
          */
         static void incRefCount(const GCNode *node)
         {
-            if (node)
+            if (node && node->m_trackrefs)
             {
                 if (node->m_refcnt < REFCNTMAX)
                     ++(node->m_refcnt);
@@ -699,6 +699,10 @@ extern "C"
     void SET_REFCNT(SEXP x, unsigned int v);
     int TRACKREFS(SEXP x);
     void SET_TRACKREFS(SEXP x, bool v);
+    void DECREMENT_REFCNT(SEXP x);
+    void INCREMENT_REFCNT(SEXP x);
+    void DISABLE_REFCNT(SEXP x);
+    void ENABLE_REFCNT(SEXP x);
 }
 
 #endif /* GCNODE_HPP */

@@ -340,9 +340,26 @@ namespace CXXR
              * new_target (if any) to the same generation as the node
              * incorporating the Handle object.
              */
-            void retarget(T *new_target)
+            void retarget(GCNode *from, T *new_target)
+            {
+                GCNode::incRefCount(new_target);
+                T *oldtarget = m_ptr;
+                m_ptr = new_target;
+                GCNode::decRefCount(oldtarget);
+                if (from)
+                    from->propagateAge(m_ptr);
+            }
+
+            void clearCar()
+            {
+                m_ptr = nullptr;
+            }
+
+            void setTarget(GCNode *from, T *new_target)
             {
                 m_ptr = new_target;
+                if (from)
+                    from->propagateAge(m_ptr);
             }
 
         private:
@@ -533,16 +550,6 @@ namespace CXXR
             m_alt = on;
         }
 
-        void incrementRefCount()
-        {
-            GCNode::incRefCount(this);
-        }
-
-        void decrementRefCount()
-        {
-            GCNode::decRefCount(this);
-        }
-
         bool isScalarOfType(SEXPTYPE type) const
         {
             return (m_type == type) && m_scalar;
@@ -723,7 +730,6 @@ namespace CXXR
         virtual RObject *evaluate(Environment *env);
 
         void xfix_refcnt(RObject *old, RObject *new_);
-        void xfix_binding_refcnt(RObject *old, RObject *new_);
 
         /** @brief The name by which this type is known in R.
          *
@@ -764,6 +770,7 @@ namespace CXXR
                     m_ptr = static_cast<T *>(t);
             }
         }
+        GCNode::incRefCount(m_ptr);
     }
 
     /* Vector Heap Structure */
@@ -1014,10 +1021,6 @@ extern "C"
     void SETALTREP(SEXP x, int v);
     int IS_SCALAR(SEXP x, SEXPTYPE type);
     int SIMPLE_SCALAR_TYPE(SEXP x);
-    void DECREMENT_REFCNT(SEXP x);
-    void INCREMENT_REFCNT(SEXP x);
-    void DISABLE_REFCNT(SEXP x);
-    void ENABLE_REFCNT(SEXP x);
     void SHALLOW_DUPLICATE_ATTRIB(SEXP to, SEXP from);
     int ASSIGNMENT_PENDING(SEXP x);
     void SET_ASSIGNMENT_PENDING(SEXP x, int v);

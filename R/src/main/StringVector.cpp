@@ -32,7 +32,8 @@
 #include <CXXR/StringVector.hpp>
 #include <CXXR/GCStackRoot.hpp>
 #include <Rinternals.h>
-#include <iostream>
+
+using namespace CXXR;
 
 namespace CXXR
 {
@@ -114,10 +115,9 @@ void SET_STRING_ELT(SEXP x, R_xlen_t i, SEXP v)
         ALTSTRING_SET_ELT(x, i, v);
     else
     {
-        SEXP *ps = CXXR::stdvec_dataptr<SEXP>(x);
-        if (x)
-            x->xfix_refcnt(ps[i], v);
-        ps[i] = v;
+        StringVector *sv = SEXP_downcast<StringVector *>(x);
+        String *el = SEXP_downcast<String *>(v);
+        (*sv)[i] = el;
     }
 }
 

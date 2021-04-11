@@ -170,8 +170,11 @@ namespace CXXR
          */
         void setValue(RObject *val)
         {
-            if (m_value && assignmentPending())
+            if (trackrefs() && m_value && m_value != val && assignmentPending())
+            {
                 setAssignmentPending(false);
+                GCNode::incRefCount(m_value);
+            }
             m_value = val;
             m_value.propagateAge(this);
         }

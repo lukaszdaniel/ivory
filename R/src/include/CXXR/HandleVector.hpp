@@ -78,9 +78,7 @@ namespace CXXR
              */
             ElementProxy &operator=(const ElementProxy &rhs)
             {
-                *m_it = *rhs.m_it;
-                if (rhs.m_ev != m_ev)
-                    m_ev->propagateAge(*m_it);
+                (*m_it).retarget(m_ev, *rhs.m_it);
                 return *this;
             }
 
@@ -92,8 +90,7 @@ namespace CXXR
              */
             ElementProxy &operator=(T *s)
             {
-                m_ev->propagateAge(s);
-                (*m_it).retarget(s);
+                (*m_it).retarget(m_ev, s);
                 return *this;
             }
 
@@ -131,15 +128,7 @@ namespace CXXR
          * @param init Initial value for the destination of each
          *          \a T* in the HandleVector.
          */
-        explicit HandleVector(R_xlen_t sz, Handle<T> init = Handle<T>())
-            : VectorBase(ST, sz), m_data(sz, init)
-        {
-            if (sz > R_xlen_t(R_SIZE_T_MAX / sizeof(RObject *)))
-                Rf_error(_("cannot allocate vector of length %d"), sz);
-#ifdef R_MEMORY_PROFILING
-            MemoryBank::R_ReportAllocation(convert2VEC<T>(sz) * sizeof(VECREC));
-#endif
-        }
+        explicit HandleVector(R_xlen_t sz, Handle<T> init = Handle<T>());
 
         /** @brief Copy constructor.
          *
@@ -161,8 +150,6 @@ namespace CXXR
             for (R_xlen_t i = 0; i < sz; ++i)
             {
                 (m_data[i]).clone(pattern.m_data[i], deep);
-                if (m_data[i])
-                    m_data[i]->incrementRefCount();
             }
         }
 
@@ -262,7 +249,8 @@ namespace CXXR
         ~HandleVector() {}
 
     private:
-        std::vector<Handle<T>, Allocator<Handle<T>>> m_data;
+        typedef std::vector<Handle<T>, Allocator<Handle<T>>> Vector;
+        Vector m_data;
 
         // Not implemented.  Declared to prevent
         // compiler-generated versions:
@@ -270,6 +258,23 @@ namespace CXXR
 
         friend class ElementProxy;
     };
+
+    template <typename T, SEXPTYPE ST>
+    HandleVector<T, ST>::HandleVector(R_xlen_t sz, Handle<T> init)
+        : VectorBase(ST, sz), m_data(sz)
+    {
+        if (sz > R_xlen_t(R_SIZE_T_MAX / sizeof(RObject *)))
+            Rf_error(_("cannot allocate vector of length %d"), sz);
+#ifdef R_MEMORY_PROFILING
+        MemoryBank::R_ReportAllocation(convert2VEC<T>(sz) * sizeof(VECREC));
+#endif
+        if (init)
+        {
+            for (typename Vector::iterator it = m_data.begin();
+                 it != m_data.end(); ++it)
+                (*it).retarget(this, init);
+        }
+    }
 
     template <typename T, SEXPTYPE ST>
     const char *HandleVector<T, ST>::typeName() const

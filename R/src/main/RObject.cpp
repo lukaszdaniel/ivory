@@ -303,23 +303,6 @@ namespace CXXR
         GCNode::decRefCount(old);
         GCNode::incRefCount(new_);
     }
-
-    void RObject::xfix_binding_refcnt(RObject *old, RObject *new_)
-    {
-        if (!trackrefs())
-            return;
-        if (old == new_)
-            return;
-
-        if (old)
-        {
-            if (assignmentPending())
-                setAssignmentPending(false);
-            else
-                GCNode::decRefCount(old);
-        }
-        GCNode::incRefCount(new_);
-    }
 } // namespace CXXR
 
 // ***** C interface *****
@@ -373,28 +356,6 @@ int IS_SCALAR(SEXP x, SEXPTYPE type)
 int SIMPLE_SCALAR_TYPE(SEXP x)
 {
     return (x && x->isScalar() && ATTRIB(x) == nullptr) ? x->sexptype() : 0;
-}
-
-void DECREMENT_REFCNT(SEXP x)
-{
-    if (x)
-        x->decrementRefCount();
-}
-
-void INCREMENT_REFCNT(SEXP x)
-{
-    if (x)
-        x->incrementRefCount();
-}
-
-void DISABLE_REFCNT(SEXP x)
-{
-    SET_TRACKREFS(x, false);
-}
-
-void ENABLE_REFCNT(SEXP x)
-{
-    SET_TRACKREFS(x, true);
 }
 
 void SET_ATTRIB(SEXP x, SEXP v)
