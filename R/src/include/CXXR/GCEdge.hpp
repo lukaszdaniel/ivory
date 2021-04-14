@@ -102,7 +102,7 @@ namespace CXXR
 		 */
 		GCEdge(const GCEdge<T> &source) : m_target(source.m_target)
 		{
-			static_assert(sizeof(T) >= 0, "T must be a complete type");
+			check_complete_type();
 			GCNode::incRefCount(m_target);
 			if (m_target)
 				m_target->propagateAge(m_target);
@@ -111,7 +111,9 @@ namespace CXXR
 		~GCEdge()
 		{
 			check_complete_type();
-			GCNode::decRefCount(m_target);
+			// TODO: Below code results in segfault during byte
+			// compilation for package 'utils'
+			// GCNode::decRefCount(m_target);
 		}
 
 		GCEdge<T> &operator=(const GCEdge<T> &source)
@@ -170,8 +172,22 @@ namespace CXXR
 		 */
 		void retarget(GCNode *from, T *to)
 		{
-			retarget(to);
+			// retarget(to);
+			check_complete_type();
+			if (m_target == to)
+				return;
+			if (from && from->trackrefs())
+				GCNode::incRefCount(to);
+			T *oldtarget = m_target;
+			m_target = to;
+			if (from && from->trackrefs())
+				GCNode::decRefCount(oldtarget);
 			propagateAge(from);
+		}
+
+		void clearCar()
+		{
+			m_target = nullptr;
 		}
 
 	protected:
@@ -186,8 +202,9 @@ namespace CXXR
 		void setTarget(T *to)
 		{
 			GCNode::incRefCount(to);
-			GCNode::decRefCount(m_target);
+			T *oldtarget = m_target;
 			m_target = to;
+			GCNode::decRefCount(oldtarget);
 		}
 
 	private:

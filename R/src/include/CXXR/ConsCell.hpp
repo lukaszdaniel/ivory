@@ -213,8 +213,9 @@ namespace CXXR
          */
         void setTag(RObject *tg)
         {
-            m_tag = tg;
-            m_tag.propagateAge(this);
+            // m_tag = tg;
+            // m_tag.propagateAge(this);
+            m_tag.retarget(this, tg);
         }
 
         /** @brief Set the 'tail' value.

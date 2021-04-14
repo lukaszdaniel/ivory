@@ -121,8 +121,9 @@ namespace CXXR
          */
         void setProtege(RObject *prot)
         {
-            m_protege = prot;
-            m_protege.propagateAge(this);
+            // m_protege = prot;
+            // m_protege.propagateAge(this);
+            m_protege.retarget(this, prot);
         }
 
         /** @brief Set the value of the encapsulated pointer
@@ -141,8 +142,9 @@ namespace CXXR
          */
         void setTag(RObject *tag)
         {
-            m_tag = tag;
-            m_tag.propagateAge(this);
+            // m_tag = tag;
+            // m_tag.propagateAge(this);
+            m_tag.retarget(this, tag);
         }
 
         // Virtual function of RObject:

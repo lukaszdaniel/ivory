@@ -76,9 +76,10 @@ namespace CXXR
        * checked.
        */
       explicit Environment(Environment *enclosing = nullptr, PairList *namevals = nullptr)
-          : RObject(ENVSXP), m_hashtable(nullptr), m_single_stepping(false),
+          : RObject(ENVSXP), m_single_stepping(false),
             m_globally_cached(false), m_locked(false)
       {
+         m_hashtable = nullptr;
          m_enclosing = enclosing;
          m_frame = namevals;
       }
@@ -183,8 +184,9 @@ namespace CXXR
        */
       void setEnclosingEnvironment(Environment *new_enclos)
       {
-         m_enclosing = new_enclos;
-         m_enclosing.propagateAge(this);
+         // m_enclosing = new_enclos;
+         // m_enclosing.propagateAge(this);
+         m_enclosing.retarget(this, new_enclos);
       }
 
       /** @brief Replace the frame.
@@ -196,8 +198,9 @@ namespace CXXR
        */
       void setFrame(PairList *new_frame)
       {
-         m_frame = new_frame;
-         m_frame.propagateAge(this);
+         // m_frame = new_frame;
+         // m_frame.propagateAge(this);
+         m_frame.retarget(this, new_frame);
       }
 
       /** @brief Replace the hash table.
@@ -209,9 +212,9 @@ namespace CXXR
        */
       void setHashTable(ListVector *new_hash_table)
       {
-         xfix_refcnt(m_hashtable, new_hash_table);
-         m_hashtable = new_hash_table;
-         propagateAge(m_hashtable);
+         // m_hashtable = new_hash_table;
+         // m_hashtable.propagateAge(this);
+         m_hashtable.retarget(this, new_hash_table);
       }
 
       /** @brief Set the frame's status as globally cached.
@@ -289,7 +292,7 @@ namespace CXXR
 
       GCEdge<Environment> m_enclosing;
       GCEdge<PairList> m_frame;
-      ListVector *m_hashtable;
+      GCEdge<ListVector> m_hashtable;
       bool m_single_stepping;
       bool m_globally_cached;
       bool m_locked;

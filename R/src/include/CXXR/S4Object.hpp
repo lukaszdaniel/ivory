@@ -93,8 +93,9 @@ namespace CXXR
 		 */
 		void setTag(RObject *tg)
 		{
-			m_tag = tg;
-			m_tag.propagateAge(this);
+			// m_tag = tg;
+			// m_tag.propagateAge(this);
+			m_tag.retarget(this, tg);
 		}
 
 		// Virtual function of GCNode:

@@ -54,22 +54,25 @@ namespace CXXR
 
     void Promise::setValue(RObject *val)
     {
-        m_value = val;
-        m_value.propagateAge(this);
+        // m_value = val;
+        // m_value.propagateAge(this);
+        m_value.retarget(this, val);
         if (val != Symbol::unboundValue())
             m_environment = nullptr;
     }
 
     void Promise::setEnvironment(Environment *val)
     {
-        m_environment = val;
-        m_environment.propagateAge(this);
+        // m_environment = val;
+        // m_environment.propagateAge(this);
+        m_environment.retarget(this, val);
     }
 
     void Promise::setValueGenerator(RObject *val)
     {
-        m_valgen = val;
-        m_valgen.propagateAge(this);
+        // m_valgen = val;
+        // m_valgen.propagateAge(this);
+        m_valgen.retarget(this, val);
     }
 
     const char *Promise::typeName() const

@@ -33,7 +33,7 @@ Error in command 'quint(break)': no loop for break/next, jumping to top level
 > 
 > system.time(for (i in 1:1e9) break)
    user  system elapsed 
-  0.014   0.000   0.014 
+  0.016   0.000   0.016 
 > 
 > tools::assertError(y <- x + 1L)
 > 
@@ -41,18 +41,18 @@ Error in command 'quint(break)': no loop for break/next, jumping to top level
 > y <- x + rnorm(1e5)
 > system.time(lm(y ~ x))
    user  system elapsed 
-  0.542   0.007   0.550 
+  0.569   0.000   0.570 
 > 
 > x <- structure(numeric(1e9), class = "foo")
 > system.time(base::unclass(x))
    user  system elapsed 
       0       0       0 
 > 
->  
+> 
 > x <- rnorm(1e7)
 > system.time(y <- sort(x))
    user  system elapsed 
-  4.889   0.065   4.954 
+  5.198   0.060   5.260 
 > system.time(sort(y))
    user  system elapsed 
       0       0       0 
@@ -84,4 +84,20 @@ Error in command 'quint(break)': no loop for break/next, jumping to top level
 > tail(x)
 [1] 1e+12 1e+12 1e+12 1e+12 1e+12 1e+12
 > 
+> ## Reference counting
+> 
+> m <- matrix(1:4, 2)
+> eval(compiler::compile(quote(m[1,1])))
+[1] 1
+> .Internal(named(m))
+[1] 1
+> .Internal(refcnt(m))
+[1] 1
+> stopifnot(max(.Internal(named(m)), .Internal(refcnt(m))) == 1)
+> x <- 1:10
+> .Internal(refcnt(x))
+[1] 65535
+> .Internal(named(x))
+[1] 65535
+> stopifnot(max(.Internal(named(x)), .Internal(refcnt(x))) == 65535)
 > 

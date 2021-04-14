@@ -114,20 +114,23 @@ namespace CXXR
        */
       void setEnvironment(Environment *new_env)
       {
-         m_environment = new_env;
-         m_environment.propagateAge(this);
+         // m_environment = new_env;
+         // m_environment.propagateAge(this);
+         m_environment.retarget(this, new_env);
       }
 
       void setFormalArgs(PairList *formal_args)
       {
-         m_formals = formal_args;
-         m_formals.propagateAge(this);
+         // m_formals = formal_args;
+         // m_formals.propagateAge(this);
+         m_formals.retarget(this, formal_args);
       }
 
       void setBody(RObject *body)
       {
-         m_body = body;
-         m_body.propagateAge(this);
+         // m_body = body;
+         // m_body.propagateAge(this);
+         m_body.retarget(this, body);
       }
 
       bool noJIT() const

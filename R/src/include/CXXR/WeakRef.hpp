@@ -34,7 +34,7 @@
 #include <list>
 #include <CXXR/RObject.hpp>
 #include <CXXR/Allocator.hpp>
-// #include <CXXR/GCEdge.hpp>
+#include <CXXR/GCEdge.hpp>
 #include <R_ext/Boolean.h>
 #include <Rinternals.h>
 

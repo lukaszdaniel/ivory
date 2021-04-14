@@ -172,8 +172,9 @@ namespace CXXR
         if (trackrefs() && tl && !tl->trackrefs())
             Rf_error(_("inserting non-tracking CDR in tracking cell"));
 #endif
-        m_tail = tl;
-        m_tail.propagateAge(this);
+        // m_tail = tl;
+        // m_tail.propagateAge(this);
+        m_tail.retarget(this, tl);
     }
 
     template <class T = PairList>

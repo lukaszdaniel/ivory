@@ -158,8 +158,9 @@ namespace CXXR
          */
         void setInternalFunction(const BuiltInFunction *fun)
         {
-            m_internalfunc = fun;
-            m_internalfunc.propagateAge(this);
+            // m_internalfunc = fun;
+            // m_internalfunc.propagateAge(this);
+            m_internalfunc.retarget(this, fun);
         }
 
         /** @brief Set value.
@@ -175,8 +176,9 @@ namespace CXXR
                 setAssignmentPending(false);
                 GCNode::incRefCount(m_value);
             }
-            m_value = val;
-            m_value.propagateAge(this);
+            // m_value = val;
+            // m_value.propagateAge(this);
+            m_value.retarget(this, val);
         }
 
         /** @brief Access value.

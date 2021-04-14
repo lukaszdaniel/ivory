@@ -239,10 +239,11 @@ namespace CXXR
                 prev->setTail(newnode);
             else
             { // No preexisting attributes at all:
-                m_attrib = newnode;
+                // m_attrib = newnode;
                 // TODO: Such propagateAge is needed here because RObject might be in older
                 // generation than the newly created newnode (which is in gen. 1)
-                m_attrib.propagateAge(this);
+                // m_attrib.propagateAge(this);
+                m_attrib.retarget(this, newnode);
             }
         }
         return value;
@@ -254,10 +255,11 @@ namespace CXXR
     {
         clearAttributes();
 #if CXXR_TRUE // temporarily
-        m_attrib = new_attributes;
+        // m_attrib = new_attributes;
         // TODO: Such propagateAge is needed here because RObject might be in older
         // generation than the newly assigned new_attributes
-        m_attrib.propagateAge(this);
+        // m_attrib.propagateAge(this);
+        m_attrib.retarget(this, new_attributes);
 
         for (PairList *node = m_attrib; node; node = node->tail())
             if (node->tag() == R_ClassSymbol)
@@ -269,7 +271,7 @@ namespace CXXR
         // TODO: Below code results in installation error for package "vctrs".
         // Error: Can't bind data because some elements are not named.
         // Error: unable to load R code in package ‘vctrs’
-        // This is because vctrs package modifies the attributes 
+        // This is because vctrs package modifies the attributes
         // after SET_ATTRIB has been called.
         while (new_attributes)
         {
@@ -291,17 +293,6 @@ namespace CXXR
         }
         // m_gpbits |= BINDING_LOCK_MASK;
         m_binding_locked = true;
-    }
-
-    void RObject::xfix_refcnt(RObject *old, RObject *new_)
-    {
-        if (!trackrefs())
-            return;
-        if (old == new_)
-            return;
-
-        GCNode::decRefCount(old);
-        GCNode::incRefCount(new_);
     }
 } // namespace CXXR
 

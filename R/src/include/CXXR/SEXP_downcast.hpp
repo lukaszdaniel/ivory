@@ -29,8 +29,8 @@
 #ifndef SEXP_DOWNCAST_HPP
 #define SEXP_DOWNCAST_HPP
 
-#include <R_ext/Error.h> // For NORET
 #include <type_traits>
+#include <R_ext/Error.h> // For NORET
 
 namespace CXXR
 {

@@ -56,3 +56,14 @@ set.seed(17)
 sample(x, 10)
 tail(x)
 
+## Reference counting
+
+m <- matrix(1:4, 2)
+eval(compiler::compile(quote(m[1,1])))
+.Internal(named(m))
+.Internal(refcnt(m))
+stopifnot(max(.Internal(named(m)), .Internal(refcnt(m))) == 1)
+x <- 1:10
+.Internal(refcnt(x))
+.Internal(named(x))
+stopifnot(max(.Internal(named(x)), .Internal(refcnt(x))) == 65535)

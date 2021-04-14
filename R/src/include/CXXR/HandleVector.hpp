@@ -128,7 +128,7 @@ namespace CXXR
          * @param init Initial value for the destination of each
          *          \a T* in the HandleVector.
          */
-        explicit HandleVector(R_xlen_t sz, Handle<T> init = Handle<T>());
+        explicit HandleVector(R_xlen_t sz, T *init = nullptr);
 
         /** @brief Copy constructor.
          *
@@ -260,7 +260,7 @@ namespace CXXR
     };
 
     template <typename T, SEXPTYPE ST>
-    HandleVector<T, ST>::HandleVector(R_xlen_t sz, Handle<T> init)
+    HandleVector<T, ST>::HandleVector(R_xlen_t sz, T *init)
         : VectorBase(ST, sz), m_data(sz)
     {
         if (sz > R_xlen_t(R_SIZE_T_MAX / sizeof(RObject *)))

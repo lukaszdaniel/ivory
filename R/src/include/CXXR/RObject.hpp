@@ -239,7 +239,7 @@ namespace CXXR
          * This class encapsulates a T* pointer, where T is derived
          * from RObject, and is used to manage the copying of
          * subobjects when an RObject is copied.  For most purposes,
-         * it behaves essentially like a T*.  However, when a Handle
+         * it behaves essentially like a GCEdge<T>.  However, when a Handle
          * is copied, it checks whether the object, \a x say, that it
          * points to is clonable.  If it is, then the copied Handle
          * will point to a clone of \a x ; if not, then the copy will
@@ -248,16 +248,12 @@ namespace CXXR
          * @param T RObject or a class publicly derived from RObject.
          */
         template <class T = RObject>
-        class Handle
+        class Handle : public GCEdge<T>
         {
         public:
-            /** @brief Primary constructor.
-             *
-             * @param ptr The pointer value to be encapsulated by the
-             *          Handle.
+            /** @brief Default constructor.
              */
-            explicit Handle(T *ptr = nullptr)
-                : m_ptr(ptr)
+            Handle() : GCEdge<T>()
             {
             }
 
@@ -297,73 +293,9 @@ namespace CXXR
             Handle<T> &clone(const Handle<T> &pattern, bool deep)
             {
                 Handle<T> cp(pattern, deep);
-                m_ptr = cp.m_ptr;
+                this->setTarget(cp.get());
                 return *this;
             }
-
-            const T *operator->() const
-            {
-                return m_ptr;
-            }
-
-            T *operator->()
-            {
-                return m_ptr;
-            }
-
-            /** @brief Extract encapsulated pointer (const form)
-             *
-             * @return The encapsulated pointer as a const pointer.
-             */
-            operator const T *() const
-            {
-                return m_ptr;
-            }
-
-            /** @brief Extract encapsulated pointer
-             *
-             * @return The encapsulated pointer.
-             */
-            operator T *()
-            {
-                return m_ptr;
-            }
-
-            /** @brief Change value of encapsulated pointer.
-             *
-             * @param new_target The required new value of the
-             *          encapsulated pointer.
-             *
-             * @note This function does not itself carry out
-             * write-barrier enforcement: the calling code will
-             * usually need to raise the object pointed to by \a
-             * new_target (if any) to the same generation as the node
-             * incorporating the Handle object.
-             */
-            void retarget(GCNode *from, T *new_target)
-            {
-                GCNode::incRefCount(new_target);
-                T *oldtarget = m_ptr;
-                m_ptr = new_target;
-                GCNode::decRefCount(oldtarget);
-                if (from)
-                    from->propagateAge(m_ptr);
-            }
-
-            void clearCar()
-            {
-                m_ptr = nullptr;
-            }
-
-            void setTarget(GCNode *from, T *new_target)
-            {
-                m_ptr = new_target;
-                if (from)
-                    from->propagateAge(m_ptr);
-            }
-
-        private:
-            T *m_ptr;
         };
 
     private:
@@ -729,8 +661,6 @@ namespace CXXR
          */
         virtual RObject *evaluate(Environment *env);
 
-        void xfix_refcnt(RObject *old, RObject *new_);
-
         /** @brief The name by which this type is known in R.
          *
          * @return The name by which this type is known in R.
@@ -758,19 +688,19 @@ namespace CXXR
     };
 
     template <class T>
-    RObject::Handle<T>::Handle(const Handle<T> &pattern, bool deep)
-        : m_ptr(pattern.m_ptr)
+    RObject::Handle<T>::Handle(const Handle<T> &pattern, bool deep) : GCEdge<T>(pattern)
     {
-        if (m_ptr)
+        if (pattern)
         {
             if (deep)
             {
-                RObject *t = m_ptr->clone(deep);
+                RObject *t = pattern->clone(deep);
                 if (t)
-                    m_ptr = static_cast<T *>(t);
+                {
+                    this->setTarget(static_cast<T *>(t));
+                }
             }
         }
-        GCNode::incRefCount(m_ptr);
     }
 
     /* Vector Heap Structure */
