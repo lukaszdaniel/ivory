@@ -389,7 +389,7 @@ HIDDEN SEXP R::matchArgs_RC(SEXP formals, SEXP supplied, SEXP call)
     /* it would be better not to build this arglist with CONS_NR in
        the first place */
     for (SEXP a = args; a  != R_NilValue; a = CDR(a)) {
-	if (! TRACKREFS(a)) {
+	if (a && !TRACKREFS(a)) {
 	    ENABLE_REFCNT(a);
 	    INCREMENT_REFCNT(CAR(a));
 	    INCREMENT_REFCNT(CDR(a));

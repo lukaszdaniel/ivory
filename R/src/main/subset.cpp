@@ -1041,17 +1041,11 @@ HIDDEN SEXP do_subset2_dflt(SEXP call, SEXP op, SEXP args, SEXP rho)
     if (!(isVector(x) || isList(x) || isLanguage(x)))
 	errorcall(call, _("object of type '%s' is not subsettable"), type2char(TYPEOF(x)));
 
-#ifndef SWITCH_TO_REFCNT
-    int named_x;
-    named_x = NAMED(x);  /* x may change below; save this now.  See PR#13411 */
-#endif
-
     if(nsubs == 1) { /* vector indexing */
 	SEXP thesub = CAR(subs);
 	int len = length(thesub);
 
 	if (len > 1) {
-#ifdef SWITCH_TO_REFCNT
 	    if (IS_GETTER_CALL(call)) {
 		/* This is (most likely) a getter call in a complex
 		   assighment so we duplicate as needed. The original
@@ -1067,10 +1061,6 @@ HIDDEN SEXP do_subset2_dflt(SEXP call, SEXP op, SEXP args, SEXP rho)
 	    }
 	    else
 		x = vectorIndex(x, thesub, 0, len-1, pok, call, false);
-#else
-	    x = vectorIndex(x, thesub, 0, len-1, pok, call, false);
-	    named_x = NAMED(x);
-#endif
 	    UNPROTECT(1); /* x */
 	    PROTECT(x);
 	}
@@ -1125,18 +1115,14 @@ HIDDEN SEXP do_subset2_dflt(SEXP call, SEXP op, SEXP args, SEXP rho)
 	    error(_("invalid subscript for pairlist"));
 #endif
 	ans = CAR(nthcdr(x, (int) offset));
-#ifndef SWITCH_TO_REFCNT
-	RAISE_NAMED(ans, named_x);
-#endif
+
     } else if(isVectorList(x)) {
 	/* did unconditional duplication before 2.4.0 */
 	if (x->sexptype() == EXPRSXP)
 		ans = XVECTOR_ELT(x, offset);
 	else
 		ans = VECTOR_ELT(x, offset);
-#ifndef SWITCH_TO_REFCNT
-	RAISE_NAMED(ans, named_x);
-#endif
+
     } else {
 	ans = allocVector(TYPEOF(x), 1);
 	switch (TYPEOF(x)) {
@@ -1327,10 +1313,10 @@ HIDDEN SEXP R::R_subset3_dflt(SEXP x, SEXP input, SEXP call)
 	    case PARTIAL_MATCH:
 		havematch++;
 		xmatch = y;
-#ifdef SWITCH_TO_REFCNT
+
 		if (IS_GETTER_CALL(call))
 		    MARK_NOT_MUTABLE(y);
-#endif
+
 		break;
 	    case NO_MATCH:
 		break;
@@ -1383,12 +1369,10 @@ HIDDEN SEXP R::R_subset3_dflt(SEXP x, SEXP input, SEXP call)
 		       This is overkill, but alternative ways to prevent
 		       the aliasing appear to be even worse */
 		    y = VECTOR_ELT(x,i);
-#ifdef SWITCH_TO_REFCNT
+
 		    if (IS_GETTER_CALL(call))
 			MARK_NOT_MUTABLE(y);
-#else
-		    ENSURE_NAMEDMAX(y);
-#endif
+
 		    SET_VECTOR_ELT(x,i,y);
 		}
 		imatch = i;

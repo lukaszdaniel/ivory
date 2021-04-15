@@ -67,7 +67,6 @@
     {                                        \
         RObject *val = allocVector(type, 1); \
         SETCAR(cell, val);                   \
-        INCREMENT_NAMED(val);                \
         SET_BNDCELL_TAG(cell, type);         \
         SET_MISSING(cell, 0);                \
     } while (0)

@@ -66,7 +66,6 @@ HIDDEN SEXP do_lapply(SEXP call, SEXP op, SEXP args, SEXP rho)
     SEXP ind = PROTECT(allocVector(realIndx ? REALSXP : INTSXP, 1));
     SEXP isym = Symbol::obtain("i");
     defineVar(isym, ind, rho);
-    INCREMENT_NAMED(ind);
 
     /* Notice that it is OK to have one arg to LCONS do memory
        allocation and not PROTECT the result (LCONS does memory
@@ -153,7 +152,6 @@ HIDDEN SEXP do_vapply(SEXP call, SEXP op, SEXP args, SEXP rho)
 	SEXP isym = Symbol::obtain("i");
 	PROTECT(ind = allocVector(realIndx ? REALSXP : INTSXP, 1));
 	defineVar(isym, ind, rho);
-	INCREMENT_NAMED(ind);
 
 	/* Notice that it is OK to have one arg to LCONS do memory
 	   allocation and not PROTECT the result (LCONS does memory
@@ -326,7 +324,6 @@ static SEXP do_one(SEXP X, SEXP FUN, SEXP classes, SEXP deflt,
 	SEXP R_fcall; /* could allocate once and preserve for re-use */
 	SEXP Xsym = Symbol::obtain("X");
 	defineVar(Xsym, X, rho);
-	INCREMENT_NAMED(X);
 	/* PROTECT(R_fcall = lang2(FUN, Xsym)); */
 	PROTECT(R_fcall = lang3(FUN, Xsym, R_DotsSymbol));
 	ans = R_forceAndCall(R_fcall, 1, rho);

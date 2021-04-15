@@ -2302,7 +2302,6 @@ SEXP R::R_subassign3_dflt(SEXP call, SEXP x, SEXP nlist, SEXP val)
     /* cannot use isEnvironment since we do not want NULL here */
     else if( TYPEOF(x) == ENVSXP ) {
 	defineVar(nlist, val, x);
-	INCREMENT_NAMED(val);
     }
     else if( TYPEOF(x) == SYMSXP || /* Used to 'work' in R < 2.8.0 */
 	     TYPEOF(x) == CLOSXP ||

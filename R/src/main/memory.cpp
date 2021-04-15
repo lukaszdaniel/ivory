@@ -1458,17 +1458,14 @@ HIDDEN void R::R_expand_binding_value(SEXP b)
         case REALSXP:
             val = ScalarReal(vv.dval);
             SET_BNDCELL(b, val);
-            INCREMENT_NAMED(val);
             break;
         case INTSXP:
             val = ScalarInteger(vv.ival);
             SET_BNDCELL(b, val);
-            INCREMENT_NAMED(val);
             break;
         case LGLSXP:
             val = ScalarLogical(vv.ival);
             SET_BNDCELL(b, val);
-            INCREMENT_NAMED(val);
             break;
         }
     }
@@ -1477,7 +1474,6 @@ HIDDEN void R::R_expand_binding_value(SEXP b)
 
 HIDDEN void R::R_args_enable_refcnt(SEXP args)
 {
-#ifdef SWITCH_TO_REFCNT
     /* args is escaping into user C code and might get captured, so
        make sure it is reference counting. Should be able to get rid
        of this function if we reduce use of CONS_NR. */
@@ -1493,7 +1489,6 @@ HIDDEN void R::R_args_enable_refcnt(SEXP args)
                 error(_("argument not tracking references"));
 #endif
         }
-#endif
 }
 
 /*******************************************/

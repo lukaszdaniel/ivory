@@ -1524,11 +1524,7 @@ static SEXP wrapper_Duplicate(SEXP x, Rboolean deep)
        the data is installed in the new wrapper object. */
     if (deep)
 	data = duplicate(data);
-#ifndef SWITCH_TO_REFCNT
-    else
-	/* not needed with reference counting */
-	MARK_NOT_MUTABLE(data);
-#endif
+
     PROTECT(data);
 
     /* always duplicate the meta data */
@@ -1928,11 +1924,6 @@ static SEXP make_wrapper(SEXP x, SEXP meta)
     }
 #endif
 
-#ifndef SWITCH_TO_REFCNT
-    if (MAYBE_REFERENCED(x))
-	/* make sure no mutation can happen through another reference */
-	MARK_NOT_MUTABLE(x);
-#endif
     return ans;
 }
 

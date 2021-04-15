@@ -1760,7 +1760,6 @@ void Rf_callToplevelHandlers(SEXP expr, SEXP value, Rboolean succeeded,
 static void defineVarInc(SEXP sym, SEXP val, SEXP rho)
 {
     defineVar(sym, val, rho);
-    INCREMENT_NAMED(val); /* in case this is used in a NAMED build */
 }
 
 Rboolean R_taskCallbackRoutine(SEXP expr, SEXP value, Rboolean succeeded,

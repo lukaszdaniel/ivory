@@ -3004,9 +3004,7 @@ HIDDEN SEXP do_eapply(SEXP call, SEXP op, SEXP args, SEXP rho)
     PROTECT(R_fcall = LCONS(FUN, CONS(tmp, CONS(R_DotsSymbol, R_NilValue))));
 
     defineVar(Xsym, tmp2, rho);
-    INCREMENT_NAMED(tmp2);
     defineVar(isym, ind, rho);
-    INCREMENT_NAMED(ind);
 
     for(i = 0; i < k2; i++) {
 	INTEGER(ind)[0] = i+1;

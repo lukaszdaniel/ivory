@@ -731,9 +731,7 @@ RObject *Expression::evaluate(Environment *env)
 		SEXP pargs = promiseArgs(CDR(this), env);
 		PROTECT(pargs);
 		tmp = Rf_applyClosure(this, op, pargs, env, R_NilValue);
-#ifdef ADJUST_ENVIR_REFCNTS
 		unpromiseArgs(pargs);
-#endif
 		UNPROTECT(1);
 	}
 	else
@@ -1517,7 +1515,6 @@ inline static SEXP getSrcref(SEXP srcrefs, int ind)
 	return R_NilValue;
 }
 
-#ifdef ADJUST_ENVIR_REFCNTS
 inline static Rboolean R_isReplaceSymbol(SEXP fun)
 {
     /* fun is a replacement function name if it contains '<-'
@@ -1529,7 +1526,6 @@ inline static Rboolean R_isReplaceSymbol(SEXP fun)
 	return TRUE;
     else return FALSE;
 }
-#endif
 
 /* There's another copy of this in main.cpp */
 static void PrintCall(SEXP call, SEXP rho)
@@ -1546,7 +1542,6 @@ static void PrintCall(SEXP call, SEXP rho)
     R_BrowseLines = old_bl;
 }
 
-#ifdef ADJUST_ENVIR_REFCNTS
 /* After executing a closure call the environment created for the call
    may no longer be reachable. If this is the case, then its bindings
    can be cleared to reduce the reference counts on the binding
@@ -1687,9 +1682,6 @@ HIDDEN void R::unpromiseArgs(SEXP pargs)
 	SETCAR(pargs, R_NilValue);
     }
 }
-#else
-HIDDEN void R::unpromiseArgs(SEXP pargs) { }
-#endif
 
 /* Note: GCC will not inline execClosure because it calls setjmp */
 inline static SEXP R_execClosure(SEXP call, SEXP newrho, SEXP sysparent,
@@ -1754,10 +1746,8 @@ SEXP Rf_applyClosure(SEXP call, SEXP op, SEXP arglist, SEXP rho, SEXP suppliedva
 	if (R_envHasNoSpecialSymbols(newrho))
 		SET_NO_SPECIAL_SYMBOLS(newrho);
 
-#ifdef ADJUST_ENVIR_REFCNTS
     Rboolean is_getter_call =
 	(Rboolean) (CADR(call) == R_TmpvalSymbol && ! R_isReplaceSymbol(CAR(call)));
-#endif
 
     /*  If we have a generic function we need to use the sysparent of
 	the generic as the sysparent of the method because the method
@@ -1767,11 +1757,9 @@ SEXP Rf_applyClosure(SEXP call, SEXP op, SEXP arglist, SEXP rho, SEXP suppliedva
 			     (R_GlobalContext->getCallFlag() == CTXT_GENERIC) ?
 			     R_GlobalContext->getSysParent() : rho,
 			     rho, arglist, op);
-#ifdef ADJUST_ENVIR_REFCNTS
     R_CleanupEnvir(newrho, val);
     if (is_getter_call && MAYBE_REFERENCED(val))
     	val = shallow_duplicate(val);
-#endif
 
     UNPROTECT(1); /* newrho */
     return val;
@@ -1929,9 +1917,7 @@ SEXP R_forceAndCall(SEXP e, int n, SEXP rho)
 	}
 	SEXP pargs = tmp;
 	tmp = applyClosure(e, fun, pargs, rho, R_NilValue);
-#ifdef ADJUST_ENVIR_REFCNTS
 	unpromiseArgs(pargs);
-#endif
 	UNPROTECT(1);
     }
     else {
@@ -2001,12 +1987,11 @@ SEXP R::R_execMethod(SEXP op, SEXP rho)
 		val = mkPROMISE(CAR(deflt), newrho);
 	    }
 	}
-#ifdef SWITCH_TO_REFCNT
+
 	/* re-promise to get referenve counts for references from rho
 	   and newrho right. */
 	if (TYPEOF(val) == PROMSXP)
 	    SETCAR(FRAME(newrho), mkPROMISE(val, rho));
-#endif
     }
 
     /* copy the bindings of the special dispatch variables in the top
@@ -2036,9 +2021,7 @@ SEXP R::R_execMethod(SEXP op, SEXP rho)
     call = cptr->getCall();
     arglist = cptr->getPromiseArgs();
     val = R_execClosure(call, newrho, callerenv, callerenv, arglist, op);
-#ifdef ADJUST_ENVIR_REFCNTS
     R_CleanupEnvir(newrho, val);
-#endif
     UNPROTECT(1);
     return val;
 }
@@ -2057,7 +2040,6 @@ static SEXP EnsureLocal(SEXP symbol, SEXP rho, R_varloc_t &ploc)
 	    PROTECT(vl);
 	    PROTECT(vl = R_shallow_duplicate_attr(vl));
 	    defineVar(symbol, vl, rho);
-	    INCREMENT_NAMED(vl);
 	    UNPROTECT(2);
 	}
 	PROTECT(vl); /* R_findVarLocInFrame allocates for user databases */
@@ -2073,7 +2055,6 @@ static SEXP EnsureLocal(SEXP symbol, SEXP rho, R_varloc_t &ploc)
     PROTECT(vl = shallow_duplicate(vl));
     defineVar(symbol, vl, rho);
     ploc = R_findVarLocInFrame(rho, symbol);
-    INCREMENT_NAMED(vl);
     UNPROTECT(1);
     return vl;
 }
@@ -2179,7 +2160,6 @@ inline static bool BodyHasBraces(SEXP body) { return (isLanguage(body) && CAR(bo
 			ATTRIB(v) != R_NilValue || (v) != CAR(cell))  \
 		{                                                 \
 			REPROTECT(v = allocVector(val_type, 1), vpi); \
-			INCREMENT_NAMED(v);                           \
 		}                                                 \
 	} while (0)
 
@@ -2771,7 +2751,6 @@ inline static SEXP try_assign_unwrap(SEXP value, SEXP sym, SEXP rho, SEXP cell)
     if (! MAYBE_REFERENCED(value))
 	/* Typical case for NAMED; can also happen for REFCNT. */
 	return R_tryUnwrap(value);
-#ifdef SWITCH_TO_REFCNT
     else {
 	/* Typical case for REFCNT; might not be safe to unwrap for NAMED. */
 	if (! MAYBE_SHARED(value)) {
@@ -2784,7 +2763,7 @@ inline static SEXP try_assign_unwrap(SEXP value, SEXP sym, SEXP rho, SEXP cell)
 		return R_tryUnwrap(value);
 	}
     }
-#endif
+
     return value;
 }
 
@@ -2805,10 +2784,9 @@ static SEXP applydefine(SEXP call, SEXP op, SEXP args, SEXP rho)
     INCLNK_stack_commit();
 
     PROTECT(saverhs = rhs = eval(CADR(args), rho)); nprot++;
-#ifdef SWITCH_TO_REFCNT
+
     int refrhs = MAYBE_REFERENCED(saverhs);
     if (refrhs) INCREMENT_REFCNT(saverhs);
-#endif
 
     /*  FIXME: We need to ensure that this works for hashed
 	environments.  This code only works for unhashed ones.  the
@@ -2941,23 +2919,15 @@ static SEXP applydefine(SEXP call, SEXP op, SEXP args, SEXP rho)
 	}
 	defineVar(lhsSym, value, rho);
     }
-    INCREMENT_NAMED(value);
+
     Evaluator::enableResultPrinting(false);
 
     UNPROTECT((nprot - 2));
     cntxt.end(); /* which does not run the remove */
     UNPROTECT(2); // saverhs, tmploc.cell
     unbindVar(R_TmpvalSymbol, rho);
-#ifdef OLD_RHS_NAMED
-    /* we do not duplicate the value, so to be conservative mark the
-       value as NAMED = NAMEDMAX */
-    ENSURE_NAMEDMAX(saverhs);
-#else
-    INCREMENT_NAMED(saverhs);
-#endif
-#ifdef SWITCH_TO_REFCNT
+
     if (refrhs) DECREMENT_REFCNT(saverhs);
-#endif
 
     DECREMENT_BCSTACK_LINKS();
 
@@ -2983,7 +2953,6 @@ HIDDEN SEXP do_set(SEXP call, SEXP op, SEXP args, SEXP rho)
 	/* fall through */
     case SYMSXP:
 	rhs = eval(CADR(args), rho);
-	INCREMENT_NAMED(rhs);
 	if (PRIMVAL(op) == 2)                       /* <<- */
 	    setVar(lhs, rhs, ENCLOS(rho));
 	else                                        /* <-, = */
@@ -3687,17 +3656,13 @@ bool R::DispatchOrEval(SEXP call, SEXP op, const char *generic, SEXP args,
 	    {
 		cntxt.end();
 		UNPROTECT(nprotect);
-#ifdef ADJUST_ENVIR_REFCNTS
 		R_CleanupEnvir(rho1, *ans);
 		unpromiseArgs(pargs);
-#endif
 		return true;
 	    }
 	    cntxt.end();
-#ifdef ADJUST_ENVIR_REFCNTS
 	    R_CleanupEnvir(rho1, R_NilValue);
 	    unpromiseArgs(pargs);
-#endif
 	}
     }
     if(!argsevald) {
@@ -3932,9 +3897,7 @@ bool R::DispatchGroup(const char* group, SEXP call, SEXP op, SEXP args, SEXP rho
     }
 
     *ans = applyClosure(t, lsxp, s, rho, newvars);
-#ifdef ADJUST_ENVIR_REFCNTS
     unpromiseArgs(s);
-#endif
     UNPROTECT(10);
     return true;
 }
@@ -5509,7 +5472,7 @@ inline static SEXP CLOSURE_CALL_FRAME_ARGS()
        the first place */
     for (SEXP a = args; a  != R_NilValue; a = CDR(a)) {
 	DECREMENT_LINKS(CAR(a));
-	if (! TRACKREFS(a)) {
+	if (a && !TRACKREFS(a)) {
 	    ENABLE_REFCNT(a);
 	    INCREMENT_REFCNT(CAR(a));
 	    INCREMENT_REFCNT(CDR(a));
@@ -5632,12 +5595,9 @@ static int tryDispatch(const char *generic, SEXP call, SEXP x, SEXP rho, SEXP *p
     dispatched = TRUE;
   cntxt.end();
   UNPROTECT(2);
-#ifdef ADJUST_ENVIR_REFCNTS
   R_CleanupEnvir(rho1, dispatched ? *pv : R_NilValue);
   unpromiseArgs(pargs);
-#else
-  if (! dispatched) DECREMENT_REFCNT(x);
-#endif
+
   return dispatched;
 }
 
@@ -6539,7 +6499,6 @@ struct R_loopinfo_t{
 		{                                              \
 			(var) = allocVector(TYPEOF(seq), 1);       \
 			SETSTACK_NLNK(-1, var);                    \
-			INCREMENT_NAMED(var);                      \
 		}                                              \
 	} while (0)
 
@@ -7064,7 +7023,6 @@ static SEXP bcEval(SEXP body, SEXP rho, bool useCache)
 	case STRSXP:
 	case RAWSXP:
 	    value = allocVector(TYPEOF(seq), 1);
-	    INCREMENT_NAMED(value);
 	    BCNPUSH_NLNK(value);
 	    break;
 	default: BCNPUSH(R_NilValue);
@@ -7262,7 +7220,6 @@ static SEXP bcEval(SEXP body, SEXP rho, bool useCache)
 	    }
 
 	SEXP value = GETSTACK(-1);
-	INCREMENT_NAMED(value);
 	if (! SET_BINDING_VALUE(loc, value)) {
 	    SEXP symbol = VECTOR_ELT(constants, sidx);
 	    PROTECT(value);
@@ -7448,9 +7405,7 @@ static SEXP bcEval(SEXP body, SEXP rho, bool useCache)
 	case CLOSXP:
 	  args = CLOSURE_CALL_FRAME_ARGS();
 	  value = applyClosure(call, fun, args, rho, R_NilValue);
-#ifdef ADJUST_ENVIR_REFCNTS
 	  unpromiseArgs(args);
-#endif
 	  break;
 	default: error(_("bad function"));
 	}
@@ -7605,23 +7560,15 @@ static SEXP bcEval(SEXP body, SEXP rho, bool useCache)
 		value = v;
 	    }
 	}
-	INCREMENT_NAMED(value);
 	if (! SET_BINDING_VALUE(cell, value))
 	    defineVar(symbol, value, rho);
 	R_BCNodeStackTop -= 2; /* now pop cell and LHS value off the stack */
 	/* original right-hand side value is now on top of stack again */
-#ifdef OLD_RHS_NAMED
-	/* we do not duplicate the right-hand side value, so to be
-	   conservative mark the value as NAMED = NAMEDMAX */
-	ENSURE_NAMEDMAX(GETSTACK(-1));
-#else
 	if (IS_STACKVAL_BOXED(-1)) {
 	    SEXP saverhs = GETSTACK(-1);
-	    INCREMENT_NAMED(saverhs);
 	    int refrhs = GETSTACK_FLAGS(-1);
 	    if (refrhs) DECREMENT_REFCNT(saverhs);
 	}
-#endif
 	NEXT();
       }
     OP(STARTSUBSET, 2): DO_STARTDISPATCH("[");
@@ -7763,7 +7710,6 @@ static SEXP bcEval(SEXP body, SEXP rho, bool useCache)
       {
 	SEXP symbol = VECTOR_ELT(constants, GETOP());
 	SEXP value = GETSTACK(-1);
-	INCREMENT_NAMED(value);
 	setVar(symbol, value, ENCLOS(rho));
 	NEXT();
       }
@@ -7800,17 +7746,9 @@ static SEXP bcEval(SEXP body, SEXP rho, bool useCache)
 
 	SEXP symbol = VECTOR_ELT(constants, GETOP());
 	SEXP value = GETSTACK(-1); /* leave on stack for GC protection */
-	INCREMENT_NAMED(value);
 	setVar(symbol, value, ENCLOS(rho));
 	R_BCNodeStackTop -= 2; /* now pop cell and LHS value off the stack */
 	/* original right-hand side value is now on top of stack again */
-#ifdef OLD_RHS_NAMED
-	/* we do not duplicate the right-hand side value, so to be
-	   conservative mark the value as NAMED = NAMEDMAX */
-	ENSURE_NAMEDMAX(GETSTACK(-1));
-#else
-	INCREMENT_NAMED(GETSTACK(-1));
-#endif
 	DECREMENT_REFCNT(GETSTACK(-1));
 	NEXT();
       }
@@ -7872,9 +7810,7 @@ static SEXP bcEval(SEXP body, SEXP rho, bool useCache)
 	  SETCAR(args, prom);
 	  /* make the call */
 	  value = applyClosure(call, fun, args, rho, R_NilValue);
-#ifdef ADJUST_ENVIR_REFCNTS
 	  unpromiseArgs(args);
-#endif
 	  break;
 	default: error(_("bad function"));
 	}
@@ -7916,9 +7852,8 @@ static SEXP bcEval(SEXP body, SEXP rho, bool useCache)
 	  SETCAR(args, prom);
 	  /* make the call */
 	  value = applyClosure(call, fun, args, rho, R_NilValue);
-#ifdef ADJUST_ENVIR_REFCNTS
 	  unpromiseArgs(args);
-#endif
+
 	  break;
 	default: error(_("bad function"));
 	}

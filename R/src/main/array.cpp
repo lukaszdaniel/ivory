@@ -2179,23 +2179,8 @@ HIDDEN SEXP do_array(SEXP call, SEXP op, SEXP args, SEXP rho)
     /* Rest are already initialized */
     case VECSXP:
     case EXPRSXP:
-#ifdef SWITCH_TO_REFCNT
 	if (nans && lendat)
 	    xcopyVectorWithRecycle(ans, vals, 0, nans, lendat);
-#else
-	if (nans && lendat) {
-	    /* Need to guard against possible sharing of values under
-	       NAMED.  This is not needed with reference
-	       coutning. (PR#15919) */
-	    Rboolean needsmark = (lendat < nans || MAYBE_REFERENCED(vals));
-	    for (i = 0; i < nans; i++) {
-		SEXP elt = VECTOR_ELT(vals, i % lendat);
-		if (needsmark || MAYBE_REFERENCED(elt))
-		    MARK_NOT_MUTABLE(elt);
-		SET_VECTOR_ELT(ans, i, elt);
-	    }
-	}
-#endif
 	break;
     default:
 	// excluded above
