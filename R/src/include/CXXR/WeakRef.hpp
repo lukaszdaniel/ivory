@@ -42,26 +42,26 @@ namespace CXXR
 {
 	typedef void (*R_CFinalizer_t)(RObject *);
 	/** @brief Weak reference.
-     *
-     * Refer to <em>Stretching the storage manager: weak pointers and
-     * stable names in Haskell</em> by Peyton Jones, Marlow, and
-     * Elliott (at <a
-     * href="www.research.microsoft.com/Users/simonpj/papers/weak.ps.gz">www.research.microsoft.com/Users/simonpj/papers/weak.ps.gz</a>)
-     * for the motivation and implementation of this class.
-     *
-     * Each WeakRef has a key and, optionally, a value and/or a
-     * finalizer.  The finalizer may either be a C function or an R
-     * object.  The garbage collector will consider the value and
-     * finalizer to be reachable provided the key is reachable.
-     *
-     * If, during a garbage collection, the key is found not to be
-     * reachable then the finalizer (if any) will be run, and the weak
-     * reference object will be 'tombstoned', so that subsequent calls
-     * to key() and value() will return null pointers.
-     *
-     * A WeakRef object with a reachable key will not be garbage
-     * collected even if the WeakRef object is not itself reachable.
-     */
+	 *
+	 * Refer to <em>Stretching the storage manager: weak pointers and
+	 * stable names in Haskell</em> by Peyton Jones, Marlow, and
+	 * Elliott (at <a
+	 * href="www.research.microsoft.com/Users/simonpj/papers/weak.ps.gz">www.research.microsoft.com/Users/simonpj/papers/weak.ps.gz</a>)
+	 * for the motivation and implementation of this class.
+	 *
+	 * Each WeakRef has a key and, optionally, a value and/or a
+	 * finalizer.  The finalizer may either be a C function or an R
+	 * object.  The garbage collector will consider the value and
+	 * finalizer to be reachable provided the key is reachable.
+	 *
+	 * If, during a garbage collection, the key is found not to be
+	 * reachable then the finalizer (if any) will be run, and the weak
+	 * reference object will be 'tombstoned', so that subsequent calls
+	 * to key() and value() will return null pointers.
+	 *
+	 * A WeakRef object with a reachable key will not be garbage
+	 * collected even if the WeakRef object is not itself reachable.
+	 */
 	class WeakRef : public RObject
 	{
 	public:

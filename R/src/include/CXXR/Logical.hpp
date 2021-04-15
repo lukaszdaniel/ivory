@@ -35,15 +35,15 @@
 namespace CXXR
 {
 	/** @brief Object representing a scalar logical value.
-     *
-     * In R, logical values have three states: TRUE, FALSE and NA.
-     * The Logical class represents such a value and provides the standard
-     * logic operations extended to ternary logic.
-     *
-     * Note that the representation of this class is completely constrained by
-     * the C API to R's internals.  Any changes are likely to break existing
-     * user code.
-     */
+	 *
+	 * In R, logical values have three states: TRUE, FALSE and NA.
+	 * The Logical class represents such a value and provides the standard
+	 * logic operations extended to ternary logic.
+	 *
+	 * Note that the representation of this class is completely constrained by
+	 * the C API to R's internals.  Any changes are likely to break existing
+	 * user code.
+	 */
 	class Logical
 	{
 	public:

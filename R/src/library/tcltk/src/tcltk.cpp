@@ -167,8 +167,7 @@ static int R_call_lang(ClientData clientData,
     return TCL_OK;
 }
 
-
-static Tcl_Obj * tk_eval(const char *cmd)
+static Tcl_Obj *tk_eval(const char *cmd)
 {
     char *cmd_utf8;
     Tcl_DString  cmd_utf8_ds;

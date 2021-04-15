@@ -135,40 +135,19 @@ Rboolean Rf_isRaw(SEXP s);
     (IS_SCALAR(x, type) && ATTRIB(x) == R_NilValue)
 int SIMPLE_SCALAR_TYPE(SEXP x);
 
-#ifdef SWITCH_TO_REFCNT
-# define INCREMENT_NAMED(x) do { } while (0)
-# define DECREMENT_NAMED(x) do { } while (0)
-#else
-#define NAMEDMAX 7
-#define INCREMENT_NAMED(x)                      \
-    do                                          \
-    {                                           \
-        SEXP __x__ = (x);                       \
-        if (NAMED(__x__) != NAMEDMAX)           \
-            SET_NAMED(__x__, NAMED(__x__) + 1); \
-    } while (0)
-#define DECREMENT_NAMED(x)                 \
-    do                                     \
-    {                                      \
-        SEXP __x__ = (x);                  \
-        int __n__ = NAMED(__x__);          \
-        if (__n__ > 0 && __n__ < NAMEDMAX) \
-            SET_NAMED(__x__, __n__ - 1);   \
-    } while (0)
-#endif
+#define INCREMENT_NAMED(x) do { } while (0)
+#define DECREMENT_NAMED(x) do { } while (0)
 
 #define INCREMENT_LINKS(x)         \
     do                             \
     {                              \
         SEXP il__x__ = (x);        \
-        INCREMENT_NAMED(il__x__);  \
         INCREMENT_REFCNT(il__x__); \
     } while (0)
 #define DECREMENT_LINKS(x)         \
     do                             \
     {                              \
         SEXP dl__x__ = (x);        \
-        DECREMENT_NAMED(dl__x__);  \
         DECREMENT_REFCNT(dl__x__); \
     } while (0)
 

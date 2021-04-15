@@ -37,13 +37,13 @@
 namespace CXXR
 {
 	/** @brief CXXR's extension of CR's Rcomplex.
-     *
-     * This class is a wrapper around the C struct Rcomplex defined by
-     * CR.
-     *
-     * @note Backwards compatibility requires that <tt>sizeof(Complex)
-     * == sizeof(Rcomplex)</tt>.
-     */
+	 *
+	 * This class is a wrapper around the C struct Rcomplex defined by
+	 * CR.
+	 *
+	 * @note Backwards compatibility requires that <tt>sizeof(Complex)
+	 * == sizeof(Rcomplex)</tt>.
+	 */
 	struct Complex : public Rcomplex
 	{
 		/** @brief Default constructor.

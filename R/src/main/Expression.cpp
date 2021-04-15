@@ -53,6 +53,18 @@ namespace CXXR
         const auto &lconsptr = Rf_lcons;
     } // namespace ForceNonInline
 
+    Expression::Expression(RObject *function, std::initializer_list<RObject *> args)
+        : Expression(function)
+    {
+        ConsCell *current = this;
+        for (RObject *arg : args)
+        {
+            PairList *next = GCNode::expose(new PairList(arg));
+            current->setTail(next);
+            current = next;
+        }
+    }
+
     Expression *Expression::clone(bool deep) const
     {
         // return GCNode::expose(new Expression(*this, deep));

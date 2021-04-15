@@ -60,6 +60,8 @@ namespace CXXR
       {
       }
 
+      Expression(RObject *function, std::initializer_list<RObject *> unnamed_args);
+
       /** @brief Copy constructor.
        *
        * @param pattern Expression to be copied.
