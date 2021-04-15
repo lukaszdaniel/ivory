@@ -1269,7 +1269,7 @@ static void WriteItem(SEXP s, SEXP ref_table, R_outpstream_t stream)
 
 static SEXP MakeCircleHashTable(void)
 {
-    return CONS(R_NilValue, CONS(allocVector(VECSXP, HASHSIZE), nullptr)); 
+	return GCNode::expose(new Expression(nullptr, {Rf_allocVector(VECSXP, HASHSIZE)}));
 }
 
 static bool AddCircleHash(SEXP item, SEXP ct)
@@ -1792,8 +1792,7 @@ static SEXP R_FindNamespace1(SEXP info)
     PROTECT(info);
     where = PROTECT(ScalarString(mkChar(lastname)));
     SEXP s_getNamespace = Symbol::obtain("..getNamespace");
-    PROTECT(expr = LCONS(s_getNamespace,
-			 CONS(info, CONS(where, R_NilValue))));
+    PROTECT(expr = GCNode::expose(new Expression(s_getNamespace, {info, where})));
     val = eval(expr, R_GlobalEnv);
     UNPROTECT(3);
     return val;
@@ -2656,7 +2655,7 @@ void R_InitConnInPStream(R_inpstream_t stream,  Rconnection con,
 static SEXP CallHook(SEXP x, SEXP fun)
 {
 	SEXP val, call;
-	PROTECT(call = LCONS(fun, CONS(x, R_NilValue)));
+	PROTECT(call = GCNode::expose(new Expression(fun, {x})));
 	val = eval(call, R_GlobalEnv);
 	UNPROTECT(1);
 	return val;

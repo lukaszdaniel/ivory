@@ -72,10 +72,8 @@ HIDDEN SEXP do_lapply(SEXP call, SEXP op, SEXP args, SEXP rho)
        protection of its args internally), but not both of them,
        since the computation of one may destroy the other */
 
-    SEXP tmp = PROTECT(LCONS(R_Bracket2Symbol,
-			CONS(X, CONS(isym, R_NilValue))));
-    SEXP R_fcall = PROTECT(LCONS(FUN,
-				 CONS(tmp, CONS(R_DotsSymbol, R_NilValue))));
+    SEXP tmp = PROTECT(GCNode::expose(new Expression(R_Bracket2Symbol, {X, isym})));
+    SEXP R_fcall = PROTECT(GCNode::expose(new Expression(FUN, {tmp, R_DotsSymbol})));
 
     for(R_xlen_t i = 0; i < n; i++) {
 	if (realIndx) REAL(ind)[0] = (double)(i + 1);
@@ -157,10 +155,8 @@ HIDDEN SEXP do_vapply(SEXP call, SEXP op, SEXP args, SEXP rho)
 	   allocation and not PROTECT the result (LCONS does memory
 	   protection of its args internally), but not both of them,
 	   since the computation of one may destroy the other */
-	PROTECT(tmp = LCONS(R_Bracket2Symbol,
-			    LCONS(X, LCONS(isym, R_NilValue))));
-	PROTECT(R_fcall = LCONS(FUN,
-				LCONS(tmp, LCONS(R_DotsSymbol, R_NilValue))));
+	PROTECT(tmp = GCNode::expose(new Expression(R_Bracket2Symbol, {X, isym})));
+	PROTECT(R_fcall = GCNode::expose(new Expression(FUN, {tmp, R_DotsSymbol})));
 
 	int common_len_offset = 0;
 	for(i = 0; i < n; i++) {

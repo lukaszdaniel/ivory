@@ -65,12 +65,13 @@ using namespace CXXR;
    in  more places. LT */
 static SEXP evalKeepVis(SEXP e, SEXP rho)
 {
-    bool oldvis = Evaluator::resultPrinted();
-    SEXP val = eval(e, rho);
-    Evaluator::enableResultPrinting(oldvis);
-    return val;
+	if (!e)
+		return nullptr; // CXXR change
+	bool oldvis = Evaluator::resultPrinted();
+	SEXP val = Rf_eval(e, rho);
+	Evaluator::enableResultPrinting(oldvis);
+	return val;
 }
-
 
 /* Total line length, in chars, before splitting in warnings/errors */
 #define LONGWARN max(75, int(GetOptionWidth() - 5))
@@ -126,7 +127,7 @@ NORET void R_SignalCStackOverflow(intptr_t usage)
     /* Do not translate this, to save stack space */
 }
 
-void (R_CheckStack)(void)
+void R_CheckStack(void)
 {
     int dummy;
     intptr_t usage = R_CStackDir * (R_CStackStart - (uintptr_t)&dummy);
@@ -1855,7 +1856,7 @@ static void vsignalWarning(SEXP call, const char *format, va_list ap)
 	SYMVALUE(R_QuoteSymbol) != R_UnboundValue) {
 	qfun = lang3(R_DoubleColonSymbol, R_BaseSymbol, R_QuoteSymbol);
 	PROTECT(qfun);
-	PROTECT(qcall = LCONS(qfun, CONS(call, R_NilValue)));
+	PROTECT(qcall = GCNode::expose(new Expression(qfun, {call})));
 	PROTECT(hcall = CONS(qcall, R_NilValue));
 	Rvsnprintf_mbcs(buf, BUFSIZE - 1, format, ap);
 	hcall = CONS(mkString(buf), hcall);
@@ -1898,23 +1899,19 @@ static void vsignalError(SEXP call, const char *format, va_list ap)
 		   overflow, treat all calling handlers as failed */
 		if (R_OldCStackLimit)
 		    break;
-		SEXP hooksym, hcall, qcall, qfun;
+		Expression *hcall;
+		Expression *qcall;
 		/* protect oldstack here, not outside loop, so handler
 		   stack gets unwound in case error is protect stack
 		   overflow */
 		PROTECT(oldstack);
-		hooksym = Symbol::obtain(".handleSimpleError");
-		qfun = lang3(R_DoubleColonSymbol, R_BaseSymbol,
-		             R_QuoteSymbol);
+		static Symbol *hooksym = Symbol::obtain(".handleSimpleError");
+		Expression *qfun = GCNode::expose(new Expression(R_DoubleColonSymbol, {R_BaseSymbol, R_QuoteSymbol}));
 		PROTECT(qfun);
-		PROTECT(qcall = LCONS(qfun,
-				      LCONS(call, R_NilValue)));
-		PROTECT(hcall = LCONS(qcall, R_NilValue));
-		hcall = LCONS(mkString(buf), hcall);
-		hcall = LCONS(ENTRY_HANDLER(entry), hcall);
-		PROTECT(hcall = LCONS(hooksym, hcall));
-		eval(hcall, R_GlobalEnv);
-		UNPROTECT(5);
+		PROTECT(qcall = GCNode::expose(new Expression(qfun, {call})));
+		PROTECT(hcall = GCNode::expose(new Expression(hooksym, {ENTRY_HANDLER(entry), Rf_mkString(buf), qcall})));
+		hcall->evaluate(Environment::global());
+		UNPROTECT(4);
 	    }
 	}
 	else gotoExitingHandler(R_NilValue, call, entry);
@@ -1965,10 +1962,8 @@ HIDDEN SEXP do_signalCondition(SEXP call, SEXP op, SEXP args, SEXP rho)
 		errorcall_dflt(ecall, "%s", msgstr);
 	    }
 	    else {
-		SEXP hcall = LCONS(h, CONS(cond, R_NilValue));
-		PROTECT(hcall);
-		eval(hcall, R_GlobalEnv);
-		UNPROTECT(1);
+		Expression *hcall = GCNode::expose(new Expression(h, {cond}));
+		hcall->evaluate(Environment::global());
 	    }
 	}
 	else gotoExitingHandler(cond, ecall, entry);
@@ -2014,7 +2009,7 @@ static void signalInterrupt(void)
 	PROTECT(cond = getInterruptCondition());
 	if (IS_CALLING_ENTRY(entry)) {
 	    SEXP h = ENTRY_HANDLER(entry);
-	    SEXP hcall = LCONS(h, CONS(cond, R_NilValue));
+	    SEXP hcall = GCNode::expose(new Expression(h, {cond}));
 	    PROTECT(hcall);
 	    evalKeepVis(hcall, R_GlobalEnv);
 	    UNPROTECT(1);

@@ -123,21 +123,19 @@ using namespace CXXR;
 
 static SEXP getActiveValue(SEXP fun)
 {
-    SEXP expr = LCONS(fun, R_NilValue);
-    PROTECT(expr);
-    expr = eval(expr, R_GlobalEnv);
-    UNPROTECT(1);
-    return expr;
+    GCStackRoot<Expression> expr(GCNode::expose(new Expression(fun, {})));
+    return expr->evaluate(Environment::global());
 }
 
 static void setActiveValue(SEXP fun, SEXP val)
 {
-    SEXP qfun = lang3(R_DoubleColonSymbol, R_BaseSymbol, R_QuoteSymbol);
-    SEXP arg = lang2(qfun, val);
-    SEXP expr = lang2(fun, arg);
-    PROTECT(expr);
-    eval(expr, R_GlobalEnv);
-    UNPROTECT(1);
+    static Symbol *s_dcolon = Symbol::obtain("::");
+    static Symbol *s_base = Symbol::obtain("base");
+    static Symbol *s_quote = Symbol::obtain("quote");
+    GCStackRoot<Expression> qfun(GCNode::expose(new Expression(s_dcolon, {s_base, s_quote})));
+    GCStackRoot<Expression> arg(GCNode::expose(new Expression(qfun, {val})));
+    GCStackRoot<Expression> expr(GCNode::expose(new Expression(fun, {arg})));
+    expr->evaluate(Environment::global());
 }
 
 inline static bool IS_USER_DATABASE(SEXP rho)
@@ -2121,7 +2119,7 @@ static SEXP gfind(const char *name, SEXP env, SEXPTYPE mode,
     if (rval == R_UnboundValue) {
 	if( isFunction(ifnotfound) ) {
 	    PROTECT(var = mkString(name));
-	    PROTECT(R_fcall = LCONS(ifnotfound, CONS(var, R_NilValue)));
+	    PROTECT(R_fcall = GCNode::expose(new Expression(ifnotfound, {var})));
 	    rval = eval(R_fcall, enclos);
 	    UNPROTECT(2);
 	} else
@@ -2998,10 +2996,9 @@ HIDDEN SEXP do_eapply(SEXP call, SEXP op, SEXP args, SEXP rho)
     SEXP isym = Symbol::obtain("i");
     PROTECT(ind = allocVector(INTSXP, 1));
     /* tmp :=  `[`(<elist>, i) */
-    PROTECT(tmp = LCONS(R_Bracket2Symbol,
-			CONS(Xsym, CONS(isym, R_NilValue))));
+    PROTECT(tmp = GCNode::expose(new Expression(R_Bracket2Symbol, {Xsym, isym})));
     /* fcall :=  <FUN>( tmp, ... ) */
-    PROTECT(R_fcall = LCONS(FUN, CONS(tmp, CONS(R_DotsSymbol, R_NilValue))));
+    PROTECT(R_fcall = GCNode::expose(new Expression(FUN, {tmp, R_DotsSymbol})));
 
     defineVar(Xsym, tmp2, rho);
     defineVar(isym, ind, rho);
@@ -3611,13 +3608,10 @@ SEXP R_PackageEnvName(SEXP rho)
 
 SEXP R_FindPackageEnv(SEXP info)
 {
-    SEXP val;
-    GCStackRoot<> infor(info);
-    SEXP s_findPackageEnv = Symbol::obtain("findPackageEnv");
-    GCStackRoot<PairList> tail(CXXR_cons(info, R_NilValue));
-    GCStackRoot<> expr(LCONS(s_findPackageEnv, tail));
-    val = eval(expr, R_GlobalEnv);
-    return val;
+    static Symbol *s_findPackageEnv = Symbol::obtain("findPackageEnv");
+    GCStackRoot<Expression> expr(GCNode::expose(new Expression(s_findPackageEnv, {info})));
+
+    return expr->evaluate(Environment::global());
 }
 
 Rboolean R_IsNamespaceEnv(SEXP rho)

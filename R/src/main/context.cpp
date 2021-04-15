@@ -960,7 +960,7 @@ struct unwind_cont_t
 
 SEXP R_MakeUnwindCont()
 {
-    return CONS(R_NilValue, CONS(allocVector(RAWSXP, sizeof(unwind_cont_t)), nullptr));
+    return GCNode::expose(new Expression(nullptr, {Rf_allocVector(RAWSXP, sizeof(unwind_cont_t))}));
 }
 
 #define RAWDATA(x) ((void *) RAW0(x))

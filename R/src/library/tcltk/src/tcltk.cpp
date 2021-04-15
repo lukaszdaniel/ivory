@@ -36,6 +36,7 @@
 #include "localization.h"
 
 using namespace R;
+using namespace CXXR;
 
 Tcl_Interp *RTcl_interp;
 
@@ -116,7 +117,7 @@ static int R_call(ClientData clientData,
 
     SEXP s_try = install("try");
 
-    alist = R_NilValue;
+    alist = nullptr;
     for (i = argc - 1 ; i > 1 ; i--){
 	PROTECT(alist);
 	alist = LCONS(mkString(argv[i]), alist);
@@ -125,8 +126,8 @@ static int R_call(ClientData clientData,
 
     sscanf(argv[1], "%p", &fun);
 
-    expr = LCONS( (SEXP)fun, alist);
-    PROTECT(expr = LCONS(s_try, CONS(expr, R_NilValue)));
+    expr = LCONS( SEXP(fun), alist);
+    PROTECT(expr = GCNode::expose(new Expression(s_try, {expr})));
 
     R_Busy(1);
     PROTECT(ans = eval(expr, R_GlobalEnv));
@@ -152,11 +153,11 @@ static int R_call_lang(ClientData clientData,
     sscanf(argv[2], "%p", &env);
 
     SEXP s_try = install("try");
-    expr = LCONS(s_try, CONS(expr, R_NilValue));
+    expr = GCNode::expose(new Expression(s_try, {expr}));
     PROTECT((SEXP)expr);
 
     R_Busy(1);
-    PROTECT(ans = eval((SEXP)expr, (SEXP)env));
+    PROTECT(ans = eval(SEXP(expr), SEXP(env)));
     R_Busy(0);
 
     /* If return value is of class tclObj, use as Tcl result */
