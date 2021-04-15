@@ -1,9 +1,9 @@
 
-Ivory Under development (unstable) (2021-03-12 r1450) -- "Internationalized Version of R"
+Ivory Under development (unstable) (2021-04-14 r1487) -- "Internationalized Version of R"
 Copyright (C) 2013-2021 Lukasz Daniel (lukasz.daniel@gmail.com)
 See README-IVORY file for details.
 
-R Under development (unstable) (2021-03-12 r80086) -- "Unsuffered Consequences"
+R Under development (unstable) (2021-04-14 r80154) -- "Unsuffered Consequences"
 Copyright (C) 2021 The R Foundation for Statistical Computing
 Platform: x86_64-pc-linux-gnu (64-bit)
 
@@ -39,10 +39,10 @@ Loading required package: 'methods'
 Class "standardGeneric" [package in 'methods']
 
 Slots:
-
+                                                                  
 Name:           .Data        generic        package          group
 Class:       function      character      character           list
-
+                                                                  
 Name:      valueClass      signature        default       skeleton
 Class:      character      character optionalMethod           call
 
@@ -1280,13 +1280,13 @@ Also defined by 'package2'
 > m <- matrix(c(0, 0, 2:0), 3, 5, dimnames = list(NULL, NULL))
 > (mC <- as(m, "dgCMatrix"))
 3 x 5 sparse Matrix of class "dgCMatrix"
-
+              
 [1,] . 1 . . 2
 [2,] . . 2 . 1
 [3,] 2 . 1 . .
 > (cc <- as(mC, "C"))
 3 x 5 sparse Matrix of class "C"
-
+              
 [1,] . 1 . . 2
 [2,] . . 2 . 1
 [3,] 2 . 1 . .
