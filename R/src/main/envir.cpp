@@ -261,44 +261,6 @@ R_INLINE static bool IS_HASHED(SEXP x)
 
 /*----------------------------------------------------------------------
 
-  String Hashing
-
-  This is taken from the second edition of the "Dragon Book" by
-  Aho, Ullman and Sethi.
-
-*/
-
-/* was extern: used in this file and names.cpp (for the symbol table).
-
-   This hash function seems to work well enough for symbol tables,
-   and hash tables get saved as part of environments so changing it
-   is a major decision.
- */
-HIDDEN int R::R_Newhashpjw(const char *s)
-{
-    char *p;
-    unsigned h = 0, g;
-    for (p = (char *)s; *p; p++)
-    {
-        h = (h << 4) + (*p);
-        if ((g = h & 0xf0000000) != 0)
-        {
-            h = h ^ (g >> 24);
-            h = h ^ g;
-        }
-    }
-    return h;
-}
-
-int CXXR::String::hash() const
-{
-    if (m_hash < 0)
-        m_hash = R_Newhashpjw(m_data.c_str());
-    return m_hash;
-}
-
-/*----------------------------------------------------------------------
-
   R_HashSet
 
   Hashtable set function.  Sets 'symbol' in 'table' to be 'value'.

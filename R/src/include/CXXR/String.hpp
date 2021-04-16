@@ -367,6 +367,17 @@ namespace R
 	bool Seql(SEXP a, SEXP b);
 	bool streql(const char *s, const char *t);
 	bool streqln(const char *s, const char *t, size_t n);
+
+	/** @brief String Hashing
+	 *
+	 * This is taken from the second edition of the "Dragon Book" by
+	 * Aho, Ullman and Sethi.
+	 *
+	 * @note This hash function seems to work well enough for symbol tables,
+	 * and hash tables get saved as part of environments so changing it
+	 * is a major decision.
+	 */
+	int R_Newhashpjw(const char *s);
 }
 
 extern "C"

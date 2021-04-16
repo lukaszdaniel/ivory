@@ -154,6 +154,13 @@ namespace CXXR
             Rf_error(_("unknown encoding: %d"), encoding);
         }
     }
+
+    int String::hash() const
+    {
+        if (m_hash < 0)
+            m_hash = R::R_Newhashpjw(m_data.c_str());
+        return m_hash;
+    }
 } // namespace CXXR
 
 namespace R
@@ -189,6 +196,22 @@ namespace R
             vmaxset(vmax); /* discard any memory used by translateCharUTF8 */
             return result;
         }
+    }
+
+    HIDDEN int R_Newhashpjw(const char *s)
+    {
+        char *p;
+        unsigned h = 0, g;
+        for (p = (char *)s; *p; p++)
+        {
+            h = (h << 4) + (*p);
+            if ((g = h & 0xf0000000) != 0)
+            {
+                h = h ^ (g >> 24);
+                h = h ^ g;
+            }
+        }
+        return h;
     }
 }
 

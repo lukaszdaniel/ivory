@@ -607,7 +607,6 @@ namespace R
     char *R_LibraryFileName(const char *file, char *buf, size_t bsize);
     SEXP R_LoadFromFile(FILE *fp, int startup);
     SEXP R_NewHashedEnv(SEXP enclos, SEXP size);
-    int R_Newhashpjw(const char *s);
     FILE *R_OpenLibraryFile(const char *file);
     SEXP R_Primitive(const char *primname);
     void R_SaveToFile(SEXP obj, FILE *fp, int ascii);

@@ -915,59 +915,33 @@ HIDDEN SEXP R::R_mkEVPROMISE_NR(SEXP expr, SEXP val)
 
 SEXP Rf_allocVector3(SEXPTYPE type, R_xlen_t length = 1, R_allocator_t *allocator = nullptr)
 {
-    RObject *s = nullptr;
-
     if (length > R_XLEN_T_MAX)
         Rf_error(_("vector is too large")); /**** put length into message */
     else if (length < 0)
         Rf_error(_("negative length vectors are not allowed"));
-    /* number of vector cells to allocate */
+
     switch (type)
     {
     case NILSXP:
         return nullptr;
     case RAWSXP:
-    {
-        s = RawVector::create(length, allocator);
-        break;
-    }
+        return RawVector::create(length, allocator);
     case CHARSXP:
         Rf_error(_("use of allocVector(CHARSXP ...) is defunct\n"));
     case LGLSXP:
-    {
-        s = LogicalVector::create(length, allocator);
-        break;
-    }
+        return LogicalVector::create(length, allocator);
     case INTSXP:
-    {
-        s = IntVector::create(length, allocator);
-        break;
-    }
+        return IntVector::create(length, allocator);
     case REALSXP:
-    {
-        s = RealVector::create(length, allocator);
-        break;
-    }
+        return RealVector::create(length, allocator);
     case CPLXSXP:
-    {
-        s = ComplexVector::create(length, allocator);
-        break;
-    }
+        return ComplexVector::create(length, allocator);
     case STRSXP:
-    {
-        s = GCNode::expose(new StringVector(length));
-        break;
-    }
+        return GCNode::expose(new StringVector(length));
     case EXPRSXP:
-    {
-        s = GCNode::expose(new ExpressionVector(length));
-        break;
-    }
+        return GCNode::expose(new ExpressionVector(length));
     case VECSXP:
-    {
-        s = GCNode::expose(new ListVector(length));
-        break;
-    }
+        return GCNode::expose(new ListVector(length));
     case LANGSXP:
     {
 #ifdef LONG_VECTOR_SUPPORT
@@ -977,8 +951,7 @@ SEXP Rf_allocVector3(SEXPTYPE type, R_xlen_t length = 1, R_allocator_t *allocato
         if (length == 0)
             return nullptr;
         GCStackRoot<PairList> tl(PairList::makeList(length - 1));
-        s = GCNode::expose(new Expression(nullptr, tl));
-        break;
+        return GCNode::expose(new Expression(nullptr, tl));
     }
     case LISTSXP:
     {
@@ -992,7 +965,7 @@ SEXP Rf_allocVector3(SEXPTYPE type, R_xlen_t length = 1, R_allocator_t *allocato
         Rf_error(_("invalid type/length (%s/%d) in vector allocation"), type2char(type), length);
     }
 
-    return s;
+    return nullptr;
 }
 
 /* For future hiding of allocVector(CHARSXP) */
