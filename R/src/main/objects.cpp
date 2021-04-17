@@ -1121,8 +1121,7 @@ int R_check_class_and_super(SEXP x, const char **valid, SEXP rho)
 }
 
 
-/**
- * @brief Return the 0-based index of an is() match in a vector of class-name
+/** @brief Return the 0-based index of an is() match in a vector of class-name
  * strings terminated by an empty string.  Returns -1 for no match.
  * Strives to find the correct environment() for is(), using .classEnv()
  * (from \pkg{methods}).

@@ -160,8 +160,7 @@ int R_gc_running() { return GCManager::R_in_gc(); }
 #define PROTECTCHECK
 #endif
 
-/**
- * @brief Translate SEXPTYPE enum to a character string
+/** @brief Translate SEXPTYPE enum to a character string
  * 
  * @param type SEXP object's type
  * 
@@ -169,7 +168,6 @@ int R_gc_running() { return GCManager::R_in_gc(); }
  * 
  * @note also called from typeName() in inspect.cpp
  */
-
 HIDDEN
 const char *R::sexptype2char(const SEXPTYPE type)
 {

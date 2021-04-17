@@ -91,14 +91,12 @@ static void pp(int pre)
 		Rprintf(" ");
 }
 
-/**
- * @brief Translate RObject's SEXPTYPE enum to a character string
+/** @brief Translate RObject's SEXPTYPE enum to a character string
  * 
  * @param v examined RObject
  * 
  * @return name of RObject's type
  */
-
 HIDDEN const char *R::typeName(SEXP v)
 {
 	return sexptype2char(TYPEOF(v)); // -> memory.cpp

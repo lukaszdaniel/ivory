@@ -131,6 +131,32 @@ Rboolean Rf_isObject(SEXP s);
 Rboolean Rf_isRaw(SEXP s);
 
 
+// =====
+// These macros are required by stringi package ( version < 1.5.4)
+#ifndef COMPILING_IVORY
+#ifndef USING_R
+#ifndef IS_BYTES
+#define IS_BYTES(x) (LEVELS(x) & 2)
+#endif
+#ifndef IS_LATIN1
+#define IS_LATIN1(x) (LEVELS(x) & 4)
+#endif
+#ifndef IS_ASCII
+#define IS_ASCII(x) (LEVELS(x) & 64)
+#endif
+#ifndef IS_UTF8
+#define IS_UTF8(x) (LEVELS(x) & 8)
+#endif
+#ifndef IS_CACHED
+#define IS_CACHED(x) (LEVELS(x) & 32)
+#endif
+#ifndef ENC_KNOWN
+#define ENC_KNOWN(x) (LEVELS(x) & 12)
+#endif
+#endif
+#endif
+// =====
+
 #define IS_SIMPLE_SCALAR(x, type) \
     (IS_SCALAR(x, type) && ATTRIB(x) == R_NilValue)
 int SIMPLE_SCALAR_TYPE(SEXP x);
@@ -1281,7 +1307,7 @@ void SET_LOGICAL_ELT(SEXP x, R_xlen_t i, int v);
 void SET_INTEGER_ELT(SEXP x, R_xlen_t i, int v);
 void SET_REAL_ELT(SEXP x, R_xlen_t i, double v);
 
-#if defined(USE_RINTERNALS) || defined(TESTING_WRITE_BARRIER) || defined(COMPILING_IVORY)
+#if defined(USE_RINTERNALS) || defined(COMPILING_IVORY)
 
 /* Test macros with function versions above */
 // These macros are required by stringi package.

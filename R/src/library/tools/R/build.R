@@ -402,7 +402,7 @@ inRbuildignore <- function(files, pkgdir) {
                              gettext("Run R CMD build without --no-build-vignettes to re-create", domain = "R-tools"))
                     errorLog(Log, paste(msg, collapse = "\n"))
                     do_exit(1L)
-                } else resultLog(Log, gettext("OK"))
+                } else resultLog(Log, gettext("OK", domain = "R-tools"))
             }
         }
         if (compact_vignettes != "no" &&
@@ -997,7 +997,7 @@ inRbuildignore <- function(files, pkgdir) {
         }
 
         ## prepare the copy
-        messageLog(Log, gettextf("preparing %s:", sQuote(pkgname)))
+        messageLog(Log, gettextf("preparing %s:", sQuote(pkgname), domain = "R-tools"))
         prepare_pkg(normalizePath(pkgname, "/"), desc, Log);
         owd <- setwd(pkgname)
         ## remove exclude files
@@ -1154,7 +1154,7 @@ inRbuildignore <- function(files, pkgdir) {
         filename <- paste0(pkgname, "_", desc["Version"], ".tar", ext)
         filepath <- file.path(startdir, filename)
         ## NB: ../../../../tests/reg-packages.R relies on this exact format!
-        messageLog(Log, gettextf("building %s", sQuote(filename)))
+        messageLog(Log, gettextf("building %s", sQuote(filename), domain = "R-tools"))
         res <- utils::tar(filepath, pkgname, compression = compression,
                           compression_level = 9L,
                           tar = Sys.getenv("R_BUILD_TAR"),
