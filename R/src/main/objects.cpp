@@ -1172,7 +1172,7 @@ static R_stdGen_ptr_t R_get_standardGeneric_ptr(void)
 
 /* Also called from R_initMethodDispatch in methods C code, which is
    called when the methods namespace is loaded. */
-R_stdGen_ptr_t R_set_standardGeneric_ptr(R_stdGen_ptr_t val, SEXP envir)
+R_stdGen_ptr_t R::R_set_standardGeneric_ptr(R_stdGen_ptr_t val, SEXP envir)
 {
     R_stdGen_ptr_t old = R_standardGeneric_ptr;
     R_standardGeneric_ptr = val;
@@ -1327,7 +1327,7 @@ static SEXP *prim_mlist;
 static constexpr int DEFAULT_N_PRIM_METHODS = 100;
 
 // Called from methods package, ../library/methods/src/methods_list_dispatch.cpp
-SEXP R_set_prim_method(SEXP fname, SEXP op, SEXP code_vec, SEXP fundef,
+SEXP R::R_set_prim_method(SEXP fname, SEXP op, SEXP code_vec, SEXP fundef,
 		       SEXP mlist)
 {
     const char *code_string;
@@ -1362,7 +1362,7 @@ SEXP R_set_prim_method(SEXP fname, SEXP op, SEXP code_vec, SEXP fundef,
     return fname;
 }
 
-SEXP R_primitive_methods(SEXP op)
+SEXP R::R_primitive_methods(SEXP op)
 {
 	int offset = PRIMOFFSET(op);
 	if (offset < 0 || offset > curMaxOffset)
@@ -1374,7 +1374,7 @@ SEXP R_primitive_methods(SEXP op)
 	}
 }
 
-SEXP R_primitive_generic(SEXP op)
+SEXP R::R_primitive_generic(SEXP op)
 {
 	int offset = PRIMOFFSET(op);
 	if (offset < 0 || offset > curMaxOffset)
@@ -1387,7 +1387,7 @@ SEXP R_primitive_generic(SEXP op)
 }
 
 // used in the methods package, but also here
-SEXP do_set_prim_method(SEXP op, const char *code_string, SEXP fundef,
+SEXP R::do_set_prim_method(SEXP op, const char *code_string, SEXP fundef,
 			SEXP mlist)
 {
     int offset = 0;
@@ -1551,7 +1551,7 @@ HIDDEN bool R::R_has_methods(SEXP op)
 
 static GCRoot<Symbol> deferred_default_object;
 
-SEXP R_deferred_default_method()
+SEXP R::R_deferred_default_method()
 {
 	if (!deferred_default_object)
 		deferred_default_object = Symbol::obtain("__Deferred_Default_Marker__");
@@ -1559,7 +1559,7 @@ SEXP R_deferred_default_method()
 }
 
 static R_stdGen_ptr_t quick_method_check_ptr = nullptr;
-void R_set_quick_method_check(R_stdGen_ptr_t value)
+void R::R_set_quick_method_check(R_stdGen_ptr_t value)
 {
     quick_method_check_ptr = value;
 }

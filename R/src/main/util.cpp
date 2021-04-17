@@ -2996,7 +2996,7 @@ static void str_signif_sexp(SEXP x, const char *type, int width, int digits,
    This checks if it succeeds.
    FIXME: is this worth inlining?
  */
-char *Rstrdup(const char *s)
+char *R::Rstrdup(const char *s)
 {
 	size_t nb = strlen(s) + 1;
 	void *cpy = malloc(nb);

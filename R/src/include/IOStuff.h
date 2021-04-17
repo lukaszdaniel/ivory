@@ -70,15 +70,7 @@ namespace R
 		int ntext;			 /* Vector length */
 		int offset;			 /* Offset within vector */
 	};
-} // namespace R
-#ifndef __MAIN__
-	extern
-#else
-	HIDDEN
-#endif
-		R::IoBuffer R_ConsoleIob; /* Console IO Buffer */
-namespace R
-{
+
 	/*- some of these really could be void */
 	bool R_IoBufferInit(IoBuffer *);
 	bool R_IoBufferFree(IoBuffer *);
@@ -93,5 +85,12 @@ namespace R
 	bool R_TextBufferFree(TextBuffer *);
 	int R_TextBufferGetc(TextBuffer *);
 } // namespace R
+
+#ifndef __MAIN__
+extern
+#else
+HIDDEN
+#endif
+	R::IoBuffer R_ConsoleIob; /* Console IO Buffer */
 
 #endif /* R_IOSTUFF_H */

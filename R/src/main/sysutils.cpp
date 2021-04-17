@@ -1949,7 +1949,7 @@ HIDDEN SEXP do_proctime(SEXP call, SEXP op, SEXP args, SEXP env)
     return ans;
 }
 
-HIDDEN void resetTimeLimits()
+HIDDEN void R::resetTimeLimits()
 {
     double data[5];
     R_getProcTime(data);

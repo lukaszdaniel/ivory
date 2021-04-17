@@ -967,7 +967,7 @@ static int MIN_JIT_SCORE = 50;
 
 static struct { unsigned long count, envcount, bdcount; } jit_info = {0, 0, 0};
 
-HIDDEN void R_init_jit_enabled(void)
+HIDDEN void R::R_init_jit_enabled(void)
 {
     /* Need to force the lazy loading promise to avoid recursive
        promise evaluation when JIT is enabled. Might be better to do
@@ -1336,7 +1336,7 @@ inline static Rboolean jit_srcref_match(SEXP cmpsrcref, SEXP srcref)
     return R_compute_identical(cmpsrcref, srcref, 0);
 }
 
-HIDDEN SEXP R_cmpfun1(SEXP fun)
+HIDDEN SEXP R::R_cmpfun1(SEXP fun)
 {
     bool old_visible = Evaluator::resultPrinted();
     SEXP packsym, funsym, call, fcall, val;
@@ -2641,7 +2641,7 @@ static GCRoot<Symbol> R_Subassign2Sym(nullptr);
 static GCRoot<Symbol> R_DollarGetsSymbol(nullptr);
 static GCRoot<Symbol> R_AssignSym(nullptr);
 
-HIDDEN void R_initAssignSymbols(void)
+HIDDEN void R::R_initAssignSymbols(void)
 {
 	for (auto i = 0; i < NUM_ASYM; i++)
 		asymSymbol[i] = install(asym[i]);
@@ -6641,7 +6641,7 @@ static SEXP R_findBCInterpreterExpression()
 	return R_findBCInterpreterLocation(nullptr, "expressionsIndex");
 }
 
-HIDDEN SEXP R_getCurrentSrcref()
+HIDDEN SEXP R::R_getCurrentSrcref()
 {
 	if (R_Srcref != R_InBCInterpreter)
 		return R_Srcref;
@@ -6741,7 +6741,7 @@ static SEXP inflateAssignmentCall(SEXP expr) {
 }
 
 /* Get the current expression being evaluated by the byte-code interpreter. */
-HIDDEN SEXP R_getBCInterpreterExpression()
+HIDDEN SEXP R::R_getBCInterpreterExpression()
 {
     SEXP exp = R_findBCInterpreterExpression();
     if (TYPEOF(exp) == PROMSXP) {

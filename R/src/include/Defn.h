@@ -54,7 +54,6 @@
 constexpr int MAXELTSIZE = 8192; /* Used as a default for string buffer sizes, \
                and occasionally as a limit. */
 
-
 #ifdef _WIN32
 extern void R_WaitEvent(void);
 #endif
@@ -140,9 +139,11 @@ extern char *strdup(const char *s1);
 extern int strncasecmp(const char *s1, const char *s2, size_t n);
 #endif
 
-/* safer alternative */
-extern char *Rstrdup(const char *s);
-
+namespace R
+{
+    /* safer alternative */
+    extern char *Rstrdup(const char *s);
+} // namespace R
 /* Glibc manages to not define this in -pedantic -ansi */
 #if defined(HAVE_PUTENV) && !defined(putenv) && defined(HAVE_DECL_PUTENV) && !HAVE_DECL_PUTENV
 extern int putenv(char *string);
@@ -245,7 +246,7 @@ extern "C"
         INITIALIZED = 1,
         STARTED = 2
     };
-    extern0 RStatus R_Is_Running INI_as(RStatus::NOT_STARTED);                 /* for Windows memory manager */
+    extern0 RStatus R_Is_Running INI_as(RStatus::NOT_STARTED); /* for Windows memory manager */
 
     /* Evaluation Environment */
     extern0 int R_BrowseLines INI_as(0);                    /* lines/per call in browser :
@@ -299,8 +300,10 @@ extern "C"
     LibExtern char *R_HistoryFile;  /* Name of the history file */
     LibExtern int R_HistorySize;    /* Size of the history file */
     LibExtern int R_RestoreHistory; /* restore the history file? */
-    extern void R_setupHistory(void);
-
+    namespace R
+    {
+        extern void R_setupHistory(void);
+    } // namespace R
     /* Warnings/Errors */
     extern0 int R_CollectWarnings INI_as(0);       /* the number of warnings */
     extern0 SEXP R_Warnings;                       /* the warnings and their calls */
@@ -327,10 +330,11 @@ extern "C"
     extern1 const char *OutDec INI_as("."); /* decimal point used for output */
     extern0 Rboolean R_DisableNLinBrowser INI_as(FALSE);
     extern0 char R_BrowserLastCommand INI_as('n');
-
-    /* Initialization of the R environment when it is embedded */
-    extern int Rf_initEmbeddedR(int argc, char *argv[]);
-
+    namespace R
+    {
+        /* Initialization of the R environment when it is embedded */
+        extern int Rf_initEmbeddedR(int argc, char *argv[]);
+    } // namespace R
     /* GUI type */
 
     extern1 const char *R_GUIType INI_as("unknown");
@@ -342,34 +346,41 @@ extern "C"
     extern0 double elapsedLimit INI_as(-1.0);
     extern0 double elapsedLimit2 INI_as(-1.0);
     extern0 double elapsedLimitValue INI_as(-1.0);
-
-    void resetTimeLimits(void);
-
+    namespace R
+    {
+        void resetTimeLimits(void);
+    } // namespace R
     extern0 int R_jit_enabled INI_as(0); /* has to be 0 during R startup */
     extern0 int R_compile_pkgs INI_as(0);
     extern0 int R_check_constants INI_as(0);
     extern0 int R_disable_bytecode INI_as(0);
-    extern SEXP R_cmpfun1(SEXP); /* unconditional fresh compilation */
-    extern void R_init_jit_enabled(void);
-    extern void R_initAssignSymbols(void);
-    extern SEXP R_getCurrentSrcref();
-    extern SEXP R_getBCInterpreterExpression();
-
+    namespace R
+    {
+        extern SEXP R_cmpfun1(SEXP); /* unconditional fresh compilation */
+        extern void R_init_jit_enabled(void);
+        extern void R_initAssignSymbols(void);
+        extern SEXP R_getCurrentSrcref();
+        extern SEXP R_getBCInterpreterExpression();
+    } // namespace R
     LibExtern int R_num_math_threads INI_as(1);
     LibExtern int R_max_num_math_threads INI_as(1);
-
-    /* Pointer type and utilities for dispatch in the methods package */
-    using R_stdGen_ptr_t = SEXP (*)(SEXP, SEXP, SEXP); /* typedef */
-    //R_stdGen_ptr_t R_get_standardGeneric_ptr(void); /* get method */
-    R_stdGen_ptr_t R_set_standardGeneric_ptr(R_stdGen_ptr_t, SEXP); /* set method */
+    namespace R
+    {
+        /* Pointer type and utilities for dispatch in the methods package */
+        using R_stdGen_ptr_t = SEXP (*)(SEXP, SEXP, SEXP); /* typedef */
+        //R_stdGen_ptr_t R_get_standardGeneric_ptr(void); /* get method */
+        R_stdGen_ptr_t R_set_standardGeneric_ptr(R_stdGen_ptr_t, SEXP); /* set method */
+    } // namespace R
     LibExtern SEXP R_MethodsNamespace;
-    SEXP R_deferred_default_method(void);
-    SEXP R_set_prim_method(SEXP fname, SEXP op, SEXP code_vec, SEXP fundef, SEXP mlist);
-    SEXP do_set_prim_method(SEXP op, const char *code_string, SEXP fundef, SEXP mlist);
-    void R_set_quick_method_check(R_stdGen_ptr_t);
-    SEXP R_primitive_methods(SEXP op);
-    SEXP R_primitive_generic(SEXP op);
-
+    namespace R
+    {
+        SEXP R_deferred_default_method(void);
+        SEXP R_set_prim_method(SEXP fname, SEXP op, SEXP code_vec, SEXP fundef, SEXP mlist);
+        SEXP do_set_prim_method(SEXP op, const char *code_string, SEXP fundef, SEXP mlist);
+        void R_set_quick_method_check(R_stdGen_ptr_t);
+        SEXP R_primitive_methods(SEXP op);
+        SEXP R_primitive_generic(SEXP op);
+    } // namespace R
     /* smallest decimal exponent, needed in format.cpp, set in Init_R_Machine */
     extern0 int R_dec_min_exponent INI_as(-308);
 

@@ -143,7 +143,7 @@ void R_FlushConsole(void) {
 #endif
 
 
-void R_setupHistory()
+void R::R_setupHistory()
 {
     int value, ierr;
     char *p;

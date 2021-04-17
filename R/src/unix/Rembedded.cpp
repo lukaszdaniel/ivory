@@ -59,7 +59,7 @@ extern "C" void R_CleanTempDir(void);
     Rf_initEmbeddedR(sizeof(argv)/sizeof(argv[0]), argv);
 */
 
-int Rf_initEmbeddedR(int argc, char *argv[])
+int R::Rf_initEmbeddedR(int argc, char *argv[])
 {
     Rf_initialize_R(argc, argv);
     R_Interactive = TRUE; /* Rf_initialize_R set this based on isatty */

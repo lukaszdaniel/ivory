@@ -129,7 +129,7 @@ int Rf_initialize_R(int argc, char *argv[])
     return 0;
 }
 
-int Rf_initEmbeddedR(int argc, char *argv[])
+int R::Rf_initEmbeddedR(int argc, char *argv[])
 {
     Rf_initialize_R(argc, argv);
     setup_Rmainloop();
