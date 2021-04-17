@@ -282,6 +282,15 @@ int IS_UTF8(SEXP x)
     return str->encoding() == CE_UTF8;
 }
 
+int IS_NATIVE(SEXP x)
+{
+    if (!x)
+        return false;
+    const String *str = SEXP_downcast<const String *>(x);
+    // return !(str->encoding() == CE_LATIN1 || str->encoding() == CE_UTF8 || str->encoding() == CE_BYTES);
+    return str->encoding() == CE_NATIVE;
+}
+
 void SET_BYTES(SEXP x)
 {
     /* does nothing in CXXR */

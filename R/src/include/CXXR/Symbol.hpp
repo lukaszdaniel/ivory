@@ -42,7 +42,7 @@
 namespace R
 {
     extern void InitNames();
-}
+} // namespace R
 
 namespace CXXR
 {

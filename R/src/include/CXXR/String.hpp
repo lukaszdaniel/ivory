@@ -42,7 +42,7 @@
 namespace R
 {
 	extern void InitNames();
-}
+} // namespace R
 
 namespace CXXR
 {
@@ -378,7 +378,7 @@ namespace R
 	 * is a major decision.
 	 */
 	int R_Newhashpjw(const char *s);
-}
+} // namespace R
 
 extern "C"
 {
@@ -427,6 +427,14 @@ extern "C"
 	 * @return true iff \a x contains only ASCII characters.
 	 */
 	int IS_ASCII(SEXP x);
+
+	/** @brief Does a rho::String have NATIVE encoding?
+	 *
+	 * @param x Pointer to a rho::String.
+	 *
+	 * @return true iff \a x is marked as having NATIVE encoding.
+	 */
+	int IS_NATIVE(SEXP x);
 
 	/** @brief Is the encoding of a rho::String known?
 	 *

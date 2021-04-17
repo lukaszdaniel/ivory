@@ -209,6 +209,6 @@ namespace R
      * @return Pointer to the created CXXR::BuiltInFunction object.
      */
     SEXP mkPRIMSXP(int offset, bool evaluate);
-}
+} // namespace R
 
 #endif /* BUILTINFUNCTION_HPP */

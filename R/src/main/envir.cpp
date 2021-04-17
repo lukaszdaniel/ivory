@@ -821,8 +821,7 @@ static std::pair<SEXP, bool> RemoveFromList(SEXP thing, SEXP list)
     }
 }
 
-/**
- * @brief Remove a value from an environment.
+/** @brief Remove a value from an environment.
  *
  *       This happens only in the frame of the specified environment.
  * 
@@ -3196,10 +3195,7 @@ void R_LockEnvironment(SEXP env, Rboolean bindings)
                     LOCK_BINDING(sym);
             }
         }
-#ifdef NOT_YET
-	/* causes problems with Matrix */
 	LOCK_FRAME(env);
-#endif
 	return;
     }
 

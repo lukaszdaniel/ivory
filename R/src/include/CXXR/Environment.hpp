@@ -40,7 +40,7 @@
 namespace R
 {
    extern void InitGlobalEnv();
-}
+} // namespace R
 
 namespace CXXR
 {

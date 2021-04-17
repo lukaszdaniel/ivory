@@ -406,7 +406,10 @@ extern "C"
 #include <wchar.h>
 
 /*--- FUNCTIONS ------------------------------------------------------ */
-
+/** @brief Namespace for the CR internal functions.
+ *
+ * This namespace encapsulates CR internal functions that are not part of the R API.
+ */
 namespace R
 {
     void CoercionWarning(int); /* warning code */

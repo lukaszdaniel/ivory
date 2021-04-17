@@ -226,7 +226,7 @@ namespace R
      * surprisingly complicated.
      */
     bool R_isMissing(SEXP symbol, SEXP rho);
-}
+} // namespace R
 
 extern "C"
 {

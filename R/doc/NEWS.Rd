@@ -232,6 +232,15 @@
 
       \item \code{sprintf} now warns on arguments unused by the format
       string.
+
+      \item New palettes \code{"Rocket"} and \code{"Mako"} for
+      \code{hcl.colors()} (approximating palettes of the same name
+      from the 'viridisLite' package).
+
+      Contributed by Achim Zeileis.
+
+      \item The base environment and its namespace are now locked (so
+      one can no longer add bindings to these or remove from these).
     }
   }
 

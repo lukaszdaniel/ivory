@@ -108,3 +108,5 @@ local({
     if(nzchar(rv <- Sys.getenv("_R_RNG_VERSION_")))
         suppressWarnings(RNGversion(rv))
 })
+
+.sys.timezone <- NA_character_
