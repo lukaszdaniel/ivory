@@ -31,7 +31,9 @@
 #ifndef BUILTINFUNCTION_HPP
 #define BUILTINFUNCTION_HPP
 
+#include <vector>
 #include <CXXR/FunctionBase.hpp>
+#include <CXXR/Expression.hpp>
 
 namespace CXXR
 {
@@ -65,8 +67,11 @@ namespace CXXR
         {
         }
 
-        // Virtual function of RObject:
-        const char *typeName() const override;
+        /** @brief Get table offset.
+         *
+         * @return The offset into the table of functions.
+         */
+        int offset() const { return m_offset; }
 
         /** @brief The names by which this type is known in R.
          *
@@ -77,11 +82,8 @@ namespace CXXR
             return "(builtin or special)";
         }
 
-        /** @brief Get table offset.
-         *
-         * @return The offset into the table of functions.
-         */
-        int offset() const { return m_offset; }
+        // Virtual function of RObject:
+        const char *typeName() const override;
 
     private:
         int m_offset;
