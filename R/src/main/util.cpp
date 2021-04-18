@@ -779,7 +779,7 @@ static SEXP intern_getwd(void)
     char *res = getcwd(buf, PATH_MAX); /* can return nullptr */
     if(res) rval = mkString(buf);
 #endif
-    return(rval);
+    return rval;
 }
 
 HIDDEN SEXP do_getwd(SEXP call, SEXP op, SEXP args, SEXP rho)
@@ -821,7 +821,7 @@ HIDDEN SEXP do_setwd(SEXP call, SEXP op, SEXP args, SEXP rho)
     }
 #endif
     UNPROTECT(1); /* wd */
-    return(wd);
+    return wd;
 }
 
 /* remove portion of path before file separator if one exists */
@@ -858,7 +858,7 @@ HIDDEN SEXP do_basename(SEXP call, SEXP op, SEXP args, SEXP rho)
 	}
     }
     UNPROTECT(1);
-    return(ans);
+    return ans;
 }
 #else
 HIDDEN SEXP do_basename(SEXP call, SEXP op, SEXP args, SEXP rho)
@@ -892,7 +892,7 @@ HIDDEN SEXP do_basename(SEXP call, SEXP op, SEXP args, SEXP rho)
 	}
     }
     UNPROTECT(1);
-    return(ans);
+    return ans;
 }
 #endif
 
@@ -942,7 +942,7 @@ HIDDEN SEXP do_dirname(SEXP call, SEXP op, SEXP args, SEXP rho)
 	}
     }
     UNPROTECT(1);
-    return(ans);
+    return ans;
 }
 #else
 HIDDEN SEXP do_dirname(SEXP call, SEXP op, SEXP args, SEXP rho)
@@ -980,7 +980,7 @@ HIDDEN SEXP do_dirname(SEXP call, SEXP op, SEXP args, SEXP rho)
 	}
     }
     UNPROTECT(1);
-    return(ans);
+    return ans;
 }
 #endif
 

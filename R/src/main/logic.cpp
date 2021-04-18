@@ -462,7 +462,7 @@ HIDDEN SEXP do_logic3(SEXP call, SEXP op, SEXP args, SEXP env)
 
     if (DispatchGroup("Summary", call2, op, args, env, &ans)) {
 	UNPROTECT(2);
-	return(ans);
+	return ans;
     }
 
     ans = matchArgExact(R_NaRmSymbol, &args);

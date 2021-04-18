@@ -94,7 +94,7 @@ SEXP do_setGraphicsEventEnv(SEXP call, SEXP op, SEXP args, SEXP env)
 
     dd->eventEnv = eventEnv;
 
-    return(R_NilValue);
+    return nullptr;
 }
 
 extern "C"
@@ -215,7 +215,7 @@ SEXP do_getGraphicsEvent(SEXP call, SEXP op, SEXP args, SEXP env)
 	}
 
     }
-    return(result);
+    return result;
 }
 
 /* used in devWindows.cpp and cairoDevice */

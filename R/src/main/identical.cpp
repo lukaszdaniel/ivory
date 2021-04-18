@@ -309,11 +309,11 @@ Rboolean R_compute_identical(SEXP x, SEXP y, int flags)
     }
     case SPECIALSXP:
     case BUILTINSXP:
-	return(PRIMOFFSET(x) == PRIMOFFSET(y) ? TRUE : FALSE);
+	return (PRIMOFFSET(x) == PRIMOFFSET(y) ? TRUE : FALSE);
     case ENVSXP:
     case SYMSXP:
     case WEAKREFSXP: /**** is this the best approach? */
-	return(x == y ? TRUE : FALSE);
+	return (x == y ? TRUE : FALSE);
     case BCODESXP:
 	return (Rboolean) (R_compute_identical(BCODE_CODE(x), BCODE_CODE(y), flags) &&
 	       R_compute_identical(BCODE_EXPR(x), BCODE_EXPR(y), flags) &&
@@ -328,8 +328,8 @@ Rboolean R_compute_identical(SEXP x, SEXP y, int flags)
     case PROMSXP: // args are evaluated -- but can be seen from DOTSXP dissection
 	/* test for equality of the substituted expression -- or should
 	   we require both expression and environment to be identical? */
-	return(R_compute_identical(substitute(PREXPR(x), PRENV(x)),
-				   substitute(PREXPR(y), PRENV(y)), flags));
+	return R_compute_identical(substitute(PREXPR(x), PRENV(x)),
+				   substitute(PREXPR(y), PRENV(y)), flags);
     case S4SXP:
 	/* attributes already tested, so all slots identical */
 	return TRUE;

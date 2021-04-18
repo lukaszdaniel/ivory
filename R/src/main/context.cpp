@@ -657,7 +657,7 @@ HIDDEN SEXP do_sysbrowser(SEXP call, SEXP op, SEXP args, SEXP rho)
 	SET_ENV_RDEBUG(cptr->workingEnvironment(), 1);
 	break;
     }
-    return(rval);
+    return rval;
 }
 
 /* An implementation of S's frame access functions. They usually count */

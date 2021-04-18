@@ -326,7 +326,7 @@ static SEXP do_one(SEXP X, SEXP FUN, SEXP classes, SEXP deflt,
 	if (MAYBE_REFERENCED(ans))
 	    ans = lazy_duplicate(ans);
 	UNPROTECT(1);
-	return(ans);
+	return ans;
     } else if(replace) return lazy_duplicate(X);
     else return lazy_duplicate(deflt);
 }

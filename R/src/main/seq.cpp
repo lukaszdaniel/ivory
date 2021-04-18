@@ -28,6 +28,7 @@
 
 #define R_NO_REMAP
 
+#include <cfloat>  /* for DBL_EPSILON */
 #include <CXXR/VectorBase.hpp>
 #include <CXXR/IntVector.hpp>
 #include <CXXR/RealVector.hpp>
@@ -37,7 +38,6 @@
 #include <Localization.h>
 #include <Defn.h>
 #include <Internal.h>
-#include <cfloat>  /* for DBL_EPSILON */
 #include <Rmath.h>
 #include <R_ext/Itermacros.h>
 
@@ -158,7 +158,7 @@ HIDDEN SEXP do_colon(SEXP call, SEXP op, SEXP args, SEXP rho)
 
     checkArity(op, args);
     if (inherits(CAR(args), "factor") && inherits(CADR(args), "factor"))
-	return(cross_colon(call, CAR(args), CADR(args)));
+	return cross_colon(call, CAR(args), CADR(args));
 
     s1 = CAR(args);
     s2 = CADR(args);
@@ -387,10 +387,10 @@ HIDDEN SEXP do_rep_int(SEXP call, SEXP op, SEXP args, SEXP rho)
 
     /* DispatchOrEval internal generic: rep.int */
     if (DispatchOrEval(call, op, "rep.int", args, rho, &a, 0, 0))
-      return(a);
+      return a;
 
     if (DispatchOrEval(call, op, "rep", args, rho, &a, 0, 0))
-      return(a);
+      return a;
 
     if (!isVector(ncopy))
 	error(_("invalid type (%s) for '%s' (must be a vector)"),
@@ -450,7 +450,7 @@ HIDDEN SEXP do_rep_len(SEXP call, SEXP op, SEXP args, SEXP rho)
 
     /* DispatchOrEval internal generic: rep_len */
     if (DispatchOrEval(call, op, "rep_len", args, rho, &a, 0, 0))
-      return(a);
+      return a;
 
     s = CAR(args);
 
@@ -462,7 +462,7 @@ HIDDEN SEXP do_rep_len(SEXP call, SEXP op, SEXP args, SEXP rho)
 	SET_TAG(CDR(args), Symbol::obtain("length.out"));
 	if (DispatchOrEval(rep_call, op, "rep", args, rho, &a, 0, 0)) {
 	    UNPROTECT(1);
-	    return(a);
+	    return a;
 	}
 	UNPROTECT(1);
     }
@@ -734,7 +734,7 @@ HIDDEN SEXP do_rep(SEXP call, SEXP op, SEXP args, SEXP rho)
     /* includes factors, POSIX[cl]t, Date */
     /* DispatchOrEval internal generic: rep */
     if (DispatchOrEval(call, op, "rep", args, rho, &ans, 0, 0))
-	return(ans);
+	return ans;
 
     /* This has evaluated all the non-missing arguments into ans */
     PROTECT(args = ans);
@@ -898,7 +898,7 @@ HIDDEN SEXP do_seq(SEXP call, SEXP op, SEXP args, SEXP rho)
 
     /* DispatchOrEval internal generic: seq.int */
     if (DispatchOrEval(call, op, "seq", args, rho, &ans, 0, 1))
-	return(ans);
+	return ans;
 
     /* This is a primitive and we manage argument matching ourselves.
        We pretend this is

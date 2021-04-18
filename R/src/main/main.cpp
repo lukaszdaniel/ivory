@@ -33,6 +33,7 @@
 #include <cctype>
 #include <cstdlib>
 #include <cstring>
+#include <clocale>
 
 #define __MAIN__
 #define R_NO_REMAP
@@ -58,7 +59,6 @@
 #include <Parse.h>
 #include <Startup.h>
 
-#include <clocale>
 #include <R_ext/Print.h>
 #include <R_ext/Error.h>
 
@@ -233,14 +233,14 @@ int Rf_ReplIteration(SEXP rho, int savestack, int browselevel, R_ReplState *stat
 	    R_Busy(0);
 	    if (R_ReadConsole(R_PromptString(browselevel, state->prompt_type),
 			      state->buf, CONSOLE_BUFFER_SIZE, 1) == 0)
-		return(-1);
+		return (-1);
 	    state->bufp = state->buf;
     }
 #ifdef SHELL_ESCAPE /* not default */
     if (*state->bufp == '!') {
 	    R_system(&(state->buf[1]));
 	    state->buf[0] = '\0';
-	    return(0);
+	    return 0;
     }
 #endif /* SHELL_ESCAPE */
     while((c = *state->bufp++)) {
@@ -296,28 +296,28 @@ int Rf_ReplIteration(SEXP rho, int savestack, int browselevel, R_ReplState *stat
 	if (R_BrowserLastCommand == 'S') R_BrowserLastCommand = 's';
 	R_IoBufferWriteReset(&R_ConsoleIob);
 	state->prompt_type = 1;
-	return(1);
+	return 1;
 
     case PARSE_ERROR:
 
 	state->prompt_type = 1;
 	parseError(R_NilValue, 0);
 	R_IoBufferWriteReset(&R_ConsoleIob);
-	return(1);
+	return 1;
 
     case PARSE_INCOMPLETE:
 
 	R_IoBufferReadReset(&R_ConsoleIob);
 	state->prompt_type = 2;
-	return(2);
+	return 2;
 
     case PARSE_EOF:
 
-	return(-1);
+	return (-1);
 	break;
     }
 
-    return(0);
+    return 0;
 }
 
 static void R_ReplConsole(SEXP rho, int savestack, int browselevel)
@@ -1576,7 +1576,7 @@ R_ToplevelCallbackEl *Rf_addTaskCallback(R_ToplevelCallback cb, void *data,
     if(pos)
 	*pos = which;
 
-    return(el);
+    return el;
 }
 
 Rboolean Rf_removeTaskCallbackByName(const char *name)
@@ -1658,7 +1658,7 @@ Rboolean Rf_removeTaskCallbackByIndex(int id)
 	status = FALSE;
     }
 
-    return(status);
+    return status;
 }
 
 
@@ -1708,7 +1708,7 @@ SEXP R_getTaskCallbackNames(void)
 	el = el->next;
     }
     UNPROTECT(1);
-    return(ans);
+    return ans;
 }
 
 /**
@@ -1839,7 +1839,7 @@ Rboolean R_taskCallbackRoutine(SEXP expr, SEXP value, Rboolean succeeded,
 
     UNPROTECT(3); /* rho, e, val */
 
-    return(again);
+    return again;
 }
 
 SEXP R_addTaskCallback(SEXP f, SEXP data, SEXP useData, SEXP name)
@@ -1872,7 +1872,7 @@ SEXP R_addTaskCallback(SEXP f, SEXP data, SEXP useData, SEXP name)
     }
 
     UNPROTECT(1);
-    return(index);
+    return index;
 }
 
 #undef __MAIN__

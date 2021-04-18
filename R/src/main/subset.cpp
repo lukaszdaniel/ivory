@@ -701,7 +701,7 @@ HIDDEN SEXP do_subset(SEXP call, SEXP op, SEXP args, SEXP rho)
 /*     if(DispatchAnyOrEval(call, op, "[", args, rho, &ans, 0, 0)) */
 	if (NAMED(ans))
 	    ENSURE_NAMEDMAX(ans);
-	return(ans);
+	return ans;
     }
 
     /* Method dispatch has failed, we now */
@@ -962,7 +962,7 @@ HIDDEN SEXP do_subset2(SEXP call, SEXP op, SEXP args, SEXP rho)
     if(R_DispatchOrEvalSP(call, op, "[[", args, rho, &ans)) {
 	if (NAMED(ans))
 	    ENSURE_NAMEDMAX(ans);
-	return(ans);
+	return ans;
     }
 
     /* Method dispatch has failed. */
@@ -1031,7 +1031,7 @@ HIDDEN SEXP do_subset2_dflt(SEXP call, SEXP op, SEXP args, SEXP rho)
 
 	UNPROTECT(2); /* args, x */
 	if(ans == R_UnboundValue)
-	    return(R_NilValue);
+	    return nullptr;
 	if (NAMED(ans))
 	    ENSURE_NAMEDMAX(ans);
 	return ans;
@@ -1166,7 +1166,7 @@ HIDDEN SEXP R::dispatch_subset2(SEXP x, R_xlen_t i, SEXP call, SEXP rho)
       // FIXME: throw error if not a list
         x_elt = VECTOR_ELT(x, i);
     }
-    return(x_elt);
+    return x_elt;
 }
 
 enum pmatch {
@@ -1269,7 +1269,7 @@ HIDDEN SEXP do_subset3(SEXP call, SEXP op, SEXP args, SEXP env)
 	UNPROTECT(1); /* args */
 	if (NAMED(ans))
 	    ENSURE_NAMEDMAX(ans);
-	return(ans);
+	return ans;
     }
     PROTECT(ans);
     ans = R_subset3_dflt(CAR(ans), STRING_ELT(CADR(args), 0), call);
@@ -1419,7 +1419,7 @@ HIDDEN SEXP R::R_subset3_dflt(SEXP x, SEXP input, SEXP call)
 	    if (NAMED(y))
 		ENSURE_NAMEDMAX(y);
 	    else RAISE_NAMED(y, NAMED(x));
-	    return(y);
+	    return y;
 	}
 	return R_NilValue;
     }

@@ -25,6 +25,7 @@
 
 #define R_NO_REMAP
 
+#include <cerrno>
 #include <CXXR/BuiltInFunction.hpp>
 #include <CXXR/VectorBase.hpp>
 #include <CXXR/FixedVector.hpp>
@@ -36,12 +37,12 @@
 #include <R_ext/Random.h>
 #include <R_ext/RS.h>		/* for Calloc() */
 #include <Rmath.h>		/* for rxxx functions */
-#include <cerrno>
+#include <Internal.h>
+
 using namespace R;
 
 /* Code down to do_random3 (inclusive) can be removed once the byte
   compiler knows how to optimize to .External rather than .Internal */
-#include <Internal.h>
 NORET static void invalid(SEXP call)
 {
     error(_("invalid arguments"));
@@ -93,7 +94,7 @@ HIDDEN SEXP do_random1(SEXP call, SEXP op, SEXP args, SEXP rho)
     PROTECT(x = allocVector(REALSXP, n));
     if (n == 0) {
 	UNPROTECT(1);
-	return(x);
+	return x;
     }
     na = XLENGTH(CADR(args));
     if (na < 1) {
@@ -175,7 +176,7 @@ HIDDEN SEXP do_random2(SEXP call, SEXP op, SEXP args, SEXP rho)
     PROTECT(x = allocVector(REALSXP, n));
     if (n == 0) {
 	UNPROTECT(1);
-	return(x);
+	return x;
     }
     na = XLENGTH(CADR(args));
     nb = XLENGTH(CADDR(args));
@@ -265,7 +266,7 @@ HIDDEN SEXP do_random3(SEXP call, SEXP op, SEXP args, SEXP rho)
     PROTECT(x = allocVector(REALSXP, n));
     if (n == 0) {
 	UNPROTECT(1);
-	return(x);
+	return x;
     }
 
     args = CDR(args); a = CAR(args);

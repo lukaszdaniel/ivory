@@ -29,6 +29,7 @@
 #define R_NO_REMAP
 #define R_USE_SIGNALS 1
 
+#include <utility>
 #include <CXXR/BuiltInFunction.hpp>
 #include <CXXR/GCStackRoot.hpp>
 #include <CXXR/ProtectStack.hpp>
@@ -44,7 +45,6 @@
 #include <Localization.h>
 #include <Internal.h>
 #include <R_ext/RS.h> /* for Calloc, Realloc and for S4 object bit */
-#include <utility>
 
 using namespace R;
 using namespace CXXR;
@@ -101,7 +101,7 @@ static SEXP GetObject(RCNTXT *cptr)
 	else
 	    s = PRVALUE(s);
     }
-    return(s);
+    return s;
 }
 
 static SEXP applyMethod(SEXP call, SEXP op, SEXP args, SEXP rho, SEXP newvars)
@@ -936,7 +936,7 @@ HIDDEN SEXP do_nextmethod(SEXP call, SEXP op, SEXP args, SEXP env)
     ans = applyMethod(newcall, nextfun, matchedarg, env, newvars);
     vmaxset(vmax);
     UNPROTECT(8);
-    return(ans);
+    return ans;
 }
 
 /* primitive */
@@ -1673,7 +1673,7 @@ SEXP R_do_MAKE_CLASS(const char *what)
     SETCAR(CDR(call), mkString(what));
     e = eval(call, R_MethodsNamespace);
     UNPROTECT(1);
-    return(e);
+    return e;
 }
 
 // similar, but gives NULL instead of an error for a non-existing class
@@ -1686,7 +1686,7 @@ SEXP R_getClassDef_R(SEXP what)
     SEXP call = PROTECT(lang2(s_getClassDef, what));
     SEXP e = eval(call, R_MethodsNamespace);
     UNPROTECT(1);
-    return(e);
+    return e;
 }
 
 SEXP R_getClassDef(const char *what)
@@ -1701,12 +1701,12 @@ SEXP R_getClassDef(const char *what)
 
 Rboolean R_isVirtualClass(SEXP class_def, SEXP env)
 {
-    if(!isMethodsDispatchOn()) return(FALSE);
+    if(!isMethodsDispatchOn()) return FALSE;
     static GCRoot<Symbol> isVCl_sym(nullptr);
     if(!isVCl_sym) isVCl_sym = Symbol::obtain("isVirtualClass");
     SEXP call = PROTECT(lang2(isVCl_sym, class_def));
     SEXP e = PROTECT(eval(call, env));
-    // return(LOGICAL(e)[0]);
+    // return LOGICAL(e)[0];
     // more cautious:
     Rboolean ans = (Rboolean) (asLogical(e) == TRUE);
     UNPROTECT(2); /* call, e */
@@ -1715,12 +1715,12 @@ Rboolean R_isVirtualClass(SEXP class_def, SEXP env)
 
 Rboolean R_extends(SEXP class1, SEXP class2, SEXP env)
 {
-    if(!isMethodsDispatchOn()) return(FALSE);
+    if(!isMethodsDispatchOn()) return FALSE;
     static GCRoot<Symbol> extends_sym(nullptr);
     if(!extends_sym) extends_sym = Symbol::obtain("extends");
     SEXP call = PROTECT(lang3(extends_sym, class1, class2));
     SEXP e = PROTECT(eval(call, env));
-    // return(LOGICAL(e)[0]);
+    // return LOGICAL(e)[0];
     // more cautious:
     Rboolean ans = (Rboolean) (asLogical(e) == TRUE);
     UNPROTECT(2); /* call, e */

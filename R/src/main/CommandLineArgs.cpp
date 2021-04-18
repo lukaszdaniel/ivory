@@ -23,6 +23,7 @@
 
 #define R_NO_REMAP
 
+#include <cstring>
 #include <CXXR/VectorBase.hpp>
 #include <CXXR/String.hpp>
 #include <Localization.h>
@@ -30,9 +31,9 @@
 #include <Rinterface.h>
 #include <R_ext/RStartup.h>
 #include <R_ext/RS.h> // for Calloc
-#include <cstring>
 
 using namespace R;
+using namespace CXXR;
 
 /* Remove and process common command-line arguments
  *  Formally part of ../unix/sys-common.cpp.

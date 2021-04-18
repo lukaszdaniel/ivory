@@ -532,7 +532,7 @@ static SEXP logicalSubscript(SEXP s, R_xlen_t ns, R_xlen_t nx, R_xlen_t &stretch
     }
     nmax = (ns > nx) ? ns : nx;
     stretch = (ns > nx) ? ns : 0;
-    if (ns == 0) return(allocVector(INTSXP, 0));
+    if (ns == 0) return allocVector(INTSXP, 0);
     const int *ps = LOGICAL_RO(s);    /* Calling LOCICAL_RO here may force a
 					 large allocation, but no larger than
 					 the one made by R_alloc below. This

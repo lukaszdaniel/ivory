@@ -373,7 +373,7 @@ static SEXP R_NewHashTable(int size)
     PROTECT(table = allocVector(VECSXP, size));
     SET_HASHPRI(table, 0);
     UNPROTECT(1);
-    return(table);
+    return table;
 }
 
 /**
@@ -891,7 +891,7 @@ static SEXP findVarLocInFrame(SEXP rho, SEXP symbol, Rboolean *canCache)
 	    }
 	    MARK_NOT_MUTABLE(val); /* to keep complex assignment code sane */
 	}
-	return(tmp);
+	return tmp;
     }
 
     if (HASHTAB(rho) == R_NilValue) {
@@ -997,7 +997,7 @@ SEXP Rf_findVarInFrame3(SEXP rho, SEXP symbol, Rboolean doGet)
 	    }
 	    MARK_NOT_MUTABLE(val); /* to keep complex assignment code sane */
 	}
-	return(val);
+	return val;
     } else if (HASHTAB(rho) == R_NilValue) {
 	frame = FRAME(rho);
 	while (frame != R_NilValue) {
@@ -1010,7 +1010,7 @@ SEXP Rf_findVarInFrame3(SEXP rho, SEXP symbol, Rboolean doGet)
 	c = PRINTNAME(symbol);
 	hashcode = HASHVALUE(c) % HASHSIZE(HASHTAB(rho));
 	/* Will return 'R_UnboundValue' if not found */
-	return(R_HashGet(hashcode, symbol, HASHTAB(rho)));
+	return R_HashGet(hashcode, symbol, HASHTAB(rho));
     }
     return R_UnboundValue;
 }
@@ -1336,7 +1336,7 @@ SEXP ddfind(int i, SEXP rho)
     if (vl != R_UnboundValue) {
 	if (length_DOTS(vl) >= i) {
 	    vl = nthcdr(vl, i - 1);
-	    return(CAR(vl));
+	    return CAR(vl);
 	}
 	else // length(...) < i
 	    error(n_("the ... list contains fewer than %d element",
@@ -1645,7 +1645,7 @@ static SEXP setVarInFrame(SEXP rho, SEXP symbol, SEXP value)
 	PROTECT(value);
 	SEXP result = table->assign(CHAR(PRINTNAME(symbol)), value, table);
 	UNPROTECT(1);
-	return(result);
+	return result;
     }
 
     if (rho == R_BaseNamespace || rho == R_BaseEnv) {
@@ -1810,7 +1810,7 @@ static int RemoveVariable(SEXP name, int hashcode, SEXP env)
 	table = (R_ObjectTable *) R_ExternalPtrAddr(HASHTAB(env));
 	if(table->remove == nullptr)
 	    error(_("cannot remove variables from this database"));
-	return(table->remove(CHAR(PRINTNAME(name)), table));
+	return table->remove(CHAR(PRINTNAME(name)), table);
     }
 
     if (IS_HASHED(env)) {
@@ -2120,7 +2120,7 @@ HIDDEN SEXP do_mget(SEXP call, SEXP op, SEXP args, SEXP rho)
 
     setAttrib(ans, R_NamesSymbol, lazy_duplicate(x));
     UNPROTECT(2);
-    return(ans);
+    return ans;
 }
 
 static SEXP findRootPromise(SEXP p)
@@ -2679,7 +2679,7 @@ HIDDEN SEXP do_ls(SEXP call, SEXP op, SEXP args, SEXP rho)
     if(IS_USER_DATABASE(CAR(args))) {
 	R_ObjectTable *tb = (R_ObjectTable*)
 	    R_ExternalPtrAddr(HASHTAB(CAR(args)));
-	return(tb->objects(tb));
+	return tb->objects(tb);
     }
 
     SEXP env = CAR(args);
@@ -2703,7 +2703,7 @@ SEXP R_lsInternal3(SEXP env, Rboolean all, Rboolean sorted)
     if(IS_USER_DATABASE(env)) {
 	R_ObjectTable *tb = (R_ObjectTable*)
 	    R_ExternalPtrAddr(HASHTAB(env));
-	return(tb->objects(tb));
+	return tb->objects(tb);
     }
 
     /* Step 1 : Compute the Vector Size */
@@ -2802,7 +2802,7 @@ HIDDEN SEXP do_env2list(SEXP call, SEXP op, SEXP args, SEXP rho)
 
     if(k == 0) { // no sorting, keep NULL names
 	UNPROTECT(2);
-	return(ans);
+	return ans;
     }
     if(sort_nms) {
 	// return list with *sorted* names
@@ -2819,12 +2819,12 @@ HIDDEN SEXP do_env2list(SEXP call, SEXP op, SEXP args, SEXP rho)
 	}
 	setAttrib(ans2, R_NamesSymbol, names2);
 	UNPROTECT(5);
-	return(ans2);
+	return ans2;
     }
     else {
 	setAttrib(ans, R_NamesSymbol, names);
 	UNPROTECT(2);
-	return(ans);
+	return ans;
     }
 }
 
@@ -2916,7 +2916,7 @@ HIDDEN SEXP do_eapply(SEXP call, SEXP op, SEXP args, SEXP rho)
 	UNPROTECT(1);
     }
     UNPROTECT(6);
-    return(ans);
+    return ans;
 }
 
 /* Leaks out via inlining in ../library/tools/src/ */
@@ -3092,7 +3092,7 @@ HIDDEN SEXP do_as_environment(SEXP call, SEXP op, SEXP args, SEXP rho)
 	if(!Rf_isEnvironment(dot_xData))
 	    errorcall(call, _("S4 object does not extend class \"environment\""));
 	else
-	    return(dot_xData);
+	    return dot_xData;
     }
     case VECSXP: {
 	/* implement as.environment.list() {isObject(.) is false for a list} */

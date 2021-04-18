@@ -509,9 +509,9 @@ static int SubassignTypeFix(SEXP *x, SEXP *y, R_xlen_t stretch, int level,
     SET_OBJECT(*x, x_is_object);
 
     if(redo_which)
-	return(100 * TYPEOF(*x) + TYPEOF(*y));
+	return (100 * TYPEOF(*x) + TYPEOF(*y));
     else
-	return(which);
+	return which;
 }
 
 #ifdef LONG_VECTOR_SUPPORT
@@ -1281,7 +1281,7 @@ static SEXP ArrayAssign(SEXP call, SEXP rho, SEXP x, SEXP s, SEXP y)
 
     if (n == 0) {
 	UNPROTECT(1);
-	return(x);
+	return x;
     }
 
     PROTECT(x);
@@ -1689,7 +1689,7 @@ HIDDEN SEXP do_subassign(SEXP call, SEXP op, SEXP args, SEXP rho)
     /* DispatchOrEval internal generic: [<- */
     if(R_DispatchOrEvalSP(call, op, "[<-", args, rho, &ans))
 /*     if(DispatchAnyOrEval(call, op, "[<-", args, rho, &ans, 0, 0)) */
-      return(ans);
+      return ans;
 
     return do_subassign_dflt(call, op, ans, rho);
 }
@@ -1737,7 +1737,7 @@ HIDDEN SEXP do_subassign_dflt(SEXP call, SEXP op, SEXP args, SEXP rho)
 				// isVectorList(y):
 				TYPEOF(y) == VECSXP || TYPEOF(y) == EXPRSXP)) {
 	    UNPROTECT(2);  /* args, y */
-	    return(x);
+	    return x;
 	}
 	else {
 	    /* bug PR#2590 coerce only if null */
@@ -1842,7 +1842,7 @@ HIDDEN SEXP do_subassign2(SEXP call, SEXP op, SEXP args, SEXP rho)
     /* DispatchOrEval internal generic: [[<- */
     if(R_DispatchOrEvalSP(call, op, "[[<-", args, rho, &ans))
 /*     if(DispatchAnyOrEval(call, op, "[[<-", args, rho, &ans, 0, 0)) */
-      return(ans);
+      return ans;
 
     return do_subassign2_dflt(call, op, ans, rho);
 }
@@ -1913,7 +1913,7 @@ do_subassign2_dflt(SEXP call, SEXP op, SEXP args, SEXP rho)
 	    error(_("wrong arguments for environment subassignment"));
 	defineVar(installTrChar(STRING_ELT(CAR(subs), 0)), y, x);
 	UNPROTECT(3); /* x, args, y */
-	return(S4 ? xOrig : x);
+	return (S4 ? xOrig : x);
     }
 
     /* new case in 1.7.0, one vector index for a list,
@@ -2217,7 +2217,7 @@ HIDDEN SEXP do_subassign3(SEXP call, SEXP op, SEXP args, SEXP env)
     /* DispatchOrEval internal generic: $<- */
     if(R_DispatchOrEvalSP(call, op, "$<-", args, env, &ans)) {
 	UNPROTECT(1); /* args */
-	return(ans);
+	return ans;
     }
     PROTECT(ans);
     if (nlist == R_NilValue)

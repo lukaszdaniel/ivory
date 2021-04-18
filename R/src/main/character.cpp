@@ -89,6 +89,8 @@ abbreviate chartr make.names strtrim tolower toupper give error.
  */
 #endif
 
+#include <cerrno>
+#include <vector>
 #include <CXXR/BuiltInFunction.hpp>
 #include <CXXR/String.hpp>
 #include <CXXR/IntVector.hpp>
@@ -97,12 +99,10 @@ abbreviate chartr make.names strtrim tolower toupper give error.
 #include <Defn.h>
 #include <Localization.h>
 #include <Internal.h>
-#include <cerrno>
 #include <R_ext/RS.h>  // for Calloc/Free
 #include <R_ext/Itermacros.h>
 #include <R_ext/Minmax.h>
 #include <rlocale.h>   // overrides iswxxxx on some platforms.
-#include <vector>
 
 using namespace std;
 using namespace R;
@@ -327,7 +327,7 @@ HIDDEN SEXP do_nchar(SEXP call, SEXP op, SEXP args, SEXP env)
 #endif
     /* DispatchOrEval internal generic: nchar */
     if (DispatchOrEval(call, op, "nchar", args, env, &ans, 0, 1))
-      return(ans);
+      return ans;
     if (isFactor(CAR(args)))
 	error(_("'%s' function requires a character vector"), "nchar()");
     PROTECT(x = coerceVector(CAR(args), STRSXP));
@@ -1203,7 +1203,7 @@ HIDDEN SEXP do_tolower(SEXP call, SEXP op, SEXP args, SEXP env)
     SHALLOW_DUPLICATE_ATTRIB(y, x);
     /* This copied the class, if any */
     UNPROTECT(1);
-    return(y);
+    return y;
 }
 
 /* These assume one wchar_t per char so will not work with surrogate pairs */
@@ -1278,7 +1278,7 @@ static wchar_t wtr_get_next_char_from_spec(struct wtr_spec **p) {
 
     This = *p;
     if (!This)
-	return('\0');
+	return '\0';
     switch(This->type) {
 	/* Note: this code does not deal with the WTR_INIT case. */
     case WTR_CHAR:
@@ -1297,7 +1297,7 @@ static wchar_t wtr_get_next_char_from_spec(struct wtr_spec **p) {
 	c = L'\0';
 	break;
     }
-    return(c);
+    return c;
 }
 
 enum tr_spec_type
@@ -1371,7 +1371,7 @@ static unsigned char tr_get_next_char_from_spec(struct tr_spec **p) {
 
     This = *p;
     if (!This)
-	return('\0');
+	return '\0';
     switch(This->type) {
 	/* Note: this code does not deal with the TR_INIT case. */
     case TR_CHAR:
@@ -1390,7 +1390,7 @@ static unsigned char tr_get_next_char_from_spec(struct tr_spec **p) {
 	c = '\0';
 	break;
     }
-    return(c);
+    return c;
 }
 
 struct xtable_t
@@ -1709,7 +1709,7 @@ HIDDEN SEXP do_chartr(SEXP call, SEXP op, SEXP args, SEXP env)
     SHALLOW_DUPLICATE_ATTRIB(y, x);
     /* This copied the class, if any */
     UNPROTECT(1);
-    return(y);
+    return y;
 }
 
 HIDDEN SEXP do_strtrim(SEXP call, SEXP op, SEXP args, SEXP env)
@@ -1781,7 +1781,7 @@ HIDDEN SEXP do_strtrim(SEXP call, SEXP op, SEXP args, SEXP env)
 
 static int strtoi(SEXP s, int base)
 {
-    if(s == NA_STRING || CHAR(s)[0] == '\0') return(NA_INTEGER);
+    if(s == NA_STRING || CHAR(s)[0] == '\0') return NA_INTEGER;
 
     /* strtol might return extreme values on error */
     errno = 0;

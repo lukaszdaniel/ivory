@@ -96,13 +96,13 @@
 #define R_NO_REMAP
 #define R_USE_SIGNALS 1
 
-#include <RContext.h>
 #include <CXXR/GCStackRoot.hpp>
 #include <CXXR/Expression.hpp>
 #include <CXXR/IntVector.hpp>
 #include <CXXR/RealVector.hpp>
 #include <CXXR/StringVector.hpp>
 #include <CXXR/Symbol.hpp>
+#include <RContext.h>
 #include <IOStuff.h>		/*-> Defn.h */
 #include <Fileio.h>
 #include <Parse.h>
@@ -5171,7 +5171,7 @@ static int processLineDirective(int *type)
 {
     int c, tok, linenumber;
     c = SkipSpace();
-    if (!isdigit(c)) return(c);
+    if (!isdigit(c)) return c;
     tok = NumericValue(c);
     linenumber = atoi(yytext);
     c = SkipSpace();
@@ -5186,7 +5186,7 @@ static int processLineDirective(int *type)
     *type = LINE_DIRECTIVE;
     /* we don't change xxparseno here:  it counts parsed lines, not official lines */
     R_ParseContext[R_ParseContextLast] = '\0';  /* Context report shouldn't show the directive */
-    return(c);
+    return c;
 }
 
 /* Get the R symbol, and set yytext at the same time */

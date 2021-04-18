@@ -106,6 +106,7 @@
 #define R_NO_REMAP
 #define R_USE_SIGNALS 1
 
+#include <cfloat> /* for DBL_DIG */
 #include <CXXR/String.hpp>
 #include <CXXR/BuiltInFunction.hpp>
 #include <CXXR/Expression.hpp>
@@ -115,7 +116,6 @@
 #include <RContext.h>
 #include <Defn.h>
 #include <Internal.h>
-#include <cfloat> /* for DBL_DIG */
 #include <Print.h>
 #include <Fileio.h>
 #ifdef _WIN32
@@ -354,7 +354,7 @@ SEXP R::deparse1line_(SEXP call, bool abbrev, int opts)
 	vmaxset(vmax);
     }
     UNPROTECT(1);
-    return(temp);
+    return temp;
 }
 
 SEXP R::deparse1line(SEXP call, bool abbrev)
@@ -779,7 +779,7 @@ static attr_type attr1(SEXP s, LocalParseData *d)
     } else if(has_names) { // attr <= OK_NAMES
     }
 #ifdef DEBUG_DEPARSE
-    REprintf(", return()ing %s\n", attrT2char(attr));
+    REprintf(", returning %s\n", attrT2char(attr));
 #endif
     return attr;
 }

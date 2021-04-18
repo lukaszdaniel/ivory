@@ -26,6 +26,7 @@
 #define R_NO_REMAP
 #define HAVE_BZIP2
 
+#include <cerrno>
 #include <CXXR/IntVector.hpp>
 #include <CXXR/StringVector.hpp>
 #include <CXXR/PairList.hpp>
@@ -37,7 +38,6 @@
 #ifdef HAVE_SYS_STAT_H
 #include <sys/stat.h>
 #endif
-#include <cerrno>
 
 #ifdef _WIN32
 #include <io.h> /* for mkdir */
@@ -355,7 +355,7 @@ SEXP Runzip(SEXP args)
     list = asLogical(CAR(args));
     if (list == NA_LOGICAL)
 	error(_("invalid '%s' argument"), "list");
-    if (list) return(ziplist(zipname));
+    if (list) return ziplist(zipname);
     args = CDR(args);
     overwrite = asLogical(CAR(args));
     if (overwrite == NA_LOGICAL)

@@ -55,7 +55,7 @@ HIDDEN int R_fgetc(FILE *fp)
 	/* retain CR's with no following linefeed */
 	if (c != '\n') {
 	    ungetc(c,fp);
-	    return('\r');
+	    return '\r';
 	}
     }
 #ifdef _WIN32

@@ -230,7 +230,7 @@ static double step_computing(int k,
      (xv2, yv2) : coordinates of the vector from middle to extremity */
 
   if ((s1 == 0) && (s2 == 0))
-    return(1.0);              /* only one step in case of linear segment */
+    return 1.0;              /* only one step in case of linear segment */
 
   /* compute coordinates of the origin */
   if (s1>0) {

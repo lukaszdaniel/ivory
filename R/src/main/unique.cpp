@@ -738,7 +738,7 @@ HIDDEN SEXP do_duplicated(SEXP call, SEXP op, SEXP args, SEXP env)
 
     /* handle zero length vectors, and NULL */
     if ((n = xlength(x)) == 0)
-	return(PRIMVAL(op) <= 1
+	return (PRIMVAL(op) <= 1
 	       ? allocVector(PRIMVAL(op) != 1 ? LGLSXP : TYPEOF(x), 0)
 	       : ScalarInteger(0));
 

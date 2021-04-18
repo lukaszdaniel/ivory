@@ -1333,7 +1333,7 @@ static int isorted(int *x, int n)
     push(tt);
     // same as 'order', NAs at the beginning for order=1, at end for
     // order=-1, possibly with ties
-    return(1);
+    return 1;
 }
 
 // order=1 is ascending and -1 is descending
@@ -1380,7 +1380,7 @@ static int dsorted(double *x, int n)
 	// more than one NA at the beginning/end (for order=-1/1)
 
 	// TO DO: improve to be stable for ties in reverse
-	else return(0);
+	else return 0;
     }
     int old = gsngrp[flip];
     int tt = 1;

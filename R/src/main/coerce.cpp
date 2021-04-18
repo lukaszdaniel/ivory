@@ -31,6 +31,7 @@
 
 #define R_NO_REMAP
 
+#include <cfloat> /* for DBL_DIG */
 #include <CXXR/String.hpp>
 #include <CXXR/Expression.hpp>
 #include <CXXR/BuiltInFunction.hpp>
@@ -48,9 +49,9 @@
 #include <Parse.h>
 #include <Defn.h> /*-- Maybe modularize into own Coerce.h ..*/
 #include <Internal.h>
-#include <cfloat> /* for DBL_DIG */
 #include <Rmath.h>
 #include <Print.h>
+#include <R_ext/Itermacros.h>
 
 #ifdef _WIN32
 #include <trioremap.h> /* for %lld */
@@ -1478,7 +1479,7 @@ HIDDEN SEXP do_asatomic(SEXP call, SEXP op, SEXP args, SEXP rho)
     /* DispatchOrEval internal generic: as.logical */
     /* DispatchOrEval internal generic: as.raw */
     if (DispatchOrEval(call, op, name, args, rho, &ans, 0, 1))
-	return(ans);
+	return ans;
 
     /* Method dispatch has failed, we now just */
     /* run the generic internal code */
@@ -1505,7 +1506,7 @@ HIDDEN SEXP do_asvector(SEXP call, SEXP op, SEXP args, SEXP rho)
 
     /* DispatchOrEval internal generic: as.vector */
     if (DispatchOrEval(call, op, "as.vector", args, rho, &ans, 0, 1))
-	return(ans);
+	return ans;
 
     /* Method dispatch has failed, we now just */
     /* run the generic internal code */
@@ -1668,7 +1669,7 @@ HIDDEN SEXP do_str2lang(SEXP call, SEXP op, SEXP args, SEXP rho) {
     // basically parse(text = "...."), for str2lang() '[[1]]' :
     } else // str2expression()
 	if(!LENGTH(args))
-	    return(allocVector(EXPRSXP, 0));
+	    return allocVector(EXPRSXP, 0);
 
     ParseStatus status;
     parse_cleanup_info pci;
@@ -1724,7 +1725,7 @@ HIDDEN SEXP do_ascall(SEXP call, SEXP op, SEXP args, SEXP rho)
     SEXP ans;
     /* DispatchOrEval internal generic: as.call */
     if (DispatchOrEval(call, op, "as.call", args, rho, &ans, 0, 1))
-	return(ans);
+	return ans;
 
     args = CAR(args);
     switch (TYPEOF(args)) {
@@ -2008,7 +2009,7 @@ HIDDEN SEXP do_is(SEXP call, SEXP op, SEXP args, SEXP rho)
 	/* DispatchOrEval internal generic: is.matrix */
 	/* DispatchOrEval internal generic: is.array */
 	if(DispatchOrEval(call, op, nm, args, rho, &ans, 0, 1))
-	    return(ans);
+	    return ans;
     }
 
     PROTECT(ans = allocVector(LGLSXP, 1));
@@ -2204,7 +2205,7 @@ HIDDEN SEXP do_isvector(SEXP call, SEXP op, SEXP args, SEXP rho)
 	}
     }
     UNPROTECT(1);
-    return (ans);
+    return ans;
 }
 
 R_INLINE static void copyDimAndNames(SEXP x, SEXP ans)
@@ -2241,7 +2242,7 @@ HIDDEN SEXP do_isna(SEXP call, SEXP op, SEXP args, SEXP rho)
 
     /* DispatchOrEval internal generic: is.na */
     if (DispatchOrEval(call, op, "is.na", args, rho, &ans, 1, 1))
-	return(ans);
+	return ans;
     PROTECT(args = ans);
 #ifdef stringent_is
 	if (!isList(CAR(args)) && !isVector(CAR(args)))
@@ -2489,7 +2490,7 @@ HIDDEN SEXP do_isnan(SEXP call, SEXP op, SEXP args, SEXP rho)
 
     /* DispatchOrEval internal generic: is.nan */
     if (DispatchOrEval(call, op, "is.nan", args, rho, &ans, 1, 1))
-	return(ans);
+	return ans;
 
     PROTECT(args = ans);
 #ifdef stringent_is
@@ -2542,7 +2543,7 @@ HIDDEN SEXP do_isfinite(SEXP call, SEXP op, SEXP args, SEXP rho)
 
     /* DispatchOrEval internal generic: is.finite */
     if (DispatchOrEval(call, op, "is.finite", args, rho, &ans, 0, 1))
-	return(ans);
+	return ans;
 #ifdef stringent_is
     if (!isList(CAR(args)) && !isVector(CAR(args)))
 	{
@@ -2614,7 +2615,7 @@ HIDDEN SEXP do_isinfinite(SEXP call, SEXP op, SEXP args, SEXP rho)
 
     /* DispatchOrEval internal generic: is.infinite */
     if (DispatchOrEval(call, op, "is.infinite", args, rho, &ans, 0, 1))
-	return(ans);
+	return ans;
 #ifdef stringent_is
     if (!isList(CAR(args)) && !isVector(CAR(args)))
 	{
@@ -2917,7 +2918,7 @@ HIDDEN SEXP do_quote(SEXP call, SEXP op, SEXP args, SEXP rho)
     /* Make sure expression has NAMED == NAMEDMAX before being returning
        in order to avoid modification of source code */
     ENSURE_NAMEDMAX(val);
-    return(val);
+    return val;
 }
 
 namespace

@@ -31,6 +31,10 @@
 
 #define R_NO_REMAP
 
+// LDBL_EPSILON
+#include <cfloat>
+#include <cerrno>
+#include <limits>
 #include <CXXR/BuiltInFunction.hpp>
 #include <CXXR/GCStackRoot.hpp>
 #include <CXXR/Expression.hpp>
@@ -39,8 +43,6 @@
 #include <CXXR/IntVector.hpp>
 #include <CXXR/Symbol.hpp>
 #include <Defn.h>
-// LDBL_EPSILON
-#include <cfloat>
 
 /* interval at which to check interrupts, a guess */
 constexpr R_xlen_t NINTERRUPT = 10000000;
@@ -60,9 +62,6 @@ constexpr R_xlen_t NINTERRUPT = 10000000;
 #include <Rmath.h>
 #include <R_ext/Itermacros.h>
 #include "arithmetic.h"
-
-#include <cerrno>
-#include <limits>
 
 using namespace R;
 using namespace CXXR;
@@ -523,7 +522,7 @@ HIDDEN SEXP do_arith(SEXP call, SEXP op, SEXP args, SEXP env)
     else if (argc == 1) {
 	if (IS_SCALAR(arg1, REALSXP)) {
 	    switch(PRIMVAL(op)) {
-	    case PLUSOP: return(arg1);
+	    case PLUSOP: return arg1;
 	    case MINUSOP:
 		ans = ScalarValue1(arg1);
 		SET_SCALAR_DVAL(ans, -SCALAR_DVAL(arg1));
@@ -533,7 +532,7 @@ HIDDEN SEXP do_arith(SEXP call, SEXP op, SEXP args, SEXP env)
 	else if (IS_SCALAR(arg1, INTSXP)) {
 	    int ival;
 	    switch(PRIMVAL(op)) {
-	    case PLUSOP: return(arg1);
+	    case PLUSOP: return arg1;
 	    case MINUSOP:
 		ival = SCALAR_IVAL(arg1);
 		ans = ScalarValue1(arg1);
@@ -895,7 +894,7 @@ static SEXP integer_binary(ARITHOP_TYPE code, SEXP s1, SEXP s2, SEXP lcall)
 	ans = allocVector(REALSXP, n);
     else
 	ans = R_allocOrReuseVector(s1, s2, INTSXP, n);
-    if (n == 0) return(ans);
+    if (n == 0) return ans;
     PROTECT(ans);
 
     switch (code) {
@@ -1035,7 +1034,7 @@ static SEXP real_binary(ARITHOP_TYPE code, SEXP s1, SEXP s2)
     n2 = XLENGTH(s2);
 
     /* S4-compatibility change: if n1 or n2 is 0, result is of length 0 */
-    if (n1 == 0 || n2 == 0) return(allocVector(REALSXP, 0));
+    if (n1 == 0 || n2 == 0) return allocVector(REALSXP, 0);
 
     n = std::max(n1, n2);
     PROTECT(ans = R_allocOrReuseVector(s1, s2, REALSXP, n));

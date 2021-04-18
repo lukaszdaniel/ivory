@@ -393,7 +393,7 @@ HIDDEN SEXP do_parentenv(SEXP call, SEXP op, SEXP args, SEXP rho)
 	error( _("'%s' argument is not an environment"), "env");
     if( arg == R_EmptyEnv )
 	error(_("the empty environment has no parent"));
-    return( ENCLOS(arg) );
+    return ENCLOS(arg);
 }
 
 static bool R_IsImportsEnv(SEXP env)
@@ -444,7 +444,7 @@ HIDDEN SEXP do_parentenvgets(SEXP call, SEXP op, SEXP args, SEXP rho)
 
     SET_ENCLOS(env, parent);
 
-    return( CAR(args) );
+    return CAR(args);
 }
 
 HIDDEN SEXP do_envirName(SEXP call, SEXP op, SEXP args, SEXP rho)
@@ -965,7 +965,7 @@ HIDDEN SEXP do_lengthgets(SEXP call, SEXP op, SEXP args, SEXP rho)
     /* DispatchOrEval internal generic: length<- */
     if(isObject(x) && DispatchOrEval(call, op, "length<-", args,
 				     rho, &ans, 0, 1))
-	return(ans);
+	return ans;
     // more 'x' checks in xlengthgets()
     if (length(CADR(args)) != 1)
 	error(_("wrong length for '%s' argument"), "value");

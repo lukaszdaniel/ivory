@@ -24,6 +24,7 @@
 
 #define R_NO_REMAP
 
+#include <cfloat> // for DBL_MAX
 #include <CXXR/BuiltInFunction.hpp>
 #include <CXXR/LogicalVector.hpp>
 #include <CXXR/IntVector.hpp>
@@ -37,7 +38,6 @@
 #include <Internal.h>
 #include <R_ext/Itermacros.h>
 #include <R_ext/Minmax.h>
-#include <cfloat> // for DBL_MAX
 #include "duplicate.h"
 
 using namespace std;
@@ -45,7 +45,8 @@ using namespace R;
 using namespace CXXR;
 
 /* since INT_MIN is the NA_INTEGER value ! */
-namespace {
+namespace
+{
 	template <typename T>
 	double Int2Real(T i) { return ((i == NA_INTEGER) ? NA_REAL : (double)i); }
 }
@@ -221,7 +222,7 @@ static Rboolean imin(SEXP sx, int *value, Rboolean narm)
 		}
 		else if (!narm) {
 		    *value = NA_INTEGER;
-		    return(TRUE);
+		    return TRUE;
 		}
 	    }
 	});
@@ -269,7 +270,7 @@ static Rboolean smin(SEXP x, SEXP *value, Rboolean narm)
 	}
 	else if (!narm) {
 	    *value = NA_STRING;
-	    return(TRUE);
+	    return TRUE;
 	}
     }
     *value = s;
@@ -292,7 +293,7 @@ static Rboolean imax(SEXP sx, int *value, Rboolean narm)
 		    }
 		} else if (!narm) {
 		    *value = NA_INTEGER;
-		    return(TRUE);
+		    return TRUE;
 		}
 	    }
 	});
@@ -339,7 +340,7 @@ static Rboolean smax(SEXP x, SEXP *value, Rboolean narm)
 	}
 	else if (!narm) {
 	    *value = NA_STRING;
-	    return(TRUE);
+	    return TRUE;
 	}
     }
     *value = s;
@@ -564,7 +565,7 @@ HIDDEN SEXP do_summary(SEXP call, SEXP op, SEXP args, SEXP env)
 
     if (DispatchGroup("Summary", call2, op, args, env, &ans)) {
 	UNPROTECT(2); /* call2, args */
-	return(ans);
+	return ans;
     }
     UNPROTECT(1); /* call2 */
 
@@ -1010,7 +1011,7 @@ HIDDEN SEXP do_range(SEXP call, SEXP op, SEXP args, SEXP env)
 
     if (DispatchGroup("Summary", call2, op, args, env, &ans)) {
 	UNPROTECT(2);
-	return(ans);
+	return ans;
     }
     UNPROTECT(1);
 
@@ -1020,7 +1021,7 @@ HIDDEN SEXP do_range(SEXP call, SEXP op, SEXP args, SEXP env)
 	SET_PRVALUE(CAR(b), CAR(a));
     ans = applyClosure(call, op, prargs, env, R_NilValue);
     UNPROTECT(3);
-    return(ans);
+    return ans;
 }
 
 // which.min(x) : The index (starting at 1), of the first min(x) in x

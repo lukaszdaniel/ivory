@@ -26,6 +26,9 @@
 #define R_NO_REMAP
 #define R_USE_SIGNALS 1
 
+#include <cctype> /* for tolower */
+#include <cstring>
+#include <cerrno>
 #include <CXXR/BuiltInFunction.hpp>
 #include <CXXR/Expression.hpp>
 #include <CXXR/VectorBase.hpp>
@@ -38,9 +41,6 @@
 #include <Defn.h>
 #include <Rinterface.h>
 #include <Internal.h>
-#include <cctype> /* for tolower */
-#include <cstring>
-#include <cerrno>
 
 #include <Rmath.h>
 #include <boost/preprocessor.hpp>
@@ -817,7 +817,7 @@ static SEXP Rf_getCallingDLL(void)
     PROTECT(e = lang2(Symbol::obtain("getCallingDLLe"), rho));
     ans = eval(e,  R_GlobalEnv);
     UNPROTECT(1);
-    return(ans);
+    return ans;
 }
 
 

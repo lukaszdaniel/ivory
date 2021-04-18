@@ -864,7 +864,7 @@ HIDDEN SEXP do_c(SEXP call, SEXP op, SEXP args, SEXP env)
     /* DispatchOrEval internal generic: c */
     if (DispatchAnyOrEval(call, op, "c", args, env, &ans, 1, 1))
 	//      ^^^ "Any" => all args are eval()ed and checked => correct multi-arg dispatch
-	return(ans);
+	return ans;
     PROTECT(ans);
     SEXP res = do_c_dflt(call, op, ans, env);
     UNPROTECT(1);
@@ -983,7 +983,7 @@ HIDDEN SEXP do_unlist(SEXP call, SEXP op, SEXP args, SEXP env)
 
     /* DispatchOrEval internal generic: unlist */
     if (DispatchOrEval(call, op, "unlist", args, env, &ans, 0, 1))
-	return(ans);
+	return ans;
 
     /* Method dispatch has failed; run the default code. */
     /* By default we recurse, but this can be over-ridden */

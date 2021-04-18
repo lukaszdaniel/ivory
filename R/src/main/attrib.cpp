@@ -24,6 +24,7 @@
 
 #define R_NO_REMAP
 
+#include <assert.h>
 #include <CXXR/RObject.hpp>
 #include <CXXR/BuiltInFunction.hpp>
 #include <CXXR/Expression.hpp>
@@ -37,7 +38,6 @@
 #include <Defn.h>
 #include <Internal.h>
 #include <Rmath.h>
-#include <assert.h>
 
 using namespace R;
 using namespace CXXR;
@@ -628,7 +628,7 @@ SEXP R::R_data_class(SEXP obj, bool singleString)
     SEXP value, klass = getAttrib(obj, R_ClassSymbol);
     int n = length(klass);
     if(n == 1 || (n > 0 && !singleString))
-	return(klass);
+	return klass;
     if(n == 0) {
 	SEXP dim = getAttrib(obj, R_DimSymbol);
 	int nd = length(dim);
@@ -724,7 +724,7 @@ static SEXP S4_extends(SEXP klass, Rboolean use_tab) {
     PROTECT(val = eval(e, R_MethodsNamespace));
     cache_class(class_, val);
     UNPROTECT(2); /* val, e */
-    return(val);
+    return val;
 }
 
 SEXP R_S4_extends(SEXP klass, SEXP useTable)
@@ -895,7 +895,7 @@ HIDDEN SEXP do_namesgets(SEXP call, SEXP op, SEXP args, SEXP env)
 
     /* DispatchOrEval internal generic: names<- */
     if (DispatchOrEval(call, op, "names<-", args, env, &ans, 0, 1))
-	return(ans);
+	return ans;
     /* Special case: removing non-existent names, to avoid a copy */
     if (CADR(args) == R_NilValue &&
 	getAttrib(CAR(args), R_NamesSymbol) == R_NilValue)
@@ -1014,7 +1014,7 @@ HIDDEN SEXP do_names(SEXP call, SEXP op, SEXP args, SEXP env)
     check1arg(args, call, "x");
     /* DispatchOrEval internal generic: names */
     if (DispatchOrEval(call, op, "names", args, env, &ans, 0, 1))
-	return(ans);
+	return ans;
     PROTECT(args = ans);
     ans = CAR(args);
     if (isEnvironment(ans) || isS4Environment(ans))
@@ -1034,7 +1034,7 @@ HIDDEN SEXP do_dimnamesgets(SEXP call, SEXP op, SEXP args, SEXP env)
     // 2 args ("x", "value")
     /* DispatchOrEval internal generic: dimnames<- */
     if (DispatchOrEval(call, op, "dimnames<-", args, env, &ans, 0, 1))
-	return(ans);
+	return ans;
     PROTECT(args = ans);
     if (MAYBE_SHARED(CAR(args)) ||
 	((! IS_ASSIGNMENT_CALL(call)) && MAYBE_REFERENCED(CAR(args))))
@@ -1145,7 +1145,7 @@ HIDDEN SEXP do_dimnames(SEXP call, SEXP op, SEXP args, SEXP env)
 	check1arg(args, call, "x");
 	/* DispatchOrEval internal generic: dimnames */
 	if (DispatchOrEval(call, op, "dimnames", args, env, &ans, 0, 1))
-		return(ans);
+		return ans;
 	PROTECT(args = ans);
 	ans = getAttrib(CAR(args), R_DimNamesSymbol);
 	UNPROTECT(1);
@@ -1159,7 +1159,7 @@ HIDDEN SEXP do_dim(SEXP call, SEXP op, SEXP args, SEXP env)
 	check1arg(args, call, "x");
 	/* DispatchOrEval internal generic: dim */
 	if (DispatchOrEval(call, op, "dim", args, env, &ans, 0, 1))
-		return(ans);
+		return ans;
 	PROTECT(args = ans);
 	ans = getAttrib(CAR(args), R_DimSymbol);
 	UNPROTECT(1);
@@ -1172,7 +1172,7 @@ HIDDEN SEXP do_dimgets(SEXP call, SEXP op, SEXP args, SEXP env)
     checkArity(op, args);
     /* DispatchOrEval internal generic: dim<- */
     if (DispatchOrEval(call, op, "dim<-", args, env, &ans, 0, 1))
-	return(ans);
+	return ans;
     x = CAR(args);
     /* Duplication might be expensive */
     if (CADR(args) == R_NilValue) {
@@ -1296,7 +1296,7 @@ HIDDEN SEXP do_levelsgets(SEXP call, SEXP op, SEXP args, SEXP env)
     /* DispatchOrEval internal generic: levels<- */
     if (DispatchOrEval(call, op, "levels<-", args, env, &ans, 0, 1))
 	/* calls, e.g., levels<-.factor() */
-	return(ans);
+	return ans;
     PROTECT(ans);
     if(!isNull(CADR(args)) && any_duplicated(CADR(args), FALSE))
 	errorcall(call, _("factor level [%d] is duplicated"),
@@ -1582,7 +1582,7 @@ HIDDEN SEXP do_attrgets(SEXP call, SEXP op, SEXP args, SEXP env)
 
 	/* DispatchOrEval internal generic: @<- */
 	if(DispatchOrEval(call, op, "@<-", args, env, &ans, 0, 0))
-	    return(ans);
+	    return ans;
 
 	PROTECT(value = CADDR(ans));
 	obj = CAR(ans);
@@ -1707,7 +1707,7 @@ static SEXP data_part(SEXP obj) {
 	val = eval(e, R_MethodsNamespace);
 	UNSET_S4_OBJECT(val); /* data part must be base vector */
 	UNPROTECT(1);
-	return(val);
+	return val;
 }
 
 static SEXP set_data_part(SEXP obj, SEXP rhs) {
@@ -1723,7 +1723,7 @@ static SEXP set_data_part(SEXP obj, SEXP rhs) {
 	val = eval(e, R_MethodsNamespace);
 	SET_S4_OBJECT(val);
 	UNPROTECT(1);
-	return(val);
+	return val;
 }
 
 SEXP Rf_S3Class(SEXP obj)
@@ -1752,9 +1752,9 @@ int R_has_slot(SEXP obj, SEXP name) {
 
 	R_SLOT_INIT;
     if(name == s_dot_Data && TYPEOF(obj) != S4SXP)
-	return(1);
+	return 1;
     /* else */
-    return(getAttrib(obj, name) != R_NilValue);
+    return getAttrib(obj, name) != R_NilValue;
 }
 
 /* the @ operator, and its assignment form.  Processed much like $

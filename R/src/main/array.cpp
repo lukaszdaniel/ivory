@@ -25,6 +25,7 @@
 
 #define R_NO_REMAP
 
+#include <complex>
 #include <CXXR/BuiltInFunction.hpp>
 #include <CXXR/PairList.hpp>
 #include <CXXR/RealVector.hpp>
@@ -41,7 +42,6 @@
 
 #include "duplicate.h"
 
-#include <complex>
 #include <Rcomplex.h>	/* toC99 */
 
 using namespace R;
@@ -454,10 +454,10 @@ HIDDEN SEXP do_length(SEXP call, SEXP op, SEXP args, SEXP rho)
                 PROTECT(ans);
                 ans = coerceVector(ans, INTSXP);
                 UNPROTECT(1);
-                return(ans);
+                return ans;
             }
 	}
-	return(ans);
+	return ans;
     }
 
 
@@ -494,7 +494,7 @@ HIDDEN R_xlen_t R::dispatch_xlength(SEXP x, SEXP call, SEXP rho) {
         }
         UNPROTECT(1);
     }
-    return(xlength(x));
+    return Rf_xlength(x);
 }
 
 // auxiliary for do_lengths_*(), i.e., R's lengths()
@@ -537,7 +537,7 @@ HIDDEN SEXP do_lengths(SEXP call, SEXP op, SEXP args, SEXP rho)
 
     /* DispatchOrEval internal generic: lengths */
     if (DispatchOrEval(call, op, "lengths", args, rho, &ans, 0, 1))
-      return(ans);
+      return ans;
 
     Rboolean isList = (Rboolean) (isVectorList(x) || isS4(x));
     if(!isList) switch(TYPEOF(x)) {

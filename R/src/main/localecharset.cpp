@@ -47,14 +47,14 @@
 //#define HAVE_STRING_H
 #endif
 
-#include <CXXR/String.hpp>
-#include <Defn.h>
 #include <cstring>
 #include <memory>
 #include <clocale>
 #include <cstdio>
 #include <cstdlib>
 #include <cctype>
+#include <CXXR/String.hpp>
+#include <Defn.h>
 
 using namespace R;
 //#include <rlocale.h> /* To get the correct linkage for locale2charset */
@@ -579,7 +579,7 @@ static const char* name_value_search(const char *name, const name_value table[],
 #if defined(DEBUG_TEST) && DEBUG_TEST > 1
 	    DPRINT(strcmp(name, table[mid].name));
 #endif
-	    return(table[mid].value);
+	    return table[mid].value;
 	}
     }
     return (nullptr);

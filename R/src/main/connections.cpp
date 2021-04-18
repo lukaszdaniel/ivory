@@ -3848,7 +3848,7 @@ int Rconn_fgetc(Rconnection con)
 	    c = con->fgetc(con);
 	    if (c != '\n') {
 		con->save = (c != '\r') ? c : '\n';
-		return('\n');
+		return '\n';
 	    }
 	}
 	return c;
@@ -4770,7 +4770,7 @@ static SEXP rawFixedString(Rbyte *bytes, int len, int nbytes, int *np, int useBy
 
     if(*np + len > nbytes) {
 	len = nbytes - *np;
-	if (!len) return(R_NilValue);
+	if (!len) return nullptr;
     }
 
     /* Note: mkCharLenCE signals an error on embedded nuls. */

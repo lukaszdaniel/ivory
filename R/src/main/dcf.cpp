@@ -336,7 +336,7 @@ HIDDEN SEXP do_readDCF(SEXP call, SEXP op, SEXP args, SEXP env)
     setAttrib(retval2, R_DimSymbol, dims);
     setAttrib(retval2, R_DimNamesSymbol, dimnames);
     UNPROTECT(nprot); /* what, fold_excludes, retval, retval2, dimnames, dims */
-    return(retval2);
+    return retval2;
 }
 
 static SEXP allocMatrixNA(SEXPTYPE mode, int nrow, int ncol)

@@ -379,7 +379,7 @@ HIDDEN SEXP R::matchArgs_NR(SEXP formals, SEXP supplied, SEXP call)
 	}
     }
     UNPROTECT(1);
-    return(actuals);
+    return actuals;
 }
 
 /* Use matchArgs_RC if the result might escape into R. */
@@ -550,5 +550,5 @@ HIDDEN SEXP R::patchArgsByActuals(SEXP formals, SEXP supplied, SEXP cloenv)
 
     /* Previous invocation of matchArgs_NR ensured all args are used */
     UNPROTECT(1);
-    return(prsupplied);
+    return prsupplied;
 }

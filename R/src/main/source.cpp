@@ -218,7 +218,7 @@ HIDDEN SEXP do_parse(SEXP call, SEXP op, SEXP args, SEXP env)
     bool wasopen = con->isopen;
     int num = asInteger(CAR(args));			args = CDR(args);
     if (num == 0)
-	return(allocVector(EXPRSXP, 0));
+	return allocVector(EXPRSXP, 0);
 
     SEXP text = PROTECT(coerceVector(CAR(args), STRSXP));
     if(length(CAR(args)) && !length(text))

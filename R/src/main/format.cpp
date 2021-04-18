@@ -50,6 +50,7 @@
 
 #define R_NO_REMAP
 
+#include <cfloat> /* for DBL_EPSILON */
 #include <CXXR/String.hpp>
 #include <CXXR/IntVector.hpp>
 #include <CXXR/LogicalVector.hpp>
@@ -58,7 +59,6 @@
 #include <CXXR/StringVector.hpp>
 #include <Localization.h>
 #include <Defn.h>
-#include <cfloat> /* for DBL_EPSILON */
 #include <Rmath.h>
 #include <Print.h>
 #include <R_ext/Itermacros.h> /* for ITERATE_BY_REGION */
@@ -280,11 +280,11 @@ LDOUBLE private_nearbyintl(LDOUBLE x)
     LDOUBLE x1;
     x1 = - floorl(-x + 0.5);
     x = floorl(x + 0.5);
-    if (x == x1) return(x);
+    if (x == x1) return x;
     else {
 	/* FIXME: we should really test for floorl, also C99.
 	   But FreeBSD 7.x does have it, but not nearbyintl */
-        if (x/2.0 == floorl(x/2.0)) return(x); else return(x1);
+        if (x/2.0 == floorl(x/2.0)) return x; else return x1;
     }
 }
 # endif

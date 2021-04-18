@@ -41,21 +41,20 @@
 
 #define R_NO_REMAP
 
-#include <CXXR/String.hpp>
-#include <Defn.h>
-#include <R_ext/Visibility.h>
-
 #include <cstring>
 #include <cstdlib>
-
-#define IN_RLOCALE_C 1 /* used in rlocale.h */
-#include <rlocale.h>
-
 #include <cwctype>
 #include <cwchar>
 #include <cctype>
 #include <clocale>
 #include <climits>
+#include <CXXR/String.hpp>
+#include <Defn.h>
+#include <R_ext/Visibility.h>
+
+#define IN_RLOCALE_C 1 /* used in rlocale.h */
+#include <rlocale.h>
+
 #include <R_ext/Riconv.h>
 
 using namespace R;
@@ -140,7 +139,7 @@ static int wcwidthsearch(int wint, const struct interval_wcwidth *table,
 	else if (wint < table[mid].first)
 	    max = mid - 1;
 	else{
-	    return(table[mid].mb[locale]);
+	    return table[mid].mb[locale];
 	}
     }
     return -1;

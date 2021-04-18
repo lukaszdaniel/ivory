@@ -189,7 +189,7 @@ static double _label_height_hershey(const pGEcontext gc,
 				     pGEDevDesc dd,
 				     const unsigned short *label)
 {
-    return( HERSHEY_Y_UNITS_TO_USER_UNITS(HERSHEY_LARGE_CAPHEIGHT) );
+    return HERSHEY_Y_UNITS_TO_USER_UNITS(HERSHEY_LARGE_CAPHEIGHT);
 }
 
 HIDDEN

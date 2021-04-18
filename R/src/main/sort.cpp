@@ -25,6 +25,7 @@
 
 #define R_NO_REMAP
 
+#include <cfloat> /* for DBL_MAX */
 #include <CXXR/String.hpp>
 #include <CXXR/StringVector.hpp>
 #include <CXXR/IntVector.hpp>
@@ -37,7 +38,6 @@
 #include <Internal.h>
 #include <Rmath.h>
 #include <R_ext/RS.h>  /* for Calloc/Free */
-#include <cfloat> /* for DBL_MAX */
 #include <R_ext/Itermacros.h> /* for ITERATE_BY_REGION */
 
 using namespace R;
@@ -439,7 +439,7 @@ HIDDEN SEXP do_sort(SEXP call, SEXP op, SEXP args, SEXP rho)
     ans->clearAttributes(); /* this is never called with names */ /* we may have just stripped off the class */
     sortVector(ans, bool(decreasing));
     UNPROTECT(1);
-    return(ans); /* wrapping with metadata happens at end of sort.int */
+    return ans; /* wrapping with metadata happens at end of sort.int */
 }
 
 Rboolean fastpass_sortcheck(SEXP x, int wanted) {
