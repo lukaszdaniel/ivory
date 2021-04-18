@@ -373,13 +373,12 @@ SEXP Rf_DropDims(SEXP x)
 	    if (dim[i] != 1)
 		INTEGER(newdims)[n++] = dim[i];
 	if(!isNull(getAttrib(dims, R_NamesSymbol))) {
-	    SEXP new_nms = PROTECT(allocVector(STRSXP, n));
+	    GCStackRoot<> new_nms(allocVector(STRSXP, n));
 	    SEXP nms_d = getAttrib(dims, R_NamesSymbol);
 	    for (i = 0, n = 0; i < ndims; i++)
 		if (dim[i] != 1)
 		    SET_STRING_ELT(new_nms, n++, STRING_ELT(nms_d, i));
 	    setAttrib(newdims, R_NamesSymbol, new_nms);
-	    UNPROTECT(1);
 	}
 	Rboolean havenames = FALSE;
 	if (!isNull(dimnames)) {
@@ -482,17 +481,14 @@ HIDDEN R_len_t R::dispatch_length(SEXP x, SEXP call, SEXP rho)
 HIDDEN R_xlen_t R::dispatch_xlength(SEXP x, SEXP call, SEXP rho) {
     static GCRoot<> length_op(nullptr);
     if (isObject(x)) {
-        SEXP len, args;
+        SEXP len;
         if (length_op == nullptr)
             length_op = R_Primitive("length");
-        PROTECT(args = list1(x));
+        GCStackRoot<> args(list1(x));
 	/* DispatchOrEval internal generic: length */
         if (DispatchOrEval(call, length_op, "length", args, rho, &len, 0, 1)) {
-            UNPROTECT(1);
-            return (R_xlen_t)
-                (TYPEOF(len) == REALSXP ? REAL(len)[0] : asInteger(len));
+            return R_xlen_t(TYPEOF(len) == REALSXP ? REAL(len)[0] : asInteger(len));
         }
-        UNPROTECT(1);
     }
     return Rf_xlength(x);
 }
@@ -500,27 +496,25 @@ HIDDEN R_xlen_t R::dispatch_xlength(SEXP x, SEXP call, SEXP rho) {
 // auxiliary for do_lengths_*(), i.e., R's lengths()
 static R_xlen_t getElementLength(SEXP x, R_xlen_t i, SEXP call, SEXP rho)
 {
-	SEXP x_elt;
 	R_xlen_t ans;
 
-	PROTECT(x_elt = dispatch_subset2(x, i, call, rho));
+	GCStackRoot<> x_elt(dispatch_subset2(x, i, call, rho));
 	ans = dispatch_xlength(x_elt, call, rho);
-	UNPROTECT(1); /* x_elt */
+
 	return ans;
 }
 
 #ifdef LONG_VECTOR_SUPPORT
 static SEXP do_lengths_long(SEXP x, SEXP call, SEXP rho)
 {
-	SEXP ans;
 	R_xlen_t x_len, i;
 	double *ans_elt;
 
 	x_len = dispatch_xlength(x, call, rho);
-	PROTECT(ans = allocVector(REALSXP, x_len));
+	GCStackRoot<> ans(allocVector(REALSXP, x_len));
 	for (i = 0, ans_elt = REAL(ans); i < x_len; i++, ans_elt++)
 		*ans_elt = (double)getElementLength(x, i, call, rho);
-	UNPROTECT(1);
+
 	return ans;
 }
 #endif
@@ -699,7 +693,7 @@ static Rboolean cmayHaveNaNOrInf_simd(Rcomplex *x, R_xlen_t n)
 	s += x[i].r;
 	s += x[i].i;
     }
-    return (Rboolean) !R_FINITE(s);
+    return Rboolean(!R_FINITE(s));
 }
 
 template <typename T>
@@ -1884,12 +1878,12 @@ HIDDEN SEXP do_aperm(SEXP call, SEXP op, SEXP args, SEXP rho)
 	SEXP nmdm = getAttrib(dimsa, R_NamesSymbol);
 	if(nmdm != R_NilValue) { // dimsr needs correctly permuted names()
 	    PROTECT(nmdm);
-	    SEXP nm_dr = PROTECT(allocVector(STRSXP, n));
+	    GCStackRoot<> nm_dr(allocVector(STRSXP, n));
 	    for (i = 0; i < n; i++) {
 		SET_STRING_ELT(nm_dr, i, STRING_ELT(nmdm, pp[i]));
 	    }
 	    setAttrib(dimsr, R_NamesSymbol, nm_dr);
-	    UNPROTECT(2);
+	    UNPROTECT(1);
 	}
 	setAttrib(r, R_DimSymbol, dimsr);
 

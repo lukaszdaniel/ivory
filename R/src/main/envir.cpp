@@ -365,14 +365,12 @@ static SEXP R_HashGetLoc(int hashcode, SEXP symbol, SEXP table)
  */
 static SEXP R_NewHashTable(int size)
 {
-    SEXP table;
-
     if (size <= 0) size = HASHMINSIZE;
 
     /* Allocate hash table in the form of a vector */
-    PROTECT(table = allocVector(VECSXP, size));
+    GCStackRoot<> table(allocVector(VECSXP, size));
     SET_HASHPRI(table, 0);
-    UNPROTECT(1);
+
     return table;
 }
 
@@ -2359,8 +2357,9 @@ HIDDEN SEXP do_attach(SEXP call, SEXP op, SEXP args, SEXP env)
 		}
 		/* FIXME: duplicate the hash table and assign here */
 	    } else {
-		for(p = FRAME(loadenv); p != R_NilValue; p = CDR(p))
-		    defineVar(TAG(p), lazy_duplicate(CAR(p)), s);
+            GCStackRoot<> framelist(FRAME(loadenv));
+            for (p = framelist; p != R_NilValue; p = CDR(p))
+                defineVar(TAG(p), lazy_duplicate(CAR(p)), s);
 	    }
 	} else {
 	    error(_("'attach()' function only works for lists, data frames and environments"));
@@ -2767,6 +2766,7 @@ HIDDEN SEXP do_env2list(SEXP call, SEXP op, SEXP args, SEXP rho)
 	    error(_("'%s' argument must be an environment"), "env");
     }
 
+    GCStackRoot<> framelist(FRAME(env));
     all = asLogical(CADR(args)); /* all.names = TRUE/FALSE */
     if (all == NA_LOGICAL) all = 0;
 
@@ -2779,7 +2779,7 @@ HIDDEN SEXP do_env2list(SEXP call, SEXP op, SEXP args, SEXP rho)
     else if (HASHTAB(env) != R_NilValue)
 	k = HashTableSize(HASHTAB(env), all);
     else
-	k = FrameSize(FRAME(env), all);
+	k = FrameSize(framelist, all);
 
     PROTECT(names = allocVector(STRSXP, k));
     PROTECT(ans = allocVector(VECSXP, k));
@@ -2790,7 +2790,7 @@ HIDDEN SEXP do_env2list(SEXP call, SEXP op, SEXP args, SEXP rho)
     else if (HASHTAB(env) != R_NilValue)
 	HashTableValues(HASHTAB(env), all, ans, &k);
     else
-	FrameValues(FRAME(env), all, ans, &k);
+	FrameValues(framelist, all, ans, &k);
 
     k = 0;
     if (env == R_BaseEnv || env == R_BaseNamespace)
@@ -2798,7 +2798,7 @@ HIDDEN SEXP do_env2list(SEXP call, SEXP op, SEXP args, SEXP rho)
     else if (HASHTAB(env) != R_NilValue)
 	HashTableNames(HASHTAB(env), all, names, &k);
     else
-	FrameNames(FRAME(env), all, names, &k);
+	FrameNames(framelist, all, names, &k);
 
     if(k == 0) { // no sorting, keep NULL names
 	UNPROTECT(2);
@@ -2859,6 +2859,8 @@ HIDDEN SEXP do_eapply(SEXP call, SEXP op, SEXP args, SEXP rho)
     UNPROTECT(1);
     if (all == NA_LOGICAL) all = 0;
 
+    GCStackRoot<> framelist(FRAME(env));
+
     /* 'USE.NAMES' : */
     useNms = asLogical(PROTECT(eval(CADDDR(args), rho)));
     UNPROTECT(1);
@@ -2869,7 +2871,7 @@ HIDDEN SEXP do_eapply(SEXP call, SEXP op, SEXP args, SEXP rho)
     else if (HASHTAB(env) != R_NilValue)
 	k = HashTableSize(HASHTAB(env), all);
     else
-	k = FrameSize(FRAME(env), all);
+	k = FrameSize(framelist, all);
 
     PROTECT(ans  = allocVector(VECSXP, k));
     PROTECT(tmp2 = allocVector(VECSXP, k));
@@ -2880,7 +2882,7 @@ HIDDEN SEXP do_eapply(SEXP call, SEXP op, SEXP args, SEXP rho)
     else if (HASHTAB(env) != R_NilValue)
 	HashTableValues(HASHTAB(env), all, tmp2, &k2);
     else
-	FrameValues(FRAME(env), all, tmp2, &k2);
+	FrameValues(framelist, all, tmp2, &k2);
 
     SEXP Xsym = Symbol::obtain("X");
     SEXP isym = Symbol::obtain("i");
@@ -2910,7 +2912,7 @@ HIDDEN SEXP do_eapply(SEXP call, SEXP op, SEXP args, SEXP rho)
 	else if(HASHTAB(env) != R_NilValue)
 	    HashTableNames(HASHTAB(env), all, names, &k);
 	else
-	    FrameNames(FRAME(env), all, names, &k);
+	    FrameNames(framelist, all, names, &k);
 
 	setAttrib(ans, R_NamesSymbol, names);
 	UNPROTECT(1);

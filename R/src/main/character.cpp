@@ -1207,7 +1207,7 @@ HIDDEN SEXP do_tolower(SEXP call, SEXP op, SEXP args, SEXP env)
 }
 
 /* These assume one wchar_t per char so will not work with surrogate pairs */
-enum wtr_type
+enum class wtr_type
 {
 	WTR_INIT,
 	WTR_CHAR,
@@ -1238,14 +1238,14 @@ static void wtr_build_spec(const wchar_t *s, struct wtr_spec *trs) {
 	_new = Calloc(1, struct wtr_spec);
 	_new->next = nullptr;
 	if (s[i + 1] == L'-') {
-	    _new->type = WTR_RANGE;
+	    _new->type = wtr_type::WTR_RANGE;
 	    if (s[i] > s[i + 2])
 		error(_("decreasing range specification ('%lc-%lc')"), s[i], s[i + 2]);
 	    _new->u.r.first = s[i];
 	    _new->u.r.last = s[i + 2];
 	    i = i + 3;
 	} else {
-	    _new->type = WTR_CHAR;
+	    _new->type = wtr_type::WTR_CHAR;
 	    _new->u.c = s[i];
 	    i++;
 	}
@@ -1254,7 +1254,7 @@ static void wtr_build_spec(const wchar_t *s, struct wtr_spec *trs) {
     for ( ; i < len; i++) {
 	_new = Calloc(1, struct wtr_spec);
 	_new->next = nullptr;
-	_new->type = WTR_CHAR;
+	_new->type = wtr_type::WTR_CHAR;
 	_new->u.c = s[i];
 	This = This->next = _new;
     }
@@ -1281,11 +1281,11 @@ static wchar_t wtr_get_next_char_from_spec(struct wtr_spec **p) {
 	return '\0';
     switch(This->type) {
 	/* Note: this code does not deal with the WTR_INIT case. */
-    case WTR_CHAR:
+    case wtr_type::WTR_CHAR:
 	c = This->u.c;
 	*p = This->next;
 	break;
-    case WTR_RANGE:
+    case wtr_type::WTR_RANGE:
 	c = This->u.r.first;
 	if (c == This->u.r.last) {
 	    *p = This->next;
@@ -1516,10 +1516,10 @@ HIDDEN SEXP do_chartr(SEXP call, SEXP op, SEXP args, SEXP env)
 
 	/* Initialize the old and new wtr_spec lists. */
 	trs_old = Calloc(1, struct wtr_spec);
-	trs_old->type = WTR_INIT;
+	trs_old->type = wtr_type::WTR_INIT;
 	trs_old->next = nullptr;
 	trs_new = Calloc(1, struct wtr_spec);
-	trs_new->type = WTR_INIT;
+	trs_new->type = wtr_type::WTR_INIT;
 	trs_new->next = nullptr;
 	/* Build the old and new wtr_spec lists. */
 	if (use_WC && IS_UTF8(STRING_ELT(old, 0))) {
@@ -1543,7 +1543,7 @@ HIDDEN SEXP do_chartr(SEXP call, SEXP op, SEXP args, SEXP env)
 	}
 	wtr_build_spec(wc, trs_old);
 	trs_cnt = Calloc(1, struct wtr_spec);
-	trs_cnt->type = WTR_INIT;
+	trs_cnt->type = wtr_type::WTR_INIT;
 	trs_cnt->next = nullptr;
 	wtr_build_spec(wc, trs_cnt); /* use count only */
 

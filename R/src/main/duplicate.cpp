@@ -234,7 +234,7 @@ void Rf_copyListMatrix(SEXP s, SEXP t, Rboolean byrow)
 	if (byrow)
 	{
 		R_xlen_t NR = nr;
-		SEXP tmp = PROTECT(Rf_allocVector(STRSXP, ns));
+		GCStackRoot<> tmp(Rf_allocVector(STRSXP, ns));
 		for (int i = 0; i < nr; i++)
 			for (int j = 0; j < nc; j++)
 			{
@@ -248,7 +248,6 @@ void Rf_copyListMatrix(SEXP s, SEXP t, Rboolean byrow)
 			SETCAR(s, STRING_ELT(tmp, i++));
 			s = CDR(s);
 		}
-		UNPROTECT(1);
 	}
 	else
 	{
@@ -372,15 +371,13 @@ static SEXP duplicate_attr(SEXP x, bool deep)
 {
 	if (Rf_isVector(x) && XLENGTH(x) >= WRAP_THRESHOLD)
 	{
-		SEXP val = R_tryWrap(x);
+		GCStackRoot<> val(R_tryWrap(x));
 		if (val != x)
 		{
 			if (deep)
 			{
-				PROTECT(val);
 				/* the spine has been duplicated; we could just do the values */
 				SET_ATTRIB(val, Rf_duplicate(ATTRIB(val)));
-				UNPROTECT(1); /* val */
 			}
 			return val;
 		}

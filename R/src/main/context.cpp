@@ -154,7 +154,7 @@ HIDDEN void RCNTXT::R_run_onexits(RCNTXT *cptr)
 	    cend(c->getContextEndData());
 	}
 	if (c->workingEnvironment() != R_NilValue && c->onExit() != R_NilValue) {
-	    SEXP s = c->onExit();
+	    GCStackRoot<> s(c->onExit());
 	    RCNTXT* savecontext = R_ExitContext;
 	    R_ExitContext = c;
 	    c->setOnExit(R_NilValue); /* prevent recursion */
@@ -162,7 +162,6 @@ HIDDEN void RCNTXT::R_run_onexits(RCNTXT *cptr)
 	    c->setReturnValue(nullptr);
 	    R_HandlerStack = c->getHandlerStack();
 	    R_RestartStack = c->getRestartStack();
-	    PROTECT(s);
 	    /* Since these are run before any jumps rather than after
 	       jumping to the context where the exit handler was set
 	       we need to make sure there is enough room on the
@@ -175,7 +174,6 @@ HIDDEN void RCNTXT::R_run_onexits(RCNTXT *cptr)
 		c->setOnExit(CDR(s));
 		eval(CAR(s), c->workingEnvironment());
 	    }
-	    UNPROTECT(1);
 	    R_ExitContext = savecontext;
 	}
 	if (R_ExitContext == c)
@@ -323,15 +321,13 @@ void RCNTXT::end()
     RCNTXT *jumptarget = getJumpTarget();
     if (workingEnvironment() != R_NilValue && onExit() != R_NilValue)
     {
-        SEXP s = onExit();
+        GCStackRoot<> s(onExit());
         bool savevis = Evaluator::resultPrinted();
         RCNTXT *savecontext = R_ExitContext;
-        SEXP saveretval = R_ReturnedValue;
+        GCStackRoot<> saveretval(R_ReturnedValue);
         R_ExitContext = this;
         setOnExit(R_NilValue);  /* prevent recursion */
         setJumpTarget(nullptr); /* in case on.exit expr calls return() */
-        PROTECT(saveretval);
-        PROTECT(s);
         R_FixupExitingHandlerResult(saveretval);
         if (getReturnValue()) // why is this needed???
             INCREMENT_LINKS(getReturnValue());
@@ -343,7 +339,6 @@ void RCNTXT::end()
         if (getReturnValue()) // why is this needed???
             DECREMENT_LINKS(getReturnValue());
         R_ReturnedValue = saveretval;
-        UNPROTECT(2);
         R_ExitContext = savecontext;
         Evaluator::enableResultPrinting(savevis);
     }
@@ -495,9 +490,7 @@ HIDDEN int RCNTXT::Rf_framedepth()
 
 SEXP RCNTXT::getCallWithSrcref()
 {
-    SEXP result;
-
-    PROTECT(result = shallow_duplicate(getCall()));
+    GCStackRoot<> result(shallow_duplicate(getCall()));
     if (getSrcRef() && !isNull(getSrcRef()))
     {
         SEXP sref;
@@ -509,7 +502,7 @@ SEXP RCNTXT::getCallWithSrcref()
             sref = getSrcRef();
         setAttrib(result, R_SrcrefSymbol, duplicate(sref));
     }
-    UNPROTECT(1);
+
     return result;
 }
 
@@ -936,15 +929,13 @@ SEXP R_ExecWithCleanup(SEXP (*fun)(void *), void *data,
                        void (*cleanfun)(void *), void *cleandata)
 {
     RCNTXT cntxt;
-    SEXP result;
 
     cntxt.start(CTXT_CCODE, R_NilValue, R_BaseEnv, R_BaseEnv, R_NilValue, R_NilValue);
     cntxt.setContextEnd(cleanfun, cleandata);
 
-    PROTECT(result = fun(data));
+    GCStackRoot<> result(fun(data));
     cleanfun(cleandata);
 
-    UNPROTECT(1);
     cntxt.end();
 
     return result;

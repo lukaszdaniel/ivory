@@ -82,7 +82,7 @@ static SEXP LookupClassEntry(SEXP csym, SEXP psym)
 static void RegisterClass(SEXP class_, int type, const char *cname, const char *pname,
 	      DllInfo *dll)
 {
-    PROTECT(class_);
+    GCStackRoot<> classr(class_);
     if (Registry == nullptr) {
 	Registry = CXXR_cons(R_NilValue, R_NilValue);
 	R_PreserveObject(Registry);
@@ -90,7 +90,7 @@ static void RegisterClass(SEXP class_, int type, const char *cname, const char *
 
     SEXP csym = install(cname);
     SEXP psym = install(pname);
-    SEXP stype = PROTECT(ScalarInteger(type));
+    GCStackRoot<> stype(ScalarInteger(type));
     SEXP iptr = R_MakeExternalPtr(dll, R_NilValue, R_NilValue);
     SEXP entry = LookupClassEntry(csym, psym);
     if (entry == nullptr) {
@@ -104,7 +104,6 @@ static void RegisterClass(SEXP class_, int type, const char *cname, const char *
 	SETCAR(CDR(CDR(CDR(entry))), iptr);
     }
     SET_ALTREP_CLASS_SERIALIZED_CLASS(class_, csym, psym, stype);
-    UNPROTECT(2); /* class, stype */
 }
 
 static SEXP LookupClass(SEXP csym, SEXP psym)
@@ -293,12 +292,10 @@ static SEXP ALTREP_UNSERIALIZE_CLASS(SEXP info)
 	SEXP psym = ALTREP_SERIALIZED_CLASS_PKGSYM(info);
 	SEXP class_ = LookupClass(csym, psym);
 	if (class_ == nullptr) {
-	    SEXP pname = ScalarString(PRINTNAME(psym));
-	    PROTECT(pname);
+	    GCStackRoot<> pname(ScalarString(PRINTNAME(psym)));
 	    R_tryCatchError(find_namespace, pname,
 			    handle_namespace_error, nullptr);
 	    class_ = LookupClass(csym, psym);
-	    UNPROTECT(1);
 	}
 	return class_;
     }
@@ -666,18 +663,16 @@ static SEXP altrep_Duplicate_default(SEXP x, Rboolean deep)
 
 static SEXP altrep_DuplicateEX_default(SEXP x, Rboolean deep)
 {
-    SEXP ans = ALTREP_DUPLICATE(x, deep);
+    GCStackRoot<> ans(ALTREP_DUPLICATE(x, deep));
 
     if (ans &&
 	ans != x) { /* leave attributes alone if returning original */
 	/* handle attributes generically */
 	SEXP attr = ATTRIB(x);
 	if (attr != R_NilValue) {
-	    PROTECT(ans);
 	    SET_ATTRIB(ans, deep ? duplicate(attr) : shallow_duplicate(attr));
 	    SET_OBJECT(ans, OBJECT(x));
         ans->setS4Object(IS_S4_OBJECT(x));
-	    UNPROTECT(1);
 	}
 	else if (ATTRIB(ans) != R_NilValue) {
 	    ans->clearAttributes();

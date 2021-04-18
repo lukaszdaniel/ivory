@@ -80,14 +80,13 @@ void R_set_command_line_arguments(int argc, char *argv[])
 extern "C" HIDDEN SEXP do_commandArgs(SEXP call, SEXP op, SEXP args, SEXP env)
 {
 	int i;
-	SEXP vals;
 
 	checkArity(op, args);
 	/* need protection as mkChar allocates */
-	vals = PROTECT(allocVector(STRSXP, NumCommandLineArgs));
+	GCStackRoot<> vals(allocVector(STRSXP, NumCommandLineArgs));
 	for (i = 0; i < NumCommandLineArgs; i++)
 		SET_STRING_ELT(vals, i, mkChar(CommandLineArgs[i]));
-	UNPROTECT(1);
+
 	return vals;
 }
 

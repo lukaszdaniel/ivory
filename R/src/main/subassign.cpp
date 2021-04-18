@@ -2219,11 +2219,11 @@ HIDDEN SEXP do_subassign3(SEXP call, SEXP op, SEXP args, SEXP env)
 	UNPROTECT(1); /* args */
 	return ans;
     }
-    PROTECT(ans);
+    GCStackRoot<> ansrt(ans);
     if (nlist == R_NilValue)
 	nlist = installTrChar(STRING_ELT(CADR(args), 0));
     ans = R_subassign3_dflt(call, CAR(ans), nlist, CADDR(ans));
-    UNPROTECT(2); /* args, ans */
+    UNPROTECT(1); /* args */
     return ans;
 }
 

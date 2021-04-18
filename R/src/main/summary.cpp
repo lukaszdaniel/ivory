@@ -427,7 +427,8 @@ static Rboolean cprod(SEXP sx, Rcomplex *value, Rboolean narm)
 HIDDEN
 SEXP R::fixup_NaRm(SEXP args)
 {
-    SEXP t, na_value;
+    GCStackRoot<> t;
+	GCStackRoot<> na_value;
 
     /* Need to make sure na.rm is last and exists */
     na_value = ScalarLogical(FALSE);
@@ -441,10 +442,7 @@ SEXP R::fixup_NaRm(SEXP args)
 	prev = a;
     }
 
-    PROTECT(na_value);
     t = CONS(na_value, R_NilValue);
-    UNPROTECT(1);
-    PROTECT(t);
     SET_TAG(t, R_NaRmSymbol);
     if (args == R_NilValue)
 	args = t;
@@ -453,7 +451,6 @@ SEXP R::fixup_NaRm(SEXP args)
 	while (CDR(r) != R_NilValue) r = CDR(r);
 	SETCDR(r, t);
     }
-    UNPROTECT(1);
     return args;
 }
 

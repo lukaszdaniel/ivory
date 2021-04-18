@@ -791,14 +791,13 @@ HIDDEN SEXP R_unary(SEXP call, SEXP op, SEXP s1)
 static SEXP logical_unary(ARITHOP_TYPE code, SEXP s1, SEXP call)
 {
     R_xlen_t n = XLENGTH(s1);
-    SEXP ans = PROTECT(allocVector(INTSXP, n));
-    SEXP names = PROTECT(getAttrib(s1, R_NamesSymbol));
-    SEXP dim = PROTECT(getAttrib(s1, R_DimSymbol));
-    SEXP dimnames = PROTECT(getAttrib(s1, R_DimNamesSymbol));
+    GCStackRoot<> ans(allocVector(INTSXP, n));
+    GCStackRoot<> names(getAttrib(s1, R_NamesSymbol));
+    GCStackRoot<> dim(getAttrib(s1, R_DimSymbol));
+    GCStackRoot<> dimnames(getAttrib(s1, R_DimNamesSymbol));
     if(names != R_NilValue) setAttrib(ans, R_NamesSymbol, names);
     if(dim != R_NilValue) setAttrib(ans, R_DimSymbol, dim);
     if(dimnames != R_NilValue) setAttrib(ans, R_DimNamesSymbol, dimnames);
-    UNPROTECT(3);
 
     int *pa = INTEGER(ans);
     const int *px = LOGICAL_RO(s1);
@@ -817,7 +816,6 @@ static SEXP logical_unary(ARITHOP_TYPE code, SEXP s1, SEXP call)
     default:
 	errorcall(call, _("invalid unary operator"));
     }
-    UNPROTECT(1);
     return ans;
 }
 

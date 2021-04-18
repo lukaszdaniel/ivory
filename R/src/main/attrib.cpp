@@ -1536,21 +1536,18 @@ HIDDEN SEXP do_attr(SEXP call, SEXP op, SEXP args, SEXP env)
 
 static void check_slot_assign(SEXP obj, SEXP input, SEXP value, SEXP env)
 {
-	SEXP
-		valueClass = PROTECT(R_data_class(value, false)),
-		objClass   = PROTECT(R_data_class(obj, false));
+		GCStackRoot<> valueClass(R_data_class(value, false));
+		GCStackRoot<> objClass(R_data_class(obj, false));
 	static GCRoot<> checkAt(nullptr);
 	// 'methods' may *not* be in search() ==> do as if calling  methods::checkAtAssignment(..)
 	if (!isMethodsDispatchOn()) { // needed?
-		SEXP e = PROTECT(lang1(Symbol::obtain("initMethodDispatch")));
+		GCStackRoot<> e(lang1(Symbol::obtain("initMethodDispatch")));
 		eval(e, R_MethodsNamespace); // only works with methods loaded
-		UNPROTECT(1);
 	}
 	if (checkAt == nullptr)
 		checkAt = findFun(Symbol::obtain("checkAtAssignment"), R_MethodsNamespace);
-	SEXP e = PROTECT(lang4(checkAt, objClass, input, valueClass));
+	GCStackRoot<> e(lang4(checkAt, objClass, input, valueClass));
 	eval(e, env);
-	UNPROTECT(3);
 }
 
 

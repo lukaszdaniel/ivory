@@ -742,8 +742,8 @@ HIDDEN SEXP do_makelist(SEXP call, SEXP op, SEXP args, SEXP rho)
 	n++;
     }
 
-    SEXP list = PROTECT(allocVector(VECSXP, n));
-    SEXP names = PROTECT(havenames ? allocVector(STRSXP, n) : R_NilValue);
+    GCStackRoot<> list(allocVector(VECSXP, n));
+    GCStackRoot<> names(havenames ? allocVector(STRSXP, n) : R_NilValue);
     for (int i = 0; i < n; i++) {
 	if (havenames) {
 	    if (TAG(args) != R_NilValue)
@@ -759,7 +759,7 @@ HIDDEN SEXP do_makelist(SEXP call, SEXP op, SEXP args, SEXP rho)
     if (havenames) {
 	setAttrib(list, R_NamesSymbol, names);
     }
-    UNPROTECT(2);
+
     return list;
 }
 

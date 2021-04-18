@@ -2538,7 +2538,8 @@ HIDDEN NORET SEXP do_return(SEXP call, SEXP op, SEXP args, SEXP rho)
 /* Declared with a variable number of args in names.cpp */
 HIDDEN SEXP do_function(SEXP call, SEXP op, SEXP args, SEXP rho)
 {
-	SEXP rval, srcref;
+	GCStackRoot<> rval;
+	SEXP srcref;
 
 	if (TYPEOF(op) == PROMSXP)
 	{

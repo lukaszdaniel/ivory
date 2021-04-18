@@ -173,7 +173,7 @@ static void *compact_intseq_Dataptr(SEXP x, Rboolean writeable)
 {
     if (COMPACT_SEQ_EXPANDED(x) == R_NilValue) {
 	/* no need to re-run if expanded data exists */
-	PROTECT(x);
+	GCStackRoot<> xx(x);
 	SEXP info = COMPACT_SEQ_INFO(x);
 	R_xlen_t n = COMPACT_INTSEQ_INFO_LENGTH(info);
 	int n1 = COMPACT_INTSEQ_INFO_FIRST(info);
@@ -195,7 +195,6 @@ static void *compact_intseq_Dataptr(SEXP x, Rboolean writeable)
 	    error(_("compact sequences with increment %d not supported yet"), inc);
 
 	SET_COMPACT_SEQ_EXPANDED(x, val);
-	UNPROTECT(1);
     }
     return DATAPTR(COMPACT_SEQ_EXPANDED(x));
 }
