@@ -706,7 +706,7 @@ namespace R
     int utf8clen(char c);
     int Rf_AdobeSymbol2ucs2(int n);
     double R_strtod5(const char *str, char **endptr, char dec, Rboolean NA, int exact);
-    SEXP R_listCompact(SEXP s, bool keep_initial);
+    // SEXP R_listCompact(SEXP s, bool keep_initial);
 
     using R_ucs2_t = unsigned short;
     size_t mbcsToUcs2(const char *in, R_ucs2_t *out, int nout, int enc);

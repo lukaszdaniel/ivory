@@ -199,6 +199,19 @@ namespace CXXR
 
 } // namespace CXXR
 
+namespace R
+{
+    /** @brief Destructively removes R_NilValue ('NULL') elements from a pairlist.
+     *
+     * @param s Pointer to a CXXR::ConsCell.
+     * 
+     * @param keep_initial Indicator whether to keep initial NULL values.
+     *
+     * @return Pointer to the rearanged CXXR::ConsCell.
+     */
+    CXXR::PairList *R_listCompact(CXXR::PairList *s, bool keep_initial);
+}
+
 extern "C"
 {
     /** @brief Get car of CXXR::ConsCell.

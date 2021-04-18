@@ -457,6 +457,16 @@ extern "C"
     void INIT_BNDCELL(SEXP cell, int type);
     void SET_BNDCELL(SEXP cell, SEXP val);
     SEXP CONS_NR(SEXP a, SEXP b);
+
+    /** @brief Obtain the n-th element of CXXR::ConsCell.
+     *
+     * @param s Pointer to a CXXR::ConsCell (checked).
+     *
+     * @param n n-th element to be extracted from CXXR:ConsCell
+     *
+     * @return Pointer to the n-th element.
+     */
+    SEXP Rf_nthcdr(SEXP s, int n);
 } // extern "C"
 
 #endif /* CONSCELL_HPP */

@@ -480,6 +480,11 @@ HIDDEN SEXP R::EnsureString(SEXP s)
 void R::Rf_checkArityCall(SEXP op, SEXP args, SEXP call)
 {
 	R_len_t nargs = ConsCell::listLength<R_len_t>(SEXP_downcast<const ConsCell *>(args));
+#if CXXR_FALSE
+    BuiltInFunction* func = SEXP_downcast<BuiltInFunction*>(op);
+    PairList* arglist = SEXP_downcast<PairList*>(args);
+    Expression* callx = SEXP_downcast<Expression*>(call);
+#endif
 	if (PRIMARITY(op) >= 0 && PRIMARITY(op) != nargs)
 	{
 		/* FIXME: ngettext reguires unsigned long, but %u would seem appropriate */
@@ -518,37 +523,38 @@ SEXP Rf_nthcdr(SEXP s, int n)
 {
 	if (Rf_isList(s) || Rf_isLanguage(s) || Rf_isFrame(s) || Rf_isDottedArgs(s))
 	{
+		ConsCell *ss = SEXP_downcast<ConsCell *>(s);
 		while (n-- > 0)
 		{
-			if (s == R_NilValue)
-				error(_("'nthcdr()' list is shorter than %d"), n);
-			s = CDR(s);
+			if (!ss)
+				Rf_error(_("'nthcdr()' list is shorter than %d"), n);
+			ss = ss->tail();
 		}
-		return s;
+		return ss;
 	}
 	else
-		error(_("'nthcdr' needs a list to CDR down"));
-	return R_NilValue; /* for -Wall */
+		Rf_error(_("'nthcdr()' needs a list to CDR down"));
+	return nullptr; /* for -Wall */
 }
 
-/* Destructively removes R_NilValue ('NULL') elements from a pairlist. */
-SEXP R::R_listCompact(SEXP s, bool keep_initial)
+PairList *R::R_listCompact(PairList *s, bool keep_initial)
 {
-    if(!keep_initial)
-    // skip initial NULL values
-	while (s != R_NilValue && CAR(s) == R_NilValue)
-	    s = CDR(s);
+	if (!keep_initial)
+		// skip initial NULL values
+		while (s && !s->car())
+			s = s->tail();
 
-    SEXP val = s;
-    SEXP prev = s;
-    while (s != R_NilValue) {
-	s = CDR(s);
-	if (CAR(s) == R_NilValue) // skip it
-	    SETCDR(prev, CDR(s));
-	else
-	    prev = s;
-    }
-    return val;
+	PairList *val = s;
+	PairList *prev = s;
+	while (s)
+	{
+		s = s->tail();
+		if (s && !s->car()) // skip it
+			prev->setTail(s->tail());
+		else
+			prev = s;
+	}
+	return val;
 }
 
 /* This is a primitive (with no arguments) */
