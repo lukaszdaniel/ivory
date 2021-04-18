@@ -140,6 +140,7 @@ static void setActiveValue(SEXP fun, SEXP val)
 
 inline static bool IS_USER_DATABASE(SEXP rho)
 {
+    // original CXXR always returns false (rev. 375)
     return (OBJECT((rho)) && inherits((rho), "UserDefinedDatabase"));
 }
 
@@ -608,7 +609,8 @@ static SEXP R_HashProfile(SEXP table)
 
 */
 
-#define USE_GLOBAL_CACHE
+#define USE_GLOBAL_CACHE // original CXXR undefines this (rev. 374)
+
 #ifdef USE_GLOBAL_CACHE  /* NB leave in place: see below */
 /* Global variable caching.  A cache is maintained in a hash table,
    R_GlobalCache.  The entry values are either R_UnboundValue (a
@@ -688,7 +690,6 @@ HIDDEN void R::InitGlobalEnv()
     R_GlobalCachePreserve = CXXR_cons(R_GlobalCache, nullptr);
     R_PreserveObject(R_GlobalCachePreserve);
 #endif
-    R_BaseNamespace = NewEnvironment(nullptr, nullptr, R_GlobalEnv);
     R_PreserveObject(R_BaseNamespace);
     SET_SYMVALUE(Symbol::obtain(".BaseNamespaceEnv"), R_BaseNamespace);
     R_BaseNamespaceName = ScalarString(CachedString::obtain("base"));

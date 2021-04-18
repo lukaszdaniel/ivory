@@ -858,7 +858,7 @@ SEXP R::NewEnvironment(SEXP namelist, SEXP valuelist, SEXP rho)
     SEXP v = valuelist;
     SEXP n = namelist;
 
-    while (v != R_NilValue && n != R_NilValue)
+    while (v && n)
     {
         SET_TAG(v, TAG(n));
         v = CDR(v);

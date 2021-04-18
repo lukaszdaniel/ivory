@@ -32,9 +32,13 @@
 #define ENVIRONMENT_HPP
 
 #include <CXXR/GCRoot.hpp>
+#include <CXXR/GCStackRoot.hpp>
 #include <CXXR/RObject.hpp>
+#include <CXXR/Frame.hpp>
 #include <CXXR/ListVector.hpp>
 #include <CXXR/PairList.hpp>
+#include <CXXR/StringVector.hpp>
+#include <CXXR/Symbol.hpp>
 #include <CXXR/SEXP_downcast.hpp>
 
 namespace R
@@ -44,6 +48,8 @@ namespace R
 
 namespace CXXR
 {
+   class FunctionBase;
+
    /** @brief Mapping from Symbols to R objects.
     *
     * An Environment has an associated Frame, which defines a mapping
@@ -60,10 +66,11 @@ namespace CXXR
    class Environment : public RObject
    {
    public:
-      /**
+      /** @brief Constructor.
+       *
        * @param enclosing Pointer to the enclosing environment.
        *
-       * @param namevals List of name-value pairs used to initialize
+       * @param frame List of name-value pairs used to initialize
        *          the environment.  Every element of this list must have
        *          a tag (not checked), and these tags must be
        *          distinct (not checked).  As presently implemented,
@@ -75,54 +82,79 @@ namespace CXXR
        * empty environment.  \a namevals ought to be thoroughly
        * checked.
        */
-      explicit Environment(Environment *enclosing = nullptr, PairList *namevals = nullptr)
+      explicit Environment(Environment *enclosing = nullptr, PairList *frame = nullptr)
           : RObject(ENVSXP), m_single_stepping(false),
             m_globally_cached(false), m_locked(false)
       {
          m_hashtable = nullptr;
          m_enclosing = enclosing;
-         m_frame = namevals;
+         m_frame = frame;
       }
 
       /** @brief Base environment.
        *
-       * @return pointer to the base environment.
+       * @return Pointer to the base environment.
        */
       static Environment *base()
       {
          return s_base_env;
       }
 
-      /** @brief Access the enclosing environment.
+      /** @brief Base namespace.
        *
-       * @return pointer to the enclosing environment.
+       * @return Pointer to the base namespace.
+       */
+      static Environment *baseNamespace()
+      {
+         return s_base_namespace;
+      }
+
+      /** @brief Empty environment.
+       *
+       * CR accords a special status to the empty environment,
+       * R_EmptyEnv, which is an Environment whose Frame contains no
+       * Bindings, and which has no enclosing Environment.  In CR
+       * the search for a Symbol Binding terminates when it reaches
+       * the empty environment, without looking inside it.  In rho,
+       * although the empty environment still exists (for backwards
+       * compatibility)), it is not handled specially.  If the
+       * search for a Symbol reaches the empty environment, rho
+       * will look for the Symbol inside it - unsuccessfully of
+       * course - and the search then terminates because there is no
+       * enclosing Environment.
+       *
+       * @return Pointer to the empty environment.
+       *
+       * @note rho's own code does not include tests to prohibit
+       * the creation of bindings within the empty environment, but
+       * the effect of doing so is undefined.
+       */
+      static Environment *empty()
+      {
+         return s_empty_env;
+      }
+
+      /** @brief Access the enclosing Environment.
+       *
+       * @return Pointer to the enclosing Environment.
        */
       Environment *enclosingEnvironment() const
       {
          return m_enclosing;
       }
 
-      /** @brief Empty environment.
+      /** @brief Access the Environment's Frame.
        *
-       * @return pointer to the standard empty environment.
-       */
-      static Environment *emptyEnvironment()
-      {
-         return s_empty_env;
-      }
-
-      /** @brief Access the frame.
-       *
-       * @return pointer to the frame of this environment.
+       * @return Pointer to the Environment's Frame.
        */
       PairList *frame()
       {
          return m_frame;
       }
 
-      /** @brief Access the frame (const variant).
+      /** @brief Access the Environment's Frame (const variant).
        *
-       * @return pointer to the frame of this environment.
+       * @return const pointer to the Environment's Frame.
        */
       const PairList *frame() const
       {
@@ -131,7 +163,7 @@ namespace CXXR
 
       /** @brief Global environment.
        *
-       * @return pointer to the global environment.
+       * @return Pointer to the global environment.
        */
       static Environment *global()
       {
@@ -285,9 +317,16 @@ namespace CXXR
       // Virtual function of GCNode:
       void visitReferents(const_visitor *v) const override;
 
+      /** @brief Not for general use.
+       *
+       * (Used by downcast_to_env to report use of NULL environment.)
+       */
+      NORET static void nullEnvironmentError();
+
    private:
       static GCRoot<Environment> s_empty_env;
       static GCRoot<Environment> s_base_env;
+      static GCRoot<Environment> s_base_namespace;
       static GCRoot<Environment> s_global_env;
 
       GCEdge<Environment> m_enclosing;
@@ -308,6 +347,17 @@ namespace CXXR
       Environment(const Environment &);
       Environment &operator=(const Environment &);
    };
+
+   template <typename PtrIn>
+   Environment *downcast_to_env(PtrIn s, bool allow_null = false)
+   {
+      if (!s && !allow_null)
+      {
+         Environment::nullEnvironmentError();
+      }
+      return SEXP_downcast<Environment *>(s);
+   }
+
 } // namespace CXXR
 
 extern "C"
@@ -324,6 +374,10 @@ extern "C"
     */
    extern SEXP R_GlobalEnv;
 
+   /** @brief The (fake) namespace for base
+    */
+   extern SEXP R_BaseNamespace;
+
    /** @brief Is this a CXXR::Environment?
     *
     * @param s Pointer to an RObject.
@@ -331,16 +385,6 @@ extern "C"
     * @return TRUE iff the RObject pointed to by s is an environment.
     */
    Rboolean Rf_isEnvironment(SEXP s);
-
-   /* Environment Access Functions */
-
-   /** @brief Access an environment's frame.
-    *
-    * @param x Pointer to a CXXR::Environment (checked).
-    *
-    * @return Pointer to the frame of \a x (may be null).
-    */
-   SEXP FRAME(SEXP x);
 
    /** @brief Access an environment's Frame, represented as a PairList.
     *
@@ -354,6 +398,14 @@ extern "C"
     * @note Beware that since (unlike CR) this isn't a simple
     * accessor function, its return value will need protection from
     * garbage collection.
+    */
+   SEXP FRAME(SEXP x);
+
+   /** @brief Access enclosing environment.
+    *
+    * @param x Pointer to a CXXR::Environment (checked).
+    *
+    * @return Pointer to the enclosing environment of \a x.
     */
    SEXP ENCLOS(SEXP x);
 

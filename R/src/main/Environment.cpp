@@ -87,10 +87,11 @@ namespace CXXR
     GCRoot<Environment> Environment::s_empty_env(GCNode::expose(new Environment()));
     GCRoot<Environment> Environment::s_base_env(GCNode::expose(new Environment(s_empty_env)));
     GCRoot<Environment> Environment::s_global_env(GCNode::expose(SEXP_downcast<Environment *>(R::R_NewHashedEnv(s_base_env, Rf_ScalarInteger(0)))));
+    GCRoot<Environment> Environment::s_base_namespace(GCNode::expose(new Environment(s_global_env)));
 
     void Environment::initialize()
     {
-        R_EmptyEnv = emptyEnvironment();
+        R_EmptyEnv = empty();
         R_BaseEnv = base();
 
         // base()->setOnSearchPath(true);
@@ -98,7 +99,7 @@ namespace CXXR
 
         // global()->setOnSearchPath(true);
 
-        // R_BaseNamespace = baseNamespace();
+        R_BaseNamespace = baseNamespace();
     }
 
     const char *Environment::typeName() const
@@ -115,6 +116,11 @@ namespace CXXR
             m_frame->conductVisitor(v);
         if (m_hashtable)
             m_hashtable->conductVisitor(v);
+    }
+
+    void Environment::nullEnvironmentError()
+    {
+        Rf_error(_("use of NULL environment is defunct"));
     }
 
     void Environment::checkST(const RObject *x)
