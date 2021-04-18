@@ -25,11 +25,16 @@
 #define R_NO_REMAP
 #define R_USE_SIGNALS 1
 
+#include <cctype>		/* for isspace */
+#include <cfloat>		/* for DBL_MAX */
+#include <vector>
+#include <string>
 #include <CXXR/RAllocStack.hpp>
 #include <CXXR/String.hpp>
 #include <CXXR/BuiltInFunction.hpp>
 #include <CXXR/PairList.hpp>
 #include <CXXR/Expression.hpp>
+#include <CXXR/DottedArgs.hpp>
 #include <CXXR/StringVector.hpp>
 #include <CXXR/IntVector.hpp>
 #include <CXXR/RealVector.hpp>
@@ -40,12 +45,7 @@
 #include <Internal.h>
 #include <R_ext/Print.h>
 #include <R_ext/Minmax.h>
-#include <cctype>		/* for isspace */
-#include <cfloat>		/* for DBL_MAX */
 #include <R_ext/Itermacros.h> /* for ITERATE_BY_REGION */
-
-#include <vector>
-#include <string>
 
 using namespace std;
 using namespace R;
@@ -479,7 +479,8 @@ HIDDEN SEXP R::EnsureString(SEXP s)
 // NB: have  checkArity(a,b) :=  Rf_checkArityCall(a,b,call)
 void R::Rf_checkArityCall(SEXP op, SEXP args, SEXP call)
 {
-	if (PRIMARITY(op) >= 0 && PRIMARITY(op) != length(args))
+	R_len_t nargs = ConsCell::listLength<R_len_t>(SEXP_downcast<const ConsCell *>(args));
+	if (PRIMARITY(op) >= 0 && PRIMARITY(op) != nargs)
 	{
 		/* FIXME: ngettext reguires unsigned long, but %u would seem appropriate */
 		if (PRIMINTERNAL(op))
@@ -490,15 +491,15 @@ void R::Rf_checkArityCall(SEXP op, SEXP args, SEXP call)
 			snprintf(result, bufsize, ".Internal(%s)", primname);
 			error(n_("%d argument passed to '%s' function which requires %d",
 					 "%d arguments passed to '%s' function which requires %d",
-					 (unsigned long)length(args)),
-				  length(args), result, PRIMARITY(op));
+					 (unsigned long)nargs),
+				  nargs, result, PRIMARITY(op));
 		}
 		else
 			errorcall(call,
 					  n_("%d argument passed to '%s' function which requires %d",
 						 "%d arguments passed to '%s' function which requires %d",
-						 (unsigned long)length(args)),
-					  length(args), PRIMNAME(op), PRIMARITY(op));
+						 (unsigned long)nargs),
+					  nargs, PRIMNAME(op), PRIMARITY(op));
 	}
 }
 
@@ -515,7 +516,7 @@ HIDDEN void R::check1arg(SEXP arg, SEXP call, const char *formal)
 
 SEXP Rf_nthcdr(SEXP s, int n)
 {
-	if (isList(s) || isLanguage(s) || isFrame(s) || TYPEOF(s) == DOTSXP)
+	if (Rf_isList(s) || Rf_isLanguage(s) || Rf_isFrame(s) || Rf_isDottedArgs(s))
 	{
 		while (n-- > 0)
 		{

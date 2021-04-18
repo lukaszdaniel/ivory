@@ -516,13 +516,7 @@ R_len_t Rf_length(SEXP s)
     case LANGSXP:
     case DOTSXP:
     {
-        R_len_t i = 0;
-        while (s)
-        {
-            ++i;
-            s = CDR(s);
-        }
-        return i;
+        return ConsCell::listLength<R_len_t>(SEXP_downcast<const ConsCell *>(s));
     }
     case ENVSXP:
         return Rf_envlength(s);
@@ -552,13 +546,7 @@ R_xlen_t Rf_xlength(SEXP s)
     case DOTSXP:
     {
         // it is implausible this would be >= 2^31 elements, but allow it
-        R_xlen_t i = 0;
-        while (s)
-        {
-            ++i;
-            s = CDR(s);
-        }
-        return i;
+        return ConsCell::listLength<>(SEXP_downcast<const ConsCell *>(s));
     }
     case ENVSXP:
         return Rf_envxlength(s);

@@ -52,3 +52,10 @@ namespace CXXR
         return staticTypeName();
     }
 } // namespace CXXR
+
+// ***** C interface *****
+
+Rboolean Rf_isDottedArgs(SEXP s)
+{
+    return Rboolean(!s || TYPEOF(s) == DOTSXP);
+}

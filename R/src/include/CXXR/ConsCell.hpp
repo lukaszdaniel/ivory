@@ -181,6 +181,26 @@ namespace CXXR
             return ans;
         }
 
+        /** @brief Number of elements in list.
+         *
+         * @param start Pointer to a ConsCell, possibly null.
+         *
+         * @return zero if \a start is a null pointer, otherwise the
+         * number of elements in the list starting at the ConsCell
+         * pointed to by \a start.
+         */
+        template <typename T = R_xlen_t>
+        static T listLength(const ConsCell *start)
+        {
+            T ans = 0;
+            while (start)
+            {
+                ++ans;
+                start = start->tail();
+            }
+            return ans;
+        }
+
         /** @brief Set the 'car' value.
          *
          * @param cr Pointer to the new car object (or a null

@@ -93,4 +93,9 @@ namespace CXXR
     };
 } // namespace CXXR
 
+extern "C"
+{
+    Rboolean Rf_isDottedArgs(SEXP s);
+}
+
 #endif /* DOTTEDARGS_HPP */
