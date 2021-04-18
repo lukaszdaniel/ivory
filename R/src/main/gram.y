@@ -1285,7 +1285,7 @@ static SEXP xxexprlist(SEXP a1, YYLTYPE *lloc, SEXP a2)
 	    GCStackRoot<> s(makeSrcref(lloc, PS_SRCFILE));
 	    PrependToSrcRefs(s);
 	    attachSrcrefs(a2);
-	    UNPROTECT(1); /* prevSrcrefs */
+
 	    PS_SET_SRCREFS(prevSrcrefs);
 	}
 	PRESERVE_SV(anslist = a2);
