@@ -228,6 +228,14 @@ SEXP R::deparse1(SEXP call, bool abbrev, int opts)
     return result;
 }
 
+void CXXR::DEPARSE(RObject *expr)
+{
+	GCManager::GCInhibitor no_gc;
+	GCStackRoot<> srt(expr);
+	GCStackRoot<const StringVector> sv(static_cast<const StringVector *>(R::deparse1(expr, false, DEFAULTDEPARSE)));
+	for (R_xlen_t i = 0; i < sv->size(); ++i)
+		std::cout << (*sv)[i]->c_str() << '\n';
+}
 
 /* used for language objects in print() */
 HIDDEN

@@ -115,6 +115,15 @@ namespace CXXR
     *          currently checked in any way.)
     */
    void Rf_setCurrentExpression(RObject *e);
+
+   /** @brief Deparse an Expression.
+    *
+    * Utility intended to be called from a debugger.  Prints out the
+    * deparse of an RObject.
+    *
+    * @param expr Pointer to a CXXR::Expression (checked) to be deparsed.
+    */
+   void DEPARSE(RObject *expr);
 } // namespace CXXR
 
 extern "C"
