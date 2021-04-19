@@ -21,7 +21,7 @@ SOURCES_CXX = \
 	RealVector.cpp StringVector.cpp RObject.cpp ConsCell.cpp BuiltInFunction.cpp Expression.cpp ExternalPointer.cpp FunctionBase.cpp \
 	RAltRep.cpp ByteCode.cpp DottedArgs.cpp Closure.cpp Environment.cpp Evaluator.cpp VectorBase.cpp FixedVector.cpp SEXP_downcast.cpp Symbol.cpp \
 	UncachedString.cpp CachedString.cpp \
-	ExpressionVector.cpp Frame.cpp FrameDescriptor.cpp ListVector.cpp PairList.cpp S4Object.cpp Promise.cpp WeakRef.cpp \
+	ExpressionVector.cpp Frame.cpp StdFrame.cpp FrameDescriptor.cpp ListVector.cpp PairList.cpp S4Object.cpp Promise.cpp WeakRef.cpp \
 	NodeStack.cpp ProtectStack.cpp \
 	agrep.cpp altclasses.cpp altrep.cpp apply.cpp arithmetic.cpp array.cpp attrib.cpp \
 	bind.cpp builtin.cpp \
