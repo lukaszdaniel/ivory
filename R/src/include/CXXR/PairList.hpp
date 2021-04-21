@@ -170,7 +170,10 @@ namespace CXXR
 #ifdef TESTING_WRITE_BARRIER
         /* this should not add a non-tracking CDR to a tracking cell */
         if (trackrefs() && tl && !tl->trackrefs())
-            Rf_error(_("inserting non-tracking CDR in tracking cell"));
+        {
+            std::cerr << _("inserting non-tracking CDR in tracking cell") << std::endl;
+            // Rf_error(_("inserting non-tracking CDR in tracking cell"));
+        }
 #endif
         // m_tail = tl;
         // m_tail.propagateAge(this);

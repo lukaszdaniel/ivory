@@ -97,7 +97,6 @@ function(..., list = character(), package = NULL, lib.loc = NULL,
                     warning(gettextf("data index for package %s is invalid and will be ignored", sQuote(packageName)), domain = "R-utils", call.=FALSE)
             }
         }
-	#data() powoduje wyswietlenie komunikatu: Błąd w db[, "Package"]: indeks poza granicami
         colnames(db) <- c(gettext("Package", domain = "R-utils"), gettext("LibPath", domain = "R-utils"), gettext("Item", domain = "R-utils"), gettext("Title", domain = "R-utils"))
         #colnames(db) <- c("Package", "LibPath", "Item", "Title")
 

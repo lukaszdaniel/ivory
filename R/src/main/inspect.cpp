@@ -50,11 +50,12 @@ namespace
 	{
 		return e && SEXP_downcast<const Environment *>(e)->isLocked();
 	}
-
+#ifdef USE_GLOBAL_CACHE
 	bool IS_GLOBAL_FRAME(SEXP e)
 	{
 		return e && SEXP_downcast<const Environment *>(e)->inGlobalCache();
 	}
+#endif
 }
 
 /* based on EncodeEnvironment in  printutils.cpp */
@@ -141,7 +142,9 @@ static void inspect_tree(int pre, SEXP v, int deep, int pvec) {
     }
     if (TYPEOF(v) == ENVSXP) {
 	if (FRAME_IS_LOCKED(v)) { if (a) Rprintf(","); Rprintf("LCK"); a = 1; }
+#ifdef USE_GLOBAL_CACHE
 	if (IS_GLOBAL_FRAME(v)) { if (a) Rprintf(","); Rprintf("GL"); a = 1; }
+#endif
     }
     if (LEVELS(v)) { if (a) Rprintf(","); Rprintf("gp=0x%x", LEVELS(v)); a = 1; }
     if (ATTRIB(v) && ATTRIB(v) != R_NilValue) { if (a) Rprintf(","); Rprintf("ATT"); a = 1; }

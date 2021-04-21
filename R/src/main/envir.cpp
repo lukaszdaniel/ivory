@@ -181,6 +181,7 @@ RObject *Frame::Binding::value() const
     m_frame->monitorRead(*this);
     return ans;
 }
+
 inline static SEXP SYMBOL_BINDING_VALUE(SEXP s)
 {
     return IS_ACTIVE_BINDING(s) ? getActiveValue(SYMVALUE(s)) : SYMVALUE(s);
@@ -634,8 +635,6 @@ static SEXP R_HashProfile(SEXP table)
 
 */
 
-#define USE_GLOBAL_CACHE // original CXXR undefines this (rev. 374)
-
 #ifdef USE_GLOBAL_CACHE  /* NB leave in place: see below */
 /* Global variable caching.  A cache is maintained in a hash table,
    R_GlobalCache.  The entry values are either R_UnboundValue (a
@@ -671,6 +670,7 @@ static SEXP R_HashProfile(SEXP table)
    left in place.
 
    L. T. */
+#ifdef USE_GLOBAL_CACHE
 namespace
 {
     inline bool IS_GLOBAL_FRAME(SEXP e)
@@ -692,6 +692,7 @@ namespace
         SEXP_downcast<Environment *>(e)->setGlobalCaching(false);
     }
 }
+#endif
 
 #define INITIAL_CACHE_SIZE 1000
 
