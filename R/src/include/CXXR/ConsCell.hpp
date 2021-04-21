@@ -390,6 +390,7 @@ namespace CXXR
 
         // 'Scratchpad' field used in handling argument lists,
         // formerly hosted in the 'gp' field of sxpinfo_struct.
+        public: // private:
         unsigned int m_missing : 2;
     };
 
@@ -438,13 +439,6 @@ extern "C"
      * @return Pointer to the created object.
      */
     SEXP Rf_allocSExp(SEXPTYPE t);
-
-    SEXP SETCAR(SEXP x, SEXP y);
-    SEXP SETCDR(SEXP x, SEXP y);
-    SEXP SETCADR(SEXP x, SEXP y);
-    SEXP SETCADDR(SEXP x, SEXP y);
-    SEXP SETCADDDR(SEXP x, SEXP y);
-    SEXP SETCAD4R(SEXP x, SEXP y);
 
     int BNDCELL_TAG(SEXP cell);
     void SET_BNDCELL_TAG(SEXP cell, int val);

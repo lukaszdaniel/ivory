@@ -1161,7 +1161,11 @@ inline static bool R_CheckJIT(SEXP fun)
 
 /* FIXME: this should not depend on internals from envir.cpp but does for now. */
 /* copied from envir.cpp for now */
-#define IS_USER_DATABASE(rho)  (OBJECT((rho)) && inherits((rho), "UserDefinedDatabase"))
+inline static bool IS_USER_DATABASE(SEXP rho)
+{
+    // original CXXR always returns false (rev. 375)
+    return (OBJECT((rho)) && inherits((rho), "UserDefinedDatabase"));
+}
 #define IS_STANDARD_UNHASHED_FRAME(e) (! IS_USER_DATABASE(e) && HASHTAB(e) == R_NilValue)
 #define IS_STANDARD_HASHED_FRAME(e) (! IS_USER_DATABASE(e) && HASHTAB(e) != R_NilValue)
 
@@ -2189,9 +2193,6 @@ HIDDEN SEXP do_if(SEXP call, SEXP op, SEXP args, SEXP rho)
     }
     return (eval(Stmt, rho));
 }
-
-#define IS_USER_DATABASE(rho)					\
-    (OBJECT((rho)) && inherits((rho), "UserDefinedDatabase"))
 
 inline static SEXP GET_BINDING_CELL(SEXP symbol, SEXP rho)
 {

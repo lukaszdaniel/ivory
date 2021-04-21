@@ -31,8 +31,10 @@
 
 #include <CXXR/Environment.hpp>
 #include <CXXR/IntVector.hpp>
+#include <CXXR/Symbol.hpp>
 #include <Rinternals.h>
 
+using namespace std;
 using namespace CXXR;
 
 namespace R

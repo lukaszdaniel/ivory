@@ -100,6 +100,7 @@
 #define R_NO_REMAP
 #define R_USE_SIGNALS 1
 
+#include <CXXR/Frame.hpp>
 #include <CXXR/Environment.hpp>
 #include <CXXR/CachedString.hpp>
 #include <CXXR/BuiltInFunction.hpp>
@@ -163,18 +164,28 @@ namespace
 static SEXP getActiveValue(SEXP);
 inline static SEXP BINDING_VALUE(SEXP b)
 {
-    if (BNDCELL_TAG(b)) {
-	R_expand_binding_value(b);
-	return CAR0(b);
+    if (BNDCELL_TAG(b))
+    {
+        R_expand_binding_value(b);
+        return CAR0(b);
     }
-    if (IS_ACTIVE_BINDING(b)) return getActiveValue(CAR(b));
-    else return CAR(b);
+    if (IS_ACTIVE_BINDING(b))
+        return getActiveValue(CAR(b));
+    else
+        return CAR(b);
 }
 
+RObject *Frame::Binding::value() const
+{
+    RObject *ans = (isActive() ? getActiveValue(m_value) : m_value);
+    m_frame->monitorRead(*this);
+    return ans;
+}
 inline static SEXP SYMBOL_BINDING_VALUE(SEXP s)
 {
     return IS_ACTIVE_BINDING(s) ? getActiveValue(SYMVALUE(s)) : SYMVALUE(s);
 }
+
 inline static Rboolean SYMBOL_HAS_BINDING(SEXP s)
 {
     return (Rboolean)(IS_ACTIVE_BINDING(s) || (SYMVALUE(s) != R_UnboundValue));
@@ -183,27 +194,41 @@ inline static Rboolean SYMBOL_HAS_BINDING(SEXP s)
 inline static void SET_BINDING_VALUE(SEXP b, SEXP val)
 {
     if (BINDING_IS_LOCKED(b))
-        error(_("cannot change value of locked binding for '%s'"),
-              CHAR(PRINTNAME(TAG(b))));
+        error(_("cannot change value of locked binding for '%s'"), CHAR(PRINTNAME(TAG(b))));
     if (IS_ACTIVE_BINDING(b))
         setActiveValue(CAR(b), val);
     else
         SET_BNDCELL(b, val);
 }
 
-inline static void SET_SYMBOL_BINDING_VALUE(SEXP sym, SEXP val)
+void Frame::Binding::assign(RObject *new_value)
+{
+    if (isLocked())
+        Rf_error(_("cannot change value of locked binding for '%s'"), symbol()->name()->c_str());
+    if (isActive())
+    {
+        setActiveValue(m_value, new_value);
+        m_frame->monitorRead(*this);
+    }
+    else
+    {
+        m_value.retarget(m_frame, new_value);
+        m_frame->monitorWrite(*this);
+    }
+}
+
+inline static void SET_SYMBOL_BINDING_VALUE(SEXP sym, SEXP new_value)
 {
     if (BINDING_IS_LOCKED(sym))
-        error(_("cannot change value of locked binding for '%s'"),
-              CHAR(PRINTNAME(sym)));
+        error(_("cannot change value of locked binding for '%s'"), CHAR(PRINTNAME(sym)));
     if (IS_ACTIVE_BINDING(sym))
     {
-        PROTECT(val);
-        setActiveValue(SYMVALUE(sym), val);
+        PROTECT(new_value);
+        setActiveValue(SYMVALUE(sym), new_value);
         UNPROTECT(1);
     }
     else
-        SET_SYMVALUE(sym, val);
+        SET_SYMVALUE(sym, new_value);
 }
 
 /* Macro version of isNull for only the test against R_NilValue */
@@ -819,8 +844,6 @@ static std::pair<SEXP, bool> RemoveFromList(SEXP thing, SEXP list)
 */
 HIDDEN void R::unbindVar(SEXP symbol, SEXP rho)
 {
-    int hashcode;
-    SEXP c;
 
     if (rho == R_BaseNamespace)
 	error(_("cannot unbind in the base namespace"));
@@ -839,16 +862,16 @@ HIDDEN void R::unbindVar(SEXP symbol, SEXP rho)
 #endif
 	}
     }
+#ifdef USE_GLOBAL_CACHE
     else {
 	/* This branch is used e.g. via sys.source, utils::data */
-	c = PRINTNAME(symbol);
-	hashcode = HASHVALUE(c) % HASHSIZE(HASHTAB(rho));
+	SEXP c = PRINTNAME(symbol);
+	int hashcode = HASHVALUE(c) % HASHSIZE(HASHTAB(rho));
 	bool found = R_HashDelete(hashcode, symbol, rho);
-#ifdef USE_GLOBAL_CACHE
 	if (found && IS_GLOBAL_FRAME(rho))
 	     R_FlushGlobalCache(symbol);
-#endif
     }
+#endif
 }
 
 
@@ -1226,7 +1249,7 @@ static SEXP findVarLoc(SEXP symbol, SEXP rho)
 	return R_NilValue;
 #else
     while (rho != R_EmptyEnv) {
-	vl = findVarInLocFrame(rho, symbol, nullptr);
+	vl = findVarLocInFrame(rho, symbol, nullptr);
 	if (vl != R_NilValue) return vl;
 	rho = ENCLOS(rho);
     }
@@ -2407,19 +2430,15 @@ HIDDEN SEXP do_attach(SEXP call, SEXP op, SEXP args, SEXP env)
         SET_ENCLOS(t, s);
         SET_ENCLOS(s, x);
     }
-
-    if(!isSpecial) { /* Temporary: need to remove the elements identified by objects(CAR(args)) */
 #ifdef USE_GLOBAL_CACHE
+    if(!isSpecial) { /* Temporary: need to remove the elements identified by objects(CAR(args)) */
 	R_FlushGlobalCacheFromTable(HASHTAB(s));
 	MARK_AS_GLOBAL_FRAME(s);
-#endif
     } else {
-#ifdef USE_GLOBAL_CACHE
 	R_FlushGlobalCacheFromUserTable(HASHTAB(s));
 	MARK_AS_GLOBAL_FRAME(s);
-#endif
     }
-
+#endif
     UNPROTECT(1); /* s */
     return s;
 }

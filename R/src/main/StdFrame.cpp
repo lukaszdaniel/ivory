@@ -54,4 +54,89 @@ using namespace CXXR;
 namespace CXXR
 {
 
+    // We want to be able to determine quickly if a symbol is *not*
+    // defined in an frame, so that we can carry on working up the
+    // chain of enclosing frames.  On average the number of tests
+    // needed to determine that a symbol is not present is 1 + 2L, where L
+    // is the load factor.  So we keep the load factor small:
+    namespace
+    {
+        const float maximum_load_factor = 0.5;
+    }
+
+    StdFrame::StdFrame(size_t initial_capacity)
+        : m_map(ceil(initial_capacity / maximum_load_factor))
+    {
+        m_map.max_load_factor(maximum_load_factor);
+    }
+
+    PairList *StdFrame::asPairList() const
+    {
+        GCRoot<PairList> ans(nullptr);
+        for (map::const_iterator it = m_map.begin(); it != m_map.end(); ++it)
+            ans = (*it).second.asPairList(ans);
+        return ans;
+    }
+
+    Frame::Binding *StdFrame::binding(const Symbol *symbol)
+    {
+        map::iterator it = m_map.find(symbol);
+        if (it == m_map.end())
+            return nullptr;
+        return &(*it).second;
+    }
+
+    const Frame::Binding *StdFrame::binding(const Symbol *symbol) const
+    {
+        map::const_iterator it = m_map.find(symbol);
+        if (it == m_map.end())
+            return nullptr;
+        return &(*it).second;
+    }
+
+    void StdFrame::clear()
+    {
+        m_map.clear();
+    }
+
+    bool StdFrame::erase(const Symbol *symbol)
+    {
+        if (isLocked())
+            Rf_error(_("cannot remove bindings from a locked frame"));
+        return m_map.erase(symbol);
+    }
+
+    void StdFrame::lockBindings()
+    {
+        for (map::iterator it = m_map.begin(); it != m_map.end(); ++it)
+            (*it).second.setLocking(true);
+    }
+
+    Frame::Binding *StdFrame::obtainBinding(const Symbol *symbol)
+    {
+        Binding &bdg = m_map[symbol];
+        // Was this binding newly created?
+        if (!bdg.frame())
+        {
+            if (isLocked())
+            {
+                m_map.erase(symbol);
+                Rf_error(_("cannot add bindings to a locked frame"));
+            }
+            bdg.initialize(this, symbol);
+        }
+        return &bdg;
+    }
+
+    size_t StdFrame::size() const
+    {
+        return m_map.size();
+    }
+
+    void StdFrame::visitReferents(const_visitor *v) const
+    {
+        Frame::visitReferents(v);
+        for (map::const_iterator it = m_map.begin(); it != m_map.end(); ++it)
+            (*it).second.visitReferents(v);
+    }
 } // namespace CXXR

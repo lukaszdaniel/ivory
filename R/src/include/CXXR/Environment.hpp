@@ -323,6 +323,11 @@ namespace CXXR
        */
       NORET static void nullEnvironmentError();
 
+   protected:
+      // Declared private to ensure that Environment objects are
+      // created only using 'new':
+      ~Environment() {}
+
    private:
       static GCRoot<Environment> s_empty_env;
       static GCRoot<Environment> s_base_env;
@@ -335,10 +340,6 @@ namespace CXXR
       bool m_single_stepping;
       bool m_globally_cached;
       bool m_locked;
-
-      // Declared private to ensure that Environment objects are
-      // created only using 'new':
-      ~Environment() {}
 
       static void initialize();
       friend void ::R::InitGlobalEnv();

@@ -37,7 +37,60 @@
 
 namespace CXXR
 {
+	/** @brief General-purpose implementation of CXXR::Frame.
+	 */
+	class StdFrame : public Frame
+	{
+	private:
+		typedef std::unordered_map<const Symbol *, Binding,
+								   std::hash<const Symbol *>,
+								   std::equal_to<const Symbol *>,
+								   CXXR::Allocator<std::pair<const Symbol *,
+															 Binding>>>
+			map;
 
+	public:
+		/**
+		 * @param initial_capacity A hint to the implementation that
+		 *          the constructed StdFrame should be
+		 *          configured to have capacity for at least \a
+		 *          initial_capacity Bindings.  This does not impose an
+		 *          upper limit on the capacity of the StdFrame,
+		 *          but some reconfiguration (and consequent time
+		 *          penalty) may occur if it is exceeded.
+		 */
+		explicit StdFrame(size_t initial_capacity = 15);
+		// Why 15?  Because if the implementation uses a prime number
+		// hash table sizing policy, this will result in the
+		// allocation of a hash table array comprising 31 buckets.  On
+		// a 32-bit architecture, this will fit well into two 64-byte
+		// cache lines.
+
+		// Virtual functions of Frame (qv):
+		PairList *asPairList() const override;
+		Binding *binding(const Symbol *symbol) override;
+		const Binding *binding(const Symbol *symbol) const override;
+		void clear() override;
+		bool erase(const Symbol *symbol) override;
+		void lockBindings() override;
+		Binding *obtainBinding(const Symbol *symbol) override;
+		size_t size() const override;
+
+		// Virtual function of GCNode:
+		void visitReferents(const_visitor *v) const override;
+
+	private:
+		map m_map;
+
+		// Declared private to ensure that StdFrame objects are
+		// created only using 'new':
+		~StdFrame() {}
+
+		// Not (yet) implemented.  Declared to prevent
+		// compiler-generated versions:
+		StdFrame(const Frame &);
+		StdFrame &operator=(const Frame &);
+	};
 } // namespace CXXR
 
 #endif // STDFRAME_HPP
