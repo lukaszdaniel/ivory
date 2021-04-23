@@ -863,16 +863,18 @@ HIDDEN void R::unbindVar(SEXP symbol, SEXP rho)
 #endif
 	}
     }
-#ifdef USE_GLOBAL_CACHE
     else {
 	/* This branch is used e.g. via sys.source, utils::data */
 	SEXP c = PRINTNAME(symbol);
 	int hashcode = HASHVALUE(c) % HASHSIZE(HASHTAB(rho));
-	bool found = R_HashDelete(hashcode, symbol, rho);
+#ifdef USE_GLOBAL_CACHE
+    bool found = R_HashDelete(hashcode, symbol, rho);
 	if (found && IS_GLOBAL_FRAME(rho))
 	     R_FlushGlobalCache(symbol);
-    }
+#else
+    R_HashDelete(hashcode, symbol, rho);
 #endif
+    }
 }
 
 
