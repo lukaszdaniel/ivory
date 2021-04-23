@@ -32,7 +32,7 @@ Because the computational burden in \code{mgcv} is all in the linear algebra, th
 Simon Wood <simon.wood@r-project.org>
 }
 \references{
-\url{https://computing.llnl.gov/tutorials/openMP/}
+\url{https://hpc.llnl.gov/openmp-tutorial}
 }
 
 \keyword{ package }
@@ -69,7 +69,7 @@ if (detectCores()>1) { ## no point otherwise
   cl <- makeCluster(nc) 
   ## could also use makeForkCluster, but read warnings first!
 } else cl <- NULL
-
+  
 system.time(b3 <- bam(y ~ s(x0,bs=bs,k=7)+s(x1,bs=bs,k=7)+s(x2,bs=bs,k=k)
             ,data=dat,family=poisson(),chunk.size=5000,cluster=cl))
 

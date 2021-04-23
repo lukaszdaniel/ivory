@@ -12,7 +12,7 @@ penalized by discrete penalties applied directly to
 the basis coefficients. Cyclic P-splines are specified by model terms like \code{s(x,bs="cp",...)}. 
 These bases can be used in tensor product smooths (see \code{\link{te}}).
 
-The advantage of P-splines is the flexible way that penalty and basis order can be mixed. This often provides a useful way of `taming' an otherwise poorly behave smooth. However, in regular use, splines with derivative based penalties (e.g. \code{"tp"} or \code{"cr"} bases) tend to result in slightly better MSE performance, presumably because the good approximation theoretic properties of splines are rather closely connected to the use of derivative penalties.  
+The advantage of P-splines is the flexible way that penalty and basis order can be mixed (but see also \code{\link{d.spline}}). This often provides a useful way of `taming' an otherwise poorly behave smooth. However, in regular use, splines with derivative based penalties (e.g. \code{"tp"} or \code{"cr"} bases) tend to result in slightly better MSE performance, presumably because the good approximation theoretic properties of splines are rather closely connected to the use of derivative penalties. 
 
 }
 
@@ -72,7 +72,7 @@ Pya, N., and Wood, S.N. (2015). Shape constrained additive models. Statistics an
 
 \author{ Simon N. Wood \email{simon.wood@r-project.org}}
 
-\seealso{\code{\link{cSplineDes}}, \code{\link{adaptive.smooth}}}
+\seealso{\code{\link{cSplineDes}}, \code{\link{adaptive.smooth}}, \code{\link{d.spline}}}
 
 \examples{
 ## see ?gam
@@ -101,7 +101,7 @@ Pya, N., and Wood, S.N. (2015). Shape constrained additive models. Statistics an
   plot(b,select=2,shade=TRUE);lines(z,0*z,col=2)
   plot(bk,select=1,shade=TRUE);lines(x,f-mean(f),col=2)
   plot(bk,select=2,shade=TRUE);lines(z,0*z,col=2)
-
+  
 ## Example using montonic constraints via the SCOP-spline
 ## construction, and of computng derivatives...
   x <- seq(0,1,length=100); dat <- data.frame(x)
@@ -136,14 +136,14 @@ Pya, N., and Wood, S.N. (2015). Shape constrained additive models. Statistics an
   b <- b[-1] ## dropping first param
   plot(x,sm$X\%*\%b,type="l",ylab="f(x)")
   plot(x,Xd\%*\%b,type="l",ylab="f'(x)")
-
+  
   sspec$mono <- -1
   sm1 <- smoothCon(sspec,dat,absorb.cons=TRUE)[[1]]
   sm1$deriv <- 1
   Xd1 <- PredictMat(sm1,dat)
   plot(x,sm1$X\%*\%b,type="l",ylab="f(x)")
   plot(x,Xd1\%*\%b,type="l",ylab="f'(x)")
-
+  
 }
 \keyword{models} \keyword{regression}%-- one or more ..
 

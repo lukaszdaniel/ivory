@@ -29,7 +29,7 @@ The density function of the shash family is
          \code{shash} can model skewness to either side, depending on the sign of \eqn{\epsilon}. 
          Also, shash can have tails that are lighter (\eqn{\delta>1}) or heavier (\eqn{0<\delta<1}) that a normal.
          For fitting purposes, here we are using \eqn{\tau = log(\sigma)} and \eqn{\phi = log(\delta)}.
-
+         
 The link function used for \eqn{\tau} is logeb with is \eqn{\eta = log{exp(\tau)-b}} so that the inverse link is
 \eqn{\tau = log(\sigma) = log{exp(\eta)+b}}. The point is that we are don't allow \eqn{\sigma} to become smaller
 than a small constant b. The likelihood includes a ridge penalty \eqn{- phiPen * \phi^2}, which shrinks \eqn{\phi} toward zero. When sufficient data is available the ridge penalty does not change the fit much, but it is useful to include it when fitting the model to small data sets, to avoid \eqn{\phi} diverging to +infinity (a problem already identified by Jones and Pewsey (2009)). 
@@ -52,7 +52,7 @@ sigma =  .5+0.4*(x+4)*.5            # Scale
 eps = 2*sin(x)                      # Skewness
 del = 1 + 0.2*cos(3*x)              # Kurtosis
 
-dat <-  mu + (del * sigma) * sinh((1/del) * asinh(qnorm(runif(n))) + (eps/del))
+dat <-  mu + (del*sigma)*sinh((1/del)*asinh(qnorm(runif(n))) + (eps/del))
 dataf <- data.frame(cbind(dat, x))
 names(dataf) <- c("y", "x")
 plot(x, dat, xlab = "x", ylab = "y")
@@ -105,11 +105,12 @@ legend("topleft", c("estimated", "truth"), col = 1:2, lty = 1:2, lwd = 2)
 # to what we would get with mgcv::gaulss
 library(MASS)
 
-b <- gam(list(accel~s(times, k=20, bs = "ad"), ~ s(times, k = 10), ~ 1, ~ 1),
+b <- gam(list(accel~s(times, k=20, bs = "ad"), ~s(times, k = 10), ~1, ~1),
          data=mcycle, family=shash)
 
 par(mfrow = c(1, 1))
-xSeq <- data.frame(cbind("accel" = rep(0, 1e3), "times" = seq(2, 58, length.out = 1e3)))
+xSeq <- data.frame(cbind("accel" = rep(0, 1e3),
+                   "times" = seq(2, 58, length.out = 1e3)))
 pred <- predict(b, newdata = xSeq)
 plot(mcycle$times, mcycle$accel, ylim = c(-180, 100))
 for(qq in c(0.1, 0.3, 0.5, 0.7, 0.9)){

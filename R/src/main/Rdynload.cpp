@@ -1,6 +1,6 @@
 /*
  *  R : A Computer Language for Statistical Data Analysis
- *  Copyright (C) 1997-2019 The R Core Team
+ *  Copyright (C) 1997-2021 The R Core Team
  *  Copyright (C) 1995-1996 Robert Gentleman and Ross Ihaka
  *
  *  This program is free software; you can redistribute it and/or modify
@@ -1125,6 +1125,8 @@ HIDDEN SEXP R_getSymbolInfo(SEXP sname, SEXP spackage, SEXP withRegistrationInfo
 
     package = "";
 
+    if (!isString(sname) || LENGTH(sname) != 1)
+	error(_("invalid '%s' argument"), "name");
     name = translateCharFP(STRING_ELT(sname, 0));
 
     if(length(spackage)) {
@@ -1152,15 +1154,14 @@ HIDDEN SEXP R_getSymbolInfo(SEXP sname, SEXP spackage, SEXP withRegistrationInfo
 HIDDEN SEXP R_getDllTable()
 {
     int i;
-    SEXP ans;
+    SEXP ans, nm;
 
     do
     {
         PROTECT(ans = allocVector(VECSXP, CountDLL));
         for (i = 0; i < CountDLL; i++)
-        {
             SET_VECTOR_ELT(ans, i, Rf_MakeDLLInfo(&(LoadedDLL[i])));
-        }
+
         setAttrib(ans, R_ClassSymbol, mkString("DLLInfoList"));
         UNPROTECT(1);
 
@@ -1171,6 +1172,14 @@ HIDDEN SEXP R_getDllTable()
        it was at the beginning.  LT */
     } while (CountDLL != LENGTH(ans));
 
+    PROTECT(ans);
+    PROTECT(nm = allocVector(STRSXP, CountDLL));
+    setAttrib(ans, R_NamesSymbol, nm);
+    for(int i = 0; i < CountDLL; i++)
+	SET_STRING_ELT(nm, i,
+	               /* ->name from DllInfo */
+		       STRING_ELT(VECTOR_ELT(VECTOR_ELT(ans, i), 0), 0));
+    UNPROTECT(2);
     return ans;
 }
 
@@ -1334,96 +1343,21 @@ HIDDEN SEXP R_getRegisteredRoutines(SEXP dll)
 
 HIDDEN SEXP do_getSymbolInfo(SEXP call, SEXP op, SEXP args, SEXP env)
 {
-    const char *package = "", *name;
-    R_RegisteredNativeSymbol symbol = {R_ANY_SYM, {nullptr}, nullptr};
-    SEXP sym = R_NilValue;
-    DL_FUNC f = nullptr;
-
     checkArity(op, args);
-    SEXP sname = CAR(args), spackage = CADR(args),
-	withRegistrationInfo = CADDR(args);
-
-    if (!isString(sname) || LENGTH(sname) != 1)
-	error(_("invalid '%s' argument"), "name");
-    name = translateCharFP(STRING_ELT(sname, 0));
-    if(length(spackage)) {
-	if(TYPEOF(spackage) == STRSXP)
-	    package = translateCharFP(STRING_ELT(spackage, 0));
-	else if(TYPEOF(spackage) == EXTPTRSXP &&
-		R_ExternalPtrTag(spackage) == Symbol::obtain("DLLInfo")) {
-	    f = R_dlsym((DllInfo *) R_ExternalPtrAddr(spackage), name, &symbol);
-	    package = nullptr;
-	} else
-	    error(_("must pass package name or DllInfo reference"));
-    }
-    if(package)
-	f = R_FindSymbol(name, package, &symbol);
-    if(f)
-	sym = createRSymbolObject(sname, f, &symbol,
-				  (Rboolean) LOGICAL(withRegistrationInfo)[0]);
-    return sym;
+    return R_getSymbolInfo(CAR(args), CADR(args), CADDR(args));
 }
 
 /* .Internal(getLoadedDLLs()) */
 HIDDEN SEXP do_getDllTable(SEXP call, SEXP op, SEXP args, SEXP env)
 {
-    SEXP ans, nm;
-
     checkArity(op, args);
-
-    do
-    {
-        PROTECT(ans = allocVector(VECSXP, CountDLL));
-        for (int i = 0; i < CountDLL; i++)
-            SET_VECTOR_ELT(ans, i, Rf_MakeDLLInfo(&(LoadedDLL[i])));
-        setAttrib(ans, R_ClassSymbol, mkString("DLLInfoList"));
-        UNPROTECT(1);
-
-        /* There is a problem here: The allocations can cause gc, and gc
-       may result in no longer referenced DLLs being unloaded.  So
-       CountDLL can be reduced during this loop.  A simple work-around
-       is to just try again until CountDLL at the end is the same as
-       it was at the beginning.  LT */
-    } while (CountDLL != LENGTH(ans));
-
-    PROTECT(ans);
-    PROTECT(nm = allocVector(STRSXP, CountDLL));
-    setAttrib(ans, R_NamesSymbol, nm);
-    for(int i = 0; i < CountDLL; i++)
-	SET_STRING_ELT(nm, i,
-		       STRING_ELT(VECTOR_ELT(VECTOR_ELT(ans, i), 0), 0));
-    UNPROTECT(2);
-    return ans;
+    return R_getDllTable();
 }
 
 HIDDEN SEXP do_getRegisteredRoutines(SEXP call, SEXP op, SEXP args, SEXP env)
 {
-    const char * const names[] = {".C", ".Call", ".Fortran", ".External"};
-
     checkArity(op, args);
-    SEXP dll = CAR(args), ans, snames;
-
-    if(TYPEOF(dll) != EXTPTRSXP &&
-       R_ExternalPtrTag(dll) != Symbol::obtain("DLLInfo"))
-	error(_("'R_getRegisteredRoutines()' expects a DllInfo reference"));
-
-    DllInfo *info = (DllInfo *) R_ExternalPtrAddr(dll);
-    if(!info) error(_("NULL value passed for DllInfo"));
-
-
-    PROTECT(ans = allocVector(VECSXP, 4));
-
-    SET_VECTOR_ELT(ans, 0, R_getRoutineSymbols(R_C_SYM, info));
-    SET_VECTOR_ELT(ans, 1, R_getRoutineSymbols(R_CALL_SYM, info));
-    SET_VECTOR_ELT(ans, 2, R_getRoutineSymbols(R_FORTRAN_SYM, info));
-    SET_VECTOR_ELT(ans, 3, R_getRoutineSymbols(R_EXTERNAL_SYM, info));
-
-    PROTECT(snames = allocVector(STRSXP, 4));
-    for(int i = 0; i < 4; i++)
-	SET_STRING_ELT(snames, i, mkChar(names[i]));
-    setAttrib(ans, R_NamesSymbol, snames);
-    UNPROTECT(2);
-    return ans;
+    return R_getRegisteredRoutines(CAR(args));
 }
 
 

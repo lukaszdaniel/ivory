@@ -1,5 +1,5 @@
 # Generate a short man page from --help and --version output.
-# Copyright ï¿½ 1997, 98, 99 Free Software Foundation, Inc.
+# Copyright © 1997, 98, 99 Free Software Foundation, Inc.
 
 # This program is free software; you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
@@ -16,7 +16,7 @@
 # Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301  USA.
 
 # Written by Brendan O'Dea <bod@compusol.com.au>
-# Available from ftp://ftp.gnu.org/gnu/help2man/
+# Available from 
 
 use 5.004;
 use strict;

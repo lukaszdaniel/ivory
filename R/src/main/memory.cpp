@@ -1,6 +1,6 @@
 /*
  *  R : A Computer Language for Statistical Data Analysis
- *  Copyright (C) 1998--2020  The R Core Team.
+ *  Copyright (C) 1998--2021  The R Core Team.
  *  Copyright (C) 1995, 1996  Robert Gentleman and Ross Ihaka
  *  Copyright (C) 2008-2014  Andrew R. Runnalls.
  *  Copyright (C) 2014 and onwards the Rho Project Authors.
@@ -1427,16 +1427,22 @@ HIDDEN void R::R_expand_binding_value(SEXP b)
         switch (typetag)
         {
         case REALSXP:
+	    PROTECT(b);
             val = ScalarReal(vv.dval);
             SET_BNDCELL(b, val);
+	    UNPROTECT(1);
             break;
         case INTSXP:
+	    PROTECT(b);
             val = ScalarInteger(vv.ival);
             SET_BNDCELL(b, val);
+	    UNPROTECT(1);
             break;
         case LGLSXP:
+	    PROTECT(b);
             val = ScalarLogical(vv.ival);
             SET_BNDCELL(b, val);
+	    UNPROTECT(1);
             break;
         }
     }
