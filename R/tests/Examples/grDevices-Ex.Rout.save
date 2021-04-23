@@ -1,9 +1,9 @@
 
-Ivory Under development (unstable) (2021-04-14 r1487) -- "Internationalized Version of R"
+Ivory Under development (unstable) (2021-04-23 r1510) -- "Internationalized Version of R"
 Copyright (C) 2013-2021 Lukasz Daniel (lukasz.daniel@gmail.com)
 See README-IVORY file for details.
 
-R Under development (unstable) (2021-04-14 r80154) -- "Unsuffered Consequences"
+R Under development (unstable) (2021-04-23 r80216) -- "Unsuffered Consequences"
 Copyright (C) 2021 The R Foundation for Statistical Computing
 Platform: x86_64-pc-linux-gnu (64-bit)
 
@@ -2795,17 +2795,18 @@ Sturges   Scott      FD
 [13] "Red-Purple"    "Red-Blue"      "Purple-Orange" "Purple-Yellow"
 [17] "Blue-Yellow"   "Green-Yellow"  "Red-Yellow"    "Heat"         
 [21] "Heat 2"        "Terrain"       "Terrain 2"     "Viridis"      
-[25] "Plasma"        "Inferno"       "Dark Mint"     "Mint"         
-[29] "BluGrn"        "Teal"          "TealGrn"       "Emrld"        
-[33] "BluYl"         "ag_GrnYl"      "Peach"         "PinkYl"       
-[37] "Burg"          "BurgYl"        "RedOr"         "OrYel"        
-[41] "Purp"          "PurpOr"        "Sunset"        "Magenta"      
-[45] "SunsetDark"    "ag_Sunset"     "BrwnYl"        "YlOrRd"       
-[49] "YlOrBr"        "OrRd"          "Oranges"       "YlGn"         
-[53] "YlGnBu"        "Reds"          "RdPu"          "PuRd"         
-[57] "Purples"       "PuBuGn"        "PuBu"          "Greens"       
-[61] "BuGn"          "GnBu"          "BuPu"          "Blues"        
-[65] "Lajolla"       "Turku"         "Hawaii"        "Batlow"       
+[25] "Plasma"        "Inferno"       "Rocket"        "Mako"         
+[29] "Dark Mint"     "Mint"          "BluGrn"        "Teal"         
+[33] "TealGrn"       "Emrld"         "BluYl"         "ag_GrnYl"     
+[37] "Peach"         "PinkYl"        "Burg"          "BurgYl"       
+[41] "RedOr"         "OrYel"         "Purp"          "PurpOr"       
+[45] "Sunset"        "Magenta"       "SunsetDark"    "ag_Sunset"    
+[49] "BrwnYl"        "YlOrRd"        "YlOrBr"        "OrRd"         
+[53] "Oranges"       "YlGn"          "YlGnBu"        "Reds"         
+[57] "RdPu"          "PuRd"          "Purples"       "PuBuGn"       
+[61] "PuBu"          "Greens"        "BuGn"          "GnBu"         
+[65] "BuPu"          "Blues"         "Lajolla"       "Turku"        
+[69] "Hawaii"        "Batlow"       
 > hcl.pals("diverging")
  [1] "Blue-Red"      "Blue-Red 2"    "Blue-Red 3"    "Red-Green"    
  [5] "Purple-Green"  "Purple-Brown"  "Green-Brown"   "Blue-Yellow 2"
@@ -4315,7 +4316,7 @@ $zlab
 > cleanEx()
 > options(digits = 7L)
 > base::cat(gettext("Time elapsed: ", domain = "R-base"), proc.time() - base::get("ptime", pos = 'CheckExEnv'),"\n")
-Time elapsed:  72.023 0.643 72.714 0 0 
+Time elapsed:  65.9 0.519 66.44 0 0 
 > grDevices::dev.off()
 null device 
           1 

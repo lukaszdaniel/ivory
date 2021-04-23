@@ -1,9 +1,9 @@
 
-Ivory Under development (unstable) (2021-04-14 r1487) -- "Internationalized Version of R"
+Ivory Under development (unstable) (2021-04-23 r1510) -- "Internationalized Version of R"
 Copyright (C) 2013-2021 Lukasz Daniel (lukasz.daniel@gmail.com)
 See README-IVORY file for details.
 
-R Under development (unstable) (2021-04-14 r80154) -- "Unsuffered Consequences"
+R Under development (unstable) (2021-04-23 r80216) -- "Unsuffered Consequences"
 Copyright (C) 2021 The R Foundation for Statistical Computing
 Platform: x86_64-pc-linux-gnu (64-bit)
 
@@ -3985,7 +3985,7 @@ sigma^2 estimated as 0.4566:  log likelihood = -101.2,  aic = 212.4
 > 
 > asOneSidedFormula("age")
 ~age
-<environment: 0x55ecd118c1e0>
+<environment: 0x5582ed563060>
 > asOneSidedFormula(~ age)
 ~age
 > 
@@ -5022,7 +5022,7 @@ function (V)
     r[cbind(seq_len(p), seq_len(p))] <- 1
     r
 }
-<bytecode: 0x55ecd18cc780>
+<bytecode: 0x5582ecce30c0>
 <environment: namespace:stats>
 > stopifnot(all.equal(Cl, cov2cor(cov(longley))),
 +           all.equal(cor(longley, method = "kendall"),
@@ -7647,7 +7647,7 @@ attr(,".Environment")
 > environment(as.formula("y ~ x"))
 <environment: R_GlobalEnv>
 > environment(as.formula("y ~ x", env = new.env()))
-<environment: 0x55ecd392e300>
+<environment: 0x5582ef2905a0>
 > 
 > 
 > ## Create a formula for a model with a large number of variables:
@@ -12449,14 +12449,14 @@ attr(,"class")
 $linkfun
 function (mu) 
 mu^lambda
-<bytecode: 0x55ecd1a8f840>
-<environment: 0x55ecd1bcf8a0>
+<bytecode: 0x5582ed2df1e0>
+<environment: 0x5582ed3eef60>
 
 $linkinv
 function (eta) 
 pmax(eta^(1/lambda), .Machine$double.eps)
-<bytecode: 0x55ecd1a8fd80>
-<environment: 0x55ecd1bcf8a0>
+<bytecode: 0x5582ed2df780>
+<environment: 0x5582ed3eef60>
 
 > 
 > 
@@ -14991,7 +14991,7 @@ block     N     P     K
 > 
 > ### ** Examples
 > 
-> summary(Indometh)
+> summary(Indometh) # data in long format
  Subject      time            conc       
  1:11    Min.   :0.250   Min.   :0.0500  
  4:11    1st Qu.:0.750   1st Qu.:0.1100  
@@ -14999,9 +14999,9 @@ block     N     P     K
  5:11    Mean   :2.886   Mean   :0.5918  
  6:11    3rd Qu.:5.000   3rd Qu.:0.8325  
  3:11    Max.   :8.000   Max.   :2.7200  
-> wide <- reshape(Indometh, v.names = "conc", idvar = "Subject",
-+                 timevar = "time", direction = "wide")
-> wide
+> 
+> ## long to wide (direction = "wide") requires idvar and timevar at a minimum
+> reshape(Indometh, direction = "wide", idvar = "Subject", timevar = "time")
    Subject conc.0.25 conc.0.5 conc.0.75 conc.1 conc.1.25 conc.2 conc.3 conc.4
 1        1      1.50     0.94      0.78   0.48      0.37   0.19   0.12   0.11
 12       2      2.03     1.63      0.71   0.70      0.64   0.36   0.32   0.20
@@ -15017,6 +15017,26 @@ block     N     P     K
 45   0.08   0.10   0.06
 56   0.13   0.10   0.09
 > 
+> ## can also explicitly specify name of combined variable
+> wide <- reshape(Indometh, direction = "wide", idvar = "Subject",
++                 timevar = "time", v.names = "conc", sep= "_")
+> wide
+   Subject conc_0.25 conc_0.5 conc_0.75 conc_1 conc_1.25 conc_2 conc_3 conc_4
+1        1      1.50     0.94      0.78   0.48      0.37   0.19   0.12   0.11
+12       2      2.03     1.63      0.71   0.70      0.64   0.36   0.32   0.20
+23       3      2.72     1.49      1.16   0.80      0.80   0.39   0.22   0.12
+34       4      1.85     1.39      1.02   0.89      0.59   0.40   0.16   0.11
+45       5      2.05     1.04      0.81   0.39      0.30   0.23   0.13   0.11
+56       6      2.31     1.44      1.03   0.84      0.64   0.42   0.24   0.17
+   conc_5 conc_6 conc_8
+1    0.08   0.07   0.05
+12   0.25   0.12   0.08
+23   0.11   0.08   0.08
+34   0.10   0.07   0.07
+45   0.08   0.10   0.06
+56   0.13   0.10   0.09
+> 
+> ## reverse transformation
 > reshape(wide, direction = "long")
        Subject time conc
 1.0.25       1 0.25 1.50
@@ -15440,7 +15460,7 @@ Wyoming           62.9   173  97203
 > ## multiple id variables
 > df3 <- data.frame(school = rep(1:3, each = 4), class = rep(9:10, 6),
 +                   time = rep(c(1,1,2,2), 3), score = rnorm(12))
-> wide <- reshape(df3, idvar = c("school","class"), direction = "wide")
+> wide <- reshape(df3, idvar = c("school", "class"), direction = "wide")
 > wide
    school class     score.1     score.2
 1       1     9  0.48742905  0.57578135
@@ -16699,8 +16719,8 @@ Step function with continuity 'f'=0.2, 3 knots at:
 > unclass(sfun0)
 function (v) 
 .approxfun(x, y, v, method, yleft, yright, f, na.rm)
-<bytecode: 0x55eccfebf000>
-<environment: 0x55ecd1be8540>
+<bytecode: 0x5582eb83e360>
+<environment: 0x5582ed43e840>
 attr(,"call")
 stepfun(1:3, y0, f = 0)
 > ls(envir = environment(sfun0))
@@ -19127,7 +19147,7 @@ Number of Fisher Scoring iterations: 6
 > cleanEx()
 > options(digits = 7L)
 > base::cat(gettext("Time elapsed: ", domain = "R-base"), proc.time() - base::get("ptime", pos = 'CheckExEnv'),"\n")
-Time elapsed:  62.463 0.332 62.845 0 0 
+Time elapsed:  59.738 0.251 60.002 0 0 
 > grDevices::dev.off()
 null device 
           1 
