@@ -41,6 +41,7 @@
 
 #include <CXXR/ConsCell.hpp>
 #include <CXXR/GCStackRoot.hpp>
+#include <CXXR/strutil.hpp>
 #include <R_ext/Boolean.h>
 #include <Rinternals.h>
 #include <Localization.h>
@@ -171,7 +172,9 @@ namespace CXXR
         /* this should not add a non-tracking CDR to a tracking cell */
         if (trackrefs() && tl && !tl->trackrefs())
         {
-            std::cerr << _("inserting non-tracking CDR in tracking cell") << std::endl;
+            Color::Modifier red(Color::Modifier::Code::FG_RED);
+            Color::Modifier def(Color::Modifier::Code::FG_DEFAULT);
+            std::cerr << red << _("inserting non-tracking CDR in tracking cell") << def << std::endl;
             // Rf_error(_("inserting non-tracking CDR in tracking cell"));
         }
 #endif

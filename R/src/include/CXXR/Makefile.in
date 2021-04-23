@@ -20,7 +20,7 @@ CXXR_HEADERS = CXXR.hpp DebugMacros.hpp Allocator.hpp RAllocStack.hpp CellHeap.h
   Complex.hpp Logical.hpp String.hpp VectorBase.hpp FixedVector.hpp ComplexVector.hpp RealVector.hpp \
   IntVector.hpp ListVector.hpp LogicalVector.hpp PairList.hpp RawVector.hpp StringVector.hpp \
   PredefinedSymbols.hpp RTypes.hpp SEXP_downcast.hpp SEXPTYPE.hpp SchwarzCounter.hpp S4Object.hpp Symbol.hpp UncachedString.hpp CachedString.hpp Promise.hpp WeakRef.hpp \
-  NodeStack.hpp ProtectStack.hpp
+  NodeStack.hpp ProtectStack.hpp strutil.hpp
 
 DISTFILES = Makefile.in $(CXXR_HEADERS)
 TIMESTAMPS = $(CXXR_HEADERS:.hpp=.ts)

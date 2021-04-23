@@ -60,6 +60,7 @@
 #include <CXXR/SEXP_downcast.hpp>
 #include <CXXR/DebugMacros.hpp>
 #include <CXXR/JMPException.hpp>
+#include <CXXR/strutil.hpp>
 
 // Representation of CR's SEXPREC
 #include <CXXR/GCNode.hpp>
@@ -139,7 +140,6 @@
 #include <CXXR/ReturnException.hpp>
 #include <CXXR/S3Launcher.hpp>
 #include <CXXR/StackChecker.hpp>
-#include <CXXR/strutil.hpp>
 #include <CXXR/Subscripting.hpp>
 #include <CXXR/UnaryFunction.hpp>
 #include <CXXR/unrho.hpp>
