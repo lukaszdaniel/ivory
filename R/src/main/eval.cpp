@@ -2030,7 +2030,7 @@ SEXP R::R_execMethod(SEXP op, SEXP rho)
     return val;
 }
 
-static SEXP EnsureLocal(SEXP symbol, SEXP rho, R_varloc_t &ploc)
+static SEXP EnsureLocal(SEXP symbol, SEXP rho, R_varloc_t ploc)
 {
     SEXP vl;
 
@@ -2194,20 +2194,20 @@ HIDDEN SEXP do_if(SEXP call, SEXP op, SEXP args, SEXP rho)
     return (eval(Stmt, rho));
 }
 
-inline static SEXP GET_BINDING_CELL(SEXP symbol, SEXP rho)
+inline static R_varloc_t GET_BINDING_CELL(SEXP symbol, SEXP rho)
 {
     if (rho == R_BaseEnv || rho == R_BaseNamespace || IS_USER_DATABASE(rho))
-	return R_NilValue;
+	return nullptr;
     else {
 	R_varloc_t loc = R_findVarLocInFrame(rho, symbol);
-	return (! R_VARLOC_IS_NULL(loc) && ! IS_ACTIVE_BINDING(loc.cell)) ?
-	    loc.cell : R_NilValue;
+	return (! R_VARLOC_IS_NULL(loc) && ! IS_ACTIVE_BINDING(loc)) ?
+	    loc : nullptr;
     }
 }
 
-inline static bool SET_BINDING_VALUE(SEXP loc, SEXP value) {
+inline static bool SET_BINDING_VALUE(R_varloc_t loc, SEXP value) {
     /* This depends on the current implementation of bindings */
-    if (loc != R_NilValue &&
+    if (loc != nullptr &&
 	! BINDING_IS_LOCKED(loc) && ! IS_ACTIVE_BINDING(loc)) {
 	if (BNDCELL_TAG(loc) || CAR(loc) != value) {
 	    SET_BNDCELL(loc, value);
@@ -2229,7 +2229,8 @@ HIDDEN SEXP do_for(SEXP call, SEXP op, SEXP args, SEXP rho)
        to be safe we declare them volatile as well. */
     volatile R_xlen_t i = 0, n;
     volatile int bgn;
-    volatile SEXP v, val, cell;
+    volatile SEXP v, val;
+	volatile R_varloc_t cell;
     int dbg;
 	int nprot = 0;
 	int sub_nprot = 0;
@@ -2577,7 +2578,7 @@ HIDDEN SEXP do_function(SEXP call, SEXP op, SEXP args, SEXP rho)
 */
 
 static SEXP evalseq(SEXP expr, SEXP rho, int forcelocal,  R_varloc_t tmploc,
-		    R_varloc_t &ploc)
+		    R_varloc_t ploc)
 {
     SEXP val, nval, nexpr;
     if (isNull(expr))
@@ -2593,10 +2594,10 @@ static SEXP evalseq(SEXP expr, SEXP rho, int forcelocal,  R_varloc_t tmploc,
 	    ploc = R_findVarLoc(expr, ENCLOS(rho));
 	    UNPROTECT(1);
 	}
-	int maybe_in_assign = ploc.cell ?
-	    ASSIGNMENT_PENDING(ploc.cell) : FALSE;
-	if (ploc.cell)
-	    SET_ASSIGNMENT_PENDING(ploc.cell, TRUE);
+	int maybe_in_assign = ploc ?
+	    ASSIGNMENT_PENDING(ploc) : FALSE;
+	if (ploc)
+	    SET_ASSIGNMENT_PENDING(ploc, TRUE);
 	if (maybe_in_assign || MAYBE_SHARED(nval))
 	    nval = shallow_duplicate(nval);
 	UNPROTECT(1);
@@ -2741,8 +2742,8 @@ inline static SEXP mkRHSPROMISE(SEXP expr, SEXP rhs)
     return R_mkEVPROMISE_NR(expr, rhs);
 }
 
-static SEXP GET_BINDING_CELL(SEXP, SEXP);
-static SEXP BINDING_VALUE(SEXP);
+static SEXP GET_BINDING_CELL(R_varloc_t, SEXP);
+static SEXP BINDING_VALUE(R_varloc_t);
 
 inline static SEXP try_assign_unwrap(SEXP value, SEXP sym, SEXP rho, SEXP cell)
 {
@@ -2837,9 +2838,9 @@ static SEXP applydefine(SEXP call, SEXP op, SEXP args, SEXP rho)
 	errorcall(call, _("cannot do complex assignments in base environment"));
     defineVar(R_TmpvalSymbol, R_NilValue, rho);
     tmploc = R_findVarLocInFrame(rho, R_TmpvalSymbol);
-    PROTECT(tmploc.cell); nprot++;
-    DISABLE_REFCNT(tmploc.cell);
-    DECREMENT_REFCNT(CDR(tmploc.cell));
+    PROTECT(tmploc); nprot++;
+    DISABLE_REFCNT(tmploc);
+    DECREMENT_REFCNT(CDR(tmploc));
 
     /* Now set up a context to remove it when we are done, even in the
      * case of an error.  This all helps error() provide a better call.
@@ -2848,12 +2849,12 @@ static SEXP applydefine(SEXP call, SEXP op, SEXP args, SEXP rho)
     cntxt.setContextEnd(&tmp_cleanup, rho);
 
     /*  Do a partial evaluation down through the LHS. */
-    R_varloc_t lhsloc;
+    R_varloc_t lhsloc = nullptr;
     lhs = evalseq(CADR(expr), rho,
 		  PRIMVAL(op)==1 || PRIMVAL(op)==3, tmploc, lhsloc);
-    if (lhsloc.cell == nullptr)
-	lhsloc.cell = R_NilValue;
-    PROTECT(lhsloc.cell); nprot++;
+    if (lhsloc == nullptr)
+	lhsloc = R_NilValue;
+    PROTECT(lhsloc); nprot++;
 
     PROTECT(lhs); nprot++;
     PROTECT(rhsprom = mkRHSPROMISE(CADR(args), rhs)); nprot++;
@@ -2910,7 +2911,7 @@ static SEXP applydefine(SEXP call, SEXP op, SEXP args, SEXP rho)
     PROTECT(expr = replaceCall(afun, R_TmpvalSymbol, CDDR(expr), rhsprom)); nprot++;
     SEXP value = eval(expr, rho);
 
-    SET_ASSIGNMENT_PENDING(lhsloc.cell, FALSE);
+    SET_ASSIGNMENT_PENDING(lhsloc, FALSE);
     if (PRIMVAL(op) == 2)                       /* <<- */
 	setVar(lhsSym, value, ENCLOS(rho));
     else {                                      /* <-, = */
@@ -2926,7 +2927,7 @@ static SEXP applydefine(SEXP call, SEXP op, SEXP args, SEXP rho)
 
     UNPROTECT((nprot - 2));
     cntxt.end(); /* which does not run the remove */
-    UNPROTECT(2); // saverhs, tmploc.cell
+    UNPROTECT(2); // saverhs, tmploc
     unbindVar(R_TmpvalSymbol, rho);
 
     if (refrhs) DECREMENT_REFCNT(saverhs);
@@ -5161,7 +5162,7 @@ inline static void NEW_BNDCELL_LVAL(SEXP cell, int lval)
     SET_BNDCELL_LVAL(cell, lval);
 }
 
-inline static SEXP BINDING_VALUE(SEXP loc)
+inline static SEXP BINDING_VALUE(R_varloc_t loc)
 {
 	if (BNDCELL_TAG(loc))
 	{
@@ -5326,7 +5327,7 @@ inline static SEXP FORCE_PROMISE(SEXP value, SEXP symbol, SEXP rho,
 inline static SEXP FIND_VAR_NO_CACHE(SEXP symbol, SEXP rho, SEXP cell)
 {
 	R_varloc_t loc = R_findVarLoc(symbol, rho);
-	if (loc.cell && IS_ACTIVE_BINDING(loc.cell))
+	if (loc && IS_ACTIVE_BINDING(loc))
 	{
 		SEXP value = R_GetVarLocValue(loc);
 		return value;
@@ -7528,14 +7529,14 @@ static SEXP bcEval(SEXP body, SEXP rho, bool useCache)
 	if (value == R_UnboundValue ||
 	    TYPEOF(value) == PROMSXP) {
 	    value = EnsureLocal(symbol, rho, loc);
-	    if (loc.cell == nullptr)
-		loc.cell = R_NilValue;
+	    if (loc == nullptr)
+		loc = R_NilValue;
 	}
-	else loc.cell = cell;
+	else loc = cell;
 
-	int maybe_in_assign = ASSIGNMENT_PENDING(loc.cell);
-	SET_ASSIGNMENT_PENDING(loc.cell, TRUE);
-	BCNPUSH(loc.cell);
+	int maybe_in_assign = ASSIGNMENT_PENDING(loc);
+	SET_ASSIGNMENT_PENDING(loc, TRUE);
+	BCNPUSH(loc);
 
 	if (maybe_in_assign || MAYBE_SHARED(value))
 	    value = shallow_duplicate(value);
@@ -7721,11 +7722,11 @@ static SEXP bcEval(SEXP body, SEXP rho, bool useCache)
 	SEXP symbol = VECTOR_ELT(constants, GETOP());
 	R_varloc_t loc = R_findVarLoc(symbol, rho);
 
-	if (loc.cell == nullptr)
-	    loc.cell = R_NilValue;
-	int maybe_in_assign = ASSIGNMENT_PENDING(loc.cell);
-	SET_ASSIGNMENT_PENDING(loc.cell, TRUE);
-	BCNPUSH(loc.cell);
+	if (loc == nullptr)
+	    loc = R_NilValue;
+	int maybe_in_assign = ASSIGNMENT_PENDING(loc);
+	SET_ASSIGNMENT_PENDING(loc, TRUE);
+	BCNPUSH(loc);
 
 	SEXP value = getvar(symbol, ENCLOS(rho), FALSE, FALSE, nullptr, 0);
 	if (maybe_in_assign || MAYBE_SHARED(value))

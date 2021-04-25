@@ -34,7 +34,6 @@
 #include <unordered_map>
 #include <CXXR/Allocator.hpp>
 #include <CXXR/GCNode.hpp>
-#include <CXXR/Promise.hpp>
 #include <CXXR/Symbol.hpp>
 
 namespace CXXR
@@ -323,7 +322,7 @@ namespace CXXR
      */
     virtual PairList *asPairList() const = 0;
 
-    /** @briefing Access binding of an already-defined Symbol.
+    /** @brief Access binding of an already-defined Symbol.
      *
      * This function provides a pointer to the Binding of a
      * Symbol.  In this variant the pointer is non-const, and
@@ -337,7 +336,7 @@ namespace CXXR
      */
     virtual Binding *binding(const Symbol *symbol) = 0;
 
-    /** @briefing Access const binding of an already-defined Symbol.
+    /** @brief Access const binding of an already-defined Symbol.
      *
      * This function provides a pointer to a PairList element
      * representing the binding of a symbol.  In this variant the
@@ -429,7 +428,7 @@ namespace CXXR
      */
     virtual Binding *obtainBinding(const Symbol *symbol) = 0;
 
-    /** @brief Monitor reading of Symbol values.
+    /** @brief Define function to monitor reading of Symbol values.
      *
      * This function allows the user to define a function to be
      * called whenever a Symbol's value is read from a Binding
@@ -458,7 +457,7 @@ namespace CXXR
       return old;
     }
 
-    /** @brief Monitor writing of Symbol values.
+    /** @brief Define function to monitor writing of Symbol values.
      *
      * This function allows the user to define a function to be
      * called whenever a Symbol's value is modified in a Binding
@@ -492,7 +491,7 @@ namespace CXXR
       return old;
     }
 
-    /** @brief Number of Symbols bound.
+    /** @brief Number of Bindings in Frame.
      *
      * @return the number of Symbols for which Bindings exist in
      * this Frame.
@@ -535,7 +534,7 @@ namespace CXXR
    * Raises an error if the Frame is locked, or an attempt is made
    * to modify a binding that is locked.
    *
-   * @param env Pointer to the Frame into which new or
+   * @param frame Pointer to the Frame into which new or
    *          modified bindings are to be incorporated.
    *
    * @param bindings List of symbol-value pairs defining bindings to
@@ -553,5 +552,24 @@ namespace CXXR
   // definition (in Environment.h) as an opaque pointer.
   // using R_varloc_t = Frame::Binding *;
 } // namespace CXXR
+
+namespace R
+{
+  /* environment cell access */
+  // struct R_varloc_t
+  // {
+  //   SEXP cell;
+  // }; /* use struct to prevent casting */
+  using R_varloc_t = SEXP;
+  // using R_varloc_t = CXXR::Frame::Binding *;
+
+  inline bool R_VARLOC_IS_NULL(R_varloc_t loc) { return (loc == nullptr); }
+  R_varloc_t R_findVarLocInFrame(SEXP, SEXP);
+  R_varloc_t R_findVarLoc(SEXP rho, SEXP symbol);
+  SEXP R_GetVarLocValue(R_varloc_t vl);
+  SEXP R_GetVarLocSymbol(R_varloc_t vl);
+  Rboolean R_GetVarLocMISSING(R_varloc_t vl);
+  void R_SetVarLocValue(R_varloc_t vl, SEXP value);
+} // namespace R
 
 #endif // RFRAME_HPP

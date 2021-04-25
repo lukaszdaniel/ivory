@@ -884,16 +884,16 @@ HIDDEN void R::unbindVar(SEXP symbol, SEXP rho)
  *        Almost like findVarInFrame, but does not return the value. R_NilValue if not found.
  *        Callers set *canCache = TRUE or NULL
 */
-static SEXP findVarLocInFrame(SEXP rho, SEXP symbol, Rboolean *canCache)
+static R_varloc_t findVarLocInFrame(SEXP rho, SEXP symbol, Rboolean *canCache)
 {
     int hashcode;
     SEXP frame, c;
 
     if (rho == R_BaseEnv || rho == R_BaseNamespace)
-	return (SYMVALUE(symbol) == R_UnboundValue) ? R_NilValue : symbol;
+	return (SYMVALUE(symbol) == R_UnboundValue) ? nullptr : symbol;
 
     if (!rho || rho == R_EmptyEnv)
-        return R_NilValue;
+        return nullptr;
 
     if(IS_USER_DATABASE(rho)) {
 	R_ObjectTable *table;
@@ -941,16 +941,13 @@ static SEXP findVarLocInFrame(SEXP rho, SEXP symbol, Rboolean *canCache)
  */
 R_varloc_t R::R_findVarLocInFrame(SEXP rho, SEXP symbol)
 {
-    SEXP binding = findVarLocInFrame(rho, symbol, nullptr);
-    R_varloc_t val;
-    val.cell = binding == R_NilValue ? NULL : binding;
-    return val;
+    return findVarLocInFrame(rho, symbol, nullptr);
 }
 
 HIDDEN
 SEXP R::R_GetVarLocValue(R_varloc_t vl)
 {
-    SEXP cell = vl.cell;
+    R_varloc_t cell = vl;
     if (cell == nullptr || cell == R_UnboundValue)
         return R_UnboundValue;
     else if (TYPEOF(cell) == SYMSXP)
@@ -961,19 +958,19 @@ SEXP R::R_GetVarLocValue(R_varloc_t vl)
 HIDDEN
 SEXP R::R_GetVarLocSymbol(R_varloc_t vl)
 {
-    return TAG(vl.cell);
+    return TAG(vl);
 }
 
 /* used in methods */
 Rboolean R::R_GetVarLocMISSING(R_varloc_t vl)
 {
-    return (Rboolean) MISSING(vl.cell);
+    return (Rboolean) MISSING(vl);
 }
 
 HIDDEN
 void R::R_SetVarLocValue(R_varloc_t vl, SEXP value)
 {
-    SET_BINDING_VALUE(vl.cell, value);
+    SET_BINDING_VALUE(vl, value);
 }
 
 
@@ -1158,7 +1155,8 @@ slowpath:
    so the cache can be used. */
 static SEXP findGlobalVarLoc(SEXP symbol)
 {
-    SEXP vl, rho;
+    R_varloc_t vl;
+    SEXP rho;
     Rboolean canCache = TRUE;
     vl = R_GetGlobalCacheLoc(symbol);
     if (vl != R_UnboundValue)
@@ -1230,7 +1228,7 @@ SEXP Rf_findVar(SEXP symbol, SEXP rho)
 
 static SEXP findVarLoc(SEXP symbol, SEXP rho)
 {
-    SEXP vl;
+    R_varloc_t vl;
 
     if (TYPEOF(rho) == NILSXP)
 	error(_("use of NULL environment is defunct"));
@@ -1265,7 +1263,7 @@ R_varloc_t R::R_findVarLoc(SEXP rho, SEXP symbol)
 {
     SEXP binding = findVarLoc(rho, symbol);
     R_varloc_t val;
-    val.cell = binding == R_NilValue ? nullptr : binding;
+    val = binding == R_NilValue ? nullptr : binding;
     return val;
 }
 
@@ -2164,7 +2162,8 @@ static SEXP findRootPromise(SEXP p)
 HIDDEN bool R::R_isMissing(SEXP symbol, SEXP rho)
 {
     int ddv = 0;
-    SEXP vl, s;
+    R_varloc_t vl;
+    SEXP s;
 
     if (symbol == R_MissingArg) /* Yes, this can happen */
 	return true;
@@ -3217,7 +3216,7 @@ void R_LockBinding(SEXP sym, SEXP env)
 	   R_UnboundSymbol */
 	LOCK_BINDING(sym);
     else {
-	SEXP binding = findVarLocInFrame(env, sym, nullptr);
+	R_varloc_t binding = findVarLocInFrame(env, sym, nullptr);
 	if (binding == R_NilValue)
 	    error(_("no binding for '%s'"), EncodeChar(PRINTNAME(sym)));
 	LOCK_BINDING(binding);
@@ -3238,7 +3237,7 @@ void R_unLockBinding(SEXP sym, SEXP env)
 	   R_UnboundSymbol */
 	UNLOCK_BINDING(sym);
     else {
-	SEXP binding = findVarLocInFrame(env, sym, nullptr);
+	R_varloc_t binding = findVarLocInFrame(env, sym, nullptr);
 	if (binding == R_NilValue)
 	    error(_("no binding for '%s'"), EncodeChar(PRINTNAME(sym)));
 	UNLOCK_BINDING(binding);
@@ -3266,7 +3265,7 @@ void R_MakeActiveBinding(SEXP sym, SEXP fun, SEXP env)
 	   a regular binding cannot be changed */
     }
     else {
-	SEXP binding = findVarLocInFrame(env, sym, nullptr);
+	R_varloc_t binding = findVarLocInFrame(env, sym, nullptr);
 	if (binding == R_NilValue) {
 	    defineVar(sym, fun, env); /* fails if env is locked */
 	    binding = findVarLocInFrame(env, sym, nullptr);
@@ -3294,7 +3293,7 @@ Rboolean R_BindingIsLocked(SEXP sym, SEXP env)
 	   R_UnboundSymbol */
 	return (Rboolean) (BINDING_IS_LOCKED(sym) != 0);
     else {
-	SEXP binding = findVarLocInFrame(env, sym, nullptr);
+	R_varloc_t binding = findVarLocInFrame(env, sym, nullptr);
 	if (binding == R_NilValue)
 	    error(_("no binding for '%s'"), EncodeChar(PRINTNAME(sym)));
 	return (Rboolean) (BINDING_IS_LOCKED(binding) != 0);
@@ -3314,7 +3313,7 @@ Rboolean R_BindingIsActive(SEXP sym, SEXP env)
 	   R_UnboundSymbol */
 	return (Rboolean) (IS_ACTIVE_BINDING(sym) != 0);
     else {
-	SEXP binding = findVarLocInFrame(env, sym, nullptr);
+	R_varloc_t binding = findVarLocInFrame(env, sym, nullptr);
 	if (binding == R_NilValue)
 	    error(_("no binding for '%s'"), EncodeChar(PRINTNAME(sym)));
 	return (Rboolean) (IS_ACTIVE_BINDING(binding) != 0);
@@ -3366,7 +3365,7 @@ SEXP R_ActiveBindingFunction(SEXP sym, SEXP env)
 	return val;
     }
     else {
-	SEXP binding = findVarLocInFrame(env, sym, nullptr);
+	R_varloc_t binding = findVarLocInFrame(env, sym, nullptr);
 	if (binding == R_NilValue)
 	    error(_("no binding for \"%s\""), EncodeChar(PRINTNAME(sym)));
 	if (! IS_ACTIVE_BINDING(binding))
@@ -3830,7 +3829,7 @@ HIDDEN SEXP do_importIntoEnv(SEXP call, SEXP op, SEXP args, SEXP env)
 	expsym = installTrChar(STRING_ELT(expnames, i));
 
 	/* find the binding--may be a CONS cell or a symbol */
-	SEXP binding = R_NilValue;
+	R_varloc_t binding = nullptr;
 	for (SEXP env = expenv;
 	     env != R_EmptyEnv && binding == R_NilValue;
 	     env = ENCLOS(env))
