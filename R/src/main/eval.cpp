@@ -1694,7 +1694,8 @@ inline static SEXP R_execClosure(SEXP call, SEXP newrho, SEXP sysparent,
 /* Apply SEXP op of type CLOSXP to actuals */
 SEXP Rf_applyClosure(SEXP call, SEXP op, SEXP arglist, SEXP rho, SEXP suppliedvars)
 {
-    SEXP formals, actuals, savedrho, newrho;
+    SEXP formals, actuals, savedrho;
+    Environment *newrho;
     SEXP f, a;
 
     /* formals = list of formal parameters */
@@ -1717,7 +1718,7 @@ SEXP Rf_applyClosure(SEXP call, SEXP op, SEXP arglist, SEXP rho, SEXP suppliedva
 	reference couting enabled. */
 
     actuals = matchArgs_RC(formals, arglist, call);
-    PROTECT(newrho = NewEnvironment(formals, actuals, savedrho));
+    PROTECT(newrho = static_cast<Environment*>(NewEnvironment(formals, actuals, savedrho)));
 
     /*  Use the default code for unbound formals.  FIXME: It looks like
 	this code should preceed the building of the environment so that
@@ -2230,7 +2231,7 @@ HIDDEN SEXP do_for(SEXP call, SEXP op, SEXP args, SEXP rho)
     volatile R_xlen_t i = 0, n;
     volatile int bgn;
     volatile SEXP v, val;
-	volatile R_varloc_t cell;
+    volatile R_varloc_t cell;
     int dbg;
 	int nprot = 0;
 	int sub_nprot = 0;
@@ -7723,7 +7724,7 @@ static SEXP bcEval(SEXP body, SEXP rho, bool useCache)
 	R_varloc_t loc = R_findVarLoc(symbol, rho);
 
 	if (loc == nullptr)
-	    loc = R_NilValue;
+	    loc = nullptr;
 	int maybe_in_assign = ASSIGNMENT_PENDING(loc);
 	SET_ASSIGNMENT_PENDING(loc, TRUE);
 	BCNPUSH(loc);
