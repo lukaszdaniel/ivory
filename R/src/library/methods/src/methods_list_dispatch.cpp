@@ -26,6 +26,7 @@
 #endif
 
 #include <CXXR/GCRoot.hpp>
+#include <CXXR/Frame.hpp>
 #include <CXXR/Expression.hpp>
 #include <CXXR/VectorBase.hpp>
 #include <CXXR/FunctionBase.hpp>
