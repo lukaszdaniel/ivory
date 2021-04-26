@@ -489,6 +489,28 @@ extern "C"
     */
    void SET_HASHTAB(SEXP x, SEXP v);
 
+   /** @brief Symbol's value in the base environment.
+    *
+    * @param x Pointer to a CXXR::Symbol (checked).
+    *
+    * @return Pointer to a CXXR::RObject representing \a x's value.
+    *         Returns R_UnboundValue if no value is currently
+    *         associated with the Symbol.
+    */
+   SEXP SYMVALUE(SEXP x);
+
+   /** @brief Set symbol's value in the base environment.
+    *
+    * @param x Pointer to a CXXR::Symbol (checked).
+    *
+    * @param val Pointer to the RObject now to be considered as
+    *            the value of this symbol.  A null pointer or
+    *            R_UnboundValue are permissible values of \a val.
+    *
+    * @todo No binding to R_UnboundValue ought to be created.
+    */
+   void SET_SYMVALUE(SEXP x, SEXP v);
+
    SEXP R_NewEnv(SEXP enclos, int hash, int size);
    void R_RestoreHashCount(SEXP rho);
    Rboolean R_IsPackageEnv(SEXP rho);

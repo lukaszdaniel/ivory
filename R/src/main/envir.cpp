@@ -1525,9 +1525,10 @@ SEXP Rf_findFun(SEXP symbol, SEXP rho)
 void Rf_defineVar(SEXP symbol, SEXP value, SEXP rho)
 {
     if (value == R_UnboundValue)
-	error(_("attempt to bind a variable to R_UnboundValue"));
+        error(_("attempt to bind a variable to R_UnboundValue"));
     /* R_DirtyImage should only be set if assigning to R_GlobalEnv. */
-    if (rho == R_GlobalEnv) R_DirtyImage = 1;
+    if (rho == R_GlobalEnv)
+        R_DirtyImage = 1;
 
     if (!rho || rho == R_EmptyEnv)
         error(_("cannot assign values in the empty environment"));
@@ -2519,73 +2520,51 @@ HIDDEN SEXP do_search(SEXP call, SEXP op, SEXP args, SEXP env)
  * 
  * @example ls(envir, all.names, sorted)
  */
-inline static bool NONEMPTY_(SEXP _FRAME_) { return CHAR(PRINTNAME(TAG(_FRAME_)))[0] != '.'; }
 
-static int FrameSize(SEXP frame, int all)
+static int FrameSize(SEXP frame, bool all)
 {
     int count = 0;
-    if (all) {
-	while (frame != R_NilValue) {
-	    count += 1;
-	    frame = CDR(frame);
-	}
-    } else {
-	while (frame != R_NilValue) {
-	    if (NONEMPTY_(frame))
-		count += 1;
-	    frame = CDR(frame);
-	}
+    while (frame)
+    {
+        if (all || !isDotSymbol(SEXP_downcast<Symbol *>(TAG(frame))))
+            count += 1;
+        frame = CDR(frame);
     }
     return count;
 }
 
-static void FrameNames(SEXP frame, int all, SEXP names, int *indx)
+static void FrameNames(SEXP frame, bool all, SEXP names, int *indx)
 {
-    if (all) {
-	while (frame != R_NilValue) {
-	    SET_STRING_ELT(names, *indx, PRINTNAME(TAG(frame)));
-	    (*indx)++;
-	    frame = CDR(frame);
-	}
-    } else {
-	while (frame != R_NilValue) {
-	    if (NONEMPTY_(frame)) {
-		SET_STRING_ELT(names, *indx, PRINTNAME(TAG(frame)));
-		(*indx)++;
-	    }
-	    frame = CDR(frame);
-	}
+    while (frame)
+    {
+        if (all || !isDotSymbol(SEXP_downcast<Symbol *>(TAG(frame))))
+        {
+            SET_STRING_ELT(names, *indx, PRINTNAME(TAG(frame)));
+            (*indx)++;
+        }
+        frame = CDR(frame);
     }
 }
 
-static void FrameValues(SEXP frame, int all, SEXP values, int *indx)
+static void FrameValues(SEXP frame, bool all, SEXP values, int *indx)
 {
-    if (all) {
-	while (frame != R_NilValue) {
-#define DO_FrameValues                                    \
-    SEXP value = BINDING_VALUE(frame);                    \
-    if (TYPEOF(value) == PROMSXP)                         \
-    {                                                     \
-        PROTECT(value);                                   \
-        value = eval(value, R_GlobalEnv);                 \
-        UNPROTECT(1);                                     \
-    }                                                     \
-    SET_VECTOR_ELT(values, *indx, lazy_duplicate(value)); \
-    (*indx)++
-
-        DO_FrameValues;
-	    frame = CDR(frame);
-	}
-    } else {
-	while (frame != R_NilValue) {
-	    if (NONEMPTY_(frame)) {
-		DO_FrameValues;
-	    }
-	    frame = CDR(frame);
-	}
+    while (frame)
+    {
+        if (all || !isDotSymbol(SEXP_downcast<Symbol *>(TAG(frame))))
+        {
+            SEXP value = BINDING_VALUE(frame);
+            if (TYPEOF(value) == PROMSXP)
+            {
+                PROTECT(value);
+                value = Rf_eval(value, R_GlobalEnv);
+                UNPROTECT(1);
+            }
+            SET_VECTOR_ELT(values, *indx, Rf_lazy_duplicate(value));
+            (*indx)++;
+        }
+        frame = CDR(frame);
     }
 }
-#undef DO_FrameValues
 
 #define CHECK_HASH_TABLE(table)                  \
     do                                           \
@@ -2629,7 +2608,7 @@ static bool BuiltinTest(const Symbol *sym, bool all, bool intern)
         return false;
     if (intern && sym->internalFunction())
         return true;
-    if ((all || sym->name()->c_str()[0] != '.') && SYMVALUE(const_cast<Symbol*>(sym)) != R_UnboundValue)
+    if ((all || !isDotSymbol(sym)) && SYMVALUE(const_cast<Symbol*>(sym)) != R_UnboundValue)
         return true;
     return false;
 }
@@ -2646,7 +2625,7 @@ static int BuiltinSize(bool all, bool intern)
     return count;
 }
 
-static void BuiltinNames(int all, int intern, SEXP names, int *indx)
+static void BuiltinNames(bool all, bool intern, SEXP names, int *indx)
 {
     // StringVector *sv = SEXP_downcast<StringVector *>(names);
     for (Symbol::const_iterator it = Symbol::begin(); it != Symbol::end(); ++it)
@@ -2657,7 +2636,7 @@ static void BuiltinNames(int all, int intern, SEXP names, int *indx)
     }
 }
 
-static void BuiltinValues(int all, int intern, SEXP values, int *indx)
+static void BuiltinValues(bool all, bool intern, SEXP values, int *indx)
 {
     // ListVector *lv = SEXP_downcast<ListVector *>(values);
     for (Symbol::const_iterator it = Symbol::begin(); it != Symbol::end(); ++it)
@@ -3819,9 +3798,12 @@ HIDDEN SEXP do_importIntoEnv(SEXP call, SEXP op, SEXP args, SEXP env)
 	    if (env == R_BaseNamespace) {
 		if (SYMVALUE(expsym) != R_UnboundValue)
 		    binding = expsym;
-	    } else
+        }
+        else
+        {
 		binding = findVarLocInFrame(env, expsym, nullptr);
-	if (binding == R_NilValue)
+        }
+    if (binding == R_NilValue)
 	    binding = expsym;
 
 	/* get value of the binding; do not force promises */
@@ -4021,17 +4003,21 @@ void findFunctionForBodyInNamespace(SEXP body, SEXP nsenv, SEXP nsname) {
  * @note For debugging.
  * */
 /*HIDDEN*/
-void Rf_findFunctionForBody(SEXP body) {
+void Rf_findFunctionForBody(SEXP body)
+{
     SEXP nstable = HASHTAB(R_NamespaceRegistry);
-    CHECK_HASH_TABLE(nstable);
+    if (TYPEOF(nstable) != VECSXP)
+        error(_("bad hash table contents"));
     int n = length(nstable);
     int i;
-    for(i = 0; i < n; i++) {
-	SEXP frame = VECTOR_ELT(nstable, i);
-	while (frame != R_NilValue) {
-	    findFunctionForBodyInNamespace(body, CAR(frame), TAG(frame));
-	    frame = CDR(frame);
-	}
+    for (i = 0; i < n; i++)
+    {
+        SEXP frame = VECTOR_ELT(nstable, i);
+        while (frame != R_NilValue)
+        {
+            findFunctionForBodyInNamespace(body, CAR(frame), TAG(frame));
+            frame = CDR(frame);
+        }
     }
 }
 

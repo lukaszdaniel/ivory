@@ -5170,7 +5170,7 @@ inline static SEXP BINDING_VALUE(R_varloc_t loc)
 		R_expand_binding_value(loc);
 		return CAR0(loc);
 	}
-	else if (loc != R_NilValue && !IS_ACTIVE_BINDING(loc))
+	else if (loc && !loc->isActiveBinding())
 		return CAR0(loc);
 	else
 		return R_UnboundValue;
@@ -7530,8 +7530,6 @@ static SEXP bcEval(SEXP body, SEXP rho, bool useCache)
 	if (value == R_UnboundValue ||
 	    TYPEOF(value) == PROMSXP) {
 	    value = EnsureLocal(symbol, rho, loc);
-	    if (loc == nullptr)
-		loc = R_NilValue;
 	}
 	else loc = cell;
 
@@ -7723,8 +7721,6 @@ static SEXP bcEval(SEXP body, SEXP rho, bool useCache)
 	SEXP symbol = VECTOR_ELT(constants, GETOP());
 	R_varloc_t loc = R_findVarLoc(symbol, rho);
 
-	if (loc == nullptr)
-	    loc = nullptr;
 	int maybe_in_assign = ASSIGNMENT_PENDING(loc);
 	SET_ASSIGNMENT_PENDING(loc, TRUE);
 	BCNPUSH(loc);

@@ -66,10 +66,8 @@ namespace CXXR
         const auto &installptr = Rf_install;
         const auto &isSymbolptr = Rf_isSymbol;
         const auto &PRINTNAMEptr = PRINTNAME;
-        const auto &SYMVALUEptr = SYMVALUE;
         const auto &INTERNALptr = INTERNAL;
         const auto &SET_PRINTNAMEptr = SET_PRINTNAME;
-        const auto &SET_SYMVALUEptr = SET_SYMVALUE;
         const auto &SET_INTERNALptr = SET_INTERNAL;
         const auto &SET_DDVALptr = SET_DDVAL;
     } // namespace ForceNonInline
@@ -434,15 +432,6 @@ SEXP PRINTNAME(SEXP x)
     return const_cast<CachedString *>(sym->name());
 }
 
-SEXP SYMVALUE(SEXP x)
-{
-    if (!x)
-        return nullptr;
-    Symbol::checkST(x);
-    Symbol *sym = SEXP_downcast<Symbol *>(x);
-    return sym->value();
-}
-
 SEXP INTERNAL(SEXP x)
 {
     if (!x)
@@ -462,17 +451,6 @@ void SET_PRINTNAME(SEXP x, SEXP v)
     if (!x)
         return;
     Symbol::checkST(x);
-}
-
-void SET_SYMVALUE(SEXP x, SEXP v)
-{
-    if (!x)
-        return;
-    Symbol::checkST(x);
-    if (SEXP_downcast<Symbol *>(x)->value() == v)
-        return;
-    Symbol *sym = SEXP_downcast<Symbol *>(x);
-    sym->setValue(v);
 }
 
 void SET_INTERNAL(SEXP x, SEXP v)

@@ -59,6 +59,8 @@ namespace CXXR
         const auto &SET_FRAMEp = SET_FRAME;
         const auto &SET_ENV_RDEBUGptr = SET_ENV_RDEBUG;
         const auto &SET_HASHTABptr = SET_HASHTAB;
+        const auto &SYMVALUEptr = SYMVALUE;
+        const auto &SET_SYMVALUEptr = SET_SYMVALUE;
     } // namespace ForceNonInline
 
     namespace
@@ -233,4 +235,24 @@ void SET_ENV_RDEBUG(SEXP x, int v)
         return;
     Environment *env = SEXP_downcast<Environment *>(x);
     env->setSingleStepping(v);
+}
+
+SEXP SYMVALUE(SEXP x)
+{
+    if (!x)
+        return nullptr;
+    Symbol::checkST(x);
+    Symbol *sym = SEXP_downcast<Symbol *>(x);
+    return sym->value();
+}
+
+void SET_SYMVALUE(SEXP x, SEXP v)
+{
+    if (!x)
+        return;
+    Symbol::checkST(x);
+    if (SEXP_downcast<Symbol *>(x)->value() == v)
+        return;
+    Symbol *sym = SEXP_downcast<Symbol *>(x);
+    sym->setValue(v);
 }

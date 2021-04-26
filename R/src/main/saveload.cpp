@@ -663,9 +663,9 @@ static void RestoreSEXP(SEXP s, FILE *fp, InputRoutines &m, NodeInfo &node, int 
 	break;
     case ENVSXP:
     {
-	SET_FRAME(s, OffsetToNode(m.InInteger(fp, d), node));
-	SET_ENCLOS(s, OffsetToNode(m.InInteger(fp, d), node));
-	SET_HASHTAB(s, OffsetToNode(m.InInteger(fp, d), node));
+        SET_FRAME(s, OffsetToNode(m.InInteger(fp, d), node));
+        SET_ENCLOS(s, OffsetToNode(m.InInteger(fp, d), node));
+        SET_HASHTAB(s, OffsetToNode(m.InInteger(fp, d), node));
     }
     break;
     case SPECIALSXP:
