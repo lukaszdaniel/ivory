@@ -27,7 +27,6 @@
  *
  *	FRAME(envir) = environment frame
  *	ENCLOS(envir) = parent environment
- *	HASHTAB(envir) = (optional) hash table
  *
  *  Each frame is a (tagged) list with
  *
@@ -100,7 +99,7 @@
 #define R_NO_REMAP
 #define R_USE_SIGNALS 1
 
-#include <CXXR/Frame.hpp>
+#include <CXXR/StdFrame.hpp>
 #include <CXXR/Environment.hpp>
 #include <CXXR/CachedString.hpp>
 #include <CXXR/BuiltInFunction.hpp>
@@ -139,7 +138,6 @@ static void setActiveValue(SEXP fun, SEXP val)
     expr->evaluate(Environment::global());
 }
 
-/* various definitions of macros/functions in Defn.h */
 namespace
 {
     inline bool FRAME_IS_LOCKED(SEXP e)
@@ -156,7 +154,7 @@ namespace
 }
 /* use the same bits (15 and 14) in symbols and bindings */
 static SEXP getActiveValue(SEXP);
-inline static SEXP BINDING_VALUE(SEXP frame)
+inline static SEXP BINDING_VALUE(R_varloc_t frame)
 {
     if (BNDCELL_TAG(frame))
     {
@@ -235,9 +233,6 @@ inline static bool ISNULL(SEXP x)
 /* Function to determine whethr an environment contains special symbols */
 Rboolean R_envHasNoSpecialSymbols(SEXP env)
 {
-    if (HASHTAB(env) != R_NilValue)
-	return FALSE;
-
     for (SEXP frame = FRAME(env); frame != nullptr; frame = CDR(frame))
 	if (IS_SPECIAL_SYMBOL(TAG(frame)))
 	    return FALSE;
@@ -245,157 +240,11 @@ Rboolean R_envHasNoSpecialSymbols(SEXP env)
     return TRUE;
 }
 
-/*----------------------------------------------------------------------
-
-  Hash Tables
-
-  We use a basic separate chaining algorithm.	A hash table consists
-  of SEXP (vector) which contains a number of SEXPs (lists).
-
-  The only non-static function is R_NewHashedEnv, which allows code to
-  request a hashed environment.  All others are static to allow
-  internal changes of implementation without affecting client code.
-*/
-
-R_INLINE static int HASHSIZE(SEXP x)
-{
-    return (int)CXXR::VectorBase::stdvec_length(x);
-}
-R_INLINE static int HASHPRI(SEXP x)
-{
-    return (int)CXXR::VectorBase::stdvec_truelength(x);
-}
-#define HASHTABLEGROWTHRATE 1.2
-#define HASHMINSIZE 29
-R_INLINE static void SET_HASHPRI(SEXP x, int v)
-{
-    SET_TRUELENGTH(x, v);
-}
-#define HASHCHAIN(table, i) (CXXR::stdvec_dataptr<SEXP>(table))[i]
-
-R_INLINE static bool IS_HASHED(SEXP x)
-{
-    return (HASHTAB(x) != R_NilValue);
-}
-
-/*----------------------------------------------------------------------
-
-  R_HashSet
-
-  Hashtable set function.  Sets 'symbol' in 'table' to be 'value'.
-  'hashcode' must be provided by user.	Allocates some memory for list
-  entries.
-
-*/
-
-static void R_HashSet(int hashcode, SEXP symbol, SEXP table, SEXP value,
-		      int frame_locked)
-{
-    SEXP chain;
-
-    /* Grab the chain from the hashtable */
-    chain = VECTOR_ELT(table, hashcode);
-
-    /* Search for the value in the chain */
-    for (; !ISNULL(chain); chain = CDR(chain))
-	if (TAG(chain) == symbol) {
-	    SET_BINDING_VALUE(chain, value);
-	    SET_MISSING(chain, 0);	/* Over-ride for new value */
-	    return;
-	}
-    if (frame_locked)
-	error(_("cannot add bindings to a locked environment"));
-    if (ISNULL(chain))
-	SET_HASHPRI(table, HASHPRI(table) + 1);
-    /* Add the value into the chain */
-    SET_VECTOR_ELT(table, hashcode, CONS(value, VECTOR_ELT(table, hashcode)));
-    SET_TAG(VECTOR_ELT(table, hashcode), symbol);
-    return;
-}
-
-
-
-/*----------------------------------------------------------------------
-
-  R_HashGet
-
-  Hashtable get function.  Returns 'value' from 'table' indexed by
-  'symbol'.  'hashcode' must be provided by user.  Returns
-  'R_UnboundValue' if value is not present.
-
-*/
-
-static SEXP R_HashGet(int hashcode, SEXP symbol, SEXP table)
-{
-    SEXP chain;
-
-    /* Grab the chain from the hashtable */
-    chain = HASHCHAIN(table, hashcode);
-    /* Retrieve the value from the chain */
-    for (; chain != R_NilValue ; chain = CDR(chain))
-	if (TAG(chain) == symbol) return BINDING_VALUE(chain);
-    /* If not found */
-    return R_UnboundValue;
-}
-
-static bool R_HashExists(int hashcode, SEXP symbol, SEXP table)
-{
-    SEXP chain;
-
-    /* Grab the chain from the hashtable */
-    chain = VECTOR_ELT(table, hashcode);
-    /* Find the binding in the chain */
-    for (; chain != R_NilValue; chain = CDR(chain))
-        if (TAG(chain) == symbol)
-            return true;
-    /* If not found */
-    return false;
-}
-
-/*----------------------------------------------------------------------
-
-  R_HashGetLoc
-
-  Hashtable get location function. Just like R_HashGet, but returns
-  location of variable, rather than its value. Returns R_NilValue
-  if not found.
-
-*/
-
-static SEXP R_HashGetLoc(int hashcode, SEXP symbol, SEXP table)
-{
-    SEXP chain;
-
-    /* Grab the chain from the hashtable */
-    chain = VECTOR_ELT(table, hashcode);
-    /* Retrieve the value from the chain */
-    for (; !ISNULL(chain); chain = CDR(chain))
-	if (TAG(chain) == symbol) return chain;
-    /* If not found */
-    return R_NilValue;
-}
-
-
-
-/** @brief Hash table initialisation function.
- * 
- * Creates a table of size 'size' that increases in size
- * by 'growth_rate' after a threshold is met.
- */
-static SEXP R_NewHashTable(int size)
-{
-    if (size <= 0) size = HASHMINSIZE;
-
-    /* Allocate hash table in the form of a vector */
-    GCStackRoot<> table(allocVector(VECSXP, size));
-    SET_HASHPRI(table, 0);
-
-    return table;
-}
-
 /**
  * @return Returns a new Environment with a hash table initialized with default
  * size.
+ *
+ * In CXXR currently returns an unhashed environment.
  *
  * @note The only non-static hash table function.
  */
@@ -406,200 +255,9 @@ SEXP R::R_NewHashedEnv(SEXP enclos, SEXP size)
     PROTECT(enclos);
     PROTECT(size);
     PROTECT(s = NewEnvironment(R_NilValue, R_NilValue, enclos));
-    SET_HASHTAB(s, R_NewHashTable(asInteger(size)));
     UNPROTECT(3);
     return s;
 }
-
-
-/** @brief Hash table delete function.
- * 
- * Symbols are completely removed from the table;
- * there is no way to mark a symbol as not present without actually removing
- * it.
- */
-static std::pair<SEXP, bool> RemoveFromList(SEXP thing, SEXP list);
-
-static bool R_HashDelete(int hashcode, SEXP symbol, SEXP env)
-{
-    int idx;
-    SEXP hashtab;
-
-    hashtab = HASHTAB(env);
-    idx = hashcode % HASHSIZE(hashtab);
-    auto list = RemoveFromList(symbol, VECTOR_ELT(hashtab, idx));
-    if (list.second) {
-	if (env == R_GlobalEnv)
-	    R_DirtyImage = 1;
-	if (list.first == R_NilValue)
-	    SET_HASHPRI(hashtab, HASHPRI(hashtab) - 1);
-	SET_VECTOR_ELT(hashtab, idx, list.first);
-    }
-    return list.second;
-}
-
-
-
-
-/** @brief Hash table resizing function.
- * 
- * Increase the size of the hash table by
- * the growth_rate of the table. The vector is reallocated, however
- * the lists with in the hash table have their pointers shuffled around
- * so that they are not reallocated.
- */
-static SEXP R_HashResize(SEXP table)
-{
-    SEXP new_table, chain, new_chain, tmp_chain;
-    int counter, new_hashcode;
-
-    /* Do some checking */
-    if (TYPEOF(table) != VECSXP)
-	error(_("first argument ('table') is not of type '%s', from '%s'"), "VECSXP", "R_HashResize()");
-
-    /* This may have to change.	 The growth rate should
-       be independent of the size (not implemented yet) */
-    /* hash_grow = HASHSIZE(table); */
-
-    /* Allocate the new hash table */
-    new_table = R_NewHashTable((int)(HASHSIZE(table) * HASHTABLEGROWTHRATE));
-    for (counter = 0; counter < length(table); counter++) {
-	chain = VECTOR_ELT(table, counter);
-	while (!ISNULL(chain)) {
-	    new_hashcode = R_Newhashpjw(CHAR(PRINTNAME(TAG(chain)))) %
-		HASHSIZE(new_table);
-	    new_chain = VECTOR_ELT(new_table, new_hashcode);
-	    /* If using a primary slot then increase HASHPRI */
-	    if (ISNULL(new_chain))
-		SET_HASHPRI(new_table, HASHPRI(new_table) + 1);
-	    tmp_chain = chain;
-	    chain = CDR(chain);
-	    SETCDR(tmp_chain, new_chain);
-	    SET_VECTOR_ELT(new_table, new_hashcode,  tmp_chain);
-#ifdef MIKE_DEBUG
-	    fprintf(stdout, "HASHSIZE = %d\nHASHPRI = %d\ncounter = %d\nHASHCODE = %d\n",
-		    HASHSIZE(table), HASHPRI(table), counter, new_hashcode);
-#endif
-	}
-    }
-    /* Some debugging statements */
-#ifdef MIKE_DEBUG
-    fprintf(stdout, "Resized O.K.\n");
-    fprintf(stdout, "Old size: %d, New size: %d\n",
-	    HASHSIZE(table), HASHSIZE(new_table));
-    fprintf(stdout, "Old pri: %d, New pri: %d\n",
-	    HASHPRI(table), HASHPRI(new_table));
-#endif
-    return new_table;
-} /* end R_HashResize */
-
-
-
-/** @brief Hash table size rechecking function.
- * 
- * Compares the load factor (size/# of primary slots used)
- * to a particular threshhold value.
- * 
- * @return true if the table needs to be resized.
- */
-static int R_HashSizeCheck(SEXP table)
-{
-    int resize;
-    double thresh_val;
-
-    /* Do some checking */
-    if (TYPEOF(table) != VECSXP)
-	error(_("first argument ('table') is not of type '%s', from '%s'"), "VECSXP", "R_HashSizeCheck()");
-    resize = 0; thresh_val = 0.85;
-    if ((double)HASHPRI(table) > (double)HASHSIZE(table) * thresh_val)
-	resize = 1;
-    return resize;
-}
-
-
-
-/** @brief Hashing for environment frames.
- * 
- * This function ensures that the 
- * first frame in the given environment has been hashed. Ultimately
- * all enironments should be created in hashed form.  At that point
- * this function will be redundant.
- */
-static SEXP R_HashFrame(SEXP rho)
-{
-    int hashcode;
-    SEXP frame, chain, tmp_chain, table;
-
-    /* Do some checking */
-    if (TYPEOF(rho) != ENVSXP)
-	error(_("first argument ('table') is not of type '%s', from '%s'"), "ENVSXP", "R_HashVector2Hash()");
-    table = HASHTAB(rho);
-    frame = FRAME(rho);
-    while (!ISNULL(frame)) {
-	hashcode = HASHVALUE(PRINTNAME(TAG(frame))) % HASHSIZE(table);
-	chain = VECTOR_ELT(table, hashcode);
-	/* If using a primary slot then increase HASHPRI */
-	if (ISNULL(chain)) SET_HASHPRI(table, HASHPRI(table) + 1);
-	tmp_chain = frame;
-	frame = CDR(frame);
-	SETCDR(tmp_chain, chain);
-	SET_VECTOR_ELT(table, hashcode, tmp_chain);
-    }
-    SET_FRAME(rho, R_NilValue);
-    return rho;
-}
-
-
-/* ---------------------------------------------------------------------
-
-   R_HashProfile
-
-   Profiling tool for analyzing hash table performance.  Returns a
-   three element list with components:
-
-   size: the total size of the hash table
-
-   nchains: the number of non-null chains in the table (as reported by
-	    HASHPRI())
-
-   counts: an integer vector the same length as size giving the length of
-	   each chain (or zero if no chain is present).  This allows
-	   for assessing collisions in the hash table.
- */
-
-static SEXP R_HashProfile(SEXP table)
-{
-    SEXP chain, ans, chain_counts, nms;
-    int i, count;
-
-    PROTECT(ans = allocVector(VECSXP, 3));
-    PROTECT(nms = allocVector(STRSXP, 3));
-    SET_STRING_ELT(nms, 0, mkChar("size"));    /* size of hashtable */
-    SET_STRING_ELT(nms, 1, mkChar("nchains")); /* number of non-null chains */
-    SET_STRING_ELT(nms, 2, mkChar("counts"));  /* length of each chain */
-    setAttrib(ans, R_NamesSymbol, nms);
-    UNPROTECT(1);
-
-    SET_VECTOR_ELT(ans, 0, ScalarInteger(length(table)));
-    SET_VECTOR_ELT(ans, 1, ScalarInteger(HASHPRI(table)));
-
-    PROTECT(chain_counts = allocVector(INTSXP, length(table)));
-    for (i = 0; i < length(table); i++) {
-	chain = VECTOR_ELT(table, i);
-	count = 0;
-	for (; chain != R_NilValue ; chain = CDR(chain)) {
-	    count++;
-	}
-	INTEGER(chain_counts)[i] = count;
-    }
-
-    SET_VECTOR_ELT(ans, 2, chain_counts);
-
-    UNPROTECT(2);
-    return ans;
-}
-
-
 
 /*----------------------------------------------------------------------
 
@@ -696,18 +354,13 @@ HIDDEN void R::unbindVar(SEXP symbol, SEXP rho)
         error(_("unbind in the base environment is unimplemented"));
     if (FRAME_IS_LOCKED(rho))
         error(_("cannot remove bindings from a locked environment"));
-    if (HASHTAB(rho) == R_NilValue) {
-	auto list = RemoveFromList(symbol, FRAME(rho));
-	if (list.second) {
-	    if (rho == R_GlobalEnv) R_DirtyImage = 1;
-	    SET_FRAME(rho, list.first);
-	}
-    }
-    else {
-	/* This branch is used e.g. via sys.source, utils::data */
-	SEXP c = PRINTNAME(symbol);
-	int hashcode = HASHVALUE(c) % HASHSIZE(HASHTAB(rho));
-    R_HashDelete(hashcode, symbol, rho);
+
+    auto list = RemoveFromList(symbol, FRAME(rho));
+    if (list.second)
+    {
+        if (rho == R_GlobalEnv)
+            R_DirtyImage = 1;
+        SET_FRAME(rho, list.first);
     }
 }
 
@@ -716,7 +369,9 @@ HIDDEN void R::unbindVar(SEXP symbol, SEXP rho)
  *        Almost like findVarInFrame, but does not return the value. R_NilValue if not found.
  *        Callers set *canCache = TRUE or NULL
 */
-static R_varloc_t findVarLocInFrame(SEXP rho, SEXP symbol, Rboolean *canCache)
+// canCache is used for 'user databases': currently (2009-01-18)
+// unimplemented in CXXR.
+static R_varloc_t findVarLocInFrame(SEXP rho, SEXP symbol, Rboolean * /*canCache*/)
 {
     if (rho == R_BaseEnv || rho == R_BaseNamespace)
         return (SYMVALUE(symbol) == R_UnboundValue) ? nullptr : symbol;
@@ -724,18 +379,10 @@ static R_varloc_t findVarLocInFrame(SEXP rho, SEXP symbol, Rboolean *canCache)
     if (!rho || rho == R_EmptyEnv)
         return nullptr;
 
-    if (HASHTAB(rho) == R_NilValue) {
-	SEXP frame = FRAME(rho);
-	while (frame != R_NilValue && TAG(frame) != symbol)
-	    frame = CDR(frame);
-	return frame;
-    }
-    else {
-	SEXP c = PRINTNAME(symbol);
-	int hashcode = HASHVALUE(c) % HASHSIZE(HASHTAB(rho));
-	/* Will return 'R_NilValue' if not found */
-	return R_HashGetLoc(hashcode, symbol, HASHTAB(rho));
-    }
+    SEXP frame = FRAME(rho);
+    while (frame != R_NilValue && TAG(frame) != symbol)
+        frame = CDR(frame);
+    return frame;
 }
 
 /** @brief External version and accessor functions.
@@ -792,7 +439,8 @@ void R::R_SetVarLocValue(R_varloc_t vl, SEXP value)
   simply to check whether there is a value bound to the specified
   symbol in this frame (FALSE).  This is used for get() and exists().
 */
-
+// doGet is used in connection with user databases, currently
+// (2009-01-18) unimplemented in CXXR.
 SEXP Rf_findVarInFrame3(SEXP rho, SEXP symbol, Rboolean doGet)
 {
     if (TYPEOF(rho) == NILSXP)
@@ -804,20 +452,14 @@ SEXP Rf_findVarInFrame3(SEXP rho, SEXP symbol, Rboolean doGet)
     if (!rho || rho == R_EmptyEnv)
         return R_UnboundValue;
 
-    if (HASHTAB(rho) == R_NilValue) {
-	SEXP frame = FRAME(rho);
-	while (frame != R_NilValue) {
-	    if (TAG(frame) == symbol)
-		return BINDING_VALUE(frame);
-	    frame = CDR(frame);
-	}
+    SEXP frame = FRAME(rho);
+    while (frame != R_NilValue)
+    {
+        if (TAG(frame) == symbol)
+            return BINDING_VALUE(frame);
+        frame = CDR(frame);
     }
-    else {
-	SEXP c = PRINTNAME(symbol);
-	int hashcode = HASHVALUE(c) % HASHSIZE(HASHTAB(rho));
-	/* Will return 'R_UnboundValue' if not found */
-	return R_HashGet(hashcode, symbol, HASHTAB(rho));
-    }
+
     return R_UnboundValue;
 }
 
@@ -834,20 +476,14 @@ static bool existsVarInFrame(SEXP rho, SEXP symbol)
     if (!rho || rho == R_EmptyEnv)
         return false;
 
-    if (HASHTAB(rho) == R_NilValue) {
-	SEXP frame = FRAME(rho);
-	while (frame != R_NilValue) {
-	    if (TAG(frame) == symbol)
-		return true;
-	    frame = CDR(frame);
-	}
+    SEXP frame = FRAME(rho);
+    while (frame != R_NilValue)
+    {
+        if (TAG(frame) == symbol)
+            return true;
+        frame = CDR(frame);
     }
-    else {
-	SEXP c = PRINTNAME(symbol);
-	int hashcode = HASHVALUE(c) % HASHSIZE(HASHTAB(rho));
-	/* Will return 'R_UnboundValue' if not found */
-	return R_HashExists(hashcode, symbol, HASHTAB(rho));
-    }
+
     return false;
 }
 
@@ -870,8 +506,7 @@ void Rf_readS3VarsFromFrame(SEXP rho,
     SEXP frame = nullptr;
 
     if (TYPEOF(rho) == NILSXP ||
-        rho == R_BaseNamespace || rho == R_BaseEnv || rho == R_EmptyEnv ||
-        HASHTAB(rho) != nullptr)
+        rho == R_BaseNamespace || rho == R_BaseEnv || rho == R_EmptyEnv)
         goto slowpath;
 
     frame = FRAME(rho);
@@ -1232,36 +867,31 @@ void Rf_defineVar(SEXP symbol, SEXP value, SEXP rho)
     if (!rho || rho == R_EmptyEnv)
         error(_("cannot assign values in the empty environment"));
 
-    if (rho == R_BaseNamespace || rho == R_BaseEnv) {
-	gsetVar(symbol, value, rho);
-    } else {
-	if (IS_SPECIAL_SYMBOL(symbol))
-	    UNSET_NO_SPECIAL_SYMBOLS(rho);
+    if (rho == R_BaseNamespace || rho == R_BaseEnv)
+    {
+        gsetVar(symbol, value, rho);
+    }
+    else
+    {
+        if (IS_SPECIAL_SYMBOL(symbol))
+            UNSET_NO_SPECIAL_SYMBOLS(rho);
 
-	if (HASHTAB(rho) == nullptr) {
-	    /* First check for an existing binding */
-	    SEXP frame = FRAME(rho);
-	    while (frame != nullptr) {
-		if (TAG(frame) == symbol) {
-		    SET_BINDING_VALUE(frame, value);
-		    SET_MISSING(frame, 0);	/* Over-ride */
-		    return;
-		}
-		frame = CDR(frame);
-	    }
-	    if (FRAME_IS_LOCKED(rho))
-		error(_("cannot add bindings to a locked environment"));
-	    SET_FRAME(rho, CONS(value, FRAME(rho)));
-	    SET_TAG(FRAME(rho), symbol);
-	}
-	else {
-	    SEXP c = PRINTNAME(symbol);
-	    int hashcode = HASHVALUE(c) % HASHSIZE(HASHTAB(rho));
-	    R_HashSet(hashcode, symbol, HASHTAB(rho), value,
-		      FRAME_IS_LOCKED(rho));
-	    if (R_HashSizeCheck(HASHTAB(rho)))
-		SET_HASHTAB(rho, R_HashResize(HASHTAB(rho)));
-	}
+        /* First check for an existing binding */
+        SEXP frame = FRAME(rho);
+        while (frame != nullptr)
+        {
+            if (TAG(frame) == symbol)
+            {
+                SET_BINDING_VALUE(frame, value);
+                SET_MISSING(frame, 0); /* Over-ride */
+                return;
+            }
+            frame = CDR(frame);
+        }
+        if (FRAME_IS_LOCKED(rho))
+            error(_("cannot add bindings to a locked environment"));
+        SET_FRAME(rho, CONS(value, FRAME(rho)));
+        SET_TAG(FRAME(rho), symbol);
     }
 }
 
@@ -1322,7 +952,6 @@ void Rf_addMissingVarsToNewEnv(SEXP env, SEXP addVars)
  */
 static SEXP setVarInFrame(SEXP rho, SEXP symbol, SEXP value)
 {
-    SEXP frame = nullptr;
     /* R_DirtyImage should only be set if assigning to R_GlobalEnv. */
     if (rho == R_GlobalEnv) R_DirtyImage = 1;
     if (!rho || rho == R_EmptyEnv) return R_NilValue;
@@ -1333,8 +962,7 @@ static SEXP setVarInFrame(SEXP rho, SEXP symbol, SEXP value)
 	return symbol;
     }
 
-    if (HASHTAB(rho) == nullptr) {
-	frame = FRAME(rho);
+	SEXP frame = FRAME(rho);
 	while (frame != R_NilValue) {
 	    if (TAG(frame) == symbol) {
 		SET_BINDING_VALUE(frame, value);
@@ -1343,17 +971,6 @@ static SEXP setVarInFrame(SEXP rho, SEXP symbol, SEXP value)
 	    }
 	    frame = CDR(frame);
 	}
-    } else {
-	/* Do the hash table thing */
-	SEXP c = PRINTNAME(symbol);
-	int hashcode = HASHVALUE(c) % HASHSIZE(HASHTAB(rho));
-	frame = R_HashGetLoc(hashcode, symbol, HASHTAB(rho));
-	if (frame != R_NilValue) {
-	    SET_BINDING_VALUE(frame, value);
-	    SET_MISSING(frame, 0);	/* same as defineVar */
-	    return symbol;
-	}
-    }
     return nullptr; /* -Wall */
 }
 
@@ -1468,10 +1085,8 @@ HIDDEN SEXP do_list2env(SEXP call, SEXP op, SEXP args, SEXP rho)
     return envir;
 }
 
-static int RemoveVariable(SEXP name, int hashcode, SEXP env)
+static int RemoveVariable(SEXP name, SEXP env)
 {
-    bool found = false;
-
     if (env == R_BaseNamespace)
         error(_("cannot remove variables from base namespace"));
     if (env == R_BaseEnv)
@@ -1481,16 +1096,15 @@ static int RemoveVariable(SEXP name, int hashcode, SEXP env)
     if (FRAME_IS_LOCKED(env))
         error(_("cannot remove bindings from a locked environment"));
 
-    if (IS_HASHED(env)) {
-	found = R_HashDelete(hashcode, name, env);
-    } else {
-	auto list = RemoveFromList(name, FRAME(env));
-    found = list.second;
-	if (list.second) {
-	    if(env == R_GlobalEnv) R_DirtyImage = 1;
-	    SET_FRAME(env, list.first);
-	}
+    auto list = RemoveFromList(name, FRAME(env));
+    bool found = list.second;
+    if (list.second)
+    {
+        if (env == R_GlobalEnv)
+            R_DirtyImage = 1;
+        SET_FRAME(env, list.first);
     }
+
     return found;
 }
 
@@ -1509,7 +1123,7 @@ HIDDEN SEXP do_remove(SEXP call, SEXP op, SEXP args, SEXP rho)
 
     SEXP name, envarg, tsym, tenv;
     int ginherits = 0;
-    int done, i, hashcode;
+    int done, i;
     checkArity(op, args);
 
     name = CAR(args);
@@ -1532,10 +1146,9 @@ HIDDEN SEXP do_remove(SEXP call, SEXP op, SEXP args, SEXP rho)
     for (i = 0; i < LENGTH(name); i++) {
 	done = 0;
 	tsym = installTrChar(STRING_ELT(name, i));
-	hashcode = HASHVALUE(PRINTNAME(tsym));
 	tenv = envarg;
 	while (tenv != R_EmptyEnv) {
-	    done = RemoveVariable(tsym, hashcode, tenv);
+	    done = RemoveVariable(tsym, tenv);
 	    if (done || !ginherits)
 		break;
 	    tenv = ENCLOS(tenv);
@@ -1548,23 +1161,17 @@ HIDDEN SEXP do_remove(SEXP call, SEXP op, SEXP args, SEXP rho)
 
 void R_removeVarFromFrame(SEXP name, SEXP env)
 {
-    int hashcode = -1;
-
     if (TYPEOF(env) == NILSXP)
-	error(_("use of NULL environment is defunct"));
+        error(_("use of NULL environment is defunct"));
 
     if (!isEnvironment(env))
-	error(_("argument to '%s' is not an environment"), "R_removeVarFromFrame");
+        error(_("argument to '%s' is not an environment"), "R_removeVarFromFrame");
 
     if (TYPEOF(name) != SYMSXP)
-	error(_("not a symbol"));
+        error(_("not a symbol"));
 
-    if (IS_HASHED(env)) {
-	    hashcode = HASHVALUE(PRINTNAME(name));
-    }
-    RemoveVariable(name, hashcode, env);
+    RemoveVariable(name, env);
 }
-
 
 /** @brief This function returns the SEXP associated with the character
  * argument.
@@ -1799,7 +1406,7 @@ HIDDEN bool R::R_isMissing(SEXP symbol, SEXP rho)
 {
     int ddv = 0;
     SEXP s;
-    R_varloc_t vl;
+    GCRoot<> vl; // Binding defined in PairList form
 
     if (symbol == R_MissingArg) /* Yes, this can happen */
 	return true;
@@ -1979,8 +1586,9 @@ HIDDEN SEXP do_emptyenv(SEXP call, SEXP op, SEXP args, SEXP rho)
 */
 HIDDEN SEXP do_attach(SEXP call, SEXP op, SEXP args, SEXP env)
 {
-    SEXP name, s, t, x;
-    int pos, hsize;
+    SEXP name, t, x;
+    int pos;
+    GCRoot<Environment> newenv;
 
     checkArity(op, args);
 
@@ -1992,72 +1600,49 @@ HIDDEN SEXP do_attach(SEXP call, SEXP op, SEXP args, SEXP env)
     if (!isValidStringF(name))
         error(_("invalid '%s' argument"), "name");
 
-    if (isNewList(CAR(args))) {
-	    SETCAR(args, VectorToPairList(CAR(args)));
+    if (isNewList(CAR(args)))
+    {
+        SETCAR(args, VectorToPairList(CAR(args)));
 
-	    for (x = CAR(args); x != R_NilValue; x = CDR(x))
-		if (TAG(x) == R_NilValue)
-		    error(_("all elements of a list must be named"));
-	    GCStackRoot<PairList> dupcar(SEXP_downcast<PairList*>(shallow_duplicate(CAR(args))));
-        PROTECT(s = GCNode::expose(new Environment(nullptr, dupcar)));
-	} else if (isEnvironment(CAR(args))) {
-	    SEXP p, loadenv = CAR(args);
+        for (x = CAR(args); x != R_NilValue; x = CDR(x))
+            if (TAG(x) == R_NilValue)
+                error(_("all elements of a list must be named"));
+        GCStackRoot<PairList> dupcar(SEXP_downcast<PairList *>(shallow_duplicate(CAR(args))));
+        newenv = GCNode::expose(new Environment(nullptr, dupcar));
+    }
+    else if (isEnvironment(CAR(args)))
+    {
+        SEXP p, loadenv = CAR(args);
 
-	    PROTECT(s = GCNode::expose(new Environment()));
-	    if (HASHTAB(loadenv) != R_NilValue) {
-		int i, n;
-		n = length(HASHTAB(loadenv));
-		for (i = 0; i < n; i++) {
-		    p = VECTOR_ELT(HASHTAB(loadenv), i);
-		    while (p != R_NilValue) {
-			defineVar(TAG(p), lazy_duplicate(CAR(p)), s);
-			p = CDR(p);
-		    }
-		}
-		/* FIXME: duplicate the hash table and assign here */
-	    } else {
-            GCStackRoot<> framelist(FRAME(loadenv));
-            for (p = framelist; p != R_NilValue; p = CDR(p))
-                defineVar(TAG(p), lazy_duplicate(CAR(p)), s);
-	    }
-	} else {
-	    error(_("'attach()' function only works for lists, data frames and environments"));
-	    s = nullptr; /* -Wall */
-	}
+        newenv = GCNode::expose(new Environment());
+        GCStackRoot<> framelist(FRAME(loadenv));
+        for (p = framelist; p != R_NilValue; p = CDR(p))
+            defineVar(TAG(p), lazy_duplicate(CAR(p)), newenv);
+    }
+    else
+    {
+        error(_("'attach()' function only works for lists, data frames and environments"));
+        newenv = nullptr; /* -Wall */
+    }
 
-	/* Connect FRAME(s) into HASHTAB(s) */
-	if (length(s) < HASHMINSIZE)
-	    hsize = HASHMINSIZE;
-	else
-	    hsize = length(s);
-
-	SET_HASHTAB(s, R_NewHashTable(hsize));
-	s = R_HashFrame(s);
-
-	/* FIXME: A little inefficient */
-	while (R_HashSizeCheck(HASHTAB(s)))
-	    SET_HASHTAB(s, R_HashResize(HASHTAB(s)));
-
-    setAttrib(s, R_NameSymbol, name);
+    setAttrib(newenv, R_NameSymbol, name);
     for (t = R_GlobalEnv; ENCLOS(t) != R_BaseEnv && pos > 2; t = ENCLOS(t))
-	pos--;
+        pos--;
 
     if (ENCLOS(t) == R_BaseEnv)
     {
-        SET_ENCLOS(t, s);
-        SET_ENCLOS(s, R_BaseEnv);
+        SET_ENCLOS(t, newenv);
+        SET_ENCLOS(newenv, R_BaseEnv);
     }
     else
     {
         x = ENCLOS(t);
-        SET_ENCLOS(t, s);
-        SET_ENCLOS(s, x);
+        SET_ENCLOS(t, newenv);
+        SET_ENCLOS(newenv, x);
     }
-    UNPROTECT(1); /* s */
-    return s;
+
+    return newenv;
 }
-
-
 
 /** @brief Detach the specified environment.
  * 
@@ -2175,42 +1760,6 @@ static void FrameValues(SEXP frame, bool all, SEXP values, int *indx)
     }
 }
 
-#define CHECK_HASH_TABLE(table)                  \
-    do                                           \
-    {                                            \
-        if (TYPEOF(table) != VECSXP)             \
-            error(_("bad hash table contents")); \
-    } while (0)
-
-static int HashTableSize(SEXP table, int all)
-{
-    CHECK_HASH_TABLE(table);
-    int count = 0;
-    int n = length(table);
-    int i;
-    for (i = 0; i < n; i++)
-	count += FrameSize(VECTOR_ELT(table, i), all);
-    return count;
-}
-
-static void HashTableNames(SEXP table, int all, SEXP names, int *indx)
-{
-    CHECK_HASH_TABLE(table);
-    int n = length(table);
-    int i;
-    for (i = 0; i < n; i++)
-	FrameNames(VECTOR_ELT(table, i), all, names, indx);
-}
-
-static void HashTableValues(SEXP table, int all, SEXP values, int *indx)
-{
-    CHECK_HASH_TABLE(table);
-    int n = length(table);
-    int i;
-    for (i = 0; i < n; i++)
-	FrameValues(VECTOR_ELT(table, i), all, values, indx);
-}
-
 static bool BuiltinTest(const Symbol *sym, bool all, bool intern)
 {
     if (!sym)
@@ -2295,9 +1844,6 @@ SEXP R_lsInternal3(SEXP env, Rboolean all, Rboolean sorted)
 	k += BuiltinSize(all, false);
     else if (isEnvironment(env) ||
 	isEnvironment(env = simple_as_environment(env))) {
-	if (HASHTAB(env) != R_NilValue)
-	    k += HashTableSize(HASHTAB(env), all);
-	else
 	    k += FrameSize(FRAME(env), all);
     }
     else
@@ -2309,9 +1855,6 @@ SEXP R_lsInternal3(SEXP env, Rboolean all, Rboolean sorted)
     if (env == R_BaseEnv || env == R_BaseNamespace)
 	BuiltinNames(all, 0, ans, &k);
     else if (isEnvironment(env)) {
-	if (HASHTAB(env) != R_NilValue)
-	    HashTableNames(HASHTAB(env), all, ans, &k);
-	else
 	    FrameNames(FRAME(env), all, ans, &k);
     }
 
@@ -2360,8 +1903,6 @@ HIDDEN SEXP do_env2list(SEXP call, SEXP op, SEXP args, SEXP rho)
     // k := length(env) = envxlength(env) :
     if (env == R_BaseEnv || env == R_BaseNamespace)
 	k = BuiltinSize(all, false);
-    else if (HASHTAB(env) != R_NilValue)
-	k = HashTableSize(HASHTAB(env), all);
     else
 	k = FrameSize(framelist, all);
 
@@ -2371,16 +1912,12 @@ HIDDEN SEXP do_env2list(SEXP call, SEXP op, SEXP args, SEXP rho)
     k = 0;
     if (env == R_BaseEnv || env == R_BaseNamespace)
 	BuiltinValues(all, 0, ans, &k);
-    else if (HASHTAB(env) != R_NilValue)
-	HashTableValues(HASHTAB(env), all, ans, &k);
     else
 	FrameValues(framelist, all, ans, &k);
 
     k = 0;
     if (env == R_BaseEnv || env == R_BaseNamespace)
 	BuiltinNames(all, 0, names, &k);
-    else if (HASHTAB(env) != R_NilValue)
-	HashTableNames(HASHTAB(env), all, names, &k);
     else
 	FrameNames(framelist, all, names, &k);
 
@@ -2452,8 +1989,6 @@ HIDDEN SEXP do_eapply(SEXP call, SEXP op, SEXP args, SEXP rho)
 
     if (env == R_BaseEnv || env == R_BaseNamespace)
 	k = BuiltinSize(all, false);
-    else if (HASHTAB(env) != R_NilValue)
-	k = HashTableSize(HASHTAB(env), all);
     else
 	k = FrameSize(framelist, all);
 
@@ -2463,8 +1998,6 @@ HIDDEN SEXP do_eapply(SEXP call, SEXP op, SEXP args, SEXP rho)
     k2 = 0;
     if (env == R_BaseEnv || env == R_BaseNamespace)
 	BuiltinValues(all, 0, tmp2, &k2);
-    else if (HASHTAB(env) != R_NilValue)
-	HashTableValues(HASHTAB(env), all, tmp2, &k2);
     else
 	FrameValues(framelist, all, tmp2, &k2);
 
@@ -2493,8 +2026,6 @@ HIDDEN SEXP do_eapply(SEXP call, SEXP op, SEXP args, SEXP rho)
 	k = 0;
 	if (env == R_BaseEnv || env == R_BaseNamespace)
 	    BuiltinNames(all, 0, names, &k);
-	else if(HASHTAB(env) != R_NilValue)
-	    HashTableNames(HASHTAB(env), all, names, &k);
 	else
 	    FrameNames(framelist, all, names, &k);
 
@@ -2508,9 +2039,7 @@ HIDDEN SEXP do_eapply(SEXP call, SEXP op, SEXP args, SEXP rho)
 /* Leaks out via inlining in ../library/tools/src/ */
 int Rf_envlength(SEXP rho)
 {
-    if (HASHTAB(rho) != R_NilValue)
-        return HashTableSize(HASHTAB(rho), 1);
-    else if (rho == R_BaseEnv || rho == R_BaseNamespace)
+    if (rho == R_BaseEnv || rho == R_BaseNamespace)
         return BuiltinSize(true, false);
     else
         return FrameSize(FRAME(rho), 1);
@@ -2518,9 +2047,7 @@ int Rf_envlength(SEXP rho)
 
 R_xlen_t Rf_envxlength(SEXP rho)
 {
-    if (HASHTAB(rho) != R_NilValue)
-        return HashTableSize(HASHTAB(rho), 1);
-    else if (rho == R_BaseEnv || rho == R_BaseNamespace)
+    if (rho == R_BaseEnv || rho == R_BaseNamespace)
         return BuiltinSize(true, false);
     else
         return FrameSize(FRAME(rho), 1);
@@ -2706,21 +2233,8 @@ void R_LockEnvironment(SEXP env, Rboolean bindings)
     if (TYPEOF(env) != ENVSXP)
         error(_("'%s' argument is not an environment"), "env");
     if (bindings) {
-	if (IS_HASHED(env)) {
-	    SEXP table, chain;
-	    int i, size;
-	    table = HASHTAB(env);
-	    size = HASHSIZE(table);
-	    for (i = 0; i < size; i++)
-		for (chain = VECTOR_ELT(table, i);
-		     chain != R_NilValue;
-		     chain = CDR(chain))
-		    LOCK_BINDING(chain);
-	}
-	else {
 	    for (SEXP frame = FRAME(env); frame != nullptr; frame = CDR(frame))
 		LOCK_BINDING(frame);
-	}
     }
     LOCK_FRAME(env);
 }
@@ -2873,26 +2387,10 @@ Rboolean R_BindingIsActive(SEXP sym, SEXP env)
 
 Rboolean R_HasFancyBindings(SEXP rho)
 {
-    if (IS_HASHED(rho)) {
-	SEXP table, chain;
-	int i, size;
-
-	table = HASHTAB(rho);
-	size = HASHSIZE(table);
-	for (i = 0; i < size; i++)
-	    for (chain = VECTOR_ELT(table, i);
-		 chain != R_NilValue;
-		 chain = CDR(chain))
-		if (IS_ACTIVE_BINDING(chain) || BINDING_IS_LOCKED(chain))
-		    return TRUE;
-	return FALSE;
-    }
-    else {
 	for (SEXP frame = FRAME(rho); frame != R_NilValue; frame = CDR(frame))
 	    if (IS_ACTIVE_BINDING(frame) || BINDING_IS_LOCKED(frame))
 		return TRUE;
 	return FALSE;
-    }
 }
 
 SEXP R_ActiveBindingFunction(SEXP sym, SEXP env)
@@ -2993,8 +2491,7 @@ HIDDEN SEXP do_mkUnbound(SEXP call, SEXP op, SEXP args, SEXP rho)
 
     if (TYPEOF(sym) != SYMSXP)
 	error(_("'%s' argument is not a symbol"), "sym");
-    /* This is not quite the same as SET_SYMBOL_BINDING_VALUE as it
-       does not allow active bindings to be unbound */
+    /* This does not allow active bindings to be unbound */
     if (R_BindingIsLocked(sym, R_BaseEnv))
 	error(_("cannot unbind a locked binding"));
     if (R_BindingIsActive(sym, R_BaseEnv))
@@ -3019,17 +2516,6 @@ SEXP R_NewEnv(SEXP enclos, int hash, int size)
 
 void R_RestoreHashCount(SEXP rho)
 {
-    if (IS_HASHED(rho)) {
-	SEXP table;
-	int i, count, size;
-
-	table = HASHTAB(rho);
-	size = HASHSIZE(table);
-	for (i = 0, count = 0; i < size; i++)
-	    if (VECTOR_ELT(table, i) != R_NilValue)
-		count++;
-	SET_HASHPRI(table, count);
-    }
 }
 
 Rboolean R_IsPackageEnv(SEXP rho)
@@ -3172,8 +2658,7 @@ HIDDEN SEXP do_unregNS(SEXP call, SEXP op, SEXP args, SEXP env)
     name = checkNSname(call, CAR(args));
     if (findVarInFrame(R_NamespaceRegistry, name) == R_UnboundValue)
         errorcall(call, _("namespace is not registered"));
-    int hashcode = HASHVALUE(PRINTNAME(name));
-    RemoveVariable(name, hashcode, R_NamespaceRegistry);
+    RemoveVariable(name, R_NamespaceRegistry);
     return R_NilValue;
 }
 
@@ -3419,16 +2904,8 @@ HIDDEN SEXP do_envprofile(SEXP call, SEXP op, SEXP args, SEXP env)
        way to test whether an environment is hashed at the R level.
     */
     checkArity(op, args);
-    SEXP env2, ans = R_NilValue /* -Wall */;
-    env2 = CAR(args);
-    if (isEnvironment(env2))
-    {
-        if (IS_HASHED(env2))
-            ans = R_HashProfile(HASHTAB(env2));
-    }
-    else
-        error(_("'%s' argument must be a hashed environment"), "env");
-    return ans;
+    // Unimplemented in CXXR:
+    return nullptr;
 }
 
 SEXP Rf_mkCharCE(const char *name, cetype_t enc)
@@ -3605,4 +3082,3 @@ void Rf_findFunctionForBody(SEXP body)
         }
     }
 }
-
