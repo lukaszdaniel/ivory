@@ -563,7 +563,6 @@ namespace R
   using R_varloc_t = SEXP;
   // using R_varloc_t = CXXR::Frame::Binding *;
 
-  inline bool R_VARLOC_IS_NULL(R_varloc_t loc) { return (loc == nullptr); }
   R_varloc_t R_findVarLocInFrame(SEXP, SEXP);
   R_varloc_t R_findVarLoc(SEXP rho, SEXP symbol);
   SEXP R_GetVarLocValue(R_varloc_t vl);

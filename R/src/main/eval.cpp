@@ -1946,7 +1946,7 @@ SEXP R::R_execMethod(SEXP op, SEXP rho)
 	R_varloc_t loc;
 	int missing;
 	loc = R_findVarLocInFrame(rho,symbol);
-	if(R_VARLOC_IS_NULL(loc))
+	if(!loc)
 	    error(_("could not find symbol \"%s\" in environment of the generic function"), CHAR(PRINTNAME(symbol)));
 	missing = R_GetVarLocMISSING(loc);
 	val = R_GetVarLocValue(loc);
@@ -2007,7 +2007,7 @@ SEXP R::R_execMethod(SEXP op, SEXP rho)
     return val;
 }
 
-static SEXP EnsureLocal(SEXP symbol, SEXP rho, R_varloc_t ploc)
+static SEXP EnsureLocal(SEXP symbol, SEXP rho, R_varloc_t *ploc)
 {
     SEXP vl;
 
@@ -2024,7 +2024,7 @@ static SEXP EnsureLocal(SEXP symbol, SEXP rho, R_varloc_t ploc)
 	    UNPROTECT(2);
 	}
 	PROTECT(vl); /* R_findVarLocInFrame allocates for user databases */
-	ploc = R_findVarLocInFrame(rho, symbol);
+	*ploc = R_findVarLocInFrame(rho, symbol);
 	UNPROTECT(1);
 	return vl;
     }
@@ -2035,7 +2035,7 @@ static SEXP EnsureLocal(SEXP symbol, SEXP rho, R_varloc_t ploc)
 
     PROTECT(vl = shallow_duplicate(vl));
     defineVar(symbol, vl, rho);
-    ploc = R_findVarLocInFrame(rho, symbol);
+    *ploc = R_findVarLocInFrame(rho, symbol);
     UNPROTECT(1);
     return vl;
 }
@@ -2177,24 +2177,26 @@ inline static R_varloc_t GET_BINDING_CELL(SEXP symbol, SEXP rho)
 	return nullptr;
     else {
 	R_varloc_t loc = R_findVarLocInFrame(rho, symbol);
-	return (! R_VARLOC_IS_NULL(loc) && ! IS_ACTIVE_BINDING(loc)) ?
+	return (loc && ! IS_ACTIVE_BINDING(loc)) ?
 	    loc : nullptr;
     }
 }
 
-inline static bool SET_BINDING_VALUE(R_varloc_t loc, SEXP value) {
-    /* This depends on the current implementation of bindings */
-    if (loc != nullptr &&
-	! BINDING_IS_LOCKED(loc) && ! IS_ACTIVE_BINDING(loc)) {
-	if (BNDCELL_TAG(loc) || CAR(loc) != value) {
-	    SET_BNDCELL(loc, value);
-	    if (MISSING(loc))
-		SET_MISSING(loc, 0);
+inline static bool SET_BINDING_VALUE(R_varloc_t loc, SEXP value)
+{
+	/* This depends on the current implementation of bindings */
+	if (loc && !BINDING_IS_LOCKED(loc) && !IS_ACTIVE_BINDING(loc))
+	{
+		if (BNDCELL_TAG(loc) || CAR(loc) != value)
+		{
+			SET_BNDCELL(loc, value);
+			if (MISSING(loc))
+				SET_MISSING(loc, 0);
+		}
+		return true;
 	}
-	return true;
-    }
-    else
-	return false;
+	else
+		return false;
 }
 
 HIDDEN SEXP do_for(SEXP call, SEXP op, SEXP args, SEXP rho)
@@ -2555,7 +2557,7 @@ HIDDEN SEXP do_function(SEXP call, SEXP op, SEXP args, SEXP rho)
 */
 
 static SEXP evalseq(SEXP expr, SEXP rho, int forcelocal,  R_varloc_t tmploc,
-		    R_varloc_t ploc)
+		    R_varloc_t *ploc)
 {
     SEXP val, nval, nexpr;
     if (isNull(expr))
@@ -2568,13 +2570,13 @@ static SEXP evalseq(SEXP expr, SEXP rho, int forcelocal,  R_varloc_t tmploc,
 	else {
 	    nval = eval(expr, ENCLOS(rho));
 	    PROTECT(nval); /* R_findVarLoc allocates for user databases */
-	    ploc = R_findVarLoc(expr, ENCLOS(rho));
+	    *ploc = R_findVarLoc(expr, ENCLOS(rho));
 	    UNPROTECT(1);
 	}
 	int maybe_in_assign = ploc ?
-	    ASSIGNMENT_PENDING(ploc) : FALSE;
+	    ASSIGNMENT_PENDING(*ploc) : FALSE;
 	if (ploc)
-	    SET_ASSIGNMENT_PENDING(ploc, TRUE);
+	    SET_ASSIGNMENT_PENDING(*ploc, TRUE);
 	if (maybe_in_assign || MAYBE_SHARED(nval))
 	    nval = shallow_duplicate(nval);
 	UNPROTECT(1);
@@ -2826,9 +2828,9 @@ static SEXP applydefine(SEXP call, SEXP op, SEXP args, SEXP rho)
     cntxt.setContextEnd(&tmp_cleanup, rho);
 
     /*  Do a partial evaluation down through the LHS. */
-    R_varloc_t lhsloc = nullptr;
+    R_varloc_t lhsloc;
     lhs = evalseq(CADR(expr), rho,
-		  PRIMVAL(op)==1 || PRIMVAL(op)==3, tmploc, lhsloc);
+		  PRIMVAL(op)==1 || PRIMVAL(op)==3, tmploc, &lhsloc);
     if (lhsloc == nullptr)
 	lhsloc = R_NilValue;
     PROTECT(lhsloc); nprot++;
@@ -5151,8 +5153,6 @@ inline static SEXP BINDING_VALUE(R_varloc_t loc)
 	else
 		return R_UnboundValue;
 }
-
-#define BINDING_SYMBOL(loc) TAG(loc)
 
 /* Defining USE_BINDING_CACHE enables a cache for GETVAR, SETVAR, and
    others to more efficiently locate bindings in the top frame of the
@@ -7505,7 +7505,7 @@ static SEXP bcEval(SEXP body, SEXP rho, bool useCache)
 	R_varloc_t loc;
 	if (value == R_UnboundValue ||
 	    TYPEOF(value) == PROMSXP) {
-	    value = EnsureLocal(symbol, rho, loc);
+	    value = EnsureLocal(symbol, rho, &loc);
 	}
 	else loc = cell;
 
