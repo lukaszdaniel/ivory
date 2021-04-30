@@ -843,10 +843,15 @@ SEXP Rf_lcons(SEXP cr, SEXP tl)
   pairing the variable names given by the tags on "namelist" with
   the values given by the elements of "valuelist".
 
-  This definition allows the namelist argument to be shorter than the
-  valuelist; in this case the remaining values must be named already.
-  (This is useful in cases where the entire valuelist is already
-  named--namelist can then be R_NilValue.)
+  NewEnvironment is defined directly to avoid the need to protect its
+  arguments unless a GC will actually occur.  This definition allows
+  the namelist argument to be shorter than the valuelist; in this
+  case the remaining values must be named already.  (This is useful
+  in cases where the entire valuelist is already named--namelist can
+  then be R_NilValue.)
+
+  The valuelist is destructively modified and used as the
+  environment's frame.
 */
 SEXP R::NewEnvironment(SEXP namelist, SEXP valuelist, SEXP rho)
 {

@@ -59,14 +59,13 @@ namespace CXXR
         const auto &SET_FRAMEp = SET_FRAME;
         const auto &SET_ENV_RDEBUGptr = SET_ENV_RDEBUG;
         const auto &SET_HASHTABptr = SET_HASHTAB;
-        const auto &SYMVALUEptr = SYMVALUE;
-        const auto &SET_SYMVALUEptr = SET_SYMVALUE;
     } // namespace ForceNonInline
 
     namespace
     {
         // Used in {,un}packGPBits():
         constexpr unsigned int FRAME_LOCK_MASK = 1 << 14;
+        constexpr unsigned int GLOBAL_FRAME_MASK = 1 << 15;
     } // namespace
 
     unsigned int Environment::packGPBits() const
@@ -74,6 +73,8 @@ namespace CXXR
         unsigned int ans = RObject::packGPBits();
         if (m_locked)
             ans |= FRAME_LOCK_MASK;
+        if (m_globally_cached)
+            ans |= GLOBAL_FRAME_MASK;
         return ans;
     }
 
@@ -82,6 +83,7 @@ namespace CXXR
         RObject::unpackGPBits(gpbits);
         // Be careful with precedence!
         m_locked = ((gpbits & FRAME_LOCK_MASK) != 0);
+        m_globally_cached = ((gpbits & GLOBAL_FRAME_MASK) != 0);
     }
 
     GCRoot<Environment> Environment::s_empty_env(GCNode::expose(new Environment()));
@@ -114,6 +116,8 @@ namespace CXXR
             m_enclosing->conductVisitor(v);
         if (m_frame)
             m_frame->conductVisitor(v);
+        if (m_hashtable)
+            m_hashtable->conductVisitor(v);
     }
 
     void Environment::nullEnvironmentError()
@@ -162,7 +166,11 @@ SEXP ENCLOS(SEXP x)
 
 SEXP HASHTAB(SEXP x)
 {
-    return nullptr;
+    if (!x)
+        return nullptr;
+    Environment::checkST(x);
+    Environment *env = SEXP_downcast<Environment *>(x);
+    return env->hashTable();
 }
 
 int ENVFLAGS(SEXP x)
@@ -203,6 +211,12 @@ void SET_ENCLOS(SEXP x, SEXP v)
 
 void SET_HASHTAB(SEXP x, SEXP v)
 {
+    if (!x)
+        return;
+    Environment::checkST(x);
+    Environment *env = SEXP_downcast<Environment *>(x);
+    ListVector *lv = SEXP_downcast<ListVector *>(v);
+    env->setHashTable(lv);
 }
 
 void SET_ENVFLAGS(SEXP x, int v)
@@ -219,24 +233,4 @@ void SET_ENV_RDEBUG(SEXP x, int v)
         return;
     Environment *env = SEXP_downcast<Environment *>(x);
     env->setSingleStepping(v);
-}
-
-SEXP SYMVALUE(SEXP x)
-{
-    if (!x)
-        return nullptr;
-    Symbol::checkST(x);
-    Symbol *sym = SEXP_downcast<Symbol *>(x);
-    return sym->value();
-}
-
-void SET_SYMVALUE(SEXP x, SEXP v)
-{
-    if (!x)
-        return;
-    Symbol::checkST(x);
-    if (SEXP_downcast<Symbol *>(x)->value() == v)
-        return;
-    Symbol *sym = SEXP_downcast<Symbol *>(x);
-    sym->setValue(v);
 }

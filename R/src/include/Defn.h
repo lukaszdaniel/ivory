@@ -459,6 +459,20 @@ namespace R
     int R_GetFDLimit();
     int R_EnsureFDLimit(int);
 
+    /* environment cell access */
+    struct R_varloc_t
+    {
+        SEXP cell;
+    }; /* use struct to prevent casting */
+
+    inline bool R_VARLOC_IS_NULL(const R_varloc_t &loc) { return ((loc).cell == nullptr); }
+    R_varloc_t R_findVarLocInFrame(SEXP, SEXP);
+    R_varloc_t R_findVarLoc(SEXP rho, SEXP symbol);
+    SEXP R_GetVarLocValue(R_varloc_t vl);
+    SEXP R_GetVarLocSymbol(R_varloc_t vl);
+    Rboolean R_GetVarLocMISSING(R_varloc_t vl);
+    void R_SetVarLocValue(R_varloc_t vl, SEXP value);
+
     /* deparse option bits: change do_dump if more are added */
     enum DeparseOptionBits
     {

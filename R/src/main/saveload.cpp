@@ -662,12 +662,10 @@ static void RestoreSEXP(SEXP s, FILE *fp, InputRoutines &m, NodeInfo &node, int 
 	SET_PRENV(s, OffsetToNode(m.InInteger(fp, d), node));
 	break;
     case ENVSXP:
-    {
-        SET_FRAME(s, OffsetToNode(m.InInteger(fp, d), node));
-        SET_ENCLOS(s, OffsetToNode(m.InInteger(fp, d), node));
-        SET_HASHTAB(s, OffsetToNode(m.InInteger(fp, d), node));
-    }
-    break;
+	SET_FRAME(s, OffsetToNode(m.InInteger(fp, d), node));
+	SET_ENCLOS(s, OffsetToNode(m.InInteger(fp, d), node));
+	SET_HASHTAB(s, OffsetToNode(m.InInteger(fp, d), node));
+	break;
     case SPECIALSXP:
     case BUILTINSXP:
     {
@@ -1457,13 +1455,11 @@ static SEXP NewDataLoad(FILE *fp, InputRoutines *m, SaveLoadData *d)
 
     /* Now fill them in  */
     for (count = 0; count < env_count; ++count) {
-        Environment *env = static_cast<Environment *>(VECTOR_ELT(env_table, count));
-        Environment *enc = SEXP_downcast<Environment *>(NewReadItem(sym_table, env_table, fp, m, d));
-        env->setEnclosingEnvironment(enc);
-	SET_FRAME(env, NewReadItem(sym_table, env_table, fp, m, d));
-        // Throw away the hash table:
-        NewReadItem(sym_table, env_table, fp, m, d);
-        env->expose();
+	obj = VECTOR_ELT(env_table, count);
+	SET_ENCLOS(obj, NewReadItem(sym_table, env_table, fp, m, d));
+	SET_FRAME(obj, NewReadItem(sym_table, env_table, fp, m, d));
+	SET_TAG(obj, NewReadItem(sym_table, env_table, fp, m, d));
+	R_RestoreHashCount(obj);
     }
 
     /* Read the actual object back */

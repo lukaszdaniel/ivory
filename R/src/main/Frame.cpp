@@ -29,7 +29,6 @@
 
 #include <algorithm>
 #include <CXXR/Frame.hpp>
-#include <CXXR/Symbol.hpp>
 #include <CXXR/FunctionBase.hpp>
 #include <CXXR/Promise.hpp>
 #include <Localization.h>
@@ -40,6 +39,7 @@ using namespace CXXR;
 
 namespace CXXR
 {
+    // ***** Class Frame::Binding *****
 
     PairList *Frame::Binding::asPairList(PairList *tail) const
     {
