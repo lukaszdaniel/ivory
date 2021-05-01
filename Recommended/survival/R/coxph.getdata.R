@@ -43,12 +43,12 @@ coxph.getdata <- function(fit, y=TRUE, x=TRUE, stratax=TRUE,
         n <- nrow(mf)
 
 	# Pull things out
-        if (is.null(twt) && weights) {
+        if (weights) {
             twt <- model.extract(mf, "weights")
             if (is.null(twt)) twt <- rep(1.0, n)
         }
-
-	if (offset && is.null(toff)) {
+            
+	if (offset) {
             toff <- model.extract(mf, 'offset')
             if (is.null(toff)) toff <- rep(0.0, n)
         }

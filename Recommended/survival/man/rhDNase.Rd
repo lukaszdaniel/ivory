@@ -49,7 +49,7 @@ pulmonary exacerbations, along with measures of lung volume and flow.
 The primary endpoint was the time until
 first pulmonary exacerbation; however, data on all exacerbations were
 collected for 169 days.
-
+ 
 The definition of an exacerbation was an infection that required the use
 of intravenous (IV) antibiotics.  Subjects had 0--5 such episodes during
 the trial, those with more than one have multiple rows in the data
@@ -71,7 +71,7 @@ T. M. Therneau and P. M. Grambsch, Modeling Survival Data: Extending
   the Cox Model, Springer, 2000.
 
 
-T. M. Therneau and S.A. Mamilton,
+T. M. Therneau and S.A. Hamilton,
 rhDNase as an example of recurrent event analysis, Statistics
 in Medicine, 16:2029-2047, 1997.
 }

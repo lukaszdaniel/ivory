@@ -53,7 +53,7 @@ except row $j$.
 \end{align*}
 If time is continuous then most events will be at a unique event time, and this
 fast computation will be the most common case.
-
+    
 If the state space is acylic, the case for many survival problems, then
 we can reorder the states so that R is upper triangular.
 In that case, the diagonal elements of R are the eigenvalues.  If these
@@ -92,7 +92,7 @@ survexpmsetup <- function(rmat) {
     nc <- ncol(rmat)
     lower <- row(rmat) > col(rmat)
     if (all(rmat[lower] ==0))  return(0)  # already in order
-
+    
     # score each state by (number of states it follows) - (number it precedes)
     temp <- 1*(rmat >0) # 0/1 matrix
     indx <- order(colSums(temp) - rowSums(temp))
@@ -215,7 +215,7 @@ except that their Q = our rmat.  Q = A diag(d) Ainv and P= exp(Qt)
 SEXP cdecomp(SEXP R2, SEXP time2) {
     int i,j,k;
     int nc, ii;
-
+    
     static const char *outnames[]= {"d", "A", "Ainv", 
 				    "P", ""};    
     SEXP rval, stemp;
@@ -230,7 +230,7 @@ SEXP cdecomp(SEXP R2, SEXP time2) {
     /* Make the output matrices as copies of R, so as to inherit
     **   the dimnames and etc
     */
-
+    
     PROTECT(rval = mkNamed(VECSXP, outnames));
     stemp=  SET_VECTOR_ELT(rval, 0, allocVector(REALSXP, nc));
     dd = REAL(stemp);
@@ -241,9 +241,9 @@ SEXP cdecomp(SEXP R2, SEXP time2) {
     Ainv = REAL(stemp);
     stemp = SET_VECTOR_ELT(rval, 3, duplicate(stemp));
     P = REAL(stemp);
-
+   
     ediag = (double *) R_alloc(nc, sizeof(double));
-
+    
     /* 
     **	Compute the eigenvectors
     **   For each column of R, find x such that Rx = kx
@@ -255,16 +255,14 @@ SEXP cdecomp(SEXP R2, SEXP time2) {
     for (i=0; i<nc; i++) { /* computations for column i */
 	dd[i] = R[i +ii];    /* the i,i diagonal element = eigenvalue*/
 	A[i +ii] = 1.0;
-        if (dd[i] !=0) {
-            for (j=(i-1); j >=0; j--) {  /* fill in the rest */
-                temp =0;
-                for (k=j; k<=i; k++) temp += R[j + k*nc]* A[k +ii];
-                A[j +ii] = temp/(dd[i]- R[j + j*nc]);
-            }
+        for (j=(i-1); j >=0; j--) {  /* fill in the rest */
+            temp =0;
+            for (k=j; k<=i; k++) temp += R[j + k*nc]* A[k +ii];
+            A[j +ii] = temp/(dd[i]- R[j + j*nc]);
         }
 	ii += nc;
     }
-
+    
     /*
     ** Solve for A-inverse, which is also upper triangular. The diagonal
     **  of A and the diagonal of A-inverse are both 1.  At the same time 
@@ -287,7 +285,7 @@ SEXP cdecomp(SEXP R2, SEXP time2) {
     **    0*A[1,3] + U[2,2]A[2,3] + U[2,3]A[3,3] + U[2,4] 0     = 0
     **    0*A[1,4] + U[2,2]A[2,4] + U[2,3]A[3,4] + U[2,4]A[4,4] = 0
     */
-
+    
     ii =0; /* contains i * nc */
     for (i=0; i<nc; i++) ediag[i] = exp(time* dd[i]);
     for (i=0; i<nc; i++) { 
@@ -298,7 +296,7 @@ SEXP cdecomp(SEXP R2, SEXP time2) {
 	    for (k=j+1; k<=i; k++) temp += A[j + k*nc]* Ainv[k +ii];
 	    Ainv[j +ii] = -temp;
 	}
-
+	
         /* column i of P */
 	P[i + ii] = ediag[i];
         for (j=0; j<i; j++) {
@@ -306,7 +304,7 @@ SEXP cdecomp(SEXP R2, SEXP time2) {
             for (k=j; k<nc; k++) temp += A[j + k*nc] * Ainv[k+ii] * ediag[k];
             P[j+ii] = temp;
         }
-
+        
 	/* alternate computations for row i of P, does not use Ainv*/
 	/*P[i +ii] = ediag[i];
 	  for (j=i+1; j<nc; j++) { 
@@ -365,7 +363,7 @@ derivative <- function(rmat, time, dR, setup, eps=1e-8) {
     else dlist <- .Call(Ccdecomp, rmat[setup, setup], time)
     ncoef <- dim(dR)[3]
     nstate <- nrow(rmat)
-
+    
     dmat <- array(0.0, dim=c(nstate, nstate, ncoef))
     vtemp <- outer(dlist$d, dlist$d,
                    function(a, b) {
@@ -379,14 +377,14 @@ derivative <- function(rmat, time, dR, setup, eps=1e-8) {
         dmat[,,i] <- dlist$A %*% V %*% dlist$Ainv
     }
     dlist$dmat <- dmat
-
+    
     # undo the reordering, if needed
     if (setup[1] >0) {
         indx <- order(setup)
         dlist <- list(P = dlist$P[indx, indx],
                       dmat = apply(dmat,1:2, function(x) x[indx, indx]))
     }
-
+                      
     dlist
 }
 @ 

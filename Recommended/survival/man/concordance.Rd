@@ -55,13 +55,13 @@ concordance(object, \ldots)
 
   \item{\ldots}{multiple fitted models are allowed.  Only applicable if
     \code{object} is a model object.}
-
+  
   \item{newdata}{optional, a new data frame in which to evaluate (but
     not refit) the models}
-
+  
   \item{cluster}{optional grouping vector for calculating the robust
     variance}
-
+  
   \item{ymin, ymax}{compute the concordance over the restricted range
      ymin <= y <= ymax.  (For survival data this is a time range.)
   }
@@ -98,10 +98,13 @@ concordance(object, \ldots)
   For uncensored data each unique response value is compared to all
   those which are larger.
 
-  Using the default value for \code{timewt}, this gives the area
+  Using the default value for \code{timewt} gives the area
   under the receiver operating curve (AUC) for a binary response,
-  Harrell's c-statistic when the response is a survival time,
   and (d+1)/2 when y is continuous, where d is Somers' d.
+  For a survival time, \code{timewt} of n gives Harrell's c-statistic,
+  which is closely related to the Gehan-Wilcoxon test,
+  S corresponds to the Peto-Wilcoxon, n/G2 is the weighted advocated
+  by Umo, and S/G the weighting proposed by Schemper.
 
   When the number of strata is very large, such as in a conditional
   logistic regression for instance (\code{clogit} function), a much
@@ -136,7 +139,7 @@ concordance(object, \ldots)
      proportional hazards model information matrix).
      A weighted mean of the ranks equals Somer's d.}
  }
-
+  
 \author{Terry Therneau}
 \seealso{\code{\link{coxph}}}
 \examples{

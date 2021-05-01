@@ -961,7 +961,7 @@ inRbuildignore <- function(files, pkgdir) {
             do_exit(1L)
         }
 	if(is.na(intname <- desc["Package"]) || !length(intname) ||
-	   !nchar(intname)) {
+	   !nzchar(intname)) {
 	    errorLog(Log, gettext("invalid 'Package' field", domain = "R-tools")); do_exit(1L)
 	}
         ## make a copy, cd to parent of copy

@@ -49,7 +49,7 @@ function(file, encoding = "unknown")
     }
 
     Rd_title <- .Rd_get_title(Rd)
-    if(!nchar(Rd_title)) {
+    if(!nzchar(Rd_title)) {
         msg <-
             c(gettextf("missing/empty %s field in '%s'", "\\title", description, domain = "R-tools"),
               gettextf("Rd files must have a non-empty %s.", "\\title", domain = "R-tools"),

@@ -57,7 +57,7 @@ print.coxph <-
             }       
         }
 
-        cat(gettext(" States: ", domain = "R-survival"), paste(paste(seq(along=x$states), x$states, sep='= '), 
+        cat(gettext(" States: ", domain = "R-survival"), paste(paste(seq(along.with=x$states), x$states, sep='= '), 
                                collapse=", "), '\n', sep = "")
         # cat(" States: ", paste(x$states, collapse=", "), '\n')
         if (FALSE) { # alternate forms, still deciding which I like

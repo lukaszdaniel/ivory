@@ -26,11 +26,11 @@ residuals.survfit <- function(object, times,
 survresid.fit <- function(object, times, 
                               type= "pstate",
                               collapse, weighted=FALSE, method=1) {
-
+    
     survfitms <- inherits(object, "survfitms")
     coxsurv <- inherits(object, "survfitcox")
     timefix <- (is.null(object$timefix) || object$timefix)
-
+    
     start.time <- object$start.time
     if (is.null(start.time)) start.time <- min(c(0, object$time))
 
@@ -183,7 +183,7 @@ survresid.fit <- function(object, times,
         if (any(duplicated(temp)))
             stop("same id appears in multiple curves, cannot collapse")
     }
-
+    
     timelab <- signif(times, 3)  # used for dimnames
     # What type of survival curve?
     if (!coxsurv) {
@@ -242,7 +242,7 @@ survresid.fit <- function(object, times,
 }
 rsurvpart1 <- function(Y, X, casewt, times,
          type, stype, ctype, fit) {
-
+     
     ntime <- length(times)
     etime <- (fit$n.event >0)
     ny <- ncol(Y)
@@ -265,7 +265,7 @@ rsurvpart1 <- function(Y, X, casewt, times,
         })
     }
     ff <- unlist(fitrow) 
-
+ 
     # for each time x, the index of the last death time which is <=x.
     #  0 if x is before the first death time in the fit object.
     #  The result is an index to the survival curve
@@ -274,7 +274,7 @@ rsurvpart1 <- function(Y, X, casewt, times,
         i2 <- findInterval(x, dtime, left.open=FALSE)
         c(0, index)[i2 +1]
     }
-
+     
     # output matrix D will have one row per observation, one col for each
     #  reporting time. tindex and yindex have the same dimension as D.
     # tindex points to the last death time in fit which
@@ -309,7 +309,7 @@ rsurvpart1 <- function(Y, X, casewt, times,
         # no subtractions for report times before subject's entry
         startindex <- pmin(startindex, tindex) 
     }
-
+    
     # Now do the work
     if (type=="cumhaz" || stype==2) {  # result based on hazards
         if (ctype==1) {
@@ -380,7 +380,7 @@ rsurvpart1 <- function(Y, X, casewt, times,
             if (any(casewt != casewt[1])) {
                 # Have to reconstruct the number of obs with an event, the curve only
                 # contains the weighted sum
-                nevent <- unlist(lapply(seq(along=levels(X)), function(i) {
+                nevent <- unlist(lapply(seq(along.with=levels(X)), function(i) {
                     keep <- which(as.numeric(X) ==i)
                     counts <- table(Y[keep, ny-1], status)
                     as.vector(counts[, ncol(counts)])
@@ -531,7 +531,7 @@ rsurvpart2 <- function(Y, X, casewt, istate, times, cluster, type, fit,
     ny <- ncol(Y)
     ntime <- length(times)
     nstate <- length(fit$states)
-
+    
     # ensure that Y, istate, and fit all use the same set of states
     states <- fit$states
     if (!identical(attr(Y, "states"), fit$states)) {
@@ -623,7 +623,7 @@ rsurvpart2 <- function(Y, X, casewt, istate, times, cluster, type, fit,
         i2 <- findInterval(x, dtime, left.open=FALSE)
         c(0, index)[i2 +1]
     }
-
+     
 
     if (type== "cumhaz") {
         # output matrix D will have one row per observation, one col for each
@@ -678,7 +678,7 @@ rsurvpart2 <- function(Y, X, casewt, istate, times, cluster, type, fit,
             add1 <- (yindex <= tindex & rep(e2, ntime))
             lsum <- unlist(lapply(fitrow, function(i) 
                      cumsum(fit$n.event[i,k]/fit$n.risk[i,k]^2)))
-
+            
             term1 <- c(0, 1/fit$n.risk[ff,k])[ifelse(add1, 1+yindex, 1)]
             term2 <- c(0, lsum)[1+pmin(yindex, tindex)]
             if (ny==3) term3 <- c(0, lsum)[1 + startindex]
@@ -781,7 +781,7 @@ rsurvpart2 <- function(Y, X, casewt, istate, times, cluster, type, fit,
             to   <- Y[transition, ny]   # to this state
             nrisk <- fit$n.risk[cbind(yindex[transition], from)]  # number at risk
             wt <- casewt[transition]
-            for (i in seq(along=from)) {
+            for (i in seq(along.with =from)) {
                 j <- c(from[i], to[i])
                 haz <- wt[i]/nrisk[i]
                 cmat[from[i], j, i2[i]] <- cmat[from[i], j, i2[i]] + c(-haz, haz)

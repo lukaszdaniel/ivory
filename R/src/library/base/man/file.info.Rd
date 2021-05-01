@@ -1,6 +1,6 @@
 % File src/library/base/man/file.info.Rd
 % Part of the R package, https://www.R-project.org
-% Copyright 1995-2019 R Core Team
+% Copyright 1995-2021 R Core Team
 % Distributed under GPL 2 or later
 
 \name{file.info}
@@ -36,9 +36,9 @@ file.size(\dots)
   digits summarizing the permissions for the file owner, the owner's
   group and for anyone respectively.  Each digit is the logical
   \emph{or} of read (4), write (2) and execute/search (1) permissions.
-
+  
   See \link{files} for how file paths with marked encodings are interpreted.
-
+  
 #ifdef unix
   On most systems symbolic links are followed, so information is given
   about the file to which the link points rather than about the link.
@@ -64,7 +64,7 @@ file.size(\dots)
   \item{isdir}{logical: Is the file a directory?}
   \item{mode}{integer of class \code{"octmode"}.  The file permissions,
     printed in octal, for example \code{644}.}
-  \item{mtime, ctime, atime}{integer of class \code{"POSIXct"}:
+  \item{mtime, ctime, atime}{object of class \code{"POSIXct"}:
     file modification, \sQuote{last status change} and last access times.}
 #ifdef unix
   \item{uid}{integer: the user ID of the file's owner.}
@@ -85,7 +85,7 @@ file.size(\dots)
   returned: as these can all be found from a single C system call this
   can be faster.  (However, properly configured systems will use a
   \sQuote{name service cache daemon} to speed up the name lookups.)
-
+  
   Entries for non-existent or non-readable files will be \code{NA}.
 #ifdef unix
   The \code{uid}, \code{gid}, \code{uname} and \code{grname} columns
@@ -99,20 +99,23 @@ file.size(\dots)
   systems).  What is meant by \sQuote{file access} and hence the
   \sQuote{last access time} is system-dependent.
 
-  The times are reported to an accuracy of seconds, and perhaps more on
-  some systems.  However, many file systems only record times in
-  seconds, and some (e.g., modification time on FAT systems) are recorded
-  in increments of 2 or more seconds.
-
+  The resolution of the file times depends on both the OS and the type
+  of the file system.  Modern file systems typically record times to an
+  accuracy of a microsecond or better: notable exceptions are HFS+ on
+  macOS (recorded in seconds) and modification time on older FAT systems
+  (recorded in increments of 2 seconds).  Note that \code{"POSIXct"}
+  times are by default printed in whole seconds: to change that see
+  \code{\link{strftime}}.
+  
   \code{file.mode}, \code{file.mtime} and \code{file.size} are
   convenience wrappers returning just one of the columns.
 }
 #ifdef unix
 \note{
-  Some systems allow files of more than 2Gb to be created but
-  not accessed by the \code{stat} system call.  Such files will show up
+  Some (now old) systems allow files of more than 2Gb to be created but
+  not accessed by the \code{stat} system call.  Such files may show up
   as non-readable (and very likely not be readable by any of \R's input
-  functions) -- fortunately such file systems are becoming rare.
+  functions).
 }
 #endif
 

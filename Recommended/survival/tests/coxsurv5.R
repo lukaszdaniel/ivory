@@ -10,7 +10,7 @@ coxhaz <- function(y, id, risk, wt, expm=TRUE) {
 
     n <- nrow(y)
     if (missing(id) || length(id) !=n) stop("invalid id")
-
+     
     if (missing(wt)) wt <- rep(1.0, n)
     else if (length(wt) !=n || any(wt <=0)) stop("invalid wt")
 
@@ -61,7 +61,7 @@ coxhaz <- function(y, id, risk, wt, expm=TRUE) {
 
     haz <- nevent/ifelse(wtrisk==0, 1, wtrisk)   # avoid 0/0
     chaz<- apply(haz, 2, cumsum)
-
+    
     # compute the probability in state, with p(0)= 1,0, ..
     pstate <- matrix(0, ntime+1, nstate)
     pstate[1,1] <- 1
@@ -142,7 +142,7 @@ if (FALSE) {
     event <- subset(mtest, state!='censor')
     text(event$t2, event$id+.2, as.character(event$state))
 }
-
+         
 
 # slight change, add a few censored subjects
 #  all the events happen on even numbered days
@@ -180,7 +180,7 @@ chaz2['6', 3] <- 1/5; chaz2['10', 3] <- 1/5
 chaz2['18',4:5] <- 1
 chaz2['16', 6] <- 1/2
 chaz2 <- apply(chaz2, 2, cumsum)
-
+ 
 
 cox3 <- coxph(Surv(t1, t2, state) ~x, id=id, test2, iter=0)  # no weights
 csurv3 <- survfit(cox3, newdata=data.frame(x=0:1))
@@ -200,3 +200,11 @@ check4 <- with(test2, coxhaz(Surv(t1, t2, state), id=id, risk=mrisk4))
 aeq(check4$cumhaz, csurv4$cumhaz[indx3,1,])
 aeq(check4$pstate, csurv4$pstate[indx3,1,])
 aeq(csurv4$cumhaz[,2,], csurv4$cumhaz[,1,] %*% diag(1:6))
+
+
+# Check the stype=1 option
+csurv4b <- survfit(cox4, newdata= data.frame(x=0:1), stype=1)
+check4b <- with(test2, coxhaz(Surv(t1, t2, state), id=id, risk=mrisk4, 
+                              expm=FALSE))
+aeq(check4b$cumhaz, csurv4b$cumhaz[indx3,1,])
+aeq(check4b$pstate, csurv4b$pstate[indx3,1,])
