@@ -31,6 +31,8 @@
 #include <CXXR/Frame.hpp>
 #include <CXXR/FunctionBase.hpp>
 #include <CXXR/Promise.hpp>
+#include <CXXR/Evaluator.hpp>
+#include <CXXR/GCStackRoot.hpp>
 #include <Localization.h>
 #include <R_ext/Error.h>
 
@@ -39,12 +41,15 @@ using namespace CXXR;
 
 namespace CXXR
 {
+    Frame::monitor Frame::s_read_monitor = nullptr;
+    Frame::monitor Frame::s_write_monitor = nullptr;
+
     // ***** Class Frame::Binding *****
 
     PairList *Frame::Binding::asPairList(PairList *tail) const
     {
         PairList *ans = new PairList(m_value, tail, const_cast<Symbol *>(symbol()));
-        SET_MISSING(ans, missing());
+        SET_MISSING(ans, origin());
         if (isActive())
             SET_ACTIVE_BINDING_BIT(ans);
         if (isLocked())
@@ -53,19 +58,175 @@ namespace CXXR
         return ans;
     }
 
-    // Frame::Binding::assign() is defined in envir.cpp (for the time being).
+    pair<RObject *, bool> Frame::Binding::forcedValueSlow() const
+    {
+        bool promise_forced = false;
+        RObject *val = m_value;
+
+        if (val && val->sexptype() == PROMSXP)
+        {
+            Promise *prom = static_cast<Promise *>(val);
+            if (!prom->evaluated())
+            {
+                frame()->monitorRead(*this);
+                promise_forced = true;
+            }
+            val = Evaluator::evaluate(prom, nullptr);
+        }
+        return make_pair(val, promise_forced);
+    }
+
+    // We want to be able to determine quickly if a symbol is *not*
+    // defined in an frame, so that we can carry on working up the
+    // chain of enclosing frames.  On average the number of tests
+    // needed to determine that a symbol is not present is 1 + 2L, where L
+    // is the load factor.  So we keep the load factor small:
+    namespace
+    {
+        constexpr double maximum_load_factor = 0.5;
+    }
+
+    Frame::Frame(size_t initial_capacity)
+        : m_cache_count(0), m_locked(false), m_no_special_symbols(true), m_read_monitored(false), m_write_monitored(false), m_map(nullptr)
+    {
+        m_map = new map(ceil(initial_capacity / maximum_load_factor));
+        m_map->max_load_factor(maximum_load_factor);
+    }
 
     void Frame::Binding::fromPairList(PairList *pl)
     {
         const RObject *tag = pl->tag();
         if (tag && tag != m_symbol)
             Rf_error(_("internal error in %s"), "Frame::Binding::fromPairList()");
+        Origin pl_origin = Origin(pl->m_missing);
         if (pl->m_active_binding)
-            setFunction(SEXP_downcast<FunctionBase *>(pl->car()));
+            setFunction(SEXP_downcast<FunctionBase *>(pl->car()), pl_origin);
         else
-            setValue(pl->car());
-        setMissing(pl->m_missing);
+            setValue(pl->car(), pl_origin);
         setLocking(pl->m_binding_locked);
+    }
+
+    PairList *Frame::asPairList() const
+    {
+        GCStackRoot<PairList> ans(nullptr);
+        visitBindings([&](const Binding *binding) {
+            ans = binding->asPairList(ans);
+        });
+        return ans;
+    }
+
+    void Frame::Binding::handleSetValueError() const
+    {
+        if (isLocked())
+            Rf_error(_("cannot change value of locked binding for '%s'"), symbol()->name()->c_str());
+        if (isActive())
+            Rf_error(_("internal error: use %s for active bindings"), "setFunction()");
+    }
+
+    Frame::Binding *Frame::binding(const Symbol *symbol)
+    {
+        if (symbol->isSpecialSymbol() && m_no_special_symbols)
+            return nullptr;
+        return v_binding(symbol);
+    }
+
+    const Frame::Binding *Frame::binding(const Symbol *symbol) const
+    {
+        return const_cast<Frame *>(this)->binding(symbol);
+    }
+
+    // NB: this is always a normal frame, never an execution frame.
+    Frame::Frame(const Frame &source)
+        : m_cache_count(0), m_locked(source.m_locked),
+          m_no_special_symbols(source.m_no_special_symbols),
+          m_read_monitored(false), m_write_monitored(false), m_map(nullptr)
+    {
+        m_map = new map(source.m_map->size());
+        m_map->max_load_factor(source.m_map->max_load_factor());
+        importBindings(&source);
+        if (source.isLocked())
+            lock(false);
+    }
+
+    void Frame::clear()
+    {
+        statusChanged(nullptr);
+        m_map->clear();
+        m_no_special_symbols = true;
+    }
+
+    bool Frame::erase(const Symbol *symbol)
+    {
+        if (isLocked())
+            Rf_error(_("cannot remove bindings from a locked frame"));
+        return m_map->erase(symbol);
+    }
+
+    void Frame::enableReadMonitoring(bool on) const
+    {
+        if (on && !s_read_monitor)
+            Rf_error("Internal error: Frame::s_read_monitor not set");
+        m_read_monitored = on;
+    }
+
+    void Frame::enableWriteMonitoring(bool on) const
+    {
+        if (on && !s_write_monitor)
+            Rf_error("Internal error: Frame::s_write_monitor not set");
+        m_write_monitored = on;
+    }
+
+    void Frame::lockBindings()
+    {
+        modifyBindings([](Binding *binding) { binding->setLocking(true); });
+    }
+
+    Frame::Binding *Frame::obtainBinding(const Symbol *symbol)
+    {
+        Frame::Binding *binding = nullptr;
+        if (isLocked())
+        {
+            // If the frame is locked, we can only return pre-existing bindings.
+            Frame::Binding *binding = Frame::binding(symbol);
+            if (!binding)
+            {
+                Rf_error(_("cannot add bindings to a locked frame"));
+            }
+            return binding;
+        }
+
+        // If the binding exists, return that.
+        binding = Frame::binding(symbol);
+        if (binding)
+            return binding;
+
+        // If all else fails, go to the m_map.
+        if (!binding)
+        {
+            if (!m_map)
+            {
+                m_map = new map();
+            }
+            binding = &((*m_map)[symbol]);
+        }
+
+        if (!binding->frame())
+        {
+            initializeBinding(binding, symbol);
+        }
+        return binding;
+    }
+
+    std::size_t Frame::size() const
+    {
+        return m_map->size();
+    }
+
+    void Frame::visitReferents(const_visitor *v) const
+    {
+        visitBindings([=](const Binding *binding) {
+            binding->visitReferents(v);
+        });
     }
 
     void Frame::Binding::initialize(Frame *frame, const Symbol *sym)
@@ -78,10 +239,16 @@ namespace CXXR
         m_symbol.retarget(frame, sym);
     }
 
-    void Frame::Binding::setFunction(FunctionBase *function)
+    Frame::~Frame()
+    {
+        statusChanged(nullptr);
+        delete m_map;
+    }
+
+    void Frame::Binding::setFunction(FunctionBase *function, Origin origin)
     {
         // See if binding already has a non-null value:
-        if (m_value)
+        if (m_value != Symbol::missingArgument())
         {
             if (!isActive())
                 Rf_error(_("symbol already has a regular binding"));
@@ -93,24 +260,157 @@ namespace CXXR
         m_frame->monitorWrite(*this);
     }
 
+    Frame *Frame::clone() const
+    {
+        return new Frame(*this);
+    }
+
+    // Frame::Binding::assignSlow() is defined in envir.cpp (for the time being).
+    void Frame::Binding::assign(RObject *new_value, Origin origin)
+    {
+        if (isLocked() || isActive())
+        {
+            assignSlow(new_value, origin);
+        }
+        else
+        {
+            m_origin = origin;
+            m_value.retarget(m_frame, new_value);
+            m_frame->monitorWrite(*this);
+        }
+    }
+
+    RObject *Frame::Binding::forcedValue() const
+    {
+        if (m_value && m_value->sexptype() == PROMSXP)
+        {
+            return forcedValueSlow().first;
+        }
+        return m_value;
+    }
+
+    std::pair<RObject *, bool> Frame::Binding::forcedValue2() const
+    {
+        if (m_value && m_value->sexptype() == PROMSXP)
+        {
+            return forcedValueSlow();
+        }
+        return std::make_pair(m_value, false);
+    }
+
     void Frame::Binding::setMissing(short int missingval)
     {
         if (isLocked())
             Rf_error(_("cannot change missing status of a locked binding"));
-        m_missing = missingval;
+        if (!(missingval == 0 || missingval == 1 || missingval == 2))
+            Rf_error(_("incorrect missing status supplied"));
+        m_origin = Origin(missingval);
     }
 
-    void Frame::Binding::setValue(RObject *new_value)
+    void Frame::Binding::setValue(RObject *new_value, Origin origin, bool quiet)
+    {
+        if (isLocked() || isActive())
+        {
+            handleSetValueError();
+        }
+        m_value.retarget(m_frame, new_value);
+        m_origin = origin;
+        if (!quiet)
+            m_frame->monitorWrite(*this);
+    }
+
+    vector<const Symbol *> Frame::symbols(bool include_dotsymbols,
+                                          bool sorted) const
+    {
+        vector<const Symbol *> ans;
+        visitBindings([&](const Binding *binding) {
+            const Symbol *symbol = binding->symbol();
+            if (include_dotsymbols || !isDotSymbol(symbol))
+                ans.push_back(symbol);
+        });
+        if (sorted)
+        {
+            std::sort(ans.begin(), ans.end(),
+                      [](const Symbol *x, const Symbol *y) { return String::Comparator()(x->name(), y->name()); });
+        }
+
+        return ans;
+    }
+
+    // Frame::Binding::unforcedValue() is defined in envir.cpp (for the time being).
+    RObject *Frame::Binding::value() const
+    {
+        return unforcedValue();
+    }
+
+    Frame::Binding *Frame::v_binding(const Symbol *symbol)
+    {
+        auto location = m_map->find(symbol);
+        if (location != m_map->end())
+        {
+            return &(location->second);
+        }
+        return nullptr;
+    }
+
+    void Frame::flush(const Symbol *sym)
+    {
+        // Environment::flushFromSearchPathCache(sym);
+    }
+
+    void Frame::initializeBinding(Frame::Binding *binding, const Symbol *symbol)
+    {
+        assert(!isLocked());
+        binding->initialize(this, symbol);
+        statusChanged(symbol);
+        if (symbol->isSpecialSymbol())
+        {
+            m_no_special_symbols = false;
+        }
+    }
+
+    void Frame::initializeBindingIfUnlocked(Frame::Binding *binding, const Symbol *symbol)
     {
         if (isLocked())
-            Rf_error(_("cannot change value of locked binding for '%s'"), symbol()->name()->c_str());
-        if (isActive())
-            Rf_error(_("internal error: use %s for active bindings"), "setFunction()");
-        m_value.retarget(m_frame, new_value);
-        m_frame->monitorWrite(*this);
+        {
+            Rf_error(_("cannot add bindings to a locked frame"));
+        }
+        initializeBinding(binding, symbol);
     }
 
-    // Frame::Binding::value() is defined in envir.cpp (for the time being).
+    void Frame::importBinding(const Binding *binding_to_import, bool quiet)
+    {
+        if (!binding_to_import)
+            return;
+        Binding *new_binding = obtainBinding(binding_to_import->symbol());
+        *new_binding = *binding_to_import;
+        new_binding->m_frame = this;
+        if (!quiet)
+            monitorWrite(*new_binding);
+    }
+
+    void Frame::importBindings(const Frame *frame, bool quiet)
+    {
+        frame->visitBindings([=](const Binding *binding) {
+            importBinding(binding, quiet);
+        });
+    }
+
+    void Frame::visitBindings(std::function<void(const Binding *)> f) const
+    {
+        for (const auto &entry : *m_map)
+        {
+            f(&(entry.second));
+        }
+    }
+
+    void Frame::modifyBindings(std::function<void(Binding *)> f)
+    {
+        for (auto &entry : *m_map)
+        {
+            f(&(entry.second));
+        }
+    }
 
     void Frame::Binding::visitReferents(const_visitor *v) const
     {
@@ -124,12 +424,59 @@ namespace CXXR
     {
         for (PairList *pl = bindings; pl != nullptr; pl = pl->tail())
         {
-            RObject *tag = pl->tag();
-            Symbol *symbol = dynamic_cast<Symbol *>(tag);
+            const RObject *tag = pl->tag();
+            const Symbol *symbol = dynamic_cast<const Symbol *>(tag);
             if (!symbol)
                 Rf_error(_("list used to set frame bindings must have symbols as tags throughout"));
             Frame::Binding *bdg = frame->obtainBinding(symbol);
             bdg->fromPairList(pl);
         }
+    }
+
+    bool isMissingArgument(const Symbol *sym, Frame *frame)
+    {
+#if CXXR_TRUE
+        std::cerr << "isMissingArgument(...) not yet implemented" << std::endl;
+        abort();
+        return false;
+#else
+        RObject *rawval;
+        if (sym->isDotDotSymbol())
+        {
+            unsigned int ddv = sym->dotDotIndex();
+            Frame::Binding *bdg = frame->binding(SEXP_downcast<Symbol *>(R_DotsSymbol));
+            if (!bdg)
+                return false; // This is what CR does.  Is it really right?
+            ConsCell *cc = SEXP_downcast<ConsCell *>(bdg->rawValue());
+            while (cc && ddv > 1)
+            {
+                cc = cc->tail();
+                --ddv;
+            }
+            if (!cc)
+                return true;
+            rawval = cc->car();
+        }
+        else
+        {
+            // Not a ..n symbol:
+            if (sym == Symbol::missingArgument())
+                return true;
+            Frame::Binding *bdg = frame->binding(sym);
+            if (!bdg)
+                return false;
+            rawval = bdg->rawValue();
+            if (bdg->origin() == Frame::Binding::MISSING || rawval == Symbol::missingArgument())
+                return true;
+            if (bdg->isActive())
+                return false;
+        }
+        if (rawval && rawval->sexptype() == PROMSXP)
+        {
+            Promise *prom = static_cast<Promise *>(rawval);
+            return prom->isMissingSymbol();
+        }
+        return false;
+#endif
     }
 } // namespace CXXR

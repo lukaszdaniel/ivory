@@ -33,6 +33,7 @@
 
 #include <unordered_map>
 #include <CXXR/Allocator.hpp>
+#include <CXXR/FrameDescriptor.hpp>
 #include <CXXR/GCNode.hpp>
 #include <CXXR/Symbol.hpp>
 
@@ -70,17 +71,41 @@ namespace CXXR
     class Binding
     {
     public:
+      /** @brief How the binding arrived at its current setting.
+       */
+      enum Origin
+      {
+        EXPLICIT = 0, /**< The Binding was specified
+                       * explicitly, e.g. by supplying an
+                       * actual argument to a function, or by
+                       * direct assignment into the relevant
+                       * Environment.
+                       */
+        MISSING,      /**< The Binding corresponds to a formal
+                       * argument of a function, for which no
+                       * actual value was supplied, and which
+                       * has no default value.  This is the
+                       * default for newly created Binding
+                       * objects.
+                       */
+        DEFAULTED     /**< The Binding represents the default
+                       * value of the formal argument of a
+                       * function call, no actual argument
+                       * having been supplied.
+                       */
+      };
+
       /** @brief Default constructor
        *
        * initialize() must be called before the Binding object
        * can be used.
        */
       Binding()
-          : m_frame(nullptr), m_missing(0),
-            m_active(false), m_locked(false)
+          : m_frame(nullptr), m_origin(MISSING), m_active(false),
+            m_locked(false)
       {
         m_symbol = nullptr;
-        m_value = nullptr;
+        m_value = Symbol::missingArgument();
       }
 
       /** @brief Represent this Binding as a PairList element.
@@ -114,8 +139,57 @@ namespace CXXR
        *
        * @param new_value Pointer (possibly null) to the new
        *          value.  See function description.
+       *
+       * @param origin Origin of the newly-assigned value.
        */
-      void assign(RObject *new_value);
+      void assign(RObject *new_value, Origin origin = EXPLICIT);
+
+      /** @brief Look up bound value, forcing Promises if
+       * necessary.
+       *
+       * If the value of this Binding is anything other than a
+       * Promise, this function returns a pointer to that bound
+       * value.  However, if the value is a Promise, the
+       * function forces the Promise if necessary, and returns a
+       * pointer to the value of the Promise.
+       *
+       * @return A pointer - possibly null - to the bound value, or the
+       * Promise value if the bound value is a Promise.
+       *
+       * @note If this Binding's frame has a read monitor set,
+       * the function will call it only in the event that a
+       * Promise is forced (and in that event the evaluation of
+       * the Promise may trigger other read and write monitors).
+       *
+       * @note It is conceivable that forcing a Promise will
+       * result in the destruction of this Binding object.
+       */
+      RObject *forcedValue() const;
+
+      /** @brief Look up bound value, forcing Promises if
+       * necessary.
+       *
+       * If the value of this Binding is anything other than a
+       * Promise, this function returns a pointer to that bound
+       * value.  However, if the value is a Promise, the
+       * function forces the Promise if necessary, and returns a
+       * pointer to the value of the Promise.
+       *
+       * @return The first element of the returned pair is a
+       * pointer - possibly null - to the bound value, or the
+       * Promise value if the bound value is a Promise.  The
+       * second element is true iff the function call resulted
+       * in the forcing of a Promise.
+       *
+       * @note If this Binding's frame has a read monitor set,
+       * the function will call it only in the event that a
+       * Promise is forced (and in that event the evaluation of
+       * the Promise may trigger other read and write monitors).
+       *
+       * @note It is conceivable that forcing a Promise will
+       * result in the destruction of this Binding object.
+       */
+      std::pair<RObject *, bool> forcedValue2() const;
 
       /** @brief Get pointer to Frame.
        *
@@ -180,6 +254,15 @@ namespace CXXR
         return m_locked;
       }
 
+      /** @brief Origin of this Binding.
+       *
+       * @return the Origin of this Binding.
+       */
+      Origin origin() const
+      {
+        return Origin(m_origin);
+      }
+
       /** @brief Binding's missing status.
        *
        * @return the 'missing' status of this Binding.  0 means
@@ -191,8 +274,18 @@ namespace CXXR
        */
       short int missing() const
       {
-        return m_missing;
+        return origin();
       }
+
+      /** @brief Set the 'missing' status of this Binding.
+       *
+       * Raises an error if the Binding is locked.
+       *
+       * @param missingval The required 'missing' status.  Refer
+       *          to the documentation of missing() for the
+       *          possible values.
+       */
+      void setMissing(short int missingval);
 
       /** @brief Get raw value bound to the Symbol.
        *
@@ -206,6 +299,8 @@ namespace CXXR
        */
       RObject *rawValue() const
       {
+        if (m_frame)
+          m_frame->monitorRead(*this);
         return m_value;
       }
 
@@ -224,8 +319,10 @@ namespace CXXR
        *
        * @param function The function used to implement the
        *          active binding.
+       *
+       * @param origin Origin now to be associated with this Binding.
        */
-      void setFunction(FunctionBase *function);
+      void setFunction(FunctionBase *function, Origin origin = EXPLICIT);
 
       /** @brief Lock/unlock this Binding.
        *
@@ -236,16 +333,6 @@ namespace CXXR
         m_locked = on;
       }
 
-      /** @brief Set the 'missing' status of this Binding.
-       *
-       * Raises an error if the Binding is locked.
-       *
-       * @param missingval The required 'missing' status.  Refer
-       *          to the documentation of missing() for the
-       *          possible values.
-       */
-      void setMissing(short int missingval);
-
       /** @brief Define the object to which this Binding's
        *         Symbol is bound.
        *
@@ -254,8 +341,12 @@ namespace CXXR
        * @param new_value Pointer (possibly null) to the RObject
        *          to which this Binding's Symbol is now to be
        *          bound.
+       *
+       * @param origin Origin of the newly assigned value.
+       *
+       * @param quiet Don't trigger monitor.
        */
-      void setValue(RObject *new_value);
+      void setValue(RObject *new_value, Origin origin = EXPLICIT, bool quiet = false);
 
       /** @brief Bound symbol.
        *
@@ -272,9 +363,12 @@ namespace CXXR
        * function and returns the result rather than returning a
        * pointer to the encapsulated function itself.
        *
+       * Does not force promises.
+       *
        * @return The value bound to a Symbol by this Binding.
        */
       RObject *value() const;
+      RObject *unforcedValue() const;
 
       /** @brief Auxiliary function to Frame::visitReferents().
        *
@@ -288,20 +382,75 @@ namespace CXXR
       void visitReferents(const_visitor *v) const;
 
     private:
+      friend class Frame;
       Frame *m_frame;
       GCEdge<const Symbol> m_symbol;
       GCEdge<> m_value;
-      short int m_missing;
+      unsigned char m_origin;
       bool m_active;
       bool m_locked;
-    };
 
+      std::pair<RObject *, bool> forcedValueSlow() const;
+      void assignSlow(RObject *new_value, Origin origin);
+      void handleSetValueError() const;
+
+      /** @brief Has this binding been set to a value?
+       *
+       * In this case, R_MissingValue etc all count as being 'set'.
+       * Unset bindings are a private implementation detail of Frame and
+       * should never escape from the Frame object.
+       *
+       * @return true iff this Binding has been set.
+       */
+      bool isSet() const
+      {
+        return m_frame != nullptr;
+      }
+
+      void unset()
+      {
+        // Matches the constructor.
+        m_frame = nullptr;
+        m_symbol = nullptr;
+        m_origin = MISSING;
+        m_active = false;
+        m_locked = false;
+        m_value = Symbol::missingArgument();
+      }
+    }; // Frame::Binding
+
+    /** @brief Function type for read and write monitors.
+     *
+     * See the documentation for setReadMonitor() and setWriteMonitor().
+     */
     typedef void (*monitor)(const Binding &);
 
-    Frame()
-        : m_locked(false), m_read_monitor(nullptr), m_write_monitor(nullptr)
-    {
-    }
+    /**
+     * @param initial_capacity A hint to the implementation that
+     *          the constructed Frame should be
+     *          configured to have capacity for at least \a
+     *          initial_capacity Bindings.  This does not impose an
+     *          upper limit on the capacity of the Frame,
+     *          but some reconfiguration (and consequent time
+     *          penalty) may occur if it is exceeded.
+     */
+    explicit Frame(size_t initial_capacity = 15);
+    // Why 15?  Because if the implementation uses a prime number
+    // hash table sizing policy, this will result in the
+    // allocation of a hash table array comprising 31 buckets.  On
+    // a 32-bit architecture, this will fit well into two 64-byte
+    // cache lines.
+
+    /** @brief Copy constructor.
+     *
+     * The copy will define the same mapping from Symbols to R
+     * objects as \a source; neither the R objects, nor of course
+     * the Symbols, are copied as part of the cloning.
+     *
+     * The copy will be locked if \a source is locked.  However,
+     * the copy will not have a read or write monitor.
+     */
+    Frame(const Frame &source);
 
     /** @brief Get contents as a PairList.
      *
@@ -318,7 +467,28 @@ namespace CXXR
      * to the returned PairList will have no effect on the
      * Frame itself.
      */
-    virtual PairList *asPairList() const = 0;
+    PairList *asPairList() const;
+
+    /** @brief Bind a Symbol to a specified value.
+     *
+     * @param symbol Non-null pointer to the Symbol to be bound or
+     *          rebound.
+     *
+     * @param value Pointer, possibly null, to the RObject to
+     *          which \a symbol is now to be bound.  Any previous
+     *          binding of \a symbol is overwritten.
+     *
+     * @param origin Origin of the newly bound value.
+     *
+     * @return Pointer to the resulting Binding.
+     */
+    Binding *bind(const Symbol *symbol, RObject *value,
+                  Frame::Binding::Origin origin = Frame::Binding::EXPLICIT)
+    {
+      Binding *bdg = obtainBinding(symbol);
+      bdg->setValue(value, origin);
+      return bdg;
+    }
 
     /** @brief Access binding of an already-defined Symbol.
      *
@@ -332,7 +502,7 @@ namespace CXXR
      * @return A pointer to the required binding, or a null
      * pointer if it was not found.
      */
-    virtual Binding *binding(const Symbol *symbol) = 0;
+    Binding *binding(const Symbol *symbol);
 
     /** @brief Access const binding of an already-defined Symbol.
      *
@@ -346,13 +516,85 @@ namespace CXXR
      * @return A pointer to the required binding, or a null
      * pointer if it was not found..
      */
-    virtual const Binding *binding(const Symbol *symbol) const = 0;
+    const Binding *binding(const Symbol *symbol) const;
+
+    /** @brief Call a function for all of a Frame object's Bindings.
+     */
+    void visitBindings(std::function<void(const Binding *)> f) const;
+
+    /** @brief Call a function for all of a Frame object's Bindings.
+     */
+    void modifyBindings(std::function<void(Binding *)> f);
 
     /** @brief Remove all symbols from the Frame.
      *
      * Raises an error if the Frame is locked.
      */
-    virtual void clear() = 0;
+    void clear();
+
+    /** @brief Return pointer to a copy of this Frame.
+     *
+     * This function creates a copy of this Frame, and returns a
+     * pointer to that copy.  The copy will define the same
+     * mapping from Symbols to R objects as this Frame; neither
+     * the R objects, nor of course the Symbols, are copied as
+     * part of the cloning.
+     *
+     * The created copy will be locked if this Frame is locked.
+     * However, it will not have a read or write monitor.
+     *
+     * @return a pointer to a clone of this Frame.
+     *
+     * @note Derived classes should exploit the covariant return
+     * type facility to return a pointer to the type of object
+     * being cloned.
+     */
+    Frame *clone() const;
+
+    /** @brief Enable monitored reading of Symbol values.
+     *
+     * This function determines whether the read monitor function
+     * set with setReadMonitor() will be called whenever a
+     * Symbol's value is read from a Binding within this Frame.
+     *
+     * In the case of an active Binding, the monitor is called
+     * whenever the encapsulated function is accessed: note that
+     * this includes calls to Binding::assign().
+     *
+     * @param on True if monitoring is be enabled (in which case a
+     *          read monitor must already have been set), false if
+     *          it is to be disabled.
+     *
+     * @note Whether or not monitoring is enabled is not
+     * considered to be part of the state of a Frame object, and
+     * hence this function is const.
+     */
+    void enableReadMonitoring(bool on) const;
+
+    /** @brief Enable monitored writing of Symbol values.
+     *
+     * This function determines whether the write monitor function
+     * set with setWriteMonitor() will be called whenever a
+     * Symbol's value is modified a Binding within this Frame.
+     *
+     * In the case of an active Binding, the monitor is called
+     * only when the encapsulated function is initially set or
+     * changed: in particular the monitor is \e not invoked by
+     * calls to Binding::assign().
+     *
+     * The monitor is not called when a Binding is newly created
+     * within a Frame (with the Symbol bound by default to a null
+     * pointer).
+     *
+     * @param on True if monitoring is be enabled (in which case a
+     *          write monitor must already have been set), false if
+     *          it is to be disabled.
+     *
+     * @note Whether or not monitoring is enabled is not
+     * considered to be part of the state of a Frame object, and
+     * hence this function is const.
+     */
+    void enableWriteMonitoring(bool on) const;
 
     /** @brief Remove the Binding (if any) of a Symbol.
      *
@@ -368,7 +610,7 @@ namespace CXXR
      * @return true iff the environment previously contained a
      * mapping for \a symbol.
      */
-    virtual bool erase(const Symbol *symbol) = 0;
+    bool erase(const Symbol *symbol);
 
     /** @brief Is the Frame locked?
      *
@@ -407,7 +649,7 @@ namespace CXXR
      *
      * It is permitted to apply this function to a locked Frame.
      */
-    virtual void lockBindings() = 0;
+    void lockBindings();
 
     /** @brief Get or create a Binding for a Symbol.
      *
@@ -424,17 +666,41 @@ namespace CXXR
      *
      * @return Pointer to the required Binding.
      */
-    virtual Binding *obtainBinding(const Symbol *symbol) = 0;
+    Binding *obtainBinding(const Symbol *symbol);
+
+    /** @brief Import a Binding from another Frame into this one.
+     *
+     * Inserts a binding with the same Symbol, value and metadata as the
+     * supplied binding into this frame.  Retains active bindings and does
+     * not force promises.
+     *
+     * @param binding The binding to copy into this frame.
+     *
+     * @param quiet Don't trigger monitor.
+     */
+    void importBinding(const Binding *binding, bool quiet = false);
+
+    /** @brief Import all the Bindings from another frame into this one.
+     *
+     * Inserts bindings with the same Symbol, value and metadata as those
+     * in the supplied frame.  Retains active bindings and does
+     * not force promises.
+     *
+     * @param frame The Frame to copy bindings from.
+     *
+     * @param quiet Don't trigger monitor.
+     */
+    void importBindings(const Frame *frame, bool quiet = false);
 
     /** @brief Define function to monitor reading of Symbol values.
      *
      * This function allows the user to define a function to be
      * called whenever a Symbol's value is read from a Binding
-     * within this Frame.
-     *
-     * In the case of an active Binding, the monitor is called
-     * whenever the encapsulated function is accessed: note that
-     * this includes calls to Binding::assign().
+     * within a Frame.  Even if such a function has been defined,
+     * the monitoring is off by default: it must be enabled for
+     * particular Frame objects by calling enableReadMonitoring().
+     * See the description of enableReadMonitoring() for further
+     * information.
      *
      * @param new_monitor Pointer, possibly null, to the new
      *          monitor function.  A null pointer signifies that
@@ -443,15 +709,11 @@ namespace CXXR
      *
      * @return Pointer, possibly null, to the monitor being
      * displaced by \a new_monitor.
-     *
-     * @note The presence or absence of a monitor is not
-     * considered to be part of the state of a Frame object, and
-     * hence this function is const.
      */
-    monitor setReadMonitor(monitor new_monitor) const
+    static monitor setReadMonitor(monitor new_monitor)
     {
-      monitor old = m_read_monitor;
-      m_read_monitor = new_monitor;
+      monitor old = s_read_monitor;
+      s_read_monitor = new_monitor;
       return old;
     }
 
@@ -459,16 +721,11 @@ namespace CXXR
      *
      * This function allows the user to define a function to be
      * called whenever a Symbol's value is modified in a Binding
-     * within this Frame.
-     *
-     * In the case of an active Binding, the monitor is called
-     * only when the encapsulated function is initially set or
-     * changed: in particular the monitor is \e not invoked by
-     * calls to Binding::assign().
-     *
-     * The monitor is not called when a Binding is newly created
-     * within a Frame (with the Symbol bound by default to a null
-     * pointer).
+     * within a Frame.  Even if such a function has been defined,
+     * the monitoring is off by default: it must be enabled for
+     * particular Frame objects by calling enableWriteMonitoring().
+     * See the description of enableWriteMonitoring() for further
+     * information.
      *
      * @param new_monitor Pointer, possibly null, to the new
      *          monitor function.  A null pointer signifies that
@@ -477,15 +734,11 @@ namespace CXXR
      *
      * @return Pointer, possibly null, to the monitor being
      * displaced by \a new_monitor.
-     *
-     * @note The presence or absence of a monitor is not
-     * considered to be part of the state of a Frame object, and
-     * hence this function is const.
      */
-    monitor setWriteMonitor(monitor new_monitor) const
+    static monitor setWriteMonitor(monitor new_monitor)
     {
-      monitor old = m_write_monitor;
-      m_write_monitor = new_monitor;
+      monitor old = s_write_monitor;
+      s_write_monitor = new_monitor;
       return old;
     }
 
@@ -494,37 +747,95 @@ namespace CXXR
      * @return the number of Symbols for which Bindings exist in
      * this Frame.
      */
-    virtual size_t size() const = 0;
+    size_t size() const;
 
-  protected:
-    // Declared protected to ensure that Frame objects are created
-    // only using 'new':
-    ~Frame() {}
+    /** @brief Symbols bound by this Frame.
+     *
+     * @param include_dotsymbols If false, any Symbol whose name
+     * begins with '.' will not be included in the result.
+     *
+     * @return A vector containing pointers to the Symbol objects
+     * bound by this Frame.
+     */
+    std::vector<const Symbol *> symbols(bool include_dotsymbols, bool sorted = false) const;
+
+    // Virtual function of GCNode:
+    void visitReferents(const_visitor *v) const override;
 
   private:
+    friend class Environment;
+
+    static monitor s_read_monitor;
+    static monitor s_write_monitor;
+    // Number of cached Environments of which this is the Frame.  Normally
+    // either 0 or 1.
+    unsigned char m_cache_count;
     bool m_locked;
-    mutable monitor m_read_monitor;
-    mutable monitor m_write_monitor;
+    bool m_no_special_symbols;
+    mutable bool m_read_monitored;
+    mutable bool m_write_monitored;
+
+    typedef std::unordered_map<const Symbol *, Binding,
+                               std::hash<const Symbol *>,
+                               std::equal_to<const Symbol *>,
+                               CXXR::Allocator<std::pair<const Symbol *,
+                                                         Binding>>>
+        map;
+    map *m_map;
+
+    // Declared private to ensure that Frame objects are created
+    // only using 'new':
+    ~Frame();
+
+    /** @brief Report change in the bound/unbound status of Symbol
+     *         objects.
+     *
+     * This function should be called when a Symbol that was not
+     * formerly bound within this Frame becomes bound, or <em>vice
+     * versa</em>.
+     */
+    void statusChanged(const Symbol *sym)
+    {
+      if (m_cache_count > 0)
+        flush(sym);
+    }
+
+    void initializeBinding(Binding *binding, const Symbol *symbol);
+    void initializeBindingIfUnlocked(Binding *binding, const Symbol *symbol);
 
     // Not (yet) implemented.  Declared to prevent
     // compiler-generated versions:
-    Frame(const Frame &);
     Frame &operator=(const Frame &);
 
     // Monitoring functions:
     friend class Binding;
 
+    void decCacheCount()
+    {
+      --m_cache_count;
+    }
+
+    // Flush symbol(s) from search list cache:
+    void flush(const Symbol *sym);
+
+    void incCacheCount()
+    {
+      ++m_cache_count;
+    }
+
     void monitorRead(const Binding &bdg) const
     {
-      if (m_read_monitor)
-        m_read_monitor(bdg);
+      if (m_read_monitored)
+        s_read_monitor(bdg);
     }
 
     void monitorWrite(const Binding &bdg) const
     {
-      if (m_write_monitor)
-        m_write_monitor(bdg);
+      if (m_write_monitored)
+        s_write_monitor(bdg);
     }
+
+    Binding *v_binding(const Symbol *symbol);
   };
 
   /** @brief Incorporate bindings defined by a PairList into a Frame.
@@ -546,9 +857,42 @@ namespace CXXR
    */
   void frameReadPairList(Frame *frame, PairList *bindings);
 
-  // This definition is visible only in C++; C code sees instead a
-  // definition (in Environment.h) as an opaque pointer.
-  // using R_varloc_t = Frame::Binding *;
+  /** @brief Does a Symbol correspond to a missing argument?
+   *
+   * Within a Frame \a frame, a Symbol \a sym is considered to
+   * correspond to a missing argument if any of the following
+   * criteria is satisfied:
+   *
+   * <ol>
+   * <li>\a sym is itself Symbol::missingArgument()
+   * (R_MissingArg).</li>
+   *
+   * <li>The binding of \a sym within \a frame is flagged as having
+   * origin Frame::Binding::MISSING.</li>
+   *
+   * <li>\a sym is bound to Symbol::missingArgument().</li>
+   *
+   * <li>\a sym is bound to a unforced Promise, and forcing the
+   * Promise would consist in evaluating a Symbol which - by a
+   * recursive application of these criteria - is missing with
+   * respect to the Frame of the Environment of the Promise.</li>
+   *
+   * </ol>
+   *
+   * Note that unless Criterion 1 applies, \a sym is not considered
+   * missing if it is not bound at all within \a frame, or if it has
+   * an active binding.
+   *
+   * @param sym Non-null pointer to the Symbol whose missing status
+   *          is to be determined.
+   *
+   * @param frame Non-null pointer to the Frame with respect to
+   *          which missingness is to be determined.
+   *
+   * @return true iff \a sym is missing with respect to \a frame.
+   */
+  bool isMissingArgument(const Symbol *sym, Frame *frame);
+
 } // namespace CXXR
 
 namespace R

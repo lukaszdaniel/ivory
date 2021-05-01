@@ -77,7 +77,7 @@ namespace CXXR
     // Symbol::s_special_symbol_names is in names.cpp
 
     Symbol::Symbol(const CachedString *the_name)
-        : RObject(SYMSXP), m_dd_index(-1), m_base_symbol(false), m_special_symbol(false)
+        : RObject(SYMSXP), m_dd_index(-1), m_base_symbol(false), m_is_special_symbol(false)
     {
         m_name = the_name;
         m_value = unboundValue();
@@ -136,7 +136,7 @@ namespace CXXR
     unsigned int Symbol::packGPBits() const
     {
         unsigned int ans = RObject::packGPBits();
-        if (m_special_symbol)
+        if (m_is_special_symbol)
             ans |= SPECIAL_SYMBOL_MASK;
         if (m_base_symbol)
             ans |= BASE_SYM_CACHED_MASK;
@@ -146,7 +146,7 @@ namespace CXXR
     void Symbol::unpackGPBits(unsigned int gpbits)
     {
         RObject::unpackGPBits(gpbits);
-        m_special_symbol = ((gpbits & SPECIAL_SYMBOL_MASK) != 0);
+        m_is_special_symbol = ((gpbits & SPECIAL_SYMBOL_MASK) != 0);
         m_base_symbol = ((gpbits & BASE_SYM_CACHED_MASK) != 0);
     }
 
@@ -228,7 +228,7 @@ namespace CXXR
         for (const auto &sname : s_special_symbol_names)
         {
             Symbol *symbol = Symbol::obtain(sname);
-            symbol->m_special_symbol = true;
+            symbol->m_is_special_symbol = true;
         }
     }
 
@@ -524,7 +524,7 @@ void UNSET_SPECIAL_SYMBOL(SEXP b)
 
 Rboolean IS_SPECIAL_SYMBOL(SEXP b)
 {
-    return Rboolean(b && SEXP_downcast<const Symbol *>(b)->specialSymbol());
+    return Rboolean(b && SEXP_downcast<const Symbol *>(b)->isSpecialSymbol());
 }
 
 void SET_NO_SPECIAL_SYMBOLS(SEXP b)
@@ -543,7 +543,7 @@ void UNSET_NO_SPECIAL_SYMBOLS(SEXP b)
 
 Rboolean NO_SPECIAL_SYMBOLS(SEXP b)
 {
-    return Rboolean(b && SEXP_downcast<const Symbol *>(b)->specialSymbol());
+    return Rboolean(b && SEXP_downcast<const Symbol *>(b)->isSpecialSymbol());
 }
 
 Rboolean Rf_isUserBinop(SEXP s)

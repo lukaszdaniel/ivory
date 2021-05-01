@@ -145,7 +145,6 @@ inline static bool IS_USER_DATABASE(SEXP rho)
     return (OBJECT((rho)) && inherits((rho), "UserDefinedDatabase"));
 }
 
-/* various definitions of macros/functions in Defn.h */
 namespace
 {
     inline bool FRAME_IS_LOCKED(SEXP e)
@@ -175,7 +174,7 @@ inline static SEXP BINDING_VALUE(SEXP b)
         return CAR(b);
 }
 
-RObject *Frame::Binding::value() const
+RObject *Frame::Binding::unforcedValue() const
 {
     RObject *ans = (isActive() ? getActiveValue(m_value) : m_value);
     m_frame->monitorRead(*this);
@@ -189,7 +188,7 @@ inline static SEXP SYMBOL_BINDING_VALUE(SEXP s)
 
 inline static Rboolean SYMBOL_HAS_BINDING(SEXP s)
 {
-    return (Rboolean)(IS_ACTIVE_BINDING(s) || (SYMVALUE(s) != R_UnboundValue));
+    return Rboolean(IS_ACTIVE_BINDING(s) || (SYMVALUE(s) != R_UnboundValue));
 }
 
 inline static void SET_BINDING_VALUE(SEXP b, SEXP val)
@@ -202,10 +201,11 @@ inline static void SET_BINDING_VALUE(SEXP b, SEXP val)
         SET_BNDCELL(b, val);
 }
 
-void Frame::Binding::assign(RObject *new_value)
+void Frame::Binding::assignSlow(RObject *new_value, Origin origin)
 {
     if (isLocked())
         Rf_error(_("cannot change value of locked binding for '%s'"), symbol()->name()->c_str());
+    m_origin = origin;
     if (isActive())
     {
         setActiveValue(m_value, new_value);
@@ -845,7 +845,6 @@ static std::pair<SEXP, bool> RemoveFromList(SEXP thing, SEXP list)
 */
 HIDDEN void R::unbindVar(SEXP symbol, SEXP rho)
 {
-
     if (rho == R_BaseNamespace)
 	error(_("cannot unbind in the base namespace"));
     if (rho == R_BaseEnv)
@@ -876,8 +875,6 @@ HIDDEN void R::unbindVar(SEXP symbol, SEXP rho)
 #endif
     }
 }
-
-
 
 /** @brief Look up the location of the value of a symbol in a single environment frame.
  * 
@@ -932,7 +929,6 @@ static SEXP findVarLocInFrame(SEXP rho, SEXP symbol, Rboolean *canCache)
 	return R_HashGetLoc(hashcode, symbol, HASHTAB(rho));
     }
 }
-
 
 /** @brief External version and accessor functions.
  * 

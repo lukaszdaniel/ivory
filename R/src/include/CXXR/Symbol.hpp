@@ -232,9 +232,9 @@ namespace CXXR
          *
          * @return true iff this symbol is marked as a special symbol.
          */
-        bool specialSymbol() const
+        bool isSpecialSymbol() const
         {
-            return m_special_symbol;
+            return m_is_special_symbol;
         }
 
         void setSpecialSymbol(bool on)
@@ -243,7 +243,7 @@ namespace CXXR
             //     m_gpbits |= SPECIAL_SYMBOL_MASK;
             // else
             //     m_gpbits &= (~SPECIAL_SYMBOL_MASK);
-            m_special_symbol = on;
+            m_is_special_symbol = on;
         }
 
         /** @brief Missing argument.
@@ -402,7 +402,7 @@ namespace CXXR
         GCEdge<const BuiltInFunction> m_internalfunc;
         int m_dd_index : 31;
         bool m_base_symbol;
-        bool m_special_symbol;
+        bool m_is_special_symbol;
 
         /**
          * @param name Pointer to String object representing the name

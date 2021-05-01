@@ -195,6 +195,13 @@ namespace CXXR
 
         static void checkST(const RObject *);
 
+        /** @brief Has this promise been evaluated yet?
+         */
+        bool evaluated() const
+        {
+            return m_environment == nullptr;
+        }
+
         // Virtual function of RObject:
         const char *typeName() const;
         RObject *evaluate(Environment *env) override;
