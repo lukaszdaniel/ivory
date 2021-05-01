@@ -320,10 +320,9 @@ namespace CXXR
         // a PairList, for example during serialization and
         // deserialization, and formerly hosted in the gp field of
         // sxpinfo_struct.
-        public: // private:
+        private:
         bool m_active_binding : 1;
         bool m_binding_locked : 1;
-        private:
         bool m_assignment_pending : 1;
         GCEdge<PairList> m_attrib;
 

@@ -62,13 +62,13 @@
 #define SET_BNDCELL_IVAL_MACRO(cell, ival) SET_SCALAR_IVAL(CAR0(cell), ival)
 #define SET_BNDCELL_LVAL_MACRO(cell, lval) SET_SCALAR_LVAL(CAR0(cell), lval)
 
-#define INIT_BNDCELL_MACRO(cell, type)       \
-    do                                       \
-    {                                        \
-        RObject *val = allocVector(type, 1); \
-        SETCAR(cell, val);                   \
-        SET_BNDCELL_TAG(cell, type);         \
-        SET_MISSING(cell, 0);                \
+#define INIT_BNDCELL_MACRO(cell, type)                    \
+    do                                                    \
+    {                                                     \
+        RObject *val = Rf_allocVector(SEXPTYPE(type), 1); \
+        SETCAR(cell, val);                                \
+        SET_BNDCELL_TAG(cell, type);                      \
+        SET_MISSING(cell, 0);                             \
     } while (0)
 #else
 /* Use a union in the CAR field to represent an RObject* or an immediate
@@ -302,12 +302,14 @@ namespace CXXR
         void visitReferents(const_visitor *v) const override;
 
         /* List Access Methods */
+#if !BOXED_BINDING_CELLS
         static double bndcell_dval(const RObject *x);
         static int bndcell_ival(const RObject *x);
         static int bndcell_lval(const RObject *x);
         static void set_bndcell_dval(RObject *x, double v);
         static void set_bndcell_ival(RObject *x, int v);
         static void set_bndcell_lval(RObject *x, int v);
+#endif
         static void clear_bndcell_tag(SEXP cell);
 
         // Virtual functions of RObject:
@@ -390,7 +392,7 @@ namespace CXXR
 
         // 'Scratchpad' field used in handling argument lists,
         // formerly hosted in the 'gp' field of sxpinfo_struct.
-        public: // private:
+    private:
         unsigned int m_missing : 2;
     };
 

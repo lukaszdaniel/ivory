@@ -98,12 +98,12 @@ namespace CXXR
         const RObject *tag = pl->tag();
         if (tag && tag != m_symbol)
             Rf_error(_("internal error in %s"), "Frame::Binding::fromPairList()");
-        Origin pl_origin = Origin(pl->m_missing);
-        if (pl->m_active_binding)
+        Origin pl_origin = Origin(pl->missing());
+        if (pl->isActiveBinding())
             setFunction(SEXP_downcast<FunctionBase *>(pl->car()), pl_origin);
         else
             setValue(pl->car(), pl_origin);
-        setLocking(pl->m_binding_locked);
+        setLocking(pl->bindingIsLocked());
     }
 
     PairList *Frame::asPairList() const

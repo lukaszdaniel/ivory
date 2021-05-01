@@ -2030,7 +2030,7 @@ SEXP R::R_execMethod(SEXP op, SEXP rho)
     return val;
 }
 
-static SEXP EnsureLocal(SEXP symbol, SEXP rho, R_varloc_t &ploc)
+static SEXP EnsureLocal(SEXP symbol, SEXP rho, R_varloc_t *ploc)
 {
     SEXP vl;
 
@@ -2047,7 +2047,7 @@ static SEXP EnsureLocal(SEXP symbol, SEXP rho, R_varloc_t &ploc)
 	    UNPROTECT(2);
 	}
 	PROTECT(vl); /* R_findVarLocInFrame allocates for user databases */
-	ploc = R_findVarLocInFrame(rho, symbol);
+	*ploc = R_findVarLocInFrame(rho, symbol);
 	UNPROTECT(1);
 	return vl;
     }
@@ -2058,7 +2058,7 @@ static SEXP EnsureLocal(SEXP symbol, SEXP rho, R_varloc_t &ploc)
 
     PROTECT(vl = shallow_duplicate(vl));
     defineVar(symbol, vl, rho);
-    ploc = R_findVarLocInFrame(rho, symbol);
+    *ploc = R_findVarLocInFrame(rho, symbol);
     UNPROTECT(1);
     return vl;
 }
@@ -2577,7 +2577,7 @@ HIDDEN SEXP do_function(SEXP call, SEXP op, SEXP args, SEXP rho)
 */
 
 static SEXP evalseq(SEXP expr, SEXP rho, int forcelocal,  R_varloc_t tmploc,
-		    R_varloc_t &ploc)
+		    R_varloc_t *ploc)
 {
     SEXP val, nval, nexpr;
     if (isNull(expr))
@@ -2590,13 +2590,13 @@ static SEXP evalseq(SEXP expr, SEXP rho, int forcelocal,  R_varloc_t tmploc,
 	else {
 	    nval = eval(expr, ENCLOS(rho));
 	    PROTECT(nval); /* R_findVarLoc allocates for user databases */
-	    ploc = R_findVarLoc(expr, ENCLOS(rho));
+	    *ploc = R_findVarLoc(expr, ENCLOS(rho));
 	    UNPROTECT(1);
 	}
-	int maybe_in_assign = ploc.cell ?
-	    ASSIGNMENT_PENDING(ploc.cell) : FALSE;
-	if (ploc.cell)
-	    SET_ASSIGNMENT_PENDING(ploc.cell, TRUE);
+	int maybe_in_assign = ploc->cell ?
+	    ASSIGNMENT_PENDING(ploc->cell) : FALSE;
+	if (ploc->cell)
+	    SET_ASSIGNMENT_PENDING(ploc->cell, TRUE);
 	if (maybe_in_assign || MAYBE_SHARED(nval))
 	    nval = shallow_duplicate(nval);
 	UNPROTECT(1);
@@ -2850,7 +2850,7 @@ static SEXP applydefine(SEXP call, SEXP op, SEXP args, SEXP rho)
     /*  Do a partial evaluation down through the LHS. */
     R_varloc_t lhsloc;
     lhs = evalseq(CADR(expr), rho,
-		  PRIMVAL(op)==1 || PRIMVAL(op)==3, tmploc, lhsloc);
+		  PRIMVAL(op)==1 || PRIMVAL(op)==3, tmploc, &lhsloc);
     if (lhsloc.cell == nullptr)
 	lhsloc.cell = R_NilValue;
     PROTECT(lhsloc.cell); nprot++;
@@ -7527,7 +7527,7 @@ static SEXP bcEval(SEXP body, SEXP rho, bool useCache)
 	R_varloc_t loc;
 	if (value == R_UnboundValue ||
 	    TYPEOF(value) == PROMSXP) {
-	    value = EnsureLocal(symbol, rho, loc);
+	    value = EnsureLocal(symbol, rho, &loc);
 	    if (loc.cell == nullptr)
 		loc.cell = R_NilValue;
 	}

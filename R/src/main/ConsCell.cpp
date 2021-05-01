@@ -112,6 +112,7 @@ namespace CXXR
         // m_missing = ((gpbits & MISSING_MASK) != 0);
     }
 
+#if !BOXED_BINDING_CELLS
     double ConsCell::bndcell_dval(const RObject *x)
     {
         if (!x)
@@ -159,7 +160,7 @@ namespace CXXR
         ConsCell::checkST(x);
         ((R_bndval_t *)&(SEXP_downcast<ConsCell *>(x, false)->m_car))->ival = v;
     }
-
+#endif
     void ConsCell::clear_bndcell_tag(SEXP cell)
     {
         if (!cell)
