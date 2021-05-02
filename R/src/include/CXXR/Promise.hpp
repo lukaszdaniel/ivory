@@ -5,14 +5,14 @@
  *  Copyright (C) 2008-2014  Andrew R. Runnalls.
  *  Copyright (C) 2014 and onwards the Rho Project Authors.
  *
+ *  Rho is not part of the R project, and bugs and other issues should
+ *  not be reported via r-bugs or other R project channels; instead refer
+ *  to the Rho website.
+ *
  *  This header file is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU Lesser General Public License as published by
  *  the Free Software Foundation; either version 2.1 of the License, or
  *  (at your option) any later version.
- *
- *  This file is part of R. R is distributed under the terms of the
- *  GNU General Public License, either Version 2, June 1991 or Version 3,
- *  June 2007. See doc/COPYRIGHTS for details of the copyright status of R.
  *
  *  This program is distributed in the hope that it will be useful,
  *  but WITHOUT ANY WARRANTY; without even the implied warranty of
@@ -66,6 +66,20 @@ namespace CXXR
     class Promise : public RObject
     {
     public:
+        /** @brief Current evaluation status.
+         */
+        enum EvaluationStatus
+        {
+            DEFAULT = 0,      /**< Default status of this Promise.
+                               */
+            UNDER_EVALUATION, /**< This Promise is currently
+                               *   under evaluation.
+                               */
+            INTERRUPTED       /**< Evaluation of this Promise has been
+                               *   interrupted by a jump (JMPException)
+                               */
+        };
+
         /**
          * @param valgen pointer to RObject to be evaluated to provide
          *          the value of the Promise.  Can be null.
@@ -73,8 +87,7 @@ namespace CXXR
          * @param env Environment in which \a valgen is to be evaluated.
          */
         Promise(const RObject *valgen, Environment *env)
-            : RObject(PROMSXP), m_under_evaluation(false),
-              m_interrupted(false)
+            : RObject(PROMSXP), m_status(DEFAULT)
         {
             m_value = Symbol::unboundValue();
             m_valgen = valgen;
@@ -99,7 +112,7 @@ namespace CXXR
          */
         bool evaluationInterrupted() const
         {
-            return m_interrupted;
+            return m_status == INTERRUPTED;
         }
 
         /** @brief Force the Promise.
@@ -117,26 +130,20 @@ namespace CXXR
 
         /** @brief Indicate whether evaluation has been interrupted.
          *
-         * @param on true to indicate that evaluation of this promise
-         *           has been interrupted by a JMPException.
-         *
          * @note To be removed from public interface in due course.
          */
-        void markEvaluationInterrupted(bool on)
+        void markEvaluationInterrupted()
         {
-            m_interrupted = on;
+            m_status = INTERRUPTED;
         }
 
         /** @brief Indicate whether this promise is under evaluation.
          *
-         * @param on true to indicate that this promise is currently
-         *           under evaluation; otherwise false.
-         *
          * @note To be removed from public interface in due course.
          */
-        void markUnderEvaluation(bool on)
+        void markUnderEvaluation()
         {
-            m_under_evaluation = on;
+            m_status = UNDER_EVALUATION;
         }
 
         /** @brief RObject to be evaluated by the Promise.
@@ -162,6 +169,24 @@ namespace CXXR
          */
         void setValue(RObject *val);
 
+        /** @brief Current status of this promise.
+         *
+         * @return Status of this promise.
+         */
+        EvaluationStatus status() const
+        {
+            return m_status;
+        }
+
+        /** @brief Set the status of this promise.
+         *
+         * @param status Status to be assigned to this promise.
+         */
+        void setStatus(EvaluationStatus status)
+        {
+            m_status = status;
+        }
+
         void setEnvironment(Environment *val);
         void setValueGenerator(RObject *val);
 
@@ -180,7 +205,7 @@ namespace CXXR
          */
         bool underEvaluation() const
         {
-            return m_under_evaluation;
+            return m_status == UNDER_EVALUATION;
         }
 
         /** @brief Access the value of a Promise.
@@ -213,8 +238,8 @@ namespace CXXR
         GCEdge<> m_value;
         GCEdge<const RObject> m_valgen;
         GCEdge<Environment> m_environment;
-        bool m_under_evaluation;
-        bool m_interrupted;
+        EvaluationStatus m_status;
+
         // Declared private to ensure that Environment objects are
         // created only using 'new':
         ~Promise() {}
@@ -225,14 +250,17 @@ namespace CXXR
         Promise &operator=(const Promise &);
     };
 
-    /* Stack entry for pending promises */
+    /** @brief Stack entry for pending promises.
+     */
     struct RPRSTACK
     {
         RObject *promise;
         RPRSTACK *next;
     };
 
-    extern struct RPRSTACK *R_PendingPromises; // INI_as(nullptr); /* Pending promise stack */
+    /** @brief Pending promise stack.
+     */
+    extern struct RPRSTACK *R_PendingPromises;
 } // namespace CXXR
 
 namespace R

@@ -2,15 +2,17 @@
  *  R : A Computer Language for Statistical Data Analysis
  *  Copyright (C) 1999--2020  The R Core Team.
  *  Copyright (C) 1995, 1996  Robert Gentleman and Ross Ihaka
+ *  Copyright (C) 2008-2014  Andrew R. Runnalls.
+ *  Copyright (C) 2014 and onwards the Rho Project Authors.
+ *
+ *  Rho is not part of the R project, and bugs and other issues should
+ *  not be reported via r-bugs or other R project channels; instead refer
+ *  to the Rho website.
  *
  *  This program is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU Lesser General Public License as published by
  *  the Free Software Foundation; either version 2.1 of the License, or
  *  (at your option) any later version.
- *
- *  This file is part of R. R is distributed under the terms of the
- *  GNU General Public License, either Version 2, June 1991 or Version 3,
- *  June 2007. See doc/COPYRIGHTS for details of the copyright status of R.
  *
  *  This program is distributed in the hope that it will be useful,
  *  but WITHOUT ANY WARRANTY; without even the implied warranty of
@@ -97,38 +99,44 @@ namespace CXXR
         {
             RPRSTACK prstack;
 
-            if (PRSEEN(this))
+            if (m_status == UNDER_EVALUATION)
+                Rf_errorcall(R_GlobalContext->getCall(),
+                             _("promise is already under evaluation: recursive default argument reference or earlier problems?"));
+            else if (m_status == INTERRUPTED)
             {
-                if (PRSEEN(this) == 1)
-                    Rf_errorcall(R_GlobalContext->getCall(),
-                                 _("promise is already under evaluation: recursive default argument reference or earlier problems?"));
-                else
-                {
-                    /* set PRSEEN to 1 to avoid infinite recursion */
-                    SET_PRSEEN(this, 1);
-                    warningcall(R_GlobalContext->getCall(),
-                                _("restarting interrupted promise evaluation"));
-                }
+                /* set PRSEEN to UNDER_EVALUATION to avoid infinite recursion */
+                m_status = UNDER_EVALUATION;
+                warningcall(R_GlobalContext->getCall(),
+                            _("restarting interrupted promise evaluation"));
             }
+
             /* Mark the promise as under evaluation and push it on a stack
                that can be used to unmark pending promises if a jump out
                of the evaluation occurs. */
-            SET_PRSEEN(this, 1);
-            prstack.promise = this;
-            prstack.next = R_PendingPromises;
-            R_PendingPromises = &prstack;
+            m_status = UNDER_EVALUATION;
+            try
+            {
+                prstack.promise = this;
+                prstack.next = R_PendingPromises;
+                R_PendingPromises = &prstack;
 
-            RObject *val = Evaluator::evaluate(const_cast<RObject *>(valueGenerator()), environment());
+                RObject *val = Evaluator::evaluate(const_cast<RObject *>(valueGenerator()), environment());
 
-            /* Pop the stack, unmark the promise and set its value field.
+                /* Pop the stack, unmark the promise and set its value field.
                Also set the environment to R_NilValue to allow GC to
                reclaim the promise environment; this is also useful for
                fancy games with delayedAssign() */
-            R_PendingPromises = prstack.next;
-            SET_PRSEEN(this, 0);
-            setValue(val);
-            ENSURE_NAMEDMAX(val);
-            setEnvironment(nullptr);
+                R_PendingPromises = prstack.next;
+                setValue(val);
+                ENSURE_NAMEDMAX(val);
+                setEnvironment(nullptr);
+            }
+            catch (...)
+            {
+                m_status = INTERRUPTED;
+                throw;
+            }
+            m_status = DEFAULT;
         }
         return const_cast<RObject *>(value());
     }
@@ -181,17 +189,9 @@ SEXP PRVALUE(SEXP x)
 int PRSEEN(SEXP x)
 {
     if (!x)
-        return 0;
+        return Promise::EvaluationStatus::DEFAULT;
     const Promise *prom = SEXP_downcast<const Promise *>(x);
-    if (prom->evaluationInterrupted())
-    {
-        return 2;
-    }
-    else if (prom->underEvaluation())
-    {
-        return 1;
-    }
-    return 0;
+    return prom->status();
 }
 
 void SET_PRENV(SEXP x, SEXP v)
@@ -225,20 +225,13 @@ void SET_PRSEEN(SEXP x, int v)
 {
     if (!x)
         return;
+    if (!(v == Promise::EvaluationStatus::DEFAULT ||
+          v == Promise::EvaluationStatus::UNDER_EVALUATION ||
+          v == Promise::EvaluationStatus::INTERRUPTED))
+    {
+        std::cerr << "Incorrect EvaluationStatus = " << v << std::endl;
+        abort();
+    }
     Promise *prom = SEXP_downcast<Promise *>(x);
-    if (v == 1)
-    {
-        prom->markUnderEvaluation(true);
-        prom->markEvaluationInterrupted(false);
-    }
-    else if (v)
-    {
-        prom->markUnderEvaluation(false);
-        prom->markEvaluationInterrupted(true);
-    }
-    else
-    {
-        prom->markUnderEvaluation(false);
-        prom->markEvaluationInterrupted(false);
-    }
+    prom->setStatus(Promise::EvaluationStatus(v));
 }

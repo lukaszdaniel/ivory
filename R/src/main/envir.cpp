@@ -110,6 +110,7 @@
 #include <CXXR/IntVector.hpp>
 #include <CXXR/LogicalVector.hpp>
 #include <CXXR/Symbol.hpp>
+#include <CXXR/Promise.hpp>
 #include <Localization.h>
 #include <RContext.h>
 #include <Defn.h>
@@ -2207,16 +2208,16 @@ HIDDEN bool R::R_isMissing(SEXP symbol, SEXP rho)
 	       checking for missingness.  Because of the test above
 	       for an active binding a longjmp should only happen if
 	       the stack check fails.  LT */
-	    if (PRSEEN(CAR(vl)) == 1)
+	    if (PRSEEN(CAR(vl)) == Promise::EvaluationStatus::UNDER_EVALUATION)
 		return true;
 	    else {
 		bool val;
 		int oldseen = PRSEEN(CAR(vl));
-		SET_PRSEEN(CAR(vl), 1);
+		SET_PRSEEN(CAR(vl), Promise::EvaluationStatus::UNDER_EVALUATION);
 		PROTECT(vl);
 		val = R_isMissing(PREXPR(CAR(vl)), PRENV(CAR(vl)));
 		UNPROTECT(1); /* vl */
-		/* The oldseen value will usually be 0, but might be 2
+		/* The oldseen value will usually be DEFAULT, but might be INTERRUPTED
 		   from an interrupted evaluation. LT */
 		SET_PRSEEN(CAR(vl), oldseen);
 		return val;
