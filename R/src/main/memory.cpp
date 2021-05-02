@@ -882,9 +882,7 @@ HIDDEN SEXP R::mkPROMISE(SEXP expr, SEXP rho)
        substitute() and the like */
     ENSURE_NAMEDMAX(expr);
 
-    Promise *s = GCNode::expose(new Promise(exprt, rhort));
-    SET_PRSEEN(s, 0);
-    return s;
+    return GCNode::expose(new Promise(exprt, rhort));
 }
 
 SEXP R::R_mkEVPROMISE(SEXP expr, SEXP val)
