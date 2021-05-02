@@ -41,9 +41,6 @@
 #include <CXXR/Symbol.hpp>
 #include <CXXR/SEXP_downcast.hpp>
 
-// used in envir.cpp and inspect.cpp
-#define USE_GLOBAL_CACHE // original CXXR undefines this (rev. 374)
-
 namespace R
 {
    extern void InitGlobalEnv();
