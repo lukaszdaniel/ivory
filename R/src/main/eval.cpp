@@ -1694,7 +1694,8 @@ inline static SEXP R_execClosure(SEXP call, SEXP newrho, SEXP sysparent,
 /* Apply SEXP op of type CLOSXP to actuals */
 SEXP Rf_applyClosure(SEXP call, SEXP op, SEXP arglist, SEXP rho, SEXP suppliedvars)
 {
-    SEXP formals, actuals, savedrho, newrho;
+    SEXP formals, actuals, savedrho;
+    Environment *newrho;
     SEXP f, a;
 
     /* formals = list of formal parameters */
@@ -1717,7 +1718,7 @@ SEXP Rf_applyClosure(SEXP call, SEXP op, SEXP arglist, SEXP rho, SEXP suppliedva
 	reference couting enabled. */
 
     actuals = matchArgs_RC(formals, arglist, call);
-    PROTECT(newrho = NewEnvironment(formals, actuals, savedrho));
+    PROTECT(newrho = static_cast<Environment*>(NewEnvironment(formals, actuals, savedrho)));
 
     /*  Use the default code for unbound formals.  FIXME: It looks like
 	this code should preceed the building of the environment so that
@@ -2196,28 +2197,30 @@ HIDDEN SEXP do_if(SEXP call, SEXP op, SEXP args, SEXP rho)
 
 inline static SEXP GET_BINDING_CELL(SEXP symbol, SEXP rho)
 {
-    if (rho == R_BaseEnv || rho == R_BaseNamespace || IS_USER_DATABASE(rho))
-	return R_NilValue;
-    else {
-	R_varloc_t loc = R_findVarLocInFrame(rho, symbol);
-	return (! R_VARLOC_IS_NULL(loc) && ! IS_ACTIVE_BINDING(loc.cell)) ?
-	    loc.cell : R_NilValue;
-    }
+	if (rho == R_BaseEnv || rho == R_BaseNamespace || IS_USER_DATABASE(rho))
+		return nullptr;
+	else
+	{
+		R_varloc_t loc = R_findVarLocInFrame(rho, symbol);
+		return (!R_VARLOC_IS_NULL(loc) && !IS_ACTIVE_BINDING(loc.cell)) ? loc.cell : nullptr;
+	}
 }
 
-inline static bool SET_BINDING_VALUE(SEXP loc, SEXP value) {
-    /* This depends on the current implementation of bindings */
-    if (loc != R_NilValue &&
-	! BINDING_IS_LOCKED(loc) && ! IS_ACTIVE_BINDING(loc)) {
-	if (BNDCELL_TAG(loc) || CAR(loc) != value) {
-	    SET_BNDCELL(loc, value);
-	    if (MISSING(loc))
-		SET_MISSING(loc, 0);
+inline static bool SET_BINDING_VALUE(SEXP loc, SEXP value)
+{
+	/* This depends on the current implementation of bindings */
+	if (loc && !BINDING_IS_LOCKED(loc) && !IS_ACTIVE_BINDING(loc))
+	{
+		if (BNDCELL_TAG(loc) || CAR(loc) != value)
+		{
+			SET_BNDCELL(loc, value);
+			if (MISSING(loc))
+				SET_MISSING(loc, 0);
+		}
+		return true;
 	}
-	return true;
-    }
-    else
-	return false;
+	else
+		return false;
 }
 
 HIDDEN SEXP do_for(SEXP call, SEXP op, SEXP args, SEXP rho)
@@ -5168,13 +5171,11 @@ inline static SEXP BINDING_VALUE(SEXP loc)
 		R_expand_binding_value(loc);
 		return CAR0(loc);
 	}
-	else if (loc != R_NilValue && !IS_ACTIVE_BINDING(loc))
+	else if (loc && !IS_ACTIVE_BINDING(loc))
 		return CAR0(loc);
 	else
 		return R_UnboundValue;
 }
-
-#define BINDING_SYMBOL(loc) TAG(loc)
 
 /* Defining USE_BINDING_CACHE enables a cache for GETVAR, SETVAR, and
    others to more efficiently locate bindings in the top frame of the
@@ -7528,8 +7529,6 @@ static SEXP bcEval(SEXP body, SEXP rho, bool useCache)
 	if (value == R_UnboundValue ||
 	    TYPEOF(value) == PROMSXP) {
 	    value = EnsureLocal(symbol, rho, &loc);
-	    if (loc.cell == nullptr)
-		loc.cell = R_NilValue;
 	}
 	else loc.cell = cell;
 
@@ -7721,8 +7720,6 @@ static SEXP bcEval(SEXP body, SEXP rho, bool useCache)
 	SEXP symbol = VECTOR_ELT(constants, GETOP());
 	R_varloc_t loc = R_findVarLoc(symbol, rho);
 
-	if (loc.cell == nullptr)
-	    loc.cell = R_NilValue;
 	int maybe_in_assign = ASSIGNMENT_PENDING(loc.cell);
 	SET_ASSIGNMENT_PENDING(loc.cell, TRUE);
 	BCNPUSH(loc.cell);
