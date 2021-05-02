@@ -288,10 +288,6 @@ static void inspect_tree(int pre, SEXP v, int deep, int pvec) {
 	    }
 	    pp(pre); Rprintf("ENCLOS:\n");
 	    inspect_tree(pre+2, ENCLOS(v), 0, pvec);
-	    if (HASHTAB(v) != R_NilValue) {
-		pp(pre); Rprintf("HASHTAB:\n");
-		inspect_tree(pre+2, HASHTAB(v), deep - 1, pvec);
-	    }
 	    break;
 
 	case CLOSXP:

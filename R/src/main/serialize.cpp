@@ -1106,7 +1106,7 @@ static void WriteItem(SEXP s, SEXP ref_table, R_outpstream_t stream)
 	    WriteItem(ENCLOS(s), ref_table, stream);
 	    GCStackRoot<> frame_pairlist(FRAME(s));
 	    WriteItem(frame_pairlist, ref_table, stream);
-	    WriteItem(HASHTAB(s), ref_table, stream);
+	    WriteItem(HASHTAB(s), ref_table, stream); // No hashtab field in CXXR
 	    WriteItem(ATTRIB(s), ref_table, stream);
 	}
     }
@@ -1878,7 +1878,8 @@ static SEXP ReadItem(SEXP ref_table, R_inpstream_t stream)
 		{
 			SET_FRAME(env, ReadItem(ref_table, stream));
 		}
-		SET_HASHTAB(env, ReadItem(ref_table, stream));
+		// Ignore hash table:
+		ReadItem(ref_table, stream);
 		// Attributes:
 		SET_ATTRIB(env, ReadItem(ref_table, stream));
 		R_ReadItemDepth--;

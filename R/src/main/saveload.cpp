@@ -663,9 +663,10 @@ static void RestoreSEXP(SEXP s, FILE *fp, InputRoutines &m, NodeInfo &node, int 
 	break;
     case ENVSXP:
     {
-        SET_FRAME(s, OffsetToNode(m.InInteger(fp, d), node));
-        SET_ENCLOS(s, OffsetToNode(m.InInteger(fp, d), node));
-        SET_HASHTAB(s, OffsetToNode(m.InInteger(fp, d), node));
+        Environment *env = SEXP_downcast<Environment *>(s);
+        SET_FRAME(env, OffsetToNode(m.InInteger(fp, d), node));
+        SET_ENCLOS(env, OffsetToNode(m.InInteger(fp, d), node));
+        SET_HASHTAB(env, OffsetToNode(m.InInteger(fp, d), node));
     }
     break;
     case SPECIALSXP:
@@ -1461,8 +1462,8 @@ static SEXP NewDataLoad(FILE *fp, InputRoutines *m, SaveLoadData *d)
         Environment *enc = SEXP_downcast<Environment *>(NewReadItem(sym_table, env_table, fp, m, d));
         env->setEnclosingEnvironment(enc);
         SET_FRAME(env, NewReadItem(sym_table, env_table, fp, m, d));
-        SET_TAG(env, NewReadItem(sym_table, env_table, fp, m, d));
-        R_RestoreHashCount(env);
+        // Throw away the hash table:
+        NewReadItem(sym_table, env_table, fp, m, d);
         env->expose();
     }
 

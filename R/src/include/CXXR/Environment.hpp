@@ -84,9 +84,8 @@ namespace CXXR
        */
       explicit Environment(Environment *enclosing = nullptr, PairList *frame = nullptr)
           : RObject(ENVSXP), m_single_stepping(false),
-            m_globally_cached(false), m_locked(false)
+            m_locked(false)
       {
-         m_hashtable = nullptr;
          m_enclosing = enclosing;
          m_frame = frame;
       }
@@ -170,15 +169,6 @@ namespace CXXR
          return s_global_env;
       }
 
-      /** @brief Is this frame in the global cache?
-       *
-       * @return true iff this frame is included in the global cache.
-       */
-      bool inGlobalCache() const
-      {
-         return m_globally_cached;
-      }
-
       /** @brief Is the frame locked?
        *
        * @return true iff the frame is locked.
@@ -186,24 +176,6 @@ namespace CXXR
       bool isLocked() const
       {
          return m_locked;
-      }
-
-      /** @brief Access the hash table.
-       *
-       * @return pointer to the hash table of this environment.
-       */
-      ListVector *hashTable()
-      {
-         return m_hashtable;
-      }
-
-      /** @brief Access the hash table (const variant).
-       *
-       * @return pointer to the hash table of this environment.
-       */
-      const ListVector *hashTable() const
-      {
-         return m_hashtable;
       }
 
       /** @brief Replace the enclosing environment.
@@ -233,36 +205,6 @@ namespace CXXR
          // m_frame = new_frame;
          // m_frame.propagateAge(this);
          m_frame.retarget(this, new_frame);
-      }
-
-      /** @brief Replace the hash table.
-       *
-       * @param new_hash_table Pointer to the new hash table.
-       *          (Because this member function will soon be
-       *          replaced, we won't go into the detailed
-       *          requirements for a hash table.)
-       */
-      void setHashTable(ListVector *new_hash_table)
-      {
-         // m_hashtable = new_hash_table;
-         // m_hashtable.propagateAge(this);
-         m_hashtable.retarget(this, new_hash_table);
-      }
-
-      /** @brief Set the frame's status as globally cached.
-       *
-       * @param cached The required status.
-       *
-       * @note At present this function just toggles a flag: it
-       * doesn't insert or remove the frame from the global cache.
-       */
-      void setGlobalCaching(bool cached)
-      {
-         // if (cached)
-         //    m_gpbits |= GLOBAL_FRAME_MASK;
-         // else
-         //    m_gpbits &= ~(GLOBAL_FRAME_MASK);
-         m_globally_cached = cached;
       }
 
       /** @brief Set locking status.
@@ -336,9 +278,7 @@ namespace CXXR
 
       GCEdge<Environment> m_enclosing;
       GCEdge<PairList> m_frame;
-      GCEdge<ListVector> m_hashtable;
       bool m_single_stepping;
-      bool m_globally_cached;
       bool m_locked;
 
       static void initialize();

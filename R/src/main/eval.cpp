@@ -1158,10 +1158,6 @@ inline static bool R_CheckJIT(SEXP fun)
 #define PRINT_JIT_INFO	do { } while(0)
 #endif
 
-
-#define IS_STANDARD_UNHASHED_FRAME(e) (HASHTAB(e) == R_NilValue)
-#define IS_STANDARD_HASHED_FRAME(e) (HASHTAB(e) != R_NilValue)
-
 /* This makes a snapshot of the local variables in cmpenv and creates
    a new environment with the same top level environment and bindings
    with value R_NilValue for the local variables. This guards against
@@ -1195,17 +1191,7 @@ inline static SEXP make_cached_cmpenv(SEXP fun)
 	for (; frmls != R_NilValue; frmls = CDR(frmls))
 	    defineVar(TAG(frmls), R_NilValue, newenv);
 	for (SEXP env = cmpenv; env != top; env = ENCLOS(env)) {
-	    if (IS_STANDARD_UNHASHED_FRAME(env))
 		cmpenv_enter_frame(FRAME(env), newenv);
-	    else if (IS_STANDARD_HASHED_FRAME(env)) {
-		SEXP h = HASHTAB(env);
-		int n = length(h);
-		for (int i = 0; i < n; i++)
-		    cmpenv_enter_frame(VECTOR_ELT(h, i), newenv);
-	    } else {
-		UNPROTECT(1); /* newenv */
-		return top;
-	    }
 		/* topenv is a safe conservative answer; if a closure
 		   defines anything, its environment will not match, and
 		   it will never be compiled */
@@ -1311,7 +1297,6 @@ inline static Rboolean jit_env_match(SEXP cmpenv, SEXP fun)
 	    if (! cmpenv_exists_local(TAG(frmls), cmpenv, top))
 		return FALSE;
 	for (; env != top; env = ENCLOS(env)) {
-	    if (IS_STANDARD_UNHASHED_FRAME(env)) {
 		/* To keep things simple, for a match this code
 		   requires that the local frames be standard unhashed
 		   frames. */
@@ -1320,8 +1305,6 @@ inline static Rboolean jit_env_match(SEXP cmpenv, SEXP fun)
 		     frame = CDR(frame))
 		    if (! cmpenv_exists_local(TAG(frame), cmpenv, top))
 			return FALSE;
-	    }
-	    else return FALSE;
 	}
 	return TRUE;
     }
