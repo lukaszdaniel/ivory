@@ -1943,11 +1943,10 @@ SEXP R::R_execMethod(SEXP op, SEXP rho)
        it can be done more efficiently. */
     for (next = FORMALS(op); next != R_NilValue; next = CDR(next)) {
 	SEXP symbol =  TAG(next);
-	R_varloc_t loc;
 	int missing;
-	loc = R_findVarLocInFrame(rho,symbol);
-	if(R_VARLOC_IS_NULL(loc))
-	    error(_("could not find symbol \"%s\" in environment of the generic function"), CHAR(PRINTNAME(symbol)));
+	R_varloc_t loc = R_findVarLocInFrame(rho,symbol);
+	if (loc.cell == nullptr)
+		error(_("could not find symbol \"%s\" in environment of the generic function"), CHAR(PRINTNAME(symbol)));
 	missing = R_GetVarLocMISSING(loc);
 	val = R_GetVarLocValue(loc);
 	SET_FRAME(newrho, CONS(val, FRAME(newrho)));
@@ -2178,7 +2177,7 @@ inline static SEXP GET_BINDING_CELL(SEXP symbol, SEXP rho)
 	else
 	{
 		R_varloc_t loc = R_findVarLocInFrame(rho, symbol);
-		return (!R_VARLOC_IS_NULL(loc) && !IS_ACTIVE_BINDING(loc.cell)) ? loc.cell : nullptr;
+		return (loc.cell && !IS_ACTIVE_BINDING(loc.cell)) ? loc.cell : nullptr;
 	}
 }
 
