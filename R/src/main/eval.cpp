@@ -1945,7 +1945,7 @@ SEXP R::R_execMethod(SEXP op, SEXP rho)
 	SEXP symbol =  TAG(next);
 	int missing;
 	R_varloc_t loc = R_findVarLocInFrame(rho,symbol);
-	if (loc.cell == nullptr)
+	if (loc.asPairList() == nullptr)
 		error(_("could not find symbol \"%s\" in environment of the generic function"), CHAR(PRINTNAME(symbol)));
 	missing = R_GetVarLocMISSING(loc);
 	val = R_GetVarLocValue(loc);
@@ -2177,7 +2177,7 @@ inline static SEXP GET_BINDING_CELL(SEXP symbol, SEXP rho)
 	else
 	{
 		R_varloc_t loc = R_findVarLocInFrame(rho, symbol);
-		return (loc.cell && !IS_ACTIVE_BINDING(loc.cell)) ? loc.cell : nullptr;
+		return (loc.asPairList() && !IS_ACTIVE_BINDING(loc.asPairList())) ? loc.asPairList() : nullptr;
 	}
 }
 
@@ -2571,10 +2571,10 @@ static SEXP evalseq(SEXP expr, SEXP rho, int forcelocal,  R_varloc_t tmploc,
 	    *ploc = R_findVarLoc(expr, ENCLOS(rho));
 	    UNPROTECT(1);
 	}
-	int maybe_in_assign = ploc->cell ?
-	    ASSIGNMENT_PENDING(ploc->cell) : FALSE;
-	if (ploc->cell)
-	    SET_ASSIGNMENT_PENDING(ploc->cell, TRUE);
+	int maybe_in_assign = ploc->asPairList() ?
+	    ASSIGNMENT_PENDING(ploc->asPairList()) : FALSE;
+	if (ploc->asPairList())
+	    SET_ASSIGNMENT_PENDING(ploc->asPairList(), TRUE);
 	if (maybe_in_assign || MAYBE_SHARED(nval))
 	    nval = shallow_duplicate(nval);
 	UNPROTECT(1);
@@ -2809,15 +2809,15 @@ static SEXP applydefine(SEXP call, SEXP op, SEXP args, SEXP rho)
 
     FIXUP_RHS_NAMED(rhs);
 
-    if (rho == R_BaseNamespace)
-	errorcall(call, _("cannot do complex assignments in base namespace"));
-    if (rho == R_BaseEnv)
-	errorcall(call, _("cannot do complex assignments in base environment"));
-    defineVar(R_TmpvalSymbol, R_NilValue, rho);
+	if (rho == R_BaseNamespace)
+		errorcall(call, _("cannot do complex assignments in base namespace"));
+	if (rho == R_BaseEnv)
+		errorcall(call, _("cannot do complex assignments in base environment"));
+	defineVar(R_TmpvalSymbol, R_NilValue, rho);
     tmploc = R_findVarLocInFrame(rho, R_TmpvalSymbol);
-    PROTECT(tmploc.cell); nprot++;
-    DISABLE_REFCNT(tmploc.cell);
-    DECREMENT_REFCNT(CDR(tmploc.cell));
+    PROTECT(tmploc.asPairList()); nprot++;
+    DISABLE_REFCNT(tmploc.asPairList());
+    DECREMENT_REFCNT(CDR(tmploc.asPairList()));
 
     /* Now set up a context to remove it when we are done, even in the
      * case of an error.  This all helps error() provide a better call.
@@ -2829,9 +2829,7 @@ static SEXP applydefine(SEXP call, SEXP op, SEXP args, SEXP rho)
     R_varloc_t lhsloc;
     lhs = evalseq(CADR(expr), rho,
 		  PRIMVAL(op)==1 || PRIMVAL(op)==3, tmploc, &lhsloc);
-    if (lhsloc.cell == nullptr)
-	lhsloc.cell = R_NilValue;
-    PROTECT(lhsloc.cell); nprot++;
+    PROTECT(lhsloc.asPairList()); nprot++;
 
     PROTECT(lhs); nprot++;
     PROTECT(rhsprom = mkRHSPROMISE(CADR(args), rhs)); nprot++;
@@ -2888,7 +2886,7 @@ static SEXP applydefine(SEXP call, SEXP op, SEXP args, SEXP rho)
     PROTECT(expr = replaceCall(afun, R_TmpvalSymbol, CDDR(expr), rhsprom)); nprot++;
     SEXP value = eval(expr, rho);
 
-    SET_ASSIGNMENT_PENDING(lhsloc.cell, FALSE);
+    SET_ASSIGNMENT_PENDING(lhsloc.asPairList(), FALSE);
     if (PRIMVAL(op) == 2)                       /* <<- */
 	setVar(lhsSym, value, ENCLOS(rho));
     else {                                      /* <-, = */
@@ -2904,7 +2902,7 @@ static SEXP applydefine(SEXP call, SEXP op, SEXP args, SEXP rho)
 
     UNPROTECT((nprot - 2));
     cntxt.end(); /* which does not run the remove */
-    UNPROTECT(2); // saverhs, tmploc.cell
+    UNPROTECT(2); // saverhs, tmploc.asPairList()
     unbindVar(R_TmpvalSymbol, rho);
 
     if (refrhs) DECREMENT_REFCNT(saverhs);
@@ -5302,7 +5300,7 @@ inline static SEXP FORCE_PROMISE(SEXP value, SEXP symbol, SEXP rho,
 inline static SEXP FIND_VAR_NO_CACHE(SEXP symbol, SEXP rho, SEXP cell)
 {
 	R_varloc_t loc = R_findVarLoc(symbol, rho);
-	if (loc.cell && IS_ACTIVE_BINDING(loc.cell))
+	if (loc.asPairList() && IS_ACTIVE_BINDING(loc.asPairList()))
 	{
 		SEXP value = R_GetVarLocValue(loc);
 		return value;
@@ -7505,11 +7503,14 @@ static SEXP bcEval(SEXP body, SEXP rho, bool useCache)
 	    TYPEOF(value) == PROMSXP) {
 	    value = EnsureLocal(symbol, rho, &loc);
 	}
-	else loc.cell = cell;
+	else
+	{
+		loc.fromPairList(cell);
+	}
 
-	int maybe_in_assign = ASSIGNMENT_PENDING(loc.cell);
-	SET_ASSIGNMENT_PENDING(loc.cell, TRUE);
-	BCNPUSH(loc.cell);
+	int maybe_in_assign = ASSIGNMENT_PENDING(loc.asPairList());
+	SET_ASSIGNMENT_PENDING(loc.asPairList(), TRUE);
+	BCNPUSH(loc.asPairList());
 
 	if (maybe_in_assign || MAYBE_SHARED(value))
 	    value = shallow_duplicate(value);
@@ -7695,9 +7696,9 @@ static SEXP bcEval(SEXP body, SEXP rho, bool useCache)
 	SEXP symbol = VECTOR_ELT(constants, GETOP());
 	R_varloc_t loc = R_findVarLoc(symbol, rho);
 
-	int maybe_in_assign = ASSIGNMENT_PENDING(loc.cell);
-	SET_ASSIGNMENT_PENDING(loc.cell, TRUE);
-	BCNPUSH(loc.cell);
+	int maybe_in_assign = ASSIGNMENT_PENDING(loc.asPairList());
+	SET_ASSIGNMENT_PENDING(loc.asPairList(), TRUE);
+	BCNPUSH(loc.asPairList());
 
 	SEXP value = getvar(symbol, ENCLOS(rho), FALSE, FALSE, nullptr, 0);
 	if (maybe_in_assign || MAYBE_SHARED(value))

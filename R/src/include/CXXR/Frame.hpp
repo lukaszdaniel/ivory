@@ -900,9 +900,22 @@ namespace R
   /* environment cell access */
   struct R_varloc_t
   {
-    SEXP cell;
+  private:
+    SEXP m_cell;
+
+  public:
+    // not entirely true, since m_cell can contain Symbol as well (for now)
+    SEXP asPairList()
+    {
+      return m_cell;
+    }
+
+    // not entirely true, since m_cell can contain Symbol as well (for now)
+    void fromPairList(SEXP pl)
+    {
+      m_cell = pl;
+    }
   }; /* use struct to prevent casting */
-  // using R_varloc_t = SEXP;
   // using R_varloc_t = CXXR::Frame::Binding *;
 
   R_varloc_t R_findVarLocInFrame(SEXP, SEXP);
