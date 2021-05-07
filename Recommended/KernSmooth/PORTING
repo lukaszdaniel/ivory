@@ -222,3 +222,28 @@ Version 2.23-16
 
 Incude <stddef.h> in src/init.c.
 Add credit for LINPACK routines.
+
+Version 2.23-17
+===============
+
+Update translations and PORTING
+
+Version 2.23-18
+===============
+
+src/dgedi.f: remove incorrect copyright in header.
+
+Add Note field in DESCRIPTION
+
+Version 2.23-19
+===============
+
+src/rlbin.f: issue in locpoly()  reported by Peter Dalgaard
+tests/locpoly.R: regression test for the above.
+
+Version 2.23-20
+===============
+
+R/all.R: add sanity check for 'canonical' argument.
+man/bkde.Rd: stress the above.
+Update fr translations.

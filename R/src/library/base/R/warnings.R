@@ -1,7 +1,7 @@
 #  File src/library/base/R/warnings.R
 #  Part of the R package, https://www.R-project.org
 #
-#  Copyright (C) 1995-2020 The R Core Team
+#  Copyright (C) 1995-2021 The R Core Team
 #
 #  This program is free software; you can redistribute it and/or modify
 #  it under the terms of the GNU General Public License as published by
@@ -107,6 +107,6 @@ chkDots <- function(..., which.call = -1, allowed = character(0)) {
 				 "In command '%s':\n extra arguments %s will be disregarded", domain = "R-base"),
 			paste(deparse(sys.call(which.call), control=c())),
 			## sub(")$", '', sub("^list\\(", '', deparse(list(...), control=c())))
-			paste(sQuote(names(list(...))), collapse = ", ")),
+			paste(sQuote(...names()), collapse = ", ")),
 		call. = FALSE, domain=NA)
 }
