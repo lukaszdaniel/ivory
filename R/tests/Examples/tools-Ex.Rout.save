@@ -63,8 +63,9 @@ Type 'q()' to quit R.
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head><title>R: This is a sample header</title>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
 <link rel="stylesheet" type="text/css" href="/doc/html/R.css" />
-</head><body>
+</head><body><div class="container">
 <h1> This is a sample header
 <img class="toplogo" src="/doc/html/Rlogo.svg" alt="[R logo]" />
 </h1>
@@ -851,8 +852,9 @@ function (x, ...)
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head><title>R: R</title>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
 <link rel="stylesheet" type="text/css" href="/doc/html/R.css" />
-</head><body>
+</head><body><div class="container">
 <h1> R
 <img class="toplogo" src="/doc/html/Rlogo.svg" alt="[R logo]" />
 </h1>
@@ -901,7 +903,7 @@ An illustration of lexical scoping.
 </table>
 <p>
 </p>
-</body></html>
+</div></body></html>
 > 
 > 
 > 
@@ -959,7 +961,7 @@ An illustration of lexical scoping.
 > 
 > ## IGNORE_RDIFF_BEGIN
 > R_user_dir("FOO", "cache")
-[1] "/home/monia/.cache/R/FOO"
+[1] "/Users/deepayan/Library/Caches/org.R-project.R/R/FOO"
 > ## IGNORE_RDIFF_END
 > 
 > 
