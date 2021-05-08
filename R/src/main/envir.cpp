@@ -170,7 +170,20 @@ inline static SEXP BINDING_VALUE(SEXP b)
 
 RObject *Frame::Binding::unforcedValue() const
 {
-    RObject *ans = (isActive() ? getActiveValue(m_value) : m_value);
+    RObject *ans = nullptr;
+    if (bndcellTag())
+    {
+        R_expand_binding_value(const_cast<Frame::Binding *>(this));
+        ans = m_value;
+    }
+    if (isActive())
+        ans = getActiveValue(m_value);
+    else
+    {
+        if (bndcellTag())
+            Rf_error(_("bad binding access"));
+        ans = m_value;
+    }
     m_frame->monitorRead(*this);
     return ans;
 }
@@ -207,6 +220,11 @@ void Frame::Binding::assignSlow(RObject *new_value, Origin origin)
     }
     else
     {
+        if (bndcellTag())
+        {
+            m_value = nullptr;
+            setBndCellTag(0);
+        }
         m_value.retarget(m_frame, new_value);
         m_frame->monitorWrite(*this);
     }
@@ -235,7 +253,7 @@ inline static bool ISNULL(SEXP x)
 /* Function to determine whethr an environment contains special symbols */
 Rboolean R_envHasNoSpecialSymbols(SEXP env)
 {
-    for (SEXP frame = FRAME(env); frame != nullptr; frame = CDR(frame))
+    for (SEXP frame = FRAME(env); frame; frame = CDR(frame))
 	if (IS_SPECIAL_SYMBOL(TAG(frame)))
 	    return FALSE;
 
@@ -499,8 +517,9 @@ inline SEXP Rf_findVarInFrame(SEXP rho, SEXP symbol)
  * represented by a pairlist.
  */
 void Rf_readS3VarsFromFrame(SEXP rho,
-    SEXP *dotGeneric, SEXP *dotGroup, SEXP *dotClass, SEXP *dotMethod,
-    SEXP *dotGenericCallEnv, SEXP *dotGenericDefEnv) {
+                            SEXP *dotGeneric, SEXP *dotGroup, SEXP *dotClass, SEXP *dotMethod,
+                            SEXP *dotGenericCallEnv, SEXP *dotGenericDefEnv)
+{
 
     SEXP frame = nullptr;
 
@@ -552,12 +571,12 @@ void Rf_readS3VarsFromFrame(SEXP rho,
 slowpath:
     /* fall back to the slow but general implementation */
 
-    *dotGeneric = findVarInFrame3(rho, R_dot_Generic, TRUE);
-    *dotClass = findVarInFrame3(rho, R_dot_Class, TRUE);
-    *dotMethod = findVarInFrame3(rho, R_dot_Method, TRUE);
-    *dotGroup = findVarInFrame3(rho, R_dot_Group, TRUE);
-    *dotGenericCallEnv = findVarInFrame3(rho, R_dot_GenericCallEnv, TRUE);
-    *dotGenericDefEnv = findVarInFrame3(rho, R_dot_GenericDefEnv, TRUE);
+    *dotGeneric = Rf_findVarInFrame3(rho, R_dot_Generic, TRUE);
+    *dotClass = Rf_findVarInFrame3(rho, R_dot_Class, TRUE);
+    *dotMethod = Rf_findVarInFrame3(rho, R_dot_Method, TRUE);
+    *dotGroup = Rf_findVarInFrame3(rho, R_dot_Group, TRUE);
+    *dotGenericCallEnv = Rf_findVarInFrame3(rho, R_dot_GenericCallEnv, TRUE);
+    *dotGenericDefEnv = Rf_findVarInFrame3(rho, R_dot_GenericDefEnv, TRUE);
 }
 
 /** @brief Look up a symbol in an environment.
@@ -1418,7 +1437,8 @@ static SEXP findRootPromise(SEXP p)
 HIDDEN bool R::R_isMissing(SEXP symbol, SEXP rho)
 {
     int ddv = 0;
-    SEXP vl, s;
+    SEXP s;
+    GCRoot<> vl; // Binding defined in PairList form
 
     if (symbol == R_MissingArg) /* Yes, this can happen */
 	return true;
@@ -1504,7 +1524,7 @@ HIDDEN SEXP do_missing(SEXP call, SEXP op, SEXP args, SEXP rho)
     int ddv=0;
     SEXP sym, s;
     GCStackRoot<> rval;
-    GCStackRoot<> t;
+    GCStackRoot<> t; // Binding defined in PairList form
 
     checkArity(op, args);
     check1arg(args, call, "x");
@@ -1598,8 +1618,9 @@ HIDDEN SEXP do_emptyenv(SEXP call, SEXP op, SEXP args, SEXP rho)
 */
 HIDDEN SEXP do_attach(SEXP call, SEXP op, SEXP args, SEXP env)
 {
-    SEXP name, s, t, x;
+    SEXP name, t, x;
     int pos;
+    GCRoot<Environment> newenv;
 
     checkArity(op, args);
 
@@ -1611,44 +1632,48 @@ HIDDEN SEXP do_attach(SEXP call, SEXP op, SEXP args, SEXP env)
     if (!isValidStringF(name))
         error(_("invalid '%s' argument"), "name");
 
-    if (isNewList(CAR(args))) {
-	    SETCAR(args, VectorToPairList(CAR(args)));
+    if (isNewList(CAR(args)))
+    {
+        SETCAR(args, VectorToPairList(CAR(args)));
 
-	    for (x = CAR(args); x != nullptr; x = CDR(x))
-		if (TAG(x) == nullptr)
-		    error(_("all elements of a list must be named"));
-	    GCStackRoot<PairList> dupcar(SEXP_downcast<PairList*>(shallow_duplicate(CAR(args))));
-        PROTECT(s = GCNode::expose(new Environment(nullptr, dupcar)));
-	} else if (isEnvironment(CAR(args))) {
-	    SEXP p, loadenv = CAR(args);
+        for (x = CAR(args); x != nullptr; x = CDR(x))
+            if (TAG(x) == nullptr)
+                error(_("all elements of a list must be named"));
+        GCStackRoot<PairList> dupcar(SEXP_downcast<PairList*>(shallow_duplicate(CAR(args))));
+        newenv = GCNode::expose(new Environment(nullptr, dupcar));
+    }
+    else if (isEnvironment(CAR(args)))
+    {
+        SEXP p, loadenv = CAR(args);
 
-	    PROTECT(s = GCNode::expose(new Environment()));
-            GCStackRoot<> framelist(FRAME(loadenv));
-            for (p = framelist; p != nullptr; p = CDR(p))
-                defineVar(TAG(p), lazy_duplicate(CAR(p)), s);
-	} else {
-	    error(_("'attach()' function only works for lists, data frames and environments"));
-	    s = nullptr; /* -Wall */
-	}
+        newenv = GCNode::expose(new Environment());
+        GCStackRoot<> framelist(FRAME(loadenv));
+        for (p = framelist; p; p = CDR(p))
+            defineVar(TAG(p), lazy_duplicate(CAR(p)), newenv);
+    }
+    else
+    {
+        error(_("'attach()' function only works for lists, data frames and environments"));
+        newenv = nullptr; /* -Wall */
+    }
 
-    setAttrib(s, R_NameSymbol, name);
+    setAttrib(newenv, R_NameSymbol, name);
     for (t = R_GlobalEnv; ENCLOS(t) != R_BaseEnv && pos > 2; t = ENCLOS(t))
-	pos--;
+        pos--;
 
     if (ENCLOS(t) == R_BaseEnv)
     {
-        SET_ENCLOS(t, s);
-        SET_ENCLOS(s, R_BaseEnv);
+        SET_ENCLOS(t, newenv);
+        SET_ENCLOS(newenv, R_BaseEnv);
     }
     else
     {
         x = ENCLOS(t);
-        SET_ENCLOS(t, s);
-        SET_ENCLOS(s, x);
+        SET_ENCLOS(t, newenv);
+        SET_ENCLOS(newenv, x);
     }
 
-    UNPROTECT(1); /* s */
-    return s;
+    return newenv;
 }
 
 /** @brief Detach the specified environment.
@@ -2512,8 +2537,7 @@ HIDDEN SEXP do_mkUnbound(SEXP call, SEXP op, SEXP args, SEXP rho)
 
     if (TYPEOF(sym) != SYMSXP)
         error(_("'%s' argument is not a symbol"), "sym");
-    /* This is not quite the same as SET_SYMBOL_BINDING_VALUE as it
-       does not allow active bindings to be unbound */
+    /* This does not allow active bindings to be unbound */
     if (R_BindingIsLocked(sym, R_BaseEnv))
         error(_("cannot unbind a locked binding"));
     if (R_BindingIsActive(sym, R_BaseEnv))
@@ -2890,7 +2914,8 @@ HIDDEN SEXP do_importIntoEnv(SEXP call, SEXP op, SEXP args, SEXP env)
 	expsym = installTrChar(STRING_ELT(expnames, i));
 
 	/* find the binding--may be a CONS cell or a symbol */
-	SEXP binding = nullptr;
+	GCRoot<> binding;  // represented in PairList form.
+
 	for (SEXP env = expenv;
 	     env != R_EmptyEnv && binding == nullptr;
 	     env = ENCLOS(env))
@@ -2902,7 +2927,7 @@ HIDDEN SEXP do_importIntoEnv(SEXP call, SEXP op, SEXP args, SEXP env)
         {
 		binding = findVarLocInFrame(env, expsym, nullptr);
         }
-    if (binding == nullptr)
+    if (!binding)
 	    binding = expsym;
 
 	/* get value of the binding; do not force promises */

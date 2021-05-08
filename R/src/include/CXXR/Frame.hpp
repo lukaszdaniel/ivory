@@ -102,7 +102,7 @@ namespace CXXR
        */
       Binding()
           : m_frame(nullptr), m_origin(MISSING), m_active(false),
-            m_locked(false)
+            m_locked(false), m_bndcellTag(0)
       {
         m_symbol = nullptr;
         m_value = Symbol::missingArgument();
@@ -370,6 +370,16 @@ namespace CXXR
       RObject *value() const;
       RObject *unforcedValue() const;
 
+      unsigned int bndcellTag() const
+      {
+        return m_bndcellTag;
+      }
+
+      void setBndCellTag(unsigned int v)
+      {
+        m_bndcellTag = v;
+      }
+
       /** @brief Auxiliary function to Frame::visitReferents().
        *
        * This function conducts a visitor to those objects
@@ -389,6 +399,7 @@ namespace CXXR
       unsigned char m_origin;
       bool m_active;
       bool m_locked;
+      unsigned int m_bndcellTag;
 
       std::pair<RObject *, bool> forcedValueSlow() const;
       void assignSlow(RObject *new_value, Origin origin);
@@ -893,10 +904,12 @@ namespace CXXR
    */
   bool isMissingArgument(const Symbol *sym, Frame *frame);
 
+  void R_expand_binding_value(Frame::Binding *b);
 } // namespace CXXR
 
 namespace R
 {
+#if CXXR_TRUE
   /* environment cell access */
   struct R_varloc_t
   {
@@ -916,8 +929,9 @@ namespace R
       m_cell = pl;
     }
   }; /* use struct to prevent casting */
-  // using R_varloc_t = CXXR::Frame::Binding *;
-
+#else
+  using R_varloc_t = CXXR::Frame::Binding *;
+#endif
   R_varloc_t R_findVarLocInFrame(SEXP, SEXP);
   R_varloc_t R_findVarLoc(SEXP rho, SEXP symbol);
   SEXP R_GetVarLocValue(R_varloc_t vl);

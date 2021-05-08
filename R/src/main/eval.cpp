@@ -2181,7 +2181,7 @@ inline static SEXP GET_BINDING_CELL(SEXP symbol, SEXP rho)
 	}
 }
 
-inline static bool SET_BINDING_VALUE(SEXP loc, SEXP value)
+inline static bool SET_BINDING_VALUE2(SEXP loc, SEXP value, SEXP rho)
 {
 	/* This depends on the current implementation of bindings */
 	if (loc && !BINDING_IS_LOCKED(loc) && !IS_ACTIVE_BINDING(loc))
@@ -2322,7 +2322,7 @@ HIDDEN SEXP do_for(SEXP call, SEXP op, SEXP args, SEXP rho)
 				default:
 					errorcall(call, _("invalid 'for()' loop sequence 2"));
 				}
-				if (CAR(cell) == R_UnboundValue || !SET_BINDING_VALUE(cell, v))
+				if (CAR(cell) == R_UnboundValue || !SET_BINDING_VALUE2(cell, v, rho))
 					defineVar(sym, v, rho);
 			}
 			if (!bgn && ENV_RDEBUG(rho) && !R_GlobalContext->getBrowserFinish())
@@ -4224,10 +4224,8 @@ inline static SEXP GETSTACK_PTR_TAG(R_bcstack_t *s)
 	do                                         \
 	{                                          \
 		SEXP info = allocVector(INTSXP, 2);    \
-		INTEGER(info)                          \
-		[0] = (int)rn1;                        \
-		INTEGER(info)                          \
-		[1] = (int)rn2;                        \
+		INTEGER(info)[0] = (int)rn1;           \
+		INTEGER(info)[1] = (int)rn2;           \
 		R_BCNodeStackTop[idx].u.sxpval = info; \
 		R_BCNodeStackTop[idx].tag = INTSEQSXP; \
 	} while (0)
@@ -6484,10 +6482,9 @@ struct R_loopinfo_t{
 	do                                               \
 	{                                                \
 		if (BNDCELL_UNBOUND(cell) ||                 \
-			!SET_BINDING_VALUE(cell, value))         \
+			!SET_BINDING_VALUE2(cell, value, rho))   \
 			defineVar(loopinfo->symbol, value, rho); \
 	} while (0)
-
 
 /* Check whether a call is to a base function; if not use AST interpeter */
 /***** need a faster guard check */
@@ -7196,7 +7193,7 @@ static SEXP bcEval(SEXP body, SEXP rho, bool useCache)
 	    }
 
 	SEXP value = GETSTACK(-1);
-	if (! SET_BINDING_VALUE(loc, value)) {
+	if (! SET_BINDING_VALUE2(loc, value, rho)) {
 	    SEXP symbol = VECTOR_ELT(constants, sidx);
 	    PROTECT(value);
 	    defineVar(symbol, value, rho);
@@ -7537,7 +7534,7 @@ static SEXP bcEval(SEXP body, SEXP rho, bool useCache)
 		value = v;
 	    }
 	}
-	if (! SET_BINDING_VALUE(cell, value))
+	if (! SET_BINDING_VALUE2(cell, value, rho))
 	    defineVar(symbol, value, rho);
 	R_BCNodeStackTop -= 2; /* now pop cell and LHS value off the stack */
 	/* original right-hand side value is now on top of stack again */

@@ -1442,6 +1442,45 @@ HIDDEN void R::R_expand_binding_value(SEXP b)
 #endif
 }
 
+HIDDEN void CXXR::R_expand_binding_value(Frame::Binding *b)
+{
+#if BOXED_BINDING_CELLS
+    if (b)
+        b->setBndCellTag(0);
+#else
+    int typetag = b ? b->bndcellTag() : 0;
+    if (typetag)
+    {
+        union
+        {
+            RObject *sxpval;
+            double dval;
+            int ival;
+        } vv;
+        RObject *val;
+        vv.sxpval = b ? b->value() : nullptr;
+        switch (typetag)
+        {
+        case REALSXP:
+            val = Rf_ScalarReal(vv.dval);
+            if (b)
+                b->setValue(val);
+            break;
+        case INTSXP:
+            val = Rf_ScalarInteger(vv.ival);
+            if (b)
+                b->setValue(val);
+            break;
+        case LGLSXP:
+            val = Rf_ScalarLogical(vv.ival);
+            if (b)
+                b->setValue(val);
+            break;
+        }
+    }
+#endif
+}
+
 HIDDEN void R::R_args_enable_refcnt(SEXP args)
 {
     /* args is escaping into user C code and might get captured, so
