@@ -527,25 +527,6 @@ Rboolean IS_SPECIAL_SYMBOL(SEXP b)
     return Rboolean(b && SEXP_downcast<const Symbol *>(b)->isSpecialSymbol());
 }
 
-void SET_NO_SPECIAL_SYMBOLS(SEXP b)
-{
-    if (!b)
-        return;
-    SEXP_downcast<Symbol *>(b)->setSpecialSymbol(true);
-}
-
-void UNSET_NO_SPECIAL_SYMBOLS(SEXP b)
-{
-    if (!b)
-        return;
-    SEXP_downcast<Symbol *>(b)->setSpecialSymbol(false);
-}
-
-Rboolean NO_SPECIAL_SYMBOLS(SEXP b)
-{
-    return Rboolean(b && SEXP_downcast<const Symbol *>(b)->isSpecialSymbol());
-}
-
 Rboolean Rf_isUserBinop(SEXP s)
 {
     if (TYPEOF(s) == SYMSXP)

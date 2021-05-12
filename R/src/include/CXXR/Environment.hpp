@@ -87,7 +87,7 @@ namespace CXXR
        */
       explicit Environment(Environment *enclosing = nullptr, PairList *frame = nullptr)
           : RObject(ENVSXP), m_single_stepping(false),
-            m_globally_cached(false), m_locked(false)
+            m_globally_cached(false), m_locked(false), m_no_special_symbols(true)
       {
          m_hashtable = nullptr;
          m_enclosing = enclosing;
@@ -189,6 +189,16 @@ namespace CXXR
       bool isLocked() const
       {
          return m_locked;
+      }
+
+      bool noSpecialSymbols() const
+      {
+         return m_no_special_symbols;
+      }
+
+      void setNoSpecialSymbols(bool on)
+      {
+         m_no_special_symbols = on;
       }
 
       /** @brief Access the hash table.
@@ -343,6 +353,7 @@ namespace CXXR
       bool m_single_stepping;
       bool m_globally_cached;
       bool m_locked;
+      bool m_no_special_symbols;
 
       static void initialize();
       friend void ::R::InitGlobalEnv();
@@ -506,6 +517,9 @@ extern "C"
    Rboolean R_BindingIsActive(SEXP sym, SEXP env);
    SEXP R_ActiveBindingFunction(SEXP sym, SEXP env);
    Rboolean R_HasFancyBindings(SEXP rho);
+   void SET_NO_SPECIAL_SYMBOLS(SEXP b);
+   void UNSET_NO_SPECIAL_SYMBOLS(SEXP b);
+   Rboolean NO_SPECIAL_SYMBOLS(SEXP b);
 } // extern "C"
 
 #endif /* ENVIRONMENT_HPP */
