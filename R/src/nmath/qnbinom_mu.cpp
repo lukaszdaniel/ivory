@@ -1,7 +1,7 @@
 /*
  *  Mathlib : A C Library of Special Functions
- *  Copyright (C) 1999-2021 The R Core Team
- *  Copyright (C) 1998 Ross Ihaka
+ *  Copyright (C) 2000-2021 The R Core Team
+ *  Copyright (C) 2005-2021 The R Foundation
  *
  *  This program is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -17,9 +17,16 @@
  *  along with this program; if not, a copy is available at
  *  https://www.R-project.org/Licenses/
  *
+ *  SYNOPSIS
+ *
+ *	#include <Rmath.h>
+ *      double qnbinom_mu(double p, double size, double mu,
+ *                     int lower_tail, int log_p)
+ *
  *  DESCRIPTION
  *
- *	The quantile function of the Poisson distribution.
+ *	The quantile function of the negative binomial distribution,
+ *      for the (size, mu) parametrizations
  *
  *  METHOD
  *
@@ -33,44 +40,44 @@
 #include "nmath.h"
 #include "dpq.h"
 
-#ifdef DEBUG_qpois
+#ifdef DEBUG_qnbinom
 # define R_DBG_printf(...) REprintf(__VA_ARGS__)
 #else
 # define R_DBG_printf(...)
 #endif
 
-
-#define _thisDIST_ pois
-#define _dist_PARS_DECL_ double lambda
-#define _dist_PARS_      lambda
+#define _thisDIST_ nbinom_mu
+#define _dist_PARS_DECL_ double size, double mu
+#define _dist_PARS_      size, mu
 
 #include "qDiscrete_search.h"
 //        ------------------>  do_search() and all called by q_DISCRETE_*() below
 
-double Rf_qpois(double p, double lambda, int lower_tail, int log_p)
+double qnbinom_mu(double p, double size, double mu, int lower_tail, int log_p)
 {
+    if (size == ML_POSINF) // limit case: Poisson
+	return(qpois(p, mu, lower_tail, log_p));
+
 #ifdef IEEE_754
-    if (ISNAN(p) || ISNAN(lambda))
-	return p + lambda;
+    if (ISNAN(p) || ISNAN(size) || ISNAN(mu))
+	return p + size + mu;
 #endif
-    if(!R_FINITE(lambda))
-	ML_WARN_return_NAN;
-    if(lambda < 0) ML_WARN_return_NAN;
-    R_Q_P01_check(p);
-    if(lambda == 0) return 0;
-    if(p == R_DT_0) return 0;
-    if(p == R_DT_1) return ML_POSINF;
+
+    if (mu == 0 || size == 0) return 0;
+    if (mu <  0 || size <  0) ML_WARN_return_NAN;
+
+    R_Q_P01_boundaries(p, 0, ML_POSINF);
 
     double
-	mu = lambda,
-	sigma = sqrt(lambda),
-	// had gamma = sigma; PR#8058 should be kurtosis which is mu^-0.5 = 1/sigma
-	gamma = 1.0/sigma;
+	Q = 1 + mu/size, // (size+mu)/size = 1 / prob
+	P = mu/size,     // = (1 - prob) * Q = (1 - prob) / prob  =  Q - 1
+	sigma = sqrt(size * P * Q),
+	gamma = (Q + P)/sigma;
 
-     R_DBG_printf("qpois(p=%.12g, lambda=%.15g, l.t.=%d, log=%d):"
-		  " mu=%g, sigma=%g, gamma=%g;\n",
-		  p, lambda, lower_tail, log_p, mu, sigma, gamma);
+    R_DBG_printf("qnbinom_mu(p=%.12g, size=%.15g, mu=%g, l.t.=%d, log=%d):"
+		 " mu=%g, sigma=%g, gamma=%g;\n",
+		 p, size, mu, lower_tail, log_p, mu, sigma, gamma);
 
-     // never "needed" here (FIXME?):   q_DISCRETE_01_CHECKS();
-     q_DISCRETE_BODY();
+    q_DISCRETE_01_CHECKS();
+    q_DISCRETE_BODY();
 }
