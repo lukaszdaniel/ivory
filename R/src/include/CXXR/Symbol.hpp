@@ -604,9 +604,6 @@ extern "C"
     void SET_SPECIAL_SYMBOL(SEXP b);
     void UNSET_SPECIAL_SYMBOL(SEXP b);
     Rboolean IS_SPECIAL_SYMBOL(SEXP b);
-    void SET_NO_SPECIAL_SYMBOLS(SEXP b);
-    void UNSET_NO_SPECIAL_SYMBOLS(SEXP b);
-    Rboolean NO_SPECIAL_SYMBOLS(SEXP b);
 
     void SET_DDVAL(SEXP x, int v);
     SEXP Rf_installDDVAL(int i);

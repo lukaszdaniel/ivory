@@ -178,6 +178,16 @@ namespace CXXR
          return m_locked;
       }
 
+      bool noSpecialSymbols() const
+      {
+         return m_no_special_symbols;
+      }
+
+      void setNoSpecialSymbols(bool on)
+      {
+         m_no_special_symbols = on;
+      }
+
       /** @brief Replace the enclosing environment.
        *
        * @param new_enclos Pointer to the environment now to be
@@ -280,6 +290,7 @@ namespace CXXR
       GCEdge<PairList> m_frame;
       bool m_single_stepping;
       bool m_locked;
+      bool m_no_special_symbols;
 
       static void initialize();
       friend void ::R::InitGlobalEnv();
@@ -443,6 +454,9 @@ extern "C"
    Rboolean R_BindingIsActive(SEXP sym, SEXP env);
    SEXP R_ActiveBindingFunction(SEXP sym, SEXP env);
    Rboolean R_HasFancyBindings(SEXP rho);
+   void SET_NO_SPECIAL_SYMBOLS(SEXP b);
+   void UNSET_NO_SPECIAL_SYMBOLS(SEXP b);
+   Rboolean NO_SPECIAL_SYMBOLS(SEXP b);
 } // extern "C"
 
 #endif /* ENVIRONMENT_HPP */

@@ -17,6 +17,25 @@
       of \R to that provided by \samp{libcurl}.
     }
   }
+
+  \subsection{NEW FEATURES}{
+    \itemize{
+      \item \code{matrix(x, n,m)} now warns in more cases where
+      \code{length(x)} is larger than \code{n * m}; suggested by Abby
+      Spurdle and Wolfgang Huber in Feb.2021 on R-devel (mailing list).
+    }
+  }
+
+  \subsection{BUG FIXES}{
+    \itemize{
+      \item \code{qnbinom(p, size, mu)} for large \code{size/mu} is correct
+      now in a range of cases (\PR{18095}); similarly for the \code{(size,
+      prob)} parametrization of the negative binomial.  Also \code{qpois()}
+      and \code{qbinom()} are better and or faster for extreme cases.  The
+      underlying C code has been modularized and common to all four cases
+      of discrete distributions.
+    }
+  }
 }
 
 \section{\Rlogo CHANGES IN R 4.1.0}{
@@ -267,6 +286,10 @@
       \item Environment variable \env{LC_ALL} on Windows now takes
       precedence over \env{LC_CTYPE} and variables for other supported
       categories, matching the POSIX behaviour.
+
+      \item \code{duplicated()} and \code{anyDuplicated()} are now
+      optimized for integer and real vectors that are known to be sorted
+      via the ALTREP framework. Contributed by Gabriel Becker via \PR{17993}.
     }
   }
 

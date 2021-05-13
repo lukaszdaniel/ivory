@@ -160,8 +160,8 @@ struct OSDynSymbol
   /* Put the current system error in DLLerror. */
 
   void (*deleteCachedSymbols)(DllInfo *dll); /* Discard cached symbols */
-  DL_FUNC(*lookupCachedSymbol)
-  (const char *name, const char *pkg, int all);
+  DL_FUNC (*lookupCachedSymbol)(const char *name, const char *pkg, int all,
+                                  DllInfo **dll);
 
   void (*fixPath)(char *path);
   void (*getFullDLLPath)(SEXP call, char *buf, const char *const path);
@@ -182,6 +182,7 @@ struct R_CPFun
   char pkg[21];
   char name[41];
   DL_FUNC func;
+  DllInfo *dll;
 };
 
 extern R_CPFun CPFun[];
@@ -189,7 +190,8 @@ extern int nCPFun;
 
 #endif /* CACHE_DLL_SYM */
 
-DL_FUNC Rf_lookupCachedSymbol(const char *name, const char *pkg, int all);
+void Rf_deleteCachedSymbols(DllInfo *);
+DL_FUNC Rf_lookupCachedSymbol(const char *name, const char *pkg, int all, DllInfo **dll);
 
 DL_FUNC R_dlsym(DllInfo *info, const char *name, R_RegisteredNativeSymbol *symbol);
 

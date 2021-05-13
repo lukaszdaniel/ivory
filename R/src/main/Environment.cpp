@@ -218,3 +218,22 @@ void SET_ENV_RDEBUG(SEXP x, int v)
     Environment *env = SEXP_downcast<Environment *>(x);
     env->setSingleStepping(v);
 }
+
+void SET_NO_SPECIAL_SYMBOLS(SEXP b)
+{
+    if (!b)
+        return;
+    SEXP_downcast<Environment *>(b)->setNoSpecialSymbols(true);
+}
+
+void UNSET_NO_SPECIAL_SYMBOLS(SEXP b)
+{
+    if (!b)
+        return;
+    SEXP_downcast<Environment *>(b)->setNoSpecialSymbols(false);
+}
+
+Rboolean NO_SPECIAL_SYMBOLS(SEXP b)
+{
+    return Rboolean(b && SEXP_downcast<Environment *>(b)->noSpecialSymbols());
+}

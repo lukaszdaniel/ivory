@@ -73,7 +73,7 @@ getLabelList <- function(label, text.settings, default.label = NULL)
 {
     if (!is.null(label))
     {
-        if (inherits(label, "grob")) return(label)
+        if (is.grob(label)) return(label)
         ans <-
             list(label = 
                  if (is.characterOrExpression(label)) label
@@ -114,7 +114,7 @@ grobFromLabelList <- function(lab, name = "label", orient = 0)
         ## NOTE: lab could also be "empty" expression / call / symbol, but we're not checking
     }
     if (emptyLabel(lab)) return (NULL)
-    if (inherits(lab, "grob")) return(lab)
+    if (is.grob(lab)) return(lab)
     process.lab <-
         function(label, rot = orient,
                  x = NULL, y = NULL,
@@ -399,7 +399,7 @@ plot.trellis <-
 ### FIXME: need some thinking here.
 
     ## ## Original version (up to 0.13 series):
-
+    
     ## order.cond <- seq_len(prod(sapply(x$condlevels, length)))
     ## dim(order.cond) <- sapply(x$condlevels, length)
 
@@ -1004,7 +1004,7 @@ plot.trellis <-
                             panel.fill(col = panel.bg$col)
                         upViewport()
 
-
+                        
 ############################################
 ###        drawing the axes               ##
 ############################################
@@ -1139,11 +1139,11 @@ plot.trellis <-
                         ## must be postponed till after the panel is
                         ## drawn, since otherwise the border is liable
                         ## to be obscured.
-
+                        
                         upViewport()
 
 
-
+                        
 ############################################
 ###        done drawing axes              ##
 ############################################
@@ -1161,7 +1161,7 @@ plot.trellis <-
                                                     prefix = prefix,
                                                     clip.off = FALSE))
 
-
+                        
                         ## pushViewport(viewport(layout.pos.row = pos.row,
                         ##                       layout.pos.col = pos.col,
                         ##                       xscale = xscale,
@@ -1227,7 +1227,7 @@ plot.trellis <-
                         upViewport()
 
 
-
+                        
 
 
 #########################################
@@ -1253,13 +1253,13 @@ plot.trellis <-
 
                                 which.given <- x$perm.cond[i]
                                 which.panel <- which.packet
-
+                                
                                 lattice.setStatus(current.which.given =
                                                   which.given,
                                                   current.which.panel =
                                                   which.panel,
                                                   prefix = prefix)
-
+                                
                                 strip(which.given = which.given,
                                       which.panel = which.panel,
 ##                                       panel.number = panel.number,
@@ -1275,7 +1275,7 @@ plot.trellis <-
                                       bg = strip.col.default.bg[i],
                                       fg = strip.col.default.fg[i],
                                       par.strip.text = par.strip.text)
-
+                                
                             }
                             upViewport()
                         }
@@ -1308,13 +1308,13 @@ plot.trellis <-
 
                                 which.given <- x$perm.cond[i]
                                 which.panel <- which.packet
-
+                                
                                 lattice.setStatus(current.which.given =
                                                   which.given,
                                                   current.which.panel =
                                                   which.panel,
                                                   prefix = prefix)
-
+                                
                                 strip.left(which.given = which.given,
                                            which.panel = which.panel,
 ##                                            panel.number = panel.number,
@@ -1418,8 +1418,8 @@ plot.trellis <-
             dev.held <- FALSE
         }
     }
-
-
+    
+    
     if (!is.null(position))
     {
         if (!is.null(split))

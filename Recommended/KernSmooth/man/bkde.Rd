@@ -36,11 +36,10 @@ character string which determines the smoothing kernel.
 This can be abbreviated to any unique abbreviation.
 }
 \item{canonical}{
-logical flag: if \code{TRUE}, canonically scaled kernels are used.
+length-one logical vector: if \code{TRUE}, canonically scaled kernels are used.
 }
 \item{gridsize}{
-the number of equally spaced points at which to estimate
-the density.
+the number of equally spaced points at which to estimate the density.
 }
 \item{range.x}{
 vector containing the minimum and maximum values of \code{x}

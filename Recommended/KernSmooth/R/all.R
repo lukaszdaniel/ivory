@@ -27,6 +27,9 @@ bkde <- function(x, kernel = "normal", canonical = FALSE, bandwidth,
                    "biweight" = 35^(1/5),
                    "triweight" = (9450/143)^(1/5))
 
+    if (length(canonical) != 1L || !is.logical(canonical))
+        stop("'canonical' must be a length-1 logical vector")
+
     ## Set default bandwidth
 
     h <- if (missing(bandwidth)) del0 * (243/(35*n))^(1/5)*sqrt(var(x))

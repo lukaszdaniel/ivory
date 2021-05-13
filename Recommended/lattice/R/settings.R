@@ -169,14 +169,14 @@ canonical.theme <- function(name = .Device, color = name != "postscript")
                                      axis.bottom = 1,
                                      axis.xlab.padding = 1,
                                      xlab = 1,
-                                     xlab.key.padding = 0,
+                                     xlab.key.padding = 1,
                                      key.bottom = 1,
                                      key.sub.padding = 1,
                                      sub = 1,
                                      bottom.padding = 1),
              layout.widths    = list(left.padding = 1,
                                      key.left = 1,
-                                     key.ylab.padding = 0,
+                                     key.ylab.padding = 1,
                                      ylab = 1,
                                      ylab.axis.padding = 1,
                                      axis.left = 1,
@@ -191,6 +191,7 @@ canonical.theme <- function(name = .Device, color = name != "postscript")
                                      right.padding = 1),
 
              box.3d           = list(alpha = 1, col = can.col[1], lty = 1, lwd = 1),
+             par.title.text   = list(alpha = 1, cex = 1.2, col = can.col[1], font = 1, lineheight = 1), # legend title (not used for key yet)
              par.xlab.text    = list(alpha = 1, cex = 1, col = can.col[1], font = 1, lineheight = 1),
              par.ylab.text    = list(alpha = 1, cex = 1, col = can.col[1], font = 1, lineheight = 1),
              par.zlab.text    = list(alpha = 1, cex = 1, col = can.col[1], font = 1, lineheight = 1),
@@ -484,7 +485,7 @@ show.settings <- function(x = NULL)
                    lty = par.box$lty,
                    lwd = par.box$lwd)
     }
-
+    
     xyplot(d ~ d | d,
            prepanel = function(x, y) {
                list(ylim = c(0, 1),
@@ -1015,7 +1016,7 @@ lattice.options <- function(...)
          prepanel.default.barchart = "prepanel.default.bwplot",
          prepanel.default.wireframe = "prepanel.default.cloud",
          prepanel.default.contourplot = "prepanel.default.levelplot",
-
+         
          ## Axis units.  Rather than messing with these, end-users
          ## should manipulate corresponding settings via
          ## trellis.par.set()

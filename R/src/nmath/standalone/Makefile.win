@@ -88,7 +88,7 @@ SOURCES_NMATH = \
 	dexp.cpp pexp.cpp qexp.cpp rexp.cpp \
 	dgeom.cpp pgeom.cpp qgeom.cpp rgeom.cpp \
 	dhyper.cpp phyper.cpp qhyper.cpp rhyper.cpp \
-	dnbinom.cpp pnbinom.cpp qnbinom.cpp rnbinom.cpp \
+	dnbinom.cpp pnbinom.cpp qnbinom.cpp qnbinom_mu.cpp rnbinom.cpp \
 	dpois.cpp ppois.cpp qpois.cpp rpois.cpp \
 	dweibull.cpp pweibull.cpp qweibull.cpp rweibull.cpp \
 	dlogis.cpp plogis.cpp qlogis.cpp rlogis.cpp \

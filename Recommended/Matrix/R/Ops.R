@@ -37,7 +37,7 @@ setMethod("-", signature(e1 = "Matrix", e2 = "missing"),
 	      0-e1
 	  })
 setMethod("-", signature(e1 = "denseMatrix", e2 = "missing"),
-	  function(e1, e2) { e1@x <- -e1@x; e1 })
+	  function(e1, e2) { e1@x <- -e1@x; .empty.factors(e1); e1 })
 
 ## "diagonalMatrix" -- only two cases -- easiest to do both
 setMethod("-", signature(e1 = "ddiMatrix", e2 = "missing"),
@@ -48,6 +48,7 @@ setMethod("-", signature(e1 = "ddiMatrix", e2 = "missing"),
                   }
 		  else ## diag == "N" -> using 'x' slot
                       e1@x <- -e1@x
+              .empty.factors(e1)
 	      e1
 	  })
 setMethod("-", signature(e1 = "ldiMatrix", e2 = "missing"),
@@ -129,6 +130,7 @@ setMethod("Compare", signature(e1 = "Matrix", e2 = "Matrix"),
 .Ops.via.x <- function(e1,e2) {
     dimCheck(e1, e2)
     e1@x <- callGeneric(e1@x, e2@x)
+    .empty.factors(e1)
     e1
 }
 
@@ -410,25 +412,25 @@ for(cl in c("numeric", "logical")) { # "complex", "raw" : basically "replValue"
 setMethod("Arith", signature(e1 = cl, e2 = "dpoMatrix"),
 	  function(e1, e2) if(!(l1 <- length(e1))) numeric()
 			   else if(l1 == 1 && any(.Generic == c("*","/","+")) && (e1 > 0)) {
-	      e2@x <- callGeneric(e1, e2@x) ; e2 # remains "dpo"
+	      e2@x <- callGeneric(e1, e2@x) ; .empty.factors(e2); e2 # remains "dpo"
 	  } else ## in all other cases
 	  callGeneric(e1, as(e2, "dsyMatrix")))
 setMethod("Arith", signature(e1 = cl, e2 = "dppMatrix"),
 	  function(e1, e2) if(!(l1 <- length(e1))) numeric()
 			   else if(l1 == 1 && any(.Generic == c("*","/","+")) && (e1 > 0)) {
-	      e2@x <- callGeneric(e1, e2@x) ; e2 # remains "dpp"
+	      e2@x <- callGeneric(e1, e2@x) ; .empty.factors(e2); e2 # remains "dpp"
 	  } else ## in all other cases
 	  callGeneric(e1, as(e2, "dspMatrix")))
 setMethod("Arith", signature(e1 = "dpoMatrix", e2 = cl),
 	  function(e1, e2) if(!(l2 <- length(e2))) numeric()
 			   else if(l2 == 1 && any(.Generic == c("*","/","+")) && (e2 > 0)) {
-	      e1@x <- callGeneric(e1@x, e2) ; e1 # remains "dpo"
+	      e1@x <- callGeneric(e1@x, e2) ; .empty.factors(e1); e1 # remains "dpo"
 	  } else ## in all other cases
 	  callGeneric(as(e1, "dsyMatrix"), e2))
 setMethod("Arith", signature(e1 = "dppMatrix", e2 = cl),
 	  function(e1, e2) if(!(l2 <- length(e2))) numeric()
 			   else if(l2 == 1 && any(.Generic == c("*","/","+")) && (e2 > 0)) {
-	      e1@x <- callGeneric(e1@x, e2) ; e1 # remains "dpp"
+	      e1@x <- callGeneric(e1@x, e2) ; .empty.factors(e1); e1 # remains "dpp"
 	  } else ## in all other cases
 	  callGeneric(as(e1, "dspMatrix"), e2))
 
@@ -459,23 +461,25 @@ setMethod("Arith", signature(e1 = "dgeMatrix", e2 = "dgeMatrix"),
 	      if (!eqD[1])
 		  stop("Matrices must have same number of rows for arithmetic")
 	      same.dim <- eqD[2]
+              x1 <- e1@x
+              x2 <- e2@x
 	      if (same.dim) {
 		  d <- d1
 		  dn <- dimNamesCheck(e1, e2)
 	      }
 	      else { # nrows differ ----> maybe recycling
 		  if(d2[2] %% d1[2] == 0) { # nrow(e2) is a multiple
-		      e1@x <- rep.int(e1@x, d2[2] %/% d1[2])
+		      x1 <- rep.int(x1, d2[2] %/% d1[2])
 		      d <- d2
 		      dn <- e2@Dimnames
 		  } else if(d1[2] %% d2[2] == 0) { # nrow(e1) is a multiple
-		      e2@x <- rep.int(e2@x, d1[2] %/% d2[2])
+		      x2 <- rep.int(x2, d1[2] %/% d2[2])
 		      d <- d1
 		      dn <- e1@Dimnames
 		  } else
 		      stop(gettextf("number of rows are not compatible for %s", .Generic), domain = "R-Matrix")
 	      }
-	      new("dgeMatrix", Dim = d, Dimnames = dn, x = callGeneric(e1@x, e2@x))
+	      new("dgeMatrix", Dim = d, Dimnames = dn, x = callGeneric(x1, x2))
 	  })
 
 A.M.n <- function(e1, e2) {
@@ -488,6 +492,7 @@ A.M.n <- function(e1, e2) {
 	    as.numeric(e2)
     else if(le == 1 || le == d[1] || any(prod(d) == c(le, 0L))) { # matching dim
         e1@x <- callGeneric(e1@x, as.vector(e2))
+	.empty.factors(e1)
         e1
     } else stop ("length of 2nd arg does not match dimension of first")
 }
@@ -505,6 +510,7 @@ A.n.M <- function(e1, e2) {
 	    as.numeric(e1)
     else if(le == 1 || le == d[1] || any(prod(d) == c(le, 0L))) { # matching dim
         e2@x <- callGeneric(as.vector(e1), e2@x)
+	.empty.factors(e2)
         e2
     } else stop ("length of 1st arg does not match dimension of 2nd")
 }
@@ -542,6 +548,7 @@ setMethod("Arith", signature(e1 = "ddenseMatrix", e2 = "ddenseMatrix"),
                 if(e1@diag == "U" && !all(1 == callGeneric(1,e2)))
                     e1 <- diagU2N(e1)
                 e1@x <- callGeneric(e1@x, e2)
+		.empty.factors(e1)
                 e1
             } else { ## result *general*
                 callGeneric(as(e1,"dgeMatrix"), e2)
@@ -549,6 +556,7 @@ setMethod("Arith", signature(e1 = "ddenseMatrix", e2 = "ddenseMatrix"),
         } else {                    ## symmetric
             if(le == 1) {           ## result remains symmetric
                 e1@x <- callGeneric(e1@x, e2)
+		.empty.factors(e1)
                 e1
             } else { ## (le == d[1] || prod(d) == le)
                 ## *might* remain symmetric, but 'x' may contain garbage
@@ -578,6 +586,7 @@ setMethod("Arith", signature(e1 = "ddenseMatrix", e2 = "sparseVector"), .Arith.d
 		if(e2@diag == "U" && !all(1 == callGeneric(e1,1)))
 		    e2 <- diagU2N(e2)
 		e2@x <- callGeneric(e1, e2@x)
+		.empty.factors(e2)
 		e2
 	    } else {			# result *general*
 		callGeneric(e1, as(e2,"dgeMatrix"))
@@ -585,6 +594,7 @@ setMethod("Arith", signature(e1 = "ddenseMatrix", e2 = "sparseVector"), .Arith.d
 	} else { ## symmetric
 	    if(le == 1) {		# result remains symmetric
 		e2@x <- callGeneric(e1, e2@x)
+		.empty.factors(e2)
 		e2
 	    } else { ## (le == d[1] || prod(d) == le)
 		## *might* remain symmetric, but 'x' may contain garbage
@@ -792,7 +802,7 @@ Logic.Mat.atomic <- function(e1, e2) { ## result will typically be "like" e1:
                 nCl <- class2(class(M), 'l') # logical Tsparse
                 sN <- slotNames(nCl)
                 ## copy "the other slots" (important for "tr"/"sym"):
-                r <- copyClass(M, nCl, sNames = sN[is.na(match(sN, "x"))])
+                r <- copyClass(M, nCl, sNames = sN[is.na(match(sN, c("x","factors")))])
 		r@x <- callGeneric(if(has.x) M@x else TRUE, e2)
                 if(extends(cl1, "CsparseMatrix"))
                     r <- as(r, "CsparseMatrix")
@@ -900,6 +910,7 @@ Logic.lCMat <- function(e1, e2, isOR) {
     ## Very easy case first :
     if(identical(e1@i, e2@i) && identical(e1@p, e2@p)) {
         e1@x <- if(isOR) e1@x | e2@x else e1@x & e2@x
+        .empty.factors(e1)
         return(e1)
     }
     ## else :
@@ -919,6 +930,7 @@ Logic.lTMat <- function(e1,e2) {
     ## Very easy case first :
     if(identical(e1@i, e2@i) && identical(e1@j, e2@j)) {
         e1@x <- callGeneric(e1@x, e2@x)
+        .empty.factors(e1)
         return(e1)
     }
     ## else :
@@ -1148,9 +1160,7 @@ setMethod("Arith", signature(e1 = "dtCMatrix", e2 = "dtCMatrix"),
 	       e1@diag == "U" && !all(1 == callGeneric(1, e2)))
 		e1 <- .diagU2N(e1, cld)
 	    e1@x <- callGeneric(e1@x, e2)
-	    if(extends(cld, "compMatrix") && length(e1@factors))
-                ## TODO: be much smarter and try *updating* (some) 'factors':
-		e1@factors <- list()
+	    .empty.factors(e1) # TODO be much smarter and e.g. update U of an LU-factorization
 	    return(e1)
 	}
     }
@@ -1169,9 +1179,7 @@ setMethod("Arith", signature(e1 = "dtCMatrix", e2 = "dtCMatrix"),
 	       e2@diag == "U" && !all(1 == callGeneric(e1, 1)))
 		e2 <- .diagU2N(e2, cld)
 	    e2@x <- callGeneric(e1, e2@x)
-	    if(extends(cld, "compMatrix") && length(e2@factors))
-                ## TODO: be much smarter and try *updating* (some) 'factors':
-		e2@factors <- list()
+	    .empty.factors(e2) # TODO: much smarter, e.g. update U of an LU-factorization
 	    return(e2)
 	}
     }
@@ -1201,16 +1209,14 @@ A.M.n <- function(e1, e2) {
 	    e2 <- e2[.Ops.recycle.ind(e1, len = l2)]
 	}
 	e1@x <- callGeneric(e1@x, e2)
-	if(length(e1@factors)) # TODO: be smarter and try *updating* (some) 'factors':
-	    e1@factors <- list()
+        .empty.factors(e1) # TODO: possibly rather *update* LU
 	e1
     } else if(mean(is0f) > 7/8) { ## remain sparse ['7/8' is *somewhat* arbitrary]
 	if(l2 > 1) ## as not all callGeneric(0, e2) is 0, e2 is typically sparse
 	    callGeneric(e1, as(e2, "sparseVector"))
 	else { ## l2 == 1: e2 is "scalar"
 	    e1@x <- callGeneric(e1@x, e2)
-	    if(length(e1@factors)) # TODO: be smarter (see above)
-		e1@factors <- list()
+	    .empty.factors(e1)
 	    e1
 	}
     }
@@ -1240,16 +1246,14 @@ A.n.M <- function(e1, e2) {
 	    e1 <- e1[.Ops.recycle.ind(e2, len = l1)]
 	}
 	e2@x <- callGeneric(e1, e2@x)
-	if(length(e2@factors))# TODO: be much smarter and try *updating* (some) 'factors':
-	    e2@factors <- list()
+	.empty.factors(e2)
 	e2
     } else if(mean(is0f) > 7/8) { ## remain sparse ['7/8' is *somewhat* arbitrar
 	if(l1 > 1) ## as not all callGeneric(e1, 0) is 0, e1 is typically sparse
 	    callGeneric(as(e1, "sparseVector"), e2)
 	else { ## l1 == 1: e1 is "scalar"
 	    e2@x <- callGeneric(e1, e2@x)
-	    if(length(e2@factors))# TODO: be much smarter (see above)
-		e2@factors <- list()
+	    .empty.factors(e2)
 	    e2
 	}
     }
@@ -1444,7 +1448,7 @@ setMethod("-", signature(e1 = "sparseMatrix", e2 = "missing"),
 	  function(e1, e2) {
 	      e1 <- diagU2N(e1)
 	      e1@x <- -e1@x
-	      e1@factors <- list()# Drop Cholesky factors; TODO: Consider to modify & keep LU
+              .empty.factors(e1)
 	      e1
 	  })
 ## with the following exceptions:

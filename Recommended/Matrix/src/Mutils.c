@@ -180,6 +180,27 @@ SEXP R_set_factors(SEXP obj, SEXP val, SEXP name, SEXP warn)
     }
 }
 
+// R interface for emptying the '@ factors' slot of *function *argument* 'obj' [CARE!]
+SEXP R_empty_factors(SEXP obj, SEXP warn)
+{
+    Rboolean do_warn = asLogical(warn), modified = FALSE;
+    PROTECT(obj);
+    if(R_has_slot(obj, Matrix_factorSym)) {
+	SEXP fac = R_do_slot(obj, Matrix_factorSym);
+	if (length(fac) > 0) { // if there's a non-empty factor slot, replace it with list()
+	    SEXP fac = PROTECT(allocVector(VECSXP, 0));
+	    R_do_slot_assign(obj, Matrix_factorSym, fac);
+	    modified = TRUE;
+	    UNPROTECT(1);
+	}
+    } else {
+	if(do_warn) warning(_("Matrix object has no 'factors' slot"));
+    }
+    UNPROTECT(1);
+    return ScalarLogical(modified);
+}
+
+
 #if 0 				/* unused */
 /* useful for all the ..CMatrix classes (and ..R by [0] <-> [1]); but unused */
 SEXP CMatrix_set_Dim(SEXP x, int nrow)
@@ -195,59 +216,63 @@ SEXP CMatrix_set_Dim(SEXP x, int nrow)
 /* Fill in the "trivial remainder" in  n*m  array ;
  *  typically the 'x' slot of a "dtrMatrix", such that
  *  it should be usable for double/logical/int/complex : */
-#define MAKE_TRIANGULAR_BODY(_TO_, _FROM_, _ZERO_, _ONE_)	\
-{								\
-    int i, j, *dims = INTEGER(R_do_slot(_FROM_, Matrix_DimSym));	\
-    int n = dims[0], m = dims[1];				\
-								\
-    if (*uplo_P(_FROM_) == 'U') {				\
-	for (j = 0; j < n; j++)					\
-	    for (i = j+1; i < m; i++)				\
-		_TO_[i + j*m] = _ZERO_;				\
-    } else {							\
-	for (j = 1; j < n; j++)					\
-	    for (i = 0; i < j && i < m; i++)			\
-		_TO_[i + j*m] = _ZERO_;				\
-    }								\
-    if (*diag_P(_FROM_) == 'U') {				\
-	j = (n < m) ? n : m;					\
-	for (i = 0; i < j; i++)					\
-	    _TO_[i * (m + 1)] = _ONE_;				\
-    }								\
-}
+#define MAKE_TRIANGULAR_BODY(_TO_, _FROM_, _ZERO_, _ONE_)            \
+	{                                                                \
+		int i, j, *dims = INTEGER(R_do_slot(_FROM_, Matrix_DimSym)); \
+		int n = dims[0], m = dims[1];                                \
+                                                                     \
+		if (*uplo_P(_FROM_) == 'U')                                  \
+		{                                                            \
+			for (j = 0; j < n; j++)                                  \
+				for (i = j + 1; i < m; i++)                          \
+					_TO_[i + j * m] = _ZERO_;                        \
+		}                                                            \
+		else                                                         \
+		{                                                            \
+			for (j = 1; j < n; j++)                                  \
+				for (i = 0; i < j && i < m; i++)                     \
+					_TO_[i + j * m] = _ZERO_;                        \
+		}                                                            \
+		if (*diag_P(_FROM_) == 'U')                                  \
+		{                                                            \
+			j = (n < m) ? n : m;                                     \
+			for (i = 0; i < j; i++)                                  \
+				_TO_[i * (m + 1)] = _ONE_;                           \
+		}                                                            \
+	}
 
 void make_d_matrix_triangular(double *to, SEXP from)
-    MAKE_TRIANGULAR_BODY(to, from, 0., 1.)
-void make_i_matrix_triangular(int *to, SEXP from)
-    MAKE_TRIANGULAR_BODY(to, from, 0, 1)
-
+	MAKE_TRIANGULAR_BODY(to, from, 0., 1.) void make_i_matrix_triangular(int *to, SEXP from)
+		MAKE_TRIANGULAR_BODY(to, from, 0, 1)
 
 /* Should work for double/logical/int/complex : */
-#define MAKE_SYMMETRIC_BODY(_TO_, _FROM_)			\
-{								\
-    int i, j, n = INTEGER(R_do_slot(_FROM_, Matrix_DimSym))[0];	\
-								\
-    if (*uplo_P(_FROM_) == 'U') {				\
-	for (j = 0; j < n; j++)					\
-	    for (i = j+1; i < n; i++)				\
-		_TO_[i + j*n] = _TO_[j + i*n];			\
-    } else {							\
-	for (j = 1; j < n; j++)					\
-	    for (i = 0; i < j && i < n; i++)			\
-		_TO_[i + j*n] = _TO_[j + i*n];			\
-    }								\
-}
+#define MAKE_SYMMETRIC_BODY(_TO_, _FROM_)                           \
+	{                                                               \
+		int i, j, n = INTEGER(R_do_slot(_FROM_, Matrix_DimSym))[0]; \
+                                                                    \
+		if (*uplo_P(_FROM_) == 'U')                                 \
+		{                                                           \
+			for (j = 0; j < n; j++)                                 \
+				for (i = j + 1; i < n; i++)                         \
+					_TO_[i + j * n] = _TO_[j + i * n];              \
+		}                                                           \
+		else                                                        \
+		{                                                           \
+			for (j = 1; j < n; j++)                                 \
+				for (i = 0; i < j && i < n; i++)                    \
+					_TO_[i + j * n] = _TO_[j + i * n];              \
+		}                                                           \
+	}
 
-void make_d_matrix_symmetric(double *to, SEXP from)
-    MAKE_SYMMETRIC_BODY(to, from)
+			void make_d_matrix_symmetric(double *to, SEXP from)
+				MAKE_SYMMETRIC_BODY(to, from)
 
-void make_i_matrix_symmetric(int *to, SEXP from)
-    MAKE_SYMMETRIC_BODY(to, from)
-
+					void make_i_matrix_symmetric(int *to, SEXP from)
+						MAKE_SYMMETRIC_BODY(to, from)
 
 #define Matrix_Error_Bufsiz    4096
 
-/**
+	/**
  * Check validity of 1-letter string from a set of possible values
  * (typically used in  S4 validity method)
  *
@@ -257,7 +282,7 @@ void make_i_matrix_symmetric(int *to, SEXP from)
  *
  * @return a SEXP, either NULL (= success) or an error message
  */
-SEXP check_scalar_string(SEXP sP, char *vals, char *nm)
+	SEXP check_scalar_string(SEXP sP, char *vals, char *nm)
 {
     SEXP val = ScalarLogical(1);
     char *buf;
@@ -400,55 +425,59 @@ SEXP dimNames_validate(SEXP obj)
 			       "Dimnames slot");
 }
 
-
-
-#define PACKED_TO_FULL(TYPE)						\
-TYPE *packed_to_full_ ## TYPE(TYPE *dest, const TYPE *src,		\
-		        int n, enum CBLAS_UPLO uplo)			\
-{									\
-    int i, j, pos = 0;							\
-									\
-    AZERO(dest, n*n);							\
-    for (j = 0; j < n; j++) {						\
-	switch(uplo) {							\
-	case UPP:							\
-	    for (i = 0; i <= j; i++) dest[i + j * n] = src[pos++];	\
-	    break;							\
-	case LOW:							\
-	    for (i = j; i < n; i++) dest[i + j * n] = src[pos++];	\
-	    break;							\
-	default:							\
-	    error(_("'uplo' must be UPP or LOW"));			\
-	}								\
-    }									\
-    return dest;							\
-}
+#define PACKED_TO_FULL(TYPE)                                 \
+	TYPE *packed_to_full_##TYPE(TYPE *dest, const TYPE *src, \
+								int n, enum CBLAS_UPLO uplo) \
+	{                                                        \
+		int i, j, pos = 0;                                   \
+                                                             \
+		AZERO(dest, n *n);                                   \
+		for (j = 0; j < n; j++)                              \
+		{                                                    \
+			switch (uplo)                                    \
+			{                                                \
+			case UPP:                                        \
+				for (i = 0; i <= j; i++)                     \
+					dest[i + j * n] = src[pos++];            \
+				break;                                       \
+			case LOW:                                        \
+				for (i = j; i < n; i++)                      \
+					dest[i + j * n] = src[pos++];            \
+				break;                                       \
+			default:                                         \
+				error(_("'uplo' must be UPP or LOW"));       \
+			}                                                \
+		}                                                    \
+		return dest;                                         \
+	}
 
 PACKED_TO_FULL(double)
 PACKED_TO_FULL(int)
 
-#define FULL_TO_PACKED(TYPE)						\
-TYPE *full_to_packed_ ## TYPE(TYPE *dest, const TYPE *src, int n,	\
-		      enum CBLAS_UPLO uplo, enum CBLAS_DIAG diag)	\
-{									\
-    int i, j, pos = 0;							\
-									\
-    for (j = 0; j < n; j++) {						\
-	switch(uplo) {							\
-	case UPP:							\
-	    for (i = 0; i <= j; i++)					\
-		dest[pos++] = (i == j && diag== UNT) ? 1 : src[i + j*n]; \
-	    break;							\
-	case LOW:							\
-	    for (i = j; i < n; i++)					\
-		dest[pos++] = (i == j && diag== UNT) ? 1 : src[i + j*n]; \
-	    break;							\
-	default:							\
-	    error(_("'uplo' must be UPP or LOW"));			\
-	}								\
-    }									\
-    return dest;							\
-}
+#define FULL_TO_PACKED(TYPE)                                                    \
+	TYPE *full_to_packed_##TYPE(TYPE *dest, const TYPE *src, int n,             \
+								enum CBLAS_UPLO uplo, enum CBLAS_DIAG diag)     \
+	{                                                                           \
+		int i, j, pos = 0;                                                      \
+                                                                                \
+		for (j = 0; j < n; j++)                                                 \
+		{                                                                       \
+			switch (uplo)                                                       \
+			{                                                                   \
+			case UPP:                                                           \
+				for (i = 0; i <= j; i++)                                        \
+					dest[pos++] = (i == j && diag == UNT) ? 1 : src[i + j * n]; \
+				break;                                                          \
+			case LOW:                                                           \
+				for (i = j; i < n; i++)                                         \
+					dest[pos++] = (i == j && diag == UNT) ? 1 : src[i + j * n]; \
+				break;                                                          \
+			default:                                                            \
+				error(_("'uplo' must be UPP or LOW"));                          \
+			}                                                                   \
+		}                                                                       \
+		return dest;                                                            \
+	}
 
 FULL_TO_PACKED(double)
 FULL_TO_PACKED(int)
@@ -468,17 +497,22 @@ void d_packed_getDiag(double *dest, SEXP x, int n)
 {
     double *xx = REAL(R_do_slot(x, Matrix_xSym));
 
-#define END_packed_getDiag						\
-    int j, pos = 0;							\
-									\
-    if (*uplo_P(x) == 'U') {						\
-	for(pos= 0, j=0; j < n; pos += 1+(++j))	 dest[j] = xx[pos];	\
-    } else {								\
-	for(pos= 0, j=0; j < n; pos += (n - j), j++) dest[j] = xx[pos]; \
-    }									\
-    return
+#define END_packed_getDiag                               \
+	int j, pos = 0;                                      \
+                                                         \
+	if (*uplo_P(x) == 'U')                               \
+	{                                                    \
+		for (pos = 0, j = 0; j < n; pos += 1 + (++j))    \
+			dest[j] = xx[pos];                           \
+	}                                                    \
+	else                                                 \
+	{                                                    \
+		for (pos = 0, j = 0; j < n; pos += (n - j), j++) \
+			dest[j] = xx[pos];                           \
+	}                                                    \
+	return
 
-    END_packed_getDiag;
+	END_packed_getDiag;
 }
 
 void l_packed_getDiag(int *dest, SEXP x, int n)
@@ -496,31 +530,38 @@ void l_packed_getDiag(int *dest, SEXP x, int n)
  */
 SEXP d_packed_setDiag(double *diag, int l_d, SEXP x, int n)
 {
-#define SET_packed_setDiag				\
-    SEXP ret = PROTECT(duplicate(x)),			\
-	r_x = R_do_slot(ret, Matrix_xSym);		\
-    Rboolean d_full = (l_d == n);			\
-    if (!d_full && l_d != 1)				\
+#define SET_packed_setDiag                  \
+	SEXP ret = PROTECT(duplicate(x)),       \
+		 r_x = R_do_slot(ret, Matrix_xSym); \
+	Rboolean d_full = (l_d == n);           \
+	if (!d_full && l_d != 1)                \
 	error(_("replacement diagonal has wrong length"))
 
-#define END_packed_setDiag						\
-    int j, pos = 0;							\
-									\
-    if (*uplo_P(x) == 'U') {						\
-	if(d_full)							\
-	    for(pos= 0, j=0; j < n; pos += 1+(++j))	 xx[pos] = diag[j]; \
-	else /* l_d == 1 */						\
-	    for(pos= 0, j=0; j < n; pos += 1+(++j))	 xx[pos] = *diag; \
-    } else {								\
-	if(d_full)							\
-	    for(pos= 0, j=0; j < n; pos += (n - j), j++) xx[pos] = diag[j]; \
-	else /* l_d == 1 */						\
-	    for(pos= 0, j=0; j < n; pos += (n - j), j++) xx[pos] = *diag; \
-    }									\
-    UNPROTECT(1);							\
-    return ret
+#define END_packed_setDiag                                   \
+	int j, pos = 0;                                          \
+                                                             \
+	if (*uplo_P(x) == 'U')                                   \
+	{                                                        \
+		if (d_full)                                          \
+			for (pos = 0, j = 0; j < n; pos += 1 + (++j))    \
+				xx[pos] = diag[j];                           \
+		else /* l_d == 1 */                                  \
+			for (pos = 0, j = 0; j < n; pos += 1 + (++j))    \
+				xx[pos] = *diag;                             \
+	}                                                        \
+	else                                                     \
+	{                                                        \
+		if (d_full)                                          \
+			for (pos = 0, j = 0; j < n; pos += (n - j), j++) \
+				xx[pos] = diag[j];                           \
+		else /* l_d == 1 */                                  \
+			for (pos = 0, j = 0; j < n; pos += (n - j), j++) \
+				xx[pos] = *diag;                             \
+	}                                                        \
+	UNPROTECT(1);                                            \
+	return ret
 
-    SET_packed_setDiag; double *xx = REAL(r_x);
+	SET_packed_setDiag; double *xx = REAL(r_x);
     END_packed_setDiag;
 }
 
@@ -530,15 +571,15 @@ SEXP l_packed_setDiag(int *diag, int l_d, SEXP x, int n)
     END_packed_setDiag;
 }
 
-#define tr_END_packed_setDiag						\
-    if (*diag_P(x) == 'U') { /* uni-triangular */			\
-	/* after setting, typically is not uni-triangular anymore: */	\
-	SEXP ch_N = PROTECT(mkChar("N"));				\
-	SET_STRING_ELT(R_do_slot(ret, Matrix_diagSym), 0, ch_N);		\
-	UNPROTECT(1);							\
-    }									\
-    END_packed_setDiag
-
+#define tr_END_packed_setDiag                                         \
+	if (*diag_P(x) == 'U')                                            \
+	{ /* uni-triangular */                                            \
+		/* after setting, typically is not uni-triangular anymore: */ \
+		SEXP ch_N = PROTECT(mkChar("N"));                             \
+		SET_STRING_ELT(R_do_slot(ret, Matrix_diagSym), 0, ch_N);      \
+		UNPROTECT(1);                                                 \
+	}                                                                 \
+	END_packed_setDiag
 
 SEXP tr_d_packed_setDiag(double *diag, int l_d, SEXP x, int n)
 {
@@ -725,27 +766,36 @@ SEXP dup_mMatrix_as_geMatrix(SEXP A)
 	    error(_("invalid class \"%s\" passed to 'dup_mMatrix_as_geMatrix' function"),
 		  class_P(A));
 
-#define	DUP_MMATRIX_NON_CLASS(transpose_if_vec)				\
-	if (isMatrix(A)) {	/* "matrix" */				\
-	    ad = getAttrib(A, R_DimSymbol);				\
-	    an = getAttrib(A, R_DimNamesSymbol);			\
-	} else {/* maybe "numeric" (incl integer,logical) --> (n x 1) */ \
-	    int* dd = INTEGER(ad = PROTECT(allocVector(INTSXP, 2)));	\
-	    nprot++;							\
-	    if(transpose_if_vec) {					\
-		dd[0] = 1;						\
-		dd[1] = LENGTH(A);					\
-	    } else {							\
-		dd[0] = LENGTH(A);					\
-		dd[1] = 1;						\
-	    }								\
-	    SEXP nms = PROTECT(getAttrib(A, R_NamesSymbol)); nprot++;	\
-	    if(nms != R_NilValue) {					\
-		an = PROTECT(allocVector(VECSXP, 2)); nprot++;		\
-	        SET_VECTOR_ELT(an, (transpose_if_vec)? 1 : 0, nms);	\
-		/* not needed: SET_VECTOR_ELT(an, 1, R_NilValue); */    \
-	    } /* else nms = NULL ==> an remains NULL */                 \
- 	}								\
+#define DUP_MMATRIX_NON_CLASS(transpose_if_vec)                  \
+	if (isMatrix(A))                                             \
+	{ /* "matrix" */                                             \
+		ad = getAttrib(A, R_DimSymbol);                          \
+		an = getAttrib(A, R_DimNamesSymbol);                     \
+	}                                                            \
+	else                                                         \
+	{ /* maybe "numeric" (incl integer,logical) --> (n x 1) */   \
+		int *dd = INTEGER(ad = PROTECT(allocVector(INTSXP, 2))); \
+		nprot++;                                                 \
+		if (transpose_if_vec)                                    \
+		{                                                        \
+			dd[0] = 1;                                           \
+			dd[1] = LENGTH(A);                                   \
+		}                                                        \
+		else                                                     \
+		{                                                        \
+			dd[0] = LENGTH(A);                                   \
+			dd[1] = 1;                                           \
+		}                                                        \
+		SEXP nms = PROTECT(getAttrib(A, R_NamesSymbol));         \
+		nprot++;                                                 \
+		if (nms != R_NilValue)                                   \
+		{                                                        \
+			an = PROTECT(allocVector(VECSXP, 2));                \
+			nprot++;                                             \
+			SET_VECTOR_ELT(an, (transpose_if_vec) ? 1 : 0, nms); \
+			/* not needed: SET_VECTOR_ELT(an, 1, R_NilValue); */ \
+		} /* else nms = NULL ==> an remains NULL */              \
+	}                                                            \
 	ctype = 0
 
 	DUP_MMATRIX_NON_CLASS(FALSE);
@@ -754,56 +804,59 @@ SEXP dup_mMatrix_as_geMatrix(SEXP A)
     ans = PROTECT(NEW_OBJECT_OF_CLASS(M_type == ddense ? "dgeMatrix" :
 				      (M_type == ldense ? "lgeMatrix" :
 					 "ngeMatrix")));
-#define DUP_MMATRIX_SET_1						\
-    R_do_slot_assign(ans, Matrix_DimSym, duplicate(ad));			\
-    R_do_slot_assign(ans, Matrix_DimNamesSym, (!isNull(an) && LENGTH(an) == 2) ? \
-	     duplicate(an): allocVector(VECSXP, 2));			\
-    sz = (R_xlen_t) INTEGER(ad)[0] * INTEGER(ad)[1]
+#define DUP_MMATRIX_SET_1                                                                                                 \
+	R_do_slot_assign(ans, Matrix_DimSym, duplicate(ad));                                                                  \
+	R_do_slot_assign(ans, Matrix_DimNamesSym, (!isNull(an) && LENGTH(an) == 2) ? duplicate(an) : allocVector(VECSXP, 2)); \
+	sz = (R_xlen_t)INTEGER(ad)[0] * INTEGER(ad)[1]
 
-    DUP_MMATRIX_SET_1;
+	DUP_MMATRIX_SET_1;
 
     if(M_type == ddense) { /* ddense -> dge */
 
 	double *ansx;
 
-#define DUP_MMATRIX_ddense_CASES						\
-	ansx = REAL(ALLOC_SLOT(ans, Matrix_xSym, REALSXP, sz));			\
-	switch(ctype) {								\
-	case 0:			/* unclassed real matrix */			\
-	    Memcpy(ansx, REAL(A), sz);						\
-	    break;								\
-	case 1:			/* dgeMatrix */					\
-	    Memcpy(ansx, REAL(R_do_slot(A, Matrix_xSym)), sz);			\
-	    break;								\
-	case 2:			/* dtrMatrix   and subclasses */		\
-	case 9: case 10: case 11:   /* ---	Cholesky, LDL, BunchKaufman */	\
-	    Memcpy(ansx, REAL(R_do_slot(A, Matrix_xSym)), sz);			\
-	    make_d_matrix_triangular(ansx, A);					\
-	    break;								\
-	case 3:			/* dsyMatrix */					\
-	case 4:			/* dpoMatrix  + subclass */			\
-	case 14:	 		/* ---	corMatrix */			\
-	    Memcpy(ansx, REAL(R_do_slot(A, Matrix_xSym)), sz);			\
-	    make_d_matrix_symmetric(ansx, A);					\
-	    break;								\
-	case 5:			/* ddiMatrix */					\
-	    install_diagonal(ansx, A);						\
-	    break;								\
-	case 6:			/* dtpMatrix  + subclasses */			\
-	case 12: case 13: 		/* ---	pCholesky, pBunchKaufman */	\
-	    packed_to_full_double(ansx, REAL(R_do_slot(A, Matrix_xSym)),		\
-				  INTEGER(ad)[0],				\
-				  *uplo_P(A) == 'U' ? UPP : LOW);		\
-	    make_d_matrix_triangular(ansx, A);					\
-	    break;								\
-	case 7:			/* dspMatrix */					\
-	case 8:			/* dppMatrix */					\
-	    packed_to_full_double(ansx, REAL(R_do_slot(A, Matrix_xSym)),		\
-				  INTEGER(ad)[0],				\
-				  *uplo_P(A) == 'U' ? UPP : LOW);		\
-	    make_d_matrix_symmetric(ansx, A);					\
-	    break;								\
-	}  /* switch(ctype) */
+#define DUP_MMATRIX_ddense_CASES                                     \
+	ansx = REAL(ALLOC_SLOT(ans, Matrix_xSym, REALSXP, sz));          \
+	switch (ctype)                                                   \
+	{                                                                \
+	case 0: /* unclassed real matrix */                              \
+		Memcpy(ansx, REAL(A), sz);                                   \
+		break;                                                       \
+	case 1: /* dgeMatrix */                                          \
+		Memcpy(ansx, REAL(R_do_slot(A, Matrix_xSym)), sz);           \
+		break;                                                       \
+	case 2: /* dtrMatrix   and subclasses */                         \
+	case 9:                                                          \
+	case 10:                                                         \
+	case 11: /* ---	Cholesky, LDL, BunchKaufman */                   \
+		Memcpy(ansx, REAL(R_do_slot(A, Matrix_xSym)), sz);           \
+		make_d_matrix_triangular(ansx, A);                           \
+		break;                                                       \
+	case 3:	 /* dsyMatrix */                                         \
+	case 4:	 /* dpoMatrix  + subclass */                             \
+	case 14: /* ---	corMatrix */                                     \
+		Memcpy(ansx, REAL(R_do_slot(A, Matrix_xSym)), sz);           \
+		make_d_matrix_symmetric(ansx, A);                            \
+		break;                                                       \
+	case 5: /* ddiMatrix */                                          \
+		install_diagonal(ansx, A);                                   \
+		break;                                                       \
+	case 6: /* dtpMatrix  + subclasses */                            \
+	case 12:                                                         \
+	case 13: /* ---	pCholesky, pBunchKaufman */                      \
+		packed_to_full_double(ansx, REAL(R_do_slot(A, Matrix_xSym)), \
+							  INTEGER(ad)[0],                        \
+							  *uplo_P(A) == 'U' ? UPP : LOW);        \
+		make_d_matrix_triangular(ansx, A);                           \
+		break;                                                       \
+	case 7: /* dspMatrix */                                          \
+	case 8: /* dppMatrix */                                          \
+		packed_to_full_double(ansx, REAL(R_do_slot(A, Matrix_xSym)), \
+							  INTEGER(ad)[0],                        \
+							  *uplo_P(A) == 'U' ? UPP : LOW);        \
+		make_d_matrix_symmetric(ansx, A);                            \
+		break;                                                       \
+	} /* switch(ctype) */
 
 	DUP_MMATRIX_ddense_CASES;
     }
@@ -936,29 +989,42 @@ SEXP m_encodeInd(SEXP ij, SEXP di, SEXP orig_1, SEXP chk_bnds)
     if((Di[0] * (double) Di[1]) >= 1 + (double)INT_MAX) { /* need double */
 	ans = PROTECT(allocVector(REALSXP, n));
 	double *ii = REAL(ans), nr = (double) Di[0];
-#define do_ii_FILL(_i_, _j_)						\
-	int i;								\
-	if(check_bounds) {						\
-	    for(i=0; i < n; i++) {					\
-		if(_i_[i] == NA_INTEGER || _j_[i] == NA_INTEGER)	\
-		    ii[i] = NA_INTEGER;					\
-		else {							\
-		    register int i_i, j_i;				\
-	            if(one_ind) { i_i = _i_[i]-1; j_i = _j_[i]-1; }	\
-	            else        { i_i = _i_[i]  ; j_i = _j_[i]  ; }	\
-		    if(i_i < 0 || i_i >= Di[0])				\
-			error(_("subscript 'i' out of bounds in M[ij]")); \
-		    if(j_i < 0 || j_i >= Di[1])				\
-			error(_("subscript 'j' out of bounds in M[ij]")); \
-		    ii[i] = i_i + j_i * nr;				\
-		}							\
-	    }								\
-	} else {							\
-	    for(i=0; i < n; i++)					\
-		ii[i] = (_i_[i] == NA_INTEGER || _j_[i] == NA_INTEGER)	\
-		    ? NA_INTEGER					\
- 	            : (one_ind ? ((_i_[i]-1) + (_j_[i]-1)*nr)		\
-	                       :   _i_[i]    +  _j_[i]   *nr);		\
+#define do_ii_FILL(_i_, _j_)                                            \
+	int i;                                                              \
+	if (check_bounds)                                                   \
+	{                                                                   \
+		for (i = 0; i < n; i++)                                         \
+		{                                                               \
+			if (_i_[i] == NA_INTEGER || _j_[i] == NA_INTEGER)           \
+				ii[i] = NA_INTEGER;                                     \
+			else                                                        \
+			{                                                           \
+				register int i_i, j_i;                                  \
+				if (one_ind)                                            \
+				{                                                       \
+					i_i = _i_[i] - 1;                                   \
+					j_i = _j_[i] - 1;                                   \
+				}                                                       \
+				else                                                    \
+				{                                                       \
+					i_i = _i_[i];                                       \
+					j_i = _j_[i];                                       \
+				}                                                       \
+				if (i_i < 0 || i_i >= Di[0])                            \
+					error(_("subscript 'i' out of bounds in M[ij]"));   \
+				if (j_i < 0 || j_i >= Di[1])                            \
+					error(_("subscript 'j' out of bounds in M[ij]"));   \
+				ii[i] = i_i + j_i * nr;                                 \
+			}                                                           \
+		}                                                               \
+	}                                                                   \
+	else                                                                \
+	{                                                                   \
+		for (i = 0; i < n; i++)                                         \
+			ii[i] = (_i_[i] == NA_INTEGER || _j_[i] == NA_INTEGER)      \
+						? NA_INTEGER                                    \
+						: (one_ind ? ((_i_[i] - 1) + (_j_[i] - 1) * nr) \
+								   : _i_[i] + _j_[i] * nr);             \
 	}
 
 	do_ii_FILL(IJ, j_);
@@ -1189,10 +1255,13 @@ SEXP Mmatrix(SEXP args)
 	    *ax= LOGICAL(a_x),
 	    *bx= LOGICAL(b_x);
 
-#define COPY_a_AND_b_j					\
-	for(int j=0; j < m; j++) {			\
-	    Memcpy(r+ii, ax+ j*n1, n1); ii += n1;	\
-	    Memcpy(r+ii, bx+ j*n2, n2); ii += n2;	\
+#define COPY_a_AND_b_j                   \
+	for (int j = 0; j < m; j++)          \
+	{                                    \
+		Memcpy(r + ii, ax + j * n1, n1); \
+		ii += n1;                        \
+		Memcpy(r + ii, bx + j * n2, n2); \
+		ii += n2;                        \
 	}
 
 	COPY_a_AND_b_j;
@@ -1307,32 +1376,34 @@ SEXP R_any0(SEXP x) {
  */
 SEXP symmetric_DimNames(SEXP dn) {
     Rboolean do_nm = FALSE;
-#define NON_TRIVIAL_DN					\
-  !isNull(VECTOR_ELT(dn, 0)) ||				\
-  !isNull(VECTOR_ELT(dn, 1)) ||				\
- (do_nm = !isNull(getAttrib(dn, R_NamesSymbol)))
+#define NON_TRIVIAL_DN                \
+	!isNull(VECTOR_ELT(dn, 0)) ||     \
+		!isNull(VECTOR_ELT(dn, 1)) || \
+		(do_nm = !isNull(getAttrib(dn, R_NamesSymbol)))
 
-#define SYMM_DIMNAMES							\
-	/* Fixup dimnames to be symmetric <==>				\
-	   symmetricDimnames() in ../R/symmetricMatrix.R */		\
-	PROTECT(dn = duplicate(dn));					\
-	if (isNull(VECTOR_ELT(dn,0)))					\
-	    SET_VECTOR_ELT(dn, 0, VECTOR_ELT(dn, 1));			\
-	if (isNull(VECTOR_ELT(dn,1)))					\
-	    SET_VECTOR_ELT(dn, 1, VECTOR_ELT(dn, 0));			\
-	if(do_nm) { /* names(dimnames(.)): */				\
-	    SEXP nms_dn = PROTECT(getAttrib(dn, R_NamesSymbol));	\
-	    if(!R_compute_identical(STRING_ELT(nms_dn, 0),		\
-				    STRING_ELT(nms_dn, 1), 16)) {	\
-		int J = LENGTH(STRING_ELT(nms_dn, 0)) == 0; /* 0/1 */   \
-		SET_STRING_ELT(nms_dn, !J, STRING_ELT(nms_dn, J));	\
-		setAttrib(dn, R_NamesSymbol, nms_dn);			\
-            }								\
-	    UNPROTECT(1);						\
-	}								\
+#define SYMM_DIMNAMES                                             \
+	/* Fixup dimnames to be symmetric <==>                        \
+	   symmetricDimnames() in ../R/symmetricMatrix.R */           \
+	PROTECT(dn = duplicate(dn));                                  \
+	if (isNull(VECTOR_ELT(dn, 0)))                                \
+		SET_VECTOR_ELT(dn, 0, VECTOR_ELT(dn, 1));                 \
+	if (isNull(VECTOR_ELT(dn, 1)))                                \
+		SET_VECTOR_ELT(dn, 1, VECTOR_ELT(dn, 0));                 \
+	if (do_nm)                                                    \
+	{ /* names(dimnames(.)): */                                   \
+		SEXP nms_dn = PROTECT(getAttrib(dn, R_NamesSymbol));      \
+		if (!R_compute_identical(STRING_ELT(nms_dn, 0),           \
+								 STRING_ELT(nms_dn, 1), 16))      \
+		{                                                         \
+			int J = LENGTH(STRING_ELT(nms_dn, 0)) == 0; /* 0/1 */ \
+			SET_STRING_ELT(nms_dn, !J, STRING_ELT(nms_dn, J));    \
+			setAttrib(dn, R_NamesSymbol, nms_dn);                 \
+		}                                                         \
+		UNPROTECT(1);                                             \
+	}                                                             \
 	UNPROTECT(1)
 
-    // Be fast (do nothing!) for the case where dimnames = list(NULL,NULL) :
+	// Be fast (do nothing!) for the case where dimnames = list(NULL,NULL) :
     if (NON_TRIVIAL_DN) {
 	SYMM_DIMNAMES;
     }
