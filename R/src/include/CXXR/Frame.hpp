@@ -102,7 +102,7 @@ namespace CXXR
        */
       Binding()
           : m_frame(nullptr), m_origin(MISSING), m_active(false),
-            m_locked(false), m_bndcellTag(0)
+            m_locked(false), m_bndcellTag(0), m_assignment_pending(false)
       {
         m_symbol = nullptr;
         m_value = Symbol::missingArgument();
@@ -380,6 +380,16 @@ namespace CXXR
         m_bndcellTag = v;
       }
 
+      bool assignmentPending() const
+      {
+        return m_assignment_pending;
+      }
+
+      void setAssignmentPending(bool on)
+      {
+        m_assignment_pending = on;
+      }
+
       /** @brief Auxiliary function to Frame::visitReferents().
        *
        * This function conducts a visitor to those objects
@@ -400,6 +410,7 @@ namespace CXXR
       bool m_active;
       bool m_locked;
       unsigned int m_bndcellTag;
+      bool m_assignment_pending;
 
       std::pair<RObject *, bool> forcedValueSlow() const;
       void assignSlow(RObject *new_value, Origin origin);
@@ -759,6 +770,15 @@ namespace CXXR
      * this Frame.
      */
     size_t size() const;
+
+    /** @brief Does this frame have any special symbols?
+     *
+     * @return true iff this Frame has special symbols.
+     */
+    bool noSpecialSymbols() const
+    {
+      return m_no_special_symbols;
+    }
 
     /** @brief Symbols bound by this Frame.
      *

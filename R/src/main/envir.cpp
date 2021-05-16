@@ -652,9 +652,9 @@ HIDDEN SEXP R::findVar1(SEXP symbol, SEXP rho, SEXPTYPE mode, int inherits_)
 	if (inherits_)
 	    rho = ENCLOS(rho);
 	else
-	    return (R_UnboundValue);
+	    return R_UnboundValue;
     }
-    return (R_UnboundValue);
+    return R_UnboundValue;
 }
 
 /** @brief Look up a symbol in an environment.
@@ -691,9 +691,9 @@ static SEXP findVar1mode(SEXP symbol, SEXP rho, SEXPTYPE mode, int inherits,
 	if (inherits)
 	    rho = ENCLOS(rho);
 	else
-	    return (R_UnboundValue);
+	    return R_UnboundValue;
     }
-    return (R_UnboundValue);
+    return R_UnboundValue;
 }
 
 
@@ -892,16 +892,15 @@ void Rf_defineVar(SEXP symbol, SEXP value, SEXP rho)
 
     if (rho == R_BaseEnv || rho == R_BaseNamespace)
     {
-        gsetVar(symbol, value, rho);
+        Rf_gsetVar(symbol, value, rho);
     }
     else
     {
-        Environment *envir = (rho == R_BaseNamespace) ? Environment::base() : SEXP_downcast<Environment *>(rho);
         if (IS_SPECIAL_SYMBOL(symbol))
-            UNSET_NO_SPECIAL_SYMBOLS(envir);
+            UNSET_NO_SPECIAL_SYMBOLS(rho);
 
         /* First check for an existing binding */
-        PairList *frame = SEXP_downcast<PairList *>(FRAME(envir));
+        PairList *frame = SEXP_downcast<PairList *>(FRAME(rho));
         while (frame)
         {
             if (frame->tag() == symbol)
@@ -912,10 +911,10 @@ void Rf_defineVar(SEXP symbol, SEXP value, SEXP rho)
             }
             frame = frame->tail();
         }
-        if (FRAME_IS_LOCKED(envir))
+        if (FRAME_IS_LOCKED(rho))
             error(_("cannot add bindings to a locked environment"));
-        SET_FRAME(envir, CONS(value, FRAME(envir)));
-        SET_TAG(FRAME(envir), symbol);
+        SET_FRAME(rho, CONS(value, FRAME(rho)));
+        SET_TAG(FRAME(rho), symbol);
     }
 }
 
@@ -941,7 +940,7 @@ void Rf_addMissingVarsToNewEnv(SEXP env, SEXP addVars)
     /* append variables from env after addVars */
     SEXP aprev = addVars;
     SEXP a = CDR(addVars);
-    while (a != nullptr) {
+    while (a) {
 	aprev = a;
 	a = CDR(a);
     }
@@ -951,7 +950,7 @@ void Rf_addMissingVarsToNewEnv(SEXP env, SEXP addVars)
     /* remove duplicates - a variable listed later has precedence over a
        variable listed sooner */
     SEXP end;
-    for(end = CDR(addVars); end != nullptr; end = CDR(end)) {
+    for(end = CDR(addVars); end; end = CDR(end)) {
 	SEXP endTag = TAG(end);
 	SEXP sprev = nullptr;
 	SEXP s;
@@ -1458,7 +1457,7 @@ HIDDEN bool R::R_isMissing(SEXP symbol, SEXP rho)
         return false; /* is this really the right thing to do? LT */
 
     vl = findVarLocInFrame(rho, s, nullptr);
-    if (vl != nullptr) {
+    if (vl) {
 	if (DDVAL(symbol)) {
 	    if (length(CAR(vl)) < ddv || CAR(vl) == R_MissingArg)
 		return true;
@@ -2315,7 +2314,7 @@ void R_LockBinding(SEXP sym, SEXP env)
     {
         Environment *envir = (env == R_BaseNamespace) ? Environment::base() : SEXP_downcast<Environment *>(env);
         SEXP binding = findVarLocInFrame(envir, sym, nullptr);
-        if (binding == nullptr)
+        if (!binding)
             error(_("no binding for '%s'"), EncodeChar(PRINTNAME(sym)));
         LOCK_BINDING(binding);
     }
@@ -2338,7 +2337,7 @@ void R_unLockBinding(SEXP sym, SEXP env)
     {
         Environment *envir = (env == R_BaseNamespace) ? Environment::base() : SEXP_downcast<Environment *>(env);
         SEXP binding = findVarLocInFrame(envir, sym, nullptr);
-        if (binding == nullptr)
+        if (!binding)
             error(_("no binding for '%s'"), EncodeChar(PRINTNAME(sym)));
         UNLOCK_BINDING(binding);
     }
@@ -2431,7 +2430,7 @@ Rboolean R_BindingIsActive(SEXP sym, SEXP env)
 
 Rboolean R_HasFancyBindings(SEXP rho)
 {
-    for (SEXP frame = FRAME(rho); frame != nullptr; frame = CDR(frame))
+    for (SEXP frame = FRAME(rho); frame; frame = CDR(frame))
         if (IS_ACTIVE_BINDING(frame) || BINDING_IS_LOCKED(frame))
             return TRUE;
     return FALSE;
@@ -2611,7 +2610,7 @@ Rboolean R_IsNamespaceEnv(SEXP rho)
         return TRUE;
     else if (TYPEOF(rho) == ENVSXP)
     {
-        SEXP info = findVarInFrame3(rho, R_NamespaceSymbol, TRUE);
+        SEXP info = Rf_findVarInFrame3(rho, R_NamespaceSymbol, TRUE);
         if (info != R_UnboundValue && TYPEOF(info) == ENVSXP)
         {
             GCStackRoot<> infor(info);
