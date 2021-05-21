@@ -5506,43 +5506,23 @@ inline static SEXP CLOSURE_CALL_FRAME_ARGS()
 	} while (0)
 
 /* place a tag on the most recently pushed call argument */
-/*
-#define SETCALLARG_TAG(t)                              \
-	do                                                 \
-	{                                                  \
-		SEXP __tag__ = (t);                            \
-		if (__tag__ != R_NilValue)                     \
-		{                                              \
-			SEXP __cell__ = GETSTACK(-1);              \
-			if (__cell__ != R_NilValue)                \
-				SET_TAG(__cell__, CreateTag(__tag__)); \
-		}                                              \
-	} while (0)
-*/
-inline static void SETCALLARG_TAG(SEXP tag) {
-        if (tag != R_NilValue) {
-            SEXP cell = GETSTACK(-1);
-            if (cell != R_NilValue)
-                SET_TAG(cell, CreateTag(tag));
+inline static void SETCALLARG_TAG(SEXP tag)
+{
+	if (tag != R_NilValue)
+	{
+		SEXP cell = GETSTACK(-1);
+		if (cell != R_NilValue)
+			SET_TAG(cell, CreateTag(tag));
 	}
- }
+}
 
 /* same, but tag is known to be a symbol */
-/*
-#define SETCALLARG_TAG_SYMBOL(t)      \
-	do                                \
-	{                                 \
-		SEXP __cell__ = GETSTACK(-1); \
-		if (__cell__ != R_NilValue)   \
-			SET_TAG(__cell__, t);     \
-	} while (0)
-*/
- inline static void SETCALLARG_TAG_SYMBOL(SEXP tag)
- {
-	 SEXP cell = GETSTACK(-1);
-	 if (cell != R_NilValue)
-		 SET_TAG(cell, tag);
- }
+inline static void SETCALLARG_TAG_SYMBOL(SEXP tag)
+{
+	SEXP cell = GETSTACK(-1);
+	if (cell != R_NilValue)
+		SET_TAG(cell, tag);
+}
 
 static int tryDispatch(const char *generic, SEXP call, SEXP x, SEXP rho, SEXP *pv)
 {

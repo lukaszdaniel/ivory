@@ -39,7 +39,7 @@ namespace CXXR
 {
     void SEXP_downcast_error(const char *given, const char *wanted)
     {
-        Rf_error(_("SEXP_downast: '%s' supplied where '%s' expected."), given, wanted);
+        Rf_error(_("SEXP_downcast: '%s' supplied where '%s' expected."), given, wanted);
         abort(); // To avoid warning about noreturn function returning
     }
 } // namespace CXXR
