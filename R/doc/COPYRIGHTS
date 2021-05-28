@@ -249,7 +249,7 @@ src/main/xspline.c
  * Parts Copyright (c) 1992 by James Tough
  * Parts Copyright (c) 1998 by Georg Stemmer
  * Parts Copyright (c) 1995 by C. Blanc and C. Schlick
-
+  
  * Any party obtaining a copy of these files is granted, free of charge, a
  * full and unrestricted irrevocable, world-wide, paid up, royalty-free,
  * nonexclusive right and license to deal in this software and
@@ -260,7 +260,7 @@ src/main/xspline.c
  * notice remain intact.
 
 
-src/modules/nano{ftp,http}.c
+src/modules/nanohttp.c
 
  Copyright (C) 1998-2001 Daniel Veillard.  All Rights Reserved.
 
@@ -577,7 +577,7 @@ src/main/gram.c
 Portions of these files are based on the parser package,
 
    Copyright (C) 2009--2011  Romain Francois
-
+   
 
 Some of the files in src/appl were originally taken from the Netlib
 archive now at www.netlib.org and do not clearly state their
@@ -607,7 +607,7 @@ src/gnuwin32/front-ends/R.ico
 src/gnuwin32/installer/R.bmp
 
    Copyright (C) 2015-2016 The R Foundation
-
+   
    You can distribute the logo under the terms of the Creative
    Commons Attribution-ShareAlike 4.0 International license (CC-BY-SA
    4.0) or (at your option) the GNU General Public License version 2

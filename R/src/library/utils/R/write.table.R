@@ -156,7 +156,7 @@ write.csv <- function(...)
     Call$sep <- ","
     Call$dec <- "."
     Call$qmethod <- "double"
-    Call[[1L]] <- as.name("write.table")
+    Call[[1L]] <- quote(utils::write.table)
     eval.parent(Call)
 }
 
@@ -172,6 +172,6 @@ write.csv2 <- function(...)
     Call$sep <- ";"
     Call$dec <- ","
     Call$qmethod <- "double"
-    Call[[1L]] <- as.name("write.table")
+    Call[[1L]] <- quote(utils::write.table)
     eval.parent(Call)
 }

@@ -1,8 +1,8 @@
-/* A Bison parser, made by GNU Bison 3.7.  */
+/* A Bison parser, made by GNU Bison 3.7.5.  */
 
 /* Bison implementation for Yacc-like parsers in C
 
-   Copyright (C) 1984, 1989-1990, 2000-2015, 2018-2020 Free Software Foundation,
+   Copyright (C) 1984, 1989-1990, 2000-2015, 2018-2021 Free Software Foundation,
    Inc.
 
    This program is free software: you can redistribute it and/or modify
@@ -45,11 +45,11 @@
    define necessary library symbols; they are noted "INFRINGES ON
    USER NAME SPACE" below.  */
 
-/* Identify Bison output.  */
-#define YYBISON 1
+/* Identify Bison output, and Bison version.  */
+#define YYBISON 30705
 
-/* Bison version.  */
-#define YYBISON_VERSION "3.7"
+/* Bison version string.  */
+#define YYBISON_VERSION "3.7.5"
 
 /* Skeleton name.  */
 #define YYSKELETON_NAME "yacc.c"
@@ -71,7 +71,7 @@
 /*
  *  R : A Computer Language for Statistical Data Analysis
  *  Copyright (C) 1995, 1996, 1997  Robert Gentleman and Ross Ihaka
- *  Copyright (C) 1997--2020  The R Core Team
+ *  Copyright (C) 1997--2021  The R Core Team
  *  Copyright (C) 2009--2011  Romain Francois
  *
  *  This program is free software; you can redistribute it and/or modify
@@ -392,7 +392,7 @@ static int mbcs_get_next(int c, wchar_t *wc)
 	if(res == -1) error(_("invalid multibyte character in parser at line %d"), ParseState.xxlineno);
     } else {
 	/* This is not necessarily correct for stateful MBCS */
-	while(clen <= MB_CUR_MAX) {
+	while(clen <= R_MB_CUR_MAX) {
 	    mbs_init(&mb_st);
 	    res = (int) mbrtowc(wc, s, clen, &mb_st);
 	    if(res >= 0) break;
@@ -548,6 +548,7 @@ extern int yydebug;
   typedef enum yytokentype yytoken_kind_t;
 #endif
 /* Token kinds.  */
+#define YYEMPTY -2
 #define YYEOF 0
 #define YYerror 256
 #define YYUNDEF 257
@@ -763,6 +764,18 @@ typedef int_least16_t yytype_int16;
 typedef short yytype_int16;
 #endif
 
+/* Work around bug in HP-UX 11.23, which defines these macros
+   incorrectly for preprocessor constants.  This workaround can likely
+   be removed in 2023, as HPE has promised support for HP-UX 11.23
+   (aka HP-UX 11i v2) only through the end of 2022; see Table 2 of
+   <https://h20195.www2.hpe.com/V2/getpdf.aspx/4AA4-7673ENW.pdf>.  */
+#ifdef __hpux
+# undef UINT_LEAST8_MAX
+# undef UINT_LEAST16_MAX
+# define UINT_LEAST8_MAX 255
+# define UINT_LEAST16_MAX 65535
+#endif
+
 #if defined __UINT_LEAST8_MAX__ && __UINT_LEAST8_MAX__ <= __INT_MAX__
 typedef __UINT_LEAST8_TYPE__ yytype_uint8;
 #elif (!defined __UINT_LEAST8_MAX__ && defined YY_STDINT_H \
@@ -860,9 +873,9 @@ typedef int yy_state_fast_t;
 
 /* Suppress unused-variable warnings by "using" E.  */
 #if ! defined lint || defined __GNUC__
-# define YYUSE(E) ((void) (E))
+# define YY_USE(E) ((void) (E))
 #else
-# define YYUSE(E) /* empty */
+# define YY_USE(E) /* empty */
 #endif
 
 #if defined __GNUC__ && ! defined __ICC && 407 <= __GNUC__ * 100 + __GNUC_MINOR__
@@ -1225,9 +1238,9 @@ static const yytype_int8 yypgoto[] =
 };
 
   /* YYDEFGOTO[NTERM-NUM].  */
-static const yytype_int16 yydefgoto[] =
+static const yytype_uint8 yydefgoto[] =
 {
-      -1,    23,    24,   108,    25,    36,    34,    32,    44,   109,
+       0,    23,    24,   108,    25,    36,    34,    32,    44,   109,
      110,    88,   152
 };
 
@@ -1549,8 +1562,8 @@ yy_symbol_value_print (FILE *yyo,
                        yysymbol_kind_t yykind, YYSTYPE const * const yyvaluep, YYLTYPE const * const yylocationp)
 {
   FILE *yyoutput = yyo;
-  YYUSE (yyoutput);
-  YYUSE (yylocationp);
+  YY_USE (yyoutput);
+  YY_USE (yylocationp);
   if (!yyvaluep)
     return;
 # ifdef YYPRINT
@@ -1558,7 +1571,7 @@ yy_symbol_value_print (FILE *yyo,
     YYPRINT (yyo, yytoknum[yykind], *yyvaluep);
 # endif
   YY_IGNORE_MAYBE_UNINITIALIZED_BEGIN
-  YYUSE (yykind);
+  YY_USE (yykind);
   YY_IGNORE_MAYBE_UNINITIALIZED_END
 }
 
@@ -1675,14 +1688,14 @@ static void
 yydestruct (const char *yymsg,
             yysymbol_kind_t yykind, YYSTYPE *yyvaluep, YYLTYPE *yylocationp)
 {
-  YYUSE (yyvaluep);
-  YYUSE (yylocationp);
+  YY_USE (yyvaluep);
+  YY_USE (yylocationp);
   if (!yymsg)
     yymsg = "Deleting";
   YY_SYMBOL_PRINT (yymsg, yykind, yyvaluep, yylocationp);
 
   YY_IGNORE_MAYBE_UNINITIALIZED_BEGIN
-  YYUSE (yykind);
+  YY_USE (yykind);
   YY_IGNORE_MAYBE_UNINITIALIZED_END
 }
 
@@ -2694,7 +2707,7 @@ static void finish_mbcs_in_parse_context()
 	return;
 
     /* copy the context to a linear buffer */
-    char buf[nbytes + MB_CUR_MAX];
+    char buf[nbytes + R_MB_CUR_MAX];
 
     for(i = 0; i < nbytes; i++)
 	buf[i] = R_ParseContext[(first + i) % PARSE_CONTEXT_SIZE];
@@ -4580,7 +4593,7 @@ static int mbcs_get_next2(int c, ucs_t *wc)
 	if(res == -1) error(_("invalid multibyte character in parser at line %d"), ParseState.xxlineno);
     } else {
 	/* This is not necessarily correct for stateful MBCS */
-	while(clen <= MB_CUR_MAX) {
+	while(clen <= R_MB_CUR_MAX) {
 	    res = mbtoucs(wc, s, clen);
 	    if(res >= 0) break;
 	    if(res == -1)

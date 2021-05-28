@@ -1,6 +1,6 @@
 /*
  *  R : A Computer Language for Statistical Data Analysis
- *  Copyright (C) 1997--2020  The R Core Team
+ *  Copyright (C) 1997--2021  The R Core Team
  *  Copyright (C) 1995, 1996  Robert Gentleman and Ross Ihaka
  *
  *  This program is free software; you can redistribute it and/or modify
@@ -421,7 +421,7 @@ Rboolean Rf_isBlankString(const char *s)
 	wchar_t wc; size_t used; mbstate_t mb_st;
 	mbs_init(&mb_st);
 	// This does not allow for surrogate pairs, but all blanks are in BMP
-	while( (used = Mbrtowc(&wc, s, MB_CUR_MAX, &mb_st)) ) {
+	while( (used = Mbrtowc(&wc, s, R_MB_CUR_MAX, &mb_st)) ) {
 	    if(!iswspace((wint_t) wc)) return FALSE;
 	    s += used;
 	}
@@ -1663,7 +1663,7 @@ char *R::Rf_strchr(const char *s, int c)
 
     if(!mbcslocale || utf8locale) return (char*) strchr(s, c);
     mbs_init(&mb_st);
-    while( (used = Mbrtowc(nullptr, p, MB_CUR_MAX, &mb_st)) ) {
+    while( (used = Mbrtowc(nullptr, p, R_MB_CUR_MAX, &mb_st)) ) {
 	if(*p == c) return p;
 	p += used;
     }
@@ -1678,7 +1678,7 @@ char *R::Rf_strrchr(const char *s, int c)
 
     if(!mbcslocale || utf8locale) return (char*) strrchr(s, c);
     mbs_init(&mb_st);
-    while( (used = Mbrtowc(nullptr, p, MB_CUR_MAX, &mb_st)) ) {
+    while( (used = Mbrtowc(nullptr, p, R_MB_CUR_MAX, &mb_st)) ) {
 	if(*p == c) plast = p;
 	p += used;
     }
@@ -1693,7 +1693,7 @@ void R::R_fixslash(char *s)
     if(mbcslocale) {
 	mbstate_t mb_st; int used;
 	mbs_init(&mb_st);
-	while((used = Mbrtowc(nullptr, p, MB_CUR_MAX, &mb_st))) {
+	while((used = Mbrtowc(nullptr, p, R_MB_CUR_MAX, &mb_st))) {
 	    if(*p == '\\') *p = '/';
 	    p += used;
 	}
@@ -1729,7 +1729,7 @@ void R::R_fixbackslash(char *s)
     if(mbcslocale) {
 	mbstate_t mb_st; int used;
 	mbs_init(&mb_st);
-	while((used = Mbrtowc(nullptr, p, MB_CUR_MAX, &mb_st))) {
+	while((used = Mbrtowc(nullptr, p, R_MB_CUR_MAX, &mb_st))) {
 	    if(*p == '/') *p = '\\';
 	    p += used;
 	}

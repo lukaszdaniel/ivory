@@ -63,6 +63,8 @@ SEXP unzip(SEXP args)
 #include "rlocale.h" // may remap iswctype, wctype
 
 /* Declarations from Defn.h */
+int ENC_KNOWN(SEXP x);
+extern Rboolean utf8locale;
 namespace R
 {
     const wchar_t *wtransChar(SEXP x);
@@ -71,36 +73,42 @@ namespace R
 #if defined(USE_RI18N_FNS) || (defined(HAVE_ISWCTYPE) && defined(HAVE_WCTYPE))
 SEXP charClass(SEXP x, SEXP scl)
 {
+    if (!isString(scl) || length(scl) != 1)
+	error(_("argument 'class' must be a character string"));
+    const char *cl = CHAR(STRING_ELT(scl, 0));
+    wctype_t wcl = wctype(cl);
+    if(wcl == 0)
+	error(_("character class \"%s\" is invalid"), cl);
+
     R_xlen_t n;
     GCStackRoot<> xx(x);
-    const int *px;
+    GCStackRoot<> ans;
     if (isString(x)) {
 	if (XLENGTH(x) != 1)
 	    error(_("argument 'x' must be a length-1 character vector"));
-	if (IS_ASCII(x) || IS_UTF8(x))
-	    error(_("argument 'x' must be UTF-8 encoded (including ASCII)"));
 	SEXP sx = STRING_ELT(x, 0);
+	if (!(IS_ASCII(sx) || IS_UTF8(sx) || (utf8locale && !ENC_KNOWN(sx))))
+	    error(_("argument 'x' must be UTF-8 encoded (including ASCII)"));
 	const wchar_t *wx = R::wtransChar(sx);
 	n = wcslen(wx);
-	px = (const int*) wx;
+	ans = allocVector(LGLSXP, n);
+	int *pans = LOGICAL(ans);
+	for (R_xlen_t i = 0; i < n; i++) {
+	    // casting in case wchar_t is signed short: avoid sign extension
+	    int this_ = (int)(unsigned int)wx[i];
+	    pans[i] = iswctype(this_, wcl);
+	}
     } else {
 	x = coerceVector(x, INTSXP);
 	n = XLENGTH(x);
-	px = INTEGER(x);
-    }
-
-    if (!isString(scl))
-	error(_("'%s' argument must be a character string"), "class");
-    const char *cl = CHAR(STRING_ELT(scl, 0));
-    wctype_t wcl = wctype(cl);
-    if(wcl == 0) error(_("character class \"%s\" is invalid"), cl);
-
-    SEXP ans = allocVector(LGLSXP, n);
-    int *pans = LOGICAL(ans);
-    for (R_xlen_t i = 0; i < n; i++) {
-	int this_ = px[i];
-	if (this_ < 0) pans[i] = NA_LOGICAL;
-	else pans[i] = iswctype(this_, wcl);
+	const int* px = INTEGER(x);
+	ans = allocVector(LGLSXP, n);
+	int *pans = LOGICAL(ans);
+	for (R_xlen_t i = 0; i < n; i++) {
+	    int this_ = px[i];
+	    if (this_ < 0) pans[i] = NA_LOGICAL;
+	    else pans[i] = iswctype(this_, wcl);
+	}
     }
     return ans;
 }

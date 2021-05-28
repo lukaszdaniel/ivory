@@ -56,7 +56,7 @@
 double qnbinom_mu(double p, double size, double mu, int lower_tail, int log_p)
 {
     if (size == ML_POSINF) // limit case: Poisson
-	return(qpois(p, mu, lower_tail, log_p));
+	return(Rf_qpois(p, mu, lower_tail, log_p));
 
 #ifdef IEEE_754
     if (ISNAN(p) || ISNAN(size) || ISNAN(mu))

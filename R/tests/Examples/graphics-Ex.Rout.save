@@ -1,9 +1,9 @@
 
-Ivory Under development (unstable) (2021-05-02 r1526) -- "Internationalized Version of R"
+Ivory Under development (unstable) (2021-05-13 r1532) -- "Internationalized Version of R"
 Copyright (C) 2013-2021 Lukasz Daniel (lukasz.daniel@gmail.com)
 See README-IVORY file for details.
 
-R Under development (unstable) (2021-05-02 r80266) -- "Unsuffered Consequences"
+R Under development (unstable) (2021-05-13 r80398) -- "Unsuffered Consequences"
 Copyright (C) 2021 The R Foundation for Statistical Computing
 Platform: x86_64-pc-linux-gnu (64-bit)
 
@@ -579,6 +579,10 @@ Warning in command 'bxp(bx.p, notch = TRUE, boxfill = "lightblue", border = 2:6,
 +               subset = group == "ctrl", plot = FALSE)
 > bxp(bx, show.names=TRUE)
 > par(op)
+> 
+> ## passing gap.axis=* to axis(), PR#18109:
+> boxplot(matrix(100*rnorm(1e3), 50, 20),
++         cex.axis = 1.5, gap.axis = -1)# showing *all* labels
 > 
 > z <- split(rnorm(1000), rpois(1000, 2.2))
 > boxplot(z, whisklty = 3, main = "boxplot(z, whisklty = 3)")
@@ -2152,7 +2156,7 @@ N
 > points.default # to see how it calls "plot.xy(xy.coords(x, y), ...)"
 function (x, y = NULL, type = "p", ...) 
 plot.xy(xy.coords(x, y), type = type, ...)
-<bytecode: 0x557813ab78a0>
+<bytecode: 0x55e5b5ff75a0>
 <environment: namespace:graphics>
 > 
 > 
@@ -3022,7 +3026,7 @@ function (xy = 1, warn.log = TRUE)
     u <- par("usr")
     xy * c(u[2L] - u[1L], u[4L] - u[3L])/par("pin")
 }
-<bytecode: 0x5578139d1960>
+<bytecode: 0x55e5b9b56a80>
 <environment: namespace:graphics>
 > 
 > ## plot labels offset 0.12 inches to the right
@@ -3103,7 +3107,7 @@ function (xy = 1, warn.log = TRUE)
 > cleanEx()
 > options(digits = 7L)
 > base::cat(gettext("Time elapsed: ", domain = "R-base"), proc.time() - base::get("ptime", pos = 'CheckExEnv'),"\n")
-Time elapsed:  19.946 0.084 20.058 0 0 
+Time elapsed:  20.267 0.121 20.4 0 0 
 > grDevices::dev.off()
 null device 
           1 

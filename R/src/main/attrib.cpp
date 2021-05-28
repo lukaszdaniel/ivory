@@ -316,6 +316,8 @@ void Rf_copyMostAttrib(SEXP inp, SEXP ans)
 void R::copyMostAttribNoTs(SEXP inp, SEXP ans)
 {
     SEXP s;
+    int is_object = OBJECT(inp);
+    int is_s4_object = IS_S4_OBJECT(inp);
 
     if (ans == R_NilValue)
 	error(_("attempt to set an attribute on NULL"));
@@ -340,6 +342,9 @@ void R::copyMostAttribNoTs(SEXP inp, SEXP ans)
 		}
 	    if (!ists) installAttrib(ans, TAG(s), cl);
 	    else if(LENGTH(cl) <= 1) {
+		/* dropping class attribute */
+		is_object = 0;
+		is_s4_object = 0;
 	    } else {
 		SEXP new_cl;
 		int i, j, l = LENGTH(cl);
@@ -352,8 +357,8 @@ void R::copyMostAttribNoTs(SEXP inp, SEXP ans)
 	    }
 	}
     }
-    SET_OBJECT(ans, OBJECT(inp));
-    ans->setS4Object(IS_S4_OBJECT(inp));
+    SET_OBJECT(ans, is_object);
+    ans->setS4Object(is_s4_object);
     UNPROTECT(2);
 }
 

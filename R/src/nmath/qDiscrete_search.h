@@ -27,8 +27,8 @@
 #define CHR_0(x) #x
 #define AS_CHAR(x) CHR_0(x)
 
-#define _pDIST_  PASTE(p, _thisDIST_)
-#define _qDIST_  PASTE(q, _thisDIST_)
+#define _pDIST_  PASTE(Rf_p, _thisDIST_)
+#define _qDIST_  PASTE(Rf_q, _thisDIST_)
 /**
    For a discrete distribution on  the integers,
    For P(x) := <pDist>(x, <distPars>),  find p-quantile  y(p)   :<==>   P(y) < p <= P(y)
@@ -84,7 +84,7 @@ static double DO_SEARCH_FUN(_dist_PARS_DECL_)
 			     ISNAN(newz) ? "is NaN" : (lower_tail ? "< p" : ">= p"), *z, iter);
 		return y; // and previous *z
 	    }
-	    y = fmax2(0, y - incr);
+	    y = Rf_fmax2(0, y - incr);
 	    *z = newz;
 	}
     }
@@ -171,7 +171,7 @@ static double DO_SEARCH_FUN(_dist_PARS_DECL_)
 	{                                                                                                        \
 		/* y := approx.value (Cornish-Fisher expansion) :  */                                                \
 		double                                                                                               \
-			z = qnorm(p, 0., 1., lower_tail, log_p),                                                         \
+			z = Rf_qnorm(p, 0., 1., lower_tail, log_p),                                                      \
 			y = R_forceint(mu + sigma * (z + gamma * (z * z - 1) / 6));                                      \
 		R_DBG_printf(" Cornish-Fisher: initial z = qnorm(p, l.t, log)= %g,  y = %g;\n", z, y);               \
                                                                                                              \
@@ -230,7 +230,7 @@ static double DO_SEARCH_FUN(_dist_PARS_DECL_)
 				y = DO_SEARCH_(y, incr, _dist_PARS_); /* also updating *z */                                 \
 				if (++qIt % 10000 == 0)                                                                      \
 					MAYBE_R_CheckUserInterrupt();                                                            \
-				incr = fmax2(1, floor(incr / _iShrink_));                                                    \
+				incr = Rf_fmax2(1, floor(incr / _iShrink_));                                                 \
 			} while (oldincr > 1 && incr > y * _relTol_);                                                    \
 			R_DBG_printf("  \\--> oldincr=%.0f, after %d \"outer\" search() iterations\n",                   \
 						 oldincr, qIt);                                                                      \
