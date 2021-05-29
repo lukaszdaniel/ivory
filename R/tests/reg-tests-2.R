@@ -226,9 +226,11 @@ tabulate(numeric(0))
 
 ## ts
 # Ensure working arithmetic for 'ts' objects :
-z <- ts(matrix(1:900, 100, 3), start = c(1961, 1), frequency = 12)
+z <- ts(matrix(1:300, 100, 3), start = c(1961, 1), frequency = 12)
 stopifnot(z == z)
 stopifnot(z-z == 0)
+if(FALSE) ## <<-- not currently: _R_CHECK_MATRIX_DATA_ \\ related to earlier code:
+tools::assertWarning(matrix(1:90, 10, 3), verbose=TRUE)
 
 ts(1:5, start=2, end=4) # truncate
 ts(1:5, start=3, end=17)# repeat
@@ -2766,12 +2768,15 @@ all.equal(x, y, check.names = FALSE)
 ## failed on mismatched attributes
 
 
-## PR#15411, plus digits change
+## PR#15411; PR#18098 ==> digits=0 not ok:
 format(9992, digits = 3)
 format(9996, digits = 3)
-format(0.0002, digits = 0, nsmall = 2)
-format(pi*10, digits = 0, nsmall = 1)
-## second added an extra space; 3rd and 4th were not allowed.
+format(0.0002, digits = 1, nsmall = 2, scientific = FALSE)
+assertErrorV(
+format(pi*10,  digits = 0))
+format(pi*10,  digits = 1)
+format(pi*10,  digits = 1, nsmall = 1)
+## second added an extra space.
 
 ## and one branch of this was wrong:
 xx <- c(-86870268, 107833358, 302536985, 481015309, 675718935, 854197259,

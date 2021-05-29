@@ -11,7 +11,7 @@ R_HOME = $(top_builddir)
 
 include $(top_builddir)/Makeconf
 
-SOURCES = Rhttpd.cpp Rsock.cpp internet.cpp libcurl.cpp nanoftp.cpp nanohttp.cpp sock.cpp sockconn.cpp
+SOURCES = Rhttpd.cpp Rsock.cpp internet.cpp libcurl.cpp sock.cpp sockconn.cpp
 HEADERS = sock.h
 DEPENDS = $(SOURCES:.cpp=.d)
 OBJECTS = $(SOURCES:.cpp=.o)
@@ -19,7 +19,7 @@ OBJECTS = $(SOURCES:.cpp=.o)
 distdir = $(top_builddir)/$(PACKAGE)-$(VERSION)/$(subdir)
 DISTFILES = \
 	README Makefile.in Makefile.win $(SOURCES) $(HEADERS) \
-	dllversion.rc
+	dllversion.rc nanohttp.cpp
 
 internet_la = internet$(SHLIB_EXT)
 internet_la_LIBADD = $(CURL_LIBS) $(LIBR1) @INTERNET_LIBS@ @DYLIB_UNDEFINED_ALLOWED_FALSE@ $(LIBINTL)

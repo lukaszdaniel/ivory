@@ -1,9 +1,9 @@
 
-Ivory Under development (unstable) (2021-05-02 r1526) -- "Internationalized Version of R"
+Ivory Under development (unstable) (2021-05-13 r1532) -- "Internationalized Version of R"
 Copyright (C) 2013-2021 Lukasz Daniel (lukasz.daniel@gmail.com)
 See README-IVORY file for details.
 
-R Under development (unstable) (2021-05-02 r80266) -- "Unsuffered Consequences"
+R Under development (unstable) (2021-05-13 r80398) -- "Unsuffered Consequences"
 Copyright (C) 2021 The R Foundation for Statistical Computing
 Platform: x86_64-pc-linux-gnu (64-bit)
 
@@ -211,7 +211,7 @@ Error in command 'assertWarning(ff())':
 > bibstyle("unsorted", sortKeys = function(refs) seq_along(refs),
 +     fmtPrefix = function(paper) paste0("[", paper$.index, "]"),
 +        .init = TRUE)
-<environment: 0x557d9d22b2a0>
+<environment: 0x560d0f086420>
 > print(refs, .bibstyle = "unsorted")
 [1] R Core Team (2013). _R: A Language and Environment for Statistical
 Computing_. R Foundation for Statistical Computing, Vienna, Austria.
@@ -961,7 +961,7 @@ An illustration of lexical scoping.
 > 
 > ## IGNORE_RDIFF_BEGIN
 > R_user_dir("FOO", "cache")
-[1] "/Users/deepayan/Library/Caches/org.R-project.R/R/FOO"
+[1] "/home/monia/.cache/R/FOO"
 > ## IGNORE_RDIFF_END
 > 
 > 
@@ -1004,6 +1004,17 @@ List of 6 components
 > ### Keywords: utilities
 > 
 > ### ** Examples
+> 
+>   gridEx <- system.file("doc", "grid.Rnw", package = "grid")
+>   vi <- vignetteInfo(gridEx)
+>   str(vi)
+List of 5 components
+ $ file    : character "grid.Rnw"
+ $ title   : character "Introduction to grid"
+ $ depends : character(0) 
+ $ keywords: character(0) 
+ $ engine  : character "utils::Sweave"
+> 
 > 
 > 
 > cleanEx()
@@ -1049,7 +1060,7 @@ List of 6 components
 > cleanEx()
 > options(digits = 7L)
 > base::cat(gettext("Time elapsed: ", domain = "R-base"), proc.time() - base::get("ptime", pos = 'CheckExEnv'),"\n")
-Time elapsed:  2.072 0.013 2.086 0 0 
+Time elapsed:  2.238 0.015 2.256 0 0 
 > grDevices::dev.off()
 null device 
           1 

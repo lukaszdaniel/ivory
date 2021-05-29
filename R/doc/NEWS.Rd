@@ -6,37 +6,144 @@
 \encoding{UTF-8}
 
 \section{\Rlogo CHANGES IN R-devel}{
-  \subsection{INSTALLATION}{
+  \subsection{NEW FEATURES}{
     \itemize{
-      \item Facilities for accessing \samp{ftp://} sites are no longer
-      tested (except \emph{pro tem} for \code{curlGetHeaders()}) as
-      browsers are increasing removing support.
-      %% Chrome and Firefox did in early 2021: Safari and Edge never had it.
+      \item \code{matrix(x, n, m)} now warns in more cases where
+      \code{length(x)} differs from \code{n * m}, as suggested by Abby
+      Spurdle and Wolfgang Huber in Feb 2021 on the R-devel mailing
+      list.
 
-      It is planned to reduce \samp{ftp://} support in future versions
-      of \R to that provided by \samp{libcurl}.
+      This warning can be turned into an error by setting environment
+      variable \env{_R_CHECK_MATRIX_DATA_} to \samp{TRUE}: \command{R
+	CMD check --as-cran} does so unless it is already set.
+
+      \item Function \code{file_test()} in package \pkg{utils} gains
+      tests for symlinks, readability and writability.
+
+      \item On Windows, \code{download.file(method = "auto")} and
+      \code{url(method = "default")} now follow Unix in using
+      \code{"libcurl"} for all except \samp{file://} URIs.
+
+      \item \code{capabilities("libxml")} is now false.
+
+      The description of \code{capabilities("http/ftp")} now reflects
+      that it refers to the default method, no longer the internal one.
+
+      \item \code{simplify2array()} gains an \code{except} argument for
+      controlling the exceptions used by \code{sapply()}.
     }
   }
 
-  \subsection{NEW FEATURES}{
+  \subsection{INSTALLATION}{
     \itemize{
-      \item \code{matrix(x, n,m)} now warns in more cases where
-      \code{length(x)} is larger than \code{n * m}; suggested by Abby
-      Spurdle and Wolfgang Huber in Feb.2021 on R-devel (mailing list).
+      \item Facilities for accessing \samp{ftp://} sites are no longer
+      tested (except \emph{pro tem} for \code{curlGetHeaders()}) as modern
+      browsers have removed support.
+      %% Chrome and Firefox did in early 2021: Safari and Edge never had it.
+    }
+  }
+
+  \subsection{INSTALLATION ON WINDOWS}{
+    \itemize{
+      \item \code{libcurl} is now required.
+    }
+  }
+
+  \subsection{C-LEVEL FACILITIES}{
+    \itemize{
+      \item The non-API header \file{R_ext/R-ftp-http.h} is no longer
+      provided, as the entry points it covered are now all defunct.
+    }
+  }
+
+  \subsection{DEPRECATED AND DEFUNCT}{
+    \itemize{
+      \item The (non-default and deprecated) \code{method = "internal"}
+      for \code{download.file} and \code{url} no longer supports
+      \samp{http://} nor \samp{ftp://} URIs.  (It is used only for
+      \samp{file://} URIs.)
+
+      On Windows, \code{download.file(method = "wininet")} no longer
+      supports \samp{ftp://} URIs.  (It is no longer the default method,
+      which is \code{"libcurl"} and does.)
+
+      On Windows, the deprecated \code{method = "wininet"} now gives a
+      warning for \samp{http://} and \samp{https://} URIs for both
+      \code{download.file} and \code{url}. (It is no longer the default
+      method.)
     }
   }
 
   \subsection{BUG FIXES}{
     \itemize{
+      \item Setting \code{digits = 0} in \code{format()},
+      \code{print.default()} (and hence typically \code{print()}) or
+      \code{options()} is again invalid.  Its behaviour was
+      platform-dependent, and it is unclear what \dQuote{zero
+	significant digits} should mean (\PR{18098}).
+    }
+  }
+}
+
+\section{\Rlogo CHANGES IN R 4.1.0 patched}{
+  \subsection{NEW FEATURES}{
+    \itemize{
+      \item \code{require(\var{pkg}, quietly = TRUE)} is quieter and in
+      particular does not warn if the package is not found.
+    }
+  }
+
+  \subsection{DEPRECATED AND DEFUNCT}{
+    \itemize{
+      \item Use of \samp{ftp://} URIs should be regarded as
+      deprecated, with on-going support confined to \code{method =
+	"libcurl"} and not routinely tested.  (Nowadays no major browser
+      supports them.)
+
+      \item The non-default \code{method = "internal"} is deprecated for
+      \samp{http://} and \samp{ftp://} URIs for both
+      \code{download.file} and \code{url}.
+
+      \item On Windows, \code{method = "wininet"} is deprecated for
+      \samp{http://}, \samp{https://} and \samp{ftp://} URIs for both
+      \code{download.file} and \code{url}.  (A warning is only given for
+      \samp{ftp://}.)
+
+      For \samp{ftp://} URIs the default method is now \code{"libcurl"}
+      if available (which it is on \acronym{CRAN builds}).
+
+      \code{method = "wininet"} remains the default for \samp{http://}
+      and \samp{https://} URIs but if \code{libcurl} is available, using
+      \code{method = "libcurl"} is preferred.
+    }
+  }
+
+  \subsection{INSTALLATION}{
+    \itemize{
+      \item \command{make check} now works also without a LaTeX
+      installation.  (Thanks to Sebastian Meyer's \PR{18103}.)
+    }
+  }
+
+  \subsection{BUG FIXES}{
+    \itemize{
+      \item \command{make check-devel} works again in an \R build
+      configured with \option{--without-recommended-packages}.
+
       \item \code{qnbinom(p, size, mu)} for large \code{size/mu} is correct
       now in a range of cases (\PR{18095}); similarly for the \code{(size,
       prob)} parametrization of the negative binomial.  Also \code{qpois()}
       and \code{qbinom()} are better and or faster for extreme cases.  The
-      underlying C code has been modularized and common to all four cases
+      underlying C code has been modularized and is common to all four cases
       of discrete distributions.
+
+      \item \code{gap.axis} is now part of the \code{axis()} arguments which
+      are passed from \code{bxp()}, and hence \code{boxplot()}.  (Thanks to
+      Martin Smith's report and suggestions in \PR{18109}.)
     }
   }
 }
+
 
 \section{\Rlogo CHANGES IN R 4.1.0}{
   \subsection{FUTURE DIRECTIONS}{
@@ -112,7 +219,7 @@
       and also \code{checkDocFiles()} have a new option \code{chkInternal}
       allowing to check Rd files marked with keyword \code{"internal"} as
       well.  The latter can be activated for \command{R CMD check} via
-      experimental environment variable \env{_R_CHECK_RD_INTERNAL_TOO_}.
+      environment variable \env{_R_CHECK_RD_INTERNAL_TOO_}.
 
       \item New functions \code{numToBits()} and \code{numToInts()}
       extend the \code{raw} conversion utilities to (double precision)
@@ -195,15 +302,13 @@
       by Antoine Fabri on R-devel.)
 
       \item \R{} now provides a shorthand notation for creating functions,
-      e.g. \code{\(x) x + 1} is parsed as \code{function(x) x + 1}.  This
-      feature is experimental and may change prior to release.
+      e.g. \code{\(x) x + 1} is parsed as \code{function(x) x + 1}.
 
       \item \R{} now provides a simple native forward pipe syntax
       \code{|>}.  The simple form of the forward pipe inserts the
       left-hand side as the first argument in the right-hand side call.
       The pipe implementation as a syntax transformation was motivated
-      by suggestions from Jim Hester and Lionel Henry.  This feature is
-      experimental and may change prior to release.
+      by suggestions from Jim Hester and Lionel Henry.
 
       \item \code{all.equal(f, g)} for \code{function}s now by default also
       compares their \code{environment(.)}s, notably via new
@@ -537,7 +642,8 @@
       AIX have been updated to Unicode 13.0.0.
 
       The character-width tables have been updated to include new
-      assignments in Unicode 13.0.0.
+      assignments in Unicode 13.0.0.  This included treating all control
+      characters as having zero width.
 
       \item The code for evaluating default (extended) regular
       expressions now uses the same character-classification functions

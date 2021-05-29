@@ -405,6 +405,15 @@ HIDDEN void R::R_check_locale(void)
     }
 #endif
     mbcslocale = (Rboolean) (MB_CUR_MAX > 1);
+    R_MB_CUR_MAX = MB_CUR_MAX;
+#ifdef __sun
+    /* Solaris 10 (at least) has MB_CUR_MAX == 3 in some, but ==4
+       in other UTF-8 locales. The former does not allow working
+       with non-BMP characters using mbrtowc(). Work-around by
+       allowing to use more. */
+    if (utf8locale && R_MB_CUR_MAX < 4)
+	R_MB_CUR_MAX = 4;
+#endif
 #ifdef _WIN32
     {
 	char *ctype = setlocale(LC_CTYPE, nullptr), *p;
@@ -2220,7 +2229,7 @@ HIDDEN SEXP do_capabilities(SEXP call, SEXP op, SEXP args, SEXP rho)
     LOGICAL(ans)[i++] = TRUE;
 
     SET_STRING_ELT(ansnames, i, mkChar("libxml"));
-    LOGICAL(ans)[i++] = TRUE;
+    LOGICAL(ans)[i++] = FALSE;
 
     SET_STRING_ELT(ansnames, i, mkChar("fifo"));
 #if (defined(HAVE_MKFIFO) && defined(HAVE_FCNTL_H)) || defined(_WIN32)

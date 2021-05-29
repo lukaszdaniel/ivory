@@ -417,11 +417,11 @@ static void substr(const char *str, int len, int ienc, int sa, int so,
 	mbs_init(&mb_st);
 	for (i = 0; i < sa - 1 && str < end; i++)
 	    /* throws error on invalid multi-byte string */
-	    str += Mbrtowc(nullptr, str, MB_CUR_MAX, &mb_st);
+	    str += Mbrtowc(nullptr, str, R_MB_CUR_MAX, &mb_st);
 	*rfrom = str;
 	for (; i < so && str < end; i++)
 	    /* throws error on invalid multi-byte string */
-	    str += (int) Mbrtowc(nullptr, str, MB_CUR_MAX, &mb_st);
+	    str += (int) Mbrtowc(nullptr, str, R_MB_CUR_MAX, &mb_st);
 	*rlen = (int) (str - *rfrom);
     } else {
 	if (so - 1 < len) {
@@ -627,11 +627,11 @@ static void substrset(char *buf, const char *const str, cetype_t ienc, size_t sa
     } else {
 	/* This cannot work for stateful encodings */
 	if (mbcslocale) {
-	    for (size_t i = 1; i < sa; i++) buf += Mbrtowc(nullptr, buf, MB_CUR_MAX, nullptr);
+	    for (size_t i = 1; i < sa; i++) buf += Mbrtowc(nullptr, buf, R_MB_CUR_MAX, nullptr);
 	    /* now work out how many bytes to replace by how many */
 	    for (size_t i = sa; i <= so && in < strlen(str); i++) {
-		in += Mbrtowc(nullptr, str+in, MB_CUR_MAX, nullptr);
-		out += Mbrtowc(nullptr, buf+out, MB_CUR_MAX, nullptr);
+		in += Mbrtowc(nullptr, str+in, R_MB_CUR_MAX, nullptr);
+		out += Mbrtowc(nullptr, buf+out, R_MB_CUR_MAX, nullptr);
 		if (!str[in]) break;
 	    }
 	    if (in != out) memmove(buf+in, buf+out, strlen(buf+out)+1);
@@ -1014,11 +1014,11 @@ HIDDEN SEXP do_makenames(SEXP call, SEXP op, SEXP args, SEXP env)
 	    mbstate_t mb_st;
 	    const char *pp = This;
 	    mbs_init(&mb_st);
-	    used = (int) Mbrtowc(&wc, pp, MB_CUR_MAX, &mb_st);
+	    used = (int) Mbrtowc(&wc, pp, R_MB_CUR_MAX, &mb_st);
 	    pp += used; nc -= used;
 	    if (wc == L'.') {
 		if (nc > 0) {
-		    Mbrtowc(&wc, pp, MB_CUR_MAX, &mb_st);
+		    Mbrtowc(&wc, pp, R_MB_CUR_MAX, &mb_st);
 		    if (iswdigit(wc))  need_prefix = TRUE;
 		}
 	    } else if (!iswalpha(wc)) need_prefix = TRUE;
@@ -1754,7 +1754,7 @@ HIDDEN SEXP do_strtrim(SEXP call, SEXP op, SEXP args, SEXP env)
 	    mbs_init(&mb_st);
 	    for (p = This, w0 = 0, q = buf; *p ;) {
 		wchar_t wc;
-		nb =  (int) Mbrtowc(&wc, p, MB_CUR_MAX, &mb_st);
+		nb =  (int) Mbrtowc(&wc, p, R_MB_CUR_MAX, &mb_st);
 #ifdef USE_RI18N_WIDTH
 		w0 = Ri18n_wcwidth((R_wchar_t) wc);
 #else

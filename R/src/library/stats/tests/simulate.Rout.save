@@ -1,9 +1,9 @@
 
-Ivory Under development (unstable) (2021-05-02 r1526) -- "Internationalized Version of R"
+Ivory Under development (unstable) (2021-05-13 r1532) -- "Internationalized Version of R"
 Copyright (C) 2013-2021 Lukasz Daniel (lukasz.daniel@gmail.com)
 See README-IVORY file for details.
 
-R Under development (unstable) (2021-05-02 r80266) -- "Unsuffered Consequences"
+R Under development (unstable) (2021-05-13 r80398) -- "Unsuffered Consequences"
 Copyright (C) 2021 The R Foundation for Statistical Computing
 Platform: x86_64-pc-linux-gnu (64-bit)
 
@@ -381,8 +381,10 @@ ftv1        -0.7388479  0.5090637 -1.451386 0.14667244
 ftv2+       -0.0097438  0.4670024 -0.020865 0.98335371
 > 
 > ## This requires MASS::gamma.shape
-> if(!require("MASS")) q()
-Loading required package: 'MASS'
+> if(!require("MASS", quietly = TRUE)) {
++     message("skipping tests requiring the MASS package")
++     q()
++ }
 > 
 > ## gamma fit, from example(glm)
 > clotting <- data.frame(u = c(5,10,15,20,30,40,60,80,100),
@@ -419,4 +421,4 @@ log(u)       0.015569 0.00033659  46.256 5.7704e-10
 > 
 > proc.time()
    user  system elapsed 
-  2.153   0.017   2.161 
+  2.317   0.049   2.355 

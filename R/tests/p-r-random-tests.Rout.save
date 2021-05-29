@@ -1,9 +1,9 @@
 
-Ivory Under development (unstable) (2021-05-02 r1526) -- "Internationalized Version of R"
+Ivory Under development (unstable) (2021-05-13 r1532) -- "Internationalized Version of R"
 Copyright (C) 2013-2021 Lukasz Daniel (lukasz.daniel@gmail.com)
 See README-IVORY file for details.
 
-R Under development (unstable) (2021-05-02 r80266) -- "Unsuffered Consequences"
+R Under development (unstable) (2021-05-13 r80398) -- "Unsuffered Consequences"
 Copyright (C) 2021 The R Foundation for Statistical Computing
 Platform: x86_64-pc-linux-gnu (64-bit)
 
@@ -328,6 +328,6 @@ f(df1 = 10, df2 = 2, ncp = 3) PASSED
 > 
 > 
 > cat('Time elapsed: ', proc.time() - .proctime00,'\n')
-Time elapsed:  5.935 0.012 5.948 0 0 
+Time elapsed:  6.131 0.012 6.145 0 0 
 > 
 > 

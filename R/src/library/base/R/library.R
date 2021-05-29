@@ -294,7 +294,7 @@ function(package, help, pos = 2, lib.loc = NULL, character.only = FALSE,
                 else
                     gettext("no library trees found in 'lib.loc'", domain = "R-base")
                 if(logical.return) {
-                    warning(txt, domain = NA)
+                    if(!quietly) warning(txt, domain = NA)
 		    return(FALSE)
 		} else stop(txt, domain = NA)
             }
@@ -373,7 +373,7 @@ function(package, help, pos = 2, lib.loc = NULL, character.only = FALSE,
 		    } else {
 		      msg <- gettextf("package or namespace load failed for %s:\n %s", sQuote(package), conditionMessage(e), domain = "R-base")
 		    }
-		    if(logical.return)
+		    if(logical.return && !quietly)
 			message(gettext("Error:", domain = "R-base"), msg, domain = NA) # returns NULL
 		    else stop(msg, call. = FALSE, domain = NA)
 		})

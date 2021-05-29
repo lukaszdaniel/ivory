@@ -1,6 +1,6 @@
 /*
  *  R : A Computer Language for Statistical Data Analysis
- *  Copyright (C) 2003-2016   The R Core Team.
+ *  Copyright (C) 2003-2021   The R Core Team.
  *
  *  This program is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -31,6 +31,7 @@
 #include "localization.h"
 
 LibExtern Rboolean mbcslocale;
+LibExtern size_t R_MB_CUR_MAX;
 
 namespace R
 {
@@ -102,7 +103,7 @@ SEXP delim_match(SEXP x, SEXP delims)
 	    else if(c == '%') {
 		while((c != '\0') && (c != '\n')) {
 		    if(mbcslocale) {
-			used = (int) Mbrtowc(nullptr, s, MB_CUR_MAX, &mb_st);
+			used = (int) Mbrtowc(nullptr, s, R_MB_CUR_MAX, &mb_st);
 			if(used == 0) break;
 			s += used; c = *s;
 		    } else
@@ -126,7 +127,7 @@ SEXP delim_match(SEXP x, SEXP delims)
 		delim_depth++;
 	    }
 	    if(mbcslocale) {
-		used = (int) Mbrtowc(nullptr, s, MB_CUR_MAX, &mb_st);
+		used = (int) Mbrtowc(nullptr, s, R_MB_CUR_MAX, &mb_st);
 		if(used == 0) break;
 		s += used;
 	    } else

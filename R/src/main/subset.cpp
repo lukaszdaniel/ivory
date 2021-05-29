@@ -1124,7 +1124,7 @@ HIDDEN SEXP do_subset2_dflt(SEXP call, SEXP op, SEXP args, SEXP rho)
 		ans = VECTOR_ELT(x, offset);
 
     } else {
-	ans = allocVector(TYPEOF(x), 1);
+	ans = PROTECT(allocVector(TYPEOF(x), 1));
 	switch (TYPEOF(x)) {
 	case LGLSXP:
 	    LOGICAL0(ans)[0] = LOGICAL_ELT(x, offset);
@@ -1147,6 +1147,7 @@ HIDDEN SEXP do_subset2_dflt(SEXP call, SEXP op, SEXP args, SEXP rho)
 	default:
 	    UNIMPLEMENTED_TYPE("do_subset2()", x);
 	}
+	UNPROTECT(1); /* ans */
     }
     UNPROTECT(2); /* args, x */
     return ans;

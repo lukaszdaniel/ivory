@@ -1,7 +1,7 @@
 /*
  *  R : A Computer Language for Statistical Data Analysis
  *  Copyright (C) 1995, 1996  Robert Gentleman and Ross Ihaka
- *  Copyright (C) 1998--2013  The R Core Team
+ *  Copyright (C) 1998--2021  The R Core Team
  *
  *  This program is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -144,7 +144,7 @@ int mb_char_len(const char *buf, int clength)
     int i, mb_len = 0;
 
     for(i = 0; i <= clength; i += mb_len)
-	mb_len = mbrtowc(nullptr, buf+i, MB_CUR_MAX, nullptr);
+	mb_len = mbrtowc(nullptr, buf+i, R_MB_CUR_MAX, nullptr);
     return mb_len;
 }
 

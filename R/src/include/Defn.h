@@ -1,6 +1,6 @@
 /*
  *  R : A Computer Language for Statistical Data Analysis
- *  Copyright (C) 1998--2020  The R Core Team.
+ *  Copyright (C) 1998--2021  The R Core Team.
  *  Copyright (C) 1995, 1996  Robert Gentleman and Ross Ihaka
  *
  *  This program is free software; you can redistribute it and/or modify
@@ -320,6 +320,7 @@ extern "C"
     LibExtern bool utf8locale INI_as(false);     /* is this a UTF-8 locale? */
     LibExtern Rboolean mbcslocale INI_as(FALSE); /* is this a MBCS locale? */
     extern0 bool latin1locale INI_as(false);     /* is this a Latin-1 locale? */
+    LibExtern size_t R_MB_CUR_MAX INI_as(0);     /* corrected variant of MB_CUR_MAX */
 #ifdef _WIN32
     LibExtern unsigned int localeCP INI_as(1252); /* the locale's codepage */
     LibExtern unsigned int systemCP INI_as(437);  /* the ANSI codepage, GetACP */
