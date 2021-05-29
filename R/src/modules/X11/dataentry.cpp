@@ -1351,7 +1351,7 @@ static void handlechar(DEstruct DE, const char *text)
 	}
     }
 
-    if (int(clength+strlen(text)) > BOOSTED_BUF_SIZE - R_MB_CUR_MAX - 1) {
+    if (clength+strlen(text) > BOOSTED_BUF_SIZE - R_MB_CUR_MAX - 1) {
 	warning(_("dataentry: expression too long"));
 	goto donehc;
     }
