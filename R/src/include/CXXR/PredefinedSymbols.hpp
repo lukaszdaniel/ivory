@@ -92,6 +92,8 @@ PREDEFINED_SYMBOL(R_DevicesSymbol, DotDevicesSymbol, ".Devices");
 PREDEFINED_SYMBOL2(baseSymbol, "base"); // deprecated.
 PREDEFINED_SYMBOL2(BaseSymbol, "base");
 PREDEFINED_SYMBOL2(SpecSymbol, "spec");
+PREDEFINED_SYMBOL2(LastWarningSymbol, "last.warning");
+PREDEFINED_SYMBOL2(DotTracebackSymbol, ".Traceback");
 PREDEFINED_SYMBOL2(NamespaceEnvSymbol, ".__NAMESPACE__.");
 PREDEFINED_SYMBOL2(AsCharacterSymbol, "as.character");
 PREDEFINED_SYMBOL2(FunctionSymbol, "function");

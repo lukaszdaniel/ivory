@@ -455,7 +455,7 @@ void GCNode::gc(unsigned int num_old_gens_to_collect)
     {
         if (sp->tag == RAWMEM_TAG)
             sp += sp->u.ival;
-        else if (sp->tag == 0 || R_bcstack_t::IS_PARTIAL_SXP_TAG(sp->tag))
+        else if (sp->tag == NILSXP || R_bcstack_t::IS_PARTIAL_SXP_TAG(sp->tag))
             MARK_THRU(&marker, sp->u.sxpval);
     }
 
@@ -1409,7 +1409,7 @@ DL_FUNC R_ExternalPtrAddrFn(SEXP s)
 HIDDEN void R::R_expand_binding_value(SEXP b)
 {
 #if BOXED_BINDING_CELLS
-    SET_BNDCELL_TAG(b, 0);
+    SET_BNDCELL_TAG(b, NILSXP);
 #else
     int typetag = BNDCELL_TAG(b);
     if (typetag)
@@ -1441,6 +1441,45 @@ HIDDEN void R::R_expand_binding_value(SEXP b)
             val = ScalarLogical(vv.ival);
             SET_BNDCELL(b, val);
 	    UNPROTECT(1);
+            break;
+        }
+    }
+#endif
+}
+
+HIDDEN void CXXR::R_expand_binding_value(Frame::Binding *b)
+{
+#if BOXED_BINDING_CELLS
+    if (b)
+        b->setBndCellTag(NILSXP);
+#else
+    int typetag = b ? b->bndcellTag() : NILSXP;
+    if (typetag)
+    {
+        union
+        {
+            RObject *sxpval;
+            double dval;
+            int ival;
+        } vv;
+        RObject *val;
+        vv.sxpval = b ? b->value() : nullptr;
+        switch (typetag)
+        {
+        case REALSXP:
+            val = Rf_ScalarReal(vv.dval);
+            if (b)
+                b->setValue(val);
+            break;
+        case INTSXP:
+            val = Rf_ScalarInteger(vv.ival);
+            if (b)
+                b->setValue(val);
+            break;
+        case LGLSXP:
+            val = Rf_ScalarLogical(vv.ival);
+            if (b)
+                b->setValue(val);
             break;
         }
     }

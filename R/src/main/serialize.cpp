@@ -1104,7 +1104,7 @@ static void WriteItem(SEXP s, SEXP ref_table, R_outpstream_t stream)
 	    OutInteger(stream, ENVSXP);
 	    OutInteger(stream, R_EnvironmentIsLocked(s) ? 1 : 0);
 	    WriteItem(ENCLOS(s), ref_table, stream);
-		GCStackRoot<> frame_pairlist(FRAME(s));
+	    GCStackRoot<> frame_pairlist(FRAME(s));
 	    WriteItem(frame_pairlist, ref_table, stream);
 	    WriteItem(HASHTAB(s), ref_table, stream);
 	    WriteItem(ATTRIB(s), ref_table, stream);
@@ -1860,31 +1860,40 @@ static SEXP ReadItem(SEXP ref_table, R_inpstream_t stream)
 	return s;
     case ENVSXP:
 	{
-	    int locked = InInteger(stream);
+		int locked = InInteger(stream);
 
-	    PROTECT(s = GCNode::expose(new Environment()));
+		GCRoot<Environment> env(GCNode::expose(new Environment()));
 
-	    /* MUST register before filling in */
-	    AddReadRef(ref_table, s);
+		/* MUST register before filling in */
+		AddReadRef(ref_table, env);
 
-	    /* Now fill it in  */
-	    R_ReadItemDepth++;
-	    SET_ENCLOS(s, ReadItem(ref_table, stream));
-	    SET_FRAME(s, ReadItem(ref_table, stream));
-	    SET_HASHTAB(s, ReadItem(ref_table, stream));
-	    SET_ATTRIB(s, ReadItem(ref_table, stream));
-	    R_ReadItemDepth--;
-	    if (ATTRIB(s) != R_NilValue &&
-		getAttrib(s, R_ClassSymbol) != R_NilValue)
-		/* We don't write out the object bit for environments,
+		/* Now fill it in  */
+		R_ReadItemDepth++;
+		// Enclosing environment:
+		{
+			Environment *enc = SEXP_downcast<Environment *>(ReadItem(ref_table, stream));
+			env->setEnclosingEnvironment(enc);
+		}
+		// Frame:
+		{
+			SET_FRAME(env, ReadItem(ref_table, stream));
+		}
+		SET_HASHTAB(env, ReadItem(ref_table, stream));
+		// Attributes:
+		SET_ATTRIB(env, ReadItem(ref_table, stream));
+		R_ReadItemDepth--;
+		if (ATTRIB(env) != R_NilValue &&
+			getAttrib(env, R_ClassSymbol) != R_NilValue)
+			/* We don't write out the object bit for environments,
 		   so reconstruct it here if needed. */
-		SET_OBJECT(s, 1);
-	    R_RestoreHashCount(s);
-	    if (locked) R_LockEnvironment(s, (Rboolean) FALSE);
-	    /* Convert a NULL enclosure to baseenv() */
-	    if (ENCLOS(s) == R_NilValue) SET_ENCLOS(s, R_BaseEnv);
-	    UNPROTECT(1);
-	    return s;
+			SET_OBJECT(env, 1);
+		R_RestoreHashCount(env);
+		if (locked)
+			R_LockEnvironment(env, (Rboolean)FALSE);
+		/* Convert a NULL enclosure to baseenv() */
+		if (!env->enclosingEnvironment())
+			env->setEnclosingEnvironment(Environment::base());
+		return env;
 	}
     case LISTSXP:
 	{

@@ -46,18 +46,6 @@ namespace CXXR
 
     // ***** Class Frame::Binding *****
 
-    PairList *Frame::Binding::asPairList(PairList *tail) const
-    {
-        PairList *ans = new PairList(m_value, tail, const_cast<Symbol *>(symbol()));
-        SET_MISSING(ans, origin());
-        if (isActive())
-            SET_ACTIVE_BINDING_BIT(ans);
-        if (isLocked())
-            LOCK_BINDING(ans);
-        ans->expose();
-        return ans;
-    }
-
     pair<RObject *, bool> Frame::Binding::forcedValueSlow() const
     {
         bool promise_forced = false;
@@ -93,6 +81,41 @@ namespace CXXR
         m_map->max_load_factor(maximum_load_factor);
     }
 
+    PairList *Frame::asPairList() const
+    {
+        GCStackRoot<PairList> ans(nullptr);
+        visitBindings([&](const Binding *binding)
+                      { ans = binding->asPairList(ans); });
+        return ans;
+    }
+
+    void frameReadPairList(Frame *frame, PairList *bindings)
+    {
+        for (PairList *pl = bindings; pl; pl = pl->tail())
+        {
+            const RObject *tag = pl->tag();
+            const Symbol *symbol = dynamic_cast<const Symbol *>(tag);
+            if (!symbol)
+                Rf_error(_("list used to set frame bindings must have symbols as tags throughout"));
+            Frame::Binding *bdg = frame->obtainBinding(symbol);
+            bdg->fromPairList(pl);
+        }
+    }
+
+    PairList *Frame::Binding::asPairList(PairList *tail) const
+    {
+        PairList *ans = new PairList(m_value, tail, const_cast<Symbol *>(symbol()));
+        SET_MISSING(ans, origin());
+        SET_BNDCELL_TAG(ans, bndcellTag());
+        SET_ASSIGNMENT_PENDING(ans, assignmentPending());
+        if (isActive())
+            SET_ACTIVE_BINDING_BIT(ans);
+        if (isLocked())
+            LOCK_BINDING(ans);
+        ans->expose();
+        return ans;
+    }
+
     void Frame::Binding::fromPairList(PairList *pl)
     {
         const RObject *tag = pl->tag();
@@ -104,15 +127,8 @@ namespace CXXR
         else
             setValue(pl->car(), pl_origin);
         setLocking(pl->bindingIsLocked());
-    }
-
-    PairList *Frame::asPairList() const
-    {
-        GCStackRoot<PairList> ans(nullptr);
-        visitBindings([&](const Binding *binding) {
-            ans = binding->asPairList(ans);
-        });
-        return ans;
+        setBndCellTag(pl->bndcellTag());
+        setAssignmentPending(pl->assignmentPending());
     }
 
     void Frame::Binding::handleSetValueError() const
@@ -178,7 +194,8 @@ namespace CXXR
 
     void Frame::lockBindings()
     {
-        modifyBindings([](Binding *binding) { binding->setLocking(true); });
+        modifyBindings([](Binding *binding)
+                       { binding->setLocking(true); });
     }
 
     Frame::Binding *Frame::obtainBinding(const Symbol *symbol)
@@ -224,9 +241,8 @@ namespace CXXR
 
     void Frame::visitReferents(const_visitor *v) const
     {
-        visitBindings([=](const Binding *binding) {
-            binding->visitReferents(v);
-        });
+        visitBindings([=](const Binding *binding)
+                      { binding->visitReferents(v); });
     }
 
     void Frame::Binding::initialize(Frame *frame, const Symbol *sym)
@@ -323,15 +339,17 @@ namespace CXXR
                                           bool sorted) const
     {
         vector<const Symbol *> ans;
-        visitBindings([&](const Binding *binding) {
-            const Symbol *symbol = binding->symbol();
-            if (include_dotsymbols || !isDotSymbol(symbol))
-                ans.push_back(symbol);
-        });
+        visitBindings([&](const Binding *binding)
+                      {
+                          const Symbol *symbol = binding->symbol();
+                          if (include_dotsymbols || !isDotSymbol(symbol))
+                              ans.push_back(symbol);
+                      });
         if (sorted)
         {
             std::sort(ans.begin(), ans.end(),
-                      [](const Symbol *x, const Symbol *y) { return String::Comparator()(x->name(), y->name()); });
+                      [](const Symbol *x, const Symbol *y)
+                      { return String::Comparator()(x->name(), y->name()); });
         }
 
         return ans;
@@ -391,9 +409,8 @@ namespace CXXR
 
     void Frame::importBindings(const Frame *frame, bool quiet)
     {
-        frame->visitBindings([=](const Binding *binding) {
-            importBinding(binding, quiet);
-        });
+        frame->visitBindings([=](const Binding *binding)
+                             { importBinding(binding, quiet); });
     }
 
     void Frame::visitBindings(std::function<void(const Binding *)> f) const
@@ -418,19 +435,6 @@ namespace CXXR
         // visit that.
         m_symbol.conductVisitor(v);
         m_value.conductVisitor(v);
-    }
-
-    void frameReadPairList(Frame *frame, PairList *bindings)
-    {
-        for (PairList *pl = bindings; pl != nullptr; pl = pl->tail())
-        {
-            const RObject *tag = pl->tag();
-            const Symbol *symbol = dynamic_cast<const Symbol *>(tag);
-            if (!symbol)
-                Rf_error(_("list used to set frame bindings must have symbols as tags throughout"));
-            Frame::Binding *bdg = frame->obtainBinding(symbol);
-            bdg->fromPairList(pl);
-        }
     }
 
     bool isMissingArgument(const Symbol *sym, Frame *frame)

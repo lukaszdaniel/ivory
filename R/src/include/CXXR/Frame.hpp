@@ -102,7 +102,7 @@ namespace CXXR
        */
       Binding()
           : m_frame(nullptr), m_origin(MISSING), m_active(false),
-            m_locked(false)
+            m_locked(false), m_bndcellTag(NILSXP), m_assignment_pending(false)
       {
         m_symbol = nullptr;
         m_value = Symbol::missingArgument();
@@ -370,6 +370,26 @@ namespace CXXR
       RObject *value() const;
       RObject *unforcedValue() const;
 
+      SEXPTYPE bndcellTag() const
+      {
+        return m_bndcellTag;
+      }
+
+      void setBndCellTag(SEXPTYPE v)
+      {
+        m_bndcellTag = v;
+      }
+
+      bool assignmentPending() const
+      {
+        return m_assignment_pending;
+      }
+
+      void setAssignmentPending(bool on)
+      {
+        m_assignment_pending = on;
+      }
+
       /** @brief Auxiliary function to Frame::visitReferents().
        *
        * This function conducts a visitor to those objects
@@ -389,6 +409,8 @@ namespace CXXR
       unsigned char m_origin;
       bool m_active;
       bool m_locked;
+      SEXPTYPE m_bndcellTag;
+      bool m_assignment_pending;
 
       std::pair<RObject *, bool> forcedValueSlow() const;
       void assignSlow(RObject *new_value, Origin origin);
@@ -749,6 +771,15 @@ namespace CXXR
      */
     size_t size() const;
 
+    /** @brief Does this frame have any special symbols?
+     *
+     * @return true iff this Frame has special symbols.
+     */
+    bool noSpecialSymbols() const
+    {
+      return m_no_special_symbols;
+    }
+
     /** @brief Symbols bound by this Frame.
      *
      * @param include_dotsymbols If false, any Symbol whose name
@@ -893,19 +924,34 @@ namespace CXXR
    */
   bool isMissingArgument(const Symbol *sym, Frame *frame);
 
+  void R_expand_binding_value(Frame::Binding *b);
 } // namespace CXXR
 
 namespace R
 {
+#if CXXR_TRUE
   /* environment cell access */
   struct R_varloc_t
   {
-    SEXP cell;
-  }; /* use struct to prevent casting */
-  // using R_varloc_t = SEXP;
-  // using R_varloc_t = CXXR::Frame::Binding *;
+  private:
+    SEXP m_cell;
 
-  inline bool R_VARLOC_IS_NULL(const R_varloc_t &loc) { return ((loc).cell == nullptr); }
+  public:
+    // not entirely true, since m_cell can contain Symbol as well (for now)
+    SEXP asPairList()
+    {
+      return m_cell;
+    }
+
+    // not entirely true, since m_cell can contain Symbol as well (for now)
+    void fromPairList(SEXP pl)
+    {
+      m_cell = pl;
+    }
+  }; /* use struct to prevent casting */
+#else
+  using R_varloc_t = CXXR::Frame::Binding *;
+#endif
   R_varloc_t R_findVarLocInFrame(SEXP, SEXP);
   R_varloc_t R_findVarLoc(SEXP rho, SEXP symbol);
   SEXP R_GetVarLocValue(R_varloc_t vl);
