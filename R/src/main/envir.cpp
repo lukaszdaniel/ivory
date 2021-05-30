@@ -222,8 +222,8 @@ void Frame::Binding::assignSlow(RObject *new_value, Origin origin)
     {
         if (bndcellTag())
         {
-            m_value = nullptr;
-            setBndCellTag(0);
+            m_value.clearCar(); // m_value = nullptr;
+            setBndCellTag(NILSXP);
         }
         m_value.retarget(m_frame, new_value);
         m_frame->monitorWrite(*this);
@@ -312,6 +312,8 @@ HIDDEN void R::InitGlobalEnv()
     R_PreserveObject(R_NamespaceRegistry);
     Rf_defineVar(R_BaseSymbol, R_BaseNamespace, R_NamespaceRegistry);
     /**** needed to properly initialize the base namespace */
+    Rf_gsetVar(R_LastWarningSymbol, nullptr, R_BaseEnv);  // CXXR addition
+    Rf_gsetVar(R_DotTracebackSymbol, nullptr, R_BaseEnv);  // CXXR addition
 }
 
 static std::pair<SEXP, bool> RemoveFromList(SEXP thing, SEXP list)
@@ -397,7 +399,7 @@ static SEXP findVarLocInFrame(SEXP rho, SEXP symbol, Rboolean * /*canCache*/)
 
 /** @brief External version and accessor functions.
  * 
- * @return Returned value is cast as an opaque pointer to insure it is only used by routines in this
+ * @return Returned value is cast as an opaque pointer to ensure it is only used by routines in this
  * group. This allows the implementation to be changed without needing to change other files.
  */
 R_varloc_t R::R_findVarLocInFrame(SEXP rho, SEXP symbol)
@@ -1543,7 +1545,7 @@ HIDDEN SEXP do_missing(SEXP call, SEXP op, SEXP args, SEXP rho)
     rval = allocVector(LGLSXP,1);
     LOGICAL(rval)[0] = 0;
 
-    if (t != nullptr) {
+    if (t) {
 	if (DDVAL(s)) {
 	    if (length(CAR(t)) < ddv  || CAR(t) == R_MissingArg) {
 		LOGICAL(rval)[0] = 1;
@@ -2391,7 +2393,6 @@ Rboolean R_BindingIsLocked(SEXP sym, SEXP env)
         error(_("use of NULL environment is defunct"));
     if (TYPEOF(env) != ENVSXP && TYPEOF((env = simple_as_environment(env))) != ENVSXP)
         error(_("'%s' argument is not an environment"), "env");
-
     if (env == R_BaseEnv || env == R_BaseNamespace)
         /* It is a symbol, so must have a binding even if it is
 	   R_UnboundSymbol */
@@ -2543,7 +2544,6 @@ HIDDEN SEXP do_mkUnbound(SEXP call, SEXP op, SEXP args, SEXP rho)
     if (R_BindingIsActive(sym, R_BaseEnv))
         error(_("cannot unbind an active binding"));
     SET_SYMVALUE(sym, R_UnboundValue);
-
     return nullptr;
 }
 

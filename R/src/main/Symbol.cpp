@@ -223,6 +223,7 @@ namespace CXXR
        since the symbol value corresponds to the base environment
        where complex assignments are not allowed.  */
         DISABLE_REFCNT(R_LastvalueSymbol);
+        DISABLE_REFCNT(R_LastWarningSymbol);
 
         /* Special base functions */
         for (const auto &sname : s_special_symbol_names)

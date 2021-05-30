@@ -170,7 +170,7 @@ namespace CXXR
         if (cc->bndcellTag())
         {
             cc->clearCar();
-            cc->setBndCellTag(0);
+            cc->setBndCellTag(NILSXP);
         }
     }
 
@@ -214,7 +214,7 @@ namespace CXXR
         }
         else
         {
-            if (car() && (sexptype() != LISTSXP || BOXED_BINDING_CELLS || bndcellTag() == 0))
+            if (car() && (sexptype() != LISTSXP || BOXED_BINDING_CELLS || bndcellTag() == NILSXP))
                 car()->conductVisitor(v);
             if (tag())
                 tag()->conductVisitor(v);
@@ -245,7 +245,7 @@ namespace CXXR
             }
             else
             {
-                if (p->car() && (p->sexptype() != LISTSXP || BOXED_BINDING_CELLS || p->bndcellTag() == 0))
+                if (p->car() && (p->sexptype() != LISTSXP || BOXED_BINDING_CELLS || p->bndcellTag() == NILSXP))
                     p->car()->conductVisitor(v);
                 if (p->tag())
                     p->tag()->conductVisitor(v);
@@ -473,13 +473,13 @@ void SET_MISSING(SEXP x, int v)
 
 int BNDCELL_TAG(SEXP cell)
 {
-    return cell ? SEXP_downcast<ConsCell *>(cell)->bndcellTag() : 0;
+    return cell ? SEXP_downcast<ConsCell *>(cell)->bndcellTag() : NILSXP;
 }
 
 void SET_BNDCELL_TAG(SEXP cell, int val)
 {
     if (cell)
-        SEXP_downcast<ConsCell *>(cell)->setBndCellTag(val);
+        SEXP_downcast<ConsCell *>(cell)->setBndCellTag(SEXPTYPE(val));
 }
 
 double BNDCELL_DVAL(SEXP cell)

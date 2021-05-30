@@ -245,12 +245,12 @@ namespace CXXR
         void setTail(PairList *tl);
         // Implemented inline in CXXR/PairList.h
 
-        unsigned int bndcellTag() const
+        SEXPTYPE bndcellTag() const
         {
-            return extra();
+            return SEXPTYPE(extra());
         }
 
-        void setBndCellTag(unsigned int v)
+        void setBndCellTag(SEXPTYPE v)
         {
             setExtra(v);
         }

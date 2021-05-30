@@ -614,7 +614,7 @@ static Rboolean is_missing_arg(SEXP symbol, SEXP ev)
     if (!isSymbol(symbol))
         error(_("'symbol' must be a SYMSXP expression"));
     R_varloc_t loc = R_findVarLocInFrame(ev, symbol);
-    if (loc.asPairList() == nullptr)
+    if (!loc.asPairList())
         error(_("could not find symbol '%s' in frame of call"),
               CHAR(PRINTNAME(symbol)));
     return R_GetVarLocMISSING(loc);

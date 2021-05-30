@@ -1019,6 +1019,8 @@ void setup_Rmainloop(void)
     R_LockEnvironment(R_BaseNamespace, TRUE);
     R_LockEnvironment(R_BaseEnv, FALSE);
     R_unLockBinding(R_LastvalueSymbol, R_BaseEnv);  // CXXR addition
+    R_unLockBinding(R_LastWarningSymbol, R_BaseEnv);  // CXXR addition
+    R_unLockBinding(R_DotTracebackSymbol, R_BaseEnv);  // CXXR addition
     /* At least temporarily unlock some bindings used in graphics */
     R_unLockBinding(R_DeviceSymbol, R_BaseEnv);
     R_unLockBinding(R_DevicesSymbol, R_BaseEnv);

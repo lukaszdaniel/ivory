@@ -102,7 +102,7 @@ namespace CXXR
        */
       Binding()
           : m_frame(nullptr), m_origin(MISSING), m_active(false),
-            m_locked(false), m_bndcellTag(0), m_assignment_pending(false)
+            m_locked(false), m_bndcellTag(NILSXP), m_assignment_pending(false)
       {
         m_symbol = nullptr;
         m_value = Symbol::missingArgument();
@@ -370,12 +370,12 @@ namespace CXXR
       RObject *value() const;
       RObject *unforcedValue() const;
 
-      unsigned int bndcellTag() const
+      SEXPTYPE bndcellTag() const
       {
         return m_bndcellTag;
       }
 
-      void setBndCellTag(unsigned int v)
+      void setBndCellTag(SEXPTYPE v)
       {
         m_bndcellTag = v;
       }
@@ -409,7 +409,7 @@ namespace CXXR
       unsigned char m_origin;
       bool m_active;
       bool m_locked;
-      unsigned int m_bndcellTag;
+      SEXPTYPE m_bndcellTag;
       bool m_assignment_pending;
 
       std::pair<RObject *, bool> forcedValueSlow() const;
