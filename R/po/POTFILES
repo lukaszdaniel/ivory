@@ -72,15 +72,19 @@ src/main/debug.cpp
 src/main/deparse.cpp
 src/main/devices.cpp
 src/main/dotcode.cpp
+src/main/DottedArgs.cpp
 src/main/dounzip.cpp
 src/main/dstruct.cpp
 src/main/duplicate.cpp
 src/main/edit.cpp
 src/main/engine.cpp
 src/main/envir.cpp
+src/main/Environment.cpp
 src/main/errors.cpp
 src/main/eval.cpp
+src/main/Evaluator.cpp
 src/main/ExpressionVector.cpp
+src/main/Frame.cpp
 src/main/GCManager.cpp
 src/main/gevents.cpp
 src/main/gram.cpp
@@ -114,6 +118,7 @@ src/main/printarray.cpp
 src/main/print.cpp
 src/main/printutils.cpp
 src/main/printvector.cpp
+src/main/Promise.cpp
 src/main/qsort.cpp
 src/main/radixsort.cpp
 src/main/RAllocStack.cpp
@@ -155,8 +160,6 @@ src/main/WeakRef.cpp
 src/main/xspline.cpp
 src/modules/internet/internet.cpp
 src/modules/internet/libcurl.cpp
-src/modules/internet/nanoftp.cpp
-src/modules/internet/nanohttp.cpp
 src/modules/internet/Rhttpd.cpp
 src/modules/internet/sockconn.cpp
 src/modules/lapack/Lapack.cpp

@@ -205,7 +205,6 @@ namespace CXXR
 
 		void setCached()
 		{
-			// m_gpbits |= CACHED_MASK;
 			m_cached = true;
 		}
 

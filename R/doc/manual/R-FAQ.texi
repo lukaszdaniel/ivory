@@ -315,7 +315,7 @@ If you know about other platforms, please drop us a note.
 
 @node What is the current version of R?, How can R be obtained?, What machines does R run on?, R Basics
 @section What is the current version of R?
-
+ 
 R uses a `major.minor.patchlevel' numbering scheme.  Based on this,
 there are the current release version of R (`r-release') as well as two
 development versions of R, a patched version of the current release
@@ -491,7 +491,7 @@ Snapshots of the r-patched and r-devel versions of R are available as
 Apple installer packages at @uref{https://mac.R-project.org}.
 
 As from R 4.1.0 there are separate builds for ARM-based Macs (also
-known as `M1' or `Apple Silicon') runnind macOS 11 (`Big Sur') or later.
+known as `M1' or `Apple Silicon') running macOS 11 (`Big Sur') or later.
 
 @node Are there Unix-like binaries for R?, What documentation exists for R?, How can R be installed?, R Basics
 @section Are there Unix-like binaries for R?

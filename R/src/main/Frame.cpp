@@ -122,11 +122,11 @@ namespace CXXR
         if (tag && tag != m_symbol)
             Rf_error(_("internal error in %s"), "Frame::Binding::fromPairList()");
         Origin pl_origin = Origin(pl->missing());
-        if (pl->isActiveBinding())
+        if (pl->isActive())
             setFunction(SEXP_downcast<FunctionBase *>(pl->car()), pl_origin);
         else
             setValue(pl->car(), pl_origin);
-        setLocking(pl->bindingIsLocked());
+        setLocking(pl->isLocked());
         setBndCellTag(pl->bndcellTag());
         setAssignmentPending(pl->assignmentPending());
     }

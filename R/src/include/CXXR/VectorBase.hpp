@@ -101,7 +101,6 @@ namespace CXXR
 
     void setGrowable(bool on)
     {
-      // m_gpbits |= GROWABLE_MASK;
       m_growable = on;
     }
 

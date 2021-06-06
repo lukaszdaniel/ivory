@@ -523,12 +523,12 @@ namespace CXXR
             m_spare = on;
         }
 
-        bool bindingIsLocked() const
+        bool isLocked() const
         {
             return m_binding_locked;
         }
 
-        bool isActiveBinding() const
+        bool isActive() const
         {
             return m_active_binding;
         }
@@ -540,31 +540,14 @@ namespace CXXR
 
         void setAssignmentPending(bool on)
         {
-#if CXXR_FALSE
-            if (on)
-            {
-                m_gpbits |= ASSIGNMENT_PENDING_MASK;
-            }
-            else
-            {
-                m_gpbits &= ~ASSIGNMENT_PENDING_MASK;
-            }
-#endif
             m_assignment_pending = on;
         }
 
-        void lockBinding();
+        void setLocking(bool on);
 
         void setActiveBindingBit()
         {
-            // m_gpbits |= ACTIVE_BINDING_MASK;
             m_active_binding = true;
-        }
-
-        void unlockBinding()
-        {
-            // m_gpbits &= (~BINDING_LOCK_MASK);
-            m_binding_locked = false;
         }
 
         unsigned int extra() const

@@ -944,7 +944,7 @@ NULL
 > flush(stderr()); flush(stdout())
 > 
 > ### Name: grid.grep
-> ### Title: Search for grobs
+> ### Title: Search for Grobs and/or Viewports
 > ### Aliases: grid.grep
 > ### Keywords: dplot
 > 

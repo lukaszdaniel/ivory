@@ -226,7 +226,6 @@ namespace CXXR
        */
       void setLocking(bool on)
       {
-         // m_gpbits |= FRAME_LOCK_MASK;
          m_locked = on;
       }
 

@@ -187,14 +187,14 @@ Rboolean IS_ACTIVE_BINDING(SEXP b)
 {
     if (!b)
         return FALSE;
-    return Rboolean(b->isActiveBinding());
+    return Rboolean(b->isActive());
 }
 
 Rboolean BINDING_IS_LOCKED(SEXP b)
 {
     if (!b)
         return FALSE;
-    return Rboolean(b->bindingIsLocked());
+    return Rboolean(b->isLocked());
 }
 
 void SET_ACTIVE_BINDING_BIT(SEXP b)
@@ -206,13 +206,13 @@ void SET_ACTIVE_BINDING_BIT(SEXP b)
 void LOCK_BINDING(SEXP b)
 {
     if (b)
-        b->lockBinding();
+        b->setLocking(true);
 }
 
 void UNLOCK_BINDING(SEXP b)
 {
     if (b)
-        b->unlockBinding();
+        b->setLocking(false);
 }
 
 SEXP Rf_elt(SEXP list, int i)

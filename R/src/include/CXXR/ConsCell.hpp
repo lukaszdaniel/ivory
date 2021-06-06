@@ -90,13 +90,13 @@ union R_bndval_t
 #define SET_BNDCELL_IVAL_MACRO(cell, ival_) (CXXR::ConsCell::set_bndcell_ival(cell, ival_))
 #define SET_BNDCELL_LVAL_MACRO(cell, lval_) (CXXR::ConsCell::set_bndcell_lval(cell, lval_))
 
-#define INIT_BNDCELL_MACRO(cell, type) \
-    do                                 \
-    {                                  \
-        if (BNDCELL_TAG(cell) == 0)    \
-            SETCAR(cell, nullptr);     \
-        SET_BNDCELL_TAG(cell, type);   \
-        SET_MISSING(cell, 0);          \
+#define INIT_BNDCELL_MACRO(cell, type)   \
+    do                                   \
+    {                                    \
+        if (BNDCELL_TAG(cell) == NILSXP) \
+            SETCAR(cell, nullptr);       \
+        SET_BNDCELL_TAG(cell, type);     \
+        SET_MISSING(cell, 0);            \
     } while (0)
 #endif
 
