@@ -354,7 +354,7 @@ extern "C"
     extern0 int R_jit_enabled INI_as(0); /* has to be 0 during R startup */
     extern0 int R_compile_pkgs INI_as(0);
     extern0 int R_check_constants INI_as(0);
-    extern0 int R_disable_bytecode INI_as(0);
+    extern0 bool R_disable_bytecode INI_as(false);
     namespace R
     {
         extern SEXP R_cmpfun1(SEXP); /* unconditional fresh compilation */

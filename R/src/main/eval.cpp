@@ -993,25 +993,24 @@ HIDDEN void R::R_init_jit_enabled(void)
 	}
     }
 
-    if (R_disable_bytecode <= 0) {
-	char *disable = getenv("R_DISABLE_BYTECODE");
-	if (disable) {
-	    int val = atoi(disable);
-	    if (val > 0)
-		R_disable_bytecode = TRUE;
-	    else
-		R_disable_bytecode = FALSE;
+	if (R_disable_bytecode == false)
+	{
+		char *disable = getenv("R_DISABLE_BYTECODE");
+		if (disable)
+		{
+			int val = atoi(disable);
+			R_disable_bytecode = (val > 0);
+		}
 	}
-    }
 
-    /* -1 ... duplicate constants on LDCONST and PUSHCONSTARG, no checking
-        0 ... no checking (no duplication for >= 0) [DEFAULT]
+/* -1 ... duplicate constants on LDCONST and PUSHCONSTARG, no checking
+	0 ... no checking (no duplication for >= 0) [DEFAULT]
 	1 ... check at error, session exit and reclamation
 	2 ... check also at full GC
 	3 ... check also at partial GC
 	4 ... check also at .Call
 	5 ... (very) verbose report on modified constants
-    */
+ */
     if (R_check_constants <= 1) {
 	char *check = getenv("R_CHECK_CONSTANTS");
 	if (check)
@@ -1104,7 +1103,7 @@ inline static bool R_CheckJIT(SEXP fun)
     SEXP body = BODY(fun);
 
     if (R_jit_enabled > 0 && TYPEOF(body) != BCODESXP &&
-	! R_disable_bytecode && ! NOJIT(fun)) {
+	!R_disable_bytecode && ! NOJIT(fun)) {
 
 	if (MAYBEJIT(fun)) {
 	    /* function marked as MAYBEJIT the first time now seen
@@ -1149,9 +1148,9 @@ inline static bool R_CheckJIT(SEXP fun)
 }
 
 #ifdef DEBUG_JIT
-#define PRINT_JIT_INFO							\
-    REprintf("JIT cache hits: %ld; env: %ld; body %ld\n",		\
-	     jit_info.count, jit_info.envcount, jit_info.bdcount)
+#define PRINT_JIT_INFO                                    \
+	REprintf("JIT cache hits: %ld; env: %ld; body %ld\n", \
+			 jit_info.count, jit_info.envcount, jit_info.bdcount)
 #else
 #define PRINT_JIT_INFO	do { } while(0)
 #endif
@@ -1647,7 +1646,7 @@ inline static void R_CleanupEnvir(SEXP rho, SEXP val)
 	    refs -= countCycleRefs(rho, val);
 	if (refs == 0) {
 	    for (SEXP b = FRAME(rho);
-		 b != R_NilValue && REFCNT(b) == 1;
+		 b && REFCNT(b) == 1;
 		 b = CDR(b)) {
 		if (BNDCELL_TAG(b)) continue;
 		SEXP v = CAR(b);
@@ -2204,19 +2203,23 @@ inline static SEXP GET_BINDING_CELL(SEXP symbol, SEXP rho)
 	}
 }
 
-inline static bool SET_BINDING_VALUE(SEXP loc, SEXP value) {
-    /* This depends on the current implementation of bindings */
-    if (loc != R_NilValue &&
-	! BINDING_IS_LOCKED(loc) && ! IS_ACTIVE_BINDING(loc)) {
-	if (BNDCELL_TAG(loc) || CAR(loc) != value) {
-	    SET_BNDCELL(loc, value);
-	    if (MISSING(loc))
-		SET_MISSING(loc, 0);
+inline static bool SET_BINDING_VALUE(SEXP loc, SEXP value)
+{
+	/* This depends on the current implementation of bindings */
+	if (!loc)
+		return false;
+	if (loc->isLocked())
+		return false;
+	if (loc->isActive())
+		return false;
+
+	if (BNDCELL_TAG(loc) || CAR(loc) != value)
+	{
+		SET_BNDCELL(loc, value);
+		if (MISSING(loc))
+			SET_MISSING(loc, 0);
 	}
 	return true;
-    }
-    else
-	return false;
 }
 
 HIDDEN SEXP do_for(SEXP call, SEXP op, SEXP args, SEXP rho)
@@ -2842,7 +2845,7 @@ static SEXP applydefine(SEXP call, SEXP op, SEXP args, SEXP rho)
 	DISABLE_REFCNT(tmploc.asPairList());
 	DECREMENT_REFCNT(CDR(tmploc.asPairList()));
 
-	/* Now set up a context to remove it when we are done, even in the
+    /* Now set up a context to remove it when we are done, even in the
      * case of an error.  This all helps error() provide a better call.
      */
     cntxt.start(CTXT_CCODE, call, R_BaseEnv, R_BaseEnv, R_NilValue, R_NilValue);
@@ -5136,9 +5139,8 @@ using BCODE = int;
 /**** always boxing on lock is one option */
 #define BNDCELL_TAG_WR(v) (BINDING_IS_LOCKED(v) ? 0 : BNDCELL_TAG(v))
 
-#define BNDCELL_WRITABLE(v)						\
-    (v != R_NilValue &&	 ! BINDING_IS_LOCKED(v) && ! IS_ACTIVE_BINDING(v))
-#define BNDCELL_UNBOUND(v) (BNDCELL_TAG(v) == 0 && CAR0(v) == R_UnboundValue)
+#define BNDCELL_WRITABLE(v) (v && !BINDING_IS_LOCKED(v) && !IS_ACTIVE_BINDING(v))
+#define BNDCELL_UNBOUND(v) (BNDCELL_TAG(v) == NILSXP && CAR0(v) == R_UnboundValue)
 
 inline static void NEW_BNDCELL_DVAL(SEXP cell, double dval)
 {
@@ -5165,7 +5167,7 @@ inline static SEXP BINDING_VALUE(SEXP loc)
 		R_expand_binding_value(loc);
 		return CAR0(loc);
 	}
-	else if (loc != R_NilValue && !IS_ACTIVE_BINDING(loc))
+	else if (loc && !IS_ACTIVE_BINDING(loc))
 		return CAR0(loc);
 	else
 		return R_UnboundValue;
@@ -5375,66 +5377,66 @@ inline static SEXP getvar(SEXP symbol, SEXP rho,
    Skipping SYMSXP values rules out R_MissingArg and R_UnboundValue as
    these are implemented s symbols.  It also rules other symbols, but
    as those are rare they are handled by the getvar() call. */
-#define DO_GETVAR(dd, keepmiss)                                     \
-	do                                                              \
-	{                                                               \
-		int sidx = GETOP();                                         \
-		Evaluator::enableResultPrinting(true);                      \
-		if (!dd && smallcache)                                      \
-		{                                                           \
-			SEXP cell = GET_SMALLCACHE_BINDING_CELL(vcache, sidx);  \
-			/* handle immediate binings */                          \
-			switch (BNDCELL_TAG(cell))                              \
-			{                                                       \
-			case REALSXP:                                           \
-				BCNPUSH_REAL(BNDCELL_DVAL(cell));                   \
-				NEXT();                                             \
-			case INTSXP:                                            \
-				BCNPUSH_INTEGER(BNDCELL_IVAL(cell));                \
-				NEXT();                                             \
-			case LGLSXP:                                            \
-				BCNPUSH_LOGICAL(BNDCELL_LVAL(cell));                \
-				NEXT();                                             \
-			}                                                       \
-			SEXP value = CAR(cell);                                 \
-			int type = TYPEOF(value);                               \
-			/* extract value of forced promises */                  \
-			if (type == PROMSXP)                                    \
-			{                                                       \
-				SEXP pv = PRVALUE(value);                           \
-				if (pv != R_UnboundValue)                           \
-				{                                                   \
-					value = pv;                                     \
-					type = TYPEOF(value);                           \
-				}                                                   \
-			}                                                       \
-			/* try fast handling of some types; for these the */    \
-			/* cell won't be R_NilValue or an active binding */     \
-			switch (type)                                           \
-			{                                                       \
-			case REALSXP:                                           \
-			case INTSXP:                                            \
-			case LGLSXP:                                            \
-			case CPLXSXP:                                           \
-			case STRSXP:                                            \
-			case VECSXP:                                            \
-			case RAWSXP:                                            \
-				BCNPUSH(value);                                     \
-				NEXT();                                             \
-			case SYMSXP:                                            \
-			case PROMSXP:                                           \
-				break;                                              \
-			default:                                                \
-				if (cell != R_NilValue && !IS_ACTIVE_BINDING(cell)) \
-				{                                                   \
-					BCNPUSH(value);                                 \
-					NEXT();                                         \
-				}                                                   \
-			}                                                       \
-		}                                                           \
-		SEXP symbol = VECTOR_ELT(constants, sidx);                  \
-		BCNPUSH(getvar(symbol, rho, dd, keepmiss, vcache, sidx));   \
-		NEXT();                                                     \
+#define DO_GETVAR(dd, keepmiss)                                    \
+	do                                                             \
+	{                                                              \
+		int sidx = GETOP();                                        \
+		Evaluator::enableResultPrinting(true);                     \
+		if (!dd && smallcache)                                     \
+		{                                                          \
+			SEXP cell = GET_SMALLCACHE_BINDING_CELL(vcache, sidx); \
+			/* handle immediate binings */                         \
+			switch (BNDCELL_TAG(cell))                             \
+			{                                                      \
+			case REALSXP:                                          \
+				BCNPUSH_REAL(BNDCELL_DVAL(cell));                  \
+				NEXT();                                            \
+			case INTSXP:                                           \
+				BCNPUSH_INTEGER(BNDCELL_IVAL(cell));               \
+				NEXT();                                            \
+			case LGLSXP:                                           \
+				BCNPUSH_LOGICAL(BNDCELL_LVAL(cell));               \
+				NEXT();                                            \
+			}                                                      \
+			SEXP value = CAR(cell);                                \
+			int type = TYPEOF(value);                              \
+			/* extract value of forced promises */                 \
+			if (type == PROMSXP)                                   \
+			{                                                      \
+				SEXP pv = PRVALUE(value);                          \
+				if (pv != R_UnboundValue)                          \
+				{                                                  \
+					value = pv;                                    \
+					type = TYPEOF(value);                          \
+				}                                                  \
+			}                                                      \
+			/* try fast handling of some types; for these the */   \
+			/* cell won't be R_NilValue or an active binding */    \
+			switch (type)                                          \
+			{                                                      \
+			case REALSXP:                                          \
+			case INTSXP:                                           \
+			case LGLSXP:                                           \
+			case CPLXSXP:                                          \
+			case STRSXP:                                           \
+			case VECSXP:                                           \
+			case RAWSXP:                                           \
+				BCNPUSH(value);                                    \
+				NEXT();                                            \
+			case SYMSXP:                                           \
+			case PROMSXP:                                          \
+				break;                                             \
+			default:                                               \
+				if (cell && !IS_ACTIVE_BINDING(cell))              \
+				{                                                  \
+					BCNPUSH(value);                                \
+					NEXT();                                        \
+				}                                                  \
+			}                                                      \
+		}                                                          \
+		SEXP symbol = VECTOR_ELT(constants, sidx);                 \
+		BCNPUSH(getvar(symbol, rho, dd, keepmiss, vcache, sidx));  \
+		NEXT();                                                    \
 	} while (0)
 #else
 #define DO_GETVAR(dd, keepmiss)                                   \
@@ -6489,7 +6491,6 @@ struct R_loopinfo_t{
 			defineVar(loopinfo->symbol, value, rho); \
 	} while (0)
 
-
 /* Check whether a call is to a base function; if not use AST interpeter */
 /***** need a faster guard check */
 inline static SEXP SymbolValue(SEXP sym)
@@ -7184,17 +7185,31 @@ static SEXP bcEval(SEXP body, SEXP rho, bool useCache)
 	int tag = s->tag;
 
 	if (tag == BNDCELL_TAG_WR(loc))
-	    switch (tag) {
-	    case REALSXP: SET_BNDCELL_DVAL(loc, s->u.dval); NEXT();
-	    case INTSXP: SET_BNDCELL_IVAL(loc, s->u.ival); NEXT();
-	    case LGLSXP: SET_BNDCELL_LVAL(loc, s->u.ival); NEXT();
-	    }
+		switch (tag)
+		{
+		case REALSXP:
+			SET_BNDCELL_DVAL(loc, s->u.dval);
+			NEXT();
+		case INTSXP:
+			SET_BNDCELL_IVAL(loc, s->u.ival);
+			NEXT();
+		case LGLSXP:
+			SET_BNDCELL_LVAL(loc, s->u.ival);
+			NEXT();
+		}
 	else if (BNDCELL_WRITABLE(loc))
-	    switch (tag) {
-	    case REALSXP: NEW_BNDCELL_DVAL(loc, s->u.dval); NEXT();
-	    case INTSXP: NEW_BNDCELL_IVAL(loc, s->u.ival); NEXT();
-	    case LGLSXP: NEW_BNDCELL_LVAL(loc, s->u.ival); NEXT();
-	    }
+		switch (tag)
+		{
+		case REALSXP:
+			NEW_BNDCELL_DVAL(loc, s->u.dval);
+			NEXT();
+		case INTSXP:
+			NEW_BNDCELL_IVAL(loc, s->u.ival);
+			NEXT();
+		case LGLSXP:
+			NEW_BNDCELL_LVAL(loc, s->u.ival);
+			NEXT();
+		}
 
 	SEXP value = GETSTACK(-1);
 	if (! SET_BINDING_VALUE(loc, value)) {

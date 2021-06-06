@@ -140,7 +140,6 @@ namespace CXXR
 
       void setNoJIT()
       {
-         // m_gpbits |= NOJIT_MASK;
          m_no_jit = true;
       }
 
@@ -151,10 +150,6 @@ namespace CXXR
 
       void setMaybeJIT(bool on)
       {
-         // if (on)
-         //    m_gpbits |= MAYBEJIT_MASK;
-         // else
-         //    m_gpbits &= ~MAYBEJIT_MASK;
          m_maybe_jit = on;
       }
 

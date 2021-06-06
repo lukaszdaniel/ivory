@@ -223,7 +223,6 @@ void SET_ENVFLAGS(SEXP x, int v)
 {
     if (!x)
         return;
-    // x->m_gpbits = v;
     SEXP_downcast<Environment *>(x)->unpackGPBits(v);
 }
 

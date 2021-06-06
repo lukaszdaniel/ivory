@@ -282,17 +282,16 @@ namespace CXXR
 #endif
     }
 
-    void RObject::lockBinding()
+    void RObject::setLocking(bool on)
     {
-        if (!m_active_binding)
+        if (on && !m_active_binding)
         {
             if (m_type == SYMSXP)
                 MARK_NOT_MUTABLE(SYMVALUE(this));
             else
                 MARK_NOT_MUTABLE(SEXP_downcast<ConsCell *>(this)->car());
         }
-        // m_gpbits |= BINDING_LOCK_MASK;
-        m_binding_locked = true;
+        m_binding_locked = on;
     }
 } // namespace CXXR
 
@@ -381,7 +380,6 @@ void SETLEVELS(SEXP x, int v)
     if (!x)
         return;
     x->unpackGPBits(v);
-    // x->m_gpbits = v;
 }
 
 void DUPLICATE_ATTRIB(SEXP to, SEXP from)

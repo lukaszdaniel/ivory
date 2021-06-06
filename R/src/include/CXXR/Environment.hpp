@@ -271,10 +271,6 @@ namespace CXXR
        */
       void setGlobalCaching(bool cached)
       {
-         // if (cached)
-         //    m_gpbits |= GLOBAL_FRAME_MASK;
-         // else
-         //    m_gpbits &= ~(GLOBAL_FRAME_MASK);
          m_globally_cached = cached;
       }
 
@@ -287,7 +283,6 @@ namespace CXXR
        */
       void setLocking(bool on)
       {
-         // m_gpbits |= FRAME_LOCK_MASK;
          m_locked = on;
       }
 

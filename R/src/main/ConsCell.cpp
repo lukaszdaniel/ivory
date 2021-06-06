@@ -177,7 +177,6 @@ namespace CXXR
     void ConsCell::setMissing(unsigned int v)
     {
         int __other_flags__ = packGPBits() & ~MISSING_MASK; // erase 4 rightmost bits
-        // m_gpbits = __other_flags__ | v;
         m_missing = __other_flags__ | v;
     }
 

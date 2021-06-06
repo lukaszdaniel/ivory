@@ -2209,7 +2209,7 @@ HIDDEN bool R::R_isMissing(SEXP symbol, SEXP rho)
 		vl = nthcdr(CAR(vl), ddv-1);
 	}
 	if (MISSING(vl) == 1 ||
-	    (BNDCELL_TAG(vl) == 0 && CAR(vl) == R_MissingArg))
+	    (BNDCELL_TAG(vl) == NILSXP && CAR(vl) == R_MissingArg))
 	    return 1;
 	if (IS_ACTIVE_BINDING(vl))
 	    return false;
