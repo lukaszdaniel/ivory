@@ -1323,9 +1323,11 @@ HIDDEN size_t R::utf8toucs(wchar_t *wc, const char * const s)
     if (byte == 0) {
 	*w = (wchar_t) 0;
 	return 0;
-    } else if (byte < 0xC0) {
+    } else if (byte < 0x80) {
 	*w = (wchar_t) byte;
 	return 1;
+    } else if (byte < 0xC0) {
+	return (size_t)-1;
     } else if (byte < 0xE0) {
 	if(strlen(s) < 2) return (size_t)-2;
 	if ((s[1] & 0xC0) == 0x80) {

@@ -31,7 +31,7 @@
 #include <RContext.h>
 #include <Defn.h>
 #include <Rconnections.h>
-#include <R-ftp-http.h>
+//#include <R-ftp-http.h>
 #include "sock.h"
 #include <cerrno>
 

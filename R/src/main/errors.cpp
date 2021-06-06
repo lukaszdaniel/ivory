@@ -28,6 +28,7 @@
 
 #define R_NO_REMAP
 #define R_USE_SIGNALS 1
+#define CXXR_DIE_IF_ISSUE 0 // 2 = die on errors or warnings, 1 = die on errors only, 0 = original CR's behaviour
 
 #include <CXXR/GCStackRoot.hpp>
 #include <CXXR/JMPException.hpp>
@@ -41,6 +42,7 @@
 #include <CXXR/LogicalVector.hpp>
 #include <CXXR/Symbol.hpp>
 #include <CXXR/Evaluator.hpp>
+#include <CXXR/strutil.hpp>
 #include <Localization.h>
 #include <RContext.h>
 #include <R.h>
@@ -440,7 +442,14 @@ void Rf_warning(const char *format, ...)
     p = buf + strlen(buf) - 1;
     if(strlen(buf) > 0 && *p == '\n') *p = '\0';
     RprintTrunc(buf, pval >= (int) psize);
+#if CXXR_DIE_IF_ISSUE > 1
+	CXXR::Color::Modifier yellow(CXXR::Color::Modifier::Code::FG_YELLOW);
+	CXXR::Color::Modifier def(CXXR::Color::Modifier::Code::FG_DEFAULT);
+	std::cerr << yellow << "CXXR Warning: " << buf << def << std::endl;
+	abort();
+#else
     warningcall(getCurrentCall(), "%s", buf);
+#endif
 }
 
 /* declarations for internal condition handling */
@@ -999,7 +1008,14 @@ void Rf_error(const char *format, ...)
     va_start(ap, format);
     Rvsnprintf_mbcs(buf, min(BUFSIZE, R_WarnLength), format, ap);
     va_end(ap);
+#if CXXR_DIE_IF_ISSUE > 0
+	CXXR::Color::Modifier red(CXXR::Color::Modifier::Code::FG_RED);
+	CXXR::Color::Modifier def(CXXR::Color::Modifier::Code::FG_DEFAULT);
+	std::cerr << red << "CXXR Error: " << buf << def << std::endl;
+	abort();
+#else
     errorcall(getCurrentCall(), "%s", buf);
+#endif
 }
 
 static void try_jump_to_restart(void)
