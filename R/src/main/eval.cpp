@@ -1943,7 +1943,7 @@ SEXP R::R_execMethod(SEXP op, SEXP rho)
     for (next = FORMALS(op); next != R_NilValue; next = CDR(next)) {
 	SEXP symbol =  TAG(next);
 	R_varloc_t loc = R_findVarLocInFrame(rho, symbol);
-	if(!loc.asPairList())
+	if (!loc.asPairList())
 	    error(_("could not find symbol \"%s\" in environment of the generic function"), CHAR(PRINTNAME(symbol)));
 	int missing = R_GetVarLocMISSING(loc);
 	val = R_GetVarLocValue(loc);
@@ -5251,9 +5251,9 @@ inline static SEXP GET_BINDING_CELL_CACHE(SEXP symbol, SEXP rho,
 	return bdg__cell;
     else {
 	SEXP bdg__ncell = GET_BINDING_CELL(symbol, rho);
-	if (bdg__ncell != R_NilValue)
+	if (bdg__ncell)
 	    SET_CACHED_BINDING(vcache, idx, bdg__ncell);
-	else if (bdg__cell != R_NilValue && BNDCELL_UNBOUND(bdg__cell))
+	else if (bdg__cell && BNDCELL_UNBOUND(bdg__cell))
 	    SET_CACHED_BINDING(vcache, idx, R_NilValue);
 	return bdg__ncell;
     }

@@ -518,6 +518,5 @@ void INIT_BNDCELL(SEXP cell, int type)
 
 void SET_BNDCELL(SEXP cell, SEXP val)
 {
-    CXXR::ConsCell::clear_bndcell_tag(cell);
     SETCAR(cell, val);
 }

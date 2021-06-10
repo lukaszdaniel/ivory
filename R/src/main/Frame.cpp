@@ -122,13 +122,13 @@ namespace CXXR
         if (tag && tag != m_symbol)
             Rf_error(_("internal error in %s"), "Frame::Binding::fromPairList()");
         Origin pl_origin = Origin(pl->missing());
+        setBndCellTag(pl->bndcellTag());
+        setAssignmentPending(pl->assignmentPending());
         if (pl->isActive())
             setFunction(SEXP_downcast<FunctionBase *>(pl->car()), pl_origin);
         else
             setValue(pl->car(), pl_origin);
         setLocking(pl->isLocked());
-        setBndCellTag(pl->bndcellTag());
-        setAssignmentPending(pl->assignmentPending());
     }
 
     void Frame::Binding::handleSetValueError() const
@@ -263,6 +263,15 @@ namespace CXXR
 
     void Frame::Binding::setFunction(FunctionBase *function, Origin origin)
     {
+        if (bndcellTag())
+        {
+            m_value.clearCar(); // m_value = nullptr;
+            setBndCellTag(NILSXP);
+        }
+        if (m_value == function)
+        {
+            return;
+        }
         // See if binding already has a non-null value:
         if (m_value != Symbol::missingArgument())
         {
@@ -270,6 +279,11 @@ namespace CXXR
                 Rf_error(_("symbol already has a regular binding"));
             if (isLocked())
                 Rf_error(_("cannot change active binding if binding is locked"));
+        }
+        if (assignmentPending())
+        {
+            setAssignmentPending(false);
+            GCNode::incRefCount(m_value);
         }
         m_value.retarget(m_frame, function);
         m_active = true;
@@ -290,9 +304,7 @@ namespace CXXR
         }
         else
         {
-            m_origin = origin;
-            m_value.retarget(m_frame, new_value);
-            m_frame->monitorWrite(*this);
+            setValue(new_value, origin);
         }
     }
 
@@ -325,9 +337,23 @@ namespace CXXR
 
     void Frame::Binding::setValue(RObject *new_value, Origin origin, bool quiet)
     {
+        if (bndcellTag())
+        {
+            m_value.clearCar(); // m_value = nullptr;
+            setBndCellTag(NILSXP);
+        }
+        if (m_value == new_value)
+        {
+            return;
+        }
         if (isLocked() || isActive())
         {
             handleSetValueError();
+        }
+        if (assignmentPending())
+        {
+            setAssignmentPending(false);
+            GCNode::incRefCount(m_value);
         }
         m_value.retarget(m_frame, new_value);
         m_origin = origin;

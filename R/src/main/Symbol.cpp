@@ -470,8 +470,6 @@ void SET_SYMVALUE(SEXP x, SEXP v)
     if (!x)
         return;
     Symbol::checkST(x);
-    if (SEXP_downcast<Symbol *>(x)->value() == v)
-        return;
     Symbol *sym = SEXP_downcast<Symbol *>(x);
     sym->setValue(v);
 }

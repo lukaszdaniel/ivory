@@ -171,7 +171,9 @@ namespace CXXR
          */
         void setValue(RObject *val)
         {
-            if (trackrefs() && m_value && m_value != val && assignmentPending())
+            if (value() == val)
+                return;
+            if (trackrefs() && assignmentPending())
             {
                 setAssignmentPending(false);
                 GCNode::incRefCount(m_value);

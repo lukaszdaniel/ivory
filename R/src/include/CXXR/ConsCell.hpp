@@ -45,7 +45,7 @@
 #include <CXXR/GCStackRoot.hpp>
 #include <CXXR/SEXP_downcast.hpp>
 
-#if (SIZEOF_SIZE_T < SIZEOF_DOUBLE)
+#if CXXR_TRUE // (SIZEOF_SIZE_T < SIZEOF_DOUBLE)
 #define BOXED_BINDING_CELLS 1
 #else
 #define BOXED_BINDING_CELLS 0
@@ -212,7 +212,7 @@ namespace CXXR
             if (m_car == cr)
                 return;
 
-            if (trackrefs() && m_car && m_car != cr && assignmentPending())
+            if (trackrefs() && assignmentPending())
             {
                 setAssignmentPending(false);
                 GCNode::incRefCount(m_car);

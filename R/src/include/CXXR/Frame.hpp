@@ -330,6 +330,10 @@ namespace CXXR
        */
       void setLocking(bool on)
       {
+        if (on && !m_active)
+        {
+          MARK_NOT_MUTABLE(m_value);
+        }
         m_locked = on;
       }
 
