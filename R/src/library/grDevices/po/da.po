@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 3.0.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-03-25 22:06+0100\n"
+"POT-Creation-Date: 2021-06-18 18:04+0200\n"
 "PO-Revision-Date: 2016-01-09 18:50+0100\n"
 "Last-Translator: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
 "Language-Team: \n"
@@ -160,7 +160,7 @@ msgid "requires INTSXP argument"
 msgstr ""
 
 # 75%
-#: devCairo.cpp:52 devCairo.cpp:63
+#: devCairo.cpp:54 devCairo.cpp:65
 #, fuzzy
 msgid "failed to load cairo DLL"
 msgstr "kunne ikke allokere rastere"

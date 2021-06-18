@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R-core\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-03-25 22:06+0100\n"
+"POT-Creation-Date: 2021-06-18 18:04+0200\n"
 "PO-Revision-Date: \n"
 "Last-Translator: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
 "Language-Team: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
@@ -153,7 +153,7 @@ msgstr "maksymalna liczba kolorów wynosi %d"
 msgid "requires INTSXP argument"
 msgstr ""
 
-#: devCairo.cpp:52 devCairo.cpp:63
+#: devCairo.cpp:54 devCairo.cpp:65
 msgid "failed to load cairo DLL"
 msgstr "nie udało się załadować pliku DLL cairo"
 

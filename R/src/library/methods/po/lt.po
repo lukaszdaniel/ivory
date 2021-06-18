@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: methods 4.1.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-03-25 22:06+0100\n"
+"POT-Creation-Date: 2021-06-18 18:05+0200\n"
 "PO-Revision-Date: 2020-12-08 13:57+0200\n"
 "Last-Translator: r.zakauskas@gmail.com;gabriele.dauksaite@gmail.com\n"
 "Language-Team: Lithuanian\n"
@@ -30,16 +30,16 @@ msgstr ""
 msgid "invalid list for substitution"
 msgstr "neteisingas metodo posąrašis"
 
-#: methods_list_dispatch.cpp:136
+#: methods_list_dispatch.cpp:140
 #, c-format
 msgid "unexpected type '%s' for condition message"
 msgstr "netikėtas sąlygos pranešimo tipas '%s'"
 
-#: methods_list_dispatch.cpp:139
+#: methods_list_dispatch.cpp:143
 msgid "condition message must be length 1"
 msgstr "sąlygos pranešimas turi būti 1 ilgio"
 
-#: methods_list_dispatch.cpp:220
+#: methods_list_dispatch.cpp:224
 msgid ""
 "could not find the skeleton calls for 'methods' (package detached?): expect "
 "very bad things to happen"
@@ -47,7 +47,7 @@ msgstr ""
 "nerasti 'methods' (atskiro paketo?) struktūros kreipiniai: tikėtis "
 "blogiausių dalykų, kurie gali nutikti"
 
-#: methods_list_dispatch.cpp:288
+#: methods_list_dispatch.cpp:292
 #, fuzzy, c-format
 msgid ""
 "no 'allMethods' slot found in object of class \"%s\" used as methods list "
@@ -56,7 +56,7 @@ msgstr ""
 "nenurodytas \"allMethods\" laukas objekte (klasės \"%s\" ), kuris naudojamas "
 "kaip metodų sąrašas funkcijai '%s'"
 
-#: methods_list_dispatch.cpp:411
+#: methods_list_dispatch.cpp:420
 #, c-format
 msgid ""
 "S language method selection did not return normally when called from "
@@ -65,40 +65,40 @@ msgstr ""
 "S kalbos metodo pasirinkimas negrįžta normaliai, kai iškviečiama iš vidinio "
 "perdavimo funkcijai '%s'"
 
-#: methods_list_dispatch.cpp:413
+#: methods_list_dispatch.cpp:422
 msgid "Function name for method selection called internally"
 msgstr "Metodo pasirinkimo funkcijos pavadinimas iškviečiamas viduje"
 
-#: methods_list_dispatch.cpp:468 methods_list_dispatch.cpp:489
+#: methods_list_dispatch.cpp:477 methods_list_dispatch.cpp:498
 #, fuzzy
 msgid "The 'package' slot in generic function object"
 msgstr "argumentas 'f' turi būti bendrinė funkcija arba %s"
 
-#: methods_list_dispatch.cpp:501
+#: methods_list_dispatch.cpp:510
 msgid "The argument 'f' passed to getGeneric"
 msgstr ""
 
-#: methods_list_dispatch.cpp:502
+#: methods_list_dispatch.cpp:511
 msgid "The argument 'package' passed to getGeneric"
 msgstr ""
 
-#: methods_list_dispatch.cpp:507
+#: methods_list_dispatch.cpp:516
 #, fuzzy, c-format
 msgid "no generic function definition found for '%s'"
 msgstr "nėra funkcijos apibrėžties %s"
 
-#: methods_list_dispatch.cpp:510
+#: methods_list_dispatch.cpp:519
 #, fuzzy, c-format
 msgid ""
 "no generic function definition found for '%s' in the supplied environment"
 msgstr "nėra funkcijos apibrėžties %s"
 
-#: methods_list_dispatch.cpp:531
+#: methods_list_dispatch.cpp:540
 #, fuzzy
 msgid "The function name in the call to standardGeneric"
 msgstr "Tuščias funkcijos vardas .getGeneric"
 
-#: methods_list_dispatch.cpp:545
+#: methods_list_dispatch.cpp:554
 #, fuzzy, c-format
 msgid ""
 "invalid generic function object for method selection for function '%s': "
@@ -106,26 +106,26 @@ msgid ""
 msgstr ""
 "neteisinga metodo apibrėžtis: turėtų būti funkcija, gautas klasės %s objektas"
 
-#: methods_list_dispatch.cpp:560
+#: methods_list_dispatch.cpp:569
 #, fuzzy, c-format
 msgid "no direct or inherited method for function '%s' for this call"
 msgstr "nepavyko rasti paveldėto metodo funkcijos %s prierašui %s"
 
-#: methods_list_dispatch.cpp:589 methods_list_dispatch.cpp:1161
+#: methods_list_dispatch.cpp:598 methods_list_dispatch.cpp:1170
 #, fuzzy
 msgid "invalid object (non-function) used as method"
 msgstr "neteisinga funkcijos argumento rodyklė"
 
-#: methods_list_dispatch.cpp:607
+#: methods_list_dispatch.cpp:615
 msgid "'symbol' must be a SYMSXP expression"
 msgstr ""
 
-#: methods_list_dispatch.cpp:610
+#: methods_list_dispatch.cpp:618
 #, c-format
 msgid "could not find symbol '%s' in frame of call"
 msgstr "simbolis '%s' nerastas kreipinyje"
 
-#: methods_list_dispatch.cpp:618
+#: methods_list_dispatch.cpp:626
 #, fuzzy, c-format
 msgid ""
 "invalid symbol in checking for missing argument in method dispatch: expected "
@@ -134,11 +134,11 @@ msgstr ""
 "neteisingas objektas metodų lentelėje (%s), turėtų būti metodas, gautas "
 "klasės %s objektas"
 
-#: methods_list_dispatch.cpp:621
+#: methods_list_dispatch.cpp:629
 msgid "use of NULL environment is defunct"
 msgstr "NULL aplinkos naudojimas yra nepilnas"
 
-#: methods_list_dispatch.cpp:625
+#: methods_list_dispatch.cpp:633
 #, fuzzy, c-format
 msgid ""
 "invalid environment in checking for missing argument, '%s', in methods "
@@ -147,14 +147,14 @@ msgstr ""
 "neteisinga aplinka tikrinant trūkstamą argumentą '%s' metodo perdavime, "
 "gaunamas klasės \"%s\" objektas"
 
-#: methods_list_dispatch.cpp:649
+#: methods_list_dispatch.cpp:657
 #, fuzzy, c-format
 msgid ""
 "error in evaluating the argument '%s' in selecting a method for function "
 "'%s': %s"
 msgstr "klaida vertinant 'primitive' sekantį metodą: %s"
 
-#: methods_list_dispatch.cpp:666
+#: methods_list_dispatch.cpp:674
 #, c-format
 msgid ""
 "object of class \"%s\" used as methods list for function '%s' ( no "
@@ -163,7 +163,7 @@ msgstr ""
 "klasės \"%s\" objektas naudojamas kaip metodų sąrašas funkcijai '%s' (nėra "
 "nurodytas 'argument' laukas)"
 
-#: methods_list_dispatch.cpp:677
+#: methods_list_dispatch.cpp:685
 #, c-format
 msgid ""
 "(in selecting a method for function '%s') '...' and related variables cannot "
@@ -172,7 +172,7 @@ msgstr ""
 "(renkantis funkcijos '%s' metodą) '...' ir susiję kintamieji negali būti "
 "naudojami metodų perdavimui"
 
-#: methods_list_dispatch.cpp:680
+#: methods_list_dispatch.cpp:688
 #, c-format
 msgid ""
 "(in selecting a method for function '%s') the 'environment' argument for "
@@ -181,13 +181,13 @@ msgstr ""
 "(renkantis funkcijos '%s' metodą) 'environment' perdavimo argumentas turi "
 "būti R aplinka; gaunamas klasės objektas \"%s\""
 
-#: methods_list_dispatch.cpp:711
+#: methods_list_dispatch.cpp:719
 #, fuzzy, c-format
 msgid "no matching method for function '%s' (argument '%s', with class \"%s\")"
 msgstr ""
 "nėra metodo ar numatytojo parametro dėl as() pakeitimo %s su Class=\"%s\""
 
-#: methods_list_dispatch.cpp:718
+#: methods_list_dispatch.cpp:726
 #, c-format
 msgid ""
 "recursive use of function '%s' in method selection, with no default method"
@@ -195,65 +195,65 @@ msgstr ""
 "rekursinis funkcijos '%s' naudojimas metodo pasirinkime, nėra numatytojo "
 "metodo"
 
-#: methods_list_dispatch.cpp:743
+#: methods_list_dispatch.cpp:751
 #, c-format
 msgid "error in evaluating a 'primitive' next method: %s"
 msgstr "klaida vertinant 'primitive' sekantį metodą: %s"
 
-#: methods_list_dispatch.cpp:766
+#: methods_list_dispatch.cpp:774
 msgid ""
 "internal error in 'callNextMethod': '.nextMethod' was not assigned in the "
 "frame of the method call"
 msgstr ""
 
-#: methods_list_dispatch.cpp:773
+#: methods_list_dispatch.cpp:781
 msgid ""
 "internal error in 'callNextMethod()': '.Generic' was not assigned in the "
 "frame of the method call"
 msgstr ""
 
-#: methods_list_dispatch.cpp:898
+#: methods_list_dispatch.cpp:906
 #, fuzzy, c-format
 msgid "'%s' must be a single string (got a character vector of length %d)"
 msgstr ""
 "vienos klasės vardas reikalingas %s laukui, gautas %d ilgio tekstinis "
 "vektorius"
 
-#: methods_list_dispatch.cpp:902
+#: methods_list_dispatch.cpp:910
 #, c-format
 msgid "'%s' must be a non-empty string; got an empty string"
 msgstr "'%s' negali būti tuščia eilutė; gavo tuščią eilutę"
 
-#: methods_list_dispatch.cpp:906
+#: methods_list_dispatch.cpp:914
 #, fuzzy, c-format
 msgid "'%s' must be a single string (got an object of class \"%s\")"
 msgstr "viena eilutė, gaunamas klasės %s objektas"
 
-#: methods_list_dispatch.cpp:941
+#: methods_list_dispatch.cpp:949
 msgid "The internal prefix (e.g., \"C\") for a meta-data object"
 msgstr ""
 
-#: methods_list_dispatch.cpp:943
+#: methods_list_dispatch.cpp:951
 msgid ""
 "The name of the object (e.g,. a class or generic function) to find in the "
 "meta-data"
 msgstr ""
 
-#: methods_list_dispatch.cpp:945
+#: methods_list_dispatch.cpp:953
 msgid "The name of the package for a meta-data object"
 msgstr ""
 
-#: methods_list_dispatch.cpp:985
+#: methods_list_dispatch.cpp:993
 #, fuzzy
 msgid "class should be either a character-string name or a class definition"
 msgstr "'class1' turi būti klasės vardas arba klasės apibrėžimas"
 
-#: methods_list_dispatch.cpp:1071
+#: methods_list_dispatch.cpp:1080
 #, c-format
 msgid "failed to get the generic for the primitive \"%s\""
 msgstr "nepavyko gauti bendrinės funkcijos primityviai funkcijai \"%s\""
 
-#: methods_list_dispatch.cpp:1078
+#: methods_list_dispatch.cpp:1087
 #, fuzzy, c-format
 msgid ""
 "expected a generic function or a primitive for dispatch, got an object of "
@@ -262,18 +262,18 @@ msgstr ""
 "argumentas %s turi būti bendrinė funkcija arba vieno simbolio eilutė, "
 "gaunamas klasės %s objektas"
 
-#: methods_list_dispatch.cpp:1090
+#: methods_list_dispatch.cpp:1099
 #, c-format
 msgid ""
 "generic \"%s\" seems not to have been initialized for table dispatch---need "
 "to have '.SigArgs' and '.AllMtable' assigned in its environment"
 msgstr ""
 
-#: methods_list_dispatch.cpp:1094
+#: methods_list_dispatch.cpp:1103
 msgid "'.SigArgs' is shorter than '.SigLength' says it should be"
 msgstr ""
 
-#: utils.cpp:32
+#: utils.cpp:33
 msgid "'R_get_primname' called on a non-primitive"
 msgstr ""
 

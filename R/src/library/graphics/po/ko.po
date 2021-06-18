@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.11.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-03-25 22:06+0100\n"
+"POT-Creation-Date: 2021-06-18 18:04+0200\n"
 "PO-Revision-Date: 2012-03-07 02:34+0200\n"
 "Last-Translator: Chel Hee Lee <chl948@mail.usask.ca>\n"
 "Language-Team: The Korean R Translation Council <gnustats@gmail.com>\n"
@@ -39,86 +39,86 @@ msgstr "이벤트 GE_ScalePS는 단일 수치를 필요로 합니다"
 msgid "the base graphics system is not registered"
 msgstr "등록된 graphics 시스템이 너무 많습니다"
 
-#: graphics.cpp:292
+#: graphics.cpp:293
 #, c-format
 msgid "bad units specified in '%s'"
 msgstr "'%s'에 잘못된 unit가 지정되었습니다"
 
-#: graphics.cpp:1806 graphics.cpp:1828
+#: graphics.cpp:1807 graphics.cpp:1829
 msgid "attempt to plot on null device"
 msgstr "존재하지 않는 장치에 그리기를 시도하였습니다"
 
-#: graphics.cpp:1859
+#: graphics.cpp:1860
 #, fuzzy
 msgid "outer margins are too large (figure region is too small)"
 msgstr "외부 여백이 너무 큽니다 (fig.region가 너무 작습니다)"
 
-#: graphics.cpp:1861
+#: graphics.cpp:1862
 #, fuzzy
 msgid "figure region is too large"
 msgstr "그리기 영역이 너무 큽니다"
 
-#: graphics.cpp:1863
+#: graphics.cpp:1864
 #, fuzzy
 msgid "figure margins are too large"
 msgstr "그림의 여백이 너무 큽니다"
 
-#: graphics.cpp:1865
+#: graphics.cpp:1866
 #, fuzzy
 msgid "plot region is too large"
 msgstr "plot 영역이 너무 큽니다"
 
-#: graphics.cpp:1921
+#: graphics.cpp:1922
 #, c-format
 msgid "nonfinite axis limits [GScale(%g,%g,%d, .); log=%d]"
 msgstr "축의 한계가 유한하지 않습니다 [GScale (%g,%g, %d,); log = %d]"
 
-#: graphics.cpp:1951
+#: graphics.cpp:1952
 #, c-format
 msgid "axis style \"%c\" unimplemented"
 msgstr "축 스타일 \"%c\"는 아직 구현되지 않았습니다"
 
-#: graphics.cpp:2191 graphics.cpp:2592
+#: graphics.cpp:2192 graphics.cpp:2593
 #, fuzzy
 msgid "no graphics device is active"
 msgstr "현재 유효한 그래픽 장치가 없습니다"
 
-#: graphics.cpp:2385
+#: graphics.cpp:2386
 msgid "plot.new has not been called yet"
 msgstr "아직 plot.new가 호출되지 않았습니다"
 
-#: graphics.cpp:2387
+#: graphics.cpp:2388
 msgid "invalid graphics state"
 msgstr "그래픽 상태가 올바르지 않습니다"
 
-#: graphics.cpp:2542
+#: graphics.cpp:2543
 msgid "graphics device closed during call to locator or identify"
 msgstr ""
 
-#: graphics.cpp:2841
+#: graphics.cpp:2842
 msgid "unable to allocate memory (in GPolygon)"
 msgstr "(GPolygon에서) 메모리를 확보할 수 없습니다"
 
-#: graphics.cpp:2877
+#: graphics.cpp:2878
 #, fuzzy
 msgid "unable to allocate memory (in GPolyline)"
 msgstr "(GPolygon에서) 메모리를 확보할 수 없습니다"
 
-#: graphics.cpp:3060
+#: graphics.cpp:3061
 msgid "zero-length arrow is of indeterminate angle and so skipped"
 msgstr "길이가 0 인 arrow는 각도를 정할 수 없으므로, 지나 갑니다"
 
-#: graphics.cpp:3141
+#: graphics.cpp:3142
 #, c-format
 msgid "invalid par(\"bty\") = '%c'; no box() drawn"
 msgstr "par(\"bty\") = '%c'는 잘못되었습니다：box()를 그릴 수 없습니다"
 
-#: graphics.cpp:3158 par.cpp:1129
+#: graphics.cpp:3159 par.cpp:1129
 #, fuzzy, c-format
 msgid "invalid argument passed to '%s' function"
 msgstr "par()에 잘못된 매개 변수가 전달되었습니다"
 
-#: graphics.cpp:3365
+#: graphics.cpp:3366
 #, fuzzy
 msgid "metric information not available for this device"
 msgstr "이 장치에 대한 메트릭 정보를 사용할 수 없습니다"

@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-03-25 22:07+0100\n"
+"POT-Creation-Date: 2021-06-18 18:06+0200\n"
 "PO-Revision-Date: \n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -63,7 +63,7 @@ msgstr "approx(x,y, .., na.rm=FALSE): neleidžiamos NA reikšmės, esančios x"
 msgid "invalid argument type"
 msgstr "neleistinas argumento tipas"
 
-#: arima.cpp:437 arima.cpp:523 pacf.cpp:321 pacf.cpp:360
+#: arima.cpp:437 arima.cpp:523 pacf.cpp:324 pacf.cpp:363
 msgid "can only transform 100 pars in arima0"
 msgstr "galima transformuoti tik 100 pars, esančių arima0"
 
@@ -130,44 +130,44 @@ msgstr "'x' tuščias"
 msgid "the standard deviation is zero"
 msgstr "standartinis nuokrypis lygus nuliui"
 
-#: deriv.cpp:161
+#: deriv.cpp:163
 msgid "invalid form in unary minus check"
 msgstr "netinkama forma unariojo minuso patikrinime"
 
-#: deriv.cpp:445
+#: deriv.cpp:447
 msgid ""
 "only single-argument calls to log() are supported;\n"
 "  maybe use log(x,a) = log(x)/log(a)"
 msgstr ""
 
-#: deriv.cpp:685
+#: deriv.cpp:686
 #, c-format
 msgid "Function '%s' is not in the derivatives table"
 msgstr "Funkcija '%s' nėra išvestinių lentelėje"
 
-#: deriv.cpp:791
+#: deriv.cpp:792
 #, fuzzy, c-format
 msgid "'%s' argument must not be of type '%s'"
 msgstr "išraiška negali būti '%s' tipo"
 
-#: deriv.cpp:794
+#: deriv.cpp:795
 msgid "variable must be a character string"
 msgstr "kintamasis turi būti simbolių eilutė"
 
-#: deriv.cpp:796
+#: deriv.cpp:797
 msgid "only the first element is used as variable name"
 msgstr "kaip kintamojo pavadinimas naudojamas tik pirmasis elementas"
 
-#: deriv.cpp:809
+#: deriv.cpp:810
 #, c-format
 msgid "invalid expression in '%s'"
 msgstr "neleistina išraiška, esanti '%s'"
 
-#: deriv.cpp:1087 model.cpp:101
+#: deriv.cpp:1088 model.cpp:102
 msgid "invalid variable names"
 msgstr "neleistini kintamųjų pavadinimai"
 
-#: deriv.cpp:1096
+#: deriv.cpp:1097
 msgid "invalid tag"
 msgstr "netinkama žymė"
 
@@ -324,24 +324,24 @@ msgstr ""
 msgid "invalid input"
 msgstr "netinkama žymė"
 
-#: fourier.cpp:62 fourier.cpp:157
+#: fourier.cpp:63 fourier.cpp:158
 msgid "non-numeric argument"
 msgstr "neskaitinis argumentas"
 
-#: fourier.cpp:80 fourier.cpp:98 fourier.cpp:171
+#: fourier.cpp:81 fourier.cpp:99 fourier.cpp:172
 msgid "fft factorization error"
 msgstr "fft faktorizacijos klaida"
 
-#: fourier.cpp:83 fourier.cpp:107 fourier.cpp:174
+#: fourier.cpp:84 fourier.cpp:108 fourier.cpp:175
 #, fuzzy
 msgid "fft is too large"
 msgstr "arba steptol yra per didelis."
 
-#: fourier.cpp:143
+#: fourier.cpp:144
 msgid "vector-valued (multivariate) series required"
 msgstr "reikalinga vektorinės reikšmės (daugiamatė) eilutė"
 
-#: fourier.cpp:213
+#: fourier.cpp:214
 #, c-format
 msgid ""
 "nextn() found no solution < %d = INT_MAX (the maximal integer); pass '0+ n' "
@@ -350,30 +350,30 @@ msgstr ""
 "nextn() nerado sprendimo < %d = INT_MAX (maksimalus sveikasis skaičius); "
 "naudoti '0+ n' vietoj 'n'"
 
-#: fourier.cpp:224
+#: fourier.cpp:225
 #, c-format
 msgid "nextn<64>() found no solution < %ld = UINT64_MAX (the maximal integer)"
 msgstr ""
 "nextn<64>() nerado sprendimo < %ld = UINT64_MAX (maksimalus sveikasis "
 "skaičius)"
 
-#: fourier.cpp:240
+#: fourier.cpp:241
 msgid "no factors"
 msgstr "jokių faktorių"
 
-#: fourier.cpp:241
+#: fourier.cpp:242
 msgid "too many factors"
 msgstr "per daug faktorių"
 
-#: fourier.cpp:244
+#: fourier.cpp:245
 msgid "invalid factors"
 msgstr "netinkami faktoriai"
 
-#: fourier.cpp:248
+#: fourier.cpp:249
 msgid "'n' must have typeof(.) \"integer\" or \"double\""
 msgstr "'n' privalo turėti typeof(.) \"integer\" arba \"double\""
 
-#: fourier.cpp:289
+#: fourier.cpp:290
 #, c-format
 msgid ""
 "nextn() = %<PRIu64> > 2^53 may not be exactly representable in R (as \"double"
@@ -473,7 +473,7 @@ msgstr "span yra per mažas"
 
 #: loessc.cpp:366 loessc.cpp:367 optim.cpp:403 optimize.cpp:262
 #: optimize.cpp:269 optimize.cpp:278 optimize.cpp:352 optimize.cpp:357
-#: optimize.cpp:373 pacf.cpp:463
+#: optimize.cpp:373 pacf.cpp:466
 #, c-format
 msgid "invalid '%s' value"
 msgstr "neleistina '%s' reikšmė"
@@ -662,7 +662,7 @@ msgstr ""
 msgid "Singular matrix in '%s' function"
 msgstr "Singuliari matrica, esanti ldet"
 
-#: mAR.cpp:700 massdist.cpp:42 model.cpp:382 model.cpp:390 optim.cpp:230
+#: mAR.cpp:700 massdist.cpp:42 model.cpp:383 model.cpp:391 optim.cpp:230
 #, c-format
 msgid "invalid '%s' argument"
 msgstr "neleistinas argumentas '%s'"
@@ -671,55 +671,55 @@ msgstr "neleistinas argumentas '%s'"
 msgid "Burg's algorithm failed to find partial correlation"
 msgstr "Burgo algoritmui nepavyko rasti dalinės koreliacijos"
 
-#: model.cpp:99
+#: model.cpp:100
 msgid "invalid variables"
 msgstr "neleistini kintamieji"
 
-#: model.cpp:103 model.cpp:108
+#: model.cpp:104 model.cpp:109
 msgid "number of variables != number of variable names"
 msgstr "kintamųjų skaičius != kintamųjų pavadinimų skaičius"
 
-#: model.cpp:106
+#: model.cpp:107
 msgid "invalid extra variables"
 msgstr "netinkami papildomi kintamieji"
 
-#: model.cpp:110
+#: model.cpp:111
 msgid "invalid extra variable names"
 msgstr "neleistini papildomi kintamųjų pavadinimai"
 
-#: model.cpp:131
+#: model.cpp:132
 #, c-format
 msgid "overlong names in '%s'"
 msgstr "per ilgi vardai, esantys '%s'"
 
-#: model.cpp:158
+#: model.cpp:159
 #, c-format
 msgid "invalid type (%s) for variable '%s'"
 msgstr "neleistinas tipas (%s) kintamajam '%s'"
 
-#: model.cpp:163
+#: model.cpp:164
 #, c-format
 msgid "variable lengths differ (found for '%s')"
 msgstr "kintamojo ilgiai skiriasi (rasta '%s')"
 
-#: model.cpp:220
+#: model.cpp:221
 msgid "invalid result from na.action"
 msgstr "neteisingas rezultatas iš na.action"
 
-#: model.cpp:401
+#: model.cpp:402
 msgid "invalid model frame"
 msgstr "neleistina modelio sistema"
 
-#: model.cpp:403
+#: model.cpp:404
 msgid "do not know how many cases"
 msgstr "nežino, kiek atvejų"
 
-#: model.cpp:427
+#: model.cpp:428
 #, c-format
 msgid "variable lengths differ (found for variable %d)"
 msgstr "kintamojo ilgiai skiriasi (randama kintamajam %d)"
 
-#: model.cpp:431 model.cpp:438
+#: model.cpp:432 model.cpp:439
 #, c-format
 msgid "variable %d has no levels"
 msgstr "kintamasis %d neturi lygių"
@@ -1121,16 +1121,16 @@ msgstr "pateikta netinkamo ilgio arba tipo Hessian funkcija, todėl ignoruojama"
 msgid "gradient supplied is of the wrong length or mode, so ignored"
 msgstr "pateiktas netinkamo ilgio arba tipo gradientas, todėl ignoruojamas"
 
-#: pacf.cpp:84
+#: pacf.cpp:87
 msgid "bad Starma struct"
 msgstr "blogas Starma struktūra"
 
-#: pacf.cpp:230
+#: pacf.cpp:233
 #, c-format
 msgid "starma error code %d"
 msgstr "starma klaidos kodas %d"
 
-#: pacf.cpp:290
+#: pacf.cpp:293
 #, c-format
 msgid "forkal error code %d"
 msgstr "forkal klaidos kodas %d"

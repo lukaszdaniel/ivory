@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: methods 4.1.0\n"
-"POT-Creation-Date: 2021-03-18 20:00\n"
+"POT-Creation-Date: 2021-06-18 18:05\n"
 "PO-Revision-Date: 2021-01-07 23:46+0100\n"
 "Last-Translator: r.zakauskas@gmail.com;gabriele.dauksaite@gmail.com\n"
 "Language-Team: Lithuanian\n"
@@ -1052,11 +1052,6 @@ msgstr "nėra paveldėtos klasės apibrėžties: %s"
 #, fuzzy
 msgid "Prototypical reference class object"
 msgstr "ne referencinė klasė: %s"
-
-#. R/methodsTable.R: stop(gettextf("invalid or unset methods table in generic function %s", sQuote(fdef@generic)),     damain = "R-methods")
-#: R/methodsTable.R:0
-msgid "R-methods"
-msgstr ""
 
 #. R/refClass.R: gettext("Reference Class", domain = "R-methods")
 #: R/refClass.R:0

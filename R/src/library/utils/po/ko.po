@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 3.1.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-03-25 22:09+0100\n"
+"POT-Creation-Date: 2021-06-18 18:08+0200\n"
 "PO-Revision-Date: 2014-03-26 23:03-0600\n"
 "Last-Translator: Chel Hee Lee <chl948@mail.usask.ca>\n"
 "Language-Team:  <chl948@mail.usask.ca>\n"
@@ -160,48 +160,53 @@ msgstr ""
 msgid "size must be finite and >= 0"
 msgstr ""
 
-#: utils.cpp:79
+#: utils.cpp:77
+#, fuzzy
+msgid "argument 'class' must be a character string"
+msgstr "'text'는 반드시 문자열이어야 합니다"
+
+#: utils.cpp:81
+#, c-format
+msgid "character class \"%s\" is invalid"
+msgstr ""
+
+#: utils.cpp:88
 #, fuzzy
 msgid "argument 'x' must be a length-1 character vector"
 msgstr "'text'는 반드시 문자열이어야 합니다"
 
-#: utils.cpp:81
+#: utils.cpp:91
 msgid "argument 'x' must be UTF-8 encoded (including ASCII)"
 msgstr ""
 
-#: utils.cpp:93 utils.cpp:122 windows/util.cpp:408 windows/util.cpp:417
+#: utils.cpp:118
+#, fuzzy
+msgid "'charClass()' function is not available on this platform"
+msgstr "이 플랫폼에서는 nsl()는 지원되지 않습니다"
+
+#: utils.cpp:130 windows/util.cpp:408 windows/util.cpp:417
 #: windows/widgets.cpp:188 windows/widgets.cpp:194 windows/widgets.cpp:256
 #: windows/widgets.cpp:262
 #, fuzzy, c-format
 msgid "'%s' argument must be a character string"
 msgstr "'text'는 반드시 문자열이어야 합니다"
 
-#: utils.cpp:96
-#, c-format
-msgid "character class \"%s\" is invalid"
-msgstr ""
-
-#: utils.cpp:110
-#, fuzzy
-msgid "'charClass()' function is not available on this platform"
-msgstr "이 플랫폼에서는 nsl()는 지원되지 않습니다"
-
-#: utils.cpp:145
+#: utils.cpp:153
 #, fuzzy
 msgid "'hostname' argument must be a character vector of length 1"
 msgstr "'hostname'은 반드시 길이가 1인 문자형 벡터이어야 합니다"
 
-#: utils.cpp:151
+#: utils.cpp:159
 #, c-format
 msgid "'nsl()' was unable to resolve host '%s'"
 msgstr ""
 
-#: utils.cpp:158
+#: utils.cpp:166
 #, fuzzy
 msgid "unknown format returned by 'gethostbyname()'"
 msgstr "알수없는 형식이 'gethostbyname'에 의해서 반환되었습니다"
 
-#: utils.cpp:167
+#: utils.cpp:175
 #, fuzzy
 msgid "'nsl()' is not supported on this platform"
 msgstr "이 플랫폼에서는 nsl()는 지원되지 않습니다"

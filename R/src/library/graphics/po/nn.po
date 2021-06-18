@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: nn\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-03-25 22:06+0100\n"
+"POT-Creation-Date: 2021-06-18 18:04+0200\n"
 "PO-Revision-Date: 2011-02-18 09:09+0100\n"
 "Last-Translator: Karl Ove Hufthammer <karl@huftis.org>\n"
 "Language-Team: Norwegian Nynorsk <i18n-nn@lister.ping.uio.no>\n"
@@ -37,86 +37,86 @@ msgstr "Hendinga «GE_ScalePS» tek nøyaktig éin talverdi"
 msgid "the base graphics system is not registered"
 msgstr "for mange grafikksystem registrerte"
 
-#: graphics.cpp:292
+#: graphics.cpp:293
 #, c-format
 msgid "bad units specified in '%s'"
 msgstr "ugyldige einingar gjevne i «%s»"
 
-#: graphics.cpp:1806 graphics.cpp:1828
+#: graphics.cpp:1807 graphics.cpp:1829
 msgid "attempt to plot on null device"
 msgstr "forsøk på å plotta på nulleininga"
 
-#: graphics.cpp:1859
+#: graphics.cpp:1860
 #, fuzzy
 msgid "outer margins are too large (figure region is too small)"
 msgstr "ytremargane er for store (figurområdet vert for lite)"
 
-#: graphics.cpp:1861
+#: graphics.cpp:1862
 #, fuzzy
 msgid "figure region is too large"
 msgstr "figurområdet er for stort"
 
-#: graphics.cpp:1863
+#: graphics.cpp:1864
 #, fuzzy
 msgid "figure margins are too large"
 msgstr "figurmargane er for store"
 
-#: graphics.cpp:1865
+#: graphics.cpp:1866
 #, fuzzy
 msgid "plot region is too large"
 msgstr "plotteområdet er for stort"
 
-#: graphics.cpp:1921
+#: graphics.cpp:1922
 #, c-format
 msgid "nonfinite axis limits [GScale(%g,%g,%d, .); log=%d]"
 msgstr "uendelege aksegrenser [GScale(%g,%g,%d, .); log=%d]"
 
-#: graphics.cpp:1951
+#: graphics.cpp:1952
 #, c-format
 msgid "axis style \"%c\" unimplemented"
 msgstr "aksestilen «%c» er ikkje implementert"
 
-#: graphics.cpp:2191 graphics.cpp:2592
+#: graphics.cpp:2192 graphics.cpp:2593
 #, fuzzy
 msgid "no graphics device is active"
 msgstr "Inga verksam grafikkeining"
 
-#: graphics.cpp:2385
+#: graphics.cpp:2386
 msgid "plot.new has not been called yet"
 msgstr "plot.new er ikkje kalla enno"
 
-#: graphics.cpp:2387
+#: graphics.cpp:2388
 msgid "invalid graphics state"
 msgstr "ugyldig grafikktilstand"
 
-#: graphics.cpp:2542
+#: graphics.cpp:2543
 msgid "graphics device closed during call to locator or identify"
 msgstr ""
 
-#: graphics.cpp:2841
+#: graphics.cpp:2842
 msgid "unable to allocate memory (in GPolygon)"
 msgstr "klarte ikkje reservera minne (i GPolygon)"
 
-#: graphics.cpp:2877
+#: graphics.cpp:2878
 #, fuzzy
 msgid "unable to allocate memory (in GPolyline)"
 msgstr "klarte ikkje reservera minne (i GPolygon)"
 
-#: graphics.cpp:3060
+#: graphics.cpp:3061
 msgid "zero-length arrow is of indeterminate angle and so skipped"
 msgstr "pil av lengd null har ikkje-unik vinkel, og vert derfor ikkje teikna"
 
-#: graphics.cpp:3141
+#: graphics.cpp:3142
 #, c-format
 msgid "invalid par(\"bty\") = '%c'; no box() drawn"
 msgstr "ugyldig par(\"bty\") = '%c' (ingen box() teikna)"
 
-#: graphics.cpp:3158 par.cpp:1129
+#: graphics.cpp:3159 par.cpp:1129
 #, fuzzy, c-format
 msgid "invalid argument passed to '%s' function"
 msgstr "ugyldig argument sendt til par()"
 
-#: graphics.cpp:3365
+#: graphics.cpp:3366
 #, fuzzy
 msgid "metric information not available for this device"
 msgstr "Metrikkinformasjon ikkje tilgjengeleg for eininga"

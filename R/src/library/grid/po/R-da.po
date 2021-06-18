@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 3.0.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2020-07-23 12:02\n"
+"POT-Creation-Date: 2021-06-18 18:04\n"
 "PO-Revision-Date: 2016-01-09 19:14+0100\n"
 "Last-Translator: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
 "Language-Team: \n"
@@ -492,8 +492,8 @@ msgstr ""
 msgid "how did we get here?"
 msgstr "Hvordan nåede vi hertil?"
 
-#. R/unit.R: stop("index must be of length 1", call = FALSE)
-#. R/unit.R: stop("index must be of length 1", call = FALSE)
+#. R/unit.R: stop("index must be of length 1", call. = FALSE)
+#. R/unit.R: stop("index must be of length 1", call. = FALSE)
 #: R/unit.R:0
 #, fuzzy
 msgid "index must be of length 1"
@@ -793,7 +793,7 @@ msgstr ""
 msgid "operator '%s' not meaningful for units"
 msgstr ""
 
-#. R/unit.R: stop("replacement must be of length 1", call = FALSE)
+#. R/unit.R: stop("replacement must be of length 1", call. = FALSE)
 #: R/unit.R:0
 #, fuzzy
 msgid "replacement must be of length 1"

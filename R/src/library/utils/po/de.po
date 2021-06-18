@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 3.1.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-03-25 22:09+0100\n"
+"POT-Creation-Date: 2021-06-18 18:08+0200\n"
 "PO-Revision-Date: 2014-03-16 16:24+0100\n"
 "Last-Translator: Detlef Steuer <steuer@hsu-hh.de>\n"
 "Language-Team: R Core <r-core@r-project.org>\n"
@@ -154,48 +154,53 @@ msgstr ""
 msgid "size must be finite and >= 0"
 msgstr ""
 
-#: utils.cpp:79
+#: utils.cpp:77
+#, fuzzy
+msgid "argument 'class' must be a character string"
+msgstr "'text' muss eine Zeichenkette sein"
+
+#: utils.cpp:81
+#, c-format
+msgid "character class \"%s\" is invalid"
+msgstr ""
+
+#: utils.cpp:88
 #, fuzzy
 msgid "argument 'x' must be a length-1 character vector"
 msgstr "'text' muss eine Zeichenkette sein"
 
-#: utils.cpp:81
+#: utils.cpp:91
 msgid "argument 'x' must be UTF-8 encoded (including ASCII)"
 msgstr ""
 
-#: utils.cpp:93 utils.cpp:122 windows/util.cpp:408 windows/util.cpp:417
+#: utils.cpp:118
+#, fuzzy
+msgid "'charClass()' function is not available on this platform"
+msgstr "nsl() ist auf dieser Plattform nicht unterstützt"
+
+#: utils.cpp:130 windows/util.cpp:408 windows/util.cpp:417
 #: windows/widgets.cpp:188 windows/widgets.cpp:194 windows/widgets.cpp:256
 #: windows/widgets.cpp:262
 #, fuzzy, c-format
 msgid "'%s' argument must be a character string"
 msgstr "'text' muss eine Zeichenkette sein"
 
-#: utils.cpp:96
-#, c-format
-msgid "character class \"%s\" is invalid"
-msgstr ""
-
-#: utils.cpp:110
-#, fuzzy
-msgid "'charClass()' function is not available on this platform"
-msgstr "nsl() ist auf dieser Plattform nicht unterstützt"
-
-#: utils.cpp:145
+#: utils.cpp:153
 #, fuzzy
 msgid "'hostname' argument must be a character vector of length 1"
 msgstr "'hostname' muss ein Zeihenkettenetor der Länge 1 sein"
 
-#: utils.cpp:151
+#: utils.cpp:159
 #, fuzzy, c-format
 msgid "'nsl()' was unable to resolve host '%s'"
 msgstr "nsl() konnte Hostnamen '%s' nicht auflösen"
 
-#: utils.cpp:158
+#: utils.cpp:166
 #, fuzzy
 msgid "unknown format returned by 'gethostbyname()'"
 msgstr "unbekanntes Format von 'gethostbyname' zurückgegeben"
 
-#: utils.cpp:167
+#: utils.cpp:175
 #, fuzzy
 msgid "'nsl()' is not supported on this platform"
 msgstr "nsl() ist auf dieser Plattform nicht unterstützt"

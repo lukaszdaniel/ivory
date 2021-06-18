@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 2.13.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2020-07-23 12:02\n"
+"POT-Creation-Date: 2021-06-18 18:04\n"
 "PO-Revision-Date: 2011-03-26 08:56-0300\n"
 "Last-Translator: Fernando Henrique <pessoal@fernandohrosa.com.br>\n"
 "Language-Team: http://www.feferraz.net/br/P/Projeto_Traducao_R_Portugues\n"
@@ -528,8 +528,8 @@ msgstr ""
 msgid "how did we get here?"
 msgstr "Como é que chegamos aqui?"
 
-#. R/unit.R: stop("index must be of length 1", call = FALSE)
-#. R/unit.R: stop("index must be of length 1", call = FALSE)
+#. R/unit.R: stop("index must be of length 1", call. = FALSE)
+#. R/unit.R: stop("index must be of length 1", call. = FALSE)
 #: R/unit.R:0
 #, fuzzy
 msgid "index must be of length 1"
@@ -846,7 +846,7 @@ msgstr "Somente vistas permitidas em 'vpStack'"
 msgid "operator '%s' not meaningful for units"
 msgstr "Operador '%s' não faz sentido para unidades"
 
-#. R/unit.R: stop("replacement must be of length 1", call = FALSE)
+#. R/unit.R: stop("replacement must be of length 1", call. = FALSE)
 #: R/unit.R:0
 #, fuzzy
 msgid "replacement must be of length 1"

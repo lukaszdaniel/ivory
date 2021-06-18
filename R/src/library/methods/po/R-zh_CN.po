@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.3.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2021-03-18 20:00\n"
+"POT-Creation-Date: 2021-06-18 18:05\n"
 "PO-Revision-Date: 2015-01-17 15:43+0100\n"
 "Last-Translator: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
 "Language-Team: Chinese\n"
@@ -1068,11 +1068,6 @@ msgstr "假装我们插入了类别"
 #, fuzzy
 msgid "Prototypical reference class object"
 msgstr "非引用类别"
-
-#. R/methodsTable.R: stop(gettextf("invalid or unset methods table in generic function %s", sQuote(fdef@generic)),     damain = "R-methods")
-#: R/methodsTable.R:0
-msgid "R-methods"
-msgstr ""
 
 #. R/refClass.R: gettext("Reference Class", domain = "R-methods")
 #: R/refClass.R:0

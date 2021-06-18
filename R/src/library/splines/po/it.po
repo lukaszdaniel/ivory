@@ -6,8 +6,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: splines 4.1.0\n"
-"Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2021-02-01 13:59+0000\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2021-06-18 18:05+0200\n"
 "PO-Revision-Date: \n"
 "Last-Translator: Daniele Medri <dmedri@gmail.com>\n"
 "Language-Team: Italian https://github.com/dmedri/R-italian-lang\n"
@@ -18,16 +18,17 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Generator: Poedit 2.2.1\n"
 
-#: splines.c:154
-msgid "'ord' must be a positive integer"
+#: splines.cpp:146
+#, fuzzy, c-format
+msgid "'%s' argument must be a positive integer"
 msgstr "'ord' dev'essere un intero positivo"
 
-#: splines.c:222
+#: splines.cpp:214
 #, c-format
 msgid "derivs = %d >= ord = %d, but should be in {0,..,ord-1}"
 msgstr "derivs = %d >= ord = %d, ma dovrebbe essere in {0,..,ord-1}"
 
-#: splines.c:225
+#: splines.cpp:217
 #, c-format
 msgid "derivs[%d] = %d >= ord = %d, but should be in {0,..,ord-1}"
 msgstr "derivs[%d] = %d >= ord = %d, ma dovrebbe essere in {0,..,ord-1}"

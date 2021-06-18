@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R-core\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-03-18 20:00\n"
+"POT-Creation-Date: 2021-06-18 18:05\n"
 "PO-Revision-Date: \n"
 "Last-Translator: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
 "Language-Team: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
@@ -1045,11 +1045,6 @@ msgstr "Udawanie, że została wstawiona klasa %s"
 #: R/refClass.R:0
 msgid "Prototypical reference class object"
 msgstr "Obiekt klasy prototywowej referencji"
-
-#. R/methodsTable.R: stop(gettextf("invalid or unset methods table in generic function %s", sQuote(fdef@generic)),     damain = "R-methods")
-#: R/methodsTable.R:0
-msgid "R-methods"
-msgstr "R-methods"
 
 #. R/refClass.R: gettext("Reference Class", domain = "R-methods")
 #: R/refClass.R:0
@@ -3706,6 +3701,9 @@ msgstr[1] ""
 msgstr[2] ""
 "formalne argumenty ogólnej funkcji dla %s (%s) różnią się od tych dla "
 "nieogólnej, która ma być użyta jako domyślna (%s)"
+
+#~ msgid "R-methods"
+#~ msgstr "R-methods"
 
 #, fuzzy
 #~ msgid ""

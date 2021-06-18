@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.2.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-03-25 22:07+0100\n"
+"POT-Creation-Date: 2021-06-18 18:06+0200\n"
 "PO-Revision-Date: 2012-03-08 20:50+0200\n"
 "Last-Translator: Chel Hee Lee <chl948@mail.usask.ca>\n"
 "Language-Team: The Korean R Translation Council <gnustats@gmail.com>\n"
@@ -70,7 +70,7 @@ msgstr ""
 msgid "invalid argument type"
 msgstr "인수의 유형이 잘못되었습니다 "
 
-#: arima.cpp:437 arima.cpp:523 pacf.cpp:321 pacf.cpp:360
+#: arima.cpp:437 arima.cpp:523 pacf.cpp:324 pacf.cpp:363
 msgid "can only transform 100 pars in arima0"
 msgstr "arima0 는 최대 100 개까지의 파라미터들만 변환이 가능합니다 "
 
@@ -137,44 +137,44 @@ msgstr "'x'가 비어 있습니다"
 msgid "the standard deviation is zero"
 msgstr "표준 편차가 0 입니다"
 
-#: deriv.cpp:161
+#: deriv.cpp:163
 msgid "invalid form in unary minus check"
 msgstr "단항 마이너스 검사에 잘못된 형식이 있습니다"
 
-#: deriv.cpp:445
+#: deriv.cpp:447
 msgid ""
 "only single-argument calls to log() are supported;\n"
 "  maybe use log(x,a) = log(x)/log(a)"
 msgstr ""
 
-#: deriv.cpp:685
+#: deriv.cpp:686
 #, c-format
 msgid "Function '%s' is not in the derivatives table"
 msgstr "함수 '%s'는 미분함수 테이블에 없습니다"
 
-#: deriv.cpp:791
+#: deriv.cpp:792
 #, fuzzy, c-format
 msgid "'%s' argument must not be of type '%s'"
 msgstr "'m' 은 반드시 list 이어야 합니다 "
 
-#: deriv.cpp:794
+#: deriv.cpp:795
 msgid "variable must be a character string"
 msgstr "변수는 문자열이어야 합니다"
 
-#: deriv.cpp:796
+#: deriv.cpp:797
 msgid "only the first element is used as variable name"
 msgstr " 번째 요소만 변수 이름으로 사용되었습니다 "
 
-#: deriv.cpp:809
+#: deriv.cpp:810
 #, c-format
 msgid "invalid expression in '%s'"
 msgstr "'%s'의 식이 잘못되었습니다"
 
-#: deriv.cpp:1087 model.cpp:101
+#: deriv.cpp:1088 model.cpp:102
 msgid "invalid variable names"
 msgstr "변수 이름들이 잘못되었습니다"
 
-#: deriv.cpp:1096
+#: deriv.cpp:1097
 msgid "invalid tag"
 msgstr "태그가 부적절합니다"
 
@@ -314,52 +314,52 @@ msgstr ""
 msgid "invalid input"
 msgstr "태그가 부적절합니다"
 
-#: fourier.cpp:62 fourier.cpp:157
+#: fourier.cpp:63 fourier.cpp:158
 msgid "non-numeric argument"
 msgstr "인수가 숫자가 아닙니다"
 
-#: fourier.cpp:80 fourier.cpp:98 fourier.cpp:171
+#: fourier.cpp:81 fourier.cpp:99 fourier.cpp:172
 msgid "fft factorization error"
 msgstr "fft의 인수분해 에러입니다"
 
-#: fourier.cpp:83 fourier.cpp:107 fourier.cpp:174
+#: fourier.cpp:84 fourier.cpp:108 fourier.cpp:175
 msgid "fft is too large"
 msgstr ""
 
-#: fourier.cpp:143
+#: fourier.cpp:144
 msgid "vector-valued (multivariate) series required"
 msgstr "벡터 (다변량) 계열이 필요합니다"
 
-#: fourier.cpp:213
+#: fourier.cpp:214
 #, c-format
 msgid ""
 "nextn() found no solution < %d = INT_MAX (the maximal integer); pass '0+ n' "
 "instead of 'n'"
 msgstr ""
 
-#: fourier.cpp:224
+#: fourier.cpp:225
 #, c-format
 msgid "nextn<64>() found no solution < %ld = UINT64_MAX (the maximal integer)"
 msgstr ""
 
-#: fourier.cpp:240
+#: fourier.cpp:241
 msgid "no factors"
 msgstr "인자가 아닙니다"
 
-#: fourier.cpp:241
+#: fourier.cpp:242
 #, fuzzy
 msgid "too many factors"
 msgstr "인자가 아닙니다"
 
-#: fourier.cpp:244
+#: fourier.cpp:245
 msgid "invalid factors"
 msgstr "인자가 잘못되었습니다"
 
-#: fourier.cpp:248
+#: fourier.cpp:249
 msgid "'n' must have typeof(.) \"integer\" or \"double\""
 msgstr ""
 
-#: fourier.cpp:289
+#: fourier.cpp:290
 #, c-format
 msgid ""
 "nextn() = %<PRIu64> > 2^53 may not be exactly representable in R (as \"double"
@@ -457,7 +457,7 @@ msgstr "범위가 너무 작습니다 "
 
 #: loessc.cpp:366 loessc.cpp:367 optim.cpp:403 optimize.cpp:262
 #: optimize.cpp:269 optimize.cpp:278 optimize.cpp:352 optimize.cpp:357
-#: optimize.cpp:373 pacf.cpp:463
+#: optimize.cpp:373 pacf.cpp:466
 #, c-format
 msgid "invalid '%s' value"
 msgstr "'%s' 의 값이 잘못되었습니다 "
@@ -646,7 +646,7 @@ msgstr ""
 msgid "Singular matrix in '%s' function"
 msgstr "Singular matrix in ldet"
 
-#: mAR.cpp:700 massdist.cpp:42 model.cpp:382 model.cpp:390 optim.cpp:230
+#: mAR.cpp:700 massdist.cpp:42 model.cpp:383 model.cpp:391 optim.cpp:230
 #, c-format
 msgid "invalid '%s' argument"
 msgstr "'%s' 인수가 잘못되었습니다 "
@@ -655,55 +655,55 @@ msgstr "'%s' 인수가 잘못되었습니다 "
 msgid "Burg's algorithm failed to find partial correlation"
 msgstr "Burg 의 알고리즘를 이용하여 부분상관관계를 찾는데 실패했습니다 "
 
-#: model.cpp:99
+#: model.cpp:100
 msgid "invalid variables"
 msgstr "변수가 올바르지 않습니다"
 
-#: model.cpp:103 model.cpp:108
+#: model.cpp:104 model.cpp:109
 msgid "number of variables != number of variable names"
 msgstr "변수의 개수가 변수 이름의 개수와 일치하지 않습니다"
 
-#: model.cpp:106
+#: model.cpp:107
 msgid "invalid extra variables"
 msgstr "추가 변수가 잘못되었습니다"
 
-#: model.cpp:110
+#: model.cpp:111
 msgid "invalid extra variable names"
 msgstr "추가 변수 이름이 잘못되었습니다"
 
-#: model.cpp:131
+#: model.cpp:132
 #, c-format
 msgid "overlong names in '%s'"
 msgstr "'%s'의 이름이 너무 깁니다"
 
-#: model.cpp:158
+#: model.cpp:159
 #, c-format
 msgid "invalid type (%s) for variable '%s'"
 msgstr "형식 (%s)은 변수 '%s'에 대해서는 잘못되었습니다"
 
-#: model.cpp:163
+#: model.cpp:164
 #, c-format
 msgid "variable lengths differ (found for '%s')"
 msgstr "변수('%s'기준)의 길이가 다릅니다"
 
-#: model.cpp:220
+#: model.cpp:221
 msgid "invalid result from na.action"
 msgstr "na.action 결과가 올바르지 않습니다"
 
-#: model.cpp:401
+#: model.cpp:402
 msgid "invalid model frame"
 msgstr "모델 프레임이 잘못되었습니다"
 
-#: model.cpp:403
+#: model.cpp:404
 msgid "do not know how many cases"
 msgstr "케이스의 수가 몇인지 모르겠습니다"
 
-#: model.cpp:427
+#: model.cpp:428
 #, c-format
 msgid "variable lengths differ (found for variable %d)"
 msgstr "변수 (%d 변수 기준)의 길이가 다릅니다"
 
-#: model.cpp:431 model.cpp:438
+#: model.cpp:432 model.cpp:439
 #, c-format
 msgid "variable %d has no levels"
 msgstr "변수 %d 수준이 없습니다"
@@ -1105,16 +1105,16 @@ msgstr ""
 msgid "gradient supplied is of the wrong length or mode, so ignored"
 msgstr "제공된 기울기는 부적절한 길이 또는 모드이었기때문에 무시되었습니다"
 
-#: pacf.cpp:84
+#: pacf.cpp:87
 msgid "bad Starma struct"
 msgstr "Starma struct 가 잘못되었습니다 "
 
-#: pacf.cpp:230
+#: pacf.cpp:233
 #, c-format
 msgid "starma error code %d"
 msgstr "starma 에러 코드는 %d 입니다"
 
-#: pacf.cpp:290
+#: pacf.cpp:293
 #, c-format
 msgid "forkal error code %d"
 msgstr "forkal 에러코드는 %d 입니다"

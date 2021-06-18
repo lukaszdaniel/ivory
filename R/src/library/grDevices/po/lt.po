@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: grDevices 4.1.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-03-25 22:06+0100\n"
+"POT-Creation-Date: 2021-06-18 18:04+0200\n"
 "PO-Revision-Date: 2020-12-09 13:16+0200\n"
 "Last-Translator: r.zakauskas@gmail.com;gabriele.dauksaite@gmail.com\n"
 "Language-Team: Lithuanian\n"
@@ -156,7 +156,7 @@ msgstr "didžiausias spalvų skaičius yra %d"
 msgid "requires INTSXP argument"
 msgstr ""
 
-#: devCairo.cpp:52 devCairo.cpp:63
+#: devCairo.cpp:54 devCairo.cpp:65
 #, fuzzy
 msgid "failed to load cairo DLL"
 msgstr "nepavyko paskirti rastrų"

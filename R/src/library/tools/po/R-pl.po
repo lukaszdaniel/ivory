@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R-core\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-03-18 20:02\n"
+"POT-Creation-Date: 2021-06-18 18:06\n"
 "PO-Revision-Date: \n"
 "Last-Translator: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
 "Language-Team: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
@@ -216,6 +216,21 @@ msgstr "plik 'DESCRIPTION' wygląda to na paczkę -- a one zostały zlikwidowane
 #: R/check.R:0
 msgid "'DUP' option is no longer supported and will be ignored."
 msgstr "'DUP' nie jest już dłużej wspierane i będzie ignorowane."
+
+#. R/check.R: gettext("  'LazyData' is specified without a 'data' directory\n", domain = "R-tools")
+#: R/check.R:0
+msgid "'LazyData' is specified without a 'data' directory"
+msgstr ""
+
+#. R/check.R: gettext("  'LazyDataCompression' is specified without 'LazyData'\n", domain = "R-tools")
+#: R/check.R:0
+msgid "'LazyDataCompression' is specified without 'LazyData'"
+msgstr ""
+
+#. R/check.R: gettext("  'LazyDataCompression' is specified without a 'data' directory\n", domain = "R-tools")
+#: R/check.R:0
+msgid "'LazyDataCompression' is specified without a 'data' directory"
+msgstr ""
 
 #. R/QC.R: gettextf("'LinkingTo' field is unused: package has no 'src' directory", domain = "R-tools")
 #: R/QC.R:0
@@ -1914,6 +1929,7 @@ msgstr "Znaleziono następujące pliki z niewystarczającymi uprawnieniami:"
 
 #. R/check.R: gettext("Found the following files/directories:", domain = "R-tools")
 #. R/check.R: gettext("Found the following files/directories:", domain = "R-tools")
+#. R/check.R: gettext("Found the following files/directories:", domain = "R-tools")
 #: R/check.R:0
 #, fuzzy
 msgid "Found the following files/directories:"
@@ -2235,6 +2251,11 @@ msgstr ""
 #: R/utils.R:0
 msgid "LaTeX errors:"
 msgstr "Błędy LaTeXa:"
+
+#. R/check.R: gettextf("  LazyData DB of %.1f MB without LazyDataCompression set\n", fs/1024^2)
+#: R/check.R:0
+msgid "LazyData DB of %.1f MB without LazyDataCompression set"
+msgstr ""
 
 #. R/QC.R: gettext("License components which are templates and need '+ file LICENSE':", domain = "R-tools")
 #: R/QC.R:0
@@ -2775,9 +2796,12 @@ msgstr "Liczba aktualizacji w ostatnich 6 miesiącach: %d"
 
 #. R/build.R: gettext("OK", domain = "R-tools")
 #. R/build.R: gettext("OK", domain = "R-tools")
-#. R/build.R: gettext("OK")
 #. R/build.R: gettext("OK", domain = "R-tools")
 #. R/build.R: gettext("OK", domain = "R-tools")
+#. R/build.R: gettext("OK", domain = "R-tools")
+#. R/check.R: gettext("OK", domain = "R-tools")
+#. R/check.R: gettext("OK", domain = "R-tools")
+#. R/check.R: gettext("OK", domain = "R-tools")
 #. R/check.R: gettext("OK", domain = "R-tools")
 #. R/check.R: gettext("OK", domain = "R-tools")
 #. R/check.R: gettext("OK", domain = "R-tools")
@@ -2894,6 +2918,11 @@ msgstr "Stara licencja:"
 #: R/QC.R:0
 msgid "Old maintainer(s):"
 msgstr "Dawni opiekunowie:"
+
+#. R/build.R: gettextf("Omitted %s from DESCRIPTION\n", paste(sQuote(omit), collapse = ", "), domain = "R-tools")
+#: R/build.R:0
+msgid "Omitted %s from DESCRIPTION"
+msgstr ""
 
 #. R/QC.R: gettextf("One or more packages in %s depend on this package.", x$all_depends, domain = "R-tools")
 #: R/QC.R:0
@@ -3235,11 +3264,6 @@ msgstr "Pozycja: %d Kod: %s Dokumentacje: %s"
 #: R/QC.R:0
 msgid "Possibly mis-spelled words in DESCRIPTION:"
 msgstr "Prawdopodobnie występują literówki w pliku 'DESCRIPTION'"
-
-#. R/Rd2HTML.R: warning("Previous alias or file overwritten by alias: ", aname)
-#: R/Rd2HTML.R:0
-msgid "Previous alias or file overwritten by alias:"
-msgstr ""
 
 #. R/QC.R: gettext("Problems when formatting CITATION entries:", domain = "R-tools")
 #: R/QC.R:0
@@ -4725,7 +4749,7 @@ msgstr "tworzenie kopii zapasowej wcześniejszej instalacji"
 msgid "bibtype %s is not implemented"
 msgstr "typ bibliografii %s nie jest zaimplementowany"
 
-#. R/build.R: gettextf("building %s", sQuote(filename))
+#. R/build.R: gettextf("building %s", sQuote(filename), domain = "R-tools")
 #: R/build.R:0
 msgid "building %s"
 msgstr "budowanie %s"
@@ -5060,6 +5084,12 @@ msgstr "sprawdzanie czy są jakieś pozostałości po generowaniu ilustracji ...
 #: R/check.R:0
 msgid "checking for missing documentation entries ..."
 msgstr "szukanie brakujących wpisów dokumentacji ..."
+
+#. R/check.R: gettext("checking for new files in some other directories ...", domain = "R-tools")
+#: R/check.R:0
+#, fuzzy
+msgid "checking for new files in some other directories ..."
+msgstr "szukanie ukrytych plików oraz katalogów ..."
 
 #. R/check.R: gettext("checking for non-standard things in the check directory ...", domain = "R-tools")
 #: R/check.R:0
@@ -6113,7 +6143,7 @@ msgstr ""
 msgid "parsing file %s"
 msgstr "przetwarzanie pliku %s"
 
-#. R/build.R: gettextf("preparing %s:", sQuote(pkgname))
+#. R/build.R: gettextf("preparing %s:", sQuote(pkgname), domain = "R-tools")
 #: R/build.R:0
 msgid "preparing %s:"
 msgstr "przygotowywanie %s"
@@ -6643,6 +6673,11 @@ msgstr "nie można zweryfikować bieżącego czasu"
 #: R/QC.R:0 R/admin.R:0 R/utils.R:0
 msgid "unable to write code files"
 msgstr "nie można zapisać plików kodu"
+
+#. R/check.R: gettextf("  undocumented value %s of field 'LazyDataCompression'\n", sQuote(lazyz),     domain = "R-tools")
+#: R/check.R:0
+msgid "undocumented value %s of field 'LazyDataCompression'"
+msgstr ""
 
 #. R/recode.R: stop("unimplemented encoding")
 #: R/recode.R:0

@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 3.3.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-03-25 22:09+0100\n"
+"POT-Creation-Date: 2021-06-18 18:08+0200\n"
 "PO-Revision-Date: 2018-04-16 18:50+0200\n"
 "Last-Translator: Alexey Shipunov <dactylorhiza@gmail.com>\n"
 "Language-Team: Russian\n"
@@ -159,48 +159,53 @@ msgstr ""
 msgid "size must be finite and >= 0"
 msgstr ""
 
-#: utils.cpp:79
+#: utils.cpp:77
+#, fuzzy
+msgid "argument 'class' must be a character string"
+msgstr "'%s' должен быть текстовой строкой"
+
+#: utils.cpp:81
+#, c-format
+msgid "character class \"%s\" is invalid"
+msgstr ""
+
+#: utils.cpp:88
 #, fuzzy
 msgid "argument 'x' must be a length-1 character vector"
 msgstr "'%s' должен быть текстовой строкой"
 
-#: utils.cpp:81
+#: utils.cpp:91
 msgid "argument 'x' must be UTF-8 encoded (including ASCII)"
 msgstr ""
 
-#: utils.cpp:93 utils.cpp:122 windows/util.cpp:408 windows/util.cpp:417
+#: utils.cpp:118
+#, fuzzy
+msgid "'charClass()' function is not available on this platform"
+msgstr "'nsl()' не поддерживается на этой платформе"
+
+#: utils.cpp:130 windows/util.cpp:408 windows/util.cpp:417
 #: windows/widgets.cpp:188 windows/widgets.cpp:194 windows/widgets.cpp:256
 #: windows/widgets.cpp:262
 #, c-format
 msgid "'%s' argument must be a character string"
 msgstr "'%s' должен быть текстовой строкой"
 
-#: utils.cpp:96
-#, c-format
-msgid "character class \"%s\" is invalid"
-msgstr ""
-
-#: utils.cpp:110
-#, fuzzy
-msgid "'charClass()' function is not available on this platform"
-msgstr "'nsl()' не поддерживается на этой платформе"
-
-#: utils.cpp:145
+#: utils.cpp:153
 #, fuzzy
 msgid "'hostname' argument must be a character vector of length 1"
 msgstr "'hostname' должно быть текстовым вектором длиной 1"
 
-#: utils.cpp:151
+#: utils.cpp:159
 #, c-format
 msgid "'nsl()' was unable to resolve host '%s'"
 msgstr "'nsl()' не смог разрешить хост '%s'"
 
-#: utils.cpp:158
+#: utils.cpp:166
 #, fuzzy
 msgid "unknown format returned by 'gethostbyname()'"
 msgstr "'gethostbyname' вернула неправильный формат"
 
-#: utils.cpp:167
+#: utils.cpp:175
 msgid "'nsl()' is not supported on this platform"
 msgstr "'nsl()' не поддерживается на этой платформе"
 

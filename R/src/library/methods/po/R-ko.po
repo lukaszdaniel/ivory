@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 3.1.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2021-03-18 20:00\n"
+"POT-Creation-Date: 2021-06-18 18:05\n"
 "PO-Revision-Date: 2014-03-27 13:32-0600\n"
 "Last-Translator: Chel Hee Lee <chl948@mail.usask.ca>\n"
 "Language-Team:  <chl948@mail.usask.ca>\n"
@@ -1069,11 +1069,6 @@ msgstr "다음의 상속된 클래스에 대한 정의를 찾을 수 없습니�
 #, fuzzy
 msgid "Prototypical reference class object"
 msgstr "다음은 레퍼런스 클래스가 아닙니다: %s"
-
-#. R/methodsTable.R: stop(gettextf("invalid or unset methods table in generic function %s", sQuote(fdef@generic)),     damain = "R-methods")
-#: R/methodsTable.R:0
-msgid "R-methods"
-msgstr ""
 
 #. R/refClass.R: gettext("Reference Class", domain = "R-methods")
 #: R/refClass.R:0

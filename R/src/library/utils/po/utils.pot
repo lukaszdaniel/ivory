@@ -6,9 +6,9 @@
 #, fuzzy
 msgid ""
 msgstr ""
-"Project-Id-Version: utils 4.1.0\n"
+"Project-Id-Version: utils 4.2.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-03-25 22:09+0100\n"
+"POT-Creation-Date: 2021-06-18 18:08+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -151,44 +151,48 @@ msgstr ""
 msgid "size must be finite and >= 0"
 msgstr ""
 
-#: utils.cpp:79
-msgid "argument 'x' must be a length-1 character vector"
+#: utils.cpp:77
+msgid "argument 'class' must be a character string"
 msgstr ""
 
 #: utils.cpp:81
+#, c-format
+msgid "character class \"%s\" is invalid"
+msgstr ""
+
+#: utils.cpp:88
+msgid "argument 'x' must be a length-1 character vector"
+msgstr ""
+
+#: utils.cpp:91
 msgid "argument 'x' must be UTF-8 encoded (including ASCII)"
 msgstr ""
 
-#: utils.cpp:93 utils.cpp:122 windows/util.cpp:408 windows/util.cpp:417
+#: utils.cpp:118
+msgid "'charClass()' function is not available on this platform"
+msgstr ""
+
+#: utils.cpp:130 windows/util.cpp:408 windows/util.cpp:417
 #: windows/widgets.cpp:188 windows/widgets.cpp:194 windows/widgets.cpp:256
 #: windows/widgets.cpp:262
 #, c-format
 msgid "'%s' argument must be a character string"
 msgstr ""
 
-#: utils.cpp:96
-#, c-format
-msgid "character class \"%s\" is invalid"
-msgstr ""
-
-#: utils.cpp:110
-msgid "'charClass()' function is not available on this platform"
-msgstr ""
-
-#: utils.cpp:145
+#: utils.cpp:153
 msgid "'hostname' argument must be a character vector of length 1"
 msgstr ""
 
-#: utils.cpp:151
+#: utils.cpp:159
 #, c-format
 msgid "'nsl()' was unable to resolve host '%s'"
 msgstr ""
 
-#: utils.cpp:158
+#: utils.cpp:166
 msgid "unknown format returned by 'gethostbyname()'"
 msgstr ""
 
-#: utils.cpp:167
+#: utils.cpp:175
 msgid "'nsl()' is not supported on this platform"
 msgstr ""
 

@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.15.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2020-07-23 12:02\n"
+"POT-Creation-Date: 2021-06-18 18:04\n"
 "PO-Revision-Date: 2015-01-17 15:10+0100\n"
 "Last-Translator: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
 "Language-Team: R-Core <R-core@r-project.org>\n"
@@ -518,8 +518,8 @@ msgstr ""
 msgid "how did we get here?"
 msgstr "Wie konnte es so weit kommen?"
 
-#. R/unit.R: stop("index must be of length 1", call = FALSE)
-#. R/unit.R: stop("index must be of length 1", call = FALSE)
+#. R/unit.R: stop("index must be of length 1", call. = FALSE)
+#. R/unit.R: stop("index must be of length 1", call. = FALSE)
 #: R/unit.R:0
 #, fuzzy
 msgid "index must be of length 1"
@@ -840,7 +840,7 @@ msgstr "Nur Viewports zulässig in 'vpStack'"
 msgid "operator '%s' not meaningful for units"
 msgstr "Operator '%s' hat für Einheiten keine Bedeutung"
 
-#. R/unit.R: stop("replacement must be of length 1", call = FALSE)
+#. R/unit.R: stop("replacement must be of length 1", call. = FALSE)
 #: R/unit.R:0
 #, fuzzy
 msgid "replacement must be of length 1"

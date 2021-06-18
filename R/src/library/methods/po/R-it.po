@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R-methods 3.6.3\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2021-03-18 20:00\n"
+"POT-Creation-Date: 2021-06-18 18:05\n"
 "PO-Revision-Date: \n"
 "Last-Translator: Daniele Medri <dmedri@gmail.com>\n"
 "Language-Team: Italian https://github.com/dmedri/R-italian-lang\n"
@@ -1068,11 +1068,6 @@ msgstr "nessuna definizione trovata per la classe ereditata:%s"
 #, fuzzy
 msgid "Prototypical reference class object"
 msgstr "non un riferimento di classe: %s"
-
-#. R/methodsTable.R: stop(gettextf("invalid or unset methods table in generic function %s", sQuote(fdef@generic)),     damain = "R-methods")
-#: R/methodsTable.R:0
-msgid "R-methods"
-msgstr ""
 
 #. R/refClass.R: gettext("Reference Class", domain = "R-methods")
 #: R/refClass.R:0

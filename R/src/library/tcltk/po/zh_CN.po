@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.4.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-03-25 22:07+0100\n"
+"POT-Creation-Date: 2021-06-18 18:06+0200\n"
 "PO-Revision-Date: 2015-01-17 15:16+0100\n"
 "Last-Translator: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
 "Language-Team: Chinese\n"
@@ -19,7 +19,7 @@ msgstr ""
 "X-Generator: Poedit 1.5.4\n"
 "X-Poedit-SourceCharset: UTF-8\n"
 
-#: tcltk.cpp:73
+#: tcltk.cpp:74
 msgid "parse error in R expression"
 msgstr "R表达式里句法分析错误"
 

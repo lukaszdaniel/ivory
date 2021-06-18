@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.11.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-03-25 22:06+0100\n"
+"POT-Creation-Date: 2021-06-18 18:04+0200\n"
 "PO-Revision-Date: 2015-01-17 15:10+0100\n"
 "Last-Translator: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
 "Language-Team: Russian\n"
@@ -43,86 +43,86 @@ msgstr "Событие GE_ScalePS требует единичного число
 msgid "the base graphics system is not registered"
 msgstr "слишком много зарегистрированных графических систем"
 
-#: graphics.cpp:292
+#: graphics.cpp:293
 #, c-format
 msgid "bad units specified in '%s'"
 msgstr "в %s указаны неправильные единицы"
 
-#: graphics.cpp:1806 graphics.cpp:1828
+#: graphics.cpp:1807 graphics.cpp:1829
 msgid "attempt to plot on null device"
 msgstr "попытка рисовать на null-устройстве"
 
-#: graphics.cpp:1859
+#: graphics.cpp:1860
 #, fuzzy
 msgid "outer margins are too large (figure region is too small)"
 msgstr "внешние края слишком велики (fig.region слишком мал)"
 
-#: graphics.cpp:1861
+#: graphics.cpp:1862
 #, fuzzy
 msgid "figure region is too large"
 msgstr "область рисунка слишком велика"
 
-#: graphics.cpp:1863
+#: graphics.cpp:1864
 #, fuzzy
 msgid "figure margins are too large"
 msgstr "края рисунка слишком велики"
 
-#: graphics.cpp:1865
+#: graphics.cpp:1866
 #, fuzzy
 msgid "plot region is too large"
 msgstr "область графика слишком велика"
 
-#: graphics.cpp:1921
+#: graphics.cpp:1922
 #, c-format
 msgid "nonfinite axis limits [GScale(%g,%g,%d, .); log=%d]"
 msgstr "неопределенные границы осей [GScale(%g,%g,%d, .); log=%d]"
 
-#: graphics.cpp:1951
+#: graphics.cpp:1952
 #, c-format
 msgid "axis style \"%c\" unimplemented"
 msgstr "стиль оси \"%c\" не разработан"
 
-#: graphics.cpp:2191 graphics.cpp:2592
+#: graphics.cpp:2192 graphics.cpp:2593
 #, fuzzy
 msgid "no graphics device is active"
 msgstr "Нет активного графического устройства"
 
-#: graphics.cpp:2385
+#: graphics.cpp:2386
 msgid "plot.new has not been called yet"
 msgstr "'plot.new' пока не вызван"
 
-#: graphics.cpp:2387
+#: graphics.cpp:2388
 msgid "invalid graphics state"
 msgstr "неправильное графическое состояние"
 
-#: graphics.cpp:2542
+#: graphics.cpp:2543
 msgid "graphics device closed during call to locator or identify"
 msgstr ""
 
-#: graphics.cpp:2841
+#: graphics.cpp:2842
 msgid "unable to allocate memory (in GPolygon)"
 msgstr "не могу разместить память (в GPolygon)"
 
-#: graphics.cpp:2877
+#: graphics.cpp:2878
 #, fuzzy
 msgid "unable to allocate memory (in GPolyline)"
 msgstr "не могу разместить память (в GPolygon)"
 
-#: graphics.cpp:3060
+#: graphics.cpp:3061
 msgid "zero-length arrow is of indeterminate angle and so skipped"
 msgstr "стрелка нулевой длины имеет неопределенный угол и поэтому пропущена"
 
-#: graphics.cpp:3141
+#: graphics.cpp:3142
 #, c-format
 msgid "invalid par(\"bty\") = '%c'; no box() drawn"
 msgstr "неправильный par(\"bty\") = '%c'; не нарисован box()"
 
-#: graphics.cpp:3158 par.cpp:1129
+#: graphics.cpp:3159 par.cpp:1129
 #, fuzzy, c-format
 msgid "invalid argument passed to '%s' function"
 msgstr "par() передан неправильный аргумент"
 
-#: graphics.cpp:3365
+#: graphics.cpp:3366
 #, fuzzy
 msgid "metric information not available for this device"
 msgstr "Метрическая информация для этого устройства недоступна"

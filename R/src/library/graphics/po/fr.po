@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R-2.12.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-03-25 22:06+0100\n"
+"POT-Creation-Date: 2021-06-18 18:04+0200\n"
 "PO-Revision-Date: 2012-03-06 22:22+0100\n"
 "Last-Translator: Philippe Grosjean <phgrosjean@sciviews.org>\n"
 "Language-Team: French <R-core@r-project.org>\n"
@@ -38,87 +38,87 @@ msgstr "L'événement GE_ScalePS exige une valeur numérique unique"
 msgid "the base graphics system is not registered"
 msgstr "trop de systèmes graphiques enregistrés"
 
-#: graphics.cpp:292
+#: graphics.cpp:293
 #, c-format
 msgid "bad units specified in '%s'"
 msgstr "mauvaise unité spécifiée dans '%s'"
 
-#: graphics.cpp:1806 graphics.cpp:1828
+#: graphics.cpp:1807 graphics.cpp:1829
 msgid "attempt to plot on null device"
 msgstr "tentative de dessin dans un périphérique null"
 
-#: graphics.cpp:1859
+#: graphics.cpp:1860
 #, fuzzy
 msgid "outer margins are too large (figure region is too small)"
 msgstr "marges externes trop larges (fig.region trop petit)"
 
-#: graphics.cpp:1861
+#: graphics.cpp:1862
 #, fuzzy
 msgid "figure region is too large"
 msgstr "zone de dessin trop large"
 
-#: graphics.cpp:1863
+#: graphics.cpp:1864
 #, fuzzy
 msgid "figure margins are too large"
 msgstr "marges de dessin trop larges"
 
-#: graphics.cpp:1865
+#: graphics.cpp:1866
 #, fuzzy
 msgid "plot region is too large"
 msgstr "zone de graphe trop large"
 
-#: graphics.cpp:1921
+#: graphics.cpp:1922
 #, c-format
 msgid "nonfinite axis limits [GScale(%g,%g,%d, .); log=%d]"
 msgstr "limites d'axes non finis [GScale(%g,%g,%d, .) ; log=%d]"
 
-#: graphics.cpp:1951
+#: graphics.cpp:1952
 #, c-format
 msgid "axis style \"%c\" unimplemented"
 msgstr "style d'axe \"%c\" non implémenté"
 
-#: graphics.cpp:2191 graphics.cpp:2592
+#: graphics.cpp:2192 graphics.cpp:2593
 #, fuzzy
 msgid "no graphics device is active"
 msgstr "Aucun périphérique graphique n'est actif"
 
-#: graphics.cpp:2385
+#: graphics.cpp:2386
 msgid "plot.new has not been called yet"
 msgstr "plot.new n'a pas encore été appelé"
 
-#: graphics.cpp:2387
+#: graphics.cpp:2388
 msgid "invalid graphics state"
 msgstr "état des graphiques incorrect"
 
-#: graphics.cpp:2542
+#: graphics.cpp:2543
 msgid "graphics device closed during call to locator or identify"
 msgstr ""
 
-#: graphics.cpp:2841
+#: graphics.cpp:2842
 msgid "unable to allocate memory (in GPolygon)"
 msgstr "impossible d'allouer de la mémoire (dans GPolygon)"
 
-#: graphics.cpp:2877
+#: graphics.cpp:2878
 #, fuzzy
 msgid "unable to allocate memory (in GPolyline)"
 msgstr "impossible d'allouer de la mémoire (dans GPolygon)"
 
-#: graphics.cpp:3060
+#: graphics.cpp:3061
 msgid "zero-length arrow is of indeterminate angle and so skipped"
 msgstr "un flèche de longueur nulle n'a pas d'angle déterminé et est ignorée"
 
-#: graphics.cpp:3141
+#: graphics.cpp:3142
 #, c-format
 msgid "invalid par(\"bty\") = '%c'; no box() drawn"
 msgstr ""
 "par(\"bty\") = '%c' incorrect ; aucune boîte n'est tracée à l'aide de box()"
 
-#: graphics.cpp:3158 par.cpp:1129
+#: graphics.cpp:3159 par.cpp:1129
 #, fuzzy, c-format
 msgid "invalid argument passed to '%s' function"
 msgstr "paramètre passé à par() invalide"
 
-#: graphics.cpp:3365
+#: graphics.cpp:3366
 #, fuzzy
 msgid "metric information not available for this device"
 msgstr "Information de métrique non disponible pour ce périphérique"
