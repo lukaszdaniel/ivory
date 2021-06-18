@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.12.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-03-25 22:07+0100\n"
+"POT-Creation-Date: 2021-06-18 18:06+0200\n"
 "PO-Revision-Date: 2012-03-06 21:47+0100\n"
 "Last-Translator: Philippe Grosjean <phgrosjean@sciviews.org>\n"
 "Language-Team: French <R-core@r-project.org>\n"
@@ -69,7 +69,7 @@ msgstr ""
 msgid "invalid argument type"
 msgstr "type d'argument incorrect"
 
-#: arima.cpp:437 arima.cpp:523 pacf.cpp:321 pacf.cpp:360
+#: arima.cpp:437 arima.cpp:523 pacf.cpp:324 pacf.cpp:363
 msgid "can only transform 100 pars in arima0"
 msgstr "impossible de transformer plus de 100 pars dans arima0"
 
@@ -136,44 +136,44 @@ msgstr "'x' est vide"
 msgid "the standard deviation is zero"
 msgstr "l'écart type est nulle"
 
-#: deriv.cpp:161
+#: deriv.cpp:163
 msgid "invalid form in unary minus check"
 msgstr "forme incorrecte dans la vérification d'un moins unitaire"
 
-#: deriv.cpp:445
+#: deriv.cpp:447
 msgid ""
 "only single-argument calls to log() are supported;\n"
 "  maybe use log(x,a) = log(x)/log(a)"
 msgstr ""
 
-#: deriv.cpp:685
+#: deriv.cpp:686
 #, c-format
 msgid "Function '%s' is not in the derivatives table"
 msgstr "La fonction '%s' n'est pas dans la table des dérivées"
 
-#: deriv.cpp:791
+#: deriv.cpp:792
 #, fuzzy, c-format
 msgid "'%s' argument must not be of type '%s'"
 msgstr "'m' doit être une liste"
 
-#: deriv.cpp:794
+#: deriv.cpp:795
 msgid "variable must be a character string"
 msgstr "la variable doit être une chaîne de caractères"
 
-#: deriv.cpp:796
+#: deriv.cpp:797
 msgid "only the first element is used as variable name"
 msgstr "seulement le premier élément est utilisé comme nom de variable"
 
-#: deriv.cpp:809
+#: deriv.cpp:810
 #, c-format
 msgid "invalid expression in '%s'"
 msgstr "expression incorrecte dans '%s'"
 
-#: deriv.cpp:1087 model.cpp:101
+#: deriv.cpp:1088 model.cpp:102
 msgid "invalid variable names"
 msgstr "nom de variable incorrect"
 
-#: deriv.cpp:1096
+#: deriv.cpp:1097
 msgid "invalid tag"
 msgstr "marque (tag) incorrecte"
 
@@ -313,52 +313,52 @@ msgstr ""
 msgid "invalid input"
 msgstr "marque (tag) incorrecte"
 
-#: fourier.cpp:62 fourier.cpp:157
+#: fourier.cpp:63 fourier.cpp:158
 msgid "non-numeric argument"
 msgstr "argument non numérique"
 
-#: fourier.cpp:80 fourier.cpp:98 fourier.cpp:171
+#: fourier.cpp:81 fourier.cpp:99 fourier.cpp:172
 msgid "fft factorization error"
 msgstr "erreur de factorisation fft"
 
-#: fourier.cpp:83 fourier.cpp:107 fourier.cpp:174
+#: fourier.cpp:84 fourier.cpp:108 fourier.cpp:175
 msgid "fft is too large"
 msgstr ""
 
-#: fourier.cpp:143
+#: fourier.cpp:144
 msgid "vector-valued (multivariate) series required"
 msgstr "serie multivariée requise"
 
-#: fourier.cpp:213
+#: fourier.cpp:214
 #, c-format
 msgid ""
 "nextn() found no solution < %d = INT_MAX (the maximal integer); pass '0+ n' "
 "instead of 'n'"
 msgstr ""
 
-#: fourier.cpp:224
+#: fourier.cpp:225
 #, c-format
 msgid "nextn<64>() found no solution < %ld = UINT64_MAX (the maximal integer)"
 msgstr ""
 
-#: fourier.cpp:240
+#: fourier.cpp:241
 msgid "no factors"
 msgstr "pas de variables facteur"
 
-#: fourier.cpp:241
+#: fourier.cpp:242
 #, fuzzy
 msgid "too many factors"
 msgstr "pas de variables facteur"
 
-#: fourier.cpp:244
+#: fourier.cpp:245
 msgid "invalid factors"
 msgstr "variables facteur incorrectes"
 
-#: fourier.cpp:248
+#: fourier.cpp:249
 msgid "'n' must have typeof(.) \"integer\" or \"double\""
 msgstr ""
 
-#: fourier.cpp:289
+#: fourier.cpp:290
 #, c-format
 msgid ""
 "nextn() = %<PRIu64> > 2^53 may not be exactly representable in R (as \"double"
@@ -456,7 +456,7 @@ msgstr "fenêtre trop étroite"
 
 #: loessc.cpp:366 loessc.cpp:367 optim.cpp:403 optimize.cpp:262
 #: optimize.cpp:269 optimize.cpp:278 optimize.cpp:352 optimize.cpp:357
-#: optimize.cpp:373 pacf.cpp:463
+#: optimize.cpp:373 pacf.cpp:466
 #, c-format
 msgid "invalid '%s' value"
 msgstr "valeur '%s' incorrecte"
@@ -645,7 +645,7 @@ msgstr ""
 msgid "Singular matrix in '%s' function"
 msgstr "Matrice singulière dans ldet"
 
-#: mAR.cpp:700 massdist.cpp:42 model.cpp:382 model.cpp:390 optim.cpp:230
+#: mAR.cpp:700 massdist.cpp:42 model.cpp:383 model.cpp:391 optim.cpp:230
 #, c-format
 msgid "invalid '%s' argument"
 msgstr "argument '%s' incorrect"
@@ -654,55 +654,55 @@ msgstr "argument '%s' incorrect"
 msgid "Burg's algorithm failed to find partial correlation"
 msgstr "l'algorithme de Burg n'a pas trouvé la correlation partielle"
 
-#: model.cpp:99
+#: model.cpp:100
 msgid "invalid variables"
 msgstr "variables incorrectes"
 
-#: model.cpp:103 model.cpp:108
+#: model.cpp:104 model.cpp:109
 msgid "number of variables != number of variable names"
 msgstr "le nombre de variables n'est pas égal au nombre de noms de variables"
 
-#: model.cpp:106
+#: model.cpp:107
 msgid "invalid extra variables"
 msgstr "variables supplémentaires incorrectes"
 
-#: model.cpp:110
+#: model.cpp:111
 msgid "invalid extra variable names"
 msgstr "noms de variables supplémentaires incorrects"
 
-#: model.cpp:131
+#: model.cpp:132
 #, c-format
 msgid "overlong names in '%s'"
 msgstr "noms trop longs dans '%s'"
 
-#: model.cpp:158
+#: model.cpp:159
 #, c-format
 msgid "invalid type (%s) for variable '%s'"
 msgstr "type (%s) incorrect pour la variable '%s'"
 
-#: model.cpp:163
+#: model.cpp:164
 #, c-format
 msgid "variable lengths differ (found for '%s')"
 msgstr "les longueurs des variables diffèrent (trouvé pour '%s')"
 
-#: model.cpp:220
+#: model.cpp:221
 msgid "invalid result from na.action"
 msgstr "résultat incorrect de na.action"
 
-#: model.cpp:401
+#: model.cpp:402
 msgid "invalid model frame"
 msgstr "trame de modèle incorrect"
 
-#: model.cpp:403
+#: model.cpp:404
 msgid "do not know how many cases"
 msgstr "nombre de cas inconnu"
 
-#: model.cpp:427
+#: model.cpp:428
 #, c-format
 msgid "variable lengths differ (found for variable %d)"
 msgstr "les longueurs des variables diffèrent (trouvé pour la variable %d)"
 
-#: model.cpp:431 model.cpp:438
+#: model.cpp:432 model.cpp:439
 #, c-format
 msgid "variable %d has no levels"
 msgstr "la variable %d n'a pas de niveaux"
@@ -1111,16 +1111,16 @@ msgstr "le Hessien fourni est de la mauvaise longueur ou mode, et est ignoré"
 msgid "gradient supplied is of the wrong length or mode, so ignored"
 msgstr "le gradient fourni est de mauvaise longueur ou mode, et est ignoré"
 
-#: pacf.cpp:84
+#: pacf.cpp:87
 msgid "bad Starma struct"
 msgstr "Starma struct incorrecte"
 
-#: pacf.cpp:230
+#: pacf.cpp:233
 #, c-format
 msgid "starma error code %d"
 msgstr "code d'erreur starma %d"
 
-#: pacf.cpp:290
+#: pacf.cpp:293
 #, c-format
 msgid "forkal error code %d"
 msgstr "code d'erreur forkal %d"

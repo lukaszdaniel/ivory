@@ -1,7 +1,7 @@
 #  File src/library/stats/R/contrast.R
 #  Part of the R package, https://www.R-project.org
 #
-#  Copyright (C) 1995-2012 The R Core Team
+#  Copyright (C) 1995-2021 The R Core Team
 #
 #  This program is free software; you can redistribute it and/or modify
 #  it under the terms of the GNU General Public License as published by
@@ -41,7 +41,7 @@ contrasts <- function (x, contrasts = TRUE, sparse = FALSE)
     ctr
 }
 
-`contrasts<-` <- function(x, how.many, value)
+`contrasts<-` <- function(x, how.many=NULL, value)
 {
     if (is.logical(x)) x <- factor(x, levels=c(FALSE, TRUE))
     if(!is.factor(x))
@@ -56,7 +56,7 @@ contrasts <- function (x, contrasts = TRUE, sparse = FALSE)
 	nlevs <- nlevels(x)
 	if(nrow(value) != nlevs)
 	    stop("wrong number of contrast matrix rows")
-	n1 <- if(missing(how.many)) nlevs - 1L else how.many
+	n1 <- if(missing(how.many) || is.null(how.many)) nlevs - 1L else how.many
 	nc <- ncol(value)
 	rownames(value) <- levels(x)
 	if(nc < n1) {

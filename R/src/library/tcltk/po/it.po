@@ -6,8 +6,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: tcltk 4.1.0\n"
-"Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2021-02-01 13:59+0000\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2021-06-18 18:06+0200\n"
 "PO-Revision-Date: \n"
 "Last-Translator: Daniele Medri <dmedri@gmail.com>\n"
 "Language-Team: Italian https://github.com/dmedri/R-italian-lang\n"
@@ -18,43 +18,45 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Generator: Poedit 2.2.1\n"
 
-#: tcltk.c:70
+#: tcltk.cpp:74
 msgid "parse error in R expression"
 msgstr "errore di elaborazione nell'espressione R"
 
-#: tcltk.c:179 tcltk.c:257
+#: tcltk.cpp:182 tcltk.cpp:260
 msgid "tcl error.\n"
 msgstr "errore tcl.\n"
 
-#: tcltk.c:208 tcltk.c:283 tcltk.c:300 tcltk.c:320 tcltk.c:340 tcltk.c:415
-#: tcltk.c:480 tcltk.c:534 tcltk.c:773
+#: tcltk.cpp:211 tcltk.cpp:286 tcltk.cpp:303 tcltk.cpp:323 tcltk.cpp:343
+#: tcltk.cpp:418 tcltk.cpp:483 tcltk.cpp:537 tcltk.cpp:777
 msgid "invalid argument"
 msgstr "argomento non valido"
 
-#: tcltk.c:290
+#: tcltk.cpp:293
 msgid "no such variable"
 msgstr "nessuna variabile"
 
-#: tcltk.c:322 tcltk.c:342 tcltk.c:417 tcltk.c:482 tcltk.c:536
-msgid "invalid tclObj -- perhaps saved from another session?"
+#: tcltk.cpp:325 tcltk.cpp:345 tcltk.cpp:420 tcltk.cpp:485 tcltk.cpp:539
+#, fuzzy
+msgid "invalid object of type tclObj -- perhaps saved from another session?"
 msgstr "tclObj non valido -- salvato forse da un'altra sessione?"
 
-#: tcltk.c:646
+#: tcltk.cpp:649
 msgid "argument list is too long in tcltk internal function 'callback_closure'"
-msgstr "lista argomento troppo grande nella funzione interna tcltk 'callback_closure'"
+msgstr ""
+"lista argomento troppo grande nella funzione interna tcltk 'callback_closure'"
 
-#: tcltk.c:679
+#: tcltk.cpp:683
 msgid "argument is not of correct type"
 msgstr "l'argomento non è del tipo corretto"
 
-#: tcltk.c:731
+#: tcltk.cpp:735
 msgid "no DISPLAY variable so Tk is not available"
 msgstr "nessuna variabile DISPLAY perciò Tk non è disponibile"
 
-#: tcltk_unix.c:94
+#: tcltk_unix.cpp:88
 msgid "Tcl is not loaded"
 msgstr "Tcl non è caricato"
 
-#: tcltk_unix.c:98
+#: tcltk_unix.cpp:92
 msgid "Tcl is not last loaded handler"
 msgstr "Tcl non è l'ultimo gestore caricato"

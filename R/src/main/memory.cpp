@@ -1500,6 +1500,22 @@ HIDDEN void R::R_args_enable_refcnt(SEXP args)
         }
 }
 
+HIDDEN void R::R_try_clear_args_refcnt(SEXP args)
+{
+    /* If args excapes properly its reference count will have been
+       incremented. If it has no references, then it can be reverted
+       to NR and the reference counts on its CAR and CDR can be
+       decremented. */
+    while (args && NO_REFERENCES(args))
+    {
+        SEXP next = CDR(args);
+        DISABLE_REFCNT(args);
+        DECREMENT_REFCNT(CAR(args));
+        DECREMENT_REFCNT(CDR(args));
+        args = next;
+    }
+}
+
 /*******************************************/
 /* Non-sampling memory use profiler
    reports all large vector heap
@@ -1554,7 +1570,7 @@ static void R_EndMemReporting()
         R_MemReportingOutfile = nullptr;
     }
     R_IsMemReporting = false;
-    MemoryBank::setMonitor(0);
+    MemoryBank::setMonitor(nullptr);
     return;
 }
 

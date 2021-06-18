@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
-"Project-Id-Version: tools 4.1.0\n"
-"POT-Creation-Date: 2021-03-18 20:02\n"
+"Project-Id-Version: tools 4.2.0\n"
+"POT-Creation-Date: 2021-06-18 18:06\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -271,6 +271,27 @@ msgstr ""
 #. R/check.R: gettext("'DUP' option is no longer supported and will be ignored.", domain = "R-tools")
 
 msgid "'DUP' option is no longer supported and will be ignored."
+msgstr ""
+
+
+#: R/check.R: 0
+#. R/check.R: gettext("  'LazyData' is specified without a 'data' directory\n", domain = "R-tools")
+
+msgid "'LazyData' is specified without a 'data' directory"
+msgstr ""
+
+
+#: R/check.R: 0
+#. R/check.R: gettext("  'LazyDataCompression' is specified without 'LazyData'\n", domain = "R-tools")
+
+msgid "'LazyDataCompression' is specified without 'LazyData'"
+msgstr ""
+
+
+#: R/check.R: 0
+#. R/check.R: gettext("  'LazyDataCompression' is specified without a 'data' directory\n", domain = "R-tools")
+
+msgid "'LazyDataCompression' is specified without a 'data' directory"
 msgstr ""
 
 
@@ -2307,6 +2328,7 @@ msgstr ""
 #: R/check.R: 0
 #. R/check.R: gettext("Found the following files/directories:", domain = "R-tools")
 #. R/check.R: gettext("Found the following files/directories:", domain = "R-tools")
+#. R/check.R: gettext("Found the following files/directories:", domain = "R-tools")
 
 msgid "Found the following files/directories:"
 msgstr ""
@@ -2665,6 +2687,13 @@ msgstr ""
 #. R/utils.R: gettext("LaTeX errors:", domain = "R-tools")
 
 msgid "LaTeX errors:"
+msgstr ""
+
+
+#: R/check.R: 0
+#. R/check.R: gettextf("  LazyData DB of %.1f MB without LazyDataCompression set\n", fs/1024^2)
+
+msgid "LazyData DB of %.1f MB without LazyDataCompression set"
 msgstr ""
 
 
@@ -3387,6 +3416,9 @@ msgstr ""
 #: R/check.R: 0
 #: R/check.R: 0
 #: R/check.R: 0
+#: R/check.R: 0
+#: R/check.R: 0
+#: R/check.R: 0
 #: R/testing.R: 0
 #: R/testing.R: 0
 #: R/testing.R: 0
@@ -3397,9 +3429,12 @@ msgstr ""
 #: R/testing.R: 0
 #. R/build.R: gettext("OK", domain = "R-tools")
 #. R/build.R: gettext("OK", domain = "R-tools")
-#. R/build.R: gettext("OK")
 #. R/build.R: gettext("OK", domain = "R-tools")
 #. R/build.R: gettext("OK", domain = "R-tools")
+#. R/build.R: gettext("OK", domain = "R-tools")
+#. R/check.R: gettext("OK", domain = "R-tools")
+#. R/check.R: gettext("OK", domain = "R-tools")
+#. R/check.R: gettext("OK", domain = "R-tools")
 #. R/check.R: gettext("OK", domain = "R-tools")
 #. R/check.R: gettext("OK", domain = "R-tools")
 #. R/check.R: gettext("OK", domain = "R-tools")
@@ -3526,6 +3561,13 @@ msgstr ""
 #. R/QC.R: gettext("Old maintainer(s):", domain = "R-tools")
 
 msgid "Old maintainer(s):"
+msgstr ""
+
+
+#: R/build.R: 0
+#. R/build.R: gettextf("Omitted %s from DESCRIPTION\n", paste(sQuote(omit), collapse = ", "), domain = "R-tools")
+
+msgid "Omitted %s from DESCRIPTION"
 msgstr ""
 
 
@@ -3893,13 +3935,6 @@ msgstr ""
 #. R/QC.R: gettext("\nPossibly mis-spelled words in DESCRIPTION:", domain = "R-tools")
 
 msgid "Possibly mis-spelled words in DESCRIPTION:"
-msgstr ""
-
-
-#: R/Rd2HTML.R: 0
-#. R/Rd2HTML.R: warning("Previous alias or file overwritten by alias: ", aname)
-
-msgid "Previous alias or file overwritten by alias:"
 msgstr ""
 
 
@@ -5670,7 +5705,7 @@ msgstr ""
 
 
 #: R/build.R: 0
-#. R/build.R: gettextf("building %s", sQuote(filename))
+#. R/build.R: gettextf("building %s", sQuote(filename), domain = "R-tools")
 
 msgid "building %s"
 msgstr ""
@@ -6119,6 +6154,13 @@ msgstr ""
 #. R/check.R: gettext("checking for missing documentation entries ...", domain = "R-tools")
 
 msgid "checking for missing documentation entries ..."
+msgstr ""
+
+
+#: R/check.R: 0
+#. R/check.R: gettext("checking for new files in some other directories ...", domain = "R-tools")
+
+msgid "checking for new files in some other directories ..."
 msgstr ""
 
 
@@ -7534,7 +7576,7 @@ msgstr ""
 
 
 #: R/build.R: 0
-#. R/build.R: gettextf("preparing %s:", sQuote(pkgname))
+#. R/build.R: gettextf("preparing %s:", sQuote(pkgname), domain = "R-tools")
 
 msgid "preparing %s:"
 msgstr ""
@@ -8229,6 +8271,13 @@ msgstr ""
 #. R/utils.R: stop("unable to write code files")
 
 msgid "unable to write code files"
+msgstr ""
+
+
+#: R/check.R: 0
+#. R/check.R: gettextf("  undocumented value %s of field 'LazyDataCompression'\n", sQuote(lazyz),     domain = "R-tools")
+
+msgid "undocumented value %s of field 'LazyDataCompression'"
 msgstr ""
 
 

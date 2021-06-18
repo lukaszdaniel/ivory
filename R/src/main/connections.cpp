@@ -92,7 +92,6 @@
 #include <Rinterface.h>
 #include <Rconnections.h>
 #include <R_ext/Complex.h>
-//#include <R-ftp-http.h>
 #include <R_ext/RS.h>		/* R_chk_calloc and Free */
 #include <R_ext/Riconv.h>
 //#include <R_ext/Print.h> // REprintf, REvprintf
@@ -5424,6 +5423,8 @@ HIDDEN SEXP do_url(SEXP call, SEXP op, SEXP args, SEXP env)
     url = translateCharFP(STRING_ELT(scmd, 0));
 #endif
 
+    // curl-based url() does not need to know the type. so
+    // only set for use by the wininet method.
 #ifdef _WIN32
     UrlScheme type = HTTPsh;	/* -Wall */
 #endif
@@ -5449,8 +5450,6 @@ HIDDEN SEXP do_url(SEXP call, SEXP op, SEXP args, SEXP env)
     else if (streqln(url, "ftps://", 7))
     {
     // ftps:// is available via most libcurl, only
-    // The internal and wininet methods will create a connection
-    // but refuse to open it so as from R 3.2.0 we switch to libcurl
 #ifdef _WIN32
         type = FTPSsh;
 #endif

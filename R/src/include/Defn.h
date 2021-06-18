@@ -654,6 +654,7 @@ namespace R
     void R_expand_binding_value(SEXP b);
 
     void R_args_enable_refcnt(SEXP args);
+    void R_try_clear_args_refcnt(SEXP args);
 
     /* ../main/devices.cpp, used in memory.cpp, gnuwin32/extra.cpp */
     constexpr int R_MaxDevices = 64;

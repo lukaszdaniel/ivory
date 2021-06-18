@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.4.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2021-03-18 20:02\n"
+"POT-Creation-Date: 2021-06-18 18:06\n"
 "PO-Revision-Date: 2015-01-17 15:15+0100\n"
 "Last-Translator: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
 "Language-Team: Chinese\n"
@@ -231,6 +231,21 @@ msgstr "这看起来好象是捆绑软件--已经不存在了"
 #. R/check.R: gettext("'DUP' option is no longer supported and will be ignored.", domain = "R-tools")
 #: R/check.R:0
 msgid "'DUP' option is no longer supported and will be ignored."
+msgstr ""
+
+#. R/check.R: gettext("  'LazyData' is specified without a 'data' directory\n", domain = "R-tools")
+#: R/check.R:0
+msgid "'LazyData' is specified without a 'data' directory"
+msgstr ""
+
+#. R/check.R: gettext("  'LazyDataCompression' is specified without 'LazyData'\n", domain = "R-tools")
+#: R/check.R:0
+msgid "'LazyDataCompression' is specified without 'LazyData'"
+msgstr ""
+
+#. R/check.R: gettext("  'LazyDataCompression' is specified without a 'data' directory\n", domain = "R-tools")
+#: R/check.R:0
+msgid "'LazyDataCompression' is specified without a 'data' directory"
 msgstr ""
 
 #. R/QC.R: gettextf("'LinkingTo' field is unused: package has no 'src' directory", domain = "R-tools")
@@ -1926,6 +1941,7 @@ msgstr "在下面的Rd例子文件中遇到了有可能是全局的T或F值:"
 
 #. R/check.R: gettext("Found the following files/directories:", domain = "R-tools")
 #. R/check.R: gettext("Found the following files/directories:", domain = "R-tools")
+#. R/check.R: gettext("Found the following files/directories:", domain = "R-tools")
 #: R/check.R:0
 #, fuzzy
 msgid "Found the following files/directories:"
@@ -2237,6 +2253,11 @@ msgstr ""
 #. R/utils.R: gettext("LaTeX errors:", domain = "R-tools")
 #: R/utils.R:0
 msgid "LaTeX errors:"
+msgstr ""
+
+#. R/check.R: gettextf("  LazyData DB of %.1f MB without LazyDataCompression set\n", fs/1024^2)
+#: R/check.R:0
+msgid "LazyData DB of %.1f MB without LazyDataCompression set"
 msgstr ""
 
 #. R/QC.R: gettext("License components which are templates and need '+ file LICENSE':", domain = "R-tools")
@@ -2763,9 +2784,12 @@ msgstr ""
 
 #. R/build.R: gettext("OK", domain = "R-tools")
 #. R/build.R: gettext("OK", domain = "R-tools")
-#. R/build.R: gettext("OK")
 #. R/build.R: gettext("OK", domain = "R-tools")
 #. R/build.R: gettext("OK", domain = "R-tools")
+#. R/build.R: gettext("OK", domain = "R-tools")
+#. R/check.R: gettext("OK", domain = "R-tools")
+#. R/check.R: gettext("OK", domain = "R-tools")
+#. R/check.R: gettext("OK", domain = "R-tools")
 #. R/check.R: gettext("OK", domain = "R-tools")
 #. R/check.R: gettext("OK", domain = "R-tools")
 #. R/check.R: gettext("OK", domain = "R-tools")
@@ -2881,6 +2905,11 @@ msgstr ""
 #. R/QC.R: gettext("Old maintainer(s):", domain = "R-tools")
 #: R/QC.R:0
 msgid "Old maintainer(s):"
+msgstr ""
+
+#. R/build.R: gettextf("Omitted %s from DESCRIPTION\n", paste(sQuote(omit), collapse = ", "), domain = "R-tools")
+#: R/build.R:0
+msgid "Omitted %s from DESCRIPTION"
 msgstr ""
 
 #. R/QC.R: gettextf("One or more packages in %s depend on this package.", x$all_depends, domain = "R-tools")
@@ -3193,11 +3222,6 @@ msgstr ""
 #. R/QC.R: gettext("\nPossibly mis-spelled words in DESCRIPTION:", domain = "R-tools")
 #: R/QC.R:0
 msgid "Possibly mis-spelled words in DESCRIPTION:"
-msgstr ""
-
-#. R/Rd2HTML.R: warning("Previous alias or file overwritten by alias: ", aname)
-#: R/Rd2HTML.R:0
-msgid "Previous alias or file overwritten by alias:"
 msgstr ""
 
 #. R/QC.R: gettext("Problems when formatting CITATION entries:", domain = "R-tools")
@@ -4668,7 +4692,7 @@ msgstr "程辑包安装"
 msgid "bibtype %s is not implemented"
 msgstr ""
 
-#. R/build.R: gettextf("building %s", sQuote(filename))
+#. R/build.R: gettextf("building %s", sQuote(filename), domain = "R-tools")
 #: R/build.R:0
 #, fuzzy
 msgid "building %s"
@@ -5025,6 +5049,12 @@ msgstr ""
 #: R/check.R:0
 msgid "checking for missing documentation entries ..."
 msgstr ""
+
+#. R/check.R: gettext("checking for new files in some other directories ...", domain = "R-tools")
+#: R/check.R:0
+#, fuzzy
+msgid "checking for new files in some other directories ..."
+msgstr "安装至"
 
 #. R/check.R: gettext("checking for non-standard things in the check directory ...", domain = "R-tools")
 #: R/check.R:0
@@ -6152,7 +6182,7 @@ msgstr ""
 msgid "parsing file %s"
 msgstr "文名分析'%s'"
 
-#. R/build.R: gettextf("preparing %s:", sQuote(pkgname))
+#. R/build.R: gettextf("preparing %s:", sQuote(pkgname), domain = "R-tools")
 #: R/build.R:0
 #, fuzzy
 msgid "preparing %s:"
@@ -6718,6 +6748,11 @@ msgstr "无法建立"
 #: R/QC.R:0 R/admin.R:0 R/utils.R:0
 msgid "unable to write code files"
 msgstr "无法写编码文件"
+
+#. R/check.R: gettextf("  undocumented value %s of field 'LazyDataCompression'\n", sQuote(lazyz),     domain = "R-tools")
+#: R/check.R:0
+msgid "undocumented value %s of field 'LazyDataCompression'"
+msgstr ""
 
 #. R/recode.R: stop("unimplemented encoding")
 #: R/recode.R:0

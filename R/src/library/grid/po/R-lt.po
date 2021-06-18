@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: grid 4.1.0\n"
-"POT-Creation-Date: 2020-07-23 12:02\n"
+"POT-Creation-Date: 2021-06-18 18:04\n"
 "PO-Revision-Date: 2020-12-09 13:08+0200\n"
 "Last-Translator: r.zakauskas@gmail.com;gabriele.dauksaite@gmail.com\n"
 "Language-Team: Lithuanian\n"
@@ -489,8 +489,8 @@ msgstr ""
 msgid "how did we get here?"
 msgstr "kaip mes čia atėjome?"
 
-#. R/unit.R: stop("index must be of length 1", call = FALSE)
-#. R/unit.R: stop("index must be of length 1", call = FALSE)
+#. R/unit.R: stop("index must be of length 1", call. = FALSE)
+#. R/unit.R: stop("index must be of length 1", call. = FALSE)
 #: R/unit.R:0
 msgid "index must be of length 1"
 msgstr "indeksas turi būti 1 ilgio"
@@ -779,7 +779,7 @@ msgstr "tik peržiūros sritis leidžiama 'vpStack'"
 msgid "operator '%s' not meaningful for units"
 msgstr "operatorius '%s' nėra reikšmingas vienetams"
 
-#. R/unit.R: stop("replacement must be of length 1", call = FALSE)
+#. R/unit.R: stop("replacement must be of length 1", call. = FALSE)
 #: R/unit.R:0
 msgid "replacement must be of length 1"
 msgstr "pakeitimas turi būti 1 ilgio"

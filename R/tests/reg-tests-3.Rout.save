@@ -1,9 +1,9 @@
 
-Ivory Under development (unstable) (2021-05-13 r1532) -- "Internationalized Version of R"
+Ivory Under development (unstable) (2021-06-06 r1538) -- "Internationalized Version of R"
 Copyright (C) 2013-2021 Lukasz Daniel (lukasz.daniel@gmail.com)
 See README-IVORY file for details.
 
-R Under development (unstable) (2021-05-13 r80398) -- "Unsuffered Consequences"
+R Under development (unstable) (2021-06-06 r80508) -- "Unsuffered Consequences"
 Copyright (C) 2021 The R Foundation for Statistical Computing
 Platform: x86_64-pc-linux-gnu (64-bit)
 
@@ -948,8 +948,8 @@ Class "standardGeneric" for generic "chol2inv" defined from package 'base'
 
 function (x, ...) 
 standardGeneric("chol2inv")
-<bytecode: 0x5593d51be9c0>
-<environment: 0x5593d51b33c0>
+<bytecode: 0x5556be7c3b40>
+<environment: 0x5556be7b8540>
 Methods may be defined for arguments: x
 Use 'showMethods("chol2inv")' for currently available ones.
 > 

@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: utils 4.1.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-03-25 22:09+0100\n"
+"POT-Creation-Date: 2021-06-18 18:08+0200\n"
 "PO-Revision-Date: 2020-12-08 12:22+0200\n"
 "Last-Translator: r.zakauskas@gmail.com;gabriele.dauksaite@gmail.com\n"
 "Language-Team: Lithuanian\n"
@@ -155,48 +155,53 @@ msgstr "'%s' yra trūkstamų reikšmių"
 msgid "size must be finite and >= 0"
 msgstr ""
 
-#: utils.cpp:79
+#: utils.cpp:77
+#, fuzzy
+msgid "argument 'class' must be a character string"
+msgstr "'text' turi būti simbolių eilutė"
+
+#: utils.cpp:81
+#, c-format
+msgid "character class \"%s\" is invalid"
+msgstr ""
+
+#: utils.cpp:88
 #, fuzzy
 msgid "argument 'x' must be a length-1 character vector"
 msgstr "'text' turi būti simbolių eilutė"
 
-#: utils.cpp:81
+#: utils.cpp:91
 msgid "argument 'x' must be UTF-8 encoded (including ASCII)"
 msgstr ""
 
-#: utils.cpp:93 utils.cpp:122 windows/util.cpp:408 windows/util.cpp:417
+#: utils.cpp:118
+#, fuzzy
+msgid "'charClass()' function is not available on this platform"
+msgstr "nsl() šioje platformoje nepalaikomas"
+
+#: utils.cpp:130 windows/util.cpp:408 windows/util.cpp:417
 #: windows/widgets.cpp:188 windows/widgets.cpp:194 windows/widgets.cpp:256
 #: windows/widgets.cpp:262
 #, fuzzy, c-format
 msgid "'%s' argument must be a character string"
 msgstr "'text' turi būti simbolių eilutė"
 
-#: utils.cpp:96
-#, c-format
-msgid "character class \"%s\" is invalid"
-msgstr ""
-
-#: utils.cpp:110
-#, fuzzy
-msgid "'charClass()' function is not available on this platform"
-msgstr "nsl() šioje platformoje nepalaikomas"
-
-#: utils.cpp:145
+#: utils.cpp:153
 #, fuzzy
 msgid "'hostname' argument must be a character vector of length 1"
 msgstr "'hostname' turi būti 1 ilgio simbolių vektorius"
 
-#: utils.cpp:151
+#: utils.cpp:159
 #, fuzzy, c-format
 msgid "'nsl()' was unable to resolve host '%s'"
 msgstr "nsl() nepavyko išspręsti pagrindinio kompiuterio '%s'"
 
-#: utils.cpp:158
+#: utils.cpp:166
 #, fuzzy
 msgid "unknown format returned by 'gethostbyname()'"
 msgstr "nežinomas formatas, kurį grąžino 'gethostbyname'"
 
-#: utils.cpp:167
+#: utils.cpp:175
 #, fuzzy
 msgid "'nsl()' is not supported on this platform"
 msgstr "nsl() šioje platformoje nepalaikomas"

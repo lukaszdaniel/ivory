@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
-"Project-Id-Version: methods 4.1.0\n"
-"POT-Creation-Date: 2021-03-18 20:00\n"
+"Project-Id-Version: methods 4.2.0\n"
+"POT-Creation-Date: 2021-06-18 18:05\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -1204,13 +1204,6 @@ msgstr ""
 #. R/refClass.R: gettext("Prototypical reference class object", domain = "R-methods")
 
 msgid "Prototypical reference class object"
-msgstr ""
-
-
-#: R/methodsTable.R: 0
-#. R/methodsTable.R: stop(gettextf("invalid or unset methods table in generic function %s", sQuote(fdef@generic)),     damain = "R-methods")
-
-msgid "R-methods"
 msgstr ""
 
 

@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 3.5.1\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-03-25 22:08+0100\n"
+"POT-Creation-Date: 2021-06-18 18:07+0200\n"
 "PO-Revision-Date: 2018-09-16 23:38+0800\n"
 "Last-Translator: Wei-Lun Chao <bluebat@member.fsf.org>\n"
 "Language-Team: Chinese (traditional) <zh-l10n@linux.org.tw>\n"
@@ -63,104 +63,104 @@ msgstr "不明的格式設定 '%s'"
 msgid "at most one asterisk '*' is supported in each conversion specification"
 msgstr "每一個轉換設定最多只支援一個星 '*'"
 
-#: gramLatex.cpp:2441 gramRd.cpp:3800
+#: gramLatex.cpp:2444 gramRd.cpp:3802
 #, c-format
 msgid "unable to allocate buffer for long string at line %d"
 msgstr "無法為 %d 列的長字串指派緩衝區"
 
-#: gramLatex.cpp:2637 gramRd.cpp:4294
+#: gramLatex.cpp:2640 gramRd.cpp:4296
 #, fuzzy
 msgid "unable to allocate in PushState"
 msgstr "無法為 %d 列的長字串指派緩衝區"
 
-#: gramLatex.cpp:2680 gramRd.cpp:4346 gramRd.cpp:4352
+#: gramLatex.cpp:2683 gramRd.cpp:4348 gramRd.cpp:4354
 #, c-format
 msgid "invalid '%s' value"
 msgstr "'%s' 值無效"
 
-#: gramRd.cpp:2416 gramRd.cpp:2419
+#: gramRd.cpp:2418 gramRd.cpp:2421
 #, c-format
 msgid "bad markup (extra space?) at %s:%d:%d"
 msgstr "壞標記(額外的空間？)在 %s：%d：%d"
 
-#: gramRd.cpp:2944
+#: gramRd.cpp:2946
 #, c-format
 msgid "Macro '%s' previously defined."
 msgstr "'%s' 巨集之前已經定義了"
 
-#: gramRd.cpp:2954
+#: gramRd.cpp:2956
 #, c-format
 msgid "At most 4 arguments are allowed for user defined macros."
 msgstr "使用者定義的巨集最多只允許四個引數"
 
-#: gramRd.cpp:2996
+#: gramRd.cpp:2998
 #, c-format
 msgid "No macro definition for '%s'."
 msgstr "'%s' 巨集的定義沒有。"
 
-#: gramRd.cpp:3013 gramRd.cpp:3029
+#: gramRd.cpp:3015 gramRd.cpp:3031
 msgid "internal error: invalid argument to xxusermacro"
 msgstr ""
 
-#: gramRd.cpp:3058
+#: gramRd.cpp:3060
 #, fuzzy, c-format
 msgid "Not enough arguments passed to user macro '%s'"
 msgstr "使用者定義的巨集最多只允許四個引數"
 
-#: gramRd.cpp:3117
+#: gramRd.cpp:3119
 msgid "internal error: inconsistent argument count"
 msgstr ""
 
-#: gramRd.cpp:3198 gramRd.cpp:3202
+#: gramRd.cpp:3200 gramRd.cpp:3204
 #, c-format
 msgid "newline within quoted string at %s:%d"
 msgstr "出現了換列內引號的字串在 %s:%d"
 
-#: gramRd.cpp:3225
+#: gramRd.cpp:3227
 #, c-format
 msgid "unable to allocate buffer for long macro at line %d"
 msgstr "無法為在第 %d 列的長巨集指派緩衝區"
 
-#: gramRd.cpp:3257
+#: gramRd.cpp:3259
 msgid "macros nested too deeply: infinite recursion?"
 msgstr "巨集巢狀過深：無限遞迴？"
 
-#: gramRd.cpp:3662
+#: gramRd.cpp:3664
 #, c-format
 msgid "Unable to find macro %s"
 msgstr "找不到巨集 %s "
 
-#: gramRd.cpp:3860
+#: gramRd.cpp:3862
 #, c-format
 msgid "Unexpected end of input (in %c quoted string opened at %s:%d:%d)"
 msgstr "意外結束輸入(在 %c 引號的字串於 %s:%d:%d)"
 
-#: gramRd.cpp:4359
+#: gramRd.cpp:4361
 msgid "cannot open the connection"
 msgstr "打不開鏈結"
 
-#: gramRd.cpp:4364
+#: gramRd.cpp:4366
 msgid "cannot read from this connection"
 msgstr "無法從這個鏈結讀取"
 
-#: gramRd.cpp:4372
+#: gramRd.cpp:4374
 msgid "invalid Rd file"
 msgstr "Rd 檔案無效"
 
-#: gramRd.cpp:4391
+#: gramRd.cpp:4393
 msgid "'deparseRd' only supports deparsing character elements"
 msgstr "'deparseRd' 只支援反解析字元元素"
 
-#: gramRd.cpp:4394
+#: gramRd.cpp:4396
 msgid "bad state"
 msgstr "狀態不好"
 
-#: gramRd.cpp:4407
+#: gramRd.cpp:4409
 #, c-format
 msgid "bad text mode %d in 'deparseRd'"
 msgstr "'deparseRd' 裡的文字模式 %d 無效"
 
-#: http.cpp:32
+#: http.cpp:33
 msgid "invalid bind address specification"
 msgstr "繫結位址規範無效"
 
@@ -181,30 +181,30 @@ msgstr ""
 msgid "non-character argument"
 msgstr ""
 
-#: signals.cpp:43 signals.cpp:141
+#: signals.cpp:44 signals.cpp:142
 #, fuzzy, c-format
 msgid "'%s' function is not supported on this platform"
 msgstr "這個平臺不支援 psnice()"
 
-#: text.cpp:75
+#: text.cpp:76
 msgid "invalid argument type"
 msgstr "引數種類無效"
 
-#: text.cpp:164 text.cpp:200
+#: text.cpp:165 text.cpp:201
 #, fuzzy
 msgid "invalid input"
 msgstr "Rd 檔案無效"
 
-#: text.cpp:166
+#: text.cpp:167
 #, c-format
 msgid "'%s' argument must be TRUE or FALSE"
 msgstr ""
 
-#: text.cpp:231 text.cpp:253
+#: text.cpp:232 text.cpp:254
 msgid "out of memory"
 msgstr "記憶體不足"
 
-#: text.cpp:273 text.cpp:275
+#: text.cpp:274 text.cpp:276
 msgid "first arg must be a single character string"
 msgstr ""
 

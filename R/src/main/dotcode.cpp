@@ -578,6 +578,9 @@ HIDDEN SEXP do_External(SEXP call, SEXP op, SEXP args, SEXP env)
 	R_ExternalRoutine fun = (R_ExternalRoutine) ofun;
 	retval = fun(args);
     }
+
+    R_try_clear_args_refcnt(args);
+
     vmaxset(vmax);
     return check_retval(call, retval);
 }

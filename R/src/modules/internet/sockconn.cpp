@@ -31,18 +31,8 @@
 #include <RContext.h>
 #include <Defn.h>
 #include <Rconnections.h>
-//#include <R-ftp-http.h>
 #include "sock.h"
 #include <cerrno>
-
-#ifdef _WIN32
-# ifndef EINTR
-#  define EINTR                   WSAEINTR
-# endif
-# ifndef EWOULDBLOCK
-#  define EWOULDBLOCK             WSAEWOULDBLOCK
-# endif
-#endif
 
 static void listencleanup(void *data)
 {
@@ -145,10 +135,11 @@ static ssize_t sock_read_helper(Rconnection con, void *ptr, size_t size)
 	    do
 		res = R_SockRead(thisconn->fd, thisconn->inbuf, 4096,
 				 con->blocking, thisconn->timeout);
-	    while (-res == EINTR);
 #ifdef _WIN32
-	    if (! con->blocking && -res == EAGAIN) {
+	    while (-res == WSAEINTR);
+	    if (! con->blocking && -res == WSAEWOULDBLOCK) {
 #else
+	    while (-res == EINTR);
 	    if (! con->blocking && (-res == EAGAIN || -res == EWOULDBLOCK)) {
 #endif
 		con->incomplete = TRUE;

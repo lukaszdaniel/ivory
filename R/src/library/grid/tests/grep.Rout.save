@@ -1,7 +1,14 @@
 
-R Under development (unstable) (2021-05-27 r80400) -- "Unsuffered Consequences"
+Ivory Under development (unstable) (2021-06-06 r1538) -- "Internationalized Version of R"
+Copyright (C) 2013-2021 Lukasz Daniel (lukasz.daniel@gmail.com)
+See README-IVORY file for details.
+
+R Under development (unstable) (2021-06-06 r80508) -- "Unsuffered Consequences"
 Copyright (C) 2021 The R Foundation for Statistical Computing
 Platform: x86_64-pc-linux-gnu (64-bit)
+
+Ivory is not part of the R project, so please do not report bugs
+via r-bugs or the R website - instead refer to the author.
 
 R is free software and comes with ABSOLUTELY NO WARRANTY.
 You are welcome to redistribute it under certain conditions.
@@ -97,4 +104,4 @@ NULL
 > 
 > proc.time()
    user  system elapsed 
-  0.328   0.020   0.346 
+  1.329   0.035   1.355 

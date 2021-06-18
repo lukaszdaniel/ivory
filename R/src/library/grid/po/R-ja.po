@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.3.0 \n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2020-07-23 12:02\n"
+"POT-Creation-Date: 2021-06-18 18:04\n"
 "PO-Revision-Date: 2012-02-26 14:01+0200 \n"
 "Last-Translator: Shigeru Mase <maseshigeru@gmail.com> \n"
 "Language-Team: RjpWiki Message Translation Team <mokada@md.tsukuba.ac.jp> \n"
@@ -524,8 +524,8 @@ msgstr ""
 msgid "how did we get here?"
 msgstr " どうしてこうなったのかな？ "
 
-#. R/unit.R: stop("index must be of length 1", call = FALSE)
-#. R/unit.R: stop("index must be of length 1", call = FALSE)
+#. R/unit.R: stop("index must be of length 1", call. = FALSE)
+#. R/unit.R: stop("index must be of length 1", call. = FALSE)
 #: R/unit.R:0
 #, fuzzy
 msgid "index must be of length 1"
@@ -850,7 +850,7 @@ msgstr " 'vpStack' 中には viewport のみが許されます "
 msgid "operator '%s' not meaningful for units"
 msgstr " 演算子 '%s' は単位(units)として意味をなしません "
 
-#. R/unit.R: stop("replacement must be of length 1", call = FALSE)
+#. R/unit.R: stop("replacement must be of length 1", call. = FALSE)
 #: R/unit.R:0
 #, fuzzy
 msgid "replacement must be of length 1"

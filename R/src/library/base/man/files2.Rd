@@ -1,6 +1,6 @@
 % File src/library/base/man/files.Rd
 % Part of the R package, https://www.R-project.org
-% Copyright 1995-2019 R Core Team
+% Copyright 1995-2021 R Core Team
 % Distributed under GPL 2 or later
 
 \name{files2}
@@ -37,6 +37,9 @@ Sys.umask(mode = NA)
     \code{umask} setting?}
 }
 \details{
+  \code{dir.exists} checks that the paths exist (in the same sense as
+  \code{\link{file.exists}}) and are directories.
+
   \code{dir.create} creates the last element of the path, unless
   \code{recursive = TRUE}.  Trailing path separators are discarded.
 #ifdef windows
@@ -102,13 +105,13 @@ Sys.umask(mode = NA)
   (although their documentation is often written assuming a POSIX file
   system).  So treat documentation cautiously if you are using, say, a
   FAT/FAT32 or network-mounted file system.
-
+  
   See \link{files} for how file paths with marked encodings are interpreted.  
 }
 \value{
   \code{dir.exists} returns a logical vector of \code{TRUE} or
   \code{FALSE} values (without names).
-
+  
   \code{dir.create} and \code{Sys.chmod} return invisibly a logical vector
   indicating if the operation succeeded for each of the files attempted.
   Using a missing value for a path name will always be regarded as a

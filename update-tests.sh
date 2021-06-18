@@ -84,6 +84,7 @@ cd ..
 `$cmd stats.Rcheck/tests/bandwidth.Rout	../src/library/stats/tests/bandwidth.Rout.save`
 
 `$cmd grid.Rcheck/tests/testls.Rout	../src/library/grid/tests/testls.Rout.save`
+`$cmd grid.Rcheck/tests/grep.Rout	../src/library/grid/tests/grep.Rout.save`
 
 
 `$cmd parallel.Rcheck/tests/multicore2.Rout	../src/library/parallel/tests/multicore2.Rout.save`

@@ -6,7 +6,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: R-grid 3.6.3\n"
-"POT-Creation-Date: 2020-07-23 12:02\n"
+"POT-Creation-Date: 2021-06-18 18:04\n"
 "PO-Revision-Date: \n"
 "Last-Translator: Daniele Medri <dmedri@gmail.com>\n"
 "Language-Team: Italian https://github.com/dmedri/R-italian-lang\n"
@@ -494,8 +494,8 @@ msgstr ""
 msgid "how did we get here?"
 msgstr "come siamo arrivati qui?"
 
-#. R/unit.R: stop("index must be of length 1", call = FALSE)
-#. R/unit.R: stop("index must be of length 1", call = FALSE)
+#. R/unit.R: stop("index must be of length 1", call. = FALSE)
+#. R/unit.R: stop("index must be of length 1", call. = FALSE)
 #: R/unit.R:0
 #, fuzzy
 msgid "index must be of length 1"
@@ -787,7 +787,7 @@ msgstr "solo i viewport sono ammessi in 'vpStack'"
 msgid "operator '%s' not meaningful for units"
 msgstr "l'operatore '%s' non è significativo per le unità"
 
-#. R/unit.R: stop("replacement must be of length 1", call = FALSE)
+#. R/unit.R: stop("replacement must be of length 1", call. = FALSE)
 #: R/unit.R:0
 #, fuzzy
 msgid "replacement must be of length 1"
