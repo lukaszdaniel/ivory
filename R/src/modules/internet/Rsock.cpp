@@ -162,22 +162,8 @@ void in_Rsockwrite(int *sockp, char **buf, int *start, int *end, int *len)
 
 /* --------- for use in socket connections ---------- */
 
-//#include <R-ftp-http.h>
-
 #ifdef _WIN32
 #include <io.h>
-# ifndef ECONNABORTED
-#  define ECONNABORTED            WSAECONNABORTED
-# endif
-# ifndef EINPROGRESS
-#  define EINPROGRESS             WSAEINPROGRESS
-# endif
-# ifndef EINTR
-#  define EINTR                   WSAEINTR
-# endif
-# ifndef EWOULDBLOCK
-#  define EWOULDBLOCK             WSAEWOULDBLOCK
-# endif
 #else
 #include <netdb.h>
 #include <sys/socket.h>
@@ -227,8 +213,8 @@ static void set_timeval(struct timeval *tv, int timeout)
 {
 #ifdef Unix
     if(R_wait_usec > 0) {
-	tv->tv_sec = 0;
-	tv->tv_usec = R_wait_usec;
+	tv->tv_sec = R_wait_usec / 1000000;
+	tv->tv_usec = (suseconds_t)(R_wait_usec - tv->tv_sec * 1000000);
     } else {
 	tv->tv_sec = timeout;
 	tv->tv_usec = 0;
@@ -312,8 +298,8 @@ int R_SocketWaitMultiple(int nsock, int *insockfd, int *ready, int *write,
 		delta = R_wait_usec;
 	    else
 		delta = (int)ceil(1e6 * (mytimeout - used));
-	    tv.tv_sec = 0;
-	    tv.tv_usec = delta;
+	    tv.tv_sec = delta / 1000000;
+	    tv.tv_usec = (suseconds_t)(delta - tv.tv_sec * 1000000);
 	} else if (mytimeout >= 0) {
 	    tv.tv_sec = (int)(mytimeout - used);
 	    tv.tv_usec = (int)ceil(1e6 * (mytimeout - used - tv.tv_sec));
@@ -329,7 +315,7 @@ int R_SocketWaitMultiple(int nsock, int *insockfd, int *ready, int *write,
 	    tv.tv_sec = mytimeout - used;
 	    tv.tv_usec = ceil(1e6 * (mytimeout - used - tv.tv_sec));
 	} else {  /* always poll occasionally--not really necessary */
-	    tv.tv_sec = timeout;
+	    tv.tv_sec = 60;
 	    tv.tv_usec = 0;
 	}
 #endif
@@ -426,10 +412,15 @@ int R_SockConnect(int port, char *host, int timeout)
                                sizeof(server)))) {
 
 	switch (R_socket_errno()) {
+#ifndef _WIN32
 	case EINPROGRESS:
 	case EWOULDBLOCK:
-#if !defined(_WIN32) && EAGAIN != EWOULDBLOCK
+# if EAGAIN != EWOULDBLOCK
 	case EAGAIN:
+# endif
+#else
+	case WSAEINPROGRESS:
+	case WSAEWOULDBLOCK:
 #endif
 	    break;
 	default:
@@ -529,9 +520,13 @@ ssize_t R_SockRead(int sockp, void *buf, size_t len, int blocking, int timeout)
 	res = recv(sockp, buf, len, 0);
 	if (R_socket_error((int)res)) {
 	    switch(R_socket_errno()) {
+#ifndef _WIN32
 	    case EWOULDBLOCK:
-#if !defined(Win32) && EAGAIN != EWOULDBLOCK
+# if EAGAIN != EWOULDBLOCK
 	    case EAGAIN:
+# endif
+#else
+	    case WSAEWOULDBLOCK:
 #endif
 		if (blocking)
 		    /* spurious readability, can happen on Linux */
@@ -606,14 +601,18 @@ int R_SockListen(int sockp, char *buf, int len, int timeout)
 	    int s = Sock_listen(sockp, buf, len, &perr);
 	    if (s == -1) {
 		switch(perr.error) {
+#ifndef _WIN32
 		case EINPROGRESS:
 		case EWOULDBLOCK:
 		case ECONNABORTED:
-#ifndef Win32
 # if EAGAIN != EWOULDBLOCK
 		case EAGAIN:
 # endif
 		case EPROTO:
+#else
+		case WSAEINPROGRESS:
+		case WSAEWOULDBLOCK:
+		case WSAECONNABORTED:
 #endif
 		    continue;
 		default:
@@ -653,9 +652,13 @@ ssize_t R_SockWrite(int sockp, const void *buf, size_t len, int timeout)
 	res = send(sockp, buf, len, 0);
 	if (R_socket_error((int)res)) {
 	    switch(R_socket_errno()) {
+#ifndef _WIN32
 	    case EWOULDBLOCK:
-#if !defined(_WIN32) && EAGAIN != EWOULDBLOCK
+# if EAGAIN != EWOULDBLOCK
 	    case EAGAIN:
+# endif
+#else
+	    case WSAEWOULDBLOCK:
 #endif
 		/* Spurious writability to the socket, should not happen. */
 		continue;

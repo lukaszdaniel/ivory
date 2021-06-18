@@ -2267,7 +2267,7 @@ DLL.
 There is some support for packages which wish to use
 OpenMP@footnote{@uref{https://www.openmp.org/},
 @uref{https://en.wikipedia.org/wiki/OpenMP},
-@uref{https://hpc.llnl.gov/openmp-tutorial}}.  The
+@uref{https://hpc.llnl.gov/training/tutorials/openmp-tutorial}}.  The
 @command{make} macros
 
 @example
@@ -4856,8 +4856,8 @@ However, some Linux distributions micro-package, so locales defined by
 @item
 Avoid spaces in file names, not least as they can cause difficulties for
 external tools.  An example was a package with a @CRANpkg{knitr}
-vignette that used spaces in plot names: this caused some versions of
-@command{pandoc} to fail with a baffling error message.
+vignette that used spaces in plot names: this caused some older versions
+of @command{pandoc} to fail with a baffling error message.
 @c msmtools in June 2016 failed with pandoc 1.12 but not 1.16.
 
 Non-ASCII filenames can also cause problems (particularly in non-UTF-8
@@ -4950,12 +4950,12 @@ portable, annoyingly so if this is not declared in the
 @command{pandoc}, which is only available for a very limited range of
 platforms (and has onerous requirements to install from source) and has
 capabilities@footnote{For example, the ability to handle @samp{https://}
-URLs, which even the build in some major Linux distributions in 2020 did
-not possess (and some of those builds were of far-from-current
-versions).} that vary by build but are not documented.  Some recent
-versions of @command{pandoc} for macOS do not work on @R{}'s target of
-High Sierra (and this too was undocumented): at the time of writing the
-latest that did was @samp{2.7.3}.
+URLs.} that vary by build but are not documented.  Several recent
+versions of @command{pandoc} for macOS did not work on @R{}'s target of
+High Sierra (and this too was undocumented): at the time of writing both
+@samp{2.7.3} and @samp{2.14.0.1} did.  (Currently @command{pandoc} is
+only available for Intel macOS but that build works well enough on
+@cputype{arm64} machines.)
 
 Usage of external commands should always be conditional on a test for
 presence (perhaps using @code{Sys.which}), as well as declared in the
@@ -8308,7 +8308,7 @@ Developers have recommended @command{sample} (or @command{Sampler.app},
 which is a GUI version), @command{Shark} (in version of @code{Xcode}
 up to those for Snow Leopard), and @command{Instruments} (part of
 @code{Xcode}, see
-@uref{https://help.apple.com/instruments/mac/current}).
+@uref{https://help.apple.com/instruments/mac/current/}).
 
 
 @node Debugging, System and foreign language interfaces, Tidying and profiling R code, Top
@@ -9252,7 +9252,7 @@ analysis, it does not rely on code paths being exercised.
 See
 @uref{https://gcc.gnu.org/onlinedocs/gcc-10.1.0/gcc/Static-Analyzer-Options.html}
 (or the documentation for your version of @command{gcc} if later) and
-@uref{https://developers.redhat.com/blog/2020/03/26/static-analysis-in-gcc-10/}
+@uref{https://developers.redhat.com/blog/2020/03/26/static-analysis-in-gcc-10}
 
 @node Using `Dr. Memory', Fortran array bounds checking, Other analyses with `gcc', Checking memory access
 @subsection Using `Dr. Memory'

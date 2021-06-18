@@ -128,7 +128,7 @@ b131db6dd2216719942b771909097ae6 *vignettes/sparseModels.Rnw
 c39a26dfe7ccaafd044e88468155b153 *vignettes/Introduction.Rnw
 5a9e99ce004c325e01fb2773e58052f5 *vignettes/Design-issues.Rnw
 675a3a48a357cb2ee05ed285387b3e85 *ChangeLog
-03e48f22c4d304634071cb3bb140db10 *DESCRIPTION
+9d880b50fd2ee286a4878c49175a695c *DESCRIPTION
 de8f6fb47542a8ae6bb240a7721a58c1 *po/R-fr.po
 6befbddffa6d4966654ed96911e6cd79 *po/R-ko.po
 064d8f1c4180b09038add0b4c603d17e *po/R-de.po
@@ -149,7 +149,7 @@ d30da99155bef6e3de4810ff6691b405 *TODO
 384ad19fd9e35dfa867ff36dc6d502f4 *inst/test-tools.R
 ac3697580885d17a062ce39df01338ad *inst/Doxyfile
 0e2f00b6677a27002041d9dc92a6fab2 *inst/test-tools-Matrix.R
-7f7151d944032e2e4fd3f36583090a8c *inst/NEWS.Rd
+c65e0cf1ee06efebe5ed044ff5205035 *inst/NEWS.Rd
 499b4933eb250df9d4218683c10d65cf *inst/test-tools-1.R
 599946ccc3c785072deb526531c04bff *inst/po/fr/LC_MESSAGES/Matrix.mo
 49cb70f0c46f44d849965230f969a0cd *inst/po/fr/LC_MESSAGES/R-Matrix.mo
@@ -166,7 +166,7 @@ d7ddf54f0c4231c3b7a37a5a25c2c3f3 *inst/po/pl/LC_MESSAGES/Matrix.mo
 7328e375b8d267bffd4e43e7f973aa5f *inst/po/ko/LC_MESSAGES/Matrix.mo
 e584dab6f80bb9826b81c572e4183331 *inst/po/ko/LC_MESSAGES/R-Matrix.mo
 8734f0b040c6292983d273d4251d250a *inst/Copyrights
-56cdeb6242b53d971bbef833883a1629 *inst/doc/sparseModels.pdf
+0e84e5586858a5fcacd381a2af52c8ba *inst/doc/sparseModels.pdf
 588c7243a45ab43dd45a0d856423e89d *inst/doc/Intro2Matrix.R
 1a59a7d3257a30349a5e10285ea05a69 *inst/doc/Introduction.R
 09e13507b9832a30aa92e8aff0dc96a0 *inst/doc/Comparisons.Rnw
@@ -178,15 +178,15 @@ d75882d4bb768ba0ea352291652daaee *inst/doc/SuiteSparse/SPQR.txt
 20ced7019f5a55639aa1af1a2dfa1057 *inst/doc/SuiteSparse/AMD.txt
 facc21d5bf9bcbf3e57a8b3c7bd1caa0 *inst/doc/SuiteSparse/CHOLMOD.txt
 6bb038dd0a9c26fa751c1fe084328a1f *inst/doc/Intro2Matrix.Rnw
-d0abb76817e5695ce5bc2a8fc1895e67 *inst/doc/Intro2Matrix.pdf
+c88699e34f8bc88a05d29fc999c73493 *inst/doc/Intro2Matrix.pdf
 b131db6dd2216719942b771909097ae6 *inst/doc/sparseModels.Rnw
 2812fdc46495ac74ebdc299860a197bc *inst/doc/Design-issues.R
 fd17dfab29a894aa9d33ff5fa75e3967 *inst/doc/sparseModels.R
-27bc05d7551fb832ddd82c4c52097160 *inst/doc/Comparisons.pdf
-77de8418c03fd9fd8ae2863caaf1a7e5 *inst/doc/Introduction.pdf
+f903012040db051b78ac04417692b953 *inst/doc/Comparisons.pdf
+f1a9ae62f748c610208cd904dc826dcf *inst/doc/Introduction.pdf
 c39a26dfe7ccaafd044e88468155b153 *inst/doc/Introduction.Rnw
 5a9e99ce004c325e01fb2773e58052f5 *inst/doc/Design-issues.Rnw
-e03f9e471db6554c3ae3b73e7fa6992c *inst/doc/Design-issues.pdf
+5881dbd228dcf77ebdde797c5f056391 *inst/doc/Design-issues.pdf
 bac68d3a4425ca2e234668cced364ca6 *inst/doc/Comparisons.R
 8758e19cf3478732e62e563b638bcda7 *inst/external/symA.rda
 47bc35200e7b3fc1cdd6ab1adbeef3a0 *inst/external/lund_a.mtx
@@ -217,8 +217,8 @@ ee0597542ac82a7bc31ba262127c1d50 *tests/indexing.R
 2787ae0732f209eee2a0965c196c3363 *tests/spModel.matrix.R
 9a040fc34787f494c297dd812d9ee49a *tests/bind.R
 ce85ee2aba7d78e88fef738a0d1c7118 *tests/base-matrix-fun.R
-f609a60d3462274470b3e5f6f2b5a16c *tests/group-methods.R
-badc5316b3572c5b836c8dd8656c7c0f *tests/factorizing.R
+a9e11bbd1edc88f65dcc498e32c285cb *tests/group-methods.R
+8eee86c287319ef9bd896c65622c13c8 *tests/factorizing.R
 a5ded77bce8df79c8c5096c20a57d6e6 *tests/Class+Meth.R
 4aede3ab1ede1a5d7b88968cc41a8498 *tests/abIndex-tsts.R
 fe6cd95e5fa1f664c7dda44b2ad8d774 *tests/validObj.R
@@ -492,5 +492,5 @@ c763051781e59f7c79fb15c896d3bbdd *src/dtpMatrix.c
 0eab9c4475b8630bb8f2a3ebb782530e *src/dtCMatrix.h
 dadce6c58bc388ff5f6501f4c3cafab1 *src/dsCMatrix.h
 a5c216c0999608276e06dcaf5d27f2ea *src/TMatrix_as.c
-80d534348524b475fae30df49d815b99 *build/partial.rdb
+09b35f2cc448719d180096ef139a8e1a *build/partial.rdb
 7c8acf71950fd7d6e049f8fabc353d41 *build/vignette.rds

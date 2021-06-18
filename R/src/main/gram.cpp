@@ -260,7 +260,7 @@ static void setId(yyltype loc){
 
 static void	CheckFormalArgs(SEXP, SEXP, YYLTYPE *);
 static SEXP	FirstArg(SEXP, SEXP); /* create list with one element */
-static void 	GrowList(SEXP, SEXP); /* add element to list end */
+static void GrowList(SEXP, SEXP); /* add element to list end */
 
 static void	SetSingleSrcRef(SEXP);
 static void	AppendToSrcRefs(SEXP);
@@ -274,14 +274,15 @@ static void	NextArg(SEXP, SEXP, SEXP); /* add named element to list end */
 static SEXP	TagArg(SEXP, SEXP, YYLTYPE *);
 static int 	processLineDirective(int *);
 
+static bool HavePipeBind = false;
 static GCRoot<Symbol> R_PipeBindSymbol(nullptr);
 
 /* These routines allocate constants */
 
 static SEXP	mkComplex(const char *);
 SEXP		mkFalse(void);
-static SEXP     mkFloat(const char *);
-static SEXP 	mkInt(const char *); 
+static SEXP mkFloat(const char *);
+static SEXP mkInt(const char *); 
 static SEXP	mkNA(void);
 SEXP		mkTrue(void);
 
@@ -1108,16 +1109,16 @@ static const yytype_int8 yytranslate[] =
   /* YYRLINE[YYN] -- Source line where rule number YYN was defined.  */
 static const yytype_int16 yyrline[] =
 {
-       0,   435,   435,   436,   437,   438,   439,   442,   443,   444,
-     447,   448,   451,   452,   453,   454,   456,   457,   459,   460,
-     461,   462,   463,   465,   466,   467,   468,   469,   470,   471,
-     472,   473,   474,   475,   476,   477,   478,   479,   480,   481,
-     482,   483,   484,   485,   486,   487,   489,   490,   491,   492,
-     493,   494,   495,   496,   497,   498,   499,   500,   501,   502,
-     503,   504,   505,   506,   507,   508,   509,   510,   511,   515,
-     518,   521,   525,   526,   527,   528,   529,   530,   533,   534,
-     537,   538,   539,   540,   541,   542,   543,   544,   547,   548,
-     549,   550,   551,   555
+       0,   436,   436,   437,   438,   439,   440,   443,   444,   445,
+     448,   449,   452,   453,   454,   455,   457,   458,   460,   461,
+     462,   463,   464,   466,   467,   468,   469,   470,   471,   472,
+     473,   474,   475,   476,   477,   478,   479,   480,   481,   482,
+     483,   484,   485,   486,   487,   488,   490,   491,   492,   493,
+     494,   495,   496,   497,   498,   499,   500,   501,   502,   503,
+     504,   505,   506,   507,   508,   509,   510,   511,   512,   516,
+     519,   522,   526,   527,   528,   529,   530,   531,   534,   535,
+     538,   539,   540,   541,   542,   543,   544,   545,   548,   549,
+     550,   551,   552,   556
 };
 #endif
 
@@ -3179,8 +3180,6 @@ static SEXP xxbinary(SEXP n1, SEXP n2, SEXP n3)
     return ans;
 }
 
-static SEXP findPlaceholderCell(SEXP, SEXP);
-
 static void check_rhs(SEXP rhs)
 {
     if (TYPEOF(rhs) != LANGSXP)
@@ -3202,12 +3201,12 @@ static SEXP xxpipe(SEXP lhs, SEXP rhs)
 	if (TYPEOF(rhs) == LANGSXP && CAR(rhs) == R_PipeBindSymbol) {
 	    SEXP var = CADR(rhs);
 	    SEXP expr = CADDR(rhs);
-	    check_rhs(expr);
-	    SEXP phcell = findPlaceholderCell(var, expr);
-	    if (phcell == NULL)
-		error(_("no placeholder found on RHS"));
-	    SETCAR(phcell, lhs);
-	    return expr;
+	    if (TYPEOF(var) != SYMSXP)
+		error(_("RHS variable must be a symbol"));
+	    SEXP alist = list1(R_MissingArg);
+	    SET_TAG(alist, var);
+	    SEXP fun = lang4(R_FunctionSymbol, alist, expr, R_NilValue);
+	    return lang2(fun, lhs);
 	}
 
 	check_rhs(rhs);
@@ -3583,6 +3582,7 @@ static void ParseInit(void)
     EndOfFile = 0;
     xxcharcount = 0;
     npush = 0;
+    HavePipeBind = false;
 }
 
 static void initData(void)
@@ -3601,6 +3601,19 @@ static void ParseContextInit(void)
     initData();
 }
 
+static bool checkForPipeBind(SEXP arg)
+{
+    if (!HavePipeBind)
+    	return false;
+    else if (arg == R_PipeBindSymbol)
+	return true;
+    else if (TYPEOF(arg) == LANGSXP)
+	for (SEXP cur = arg; cur; cur = CDR(cur))
+	    if (checkForPipeBind(CAR(cur)))
+		return true;
+    return true;
+}
+
 static SEXP R_Parse1(ParseStatus *status)
 {
     switch(yyparse()) {
@@ -3617,6 +3630,9 @@ static SEXP R_Parse1(ParseStatus *status)
 	break;
     case 3:                     /* Valid expr '\n' terminated */
     case 4:                     /* Valid expr ';' terminated */
+        if (checkForPipeBind(R_CurrentExpr))
+	    errorcall(R_CurrentExpr,
+		      _("pipe bind symbol may only appear in pipe expressions"));
 	*status = PARSE_OK;
 	break;
     }
@@ -5327,6 +5343,7 @@ static int token(void)
 	}
 	else if (nextchar('>')) {
 	    yylval = install_and_save("=>");
+	    HavePipeBind = true;
 	    return PIPEBIND;
 	}		 
 	yylval = install_and_save("=");
@@ -6067,39 +6084,4 @@ static void growID( int target ){
 
     int new_size = (1 + new_count)*2;
     PS_SET_IDS(lengthgets2(PS_IDS, new_size));
-}
-
-static int checkForPlaceholder(SEXP placeholder, SEXP arg)
-{
-    if (arg == placeholder)
-	return TRUE;
-    else if (TYPEOF(arg) == LANGSXP)
-	for (SEXP cur = arg; cur != R_NilValue; cur = CDR(cur))
-	    if (checkForPlaceholder(placeholder, CAR(cur)))
-		return TRUE;
-    return FALSE;
-}
-
-static void NORET signal_ph_error(SEXP rhs, SEXP ph) {
-    errorcall(rhs, _("pipe placeholder must only appear as a top-level "
-		     "argument in the RHS call"));
-}
-
-static SEXP findPlaceholderCell(SEXP placeholder, SEXP rhs)
-{
-    SEXP phcell = NULL;
-    int count = 0;
-    if (checkForPlaceholder(placeholder, CAR(rhs)))
-	signal_ph_error(rhs, placeholder);
-    for (SEXP a = CDR(rhs); a != R_NilValue; a = CDR(a))
-	if (CAR(a) == placeholder) {
-	    if (phcell == NULL)
-		phcell = a;
-	    count++;
-	}
-	else if (checkForPlaceholder(placeholder, CAR(a)))
-	    signal_ph_error(rhs, placeholder);
-    if (count > 1)
-	errorcall(rhs, _("pipe placeholder may only appear once"));
-    return phcell;
 }
