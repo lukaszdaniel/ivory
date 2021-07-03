@@ -103,6 +103,14 @@
       \code{options()} is again invalid.  Its behaviour was
       platform-dependent, and it is unclear what \dQuote{zero
 	significant digits} should mean (\PR{18098}).
+
+      \item Messages from C code in the \file{cairo} section of package
+      \pkg{grDevices} are now also up for translation, thanks to Michael
+      Chirico's \PR{18123}.
+
+      \item \code{pretty(x)} with finite \code{x} now returns finite values
+      also in the case where the extreme \code{x} values are close in size
+      to the maximal representable number \code{.Machine$double.xmax}.
     }
   }
 }
@@ -173,6 +181,22 @@
       \item \code{all.equal(x,y)} now returns \code{TRUE} correctly also
       when several entries of \code{abs(x)} and \code{abs(y)} are close to
       \code{.Machine$double.xmax}, the largest finite \code{numeric}.
+
+      \item \code{model.frame()} now clears the object bit when removing the
+      \code{class} attribute of a value via \code{na.action} (\PR{18100}).
+
+      \item \code{charClass()} now works with multi-character
+      strings on Windows (\PR{18104}, fixed by Bill Dunlap).
+
+      \item \code{encodeString()} on Solaris now works again in Latin-1
+      encoding on characters represented differently in UTF-8.  Support for
+      surrogate pairs on Solaris has been improved.
+
+      \item \code{file.show()} on Windows now works with non-ASCII path
+      names representable in the current native encoding (\PR{18132}).
+
+      \item Embedded \R on Windows can now find \R home directory via the
+      registry even when installed only for the current user (\PR{18135}).
     }
   }
 }

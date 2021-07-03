@@ -285,6 +285,8 @@ int Rf_ReplIteration(SEXP rho, int savestack, int browselevel, R_ReplState *stat
 	R_Busy(1);
 	PROTECT(value = eval(thisExpr, rho));
 	SET_SYMVALUE(R_LastvalueSymbol, value);
+	if (NO_REFERENCES(value))
+	    INCREMENT_REFCNT(value);
 	wasDisplayed = Evaluator::resultPrinted();
 	if (Evaluator::resultPrinted())
 	    PrintValueEnv(value, rho);

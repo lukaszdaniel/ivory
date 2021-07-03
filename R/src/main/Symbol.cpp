@@ -196,7 +196,7 @@ namespace CXXR
             ENSURE_NAMEDMAX(val);
         }
         else
-            ENSURE_NAMED(val); /* should not really be needed - LT */
+            ENSURE_NAMED(val); /* needed for .Last.value - LT */
         return val;
     }
 
