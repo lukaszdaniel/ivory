@@ -35,17 +35,10 @@
 #include <CXXR/SEXPTYPE.hpp>
 #include <CXXR/RTypes.hpp>
 
-// CXXR extentions
-#include <CXXR/Complex.hpp>
-#include <CXXR/Logical.hpp>
-#include <CXXR/String.hpp>
-#include <CXXR/CachedString.hpp>
-#include <CXXR/UncachedString.hpp>
-
 // Memory Management
-#include <CXXR/MemoryBank.hpp>
 #include <CXXR/CellHeap.hpp>
 #include <CXXR/CellPool.hpp>
+#include <CXXR/MemoryBank.hpp>
 #include <CXXR/Allocator.hpp>
 #include <CXXR/RAllocStack.hpp>
 
@@ -54,6 +47,13 @@
 #include <CXXR/GCRoot.hpp>
 #include <CXXR/GCStackRoot.hpp>
 #include <CXXR/NodeStack.hpp>
+
+// CXXR extentions
+#include <CXXR/Complex.hpp>
+#include <CXXR/Logical.hpp>
+#include <CXXR/String.hpp>
+#include <CXXR/CachedString.hpp>
+#include <CXXR/UncachedString.hpp>
 
 // Various utilities
 #include <CXXR/SchwarzCounter.hpp>
