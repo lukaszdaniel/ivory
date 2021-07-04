@@ -58,11 +58,12 @@
     }
     mytrim <- function(x) {
         y <- unlist(strsplit(x, "\n", fixed = TRUE))
-        if(length(y) <= 1L)
+        lines2trim <- setdiff(which(nzchar(y)), 1L)
+        if(!length(lines2trim))
             x
         else
-            paste(c(y[1L],
-                    .trim_common_leading_whitespace(y[-1L])),
+            paste(replace(y, lines2trim,
+                          .trim_common_leading_whitespace(y[lines2trim])),
                   collapse = "\n")
     }
 
@@ -134,12 +135,8 @@
         text <- gsub('"([^"]*)"', "\\`\\`\\1''", text, useBytes = TRUE)
         text <- texify(text, one = FALSE, two = TRUE)
         text <- fsub("@VERSION@", version, text)
-        ## text can have paras, and digest/DESCRIPTION does.
-        ## \AsIs is per-para.
-        ## FIXME: enc2utf8        
-        ## text <- strsplit(text, "\n\n", fixed = TRUE, useBytes = TRUE)[[1L]]
+        ## FIXME: enc2utf8
         ## Encoding(text) <- "unknown"
-        text <- strsplit(text, "\n\n", fixed = TRUE)[[1L]]
         if(f %in% c("Author", "Maintainer", "Contact"))
             text <- mygsub("<([^@ ]+)@([^> ]+)>",
                            "}\\\\email{%s@%s}\\\\AsIs{",
@@ -169,7 +166,7 @@
         }
         text <- paste0("\\AsIs{", text, "}")
         writeLines(paste0("\\item[", texify(f, TRUE, TRUE), "]",
-                          paste(text, collapse = "\n\n")),
+                          text),
                    con = out, useBytes = TRUE)
     }
     cat("\\end{description}\n", file = out)
@@ -929,16 +926,16 @@ function(pkgdir, outfile, title, batch = FALSE,
     if(!nzchar(dir)) dir <- paste(files, collapse = " ")
 
     ## Prepare for building the documentation.
-    if(dir.exists(build_dir) && unlink(build_dir, recursive = TRUE)) {
-        cat(gettext("cannot write to build dir", domain = "R-tools"), "\n", sep = "")
-        q("no", status = 2L, runLast = FALSE)
-    }
-    dir.create(build_dir, FALSE)
     if(!nzchar(output)) output <- paste0("Rd2.", out_ext)
     if(file.exists(output) && !force) {
         cat(gettextf("file %s exists; please remove it first", sQuote(output), domain = "R-tools"), "\n", sep = "")
         q("no", status = 1L, runLast = FALSE)
     }
+    if(dir.exists(build_dir) && unlink(build_dir, recursive = TRUE)) {
+        cat(gettext("cannot write to build dir", domain = "R-tools"), "\n", sep = "")
+        q("no", status = 2L, runLast = FALSE)
+    }
+    dir.create(build_dir, FALSE)
 
     res <-
         try(.Rd2pdf(files[1L], file.path(build_dir, "Rd2.tex"),
