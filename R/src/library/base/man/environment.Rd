@@ -168,9 +168,6 @@ ls(e2)
 exists("a", envir = e2)   # this succeeds by inheritance
 exists("a", envir = e2, inherits = FALSE)
 exists("+", envir = e2)   # this succeeds by inheritance
-
-eh <- new.env(hash = TRUE, size = NA)
-with(env.profile(eh), stopifnot(size == length(counts)))
 }
 \keyword{data}
 \keyword{programming}

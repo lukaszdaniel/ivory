@@ -18,7 +18,7 @@ sizeof(VectorBase): 72
 sizeof(ConsCell): 80
 sizeof(PairList): 80
 sizeof(Expression): 80
-sizeof(Environment): 80
+sizeof(Environment): 72
 sizeof(Symbol): 80
 sizeof(IntVector): 88
 sizeof(ListVector): 96

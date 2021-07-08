@@ -935,15 +935,29 @@ namespace R
 {
 #if CXXR_TRUE
   /* environment cell access */
-  struct R_varloc_t
+  class R_varloc_struct
   {
   private:
-    SEXP m_cell;
+    // CXXR::GCEdge<CXXR::RObject> m_cell;
+    CXXR::RObject *m_cell;
+    CXXR::GCEdge<const CXXR::RObject> m_symbol;
+    CXXR::GCEdge<> m_value;
+    bool m_assignment_pending;
+    bool m_active;
+    int m_origin;
+
+    // bool m_locked;
+    // SEXPTYPE m_bndcellTag;
 
   public:
+    R_varloc_struct() : m_assignment_pending(false), m_active(false), m_origin(0){};
+    ~R_varloc_struct(){};
     // not entirely true, since m_cell can contain Symbol as well (for now)
     SEXP asPairList()
     {
+      SET_ASSIGNMENT_PENDING(m_cell, assignmentPending());
+      SET_MISSING(m_cell, missing());
+      if (m_active) SET_ACTIVE_BINDING_BIT(m_cell);
       return m_cell;
     }
 
@@ -951,8 +965,72 @@ namespace R
     void fromPairList(SEXP pl)
     {
       m_cell = pl;
+      if (pl->altrep())
+      {
+        std::cerr << __FILE__ << ":" << __LINE__ << " altrep" << std::endl;
+        abort();
+      }
+      if (pl->sexptype() == LISTSXP)
+      {
+        // m_symbol = CXXR::SEXP_downcast<CXXR::RObject *>(TAG(pl));
+        // m_value = CXXR::SEXP_downcast<CXXR::RObject *>(CAR(pl));
+      }
+      else if (pl->sexptype() == SYMSXP)
+      {
+        // m_symbol = CXXR::SEXP_downcast<CXXR::RObject *>(pl);
+        // m_value = CXXR::SEXP_downcast<CXXR::RObject *>(SYMVALUE(pl));
+      }
+      else
+      {
+        std::cerr << __FILE__ << ":" << __LINE__ << " sexptype = " << pl->sexptype() << std::endl;
+      }
+      // m_symbol = CXXR::SEXP_downcast<const CXXR::RObject *>(TAG(pl));
+      m_assignment_pending = ASSIGNMENT_PENDING(pl);
+      m_active = IS_ACTIVE_BINDING(pl);
+      m_origin = MISSING(pl);
+    }
+
+    int missing()
+    {
+      if (m_origin != MISSING(m_cell))
+      {
+        std::cerr << __FILE__ << ":" << __LINE__ << " missing status mismatch" << std::endl;
+        abort();
+      }
+      return m_origin;
+    }
+
+    const CXXR::RObject *symbol()
+    {
+      return TAG(m_cell);
+    }
+
+    bool isActive()
+    {
+      if (m_active != IS_ACTIVE_BINDING(m_cell))
+      {
+        std::cerr << __FILE__ << ":" << __LINE__ << " active binding mismatch" << std::endl;
+        abort();
+      }
+      return m_active;
+    }
+
+    bool assignmentPending()
+    {
+      if (m_assignment_pending != ASSIGNMENT_PENDING(m_cell))
+      {
+        std::cerr << __FILE__ << ":" << __LINE__ << " assignment pending mismatch" << std::endl;
+        abort();
+      }
+      return m_assignment_pending;
+    }
+
+    void setAssignmentPending(bool on)
+    {
+      m_assignment_pending = on;
     }
   }; /* use struct to prevent casting */
+  using R_varloc_t = R_varloc_struct *;
 #else
   using R_varloc_t = CXXR::Frame::Binding *;
 #endif

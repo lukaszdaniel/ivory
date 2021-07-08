@@ -405,15 +405,19 @@ static SEXP findVarLocInFrame(SEXP rho, SEXP symbol, Rboolean * /*canCache*/)
 R_varloc_t R::R_findVarLocInFrame(SEXP rho, SEXP symbol)
 {
     SEXP binding = findVarLocInFrame(rho, symbol, nullptr);
-    R_varloc_t val;
-    val.fromPairList(binding);
+    if (!binding)
+        return nullptr;
+    R_varloc_t val = new R_varloc_struct();
+    val->fromPairList(binding);
     return val;
 }
 
 HIDDEN
 SEXP R::R_GetVarLocValue(R_varloc_t vl)
 {
-    SEXP cell = vl.asPairList();
+    if (!vl)
+        return R_UnboundValue;
+    SEXP cell = vl->asPairList();
     if (cell == nullptr || cell == R_UnboundValue)
     {
         return R_UnboundValue;
@@ -428,19 +432,19 @@ SEXP R::R_GetVarLocValue(R_varloc_t vl)
 HIDDEN
 SEXP R::R_GetVarLocSymbol(R_varloc_t vl)
 {
-    return TAG(vl.asPairList());
+    return vl ? const_cast<RObject *>(vl->symbol()) : nullptr;
 }
 
 /* used in methods */
 Rboolean R::R_GetVarLocMISSING(R_varloc_t vl)
 {
-    return Rboolean(MISSING(vl.asPairList()));
+    return vl ? Rboolean(vl->missing()) : FALSE;
 }
 
 HIDDEN
 void R::R_SetVarLocValue(R_varloc_t vl, SEXP value)
 {
-    SET_BINDING_VALUE(vl.asPairList(), value);
+    if (vl) SET_BINDING_VALUE(vl->asPairList(), value);
 }
 
 /*----------------------------------------------------------------------
@@ -624,8 +628,10 @@ static SEXP findVarLoc(SEXP symbol, SEXP rho)
 R_varloc_t R::R_findVarLoc(SEXP rho, SEXP symbol)
 {
     SEXP binding = findVarLoc(rho, symbol);
-    R_varloc_t val;
-    val.fromPairList(binding);
+    if (!binding)
+        return nullptr;
+    R_varloc_t val = new R_varloc_struct();
+    val->fromPairList(binding);
     return val;
 }
 
