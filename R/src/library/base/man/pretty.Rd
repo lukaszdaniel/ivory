@@ -1,19 +1,24 @@
 % File src/library/base/man/pretty.Rd
 % Part of the R package, https://www.R-project.org
-% Copyright 1995-2018 R Core Team
+% Copyright 1995-2021 R Core Team
 % Distributed under GPL 2 or later
 
 \name{pretty}
 \title{Pretty Breakpoints}
+\alias{pretty}
+\alias{.pretty}
+\alias{pretty.default}
 \usage{
 pretty(x, \dots)
 
 \method{pretty}{default}(x, n = 5, min.n = n \%/\% 3,  shrink.sml = 0.75,
        high.u.bias = 1.5, u5.bias = .5 + 1.5*high.u.bias,
        eps.correct = 0, \dots)
+
+.pretty(x, n = 5L, min.n = n \%/\% 3,  shrink.sml = 0.75,
+       high.u.bias = 1.5, u5.bias = .5 + 1.5*high.u.bias,
+       eps.correct = 0L, bounds = TRUE)
 }
-\alias{pretty}
-\alias{pretty.default}
 \arguments{
   \item{x}{an object coercible to numeric by \code{\link{as.numeric}}.}
   \item{n}{integer giving the \emph{desired} number of
@@ -34,7 +39,12 @@ pretty(x, \dots)
     \emph{epsilon correction} is made at the boundaries such that
     the result boundaries will be outside \code{range(x)}; in the
     \emph{small} case, the correction is only done if \code{eps.correct
-       >= 2}.}
+      >= 2}.}
+  \item{bounds}{a \code{\link{logical}} indicating if the resulting vector
+    should \emph{cover} the full \code{range(x)}, i.e., strictly include
+    the bounds of \code{x}.  New from \R 4.2.0, allowing \code{bound=FALSE}
+    to reproduce how \R's graphics engine computes axis tick locations (in
+    \code{GEPretty()}).}
   \item{\dots}{further arguments for methods.}
 }
 \description{
@@ -59,6 +69,15 @@ pretty(x, \dots)
   =}\code{high.u.bias} and \eqn{f =}\code{u5.bias}.
 
   \dots\dots\dots
+}
+\value{\code{pretty()} returns a numeric vector with \dQuote{pretty}
+  entries (in decimal notation).
+
+  For ease of investigating the underlying C \code{R_pretty()}
+  function, \code{.pretty()} returns a \code{\link{list}} with entries
+  \code{ns}, \code{nu}, \code{n}, and (\dQuote{pretty}) \code{unit}, where
+  \code{n*} are integer valued (but only \code{n} is of class
+  \code{\link{integer}}).
 }
 \seealso{
   \code{\link{axTicks}} for the computation of pretty axis tick
@@ -86,7 +105,8 @@ pretty(pi)
 
 add.names <- function(v) { names(v) <- paste(v); v}
 utils::str(lapply(add.names(-10:20), pretty))
-utils::str(lapply(add.names(0:20),   pretty, min.n = 0))
+## min.n = 0  returns a length-1 vector "if pretty":
+utils::str(lapply(add.names(0:20),  pretty, min.n = 0))
 sapply(    add.names(0:20),   pretty, min.n = 4)
 
 pretty(1.234e100)

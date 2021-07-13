@@ -4041,20 +4041,25 @@ add_dummies <- function(dir, Log)
         ## frequently-changing binary files in the SVN archive.
         if (!is_base_pkg) {
             dir <- file.path(pkgdir, "inst", "doc")
-            outputs <- character(length(vigns$docs))
-	    .msg <- character()
-            for (i in seq_along(vigns$docs)) {
-                file <- vigns$docs[i]
-                name <- vigns$names[i]
-                engine <- vignetteEngine(vigns$engines[i])
-                outputs[i] <- tryCatch({
-                    find_vignette_product(name, what="weave", final=TRUE, dir=dir, engine = engine)
-                }, error = function(e) {
-		    .msg <<- c(.msg, conditionMessage(e))
-	            NA}
-		)
+            if (dir.exists(dir)) {
+                outputs <- character(length(vigns$docs))
+                .msg <- character()
+                for (i in seq_along(vigns$docs)) {
+                    file <- vigns$docs[i]
+                    name <- vigns$names[i]
+                    engine <- vignetteEngine(vigns$engines[i])
+                    outputs[i] <- tryCatch({
+                        find_vignette_product(name, what="weave", final=TRUE, dir=dir, engine = engine)
+                    }, error = function(e) {
+                        .msg <<- c(.msg, conditionMessage(e))
+                        NA}
+                    )
+                }
+                bad_vignettes <- vigns$docs[is.na(outputs)]
+            } else {
+                .msg <- gettext("Directory 'inst/doc' does not exist.", domain = "R-tools")
+                bad_vignettes <- vigns$docs
             }
-            bad_vignettes <- vigns$docs[is.na(outputs)]
             if (nb <- length(bad_vignettes)) {
                 any <- TRUE
                 warningLog(Log)
@@ -4876,6 +4881,7 @@ add_dummies <- function(dir, Log)
                              ": warning: .* with a value, in function returning void",
                              ": warning: .*\\[-Wlto",
                              ": warning: .*\\[-Wodr\\]",
+                             ": warning: .*\\[-Wswitch\\]",
                              ": warning: line number out of range",
                              ## gcc 10 some -fanalyzer warnings
                              ": warning: .*\\[-Wanalyzer-null-dereference\\]",
