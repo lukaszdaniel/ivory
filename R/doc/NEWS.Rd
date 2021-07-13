@@ -43,7 +43,13 @@
       has always been the intention.
 
       \item The \code{contrasts} setter \code{`contrasts<-`} gets explicit
-      default \code{how.many = NULL} rather than just using \code{missing(how.many)}.
+      default \code{how.many = NULL} rather than just using
+      \code{missing(how.many)}.
+
+      \item \code{grid.pretty()} got new optional argument \code{n = 5}.
+
+      \item New \code{.pretty()} with option \code{bounds} as technical
+      utility version of \code{pretty()}.
     }
   }
 
@@ -108,12 +114,12 @@
       \pkg{grDevices} are now also up for translation, thanks to Michael
       Chirico's \PR{18123}.
 
-      \item \code{pretty(x)} with finite \code{x} now returns finite values
-      also in the case where the extreme \code{x} values are close in size
-      to the maximal representable number \code{.Machine$double.xmax}.
-
       \item \code{mean(x)} with finite \code{x} now is finite also without
       "long.double" capability.
+
+      \item \command{R CMD Rd2pdf} no longer leaves an empty build
+      directory behind when it aborts due to an already existing output
+      file (\PR{18141}).
     }
   }
 }
@@ -200,6 +206,10 @@
 
       \item Embedded \R on Windows can now find \R home directory via the
       registry even when installed only for the current user (\PR{18135}).
+
+      \item \code{pretty(x)} with finite \code{x} now returns finite values
+      also in the case where the extreme \code{x} values are close in size
+      to the maximal representable number \code{.Machine$double.xmax}.
     }
   }
 }
