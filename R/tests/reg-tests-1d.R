@@ -9,6 +9,7 @@ onWindows <- .Platform$OS.type == "windows"
 .M <- .Machine
 str(.M[grep("^sizeof", names(.M))]) ## also differentiate long-double..
 b64 <- .M$sizeof.pointer == 8
+options(nwarnings = 10000) # (rather than just 50)
 
 
 ## body() / formals() notably the replacement versions
@@ -5149,7 +5150,7 @@ stopifnot(is.na(match(c("NA", "\u{e0}"), NA)))
 
 ## pretty(x) when range(x) is finite but diff(range(x)) is +/- Inf:
 B <- 1e308; 2*B; (s <- seq(-B,B,length.out = 3))
-options(warn=1) # allow warnings *as they happen*
+options(warn=1) # => warnings *as they happen*
 (ps <- pretty(c(-B,B)))
 ## Warning in pretty.default(c(-B, B)) :
 ##   Internal(pretty()): very large range 4e+307, corrected to 2.24712e+307
@@ -5210,8 +5211,45 @@ for(i.n in seq_along(ns)) {
                   ps[1] <= x[1] , x[2] <= ps[length(ps)])
     }))
 }
+##
 stopifnot(abs(rr-1) < 3.3/ns)
 ## many of these pretty() calls errored (because internally gave Inf) in R <= 4.1.0
+##
+##---------------- very small ranges ------------------
+## The really smallest positive number (unless subnormals do "not exist"):
+mm <- with(.Machine, double.xmin * double.eps)
+log2(mm) == -1074 # T
+## "of course", this an extreme *sub normal* number, e.g.
+mm == c(0.50001, 1.49999) * mm # TRUE TRUE (!)
+(1.5*mm) / mm #  2  (!!)
+##
+nns0 <- setNames(,0:28) # n=0,1 give often warnings (and make no difference!)
+nns <-  setNames(,2:30)
+fs <- c(.05, .1, .25, .375, .5, .75, .9, .95, .99, .995, .999, .9999, .99999)
+names(fs) <- sub("^0", "", formatC(fs))
+h.u <- c(.5, 1, 1.5, 2, 2.5, 3, 4, 6, 10); names(h.u) <- formatC(h.u); h.u
+## for mm/f, *sub*normal:
+fsS <- fs[fs <= 0.75]
+options(warn=0) # (collect warnings)
+psmm <- lapply(h.u, function(hu)
+    lapply(fsS, function(f)
+        lapply(nns, pretty, x = c(0, mm/f), high.u=hu, eps.correction = 2)))
+summary(warnings())## many; mostly  "very small range 'cell'=0, corrected to 2.122e-314"
+(T <- table(psA <- unlist(psmm))) # is this portable?
+(nT <- as.numeric(names(T)))
+range(rEd <- abs(2e-314/diff(nT) - 1))
+stopifnot(nT >= 0, length(nT) == 11,
+          rEd <= 2^-50) # only seen rEd == 0
+##
+psmm.o <- lapply(h.u, function(hu)
+    lapply(fsS, function(f) # older R: f.min = 20 hardwired:
+        lapply(nns, pretty, x = c(0, mm/f), high.u=hu, f.min = 20) ))
+summary(warnings())## many; mostly  "very small range 'cell'=0, corrected to 4.45015e-307"
+(To <- table(psAo <- unlist(psmm.o)))
+(nTo <- as.numeric(names(To)))
+range(rEdo <- abs(5e-307/diff(nTo) - 1))
+stopifnot(nTo >= 0, length(nTo) == 11,
+          rEdo <= 2^-44) # seen max of 2^-51 on Lnx_64; .. on Win64
 
 
 
