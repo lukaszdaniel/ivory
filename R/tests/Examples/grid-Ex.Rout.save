@@ -1,9 +1,9 @@
 
-Ivory Under development (unstable) (2021-06-18 r1541) -- "Internationalized Version of R"
+Ivory Under development (unstable) (2021-07-15 r1569) -- "Internationalized Version of R"
 Copyright (C) 2013-2021 Lukasz Daniel (lukasz.daniel@gmail.com)
 See README-IVORY file for details.
 
-R Under development (unstable) (2021-06-18 r80591) -- "Unsuffered Consequences"
+R Under development (unstable) (2021-07-15 r80640) -- "Unsuffered Consequences"
 Copyright (C) 2021 The R Foundation for Statistical Computing
 Platform: x86_64-pc-linux-gnu (64-bit)
 
@@ -194,7 +194,7 @@ GRID.VP.65::A::C::D
 > current.vpPath()
 GRID.VP.65::A::C 
 > current.vpTree()
-viewport[ROOT]->(viewport[GRID.VP.65]->(viewport[A]->(viewport[B], viewport[C]->(viewport[D])))) 
+viewport[ROOT]->(viewport[GRID.VP.65]->(viewport[A]->(viewport[C]->(viewport[D]), viewport[B]))) 
 > current.viewport()
 viewport[C] 
 > current.vpTree(all=FALSE)
@@ -2317,7 +2317,7 @@ vp1::vp2
 > cleanEx()
 > options(digits = 7L)
 > base::cat(gettext("Time elapsed: ", domain = "R-base"), proc.time() - base::get("ptime", pos = 'CheckExEnv'),"\n")
-Time elapsed:  16.299 0.064 16.368 0 0 
+Time elapsed:  30.145 0.044 30.192 0 0 
 > grDevices::dev.off()
 null device 
           1 

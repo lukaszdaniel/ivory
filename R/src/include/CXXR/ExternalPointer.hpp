@@ -267,6 +267,8 @@ extern "C"
      */
     void R_SetExternalPtrProtected(SEXP s, SEXP p);
 
+    SEXP EXTPTR_PROT(SEXP);
+    SEXP EXTPTR_TAG(SEXP);
     void *EXTPTR_PTR(SEXP x);
     SEXP R_MakeExternalPtr(void *p, SEXP tag, SEXP prot);
     typedef void *(*DL_FUNC)();

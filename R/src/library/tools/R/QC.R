@@ -7767,7 +7767,7 @@ function(dir, localOnly = FALSE, pkgSize = NA)
     if(!inherits(year <- tryCatch(format(as.Date(meta0["Published"]), "%Y"),
                                      error = identity),
                     "error")){
-        ## possible mis-spellings and keep only the new ones:
+        ## possible misspellings and keep only the new ones:
         if(NROW(a <- out$spelling)
            && config_val_to_logical(Sys.getenv("_R_CHECK_CRAN_INCOMING_ASPELL_RECHECK_MAYBE_",
                                                "TRUE"))
@@ -7893,7 +7893,7 @@ function(x, ...)
             })),
       if(NROW(y <- x$spelling)) {
           s <- split(sprintf("%d:%d", y$Line, y$Column), y$Original)
-          paste(c(gettext("\nPossibly mis-spelled words in DESCRIPTION:", domain = "R-tools"),
+          paste(c(gettext("\nPossibly misspelled words in DESCRIPTION:", domain = "R-tools"),
                   sprintf("  %s (%s)", names(s), lapply(s, paste, collapse = ", "))),
                 collapse = "\n")
       },
@@ -7901,7 +7901,7 @@ function(x, ...)
           gettext("FOSS licence with BuildVignettes: false", domain = "R-tools")
       },
       if(length(y <- x$fields)) {
-          paste(c(gettext("Unknown, possibly mis-spelled fields in DESCRIPTION:", domain = "R-tools"),
+          paste(c(gettext("Unknown, possibly misspelled fields in DESCRIPTION:", domain = "R-tools"),
                   sprintf("  %s", paste(sQuote(y), collapse = " "))),
                 collapse = "\n")
       },

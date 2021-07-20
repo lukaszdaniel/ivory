@@ -1,6 +1,6 @@
 /*
  *  R : A Computer Language for Statistical Data Analysis
- *  Copyright (C) 1998--2017  The R Core Team
+ *  Copyright (C) 1998--2021  The R Core Team
  *  Copyright (C) 1995, 1996  Robert Gentleman and Ross Ihaka
  *
  *  This program is free software; you can redistribute it and/or modify
@@ -50,10 +50,9 @@
 #include <CXXR/VectorBase.hpp>
 #include <CXXR/IntVector.hpp>
 #include <CXXR/RealVector.hpp>
-#include <Defn.h>
+#include <Defn.h> // for R_xlen_t, UNIMPLEMENTED_TYPE
 #include <R.h>
 #include <R_ext/Applic.h>
-#include <Rinternals.h> // for R_xlen_t
 
 using namespace R;
 
@@ -440,7 +439,6 @@ static void spline_eval(int method, R_xlen_t nu, double *u, double *v,
 }
 
 // TODO: move to ../../../main/coerce.cpp
-#include <Defn.h> /* for UNIMPLEMENTED_TYPE */
 static R_xlen_t asXlen(SEXP x) {
     if (isVectorAtomic(x) && XLENGTH(x) >= 1) {
 	switch (TYPEOF(x)) {

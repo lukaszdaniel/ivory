@@ -64,6 +64,16 @@ namespace CXXR
 
 // ***** C interface *****
 
+SEXP EXTPTR_PROT(SEXP x)
+{
+    return R_ExternalPtrProtected(x);
+}
+
+SEXP EXTPTR_TAG(SEXP x)
+{
+    return R_ExternalPtrTag(x);
+}
+
 void *EXTPTR_PTR(SEXP x)
 {
     if (!x)

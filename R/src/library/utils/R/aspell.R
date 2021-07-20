@@ -276,7 +276,7 @@ function(object, ...)
 {
     words <- sort(unique(object$Original))
     if(length(words)) {
-        writeLines(gettext("Possibly mis-spelled words:"))
+        writeLines(gettext("Possibly misspelled words:"))
         print(words)
     }
     invisible(words)

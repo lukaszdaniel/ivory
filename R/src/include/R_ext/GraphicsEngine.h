@@ -1,6 +1,6 @@
 /*
  *  R : A Computer Language for Statistical Data Analysis
- *  Copyright (C) 2001-11 The R Core Team.
+ *  Copyright (C) 2001-21 The R Core Team.
  *
  *  This header file is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU Lesser General Public License as published by
@@ -544,7 +544,7 @@ void GEnullDevice(void);
 
 /* From ../../main/plot.cpp, used by ../../library/grid/src/grid.cpp : */
 #define CreateAtVector		Rf_CreateAtVector
-SEXP Rf_CreateAtVector(double*, double*, int, Rboolean);
+SEXP Rf_CreateAtVector(double axp[], const double usr[], int nint, Rboolean logflag);
 /* From ../../main/graphics.cpp, used by ../../library/grDevices/src/axis_scales.cpp : */
 #define GAxisPars 		Rf_GAxisPars
 void Rf_GAxisPars(double *min, double *max, int *n, Rboolean log, int axis);

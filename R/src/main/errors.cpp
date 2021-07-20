@@ -28,7 +28,7 @@
 
 #define R_NO_REMAP
 #define R_USE_SIGNALS 1
-#define CXXR_DIE_IF_ISSUE 1 // 2 = die on errors or warnings, 1 = die on errors only, 0 = original CR's behaviour
+#define CXXR_DIE_IF_ISSUE 0 // 2 = die on errors or warnings, 1 = die on errors only, 0 = original CR's behaviour
 
 #include <CXXR/GCStackRoot.hpp>
 #include <CXXR/JMPException.hpp>

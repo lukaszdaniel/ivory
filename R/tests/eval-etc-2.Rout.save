@@ -1,9 +1,9 @@
 
-Ivory Under development (unstable) (2021-06-18 r1541) -- "Internationalized Version of R"
+Ivory Under development (unstable) (2021-07-15 r1569) -- "Internationalized Version of R"
 Copyright (C) 2013-2021 Lukasz Daniel (lukasz.daniel@gmail.com)
 See README-IVORY file for details.
 
-R Under development (unstable) (2021-06-18 r80591) -- "Unsuffered Consequences"
+R Under development (unstable) (2021-07-15 r80640) -- "Unsuffered Consequences"
 Copyright (C) 2021 The R Foundation for Statistical Computing
 Platform: x86_64-pc-linux-gnu (64-bit)
 
@@ -565,5 +565,5 @@ Length  Class   Mode
      0   NULL   NULL 
 > ## at the very end
 > cat('Time elapsed: ', proc.time(), "\n")
-Time elapsed:  19.395 0.08 19.474 0.002 0 
+Time elapsed:  19.367 0.119 19.487 0.002 0 
 > 

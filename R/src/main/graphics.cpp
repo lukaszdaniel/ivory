@@ -48,7 +48,8 @@ static void GLPretty(double *ul, double *uh, int *n);
 void Rf_GAxisPars(double *min, double *max, int *n, Rboolean log,
 	       int axis) // <- needed for warning() only
 {
-#define EPS_FAC_2 100
+#define EPS_FAC_2 16
+    //            -- was 100 (till R 4.1.0); 16 == EPS_FAC in ../library/graphics/src/graphics.cpp
     bool swap = (*min > *max);
     /* Feature: in R, something like  xlim = c(100,0)  just works */
 #define MAYBE_SWAP(_U, _V) \
@@ -65,19 +66,40 @@ void Rf_GAxisPars(double *min, double *max, int *n, Rboolean log,
     /* save only for the extreme case (EPS_FAC_2): */
     double min_o = *min, max_o = *max;
 
+#ifdef DEBUG_axis
+    REprintf("GAxisPars(%s): maybe_swap => (min=%g, max=%g); ",
+	     log ? "log=TRUE" : "", min_o, max_o);
+#endif
     if(log) {
 	/* Avoid infinities */
 	if(*max >  308) { *max =  308; if(*min > *max) *min = *max; }
 	if(*min < -307) { *min = -307; if(*max < *min) *max = *min; }
 	*min = Rexp10(*min);
 	*max = Rexp10(*max);
+#ifdef DEBUG_axis
+	REprintf("before GLPretty(min=%g, max=%g, n=%d):\n", *min, *max, *n);
+#endif
 	GLPretty(min, max, n);
     }
-    else GEPretty(min, max, n);
+    else {
+#ifdef DEBUG_axis
+	REprintf("before GEPretty(..):\n");
+#endif
+	GEPretty(min, max, n);
+    }
 
-    const double eps_2 = EPS_FAC_2 * DBL_EPSILON; /* << prevent overflow in product below */
-    double t_ = Rf_fmax2(fabs(*max), fabs(*min));
-    if(fabs(*max - *min) < t_ * eps_2) {
+#ifdef DEBUG_axis
+    REprintf(" [GAP]: then (min=%g, max=%g, n=%d)\n", *min, *max, *n);
+#endif
+
+    double t_ = Rf_fmax2(fabs(*max), fabs(*min)),
+	tf = // careful to avoid overflow (and underflow) here:
+	    (t_ > 1)
+	    ? (t_ * DBL_EPSILON) * EPS_FAC_2
+	    : (t_ * EPS_FAC_2  ) * DBL_EPSILON;
+	if(tf == 0) tf = DBL_MIN;
+
+    if(fabs(*max - *min) <= tf) {
 	/* Treat this case somewhat similar to the (min ~= max) case above */
 	/* Too much accuracy here just shows machine differences */
 	if(axis) // no warning with (axis = 0)
@@ -96,6 +118,9 @@ void Rf_GAxisPars(double *min, double *max, int *n, Rboolean log,
 	    *max = Rexp10(*max);
 	}
 	*n = 1;
+#ifdef DEBUG_axis
+	REprintf(" small range() --> axp[1:3]=(min,max, n=1) = (%g, %g, 1)\n", *min, *max);
+#endif
     }
     MAYBE_SWAP(*min, *max);
 }
@@ -142,5 +167,5 @@ static void GLPretty(double *ul, double *uh, int *n)
 
 void Rf_GPretty(double *lo, double *up, int *ndiv)
 {
-    GEPretty(lo, up, ndiv);
+    GEPretty(lo, up, ndiv); // --> in ./engine.cpp , --> calling R_pretty()
 }

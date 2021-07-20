@@ -419,9 +419,12 @@ SEXP SETCADR(SEXP x, SEXP y);
 SEXP SETCADDR(SEXP x, SEXP y);
 SEXP SETCADDDR(SEXP x, SEXP y);
 SEXP SETCAD4R(SEXP e, SEXP y);
-void *EXTPTR_PTR(SEXP);
-
 SEXP CONS_NR(SEXP a, SEXP b);
+
+/* External Pointer Access Functions */
+SEXP EXTPTR_PROT(SEXP);
+SEXP EXTPTR_TAG(SEXP);
+void *EXTPTR_PTR(SEXP);
 
 /* S4Object Access Functions */
 SEXP S4TAG(SEXP e);
@@ -483,8 +486,8 @@ void SET_HASHVALUE(SEXP x, int v);
 
 /* External pointer access macros */
 /* (only for backwards compatibility in CXXR) */
-#define EXTPTR_PROT(x)	R_ExternalPtrProtected(x)
-#define EXTPTR_TAG(x)	R_ExternalPtrTag(x)
+// #define EXTPTR_PROT(x)	R_ExternalPtrProtected(x)
+// #define EXTPTR_TAG(x)	R_ExternalPtrTag(x)
 /* EXTPTR_PTR is defined above within USE_RINTERNALS */
 
 /* Bytecode access macros */
