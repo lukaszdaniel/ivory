@@ -156,8 +156,9 @@ Hair    Brown Blue Hazel Green
 > 
 > x <- 9.9*10^(-3:10)
 > plot(x, 1:14, log = "x")
-> axTicks(1) # now length 5, in R <= 2.13.x gave the following
+> axTicks(1) # now length 7, in R <= 2.13.x gave 'nintLog = Inf' res; then
 [1] 1e-02 1e+00 1e+02 1e+04 1e+06 1e+08 1e+10
+> ## 1e-01 1e+01 1e+03 1e+05 1e+07 1e+09 1e+11 ; since R 4.2.0: 1e-2 1e0 1e2 .. 1e10
 > axTicks(1, nintLog = Inf) # rather too many
  [1] 1e-02 1e-01 1e+00 1e+01 1e+02 1e+03 1e+04 1e+05 1e+06 1e+07 1e+08 1e+09
 [13] 1e+10 1e+11

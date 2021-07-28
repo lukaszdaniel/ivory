@@ -32,6 +32,9 @@
 #include <CXXR/IntVector.hpp>
 #include <Rinternals.h>
 
+using namespace R;
+using namespace CXXR;
+
 namespace CXXR
 {
     // Force the creation of non-inline embodiments of functions callable
@@ -126,13 +129,13 @@ int *INTEGER0(SEXP x)
     return static_cast<int *>(STDVEC_DATAPTR(x));
 }
 
-int SCALAR_IVAL(SEXP x)
+int R::SCALAR_IVAL(SEXP x)
 {
     CHECK_SCALAR_INT(x);
     return INTEGER0(x)[0];
 }
 
-void SET_SCALAR_IVAL(SEXP x, int v)
+void R::SET_SCALAR_IVAL(SEXP x, int v)
 {
     CHECK_SCALAR_INT(x);
     INTEGER0(x)[0] = v;

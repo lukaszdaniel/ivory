@@ -32,6 +32,9 @@
 #include <CXXR/RawVector.hpp>
 #include <Rinternals.h>
 
+using namespace R;
+using namespace CXXR;
+
 namespace CXXR
 {
     // Force the creation of non-inline embodiments of functions callable
@@ -126,12 +129,12 @@ Rbyte *RAW0(SEXP x)
     CHECK_STDVEC_RAW(x);
     return static_cast<Rbyte *>(STDVEC_DATAPTR(x));
 }
-Rbyte SCALAR_BVAL(SEXP x)
+Rbyte R::SCALAR_BVAL(SEXP x)
 {
     CHECK_SCALAR_RAW(x);
     return RAW0(x)[0];
 }
-void SET_SCALAR_BVAL(SEXP x, Rbyte v)
+void R::SET_SCALAR_BVAL(SEXP x, Rbyte v)
 {
     CHECK_SCALAR_RAW(x);
     RAW0(x)[0] = v;

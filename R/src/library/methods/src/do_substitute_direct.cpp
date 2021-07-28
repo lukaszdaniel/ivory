@@ -21,11 +21,11 @@
 #include <config.h>
 #endif
 
-#include <CXXR/GCStackRoot.hpp>
-#include <Defn.h>
-
 #include "methods.h"
 #include "localization.h"
+
+#include <CXXR/GCStackRoot.hpp>
+#include <Defn.h>
 
 using namespace R;
 
@@ -38,14 +38,14 @@ SEXP do_substitute_direct(SEXP f, SEXP env)
 {
     SEXP s;
     if (TYPEOF(env) == VECSXP)
-	env = NewEnvironment(R_NilValue, VectorToPairList(env), R_BaseEnv);
+	env = NewEnvironment(R_NilValue, Rf_VectorToPairList(env), R_BaseEnv);
     else if (TYPEOF(env) == LISTSXP)
-	env = NewEnvironment(R_NilValue, duplicate(env), R_BaseEnv);
+	env = NewEnvironment(R_NilValue, Rf_duplicate(env), R_BaseEnv);
     if(TYPEOF(env) != ENVSXP)
-	error(_("invalid list for substitution"));
+	Rf_error(_("invalid list for substitution"));
     PROTECT(env);
     PROTECT(f);
-    s = substitute(f, env);
+    s = Rf_substitute(f, env);
     UNPROTECT(2);
     return(s);
 }

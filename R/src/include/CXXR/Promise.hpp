@@ -265,6 +265,13 @@ namespace CXXR
 
 namespace R
 {
+    /**
+     * @param x Pointer to a CXXR::Promise.
+     *
+     * @deprecated Will need to be fixed.
+     */
+    void SET_PRSEEN(SEXP x, int v);
+
     /** @brief Create a CXXR::Promise object.
      *
      * @param expr Expression to be evaluated to provide the value
@@ -313,13 +320,6 @@ extern "C"
      * @deprecated Will need to be fixed.
      */
     int PRSEEN(SEXP x);
-
-    /**
-     * @param x Pointer to a CXXR::Promise.
-     *
-     * @deprecated Will need to be fixed.
-     */
-    void SET_PRSEEN(SEXP x, int v);
 
     /** @brief Set the environment of a CXXR::Promise.
      *

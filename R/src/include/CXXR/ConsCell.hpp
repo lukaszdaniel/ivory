@@ -403,15 +403,30 @@ namespace CXXR
     void ccdump(std::ostream &os, const ConsCell *cc, size_t margin = 0);
 } // namespace CXXR
 
+namespace R
+{
+    // Used in argument handling (within envir.cpp, eval.cpp and
+    // match.cpp).  Note comments in the 'R Internals' document.
+    void SET_MISSING(SEXP x, int v);
+
+    SEXP CONS_NR(SEXP a, SEXP b);
+    int BNDCELL_TAG(SEXP cell);
+    void SET_BNDCELL_TAG(SEXP cell, int val);
+    double BNDCELL_DVAL(SEXP cell);
+    int BNDCELL_IVAL(SEXP cell);
+    int BNDCELL_LVAL(SEXP cell);
+    void SET_BNDCELL_DVAL(SEXP cell, double v);
+    void SET_BNDCELL_IVAL(SEXP cell, int v);
+    void SET_BNDCELL_LVAL(SEXP cell, int v);
+    void INIT_BNDCELL(SEXP cell, int type);
+    void SET_BNDCELL(SEXP cell, SEXP val);
+} // namespace R
+
 extern "C"
 {
     // Used in argument handling (within envir.cpp, eval.cpp and
     // match.cpp).  Note comments in the 'R Internals' document.
     int MISSING(SEXP x);
-
-    // Used in argument handling (within envir.cpp, eval.cpp and
-    // match.cpp).  Note comments in the 'R Internals' document.
-    void SET_MISSING(SEXP x, int v);
 
     /** @brief Get tag of CXXR::ConsCell.
      *
@@ -441,18 +456,6 @@ extern "C"
      * @return Pointer to the created object.
      */
     SEXP Rf_allocSExp(SEXPTYPE t);
-
-    int BNDCELL_TAG(SEXP cell);
-    void SET_BNDCELL_TAG(SEXP cell, int val);
-    double BNDCELL_DVAL(SEXP cell);
-    int BNDCELL_IVAL(SEXP cell);
-    int BNDCELL_LVAL(SEXP cell);
-    void SET_BNDCELL_DVAL(SEXP cell, double v);
-    void SET_BNDCELL_IVAL(SEXP cell, int v);
-    void SET_BNDCELL_LVAL(SEXP cell, int v);
-    void INIT_BNDCELL(SEXP cell, int type);
-    void SET_BNDCELL(SEXP cell, SEXP val);
-    SEXP CONS_NR(SEXP a, SEXP b);
 
     /** @brief Obtain the n-th element of CXXR::ConsCell.
      *

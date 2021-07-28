@@ -213,6 +213,42 @@ namespace R
     *       should do this checking in advance.
     */
    SEXP mkCLOSXP(SEXP formal_args, SEXP body, SEXP env);
+
+   /** @brief Get the JIT state
+    *
+    * @param x Pointer to \c RObject.
+    *
+    * @return true iff \a x is not meant to be JIT-compiled.  Returns false if \a x
+    * is nullptr.
+    */
+   int NOJIT(SEXP x);
+
+   /** @brief Can this object be JIT-compiled?
+    *
+    * @param x Pointer to \c RObject.
+    *
+    * @return true iff \a x can be JIT-compiled.  Returns false if \a x
+    * is nullptr.
+    */
+   int MAYBEJIT(SEXP x);
+
+   /** @brief Do not allow JIT compilation for this object
+    *
+    * @param x Pointer to \c RObject.
+    */
+   void SET_NOJIT(SEXP x);
+
+   /** @brief Mark object as available for JIT compilation
+    *
+    * @param x Pointer to \c RObject.
+    */
+   void SET_MAYBEJIT(SEXP x);
+
+   /** @brief Remove availabilty flag for JIT compilation
+    *
+    * @param x Pointer to \c RObject.
+    */
+   void UNSET_MAYBEJIT(SEXP x);
 } // namespace R
 
 extern "C"
@@ -266,42 +302,6 @@ extern "C"
     *          A null pointer is not permissible (not checked).
     */
    void SET_CLOENV(SEXP x, SEXP v);
-
-   /** @brief Get the JIT state
-    *
-    * @param x Pointer to \c RObject.
-    *
-    * @return true iff \a x is not meant to be JIT-compiled.  Returns false if \a x
-    * is nullptr.
-    */
-   int NOJIT(SEXP x);
-
-   /** @brief Can this object be JIT-compiled?
-    *
-    * @param x Pointer to \c RObject.
-    *
-    * @return true iff \a x can be JIT-compiled.  Returns false if \a x
-    * is nullptr.
-    */
-   int MAYBEJIT(SEXP x);
-
-   /** @brief Do not allow JIT compilation for this object
-    *
-    * @param x Pointer to \c RObject.
-    */
-   void SET_NOJIT(SEXP x);
-
-   /** @brief Mark object as available for JIT compilation
-    *
-    * @param x Pointer to \c RObject.
-    */
-   void SET_MAYBEJIT(SEXP x);
-
-   /** @brief Remove availabilty flag for JIT compilation
-    *
-    * @param x Pointer to \c RObject.
-    */
-   void UNSET_MAYBEJIT(SEXP x);
 
    /** @brief Get debugging state
     *

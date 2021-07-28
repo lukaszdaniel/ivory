@@ -35,6 +35,7 @@
 #include <iostream>
 
 using namespace std;
+using namespace R;
 using namespace CXXR;
 
 namespace CXXR
@@ -103,7 +104,7 @@ namespace CXXR
 
 // ***** C interface *****
 
-SEXP CAR0(SEXP e)
+SEXP R::CAR0(SEXP e)
 {
     if (!e)
         return nullptr;

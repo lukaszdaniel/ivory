@@ -24,8 +24,8 @@
 #include <config.h>
 #endif
 
-#include <Defn.h>
 #include <Rinternals.h>
+#include <Defn.h>
 #include <R_ext/GraphicsEngine.h>
 
 #include "grDevices.h"

@@ -251,7 +251,7 @@ inline static bool ISNULL(SEXP x)
 }
 
 /* Function to determine whethr an environment contains special symbols */
-Rboolean R_envHasNoSpecialSymbols(SEXP env)
+Rboolean R::R_envHasNoSpecialSymbols(SEXP env)
 {
     for (SEXP frame = FRAME(env); frame; frame = CDR(frame))
 	if (IS_SPECIAL_SYMBOL(TAG(frame)))
@@ -522,7 +522,7 @@ inline SEXP Rf_findVarInFrame(SEXP rho, SEXP symbol)
  * S3 meta-variables are in the expected order and that the frame is
  * represented by a pairlist.
  */
-void Rf_readS3VarsFromFrame(SEXP rho,
+void R::Rf_readS3VarsFromFrame(SEXP rho,
                             SEXP *dotGeneric, SEXP *dotGroup, SEXP *dotClass, SEXP *dotMethod,
                             SEXP *dotGenericCallEnv, SEXP *dotGenericDefEnv)
 {
@@ -840,7 +840,7 @@ SEXP RCNTXT::dynamicfindVar(SEXP symbol, RCNTXT *cptr)
 */
 
 /*HIDDEN*/
-SEXP Rf_findFun3(SEXP symbol, SEXP rho, SEXP call)
+SEXP R::Rf_findFun3(SEXP symbol, SEXP rho, SEXP call)
 {
     SEXP vl;
 
@@ -936,7 +936,7 @@ void Rf_defineVar(SEXP symbol, SEXP value, SEXP rho)
  * the variables from addVars are not present in env and that addVars does
  * not have duplicit variables.
  */
-void Rf_addMissingVarsToNewEnv(SEXP env, SEXP addVars)
+void R::Rf_addMissingVarsToNewEnv(SEXP env, SEXP addVars)
 {
     if (!addVars)
         return;
@@ -2569,7 +2569,7 @@ SEXP R_NewEnv(SEXP enclos, int hash, int size)
 	return NewEnvironment(nullptr, nullptr, enclos);
 }
 
-void R_RestoreHashCount(SEXP rho)
+void R::R_RestoreHashCount(SEXP rho)
 {
 }
 
@@ -3062,7 +3062,7 @@ HIDDEN SEXP do_topenv(SEXP call, SEXP op, SEXP args, SEXP rho) {
 }
 
 /*HIDDEN*/
-Rboolean Rf_isUnmodifiedSpecSym(SEXP sym, SEXP env)
+Rboolean R::Rf_isUnmodifiedSpecSym(SEXP sym, SEXP env)
 {
     if (sym && !IS_SPECIAL_SYMBOL(sym))
         return FALSE;
@@ -3128,7 +3128,7 @@ void findFunctionForBodyInNamespace(SEXP body, SEXP nsenv, SEXP nsname) {
  * @note For debugging.
  * */
 /*HIDDEN*/
-void Rf_findFunctionForBody(SEXP body)
+void R::Rf_findFunctionForBody(SEXP body)
 {
     SEXP nstable = HASHTAB(R_NamespaceRegistry);
     int n = Rf_length(nstable);

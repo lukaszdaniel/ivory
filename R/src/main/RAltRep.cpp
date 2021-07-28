@@ -32,6 +32,7 @@
 #include <CXXR/StringVector.hpp>
 
 using namespace std;
+using namespace R;
 using namespace CXXR;
 
 namespace CXXR

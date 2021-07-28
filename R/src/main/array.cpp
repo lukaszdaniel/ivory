@@ -305,7 +305,7 @@ SEXP Rf_allocArray(SEXPTYPE mode, SEXP dims)
 /* attribute.  Note that this function mutates x. */
 /* Duplication should occur before this is called. */
 
-SEXP Rf_DropDims(SEXP x)
+SEXP R::Rf_DropDims(SEXP x)
 {
     PROTECT(x);
     SEXP dims = getAttrib(x, R_DimSymbol);

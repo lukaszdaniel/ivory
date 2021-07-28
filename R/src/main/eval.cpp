@@ -48,6 +48,7 @@
 #include <CXXR/Symbol.hpp>
 #include <CXXR/Environment.hpp>
 #include <CXXR/Promise.hpp>
+#include <CXXR/Closure.hpp>
 #include <CXXR/Evaluator.hpp>
 #include <Localization.h>
 #include <RContext.h>
@@ -3940,7 +3941,7 @@ static GCRoot<> R_ConstantsRegistry(nullptr);
 #define THREADED_CODE
 #endif
 
-HIDDEN void R_initialize_bcode(void)
+HIDDEN void R::R_initialize_bcode(void)
 {
   R_AddSym = Symbol::obtain("+");
   R_SubSym = Symbol::obtain("-");
@@ -6761,7 +6762,7 @@ static SEXP markSpecialArgs(SEXP args)
 	return args;
 }
 
-HIDDEN Rboolean R_BCVersionOK(SEXP s)
+HIDDEN Rboolean R::R_BCVersionOK(SEXP s)
 {
 	if (TYPEOF(s) != BCODESXP)
 		return FALSE;
@@ -8011,7 +8012,7 @@ RObject *ByteCode::evaluate(Environment *env)
 }
 
 #ifdef THREADED_CODE
-SEXP R_bcEncode(SEXP bytes)
+SEXP R::R_bcEncode(SEXP bytes)
 {
     SEXP code;
     BCODE *pc;
@@ -8068,7 +8069,7 @@ static int findOp(void *addr)
 	return 0; /* not reached */
 }
 
-SEXP R_bcDecode(SEXP code) {
+SEXP R::R_bcDecode(SEXP code) {
     int n, i, j, *ipc;
     BCODE *pc;
     SEXP bytes;
@@ -8096,14 +8097,14 @@ SEXP R_bcDecode(SEXP code) {
     return bytes;
 }
 #else
-SEXP R_bcEncode(SEXP x) { return x; }
-SEXP R_bcDecode(SEXP x) { return duplicate(x); }
+SEXP R::R_bcEncode(SEXP x) { return x; }
+SEXP R::R_bcDecode(SEXP x) { return duplicate(x); }
 #endif
 
 /* Add BCODESXP bc into the constants registry, performing a deep copy of the
    bc's constants */
 #define CONST_CHECK_COUNT 1000
-HIDDEN void R_registerBC(SEXP bcBytes, SEXP bcode)
+HIDDEN void R::R_registerBC(SEXP bcBytes, SEXP bcode)
 {
     if (R_check_constants <= 0)
 	return;
@@ -8270,7 +8271,7 @@ static void const_cleanup(void *data)
 
 /* Checks if constants of any registered BCODESXP have been modified.
    Returns TRUE if the constants are ok, otherwise returns false or aborts.*/
-HIDDEN Rboolean R_checkConstants(Rboolean abortOnError)
+HIDDEN Rboolean R::R_checkConstants(Rboolean abortOnError)
 {
     if (R_check_constants <= 0 || R_ConstantsRegistry == nullptr)
 	return TRUE;

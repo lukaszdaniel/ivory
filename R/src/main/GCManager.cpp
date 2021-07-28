@@ -40,10 +40,10 @@
 #include <CXXR/WeakRef.hpp>
 #include <Defn.h>
 #include <Rinterface.h>
-#include <Rinternals.h>
 #include <Localization.h>
 
 using namespace std;
+using namespace R;
 using namespace CXXR;
 
 constexpr int LEVEL_0_FREQ = 20;

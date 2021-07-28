@@ -40,9 +40,11 @@
 #include <CXXR/ProtectStack.hpp>
 #include <CXXR/JMPException.hpp>
 #include <CXXR/WeakRef.hpp>
+#include <Defn.h>
 #include <Localization.h>
 
 using namespace std;
+using namespace R;
 using namespace CXXR;
 
 extern "C"
@@ -225,9 +227,6 @@ namespace CXXR
 		static WRList *tombstone = new WRList();
 		return tombstone;
 	}
-
-	// WeakRef::finalize() is in memory.cpp (for the time being, until
-	// eval() is declared in a CXXR header).
 
 	void WeakRef::markThru(unsigned int max_gen)
 	{

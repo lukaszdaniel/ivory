@@ -41,6 +41,7 @@
 #include <CXXR/IntVector.hpp>
 #include <CXXR/LogicalVector.hpp>
 #include <CXXR/Symbol.hpp>
+#include <CXXR/ByteCode.hpp>
 #include <CXXR/Evaluator.hpp>
 #include <CXXR/strutil.hpp>
 #include <Localization.h>
@@ -2211,7 +2212,7 @@ HIDDEN SEXP do_interruptsSuspended(SEXP call, SEXP op, SEXP args, SEXP env)
 	return ScalarLogical(orig_value);
 }
 
-HIDDEN void R_BadValueInRCode(SEXP value, SEXP call, SEXP rho, const char *rawmsg,
+HIDDEN void R::R_BadValueInRCode(SEXP value, SEXP call, SEXP rho, const char *rawmsg,
                   const char *errmsg, const char *warnmsg,
                   const char *varname, Rboolean warnByDefault)
 {

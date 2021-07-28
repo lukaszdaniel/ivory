@@ -50,6 +50,12 @@ namespace CXXR
     }
 } // namespace CXXR
 
+namespace R
+{
+    void SET_SCALAR_BVAL(SEXP x, Rbyte v);
+    Rbyte SCALAR_BVAL(SEXP x);
+} // namespace R
+
 extern "C"
 {
     /**
@@ -77,8 +83,7 @@ extern "C"
      */
     const Rbyte *RAW_RO(SEXP x);
     Rbyte *RAW0(SEXP x);
-    Rbyte SCALAR_BVAL(SEXP x);
-    void SET_SCALAR_BVAL(SEXP x, Rbyte v);
+
     const Rbyte *RAW_OR_NULL(SEXP x);
     Rbyte RAW_ELT(SEXP x, R_xlen_t i);
     void SET_RAW_ELT(SEXP x, R_xlen_t i, Rbyte v);

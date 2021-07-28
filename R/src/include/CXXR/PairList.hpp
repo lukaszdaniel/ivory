@@ -207,6 +207,14 @@ namespace CXXR
 
 namespace R
 {
+    /**
+     * @param e Pointer to a list.
+     *
+     * @return Pointer to the value of the list head, or 0 if \a e is
+     * a null pointer.
+     */
+    SEXP CAR0(SEXP e);
+
     /** @brief Destructively removes R_NilValue ('NULL') elements from a pairlist.
      *
      * @param s Pointer to a CXXR::ConsCell.
@@ -216,7 +224,13 @@ namespace R
      * @return Pointer to the rearanged CXXR::ConsCell.
      */
     CXXR::PairList *R_listCompact(CXXR::PairList *s, bool keep_initial);
-}
+
+    SEXP Rf_allocFormalsList2(SEXP sym1, SEXP sym2);
+    SEXP Rf_allocFormalsList3(SEXP sym1, SEXP sym2, SEXP sym3);
+    SEXP Rf_allocFormalsList4(SEXP sym1, SEXP sym2, SEXP sym3, SEXP sym4);
+    SEXP Rf_allocFormalsList5(SEXP sym1, SEXP sym2, SEXP sym3, SEXP sym4, SEXP sym5);
+    SEXP Rf_allocFormalsList6(SEXP sym1, SEXP sym2, SEXP sym3, SEXP sym4, SEXP sym5, SEXP sym6);
+} // namespace R
 
 extern "C"
 {
@@ -228,14 +242,6 @@ extern "C"
      * a null pointer.
      */
     SEXP CAR(SEXP e);
-
-    /**
-     * @param e Pointer to a list.
-     *
-     * @return Pointer to the value of the list head, or 0 if \a e is
-     * a null pointer.
-     */
-    SEXP CAR0(SEXP e);
 
     /** @brief Get tail of CXXR::ConsCell.
      *
@@ -478,11 +484,6 @@ extern "C"
     Rboolean Rf_isVectorizable(SEXP s);
     Rboolean Rf_isList(SEXP s);
     Rboolean Rf_isPairList(SEXP s);
-    SEXP Rf_allocFormalsList2(SEXP sym1, SEXP sym2);
-    SEXP Rf_allocFormalsList3(SEXP sym1, SEXP sym2, SEXP sym3);
-    SEXP Rf_allocFormalsList4(SEXP sym1, SEXP sym2, SEXP sym3, SEXP sym4);
-    SEXP Rf_allocFormalsList5(SEXP sym1, SEXP sym2, SEXP sym3, SEXP sym4, SEXP sym5);
-    SEXP Rf_allocFormalsList6(SEXP sym1, SEXP sym2, SEXP sym3, SEXP sym4, SEXP sym5, SEXP sym6);
 } // extern "C"
 
 #if (defined(R_NO_REMAP) && defined(COMPILING_IVORY)) && defined(__cplusplus)

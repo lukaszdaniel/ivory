@@ -311,6 +311,19 @@ namespace CXXR
 
 } // namespace CXXR
 
+namespace R
+{
+   void R_RestoreHashCount(SEXP rho);
+
+   /** @brief Enable/disable single-stepping of the debugger.
+    *
+    * @param x Pointer a CXXR::Environment object (checked).
+    *
+    * @param v The new single-stepping state (true = enabled).
+    */
+   void SET_ENV_RDEBUG(SEXP x, int v);
+} // namespace R
+
 extern "C"
 {
    /** @brief An empty environment at the root of the environment tree
@@ -385,14 +398,6 @@ extern "C"
     */
    int ENV_RDEBUG(SEXP x);
 
-   /** @brief Enable/disable single-stepping of the debugger.
-    *
-    * @param x Pointer a CXXR::Environment object (checked).
-    *
-    * @param v The new single-stepping state (true = enabled).
-    */
-   void SET_ENV_RDEBUG(SEXP x, int v);
-
    /** @brief Set environment flags.
     *
     * @param x Pointer to a CXXR::Environment (not currently checked).
@@ -437,7 +442,6 @@ extern "C"
    void SET_HASHTAB(SEXP x, SEXP v);
 
    SEXP R_NewEnv(SEXP enclos, int hash, int size);
-   void R_RestoreHashCount(SEXP rho);
    Rboolean R_IsPackageEnv(SEXP rho);
    SEXP R_PackageEnvName(SEXP rho);
    SEXP R_FindPackageEnv(SEXP info);

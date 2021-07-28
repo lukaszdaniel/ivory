@@ -204,35 +204,35 @@ void SET_RSTEP(SEXP x, int v)
     x->setRstep(v);
 }
 
-int NOJIT(SEXP x)
+int R::NOJIT(SEXP x)
 {
     if (!x)
         return 0;
     return SEXP_downcast<const Closure *>(x)->noJIT();
 }
 
-int MAYBEJIT(SEXP x)
+int R::MAYBEJIT(SEXP x)
 {
     if (!x)
         return 0;
     return SEXP_downcast<const Closure *>(x)->maybeJIT();
 }
 
-void SET_NOJIT(SEXP x)
+void R::SET_NOJIT(SEXP x)
 {
     if (!x)
         return;
     SEXP_downcast<Closure *>(x)->setNoJIT();
 }
 
-void SET_MAYBEJIT(SEXP x)
+void R::SET_MAYBEJIT(SEXP x)
 {
     if (!x)
         return;
     SEXP_downcast<Closure *>(x)->setMaybeJIT(true);
 }
 
-void UNSET_MAYBEJIT(SEXP x)
+void R::UNSET_MAYBEJIT(SEXP x)
 {
     if (!x)
         return;

@@ -32,6 +32,9 @@
 #include <CXXR/RealVector.hpp>
 #include <Rinternals.h>
 
+using namespace R;
+using namespace CXXR;
+
 namespace CXXR
 {
     // Force the creation of non-inline embodiments of functions callable
@@ -127,13 +130,13 @@ double *REAL0(SEXP x)
     return static_cast<double *>(STDVEC_DATAPTR(x));
 }
 
-double SCALAR_DVAL(SEXP x)
+double R::SCALAR_DVAL(SEXP x)
 {
     CHECK_SCALAR_REAL(x);
     return REAL0(x)[0];
 }
 
-void SET_SCALAR_DVAL(SEXP x, double v)
+void R::SET_SCALAR_DVAL(SEXP x, double v)
 {
     CHECK_SCALAR_REAL(x);
     REAL0(x)[0] = v;

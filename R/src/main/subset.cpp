@@ -116,7 +116,7 @@ inline static SEXP VECTOR_ELT_FIX_NAMED(SEXP y, R_xlen_t i)
 	} while (0)
 
 /*HIDDEN*/
-SEXP Rf_ExtractSubset(SEXP x, SEXP indx, SEXP call)
+SEXP R::Rf_ExtractSubset(SEXP x, SEXP indx, SEXP call)
 {
     if (x == R_NilValue)
 	return x;
@@ -1213,7 +1213,7 @@ static enum pmatch pstrmatch(SEXP target, SEXP input, size_t slen)
 }
 
 /*HIDDEN*/
-SEXP Rf_fixSubset3Args(SEXP call, SEXP args, SEXP env, SEXP* syminp)
+SEXP R::Rf_fixSubset3Args(SEXP call, SEXP args, SEXP env, SEXP* syminp)
 {
     SEXP input, nlist;
 

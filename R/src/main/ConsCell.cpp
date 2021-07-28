@@ -39,6 +39,7 @@
 #include <Rinternals.h>
 
 using namespace std;
+using namespace R;
 using namespace CXXR;
 
 namespace CXXR
@@ -464,59 +465,59 @@ int MISSING(SEXP x)
     return SEXP_downcast<const ConsCell *>(x)->missing();
 }
 
-void SET_MISSING(SEXP x, int v)
+void R::SET_MISSING(SEXP x, int v)
 {
     if (x)
         SEXP_downcast<ConsCell *>(x)->setMissing(v);
 }
 
-int BNDCELL_TAG(SEXP cell)
+int R::BNDCELL_TAG(SEXP cell)
 {
     return cell ? SEXP_downcast<ConsCell *>(cell)->bndcellTag() : NILSXP;
 }
 
-void SET_BNDCELL_TAG(SEXP cell, int val)
+void R::SET_BNDCELL_TAG(SEXP cell, int val)
 {
     if (cell)
         SEXP_downcast<ConsCell *>(cell)->setBndCellTag(SEXPTYPE(val));
 }
 
-double BNDCELL_DVAL(SEXP cell)
+double R::BNDCELL_DVAL(SEXP cell)
 {
     return BNDCELL_DVAL_MACRO(cell);
 }
 
-int BNDCELL_IVAL(SEXP cell)
+int R::BNDCELL_IVAL(SEXP cell)
 {
     return BNDCELL_IVAL_MACRO(cell);
 }
 
-int BNDCELL_LVAL(SEXP cell)
+int R::BNDCELL_LVAL(SEXP cell)
 {
     return BNDCELL_LVAL_MACRO(cell);
 }
 
-void SET_BNDCELL_DVAL(SEXP cell, double v)
+void R::SET_BNDCELL_DVAL(SEXP cell, double v)
 {
     SET_BNDCELL_DVAL_MACRO(cell, v);
 }
 
-void SET_BNDCELL_IVAL(SEXP cell, int v)
+void R::SET_BNDCELL_IVAL(SEXP cell, int v)
 {
     SET_BNDCELL_IVAL_MACRO(cell, v);
 }
 
-void SET_BNDCELL_LVAL(SEXP cell, int v)
+void R::SET_BNDCELL_LVAL(SEXP cell, int v)
 {
     SET_BNDCELL_LVAL_MACRO(cell, v);
 }
 
-void INIT_BNDCELL(SEXP cell, int type)
+void R::INIT_BNDCELL(SEXP cell, int type)
 {
     INIT_BNDCELL_MACRO(cell, type);
 }
 
-void SET_BNDCELL(SEXP cell, SEXP val)
+void R::SET_BNDCELL(SEXP cell, SEXP val)
 {
     SETCAR(cell, val);
 }

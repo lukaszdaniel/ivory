@@ -31,9 +31,10 @@
 #include <CXXR/GCNode.hpp>
 #include <CXXR/WeakRef.hpp>
 #include <Rinterface.h>
-#include <Rinternals.h>
+#include <Defn.h>
 
 using namespace std;
+using namespace R;
 using namespace CXXR;
 
 namespace
@@ -93,15 +94,16 @@ namespace
 int R_check_constants = 0;
 
 #ifdef THREADCHECK
-void R_check_thread(const char *s)
+void R::R_check_thread(const char *s)
 {
 }
 #endif
 
-Rboolean R_checkConstants(Rboolean abortOnError)
+Rboolean R::R_checkConstants(Rboolean abortOnError)
 {
     return FALSE;
 }
+
 void REprintf(const char *format, ...)
 {
     std::cerr << format << std::endl;

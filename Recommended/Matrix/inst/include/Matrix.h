@@ -28,56 +28,55 @@ extern "C" {
 #include <R_ext/Visibility.h>
 
 // Copied from ../../src/Mutils.h ----------------------------------------
-#define MATRIX_VALID_ge_dense			\
-        "dmatrix", "dgeMatrix",			\
-	"lmatrix", "lgeMatrix",			\
-	"nmatrix", "ngeMatrix",			\
-	"zmatrix", "zgeMatrix"
+#define MATRIX_VALID_ge_dense   \
+	"dmatrix", "dgeMatrix",     \
+		"lmatrix", "lgeMatrix", \
+		"nmatrix", "ngeMatrix", \
+		"zmatrix", "zgeMatrix"
 
-#define MATRIX_VALID_ddense					\
-		    "dgeMatrix", "dtrMatrix",			\
-		    "dsyMatrix", "dpoMatrix", "ddiMatrix",	\
-		    "dtpMatrix", "dspMatrix", "dppMatrix",	\
-		    /* sub classes of those above:*/		\
-		    /* dtr */ "Cholesky", "LDL", "BunchKaufman",\
-		    /* dtp */ "pCholesky", "pBunchKaufman",	\
-		    /* dpo */ "corMatrix"
+#define MATRIX_VALID_ddense                                                     \
+	"dgeMatrix", "dtrMatrix",                                                   \
+		"dsyMatrix", "dpoMatrix", "ddiMatrix",                                  \
+		"dtpMatrix", "dspMatrix", "dppMatrix", /* sub classes of those above:*/ \
+		/* dtr */ "Cholesky", "LDL", "BunchKaufman",                            \
+		/* dtp */ "pCholesky", "pBunchKaufman",                                 \
+		/* dpo */ "corMatrix"
 
-#define MATRIX_VALID_ldense			\
-		    "lgeMatrix", "ltrMatrix",	\
-		    "lsyMatrix", "ldiMatrix",	\
-		    "ltpMatrix", "lspMatrix"
+#define MATRIX_VALID_ldense       \
+	"lgeMatrix", "ltrMatrix",     \
+		"lsyMatrix", "ldiMatrix", \
+		"ltpMatrix", "lspMatrix"
 
-#define MATRIX_VALID_ndense			\
-		    "ngeMatrix", "ntrMatrix",	\
-		    "nsyMatrix",		\
-		    "ntpMatrix", "nspMatrix"
+#define MATRIX_VALID_ndense   \
+	"ngeMatrix", "ntrMatrix", \
+		"nsyMatrix",          \
+		"ntpMatrix", "nspMatrix"
 
-#define MATRIX_VALID_dCsparse			\
- "dgCMatrix", "dsCMatrix", "dtCMatrix"
-#define MATRIX_VALID_nCsparse			\
- "ngCMatrix", "nsCMatrix", "ntCMatrix"
+#define MATRIX_VALID_dCsparse \
+	"dgCMatrix", "dsCMatrix", "dtCMatrix"
+#define MATRIX_VALID_nCsparse \
+	"ngCMatrix", "nsCMatrix", "ntCMatrix"
 
-#define MATRIX_VALID_Csparse			\
-    MATRIX_VALID_dCsparse,			\
- "lgCMatrix", "lsCMatrix", "ltCMatrix",		\
-    MATRIX_VALID_nCsparse,			\
- "zgCMatrix", "zsCMatrix", "ztCMatrix"
+#define MATRIX_VALID_Csparse                   \
+	MATRIX_VALID_dCsparse,                     \
+		"lgCMatrix", "lsCMatrix", "ltCMatrix", \
+		MATRIX_VALID_nCsparse,                 \
+		"zgCMatrix", "zsCMatrix", "ztCMatrix"
 
-#define MATRIX_VALID_Tsparse			\
- "dgTMatrix", "dsTMatrix", "dtTMatrix",		\
- "lgTMatrix", "lsTMatrix", "ltTMatrix",		\
- "ngTMatrix", "nsTMatrix", "ntTMatrix",		\
- "zgTMatrix", "zsTMatrix", "ztTMatrix"
+#define MATRIX_VALID_Tsparse                   \
+	"dgTMatrix", "dsTMatrix", "dtTMatrix",     \
+		"lgTMatrix", "lsTMatrix", "ltTMatrix", \
+		"ngTMatrix", "nsTMatrix", "ntTMatrix", \
+		"zgTMatrix", "zsTMatrix", "ztTMatrix"
 
-#define MATRIX_VALID_Rsparse			\
- "dgRMatrix", "dsRMatrix", "dtRMatrix",		\
- "lgRMatrix", "lsRMatrix", "ltRMatrix",		\
- "ngRMatrix", "nsRMatrix", "ntRMatrix",		\
- "zgRMatrix", "zsRMatrix", "ztRMatrix"
+#define MATRIX_VALID_Rsparse                   \
+	"dgRMatrix", "dsRMatrix", "dtRMatrix",     \
+		"lgRMatrix", "lsRMatrix", "ltRMatrix", \
+		"ngRMatrix", "nsRMatrix", "ntRMatrix", \
+		"zgRMatrix", "zsRMatrix", "ztRMatrix"
 
-#define MATRIX_VALID_tri_Csparse		\
-   "dtCMatrix", "ltCMatrix", "ntCMatrix", "ztCMatrix"
+#define MATRIX_VALID_tri_Csparse \
+	"dtCMatrix", "ltCMatrix", "ntCMatrix", "ztCMatrix"
 
 #define MATRIX_VALID_CHMfactor "dCHMsuper", "dCHMsimpl", "nCHMsuper", "nCHMsimpl"
 

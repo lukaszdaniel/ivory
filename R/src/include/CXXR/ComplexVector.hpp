@@ -51,6 +51,12 @@ namespace CXXR
     }
 } // namespace CXXR
 
+namespace R
+{
+    void SET_SCALAR_CVAL(SEXP x, Rcomplex v);
+    Rcomplex SCALAR_CVAL(SEXP x);
+} // namespace R
+
 extern "C"
 {
     /**
@@ -78,8 +84,7 @@ extern "C"
      */
     const Rcomplex *COMPLEX_RO(SEXP x);
     Rcomplex *COMPLEX0(SEXP x);
-    Rcomplex SCALAR_CVAL(SEXP x);
-    void SET_SCALAR_CVAL(SEXP x, Rcomplex v);
+
     const Rcomplex *COMPLEX_OR_NULL(SEXP x);
     Rcomplex COMPLEX_ELT(SEXP x, R_xlen_t i);
     void SET_COMPLEX_ELT(SEXP x, R_xlen_t i, Rcomplex v);

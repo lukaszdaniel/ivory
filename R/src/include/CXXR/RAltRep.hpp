@@ -97,15 +97,8 @@ namespace CXXR
     };
 } // namespace CXXR
 
-extern "C"
+namespace R
 {
-    void R_init_altrep();
-    void R_reinit_altrep_classes(DllInfo *);
-    SEXP ALTREP_CLASS(SEXP x);
-    SEXP R_altrep_data1(SEXP x);
-    SEXP R_altrep_data2(SEXP x);
-    void R_set_altrep_data1(SEXP x, SEXP v);
-    void R_set_altrep_data2(SEXP x, SEXP v);
     SEXP ALTREP_DUPLICATE_EX(SEXP x, Rboolean deep);
     SEXP ALTREP_COERCE(SEXP x, int type);
     Rboolean ALTREP_INSPECT(SEXP, int, int, int, void (*)(SEXP, int, int, int));
@@ -130,6 +123,35 @@ extern "C"
     void ALTCOMPLEX_SET_ELT(SEXP x, R_xlen_t i, Rcomplex v);
     Rbyte ALTRAW_ELT(SEXP x, R_xlen_t i);
     void ALTRAW_SET_ELT(SEXP x, R_xlen_t i, Rbyte v);
+    /* invoking ALTREP class methods */
+    SEXP ALTINTEGER_SUM(SEXP x, Rboolean narm);
+    SEXP ALTINTEGER_MIN(SEXP x, Rboolean narm);
+    SEXP ALTINTEGER_MAX(SEXP x, Rboolean narm);
+    SEXP INTEGER_MATCH(SEXP, SEXP, int, SEXP, SEXP, Rboolean);
+    SEXP INTEGER_IS_NA(SEXP x);
+    SEXP ALTREAL_SUM(SEXP x, Rboolean narm);
+    SEXP ALTREAL_MIN(SEXP x, Rboolean narm);
+    SEXP ALTREAL_MAX(SEXP x, Rboolean narm);
+    SEXP REAL_MATCH(SEXP, SEXP, int, SEXP, SEXP, Rboolean);
+    SEXP REAL_IS_NA(SEXP x);
+    SEXP ALTLOGICAL_SUM(SEXP x, Rboolean narm);
+    /* constructors for internal ALTREP classes */
+    SEXP R_compact_intrange(R_xlen_t n1, R_xlen_t n2);
+    SEXP R_deferred_coerceToString(SEXP v, SEXP info);
+    // SEXP R_virtrep_vec(SEXP, SEXP);
+    SEXP R_tryWrap(SEXP);
+    SEXP R_tryUnwrap(SEXP);
+    void R_init_altrep();
+    void R_reinit_altrep_classes(DllInfo *);
+} // namespace R
+
+extern "C"
+{
+    SEXP ALTREP_CLASS(SEXP x);
+    SEXP R_altrep_data1(SEXP x);
+    SEXP R_altrep_data2(SEXP x);
+    void R_set_altrep_data1(SEXP x, SEXP v);
+    void R_set_altrep_data2(SEXP x, SEXP v);
 
     R_xlen_t INTEGER_GET_REGION(SEXP sx, R_xlen_t i, R_xlen_t n, int *buf);
     R_xlen_t REAL_GET_REGION(SEXP sx, R_xlen_t i, R_xlen_t n, double *buf);
@@ -146,26 +168,6 @@ extern "C"
     int LOGICAL_NO_NA(SEXP x);
     int STRING_IS_SORTED(SEXP x);
     int STRING_NO_NA(SEXP x);
-
-    /* invoking ALTREP class methods */
-    SEXP ALTINTEGER_SUM(SEXP x, Rboolean narm);
-    SEXP ALTINTEGER_MIN(SEXP x, Rboolean narm);
-    SEXP ALTINTEGER_MAX(SEXP x, Rboolean narm);
-    SEXP INTEGER_MATCH(SEXP, SEXP, int, SEXP, SEXP, Rboolean);
-    SEXP INTEGER_IS_NA(SEXP x);
-    SEXP ALTREAL_SUM(SEXP x, Rboolean narm);
-    SEXP ALTREAL_MIN(SEXP x, Rboolean narm);
-    SEXP ALTREAL_MAX(SEXP x, Rboolean narm);
-    SEXP REAL_MATCH(SEXP, SEXP, int, SEXP, SEXP, Rboolean);
-    SEXP REAL_IS_NA(SEXP x);
-    SEXP ALTLOGICAL_SUM(SEXP x, Rboolean narm);
-
-    /* constructors for internal ALTREP classes */
-    SEXP R_compact_intrange(R_xlen_t n1, R_xlen_t n2);
-    SEXP R_deferred_coerceToString(SEXP v, SEXP info);
-    SEXP R_virtrep_vec(SEXP, SEXP);
-    SEXP R_tryWrap(SEXP);
-    SEXP R_tryUnwrap(SEXP);
 } // extern "C"
 
 #endif /* RALTREP_HPP */

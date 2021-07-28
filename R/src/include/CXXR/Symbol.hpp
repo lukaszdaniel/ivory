@@ -463,6 +463,59 @@ namespace CXXR
     }
 } // namespace CXXR
 
+namespace R
+{
+    SEXP Rf_installDDVAL(int i);
+    SEXP Rf_installS3Signature(const char *methodName, const char *className);
+    void SET_DDVAL(SEXP x, int v);
+
+    /** @brief Set Symbol name.
+     *
+     * @param x Pointer to a CXXR::Symbol (checked).
+     *
+     * @param v Pointer to a CXXR::String representing \a x's name. 
+     */
+    void SET_PRINTNAME(SEXP x, SEXP v);
+
+    /** @brief Set symbol's value in the base environment.
+     *
+     * @param x Pointer to a CXXR::Symbol (checked).
+     *
+     * @param val Pointer to the RObject now to be considered as
+     *            the value of this symbol.  A null pointer or
+     *            R_UnboundValue are permissible values of \a val.
+     *
+     * @todo No binding to R_UnboundValue ought to be created.
+     */
+    void SET_SYMVALUE(SEXP x, SEXP v);
+
+    /** @brief Set internal function denoted by a symbol.
+     *
+     * @param x Pointer to a CXXR::Symbol (checked).
+     *
+     * @param func Pointer to the CXXR::BuiltInFunction (checked) to
+     *          be denoted by this symbol.  A null pointer is
+     *          permissible.
+     *
+     * @note It would be better if this was set exclusively during
+     * construction.
+     */
+    void SET_INTERNAL(SEXP x, SEXP v);
+
+    /** @brief Create a CXXR::Symbol object.
+     *
+     * @param name Pointer to a CXXR::String object (checked) to be
+     *          taken as the name of the constructed symbol.
+     *
+     * @param value Pointer to the CXXR::RObject to be considered as
+     *          the value of the constructed symbol.  A null pointer or
+     *          R_UnboundValue are permissible values of \a value.
+     *
+     * @return Pointer to the created CXXR::Symbol object.
+     */
+    SEXP mkSYMSXP(SEXP name, SEXP value);
+} // namespace R
+
 extern "C"
 {
     /** @brief Missing argument marker
@@ -566,38 +619,6 @@ extern "C"
      */
     int DDVAL(SEXP x);
 
-    /** @brief Set Symbol name.
-     *
-     * @param x Pointer to a CXXR::Symbol (checked).
-     *
-     * @param v Pointer to a CXXR::String representing \a x's name. 
-     */
-    void SET_PRINTNAME(SEXP x, SEXP v);
-
-    /** @brief Set symbol's value in the base environment.
-     *
-     * @param x Pointer to a CXXR::Symbol (checked).
-     *
-     * @param val Pointer to the RObject now to be considered as
-     *            the value of this symbol.  A null pointer or
-     *            R_UnboundValue are permissible values of \a val.
-     *
-     * @todo No binding to R_UnboundValue ought to be created.
-     */
-    void SET_SYMVALUE(SEXP x, SEXP v);
-
-    /** @brief Set internal function denoted by a symbol.
-     *
-     * @param x Pointer to a CXXR::Symbol (checked).
-     *
-     * @param func Pointer to the CXXR::BuiltInFunction (checked) to
-     *          be denoted by this symbol.  A null pointer is
-     *          permissible.
-     *
-     * @note It would be better if this was set exclusively during
-     * construction.
-     */
-    void SET_INTERNAL(SEXP x, SEXP v);
     Rboolean Rf_isUserBinop(SEXP s);
     void SET_BASE_SYM_CACHED(SEXP b);
     void UNSET_BASE_SYM_CACHED(SEXP b);
@@ -607,32 +628,11 @@ extern "C"
     void UNSET_SPECIAL_SYMBOL(SEXP b);
     Rboolean IS_SPECIAL_SYMBOL(SEXP b);
 
-    void SET_DDVAL(SEXP x, int v);
-    SEXP Rf_installDDVAL(int i);
-
     /* This function is equivalent to Rf_install(R_CHAR(charSXP)), but faster.
    Like the equivalent code pattern, it discards the encoding information,
    hence in almost all cases installTrChar should be used, instead. */
     SEXP Rf_installNoTrChar(SEXP charSXP);
-
-    SEXP Rf_installS3Signature(const char *methodName, const char *className);
 } // extern "C"
-
-namespace R
-{
-    /** @brief Create a CXXR::Symbol object.
-     *
-     * @param name Pointer to a CXXR::String object (checked) to be
-     *          taken as the name of the constructed symbol.
-     *
-     * @param value Pointer to the CXXR::RObject to be considered as
-     *          the value of the constructed symbol.  A null pointer or
-     *          R_UnboundValue are permissible values of \a value.
-     *
-     * @return Pointer to the created CXXR::Symbol object.
-     */
-    SEXP mkSYMSXP(SEXP name, SEXP value);
-} // namespace R
 
 #if (defined(R_NO_REMAP) && defined(COMPILING_IVORY)) && defined(__cplusplus)
 const auto isUserBinop = Rf_isUserBinop;

@@ -155,6 +155,11 @@ namespace CXXR
     };
 } // namespace CXXR
 
+namespace R
+{
+    const char *Rf_translateChar0(SEXP);
+} // namespace R
+
 extern "C"
 {
     /** @brief Get a pointer to a CXXR::String object.
@@ -242,7 +247,6 @@ extern "C"
      */
     const char *Rf_translateCharUTF8(SEXP x);
     const char *Rf_translateChar(SEXP);
-    const char *Rf_translateChar0(SEXP);
     cetype_t Rf_getCharCE(SEXP x);
     const char *Rf_reEnc(const char *x, cetype_t ce_in, cetype_t ce_out, int subst);
     SEXP Rf_installChar(SEXP x);

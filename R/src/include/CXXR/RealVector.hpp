@@ -54,6 +54,12 @@ namespace CXXR
     }
 } // namespace CXXR
 
+namespace R
+{
+    double SCALAR_DVAL(SEXP x);
+    void SET_SCALAR_DVAL(SEXP x, double v);
+} // namespace R
+
 extern "C"
 {
     /**
@@ -81,8 +87,6 @@ extern "C"
      */
     const double *REAL_RO(SEXP x);
     double *REAL0(SEXP x);
-    double SCALAR_DVAL(SEXP x);
-    void SET_SCALAR_DVAL(SEXP x, double v);
     const double *REAL_OR_NULL(SEXP x);
     double REAL_ELT(SEXP x, R_xlen_t i);
     void SET_REAL_ELT(SEXP x, R_xlen_t i, double v);

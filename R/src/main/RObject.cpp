@@ -31,8 +31,10 @@
 #include <CXXR/RAltRep.hpp>
 #include <CXXR/StringVector.hpp>
 #include <Rinternals.h>
+#include <Defn.h>
 #include <R_ext/Boolean.h>
 
+using namespace R;
 using namespace CXXR;
 
 namespace CXXR
@@ -48,15 +50,15 @@ namespace CXXR
         const auto &NAMEDptr = NAMED;
         const auto &OBJECTptr = OBJECT;
         const auto &SET_NAMEDptr = SET_NAMED;
-        const auto &ENSURE_NAMEDMAXptr = ENSURE_NAMEDMAX;
-        const auto &ENSURE_NAMEDptr = ENSURE_NAMED;
-        const auto &SETTER_CLEAR_NAMEDptr = SETTER_CLEAR_NAMED;
-        const auto &RAISE_NAMEDptr = RAISE_NAMED;
+        const auto &ENSURE_NAMEDMAXptr = R::ENSURE_NAMEDMAX;
+        const auto &ENSURE_NAMEDptr = R::ENSURE_NAMED;
+        const auto &SETTER_CLEAR_NAMEDptr = R::SETTER_CLEAR_NAMED;
+        const auto &RAISE_NAMEDptr = R::RAISE_NAMED;
         const auto &TYPEOFptr = TYPEOF;
         const auto &LEVELSptr = LEVELS;
         const auto &SETLEVELSptr = SETLEVELS;
         const auto &ALTREPptr = ALTREP;
-        const auto &SETALTREPptr = SETALTREP;
+        const auto &SETALTREPptr = R::SETALTREP;
     } // namespace ForceNonInline
 
     RObject::~RObject()
@@ -324,7 +326,7 @@ int ALTREP(SEXP x)
     return x ? x->altrep() : 0;
 }
 
-void SETALTREP(SEXP x, int v)
+void R::SETALTREP(SEXP x, int v)
 {
 }
 
@@ -343,7 +345,7 @@ int IS_SCALAR(SEXP x, SEXPTYPE type)
     return x ? x->isScalarOfType(type) : false;
 }
 
-int SIMPLE_SCALAR_TYPE(SEXP x)
+int R::SIMPLE_SCALAR_TYPE(SEXP x)
 {
     return (x && x->isScalar() && ATTRIB(x) == nullptr) ? x->sexptype() : 0;
 }
@@ -396,50 +398,52 @@ void SHALLOW_DUPLICATE_ATTRIB(SEXP to, SEXP from)
         to->setS4Object(from->isS4Object());
 }
 
-int ASSIGNMENT_PENDING(SEXP x)
+int R::ASSIGNMENT_PENDING(SEXP x)
 {
     if (!x)
         return 0;
     return x->assignmentPending();
 }
 
-void SET_ASSIGNMENT_PENDING(SEXP x, int v)
+void R::SET_ASSIGNMENT_PENDING(SEXP x, int v)
 {
     if (x)
         x->setAssignmentPending(v);
 }
 
-void(MARK_NOT_MUTABLE)(SEXP x)
+void MARK_NOT_MUTABLE(SEXP x)
 {
-    MARK_NOT_MUTABLE(x);
+#if defined(USE_RINTERNALS) || defined(COMPILING_IVORY)
+    SET_REFCNT(x, REFCNTMAX);
+#endif
 }
 
-int IS_ASSIGNMENT_CALL(SEXP x)
+int R::IS_ASSIGNMENT_CALL(SEXP x)
 {
     return IS_ASSIGNMENT_CALL_MACRO(x);
 }
 
-void MARK_ASSIGNMENT_CALL(SEXP x)
+void R::MARK_ASSIGNMENT_CALL(SEXP x)
 {
     MARK_ASSIGNMENT_CALL_MACRO(x);
 }
 
-void ENSURE_NAMEDMAX(SEXP x)
+void R::ENSURE_NAMEDMAX(SEXP x)
 {
     ENSURE_NAMEDMAX_MACRO(x);
 }
 
-void ENSURE_NAMED(SEXP x)
+void R::ENSURE_NAMED(SEXP x)
 {
     ENSURE_NAMED_MACRO(x);
 }
 
-void SETTER_CLEAR_NAMED(SEXP x)
+void R::SETTER_CLEAR_NAMED(SEXP x)
 {
     SETTER_CLEAR_NAMED_MACRO(x);
 }
 
-void RAISE_NAMED(SEXP x, int n)
+void R::RAISE_NAMED(SEXP x, int n)
 {
     RAISE_NAMED_MACRO(x, n);
 }
@@ -553,7 +557,7 @@ R_xlen_t Rf_xlength(SEXP s)
     }
 }
 
-SEXP R_FixupRHS(SEXP x, SEXP y)
+SEXP R::R_FixupRHS(SEXP x, SEXP y)
 {
     if (y && MAYBE_REFERENCED(y))
     {

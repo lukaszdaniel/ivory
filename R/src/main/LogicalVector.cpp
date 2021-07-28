@@ -33,6 +33,7 @@
 #include <CXXR/LogicalVector.hpp>
 #include <Rinternals.h>
 
+using namespace R;
 using namespace CXXR;
 
 namespace CXXR
@@ -130,13 +131,13 @@ int *LOGICAL0(SEXP x)
     return static_cast<int *>(STDVEC_DATAPTR(x));
 }
 
-int SCALAR_LVAL(SEXP x)
+int R::SCALAR_LVAL(SEXP x)
 {
     CHECK_SCALAR_LGL(x);
     return LOGICAL0(x)[0];
 }
 
-void SET_SCALAR_LVAL(SEXP x, int v)
+void R::SET_SCALAR_LVAL(SEXP x, int v)
 {
     CHECK_SCALAR_LGL(x);
     LOGICAL0(x)[0] = v;

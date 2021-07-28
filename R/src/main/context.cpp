@@ -562,7 +562,7 @@ HIDDEN SEXP RCNTXT::R_sysfunction(int n)
 /* browser contexts are a bit special because they are transient and for  */
 /* any closure context with the debug bit set one will be created; so we  */
 /* need to count those as well                                            */
-int Rf_countContexts(int ctxttype, int browser)
+int R::Rf_countContexts(int ctxttype, bool browser)
 {
     int n = 0;
     RCNTXT *cptr = R_GlobalContext;

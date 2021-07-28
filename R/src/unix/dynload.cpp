@@ -30,8 +30,8 @@
 #include <config.h>
 #endif
 
-#include <Defn.h>
 #include <Rinternals.h>
+#include <Defn.h>
 #include <Localization.h>
 #include <Rdynpriv.h>
 

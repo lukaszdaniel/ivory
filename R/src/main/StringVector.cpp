@@ -33,6 +33,7 @@
 #include <CXXR/GCStackRoot.hpp>
 #include <Rinternals.h>
 
+using namespace R;
 using namespace CXXR;
 
 namespace CXXR

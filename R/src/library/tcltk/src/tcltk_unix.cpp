@@ -20,8 +20,9 @@
 #ifdef HAVE_CONFIG_H
 #include <config.h>
 #endif
-#include <Defn.h>
+
 #include "tcltk.h" /* declarations of our `public' interface */
+#include <Defn.h>
 
 #ifndef _WIN32
 #include <R_ext/eventloop.h>

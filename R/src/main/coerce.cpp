@@ -1329,7 +1329,7 @@ SEXP Rf_coerceVector(SEXP v, SEXPTYPE type)
     return ans;
 }
 
-SEXP Rf_CreateTag(SEXP x)
+SEXP R::Rf_CreateTag(SEXP x)
 {
 	if (isNull(x) || isSymbol(x))
 		return x;
@@ -1792,7 +1792,7 @@ HIDDEN SEXP do_ascall(SEXP call, SEXP op, SEXP args, SEXP rho)
 /* call and rho are only needed for _R_CHECK_LENGTH_1_LOGIC2_ checking
        and diagnostics; to be removed if length>1 value is turned to error */
 /* return int, not Rboolean, for NA_LOGICAL : */
-int Rf_asLogical2(SEXP x, int checking, SEXP call, SEXP rho)
+int R::Rf_asLogical2(SEXP x, int checking, SEXP call, SEXP rho)
 {
     int warn = 0;
 

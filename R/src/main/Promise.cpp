@@ -36,6 +36,7 @@
 #include <Localization.h>
 #include <Rinternals.h>
 
+using namespace R;
 using namespace CXXR;
 
 namespace CXXR
@@ -48,7 +49,7 @@ namespace CXXR
         const auto &PRENVptr = PRENV;
         const auto &PRSEENptr = PRSEEN;
         const auto &PRVALUEptr = PRVALUE;
-        const auto &SETPRSEENptr = SET_PRSEEN;
+        const auto &SETPRSEENptr = R::SET_PRSEEN;
         const auto &SET_PRVALUEptr = SET_PRVALUE;
     } // namespace ForceNonInline
 
@@ -221,7 +222,7 @@ void SET_PRCODE(SEXP x, SEXP v)
     prom->setValueGenerator(v);
 }
 
-void SET_PRSEEN(SEXP x, int v)
+void R::SET_PRSEEN(SEXP x, int v)
 {
     if (!x)
         return;

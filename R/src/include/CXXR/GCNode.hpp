@@ -685,6 +685,15 @@ namespace CXXR
     void initializeMemorySubsystem();
 } // namespace CXXR
 
+namespace R
+{
+    int TRACKREFS(SEXP x);
+    void DECREMENT_REFCNT(SEXP x);
+    void INCREMENT_REFCNT(SEXP x);
+    void DISABLE_REFCNT(SEXP x);
+    void ENABLE_REFCNT(SEXP x);
+} // namespace R
+
 extern "C"
 {
     /** @brief Is this node marked?
@@ -697,12 +706,7 @@ extern "C"
     int MARK(SEXP x);
     int REFCNT(SEXP x);
     void SET_REFCNT(SEXP x, unsigned int v);
-    int TRACKREFS(SEXP x);
     void SET_TRACKREFS(SEXP x, bool v);
-    void DECREMENT_REFCNT(SEXP x);
-    void INCREMENT_REFCNT(SEXP x);
-    void DISABLE_REFCNT(SEXP x);
-    void ENABLE_REFCNT(SEXP x);
-}
+} // extern "C"
 
 #endif /* GCNODE_HPP */

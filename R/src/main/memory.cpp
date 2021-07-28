@@ -816,7 +816,7 @@ SEXP Rf_cons(SEXP car, SEXP cdr)
     return PairList::construct<PairList>(car, SEXP_downcast<PairList *>(cdr));
 }
 
-HIDDEN SEXP CONS_NR(SEXP car, SEXP cdr)
+HIDDEN SEXP R::CONS_NR(SEXP car, SEXP cdr)
 {
     GCStackRoot<> crr(car);
     GCStackRoot<PairList> tlr(SEXP_downcast<CXXR::PairList *>(cdr));
@@ -997,27 +997,27 @@ static SEXP allocFormalsList(const int nargs, ...)
     return res;
 }
 
-SEXP Rf_allocFormalsList2(SEXP sym1, SEXP sym2)
+SEXP R::Rf_allocFormalsList2(SEXP sym1, SEXP sym2)
 {
     return allocFormalsList(2, sym1, sym2);
 }
 
-SEXP Rf_allocFormalsList3(SEXP sym1, SEXP sym2, SEXP sym3)
+SEXP R::Rf_allocFormalsList3(SEXP sym1, SEXP sym2, SEXP sym3)
 {
     return allocFormalsList(3, sym1, sym2, sym3);
 }
 
-SEXP Rf_allocFormalsList4(SEXP sym1, SEXP sym2, SEXP sym3, SEXP sym4)
+SEXP R::Rf_allocFormalsList4(SEXP sym1, SEXP sym2, SEXP sym3, SEXP sym4)
 {
     return allocFormalsList(4, sym1, sym2, sym3, sym4);
 }
 
-SEXP Rf_allocFormalsList5(SEXP sym1, SEXP sym2, SEXP sym3, SEXP sym4, SEXP sym5)
+SEXP R::Rf_allocFormalsList5(SEXP sym1, SEXP sym2, SEXP sym3, SEXP sym4, SEXP sym5)
 {
     return allocFormalsList(5, sym1, sym2, sym3, sym4, sym5);
 }
 
-SEXP Rf_allocFormalsList6(SEXP sym1, SEXP sym2, SEXP sym3, SEXP sym4, SEXP sym5, SEXP sym6)
+SEXP R::Rf_allocFormalsList6(SEXP sym1, SEXP sym2, SEXP sym3, SEXP sym4, SEXP sym5, SEXP sym6)
 {
     return allocFormalsList(6, sym1, sym2, sym3, sym4, sym5, sym6);
 }
@@ -1036,7 +1036,7 @@ void R_gc(void)
 #ifdef THREADCHECK
 #if !defined(_WIN32) && defined(HAVE_PTHREAD)
 #include <pthread.h>
-HIDDEN void R_check_thread(const char *s)
+HIDDEN void R::R_check_thread(const char *s)
 {
     static Rboolean main_thread_inited = FALSE;
     static pthread_t main_thread;
@@ -1056,7 +1056,7 @@ HIDDEN void R_check_thread(const char *s)
 }
 #else
 /* This could be implemented for Windows using their threading API */
-HIDDEN void R_check_thread(const char *s) {}
+HIDDEN void R::R_check_thread(const char *s) {}
 #endif
 #endif
 

@@ -46,13 +46,264 @@
 #endif
 
 #include <CXXR/SEXPTYPE.hpp>
+#include <CXXR/RTypes.hpp> // for RObject, SEXPREC, Rbyte, R_*_t, 
 #include <R_ext/Boolean.h>
 #include <R_ext/Visibility.h>
 #include <R_ext/Complex.h>
+#include <R_ext/Rdynload.h> // for DL_FUNC
 #include <Errormsg.h>
 
 constexpr int MAXELTSIZE = 8192; /* Used as a default for string buffer sizes, \
                and occasionally as a limit. */
+
+/* UUID identifying the internals version -- packages using compiled
+   code should be re-installed when this changes */
+#define R_INTERNALS_UUID "2fdf6c18-697a-4ba7-b8ef-11c0d92f1327"
+
+#define INCREMENT_LINKS(x)         \
+    do                             \
+    {                              \
+        SEXP il__x__ = (x);        \
+        INCREMENT_REFCNT(il__x__); \
+    } while (0)
+#define DECREMENT_LINKS(x)         \
+    do                             \
+    {                              \
+        SEXP dl__x__ = (x);        \
+        DECREMENT_REFCNT(dl__x__); \
+    } while (0)
+
+/* Complex assignment support */
+/* temporary definition that will need to be refined to distinguish
+   getter from setter calls */
+#define IS_GETTER_CALL(call) (CADR(call) == R_TmpvalSymbol)
+
+namespace R
+{
+#ifdef LONG_VECTOR_SUPPORT
+    NORET R_len_t R_BadLongVector(SEXP, const char *, int);
+#endif
+
+/* checking for mis-use of multi-threading */
+#ifdef TESTING_WRITE_BARRIER
+#define THREADCHECK
+#endif
+#ifdef THREADCHECK
+    void R_check_thread(const char *s);
+#define R_CHECK_THREAD R_check_thread(__func__)
+#else
+#define R_CHECK_THREAD \
+    do                 \
+    {                  \
+    } while (0)
+#endif
+
+    /* Accessor functions.  Many are declared using () to avoid the macro
+   definitions in the internal headers.
+   The function STRING_ELT is used as an argument to arrayAssign even
+   if the macro version is in use.
+    */
+    /* General Cons Cell Attributes */
+    int TRACKREFS(SEXP x);
+    // extern "C" void SET_OBJECT(SEXP x, int v); // still present in Rinternals.h
+    // extern "C" void SET_TYPEOF(SEXP x, int v); // still present in Rinternals.h
+    // extern "C" void SET_NAMED(SEXP x, int v); // still present in Rinternals.h
+    void ENSURE_NAMEDMAX(SEXP x);
+    void ENSURE_NAMED(SEXP x);
+    void SETTER_CLEAR_NAMED(SEXP x);
+    void RAISE_NAMED(SEXP x, int n);
+    void DECREMENT_REFCNT(SEXP x);
+    void INCREMENT_REFCNT(SEXP x);
+    void DISABLE_REFCNT(SEXP x);
+    void ENABLE_REFCNT(SEXP x);
+
+    /* S4 object setting */
+    // extern "C" void SET_S4_OBJECT(SEXP x); // still present in Rinternals.h
+    // extern "C" void UNSET_S4_OBJECT(SEXP x); // still present in Rinternals.h
+
+    int ASSIGNMENT_PENDING(SEXP x);
+    void SET_ASSIGNMENT_PENDING(SEXP x, int v);
+    int IS_ASSIGNMENT_CALL(SEXP x);
+    void MARK_ASSIGNMENT_CALL(SEXP x);
+
+    /* JIT optimization support */
+    int NOJIT(SEXP x);
+    int MAYBEJIT(SEXP x);
+    void SET_NOJIT(SEXP x);
+    void SET_MAYBEJIT(SEXP x);
+    void UNSET_MAYBEJIT(SEXP x);
+
+    /* Growable vector support */
+    // extern "C" int IS_GROWABLE(SEXP x); // still present in Rinternals.h
+    // extern "C" void SET_GROWABLE_BIT(SEXP x); // still present in Rinternals.h
+
+    /* Vector Access Functions */
+    // extern "C" void SETLENGTH(SEXP x, R_xlen_t v); // still present in Rinternals.h
+    // extern "C" void SET_TRUELENGTH(SEXP x, R_xlen_t v); // still present in Rinternals.h
+    // extern "C" void  SETLEVELS(SEXP x, int v); // still present in Rinternals.h
+    R_xlen_t STDVEC_LENGTH(SEXP);
+    R_xlen_t STDVEC_TRUELENGTH(SEXP);
+    void SETALTREP(SEXP, int);
+
+    /* Binding Cell Access Functions */
+    int BNDCELL_TAG(SEXP e);
+    void SET_BNDCELL_TAG(SEXP e, int v);
+    double BNDCELL_DVAL(SEXP cell);
+    int BNDCELL_IVAL(SEXP cell);
+    int BNDCELL_LVAL(SEXP cell);
+    void SET_BNDCELL_DVAL(SEXP cell, double v);
+    void SET_BNDCELL_IVAL(SEXP cell, int v);
+    void SET_BNDCELL_LVAL(SEXP cell, int v);
+    void INIT_BNDCELL(SEXP cell, int type);
+    void SET_BNDCELL(SEXP cell, SEXP val);
+
+    /* List Access Functions */
+    SEXP CAR0(SEXP e);
+
+    void SET_MISSING(SEXP x, int v);
+    SEXP CONS_NR(SEXP a, SEXP b);
+
+    /* Symbol Access Functions */
+    void SET_DDVAL(SEXP x, int v);
+    void SET_PRINTNAME(SEXP x, SEXP v);
+    void SET_SYMVALUE(SEXP x, SEXP v);
+    void SET_INTERNAL(SEXP x, SEXP v);
+
+    /* Environment Access Functions */
+    // extern "C" void SET_ENVFLAGS(SEXP x, int v); // still present in Rinternals.h
+    void SET_ENV_RDEBUG(SEXP x, int v);
+    // extern "C" void SET_FRAME(SEXP x, SEXP v); // still present in Rinternals.h
+    // extern "C" void SET_ENCLOS(SEXP x, SEXP v); // still present in Rinternals.h
+    // extern "C" void SET_HASHTAB(SEXP x, SEXP v); // still present in Rinternals.h
+
+    /* Promise Access Functions */
+    void SET_PRSEEN(SEXP x, int v);
+    // extern "C" void SET_PRENV(SEXP x, SEXP v); // still present in Rinternals.h
+    // extern "C" void SET_PRVALUE(SEXP x, SEXP v); // still present in Rinternals.h
+    // extern "C" void SET_PRCODE(SEXP x, SEXP v); // still present in Rinternals.h
+
+    /* Hashing Functions */
+    int HASHASH(SEXP x);
+    int HASHVALUE(SEXP x);
+    void SET_HASHASH(SEXP x, int v);
+    void SET_HASHVALUE(SEXP x, int v);
+
+/* Bytecode access macros */
+#define BCODE_CODE(x) CAR(x)
+//#define BCODE_CONSTS(x) CDR(x)
+#define BCODE_EXPR(x) TAG(x)
+#define isByteCode(x) (TYPEOF(x) == BCODESXP)
+
+    /* ALTREP internal support */
+    // int IS_SCALAR(SEXP x, int type); // still present in Rinternals.h
+    SEXP ALTREP_DUPLICATE_EX(SEXP x, Rboolean deep);
+    SEXP ALTREP_COERCE(SEXP x, int type);
+    Rboolean ALTREP_INSPECT(SEXP, int, int, int, void (*)(SEXP, int, int, int));
+    SEXP ALTREP_SERIALIZED_CLASS(SEXP);
+    SEXP ALTREP_SERIALIZED_STATE(SEXP);
+    SEXP ALTREP_UNSERIALIZE_EX(SEXP, SEXP, SEXP, int, int);
+    R_xlen_t ALTREP_LENGTH(SEXP x);
+    R_xlen_t ALTREP_TRUELENGTH(SEXP x);
+    void *ALTVEC_DATAPTR(SEXP x);
+    const void *ALTVEC_DATAPTR_RO(SEXP x);
+    const void *ALTVEC_DATAPTR_OR_NULL(SEXP x);
+    SEXP ALTVEC_EXTRACT_SUBSET(SEXP x, SEXP indx, SEXP call);
+
+    /* data access */
+    int ALTINTEGER_ELT(SEXP x, R_xlen_t i);
+    void ALTINTEGER_SET_ELT(SEXP x, R_xlen_t i, int v);
+    int ALTLOGICAL_ELT(SEXP x, R_xlen_t i);
+    void ALTLOGICAL_SET_ELT(SEXP x, R_xlen_t i, int v);
+    double ALTREAL_ELT(SEXP x, R_xlen_t i);
+    void ALTREAL_SET_ELT(SEXP x, R_xlen_t i, double v);
+    SEXP ALTSTRING_ELT(SEXP, R_xlen_t);
+    void ALTSTRING_SET_ELT(SEXP, R_xlen_t, SEXP);
+    Rcomplex ALTCOMPLEX_ELT(SEXP x, R_xlen_t i);
+    void ALTCOMPLEX_SET_ELT(SEXP x, R_xlen_t i, Rcomplex v);
+    Rbyte ALTRAW_ELT(SEXP x, R_xlen_t i);
+    void ALTRAW_SET_ELT(SEXP x, R_xlen_t i, Rbyte v);
+
+    /* invoking ALTREP class methods */
+    SEXP ALTINTEGER_SUM(SEXP x, Rboolean narm);
+    SEXP ALTINTEGER_MIN(SEXP x, Rboolean narm);
+    SEXP ALTINTEGER_MAX(SEXP x, Rboolean narm);
+    SEXP INTEGER_MATCH(SEXP, SEXP, int, SEXP, SEXP, Rboolean);
+    SEXP INTEGER_IS_NA(SEXP x);
+    SEXP ALTREAL_SUM(SEXP x, Rboolean narm);
+    SEXP ALTREAL_MIN(SEXP x, Rboolean narm);
+    SEXP ALTREAL_MAX(SEXP x, Rboolean narm);
+    SEXP REAL_MATCH(SEXP, SEXP, int, SEXP, SEXP, Rboolean);
+    SEXP REAL_IS_NA(SEXP x);
+    SEXP ALTLOGICAL_SUM(SEXP x, Rboolean narm);
+
+    /* constructors for internal ALTREP classes */
+    SEXP R_compact_intrange(R_xlen_t n1, R_xlen_t n2);
+    SEXP R_deferred_coerceToString(SEXP v, SEXP info);
+    // SEXP R_virtrep_vec(SEXP, SEXP); // not implemented in CR
+    SEXP R_tryWrap(SEXP);
+    SEXP R_tryUnwrap(SEXP);
+
+    Rboolean Rf_pmatch(SEXP, SEXP, Rboolean);
+    // extern "C" Rboolean Rf_psmatch(const char *, const char *, Rboolean); // still present in Rinternals.h
+    void Rf_printwhere(void);
+    void Rf_readS3VarsFromFrame(SEXP, SEXP *, SEXP *, SEXP *, SEXP *, SEXP *, SEXP *);
+
+    // extern "C" const char *R_curErrorBuf(); // still present in Rinternals.h
+    Rboolean R_cycle_detected(SEXP s, SEXP child);
+
+    void R_init_altrep();
+    void R_reinit_altrep_classes(DllInfo *);
+    /* need remapped names here for use with R_NO_REMAP */
+
+    /*
+   These are the private inlinable functions that are provided in
+   Rinlinedfuns.h It is *essential* that these do not appear in any
+   other header file, with or without the Rf_ prefix.
+    */
+
+    SEXP R_FixupRHS(SEXP x, SEXP y);
+    double SCALAR_DVAL(SEXP x);
+    void SET_SCALAR_DVAL(SEXP x, double v);
+    int SCALAR_LVAL(SEXP x);
+    void SET_SCALAR_LVAL(SEXP x, int v);
+    int SCALAR_IVAL(SEXP x);
+    void SET_SCALAR_IVAL(SEXP x, int v);
+    Rcomplex SCALAR_CVAL(SEXP x);
+    void SET_SCALAR_CVAL(SEXP x, Rcomplex v);
+    Rbyte SCALAR_BVAL(SEXP x);
+    void SET_SCALAR_BVAL(SEXP x, Rbyte v);
+} // namespace R
+
+#if defined(USE_RINTERNALS) || defined(COMPILING_IVORY)
+
+/* Test macros with function versions above */
+#undef isNull
+#define isNull(s)	(TYPEOF(s) == NILSXP)
+#undef isSymbol
+#define isSymbol(s)	(TYPEOF(s) == SYMSXP)
+#undef isLogical
+#define isLogical(s)	(TYPEOF(s) == LGLSXP)
+#undef isReal
+#define isReal(s)	(TYPEOF(s) == REALSXP)
+#undef isComplex
+#define isComplex(s)	(TYPEOF(s) == CPLXSXP)
+#undef isExpression
+#define isExpression(s) (TYPEOF(s) == EXPRSXP)
+#undef isEnvironment
+#define isEnvironment(s) (TYPEOF(s) == ENVSXP)
+#undef isString
+#define isString(s)	(TYPEOF(s) == STRSXP)
+#undef isObject
+#define isObject(s)	(OBJECT(s) != 0)
+
+#endif
+
+namespace R
+{
+void R_BadValueInRCode(SEXP value, SEXP call, SEXP rho, const char *rawmsg,
+        const char *errmsg, const char *warnmsg, const char *varname,
+        Rboolean warnByDefault);
+} // namespace R
 
 #ifdef _WIN32
 extern void R_WaitEvent(void);
@@ -144,6 +395,7 @@ namespace R
     /* safer alternative */
     extern char *Rstrdup(const char *s);
 } // namespace R
+
 /* Glibc manages to not define this in -pedantic -ansi */
 #if defined(HAVE_PUTENV) && !defined(putenv) && defined(HAVE_DECL_PUTENV) && !HAVE_DECL_PUTENV
 extern int putenv(char *string);
@@ -424,6 +676,51 @@ extern "C"
  */
 namespace R
 {
+    int SIMPLE_SCALAR_TYPE(SEXP x);
+    /* Internal type coercions */
+    int Rf_asLogical2(SEXP x, int checking, SEXP call, SEXP rho);
+
+    enum warn_type
+    {
+        iSILENT,
+        iWARN,
+        iERROR
+    };
+    /* Other Internally Used Functions, excluding those which are inline-able*/
+    void Rf_addMissingVarsToNewEnv(SEXP env, SEXP addVars);
+    SEXP Rf_allocFormalsList2(SEXP sym1, SEXP sym2);
+    SEXP Rf_allocFormalsList3(SEXP sym1, SEXP sym2, SEXP sym3);
+    SEXP Rf_allocFormalsList4(SEXP sym1, SEXP sym2, SEXP sym3, SEXP sym4);
+    SEXP Rf_allocFormalsList5(SEXP sym1, SEXP sym2, SEXP sym3, SEXP sym4, SEXP sym5);
+    SEXP Rf_allocFormalsList6(SEXP sym1, SEXP sym2, SEXP sym3, SEXP sym4, SEXP sym5, SEXP sym6);
+    SEXP Rf_arraySubscript(int, SEXP, SEXP, SEXP (*)(SEXP, SEXP), SEXP (*)(SEXP, int), SEXP);
+    SEXP Rf_fixSubset3Args(SEXP call, SEXP args, SEXP env, SEXP* syminp);
+    int Rf_countContexts(int ctxttype, bool browser);
+    SEXP Rf_CreateTag(SEXP);
+    SEXP Rf_DropDims(SEXP);
+    Rboolean R_envHasNoSpecialSymbols(SEXP);
+    SEXP Rf_ExtractSubset(SEXP, SEXP, SEXP);
+    SEXP Rf_findFun3(SEXP, SEXP, SEXP);
+    void Rf_findFunctionForBody(SEXP);
+    int Rf_FixupDigits(SEXP, warn_type);
+    size_t Rf_FixupWidth(SEXP, warn_type);
+    SEXP Rf_installDDVAL(int i);
+    SEXP Rf_installS3Signature(const char *methodName, const char *className);
+    Rboolean Rf_isFree(SEXP);
+    Rboolean Rf_isUnmodifiedSpecSym(SEXP sym, SEXP env);
+    SEXP Rf_matchE(SEXP, SEXP, int, SEXP);
+    void Rf_setSVector(SEXP*, int, SEXP);
+    SEXP Rf_stringSuffix(SEXP, int);
+    const char *Rf_translateChar0(SEXP);
+    void R_initialize_bcode(void);
+    SEXP R_bcEncode(SEXP);
+    SEXP R_bcDecode(SEXP);
+    void R_registerBC(SEXP, SEXP);
+    Rboolean R_checkConstants(Rboolean);
+    Rboolean R_BCVersionOK(SEXP);
+    /* Environment and Binding Features */
+    void R_RestoreHashCount(SEXP rho);
+
     void CoercionWarning(int); /* warning code */
     int LogicalFromInteger(int, int &);
     int LogicalFromReal(double, int &);
@@ -797,6 +1094,37 @@ extern void *alloca(size_t);
 #elif defined(HAVE_INT_FAST64_T)
 #define LONG_INT int_fast64_t
 #define LONG_INT_MAX INT_FAST64_MAX
+#endif
+
+#if (defined(R_NO_REMAP) && defined(COMPILING_IVORY)) && defined(__cplusplus)
+const auto addMissingVarsToNewEnv = R::Rf_addMissingVarsToNewEnv;
+const auto allocFormalsList2 = R::Rf_allocFormalsList2;
+const auto allocFormalsList3 = R::Rf_allocFormalsList3;
+const auto allocFormalsList4 = R::Rf_allocFormalsList4;
+const auto allocFormalsList5 = R::Rf_allocFormalsList5;
+const auto allocFormalsList6 = R::Rf_allocFormalsList6;
+const auto arraySubscript = R::Rf_arraySubscript;
+const auto asLogical2 = R::Rf_asLogical2;
+const auto fixSubset3Args = R::Rf_fixSubset3Args;
+const auto countContexts = R::Rf_countContexts;
+const auto CreateTag = R::Rf_CreateTag;
+const auto DropDims = R::Rf_DropDims;
+const auto ExtractSubset = R::Rf_ExtractSubset;
+const auto findFun3 = R::Rf_findFun3;
+const auto findFunctionForBody = R::Rf_findFunctionForBody;
+const auto FixupDigits = R::Rf_FixupDigits;
+const auto FixupWidth = R::Rf_FixupWidth;
+const auto installDDVAL = R::Rf_installDDVAL;
+const auto installS3Signature = R::Rf_installS3Signature;
+const auto isFree = R::Rf_isFree;
+const auto isUnmodifiedSpecSym = R::Rf_isUnmodifiedSpecSym;
+const auto matchE = R::Rf_matchE;
+const auto pmatch = R::Rf_pmatch;
+const auto printwhere = R::Rf_printwhere;
+const auto readS3VarsFromFrame = R::Rf_readS3VarsFromFrame;
+const auto setSVector = R::Rf_setSVector;
+const auto stringSuffix = R::Rf_stringSuffix;
+const auto translateChar0 = R::Rf_translateChar0;
 #endif
 
 #endif /* DEFN_H_ */

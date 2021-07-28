@@ -34,6 +34,7 @@
 #include <cstddef>
 #include <CXXR/GCStackRoot.hpp>
 #include <CXXR/RObject.hpp>
+#include <CXXR/RAltRep.hpp>
 #include <CXXR/SEXP_downcast.hpp>
 #include <Localization.h>
 
@@ -192,6 +193,15 @@ namespace CXXR
   }
 } // namespace CXXR
 
+namespace R
+{
+  R_xlen_t STDVEC_LENGTH(SEXP x);
+  R_xlen_t STDVEC_TRUELENGTH(SEXP x);
+#ifdef LONG_VECTOR_SUPPORT
+  NORET R_len_t R_BadLongVector(SEXP, const char *, int);
+#endif
+} // namespace R
+
 extern "C"
 {
   /* Accessor functions */
@@ -315,16 +325,9 @@ extern "C"
   const void *DATAPTR_OR_NULL(SEXP x);
   NORET SEXP *VECTOR_PTR(SEXP x);
 
-#ifdef LONG_VECTOR_SUPPORT
-  NORET R_len_t R_BadLongVector(SEXP, const char *, int);
-#endif
-
   /* Growable vector support */
   int IS_GROWABLE(SEXP x);
   void SET_GROWABLE_BIT(SEXP x);
-
-  R_xlen_t STDVEC_LENGTH(SEXP x);
-  R_xlen_t STDVEC_TRUELENGTH(SEXP x);
   R_xlen_t(XLENGTH)(SEXP x);
   int(IS_LONG_VEC)(SEXP x);
 

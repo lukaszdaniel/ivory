@@ -220,23 +220,23 @@ namespace R
 SEXP R_NaString = nullptr;
 SEXP R_BlankString = nullptr;
 
-int HASHASH(SEXP x)
+int R::HASHASH(SEXP x)
 {
     return x ? SEXP_downcast<const String *>(x)->hasHash() : 0;
 }
 
-int HASHVALUE(SEXP x)
+int R::HASHVALUE(SEXP x)
 {
     const CXXR::String *str = CXXR::SEXP_downcast<CXXR::String *>(x, false);
     return str->hash();
 }
 
-void SET_HASHASH(SEXP x, int v)
+void R::SET_HASHASH(SEXP x, int v)
 {
     /* does nothing in CXXR */
 }
 
-void SET_HASHVALUE(SEXP x, int v)
+void R::SET_HASHVALUE(SEXP x, int v)
 {
     const CXXR::String *str = CXXR::SEXP_downcast<CXXR::String *>(x, false);
     str->hash();

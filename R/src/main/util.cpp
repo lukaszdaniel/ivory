@@ -595,13 +595,13 @@ HIDDEN void Rf_setRVector(double *vec, int len, double val)
 	setVector(vec, len, val);
 }
 
-/* unused in R, in Rinternals.h */
-void Rf_setSVector(SEXP *vec, int len, SEXP val)
+/* unused in R, in Defn.h */
+void R::Rf_setSVector(SEXP *vec, int len, SEXP val)
 {
 	setVector(vec, len, val);
 }
 
-Rboolean Rf_isFree(SEXP val)
+Rboolean R::Rf_isFree(SEXP val)
 {
     for (SEXP t = R_FreeSEXP; t != R_NilValue; t = CAR(t))
 	if (val == t)

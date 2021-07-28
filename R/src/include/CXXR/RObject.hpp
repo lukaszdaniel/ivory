@@ -320,7 +320,7 @@ namespace CXXR
         // a PairList, for example during serialization and
         // deserialization, and formerly hosted in the gp field of
         // sxpinfo_struct.
-        private:
+    private:
         bool m_active_binding : 1;
         bool m_binding_locked : 1;
         bool m_assignment_pending : 1;
@@ -709,6 +709,62 @@ namespace CXXR
 
 } // namespace CXXR
 
+namespace R
+{
+    int SIMPLE_SCALAR_TYPE(SEXP x);
+
+    /** @brief Set object max copying status.
+     *
+     * @param x Pointer to CXXR::RObject.  The function does nothing
+     *          if \a x is a null pointer.
+     *
+     * @param v Refer to 'R Internals' document.
+     *
+     * @deprecated Ought to be private.
+     */
+    void ENSURE_NAMEDMAX(SEXP x);
+
+    /** @brief Set object copying status to one.
+     *
+     * @param x Pointer to CXXR::RObject.  The function does nothing
+     *          if \a x is a null pointer.
+     *
+     * @param v Refer to 'R Internals' document.
+     *
+     * @deprecated Ought to be private.
+     */
+    void ENSURE_NAMED(SEXP x);
+
+    /** @brief Set object copying status to zero.
+     *
+     * @param x Pointer to CXXR::RObject.  The function does nothing
+     *          if \a x is a null pointer.
+     *
+     * @param v Refer to 'R Internals' document.
+     *
+     * @deprecated Ought to be private.
+     */
+    void SETTER_CLEAR_NAMED(SEXP x);
+
+    /** @brief Raise object copying status if possible.
+     *
+     * @param x Pointer to CXXR::RObject.  The function does nothing
+     *          if \a x is a null pointer.
+     *
+     * @param v Refer to 'R Internals' document.
+     *
+     * @deprecated Ought to be private.
+     */
+    void RAISE_NAMED(SEXP x, int n);
+
+    int ASSIGNMENT_PENDING(SEXP x);
+    void SET_ASSIGNMENT_PENDING(SEXP x, int v);
+    int IS_ASSIGNMENT_CALL(SEXP x);
+    void MARK_ASSIGNMENT_CALL(SEXP x);
+    void SETALTREP(SEXP x, int v);
+    SEXP R_FixupRHS(SEXP x, SEXP y);
+} // namespace R
+
 extern "C"
 {
     /** @brief The nil object
@@ -910,7 +966,7 @@ extern "C"
     R_xlen_t Rf_envxlength(SEXP rho);
 
     R_xlen_t Rf_xlength(SEXP s);
-    SEXP R_FixupRHS(SEXP x, SEXP y);
+
     Rboolean Rf_isFrame(SEXP s);
 
     /** @brief Check to see if the arrays "x" and "y" have the identical extents
@@ -932,68 +988,10 @@ extern "C"
     Rboolean Rf_isString(SEXP s);
     Rboolean Rf_isRaw(SEXP s);
     int ALTREP(SEXP x);
-    void SETALTREP(SEXP x, int v);
     int IS_SCALAR(SEXP x, SEXPTYPE type);
-    int SIMPLE_SCALAR_TYPE(SEXP x);
     void SHALLOW_DUPLICATE_ATTRIB(SEXP to, SEXP from);
-    int ASSIGNMENT_PENDING(SEXP x);
-    void SET_ASSIGNMENT_PENDING(SEXP x, int v);
-
-    void(MARK_NOT_MUTABLE)(SEXP x);
-    int IS_ASSIGNMENT_CALL(SEXP x);
-    void MARK_ASSIGNMENT_CALL(SEXP x);
-
-    /** @brief Set object max copying status.
-     *
-     * @param x Pointer to CXXR::RObject.  The function does nothing
-     *          if \a x is a null pointer.
-     *
-     * @param v Refer to 'R Internals' document.
-     *
-     * @deprecated Ought to be private.
-     */
-    void ENSURE_NAMEDMAX(SEXP x);
-
-    /** @brief Set object copying status to one.
-     *
-     * @param x Pointer to CXXR::RObject.  The function does nothing
-     *          if \a x is a null pointer.
-     *
-     * @param v Refer to 'R Internals' document.
-     *
-     * @deprecated Ought to be private.
-     */
-    void ENSURE_NAMED(SEXP x);
-
-    /** @brief Set object copying status to zero.
-     *
-     * @param x Pointer to CXXR::RObject.  The function does nothing
-     *          if \a x is a null pointer.
-     *
-     * @param v Refer to 'R Internals' document.
-     *
-     * @deprecated Ought to be private.
-     */
-    void SETTER_CLEAR_NAMED(SEXP x);
-
-    /** @brief Raise object copying status if possible.
-     *
-     * @param x Pointer to CXXR::RObject.  The function does nothing
-     *          if \a x is a null pointer.
-     *
-     * @param v Refer to 'R Internals' document.
-     *
-     * @deprecated Ought to be private.
-     */
-    void RAISE_NAMED(SEXP x, int n);
+    void MARK_NOT_MUTABLE(SEXP x);
 } // extern "C"
-
-/** @brief Shorthand for Rf_length().
- */
-inline R_len_t length(SEXP s)
-{
-    return Rf_length(s);
-}
 
 #if (defined(R_NO_REMAP) && defined(COMPILING_IVORY)) && defined(__cplusplus)
 const auto xlength = Rf_xlength;

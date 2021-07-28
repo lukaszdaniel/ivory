@@ -366,6 +366,12 @@ namespace R
 	bool Seql(SEXP a, SEXP b);
 	bool streql(const char *s, const char *t);
 	bool streqln(const char *s, const char *t, size_t n);
+	/* Hashing Functions */
+
+	int HASHASH(SEXP x);
+	int HASHVALUE(SEXP x);
+	void SET_HASHASH(SEXP x, int v);
+	void SET_HASHVALUE(SEXP x, int v);
 
 	/** @brief String Hashing
 	 *
@@ -471,13 +477,6 @@ extern "C"
 	void SET_ASCII(SEXP x);
 
 	void SET_CACHED(SEXP x);
-
-	/* Hashing Functions */
-
-	int HASHASH(SEXP x);
-	int HASHVALUE(SEXP x);
-	void SET_HASHASH(SEXP x, int v);
-	void SET_HASHVALUE(SEXP x, int v);
 } // extern "C"
 
 #endif /* CXXR_STRING_HPP */

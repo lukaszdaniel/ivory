@@ -1220,7 +1220,7 @@ void mainloop(void)
   places-jump_to_toplevel/profile/here */
 
 /*HIDDEN*/
-void Rf_printwhere(void)
+void R::Rf_printwhere(void)
 {
 	RCNTXT *cptr;
 	int lct = 1;
@@ -1366,7 +1366,7 @@ HIDDEN SEXP do_browser(SEXP call, SEXP op, SEXP args, SEXP rho)
     /* Save the evaluator state information */
     /* so that it can be restored on exit. */
 
-    browselevel = countContexts(CTXT_BROWSER, 1);
+    browselevel = countContexts(CTXT_BROWSER, true);
     savestack = ProtectStack::size();
     PROTECT(topExp = R_CurrentExpr);
     saveToplevelContext = R_ToplevelContext;
@@ -1497,7 +1497,7 @@ HIDDEN SEXP do_quit(SEXP call, SEXP op, SEXP args, SEXP rho)
 
     checkArity(op, args);
     /* if there are any browser contexts active don't quit */
-    if(countContexts(CTXT_BROWSER, 1)) {
+    if(countContexts(CTXT_BROWSER, true)) {
 	warning(_("cannot quit from browser"));
 	return R_NilValue;
     }

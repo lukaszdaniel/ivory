@@ -1081,7 +1081,7 @@ SEXP Rf_installChar(SEXP x)
    Use for writeLines/Bin/Char, the first only with useBytes = TRUE.
 
 */
-const char *Rf_translateChar0(SEXP x)
+const char *R::Rf_translateChar0(SEXP x)
 {
     if (TYPEOF(x) != CHARSXP)
         error(_("'%s' must be called on a CHARSXP"), "translateChar0");

@@ -32,6 +32,9 @@
 #include <CXXR/ComplexVector.hpp>
 #include <Rinternals.h>
 
+using namespace R;
+using namespace CXXR;
+
 namespace CXXR
 {
     // Force the creation of non-inline embodiments of functions callable
@@ -127,13 +130,13 @@ Rcomplex *COMPLEX0(SEXP x)
     return static_cast<Rcomplex *>(STDVEC_DATAPTR(x));
 }
 
-Rcomplex SCALAR_CVAL(SEXP x)
+Rcomplex R::SCALAR_CVAL(SEXP x)
 {
     CHECK_SCALAR_CPLX(x);
     return COMPLEX0(x)[0];
 }
 
-void SET_SCALAR_CVAL(SEXP x, Rcomplex v)
+void R::SET_SCALAR_CVAL(SEXP x, Rcomplex v)
 {
     CHECK_SCALAR_CPLX(x);
     COMPLEX0(x)[0] = v;

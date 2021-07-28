@@ -1427,7 +1427,7 @@ SEXP match5(SEXP itable, SEXP ix, int nmatch, SEXP incomp, SEXP env)
     return ans;
 } // end{ match5 }
 
-SEXP Rf_matchE(SEXP itable, SEXP ix, int nmatch, SEXP env)
+SEXP R::Rf_matchE(SEXP itable, SEXP ix, int nmatch, SEXP env)
 {
     return match5(itable, ix, nmatch, nullptr, env);
 }

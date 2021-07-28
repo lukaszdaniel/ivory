@@ -43,6 +43,7 @@
 #include <boost/regex.hpp>
 #include <sstream>
 
+using namespace R;
 using namespace CXXR;
 
 extern "C"
@@ -68,10 +69,10 @@ namespace CXXR
         const auto &PRINTNAMEptr = PRINTNAME;
         const auto &SYMVALUEptr = SYMVALUE;
         const auto &INTERNALptr = INTERNAL;
-        const auto &SET_PRINTNAMEptr = SET_PRINTNAME;
-        const auto &SET_SYMVALUEptr = SET_SYMVALUE;
-        const auto &SET_INTERNALptr = SET_INTERNAL;
-        const auto &SET_DDVALptr = SET_DDVAL;
+        const auto &SET_PRINTNAMEptr = R::SET_PRINTNAME;
+        const auto &SET_SYMVALUEptr = R::SET_SYMVALUE;
+        const auto &SET_INTERNALptr = R::SET_INTERNAL;
+        const auto &SET_DDVALptr = R::SET_DDVAL;
     } // namespace ForceNonInline
 
     // Symbol::s_special_symbol_names is in names.cpp
@@ -458,14 +459,14 @@ int DDVAL(SEXP x)
     return x ? SEXP_downcast<const Symbol *>(x)->isDotDotSymbol() : false;
 }
 
-void SET_PRINTNAME(SEXP x, SEXP v)
+void R::SET_PRINTNAME(SEXP x, SEXP v)
 {
     if (!x)
         return;
     Symbol::checkST(x);
 }
 
-void SET_SYMVALUE(SEXP x, SEXP v)
+void R::SET_SYMVALUE(SEXP x, SEXP v)
 {
     if (!x)
         return;
@@ -474,7 +475,7 @@ void SET_SYMVALUE(SEXP x, SEXP v)
     sym->setValue(v);
 }
 
-void SET_INTERNAL(SEXP x, SEXP v)
+void R::SET_INTERNAL(SEXP x, SEXP v)
 {
     if (!x)
         return;
@@ -484,7 +485,7 @@ void SET_INTERNAL(SEXP x, SEXP v)
     sym->setInternalFunction(fun);
 }
 
-void SET_DDVAL(SEXP x, int v)
+void R::SET_DDVAL(SEXP x, int v)
 {
 }
 

@@ -1822,7 +1822,7 @@ HIDDEN SEXP do_strtoi(SEXP call, SEXP op, SEXP args, SEXP env)
    with given index; the result is returned unprotected  */
 
 /*HIDDEN*/
-SEXP Rf_stringSuffix(SEXP string, int fromIndex)
+SEXP R::Rf_stringSuffix(SEXP string, int fromIndex)
 {
 
 	int origLen = LENGTH(string);

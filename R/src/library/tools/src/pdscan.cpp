@@ -18,7 +18,7 @@
  */
 
 #include <R.h>
-#include <Rdefines.h>
+// #include <Rdefines.h>
 #include <cctype>
 #include "tools.h"
 #include "localization.h"

@@ -50,6 +50,12 @@ namespace CXXR
     }
 } // namespace CXXR
 
+namespace R
+{
+    int SCALAR_IVAL(SEXP x);
+    void SET_SCALAR_IVAL(SEXP x, int v);
+} // namespace R
+
 extern "C"
 {
     /**
@@ -73,8 +79,7 @@ extern "C"
      */
     const int *INTEGER_RO(SEXP x);
     int *INTEGER0(SEXP x);
-    int SCALAR_IVAL(SEXP x);
-    void SET_SCALAR_IVAL(SEXP x, int v);
+
     const int *INTEGER_OR_NULL(SEXP x);
     int INTEGER_ELT(SEXP x, R_xlen_t i);
     void SET_INTEGER_ELT(SEXP x, R_xlen_t i, int v);

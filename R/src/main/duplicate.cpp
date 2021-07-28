@@ -143,7 +143,7 @@ SEXP Rf_lazy_duplicate(SEXP s)
    FALSE. Could be made more efficient, at least with partial
    inlining, but probably not worth while until it starts showing up
    significantly in profiling. Based on code from Michael Lawrence. */
-Rboolean R_cycle_detected(SEXP s, SEXP child)
+Rboolean R::R_cycle_detected(SEXP s, SEXP child)
 {
 	if (s == child)
 	{

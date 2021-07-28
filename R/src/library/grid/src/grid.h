@@ -27,8 +27,6 @@
 #include <R_ext/GraphicsEngine.h>
 #include <R_ext/Minmax.h>
 
-#include <Rinternals.h>
-
 /* All grid type names are prefixed with an "L" 
  * All grid global variable names are prefixed with an "L_" 
  */

@@ -57,7 +57,7 @@ namespace CXXR
         const auto &SET_ENCLOSptr = SET_ENCLOS;
         const auto &SET_ENVFLAGSptr = SET_ENVFLAGS;
         const auto &SET_FRAMEp = SET_FRAME;
-        const auto &SET_ENV_RDEBUGptr = SET_ENV_RDEBUG;
+        const auto &SET_ENV_RDEBUGptr = R::SET_ENV_RDEBUG;
         const auto &SET_HASHTABptr = SET_HASHTAB;
     } // namespace ForceNonInline
 
@@ -210,7 +210,7 @@ void SET_ENVFLAGS(SEXP x, int v)
     SEXP_downcast<Environment *>(x)->unpackGPBits(v);
 }
 
-void SET_ENV_RDEBUG(SEXP x, int v)
+void R::SET_ENV_RDEBUG(SEXP x, int v)
 {
     if (!x)
         return;

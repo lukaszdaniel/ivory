@@ -579,7 +579,7 @@ static SEXP new_compact_realseq(R_xlen_t n, double n1, double inc)
  ** Compact Integer/Real Sequences
  **/
 
-HIDDEN SEXP R_compact_intrange(R_xlen_t n1, R_xlen_t n2)
+HIDDEN SEXP R::R_compact_intrange(R_xlen_t n1, R_xlen_t n2)
 {
     R_xlen_t n = std::abs(n2 - n1) + 1;
 
@@ -890,7 +890,7 @@ static void InitDefferredStringClass()
  * Constructor
  */
 
-HIDDEN SEXP R_deferred_coerceToString(SEXP v, SEXP info)
+HIDDEN SEXP R::R_deferred_coerceToString(SEXP v, SEXP info)
 {
     SEXP ans = R_NilValue;
     switch (TYPEOF(v)) {
@@ -1999,7 +1999,7 @@ HIDDEN SEXP do_wrap_meta(SEXP call, SEXP op, SEXP args, SEXP env)
     return wrap_meta(x, srt, no_na);
 }
 
-HIDDEN SEXP R_tryWrap(SEXP x)
+HIDDEN SEXP R::R_tryWrap(SEXP x)
 {
     return wrap_meta(x, UNKNOWN_SORTEDNESS, false);
 }
@@ -2024,7 +2024,7 @@ HIDDEN SEXP do_tryWrap(SEXP call, SEXP op, SEXP args, SEXP env)
    operation. It could be used in other places, but extreme caution is
    needed to make sure there is no possibliity that the wrapper object
    will be referenced from C code after it is cleared. */
-HIDDEN SEXP R_tryUnwrap(SEXP x)
+HIDDEN SEXP R::R_tryUnwrap(SEXP x)
 {
     if (! MAYBE_SHARED(x) && is_wrapper(x) &&
 	WRAPPER_SORTED(x) == UNKNOWN_SORTEDNESS && ! WRAPPER_NO_NA(x)) {
@@ -2060,7 +2060,7 @@ HIDDEN SEXP R_tryUnwrap(SEXP x)
  ** Initialize ALTREP Classes
  **/
 
-HIDDEN void R_init_altrep()
+HIDDEN void R::R_init_altrep()
 {
     InitCompactIntegerClass();
     InitCompactRealClass();

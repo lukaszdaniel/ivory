@@ -37,6 +37,7 @@
 #include <R_ext/Error.h>
 
 using namespace std;
+using namespace R;
 using namespace CXXR;
 
 namespace CXXR

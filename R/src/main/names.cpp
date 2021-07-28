@@ -1103,7 +1103,7 @@ static void initializeDDVALSymbols()
 }
 
 /*HIDDEN*/
-SEXP Rf_installDDVAL(int n)
+SEXP R::Rf_installDDVAL(int n)
 {
     return Symbol::obtainDotDotSymbol(n);
 }
@@ -1174,7 +1174,7 @@ SEXP Rf_installNoTrChar(SEXP charSXP)
 }
 
 /*HIDDEN*/
-SEXP Rf_installS3Signature(const char *className, const char *methodName)
+SEXP R::Rf_installS3Signature(const char *className, const char *methodName)
 {
     return Symbol::obtainS3Signature(className, methodName);
 }

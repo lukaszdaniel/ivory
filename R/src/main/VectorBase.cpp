@@ -34,6 +34,7 @@
 #include <Rinternals.h>
 #include <Localization.h>
 
+using namespace R;
 using namespace CXXR;
 
 namespace CXXR
@@ -42,9 +43,9 @@ namespace CXXR
     // from C:
     namespace ForceNonInline
     {
-        const auto &STDVEC_LENGTHptr = STDVEC_LENGTH;
+        const auto &STDVEC_LENGTHptr = R::STDVEC_LENGTH;
         const auto &SET_TRUELENGTHptr = SET_TRUELENGTH;
-        const auto &STDVEC_TRUELENGTHptr = STDVEC_TRUELENGTH;
+        const auto &STDVEC_TRUELENGTHptr = R::STDVEC_TRUELENGTH;
     } // namespace ForceNonInline
 
     namespace
@@ -115,7 +116,7 @@ namespace CXXR
 // ***** C interface *****
 
 #ifdef LONG_VECTOR_SUPPORT
-NORET R_len_t R_BadLongVector(SEXP x, const char *file, int line)
+NORET R_len_t R::R_BadLongVector(SEXP x, const char *file, int line)
 {
     Rf_error(_("long vectors not supported yet: %s:%d"), file, line);
 }
@@ -276,12 +277,12 @@ void SET_TRUELENGTH(SEXP x, R_xlen_t v)
     CXXR::VectorBase::set_truelength(x, v);
 }
 
-R_xlen_t STDVEC_LENGTH(SEXP x)
+R_xlen_t R::STDVEC_LENGTH(SEXP x)
 {
     return CXXR::VectorBase::stdvec_length(x);
 }
 
-R_xlen_t STDVEC_TRUELENGTH(SEXP x)
+R_xlen_t R::STDVEC_TRUELENGTH(SEXP x)
 {
     return CXXR::VectorBase::stdvec_truelength(x);
 }

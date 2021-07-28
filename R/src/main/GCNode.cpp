@@ -408,7 +408,7 @@ void SET_REFCNT(SEXP x, unsigned int v)
         x->setRefCnt(v);
 }
 
-int TRACKREFS(SEXP x)
+int R::TRACKREFS(SEXP x)
 {
     return x ? x->trackrefs() : false;
 }
@@ -419,22 +419,22 @@ void SET_TRACKREFS(SEXP x, bool v)
         x->setTrackrefs(x->sexptype() == CLOSXP ? true : v);
 }
 
-void DECREMENT_REFCNT(SEXP x)
+void R::DECREMENT_REFCNT(SEXP x)
 {
     CXXR::GCNode::decRefCount(x);
 }
 
-void INCREMENT_REFCNT(SEXP x)
+void R::INCREMENT_REFCNT(SEXP x)
 {
     CXXR::GCNode::incRefCount(x);
 }
 
-void DISABLE_REFCNT(SEXP x)
+void R::DISABLE_REFCNT(SEXP x)
 {
     SET_TRACKREFS(x, false);
 }
 
-void ENABLE_REFCNT(SEXP x)
+void R::ENABLE_REFCNT(SEXP x)
 {
     SET_TRACKREFS(x, true);
 }

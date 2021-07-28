@@ -35,6 +35,7 @@
 #include <CXXR/StringVector.hpp>
 #include <CXXR/LogicalVector.hpp>
 #include <CXXR/Symbol.hpp>
+#include <CXXR/ByteCode.hpp>
 #include <Localization.h>
 #include <R_ext/Minmax.h>
 #include <RContext.h>
