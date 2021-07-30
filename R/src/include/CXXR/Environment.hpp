@@ -317,7 +317,7 @@ namespace R
 
    /** @brief Enable/disable single-stepping of the debugger.
     *
-    * @param x Pointer a CXXR::Environment object (checked).
+    * @param x Pointer to a CXXR::Environment object (checked).
     *
     * @param v The new single-stepping state (true = enabled).
     */

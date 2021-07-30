@@ -140,7 +140,7 @@ extern "C"
 	 *
 	 * @param x Pointer to a CXXR::S4Object (checked).
 	 *
-	 * @param y Pointer a CXXR::RObject representing the new tag of
+	 * @param y Pointer to a CXXR::RObject representing the new tag of
 	 *          the CXXR::S4Object.
 	 */
 	void SET_S4TAG(SEXP x, SEXP y);

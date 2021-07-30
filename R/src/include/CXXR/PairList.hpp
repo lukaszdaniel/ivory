@@ -300,7 +300,7 @@ extern "C"
      *
      * @param x Pointer to a CXXR::ConsCell (checked).
      *
-     * @param y Pointer a CXXR::RObject representing the new value of the
+     * @param y Pointer to a CXXR::RObject representing the new value of the
      *          list car.
      *
      * @returns \a y.
@@ -311,7 +311,7 @@ extern "C"
      *
      * @param x Pointer to a CXXR::ConsCell (checked).
      *
-     * @param y Pointer a CXXR::RObject representing the new tail of the list.
+     * @param y Pointer to a CXXR::RObject representing the new tail of the list.
      *
      * @returns \a y.
      */
@@ -322,7 +322,7 @@ extern "C"
      * @param x Pointer to a CXXR::ConsCell with at least one successor
      *          (checked).
      *
-     * @param y Pointer a CXXR::RObject representing the new value of the
+     * @param y Pointer to a CXXR::RObject representing the new value of the
      *          second element of the list.
      *
      * @returns \a y.
@@ -334,7 +334,7 @@ extern "C"
      * @param x Pointer to a CXXR::ConsCell with at least two
      *          successors (checked).
      *
-     * @param y Pointer a CXXR::RObject representing the new value of the
+     * @param y Pointer to a CXXR::RObject representing the new value of the
      *          third element of the list.
      *
      * @returns \a y.
@@ -346,7 +346,7 @@ extern "C"
      * @param x Pointer to a CXXR::ConsCell with at least three
      *          successors (checked).
      *
-     * @param y Pointer a CXXR::RObject representing the new value of the
+     * @param y Pointer to a CXXR::RObject representing the new value of the
      *          fourth element of the list.
      *
      * @returns \a y.
@@ -358,7 +358,7 @@ extern "C"
      * @param x Pointer to a CXXR::ConsCell with at least four
      *          successors (checked).
      *
-     * @param y Pointer a CXXR::RObject representing the new value of the
+     * @param y Pointer to a CXXR::RObject representing the new value of the
      *          fifth element of the list.
      *
      * @returns \a y.

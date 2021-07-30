@@ -471,15 +471,15 @@ void R::SET_MISSING(SEXP x, int v)
         SEXP_downcast<ConsCell *>(x)->setMissing(v);
 }
 
-int R::BNDCELL_TAG(SEXP cell)
+SEXPTYPE R::BNDCELL_TAG(SEXP cell)
 {
     return cell ? SEXP_downcast<ConsCell *>(cell)->bndcellTag() : NILSXP;
 }
 
-void R::SET_BNDCELL_TAG(SEXP cell, int val)
+void R::SET_BNDCELL_TAG(SEXP cell, SEXPTYPE val)
 {
     if (cell)
-        SEXP_downcast<ConsCell *>(cell)->setBndCellTag(SEXPTYPE(val));
+        SEXP_downcast<ConsCell *>(cell)->setBndCellTag(val);
 }
 
 double R::BNDCELL_DVAL(SEXP cell)
@@ -512,7 +512,7 @@ void R::SET_BNDCELL_LVAL(SEXP cell, int v)
     SET_BNDCELL_LVAL_MACRO(cell, v);
 }
 
-void R::INIT_BNDCELL(SEXP cell, int type)
+void R::INIT_BNDCELL(SEXP cell, SEXPTYPE type)
 {
     INIT_BNDCELL_MACRO(cell, type);
 }

@@ -410,15 +410,15 @@ namespace R
     void SET_MISSING(SEXP x, int v);
 
     SEXP CONS_NR(SEXP a, SEXP b);
-    int BNDCELL_TAG(SEXP cell);
-    void SET_BNDCELL_TAG(SEXP cell, int val);
+    SEXPTYPE BNDCELL_TAG(SEXP cell);
+    void SET_BNDCELL_TAG(SEXP cell, SEXPTYPE val);
     double BNDCELL_DVAL(SEXP cell);
     int BNDCELL_IVAL(SEXP cell);
     int BNDCELL_LVAL(SEXP cell);
     void SET_BNDCELL_DVAL(SEXP cell, double v);
     void SET_BNDCELL_IVAL(SEXP cell, int v);
     void SET_BNDCELL_LVAL(SEXP cell, int v);
-    void INIT_BNDCELL(SEXP cell, int type);
+    void INIT_BNDCELL(SEXP cell, SEXPTYPE type);
     void SET_BNDCELL(SEXP cell, SEXP val);
 } // namespace R
 
@@ -441,7 +441,7 @@ extern "C"
      *
      * @param x Pointer to a CXXR::ConsCell (checked).
      *
-     * @param y Pointer a CXXR::RObject representing the new tag of
+     * @param y Pointer to a CXXR::RObject representing the new tag of
      *          the CXXR::ConsCell.
      */
     void SET_TAG(SEXP x, SEXP y);

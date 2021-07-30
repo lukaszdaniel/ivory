@@ -299,12 +299,20 @@ extern "C"
 {
     /** @brief Is an object of numeric type.
      *
+     * @param s Pointer to an CXXR::RObject.
+     *
+     * @return \c true if CXXR::RObject is integer, logical or real.
+     *
      * @todo the LGLSXP case should be excluded here
      *       (really? in many places we affirm they are treated like INTs)
      */
     Rboolean Rf_isNumeric(SEXP s);
 
-    /** @brief Is an object "Numeric" or  complex
+    /** @brief Is an object "Numeric" or complex?
+     *
+     * @param s Pointer to an CXXR::RObject.
+     *
+     * @return \c true if CXXR::RObject is integer, logical, real or complex.
      */
     Rboolean Rf_isNumber(SEXP s);
 } // extern "C"

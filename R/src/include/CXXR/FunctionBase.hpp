@@ -137,7 +137,7 @@ extern "C"
 
     /** @brief Set the debugging state of a CXXR::FunctionBase object.
      *
-     * @param x Pointer a CXXR::FunctionBase object (checked).
+     * @param x Pointer to a CXXR::FunctionBase object (checked).
      *
      * @param v The new debugging state.
      *
@@ -146,7 +146,21 @@ extern "C"
      * for environments.
      */
     void SET_RDEBUG(SEXP x, int v);
+
+    /** @brief Is function BuiltIn or Special?
+     *
+     * @param s Pointer to a CXXR::RObject.
+     *
+     * @return \c true if CXXR::ROject is BuiltIn or Special.
+     */
     Rboolean Rf_isPrimitive(SEXP s);
+
+    /** @brief Is function Closure or Primitive?
+     *
+     * @param s Pointer to a CXXR::RObject.
+     *
+     * @return \c true if CXXR::ROject is Closure or Primitive.
+     */
     Rboolean Rf_isFunction(SEXP s);
 } // extern "C"
 

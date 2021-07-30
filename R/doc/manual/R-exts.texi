@@ -5286,12 +5286,16 @@ versions the default standard was that of the compiler used, often C++98
 or C++14, and the default is likely to change in future.  For maximal
 portability a package should either specify a standard (@pxref{Using C++
 code}) or be tested under all of C++11, C++98 and C++14.  (Specifying
-C++14 or later will limit portability.)
+C++14 will limit portability.)
 
 Note that the `TR1' C++ extensions are not part of any of these
 standards and the @code{<tr1/@var{name}>} headers are not supplied by some of
 the compilers used for @R{}, including on macOS.  (Use the C++11
 versions instead.)
+
+As noted elsewhere, the C++17 standard was finalized only recently (Dec
+2017) and support for it is patchy or absent on several platforms used
+for @R{}.  So portable code should not require C++17 (let alone C++20).
 
 Note too that the POSIX standards only require recently-defined
 functions to be declared if certain macros are defined with large enough
@@ -15716,7 +15720,7 @@ errors to be trapped and to make use of extended precision registers).
 The standard code sets up a session temporary directory in the usual
 way, @emph{unless} @code{R_TempDir} is set to a non-NULL value before
 @code{Rf_initEmbeddedR} is called.  In that case the value is assumed to
-contain an existing writable directory (no check is done), and it is not
+contain an existing writable directory, and it is not
 cleaned up when @R{} is shut down.
 
 @code{Rf_initEmbeddedR} sets @R{} to be in interactive mode: you can set

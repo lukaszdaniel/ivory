@@ -141,17 +141,25 @@ extern "C"
     */
    SEXP Rf_lcons(SEXP cr, SEXP tl);
 
-   /* Language based list constructs.  These are identical to the list */
-   /* constructs, but the results can be evaluated. */
-
+   /** @note Language based list constructs.  These are identical to the list
+    * constructs, but the results can be evaluated.
+    */
    SEXP Rf_lang1(SEXP s);
    SEXP Rf_lang2(SEXP s, SEXP t);
    SEXP Rf_lang3(SEXP s, SEXP t, SEXP u);
    SEXP Rf_lang4(SEXP s, SEXP t, SEXP u, SEXP v);
    SEXP Rf_lang5(SEXP s, SEXP t, SEXP u, SEXP v, SEXP w);
    SEXP Rf_lang6(SEXP s, SEXP t, SEXP u, SEXP v, SEXP w, SEXP x);
-   /* DIFFERENT than R's  is.language(.) in ../main/coerce.cpp [do_is(), case 301:]
-    *                                    which is   <=>  SYMSXP || LANGSXP || EXPRSXP */
+
+   /** @brief Is an object "language" expression?
+    *
+    * @param s Pointer to an CXXR::RObject.
+    *
+    * @return \c true if s is a null pointer or a language expression.
+    *
+    * @note DIFFERENT than R's  is.language(.) in ../main/coerce.cpp [do_is(), case 301:]
+    *                                    which is   <=>  SYMSXP || LANGSXP || EXPRSXP
+    */
    Rboolean Rf_isLanguage(SEXP s);
 } // extern "C"
 

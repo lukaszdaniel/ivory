@@ -84,9 +84,6 @@ namespace CXXR
 
 void Rf_setCurrentExpression(SEXP e);
 
-/* Language based list constructs.  These are identical to the list */
-/* constructs, but the results can be evaluated. */
-
 SEXP Rf_lang1(SEXP s)
 {
     return Rf_lcons(s, nullptr);

@@ -95,6 +95,12 @@ namespace CXXR
 
 extern "C"
 {
+    /** @brief Is an object "dotted" expression?
+     *
+     * @param s Pointer to an CXXR::RObject.
+     *
+     * @return \c true if s is a null pointer or a dotted expression.
+     */
     Rboolean Rf_isDottedArgs(SEXP s);
 }
 

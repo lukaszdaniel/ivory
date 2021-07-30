@@ -5130,7 +5130,7 @@ using BCODE = int;
 
 /**** is there a way to avoid the locked check here? */
 /**** always boxing on lock is one option */
-#define BNDCELL_TAG_WR(v) (BINDING_IS_LOCKED(v) ? 0 : BNDCELL_TAG(v))
+#define BNDCELL_TAG_WR(v) (BINDING_IS_LOCKED(v) ? NILSXP : BNDCELL_TAG(v))
 
 #define BNDCELL_WRITABLE(v) (v && !BINDING_IS_LOCKED(v) && !IS_ACTIVE_BINDING(v))
 #define BNDCELL_UNBOUND(v) (BNDCELL_TAG(v) == NILSXP && CAR0(v) == R_UnboundValue)

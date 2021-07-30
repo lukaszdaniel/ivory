@@ -146,15 +146,15 @@ namespace R
     void SETALTREP(SEXP, int);
 
     /* Binding Cell Access Functions */
-    int BNDCELL_TAG(SEXP e);
-    void SET_BNDCELL_TAG(SEXP e, int v);
+    SEXPTYPE BNDCELL_TAG(SEXP e);
+    void SET_BNDCELL_TAG(SEXP e, SEXPTYPE v);
     double BNDCELL_DVAL(SEXP cell);
     int BNDCELL_IVAL(SEXP cell);
     int BNDCELL_LVAL(SEXP cell);
     void SET_BNDCELL_DVAL(SEXP cell, double v);
     void SET_BNDCELL_IVAL(SEXP cell, int v);
     void SET_BNDCELL_LVAL(SEXP cell, int v);
-    void INIT_BNDCELL(SEXP cell, int type);
+    void INIT_BNDCELL(SEXP cell, SEXPTYPE type);
     void SET_BNDCELL(SEXP cell, SEXP val);
 
     /* List Access Functions */

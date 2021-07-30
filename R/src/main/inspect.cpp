@@ -277,7 +277,7 @@ static void inspect_tree(int pre, SEXP v, int deep, int pvec) {
 			inspect_tree(0, TAG(lc), deep - 1, pvec);
 		    }
 		    if (BNDCELL_TAG(lc)) {
-			SEXPTYPE type = SEXPTYPE(BNDCELL_TAG(lc));
+			SEXPTYPE type = BNDCELL_TAG(lc);
 			pp(pre + 2);
 			Rprintf("immediate %s: ", sexptype2char(type));
 			switch(type) {
