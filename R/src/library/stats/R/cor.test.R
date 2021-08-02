@@ -27,10 +27,10 @@ function(x, y, alternative = c("two.sided", "less", "greater"),
     method <- match.arg(method)
     DNAME <- gettextf("%s and %s", paste(deparse1(substitute(x)), collapse = ""), paste(deparse1(substitute(y)), collapse = ""), domain = "R-stats")
 
-    if(length(x) != length(y))
-	stop(gettextf("'%s' and '%s' arguments must have the same length", "x", "y"))
     if(!is.numeric(x)) stop(gettextf("'%s' argument must be a numeric vector", "x"))
     if(!is.numeric(y)) stop(gettextf("'%s' argument must be a numeric vector", "y"))
+    if(length(x) != length(y))
+	stop(gettextf("'%s' and '%s' arguments must have the same length", "x", "y"))
     OK <- complete.cases(x, y)
     x <- x[OK]
     y <- y[OK]
