@@ -1,9 +1,9 @@
 
-Ivory Under development (unstable) (2021-07-15 r1569) -- "Internationalized Version of R"
+Ivory Under development (unstable) (2021-08-02 r1573) -- "Internationalized Version of R"
 Copyright (C) 2013-2021 Lukasz Daniel (lukasz.daniel@gmail.com)
 See README-IVORY file for details.
 
-R Under development (unstable) (2021-07-15 r80640) -- "Unsuffered Consequences"
+R Under development (unstable) (2021-08-02 r80695) -- "Unsuffered Consequences"
 Copyright (C) 2021 The R Foundation for Statistical Computing
 Platform: x86_64-pc-linux-gnu (64-bit)
 
@@ -57,4 +57,4 @@ Calculations on Transformed Scale; Intervals on Original Scale
 > 
 > proc.time()
    user  system elapsed 
-  1.161   0.027   3.421 
+  1.159   0.027   3.382 
