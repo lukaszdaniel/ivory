@@ -52,12 +52,36 @@ namespace CXXR
     GCStackRoot<> PairList::s_cons_car;
     GCStackRoot<PairList> PairList::s_cons_cdr;
 
-    PairList::PairList(const PairList &pattern, bool deep, int)
+    PairList *PairList::make(int num_args, RObject *const *args)
+    {
+        if (num_args == 0)
+            return nullptr;
+        // TODO(kmillar): this uses a recursive implementation and may take up a lot
+        //   of stack space.  Either reimplement or retire this function.
+        return GCNode::expose(new PairList(args[0],
+                                           make(num_args - 1, args + 1),
+                                           nullptr));
+    }
+
+    void PairList::copyTagsFrom(const PairList *listWithTags)
+    {
+        PairList *to = this;
+        const PairList *from = listWithTags;
+
+        while (to && from)
+        {
+            to->setTag(from->tag());
+            to = to->tail();
+            from = from->tail();
+        }
+    }
+
+    PairList::PairList(const PairList &pattern, Duplicate deep, int)
         : ConsCell(pattern, deep, 0), m_argused(0)
     {
     }
 
-    PairList::PairList(const PairList &pattern, bool deep)
+    PairList::PairList(const PairList &pattern, Duplicate deep)
         : ConsCell(pattern, deep, 0), m_argused(0)
     {
         // Clone the tail:
@@ -71,9 +95,8 @@ namespace CXXR
         }
     }
 
-    PairList *PairList::clone(bool deep) const
+    PairList *PairList::clone(Duplicate deep) const
     {
-        // return GCNode::expose(new PairList(*this, deep));
         return new PairList(*this, deep);
     }
 

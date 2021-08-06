@@ -25,6 +25,8 @@
 #define R_NO_REMAP
 
 #include <CXXR/BuiltInFunction.hpp>
+#include <CXXR/BinaryFunction.hpp>
+#include <CXXR/UnaryFunction.hpp>
 #include <CXXR/FixedVector.hpp>
 #include <CXXR/LogicalVector.hpp>
 #include <CXXR/PairList.hpp>
@@ -34,6 +36,7 @@
 #include <R_ext/Itermacros.h>
 
 using namespace R;
+using namespace CXXR;
 
 /* interval at which to check interrupts, a guess */
 // constexpr R_xlen_t NINTERRUPT = 10000000;

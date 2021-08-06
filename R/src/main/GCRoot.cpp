@@ -46,30 +46,28 @@ namespace CXXR
     {
     } // namespace ForceNonInline
 
-    GCRootBase::List *GCRootBase::s_roots;
+    GCRootBase *GCRootBase::s_list_head = nullptr;
 
     GCRootBase::GCRootBase(const GCNode *node)
-        : m_it(s_roots->insert(s_roots->end(), node))
     {
-        // GCNode::maybeCheckExposed(node);
-    }
+        m_next = s_list_head;
+        m_prev = nullptr;
+        if (m_next)
+        {
+            m_next->m_prev = this;
+        }
+        s_list_head = this;
 
-    void GCRootBase::cleanup()
-    {
-        delete s_roots;
-    }
-
-    void GCRootBase::initialize()
-    {
-        s_roots = new List();
+        m_pointer = node;
+        GCNode::incRefCount(ptr());
     }
 
     void GCRootBase::visitRoots(GCNode::const_visitor *v)
     {
-        for (auto &n : *s_roots)
+        for (GCRootBase *node = s_list_head; node; node = node->m_next)
         {
-            if (n)
-                n->conductVisitor(v);
+            if (node->ptr())
+                node->ptr()->conductVisitor(v);
         }
     }
 } // namespace CXXR

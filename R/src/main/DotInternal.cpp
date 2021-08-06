@@ -1,7 +1,7 @@
 /*
  *  R : A Computer Language for Statistical Data Analysis
+ *  Copyright (C) 1999--2020  The R Core Team.
  *  Copyright (C) 1995, 1996  Robert Gentleman and Ross Ihaka
- *  Copyright (C) 1999-2007   The R Development Core Team.
  *  Copyright (C) 2008-2014  Andrew R. Runnalls.
  *  Copyright (C) 2014 and onwards the Rho Project Authors.
  *
@@ -17,24 +17,26 @@
  *  This program is distributed in the hope that it will be useful,
  *  but WITHOUT ANY WARRANTY; without even the implied warranty of
  *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- *  GNU General Public License for more details.
+ *  GNU Lesser General Public License for more details.
  *
- *  You should have received a copy of the GNU General Public License
+ *  You should have received a copy of the GNU Lesser General Public License
  *  along with this program; if not, a copy is available at
  *  https://www.R-project.org/Licenses/
  */
 
-/** @file FunctionBase.cpp
+/** @file DotInternal.cpp
  *
- * Class FunctionBase and associated C interface functions.
+ * @brief Table of functions invoked \e via <tt>.Internal()</tt>.
  */
 
-#include <CXXR/FunctionBase.hpp>
+#include <CXXR/DotInternal.hpp>
+#include <CXXR/BuiltInFunction.hpp>
+#include <CXXR/Expression.hpp>
+#include <CXXR/Symbol.hpp>
+#include <Internal.h>
 
-#include <cstdarg>
-#include <R_ext/Print.h>
-#include <Rinternals.h>
-
+using namespace std;
+using namespace R;
 using namespace CXXR;
 
 namespace CXXR
@@ -43,49 +45,30 @@ namespace CXXR
     // from C:
     namespace ForceNonInline
     {
-        const auto &RDEBUGptr = RDEBUG;
-        const auto &RTRACEptr = RTRACE;
-        const auto &SET_RDEBUGptr = SET_RDEBUG;
-        const auto &SET_RTRACEptr = SET_RTRACE;
+        const auto &INTERNALptr = INTERNAL;
+        const auto &SET_INTERNALptr = R::SET_INTERNAL;
     } // namespace ForceNonInline
 } // namespace CXXR
 
 // ***** C interface *****
 
-int RTRACE(SEXP x)
+SEXP INTERNAL(SEXP x)
 {
-    return x && x->trace();
+    if (!x)
+        return nullptr;
+    Symbol::checkST(x);
+    const Symbol *sym = SEXP_downcast<const Symbol *>(x);
+    return const_cast<BuiltInFunction *>(sym->internalFunction());
+    // TODO: sometime in the future:
+    // return BuiltInFunction::obtainInternal(sym);
 }
 
-void SET_RTRACE(SEXP x, int v)
+void R::SET_INTERNAL(SEXP x, SEXP v)
 {
     if (!x)
         return;
-    x->setTrace(v);
-}
-
-int RDEBUG(SEXP x)
-{
-    if (!x)
-        return false;
-    const FunctionBase *fb = SEXP_downcast<const FunctionBase *>(x);
-    return fb->debugging();
-}
-
-void SET_RDEBUG(SEXP x, int v)
-{
-    if (!x)
-        return;
-    FunctionBase *fb = SEXP_downcast<FunctionBase *>(x);
-    fb->setDebugging(v);
-}
-
-Rboolean Rf_isPrimitive(SEXP s)
-{
-    return Rboolean(TYPEOF(s) == BUILTINSXP || TYPEOF(s) == SPECIALSXP);
-}
-
-Rboolean Rf_isFunction(SEXP s)
-{
-    return Rboolean(FunctionBase::isA(s));
+    Symbol::checkST(x);
+    Symbol *sym = SEXP_downcast<Symbol *>(x);
+    BuiltInFunction *fun = SEXP_downcast<BuiltInFunction *>(v);
+    sym->setInternalFunction(fun);
 }

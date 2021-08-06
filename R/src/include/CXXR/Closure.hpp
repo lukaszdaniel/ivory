@@ -70,7 +70,7 @@ namespace CXXR
        *
        * @param deep Indicator whether to perform deep or shallow copy.
        */
-      Closure(const Closure &pattern, bool deep)
+      Closure(const Closure &pattern, Duplicate deep)
           : FunctionBase(pattern, deep),
             m_no_jit(pattern.m_no_jit), m_maybe_jit(pattern.m_maybe_jit)
       {
@@ -119,6 +119,11 @@ namespace CXXR
          m_environment.retarget(this, new_env);
       }
 
+      /** @brief Replace the formals of the closure.
+       *
+       * @param formal_args Pointer to a pairlist containing the new
+       *          formal arguments to use for this closure.
+       */
       void setFormalArgs(PairList *formal_args)
       {
          // m_formals = formal_args;
@@ -126,6 +131,10 @@ namespace CXXR
          m_formals.retarget(this, formal_args);
       }
 
+      /** @brief Replace the body of the closure.
+       *
+       * @param body Pointer to the new body to use for this closure.
+       */
       void setBody(RObject *body)
       {
          // m_body = body;
@@ -167,7 +176,7 @@ namespace CXXR
       // Virtual functions of RObject:
       unsigned int packGPBits() const override;
       void unpackGPBits(unsigned int gpbits) override;
-      Closure *clone(bool deep) const override;
+      Closure *clone(Duplicate deep) const override;
       const char *typeName() const override;
 
       // Virtual function of GCNode:

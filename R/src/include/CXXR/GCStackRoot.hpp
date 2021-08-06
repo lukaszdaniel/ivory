@@ -24,7 +24,7 @@
 
 /** @file GCStackRoot.hpp
  *
- * @brief Templated class CXXR::GCStackRoot and its untemplated base class
+ * @brief Templated class CXXR::GCStackRoot and its untemplated utility class
  * CXXR::GCStackRootBase.
  */
 
@@ -41,7 +41,7 @@ namespace CXXR
 {
     class RObject;
 
-    /** @brief Untemplated base class for GCStackRoot.
+    /** @brief Untemplated utility class for GCStackRoot.
      *
      * The preferred method for C++ code to protect a GCNode
      * from the garbage collector is to use the templated class

@@ -34,6 +34,8 @@
 #include <CXXR/Symbol.hpp>
 #include <Rinternals.h>
 
+#include <typeinfo>
+
 using namespace std;
 using namespace CXXR;
 
@@ -105,6 +107,12 @@ namespace CXXR
         return staticTypeName();
     }
 
+    // Environment::findNamespace() is in envir.cpp
+
+    // Environment::findPackage() is in envir.cpp
+
+    // Environment::namespaceSpec() is in envir.cpp
+
     void Environment::visitReferents(const_visitor *v) const
     {
         RObject::visitReferents(v);
@@ -129,6 +137,30 @@ namespace CXXR
         default:
             std::cerr << "Inappropriate SEXPTYPE (" << x->sexptype() << ") for Environment." << std::endl;
             abort();
+        }
+#endif
+    }
+
+    // Utility intended to be called from a debugger.  Prints out the
+    // names of the Symbols in an Environment, together with the addresses
+    // the Symbols are bound to.
+
+    void LS(RObject *s)
+    {
+#if CXXR_TRUE
+		std::cerr << "LS(...) not yet implemented" << std::endl;
+		abort();
+#else
+        const Environment *env = SEXP_downcast<Environment *>(s);
+        const Frame *frame = env->frame();
+        vector<const Symbol *> syms = frame->symbols(true);
+        for (const auto &sym : syms)
+        {
+            const RObject *val = frame->binding(sym)->rawValue();
+            cout << "\"" << sym->name()->stdstring() << "\" (\'RObject\'*)" << val;
+            if (val)
+                cout << " [" << typeid(*val).name() << "]";
+            cout << "\n";
         }
 #endif
     }

@@ -32,9 +32,9 @@
 #define WEAKREF_HPP
 
 #include <list>
-#include <CXXR/RObject.hpp>
 #include <CXXR/Allocator.hpp>
-#include <CXXR/GCEdge.hpp>
+#include <CXXR/FunctionBase.hpp>
+#include <CXXR/RObject.hpp>
 #include <R_ext/Boolean.h>
 #include <Rinternals.h>
 
@@ -85,7 +85,7 @@ namespace CXXR
 		 * @param finalize_on_exit True iff the finalizer should be
 		 *          run when R exits.
 		 */
-		WeakRef(RObject *key, RObject *value, RObject *R_finalizer = nullptr,
+		WeakRef(RObject *key, RObject *value, FunctionBase *R_finalizer = nullptr,
 				bool finalize_on_exit = false);
 
 		/**
@@ -173,7 +173,7 @@ namespace CXXR
 
 		GCEdge<> m_key;
 		GCEdge<> m_value;
-		GCEdge<> m_Rfinalizer;
+		GCEdge<FunctionBase> m_Rfinalizer;
 		R_CFinalizer_t m_Cfinalizer;
 		WRList::iterator m_lit;
 		bool m_ready_to_finalize;

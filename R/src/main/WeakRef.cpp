@@ -32,7 +32,6 @@
 #include <cstdlib>
 #include <iostream>
 
-// #include <CXXR/GCEdge.hpp>
 #include <CXXR/Environment.hpp>
 #include <CXXR/Expression.hpp>
 #include <CXXR/Evaluator.hpp>
@@ -65,7 +64,7 @@ namespace CXXR
 		constexpr unsigned int FINALIZE_ON_EXIT_MASK = 2;
 	} // namespace
 
-	WeakRef::WeakRef(RObject *key, RObject *value, RObject *R_finalizer,
+	WeakRef::WeakRef(RObject *key, RObject *value, FunctionBase *R_finalizer,
 					 bool finalize_on_exit)
 		: RObject(WEAKREFSXP), m_Cfinalizer(nullptr),
 		  m_ready_to_finalize(false),
@@ -254,7 +253,7 @@ namespace CXXR
 						RObject *value = wr->value();
 						if (value && value->conductVisitor(&marker))
 							newmarks = true;
-						RObject *Rfinalizer = wr->m_Rfinalizer;
+						FunctionBase *Rfinalizer = wr->m_Rfinalizer;
 						if (Rfinalizer && Rfinalizer->conductVisitor(&marker))
 							newmarks = true;
 						wr->transfer(live, &newlive);
@@ -270,7 +269,7 @@ namespace CXXR
 				WeakRef *wr = *lit++;
 				RObject *key = wr->key();
 				RObject *value = wr->value();
-				RObject *Rfinalizer = wr->m_Rfinalizer;
+				FunctionBase *Rfinalizer = wr->m_Rfinalizer;
 				if (Rfinalizer || wr->m_Cfinalizer)
 				{
 					if (wr)
@@ -291,10 +290,8 @@ namespace CXXR
 		// Step 5 of algorithm.  Mark all live references with reachable keys.
 		{
 			live->splice(live->end(), newlive);
-			for (WRList::iterator lit = live->begin();
-				 lit != live->end(); ++lit)
+			for (WeakRef *wr : *live)
 			{
-				WeakRef *wr = *lit;
 				wr->conductVisitor(&marker);
 			}
 		}
@@ -433,7 +430,7 @@ namespace CXXR
 	{
 		R_CFinalizer_t Cfin = m_Cfinalizer;
 		GCStackRoot<> key(m_key);
-		GCStackRoot<> Rfin(m_Rfinalizer);
+		GCStackRoot<FunctionBase> Rfin(m_Rfinalizer);
 		// Do this now to ensure that finalizer is run only once, even if
 		// an error occurs:
 		tombstone();
@@ -443,7 +440,7 @@ namespace CXXR
 		{
 			GCStackRoot<PairList> tail(CXXR_cons(key, nullptr));
 			GCStackRoot<Expression> e(new Expression(Rfin, tail), true);
-			Rf_eval(e, Environment::global());
+			Evaluator::evaluate(e, Environment::global());
 		}
 	}
 } // namespace CXXR
@@ -480,8 +477,8 @@ SEXP R_MakeWeakRef(SEXP key, SEXP val, SEXP fin, Rboolean onexit)
 	default:
 		Rf_error(_("finalizer must be a function or NULL"));
 	}
-
-	return GCNode::expose(new WeakRef(key, val, fin, onexit));
+	FunctionBase *finf = SEXP_downcast<FunctionBase *>(fin);
+	return GCNode::expose(new WeakRef(key, val, finf, onexit));
 }
 
 SEXP R_MakeWeakRefC(SEXP key, SEXP val, R_CFinalizer_t fin, Rboolean onexit)

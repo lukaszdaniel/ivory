@@ -30,6 +30,10 @@
  */
 
 #include <CXXR/VectorBase.hpp>
+#include <CXXR/IntVector.hpp>
+#include <CXXR/ListVector.hpp>
+#include <CXXR/StringVector.hpp>
+#include <CXXR/Symbol.hpp>
 #include <R_ext/Error.h>
 #include <Rinternals.h>
 #include <Localization.h>
@@ -66,6 +70,46 @@ namespace CXXR
     {
         RObject::unpackGPBits(gpbits);
         m_growable = ((gpbits & GROWABLE_MASK) != 0);
+    }
+
+    const ListVector *VectorBase::dimensionNames() const
+    {
+        return static_cast<const ListVector *>(getAttribute(DimNamesSymbol));
+    }
+
+    const StringVector *VectorBase::dimensionNames(unsigned int d) const
+    {
+        const ListVector *lv = dimensionNames();
+        if (!lv || d > lv->size())
+            return nullptr;
+        return static_cast<const StringVector *>((*lv)[d - 1]);
+    }
+
+    const IntVector *VectorBase::dimensions() const
+    {
+        return static_cast<const IntVector *>(getAttribute(DimSymbol));
+    }
+
+    const StringVector *VectorBase::names() const
+    {
+        return static_cast<const StringVector *>(getAttribute(NamesSymbol));
+    }
+
+    // TODO: Ensure that names(dims(x)) and names(dimnames(x)) always match
+    //   when dims(x) and dimnames(x) are both defined.
+    void VectorBase::setDimensionNames(ListVector *names)
+    {
+        setAttribute(DimNamesSymbol, names);
+    }
+
+    void VectorBase::setDimensions(IntVector *dims)
+    {
+        setAttribute(DimSymbol, dims);
+    }
+
+    void VectorBase::setNames(StringVector *names)
+    {
+        setAttribute(NamesSymbol, names);
     }
 
     void VectorBase::resize(R_xlen_t new_size)
@@ -287,9 +331,9 @@ R_xlen_t R::STDVEC_TRUELENGTH(SEXP x)
     return CXXR::VectorBase::stdvec_truelength(x);
 }
 
-SEXP Rf_allocVector(SEXPTYPE type, R_xlen_t length = 1)
+SEXP Rf_allocVector(SEXPTYPE stype, R_xlen_t length = 1)
 {
-    return Rf_allocVector3(type, length, nullptr);
+    return Rf_allocVector3(stype, length, nullptr);
 }
 
 SEXP Rf_mkNamed(SEXPTYPE TYP, const char **names)

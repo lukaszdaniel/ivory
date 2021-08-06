@@ -138,19 +138,116 @@ namespace CXXR
     class ConsCell : public RObject
     {
     public:
+        /** @brief iterator for iterating over a HeterogeneousList.
+         */
+        template <typename ValueType = ConsCell>
+        class iterator_tmpl
+            : public std::iterator<std::forward_iterator_tag, ValueType>
+        {
+        public:
+            /** @brief Constructor.
+             *
+             * @param cc Pointer, possibly null, to the ConsCell to be
+             *           designated by the iterator.
+             */
+            explicit iterator_tmpl(ValueType *cc = nullptr) : m_cc(cc) {}
+
+            ValueType &operator*() const { return *m_cc; }
+
+            ValueType *operator->() const { return m_cc; }
+
+            iterator_tmpl operator++()
+            {
+                advance();
+                return *this;
+            }
+
+            iterator_tmpl operator++(int)
+            {
+                iterator_tmpl ans = *this;
+                advance();
+                return ans;
+            }
+
+            bool operator==(iterator_tmpl other) const
+            {
+                return m_cc == other.m_cc;
+            }
+            bool operator!=(iterator_tmpl other) const
+            {
+                return m_cc != other.m_cc;
+            }
+
+        private:
+            ValueType *m_cc;
+
+            void advance();
+        };
+
+        /** @brief const_iterator for iterating over a ConsCell list.
+         */
+        template <typename ValueType = ConsCell>
+        class const_iterator_tmpl
+            : public std::iterator<std::forward_iterator_tag, const ValueType>
+        {
+        public:
+            /** @brief Constructor.
+             *
+             * @param cc Pointer, possibly null, to the ConsCell to be
+             *           designated by the const_iterator.
+             */
+            explicit const_iterator_tmpl(const ValueType *cc = nullptr) : m_cc(cc)
+            {
+            }
+
+            const ValueType &operator*() const { return *m_cc; }
+
+            const ValueType *operator->() const { return m_cc; }
+
+            const_iterator_tmpl operator++()
+            {
+                advance();
+                return *this;
+            }
+
+            const_iterator_tmpl operator++(int)
+            {
+                const_iterator_tmpl ans = *this;
+                advance();
+                return ans;
+            }
+
+            bool operator==(const_iterator_tmpl other) const
+            {
+                return m_cc == other.m_cc;
+            }
+            bool operator!=(const_iterator_tmpl other) const
+            {
+                return m_cc != other.m_cc;
+            }
+
+        private:
+            const ValueType *m_cc;
+
+            void advance();
+        };
+
+        typedef iterator_tmpl<ConsCell> iterator;
+        typedef const_iterator_tmpl<ConsCell> const_iterator;
+
+        iterator begin() { return iterator(this); }
+
+        const_iterator begin() const { return const_iterator(this); }
+
+        iterator end() { return iterator(); }
+
+        const_iterator end() const { return const_iterator(); }
+
         /**
          * @return a const pointer to the 'car' of this ConsCell
          * element.
          */
-        const RObject *car() const
-        {
-            return m_car;
-        }
-
-        /**
-         * @return a pointer to the 'car' of this ConsCell.
-         */
-        RObject *car()
+        RObject *car() const
         {
             return m_car;
         }
@@ -192,13 +289,7 @@ namespace CXXR
         template <typename T = R_xlen_t>
         static T listLength(const ConsCell *start)
         {
-            T ans = 0;
-            while (start)
-            {
-                ++ans;
-                start = start->tail();
-            }
-            return ans;
+            return (start ? T(std::distance(start->begin(), start->end())) : 0);
         }
 
         /** @brief Set the 'car' value.
@@ -230,7 +321,7 @@ namespace CXXR
          * @param tg Pointer to the new tag object (or a null
          *           pointer).
          */
-        void setTag(RObject *tg)
+        void setTag(const RObject *tg)
         {
             // m_tag = tg;
             // m_tag.propagateAge(this);
@@ -241,9 +332,10 @@ namespace CXXR
          *
          * @param tl Pointer to the new tail list (or a null
          *           pointer).
+         *
+         * @note Implemented inline in CXXR/PairList.hpp
          */
         void setTail(PairList *tl);
-        // Implemented inline in CXXR/PairList.h
 
         SEXPTYPE bndcellTag() const
         {
@@ -267,7 +359,7 @@ namespace CXXR
         /**
          * @return a pointer to the 'tag' of this ConsCell.
          */
-        RObject *tag() const
+        const RObject *tag() const
         {
             return m_tag;
         }
@@ -330,8 +422,8 @@ namespace CXXR
          *
          * @param tg Pointer to the 'tag' of the element to be constructed.
          */
-        explicit ConsCell(SEXPTYPE st,
-                          RObject *cr = nullptr, PairList *tl = nullptr, RObject *tg = nullptr);
+        explicit ConsCell(SEXPTYPE st, RObject *cr = nullptr,
+                          PairList *tl = nullptr, const RObject *tg = nullptr);
 
         /** @brief Copy constructor.
          *
@@ -342,7 +434,7 @@ namespace CXXR
          *
          * @param deep Indicator whether to perform deep or shallow copy.
          */
-        ConsCell(const ConsCell &pattern, bool deep);
+        ConsCell(const ConsCell &pattern, Duplicate deep);
 
         /** @brief Tailless copy constructor.
          *
@@ -360,7 +452,7 @@ namespace CXXR
          *          constructor with a distinct signature.  Its value
          *          is ignored.
          */
-        ConsCell(const ConsCell &pattern, bool deep, int dummy);
+        ConsCell(const ConsCell &pattern, Duplicate deep, int dummy);
 
         /**
          * Declared protected to ensure that ConsCell objects are
@@ -372,7 +464,7 @@ namespace CXXR
         friend class PairList;
         Handle<> m_car;
         GCEdge<PairList> m_tail;
-        GCEdge<> m_tag;
+        GCEdge<const RObject> m_tag;
 
         // Not implemented yet.  Declared to prevent
         // compiler-generated version:

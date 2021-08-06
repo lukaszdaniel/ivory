@@ -136,7 +136,6 @@ void* GCNode::operator new(size_t bytes)
     {
         ProtectStack::cleanup();
         GCStackRootBase::cleanup();
-        GCRootBase::cleanup();
         delete s_aged_list;
         delete[] s_gencount;
         delete[] s_next_gen;
@@ -158,7 +157,6 @@ void* GCNode::operator new(size_t bytes)
         }
         s_next_gen[0] = 0;
         s_next_gen[s_num_generations - 1] = s_num_generations - 1;
-        GCRootBase::initialize();
         GCStackRootBase::initialize();
         ProtectStack::initialize();
     }

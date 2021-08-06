@@ -56,9 +56,8 @@ namespace CXXR
             Rf_setAttrib(this, R_NamesSymbol, names);
     }
 
-    ExpressionVector *ExpressionVector::clone(bool deep) const
+    ExpressionVector *ExpressionVector::clone(Duplicate deep) const
     {
-        // return GCNode::expose(new ExpressionVector(*this, deep));
         return new ExpressionVector(*this, deep);
     }
 } // namespace CXXR

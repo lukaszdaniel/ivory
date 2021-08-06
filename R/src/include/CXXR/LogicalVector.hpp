@@ -41,7 +41,7 @@ namespace CXXR
 {
     /** @brief Vector of truth values.
      */
-    typedef CXXR::FixedVector<Logical, LGLSXP> LogicalVector;
+    using LogicalVector = CXXR::FixedVector<Logical, LGLSXP>;
 
     inline int *LOGICALVECTOR_LOGICAL(RObject *x)
     {
@@ -77,7 +77,7 @@ extern "C"
     /**
      * @param x Pointer to a CXXR::LogicalVector or an CXXR::IntVector (i.e. an
      *          R logical or integer vector).
-     *          An error is generated if \a x is not pointer to a \c
+     *          An error is generated if \a x is not a non-null pointer to a \c
      *          CXXR::LogicalVector or an CXXR::IntVector.
      *
      * @return Pointer to element 0 of \a x.
@@ -87,7 +87,7 @@ extern "C"
     /**
      * @param x Pointer to a CXXR::LogicalVector or an CXXR::IntVector (i.e. an
      *          R logical or integer vector).
-     *          An error is generated if \a x is not pointer to a \c
+     *          An error is generated if \a x is not a non-null pointer to a \c
      *          CXXR::LogicalVector or an CXXR::IntVector.
      *
      * @return Pointer to constant element 0 of \a x.

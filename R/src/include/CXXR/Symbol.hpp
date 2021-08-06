@@ -388,6 +388,8 @@ namespace CXXR
          */
         static Symbol *createUnnamedSymbol();
 
+   protected:
+
     private:
         // static GCRoot<Symbol> s_missing_arg;
         // static GCRoot<Symbol> s_restart_token;
@@ -461,6 +463,12 @@ namespace CXXR
     {
         return symbol && symbol->isDotDotSymbol();
     }
+
+// Predefined Symbols visible in CXXR namespace
+#define PREDEFINED_SYMBOL(C_NAME, CXXR_NAME, R_NAME) \
+    extern Symbol *CXXR_NAME;
+#include <CXXR/PredefinedSymbols.hpp>
+#undef PREDEFINED_SYMBOL
 } // namespace CXXR
 
 namespace R
@@ -488,19 +496,6 @@ namespace R
      * @todo No binding to R_UnboundValue ought to be created.
      */
     void SET_SYMVALUE(SEXP x, SEXP v);
-
-    /** @brief Set internal function denoted by a symbol.
-     *
-     * @param x Pointer to a CXXR::Symbol (checked).
-     *
-     * @param func Pointer to the CXXR::BuiltInFunction (checked) to
-     *          be denoted by this symbol.  A null pointer is
-     *          permissible.
-     *
-     * @note It would be better if this was set exclusively during
-     * construction.
-     */
-    void SET_INTERNAL(SEXP x, SEXP v);
 
     /** @brief Create a CXXR::Symbol object.
      *
@@ -599,16 +594,6 @@ extern "C"
      *         associated with the Symbol.
      */
     SEXP SYMVALUE(SEXP x);
-
-    /** @brief Internal function value.
-     *
-     * @param x Pointer to a CXXR::Symbol (checked).
-     *
-     * @return If \a x denotes an internal function, a pointer to
-     *         the appropriate CXXR::BuiltInFunction, otherwise a null
-     *         pointer..
-     */
-    SEXP INTERNAL(SEXP x);
 
     /** @brief Does symbol relate to a <tt>...</tt> expression?
      *

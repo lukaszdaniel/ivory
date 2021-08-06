@@ -59,9 +59,8 @@ namespace CXXR
             Rf_setAttrib(this, R_NamesSymbol, names);
     }
 
-    ListVector *ListVector::clone(bool deep) const
+    ListVector *ListVector::clone(Duplicate deep) const
     {
-        // return GCNode::expose(new ListVector(*this, deep));
         return new ListVector(*this, deep);
     }
 } // namespace CXXR

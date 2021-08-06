@@ -47,9 +47,8 @@ namespace CXXR
         const auto &STRING_ELTptr = STRING_ELT;
     } // namespace ForceNonInline
 
-    StringVector *StringVector::clone(bool deep) const
+    StringVector *StringVector::clone(Duplicate deep) const
     {
-        // return GCNode::expose(new StringVector(*this, deep));
         return new StringVector(*this, deep);
     }
 

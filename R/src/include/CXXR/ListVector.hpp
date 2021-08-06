@@ -71,7 +71,7 @@ namespace CXXR
          *
          * @param deep Indicator whether to perform deep or shallow copy.
          */
-        ListVector(const ListVector &pattern, bool deep)
+        ListVector(const ListVector &pattern, Duplicate deep)
             : HandleVector<RObject, VECSXP>(pattern, deep)
         {
         }
@@ -91,7 +91,7 @@ namespace CXXR
         explicit ListVector(ExpressionVector &ev);
 
         // Virtual function of RObject:
-        ListVector *clone(bool deep) const override;
+        ListVector *clone(Duplicate deep) const override;
 
     private:
         // Declared private to ensure that ListVectors are

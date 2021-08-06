@@ -55,7 +55,7 @@ namespace CXXR
        *           to be constructed.
        * @param tg Pointer to the 'tag' of the element to be constructed.
        */
-      explicit Expression(RObject *cr = nullptr, PairList *tl = nullptr, RObject *tg = nullptr)
+      explicit Expression(RObject *cr = nullptr, PairList *tl = nullptr, const RObject *tg = nullptr)
           : ConsCell(LANGSXP, cr, tl, tg)
       {
       }
@@ -66,9 +66,19 @@ namespace CXXR
        *
        * @param pattern Expression to be copied.
        */
-      Expression(const Expression &pattern, bool deep)
+      Expression(const Expression &pattern, Duplicate deep)
           : ConsCell(pattern, deep)
       {
+      }
+
+      const RObject *getFunction() const
+      {
+         return car();
+      }
+
+      const PairList *getArgs() const
+      {
+         return tail();
       }
 
       /** @brief The name by which this type is known in R.
@@ -81,18 +91,17 @@ namespace CXXR
       }
 
       // Virtual functions of RObject:
-      Expression *clone(bool deep) const override;
+      Expression *clone(Duplicate deep) const override;
       RObject *evaluate(Environment *env) override;
       const char *typeName() const override;
 
+   protected:
    private:
       // Declared private to ensure that Expression objects are
       // allocated only using 'new':
       ~Expression() {}
 
-      // Not implemented yet.  Declared to prevent
-      // compiler-generated versions:
-      Expression &operator=(const Expression &);
+      Expression &operator=(const Expression &) = delete;
    };
 
    /** @brief Pointer to expression currently being evaluated.

@@ -438,9 +438,11 @@ namespace CXXR
         // Matches the constructor.
         m_frame = nullptr;
         m_symbol = nullptr;
-        m_origin = MISSING;
+        m_origin = Origin::MISSING;
         m_active = false;
         m_locked = false;
+        m_bndcellTag = NILSXP;
+        m_assignment_pending = false;
         m_value = Symbol::missingArgument();
       }
     }; // Frame::Binding
@@ -957,7 +959,8 @@ namespace R
     {
       SET_ASSIGNMENT_PENDING(m_cell, assignmentPending());
       SET_MISSING(m_cell, missing());
-      if (m_active) SET_ACTIVE_BINDING_BIT(m_cell);
+      if (m_active)
+        SET_ACTIVE_BINDING_BIT(m_cell);
       return m_cell;
     }
 
@@ -1034,7 +1037,7 @@ namespace R
 #else
   using R_varloc_t = CXXR::Frame::Binding *;
 #endif
-  R_varloc_t R_findVarLocInFrame(SEXP, SEXP);
+  R_varloc_t R_findVarLocInFrame(SEXP rho, SEXP symbol);
   R_varloc_t R_findVarLoc(SEXP rho, SEXP symbol);
   SEXP R_GetVarLocValue(R_varloc_t vl);
   SEXP R_GetVarLocSymbol(R_varloc_t vl);

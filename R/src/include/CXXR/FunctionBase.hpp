@@ -63,6 +63,24 @@ namespace CXXR
             m_debug = on;
         }
 
+        /** @brief Is an RObject a FunctionBase?
+         *
+         * @param obj Pointer to RObject to be tested.  This may be a
+         *          null pointer, in which case the function returns
+         *          false.
+         *
+         * @return true iff \a obj is a FunctionBase.
+         */
+        static bool isA(const RObject *obj)
+        {
+            // We could of course use dynamic_cast here, but the
+            // following is probably faster:
+            if (!obj)
+                return false;
+            SEXPTYPE st = obj->sexptype();
+            return st == CLOSXP || st == BUILTINSXP || st == SPECIALSXP;
+        }
+
         /** @brief The name by which this type is known in R.
          *
          * @return the name by which this type is known in R.
@@ -87,7 +105,7 @@ namespace CXXR
          *
          * @param deep Indicator whether to perform deep or shallow copy.
          */
-        FunctionBase(const FunctionBase &pattern, bool deep)
+        FunctionBase(const FunctionBase &pattern, Duplicate deep)
             : RObject(pattern, deep), m_debug(false)
         {
         }
@@ -97,7 +115,6 @@ namespace CXXR
     private:
         bool m_debug;
     };
-
 } // namespace CXXR
 
 extern "C"

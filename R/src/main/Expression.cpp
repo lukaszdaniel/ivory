@@ -65,9 +65,8 @@ namespace CXXR
         }
     }
 
-    Expression *Expression::clone(bool deep) const
+    Expression *Expression::clone(Duplicate deep) const
     {
-        // return GCNode::expose(new Expression(*this, deep));
         return new Expression(*this, deep);
     }
 

@@ -126,9 +126,13 @@ namespace CXXR
         setBndCellTag(pl->bndcellTag());
         setAssignmentPending(pl->assignmentPending());
         if (pl->isActive())
+        {
             setFunction(SEXP_downcast<FunctionBase *>(pl->car()), pl_origin);
+        }
         else
+        {
             setValue(pl->car(), pl_origin);
+        }
         setLocking(pl->isLocked());
     }
 
@@ -274,7 +278,7 @@ namespace CXXR
             return;
         }
         // See if binding already has a non-null value:
-        if (m_value != Symbol::missingArgument())
+        if (m_value != Symbol::missingArgument() && m_value != Symbol::unboundValue())
         {
             if (!isActive())
                 Rf_error(_("symbol already has a regular binding"));

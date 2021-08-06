@@ -54,7 +54,7 @@ namespace CXXR
          *
          * @param tg Pointer to the 'tag' of the element to be constructed.
          */
-        explicit DottedArgs(RObject *cr = nullptr, PairList *tl = nullptr, RObject *tg = nullptr)
+        explicit DottedArgs(RObject *cr = nullptr, PairList *tl = nullptr, const RObject *tg = nullptr)
             : ConsCell(DOTSXP, cr, tl, tg)
         {
         }
@@ -63,7 +63,7 @@ namespace CXXR
          *
          * @param pattern DottedArgs to be copied.
          */
-        DottedArgs(const DottedArgs &pattern, bool deep)
+        DottedArgs(const DottedArgs &pattern, Duplicate deep)
             : ConsCell(pattern, deep)
         {
         }
@@ -78,7 +78,7 @@ namespace CXXR
         }
 
         // Virtual functions of RObject:
-        DottedArgs *clone(bool deep) const override;
+        DottedArgs *clone(Duplicate deep) const override;
         RObject *evaluate(Environment *env) override;
         const char *typeName() const override;
 

@@ -41,7 +41,7 @@ namespace CXXR
 {
     /** @brief Vector of real numbers.
      */
-    typedef CXXR::FixedVector<double, REALSXP> RealVector;
+    using RealVector = CXXR::FixedVector<double, REALSXP>;
 
     inline double *REALVECTOR_REAL(RObject *x)
     {
@@ -71,7 +71,7 @@ extern "C"
 
     /**
      * @param x Pointer to an \c RealVector (i.e. an R numeric vector).
-     *          An error is generated if \a x is not pointer to an \c
+     *          An error is generated if \a x is not a non-null pointer to an \c
      *          RealVector.
      *
      * @return Pointer to element 0 of \a x.
@@ -80,7 +80,7 @@ extern "C"
 
     /**
      * @param x Pointer to an \c RealVector (i.e. an R numeric vector).
-     *          An error is generated if \a x is not pointer to an \c
+     *          An error is generated if \a x is not a non-null pointer to an \c
      *          RealVector.
      *
      * @return Pointer to constant element 0 of \a x.

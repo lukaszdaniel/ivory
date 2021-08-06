@@ -35,12 +35,13 @@
 #include <utility>
 #include <CXXR/Environment.hpp>
 #include <CXXR/PairList.hpp>
+#include <RContext.h>
 #include <R_ext/Boolean.h>
 
 namespace CXXR
 {
     class RObject;
-    class Environment;
+    class Expression;
 
     /** @brief Housekeeping services for R expression evaluation.
      * 
@@ -49,6 +50,26 @@ namespace CXXR
     class Evaluator
     {
     public:
+        Evaluator()
+            : m_next(s_current), m_innermost_context(nullptr)
+        {
+            s_current = this;
+        }
+
+        ~Evaluator()
+        {
+            s_current = m_next;
+        }
+
+        /** @brief The current Evaluator.
+         *
+         * @return Pointer to the current (innermost) Evaluator.
+         */
+        static Evaluator *current()
+        {
+            return s_current;
+        }
+
         /** @brief (Not for general use.)
          *
          * Used in context.cpp to save the evaluation depth
@@ -109,6 +130,16 @@ namespace CXXR
          */
         static RObject *evaluate(RObject *object, Environment *env);
 
+        /** @brief Innermost Context belonging to this Evaluator.
+         *
+         * @return Pointer to the innermost Context belonging to this
+         * Evaluator.
+         */
+        RContext *innermostContext() const
+        {
+            return m_innermost_context;
+        }
+
         /** @brief (Not for general use.)
          *
          * @param on If true, an increase is applied to the
@@ -137,6 +168,14 @@ namespace CXXR
          * of a top-level R expression evaluation should be printed.
          */
         static bool resultPrinted();
+
+        /** @brief Check for user interrupts.
+         */
+        static void maybeCheckForUserInterrupts();
+
+        /** @brief Check for user interrupts.
+         */
+        static void checkForUserInterrupts();
 
         /** @brief (Not for general use.)
          *
@@ -188,7 +227,9 @@ namespace CXXR
         static Evaluator *s_current;           // The current (innermost) Evaluator
         static bool s_profiling;               // True iff profiling enabled
 
-        Evaluator *m_next; // Next Evaluator down the stack
+        Evaluator *m_next;             // Next Evaluator down the stack
+        RContext *m_innermost_context; // Innermost Context belonging
+                                       // to this Evaluator
     };
 
     /** @brief Shorthand for Evaluator::evaluate().

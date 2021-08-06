@@ -93,7 +93,7 @@ namespace CXXR
 			bool m_na_last;
 		};
 
-		String *clone(bool deep) const override
+		String *clone(Duplicate deep) const override
 		{
 			return const_cast<String *>(this);
 		}
@@ -395,55 +395,57 @@ extern "C"
 	 */
 	extern SEXP R_BlankString;
 
-	/**
-	 * @param x \c const pointer to a CXXR::String.
+	/** @brief Access the content of rho::String as a C-style string.
+	 *
+	 * @param x \c non-null pointer to a CXXR::String.
 	 *
 	 * @return \c const pointer to character 0 of \a x.
 	 */
 	const char *R_CHAR(SEXP x);
 
-	/**
+	/** @brief Does a rho::String have LATIN1 encoding?
+	 *
 	 * @param x Pointer to a CXXR::String.
 	 *
 	 * @return true iff \a x is marked as having LATIN1 encoding.
 	 */
 	int IS_LATIN1(SEXP x);
 
-	/** @brief Does a rho::String have UTF8 encoding?
+	/** @brief Does a CXXR::String have UTF8 encoding?
 	 *
-	 * @param x Pointer to a rho::String (checked).
+	 * @param x Pointer to a CXXR::String (checked).
 	 *
 	 * @return true iff \a x is marked as having UTF8 encoding.
 	 */
 	int IS_UTF8(SEXP x);
 
-	/** @brief Does a rho::String have bytecode encoding?
+	/** @brief Does a CXXR::String have bytecode encoding?
 	 *
-	 * @param x Pointer to a rho::String.
+	 * @param x Pointer to a CXXR::String.
 	 *
 	 * @return true iff \a x is marked as having BYTES encoding.
 	 */
 	int IS_BYTES(SEXP x);
 
-	/** @brief Is a rho::String pure ASCII?
+	/** @brief Is a CXXR::String pure ASCII?
 	 *
-	 * @param x Pointer to a rho::String.
+	 * @param x Pointer to a CXXR::String.
 	 *
 	 * @return true iff \a x contains only ASCII characters.
 	 */
 	int IS_ASCII(SEXP x);
 
-	/** @brief Does a rho::String have NATIVE encoding?
+	/** @brief Does a CXXR::String have NATIVE encoding?
 	 *
-	 * @param x Pointer to a rho::String.
+	 * @param x Pointer to a CXXR::String.
 	 *
 	 * @return true iff \a x is marked as having NATIVE encoding.
 	 */
 	int IS_NATIVE(SEXP x);
 
-	/** @brief Is the encoding of a rho::String known?
+	/** @brief Is the encoding of a CXXR::String known?
 	 *
-	 * @param x Pointer to a rho::String.
+	 * @param x Pointer to a CXXR::String.
 	 *
 	 * @return a non-zero value iff \a x is marked as having either
 	 * LATIN1 encoding or UTF8 encoding.

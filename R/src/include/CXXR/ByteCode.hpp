@@ -48,7 +48,7 @@ namespace CXXR
          *           to be constructed.
          * @param tg Pointer to the 'tag' of the element to be constructed.
          */
-        explicit ByteCode(RObject *cr = nullptr, PairList *tl = nullptr, RObject *tg = nullptr)
+        explicit ByteCode(RObject *cr = nullptr, PairList *tl = nullptr, const RObject *tg = nullptr)
             : ConsCell(BCODESXP, cr, tl, tg)
         {
         }

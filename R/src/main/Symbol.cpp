@@ -68,10 +68,8 @@ namespace CXXR
         const auto &isSymbolptr = Rf_isSymbol;
         const auto &PRINTNAMEptr = PRINTNAME;
         const auto &SYMVALUEptr = SYMVALUE;
-        const auto &INTERNALptr = INTERNAL;
         const auto &SET_PRINTNAMEptr = R::SET_PRINTNAME;
         const auto &SET_SYMVALUEptr = R::SET_SYMVALUE;
-        const auto &SET_INTERNALptr = R::SET_INTERNAL;
         const auto &SET_DDVALptr = R::SET_DDVAL;
     } // namespace ForceNonInline
 
@@ -411,6 +409,11 @@ namespace CXXR
                 (*it).first->conductVisitor(v);
         }
     }
+
+#define PREDEFINED_SYMBOL(C_NAME, CXXR_NAME, R_NAME) \
+    Symbol *CXXR_NAME = nullptr;
+#include <CXXR/PredefinedSymbols.hpp>
+#undef PREDEFINED_SYMBOL
 } // namespace CXXR
 
 // ***** C interface *****
@@ -445,15 +448,6 @@ SEXP SYMVALUE(SEXP x)
     return sym->value();
 }
 
-SEXP INTERNAL(SEXP x)
-{
-    if (!x)
-        return nullptr;
-    Symbol::checkST(x);
-    const Symbol *sym = SEXP_downcast<const Symbol *>(x);
-    return const_cast<BuiltInFunction *>(sym->internalFunction());
-}
-
 int DDVAL(SEXP x)
 {
     return x ? SEXP_downcast<const Symbol *>(x)->isDotDotSymbol() : false;
@@ -473,16 +467,6 @@ void R::SET_SYMVALUE(SEXP x, SEXP v)
     Symbol::checkST(x);
     Symbol *sym = SEXP_downcast<Symbol *>(x);
     sym->setValue(v);
-}
-
-void R::SET_INTERNAL(SEXP x, SEXP v)
-{
-    if (!x)
-        return;
-    Symbol::checkST(x);
-    Symbol *sym = SEXP_downcast<Symbol *>(x);
-    BuiltInFunction *fun = SEXP_downcast<BuiltInFunction *>(v);
-    sym->setInternalFunction(fun);
 }
 
 void R::SET_DDVAL(SEXP x, int v)

@@ -613,8 +613,7 @@ static bool needsparens(PPinfo mainop, SEXP arg, bool left)
     PPinfo arginfo;
     if (TYPEOF(arg) == LANGSXP) {
 	if (TYPEOF(CAR(arg)) == SYMSXP) {
-	    if ((TYPEOF(SYMVALUE(CAR(arg))) == BUILTINSXP) ||
-		(TYPEOF(SYMVALUE(CAR(arg))) == SPECIALSXP)) {
+	    if (Rf_isPrimitive(SYMVALUE(CAR(arg)))) {
 		arginfo = PPINFO(SYMVALUE(CAR(arg)));
 		switch(arginfo.kind) {
 		case PP_BINARY:	      /* Not all binary ops are binary! */
@@ -872,8 +871,7 @@ static bool parenthesizeCaller(SEXP s)
 	if (TYPEOF(op) == SYMSXP) {
 	    if (isUserBinop(op)) return true;   /* %foo% */
 	    sym = SYMVALUE(op);
-	    if (TYPEOF(sym) == BUILTINSXP
-		|| TYPEOF(sym) == SPECIALSXP) {
+	    if (Rf_isPrimitive(sym)) {
 		if (PPINFO(sym).precedence >= PREC_SUBSET
 		    || PPINFO(sym).kind == PP_FUNCALL
 		    || PPINFO(sym).kind == PP_PAREN
@@ -1136,8 +1134,7 @@ static void deparse2buff(SEXP s, LocalParseData *d)
 	}
 	if (TYPEOF(op) == SYMSXP) {
 	    int userbinop = 0;
-	    if ((TYPEOF(SYMVALUE(op)) == BUILTINSXP) ||
-		(TYPEOF(SYMVALUE(op)) == SPECIALSXP) ||
+	    if (Rf_isPrimitive(SYMVALUE(op)) ||
 		(userbinop = isUserBinop(op))) {
 		PPinfo fop;
 		bool parens;
@@ -1439,8 +1436,7 @@ static void deparse2buff(SEXP s, LocalParseData *d)
 		}
 	    }
 	} // end{op : SYMSXP }
-	else if (TYPEOF(op) == CLOSXP || TYPEOF(op) == SPECIALSXP
-		 || TYPEOF(op) == BUILTINSXP) {
+	else if (FunctionBase::isA(op)) {
 	    if (parenthesizeCaller(op)) {
 		print2buff("(", d);
 		deparse2buff(op, d);

@@ -63,11 +63,13 @@ namespace CXXR
         /**
          * @param cr Pointer to the 'car' of the element to be
          *           constructed.
+         *
          * @param tl Pointer to the 'tail' (LISP cdr) of the element
          *           to be constructed.
+         *
          * @param tg Pointer to the 'tag' of the element to be constructed.
          */
-        explicit PairList(RObject *cr = nullptr, PairList *tl = nullptr, RObject *tg = nullptr)
+        explicit PairList(RObject *cr = nullptr, PairList *tl = nullptr, const RObject *tg = nullptr)
             : ConsCell(LISTSXP, cr, tl, tg), m_argused(0)
         {
         }
@@ -78,7 +80,7 @@ namespace CXXR
          *
          * @param deep Indicator whether to perform deep or shallow copy.
          */
-        PairList(const PairList &pattern, bool deep);
+        PairList(const PairList &pattern, Duplicate deep);
 
         /** @brief Create a PairList element on the free store.
          *
@@ -92,11 +94,20 @@ namespace CXXR
          * @param tl Pointer to the 'tail' (LISP cdr) of the element
          *           to be constructed.
          *
+         * @param tg Pointer to the tag of the element to be constructed.
+         *
          * @return Pointer to newly created PairList element.
          */
         template <class T = PairList>
-        static T *construct(RObject *cr, PairList *tl = nullptr, RObject *tg = nullptr)
+        static T *construct(RObject *cr, PairList *tl = nullptr, const RObject *tg = nullptr)
         {
+            GCManager::GCInhibitor no_gc;
+            // We inhibit garbage collection here to avoid (a) the need
+            // to protect the arguments from GC, and (b) the
+            // possibility of reentrant calls to this function (from
+            // object destructors).  However, calling code should not
+            // rely on the fact that no GC will occur, because the
+            // implementation may change in the future.
             s_cons_car = cr;
             s_cons_cdr = tl;
             T *ans = GCNode::expose(new T(cr, tl, tg));
@@ -116,6 +127,13 @@ namespace CXXR
          */
         static PairList *makeList(size_t sz);
 
+        /** @brief Create a PairList from values in an array.
+         *
+         * This constructor creates a chain of PairList nodes.  The nodes
+         * contain the vars args[0]...args[size - 1].
+         */
+        static PairList *make(int size, RObject *const *args);
+
         unsigned char argUsed() const
         {
             return m_argused;
@@ -125,6 +143,18 @@ namespace CXXR
         {
             m_argused = v;
         }
+
+        typedef iterator_tmpl<PairList> iterator;
+        typedef const_iterator_tmpl<PairList> const_iterator;
+
+        iterator begin() { return iterator(this); }
+        const_iterator begin() const { return const_iterator(this); }
+        iterator end() { return iterator(); }
+        const_iterator end() const { return const_iterator(); }
+
+        /** @brief Copy the tags from one PairList to another.
+         */
+        void copyTagsFrom(const PairList *listWithTags);
 
         /** @brief The name by which this type is known in R.
          *
@@ -136,7 +166,7 @@ namespace CXXR
         }
 
         // Virtual functions of RObject:
-        PairList *clone(bool deep) const override;
+        PairList *clone(Duplicate deep) const override;
         const char *typeName() const override;
 
     protected:
@@ -154,7 +184,7 @@ namespace CXXR
         // its tail.  Used in implementing the copy constructor
         // proper.  The third parameter is simply to provide a
         // distinct signature, and its value is ignored.
-        PairList(const PairList &pattern, bool deep, int);
+        PairList(const PairList &pattern, Duplicate deep, int);
 
         // Not implemented yet.  Declared to prevent
         // compiler-generated version:
@@ -165,6 +195,18 @@ namespace CXXR
         // would be good to remove this from the class altogether.
         unsigned char m_argused;
     };
+
+    template <typename ValueType>
+    inline void ConsCell::iterator_tmpl<ValueType>::advance()
+    {
+        m_cc = m_cc->tail();
+    }
+
+    template <typename ValueType>
+    inline void ConsCell::const_iterator_tmpl<ValueType>::advance()
+    {
+        m_cc = m_cc->tail();
+    }
 
     inline void ConsCell::setTail(PairList *tl)
     {

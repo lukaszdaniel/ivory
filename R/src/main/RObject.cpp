@@ -78,7 +78,7 @@ namespace CXXR
         m_attrib = nullptr;
     }
 
-    RObject::RObject(const RObject &pattern, bool deep)
+    RObject::RObject(const RObject &pattern, Duplicate deep)
         : GCNode(), m_type(pattern.m_type), m_scalar(pattern.m_scalar), m_has_class(pattern.m_has_class), m_alt(pattern.m_alt), /*m_gpbits(pattern.m_gpbits),*/
           m_trace(false), m_spare(false), m_named(0), m_extra(0), m_s4_object(pattern.m_s4_object),
           m_active_binding(false),
@@ -87,7 +87,7 @@ namespace CXXR
         m_attrib = clone(pattern.m_attrib.get(), deep);
     }
 
-    void RObject::cloneAttributes(const RObject &source, bool deep)
+    void RObject::cloneAttributes(const RObject &source, Duplicate deep)
     {
         m_attrib = RObject::clone(source.m_attrib.get(), deep);
         m_has_class = source.m_has_class;
@@ -157,6 +157,23 @@ namespace CXXR
         }
     }
 
+    void RObject::copyAttributes(const RObject *source, Duplicate deep)
+    {
+        if (!source)
+        {
+            clearAttributes();
+            setS4Object(false);
+            return;
+        }
+        PairList *attributes = source->attributes();
+        if (attributes)
+        {
+            attributes = attributes->clone(deep);
+        }
+        setAttributes(attributes);
+        setS4Object(source->isS4Object());
+    }
+
     RObject *RObject::evaluate(Environment *env)
     {
         /* Make sure constants in expressions are NAMED before being
@@ -167,17 +184,9 @@ namespace CXXR
         return this;
     }
 
-    RObject *RObject::getAttribute(const Symbol *name)
+    RObject *RObject::getAttribute(const Symbol *name) const
     {
-        for (PairList *node = m_attrib; node; node = node->tail())
-            if (node->tag() == name)
-                return node->car();
-        return nullptr;
-    }
-
-    const RObject *RObject::getAttribute(const Symbol *name) const
-    {
-        for (PairList *node = m_attrib; node; node = node->tail())
+        for (const PairList *node = m_attrib; node; node = node->tail())
             if (node->tag() == name)
                 return node->car();
         return nullptr;
@@ -186,7 +195,7 @@ namespace CXXR
     /* Tweaks here based in part on PR#14934 */
     // This follows CR in adding new attributes at the end of the list,
     // though it would be easier to add them at the beginning.
-    RObject *RObject::setAttribute(Symbol *name, RObject *value)
+    RObject *RObject::setAttribute(const Symbol *name, RObject *value)
     {
         if (!name)
             Rf_error(_("attempt to set an attribute on NULL"));
@@ -232,7 +241,7 @@ namespace CXXR
             /* The usual convention is that the caller protects,
                but a lot of existing code depends assume that
                setAttrib/installAttrib protects its arguments */
-            GCStackRoot<Symbol> namer(name);
+            GCStackRoot<const Symbol> namer(name);
             GCStackRoot<> valuer(value);
             if (MAYBE_REFERENCED(value))
                 ENSURE_NAMEDMAX(value);
@@ -263,7 +272,7 @@ namespace CXXR
         // m_attrib.propagateAge(this);
         m_attrib.retarget(this, new_attributes);
 
-        for (PairList *node = m_attrib; node; node = node->tail())
+        for (const PairList *node = m_attrib; node; node = node->tail())
             if (node->tag() == R_ClassSymbol)
             {
                 m_has_class = (node->car() != nullptr);

@@ -44,19 +44,19 @@ namespace CXXR
 	{
 	public:
 		// type definitions
-		typedef T value_type;
-		typedef T *pointer;
-		typedef const T *const_pointer;
-		typedef T &reference;
-		typedef const T &const_reference;
-		typedef std::size_t size_type;
-		typedef std::ptrdiff_t difference_type;
+		using value_type = T;
+		using pointer = T *;
+		using const_pointer = const T *;
+		using reference = T &;
+		using const_reference = const T &;
+		using size_type = std::size_t;
+		using difference_type = std::ptrdiff_t;
 
 		// rebind allocator to type U
 		template <class U>
 		struct rebind
 		{
-			typedef Allocator<U> other;
+			using other = Allocator<U>;
 		};
 
 		// return address of values

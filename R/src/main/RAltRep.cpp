@@ -42,7 +42,7 @@ namespace CXXR
         return staticTypeName();
     }
 
-    AltRep *AltRep::clone(bool deep) const
+    AltRep *AltRep::clone(Duplicate deep) const
     {
         GCStackRoot<const AltRep> thisroot(this);
         SEXP ans = ALTREP_DUPLICATE_EX(const_cast<AltRep *>(this), Rboolean(deep));
@@ -69,8 +69,6 @@ namespace CXXR
                 std::cerr << "Cloning not implemented yet (" << altsexptype() << ")" << std::endl;
                 abort();
             }
-            // if (t)
-            //     t->expose();
             return static_cast<AltRep *>(t.get());
         }
     }

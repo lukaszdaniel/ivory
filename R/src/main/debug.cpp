@@ -147,9 +147,7 @@ HIDDEN SEXP do_tracemem(SEXP call, SEXP op, SEXP args, SEXP rho)
     check1arg(args, call, "x");
 
     object = CAR(args);
-    if (TYPEOF(object) == CLOSXP ||
-	TYPEOF(object) == BUILTINSXP ||
-	TYPEOF(object) == SPECIALSXP)
+    if (FunctionBase::isA(object))
 	errorcall(call, _("argument must not be a function"));
 
     if(object == R_NilValue)
@@ -175,9 +173,7 @@ HIDDEN SEXP do_untracemem(SEXP call, SEXP op, SEXP args, SEXP rho)
     check1arg(args, call, "x");
 
     object = CAR(args);
-    if (TYPEOF(object) == CLOSXP ||
-        TYPEOF(object) == BUILTINSXP ||
-        TYPEOF(object) == SPECIALSXP)
+    if (FunctionBase::isA(object))
         errorcall(call, _("argument must not be a function"));
 
     if (RTRACE(object))
@@ -251,9 +247,7 @@ HIDDEN SEXP do_retracemem(SEXP call, SEXP op, SEXP args, SEXP rho)
     if(CADR(argList) == R_MissingArg) SETCAR(CDR(argList), R_NilValue);
 
     object = CAR(argList);
-    if (TYPEOF(object) == CLOSXP ||
-	TYPEOF(object) == BUILTINSXP ||
-	TYPEOF(object) == SPECIALSXP)
+    if (FunctionBase::isA(object))
 	errorcall(call, _("argument must not be a function"));
 
     previous = CADR(argList);

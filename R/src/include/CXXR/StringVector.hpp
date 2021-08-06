@@ -79,13 +79,13 @@ namespace CXXR
          *
          * @param deep Indicator whether to perform deep or shallow copy.
          */
-        StringVector(const StringVector &pattern, bool deep)
+        StringVector(const StringVector &pattern, Duplicate deep)
             : HandleVector<String, STRSXP>(pattern, deep)
         {
         }
 
         // Virtual function of RObject:
-        StringVector *clone(bool deep) const override;
+        StringVector *clone(Duplicate deep) const override;
 
     private:
         /**
@@ -107,6 +107,27 @@ namespace CXXR
         return static_cast<const SEXP *>(DATAPTR_RO(x));
     }
 
+    /** @brief Create a StringVector containing a single std::string.
+     *
+     * This constructor constructs a StringVector containing a single
+     * element, and initializes that element to represent a specified
+     * string and encoding.
+     *
+     * @param str The required text of the single vector element.
+     *
+     * @param encoding The required encoding of the single vector
+     *          element.  Only CE_NATIVE, CE_UTF8 or CE_LATIN1 are
+     *          permitted in this context (checked).
+     */
+    inline StringVector *asStringVector(const std::string &str, cetype_t encoding = CE_UTF8)
+    {
+        GCStackRoot<CachedString> cs(CachedString::obtain(str, encoding));
+        StringVector *ans = GCNode::expose(new StringVector(1));
+        (*ans)[0] = cs;
+        return ans;
+        // return StringVector::createScalar(cs);
+    }
+
     /** @brief (For debugging.)
      *
      * @note The name and interface of this function may well change.
@@ -125,18 +146,18 @@ extern "C"
 
     /** @brief Set element of CXXR::StringVector.
      *
-     * @param x Pointer to a CXXR::StringVector.
+     * @param x Non-null pointer to a CXXR::StringVector.
      *
      * @param i Index of the required element.  There is no bounds checking.
      *
-     * @param v Pointer to CXXR::RObject representing the new value.
+     * @param v Non-null pointer to CXXR::String representing the new value.
      */
     void SET_STRING_ELT(SEXP x, R_xlen_t i, SEXP v);
 
     /** @brief Examine element of a CXXR::StringVector.
      *
-     * @param x Pointer to a CXXR::StringVector.  An error is raised if \a x
-     *          is not a pointer to a StringVector.
+     * @param x Non-null pointer to a CXXR::StringVector.  An error is
+     *          raised if \a x is not a pointer to a CXXR::StringVector.
      *
      * @param i Index of the required element.  There is no bounds checking.
      *

@@ -37,7 +37,7 @@ namespace CXXR
 {
     /** @brief Vector of 'raw bytes'.
      */
-    typedef CXXR::FixedVector<Rbyte, RAWSXP> RawVector;
+    using RawVector = CXXR::FixedVector<Rbyte, RAWSXP>;
 
     inline Rbyte *RAWVECTOR_RAW(RObject *x)
     {
@@ -66,8 +66,8 @@ extern "C"
     Rboolean Rf_isRaw(SEXP s);
 
     /**
-     * @param x Pointer to a CXXR::RawVector (i.e. a RAWSXP).
-     *          An error is generated if \a x is not pointer to a
+     * @param x Pointer to a CXXR::RawVector (i.e. a RAWSXP).  An error is
+     *          generated if \a x is not a non-null pointer to a
      *          CXXR::RawVector.
      *
      * @return Pointer to element 0 of \a x.
@@ -75,8 +75,8 @@ extern "C"
     Rbyte *RAW(SEXP x);
 
     /**
-     * @param x Pointer to a CXXR::RawVector (i.e. a RAWSXP).
-     *          An error is generated if \a x is not pointer to a
+     * @param x Pointer to a CXXR::RawVector (i.e. a RAWSXP).  An error is
+     *          generated if \a x is not a non-null pointer to a
      *          CXXR::RawVector.
      *
      * @return Pointer to constant element 0 of \a x.

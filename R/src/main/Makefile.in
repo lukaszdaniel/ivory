@@ -15,14 +15,16 @@ include $(top_builddir)/Makeconf
 SOURCES_C =
 
 SOURCES_CXX = \
+	ArgList.cpp ArgMatcher.cpp \
 	CellHeap.cpp CellPool.cpp CommandLineArgs.cpp MemoryBank.cpp RAllocStack.cpp allocstats.cpp \
 	Rdynload.cpp Renviron.cpp RNG.cpp \
 	GCManager.cpp GCNode.cpp GCRoot.cpp GCStackRoot.cpp Logical.cpp String.cpp ComplexVector.cpp IntVector.cpp LogicalVector.cpp RawVector.cpp \
 	RealVector.cpp StringVector.cpp RObject.cpp ConsCell.cpp BuiltInFunction.cpp Expression.cpp ExternalPointer.cpp FunctionBase.cpp \
-	RAltRep.cpp ByteCode.cpp DottedArgs.cpp Closure.cpp Environment.cpp Evaluator.cpp VectorBase.cpp FixedVector.cpp SEXP_downcast.cpp Symbol.cpp \
+	RAltRep.cpp ByteCode.cpp DotInternal.cpp DottedArgs.cpp Closure.cpp Environment.cpp Evaluator.cpp VectorBase.cpp FixedVector.cpp SEXP_downcast.cpp Symbol.cpp \
 	UncachedString.cpp CachedString.cpp \
-	ExpressionVector.cpp Frame.cpp FrameDescriptor.cpp ListVector.cpp PairList.cpp S4Object.cpp Promise.cpp WeakRef.cpp \
+	ExpressionVector.cpp Frame.cpp FrameDescriptor.cpp ListVector.cpp PairList.cpp S3Launcher.cpp S4Object.cpp Promise.cpp WeakRef.cpp \
 	NodeStack.cpp ProtectStack.cpp \
+	BinaryFunction.cpp UnaryFunction.cpp Subscripting.cpp \
 	agrep.cpp altclasses.cpp altrep.cpp apply.cpp arithmetic.cpp array.cpp attrib.cpp \
 	bind.cpp builtin.cpp \
 	character.cpp coerce.cpp colors.cpp complex.cpp connections.cpp context.cpp cum.cpp \

@@ -31,12 +31,7 @@
 #ifndef GCROOT_HPP
 #define GCROOT_HPP
 
-#include <vector>
-#include <iostream>
-#include <list>
-#include <CXXR/Allocator.hpp>
 #include <CXXR/GCNode.hpp>
-#include <CXXR/RObject.hpp>
 
 namespace CXXR
 {
@@ -62,28 +57,46 @@ namespace CXXR
         static void visitRoots(GCNode::const_visitor *v);
 
     protected:
+        /** @brief Primary constructor.
+         *
+         * @param node Pointer, possibly null, to the node to be protected.
+         */
         GCRootBase(const GCNode *node);
 
-        GCRootBase(const GCRootBase &source)
-            : m_it(s_roots->insert(s_roots->end(), *source.m_it))
-        {
-        }
+        /** @brief Copy constructor.
+         *
+         * @param source Pattern for the copy.
+         */
+        GCRootBase(const GCRootBase &source) : GCRootBase(source.ptr()) {}
 
         ~GCRootBase()
         {
-            s_roots->erase(m_it);
+            const GCNode *node = ptr();
+            GCNode::decRefCount(node);
+            unlink();
         }
 
         GCRootBase &operator=(const GCRootBase &source)
         {
-            *m_it = *(source.m_it);
+            const GCNode *newnode = source.ptr();
+            GCNode::incRefCount(newnode);
+            const GCNode *oldnode = ptr();
+            GCNode::decRefCount(oldnode);
+            m_pointer = newnode;
             return *this;
         }
 
+        /** @brief Change the node protected by this GCRootBase.
+         *
+         * @param node Pointer to the node now to be protected, or a
+         * null pointer.
+         */
         void redirect(const GCNode *node)
         {
-            // GCNode::maybeCheckExposed(node);
-            *m_it = node;
+            GCNode::incRefCount(node);
+            const GCNode *oldnode = ptr();
+            GCNode::decRefCount(oldnode);
+            m_pointer = node;
         }
 
         /** @brief Access the encapsulated pointer.
@@ -92,29 +105,35 @@ namespace CXXR
          */
         const GCNode *ptr() const
         {
-            return *m_it;
+            return m_pointer;
         }
 
     private:
-        friend class GCNode;
+        const GCNode *m_pointer;
 
-        typedef std::list<const GCNode *, Allocator<const GCNode *>> List;
+        // GCRoots form an intrusive doubly-linked list.  This structure
+        // requires only constant initialization and doesn't allocate memory at
+        // all.  This allows static creation of global GCRoots when needed.
+        GCRootBase *m_next;
+        GCRootBase *m_prev;
 
-        // There may be a case, at least in some C++ library
-        // implementations, for using a deque instead of a vector in
-        // the following, so that memory is released as the stack
-        // shrinks.
-        static List *s_roots;
+        static GCRootBase *s_list_head;
 
-        List::iterator m_it;
-
-        // Clean up static data at end of run (called by
-        // GCNode::SchwarzCtr destructor:
-        static void cleanup();
-
-        // Initialize static data (called by GCNode::SchwarzCtr
-        // constructor):
-        static void initialize();
+        void unlink()
+        {
+            if (m_next)
+            {
+                m_next->m_prev = m_prev;
+            }
+            if (m_prev)
+            {
+                m_prev->m_next = m_next;
+            }
+            else
+            {
+                s_list_head = m_next;
+            }
+        }
     };
 
     /** @brief Smart pointer to protect a GCNode from garbage
@@ -131,7 +150,9 @@ namespace CXXR
      * the price of this is that there is a slightly greater time overhead
      * to construction and destruction.
      *
-     * @param T GCNode or a type publicly derived from GCNode.  This
+     * It is safe to declare a GCRoot at file or namespace scope.
+     *
+     * @tparam T GCNode or a type publicly derived from GCNode.  This
      *          may be qualified by const, so for example a const
      *          String* may be encapsulated in a GCRoot using the type
      *          GCRoot<const String>.
@@ -146,7 +167,7 @@ namespace CXXR
          *          pointer.
          */
         explicit GCRoot(T *node = nullptr)
-            : GCRootBase(node) {}
+            : GCRootBase(node) { check_complete_type(); }
 
         /** @brief Copy constructor.
          *
@@ -177,6 +198,7 @@ namespace CXXR
          */
         GCRoot &operator=(T *node)
         {
+            check_complete_type();
             GCRootBase::redirect(node);
             return *this;
         }
@@ -219,10 +241,31 @@ namespace CXXR
          */
         T *get() const
         {
+            check_complete_type();
             return static_cast<T *>(const_cast<GCNode *>(ptr()));
+        }
+
+    private:
+        static void check_complete_type()
+        {
+            static_assert(sizeof(T) >= 0, "T must be a complete type");
         }
     };
 } // namespace CXXR
+
+// For hashing, simply hash the encapsulated pointer:
+namespace std
+{
+    template <class T>
+    struct hash<CXXR::GCRoot<T>>
+    {
+        std::size_t operator()(const CXXR::GCRoot<T> &gcrt) const
+        {
+            std::hash<T *> make_hash;
+            return make_hash(gcrt);
+        }
+    };
+} // namespace std
 
 extern "C"
 {

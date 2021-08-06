@@ -1,5 +1,7 @@
 /*
  *  R : A Computer Language for Statistical Data Analysis
+ *  Copyright (C) 1999--2020  The R Core Team.
+ *  Copyright (C) 1995, 1996  Robert Gentleman and Ross Ihaka
  *  Copyright (C) 2008-2014  Andrew R. Runnalls.
  *  Copyright (C) 2014 and onwards the Rho Project Authors.
  *
@@ -15,46 +17,21 @@
  *  This program is distributed in the hope that it will be useful,
  *  but WITHOUT ANY WARRANTY; without even the implied warranty of
  *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- *  GNU General Public License for more details.
+ *  GNU Lesser General Public License for more details.
  *
- *  You should have received a copy of the GNU General Public License
+ *  You should have received a copy of the GNU Lesser General Public License
  *  along with this program; if not, a copy is available at
  *  https://www.R-project.org/Licenses/
  */
 
-/** @file DottedArgs.cpp
+/** @file Subscripting.cpp
  *
- * @brief Class CXXR::DottedArgs.
+ * Implementation of class Subscripting and associated functions.
  */
 
-#include <CXXR/DottedArgs.hpp>
+#include <set>
+#include <unordered_map>
+#include <CXXR/RAllocStack.hpp>
+#include <CXXR/RealVector.hpp>
+#include <CXXR/Subscripting.hpp>
 #include <Localization.h>
-
-using namespace std;
-using namespace CXXR;
-
-namespace CXXR
-{
-    DottedArgs *DottedArgs::clone(Duplicate deep) const
-    {
-        return new DottedArgs(*this, deep);
-    }
-
-    RObject *DottedArgs::evaluate(Environment *env)
-    {
-        Rf_error(_("'...' used in an incorrect context"));
-        return nullptr;
-    }
-
-    const char *DottedArgs::typeName() const
-    {
-        return staticTypeName();
-    }
-} // namespace CXXR
-
-// ***** C interface *****
-
-Rboolean Rf_isDottedArgs(SEXP s)
-{
-    return Rboolean(!s || TYPEOF(s) == DOTSXP);
-}

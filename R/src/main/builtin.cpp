@@ -221,7 +221,7 @@ HIDDEN SEXP do_args(SEXP call, SEXP op, SEXP args, SEXP rho)
 	return mkCLOSXP(FORMALS(CAR(args)), nullptr, R_GlobalEnv);
     }
 
-    if (TYPEOF(CAR(args)) == BUILTINSXP || TYPEOF(CAR(args)) == SPECIALSXP) {
+    if (Rf_isPrimitive(CAR(args))) {
 	const char *nm = PRIMNAME(CAR(args));
 	SEXP env, s2;
 	PROTECT_INDEX xp;
@@ -265,8 +265,7 @@ HIDDEN SEXP do_formals(SEXP call, SEXP op, SEXP args, SEXP rho)
 	}
 	else
 	{
-		if (!(TYPEOF(CAR(args)) == BUILTINSXP ||
-			  TYPEOF(CAR(args)) == SPECIALSXP))
+		if (!Rf_isPrimitive(CAR(args)))
 			warningcall(call, _("'%s' argument is not a function"), "fun");
 		return R_NilValue;
 	}
@@ -283,8 +282,7 @@ HIDDEN SEXP do_body(SEXP call, SEXP op, SEXP args, SEXP rho)
 	}
 	else
 	{
-		if (!(TYPEOF(CAR(args)) == BUILTINSXP ||
-			  TYPEOF(CAR(args)) == SPECIALSXP))
+		if (!Rf_isPrimitive(CAR(args)))
 			warningcall(call, _("'%s' argument is not a function"), "fun");
 		return R_NilValue;
 	}

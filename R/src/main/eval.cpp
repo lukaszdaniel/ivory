@@ -50,6 +50,7 @@
 #include <CXXR/Promise.hpp>
 #include <CXXR/Closure.hpp>
 #include <CXXR/Evaluator.hpp>
+#include <CXXR/WeakRef.hpp>
 #include <Localization.h>
 #include <RContext.h>
 #include <Defn.h>
@@ -752,6 +753,17 @@ RObject *Expression::evaluate(Environment *env)
 	return tmp;
 }
 
+void Evaluator::checkForUserInterrupts()
+{
+	R_CheckUserInterrupt();
+#ifndef IMMEDIATE_FINALIZERS
+	/* finalizers are run here since this should only be called at
+	   points where running arbitrary code should be safe */
+	WeakRef::runPendingFinalizers();
+#endif
+	s_countdown = s_countdown_start;
+}
+
 /* Return value of "e" evaluated in "rho". */
 
 /* some places, e.g. deparse2buff, call this with a promise and rho = nullptr */
@@ -761,16 +773,7 @@ RObject *Evaluator::evaluate(RObject *object, Environment *env)
 
 	/* this is needed even for self-evaluating objects or something like
        'while (TRUE) NULL' will not be interruptable */
-	if (--s_countdown == 0)
-	{
-		R_CheckUserInterrupt();
-#ifndef IMMEDIATE_FINALIZERS
-		/* finalizers are run here since this should only be called at
-	   points where running arbitrary code should be safe */
-		R_RunPendingFinalizers();
-#endif
-		s_countdown = s_countdown_start;
-	}
+	maybeCheckForUserInterrupts();
 
 	bool bcintactivesave = R_BCIntActive;
 	R_BCIntActive = false;
@@ -6665,7 +6668,7 @@ static bool maybePrimitiveCall(SEXP expr)
 		SEXP value = SYMVALUE(CAR(expr));
 		if (TYPEOF(value) == PROMSXP)
 			value = PRVALUE(value);
-		return (TYPEOF(value) == BUILTINSXP || TYPEOF(value) == SPECIALSXP);
+		return Rf_isPrimitive(value);
 	}
 	return false;
 }

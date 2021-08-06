@@ -139,6 +139,13 @@ static void setActiveValue(SEXP fun, SEXP val)
     expr->evaluate(Environment::global());
 }
 
+/*
+SEXP BINDING_VALUE(SEXP b) == Binding::value() or Binding::unforcedValue()
+void SET_BINDING_VALUE(SEXP b, SEXP val) == assignSlow(RObject *new_value, Origin origin) or assign(RObject *new_value, Origin origin)
+void R::SET_BNDCELL(SEXP cell, SEXP val) == Binding::setValue(RObject *new_value, Origin origin, bool quiet)
+CAR(b) == rawValue()
+*/
+
 namespace
 {
     inline bool FRAME_IS_LOCKED(SEXP e)
@@ -154,7 +161,6 @@ namespace
     }
 }
 /* use the same bits (15 and 14) in symbols and bindings */
-static SEXP getActiveValue(SEXP);
 inline static SEXP BINDING_VALUE(SEXP b)
 {
     if (BNDCELL_TAG(b))
@@ -216,18 +222,12 @@ void Frame::Binding::assignSlow(RObject *new_value, Origin origin)
     if (isActive())
     {
         setActiveValue(m_value, new_value);
-        m_frame->monitorRead(*this);
     }
     else
     {
-        if (bndcellTag())
-        {
-            m_value.clearCar(); // m_value = nullptr;
-            setBndCellTag(NILSXP);
-        }
-        m_value.retarget(m_frame, new_value);
-        m_frame->monitorWrite(*this);
+        setValue(new_value);
     }
+    m_frame->monitorWrite(*this);
 }
 
 inline static void SET_SYMBOL_BINDING_VALUE(SEXP sym, SEXP new_value)
@@ -250,7 +250,7 @@ inline static bool ISNULL(SEXP x)
     return (x == nullptr);
 }
 
-/* Function to determine whethr an environment contains special symbols */
+/* Function to determine whether an environment contains special symbols */
 Rboolean R::R_envHasNoSpecialSymbols(SEXP env)
 {
     for (SEXP frame = FRAME(env); frame; frame = CDR(frame))
@@ -314,6 +314,7 @@ HIDDEN void R::InitGlobalEnv()
     /**** needed to properly initialize the base namespace */
     Rf_gsetVar(R_LastWarningSymbol, nullptr, R_BaseEnv);  // CXXR addition
     Rf_gsetVar(R_DotTracebackSymbol, nullptr, R_BaseEnv);  // CXXR addition
+    Rf_gsetVar(Symbol::obtain(".Library.site"), nullptr, R_BaseEnv);  // CXXR addition
 }
 
 static std::pair<SEXP, bool> RemoveFromList(SEXP thing, SEXP list)
@@ -652,9 +653,7 @@ HIDDEN SEXP R::findVar1(SEXP symbol, SEXP rho, SEXPTYPE mode, int inherits_)
 		UNPROTECT(1);
 	    }
 	    if (TYPEOF(vl) == mode) return vl;
-	    if (mode == FUNSXP && (TYPEOF(vl) == CLOSXP ||
-				   TYPEOF(vl) == BUILTINSXP ||
-				   TYPEOF(vl) == SPECIALSXP))
+	    if (mode == FUNSXP && (FunctionBase::isA(vl)))
 		return (vl);
 	}
 	if (inherits_)
@@ -846,8 +845,7 @@ SEXP R::Rf_findFun3(SEXP symbol, SEXP rho, SEXP call)
 
     /* If the symbol is marked as special, skip to the first
        environment that might contain such a symbol. */
-       // TODO: Deal with CXXR_FALSE later.
-    if (CXXR_FALSE && IS_SPECIAL_SYMBOL(symbol)) {
+    if (IS_SPECIAL_SYMBOL(symbol)) {
 	while (rho != R_EmptyEnv && NO_SPECIAL_SYMBOLS(rho))
 	    rho = ENCLOS(rho);
     }
@@ -867,8 +865,7 @@ SEXP R::Rf_findFun3(SEXP symbol, SEXP rho, SEXP call)
 		    UNPROTECT(1);
 		}
 	    }
-	    if (TYPEOF(vl) == CLOSXP || TYPEOF(vl) == BUILTINSXP ||
-		TYPEOF(vl) == SPECIALSXP)
+	    if (FunctionBase::isA(vl))
 		return (vl);
 	    if (vl == R_MissingArg)
 		errorcall(call, _("'%s' argument is missing, with no default"), CHAR(PRINTNAME(symbol)));
@@ -1036,7 +1033,7 @@ void Rf_setVar(SEXP symbol, SEXP value, SEXP rho)
             return;
         rho = ENCLOS(rho);
     }
-    defineVar(symbol, value, R_GlobalEnv);
+    Rf_defineVar(symbol, value, R_GlobalEnv);
 }
 
 /** @brief Assignment in the base environment.
@@ -1465,8 +1462,10 @@ HIDDEN bool R::R_isMissing(SEXP symbol, SEXP rho)
         return false; /* is this really the right thing to do? LT */
 
     vl = findVarLocInFrame(rho, s, nullptr);
-    if (vl) {
-	if (DDVAL(symbol)) {
+    if (!vl)
+        return false; // This is what CR does.  Is it really right?
+
+    if (DDVAL(symbol)) {
 	    if (length(CAR(vl)) < ddv || CAR(vl) == R_MissingArg)
 		return true;
 	    /* defineVar(symbol, value, R_GlobalEnv); */
@@ -1510,8 +1509,6 @@ HIDDEN bool R::R_isMissing(SEXP symbol, SEXP rho)
 	}
 	else
 	    return false;
-    }
-    return false;
 }
 
 /** @brief This function tests whether the symbol passed as its first argument
@@ -2613,6 +2610,13 @@ SEXP R_FindPackageEnv(SEXP info)
     return expr->evaluate(Environment::global());
 }
 
+Environment *Environment::findPackage(const std::string &name)
+{
+    GCStackRoot<StringVector> pkgsv(asStringVector(name));
+    RObject *ans = R_FindPackageEnv(pkgsv);
+    return SEXP_downcast<Environment *>(ans);
+}
+
 Rboolean R_IsNamespaceEnv(SEXP rho)
 {
     if (rho == R_BaseNamespace)
@@ -2672,6 +2676,12 @@ SEXP R_NamespaceEnvSpec(SEXP rho)
         return nullptr;
 }
 
+const StringVector *Environment::namespaceSpec() const
+{
+    RObject *ans = R_NamespaceEnvSpec(const_cast<Environment *>(this));
+    return SEXP_downcast<const StringVector *>(ans);
+}
+
 SEXP R_FindNamespace(SEXP info)
 {
     SEXP val;
@@ -2681,6 +2691,12 @@ SEXP R_FindNamespace(SEXP info)
     GCStackRoot<> expr(LCONS(s_getNamespace, tail));
     val = eval(expr, R_GlobalEnv);
     return val;
+}
+
+Environment *Environment::findNamespace(const StringVector *spec)
+{
+    RObject *ans = R_FindNamespace(const_cast<StringVector *>(spec));
+    return SEXP_downcast<Environment *>(ans);
 }
 
 static SEXP checkNSname(SEXP call, SEXP name)

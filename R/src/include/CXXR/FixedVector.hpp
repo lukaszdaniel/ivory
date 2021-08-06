@@ -115,7 +115,7 @@ namespace CXXR
          *
          * @param deep Indicator whether to perform deep or shallow copy.
          */
-        FixedVector(const FixedVector<T, ST> &pattern, bool deep);
+        FixedVector(const FixedVector<T, ST> &pattern, Duplicate deep);
 
         /** @brief Element access.
          *
@@ -191,7 +191,7 @@ namespace CXXR
         static const char *staticTypeName();
 
         // Virtual functions of RObject:
-        FixedVector<T, ST> *clone(bool deep) const override;
+        FixedVector<T, ST> *clone(Duplicate deep) const override;
         const char *typeName() const override;
 
     protected:
@@ -233,7 +233,7 @@ namespace CXXR
     };
 
     template <typename T, SEXPTYPE ST>
-    FixedVector<T, ST>::FixedVector(const FixedVector<T, ST> &pattern, bool deep)
+    FixedVector<T, ST>::FixedVector(const FixedVector<T, ST> &pattern, Duplicate deep)
         : VectorBase(pattern, deep), m_data(&m_singleton),
           m_singleton(pattern.m_singleton)
     {
@@ -281,7 +281,7 @@ namespace CXXR
     }
 
     template <typename T, SEXPTYPE ST>
-    FixedVector<T, ST> *FixedVector<T, ST>::clone(bool deep) const
+    FixedVector<T, ST> *FixedVector<T, ST>::clone(Duplicate deep) const
     {
         // return GCNode::expose(new FixedVector<T, ST>(*this, deep));
         return new FixedVector<T, ST>(*this, deep);

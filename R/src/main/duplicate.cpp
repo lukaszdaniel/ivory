@@ -63,8 +63,8 @@ HIDDEN void R::reset_duplicate_counter(void)
 }
 #endif
 
-template <bool DEEP = true>
-SEXP CXXR_deep_duplicate(SEXP s)
+template <CXXR::RObject::Duplicate deep = RObject::Duplicate::DEEP>
+SEXP CXXR_duplicate(SEXP s)
 {
 	if (!s)
 		return nullptr;
@@ -73,12 +73,11 @@ SEXP CXXR_deep_duplicate(SEXP s)
 #ifdef R_PROFILING
 	++duplicate_counter;
 #endif
-	SEXP t = RObject::clone(s, DEEP);
+	SEXP t = RObject::clone(s, deep);
 	if (!t)
 		return s;
 #ifdef R_MEMORY_PROFILING
-	if (RTRACE(s) && !(TYPEOF(s) == CLOSXP || TYPEOF(s) == BUILTINSXP ||
-					   TYPEOF(s) == SPECIALSXP || TYPEOF(s) == PROMSXP ||
+	if (RTRACE(s) && !(FunctionBase::isA(s) || TYPEOF(s) == PROMSXP ||
 					   TYPEOF(s) == ENVSXP))
 	{
 		memtrace_report(s, t);
@@ -91,12 +90,12 @@ SEXP CXXR_deep_duplicate(SEXP s)
 
 SEXP Rf_duplicate(SEXP s)
 {
-	return CXXR_deep_duplicate<true>(s);
+	return CXXR_duplicate<RObject::Duplicate::DEEP>(s);
 }
 
 SEXP Rf_shallow_duplicate(SEXP s)
 {
-	return CXXR_deep_duplicate<false>(s);
+	return CXXR_duplicate<RObject::Duplicate::SHALLOW>(s);
 }
 
 SEXP Rf_lazy_duplicate(SEXP s)

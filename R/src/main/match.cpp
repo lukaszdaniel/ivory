@@ -47,6 +47,7 @@
 #include <CXXR/DottedArgs.hpp>
 #include <CXXR/PairList.hpp>
 #include <CXXR/StringVector.hpp>
+#include <CXXR/ArgMatcher.hpp>
 #include <Localization.h>
 #include <Defn.h>
 
@@ -117,6 +118,34 @@ Rboolean R::Rf_pmatch(SEXP formal, SEXP tag, Rboolean exact)
 		vmaxset(vmax);
 		return res;
 	}
+}
+
+void ArgMatcher::unusedArgsError(const SuppliedList &supplied_list)
+{
+	GCStackRoot<PairList> unused_list;
+	// Produce a PairList of the unused args:
+	for (SuppliedList::const_reverse_iterator rit = supplied_list.rbegin();
+		 rit != supplied_list.rend(); ++rit)
+	{
+		const SuppliedData &supplied_data = *rit;
+		RObject *value = supplied_data.value;
+		if (value && value->sexptype() == PROMSXP)
+			value = const_cast<RObject *>(PREXPR(value));
+		unused_list = PairList::construct(value, unused_list, supplied_data.tag);
+	}
+	unusedArgsError(unused_list);
+}
+
+void ArgMatcher::unusedArgsError(const ConsCell *unused_list)
+{
+	// Prepare error message:
+	GCStackRoot<const StringVector>
+		argstrv(SEXP_downcast<const StringVector *>(
+			R::deparse1line(
+				const_cast<ConsCell *>(unused_list), FALSE)));
+	// '+ 8' is to remove 'pairlist' from 'pairlist(badTag1, ...' :
+	const char *errdetails = (*argstrv)[0]->c_str() + 8;
+	Rf_error(_("unused argument(s) %s"), errdetails);
 }
 
 /* Destructively Extract A Named List Element. */

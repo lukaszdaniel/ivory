@@ -63,7 +63,7 @@ namespace CXXR
         const auto &UNLOCK_BINDINGptr = UNLOCK_BINDING;
     } // namespace ForceNonInline
 
-    ConsCell::ConsCell(SEXPTYPE st, RObject *cr, PairList *tl, RObject *tg)
+    ConsCell::ConsCell(SEXPTYPE st, RObject *cr, PairList *tl, const RObject *tg)
         : RObject(st), m_missing(0)
     {
         checkST(st);
@@ -72,7 +72,7 @@ namespace CXXR
         m_tag = tg;
     }
 
-    ConsCell::ConsCell(const ConsCell &pattern, bool deep)
+    ConsCell::ConsCell(const ConsCell &pattern, Duplicate deep)
         : RObject(pattern, deep), m_car(pattern.m_car, deep),
           m_missing(0)
     {
@@ -80,7 +80,7 @@ namespace CXXR
         m_tag = pattern.tag();
     }
 
-    ConsCell::ConsCell(const ConsCell &pattern, bool deep, int)
+    ConsCell::ConsCell(const ConsCell &pattern, Duplicate deep, int)
         : RObject(pattern, deep), m_car(pattern.m_car, deep), m_missing(0)
     {
         m_tail = nullptr;
@@ -363,7 +363,7 @@ SEXP TAG(SEXP e)
     {
         ConsCell::checkST(e);
         const ConsCell *cc = SEXP_downcast<const ConsCell *>(e);
-        return cc->tag();
+        return const_cast<RObject *>(cc->tag());
     }
 }
 

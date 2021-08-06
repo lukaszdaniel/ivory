@@ -58,6 +58,15 @@ namespace CXXR
     }
 
     // Implementation of Evaluator::evaluate() is in eval.cpp (for the time being)
+    // Implementation of Evaluator::checkForUserInterrupts() is in eval.cpp (for the time being)
+
+    void Evaluator::maybeCheckForUserInterrupts()
+    {
+        if (--s_countdown == 0)
+        {
+            checkForUserInterrupts();
+        }
+    }
 
     void Evaluator::setDepthLimit(int depth)
     {

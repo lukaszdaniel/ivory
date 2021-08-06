@@ -44,9 +44,8 @@ namespace CXXR
 
     } // namespace ForceNonInline
 
-    S4Object *S4Object::clone(bool deep) const
+    S4Object *S4Object::clone(Duplicate deep) const
     {
-        // return GCNode::expose(new S4Object(*this, deep));
         return new S4Object(*this, deep);
     }
 

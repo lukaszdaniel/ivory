@@ -212,7 +212,7 @@ extern "C"
     /** @brief Reallocate a block of memory.
      *
      * This is part of the S compatibility interface, and is used when
-     * it is decided that a block of memory previously allocated by 
+     * it is decided that a block of memory previously allocated by
      * S_alloc() or S_realloc() needs to be expanded.  It allocates a
      * new block of memory, copies across the previous contents, and
      * zeroes any additional elements.

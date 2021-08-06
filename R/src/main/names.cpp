@@ -1198,8 +1198,7 @@ HIDDEN SEXP do_internal(SEXP call, SEXP op, SEXP args, SEXP env)
     if (!isSymbol(fun))
 	errorcall(call, _("invalid '%s' argument"), ".Internal()");
     if (INTERNAL(fun) == R_NilValue)
-	errorcall(call, _("there is no '.Internal' function '%s'"),
-		  CHAR(PRINTNAME(fun)));
+	errorcall(call, _("there is no '.Internal' function '%s'"), R_CHAR(PRINTNAME(fun)));
 
 #ifdef CHECK_INTERNALS
     if(R_Is_Running > RStatus::INITIALIZED && getenv("_R_CHECK_INTERNALS2_")) {

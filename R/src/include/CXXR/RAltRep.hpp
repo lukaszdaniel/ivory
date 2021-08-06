@@ -47,7 +47,7 @@ namespace CXXR
          *           to be constructed.
          * @param tg Pointer to the 'tag' of the element to be constructed.
          */
-        explicit AltRep(RObject *cr = nullptr, PairList *tl = nullptr, RObject *tg = nullptr)
+        explicit AltRep(RObject *cr = nullptr, PairList *tl = nullptr, const RObject *tg = nullptr)
             : PairList(cr, tl, tg)
         {
             setAltrep(true);
@@ -82,7 +82,7 @@ namespace CXXR
         }
 
         // Virtual functions of RObject:
-        AltRep *clone(bool deep) const override;
+        AltRep *clone(Duplicate deep) const override;
         const char *typeName() const override;
 
     private:

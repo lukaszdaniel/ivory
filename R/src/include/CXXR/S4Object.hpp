@@ -64,7 +64,7 @@ namespace CXXR
 		 *
 		 * @param deep Indicator whether to perform deep or shallow copy.
 		 */
-		S4Object(const S4Object &pattern, bool deep)
+		S4Object(const S4Object &pattern, Duplicate deep)
 			: RObject(pattern, deep)
 		{
 		}
@@ -111,7 +111,7 @@ namespace CXXR
 		}
 
 		// Virtual functions of RObject:
-		S4Object *clone(bool deep) const override;
+		S4Object *clone(Duplicate deep) const override;
 		const char *typeName() const override;
 
 	private:

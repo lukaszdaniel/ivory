@@ -66,7 +66,77 @@ namespace CXXR
    class Environment : public RObject
    {
    public:
-      /** @brief Constructor.
+      /** @brief Object authorising R 'break' and 'next' commands.
+       *
+       * LoopScope objects must be declared on the processor stack
+       * (i.e. as C++ automatic variables).  Each Environment object
+       * keeps track of the number of LoopScope objects associated
+       * with it.  The R commands 'break' and 'next' are legal only
+       * when the evaluation Environment has at least one LoopScope
+       * in existence; this can be determined by calling
+       * Environment::loopActive().
+       */
+      class LoopScope
+      {
+      public:
+         /** @brief Constructor.
+	       *
+	       * @param env Pointer to the Environment with which this
+	       *          LoopScope is to be associated.
+	       */
+         LoopScope(Environment *env)
+             : m_environment(env), m_prev_state(env->m_in_loop)
+         {
+            env->m_in_loop = true;
+         }
+
+         ~LoopScope()
+         {
+            m_environment->m_in_loop = m_prev_state;
+         }
+
+      private:
+         GCStackRoot<Environment> m_environment;
+         bool m_prev_state;
+      };
+
+      /** @brief Object authorising R 'return' command.
+       *
+       * ReturnScope objects must be declared on the processor stack
+       * (i.e. as C++ automatic variables).  Each Environment object
+       * keeps track of the number of ReturnScope objects associated
+       * with it.  The R command 'return' is legal only when the
+       * evaluation Environment has at least one ReturnScope in
+       * existence; this can be determined by calling
+       * Environment::canReturn().  More generally, a transfer of
+       * control to a specified Environment using ReturnException
+       * will succeed only if canReturn() is true.
+       */
+      class ReturnScope
+      {
+      public:
+         /** @brief Constructor.
+          *
+          * @param env Pointer to the Environment with which this
+          *          ReturnScope is to be associated.
+          */
+         ReturnScope(Environment *env)
+             : m_environment(env), m_prev_state(env->m_can_return)
+         {
+            env->m_can_return = true;
+         }
+
+         ~ReturnScope()
+         {
+            m_environment->m_can_return = m_prev_state;
+         }
+
+      private:
+         GCStackRoot<Environment> m_environment;
+         bool m_prev_state;
+      };
+
+      /** @brief Constructor with specified Frame.
        *
        * @param enclosing Pointer to the enclosing environment.
        *
@@ -84,11 +154,47 @@ namespace CXXR
        */
       explicit Environment(Environment *enclosing = nullptr, PairList *frame = nullptr)
           : RObject(ENVSXP), m_single_stepping(false),
-            m_locked(false)
+            m_locked(false), m_in_loop(false), m_can_return(false)
       {
          m_enclosing = enclosing;
          m_frame = frame;
       }
+
+      /** @brief Access binding of an already-defined Symbol.
+       *
+       * This function provides a pointer to the Binding of a
+       * Symbol.  In this variant the pointer is non-const, and
+       * consequently the calling code can use it to modify the
+       * binding (provided the Binding is not locked).
+       *
+       * @param symbol The Symbol for which a mapping is sought.
+       *
+       * @param recursive If false, a mapping is sought only in this
+       *          environment.  If true, the search works up through
+       *          enclosing environments.
+       *
+       * @return A pointer to the required binding, or a null
+       * pointer if it was not found..
+       */
+      // Binding *binding(const Symbol *symbol, bool recursive = true);
+
+      /** @brief Access const binding of an already-defined Symbol.
+       *
+       * This function provides a pointer to a PairList element
+       * representing the binding of a symbol.  In this variant the
+       * pointer is const, and consequently the calling code can use
+       * it only to examine the binding.
+       *
+       * @param symbol The Symbol for which a mapping is sought.
+       *
+       * @param recursive If false, a mapping is sought only in this
+       *          environment.  If true, the search works up through
+       *          enclosing environments.
+       *
+       * @return A pointer to the required binding, or a null
+       * pointer if it was not found..
+       */
+      // const Binding *binding(const Symbol *symbol, bool recursive = true) const;
 
       /** @brief Base environment.
        *
@@ -106,6 +212,28 @@ namespace CXXR
       static Environment *baseNamespace()
       {
          return s_base_namespace;
+      }
+
+      /** @brief Is R 'return' currently legal?
+       *
+       * @return true iff there is currently at least one ReturnScope
+       * object in existence associated with this Environment, so
+       * that a transfer of control using ReturnException will
+       * succeed.
+       */
+      bool canReturn() const
+      {
+         return m_can_return;
+      }
+
+      /** @brief Is R 'break' or 'next' currently legal?
+       *
+       * @return true iff there is currently at least one LoopScope
+       * object in existence associated with this Environment.
+       */
+      bool loopActive() const
+      {
+         return m_in_loop;
       }
 
       /** @brief Empty environment.
@@ -141,6 +269,35 @@ namespace CXXR
       {
          return m_enclosing;
       }
+
+      /** @brief Locate a namespace environment from its
+       *   specification.
+       *
+       * @param spec Non-null pointer to the specification of a
+       * namespace environment (as returned by namespaceSpec() ).
+       *
+       * @return A pointer to the namespace environment
+       * corresponding to \a spec .  This namespace is loaded if
+       * necessary, and deserialization fails if loading is
+       * unsuccessful.
+       *
+       * @todo Having deserialization fail entirely in the event that
+       * the namespace cannot be loaded seems insufficiently robust,
+       * but follows CR practice.
+       */
+      static Environment *findNamespace(const StringVector *spec);
+
+      /** @brief Locate a package environment from its name.
+       *
+       * @param name Name of a package, prefixed by <tt>package:</tt>.
+       *
+       * @return A pointer to the package environment corresponding
+       * to \a name .  This package is loaded if necessary.  If
+       * loading fails, the function returns a pointer to the global
+       * Environment (<tt>Environment::global()</tt>): this follows
+       * CR practice.
+       */
+      static Environment *findPackage(const std::string &name);
 
       /** @brief Access the Environment's Frame.
        *
@@ -229,6 +386,23 @@ namespace CXXR
          m_locked = on;
       }
 
+      /** @brief Get namespace spec (if applicable).
+       *
+       * @return If this Environment is a namespace environment,
+       * this function returns the namespace specification.
+       * Otherwise returns a null pointer.
+       */
+      const StringVector *namespaceSpec() const;
+
+      /** @brief Get package name (if any).
+       *
+       * @return If this Environment is the Environment of a package, this
+       * function returns the name of the package (of the form
+       * "package:foo") as the first element of a StringVector.
+       * Otherwise returns a null pointer.
+       */
+      const StringVector *packageName() const;
+
       /** @brief Set single-stepping status
        *
        * @param on The required single-stepping status (true =
@@ -275,7 +449,7 @@ namespace CXXR
       NORET static void nullEnvironmentError();
 
    protected:
-      // Declared private to ensure that Environment objects are
+      // Declared protected to ensure that Environment objects are
       // created only using 'new':
       ~Environment() {}
 
@@ -290,6 +464,8 @@ namespace CXXR
       bool m_single_stepping;
       bool m_locked;
       bool m_no_special_symbols;
+      bool m_in_loop;
+      bool m_can_return;
 
       static void initialize();
       friend void ::R::InitGlobalEnv();
@@ -313,6 +489,18 @@ namespace CXXR
 
 namespace R
 {
+   /** @brief Set symbol's value in the base environment.
+    *
+    * @param x Pointer to a CXXR::Symbol (checked).
+    *
+    * @param val Pointer to the RObject now to be considered as
+    *            the value of this symbol.  A null pointer or
+    *            R_UnboundValue are permissible values of \a val.
+    *
+    * @todo No binding to R_UnboundValue ought to be created.
+    */
+   void SET_SYMVALUE(SEXP x, SEXP v);
+
    void R_RestoreHashCount(SEXP rho);
 
    /** @brief Enable/disable single-stepping of the debugger.
@@ -349,6 +537,16 @@ extern "C"
     * @return TRUE iff the RObject pointed to by s is an environment.
     */
    Rboolean Rf_isEnvironment(SEXP s);
+
+   /** @brief Symbol's value in the base environment.
+    *
+    * @param x Pointer to a CXXR::Symbol (checked).
+    *
+    * @return Pointer to a CXXR::RObject representing \a x's value.
+    *         Returns R_UnboundValue if no value is currently
+    *         associated with the Symbol.
+    */
+   SEXP SYMVALUE(SEXP x);
 
    /** @brief Access an environment's Frame, represented as a PairList.
     *

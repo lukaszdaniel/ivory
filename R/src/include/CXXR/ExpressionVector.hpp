@@ -81,7 +81,7 @@ namespace CXXR
          *
          * @param deep Indicator whether to perform deep or shallow copy.
          */
-        ExpressionVector(const ExpressionVector &pattern, bool deep)
+        ExpressionVector(const ExpressionVector &pattern, Duplicate deep)
             : HandleVector<RObject, EXPRSXP>(pattern, deep)
         {
         }
@@ -106,7 +106,7 @@ namespace CXXR
         explicit ExpressionVector(ListVector &lv);
 
         // Virtual function of RObject:
-        ExpressionVector *clone(bool deep) const override;
+        ExpressionVector *clone(Duplicate deep) const override;
 
     private:
         // Declare private to ensure that ExpressionVector objects are

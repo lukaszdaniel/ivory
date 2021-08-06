@@ -118,6 +118,15 @@ namespace CXXR
             friend class HandleVector<T, ST>;
         };
 
+        /** @brief Create a vector, leaving its contents
+         *         uninitialized (for POD types) or default
+         *         constructed.
+         *
+         * @param sz Number of elements required.  Zero is
+         *          permissible.
+         */
+        static HandleVector *create(R_xlen_t sz);
+
         /** @brief Create a vector.
          *
          * Create a vector.
@@ -140,7 +149,7 @@ namespace CXXR
          *
          * @param deep Indicator whether to perform deep or shallow copy.
          */
-        HandleVector(const HandleVector<T, ST> &pattern, bool deep)
+        HandleVector(const HandleVector<T, ST> &pattern, Duplicate deep)
             : VectorBase(pattern, deep), m_data(pattern.size())
         {
             R_xlen_t sz = size();
@@ -167,7 +176,7 @@ namespace CXXR
          *          constructor with a distinct signature.  Its value
          *          is ignored.
          */
-        HandleVector(const HandleVector<T, ST> &pattern, bool deep, int dummy)
+        HandleVector(const HandleVector<T, ST> &pattern, Duplicate deep, int dummy)
             : VectorBase(pattern, deep), m_data(pattern.size())
         {
             R_xlen_t sz = size();
@@ -258,6 +267,12 @@ namespace CXXR
 
         friend class ElementProxy;
     };
+
+    template <typename T, SEXPTYPE ST>
+    HandleVector<T, ST> *HandleVector<T, ST>::create(size_type sz)
+    {
+        return GCNode::expose(new HandleVector(sz));
+    }
 
     template <typename T, SEXPTYPE ST>
     HandleVector<T, ST>::HandleVector(R_xlen_t sz, T *init)

@@ -234,6 +234,12 @@ namespace CXXR
     class RObject : public GCNode
     {
     public:
+        enum class Duplicate
+        {
+            SHALLOW,
+            DEEP
+        };
+
         /** @brief Smart pointer used to control the copying of RObjects.
          *
          * This class encapsulates a T* pointer, where T is derived
@@ -270,7 +276,7 @@ namespace CXXR
              *
              * @param deep Indicator whether to perform deep or shallow copy.
              */
-            Handle(const Handle<T> &pattern, bool deep = false);
+            Handle(const Handle<T> &pattern, Duplicate deep = Duplicate::SHALLOW);
 
             /** @brief Assignment operator.
              *
@@ -287,10 +293,10 @@ namespace CXXR
              */
             Handle<T> &operator=(const Handle<T> &rhs)
             {
-                return clone(rhs, true);
+                return clone(rhs, Duplicate::DEEP);
             }
 
-            Handle<T> &clone(const Handle<T> &pattern, bool deep)
+            Handle<T> &clone(const Handle<T> &pattern, Duplicate deep)
             {
                 Handle<T> cp(pattern, deep);
                 this->setTarget(cp.get());
@@ -327,21 +333,11 @@ namespace CXXR
         GCEdge<PairList> m_attrib;
 
     public:
-        /** @brief Get object attributes.
-         *
-         * @return Pointer to the attributes of this object.
-         *
-         * @deprecated This method allows clients to modify the
-         * attribute list directly, and thus bypass attribute
-         * consistency checks.
-         */
-        PairList *attributes() { return m_attrib; }
-
         /** @brief Get object attributes (const variant).
          *
          * @return const pointer to the attributes of this object.
          */
-        const PairList *attributes() const { return m_attrib; }
+        PairList *attributes() const { return m_attrib; }
 
         /** @brief Remove all attributes.
          */
@@ -349,25 +345,43 @@ namespace CXXR
 
         /** @brief Get the value a particular attribute.
          *
-         * @param name Reference to a \c Symbol giving the name of the
+         * @param name Pointer to a \c Symbol giving the name of the
          *          sought attribute.  Note that this \c Symbol is
          *          identified by its address.
          *
          * @return pointer to the value of the attribute with \a name,
          * or a null pointer if there is no such attribute.
          */
-        RObject *getAttribute(const Symbol *name);
+        RObject *getAttribute(const Symbol *name) const;
 
-        /** @brief Get the value a particular attribute (const variant).
+        /** @brief Copy an attribute from one RObject to another.
          *
-         * @param name Reference to a \c Symbol giving the name of the
-         *          sought attribute.  Note that this \c Symbol is
-         *          identified by its address.
+         * @param name Non-null pointer to the Symbol naming the
+         *         attribute to be copied.
          *
-         * @return const pointer to the value of the attribute with \a
-         * name, or a null pointer if there is no such attribute.
+         * @param source Non-null pointer to the object from which
+         *          the attribute are to be copied.  If \a source does
+         *          not have an attribute named \a name , then the
+         *          function has no effect.
          */
-        const RObject *getAttribute(const Symbol *name) const;
+        void copyAttribute(Symbol *name, const RObject *source)
+        {
+            RObject *att = source->getAttribute(name);
+            if (att)
+                setAttribute(name, att);
+        }
+
+        /** @brief Copy attributes from one RObject to another.
+         *
+         * Any existing attributes of \a *this are discarded.
+         *
+         * @param source Non-null pointer to the object from which
+         *          attributes are to be copied.
+         *
+         * @param deep If deep, copy the full set of attributes.  Otherwise
+         *          do a shallow copy.
+         */
+        void copyAttributes(const RObject *source, Duplicate deep);
 
         /** @brief Has this object any attributes?
          *
@@ -433,7 +447,7 @@ namespace CXXR
          *          assume ownership of \a value, which should
          *          therefore not be subsequently altered externally.
          */
-        RObject *setAttribute(Symbol *name, RObject *value);
+        RObject *setAttribute(const Symbol *name, RObject *value);
 
         /** @brief Replace the attributes of an object.
          *
@@ -560,10 +574,15 @@ namespace CXXR
             m_extra = v;
         }
 
+        /** @brief Is this an S4 object?
+         *
+         * @return true iff this is an S4 object.
+         */
         bool isS4Object() const
         {
             return m_s4_object;
         }
+
         /** @brief Set the status of this RObject as an S4 object.
          *
          * @param on true iff this is to be considered an S4 object.
@@ -586,7 +605,7 @@ namespace CXXR
 
         // Introduced temporarily while copy constructors are being
         // rolled out:
-        void cloneAttributes(const RObject &source, bool deep);
+        void cloneAttributes(const RObject &source, Duplicate deep);
 
         /** @brief Return pointer to a copy of this object.
          *
@@ -612,9 +631,9 @@ namespace CXXR
          *          type facility to return a pointer to the type of object
          *          being cloned.
          */
-        virtual RObject *clone(bool deep) const
+        virtual RObject *clone(Duplicate deep) const
         {
-            return nullptr;
+            return const_cast<RObject *>(this);
         }
 
         /** @brief Return a pointer to a copy of an object or the object itself
@@ -631,7 +650,7 @@ namespace CXXR
          *         if \a pattern cannot be cloned or is itself a null pointer.
          */
         template <class T>
-        static T *clone(const T *pattern, bool deep)
+        static T *clone(const T *pattern, Duplicate deep)
         {
             return pattern ? pattern->clone(deep) : nullptr;
         }
@@ -666,17 +685,17 @@ namespace CXXR
          *
          * @param deep Indicator whether to perform deep or shallow copy.
          */
-        RObject(const RObject &pattern, bool deep);
+        RObject(const RObject &pattern, Duplicate deep);
 
         virtual ~RObject();
     };
 
     template <class T>
-    RObject::Handle<T>::Handle(const Handle<T> &pattern, bool deep) : GCEdge<T>(pattern)
+    RObject::Handle<T>::Handle(const Handle<T> &pattern, Duplicate deep) : GCEdge<T>(pattern)
     {
         if (pattern)
         {
-            if (deep)
+            if (deep == Duplicate::DEEP)
             {
                 RObject *t = pattern->clone(deep);
                 if (t)
@@ -782,7 +801,9 @@ extern "C"
     /** @brief Name of type within R.
      *
      * Translate a ::SEXPTYPE to the name by which it is known within R.
+     *
      * @param st The ::SEXPTYPE whose name is required.
+     *
      * @return The ::SEXPTYPE's name within R.
      */
     const char *Rf_type2char(SEXPTYPE st);
@@ -917,10 +938,13 @@ extern "C"
      *          be subsequently altered externally.
      *
      * @note Unlike CR, \a v isn't simply plugged into the attributes
-     * field of \x : refer to the documentation for \c
+     * field of \a x : refer to the documentation for \c
      * RObject::setAttributes() .  In particular, do not attempt to
      * modify the attributes by changing \a v \e after SET_ATTRIB
      * has been called.
+     *
+     * @note For compatibility with CR, garbage collection is
+     * inhibited within this function.
      */
     void SET_ATTRIB(SEXP x, SEXP v);
 
@@ -928,7 +952,9 @@ extern "C"
      *
      * @param x Pointer to CXXR::RObject.  The function does nothing
      *          if \a x is a null pointer.
+     *
      * @param v Refer to 'R Internals' document.
+     *
      * @deprecated Ought to be private.
      */
     void SET_NAMED(SEXP x, int v);
@@ -986,7 +1012,16 @@ extern "C"
     Rboolean Rf_isExpression(SEXP s);
     Rboolean Rf_isEnvironment(SEXP s);
     Rboolean Rf_isString(SEXP s);
+
+    /** @brief Is this an object of RAWSXP type?
+     *
+     * @param x Pointer to CXXR::RObject.
+     *
+     * @return true iff \a x is of RAWSXP type.  Returns false if \a x
+     * is 0.
+     */
     Rboolean Rf_isRaw(SEXP s);
+
     int ALTREP(SEXP x);
     int IS_SCALAR(SEXP x, SEXPTYPE type);
     void SHALLOW_DUPLICATE_ATTRIB(SEXP to, SEXP from);

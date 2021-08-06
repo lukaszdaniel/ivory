@@ -72,9 +72,8 @@ namespace CXXR
         m_environment = env ? env : Environment::global();
     }
 
-    Closure *Closure::clone(bool deep) const
+    Closure *Closure::clone(Duplicate deep) const
     {
-        // return GCNode::expose(new Closure(*this, deep));
         return new Closure(*this, deep);
     }
 

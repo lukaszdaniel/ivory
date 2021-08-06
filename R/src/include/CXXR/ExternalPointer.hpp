@@ -147,9 +147,6 @@ namespace CXXR
             m_tag.retarget(this, tag);
         }
 
-        // Virtual function of RObject:
-        const char *typeName() const override;
-
         /** @brief The name by which this type is known in R.
          *
          * @return the name by which this type is known in R.
@@ -176,6 +173,9 @@ namespace CXXR
         {
             return m_tag;
         }
+
+        // Virtual function of RObject:
+        const char *typeName() const override;
 
         // Virtual function of GCNode:
         void visitReferents(const_visitor *v) const override;
