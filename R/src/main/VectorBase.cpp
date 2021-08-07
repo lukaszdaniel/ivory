@@ -95,11 +95,54 @@ namespace CXXR
         return static_cast<const StringVector *>(getAttribute(NamesSymbol));
     }
 
+    PairList *VectorBase::resizeAttributes(const PairList *attributes,
+                                           size_type new_size)
+    {
+        GCStackRoot<PairList> ans(PairList::construct(nullptr)); // dummy first link
+        PairList *op = ans;
+        for (const PairList *ip = attributes; ip; ip = ip->tail())
+        {
+            const RObject *tag = ip->tag();
+            RObject *value = ip->car();
+
+            if (tag == NamesSymbol)
+            {
+                StringVector *names = SEXP_downcast<StringVector *>(value);
+                size_type old_size = names->size();
+                names = VectorBase::resize(names, new_size);
+                // resize() pads with NA, but we want blank strings instead.
+                for (size_type i = old_size; i < new_size; i++)
+                    (*names)[i] = SEXP_downcast<String *>(CachedString::blank());
+                value = names;
+            }
+            if (tag != DimSymbol && tag != DimNamesSymbol)
+            {
+                op->setTail(PairList::construct(value, nullptr, tag));
+                op = op->tail();
+            }
+        }
+        return ans->tail();
+    }
+
     // TODO: Ensure that names(dims(x)) and names(dimnames(x)) always match
     //   when dims(x) and dimnames(x) are both defined.
     void VectorBase::setDimensionNames(ListVector *names)
     {
         setAttribute(DimNamesSymbol, names);
+    }
+
+    void VectorBase::setDimensionNames(unsigned int d, StringVector *names)
+    {
+        size_t ndims = dimensions()->size();
+        if (d == 0 || d > ndims)
+            Rf_error(_("Attempt to associate dimnames with a non-existent dimension"));
+        ListVector *lv = SEXP_downcast<ListVector *>(getAttribute(DimNamesSymbol));
+        if (!lv)
+        {
+            lv = ListVector::create(ndims);
+            setAttribute(DimNamesSymbol, lv);
+        }
+        (*lv)[d - 1] = names;
     }
 
     void VectorBase::setDimensions(IntVector *dims)
@@ -120,6 +163,11 @@ namespace CXXR
         //     return;
         // }
         m_size = new_size;
+    }
+
+    void VectorBase::decreaseSizeInPlace(size_type)
+    {
+        Rf_error(_("this object cannot be resized"));
     }
 
     // The error messages here match those used by CR (as of 3.0.2),

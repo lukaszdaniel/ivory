@@ -138,6 +138,50 @@ namespace CXXR
      */
     const StringVector *names() const;
 
+    /** @brief Create an extended or shrunken copy of an R vector.
+     *
+     * @tparam V A type inheriting from VectorBase.
+     *
+     * @param pattern Non-null pointer to the vector to be copied.
+     *
+     * @param new_size Required size of the copy, which may be
+     *          smaller than, equal to or larger than the current
+     *          size.  Zero is permissible.
+     *
+     * @return Pointer to the copied vector.  If \a new_size is
+     * smaller than the size of \a pattern , supernumerary
+     * elements at the end of \a pattern are not included in the
+     * copy.  If \a new_size is greater than the size of \a
+     * pattern, extra elements are appended to the result and set
+     * to the NA value of \a V::value_type .  If \a pattern has a
+     * <tt>names</tt> attribute, then the result is given a
+     * <tt>names</tt> attribute obtained by recursively applying
+     * this resize() function to the names of \a pattern .  Other
+     * attributes are copied across by calling
+     * copyAttributesOnResize().
+     */
+    template <class V>
+    static V *resize(const V *pattern, size_type new_size);
+
+    /** @brief Adjust attributes for a resized vector.
+     *
+     * When a vector is resized (either by VectorBase::resize() or
+     * VectorBase::setSize() ), this function is used to determine
+     * the attributes of the resized vector.  'dim' and 'dimnames'
+     * attributes are discarded, and any 'names' attribute is
+     * itself resized.  Other attributes are carried across
+     * unchanged.
+     *
+     * @param attributes Pointer, possibly null, to the attribute
+     *          list of the original vector.
+     *
+     * @param new_size Size of the resized vector.
+     *
+     * @return attribute list (possibly null) for the resized
+     * vector.
+     */
+    static PairList *resizeAttributes(const PairList *attributes, size_type new_size);
+
     /** @brief Associate names with the rows, columns or other
      *  dimensions of an R matrix or array.
      *
@@ -160,6 +204,26 @@ namespace CXXR
      *          must not subsequently modify it.
      */
     void setDimensionNames(ListVector *names);
+
+    /** @brief Associate names with a particular dimension of an
+     *  R matrix or array.
+     *
+     * @param d Dimension number (counting from 1) with which
+     *          dimension names are to be associated.  Must not be
+     *          greater than the * number of dimensions of \a
+     *          *this (checked).
+     *
+     * @param names If this is a null pointer, any names currently
+     *          associated with dimension \a d of \a *this are
+     *          removed.  Otherwise \a names must be a pointer to
+     *          a StringVector with as many elements as the size
+     *          of \a *this along the corresponding dimension,
+     *          giving the names to be given to the 'slices' along
+     *          that dimension.  \a *this will assume ownership of
+     *          this StringVector (rather than duplicating it), so
+     *          the calling code must not subsequently modify it.
+     */
+    void setDimensionNames(unsigned int d, StringVector *names);
 
     /** @brief Define the dimensions of R matrix or array.
      *
@@ -199,6 +263,17 @@ namespace CXXR
      *          not be greater than the current size. 
      */
     void resize(size_type new_size);
+
+    /** @brief Adjust the number of elements in the vector.
+     *
+     * The default implementation is simply to raise an error.
+     *
+     * @param new_size New size required.  Zero is permissible.
+     *          If the size is increased, the extra elements will
+     *          be initialized with <tt>NA<T>()</tt>, where \a T
+     *          is the element type.
+     */
+    virtual void decreaseSizeInPlace(size_type new_size);
 
     /** @brief Number of elements in the vector.
      *
@@ -284,6 +359,19 @@ namespace CXXR
   protected:
     ~VectorBase() {}
 
+    /** @brief Adjust the number of elements in the vector.
+     *
+     * Used by derived classes to modify the recorded size of the
+     * vector, and to adjust its attributes accordingly.
+     *
+     * @param new_size New size required.
+     */
+    void adjustSize(size_type new_size)
+    {
+      m_size = new_size;
+      setAttributes(resizeAttributes(attributes(), new_size));
+    }
+
     /** @brief Raise error on attempt to allocate overlarge vector.
      *
      * @param bytes Size of data block for which allocation failed.
@@ -295,6 +383,29 @@ namespace CXXR
     size_type m_truelength;
     bool m_growable;
   };
+
+  template <class V>
+  V *VectorBase::resize(const V *pattern, size_type new_size)
+  {
+    GCStackRoot<V> ans(V::create(new_size));
+#if CXXR_TRUE
+    std::cerr << "Copying of values not yet implemented" << std::endl;
+    abort();
+#else
+    size_type copysz = std::min(pattern->size(), new_size);
+    for (size_type i = 0; i < copysz; i++)
+    {
+      (*ans)[i] = ElementTraits::duplicate_element((*pattern)[i]);
+    }
+    for (size_type i = copysz; i < new_size; i++)
+    {
+      (*ans)[i] = ElementTraits::duplicate_element(NA<typename V::value_type>());
+    }
+#endif
+    ans->setAttributes(resizeAttributes(pattern->attributes(), new_size));
+    ans->setS4Object(pattern->isS4Object());
+    return ans;
+  }
 
 /* Vector Access Macros */
 #ifdef LONG_VECTOR_SUPPORT

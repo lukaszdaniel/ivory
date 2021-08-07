@@ -43,7 +43,10 @@ namespace CXXR
      * vector, and is intended particularly for the case where the
      * size of the vector is fixed when it is constructed.
      *
-     * R implements all of CR's built-in vector types using this
+     * Having said that, the template \e does implement decreaseSizeInPlace(),
+     * primarily to service CR code's occasional use of SETLENGTH().
+     *
+     * CXXR implements all of CR's built-in vector types using this
      * template.
      *
      * @tparam T The type of the elements of the vector.
@@ -68,6 +71,51 @@ namespace CXXR
          * @param allocator Custom allocator.
          */
         static FixedVector *create(size_type sz, R_allocator_t *allocator = nullptr);
+
+        /** @brief Create a vector from a range.
+         *
+         * @tparam An iterator type, at least a forward iterator.
+         *
+         * @param from Iterator designating the start of the range
+         *          from which the FixedVector is to be constructed.
+         *
+         * @param to Iterator designating 'one past the end' of the
+         *          range from which the FixedVector is to be
+         *          constructed.
+         */
+        template <typename FwdIter>
+        static FixedVector *create(FwdIter from, FwdIter to)
+        {
+            FixedVector *result = create(std::distance(from, to));
+            iterator out = result->begin();
+            for (FwdIter in = from; in != to; ++in, ++out)
+            {
+                *out = ElementTraits::duplicate_element(*in);
+            }
+            return result;
+        }
+
+        /** @brief Create a vector from an initializer list.
+         *
+         * @param An initializer list containing the values to store in the
+         *          FixedVector.
+         */
+        static FixedVector *create(std::initializer_list<T> items)
+        {
+            return create(items.begin(), items.end());
+        }
+
+        /** @brief Create a vector containing a single value.
+         *
+         * @param value The value to store in the vector.
+         */
+        template <typename U>
+        static FixedVector *createScalar(const U &value)
+        {
+            FixedVector *result = create(1);
+            (*result)[0] = value;
+            return result;
+        }
 
         /** @brief Element access.
          *
@@ -142,9 +190,15 @@ namespace CXXR
          */
         static const char *staticTypeName();
 
+        // Virtual functions of VectorBase:
+        void decreaseSizeInPlace(size_type new_size) override;
+
         // Virtual functions of RObject:
         FixedVector<T, ST> *clone(Duplicate deep) const override;
         const char *typeName() const override;
+
+        // Virtual function of GCNode:
+        void visitReferents(const_visitor *v) const override;
 
     protected:
         /**
@@ -229,6 +283,34 @@ namespace CXXR
         // If there is more than one element, this function is used to
         // allocate the required memory block from CXXR::MemoryBank :
         void allocData(size_type sz, bool initialize = false, R_allocator_t *allocator = nullptr);
+
+        static void constructElements(iterator from, iterator to);
+        static void constructElementsIfNeeded(iterator from, iterator to)
+        {
+            // This is essential for e.g. GCEdges, otherwise they
+            // may contain junk pointers.
+            if (ElementTraits::MustConstruct<T>::value) // compile-time constant
+                constructElements(from, to);
+        }
+        void constructElementsIfNeeded()
+        {
+            constructElementsIfNeeded(begin(), end());
+        }
+
+        void destructElementsIfNeeded(iterator from, iterator to)
+        {
+            if (ElementTraits::MustDestruct<T>::value) // compile-time constant
+                destructElements(from, to);
+        }
+        void destructElementsIfNeeded()
+        {
+            destructElementsIfNeeded(begin(), end());
+        }
+        void destructElements(iterator from, iterator to);
+
+        // Helper functions for visitReferents():
+        void visitElements(const_visitor *v, std::true_type) const;
+        void visitElements(const_visitor *v, std::false_type) const {}
     };
 
     template <typename T, SEXPTYPE ST>
@@ -236,6 +318,7 @@ namespace CXXR
         : VectorBase(pattern, deep), m_data(&m_singleton),
           m_singleton(pattern.m_singleton)
     {
+#if CXXR_TRUE
         size_type sz = size();
 #ifdef R_MEMORY_PROFILING
         MemoryBank::R_ReportAllocation(convert2VEC<T>(sz) * sizeof(VECREC));
@@ -245,6 +328,17 @@ namespace CXXR
             allocData(sz);
             memcpy(m_data, pattern.m_data, sizeof(T) * sz);
         }
+#else
+        constructElementsIfNeeded();
+
+        const_iterator to = pattern.end();
+        iterator out = begin();
+        for (const_iterator in = pattern.begin(); in != to; ++in)
+        {
+            *out = ElementTraits::duplicate_element(*in);
+            ++out;
+        }
+#endif
     }
 
     template <typename T, SEXPTYPE ST>
@@ -286,11 +380,56 @@ namespace CXXR
     }
 
     template <typename T, SEXPTYPE ST>
+    void FixedVector<T, ST>::constructElements(iterator from, iterator to)
+    {
+        for (iterator p = from; p != to; ++p)
+            new (p) T;
+    }
+
+    template <typename T, SEXPTYPE ST>
+    void FixedVector<T, ST>::destructElements(iterator from, iterator to)
+    {
+        for (iterator p = from; p != to; ++p)
+            p->~T();
+    }
+
+    template <typename T, SEXPTYPE ST>
+    void FixedVector<T, ST>::decreaseSizeInPlace(size_type new_size)
+    {
+        if (new_size > size())
+        {
+            Rf_error("Increasing vector length in place not allowed.");
+        }
+        size_t bytes = (size() - new_size) * sizeof(T);
+        MemoryBank::adjustBytesAllocated(-bytes);
+
+        destructElementsIfNeeded(begin() + new_size, end());
+        adjustSize(new_size);
+    }
+
+    template <typename T, SEXPTYPE ST>
     const char *FixedVector<T, ST>::typeName() const
     {
         return FixedVector<T, ST>::staticTypeName();
     }
 
+    template <typename T, SEXPTYPE ST>
+    void FixedVector<T, ST>::visitElements(
+        const_visitor *v, std::true_type) const
+    {
+        std::for_each(begin(), end(), [=](GCNode *n)
+                      {
+                          if (n)
+                              (*v)(n);
+                      });
+    }
+
+    template <typename T, SEXPTYPE ST>
+    void FixedVector<T, ST>::visitReferents(const_visitor *v) const
+    {
+        visitElements(v, typename ElementTraits::IsGCEdge<T>());
+        VectorBase::visitReferents(v);
+    }
 } // namespace CXXR
 
 extern "C"
