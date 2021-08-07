@@ -87,23 +87,28 @@ namespace CXXR
         static UncachedString *obtain(const std::string &str, cetype_t encoding = CE_NATIVE);
 
         /** @brief Character access.
-		 * @param index Index of required character (counting from
-		 *          zero).  No bounds checking is applied.
-		 * @return Reference to the specified character.
-		 */
-        char &operator[](R_xlen_t index)
+         *
+         * @param index Index of required character (counting from
+         *          zero).  No bounds checking is applied.
+         *
+         * @return Reference to the specified character.
+         */
+        char &operator[](size_type index)
         {
             invalidateHash();
             return m_data[index];
         }
 
         /** @brief Read-only character access.
-		 * @param index Index of required character (counting from
-		 *          zero).  No bounds checking is applied.
-		 * @return the specified character.
-		 * @note For CXXR internal use only.
-		 */
-        char operator[](R_xlen_t index) const
+         *
+         * @param index Index of required character (counting from
+         *          zero).  No bounds checking is applied.
+         *
+         * @return the specified character.
+         *
+         * @note For CXXR internal use only.
+         */
+        char operator[](size_type index) const
         {
             return m_data[index];
         }
@@ -151,9 +156,9 @@ namespace CXXR
 
     private:
         // Max. strlen stored internally:
-        static const R_xlen_t s_short_strlen = 7;
+        static const size_type s_short_strlen = 7;
 
-        R_xlen_t m_databytes; // includes trailing null byte
+        size_type m_databytes; // includes trailing null byte
         char *m_data;         // pointer to the string's data block.
 
         // If there are fewer than s_short_strlen+1 chars in the

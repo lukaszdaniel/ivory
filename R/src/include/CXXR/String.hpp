@@ -107,7 +107,7 @@ namespace CXXR
 		 *
 		 * @note For CXXR internal use only.
 		 */
-		char operator[](R_xlen_t index) const
+		char operator[](size_type index) const
 		{
 			return m_data[index];
 		}

@@ -58,7 +58,7 @@ namespace CXXR
          * @param sz Number of elements required.  Zero is
          *          permissible.
          */
-        explicit ListVector(R_xlen_t sz)
+        explicit ListVector(size_type sz)
             : HandleVector<RObject, VECSXP>(sz)
         {
         }

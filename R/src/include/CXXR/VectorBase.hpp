@@ -59,7 +59,7 @@ namespace CXXR
      *
      * @param sz The required number of elements in the vector.
      */
-    VectorBase(SEXPTYPE stype, R_xlen_t sz)
+    VectorBase(SEXPTYPE stype, size_type sz)
         : RObject(stype), m_size(sz), m_truelength(0), m_growable(false)
     {
       if (sz > R_XLEN_T_MAX)
@@ -198,18 +198,18 @@ namespace CXXR
      *          but (as presently implemented) the new size must
      *          not be greater than the current size. 
      */
-    void resize(R_xlen_t new_size);
+    void resize(size_type new_size);
 
     /** @brief Number of elements in the vector.
      *
      * @return The number of elements in the vector.
      */
-    R_xlen_t size() const
+    size_type size() const
     {
       return m_size;
     }
 
-    R_xlen_t truelength() const
+    size_type truelength() const
     {
       return m_truelength;
     }
@@ -242,19 +242,19 @@ namespace CXXR
 
     static int *chkzln(RObject *x);
 
-    static inline R_xlen_t stdvec_length(RObject *x)
+    static inline size_type stdvec_length(RObject *x)
     {
       VectorBase *vb = dynamic_cast<VectorBase *>(x);
       return vb ? vb->size() : 0;
     }
 
-    static inline R_xlen_t stdvec_truelength(RObject *x)
+    static inline size_type stdvec_truelength(RObject *x)
     {
       VectorBase *vb = dynamic_cast<VectorBase *>(x);
       return vb ? vb->truelength() : 0;
     }
 
-    static inline void set_stdvec_truelength(RObject *x, R_xlen_t v)
+    static inline void set_stdvec_truelength(RObject *x, size_type v)
     {
       VectorBase *vb = dynamic_cast<VectorBase *>(x);
       if (!vb)
@@ -262,7 +262,7 @@ namespace CXXR
       vb->m_truelength = v;
     }
 
-    static inline void set_stdvec_length(RObject *x, R_xlen_t v)
+    static inline void set_stdvec_length(RObject *x, size_type v)
     {
       VectorBase *vb = dynamic_cast<VectorBase *>(x);
       if (!vb)
@@ -271,7 +271,7 @@ namespace CXXR
       x->setScalar(v == 1);
     }
 
-    static inline void set_truelength(RObject *x, R_xlen_t v)
+    static inline void set_truelength(RObject *x, size_type v)
     {
       if (x && x->altrep())
         Rf_error(_("can't set ALTREP truelength"));
@@ -288,8 +288,8 @@ namespace CXXR
     static void tooBig(std::size_t bytes);
 
   private:
-    R_xlen_t m_size;
-    R_xlen_t m_truelength;
+    size_type m_size;
+    size_type m_truelength;
     bool m_growable;
   };
 

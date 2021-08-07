@@ -77,7 +77,7 @@ namespace CXXR
          *
          * @param allocator Custom allocator.
          */
-        FixedVector(R_xlen_t sz, R_allocator_t *allocator = nullptr)
+        FixedVector(size_type sz, R_allocator_t *allocator = nullptr)
             : VectorBase(ST, sz), m_data(&m_singleton), m_allocator(allocator)
         {
 #ifdef R_MEMORY_PROFILING
@@ -98,7 +98,7 @@ namespace CXXR
          *
          * @param allocator Custom allocator.
          */
-        FixedVector(R_xlen_t sz, const T &initializer, R_allocator_t *allocator = nullptr)
+        FixedVector(size_type sz, const T &initializer, R_allocator_t *allocator = nullptr)
             : VectorBase(ST, sz), m_data(&m_singleton),
               m_singleton(initializer), m_allocator(allocator)
         {
@@ -124,7 +124,7 @@ namespace CXXR
          *
          * @return Reference to the specified element.
          */
-        T &operator[](R_xlen_t index)
+        T &operator[](size_type index)
         {
             return m_data[index];
         }
@@ -136,7 +136,7 @@ namespace CXXR
          *
          * @return \c const reference to the specified element.
          */
-        const T &operator[](R_xlen_t index) const
+        const T &operator[](size_type index) const
         {
             return m_data[index];
         }
@@ -229,7 +229,7 @@ namespace CXXR
 
         // If there is more than one element, this function is used to
         // allocate the required memory block from CXXR::MemoryBank :
-        void allocData(R_xlen_t sz, bool initialize = false, R_allocator_t *allocator = nullptr);
+        void allocData(size_type sz, bool initialize = false, R_allocator_t *allocator = nullptr);
     };
 
     template <typename T, SEXPTYPE ST>
@@ -237,7 +237,7 @@ namespace CXXR
         : VectorBase(pattern, deep), m_data(&m_singleton),
           m_singleton(pattern.m_singleton)
     {
-        R_xlen_t sz = size();
+        size_type sz = size();
 #ifdef R_MEMORY_PROFILING
         MemoryBank::R_ReportAllocation(convert2VEC<T>(sz) * sizeof(VECREC));
 #endif
@@ -249,11 +249,11 @@ namespace CXXR
     }
 
     template <typename T, SEXPTYPE ST>
-    void FixedVector<T, ST>::allocData(R_xlen_t sz, bool initialize, R_allocator_t *allocator)
+    void FixedVector<T, ST>::allocData(size_type sz, bool initialize, R_allocator_t *allocator)
     {
-        R_xlen_t bytes = sz * sizeof(T);
+        size_type bytes = sz * sizeof(T);
         // Check for integer overflow:
-        if (R_xlen_t(bytes / sizeof(T)) != sz)
+        if (size_type(bytes / sizeof(T)) != sz)
             Rf_error(_("Request to create impossibly large vector."));
         GCStackRoot<> thisroot(this);
         try
@@ -269,7 +269,7 @@ namespace CXXR
         }
         if (initialize)
         {
-            for (R_xlen_t i = 0; i < sz; ++i)
+            for (size_type i = 0; i < sz; ++i)
                 m_data[i] = m_singleton;
         }
     }
@@ -283,7 +283,6 @@ namespace CXXR
     template <typename T, SEXPTYPE ST>
     FixedVector<T, ST> *FixedVector<T, ST>::clone(Duplicate deep) const
     {
-        // return GCNode::expose(new FixedVector<T, ST>(*this, deep));
         return new FixedVector<T, ST>(*this, deep);
     }
 

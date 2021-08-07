@@ -53,6 +53,10 @@ namespace CXXR
     class HandleVector : public VectorBase
     {
     public:
+        typedef T value_type;
+        typedef T *iterator;
+        typedef const T *const_iterator;
+
         /** @brief Proxy object for an element of an HandleVector<T, ST>.
          *
          * Objects of this class are used to allow the elements of an
@@ -107,7 +111,7 @@ namespace CXXR
             HandleVector<T, ST> *m_ev;
             typename std::vector<Handle<T>, Allocator<Handle<T>>>::iterator m_it;
 
-            ElementProxy(HandleVector<T, ST> *ev, R_xlen_t index)
+            ElementProxy(HandleVector<T, ST> *ev, size_type index)
                 : m_ev(ev), m_it(m_ev->m_data.begin() + index)
             {
             }
@@ -125,7 +129,7 @@ namespace CXXR
          * @param sz Number of elements required.  Zero is
          *          permissible.
          */
-        static HandleVector *create(R_xlen_t sz);
+        static HandleVector *create(size_type sz);
 
         /** @brief Create a vector.
          *
@@ -137,7 +141,7 @@ namespace CXXR
          * @param init Initial value for the destination of each
          *          \a T* in the HandleVector.
          */
-        explicit HandleVector(R_xlen_t sz, T *init = nullptr);
+        explicit HandleVector(size_type sz, T *init = nullptr);
 
         /** @brief Copy constructor.
          *
@@ -152,11 +156,11 @@ namespace CXXR
         HandleVector(const HandleVector<T, ST> &pattern, Duplicate deep)
             : VectorBase(pattern, deep), m_data(pattern.size())
         {
-            R_xlen_t sz = size();
+            size_type sz = size();
 #ifdef R_MEMORY_PROFILING
             MemoryBank::R_ReportAllocation(convert2VEC<T>(sz) * sizeof(VECREC));
 #endif
-            for (R_xlen_t i = 0; i < sz; ++i)
+            for (size_type i = 0; i < sz; ++i)
             {
                 (m_data[i]).clone(pattern.m_data[i], deep);
             }
@@ -179,7 +183,7 @@ namespace CXXR
         HandleVector(const HandleVector<T, ST> &pattern, Duplicate deep, int dummy)
             : VectorBase(pattern, deep), m_data(pattern.size())
         {
-            R_xlen_t sz = size();
+            size_type sz = size();
 #ifdef R_MEMORY_PROFILING
             MemoryBank::R_ReportAllocation(convert2VEC<T>(sz) * sizeof(VECREC));
 #endif
@@ -194,7 +198,7 @@ namespace CXXR
          * @return Proxy for the specified element, via which the
          *         element can be examined or modified.
          */
-        ElementProxy operator[](R_xlen_t index)
+        ElementProxy operator[](size_type index)
         {
             return ElementProxy(this, index);
         }
@@ -206,7 +210,7 @@ namespace CXXR
          *
          * @return the specified element.
          */
-        const T *operator[](R_xlen_t index) const
+        const T *operator[](size_type index) const
         {
             return m_data[index];
         }
@@ -275,10 +279,10 @@ namespace CXXR
     }
 
     template <typename T, SEXPTYPE ST>
-    HandleVector<T, ST>::HandleVector(R_xlen_t sz, T *init)
+    HandleVector<T, ST>::HandleVector(size_type sz, T *init)
         : VectorBase(ST, sz), m_data(sz)
     {
-        if (sz > R_xlen_t(R_SIZE_T_MAX / sizeof(RObject *)))
+        if (sz > size_type(R_SIZE_T_MAX / sizeof(RObject *)))
             Rf_error(_("cannot allocate vector of length %d"), sz);
 #ifdef R_MEMORY_PROFILING
         MemoryBank::R_ReportAllocation(convert2VEC<T>(sz) * sizeof(VECREC));
@@ -301,7 +305,7 @@ namespace CXXR
     void HandleVector<T, ST>::visitReferents(const_visitor *v) const
     {
         VectorBase::visitReferents(v);
-        for (R_xlen_t i = 0; i < size(); ++i)
+        for (size_type i = 0; i < size(); ++i)
         {
             const T *ptr = (*this)[i];
             if (ptr)

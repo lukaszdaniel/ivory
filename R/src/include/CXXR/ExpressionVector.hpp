@@ -67,7 +67,7 @@ namespace CXXR
          *
          * @param sz Number of elements required.  Zero is permissible.
          */
-        explicit ExpressionVector(R_xlen_t sz)
+        explicit ExpressionVector(size_type sz)
             : HandleVector<RObject, EXPRSXP>(sz)
         {
         }
@@ -160,7 +160,7 @@ extern "C"
      *
      * @param i Index of the required element.  There is no bounds checking.
      *
-     * @return The value of the \a i 'th element.
+     * @return Pointer to extracted \a i 'th element.
      */
     SEXP XVECTOR_ELT(SEXP x, R_xlen_t i);
 } // extern "C"
