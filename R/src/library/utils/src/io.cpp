@@ -732,7 +732,7 @@ SEXP typeconvert(SEXP call, SEXP op, SEXP args, SEXP env)
 		/* CR avoided an allocation by reusing dup,
 	     * a LGLSXP of the right length.  CXXR doesn't!
 	     */
-		GCStackRoot<IntVector> rvalr(new IntVector(LENGTH(dup)), true);
+		GCStackRoot<IntVector> rvalr(IntVector::create(LENGTH(dup)));
 		rval = rvalr;
 
 		/* put the levels in lexicographic order */

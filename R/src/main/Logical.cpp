@@ -35,15 +35,15 @@ namespace CXXR
 
     void Logical::initialize()
     {
-        static GCRoot<LogicalVector> trueValue(GCNode::expose(new LogicalVector(1)));
+        static GCRoot<LogicalVector> trueValue(LogicalVector::create(1));
         (*trueValue)[0] = true;
         MARK_NOT_MUTABLE(trueValue.get());
 
-        static GCRoot<LogicalVector> falseValue(GCNode::expose(new LogicalVector(1)));
+        static GCRoot<LogicalVector> falseValue(LogicalVector::create(1));
         (*falseValue)[0] = false;
         MARK_NOT_MUTABLE(falseValue.get());
 
-        static GCRoot<LogicalVector> naValue(GCNode::expose(new LogicalVector(1)));
+        static GCRoot<LogicalVector> naValue(LogicalVector::create(1));
         (*naValue)[0] = NA();
         MARK_NOT_MUTABLE(naValue.get());
 

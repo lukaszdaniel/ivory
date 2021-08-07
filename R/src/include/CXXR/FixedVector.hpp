@@ -69,54 +69,6 @@ namespace CXXR
          */
         static FixedVector *create(size_type sz, R_allocator_t *allocator = nullptr);
 
-        /** @brief Create a vector, leaving its contents
-         *         uninitialized.
-         *
-         * @param sz Number of elements required.  Zero is
-         *          permissible.
-         *
-         * @param allocator Custom allocator.
-         */
-        FixedVector(size_type sz, R_allocator_t *allocator = nullptr)
-            : VectorBase(ST, sz), m_data(&m_singleton), m_allocator(allocator)
-        {
-#ifdef R_MEMORY_PROFILING
-            MemoryBank::R_ReportAllocation(convert2VEC<T>(sz) * sizeof(VECREC));
-#endif
-            if (sz > 1)
-                allocData(sz, allocator);
-        }
-
-        /** @brief Create a vector, and fill with a specified initial
-         *         value.
-         *
-         * @param sz Number of elements required.  Zero is
-         *          permissible.
-         *
-         * @param initializer Initial value to be assigned to every
-         *          element.
-         *
-         * @param allocator Custom allocator.
-         */
-        FixedVector(size_type sz, const T &initializer, R_allocator_t *allocator = nullptr)
-            : VectorBase(ST, sz), m_data(&m_singleton),
-              m_singleton(initializer), m_allocator(allocator)
-        {
-#ifdef R_MEMORY_PROFILING
-            MemoryBank::R_ReportAllocation(convert2VEC<T>(sz) * sizeof(VECREC));
-#endif
-            if (sz > 1)
-                allocData(sz, true, allocator);
-        }
-
-        /** @brief Copy constructor.
-         *
-         * @param pattern FixedVector to be copied.
-         *
-         * @param deep Indicator whether to perform deep or shallow copy.
-         */
-        FixedVector(const FixedVector<T, ST> &pattern, Duplicate deep);
-
         /** @brief Element access.
          *
          * @param index Index of required element (counting from
@@ -223,9 +175,56 @@ namespace CXXR
         T m_singleton;
         bool m_allocator; // indicator whether external allocator was used
 
-        // Not implemented yet.  Declared to prevent
-        // compiler-generated versions:
-        FixedVector &operator=(const FixedVector &);
+        /** @brief Create a vector, leaving its contents
+         *         uninitialized (for POD types) or default
+         *         constructed.
+         *
+         * @param sz Number of elements required.  Zero is
+         *          permissible.
+         *
+         * @param allocator Custom allocator.
+         */
+        FixedVector(size_type sz, R_allocator_t *allocator = nullptr)
+            : VectorBase(ST, sz), m_data(&m_singleton), m_allocator(allocator)
+        {
+#ifdef R_MEMORY_PROFILING
+            MemoryBank::R_ReportAllocation(convert2VEC<T>(sz) * sizeof(VECREC));
+#endif
+            if (sz > 1)
+                allocData(sz, allocator);
+        }
+
+        /** @brief Create a vector, and fill with a specified initial
+         *         value.
+         *
+         * @param sz Number of elements required.  Zero is
+         *          permissible.
+         *
+         * @param initializer Initial value to be assigned to every
+         *          element.
+         *
+         * @param allocator Custom allocator.
+         */
+        FixedVector(size_type sz, const T &initializer, R_allocator_t *allocator = nullptr)
+            : VectorBase(ST, sz), m_data(&m_singleton),
+              m_singleton(initializer), m_allocator(allocator)
+        {
+#ifdef R_MEMORY_PROFILING
+            MemoryBank::R_ReportAllocation(convert2VEC<T>(sz) * sizeof(VECREC));
+#endif
+            if (sz > 1)
+                allocData(sz, true, allocator);
+        }
+
+        /** @brief Copy constructor.
+         *
+         * @param pattern FixedVector to be copied.
+         *
+         * @param deep Indicator whether to perform deep or shallow copy.
+         */
+        FixedVector(const FixedVector<T, ST> &pattern, Duplicate deep);
+
+        FixedVector &operator=(const FixedVector &) = delete;
 
         // If there is more than one element, this function is used to
         // allocate the required memory block from CXXR::MemoryBank :
