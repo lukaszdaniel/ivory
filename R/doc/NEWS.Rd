@@ -87,6 +87,10 @@
       \item \command{R CMD check} now reports byte-compilation errors
       during installation.  These are not usually fatal but may result
       in parts of the package not being byte-compiled.
+
+      \item \env{_R_DEPENDS_ONLY_} can be applied selectively to
+      examples, tests and/or vignettes in \command{R CMD check}: see the
+      \dQuote{R Internals} manual.
     }
   }
 
@@ -142,6 +146,16 @@
 
       \item \verb{\Sexpr{ch}} now preserves \code{Encoding(ch)}. (Thanks to
       report and patch by Jeroen Ooms in \PR{18152}.)
+
+      \item \code{density(x, weights=w, na.rm=TRUE)} when \code{anyNA(x)}
+      is true, now removes weights \dQuote{in parallel} to \code{x}, fixing
+      \PR{18151}, reported by Matthias Gondan.
+      Additionally, it gets a \code{subdensity} option.
+
+      \item Conversion of \verb{\Sexpr[]{<expR>}} to LaTeX or HTML no longer
+      produces long blocks of empty lines when \code{<expR>} itself
+      contains several lines all producing empty output.  Thanks to a
+      report and patch by Ivan Krylow posted to R-devel.
     }
   }
 }

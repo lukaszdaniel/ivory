@@ -486,7 +486,7 @@ enum {
 };
 #endif
 
-#if WIN32_WINNT < 0x602 || !defined(__MINGW32__)
+#if _WIN32_WINNT < 0x602 || !defined(__MINGW32__)
 /* Available in Windows Server 2012, but also in MinGW from Windows 8.  */
 typedef struct _FILE_ID_INFO {
   ULONGLONG   VolumeSerialNumber;

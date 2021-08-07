@@ -39,7 +39,7 @@ bug.report <- function(subject = "", address,
         writeLines(gettext("  Bug reports on R and the base packages need to be submitted\n  to the tracker at <https://bugs.R-project.org/>.\n\n  We will now try to open that website in a browser"))
         flush.console()
         Sys.sleep(2)
-        browseURL("https://bugs.r-project.org/bugzilla3/index.cgi")
+        browseURL("https://bugs.r-project.org/index.cgi")
     }
 
     if (is.null(package)) return(baseR())

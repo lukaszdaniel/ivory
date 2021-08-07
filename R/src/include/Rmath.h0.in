@@ -1,6 +1,6 @@
 /* -*- C -*-
  *  Mathlib : A C Library of Special Functions
- *  Copyright (C) 1998-2020  The R Core Team
+ *  Copyright (C) 1998-2021  The R Core Team
  *  Copyright (C) 2004       The R Foundation
  *
  *  This program is free software; you can redistribute it and/or modify
@@ -563,13 +563,14 @@ double Rf_dwilcox(double, double, double, int);
 double Rf_pwilcox(double, double, double, int, int);
 double Rf_qwilcox(double, double, double, int, int);
 double Rf_rwilcox(double, double);
-
+void wilcox_free(void);
 	/* Wilcoxon Signed Rank Distribution */
 
 double Rf_dsignrank(double, double, int);
 double Rf_psignrank(double, double, int, int);
 double Rf_qsignrank(double, double, int, int);
 double Rf_rsignrank(double);
+void signrank_free(void);
 
 	/* Gamma and Related Functions */
 double	Rf_gammafn(double);

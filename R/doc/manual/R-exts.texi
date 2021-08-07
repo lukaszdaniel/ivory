@@ -4958,7 +4958,8 @@ versions of @command{pandoc} for macOS did not work on @R{}'s target of
 High Sierra (and this too was undocumented): at the time of writing both
 @samp{2.7.3} and @samp{2.14.0.1} did.  (Currently @command{pandoc} is
 only available for Intel macOS but that build works well enough on
-@cputype{arm64} machines.)
+@cputype{arm64} machines.)  Another example is the Rust compilation
+system (@command{cargo} and @command{rustc}).
 
 Usage of external commands should always be conditional on a test for
 presence (perhaps using @code{Sys.which}), as well as declared in the
@@ -4974,12 +4975,13 @@ Interpreters for scripting languages such as Perl, Python and Ruby need
 to be declared as system requirements and used conditionally: for
 example macOS 10.16 was announced not to have them (but released as
 macOS 11 with them).  Python 2 has passed end-of-life and been removed
-from some major distributions.
+from many major distributions.  Support for Rust cannot be assumed, and
+it does not even support all the @R{} platforms used by @acronym{CRAN}.
 
 Command @command{cmake} is not commonly installed, and where it is, it
 might not be on the path.  In particular, the most common location on
 macOS is @file{/Applications/CMake.app/Contents/bin/cmake} and that
-should be looked for if it is not on the path.
+should be looked for if @command{make} is not on the path.
 
 @item
 Be sure to use portable encoding names: none of @code{utf8}, @code{mac}
@@ -5343,7 +5345,8 @@ or
 @end example
 @noindent
 before @emph{any} headers.  (@code{strdup}, @code{strncasecmp} and
-@code{strnlen} are such functions.)
+@code{strnlen} are such functions --  there are several older platforms
+which do not have the POSIX 2008 function @code{strnlen}.)
 
 However, some common errors are worth pointing out here.  It can be
 helpful to look up functions at
@@ -5518,7 +5521,9 @@ strerror strlen strncmp strtol tan trunc
 @end example
 @noindent
 This problem is less common than it used to be, but in 2019
-@command{clang} did not have @code{bind} in the main namespace.
+@command{clang} did not have @code{bind} in the main namespace.  Also
+seen has been type @code{size_t} defined only in the @code{std} namespace.
+@c with g++ on Solaris 10.
 
 @item
 @c including clang as from 4.0.0
@@ -14371,9 +14376,11 @@ distributions.
 @noindent
 Entries marked with an asterisk only have @samp{p} and @samp{q}
 functions available, and none of the non-central distributions have
-@samp{r} functions.  After a call to @code{dwilcox}, @code{pwilcox} or
+@samp{r} functions.  After calls to @code{dwilcox}, @code{pwilcox} or
 @code{qwilcox} the function @code{wilcox_free()} should be called, and
-similarly for the signed rank functions.
+similarly @code{signrank_free()} for the signed rank functions.
+@findex wilcox_free
+@findex signrank_free
 
 (If remapping is suppressed, the Normal distribution names are
 @code{Rf_dnorm4}, @code{Rf_pnorm5} and @code{Rf_qnorm5}.)
