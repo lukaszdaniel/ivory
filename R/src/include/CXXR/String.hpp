@@ -229,7 +229,7 @@ namespace CXXR
 		 * @return <tt>const</tt> pointer to the string representing
 		 *         'not available'.
 		 */
-		static const String *NA()
+		static String *NA()
 		{
 			return s_na;
 		}
@@ -319,7 +319,7 @@ namespace CXXR
 		}
 
 	private:
-		static GCRoot<const String> s_na;
+		static GCRoot<String> s_na;
 		std::string m_data;
 		cetype_t m_encoding;
 		bool m_ascii;

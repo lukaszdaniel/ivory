@@ -49,7 +49,7 @@ namespace CXXR
         /** @brief Blank string.
          * @return <tt>const</tt> pointer to the string "".
          */
-        static const CachedString *blank()
+        static CachedString *blank()
         {
             return s_blank;
         }
@@ -91,7 +91,7 @@ namespace CXXR
 
     private:
         friend class Symbol;
-        static GCRoot<const CachedString> s_blank;
+        static GCRoot<CachedString> s_blank;
         // The first element of the key is the text, the second
         // element the encoding:
         typedef std::pair<std::string, cetype_t> key;
