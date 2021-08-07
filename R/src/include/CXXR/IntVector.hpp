@@ -31,6 +31,7 @@
 #ifndef INTVECTOR_HPP
 #define INTVECTOR_HPP
 
+#include <CXXR/ElementTraits.hpp>
 #include <CXXR/FixedVector.hpp>
 
 namespace CXXR

@@ -29,6 +29,7 @@
 #define CXXR_LOGICAL_HPP
 
 #include <cassert>
+#include <CXXR/ElementTraits.hpp>
 #include <CXXR/RTypes.hpp>
 #include <R_ext/Arith.h>
 

@@ -30,6 +30,7 @@
 #ifndef GCEDGE_HPP
 #define GCEDGE_HPP
 
+#include <CXXR/ElementTraits.hpp>
 #include <CXXR/GCNode.hpp>
 
 namespace CXXR

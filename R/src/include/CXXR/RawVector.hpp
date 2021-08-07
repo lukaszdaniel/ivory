@@ -31,6 +31,7 @@
 #ifndef RAWVECTOR_HPP
 #define RAWVECTOR_HPP
 
+#include <CXXR/ElementTraits.hpp>
 #include <CXXR/FixedVector.hpp>
 
 namespace CXXR

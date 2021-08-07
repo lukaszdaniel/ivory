@@ -31,6 +31,7 @@
 #ifndef CXXR_COMPLEX_VECTOR_HPP
 #define CXXR_COMPLEX_VECTOR_HPP
 
+#include <CXXR/ElementTraits.hpp>
 #include <CXXR/Logical.hpp>
 #include <R_ext/Complex.h>
 

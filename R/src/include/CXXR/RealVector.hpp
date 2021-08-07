@@ -32,6 +32,7 @@
 #define REALVECTOR_HPP
 
 #include <cmath>
+#include <CXXR/ElementTraits.hpp>
 #include <CXXR/FixedVector.hpp>
 #include <CXXR/SEXP_downcast.hpp>
 #include <CXXR/VectorBase.hpp>
