@@ -52,6 +52,18 @@ namespace CXXR
     class ListVector : public HandleVector<RObject, VECSXP>
     {
     public:
+        /** @brief Create a vector, leaving its contents
+         *         uninitialized (for POD types) or default
+         *         constructed.
+         *
+         * @param sz Number of elements required.  Zero is
+         *          permissible.
+         */
+        static ListVector *create(size_type sz)
+        {
+            return GCNode::expose(new ListVector(sz));
+        }
+
         /** @brief Create a ListVector.
          *
          * Each element will initially encapsulate a null pointer.

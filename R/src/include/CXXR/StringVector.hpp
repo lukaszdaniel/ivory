@@ -57,9 +57,21 @@ namespace CXXR
 
     /** @brief Vector of strings.
      */
-    class StringVector : public CXXR::HandleVector<String, STRSXP>
+    class StringVector : public HandleVector<String, STRSXP>
     {
     public:
+        /** @brief Create a vector, leaving its contents
+         *         uninitialized (for POD types) or default
+         *         constructed.
+         *
+         * @param sz Number of elements required.  Zero is
+         *          permissible.
+         */
+        static StringVector *create(size_type sz)
+        {
+            return GCNode::expose(new StringVector(sz));
+        }
+
         /** @brief Create a StringVector.
          *
          * @param sz Number of elements required.  Zero is

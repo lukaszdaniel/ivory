@@ -63,6 +63,18 @@ namespace CXXR
     class ExpressionVector : public HandleVector<RObject, EXPRSXP>
     {
     public:
+        /** @brief Create a vector, leaving its contents
+         *         uninitialized (for POD types) or default
+         *         constructed.
+         *
+         * @param sz Number of elements required.  Zero is
+         *          permissible.
+         */
+        static ExpressionVector *create(size_type sz)
+        {
+            return GCNode::expose(new ExpressionVector(sz));
+        }
+
         /** @brief Create an ExpressionVector.
          *
          * @param sz Number of elements required.  Zero is permissible.
