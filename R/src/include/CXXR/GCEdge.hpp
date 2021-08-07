@@ -237,6 +237,57 @@ namespace CXXR
 			static_assert(sizeof(T) >= 0, "T must be a complete type");
 		}
 	};
+
+	// Partial specializations of ElementTraits:
+	namespace ElementTraits
+	{
+		template <class T>
+		struct MustConstruct<GCEdge<T>> : boost::mpl::true_
+		{
+		};
+
+		template <class T>
+		struct MustDestruct<GCEdge<T>> : boost::mpl::true_
+		{
+		};
+
+		template <typename T>
+		struct Duplicate<GCEdge<T>>
+		{
+			T *operator()(const GCEdge<T> &value) const
+			{
+				// TODO: This always performs deep copy. Can we also have SHALLOW copy as well?
+				return value.get() ? value.get()->clone() : nullptr;
+			}
+		};
+
+		template <class T>
+		struct NAFunc<GCEdge<T>>
+		{
+			const GCEdge<T> &operator()() const
+			{
+				static GCEdge<T> na;
+				return na;
+			}
+		};
+
+		template <class T>
+		struct IsNA<GCEdge<T>>
+		{
+			bool operator()(const GCEdge<T> &t) const { return false; }
+		};
+
+		template <typename T>
+		struct IsGCEdge : public std::false_type
+		{
+		};
+
+		template <typename T>
+		struct IsGCEdge<GCEdge<T>> : public std::true_type
+		{
+		};
+
+	} // namespace ElementTraits
 } // namespace CXXR
 
 #endif // GCEDGE_HPP

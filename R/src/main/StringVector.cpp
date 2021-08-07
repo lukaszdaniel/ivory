@@ -47,6 +47,16 @@ namespace CXXR
         const auto &STRING_ELTptr = STRING_ELT;
     } // namespace ForceNonInline
 
+    namespace ElementTraits
+    {
+        GCEdge<String> NAFunc<GCEdge<String>>::makeNA()
+        {
+            GCEdge<String> na;
+            na = String::NA();
+            return na;
+        }
+    } // namespace ElementTraits
+
     StringVector *StringVector::clone(Duplicate deep) const
     {
         return new StringVector(*this, deep);

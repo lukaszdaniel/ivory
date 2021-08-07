@@ -82,6 +82,39 @@ namespace CXXR
 			return *this;
 		}
 	};
+
+	// Template specializations of ElementTraits:
+	namespace ElementTraits
+	{
+		template <>
+		struct MustConstruct<Complex> : boost::mpl::false_
+		{
+		};
+
+		template <>
+		struct MustDestruct<Complex> : boost::mpl::false_
+		{
+		};
+
+		template <>
+		inline const Complex &NAFunc<Complex>::operator()() const
+		{
+			static Complex na(NA_REAL, NA_REAL);
+			return na;
+		}
+
+		template <>
+		inline bool IsNA<Complex>::operator()(const Complex &c) const
+		{
+			return isNA(c.r) || isNA(c.i);
+		}
+
+		template <>
+		inline bool IsNaOrNaN<Complex>::operator()(const Complex &c) const
+		{
+			return isNaOrNaN(c.r) || isNaOrNaN(c.i);
+		}
+	} // namespace ElementTraits
 } // namespace CXXR
 
 #endif // CXXR_COMPLEX_VECTOR_HPP

@@ -235,6 +235,9 @@ namespace CXXR
 
     virtual void *data() = 0;
     virtual const void *data() const = 0;
+    // Virtual function of RObject, redeclared for covariant
+    // return type:
+    VectorBase *clone(Duplicate deep) const override = 0;
 
     // Virtual functions of RObject:
     unsigned int packGPBits() const override;

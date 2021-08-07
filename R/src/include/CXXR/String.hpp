@@ -353,6 +353,29 @@ namespace CXXR
 	 * empty string.
 	 */
 	bool isASCII(const std::string &str);
+
+	// Template specializations of ElementTraits:
+	namespace ElementTraits
+	{
+		template <>
+		struct NAFunc<GCEdge<String>>
+		{
+			static GCEdge<String> makeNA();
+
+			inline const GCEdge<String> &operator()() const
+			{
+				static GCEdge<String> na = makeNA();
+				return na;
+			}
+		};
+
+		template <>
+		inline bool IsNA<GCEdge<String>>::operator()(const GCEdge<String> &t) const
+		{
+			typedef GCEdge<String> T;
+			return t == NA<T>();
+		}
+	} // namespace ElementTraits
 } // namespace CXXR
 
 namespace R

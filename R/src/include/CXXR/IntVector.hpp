@@ -49,6 +49,27 @@ namespace CXXR
     {
         return static_cast<const int *>(DATAPTR_RO(x));
     }
+
+    // Template specializations of ElementTraits:
+    namespace ElementTraits
+    {
+        template <>
+        inline const int &NAFunc<int>::operator()() const
+        {
+            static int na = NA_INTEGER;
+            return na;
+        }
+
+        template <>
+        struct MustConstruct<int> : boost::mpl::false_
+        {
+        };
+
+        template <>
+        struct MustDestruct<int> : boost::mpl::false_
+        {
+        };
+    } // namespace ElementTraits
 } // namespace CXXR
 
 namespace R

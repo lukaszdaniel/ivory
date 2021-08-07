@@ -101,6 +101,34 @@ namespace CXXR
 		Logical(float prevent_implicit_int_to_Logical_conversions);
 	};
 
+	// Template specializations of ElementTraits:
+	namespace ElementTraits
+	{
+		template <>
+		struct MustConstruct<Logical> : boost::mpl::false_
+		{
+		};
+
+		template <>
+		struct MustDestruct<Logical> : boost::mpl::false_
+		{
+		};
+
+		template <>
+		inline bool IsNA<Logical>::operator()(const Logical &value) const
+		{
+			return value.isNA();
+		}
+
+		template <>
+		inline const Logical &NAFunc<Logical>::operator()() const
+		{
+			// TODO(kmillar): change NAFunc to return by value instead.
+			static Logical NA = Logical::NA();
+			return NA;
+		}
+	} // namespace ElementTraits
+
 	// Inline definitions of operators.
 	inline Logical Logical::operator!() const
 	{

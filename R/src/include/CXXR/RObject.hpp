@@ -612,8 +612,8 @@ namespace CXXR
          * This function creates a copy of this object, and returns a
          * pointer to that copy.
          *
-         * Generally this function (and the copy constructors it
-         * utilises) will attempt to create a 'deep' copy of the
+         * This function (and the copy constructors it utilises)
+         * will attempt to create a 'deep' or 'shallow' copy of the
          * object; this follows standard practice within C++, and it
          * is intended to extend this practice as CXXR development
          * continues.
@@ -623,6 +623,9 @@ namespace CXXR
          * places simply contain pointers to those subobjects, i.e. to
          * that extent the copy is 'shallow'.  This is managed using
          * the smart pointers defined by nested class RObject::Handle.
+         *
+         * @param deep Indicator whether to perform DEEP or SHALLOW
+         *          copy of the object.
          *
          * @return a pointer to a clone of this object.  Returns the original
          *          object if it cannot be cloned.
@@ -634,6 +637,19 @@ namespace CXXR
         virtual RObject *clone(Duplicate deep) const
         {
             return const_cast<RObject *>(this);
+        }
+
+        /** @brief Return pointer to a deep copy of this object.
+         *
+         * This function creates deep copy of this object, and returns a
+         * pointer to that copy.
+         *
+         * @return a pointer to a clone of this object.  Returns the original
+         *          object if it cannot be cloned.
+         */
+        RObject *clone() const
+        {
+            return clone(RObject::Duplicate::DEEP);
         }
 
         /** @brief Return a pointer to a copy of an object or the object itself
@@ -689,6 +705,20 @@ namespace CXXR
 
         virtual ~RObject();
     };
+
+	// Template specializations of ElementTraits:
+    namespace ElementTraits
+	{
+		template <typename T>
+		struct Duplicate<T *>
+		{
+			T *operator()(T *value) const
+			{
+                // TODO: This always performs deep copy. Can we also have SHALLOW copy as well?
+				return RObject::clone(value, RObject::Duplicate::DEEP);
+			}
+		};
+	} // namespace ElementTraits
 
     template <class T>
     RObject::Handle<T>::Handle(const Handle<T> &pattern, Duplicate deep) : GCEdge<T>(pattern)

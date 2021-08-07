@@ -53,6 +53,39 @@ namespace CXXR
     {
         return static_cast<const double *>(DATAPTR_RO(x));
     }
+
+    // Template specializations of ElementTraits:
+    namespace ElementTraits
+    {
+        template <>
+        struct MustConstruct<double> : boost::mpl::false_
+        {
+        };
+
+        template <>
+        struct MustDestruct<double> : boost::mpl::false_
+        {
+        };
+
+        template <>
+        inline const double &NAFunc<double>::operator()() const
+        {
+            static double na = NA_REAL;
+            return na;
+        }
+
+        template <>
+        inline bool IsNA<double>::operator()(const double &t) const
+        {
+            return R_IsNA(t);
+        }
+
+        template <>
+        inline bool IsNaOrNaN<double>::operator()(const double &t) const
+        {
+            return std::isnan(t);
+        }
+    } // namespace ElementTraits
 } // namespace CXXR
 
 namespace R

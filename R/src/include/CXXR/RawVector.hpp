@@ -49,6 +49,33 @@ namespace CXXR
     {
         return static_cast<const Rbyte *>(DATAPTR_RO(x));
     }
+
+    // Template specializations of ElementTraits:
+    namespace ElementTraits
+    {
+        template <>
+        struct MustConstruct<Rbyte> : boost::mpl::false_
+        {
+        };
+
+        template <>
+        struct MustDestruct<Rbyte> : boost::mpl::false_
+        {
+        };
+
+        template <>
+        inline const Rbyte &NAFunc<Rbyte>::operator()() const
+        {
+            static Rbyte s_na = 0;
+            return s_na;
+        }
+
+        template <>
+        inline bool IsNA<Rbyte>::operator()(const Rbyte &) const
+        {
+            return false;
+        }
+    } // namespace ElementTraits
 } // namespace CXXR
 
 namespace R
