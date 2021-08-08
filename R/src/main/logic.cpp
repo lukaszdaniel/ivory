@@ -2,6 +2,8 @@
  *  R : A Computer Language for Statistical Data Analysis
  *  Copyright (C) 1999--2018  The R Core Team.
  *  Copyright (C) 1995, 1996  Robert Gentleman and Ross Ihaka
+ *  Copyright (C) 2008-2014  Andrew R. Runnalls.
+ *  Copyright (C) 2014 and onwards the Rho Project Authors.
  *
  *  This program is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -29,6 +31,7 @@
 #include <CXXR/UnaryFunction.hpp>
 #include <CXXR/FixedVector.hpp>
 #include <CXXR/LogicalVector.hpp>
+#include <CXXR/RawVector.hpp>
 #include <CXXR/PairList.hpp>
 #include <Localization.h>
 #include <Defn.h>
@@ -37,6 +40,7 @@
 
 using namespace R;
 using namespace CXXR;
+using namespace VectorOps;
 
 /* interval at which to check interrupts, a guess */
 // constexpr R_xlen_t NINTERRUPT = 10000000;
@@ -47,6 +51,149 @@ static SEXP lbinary(SEXP, SEXP, SEXP);
 static SEXP binaryLogic(int code, SEXP s1, SEXP s2);
 static SEXP binaryLogic2(int code, SEXP s1, SEXP s2);
 
+// Functionality to support do_logic() :
+namespace
+{
+#if CXXR_FALSE
+	LogicalVector *binaryLogic(int opcode, const LogicalVector *l,
+							   const LogicalVector *r)
+	{
+		switch (opcode)
+		{
+		case 1:
+		{
+			return applyBinaryOperator(
+				[](Logical l, Logical r)
+				{ return l && r; },
+				GeneralBinaryAttributeCopier(),
+				l, r);
+		}
+		case 2:
+		{
+			return applyBinaryOperator(
+				[](Logical l, Logical r)
+				{ return l || r; },
+				GeneralBinaryAttributeCopier(),
+				l, r);
+		}
+		}
+		return nullptr; // -Wall
+	}
+
+	RawVector *bitwiseBinary(int opcode, const RawVector *l, const RawVector *r)
+	{
+		switch (opcode)
+		{
+		case 1:
+		{
+			return applyBinaryOperator(
+				[](Rbyte l, Rbyte r) -> Rbyte
+				{ return l & r; },
+				GeneralBinaryAttributeCopier(),
+				l, r);
+		}
+		case 2:
+		{
+			return applyBinaryOperator(
+				[](Rbyte l, Rbyte r) -> Rbyte
+				{ return l | r; },
+				GeneralBinaryAttributeCopier(),
+				l, r);
+		}
+		}
+		return nullptr; // -Wall
+	}
+
+	RObject *lbinary(const BuiltInFunction *op, RObject *x, RObject *y)
+	{
+
+		if (x && x->sexptype() == RAWSXP && y && y->sexptype() == RAWSXP)
+		{
+		}
+		else if (!(Rf_isNull(x) || Rf_isNumber(x)) || !(Rf_isNull(y) || Rf_isNumber(y)))
+			Rf_error(_("operations are possible only for numeric, logical or complex types"));
+
+		R_xlen_t nx = Rf_xlength(x), ny = Rf_xlength(y);
+
+		checkOperandsConformable(
+			SEXP_downcast<VectorBase *>(x), SEXP_downcast<VectorBase *>(y));
+
+		if (nx > 0 && ny > 0)
+		{
+			/* logical binary : "&" or "|" */
+			if (x && x->sexptype() == RAWSXP && y && y->sexptype() == RAWSXP)
+			{
+				// Bitwise operations:
+				RawVector *vl = SEXP_downcast<RawVector *>(x);
+				RawVector *vr = SEXP_downcast<RawVector *>(y);
+				return bitwiseBinary(op->variant(), vl, vr);
+			}
+			GCStackRoot<LogicalVector> vl;
+			GCStackRoot<LogicalVector> vr;
+			if (Rf_isNull(x))
+				vl = SEXP_downcast<LogicalVector *>(
+					Rf_allocVector(SEXPTYPE::LGLSXP, 0));
+			else // Rf_isNumeric(x)
+				vl = SEXP_downcast<LogicalVector *>(Rf_coerceVector(x, LGLSXP));
+			if (Rf_isNull(y))
+				vr = SEXP_downcast<LogicalVector *>(
+					Rf_allocVector(SEXPTYPE::LGLSXP, 0));
+			else // Rf_isNumeric(x)
+				vr = SEXP_downcast<LogicalVector *>(Rf_coerceVector(y, LGLSXP));
+			return binaryLogic(op->variant(), vl, vr);
+		}
+		else
+		{ // nx == 0 || ny == 0
+			GCStackRoot<> val(Rf_allocVector((isRaw(x) && isRaw(y)) ? RAWSXP : LGLSXP, 0));
+			GeneralBinaryAttributeCopier::copyAttributes(
+				SEXP_downcast<VectorBase *>(val.get()),
+				SEXP_downcast<VectorBase *>(x),
+				SEXP_downcast<VectorBase *>(y));
+			return val;
+		}
+	}
+
+	//lunary
+	RObject *lnot(RObject *arg)
+	{
+		if (arg && arg->sexptype() == RAWSXP)
+		{
+			// Bit inversion:
+			return applyUnaryOperator([](Rbyte x)
+									  { return Rbyte(~x); },
+									  CopyAllAttributes(),
+									  SEXP_downcast<RawVector *>(arg));
+		}
+		else if (arg && arg->sexptype() == LGLSXP)
+		{
+			// Logical negation:
+			return applyUnaryOperator(
+				[](Logical x)
+				{ return !x; },
+				CopyAllAttributes(),
+				SEXP_downcast<LogicalVector *>(arg));
+		}
+		else if (!Rf_isNumber(arg))
+		{
+			if (Rf_length(arg) == 0U) // For back-compatibility
+				return LogicalVector::create(0);
+			Rf_error(_("invalid argument type"));
+		}
+		else
+		{
+			// Logical negation:
+			GCStackRoot<LogicalVector>
+				lv(SEXP_downcast<LogicalVector *>(Rf_coerceVector(arg, LGLSXP)));
+			return applyUnaryOperator(
+				[](Logical x)
+				{ return !x; },
+				// Note: in other cases all attributes are copied.
+				CopyLayoutAttributes(),
+				lv.get());
+		}
+	}
+#endif
+} // anonymous namespace
 
 /* & | ! */
 HIDDEN SEXP do_logic(SEXP call, SEXP op, SEXP args, SEXP env)
@@ -82,10 +229,10 @@ static SEXP lbinary(SEXP call, SEXP op, SEXP args)
 	x = CAR(args),
 	y = CADR(args);
 
-    if (isRaw(x) && isRaw(y)) {
+    if (Rf_isRaw(x) && Rf_isRaw(y)) {
     }
-    else if ( !(isNull(x) || isNumber(x)) ||
-	      !(isNull(y) || isNumber(y)) )
+    else if ( !(Rf_isNull(x) || isNumber(x)) ||
+	      !(Rf_isNull(y) || isNumber(y)) )
 	errorcall(call,
 		  _("operations are possible only for numeric, logical or complex types"));
 
@@ -98,10 +245,11 @@ static SEXP lbinary(SEXP call, SEXP op, SEXP args)
 	xts = isTs(x),
 	yts = isTs(y);
     SEXP dims, xnames, ynames;
+
+	checkOperandsConformable(SEXP_downcast<VectorBase *>(x), SEXP_downcast<VectorBase *>(y));
+
     if (xarray || yarray) {
 	if (xarray && yarray) {
-	    if (!conformable(x, y))
-		errorcall(call, _("non-conformable arrays"));
 	    PROTECT(dims = getAttrib(x, R_DimSymbol));
 	}
 	else if (xarray && (ny != 0 || nx == 0)) {
@@ -129,39 +277,35 @@ static SEXP lbinary(SEXP call, SEXP op, SEXP args)
 	    PROTECT(klass = getAttrib(x, R_ClassSymbol));
 	}
 	else if (xts) {
-	    if (nx < ny)
-		ErrorMessage(call, ERROR_TSVEC_MISMATCH);
 	    PROTECT(tsp = getAttrib(x, R_TspSymbol));
 	    PROTECT(klass = getAttrib(x, R_ClassSymbol));
 	}
 	else /*(yts)*/ {
-	    if (ny < nx)
-		ErrorMessage(call, ERROR_TSVEC_MISMATCH);
 	    PROTECT(tsp = getAttrib(y, R_TspSymbol));
 	    PROTECT(klass = getAttrib(y, R_ClassSymbol));
 	}
     }
-    if (nx > 0 && ny > 0) {
-	if(((nx > ny) ? nx % ny : ny % nx) != 0) // mismatch
-	    warningcall(call,
-			_("longer object length is not a multiple of shorter object length"));
 
-	if (isRaw(x) && isRaw(y)) {
+  if (nx > 0 && ny > 0) {
+	if(((nx > ny) ? nx % ny : ny % nx) != 0) // mismatch
+            warningcall(call, _("longer object length is not a multiple of shorter object length"));
+
+	if (Rf_isRaw(x) && Rf_isRaw(y)) {
 	    x = binaryLogic2(PRIMVAL(op), x, y);
 	}
 	else {
-	    if(isNull(x))
+	    if(Rf_isNull(x))
 		x = SETCAR(args, allocVector(LGLSXP, 0));
 	    else // isNumeric(x)
 		x = SETCAR(args, coerceVector(x, LGLSXP));
-	    if(isNull(y))
+	    if(Rf_isNull(y))
 		y = SETCAR(args, allocVector(LGLSXP, 0));
 	    else // isNumeric(y)
 		y = SETCADR(args, coerceVector(y, LGLSXP));
 	    x = binaryLogic(PRIMVAL(op), x, y);
 	}
     } else { // nx == 0 || ny == 0
-	x = allocVector((isRaw(x) && isRaw(y)) ? RAWSXP : LGLSXP, 0);
+	x = allocVector((Rf_isRaw(x) && Rf_isRaw(y)) ? RAWSXP : LGLSXP, 0);
     }
 
     PROTECT(x);
@@ -422,7 +566,7 @@ static SEXP binaryLogic2(int code, SEXP s1, SEXP s2)
 constexpr int _OP_ALL = 1;
 constexpr int _OP_ANY = 2;
 
-static int checkValues(int op, int na_rm, SEXP x, R_xlen_t n)
+static Logical checkValues(int op, int na_rm, SEXP x, R_xlen_t n)
 {
     R_xlen_t i;
     int has_na = 0;
@@ -432,19 +576,19 @@ static int checkValues(int op, int na_rm, SEXP x, R_xlen_t n)
 	int xi = px[i];
 	if (!na_rm && xi == NA_LOGICAL) has_na = 1;
 	else {
-	    if (xi == TRUE && op == _OP_ANY) return TRUE;
-	    if (xi == FALSE && op == _OP_ALL) return FALSE;
+	    if (xi == TRUE && op == _OP_ANY) return true;
+	    if (xi == FALSE && op == _OP_ALL) return false;
 	}
     }
     switch (op) {
     case _OP_ANY:
-	return has_na ? NA_LOGICAL : FALSE;
+        return has_na ? Logical::NA() : false;
     case _OP_ALL:
-	return has_na ? NA_LOGICAL : TRUE;
+        return has_na ? Logical::NA() : true;
     default:
 	error(_("bad operator value for 'do_logic3()' function"));
     }
-    return NA_LOGICAL; /* -Wall */
+    return Logical::NA(); /* -Wall */
 }
 
 /* all, any */
@@ -456,7 +600,7 @@ HIDDEN SEXP do_logic3(SEXP call, SEXP op, SEXP args, SEXP env)
        all(logical(0)) -> TRUE
        any(logical(0)) -> FALSE
      */
-    Rboolean val = PRIMVAL(op) == _OP_ALL ? TRUE : FALSE;
+    Logical val = PRIMVAL(op) == _OP_ALL ? true : false;
 
     PROTECT(args = fixup_NaRm(args));
     PROTECT(call2 = shallow_duplicate(call));
@@ -493,15 +637,15 @@ HIDDEN SEXP do_logic3(SEXP call, SEXP op, SEXP args, SEXP env)
 			    type2char(TYPEOF(t)));
 	    t = coerceVector(t, LGLSXP);
 	}
-	val = (Rboolean) checkValues(PRIMVAL(op), narm, t, XLENGTH(t));
-	if (val != NA_LOGICAL) {
-	    if ((PRIMVAL(op) == _OP_ANY && val)
-		|| (PRIMVAL(op) == _OP_ALL && !val)) {
+	val = checkValues(PRIMVAL(op), narm, t, XLENGTH(t));
+	if (!val.isNA()) {
+	    if ((PRIMVAL(op) == _OP_ANY && val.isTrue())
+		|| (PRIMVAL(op) == _OP_ALL && val.isFalse())) {
 		has_na = 0;
 		break;
 	    }
 	} else has_na = 1;
     }
     UNPROTECT(2);
-    return has_na ? ScalarLogical(NA_LOGICAL) : ScalarLogical(val);
+    return LogicalVector::createScalar(has_na ? Logical::NA() : val);
 }

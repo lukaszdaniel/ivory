@@ -35,6 +35,111 @@
 
 namespace CXXR
 {
+	/** @brief Services to support common operations on R vectors and arrays.
+	 *
+	 * This namespace encapsulates services supporting various
+	 * commonly occurring operations on R vector objects, including R
+	 * matrices and arrays.
+	 */
+	namespace VectorOps
+	{
+		/** @brief Control attribute copying for unary functions.
+		 *
+		 * VectorOps::applyUnaryOperator takes as an AttributeCopier object
+		 * as an argument which determines which attributes
+		 * are copied from the input vector to the output vector.
+		 *
+		 * This class is a possible value of the \a AttributeCopier
+		 * parameter, and its behaviour is to copy all attributes
+		 * across, along with the S4 object status.
+		 */
+		struct CopyAllAttributes
+		{
+			/** @brief Copy all attributes and S4 object status.
+			 *
+			 * @param to Non-null pointer to the vector to which
+			 *          attributes are to be copied.
+			 *
+			 * @param from Non-null pointer to the vector from which
+			 *          attributes are to be copied.
+			 */
+			static void copyAttributes(VectorBase *to, const VectorBase *from)
+			{
+				to->copyAttributes(from, RObject::Duplicate::DEEP);
+			}
+		};
+
+		/** @brief Control attribute copying for unary functions.
+		 *
+		 * VectorOps::applyUnaryOperator takes as an AttributeCopier object
+		 * as an argument which determines which attributes
+		 * are copied from the input vector to the output vector.
+		 *
+		 * This class is a possible value of the \a AttributeCopier
+		 * parameter, and its behaviour is to copy the 'names', 'dim'
+		 * and 'dimnames' attributes if present.
+		 */
+		struct CopyLayoutAttributes
+		{
+			/** @brief Copy 'names', 'dim' and 'dimnames' attributes.
+			 *
+			 * @param to Non-null pointer to the vector to which
+			 *          attributes are to be copied.
+			 *
+			 * @param from Non-null pointer to the vector from which
+			 *          attributes are to be copied.
+			 */
+			static void copyAttributes(VectorBase *to, const VectorBase *from);
+		};
+
+		/** @brief Control attribute copying for unary functions.
+		 *
+		 * VectorOps::applyUnaryOperator takes as an AttributeCopier object
+		 * as an argument which determines which attributes
+		 * are copied from the input vector to the output vector.
+		 *
+		 * This class can be used as the value of the \a AttributeCopier
+		 * parameter, and its behaviour is to copy no attributes at all.
+		 */
+		struct CopyNoAttributes
+		{
+			/** @brief Copy no attributes.
+			 */
+			static void copyAttributes(VectorBase *, const VectorBase *)
+			{
+			}
+		};
+
+		// The type that Op returns when called with elements from the InputType
+		// vectors.
+		template <typename Op, typename... InputType>
+		using OpReturnType =
+			typename std::result_of<Op(typename InputType::value_type...)>::type;
+
+		// The type of vector that can hold the elements that Op returns when
+		// called with elements from the InputType vectors.
+		template <typename Op, typename... InputType>
+		using VectorOpReturnType =
+			typename VectorTypeFor<OpReturnType<Op, InputType...>>::type;
+
+		template <typename Op, typename AttributeCopier,
+				  typename InputType,
+				  typename OutputType = VectorOpReturnType<Op, InputType>>
+		OutputType *applyUnaryOperator(Op op,
+									   AttributeCopier attribute_copier,
+									   const InputType *input)
+		{
+			R_xlen_t size = input->size();
+			if (size == 1 && !input->hasAttributes())
+			{
+				return OutputType::createScalar(op((*input)[0]));
+			}
+			OutputType *result = OutputType::create(input->size());
+			std::transform(input->begin(), input->end(), result->begin(), op);
+			attribute_copier.copyAttributes(result, input);
+			return result;
+		}
+	} // namespace VectorOps
 } // namespace CXXR
 
 #endif // UNARYFUNCTION_HPP

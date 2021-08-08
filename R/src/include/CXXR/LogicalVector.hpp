@@ -43,6 +43,12 @@ namespace CXXR
      */
     using LogicalVector = CXXR::FixedVector<Logical, LGLSXP>;
 
+    template <>
+    struct VectorTypeFor<Logical>
+    {
+        typedef LogicalVector type;
+    };
+
     inline int *LOGICALVECTOR_LOGICAL(RObject *x)
     {
         return static_cast<int *>(DATAPTR(x));

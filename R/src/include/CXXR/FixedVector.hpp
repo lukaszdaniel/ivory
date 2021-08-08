@@ -313,6 +313,13 @@ namespace CXXR
         void visitElements(const_visitor *v, std::false_type) const {}
     };
 
+    // VectorTypeFor<T>::type is the type of vector that can hold elements of
+    // type T.
+    template <class T>
+    struct VectorTypeFor
+    {
+    };
+
     template <typename T, SEXPTYPE ST>
     FixedVector<T, ST>::FixedVector(const FixedVector<T, ST> &pattern, Duplicate deep)
         : VectorBase(pattern, deep), m_data(&m_singleton),

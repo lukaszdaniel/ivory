@@ -3,6 +3,8 @@
  *  Copyright (C) 1998--2020 The R Core Team.
  *  Copyright (C) 2003--2020 The R Foundation
  *  Copyright (C) 1995--1997 Robert Gentleman and Ross Ihaka
+ *  Copyright (C) 2008-2014  Andrew R. Runnalls.
+ *  Copyright (C) 2014 and onwards the Rho Project Authors.
  *
  *  This program is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -35,6 +37,9 @@
 #include <cfloat>
 #include <cerrno>
 #include <limits>
+#include <CXXR/ArgMatcher.hpp>
+#include <CXXR/UnaryFunction.hpp>
+#include <CXXR/BinaryFunction.hpp>
 #include <CXXR/BuiltInFunction.hpp>
 #include <CXXR/GCStackRoot.hpp>
 #include <CXXR/Expression.hpp>
@@ -42,6 +47,7 @@
 #include <CXXR/FixedVector.hpp>
 #include <CXXR/IntVector.hpp>
 #include <CXXR/Symbol.hpp>
+#include <CXXR/RAllocStack.hpp>
 #include <Defn.h>
 
 /* interval at which to check interrupts, a guess */
@@ -65,6 +71,7 @@ constexpr R_xlen_t NINTERRUPT = 10000000;
 
 using namespace R;
 using namespace CXXR;
+using namespace VectorOps;
 
 #ifdef HAVE_MATHERR
 
@@ -298,7 +305,7 @@ double R_pow_di(double x, int n)
     if (n != 0) {
 	if (!R_FINITE(x)) return R_POW(x, (double)n);
 
-	Rboolean is_neg = (Rboolean) (n < 0);
+	bool is_neg = (n < 0);
 	if(is_neg) n = -n;
 	while(true) {
 	    if(n & 01) xn *= x;
@@ -314,9 +321,6 @@ double R_pow_di(double x, int n)
 
 extern "C"
 {
-	static SEXP logical_unary(ARITHOP_TYPE, SEXP, SEXP);
-	static SEXP integer_unary(ARITHOP_TYPE, SEXP, SEXP);
-	static SEXP real_unary(ARITHOP_TYPE, SEXP, SEXP);
 	static SEXP real_binary(ARITHOP_TYPE, SEXP, SEXP);
 	static SEXP integer_binary(ARITHOP_TYPE, SEXP, SEXP, SEXP);
 } //extern "C"
@@ -585,7 +589,7 @@ HIDDEN SEXP R_binary(SEXP call, SEXP op, SEXP x, SEXP y)
 {
     Rboolean xattr, yattr, xarray, yarray, xts, yts, xS4, yS4;
     PROTECT_INDEX xpi, ypi;
-    ARITHOP_TYPE oper = (ARITHOP_TYPE) PRIMVAL(op);
+    ARITHOP_TYPE oper = ARITHOP_TYPE(PRIMVAL(op));
     int nprotect = 2; /* x and y */
 
 
@@ -649,12 +653,13 @@ HIDDEN SEXP R_binary(SEXP call, SEXP op, SEXP x, SEXP y)
 #endif
 
     SEXP dims, xnames, ynames;
+
+	checkOperandsConformable(SEXP_downcast<VectorBase *>(x), SEXP_downcast<VectorBase *>(y));
+
     if (xarray || yarray) {
 	/* if one is a length-atleast-1-array and the
 	 * other  is a length-0 *non*array, then do not use array treatment */
 	if (xarray && yarray) {
-	    if (!conformable(x, y))
-		errorcall(call, _("non-conformable arrays"));
 	    PROTECT(dims = getAttrib(x, R_DimSymbol)); nprotect++;
 	}
 	else if (xarray && (ny != 0 || nx == 0)) {
@@ -697,14 +702,10 @@ HIDDEN SEXP R_binary(SEXP call, SEXP op, SEXP x, SEXP y)
 	    PROTECT(klass = getAttrib(x, R_ClassSymbol));
 	}
 	else if (xts) {
-	    if (nx < ny)
-		ErrorMessage(call, ERROR_TSVEC_MISMATCH);
 	    PROTECT(tsp = getAttrib(x, R_TspSymbol));
 	    PROTECT(klass = getAttrib(x, R_ClassSymbol));
 	}
 	else {			/* (yts) */
-	    if (ny < nx)
-		ErrorMessage(call, ERROR_TSVEC_MISMATCH);
 	    PROTECT(tsp = getAttrib(y, R_TspSymbol));
 	    PROTECT(klass = getAttrib(y, R_ClassSymbol));
 	}
@@ -769,16 +770,151 @@ HIDDEN SEXP R_binary(SEXP call, SEXP op, SEXP x, SEXP y)
     return val;
 }
 
+namespace
+{
+#if CXXR_FALSE
+	struct Negate
+	{
+		template <class InType, class OutType = InType>
+		OutType operator()(InType value) { return -value; }
+	};
+
+	template <>
+	int Negate::operator()(int value)
+	{
+		return value == R_NaInt ? R_NaInt : -value;
+	}
+
+	template <typename InputType>
+	static SEXP typed_unary(ARITHOP_TYPE code, SEXP s1, SEXP call)
+	{
+		switch (code)
+		{
+		case PLUSOP:
+			return s1;
+		case MINUSOP:
+		{
+			using namespace VectorOps;
+			return applyUnaryOperator(Negate(),
+									  CopyAllAttributes(),
+									  SEXP_downcast<InputType *>(s1));
+		}
+		default:
+			Rf_errorcall(call, _("invalid unary operator"));
+		}
+		return s1; /* never used; to keep -Wall happy */
+	}
+#endif
+	// In R, unary operators behave differently on logicals than other types.
+	// Specifically, only the layout attributes are copied and the result is
+	// an IntVector, not a LogicalVector.
+	SEXP logical_unary(ARITHOP_TYPE code, SEXP s1, SEXP call)
+	{
+		R_xlen_t n = XLENGTH(s1);
+		GCStackRoot<> ans(allocVector(INTSXP, n));
+		GCStackRoot<> names(getAttrib(s1, R_NamesSymbol));
+		GCStackRoot<> dim(getAttrib(s1, R_DimSymbol));
+		GCStackRoot<> dimnames(getAttrib(s1, R_DimNamesSymbol));
+		if (names != R_NilValue)
+			setAttrib(ans, R_NamesSymbol, names);
+		if (dim != R_NilValue)
+			setAttrib(ans, R_DimSymbol, dim);
+		if (dimnames != R_NilValue)
+			setAttrib(ans, R_DimNamesSymbol, dimnames);
+
+		int *pa = INTEGER(ans);
+		const int *px = LOGICAL_RO(s1);
+
+		switch (code)
+		{
+		case PLUSOP:
+			for (R_xlen_t i = 0; i < n; i++)
+				pa[i] = px[i];
+			break;
+		case MINUSOP:
+			for (R_xlen_t i = 0; i < n; i++)
+			{
+				int x = px[i];
+				pa[i] = (x == NA_INTEGER) ? NA_INTEGER : ((x == 0.0) ? 0 : -x);
+			}
+			break;
+		default:
+			errorcall(call, _("invalid unary operator"));
+		}
+		return ans;
+	}
+
+	SEXP integer_unary(ARITHOP_TYPE code, SEXP s1, SEXP call)
+	{
+		R_xlen_t i, n;
+		SEXP ans;
+
+		switch (code)
+		{
+		case PLUSOP:
+		{
+			return s1;
+		}
+		case MINUSOP:
+		{
+			ans = NO_REFERENCES(s1) ? s1 : duplicate(s1);
+			int *pa = INTEGER(ans);
+			const int *px = INTEGER_RO(s1);
+			n = XLENGTH(s1);
+			for (i = 0; i < n; i++)
+			{
+				int x = px[i];
+				pa[i] = (x == NA_INTEGER) ? NA_INTEGER : ((x == 0.0) ? 0 : -x);
+			}
+			return ans;
+		}
+		default:
+			errorcall(call, _("invalid unary operator"));
+		}
+		return s1; /* never used; to keep -Wall happy */
+	}
+
+	SEXP real_unary(ARITHOP_TYPE code, SEXP s1, SEXP lcall)
+	{
+		R_xlen_t i, n;
+		SEXP ans;
+
+		switch (code)
+		{
+		case PLUSOP:
+		{
+			return s1;
+		}
+		case MINUSOP:
+		{
+			ans = NO_REFERENCES(s1) ? s1 : duplicate(s1);
+			double *pa = REAL(ans);
+			const double *px = REAL_RO(s1);
+			n = XLENGTH(s1);
+			for (i = 0; i < n; i++)
+				pa[i] = -px[i];
+			return ans;
+		}
+		default:
+			errorcall(lcall, _("invalid unary operator"));
+		}
+		return s1; /* never used; to keep -Wall happy */
+	}
+} // anonymous namespace
+
 HIDDEN SEXP R_unary(SEXP call, SEXP op, SEXP s1)
 {
-	ARITHOP_TYPE operation = (ARITHOP_TYPE)PRIMVAL(op);
+	ARITHOP_TYPE operation = ARITHOP_TYPE(PRIMVAL(op));
 	switch (TYPEOF(s1))
 	{
 	case LGLSXP:
+		// arithmetic on logicals makes no sense but R defines it anyway.
 		return logical_unary(operation, s1, call);
 	case INTSXP:
+		// return typed_unary<IntVector>(operation, s1, call);
 		return integer_unary(operation, s1, call);
 	case REALSXP:
+		// return typed_unary<RealVector>(operation, s1, call);
 		return real_unary(operation, s1, call);
 	case CPLXSXP:
 		return complex_unary(operation, s1, call);
@@ -788,93 +924,108 @@ HIDDEN SEXP R_unary(SEXP call, SEXP op, SEXP s1)
 	return s1; /* never used; to keep -Wall happy */
 }
 
-static SEXP logical_unary(ARITHOP_TYPE code, SEXP s1, SEXP call)
+namespace
 {
-    R_xlen_t n = XLENGTH(s1);
-    GCStackRoot<> ans(allocVector(INTSXP, n));
-    GCStackRoot<> names(getAttrib(s1, R_NamesSymbol));
-    GCStackRoot<> dim(getAttrib(s1, R_DimSymbol));
-    GCStackRoot<> dimnames(getAttrib(s1, R_DimNamesSymbol));
-    if(names != R_NilValue) setAttrib(ans, R_NamesSymbol, names);
-    if(dim != R_NilValue) setAttrib(ans, R_DimSymbol, dim);
-    if(dimnames != R_NilValue) setAttrib(ans, R_DimNamesSymbol, dimnames);
-
-    int *pa = INTEGER(ans);
-    const int *px = LOGICAL_RO(s1);
-
-    switch (code) {
-    case PLUSOP:
-	for (R_xlen_t  i = 0; i < n; i++) pa[i] = px[i];
-	break;
-    case MINUSOP:
-	for (R_xlen_t  i = 0; i < n; i++) {
-	    int x = px[i];
-	    pa[i] = (x == NA_INTEGER) ?
-		NA_INTEGER : ((x == 0.0) ? 0 : -x);
-	}
-	break;
-    default:
-	errorcall(call, _("invalid unary operator"));
-    }
-    return ans;
-}
-
-static SEXP integer_unary(ARITHOP_TYPE code, SEXP s1, SEXP call)
-{
-	R_xlen_t i, n;
-	SEXP ans;
-
-	switch (code)
+#if CXXR_FALSE
+	int integer_plus(int lhs, int rhs, Rboolean *naflag)
 	{
-	case PLUSOP:
-	{
-		return s1;
-	}
-	case MINUSOP:
-	{
-		ans = NO_REFERENCES(s1) ? s1 : duplicate(s1);
-		int *pa = INTEGER(ans);
-		const int *px = INTEGER_RO(s1);
-		n = XLENGTH(s1);
-		for (i = 0; i < n; i++)
+		if (lhs == R_NaInt || rhs == R_NaInt)
 		{
-			int x = px[i];
-			pa[i] = (x == NA_INTEGER) ? NA_INTEGER : ((x == 0.0) ? 0 : -x);
+			return R_NaInt;
 		}
-		return ans;
+		if ((lhs > 0 && INT_MAX - lhs < rhs) || (lhs < 0 && INT_MAX + lhs < -rhs))
+		{
+			// Integer overflow.
+			*naflag = TRUE;
+			return R_NaInt;
+		}
+		return lhs + rhs;
 	}
-	default:
-		errorcall(call, _("invalid unary operator"));
-	}
-	return s1; /* never used; to keep -Wall happy */
-}
 
-static SEXP real_unary(ARITHOP_TYPE code, SEXP s1, SEXP lcall)
-{
-	R_xlen_t i, n;
-	SEXP ans;
+	int integer_minus(int lhs, int rhs, Rboolean *naflag)
+	{
+		if (rhs == R_NaInt)
+			return R_NaInt;
+		return integer_plus(lhs, -rhs, naflag);
+	}
 
-	switch (code)
+	int integer_times(int lhs, int rhs, Rboolean *naflag)
 	{
-	case PLUSOP:
+		if (lhs == R_NaInt || rhs == R_NaInt)
+		{
+			return R_NaInt;
+		}
+		// This relies on the assumption that a double can represent all the
+		// possible values of an integer.  This isn't true for 64-bit integers.
+		static_assert(sizeof(int) <= 4,
+					  "integer_times assumes 32 bit integers which isn't true on this platform");
+		double result = static_cast<double>(lhs) * static_cast<double>(rhs);
+		if (std::abs(result) > INT_MAX)
+		{
+			// Integer overflow.
+			*naflag = TRUE;
+			return R_NaInt;
+		}
+		return static_cast<int>(result);
+	}
+
+	double integer_divide(int lhs, int rhs)
 	{
-		return s1;
+		if (lhs == R_NaInt || rhs == R_NaInt)
+		{
+			return R_NaReal;
+		}
+		return static_cast<double>(lhs) / static_cast<double>(rhs);
 	}
-	case MINUSOP:
+
+	double integer_pow(int lhs, int rhs)
 	{
-		ans = NO_REFERENCES(s1) ? s1 : duplicate(s1);
-		double *pa = REAL(ans);
-		const double *px = REAL_RO(s1);
-		n = XLENGTH(s1);
-		for (i = 0; i < n; i++)
-			pa[i] = -px[i];
-		return ans;
+		if (lhs == 1 || rhs == 0)
+			return 1;
+		if (lhs == R_NaInt || rhs == R_NaInt)
+		{
+			return R_NaReal;
+		}
+		return R_POW(static_cast<double>(lhs), static_cast<double>(rhs));
 	}
-	default:
-		errorcall(lcall, _("invalid unary operator"));
+
+	int integer_mod(int lhs, int rhs)
+	{
+		if (lhs == R_NaInt || rhs == R_NaInt || rhs == 0)
+			return R_NaInt;
+		return (lhs >= 0 && rhs > 0) ? lhs % rhs : static_cast<int>(myfmod(lhs, rhs));
 	}
-	return s1; /* never used; to keep -Wall happy */
-}
+
+	int integer_idiv(int lhs, int rhs)
+	{
+		/* This had x %/% 0 == 0 prior to 2.14.1, but
+	   it seems conventionally to be undefined */
+		if (lhs == R_NaInt || rhs == R_NaInt || rhs == 0)
+			return R_NaInt;
+		return static_cast<int>(floor(double(lhs) / static_cast<double>(rhs)));
+	}
+
+	template <class Op>
+	VectorBase *apply_integer_binary(Op op, SEXP lhs, SEXP rhs)
+	{
+		if (TYPEOF(lhs) != INTSXP)
+		{
+			// Probably a logical.
+			// TODO(kmillar): eliminate the need to coerce here.
+			lhs = Rf_coerceVector(lhs, INTSXP);
+		}
+		if (TYPEOF(rhs) != INTSXP)
+		{
+			rhs = Rf_coerceVector(rhs, INTSXP);
+		}
+
+		return applyBinaryOperator(op,
+								   BinaryArithmeticAttributeCopier(),
+								   SEXP_downcast<IntVector *>(lhs),
+								   SEXP_downcast<IntVector *>(rhs));
+	}
+#endif
+} // anonymous namespace
 
 static SEXP integer_binary(ARITHOP_TYPE code, SEXP s1, SEXP s2, SEXP lcall)
 {
@@ -1020,7 +1171,45 @@ static SEXP integer_binary(ARITHOP_TYPE code, SEXP s1, SEXP s2, SEXP lcall)
 namespace
 {
 	inline double R_INTEGER(const int &x) { return (double)(x == NA_INTEGER ? NA_REAL : x); }
-} // namespace
+	inline double intToReal(const int &x) { return (double)(x == NA_INTEGER ? NA_REAL : x); }
+} // anonymous namespace
+
+template <class Op>
+static RealVector *apply_real_binary(Op op, SEXP lhs, SEXP rhs)
+{
+	using namespace VectorOps;
+
+	SEXPTYPE lhs_type = TYPEOF(lhs);
+	SEXPTYPE rhs_type = TYPEOF(rhs);
+
+	if (lhs_type == REALSXP && rhs_type == REALSXP)
+	{
+		return applyBinaryOperator(
+			op,
+			BinaryArithmeticAttributeCopier(),
+			SEXP_downcast<RealVector *>(lhs),
+			SEXP_downcast<RealVector *>(rhs));
+	}
+	else if (lhs_type == INTSXP)
+	{
+		return applyBinaryOperator(
+			[=](int lhs, double rhs)
+			{ return op(intToReal(lhs), rhs); },
+			BinaryArithmeticAttributeCopier(),
+			SEXP_downcast<IntVector *>(lhs),
+			SEXP_downcast<RealVector *>(rhs));
+	}
+	else
+	{
+		assert(rhs_type == INTSXP);
+		return applyBinaryOperator(
+			[=](double lhs, int rhs)
+			{ return op(lhs, intToReal(rhs)); },
+			BinaryArithmeticAttributeCopier(),
+			SEXP_downcast<RealVector *>(lhs),
+			SEXP_downcast<IntVector *>(rhs));
+	}
+}
 
 static SEXP real_binary(ARITHOP_TYPE code, SEXP s1, SEXP s2)
 {
@@ -1274,6 +1463,42 @@ static SEXP real_binary(ARITHOP_TYPE code, SEXP s1, SEXP s2)
 
 /* Mathematical Functions of One Argument */
 
+// FunctorWrapper for VectorOps::UnaryFunction.  Warns if function
+// application gives rise to any new NaNs.
+class NaNWarner
+{
+public:
+	NaNWarner(double (*f)(double))
+		: m_f(f), m_any_NaN(false)
+	{
+	}
+
+	double operator()(double in)
+	{
+		/* This code assumes that isnan(in) implies isnan(m_f(in)), so we
+	   only need to check isnan(in) if isnan(m_f(in)) is true. */
+		double ans = m_f(in);
+		if (std::isnan(ans))
+		{
+			if (std::isnan(in))
+				ans = in; // ensure the incoming NaN is preserved.
+			else
+				m_any_NaN = true;
+		}
+		return ans;
+	}
+
+	void warnings()
+	{
+		if (m_any_NaN)
+			Rf_warning(_("NaNs produced"));
+	}
+
+private:
+	double (*m_f)(double);
+	bool m_any_NaN;
+};
+
 static SEXP math1(SEXP sa, double(*f)(double), SEXP lcall)
 {
     SEXP sy;
@@ -1310,7 +1535,6 @@ static SEXP math1(SEXP sa, double(*f)(double), SEXP lcall)
     UNPROTECT(2);
     return sy;
 }
-
 
 HIDDEN SEXP do_math1(SEXP call, SEXP op, SEXP args, SEXP env)
 {
@@ -1638,10 +1862,9 @@ HIDDEN SEXP do_math2(SEXP call, SEXP op, SEXP args, SEXP env)
     checkArity(op, args);
 
     if (isComplex(CAR(args)) ||
-	(PRIMVAL(op) == 0 && isComplex(CADR(args))))
+	(PRIMVAL(op) == 0 && isComplex(CADR(args)))) {
 	return complex_math2(call, op, args, env);
-
-
+    }
     switch (PRIMVAL(op)) {
 
     case  0: return Math2(args, atan2);
@@ -1684,7 +1907,7 @@ HIDDEN SEXP do_math2(SEXP call, SEXP op, SEXP args, SEXP env)
     default:
 	error(n_("unimplemented real function of %d numeric argument", "unimplemented real function of %d numeric arguments", 2), 2);
     }
-    return op;			/* never used; to keep -Wall happy */
+    return nullptr;			/* never used; to keep -Wall happy */
 }
 
 
@@ -1846,7 +2069,7 @@ HIDDEN SEXP do_log_builtin(SEXP call, SEXP op, SEXP args, SEXP env)
     else {
 	/* match argument names if supplied */
 	/* will signal an error unless there are one or two arguments */
-	/* after the match, length(args) will be 2 */
+	/* after the match, Rf_length(args) will be 2 */
 	PROTECT(args = matchArgs_NR(do_log_formals, args, call));
 
 	if(CAR(args) == R_MissingArg)
@@ -1998,8 +2221,8 @@ static SEXP math3B(SEXP sa, SEXP sb, SEXP sc,
 	if (av > amax) amax = av;
     }
     const void *vmax = vmaxget();
-    nw = 1 + (size_t)floor(amax);
-    work = (double *) R_alloc(nw, sizeof(double));
+    nw = 1 + size_t(floor(amax));
+    work = static_cast<double *>(CXXR_alloc(size_t(nw), sizeof(double)));
 
     MOD_ITERATE3 (n, na, nb, nc, i, ia, ib, ic, {
 //	if ((i+1) % NINTERRUPT == 0) R_CheckUserInterrupt();

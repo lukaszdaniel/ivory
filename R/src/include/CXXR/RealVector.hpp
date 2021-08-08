@@ -44,6 +44,12 @@ namespace CXXR
      */
     using RealVector = CXXR::FixedVector<double, REALSXP>;
 
+    template <>
+    struct VectorTypeFor<double>
+    {
+        typedef RealVector type;
+    };
+
     inline double *REALVECTOR_REAL(RObject *x)
     {
         return static_cast<double *>(DATAPTR(x));

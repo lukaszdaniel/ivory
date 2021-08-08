@@ -40,6 +40,12 @@ namespace CXXR
      */
     using IntVector = CXXR::FixedVector<int, INTSXP>;
 
+    template <>
+    struct VectorTypeFor<int>
+    {
+        typedef IntVector type;
+    };
+
     inline int *INTVECTOR_INTEGER(RObject *x)
     {
         return static_cast<int *>(DATAPTR(x));

@@ -2,6 +2,8 @@
  *  R : A Computer Language for Statistical Data Analysis
  *  Copyright (C) 1997--2018  The R Core Team
  *  Copyright (C) 1995, 1996  Robert Gentleman and Ross Ihaka
+ *  Copyright (C) 2008-2014  Andrew R. Runnalls.
+ *  Copyright (C) 2014 and onwards the Rho Project Authors.
  *
  *  This program is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -25,6 +27,9 @@
 
 #define R_NO_REMAP
 
+#include <utility>
+#include <cerrno>
+#include <CXXR/BinaryFunction.hpp>
 #include <CXXR/BuiltInFunction.hpp>
 #include <CXXR/FixedVector.hpp>
 #include <CXXR/IntVector.hpp>
@@ -38,11 +43,12 @@
 #include <Internal.h>
 #include <Rmath.h>
 #include <R_ext/Minmax.h>
-#include <cerrno>
 #include <R_ext/Itermacros.h>
 
 using namespace std;
 using namespace R;
+using namespace CXXR;
+using namespace VectorOps;
 
 /* interval at which to check interrupts, a guess */
 //constexpr R_xlen_t NINTERRUPT = 10000000;
@@ -51,6 +57,102 @@ static SEXP numeric_relop(RELOP_TYPE code, SEXP s1, SEXP s2);
 static SEXP complex_relop(RELOP_TYPE code, SEXP s1, SEXP s2, SEXP call);
 static SEXP string_relop (RELOP_TYPE code, SEXP s1, SEXP s2);
 static SEXP raw_relop    (RELOP_TYPE code, SEXP s1, SEXP s2);
+
+namespace
+{
+#if CXXR_FALSE
+	inline bool operator==(const Rcomplex &l, const Rcomplex &r)
+	{
+		return (l.r == r.r) && (l.i == r.i);
+	}
+
+	inline bool operator!=(const Rcomplex &l, const Rcomplex &r)
+	{
+		return !(l == r);
+	}
+
+	// bool isNaOrNaN(Logical value) { return isNA(value); }
+	bool isNaOrNaN(int value) { return isNA(value); }
+	bool isNaOrNaN(double value) { return std::isnan(value); }
+	bool isNaOrNaN(Complex value) { return (isNaOrNaN(value.r) || isNaOrNaN(value.i)); }
+
+	template <typename T, typename Op>
+	Logical withNaHandling(T lhs, T rhs, Op op)
+	{
+		bool eitherIsNaOrNan = isNaOrNaN(lhs) || isNaOrNaN(rhs);
+		return eitherIsNaOrNan ? Logical::NA() : op(lhs, rhs);
+	}
+
+	template <typename T, typename Op>
+	LogicalVector *relop_aux(const T *lhs, const T *rhs, Op op)
+	{
+		typedef typename T::value_type Value;
+		return applyBinaryOperator(
+			[=](Value l, Value r)
+			{
+				return withNaHandling(l, r, op);
+			},
+			GeneralBinaryAttributeCopier(),
+			lhs, rhs);
+	}
+
+	template <class V>
+	LogicalVector *relop(const V *vl, const V *vr, RELOP_TYPE code)
+	{
+		typedef typename V::value_type Value;
+
+		switch (code)
+		{
+		case EQOP:
+			return relop_aux(vl, vr,
+							 [](Value lhs, Value rhs)
+							 { return lhs == rhs; });
+		case NEOP:
+			return relop_aux(vl, vr,
+							 [](Value lhs, Value rhs)
+							 { return lhs != rhs; });
+		case LTOP:
+			return relop_aux(vl, vr,
+							 [](Value lhs, Value rhs)
+							 { return lhs < rhs; });
+		case GTOP:
+			return relop_aux(vl, vr,
+							 [](Value lhs, Value rhs)
+							 { return lhs > rhs; });
+		case LEOP:
+			return relop_aux(vl, vr,
+							 [](Value lhs, Value rhs)
+							 { return lhs <= rhs; });
+		case GEOP:
+			return relop_aux(vl, vr,
+							 [](Value lhs, Value rhs)
+							 { return lhs >= rhs; });
+		}
+		return nullptr; // -Wall
+	}
+
+	template <class V>
+	LogicalVector *relop_no_order(const V *vl, const V *vr, RELOP_TYPE code)
+	{
+		typedef typename V::value_type Value;
+
+		switch (code)
+		{
+		case EQOP:
+			return relop_aux(vl, vr,
+							 [](Value lhs, Value rhs)
+							 { return lhs == rhs; });
+		case NEOP:
+			return relop_aux(vl, vr,
+							 [](Value lhs, Value rhs)
+							 { return lhs != rhs; });
+		default:
+			Rf_error(_("comparison of these types is not implemented"));
+		}
+		return nullptr; // -Wall
+	}
+#endif
+} // anonymous namespace
 
 #define DO_SCALAR_RELOP(oper, x, y)           \
 	do                                        \
@@ -197,10 +299,11 @@ HIDDEN SEXP do_relop_dflt(SEXP call, SEXP op, SEXP x, SEXP y)
 	xts = isTs(x),
 	yts = isTs(y);
     SEXP dims, xnames, ynames;
+
+	checkOperandsConformable(SEXP_downcast<VectorBase *>(x), SEXP_downcast<VectorBase *>(y));
+
     if (xarray || yarray) {
 	if (xarray && yarray) {
-	    if (!conformable(x, y))
-		errorcall(call, _("non-conformable arrays"));
 	    PROTECT(dims = getAttrib(x, R_DimSymbol));
 	}
 	else if (xarray && (ny != 0 || nx == 0)) {
@@ -228,14 +331,10 @@ HIDDEN SEXP do_relop_dflt(SEXP call, SEXP op, SEXP x, SEXP y)
 	    PROTECT(klass = getAttrib(x, R_ClassSymbol));
 	}
 	else if (xts) {
-	    if (xlength(x) < xlength(y))
-		ErrorMessage(call, ERROR_TSVEC_MISMATCH);
 	    PROTECT(tsp = getAttrib(x, R_TspSymbol));
 	    PROTECT(klass = getAttrib(x, R_ClassSymbol));
 	}
 	else /*(yts)*/ {
-	    if (xlength(y) < xlength(x))
-		ErrorMessage(call, ERROR_TSVEC_MISMATCH);
 	    PROTECT(tsp = getAttrib(y, R_TspSymbol));
 	    PROTECT(klass = getAttrib(y, R_ClassSymbol));
 	}
@@ -243,8 +342,7 @@ HIDDEN SEXP do_relop_dflt(SEXP call, SEXP op, SEXP x, SEXP y)
 
   if (nx > 0 && ny > 0) {
 	if(((nx > ny) ? nx % ny : ny % nx) != 0) // mismatch
-            warningcall(call, _(
-		"longer object length is not a multiple of shorter object length"));
+            warningcall(call, _("longer object length is not a multiple of shorter object length"));
 
     if (isString(x) || isString(y)) {
 	REPROTECT(x = coerceVector(x, STRSXP), xpi);
@@ -358,7 +456,7 @@ static SEXP numeric_relop(RELOP_TYPE code, SEXP s1, SEXP s2)
 
     n1 = XLENGTH(s1);
     n2 = XLENGTH(s2);
-    n = (n1 > n2) ? n1 : n2;
+    n = std::max(n1, n2);
     PROTECT(s1);
     PROTECT(s2);
     ans = allocVector(LGLSXP, n);
@@ -391,7 +489,7 @@ static SEXP complex_relop(RELOP_TYPE code, SEXP s1, SEXP s2, SEXP call)
 
     n1 = XLENGTH(s1);
     n2 = XLENGTH(s2);
-    n = (n1 > n2) ? n1 : n2;
+    n = std::max(n1, n2);
     PROTECT(s1);
     PROTECT(s2);
     ans = allocVector(LGLSXP, n);
@@ -444,7 +542,7 @@ static SEXP string_relop(RELOP_TYPE code, SEXP s1, SEXP s2)
 
     n1 = XLENGTH(s1);
     n2 = XLENGTH(s2);
-    n = (n1 > n2) ? n1 : n2;
+    n = std::max(n1, n2);
     PROTECT(s1);
     PROTECT(s2);
     PROTECT(ans = allocVector(LGLSXP, n));
@@ -563,7 +661,7 @@ static SEXP raw_relop(RELOP_TYPE code, SEXP s1, SEXP s2)
 
     n1 = XLENGTH(s1);
     n2 = XLENGTH(s2);
-    n = (n1 > n2) ? n1 : n2;
+    n = std::max(n1, n2);
     PROTECT(s1);
     PROTECT(s2);
     ans = allocVector(LGLSXP, n);

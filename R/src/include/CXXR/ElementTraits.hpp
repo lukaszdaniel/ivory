@@ -51,7 +51,7 @@ namespace CXXR
              * default constructor.
              *
              * In the default case, covered here, \c MustConstruct is
-             * defined to false, signifying that construction is
+             * defined to true, signifying that construction is
              * required.
              *
              * @tparam T A type capable of being used as the element type
@@ -72,7 +72,7 @@ namespace CXXR
              * element type \a T has a nontrivial destructor.
              *
              * In the default case, covered here, \c MustDestruct is
-             * defined to false, signifying that no destructor call is
+             * defined to true, signifying that no destructor call is
              * required.
              *
              * @tparam T A type capable of being used as the element type

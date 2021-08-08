@@ -40,6 +40,12 @@ namespace CXXR
      */
     using RawVector = CXXR::FixedVector<Rbyte, RAWSXP>;
 
+    template <>
+    struct VectorTypeFor<Rbyte>
+    {
+        typedef RawVector type;
+    };
+
     inline Rbyte *RAWVECTOR_RAW(RObject *x)
     {
         return static_cast<Rbyte *>(DATAPTR(x));
