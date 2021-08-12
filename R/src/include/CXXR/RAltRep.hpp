@@ -31,6 +31,8 @@
 #ifndef RALTREP_HPP
 #define RALTREP_HPP
 
+#define CXXR_USE_OLD_ALTREP_IMPL
+
 #include <CXXR/PairList.hpp>
 
 namespace CXXR

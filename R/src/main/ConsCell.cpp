@@ -33,6 +33,7 @@
 #include <CXXR/DottedArgs.hpp>
 #include <CXXR/Expression.hpp>
 #include <CXXR/PairList.hpp>
+#include <CXXR/RAltRep.hpp>
 #include <CXXR/StringVector.hpp>
 #include <CXXR/Symbol.hpp>
 #include <Defn.h>
@@ -197,7 +198,7 @@ namespace CXXR
 
     void ConsCell::visitReferents(const_visitor *v) const
     {
-#if CXXR_TRUE
+#ifdef CXXR_USE_OLD_ALTREP_IMPL
         RObject::visitReferents(v);
         if (altrep())
         {

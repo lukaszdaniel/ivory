@@ -58,17 +58,21 @@ SEXP INTERNAL(SEXP x)
         return nullptr;
     Symbol::checkST(x);
     const Symbol *sym = SEXP_downcast<const Symbol *>(x);
+#ifdef CXXR_USE_OLD_R_FUNTAB_IMPL
     return const_cast<BuiltInFunction *>(sym->internalFunction());
-    // TODO: sometime in the future:
-    // return BuiltInFunction::obtainInternal(sym);
+#else
+    return BuiltInFunction::obtainInternal(sym);
+#endif
 }
 
 void R::SET_INTERNAL(SEXP x, SEXP v)
 {
+#ifdef CXXR_USE_OLD_R_FUNTAB_IMPL
     if (!x)
         return;
     Symbol::checkST(x);
     Symbol *sym = SEXP_downcast<Symbol *>(x);
     BuiltInFunction *fun = SEXP_downcast<BuiltInFunction *>(v);
     sym->setInternalFunction(fun);
+#endif
 }

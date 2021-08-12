@@ -1797,47 +1797,52 @@ static void FrameValues(SEXP frame, bool all, SEXP values, int *indx)
     }
 }
 
-static bool BuiltinTest(const Symbol *sym, bool all, bool intern)
+static bool BuiltinTest(const Symbol *sym, bool all, bool internal_only)
 {
     if (!sym)
         return false;
-    if (intern && sym->internalFunction())
+#ifdef CXXR_USE_OLD_R_FUNTAB_IMPL
+    if (internal_only && sym->internalFunction())
         return true;
+#else
+    if (internal_only)
+        return BuiltInFunction::obtainInternal(sym);
+#endif
     if ((all || !isDotSymbol(sym)) && SYMVALUE(const_cast<Symbol*>(sym)) != R_UnboundValue)
         return true;
     return false;
 }
 
-static int BuiltinSize(bool all, bool intern)
+static int BuiltinSize(bool all, bool internal_only)
 {
     int count = 0;
     for (Symbol::const_iterator it = Symbol::begin(); it != Symbol::end(); ++it)
     {
         const Symbol *sym = (*it).second;
-        if (BuiltinTest(sym, all, intern))
+        if (BuiltinTest(sym, all, internal_only))
             ++count;
     }
     return count;
 }
 
-static void BuiltinNames(bool all, bool intern, SEXP names, int *indx)
+static void BuiltinNames(bool all, bool internal_only, SEXP names, int *indx)
 {
     // StringVector *sv = SEXP_downcast<StringVector *>(names);
     for (Symbol::const_iterator it = Symbol::begin(); it != Symbol::end(); ++it)
     {
         const Symbol *sym = (*it).second;
-        if (BuiltinTest(sym, all, intern))
+        if (BuiltinTest(sym, all, internal_only))
             SET_STRING_ELT(names, (*indx)++, const_cast<CachedString *>(sym->name()));
     }
 }
 
-static void BuiltinValues(bool all, bool intern, SEXP values, int *indx)
+static void BuiltinValues(bool all, bool internal_only, SEXP values, int *indx)
 {
     // ListVector *lv = SEXP_downcast<ListVector *>(values);
     for (Symbol::const_iterator it = Symbol::begin(); it != Symbol::end(); ++it)
     {
         Symbol *sym = (*it).second;
-        if (BuiltinTest(sym, all, intern))
+        if (BuiltinTest(sym, all, internal_only))
         {
             RObject *vl = SYMVALUE(sym);
             if (vl && vl->sexptype() == PROMSXP)

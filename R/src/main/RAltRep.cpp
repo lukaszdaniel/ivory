@@ -88,7 +88,7 @@ SEXP R_altrep_data1(SEXP x)
 
 SEXP R_altrep_data2(SEXP x)
 {
-#ifdef CXXR_OLD_ALTREP_IMPL
+#ifdef CXXR_USE_OLD_ALTREP_IMPL
     return CDR(x);
 #else
     return CADR(x);
@@ -102,7 +102,7 @@ void R_set_altrep_data1(SEXP x, SEXP v)
 
 void R_set_altrep_data2(SEXP x, SEXP v)
 {
-#ifdef CXXR_OLD_ALTREP_IMPL
+#ifdef CXXR_USE_OLD_ALTREP_IMPL
     SETCDR(x, v);
 #else
     SETCADR(x, v);

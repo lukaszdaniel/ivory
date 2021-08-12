@@ -713,7 +713,11 @@ RObject *Expression::evaluate(Environment *env)
 			Evaluator::enableResultPrinting(flag != 1);
 		/* We used to insert a context only if profiling,
 	       but helps for tracebacks on .C etc. */
+#ifdef CXXR_USE_OLD_R_FUNTAB_IMPL
 		if (R_Profiling || (PPINFO(op).kind == PP_FOREIGN))
+#else
+		if (R_Profiling || (PPINFO(op).kind == BuiltInFunction::Kind::PP_FOREIGN))
+#endif
 		{
 			SEXP oldref = R_Srcref;
 			cntxt.start(CTXT_BUILTIN, this, R_BaseEnv, R_BaseEnv, R_NilValue, R_NilValue);
@@ -1886,7 +1890,11 @@ SEXP R_forceAndCall(SEXP e, int n, SEXP rho)
 	if (flag < 2) Evaluator::enableResultPrinting(flag != 1);
 	/* We used to insert a context only if profiling,
 	   but helps for tracebacks on .C etc. */
+#ifdef CXXR_USE_OLD_R_FUNTAB_IMPL
 	if (R_Profiling || (PPINFO(fun).kind == PP_FOREIGN)) {
+#else
+	if (R_Profiling || (PPINFO(fun).kind == BuiltInFunction::Kind::PP_FOREIGN)) {
+#endif
 	    RCNTXT cntxt;
 	    SEXP oldref = R_Srcref;
 	    cntxt.start(CTXT_BUILTIN, e, R_BaseEnv, R_BaseEnv, R_NilValue, R_NilValue);
@@ -6529,7 +6537,11 @@ inline static SEXP SymbolValue(SEXP sym)
    true BUILTIN from a .Internal. LT */
 inline static bool IS_TRUE_BUILTIN(SEXP x)
 {
+#ifdef CXXR_USE_OLD_R_FUNTAB_IMPL
 	return ((R_FunTab[PRIMOFFSET(x)].evalargs() % 100) / 10 == 0);
+#else
+	return SEXP_downcast<BuiltInFunction *>(x)->viaDotInternal() == false;
+#endif
 }
 
 /* rho only needed for _R_CHECK_LENGTH_1_CONDITION_=package:name */

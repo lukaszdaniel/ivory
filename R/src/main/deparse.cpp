@@ -582,7 +582,8 @@ static bool curlyahead(SEXP s)
     return false;
 }
 
-#if CXXR_FALSE
+#ifdef CXXR_USE_OLD_R_FUNTAB_IMPL
+#else
 // In CXXR, BuiltInFunction::PPinfo is (deliberately) private, so as
 // not to expose the function table format outside the BuiltInFunction
 // class.  We now declare introduce local definitions to keep the CR
@@ -607,7 +608,7 @@ static PPinfo PPINFO(SEXP s)
    determine if it needs to be parenthesized when deparsed
    mainop is a unary or binary operator,
    arg is an argument to it, on the left if left == 1 */
-
+#ifdef CXXR_USE_OLD_R_FUNTAB_IMPL
 static bool needsparens(PPinfo mainop, SEXP arg, bool left)
 {
     PPinfo arginfo;
@@ -673,7 +674,73 @@ static bool needsparens(PPinfo mainop, SEXP arg, bool left)
     }
     return false;
 }
-
+#else
+static bool needsparens(PPinfo mainop, SEXP arg, bool left)
+{
+    PPinfo arginfo;
+    if (TYPEOF(arg) == LANGSXP) {
+	if (TYPEOF(CAR(arg)) == SYMSXP) {
+	    if (Rf_isPrimitive(SYMVALUE(CAR(arg)))) {
+		arginfo = PPINFO(SYMVALUE(CAR(arg)));
+		switch(arginfo.kind) {
+		case BuiltInFunction::Kind::PP_BINARY:	      /* Not all binary ops are binary! */
+		case BuiltInFunction::Kind::PP_BINARY2:
+		    switch(length(CDR(arg))) {
+		    case 1:
+			if (!left)
+			    return false;
+			if (arginfo.precedence == BuiltInFunction::Precedence::PREC_SUM)   /* binary +/- precedence upgraded as unary */
+			    arginfo.precedence = BuiltInFunction::Precedence::PREC_SIGN;
+		    case 2:
+			if (mainop.precedence == BuiltInFunction::Precedence::PREC_COMPARE &&
+			    arginfo.precedence == BuiltInFunction::Precedence::PREC_COMPARE)
+		          return true;     /*   a < b < c   is not legal syntax */
+			break;
+		    default:
+			return false;
+		    }
+		case BuiltInFunction::Kind::PP_SUBSET:
+		    if (mainop.kind == BuiltInFunction::Kind::PP_DOLLAR)
+		    	return false;
+		    /* fall through, don't break... */
+		case BuiltInFunction::Kind::PP_ASSIGN:
+		case BuiltInFunction::Kind::PP_ASSIGN2:
+		case BuiltInFunction::Kind::PP_UNARY:
+		case BuiltInFunction::Kind::PP_DOLLAR:
+		    /* Same as other unary operators above */
+		    if (arginfo.precedence == BuiltInFunction::Precedence::PREC_NOT && !left)
+			return false;
+		    if (mainop.precedence > arginfo.precedence
+			|| (mainop.precedence == arginfo.precedence && left == mainop.rightassoc)) {
+			return true;
+		    }
+		    break;
+		case BuiltInFunction::Kind::PP_FOR:
+		case BuiltInFunction::Kind::PP_IF:
+		case BuiltInFunction::Kind::PP_WHILE:
+		case BuiltInFunction::Kind::PP_REPEAT:
+		    return left;
+		    break;
+		default:
+		    return false;
+		}
+	    } else if (isUserBinop(CAR(arg))) {
+		if (mainop.precedence > BuiltInFunction::Precedence::PREC_PERCENT
+		    || (mainop.precedence == BuiltInFunction::Precedence::PREC_PERCENT && left == mainop.rightassoc)) {
+		    return true;
+		}
+	    }
+	}
+    }
+    else if ((TYPEOF(arg) == CPLXSXP) && (length(arg) == 1)) {
+	if (mainop.precedence > BuiltInFunction::Precedence::PREC_SUM
+	    || (mainop.precedence == BuiltInFunction::Precedence::PREC_SUM && left == mainop.rightassoc)) {
+	    return true;
+	}
+    }
+    return false;
+}
+#endif
 
 /* does the character() vector x contain one `NA_character_` or is all "",
  * or if(isAtomic) does it have one "recursive" or "use.names" ?  */
@@ -872,10 +939,17 @@ static bool parenthesizeCaller(SEXP s)
 	    if (isUserBinop(op)) return true;   /* %foo% */
 	    sym = SYMVALUE(op);
 	    if (Rf_isPrimitive(sym)) {
+#ifdef CXXR_USE_OLD_R_FUNTAB_IMPL
 		if (PPINFO(sym).precedence >= PREC_SUBSET
 		    || PPINFO(sym).kind == PP_FUNCALL
 		    || PPINFO(sym).kind == PP_PAREN
 		    || PPINFO(sym).kind == PP_CURLY) return false; /* x$f(z) or x[n](z) or f(z) or (f) or {f} */
+#else
+		if (PPINFO(sym).precedence >= BuiltInFunction::Precedence::PREC_SUBSET
+		    || PPINFO(sym).kind == BuiltInFunction::Kind::PP_FUNCALL
+		    || PPINFO(sym).kind == BuiltInFunction::Kind::PP_PAREN
+		    || PPINFO(sym).kind == BuiltInFunction::Kind::PP_CURLY) return false; /* x$f(z) or x[n](z) or f(z) or (f) or {f} */
+#endif
 		else return true;		/* (f+g)(z) etc. */
 	    }
 	    return false;			/* regular function call */
@@ -891,7 +965,7 @@ constexpr int SIMPLE_OPTS = (~QUOTEEXPRESSIONS & ~SHOWATTRIBUTES & ~DELAYPROMISE
 /* keep KEEPINTEGER | USESOURCE | KEEPNA | S_COMPAT, also
    WARNINCOMPLETE but that is not used below this point. */
 constexpr int SHOW_ATTR_OR_NMS = (SHOWATTRIBUTES | NICE_NAMES);
-
+#ifdef CXXR_USE_OLD_R_FUNTAB_IMPL
 static void deparse2buff(SEXP s, LocalParseData *d)
 {
     bool lookahead = false, lbreak = false, fnarg = d->fnarg;
@@ -1499,7 +1573,615 @@ static void deparse2buff(SEXP s, LocalParseData *d)
 	UNIMPLEMENTED_TYPE("deparse2buff()", s);
     }
 }
+#else
+static void deparse2buff(SEXP s, LocalParseData *d)
+{
+    bool lookahead = false, lbreak = false, fnarg = d->fnarg;
+    attr_type attr = STRUC_ATTR;
+    SEXP t;
+    int d_opts_in = d->opts, i, n;
 
+    d->fnarg = false;
+
+    if (!d->active) return;
+
+    bool hasS4_t = (TYPEOF(s) == S4SXP);
+    if (IS_S4_OBJECT(s) || hasS4_t) {
+	d->isS4 = true;
+	/* const void *vmax = vmaxget(); */
+	SEXP class_ = getAttrib(s, R_ClassSymbol),
+	    cl_def = TYPEOF(class_) == STRSXP ? STRING_ELT(class_, 0) : R_NilValue;
+	if(TYPEOF(cl_def) == CHARSXP) { // regular S4 objects
+	    print2buff("new(\"", d);
+	    print2buff(translateChar(cl_def), d);
+	    print2buff("\", ", d);
+	    SEXP slotNms; // ---- slotNms := methods::.slotNames(s)  ---------
+	    // computed alternatively, slotNms := names(getClassDef(class)@slots) :
+	    static GCRoot<> R_getClassDef(nullptr);
+	    static GCRoot<Symbol> R_slots(nullptr), R_asS3(nullptr);
+	    if(R_getClassDef == nullptr)
+		R_getClassDef = findFun(Symbol::obtain("getClassDef"), R_MethodsNamespace);
+	    if(R_slots == nullptr) R_slots = Symbol::obtain("slots");
+	    if(R_asS3  == nullptr) R_asS3  = Symbol::obtain("asS3");
+	    SEXP e = PROTECT(lang2(R_getClassDef, class_));
+	    cl_def = PROTECT(eval(e, R_BaseEnv)); // correct env?
+	    slotNms = // names( cl_def@slots ) :
+		getAttrib(R_do_slot(cl_def, R_slots), R_NamesSymbol);
+	    UNPROTECT(2); // (e, cl_def)
+	    int n;
+	    bool has_Data = false;// does it have ".Data" slot?
+	    if(TYPEOF(slotNms) == STRSXP && (n = LENGTH(slotNms))) {
+		PROTECT(slotNms);
+		SEXP slotlist = PROTECT(allocVector(VECSXP, n));
+		// := structure(lapply(slotNms, slot, object=s), names=slotNms)
+		for (int i = 0; i < n; i++)
+		{
+			SEXP slot_i = STRING_ELT(slotNms, i);
+		    SET_VECTOR_ELT(slotlist, i, R_do_slot(s, installTrChar(slot_i)));
+		    if(!hasS4_t && !has_Data)
+			has_Data = streql(CHAR(slot_i), ".Data");
+		}
+		setAttrib(slotlist, R_NamesSymbol, slotNms);
+		vec2buff(slotlist, d, true);
+		/*-----------------*/
+		UNPROTECT(2); // (slotNms, slotlist)
+	    }
+	    if(!hasS4_t && !has_Data) {
+		// may have *non*-slot contents, (i.e., not in .Data)
+		// ==> additionally deparse asS3(s) :
+		e = PROTECT(lang2(R_asS3, s)); // = asS3(s)
+		SEXP S3_s = PROTECT(eval(e, R_BaseEnv)); // correct env?
+		print2buff(", ", d);
+		deparse2buff(S3_s, d);
+		UNPROTECT(2); // (e, S3_s)
+	    }
+	    print2buff(")", d);
+	}
+	else { // exception: class is not CHARSXP
+	    if(isNull(cl_def) && isNull(ATTRIB(s))) // special
+		print2buff("getClass(\"S4\")@prototype", d);
+	    else { // irregular S4 ((does this ever trigger ??))
+		d->sourceable = false;
+		print2buff("<S4 object of class ", d);
+		deparse2buff(class_, d);
+		print2buff(">", d);
+	    }
+	}
+	/* vmaxset(vmax); */
+	return;
+    } // if( S4 )
+
+    // non-S4 cases:
+    switch (TYPEOF(s)) {
+    case NILSXP:
+	print2buff("NULL", d);
+	break;
+    case SYMSXP: {
+	bool
+	    doquote = ((d_opts_in & QUOTEEXPRESSIONS) && strlen(CHAR(PRINTNAME(s))));
+	if (doquote) {
+	    attr = (d_opts_in & SHOW_ATTR_OR_NMS) ? attr1(s, d) : SIMPLE;
+	    print2buff("quote(", d);
+	}
+	if (d_opts_in & S_COMPAT) {
+	    print2buff(quotify(PRINTNAME(s), '"'), d);
+	} else if (d->backtick)
+	    print2buff(quotify(PRINTNAME(s), '`'), d);
+	else
+	    print2buff(CHAR(PRINTNAME(s)), d);
+	if (doquote) {
+	    print2buff(")", d);
+	    if(attr >= STRUC_ATTR) attr2(s, d, (attr == STRUC_ATTR));
+	}
+	break;
+    }
+    case CHARSXP:
+    {
+	const void *vmax = vmaxget();
+	const char *ts = translateChar(s);
+#ifdef longstring_WARN
+	/* versions of R < 2.7.0 cannot parse strings longer than 8192 chars */
+	if(strlen(ts) >= 8192) d->longstring = true;
+#endif
+	print2buff(ts, d);
+	vmaxset(vmax);
+	break;
+    }
+    case SPECIALSXP:
+    case BUILTINSXP:
+	print2buff(".Primitive(\"", d);
+	print2buff(PRIMNAME(s), d);
+	print2buff("\")", d);
+	break;
+    case PROMSXP:
+	if(d->opts & DELAYPROMISES) {
+	    d->sourceable = false;
+	    print2buff("<promise: ", d);
+	    d->opts &= ~QUOTEEXPRESSIONS; /* don't want delay(quote()) */
+	    deparse2buff(PREXPR(s), d);
+	    d->opts = d_opts_in;
+	    print2buff(">", d);
+	} else {
+	    PROTECT(s = eval(s, R_EmptyEnv)); /* eval uses env of promise */
+	    deparse2buff(s, d);
+	    UNPROTECT(1);
+	}
+	break;
+    case CLOSXP:
+	attr = (d_opts_in & SHOW_ATTR_OR_NMS) ? attr1(s, d) : SIMPLE;
+	if ((d->opts & USESOURCE)
+	    && !isNull(t = getAttrib(s, R_SrcrefSymbol)))
+		src2buff1(t, d);
+	else {
+	    /* We have established that we don't want to use the
+	       source for this function */
+	    d->opts &= SIMPLE_OPTS & ~USESOURCE;
+	    print2buff("function (", d);
+	    args2buff(FORMALS(s), 0, 1, d);
+	    print2buff(") ", d);
+
+	    writeline(d);
+	    deparse2buff(BODY_EXPR(s), d);
+	    d->opts = d_opts_in;
+	}
+	if(attr >= STRUC_ATTR) attr2(s, d, (attr == STRUC_ATTR));
+	break;
+    case ENVSXP:
+	d->sourceable = false;
+	print2buff("<environment>", d);
+	break;
+    case VECSXP:
+	attr = (d_opts_in & SHOW_ATTR_OR_NMS) ? attr1(s, d) : SIMPLE;
+	print2buff("list(", d);
+	d->opts = d_opts_in;// vec2buff() must use unchanged d
+	vec2buff(s, d, (attr == OK_NAMES || attr == STRUC_ATTR));
+	d->opts |= NICE_NAMES;
+	print2buff(")", d);
+	if(attr >= STRUC_ATTR) attr2(s, d, (attr == STRUC_ATTR));
+	d->opts = d_opts_in;
+	break;
+    case EXPRSXP:
+	attr = (d_opts_in & SHOW_ATTR_OR_NMS) ? attr1(s, d) : SIMPLE;
+	if(length(s) <= 0)
+	    print2buff("expression()", d);
+	else {
+	    int locOpts = d->opts;
+	    print2buff("expression(", d);
+	    d->opts &= SIMPLE_OPTS;
+	    vec2buff(s, d, (attr == OK_NAMES || attr == STRUC_ATTR));
+	    d->opts = locOpts;
+	    print2buff(")", d);
+	}
+	if(attr >= STRUC_ATTR) attr2(s, d, (attr == STRUC_ATTR));
+	d->opts = d_opts_in;
+	break;
+    case LISTSXP: {
+	attr = (d_opts_in & SHOW_ATTR_OR_NMS) ? attr1(s, d) : SIMPLE;
+	/* pairlist(x=) cannot be evaluated, hence with missings we use
+	   as.pairlist(alist(...)) to allow evaluation of deparsed formals */
+	bool missing = false;
+	for(t=s; t != R_NilValue; t=CDR(t))
+	    if (CAR(t) == R_MissingArg) {
+		missing = true;
+		break;
+	    }
+	if (missing)
+	    print2buff("as.pairlist(alist(", d);
+	else
+	    print2buff("pairlist(", d);
+	d->inlist++;
+	for (t=s ; CDR(t) != R_NilValue ; t=CDR(t) ) {
+	    if( TAG(t) != R_NilValue ) {
+		d->opts = SIMPLEDEPARSE; /* turn off quote()ing */
+		deparse2buff(TAG(t), d);
+		d->opts = d_opts_in;
+		print2buff(" = ", d);
+	    }
+	    deparse2buff(CAR(t), d);
+	    print2buff(", ", d);
+	}
+	if( TAG(t) != R_NilValue ) {
+	    d->opts = SIMPLEDEPARSE; /* turn off quote()ing */
+	    deparse2buff(TAG(t), d);
+	    d->opts = d_opts_in;
+	    print2buff(" = ", d);
+	}
+	deparse2buff(CAR(t), d);
+	if (missing)
+	    print2buff("))", d);
+	else
+	    print2buff(")", d);
+	d->inlist--;
+	if(attr >= STRUC_ATTR) attr2(s, d, (attr == STRUC_ATTR));
+	break;
+    }
+    case LANGSXP:
+	{
+	if (!isNull(ATTRIB(s)))
+	    d->sourceable = false;
+	SEXP op = CAR(s);
+	bool doquote = false;
+	bool maybe_quote = (d_opts_in & QUOTEEXPRESSIONS);
+	if (maybe_quote) {
+	    // do *not* quote() formulas:
+	    doquote = // := op is not `~` (tilde) :
+		(!((TYPEOF(op) == SYMSXP) &&
+		  streql(CHAR(PRINTNAME(op)), "~")));
+	    if (doquote) {
+		print2buff("quote(", d);
+		d->opts &= SIMPLE_OPTS;
+	    } else { // `~`
+		d->opts &= ~QUOTEEXPRESSIONS;
+	    }
+	}
+	if (TYPEOF(op) == SYMSXP) {
+	    int userbinop = 0;
+	    if (Rf_isPrimitive(SYMVALUE(op)) ||
+		(userbinop = isUserBinop(op))) {
+		PPinfo fop;
+		bool parens;
+		s = CDR(s);
+		if (userbinop) {
+		    if (isNull(getAttrib(s, R_NamesSymbol))) {
+			// not quite right for spacing, but can't be unary :
+			fop.kind = BuiltInFunction::Kind::PP_BINARY2;
+			fop.precedence = BuiltInFunction::Precedence::PREC_PERCENT;
+			fop.rightassoc = 0;
+		    } else
+			// if args are named, deparse as function call (PR#15350):
+			fop.kind = BuiltInFunction::Kind::PP_FUNCALL;
+		} else
+		    fop = PPINFO(SYMVALUE(op));
+		if (fop.kind == BuiltInFunction::Kind::PP_BINARY) {
+		    switch (length(s)) {
+		    case 1:
+			fop.kind = BuiltInFunction::Kind::PP_UNARY;
+			if (fop.precedence == BuiltInFunction::Precedence::PREC_SUM)
+			    // binary +/- precedence upgraded as unary
+			    fop.precedence = BuiltInFunction::Precedence::PREC_SIGN;
+			break;
+		    case 2:
+			break;
+		    default:
+			fop.kind = BuiltInFunction::Kind::PP_FUNCALL;
+			break;
+		    }
+		}
+		else if (fop.kind == BuiltInFunction::Kind::PP_BINARY2) {
+		    if (length(s) != 2)
+			fop.kind = BuiltInFunction::Kind::PP_FUNCALL;
+		    else if (userbinop)
+			fop.kind = BuiltInFunction::Kind::PP_BINARY;
+		}
+		switch (fop.kind) {
+		case BuiltInFunction::Kind::PP_IF:
+		    print2buff("if (", d);
+		    /* print the predicate */
+		    deparse2buff(CAR(s), d);
+		    print2buff(") ", d);
+		    if (d->incurly && !d->inlist ) {
+			lookahead = curlyahead(CAR(CDR(s)));
+			if (!lookahead) {
+			    writeline(d);
+			    d->indent++;
+			}
+		    }
+		    /* need to find out if there is an else */
+		    if (length(s) > 2) {
+			deparse2buff(CAR(CDR(s)), d);
+			if (d->incurly && !d->inlist) {
+			    writeline(d);
+			    if (!lookahead)
+				d->indent--;
+			}
+			else
+			    print2buff(" ", d);
+			print2buff("else ", d);
+			deparse2buff(CAR(CDDR(s)), d);
+		    }
+		    else {
+			deparse2buff(CAR(CDR(s)), d);
+			if (d->incurly && !lookahead && !d->inlist )
+			    d->indent--;
+		    }
+		    break;
+		case BuiltInFunction::Kind::PP_WHILE:
+		    print2buff("while (", d);
+		    deparse2buff(CAR(s), d);
+		    print2buff(") ", d);
+		    deparse2buff(CADR(s), d);
+		    break;
+		case BuiltInFunction::Kind::PP_FOR:
+		    print2buff("for (", d);
+		    deparse2buff(CAR(s), d);
+		    print2buff(" in ", d);
+		    deparse2buff(CADR(s), d);
+		    print2buff(") ", d);
+		    deparse2buff(CADR(CDR(s)), d);
+		    break;
+		case BuiltInFunction::Kind::PP_REPEAT:
+		    print2buff("repeat ", d);
+		    deparse2buff(CAR(s), d);
+		    break;
+		case BuiltInFunction::Kind::PP_CURLY:
+		    print2buff("{", d);
+		    d->incurly += 1;
+		    d->indent++;
+		    writeline(d);
+		    while (s != R_NilValue) {
+			deparse2buff(CAR(s), d);
+			writeline(d);
+			s = CDR(s);
+		    }
+		    d->indent--;
+		    print2buff("}", d);
+		    d->incurly -= 1;
+		    break;
+		case BuiltInFunction::Kind::PP_PAREN:
+		    print2buff("(", d);
+		    deparse2buff(CAR(s), d);
+		    print2buff(")", d);
+		    break;
+		case BuiltInFunction::Kind::PP_SUBSET:
+		    if ((parens = needsparens(fop, CAR(s), true)))
+			print2buff("(", d);
+		    deparse2buff(CAR(s), d);
+		    if (parens)
+			print2buff(")", d);
+		    if (PRIMVAL(SYMVALUE(op)) == 1)
+			print2buff("[", d);
+		    else
+			print2buff("[[", d);
+		    args2buff(CDR(s), 0, 0, d);
+		    if (PRIMVAL(SYMVALUE(op)) == 1)
+			print2buff("]", d);
+		    else
+			print2buff("]]", d);
+		    break;
+		case BuiltInFunction::Kind::PP_FUNCALL:
+		case BuiltInFunction::Kind::PP_RETURN:
+		    if (d->backtick)
+			print2buff(quotify(PRINTNAME(op), '`'), d);
+		    else
+			print2buff(quotify(PRINTNAME(op), '"'), d);
+		    print2buff("(", d);
+		    d->inlist++;
+		    args2buff(s, 0, 0, d);
+		    d->inlist--;
+		    print2buff(")", d);
+		    break;
+		case BuiltInFunction::Kind::PP_FOREIGN:
+		    print2buff(CHAR(PRINTNAME(op)), d); /* ASCII */
+		    print2buff("(", d);
+		    d->inlist++;
+		    args2buff(s, 1, 0, d);
+		    d->inlist--;
+		    print2buff(")", d);
+		    break;
+		case BuiltInFunction::Kind::PP_FUNCTION:
+		    if (!(d->opts & USESOURCE) || !isString(CADDR(s))) {
+			print2buff(CHAR(PRINTNAME(op)), d); /* ASCII */
+			print2buff("(", d);
+			args2buff(CAR(s), 0, 1, d);
+			print2buff(") ", d);
+			deparse2buff(CADR(s), d);
+		    } else {
+			s = CADDR(s);
+			n = length(s);
+			const void *vmax = vmaxget();
+			for(i = 0 ; i < n ; i++) {
+			    print2buff(translateChar(STRING_ELT(s, i)), d);
+			    writeline(d);
+			}
+			vmaxset(vmax);
+		    }
+		    break;
+		case BuiltInFunction::Kind::PP_ASSIGN:
+		case BuiltInFunction::Kind::PP_ASSIGN2: {
+		    bool outerparens = (fnarg && streql(CHAR(PRINTNAME(op)), "="));
+		    if (outerparens)
+		    	print2buff("(", d);
+		    if ((parens = needsparens(fop, CAR(s), true)))
+			print2buff("(", d);
+		    deparse2buff(CAR(s), d);
+		    if (parens)
+			print2buff(")", d);
+		    print2buff(" ", d);
+		    print2buff(CHAR(PRINTNAME(op)), d); /* ASCII */
+		    print2buff(" ", d);
+		    if ((parens = needsparens(fop, CADR(s), false)))
+			print2buff("(", d);
+		    deparse2buff(CADR(s), d);
+		    if (parens)
+			print2buff(")", d);
+		    if (outerparens)
+		    	print2buff(")", d);
+		    break;
+		}
+		case BuiltInFunction::Kind::PP_DOLLAR:
+		    if ((parens = needsparens(fop, CAR(s), true)))
+			print2buff("(", d);
+		    deparse2buff(CAR(s), d);
+		    if (parens)
+			print2buff(")", d);
+		    print2buff(CHAR(PRINTNAME(op)), d); /* ASCII */
+		    /*temp fix to handle printing of x$a's */
+		    if( isString(CADR(s)) &&
+			isValidName(CHAR(STRING_ELT(CADR(s), 0))))
+			deparse2buff(STRING_ELT(CADR(s), 0), d);
+		    else {
+			if ((parens = needsparens(fop, CADR(s), false)))
+			    print2buff("(", d);
+			deparse2buff(CADR(s), d);
+			if (parens)
+			    print2buff(")", d);
+		    }
+		    break;
+		case BuiltInFunction::Kind::PP_BINARY:
+		    if ((parens = needsparens(fop, CAR(s), true)))
+			print2buff("(", d);
+		    deparse2buff(CAR(s), d);
+		    if (parens)
+			print2buff(")", d);
+		    print2buff(" ", d);
+		    print2buff(CHAR(PRINTNAME(op)), d); /* ASCII */
+		    print2buff(" ", d);
+		    linebreak(lbreak, d);
+		    if ((parens = needsparens(fop, CADR(s), false)))
+			print2buff("(", d);
+		    deparse2buff(CADR(s), d);
+		    if (parens)
+			print2buff(")", d);
+		    if (lbreak) {
+			d->indent--;
+			lbreak = false;
+		    }
+		    break;
+		case BuiltInFunction::Kind::PP_BINARY2:	/* no space between op and args */
+		    if ((parens = needsparens(fop, CAR(s), true)))
+			print2buff("(", d);
+		    deparse2buff(CAR(s), d);
+		    if (parens)
+			print2buff(")", d);
+		    print2buff(CHAR(PRINTNAME(op)), d); /* ASCII */
+		    if ((parens = needsparens(fop, CADR(s), false)))
+			print2buff("(", d);
+		    deparse2buff(CADR(s), d);
+		    if (parens)
+			print2buff(")", d);
+		    break;
+		case BuiltInFunction::Kind::PP_UNARY:
+		    print2buff(CHAR(PRINTNAME(op)), d); /* ASCII */
+		    if ((parens = needsparens(fop, CAR(s), false)))
+			print2buff("(", d);
+		    deparse2buff(CAR(s), d);
+		    if (parens)
+			print2buff(")", d);
+		    break;
+		case BuiltInFunction::Kind::PP_BREAK:
+		    print2buff("break", d);
+		    break;
+		case BuiltInFunction::Kind::PP_NEXT:
+		    print2buff("next", d);
+		    break;
+		case BuiltInFunction::Kind::PP_SUBASS:
+		    if(d->opts & S_COMPAT) {
+			print2buff("\"", d);
+			print2buff(CHAR(PRINTNAME(op)), d); /* ASCII */
+			print2buff("\'(", d);
+		    } else {
+			print2buff("`", d);
+			print2buff(CHAR(PRINTNAME(op)), d); /* ASCII */
+			print2buff("`(", d);
+		    }
+		    args2buff(s, 0, 0, d);
+		    print2buff(")", d);
+		    break;
+		default:
+		    d->sourceable = false;
+		    UNIMPLEMENTED("deparse2buff()");
+		}
+	    }
+	    else {
+		SEXP val = R_NilValue; /* -Wall */
+		if (isSymbol(CAR(s))) {
+		    val = SYMVALUE(CAR(s));
+		    if (TYPEOF(val) == PROMSXP)
+			val = eval(val, R_BaseEnv);
+		}
+		if ( isSymbol(CAR(s))
+		  && TYPEOF(val) == CLOSXP
+		  && streql(CHAR(PRINTNAME(CAR(s))), "::") ) { //  :: is special case
+		    deparse2buff(CADR(s), d);
+		    print2buff("::", d);
+		    deparse2buff(CADDR(s), d);
+		}
+		else if ( isSymbol(CAR(s))
+		  && TYPEOF(val) == CLOSXP
+		  && streql(CHAR(PRINTNAME(CAR(s))), ":::") ) { // ::: is special case
+		    deparse2buff(CADR(s), d);
+		    print2buff(":::", d);
+		    deparse2buff(CADDR(s), d);
+		}
+		else {
+		    if ( isSymbol(CAR(s)) ){
+			if(d->opts & S_COMPAT)
+			    print2buff(quotify(PRINTNAME(CAR(s)), '\''), d);
+			else
+			    print2buff(quotify(PRINTNAME(CAR(s)), '`'), d);
+		    }
+		    else
+			deparse2buff(CAR(s), d);
+		    print2buff("(", d);
+		    args2buff(CDR(s), 0, 0, d);
+		    print2buff(")", d);
+		}
+	    }
+	} // end{op : SYMSXP }
+	else if (FunctionBase::isA(op)) {
+	    if (parenthesizeCaller(op)) {
+		print2buff("(", d);
+		deparse2buff(op, d);
+		print2buff(")", d);
+	    } else
+		deparse2buff(op, d);
+	    print2buff("(", d);
+	    args2buff(CDR(s), 0, 0, d);
+	    print2buff(")", d);
+	}
+	else { /* we have a lambda expression */
+	    if (parenthesizeCaller(op)) {
+		print2buff("(", d);
+		deparse2buff(op, d);
+		print2buff(")", d);
+	    } else
+		deparse2buff(op, d);
+	    print2buff("(", d);
+	    args2buff(CDR(s), 0, 0, d);
+	    print2buff(")", d);
+	}
+	if (maybe_quote) {
+	    d->opts = d_opts_in;
+	    if(doquote)
+		print2buff(")", d);
+	}
+	}
+	break; // end{case LANGSXP} ---------------------------------------------
+    case STRSXP:
+    case LGLSXP:
+    case INTSXP:
+    case REALSXP:
+    case CPLXSXP:
+    case RAWSXP:
+	vector2buff(s, d);
+	break;
+    case EXTPTRSXP:
+    {
+	char tpb[32]; /* need 12+2+2*sizeof(void*) */
+	d->sourceable = false;
+	snprintf(tpb, 32, "<pointer: %p>", R_ExternalPtrAddr(s));
+	tpb[31] = '\0';
+	print2buff(tpb, d);
+    }
+	break;
+    case BCODESXP:
+	d->sourceable = false;
+	print2buff("<bytecode>", d);
+	break;
+    case WEAKREFSXP:
+	d->sourceable = false;
+	print2buff("<weak reference>", d);
+	break;
+    case S4SXP: {
+	error(_("'S4SXP': should not happen - please report"));
+      break;
+    }
+    default:
+	d->sourceable = false;
+	UNIMPLEMENTED_TYPE("deparse2buff()", s);
+    }
+}
+#endif
 
 /* If there is a string array active point to that, and */
 /* otherwise we are counting lines so don't do anything. */

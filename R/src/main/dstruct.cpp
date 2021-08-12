@@ -37,6 +37,7 @@ using namespace CXXR;
 
 HIDDEN SEXP R::mkPRIMSXP(int offset, bool evaluate)
 {
+#ifdef CXXR_USE_OLD_R_FUNTAB_IMPL
     SEXP result;
     SEXPTYPE type = evaluate ? BUILTINSXP : SPECIALSXP;
     static GCRoot<> PrimCache(nullptr);
@@ -66,6 +67,9 @@ HIDDEN SEXP R::mkPRIMSXP(int offset, bool evaluate)
         Rf_error(_("requested primitive type is not consistent with cached value"));
 
     return result;
+#else
+    return SEXP_downcast<RObject *>(BuiltInFunction::obtainPrimitive(offset, evaluate));
+#endif
 }
 
 SEXP R::mkCLOSXP(SEXP formal_args, SEXP body, SEXP env)

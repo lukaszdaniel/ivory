@@ -578,13 +578,21 @@ static void RemakeNextSEXP(FILE *fp, NodeInfo &node, int version, InputRoutines 
 	/* skip over length and name fields */
 	/* length = */ m.InInteger(fp, d);
 	R_AllocStringBuffer(MAXELTSIZE - 1, (d->buffer));
-	s = GCNode::expose(new BuiltInFunction(StrToInternal(m.InString(fp, d)), false));
+#ifdef CXXR_USE_OLD_R_FUNTAB_IMPL
+	s = new BuiltInFunction(StrToInternal(m.InString(fp, d)), false);
+#else
+	s = BuiltInFunction::obtainPrimitive(m.InString(fp, d));
+#endif
 	break;
     case BUILTINSXP:
 	/* skip over length and name fields */
 	/* length = */ m.InInteger(fp, d);
 	R_AllocStringBuffer(MAXELTSIZE - 1, (d->buffer));
-	s = GCNode::expose(new BuiltInFunction(StrToInternal(m.InString(fp, d))));
+#ifdef CXXR_USE_OLD_R_FUNTAB_IMPL
+	s = new BuiltInFunction(StrToInternal(m.InString(fp, d)));
+#else
+	s = BuiltInFunction::obtainPrimitive(m.InString(fp, d));
+#endif
 	break;
     case CHARSXP:
 	len = m.InInteger(fp, d);
@@ -674,12 +682,18 @@ static void RestoreSEXP(SEXP s, FILE *fp, InputRoutines &m, NodeInfo &node, int 
     {
         len = m.InInteger(fp, d);
         R_AllocStringBuffer(MAXELTSIZE - 1, (d->buffer));
+#ifdef CXXR_USE_OLD_R_FUNTAB_IMPL
         int index = StrToInternal(m.InString(fp, d));
         if (index == NA_INTEGER)
         {
             warning(_("unrecognized internal function name '%s'"), d->buffer.data);
             index = 0; /* zero doesn't make sense, but is back compatible with 3.0.0 and earlier */
         }
+#else
+        BuiltInFunction *fun = BuiltInFunction::obtainPrimitive(m.InString(fp, d));
+        if (!fun)
+            warning(_("unrecognized internal function name '%s'"), d->buffer.data);
+#endif
     }
     break;
     case CHARSXP:
@@ -1387,6 +1401,7 @@ static SEXP NewReadItem(SEXP sym_table, SEXP env_table, FILE *fp,
     case BUILTINSXP:
     {
         R_AllocStringBuffer(MAXELTSIZE - 1, (d->buffer));
+#ifdef CXXR_USE_OLD_R_FUNTAB_IMPL
         int index = StrToInternal(m->InString(fp, d));
         if (index == NA_INTEGER)
         {
@@ -1395,6 +1410,12 @@ static SEXP NewReadItem(SEXP sym_table, SEXP env_table, FILE *fp,
         }
         else
             PROTECT(s = mkPRIMSXP(index, type == BUILTINSXP));
+#else
+        PROTECT(s = BuiltInFunction::obtainPrimitive(m->InString(fp, d)));
+        if (s == nullptr) {
+            warning(_("unrecognized internal function name '%s'"), d->buffer.data);
+        }
+#endif
     }
     break;
     case CHARSXP:

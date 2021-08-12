@@ -33,7 +33,6 @@
 #define ROBJECT_HPP
 
 // #define ENABLE_ST_CHECKS
-#define CXXR_OLD_ALTREP_IMPL
 
 #include <cstddef>
 #include <cstring>
