@@ -49,14 +49,20 @@ namespace CXXR
 				VectorBase *vrnc = const_cast<VectorBase *>(vr);
 				if (Rf_isArray(vlnc) && Rf_isArray(vrnc) && !Rf_conformable(vlnc, vrnc))
 					Rf_error(_("non-conformable arrays"));
-				if (Rf_isTs(vlnc))
+				if (Rf_isTs(vlnc) && Rf_isTs(vrnc))
 				{
 					/* could check ts conformance here */
+				}
+				else if (Rf_isTs(vlnc))
+				{
 					if (vr->size() > vl->size())
 						Rf_error(_("time-series/vector length mismatch"));
 				}
-				else if (Rf_isTs(vrnc) && vl->size() > vr->size())
-					Rf_error(_("time-series/vector length mismatch"));
+				else if (Rf_isTs(vrnc))
+				{
+					if (vl->size() > vr->size())
+						Rf_error(_("time-series/vector length mismatch"));
+				}
 			}
 		} // namespace internal
 

@@ -515,7 +515,7 @@ static int SubassignTypeFix(SEXP *x, SEXP *y, R_xlen_t stretch, int level,
 }
 
 #ifdef LONG_VECTOR_SUPPORT
-R_INLINE static R_xlen_t gi(SEXP indx, R_xlen_t i)
+inline static R_xlen_t gi(SEXP indx, R_xlen_t i)
 {
     if (TYPEOF(indx) == REALSXP) {
 	double d = REAL_ELT(indx, i);
@@ -524,7 +524,7 @@ R_INLINE static R_xlen_t gi(SEXP indx, R_xlen_t i)
 	return INTEGER_ELT(indx, i);
 }
 #else
-R_INLINE static int gi(SEXP indx, R_xlen_t i)
+inline static int gi(SEXP indx, R_xlen_t i)
 {
     if (TYPEOF(indx) == REALSXP) {
 	double d = REAL_ELT(indx, i);
@@ -1506,58 +1506,6 @@ static SEXP SimpleListAssign(SEXP call, SEXP x, SEXP s, SEXP y, int ind,
 
 static SEXP listRemove(SEXP x, SEXP s, int ind)
 {
-#if CXXR_TRUE //#ifdef CXXR_OLD_PAIRLIST_IMPL
-	SEXP pv, px, val;
-    int i, ii, *indx, ns, nx;
-    R_xlen_t stretch=0;
-    const void *vmax = vmaxget();
-    nx = length(x);
-    PROTECT(s = GetOneIndex(s, ind));
-    PROTECT(s = makeSubscript(x, s, stretch, R_NilValue));
-    ns = length(s);
-    indx = (int*) R_alloc(nx, sizeof(int));
-    for (i = 0; i < nx; i++) indx[i] = 1;
-    if (TYPEOF(s) == REALSXP) {
-	for (i = 0; i < ns; i++) {
-	    double di = REAL_ELT(s, i);
-	    if (R_FINITE(di)) indx[(R_xlen_t) di - 1] = 0;
-	}
-    } else {
-	for (i = 0; i < ns; i++) {
-	    ii = INTEGER_ELT(s, i);
-	    if (ii != NA_INTEGER) indx[ii - 1] = 0;
-	}
-    }
-
-    px = x;
-    pv = val = R_NilValue;
-    for (i = 0; i < nx; i++) {
-	if (indx[i]) {
-	    if (val == R_NilValue)
-		val = px;
-	    pv = px;
-	}
-	else {
-	    /* The current cell, to which px points, is removed and is
-	       no longer accessible, so we can decrement the reference
-	       count on it's fields. */
-	    DECREMENT_REFCNT(CAR(px));
-	    DECREMENT_REFCNT(CDR(px));
-	    if (pv != R_NilValue)
-		SETCDR(pv, CDR(px));
-	}
-	px = CDR(px);
-    }
-    if (val != R_NilValue) {
-	SET_ATTRIB(val, ATTRIB(x));
-	if(IS_S4_OBJECT(x)) {SET_S4_OBJECT(val);} else {UNSET_S4_OBJECT(val);};
-	SET_OBJECT(val, OBJECT(x));
-	RAISE_NAMED(val, NAMED(x));
-    }
-    UNPROTECT(2);
-    vmaxset(vmax);
-    return val;
-#else
 	vector<ConsCell *, Allocator<ConsCell *>> vcc;
 	// Assemble vector of pointers to list elements:
 	for (ConsCell *xp = SEXP_downcast<ConsCell *>(x); xp; xp = xp->tail())
@@ -1575,7 +1523,7 @@ static SEXP listRemove(SEXP x, SEXP s, int ind)
 			{
 				double di = (*rv)[i];
 				if (R_FINITE(di))
-					vcc[(R_xlen_t)di - 1] = 0;
+					vcc[R_xlen_t(di) - 1] = nullptr;
 			}
 		}
 		else
@@ -1586,7 +1534,7 @@ static SEXP listRemove(SEXP x, SEXP s, int ind)
 			{
 				int ii = (*iv)[i];
 				if (ii != NA_INTEGER)
-					vcc[ii - 1] = 0;
+					vcc[ii - 1] = nullptr;
 			}
 		}
 	}
@@ -1598,27 +1546,17 @@ static SEXP listRemove(SEXP x, SEXP s, int ind)
 			ConsCell *cc = vcc[i];
 			if (cc)
 			{
-				PairList *tail = static_cast<PairList *>(ans);
+				PairList *tail = SEXP_downcast<PairList *>(ans);
 				ans = cc;
 				ans->setTail(tail);
-			}
-			else
-			{
-				/* The current cell, to which cc points, is removed and is
-				 no longer accessible, so we can decrement the reference
-				 count on it's fields. */
-				DECREMENT_REFCNT(CAR(cc));
-				DECREMENT_REFCNT(CDR(cc));
 			}
 		}
 		return ans;
 	}
-#endif
 }
 
-
 // For  x[s] <- y  --- extract (x, s, y)  and return the number of indices
-R_INLINE static int SubAssignArgs(SEXP args, SEXP *x, SEXP *s, SEXP *y)
+inline static int SubAssignArgs(SEXP args, SEXP *x, SEXP *s, SEXP *y)
 {
     if (CDR(args) == R_NilValue)
 	error(_("'SubAssignArgs()': invalid number of arguments"));
@@ -1644,8 +1582,7 @@ R_INLINE static int SubAssignArgs(SEXP args, SEXP *x, SEXP *s, SEXP *y)
 
 /* Version of DispatchOrEval for "[" and friends that speeds up simple cases.
    Also defined in subset.cpp */
-R_INLINE static
-int R_DispatchOrEvalSP(SEXP call, SEXP op, const char *generic, SEXP args,
+inline static int R_DispatchOrEvalSP(SEXP call, SEXP op, const char *generic, SEXP args,
 		    SEXP rho, SEXP *ans)
 {
     SEXP prom = nullptr;
@@ -1847,8 +1784,7 @@ HIDDEN SEXP do_subassign2(SEXP call, SEXP op, SEXP args, SEXP rho)
     return do_subassign2_dflt(call, op, ans, rho);
 }
 
-HIDDEN SEXP
-do_subassign2_dflt(SEXP call, SEXP op, SEXP args, SEXP rho)
+HIDDEN SEXP do_subassign2_dflt(SEXP call, SEXP op, SEXP args, SEXP rho)
 {
     SEXP dims, indx, names, newname, subs, x, xtop, xup, y, thesub = R_NilValue, xOrig = R_NilValue;
     int i, ndims, nsubs, which, len = 0 /* -Wall */;

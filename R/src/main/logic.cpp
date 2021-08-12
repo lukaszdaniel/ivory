@@ -115,8 +115,7 @@ namespace
 
 		R_xlen_t nx = Rf_xlength(x), ny = Rf_xlength(y);
 
-		checkOperandsConformable(
-			SEXP_downcast<VectorBase *>(x), SEXP_downcast<VectorBase *>(y));
+		checkOperandsConformable(SEXP_downcast<VectorBase *>(x), SEXP_downcast<VectorBase *>(y));
 
 		if (nx > 0 && ny > 0)
 		{
