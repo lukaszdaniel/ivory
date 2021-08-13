@@ -90,6 +90,20 @@ namespace CXXR
         return ans;
     }
 
+    PairList *Frame::Binding::asPairList(PairList *tail) const
+    {
+        PairList *ans = new PairList(rawValue(), tail, symbol());
+        SET_MISSING(ans, origin());
+        SET_BNDCELL_TAG(ans, bndcellTag());
+        SET_ASSIGNMENT_PENDING(ans, assignmentPending());
+        if (isActive())
+            SET_ACTIVE_BINDING_BIT(ans);
+        if (isLocked())
+            LOCK_BINDING(ans);
+        ans->expose();
+        return ans;
+    }
+
     void frameReadPairList(Frame *frame, PairList *bindings)
     {
         for (PairList *pl = bindings; pl; pl = pl->tail())
@@ -101,20 +115,6 @@ namespace CXXR
             Frame::Binding *bdg = frame->obtainBinding(symbol);
             bdg->fromPairList(pl);
         }
-    }
-
-    PairList *Frame::Binding::asPairList(PairList *tail) const
-    {
-        PairList *ans = new PairList(m_value, tail, const_cast<Symbol *>(symbol()));
-        SET_MISSING(ans, origin());
-        SET_BNDCELL_TAG(ans, bndcellTag());
-        SET_ASSIGNMENT_PENDING(ans, assignmentPending());
-        if (isActive())
-            SET_ACTIVE_BINDING_BIT(ans);
-        if (isLocked())
-            LOCK_BINDING(ans);
-        ans->expose();
-        return ans;
     }
 
     void Frame::Binding::fromPairList(PairList *pl)
@@ -142,6 +142,14 @@ namespace CXXR
             Rf_error(_("cannot change value of locked binding for '%s'"), symbol()->name()->c_str());
         if (isActive())
             Rf_error(_("internal error: use %s for active bindings"), "setFunction()");
+    }
+
+    void Frame::Binding::handleFunctionSetValueError() const
+    {
+        if (!isActive())
+            Rf_error(_("symbol already has a regular binding"));
+        if (isLocked())
+            Rf_error(_("cannot change active binding if binding is locked"));
     }
 
     Frame::Binding *Frame::binding(const Symbol *symbol)
@@ -209,7 +217,7 @@ namespace CXXR
         if (isLocked())
         {
             // If the frame is locked, we can only return pre-existing bindings.
-            Frame::Binding *binding = Frame::binding(symbol);
+            binding = Frame::binding(symbol);
             if (!binding)
             {
                 Rf_error(_("cannot add bindings to a locked frame"));
@@ -266,24 +274,47 @@ namespace CXXR
         delete m_map;
     }
 
-    void Frame::Binding::setFunction(FunctionBase *function, Origin origin)
+    void Frame::Binding::setValue(RObject *new_value, Origin origin, bool quiet)
     {
+        if (isLocked() || isActive())
+        {
+            handleSetValueError();
+        }
         if (bndcellTag())
         {
-            m_value.clearCar(); // m_value = nullptr;
+            m_value.clearCar();
+            setBndCellTag(NILSXP);
+        }
+        if (m_value == new_value)
+        {
+            return;
+        }
+        if (assignmentPending())
+        {
+            setAssignmentPending(false);
+            GCNode::incRefCount(m_value);
+        }
+        m_value.retarget(m_frame, new_value);
+        m_origin = origin;
+        if (!quiet)
+            m_frame->monitorWrite(*this);
+    }
+
+    void Frame::Binding::setFunction(FunctionBase *function, Origin origin)
+    {
+        // See if binding already has a non-default value:
+        if (m_value != Symbol::missingArgument() && m_value != Symbol::unboundValue())
+        {
+            handleFunctionSetValueError();
+        }
+        if (bndcellTag())
+        {
+            m_value.clearCar();
             setBndCellTag(NILSXP);
         }
         if (m_value == function)
         {
             return;
-        }
-        // See if binding already has a non-null value:
-        if (m_value != Symbol::missingArgument() && m_value != Symbol::unboundValue())
-        {
-            if (!isActive())
-                Rf_error(_("symbol already has a regular binding"));
-            if (isLocked())
-                Rf_error(_("cannot change active binding if binding is locked"));
         }
         if (assignmentPending())
         {
@@ -335,35 +366,9 @@ namespace CXXR
     {
         if (isLocked())
             Rf_error(_("cannot change missing status of a locked binding"));
-        if (!(missingval == 0 || missingval == 1 || missingval == 2))
+        if (!(missingval == Origin::EXPLICIT || missingval == Origin::MISSING || missingval == Origin::DEFAULTED))
             Rf_error(_("incorrect missing status supplied"));
         m_origin = Origin(missingval);
-    }
-
-    void Frame::Binding::setValue(RObject *new_value, Origin origin, bool quiet)
-    {
-        if (bndcellTag())
-        {
-            m_value.clearCar(); // m_value = nullptr;
-            setBndCellTag(NILSXP);
-        }
-        if (m_value == new_value)
-        {
-            return;
-        }
-        if (isLocked() || isActive())
-        {
-            handleSetValueError();
-        }
-        if (assignmentPending())
-        {
-            setAssignmentPending(false);
-            GCNode::incRefCount(m_value);
-        }
-        m_value.retarget(m_frame, new_value);
-        m_origin = origin;
-        if (!quiet)
-            m_frame->monitorWrite(*this);
     }
 
     vector<const Symbol *> Frame::symbols(bool include_dotsymbols,

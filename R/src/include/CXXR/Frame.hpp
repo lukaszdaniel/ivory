@@ -419,6 +419,7 @@ namespace CXXR
       std::pair<RObject *, bool> forcedValueSlow() const;
       void assignSlow(RObject *new_value, Origin origin);
       void handleSetValueError() const;
+      void handleFunctionSetValueError() const;
 
       /** @brief Has this binding been set to a value?
        *

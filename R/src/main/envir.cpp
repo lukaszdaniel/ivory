@@ -130,6 +130,7 @@ static SEXP getActiveValue(SEXP fun)
 
 static void setActiveValue(SEXP fun, SEXP val)
 {
+    GCManager::GCInhibitor no_gc;
     static Symbol *s_dcolon = Symbol::obtain("::");
     static Symbol *s_base = Symbol::obtain("base");
     static Symbol *s_quote = Symbol::obtain("quote");
@@ -142,7 +143,7 @@ static void setActiveValue(SEXP fun, SEXP val)
 /*
 SEXP BINDING_VALUE(SEXP b) == Binding::value() or Binding::unforcedValue()
 void SET_BINDING_VALUE(SEXP b, SEXP val) == assignSlow(RObject *new_value, Origin origin) or assign(RObject *new_value, Origin origin)
-void R::SET_BNDCELL(SEXP cell, SEXP val) == Binding::setValue(RObject *new_value, Origin origin, bool quiet)
+void R::SET_BNDCELL(SEXP cell, SEXP val) or SETCAR() == Binding::setValue(RObject *new_value, Origin origin, bool quiet)
 CAR(b) == rawValue()
 */
 
