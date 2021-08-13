@@ -8980,11 +8980,13 @@ threaded programs.
 
 @command{AddressSanitizer} (`ASan') is a tool with similar aims to the
 memory checker in @command{valgrind}.  It is available with suitable
-builds@footnote{currently on Linux and macOS (including the builds from
-Xcode 7 and later), with some support for Solaris.  On some platforms
-the runtime library, @pkg{libasan}, needs to be installed separately,
-and for checking C++ you may also need @pkg{libubsan}.} of @command{gcc}
-and @command{clang} on common Linux and macOS platforms.  See
+builds@footnote{currently on @cputype{x86_64}/@cputype{ix86} Linux and
+FreeBSD, with some support for Intel macOS, NetBSD and Windows, but not
+with the toolchains normally used with @R{}. (There is a faster variant,
+HWASAN, for @cputype{aarch64} only.)  On some platforms the runtime
+library, @pkg{libasan}, needs to be installed separately, and for
+checking C++ you may also need @pkg{libubsan}.} of @command{gcc} and
+@command{clang} on common Linux and macOS platforms.  See
 @uref{https://clang.llvm.org/docs/UsersManual.html#controlling-code-generation},
 @uref{https://clang.llvm.org/docs/AddressSanitizer.html} and
 @uref{https://github.com/google/sanitizers}.
@@ -9010,10 +9012,10 @@ uninitialized memory.
 
 Recent versions return symbolic addresses for the location of the error
 provided @command{llvm-symbolizer}@footnote{part of the LLVM project and
-in distributed in @code{llvm} RPMs and @code{.deb}s on Linux.  It is not
+distributed in @code{llvm} RPMs and @code{.deb}s on Linux.  It is not
 currently shipped by Apple.} is on the path: if it is available but not
-on the path or has been renamed@footnote{as Ubuntu has been said to do.}, one
-can use an environment variable, e.g.@:
+on the path or has been renamed@footnote{as Ubuntu has been said to
+do.}, one can use an environment variable, e.g.@:
 
 @example
 ASAN_SYMBOLIZER_PATH=/path/to/llvm-symbolizer
@@ -9156,7 +9158,12 @@ might be @code{NA_INTEGER}.
 platforms the runtime library, @pkg{libubsan}, needs to be installed
 separately.} of @command{clang} and GCC.  Its (main) runtime library is
 linked into each package's DLL, so it is less often needed to be
-included in @env{MAIN_LDFLAGS}.
+included in @env{MAIN_LDFLAGS}.  Platforms supported by @command{clang}
+are listed at
+@uref{https://clang.llvm.org/docs/UndefinedBehaviorSanitizer.html#supported-platforms}:
+@acronym{CRAN} uses it for C/C++ with both GCC and @command{clang} on
+@cputype{x86_64} Linux: the two toolchains often highlight different
+things with more reports from @command{clang} than GCC.
 
 This sanitizer can be combined with the Address Sanitizer by
 @option{-fsanitize=undefined,address} (where both are supported).
@@ -14376,14 +14383,27 @@ distributions.
 @noindent
 Entries marked with an asterisk only have @samp{p} and @samp{q}
 functions available, and none of the non-central distributions have
-@samp{r} functions.  After calls to @code{dwilcox}, @code{pwilcox} or
-@code{qwilcox} the function @code{wilcox_free()} should be called, and
-similarly @code{signrank_free()} for the signed rank functions.
-@findex wilcox_free
-@findex signrank_free
+@samp{r} functions.
 
 (If remapping is suppressed, the Normal distribution names are
 @code{Rf_dnorm4}, @code{Rf_pnorm5} and @code{Rf_qnorm5}.)
+
+After calls to @code{dwilcox}, @code{pwilcox} or @code{qwilcox} the
+function @code{wilcox_free()} should be called, and similarly
+@code{signrank_free()} for the signed rank functions.
+@findex wilcox_free
+@findex signrank_free
+Since @code{wilcox_free()} and @code{signrank_free()} were only added to
+@file{Rmath.h} in @R{}@tie{} 4.2.0, their use requires something like
+@example
+#include "Rmath.h"
+#include "Rversion.h"
+
+#if R_VERSION < R_Version(4, 2, 0)
+extern void wilcox_free(void);
+extern void signrank_free(void);
+#endif
+@end example
 
 For the negative binomial distribution (@samp{nbinom}), in addition to the
 @code{(size, prob)} parametrization, the alternative @code{(size, mu)}
@@ -14400,8 +14420,9 @@ double dbinom_raw(double x, double n, double p, double q, int give_log)
 double dpois_raw (double x, double lambda, int give_log)
 @end group
 @end example
-Note that @code{dbinom_raw()} gets both @eqn{p, p} and @eqn{q = 1-p, q = 1-p} which
-may be advantageous when one of them is close to @eqn{1, 1}.
+Note that @code{dbinom_raw()} returns both @eqn{p, p} and @eqn{q = 1-p,
+q = 1-p} which may be advantageous when one of them is close to @eqn{1,
+1}.
 
 
 @node Mathematical functions, Numerical Utilities, Distribution functions, Numerical analysis subroutines

@@ -627,11 +627,16 @@ static void substrset(char *buf, const char *const str, cetype_t ienc, size_t sa
     } else {
 	/* This cannot work for stateful encodings */
 	if (mbcslocale) {
-	    for (size_t i = 1; i < sa; i++) buf += Mbrtowc(nullptr, buf, R_MB_CUR_MAX, nullptr);
+	    mbstate_t mb_st_in;
+	    mbs_init(&mb_st_in);
+	    for (size_t i = 1; i < sa; i++)
+		buf += Mbrtowc(nullptr, buf, R_MB_CUR_MAX, &mb_st_in);
 	    /* now work out how many bytes to replace by how many */
+	    mbstate_t mb_st_out;
+	    mbs_init(&mb_st_out);
 	    for (size_t i = sa; i <= so && in < strlen(str); i++) {
-		in += Mbrtowc(nullptr, str+in, R_MB_CUR_MAX, nullptr);
-		out += Mbrtowc(nullptr, buf+out, R_MB_CUR_MAX, nullptr);
+		in += Mbrtowc(nullptr, str+in, R_MB_CUR_MAX, &mb_st_in);
+		out += Mbrtowc(nullptr, buf+out, R_MB_CUR_MAX, &mb_st_out);
 		if (!str[in]) break;
 	    }
 	    if (in != out) memmove(buf+in, buf+out, strlen(buf+out)+1);

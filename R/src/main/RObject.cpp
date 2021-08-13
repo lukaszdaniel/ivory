@@ -422,9 +422,7 @@ void R::SET_ASSIGNMENT_PENDING(SEXP x, int v)
 
 void MARK_NOT_MUTABLE(SEXP x)
 {
-#if defined(USE_RINTERNALS) || defined(COMPILING_IVORY)
     SET_REFCNT(x, REFCNTMAX);
-#endif
 }
 
 int R::IS_ASSIGNMENT_CALL(SEXP x)

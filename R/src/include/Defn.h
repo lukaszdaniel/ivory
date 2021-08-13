@@ -240,7 +240,6 @@ namespace R
     SEXP R_compact_intrange(R_xlen_t n1, R_xlen_t n2);
     SEXP R_deferred_coerceToString(SEXP v, SEXP info);
     // SEXP R_virtrep_vec(SEXP, SEXP); // not implemented in CR
-    SEXP R_tryWrap(SEXP);
     SEXP R_tryUnwrap(SEXP);
 
     Rboolean Rf_pmatch(SEXP, SEXP, Rboolean);
@@ -296,7 +295,7 @@ namespace R
 #undef isObject
 #define isObject(s)	(OBJECT(s) != 0)
 
-#endif
+#endif /* USE_RINTERNALS */
 
 namespace R
 {

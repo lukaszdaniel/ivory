@@ -1999,7 +1999,7 @@ HIDDEN SEXP do_wrap_meta(SEXP call, SEXP op, SEXP args, SEXP env)
     return wrap_meta(x, srt, no_na);
 }
 
-HIDDEN SEXP R::R_tryWrap(SEXP x)
+SEXP R_tryWrap(SEXP x)
 {
     return wrap_meta(x, UNKNOWN_SORTEDNESS, false);
 }

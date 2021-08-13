@@ -415,7 +415,7 @@ int Rstrwid(const char *str, int slen, cetype_t ienc, int quote)
 	    unsigned int k; /* not wint_t as it might be signed */
 	    wchar_t wc;
 	    int res = useUTF8 ? (int) utf8toucs(&wc, p):
-		(int) mbrtowc(&wc, p, R_MB_CUR_MAX, nullptr);
+		(int) mbrtowc(&wc, p, R_MB_CUR_MAX, &mb_st);
 	    if(res >= 0) {
 		if (useUTF8 && IS_HIGH_SURROGATE(wc))
 		    k = utf8toucs32(wc, p);
@@ -666,7 +666,7 @@ const char *R::EncodeString(SEXP s, int w, int quote, Rprt_adj justify)
 	for (i = 0; i < cnt; i++) {
 	    wchar_t wc;
 	    int res = (int)(useUTF8 ? utf8toucs(&wc, p):
-			    mbrtowc(&wc, p, R_MB_CUR_MAX, nullptr));
+			    mbrtowc(&wc, p, R_MB_CUR_MAX, &mb_st));
 	    if(res >= 0) { /* res = 0 is a terminator */
 		unsigned int k; /* not wint_t as it might be signed */
 		if (useUTF8 && IS_HIGH_SURROGATE(wc))

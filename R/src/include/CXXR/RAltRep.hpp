@@ -141,7 +141,6 @@ namespace R
     SEXP R_compact_intrange(R_xlen_t n1, R_xlen_t n2);
     SEXP R_deferred_coerceToString(SEXP v, SEXP info);
     // SEXP R_virtrep_vec(SEXP, SEXP);
-    SEXP R_tryWrap(SEXP);
     SEXP R_tryUnwrap(SEXP);
     void R_init_altrep();
     void R_reinit_altrep_classes(DllInfo *);
@@ -149,6 +148,7 @@ namespace R
 
 extern "C"
 {
+    SEXP R_tryWrap(SEXP x);
     SEXP ALTREP_CLASS(SEXP x);
     SEXP R_altrep_data1(SEXP x);
     SEXP R_altrep_data2(SEXP x);

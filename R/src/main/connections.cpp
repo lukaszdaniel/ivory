@@ -4727,6 +4727,8 @@ static SEXP readFixedString(Rconnection con, int len, int useBytes, bool *warnOn
 
 	p = buf = (char *) R_alloc(R_MB_CUR_MAX*len+1, sizeof(char));
 	memset(buf, 0, R_MB_CUR_MAX*len+1);
+	mbstate_t mb_st;
+	mbs_init(&mb_st);
 	for(i = 0; i < len; i++) {
 	    q = p;
 	    m = (int) con->read(p, sizeof(char), 1, con);
@@ -4737,7 +4739,7 @@ static SEXP readFixedString(Rconnection con, int len, int useBytes, bool *warnOn
 		if(m < clen - 1) error(_("invalid UTF-8 input in 'readChar()'"));
 		p += clen - 1;
 		/* NB: this only checks validity of multi-byte characters */
-		if((int)mbrtowc(nullptr, q, clen, nullptr) < 0)
+		if((int)mbrtowc(nullptr, q, clen, &mb_st) < 0)
 		    error(_("invalid UTF-8 input in 'readChar()'"));
 	    } else if (*q == '\0' && *warnOnNul) {
 		*warnOnNul = FALSE;

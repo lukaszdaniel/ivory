@@ -597,10 +597,8 @@ namespace CXXR
         // give this constructor a distinct signature.
         explicit GCNode(int /*ignored*/);
 
-        // Not implemented.  Declared to prevent compiler-generated
-        // versions:
-        GCNode(const GCNode &);
-        GCNode &operator=(const GCNode &);
+        GCNode(const GCNode &) = delete;
+        GCNode &operator=(const GCNode &) = delete;
 
         // Force the generation number of this node up to mingen, and
         // if the generation number is changed, flag up the change for
@@ -627,9 +625,6 @@ namespace CXXR
          * This method must be called before any GCNodes are created.
          * If called more than once in a single program run, the
          * second and subsequent calls do nothing.
-         *
-         * @param num_old_generations One fewer than the number of
-         * generations into which GCNode objects are to be ranked.
          */
         static void initialize();
 

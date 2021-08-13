@@ -27,7 +27,6 @@ Rdefines.h  macros for an S-like interface to the above (no longer maintained)
 
 and its contents are no longer documented.
 
-The use of ‘USE_RINTERNALS’ with Rdefines.h is not supported.
 */
 
 #ifndef R_DEFINES_H
@@ -96,9 +95,7 @@ The use of ‘USE_RINTERNALS’ with Rdefines.h is not supported.
 #define NUMERIC_POINTER(x)	REAL(x)
 #define CHARACTER_POINTER(x)	STRING_PTR(x)
 #define COMPLEX_POINTER(x)	COMPLEX(x)
-/* Use of VECTOR_PTR will fail unless USE_RINTERNALS is in use
-   This is probably unused.
-*/
+/* Use of VECTOR_PTR will fail; This is probably unused. */
 #define LIST_POINTER(x)		VECTOR_PTR(x)
 #define RAW_POINTER(x)		RAW(x)
 

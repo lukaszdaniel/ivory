@@ -1024,6 +1024,24 @@ add_dummies <- function(dir, Log)
             }
         }
 
+        ## Also check logical fields for appropriate values.
+        db <- .read_description(dfile)
+        fields <- c("LazyData", "KeepSource", "ByteCompile", "UseLTO",
+                    "StagedInstall", "Biarch", "BuildVignettes")
+        bad <- fields[vapply(fields,
+                             function(f) {
+                                 !is.na(x <- db[f]) &&
+                                     suppressWarnings(is.na(utils:::str2logical(x)))
+                             },
+                             NA)]
+        if(length(bad)) {
+            if(!any) noteLog(Log)
+            any <- TRUE
+            printLog(Log,
+                     paste(c("Malformed field(s):", bad), collapse = " "),
+                     "\n")
+        }
+
         if(!is_base_pkg && is.na(db["Packaged"])) {
             if(!any) (noteLog(Log))
             any <- TRUE
@@ -5783,6 +5801,10 @@ add_dummies <- function(dir, Log)
         do_install_arg <- FALSE
         ## If we do not install, then we cannot *run* any code.
         do_examples <- do_tests <- do_vignettes <- do_build_vignettes <- 0
+    }
+    if(startsWith(install, "check+fake")) {
+        install <- paste0("check", substring(install, 11L))
+        opts <- c(opts, "--install=fake")
     }
     if (run_dontrun) opts <- c(opts, "--run-dontrun")
     if (run_donttest) opts <- c(opts, "--run-donttest")

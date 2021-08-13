@@ -1795,6 +1795,7 @@ void R::R_reInitTempDir(int die_on_fail)
 #ifdef _WIN32
     char tmp2[PATH_MAX];
     int hasspace = 0;
+    DWORD res = 0;
 #endif
 
 #define ERROR_MAYBE_DIE(MSG_) \
@@ -1824,8 +1825,16 @@ void R::R_reInitTempDir(int die_on_fail)
 	for (p = tm; *p; p++)
 	    if (isspace(*p)) { hasspace = 1; break; }
 	if (hasspace) {
-	    GetShortPathName(tm, tmp2, MAX_PATH);
-	    tm = tmp2;
+	    res = GetShortPathName(tm, tmp2, MAX_PATH);
+	    if (res != 0) 
+	        tm = tmp2;
+
+	    hasspace = 0;
+	    for (p = tm; *p; p++)
+		if (isspace(*p)) { hasspace = 1; break; }
+	    if (hasspace) {
+		ERROR_MAYBE_DIE(_("'R_TempDir' contains space"));
+	    }
 	}
 	snprintf(tmp1, PATH_MAX+11, "%s\\RtmpXXXXXX", tm);
 #else

@@ -1137,6 +1137,9 @@ void SET_NAMED(SEXP x, int v);
 // used by rlang
 #define BODY_EXPR(e) R_ClosureExpr(e)
 
+// used by BIOC::matter; mightbe reasonable to include in API
+SEXP R_tryWrap(SEXP x);
+
 #ifdef __cplusplus
 /** @brief Shorthand for Rf_length().
  */
