@@ -38,7 +38,7 @@ jobs:
         fetch-depth: 100
 
     - name: Configure
-      run: CC=${{matrix.CC}} CXX=${{matrix.CXX}} ./configure --enable-R-shlib --with-blas --with-lapack --disable-java --with-included-gettext --enable-R-profiling --enable-memory-profiling --enable-werror --with-valgrind-instrumentation=2
+      run: CC=${{matrix.CC}} CXX=${{matrix.CXX}} cd R && ./configure --enable-R-shlib --with-blas --with-lapack --disable-java --with-included-gettext --enable-R-profiling --enable-memory-profiling --enable-werror --with-valgrind-instrumentation=2
 
     - name: Build
       run: make
