@@ -37,8 +37,10 @@ jobs:
       with:
         fetch-depth: 100
 
-    - name: Configure
+    - name: Navigate to the R folder
       run: cd R
+
+    - name: Configure
       run: CC=${{matrix.CC}} CXX=${{matrix.CXX}} ./configure --enable-R-shlib --with-blas --with-lapack --disable-java --with-included-gettext --enable-R-profiling --enable-memory-profiling --enable-werror --with-valgrind-instrumentation=2
 
     - name: Build
