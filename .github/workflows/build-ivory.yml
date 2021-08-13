@@ -1,0 +1,51 @@
+name: Build Ivory
+
+on:
+  push:
+    branches: [ master ]
+  pull_request:
+    branches: [ master ]
+
+jobs:
+  linux:
+    name: Linux
+    runs-on: ubuntu-latest
+    container:
+      image: ${{matrix.OS}}
+    env:
+      DEBIAN_FRONTEND: noninteractive
+      R_CRAN_WEB: "https://cran.rstudio.com"
+      CRAN_RSYNC: 'mirrors.nic.cz::CRAN'
+    strategy:
+      fail-fast: false
+      matrix:
+        CC: [ gcc ]
+        CXX: [ g++ ]
+        OS: [ 'debian:stable' ]
+    steps:
+    - name: System dependencies
+      run: |
+        set -e
+        apt-get update -y
+        apt-get install -y ${{matrix.CC}} ${{matrix.CXX}} libboost-all-dev wget locales git rsync gfortran xvfb autoconf pkg-config texinfo texlive-latex-extra texlive-fonts-recommended tk8.6-dev \
+        libcurl4-openssl-dev libblas-dev libbz2-dev libicu-dev libjpeg-dev liblapack-dev liblzma-dev libncurses5-dev libpcre2-dev libpng-dev libreadline-dev libxt-dev
+        localedef -i en_US -f UTF-8 en_US.UTF-8
+        echo "LANG=en_US.UTF-8" >> $GITHUB_ENV
+
+    - name: Checkout
+      uses: actions/checkout@v2
+      with:
+        fetch-depth: 100
+
+    - name: Configure
+      run: CC=${{matrix.CC}} CXX=${{matrix.CXX}} ./configure --enable-R-shlib --with-blas --with-lapack --disable-java --with-included-gettext --enable-R-profiling --enable-memory-profiling --enable-werror --with-valgrind-instrumentation=2
+
+    - name: Build
+      run: make
+
+    - name: Check
+      run: xvfb-run make check-devel
+
+    - name: Print failed tests
+      if: always()
+      run: tail -n100 tests/*.fail || true
