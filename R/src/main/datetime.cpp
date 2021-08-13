@@ -44,8 +44,6 @@
 
 #define R_NO_REMAP
 
-#include <Rmath.h> // for imin2()
-
 // to get tm_zone, tm_gmtoff defined in glibc.
 // some other header, e.g. cmath, might define the macro.
 #if defined HAVE_FEATURES_H
@@ -918,7 +916,7 @@ HIDDEN SEXP do_formatPOSIXlt(SEXP call, SEXP op, SEXP args, SEXP env)
 
     /* coerce fields, find length of longest one */
     R_xlen_t n = 0, nlen[11];
-    int nn = imin2(LENGTH(x), 11);
+    int nn = std::min(LENGTH(x), 11);
     for(int i = 0; i < nn; i++) {
 	nlen[i] = XLENGTH(VECTOR_ELT(x, i));
 	if(nlen[i] > n) n = nlen[i];
