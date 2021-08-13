@@ -37,18 +37,21 @@ jobs:
       with:
         fetch-depth: 100
 
-    - name: Navigate to the R folder
-      run: cd R
-
     - name: Configure
-      run: CC=${{matrix.CC}} CXX=${{matrix.CXX}} ./configure --enable-R-shlib --with-blas --with-lapack --disable-java --with-included-gettext --enable-R-profiling --enable-memory-profiling --enable-werror --with-valgrind-instrumentation=2
+      run: |
+        cd R
+        CC=${{matrix.CC}} CXX=${{matrix.CXX}} ./configure --enable-R-shlib --with-blas --with-lapack --disable-java --with-included-gettext --enable-R-profiling --enable-memory-profiling --enable-werror --with-valgrind-instrumentation=2
 
     - name: Build
-      run: make
+      run: |
+        cd R
+        make
 
     - name: Check
-      run: xvfb-run make check-devel
+      run: |
+        cd R
+        xvfb-run make check-devel
 
     - name: Print failed tests
       if: always()
-      run: tail -n100 tests/*.fail || true
+      run: tail -n100 R/tests/*.fail || true
