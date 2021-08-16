@@ -89,9 +89,9 @@ TRE_CPPFLAGS = @BUILD_TRE_TRUE@ -I$(top_srcdir)/src/extra
 XDR_CPPFLAGS = @BUILD_XDR_TRUE@ -I$(top_srcdir)/src/extra/xdr
 @BUILD_XDR_FALSE@XDR_CPPFLAGS = @TIRPC_CPPFLAGS@
 
-## platform.c needs $(CURL_CPPFLAGS).
+## platform.cpp needs $(CURL_CPPFLAGS).
 ALL_CPPFLAGS = $(TRE_CPPFLAGS) $(XDR_CPPFLAGS) $(R_XTRA_CPPFLAGS) \
-  $(CURL_CPPFLAGS) $(CPPFLAGS) -I$(top_srcdir)/src/nmath $(DEFS) $(WERROR_FLAGS)
+  $(CURL_CPPFLAGS) $(CPPFLAGS) -I$(top_srcdir)/src/nmath $(WERROR_FLAGS) $(DEFS)
 @WANT_R_SHLIB_TRUE@ALL_CFLAGS = $(ALL_CFLAGS_LO)
 @WANT_R_SHLIB_TRUE@ALL_FFLAGS = $(ALL_FFLAGS_LO)
 

@@ -14,11 +14,11 @@ LIBINTL= @BUILD_LIBINTL_FALSE@ @LIBINTL@
 R_HOME=$(rhome)
 STATIC_LIBR_PC = @WANT_R_STATIC_TRUE@ $(BLAS_LIBS) $(FLIBS) @R_XTRA_LIBS@ $(LIBINTL) @READLINE_LIBS@ $(LIBS)
 
-ALL_CPPFLAGS = $(R_XTRA_CPPFLAGS) $(X_CFLAGS) $(CPPFLAGS) $(DEFS)
+ALL_CPPFLAGS = $(R_XTRA_CPPFLAGS) $(X_CFLAGS) $(CPPFLAGS) $(WERROR_FLAGS) $(DEFS)
 
 ## Rscript should not be linked to OpenMP
 ## MAIN_CFLAGS is used on some systems when profiling R.
-ALL_CFLAGS0 = $(R_XTRA_CFLAGS) $(MAIN_CFLAGS) $(CFLAGS)
+ALL_CFLAGS0 = $(R_XTRA_CFLAGS) $(MAIN_CFLAGS) $(CFLAGS) $(WERROR_FLAGS)
 
 SOURCES_CXX_BASE = Rembedded.cpp dynload.cpp system.cpp sys-unix.cpp sys-std.cpp X11.cpp
 SOURCES = $(SOURCES_CXX_BASE)
@@ -31,7 +31,7 @@ DISTFILES = \
   Makefile.in $(SOURCES_CXX_BASE) Rscript.cpp \
   $(HEADERS) libR.pc.in system.txt
 
-@WANT_R_SHLIB_TRUE@ALL_CFLAGS = $(ALL_CFLAGS_LO)
+@WANT_R_SHLIB_TRUE@ALL_CFLAGS = $(ALL_CFLAGS_LO) $(WERROR_FLAGS)
 
 all: R
 

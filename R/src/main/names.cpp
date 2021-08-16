@@ -1978,11 +1978,9 @@ const std::vector<std::string> Symbol::s_special_symbol_names = {
     "$", "[", "[[",
     "$<-", "[<-", "[[<-"};
 
+#ifndef CXXR_USE_OLD_R_FUNTAB_IMPL
 std::pair<BuiltInFunction::map*, BuiltInFunction::map*> BuiltInFunction::createLookupTables()
 {
-#ifdef CXXR_USE_OLD_R_FUNTAB_IMPL
-    return std::make_pair(nullptr, nullptr);
-#else
     GCManager::GCInhibitor no_gc;
     map *primitive_function_cache = new map();
     map *internal_function_cache = new map();
@@ -2002,8 +2000,8 @@ std::pair<BuiltInFunction::map*, BuiltInFunction::map*> BuiltInFunction::createL
         }
     }
     return std::make_pair(primitive_function_cache, internal_function_cache);
-#endif
 }
+#endif
 
 /* also used in eval.cpp */
 HIDDEN SEXP R::R_Primitive(const char *primname)

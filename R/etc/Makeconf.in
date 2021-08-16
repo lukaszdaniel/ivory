@@ -93,7 +93,7 @@ LTO_FC_OPT = @LTO_FC@
 ## needed to build applications linking to static libR
 MAIN_LD = @MAIN_LD@
 MAIN_LDFLAGS = @MAIN_LDFLAGS@
-MAIN_LINK = $(CXX) $(MAIN_LDFLAGS) $(LDFLAGS)
+MAIN_LINK = $(MAIN_LD) $(MAIN_LDFLAGS) $(LDFLAGS)
 MKINSTALLDIRS = "$(R_HOME)/bin/mkinstalldirs"
 NM = @NM@
 OBJC = @OBJC@

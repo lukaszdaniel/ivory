@@ -513,7 +513,7 @@ static bool existsVarInFrame(SEXP rho, SEXP symbol)
     return false;
 }
 
-inline SEXP Rf_findVarInFrame(SEXP rho, SEXP symbol)
+SEXP Rf_findVarInFrame(SEXP rho, SEXP symbol)
 {
     return findVarInFrame3(rho, symbol, TRUE);
 }

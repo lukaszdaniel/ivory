@@ -85,7 +85,7 @@ namespace CXXR
 #endif
     }
 
-    unsigned int ProtectStack::protect(RObject *node)
+    unsigned int ProtectStack::protect_(RObject *node)
     {
         unsigned int index = s_stack->size();
 #ifdef NDEBUG
@@ -96,7 +96,7 @@ namespace CXXR
         return index;
     }
 
-    void ProtectStack::unprotect(unsigned int count)
+    void ProtectStack::unprotect_(unsigned int count)
     {
         size_t sz = s_stack->size();
         if (count > sz)

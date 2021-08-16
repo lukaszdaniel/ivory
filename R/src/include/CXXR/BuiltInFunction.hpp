@@ -60,6 +60,7 @@ namespace CXXR
     class BuiltInFunction : public FunctionBase
     {
     public:
+#ifndef CXXR_USE_OLD_R_FUNTAB_IMPL
         /* Information for Deparsing Expressions */
         /** @brief Kind of function, used mainly in deparsing.
          */
@@ -204,7 +205,7 @@ namespace CXXR
          */
         static BuiltInFunction *obtainInternal(const Symbol *name);
         static BuiltInFunction *obtainInternal(const std::string &name);
-
+#endif
         /**
          * @param offset The required table offset.  (Not
          * range-checked in any way.)
@@ -222,7 +223,7 @@ namespace CXXR
          * @return The offset into the table of functions.
          */
         unsigned int offset() const { return m_offset; }
-
+#ifndef CXXR_USE_OLD_R_FUNTAB_IMPL
         /** @brief Precedence of built-in function.
          *
          * @return The Precedence of the function.
@@ -287,10 +288,10 @@ namespace CXXR
         /** @brief Does this function create a frame visible in traceback()?
          */
         bool createsStackFrame() const { return !m_transparent; }
-
+#endif
         // Virtual function of RObject:
         const char *typeName() const override;
-
+#ifndef CXXR_USE_OLD_R_FUNTAB_IMPL
         // The different ways that the underlying function can take arguments.
         enum class CallingConvention
         {
@@ -437,7 +438,9 @@ namespace CXXR
             return std::make_pair(false, nullptr);
         }
 #endif
+#endif
     private:
+#ifndef CXXR_USE_OLD_R_FUNTAB_IMPL
         // The type of internal dispatch (if any) that the function does..
         enum class DispatchType
         {
@@ -524,8 +527,9 @@ namespace CXXR
         static map *getPrimitiveFunctionLookupTable();
         // And for functions called via .Internal()
         static map *getInternalFunctionLookupTable();
-
+#endif
         unsigned int m_offset;
+#ifndef CXXR_USE_OLD_R_FUNTAB_IMPL
         CallingConvention m_calling_convention;
         union
         {
@@ -548,11 +552,11 @@ namespace CXXR
         const char *m_first_arg_name;
         DispatchType m_dispatch_type; // Type of internal dispatch to use.
         PPinfo m_gram;                // 'pretty-print' information
-
+#endif
         // Declared private to ensure that BuiltInFunction objects are
         // allocated only using 'new'.
         ~BuiltInFunction();
-
+#ifndef CXXR_USE_OLD_R_FUNTAB_IMPL
         bool isInternalGeneric() const
         {
             return m_dispatch_type != DispatchType::NONE;
@@ -622,6 +626,7 @@ namespace CXXR
          */
         void badArgumentCountError(
             int num_args, int arity, const Expression *call) const;
+#endif
     };
 
     /* Information for Deparsing Expressions */

@@ -44,7 +44,7 @@ namespace CXXR
     {
         const auto &PRIMOFFSETptr = PRIMOFFSET;
     } // namespace ForceNonInline
-
+#ifndef CXXR_USE_OLD_R_FUNTAB_IMPL
     // BuiltInFunction::getFunctionTable() is in names.cpp
 
     unsigned int BuiltInFunction::s_next_offset = 0;
@@ -158,12 +158,12 @@ namespace CXXR
         m_result_printing_mode = ResultPrintingMode(pmdigit);
         m_transparent = (viaDotInternal() || (m_name.length() > 2 && m_name.substr(m_name.length() - 2) == "<-"));
     }
-
+#endif
     BuiltInFunction::~BuiltInFunction()
     {
         assert(0 && "BuiltInFunction's destructor should never be called");
     }
-
+#ifndef CXXR_USE_OLD_R_FUNTAB_IMPL
     BuiltInFunction *BuiltInFunction::obtainInternal(const std::string &name)
     {
         return obtainInternal(Symbol::obtain(name));
@@ -184,12 +184,12 @@ namespace CXXR
                             nargs),
                          nargs, name(), arity);
     }
-
+#endif
     const char *BuiltInFunction::typeName() const
     {
         return sexptype() == SPECIALSXP ? "special" : "builtin";
     }
-
+#ifndef CXXR_USE_OLD_R_FUNTAB_IMPL
     // BuiltInFunction::createLookupTables() is in names.cpp
 
     std::pair<BuiltInFunction::map *, BuiltInFunction::map *>
@@ -211,9 +211,6 @@ namespace CXXR
 
     BuiltInFunction *BuiltInFunction::obtainPrimitive(unsigned int offset, bool evaluate)
     {
-#ifdef CXXR_USE_OLD_R_FUNTAB_IMPL
-        return nullptr;
-#else
         if (offset < 0 || offset >= getFunctionTable().size())
             Rf_error(_("offset is out of range"));
         for (BuiltInFunction *function : getFunctionTable())
@@ -227,7 +224,6 @@ namespace CXXR
             }
         }
         return nullptr;
-#endif
     }
 
     BuiltInFunction *BuiltInFunction::obtainPrimitive(const Symbol *symbol)
@@ -248,17 +244,12 @@ namespace CXXR
 
     void BuiltInFunction::addPrimitivesToEnvironment(Environment *environment)
     {
-#if CXXR_TRUE
-        std::cerr << "addPrimitivesToEnvironment() not yet implemented" << std::endl;
-        abort();
-#else
         for (const auto &entry : *getPrimitiveFunctionLookupTable())
         {
             const Symbol *symbol = entry.first;
             BuiltInFunction *function = entry.second;
             environment->frame()->bind(symbol, function);
         }
-#endif
     }
 
     BuiltInFunction *BuiltInFunction::obtainInternal(const Symbol *name)
@@ -334,6 +325,7 @@ namespace CXXR
         }
         return std::make_pair(false, nullptr);
     }
+#endif
 #endif
 #ifdef CXXR_USE_OLD_R_FUNTAB_IMPL
     CCODE PRIMFUN(RObject *x) { return R_FunTab[PRIMOFFSET(x)].cfun(); }

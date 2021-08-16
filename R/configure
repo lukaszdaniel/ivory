@@ -1943,11 +1943,11 @@ Some influential environment variables:
   FPICFLAGS   special flags for compiling Fortran code to be turned into a
               shared object.
   SHLIB_LD    command for linking shared objects which contain object files
-              from a C or Fortran compiler only
+              from a C++ or Fortran compiler only
   SHLIB_LDFLAGS
               special flags used by SHLIB_LD
   DYLIB_LD    command for linking dynamic libraries which contain object files
-              from a C or Fortran compiler only
+              from a C++ or Fortran compiler only
   DYLIB_LDFLAGS
               special flags used for make a dynamic library
   CXXPICFLAGS special flags for compiling C++ code to be turned into a shared
@@ -29060,8 +29060,8 @@ fi
 ## symbols at link time.  For such systems, we link against -lm (in case
 ## it exists) when building a shlib module via SHLIB_LIBADD.
 
-main_ld="${CC}"
-shlib_ld="${CC}"
+main_ld="${CXX}"
+shlib_ld="${CXX}"
 shlib_cxxld="${CXX}"
 ## Allow user to override this, e.g. HP-UX uses .sl
 : ${SHLIB_EXT=".so"}
@@ -29431,8 +29431,8 @@ esac
 ## Step 5.  Overrides from the environment and error checking.
 if test -z "${MAIN_LD}"; then
    main_ld_was_given=no
-  if test "${main_ld}" = "${CC}"; then
-     MAIN_LD="\$(CC)"
+  if test "${main_ld}" = "${CXX}"; then
+     MAIN_LD="\$(CXX)"
   else
      MAIN_LD="${main_ld}"
   fi
@@ -29484,8 +29484,8 @@ fi
 
 if test -z "${SHLIB_LD}"; then
   shlib_ld_was_given=no
-  if test "${shlib_ld}" = "${CC}"; then
-    SHLIB_LD="\$(CC)"
+  if test "${shlib_ld}" = "${CXX}"; then
+    SHLIB_LD="\$(CXX)"
   else
     SHLIB_LD="${shlib_ld}"
   fi
@@ -39330,8 +39330,8 @@ fi
 $as_echo "#define HAVE_OPENMP 1" >>confdefs.h
 
   fi
-elif test "x${main_ld_was_given}" = xno -a "${MAIN_LD}" = "\$(CC)" -a \
-        "x${dylib_ld_was_given}" = xno -a "${DYLIB_LD}" = "\$(CC)" -a \
+elif test "x${main_ld_was_given}" = xno -a "${MAIN_LD}" = "\$(CXX)" -a \
+        "x${dylib_ld_was_given}" = xno -a "${DYLIB_LD}" = "\$(CXX)" -a \
         "x${ac_cv_prog_c_openmp}" != "xunsupported"; then
   R_OPENMP_CFLAGS="${OPENMP_CFLAGS}"
   separator=""
@@ -49514,7 +49514,7 @@ FCLIBS_XTRA=${FCLIBS_XTRA}
 ## compilers).
 ## We allow the users to override this for packages only (for now)
 if test "x${shlib_ld_was_given}" = xno -a \
-        "${SHLIB_LD}" = "\$(CC)" -a \
+        "${SHLIB_LD}" = "\$(CXX)" -a \
         "x${ac_cv_prog_c_openmp}" != "xunsupported" -a \
         "x${ac_cv_prog_c_openmp}" != "x" -a \
         "x${shlib_cxxld_was_given}" = xno -a \
@@ -49531,7 +49531,7 @@ fi
 ## This assumes that OpenMP support in the C compiler includes compilation by FC
 if test -z "${SHLIB_OPENMP_CFLAGS+set}" -a \
         "x${shlib_ld_was_given}" = xno -a \
-        "${SHLIB_LD}" = "\$(CC)" -a \
+        "${SHLIB_LD}" = "\$(CXX)" -a \
         "x${ac_cv_prog_c_openmp}" != "xunsupported" -a \
         "x${ac_cv_prog_c_openmp}" != "x"; then
   SHLIB_OPENMP_CFLAGS="${OPENMP_CFLAGS}"

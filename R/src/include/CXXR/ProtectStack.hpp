@@ -89,7 +89,7 @@ namespace CXXR
 		 * @return Index of the stack cell thus created, for
 		 *          subsequent use with reprotect().
 		 */
-		static unsigned int protect(RObject *node);
+		static unsigned int protect_(RObject *node);
 
 		/** @brief Change the target of a pointer on the PPS.
 		 *
@@ -121,7 +121,7 @@ namespace CXXR
 		 *          larger than the current size of the C pointer
 		 *          protection stack.
 		 */
-		static void unprotect(unsigned int count = 1);
+		static void unprotect_(unsigned int count = 1);
 
 		/**
 		 * Removes from the C pointer protection stack the uppermost
@@ -188,7 +188,7 @@ extern "C"
 	 */
 	inline void R_ProtectWithIndex(SEXP node, PROTECT_INDEX *iptr)
 	{
-		*iptr = CXXR::ProtectStack::protect(node);
+		*iptr = CXXR::ProtectStack::protect_(node);
 	}
 
 	/** @brief Retarget a cell in the C pointer protection stack.
@@ -259,7 +259,7 @@ extern "C"
 	 */
 	inline SEXP Rf_protect(SEXP node)
 	{
-		CXXR::ProtectStack::protect(node);
+		CXXR::ProtectStack::protect_(node);
 		return node;
 	}
 
@@ -275,7 +275,7 @@ extern "C"
 	 */
 	inline void Rf_unprotect(int count)
 	{
-		CXXR::ProtectStack::unprotect(static_cast<unsigned int>(count));
+		CXXR::ProtectStack::unprotect_(static_cast<unsigned int>(count));
 	}
 
 	/** @brief Remove entry from pointer protection stack.

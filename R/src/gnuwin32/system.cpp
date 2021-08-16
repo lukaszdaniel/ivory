@@ -1245,6 +1245,6 @@ int R::R_GetFDLimit()
 int R::R_EnsureFDLimit(int desired)
 {
     long limit = 16L*1024L*1024L;
-    return (desired <= limit) ? desired : (int)limit;
+    return (long(desired) <= limit) ? desired : int(limit);
 }
 

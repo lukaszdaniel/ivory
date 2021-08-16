@@ -658,7 +658,7 @@ int R::R_EnsureFDLimit(int desired) {
     if (lim == RLIM_SAVED_CUR || lim == RLIM_SAVED_MAX) 
 	lim = RLIM_INFINITY;
 #endif
-    if (lim == RLIM_INFINITY || lim >= desired)
+    if (lim == RLIM_INFINITY || lim >= rlim_t(desired))
 	return desired;
 
     /* increase the limit */
@@ -667,7 +667,7 @@ int R::R_EnsureFDLimit(int desired) {
     if (hlim == RLIM_SAVED_CUR || hlim == RLIM_SAVED_MAX) 
 	hlim = RLIM_INFINITY;
 #endif
-    if (hlim == RLIM_INFINITY || hlim >= desired)
+    if (hlim == RLIM_INFINITY || hlim >= rlim_t(desired))
 	rlim.rlim_cur = (rlim_t) desired;
     else
 	rlim.rlim_cur = hlim;

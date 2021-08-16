@@ -579,7 +579,7 @@ static void RemakeNextSEXP(FILE *fp, NodeInfo &node, int version, InputRoutines 
 	/* length = */ m.InInteger(fp, d);
 	R_AllocStringBuffer(MAXELTSIZE - 1, (d->buffer));
 #ifdef CXXR_USE_OLD_R_FUNTAB_IMPL
-	s = new BuiltInFunction(StrToInternal(m.InString(fp, d)), false);
+	s = GCNode::expose(new BuiltInFunction(StrToInternal(m.InString(fp, d)), false));
 #else
 	s = BuiltInFunction::obtainPrimitive(m.InString(fp, d));
 #endif
@@ -589,7 +589,7 @@ static void RemakeNextSEXP(FILE *fp, NodeInfo &node, int version, InputRoutines 
 	/* length = */ m.InInteger(fp, d);
 	R_AllocStringBuffer(MAXELTSIZE - 1, (d->buffer));
 #ifdef CXXR_USE_OLD_R_FUNTAB_IMPL
-	s = new BuiltInFunction(StrToInternal(m.InString(fp, d)));
+	s = GCNode::expose(new BuiltInFunction(StrToInternal(m.InString(fp, d))));
 #else
 	s = BuiltInFunction::obtainPrimitive(m.InString(fp, d));
 #endif
