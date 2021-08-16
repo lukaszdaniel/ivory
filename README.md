@@ -1,4 +1,4 @@
-[![Build Status](https://travis-ci.com/lukaszdaniel/ivory.svg?branch=master)](https://travis-ci.com/lukaszdaniel/ivory)
+![Build](https://github.com/lukaszdaniel/ivory/actions/workflows/build-ivory.yml/badge.svg)
 
 # What is IVORY? #
 IVORY is a project based on R-devel platform. Its aim is to deliver internationalization of R and its recommended packages.

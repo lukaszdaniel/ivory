@@ -21,7 +21,7 @@ jobs:
       matrix:
         CC: [ gcc ]
         CXX: [ g++ ]
-        OS: [ 'debian:stable' ]
+        OS: [ 'debian:testing' ]
     steps:
     - name: System dependencies
       run: |

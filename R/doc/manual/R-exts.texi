@@ -4849,6 +4849,17 @@ Note that on some systems @command{ar -cr} must have at least one file
 specified.
 
 @item
+The @command{strip} utility is platform-specific (and @acronym{CRAN}
+prohibits removing debug symbols).  For example flags
+@option{--strip-debug} and @option{--strip-unneeded} of the GNU version
+are not supported on macOS nor Solaris@footnote{which is
+@file{/usr/ccs/bin/strip}, not @file{/usr/bin/strip}.}: the POSIX
+standard for @command{strip} does not mention any options, and what
+calling it without options does is platform-dependent. Stripping a
+@file{.so} file could even prevent it being dynamically loaded into @R{}
+on an untested platform.
+
+@item
 Some people have a need to set a locale.  Locale names are not portable,
 and e.g.@: @samp{fr_FR.utf8} is commonly used on Linux but not accepted on
 either Solaris or macOS.  @samp{fr_FR.UTF-8} is more portable, being
@@ -12319,7 +12330,7 @@ rebound immediately.  (Provided the remaining code in @code{"foo<-"}
 make no reference to @code{x}, and no one is going to attempt a direct
 call such as @code{y <- "foo<-"(x)}.)
 
-This mechanism is to be replaced in @R{} 4.0.0. To
+This mechanism was replaced in @R{} 4.0.0. To
 support future changes, package code should use the macros
 @code{MAYBE_REFERENCED}, @code{MAYBE_SHARED}, and
 @code{MARK_NOT_MUTABLE}. These currently correspond to
@@ -13522,17 +13533,22 @@ can be used from C++ code.
 
 @quotation Note
 Because @R{} re-maps many of its external names to avoid clashes with
-user code, it is @emph{essential} to include the appropriate header
-files when using these entry points.
+system or user code, it is @emph{essential} to include the appropriate
+header files when using these entry points.
 @end quotation
 
-This remapping can cause problems@footnote{Known problems are redefining
-@code{LENGTH}, @code{error}, @code{length}, @code{vector} and
-@code{warning}}, and can be eliminated by defining @code{R_NO_REMAP} and
-prepending @samp{Rf_} to @emph{all} the function names used from
-@file{Rinternals.h} and @file{R_ext/Error.h}.  These problems can
+This remapping can cause problems@footnote{Known problems have been
+defining @code{LENGTH}, @code{error}, @code{length}, @code{vector} and
+@code{warning}: whether these matter depends on the OS and toolchain,
+with many problem reports involving @command{clang++}.}, and can be
+eliminated by defining @code{R_NO_REMAP} (before including any @R{}
+headers) and prepending @samp{Rf_} to @emph{all} the function names used
+from @file{Rinternals.h} and @file{R_ext/Error.h}.  These problems can
 usually be avoided by including other headers (such as system headers
-and those for external software used by the package) before @file{R.h}.
+and those for external software used by the package) before any @R{}
+headers. (Headers from other packages may include @R{} headers directly
+or @emph{via} inclusion from further packages, and may define
+@code{R_NO_REMAP} with or without including @file{Rinternals.h}.)
 
 We can classify the entry points as
 
@@ -13673,7 +13689,7 @@ the interface providing @R{} error signaling.  This memory lasts until
 freed by the user and is additional to the memory allocated for the @R{}
 workspace.
 
-The interface functions are
+The interface macros are
 
 @example
 @group
@@ -13686,9 +13702,9 @@ void Free(@var{any} *@var{p})
 @noindent
 providing analogues of @code{calloc}, @code{realloc} and @code{free}.
 If there is an error during allocation it is handled by @R{}, so if
-these routines return the memory has been successfully allocated or
-freed.  @code{Free} will set the pointer @var{p} to @code{NULL}.  (Some
-but not all versions of @Sl{} do so.)
+these return the memory has been successfully allocated or freed.
+@code{Free} will set the pointer @var{p} to @code{NULL}.  (Some but not
+all versions of @Sl{} did so.)
 
 Users should arrange to @code{Free} this memory when no longer needed,
 including on error or user interrupt.  This can often be done most
@@ -13699,11 +13715,14 @@ Do not assume that memory allocated by @code{Calloc}/@code{Realloc}
 comes from the same pool as used by @code{malloc}: in particular do not
 use @code{free} or @code{strdup} with it.
 
-Memory obtained by these functions should be aligned in the same way as
+Memory obtained by these macros should be aligned in the same way as
 @code{malloc}, that is `suitably aligned for any kind of variable'.
 
-These entry points need to be prefixed by @code{R_} if
-@code{STRICT_R_HEADERS} has been defined.
+@findex R_Calloc
+@findex R_Realloc
+@findex R_Free
+These macros need to be prefixed by @code{R_} if @code{STRICT_R_HEADERS}
+has been defined: the prefixed forms can always be used.
 
 
 @node Error signaling, Random numbers, Memory allocation, The R API
@@ -15435,8 +15454,8 @@ use.
 Let us re-iterate the advice to include system headers before the @R{}
 header files, especially @file{Rinternals.h} (included by
 @file{Rdefines.h}) and @file{Rmath.h}, which redefine names which may be
-used in system headers (fewer if @samp{R_NO_REMAP} is defined, or
-@samp{R_NO_REMAP_RMATH} for @file{Rmath.h}).
+used in system headers (fewer if @samp{R_NO_REMAP} is defined before
+inclusion, or @samp{R_NO_REMAP_RMATH} for @file{Rmath.h}).
 
 @node Generic functions and methods, Linking GUIs and other front-ends to R, The R API, Top
 @chapter Generic functions and methods
