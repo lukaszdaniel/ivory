@@ -501,15 +501,12 @@ R_INLINE static SEXP getElement(SEXP list, const char *nm)
 R_INLINE static SEXP getFunc(SEXP list, const char *enm, const char *lnm)
 {
     SEXP ans;
-    if (!isFunction(ans = getElement(list, enm))) {
-	char *bf = nullptr;
-	strcat(bf, lnm);
-	strcat(bf, "$");
-	strcat(bf, enm);
-	strcat(bf, "()");
-	error(_("'%s' was not found"), bf);
+	if (!isFunction(ans = getElement(list, enm)))
+	{
+		std::string bf = std::string(lnm) + "$" + std::string(enm) + "()";
+		error(_("'%s' was not found"), bf.c_str());
 	}
-    return ans;
+	return ans;
 }
 
 static void neggrad(SEXP gf, SEXP rho, SEXP gg)

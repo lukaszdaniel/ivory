@@ -46,12 +46,17 @@ namespace CXXR
         const auto &unprotect_ptrp = Rf_unprotect_ptr;
         const auto &ProtectWithIndexp = R_ProtectWithIndex;
         const auto &Reprotectp = R_Reprotect;
+        const auto &cxxrprotectp = CXXR_protect;
+        const auto &cxxrunprotectp = CXXR_unprotect;
+        const auto &cxxrunprotect_ptrp = CXXR_unprotect_ptr;
+        const auto &cxxrProtectWithIndexp = CXXR_ProtectWithIndex;
+        const auto &cxxrReprotectp = CXXR_Reprotect;
     } // namespace ForceNonInline
 
 #ifdef NDEBUG
     vector<RObject *> *ProtectStack::s_stack;
 #else
-    vector<pair<RObject *, RCNTXT *>> *ProtectStack::s_stack;
+    vector<tuple<RObject *, RCNTXT *, const char *>> *ProtectStack::s_stack;
 #endif
 
     void ProtectStack::initialize()
@@ -59,7 +64,7 @@ namespace CXXR
 #ifdef NDEBUG
         s_stack = new vector<RObject *>;
 #else
-        s_stack = new vector<pair<RObject *, RCNTXT *>>;
+        s_stack = new vector<tuple<RObject *, RCNTXT *, const char *>>;
 #endif
     }
 
@@ -70,7 +75,7 @@ namespace CXXR
         s_stack->resize(new_size);
     }
 
-    void ProtectStack::reprotect(RObject *node, unsigned int index)
+    void ProtectStack::reprotect(RObject *node, unsigned int index, const char *function_name)
     {
         if (index >= s_stack->size())
             throw out_of_range("ProtectStack::reprotect: index out of range.");
@@ -78,55 +83,83 @@ namespace CXXR
         (*s_stack)[index] = node;
 #else
         auto &pr = (*s_stack)[index];
-        // if (pr.second != R_GlobalContext)
-        //     throw logic_error("ProtectStack::reprotect: not in same context as the corresponding call of protect().");
-        pr.first = node;
-        pr.second = R_GlobalContext;
+        if (get<1>(pr) != R_GlobalContext)
+        {
+            std::cerr << __LINE__ << " Expected function '" << get<2>(pr) << "', got '" << function_name << "'" << std::endl;
+            throw logic_error("ProtectStack::reprotect: not in same context as the corresponding call of protect().");
+        }
+        if (get<2>(pr) != function_name)
+        {
+            std::cerr << __LINE__ << " Expected function '" << get<2>(pr) << "', got '" << function_name << "'" << std::endl;
+            throw logic_error("ProtectStack::reprotect: not in same function as the corresponding call of protect().");
+        }
+        pr = std::make_tuple(node, R_GlobalContext, function_name);
 #endif
     }
 
-    unsigned int ProtectStack::protect_(RObject *node)
+    unsigned int ProtectStack::protect_(RObject *node, const char *function_name)
     {
         unsigned int index = s_stack->size();
 #ifdef NDEBUG
         s_stack->push_back(node);
 #else
-        s_stack->push_back(std::make_pair(node, R_GlobalContext));
+        s_stack->push_back(std::make_tuple(node, R_GlobalContext, function_name));
 #endif
         return index;
     }
 
-    void ProtectStack::unprotect_(unsigned int count)
+    void ProtectStack::unprotect_(unsigned int count, const char *function_name)
     {
         size_t sz = s_stack->size();
         if (count > sz)
+        {
             throw out_of_range("ProtectStack::unprotect: count greater than current stack size.");
+        }
 #ifdef NDEBUG
         s_stack->resize(sz - count);
 #else
         for (unsigned int i = 0; i < count; ++i)
         {
             const auto &pr = s_stack->back();
-            if (pr.second != R_GlobalContext)
+            if (get<1>(pr) != R_GlobalContext)
+            {
+                std::cerr << __LINE__ << " Expected function '" << get<2>(pr) << "', got '" << function_name << "'" << std::endl;
                 throw logic_error("ProtectStack::unprotect: not in same context as the corresponding call of protect().");
+            }
+            if (get<2>(pr) != function_name)
+            {
+                std::cerr << __LINE__ << " Expected function '" << get<2>(pr) << "', got '" << function_name << "'" << std::endl;
+                throw logic_error("ProtectStack::unprotect: not in same function as the corresponding call of protect().");
+            }
             s_stack->pop_back();
         }
 #endif
     }
 
-    void ProtectStack::unprotectPtr(RObject *node)
+    void ProtectStack::unprotectPtr(RObject *node, const char *function_name)
     {
 #ifdef NDEBUG
         auto rit = find(s_stack->rbegin(), s_stack->rend(), node);
 #else
         auto rit = s_stack->rbegin();
-        while (rit != s_stack->rend() && (*rit).first != node)
+        while (rit != s_stack->rend() && get<0>(*rit) != node)
             ++rit;
 #endif
         if (rit == s_stack->rend())
             throw invalid_argument("ProtectStack::unprotectPtr: pointer not found.");
         // See Josuttis p.267 for the need for -- :
-        s_stack->erase(--(rit.base()));
+        const auto &pr = (--(rit.base()));
+        if (get<1>(*pr) != R_GlobalContext)
+        {
+            std::cerr << __LINE__ << " Expected function '" << get<2>(*pr) << "', got '" << function_name << "'" << std::endl;
+            throw logic_error("ProtectStack::unprotect: not in same context as the corresponding call of protect().");
+        }
+        if (get<2>(*pr) != function_name)
+        {
+            std::cerr << __LINE__ << " Expected function '" << get<2>(*pr) << "', got '" << function_name << "'" << std::endl;
+            throw logic_error("ProtectStack::unprotect: not in same function as the corresponding call of protect().");
+        }
+        s_stack->erase(pr);
     }
 
     void ProtectStack::visitRoots(GCNode::const_visitor *v)
@@ -140,8 +173,8 @@ namespace CXXR
 #else
         for (auto &n : *s_stack)
         {
-            if (n.first)
-                (n.first)->conductVisitor(v);
+            if (get<0>(n))
+                (get<0>(n))->conductVisitor(v);
         }
 #endif
     }

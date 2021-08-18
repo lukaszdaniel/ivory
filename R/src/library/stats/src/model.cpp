@@ -1007,7 +1007,7 @@ static int // 0/1 (Boolean) :
     response;		//  1: response term in the model
 static int nwords;		/* # of words (ints) to code a term */
 static GCRoot<> varlist;		/* variables in the model */
-static PROTECT_INDEX vpi;
+// static PROTECT_INDEX vpi; // no need for vpi since framenames is already a GCRoot object
 static GCRoot<> framenames;		/* variables names for specified frame */
 static bool haveDot;	/* does RHS of formula contain `.'? */
 
@@ -1134,7 +1134,8 @@ static void CheckRHS(SEXP v)
 		    else
 			SET_STRING_ELT(t, j, STRING_ELT(framenames, j+1));
 		}
-		REPROTECT(framenames = t, vpi);
+		// REPROTECT(framenames = t, vpi); // doesn't need REPROTECT since framenames is already a GCRoot object
+		framenames = t;
 	    }
 	}
     }
@@ -1800,7 +1801,7 @@ SEXP termsform(SEXP args)
 	framenames = getAttrib(data, R_NamesSymbol);
     else
 	error(_("'data' argument is of the wrong type"));
-    PROTECT_WITH_INDEX(framenames, &vpi);
+    // PROTECT_WITH_INDEX(framenames, &vpi); // doesn't need PROTECT since framenames is already a GCRoot object
 
     Rboolean hadFrameNames = FALSE;
     if (framenames != R_NilValue) {
@@ -2184,7 +2185,7 @@ SEXP termsform(SEXP args)
     SETCDR(a, R_NilValue);  /* truncate if necessary */
     SET_ATTRIB(ans, attributes);
 
-    UNPROTECT(5);
+    UNPROTECT(4);
     return ans;
 }
 // termsform()

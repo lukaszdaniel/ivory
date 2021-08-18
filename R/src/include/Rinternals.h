@@ -298,17 +298,24 @@ SEXP EXTPTR_TAG(SEXP);
 void *EXTPTR_PTR(SEXP);
 
 /* Pointer Protection and Unprotection */
-#define PROTECT(s)	Rf_protect(s)
-#define UNPROTECT(n)	Rf_unprotect(n)
-#define UNPROTECT_PTR(s)	Rf_unprotect_ptr(s)
-
 /* We sometimes need to coerce a protected value and place the new
    coerced value under protection.  For these cases PROTECT_WITH_INDEX
    saves an index of the protection location that can be used to
    replace the protected value using REPROTECT. */
 typedef int PROTECT_INDEX;
+#ifdef COMPILING_IVORY
+#define PROTECT(s)	CXXR_protect(s, __func__)
+#define UNPROTECT(n)	CXXR_unprotect(n, __func__)
+#define UNPROTECT_PTR(s)	CXXR_unprotect_ptr(s, __func__)
+#define PROTECT_WITH_INDEX(x, iptr) CXXR_ProtectWithIndex(x, iptr, __func__)
+#define REPROTECT(x, iptr) CXXR_Reprotect(x, iptr, __func__)
+#else
+#define PROTECT(s)	Rf_protect(s)
+#define UNPROTECT(n)	Rf_unprotect(n)
+#define UNPROTECT_PTR(s)	Rf_unprotect_ptr(s)
 #define PROTECT_WITH_INDEX(x, i) R_ProtectWithIndex(x, i)
 #define REPROTECT(x, i) R_Reprotect(x, i)
+#endif
 
 /* Evaluation Environment */
 extern SEXP R_GlobalEnv;	    /* The "global" environment */
@@ -489,7 +496,6 @@ const char *Rf_type2char(SEXPTYPE);
 SEXP Rf_type2rstr(SEXPTYPE);
 SEXP Rf_type2str(SEXPTYPE);
 SEXP Rf_type2str_nowarn(SEXPTYPE);
-void Rf_unprotect_ptr(SEXP);
 
 SEXP R_tryEval(SEXP e, SEXP env, int *ErrorOccurred);
 SEXP R_tryEvalSilent(SEXP e, SEXP env, int *ErrorOccurred);
@@ -1011,10 +1017,18 @@ R_xlen_t  (XLENGTH)(SEXP x);
 R_xlen_t  XTRUELENGTH(SEXP x);
 int LENGTH_EX(SEXP x, const char *file, int line);
 R_xlen_t XLENGTH_EX(SEXP x);
+#ifdef COMPILING_IVORY
+SEXP CXXR_protect(SEXP node, const char *function_name);
+void CXXR_unprotect(unsigned int count, const char *function_name);
+void CXXR_ProtectWithIndex(SEXP node, PROTECT_INDEX *iptr, const char *function_name);
+void CXXR_Reprotect(SEXP node, PROTECT_INDEX iptr, const char *function_name);
+void CXXR_unprotect_ptr(SEXP node, const char *function_name);
+#endif
 SEXP Rf_protect(SEXP);
 void Rf_unprotect(int);
 void R_ProtectWithIndex(SEXP, PROTECT_INDEX *);
 void R_Reprotect(SEXP, PROTECT_INDEX);
+void Rf_unprotect_ptr(SEXP);
 SEXP CAR(SEXP e);
 void *DATAPTR(SEXP x);
 const void *DATAPTR_RO(SEXP x);

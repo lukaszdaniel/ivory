@@ -38,6 +38,7 @@
 
 #include <vector>
 #include <iostream>
+#include <tuple>
 
 #include <CXXR/RObject.hpp>
 #include <CXXR/NodeStack.hpp>
@@ -89,7 +90,7 @@ namespace CXXR
 		 * @return Index of the stack cell thus created, for
 		 *          subsequent use with reprotect().
 		 */
-		static unsigned int protect_(RObject *node);
+		static unsigned int protect_(RObject *node, const char *function_name = nullptr);
 
 		/** @brief Change the target of a pointer on the PPS.
 		 *
@@ -108,7 +109,7 @@ namespace CXXR
 		 *          the current size of the C pointer protection
 		 *          stack (checked).
 		 */
-		static void reprotect(RObject *node, unsigned int index);
+		static void reprotect(RObject *node, unsigned int index, const char *function_name = nullptr);
 
 		/** @brief Pop pointers from the PPS.
 		 *
@@ -121,7 +122,7 @@ namespace CXXR
 		 *          larger than the current size of the C pointer
 		 *          protection stack.
 		 */
-		static void unprotect_(unsigned int count = 1);
+		static void unprotect_(unsigned int count = 1, const char *function_name = nullptr);
 
 		/**
 		 * Removes from the C pointer protection stack the uppermost
@@ -133,7 +134,7 @@ namespace CXXR
 		 *
 		 * @deprecated Utterly.
 		 */
-		static void unprotectPtr(RObject *node);
+		static void unprotectPtr(RObject *node, const char *function_name = nullptr);
 
 		/** @brief Conduct a const visitor to protected objects.
 		 *
@@ -151,7 +152,7 @@ namespace CXXR
 #ifdef NDEBUG
 		static std::vector<RObject *> *s_stack;
 #else
-		static std::vector<std::pair<RObject *, RContext *>> *s_stack;
+		static std::vector<std::tuple<RObject *, RContext *, const char *>> *s_stack;
 #endif
 
 		// Clean up static data at end of run (called by
@@ -292,6 +293,32 @@ extern "C"
 	inline void Rf_unprotect_ptr(SEXP node)
 	{
 		CXXR::ProtectStack::unprotectPtr(node);
+	}
+
+	inline SEXP CXXR_protect(SEXP node, const char *function_name)
+	{
+		CXXR::ProtectStack::protect_(node, function_name);
+		return node;
+	}
+
+	inline void CXXR_unprotect(unsigned int count, const char *function_name)
+	{
+		CXXR::ProtectStack::unprotect_(count, function_name);
+	}
+
+	inline void CXXR_unprotect_ptr(SEXP node, const char *function_name)
+	{
+		CXXR::ProtectStack::unprotectPtr(node, function_name);
+	}
+
+	inline void CXXR_ProtectWithIndex(SEXP node, PROTECT_INDEX *iptr, const char *function_name)
+	{
+		*iptr = CXXR::ProtectStack::protect_(node, function_name);
+	}
+
+	inline void CXXR_Reprotect(SEXP node, PROTECT_INDEX index, const char *function_name)
+	{
+		CXXR::ProtectStack::reprotect(node, index, function_name);
 	}
 } /* extern "C" */
 
