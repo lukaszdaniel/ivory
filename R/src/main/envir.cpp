@@ -515,7 +515,7 @@ static bool existsVarInFrame(SEXP rho, SEXP symbol)
 
 SEXP Rf_findVarInFrame(SEXP rho, SEXP symbol)
 {
-    return findVarInFrame3(rho, symbol, TRUE);
+    return Rf_findVarInFrame3(rho, symbol, TRUE);
 }
 
 /** @brief Read the S3 meta-variables from a given (single) frame.

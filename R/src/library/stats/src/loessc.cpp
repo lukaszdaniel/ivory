@@ -353,7 +353,7 @@ loess_grow(int *parameter, int *a, double *xi,
 
 void F77_SUB(loesswarn)(int *i)
 {
-    char *msg = nullptr, msg2[50];
+    char *msg = (char *) "", msg2[50];
 
 switch(*i){
  case 100:sprintf(msg, _("wrong version number in lowesd. Probably typo in caller.")); break ;
