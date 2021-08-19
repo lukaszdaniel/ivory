@@ -2347,11 +2347,19 @@ add_dummies <- function(dir, Log)
                           sprintf("suppressPackageStartupMessages(tools:::.check_packages_used_in_examples(package = \"%s\"))\n", pkgname))
 
             out <- R_runR2(Rcmd, "R_DEFAULT_PACKAGES=NULL")
+            exfile <- paste0(pkgname, "-Ex.R")
             if (length(out)) {
-                warningLog(Log)
+                failed <- any(grepl("parse error in file", out, fixed = TRUE))
+                if (failed) errorLog(Log) else warningLog(Log)
                 printLog0(Log, paste(c(out, ""), collapse = "\n"))
+                if (failed) {
+                    printLog0(Log, gettext("** will not attempt to run examples\n", domain = "R-tools"))
+                    do_examples <<- FALSE
+                    file.copy(exfile, pkgoutdir)  # keep that file (PR#17501)
+                }
                 # wrapLog(msg_DESCRIPTION)
             } else resultLog(Log, gettext("OK", domain = "R-tools"))
+            if (file.exists(exfile)) unlink(exfile)
 
         } ## FIXME, what if no install?
     }
@@ -5171,8 +5179,7 @@ add_dummies <- function(dir, Log)
                 } else resultLog(Log, gettext("OK", domain = "R-tools"))
             }   ## end of case B
         }
-
-    }
+    } ## {check_install()}
 
     ## This requires a GNU-like 'du' with 1k block sizes,
     ## so use -k (which POSIX requires).

@@ -162,8 +162,8 @@ namespace CXXR
 			delete s_stack;
 		}
 
-		// Initialize static data (called by GCNode::SchwarzCtr
-		// constructor):
+		// Initialize static data (called by GCNode::SchwarzCtr constructor):
+		friend void initializeMemorySubsystem();
 		static void initialize();
 		ProtectStack() = delete;
 	};

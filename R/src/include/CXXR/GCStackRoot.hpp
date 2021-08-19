@@ -134,8 +134,8 @@ namespace CXXR
             delete s_roots;
         }
 
-        // Initialize static data (called by GCNode::SchwarzCtr
-        // constructor):
+        // Initialize static data (called by GCNode::SchwarzCtr constructor):
+        friend void initializeMemorySubsystem();
         static void initialize();
 
         // Report out-of-sequence destructor call and abort program.

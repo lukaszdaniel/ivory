@@ -5858,6 +5858,7 @@ function(db, files)
     ## we just have a stop list here.
     common_names <- c("pkg", "pkgName", "package", "pos")
 
+    parse_errors <-
     bad_exprs <- character()
     bad_imports <- character()
     bad_data <- character()
@@ -5923,9 +5924,12 @@ function(db, files)
                          ## so ignore 'invalid multibyte character' errors.
                          msg <- .massage_file_parse_error_message(conditionMessage(e))
                          if(!startsWith(msg, "invalid multibyte character"))
+                         {
+                             parse_errors <<- c(parse_errors, f)
                              warning(gettextf("parse error in file '%s':\n%s",
                                               f, msg),
                                      domain = "R-tools", call. = FALSE)
+                         }
                      })
         }
     } else {
@@ -5944,7 +5948,9 @@ function(db, files)
     res <- list(others = unique(bad_exprs),
                 imports = unique(bad_imports),
                 data = unique(bad_data),
-                methods_message = "")
+                methods_message = ""
+              , parse_errors = unique(parse_errors)
+    	    )
     class(res) <- "check_packages_used"
     res
 }
@@ -5974,7 +5980,6 @@ function(package, dir, lib.loc = NULL)
     file <- .createExdotR(pkg_name, dir, silent = TRUE,
                           commentDonttest = FALSE)
     if (is.null(file)) return(invisible(NULL)) # e.g, no examples
-    on.exit(unlink(file))
     enc <- db["Encoding"]
     if(!is.na(enc) &&
        (Sys.getlocale("LC_CTYPE") %notin% c("C", "POSIX"))) {
