@@ -15,7 +15,7 @@ include $(top_builddir)/Makeconf
 ## png.h matching BITMAP_LIBS.  Since /opt/X11 on macOS contains libpng
 ## and we might want our own version, we give priority to BITMAP_*
 ALL_CPPFLAGS = @BITMAP_CPPFLAGS@ $(R_XTRA_CPPFLAGS) $(X_CFLAGS) @CAIROX11_CPPFLAGS@ \
-  -I$(top_srcdir)/src/library/grDevices/src/cairo $(CPPFLAGS) $(CPICFLAGS) $(DEFS)
+  -I$(top_srcdir)/src/library/grDevices/src/cairo $(CPPFLAGS) $(CPICFLAGS) $(WERROR_FLAGS) $(DEFS)
 ALL_CFLAGS = $(ALL_CFLAGS_LO) $(WERROR_FLAGS)
 ## This relies on ld re-ordering the flags, as X_PRE_LIBS does not
 ## contain a -L flag but relies on that in X_LIBS.
