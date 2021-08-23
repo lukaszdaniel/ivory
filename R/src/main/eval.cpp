@@ -2158,13 +2158,13 @@ inline static bool BodyHasBraces(SEXP body) { return (isLanguage(body) && CAR(bo
    (when v == R_NilValue) and when the value may have been assigned to
    another variable. This should be safe and avoid allocation in many
    cases. */
-#define ALLOC_LOOP_VAR(v, val_type)                           \
+#define ALLOC_LOOP_VAR(v, val_type, vpi)                      \
 	do                                                        \
 	{                                                         \
 		if (v == R_NilValue || MAYBE_SHARED(v) ||             \
 			ATTRIB(v) != R_NilValue || (v) != CAR(bdg__cell)) \
 		{                                                     \
-			v = allocVector(val_type, 1);                     \
+			REPROTECT(v = allocVector(val_type, 1), vpi);     \
 		}                                                     \
 	} while (0)
 
@@ -2227,7 +2227,6 @@ inline static bool SET_BINDING_VALUE2(SEXP bdg__loc, SEXP value, SEXP rho)
 
 HIDDEN SEXP do_for(SEXP call, SEXP op, SEXP args, SEXP rho)
 {
-	GCStackRoot<> v;
     /* Need to declare volatile variables whose values are relied on
        after for_next or for_break longjmps and might change between
        the setjmp and longjmp calls. Theoretically this does not
@@ -2235,13 +2234,15 @@ HIDDEN SEXP do_for(SEXP call, SEXP op, SEXP args, SEXP rho)
        to be safe we declare them volatile as well. */
     volatile R_xlen_t i = 0, n;
     volatile int bgn;
-    volatile SEXP val;
+    volatile SEXP v, val;
     volatile SEXP bdg__cell;
     int dbg;
     int nprot = 0;
+    int sub_nprot = 0;
     SEXPTYPE val_type;
     SEXP sym, body;
     RCNTXT cntxt;
+    PROTECT_INDEX vpi;
 
     checkArity(op, args);
     sym = CAR(args);
@@ -2284,6 +2285,8 @@ HIDDEN SEXP do_for(SEXP call, SEXP op, SEXP args, SEXP rho)
     /* bump up links count of sequence to avoid modification by loop code */
     INCREMENT_LINKS(val);
 
+    PROTECT_WITH_INDEX(v = R_NilValue, &vpi); nprot++;
+
     cntxt.start(CTXT_LOOP, R_NilValue, rho, R_BaseEnv, R_NilValue, R_NilValue);
 
 	for (i = 0; i < n; i++)
@@ -2317,30 +2320,31 @@ HIDDEN SEXP do_for(SEXP call, SEXP op, SEXP args, SEXP rho)
 				break;
 
 			default:
+				sub_nprot = 1;
 				switch (val_type)
 				{
 				case LGLSXP:
-					ALLOC_LOOP_VAR(v, val_type);
+					ALLOC_LOOP_VAR(v, val_type, vpi);
 					SET_SCALAR_LVAL(v, LOGICAL_ELT(val, i));
 					break;
 				case INTSXP:
-					ALLOC_LOOP_VAR(v, val_type);
+					ALLOC_LOOP_VAR(v, val_type, vpi);
 					SET_SCALAR_IVAL(v, INTEGER_ELT(val, i));
 					break;
 				case REALSXP:
-					ALLOC_LOOP_VAR(v, val_type);
+					ALLOC_LOOP_VAR(v, val_type, vpi);
 					SET_SCALAR_DVAL(v, REAL_ELT(val, i));
 					break;
 				case CPLXSXP:
-					ALLOC_LOOP_VAR(v, val_type);
+					ALLOC_LOOP_VAR(v, val_type, vpi);
 					SET_SCALAR_CVAL(v, COMPLEX_ELT(val, i));
 					break;
 				case STRSXP:
-					ALLOC_LOOP_VAR(v, val_type);
+					ALLOC_LOOP_VAR(v, val_type, vpi);
 					SET_STRING_ELT(v, 0, STRING_ELT(val, i));
 					break;
 				case RAWSXP:
-					ALLOC_LOOP_VAR(v, val_type);
+					ALLOC_LOOP_VAR(v, val_type, vpi);
 					SET_SCALAR_BVAL(v, RAW(val)[i]);
 					break;
 				default:
@@ -2366,9 +2370,10 @@ HIDDEN SEXP do_for(SEXP call, SEXP op, SEXP args, SEXP rho)
 			// Otherwise assume it's CTXT_NEXT
 		}
 	}
+    UNPROTECT(sub_nprot);
     DECREMENT_LINKS(val);
     cntxt.end();
-    UNPROTECT(nprot);
+    UNPROTECT(nprot - sub_nprot);
     SET_ENV_RDEBUG(rho, dbg);
     return R_NilValue;
 }

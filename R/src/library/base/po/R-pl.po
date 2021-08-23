@@ -3793,11 +3793,11 @@ msgstr[0] "Zarejestrowana metoda S3 nadpisana przez '%s':"
 msgstr[1] "Zarejestrowane metody S3 nadpisane przez '%s':"
 msgstr[2] "Zarejestrowane metody S3 nadpisane przez '%s':"
 
-#. R/namespace.R: ngettext(sum(notex), "S3 method %s was declared in 'NAMESPACE' file but was not found",     "S3 methods %s were declared in 'NAMESPACE' file but was not found", domain = "R-base")
+#. R/namespace.R: ngettext(sum(notex), "S3 method %s was declared in 'NAMESPACE' file but was not found",     "S3 methods %s were declared in 'NAMESPACE' file but were not found", domain = "R-base")
 #: R/namespace.R:0
 msgid "S3 method %s was declared in 'NAMESPACE' file but was not found"
 msgid_plural ""
-"S3 methods %s were declared in 'NAMESPACE' file but was not found"
+"S3 methods %s were declared in 'NAMESPACE' file but were not found"
 msgstr[0] ""
 "Metoda S3 %s została zadeklarowana w pliku 'NAMESPACE', ale nie została "
 "znaleziona"

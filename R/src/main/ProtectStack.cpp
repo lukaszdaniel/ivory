@@ -83,16 +83,16 @@ namespace CXXR
         (*s_stack)[index] = node;
 #else
         auto &pr = (*s_stack)[index];
-        if (get<1>(pr) != R_GlobalContext)
-        {
-            std::cerr << __LINE__ << " Expected function '" << get<2>(pr) << "', got '" << function_name << "'" << std::endl;
-            throw logic_error("ProtectStack::reprotect: not in same context as the corresponding call of protect().");
-        }
-        if (get<2>(pr) != function_name)
-        {
-            std::cerr << __LINE__ << " Expected function '" << get<2>(pr) << "', got '" << function_name << "'" << std::endl;
-            throw logic_error("ProtectStack::reprotect: not in same function as the corresponding call of protect().");
-        }
+        // if (get<1>(pr) != R_GlobalContext)
+        // {
+        //     std::cerr << __LINE__ << " Expected function '" << get<2>(pr) << "', got '" << function_name << "'" << std::endl;
+        //     throw logic_error("ProtectStack::reprotect: not in same context as the corresponding call of protect().");
+        // }
+        // if (get<2>(pr) != function_name)
+        // {
+        //     std::cerr << __LINE__ << " Expected function '" << get<2>(pr) << "', got '" << function_name << "'" << std::endl;
+        //     throw logic_error("ProtectStack::reprotect: not in same function as the corresponding call of protect().");
+        // }
         pr = std::make_tuple(node, R_GlobalContext, function_name);
 #endif
     }
@@ -126,11 +126,11 @@ namespace CXXR
                 std::cerr << __LINE__ << " Expected function '" << get<2>(pr) << "', got '" << function_name << "'" << std::endl;
                 throw logic_error("ProtectStack::unprotect: not in same context as the corresponding call of protect().");
             }
-            if (get<2>(pr) != function_name)
-            {
-                std::cerr << __LINE__ << " Expected function '" << get<2>(pr) << "', got '" << function_name << "'" << std::endl;
-                throw logic_error("ProtectStack::unprotect: not in same function as the corresponding call of protect().");
-            }
+            // if (get<2>(pr) != function_name)
+            // {
+            //     std::cerr << __LINE__ << " Expected function '" << get<2>(pr) << "', got '" << function_name << "'" << std::endl;
+            //     throw logic_error("ProtectStack::unprotect: not in same function as the corresponding call of protect().");
+            // }
             s_stack->pop_back();
         }
 #endif
@@ -149,16 +149,16 @@ namespace CXXR
             throw invalid_argument("ProtectStack::unprotectPtr: pointer not found.");
         // See Josuttis p.267 for the need for -- :
         const auto &pr = (--(rit.base()));
-        if (get<1>(*pr) != R_GlobalContext)
-        {
-            std::cerr << __LINE__ << " Expected function '" << get<2>(*pr) << "', got '" << function_name << "'" << std::endl;
-            throw logic_error("ProtectStack::unprotect: not in same context as the corresponding call of protect().");
-        }
-        if (get<2>(*pr) != function_name)
-        {
-            std::cerr << __LINE__ << " Expected function '" << get<2>(*pr) << "', got '" << function_name << "'" << std::endl;
-            throw logic_error("ProtectStack::unprotect: not in same function as the corresponding call of protect().");
-        }
+        // if (get<1>(*pr) != R_GlobalContext)
+        // {
+        //     std::cerr << __LINE__ << " Expected function '" << get<2>(*pr) << "', got '" << function_name << "'" << std::endl;
+        //     throw logic_error("ProtectStack::unprotect: not in same context as the corresponding call of protect().");
+        // }
+        // if (get<2>(*pr) != function_name)
+        // {
+        //     std::cerr << __LINE__ << " Expected function '" << get<2>(*pr) << "', got '" << function_name << "'" << std::endl;
+        //     throw logic_error("ProtectStack::unprotect: not in same function as the corresponding call of protect().");
+        // }
         s_stack->erase(pr);
     }
 

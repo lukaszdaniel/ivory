@@ -1582,7 +1582,7 @@ registerS3methods <- function(info, package, env)
     if(any(notex <- match(info[,3], loc, nomatch=0L) == 0L)) { # not %in%
         warning(sprintf(ngettext(sum(notex),
                                  "S3 method %s was declared in 'NAMESPACE' file but was not found",
-                                 "S3 methods %s were declared in 'NAMESPACE' file but was not found", domain = "R-base"),
+                                 "S3 methods %s were declared in 'NAMESPACE' file but were not found", domain = "R-base"),
                         paste(sQuote(info[notex, 3]), collapse = ", ")),
                 call. = FALSE, domain = NA)
         Info <- Info[!notex, , drop = FALSE]

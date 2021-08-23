@@ -3913,12 +3913,12 @@ msgstr[0] ""
 msgstr[1] ""
 msgstr[2] ""
 
-#. R/namespace.R: ngettext(sum(notex), "S3 method %s was declared in 'NAMESPACE' file but was not found",     "S3 methods %s were declared in 'NAMESPACE' file but was not found", domain = "R-base")
+#. R/namespace.R: ngettext(sum(notex), "S3 method %s was declared in 'NAMESPACE' file but was not found",     "S3 methods %s were declared in 'NAMESPACE' file but were not found", domain = "R-base")
 #: R/namespace.R:0
 #, fuzzy
 msgid "S3 method %s was declared in 'NAMESPACE' file but was not found"
 msgid_plural ""
-"S3 methods %s were declared in 'NAMESPACE' file but was not found"
+"S3 methods %s were declared in 'NAMESPACE' file but were not found"
 msgstr[0] "S3 metodas %s buvo aprašytas NAMESPACE, bet nerastas"
 msgstr[1] "S3 metodai %s buvo aprašyti NAMESPACE, bet nerasti"
 msgstr[2] "S3 metodų %s buvo aprašyta NAMESPACE, bet nerasta"

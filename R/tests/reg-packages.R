@@ -254,7 +254,7 @@ stopifnot(exprs = {
                      readLines(file.path("PR17501.Rcheck", "PR17501-Ex.R")))
     { str(exLines); length(exLines) > 20 } # str(): diagnostic in case
     is.integer(i <- grep("^R\\.Version\\( *# missing closing paren", exLines))
-    grepl("^## No test", exLines[i-1])
+    grepl("^## Don't test", exLines[i-1])
     { str(tlines <- readLines(tf)); length(tlines) > 20 }
     length(iw <- grep("^Warning: parse error", tlines)) == 1
     (lenN <- length(print(iN <- grep("^[1-9][0-9]:", tlines)))) >= 2

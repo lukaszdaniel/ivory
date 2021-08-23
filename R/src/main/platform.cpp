@@ -1252,7 +1252,7 @@ static SEXP filename(const char *dir, const char *file)
 
 static void list_files(const char *dnp, const char *stem, int *count, SEXP *pans,
 	   Rboolean allfiles, Rboolean recursive,
-	   const regex_t *reg, int *countmax,
+	   const regex_t *reg, int *countmax, PROTECT_INDEX idx,
 	   Rboolean idirs, Rboolean allowdots)
 {
     DIR *dir;
@@ -1294,14 +1294,14 @@ static void list_files(const char *dnp, const char *stem, int *count, SEXP *pans
 		if (*count == *countmax - 1)                              \
 		{                                                         \
 			*countmax *= 2;                                       \
-			*pans = lengthgets(*pans, *countmax);                 \
+			REPROTECT(*pans = lengthgets(*pans, *countmax), idx); \
 		}                                                         \
 		SET_STRING_ELT(*pans, (*count)++,                         \
 					   filename(stem, de->d_name));               \
 	}
 					IF_MATCH_ADD_TO_ANS
 				}
-			    if (stem) {
+				if (stem) {
 #ifdef _WIN32
 				if(strlen(stem) == 2 && stem[1] == ':')
 				    res = snprintf(stem2, PATH_MAX, "%s%s", stem,
@@ -1313,10 +1313,10 @@ static void list_files(const char *dnp, const char *stem, int *count, SEXP *pans
 				if (res >= PATH_MAX)
 				    warning(_("over-long path"));
 			    } else
-				strncpy(stem2, de->d_name, PATH_MAX);
+				strcpy(stem2, de->d_name);
 
 			    list_files(p, stem2, count, pans, allfiles,
-				       recursive, reg, countmax, idirs,
+				       recursive, reg, countmax, idx, idirs,
 				       allowdots);
 			}
 			continue;
@@ -1368,24 +1368,25 @@ HIDDEN SEXP do_listfiles(SEXP call, SEXP op, SEXP args, SEXP rho)
     int flags = REG_EXTENDED;
     if (igcase) flags |= REG_ICASE;
     regex_t reg;
-	if (pattern && tre_regcomp(&reg, translateChar(STRING_ELT(p, 0)), flags))
-		error(_("invalid 'pattern' regular expression"));
-
-	GCStackRoot<> ans(allocVector(STRSXP, countmax));
-	auto underlying_robject = ans.get();
+    if (pattern && tre_regcomp(&reg, translateChar(STRING_ELT(p, 0)), flags))
+	error(_("invalid 'pattern' regular expression"));
+    PROTECT_INDEX idx;
+    SEXP ans;
+    PROTECT_WITH_INDEX(ans = allocVector(STRSXP, countmax), &idx);
     int count = 0;
     for (int i = 0; i < LENGTH(d) ; i++) {
 	if (STRING_ELT(d, i) == NA_STRING) continue;
 	const char *p = translateCharFP2(STRING_ELT(d, i));
 	if (!p) continue;
 	const char *dnp = R_ExpandFileName(p);
-	list_files(dnp, fullnames ? dnp : nullptr, &count, &(underlying_robject), (Rboolean) allfiles,
-		   (Rboolean) recursive, pattern ? &reg : nullptr, &countmax,
+	list_files(dnp, fullnames ? dnp : nullptr, &count, &ans, (Rboolean) allfiles,
+		   (Rboolean) recursive, pattern ? &reg : nullptr, &countmax, idx,
 		   (Rboolean) idirs, /* allowdots = */ (Rboolean) !nodots);
     }
-    ans = lengthgets(ans, count);
+    REPROTECT(ans = lengthgets(ans, count), idx);
     if (pattern) tre_regfree(&reg);
     ssort(reinterpret_cast<CXXR::String**>(STRING_PTR(ans)), count);
+    UNPROTECT(1);
     return ans;
 }
 

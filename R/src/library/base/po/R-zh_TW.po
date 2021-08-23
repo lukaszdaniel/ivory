@@ -3851,12 +3851,12 @@ msgid "Registered S3 method overwritten by '%s':"
 msgid_plural "Registered S3 methods overwritten by '%s':"
 msgstr[0] ""
 
-#. R/namespace.R: ngettext(sum(notex), "S3 method %s was declared in 'NAMESPACE' file but was not found",     "S3 methods %s were declared in 'NAMESPACE' file but was not found", domain = "R-base")
+#. R/namespace.R: ngettext(sum(notex), "S3 method %s was declared in 'NAMESPACE' file but was not found",     "S3 methods %s were declared in 'NAMESPACE' file but were not found", domain = "R-base")
 #: R/namespace.R:0
 #, fuzzy
 msgid "S3 method %s was declared in 'NAMESPACE' file but was not found"
 msgid_plural ""
-"S3 methods %s were declared in 'NAMESPACE' file but was not found"
+"S3 methods %s were declared in 'NAMESPACE' file but were not found"
 msgstr[0] "S3 方法 %s 在 NAMESPACE 裡有宣告但不存在"
 
 #. R/attach.R: ngettext(length(same), "The following object is masked _by_ %s:\n\n%s\n", "The following objects are masked _by_ %s:\n\n%s\n",     domain = "R-base")
