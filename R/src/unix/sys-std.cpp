@@ -905,7 +905,7 @@ static char *R_completion_generator(const char *text, int state)
 	list_index = 0;
 	ncomp = length(completions);
 	if (ncomp > 0) {
-	    compstrings = (char **) malloc(ncomp * sizeof(char*));
+	    compstrings = static_cast<char **>(malloc(ncomp * sizeof(char*)));
 	    if (!compstrings) {
 		UNPROTECT(4);
 		return (char *)nullptr;

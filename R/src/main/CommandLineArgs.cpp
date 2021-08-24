@@ -61,7 +61,7 @@ void R_set_command_line_arguments(int argc, char *argv[])
 {
 	// nothing here is ever freed.
 	NumCommandLineArgs = argc;
-	CommandLineArgs = (char **)calloc((size_t)argc, sizeof(char *));
+	CommandLineArgs = static_cast<char**>(calloc(size_t(argc), sizeof(char *)));
 	if (CommandLineArgs == nullptr)
 		R_Suicide(_("allocation failure in R_set_command_line_arguments"));
 

@@ -1638,7 +1638,7 @@ void *R_AllocStringBuffer(size_t blen, R_StringBuffer &buf)
             buf.data[0] = '\0';
     }
     else
-        buf.data = (char *)realloc(buf.data, blen);
+        buf.data = static_cast<char *>(realloc(buf.data, blen));
     buf.bufsize = blen;
     if (!buf.data)
     {

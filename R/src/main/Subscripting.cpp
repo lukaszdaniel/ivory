@@ -35,3 +35,9 @@
 #include <CXXR/RealVector.hpp>
 #include <CXXR/Subscripting.hpp>
 #include <Localization.h>
+
+using namespace CXXR;
+
+namespace CXXR
+{
+} // namespace CXXR

@@ -56,12 +56,12 @@ typedef int bool;
 #endif
 
 /*************************************************************************/
-/* DEFINITIONS RELATED TO OUR FONT DATABASE (g_fontdb.c and g_fontd2.c)  */
+/* DEFINITIONS RELATED TO OUR FONT DATABASE (g_fontdb.cpp and g_fontd2.cpp)  */
 /*************************************************************************/
 
 /* HERSHEY FONTS */
 
-/* our information about each of the 22 Hershey vector fonts in g_fontdb.c,
+/* our information about each of the 22 Hershey vector fonts in g_fontdb.cpp,
    and the typefaces they belong to */
 struct plHersheyFontInfoStruct
 {
@@ -79,7 +79,7 @@ struct plHersheyFontInfoStruct
 extern const struct plHersheyFontInfoStruct _hershey_font_info[];
 
 /* This numbering should agree with the numbering of Hershey fonts in the
-   _hershey_font_info[] array in g_fontdb.c. */
+   _hershey_font_info[] array in g_fontdb.cpp. */
 #define HERSHEY_SERIF 0
 #define HERSHEY_SERIF_ITALIC 1
 #define HERSHEY_SERIF_BOLD 2
@@ -91,7 +91,7 @@ extern const struct plHersheyFontInfoStruct _hershey_font_info[];
 #define HERSHEY_SERIF_SYMBOL 18
 
 /* accented character information (used in constructing Hershey ISO-Latin-1
-   accented characters, see table in g_fontdb.c) */
+   accented characters, see table in g_fontdb.cpp) */
 struct plHersheyAccentedCharInfoStruct
 {
   unsigned char composite, character, accent;
@@ -109,7 +109,7 @@ extern const struct plHersheyAccentedCharInfoStruct _hershey_accented_char_info[
 
 /* HERSHEY VECTOR GLYPHS */
 
-/* arrays of Hershey vector glyphs in g_her_glyph.c */
+/* arrays of Hershey vector glyphs in g_her_glyph.cpp */
 extern const char * const _occidental_hershey_glyphs[];
 extern const char * const _oriental_hershey_glyphs[];
 

@@ -866,12 +866,12 @@ static bool StringAtom(SEXP expr)
 
 static FontType GetFont(pGEcontext gc)
 {
-    return (FontType)gc->fontface;
+    return FontType(gc->fontface);
 }
 
 static FontType SetFont(FontType font, pGEcontext gc)
 {
-    FontType prevfont = (FontType)gc->fontface;
+    FontType prevfont = FontType(gc->fontface);
     gc->fontface = font;
     return prevfont;
 }
@@ -887,7 +887,7 @@ static BBOX GlyphBBox(int chr, pGEcontext gc, pGEDevDesc dd)
     BBOX bbox;
     double height, depth, width;
     int chr1 = chr;
-    if(dd->dev->wantSymbolUTF8 && gc->fontface == 5)
+    if (dd->dev->wantSymbolUTF8 && gc->fontface == 5)
 	chr1 = -Rf_AdobeSymbol2ucs2(chr);
     GEMetricInfo(chr1, gc, &height, &depth, &width, dd);
     bbox.height = fromDeviceHeight(height, MetricUnit, dd);
@@ -944,7 +944,7 @@ static BBOX RenderSymbolChar(int ascii, int draw, mathContext *mc,
 	prev = SetFont(SymbolFont, gc);
     bbox = GlyphBBox(ascii, gc, dd);
     if (draw) {
-	asciiStr[0] = (char) ascii;
+	asciiStr[0] = char(ascii);
 	asciiStr[1] = '\0';
 	GEText(ConvertedX(mc ,dd), ConvertedY(mc, dd), asciiStr,
 	       CE_SYMBOL,
@@ -985,7 +985,7 @@ static BBOX RenderSymbolStr(const char *str, int draw, mathContext *mc,
 		wc = 0;
 		// FIXME this does not allow for surrogate pairs (implausible)
 		res = mbrtowc(&wc, s, MB_LEN_MAX, &mb_st);
-		if(res == (size_t) -1) error(_("invalid multibyte string '%s'"), s);
+		if(res == size_t(-1)) error(_("invalid multibyte string '%s'"), s);
 		if (iswdigit(wc) && font != PlainFont) {
 		    font = PlainFont;
 		    SetFont(PlainFont, gc);
@@ -994,7 +994,7 @@ static BBOX RenderSymbolStr(const char *str, int draw, mathContext *mc,
 		    font = prevfont;
 		    SetFont(prevfont, gc);
 		}
-		glyphBBox = GlyphBBox((unsigned int) wc, gc, dd);
+		glyphBBox = GlyphBBox(static_cast<unsigned int>(wc), gc, dd);
 		if (UsingItalics(gc))
 		    glyphBBox.italic =
 			ItalicFactor * glyphBBox.height;
@@ -1003,7 +1003,7 @@ static BBOX RenderSymbolStr(const char *str, int draw, mathContext *mc,
 		if (draw) {
 		    memset(chr, 0, sizeof(chr));
 		    /* should not be possible, as we just converted to wc */
-		    if(wcrtomb(chr, wc, &mb_st) == (size_t) -1)
+		    if(wcrtomb(chr, wc, &mb_st) == size_t(-1))
 			error(_("invalid multibyte string"));
 		    PMoveAcross(lastItalicCorr, mc);
 		    GEText(ConvertedX(mc ,dd), ConvertedY(mc, dd), chr,
@@ -1018,7 +1018,7 @@ static BBOX RenderSymbolStr(const char *str, int draw, mathContext *mc,
 	    }
 	} else {
 	    while (*s) {
-		if (isdigit((int)*s) && font != PlainFont) {
+		if (isdigit(int(*s)) && font != PlainFont) {
 		    font = PlainFont;
 		    SetFont(PlainFont, gc);
 		}
@@ -1026,7 +1026,7 @@ static BBOX RenderSymbolStr(const char *str, int draw, mathContext *mc,
 		    font = prevfont;
 		    SetFont(prevfont, gc);
 		}
-		glyphBBox = GlyphBBox((unsigned char) *s, gc, dd);
+		glyphBBox = GlyphBBox(static_cast<unsigned char>(*s), gc, dd);
 		if (UsingItalics(gc))
 		    glyphBBox.italic =
 			ItalicFactor * glyphBBox.height;
@@ -1067,10 +1067,10 @@ static BBOX RenderChar(int ascii, int draw, mathContext *mc,
 	memset(asciiStr, 0, sizeof(asciiStr));
 	if(mbcslocale) {
 	    size_t res = wcrtomb(asciiStr, ascii, nullptr);
-	    if(res == (size_t) -1)
+	    if(res == size_t(-1))
 		error(_("invalid character in current multibyte locale"));
 	} else
-	    asciiStr[0] = (char) ascii;
+	    asciiStr[0] = char(ascii);
 	GEText(ConvertedX(mc ,dd), ConvertedY(mc, dd), asciiStr, CE_NATIVE,
 	       0.0, 0.0, mc->CurrentAngle, gc,
 	       dd);
@@ -1099,7 +1099,7 @@ static BBOX RenderStr(const char *str, int draw, mathContext *mc,
 	    // FIXME this does not allow for surrogate pairs
 	    while ((used = Mbrtowc(&wc, p, n, &mb_st)) > 0) {
 		/* On Windows could have sign extension here */
-		glyphBBox = GlyphBBox((unsigned int) wc, gc, dd);
+		glyphBBox = GlyphBBox(static_cast<unsigned int>(wc), gc, dd);
 		resultBBox = CombineBBoxes(resultBBox, glyphBBox);
 		p += used; n -= used; nc++;
 	    }
@@ -1107,7 +1107,7 @@ static BBOX RenderStr(const char *str, int draw, mathContext *mc,
 	    const char *s = str;
 	    while (*s) {
 		/* Watch for sign extension here - fixed > 2.7.1 */
-		glyphBBox = GlyphBBox((unsigned char) *s, gc, dd);
+		glyphBBox = GlyphBBox(static_cast<unsigned char>(*s), gc, dd);
 		resultBBox = CombineBBoxes(resultBBox, glyphBBox);
 		s++; nc++;
 	    }
@@ -1429,7 +1429,7 @@ static BBOX RenderSup(SEXP expr, int draw, mathContext *mc,
     BBOX bodyBBox, subBBox, supBBox;
     SEXP body = CADR(expr);
     SEXP sup = CADDR(expr);
-    SEXP sub = R_NilValue;	/* -Wall */
+    SEXP sub = nullptr;	/* -Wall */
     STYLE style = GetStyle(mc);
     double savedX = mc->CurrentX;
     double savedY = mc->CurrentY;
@@ -2132,7 +2132,7 @@ static BBOX RenderDelim(int which, double dist, int draw, mathContext *mc,
 		- (topBBox.height + topBBox.depth);
 	    ybot = axisHeight - dist
 		+ (botBBox.height + botBBox.depth);
-	    n = (int) ceil((ytop - ybot) / (0.99 * extHeight));
+	    n = int(ceil((ytop - ybot) / (0.99 * extHeight)));
 	    if (n > 0) {
 		delta = (ytop - ybot) / n;
 		for (i = 0; i < n; i++) {

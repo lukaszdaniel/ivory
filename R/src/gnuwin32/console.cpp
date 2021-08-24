@@ -138,7 +138,7 @@ xbuf newxbuf(xlong dim, xint ms, xint shift)
 void xbufgrow(xbuf p, xlong dim, xint ms)
 {
     if(dim > p->dim) {
-	wchar_t *ret = (wchar_t *) realloc(p->b, (dim + 1)*sizeof(wchar_t));
+	wchar_t *ret = static_cast<wchar_t *>(realloc(p->b, (dim + 1)*sizeof(wchar_t)));
 	if(ret) {
 	    int i, change;
 	    change = ret - p->b;
@@ -150,9 +150,9 @@ void xbufgrow(xbuf p, xlong dim, xint ms)
 	}
     }
     if(ms > p->ms) {
-	wchar_t **ret = (wchar_t **) realloc(p->s, ms * sizeof(wchar_t *));
+	wchar_t **ret = static_cast<wchar_t **>(realloc(p->s, ms * sizeof(wchar_t *)));
 	if(ret) {
-	    int *ret2 = (int *) realloc(p->user, ms * sizeof(int));
+	    int *ret2 = static_cast<int *>(realloc(p->user, ms * sizeof(int)));
 	    if(ret2) {
 		p->s = ret;
 		p->user = ret2;

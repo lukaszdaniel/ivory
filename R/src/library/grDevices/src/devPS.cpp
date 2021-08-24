@@ -5732,8 +5732,8 @@ static void copyDefn(int fromDefn, int toDefn, PDFDesc *pd)
 static void trimDefn(int i, PDFDesc *pd) 
 {
     size_t len = strlen(pd->definitions[i].str);
-    pd->definitions[i].str = (char *) realloc(pd->definitions[i].str, 
-                                     (len + 1)*sizeof(char));
+    pd->definitions[i].str = static_cast<char *>(realloc(pd->definitions[i].str, 
+                                     (len + 1)*sizeof(char)));
     pd->definitions[i].str[len] = '\0';
 }
 

@@ -118,7 +118,7 @@ HIDDEN SEXP do_readDCF(SEXP call, SEXP op, SEXP args, SEXP env)
     PROTECT(fold_excludes = coerceVector(CAR(args), STRSXP)); nprot++;
     has_fold_excludes = (LENGTH(fold_excludes) > 0);
 
-    buf = (char *) malloc(buflen);
+    buf = static_cast<char *>(malloc(buflen));
     if(!buf) error(_("could not allocate memory for 'read.dcf()' function"));
     nret = 20;
     /* it is easier if we first have a record per column */
@@ -190,7 +190,7 @@ HIDDEN SEXP do_readDCF(SEXP call, SEXP op, SEXP args, SEXP env)
 			need += (int) strlen(line + offset) + n_eblanklines;
 		    }
 		    if(buflen < need) {
-			char *tmp = (char *) realloc(buf, need);
+			char *tmp = static_cast<char *>(realloc(buf, need));
 			if(!tmp) {
 			    free(buf);
 			    error(_("could not allocate memory for 'read.dcf()' function"));
@@ -214,7 +214,7 @@ HIDDEN SEXP do_readDCF(SEXP call, SEXP op, SEXP args, SEXP env)
 	    } else {
 		if(tre_regexecb(&regline, line, 1, regmatch, 0) == 0) {
 		    for(m = 0; m < nwhat; m++){
-			whatlen = (int) strlen(CHAR(STRING_ELT(what, m)));
+			whatlen = int(strlen(CHAR(STRING_ELT(what, m))));
 			if(strlen(line) > whatlen &&
 			   line[whatlen] == ':' &&
 			   streqln(CHAR(STRING_ELT(what, m)),
@@ -271,7 +271,7 @@ HIDDEN SEXP do_readDCF(SEXP call, SEXP op, SEXP args, SEXP env)
 			/* Make sure enough space was used */
 			need = (int) (Rf_strchr(line, ':') - line + 1);
 			if(buflen < need){
-			    char *tmp = (char *) realloc(buf, need);
+			    char *tmp = static_cast<char *>(realloc(buf, need));
 			    if(!tmp) {
 				free(buf);
 				error(_("could not allocate memory for 'read.dcf()' function"));

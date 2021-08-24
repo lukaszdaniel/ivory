@@ -35,3 +35,7 @@
 
 using namespace std;
 using namespace CXXR;
+
+namespace CXXR
+{
+} // namespace CXXR

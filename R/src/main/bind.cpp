@@ -556,7 +556,7 @@ static SEXP NewBase(SEXP base, SEXP tag)
     if (*CHAR(base) && *CHAR(tag)) { /* test of length */
 	const void *vmax = vmaxget();
 	const char *sb = translateCharUTF8(base), *st = translateCharUTF8(tag);
-	cbuf = (char*) R_AllocStringBuffer(strlen(st) + strlen(sb) + 1, cbuff);
+	cbuf = static_cast<char*>(R_AllocStringBuffer(strlen(st) + strlen(sb) + 1, cbuff));
 	sprintf(cbuf, "%s.%s", sb, st);
 	/* This isn't strictly correct as we do not know that all the
 	   components of the name were correctly translated. */
@@ -591,7 +591,7 @@ static SEXP NewName(SEXP base, SEXP tag, R_xlen_t seqno, int count)
 	    const char
 		*sb = translateCharUTF8(base),
 		*st = translateCharUTF8(tag);
-	    char *cbuf = (char*) R_AllocStringBuffer(strlen(sb) + strlen(st) + 1, cbuff);
+	    char *cbuf = static_cast<char*>(R_AllocStringBuffer(strlen(sb) + strlen(st) + 1, cbuff));
 	    sprintf(cbuf, "%s.%s", sb, st);
 	    ans = mkCharCE(cbuf, CE_UTF8);
 	    vmaxset(vmax);
@@ -602,8 +602,8 @@ static SEXP NewName(SEXP base, SEXP tag, R_xlen_t seqno, int count)
 	    const void *vmax = vmaxget();
 	    const char *sb = translateCharUTF8(base);
 	    char *cbuf;
-	    cbuf = (char*) R_AllocStringBuffer(strlen(sb) + (size_t) IndexWidth(seqno),
-				       cbuff);
+	    cbuf = static_cast<char*>(R_AllocStringBuffer(strlen(sb) + size_t(IndexWidth(seqno)),
+				       cbuff));
 #ifdef LONG_VECTOR_SUPPORT
 	    if (seqno > R_INT_MAX)
 		sprintf(cbuf, "%s%.0f", sb, (double) seqno);

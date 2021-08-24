@@ -26,6 +26,7 @@
 #define R_NO_REMAP
 
 #include <complex>
+#include <CXXR/RAllocStack.hpp>
 #include <CXXR/BuiltInFunction.hpp>
 #include <CXXR/PairList.hpp>
 #include <CXXR/RealVector.hpp>
@@ -1761,7 +1762,7 @@ HIDDEN SEXP do_aperm(SEXP call, SEXP op, SEXP args, SEXP rho)
 
     /* check the permutation */
 
-    int *pp = (int *) R_alloc((size_t) n, sizeof(int));
+    int *pp = static_cast<int *>(CXXR_alloc(size_t(n), sizeof(int)));
     perm = CADR(args);
     if (length(perm) == 0) {
 	for (i = 0; i < n; i++) pp[i] = n-1-i;
@@ -1791,7 +1792,7 @@ HIDDEN SEXP do_aperm(SEXP call, SEXP op, SEXP args, SEXP rho)
 	}
     }
 
-    R_xlen_t *iip = (R_xlen_t *) R_alloc((size_t) n, sizeof(R_xlen_t));
+    R_xlen_t *iip = static_cast<R_xlen_t *>(CXXR_alloc(size_t(n), sizeof(R_xlen_t)));
     for (i = 0; i < n; iip[i++] = 0);
     for (i = 0; i < n; i++)
 	if (pp[i] >= 0 && pp[i] < n) iip[pp[i]]++;
@@ -1801,7 +1802,7 @@ HIDDEN SEXP do_aperm(SEXP call, SEXP op, SEXP args, SEXP rho)
 
     /* create the stride object and permute */
 
-    R_xlen_t *stride = (R_xlen_t *) R_alloc((size_t) n, sizeof(R_xlen_t));
+    R_xlen_t *stride = static_cast<R_xlen_t *>(CXXR_alloc(size_t(n), sizeof(R_xlen_t)));
     for (iip[0] = 1, i = 1; i<n; i++) iip[i] = iip[i-1] * isa[i-1];
     for (i = 0; i < n; i++) stride[i] = iip[pp[i]];
 
@@ -2011,7 +2012,7 @@ HIDDEN SEXP do_colsum(SEXP call, SEXP op, SEXP args, SEXP rho)
 	LDOUBLE *rans;
 	if(n <= 10000) {
 	    R_CheckStack2(n * sizeof(LDOUBLE));
-	    rans = (LDOUBLE *) alloca(n * sizeof(LDOUBLE));
+	    rans = static_cast<LDOUBLE *>(alloca(n * sizeof(LDOUBLE)));
 	    Memzero(rans, n);
 	} else rans = Calloc(n, LDOUBLE);
 	if (!keepNA && OP == 3) Cnt = Calloc(n, int);

@@ -784,8 +784,7 @@ void R_SetWin32(Rstart Rp)
 
 static void Putenv(const char *str)
 {
-    char *buf;
-    buf = (char *) malloc((strlen(str) + 1) * sizeof(char));
+    char *buf = static_cast<char *>(malloc((strlen(str) + 1) * sizeof(char)));
     if(!buf) R_ShowMessage("allocation failure in reading Renviron");
     strcpy(buf, str);
     putenv(buf);

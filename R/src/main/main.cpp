@@ -1550,8 +1550,7 @@ R_ToplevelCallbackEl *Rf_addTaskCallback(R_ToplevelCallback cb, void *data,
 		   void (*finalizer)(void *), const char *name, int *pos)
 {
     int which;
-    R_ToplevelCallbackEl *el;
-    el = (R_ToplevelCallbackEl *) malloc(sizeof(R_ToplevelCallbackEl));
+    R_ToplevelCallbackEl *el = static_cast<R_ToplevelCallbackEl *>(malloc(sizeof(R_ToplevelCallbackEl)));
     if(!el)
 	error(_("cannot allocate space for toplevel callback element"));
 

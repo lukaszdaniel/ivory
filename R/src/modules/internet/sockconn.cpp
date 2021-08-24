@@ -82,7 +82,7 @@ static Rboolean sock_open(Rconnection con)
 	    }
 	}
 	free(con->description);
-	con->description = (char *) malloc(strlen(buf) + 10);
+	con->description = static_cast<char *>(malloc(strlen(buf) + 10));
 	sprintf(con->description, "<-%s:%d", buf, thisconn->port);
     } else {
 	sock = R_SockConnect(thisconn->port, con->description, timeout);

@@ -248,7 +248,7 @@ SEXP doTabExpand(SEXP strings, SEXP starts)  /* does tab expansion for UTF-8 str
 	    if (b - buffer >= bufsize - 8) {
 		int pos = (int)(b - buffer);
 		bufsize *= 2;
-		char *tmp = (char *) realloc(buffer, bufsize*sizeof(char));
+		char *tmp = static_cast<char *>(realloc(buffer, bufsize*sizeof(char)));
 		if (!tmp) {
 		    free(buffer); // free original allocation
 		    error(_("out of memory"));

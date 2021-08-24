@@ -470,7 +470,7 @@ SEXP in_R_X11_dataviewer(SEXP call, SEXP op, SEXP args, SEXP rho)
     int i, nprotect;
     RCNTXT cntxt;
     // FIXME: this should be checked
-    DEstruct DE = (DEstruct) malloc(sizeof(destruct));
+    DEstruct DE = static_cast<DEstruct>(malloc(sizeof(destruct)));
     if(!DE) error(_("allocation failed in in_R_X11_dataviewer"));
 
     nView++;

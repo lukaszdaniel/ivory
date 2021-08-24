@@ -336,7 +336,7 @@ HIDDEN SEXP R::ALTREP_UNSERIALIZE_EX(SEXP info, SEXP state, SEXP attr, int objf,
 		type2char(type), type2char(rtype));
 
     /* dispatch to a class method */
-    altrep_methods_t *m = (altrep_methods_t *) CLASS_METHODS_TABLE(class_);
+    altrep_methods_t *m = static_cast<altrep_methods_t *>(CLASS_METHODS_TABLE(class_));
     SEXP val = m->UnserializeEX(class_, state, attr, objf, levs);
     return val;
 }
@@ -638,7 +638,7 @@ void R::ALTRAW_SET_ELT(SEXP x, R_xlen_t i, Rbyte v)
 static SEXP altrep_UnserializeEX_default(SEXP class_, SEXP state, SEXP attr,
                                          int objf, int levs)
 {
-    altrep_methods_t *m = (altrep_methods_t *)CLASS_METHODS_TABLE(class_);
+    altrep_methods_t *m = static_cast<altrep_methods_t *>(CLASS_METHODS_TABLE(class_));
     SEXP val = m->Unserialize(class_, state);
     SET_ATTRIB(val, attr);
     SET_OBJECT(val, objf);
@@ -1004,12 +1004,12 @@ static void reinit_altrep_class(SEXP class_)
  ** ALTREP Method Setters
  **/
 
-#define DEFINE_METHOD_SETTER(CNAME, MNAME)                                            \
-    void R_set_##CNAME##_##MNAME##_method(R_altrep_class_t cls,                       \
-                                          R_##CNAME##_##MNAME##_method_t fun)         \
-    {                                                                                 \
-        CNAME##_methods_t *m = (CNAME##_methods_t *)CLASS_METHODS_TABLE(R_SEXP(cls)); \
-        m->MNAME = fun;                                                               \
+#define DEFINE_METHOD_SETTER(CNAME, MNAME)                                                         \
+    void R_set_##CNAME##_##MNAME##_method(R_altrep_class_t cls,                                    \
+                                          R_##CNAME##_##MNAME##_method_t fun)                      \
+    {                                                                                              \
+        CNAME##_methods_t *m = static_cast<CNAME##_methods_t *>(CLASS_METHODS_TABLE(R_SEXP(cls))); \
+        m->MNAME = fun;                                                                            \
     }
 
 DEFINE_METHOD_SETTER(altrep, UnserializeEX)

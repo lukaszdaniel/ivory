@@ -65,12 +65,12 @@ static bool add_point(double x, double y, pGEDevDesc dd)
 	    tmp_px = static_cast<double *>(CXXR_alloc(tmp_n, sizeof(double)));
 	    tmp_py = static_cast<double *>(CXXR_alloc(tmp_n, sizeof(double)));
 	} else {
-	    tmp_px = (double *) S_realloc((char *) xpoints,
+	    tmp_px = reinterpret_cast<double *>(S_realloc((char *) xpoints,
 					  tmp_n, max_points,
-					  sizeof(double));
-	    tmp_py = (double *) S_realloc((char *) ypoints,
+					  sizeof(double)));
+	    tmp_py = reinterpret_cast<double *>(S_realloc((char *) ypoints,
 					  tmp_n, max_points,
-					  sizeof(double));
+					  sizeof(double)));
 	}
 	if (tmp_px == nullptr || tmp_py == nullptr) {
 	    error(_("insufficient memory to allocate point array"));

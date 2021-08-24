@@ -113,18 +113,18 @@ static void savetl(SEXP s)
     if (nsaved >= nalloc) {
 	nalloc *= 2;
 	char *tmp;
-	tmp = (char *) realloc(saveds, nalloc * sizeof(SEXP));
+	tmp = static_cast<char *>(realloc(saveds, nalloc * sizeof(SEXP)));
 	if (tmp == nullptr) {
 	    savetl_end();
 	    error(_("Could not reallocate '%s' variable in '%s' function"), "saveds", "savetl()");
 	}
 	saveds = (SEXP *) tmp;
-	tmp = (char *)realloc(savedtl, nalloc * sizeof(R_len_t));
+	tmp = static_cast<char *>(realloc(savedtl, nalloc * sizeof(R_len_t)));
 	if (tmp == nullptr) {
 	    savetl_end();
 	    error(_("Could not reallocate '%s' variable in '%s' function"), "savedtl", "savetl()");
 	}
-	savedtl = (R_len_t *) tmp;
+	savedtl = reinterpret_cast<R_len_t *>(tmp);
     }
     saveds[nsaved] = s;
     savedtl[nsaved] = TRLEN(s);
@@ -145,7 +145,7 @@ static void growstack(uint64_t newlen)
     // just 100,000 seems a good minimum at 0.4MB
     if (newlen == 0) newlen = 100000;
     if (newlen > (uint64_t) gsmaxalloc) newlen = (uint64_t) gsmaxalloc;
-    gs[flip] = (int*) realloc(gs[flip], newlen * sizeof(int));
+    gs[flip] = static_cast<int *>(realloc(gs[flip], newlen * sizeof(int)));
     if (gs[flip] == nullptr)
 	Error(_("Failed to reallocate working memory stack to %d*4bytes (flip=%d)"),
 	      (int)newlen /* no bigger than gsmaxalloc */, flip);
@@ -412,7 +412,7 @@ static void alloc_otmp(int n)
 {
     if (otmp_alloc >= n)
 	return;
-    otmp = (int *) realloc(otmp, n * sizeof(int));
+    otmp = static_cast<int *>(realloc(otmp, n * sizeof(int)));
     if (otmp == nullptr)
 	Error(n_("Failed to allocate working memory for '%s' variable. Requested %d * %d byte", "Failed to allocate working memory for '%s' variable. Requested %d * %d bytes", n*sizeof(int)), "otmp",
 	      n, sizeof(int));
@@ -428,7 +428,7 @@ static void alloc_xtmp(int n)
 {
     if (xtmp_alloc >= n)
 	return;
-    xtmp = (double *) realloc(xtmp, n * sizeof(double));
+    xtmp = static_cast<double *>(realloc(xtmp, n * sizeof(double)));
     if (xtmp == nullptr)
 	Error(n_("Failed to allocate working memory for '%s' variable. Requested %d * %d byte", "Failed to allocate working memory for '%s' variable. Requested %d * %d bytes", n*sizeof(double)), "xtmp",
 	      n, sizeof(double));
@@ -514,7 +514,7 @@ static void iradix(int *x, int *o, int n)
         // up more. Often the MSD has groups in just 0-4 out of 256.
         // free'd at the end of do_radixsort once we're done calling iradix
         // repetitively
-        radix_xsub = (int *) realloc(radix_xsub, maxgrpn * sizeof(double));
+        radix_xsub = static_cast<int *>(realloc(radix_xsub, maxgrpn * sizeof(double)));
         if (!radix_xsub)
             Error(_("Failed to reallocate working memory %d*8bytes (xsub in 'iradix()' function), radix=%d"),
                   maxgrpn, radix);
@@ -744,7 +744,7 @@ static void dradix(unsigned char *x, int *o, int n)
         // more. Often the MSD has groups in just 0-4 out of 256.
         // free'd at the end of do_radixsort once we're done calling iradix
         // repetitively
-        radix_xsub = (double *) realloc(radix_xsub, maxgrpn * sizeof(double));
+        radix_xsub = static_cast<double *>(realloc(radix_xsub, maxgrpn * sizeof(double)));
         if (!radix_xsub)
             Error(_("Failed to realloc working memory %d*8bytes (xsub in 'dradix()' function), radix=%d"),
                   maxgrpn, radix);
@@ -1092,7 +1092,7 @@ static void cgroup(SEXP * x, int *o, int n)
 	    ustr_alloc = (ustr_alloc == 0) ? 10000 : ustr_alloc*2;
 	    if (ustr_alloc > n)
 		ustr_alloc = n;
-	    ustr = (SEXP*) realloc((void *) ustr, ustr_alloc * sizeof(SEXP));
+	    ustr = static_cast<SEXP *>(realloc((void *) ustr, ustr_alloc * sizeof(SEXP)));
 	    if (ustr == nullptr)
 		Error(_("Unable to reallocate %d * %d bytes in 'cgroup()' function"), ustr_alloc,
 		      sizeof(SEXP));
@@ -1128,7 +1128,7 @@ static void alloc_csort_otmp(int n)
 {
     if (csort_otmp_alloc >= n)
 	return;
-    csort_otmp = (int *) realloc(csort_otmp, n * sizeof(int));
+    csort_otmp = static_cast<int *>(realloc(csort_otmp, n * sizeof(int)));
     if (csort_otmp == nullptr)
 	Error(n_("Failed to allocate working memory for '%s' variable. Requested %d * %d byte", "Failed to allocate working memory for '%s' variable. Requested %d * %d bytes", n*sizeof(int)), "csort_otmp",
 	     n, sizeof(int));
@@ -1219,7 +1219,7 @@ static void csort_pre(SEXP * x, int n)
 	    ustr_alloc = (ustr_alloc == 0) ? 10000 : ustr_alloc*2;
 	    if (ustr_alloc > old_un+n)
 		ustr_alloc = old_un + n;
-	    ustr = (SEXP*) realloc((void *) ustr, ustr_alloc * sizeof(SEXP));
+	    ustr = static_cast<SEXP *>(realloc((void *) ustr, ustr_alloc * sizeof(SEXP)));
 	    if (ustr == nullptr)
 		Error(n_("Failed to reallocate '%s' variable. Requested %d * %d byte", "Failed to reallocate '%s' variable. Requested %d * %d bytes", ustr_alloc*sizeof(SEXP)), "ustr",
 		      ustr_alloc, sizeof(SEXP));
@@ -1243,14 +1243,14 @@ static void csort_pre(SEXP * x, int n)
     // here, to save them being in the recursive cradix_r()
     if (cradix_counts_alloc < maxlen) {
 	cradix_counts_alloc = maxlen + 10;   // +10 to save too many reallocs
-	cradix_counts = (int *)realloc(cradix_counts,
-				       cradix_counts_alloc * 256 * sizeof(int));
+	cradix_counts = static_cast<int *>(realloc(cradix_counts,
+				       cradix_counts_alloc * 256 * sizeof(int)));
 	if (!cradix_counts)
 	    Error(_("Failed to allocate '%s' variable"), "cradix_counts");
 	memset(cradix_counts, 0, cradix_counts_alloc * 256 * sizeof(int));
     }
     if (cradix_xtmp_alloc < ustr_n) {
-        cradix_xtmp = (SEXP *) realloc(cradix_xtmp,  ustr_n * sizeof(SEXP));
+        cradix_xtmp = static_cast<SEXP *>(realloc(cradix_xtmp,  ustr_n * sizeof(SEXP)));
         // TO DO: Reuse the one we have in do_radixsort.
         // Does it need to be n length?
         if (!cradix_xtmp)

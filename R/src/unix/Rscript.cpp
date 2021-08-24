@@ -157,7 +157,7 @@ int main(int argc_, char *argv_[])
 
     if (njoined > 1) { /* need to split argv_[1] */
 	argc = argc_ - 1 + njoined;
-	argv = (char **) malloc((size_t) (argc+1)*sizeof(char *));
+	argv = static_cast<char **>(malloc(size_t(argc+1)*sizeof(char *)));
 	if (!argv) {
 	    fprintf(stderr, ("malloc failure\n"));
 	    exit(1);
@@ -191,7 +191,7 @@ int main(int argc_, char *argv_[])
 	argv = argv_;
     }
 
-    av = (char **) malloc((size_t) (argc+4)*sizeof(char *));
+    av = static_cast<char **>(malloc(size_t(argc+4)*sizeof(char *)));
     if(!av) {
 	fprintf(stderr, ("malloc failure\n"));
 	exit(1);

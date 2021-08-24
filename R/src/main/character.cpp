@@ -91,6 +91,7 @@ abbreviate chartr make.names strtrim tolower toupper give error.
 
 #include <cerrno>
 #include <vector>
+#include <CXXR/RAllocStack.hpp>
 #include <CXXR/BuiltInFunction.hpp>
 #include <CXXR/String.hpp>
 #include <CXXR/IntVector.hpp>
@@ -712,7 +713,7 @@ HIDDEN SEXP do_substrgets(SEXP call, SEXP op, SEXP args, SEXP env)
 		    ienc2 = CE_NATIVE;
 		}
 		/* might expand under MBCS */
-		buf = (char*) R_AllocStringBuffer(slen+strlen(v_ss), cbuff);
+		buf = static_cast<char*>(R_AllocStringBuffer(slen+strlen(v_ss), cbuff));
 		strcpy(buf, ss);
 		substrset(buf, v_ss, ienc2, start, stop, i, i % v);
 		SET_STRING_ELT(s, i, mkCharCE(buf, ienc2));
@@ -1136,8 +1137,7 @@ HIDDEN SEXP do_tolower(SEXP call, SEXP op, SEXP args, SEXP env)
 		if (nc >= 0) {
 		    if (ienc == CE_UTF8) {
 #ifdef USE_RI18N_CASE
-			R_wchar_t *wcr = (R_wchar_t *)
-			    R_AllocStringBuffer((nc+1)*sizeof(R_wchar_t), cbuff);
+			R_wchar_t *wcr = static_cast<R_wchar_t *>(R_AllocStringBuffer((nc+1)*sizeof(R_wchar_t), cbuff));
 			utf8towcs4(wcr, xi, nc + 1);
 			if (ul)
 			    for (j = 0; j < nc; j++)
@@ -1408,12 +1408,12 @@ namespace
 {
 	inline int xtable_comp(const void *a, const void *b)
 	{
-		return ((xtable_t *)a)->c_old - ((xtable_t *)b)->c_old;
+		return (static_cast<const xtable_t *>(a))->c_old - (static_cast<const xtable_t *>(b))->c_old;
 	}
 
 	inline int xtable_key_comp(const void *a, const void *b)
 	{
-		return *((wchar_t *)a) - ((xtable_t *)b)->c_old;
+		return *(static_cast<const wchar_t *>(a)) - (static_cast<const xtable_t *>(b))->c_old;
 	}
 
 	void ISORT(xtable_t *_base, int _num, int (*_comp)(const void *a, const void *b))
@@ -1529,21 +1529,21 @@ HIDDEN SEXP do_chartr(SEXP call, SEXP op, SEXP args, SEXP env)
 	/* Build the old and new wtr_spec lists. */
 	if (use_WC && IS_UTF8(STRING_ELT(old, 0))) {
 	    s = CHAR(STRING_ELT(old, 0));
-	    nc = (int) utf8towcs(nullptr, s, 0);
+	    nc = int(utf8towcs(nullptr, s, 0));
 	    if (nc < 0) error(_("invalid UTF-8 string '%s'"), "old");
-	    wc = (wchar_t *) R_AllocStringBuffer((nc+1)*sizeof(wchar_t), cbuff);
+	    wc = static_cast<wchar_t *>(R_AllocStringBuffer((nc+1)*sizeof(wchar_t), cbuff));
 	    utf8towcs(wc, s, nc + 1);
 	} else if (use_WC && IS_LATIN1(STRING_ELT(old, 0))) {
 	    s = translateCharUTF8(STRING_ELT(old, 0));
 	    nc = (int) utf8towcs(NULL, s, 0);
 	    if (nc < 0) error(_("invalid UTF-8 string '%s'"), "old"); // but must be valid
-	    wc = (wchar_t *) R_AllocStringBuffer((nc+1)*sizeof(wchar_t), cbuff);
+	    wc = static_cast<wchar_t *>(R_AllocStringBuffer((nc+1)*sizeof(wchar_t), cbuff));
 	    utf8towcs(wc, s, nc + 1);
 	} else {
 	    s = translateChar(STRING_ELT(old, 0));
-	    nc = (int) mbstowcs(nullptr, s, 0);
+	    nc = int(mbstowcs(nullptr, s, 0));
 	    if (nc < 0) error(_("invalid multibyte string '%s'"), "old");
-	    wc = (wchar_t *) R_AllocStringBuffer((nc+1)*sizeof(wchar_t), cbuff);
+	    wc = static_cast<wchar_t *>(R_AllocStringBuffer((nc+1)*sizeof(wchar_t), cbuff));
 	    mbstowcs(wc, s, nc + 1);
 	}
 	wtr_build_spec(wc, trs_old);
@@ -1554,21 +1554,21 @@ HIDDEN SEXP do_chartr(SEXP call, SEXP op, SEXP args, SEXP env)
 
 	if (use_WC && IS_UTF8(STRING_ELT(_new, 0))) {
 	    s = CHAR(STRING_ELT(_new, 0));
-	    nc = (int) utf8towcs(NULL, s, 0);
+	    nc = int(utf8towcs(NULL, s, 0));
 	    if (nc < 0) error(_("invalid UTF-8 string '%s'"), "new");
-	    wc = (wchar_t *) R_AllocStringBuffer((nc+1)*sizeof(wchar_t), cbuff);
+	    wc = static_cast<wchar_t *>(R_AllocStringBuffer((nc+1)*sizeof(wchar_t), cbuff));
 	    utf8towcs(wc, s, nc + 1);
 	} else if (use_WC && IS_LATIN1(STRING_ELT(_new, 0))) {
 	    s = translateCharUTF8(STRING_ELT(_new, 0));
 	    nc = (int) utf8towcs(nullptr, s, 0);
 	    if (nc < 0) error(_("invalid UTF-8 string '%s'"), "new");
-	    wc = (wchar_t *) R_AllocStringBuffer((nc+1)*sizeof(wchar_t), cbuff);
+	    wc = static_cast<wchar_t *>(R_AllocStringBuffer((nc+1)*sizeof(wchar_t), cbuff));
 	    utf8towcs(wc, s, nc + 1);
 	} else {
 	    s = translateChar(STRING_ELT(_new, 0));
-	    nc = (int) mbstowcs(nullptr, s, 0);
+	    nc = int(mbstowcs(nullptr, s, 0));
 	    if (nc < 0) error(_("invalid multibyte string '%s'"), "new");
-	    wc = (wchar_t *) R_AllocStringBuffer((nc+1)*sizeof(wchar_t), cbuff);
+	    wc = static_cast<wchar_t *>(R_AllocStringBuffer((nc+1)*sizeof(wchar_t), cbuff));
 	    mbstowcs(wc, s, nc + 1);
 	}
 	wtr_build_spec(wc, trs_new);
@@ -1583,7 +1583,7 @@ HIDDEN SEXP do_chartr(SEXP call, SEXP op, SEXP args, SEXP env)
 	      xtable_cnt++) ;
 	wtr_free_spec(trs_cnt);
 	Free(trs_cnt_ptr);
-	xtable = (xtable_t *) R_alloc(xtable_cnt+1, sizeof(xtable_t));
+	xtable = static_cast<xtable_t *>(CXXR_alloc(xtable_cnt+1, sizeof(xtable_t)));
 
 	trs_old_ptr = Calloc(1, struct wtr_spec *);
 	*trs_old_ptr = trs_old->next;
@@ -1628,8 +1628,8 @@ HIDDEN SEXP do_chartr(SEXP call, SEXP op, SEXP args, SEXP env)
 		}
 		if (nc < 0)
 		    error(_("invalid multibyte input string %d"), i+1);
-		wc = (wchar_t *) R_AllocStringBuffer((nc+1)*sizeof(wchar_t),
-						     cbuff);
+		wc = static_cast<wchar_t *>(R_AllocStringBuffer((nc+1)*sizeof(wchar_t),
+						     cbuff));
 		if (ienc == CE_UTF8) utf8towcs(wc, xi, nc + 1);
 		else mbstowcs(wc, xi, nc + 1);
 		for (j = 0; j < nc; j++){
@@ -1658,7 +1658,7 @@ HIDDEN SEXP do_chartr(SEXP call, SEXP op, SEXP args, SEXP env)
 	struct tr_spec *trs_new, **trs_new_ptr;
 
 	for (unsigned int ii = 0; ii <= UCHAR_MAX; ii++)
-	    xtable[ii] = (unsigned char) ii;
+	    xtable[ii] = static_cast<unsigned char>(ii);
 
 	/* Initialize the old and new tr_spec lists. */
 	trs_old = Calloc(1, struct tr_spec);
@@ -1702,7 +1702,7 @@ HIDDEN SEXP do_chartr(SEXP call, SEXP op, SEXP args, SEXP env)
 		const char *xi = translateChar(STRING_ELT(x, i));
 		cbuf = CallocCharBuf(strlen(xi));
 		strcpy(cbuf, xi);
-		for (p = (unsigned char *) cbuf; *p != '\0'; p++)
+		for (p = reinterpret_cast<unsigned char *>(cbuf); *p != '\0'; p++)
 		    *p = xtable[*p];
 		SET_STRING_ELT(y, i, markKnown(cbuf, STRING_ELT(x, i)));
 		Free(cbuf);
@@ -1754,12 +1754,12 @@ HIDDEN SEXP do_strtrim(SEXP call, SEXP op, SEXP args, SEXP env)
 	    // FIXME: this could do a better job with UTF-8 or Latin-1 input
 	    This = translateChar(STRING_ELT(x, i));
 	    nc = (int) strlen(This);
-	    buf = (char*) R_AllocStringBuffer(nc, cbuff);
+	    buf = static_cast<char *>(R_AllocStringBuffer(nc, cbuff));
 	    wsum = 0;
 	    mbs_init(&mb_st);
 	    for (p = This, w0 = 0, q = buf; *p ;) {
 		wchar_t wc;
-		nb =  (int) Mbrtowc(&wc, p, R_MB_CUR_MAX, &mb_st);
+		nb =  int(Mbrtowc(&wc, p, R_MB_CUR_MAX, &mb_st));
 #ifdef USE_RI18N_WIDTH
 		w0 = Ri18n_wcwidth((R_wchar_t) wc);
 #else
@@ -1795,7 +1795,7 @@ static int strtoi(SEXP s, int base)
     return (errno || *endp != '\0' ||
 	    res > R_INT_MAX || res < INT_MIN)
 	? NA_INTEGER
-	: (int) res;
+	: int(res);
 }
 
 HIDDEN SEXP do_strtoi(SEXP call, SEXP op, SEXP args, SEXP env)

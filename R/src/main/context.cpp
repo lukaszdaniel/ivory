@@ -877,7 +877,7 @@ struct ProtectedEvalData
 
 static void protectedEval(void *d)
 {
-    ProtectedEvalData *data = (ProtectedEvalData *)d;
+    ProtectedEvalData *data = static_cast<ProtectedEvalData *>(d);
     SEXP env = R_GlobalEnv;
     if (data->env)
     {

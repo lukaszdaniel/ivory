@@ -1190,7 +1190,7 @@ void F77_NAME(realp0) (const char *label, int *nchar, float *data, int *ndata)
 	Rprintf("\n");
     }
     if(nd > 0) {
-	ddata = (double *) malloc(nd*sizeof(double));
+	ddata = static_cast<double *>(malloc(nd*sizeof(double)));
 	if(!ddata) error(_("memory allocation error in 'realpr'"));
 	for (int k = 0; k < nd; k++) ddata[k] = (double) data[k];
 	printRealVector(ddata, nd, 1);

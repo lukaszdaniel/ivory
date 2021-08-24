@@ -711,7 +711,7 @@ static void process_request_(void *ptr)
 		    sprintf(buf, "\r\nContent-length: %ld\r\n\r\n", fsz);
 		    send_response(c->sock, buf, strlen(buf));
 		    if (c->method != METHOD_HEAD) {
-			fbuf = (char*) malloc(32768);
+			fbuf = static_cast<char *>(malloc(32768));
 			if (fbuf) {
 			    while (fsz > 0 && !feof(f)) {
 				size_t rd = (fsz > 32768) ? 32768 : fsz;
@@ -948,7 +948,7 @@ static void worker_input_handler(void *data) {
 		if (c->attr & CONTENT_LENGTH && c->content_length) {
 		    if (c->content_length < 0 ||  /* we are parsing signed so negative numbers are bad */
 			c->content_length > 2147483640 || /* R will currently have issues with body around 2Gb or more, so better to not go there */
-			!(c->body = (char*) malloc(c->content_length + 1 /* allocate an extra termination byte */ ))) {
+			!(c->body = static_cast<char *>(malloc(c->content_length + 1 /* allocate an extra termination byte */ )))) {
 			send_http_response(c, " 413 Request Entity Too Large (request body too big)\r\nConnection: close\r\n\r\n");
 			remove_worker(c);
 			return;

@@ -612,7 +612,7 @@ const char *R::locale2charset(const char *locale)
      */
     memset(la_loc, 0, sizeof(la_loc));
     memset(enc, 0, sizeof(enc));
-    p = (char*) strrchr(locale, '.');
+    p = const_cast<char*>(strrchr(locale, '.'));
     if(p) {
 	strncpy(enc, p+1, sizeof(enc)-1);
         enc[sizeof(enc) - 1] = '\0';
@@ -669,7 +669,7 @@ const char *R::locale2charset(const char *locale)
     if (streql(enc, "UTF-8")) strcpy(enc, "utf8");
 
     if(strcmp(enc, "") && strcmp(enc, "utf8")) {
-	for(i = 0; enc[i]; i++) enc[i] = (char) tolower(enc[i]);
+	for(i = 0; enc[i]; i++) enc[i] = char(tolower(enc[i]));
 
 	for(i = 0; i < known_count; i++)
 	    if (streql(known[i].name,enc)) return known[i].value;
@@ -690,12 +690,12 @@ const char *R::locale2charset(const char *locale)
             charset[sizeof(charset) - 1] = '\0';
 	    if(strncmp(charset, "euc", 3)) {
 		if (charset[3] != '-') {
-		    for(i = (int) strlen(charset)-3; 0 < i; i--)
+		    for(i = int(strlen(charset))-3; 0 < i; i--)
 			charset[i+1] = charset[i];
 		    charset[3] = '-';
 		}
 		for(i = 0; charset[i]; i++)
-		    charset[i] = (char) toupper(charset[i]);
+		    charset[i] = char(toupper(charset[i]));
 		return charset;
 	    }
 	}
@@ -703,7 +703,7 @@ const char *R::locale2charset(const char *locale)
 	/* let's hope it is a ll_* name */
 	if (streql(enc, "euc")) {
 	    /* This is OK as encoding names are ASCII */
-	    if(isalpha((int)la_loc[0]) && isalpha((int)la_loc[1])
+	    if(isalpha(int(la_loc[0])) && isalpha(int(la_loc[1]))
 	       && (la_loc[2] == '_')) {
 		if (streqln("ja", la_loc, 2)) return "EUC-JP";
 		if (streqln("ko", la_loc, 2)) return "EUC-KR";

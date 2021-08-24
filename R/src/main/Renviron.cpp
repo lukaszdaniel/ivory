@@ -177,11 +177,11 @@ static void Putenv(char *a, const char *b)
     int inquote = 0;
 
 #ifdef HAVE_SETENV
-    buf = (char *) malloc((strlen(b) + 1) * sizeof(char));
+    buf = static_cast<char *>(malloc((strlen(b) + 1) * sizeof(char)));
     if(!buf) R_Suicide(_("allocation failure in reading Renviron"));
     value = buf;
 #else
-    buf = (char *) malloc((strlen(a) + strlen(b) + 2) * sizeof(char));
+    buf = static_cast<char *>(malloc((strlen(a) + strlen(b) + 2) * sizeof(char)));
     if(!buf) R_Suicide(_("allocation failure in reading Renviron"));
     strcpy(buf, a); strcat(buf, "=");
     value = buf+strlen(buf);

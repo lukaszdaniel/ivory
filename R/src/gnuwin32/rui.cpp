@@ -1339,9 +1339,9 @@ int winaddmenu(const char *name, char *errmsg)
 	    usermenunames = (char **) malloc(sizeof(char *) * alloc_menus);
 	} else {
 	    alloc_menus += 10;
-	    usermenus = (menu *) realloc(usermenus, sizeof(menu) * alloc_menus);
-	    usermenunames = (char **) realloc(usermenunames,
-					      sizeof(char *) * alloc_menus);
+	    usermenus = static_cast<menu *>(realloc(usermenus, sizeof(menu) * alloc_menus));
+	    usermenunames = static_cast<char **>(realloc(usermenunames,
+					      sizeof(char *) * alloc_menus));
 	}
     }
     if (strlen(name) > 500) {
@@ -1425,16 +1425,16 @@ int winaddmenuitem(const char * item, const char * menu,
 	    if(alloc_items <= nitems) {
 		if(alloc_items <= 0) {
 		    alloc_items = 100;
-		    umitems = (Uitem *) malloc(sizeof(Uitem) * alloc_items);
+		    umitems = static_cast<Uitem *>(malloc(sizeof(Uitem) * alloc_items));
 		} else {
 		    alloc_items += 100;
-		    umitems = (Uitem *) realloc(umitems,
-						sizeof(Uitem) * alloc_items);
+		    umitems = static_cast<Uitem *>(realloc(umitems,
+						sizeof(Uitem) * alloc_items));
 		}
 	    }
-	    umitems[nitems] = (Uitem) malloc(sizeof(uitem));
+	    umitems[nitems] = static_cast<Uitem>(malloc(sizeof(uitem)));
 	    umitems[nitems]->m = m;
-	    umitems[nitems]->name = p = (char *) malloc(strlen(mitem) + 1);
+	    umitems[nitems]->name = p = static_cast<char *>(malloc(strlen(mitem) + 1));
 	    if(!p) {
 		strcpy(errmsg, G_("failed to allocate char storage"));
 		return 4;

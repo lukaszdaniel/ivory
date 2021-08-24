@@ -2911,7 +2911,7 @@ static void resize_buffer(membuf_t mb, R_size_t needed)
     else if(needed < R_INT_MAX - INCR)
 	needed = (1+needed/INCR) * INCR;
 #endif
-    unsigned char *tmp = (unsigned char*) realloc(mb->buf, needed);
+    unsigned char *tmp = static_cast<unsigned char*>(realloc(mb->buf, needed));
     if (tmp == nullptr) {
 	free(mb->buf); mb->buf = nullptr;
 	error(_("cannot allocate buffer"));
@@ -3224,7 +3224,7 @@ static SEXP readRawFromFile(SEXP file, SEXP key)
 	    char *p;
 	    /* fprintf(stderr, "adding file '%s' at pos %d in cache, length %d\n",
 	       cfile, icache, filelen); */
-	    p = (char *) malloc(filelen);
+	    p = static_cast<char *>(malloc(filelen));
 	    if (p) {
 		strcpy(names[icache], cfile);
 		ptr[icache] = p;
