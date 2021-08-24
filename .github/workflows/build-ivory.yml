@@ -55,3 +55,50 @@ jobs:
     - name: Print failed tests
       if: always()
       run: tail -n100 R/tests/*.fail || true
+
+  macos:
+    name: MacOS
+    runs-on: macos-latest
+    env:
+      PKG_CONFIG_PATH: /opt/X11/lib/pkgconfig
+      R_CRAN_WEB: "https://cran.rstudio.com"
+      CRAN_RSYNC: 'mirrors.nic.cz::CRAN'
+      R_TEXI2DVICMD: emulation
+
+    steps:
+    - name: System dependencies
+      run: |
+        brew install gcc g++ boost gettext gmp isl jpeg libmpc libpng mpfr pcre2 pkg-config readline xz texinfo wget
+        echo "FC=/usr/local/opt/gcc/bin/gfortran" >> $GITHUB_ENV
+        echo "/Library/TeX/texbin" >> $GITHUB_PATH
+        echo "/usr/local/opt/texinfo/bin" >> $GITHUB_PATH
+
+    - name: Checkout
+      uses: actions/checkout@v2
+      with:
+        fetch-depth: 100
+
+    - name: Configure
+      run: |
+        cd R
+        CC=clang CXX=clang++ ./configure --disable-java --without-cairo --without-tcltk --without-x --with-aqua --with-lapack --enable-R-shlib  --enable-werror --with-valgrind-instrumentation=2 SED=/usr/bin/sed
+      env:
+        PDFLATEX: ${{github.workspace}}/.github/workflows/dummy
+
+    - name: Build
+      run: |
+        cd R
+        make
+      env:
+        PDFLATEX: ${{github.workspace}}/.github/workflows/dummy
+
+    - name: Check
+      run: |
+        cd R
+        make check-devel
+      env:
+        PDFLATEX: ${{github.workspace}}/.github/workflows/dummy
+
+    - name: Print failed tests
+      if: always()
+      run: tail -n100 R/tests/*.fail || true
