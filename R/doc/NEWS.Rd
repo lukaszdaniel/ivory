@@ -42,23 +42,24 @@
       \emph{and} suppressed from explicit calls to \code{.axisPars()} as
       has always been the intention.
 
-      \item The \code{contrasts} setter \code{`contrasts<-`} gets explicit
-      default \code{how.many = NULL} rather than just using
-      \code{missing(how.many)}.
+      \item The \code{contrasts} setter function \code{`contrasts<-`}
+      gains an explicit default \code{how.many = NULL} rather than just
+      using \code{missing(how.many)}.
 
-      \item \code{grid.pretty()} got new optional argument \code{n = 5}.
+      \item \code{grid.pretty()} gains a new optional argument \code{n = 5}.
 
-      \item New \code{.pretty()} with option \code{bounds} as technical
-      utility version of \code{pretty()}, and it and \code{pretty()} get
-      new argument \code{f.min} with a better than back-compatible default.
+      \item There is a new function \code{.pretty()} with option
+      \code{bounds} as a technical-utility version of \code{pretty()}.  It
+      and \code{pretty()} gain a new argument \code{f.min} with a better
+      than back-compatible default.
 
-      \item The graphics engine's based \code{axisTicks()} and related
-      functions such as \pkg{graphics} package's \code{axis()} work better,
-      notably for the log scale; partly because the \code{pretty()}
-      improvements, but also because care is taken e.g., when \code{ylim}
-      is finite, but \code{diff(ylim)} is infinite.
+      \item Function \code{grDevices::axisTicks()} and related functions
+      such as \code{graphics::axis()} work better, notably for the log
+      scale; partly because of the \code{pretty()} improvements, but also
+      because care is taken e.g., when \code{ylim} is finite but
+      \code{diff(ylim)} is infinite.
 
-      \item Histogram breaks rule \code{nclass.FD()} gets \code{digits} option.
+      \item \code{nclass.FD()} gains a \code{digits} option.
     }
   }
 
@@ -81,8 +82,9 @@
     \itemize{
       \item \command{R CMD INSTALL} no longer tangles vignettes. This
       completes an \command{R CMD build} change in \R 3.0.0 and affects
-      packages built before \R 3.0.2. Such packages should be rebuilt to
-      have the tangled R code of vignettes shipped with the tarball.
+      packages built before \R 3.0.2. Such packages should be re-made
+      with \command{R CMD build} to have the tangled \R code of vignettes
+      shipped with the tarball. 
     }
   }
 
@@ -132,7 +134,7 @@
   \subsection{DEPRECATED AND DEFUNCT}{
     \itemize{
       \item The (non-default and deprecated) \code{method = "internal"}
-      for \code{download.file} and \code{url} no longer supports
+      for \code{download.file()} and \code{url()} no longer supports
       \samp{http://} nor \samp{ftp://} URIs.  (It is used only for
       \samp{file://} URIs.)
 
@@ -142,7 +144,7 @@
 
       On Windows, the deprecated \code{method = "wininet"} now gives a
       warning for \samp{http://} and \samp{https://} URIs for both
-      \code{download.file} and \code{url}. (It is no longer the default
+      \code{download.file()} and \code{url()}. (It is no longer the default
       method.)
     }
   }
@@ -156,8 +158,8 @@
 	significant digits} should mean (\PR{18098}).
 
       \item Messages from C code in the \file{cairo} section of package
-      \pkg{grDevices} are now also up for translation, thanks to Michael
-      Chirico's \PR{18123}.
+      \pkg{grDevices} are now also offered for translation, thanks to
+      Michael Chirico's \PR{18123}.
 
       \item \code{mean(x)} with finite \code{x} now is finite also without
       "long.double" capability.
@@ -183,11 +185,12 @@
       uses child documents and \file{inst/doc} exists.  (Thanks to
       Sebastian Meyer's \PR{18156}.)
 
-      \item When an R documentation (\sQuote{help} source) file \file{man/foo.Rd}
-      in a package has \verb{\donttest{..}} examples with a syntax error, it is now
-      signalled as ERROR and with correct line numbers relating to the
-      \file{*-Ex.R} file, thanks to Duncan Murdoch and Sebastian Meyer's
-      reports and patch proposals in \PR{17501}.
+      \item When an R documentation (\sQuote{help} source) file
+      \file{man/foo.Rd} in a package has \verb{\donttest{..}} examples
+      with a syntax error, it is now signalled as ERROR and with correct
+      line numbers relating to the \file{*-Ex.R} file, thanks to Duncan
+      Murdoch and Sebastian Meyer's reports and patch proposals in
+      \PR{17501}.
     }
   }
 }
@@ -196,9 +199,16 @@
   \subsection{C-LEVEL FACILITIES}{
     \itemize{
       \item The workaround in headers \file{R.h} and \file{Rmath.h}
-      (\code{use namespace std:}) for the Oracle Developer Studio
+      (\code{using namespace std;}) for the Oracle Developer Studio
       compiler is no longer needed now C++11 is required so has been
-      removed.
+      removed.  A couple more usages of \code{log()} (which should have
+      been \code{std::log()}) with an \code{int} argument are reported on
+      Solaris.
+
+      \item The undocumented limit of 4095 bytes on messages from the
+      S-compatibility macros \code{PROBLEM} and \code{MESSAGE} is now
+      documented and longer messages will be silently truncated rather
+      than potentially causing segfaults. 
     }
   }
 
@@ -219,8 +229,8 @@
       always documented; reported by Andrew Simmons in \PR{18164}.
 
       \item \code{hist(<Date>, ...)} and \code{hist(<POSIXt>, ...)}
-      no longer pass arguments for \code{rect()}, such as \code{col} and
-      \code{density}, to \code{axis()}.  (Thanks to Sebastian Meyer's
+      no longer pass arguments for \code{rect()} (such as \code{col} and
+      \code{density}) to \code{axis()}.  (Thanks to Sebastian Meyer's
       \PR{18171}.)      
     }
   }

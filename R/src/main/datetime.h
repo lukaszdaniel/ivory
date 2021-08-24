@@ -18,7 +18,7 @@
  *
  */
 
-#include <cstdint>
+#include <stdint.h>
 // C99/C11 require this to be implemented.
 using R_time_t = int_fast64_t;
 
