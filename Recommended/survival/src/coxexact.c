@@ -4,25 +4,27 @@
 #include "survproto.h"
 #include <R_ext/Utils.h>
 
+#define NOTDONE -1.1
+
 double coxd0(int d, int n, double *score, double *dmat,
              int dmax) {
     double *dn;
-
+    
     if (d==0) return(1.0);
     dn = dmat + (n-1)*dmax + d -1;  /* pointer to dmat[d,n] */
 
-    if (*dn ==0) {  /* still to be computed */
+    if (*dn == NOTDONE) {  /* still to be computed */
         *dn = score[n-1]* coxd0(d-1, n-1, score, dmat, dmax);
-            if (d<n) *dn += coxd0(d, n-1, score, dmat, dmax);
+        if (d<n) *dn += coxd0(d, n-1, score, dmat, dmax);
     }
     return(*dn);
 }
 double coxd1(int d, int n, double *score, double *dmat, double *d1,
              double *covar, int dmax) {
     int indx;
-
+    
     indx = (n-1)*dmax + d -1;  /*index to the current array member d1[d.n]*/
-    if (d1[indx] ==0) { /* still to be computed */
+    if (d1[indx] == NOTDONE) { /* still to be computed */
         d1[indx] = score[n-1]* covar[n-1]* coxd0(d-1, n-1, score, dmat, dmax);
         if (d<n) d1[indx] += coxd1(d, n-1, score, dmat, d1, covar, dmax);
         if (d>1) d1[indx] += score[n-1]*
@@ -35,9 +37,9 @@ double coxd2(int d, int n, double *score, double *dmat, double *d1j,
              double *d1k, double *d2, double *covarj, double *covark,
              int dmax) {
     int indx;
-
+    
     indx = (n-1)*dmax + d -1;  /*index to the current array member d1[d,n]*/
-    if (d2[indx] ==0) { /*still to be computed */
+    if (d2[indx] == NOTDONE) { /*still to be computed */
         d2[indx] = coxd0(d-1, n-1, score, dmat, dmax)*score[n-1] *
             covarj[n-1]* covark[n-1];
         if (d<n) d2[indx] += coxd2(d, n-1, score, dmat, d1j, d1k, d2, covarj, 
@@ -55,7 +57,7 @@ SEXP coxexact(SEXP maxiter2,  SEXP y2,
               SEXP ibeta,     SEXP eps2,    SEXP toler2) {
     int i,j,k;
     int     iter;
-
+    
     double **covar, **imat;  /*ragged arrays */
     double *time, *status;   /* input data */
     double *offset;
@@ -78,17 +80,17 @@ SEXP coxexact(SEXP maxiter2,  SEXP y2,
     double *dtemp;   /* used for zeroing the memory */
     double *d1;     /* current first derivatives from coxd1 */
     double d0;      /* global sum from coxc0 */
-
+        
     /* copies of scalar input arguments */
     int     nused, nvar, maxiter;
     double  eps, toler;
-
+    
     /* returned objects */
     SEXP imat2, beta2, u2, loglik2;
     double *beta, *u, *loglik;
     SEXP rlist, rlistnames;
     int nprotect;  /* number of protect calls I have issued */
-
+    
     nused = LENGTH(offset2);
     nvar  = ncols(covar2);
     maxiter = asInteger(maxiter2);
@@ -125,7 +127,8 @@ SEXP coxexact(SEXP maxiter2,  SEXP y2,
     temp = 0;      /* temp variable for dsize */
 
     maxdeath =0;
-    j=0;   /* start of the strata */
+    j=0;   /* first obs of current stratum */
+    ndeath=0; nrisk=0;
     for (i=0; i<nused;) {
         if (strata[i]==1) { /* first obs of a new strata */
            if (i>0) {
@@ -145,7 +148,7 @@ SEXP coxexact(SEXP maxiter2,  SEXP y2,
             nrisk++;
             ndeath += status[i];
             i++;
-            if (i>=nused || strata[i] >0) break;  /*tied deaths don't cross strata */
+            if (i>=nused || strata[i] >0) break;  /* don't cross strata */
         }
         if (ndeath > maxdeath) maxdeath = ndeath;
     }
@@ -181,11 +184,11 @@ SEXP coxexact(SEXP maxiter2,  SEXP y2,
         if (strata[i] >0) { /* first obs of a new strata */
             maxdeath= strata[i];
             dtemp = dmem0;
-            for (j=0; j<dmemtot; j++) *dtemp++ =0.0;
+            for (j=0; j<dmemtot; j++) *dtemp++ = NOTDONE;
             sstart =i;
             nrisk =0;
         }
-
+        
         dtime = time[i];  /*current unique time */
         ndeath =0;
         while (time[i] == dtime) {
@@ -287,11 +290,11 @@ SEXP coxexact(SEXP maxiter2,  SEXP y2,
             if (strata[i] >0) { /* first obs of a new strata */
                 maxdeath= strata[i];
                 dtemp = dmem0;
-                for (j=0; j<dmemtot; j++) *dtemp++ =0.0;
+                for (j=0; j<dmemtot; j++) *dtemp++ = NOTDONE;
                 sstart =i;
                 nrisk =0;
             }
-
+            
             dtime = time[i];  /*current unique time */
             ndeath =0;
             while (time[i] == dtime) {
@@ -330,7 +333,7 @@ SEXP coxexact(SEXP maxiter2,  SEXP y2,
                 }
             }
          }
-
+                   
         /* am I done?
         **   update the betas and test for convergence
         */

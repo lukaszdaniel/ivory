@@ -43,6 +43,8 @@ static const R_CallMethodDef Callentries[] = {
     {"Cconcordance2", (DL_FUNC) &concordance2, 6}, 
     {"Cconcordance3", (DL_FUNC) &concordance3, 6},
     {"Cconcordance4", (DL_FUNC) &concordance4, 7},
+    {"Cconcordance5", (DL_FUNC) &concordance5, 5},
+    {"Cconcordance6", (DL_FUNC) &concordance6, 6},
     {"Ccoxcount1",    (DL_FUNC) &coxcount1,    2},
     {"Ccoxcount2",    (DL_FUNC) &coxcount2,    4},
     {"Ccoxexact",     (DL_FUNC) &coxexact,     8},
@@ -87,4 +89,4 @@ void R_init_survival(DllInfo *dll){
     R_forceSymbols(dll, TRUE);
 #endif
 }
-
+    

@@ -25,7 +25,7 @@ data(cancer, package="survival")
     ph.karno:\tab Karnofsky performance score (bad=0-good=100) rated by physician\cr
     pat.karno:\tab Karnofsky performance score as rated by patient\cr
     meal.cal:\tab Calories consumed at meals\cr
-    wt.loss:\tab Weight loss in last six months\cr
+    wt.loss:\tab Weight loss in last six months (pounds)\cr
   }
 }
 \note{
@@ -38,7 +38,7 @@ data(cancer, package="survival")
   The policy became a habit, as is often the case; and the 1/2 coding
   endured long beyond the demise of punch cards and Fortran.
 }
-
+  
 
 \source{Terry Therneau}
 \references{

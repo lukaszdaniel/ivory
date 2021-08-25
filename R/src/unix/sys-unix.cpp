@@ -32,6 +32,7 @@
 #endif
 
 #define R_USE_SIGNALS 1
+#define R_INTERFACE_PTRS 1
 
 #include <CXXR/VectorBase.hpp>
 #include <CXXR/IntVector.hpp>
@@ -41,6 +42,10 @@
 #include <Localization.h>
 #include <RContext.h>
 #include <Defn.h>
+/* The pointer here is used in the Mac GUI */
+#include <R_ext/eventloop.h> /* for R_PolledEvents */
+#include <R_ext/Rdynload.h>
+#include <Rinterface.h> /* for ptr_R_ProcessEvents */
 #include <Internal.h>
 #include <Fileio.h>
 #include <Rmath.h> /* for fround */
@@ -925,13 +930,6 @@ SEXP do_sysinfo(SEXP call, SEXP op, SEXP args, SEXP rho)
     return R_NilValue; /* -Wall */
 }
 #endif /* not HAVE_SYS_UTSNAME_H */
-
-/* The pointer here is used in the Mac GUI */
-#include <R_ext/eventloop.h> /* for R_PolledEvents */
-#include <R_ext/Rdynload.h>
-
-#define R_INTERFACE_PTRS 1
-#include <Rinterface.h> /* for ptr_R_ProcessEvents */
 
 extern "C"
 void R_ProcessEvents(void)

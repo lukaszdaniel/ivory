@@ -74,13 +74,17 @@ void chsolve5(double **matrix, int n, double *y, int flag);
 SEXP collapse(SEXP y2,  SEXP x2, SEXP istate2, SEXP id2, SEXP wt2, 
 	      SEXP order2) ;
 SEXP concordance1(SEXP y, SEXP wt2,  SEXP indx2, SEXP ntree2);
-
+ 
 SEXP concordance2(SEXP y,     SEXP wt2,  SEXP indx2, SEXP ntree2,
                   SEXP sortstop, SEXP sortstart) ;
 SEXP concordance3(SEXP y,        SEXP x2, SEXP wt2, SEXP timewt2, 
                   SEXP sortstop, SEXP doresid2);
 SEXP concordance4(SEXP y, SEXP x2, SEXP wt2, SEXP timewt2, 
                   SEXP sortstart, SEXP sortstop, SEXP doresid2); 
+SEXP concordance5(SEXP y,        SEXP x2, SEXP wt2, SEXP timewt2, 
+                  SEXP sortstop);
+SEXP concordance6(SEXP y, SEXP x2, SEXP wt2, SEXP timewt2, 
+                  SEXP sortstart, SEXP sortstop); 
 
 void cox_callback(int which, double *coef, double *first, double *second,
 		  double *penalty, int *flag, int p, SEXP fexpr, SEXP rho);
@@ -93,11 +97,11 @@ void coxdetail(Sint   *nusedx,   Sint   *nvarx,    Sint   *ndeadx,
 	       double *score,    double *weights,  double *means2, 
 	       double *u2,       double *var,      Sint   *rmat,
 	       double *nrisk2,   double *work);
-
+ 
 SEXP coxexact(SEXP maxiter2,  SEXP y2, 
               SEXP covar2,    SEXP offset2, SEXP strata2,
               SEXP ibeta,     SEXP eps2,    SEXP toler2) ;
-
+ 
 void coxfit5_a(Sint *nusedx,     Sint *nvarx,     double *yy, 
  	       double *covar2,   double *offset2, double *weights2, 
 	       int   *strata,    Sint   *sort,    double *means,   
@@ -204,7 +208,7 @@ void survfit4(Sint *n,	Sint *dd,  double *x1,  double *x2) ;
 SEXP survfitci(SEXP ftime2,       SEXP sort12,  SEXP sort22, SEXP ntime2,
                     SEXP status2, SEXP cstate2, SEXP wt2,    SEXP id2,
                     SEXP p2,      SEXP i02,     SEXP sefit2) ;
-
+  
 SEXP survfitkm(SEXP y2,     SEXP weight2,  SEXP sort12, SEXP sort22, 
                SEXP type2,  SEXP id2,      SEXP nid2,   SEXP position2, 
                SEXP influence2) ;
@@ -212,7 +216,7 @@ SEXP survfitkm(SEXP y2,     SEXP weight2,  SEXP sort12, SEXP sort22,
 SEXP survfitresid(SEXP Y2,      SEXP sort12,  SEXP sort22,  SEXP cstate2, 
 		  SEXP wt2,     SEXP p02,     SEXP i02,     SEXP otime2,  
 		  SEXP starttime2, SEXP doauc2);
-
+ 
 SEXP survreg6(SEXP maxiter2,   SEXP nvarx,  SEXP y,
 	      SEXP ny2,        SEXP covar2, SEXP wtx,
 	      SEXP offset2,    SEXP beta2,  SEXP nstratx,
@@ -253,6 +257,9 @@ SEXP tmerge (SEXP id2,  SEXP time1x, SEXP newx2,
 	     SEXP nid2, SEXP ntime2, SEXP x2,  SEXP indx2); 
 SEXP tmerge2(SEXP id2,  SEXP time1x, SEXP nid2, SEXP ntime2);
 SEXP tmerge3(SEXP id2, SEXP miss2);
+
+void walkup(double *nwt, double* twt, int index, double sums[3], int ntree);
+void addin(double *nwt, double *twt, int index, double wt);
 
 SEXP zph1(SEXP gt2,    SEXP y2, 
 	  SEXP covar2, SEXP eta2,  SEXP weights2,

@@ -63,7 +63,7 @@ function(x, y = NULL, alternative = c("two.sided", "less", "greater"),
             stop("data are essentially constant")
 	STATISTIC <- (mx-mu)/stderr
 	METHOD <- if(paired) gettext("Paired t-test") else gettext("One Sample t-test")
-	ESTIMATE <- setNames(mx, if(paired) gettext("mean of the differences") else gettext("mean of x"))
+	ESTIMATE <- setNames(mx, if(paired) gettext("mean difference") else gettext("mean of x"))
     } else {
 	ny <- length(y)
         if(nx < 1 || (!var.equal && nx < 2))
@@ -110,7 +110,9 @@ function(x, y = NULL, alternative = c("two.sided", "less", "greater"),
     CINT <- mu + CINT * stderr
     names(STATISTIC) <- "t"
     names(df) <- "df"
-    names(mu) <- if(paired || !is.null(y)) gettext("difference in means", domain = "R-stats") else gettext("mean", domain = "R-stats")
+    names(mu) <- if(paired) gettext("mean difference", domain = "R-stats")
+                 else if(!is.null(y)) gettext("difference in means", domain = "R-stats")
+                 else gettext("mean", domain = "R-stats")
     attr(CINT,"conf.level") <- conf.level
     if(paired || !is.null(y)) {
     alt.name <- switch(alternative,

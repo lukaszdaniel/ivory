@@ -37,15 +37,15 @@ int cholesky3(double **matrix, int n, int m, double *diag, double toler)
     int nonneg;
 
     n2 = n-m;    /* number of full covariates */
-
+   
     nonneg=1;
     eps =0;
     for (i=0; i<m; i++) if (diag[i] <eps) eps = diag[i];
-    for (i=0; i<n2; i++) if (matrix[i][i+m] > eps)  eps = matrix[i][i+m];
-
+    for (i=0; i<n2; i++) if (matrix[i][i+m] < eps)  eps = matrix[i][i+m];
+     
     if (eps==0) eps= toler;  /* no positive diagonals! */
     else eps *= toler;
-
+ 
     rank =0;
     /* pivot out the diagonal elements */
     for (i=0; i<m; i++) {

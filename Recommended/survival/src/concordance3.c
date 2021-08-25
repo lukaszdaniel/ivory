@@ -1,12 +1,13 @@
 /* Automatically generated from the noweb directory */
 #include "survS.h"
+#include "survproto.h"
 
 void walkup(double *nwt, double* twt, int index, double sums[3], int ntree) {
     int i, j, parent;
 
     for (i=0; i<3; i++) sums[i] = 0.0;
     sums[2] = nwt[index];   /* tied on x */
-
+    
     j = 2*index +2;  /* right child */
     if (j < ntree) sums[0] += twt[j];
     if (j <=ntree) sums[1]+= twt[j-1]; /*left child */
@@ -27,7 +28,7 @@ void addin(double *nwt, double *twt, int index, double wt) {
     }
     twt[0] += wt;
 }
-
+    
 SEXP concordance3(SEXP y, SEXP x2, SEXP wt2, SEXP timewt2, 
                       SEXP sortstop, SEXP doresid2) {
     int i, j, k, ii, jj, kk, j2;
@@ -41,7 +42,7 @@ SEXP concordance3(SEXP y, SEXP x2, SEXP wt2, SEXP timewt2,
     */
     double *nwt, *twt, *dnwt, *dtwt;
     double z2;  /* sum of z^2 values */    
-
+        
     int ndeath;   /* total number of deaths at this point */    
     int utime;    /* number of unique event times seen so far */
     double dwt, dwt2;   /* sum of weights for deaths and deaths tied on x */
@@ -55,7 +56,7 @@ SEXP concordance3(SEXP y, SEXP x2, SEXP wt2, SEXP timewt2,
     int doresid;
     static const char *outnames1[]={"count", "influence", "resid", ""},
                       *outnames2[]={"count", "influence", ""};
-
+      
     n = nrows(y);
     doresid = asLogical(doresid2);
     x = INTEGER(x2);
@@ -64,21 +65,21 @@ SEXP concordance3(SEXP y, SEXP x2, SEXP wt2, SEXP timewt2,
     sort2 = INTEGER(sortstop);
     time = REAL(y);
     status = time + n;
-
+   
     /* if there are tied predictors, the total size of the tree will be < n */
     ntree =0; nevent =0;
     for (i=0; i<n; i++) {
         if (x[i] >= ntree) ntree = x[i] +1;  
         nevent += status[i];
     }
-
+        
     nwt = (double *) R_alloc(4*ntree, sizeof(double));
     twt = nwt + ntree;
     dnwt = twt + ntree;
     dtwt = dnwt + ntree;
-
+    
     for (i=0; i< 4*ntree; i++) nwt[i] =0.0;
-
+    
     if (doresid) PROTECT(rlist = mkNamed(VECSXP, outnames1));
     else  PROTECT(rlist = mkNamed(VECSXP, outnames2));
     count2 = SET_VECTOR_ELT(rlist, 0, allocVector(REALSXP, 6));
@@ -93,7 +94,7 @@ SEXP concordance3(SEXP y, SEXP x2, SEXP wt2, SEXP timewt2,
         resid2 = SET_VECTOR_ELT(rlist, 2, allocMatrix(REALSXP, nevent, 4));
         for (i=0; i<4; i++) resid[i] = REAL(resid2) + i*nevent;
         }
-
+    
     z2 =0; utime=0;
     for (i=0; i<n;) {
         ii = sort2[i];  
@@ -103,7 +104,7 @@ SEXP concordance3(SEXP y, SEXP x2, SEXP wt2, SEXP timewt2,
             imat[0][ii] -= wsum[1];
             imat[1][ii] -= wsum[0];
             imat[2][ii] -= wsum[2];
-
+            
             /* Cox variance */
             walkup(nwt, twt, x[ii], wsum, ntree);
             z2 += wt[ii]*(wsum[0]*(wt[ii] + 2*(wsum[1] + wsum[2])) +
@@ -167,7 +168,7 @@ SEXP concordance3(SEXP y, SEXP x2, SEXP wt2, SEXP timewt2,
                     imat[3][kk] -= (dwt2- wt[kk]) * adjtimewt;
                 }
             }
-
+      
             /* pass 2 */
             for (j=i; j< (i+ndeath); j++) {
                 jj = sort2[j];
@@ -177,7 +178,7 @@ SEXP concordance3(SEXP y, SEXP x2, SEXP wt2, SEXP timewt2,
                 imat[1][jj] -= wsum[0];
                 imat[2][jj] -= wsum[2];  /* tied.x */
                 imat[3][jj] += (dwt- wt[jj])* adjtimewt;
-
+     
                 /* increment Cox var and add obs into the tree */
                 walkup(nwt, twt, x[jj], wsum, ntree);
                 z2 += wt[jj]*(wsum[0]*(wt[jj] + 2*(wsum[1] + wsum[2])) +
@@ -209,7 +210,7 @@ SEXP concordance3(SEXP y, SEXP x2, SEXP wt2, SEXP timewt2,
         imat[2][ii] += wsum[2];
     }
     count[3] -= count[4];   /* the tied.xy were counted twice, once as tied.y */
-
+        
     UNPROTECT(1);
     return(rlist);
 }
@@ -226,7 +227,7 @@ SEXP concordance3(SEXP y, SEXP x2, SEXP wt2, SEXP timewt2,
     */
     double *nwt, *twt, *dnwt, *dtwt;
     double z2;  /* sum of z^2 values */    
-
+        
     int ndeath;   /* total number of deaths at this point */    
     int utime;    /* number of unique event times seen so far */
     double dwt;   /* weighted number of deaths at this point */
@@ -241,7 +242,7 @@ SEXP concordance3(SEXP y, SEXP x2, SEXP wt2, SEXP timewt2,
     int doresid;
     static const char *outnames1[]={"count", "influence", "resid", ""},
                       *outnames2[]={"count", "influence", ""};
-
+      
     n = nrows(y);
     doresid = asLogical(doresid2);
     x = INTEGER(x2);
@@ -252,14 +253,14 @@ SEXP concordance3(SEXP y, SEXP x2, SEXP wt2, SEXP timewt2,
     time1 = REAL(y);
     time2 = time1 + n;
     status = time2 + n;
-
+   
     /* if there are tied predictors, the total size of the tree will be < n */
     ntree =0; nevent =0;
     for (i=0; i<n; i++) {
         if (x[i] >= ntree) ntree = x[i] +1;  
         nevent += status[i];
     }
-
+        
     /*
     ** nwt and twt are the node weight and total =node + all children for the
     **  tree holding all subjects.  dnwt and dtwt are the same for the tree
@@ -269,9 +270,9 @@ SEXP concordance3(SEXP y, SEXP x2, SEXP wt2, SEXP timewt2,
     twt = nwt + ntree;
     dnwt = twt + ntree;
     dtwt = dnwt + ntree;
-
+    
     for (i=0; i< 4*ntree; i++) nwt[i] =0.0;
-
+    
     if (doresid) PROTECT(rlist = mkNamed(VECSXP, outnames1));
     else  PROTECT(rlist = mkNamed(VECSXP, outnames2));
     count2 = SET_VECTOR_ELT(rlist, 0, allocVector(REALSXP, 6));
@@ -286,7 +287,7 @@ SEXP concordance3(SEXP y, SEXP x2, SEXP wt2, SEXP timewt2,
         resid2 = SET_VECTOR_ELT(rlist, 2, allocMatrix(REALSXP, nevent, 4));
         for (i=0; i<4; i++) resid[i] = REAL(resid2) + i*nevent;
         }
-
+    
     z2 =0; utime=0; i2 =0;  /* i2 tracks the start times */
     for (i=0; i<n;) {
         ii = sort2[i];  
@@ -296,7 +297,7 @@ SEXP concordance3(SEXP y, SEXP x2, SEXP wt2, SEXP timewt2,
             imat[0][ii] -= wsum[1];
             imat[1][ii] -= wsum[0];
             imat[2][ii] -= wsum[2];
-
+            
             /* Cox variance */
             walkup(nwt, twt, x[ii], wsum, ntree);
             z2 += wt[ii]*(wsum[0]*(wt[ii] + 2*(wsum[1] + wsum[2])) +
@@ -421,7 +422,7 @@ SEXP concordance3(SEXP y, SEXP x2, SEXP wt2, SEXP timewt2,
         imat[2][ii] += wsum[2];
     }
     count[3] -= count[4]; /* tied.y was double counted a tied.xy */
-
+        
     UNPROTECT(1);
     return(rlist);
 }

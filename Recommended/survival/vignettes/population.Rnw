@@ -556,7 +556,7 @@ at zero.  This centers the linear predictor at 0 but
 does not precisely center the risks at exp(0) = 1 due to
 Jensen's inequality, but suffices to keep values in a sensible range
 for display.
-
+ 
 A similar argument to that found in section \ref{sect:glm} about the arithmetic
 versus geometric mean can be made here, but a more fundamental issue is that
 the overall hazard function for a population is not the average of the
@@ -605,7 +605,7 @@ ysurv <- yates(coxfit4, ~fgroup, predict="survival", nsim=50,
 ysurv
 
 # display side by side
-temp <- rbind("simple KM" = summary(flkm, rmean=13*365.25)$table[, "*rmean"],
+temp <- rbind("simple KM" = summary(flkm, rmean=13*365.25)$table[, "rmean"],
               "population adjusted" = ysurv$estimate[,"pmm"])
 round(temp/365.25, 2)
 

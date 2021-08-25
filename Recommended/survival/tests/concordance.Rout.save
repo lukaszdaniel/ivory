@@ -27,8 +27,7 @@ Type 'q()' to quit R.
 > options(contrasts=c('contr.treatment', 'contr.poly')) #ensure constrast type
 > 
 > #
-> # Simple tests of survConcordance, which has been replaced by the more general
-> #  concordance function.
+> # Simple tests of concordance
 > #
 > aeq <- function(x,y, ...) all.equal(as.vector(x), as.vector(y), ...)
 > 
@@ -95,6 +94,14 @@ Type 'q()' to quit R.
 [1] TRUE
 > cfit2 <-  coxph(tempy ~ tt(tempx), tt=grank, method='breslow', iter=0)
 > aeq(cfit2$var, 1/cfun(fit2))
+[1] TRUE
+> 
+> # Direct call
+> fit2b <- concordancefit(tempy, tempx)
+> fit2c <- concordancefit(tempy, tempx, robustse=FALSE)
+> all.equal(fit2[1:5], fit2b)
+[1] TRUE
+> all.equal(fit2b[-4], fit2c)
 [1] TRUE
 > 
 > # Bigger data

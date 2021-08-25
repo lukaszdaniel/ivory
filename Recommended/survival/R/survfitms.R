@@ -417,8 +417,8 @@ print.survfitms <- function(x, scale=1,
         dimnames(temp$matrix) <- dd
         print(temp$matrix, ...)
         if (length(etime) ==1)
-             cat(gettextf("   *mean time in state, restricted (max time = %s)\n", format(etime, ...), domain = "R-survival"))
-        else cat(gettextf("   *mean time in state, restricted (per curve cutoff)\n", domain = "R-survival"))
+             cat(gettextf("   *restricted mean time in state (max time = %s)\n", format(etime, ...), domain = "R-survival"))
+        else cat(gettextf("   *restricted mean time in state (per curve cutoff)\n", domain = "R-survival"))
     }
     invisible(x)
 }
