@@ -183,8 +183,8 @@ namespace CXXR
         HandleVector(const HandleVector<T, ST> &pattern, Duplicate deep, int dummy)
             : VectorBase(pattern, deep), m_data(pattern.size())
         {
-            size_type sz = size();
 #ifdef R_MEMORY_PROFILING
+            size_type sz = size();
             MemoryBank::R_ReportAllocation(convert2VEC<T>(sz) * sizeof(VECREC));
 #endif
             std::copy(pattern.m_data.begin(), pattern.m_data.end(), m_data.begin());

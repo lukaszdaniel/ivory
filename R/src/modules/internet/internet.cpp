@@ -206,7 +206,7 @@ static size_t url_read2(void *ptr, size_t size, size_t nitems,
 }
 #endif
 
-#ifdef Win32
+#ifdef _WIN32
 static Rconnection in_R_newurl(const char *description, const char * const mode, SEXP headers, int type)
 {
     Rconnection newconn;
@@ -270,7 +270,7 @@ static Rconnection in_R_newurl(const char *description, const char * const mode,
 
 */
 
-#ifdef Win32
+#ifdef _WIN32
 static void putdots(DLsize_t *pold, DLsize_t newt)
 {
 	DLsize_t i, old = *pold;
@@ -332,7 +332,9 @@ static void doneprogressbar(void *data)
 /* download(url, destfile, quiet, mode, headers, cacheOK) */
 
 constexpr size_t CPBUFSIZE = 65536;
+#ifdef _WIN32
 constexpr size_t IBUFSIZE = 4096;
+#endif
 static SEXP in_do_download(SEXP args)
 {
     SEXP scmd, sfile, smode, sheaders;
@@ -546,7 +548,7 @@ static SEXP in_do_download(SEXP args)
     return ScalarInteger(status);
 }
 
-#ifdef Win32
+#ifdef _WIN32
 
 #define WIN32_LEAN_AND_MEAN 1
 #include <windows.h>
@@ -722,7 +724,7 @@ static void *in_R_FTPOpen2(const char *url)
     R_ProcessEvents();
     return (void *)wictxt;
 }
-#endif // Win32
+#endif // _WIN32
 
 #include "sock.h"
 #define STRICT_R_HEADERS

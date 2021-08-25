@@ -183,7 +183,7 @@ static const char *R_ExpandFileName_unix(const char *s, char *buff)
    BDR 10/2002
 */
 
-extern Rboolean UsingReadline;
+extern bool UsingReadline;
 static char newFileName[PATH_MAX];
 
 const char *R_ExpandFileName(const char *s)
@@ -684,7 +684,9 @@ static void warn_status(const char *cmd, int res)
         warning(_("running command '%s' had status %d"), cmd, res);
 }
 
+#ifndef HAVE_GETLINE
 constexpr size_t INTERN_BUFSIZE = 8096;
+#endif
 HIDDEN SEXP do_system(SEXP call, SEXP op, SEXP args, SEXP rho)
 {
     SEXP tlist = R_NilValue;

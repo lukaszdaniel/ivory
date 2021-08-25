@@ -200,7 +200,8 @@ HIDDEN NORET SEXP do_untracemem(SEXP call, SEXP op, SEXP args, SEXP rho)
 #endif /* R_MEMORY_PROFILING */
 
 #ifndef R_MEMORY_PROFILING
-void R::memtrace_report(void* old, void *_new) {
+void R::memtrace_report(void *old, void *_new)
+{
     return;
 }
 #else

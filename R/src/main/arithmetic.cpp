@@ -1171,7 +1171,7 @@ static SEXP integer_binary(ARITHOP_TYPE code, SEXP s1, SEXP s2, SEXP lcall)
 namespace
 {
 	inline double R_INTEGER(const int &x) { return (double)(x == NA_INTEGER ? NA_REAL : x); }
-	inline double intToReal(const int &x) { return (double)(x == NA_INTEGER ? NA_REAL : x); }
+	const auto &intToReal = R_INTEGER;
 } // anonymous namespace
 
 template <class Op>

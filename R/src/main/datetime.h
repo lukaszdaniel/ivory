@@ -22,7 +22,7 @@
 // C99/C11 require this to be implemented.
 typedef int_fast64_t R_time_t;
 
-struct stm
+struct Rtm
 {
   int tm_sec;
   int tm_min;
@@ -36,6 +36,8 @@ struct stm
   long tm_gmtoff;
   const char *tm_zone;
 };
+
+typedef struct Rtm stm;
 
 #define time_t R_time_t
 #define gmtime R_gmtime

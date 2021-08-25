@@ -95,7 +95,7 @@ namespace CXXR
         typedef std::unordered_map<const CachedString *, Symbol *,
                                    std::hash<const CachedString *>,
                                    std::equal_to<const CachedString *>,
-                                   CXXR::Allocator<std::pair<const CachedString *,
+                                   CXXR::Allocator<std::pair<const CachedString *const,
                                                              Symbol *>>>
             Table;
 

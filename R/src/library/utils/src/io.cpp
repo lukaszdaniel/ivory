@@ -862,7 +862,7 @@ SEXP readtablehead(SEXP args)
     }
 
     /* FIXME: will leak memory at long jump */
-    )buf = static_cast<char *>(malloc(buf_size);
+    buf = static_cast<char *>(malloc(buf_size));
     if(!buf)
 	error(_("cannot allocate buffer in 'readTableHead'"));
 

@@ -211,6 +211,11 @@ namespace CXXR
 			ClosureMatchCallback(Environment *target_env)
 				: m_target_env(target_env) {}
 
+			Environment *targetEnvironment() const
+			{
+				return m_target_env;
+			}
+
 			void matchedArgument(const FormalData &formal,
 								 int arg_index, RObject *value) override
 			{

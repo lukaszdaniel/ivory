@@ -75,7 +75,7 @@ using namespace CXXR;
 #endif
 
 extern SA_TYPE SaveAction;
-extern Rboolean UsingReadline;
+extern bool UsingReadline;
 extern FILE* ifp; /* from system.cpp */
 
 /*

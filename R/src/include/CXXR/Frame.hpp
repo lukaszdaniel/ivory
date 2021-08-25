@@ -816,7 +816,7 @@ namespace CXXR
     typedef std::unordered_map<const Symbol *, Binding,
                                std::hash<const Symbol *>,
                                std::equal_to<const Symbol *>,
-                               CXXR::Allocator<std::pair<const Symbol *,
+                               CXXR::Allocator<std::pair<const Symbol *const,
                                                          Binding>>>
         map;
     map *m_map;

@@ -66,7 +66,7 @@ using namespace CXXR;
 
 HIDDEN FILE *ifp = nullptr; /* used in sys-std.cpp */
 
-HIDDEN Rboolean UsingReadline = TRUE;  /* used in sys-std.cpp & ../main/platform.cpp
+HIDDEN bool UsingReadline = true;  /* used in sys-std.cpp & ../main/platform.cpp
 				   and also in sys-unix.cpp for tilde expansion */
 
 /* call pointers to allow interface switching */
@@ -131,7 +131,7 @@ HIDDEN size_t R::R_ChooseFile(int _new, char *buf, size_t len)
 
 #ifdef HAVE_AQUA
 /*  used here and in main/sysutils.cpp (for system). */
-Rboolean useaqua = FALSE;
+bool useaqua = false;
 
 // Finally in Sep 2012 R.app sets ptr_R_FlushConsole
 #include <R_ext/Rdynload.h>
@@ -221,11 +221,11 @@ extern "C"
 int Rf_initialize_R(int ac, char *av[])
 {
     int i, ioff = 1, j;
-    Rboolean useX11 = TRUE, useTk = FALSE;
+    bool useX11 = true, useTk = false;
     char *p, msg[1024], cmdlines[10000], **avv;
     structRstart rstart;
     Rstart Rp = &rstart;
-    Rboolean force_interactive = FALSE;
+    bool force_interactive = false;
 
     if (num_initialized++) {
 	fprintf(stderr, "%s", _("R is already initialized\n"));
@@ -394,15 +394,15 @@ int Rf_initialize_R(int ac, char *av[])
 		}
 	    }
 	    if(streql(p, "none"))
-		useX11 = FALSE; // not allowed from R.sh
+		useX11 = false; // not allowed from R.sh
 #ifdef HAVE_AQUA
 	    else if(streql(p, "aqua"))
-		useaqua = TRUE; // not allowed from R.sh but used by R.app
+		useaqua = true; // not allowed from R.sh but used by R.app
 #endif
 	    else if(streql(p, "X11") || streql(p, "x11"))
-		useX11 = TRUE;
+		useX11 = true;
 	    else if(streql(p, "Tk") || streql(p, "tk"))
-		useTk = TRUE;
+		useTk = true;
 	    else {
 #ifdef HAVE_X11
 		snprintf(msg, 1024, _("WARNING: unknown gui '%s', using X11\n"), p);
@@ -435,11 +435,11 @@ int Rf_initialize_R(int ac, char *av[])
     while (--ac) {
 	if (**++av == '-') {
 	    if(streql(*av, "--no-readline")) {
-		UsingReadline = FALSE;
+		UsingReadline = false;
 	    } else if(streql(*av, "-f")) {
 		ac--; av++;
 #define R_INIT_TREAT_F(_AV_)                                    \
-	Rp->R_Interactive = FALSE;                                  \
+	Rp->R_Interactive = Rboolean(FALSE);                        \
 	if (strcmp(_AV_, "-"))                                      \
 	{                                                           \
 		if (strlen(_AV_) >= PATH_MAX)                           \
@@ -468,7 +468,7 @@ int Rf_initialize_R(int ac, char *av[])
 
 	    } else if(streql(*av, "-e")) {
 		ac--; av++;
-		Rp->R_Interactive = FALSE;
+		Rp->R_Interactive = Rboolean(FALSE);
 		if(strlen(cmdlines) + strlen(*av) + 2 <= 10000) {
 		    char *p = cmdlines+strlen(cmdlines);
 		    p = unescape_arg(p, *av);
@@ -480,7 +480,7 @@ int Rf_initialize_R(int ac, char *av[])
 	    } else if(streql(*av, "--args")) {
 		break;
 	    } else if(streql(*av, "--interactive")) {
-		force_interactive = TRUE;
+		force_interactive = true;
 		break;
 	    } else {
 #ifdef HAVE_AQUA
@@ -543,10 +543,10 @@ int Rf_initialize_R(int ac, char *av[])
 
 #ifdef HAVE_AQUA
     if(useaqua)
-	R_Interactive = useaqua;
+	R_Interactive = Rboolean(useaqua);
     else
 #endif
-	R_Interactive = (Rboolean) (R_Interactive && (force_interactive || R_isatty(0)));
+	R_Interactive = Rboolean(R_Interactive && (force_interactive || R_isatty(0)));
 
 #ifdef HAVE_AQUA
     /* for Aqua and non-dumb terminal use callbacks instead of connections
@@ -577,9 +577,9 @@ int Rf_initialize_R(int ac, char *av[])
     R_setupHistory();
     if (R_RestoreHistory)
 	Rstd_read_history(R_HistoryFile);
-    fpu_setup(TRUE);
+    fpu_setup(Rboolean(TRUE));
 
-    return(0);
+    return 0;
 }
 
     /*

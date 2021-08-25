@@ -228,11 +228,11 @@ namespace CXXR
         }
 
         // Virtual function of RObject:
-        const char *typeName() const;
+        const char *typeName() const override;
         RObject *evaluate(Environment *env) override;
 
         // Virtual function of GCNode:
-        void visitReferents(const_visitor *v) const;
+        void visitReferents(const_visitor *v) const override;
 
     private:
         GCEdge<> m_value;

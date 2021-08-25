@@ -135,7 +135,7 @@ int R_set_nonblocking(SOCKET s)
 {
     int status = 0;
 
-#ifdef Win32
+#ifdef _WIN32
     {
 	u_long one = 1;
 	status = ioctlsocket(s, FIONBIO, &one) == SOCKET_ERROR ? -1 : 0;
