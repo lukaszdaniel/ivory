@@ -28,6 +28,7 @@
 #include <cctype>		/* for isspace */
 #include <cfloat>		/* for DBL_MAX */
 #include <vector>
+#include <array>
 #include <string>
 #include <CXXR/RAllocStack.hpp>
 #include <CXXR/String.hpp>
@@ -2287,14 +2288,14 @@ UCollationResult ucol_strcollIter(const UCollator *coll,
 				  UErrorCode *status);
 void uiter_setUTF8(UCharIterator *iter, const char *s, int32_t length);
 
-void uloc_setDefault(const char* localeID, UErrorCode* status);
+void uloc_setDefault(const char *localeID, UErrorCode *status);
 
-enum ULocDataLocaleType {
-    ULOC_ACTUAL_LOCALE = 0,
-    ULOC_VALID_LOCALE = 1,
-    ULOC_DATA_LOCALE_TYPE_LIMIT = 3
+enum ULocDataLocaleType
+{
+	ULOC_ACTUAL_LOCALE = 0,
+	ULOC_VALID_LOCALE = 1,
+	ULOC_DATA_LOCALE_TYPE_LIMIT = 3
 };
-
 
 const char* ucol_getLocaleByType(const UCollator *coll,
 				 ULocDataLocaleType type,
@@ -2302,7 +2303,6 @@ const char* ucol_getLocaleByType(const UCollator *coll,
 
 #define U_ZERO_ERROR 0
 #define U_FAILURE(x) ((x)>U_ZERO_ERROR)
-#define ULOC_ACTUAL_LOCALE 0
 
 #else
 #include <unicode/utypes.h>
@@ -2536,7 +2536,7 @@ HIDDEN SEXP do_ICUget(SEXP call, SEXP op, SEXP args, SEXP rho)
 
 HIDDEN void R::resetICUcollator(bool disable) {}
 
-# ifdef _WIN32
+#ifdef _WIN32
 
 static int Rstrcoll(const char *s1, const char *s2)
 {
@@ -2555,14 +2555,14 @@ int R::Scollate(SEXP a, SEXP b)
 	return strcoll(translateChar(a), translateChar(b));
 }
 
-# else
+#else
 HIDDEN int R::Scollate(SEXP a, SEXP b)
 {
     return strcoll(translateChar(a), translateChar(b));
 }
 
-# endif
-#endif
+#endif // _WIN32
+#endif // USE_ICU
 
 #include <lzma.h>
 
@@ -3015,7 +3015,7 @@ static void str_signif_sexp(SEXP x, const char *type, int width, int digits,
 					 format, flag, result + idx);
 			  });
     } else {
-	error(_("unsupported type "));
+	error(_("unsupported type '%s'"), TYPEOF(x));
     }
 }
 
@@ -3028,7 +3028,7 @@ char *R::Rstrdup(const char *s)
 	size_t nb = strlen(s) + 1;
 	void *cpy = malloc(nb);
 	if (cpy == nullptr)
-		error(_("allocation error in Rstrdup"));
+		error(_("allocation error in Rstrdup()"));
 	memcpy(cpy, s, nb);
-	return (char *)cpy;
+	return static_cast<char *>(cpy);
 }
