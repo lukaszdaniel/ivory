@@ -29,8 +29,9 @@
 
 #if HAVE_AQUA
 
-#include <Defn.h>
+#include <CXXR/String.hpp>
 #include <Rinternals.h>
+#include <Defn.h>
 #define R_USE_PROTOTYPES 1
 #include <R_ext/GraphicsEngine.h>
 /* This sets ptr_QuartzBackend as a symbol in this file */
@@ -41,6 +42,8 @@
 #include "grDevices.h"
 
 #include <CoreFoundation/CoreFoundation.h>
+
+using namespace R;
 
 #define DEVQUARTZ_VERSION 1 /* first public Quartz API version */
 
@@ -302,11 +305,11 @@ void QuartzDevice_RestoreSnapshot(QuartzDesc_t desc, void* snap)
     QuartzDesc *qd = (QuartzDesc*) desc;
     pGEDevDesc gd  = GEgetDevice(ndevNumber(qd->dev));
     if(nullptr == snap) return; /*Aw, hell no!*/
-    PROTECT((SEXP)snap);
-    if(R_NilValue == VECTOR_ELT(snap,0))
+    PROTECT(static_cast<SEXP>(snap));
+    if(R_NilValue == VECTOR_ELT(static_cast<SEXP>(snap),0))
         warning(_("Tried to restore an empty snapshot?"));
     qd->redraw = 1;
-    GEplaySnapshot((SEXP)snap, gd);
+    GEplaySnapshot(static_cast<SEXP>(snap), gd);
     qd->redraw = 0;
     qd->dirty = 0; /* we reset the dirty flag */
     UNPROTECT(1);
@@ -383,9 +386,9 @@ static void     RQuartz_releaseMask(SEXP ref, pDevDesc dd);
 
 #pragma mark Quartz device implementation
 
-void* QuartzDevice_Create(void *_dev, QuartzBackend_t *def)
+void *QuartzDevice_Create(void *_dev, QuartzBackend_t *def)
 {
-    pDevDesc dev = _dev;
+    pDevDesc dev = static_cast<pDevDesc>(_dev);
 
     dev->startfill = def->bg;
     dev->startcol  = R_RGB(0, 0, 0);
@@ -447,7 +450,7 @@ void* QuartzDevice_Create(void *_dev, QuartzBackend_t *def)
     dev->releaseMask     = RQuartz_releaseMask;
     dev->deviceVersion = R_GE_definitions;
 
-    QuartzDesc *qd = calloc(1, sizeof(QuartzDesc));
+    QuartzDesc *qd = static_cast<QuartzDesc *>(calloc(1, sizeof(QuartzDesc)));
     qd->width      = def->width;
     qd->height     = def->height;
     qd->userInfo   = def->userInfo;
@@ -660,9 +663,7 @@ CGFontRef RQuartz_Font(CTXDESC)
         atsFont = RQuartz_CacheGetFont(fontName, 0); /* face is 0 because we are passing a true font name */
         if (!atsFont) { /* not in the cache, get it */
             CFStringRef cfFontName = CFStringCreateWithCString(nullptr, fontName, kCFStringEncodingUTF8);
-            atsFont = ATSFontFindFromName(cfFontName, kATSOptionFlagsDefault);
-            if (!atsFont)
-                atsFont = ATSFontFindFromPostScriptName(cfFontName, kATSOptionFlagsDefault);
+            atsFont = CTFontCreateWithName(cfFontName);
             CFRelease(cfFontName);
             if (!atsFont) {
                 warning(_("font \"%s\" could not be found for family \"%s\""), fontName, fontFamily);
@@ -689,20 +690,19 @@ CGFontRef RQuartz_Font(CTXDESC)
                 if (fontFace == 2 || fontFace == 4) strcat(compositeFontName, " Bold");
                 if (fontFace == 3 || fontFace == 4) strcat(compositeFontName, " Italic");
                 CFStringRef cfFontName = CFStringCreateWithCString(nullptr, compositeFontName, kCFStringEncodingUTF8);
-                atsFont = ATSFontFindFromName(cfFontName, kATSOptionFlagsDefault);
-                if (!atsFont) atsFont = ATSFontFindFromPostScriptName(cfFontName, kATSOptionFlagsDefault);
+                atsFont = CTFontCreateWithName(cfFontName);
                 CFRelease(cfFontName);
                 if (!atsFont) {
                     if (fontFace == 1) { /* more guessing - fontFace == 1 may need Regular or Roman */
                         strcat(compositeFontName," Regular");
                         cfFontName = CFStringCreateWithCString(nullptr, compositeFontName, kCFStringEncodingUTF8);
-                        atsFont = ATSFontFindFromName(cfFontName, kATSOptionFlagsDefault);
+                        atsFont = CTFontCreateWithName(cfFontName);
                         CFRelease(cfFontName);
                         if (!atsFont) {
                             strcpy(compositeFontName, fontFamily);
                             strcat(compositeFontName," Roman");
                             cfFontName = CFStringCreateWithCString(nullptr, compositeFontName, kCFStringEncodingUTF8);
-                            atsFont = ATSFontFindFromName(cfFontName, kATSOptionFlagsDefault);
+                            atsFont = CTFontCreateWithName(cfFontName);
                             CFRelease(cfFontName);
                         }
                     } else if (fontFace == 3 || fontFace == 4) { /* Oblique is sometimes used instead of Italic (e.g. in Helvetica) */
@@ -710,7 +710,7 @@ CGFontRef RQuartz_Font(CTXDESC)
                         if (fontFace == 4) strcat(compositeFontName, " Bold");
                         strcat(compositeFontName," Oblique");
                         cfFontName = CFStringCreateWithCString(nullptr, compositeFontName, kCFStringEncodingUTF8);
-                        atsFont = ATSFontFindFromName(cfFontName, kATSOptionFlagsDefault);
+                        atsFont = CTFontCreateWithName(cfFontName);
                         CFRelease(cfFontName);                    
                     }
                 }
@@ -1651,8 +1651,7 @@ SEXP makeQuartzDefault() {
     return ScalarLogical(FALSE);
 }
 
-QuartzDesc_t 
-Quartz_C(QuartzParameters_t *par, quartz_create_fn_t q_create, int *errorCode)
+QuartzDesc_t Quartz_C(QuartzParameters_t *par, quartz_create_fn_t q_create, int *errorCode)
 {
     if (errorCode) errorCode[0] = -1;
     return nullptr;
