@@ -2277,7 +2277,8 @@ struct UCharIterator {
 		    is allocated when used as a local var in future
 		    versions */
 };
-
+extern "C"
+{
 UCollator* ucol_open(const char *loc, UErrorCode *status);
 void ucol_close(UCollator *coll);
 void ucol_setAttribute(UCollator *coll, UColAttribute attr,
@@ -2288,9 +2289,8 @@ UCollationResult ucol_strcollIter(const UCollator *coll,
 				  UCharIterator *tIter,
 				  UErrorCode *status);
 void uiter_setUTF8(UCharIterator *iter, const char *s, int32_t length);
-
 void uloc_setDefault(const char *localeID, UErrorCode *status);
-
+} // extern "C"
 enum ULocDataLocaleType
 {
 	ULOC_ACTUAL_LOCALE = 0,
@@ -2298,9 +2298,10 @@ enum ULocDataLocaleType
 	ULOC_DATA_LOCALE_TYPE_LIMIT = 3
 };
 
-const char* ucol_getLocaleByType(const UCollator *coll,
-				 ULocDataLocaleType type,
-				 UErrorCode *status);
+extern "C"
+const char *ucol_getLocaleByType(const UCollator *coll,
+											ULocDataLocaleType type,
+											UErrorCode *status);
 
 #define U_ZERO_ERROR 0
 #define U_FAILURE(x) ((x)>U_ZERO_ERROR)
