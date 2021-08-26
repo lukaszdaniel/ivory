@@ -1082,6 +1082,7 @@ HIDDEN SEXP do_normalizepath(SEXP call, SEXP op, SEXP args, SEXP rho)
 }
 
 #ifdef USE_INTERNAL_MKTIME
+extern "C"
 const char *getTZinfo(void)
 {
 	static char def_tz[PATH_MAX + 1] = "";

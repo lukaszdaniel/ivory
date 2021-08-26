@@ -1123,6 +1123,7 @@ HIDDEN SEXP do_filechoose(SEXP call, SEXP op, SEXP args, SEXP rho)
     return ans;
 }
 
+extern "C"
 const char *getTZinfo(void);  // src/extra/tzone/registryTZ.c
 
 HIDDEN SEXP do_tzone_name(SEXP call, SEXP op, SEXP args, SEXP rho)
