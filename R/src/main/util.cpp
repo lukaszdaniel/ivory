@@ -3015,7 +3015,7 @@ static void str_signif_sexp(SEXP x, const char *type, int width, int digits,
 					 format, flag, result + idx);
 			  });
     } else {
-	error(_("unsupported type '%s'"), TYPEOF(x));
+	error(_("unsupported type"));
     }
 }
 
