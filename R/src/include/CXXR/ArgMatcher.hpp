@@ -319,7 +319,7 @@ namespace CXXR
           // Mapping from tag names to index within m_formal_data:
           // Doesn't include '...'.
           typedef std::map<const String *, unsigned int, Comparator,
-                           Allocator<std::pair<const String *,
+                           Allocator<std::pair<const String *const,
                                                unsigned int>>>
               FormalMap;
           FormalMap m_formal_index;
@@ -341,8 +341,7 @@ namespace CXXR
           void match(const ArgList &supplied, MatchCallback *callback) const;
           void matchWithCache(const ArgList &supplied, MatchCallback *callback,
                               const ArgMatchCache *cache) const;
-          void matchByPosition(const ArgList &supplied, MatchCallback *callback)
-              const;
+          void matchByPosition(const ArgList &supplied, MatchCallback *callback) const;
 
           /** @brief Store information required to match arguments quickly.
            *
@@ -378,8 +377,7 @@ namespace CXXR
           static void unusedArgsError(const SuppliedList &supplied_list);
           static void unusedArgsError(const ConsCell *supplied_list);
 
-          static PairList *makePairList(
-              std::initializer_list<const char *> arg_names);
+          static PairList *makePairList(std::initializer_list<const char *> arg_names);
      };
 
      class ArgMatchCache : public GCNode
