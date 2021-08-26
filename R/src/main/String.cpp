@@ -192,7 +192,7 @@ namespace R
         else
         {
             auto vmax = vmaxget();
-            bool result = streql(translateCharUTF8(a), translateCharUTF8(b));
+            bool result = streql(Rf_translateCharUTF8(a), Rf_translateCharUTF8(b));
             vmaxset(vmax); /* discard any memory used by translateCharUTF8 */
             return result;
         }

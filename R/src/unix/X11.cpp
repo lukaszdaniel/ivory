@@ -22,12 +22,15 @@
 #endif
 
 #include <CXXR/VectorBase.hpp>
+#include <CXXR/String.hpp>
 #include <Defn.h>
 #include <Localization.h>
 #include <Internal.h>
 
 #include <Rconnections.h>
 #include <Rdynpriv.h>
+
+using namespace R;
 
 #ifdef HAVE_X11
 
@@ -52,7 +55,7 @@ HIDDEN int R_X11_Init(void)
     if(initialized) return initialized;
 
     initialized = -1;
-    if(strcmp(R_GUIType, "none") == 0) {
+    if(streql(R_GUIType, "none")) {
 	warning(_("X11 module is not available under this GUI"));
 	return initialized;
     }
@@ -67,7 +70,7 @@ HIDDEN int R_X11_Init(void)
 HIDDEN Rboolean R::R_access_X11(void)
 {
     R_X11_Init();
-    return (initialized > 0) ? (Rboolean)((*ptr->access)() > 0) : FALSE;
+    return (initialized > 0) ? Rboolean((*ptr->access)() > 0) : FALSE;
 }
 
 // called from src/library/grDevices/src/stubs.cpp

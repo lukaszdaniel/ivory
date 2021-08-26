@@ -1019,7 +1019,7 @@ HIDDEN int Rstd_ReadConsole(const char *prompt, unsigned char *buf, size_t len,
 	    rl_data.prev = rl_top;
 	    rl_top = &rl_data;
 	    /* Allow conditional parsing of the ~/.inputrc file. */
-	    rl_readline_name = "R";
+	    rl_readline_name = const_cast<char *>("R");
 	    pushReadline(prompt, readline_handler);
 #ifdef HAVE_RL_COMPLETION_MATCHES
 	    initialize_rlcompletion();
@@ -1081,7 +1081,7 @@ HIDDEN int Rstd_ReadConsole(const char *prompt, unsigned char *buf, size_t len,
 		    rl_callback_read_char();
 		    if(rl_data.readline_eof || rl_data.readline_gotaline) {
 			rl_top = rl_data.prev;
-			return(rl_data.readline_eof ? 0 : 1);
+			return (rl_data.readline_eof ? 0 : 1);
 		    }
 		}
 		else
