@@ -107,13 +107,13 @@ QuartzPDF_DeviceCreate(void *dd, QuartzFunctions_t *fn, QuartzParameters_t *par)
 	int numK = 1;
 	CFStringRef keys[2], values[2];
 	keys[0] = kCGPDFContextCreator;
-	values[0] = CFSTR(_("Quartz R Device"));
+	values[0] = CFSTR("Quartz R Device");
 	if (par->title) {
 	    keys[numK] = kCGPDFContextTitle;
 	    values[numK] = CFStringCreateWithBytes(kCFAllocatorDefault, (UInt8*) par->title, strlen(par->title), kCFStringEncodingUTF8, FALSE);
 	    numK++;
 	}
-	ai = CFDictionaryCreate(0, (void*) keys, (void*) values, numK, &kCFTypeDictionaryKeyCallBacks, &kCFTypeDictionaryValueCallBacks);
+	ai = CFDictionaryCreate(0, static_cast<const void**>(keys[0]), static_cast<const void**>(values[0]), numK, &kCFTypeDictionaryKeyCallBacks, &kCFTypeDictionaryValueCallBacks);
 	while (numK) CFRelease(values[--numK]);
     }
 
