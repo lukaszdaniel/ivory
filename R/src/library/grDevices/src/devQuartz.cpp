@@ -418,7 +418,7 @@ void *QuartzDevice_Create(void *_dev, QuartzBackend_t *def)
     dev->mode         = RQuartz_Mode;
     dev->metricInfo   = RQuartz_MetricInfo;
     dev->holdflush    = RQuartz_HoldFlush;
-    dev->hasTextUTF8  = TRUE;
+    dev->hasTextUTF8  = Rboolean(TRUE);
     dev->textUTF8     = RQuartz_Text;
     dev->strWidthUTF8 = RQuartz_StrWidth;
 
@@ -431,10 +431,10 @@ void *QuartzDevice_Create(void *_dev, QuartzBackend_t *def)
     dev->yCharOffset = 0.3333;
     dev->yLineBias   = 0.20; /* This is .2 for PS/PDF devices... */
 
-    dev->canClip       = TRUE;
+    dev->canClip       = Rboolean(TRUE);
     dev->canHAdj       = 2;
-    dev->canChangeGamma= FALSE;
-    dev->displayListOn = (def->flags & QDFLAG_DISPLAY_LIST) ? TRUE : FALSE;
+    dev->canChangeGamma= Rboolean(FALSE);
+    dev->displayListOn = (def->flags & QDFLAG_DISPLAY_LIST) ? Rboolean(TRUE) : Rboolean(FALSE);
 
     dev->haveTransparency = 2;
     dev->haveTransparentBg = 3; /* FIXME: depends on underlying device */
@@ -663,7 +663,7 @@ CGFontRef RQuartz_Font(CTXDESC)
         atsFont = RQuartz_CacheGetFont(fontName, 0); /* face is 0 because we are passing a true font name */
         if (!atsFont) { /* not in the cache, get it */
             CFStringRef cfFontName = CFStringCreateWithCString(nullptr, fontName, kCFStringEncodingUTF8);
-            atsFont = CTFontCreateWithName(cfFontName);
+            atsFont = CTFontCreateWithName(cfFontName, 12.0f, NULL);
             CFRelease(cfFontName);
             if (!atsFont) {
                 warning(_("font \"%s\" could not be found for family \"%s\""), fontName, fontFamily);
@@ -690,19 +690,19 @@ CGFontRef RQuartz_Font(CTXDESC)
                 if (fontFace == 2 || fontFace == 4) strcat(compositeFontName, " Bold");
                 if (fontFace == 3 || fontFace == 4) strcat(compositeFontName, " Italic");
                 CFStringRef cfFontName = CFStringCreateWithCString(nullptr, compositeFontName, kCFStringEncodingUTF8);
-                atsFont = CTFontCreateWithName(cfFontName);
+                atsFont = CTFontCreateWithName(cfFontName, 12.0f, NULL);
                 CFRelease(cfFontName);
                 if (!atsFont) {
                     if (fontFace == 1) { /* more guessing - fontFace == 1 may need Regular or Roman */
                         strcat(compositeFontName," Regular");
                         cfFontName = CFStringCreateWithCString(nullptr, compositeFontName, kCFStringEncodingUTF8);
-                        atsFont = CTFontCreateWithName(cfFontName);
+                        atsFont = CTFontCreateWithName(cfFontName, 12.0f, NULL);
                         CFRelease(cfFontName);
                         if (!atsFont) {
                             strcpy(compositeFontName, fontFamily);
                             strcat(compositeFontName," Roman");
                             cfFontName = CFStringCreateWithCString(nullptr, compositeFontName, kCFStringEncodingUTF8);
-                            atsFont = CTFontCreateWithName(cfFontName);
+                            atsFont = CTFontCreateWithName(cfFontName, 12.0f, NULL);
                             CFRelease(cfFontName);
                         }
                     } else if (fontFace == 3 || fontFace == 4) { /* Oblique is sometimes used instead of Italic (e.g. in Helvetica) */
@@ -710,7 +710,7 @@ CGFontRef RQuartz_Font(CTXDESC)
                         if (fontFace == 4) strcat(compositeFontName, " Bold");
                         strcat(compositeFontName," Oblique");
                         cfFontName = CFStringCreateWithCString(nullptr, compositeFontName, kCFStringEncodingUTF8);
-                        atsFont = CTFontCreateWithName(cfFontName);
+                        atsFont = CTFontCreateWithName(cfFontName, 12.0f, NULL);
                         CFRelease(cfFontName);                    
                     }
                 }
@@ -932,8 +932,8 @@ static CFStringRef text2unichar(CTXDESC, const char *text, UniChar **buffer, int
     *buffer = (UniChar*) CFStringGetCharactersPtr(str);
     if (*buffer == nullptr) {
         CFIndex length = CFStringGetLength(str);
-        *buffer = malloc(length * sizeof(UniChar));
-	if (buffer == nullptr) error(_("allocation failure in text2unichar"));
+        *buffer = static_cast<UniChar *>(malloc(length * sizeof(UniChar)));
+	if (buffer == nullptr) error(_("allocation failure in text2unichar()"));
         CFStringGetCharacters(str, CFRangeMake(0, length), *buffer);
         *free = 1;
     }
@@ -956,10 +956,10 @@ static double RQuartz_StrWidth(const char *text, CTXDESC)
     CFStringRef str = text2unichar(gc, dd, text, &buffer, &Free);
     if (!str) return 0.0; /* invalid text contents */
     len = (int) CFStringGetLength(str);
-    glyphs = malloc(sizeof(CGGlyph) * len);
-    if (!glyphs) error(_("allocation failure in RQuartz_StrWidth"));
-    advances = malloc(sizeof(int) * len);
-    if (!advances) error(-("allocation failure in RQuartz_StrWidth"));
+    glyphs = static_cast<CGGlyph *>(malloc(sizeof(CGGlyph) * len));
+    if (!glyphs) error(_("allocation failure in RQuartz_StrWidth()"));
+    advances = static_cast<int *>(malloc(sizeof(int) * len));
+    if (!advances) error(_("allocation failure in RQuartz_StrWidth()"));
     CGFontGetGlyphsForUnichars(font, buffer, glyphs, len);
     CGFontGetGlyphAdvances(font, glyphs, len, advances);
     float width = 0.0; /* aScale*CGFontGetLeading(CGContextGetFont(ctx)); */
@@ -992,11 +992,11 @@ static void RQuartz_Text(double x, double y, const char *text, double rot, doubl
     CFStringRef str = text2unichar(gc, dd, text, &buffer, &Free);
     if (!str) return; /* invalid text contents */
     len = (int) CFStringGetLength(str);
-    glyphs = malloc(sizeof(CGGlyph) * len);
-    if (!glyphs) error(_("allocation failure in RQuartz_Text"));
+    glyphs = static_cast<CGGlyph *>(malloc(sizeof(CGGlyph) * len));
+    if (!glyphs) error(_("allocation failure in RQuartz_Text()"));
     CGFontGetGlyphsForUnichars(font, buffer, glyphs, len);
-    int      *advances = malloc(sizeof(int) * len);
-    CGSize   *g_adv    = malloc(sizeof(CGSize) * len);
+    int      *advances = static_cast<int *>(malloc(sizeof(int) * len));
+    CGSize   *g_adv    = static_cast<CGSize *>(malloc(sizeof(CGSize) * len));
 
     CGFontGetGlyphAdvances(font, glyphs, len, advances);
     for(i =0 ; i < len; i++) {
@@ -1292,8 +1292,8 @@ static Rboolean RQuartz_Locator(double *x, double *y, DEVDESC)
     DEVSPEC;
     ctx = nullptr;
     if (!xd->locatePoint)
-        return FALSE;
-    res = xd->locatePoint(xd, xd->userInfo, x, y);
+        return Rboolean(FALSE);
+    res = Rboolean(xd->locatePoint(xd, xd->userInfo, x, y));
     *x/=xd->scalex;
     *y/=xd->scaley;
     return res;
@@ -1648,7 +1648,7 @@ SEXP Quartz(SEXP args)
 }
 
 SEXP makeQuartzDefault() {
-    return ScalarLogical(FALSE);
+    return Rf_ScalarLogical(FALSE);
 }
 
 QuartzDesc_t Quartz_C(QuartzParameters_t *par, quartz_create_fn_t q_create, int *errorCode)
