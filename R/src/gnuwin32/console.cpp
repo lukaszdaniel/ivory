@@ -319,14 +319,13 @@ rgb guiColors[numGuiColors] = {
 
 extern int R_HistorySize;  /* from Defn.h */
 
-ConsoleData
-newconsoledata(font f, int rows, int cols, int bufbytes, int buflines,
+ConsoleData newconsoledata(font f, int rows, int cols, int bufbytes, int buflines,
 	       rgb *guiColors, int kind, int buffered, int cursor_blink)
 {
     ConsoleData p;
 
     initapp(0, 0);
-    p = (ConsoleData) malloc(sizeof(struct structConsoleData));
+    p = static_cast<ConsoleData>(malloc(sizeof(struct structConsoleData)));
     if (!p)
 	return nullptr;
     p->kind = kind;
@@ -338,7 +337,7 @@ newconsoledata(font f, int rows, int cols, int bufbytes, int buflines,
 	    free(p);
 	    return nullptr;
 	}
-	p->kbuf = malloc(NKEYS * sizeof(wchar_t));
+	p->kbuf = static_cast<wchar_t *>(malloc(NKEYS * sizeof(wchar_t)));
 	if (!p->kbuf) {
 	    xbufdel(p->lbuf);
 	    free(p);
@@ -1153,11 +1152,11 @@ void consolepaste(control c)
 	 (pc = (wchar_t *) GlobalLock(hglb)))
     {
 	if (p->clp) {
-	   new_ = realloc((void *)p->clp,
-			 (wcslen(p->clp) + wcslen(pc) + 1) * sizeof(wchar_t));
+	   new_ = static_cast<wchar_t *>(realloc((void *)p->clp,
+			 (wcslen(p->clp) + wcslen(pc) + 1) * sizeof(wchar_t)));
 	}
 	else {
-	   new_ = malloc((wcslen(pc) + 1) * sizeof(wchar_t)) ;
+	   new_ = static_cast<wchar_t *>(malloc((wcslen(pc) + 1) * sizeof(wchar_t)));
 	   if (new_) new_[0] = L'\0';
 	   p->already = p->numkeys;
 	   p->pclp = 0;
@@ -1201,12 +1200,12 @@ void consolepastecmds(control c)
 	 (pc = (wchar_t *) GlobalLock(hglb)))
     {
 	if (p->clp) {
-	    new_ = realloc((void *)p->clp,
+	    new_ = static_cast<wchar_t *>(realloc((void *)p->clp,
 			  (wcslen(p->clp) + CleanTranscript(pc, 0))
-			  * sizeof(wchar_t));
+			  * sizeof(wchar_t)));
 	}
 	else {
-	    new_ = malloc(CleanTranscript(pc, 0) * sizeof(wchar_t));
+	    new_ = static_cast<wchar_t *>(malloc(CleanTranscript(pc, 0) * sizeof(wchar_t)));
 	    if (new_) new_[0] = '\0';
 	    p->already = p->numkeys;
 	    p->pclp = 0;

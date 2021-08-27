@@ -129,7 +129,7 @@ static void editor_load_file(editor c, const char *name, int enc)
     strncpy(p->filename, name, MAX_PATH+1);
     bufsize = 0;
     while (num > 0) {
-	buffer = realloc(buffer, bufsize + 3000 + 1);
+	buffer = static_cast<char *>(realloc(buffer, bufsize + 3000 + 1));
 	num = fread(buffer + bufsize, 1, 3000 - 1, f);
 	if (num >= 0) {
 	    bufsize += num;
@@ -266,7 +266,7 @@ static void editorprint(control m)
 	while (contents[i] != '\n' && contents[i] != '\0') {
 	    ++i; ++j;
 	}
-	linebuf = realloc(linebuf, (j+1)*sizeof(char));
+	linebuf = static_cast<char *>(realloc(linebuf, (j+1)*sizeof(char)));
 	strncpy(linebuf, &contents[istartline], j);
 	linebuf[j] = '\0';
 	gdrawstr(lpr, f, Black, pt(left, linep), linebuf);
@@ -470,7 +470,7 @@ static void editorreplace(control m)
 static void editorrunline(textbox t)
 {
     int length = getlinelength(t); /* return character num */
-    char *line = malloc(length * sizeof(WCHAR) + 2); /* Extra space for null and word length in getcurrentline */
+    char *line = static_cast<char *>(malloc(length * sizeof(WCHAR) + 2)); /* Extra space for null and word length in getcurrentline */
     memset(line, 0, length * sizeof(WCHAR) + 2);
     getcurrentline(t, line, length);
     consolecmd(RConsole, line);

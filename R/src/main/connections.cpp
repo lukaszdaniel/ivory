@@ -1367,7 +1367,7 @@ static size_t fifo_write(const void *ptr, size_t size, size_t nitems, Rconnectio
 
     /* Convert char* to wchar_t* */
     int str_len = size * nitems;
-    wchar_t *buffer = malloc((str_len + 1) * sizeof(wchar_t));
+    wchar_t *buffer = static_cast<wchar_t *>(malloc((str_len + 1) * sizeof(wchar_t)));
     if (!buffer) error(_("allocation of fifo buffer failed"));
     mbstowcs(buffer, (const char*) ptr, str_len);
 

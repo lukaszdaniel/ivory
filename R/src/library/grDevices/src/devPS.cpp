@@ -5702,7 +5702,7 @@ static void initDefn(int i, int type, PDFDesc *pd)
 {
     pd->definitions[i].type = type;
     pd->definitions[i].nchar = DEFBUFSIZE;
-    pd->definitions[i].str = (char *) malloc(DEFBUFSIZE*sizeof(char));
+    pd->definitions[i].str = static_cast<char *>(malloc(DEFBUFSIZE*sizeof(char)));
     pd->definitions[i].str[0] = '\0';
 }
 

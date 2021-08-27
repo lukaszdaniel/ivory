@@ -147,7 +147,7 @@ QuartzDesc_t QuartzBitmap_DeviceCreate(void *dd, QuartzFunctions_t *fn, QuartzPa
         size_t s = h*rb;
         /* QuartzDesc_t qd; */
         /* Allocate sufficient space */
-        QuartzBitmapDevice *dev = malloc(sizeof(QuartzBitmapDevice)+s);
+        QuartzBitmapDevice *dev = static_cast<QuartzBitmapDevice *>(malloc(sizeof(QuartzBitmapDevice)+s));
 	if(dev == nullptr) error(_("allocation failure in QuartzBitmap_DeviceCreate"));
         dev->length = (unsigned int) s;
         // dev->uti  = type ? strdup(type) : nullptr;

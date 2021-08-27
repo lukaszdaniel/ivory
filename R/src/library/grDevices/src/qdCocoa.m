@@ -914,7 +914,7 @@ QuartzDesc_t QuartzCocoa_DeviceCreate(void *dd, QuartzFunctions_t *fn, QuartzPar
 	return NULL;
     }
 
-    dev = malloc(sizeof(QuartzCocoaDevice));
+    dev = static_cast<QuartzCocoaDevice *>(malloc(sizeof(QuartzCocoaDevice)));
     if (dev == NULL) error(_("allocation failure in QuartzCocoa_DeviceCreate"));
     memset(dev, 0, sizeof(QuartzCocoaDevice));
 

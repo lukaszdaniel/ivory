@@ -818,7 +818,7 @@ void readconsolecfg()
     Rwin_graphicsy = gui.gry;
 
     if(strlen(gui.language)) {
-	char *buf = malloc(50);
+	char *buf = static_cast<char *>(malloc(50));
 	snprintf(buf, 50, "LANGUAGE=%s", gui.language);
 	putenv(buf);
     }
@@ -1411,7 +1411,7 @@ int winaddmenuitem(const char * item, const char * menu,
 	    disable(umitems[i]->m);
 	} else {
 	    p = umitems[i]->action;
-	    p = realloc(p, strlen(action) + 1);
+	    p = static_cast<char *>(realloc(p, strlen(action) + 1));
 	    if(!p) {
 		strcpy(errmsg, G_("failed to allocate char storage"));
 		return 4;

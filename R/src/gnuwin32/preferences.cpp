@@ -308,7 +308,7 @@ void applyGUI(Gui newGUI)
 	askok(G_("The overall console properties cannot be changed\non a running console.\n\nSave the preferences and restart Rgui to apply them.\n"));
 
     if(strcmp(newGUI->language, curGUI.language)) {
-	char *buf = malloc(50);
+	char *buf = static_cast<char *>(malloc(50));
 	askok(G_("The language for menus cannot be changed on a\n running console.\n\nSave the preferences and restart Rgui to apply to menus.\n"));
 	snprintf(buf, 50, "LANGUAGE=%s", newGUI->language);
 	putenv(buf);
