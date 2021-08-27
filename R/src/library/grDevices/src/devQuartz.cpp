@@ -1432,7 +1432,7 @@ SEXP Quartz(SEXP args)
     height    = ARG(asReal,args);
     ps        = ARG(asReal,args);
     family    = CHAR(STRING_ELT(CAR(args), 0)); args = CDR(args);
-    antialias = Rboolean(Rf_asLogical(CAR(args))); args = CDR(args)
+    antialias = Rboolean(Rf_asLogical(CAR(args))); args = CDR(args);
     title     = CHAR(STRING_ELT(CAR(args), 0)); args = CDR(args);
     bgs       = CAR(args); args = CDR(args);
     bg        = RGBpar(bgs, 0);
