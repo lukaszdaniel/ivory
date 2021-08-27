@@ -46,12 +46,12 @@ static QuartzFunctions_t *qf;
 
 CGContextRef QuartzPDF_GetCGContext(QuartzDesc_t dev,void *userInfo)
 {
-    return ((QuartzPDFDevice*)userInfo)->context;
+    return static_cast<QuartzPDFDevice *>(userInfo)->context;
 }
 
 void QuartzPDF_NewPage(QuartzDesc_t dev, void *userInfo, int flags)
 {
-    QuartzPDFDevice *qpd = (QuartzPDFDevice*) userInfo;
+    QuartzPDFDevice *qpd = static_cast<QuartzPDFDevice *>(userInfo);
     if (qpd->context) { /* hopefully that's true */
         if (qpd->page) CGContextEndPage(qpd->context);
         CGContextBeginPage(qpd->context, &qpd->bbox);
@@ -61,7 +61,7 @@ void QuartzPDF_NewPage(QuartzDesc_t dev, void *userInfo, int flags)
 
 void QuartzPDF_Close(QuartzDesc_t dev, void *userInfo)
 {
-    QuartzPDFDevice *qpd = (QuartzPDFDevice*) userInfo;
+    QuartzPDFDevice *qpd = static_cast<QuartzPDFDevice *>(userInfo);
 
     if (qpd->context) { /* hopefully that's true */
         if (qpd->page) CGContextEndPage(qpd->context);
@@ -90,7 +90,7 @@ QuartzDesc_t QuartzPDF_DeviceCreate(void *dd, QuartzFunctions_t *fn, QuartzParam
 
     if ((!par->file || ! *par->file)) par->file = "Rplots.pdf";
 
-    if (par->parv) dev->data = (CFMutableDataRef) CFRetain((CFTypeRef) par->parv); /* parv if set is CFMutableDataRef to write to */
+    if (par->parv) dev->data = static_cast<CFMutableDataRef>(CFRetain((CFTypeRef) par->parv)); /* parv if set is CFMutableDataRef to write to */
     else if (par->file && *par->file) {
         CFStringRef path = CFStringCreateWithBytes(kCFAllocatorDefault, (UInt8*) par->file, strlen(par->file), kCFStringEncodingUTF8, FALSE);
         if (!path || !(dev->url = CFURLCreateWithFileSystemPath (nullptr, path, kCFURLPOSIXPathStyle, false))) {
@@ -112,7 +112,8 @@ QuartzDesc_t QuartzPDF_DeviceCreate(void *dd, QuartzFunctions_t *fn, QuartzParam
 	    values[numK] = CFStringCreateWithBytes(kCFAllocatorDefault, (UInt8*) par->title, strlen(par->title), kCFStringEncodingUTF8, FALSE);
 	    numK++;
 	}
-	ai = CFDictionaryCreate(0, (const void**) keys, (const void*) values, numK, &kCFTypeDictionaryKeyCallBacks, &kCFTypeDictionaryValueCallBacks);
+	// ai = CFDictionaryCreate(0, (const void**) keys, (const void**) values, numK, &kCFTypeDictionaryKeyCallBacks, &kCFTypeDictionaryValueCallBacks);
+    ai = CFDictionaryCreate(0, reinterpret_cast<const void **>(&keys), reinterpret_cast<const void **>(&values), numK, &kCFTypeDictionaryKeyCallBacks, &kCFTypeDictionaryValueCallBacks);
 	while (numK) CFRelease(values[--numK]);
     }
 
