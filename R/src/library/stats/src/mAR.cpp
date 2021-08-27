@@ -77,10 +77,10 @@ static void matrix_prod(Array mat1, Array mat2, int trans1, int trans2,
 
 */
 
-static void assert(int bool_)
+static void assert_(int bool_)
 {
-    if(!bool_)
-	error(_("assert failed in src/library/ts/src/carray.c"));
+    if (!bool_)
+        Rf_error(_("assert failed in src/library/stats/src/mAR.cpp"));
 }
 
 static Array init_array(void)
@@ -118,7 +118,7 @@ static Array make_array(double vec[], int dim[], int ndim)
     int len[MAX_DIM_LENGTH + 1];
     Array a;
 
-    assert(ndim <= MAX_DIM_LENGTH);
+    assert_(ndim <= MAX_DIM_LENGTH);
 
     a = init_array();
 
@@ -215,7 +215,7 @@ static Array subarray(Array a, int index)
     b = init_array();
 
     /* is index in range? */
-    assert( index >= 0 && index < DIM(a)[0] );
+    assert_( index >= 0 && index < DIM(a)[0] );
 
     offset = index;
     switch(DIM_LENGTH(a)) {
@@ -266,7 +266,7 @@ static void copy_array (Array orig, Array ans)
 {
     int i;
 
-    assert (test_array_conform(orig, ans));
+    assert_(test_array_conform(orig, ans));
 
     for(i = 0; i < vector_length(orig); i++)
 	VECTOR(ans)[i] = VECTOR(orig)[i];
@@ -280,9 +280,9 @@ static void transpose_matrix(Array mat, Array ans)
 
     tmp = init_array();
 
-    assert(DIM_LENGTH(mat) == 2 && DIM_LENGTH(ans) == 2);
-    assert(NCOL(mat) == NROW(ans));
-    assert(NROW(mat) == NCOL(ans));
+    assert_(DIM_LENGTH(mat) == 2 && DIM_LENGTH(ans) == 2);
+    assert_(NCOL(mat) == NROW(ans));
+    assert_(NROW(mat) == NCOL(ans));
 
     vmax = vmaxget();
 
@@ -300,8 +300,8 @@ static void array_op(Array arr1, Array arr2, char op, Array ans)
 {
     int i;
 
-    assert (test_array_conform(arr1, arr2));
-    assert (test_array_conform(arr2, ans));
+    assert_(test_array_conform(arr1, arr2));
+    assert_(test_array_conform(arr2, ans));
 
     switch (op) {
 	case '*':
@@ -331,7 +331,7 @@ static void scalar_op(Array arr, double s, char op, Array ans)
 {
     int i;
 
-    assert (test_array_conform(arr, ans));
+    assert_(test_array_conform(arr, ans));
 
     switch (op) {
 	case '*':
@@ -368,28 +368,28 @@ static void matrix_prod(Array mat1, Array mat2, int trans1, int trans2, Array an
     Array tmp;
 
     /* Test whether everything is a matrix */
-    assert(DIM_LENGTH(mat1) == 2 &&
+    assert_(DIM_LENGTH(mat1) == 2 &&
 	   DIM_LENGTH(mat2) == 2 && DIM_LENGTH(ans) == 2);
 
     /* Test whether matrices conform. K is the dimension that is
        lost by multiplication */
     if (trans1) {
-	assert ( NCOL(mat1) == NROW(ans) );
+	assert_( NCOL(mat1) == NROW(ans) );
 	K1 = NROW(mat1);
     }
     else {
-	assert ( NROW(mat1) == NROW(ans) );
+	assert_( NROW(mat1) == NROW(ans) );
 	K1 = NCOL(mat1);
     }
     if (trans2) {
-	assert ( NROW(mat2) == NCOL(ans) );
+	assert_( NROW(mat2) == NCOL(ans) );
 	K2 = NCOL(mat2);
     }
     else {
-	assert ( NCOL(mat2) == NCOL(ans) );
+	assert_( NCOL(mat2) == NCOL(ans) );
 	K2 = NROW(mat2);
     }
-    assert (K1 == K2);
+    assert_(K1 == K2);
 
     tmp = init_array();
 
@@ -444,9 +444,9 @@ static void qr_solve(Array x, Array y, Array coef)
     double tol = 1.0E-7, *qraux, *work;
     Array xt, yt, coeft;
 
-    assert(NROW(x) == NROW(y));
-    assert(NCOL(coef) == NCOL(y));
-    assert(NCOL(x) == NROW(coef));
+    assert_(NROW(x) == NROW(y));
+    assert_(NCOL(coef) == NCOL(y));
+    assert_(NCOL(x) == NROW(coef));
 
     vmax = vmaxget();
 
@@ -489,8 +489,8 @@ static double ldet(Array x)
     double ll, tol = 1.0E-7, *qraux, *work;
     Array xtmp;
 
-    assert(DIM_LENGTH(x) == 2); /* is x a matrix? */
-    assert(NROW(x) == NCOL(x)); /* is x square? */
+    assert_(DIM_LENGTH(x) == 2); /* is x a matrix? */
+    assert_(NROW(x) == NCOL(x)); /* is x square? */
 
     vmax = vmaxget();
 
