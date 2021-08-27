@@ -641,7 +641,7 @@ int runcmd_timeout(const char *cmd, cetype_t enc, int wait, int visible,
    2 to read stderr from pipe, 
    3 to read both stdout and stderr from pipe.
  */
-rpipe * rpipeOpen(const char *cmd, cetype_t enc, int visible,
+rpipe *rpipeOpen(const char *cmd, cetype_t enc, int visible,
 		  const char *finput, int io,
 		  const char *fout, const char *ferr,
 		  int timeout)
@@ -723,8 +723,7 @@ rpipe * rpipeOpen(const char *cmd, cetype_t enc, int visible,
     return r;
 }
 
-static void
-rpipeTerminate(rpipe * r)
+static void rpipeTerminate(rpipe * r)
 {
     if (r->thread) {
 	TerminateThread(r->thread, 0);
@@ -740,8 +739,7 @@ rpipeTerminate(rpipe * r)
 #include "graphapp/ga.h"
 extern Rboolean UserBreak;
 
-int
-rpipeGetc(rpipe * r)
+int rpipeGetc(rpipe * r)
 {
     DWORD a, b;
     char  c;

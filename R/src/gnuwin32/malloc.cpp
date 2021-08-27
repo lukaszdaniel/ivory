@@ -1319,10 +1319,9 @@ extern void*     sbrk(ptrdiff_t);
 */
 #define MMAP_FLAGS           (MAP_PRIVATE)
 static int dev_zero_fd = -1; /* Cached file descriptor for /dev/zero. */
-#define CALL_MMAP(s) ((dev_zero_fd < 0) ? \
-           (dev_zero_fd = open("/dev/zero", O_RDWR), \
-            mmap(0, (s), MMAP_PROT, MMAP_FLAGS, dev_zero_fd, 0)) : \
-            mmap(0, (s), MMAP_PROT, MMAP_FLAGS, dev_zero_fd, 0))
+#define CALL_MMAP(s) ((dev_zero_fd < 0) ? (dev_zero_fd = open("/dev/zero", O_RDWR),             \
+                                           mmap(0, (s), MMAP_PROT, MMAP_FLAGS, dev_zero_fd, 0)) \
+                                        : mmap(0, (s), MMAP_PROT, MMAP_FLAGS, dev_zero_fd, 0))
 #endif /* MAP_ANONYMOUS */
 
 #define DIRECT_MMAP(s)       CALL_MMAP(s)
@@ -2067,10 +2066,8 @@ static struct malloc_state _gm_;
 #define use_noncontiguous(M)  ((M)->mflags &   USE_NONCONTIGUOUS_BIT)
 #define disable_contiguous(M) ((M)->mflags |=  USE_NONCONTIGUOUS_BIT)
 
-#define set_lock(M,L)\
- ((M)->mflags = (L)?\
-  ((M)->mflags | USE_LOCK_BIT) :\
-  ((M)->mflags & ~USE_LOCK_BIT))
+#define set_lock(M, L) \
+  ((M)->mflags = (L) ? ((M)->mflags | USE_LOCK_BIT) : ((M)->mflags & ~USE_LOCK_BIT))
 
 /* page-align a size */
 #define page_align(S)\
@@ -2230,53 +2227,55 @@ static size_t traverse_and_check(mstate m);
 
 /* assign tree index for size S to variable I */
 #if defined(__GNUC__) && defined(i386)
-#define compute_tree_index(S, I)\
-{\
-  size_t X = S >> TREEBIN_SHIFT;\
-  if (X == 0)\
-    I = 0;\
-  else if (X > 0xFFFF)\
-    I = NTREEBINS-1;\
-  else {\
-    unsigned int K;\
-    __asm__("bsrl %1,%0\n\t" : "=r" (K) : "rm"  (X));\
-    I =  (bindex_t)((K << 1) + ((S >> (K + (TREEBIN_SHIFT-1)) & 1)));\
-  }\
-}
+#define compute_tree_index(S, I)                                         \
+  {                                                                      \
+    size_t X = S >> TREEBIN_SHIFT;                                       \
+    if (X == 0)                                                          \
+      I = 0;                                                             \
+    else if (X > 0xFFFF)                                                 \
+      I = NTREEBINS - 1;                                                 \
+    else                                                                 \
+    {                                                                    \
+      unsigned int K;                                                    \
+      __asm__("bsrl %1,%0\n\t"                                           \
+              : "=r"(K)                                                  \
+              : "rm"(X));                                                \
+      I = (bindex_t)((K << 1) + ((S >> (K + (TREEBIN_SHIFT - 1)) & 1))); \
+    }                                                                    \
+  }
 #else /* GNUC */
-#define compute_tree_index(S, I)\
-{\
-  size_t X = S >> TREEBIN_SHIFT;\
-  if (X == 0)\
-    I = 0;\
-  else if (X > 0xFFFF)\
-    I = NTREEBINS-1;\
-  else {\
-    unsigned int Y = (unsigned int)X;\
-    unsigned int N = ((Y - 0x100) >> 16) & 8;\
-    unsigned int K = (((Y <<= N) - 0x1000) >> 16) & 4;\
-    N += K;\
-    N += K = (((Y <<= K) - 0x4000) >> 16) & 2;\
-    K = 14 - N + ((Y <<= K) >> 15);\
-    I = (K << 1) + ((S >> (K + (TREEBIN_SHIFT-1)) & 1));\
-  }\
-}
+#define compute_tree_index(S, I)                             \
+  {                                                          \
+    size_t X = S >> TREEBIN_SHIFT;                           \
+    if (X == 0)                                              \
+      I = 0;                                                 \
+    else if (X > 0xFFFF)                                     \
+      I = NTREEBINS - 1;                                     \
+    else                                                     \
+    {                                                        \
+      unsigned int Y = (unsigned int)X;                      \
+      unsigned int N = ((Y - 0x100) >> 16) & 8;              \
+      unsigned int K = (((Y <<= N) - 0x1000) >> 16) & 4;     \
+      N += K;                                                \
+      N += K = (((Y <<= K) - 0x4000) >> 16) & 2;             \
+      K = 14 - N + ((Y <<= K) >> 15);                        \
+      I = (K << 1) + ((S >> (K + (TREEBIN_SHIFT - 1)) & 1)); \
+    }                                                        \
+  }
 #endif /* GNUC */
 
 /* Bit representing maximum resolved size in a treebin at i */
 #define bit_for_tree_index(i) \
-   (i == NTREEBINS-1)? (SIZE_T_BITSIZE-1) : (((i) >> 1) + TREEBIN_SHIFT - 2)
+  (i == NTREEBINS - 1) ? (SIZE_T_BITSIZE - 1) : (((i) >> 1) + TREEBIN_SHIFT - 2)
 
 /* Shift placing maximum resolved bit in a treebin at i as sign bit */
 #define leftshift_for_tree_index(i) \
-   ((i == NTREEBINS-1)? 0 : \
-    ((SIZE_T_BITSIZE-SIZE_T_ONE) - (((i) >> 1) + TREEBIN_SHIFT - 2)))
+  ((i == NTREEBINS - 1) ? 0 : ((SIZE_T_BITSIZE - SIZE_T_ONE) - (((i) >> 1) + TREEBIN_SHIFT - 2)))
 
 /* The size of the smallest chunk held in bin with index i */
-#define minsize_for_tree_index(i) \
-   ((SIZE_T_ONE << (((i) >> 1) + TREEBIN_SHIFT)) |  \
-   (((size_t)((i) & SIZE_T_ONE)) << (((i) >> 1) + TREEBIN_SHIFT - 1)))
-
+#define minsize_for_tree_index(i)                 \
+  ((SIZE_T_ONE << (((i) >> 1) + TREEBIN_SHIFT)) | \
+   (((size_t)((i)&SIZE_T_ONE)) << (((i) >> 1) + TREEBIN_SHIFT - 1)))
 
 /* ------------------------ Operations on bin maps ----------------------- */
 
@@ -2295,29 +2294,36 @@ static size_t traverse_and_check(mstate m);
 /* index corresponding to given bit */
 
 #if defined(__GNUC__) && defined(i386)
-#define compute_bit2idx(X, I)\
-{\
-  unsigned int J;\
-  __asm__("bsfl %1,%0\n\t" : "=r" (J) : "rm" (X));\
-  I = (bindex_t)J;\
-}
+#define compute_bit2idx(X, I) \
+  {                           \
+    unsigned int J;           \
+    __asm__("bsfl %1,%0\n\t"  \
+            : "=r"(J)         \
+            : "rm"(X));       \
+    I = (bindex_t)J;          \
+  }
 
 #else /* GNUC */
 #if  USE_BUILTIN_FFS
 #define compute_bit2idx(X, I) I = ffs(X)-1
 
 #else /* USE_BUILTIN_FFS */
-#define compute_bit2idx(X, I)\
-{\
-  unsigned int Y = X - 1;\
-  unsigned int K = Y >> (16-4) & 16;\
-  unsigned int N = K;        Y >>= K;\
-  N += K = Y >> (8-3) &  8;  Y >>= K;\
-  N += K = Y >> (4-2) &  4;  Y >>= K;\
-  N += K = Y >> (2-1) &  2;  Y >>= K;\
-  N += K = Y >> (1-0) &  1;  Y >>= K;\
-  I = (bindex_t)(N + Y);\
-}
+#define compute_bit2idx(X, I)            \
+  {                                      \
+    unsigned int Y = X - 1;              \
+    unsigned int K = Y >> (16 - 4) & 16; \
+    unsigned int N = K;                  \
+    Y >>= K;                             \
+    N += K = Y >> (8 - 3) & 8;           \
+    Y >>= K;                             \
+    N += K = Y >> (4 - 2) & 4;           \
+    Y >>= K;                             \
+    N += K = Y >> (2 - 1) & 2;           \
+    Y >>= K;                             \
+    N += K = Y >> (1 - 0) & 1;           \
+    Y >>= K;                             \
+    I = (bindex_t)(N + Y);               \
+  }
 #endif /* USE_BUILTIN_FFS */
 #endif /* GNUC */
 
@@ -2402,42 +2408,44 @@ static size_t traverse_and_check(mstate m);
 #define mark_inuse_foot(M,p,s)
 
 /* Set cinuse bit and pinuse bit of next chunk */
-#define set_inuse(M,p,s)\
-  ((p)->head = (((p)->head & PINUSE_BIT)|s|CINUSE_BIT),\
-  ((mchunkptr)(((char*)(p)) + (s)))->head |= PINUSE_BIT)
+#define set_inuse(M, p, s)                                  \
+  ((p)->head = (((p)->head & PINUSE_BIT) | s | CINUSE_BIT), \
+   ((mchunkptr)(((char *)(p)) + (s)))->head |= PINUSE_BIT)
 
 /* Set cinuse and pinuse of this chunk and pinuse of next chunk */
-#define set_inuse_and_pinuse(M,p,s)\
-  ((p)->head = (s|PINUSE_BIT|CINUSE_BIT),\
-  ((mchunkptr)(((char*)(p)) + (s)))->head |= PINUSE_BIT)
+#define set_inuse_and_pinuse(M, p, s)         \
+  ((p)->head = (s | PINUSE_BIT | CINUSE_BIT), \
+   ((mchunkptr)(((char *)(p)) + (s)))->head |= PINUSE_BIT)
 
 /* Set size, cinuse and pinuse bit of this chunk */
-#define set_size_and_pinuse_of_inuse_chunk(M, p, s)\
-  ((p)->head = (s|PINUSE_BIT|CINUSE_BIT))
+#define set_size_and_pinuse_of_inuse_chunk(M, p, s) \
+  ((p)->head = (s | PINUSE_BIT | CINUSE_BIT))
 
 #else /* FOOTERS */
 
 /* Set foot of inuse chunk to be xor of mstate and seed */
-#define mark_inuse_foot(M,p,s)\
-  (((mchunkptr)((char*)(p) + (s)))->prev_foot = ((size_t)(M) ^ mparams.magic))
+#define mark_inuse_foot(M, p, s) \
+  (((mchunkptr)((char *)(p) + (s)))->prev_foot = ((size_t)(M) ^ mparams.magic))
 
-#define get_mstate_for(p)\
-  ((mstate)(((mchunkptr)((char*)(p) +\
-    (chunksize(p))))->prev_foot ^ mparams.magic))
+#define get_mstate_for(p)                 \
+  ((mstate)(((mchunkptr)((char *)(p) +    \
+                         (chunksize(p)))) \
+                ->prev_foot ^             \
+            mparams.magic))
 
-#define set_inuse(M,p,s)\
-  ((p)->head = (((p)->head & PINUSE_BIT)|s|CINUSE_BIT),\
-  (((mchunkptr)(((char*)(p)) + (s)))->head |= PINUSE_BIT), \
-  mark_inuse_foot(M,p,s))
+#define set_inuse(M, p, s)                                   \
+  ((p)->head = (((p)->head & PINUSE_BIT) | s | CINUSE_BIT),  \
+   (((mchunkptr)(((char *)(p)) + (s)))->head |= PINUSE_BIT), \
+   mark_inuse_foot(M, p, s))
 
-#define set_inuse_and_pinuse(M,p,s)\
-  ((p)->head = (s|PINUSE_BIT|CINUSE_BIT),\
-  (((mchunkptr)(((char*)(p)) + (s)))->head |= PINUSE_BIT),\
- mark_inuse_foot(M,p,s))
+#define set_inuse_and_pinuse(M, p, s)                        \
+  ((p)->head = (s | PINUSE_BIT | CINUSE_BIT),                \
+   (((mchunkptr)(((char *)(p)) + (s)))->head |= PINUSE_BIT), \
+   mark_inuse_foot(M, p, s))
 
-#define set_size_and_pinuse_of_inuse_chunk(M, p, s)\
-  ((p)->head = (s|PINUSE_BIT|CINUSE_BIT),\
-  mark_inuse_foot(M, p, s))
+#define set_size_and_pinuse_of_inuse_chunk(M, p, s) \
+  ((p)->head = (s | PINUSE_BIT | CINUSE_BIT),       \
+   mark_inuse_foot(M, p, s))
 
 #endif /* !FOOTERS */
 
@@ -2898,127 +2906,147 @@ static void internal_malloc_stats(mstate m) {
 */
 
 /* Link a free chunk into a smallbin  */
-#define insert_small_chunk(M, P, S) {\
-  bindex_t I  = small_index(S);\
-  mchunkptr B = smallbin_at(M, I);\
-  mchunkptr F = B;\
-  assert(S >= MIN_CHUNK_SIZE);\
-  if (!smallmap_is_marked(M, I))\
-    mark_smallmap(M, I);\
-  else if (RTCHECK(ok_address(M, B->fd)))\
-    F = B->fd;\
-  else {\
-    CORRUPTION_ERROR_ACTION(M);\
-  }\
-  B->fd = P;\
-  F->bk = P;\
-  P->fd = F;\
-  P->bk = B;\
-}
+#define insert_small_chunk(M, P, S)         \
+  {                                         \
+    bindex_t I = small_index(S);            \
+    mchunkptr B = smallbin_at(M, I);        \
+    mchunkptr F = B;                        \
+    assert(S >= MIN_CHUNK_SIZE);            \
+    if (!smallmap_is_marked(M, I))          \
+      mark_smallmap(M, I);                  \
+    else if (RTCHECK(ok_address(M, B->fd))) \
+      F = B->fd;                            \
+    else                                    \
+    {                                       \
+      CORRUPTION_ERROR_ACTION(M);           \
+    }                                       \
+    B->fd = P;                              \
+    F->bk = P;                              \
+    P->fd = F;                              \
+    P->bk = B;                              \
+  }
 
 /* Unlink a chunk from a smallbin  */
-#define unlink_small_chunk(M, P, S) {\
-  mchunkptr F = P->fd;\
-  mchunkptr B = P->bk;\
-  bindex_t I = small_index(S);\
-  assert(P != B);\
-  assert(P != F);\
-  assert(chunksize(P) == small_index2size(I));\
-  if (F == B)\
-    clear_smallmap(M, I);\
-  else if (RTCHECK((F == smallbin_at(M,I) || ok_address(M, F)) &&\
-                   (B == smallbin_at(M,I) || ok_address(M, B)))) {\
-    F->bk = B;\
-    B->fd = F;\
-  }\
-  else {\
-    CORRUPTION_ERROR_ACTION(M);\
-  }\
-}
+#define unlink_small_chunk(M, P, S)                                  \
+  {                                                                  \
+    mchunkptr F = P->fd;                                             \
+    mchunkptr B = P->bk;                                             \
+    bindex_t I = small_index(S);                                     \
+    assert(P != B);                                                  \
+    assert(P != F);                                                  \
+    assert(chunksize(P) == small_index2size(I));                     \
+    if (F == B)                                                      \
+      clear_smallmap(M, I);                                          \
+    else if (RTCHECK((F == smallbin_at(M, I) || ok_address(M, F)) && \
+                     (B == smallbin_at(M, I) || ok_address(M, B))))  \
+    {                                                                \
+      F->bk = B;                                                     \
+      B->fd = F;                                                     \
+    }                                                                \
+    else                                                             \
+    {                                                                \
+      CORRUPTION_ERROR_ACTION(M);                                    \
+    }                                                                \
+  }
 
 /* Unlink the first chunk from a smallbin */
-#define unlink_first_small_chunk(M, B, P, I) {\
-  mchunkptr F = P->fd;\
-  assert(P != B);\
-  assert(P != F);\
-  assert(chunksize(P) == small_index2size(I));\
-  if (B == F)\
-    clear_smallmap(M, I);\
-  else if (RTCHECK(ok_address(M, F))) {\
-    B->fd = F;\
-    F->bk = B;\
-  }\
-  else {\
-    CORRUPTION_ERROR_ACTION(M);\
-  }\
-}
+#define unlink_first_small_chunk(M, B, P, I)     \
+  {                                              \
+    mchunkptr F = P->fd;                         \
+    assert(P != B);                              \
+    assert(P != F);                              \
+    assert(chunksize(P) == small_index2size(I)); \
+    if (B == F)                                  \
+      clear_smallmap(M, I);                      \
+    else if (RTCHECK(ok_address(M, F)))          \
+    {                                            \
+      B->fd = F;                                 \
+      F->bk = B;                                 \
+    }                                            \
+    else                                         \
+    {                                            \
+      CORRUPTION_ERROR_ACTION(M);                \
+    }                                            \
+  }
 
 /* Replace dv node, binning the old one */
 /* Used only when dvsize known to be small */
-#define replace_dv(M, P, S) {\
-  size_t DVS = M->dvsize;\
-  if (DVS != 0) {\
-    mchunkptr DV = M->dv;\
-    assert(is_small(DVS));\
-    insert_small_chunk(M, DV, DVS);\
-  }\
-  M->dvsize = S;\
-  M->dv = P;\
-}
+#define replace_dv(M, P, S)           \
+  {                                   \
+    size_t DVS = M->dvsize;           \
+    if (DVS != 0)                     \
+    {                                 \
+      mchunkptr DV = M->dv;           \
+      assert(is_small(DVS));          \
+      insert_small_chunk(M, DV, DVS); \
+    }                                 \
+    M->dvsize = S;                    \
+    M->dv = P;                        \
+  }
 
 /* ------------------------- Operations on trees ------------------------- */
 
 /* Insert chunk into tree */
-#define insert_large_chunk(M, X, S) {\
-  tbinptr* H;\
-  bindex_t I;\
-  compute_tree_index(S, I);\
-  H = treebin_at(M, I);\
-  X->index = I;\
-  X->child[0] = X->child[1] = 0;\
-  if (!treemap_is_marked(M, I)) {\
-    mark_treemap(M, I);\
-    *H = X;\
-    X->parent = (tchunkptr)H;\
-    X->fd = X->bk = X;\
-  }\
-  else {\
-    tchunkptr T = *H;\
-    size_t K = S << leftshift_for_tree_index(I);\
-    for (;;) {\
-      if (chunksize(T) != S) {\
-        tchunkptr* C = &(T->child[(K >> (SIZE_T_BITSIZE-SIZE_T_ONE)) & 1]);\
-        K <<= 1;\
-        if (*C != 0)\
-          T = *C;\
-        else if (RTCHECK(ok_address(M, C))) {\
-          *C = X;\
-          X->parent = T;\
-          X->fd = X->bk = X;\
-          break;\
-        }\
-        else {\
-          CORRUPTION_ERROR_ACTION(M);\
-          break;\
-        }\
-      }\
-      else {\
-        tchunkptr F = T->fd;\
-        if (RTCHECK(ok_address(M, T) && ok_address(M, F))) {\
-          T->fd = F->bk = X;\
-          X->fd = F;\
-          X->bk = T;\
-          X->parent = 0;\
-          break;\
-        }\
-        else {\
-          CORRUPTION_ERROR_ACTION(M);\
-          break;\
-        }\
-      }\
-    }\
-  }\
-}
+#define insert_large_chunk(M, X, S)                                             \
+  {                                                                             \
+    tbinptr *H;                                                                 \
+    bindex_t I;                                                                 \
+    compute_tree_index(S, I);                                                   \
+    H = treebin_at(M, I);                                                       \
+    X->index = I;                                                               \
+    X->child[0] = X->child[1] = 0;                                              \
+    if (!treemap_is_marked(M, I))                                               \
+    {                                                                           \
+      mark_treemap(M, I);                                                       \
+      *H = X;                                                                   \
+      X->parent = (tchunkptr)H;                                                 \
+      X->fd = X->bk = X;                                                        \
+    }                                                                           \
+    else                                                                        \
+    {                                                                           \
+      tchunkptr T = *H;                                                         \
+      size_t K = S << leftshift_for_tree_index(I);                              \
+      for (;;)                                                                  \
+      {                                                                         \
+        if (chunksize(T) != S)                                                  \
+        {                                                                       \
+          tchunkptr *C = &(T->child[(K >> (SIZE_T_BITSIZE - SIZE_T_ONE)) & 1]); \
+          K <<= 1;                                                              \
+          if (*C != 0)                                                          \
+            T = *C;                                                             \
+          else if (RTCHECK(ok_address(M, C)))                                   \
+          {                                                                     \
+            *C = X;                                                             \
+            X->parent = T;                                                      \
+            X->fd = X->bk = X;                                                  \
+            break;                                                              \
+          }                                                                     \
+          else                                                                  \
+          {                                                                     \
+            CORRUPTION_ERROR_ACTION(M);                                         \
+            break;                                                              \
+          }                                                                     \
+        }                                                                       \
+        else                                                                    \
+        {                                                                       \
+          tchunkptr F = T->fd;                                                  \
+          if (RTCHECK(ok_address(M, T) && ok_address(M, F)))                    \
+          {                                                                     \
+            T->fd = F->bk = X;                                                  \
+            X->fd = F;                                                          \
+            X->bk = T;                                                          \
+            X->parent = 0;                                                      \
+            break;                                                              \
+          }                                                                     \
+          else                                                                  \
+          {                                                                     \
+            CORRUPTION_ERROR_ACTION(M);                                         \
+            break;                                                              \
+          }                                                                     \
+        }                                                                       \
+      }                                                                         \
+    }                                                                           \
+  }
 
 /*
   Unlink steps:
@@ -3037,87 +3065,111 @@ static void internal_malloc_stats(mstate m) {
      x's parent and children to x's replacement (or null if none).
 */
 
-#define unlink_large_chunk(M, X) {\
-  tchunkptr XP = X->parent;\
-  tchunkptr R;\
-  if (X->bk != X) {\
-    tchunkptr F = X->fd;\
-    R = X->bk;\
-    if (RTCHECK(ok_address(M, F))) {\
-      F->bk = R;\
-      R->fd = F;\
-    }\
-    else {\
-      CORRUPTION_ERROR_ACTION(M);\
-    }\
-  }\
-  else {\
-    tchunkptr* RP;\
-    if (((R = *(RP = &(X->child[1]))) != 0) ||\
-        ((R = *(RP = &(X->child[0]))) != 0)) {\
-      tchunkptr* CP;\
-      while ((*(CP = &(R->child[1])) != 0) ||\
-             (*(CP = &(R->child[0])) != 0)) {\
-        R = *(RP = CP);\
-      }\
-      if (RTCHECK(ok_address(M, RP)))\
-        *RP = 0;\
-      else {\
-        CORRUPTION_ERROR_ACTION(M);\
-      }\
-    }\
-  }\
-  if (XP != 0) {\
-    tbinptr* H = treebin_at(M, X->index);\
-    if (X == *H) {\
-      if ((*H = R) == 0) \
-        clear_treemap(M, X->index);\
-    }\
-    else if (RTCHECK(ok_address(M, XP))) {\
-      if (XP->child[0] == X) \
-        XP->child[0] = R;\
-      else \
-        XP->child[1] = R;\
-    }\
-    else\
-      CORRUPTION_ERROR_ACTION(M);\
-    if (R != 0) {\
-      if (RTCHECK(ok_address(M, R))) {\
-        tchunkptr C0, C1;\
-        R->parent = XP;\
-        if ((C0 = X->child[0]) != 0) {\
-          if (RTCHECK(ok_address(M, C0))) {\
-            R->child[0] = C0;\
-            C0->parent = R;\
-          }\
-          else\
-            CORRUPTION_ERROR_ACTION(M);\
-        }\
-        if ((C1 = X->child[1]) != 0) {\
-          if (RTCHECK(ok_address(M, C1))) {\
-            R->child[1] = C1;\
-            C1->parent = R;\
-          }\
-          else\
-            CORRUPTION_ERROR_ACTION(M);\
-        }\
-      }\
-      else\
-        CORRUPTION_ERROR_ACTION(M);\
-    }\
-  }\
-}
+#define unlink_large_chunk(M, X)                 \
+  {                                              \
+    tchunkptr XP = X->parent;                    \
+    tchunkptr R;                                 \
+    if (X->bk != X)                              \
+    {                                            \
+      tchunkptr F = X->fd;                       \
+      R = X->bk;                                 \
+      if (RTCHECK(ok_address(M, F)))             \
+      {                                          \
+        F->bk = R;                               \
+        R->fd = F;                               \
+      }                                          \
+      else                                       \
+      {                                          \
+        CORRUPTION_ERROR_ACTION(M);              \
+      }                                          \
+    }                                            \
+    else                                         \
+    {                                            \
+      tchunkptr *RP;                             \
+      if (((R = *(RP = &(X->child[1]))) != 0) || \
+          ((R = *(RP = &(X->child[0]))) != 0))   \
+      {                                          \
+        tchunkptr *CP;                           \
+        while ((*(CP = &(R->child[1])) != 0) ||  \
+               (*(CP = &(R->child[0])) != 0))    \
+        {                                        \
+          R = *(RP = CP);                        \
+        }                                        \
+        if (RTCHECK(ok_address(M, RP)))          \
+          *RP = 0;                               \
+        else                                     \
+        {                                        \
+          CORRUPTION_ERROR_ACTION(M);            \
+        }                                        \
+      }                                          \
+    }                                            \
+    if (XP != 0)                                 \
+    {                                            \
+      tbinptr *H = treebin_at(M, X->index);      \
+      if (X == *H)                               \
+      {                                          \
+        if ((*H = R) == 0)                       \
+          clear_treemap(M, X->index);            \
+      }                                          \
+      else if (RTCHECK(ok_address(M, XP)))       \
+      {                                          \
+        if (XP->child[0] == X)                   \
+          XP->child[0] = R;                      \
+        else                                     \
+          XP->child[1] = R;                      \
+      }                                          \
+      else                                       \
+        CORRUPTION_ERROR_ACTION(M);              \
+      if (R != 0)                                \
+      {                                          \
+        if (RTCHECK(ok_address(M, R)))           \
+        {                                        \
+          tchunkptr C0, C1;                      \
+          R->parent = XP;                        \
+          if ((C0 = X->child[0]) != 0)           \
+          {                                      \
+            if (RTCHECK(ok_address(M, C0)))      \
+            {                                    \
+              R->child[0] = C0;                  \
+              C0->parent = R;                    \
+            }                                    \
+            else                                 \
+              CORRUPTION_ERROR_ACTION(M);        \
+          }                                      \
+          if ((C1 = X->child[1]) != 0)           \
+          {                                      \
+            if (RTCHECK(ok_address(M, C1)))      \
+            {                                    \
+              R->child[1] = C1;                  \
+              C1->parent = R;                    \
+            }                                    \
+            else                                 \
+              CORRUPTION_ERROR_ACTION(M);        \
+          }                                      \
+        }                                        \
+        else                                     \
+          CORRUPTION_ERROR_ACTION(M);            \
+      }                                          \
+    }                                            \
+  }
 
 /* Relays to large vs small bin operations */
 
-#define insert_chunk(M, P, S)\
-  if (is_small(S)) insert_small_chunk(M, P, S)\
-  else { tchunkptr TP = (tchunkptr)(P); insert_large_chunk(M, TP, S); }
+#define insert_chunk(M, P, S)        \
+  if (is_small(S))                   \
+    insert_small_chunk(M, P, S) else \
+    {                                \
+      tchunkptr TP = (tchunkptr)(P); \
+      insert_large_chunk(M, TP, S);  \
+    }
 
-#define unlink_chunk(M, P, S)\
-  if (is_small(S)) unlink_small_chunk(M, P, S)\
-  else { tchunkptr TP = (tchunkptr)(P); unlink_large_chunk(M, TP); }
-
+#define unlink_chunk(M, P, S)        \
+  if (is_small(S))                   \
+    unlink_small_chunk(M, P, S) else \
+    {                                \
+      tchunkptr TP = (tchunkptr)(P); \
+      unlink_large_chunk(M, TP);     \
+    }
 
 /* Relays to internal calls to malloc/free from realloc, memalign etc */
 

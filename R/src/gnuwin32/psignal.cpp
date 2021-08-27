@@ -26,12 +26,13 @@ extern int UserBreak;
 #endif
 
 /* Signal groupings ======================================================== */
-#define SIGNAL_DEFAULT_EXIT         case SIGABRT:               \
-				    case SIGFPE:                \
-				    case SIGILL:                \
-				    case SIGINT:                \
-				    case SIGSEGV:               \
-				    case SIGTERM:
+#define SIGNAL_DEFAULT_EXIT \
+	case SIGABRT:           \
+	case SIGFPE:            \
+	case SIGILL:            \
+	case SIGINT:            \
+	case SIGSEGV:           \
+	case SIGTERM:
 
 #define IS_SIGNAL(a)        ( ((a) > 0 ) &&  ((a) < NSIG))
 

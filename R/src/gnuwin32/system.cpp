@@ -206,8 +206,7 @@ static char *tbuf;
 static  int tlen, thist, lineavailable;
 
  /* Fill a text buffer with user typed console input. */
-int
-R_ReadConsole(const char *prompt, unsigned char *buf, int len,
+int R_ReadConsole(const char *prompt, unsigned char *buf, int len,
 	      int addtohistory)
 {
     R_ProcessEvents();
