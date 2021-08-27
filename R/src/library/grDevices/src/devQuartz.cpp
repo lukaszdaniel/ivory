@@ -1568,10 +1568,10 @@ static double darwin_version() {
 #include <servers/bootstrap.h>
 
 /* even as of Darwin 9 there is no entry for bootstrap_info in bootrap headers */
-extern kern_return_t bootstrap_info(mach_port_t , /* bootstrap port */
-                                    name_array_t*, mach_msg_type_number_t*,  /* service */
-                                    name_array_t*, mach_msg_type_number_t*,  /* server */
-                                    bool_array_t*, mach_msg_type_number_t*); /* active */
+extern "C" kern_return_t bootstrap_info(mach_port_t,                               /* bootstrap port */
+                                        name_array_t *, mach_msg_type_number_t *,  /* service */
+                                        name_array_t *, mach_msg_type_number_t *,  /* server */
+                                        bool_array_t *, mach_msg_type_number_t *); /* active */
 
 /* returns 1 if window server session service
    (com.apple.windowserver.session) is present in the boostrap
