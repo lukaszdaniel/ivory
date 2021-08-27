@@ -545,15 +545,15 @@ __attribute__((constructor)) static void RQ_init() {
 }
 #define CGFontGetGlyphsForUnichars RQFontGetGlyphsForUnichars
 /* and some missing declarations */
-extern CGFontRef CGFontCreateWithName(CFStringRef);
-extern bool CGFontGetGlyphAdvances(CGFontRef font, const CGGlyph glyphs[], size_t count, int advances[]);
-extern int CGFontGetUnitsPerEm(CGFontRef font);
-extern bool CGFontGetGlyphBBoxes(CGFontRef font, const CGGlyph glyphs[], size_t count, CGRect bboxes[]);
+extern "C" CGFontRef CGFontCreateWithName(CFStringRef);
+extern "C" bool CGFontGetGlyphAdvances(CGFontRef font, const CGGlyph glyphs[], size_t count, int advances[]);
+extern "C" int CGFontGetUnitsPerEm(CGFontRef font);
+extern "C" bool CGFontGetGlyphBBoxes(CGFontRef font, const CGGlyph glyphs[], size_t count, CGRect bboxes[]);
 #else
-extern void CGFontGetGlyphsForUnichars(CGFontRef, const UniChar[], CGGlyph[], size_t);
+extern "C" void CGFontGetGlyphsForUnichars(CGFontRef, const UniChar[], CGGlyph[], size_t);
 #endif
 
-extern CGFontRef CGContextGetFont(CGContextRef);
+extern "C" CGFontRef CGContextGetFont(CGContextRef);
 
 #define DEVDESC pDevDesc dd
 #define CTXDESC const pGEcontext gc, pDevDesc dd
