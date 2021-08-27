@@ -91,8 +91,8 @@ static QuartzFunctions_t *qf;
     @try {
 	view = [[QuartzCocoaView alloc] initWithFrame: rect andInfo: info];
 	window = [[NSWindow alloc] initWithContentRect: rect
-					     styleMask: NSTitledWindowMask|NSWindowStyleMaskClosable|
-				   NSMiniaturizableWindowMask|NSWindowStyleMaskResizable//|NSTexturedBackgroundWindowMask
+					     styleMask: NSWindowStyleMaskTitled|NSWindowStyleMaskClosable|
+				   NSWindowStyleMaskMiniaturizable|NSWindowStyleMaskResizable//|NSTexturedBackgroundWindowMask
 					       backing:NSBackingStoreBuffered defer:NO];
 	NSColor *canvasColor = [view canvasColor];
 	[window setBackgroundColor:canvasColor ? canvasColor : [NSColor colorWithCalibratedRed:1.0 green:1.0 blue:1.0 alpha:0.5]];
@@ -914,8 +914,8 @@ QuartzDesc_t QuartzCocoa_DeviceCreate(void *dd, QuartzFunctions_t *fn, QuartzPar
 	return NULL;
     }
 
-    dev = static_cast<QuartzCocoaDevice *>(malloc(sizeof(QuartzCocoaDevice)));
-    if (dev == NULL) error(_("allocation failure in QuartzCocoa_DeviceCreate"));
+    dev = (QuartzCocoaDevice *) malloc(sizeof(QuartzCocoaDevice));
+    if (dev == NULL) error("allocation failure in QuartzCocoa_DeviceCreate()");
     memset(dev, 0, sizeof(QuartzCocoaDevice));
 
     QuartzBackend_t qdef = {
