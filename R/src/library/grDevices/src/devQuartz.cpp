@@ -300,7 +300,7 @@ void* QuartzDevice_GetSnapshot(QuartzDesc_t desc, int last)
     return (snap == R_NilValue) ? 0 : snap;
 }
 
-void QuartzDevice_RestoreSnapshot(QuartzDesc_t desc, void* snap)
+void QuartzDevice_RestoreSnapshot(QuartzDesc_t desc, void *snap)
 {
     QuartzDesc *qd = (QuartzDesc*) desc;
     pGEDevDesc gd  = GEgetDevice(ndevNumber(qd->dev));
@@ -317,7 +317,7 @@ void QuartzDevice_RestoreSnapshot(QuartzDesc_t desc, void* snap)
 
 static int quartz_embedding = 0;
 
-static void* QuartzDevice_SetParameter(QuartzDesc_t desc, const char *key, void *value)
+static void *QuartzDevice_SetParameter(QuartzDesc_t desc, const char *key, void *value)
 {
     if (desc) { /* backend-specific? pass it on */
 	QuartzDesc *qd = (QuartzDesc*) desc;
@@ -598,7 +598,7 @@ static ATSFontRef RQuartz_CacheGetFont(const char *family, int face) {
 
 static void RQuartz_CacheAddFont(const char *family, int face, ATSFontRef font) {
     if (font_cache_tail->fonts >= max_fonts_per_block)
-        font_cache_tail = font_cache_tail->next = (font_cache_t*) calloc(1, sizeof(font_cache_t));
+        font_cache_tail = font_cache_tail->next = static_cast<font_cache_t *>(calloc(1, sizeof(font_cache_t)));
     {
         int i = font_cache_tail->fonts;
         font_cache_tail->e[i].font = font;
@@ -663,7 +663,13 @@ CGFontRef RQuartz_Font(CTXDESC)
         atsFont = RQuartz_CacheGetFont(fontName, 0); /* face is 0 because we are passing a true font name */
         if (!atsFont) { /* not in the cache, get it */
             CFStringRef cfFontName = CFStringCreateWithCString(nullptr, fontName, kCFStringEncodingUTF8);
+#if FALSE
             atsFont = CTFontCreateWithName(cfFontName, 12.0f, NULL);
+#else
+            atsFont = ATSFontFindFromName(cfFontName, kATSOptionFlagsDefault);
+            if (!atsFont)
+                atsFont = ATSFontFindFromPostScriptName(cfFontName, kATSOptionFlagsDefault);
+#endif
             CFRelease(cfFontName);
             if (!atsFont) {
                 warning(_("font \"%s\" could not be found for family \"%s\""), fontName, fontFamily);
@@ -690,19 +696,32 @@ CGFontRef RQuartz_Font(CTXDESC)
                 if (fontFace == 2 || fontFace == 4) strcat(compositeFontName, " Bold");
                 if (fontFace == 3 || fontFace == 4) strcat(compositeFontName, " Italic");
                 CFStringRef cfFontName = CFStringCreateWithCString(nullptr, compositeFontName, kCFStringEncodingUTF8);
+#if FALSE
                 atsFont = CTFontCreateWithName(cfFontName, 12.0f, NULL);
+#else
+                atsFont = ATSFontFindFromName(cfFontName, kATSOptionFlagsDefault);
+                if (!atsFont) atsFont = ATSFontFindFromPostScriptName(cfFontName, kATSOptionFlagsDefault);
+#endif
                 CFRelease(cfFontName);
                 if (!atsFont) {
                     if (fontFace == 1) { /* more guessing - fontFace == 1 may need Regular or Roman */
                         strcat(compositeFontName," Regular");
                         cfFontName = CFStringCreateWithCString(nullptr, compositeFontName, kCFStringEncodingUTF8);
+#if FALSE
                         atsFont = CTFontCreateWithName(cfFontName, 12.0f, NULL);
+#else
+                        atsFont = ATSFontFindFromName(cfFontName, kATSOptionFlagsDefault);
+#endif
                         CFRelease(cfFontName);
                         if (!atsFont) {
                             strcpy(compositeFontName, fontFamily);
                             strcat(compositeFontName," Roman");
                             cfFontName = CFStringCreateWithCString(nullptr, compositeFontName, kCFStringEncodingUTF8);
+#if FALSE
                             atsFont = CTFontCreateWithName(cfFontName, 12.0f, NULL);
+#else
+                            atsFont = ATSFontFindFromName(cfFontName, kATSOptionFlagsDefault);
+#endif
                             CFRelease(cfFontName);
                         }
                     } else if (fontFace == 3 || fontFace == 4) { /* Oblique is sometimes used instead of Italic (e.g. in Helvetica) */
@@ -710,7 +729,11 @@ CGFontRef RQuartz_Font(CTXDESC)
                         if (fontFace == 4) strcat(compositeFontName, " Bold");
                         strcat(compositeFontName," Oblique");
                         cfFontName = CFStringCreateWithCString(nullptr, compositeFontName, kCFStringEncodingUTF8);
+#if FALSE
                         atsFont = CTFontCreateWithName(cfFontName, 12.0f, NULL);
+#else
+                        atsFont = ATSFontFindFromName(cfFontName, kATSOptionFlagsDefault);
+#endif
                         CFRelease(cfFontName);                    
                     }
                 }
@@ -1234,8 +1257,7 @@ static void RQuartz_Mode(int mode, DEVDESC)
     }
 }
 
-static void
-RQuartz_MetricInfo(int c, const pGEcontext gc,
+static void RQuartz_MetricInfo(int c, const pGEcontext gc,
 		   double *ascent, double *descent, double *width,
 		   pDevDesc dd)
 {
@@ -1326,8 +1348,7 @@ static void RQuartz_releaseMask(SEXP ref, pDevDesc dd) {}
 /* disabled for now until we get to test in on 10.3 #include "qdCarbon.h" */
 
 /* current fake */
-QuartzDesc_t 
-QuartzCarbon_DeviceCreate(pDevDesc dd, QuartzFunctions_t *fn, QuartzParameters_t *par)
+QuartzDesc_t QuartzCarbon_DeviceCreate(pDevDesc dd, QuartzFunctions_t *fn, QuartzParameters_t *par)
 {
     return nullptr;
 }
@@ -1337,8 +1358,7 @@ QuartzCarbon_DeviceCreate(pDevDesc dd, QuartzFunctions_t *fn, QuartzParameters_t
 /* C version of the Quartz call (experimental)
    Quartz descriptor on success, NULL on failure. 
    If errorCode is not NULL, it will contain the error code on exit */
-QuartzDesc_t 
-Quartz_C(QuartzParameters_t *par, quartz_create_fn_t q_create, int *errorCode)
+QuartzDesc_t Quartz_C(QuartzParameters_t *par, quartz_create_fn_t q_create, int *errorCode)
 {
     if (!q_create || !par) {
 	if (errorCode) errorCode[0] = -4;
@@ -1352,7 +1372,7 @@ Quartz_C(QuartzParameters_t *par, quartz_create_fn_t q_create, int *errorCode)
         {
 	    const char *devname = "quartz_off_screen";
 	    /* FIXME: check this allocation */
-            pDevDesc dev    = calloc(1, sizeof(DevDesc));
+            pDevDesc dev    = static_cast<pDevDesc>(calloc(1, sizeof(DevDesc)));
 
             if (!dev) {
 		if (errorCode) errorCode[0] = -2;
@@ -1412,7 +1432,7 @@ SEXP Quartz(SEXP args)
     height    = ARG(asReal,args);
     ps        = ARG(asReal,args);
     family    = CHAR(STRING_ELT(CAR(args), 0)); args = CDR(args);
-    antialias = ARG(asLogical,args);
+    antialias = Rboolean(Rf_asLogical(CAR(args))); args = CDR(args)
     title     = CHAR(STRING_ELT(CAR(args), 0)); args = CDR(args);
     bgs       = CAR(args); args = CDR(args);
     bg        = RGBpar(bgs, 0);
@@ -1459,7 +1479,7 @@ SEXP Quartz(SEXP args)
     R_GE_checkVersionOrDie(R_GE_version);
     R_CheckDeviceAvailable();
     BEGIN_SUSPEND_INTERRUPTS {
-	pDevDesc dev = calloc(1, sizeof(DevDesc));
+	pDevDesc dev = static_cast<pDevDesc>(calloc(1, sizeof(DevDesc)));
 
 	if (!dev)
 	    error(_("unable to create device description"));
@@ -1620,7 +1640,7 @@ static int has_wss() {
 	    CFTypeRef obj = CFDictionaryGetValue(dict, CFSTR("kCGSSessionOnConsoleKey"));
 	    if (obj && CFGetTypeID(obj) == CFBooleanGetTypeID()) {
 		/* even if this session is active, we don't use Quartz for SSH connections */
-		if (CFBooleanGetValue(obj) && (!getenv("SSH_CONNECTION") || getenv("SSH_CONNECTION")[0] == 0))
+		if (CFBooleanGetValue(static_cast<CFBooleanRef>(obj)) && (!getenv("SSH_CONNECTION") || getenv("SSH_CONNECTION")[0] == 0))
 		    res = 1;
 	    }
 	    CFRelease(dict);
