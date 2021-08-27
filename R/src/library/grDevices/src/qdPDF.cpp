@@ -90,7 +90,7 @@ QuartzDesc_t QuartzPDF_DeviceCreate(void *dd, QuartzFunctions_t *fn, QuartzParam
 
     if ((!par->file || ! *par->file)) par->file = "Rplots.pdf";
 
-    if (par->parv) dev->data = const_cast<CFMutableDataRef>(CFRetain((CFTypeRef) par->parv)); /* parv if set is CFMutableDataRef to write to */
+    if (par->parv) dev->data = (CFMutableDataRef) CFRetain((CFTypeRef) par->parv); /* parv if set is CFMutableDataRef to write to */
     else if (par->file && *par->file) {
         CFStringRef path = CFStringCreateWithBytes(kCFAllocatorDefault, (UInt8*) par->file, strlen(par->file), kCFStringEncodingUTF8, FALSE);
         if (!path || !(dev->url = CFURLCreateWithFileSystemPath (nullptr, path, kCFURLPOSIXPathStyle, false))) {
