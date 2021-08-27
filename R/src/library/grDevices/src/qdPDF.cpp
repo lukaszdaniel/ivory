@@ -73,6 +73,7 @@ void QuartzPDF_Close(QuartzDesc_t dev, void *userInfo)
     free(qpd);
 }
 
+extern "C"
 QuartzDesc_t QuartzPDF_DeviceCreate(void *dd, QuartzFunctions_t *fn, QuartzParameters_t *par)
 {
     QuartzDesc_t ret = nullptr;
