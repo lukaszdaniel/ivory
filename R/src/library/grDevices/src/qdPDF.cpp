@@ -73,8 +73,7 @@ void QuartzPDF_Close(QuartzDesc_t dev, void *userInfo)
     free(qpd);
 }
 
-QuartzDesc_t
-QuartzPDF_DeviceCreate(void *dd, QuartzFunctions_t *fn, QuartzParameters_t *par)
+QuartzDesc_t QuartzPDF_DeviceCreate(void *dd, QuartzFunctions_t *fn, QuartzParameters_t *par)
 {
     QuartzDesc_t ret = nullptr;
     double *dpi = par->dpi;
@@ -113,7 +112,7 @@ QuartzPDF_DeviceCreate(void *dd, QuartzFunctions_t *fn, QuartzParameters_t *par)
 	    values[numK] = CFStringCreateWithBytes(kCFAllocatorDefault, (UInt8*) par->title, strlen(par->title), kCFStringEncodingUTF8, FALSE);
 	    numK++;
 	}
-	ai = CFDictionaryCreate(0, (const void*) keys, (const void*) values, numK, &kCFTypeDictionaryKeyCallBacks, &kCFTypeDictionaryValueCallBacks);
+	ai = CFDictionaryCreate(0, (const void**) keys, (const void*) values, numK, &kCFTypeDictionaryKeyCallBacks, &kCFTypeDictionaryValueCallBacks);
 	while (numK) CFRelease(values[--numK]);
     }
 
@@ -151,7 +150,7 @@ QuartzPDF_DeviceCreate(void *dd, QuartzFunctions_t *fn, QuartzParameters_t *par)
 	nullptr,	/* state */
 	nullptr,	/* par */
 	nullptr,   /* sync */
-        nullptr,   /* cap */
+	nullptr,   /* cap */
     };
 
     if (!(ret = qf->Create(dd, &qdef)))
