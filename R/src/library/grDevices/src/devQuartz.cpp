@@ -1348,6 +1348,7 @@ static void RQuartz_releaseMask(SEXP ref, pDevDesc dd) {}
 /* disabled for now until we get to test in on 10.3 #include "qdCarbon.h" */
 
 /* current fake */
+extern "C"
 QuartzDesc_t QuartzCarbon_DeviceCreate(pDevDesc dd, QuartzFunctions_t *fn, QuartzParameters_t *par)
 {
     return nullptr;

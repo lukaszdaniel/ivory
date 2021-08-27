@@ -123,6 +123,7 @@ void QuartzBitmap_Close(QuartzDesc_t dev, void *userInfo)
     free(qbd);
 }
 
+extern "C"
 QuartzDesc_t QuartzBitmap_DeviceCreate(void *dd, QuartzFunctions_t *fn, QuartzParameters_t *par)
 {
     /* In the case of a zero length string we default to PNG presently. This
@@ -148,14 +149,14 @@ QuartzDesc_t QuartzBitmap_DeviceCreate(void *dd, QuartzFunctions_t *fn, QuartzPa
         /* QuartzDesc_t qd; */
         /* Allocate sufficient space */
         QuartzBitmapDevice *dev = static_cast<QuartzBitmapDevice *>(malloc(sizeof(QuartzBitmapDevice)+s));
-	if(dev == nullptr) error(_("allocation failure in QuartzBitmap_DeviceCreate"));
+	if(dev == nullptr) error(_("allocation failure in QuartzBitmap_DeviceCreate()"));
         dev->length = (unsigned int) s;
         // dev->uti  = type ? strdup(type) : nullptr;
 	if(type) { // code above forces this
 	    dev->uti = strdup(type);
 	    if(dev->uti == nullptr) {
 		free(dev);
-		error(_("allocation failure in QuartzBitmap_DeviceCreate"));
+		error(_("allocation failure in QuartzBitmap_DeviceCreate()"));
 	    }
 	} else dev->uti = nullptr;
         // dev->path = par->file ? strdup(par->file) : nullptr;
@@ -164,7 +165,7 @@ QuartzDesc_t QuartzBitmap_DeviceCreate(void *dd, QuartzFunctions_t *fn, QuartzPa
 	    if (dev->path == nullptr) {
 		if (dev->uti) free(dev->uti);
 		free(dev);
-		error(_("allocation failure in QuartzBitmap_DeviceCreate"));
+		error(_("allocation failure in QuartzBitmap_DeviceCreate()"));
 	    }
 	} else dev->path = nullptr;
         dev->page = 0;

@@ -868,6 +868,7 @@ static void* QuartzCocoa_Cap(QuartzDesc_t dev, void *userInfo) {
     return (void *) raster;
 }
 
+extern "C"
 QuartzDesc_t QuartzCocoa_DeviceCreate(void *dd, QuartzFunctions_t *fn, QuartzParameters_t *par)
 {
     QuartzDesc_t qd;
