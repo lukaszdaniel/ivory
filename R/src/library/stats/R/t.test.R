@@ -114,11 +114,16 @@ function(x, y = NULL, alternative = c("two.sided", "less", "greater"),
                  else if(!is.null(y)) gettext("difference in means", domain = "R-stats")
                  else gettext("mean", domain = "R-stats")
     attr(CINT,"conf.level") <- conf.level
-    if(paired || !is.null(y)) {
+    if(paired) {
     alt.name <- switch(alternative,
                            two.sided = gettextf("true difference in means is not equal to %s", mu, domain = "R-stats"),
                            less = gettextf("true difference in means is less than %s", mu, domain = "R-stats"),
                            greater = gettextf("true difference in means is greater than %s", mu, domain = "R-stats"))
+   } else if (!is.null(y)) {
+    alt.name <- switch(alternative,
+                           two.sided = gettextf("true mean difference is not equal to %s", mu, domain = "R-stats"),
+                           less = gettextf("true mean difference is less than %s", mu, domain = "R-stats"),
+                           greater = gettextf("true mean difference is greater than %s", mu, domain = "R-stats"))
    } else {
     alt.name <- switch(alternative,
                            two.sided = gettextf("true mean is not equal to %s", mu, domain = "R-stats"),
