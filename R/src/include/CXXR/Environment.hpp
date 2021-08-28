@@ -530,11 +530,11 @@ extern "C"
     */
    extern SEXP R_BaseNamespace;
 
-   /** @brief Is this a CXXR::Environment?
+   /** @brief Is this an environment?
     *
-    * @param s Pointer to an RObject.
+    * @param s Pointer to CXXR::RObject.
     *
-    * @return TRUE iff the RObject pointed to by s is an environment.
+    * @return TRUE iff the RObject pointed to by \a s is an environment.
     */
    Rboolean Rf_isEnvironment(SEXP s);
 

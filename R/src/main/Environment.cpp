@@ -148,8 +148,8 @@ namespace CXXR
     void LS(RObject *s)
     {
 #if CXXR_TRUE
-		std::cerr << "LS(...) not yet implemented" << std::endl;
-		abort();
+        std::cerr << "LS(...) not yet implemented" << std::endl;
+        abort();
 #else
         const Environment *env = SEXP_downcast<Environment *>(s);
         const Frame *frame = env->frame();
@@ -171,6 +171,11 @@ namespace CXXR
 SEXP R_EmptyEnv = nullptr;
 SEXP R_BaseEnv = nullptr;
 SEXP R_GlobalEnv = nullptr;
+
+Rboolean Rf_isEnvironment(SEXP s)
+{
+    return Rboolean(s && TYPEOF(s) == ENVSXP);
+}
 
 SEXP FRAME(SEXP x)
 {

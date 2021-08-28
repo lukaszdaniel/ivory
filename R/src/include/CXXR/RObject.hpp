@@ -705,19 +705,19 @@ namespace CXXR
         virtual ~RObject();
     };
 
-	// Template specializations of ElementTraits:
+    // Template specializations of ElementTraits:
     namespace ElementTraits
-	{
-		template <typename T>
-		struct Duplicate<T *>
-		{
-			T *operator()(T *value) const
-			{
+    {
+        template <typename T>
+        struct Duplicate<T *>
+        {
+            T *operator()(T *value) const
+            {
                 // TODO: This always performs deep copy. Can we also have SHALLOW copy as well?
-				return RObject::clone(value, RObject::Duplicate::DEEP);
-			}
-		};
-	} // namespace ElementTraits
+                return RObject::clone(value, RObject::Duplicate::DEEP);
+            }
+        };
+    } // namespace ElementTraits
 
     template <class T>
     RObject::Handle<T>::Handle(const Handle<T> &pattern, Duplicate deep) : GCEdge<T>(pattern)
@@ -1033,23 +1033,6 @@ extern "C"
      * Here, use char / CHAR() instead of the slower more general Rf_translateChar()
      */
     Rboolean Rf_inherits(SEXP s, const char *name);
-
-    Rboolean Rf_isSymbol(SEXP s);
-    Rboolean Rf_isLogical(SEXP s);
-    Rboolean Rf_isReal(SEXP s);
-    Rboolean Rf_isComplex(SEXP s);
-    Rboolean Rf_isExpression(SEXP s);
-    Rboolean Rf_isEnvironment(SEXP s);
-    Rboolean Rf_isString(SEXP s);
-
-    /** @brief Is this an object of RAWSXP type?
-     *
-     * @param x Pointer to CXXR::RObject.
-     *
-     * @return true iff \a x is of RAWSXP type.  Returns false if \a x
-     * is 0.
-     */
-    Rboolean Rf_isRaw(SEXP s);
 
     int ALTREP(SEXP x);
     int IS_SCALAR(SEXP x, SEXPTYPE type);

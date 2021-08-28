@@ -92,13 +92,13 @@ jobs:
       env:
         PDFLATEX: ${{github.workspace}}/.github/workflows/dummy
 
-    - name: Check
-      run: |
-        cd R
-        make check-devel
-      env:
-        PDFLATEX: ${{github.workspace}}/.github/workflows/dummy
+    #- name: Check
+    #  run: |
+    #    cd R
+    #    make check-devel
+    #  env:
+    #    PDFLATEX: ${{github.workspace}}/.github/workflows/dummy
 
-    - name: Print failed tests
-      if: always()
-      run: tail -n100 R/tests/*.fail || true
+    #- name: Print failed tests
+    #  if: always()
+    #  run: tail -n100 R/tests/*.fail || true

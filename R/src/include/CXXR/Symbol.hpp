@@ -388,8 +388,7 @@ namespace CXXR
          */
         static Symbol *createUnnamedSymbol();
 
-   protected:
-
+    protected:
     private:
         // static GCRoot<Symbol> s_missing_arg;
         // static GCRoot<Symbol> s_restart_token;
@@ -539,12 +538,11 @@ extern "C"
 #include <CXXR/PredefinedSymbols.hpp>
 #undef PREDEFINED_SYMBOL
 
-    /** @brief Test if SYMSXP.
+    /** @brief Is this a symbol?
      *
-     * @param s Pointer to a CXXR::RObject.
+     * @param s Pointer to CXXR::RObject.
      *
-     * @return TRUE iff s points to a CXXR::RObject with ::SEXPTYPE
-     *         SYMSXP.
+     * @return TRUE iff the RObject pointed to by \a s is a symbol.
      */
     Rboolean Rf_isSymbol(SEXP s);
 

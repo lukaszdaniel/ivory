@@ -106,6 +106,11 @@ namespace CXXR
     } while (0)
 #endif
 
+Rboolean Rf_isComplex(SEXP s)
+{
+    return Rboolean(s && TYPEOF(s) == CPLXSXP);
+}
+
 Rcomplex *COMPLEX(SEXP x)
 {
     if (TYPEOF(x) != CPLXSXP)

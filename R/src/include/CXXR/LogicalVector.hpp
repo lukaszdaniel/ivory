@@ -73,10 +73,11 @@ namespace R
 
 extern "C"
 {
-    /**
-     * @param s Pointer to a CXXR::RObject.
+    /** @brief Is this a logical vector?
      *
-     * @return TRUE iff the CXXR::RObject pointed to by \a s is a logical vector.
+     * @param s Pointer to CXXR::RObject.
+     *
+     * @return TRUE iff the RObject pointed to by \a s is a logical vector.
      */
     Rboolean Rf_isLogical(SEXP s);
 

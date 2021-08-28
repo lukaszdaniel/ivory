@@ -430,6 +430,11 @@ SEXP R_UnboundValue = nullptr;
 SEXP R_CurrentExpression = nullptr;
 SEXP R_InBCInterpreter = nullptr;
 
+Rboolean Rf_isSymbol(SEXP s)
+{
+    return Rboolean(s && TYPEOF(s) == SYMSXP);
+}
+
 SEXP PRINTNAME(SEXP x)
 {
     if (!x)

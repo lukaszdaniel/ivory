@@ -146,10 +146,11 @@ namespace CXXR
 
 extern "C"
 {
-    /**
-     * @param s Pointer to a CXXR::RObject.
+    /** @brief Is this an expression vector?
      *
-     * @return TRUE iff the CXXR::RObject pointed to by \a s is an expression.
+     * @param s Pointer to CXXR::RObject.
+     *
+     * @return TRUE iff the RObject pointed to by \a s is an expression vector.
      */
     Rboolean Rf_isExpression(SEXP s);
 

@@ -418,7 +418,7 @@ extern "C"
 	 */
 	extern SEXP R_BlankString;
 
-	/** @brief Access the content of rho::String as a C-style string.
+	/** @brief Access the content of CXXR::String as a C-style string.
 	 *
 	 * @param x \c non-null pointer to a CXXR::String.
 	 *

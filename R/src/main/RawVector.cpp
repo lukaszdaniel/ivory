@@ -106,6 +106,11 @@ namespace CXXR
     } while (0)
 #endif
 
+Rboolean Rf_isRaw(SEXP s)
+{
+    return Rboolean(s && TYPEOF(s) == RAWSXP);
+}
+
 Rbyte *RAW(SEXP x)
 {
     if (TYPEOF(x) != RAWSXP)

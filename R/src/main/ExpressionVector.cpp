@@ -64,6 +64,11 @@ namespace CXXR
 
 // ***** C interface *****
 
+Rboolean Rf_isExpression(SEXP s)
+{
+    return Rboolean(s && TYPEOF(s) == EXPRSXP);
+}
+
 SEXP SET_XVECTOR_ELT(SEXP x, R_xlen_t i, SEXP v)
 {
     if (TYPEOF(x) != EXPRSXP)
@@ -75,7 +80,7 @@ SEXP SET_XVECTOR_ELT(SEXP x, R_xlen_t i, SEXP v)
         Rf_error(_("attempt to set index %ld/%ld in 'SET_XVECTOR_ELT()' function"), (long long)i, (long long)XLENGTH(x));
 
     // EXPRVECTOR_ELT(x, i) = v;
-    ExpressionVector *ev = CXXR::SEXP_downcast<ExpressionVector *>(x, false);
+    ExpressionVector *ev = SEXP_downcast<ExpressionVector *>(x, false);
     (*ev)[i] = v;
     return v;
 }
@@ -87,6 +92,6 @@ SEXP XVECTOR_ELT(SEXP x, R_xlen_t i)
         Rf_error(_("'%s' function can only be applied to an expression, not a '%s'"), "XVECTOR_ELT()",
                  Rf_type2char(TYPEOF(x)));
     // return EXPRVECTOR_ELT(x, i);
-    ExpressionVector *ev = CXXR::SEXP_downcast<CXXR::ExpressionVector *>(x, false);
+    ExpressionVector *ev = SEXP_downcast<CXXR::ExpressionVector *>(x, false);
     return (*ev)[i];
 }

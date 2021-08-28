@@ -65,10 +65,10 @@ static bool add_point(double x, double y, pGEDevDesc dd)
 	    tmp_px = static_cast<double *>(CXXR_alloc(tmp_n, sizeof(double)));
 	    tmp_py = static_cast<double *>(CXXR_alloc(tmp_n, sizeof(double)));
 	} else {
-	    tmp_px = reinterpret_cast<double *>(S_realloc((char *) xpoints,
+	    tmp_px = reinterpret_cast<double *>(S_realloc(reinterpret_cast<char *>(xpoints),
 					  tmp_n, max_points,
 					  sizeof(double)));
-	    tmp_py = reinterpret_cast<double *>(S_realloc((char *) ypoints,
+	    tmp_py = reinterpret_cast<double *>(S_realloc(reinterpret_cast<char *>(ypoints),
 					  tmp_n, max_points,
 					  sizeof(double)));
 	}
@@ -320,7 +320,7 @@ static double step_computing(int k,
   number_of_steps = sqrt(start_to_end_dist)/2;
 
   /* more steps if the curve is high */
-  number_of_steps += (int)((1 + angle_cos)*10);
+  number_of_steps += int((1 + angle_cos)*10);
 
   if (number_of_steps == 0)
     step = 1;

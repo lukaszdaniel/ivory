@@ -91,12 +91,17 @@ namespace CXXR
 
 // ***** C interface *****
 
+Rboolean Rf_isString(SEXP s)
+{
+    return Rboolean(s && TYPEOF(s) == STRSXP);
+}
+
 SEXP *STRING_PTR(SEXP x)
 {
     if (TYPEOF(x) != STRSXP)
         Rf_error(_("'%s' function can only be applied to a character, not a '%s'"),
                  "STRING_PTR()", Rf_type2char(TYPEOF(x)));
-    CXXR::VectorBase::chkzln(x);
+    VectorBase::chkzln(x);
     return STRINGVECTOR_STRING_PTR(x);
 }
 
@@ -105,7 +110,7 @@ const SEXP *STRING_PTR_RO(SEXP x)
     if (TYPEOF(x) != STRSXP)
         Rf_error(_("'%s' function can only be applied to a character, not a '%s'"),
                  "STRING_PTR_RO()", Rf_type2char(TYPEOF(x)));
-    CXXR::VectorBase::chkzln(x);
+    VectorBase::chkzln(x);
     return STRINGVECTOR_STRING_PTR_RO(x);
 }
 
@@ -140,7 +145,7 @@ SEXP STRING_ELT(SEXP x, R_xlen_t i)
         return ALTSTRING_ELT(x, i);
     else
     {
-        SEXP *ps = CXXR::stdvec_dataptr<SEXP>(x);
+        SEXP *ps = stdvec_dataptr<SEXP>(x);
         return ps[i];
     }
 }
@@ -153,7 +158,7 @@ int Rf_stringPositionTr(SEXP string, const char *translatedElement)
     const void *vmax = vmaxget();
     for (int i = 0; i < slen; ++i)
     {
-        bool found = (strcmp(Rf_translateChar(STRING_ELT(string, i)), translatedElement) == 0);
+        bool found = (streql(Rf_translateChar(STRING_ELT(string, i)), translatedElement));
         vmaxset(vmax);
         if (found)
             return i;
@@ -174,8 +179,8 @@ Rboolean Rf_isValidStringF(SEXP x)
 SEXP Rf_ScalarString(SEXP x)
 {
     SEXP ans;
-    CXXR::GCStackRoot<> xx(x);
-    ans = Rf_allocVector(STRSXP, (R_xlen_t)1);
-    SET_STRING_ELT(ans, (R_xlen_t)0, x);
+    GCStackRoot<> xx(x);
+    ans = Rf_allocVector(STRSXP, R_xlen_t(1));
+    SET_STRING_ELT(ans, R_xlen_t(0), x);
     return ans;
 }

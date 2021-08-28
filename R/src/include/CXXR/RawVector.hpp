@@ -92,13 +92,13 @@ namespace R
 
 extern "C"
 {
-    /**
-     * @param s Pointer to an RObject.
+    /** @brief Is this a raw vector?
+     *
+     * @param s Pointer to CXXR::RObject.
      *
      * @return TRUE iff the RObject pointed to by \a s is a raw vector.
      */
     Rboolean Rf_isRaw(SEXP s);
-
     /**
      * @param x Pointer to a CXXR::RawVector (i.e. a RAWSXP).  An error is
      *          generated if \a x is not a non-null pointer to a

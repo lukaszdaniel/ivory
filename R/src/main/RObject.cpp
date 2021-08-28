@@ -460,49 +460,9 @@ Rboolean Rf_isNull(SEXP s)
     return Rboolean(TYPEOF(s) == NILSXP);
 }
 
-Rboolean Rf_isSymbol(SEXP s)
-{
-    return Rboolean(TYPEOF(s) == SYMSXP);
-}
-
-Rboolean Rf_isLogical(SEXP s)
-{
-    return Rboolean(TYPEOF(s) == LGLSXP);
-}
-
-Rboolean Rf_isReal(SEXP s)
-{
-    return Rboolean(TYPEOF(s) == REALSXP);
-}
-
-Rboolean Rf_isComplex(SEXP s)
-{
-    return Rboolean(TYPEOF(s) == CPLXSXP);
-}
-
-Rboolean Rf_isExpression(SEXP s)
-{
-    return Rboolean(TYPEOF(s) == EXPRSXP);
-}
-
-Rboolean Rf_isEnvironment(SEXP s)
-{
-    return Rboolean(TYPEOF(s) == ENVSXP);
-}
-
-Rboolean Rf_isString(SEXP s)
-{
-    return Rboolean(TYPEOF(s) == STRSXP);
-}
-
 Rboolean Rf_isObject(SEXP s)
 {
     return Rboolean(OBJECT(s) != 0);
-}
-
-Rboolean Rf_isRaw(SEXP s)
-{
-    return Rboolean(TYPEOF(s) == RAWSXP);
 }
 
 R_len_t Rf_length(SEXP s)

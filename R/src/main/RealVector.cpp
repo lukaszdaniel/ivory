@@ -106,6 +106,11 @@ namespace CXXR
     } while (0)
 #endif
 
+Rboolean Rf_isReal(SEXP s)
+{
+    return Rboolean(s && TYPEOF(s) == REALSXP);
+}
+
 double *REAL(SEXP x)
 {
     if (TYPEOF(x) != REALSXP)

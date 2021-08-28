@@ -102,8 +102,9 @@ namespace R
 
 extern "C"
 {
-    /**
-     * @param s Pointer to an RObject.
+    /** @brief Is this a real vector?
+     *
+     * @param s Pointer to CXXR::RObject.
      *
      * @return TRUE iff the RObject pointed to by \a s is a real vector.
      */

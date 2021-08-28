@@ -107,6 +107,11 @@ namespace CXXR
     } while (0)
 #endif
 
+Rboolean Rf_isLogical(SEXP s)
+{
+    return Rboolean(s && TYPEOF(s) == LGLSXP);
+}
+
 int *LOGICAL(SEXP x)
 {
     if (TYPEOF(x) != LGLSXP)

@@ -149,10 +149,11 @@ namespace CXXR
 
 extern "C"
 {
-    /**
-     * @param s Pointer to a CXXR::RObject.
+    /** @brief Is this a string vector?
      *
-     * @return TRUE iff the CXXR::RObject pointed to by \a s is a vector of strings.
+     * @param s Pointer to CXXR::RObject.
+     *
+     * @return TRUE iff the RObject pointed to by \a s is a string vector.
      */
     Rboolean Rf_isString(SEXP s);
 
