@@ -29,16 +29,16 @@
  * Class GCManager and associated C-callable functions.
  */
 
-#include <CXXR/GCManager.hpp>
-#include <CXXR/RTypes.hpp>
 #include <cmath>
 #include <iomanip>
 #include <iostream>
 #include <limits>
-#include <R_ext/Print.h>
+#include <CXXR/GCManager.hpp>
+#include <CXXR/RTypes.hpp>
 #include <CXXR/GCNode.hpp>
 #include <CXXR/WeakRef.hpp>
 #include <Defn.h>
+#include <R_ext/Print.h>
 #include <Rinterface.h>
 #include <Localization.h>
 

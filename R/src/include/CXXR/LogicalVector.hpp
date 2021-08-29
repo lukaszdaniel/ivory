@@ -49,6 +49,14 @@ namespace CXXR
         typedef LogicalVector type;
     };
 
+    template <>
+    template <typename U>
+    LogicalVector *LogicalVector::createScalar(const U &value)
+    {
+        int value_as_int = static_cast<int>(Logical(value));
+        return static_cast<LogicalVector *>(Rf_ScalarLogical(value_as_int));
+    }
+
     inline int *LOGICALVECTOR_LOGICAL(RObject *x)
     {
         return static_cast<int *>(DATAPTR(x));
@@ -67,6 +75,19 @@ namespace CXXR
 
 namespace R
 {
+
+    /** @brief Create a unit-length LogicalVector containing FALSE.
+     *
+     * @return a unit-length LogicalVector containing FALSE.
+     */
+    SEXP mkFalse();
+
+    /** @brief Create a unit-length LogicalVector containing TRUE.
+     *
+     * @return a unit-length LogicalVector containing TRUE.
+     */
+    SEXP mkTrue();
+
     int SCALAR_LVAL(SEXP x);
     void SET_SCALAR_LVAL(SEXP x, int v);
 } // namespace R
@@ -105,6 +126,7 @@ extern "C"
     const int *LOGICAL_OR_NULL(SEXP x);
     void SET_LOGICAL_ELT(SEXP x, R_xlen_t i, int v);
     int LOGICAL_ELT(SEXP x, R_xlen_t i);
+
     SEXP Rf_ScalarLogical(int x);
 } // extern "C"
 

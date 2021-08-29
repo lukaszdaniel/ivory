@@ -80,11 +80,12 @@ namespace CXXR
 
     RObject::RObject(const RObject &pattern, Duplicate deep)
         : GCNode(), m_type(pattern.m_type), m_scalar(pattern.m_scalar), m_has_class(pattern.m_has_class), m_alt(pattern.m_alt), /*m_gpbits(pattern.m_gpbits),*/
-          m_trace(false), m_spare(false), m_named(0), m_extra(0), m_s4_object(pattern.m_s4_object),
-          m_active_binding(false),
-          m_binding_locked(false), m_assignment_pending(false)
+          m_trace(pattern.m_trace), m_spare(pattern.m_spare), m_named(0), m_extra(pattern.m_extra), m_s4_object(pattern.m_s4_object),
+          m_active_binding(pattern.m_active_binding),
+          m_binding_locked(pattern.m_binding_locked), m_assignment_pending(pattern.m_assignment_pending)
     {
         m_attrib = clone(pattern.m_attrib.get(), deep);
+        maybeTraceMemory(&pattern);
     }
 
     void RObject::cloneAttributes(const RObject &source, Duplicate deep)
@@ -304,6 +305,8 @@ namespace CXXR
         }
         m_binding_locked = on;
     }
+
+    // The implementation of RObject::traceMemory() is in debug.cpp
 } // namespace CXXR
 
 // ***** C interface *****
@@ -372,12 +375,14 @@ void SET_ATTRIB(SEXP x, SEXP v)
 
 void SET_OBJECT(SEXP x, int v)
 {
+    // This is a no-op in CXXR.  The object bit is set based on the class
+    // attribute.
 }
 
-void SET_TYPEOF(SEXP x, SEXPTYPE v)
+void SET_TYPEOF(SEXP x, SEXPTYPE dest_type)
 {
     if (x)
-        x->setSexpType(v);
+        x->setSexpType(dest_type);
 }
 
 void SET_NAMED(SEXP x, int v)
@@ -457,12 +462,26 @@ void R::RAISE_NAMED(SEXP x, int n)
 
 Rboolean Rf_isNull(SEXP s)
 {
-    return Rboolean(TYPEOF(s) == NILSXP);
+    return Rboolean(!s || TYPEOF(s) == NILSXP);
 }
 
 Rboolean Rf_isObject(SEXP s)
 {
     return Rboolean(OBJECT(s) != 0);
+}
+
+void maybeTraceMemory1(SEXP dest, SEXP src)
+{
+#ifdef R_MEMORY_PROFILING
+    dest->maybeTraceMemory(src);
+#endif
+}
+
+void maybeTraceMemory2(SEXP dest, SEXP src1, SEXP src2)
+{
+#ifdef R_MEMORY_PROFILING
+    dest->maybeTraceMemory(src1, src2);
+#endif
 }
 
 R_len_t Rf_length(SEXP s)

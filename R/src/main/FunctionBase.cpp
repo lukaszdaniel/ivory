@@ -29,9 +29,9 @@
  * Class FunctionBase and associated C interface functions.
  */
 
-#include <CXXR/FunctionBase.hpp>
-
 #include <cstdarg>
+#include <CXXR/FunctionBase.hpp>
+#include <CXXR/Expression.hpp>
 #include <R_ext/Print.h>
 #include <Rinternals.h>
 
@@ -48,20 +48,28 @@ namespace CXXR
         const auto &SET_RDEBUGptr = SET_RDEBUG;
         const auto &SET_RTRACEptr = SET_RTRACE;
     } // namespace ForceNonInline
+
+    bool FunctionBase::s_tracing_enabled = true;
+
+    void FunctionBase::reportCall(const Expression *call)
+    {
+        Rprintf("trace: ");
+        Rf_PrintValue(const_cast<Expression *>(call));
+    }
 } // namespace CXXR
 
 // ***** C interface *****
 
 int RTRACE(SEXP x)
 {
-    return x && x->trace();
+    return x && x->memoryTraced();
 }
 
 void SET_RTRACE(SEXP x, int v)
 {
     if (!x)
         return;
-    x->setTrace(v);
+    x->setMemoryTracing(v);
 }
 
 int RDEBUG(SEXP x)

@@ -37,12 +37,31 @@
 
 namespace CXXR
 {
+    class Expression;
 
     /** @brief Base class for function types.
      */
     class FunctionBase : public RObject
     {
     public:
+        /** @brief Enable/disable function tracing.
+         *
+         * @param on True iff function tracing is to be enabled.
+         */
+        static void enableTracing(bool on)
+        {
+            s_tracing_enabled = on;
+        }
+
+        /** @brief If function tracing currently enabled?
+         *
+         * @return true iff function tracing is currently enabled.
+         */
+        static bool tracingEnabled()
+        {
+            return s_tracing_enabled;
+        }
+
         /** @brief Is debugging enabled?
          *
          * @return true iff debugging is currently enabled for this
@@ -81,6 +100,19 @@ namespace CXXR
             return st == CLOSXP || st == BUILTINSXP || st == SPECIALSXP;
         }
 
+        /** @brief Produce a tracing report if appropriate.
+         *
+         * A tracing report is generated if this function is set to be
+         * traced and tracing in general is enabled.
+         *
+         * @param call The call to this function to be reported.
+         */
+        void maybeTrace(const Expression *call) const
+        {
+            if (debugging() && tracingEnabled())
+                reportCall(call);
+        }
+
         /** @brief The name by which this type is known in R.
          *
          * @return the name by which this type is known in R.
@@ -113,7 +145,10 @@ namespace CXXR
         virtual ~FunctionBase(){};
 
     private:
-        bool m_debug;
+        static bool s_tracing_enabled;
+        bool m_debug; /* function tracing */
+
+        static void reportCall(const Expression *call);
     };
 } // namespace CXXR
 

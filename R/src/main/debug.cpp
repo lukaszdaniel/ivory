@@ -207,9 +207,7 @@ void R::memtrace_report(void *old, void *_new)
 #else
 static void memtrace_stack_dump(void)
 {
-    RCNTXT *cptr;
-
-    for (cptr = R_GlobalContext; cptr; cptr = cptr->nextContext())
+    for (RContext *cptr = R_GlobalContext; cptr; cptr = cptr->nextContext())
     {
         if ((cptr->getCallFlag() & (CTXT_FUNCTION | CTXT_BUILTIN)) && TYPEOF(cptr->getCall()) == LANGSXP)
         {
@@ -229,6 +227,33 @@ void R::memtrace_report(void *old, void *_new)
     memtrace_stack_dump();
 }
 
+void RObject::traceMemory(const RObject *src1, const RObject *src2,
+                          const RObject *src3)
+{
+    setMemoryTracing(true);
+    Rprintf("tracemem[");
+    bool needs_comma = false;
+    if (src1->memoryTraced())
+    {
+        Rprintf("%p", src1);
+        needs_comma = true;
+    }
+    if (src2 && src2->memoryTraced())
+    {
+        if (needs_comma)
+            Rprintf(", ");
+        Rprintf("%p", src2);
+        needs_comma = true;
+    }
+    if (src3 && src3->memoryTraced())
+    {
+        if (needs_comma)
+            Rprintf(", ");
+        Rprintf("%p", src3);
+    }
+    Rprintf(" -> %p]: ", this);
+    memtrace_stack_dump();
+}
 #endif /* R_MEMORY_PROFILING */
 
 HIDDEN SEXP do_retracemem(SEXP call, SEXP op, SEXP args, SEXP rho)

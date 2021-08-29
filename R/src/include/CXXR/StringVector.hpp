@@ -96,6 +96,13 @@ namespace CXXR
         {
         }
 
+        static StringVector *createScalar(CachedString *cs)
+        {
+            StringVector *ans = GCNode::expose(new StringVector(1));
+            (*ans)[0] = cs;
+            return ans;
+        }
+
         // Virtual function of RObject:
         StringVector *clone(Duplicate deep) const override;
 
@@ -134,10 +141,7 @@ namespace CXXR
     inline StringVector *asStringVector(const std::string &str, cetype_t encoding = CE_UTF8)
     {
         GCStackRoot<CachedString> cs(CachedString::obtain(str, encoding));
-        StringVector *ans = GCNode::expose(new StringVector(1));
-        (*ans)[0] = cs;
-        return ans;
-        // return StringVector::createScalar(cs);
+        return StringVector::createScalar(cs);
     }
 
     /** @brief (For debugging.)
