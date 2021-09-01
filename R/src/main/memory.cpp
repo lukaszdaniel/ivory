@@ -135,18 +135,6 @@
 using namespace std;
 using namespace R;
 using namespace CXXR;
-
-#if defined(_WIN32)
-extern void *Rm_malloc(size_t n);
-extern void *Rm_calloc(size_t n_elements, size_t element_size);
-extern void Rm_free(void *p);
-extern void *Rm_realloc(void *p, size_t n);
-#define calloc Rm_calloc
-#define malloc Rm_malloc
-#define realloc Rm_realloc
-#define free Rm_free
-#endif
-
 /* malloc uses size_t.  We are assuming here that size_t is at least
    as large as unsigned long.  Changed from int at 1.6.0 to (i) allow
    2-4Gb objects on 32-bit system and (ii) objects limited only by

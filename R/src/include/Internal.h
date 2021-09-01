@@ -548,5 +548,4 @@ SEXP do_sorted_fpass(SEXP call, SEXP op, SEXP args, SEXP env);
 
 } //extern "C"
 
-
 #endif /* not R_INTERNAL_H */

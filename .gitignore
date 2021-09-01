@@ -1,3 +1,4 @@
+.dccache
 *.a
 *.d
 *.o
@@ -143,6 +144,5 @@ R/tests/CXXR/splice_test
 R/tests/CXXR/GCManagertest.out
 R/tests/CXXR/RObject_sizer
 R/tests/CXXR/Allocatortest.out
-.dccache
 R/tests/CXXR/RObject_sizer.out
 R/tests/CXXR2/misc.Rout

@@ -60,6 +60,23 @@
       \code{diff(ylim)} is infinite.
 
       \item \code{nclass.FD()} gains a \code{digits} option.
+
+      \item \R on Windows now uses the system memory allocator.  Doug
+      Lea's allocator was used since \R 1.2.0 to mitigate performance
+      limitations seen with system allocators on earlier versions of
+      Windows.
+
+      \code{memory.limit()} and \code{memory.size()} are now stubs on
+      Windows (as on Unix-alikes).
+
+      \item The R Mathlib internal function \code{bd0()}, indirectly called
+      from a dozen of probability density and distribution functions such
+      as \code{dpois()}, \code{dbinom()}, \code{dgamma()}, \code{pgamma()} etc,
+      has been complemented by a more sophisticated, (mostly) more accurate
+      \code{ebd0()}, currently called only by internal \code{dpois_raw()}
+      improving accuracy for \R level \code{dpois()} and potentially others
+      calling it such as \code{dnbinom()}, \code{dgamma()} or \code{pgamma()}.
+      (Thanks to Morten Welinder's \PR{15628}.)
     }
   }
 
@@ -84,7 +101,7 @@
       completes an \command{R CMD build} change in \R 3.0.0 and affects
       packages built before \R 3.0.2. Such packages should be re-made
       with \command{R CMD build} to have the tangled \R code of vignettes
-      shipped with the tarball. 
+      shipped with the tarball.
     }
   }
 
@@ -146,6 +163,11 @@
       warning for \samp{http://} and \samp{https://} URIs for both
       \code{download.file()} and \code{url()}. (It is no longer the default
       method.)
+
+      \item On Windows, the command-line option \option{--max-mem-size}
+      and environment variable \env{R_MAX_MEM_SIZE} are defunct.  The
+      memory allocation limit was important for 32-bit Windows builds,
+      but these are no longer supported.
     }
   }
 
@@ -208,7 +230,7 @@
       \item The undocumented limit of 4095 bytes on messages from the
       S-compatibility macros \code{PROBLEM} and \code{MESSAGE} is now
       documented and longer messages will be silently truncated rather
-      than potentially causing segfaults. 
+      than potentially causing segfaults.
     }
   }
 
@@ -231,7 +253,11 @@
       \item \code{hist(<Date>, ...)} and \code{hist(<POSIXt>, ...)}
       no longer pass arguments for \code{rect()} (such as \code{col} and
       \code{density}) to \code{axis()}.  (Thanks to Sebastian Meyer's
-      \PR{18171}.)      
+      \PR{18171}.)
+
+      \item Setting the RNG to \code{"Marsaglia-Multicarry"} e.g., by
+      \code{RNGkind()}, now warns in more places, thanks to
+      André Gillibert's report and patch in \PR{18168}.
     }
   }
 }

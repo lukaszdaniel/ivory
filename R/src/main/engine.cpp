@@ -2944,7 +2944,7 @@ Rboolean GEcheckState(pGEDevDesc dd)
 
 Rboolean GErecording(SEXP call, pGEDevDesc dd)
 {
-    return (Rboolean)(call != R_NilValue && dd->recordGraphics);
+    return (Rboolean) (call != R_NilValue && dd->recordGraphics);
 }
 
 /****************************************************************

@@ -1,6 +1,6 @@
 /*
  *  Mathlib : A C Library of Special Functions
- *  Copyright (C) 1998-2020  The R Core Team
+ *  Copyright (C) 1998-2021  The R Core Team
  *
  *  This program is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -179,6 +179,7 @@ int R_finite(double);
 
 /* always remap internal functions */
 #define bd0       	Rf_bd0
+#define ebd0       	Rf_ebd0
 #define chebyshev_eval	Rf_chebyshev_eval
 #define chebyshev_init	Rf_chebyshev_init
 #define gammalims	Rf_gammalims
@@ -205,6 +206,7 @@ HIDDEN double Rf_stirlerr(double);  /* Stirling expansion "error" */
 HIDDEN double Rf_lfastchoose(double, double);
 
 HIDDEN double Rf_bd0(double, double);
+HIDDEN void Rf_ebd0(double, double, double*, double*);
 
 HIDDEN double Rf_pnchisq_raw(double, double, double, double, double, int, Rboolean, Rboolean);
 HIDDEN double Rf_pgamma_raw(double, double, int, int);

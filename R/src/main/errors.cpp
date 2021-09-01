@@ -96,7 +96,7 @@ static void try_jump_to_restart(void);
 // The next is crucial to the use of NORET attributes.
 NORET static void jump_to_top_ex(Rboolean, Rboolean, Rboolean, Rboolean, Rboolean);
 static void signalInterrupt(void);
-static const char * R_ConciseTraceback(SEXP call, int skip);
+static const char *R_ConciseTraceback(SEXP call, int skip);
 
 /* Interface / Calling Hierarchy :
 
