@@ -364,7 +364,7 @@ int R_system(const char *command)
 #include <crt_externs.h>
 #define environ (*_NSGetEnviron())
 #else
-#include <unistd.h> 
+#include <unistd.h>
 #endif
 
 #ifdef _WIN32

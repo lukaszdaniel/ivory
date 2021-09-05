@@ -1899,7 +1899,7 @@ extern "C"
 		("dummy", &nc, (FC_LEN_T)5);
 	}
 #else
-	void F77_SYMBOL(rwarnc)(char *msg, int *nchar);
+	void F77_SYMBOL(rwarnc)(const char *msg, int *nchar);
 	HIDDEN void dummy54321(void)
 	{
 		int nc = 5;

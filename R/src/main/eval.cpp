@@ -6253,16 +6253,13 @@ inline static void VECSUBASSIGN_PTR(SEXP vec, R_bcstack_t *srhs,
 				switch (TYPEOF(vec))                                        \
 				{                                                           \
 				case REALSXP:                                               \
-					REAL(vec)                                               \
-					[i - 1] = srhs->u.dval;                                 \
+					REAL(vec)[i - 1] = srhs->u.dval;                        \
 					DFVA_NEXT(sx, vec);                                     \
 				case INTSXP:                                                \
-					INTEGER(vec)                                            \
-					[i - 1] = srhs->u.ival;                                 \
+					INTEGER(vec)[i - 1] = srhs->u.ival;                     \
 					DFVA_NEXT(sx, vec);                                     \
 				case LGLSXP:                                                \
-					LOGICAL(vec)                                            \
-					[i - 1] = srhs->u.ival;                                 \
+					LOGICAL(vec)[i - 1] = srhs->u.ival;                     \
 					DFVA_NEXT(sx, vec);                                     \
 				default:                                                    \
 					break;                                                  \
@@ -6873,6 +6870,7 @@ static SEXP bcEval(SEXP body, SEXP rho, bool useCache)
       }
   }
 
+  // INCREMENT_BCSTACK_LINKS();
     ibcl_oldptop = R_BCProtTop;
     do {
 	if (R_BCNodeStackTop > R_BCProtTop)
@@ -6945,7 +6943,7 @@ static SEXP bcEval(SEXP body, SEXP rho, bool useCache)
     OP(PRINTVALUE, 0): PrintValue(BCNPOP()); NEXT();
     OP(STARTLOOPCNTXT, 2):
 	{
-		SKIP_OP(); // skip dummy operand - needed to keep the same number (2) of arguments needed by STARTLOOPCNTXT
+	    SKIP_OP(); // skip dummy operand - needed to keep the same number (2) of arguments needed by STARTLOOPCNTXT
 	    SEXP code = VECTOR_ELT(constants, GETOP());
 	    loopWithContext(code, rho);
 	    NEXT();

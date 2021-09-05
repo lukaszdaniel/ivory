@@ -1,7 +1,7 @@
 #  File src/library/graphics/R/hist.R
 #  Part of the R package, https://www.R-project.org
 #
-#  Copyright (C) 1995-2020 The R Core Team
+#  Copyright (C) 1995-2021 The R Core Team
 #
 #  This program is free software; you can redistribute it and/or modify
 #  it under the terms of the GNU General Public License as published by
@@ -160,7 +160,7 @@ hist.default <-
 
 plot.histogram <-
     function (x, freq = equidist, density = NULL, angle = 45,
-	      col = NULL, border = par("fg"), lty = NULL,
+	      col = "lightgray", border = NULL, lty = NULL,
 	      main = gettextf("Histogram of %s", paste(x$xname, collapse="\n"), domain = "R-graphics"),
               sub = NULL,
 	      xlab = x$xname, ylab,

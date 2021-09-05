@@ -76,7 +76,6 @@ R_ToplevelCallbackEl* Rf_addTaskCallback(R_ToplevelCallback cb, void *data, void
   methods related to user-level tables.  This was implemented in a
   separate package formerly available from Omegahat and these
   declarations allow the package to interface to the internal R code.
-
   See https://developer.r-project.org/RObjectTables.pdf.
 */
 

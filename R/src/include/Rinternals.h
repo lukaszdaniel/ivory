@@ -1099,8 +1099,7 @@ const char *R_curErrorBuf(); // used by unix */
 int IS_SCALAR(SEXP x, SEXPTYPE type); // used by symengine */
 Rboolean Rf_psmatch(const char *, const char *, Rboolean); // used by rgl
 
-/* stringi defines USE_RINTERNALS and NO_REMAP so needs these for now */
-#if defined(USE_RINTERNALS) || defined(COMPILING_IVORY)
+#ifdef COMPILING_IVORY
 #undef isNull
 #define isNull(s) (TYPEOF(s) == NILSXP)
 #undef isSymbol

@@ -44,7 +44,6 @@ extern "C" {
 
 /*
   The R_wchar_t typedef represents a single Unicode code point.  On
-  The R_wchar_t typedef represents a single Unicode code point.  On
   most systems it is the same as wchar_t, but on Windows (and 32-bit
   AIX and perhaps others) where wchar_t is too small and UTF-16 is
   used, it needs to be an unsigned int .
