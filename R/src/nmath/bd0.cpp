@@ -288,17 +288,19 @@ void attribute_hidden Rf_ebd0(double x, double M, double *yh, double *yl)
 	 * rounding errors.
 	 */
 
-#define ADD1(d_) do {				\
-	    double d = (d_);			\
-	    double d1 = floor (d + 0.5);	\
-	    double d2 = d - d1;			\
-	    *yh += d1;				\
-	    *yl += d2;				\
-	} while(0)
+#define ADD1(d_)                    \
+	do                              \
+	{                               \
+		double d = (d_);            \
+		double d1 = floor(d + 0.5); \
+		double d2 = d - d1;         \
+		*yh += d1;                  \
+		*yl += d2;                  \
+	} while (0)
 
 #ifdef DEBUG_bd0
 	{
-	    double log1__ = log1pmx((M * fg - x) / x),
+	    double log1__ = Rf_log1pmx((M * fg - x) / x),
 		xl = -x * log1__;
 	    REprintf(" 1a. before adding  -x * log1pmx(.) = -x * %g = %g\n", log1__, xl);
 	    ADD1(xl);
@@ -322,7 +324,7 @@ void attribute_hidden Rf_ebd0(double x, double M, double *yh, double *yl)
             }
 	}
 #else
-	ADD1(-x * log1pmx ((M * fg - x) / x));
+	ADD1(-x * Rf_log1pmx ((M * fg - x) / x));
         if(fg == 1) return;
 	// else (fg != 1) :
 	for (int j = 0; j < 4; j++) {

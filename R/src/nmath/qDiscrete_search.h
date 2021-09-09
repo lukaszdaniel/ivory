@@ -162,8 +162,10 @@ static double DO_SEARCH_FUN(_dist_PARS_DECL_)
 			Y_ = 0.;                        \
 	} while (0)
 #else
-# define q_DISCR_CHECK_BOUNDARY(Y_) if(Y_ < 0) Y_ = 0.
- /* e.g., for qnbinom(0.5, mu = 3, size = 1e-10) */
+#define q_DISCR_CHECK_BOUNDARY(Y_) \
+	if (Y_ < 0)                    \
+	Y_ = 0.
+/* e.g., for qnbinom(0.5, mu = 3, size = 1e-10) */
 #endif
 
 #define q_DISCRETE_BODY()                                                                                    \

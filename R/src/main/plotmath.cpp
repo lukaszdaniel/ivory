@@ -985,7 +985,7 @@ static BBOX RenderSymbolStr(const char *str, int draw, mathContext *mc,
 		wc = 0;
 		// FIXME this does not allow for surrogate pairs (implausible)
 		res = mbrtowc(&wc, s, MB_LEN_MAX, &mb_st);
-		if(res == size_t(-1)) error(_("invalid multibyte string '%s'"), s);
+		if((int) res == -1) error("invalid multibyte string '%s'", s);
 		if (iswdigit(wc) && font != PlainFont) {
 		    font = PlainFont;
 		    SetFont(PlainFont, gc);
@@ -1003,7 +1003,7 @@ static BBOX RenderSymbolStr(const char *str, int draw, mathContext *mc,
 		if (draw) {
 		    memset(chr, 0, sizeof(chr));
 		    /* should not be possible, as we just converted to wc */
-		    if(wcrtomb(chr, wc, &mb_st) == size_t(-1))
+		    if((int) wcrtomb(chr, wc, &mb_st) == -1)
 			error(_("invalid multibyte string"));
 		    PMoveAcross(lastItalicCorr, mc);
 		    GEText(ConvertedX(mc ,dd), ConvertedY(mc, dd), chr,

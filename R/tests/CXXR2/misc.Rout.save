@@ -33,7 +33,7 @@ Error in command 'quint(break)': no loop for break/next, jumping to top level
 > 
 > system.time(for (i in 1:1e9) break)
    user  system elapsed 
-  0.018   0.000   0.018 
+  0.008   0.000   0.009 
 > 
 > tools::assertError(y <- x + 1L)
 > 
@@ -41,18 +41,18 @@ Error in command 'quint(break)': no loop for break/next, jumping to top level
 > y <- x + rnorm(1e5)
 > system.time(lm(y ~ x))
    user  system elapsed 
-  0.576   0.000   0.575 
+  0.511   0.126   0.350 
 > 
 > x <- structure(numeric(1e9), class = "foo")
 > system.time(base::unclass(x))
    user  system elapsed 
-  0.000   0.000   0.001 
+      0       0       0 
 > 
 > 
 > x <- rnorm(1e7)
 > system.time(y <- sort(x))
    user  system elapsed 
-  5.034   0.068   5.103 
+  3.051   0.084   3.134 
 > system.time(sort(y))
    user  system elapsed 
       0       0       0 

@@ -25,7 +25,7 @@ icuGetCollate(type = c("actual", "valid"))
 }
 \details{
   Optionally, \R can be built to collate character strings by ICU
-  (\url{http://site.icu-project.org}).  For such systems,
+  (\url{https://icu.unicode.org/}).  For such systems,
   \code{icuSetCollate} can be used to tune the way collation is done.
   On other builds calling this function does nothing, with a warning.
 
@@ -81,7 +81,7 @@ icuGetCollate(type = c("actual", "valid"))
     }
   }
   For the specifications of \sQuote{real} ICU locales, see
-  \url{http://userguide.icu-project.org/locale}.  Note that ICU does not
+  \url{https://unicode-org.github.io/icu/userguide/locale/}.  Note that ICU does not
   report that a locale is not supported, but falls back to its idea of
   \sQuote{best fit} (which could be rather different and is reported by
   \code{icuGetCollate("actual")}, often \code{"root"}).  Most English
@@ -89,11 +89,11 @@ icuGetCollate(type = c("actual", "valid"))
   a valid locale (at least on some platforms), it contains no special
   rules for collation.  Note that \code{"C"} is not a supported ICU locale
   and hence \env{R_ICU_LOCALE} should never be set to \code{"C"}.
-
+  
   Some examples are \code{case_level = "on", strength = "primary"} to ignore
   accent differences and \code{alternate_handling = "shifted"} to ignore
   space and punctuation characters.
-
+  
   Initially ICU will not be used for collation if the OS is set to use the
   \code{C} locale for collation and \env{R_ICU_LOCALE} is not set.  Once
   this function is called with a value for \code{locale}, ICU will be used
@@ -138,7 +138,7 @@ icuGetCollate(type = c("actual", "valid"))
   \code{\link{extSoftVersion}} for its version.
 
   The ICU user guide chapter on collation
-  (\url{http://userguide.icu-project.org/collation}).
+  (\url{https://unicode-org.github.io/icu/userguide/collation/}).
 }
 \examples{\donttest{
 ## These examples depend on having ICU available, and on the locale.

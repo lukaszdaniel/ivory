@@ -1,9 +1,9 @@
 
-Ivory Under development (unstable) (2021-08-02 r1573) -- "Internationalized Version of R"
+Ivory Under development (unstable) (2021-09-05 r1640) -- "Internationalized Version of R"
 Copyright (C) 2013-2021 Lukasz Daniel (lukasz.daniel@gmail.com)
 See README-IVORY file for details.
 
-R Under development (unstable) (2021-08-02 r80695) -- "Unsuffered Consequences"
+R Under development (unstable) (2021-09-05 r80859) -- "Unsuffered Consequences"
 Copyright (C) 2021 The R Foundation for Statistical Computing
 Platform: x86_64-pc-linux-gnu (64-bit)
 
@@ -360,7 +360,7 @@ Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 Residual standard error: 4.67 on 57 degrees of freedom
 
 Number of iterations to convergence: 5
-Achieved convergence tolerance: 9.32e-07
+Achieved convergence tolerance: 9.33e-07
 
 > ## IGNORE_RDIFF_END
 > 
@@ -429,7 +429,7 @@ Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 Residual standard error: 1.11 on 17 degrees of freedom
 
 Number of iterations to convergence: 8
-Achieved convergence tolerance: 2.17e-06
+Achieved convergence tolerance: 2.18e-06
 
 > ## IGNORE_RDIFF_END
 > options(od)

@@ -198,7 +198,7 @@ wchar_t *R::filenameToWchar(const SEXP fn, const Rboolean expand)
     res = Riconv(obj, &inbuf , &inb, &outbuf, &outb);
     Riconv_close(obj);
     if(inb > 0) error(_("file name conversion problem -- name too long?"));
-    if(res == (size_t) -1) error(_("file name conversion problem"));
+    if((int) res == -1) error(_("file name conversion problem"));
 
     return filename;
 }
@@ -705,10 +705,10 @@ HIDDEN SEXP do_iconv(SEXP call, SEXP op, SEXP args, SEXP env)
 	    *outbuf = '\0';
 	    /* other possible error conditions are
 	       incomplete and invalid multibyte chars */
-	    if(res == (size_t) -1 && errno == E2BIG) {
+	    if((int) res == -1 && errno == E2BIG) {
 		R_AllocStringBuffer(2*cbuff.bufsize, cbuff);
 		goto top_of_loop;
-	    } else if(res == (size_t) -1 && sub &&
+	    } else if((int) res == -1 && sub &&
 		      (errno == EILSEQ || errno == EINVAL)) {
 		/* it seems this gets thrown for non-convertible input too */
 		if(fromUTF8 && streql(sub, "Unicode")) {
@@ -760,14 +760,14 @@ HIDDEN SEXP do_iconv(SEXP call, SEXP op, SEXP args, SEXP env)
 	    }
 
 	    if(toRaw) {
-		if(res != (size_t) -1 && inb == 0) {
+		if((int) res != -1 && inb == 0) {
 		    size_t nout = cbuff.bufsize - 1 - outb;
 		    SEXP el = allocVector(RAWSXP, nout);
 		    memcpy(RAW(el), cbuff.data, nout);
 		    SET_VECTOR_ELT(ans, i, el);
 		} /* otherwise is already NULL */
 	    } else {
-		if(res != (size_t) -1 && inb == 0) {
+		if((int) res != -1 && inb == 0) {
 		    cetype_t ienc = CE_NATIVE;
 
 		    size_t nout = cbuff.bufsize - 1 - outb;
@@ -931,10 +931,10 @@ top_of_loop:
 next_char:
     /* Then convert input  */
     res = (int) Riconv(obj, &inbuf , &inb, &outbuf, &outb);
-    if(res == (size_t) -1 && errno == E2BIG) {
+    if((int) res == -1 && errno == E2BIG) {
 	R_AllocStringBuffer(2*cbuff.bufsize, cbuff);
 	goto top_of_loop;
-    } else if(res == (size_t) -1 && (errno == EILSEQ || errno == EINVAL)) {
+    } else if((int) res == -1 && (errno == EILSEQ || errno == EINVAL)) {
 	if(outb < 13) {
 	    R_AllocStringBuffer(2*cbuff.bufsize, cbuff);
 	    goto top_of_loop;
@@ -1133,10 +1133,10 @@ top_of_loop:
 next_char:
     /* Then convert input  */
     res = Riconv(obj, &inbuf , &inb, &outbuf, &outb);
-    if(res == (size_t) -1 && errno == E2BIG) {
+    if((int) res == -1 && errno == E2BIG) {
 	R_AllocStringBuffer(2*cbuff.bufsize, cbuff);
 	goto top_of_loop;
-    } else if(res == (size_t) -1 && (errno == EILSEQ || errno == EINVAL)) {
+    } else if((int) res == -1 && (errno == EILSEQ || errno == EINVAL)) {
 	if(outb < 5) {
 	    R_AllocStringBuffer(2*cbuff.bufsize, cbuff);
 	    goto top_of_loop;
@@ -1198,10 +1198,10 @@ top_of_loop:
 next_char:
     /* Then convert input  */
     res = Riconv(obj, &inbuf , &inb, &outbuf, &outb);
-    if(res == (size_t) -1 && errno == E2BIG) {
+    if((int) res == -1 && errno == E2BIG) {
 	R_AllocStringBuffer(2*cbuff.bufsize, cbuff);
 	goto top_of_loop;
-    } else if(res == (size_t) -1 && (errno == EILSEQ || errno == EINVAL)) {
+    } else if((int) res == -1 && (errno == EILSEQ || errno == EINVAL)) {
 	if(outb < 5) {
 	    R_AllocStringBuffer(2*cbuff.bufsize, cbuff);
 	    goto top_of_loop;
@@ -1303,10 +1303,10 @@ top_of_loop:
 next_char:
     /* Then convert input  */
     res = Riconv(obj, &inbuf , &inb, &outbuf, &outb);
-    if(res == (size_t) -1 && errno == E2BIG) {
+    if((int) res == -1 && errno == E2BIG) {
 	R_AllocStringBuffer(2*cbuff.bufsize, cbuff);
 	goto top_of_loop;
-    } else if(res == (size_t) -1 && (errno == EILSEQ || errno == EINVAL)) {
+    } else if((int) res == -1 && (errno == EILSEQ || errno == EINVAL)) {
 	if(outb < 5) {
 	    R_AllocStringBuffer(2*cbuff.bufsize, cbuff);
 	    goto top_of_loop;
@@ -1408,10 +1408,10 @@ top_of_loop:
 next_char:
     /* Then convert input  */
     res = Riconv(obj, &inbuf , &inb, &outbuf, &outb);
-    if(res == (size_t) -1 && errno == E2BIG) {
+    if((int) res == -1 && errno == E2BIG) {
 	R_AllocStringBuffer(2*cbuff.bufsize, cbuff);
 	goto top_of_loop;
-    } else if(res == (size_t) -1 && (errno == EILSEQ || errno == EINVAL)) {
+    } else if((int) res == -1 && (errno == EILSEQ || errno == EINVAL)) {
 	switch(subst) {
 	case 1: /* substitute hex */
 	    if(outb < 5) {
@@ -1485,8 +1485,8 @@ void reEnc2(const char *x, char *y, int ny,
 	    fromcode = buf;
 	    break;
 	}
-    case CE_LATIN1: fromcode = "CP1252"; break;
-    case CE_UTF8:   fromcode = "UTF-8"; break;
+    case CE_LATIN1: fromcode = (char*) "CP1252"; break;
+    case CE_UTF8:   fromcode = (char*) "UTF-8"; break;
     default: return;
     }
 
@@ -1498,8 +1498,8 @@ void reEnc2(const char *x, char *y, int ny,
 	    tocode = buf;
 	    break;
 	}
-    case CE_LATIN1: tocode = "latin1"; break;
-    case CE_UTF8:   tocode = "UTF-8"; break;
+    case CE_LATIN1: tocode = (char*) "latin1"; break;
+    case CE_UTF8:   tocode = (char*) "UTF-8"; break;
     default: return;
     }
 
@@ -1514,10 +1514,10 @@ top_of_loop:
 next_char:
     /* Then convert input  */
     res = Riconv(obj, &inbuf , &inb, &outbuf, &outb);
-    if(res == (size_t) -1 && errno == E2BIG) {
+    if((int) res == -1 && errno == E2BIG) {
 	R_AllocStringBuffer(2*cbuff.bufsize, cbuff);
 	goto top_of_loop;
-    } else if(res == (size_t) -1 && (errno == EILSEQ || errno == EINVAL)) {
+    } else if((int) res == -1 && (errno == EILSEQ || errno == EINVAL)) {
 	switch(subst) {
 	case 1: /* substitute hex */
 	    if(outb < 5) {

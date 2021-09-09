@@ -1,9 +1,9 @@
 
-Ivory Under development (unstable) (2021-08-02 r1573) -- "Internationalized Version of R"
+Ivory Under development (unstable) (2021-09-05 r1640) -- "Internationalized Version of R"
 Copyright (C) 2013-2021 Lukasz Daniel (lukasz.daniel@gmail.com)
 See README-IVORY file for details.
 
-R Under development (unstable) (2021-08-02 r80695) -- "Unsuffered Consequences"
+R Under development (unstable) (2021-09-05 r80859) -- "Unsuffered Consequences"
 Copyright (C) 2021 The R Foundation for Statistical Computing
 Platform: x86_64-pc-linux-gnu (64-bit)
 
@@ -115,13 +115,13 @@ Type 'q()' to quit R.
 + }
 m= 10 ; n= 7 :
 Time    user  system elapsed 
-Time   0.046   0.000   0.046 
+Time   0.023   0.000   0.023 
 m= 15 ; n= 0 :
 Time    user  system elapsed 
-Time   0.020   0.000   0.021 
+Time    0.01    0.00    0.01 
 m= 999 ; n= 0 :
 Time    user  system elapsed 
-Time   1.324   0.023   1.349 
+Time   0.552   0.007   0.560 
 > 
 > ##__ 4. Negative Binomial __
 > 
@@ -896,5 +896,5 @@ Time   1.324   0.023   1.349
 > ## ==        ~~~                    ~~~~  ~~~               ~~~~~~~~~~~~~~~
 > 
 > cat("Time elapsed: ", proc.time() - .ptime,"\n")
-Time elapsed:  9.017 0.06 9.08 0 0 
+Time elapsed:  3.811 0.024 3.835 0 0 
 > 

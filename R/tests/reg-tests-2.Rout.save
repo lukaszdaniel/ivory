@@ -1,9 +1,9 @@
 
-Ivory Under development (unstable) (2021-08-02 r1573) -- "Internationalized Version of R"
+Ivory Under development (unstable) (2021-09-05 r1640) -- "Internationalized Version of R"
 Copyright (C) 2013-2021 Lukasz Daniel (lukasz.daniel@gmail.com)
 See README-IVORY file for details.
 
-R Under development (unstable) (2021-08-02 r80695) -- "Unsuffered Consequences"
+R Under development (unstable) (2021-09-05 r80859) -- "Unsuffered Consequences"
 Copyright (C) 2021 The R Foundation for Statistical Computing
 Platform: x86_64-pc-linux-gnu (64-bit)
 
@@ -1631,11 +1631,11 @@ Eye:Sex   3   11.764 190.64
 [1] 0.2916627 0.9085017 0.7958965 0.1980655
 [1] 0.05247575 0.28290867 0.20930324 0.16794887
 Warning messages:
-1: In set.seed(123, type) :
+1: In command 'set.seed(123, type)':
   RNGkind: Marsaglia-Multicarry has poor statistical properties
-2: In set.seed(1000, type) :
+2: In command 'set.seed(1000, type)':
   RNGkind: Marsaglia-Multicarry has poor statistical properties
-3: In set.seed(77, type) :
+3: In command 'set.seed(77, type)':
   RNGkind: Marsaglia-Multicarry has poor statistical properties
 > RNGkind(normal.kind = "Kinderman-Ramage")
 > set.seed(123)
@@ -1661,7 +1661,7 @@ Warning messages:
 > set.seed(123, "default")
 > set.seed(123, "Marsaglia-Multicarry") ## Careful, not the default anymore
 Warning message:
-In set.seed(123, "Marsaglia-Multicarry") :
+In command 'set.seed(123, "Marsaglia-Multicarry")':
   RNGkind: Marsaglia-Multicarry has poor statistical properties
 > runif(4)
 [1] 0.1200427 0.1991600 0.7292821 0.8115922
@@ -6371,7 +6371,7 @@ function(given = NULL) {
     if (is.null(given)) callObj$default <- TRUE
     callObj
 }
-<bytecode: 0x55d29eea6ea0>
+<bytecode: 0x55def0ceeae0>
 > print(foo, useSource = FALSE)
 function (given = NULL) 
 {
@@ -6382,7 +6382,7 @@ function (given = NULL)
         callObj$default <- TRUE
     callObj
 }
-<bytecode: 0x55d29eea6ea0>
+<bytecode: 0x55def0ceeae0>
 > attr(foo, "srcref") <- NULL
 > foo
 function (given = NULL) 
@@ -6394,7 +6394,7 @@ function (given = NULL)
         callObj$default <- TRUE
     callObj
 }
-<bytecode: 0x55d29eea6ea0>
+<bytecode: 0x55def0ceeae0>
 > (f <- structure(function(){}, note = "just a note",
 +                 yada = function() "not the same"))
 function(){}

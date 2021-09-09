@@ -1,9 +1,9 @@
 
-Ivory Under development (unstable) (2021-08-02 r1573) -- "Internationalized Version of R"
+Ivory Under development (unstable) (2021-09-05 r1640) -- "Internationalized Version of R"
 Copyright (C) 2013-2021 Lukasz Daniel (lukasz.daniel@gmail.com)
 See README-IVORY file for details.
 
-R Under development (unstable) (2021-08-02 r80695) -- "Unsuffered Consequences"
+R Under development (unstable) (2021-09-05 r80859) -- "Unsuffered Consequences"
 Copyright (C) 2021 The R Foundation for Statistical Computing
 Platform: x86_64-pc-linux-gnu (64-bit)
 
@@ -144,7 +144,7 @@ x -0.89
 > fit <- nls(yeps ~ a + b*x, start = list(a = 0.12345, b = 0.54321),
 +            weights = wts, trace = TRUE)
 112.14    (3.04e+02): par = (0.12345 0.54321)
-0.0012128 (2.75e-06): par = (0.0051705 0.99915)
+0.0012128 (3.22e-06): par = (0.0051705 0.99915)
 > summary(fit, cor = TRUE)
 
 Formula: yeps ~ a + b * x
@@ -173,8 +173,8 @@ b -0.89
 +             weights = wts, trace = TRUE, algorithm = "port")
   0:     56.070572: 0.123450 0.543210
   1:     6.3964587:  1.34546 0.700840
-  2: 0.00060639084: 0.00517053 0.999153
-  3: 0.00060639084: 0.00517051 0.999153
+  2: 0.00060639084: 0.00517051 0.999153
+  3: 0.00060639084: 0.00517052 0.999153
 > summary(fit2, cor = TRUE)
 
 Formula: yeps ~ a + b * x
@@ -182,7 +182,7 @@ Formula: yeps ~ a + b * x
 Parameters:
   Estimate Std. Error t value Pr(>|t|)    
 a  0.00517    0.00764    0.68     0.52    
-b  0.99915    0.00119  841.38   <2e-16 ***
+b  0.99915    0.00119  841.37   <2e-16 ***
 ---
 Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 
@@ -627,8 +627,8 @@ b    NA 0.611
 552.85    (4.45e+00): par = (1.29 2.129)
 70.431    (1.29e+00): par = (1.9565 1.967)
 26.555    (4.44e-02): par = (1.9788 2.0064)
-26.503    (9.35e-05): par = (1.9798 2.0046)
-26.503    (7.17e-07): par = (1.9799 2.0046)
+26.503    (9.34e-05): par = (1.9798 2.0046)
+26.503    (7.45e-07): par = (1.9799 2.0046)
 > ## IGNORE_RDIFF_END
 > t1$with.start
 Nonlinear regression model
@@ -802,4 +802,4 @@ List of 2 components
 > 
 > proc.time()
    user  system elapsed 
- 19.548   0.124  19.664 
+  8.506   0.472   8.239 
