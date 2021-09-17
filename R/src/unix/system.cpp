@@ -64,9 +64,9 @@
 using namespace R;
 using namespace CXXR;
 
-HIDDEN FILE *ifp = nullptr; /* used in sys-std.cpp */
+RHIDDEN FILE *ifp = nullptr; /* used in sys-std.cpp */
 
-HIDDEN bool UsingReadline = true;  /* used in sys-std.cpp & ../main/platform.cpp
+RHIDDEN bool UsingReadline = true;  /* used in sys-std.cpp & ../main/platform.cpp
 				   and also in sys-unix.cpp for tilde expansion */
 
 /* call pointers to allow interface switching */
@@ -117,13 +117,13 @@ NORET void R_CleanUp(SA_TYPE saveact, int status, int runLast)
     exit(status);
 }
 
-HIDDEN int R::R_ShowFiles(int nfile, const char **file, const char **headers,
+RHIDDEN int R::R_ShowFiles(int nfile, const char **file, const char **headers,
 					   const char *wtitle, bool del, const char *pager)
 {
 	return ptr_R_ShowFiles(nfile, file, headers, wtitle, del, pager);
 }
 
-HIDDEN size_t R::R_ChooseFile(int _new, char *buf, size_t len)
+RHIDDEN size_t R::R_ChooseFile(int _new, char *buf, size_t len)
 {
 	return ptr_R_ChooseFile(_new, buf, len);
 }

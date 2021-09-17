@@ -36,7 +36,7 @@
 #ifdef MATHLIB_STANDALONE
 static
 #else
-HIDDEN
+RHIDDEN
 #endif
 double BM_norm_keep = 0.0;
 

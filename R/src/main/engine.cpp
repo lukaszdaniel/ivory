@@ -17,6 +17,10 @@
  *  https://www.R-project.org/Licenses/
  */
 
+/** @file engine.cpp
+ *
+ */
+
 #ifdef HAVE_CONFIG_H
 #include <config.h>
 #endif
@@ -3218,7 +3222,7 @@ SEXP do_playSnapshot(SEXP call, SEXP op, SEXP args, SEXP env)
  ****************************************************************
  */
 
-HIDDEN SEXP do_recordGraphics(SEXP call, SEXP op, SEXP args, SEXP env)
+RHIDDEN SEXP do_recordGraphics(SEXP call, SEXP op, SEXP args, SEXP env)
 {
     SEXP x, evalenv, retval;
     pGEDevDesc dd = GEcurrentDevice();

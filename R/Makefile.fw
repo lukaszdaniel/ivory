@@ -64,7 +64,7 @@ install-R-framework:
 	@(cp -R $(top_srcdir)/src/include/* "$(DESTDIR)$(R_FRAMEWORK_DIR)/Versions/Current/PrivateHeaders/" && \
 	  cp src/include/config.h "$(DESTDIR)$(R_FRAMEWORK_DIR)/Versions/Current/PrivateHeaders/" && \
 	  chmod a+r "$(DESTDIR)$(R_FRAMEWORK_DIR)/Versions/Current/PrivateHeaders/config.h"; \
-	  find "$(DESTDIR)$(R_FRAMEWORK_DIR)/Versions/Current/PrivateHeaders" -name .svn | xargs rm -Rf)
+	  find "$(DESTDIR)$(R_FRAMEWORK_DIR)/Versions/Current/PrivateHeaders" -name .svn -o -name .git | xargs rm -Rf)
 	@(install_name_tool -change libR.dylib \
 	    "$(R_FRAMEWORK_DIR)/Versions/$(FW_VERSION)/Resources/lib/libR.dylib" \
 	    "$(DESTDIR)$(Rexecbindir2)/R")

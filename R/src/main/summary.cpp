@@ -18,6 +18,10 @@
  *  https://www.R-project.org/Licenses/
  */
 
+/** @file summary.cpp
+ *
+ */
+
 #ifdef HAVE_CONFIG_H
 #include <config.h>
 #endif
@@ -424,7 +428,7 @@ static Rboolean cprod(SEXP sx, Rcomplex *value, Rboolean narm)
 }
 
 
-HIDDEN
+RHIDDEN
 SEXP R::fixup_NaRm(SEXP args)
 {
     GCStackRoot<> t;
@@ -558,7 +562,7 @@ inline static SEXP complex_mean(SEXP x)
 	return ScalarComplex(val);
 }
 
-HIDDEN SEXP do_summary(SEXP call, SEXP op, SEXP args, SEXP env)
+RHIDDEN SEXP do_summary(SEXP call, SEXP op, SEXP args, SEXP env)
 {
     checkArity(op, args);
     if(PRIMVAL(op) == 1) { /* mean */
@@ -1022,7 +1026,7 @@ na_answer: /* only sum(INTSXP, ...) case currently used */
 }/* do_summary */
 
 
-HIDDEN SEXP do_range(SEXP call, SEXP op, SEXP args, SEXP env)
+RHIDDEN SEXP do_range(SEXP call, SEXP op, SEXP args, SEXP env)
 {
     SEXP ans, a, b, prargs, call2;
 
@@ -1055,7 +1059,7 @@ HIDDEN SEXP do_range(SEXP call, SEXP op, SEXP args, SEXP env)
 
 // which.min(x) : The index (starting at 1), of the first min(x) in x
 // which.max(x) : The index (starting at 1), of the first max(x) in x
-HIDDEN SEXP do_first_min(SEXP call, SEXP op, SEXP args, SEXP rho)
+RHIDDEN SEXP do_first_min(SEXP call, SEXP op, SEXP args, SEXP rho)
 {
     SEXP sx = CAR(args), ans;
     int nprot = 1;
@@ -1151,7 +1155,7 @@ HIDDEN SEXP do_first_min(SEXP call, SEXP op, SEXP args, SEXP rho)
 
 
 /* which(x) : indices of non-NA TRUE values in x */
-HIDDEN SEXP do_which(SEXP call, SEXP op, SEXP args, SEXP rho)
+RHIDDEN SEXP do_which(SEXP call, SEXP op, SEXP args, SEXP rho)
 {
     checkArity(op, args);
     SEXP v = CAR(args);
@@ -1225,7 +1229,7 @@ HIDDEN SEXP do_which(SEXP call, SEXP op, SEXP args, SEXP rho)
 /* op = 0 is pmin, op = 1 is pmax
    NULL and logicals are handled as if they had been coerced to integer.
  */
-HIDDEN SEXP do_pmin(SEXP call, SEXP op, SEXP args, SEXP rho)
+RHIDDEN SEXP do_pmin(SEXP call, SEXP op, SEXP args, SEXP rho)
 {
     int narm = asLogical(CAR(args));
     if(narm == NA_LOGICAL)

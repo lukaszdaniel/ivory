@@ -30,6 +30,10 @@
  *  See ./format.cpp	 for the formatXXXX functions used below.
  */
 
+/** @file printvector.cpp
+ *
+ */
+
 #ifdef HAVE_CONFIG_H
 #include <config.h>
 #endif
@@ -144,7 +148,7 @@ static void printLogicalVectorS(SEXP x, R_xlen_t n, int indx) {
     Rprintf("\n");
 }
 
-HIDDEN
+RHIDDEN
 void Rf_printIntegerVector(const int *x, R_xlen_t n, int indx)
 {
     int w, labwidth=0, width;
@@ -159,7 +163,7 @@ void Rf_printIntegerVector(const int *x, R_xlen_t n, int indx)
     Rprintf("\n");
 }
 
-HIDDEN
+RHIDDEN
 void printIntegerVectorS(SEXP x, R_xlen_t n, int indx)
 {
     int w, labwidth=0, width;
@@ -179,7 +183,7 @@ void printIntegerVectorS(SEXP x, R_xlen_t n, int indx)
 
 // used in uncmin.cpp
 // Not easily converted to printRealVectorS calls
-HIDDEN
+RHIDDEN
 void Rf_printRealVector(const double *x, R_xlen_t n, int indx)
 {
     int w, d, e, labwidth=0, width;
@@ -194,7 +198,7 @@ void Rf_printRealVector(const double *x, R_xlen_t n, int indx)
     Rprintf("\n");
 }
 
-HIDDEN
+RHIDDEN
 void printRealVectorS(SEXP x, R_xlen_t n, int indx)
 {
     int w, d, e, labwidth=0, width;
@@ -213,7 +217,7 @@ void printRealVectorS(SEXP x, R_xlen_t n, int indx)
 }
 
 #define CMPLX_ISNA(cplx) (ISNA(cplx.r) || ISNA(cplx.i))
-HIDDEN
+RHIDDEN
 void Rf_printComplexVector(const Rcomplex *x, R_xlen_t n, int indx)
 {
     int w, wr, dr, er, wi, di, ei, labwidth=0, width;
@@ -233,7 +237,7 @@ void Rf_printComplexVector(const Rcomplex *x, R_xlen_t n, int indx)
     Rprintf("\n");
 }
 
-HIDDEN
+RHIDDEN
 void printComplexVectorS(SEXP x, R_xlen_t n, int indx)
 {
     int w, wr, dr, er, wi, di, ei, labwidth=0, width;
@@ -301,7 +305,7 @@ static void printStringVectorS(String *x, R_xlen_t n, int quote, int indx)
     Rprintf("\n");
 }
 
-HIDDEN
+RHIDDEN
 void printRawVector(const Rbyte *x, R_xlen_t n, int indx)
 {
     int w, labwidth=0, width;
@@ -506,7 +510,7 @@ static void printNamedRawVectorS(SEXP x, int n, String* names)
 		   Rprintf("%*s%s%*s", w - 2, "",
 			   EncodeRaw(RAW_ELT(x, k), ""), R_print.gap,""))
 
-HIDDEN
+RHIDDEN
 void R::Rf_printNamedVector(String *x, String *names, int quote, const char *title)
 {
     int n;

@@ -18,6 +18,10 @@
  *  https://www.R-project.org/Licenses/
  */
 
+/** @file split.cpp
+ *
+ */
+
 #ifdef HAVE_CONFIG_H
 #include <config.h>
 #endif
@@ -34,7 +38,7 @@
 #include <R_ext/Itermacros.h>
 using namespace R;
 
-HIDDEN SEXP do_split(SEXP call, SEXP op, SEXP args, SEXP env)
+RHIDDEN SEXP do_split(SEXP call, SEXP op, SEXP args, SEXP env)
 {
     SEXP x, f, counts, vec, nm, nmj;
     Rboolean have_names;

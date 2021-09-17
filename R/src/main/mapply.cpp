@@ -17,6 +17,11 @@
  *  https://www.R-project.org/Licenses/
  *
  */
+
+/** @file mapply.cpp
+ *
+ */
+
 #ifdef HAVE_CONFIG_H
 #include <config.h>
 #endif
@@ -36,7 +41,7 @@ using namespace R;
 using namespace CXXR;
 
 extern "C"
-HIDDEN SEXP do_mapply(SEXP call, SEXP op, SEXP args, SEXP rho)
+RHIDDEN SEXP do_mapply(SEXP call, SEXP op, SEXP args, SEXP rho)
 {
     checkArity(op, args);
 

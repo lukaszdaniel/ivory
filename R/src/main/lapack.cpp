@@ -17,6 +17,10 @@
  *  https://www.R-project.org/Licenses/
  */
 
+/** @file lapack.cpp
+ *
+ */
+
 #ifdef HAVE_CONFIG_H
 #include <config.h>
 #endif
@@ -47,7 +51,7 @@ static void La_Init(void)
     return;
 }
 
-extern "C" HIDDEN SEXP do_lapack(SEXP call, SEXP op, SEXP args, SEXP env)
+extern "C" RHIDDEN SEXP do_lapack(SEXP call, SEXP op, SEXP args, SEXP env)
 {
     checkArity(op, args);
     if (!initialized)

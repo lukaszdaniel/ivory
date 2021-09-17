@@ -18,6 +18,10 @@
  *  https://www.R-project.org/Licenses/
  */
 
+/** @file dstruct.cpp
+ *
+ */
+
 #ifdef HAVE_CONFIG_H
 #include <config.h>
 #endif
@@ -35,7 +39,7 @@
 
 using namespace CXXR;
 
-HIDDEN SEXP R::mkPRIMSXP(int offset, bool evaluate)
+RHIDDEN SEXP R::mkPRIMSXP(int offset, bool evaluate)
 {
 #ifdef CXXR_USE_OLD_R_FUNTAB_IMPL
     SEXP result;
@@ -94,7 +98,7 @@ SEXP R::mkCLOSXP(SEXP formal_args, SEXP body, SEXP env)
     return GCNode::expose(new Closure(formalsr, bodyr, rhor));
 }
 
-HIDDEN SEXP R::mkSYMSXP(SEXP name, SEXP value)
+RHIDDEN SEXP R::mkSYMSXP(SEXP name, SEXP value)
 {
     GCStackRoot<const CachedString> namert(SEXP_downcast<const CachedString *>(name));
     return CXXR::Symbol::obtain(namert);

@@ -24,6 +24,10 @@
  *  functionality in the AT&T Bell Laboratories GRZ library.
  */
 
+/** @file graphics.cpp
+ *
+ */
+
 #ifdef HAVE_CONFIG_H
 #include <config.h>
 #endif

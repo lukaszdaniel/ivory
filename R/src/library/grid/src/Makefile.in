@@ -21,7 +21,8 @@ SOURCES_F =
 DEPENDS = $(SOURCES_C:.c=.d) $(SOURCES_CXX:.cpp=.d)
 OBJECTS = $(SOURCES_C:.c=.o) $(SOURCES_CXX:.cpp=.o) $(SOURCES_F:.f=.o)
 
-PKG_CPPFLAGS = -DCOMPILING_IVORY -Wall -Werror -Wno-error=switch -Wno-error=sign-compare -Wno-error=attributes 
+# need  config.h
+PKG_CPPFLAGS =-I../../../include -I$(top_srcdir)/src/include -DCOMPILING_IVORY -DHAVE_CONFIG_H -Wall -Werror -Wno-error=switch -Wno-error=sign-compare -Wno-error=attributes 
 PKG_CFLAGS=$(C_VISIBILITY)
 
 SHLIB = $(pkg)@SHLIB_EXT@

@@ -18,6 +18,10 @@
  *  https://www.R-project.org/Licenses/
  */
 
+/** @file cum.cpp
+ *
+ */
+
 #ifdef HAVE_CONFIG_H
 #include <config.h>
 #endif
@@ -160,7 +164,7 @@ static SEXP icummin(SEXP x, SEXP s)
     return s;
 }
 
-HIDDEN SEXP do_cum(SEXP call, SEXP op, SEXP args, SEXP env)
+RHIDDEN SEXP do_cum(SEXP call, SEXP op, SEXP args, SEXP env)
 {
     SEXP s, t, ans;
     R_xlen_t i, n;

@@ -355,7 +355,6 @@ extern void R_WaitEvent(void);
 #include <limits.h>
 #endif
 
-#include <CXXR/RTypes.hpp>
 
 constexpr double Mega = 1048576.;    /* 1 Mega Byte := 2^20 (= 1048576) Bytes */
 constexpr double Giga = 1073741824.; /* 1 Giga Byte := 2^30 Bytes */
@@ -471,7 +470,7 @@ extern "C"
 
 #ifdef __MAIN__
 #define INI_as(v) = v
-#define extern0 HIDDEN
+#define extern0 RHIDDEN
 #define extern1
 #else
 #define INI_as(v)
@@ -1052,6 +1051,8 @@ namespace R
     Rboolean R_access_X11(void); /* from src/unix/X11.cpp */
     SEXP R_execMethod(SEXP op, SEXP rho);
     SEXP Rf_csduplicated(SEXP x); /* from unique.cpp */
+
+    void R_init_base(DllInfo *); /* In registration.cpp */
 
     // for reproducibility for now: use exp10 or pown later if accurate enough.
     template <typename T>

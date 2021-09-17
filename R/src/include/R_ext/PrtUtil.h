@@ -70,7 +70,7 @@ void printRealVectorS(SEXP, R_xlen_t, int);
 void printComplexVectorS(SEXP, R_xlen_t, int);
 
 #ifdef  __cplusplus
-}
+} // extern "C"
 #endif
 
 #ifdef __cplusplus

@@ -19,6 +19,10 @@
 
 /* This should be regarded as part of the graphics engine */
 
+/** @file patterns.cpp
+ *
+ */
+
 #ifdef HAVE_CONFIG_H
 #include <config.h>
 #endif

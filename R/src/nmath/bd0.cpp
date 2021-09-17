@@ -45,7 +45,7 @@
  */
 #include "nmath.h"
 
-HIDDEN double Rf_bd0(double x, double np)
+RHIDDEN double Rf_bd0(double x, double np)
 {
     if(!R_FINITE(x) || !R_FINITE(np) || np == 0.0) ML_WARN_return_NAN;
 

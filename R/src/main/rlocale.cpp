@@ -34,6 +34,9 @@
  *  used for Windows in R 2.[12].x.
  */
 
+/** @file rlocale.cpp
+ *
+ */
 
 #ifdef HAVE_CONFIG_H
 #include <config.h>
@@ -247,7 +250,7 @@ int Ri18n_wcwidth(R_wchar_t c)
 
    NB: Windows (at least MinGW-W64) does not have this function.
 */
-HIDDEN
+RHIDDEN
 int Ri18n_wcswidth (const wchar_t *wc, size_t n)
 {
     int rs = 0;

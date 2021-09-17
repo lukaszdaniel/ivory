@@ -22,6 +22,10 @@
 /*  This module contains support for S-style generic */
 /*  functions and "class" support.  Gag, barf ...  */
 
+/** @file object.cpp
+ *
+ */
+
 #ifdef HAVE_CONFIG_H
 #include <config.h>
 #endif
@@ -244,7 +248,7 @@ static SEXP findFunWithBaseEnvAfterGlobalEnv(SEXP symbol, SEXP rho)
  *    3. fix up the argument list; it should be the arguments to the
  *	 generic matched to the formals of the method to be invoked */
 
-HIDDEN
+RHIDDEN
 SEXP R::R_LookupMethod(SEXP method, SEXP rho, SEXP callrho, SEXP defrho)
 {
     SEXP val, top = R_NilValue;	/* -Wall */
@@ -385,7 +389,7 @@ inline static SEXP addS3Var(SEXP vars, SEXP name, SEXP value) {
     return res;
 }
 
-HIDDEN
+RHIDDEN
 SEXP R::createS3Vars(SEXP dotGeneric, SEXP dotGroup, SEXP dotClass, SEXP dotMethod,
 		  SEXP dotGenericCallEnv, SEXP dotGenericDefEnv) {
 
@@ -454,7 +458,7 @@ static SEXP dispatchMethod(SEXP op, SEXP sxp, SEXP dotClass, RCNTXT *cptr, SEXP 
     return ans;
 }
 
-HIDDEN
+RHIDDEN
 bool R::usemethod(const char *generic, SEXP obj, SEXP call, SEXP args,
 	      SEXP rho, SEXP callrho, SEXP defrho, SEXP *ans)
 {
@@ -513,7 +517,7 @@ bool R::usemethod(const char *generic, SEXP obj, SEXP call, SEXP args,
 */
 
 /* This is a primitive SPECIALSXP */
-HIDDEN NORET SEXP do_usemethod(SEXP call, SEXP op, SEXP args, SEXP env)
+RHIDDEN NORET SEXP do_usemethod(SEXP call, SEXP op, SEXP args, SEXP env)
 {
     SEXP ans, generic = R_NilValue /* -Wall */, obj, val;
     SEXP callenv, defenv;
@@ -684,7 +688,7 @@ inline static SEXP getPrimitive(SEXP symbol)
 
 
 /* This is a special .Internal */
-HIDDEN SEXP do_nextmethod(SEXP call, SEXP op, SEXP args, SEXP env)
+RHIDDEN SEXP do_nextmethod(SEXP call, SEXP op, SEXP args, SEXP env)
 {
     const char *sb, *sg, *sk;
     SEXP ans, s, t, klass, method, matchedarg, generic;
@@ -936,7 +940,7 @@ HIDDEN SEXP do_nextmethod(SEXP call, SEXP op, SEXP args, SEXP env)
 }
 
 /* primitive */
-HIDDEN SEXP do_unclass(SEXP call, SEXP op, SEXP args, SEXP env)
+RHIDDEN SEXP do_unclass(SEXP call, SEXP op, SEXP args, SEXP env)
 {
     checkArity(op, args);
     check1arg(args, call, "x");
@@ -966,7 +970,7 @@ HIDDEN SEXP do_unclass(SEXP call, SEXP op, SEXP args, SEXP env)
     except there is no translation.
 */
 
-HIDDEN bool R::inherits2(SEXP x, const char *what) {
+RHIDDEN bool R::inherits2(SEXP x, const char *what) {
     if (OBJECT(x)) {
 	SEXP klass;
 
@@ -1038,7 +1042,7 @@ static SEXP inherits3(SEXP x, SEXP what, SEXP which)
     return rval;
 }
 
-HIDDEN SEXP do_inherits(SEXP call, SEXP op, SEXP args, SEXP env)
+RHIDDEN SEXP do_inherits(SEXP call, SEXP op, SEXP args, SEXP env)
 {
     checkArity(op, args);
 
@@ -1205,7 +1209,7 @@ static SEXP R_isMethodsDispatchOn(SEXP onOff)
 }
 
 /* simpler version for internal use, in attrib.cpp and print.cpp */
-HIDDEN bool R::isMethodsDispatchOn(void)
+RHIDDEN bool R::isMethodsDispatchOn(void)
 {
     return (!NOT_METHODS_DISPATCH_PTR(R_standardGeneric_ptr));
 }
@@ -1218,7 +1222,7 @@ HIDDEN bool R::isMethodsDispatchOn(void)
    It seems it is not currently called with onOff = TRUE (and would
    not have worked prior to 3.0.2).
 */
-HIDDEN
+RHIDDEN
 SEXP do_S4on(SEXP call, SEXP op, SEXP args, SEXP env)
 {
     if(Rf_length(args) == 0) return ScalarLogical(isMethodsDispatchOn());
@@ -1278,7 +1282,7 @@ static SEXP dispatchNonGeneric(SEXP name, SEXP env, SEXP fdef)
 
 static SEXP get_this_generic(SEXP args);
 
-HIDDEN SEXP do_standardGeneric(SEXP call, SEXP op, SEXP args, SEXP env)
+RHIDDEN SEXP do_standardGeneric(SEXP call, SEXP op, SEXP args, SEXP env)
 {
 	SEXP arg, value, fdef;
 	R_stdGen_ptr_t ptr = R_get_standardGeneric_ptr();
@@ -1529,7 +1533,7 @@ static SEXP get_this_generic(SEXP args)
 /* Could there be methods for this op?	Checks
    only whether methods are currently being dispatched and, if so,
    whether methods are currently defined for this op. */
-HIDDEN bool R::R_has_methods(SEXP op)
+RHIDDEN bool R::R_has_methods(SEXP op)
 {
 	R_stdGen_ptr_t ptr = R_get_standardGeneric_ptr();
 	int offset;
@@ -1570,7 +1574,7 @@ void R::R_set_quick_method_check(R_stdGen_ptr_t value)
    promises, but not from the other two: there all the arguments have
    already been evaluated.
  */
-HIDDEN std::pair<bool, SEXP> R::R_possible_dispatch(SEXP call, SEXP op, SEXP args, SEXP rho,
+RHIDDEN std::pair<bool, SEXP> R::R_possible_dispatch(SEXP call, SEXP op, SEXP args, SEXP rho,
 		    bool promisedArgs)
 {
     SEXP fundef, value, mlist=R_NilValue, s, a, b, suppliedvars;
@@ -1757,7 +1761,7 @@ SEXP R_do_new_object(SEXP class_def)
     return value;
 }
 
-HIDDEN bool R::R_seemsOldStyleS4Object(SEXP object)
+RHIDDEN bool R::R_seemsOldStyleS4Object(SEXP object)
 {
 	SEXP klass;
 	if (!isObject(object) || IS_S4_OBJECT(object))
@@ -1769,7 +1773,7 @@ HIDDEN bool R::R_seemsOldStyleS4Object(SEXP object)
 			getAttrib(klass, R_PackageSymbol) != R_NilValue);
 }
 
-HIDDEN SEXP do_setS4Object(SEXP call, SEXP op, SEXP args, SEXP env)
+RHIDDEN SEXP do_setS4Object(SEXP call, SEXP op, SEXP args, SEXP env)
 {
     checkArity(op, args);
     SEXP object = CAR(args);

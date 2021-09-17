@@ -7,7 +7,7 @@ GIT = `if [ -d "$(top_builddir)/.git" ]; then echo "git"; fi`
 VER = $(shell sed -e 's/\([^ ]*\).*/\1/' ../../VERSION)
 
 ## keep these in step with ./Makefile.in
-SRC_HEADERS = R.h S.h Rdefines.h Rembedded.h Rinternals.h Localization.h RObject.hpp List.hpp BuiltInFunction.hpp Closure.hpp Environment.hpp VectorBase.hpp Symbol.hpp Promise.hpp
+SRC_HEADERS = R.h S.h Rdefines.h Rembedded.h Rinternals.h Localization.h
 ## this deliberately does not include Rinterfaces.h, which is Unix-only
 OBJ_HEADERS = Rconfig.h Rmath.h Rversion.h
 GW32_HEADERS = iconv.h psignal.h
@@ -22,11 +22,21 @@ R_EXT_HEADERS = \
   Rdynload.h Riconv.h RStartup.h Utils.h libextern.h \
   stats_package.h stats_stubs.h Visibility.h
 
+CXXR_HEADERS = CXXR.hpp DebugMacros.hpp Allocator.hpp ArgList.hpp ArgMatcher.hpp RAllocStack.hpp CellHeap.hpp CellPool.hpp MemoryBank.hpp GCEdge.hpp GCManager.hpp \
+  GCNode.hpp GCRoot.hpp GCStackRoot.hpp RObject.hpp ConsCell.hpp BuiltInFunction.hpp RAltRep.hpp ByteCode.hpp Closure.hpp DottedArgs.hpp Expression.hpp ElementTraits.hpp \
+  HandleVector.hpp ExpressionVector.hpp ExternalPointer.hpp DotInternal.hpp Environment.hpp Evaluator.hpp Frame.hpp FrameDescriptor.hpp FunctionBase.hpp \
+  Complex.hpp Logical.hpp String.hpp VectorBase.hpp FixedVector.hpp ComplexVector.hpp RealVector.hpp \
+  IntVector.hpp ListVector.hpp LogicalVector.hpp PairList.hpp RawVector.hpp StringVector.hpp \
+  PredefinedSymbols.hpp RTypes.hpp SEXP_downcast.hpp SEXPTYPE.hpp SchwarzCounter.hpp S3Launcher.hpp S4Object.hpp Symbol.hpp UncachedString.hpp CachedString.hpp Promise.hpp WeakRef.hpp \
+  NodeStack.hpp ProtectStack.hpp BinaryFunction.hpp UnaryFunction.hpp Subscripting.hpp strutil.hpp
+
 all: fixh config.h trioremap.h
 	@echo 'installing C headers'
 	@mkdir -p $(R_HOME)/include/R_ext
+	@mkdir -p $(R_HOME)/include/CXXR
 	@cp -p $(SRC_HEADERS) $(OBJ_HEADERS) iconv.h $(R_HOME)/include
 	@(cd R_ext; cp -p $(R_EXT_HEADERS) ../../../include/R_ext)
+	@(cd CXXR; cp -p $(CXXR_HEADERS) ../../../include/CXXR)
 	@cp -p ../extra/graphapp/graphapp.h ../extra/graphapp/ga.h \
 	  $(R_HOME)/include
 

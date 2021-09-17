@@ -20,6 +20,10 @@
 
 /* This is currently restricted to vectors of length < 2^30 */
 
+/** @file unique.cpp
+ *
+ */
+
 #ifdef HAVE_CONFIG_H
 #include <config.h>
 #endif
@@ -1044,7 +1048,7 @@ R_xlen_t Rf_any_duplicated3(SEXP x, SEXP incomp, Rboolean from_last)
    .Internal(       unique(x, incomparables, fromLast, nmax))  [op=1]
    .Internal(anyDuplicated(x, incomparables, fromLast      ))  [op=2]
 */
-HIDDEN SEXP do_duplicated(SEXP call, SEXP op, SEXP args, SEXP env)
+RHIDDEN SEXP do_duplicated(SEXP call, SEXP op, SEXP args, SEXP env)
 {
     SEXP x, dup, ans;
     R_xlen_t i, k, n;
@@ -1440,7 +1444,7 @@ SEXP Rf_match(SEXP itable, SEXP ix, int nmatch)
 
 
 // .Internal(match(x, table, nomatch, incomparables)) :
-HIDDEN SEXP do_match(SEXP call, SEXP op, SEXP args, SEXP env)
+RHIDDEN SEXP do_match(SEXP call, SEXP op, SEXP args, SEXP env)
 {
     checkArity(op, args);
 
@@ -1473,7 +1477,7 @@ HIDDEN SEXP do_match(SEXP call, SEXP op, SEXP args, SEXP env)
  * Empty strings are unmatched			      BDR 2000/2/16
  */
 
-HIDDEN SEXP do_pmatch(SEXP call, SEXP op, SEXP args, SEXP env)
+RHIDDEN SEXP do_pmatch(SEXP call, SEXP op, SEXP args, SEXP env)
 {
     SEXP ans, input, target;
     int mtch, n_target, mtch_count, dups_ok, no_match;
@@ -1619,7 +1623,7 @@ HIDDEN SEXP do_pmatch(SEXP call, SEXP op, SEXP args, SEXP env)
 /* Partial Matching of Strings */
 /* Based on Therneau's charmatch. */
 
-HIDDEN SEXP do_charmatch(SEXP call, SEXP op, SEXP args, SEXP env)
+RHIDDEN SEXP do_charmatch(SEXP call, SEXP op, SEXP args, SEXP env)
 {
     SEXP ans, input, target;
     const char *ss, *st;
@@ -1789,7 +1793,7 @@ static SEXP subDots(SEXP rho)
 }
 
 
-HIDDEN SEXP do_matchcall(SEXP call, SEXP op, SEXP args, SEXP env)
+RHIDDEN SEXP do_matchcall(SEXP call, SEXP op, SEXP args, SEXP env)
 {
     SEXP formals, actuals, rlist;
     SEXP funcall, f, b, rval, sysp, t1, t2, tail;
@@ -2047,7 +2051,7 @@ static SEXP rowsum_df(SEXP x, SEXP g, SEXP uniqueg, SEXP snarm, SEXP rn)
     return ans;
 }
 
-HIDDEN SEXP do_rowsum(SEXP call, SEXP op, SEXP args, SEXP env)
+RHIDDEN SEXP do_rowsum(SEXP call, SEXP op, SEXP args, SEXP env)
 {
     checkArity(op, args);
     if(PRIMVAL(op) == 1)
@@ -2094,7 +2098,7 @@ static SEXP duplicated2(SEXP x, HashData &d)
     return ans;
 }
 
-HIDDEN SEXP do_makeunique(SEXP call, SEXP op, SEXP args, SEXP env)
+RHIDDEN SEXP do_makeunique(SEXP call, SEXP op, SEXP args, SEXP env)
 {
     SEXP names, sep, ans, dup, newx;
     int i, cnt, *cnts, dp;
@@ -2200,7 +2204,7 @@ SEXP R::Rf_csduplicated(SEXP x)
 #include <R_ext/Random.h>
 
 // sample.int(.) --> .Internal(sample2(n, size)) :
-HIDDEN SEXP do_sample2(SEXP call, SEXP op, SEXP args, SEXP env)
+RHIDDEN SEXP do_sample2(SEXP call, SEXP op, SEXP args, SEXP env)
 {
     checkArity(op, args);
     SEXP ans;

@@ -43,7 +43,7 @@
 
 #include "nmath.h"
 
-HIDDEN double Rf_lgammacor(double x)
+RHIDDEN double Rf_lgammacor(double x)
 {
     static constexpr double algmcs[15] = {
 	+.1666389480451863247205729650822e+0,

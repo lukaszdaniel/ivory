@@ -11,8 +11,10 @@ top_builddir = ../../../..
 subdir = src/library/$(pkg)/src
 R_HOME = $(top_builddir)
 
-SOURCES_C = text.cpp init.cpp Rmd5.cpp md5.cpp signals.cpp install.cpp getfmts.cpp http.cpp \
+SOURCES_C =
+SOURCES_CXX = text.cpp init.cpp Rmd5.cpp md5.cpp signals.cpp install.cpp getfmts.cpp http.cpp \
   gramLatex.cpp gramRd.cpp pdscan.cpp
+
 DEPENDS = $(SOURCES_C:.c=.d) $(SOURCES_CXX:.cpp=.d)
 OBJECTS = $(SOURCES_C:.c=.o) $(SOURCES_CXX:.cpp=.o) ../../../gnuwin32/dllversion.o
 
@@ -42,12 +44,12 @@ makeMakedeps: $(DEPENDS)
 ifdef RUN_BISON
 gramRd.cpp: gramRd.y
 	bison gramRd.y
-	$(SED) -e "s/gramRd.tab.c/gramRd.cpp/" gramRd.tab.cpp > gramRd.cpp
+	$(SED) -e "s/gramRd.tab.c/gramRd.cpp/" gramRd.tab.c > gramRd.cpp
 	$(RM) gramRd.tab.cpp
 
 gramLatex.cpp: gramLatex.y
 	bison gramLatex.y
-	$(SED) -e "s/gramLatex.tab.c/gramLatex.cpp/" gramLatex.tab.cpp > gramLatex.cpp
+	$(SED) -e "s/gramLatex.tab.c/gramLatex.cpp/" gramLatex.tab.c > gramLatex.cpp
 	$(RM) gramLatex.tab.cpp
 endif
 

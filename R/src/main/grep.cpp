@@ -46,6 +46,9 @@ As from R 4.1.0 we translate latin1 strings in a non-latin1-locale to UTF-8.
    positions for all MBCSs.)
 */
 
+/** @file grep.cpp
+ *
+ */
 
 #ifdef HAVE_CONFIG_H
 #include <config.h>
@@ -481,7 +484,7 @@ static void R_pcre_prepare(const char *pattern, SEXP subject, Rboolean use_UTF8,
  * list is the collection of splits for the corresponding element of x.
 */
 
-HIDDEN SEXP do_strsplit(SEXP call, SEXP op, SEXP args, SEXP env)
+RHIDDEN SEXP do_strsplit(SEXP call, SEXP op, SEXP args, SEXP env)
 {
     SEXP args0 = args, ans, tok, x;
     R_xlen_t i, itok, len, tlen;
@@ -1121,7 +1124,7 @@ static int fgrep_one_bytes(const char *pat, const char *target, int len,
     return -1;
 }
 
-HIDDEN SEXP do_grep(SEXP call, SEXP op, SEXP args, SEXP env)
+RHIDDEN SEXP do_grep(SEXP call, SEXP op, SEXP args, SEXP env)
 {
     SEXP pat, text, ind, ans;
     regex_t reg;
@@ -1421,7 +1424,7 @@ static R_size_t fgrepraw1(SEXP pat, SEXP text, R_size_t offset) {
 
 /* grepRaw(pattern, text, offset, ignore.case, fixed, value, all, invert) */
 // FIXME:  allow long vectors.
-HIDDEN SEXP do_grepraw(SEXP call, SEXP op, SEXP args, SEXP env)
+RHIDDEN SEXP do_grepraw(SEXP call, SEXP op, SEXP args, SEXP env)
 {
     SEXP pat, text, ans, res_head, res_tail;
     regex_t reg;
@@ -1894,7 +1897,7 @@ static int wcount_subs(const wchar_t *repl)
  * either once or globally.
  * The functions are loosely patterned on the "sub" and "gsub" in "nawk". */
 
-HIDDEN SEXP do_gsub(SEXP call, SEXP op, SEXP args, SEXP env)
+RHIDDEN SEXP do_gsub(SEXP call, SEXP op, SEXP args, SEXP env)
 {
     SEXP pat, rep, text, ans;
     regex_t reg;
@@ -2765,7 +2768,7 @@ static SEXP gregexpr_BadStringAns(void)
     return ans;
 }
 
-HIDDEN SEXP do_regexpr(SEXP call, SEXP op, SEXP args, SEXP env)
+RHIDDEN SEXP do_regexpr(SEXP call, SEXP op, SEXP args, SEXP env)
 {
     SEXP pat, text, ans, itype;
     regex_t reg;
@@ -3095,7 +3098,7 @@ HIDDEN SEXP do_regexpr(SEXP call, SEXP op, SEXP args, SEXP env)
 }
 
 // .Internal(regexec(pattern, text, ignore.case, fixed, useBytes)) :
-HIDDEN SEXP do_regexec(SEXP call, SEXP op, SEXP args, SEXP env)
+RHIDDEN SEXP do_regexec(SEXP call, SEXP op, SEXP args, SEXP env)
 {
     SEXP pat, text, ans, matchpos, matchlen, itype;
     int opt_icase, opt_fixed, useBytes;
@@ -3257,7 +3260,7 @@ HIDDEN SEXP do_regexec(SEXP call, SEXP op, SEXP args, SEXP env)
    the earliest version we allowed when coding this.
  */
 #ifdef HAVE_PCRE2
-HIDDEN SEXP do_pcre_config(SEXP call, SEXP op, SEXP args, SEXP env)
+RHIDDEN SEXP do_pcre_config(SEXP call, SEXP op, SEXP args, SEXP env)
 {
     uint32_t res;
 
@@ -3281,7 +3284,7 @@ HIDDEN SEXP do_pcre_config(SEXP call, SEXP op, SEXP args, SEXP env)
     return ans;
 }
 #else
-HIDDEN SEXP do_pcre_config(SEXP call, SEXP op, SEXP args, SEXP env)
+RHIDDEN SEXP do_pcre_config(SEXP call, SEXP op, SEXP args, SEXP env)
 {
     int res;
 

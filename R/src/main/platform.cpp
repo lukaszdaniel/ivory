@@ -34,6 +34,10 @@
    replaces off_t by __int64_t.
  */
 
+/** @file platform.cpp
+ *
+ */
+
 #ifdef HAVE_CONFIG_H
 #include <config.h>
 #endif
@@ -92,32 +96,247 @@ const char *formatError(DWORD res);  /* extra.c */
 #define HAVE_SYMLINK 1
 #endif
 
-/* Machine Constants */
-
-#define DTYPE double
-#define MACH_NAME machar
-#define ABS fabs
-#include "machar.cpp"
-#undef DTYPE
-#undef MACH_NAME
-#undef ABS
-
-#ifdef HAVE_LONG_DOUBLE
-#define DTYPE long double
-#define MACH_NAME machar_LD
-#define ABS fabsl
-#include "machar.cpp"
-# undef DTYPE
-# undef MACH_NAME
-# undef ABS
-#endif
-
 using namespace R;
 using namespace CXXR;
 
+/* Machine Constants */
+
+namespace
+{
+	template <typename DTYPE = double>
+	void machar_generic(int *ibeta, int *it, int *irnd, int *ngrd, int *machep, int *negep,
+						int *iexp, int *minexp, int *maxexp,
+						DTYPE *eps, DTYPE *epsneg, DTYPE *xmin, DTYPE *xmax)
+	{
+		volatile DTYPE a, b, beta, betain, betah, one,
+			t, temp, tempa, temp1, two, y, z, zero;
+		int i, iz, j, k, mx, nxres;
+
+		one = 1;
+		two = one + one;
+		zero = one - one;
+
+		/* determine ibeta, beta ala malcolm. */
+		a = one; // a = <large> = 9.0072e+15 for 'double' is used later
+		do
+		{
+			a = a + a;
+			temp = a + one;
+			temp1 = temp - a;
+		} while (temp1 - one == zero);
+#ifdef _no_longer___did_overflow_ // on IBM PowerPPC ('Power 8')
+		int itemp;
+		b = one;
+		do
+		{
+			b = b + b;
+			temp = a + b;
+			itemp = (int)(temp - a);
+		} while (itemp == 0);
+		*ibeta = itemp;
+#else
+		*ibeta = (int)FLT_RADIX;
+#endif
+		beta = *ibeta;
+
+		/* determine it, irnd */
+
+		*it = 0;
+		b = one;
+		do
+		{
+			*it = *it + 1;
+			b = b * beta;
+			temp = b + one;
+			temp1 = temp - b;
+		} while (temp1 - one == zero);
+		*irnd = 0;
+		betah = beta / two;
+		temp = a + betah;
+		if (temp - a != zero)
+			*irnd = 1;
+		tempa = a + beta;
+		temp = tempa + betah;
+		if (*irnd == 0 && temp - tempa != zero)
+			*irnd = 2;
+
+		/* determine negep, epsneg */
+
+		*negep = *it + 3;
+		betain = one / beta;
+		a = one;
+		for (i = 1; i <= *negep; i++)
+			a = a * betain;
+		b = a;
+		for (;;)
+		{
+			temp = one - a;
+			if (temp - one != zero)
+				break;
+			a = a * beta;
+			*negep = *negep - 1;
+		}
+		*negep = -*negep;
+		*epsneg = a;
+		if (*ibeta != 2 && *irnd != 0)
+		{
+			a = (a * (one + a)) / two;
+			temp = one - a;
+			if (temp - one != zero)
+				*epsneg = a;
+		}
+
+		/* determine machep, eps */
+
+		*machep = -*it - 3;
+		a = b;
+		for (;;)
+		{
+			temp = one + a;
+			if (temp - one != zero)
+				break;
+			a = a * beta;
+			*machep = *machep + 1;
+		}
+		*eps = a;
+		temp = tempa + beta * (one + *eps);
+		if (*ibeta != 2 && *irnd != 0)
+		{
+			a = (a * (one + a)) / two;
+			temp = one + a;
+			if (temp - one != zero)
+				*eps = a;
+		}
+
+		/* determine ngrd */
+
+		*ngrd = 0;
+		temp = one + *eps;
+		if (*irnd == 0 && temp * one - one != zero)
+			*ngrd = 1;
+
+		/* determine iexp, minexp, xmin */
+
+		/* loop to determine largest i and k = 2**i such that */
+		/*        (1/beta) ** (2**(i)) */
+		/* does not underflow. */
+		/* exit from loop is signaled by an underflow. */
+
+		i = 0;
+		k = 1;
+		z = betain;
+		t = one + *eps;
+		nxres = 0;
+		for (;;)
+		{
+			y = z;
+			z = y * y;
+
+			/* check for underflow here */
+
+			a = z * one;
+			temp = z * t;
+			if (a + a == zero || std::abs(z) >= y)
+				break;
+			temp1 = temp * betain;
+			if (temp1 * beta == z)
+				break;
+			i = i + 1;
+			k = k + k;
+		}
+		if (*ibeta != 10)
+		{
+			*iexp = i + 1;
+			mx = k + k;
+		}
+		else
+		{
+			/* this segment is for decimal machines only */
+
+			*iexp = 2;
+			iz = *ibeta;
+			while (k >= iz)
+			{
+				iz = iz * *ibeta;
+				iexp = iexp + 1;
+			}
+			mx = iz + iz - 1;
+		}
+		do
+		{
+			/* loop to determine minexp, xmin */
+			/* exit from loop is signaled by an underflow */
+
+			*xmin = y;
+			y = y * betain;
+
+			/* check for underflow here */
+
+			a = y * one;
+			temp = y * t;
+			if (a + a == zero || std::abs(y) >= *xmin)
+				goto L10;
+			k = k + 1;
+			temp1 = temp * betain;
+		} while (temp1 * beta != y);
+		nxres = 3;
+		*xmin = y;
+	L10:
+		*minexp = -k;
+
+		/* determine maxexp, xmax */
+
+		if (mx <= k + k - 3 && *ibeta != 10)
+		{
+			mx = mx + mx;
+			*iexp = *iexp + 1;
+		}
+		*maxexp = mx + *minexp;
+
+		/* adjust irnd to reflect partial underflow */
+
+		*irnd = *irnd + nxres;
+
+		/* adjust for ieee-style machines */
+
+		if (*irnd == 2 || *irnd == 5)
+			*maxexp = *maxexp - 2;
+
+		/* adjust for non-ieee machines with partial underflow */
+
+		if (*irnd == 3 || *irnd == 4)
+			*maxexp = *maxexp - *it;
+
+		/* adjust for machines with implicit leading bit in binary */
+		/* significand, and machines with radix point at extreme */
+		/* right of significand. */
+
+		i = *maxexp + *minexp;
+		if (*ibeta == 2 && i == 0)
+			*maxexp = *maxexp - 1;
+		if (i > 20)
+			*maxexp = *maxexp - 1;
+		if (a != y)
+			*maxexp = *maxexp - 2;
+		*xmax = one - *epsneg;
+		if (*xmax * one != *xmax)
+			*xmax = one - beta * *epsneg;
+		*xmax = *xmax / (beta * beta * beta * *xmin);
+		i = *maxexp + *minexp + 3;
+		if (i > 0)
+			for (j = 1; j <= i; j++)
+			{
+				if (*ibeta == 2)
+					*xmax = *xmax + *xmax;
+				if (*ibeta != 2)
+					*xmax = *xmax * beta;
+			}
+	}
+} // namespace
+
 static void Init_R_Machine(SEXP rho)
 {
-    machar(&R_AccuracyInfo.ibeta,
+    machar_generic(&R_AccuracyInfo.ibeta,
 	   &R_AccuracyInfo.it,
 	   &R_AccuracyInfo.irnd,
 	   &R_AccuracyInfo.ngrd,
@@ -217,7 +436,7 @@ static void Init_R_Machine(SEXP rho)
 			long double eps, epsneg, xmin, xmax;
 		} R_LD_AccuracyInfo;
 
-	machar_LD(&R_LD_AccuracyInfo.ibeta,
+	machar_generic<long double>(&R_LD_AccuracyInfo.ibeta,
 		  &R_LD_AccuracyInfo.it,
 		  &R_LD_AccuracyInfo.irnd,
 		  &R_LD_AccuracyInfo.ngrd,
@@ -335,7 +554,7 @@ static void Init_R_Platform(SEXP rho)
     UNPROTECT(2);
 }
 
-HIDDEN void R::Init_R_Variables(SEXP rho)
+RHIDDEN void R::Init_R_Variables(SEXP rho)
 {
     Init_R_Machine(rho);
     Init_R_Platform(rho);
@@ -356,7 +575,7 @@ int static R_strieql(const char *a, const char *b)
 #endif
 
 static char native_enc[R_CODESET_MAX + 1];
-HIDDEN const char *R::R_nativeEncoding(void)
+RHIDDEN const char *R::R_nativeEncoding(void)
 {
     return native_enc;
 }
@@ -366,7 +585,7 @@ HIDDEN const char *R::R_nativeEncoding(void)
    known_to_be_latin1, utf8locale, latin1locale and mbcslocale) */
 
 static char codeset[R_CODESET_MAX + 1];
-HIDDEN void R::R_check_locale(void)
+RHIDDEN void R::R_check_locale(void)
 {
     known_to_be_utf8 = utf8locale = false;
     known_to_be_latin1 = latin1locale = FALSE;
@@ -460,7 +679,7 @@ static char *R_Date(void)
     return s;
 }
 
-HIDDEN SEXP do_date(SEXP call, SEXP op, SEXP args, SEXP rho)
+RHIDDEN SEXP do_date(SEXP call, SEXP op, SEXP args, SEXP rho)
 {
     checkArity(op, args);
     return mkString(R_Date());
@@ -474,7 +693,7 @@ HIDDEN SEXP do_date(SEXP call, SEXP op, SEXP args, SEXP rho)
  */
 
 // .Internal so manages R_alloc stack used by acopy_string
-HIDDEN SEXP do_fileshow(SEXP call, SEXP op, SEXP args, SEXP rho)
+RHIDDEN SEXP do_fileshow(SEXP call, SEXP op, SEXP args, SEXP rho)
 {
     SEXP fn, tl, hd, pg;
     const char **f, **h, *t, *pager = nullptr /* -Wall */;
@@ -562,7 +781,7 @@ static int R_AppendFile(SEXP file1, SEXP file2)
     return status;
 }
 
-HIDDEN SEXP do_fileappend(SEXP call, SEXP op, SEXP args, SEXP rho)
+RHIDDEN SEXP do_fileappend(SEXP call, SEXP op, SEXP args, SEXP rho)
 {
     SEXP f1, f2, ans;
     int n, n1, n2;
@@ -621,7 +840,7 @@ done:
     return ans;
 }
 
-HIDDEN SEXP do_filecreate(SEXP call, SEXP op, SEXP args, SEXP rho)
+RHIDDEN SEXP do_filecreate(SEXP call, SEXP op, SEXP args, SEXP rho)
 {
     SEXP fn, ans;
     FILE *fp;
@@ -650,7 +869,7 @@ HIDDEN SEXP do_filecreate(SEXP call, SEXP op, SEXP args, SEXP rho)
     return ans;
 }
 
-HIDDEN SEXP do_fileremove(SEXP call, SEXP op, SEXP args, SEXP rho)
+RHIDDEN SEXP do_fileremove(SEXP call, SEXP op, SEXP args, SEXP rho)
 {
     SEXP f, ans;
     int i, n;
@@ -685,7 +904,7 @@ HIDDEN SEXP do_fileremove(SEXP call, SEXP op, SEXP args, SEXP rho)
    have, and which many people report granting in the Policy Editor
    fails to work.
 */
-HIDDEN SEXP do_filesymlink(SEXP call, SEXP op, SEXP args, SEXP rho)
+RHIDDEN SEXP do_filesymlink(SEXP call, SEXP op, SEXP args, SEXP rho)
 {
     SEXP f1, f2;
     int n, n1, n2;
@@ -771,7 +990,7 @@ HIDDEN SEXP do_filesymlink(SEXP call, SEXP op, SEXP args, SEXP rho)
 }
 
 
-HIDDEN SEXP do_filelink(SEXP call, SEXP op, SEXP args, SEXP rho)
+RHIDDEN SEXP do_filelink(SEXP call, SEXP op, SEXP args, SEXP rho)
 {
     SEXP f1, f2;
     int n, n1, n2;
@@ -847,7 +1066,7 @@ int Rwin_rename(char *from, char *to);  /* in src/gnuwin32/extra.cpp */
 int Rwin_wrename(const wchar_t *from, const wchar_t *to);
 #endif
 
-HIDDEN SEXP do_filerename(SEXP call, SEXP op, SEXP args, SEXP rho)
+RHIDDEN SEXP do_filerename(SEXP call, SEXP op, SEXP args, SEXP rho)
 {
     SEXP f1, f2, ans;
     int i, n1, n2;
@@ -939,7 +1158,7 @@ HIDDEN SEXP do_filerename(SEXP call, SEXP op, SEXP args, SEXP rho)
 #define STAT_TIMESPEC_NS(st, st_xtim) ((st).st_xtim.st__tim.tv_nsec)
 #endif
 
-HIDDEN SEXP do_fileinfo(SEXP call, SEXP op, SEXP args, SEXP rho)
+RHIDDEN SEXP do_fileinfo(SEXP call, SEXP op, SEXP args, SEXP rho)
 {
     SEXP fn, ans, ansnames, fsize, mtime, ctime, atime, isdir,
 	mode, xxclass;
@@ -1163,7 +1382,7 @@ HIDDEN SEXP do_fileinfo(SEXP call, SEXP op, SEXP args, SEXP rho)
     return ans;
 }
 
-HIDDEN SEXP do_direxists(SEXP call, SEXP op, SEXP args, SEXP rho)
+RHIDDEN SEXP do_direxists(SEXP call, SEXP op, SEXP args, SEXP rho)
 {
     SEXP fn, ans;
 
@@ -1333,7 +1552,7 @@ static void list_files(const char *dnp, const char *stem, int *count, SEXP *pans
 }
 #undef IF_MATCH_ADD_TO_ANS
 
-HIDDEN SEXP do_listfiles(SEXP call, SEXP op, SEXP args, SEXP rho)
+RHIDDEN SEXP do_listfiles(SEXP call, SEXP op, SEXP args, SEXP rho)
 {
     int countmax = 128;
 
@@ -1457,7 +1676,7 @@ static void list_dirs(const char *dnp, const char *nm,
     }
 }
 
-HIDDEN SEXP do_listdirs(SEXP call, SEXP op, SEXP args, SEXP rho)
+RHIDDEN SEXP do_listdirs(SEXP call, SEXP op, SEXP args, SEXP rho)
 {
     int countmax = 128;
 
@@ -1488,7 +1707,7 @@ HIDDEN SEXP do_listdirs(SEXP call, SEXP op, SEXP args, SEXP rho)
     return ans;
 }
 
-HIDDEN SEXP do_Rhome(SEXP call, SEXP op, SEXP args, SEXP rho)
+RHIDDEN SEXP do_Rhome(SEXP call, SEXP op, SEXP args, SEXP rho)
 {
     char *path;
     checkArity(op, args);
@@ -1498,14 +1717,14 @@ HIDDEN SEXP do_Rhome(SEXP call, SEXP op, SEXP args, SEXP rho)
 }
 
 #ifdef _WIN32
-HIDDEN static Rboolean R_WFileExists(const wchar_t *path)
+RHIDDEN static Rboolean R_WFileExists(const wchar_t *path)
 {
     struct _stati64 sb;
     return _wstati64(path, &sb) == 0;
 }
 #endif
 
-HIDDEN SEXP do_fileexists(SEXP call, SEXP op, SEXP args, SEXP rho)
+RHIDDEN SEXP do_fileexists(SEXP call, SEXP op, SEXP args, SEXP rho)
 {
     SEXP file, ans;
     int i, nfile;
@@ -1539,7 +1758,7 @@ HIDDEN SEXP do_fileexists(SEXP call, SEXP op, SEXP args, SEXP rho)
 constexpr int CHOOSEBUFSIZE = 1024;
 
 #ifndef _WIN32
-HIDDEN SEXP do_filechoose(SEXP call, SEXP op, SEXP args, SEXP rho)
+RHIDDEN SEXP do_filechoose(SEXP call, SEXP op, SEXP args, SEXP rho)
 {
     int _new, len;
     char buf[CHOOSEBUFSIZE];
@@ -1563,7 +1782,7 @@ extern int winAccessW(const wchar_t *path, int mode);
 #endif
 
 /* we require 'access' as from 2.12.0 */
-HIDDEN SEXP do_fileaccess(SEXP call, SEXP op, SEXP args, SEXP rho)
+RHIDDEN SEXP do_fileaccess(SEXP call, SEXP op, SEXP args, SEXP rho)
 {
     SEXP fn, ans;
     int i, n, mode, modemask;
@@ -1778,7 +1997,7 @@ static int R_unlink(const char *name, int recursive, int force)
 /* Note that wildcards are allowed in 'names' */
 #ifdef _WIN32
 #include <dos_wglob.h>
-HIDDEN SEXP do_unlink(SEXP call, SEXP op, SEXP args, SEXP env)
+RHIDDEN SEXP do_unlink(SEXP call, SEXP op, SEXP args, SEXP env)
 {
     SEXP  fn;
     int i, j, nfiles, res, failures = 0, recursive, force, expand;
@@ -1828,7 +2047,7 @@ HIDDEN SEXP do_unlink(SEXP call, SEXP op, SEXP args, SEXP env)
 #  include <glob.h>
 # endif
 
-HIDDEN SEXP do_unlink(SEXP call, SEXP op, SEXP args, SEXP env)
+RHIDDEN SEXP do_unlink(SEXP call, SEXP op, SEXP args, SEXP env)
 {
     SEXP  fn;
     int i, nfiles, failures = 0, recursive, force, expand;
@@ -1890,7 +2109,7 @@ HIDDEN SEXP do_unlink(SEXP call, SEXP op, SEXP args, SEXP env)
 }
 #endif
 
-HIDDEN SEXP do_getlocale(SEXP call, SEXP op, SEXP args, SEXP rho)
+RHIDDEN SEXP do_getlocale(SEXP call, SEXP op, SEXP args, SEXP rho)
 {
     int cat;
     char *p = nullptr;
@@ -1922,7 +2141,7 @@ HIDDEN SEXP do_getlocale(SEXP call, SEXP op, SEXP args, SEXP rho)
 }
 
 /* Locale specs are always ASCII */
-HIDDEN SEXP do_setlocale(SEXP call, SEXP op, SEXP args, SEXP rho)
+RHIDDEN SEXP do_setlocale(SEXP call, SEXP op, SEXP args, SEXP rho)
 {
     SEXP locale = CADR(args), ans;
     int cat;
@@ -2028,7 +2247,7 @@ HIDDEN SEXP do_setlocale(SEXP call, SEXP op, SEXP args, SEXP rho)
 
 
 
-HIDDEN SEXP do_localeconv(SEXP call, SEXP op, SEXP args, SEXP rho)
+RHIDDEN SEXP do_localeconv(SEXP call, SEXP op, SEXP args, SEXP rho)
 {
     SEXP ans, ansnames;
     struct lconv *lc = localeconv();
@@ -2088,7 +2307,7 @@ HIDDEN SEXP do_localeconv(SEXP call, SEXP op, SEXP args, SEXP rho)
 }
 
 /* .Internal function for path.expand */
-HIDDEN SEXP do_pathexpand(SEXP call, SEXP op, SEXP args, SEXP rho)
+RHIDDEN SEXP do_pathexpand(SEXP call, SEXP op, SEXP args, SEXP rho)
 {
     SEXP fn, ans;
     int i, n;
@@ -2150,7 +2369,7 @@ static bool R_can_use_X11(void)
 #endif
 
 /* only actually used on Unix */
-HIDDEN SEXP do_capabilitiesX11(SEXP call, SEXP op, SEXP args, SEXP rho)
+RHIDDEN SEXP do_capabilitiesX11(SEXP call, SEXP op, SEXP args, SEXP rho)
 {
     checkArity(op, args);
 #ifdef Unix
@@ -2160,7 +2379,7 @@ HIDDEN SEXP do_capabilitiesX11(SEXP call, SEXP op, SEXP args, SEXP rho)
 #endif
 }
 
-HIDDEN SEXP do_capabilities(SEXP call, SEXP op, SEXP args, SEXP rho)
+RHIDDEN SEXP do_capabilities(SEXP call, SEXP op, SEXP args, SEXP rho)
 {
     SEXP ans, ansnames;
     int i = 0;
@@ -2335,7 +2554,7 @@ HIDDEN SEXP do_capabilities(SEXP call, SEXP op, SEXP args, SEXP rho)
     return ans;
 }
 
-HIDDEN SEXP do_sysgetpid(SEXP call, SEXP op, SEXP args, SEXP rho)
+RHIDDEN SEXP do_sysgetpid(SEXP call, SEXP op, SEXP args, SEXP rho)
 {
     checkArity(op, args);
     return ScalarInteger(getpid());
@@ -2350,7 +2569,7 @@ HIDDEN SEXP do_sysgetpid(SEXP call, SEXP op, SEXP args, SEXP rho)
 */
 #ifndef _WIN32
 /* mkdir is defined in <sys/stat.h> */
-HIDDEN SEXP do_dircreate(SEXP call, SEXP op, SEXP args, SEXP env)
+RHIDDEN SEXP do_dircreate(SEXP call, SEXP op, SEXP args, SEXP env)
 {
     SEXP path;
     int res, show, recursive, mode, serrno = 0;
@@ -2409,7 +2628,7 @@ end:
 }
 #else /* _WIN32 */
 #include <io.h> /* mkdir is defined here */
-HIDDEN SEXP do_dircreate(SEXP call, SEXP op, SEXP args, SEXP env)
+RHIDDEN SEXP do_dircreate(SEXP call, SEXP op, SEXP args, SEXP env)
 {
     SEXP  path;
     wchar_t *p, dir[MAX_PATH];
@@ -2610,7 +2829,7 @@ copy_error:
 
 /* file.copy(from, to, overwrite, recursive, copy.mode, copy.date)
  * --------- Windows */
-HIDDEN SEXP do_filecopy(SEXP call, SEXP op, SEXP args, SEXP rho)
+RHIDDEN SEXP do_filecopy(SEXP call, SEXP op, SEXP args, SEXP rho)
 {
     checkArity(op, args);
     SEXP fn = CAR(args);
@@ -2864,7 +3083,7 @@ copy_error:
 
 /* file.copy(from, to, overwrite, recursive, copy.mode, copy.date)
  * --------- Unix-alike */
-HIDDEN SEXP do_filecopy(SEXP call, SEXP op, SEXP args, SEXP rho)
+RHIDDEN SEXP do_filecopy(SEXP call, SEXP op, SEXP args, SEXP rho)
 {
     checkArity(op, args);
     SEXP fn = CAR(args);
@@ -2934,7 +3153,7 @@ HIDDEN SEXP do_filecopy(SEXP call, SEXP op, SEXP args, SEXP rho)
 }
 #endif
 
-HIDDEN SEXP do_l10n_info(SEXP call, SEXP op, SEXP args, SEXP env)
+RHIDDEN SEXP do_l10n_info(SEXP call, SEXP op, SEXP args, SEXP env)
 {
 #ifdef _WIN32
     int len = 5;
@@ -2968,7 +3187,7 @@ HIDDEN SEXP do_l10n_info(SEXP call, SEXP op, SEXP args, SEXP env)
 
 /* do_normalizepath moved to util.cpp in R 2.13.0 */
 
-HIDDEN SEXP do_syschmod(SEXP call, SEXP op, SEXP args, SEXP env)
+RHIDDEN SEXP do_syschmod(SEXP call, SEXP op, SEXP args, SEXP env)
 {
 #ifdef HAVE_CHMOD
     SEXP paths, smode, ans;
@@ -3032,7 +3251,7 @@ HIDDEN SEXP do_syschmod(SEXP call, SEXP op, SEXP args, SEXP env)
 #endif
 }
 
-HIDDEN SEXP do_sysumask(SEXP call, SEXP op, SEXP args, SEXP env)
+RHIDDEN SEXP do_sysumask(SEXP call, SEXP op, SEXP args, SEXP env)
 {
     SEXP ans;
     int mode;
@@ -3061,7 +3280,7 @@ HIDDEN SEXP do_sysumask(SEXP call, SEXP op, SEXP args, SEXP env)
     return ans;
 }
 
-HIDDEN SEXP do_readlink(SEXP call, SEXP op, SEXP args, SEXP env)
+RHIDDEN SEXP do_readlink(SEXP call, SEXP op, SEXP args, SEXP env)
 {
     checkArity(op, args);
     SEXP paths = CAR(args);
@@ -3090,7 +3309,7 @@ HIDDEN SEXP do_readlink(SEXP call, SEXP op, SEXP args, SEXP env)
 }
 
 
-HIDDEN SEXP do_Cstack_info(SEXP call, SEXP op, SEXP args, SEXP rho)
+RHIDDEN SEXP do_Cstack_info(SEXP call, SEXP op, SEXP args, SEXP rho)
 {
     SEXP ans, nms;
 
@@ -3144,7 +3363,7 @@ static int winSetFileTime(const char *fn, double ftime)
 }
 #endif
 
-HIDDEN SEXP do_setFileTime(SEXP call, SEXP op, SEXP args, SEXP rho)
+RHIDDEN SEXP do_setFileTime(SEXP call, SEXP op, SEXP args, SEXP rho)
 {
     checkArity(op, args);
     const char *fn;
@@ -3213,7 +3432,7 @@ typedef struct TMN_REPARSE_DATA_BUFFER
     WCHAR  PathBuffer[1024];
 } TMN_REPARSE_DATA_BUFFER;
 
-HIDDEN SEXP do_mkjunction(SEXP call, SEXP op, SEXP args, SEXP rho)
+RHIDDEN SEXP do_mkjunction(SEXP call, SEXP op, SEXP args, SEXP rho)
 {
     wchar_t from[10000];
     const wchar_t *to;
@@ -3278,7 +3497,9 @@ HIDDEN SEXP do_mkjunction(SEXP call, SEXP op, SEXP args, SEXP rho)
 #  define U_MAX_VERSION_LENGTH 4
 #  define U_MAX_VERSION_STRING_LENGTH 20
 typedef uint8_t UVersionInfo[U_MAX_VERSION_LENGTH];
+extern "C" 
 void u_versionToString(const UVersionInfo versionArray, char *versionString);
+extern "C" 
 void u_getVersion(UVersionInfo versionArray);
 # endif
 #endif
@@ -3313,7 +3534,7 @@ extern void *dlsym(void *handle, const char *symbol);
    without loading any modules; libraries available via modules are
    treated individually (libcurlVersion(), La_version(), etc)
 */
-HIDDEN SEXP do_eSoftVersion(SEXP call, SEXP op, SEXP args, SEXP rho)
+RHIDDEN SEXP do_eSoftVersion(SEXP call, SEXP op, SEXP args, SEXP rho)
 {
     checkArity(op, args);
     SEXP ans = PROTECT(allocVector(STRSXP, 9));
@@ -3454,7 +3675,7 @@ HIDDEN SEXP do_eSoftVersion(SEXP call, SEXP op, SEXP args, SEXP rho)
 /* platform-specific */
 void Rsleep(double timeint);
 
-HIDDEN SEXP do_syssleep(SEXP call, SEXP op, SEXP args, SEXP rho)
+RHIDDEN SEXP do_syssleep(SEXP call, SEXP op, SEXP args, SEXP rho)
 {
     checkArity(op, args);
     double time = asReal(CAR(args));

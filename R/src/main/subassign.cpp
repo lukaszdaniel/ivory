@@ -80,6 +80,10 @@
  *  2000/08/01  Also promises, expressions, environments when using [[ PD
  */
 
+/** @file subassign.cpp
+ *
+ */
+
 #ifdef HAVE_CONFIG_H
 #include <config.h>
 #endif
@@ -1615,7 +1619,7 @@ inline static int R_DispatchOrEvalSP(SEXP call, SEXP op, const char *generic, SE
 /* and the remainder of args have not.  If this was called directly */
 /* the CAR(args) and the last arg won't have been. */
 
-HIDDEN SEXP do_subassign(SEXP call, SEXP op, SEXP args, SEXP rho)
+RHIDDEN SEXP do_subassign(SEXP call, SEXP op, SEXP args, SEXP rho)
 {
     SEXP ans;
 
@@ -1631,7 +1635,7 @@ HIDDEN SEXP do_subassign(SEXP call, SEXP op, SEXP args, SEXP rho)
     return do_subassign_dflt(call, op, ans, rho);
 }
 
-HIDDEN SEXP do_subassign_dflt(SEXP call, SEXP op, SEXP args, SEXP rho)
+RHIDDEN SEXP do_subassign_dflt(SEXP call, SEXP op, SEXP args, SEXP rho)
 {
     SEXP subs, x, y;
     int nsubs, oldtype; Rboolean S4;
@@ -1772,7 +1776,7 @@ static SEXP DeleteOneVectorListItem(SEXP x, R_xlen_t which)
  * args[1] =: x    = object being subscripted
  * args[2] =: subs = list of subscripts
  * args[3] =: y    = replacement values */
-HIDDEN SEXP do_subassign2(SEXP call, SEXP op, SEXP args, SEXP rho)
+RHIDDEN SEXP do_subassign2(SEXP call, SEXP op, SEXP args, SEXP rho)
 {
     SEXP ans;
 
@@ -1784,7 +1788,7 @@ HIDDEN SEXP do_subassign2(SEXP call, SEXP op, SEXP args, SEXP rho)
     return do_subassign2_dflt(call, op, ans, rho);
 }
 
-HIDDEN SEXP do_subassign2_dflt(SEXP call, SEXP op, SEXP args, SEXP rho)
+RHIDDEN SEXP do_subassign2_dflt(SEXP call, SEXP op, SEXP args, SEXP rho)
 {
     SEXP dims, indx, names, newname, subs, x, xtop, xup, y, thesub = R_NilValue, xOrig = R_NilValue;
     int i, ndims, nsubs, which, len = 0 /* -Wall */;
@@ -2141,7 +2145,7 @@ HIDDEN SEXP do_subassign2_dflt(SEXP call, SEXP op, SEXP args, SEXP rho)
    to get DispatchOrEval to work we need to first translate it
    to a string
 */
-HIDDEN SEXP do_subassign3(SEXP call, SEXP op, SEXP args, SEXP env)
+RHIDDEN SEXP do_subassign3(SEXP call, SEXP op, SEXP args, SEXP env)
 {
     SEXP ans, nlist = R_NilValue;
 

@@ -34,6 +34,10 @@
  *  separately, but then we would have more to keep in step.
  */
 
+/** @file subset.cpp
+ *
+ */
+
 #ifdef HAVE_CONFIG_H
 #include <config.h>
 #endif
@@ -115,7 +119,6 @@ inline static SEXP VECTOR_ELT_FIX_NAMED(SEXP y, R_xlen_t i)
 		}                                        \
 	} while (0)
 
-/*HIDDEN*/
 SEXP R::Rf_ExtractSubset(SEXP x, SEXP indx, SEXP call)
 {
     if (x == R_NilValue)
@@ -455,7 +458,7 @@ inline static R_xlen_t findASubIndex(R_xlen_t k, const int * const *subs,
 static SEXP ArraySubset(SEXP x, SEXP s, SEXP call, int drop)
 {
     int k;
-	SEXPTYPE mode;
+    SEXPTYPE mode;
     SEXP dimnames, dimnamesnames, p, q, r, result, xdims;
     const void *vmaxsave = vmaxget();
 
@@ -686,7 +689,7 @@ R_INLINE static int R_DispatchOrEvalSP(SEXP call, SEXP op, const char *generic, 
 /* The "[" subset operator.
  * This provides the most general form of subsetting. */
 
-HIDDEN SEXP do_subset(SEXP call, SEXP op, SEXP args, SEXP rho)
+RHIDDEN SEXP do_subset(SEXP call, SEXP op, SEXP args, SEXP rho)
 {
     SEXP ans;
 
@@ -731,7 +734,7 @@ R_INLINE static R_xlen_t scalarIndex(SEXP s)
 }
 
 // called from (R `[` => ) do_subset, but also from R .subset() :
-HIDDEN SEXP do_subset_dflt(SEXP call, SEXP op, SEXP args, SEXP rho)
+RHIDDEN SEXP do_subset_dflt(SEXP call, SEXP op, SEXP args, SEXP rho)
 {
     SEXP ans, ax, px, x, subs;
     int drop, i, nsubs, type;
@@ -948,7 +951,7 @@ HIDDEN SEXP do_subset_dflt(SEXP call, SEXP op, SEXP args, SEXP rho)
 /* The [[ subset operator.  It needs to be fast. */
 /* The arguments to this call are evaluated on entry. */
 
-HIDDEN SEXP do_subset2(SEXP call, SEXP op, SEXP args, SEXP rho)
+RHIDDEN SEXP do_subset2(SEXP call, SEXP op, SEXP args, SEXP rho)
 {
     SEXP ans;
 
@@ -971,7 +974,7 @@ HIDDEN SEXP do_subset2(SEXP call, SEXP op, SEXP args, SEXP rho)
     return do_subset2_dflt(call, op, ans, rho);
 }
 
-HIDDEN SEXP do_subset2_dflt(SEXP call, SEXP op, SEXP args, SEXP rho)
+RHIDDEN SEXP do_subset2_dflt(SEXP call, SEXP op, SEXP args, SEXP rho)
 {
     SEXP ans, dims, dimnames, indx, subs, x;
     int i, ndims, nsubs;
@@ -1153,7 +1156,7 @@ HIDDEN SEXP do_subset2_dflt(SEXP call, SEXP op, SEXP args, SEXP rho)
     return ans;
 }
 
-HIDDEN SEXP R::dispatch_subset2(SEXP x, R_xlen_t i, SEXP call, SEXP rho)
+RHIDDEN SEXP R::dispatch_subset2(SEXP x, R_xlen_t i, SEXP call, SEXP rho)
 {
     static GCRoot<> bracket_op(nullptr);
     SEXP args, x_elt;
@@ -1212,7 +1215,6 @@ static enum pmatch pstrmatch(SEXP target, SEXP input, size_t slen)
     }
 }
 
-/*HIDDEN*/
 SEXP R::Rf_fixSubset3Args(SEXP call, SEXP args, SEXP env, SEXP* syminp)
 {
     SEXP input, nlist;
@@ -1252,7 +1254,7 @@ SEXP R::Rf_fixSubset3Args(SEXP call, SEXP args, SEXP env, SEXP* syminp)
    We need to be sure to only evaluate the first argument.
    The second will be a symbol that needs to be matched, not evaluated.
 */
-HIDDEN SEXP do_subset3(SEXP call, SEXP op, SEXP args, SEXP env)
+RHIDDEN SEXP do_subset3(SEXP call, SEXP op, SEXP args, SEXP env)
 {
     SEXP ans;
 
@@ -1279,7 +1281,7 @@ HIDDEN SEXP do_subset3(SEXP call, SEXP op, SEXP args, SEXP env)
 }
 
 /* also used in eval.c */
-HIDDEN SEXP R::R_subset3_dflt(SEXP x, SEXP input, SEXP call)
+RHIDDEN SEXP R::R_subset3_dflt(SEXP x, SEXP input, SEXP call)
 {
     SEXP y, nlist;
     size_t slen;

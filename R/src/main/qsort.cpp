@@ -24,6 +24,10 @@
  * then manually by Martin Maechler
 */
 
+/** @file qsort.cpp
+ *
+ */
+
 #ifdef HAVE_CONFIG_H
 #include <config.h>
 #endif
@@ -50,7 +54,7 @@ static void R_qsort_int_R(int *v, double *I, size_t i, size_t j);
 #endif
 
 /* R function  qsort(x, index.return) */
-HIDDEN SEXP do_qsort(SEXP call, SEXP op, SEXP args, SEXP rho)
+RHIDDEN SEXP do_qsort(SEXP call, SEXP op, SEXP args, SEXP rho)
 {
     SEXP x, sx;
     int indx_ret;

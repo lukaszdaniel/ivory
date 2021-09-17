@@ -21,6 +21,10 @@
  *  https://www.R-project.org/Licenses/
  */
 
+/** @file names.cpp
+ *
+ */
+
 #ifdef HAVE_CONFIG_H
 #include <config.h>
 #endif
@@ -2004,7 +2008,7 @@ std::pair<BuiltInFunction::map*, BuiltInFunction::map*> BuiltInFunction::createL
 #endif
 
 /* also used in eval.cpp */
-HIDDEN SEXP R::R_Primitive(const char *primname)
+RHIDDEN SEXP R::R_Primitive(const char *primname)
 {
 #ifdef CXXR_USE_OLD_R_FUNTAB_IMPL
     for (size_t i = 0; i < R_FunTab.size(); i++)
@@ -2021,7 +2025,7 @@ HIDDEN SEXP R::R_Primitive(const char *primname)
 #endif
 }
 
-HIDDEN SEXP do_primitive(SEXP call, SEXP op, SEXP args, SEXP env)
+RHIDDEN SEXP do_primitive(SEXP call, SEXP op, SEXP args, SEXP env)
 {
     SEXP name, prim;
     checkArity(op, args);
@@ -2035,7 +2039,7 @@ HIDDEN SEXP do_primitive(SEXP call, SEXP op, SEXP args, SEXP env)
     return prim;
 }
 
-HIDDEN int R::StrToInternal(const char *s)
+RHIDDEN int R::StrToInternal(const char *s)
 {
 #ifdef CXXR_USE_OLD_R_FUNTAB_IMPL
     for (size_t i = 0; i < R_FunTab.size(); i++)
@@ -2072,14 +2076,14 @@ static void initializeDDVALSymbols()
     }
 }
 
-/*HIDDEN*/
+/*RHIDDEN*/
 SEXP R::Rf_installDDVAL(int n)
 {
     return Symbol::obtainDotDotSymbol(n);
 }
 
 /* initialize the symbol table */
-HIDDEN void R::InitNames()
+RHIDDEN void R::InitNames()
 {
     // Logical constants.
     Logical::initialize();
@@ -2121,7 +2125,7 @@ SEXP Rf_install(const char *name)
 /* This function is equivalent to install(CHAR(charSXP)), but faster.
    Like the equivalent code pattern, it discards the encoding information,
    hence in almost all cases installTrChar should be used, instead. */
-/*HIDDEN*/
+/*RHIDDEN*/
 SEXP Rf_installNoTrChar(SEXP charSXP)
 {
     int len = LENGTH(charSXP);
@@ -2145,7 +2149,7 @@ SEXP Rf_installNoTrChar(SEXP charSXP)
     }
 }
 
-/*HIDDEN*/
+/*RHIDDEN*/
 SEXP R::Rf_installS3Signature(const char *className, const char *methodName)
 {
     return Symbol::obtainS3Signature(className, methodName);
@@ -2154,7 +2158,7 @@ SEXP R::Rf_installS3Signature(const char *className, const char *methodName)
 
 /*  do_internal - This is the code for .Internal(). */
 
-HIDDEN SEXP do_internal(SEXP call, SEXP op, SEXP args, SEXP env)
+RHIDDEN SEXP do_internal(SEXP call, SEXP op, SEXP args, SEXP env)
 {
     SEXP s, ans;
     SEXP fun;
@@ -2228,7 +2232,7 @@ HIDDEN SEXP do_internal(SEXP call, SEXP op, SEXP args, SEXP env)
 
 	/* Internal code for the ~ operator */
 
-HIDDEN SEXP do_tilde(SEXP call, SEXP op, SEXP args, SEXP rho)
+RHIDDEN SEXP do_tilde(SEXP call, SEXP op, SEXP args, SEXP rho)
 {
     if (isObject(call))
         return duplicate(call);

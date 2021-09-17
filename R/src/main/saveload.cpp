@@ -20,6 +20,10 @@
 
 /* <UTF8> byte-level access is only to compare with chars <= 0x7F */
 
+/** @file saveload.cpp
+ *
+ */
+
 #ifdef HAVE_CONFIG_H
 #include <config.h>
 #endif
@@ -125,8 +129,8 @@ struct NodeInfo
    is not likely to be preserved properly.  Since 32 bit ints (and 2's
    complement) are pretty much universal, we can worry about that when
    the need arises.  To be safe, we signal a compiler error if int is
-   not 32 bits. There may be similar issues with doubles. */
-* /
+   not 32 bits. There may be similar issues with doubles.
+*/
 # error code requires that int have 32 bits
 #endif
 
@@ -2016,7 +2020,7 @@ inline static int defaultSaveVersion()
 
 /* ----- E x t e r n a l -- I n t e r f a c e s ----- */
 
-HIDDEN void R::R_SaveToFileV(SEXP obj, FILE *fp, int ascii, int version)
+RHIDDEN void R::R_SaveToFileV(SEXP obj, FILE *fp, int ascii, int version)
 {
     SaveLoadData data = {R_StringBuffer()};
 
@@ -2052,7 +2056,7 @@ HIDDEN void R::R_SaveToFileV(SEXP obj, FILE *fp, int ascii, int version)
     }
 }
 
-HIDDEN void R::R_SaveToFile(SEXP obj, FILE *fp, int ascii)
+RHIDDEN void R::R_SaveToFile(SEXP obj, FILE *fp, int ascii)
 {
     R_SaveToFileV(obj, fp, ascii, defaultSaveVersion());
 }
@@ -2060,7 +2064,7 @@ HIDDEN void R::R_SaveToFile(SEXP obj, FILE *fp, int ascii)
     /* different handling of errors */
 
 #define return_and_free(X) {r = X; data.buffer.R_FreeStringBuffer(); return r;}
-HIDDEN SEXP R::R_LoadFromFile(FILE *fp, int startup)
+RHIDDEN SEXP R::R_LoadFromFile(FILE *fp, int startup)
 {
     struct R_inpstream_st in;
     int magic;
@@ -2111,7 +2115,7 @@ HIDDEN SEXP R::R_LoadFromFile(FILE *fp, int startup)
     }
 }
 
-HIDDEN SEXP do_loadfile(SEXP call, SEXP op, SEXP args, SEXP env)
+RHIDDEN SEXP do_loadfile(SEXP call, SEXP op, SEXP args, SEXP env)
 {
     SEXP file, s;
     FILE *fp;
@@ -2133,7 +2137,7 @@ HIDDEN SEXP do_loadfile(SEXP call, SEXP op, SEXP args, SEXP env)
     return s;
 }
 
-HIDDEN SEXP do_savefile(SEXP call, SEXP op, SEXP args, SEXP env)
+RHIDDEN SEXP do_savefile(SEXP call, SEXP op, SEXP args, SEXP env)
 {
     FILE *fp;
     int version;
@@ -2168,7 +2172,7 @@ inline static void saveload_cleanup(void *data)
 }
 
 /* Only used for version 1 saves */
-HIDDEN SEXP do_save(SEXP call, SEXP op, SEXP args, SEXP env)
+RHIDDEN SEXP do_save(SEXP call, SEXP op, SEXP args, SEXP env)
 {
     /* save(list, file, ascii, version, environment) */
 
@@ -2289,7 +2293,7 @@ inline static SEXP R_LoadSavedData(FILE *fp, SEXP aenv)
 }
 
 /* This is only used for version 1 or earlier formats */
-HIDDEN SEXP do_load(SEXP call, SEXP op, SEXP args, SEXP env)
+RHIDDEN SEXP do_load(SEXP call, SEXP op, SEXP args, SEXP env)
 {
     SEXP fname, aenv, val;
     FILE *fp;
@@ -2332,7 +2336,7 @@ HIDDEN SEXP do_load(SEXP call, SEXP op, SEXP args, SEXP env)
 #define R_XDR_INTEGER_SIZE 4
 */
 
-HIDDEN void R_XDREncodeDouble(double d, void *buf)
+RHIDDEN void R_XDREncodeDouble(double d, void *buf)
 {
     XDR xdrs;
     int success;
@@ -2344,7 +2348,7 @@ HIDDEN void R_XDREncodeDouble(double d, void *buf)
         error(_("XDR write failed"));
 }
 
-HIDDEN double R_XDRDecodeDouble(void *buf)
+RHIDDEN double R_XDRDecodeDouble(void *buf)
 {
     XDR xdrs;
     double d;
@@ -2358,7 +2362,7 @@ HIDDEN double R_XDRDecodeDouble(void *buf)
     return d;
 }
 
-HIDDEN void R_XDREncodeInteger(int i, void *buf)
+RHIDDEN void R_XDREncodeInteger(int i, void *buf)
 {
     XDR xdrs;
     int success;
@@ -2370,7 +2374,7 @@ HIDDEN void R_XDREncodeInteger(int i, void *buf)
 	error(_("XDR write failed"));
 }
 
-HIDDEN int R_XDRDecodeInteger(void *buf)
+RHIDDEN int R_XDRDecodeInteger(void *buf)
 {
     XDR xdrs;
     int i, success;
@@ -2451,7 +2455,7 @@ static void con_cleanup(void *data)
    with either a pairlist or list.
 */
 
-HIDDEN SEXP do_saveToConn(SEXP call, SEXP op, SEXP args, SEXP env)
+RHIDDEN SEXP do_saveToConn(SEXP call, SEXP op, SEXP args, SEXP env)
 {
     /* saveToConn(list, conn, ascii, version, environment) */
 
@@ -2557,7 +2561,7 @@ HIDDEN SEXP do_saveToConn(SEXP call, SEXP op, SEXP args, SEXP env)
 
 /* Read and checks the magic number, open the connection if needed */
 
-HIDDEN SEXP do_loadFromConn2(SEXP call, SEXP op, SEXP args, SEXP env)
+RHIDDEN SEXP do_loadFromConn2(SEXP call, SEXP op, SEXP args, SEXP env)
 {
     /* 0 .. loadFromConn2(conn, environment, verbose) */
     /* 1 .. loadInfoFromConn2(conn) */

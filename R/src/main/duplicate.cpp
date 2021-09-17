@@ -19,6 +19,10 @@
  *  https://www.R-project.org/Licenses/
  */
 
+/** @file duplicate.cpp
+ *
+ */
+
 #ifdef HAVE_CONFIG_H
 #include <config.h>
 #endif
@@ -51,12 +55,12 @@ using namespace CXXR;
 #ifdef R_PROFILING
 static unsigned long duplicate_counter = static_cast<unsigned long>(-1);
 
-HIDDEN unsigned long R::get_duplicate_counter(void)
+RHIDDEN unsigned long R::get_duplicate_counter(void)
 {
 	return duplicate_counter;
 }
 
-HIDDEN void R::reset_duplicate_counter(void)
+RHIDDEN void R::reset_duplicate_counter(void)
 {
 	duplicate_counter = 0;
 	return;
@@ -316,7 +320,7 @@ void Rf_copyMatrix(SEXP s, SEXP t, Rboolean byrow)
 }
 
 #define COPY_ELT_WITH_RECYCLE(TNAME, GETELT, SETELT)                                              \
-	HIDDEN void                                                                                   \
+	RHIDDEN void                                                                                   \
 		xcopy##TNAME##WithRecycle(SEXP dst, SEXP src, R_xlen_t dstart, R_xlen_t n, R_xlen_t nsrc) \
 	{                                                                                             \
                                                                                                   \
@@ -348,7 +352,7 @@ COPY_ELT_WITH_RECYCLE(String, STRING_ELT, SET_STRING_ELT)	 /* xcopyStringWithRec
 COPY_ELT_WITH_RECYCLE(Vector, VECTOR_ELT_LD, SET_VECTOR_ELT) /* xcopyVectorWithRecycle */
 
 #define FILL_ELT_WITH_RECYCLE(TNAME, GETELT, SETELT)                                             \
-	HIDDEN void xfill##TNAME##MatrixWithRecycle(SEXP dst, SEXP src,                              \
+	RHIDDEN void xfill##TNAME##MatrixWithRecycle(SEXP dst, SEXP src,                              \
 												R_xlen_t dstart, R_xlen_t drows, R_xlen_t srows, \
 												R_xlen_t cols, R_xlen_t nsrc)                    \
 	{                                                                                            \

@@ -67,7 +67,7 @@ static double gsumln(double, double);
  * add log_p  and work towards gaining precision in that case
  */
 
-HIDDEN void Rf_bratio(double a, double b, double x, double y, double *w, double *w1,
+RHIDDEN void Rf_bratio(double a, double b, double x, double y, double *w, double *w1,
        int *ierr, int log_p)
 {
 /* -----------------------------------------------------------------------

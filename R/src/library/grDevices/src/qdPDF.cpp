@@ -114,7 +114,7 @@ QuartzDesc_t QuartzPDF_DeviceCreate(void *dd, QuartzFunctions_t *fn, QuartzParam
 	    numK++;
 	}
 	// ai = CFDictionaryCreate(0, (const void**) keys, (const void**) values, numK, &kCFTypeDictionaryKeyCallBacks, &kCFTypeDictionaryValueCallBacks);
-    ai = CFDictionaryCreate(0, reinterpret_cast<const void **>(&keys), reinterpret_cast<const void **>(&values), numK, &kCFTypeDictionaryKeyCallBacks, &kCFTypeDictionaryValueCallBacks);
+	ai = CFDictionaryCreate(0, reinterpret_cast<const void **>(&keys), reinterpret_cast<const void **>(&values), numK, &kCFTypeDictionaryKeyCallBacks, &kCFTypeDictionaryValueCallBacks);
 	while (numK) CFRelease(values[--numK]);
     }
 

@@ -37,7 +37,7 @@
 #include "nmath.h"
 #include "dpq.h"
 
-HIDDEN
+RHIDDEN
 double Rf_pbeta_raw(double x, double a, double b, int lower_tail, int log_p)
 {
     // treat limit cases correctly here:

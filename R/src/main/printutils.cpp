@@ -54,6 +54,11 @@
 /* if ESC_BARE_QUOTE is defined, " in an unquoted string is replaced
    by \".  " in a quoted string is always replaced by \". */
 
+/** @file printutils.cpp
+ *
+ * General remarks on Printing and the Encode.. utils.
+ */
+
 #ifdef HAVE_CONFIG_H
 #include <config.h>
 #endif
@@ -94,7 +99,7 @@ using namespace CXXR;
 
 constexpr int BUFSIZE = 8192;  /* used by Rprintf etc */
 
-HIDDEN
+RHIDDEN
 R_size_t R::R_Decode2Long(char *p, int &ierr)
 {
     R_size_t v = strtol(p, &p, 10);
@@ -148,7 +153,7 @@ const char *Rf_EncodeInteger(int x, int w)
     return buff;
 }
 
-HIDDEN
+RHIDDEN
 const char *R::EncodeRaw(Rbyte x, const char *prefix)
 {
 	static char buff[10];
@@ -156,7 +161,7 @@ const char *R::EncodeRaw(Rbyte x, const char *prefix)
 	return buff;
 }
 
-HIDDEN
+RHIDDEN
 const char *R::Rf_EncodeEnvironment(SEXP x)
 {
     const void *vmax = vmaxget();
@@ -285,7 +290,7 @@ static const char *EncodeRealDrop0(double x, int w, int d, int e, const char *de
     return out;
 }
 
-HIDDEN SEXP R::StringFromReal(double x, int &warn)
+RHIDDEN SEXP R::StringFromReal(double x, int &warn)
 {
     int w, d, e;
     formatReal(&x, 1, &w, &d, &e, 0);
@@ -294,7 +299,7 @@ HIDDEN SEXP R::StringFromReal(double x, int &warn)
 }
 
 
-HIDDEN
+RHIDDEN
 const char *R::EncodeReal2(double x, int w, int d, int e)
 {
     static char buff[NB];
@@ -388,7 +393,7 @@ const char *Rf_EncodeComplex(Rcomplex x, int wr, int dr, int er, int wi, int di,
 
    This supported embedded nuls when we had those.
  */
-HIDDEN
+RHIDDEN
 int Rstrwid(const char *str, int slen, cetype_t ienc, int quote)
 {
     const char *p = str;
@@ -520,7 +525,7 @@ int Rstrwid(const char *str, int slen, cetype_t ienc, int quote)
 }
 
 /* Match what EncodeString does with encodings */
-HIDDEN int R::Rstrlen(SEXP s, int quote)
+RHIDDEN int R::Rstrlen(SEXP s, int quote)
 {
 	cetype_t ienc = getCharCE(s);
 	if (ienc == CE_UTF8 || ienc == CE_BYTES)
@@ -542,7 +547,7 @@ HIDDEN int R::Rstrlen(SEXP s, int quote)
    format().
  */
 
-HIDDEN
+RHIDDEN
 const char *R::EncodeString(SEXP s, int w, int quote, Rprt_adj justify)
 {
     int i, cnt;
@@ -867,7 +872,7 @@ const char *R::Rf_EncodeElement0(SEXP x, R_xlen_t indx, int quote, const char *d
    any subsequent call to EncodeChar/EncodeString may happen. Note that
    particularly it is NOT safe to pass the result of EncodeChar as 3rd
    argument to errorcall (errorcall_cpy can be used instead). */
-//HIDDEN
+//RHIDDEN
 const char *R::EncodeChar(SEXP x)
 {
     return EncodeString(x, 0, 0, Rprt_adj_left);
@@ -906,7 +911,7 @@ int vasprintf(char **strp, const char *fmt, va_list ap)
 
 constexpr int R_BUFSIZE = BUFSIZE;
 // similar to dummy_vfprintf in connections.cpp
-HIDDEN
+RHIDDEN
 void R::Rcons_vprintf(const char *format, va_list arg)
 {
     char buf[R_BUFSIZE], *p = buf;
@@ -1043,12 +1048,12 @@ void REvprintf(const char *format, va_list arg)
     }
 }
 
-HIDDEN int Rf_IndexWidth(R_xlen_t n)
+RHIDDEN int Rf_IndexWidth(R_xlen_t n)
 {
     return (int) (log10(n + 0.5) + 1);
 }
 
-HIDDEN void Rf_VectorIndex(R_xlen_t i, int w)
+RHIDDEN void Rf_VectorIndex(R_xlen_t i, int w)
 {
 	/* print index label "[`i']" , using total width `w' (left filling blanks) */
 	Rprintf("%*s[%ld]", w - IndexWidth(i) - 2, "", i);

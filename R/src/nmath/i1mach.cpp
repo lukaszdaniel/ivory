@@ -21,7 +21,7 @@
 #include "nmath.h"
 #include <climits>
 
-HIDDEN int Rf_i1mach(int i)
+RHIDDEN int Rf_i1mach(int i)
 {
     switch(i) {
 

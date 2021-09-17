@@ -1,9 +1,9 @@
 #-*- Makefile -*-
 include ../../gnuwin32/MkRules
 
-CFLAGS = -O3 -Wall -pedantic $(EOPTS)
+CXXFLAGS = -O3 -Wall -pedantic $(EOPTS)
 ifdef DEBUG
- CFLAGS += $(G_FLAG)
+ CXXFLAGS += $(G_FLAG)
  DLLFLAGS =
 else
  DLLFLAGS = -s

@@ -243,7 +243,7 @@ void onintrNoResume() { onintrEx(FALSE); }
    These do far more processing than is allowed in a signal handler ....
 */
 
-HIDDEN RETSIGTYPE R::onsigusr1(int dummy)
+RHIDDEN RETSIGTYPE R::onsigusr1(int dummy)
 {
     if (R_interrupts_suspended) {
 	/**** ought to save signal and handle after suspend */
@@ -278,7 +278,7 @@ HIDDEN RETSIGTYPE R::onsigusr1(int dummy)
 }
 
 
-HIDDEN RETSIGTYPE R::onsigusr2(int dummy)
+RHIDDEN RETSIGTYPE R::onsigusr2(int dummy)
 {
     inError = 1;
 
@@ -322,7 +322,7 @@ static void setupwarnings(void)
 int trio_vsnprintf(char *buffer, size_t bufferSize, const char *format,
 		   va_list args);
 
-HIDDEN
+RHIDDEN
 int R::Rvsnprintf_mbcs(char *buf, size_t size, const char *format, va_list ap)
 {
     int val;
@@ -336,7 +336,7 @@ int R::Rvsnprintf_mbcs(char *buf, size_t size, const char *format, va_list ap)
     return val;
 }
 #else
-HIDDEN
+RHIDDEN
 int R::Rvsnprintf_mbcs(char *buf, size_t size, const char *format, va_list ap)
 {
     int val;
@@ -356,7 +356,7 @@ int R::Rvsnprintf_mbcs(char *buf, size_t size, const char *format, va_list ap)
    case the buffer is untouched and thus may not be null-terminated.
 
    Dangerous pattern: `Rsnprintf_mbcs(buf, size - n, )` with maybe n >= size*/
-HIDDEN
+RHIDDEN
 int R::Rsnprintf_mbcs(char *str, size_t size, const char *format, ...)
 {
     int val;
@@ -621,7 +621,7 @@ static void cleanup_PrintWarnings(void *data)
 	inPrintWarnings = 0;
 }
 
-HIDDEN
+RHIDDEN
 void R::PrintWarnings(const char *hdr)
 {
     int i;
@@ -979,7 +979,7 @@ NORET void Rf_errorcall(SEXP call, const char *format, ...)
 
 /* Like errorcall, but copies all data for the error message into a buffer
    before doing anything else. */
-HIDDEN NORET void R::errorcall_cpy(SEXP call, const char *format, ...)
+RHIDDEN NORET void R::errorcall_cpy(SEXP call, const char *format, ...)
 {
 	char buf[BUFSIZE];
 
@@ -992,7 +992,7 @@ HIDDEN NORET void R::errorcall_cpy(SEXP call, const char *format, ...)
 }
 
 // geterrmessage(): Return (the global) 'errbuf' as R string
-HIDDEN SEXP do_geterrmessage(SEXP call, SEXP op, SEXP args, SEXP env)
+RHIDDEN SEXP do_geterrmessage(SEXP call, SEXP op, SEXP args, SEXP env)
 {
     checkArity(op, args);
     SEXP res = PROTECT(allocVector(STRSXP, 1));
@@ -1221,7 +1221,7 @@ static char * determine_domain_gettext(SEXP domain_, SEXP rho)
 
 
 /* gettext(domain, string) */
-HIDDEN SEXP do_gettext(SEXP call, SEXP op, SEXP args, SEXP rho)
+RHIDDEN SEXP do_gettext(SEXP call, SEXP op, SEXP args, SEXP rho)
 {
     checkArity(op, args);
 #ifdef ENABLE_NLS
@@ -1293,7 +1293,7 @@ HIDDEN SEXP do_gettext(SEXP call, SEXP op, SEXP args, SEXP rho)
 }
 
 /* ngettext(n, msg1, msg2, domain) */
-HIDDEN SEXP do_ngettext(SEXP call, SEXP op, SEXP args, SEXP rho)
+RHIDDEN SEXP do_ngettext(SEXP call, SEXP op, SEXP args, SEXP rho)
 {
     SEXP msg1 = CADR(args), msg2 = CADDR(args);
     int n = asInteger(CAR(args));
@@ -1325,7 +1325,7 @@ HIDDEN SEXP do_ngettext(SEXP call, SEXP op, SEXP args, SEXP rho)
 
 
 /* bindtextdomain(domain, dirname) */
-HIDDEN SEXP do_bindtextdomain(SEXP call, SEXP op, SEXP args, SEXP rho)
+RHIDDEN SEXP do_bindtextdomain(SEXP call, SEXP op, SEXP args, SEXP rho)
 {
 #ifdef ENABLE_NLS
     char *res;
@@ -1356,7 +1356,7 @@ static SEXP findCall(void)
 	return R_NilValue;
 }
 
-HIDDEN NORET SEXP do_stop(SEXP call, SEXP op, SEXP args, SEXP rho)
+RHIDDEN NORET SEXP do_stop(SEXP call, SEXP op, SEXP args, SEXP rho)
 {
 /* error(.) : really doesn't return anything; but all do_foo() must be SEXP */
     SEXP c_call;
@@ -1380,7 +1380,7 @@ HIDDEN NORET SEXP do_stop(SEXP call, SEXP op, SEXP args, SEXP rho)
     /* never called: */
 }
 
-HIDDEN SEXP do_warning(SEXP call, SEXP op, SEXP args, SEXP rho)
+RHIDDEN SEXP do_warning(SEXP call, SEXP op, SEXP args, SEXP rho)
 {
     SEXP c_call;
     checkArity(op, args);
@@ -1417,7 +1417,7 @@ HIDDEN SEXP do_warning(SEXP call, SEXP op, SEXP args, SEXP rho)
 }
 
 /* Error recovery for incorrect argument count error. */
-HIDDEN NORET void WrongArgCount(const char *s)
+RHIDDEN NORET void WrongArgCount(const char *s)
 {
     error(_("incorrect number of arguments passed to '%s' function"), s);
 }
@@ -1457,7 +1457,7 @@ WarningDB[] = {
 };
 
 
-HIDDEN NORET void R::ErrorMessage(SEXP call, int which_error, ...)
+RHIDDEN NORET void R::ErrorMessage(SEXP call, int which_error, ...)
 {
     int i;
     char buf[BUFSIZE];
@@ -1476,7 +1476,7 @@ HIDDEN NORET void R::ErrorMessage(SEXP call, int which_error, ...)
     errorcall(call, "%s", buf);
 }
 
-HIDDEN void R::WarningMessage(SEXP call, int which_warn, ...)
+RHIDDEN void R::WarningMessage(SEXP call, int which_warn, ...)
 {
     int i;
     char buf[BUFSIZE];
@@ -1509,7 +1509,7 @@ static void R_PrintDeferredWarnings(void)
 /*
  * Return the traceback without deparsing the calls
  */
-HIDDEN
+RHIDDEN
 SEXP R::R_GetTracebackOnly(int skip)
 {
     int nback = 0, ns = skip;
@@ -1552,7 +1552,7 @@ SEXP R::R_GetTracebackOnly(int skip)
 /*
  * Return the traceback with calls deparsed
  */
-HIDDEN
+RHIDDEN
 SEXP R::R_GetTraceback(int skip)
 {
     int nback = 0;
@@ -1573,7 +1573,7 @@ SEXP R::R_GetTraceback(int skip)
     return u;
 }
 
-HIDDEN SEXP do_traceback(SEXP call, SEXP op, SEXP args, SEXP rho)
+RHIDDEN SEXP do_traceback(SEXP call, SEXP op, SEXP args, SEXP rho)
 {
     int skip;
 
@@ -1750,7 +1750,7 @@ namespace
 	}
 } // namespace
 
-HIDDEN SEXP R_UnwindHandlerStack(SEXP target)
+RHIDDEN SEXP R_UnwindHandlerStack(SEXP target)
 {
     SEXP hs;
 
@@ -1776,7 +1776,7 @@ constexpr R_xlen_t RESULT_SIZE = 4;
 
 static GCRoot<> R_HandlerResultToken(nullptr);
 
-HIDDEN void R_FixupExitingHandlerResult(SEXP result)
+RHIDDEN void R_FixupExitingHandlerResult(SEXP result)
 {
     /* The internal error handling mechanism stores the error message
        in 'errbuf'.  If an on.exit() action is processed while jumping
@@ -1797,7 +1797,7 @@ HIDDEN void R_FixupExitingHandlerResult(SEXP result)
     }
 }
 
-HIDDEN SEXP do_addCondHands(SEXP call, SEXP op, SEXP args, SEXP rho)
+RHIDDEN SEXP do_addCondHands(SEXP call, SEXP op, SEXP args, SEXP rho)
 {
     SEXP classes, handlers, parentenv, target, oldstack, newstack, result;
     int calling, i, n;
@@ -1844,7 +1844,7 @@ HIDDEN SEXP do_addCondHands(SEXP call, SEXP op, SEXP args, SEXP rho)
     return oldstack;
 }
 
-HIDDEN SEXP do_resetCondHands(SEXP call, SEXP op, SEXP args, SEXP rho)
+RHIDDEN SEXP do_resetCondHands(SEXP call, SEXP op, SEXP args, SEXP rho)
 {
     checkArity(op, args);
     R_HandlerStack = CAR(args);
@@ -1955,7 +1955,7 @@ static SEXP findConditionHandler(SEXP cond)
 	return R_NilValue;
 }
 
-HIDDEN SEXP do_signalCondition(SEXP call, SEXP op, SEXP args, SEXP rho)
+RHIDDEN SEXP do_signalCondition(SEXP call, SEXP op, SEXP args, SEXP rho)
 {
     SEXP list, cond, msg, ecall, oldstack;
 
@@ -2045,7 +2045,7 @@ static void signalInterrupt(void)
     }
 }
 
-HIDDEN void RCNTXT::R_InsertRestartHandlers(RCNTXT *cptr, const char *cname)
+RHIDDEN void RCNTXT::R_InsertRestartHandlers(RCNTXT *cptr, const char *cname)
 {
     SEXP klass, rho, entry, name;
 
@@ -2072,7 +2072,7 @@ HIDDEN void RCNTXT::R_InsertRestartHandlers(RCNTXT *cptr, const char *cname)
     UNPROTECT(2);
 }
 
-HIDDEN SEXP do_dfltWarn(SEXP call, SEXP op, SEXP args, SEXP rho)
+RHIDDEN SEXP do_dfltWarn(SEXP call, SEXP op, SEXP args, SEXP rho)
 {
     checkArity(op, args);
 
@@ -2085,7 +2085,7 @@ HIDDEN SEXP do_dfltWarn(SEXP call, SEXP op, SEXP args, SEXP rho)
     return R_NilValue;
 }
 
-HIDDEN NORET SEXP do_dfltStop(SEXP call, SEXP op, SEXP args, SEXP rho)
+RHIDDEN NORET SEXP do_dfltStop(SEXP call, SEXP op, SEXP args, SEXP rho)
 {
     checkArity(op, args);
 
@@ -2102,7 +2102,7 @@ HIDDEN NORET SEXP do_dfltStop(SEXP call, SEXP op, SEXP args, SEXP rho)
  * Restart Handling
  */
 
-HIDDEN SEXP do_getRestart(SEXP call, SEXP op, SEXP args, SEXP rho)
+RHIDDEN SEXP do_getRestart(SEXP call, SEXP op, SEXP args, SEXP rho)
 {
     int i;
     SEXP list;
@@ -2134,7 +2134,7 @@ static inline void CHECK_RESTART(SEXP r)
 		error(_("bad restart"));
 }
 
-HIDDEN SEXP do_addRestart(SEXP call, SEXP op, SEXP args, SEXP rho)
+RHIDDEN SEXP do_addRestart(SEXP call, SEXP op, SEXP args, SEXP rho)
 {
 	checkArity(op, args);
 	CHECK_RESTART(CAR(args));
@@ -2167,14 +2167,14 @@ NORET static void invokeRestart(SEXP r, SEXP arglist)
     }
 }
 
-HIDDEN NORET SEXP do_invokeRestart(SEXP call, SEXP op, SEXP args, SEXP rho)
+RHIDDEN NORET SEXP do_invokeRestart(SEXP call, SEXP op, SEXP args, SEXP rho)
 {
 	checkArity(op, args);
 	CHECK_RESTART(CAR(args));
 	invokeRestart(CAR(args), CADR(args));
 }
 
-HIDDEN SEXP do_addTryHandlers(SEXP call, SEXP op, SEXP args, SEXP rho)
+RHIDDEN SEXP do_addTryHandlers(SEXP call, SEXP op, SEXP args, SEXP rho)
 {
 	checkArity(op, args);
 	if (R_GlobalContext == R_ToplevelContext ||
@@ -2185,7 +2185,7 @@ HIDDEN SEXP do_addTryHandlers(SEXP call, SEXP op, SEXP args, SEXP rho)
 	return R_NilValue;
 }
 
-HIDDEN SEXP do_seterrmessage(SEXP call, SEXP op, SEXP args, SEXP env)
+RHIDDEN SEXP do_seterrmessage(SEXP call, SEXP op, SEXP args, SEXP env)
 {
 	SEXP msg;
 
@@ -2197,14 +2197,14 @@ HIDDEN SEXP do_seterrmessage(SEXP call, SEXP op, SEXP args, SEXP env)
 	return R_NilValue;
 }
 
-HIDDEN SEXP do_printDeferredWarnings(SEXP call, SEXP op, SEXP args, SEXP env)
+RHIDDEN SEXP do_printDeferredWarnings(SEXP call, SEXP op, SEXP args, SEXP env)
 {
 	checkArity(op, args);
 	R_PrintDeferredWarnings();
 	return R_NilValue;
 }
 
-HIDDEN SEXP do_interruptsSuspended(SEXP call, SEXP op, SEXP args, SEXP env)
+RHIDDEN SEXP do_interruptsSuspended(SEXP call, SEXP op, SEXP args, SEXP env)
 {
 	int orig_value = R_interrupts_suspended;
 	if (args != R_NilValue)
@@ -2212,13 +2212,13 @@ HIDDEN SEXP do_interruptsSuspended(SEXP call, SEXP op, SEXP args, SEXP env)
 	return ScalarLogical(orig_value);
 }
 
-HIDDEN void R::R_BadValueInRCode(SEXP value, SEXP call, SEXP rho, const char *rawmsg,
+RHIDDEN void R::R_BadValueInRCode(SEXP value, SEXP call, SEXP rho, const char *rawmsg,
                   const char *errmsg, const char *warnmsg,
                   const char *varname, Rboolean warnByDefault)
 {
     /* disable GC so that use of this temporary checking code does not
        introduce new PROTECT errors e.g. in asLogical() use */
-	GCManager::GCInhibitor no_gc;
+    GCManager::GCInhibitor no_gc;
     R_CHECK_THREAD;
 
     int nprotect = 0;
@@ -2605,7 +2605,7 @@ SEXP R_withCallingErrorHandler(SEXP (*body)(void *), void *bdata,
     return val;
 }
 
-HIDDEN SEXP do_addGlobHands(SEXP call, SEXP op,SEXP args, SEXP rho)
+RHIDDEN SEXP do_addGlobHands(SEXP call, SEXP op,SEXP args, SEXP rho)
 {
     SEXP oldstk = R_ToplevelContext->getHandlerStack();
 

@@ -89,7 +89,7 @@ namespace R
 #ifndef __MAIN__
 extern
 #else
-HIDDEN
+RHIDDEN
 #endif
 	R::IoBuffer R_ConsoleIob; /* Console IO Buffer */
 

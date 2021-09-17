@@ -23,6 +23,10 @@
  *  Formerly part of ../unix/sys-common.cpp.
  */
 
+/** @file Renviron.cpp
+ *
+ */
+
 #ifdef HAVE_CONFIG_H
 #include <config.h>
 #endif
@@ -404,7 +408,7 @@ void process_user_Renviron()
     process_Renviron(s);
 }
 
-extern "C" HIDDEN SEXP do_readEnviron(SEXP call, SEXP op, SEXP args, SEXP env)
+extern "C" RHIDDEN SEXP do_readEnviron(SEXP call, SEXP op, SEXP args, SEXP env)
 {
 
     checkArity(op, args);

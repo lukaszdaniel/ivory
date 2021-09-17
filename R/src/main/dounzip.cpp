@@ -19,6 +19,10 @@
  *  https://www.R-project.org/Licenses/
  */
 
+/** @file dounzip.cpp
+ *
+ */
+
 #ifdef HAVE_CONFIG_H
 #include <config.h>
 #endif
@@ -503,7 +507,7 @@ static int null_fflush(Rconnection con)
     return 0;
 }
 
-HIDDEN Rconnection R_newunz(const char *description, const char *const mode)
+RHIDDEN Rconnection R_newunz(const char *description, const char *const mode)
 {
     Rconnection newconn;
     newconn = (Rconnection) malloc(sizeof(struct Rconn));

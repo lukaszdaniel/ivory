@@ -19,6 +19,10 @@
  *  https://www.R-project.org/Licenses/
  */
 
+/** @file bind.cpp
+ *
+ */
+
 /* Code to handle list / vector switch */
 
 #ifdef HAVE_CONFIG_H
@@ -622,7 +626,7 @@ static SEXP NewName(SEXP base, SEXP tag, R_xlen_t seqno, int count)
 }
 
 /* also used in coerce.cpp */
-HIDDEN SEXP R::ItemName(SEXP names, R_xlen_t i)
+RHIDDEN SEXP R::ItemName(SEXP names, R_xlen_t i)
 {
 	/* return  names[i]  if it is a character (>= 1 char), or NULL otherwise */
 	if (names != R_NilValue &&
@@ -849,7 +853,7 @@ static SEXP c_Extract_opt(SEXP ans, bool &recurse, bool &usenames,
 */
 
 /* This is a primitive SPECIALSXP */
-HIDDEN SEXP do_c(SEXP call, SEXP op, SEXP args, SEXP env)
+RHIDDEN SEXP do_c(SEXP call, SEXP op, SEXP args, SEXP env)
 {
     SEXP ans;
 
@@ -871,7 +875,7 @@ HIDDEN SEXP do_c(SEXP call, SEXP op, SEXP args, SEXP env)
     return res;
 }
 
-HIDDEN SEXP do_c_dflt(SEXP call, SEXP op, SEXP args, SEXP env)
+RHIDDEN SEXP do_c_dflt(SEXP call, SEXP op, SEXP args, SEXP env)
 {
     /* Method dispatch has failed; run the default code. */
     /* By default we do not recurse, but this can be over-ridden */
@@ -970,7 +974,7 @@ HIDDEN SEXP do_c_dflt(SEXP call, SEXP op, SEXP args, SEXP env)
 } /* do_c */
 
 
-HIDDEN SEXP do_unlist(SEXP call, SEXP op, SEXP args, SEXP env)
+RHIDDEN SEXP do_unlist(SEXP call, SEXP op, SEXP args, SEXP env)
 {
     SEXP ans, t;
     R_xlen_t i, n = 0;
@@ -1119,7 +1123,7 @@ HIDDEN SEXP do_unlist(SEXP call, SEXP op, SEXP args, SEXP env)
 
 /* cbind(deparse.level, ...) and rbind(deparse.level, ...) : */
 /* This is a special .Internal */
-HIDDEN SEXP do_bind(SEXP call, SEXP op, SEXP args, SEXP env)
+RHIDDEN SEXP do_bind(SEXP call, SEXP op, SEXP args, SEXP env)
 {
     SEXP a, t, obj, method, rho, ans;
     SEXPTYPE mode;

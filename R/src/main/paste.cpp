@@ -24,6 +24,10 @@
  *  See ./format.cpp	 for the  format_Foo_  functions.
  */
 
+/** @file paste.cpp
+ *
+ */
+
 #ifdef HAVE_CONFIG_H
 #include <config.h>
 #endif
@@ -52,7 +56,7 @@ static R_StringBuffer cbuff = R_StringBuffer();
   .Internal(paste (args, sep, collapse, recycle0))
   .Internal(paste0(args,      collapse, recycle0))
 */
-HIDDEN SEXP do_paste(SEXP call, SEXP op, SEXP args, SEXP env)
+RHIDDEN SEXP do_paste(SEXP call, SEXP op, SEXP args, SEXP env)
 {
 /* do_paste uses two passes to paste the arguments (in CAR(args)) together.
  * The first pass calculates the width of the paste buffer,
@@ -336,7 +340,7 @@ HIDDEN SEXP do_paste(SEXP call, SEXP op, SEXP args, SEXP env)
 
   This should not do translations with escapes.
  */
-HIDDEN SEXP do_filepath(SEXP call, SEXP op, SEXP args, SEXP env)
+RHIDDEN SEXP do_filepath(SEXP call, SEXP op, SEXP args, SEXP env)
 {
     checkArity(op, args);
 
@@ -448,7 +452,7 @@ HIDDEN SEXP do_filepath(SEXP call, SEXP op, SEXP args, SEXP env)
 
 /* format.default(x, trim, digits, nsmall, width, justify, na.encode,
 		  scientific, decimal.mark) */
-HIDDEN SEXP do_format(SEXP call, SEXP op, SEXP args, SEXP env)
+RHIDDEN SEXP do_format(SEXP call, SEXP op, SEXP args, SEXP env)
 {
     SEXP l, x, y, swd;
     int il, digits, trim = 0, nsmall = 0, wd = 0, adj = -1, na, sci = 0;
@@ -683,7 +687,7 @@ HIDDEN SEXP do_format(SEXP call, SEXP op, SEXP args, SEXP env)
  * for complex : 2 x 3 integers for (Re, Im)
  */
 
-HIDDEN SEXP do_formatinfo(SEXP call, SEXP op, SEXP args, SEXP env)
+RHIDDEN SEXP do_formatinfo(SEXP call, SEXP op, SEXP args, SEXP env)
 {
     SEXP x;
     int digits, nsmall, no = 1, w, d, e, wi, di, ei;

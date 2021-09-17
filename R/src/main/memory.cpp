@@ -156,7 +156,7 @@ int R_gc_running() { return GCManager::R_in_gc(); }
  * 
  * @note also called from typeName() in inspect.cpp
  */
-HIDDEN
+RHIDDEN
 const char *R::sexptype2char(const SEXPTYPE type)
 {
     switch (type)
@@ -277,14 +277,14 @@ static void init_gc_grow_settings()
    functions; the writer function insures that the maximal values are
    never set below the current ones. */
 
-HIDDEN R_size_t R::R_GetMaxVSize(void)
+RHIDDEN R_size_t R::R_GetMaxVSize(void)
 {
     if (GCManager::maxTriggerLevel() == R_SIZE_T_MAX)
         return R_SIZE_T_MAX;
     return GCManager::maxTriggerLevel() * sizeof(VECREC);
 }
 
-HIDDEN void R::R_SetMaxVSize(R_size_t size)
+RHIDDEN void R::R_SetMaxVSize(R_size_t size)
 {
     if (size == R_SIZE_T_MAX)
         return;
@@ -292,18 +292,18 @@ HIDDEN void R::R_SetMaxVSize(R_size_t size)
         GCManager::setMaxTriggerLevel((size + 1) / sizeof(VECREC));
 }
 
-HIDDEN R_size_t R::R_GetMaxNSize(void)
+RHIDDEN R_size_t R::R_GetMaxNSize(void)
 {
     return GCManager::maxNodeTriggerLevel();
 }
 
-HIDDEN void R::R_SetMaxNSize(R_size_t size)
+RHIDDEN void R::R_SetMaxNSize(R_size_t size)
 {
     if (size >= GCManager::nodeTriggerLevel())
         GCManager::setMaxNodeTriggerLevel(size);
 }
 
-HIDDEN SEXP do_maxVSize(SEXP call, SEXP op, SEXP args, SEXP rho)
+RHIDDEN SEXP do_maxVSize(SEXP call, SEXP op, SEXP args, SEXP rho)
 {
     constexpr double MB = 1048576.0;
     double newval = asReal(CAR(args));
@@ -322,7 +322,7 @@ HIDDEN SEXP do_maxVSize(SEXP call, SEXP op, SEXP args, SEXP rho)
         return ScalarReal(R_GetMaxVSize() / MB);
 }
 
-HIDDEN SEXP do_maxNSize(SEXP call, SEXP op, SEXP args, SEXP rho)
+RHIDDEN SEXP do_maxNSize(SEXP call, SEXP op, SEXP args, SEXP rho)
 {
     double newval = asReal(CAR(args));
 
@@ -349,7 +349,7 @@ namespace
 
 /* R interface function */
 
-HIDDEN SEXP do_regFinaliz(SEXP call, SEXP op, SEXP args, SEXP rho)
+RHIDDEN SEXP do_regFinaliz(SEXP call, SEXP op, SEXP args, SEXP rho)
 {
     int onexit;
 
@@ -479,7 +479,7 @@ void R_gc_torture(int gap, int wait, Rboolean inhibit)
 #endif
 }
 
-HIDDEN SEXP do_gctorture(SEXP call, SEXP op, SEXP args, SEXP rho)
+RHIDDEN SEXP do_gctorture(SEXP call, SEXP op, SEXP args, SEXP rho)
 {
     int gap;
     SEXP old = ScalarLogical(GCManager::gc_force_wait() > 0);
@@ -504,7 +504,7 @@ HIDDEN SEXP do_gctorture(SEXP call, SEXP op, SEXP args, SEXP rho)
     return old;
 }
 
-HIDDEN SEXP do_gctorture2(SEXP call, SEXP op, SEXP args, SEXP rho)
+RHIDDEN SEXP do_gctorture2(SEXP call, SEXP op, SEXP args, SEXP rho)
 {
     int gap, wait;
     Rboolean inhibit;
@@ -551,7 +551,7 @@ static void init_gctorture(void)
     }
 }
 
-HIDDEN SEXP do_gcinfo(SEXP call, SEXP op, SEXP args, SEXP rho)
+RHIDDEN SEXP do_gcinfo(SEXP call, SEXP op, SEXP args, SEXP rho)
 {
     std::ostream *report_os = GCManager::setReporting(nullptr);
     int want_reporting = Rf_asLogical(CAR(args));
@@ -565,7 +565,7 @@ HIDDEN SEXP do_gcinfo(SEXP call, SEXP op, SEXP args, SEXP rho)
 
 /* reports memory use to profiler in eval.cpp */
 
-HIDDEN void R::get_current_mem(size_t &smallvsize,
+RHIDDEN void R::get_current_mem(size_t &smallvsize,
                                size_t &largevsize,
                                size_t &nodes)
 {
@@ -598,7 +598,7 @@ namespace
     }
 } // namespace
 
-HIDDEN SEXP do_gc(SEXP call, SEXP op, SEXP args, SEXP rho)
+RHIDDEN SEXP do_gc(SEXP call, SEXP op, SEXP args, SEXP rho)
 {
     checkArity(op, args);
     std::ostream *report_os = GCManager::setReporting(Rf_asLogical(CAR(args)) ? &std::cerr : nullptr);
@@ -640,7 +640,7 @@ static double gctimes[5], gcstarttimes[5];
 static bool gctime_enabled = false;
 
 /* this is primitive */
-HIDDEN SEXP do_gctime(SEXP call, SEXP op, SEXP args, SEXP env)
+RHIDDEN SEXP do_gctime(SEXP call, SEXP op, SEXP args, SEXP env)
 {
     SEXP ans;
 
@@ -692,7 +692,7 @@ static void gc_end_timing(void)
 /* InitMemory : Initialise the memory to be used in R. */
 /* This includes: stack space, node space and vector space */
 
-HIDDEN void R::InitMemory()
+RHIDDEN void R::InitMemory()
 {
     char *arg;
 
@@ -804,7 +804,7 @@ SEXP Rf_cons(SEXP car, SEXP cdr)
     return PairList::construct<PairList>(car, SEXP_downcast<PairList *>(cdr));
 }
 
-HIDDEN SEXP R::CONS_NR(SEXP car, SEXP cdr)
+RHIDDEN SEXP R::CONS_NR(SEXP car, SEXP cdr)
 {
     GCStackRoot<> crr(car);
     GCStackRoot<PairList> tlr(SEXP_downcast<CXXR::PairList *>(cdr));
@@ -856,7 +856,7 @@ SEXP R::NewEnvironment(SEXP namelist, SEXP valuelist, SEXP rho)
 
 /* mkPROMISE is defined directly do avoid the need to protect its arguments
    unless a GC will actually occur. */
-HIDDEN SEXP R::mkPROMISE(SEXP expr, SEXP rho)
+RHIDDEN SEXP R::mkPROMISE(SEXP expr, SEXP rho)
 {
     GCStackRoot<> exprt(expr);
     GCStackRoot<Environment> rhort(SEXP_downcast<Environment *>(rho));
@@ -875,7 +875,7 @@ SEXP R::R_mkEVPROMISE(SEXP expr, SEXP val)
     return prom;
 }
 
-HIDDEN SEXP R::R_mkEVPROMISE_NR(SEXP expr, SEXP val)
+RHIDDEN SEXP R::R_mkEVPROMISE_NR(SEXP expr, SEXP val)
 {
     SEXP prom = mkPROMISE(expr, nullptr);
     DISABLE_REFCNT(prom);
@@ -948,7 +948,7 @@ SEXP Rf_allocVector3(SEXPTYPE type, R_xlen_t length = 1, R_allocator_t *allocato
 }
 
 /* For future hiding of allocVector(CHARSXP) */
-HIDDEN SEXP R::allocCharsxp(R_len_t length)
+RHIDDEN SEXP R::allocCharsxp(R_len_t length)
 {
     return GCNode::expose(new UncachedString(length));
 }
@@ -1024,7 +1024,7 @@ void R_gc(void)
 #ifdef THREADCHECK
 #if !defined(_WIN32) && defined(HAVE_PTHREAD)
 #include <pthread.h>
-HIDDEN void R::R_check_thread(const char *s)
+RHIDDEN void R::R_check_thread(const char *s)
 {
     static Rboolean main_thread_inited = FALSE;
     static pthread_t main_thread;
@@ -1044,7 +1044,7 @@ HIDDEN void R::R_check_thread(const char *s)
 }
 #else
 /* This could be implemented for Windows using their threading API */
-HIDDEN void R::R_check_thread(const char *s) {}
+RHIDDEN void R::R_check_thread(const char *s) {}
 #endif
 #endif
 
@@ -1082,7 +1082,7 @@ namespace CXXR
     }
 } // namespace CXXR
 
-HIDDEN SEXP do_memoryprofile(SEXP call, SEXP op, SEXP args, SEXP env)
+RHIDDEN SEXP do_memoryprofile(SEXP call, SEXP op, SEXP args, SEXP env)
 {
     constexpr int n = 24;
     checkArity(op, args);
@@ -1389,7 +1389,7 @@ DL_FUNC R_ExternalPtrAddrFn(SEXP s)
     return tmp.fn;
 }
 
-HIDDEN void R::R_expand_binding_value(SEXP b)
+RHIDDEN void R::R_expand_binding_value(SEXP b)
 {
 #if BOXED_BINDING_CELLS
     SET_BNDCELL_TAG(b, NILSXP);
@@ -1430,7 +1430,7 @@ HIDDEN void R::R_expand_binding_value(SEXP b)
 #endif
 }
 
-HIDDEN void CXXR::R_expand_binding_value(Frame::Binding *b)
+RHIDDEN void CXXR::R_expand_binding_value(Frame::Binding *b)
 {
 #if BOXED_BINDING_CELLS
     if (b)
@@ -1469,7 +1469,7 @@ HIDDEN void CXXR::R_expand_binding_value(Frame::Binding *b)
 #endif
 }
 
-HIDDEN void R::R_args_enable_refcnt(SEXP args)
+RHIDDEN void R::R_args_enable_refcnt(SEXP args)
 {
     /* args is escaping into user C code and might get captured, so
        make sure it is reference counting. Should be able to get rid
@@ -1488,7 +1488,7 @@ HIDDEN void R::R_args_enable_refcnt(SEXP args)
         }
 }
 
-HIDDEN void R::R_try_clear_args_refcnt(SEXP args)
+RHIDDEN void R::R_try_clear_args_refcnt(SEXP args)
 {
     /* If args excapes properly its reference count will have been
        incremented. If it has no references, then it can be reverted
@@ -1648,7 +1648,7 @@ void R_StringBuffer::R_FreeStringBuffer()
     }
 }
 
-HIDDEN void R_FreeStringBufferL(R_StringBuffer &buf) { buf.R_FreeStringBufferL(); }
+RHIDDEN void R_FreeStringBufferL(R_StringBuffer &buf) { buf.R_FreeStringBufferL(); }
 
 void R_StringBuffer::R_FreeStringBufferL()
 {

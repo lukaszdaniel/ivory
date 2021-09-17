@@ -86,7 +86,7 @@ double Rf_pnchisq(double x, double df, double ncp, int lower_tail, int log_p)
     }
 }
 
-HIDDEN double Rf_pnchisq_raw(double x, double f, double theta /* = ncp */,
+RHIDDEN double Rf_pnchisq_raw(double x, double f, double theta /* = ncp */,
 	    double errmax, double reltol, int itrmax,
 	    Rboolean lower_tail, Rboolean log_p)
 {

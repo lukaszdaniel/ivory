@@ -17,6 +17,10 @@
  *  https://www.R-project.org/Licenses/
  */
 
+/** @file altclasses.cpp
+ *
+ */
+
 #ifdef HAVE_CONFIG_H
 #include <config.h>
 #endif
@@ -579,7 +583,7 @@ static SEXP new_compact_realseq(R_xlen_t n, double n1, double inc)
  ** Compact Integer/Real Sequences
  **/
 
-HIDDEN SEXP R::R_compact_intrange(R_xlen_t n1, R_xlen_t n2)
+RHIDDEN SEXP R::R_compact_intrange(R_xlen_t n1, R_xlen_t n2)
 {
     R_xlen_t n = std::abs(n2 - n1) + 1;
 
@@ -890,7 +894,7 @@ static void InitDefferredStringClass()
  * Constructor
  */
 
-HIDDEN SEXP R::R_deferred_coerceToString(SEXP v, SEXP info)
+RHIDDEN SEXP R::R_deferred_coerceToString(SEXP v, SEXP info)
 {
     SEXP ans = R_NilValue;
     switch (TYPEOF(v)) {
@@ -1378,7 +1382,7 @@ SEXP do_mmap_file(SEXP args)
     args = CDR(args);
 #else
 extern "C"
-HIDDEN SEXP do_mmap_file(SEXP call, SEXP op, SEXP args, SEXP env)
+RHIDDEN SEXP do_mmap_file(SEXP call, SEXP op, SEXP args, SEXP env)
 {
 #endif
     SEXP file = CAR(args);
@@ -1416,7 +1420,7 @@ static SEXP do_munmap_file(SEXP args)
     args = CDR(args);
 #else
 extern "C"
-HIDDEN SEXP do_munmap_file(SEXP call, SEXP op, SEXP args, SEXP env)
+RHIDDEN SEXP do_munmap_file(SEXP call, SEXP op, SEXP args, SEXP env)
 {
 #endif
     SEXP x = CAR(args);
@@ -1990,7 +1994,7 @@ static SEXP wrap_meta(SEXP x, int srt, int no_na)
 }
 
 extern "C"
-HIDDEN SEXP do_wrap_meta(SEXP call, SEXP op, SEXP args, SEXP env)
+RHIDDEN SEXP do_wrap_meta(SEXP call, SEXP op, SEXP args, SEXP env)
 {
     checkArity(op, args);
     SEXP x = CAR(args);
@@ -2005,7 +2009,7 @@ SEXP R_tryWrap(SEXP x)
 }
 
 extern "C"
-HIDDEN SEXP do_tryWrap(SEXP call, SEXP op, SEXP args, SEXP env)
+RHIDDEN SEXP do_tryWrap(SEXP call, SEXP op, SEXP args, SEXP env)
 {
     checkArity(op, args);
     SEXP x = CAR(args);
@@ -2024,7 +2028,7 @@ HIDDEN SEXP do_tryWrap(SEXP call, SEXP op, SEXP args, SEXP env)
    operation. It could be used in other places, but extreme caution is
    needed to make sure there is no possibliity that the wrapper object
    will be referenced from C code after it is cleared. */
-HIDDEN SEXP R::R_tryUnwrap(SEXP x)
+RHIDDEN SEXP R::R_tryUnwrap(SEXP x)
 {
     if (! MAYBE_SHARED(x) && is_wrapper(x) &&
 	WRAPPER_SORTED(x) == UNKNOWN_SORTEDNESS && ! WRAPPER_NO_NA(x)) {
@@ -2060,7 +2064,7 @@ HIDDEN SEXP R::R_tryUnwrap(SEXP x)
  ** Initialize ALTREP Classes
  **/
 
-HIDDEN void R::R_init_altrep()
+RHIDDEN void R::R_init_altrep()
 {
     InitCompactIntegerClass();
     InitCompactRealClass();

@@ -17,6 +17,10 @@
  *  https://www.R-project.org/Licenses/
  */
 
+/** @file CommandLineArgs.cpp
+ *
+ */
+
 #ifdef HAVE_CONFIG_H
 #include <config.h>
 #endif
@@ -77,7 +81,7 @@ void R_set_command_line_arguments(int argc, char *argv[])
   The .Internal which returns the command line arguments that are stored
   in global variables.
  */
-extern "C" HIDDEN SEXP do_commandArgs(SEXP call, SEXP op, SEXP args, SEXP env)
+extern "C" RHIDDEN SEXP do_commandArgs(SEXP call, SEXP op, SEXP args, SEXP env)
 {
 	int i;
 

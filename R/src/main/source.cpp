@@ -18,6 +18,10 @@
  *  https://www.R-project.org/Licenses/
  */
 
+/** @file source.cpp
+ *
+ */
+
 #ifdef HAVE_CONFIG_H
 #include <config.h>
 #endif
@@ -38,7 +42,7 @@
 using namespace R;
 using namespace CXXR;
 
-HIDDEN SEXP getParseContext(void)
+RHIDDEN SEXP getParseContext(void)
 {
     int i, last = PARSE_CONTEXT_SIZE;
     char context[PARSE_CONTEXT_SIZE+1];
@@ -205,7 +209,7 @@ static void parse_cleanup(void *data)
  .Internal( parse(file, n, text, prompt, srcfile, encoding) )
  If there is text then that is read and the other arguments are ignored.
 */
-HIDDEN SEXP do_parse(SEXP call, SEXP op, SEXP args, SEXP env)
+RHIDDEN SEXP do_parse(SEXP call, SEXP op, SEXP args, SEXP env)
 {
     checkArity(op, args);
     if(!inherits(CAR(args), "connection"))

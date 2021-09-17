@@ -19,6 +19,10 @@
  *  https://www.R-project.org/Licenses/
  */
 
+/** @file sort.cpp
+ *
+ */
+
 #ifdef HAVE_CONFIG_H
 #include <config.h>
 #endif
@@ -235,7 +239,7 @@ Rboolean Rf_isUnsorted(SEXP x, Rboolean strictly)
 								((TYPEOF(x) == INTSXP && FIRST_LAST_DIFF(x, INTEGER)) || \
 								 (TYPEOF(x) == REALSXP && FIRST_LAST_DIFF(x, REAL))))
 
-HIDDEN SEXP do_isunsorted(SEXP call, SEXP op, SEXP args, SEXP rho)
+RHIDDEN SEXP do_isunsorted(SEXP call, SEXP op, SEXP args, SEXP rho)
 {
     checkArity(op, args);
 
@@ -342,7 +346,7 @@ void R_csort(Rcomplex *x, int n)
 }
 
 /* used in platform.cpp */
-HIDDEN void R::ssort(String** x, int n)
+RHIDDEN void R::ssort(String** x, int n)
 {
     String* v;
     sort_body(scmp,PROTECT,UNPROTECT(1))
@@ -417,7 +421,7 @@ void Rf_revsort(double *a, int *ib, int n)
 }
 
 
-HIDDEN SEXP do_sort(SEXP call, SEXP op, SEXP args, SEXP rho)
+RHIDDEN SEXP do_sort(SEXP call, SEXP op, SEXP args, SEXP rho)
 {
     SEXP ans;
     Rboolean decreasing;
@@ -514,7 +518,7 @@ static int makeSortEnum(int decr, int nalast) {
 }
 
 /* .Internal(sorted_fpass(x, decr, nalast)) */
-HIDDEN SEXP do_sorted_fpass(SEXP call, SEXP op, SEXP args, SEXP rho)
+RHIDDEN SEXP do_sorted_fpass(SEXP call, SEXP op, SEXP args, SEXP rho)
 {
     checkArity(op, args);
 
@@ -796,7 +800,7 @@ static void Psort0(SEXP x, R_xlen_t lo, R_xlen_t hi, R_xlen_t *ind, int nind)
 
 
 /* FUNCTION psort(x, indices) */
-HIDDEN SEXP do_psort(SEXP call, SEXP op, SEXP args, SEXP rho)
+RHIDDEN SEXP do_psort(SEXP call, SEXP op, SEXP args, SEXP rho)
 {
     checkArity(op, args);
     SEXP x = CAR(args), p = CADR(args);
@@ -1179,7 +1183,7 @@ void R_orderVector1(int *indx, int n, SEXP x,
    Also used by do_options and  ../gnuwin32/extra.cpp
    Called with rho != R_NilValue only from do_rank, when NAs are not involved.
  */
-HIDDEN void R::orderVector1(int *indx, int n, SEXP key, Rboolean nalast, Rboolean decreasing,
+RHIDDEN void R::orderVector1(int *indx, int n, SEXP key, Rboolean nalast, Rboolean decreasing,
 	     SEXP rho)
 {
     int c, i, j, h, t, lo = 0, hi = n-1;
@@ -1458,7 +1462,7 @@ static void orderVector1l(R_xlen_t *indx, R_xlen_t n, SEXP key, Rboolean nalast,
 #endif
 
 /* FUNCTION order(...) */
-HIDDEN SEXP do_order(SEXP call, SEXP op, SEXP args, SEXP rho)
+RHIDDEN SEXP do_order(SEXP call, SEXP op, SEXP args, SEXP rho)
 {
     SEXP ap, ans = R_NilValue /* -Wall */;
     int narg = 0;
@@ -1529,7 +1533,7 @@ HIDDEN SEXP do_order(SEXP call, SEXP op, SEXP args, SEXP rho)
 }
 
 /* FUNCTION: rank(x, length, ties.method) */
-HIDDEN SEXP do_rank(SEXP call, SEXP op, SEXP args, SEXP rho)
+RHIDDEN SEXP do_rank(SEXP call, SEXP op, SEXP args, SEXP rho)
 {
     SEXP rank, x;
     int *ik = nullptr /* -Wall */;
@@ -1628,7 +1632,7 @@ HIDDEN SEXP do_rank(SEXP call, SEXP op, SEXP args, SEXP rho)
     return rank;
 }
 
-HIDDEN SEXP do_xtfrm(SEXP call, SEXP op, SEXP args, SEXP rho)
+RHIDDEN SEXP do_xtfrm(SEXP call, SEXP op, SEXP args, SEXP rho)
 {
     SEXP fn, prargs, ans;
 

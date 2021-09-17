@@ -50,7 +50,7 @@ OBJS = $(CSOURCES:.c=.o) $(CXXSOURCES:.cpp=.o) $(FSOURCES:.f=.o)
 ifdef RUN_BISON
 gram.cpp: gram.y
 	bison gram.y
-	$(SED) -e "s/gram.tab.c/gram.c/" gram.tab.c > gram.cpp
+	$(SED) -e "s/gram.tab.c/gram.cpp/" gram.tab.c > gram.cpp
 	$(RM) gram.tab.c
 endif
 

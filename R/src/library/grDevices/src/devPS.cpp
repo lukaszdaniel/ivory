@@ -2726,8 +2726,7 @@ static void PostScriptSetFont(FILE *fp, int fontnum, double size)
     fprintf(fp, "/Font%d findfont %.0f s\n", fontnum, size);
 }
 
-static void
-PostScriptSetLineTexture(FILE *fp, const char *dashlist, int nlty,
+static void PostScriptSetLineTexture(FILE *fp, const char *dashlist, int nlty,
 			 double lwd, int lend)
 {
 /* Historically the adjustment was 1 to allow for round end caps.
@@ -2905,8 +2904,7 @@ static void PostScriptHexText(FILE *fp, double x, double y,
     fprintf(fp, " t\n");
 }
 
-static void
-PostScriptTextKern(FILE *fp, double x, double y,
+static void PostScriptTextKern(FILE *fp, double x, double y,
 		   const char *str, double xc, double rot,
 		   const pGEcontext gc,
 		   pDevDesc dd)
@@ -3817,8 +3815,7 @@ static void PS_Close(pDevDesc dd)
     free(pd);
 }
 
-static FontMetricInfo
-*CIDsymbolmetricInfo(const char *family, PostScriptDesc *pd)
+static FontMetricInfo *CIDsymbolmetricInfo(const char *family, PostScriptDesc *pd)
 {
     FontMetricInfo *result = nullptr;
     int fontIndex;
@@ -4606,8 +4603,7 @@ typedef struct {
     encodinglist encodings;
 } XFigDesc;
 
-static void
-XF_FileHeader(FILE *fp, const char *papername, Rboolean landscape,
+static void XF_FileHeader(FILE *fp, const char *papername, Rboolean landscape,
 	      Rboolean onefile)
 {
     fprintf(fp, "#FIG 3.2\n");
@@ -9381,8 +9377,7 @@ static FontMetricInfo
     return result;
 }
 
-static const char
-*PDFconvname(const char *family, PDFDesc *pd)
+static const char *PDFconvname(const char *family, PDFDesc *pd)
 {
     const char *result = (pd->fonts) ? pd->fonts->family->encoding->convname : "latin1";
     /* pd->fonts is NULL when CIDfonts are used */

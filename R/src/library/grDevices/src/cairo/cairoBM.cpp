@@ -116,7 +116,7 @@ static Rboolean BM_Open(pDevDesc dd, pX11Desc xd, int width, int height)
 #ifdef HAVE_CAIRO_SVG
     else if(xd->type == SVG) {
         snprintf(buf, PATH_MAX, R_CAIRO_FN(xd), xd->npages + 1);
-        xd->cs = cairo_svg_surface_create(R_ExpandFileName(buf),
+        xd->cs = cairo_svg_surface_create(buf,
                                           (double)xd->windowWidth,
                                           (double)xd->windowHeight);
         res = cairo_surface_status(xd->cs);
@@ -139,7 +139,7 @@ static Rboolean BM_Open(pDevDesc dd, pX11Desc xd, int width, int height)
 #ifdef HAVE_CAIRO_PDF
     else if(xd->type == PDF) {
         snprintf(buf, PATH_MAX, R_CAIRO_FN(xd), xd->npages + 1);
-        xd->cs = cairo_pdf_surface_create(R_ExpandFileName(buf),
+        xd->cs = cairo_pdf_surface_create(buf,
                                           (double)xd->windowWidth,
                                           (double)xd->windowHeight);
         res = cairo_surface_status(xd->cs);
@@ -161,7 +161,7 @@ static Rboolean BM_Open(pDevDesc dd, pX11Desc xd, int width, int height)
 #ifdef HAVE_CAIRO_PS
     else if(xd->type == PS) {
         snprintf(buf, PATH_MAX, R_CAIRO_FN(xd), xd->npages + 1);
-        xd->cs = cairo_ps_surface_create(R_ExpandFileName(buf),
+        xd->cs = cairo_ps_surface_create(buf,
                                          (double)xd->windowWidth,
                                          (double)xd->windowHeight);
         res = cairo_surface_status(xd->cs);
@@ -235,7 +235,7 @@ static void BM_Close_bitmap(pX11Desc xd)
 	snprintf(buf, PATH_MAX, xd->filename, xd->npages);
 	/* filename in native encoding on Windows */
 	R_SaveAsTIFF(xi, xd->windowWidth, xd->windowHeight,
-		     Cbitgp, 0, R_ExpandFileName(buf), xd->res_dpi,
+		     Cbitgp, 0, buf, xd->res_dpi,
 		     xd->quality);
     }
 }
@@ -255,7 +255,7 @@ static void BM_NewPage(const pGEcontext gc, pDevDesc dd)
 	}
 	snprintf(buf, PATH_MAX, xd->filename, xd->npages);
 	/* filename in native encoding on Windows */
-	xd->fp = R_fopen(R_ExpandFileName(buf), "wb");
+	xd->fp = R_fopen(buf, "wb");
 	if (!xd->fp)
 	    error(_("could not open file '%s'"), buf);
     }
@@ -274,7 +274,7 @@ static void BM_NewPage(const pGEcontext gc, pDevDesc dd)
 		cairo_surface_destroy(xd->cs);
 		cairo_destroy(xd->cc);
                 snprintf(buf, PATH_MAX, R_CAIRO_FN(xd), xd->npages);
-                xd->cs = cairo_svg_surface_create(R_ExpandFileName(buf),
+                xd->cs = cairo_svg_surface_create(buf,
                                                   (double)xd->windowWidth,
                                                   (double)xd->windowHeight);
                 res = cairo_surface_status(xd->cs);
@@ -302,7 +302,7 @@ static void BM_NewPage(const pGEcontext gc, pDevDesc dd)
 		cairo_surface_destroy(xd->cs);
 		cairo_destroy(xd->cc);
                 snprintf(buf, PATH_MAX, R_CAIRO_FN(xd), xd->npages);
-                xd->cs = cairo_pdf_surface_create(R_ExpandFileName(buf),
+                xd->cs = cairo_pdf_surface_create(buf,
                                                   (double)xd->windowWidth,
                                                   (double)xd->windowHeight);
                 res = cairo_surface_status(xd->cs);
@@ -329,7 +329,7 @@ static void BM_NewPage(const pGEcontext gc, pDevDesc dd)
                 cairo_surface_destroy(xd->cs);
                 cairo_destroy(xd->cc);
                 snprintf(buf, PATH_MAX, R_CAIRO_FN(xd), xd->npages);
-                xd->cs = cairo_ps_surface_create(R_ExpandFileName(buf),
+                xd->cs = cairo_ps_surface_create(buf,
                                                  (double)xd->windowWidth,
                                                  (double)xd->windowHeight);
                 res = cairo_surface_status(xd->cs);

@@ -33,15 +33,15 @@
 #include <Rconfig.h>
 
 #ifdef HAVE_VISIBILITY_ATTRIBUTE
-# define VISIBLE __attribute__ ((visibility ("default")))
-# define HIDDEN __attribute__ ((visibility ("hidden")))
-# define attribute_visible VISIBLE
-# define attribute_hidden HIDDEN
+# define RVISIBLE __attribute__ ((visibility ("default")))
+# define RHIDDEN __attribute__ ((visibility ("hidden")))
+# define attribute_visible RVISIBLE
+# define attribute_hidden RHIDDEN
 #else
 # define attribute_visible
 # define attribute_hidden
-# define VISIBLE
-# define HIDDEN
+# define RVISIBLE
+# define RHIDDEN
 #endif
 
 #if defined(__GNUC__) && __GNUC__ >= 3

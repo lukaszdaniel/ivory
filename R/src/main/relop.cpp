@@ -20,6 +20,9 @@
  *  https://www.R-project.org/Licenses/
  */
 
+/** @file relop.cpp
+ *
+ */
 
 #ifdef HAVE_CONFIG_H
 #include <config.h>
@@ -174,7 +177,7 @@ namespace
 		}                                     \
 	} while (0)
 
-HIDDEN SEXP do_relop(SEXP call, SEXP op, SEXP args, SEXP env)
+RHIDDEN SEXP do_relop(SEXP call, SEXP op, SEXP args, SEXP env)
 {
 	SEXP ans, arg1, arg2;
 	int argc;
@@ -201,7 +204,7 @@ HIDDEN SEXP do_relop(SEXP call, SEXP op, SEXP args, SEXP env)
 }
 
 // also called from cmp_relop() in eval.cpp :
-HIDDEN SEXP do_relop_dflt(SEXP call, SEXP op, SEXP x, SEXP y)
+RHIDDEN SEXP do_relop_dflt(SEXP call, SEXP op, SEXP x, SEXP y)
 {
     /* handle the REALSXP/INTSXP simple scalar case quickly */
     if (IS_SIMPLE_SCALAR(x, INTSXP)) {
@@ -864,7 +867,7 @@ static SEXP bitwiseShiftR(SEXP a, SEXP b)
     return ans;
 }
 
-HIDDEN SEXP do_bitwise(SEXP call, SEXP op, SEXP args, SEXP env)
+RHIDDEN SEXP do_bitwise(SEXP call, SEXP op, SEXP args, SEXP env)
 {
     checkArity(op, args);
     SEXP ans = R_NilValue; /* -Wall */

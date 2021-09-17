@@ -36,7 +36,7 @@
 
 #include "nmath.h"
 
-HIDDEN void Rf_gammalims(double *xmin, double *xmax)
+RHIDDEN void Rf_gammalims(double *xmin, double *xmax)
 {
 /* FIXME: Even better: If IEEE, #define these in nmath.h
 	  and don't call Rf_gammalims() at all

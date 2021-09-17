@@ -20,6 +20,10 @@
  *  https://www.R-project.org/Licenses/
  */
 
+/** @file logic.cpp
+ *
+ */
+
 #ifdef HAVE_CONFIG_H
 #include <config.h>
 #endif
@@ -195,7 +199,7 @@ namespace
 } // anonymous namespace
 
 /* & | ! */
-HIDDEN SEXP do_logic(SEXP call, SEXP op, SEXP args, SEXP env)
+RHIDDEN SEXP do_logic(SEXP call, SEXP op, SEXP args, SEXP env)
 {
     SEXP arg1 = CAR(args); //, arg2 = CADR(args)
     Rboolean attr1 = (Rboolean) (ATTRIB(arg1) != R_NilValue);
@@ -419,7 +423,7 @@ static SEXP lunary(SEXP call, SEXP op, SEXP arg)
 }
 
 /* && || */
-HIDDEN SEXP do_logic2(SEXP call, SEXP op, SEXP args, SEXP env)
+RHIDDEN SEXP do_logic2(SEXP call, SEXP op, SEXP args, SEXP env)
 {
 /*  &&	and  ||	 */
     SEXP s1, s2;
@@ -591,7 +595,7 @@ static Logical checkValues(int op, int na_rm, SEXP x, R_xlen_t n)
 }
 
 /* all, any */
-HIDDEN SEXP do_logic3(SEXP call, SEXP op, SEXP args, SEXP env)
+RHIDDEN SEXP do_logic3(SEXP call, SEXP op, SEXP args, SEXP env)
 {
     SEXP ans, s, t, call2;
     int narm, has_na = 0;

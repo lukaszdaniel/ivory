@@ -20,6 +20,9 @@ OBJECTS = $(SOURCES_C:.c=.o) $(SOURCES_CXX:.cpp=.o) ../../../gnuwin32/dllversion
 SHLIB = $(pkg).dll
 RESFLAGS = -I $(R_HOME)/include
 
+## need config.h
+PKG_CPPFLAGS=-I$(R_HOME)/src/include -DCOMPILING_IVORY -DHAVE_CONFIG_H
+
 npus-CPPFLAGS = -I.
 
 all: makeMakedeps shlib

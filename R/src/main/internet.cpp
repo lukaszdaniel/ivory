@@ -93,7 +93,7 @@ SEXP Rdownload(SEXP args)
 }
 
 // As from R 4.2.0 this is only used on Windows
-HIDDEN Rconnection R_newurl(const char *description, const char *const mode, SEXP headers, int type)
+RHIDDEN Rconnection R_newurl(const char *description, const char *const mode, SEXP headers, int type)
 {
     if (!initialized)
         internet_Init();
@@ -106,7 +106,7 @@ HIDDEN Rconnection R_newurl(const char *description, const char *const mode, SEX
     }
 }
 
-HIDDEN Rconnection R_newsock(const char *host, int port, int server, int serverfd,
+RHIDDEN Rconnection R_newsock(const char *host, int port, int server, int serverfd,
                              const char *const mode, int timeout, int options)
 {
     if (!initialized)
@@ -120,7 +120,7 @@ HIDDEN Rconnection R_newsock(const char *host, int port, int server, int serverf
     }
 }
 
-HIDDEN Rconnection R_newservsock(int port)
+RHIDDEN Rconnection R_newservsock(int port)
 {
     if (!initialized)
         internet_Init();
@@ -253,7 +253,7 @@ SEXP Rsockwrite(SEXP ssock, SEXP sstring)
 }
 
 
-HIDDEN int Rsockselect(int nsock, int *insockfd, int *ready, int *write,
+RHIDDEN int Rsockselect(int nsock, int *insockfd, int *ready, int *write,
                 double timeout)
 {
     if (!initialized)
@@ -267,7 +267,7 @@ HIDDEN int Rsockselect(int nsock, int *insockfd, int *ready, int *write,
     }
 }
 
-HIDDEN SEXP do_curlVersion(SEXP call, SEXP op, SEXP args, SEXP rho)
+RHIDDEN SEXP do_curlVersion(SEXP call, SEXP op, SEXP args, SEXP rho)
 {
     checkArity(op, args);
     if (!initialized)
@@ -281,7 +281,7 @@ HIDDEN SEXP do_curlVersion(SEXP call, SEXP op, SEXP args, SEXP rho)
     }
 }
 
-HIDDEN SEXP do_curlGetHeaders(SEXP call, SEXP op, SEXP args, SEXP rho)
+RHIDDEN SEXP do_curlGetHeaders(SEXP call, SEXP op, SEXP args, SEXP rho)
 {
     checkArity(op, args);
     if (!initialized)
@@ -295,7 +295,7 @@ HIDDEN SEXP do_curlGetHeaders(SEXP call, SEXP op, SEXP args, SEXP rho)
     }
 }
 
-HIDDEN SEXP do_curlDownload(SEXP call, SEXP op, SEXP args, SEXP rho)
+RHIDDEN SEXP do_curlDownload(SEXP call, SEXP op, SEXP args, SEXP rho)
 {
     checkArity(op, args);
     if (!initialized)
@@ -309,7 +309,7 @@ HIDDEN SEXP do_curlDownload(SEXP call, SEXP op, SEXP args, SEXP rho)
     }
 }
 
-HIDDEN Rconnection R_newCurlUrl(const char *description, const char *const mode, SEXP headers, int type)
+RHIDDEN Rconnection R_newCurlUrl(const char *description, const char *const mode, SEXP headers, int type)
 {
     if (!initialized)
         internet_Init();

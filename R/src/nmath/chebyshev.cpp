@@ -45,7 +45,7 @@
 /* NaNs propagated correctly */
 
 
-int HIDDEN Rf_chebyshev_init(double *dos, int nos, double eta)
+int RHIDDEN Rf_chebyshev_init(double *dos, int nos, double eta)
 {
     int i, ii;
     double err;
@@ -66,7 +66,7 @@ int HIDDEN Rf_chebyshev_init(double *dos, int nos, double eta)
 }
 
 
-HIDDEN double Rf_chebyshev_eval(double x, const double *a, const int n)
+RHIDDEN double Rf_chebyshev_eval(double x, const double *a, const int n)
 {
     double b0, b1, b2, twox;
     int i;

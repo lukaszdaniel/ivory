@@ -33,8 +33,7 @@ static void m_multiply(double *A, double *B, double *C, int m);
 static void m_power(double *A, int eA, double *V, int *eV, int m, int n);
 
 /* Two-sample two-sided asymptotic distribution */
-static void
-pkstwo(int n, double *x, double tol)
+static void pkstwo(int n, double *x, double tol)
 {
 /* x[1:n] is input and output
  *
@@ -126,8 +125,7 @@ static double psmirnov2x(double *x, int m, int n)
     return u[n];
 }
 
-static double
-K(int n, double d)
+static double K(int n, double d)
 {
     /* Compute Kolmogorov's distribution.
        Code published in
@@ -183,8 +181,7 @@ K(int n, double d)
    return(s);
 }
 
-static void
-m_multiply(double *A, double *B, double *C, int m)
+static void m_multiply(double *A, double *B, double *C, int m)
 {
     /* Auxiliary routine used by K().
        Matrix multiplication.
@@ -200,8 +197,7 @@ m_multiply(double *A, double *B, double *C, int m)
 	}
 }
 
-static void
-m_power(double *A, int eA, double *V, int *eV, int m, int n)
+static void m_power(double *A, int eA, double *V, int *eV, int m, int n)
 {
     /* Auxiliary routine used by K().
        Matrix power.

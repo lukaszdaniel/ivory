@@ -18,6 +18,10 @@
  *  https://www.R-project.org/Licenses/
  */
 
+/** @file options.cpp
+ *
+ */
+
 #ifdef HAVE_CONFIG_H
 #include <config.h>
 #endif
@@ -188,7 +192,7 @@ int Rf_GetOptionDigits(void)
     return FixupDigits(GetOption1(Symbol::obtain("digits")), iWARN);
 }
 
-HIDDEN
+RHIDDEN
 int R::GetOptionCutoff(void)
 {
     int w;
@@ -200,7 +204,7 @@ int R::GetOptionCutoff(void)
     return w;
 }
 
-HIDDEN
+RHIDDEN
 Rboolean Rf_GetOptionDeviceAsk(void)
 {
     int ask;
@@ -255,7 +259,7 @@ static SEXP SetOption(SEXP tag, SEXP value)
 /* Set the width of lines for printing i.e. like options(width=...) */
 /* Returns the previous value for the options. */
 
-HIDDEN int R::R_SetOptionWidth(int w)
+RHIDDEN int R::R_SetOptionWidth(int w)
 {
     SEXP t, v;
     if (w < R_MIN_WIDTH_OPT) w = R_MIN_WIDTH_OPT;
@@ -267,7 +271,7 @@ HIDDEN int R::R_SetOptionWidth(int w)
     return INTEGER(v)[0];
 }
 
-HIDDEN int R::R_SetOptionWarn(int w)
+RHIDDEN int R::R_SetOptionWarn(int w)
 {
     SEXP t, v;
 
@@ -281,7 +285,7 @@ HIDDEN int R::R_SetOptionWarn(int w)
 /* Note that options are stored as a dotted pair list */
 /* This is barely historical, but is also useful. */
 
-HIDDEN void R::InitOptions(void)
+RHIDDEN void R::InitOptions(void)
 {
     SEXP val, v;
     const char *p = nullptr;
@@ -413,7 +417,7 @@ HIDDEN void R::InitOptions(void)
 }
 
 
-HIDDEN SEXP do_getOption(SEXP call, SEXP op, SEXP args, SEXP rho)
+RHIDDEN SEXP do_getOption(SEXP call, SEXP op, SEXP args, SEXP rho)
 {
     checkArity(op, args);
     SEXP x = CAR(args);
@@ -426,7 +430,7 @@ HIDDEN SEXP do_getOption(SEXP call, SEXP op, SEXP args, SEXP rho)
 static Rboolean warned_on_strings_as_fact = FALSE; // -> once-per-session warning
 
 /* This needs to manage R_Visible */
-HIDDEN SEXP do_options(SEXP call, SEXP op, SEXP args, SEXP rho)
+RHIDDEN SEXP do_options(SEXP call, SEXP op, SEXP args, SEXP rho)
 {
     SEXP names, value, options;
 

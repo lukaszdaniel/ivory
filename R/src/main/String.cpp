@@ -178,7 +178,7 @@ namespace R
     }
 
     /* this has NA_STRING = NA_STRING */
-    HIDDEN bool Seql(SEXP a, SEXP b)
+    RHIDDEN bool Seql(SEXP a, SEXP b)
     {
         /* The only case where pointer comparisons do not suffice is where
       we have two strings in different encodings (which must be
@@ -198,7 +198,7 @@ namespace R
         }
     }
 
-    HIDDEN int R_Newhashpjw(const char *s)
+    RHIDDEN int R_Newhashpjw(const char *s)
     {
         char *p;
         unsigned h = 0, g;

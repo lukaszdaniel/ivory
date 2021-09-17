@@ -732,7 +732,7 @@ static void *in_R_FTPOpen2(const char *url)
 #include <R_ext/Rdynload.h>
 
 extern "C"
-VISIBLE void R_init_internet(DllInfo *info)
+RVISIBLE void R_init_internet(DllInfo *info)
 {
     R_InternetRoutines *tmp;
     tmp = R_Calloc(1, R_InternetRoutines);
