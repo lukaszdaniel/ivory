@@ -21,7 +21,6 @@ CFLAGS = @CFLAGS@ $(LTO)
 CPICFLAGS = @CPICFLAGS@
 CPPFLAGS = @CPPFLAGS@
 CXX = @CXX@ @CXXSTD@
-## CXXFLAGS = @CXXFLAGS@ -Wall -Werror -Wno-error=switch -Wno-error=sign-compare -Wno-error=attributes $(LTO)
 CXXFLAGS = @CXXFLAGS@ $(LTO)
 CXXPICFLAGS = @CXXPICFLAGS@
 CXX11 = @CXX11@

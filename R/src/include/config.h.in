@@ -4,11 +4,11 @@
 #define R_CONFIG_H
 
 /* Define to one of `_getb67', `GETB67', `getb67' for Cray-2 and Cray-YMP
-   systems. This function is required for `alloca.c' support on those systems.
+   systems. This function is required for `alloca.cpp' support on those systems.
    */
 #undef CRAY_STACKSEG_END
 
-/* Define to 1 if using `alloca.c'. */
+/* Define to 1 if using `alloca.cpp'. */
 #undef C_ALLOCA
 
 /* C stack direction: 1 (down) or -1 (up) */
@@ -1058,9 +1058,6 @@
 
 /* Define if the pthread_in_use() detection is hard. (For intl) */
 #undef PTHREAD_IN_USE_DETECTION_HARD
-
-/* Define as the return type of signal handlers (`int' or `void'). */
-#undef RETSIGTYPE
 
 /* Define this to use architecture-dependent subdirectories of this name. */
 #undef R_ARCH

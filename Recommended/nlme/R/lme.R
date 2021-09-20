@@ -1,6 +1,6 @@
 ###            Fit a general linear mixed effects model
 ###
-### Copyright 2005-2020  The R Core team
+### Copyright 2005-2021  The R Core team
 ### Copyright 1997-2003  Jose C. Pinheiro,
 ###                      Douglas M. Bates <bates@stat.wisc.edu>
 ###
@@ -2155,7 +2155,7 @@ print.summary.lme <- function(x, verbose = FALSE, ...)
   if (verbose) cat(gettext("Convergence at iteration: ", domain = "R-nlme"), x$numIter, "\n", sep = "")
   cat("\n")
   print(summary(x$modelStruct), sigma = x$sigma,
-        reEstimates = x$coef$random, verbose = verbose, ...)
+        reEstimates = x$coefficients$random, verbose = verbose, ...)
   fixF <- x$call$fixed
   cat(gettext("Fixed effects: ", domain = "R-nlme"),
       deparse(

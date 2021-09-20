@@ -181,10 +181,9 @@ RHIDDEN int R::IntegerFromComplex(Rcomplex x, int &warn)
 
 RHIDDEN int R::IntegerFromString(SEXP x, int &warn)
 {
-    double xdouble;
-    char *endp;
     if (x != R_NaString && !isBlankString(CHAR(x))) { /* ASCII */
-	xdouble = R_strtod(CHAR(x), &endp); /* ASCII */
+	char *endp;
+	double xdouble = R_strtod(CHAR(x), &endp); /* ASCII */
 	if (isBlankString(endp)) {
 #ifdef _R_pre_Version_3_3_0
 	    if (xdouble > R_INT_MAX) {
@@ -222,15 +221,11 @@ RHIDDEN double R::RealFromInteger(int x, int &warn)
 
 RHIDDEN double R::RealFromComplex(Rcomplex x, int &warn)
 {
-	if (ISNAN(x.r) || ISNAN(x.i))
-		return NA_REAL;
-	if (ISNAN(x.r))
-		return x.r;
-	if (ISNAN(x.i))
-		return NA_REAL;
-	if (x.i != 0)
-		warn |= WARN_IMAG;
-	return x.r;
+    if (ISNAN(x.r) || ISNAN(x.i))
+	return NA_REAL;
+    if (x.i != 0)
+	warn |= WARN_IMAG;
+    return x.r;
 }
 
 RHIDDEN double R::RealFromString(SEXP x, int &warn)

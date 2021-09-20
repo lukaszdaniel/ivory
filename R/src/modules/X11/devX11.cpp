@@ -2586,7 +2586,7 @@ static Rboolean X11_Locator(double *x, double *y, pDevDesc dd)
 	    handleEvent(event);
     }
     /* In case it got closed asynchronously, PR#14872 */
-    if (!displayOpen) return (Rboolean) 0;
+    if (!displayOpen) return (Rboolean) FALSE;
     /* if it was a Button1 succeed, otherwise fail */
     if(xd->type==WINDOW) XDefineCursor(display, xd->window, arrow_cursor);
     XSync(display, 0);
@@ -2802,7 +2802,7 @@ Rboolean X11DeviceDriver(pDevDesc dd,
     xd->bg = bgcolor;
 #ifdef HAVE_WORKING_X11_CAIRO
     xd->useCairo = (Rboolean) (useCairo != 0);
-    xd->buffered = (Rboolean) 0;
+    xd->buffered = (Rboolean) FALSE;
     switch(useCairo) {
     case 0: break; /* Xlib */
     case 1: xd->buffered = (Rboolean) 1; break; /* cairo */
@@ -2810,7 +2810,7 @@ Rboolean X11DeviceDriver(pDevDesc dd,
     case 3: xd->buffered = (Rboolean) 2; break; /* dbcairo */
     default:
 	warning(_("that type is not supported on this platform - using \"nbcairo\""));
-	xd->buffered = (Rboolean) 0;
+	xd->buffered = (Rboolean) FALSE;
     }
     if(useCairo) {
 	switch(antialias){
@@ -3125,7 +3125,7 @@ int Rf_setX11Display(Display *dpy, double gamma_fac, X_COLORTYPE colormodel,
 		 int maxcube, Rboolean setHandlers)
 {
 /*    static int alreadyDone = 0;
-    if(alreadyDone) return((Rboolean) TRUE);
+    if(alreadyDone) return (Rboolean) TRUE;
     alreadyDone = 1; */
     display = dpy;
 
@@ -3156,7 +3156,7 @@ int Rf_setX11Display(Display *dpy, double gamma_fac, X_COLORTYPE colormodel,
 	XSetIOErrorHandler(R_X11IOErr);
     }
 
-    return((Rboolean) TRUE);
+    return (Rboolean) TRUE;
 }
 
 typedef Rboolean (*X11DeviceDriverRoutine)(pDevDesc, char*,

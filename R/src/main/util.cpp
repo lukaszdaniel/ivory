@@ -1265,6 +1265,8 @@ RHIDDEN SEXP do_setencoding(SEXP call, SEXP op, SEXP args, SEXP rho)
     return x;
 }
 
+/* `*s` should point to a string derived from `ref` after `ref` has been
+   translated to native encoding.  See `?Encoding` */
 RHIDDEN SEXP R::markKnown(const char *const s, SEXP ref)
 {
     cetype_t ienc = CE_NATIVE;

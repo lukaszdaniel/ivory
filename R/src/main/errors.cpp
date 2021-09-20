@@ -243,7 +243,7 @@ void onintrNoResume() { onintrEx(FALSE); }
    These do far more processing than is allowed in a signal handler ....
 */
 
-RHIDDEN RETSIGTYPE R::onsigusr1(int dummy)
+RHIDDEN void R::onsigusr1(int dummy)
 {
     if (R_interrupts_suspended) {
 	/**** ought to save signal and handle after suspend */
@@ -278,7 +278,7 @@ RHIDDEN RETSIGTYPE R::onsigusr1(int dummy)
 }
 
 
-RHIDDEN RETSIGTYPE R::onsigusr2(int dummy)
+RHIDDEN void R::onsigusr2(int dummy)
 {
     inError = 1;
 

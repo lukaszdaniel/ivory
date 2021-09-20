@@ -91,6 +91,14 @@
       and the \code{histogram} method for \code{plot()} now also use the
       new default \code{col = "lightgray"} in consistency with the
       corresponding change to \code{hist()}'s default for \R 4.0.0.
+
+      \item \code{hist.default()} gains new \code{fuzz} argument, and the
+      histogram \code{plot} method no longer uses fractional axis ticks
+      when displaying counts (\code{"Frequency"}).
+
+      \item \code{mapply()} and hence \code{Map()} now also obey the
+      \dQuote{max-or-0-if-any} recycling rule, such that, e.g.,
+      \code{Map(`+`, 1:3, 1[0])} is valid now.
     }
   }
 
@@ -210,9 +218,6 @@
       directory behind when it aborts due to an already existing output
       file.  (Thanks to Sebastian Meyer's \PR{18141}.)
 
-      \item \verb{\Sexpr{ch}} now preserves \code{Encoding(ch)}. (Thanks to
-      report and patch by Jeroen Ooms in \PR{18152}.)
-
       \item \code{density(x, weights=w, na.rm=TRUE)} when \code{anyNA(x)}
       is true, now removes weights \dQuote{in parallel} to \code{x}, fixing
       \PR{18151}, reported by Matthias Gondan.
@@ -275,12 +280,31 @@
       \code{density}) to \code{axis()}.  (Thanks to Sebastian Meyer's
       \PR{18171}.)
 
+      \item \verb{\Sexpr{ch}} now preserves \code{Encoding(ch)}. (Thanks to
+      report and patch by Jeroen Ooms in \PR{18152}.)
+
       \item Setting the RNG to \code{"Marsaglia-Multicarry"} e.g., by
       \code{RNGkind()}, now warns in more places, thanks to
       André Gillibert's report and patch in \PR{18168}.
 
       \item \code{gray(numeric(), alpha=1/2)} no longer segfaults, fixing
       \PR{18183}, reported by Till Krenz.
+
+      \item Fixed \code{dnbinom(x, size=<very_small>, .., log=TRUE)}
+      regression, reported by Martin Morgan.
+
+      \item \code{as.Date.POSIXlt(x)} now keeps \code{names(x)}, thanks to
+      Davis Vaughan's report and patch in \PR{18188}.
+
+      \item \code{model.response()} now strips an \code{"AsIs"} class typically,
+      thanks to Duncan Murdoch's report and other discussants in \PR{18190}.
+
+      \item \code{try()} is considerably faster in case of an error and
+      long call, as e.g., from some \code{do.call()}.  Thanks to
+      Alexander Kaever's suggestion posted to R-devel.
+
+      \item \code{qqline(y = <object>)} such as \code{y=I(.)}, now works,
+      see also \PR{18190}.
     }
   }
 }

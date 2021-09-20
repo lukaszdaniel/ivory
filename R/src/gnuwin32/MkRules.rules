@@ -74,7 +74,8 @@ SYMPAT = 's/^.* [BCDRT] _/ /p'
 endif
 
 ## -std=c99 would force __STRICT_ANSI__ disabling strdup etc, and also alloca
-C99FLAG=-std=gnu99
+C99FLAG=-std=gnu99 -DCOMPILING_IVORY
+CXXFLAG=-std=c++17 -fpermissive -DCOMPILING_IVORY
 
 ## earlier Rtools needed -sjlj; the alternative is -dw2, which failed building R.
 GCC4_SUFF=
@@ -90,6 +91,7 @@ endif
 AR = $(BINPREF)ar
 CAT=cat
 CC=$(BINPREF)gcc$(GCC4_SUFF) $(C99FLAG) $(M_ARCH)
+CXX=$(BINPREF)g++$(GCC4_SUFF) $(CXXFLAG) $(M_ARCH)
 CP=cp
 # as set by make
 CPP=$(CC) -E
@@ -142,6 +144,13 @@ SORT=sort
 
 .c.o:
 	$(CC) $(CPPFLAGS) $($*-CPPFLAGS) $(CFLAGS) $($*-CFLAGS) $(DEFINES) -c $< -o $@
+
+.cpp.o:
+	$(CXX) $(CPPFLAGS) $($*-CPPFLAGS) $(CFLAGS) $($*-CFLAGS) $(DEFINES) -c $< -o $@
+
+.cpp.d:
+	@echo "making $@ from $<"
+	@$(CXX) -MM $(CPPFLAGS) $($*-CPPFLAGS) $(DEFINES) $< -o $@
 
 .f.o:
 	$(FC) $(FFLAGS) $($*-FFLAGS) -c $< -o $@

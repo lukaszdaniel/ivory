@@ -1314,6 +1314,8 @@ RHIDDEN SEXP do_POSIXlt2D(SEXP call, SEXP op, SEXP args, SEXP env)
 	}
     }
 
+    SEXP nm = getAttrib(VECTOR_ELT(x, 5), R_NamesSymbol);
+    if (nm != R_NilValue) setAttrib(ans, R_NamesSymbol, nm);
     PROTECT(klass = mkString("Date"));
     classgets(ans, klass);
     UNPROTECT(3);

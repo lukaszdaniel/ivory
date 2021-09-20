@@ -8628,12 +8628,14 @@ function(env)
 {
     env <- as.environment(env)
     g <- suppressMessages(methods::getGenerics(env))
-    Map(function(f, p) {
-            attr(f, "package") <- p
-            f
-        },
-        g@.Data,
-        g@package)
+    y <- Map(function(f, p) {
+                 attr(f, "package") <- p
+                 f
+             },
+             g@.Data,
+             g@package)
+    names(y) <- g@.Data
+    y
 }
 
 ### ** .get_S4_methods_list

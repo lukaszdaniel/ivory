@@ -883,8 +883,8 @@ namespace R
     SEXP mkTrue(void);
     const char *R_nativeEncoding(void);
     SEXP NewEnvironment(SEXP namelist, SEXP valuelist, SEXP rho);
-    RETSIGTYPE onsigusr1(int);
-    RETSIGTYPE onsigusr2(int);
+    void onsigusr1(int);
+    void onsigusr2(int);
     R_xlen_t OneIndex(SEXP x, SEXP s, R_xlen_t nx, int partial, SEXP *newname, int pos, SEXP call);
     SEXP patchArgsByActuals(SEXP formals, SEXP supplied, SEXP cloenv);
     void PrintInit(R_PrintData &data, SEXP env);

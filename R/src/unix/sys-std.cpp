@@ -117,11 +117,11 @@ RHIDDEN void Rstd_Suicide(const char *s)
 
 static SIGJMP_BUF seljmpbuf;
 
-static RETSIGTYPE (*oldSigintHandler)(int) = SIG_DFL;
+static void (*oldSigintHandler)(int) = SIG_DFL;
 
 typedef void (*sel_intr_handler_t)(void);
 
-NORET static RETSIGTYPE handleSelectInterrupt(int dummy)
+NORET static void handleSelectInterrupt(int dummy)
 {
     signal(SIGINT, oldSigintHandler);
     SIGLONGJMP(seljmpbuf, 1);
@@ -578,7 +578,7 @@ static struct {
 #ifdef NEED_INT_HANDLER
 static volatile Rboolean caught_sigwinch = FALSE;
 
-static RETSIGTYPE R_readline_sigwinch_handler(int sig)
+static void R_readline_sigwinch_handler(int sig)
 {
     caught_sigwinch = TRUE;
 }

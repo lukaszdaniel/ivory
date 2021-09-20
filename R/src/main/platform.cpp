@@ -86,6 +86,7 @@
 #include <windows.h>
 typedef BOOLEAN (WINAPI *PCSL)(LPWSTR, LPWSTR, DWORD);
 static PCSL pCSL = nullptr;
+extern "C" 
 const char *formatError(DWORD res);  /* extra.c */
 /* Windows does not have link(), but it does have CreateHardLink() on NTFS */
 #undef HAVE_LINK
@@ -1062,7 +1063,9 @@ RHIDDEN SEXP do_filelink(SEXP call, SEXP op, SEXP args, SEXP rho)
 }
 
 #ifdef _WIN32
+extern "C" 
 int Rwin_rename(char *from, char *to);  /* in src/gnuwin32/extra.cpp */
+extern "C" 
 int Rwin_wrename(const wchar_t *from, const wchar_t *to);
 #endif
 
@@ -1778,7 +1781,8 @@ RHIDDEN SEXP do_filechoose(SEXP call, SEXP op, SEXP args, SEXP rho)
 #endif
 
 #ifdef _WIN32
-extern int winAccessW(const wchar_t *path, int mode);
+extern "C" 
+int winAccessW(const wchar_t *path, int mode);
 #endif
 
 /* we require 'access' as from 2.12.0 */
@@ -3515,7 +3519,8 @@ void u_getVersion(UVersionInfo versionArray);
 #endif
 
 #if defined(HAVE_REALPATH) && defined(HAVE_DECL_REALPATH) && !HAVE_DECL_REALPATH
-extern char *realpath(const char *path, char *resolved_path);
+extern "C" 
+char *realpath(const char *path, char *resolved_path);
 #endif
 
 #ifdef HAVE_DLFCN_H
@@ -3523,11 +3528,11 @@ extern char *realpath(const char *path, char *resolved_path);
 #endif
 
 #if defined(HAVE_DLADDR) && defined(HAVE_DECL_DLADDR) && !HAVE_DECL_DLADDR
-extern int dladdr(void *addr, Dl_info *info);
+extern "C" int dladdr(void *addr, Dl_info *info);
 #endif
 
 #if defined(HAVE_DLSYM) && defined(HAVE_DECL_DLSYM) && !HAVE_DECL_DLSYM
-extern void *dlsym(void *handle, const char *symbol);
+extern "C" void *dlsym(void *handle, const char *symbol);
 #endif
 
 /* extSoftVersion only detects versions of libraries that are available

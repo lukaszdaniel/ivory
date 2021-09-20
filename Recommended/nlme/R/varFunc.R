@@ -1,6 +1,6 @@
 ###              Classes of variance functions
 ###
-### Copyright 2007-2020  The R Core team
+### Copyright 2007-2021  The R Core team
 ### Copyright 1997-2003  Jose C. Pinheiro,
 ###                      Douglas M. Bates <bates@stat.wisc.edu>
 #
@@ -131,7 +131,7 @@ print.summary.varFunc <-
 {
   ox <- x
   class(x) <- attr(x, "oClass")
-  if (length(aux <- coef(x, uncons = FALSE, allCoef = TRUE)) > 0) {
+  if (length(aux <- coef(x, unconstrained = FALSE, allCoef = TRUE)) > 0) {
     if (header) cat(gettext("Variance function:", domain = "R-nlme"), "\n", sep = "")
     cat(gettext(" Structure: ", domain = "R-nlme"), attr(x, "structName"), "\n", sep = "")
     cat(gettext(" Formula: ", domain = "R-nlme"), deparse(formula(x)), "\n", sep = "")
@@ -150,7 +150,7 @@ print.summary.varFunc <-
 print.varFunc <-
   function(x, ...)
 {
-  if (length(aux <- coef(x, uncons = FALSE, allCoef = TRUE)) > 0) {
+  if (length(aux <- coef(x, unconstrained = FALSE, allCoef = TRUE)) > 0) {
     cat(gettextf("Variance function structure of class %s representing", dQuote(class(x)[1]), domain = "R-nlme"), "\n", sep = "")
     print(aux, ...)
   } else {

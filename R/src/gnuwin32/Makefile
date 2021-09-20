@@ -77,11 +77,11 @@ endif
 
 dllversion-RESFLAGS = -I../include
 CSOURCES = 
-CXXSOURCES = \
+CXX_SOURCES = \
   console.cpp dynload.cpp editor.cpp embeddedR.cpp extra.cpp \
   opt.cpp pager.cpp preferences.cpp psignal.cpp rhome.cpp rt_complete.cpp \
   rui.cpp run.cpp shext.cpp sys-win32.cpp system.cpp dos_wglob.cpp
-OBJS = $(CSOURCES:.c=.o) $(CXXSOURCES:.cpp=.o) dllversion.o
+OBJS = $(CSOURCES:.c=.o) $(CXX_SOURCES:.cpp=.o) dllversion.o
 ifeq "$(WIN)" "32"
  OBJS += e_pow.o
 endif
@@ -429,7 +429,7 @@ distribution:
 
 ## ============= End of maintainer targets ========================
 
-DEPS = $(CSOURCES:.c=.d)
+DEPS = $(CSOURCES:.c=.d) $(CXX_SOURCES:.cpp=.d)
 
 makeMakedeps: $(DEPS)
 	@$(RM) Makedeps

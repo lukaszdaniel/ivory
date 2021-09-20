@@ -215,7 +215,7 @@ static char *unescape_arg(char *p, char *avp)
 #endif
 #include <csignal> /* thr_stksegment */
 
-extern int R_isWriteableDir(const char *path);
+int R_isWriteableDir(const char *path); // from sysutils.cpp
 
 extern "C"
 int Rf_initialize_R(int ac, char *av[])

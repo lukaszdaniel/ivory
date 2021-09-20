@@ -22,6 +22,7 @@
 
 static unsigned int I1=1234, I2=5678;
 
+extern "C"
 void set_seed(unsigned int i1, unsigned int i2)
 {
     I1 = i1; I2 = i2;
@@ -32,7 +33,7 @@ void get_seed(unsigned int *i1, unsigned int *i2)
     *i1 = I1; *i2 = I2;
 }
 
-
+extern "C"
 double unif_rand(void)
 {
     I1= 36969*(I1 & 0177777) + (I1>>16);
@@ -55,6 +56,7 @@ static double rbits(int bits)
     return (double) (v & ((1L << bits) - 1));
 }
 
+extern "C"
 double R_unif_index(double dn)
 {
     // rejection sampling from integers below the next larger power of two
