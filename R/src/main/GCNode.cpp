@@ -26,6 +26,7 @@
  */
 
 #include <CXXR/GCNode.hpp>
+#include <CXXR/MemoryBank.hpp>
 #include <CXXR/RAllocStack.hpp>
 #include <CXXR/ProtectStack.hpp>
 #include <CXXR/GCManager.hpp>
@@ -49,14 +50,15 @@ namespace CXXR
         ++s_num_nodes;
     }
 
-    /*
-void* GCNode::operator new(size_t bytes)
-{
-    void* ans = MemoryBank::allocate(bytes);
-    cout << "Node of " << bytes << " bytes allocated at " << ans << endl;
-    return ans;
-}
-*/
+    void *GCNode::operator new(size_t bytes)
+    {
+        return memset(MemoryBank::allocate(bytes), 0, bytes);
+    }
+
+    void GCNode::operator delete(void *p, size_t bytes)
+    {
+        MemoryBank::deallocate(p, bytes);
+    }
 
     void GCNode::ageTo(unsigned int mingen) const
     {
@@ -388,51 +390,59 @@ void* GCNode::operator new(size_t bytes)
     }
 } // namespace CXXR
 
-// ***** C interface *****
-
-int MARK(SEXP x)
+namespace R
 {
-    return CXXR::GCNode::is_marked(static_cast<CXXR::GCNode *>(x));
-}
+    int TRACKREFS(SEXP x)
+    {
+        return x ? x->trackrefs() : false;
+    }
+
+    void SET_TRACKREFS(SEXP x, bool v)
+    {
+        if (x)
+            x->setTrackrefs(x->sexptype() == CLOSXP ? true : v);
+    }
+
+    void SET_REFCNT(SEXP x, unsigned int v)
+    {
+        if (x)
+            x->setRefCnt(v);
+    }
+
+    void DECREMENT_REFCNT(SEXP x)
+    {
+        CXXR::GCNode::decRefCount(x);
+    }
+
+    void INCREMENT_REFCNT(SEXP x)
+    {
+        CXXR::GCNode::incRefCount(x);
+    }
+
+    void DISABLE_REFCNT(SEXP x)
+    {
+        SET_TRACKREFS(x, false);
+    }
+
+    void ENABLE_REFCNT(SEXP x)
+    {
+        SET_TRACKREFS(x, true);
+    }
+} // namespace R
+
+// ***** C interface *****
 
 int REFCNT(SEXP x)
 {
     return x ? x->refcnt() : 0;
 }
 
-void SET_REFCNT(SEXP x, unsigned int v)
+int MARK(SEXP x)
 {
-    if (x)
-        x->setRefCnt(v);
+    return CXXR::GCNode::is_marked(static_cast<CXXR::GCNode *>(x));
 }
 
-int R::TRACKREFS(SEXP x)
+void MARK_NOT_MUTABLE(SEXP x)
 {
-    return x ? x->trackrefs() : false;
-}
-
-void SET_TRACKREFS(SEXP x, bool v)
-{
-    if (x)
-        x->setTrackrefs(x->sexptype() == CLOSXP ? true : v);
-}
-
-void R::DECREMENT_REFCNT(SEXP x)
-{
-    CXXR::GCNode::decRefCount(x);
-}
-
-void R::INCREMENT_REFCNT(SEXP x)
-{
-    CXXR::GCNode::incRefCount(x);
-}
-
-void R::DISABLE_REFCNT(SEXP x)
-{
-    SET_TRACKREFS(x, false);
-}
-
-void R::ENABLE_REFCNT(SEXP x)
-{
-    SET_TRACKREFS(x, true);
+    R::SET_REFCNT(x, REFCNTMAX);
 }

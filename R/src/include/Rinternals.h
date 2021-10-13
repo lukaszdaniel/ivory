@@ -940,7 +940,7 @@ void R_orderVector1(int *indx, int n, SEXP x, Rboolean nalast, Rboolean decreasi
 #define substitute		Rf_substitute
 #define topenv		        Rf_topenv
 #define translateChar		Rf_translateChar
-#define translateChar0		Rf_translateChar0
+// #define translateChar0		Rf_translateChar0
 #define translateCharUTF8      	Rf_translateCharUTF8
 #define type2char		Rf_type2char
 #define type2rstr		Rf_type2rstr

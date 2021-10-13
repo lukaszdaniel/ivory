@@ -115,7 +115,7 @@ namespace CXXR
 
         /** @brief The name by which this type is known in R.
          *
-         * @return the name by which this type is known in R.
+         * @return The name by which this type is known in R.
          */
         static const char *staticTypeName()
         {

@@ -166,6 +166,10 @@ namespace CXXR
     }
 } // namespace CXXR
 
+namespace R
+{
+} // namespace R
+
 // ***** C interface *****
 
 SEXP R_EmptyEnv = nullptr;

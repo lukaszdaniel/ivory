@@ -22,7 +22,6 @@
  */
 
 #include <CXXR/Logical.hpp>
-
 #include <CXXR/GCRoot.hpp>
 #include <CXXR/LogicalVector.hpp>
 #include <Defn.h>
@@ -52,3 +51,9 @@ namespace CXXR
         R_LogicalNAValue = naValue.get();
     }
 } // namespace CXXR
+
+namespace R
+{
+} // namespace R
+
+// ***** C interface *****

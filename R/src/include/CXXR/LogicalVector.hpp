@@ -75,7 +75,6 @@ namespace CXXR
 
 namespace R
 {
-
     /** @brief Create a unit-length LogicalVector containing FALSE.
      *
      * @return a unit-length LogicalVector containing FALSE.

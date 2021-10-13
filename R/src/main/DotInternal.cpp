@@ -50,6 +50,10 @@ namespace CXXR
     } // namespace ForceNonInline
 } // namespace CXXR
 
+namespace R
+{
+} // namespace R
+
 // ***** C interface *****
 
 SEXP INTERNAL(SEXP x)

@@ -86,8 +86,8 @@ namespace CXXR
 
 namespace R
 {
-    void SET_SCALAR_BVAL(SEXP x, Rbyte v);
     Rbyte SCALAR_BVAL(SEXP x);
+    void SET_SCALAR_BVAL(SEXP x, Rbyte v);
 } // namespace R
 
 extern "C"

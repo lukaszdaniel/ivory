@@ -62,6 +62,10 @@ namespace CXXR
     }
 } // namespace CXXR
 
+namespace R
+{
+} // namespace R
+
 // ***** C interface *****
 
 SEXP EXTPTR_PROT(SEXP x)

@@ -181,7 +181,7 @@ namespace CXXR
 
         /** @brief Name by which this type is known in R.
          *
-         * @return the name by which this type is known in R.
+         * @return The name by which this type is known in R.
          *
          * @note This function is declared but not defined as part of
          * the FixedVector template.  It must be defined as a

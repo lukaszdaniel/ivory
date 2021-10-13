@@ -35,7 +35,6 @@
 #include <functional>
 #include <sstream>
 #include <vector>
-#include <CXXR/MemoryBank.hpp>
 #include <CXXR/SchwarzCounter.hpp>
 #include <CXXR/RTypes.hpp>
 
@@ -97,8 +96,7 @@ namespace CXXR
      * <li>If the derived class contains any pointers to other objects
      * derived from GCNode, then any post-construction operation that
      * modifies the pointer must invoke the method propagateAge() with
-     * that no old-to-new references arise.  There is no need to do
-     * no old-to-new references arise.  There is no need to do this
+     * that no old-to-new references arise. There is no need to do this
      * this during the operation of a constructor for the derived
      * class, because then the object under construction will
      * necessarily be newer than anything to which it refers.</li>
@@ -233,10 +231,7 @@ namespace CXXR
          *
          * @return Pointer to the allocated memory block.
          */
-        static void *operator new(size_t bytes)
-        {
-            return memset(MemoryBank::allocate(bytes), 0, bytes);
-        }
+        static void *operator new(size_t bytes);
 
         /** @brief Deallocate memory
          *
@@ -247,10 +242,7 @@ namespace CXXR
          * @param bytes Size in bytes of the memory block, as
          * requested when the block was allocated.
          */
-        static void operator delete(void *p, size_t bytes)
-        {
-            MemoryBank::deallocate(p, bytes);
-        }
+        static void operator delete(void *p, size_t bytes);
 
         /** @brief Integrity check.
          *
@@ -661,7 +653,10 @@ namespace CXXR
          */
         static void sweep(unsigned int max_generation);
 
-        void unmark() const { m_marked = false; }
+        void unmark() const
+        {
+            m_marked = false;
+        }
 
         friend class SchwarzCounter<GCNode>;
     };
@@ -683,10 +678,12 @@ namespace CXXR
 namespace R
 {
     int TRACKREFS(SEXP x);
+    void SET_TRACKREFS(SEXP x, bool v);
     void DECREMENT_REFCNT(SEXP x);
     void INCREMENT_REFCNT(SEXP x);
     void DISABLE_REFCNT(SEXP x);
     void ENABLE_REFCNT(SEXP x);
+    void SET_REFCNT(SEXP x, unsigned int v);
 } // namespace R
 
 extern "C"
@@ -700,8 +697,6 @@ extern "C"
      */
     int MARK(SEXP x);
     int REFCNT(SEXP x);
-    void SET_REFCNT(SEXP x, unsigned int v);
-    void SET_TRACKREFS(SEXP x, bool v);
 } // extern "C"
 
 #endif /* GCNODE_HPP */

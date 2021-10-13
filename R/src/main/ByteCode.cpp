@@ -40,4 +40,11 @@ namespace CXXR
     {
         return staticTypeName();
     }
-}
+} // namespace CXXR
+
+namespace R
+{
+} // namespace R
+
+// ***** C interface *****
+

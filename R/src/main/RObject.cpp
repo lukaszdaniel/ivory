@@ -193,6 +193,13 @@ namespace CXXR
         return nullptr;
     }
 
+    void RObject::copyAttribute(Symbol *name, const RObject *source)
+    {
+        RObject *att = source->getAttribute(name);
+        if (att)
+            setAttribute(name, att);
+    }
+
     /* Tweaks here based in part on PR#14934 */
     // This follows CR in adding new attributes at the end of the list,
     // though it would be easier to add them at the beginning.
@@ -309,6 +316,10 @@ namespace CXXR
     // The implementation of RObject::traceMemory() is in debug.cpp
 } // namespace CXXR
 
+namespace R
+{
+} // namespace R
+
 // ***** C interface *****
 
 // In CXXR R_NilValue is simply a null pointer:
@@ -318,6 +329,7 @@ SEXP ATTRIB(SEXP x)
 {
     return x ? x->attributes() : nullptr;
 }
+
 int OBJECT(SEXP x)
 {
     return x && x->hasClass();
@@ -423,11 +435,6 @@ void R::SET_ASSIGNMENT_PENDING(SEXP x, int v)
 {
     if (x)
         x->setAssignmentPending(v);
-}
-
-void MARK_NOT_MUTABLE(SEXP x)
-{
-    SET_REFCNT(x, REFCNTMAX);
 }
 
 int R::IS_ASSIGNMENT_CALL(SEXP x)

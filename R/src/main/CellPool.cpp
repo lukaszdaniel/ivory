@@ -23,9 +23,13 @@
  * Implementation of class CellPool
  */
 
+#ifdef HAVE_CONFIG_H
+#include <config.h>
+#endif
+
 #include <CXXR/CellPool.hpp>
 
-#ifndef __APPLE__
+#ifdef HAVE_FEATURES_H
 #include <features.h>
 #endif
 

@@ -79,6 +79,10 @@ namespace CXXR
     GCRoot<> R_ReturnedValue(nullptr);
 } // namespace CXXR
 
+namespace R
+{
+} // namespace R
+
 // ***** C interface *****
 
 void Rf_setCurrentExpression(SEXP e);

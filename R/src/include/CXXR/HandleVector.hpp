@@ -239,7 +239,7 @@ namespace CXXR
 
         /** @brief Name by which this type is known in R.
          *
-         * @return the name by which this type is known in R.
+         * @return The name by which this type is known in R.
          *
          * @note This function is declared but not defined as part of
          * the HandleVector template.  It must be defined as a
@@ -313,5 +313,13 @@ namespace CXXR
         }
     }
 } // namespace CXXR
+
+namespace R
+{
+} // namespace R
+
+extern "C"
+{
+} // extern "C"
 
 #endif // HANDLEVECTOR_HPP

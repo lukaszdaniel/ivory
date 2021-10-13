@@ -33,9 +33,9 @@
 #define EVALUATOR_HPP
 
 #include <utility>
+#include <RContext.h>
 #include <CXXR/Environment.hpp>
 #include <CXXR/PairList.hpp>
-#include <RContext.h>
 #include <R_ext/Boolean.h>
 
 namespace CXXR
@@ -92,6 +92,11 @@ namespace CXXR
         static unsigned int depthLimit()
         {
             return s_depth_limit;
+        }
+
+        static unsigned int depthThreshold()
+        {
+            return s_depth_threshold;
         }
 
         /** @brief (Not for general use.)

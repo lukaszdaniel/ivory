@@ -65,6 +65,10 @@ namespace CXXR
     }
 } // namespace CXXR
 
+namespace R
+{
+} // namespace R
+
 // ***** C interface *****
 
 SEXP SET_VECTOR_ELT(SEXP x, R_xlen_t i, SEXP v)

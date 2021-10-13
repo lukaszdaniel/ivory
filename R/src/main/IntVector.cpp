@@ -52,8 +52,6 @@ namespace CXXR
     }
 } // namespace CXXR
 
-// ***** C interface *****
-
 #ifdef STRICT_TYPECHECK
 #define CHECK_VECTOR_INT(x)                                \
     do                                                     \
@@ -105,6 +103,23 @@ namespace CXXR
     } while (0)
 #endif
 
+namespace R
+{
+    int SCALAR_IVAL(SEXP x)
+    {
+        CHECK_SCALAR_INT(x);
+        return INTEGER0(x)[0];
+    }
+
+    void SET_SCALAR_IVAL(SEXP x, int v)
+    {
+        CHECK_SCALAR_INT(x);
+        INTEGER0(x)[0] = v;
+    }
+} // namespace R
+
+// ***** C interface *****
+
 int *INTEGER(SEXP x)
 {
     if (TYPEOF(x) != INTSXP && TYPEOF(x) != LGLSXP)
@@ -127,18 +142,6 @@ int *INTEGER0(SEXP x)
 {
     CHECK_STDVEC_INT(x);
     return static_cast<int *>(STDVEC_DATAPTR(x));
-}
-
-int R::SCALAR_IVAL(SEXP x)
-{
-    CHECK_SCALAR_INT(x);
-    return INTEGER0(x)[0];
-}
-
-void R::SET_SCALAR_IVAL(SEXP x, int v)
-{
-    CHECK_SCALAR_INT(x);
-    INTEGER0(x)[0] = v;
 }
 
 const int *INTEGER_OR_NULL(SEXP x)

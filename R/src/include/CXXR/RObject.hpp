@@ -351,7 +351,10 @@ namespace CXXR
          *
          * @return const pointer to the attributes of this object.
          */
-        PairList *attributes() const { return m_attrib; }
+        PairList *attributes() const
+        {
+            return m_attrib;
+        }
 
         /** @brief Remove all attributes.
          */
@@ -378,12 +381,7 @@ namespace CXXR
          *          not have an attribute named \a name , then the
          *          function has no effect.
          */
-        void copyAttribute(Symbol *name, const RObject *source)
-        {
-            RObject *att = source->getAttribute(name);
-            if (att)
-                setAttribute(name, att);
-        }
+        void copyAttribute(Symbol *name, const RObject *source);
 
         /** @brief Copy attributes from one RObject to another.
          *
@@ -620,7 +618,8 @@ namespace CXXR
             m_type = type;
         }
 
-        /**
+        /** @brief Altrep status of this object.
+         *
          * @return altrep status of this object.
          */
         bool altrep() const
@@ -829,6 +828,13 @@ namespace CXXR
          */
         RObject(const RObject &pattern, Duplicate deep);
 
+        /** Destructor
+         *
+         * @note The destructor is protected to ensure that RObjects
+         * are allocated on the heap.  (See Meyers 'More Effective
+         * C++' Item 27.) Derived classes should likewise declare
+         * their constructors private or protected.
+         */
         virtual ~RObject();
     };
 
@@ -868,19 +874,19 @@ namespace CXXR
     {
         union
         {
-            CXXR::RObject *backpointer;
+            RObject *backpointer;
             double align;
         } u;
     };
 
     /* Vector Heap Macros */
+    template <typename T>
+    inline size_t convert2VEC(size_t n) { return (n > 0) ? (n * sizeof(T) - 1) / sizeof(VECREC) + 1 : 0; }
     // inline size_t BYTE2VEC(size_t n) { return (n > 0) ? (n - 1) / sizeof(VECREC) + 1 : 0; }
     // inline size_t INT2VEC(size_t n) { return (n > 0) ? (n * sizeof(int) - 1) / sizeof(VECREC) + 1 : 0; }
     // inline size_t FLOAT2VEC(size_t n) { return (n > 0) ? (n * sizeof(double) - 1) / sizeof(VECREC) + 1 : 0; }
     // inline size_t COMPLEX2VEC(size_t n) { return (n > 0) ? (n * sizeof(Rcomplex) - 1) / sizeof(VECREC) + 1 : 0; }
     // inline size_t PTR2VEC(size_t n) { return (n > 0) ? (n * sizeof(RObject) - 1) / sizeof(VECREC) + 1 : 0; }
-    template <typename T>
-    inline size_t convert2VEC(size_t n) { return (n > 0) ? (n * sizeof(T) - 1) / sizeof(VECREC) + 1 : 0; }
 
 } // namespace CXXR
 
@@ -936,7 +942,6 @@ namespace R
     void SET_ASSIGNMENT_PENDING(SEXP x, int v);
     int IS_ASSIGNMENT_CALL(SEXP x);
     void MARK_ASSIGNMENT_CALL(SEXP x);
-    void SETALTREP(SEXP x, int v);
     SEXP R_FixupRHS(SEXP x, SEXP y);
 } // namespace R
 
@@ -1161,10 +1166,8 @@ extern "C"
      */
     Rboolean Rf_inherits(SEXP s, const char *name);
 
-    int ALTREP(SEXP x);
     int IS_SCALAR(SEXP x, SEXPTYPE type);
     void SHALLOW_DUPLICATE_ATTRIB(SEXP to, SEXP from);
-    void MARK_NOT_MUTABLE(SEXP x);
 
     /** @brief C interface to RObject::traceMemory().
      *

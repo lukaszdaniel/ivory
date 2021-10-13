@@ -144,6 +144,10 @@ namespace CXXR
 #define EXPRVECTOR_ELT(x, i) (EXPRVECTOR_PTR(x))[i]
 } // namespace CXXR
 
+namespace R
+{
+} // namespace R
+
 extern "C"
 {
     /** @brief Is this an expression vector?

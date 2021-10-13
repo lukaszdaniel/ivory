@@ -57,7 +57,7 @@ namespace CXXR
 
         /** @brief The name by which this type is known in R.
          *
-         * @return the name by which this type is known in R.
+         * @return The name by which this type is known in R.
          */
         static const char *staticTypeName()
         {
@@ -101,6 +101,7 @@ namespace CXXR
 
 namespace R
 {
+    void SETALTREP(SEXP x, int v);
     SEXP ALTREP_DUPLICATE_EX(SEXP x, Rboolean deep);
     SEXP ALTREP_COERCE(SEXP x, int type);
     Rboolean ALTREP_INSPECT(SEXP, int, int, int, void (*)(SEXP, int, int, int));
@@ -140,7 +141,7 @@ namespace R
     /* constructors for internal ALTREP classes */
     SEXP R_compact_intrange(R_xlen_t n1, R_xlen_t n2);
     SEXP R_deferred_coerceToString(SEXP v, SEXP info);
-    // SEXP R_virtrep_vec(SEXP, SEXP);
+    SEXP R_virtrep_vec(SEXP, SEXP);
     SEXP R_tryUnwrap(SEXP);
     void R_init_altrep();
     void R_reinit_altrep_classes(DllInfo *);
@@ -148,6 +149,8 @@ namespace R
 
 extern "C"
 {
+    int ALTREP(SEXP x);
+    void SETALTREP(SEXP, int);
     SEXP R_tryWrap(SEXP x);
     SEXP ALTREP_CLASS(SEXP x);
     SEXP R_altrep_data1(SEXP x);

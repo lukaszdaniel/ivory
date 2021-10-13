@@ -53,8 +53,8 @@ namespace CXXR
 
 namespace R
 {
-    void SET_SCALAR_CVAL(SEXP x, Rcomplex v);
     Rcomplex SCALAR_CVAL(SEXP x);
+    void SET_SCALAR_CVAL(SEXP x, Rcomplex v);
 } // namespace R
 
 extern "C"

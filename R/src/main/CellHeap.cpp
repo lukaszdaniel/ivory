@@ -23,14 +23,18 @@
  * Implementation of class CellHeap
  */
 
+#ifdef HAVE_CONFIG_H
+#include <config.h>
+#endif
+
 #include <CXXR/CellHeap.hpp>
 
+#ifdef HAVE_FEATURES_H
 // For posix_memalign:
-#ifndef __APPLE__
 #define HAVE_POSIX_MEMALIGN
 #endif
 
-#ifndef __APPLE__
+#ifdef HAVE_FEATURES_H
 #include <features.h>
 #endif
 

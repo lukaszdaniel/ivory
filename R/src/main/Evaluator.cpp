@@ -49,7 +49,7 @@ namespace CXXR
     unsigned int Evaluator::s_depth_threshold = 5000; // R_Expressions, options(expressions)
     unsigned int Evaluator::s_depth_limit = 5000;     // R_Expressions_keep, options(expressions)
     unsigned int Evaluator::s_countdown = 1000;
-    unsigned int Evaluator::s_countdown_start = 1000;
+    unsigned int Evaluator::s_countdown_start = 1000; // was 100 before 2.8.0
 
     namespace
     {
@@ -86,6 +86,12 @@ namespace CXXR
         return s_visible;
     }
 } // namespace CXXR
+
+namespace R
+{
+} // namespace R
+
+// ***** C interface *****
 
 extern "C"
 {

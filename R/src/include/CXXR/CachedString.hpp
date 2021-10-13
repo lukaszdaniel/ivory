@@ -79,7 +79,7 @@ namespace CXXR
 
         /** @brief The name by which this type is known in R.
          *
-         * @return the name by which this type is known in R.
+         * @return The name by which this type is known in R.
          */
         static const char *staticTypeName()
         {
@@ -157,7 +157,10 @@ namespace CXXR
 
 namespace R
 {
-    const char *Rf_translateChar0(SEXP);
+    const char *translateChar0(SEXP);
+    const char *translateCharFP(SEXP);
+    const char *translateCharFP2(SEXP);
+    const char *trCharUTF8(SEXP);
 } // namespace R
 
 extern "C"

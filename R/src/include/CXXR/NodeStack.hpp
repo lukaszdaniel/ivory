@@ -31,6 +31,7 @@
 #define NODESTACK_HPP
 
 #include <vector>
+#include <CXXR/MemoryBank.hpp>
 #include <CXXR/GCNode.hpp>
 #include <CXXR/RObject.hpp>
 

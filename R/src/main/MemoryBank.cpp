@@ -34,8 +34,6 @@
 #include <limits>
 #include <iterator>
 
-#include <limits>
-
 using namespace std;
 using namespace CXXR;
 
@@ -54,7 +52,7 @@ size_t MemoryBank::s_bytes_allocated = 0;
 size_t MemoryBank::s_gc_threshold = numeric_limits<size_t>::max();
 size_t (*MemoryBank::s_cue_gc)(size_t) = nullptr;
 #ifdef R_MEMORY_PROFILING
-void (*MemoryBank::s_monitor)(size_t) = 0;
+void (*MemoryBank::s_monitor)(size_t) = nullptr;
 size_t MemoryBank::s_monitor_threshold = numeric_limits<size_t>::max();
 #endif
 
@@ -113,11 +111,10 @@ void MemoryBank::adjustFreedSize(size_t original, size_t actual)
 
 void *MemoryBank::allocate(size_t bytes, bool allow_gc, R_allocator_t *allocator)
 {
-    notifyAllocation(bytes);
-    if (allocator)
-        return custom_node_alloc(allocator, bytes);
     void *p;
-    if (bytes >= s_new_threshold)
+    if (allocator)
+        p = custom_node_alloc(allocator, bytes);
+    else if (bytes >= s_new_threshold)
     {
         if (s_cue_gc && allow_gc && (GCManager::FORCE_GC() || (s_bytes_allocated + bytes > s_gc_threshold)))
         {
@@ -130,7 +127,24 @@ void *MemoryBank::allocate(size_t bytes, bool allow_gc, R_allocator_t *allocator
         Pool &pool = s_pools[s_pooltab[(bytes + 7) >> 3]];
         p = pool.allocate();
     }
+    notifyAllocation(bytes);
     return p;
+}
+
+void MemoryBank::deallocate(void *p, size_t bytes, bool allocator)
+{
+    if (!p)
+        return;
+    // Uncommenting this helps to diagnose premature GC:
+    // memset(p, 0x55, bytes);
+    if (allocator)
+        custom_node_free(p, bytes);
+    // Assumes sizeof(double) == 8:
+    else if (bytes >= s_new_threshold)
+        ::operator delete(p);
+    else
+        s_pools[s_pooltab[(bytes + 7) >> 3]].deallocate(p);
+    notifyDeallocation(bytes);
 }
 
 void MemoryBank::check()
@@ -225,10 +239,11 @@ void *MemoryBank::custom_node_alloc(R_allocator_t *allocator, size_t bytes)
     return nullptr;
 }
 
-void MemoryBank::custom_node_free(void *ptr)
+void MemoryBank::custom_node_free(void *ptr, size_t bytes)
 {
     if (ptr)
     {
+        notifyDeallocation(bytes);
         R_allocator_t *allocator = ((R_allocator_t *)ptr) - 1;
         allocator->mem_free(allocator, (void *)allocator);
     }

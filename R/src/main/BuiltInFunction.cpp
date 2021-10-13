@@ -377,6 +377,10 @@ namespace CXXR
 #endif
 } // namespace CXXR
 
+namespace R
+{
+} // namespace R
+
 // ***** C interface *****
 
 int CXXR::PRIMOFFSET(SEXP x)

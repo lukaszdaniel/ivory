@@ -710,7 +710,7 @@ namespace R
     SEXP Rf_matchE(SEXP, SEXP, int, SEXP);
     void Rf_setSVector(SEXP*, int, SEXP);
     SEXP Rf_stringSuffix(SEXP, int);
-    const char *Rf_translateChar0(SEXP);
+    const char *translateChar0(SEXP);
     void R_initialize_bcode(void);
     SEXP R_bcEncode(SEXP);
     SEXP R_bcDecode(SEXP);
@@ -1124,7 +1124,6 @@ const auto printwhere = R::Rf_printwhere;
 const auto readS3VarsFromFrame = R::Rf_readS3VarsFromFrame;
 const auto setSVector = R::Rf_setSVector;
 const auto stringSuffix = R::Rf_stringSuffix;
-const auto translateChar0 = R::Rf_translateChar0;
 #endif
 
 #endif /* DEFN_H_ */

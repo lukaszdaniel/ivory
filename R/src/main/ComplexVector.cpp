@@ -53,8 +53,6 @@ namespace CXXR
     }
 } // namespace CXXR
 
-// ***** C interface *****
-
 #ifdef STRICT_TYPECHECK
 #define CHECK_VECTOR_CPLX(x)                         \
     do                                               \
@@ -106,6 +104,23 @@ namespace CXXR
     } while (0)
 #endif
 
+namespace R
+{
+    Rcomplex SCALAR_CVAL(SEXP x)
+    {
+        CHECK_SCALAR_CPLX(x);
+        return COMPLEX0(x)[0];
+    }
+
+    void SET_SCALAR_CVAL(SEXP x, Rcomplex v)
+    {
+        CHECK_SCALAR_CPLX(x);
+        COMPLEX0(x)[0] = v;
+    }
+} // namespace R
+
+// ***** C interface *****
+
 Rboolean Rf_isComplex(SEXP s)
 {
     return Rboolean(s && TYPEOF(s) == CPLXSXP);
@@ -133,18 +148,6 @@ Rcomplex *COMPLEX0(SEXP x)
 {
     CHECK_STDVEC_CPLX(x);
     return static_cast<Rcomplex *>(STDVEC_DATAPTR(x));
-}
-
-Rcomplex R::SCALAR_CVAL(SEXP x)
-{
-    CHECK_SCALAR_CPLX(x);
-    return COMPLEX0(x)[0];
-}
-
-void R::SET_SCALAR_CVAL(SEXP x, Rcomplex v)
-{
-    CHECK_SCALAR_CPLX(x);
-    COMPLEX0(x)[0] = v;
 }
 
 const Rcomplex *COMPLEX_OR_NULL(SEXP x)

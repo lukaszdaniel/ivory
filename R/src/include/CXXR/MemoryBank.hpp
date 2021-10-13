@@ -110,21 +110,7 @@ namespace CXXR
 		 *          i.e. the number of bytes requested in the
 		 *          corresponding call to allocate().
 		 */
-		static void deallocate(void *p = nullptr, size_t bytes = 0, bool allocator = false)
-		{
-			if (!p)
-				return;
-			// Uncommenting this helps to diagnose premature GC:
-			// memset(p, 0x55, bytes);
-			if (allocator)
-				custom_node_free(p);
-			// Assumes sizeof(double) == 8:
-			if (bytes >= s_new_threshold)
-				::operator delete(p);
-			else
-				s_pools[s_pooltab[(bytes + 7) >> 3]].deallocate(p);
-			notifyDeallocation(bytes);
-		}
+		static void deallocate(void *p = nullptr, size_t bytes = 0, bool allocator = false);
 
 		/** @brief Reorganise lists of free cells.
 		 *
@@ -198,7 +184,7 @@ namespace CXXR
 		/* support for custom allocators that allow vectors to be allocated
 		 using non-standard means such as COW mmap() */
 		static void *custom_node_alloc(R_allocator_t *allocator, size_t bytes);
-		static void custom_node_free(void *ptr);
+		static void custom_node_free(void *ptr, size_t bytes);
 
 		friend class GCNode;
 		static void notifyAllocation(size_t bytes);

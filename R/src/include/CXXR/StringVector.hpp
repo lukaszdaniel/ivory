@@ -151,6 +151,10 @@ namespace CXXR
     void strdump(std::ostream &os, const StringVector *sv, size_t margin = 0);
 } // namespace CXXR
 
+namespace R
+{
+} // namespace R
+
 extern "C"
 {
     /** @brief Is this a string vector?

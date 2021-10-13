@@ -114,3 +114,9 @@ namespace CXXR
         return CachedString::staticTypeName();
     }
 } // namespace CXXR
+
+namespace R
+{
+} // namespace R
+
+// ***** C interface *****

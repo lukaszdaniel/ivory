@@ -212,6 +212,10 @@ namespace CXXR
 	};
 } // namespace CXXR
 
+namespace R
+{
+} // namespace R
+
 extern "C"
 {
 	SEXP R_MakeWeakRef(SEXP key, SEXP val, SEXP fin, Rboolean onexit);

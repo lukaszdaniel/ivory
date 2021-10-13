@@ -169,6 +169,10 @@ namespace CXXR
 	};
 } // namespace CXXR
 
+namespace R
+{
+} // namespace R
+
 extern "C"
 {
 	/* ***** C interface ***** */

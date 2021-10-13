@@ -119,6 +119,10 @@ namespace CXXR
 #define LISTVECTOR_ELT(x, i) (LISTVECTOR_PTR(x))[i]
 } // namespace CXXR
 
+namespace R
+{
+} // namespace R
+
 extern "C"
 {
     /** @brief Set element of CXXR::ListVector.

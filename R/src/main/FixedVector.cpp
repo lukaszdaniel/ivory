@@ -41,6 +41,10 @@ namespace CXXR
     } // namespace ForceNonInline
 } // namespace CXXR
 
+namespace R
+{
+} // namespace R
+
 // ***** C interface *****
 
 Rboolean Rf_isNumeric(SEXP s)

@@ -25,7 +25,8 @@
  */
 
 /** @file BuiltInFunction.hpp
- * @brief Class CXXR::BuiltInFunction and associated C interface.
+ *
+ * @brief Class CXXR::BuiltInFunction and associated C interface functions.
  */
 
 #ifndef BUILTINFUNCTION_HPP
@@ -758,4 +759,8 @@ namespace R
     SEXP mkPRIMSXP(int offset, bool evaluate);
 } // namespace R
 
-#endif /* BUILTINFUNCTION_HPP */
+extern "C"
+{
+} // extern "C"
+
+#endif // BUILTINFUNCTION_HPP

@@ -132,6 +132,44 @@ namespace CXXR
     }
 } // namespace CXXR
 
+namespace R
+{
+    int NOJIT(SEXP x)
+    {
+        if (!x)
+            return 0;
+        return SEXP_downcast<const Closure *>(x)->noJIT();
+    }
+
+    int MAYBEJIT(SEXP x)
+    {
+        if (!x)
+            return 0;
+        return SEXP_downcast<const Closure *>(x)->maybeJIT();
+    }
+
+    void SET_NOJIT(SEXP x)
+    {
+        if (!x)
+            return;
+        SEXP_downcast<Closure *>(x)->setNoJIT();
+    }
+
+    void SET_MAYBEJIT(SEXP x)
+    {
+        if (!x)
+            return;
+        SEXP_downcast<Closure *>(x)->setMaybeJIT(true);
+    }
+
+    void UNSET_MAYBEJIT(SEXP x)
+    {
+        if (!x)
+            return;
+        SEXP_downcast<Closure *>(x)->setMaybeJIT(false);
+    }
+} // namespace R
+
 // ***** C interface *****
 
 SEXP FORMALS(SEXP x)
@@ -201,39 +239,4 @@ void SET_RSTEP(SEXP x, int v)
     if (!x)
         return;
     x->setRstep(v);
-}
-
-int R::NOJIT(SEXP x)
-{
-    if (!x)
-        return 0;
-    return SEXP_downcast<const Closure *>(x)->noJIT();
-}
-
-int R::MAYBEJIT(SEXP x)
-{
-    if (!x)
-        return 0;
-    return SEXP_downcast<const Closure *>(x)->maybeJIT();
-}
-
-void R::SET_NOJIT(SEXP x)
-{
-    if (!x)
-        return;
-    SEXP_downcast<Closure *>(x)->setNoJIT();
-}
-
-void R::SET_MAYBEJIT(SEXP x)
-{
-    if (!x)
-        return;
-    SEXP_downcast<Closure *>(x)->setMaybeJIT(true);
-}
-
-void R::UNSET_MAYBEJIT(SEXP x)
-{
-    if (!x)
-        return;
-    SEXP_downcast<Closure *>(x)->setMaybeJIT(false);
 }
