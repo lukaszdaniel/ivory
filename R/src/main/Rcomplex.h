@@ -79,7 +79,7 @@ R_INLINE static void SET_C99_COMPLEX(Rcomplex *x, R_xlen_t i, double complex val
 extern "C" {
 #endif
 
-RHIDDEN void z_prec_r(Rcomplex *r, const Rcomplex *x, double digits);
+HIDDEN void z_prec_r(Rcomplex *r, const Rcomplex *x, double digits);
 
 #ifdef __cplusplus
 }

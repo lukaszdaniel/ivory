@@ -32,7 +32,7 @@
 #include <Defn.h>
 
 extern "C"
-RHIDDEN int R_fgetc(FILE *fp)
+HIDDEN int R_fgetc(FILE *fp)
 {
 #ifdef _WIN32
     int c;

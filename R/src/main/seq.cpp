@@ -22,10 +22,6 @@
    both arguments are factors and seq_colon() otherwise.
  */
 
-/** @file seq.cpp
- *
- */
-
 #ifdef HAVE_CONFIG_H
 #include <config.h>
 #endif
@@ -155,7 +151,7 @@ static SEXP seq_colon(double n1, double n2, SEXP call)
     return ans;
 }
 
-RHIDDEN SEXP do_colon(SEXP call, SEXP op, SEXP args, SEXP rho)
+HIDDEN SEXP do_colon(SEXP call, SEXP op, SEXP args, SEXP rho)
 {
     SEXP s1, s2;
     double n1, n2;
@@ -199,39 +195,43 @@ static SEXP rep2(SEXP s, SEXP ncopy)
 	case LGLSXP:                                                  \
 		for (i = 0; i < nc; i++)                                  \
 		{                                                         \
-			/*	   if ((i+1) % ni == 0) R_CheckUserInterrupt();*/ \
+			/*	    if ((i+1) % ni == 0) R_CheckUserInterrupt();*/ \
 			for (j = 0; j < (R_xlen_t)it[i]; j++)                 \
-				LOGICAL(a)[n++] = LOGICAL(s)[i];                  \
+				LOGICAL(a)                                        \
+				[n++] = LOGICAL(s)[i];                            \
 		}                                                         \
 		break;                                                    \
 	case INTSXP:                                                  \
 		for (i = 0; i < nc; i++)                                  \
 		{                                                         \
-			/*	   if ((i+1) % ni == 0) R_CheckUserInterrupt();*/ \
+			/*	    if ((i+1) % ni == 0) R_CheckUserInterrupt();*/ \
 			for (j = (R_xlen_t)it[i]; j > 0; j--)                 \
-				INTEGER(a)[n++] = INTEGER(s)[i];                  \
+				INTEGER(a)                                        \
+				[n++] = INTEGER(s)[i];                            \
 		}                                                         \
 		break;                                                    \
 	case REALSXP:                                                 \
 		for (i = 0; i < nc; i++)                                  \
 		{                                                         \
-			/*	   if ((i+1) % ni == 0) R_CheckUserInterrupt();*/ \
+			/*	    if ((i+1) % ni == 0) R_CheckUserInterrupt();*/ \
 			for (j = (R_xlen_t)it[i]; j > 0; j--)                 \
-				REAL(a)[n++] = REAL(s)[i];                        \
+				REAL(a)                                           \
+				[n++] = REAL(s)[i];                               \
 		}                                                         \
 		break;                                                    \
 	case CPLXSXP:                                                 \
 		for (i = 0; i < nc; i++)                                  \
 		{                                                         \
-			/*	   if ((i+1) % ni == 0) R_CheckUserInterrupt();*/ \
+			/*	    if ((i+1) % ni == 0) R_CheckUserInterrupt();*/ \
 			for (j = (R_xlen_t)it[i]; j > 0; j--)                 \
-				COMPLEX(a)[n++] = COMPLEX(s)[i];                  \
+				COMPLEX(a)                                        \
+				[n++] = COMPLEX(s)[i];                            \
 		}                                                         \
 		break;                                                    \
 	case STRSXP:                                                  \
 		for (i = 0; i < nc; i++)                                  \
 		{                                                         \
-			/*	   if ((i+1) % ni == 0) R_CheckUserInterrupt();*/ \
+			/*	    if ((i+1) % ni == 0) R_CheckUserInterrupt();*/ \
 			for (j = (R_xlen_t)it[i]; j > 0; j--)                 \
 				SET_STRING_ELT(a, n++, STRING_ELT(s, i));         \
 		}                                                         \
@@ -239,7 +239,7 @@ static SEXP rep2(SEXP s, SEXP ncopy)
 	case VECSXP:                                                  \
 		for (i = 0; i < nc; i++)                                  \
 		{                                                         \
-			/*	   if ((i+1) % ni == 0) R_CheckUserInterrupt();*/ \
+			/*	    if ((i+1) % ni == 0) R_CheckUserInterrupt();*/ \
 			SEXP elt = lazy_duplicate(VECTOR_ELT(s, i));          \
 			for (j = (R_xlen_t)it[i]; j > 0; j--)                 \
 				SET_VECTOR_ELT(a, n++, elt);                      \
@@ -248,7 +248,7 @@ static SEXP rep2(SEXP s, SEXP ncopy)
 	case EXPRSXP:                                                 \
 		for (i = 0; i < nc; i++)                                  \
 		{                                                         \
-			/*	   if ((i+1) % ni == 0) R_CheckUserInterrupt();*/ \
+			/*	    if ((i+1) % ni == 0) R_CheckUserInterrupt();*/ \
 			SEXP elt = lazy_duplicate(XVECTOR_ELT(s, i));         \
 			for (j = (R_xlen_t)it[i]; j > 0; j--)                 \
 				SET_XVECTOR_ELT(a, n++, elt);                     \
@@ -257,9 +257,10 @@ static SEXP rep2(SEXP s, SEXP ncopy)
 	case RAWSXP:                                                  \
 		for (i = 0; i < nc; i++)                                  \
 		{                                                         \
-			/*	   if ((i+1) % ni == 0) R_CheckUserInterrupt();*/ \
+			/*	    if ((i+1) % ni == 0) R_CheckUserInterrupt();*/ \
 			for (j = (R_xlen_t)it[i]; j > 0; j--)                 \
-				RAW(a)[n++] = RAW(s)[i];                          \
+				RAW(a)                                            \
+				[n++] = RAW(s)[i];                                \
 		}                                                         \
 		break;                                                    \
 	default:                                                      \
@@ -377,7 +378,7 @@ static SEXP rep3(SEXP s, R_xlen_t ns, R_xlen_t na)
 }
 
 // .Internal(rep.int(x, times))
-RHIDDEN SEXP do_rep_int(SEXP call, SEXP op, SEXP args, SEXP rho)
+HIDDEN SEXP do_rep_int(SEXP call, SEXP op, SEXP args, SEXP rho)
 {
     checkArity(op, args);
     SEXP s = CAR(args), ncopy = CADR(args);
@@ -440,7 +441,7 @@ RHIDDEN SEXP do_rep_int(SEXP call, SEXP op, SEXP args, SEXP rho)
     return a;
 }
 
-RHIDDEN SEXP do_rep_len(SEXP call, SEXP op, SEXP args, SEXP rho)
+HIDDEN SEXP do_rep_len(SEXP call, SEXP op, SEXP args, SEXP rho)
 {
     R_xlen_t ns, na;
     SEXP a, s, len;
@@ -534,12 +535,13 @@ static SEXP rep4(SEXP x, SEXP times, R_xlen_t len, R_xlen_t each, R_xlen_t nt)
 	case LGLSXP:                                                       \
 		for (i = 0, k = 0, k2 = 0; i < lx; i++)                        \
 		{                                                              \
-			/*	if ((i+1) % NINTERRUPT == 0) R_CheckUserInterrupt();*/ \
+			/*		if ((i+1) % NINTERRUPT == 0) R_CheckUserInterrupt();*/ \
 			for (j = 0, sum = 0; j < each; j++)                        \
 				sum += (R_xlen_t)itimes[k++];                          \
 			for (k3 = 0; k3 < sum; k3++)                               \
 			{                                                          \
-				LOGICAL(a)[k2++] = LOGICAL(x)[i];                      \
+				LOGICAL(a)                                             \
+				[k2++] = LOGICAL(x)[i];                                \
 				if (k2 == len)                                         \
 					goto done;                                         \
 			}                                                          \
@@ -548,12 +550,13 @@ static SEXP rep4(SEXP x, SEXP times, R_xlen_t len, R_xlen_t each, R_xlen_t nt)
 	case INTSXP:                                                       \
 		for (i = 0, k = 0, k2 = 0; i < lx; i++)                        \
 		{                                                              \
-			/*	if ((i+1) % NINTERRUPT == 0) R_CheckUserInterrupt();*/ \
+			/*		if ((i+1) % NINTERRUPT == 0) R_CheckUserInterrupt();*/ \
 			for (j = 0, sum = 0; j < each; j++)                        \
 				sum += (R_xlen_t)itimes[k++];                          \
 			for (k3 = 0; k3 < sum; k3++)                               \
 			{                                                          \
-				INTEGER(a)[k2++] = INTEGER(x)[i];                      \
+				INTEGER(a)                                             \
+				[k2++] = INTEGER(x)[i];                                \
 				if (k2 == len)                                         \
 					goto done;                                         \
 			}                                                          \
@@ -562,12 +565,13 @@ static SEXP rep4(SEXP x, SEXP times, R_xlen_t len, R_xlen_t each, R_xlen_t nt)
 	case REALSXP:                                                      \
 		for (i = 0, k = 0, k2 = 0; i < lx; i++)                        \
 		{                                                              \
-			/*	if ((i+1) % NINTERRUPT == 0) R_CheckUserInterrupt();*/ \
+			/*		if ((i+1) % NINTERRUPT == 0) R_CheckUserInterrupt();*/ \
 			for (j = 0, sum = 0; j < each; j++)                        \
 				sum += (R_xlen_t)itimes[k++];                          \
 			for (k3 = 0; k3 < sum; k3++)                               \
 			{                                                          \
-				REAL(a)[k2++] = REAL(x)[i];                            \
+				REAL(a)                                                \
+				[k2++] = REAL(x)[i];                                   \
 				if (k2 == len)                                         \
 					goto done;                                         \
 			}                                                          \
@@ -576,12 +580,13 @@ static SEXP rep4(SEXP x, SEXP times, R_xlen_t len, R_xlen_t each, R_xlen_t nt)
 	case CPLXSXP:                                                      \
 		for (i = 0, k = 0, k2 = 0; i < lx; i++)                        \
 		{                                                              \
-			/*	if ((i+1) % NINTERRUPT == 0) R_CheckUserInterrupt();*/ \
+			/*		if ((i+1) % NINTERRUPT == 0) R_CheckUserInterrupt();*/ \
 			for (j = 0, sum = 0; j < each; j++)                        \
 				sum += (R_xlen_t)itimes[k++];                          \
 			for (k3 = 0; k3 < sum; k3++)                               \
 			{                                                          \
-				COMPLEX(a)[k2++] = COMPLEX(x)[i];                      \
+				COMPLEX(a)                                             \
+				[k2++] = COMPLEX(x)[i];                                \
 				if (k2 == len)                                         \
 					goto done;                                         \
 			}                                                          \
@@ -590,7 +595,7 @@ static SEXP rep4(SEXP x, SEXP times, R_xlen_t len, R_xlen_t each, R_xlen_t nt)
 	case STRSXP:                                                       \
 		for (i = 0, k = 0, k2 = 0; i < lx; i++)                        \
 		{                                                              \
-			/*	if ((i+1) % NINTERRUPT == 0) R_CheckUserInterrupt();*/ \
+			/*		if ((i+1) % NINTERRUPT == 0) R_CheckUserInterrupt();*/ \
 			for (j = 0, sum = 0; j < each; j++)                        \
 				sum += (R_xlen_t)itimes[k++];                          \
 			for (k3 = 0; k3 < sum; k3++)                               \
@@ -604,7 +609,7 @@ static SEXP rep4(SEXP x, SEXP times, R_xlen_t len, R_xlen_t each, R_xlen_t nt)
 	case VECSXP:                                                       \
 		for (i = 0, k = 0, k2 = 0; i < lx; i++)                        \
 		{                                                              \
-			/*	if ((i+1) % NINTERRUPT == 0) R_CheckUserInterrupt();*/ \
+			/*		if ((i+1) % NINTERRUPT == 0) R_CheckUserInterrupt();*/ \
 			for (j = 0, sum = 0; j < each; j++)                        \
 				sum += (R_xlen_t)itimes[k++];                          \
 			SEXP elt = lazy_duplicate(VECTOR_ELT(x, i));               \
@@ -619,7 +624,7 @@ static SEXP rep4(SEXP x, SEXP times, R_xlen_t len, R_xlen_t each, R_xlen_t nt)
 	case EXPRSXP:                                                      \
 		for (i = 0, k = 0, k2 = 0; i < lx; i++)                        \
 		{                                                              \
-			/*	if ((i+1) % NINTERRUPT == 0) R_CheckUserInterrupt();*/ \
+			/*		if ((i+1) % NINTERRUPT == 0) R_CheckUserInterrupt();*/ \
 			for (j = 0, sum = 0; j < each; j++)                        \
 				sum += (R_xlen_t)itimes[k++];                          \
 			SEXP elt = lazy_duplicate(XVECTOR_ELT(x, i));              \
@@ -634,12 +639,13 @@ static SEXP rep4(SEXP x, SEXP times, R_xlen_t len, R_xlen_t each, R_xlen_t nt)
 	case RAWSXP:                                                       \
 		for (i = 0, k = 0, k2 = 0; i < lx; i++)                        \
 		{                                                              \
-			/*	if ((i+1) % NINTERRUPT == 0) R_CheckUserInterrupt();*/ \
+			/*		if ((i+1) % NINTERRUPT == 0) R_CheckUserInterrupt();*/ \
 			for (j = 0, sum = 0; j < each; j++)                        \
 				sum += (R_xlen_t)itimes[k++];                          \
 			for (k3 = 0; k3 < sum; k3++)                               \
 			{                                                          \
-				RAW(a)[k2++] = RAW(x)[i];                              \
+				RAW(a)                                                 \
+				[k2++] = RAW(x)[i];                                    \
 				if (k2 == len)                                         \
 					goto done;                                         \
 			}                                                          \
@@ -719,7 +725,7 @@ static SEXP rep4(SEXP x, SEXP times, R_xlen_t len, R_xlen_t each, R_xlen_t nt)
    rep(1:3,,8) matches length.out */
 
 /* This is a primitive SPECIALSXP with internal argument matching */
-RHIDDEN SEXP do_rep(SEXP call, SEXP op, SEXP args, SEXP rho)
+HIDDEN SEXP do_rep(SEXP call, SEXP op, SEXP args, SEXP rho)
 {
     SEXP ans, x, times = R_NilValue;
     R_xlen_t i, lx, len = NA_INTEGER, each = 1, nt;
@@ -882,7 +888,7 @@ RHIDDEN SEXP do_rep(SEXP call, SEXP op, SEXP args, SEXP rho)
  */
 #define FEPS 1e-10
 /* to match seq.default */
-RHIDDEN SEXP do_seq(SEXP call, SEXP op, SEXP args, SEXP rho)
+HIDDEN SEXP do_seq(SEXP call, SEXP op, SEXP args, SEXP rho)
 {
     SEXP ans = R_NilValue /* -Wall */, from, to, by, len, along;
     R_xlen_t i, lout = NA_INTEGER;
@@ -1130,7 +1136,7 @@ done:
     return ans;
 }
 
-RHIDDEN SEXP do_seq_along(SEXP call, SEXP op, SEXP args, SEXP rho)
+HIDDEN SEXP do_seq_along(SEXP call, SEXP op, SEXP args, SEXP rho)
 {
     SEXP ans;
     R_xlen_t len;
@@ -1166,7 +1172,7 @@ RHIDDEN SEXP do_seq_along(SEXP call, SEXP op, SEXP args, SEXP rho)
 	return R_compact_intrange(1, len);
 }
 
-RHIDDEN SEXP do_seq_len(SEXP call, SEXP op, SEXP args, SEXP rho)
+HIDDEN SEXP do_seq_len(SEXP call, SEXP op, SEXP args, SEXP rho)
 {
     R_xlen_t len;
 
@@ -1194,7 +1200,7 @@ RHIDDEN SEXP do_seq_len(SEXP call, SEXP op, SEXP args, SEXP rho)
 	return R_compact_intrange(1, len);
 }
 
-RHIDDEN SEXP do_sequence(SEXP call, SEXP op, SEXP args, SEXP rho)
+HIDDEN SEXP do_sequence(SEXP call, SEXP op, SEXP args, SEXP rho)
 {
     R_xlen_t lengths_len, from_len, by_len, ans_len, i, i2, i3;
     int from_elt, by_elt, length_, j, k, *ans_elt;
@@ -1213,9 +1219,9 @@ RHIDDEN SEXP do_sequence(SEXP call, SEXP op, SEXP args, SEXP rho)
     if (!isInteger(by))
 	error(_("'by' is not of mode integer"));
 
-    lengths_len = Rf_length(lengths);
-    from_len = Rf_length(from);
-    by_len = Rf_length(by);
+    lengths_len = length(lengths);
+    from_len = length(from);
+    by_len = length(by);
     if (lengths_len != 0) {
 	if (from_len == 0)
 	    error(_("'from' has length 0, but not 'lengths'"));

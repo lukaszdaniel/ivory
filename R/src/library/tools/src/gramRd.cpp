@@ -3232,6 +3232,8 @@ static int (*ptr_getc)(void);
     pushbase[npush++] = (c);                                                                  \
   } while (0)
 
+
+
 #define PUSHBACK_BUFSIZE 32
 
 static int pushback[PUSHBACK_BUFSIZE];

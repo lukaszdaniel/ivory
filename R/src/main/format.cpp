@@ -44,11 +44,6 @@
  * except that they accept a SEXP rather than a data pointer
  */
 
-/** @file array.cpp
- *
- * Object formatting.
- */
-
 #ifdef HAVE_CONFIG_H
 #include <config.h>
 #endif
@@ -73,20 +68,20 @@ using namespace R;
 using namespace CXXR;
 
 /* this is just for conformity with other types */
-RHIDDEN
+HIDDEN
 void R::Rf_formatRaw(const Rbyte *x, R_xlen_t n, int *fieldwidth)
 {
     *fieldwidth = 2;
 }
 
-RHIDDEN
+HIDDEN
 void R::Rf_formatRawS(SEXP x, R_xlen_t n, int *fieldwidth)
 {
     *fieldwidth = 2;
 }
 
 
-RHIDDEN
+HIDDEN
 void R::Rf_formatString(String *const *x, R_xlen_t n, int *fieldwidth, int quote)
 {
     int xmax = 0;
@@ -103,7 +98,7 @@ void R::Rf_formatString(String *const *x, R_xlen_t n, int *fieldwidth, int quote
 
 /* currently there is no STRING_GET_REGION */
 
-RHIDDEN
+HIDDEN
 void R::Rf_formatStringS(String *x, R_xlen_t n, int *fieldwidth, int quote)
 {
     int xmax = 0;

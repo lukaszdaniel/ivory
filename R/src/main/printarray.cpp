@@ -28,10 +28,6 @@
  *  See ./format.cpp	 for the  format_FOO_  functions used below.
  */
 
-/** @file printarray.cpp
- *
- */
-
 #ifdef HAVE_CONFIG_H
 #include <config.h>
 #endif
@@ -361,7 +357,7 @@ static void printRawMatrix(SEXP sx, int offset, int r_pr, int r, int c,
 }
 
 /* rm and cn are found by GetMatrixDimnames so in native encoding */
-RHIDDEN
+HIDDEN
 void R::Rf_printMatrix(SEXP x, int offset, SEXP dim, int quote, int right,
 		 SEXP rl, SEXP cl, const char *rn, const char *cn)
 {
@@ -419,7 +415,7 @@ void R::Rf_printMatrix(SEXP x, int offset, SEXP dim, int quote, int right,
     vmaxset(vmax);
 }
 
-RHIDDEN
+HIDDEN
 void R::Rf_printArray(SEXP x, SEXP dim, int quote, int right, SEXP dimnames)
 {
 /* == printArray(.) */

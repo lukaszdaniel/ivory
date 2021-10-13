@@ -263,7 +263,7 @@ for(L in c(FALSE,TRUE))
 
 ## Log norm
 stopifnot(All.eq(pz, plnorm(exp(z))))
-
+
 
 ###==========  p <-> q	Inversion consistency =====================
 ok <- 1e-5 < pz & pz < 1 - 1e-5

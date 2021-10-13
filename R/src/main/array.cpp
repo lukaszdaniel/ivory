@@ -19,11 +19,6 @@
  *  https://www.R-project.org/Licenses/
  */
 
-/** @file array.cpp
- *
- * Operations on arrays.
- */
-
 #ifdef HAVE_CONFIG_H
 #include <config.h>
 #endif
@@ -82,7 +77,7 @@ SEXP Rf_GetColNames(SEXP dimnames)
 }
 
 // .Internal(matrix(data, nrow, ncol, byrow, dimnames, missing(nrow), missing(ncol)))
-RHIDDEN SEXP do_matrix(SEXP call, SEXP op, SEXP args, SEXP rho)
+HIDDEN SEXP do_matrix(SEXP call, SEXP op, SEXP args, SEXP rho)
 {
     SEXP vals, ans, snr, snc, dimnames;
     int nr = 1, nc = 1, byrow, miss_nr, miss_nc;
@@ -427,7 +422,7 @@ SEXP R::Rf_DropDims(SEXP x)
     return x;
 }
 
-RHIDDEN SEXP do_drop(SEXP call, SEXP op, SEXP args, SEXP rho)
+HIDDEN SEXP do_drop(SEXP call, SEXP op, SEXP args, SEXP rho)
 {
     SEXP x, xdims;
     int i, n, shorten;
@@ -449,7 +444,7 @@ RHIDDEN SEXP do_drop(SEXP call, SEXP op, SEXP args, SEXP rho)
 
 /* Length of Primitive Objects */
 
-RHIDDEN SEXP do_length(SEXP call, SEXP op, SEXP args, SEXP rho)
+HIDDEN SEXP do_length(SEXP call, SEXP op, SEXP args, SEXP rho)
 {
     checkArity(op, args);
     check1arg(args, call, "x");
@@ -480,7 +475,7 @@ RHIDDEN SEXP do_length(SEXP call, SEXP op, SEXP args, SEXP rho)
     return ScalarInteger(length(x));
 }
 
-RHIDDEN R_len_t R::dispatch_length(SEXP x, SEXP call, SEXP rho)
+HIDDEN R_len_t R::dispatch_length(SEXP x, SEXP call, SEXP rho)
 {
 	R_xlen_t len = dispatch_xlength(x, call, rho);
 #ifdef LONG_VECTOR_SUPPORT
@@ -490,7 +485,7 @@ RHIDDEN R_len_t R::dispatch_length(SEXP x, SEXP call, SEXP rho)
 	return (R_len_t)len;
 }
 
-RHIDDEN R_xlen_t R::dispatch_xlength(SEXP x, SEXP call, SEXP rho) {
+HIDDEN R_xlen_t R::dispatch_xlength(SEXP x, SEXP call, SEXP rho) {
     static GCRoot<> length_op(nullptr);
     if (isObject(x)) {
         SEXP len;
@@ -531,7 +526,7 @@ static SEXP do_lengths_long(SEXP x, SEXP call, SEXP rho)
 }
 #endif
 
-RHIDDEN SEXP do_lengths(SEXP call, SEXP op, SEXP args, SEXP rho)
+HIDDEN SEXP do_lengths(SEXP call, SEXP op, SEXP args, SEXP rho)
 {
     checkArity(op, args);
     SEXP x = CAR(args), ans;
@@ -592,7 +587,7 @@ RHIDDEN SEXP do_lengths(SEXP call, SEXP op, SEXP args, SEXP rho)
     return ans;
 }
 
-RHIDDEN SEXP do_rowscols(SEXP call, SEXP op, SEXP args, SEXP rho)
+HIDDEN SEXP do_rowscols(SEXP call, SEXP op, SEXP args, SEXP rho)
 {
     checkArity(op, args);
     SEXP dim = CAR(args);
@@ -1274,7 +1269,7 @@ static void tccrossprod(Rcomplex *x, int nrx, int ncx,
 
 
 /* "%*%" (op = 0), crossprod (op = 1) or tcrossprod (op = 2) */
-RHIDDEN SEXP do_matprod(SEXP call, SEXP op, SEXP args, SEXP rho)
+HIDDEN SEXP do_matprod(SEXP call, SEXP op, SEXP args, SEXP rho)
 {
     int ldx, ldy, nrx, ncx, nry, ncy;
     SEXPTYPE mode;
@@ -1600,7 +1595,7 @@ RHIDDEN SEXP do_matprod(SEXP call, SEXP op, SEXP args, SEXP rho)
 }
 #undef YDIMS_ET_CETERA
 
-RHIDDEN SEXP do_transpose(SEXP call, SEXP op, SEXP args, SEXP rho)
+HIDDEN SEXP do_transpose(SEXP call, SEXP op, SEXP args, SEXP rho)
 {
     SEXP a, r, dims, dimnames, dimnamesnames = R_NilValue,
 	ndimnamesnames, rnames, cnames;
@@ -1750,7 +1745,7 @@ RHIDDEN SEXP do_transpose(SEXP call, SEXP op, SEXP args, SEXP rho)
 		lj += iip[itmp] * stride[itmp];
 
 /* aperm (a, perm, resize = TRUE) */
-RHIDDEN SEXP do_aperm(SEXP call, SEXP op, SEXP args, SEXP rho)
+HIDDEN SEXP do_aperm(SEXP call, SEXP op, SEXP args, SEXP rho)
 {
     SEXP a, perm, r, dimsa, dimsr, dna;
     int i, j, n, itmp;
@@ -1930,7 +1925,7 @@ RHIDDEN SEXP do_aperm(SEXP call, SEXP op, SEXP args, SEXP rho)
 }
 
 /* colSums(x, n, p, na.rm) and friends */
-RHIDDEN SEXP do_colsum(SEXP call, SEXP op, SEXP args, SEXP rho)
+HIDDEN SEXP do_colsum(SEXP call, SEXP op, SEXP args, SEXP rho)
 {
     SEXP x, ans = R_NilValue;
     int type;
@@ -2103,7 +2098,7 @@ RHIDDEN SEXP do_colsum(SEXP call, SEXP op, SEXP args, SEXP rho)
 */
 
 /* array(data, dim, dimnames) */
-RHIDDEN SEXP do_array(SEXP call, SEXP op, SEXP args, SEXP rho)
+HIDDEN SEXP do_array(SEXP call, SEXP op, SEXP args, SEXP rho)
 {
     SEXP vals, ans, dims, dimnames;
     R_xlen_t lendat, i, nans;
@@ -2201,7 +2196,7 @@ RHIDDEN SEXP do_array(SEXP call, SEXP op, SEXP args, SEXP rho)
     return ans;
 }
 
-RHIDDEN SEXP do_diag(SEXP call, SEXP op, SEXP args, SEXP rho)
+HIDDEN SEXP do_diag(SEXP call, SEXP op, SEXP args, SEXP rho)
 {
     SEXP ans, x, snr, snc;
     int nr = 1, nc = 1, nprotect = 1;
@@ -2297,7 +2292,7 @@ RHIDDEN SEXP do_diag(SEXP call, SEXP op, SEXP args, SEXP rho)
 
 
 /* backsolve(r, b, k, upper.tri, transpose) */
-RHIDDEN SEXP do_backsolve(SEXP call, SEXP op, SEXP args, SEXP rho)
+HIDDEN SEXP do_backsolve(SEXP call, SEXP op, SEXP args, SEXP rho)
 {
     int nprot = 1;
     checkArity(op, args);
@@ -2342,7 +2337,7 @@ RHIDDEN SEXP do_backsolve(SEXP call, SEXP op, SEXP args, SEXP rho)
 }
 
 /* max.col(m, ties.method) */
-RHIDDEN SEXP do_maxcol(SEXP call, SEXP op, SEXP args, SEXP rho)
+HIDDEN SEXP do_maxcol(SEXP call, SEXP op, SEXP args, SEXP rho)
 {
     checkArity(op, args);
     SEXP m = CAR(args);

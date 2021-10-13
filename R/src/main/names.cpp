@@ -21,10 +21,6 @@
  *  https://www.R-project.org/Licenses/
  */
 
-/** @file names.cpp
- *
- */
-
 #ifdef HAVE_CONFIG_H
 #include <config.h>
 #endif
@@ -749,7 +745,7 @@ std::vector<CXXR::FUNTAB> R_FunTab =
 {"browserSetDebug",  do_sysbrowser, 3,	111,	1,	{PP_FUNCALL, PREC_FN,	0}},
 {"parent.frame",do_parentframe,	0,	11,	1,	{PP_FUNCALL, PREC_FN,	0}},
 {"sort",	do_sort,	1,	11,	2,	{PP_FUNCALL, PREC_FN,	0}},
-{"is.unsorted",	do_isunsorted,	0,	11,	2,	{PP_FUNCALL, PREC_FN,	0}},
+{"is.unsorted",	do_isunsorted,	0,	11,	3,	{PP_FUNCALL, PREC_FN,	0}},
 {"sorted_fpass",do_sorted_fpass,0,      11,     3,      {PP_FUNCALL, PREC_FN,	0}},
 {"psort",	do_psort,	0,	11,	2,	{PP_FUNCALL, PREC_FN,	0}},
 {"qsort",	do_qsort,	0,	11,	2,	{PP_FUNCALL, PREC_FN,	0}},
@@ -2008,7 +2004,7 @@ std::pair<BuiltInFunction::map*, BuiltInFunction::map*> BuiltInFunction::createL
 #endif
 
 /* also used in eval.cpp */
-RHIDDEN SEXP R::R_Primitive(const char *primname)
+HIDDEN SEXP R::R_Primitive(const char *primname)
 {
 #ifdef CXXR_USE_OLD_R_FUNTAB_IMPL
     for (size_t i = 0; i < R_FunTab.size(); i++)
@@ -2025,7 +2021,7 @@ RHIDDEN SEXP R::R_Primitive(const char *primname)
 #endif
 }
 
-RHIDDEN SEXP do_primitive(SEXP call, SEXP op, SEXP args, SEXP env)
+HIDDEN SEXP do_primitive(SEXP call, SEXP op, SEXP args, SEXP env)
 {
     SEXP name, prim;
     checkArity(op, args);
@@ -2039,7 +2035,7 @@ RHIDDEN SEXP do_primitive(SEXP call, SEXP op, SEXP args, SEXP env)
     return prim;
 }
 
-RHIDDEN int R::StrToInternal(const char *s)
+HIDDEN int R::StrToInternal(const char *s)
 {
 #ifdef CXXR_USE_OLD_R_FUNTAB_IMPL
     for (size_t i = 0; i < R_FunTab.size(); i++)
@@ -2076,14 +2072,14 @@ static void initializeDDVALSymbols()
     }
 }
 
-/*RHIDDEN*/
+/*HIDDEN*/
 SEXP R::Rf_installDDVAL(int n)
 {
     return Symbol::obtainDotDotSymbol(n);
 }
 
 /* initialize the symbol table */
-RHIDDEN void R::InitNames()
+HIDDEN void R::InitNames()
 {
     // Logical constants.
     Logical::initialize();
@@ -2125,7 +2121,7 @@ SEXP Rf_install(const char *name)
 /* This function is equivalent to install(CHAR(charSXP)), but faster.
    Like the equivalent code pattern, it discards the encoding information,
    hence in almost all cases installTrChar should be used, instead. */
-/*RHIDDEN*/
+/*HIDDEN*/
 SEXP Rf_installNoTrChar(SEXP charSXP)
 {
     int len = LENGTH(charSXP);
@@ -2149,7 +2145,7 @@ SEXP Rf_installNoTrChar(SEXP charSXP)
     }
 }
 
-/*RHIDDEN*/
+/*HIDDEN*/
 SEXP R::Rf_installS3Signature(const char *className, const char *methodName)
 {
     return Symbol::obtainS3Signature(className, methodName);
@@ -2158,7 +2154,7 @@ SEXP R::Rf_installS3Signature(const char *className, const char *methodName)
 
 /*  do_internal - This is the code for .Internal(). */
 
-RHIDDEN SEXP do_internal(SEXP call, SEXP op, SEXP args, SEXP env)
+HIDDEN SEXP do_internal(SEXP call, SEXP op, SEXP args, SEXP env)
 {
     SEXP s, ans;
     SEXP fun;
@@ -2232,7 +2228,7 @@ RHIDDEN SEXP do_internal(SEXP call, SEXP op, SEXP args, SEXP env)
 
 	/* Internal code for the ~ operator */
 
-RHIDDEN SEXP do_tilde(SEXP call, SEXP op, SEXP args, SEXP rho)
+HIDDEN SEXP do_tilde(SEXP call, SEXP op, SEXP args, SEXP rho)
 {
     if (isObject(call))
         return duplicate(call);

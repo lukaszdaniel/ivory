@@ -19,10 +19,6 @@
  * Originally written by Jonathan Rougier
 */
 
-/** @file sprintf.cpp
- *
- */
-
 #ifdef HAVE_CONFIG_H
 #include <config.h>
 #endif
@@ -89,7 +85,7 @@ static bool checkfmt(const char *fmt, const char *pattern)
 	((use_UTF8) ? translateCharUTF8(STRING_ELT(_STR_, _i_)) \
 				: translateChar(STRING_ELT(_STR_, _i_)))
 
-RHIDDEN SEXP do_sprintf(SEXP call, SEXP op, SEXP args, SEXP env)
+HIDDEN SEXP do_sprintf(SEXP call, SEXP op, SEXP args, SEXP env)
 {
     int i, nargs, cnt, v, thislen, nfmt, nprotect = 0;
     /* fmt2 is a copy of fmt with '*' expanded.

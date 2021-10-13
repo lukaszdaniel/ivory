@@ -3454,7 +3454,7 @@ static void PutSrcRefState(SrcRefState *state);
 static void UseSrcRefState(SrcRefState *state);
 
 /* This is called once when R starts up. */
-RHIDDEN
+HIDDEN
 void R::InitParser(void)
 {
     ParseState.sexps = allocVector(VECSXP, 7); /* initialized to R_NilValue */
@@ -3471,7 +3471,7 @@ static void FinalizeSrcRefStateOnError(void *dummy)
 }
 
 /* This is called each time a new parse sequence begins */
-RHIDDEN
+HIDDEN
 void R::R_InitSrcRefState(RCNTXT* cptr)
 {
     if (busy) {
@@ -3504,7 +3504,7 @@ void R::R_InitSrcRefState(RCNTXT* cptr)
     busy = TRUE;
 }
 
-RHIDDEN
+HIDDEN
 void R::R_FinalizeSrcRefState(void)
 {
     PS_SET_SRCFILE(R_NilValue);
@@ -3648,7 +3648,7 @@ static int file_getc(void)
 }
 
 /* used in main.cpp */
-RHIDDEN
+HIDDEN
 SEXP R::R_Parse1File(FILE *fp, int gencode, ParseStatus *status)
 {
     ParseInit();
@@ -3669,7 +3669,7 @@ static int buffer_getc(void)
 }
 
 /* Used only in main.cpp */
-RHIDDEN
+HIDDEN
 SEXP R::R_Parse1Buffer(IoBuffer *buffer, int gencode, ParseStatus *status)
 {
     Rboolean keepSource = FALSE; 
@@ -3795,7 +3795,7 @@ finish:
 }
 
 /* used in edit.cpp */
-RHIDDEN
+HIDDEN
 SEXP R::R_ParseFile(FILE *fp, int n, ParseStatus *status, SEXP srcfile)
 {
     GenerateCode = 1;
@@ -3819,7 +3819,7 @@ static int con_getc(void)
 }
 
 /* used in source.cpp */
-RHIDDEN
+HIDDEN
 SEXP R::R_ParseConn(Rconnection con, int n, ParseStatus *status, SEXP srcfile)
 {
     GenerateCode = 1;
@@ -3857,7 +3857,7 @@ static const char *Prompt(SEXP prompt, int type)
 }
 
 /* used in source.cpp */
-RHIDDEN
+HIDDEN
 SEXP R::R_ParseBuffer(IoBuffer *buffer, int n, ParseStatus *status, SEXP prompt, 
 		   SEXP srcfile)
 {
@@ -4148,7 +4148,7 @@ static SEXP mkNA(void)
     return t;
 }
 
-RHIDDEN SEXP R::mkTrue(void)
+HIDDEN SEXP R::mkTrue(void)
 {
     SEXP s = allocVector(LGLSXP, 1);
     LOGICAL(s)[0] = 1;
@@ -5118,7 +5118,7 @@ static int SpecialValue(int c)
 }
 
 /* return 1 if name is a valid name 0 otherwise */
-RHIDDEN bool R::isValidName(const char *name)
+HIDDEN bool R::isValidName(const char *name)
 {
     const char *p = name;
 

@@ -850,7 +850,7 @@ static SEXP scanFrame(SEXP what, R_xlen_t maxitems, R_xlen_t maxlines,
     return ans;
 }
 
-RHIDDEN SEXP do_scan(SEXP call, SEXP op, SEXP args, SEXP rho)
+HIDDEN SEXP do_scan(SEXP call, SEXP op, SEXP args, SEXP rho)
 {
     SEXP ans, file, sep, what, stripwhite, dec, quotes, comstr;
     int c, flush, fill, blskip, multiline, escapes, skipNul;
@@ -1019,7 +1019,7 @@ RHIDDEN SEXP do_scan(SEXP call, SEXP op, SEXP args, SEXP rho)
     return ans;
 }
 
-RHIDDEN SEXP do_readln(SEXP call, SEXP op, SEXP args, SEXP rho)
+HIDDEN SEXP do_readln(SEXP call, SEXP op, SEXP args, SEXP rho)
 {
     int c;
     char buffer[MAXELTSIZE], *bufp = buffer;

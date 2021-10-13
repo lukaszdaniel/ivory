@@ -103,10 +103,6 @@
  *  occurs.
  */
 
-/** @file context.cpp
- *
- */
-
 #ifdef HAVE_CONFIG_H
 #include <config.h>
 #endif
@@ -144,7 +140,7 @@ RContext *CXXR::R_ExitContext;     /* The active context for on.exit processing 
    determines the argument is responsible for making sure
    CTXT_TOPLEVEL's are not crossed unless appropriate. */
 
-RHIDDEN void RCNTXT::R_run_onexits(RCNTXT *cptr)
+HIDDEN void RCNTXT::R_run_onexits(RCNTXT *cptr)
 {
     for (RCNTXT *c = R_GlobalContext; c != cptr; c = c->nextContext()) {
 	// a user embedding R incorrectly triggered this (PR#15420)
@@ -233,7 +229,7 @@ RCNTXT *RCNTXT::first_jump_target(int mask)
 
 /* R_jumpctxt - jump to the named context */
 
-RHIDDEN NORET void RCNTXT::R_jumpctxt(int mask, SEXP val)
+HIDDEN NORET void RCNTXT::R_jumpctxt(int mask, SEXP val)
 {
     bool savevis = Evaluator::resultPrinted();
     RCNTXT *cptr;
@@ -358,7 +354,7 @@ void RCNTXT::end()
 
 /* findcontext - find the correct context */
 
-RHIDDEN NORET void R::findcontext(int mask, SEXP env, SEXP val)
+HIDDEN NORET void R::findcontext(int mask, SEXP env, SEXP val)
 {
     if (mask & CTXT_LOOP)
     { /* break/next */
@@ -380,7 +376,7 @@ RHIDDEN NORET void R::findcontext(int mask, SEXP env, SEXP val)
     }
 }
 
-RHIDDEN NORET void RCNTXT::R_JumpToContext(RCNTXT *target, int mask, SEXP val)
+HIDDEN NORET void RCNTXT::R_JumpToContext(RCNTXT *target, int mask, SEXP val)
 {
     for (RCNTXT *cptr = R_GlobalContext;
          cptr && cptr->getCallFlag() != CTXT_TOPLEVEL;
@@ -400,7 +396,7 @@ RHIDDEN NORET void RCNTXT::R_JumpToContext(RCNTXT *target, int mask, SEXP val)
 /* negative n counts back from the current frame */
 /* positive n counts up from the globalEnv */
 
-RHIDDEN SEXP RCNTXT::R_sysframe(int n)
+HIDDEN SEXP RCNTXT::R_sysframe(int n)
 {
     RCNTXT *cptr = this;
     if (n == 0)
@@ -443,7 +439,7 @@ RHIDDEN SEXP RCNTXT::R_sysframe(int n)
 /* It would be much simpler if sysparent just returned cptr->getSysParent() */
 /* but then we wouldn't be compatible with S. */
 
-RHIDDEN int RCNTXT::R_sysparent(int n)
+HIDDEN int RCNTXT::R_sysparent(int n)
 {
     RCNTXT *cptr = this;
     int j;
@@ -479,7 +475,7 @@ RHIDDEN int RCNTXT::R_sysparent(int n)
     return n;
 }
 
-RHIDDEN int RCNTXT::Rf_framedepth()
+HIDDEN int RCNTXT::Rf_framedepth()
 {
     RCNTXT *cptr = this;
     int nframe = 0;
@@ -510,7 +506,7 @@ SEXP RCNTXT::getCallWithSrcref()
     return result;
 }
 
-RHIDDEN SEXP RCNTXT::R_syscall(int n)
+HIDDEN SEXP RCNTXT::R_syscall(int n)
 {
     RCNTXT *cptr = this;
     /* negative n counts back from the current frame */
@@ -536,7 +532,7 @@ RHIDDEN SEXP RCNTXT::R_syscall(int n)
     return R_NilValue;	/* just for -Wall */
 }
 
-RHIDDEN SEXP RCNTXT::R_sysfunction(int n)
+HIDDEN SEXP RCNTXT::R_sysfunction(int n)
 {
     RCNTXT *cptr = this;
     if (n > 0)
@@ -588,7 +584,7 @@ int R::Rf_countContexts(int ctxttype, bool browser)
 /* functions to support looking up information about the browser */
 /* contexts that are in the evaluation stack */
 
-RHIDDEN SEXP do_sysbrowser(SEXP call, SEXP op, SEXP args, SEXP rho)
+HIDDEN SEXP do_sysbrowser(SEXP call, SEXP op, SEXP args, SEXP rho)
 {
     SEXP rval = R_NilValue;
     RCNTXT *cptr;
@@ -663,7 +659,7 @@ RHIDDEN SEXP do_sysbrowser(SEXP call, SEXP op, SEXP args, SEXP rho)
 /* We don't want to count the closure that do_sys is contained in, so the */
 /* indexing is adjusted to handle this. */
 
-RHIDDEN SEXP do_sys(SEXP call, SEXP op, SEXP args, SEXP rho)
+HIDDEN SEXP do_sys(SEXP call, SEXP op, SEXP args, SEXP rho)
 {
     int i, n  = -1, nframe;
     SEXP rval, t;
@@ -744,7 +740,7 @@ RHIDDEN SEXP do_sys(SEXP call, SEXP op, SEXP args, SEXP rho)
     }
 }
 
-RHIDDEN SEXP do_parentframe(SEXP call, SEXP op, SEXP args, SEXP rho)
+HIDDEN SEXP do_parentframe(SEXP call, SEXP op, SEXP args, SEXP rho)
 {
     checkArity(op, args);
 
@@ -759,7 +755,7 @@ RHIDDEN SEXP do_parentframe(SEXP call, SEXP op, SEXP args, SEXP rho)
 
 /* R_findExecContext - Find a context frame older than `cptr` that has
    `envir` as execution environment (the `cloenv` field). */
-RHIDDEN RCNTXT *RCNTXT::R_findExecContext(RCNTXT *cptr, SEXP envir)
+HIDDEN RCNTXT *RCNTXT::R_findExecContext(RCNTXT *cptr, SEXP envir)
 {
     while (cptr->nextContext())
     {
@@ -775,7 +771,7 @@ RHIDDEN RCNTXT *RCNTXT::R_findExecContext(RCNTXT *cptr, SEXP envir)
    calling environment (`sysparent` field). In other words, find the
    frame where `cptr->syscall` was (seemingly) called. This algorithm
    powers `parent.frame()`. */
-RHIDDEN RCNTXT *RCNTXT::R_findParentContext(RCNTXT *cptr, int n)
+HIDDEN RCNTXT *RCNTXT::R_findParentContext(RCNTXT *cptr, int n)
 {
     while ((cptr = R_findExecContext(cptr, cptr->getSysParent())) != nullptr)
     {

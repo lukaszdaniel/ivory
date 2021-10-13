@@ -92,7 +92,7 @@ static void pp(int pre)
  * 
  * @return name of RObject's type
  */
-RHIDDEN const char *R::typeName(SEXP v)
+HIDDEN const char *R::typeName(SEXP v)
 {
 	return sexptype2char(TYPEOF(v)); // -> memory.cpp
 }
@@ -339,7 +339,7 @@ static void inspect_tree(int pre, SEXP v, int deep, int pvec) {
 /* internal API - takes one mandatory argument (object to inspect) and
    two optional arguments (deep and pvec - see above), positional argument
    matching only */
-RHIDDEN SEXP do_inspect(SEXP call, SEXP op, SEXP args, SEXP env)
+HIDDEN SEXP do_inspect(SEXP call, SEXP op, SEXP args, SEXP env)
 {
 	checkArity(op, args);
 	SEXP obj = CAR(args);
@@ -356,19 +356,19 @@ RHIDDEN SEXP do_inspect(SEXP call, SEXP op, SEXP args, SEXP env)
 	return obj;
 }
 
-RHIDDEN SEXP do_address(SEXP call, SEXP op, SEXP args, SEXP rho)
+HIDDEN SEXP do_address(SEXP call, SEXP op, SEXP args, SEXP rho)
 {
 	checkArity(op, args);
 	return R_MakeExternalPtr((void *)CAR(args), R_NilValue, R_NilValue);
 }
 
-RHIDDEN SEXP do_named(SEXP call, SEXP op, SEXP args, SEXP rho)
+HIDDEN SEXP do_named(SEXP call, SEXP op, SEXP args, SEXP rho)
 {
 	checkArity(op, args);
 	return ScalarInteger(NAMED(CAR(args)));
 }
 
-RHIDDEN SEXP do_refcnt(SEXP call, SEXP op, SEXP args, SEXP rho)
+HIDDEN SEXP do_refcnt(SEXP call, SEXP op, SEXP args, SEXP rho)
 {
 	checkArity(op, args);
 	return ScalarInteger(REFCNT(CAR(args)));
@@ -376,13 +376,13 @@ RHIDDEN SEXP do_refcnt(SEXP call, SEXP op, SEXP args, SEXP rho)
 
 /* the following functions can be use internally and for debugging purposes -
    so far they are not used in any actual code */
-RHIDDEN SEXP R_inspect(SEXP x)
+HIDDEN SEXP R_inspect(SEXP x)
 {
 	inspect_tree(0, x, -1, 5);
 	return x;
 }
 
-RHIDDEN SEXP R_inspect3(SEXP x, int deep, int pvec)
+HIDDEN SEXP R_inspect3(SEXP x, int deep, int pvec)
 {
 	inspect_tree(0, x, deep, pvec);
 	return x;

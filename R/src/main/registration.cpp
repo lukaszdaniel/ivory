@@ -40,10 +40,6 @@
  *  DTL 14-Dec-2002
  */
 
-/** @file registration.cpp
- *
- */
-
 #ifdef HAVE_CONFIG_H
 #include <config.h>
 #endif
@@ -96,7 +92,7 @@ static R_FortranMethodDef fortranMethods[] = {
 };
 
 
-RHIDDEN void R::R_init_base(DllInfo *dll)
+HIDDEN void R_init_base(DllInfo *dll)
 {
     R_registerRoutines(dll, nullptr, callMethods, fortranMethods, nullptr);
     R_useDynamicSymbols(dll, FALSE);

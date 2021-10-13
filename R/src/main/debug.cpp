@@ -18,10 +18,6 @@
  *  https://www.R-project.org/Licenses/
  */
 
-/** @file debug.cpp
- *
- */
-
 #ifdef HAVE_CONFIG_H
 #include <config.h>
 #endif
@@ -44,7 +40,7 @@
 using namespace R;
 using namespace CXXR;
 
-RHIDDEN SEXP do_debug(SEXP call, SEXP op, SEXP args, SEXP rho)
+HIDDEN SEXP do_debug(SEXP call, SEXP op, SEXP args, SEXP rho)
 {
     SEXP ans = R_NilValue;
 
@@ -83,7 +79,7 @@ RHIDDEN SEXP do_debug(SEXP call, SEXP op, SEXP args, SEXP rho)
 }
 
 /* primitives .primTrace() and .primUntrace() */
-RHIDDEN SEXP do_trace(SEXP call, SEXP op, SEXP args, SEXP rho)
+HIDDEN SEXP do_trace(SEXP call, SEXP op, SEXP args, SEXP rho)
 {
     checkArity(op, args);
 
@@ -114,7 +110,7 @@ const bool &GET_DEBUG_STATE = debugging_state;
 inline void SET_TRACE_STATE(bool value) { tracing_state = value; }
 inline void SET_DEBUG_STATE(bool value) { debugging_state = value; }
 
-RHIDDEN SEXP do_traceOnOff(SEXP call, SEXP op, SEXP args, SEXP rho)
+HIDDEN SEXP do_traceOnOff(SEXP call, SEXP op, SEXP args, SEXP rho)
 {
     checkArity(op, args);
     SEXP onOff = CAR(args);
@@ -142,7 +138,7 @@ bool R::R_current_debug_state() { return GET_DEBUG_STATE; }
 
 #ifdef R_MEMORY_PROFILING
 
-RHIDDEN SEXP do_tracemem(SEXP call, SEXP op, SEXP args, SEXP rho)
+HIDDEN SEXP do_tracemem(SEXP call, SEXP op, SEXP args, SEXP rho)
 {
     SEXP object;
     char buffer[21];
@@ -169,7 +165,7 @@ RHIDDEN SEXP do_tracemem(SEXP call, SEXP op, SEXP args, SEXP rho)
     return mkString(buffer);
 }
 
-RHIDDEN SEXP do_untracemem(SEXP call, SEXP op, SEXP args, SEXP rho)
+HIDDEN SEXP do_untracemem(SEXP call, SEXP op, SEXP args, SEXP rho)
 {
     SEXP object;
 
@@ -187,14 +183,14 @@ RHIDDEN SEXP do_untracemem(SEXP call, SEXP op, SEXP args, SEXP rho)
 
 #else
 
-RHIDDEN NORET SEXP do_tracemem(SEXP call, SEXP op, SEXP args, SEXP rho)
+HIDDEN NORET SEXP do_tracemem(SEXP call, SEXP op, SEXP args, SEXP rho)
 {
     checkArity(op, args);
     check1arg(args, call, "x");
     errorcall(call, _("R was not compiled with support for memory profiling"));
 }
 
-RHIDDEN NORET SEXP do_untracemem(SEXP call, SEXP op, SEXP args, SEXP rho)
+HIDDEN NORET SEXP do_untracemem(SEXP call, SEXP op, SEXP args, SEXP rho)
 {
     checkArity(op, args);
     check1arg(args, call, "x");
@@ -260,7 +256,7 @@ void RObject::traceMemory(const RObject *src1, const RObject *src2,
 }
 #endif /* R_MEMORY_PROFILING */
 
-RHIDDEN SEXP do_retracemem(SEXP call, SEXP op, SEXP args, SEXP rho)
+HIDDEN SEXP do_retracemem(SEXP call, SEXP op, SEXP args, SEXP rho)
 {
 #ifdef R_MEMORY_PROFILING
     SEXP object, previous, ans, argList;

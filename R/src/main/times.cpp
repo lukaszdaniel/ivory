@@ -142,7 +142,7 @@ double R::currentTime(void)
     return ans;
 }
 
-RHIDDEN SEXP do_systime(SEXP call, SEXP op, SEXP args, SEXP env)
+HIDDEN SEXP do_systime(SEXP call, SEXP op, SEXP args, SEXP env)
 {
     checkArity(op, args);
     return ScalarReal(currentTime());
@@ -153,7 +153,7 @@ RHIDDEN SEXP do_systime(SEXP call, SEXP op, SEXP args, SEXP env)
 #endif
 
 /* For RNG.cpp, main.cpp, mkdtemp.cpp */
-RHIDDEN unsigned int R::TimeToSeed(void)
+HIDDEN unsigned int R::TimeToSeed(void)
 {
     unsigned int seed, pid = getpid();
 #if defined(HAVE_CLOCK_GETTIME) && defined(CLOCK_REALTIME)

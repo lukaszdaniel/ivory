@@ -4989,27 +4989,37 @@ altint_dup_multicheck <- function(vec, numna, s3class = NULL) {
     altint_dup_check(ivec, numna, TRUE, TRUE, s3class = s3class)
 }
 
-altreal_dup_check <- function(vec, numna, numnan, numinf, nalast, fromlast, s3class = NULL) {
+altreal_dup_check <- function(vec, numna, numnan, numinf, nalast, fromlast,
+                              s3class = NULL) {
     if(length(vec) > 0) {
+        ## on Intel adding 0 changes the NA_real_ NaN from signaling
+        ## to non-signaling
         if(numna > 0) {
-            vec[1:numna] <- NA_real_
+            vec[1:numna] <- rep(c(NA_real_, NA_real_ + 0), length.out = numna)
         }
         if(numnan > 0) {
-            vec[seq(1+numna, 1+numnan)] <- NaN
+            vec[seq(1 + numna, numna + numnan)] <-
+                rep(c(NaN, NaN + 0), length.out = numnan)
         }
         if(numinf > 0) {
             infstrt <- 1 + numna + numnan
-            vec[seq(infstrt, infstrt + numinf - 1)] <- rep(c(Inf, -Inf), length.out = numinf)
+            vec[seq(infstrt, infstrt + numinf - 1)] <-
+                rep(c(Inf, -Inf), length.out = numinf)
         }
     } ## end length(vec) > 0
-    altrep_dup_test(vec, nalast = nalast, fromlast = fromlast, s3class = s3class)
+    altrep_dup_test(vec, nalast = nalast, fromlast = fromlast,
+                    s3class = s3class)
 }
 
 altreal_dup_multicheck <- function(vec, numna, numnan, numinf, s3class = NULL) {
-    altreal_dup_check(ivec, numna, numnan, numinf, FALSE, FALSE, s3class = s3class)
-    altreal_dup_check(ivec, numna, numnan, numinf, FALSE, TRUE, s3class = s3class)
-    altreal_dup_check(ivec, numna, numnan, numinf, TRUE, FALSE, s3class = s3class)
-    altreal_dup_check(ivec, numna, numnan, numinf, TRUE, TRUE, s3class = s3class)
+    altreal_dup_check(ivec, numna, numnan, numinf, FALSE, FALSE,
+                      s3class = s3class)
+    altreal_dup_check(ivec, numna, numnan, numinf, FALSE, TRUE,
+                      s3class = s3class)
+    altreal_dup_check(ivec, numna, numnan, numinf, TRUE, FALSE,
+                      s3class = s3class)
+    altreal_dup_check(ivec, numna, numnan, numinf, TRUE, TRUE,
+                      s3class = s3class)
 }
 
 ## NB buffer size used by ITERATE_BY_REGION macros is 512, so we need to test
@@ -5411,6 +5421,43 @@ stopifnot(class(r <- residuals(fit)) == "numeric", # was "AsIs"
 ## qqline(<object>, *) - also from PR#18190
 qqline(I(1:12))
 ## --> $ operator is invalid for atomic vectors (from coef() in abline())
+
+
+## More "rational" as.character() for <octmode> and <hexmode>,
+## fulfilling the "law"   as.<vector>(x)[j]  ===  as.<vector>(x[j])
+i <- matrix(0:21, 2)
+hi <- as.character(as.hexmode(i))
+oi <- as.character(as.octmode(i))
+stopifnot(exprs = {
+    identical(dim (hi), dim(i))
+    identical(nrow(oi), nrow(i))
+    hi[1:8] == as.character(0:7)
+    oi[1:8] == hi[1:8]
+  c(nchar(hi)) == rep(1:2, c(16,6))
+  c(nchar(oi)) == rep(1:2, c(8,14))
+})
+## as.character.*() methods had used format() previously
+
+
+## within.list() & within.data.frame() assumed setdiff(a, b) to always eval 'b'
+stopifnot(exprs = {
+  identical(list(1, let="abc"), within(list(1), let <- "abc"))
+  identical(data.frame(let = character()), within(data.frame(), let <- character()))
+})# failed for ~ 40 hours in R-devel
+
+
+## mapply() & Map() follow usual "max-or-0-if" recycling rule and keeps
+## returning a named list in the "empty" case.
+nL0 <- setNames(list(), character()) # named empty list
+stopifnot(exprs = {
+    identical(list(), mapply(`+`, 1:3, NULL))
+    identical(nL0, mapply(paste, character(), NULL))
+    identical(nL0, mapply(paste, character(), letters))
+    identical(nL0, mapply(paste, "A", character()) )
+    identical(nL0, mapply(paste, character(), letters) )
+})
+## zero-length argument with non-zero one errored in R <= 4.1.x
+
 
 
 ## keep at end

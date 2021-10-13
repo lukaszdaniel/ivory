@@ -35,7 +35,7 @@
 using namespace R;
 using namespace CXXR;
 
-RHIDDEN void R::PrintGreeting(void)
+HIDDEN void R::PrintGreeting(void)
 {
     char buf[500];
 
@@ -54,7 +54,7 @@ Type 'contributors()' for more information and\n\
 Type 'q()' to quit R.\n\n"));
 }
 
-RHIDDEN SEXP do_version(SEXP call, SEXP op, SEXP args, SEXP env)
+HIDDEN SEXP do_version(SEXP call, SEXP op, SEXP args, SEXP env)
 {
     char buf[128];
 
@@ -107,7 +107,7 @@ RHIDDEN SEXP do_version(SEXP call, SEXP op, SEXP args, SEXP env)
     return value;
 }
 
-RHIDDEN void R::PrintVersion(char *s, size_t len)
+HIDDEN void R::PrintVersion(char *s, size_t len)
 {
     PrintVersion_part_1(s, len);
 
@@ -119,7 +119,7 @@ RHIDDEN void R::PrintVersion(char *s, size_t len)
 	   "https://www.gnu.org/licenses/.\n");
 }
 
-RHIDDEN void R::PrintVersionString(char *s, size_t len)
+HIDDEN void R::PrintVersionString(char *s, size_t len)
 {
     if(R_SVN_BASEREVISION <= 0) {// 'git log' failed in ../../Makefile.in
 	snprintf(s, len, "R version %s.%s %s (%s-%s-%s)",
@@ -137,7 +137,7 @@ RHIDDEN void R::PrintVersionString(char *s, size_t len)
     }
 }
 
-RHIDDEN void PrintIvoryVersionString(char *s, size_t len)
+HIDDEN void PrintIvoryVersionString(char *s, size_t len)
 {
     if(R_SVN_REVISION <= 0) {// 'git log' failed in ../../Makefile.in
         snprintf(s, len, "Ivory version %s.%s %s (%s-%s-%s)",
@@ -155,7 +155,7 @@ RHIDDEN void PrintIvoryVersionString(char *s, size_t len)
     }
 }
 
-RHIDDEN void R::PrintVersion_part_1(char *s, size_t len)
+HIDDEN void R::PrintVersion_part_1(char *s, size_t len)
 {
 #define SPRINTF_2(_FMT, _OBJ) snprintf(tmp, 128, _FMT, _OBJ); strcat(s, tmp)
     char tmp[128];
@@ -177,7 +177,7 @@ RHIDDEN void R::PrintVersion_part_1(char *s, size_t len)
     SPRINTF_2(" (%d-bit)\n", 8*(int)sizeof(void *));
 }
 
-RHIDDEN SEXP do_internalsID(SEXP call, SEXP op, SEXP args, SEXP env)
+HIDDEN SEXP do_internalsID(SEXP call, SEXP op, SEXP args, SEXP env)
 {
     return Rf_mkString(R_INTERNALS_UUID);
 }

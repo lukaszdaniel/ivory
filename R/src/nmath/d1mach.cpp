@@ -29,7 +29,7 @@
 
 #include "nmath.h"
 
-RHIDDEN double Rf_d1mach(int i)
+HIDDEN double Rf_d1mach(int i)
 {
     switch(i) {
     case 1: return DBL_MIN;

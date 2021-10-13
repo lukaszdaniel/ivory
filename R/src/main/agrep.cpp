@@ -17,10 +17,6 @@
  *  https://www.R-project.org/Licenses/
  */
 
-/** @file agrep.cpp
- *
- */
-
 /* This at times needed to be separate from grep.cpp, as TRE has a
    conflicting regcomp and the two headers cannot both be included in
    one file
@@ -110,7 +106,7 @@ static void amatch_regaparams(regaparams_t *params, int patlen,
     }
 }
 
-RHIDDEN SEXP do_agrep(SEXP call, SEXP op, SEXP args, SEXP env)
+HIDDEN SEXP do_agrep(SEXP call, SEXP op, SEXP args, SEXP env)
 {
     SEXP pat, vec, ind, ans;
     SEXP opt_costs, opt_bounds;
@@ -498,7 +494,7 @@ static SEXP adist_full(SEXP x, SEXP y, double *costs, Rboolean opt_counts)
 
 #define OFFSETS(I, J, K) INTEGER(offsets)[I + (J)*nx + (K)*nxy]
 
-RHIDDEN SEXP do_adist(SEXP call, SEXP op, SEXP args, SEXP env)
+HIDDEN SEXP do_adist(SEXP call, SEXP op, SEXP args, SEXP env)
 {
     SEXP x, y;
     SEXP ans, counts, offsets, dimnames, names, elt;
@@ -744,7 +740,7 @@ RHIDDEN SEXP do_adist(SEXP call, SEXP op, SEXP args, SEXP env)
     return ans;
 }
 
-RHIDDEN SEXP do_aregexec(SEXP call, SEXP op, SEXP args, SEXP env)
+HIDDEN SEXP do_aregexec(SEXP call, SEXP op, SEXP args, SEXP env)
 {
     SEXP pat, vec, ans, matchpos, matchlen;
     SEXP opt_bounds, opt_costs;

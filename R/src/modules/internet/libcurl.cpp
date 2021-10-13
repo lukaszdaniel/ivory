@@ -108,7 +108,7 @@ R_curl_multi_wait(CURLM *multi_handle,
 }
 #endif
 
-RHIDDEN SEXP in_do_curlVersion(SEXP call, SEXP op, SEXP args, SEXP rho)
+HIDDEN SEXP in_do_curlVersion(SEXP call, SEXP op, SEXP args, SEXP rho)
 {
     checkArity(op, args);
     SEXP ans = PROTECT(allocVector(STRSXP, 1));
@@ -324,7 +324,7 @@ static size_t rcvBody(void *buffer, size_t size, size_t nmemb, void *userp)
 #endif
 
 
-RHIDDEN SEXP in_do_curlGetHeaders(SEXP call, SEXP op, SEXP args, SEXP rho)
+HIDDEN SEXP in_do_curlGetHeaders(SEXP call, SEXP op, SEXP args, SEXP rho)
 {
     checkArity(op, args);
 #ifndef HAVE_LIBCURL
@@ -535,7 +535,7 @@ static int progress(void *clientp, double dltotal, double dlnow,
 
 /* download(url, destfile, quiet, mode, headers, cacheOK) */
 
-RHIDDEN SEXP in_do_curlDownload(SEXP call, SEXP op, SEXP args, SEXP rho)
+HIDDEN SEXP in_do_curlDownload(SEXP call, SEXP op, SEXP args, SEXP rho)
 {
     checkArity(op, args);
 #ifndef HAVE_LIBCURL

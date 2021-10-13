@@ -85,6 +85,7 @@ axis.default(side = c("top", "bottom", "left", "right"),
   of \code{axis.default}.  Valid components in the return value of
   \code{xscale.components.default} are:
 
+  \describe{
   \item{\code{num.limit}}{ A numeric limit for the box. }
   \item{\code{bottom}}{ A list with two elements, \code{ticks} and
     \code{labels}.  \code{ticks} must be a list with components
@@ -102,12 +103,13 @@ axis.default(side = c("top", "bottom", "left", "right"),
     \code{FALSE}, axis annotation for the top axis is omitted.
     Alternatively, \code{top} can be a list like \code{bottom}.
   }
+  }
 
   Valid components in the return value of
   \code{yscale.components.default} are \code{left} and \code{right}.
   Their interpretations are analogous to (respectively) the
   \code{bottom} and \code{top} components described above.
-
+  
 }
 
 \details{
@@ -194,7 +196,7 @@ yscale.components.CF <-
         parse(text = sprintf("\%s ~ degree * C", prettyC))
     ans
 }
-
+      
 
 xyplot(nhtemp ~ time(nhtemp), aspect = "xy", type = "o",
        scales = list(y = list(alternating = 3)),

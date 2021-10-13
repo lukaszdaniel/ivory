@@ -66,7 +66,7 @@ using namespace R;
 using namespace CXXR;
 
 #ifdef ENABLE_NLS
-RHIDDEN void nl_Rdummy(void)
+HIDDEN void nl_Rdummy(void)
 {
     /* force this in as packages use it */
     dgettext("R", "dummy - do not translate");
@@ -701,25 +701,32 @@ static void *signal_stack;
 #define R_USAGE 100000 /* Just a guess */
 static void init_signal_handlers(void)
 {
-    /* <FIXME> may need to reinstall this if we do recover. */
-    struct sigaction sa;
-    signal_stack = malloc(SIGSTKSZ + R_USAGE);
-    if (signal_stack) {
-	sigstk.ss_sp = signal_stack;
-	sigstk.ss_size = SIGSTKSZ + R_USAGE;
-	sigstk.ss_flags = 0;
-	if(sigaltstack(&sigstk, nullptr) < 0)
-	    warning(_("failed to set alternate signal stack"));
-    } else
-	warning(_("failed to allocate alternate signal stack"));
-    sa.sa_sigaction = sigactionSegv;
-    sigemptyset(&sa.sa_mask);
-    sa.sa_flags = SA_ONSTACK | SA_SIGINFO;
-    sigaction(SIGSEGV, &sa, nullptr);
-    sigaction(SIGILL, &sa, nullptr);
+    /* Do not set the (since 2005 experimantal) SEGV handler
+       UI if R_NO_SEGV_HANDLER env var is non-empty.
+       This is needed to debug crashes in the handler
+       (which happen as they involve the console interface). */
+    const char *val = getenv("R_NO_SEGV_HANDLER");
+    if (!val || !*val) {
+	/* <FIXME> may need to reinstall this if we do recover. */
+	struct sigaction sa;
+	signal_stack = malloc(SIGSTKSZ + R_USAGE);
+	if (signal_stack != nullptr) {
+	    sigstk.ss_sp = signal_stack;
+	    sigstk.ss_size = SIGSTKSZ + R_USAGE;
+	    sigstk.ss_flags = 0;
+	    if(sigaltstack(&sigstk, nullptr) < 0)
+		warning(_("failed to set alternate signal stack"));
+	} else
+	    warning(_("failed to allocate alternate signal stack"));
+	sa.sa_sigaction = sigactionSegv;
+	sigemptyset(&sa.sa_mask);
+	sa.sa_flags = SA_ONSTACK | SA_SIGINFO;
+	sigaction(SIGSEGV, &sa, nullptr);
+	sigaction(SIGILL, &sa, nullptr);
 #ifdef SIGBUS
-    sigaction(SIGBUS, &sa, nullptr);
+	sigaction(SIGBUS, &sa, nullptr);
 #endif
+    }
 
     signal(SIGINT,  handleInterrupt);
     signal(SIGUSR1, onsigusr1);
@@ -768,7 +775,7 @@ int R_SignalHandlers = 1;  /* Exposed in R_interface.h */
 
 const char* get_workspace_name();  /* from startup.cpp */
 
-RHIDDEN void R::BindDomain(char *R_Home)
+HIDDEN void R::BindDomain(char *R_Home)
 {
 #ifdef ENABLE_NLS
     char localedir[PATH_MAX+20];
@@ -1219,7 +1226,7 @@ void mainloop(void)
 /*this functionality now appears in 3
   places-jump_to_toplevel/profile/here */
 
-/*RHIDDEN*/
+/*HIDDEN*/
 void R::Rf_printwhere(void)
 {
 	RCNTXT *cptr;
@@ -1326,7 +1333,7 @@ static void PrintCall(SEXP call, SEXP rho)
 
 /* browser(text = "", condition = nullptr, expr = TRUE, skipCalls = 0L)
  * ------- but also called from ./eval.cpp */
-RHIDDEN SEXP do_browser(SEXP call, SEXP op, SEXP args, SEXP rho)
+HIDDEN SEXP do_browser(SEXP call, SEXP op, SEXP args, SEXP rho)
 {
     RCNTXT *saveToplevelContext;
     RCNTXT *saveGlobalContext;
@@ -1489,7 +1496,7 @@ void R_dot_Last(void)
     UNPROTECT(1);
 }
 
-RHIDDEN SEXP do_quit(SEXP call, SEXP op, SEXP args, SEXP rho)
+HIDDEN SEXP do_quit(SEXP call, SEXP op, SEXP args, SEXP rho)
 {
     const char *tmp;
     SA_TYPE ask=SA_DEFAULT;
@@ -1892,7 +1899,7 @@ extern "C"
 #if defined FC_LEN_T
 #include <cstddef>
 	void F77_SYMBOL(rwarnc)(const char *msg, int *nchar, FC_LEN_T msg_len);
-	RHIDDEN void dummy54321(void)
+	HIDDEN void dummy54321(void)
 	{
 		int nc = 5;
 		F77_CALL(rwarnc)
@@ -1900,7 +1907,7 @@ extern "C"
 	}
 #else
 	void F77_SYMBOL(rwarnc)(const char *msg, int *nchar);
-	RHIDDEN void dummy54321(void)
+	HIDDEN void dummy54321(void)
 	{
 		int nc = 5;
 		F77_CALL(rwarnc)

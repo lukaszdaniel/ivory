@@ -36,9 +36,6 @@
 #  include <cstdarg>
 #  define R_VA_LIST std::va_list
 # endif
-#endif
-
-#ifdef  __cplusplus
 extern "C" {
 #else
 #include <stdarg.h>

@@ -43,7 +43,7 @@
  * see also Rf_lgammacor() in ./lgammacor.cpp  which computes almost the same!
  */
 
-RHIDDEN double Rf_stirlerr(double n)
+HIDDEN double Rf_stirlerr(double n)
 {
 
 constexpr double S0 = 0.083333333333333333333;       /* 1/12 */

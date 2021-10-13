@@ -82,7 +82,7 @@ extern FILE* ifp; /* from system.cpp */
  *  1) FATAL MESSAGES AT STARTUP
  */
 
-RHIDDEN void Rstd_Suicide(const char *s)
+HIDDEN void Rstd_Suicide(const char *s)
 {
     REprintf(_("Fatal error: %s\n"), s);
     /* Might be called before translation is running */
@@ -504,7 +504,7 @@ typedef void rl_vcpfunc_t (char *);
 # endif
 
 #if defined(HAVE_LIBREADLINE) && defined(HAVE_TILDE_EXPAND_WORD)
-RHIDDEN
+HIDDEN
 char *R_ExpandFileName_readline(const char *s, char *buff)
 {
     char *s2 = tilde_expand_word(s);
@@ -733,7 +733,7 @@ static SEXP
     RComp_getFileCompSym,
     RComp_retrieveCompsSym;
 
-RHIDDEN void R::set_rl_word_breaks(const char *str)
+HIDDEN void R::set_rl_word_breaks(const char *str)
 {
     static char p1[201], p2[203];
     strncpy(p1, str, 200); p1[200]= '\0';
@@ -936,7 +936,7 @@ static char *R_completion_generator(const char *text, int state)
 
 /* ============================================================ */
 #else
-RHIDDEN void R::set_rl_word_breaks(const char *str)
+HIDDEN void R::set_rl_word_breaks(const char *str)
 {
 }
 #endif /* HAVE_RL_COMPLETION_MATCHES */
@@ -952,7 +952,7 @@ static void handleInterrupt(void)
 /* Fill a text buffer from stdin or with user typed console input. */
 static void *cd = nullptr;
 
-RHIDDEN int Rstd_ReadConsole(const char *prompt, unsigned char *buf, size_t len,
+HIDDEN int Rstd_ReadConsole(const char *prompt, unsigned char *buf, size_t len,
 		 int addtohistory)
 {
     if(!R_Interactive) {
@@ -1100,7 +1100,7 @@ RHIDDEN int Rstd_ReadConsole(const char *prompt, unsigned char *buf, size_t len,
 	/* Write a text buffer to the console. */
 	/* All system output is filtered through this routine (unless R_Consolefile is used). */
 
-RHIDDEN void Rstd_WriteConsole(const char *buf, int len)
+HIDDEN void Rstd_WriteConsole(const char *buf, int len)
 {
     printf("%s", buf);
     fflush(stdout);
@@ -1108,7 +1108,7 @@ RHIDDEN void Rstd_WriteConsole(const char *buf, int len)
 
 /* The extended version allows the distinction of errors and warnings.
    It is not enabled by default unless pretty-printing is desired. */
-RHIDDEN void Rstd_WriteConsoleEx(const char *buf, int len, int otype)
+HIDDEN void Rstd_WriteConsoleEx(const char *buf, int len, int otype)
 {
     if (otype)
       printf("\033[1m%s\033[0m", buf);
@@ -1120,21 +1120,21 @@ RHIDDEN void Rstd_WriteConsoleEx(const char *buf, int len, int otype)
 
 	/* Indicate that input is coming from the console */
 
-RHIDDEN void Rstd_ResetConsole()
+HIDDEN void Rstd_ResetConsole()
 {
 }
 
 
 	/* Stdio support to ensure the console file buffer is flushed */
 
-RHIDDEN void Rstd_FlushConsole()
+HIDDEN void Rstd_FlushConsole()
 {
     /* fflush(stdin);  really work on Solaris on pipes */
 }
 
 	/* Reset stdin if the user types EOF on the console. */
 
-RHIDDEN void Rstd_ClearerrConsole()
+HIDDEN void Rstd_ClearerrConsole()
 {
     clearerr(stdin);
 }
@@ -1143,7 +1143,7 @@ RHIDDEN void Rstd_ClearerrConsole()
  *  3) ACTIONS DURING (LONG) COMPUTATIONS
  */
 
-RHIDDEN void Rstd_Busy(int which)
+HIDDEN void Rstd_Busy(int which)
 {
 }
 
@@ -1183,7 +1183,7 @@ void R_CleanTempDir(void)
 }
 
 
-RHIDDEN NORET void Rstd_CleanUp(SA_TYPE saveact, int status, int runLast)
+HIDDEN NORET void Rstd_CleanUp(SA_TYPE saveact, int status, int runLast)
 {
     if(saveact == SA_DEFAULT) /* The normal case apart from R_Suicide */
 	saveact = SaveAction;
@@ -1261,7 +1261,7 @@ RHIDDEN NORET void Rstd_CleanUp(SA_TYPE saveact, int status, int runLast)
 
 #include <cerrno>
 
-RHIDDEN int Rstd_ShowFiles(int nfile,		/* number of files */
+HIDDEN int Rstd_ShowFiles(int nfile,		/* number of files */
 	       const char **file,		/* array of filenames */
 	       const char **headers,	/* the `headers' args of file.show.
 					   Printed before each file. */
@@ -1327,7 +1327,7 @@ RHIDDEN int Rstd_ShowFiles(int nfile,		/* number of files */
 
 
 
-RHIDDEN size_t Rstd_ChooseFile(int _new, char *buf, size_t len)
+HIDDEN size_t Rstd_ChooseFile(int _new, char *buf, size_t len)
 {
     size_t namelen;
     char *bufp;
@@ -1340,13 +1340,13 @@ RHIDDEN size_t Rstd_ChooseFile(int _new, char *buf, size_t len)
 }
 
 
-RHIDDEN void Rstd_ShowMessage(const char *s)
+HIDDEN void Rstd_ShowMessage(const char *s)
 {
     REprintf("%s\n", s);
 }
 
 
-RHIDDEN void Rstd_read_history(const char *s)
+HIDDEN void Rstd_read_history(const char *s)
 {
 #if defined(HAVE_LIBREADLINE) && defined(HAVE_READLINE_HISTORY_H)
     if(R_Interactive && UsingReadline) {
@@ -1355,7 +1355,7 @@ RHIDDEN void Rstd_read_history(const char *s)
 #endif
 }
 
-RHIDDEN void Rstd_loadhistory(SEXP call, SEXP op, SEXP args, SEXP env)
+HIDDEN void Rstd_loadhistory(SEXP call, SEXP op, SEXP args, SEXP env)
 {
     SEXP sfile;
     char file[PATH_MAX];
@@ -1378,7 +1378,7 @@ RHIDDEN void Rstd_loadhistory(SEXP call, SEXP op, SEXP args, SEXP env)
 #endif
 }
 
-RHIDDEN void Rstd_savehistory(SEXP call, SEXP op, SEXP args, SEXP env)
+HIDDEN void Rstd_savehistory(SEXP call, SEXP op, SEXP args, SEXP env)
 {
     SEXP sfile;
     char file[PATH_MAX];
@@ -1409,7 +1409,7 @@ RHIDDEN void Rstd_savehistory(SEXP call, SEXP op, SEXP args, SEXP env)
 #endif
 }
 
-RHIDDEN void Rstd_addhistory(SEXP call, SEXP op, SEXP args, SEXP env)
+HIDDEN void Rstd_addhistory(SEXP call, SEXP op, SEXP args, SEXP env)
 {
     SEXP stamp;
     int i;

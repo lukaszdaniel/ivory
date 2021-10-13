@@ -21,9 +21,6 @@
 /* <UTF8> char here is handled as a whole string, but note that
    fprintf is used */
 
-/** @file edit.cpp
- *
- */
 
 #ifdef HAVE_CONFIG_H
 #include <config.h>
@@ -83,7 +80,7 @@ using namespace CXXR;
 static char *DefaultFileName;
 static int  EdFileUsed = 0;
 
-RHIDDEN void R::InitEd()
+HIDDEN void R::InitEd()
 {
 #ifdef _WIN32
     DefaultFileName = R_tmpnam2("Redit", R_TempDir, ".R");

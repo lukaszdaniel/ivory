@@ -20,10 +20,6 @@
  *  https://www.R-project.org/Licenses/
  */
 
-/** @file radixsort.cpp
- *
- */
-
 #ifdef HAVE_CONFIG_H
 #include <config.h>
 #endif
@@ -1552,7 +1548,7 @@ static void dsort(double *x, int *o, int n)
     }
 }
 
-RHIDDEN SEXP do_radixsort(SEXP call, SEXP op, SEXP args, SEXP rho)
+HIDDEN SEXP do_radixsort(SEXP call, SEXP op, SEXP args, SEXP rho)
 {
     int n = -1, narg = 0, ngrp, tmp, *osub, thisgrpn;
     R_xlen_t nl = n;

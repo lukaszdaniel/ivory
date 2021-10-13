@@ -82,7 +82,7 @@ using namespace R;
    Added typeface and fontindex arguments
 */
 
-RHIDDEN
+HIDDEN
 unsigned short *_controlify(pGEDevDesc dd, const unsigned char *src,
 							int typeface, int fontindex)
 {

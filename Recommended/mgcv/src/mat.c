@@ -47,16 +47,16 @@
    or 'L'. B is unit diagonal if diag = 'U' rather than 'N'. lda and ldb are physical rows 
    of A and B. */
 
-#include "mgcv.h"
 #include <stdlib.h>
 #include <stdio.h>
 #include <math.h>
 
-#include <R.h>
-#ifdef OPENMP_ON
+#ifdef _OPENMP // needs to precede R.h (and mgcv.h)
 #include <omp.h>
 #endif
 
+#include "mgcv.h"
+#include <R.h>
 #include "localization.h"
 /*#include <dmalloc.h>*/
 

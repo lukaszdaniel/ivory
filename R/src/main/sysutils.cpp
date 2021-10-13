@@ -18,10 +18,6 @@
  *  https://www.R-project.org/Licenses/
  */
 
-/** @file sysutils.cpp
- *
- */
-
 #ifdef HAVE_CONFIG_H
 #include <config.h>
 #endif
@@ -68,7 +64,7 @@ using namespace CXXR;
 #include <sys/stat.h>
 #endif
 
-RHIDDEN int R_isWriteableDir(const char *path);
+HIDDEN int R_isWriteableDir(const char *path);
 
 #ifdef HAVE_AQUA
 int (*ptr_CocoaSystem)(const char*);
@@ -81,7 +77,7 @@ bool R::R_FileExists(const char *path)
     return _stati64(R_ExpandFileName(path), &sb) == 0;
 }
 
-RHIDDEN double R::R_FileMtime(const char *path)
+HIDDEN double R::R_FileMtime(const char *path)
 {
     struct _stati64 sb;
     if (_stati64(R_ExpandFileName(path), &sb) != 0)
@@ -95,7 +91,7 @@ bool R::R_FileExists(const char *path)
     return (stat(R_ExpandFileName(path), &sb) == 0);
 }
 
-RHIDDEN double R::R_FileMtime(const char *path)
+HIDDEN double R::R_FileMtime(const char *path)
 {
     struct stat sb;
     if (stat(R_ExpandFileName(path), &sb) != 0)
@@ -108,7 +104,7 @@ RHIDDEN double R::R_FileMtime(const char *path)
      *  Unix file names which begin with "." are invisible.
      */
 
-RHIDDEN bool R::R_HiddenFile(const char *name)
+HIDDEN bool R::R_HiddenFile(const char *name)
 {
     if (name && name[0] != '.') return false;
     return true;
@@ -246,13 +242,13 @@ char *R_HomeDir(void)
 }
 
 /* This is a primitive (with no arguments) */
-RHIDDEN SEXP do_interactive(SEXP call, SEXP op, SEXP args, SEXP rho)
+HIDDEN SEXP do_interactive(SEXP call, SEXP op, SEXP args, SEXP rho)
 {
     checkArity(op, args);
     return ScalarLogical((R_Interactive) ? 1 : 0);
 }
 
-RHIDDEN SEXP do_tempdir(SEXP call, SEXP op, SEXP args, SEXP env)
+HIDDEN SEXP do_tempdir(SEXP call, SEXP op, SEXP args, SEXP env)
 {
     checkArity(op, args);
     Rboolean check = (Rboolean) asLogical(CAR(args));
@@ -264,7 +260,7 @@ RHIDDEN SEXP do_tempdir(SEXP call, SEXP op, SEXP args, SEXP env)
 }
 
 
-RHIDDEN SEXP do_tempfile(SEXP call, SEXP op, SEXP args, SEXP env)
+HIDDEN SEXP do_tempfile(SEXP call, SEXP op, SEXP args, SEXP env)
 {
     SEXP  ans, pattern, fileext, tempdir;
     const char *tn, *td, *te;
@@ -377,7 +373,7 @@ int R_system(const char *command)
 #include <windows.h> /* _wgetenv etc */
 #endif
 
-RHIDDEN SEXP do_getenv(SEXP call, SEXP op, SEXP args, SEXP env)
+HIDDEN SEXP do_getenv(SEXP call, SEXP op, SEXP args, SEXP env)
 {
     int i, j;
     SEXP ans;
@@ -470,7 +466,7 @@ static int Rputenv(const char *nm, const char *val)
 #endif
 
 
-RHIDDEN SEXP do_setenv(SEXP call, SEXP op, SEXP args, SEXP env)
+HIDDEN SEXP do_setenv(SEXP call, SEXP op, SEXP args, SEXP env)
 {
 #if defined(HAVE_PUTENV) || defined(HAVE_SETENV)
     int i, n;
@@ -509,7 +505,7 @@ RHIDDEN SEXP do_setenv(SEXP call, SEXP op, SEXP args, SEXP env)
 #endif
 }
 
-RHIDDEN SEXP do_unsetenv(SEXP call, SEXP op, SEXP args, SEXP env)
+HIDDEN SEXP do_unsetenv(SEXP call, SEXP op, SEXP args, SEXP env)
 {
     int i, n;
     SEXP ans, vars;
@@ -594,7 +590,7 @@ static int write_one(unsigned int namescount, const char * const *names, void *d
 #include "RBufferUtils.h"
 
 /* iconv(x, from, to, sub, mark) */
-RHIDDEN SEXP do_iconv(SEXP call, SEXP op, SEXP args, SEXP env)
+HIDDEN SEXP do_iconv(SEXP call, SEXP op, SEXP args, SEXP env)
 {
     SEXP ans, x = CAR(args), si;
     void * obj;
@@ -1033,7 +1029,7 @@ const char *R::translateCharFP(SEXP x)
 }
 
 /* Variant which may return nullptr, used for file paths */
-RHIDDEN const char *R::translateCharFP2(SEXP x)
+HIDDEN const char *R::translateCharFP2(SEXP x)
 {
     if(TYPEOF(x) != CHARSXP)
 	error(_("'%s' function must be called on a CHARSXP, but got '%s'"),
@@ -1160,7 +1156,7 @@ next_char:
 }
 
 /* Variant which does not return escaped string */
-RHIDDEN const char *R::trCharUTF8(SEXP x)
+HIDDEN const char *R::trCharUTF8(SEXP x)
 {
     void *obj;
     const char *inbuf, *ans = CHAR(x);
@@ -1563,7 +1559,7 @@ next_char:
 }
 #endif
 
-RHIDDEN void R::invalidate_cached_recodings(void)
+HIDDEN void R::invalidate_cached_recodings(void)
 {
     if (latin1_obj)
     {
@@ -1656,7 +1652,7 @@ size_t R::ucstomb(char *s, const unsigned int wc)
 }
 
 /* used in engine.cpp for non-UTF-8 MBCS */
-RHIDDEN size_t R::mbtoucs(unsigned int *wc, const char *s, size_t n)
+HIDDEN size_t R::mbtoucs(unsigned int *wc, const char *s, size_t n)
 {
     unsigned int  wcs[2];
     char     buf[16];
@@ -1753,7 +1749,7 @@ size_t ucstoutf8(char *s, const unsigned int wc)
 #define S_IFDIR __S_IFDIR
 #endif
 
-RHIDDEN int R_isWriteableDir(const char *path)
+HIDDEN int R_isWriteableDir(const char *path)
 {
 #ifdef _WIN32
     struct _stati64 sb;
@@ -1777,14 +1773,14 @@ RHIDDEN int R_isWriteableDir(const char *path)
     return isdir;
 }
 #else
-RHIDDEN int R_isWriteableDir(const char *path)
+HIDDEN int R_isWriteableDir(const char *path)
 {
     return 1;
 }
 #endif /* HAVE_STAT */
 
 #if !HAVE_DECL_MKDTEMP
-extern const char *mkdtemp(const char *template_);
+extern const char *mkdtemp(const char *template);
 #endif
 
 #ifdef _WIN32
@@ -1879,7 +1875,7 @@ void R::R_reInitTempDir(int die_on_fail)
     }
 }
 
-RHIDDEN void R::InitTempDir() {
+HIDDEN void R::InitTempDir() {
     R_reInitTempDir(/* die_on_fail = */ TRUE);
 }
 
@@ -1941,7 +1937,7 @@ void R_free_tmpnam(char *name)
         free(name);
 }
 
-RHIDDEN SEXP do_proctime(SEXP call, SEXP op, SEXP args, SEXP env)
+HIDDEN SEXP do_proctime(SEXP call, SEXP op, SEXP args, SEXP env)
 {
     SEXP ans, nm;
 
@@ -1960,7 +1956,7 @@ RHIDDEN SEXP do_proctime(SEXP call, SEXP op, SEXP args, SEXP env)
     return ans;
 }
 
-RHIDDEN void R::resetTimeLimits()
+HIDDEN void R::resetTimeLimits()
 {
     double data[5];
     R_getProcTime(data);
@@ -1979,7 +1975,7 @@ RHIDDEN void R::resetTimeLimits()
 	cpuLimit = cpuLimit2;
 }
 
-RHIDDEN SEXP do_setTimeLimit(SEXP call, SEXP op, SEXP args, SEXP rho)
+HIDDEN SEXP do_setTimeLimit(SEXP call, SEXP op, SEXP args, SEXP rho)
 {
     double cpu, elapsed, old_cpu = cpuLimitValue,
 	old_elapsed = elapsedLimitValue;
@@ -2005,7 +2001,7 @@ RHIDDEN SEXP do_setTimeLimit(SEXP call, SEXP op, SEXP args, SEXP rho)
     return R_NilValue;
 }
 
-RHIDDEN SEXP do_setSessionTimeLimit(SEXP call, SEXP op, SEXP args, SEXP rho)
+HIDDEN SEXP do_setSessionTimeLimit(SEXP call, SEXP op, SEXP args, SEXP rho)
 {
     double cpu, elapsed, data[5];
 
@@ -2042,7 +2038,7 @@ RHIDDEN SEXP do_setSessionTimeLimit(SEXP call, SEXP op, SEXP args, SEXP rho)
 #  define GLOB_QUOTE 0
 # endif
 #endif
-RHIDDEN SEXP do_glob(SEXP call, SEXP op, SEXP args, SEXP env)
+HIDDEN SEXP do_glob(SEXP call, SEXP op, SEXP args, SEXP env)
 {
     SEXP x, ans;
     R_xlen_t i, n;
@@ -2162,7 +2158,7 @@ typedef struct _FILE_NAME_INFO {
 typedef BOOL (WINAPI *LPFN_GFIBH_EX) (HANDLE, FILE_INFO_BY_HANDLE_CLASS,
                                       LPVOID, DWORD);
 
-RHIDDEN int R_is_redirection_tty(int fd)
+HIDDEN int R_is_redirection_tty(int fd)
 {
     /* for now detects only msys/cygwin redirection tty */
     static LPFN_GFIBH_EX gfibh = nullptr;
@@ -2197,7 +2193,7 @@ RHIDDEN int R_is_redirection_tty(int fd)
 }
 #endif
 
-extern "C" RHIDDEN int R_isatty(int fd)
+extern "C" HIDDEN int R_isatty(int fd)
 {
 #ifdef _WIN32
     if (R_is_redirection_tty(fd))

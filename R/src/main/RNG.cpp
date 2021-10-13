@@ -18,9 +18,6 @@
  *  https://www.R-project.org/Licenses/
  */
 
-/** @file RNG.cpp
- *
- */
 
 #ifdef HAVE_CONFIG_H
 #include <config.h>
@@ -535,7 +532,7 @@ static void Samp_kind(Sampletype kind)
 
 /*------ .Internal interface ------------------------*/
 
-RHIDDEN SEXP do_RNGkind (SEXP call, SEXP op, SEXP args, SEXP env)
+HIDDEN SEXP do_RNGkind (SEXP call, SEXP op, SEXP args, SEXP env)
 {
     SEXP ans, rng, norm, sample;
 
@@ -563,7 +560,7 @@ RHIDDEN SEXP do_RNGkind (SEXP call, SEXP op, SEXP args, SEXP env)
 }
 
 
-RHIDDEN SEXP do_setseed (SEXP call, SEXP op, SEXP args, SEXP env)
+HIDDEN SEXP do_setseed (SEXP call, SEXP op, SEXP args, SEXP env)
 {
     SEXP skind, nkind, sampkind;
     int seed;

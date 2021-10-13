@@ -19,10 +19,6 @@
  *  https://www.R-project.org/Licenses/
  */
 
-/** @file dotcode.cpp
- *
- */
-
 #ifdef HAVE_CONFIG_H
 #include <config.h>
 #endif
@@ -196,7 +192,7 @@ static void checkValidSymbolId(SEXP op, SEXP call, DL_FUNC *fun,
     return; /* not reached */
 }
 
-RHIDDEN
+HIDDEN
 DL_FUNC R_dotCallFn(SEXP op, SEXP call, int nargs)
 {
 	R_RegisteredNativeSymbol symbol = {R_CALL_SYM, {nullptr}, nullptr};
@@ -487,7 +483,7 @@ static SEXP enctrim(SEXP args)
 	return args;
 }
 
-RHIDDEN SEXP do_isloaded(SEXP call, SEXP op, SEXP args, SEXP env)
+HIDDEN SEXP do_isloaded(SEXP call, SEXP op, SEXP args, SEXP env)
 {
 	const char *sym, *type = "", *pkg = "";
 	int val = 1, nargs = length(args);
@@ -551,7 +547,7 @@ static SEXP check_retval(SEXP call, SEXP val)
 	return val;
 }
 
-RHIDDEN SEXP do_External(SEXP call, SEXP op, SEXP args, SEXP env)
+HIDDEN SEXP do_External(SEXP call, SEXP op, SEXP args, SEXP env)
 {
     DL_FUNC ofun = nullptr;
     SEXP retval;
@@ -596,7 +592,7 @@ using VarFun = SEXP (*)(...);
 using VarFun = DL_FUNC;
 #endif
 
-RHIDDEN SEXP R_doDotCall(DL_FUNC ofun, int nargs, SEXP *cargs,
+HIDDEN SEXP R_doDotCall(DL_FUNC ofun, int nargs, SEXP *cargs,
 						SEXP call)
 {
 	VarFun fun = nullptr;
@@ -637,7 +633,7 @@ cargs[N]
 }
 
 /* .Call(name, <args>) */
-RHIDDEN SEXP do_dotcall(SEXP call, SEXP op, SEXP args, SEXP env)
+HIDDEN SEXP do_dotcall(SEXP call, SEXP op, SEXP args, SEXP env)
 {
     DL_FUNC ofun = nullptr;
     SEXP retval, cargs[MAX_ARGS], pargs;
@@ -730,7 +726,7 @@ RHIDDEN SEXP do_dotcall(SEXP call, SEXP op, SEXP args, SEXP env)
 
 #include <R_ext/GraphicsEngine.h>
 
-RHIDDEN SEXP do_Externalgr(SEXP call, SEXP op, SEXP args, SEXP env)
+HIDDEN SEXP do_Externalgr(SEXP call, SEXP op, SEXP args, SEXP env)
 {
     SEXP retval;
     pGEDevDesc dd = GEcurrentDevice();
@@ -761,7 +757,7 @@ RHIDDEN SEXP do_Externalgr(SEXP call, SEXP op, SEXP args, SEXP env)
     return retval;
 }
 
-RHIDDEN SEXP do_dotcallgr(SEXP call, SEXP op, SEXP args, SEXP env)
+HIDDEN SEXP do_dotcallgr(SEXP call, SEXP op, SEXP args, SEXP env)
 {
     SEXP retval;
     pGEDevDesc dd = GEcurrentDevice();
@@ -887,7 +883,7 @@ static DL_FUNC R_FindNativeSymbolFromDLL(char *name, DllReference *dll,
 static constexpr int FILL = 0xee;
 static constexpr int NG = 64;
 
-RHIDDEN SEXP do_dotCode(SEXP call, SEXP op, SEXP args, SEXP env)
+HIDDEN SEXP do_dotCode(SEXP call, SEXP op, SEXP args, SEXP env)
 {
     void **cargs, **cargs0 = nullptr /* -Wall */;
     int naok, na, nargs, Fort;

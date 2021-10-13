@@ -18,9 +18,6 @@
  *  https://www.R-project.org/Licenses/
  */
 
-/** @file builtin.cpp
- *
- */
 
 #ifdef HAVE_CONFIG_H
 #include <config.h>
@@ -50,7 +47,7 @@
 using namespace R;
 using namespace CXXR;
 
-RHIDDEN
+HIDDEN
 R_xlen_t R::asVecSize(SEXP x)
 {
     if (isVectorAtomic(x) && LENGTH(x) >= 1) {
@@ -84,7 +81,7 @@ R_xlen_t R::asVecSize(SEXP x)
     return -999;  /* which gives error in the caller */
 }
 
-RHIDDEN SEXP do_delayed(SEXP call, SEXP op, SEXP args, SEXP rho)
+HIDDEN SEXP do_delayed(SEXP call, SEXP op, SEXP args, SEXP rho)
 {
     SEXP name = R_NilValue /* -Wall */, expr, eenv, aenv;
     checkArity(op, args);
@@ -119,7 +116,7 @@ RHIDDEN SEXP do_delayed(SEXP call, SEXP op, SEXP args, SEXP rho)
 }
 
 /* makeLazy(names, values, expr, eenv, aenv) */
-RHIDDEN SEXP do_makelazy(SEXP call, SEXP op, SEXP args, SEXP rho)
+HIDDEN SEXP do_makelazy(SEXP call, SEXP op, SEXP args, SEXP rho)
 {
     SEXP names, values, val, expr, eenv, aenv, expr0;
     R_xlen_t i;
@@ -147,7 +144,7 @@ RHIDDEN SEXP do_makelazy(SEXP call, SEXP op, SEXP args, SEXP rho)
 }
 
 /* This is a primitive SPECIALSXP */
-RHIDDEN SEXP do_onexit(SEXP call, SEXP op, SEXP args, SEXP rho)
+HIDDEN SEXP do_onexit(SEXP call, SEXP op, SEXP args, SEXP rho)
 {
     RCNTXT *cptr;
     SEXP code, oldcode, argList;
@@ -209,7 +206,7 @@ RHIDDEN SEXP do_onexit(SEXP call, SEXP op, SEXP args, SEXP rho)
     return R_NilValue;
 }
 
-RHIDDEN SEXP do_args(SEXP call, SEXP op, SEXP args, SEXP rho)
+HIDDEN SEXP do_args(SEXP call, SEXP op, SEXP args, SEXP rho)
 {
     SEXP s;
 
@@ -257,7 +254,7 @@ RHIDDEN SEXP do_args(SEXP call, SEXP op, SEXP args, SEXP rho)
     return R_NilValue;
 }
 
-RHIDDEN SEXP do_formals(SEXP call, SEXP op, SEXP args, SEXP rho)
+HIDDEN SEXP do_formals(SEXP call, SEXP op, SEXP args, SEXP rho)
 {
 	checkArity(op, args);
 	if (TYPEOF(CAR(args)) == CLOSXP)
@@ -274,7 +271,7 @@ RHIDDEN SEXP do_formals(SEXP call, SEXP op, SEXP args, SEXP rho)
 	}
 }
 
-RHIDDEN SEXP do_body(SEXP call, SEXP op, SEXP args, SEXP rho)
+HIDDEN SEXP do_body(SEXP call, SEXP op, SEXP args, SEXP rho)
 {
 	checkArity(op, args);
 	if (TYPEOF(CAR(args)) == CLOSXP)
@@ -291,7 +288,7 @@ RHIDDEN SEXP do_body(SEXP call, SEXP op, SEXP args, SEXP rho)
 	}
 }
 
-RHIDDEN SEXP do_bodyCode(SEXP call, SEXP op, SEXP args, SEXP rho)
+HIDDEN SEXP do_bodyCode(SEXP call, SEXP op, SEXP args, SEXP rho)
 {
 	checkArity(op, args);
 	if (TYPEOF(CAR(args)) == CLOSXP)
@@ -310,7 +307,7 @@ inline static SEXP simple_as_environment(SEXP arg)
 	return (IS_S4_OBJECT(arg) && (TYPEOF(arg) == S4SXP) ? R_getS4DataSlot(arg, ENVSXP) : arg);
 }
 
-RHIDDEN SEXP do_envir(SEXP call, SEXP op, SEXP args, SEXP rho)
+HIDDEN SEXP do_envir(SEXP call, SEXP op, SEXP args, SEXP rho)
 {
 	checkArity(op, args);
 	if (TYPEOF(CAR(args)) == CLOSXP)
@@ -321,7 +318,7 @@ RHIDDEN SEXP do_envir(SEXP call, SEXP op, SEXP args, SEXP rho)
 		return getAttrib(CAR(args), R_DotEnvSymbol);
 }
 
-RHIDDEN SEXP do_envirgets(SEXP call, SEXP op, SEXP args, SEXP rho)
+HIDDEN SEXP do_envirgets(SEXP call, SEXP op, SEXP args, SEXP rho)
 {
     SEXP env, s = CAR(args);
 
@@ -358,7 +355,7 @@ RHIDDEN SEXP do_envirgets(SEXP call, SEXP op, SEXP args, SEXP rho)
  *
  * @return a newly created environment()
  */
-RHIDDEN SEXP do_newenv(SEXP call, SEXP op, SEXP args, SEXP rho)
+HIDDEN SEXP do_newenv(SEXP call, SEXP op, SEXP args, SEXP rho)
 {
     SEXP enclos;
     int hash, size = 0;
@@ -384,7 +381,7 @@ RHIDDEN SEXP do_newenv(SEXP call, SEXP op, SEXP args, SEXP rho)
     return R_NewEnv(enclos, hash, size);
 }
 
-RHIDDEN SEXP do_parentenv(SEXP call, SEXP op, SEXP args, SEXP rho)
+HIDDEN SEXP do_parentenv(SEXP call, SEXP op, SEXP args, SEXP rho)
 {
     checkArity(op, args);
     SEXP arg = CAR(args);
@@ -415,7 +412,7 @@ static bool R_IsImportsEnv(SEXP env)
 	return false;
 }
 
-RHIDDEN SEXP do_parentenvgets(SEXP call, SEXP op, SEXP args, SEXP rho)
+HIDDEN SEXP do_parentenvgets(SEXP call, SEXP op, SEXP args, SEXP rho)
 {
     SEXP env, parent;
     checkArity(op, args);
@@ -448,7 +445,7 @@ RHIDDEN SEXP do_parentenvgets(SEXP call, SEXP op, SEXP args, SEXP rho)
     return CAR(args);
 }
 
-RHIDDEN SEXP do_envirName(SEXP call, SEXP op, SEXP args, SEXP rho)
+HIDDEN SEXP do_envirName(SEXP call, SEXP op, SEXP args, SEXP rho)
 {
     SEXP env = CAR(args), ans=mkString(""), res;
 
@@ -567,7 +564,7 @@ static void cat_cleanup(void *data)
 #endif
 }
 
-RHIDDEN SEXP do_cat(SEXP call, SEXP op, SEXP args, SEXP rho)
+HIDDEN SEXP do_cat(SEXP call, SEXP op, SEXP args, SEXP rho)
 {
     cat_info ci;
     RCNTXT cntxt;
@@ -730,7 +727,7 @@ RHIDDEN SEXP do_cat(SEXP call, SEXP op, SEXP args, SEXP rho)
     return R_NilValue;
 }
 
-RHIDDEN SEXP do_makelist(SEXP call, SEXP op, SEXP args, SEXP rho)
+HIDDEN SEXP do_makelist(SEXP call, SEXP op, SEXP args, SEXP rho)
 {
     int n, havenames;
     /* compute number of args and check for names */
@@ -765,7 +762,7 @@ RHIDDEN SEXP do_makelist(SEXP call, SEXP op, SEXP args, SEXP rho)
 }
 
 /* This is a primitive SPECIALSXP */
-RHIDDEN SEXP do_expression(SEXP call, SEXP op, SEXP args, SEXP rho)
+HIDDEN SEXP do_expression(SEXP call, SEXP op, SEXP args, SEXP rho)
 {
     SEXP a, ans, nms;
     int i, n, named;
@@ -799,7 +796,7 @@ RHIDDEN SEXP do_expression(SEXP call, SEXP op, SEXP args, SEXP rho)
 }
 
 /* vector(mode="logical", length=0) */
-RHIDDEN SEXP do_makevector(SEXP call, SEXP op, SEXP args, SEXP rho)
+HIDDEN SEXP do_makevector(SEXP call, SEXP op, SEXP args, SEXP rho)
 {
     R_xlen_t len;
     SEXP s;
@@ -954,7 +951,7 @@ SEXP Rf_lengthgets(SEXP x, R_len_t len)
 }
 
 
-RHIDDEN SEXP do_lengthgets(SEXP call, SEXP op, SEXP args, SEXP rho)
+HIDDEN SEXP do_lengthgets(SEXP call, SEXP op, SEXP args, SEXP rho)
 {
     SEXP x, ans;
 
@@ -1050,7 +1047,7 @@ static SEXP setDflt(SEXP arg, SEXP dflt)
 */
 
 
-RHIDDEN SEXP do_switch(SEXP call, SEXP op, SEXP args, SEXP rho)
+HIDDEN SEXP do_switch(SEXP call, SEXP op, SEXP args, SEXP rho)
 {
     int argval, nargs = length(args);
     SEXP x, y, z, w, ans, dflt = nullptr;

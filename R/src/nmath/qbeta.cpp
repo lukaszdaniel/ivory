@@ -106,7 +106,7 @@ constexpr double const3 = 0.99229;
 constexpr double const4 = 0.04481;
 
 // Returns both Rf_qbeta() and its "mirror" 1-Rf_qbeta(). Useful notably when Rf_qbeta() ~= 1
-RHIDDEN void qbeta_raw(double alpha, double p, double q, int lower_tail, int log_p,
+HIDDEN void qbeta_raw(double alpha, double p, double q, int lower_tail, int log_p,
 	  int swap_01, // {TRUE, NA, FALSE}: if NA, algorithm decides swap_tail
 	  double log_q_cut, /* if == Inf: return log(Rf_qbeta(..));
 			       otherwise, if finite: the bound for

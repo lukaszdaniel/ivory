@@ -142,26 +142,22 @@ static double R_ValueOfNA(void)
 	return x.value;
 }
 
+/* is a value known to be a NaN also an R NA? */
+HIDDEN int R::R_NaN_is_R_NA(double x)
+{
+    ieee_double y;
+    y.value = x;
+    return (y.word[lw] == 1954);
+}
+
 int R_IsNA(double x)
 {
-	if (isnan(x))
-	{
-		ieee_double y;
-		y.value = x;
-		return (y.word[lw] == 1954);
-	}
-	return 0;
+    return isnan(x) && R_NaN_is_R_NA(x);
 }
 
 int R_IsNaN(double x)
 {
-	if (isnan(x))
-	{
-		ieee_double y;
-		y.value = x;
-		return (y.word[lw] != 1954);
-	}
-	return 0;
+    return isnan(x) && ! R_NaN_is_R_NA(x);
 }
 
 /* ISNAN uses isnan, which is undefined by C++ headers
@@ -185,7 +181,7 @@ int R_finite(double x)
 
 /* Arithmetic Initialization */
 
-RHIDDEN void R::InitArithmetic()
+HIDDEN void R::InitArithmetic()
 {
     R_NaInt = std::numeric_limits<int>::min();
     R_NaReal = R_ValueOfNA();
@@ -439,7 +435,7 @@ inline static SEXP ScalarValue2(SEXP x, SEXP y)
 
 /* Unary and Binary Operators */
 
-RHIDDEN SEXP do_arith(SEXP call, SEXP op, SEXP args, SEXP env)
+HIDDEN SEXP do_arith(SEXP call, SEXP op, SEXP args, SEXP env)
 {
     SEXP ans, arg1, arg2;
     int argc;
@@ -585,7 +581,7 @@ RHIDDEN SEXP do_arith(SEXP call, SEXP op, SEXP args, SEXP env)
 		}                                                                         \
 	} while (0)
 
-RHIDDEN SEXP R_binary(SEXP call, SEXP op, SEXP x, SEXP y)
+HIDDEN SEXP R_binary(SEXP call, SEXP op, SEXP x, SEXP y)
 {
     Rboolean xattr, yattr, xarray, yarray, xts, yts, xS4, yS4;
     PROTECT_INDEX xpi, ypi;
@@ -902,7 +898,7 @@ namespace
 	}
 } // anonymous namespace
 
-RHIDDEN SEXP R_unary(SEXP call, SEXP op, SEXP s1)
+HIDDEN SEXP R_unary(SEXP call, SEXP op, SEXP s1)
 {
 	ARITHOP_TYPE operation = ARITHOP_TYPE(PRIMVAL(op));
 	switch (TYPEOF(s1))
@@ -1536,7 +1532,7 @@ static SEXP math1(SEXP sa, double(*f)(double), SEXP lcall)
     return sy;
 }
 
-RHIDDEN SEXP do_math1(SEXP call, SEXP op, SEXP args, SEXP env)
+HIDDEN SEXP do_math1(SEXP call, SEXP op, SEXP args, SEXP env)
 {
     SEXP s;
 
@@ -1601,7 +1597,7 @@ RHIDDEN SEXP do_math1(SEXP call, SEXP op, SEXP args, SEXP env)
 }
 
 /* methods are allowed to have more than one arg */
-RHIDDEN SEXP do_trunc(SEXP call, SEXP op, SEXP args, SEXP env)
+HIDDEN SEXP do_trunc(SEXP call, SEXP op, SEXP args, SEXP env)
 {
 	SEXP s;
 	if (DispatchGroup("Math", call, op, args, env, &s))
@@ -1618,7 +1614,7 @@ RHIDDEN SEXP do_trunc(SEXP call, SEXP op, SEXP args, SEXP env)
    both for integer/logical inputs and what it dispatches to for complex ones.
 */
 
-RHIDDEN SEXP do_abs(SEXP call, SEXP op, SEXP args, SEXP env)
+HIDDEN SEXP do_abs(SEXP call, SEXP op, SEXP args, SEXP env)
 {
     SEXP x, s = R_NilValue /* -Wall */;
 
@@ -1853,7 +1849,7 @@ static SEXP math2B(SEXP sa, SEXP sb, double (*f)(double, double, double *),
 #define Math2_2(A, FUN) math2_2(CAR(A), CADR(A), CADDR(A), CADDDR(A), FUN, call)
 #define Math2B(A, FUN) math2B(CAR(A), CADR(A), FUN, call);
 
-RHIDDEN SEXP do_math2(SEXP call, SEXP op, SEXP args, SEXP env)
+HIDDEN SEXP do_math2(SEXP call, SEXP op, SEXP args, SEXP env)
 {
     /* For .Internals, fix up call so errorcall() behaves like error(). */
     if (TYPEOF(CAR(call)) == SYMSXP && INTERNAL(CAR(call)) == op)
@@ -1913,7 +1909,7 @@ RHIDDEN SEXP do_math2(SEXP call, SEXP op, SEXP args, SEXP env)
 
 /* The S4 Math2 group, round and signif */
 /* This is a primitive SPECIALSXP with internal argument matching */
-RHIDDEN SEXP do_Math2(SEXP call, SEXP op, SEXP args, SEXP env)
+HIDDEN SEXP do_Math2(SEXP call, SEXP op, SEXP args, SEXP env)
 {
     SEXP res, call2;
     int n, nprotect = 2;
@@ -1969,7 +1965,7 @@ RHIDDEN SEXP do_Math2(SEXP call, SEXP op, SEXP args, SEXP env)
 }
 
 /* log{2,10}() builtins : */
-RHIDDEN SEXP do_log1arg(SEXP call, SEXP op, SEXP args, SEXP env)
+HIDDEN SEXP do_log1arg(SEXP call, SEXP op, SEXP args, SEXP env)
 {
     SEXP res, call2, args2, tmp = R_NilValue /* -Wall */;
 
@@ -2004,13 +2000,13 @@ RHIDDEN SEXP do_log1arg(SEXP call, SEXP op, SEXP args, SEXP env)
    matching. do_log_builtin is the BUILTIN version that expects
    evaluated arguments to be passed as 'args', expect that these may
    contain missing arguments.  */
-RHIDDEN SEXP do_log(SEXP call, SEXP op, SEXP args, SEXP env)
+HIDDEN SEXP do_log(SEXP call, SEXP op, SEXP args, SEXP env)
 {
     args = evalListKeepMissing(args, env);
     return  do_log_builtin(call, op, args, env);
 }
 
-RHIDDEN SEXP do_log_builtin(SEXP call, SEXP op, SEXP args, SEXP env)
+HIDDEN SEXP do_log_builtin(SEXP call, SEXP op, SEXP args, SEXP env)
 {
     PROTECT(args);
     int n = length(args);
@@ -2246,7 +2242,7 @@ static SEXP math3B(SEXP sa, SEXP sb, SEXP sc,
 #define Math3_2(A, FUN) math3_2(CAR(A), CADR(A), CADDR(A), CADDDR(A), CAD4R(A), FUN, call)
 #define Math3B(A, FUN) math3B(CAR(A), CADR(A), CADDR(A), FUN, call);
 
-RHIDDEN SEXP do_math3(SEXP call, SEXP op, SEXP args, SEXP env)
+HIDDEN SEXP do_math3(SEXP call, SEXP op, SEXP args, SEXP env)
 {
     checkArity(op, args);
 
@@ -2469,7 +2465,7 @@ static SEXP math4_2(SEXP sa, SEXP sb, SEXP sc, SEXP sd, SEXP sI, SEXP sJ,
 				CAD5R(A), FUN, call)
 
 
-RHIDDEN SEXP do_math4(SEXP call, SEXP op, SEXP args, SEXP env)
+HIDDEN SEXP do_math4(SEXP call, SEXP op, SEXP args, SEXP env)
 {
     checkArity(op, args);
 
@@ -2594,7 +2590,7 @@ static SEXP math5(SEXP sa, SEXP sb, SEXP sc, SEXP sd, SEXP se, double (*f)())
 #define Math5(A, FUN) \
 	math5(CAR(A), CADR(A), CADDR(A), CAD3R(A), CAD4R(A), FUN);
 
-RHIDDEN SEXP do_math5(SEXP call, SEXP op, SEXP args, SEXP env)
+HIDDEN SEXP do_math5(SEXP call, SEXP op, SEXP args, SEXP env)
 {
     checkArity(op, args);
     lcall = call;

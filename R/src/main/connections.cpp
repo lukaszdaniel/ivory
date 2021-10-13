@@ -69,10 +69,6 @@
    is 64-bit on Windows.
 */
 
-/** @file connections.cpp
- *
- */
-
 #ifdef HAVE_CONFIG_H
 #include <config.h>
 #endif
@@ -114,7 +110,7 @@ using namespace CXXR;
 
 namespace R
 {
-    RHIDDEN int R_OutputCon; /* used in printutils.cpp */
+    HIDDEN int R_OutputCon; /* used in printutils.cpp */
 }
 
 static void con_destroy(int i);
@@ -210,7 +206,7 @@ Rconnection getConnection(int n)
 
 }
 
-RHIDDEN int getActiveSink(int n)
+HIDDEN int getActiveSink(int n)
 {
     if (n >= R_SinkNumber || n < 0)
         return 0;
@@ -244,7 +240,7 @@ static void conFinalizer(SEXP ptr)
 }
 
 /* for use in REvprintf */
-RHIDDEN Rconnection getConnection_no_err(int n)
+HIDDEN Rconnection getConnection_no_err(int n)
 {
     Rconnection con = nullptr;
 
@@ -253,7 +249,6 @@ RHIDDEN Rconnection getConnection_no_err(int n)
         return nullptr;
     return con;
 }
-
 NORET static void set_iconv_error(Rconnection con, const char *from, const char *to) { con->set_iconv_error(from, to); }
 NORET void Rconn::set_iconv_error(const char *from, const char *to) const
 {
@@ -1451,7 +1446,7 @@ static Rconnection newfifo(const char *description, const char *mode)
     return newconn;
 }
 
-RHIDDEN SEXP do_fifo(SEXP call, SEXP op, SEXP args, SEXP env)
+HIDDEN SEXP do_fifo(SEXP call, SEXP op, SEXP args, SEXP env)
 {
 #if (defined(HAVE_MKFIFO) && defined(HAVE_FCNTL_H)) || defined(_WIN32)
     SEXP sfile, sopen, ans, classs, enc;
@@ -1614,7 +1609,7 @@ extern Rconnection
 newWpipe(const char *description, int enc, const char *mode);
 #endif
 
-RHIDDEN SEXP do_pipe(SEXP call, SEXP op, SEXP args, SEXP env)
+HIDDEN SEXP do_pipe(SEXP call, SEXP op, SEXP args, SEXP env)
 {
     SEXP scmd, sopen, ans, classs, enc;
     const char *file, *open;
@@ -2269,7 +2264,7 @@ static Rconnection newxzfile(const char *description, const char *mode, int type
 }
 
 /* op 0 is gzfile, 1 is bzfile, 2 is xv/lzma */
-RHIDDEN SEXP do_gzfile(SEXP call, SEXP op, SEXP args, SEXP env)
+HIDDEN SEXP do_gzfile(SEXP call, SEXP op, SEXP args, SEXP env)
 {
     SEXP sfile, sopen, ans, classs, enc;
     const char *file, *open;
@@ -2728,7 +2723,7 @@ static Rconnection newterminal(const char *description, const char *mode)
 }
 
 
-RHIDDEN SEXP do_stdin(SEXP call, SEXP op, SEXP args, SEXP env)
+HIDDEN SEXP do_stdin(SEXP call, SEXP op, SEXP args, SEXP env)
 {
     SEXP ans, classs;
     Rconnection con = getConnection(0);
@@ -2743,7 +2738,7 @@ RHIDDEN SEXP do_stdin(SEXP call, SEXP op, SEXP args, SEXP env)
     return ans;
 }
 
-RHIDDEN SEXP do_stdout(SEXP call, SEXP op, SEXP args, SEXP env)
+HIDDEN SEXP do_stdout(SEXP call, SEXP op, SEXP args, SEXP env)
 {
     SEXP ans, classs;
     Rconnection con = getConnection(R_OutputCon);
@@ -2759,7 +2754,7 @@ RHIDDEN SEXP do_stdout(SEXP call, SEXP op, SEXP args, SEXP env)
 }
 
 
-RHIDDEN SEXP do_stderr(SEXP call, SEXP op, SEXP args, SEXP env)
+HIDDEN SEXP do_stderr(SEXP call, SEXP op, SEXP args, SEXP env)
 {
     SEXP ans, classs;
     Rconnection con = getConnection(2);
@@ -2774,7 +2769,7 @@ RHIDDEN SEXP do_stderr(SEXP call, SEXP op, SEXP args, SEXP env)
     return ans;
 }
 
-RHIDDEN SEXP do_isatty(SEXP call, SEXP op, SEXP args, SEXP env)
+HIDDEN SEXP do_isatty(SEXP call, SEXP op, SEXP args, SEXP env)
 {
     int con;
     /* FIXME: is this correct for consoles? */
@@ -2957,7 +2952,7 @@ static Rconnection newraw(const char *description, SEXP raw, const char *mode)
 }
 
 // .Internal(rawConnection(deparse(substitute(object)), object, open))
-RHIDDEN SEXP do_rawconnection(SEXP call, SEXP op, SEXP args, SEXP env)
+HIDDEN SEXP do_rawconnection(SEXP call, SEXP op, SEXP args, SEXP env)
 {
     SEXP sfile, sraw, sopen, ans, classs;
     const char *desc, *open;
@@ -3008,7 +3003,7 @@ static Rconnection getConnectionCheck(SEXP rcon, const char *cls,
     return con;
 }
 
-RHIDDEN SEXP do_rawconvalue(SEXP call, SEXP op, SEXP args, SEXP env)
+HIDDEN SEXP do_rawconvalue(SEXP call, SEXP op, SEXP args, SEXP env)
 {
     Rconnection con = nullptr;
     Rrawconn thisconn;
@@ -3379,7 +3374,7 @@ static Rconnection newouttext(const char *description, SEXP stext,
 }
 
 // .Internal(textConnection(name, object, open, env, type))
-RHIDDEN SEXP do_textconnection(SEXP call, SEXP op, SEXP args, SEXP env)
+HIDDEN SEXP do_textconnection(SEXP call, SEXP op, SEXP args, SEXP env)
 {
     SEXP sdesc, stext, sopen, ans, classs, venv;
     const char *desc, *open;
@@ -3441,7 +3436,7 @@ RHIDDEN SEXP do_textconnection(SEXP call, SEXP op, SEXP args, SEXP env)
     return ans;
 }
 
-RHIDDEN SEXP do_textconvalue(SEXP call, SEXP op, SEXP args, SEXP env)
+HIDDEN SEXP do_textconvalue(SEXP call, SEXP op, SEXP args, SEXP env)
 {
     Rconnection con = nullptr;
     Routtextconn thisconn;
@@ -3459,7 +3454,7 @@ RHIDDEN SEXP do_textconvalue(SEXP call, SEXP op, SEXP args, SEXP env)
 
 /* socketConnection(host, port, server, blocking, open, encoding, timeout, options) */
 /* socketAccept(socket, blocking, open, encoding, timeout, options) */
-RHIDDEN SEXP do_sockconn(SEXP call, SEXP op, SEXP args, SEXP env)
+HIDDEN SEXP do_sockconn(SEXP call, SEXP op, SEXP args, SEXP env)
 {
     SEXP scmd, sopen, ans, concl, enc;
     const char *host, *open;
@@ -3551,7 +3546,7 @@ RHIDDEN SEXP do_sockconn(SEXP call, SEXP op, SEXP args, SEXP env)
 
 /* .Internal(unz(paste(description, filename, sep = ":"),
  *               open, encoding)) */
-RHIDDEN SEXP do_unz(SEXP call, SEXP op, SEXP args, SEXP env)
+HIDDEN SEXP do_unz(SEXP call, SEXP op, SEXP args, SEXP env)
 {
     SEXP sfile, sopen, ans, classs, enc;
     const char *file, *open;
@@ -3604,7 +3599,7 @@ RHIDDEN SEXP do_unz(SEXP call, SEXP op, SEXP args, SEXP env)
 
 /* -------------- open, close, seek, truncate, flush ------------------ */
 
-RHIDDEN SEXP do_open(SEXP call, SEXP op, SEXP args, SEXP env)
+HIDDEN SEXP do_open(SEXP call, SEXP op, SEXP args, SEXP env)
 {
     int i, block;
     Rconnection con=nullptr;
@@ -3639,7 +3634,7 @@ RHIDDEN SEXP do_open(SEXP call, SEXP op, SEXP args, SEXP env)
     return R_NilValue;
 }
 
-RHIDDEN SEXP do_isopen(SEXP call, SEXP op, SEXP args, SEXP env)
+HIDDEN SEXP do_isopen(SEXP call, SEXP op, SEXP args, SEXP env)
 {
     Rconnection con;
     int rw, res;
@@ -3657,7 +3652,7 @@ RHIDDEN SEXP do_isopen(SEXP call, SEXP op, SEXP args, SEXP env)
     return ScalarLogical(res);
 }
 
-RHIDDEN SEXP do_isincomplete(SEXP call, SEXP op, SEXP args, SEXP env)
+HIDDEN SEXP do_isincomplete(SEXP call, SEXP op, SEXP args, SEXP env)
 {
     Rconnection con;
 
@@ -3668,7 +3663,7 @@ RHIDDEN SEXP do_isincomplete(SEXP call, SEXP op, SEXP args, SEXP env)
     return ScalarLogical(con->incomplete != FALSE);
 }
 
-RHIDDEN SEXP do_isseekable(SEXP call, SEXP op, SEXP args, SEXP env)
+HIDDEN SEXP do_isseekable(SEXP call, SEXP op, SEXP args, SEXP env)
 {
     Rconnection con;
 
@@ -3753,7 +3748,7 @@ static void con_destroy(int i)
 }
 
 
-RHIDDEN SEXP do_close(SEXP call, SEXP op, SEXP args, SEXP env)
+HIDDEN SEXP do_close(SEXP call, SEXP op, SEXP args, SEXP env)
 {
     int i, j;
 
@@ -3781,7 +3776,7 @@ static double Rconn_seek(Rconnection con, double where, int origin, int rw) {
 }
 
 /* seek(con, where = numeric(), origin = "start", rw = "") */
-RHIDDEN SEXP do_seek(SEXP call, SEXP op, SEXP args, SEXP env)
+HIDDEN SEXP do_seek(SEXP call, SEXP op, SEXP args, SEXP env)
 {
     int origin, rw;
     Rconnection con = nullptr;
@@ -3805,7 +3800,7 @@ RHIDDEN SEXP do_seek(SEXP call, SEXP op, SEXP args, SEXP env)
 }
 
 /* truncate(con) */
-RHIDDEN SEXP do_truncate(SEXP call, SEXP op, SEXP args, SEXP env)
+HIDDEN SEXP do_truncate(SEXP call, SEXP op, SEXP args, SEXP env)
 {
     Rconnection con = nullptr;
 
@@ -3817,7 +3812,7 @@ RHIDDEN SEXP do_truncate(SEXP call, SEXP op, SEXP args, SEXP env)
     return R_NilValue;
 }
 
-RHIDDEN SEXP do_flush(SEXP call, SEXP op, SEXP args, SEXP env)
+HIDDEN SEXP do_flush(SEXP call, SEXP op, SEXP args, SEXP env)
 {
     Rconnection con = nullptr;
 
@@ -3880,7 +3875,7 @@ int Rconn_ungetc(int c, Rconnection con)
 
 /* read one line (without trailing newline) from con and store it in buf */
 /* return number of characters read, -1 on EOF */
-RHIDDEN
+HIDDEN
 size_t Rconn_getline(Rconnection con, char *buf, size_t bufsize)
 {
     int c;
@@ -3932,7 +3927,7 @@ static void con_cleanup(void *data)
 
 /* readLines(con = stdin(), n = 1, ok = TRUE, warn = TRUE) */
 constexpr size_t BUF_SIZE = 1000;
-RHIDDEN SEXP do_readLines(SEXP call, SEXP op, SEXP args, SEXP env)
+HIDDEN SEXP do_readLines(SEXP call, SEXP op, SEXP args, SEXP env)
 {
     SEXP ans = R_NilValue, ans2;
     int ok, warn, skipNul, c;
@@ -4071,7 +4066,7 @@ no_more_lines:
 }
 
 /* writeLines(text, con = stdout(), sep = "\n", useBytes) */
-RHIDDEN SEXP do_writelines(SEXP call, SEXP op, SEXP args, SEXP env)
+HIDDEN SEXP do_writelines(SEXP call, SEXP op, SEXP args, SEXP env)
 {
     int con_num, useBytes;
     bool wasopen;
@@ -4220,7 +4215,7 @@ static SEXP rawOneString(Rbyte *bytes, R_xlen_t nbytes, R_xlen_t *np)
 /* readBin(con, what, n, swap) */
 constexpr int BLOCK = 8096;
 
-RHIDDEN SEXP do_readbin(SEXP call, SEXP op, SEXP args, SEXP env)
+HIDDEN SEXP do_readbin(SEXP call, SEXP op, SEXP args, SEXP env)
 {
     SEXP ans = R_NilValue, swhat;
     int size, signd, swap, sizedef = 4, mode = 1;
@@ -4479,7 +4474,7 @@ RHIDDEN SEXP do_readbin(SEXP call, SEXP op, SEXP args, SEXP env)
 }
 
 /* writeBin(object, con, size, swap, useBytes) */
-RHIDDEN SEXP do_writebin(SEXP call, SEXP op, SEXP args, SEXP env)
+HIDDEN SEXP do_writebin(SEXP call, SEXP op, SEXP args, SEXP env)
 {
     checkArity(op, args);
     SEXP object = CAR(args);
@@ -4813,7 +4808,7 @@ static SEXP rawFixedString(Rbyte *bytes, int len, int nbytes, int *np, int useBy
 
 
 /* readChar(con, nchars) */
-RHIDDEN SEXP do_readchar(SEXP call, SEXP op, SEXP args, SEXP env)
+HIDDEN SEXP do_readchar(SEXP call, SEXP op, SEXP args, SEXP env)
 {
     SEXP ans = R_NilValue, onechar, nchars;
     R_xlen_t i, n, m = 0;
@@ -4892,7 +4887,7 @@ RHIDDEN SEXP do_readchar(SEXP call, SEXP op, SEXP args, SEXP env)
 }
 
 /* writeChar(object, con, nchars, sep, useBytes) */
-RHIDDEN SEXP do_writechar(SEXP call, SEXP op, SEXP args, SEXP env)
+HIDDEN SEXP do_writechar(SEXP call, SEXP op, SEXP args, SEXP env)
 {
     SEXP object, nchars, sep, ans = R_NilValue, si;
     R_xlen_t i, n, len;
@@ -5097,7 +5092,7 @@ void Rf_con_pushback(Rconnection con, Rboolean newLine, char *line)
 }
 
 
-RHIDDEN SEXP do_pushback(SEXP call, SEXP op, SEXP args, SEXP env)
+HIDDEN SEXP do_pushback(SEXP call, SEXP op, SEXP args, SEXP env)
 {
     int i, n, nexists, newLine, type;
     Rconnection con = nullptr;
@@ -5144,7 +5139,7 @@ RHIDDEN SEXP do_pushback(SEXP call, SEXP op, SEXP args, SEXP env)
     return R_NilValue;
 }
 
-RHIDDEN SEXP do_pushbacklength(SEXP call, SEXP op, SEXP args, SEXP env)
+HIDDEN SEXP do_pushbacklength(SEXP call, SEXP op, SEXP args, SEXP env)
 {
     Rconnection con = nullptr;
 
@@ -5153,7 +5148,7 @@ RHIDDEN SEXP do_pushbacklength(SEXP call, SEXP op, SEXP args, SEXP env)
     return ScalarInteger(con->nPushBack);
 }
 
-RHIDDEN SEXP do_clearpushback(SEXP call, SEXP op, SEXP args, SEXP env)
+HIDDEN SEXP do_clearpushback(SEXP call, SEXP op, SEXP args, SEXP env)
 {
     Rconnection con = nullptr;
 
@@ -5228,12 +5223,12 @@ static Rboolean switch_or_tee_stdout(int icon, int closeOnExit, int tee)
 }
 
 /* This is only used by cat() */
-RHIDDEN Rboolean switch_stdout(int icon, int closeOnExit)
+HIDDEN Rboolean switch_stdout(int icon, int closeOnExit)
 {
   return switch_or_tee_stdout(icon, closeOnExit, 0);
 }
 
-RHIDDEN SEXP do_sink(SEXP call, SEXP op, SEXP args, SEXP rho)
+HIDDEN SEXP do_sink(SEXP call, SEXP op, SEXP args, SEXP rho)
 {
   int icon, closeOnExit, errcon, tee;
 
@@ -5266,7 +5261,7 @@ RHIDDEN SEXP do_sink(SEXP call, SEXP op, SEXP args, SEXP rho)
     return R_NilValue;
 }
 
-RHIDDEN SEXP do_sinknumber(SEXP call, SEXP op, SEXP args, SEXP rho)
+HIDDEN SEXP do_sinknumber(SEXP call, SEXP op, SEXP args, SEXP rho)
 {
     int errcon;
     checkArity(op, args);
@@ -5290,7 +5285,7 @@ void WinCheckUTF8(void)
 
 /* ------------------- admin functions  --------------------- */
 
-RHIDDEN void R::InitConnections()
+HIDDEN void R::InitConnections()
 {
     int i;
     Connections[0] = newterminal("stdin", "r");
@@ -5307,7 +5302,7 @@ RHIDDEN void R::InitConnections()
     SinkCons[0] = 1; R_ErrorCon = 2;
 }
 
-RHIDDEN SEXP do_getallconnections(SEXP call, SEXP op, SEXP args, SEXP env)
+HIDDEN SEXP do_getallconnections(SEXP call, SEXP op, SEXP args, SEXP env)
 {
     int i, j=0, n=0;
     SEXP ans;
@@ -5322,7 +5317,7 @@ RHIDDEN SEXP do_getallconnections(SEXP call, SEXP op, SEXP args, SEXP env)
     return ans;
 }
 
-RHIDDEN SEXP do_getconnection(SEXP call, SEXP op, SEXP args, SEXP env)
+HIDDEN SEXP do_getconnection(SEXP call, SEXP op, SEXP args, SEXP env)
 {
     SEXP ans, classs;
     int what;
@@ -5347,7 +5342,7 @@ RHIDDEN SEXP do_getconnection(SEXP call, SEXP op, SEXP args, SEXP env)
     return ans;
 }
 
-RHIDDEN SEXP do_sumconnection(SEXP call, SEXP op, SEXP args, SEXP env)
+HIDDEN SEXP do_sumconnection(SEXP call, SEXP op, SEXP args, SEXP env)
 {
     SEXP ans, names, tmp;
     Rconnection Rcon;
@@ -5392,7 +5387,7 @@ extern Rconnection R_newCurlUrl(const char *description, const char * const mode
 /* op = 0: .Internal( url(description, open, blocking, encoding, method, headers))
    op = 1: .Internal(file(description, open, blocking, encoding, method, raw))
 */
-RHIDDEN SEXP do_url(SEXP call, SEXP op, SEXP args, SEXP env)
+HIDDEN SEXP do_url(SEXP call, SEXP op, SEXP args, SEXP env)
 {
     SEXP scmd, sopen, ans, classs, enc, headers = R_NilValue;
 #ifdef _WIN32
@@ -5969,7 +5964,7 @@ static int gzcon_fgetc(Rconnection con)
 }
 
 /* gzcon(con, level, allowNonCompressed) */
-RHIDDEN SEXP do_gzcon(SEXP call, SEXP op, SEXP args, SEXP rho)
+HIDDEN SEXP do_gzcon(SEXP call, SEXP op, SEXP args, SEXP rho)
 {
     SEXP ans, classs;
     int icon, level, allow;
@@ -6083,7 +6078,7 @@ static unsigned int uiSwap(unsigned int x)
 
 /* These are all hidden and used only in serialize.cpp,
    so managing R_alloc stack is prudence. */
-RHIDDEN SEXP R_compress1(SEXP in)
+HIDDEN SEXP R_compress1(SEXP in)
 {
     const void *vmax = vmaxget();
     unsigned int inlen;
@@ -6107,7 +6102,7 @@ RHIDDEN SEXP R_compress1(SEXP in)
     return ans;
 }
 
-RHIDDEN SEXP R_decompress1(SEXP in, bool &err)
+HIDDEN SEXP R_decompress1(SEXP in, bool &err)
 {
     const void *vmax = vmaxget();
     uLong inlen, outlen;
@@ -6133,7 +6128,7 @@ RHIDDEN SEXP R_decompress1(SEXP in, bool &err)
     return ans;
 }
 
-RHIDDEN SEXP R_compress2(SEXP in)
+HIDDEN SEXP R_compress2(SEXP in)
 {
     const void *vmax = vmaxget();
     unsigned int inlen, outlen;
@@ -6165,7 +6160,7 @@ RHIDDEN SEXP R_compress2(SEXP in)
     return ans;
 }
 
-RHIDDEN SEXP R_decompress2(SEXP in, bool &err)
+HIDDEN SEXP R_decompress2(SEXP in, bool &err)
 {
     const void *vmax = vmaxget();
     unsigned int inlen, outlen;
@@ -6209,7 +6204,7 @@ RHIDDEN SEXP R_decompress2(SEXP in, bool &err)
 }
 
 
-RHIDDEN SEXP do_sockselect(SEXP call, SEXP op, SEXP args, SEXP rho)
+HIDDEN SEXP do_sockselect(SEXP call, SEXP op, SEXP args, SEXP rho)
 {
     Rboolean immediate = FALSE;
     int nsock, i;
@@ -6260,7 +6255,7 @@ RHIDDEN SEXP do_sockselect(SEXP call, SEXP op, SEXP args, SEXP rho)
     return val;
 }
 
-RHIDDEN SEXP do_serversocket(SEXP call, SEXP op, SEXP args, SEXP rho)
+HIDDEN SEXP do_serversocket(SEXP call, SEXP op, SEXP args, SEXP rho)
 {
     SEXP ans, connclass;
     int ncon, port;
@@ -6289,7 +6284,7 @@ RHIDDEN SEXP do_serversocket(SEXP call, SEXP op, SEXP args, SEXP rho)
 }
 
 /* socketTimeout(socket, timeout) */
-RHIDDEN SEXP do_socktimeout(SEXP call, SEXP op, SEXP args, SEXP rho)
+HIDDEN SEXP do_socktimeout(SEXP call, SEXP op, SEXP args, SEXP rho)
 {
     int tnew, told;
     Rsockconn scon;
@@ -6332,7 +6327,7 @@ static void init_filters(void)
     */
 }
 
-RHIDDEN SEXP R_compress3(SEXP in)
+HIDDEN SEXP R_compress3(SEXP in)
 {
     const void *vmax = vmaxget();
     unsigned int inlen, outlen;
@@ -6373,7 +6368,7 @@ RHIDDEN SEXP R_compress3(SEXP in)
     return ans;
 }
 
-RHIDDEN SEXP R_decompress3(SEXP in, bool &err)
+HIDDEN SEXP R_decompress3(SEXP in, bool &err)
 {
     const void *vmax = vmaxget();
     unsigned int inlen, outlen;
@@ -6437,7 +6432,7 @@ RHIDDEN SEXP R_decompress3(SEXP in, bool &err)
     return ans;
 }
 
-RHIDDEN SEXP do_memCompress(SEXP call, SEXP op, SEXP args, SEXP env)
+HIDDEN SEXP do_memCompress(SEXP call, SEXP op, SEXP args, SEXP env)
 {
     SEXP ans, from;
     int type, res;
@@ -6518,7 +6513,7 @@ RHIDDEN SEXP do_memCompress(SEXP call, SEXP op, SEXP args, SEXP env)
     return ans;
 }
 
-RHIDDEN SEXP do_memDecompress(SEXP call, SEXP op, SEXP args, SEXP env)
+HIDDEN SEXP do_memDecompress(SEXP call, SEXP op, SEXP args, SEXP env)
 {
     SEXP ans, from;
     int type, subtype = 0;

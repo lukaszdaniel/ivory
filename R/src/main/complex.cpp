@@ -19,11 +19,6 @@
  *  https://www.R-project.org/Licenses/
  */
 
-/** @file complex.cpp
- *
- * Implementation of complex functions.
- */
-
 #ifdef HAVE_CONFIG_H
 #include <config.h>
 #endif
@@ -84,7 +79,7 @@ using namespace R;
 constexpr R_xlen_t NINTERRUPT = 10000000;
 
 
-RHIDDEN SEXP complex_unary(ARITHOP_TYPE code, SEXP s1, SEXP call)
+HIDDEN SEXP complex_unary(ARITHOP_TYPE code, SEXP s1, SEXP call)
 {
     R_xlen_t i, n;
     SEXP ans;
@@ -183,7 +178,7 @@ static std::complex<double> mycpow (std::complex<double> X, std::complex<double>
 
 
 
-RHIDDEN SEXP complex_binary(ARITHOP_TYPE code, SEXP s1, SEXP s2)
+HIDDEN SEXP complex_binary(ARITHOP_TYPE code, SEXP s1, SEXP s2)
 {
     R_xlen_t i, i1, i2, n, n1, n2;
     SEXP ans;
@@ -256,7 +251,7 @@ RHIDDEN SEXP complex_binary(ARITHOP_TYPE code, SEXP s1, SEXP s2)
     return ans;
 }
 
-RHIDDEN SEXP do_cmathfuns(SEXP call, SEXP op, SEXP args, SEXP env)
+HIDDEN SEXP do_cmathfuns(SEXP call, SEXP op, SEXP args, SEXP env)
 {
     SEXP x, y = R_NilValue;	/* -Wall*/
     R_xlen_t i, n;
@@ -371,7 +366,7 @@ RHIDDEN SEXP do_cmathfuns(SEXP call, SEXP op, SEXP args, SEXP env)
 
 /* Implementing  signif(<complex>)  *and* used in format.cpp and printutils.cpp */
 constexpr int MAX_DIGITS = 22;
-RHIDDEN void z_prec_r(Rcomplex *r, const Rcomplex *x, double digits)
+HIDDEN void z_prec_r(Rcomplex *r, const Rcomplex *x, double digits)
 {
     // Implement    r <- signif(x, digits)
 
@@ -627,7 +622,7 @@ static std::complex<double> z_cosh(std::complex<double> z) { return std::cosh(z)
 static std::complex<double> z_sinh(std::complex<double> z) { return std::sinh(z); }
 static std::complex<double> z_tanh(std::complex<double> z) { return std::tanh(z); }
 
-RHIDDEN SEXP complex_math1(SEXP call, SEXP op, SEXP args, SEXP env)
+HIDDEN SEXP complex_math1(SEXP call, SEXP op, SEXP args, SEXP env)
 {
     SEXP x, y;
     R_xlen_t n;
@@ -714,7 +709,7 @@ static void z_atan2(Rcomplex *r, Rcomplex *csn, Rcomplex *ccs)
 	/* Complex Functions of Two Arguments */
 
 using cm2_fun = void (*)(Rcomplex *, Rcomplex *, Rcomplex *);
-RHIDDEN SEXP complex_math2(SEXP call, SEXP op, SEXP args, SEXP env)
+HIDDEN SEXP complex_math2(SEXP call, SEXP op, SEXP args, SEXP env)
 {
     R_xlen_t i, n, na, nb, ia, ib;
     Rcomplex ai, bi, *y;
@@ -773,7 +768,7 @@ RHIDDEN SEXP complex_math2(SEXP call, SEXP op, SEXP args, SEXP env)
     return sy;
 }
 
-RHIDDEN SEXP do_complex(SEXP call, SEXP op, SEXP args, SEXP rho)
+HIDDEN SEXP do_complex(SEXP call, SEXP op, SEXP args, SEXP rho)
 {
     /* complex(length, real, imaginary) */
     SEXP ans, re, im;
@@ -814,7 +809,7 @@ RHIDDEN SEXP do_complex(SEXP call, SEXP op, SEXP args, SEXP rho)
 static void R_cpolyroot(double *opr, double *opi, int *degree,
 			double *zeror, double *zeroi, Rboolean *fail);
 
-RHIDDEN SEXP do_polyroot(SEXP call, SEXP op, SEXP args, SEXP rho)
+HIDDEN SEXP do_polyroot(SEXP call, SEXP op, SEXP args, SEXP rho)
 {
     SEXP z, zr, zi, r, rr, ri;
     Rboolean fail;

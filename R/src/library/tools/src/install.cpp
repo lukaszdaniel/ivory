@@ -27,7 +27,6 @@
 #include <CXXR/StringVector.hpp>
 #include <Defn.h>
 #include "localization.h"
-
 #ifdef HAVE_SYS_TYPES_H
 #include <sys/types.h>
 #endif

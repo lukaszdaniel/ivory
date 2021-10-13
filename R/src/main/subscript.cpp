@@ -30,10 +30,6 @@
  *  arraySubscript()  -- for "[i,j,..." and "[<-..." in ./subset.cpp, ./subassign.cpp
  */
 
-/** @file subscript.cpp
- *
- */
-
 #ifdef HAVE_CONFIG_H
 #include <config.h>
 #endif
@@ -79,7 +75,7 @@ R_INLINE static int integerOneIndex(int i, R_xlen_t len, SEXP call)
 }
 
 /* Utility used (only in) do_subassign2_dflt(), i.e. "[[<-" in ./subassign.cpp : */
-RHIDDEN R_xlen_t R::OneIndex(SEXP x, SEXP s, R_xlen_t nx, int partial, SEXP *newname,
+HIDDEN R_xlen_t R::OneIndex(SEXP x, SEXP s, R_xlen_t nx, int partial, SEXP *newname,
 	 int pos, SEXP call)
 {
     SEXP names;
@@ -178,7 +174,7 @@ RHIDDEN R_xlen_t R::OneIndex(SEXP x, SEXP s, R_xlen_t nx, int partial, SEXP *new
 }
 
 /* used here and in subset.cpp and subassign.cpp */
-RHIDDEN R_xlen_t R::get1index(SEXP s, SEXP names, R_xlen_t len, int pok, int pos, SEXP call)
+HIDDEN R_xlen_t R::get1index(SEXP s, SEXP names, R_xlen_t len, int pok, int pos, SEXP call)
 {
 /* Get a single index for the [[ and [[<- operators.
    Checks that only one index is being selected.
@@ -312,7 +308,7 @@ RHIDDEN R_xlen_t R::get1index(SEXP s, SEXP names, R_xlen_t len, int pok, int pos
    level start to level stop-1.  ( 0...len-1 or 0..len-2 then len-1).
    For [[<- it needs to duplicate if substructure might be shared.
  */
-RHIDDEN SEXP R::vectorIndex(SEXP x, SEXP thesub, int start, int stop, int pok, SEXP call,
+HIDDEN SEXP R::vectorIndex(SEXP x, SEXP thesub, int start, int stop, int pok, SEXP call,
 	    bool dup)
 {
     int i;
@@ -378,7 +374,7 @@ RHIDDEN SEXP R::vectorIndex(SEXP x, SEXP thesub, int start, int stop, int pok, S
 */
 
 
-RHIDDEN SEXP R::mat2indsub(SEXP dims, SEXP s, SEXP call)
+HIDDEN SEXP R::mat2indsub(SEXP dims, SEXP s, SEXP call)
 {
     int nrs = nrows(s);
     R_xlen_t NR = nrs;
@@ -474,7 +470,7 @@ to an integer matrix by matching against the dimnames of x. NA values
 in any row of i propagate to the result.  Unmatched entries result in
 a subscript is out of bounds error.  */
 
-RHIDDEN SEXP R::strmat2intmat(SEXP s, SEXP dnamelist, SEXP call)
+HIDDEN SEXP R::strmat2intmat(SEXP s, SEXP dnamelist, SEXP call)
 {
     /* XXX: assumes all args are protected */
     int nr = nrows(s), i, j, v;
@@ -927,7 +923,7 @@ static SEXP stringSubscript(SEXP s, R_xlen_t ns, R_xlen_t nx, SEXP names,
     x is the array to be subscripted.
 */
 
-RHIDDEN SEXP int_arraySubscript(int dim, SEXP s, SEXP dims, SEXP x, SEXP call)
+HIDDEN SEXP int_arraySubscript(int dim, SEXP s, SEXP dims, SEXP x, SEXP call)
 {
     int nd, ns;
     R_xlen_t stretch = 0;
@@ -982,7 +978,7 @@ SEXP R::Rf_arraySubscript(int dim, SEXP s, SEXP dims, AttrGetter dng,
    otherwise, stretch returns the new required length for x
 */
 
-RHIDDEN SEXP R::makeSubscript(SEXP x, SEXP s, R_xlen_t &stretch, SEXP call)
+HIDDEN SEXP R::makeSubscript(SEXP x, SEXP s, R_xlen_t &stretch, SEXP call)
 {
     if (! (isVector(x) || isList(x) || isLanguage(x))) {
 	ECALL(call, _("subscripting on non-vector"));

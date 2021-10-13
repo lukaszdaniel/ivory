@@ -99,10 +99,6 @@
 * writing this note.  I guess it needs a bit more thought ...
 */
 
-/** @file deparse.cpp
- *
- */
-
 #ifdef HAVE_CONFIG_H
 #include <config.h>
 #endif
@@ -183,7 +179,7 @@ static size_t DEFAULT_Cutoff() {
 }
 
 // .Internal(deparse(expr, width.cutoff, backtick, .deparseOpts(control), nlines))
-RHIDDEN SEXP do_deparse(SEXP call, SEXP op, SEXP args, SEXP rho)
+HIDDEN SEXP do_deparse(SEXP call, SEXP op, SEXP args, SEXP rho)
 {
     checkArity(op, args);
 
@@ -242,7 +238,7 @@ void CXXR::DEPARSE(RObject *expr)
 }
 
 /* used for language objects in print() */
-RHIDDEN
+HIDDEN
 SEXP R::deparse1w(SEXP call, bool abbrev, int opts)
 {
     bool backtick = true;
@@ -377,7 +373,7 @@ SEXP R::deparse1line(SEXP call, bool abbrev)
 
 
 // called only from ./errors.cpp  for calls in warnings and errors :
-RHIDDEN SEXP R::deparse1s(SEXP call)
+HIDDEN SEXP R::deparse1s(SEXP call)
 {
    bool backtick = true;
    return
@@ -394,7 +390,7 @@ static void con_cleanup(void *data)
 }
 
 // .Internal(dput(x, file, .deparseOpts(control)))
-RHIDDEN SEXP do_dput(SEXP call, SEXP op, SEXP args, SEXP rho)
+HIDDEN SEXP do_dput(SEXP call, SEXP op, SEXP args, SEXP rho)
 {
     checkArity(op, args);
     SEXP tval = CAR(args);
@@ -448,7 +444,7 @@ RHIDDEN SEXP do_dput(SEXP call, SEXP op, SEXP args, SEXP rho)
 }
 
 // .Internal(dump(list, file, envir, opts, evaluate))
-RHIDDEN SEXP do_dump(SEXP call, SEXP op, SEXP args, SEXP rho)
+HIDDEN SEXP do_dump(SEXP call, SEXP op, SEXP args, SEXP rho)
 {
     checkArity(op, args);
     SEXP names = CAR(args),

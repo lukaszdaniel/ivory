@@ -61,7 +61,7 @@ YFLAGS=-l
 $(srcdir)/gramRd.cpp: @MAINTAINER_MODE_TRUE@ $(srcdir)/gramRd.y
 	@$(ECHO) "re-making gramRd.cpp"
 	$(YACC) $(YFLAGS) $(srcdir)/gramRd.y
-	$(SHELL) $(top_srcdir)/tools/move-if-change y.tab.c $(srcdir)/gramRd.cpp
+	$(SHELL) $(top_srcdir)/tools/move-if-change y.tab.c $(srcdir)/gramRd.cpp	
 # depend on gramRd.cpp to avoid race condition with parallel make
 $(srcdir)/gramLatex.cpp: @MAINTAINER_MODE_TRUE@ $(srcdir)/gramLatex.y $(srcdir)/gramRd.cpp
 	@$(ECHO) "re-making gramLatex.cpp"

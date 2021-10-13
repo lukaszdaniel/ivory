@@ -17,10 +17,6 @@
  *  https://www.R-project.org/Licenses/
  */
 
-/** @file raw.cpp
- *
- */
-
 #ifdef HAVE_CONFIG_H
 #include <config.h>
 #endif
@@ -38,7 +34,7 @@
 using namespace R;
 
 /* charToRaw works at byte level, ignores encoding */
-RHIDDEN SEXP do_charToRaw(SEXP call, SEXP op, SEXP args, SEXP env)
+HIDDEN SEXP do_charToRaw(SEXP call, SEXP op, SEXP args, SEXP env)
 {
     SEXP ans, x = CAR(args);
     int nc;
@@ -55,7 +51,7 @@ RHIDDEN SEXP do_charToRaw(SEXP call, SEXP op, SEXP args, SEXP env)
 }
 
 /* <UTF8>  rawToChar should work at byte level */
-RHIDDEN SEXP do_rawToChar(SEXP call, SEXP op, SEXP args, SEXP env)
+HIDDEN SEXP do_rawToChar(SEXP call, SEXP op, SEXP args, SEXP env)
 {
     SEXP ans, x = CAR(args);
 
@@ -90,7 +86,7 @@ RHIDDEN SEXP do_rawToChar(SEXP call, SEXP op, SEXP args, SEXP env)
 }
 
 
-RHIDDEN SEXP do_rawShift(SEXP call, SEXP op, SEXP args, SEXP env)
+HIDDEN SEXP do_rawShift(SEXP call, SEXP op, SEXP args, SEXP env)
 {
     checkArity(op, args);
 
@@ -112,7 +108,7 @@ RHIDDEN SEXP do_rawShift(SEXP call, SEXP op, SEXP args, SEXP env)
     return ans;
 }
 
-RHIDDEN SEXP do_rawToBits(SEXP call, SEXP op, SEXP args, SEXP env)
+HIDDEN SEXP do_rawToBits(SEXP call, SEXP op, SEXP args, SEXP env)
 {
     checkArity(op, args);
 
@@ -132,7 +128,7 @@ RHIDDEN SEXP do_rawToBits(SEXP call, SEXP op, SEXP args, SEXP env)
     return ans;
 }
 
-RHIDDEN SEXP do_intToBits(SEXP call, SEXP op, SEXP args, SEXP env)
+HIDDEN SEXP do_intToBits(SEXP call, SEXP op, SEXP args, SEXP env)
 {
     checkArity(op, args);
     SEXP x = PROTECT(coerceVector(CAR(args), INTSXP));
@@ -206,7 +202,7 @@ SEXP attribute_hidden do_numToBits(SEXP call, SEXP op, SEXP args, SEXP env)
 }
 
 
-RHIDDEN SEXP do_packBits(SEXP call, SEXP op, SEXP args, SEXP env)
+HIDDEN SEXP do_packBits(SEXP call, SEXP op, SEXP args, SEXP env)
 {
     checkArity(op, args);
     SEXP ans, x = CAR(args), stype = CADR(args);
@@ -330,7 +326,7 @@ int R::mbrtoint(int &w, const char *s)
     /* return -2; not reached */
 }
 
-RHIDDEN SEXP do_utf8ToInt(SEXP call, SEXP op, SEXP args, SEXP env)
+HIDDEN SEXP do_utf8ToInt(SEXP call, SEXP op, SEXP args, SEXP env)
 {
     SEXP ans, x = CAR(args);
     int tmp, used = 0; /* -Wall */
@@ -383,7 +379,7 @@ static size_t inttomb(char *s, const int wc)
 
 #include <R_ext/RS.h>  /* for Calloc/Free */
 
-RHIDDEN SEXP do_intToUtf8(SEXP call, SEXP op, SEXP args, SEXP env)
+HIDDEN SEXP do_intToUtf8(SEXP call, SEXP op, SEXP args, SEXP env)
 {
     SEXP ans, x;
     int multiple, s_pair;

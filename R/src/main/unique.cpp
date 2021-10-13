@@ -1,6 +1,6 @@
 /*
  *  R : A Computer Language for Statistical Data Analysis
- *  Copyright (C) 1997--2020  The R Core Team
+ *  Copyright (C) 1997--2021  The R Core Team
  *  Copyright (C) 1995, 1996  Robert Gentleman and Ross Ihaka
  *
  *  This program is free software; you can redistribute it and/or modify
@@ -19,10 +19,6 @@
  */
 
 /* This is currently restricted to vectors of length < 2^30 */
-
-/** @file unique.cpp
- *
- */
 
 #ifdef HAVE_CONFIG_H
 #include <config.h>
@@ -50,6 +46,24 @@
 
 using namespace R;
 using namespace CXXR;
+
+/* inline version of function R_NaN_is_R_NA defined in arithmetic.c */
+/* may not be needed if LTO is enabled */
+#define R_NaN_is_R_NA R_NaN_is_R_NA_inline
+static R_INLINE int R_NaN_is_R_NA_inline(double x)
+{
+#ifdef WORDS_BIGENDIAN
+    static const int lw = 1;
+#else  /* !WORDS_BIGENDIAN */
+    static const int lw = 0;
+#endif /* WORDS_BIGENDIAN */
+    union {
+	double value;
+	unsigned int word[2];
+    } y;
+    y.value = x;
+    return y.word[lw] == 1954;
+}
 
 static constexpr int NIL = -1;
 /* interval at which to check interrupts */
@@ -639,8 +653,6 @@ R_xlen_t sorted_real_count_NANs(SEXP x) {
 			v[ind] = FALSE;   \
 	} while (0)
 
-#define NAN_IS_R_NA(xptr) (memcmp(&NA_REAL, xptr, sizeof(double)) == 0)
-
 static SEXP sorted_Duplicated(SEXP x, Rboolean from_last, int nmax)
 {
     //  n guaranteed >= 2 from calling function (Duplicated)
@@ -698,7 +710,7 @@ static SEXP sorted_Duplicated(SEXP x, Rboolean from_last, int nmax)
 								  double, REAL, na_left, numnas, {           \
 									  for (R_xlen_t i = istart; icond; iter) \
 									  {                                      \
-										  if (NAN_IS_R_NA(xptr + i))         \
+										  if (R_NaN_is_R_NA(xptr[i]))         \
 										  {                                  \
 											  v[idx + i] = seen_na;          \
 											  seen_na = TRUE;                \
@@ -848,7 +860,7 @@ R_xlen_t sorted_any_duplicated(SEXP x, Rboolean from_last) {
 								  start, count, {                            \
 									  for (R_xlen_t i = istart; icond; iter) \
 									  {                                      \
-										  if (NAN_IS_R_NA(xptr + i))         \
+										  if (R_NaN_is_R_NA(xptr[i]))         \
 										  {                                  \
 											  if (seen_na)                   \
 											  {                              \
@@ -1048,7 +1060,7 @@ R_xlen_t Rf_any_duplicated3(SEXP x, SEXP incomp, Rboolean from_last)
    .Internal(       unique(x, incomparables, fromLast, nmax))  [op=1]
    .Internal(anyDuplicated(x, incomparables, fromLast      ))  [op=2]
 */
-RHIDDEN SEXP do_duplicated(SEXP call, SEXP op, SEXP args, SEXP env)
+HIDDEN SEXP do_duplicated(SEXP call, SEXP op, SEXP args, SEXP env)
 {
     SEXP x, dup, ans;
     R_xlen_t i, k, n;
@@ -1241,14 +1253,16 @@ static SEXP match_transform(SEXP s, SEXP env)
 {
     if(OBJECT(s)) {
 	if(inherits(s, "factor")) return asCharacterFactor(s);
-	else if(inherits(s, "POSIXlt")) { /* and maybe more classes in the future:
-					   * Call R's (generic)	 as.character(s) : */
+	/*
+	else if(inherits(s, "POSIXlt")) { // and maybe more classes in the future:
+					  // Call R's (generic) as.character(s): 
 	    SEXP call, r;
 	    PROTECT(call = lang2(R_AsCharacterSymbol, s));
 	    r = eval(call, env);
 	    UNPROTECT(1);
 	    return r;
 	}
+	*/
 	else {
 	    SEXP call, r;
 	    PROTECT(call = lang2(install("mtfrm"), s));
@@ -1386,6 +1400,7 @@ SEXP match5(SEXP itable, SEXP ix, int nmatch, SEXP incomp, SEXP env)
 	if (incomp) { PROTECT(incomp = coerceVector(incomp, type)); nprot++; }
 	data.nomatch = nmatch;
 	HashTableSetup(table, data, NA_INTEGER);
+	PROTECT(data.HashTable); nprot++;
 	if(type == STRSXP) {
 	    bool useBytes = false;
 	    bool useUTF8 = false;
@@ -1429,7 +1444,6 @@ SEXP match5(SEXP itable, SEXP ix, int nmatch, SEXP incomp, SEXP env)
 	    data.useUTF8 = useUTF8;
 	    data.useCache = useCache;
 	}
-	PROTECT(data.HashTable); nprot++;
 	DoHashing(table, data);
 	if (incomp) UndoHashing(incomp, table, data);
 	ans = HashLookup(table, x, data);
@@ -1451,7 +1465,7 @@ SEXP Rf_match(SEXP itable, SEXP ix, int nmatch)
 
 
 // .Internal(match(x, table, nomatch, incomparables)) :
-RHIDDEN SEXP do_match(SEXP call, SEXP op, SEXP args, SEXP env)
+HIDDEN SEXP do_match(SEXP call, SEXP op, SEXP args, SEXP env)
 {
     checkArity(op, args);
 
@@ -1484,7 +1498,7 @@ RHIDDEN SEXP do_match(SEXP call, SEXP op, SEXP args, SEXP env)
  * Empty strings are unmatched			      BDR 2000/2/16
  */
 
-RHIDDEN SEXP do_pmatch(SEXP call, SEXP op, SEXP args, SEXP env)
+HIDDEN SEXP do_pmatch(SEXP call, SEXP op, SEXP args, SEXP env)
 {
     SEXP ans, input, target;
     int mtch, n_target, mtch_count, dups_ok, no_match;
@@ -1630,7 +1644,7 @@ RHIDDEN SEXP do_pmatch(SEXP call, SEXP op, SEXP args, SEXP env)
 /* Partial Matching of Strings */
 /* Based on Therneau's charmatch. */
 
-RHIDDEN SEXP do_charmatch(SEXP call, SEXP op, SEXP args, SEXP env)
+HIDDEN SEXP do_charmatch(SEXP call, SEXP op, SEXP args, SEXP env)
 {
     SEXP ans, input, target;
     const char *ss, *st;
@@ -1800,7 +1814,7 @@ static SEXP subDots(SEXP rho)
 }
 
 
-RHIDDEN SEXP do_matchcall(SEXP call, SEXP op, SEXP args, SEXP env)
+HIDDEN SEXP do_matchcall(SEXP call, SEXP op, SEXP args, SEXP env)
 {
     SEXP formals, actuals, rlist;
     SEXP funcall, f, b, rval, sysp, t1, t2, tail;
@@ -2058,7 +2072,7 @@ static SEXP rowsum_df(SEXP x, SEXP g, SEXP uniqueg, SEXP snarm, SEXP rn)
     return ans;
 }
 
-RHIDDEN SEXP do_rowsum(SEXP call, SEXP op, SEXP args, SEXP env)
+HIDDEN SEXP do_rowsum(SEXP call, SEXP op, SEXP args, SEXP env)
 {
     checkArity(op, args);
     if(PRIMVAL(op) == 1)
@@ -2105,7 +2119,7 @@ static SEXP duplicated2(SEXP x, HashData &d)
     return ans;
 }
 
-RHIDDEN SEXP do_makeunique(SEXP call, SEXP op, SEXP args, SEXP env)
+HIDDEN SEXP do_makeunique(SEXP call, SEXP op, SEXP args, SEXP env)
 {
     SEXP names, sep, ans, dup, newx;
     int i, cnt, *cnts, dp;
@@ -2211,7 +2225,7 @@ SEXP R::Rf_csduplicated(SEXP x)
 #include <R_ext/Random.h>
 
 // sample.int(.) --> .Internal(sample2(n, size)) :
-RHIDDEN SEXP do_sample2(SEXP call, SEXP op, SEXP args, SEXP env)
+HIDDEN SEXP do_sample2(SEXP call, SEXP op, SEXP args, SEXP env)
 {
     checkArity(op, args);
     SEXP ans;

@@ -25,10 +25,6 @@
  *
  */
 
-/** @file devices.cpp
- *
- */
-
 /* This should be regarded as part of the graphics engine */
 
 #ifdef HAVE_CONFIG_H
@@ -524,7 +520,7 @@ GEDevDesc *GEcreateDevDesc(pDevDesc dev)
 }
 
 
-RHIDDEN void R::InitGraphics(void)
+HIDDEN void R::InitGraphics(void)
 {
     R_Devices[0] = &nullDevice;
     active[0] = true;

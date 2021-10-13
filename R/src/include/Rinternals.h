@@ -25,7 +25,7 @@
 /* This file is installed and available to packages, but only a small
    part of the contents is within the API.  See chapter 6 of 'Writing
    R Extensions'.
- */
+*/
 
 /** @file Rinternals.h
  * @brief (As described in 'Writing R Extensions'.)
@@ -70,6 +70,10 @@ extern "C" {
 #include <Rconfig.h>
 #endif
 
+#if (SIZEOF_SIZE_T > 4)
+#define LONG_VECTOR_SUPPORT
+#endif
+
 #ifndef TESTING_WRITE_BARRIER
 #define TESTING_WRITE_BARRIER
 #endif
@@ -91,6 +95,7 @@ extern "C" {
 /*  These exact numeric values are seldom used, but they are, e.g., in
  *  ../main/subassign.cpp, and they are serialized.
 */
+
 #include <CXXR/SEXPTYPE.hpp>
 
 
@@ -437,6 +442,7 @@ SEXP Rf_findFun(SEXP symbol, SEXP rho);
 SEXP Rf_findVar(SEXP symbol, SEXP rho);
 SEXP Rf_findVarInFrame(SEXP, SEXP);
 SEXP Rf_findVarInFrame3(SEXP, SEXP, Rboolean);
+Rboolean R_existsVarInFrame(SEXP, SEXP);
 void R_removeVarFromFrame(SEXP name, SEXP env);
 SEXP Rf_getAttrib(SEXP vec, SEXP name);
 SEXP Rf_GetArrayDimnames(SEXP);
@@ -752,7 +758,7 @@ int R_system(const char *);
 */
 Rboolean R_compute_identical(SEXP, SEXP, int);
 
-SEXP R_body_no_src(SEXP x); // body(x) without "srcref" etc, ../main/util.cpp
+SEXP R_body_no_src(SEXP x); // body(x) without "srcref" etc, ../main/utils.cpp
 
 /* C version of R's  indx <- order(..., na.last, decreasing) :
    e.g.  arglist = Rf_lang2(x,y)  or  Rf_lang3(x,y,z) */

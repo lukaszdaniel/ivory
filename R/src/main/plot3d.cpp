@@ -18,9 +18,6 @@
  *  https://www.R-project.org/Licenses/
  */
 
-/** @file plot3d.cpp
- *
- */
 
 #ifdef HAVE_CONFIG_H
 #include <config.h>

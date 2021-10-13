@@ -25,8 +25,8 @@ d32fef9c6d91a0f11bfbbf748e285688 *man/banking.Rd
 9c2e5de40b02248dc031e1583dafd217 *man/panel.qqmath.Rd
 06027f4595d22b2ba53e502646dd88da *man/rfs.Rd
 b572e826fdb410aa18525fa4eca8b1f3 *man/panel.xyplot.Rd
-41b44569a825fefa9d554d9dd9c74c3f *man/axis.default.Rd
-28f95db01779fb88e18fd9bc757ac4e1 *man/oneway.Rd
+abff15820149230efbbf7dc291d16dbb *man/axis.default.Rd
+a8738eee6c1c65628bf83b8202b18489 *man/oneway.Rd
 40f3906db75059b7b0c73f544e5bd671 *man/Rows.Rd
 637c4d16ebc7d78a3d198bb02f94bc30 *man/lset.Rd
 bb1565a3c0f5f1e253adb38c25a05505 *man/utilities.3d.Rd
@@ -36,7 +36,7 @@ bbf84d8515419329cd509f0ab22d2d75 *man/panel.violin.Rd
 3502ac7cf2616d1244b812c7f032941a *man/panel.bwplot.Rd
 50a56d80344353513a894f655ca399df *man/barley.Rd
 937f13a18fc84a224726faa3c54b868d *man/panel.spline.Rd
-283bca6b062295f2e82b46b49438762b *man/trellis.par.get.Rd
+1f0b3c7e87442ba01eaa4de984928aad *man/trellis.par.get.Rd
 a0837df59d69a24d7472c27b9dd4c68b *man/ethanol.Rd
 407edc0e2f468bcec46c713d426d5e68 *man/splom.Rd
 7111eae24d35f1320ee2d98546019588 *man/panel.superpose.Rd
@@ -46,9 +46,9 @@ ad572c902c1a8f150869a3545d3c5ef8 *man/panel.barchart.Rd
 7263731c253854e72a843d3b338a9fee *man/USMortality.Rd
 3c2625a2c55b6e4c81b6edb147772585 *man/panel.number.Rd
 2b4dc3cf2fd4956d684507e3461fec9a *man/panel.axis.Rd
-7852ba42b1bed6da21746fde616c5043 *man/latticeParseFormula.Rd
+513cbd02cf89f0b3b010c18aa24ec957 *man/latticeParseFormula.Rd
 e4080822d8415ba849846c83974a6bcb *man/print.trellis.Rd
-475808636848df6ceb845270fd3aa402 *man/make.groups.Rd
+6daec9a9f39ed0fe486f929e66b5957f *man/make.groups.Rd
 444c6597d7ac5b939b4454b1066d7cf1 *man/cloud.Rd
 06643aee5ed33e7164ee08bf33c92fec *man/level.colors.Rd
 607c7f3d20d1405143b985d0a9b49b9e *man/interaction.Rd
@@ -65,7 +65,7 @@ bf40296deef9af580ee4abec70d6936c *man/panel.dotplot.Rd
 7a213adbca84a3f559ef32a4faf904f4 *man/panel.levelplot.Rd
 19e5ab48e5f1506d30f04bf9596fbcaf *man/singer.Rd
 61f0cbe1d3b98afa10c9f854fd675840 *ChangeLog
-ee6a46b661239ae957f2a7e019a3826e *DESCRIPTION
+4a3f1e12dd5b8e242ac314550e8bfa3a *DESCRIPTION
 10e53072b7a7b604206cbe607f8b41d8 *po/R-fr.po
 799169ecc009326ca0f53399287a6c38 *po/R-ko.po
 3843cc783842fba99f4066e996261903 *po/R-de.po

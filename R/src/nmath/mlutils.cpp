@@ -109,7 +109,7 @@ double R_PosInf = ML_POSINF, R_NegInf = ML_NEGINF;
 
 #include <cstdio>
 #include <cstdarg>
-RHIDDEN void REprintf(const char *format, ...)
+HIDDEN void REprintf(const char *format, ...)
 {
     va_list(ap);
     va_start(ap, format);

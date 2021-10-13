@@ -45,7 +45,7 @@ Iterator macro to fill a matrix from a vector with re-use of vector
 void xcopyStringWithRecycle(SEXP dst, SEXP src, R_xlen_t dstart, R_xlen_t n, R_xlen_t nsrc);
 void xcopyVectorWithRecycle(SEXP dst, SEXP src, R_xlen_t dstart, R_xlen_t n, R_xlen_t nsrc);
 template <typename VALTYPE>
-RHIDDEN void xcopyWithRecycle(VALTYPE *dst, VALTYPE *src, R_xlen_t dstart, R_xlen_t n, R_xlen_t nsrc)
+HIDDEN void xcopyWithRecycle(VALTYPE *dst, VALTYPE *src, R_xlen_t dstart, R_xlen_t n, R_xlen_t nsrc)
 {
 
 	if (nsrc >= n)
@@ -75,7 +75,7 @@ RHIDDEN void xcopyWithRecycle(VALTYPE *dst, VALTYPE *src, R_xlen_t dstart, R_xle
 void xfillStringMatrixWithRecycle(SEXP dst, SEXP src, R_xlen_t dstart, R_xlen_t drows, R_xlen_t srows, R_xlen_t cols, R_xlen_t nsrc);
 void xfillVectorMatrixWithRecycle(SEXP dst, SEXP src, R_xlen_t dstart, R_xlen_t drows, R_xlen_t srows, R_xlen_t cols, R_xlen_t nsrc);
 template <typename VALTYPE>
-RHIDDEN void xfillMatrixWithRecycle(VALTYPE *dst, VALTYPE *src,
+HIDDEN void xfillMatrixWithRecycle(VALTYPE *dst, VALTYPE *src,
                                    R_xlen_t dstart, R_xlen_t drows, R_xlen_t srows,
                                    R_xlen_t cols, R_xlen_t nsrc)
 {

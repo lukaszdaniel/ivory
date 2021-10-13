@@ -2,10 +2,8 @@ include ../MkRules
 R_HOME = ../../..
 
 CFLAGS = -O3 -Wall -pedantic
-CXXFLAGS = -O3 -Wall -pedantic
 ifdef DEBUG
  CFLAGS += $(G_FLAG)
- CXXFLAGS += $(G_FLAG)
  LINKFLAGS =
  DLLFLAGS =
 else
@@ -112,12 +110,12 @@ Rfe.exe: Rfe.o ../rhome.o rcico.o
 
 RSetReg.exe: RSetReg.o ../rhome.o rcico.o
 
-Rscript.o: ../../unix/Rscript.cpp ../../include/Rversion.h
-	$(CXX) $(CXXFLAGS) -DBINDIR='"$(BINDIR)"' -I. -I../../include -DHAVE_CONFIG_H -c $< -o $@
+Rscript.o: ../../unix/Rscript.c ../../include/Rversion.h
+	$(CC) $(CFLAGS) -DBINDIR='"$(BINDIR)"' -I. -I../../include -DHAVE_CONFIG_H -c $< -o $@
 
 Rscript.exe: Rscript.o rsico.o 
 
-## Used only in writing etc/../Makeconf
+## Used only in writing etc/.../Makeconf
 Rpwd:
 	$(MAKE) -C ../../include -f Makefile.win version
 	$(MAKE) Rpwd.exe
@@ -133,8 +131,7 @@ clean:
 	$(RM) *.o *.obj *.exe *~ *.exp *.dll *.lib *.a *.d Makedeps
 
 CSOURCES = $(filter-out R.c rcmd.c rpwd.c rtest.c, $(wildcard *.c))
-CXXSOURCES = $(filter-out R.cpp rcmd.cpp rpwd.cpp rtest.cpp, $(wildcard *.cpp))
-DEPS = $(CSOURCES:.c=.d) $(CXX_SOURCES:.cpp=.d)
+DEPS = $(CSOURCES:.c=.d)
 
 makeMakedeps: $(DEPS)
 	@$(RM) Makedeps

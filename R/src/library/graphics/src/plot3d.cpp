@@ -1432,7 +1432,7 @@ static SEXP contour(SEXP x, int nx, SEXP y, int ny, SEXP z,
 
     double xend, yend;
     int i, ii, j, jj, dir;
-    unsigned int ns;
+	unsigned int ns;
     SEGP seglist, seg, s, start, end;
     double *xxx, *yyy;
 

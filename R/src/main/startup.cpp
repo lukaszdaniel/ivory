@@ -22,10 +22,6 @@
   See ../unix/system.txt for a description of some of these functions
 */
 
-/** @file startup.cpp
- *
- */
-
 #ifdef HAVE_CONFIG_H
 #include <config.h>
 #endif
@@ -49,19 +45,19 @@ using namespace R;
 SA_TYPE SaveAction = SA_SAVEASK;
 SA_TYPE RestoreAction = SA_RESTORE;
 static Rboolean LoadSiteFile = TRUE;
-RHIDDEN bool R::LoadInitFile = true; /* Used in R_OpenInitFile */
+HIDDEN bool R::LoadInitFile = true; /* Used in R_OpenInitFile */
 static Rboolean DebugInitFile = FALSE;
 
 /*
  *  INITIALIZATION AND TERMINATION ACTIONS
  */
 
-RHIDDEN void R::R_InitialData(void)
+HIDDEN void R::R_InitialData(void)
 {
     R_RestoreGlobalEnv();
 }
 
-RHIDDEN
+HIDDEN
 FILE *R::R_OpenLibraryFile(const char *file)
 {
     char buf[PATH_MAX];
@@ -72,7 +68,7 @@ FILE *R::R_OpenLibraryFile(const char *file)
     return fp;
 }
 
-RHIDDEN
+HIDDEN
 char *R::R_LibraryFileName(const char *file, char *buf, size_t bsize)
 {
     if (snprintf(buf, bsize, "%s/library/base/R/%s", R_Home, file) < 0)
@@ -80,7 +76,7 @@ char *R::R_LibraryFileName(const char *file, char *buf, size_t bsize)
     return buf;
 }
 
-RHIDDEN
+HIDDEN
 FILE *R_OpenSysInitFile(void)
 {
     char buf[PATH_MAX];
@@ -91,7 +87,7 @@ FILE *R_OpenSysInitFile(void)
     return fp;
 }
 
-RHIDDEN
+HIDDEN
 FILE *R_OpenSiteFile(void)
 {
     char buf[PATH_MAX];
@@ -126,7 +122,7 @@ static char workspace_name[1000] = ".RData";
 #else
 static char workspace_name[PATH_MAX] = ".RData";
 
-RHIDDEN
+HIDDEN
 void set_workspace_name(const char *fn)
 {
     strncpy(workspace_name, fn, PATH_MAX);
@@ -134,7 +130,7 @@ void set_workspace_name(const char *fn)
 }
 #endif
 
-RHIDDEN
+HIDDEN
 const char *get_workspace_name()
 {
     return workspace_name;

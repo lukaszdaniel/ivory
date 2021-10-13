@@ -19,7 +19,7 @@
 #include "nmath.h"
 #include "dpq.h"
 
-LDOUBLE RHIDDEN Rf_pnbeta_raw(double x, double o_x, double a, double b, double ncp)
+LDOUBLE HIDDEN Rf_pnbeta_raw(double x, double o_x, double a, double b, double ncp)
 {
     /* o_x  == 1 - x  but maybe more accurate */
 
@@ -81,7 +81,7 @@ LDOUBLE RHIDDEN Rf_pnbeta_raw(double x, double o_x, double a, double b, double n
     return ans;
 }
 
-RHIDDEN double Rf_pnbeta2(double x, double o_x, double a, double b, double ncp,
+HIDDEN double Rf_pnbeta2(double x, double o_x, double a, double b, double ncp,
 	/* o_x  == 1 - x  but maybe more accurate */
 	int lower_tail, int log_p)
 {

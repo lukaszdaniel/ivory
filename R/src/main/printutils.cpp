@@ -54,11 +54,6 @@
 /* if ESC_BARE_QUOTE is defined, " in an unquoted string is replaced
    by \".  " in a quoted string is always replaced by \". */
 
-/** @file printutils.cpp
- *
- * General remarks on Printing and the Encode.. utils.
- */
-
 #ifdef HAVE_CONFIG_H
 #include <config.h>
 #endif
@@ -99,7 +94,7 @@ using namespace CXXR;
 
 constexpr int BUFSIZE = 8192;  /* used by Rprintf etc */
 
-RHIDDEN
+HIDDEN
 R_size_t R::R_Decode2Long(char *p, int &ierr)
 {
     R_size_t v = strtol(p, &p, 10);
@@ -153,7 +148,7 @@ const char *Rf_EncodeInteger(int x, int w)
     return buff;
 }
 
-RHIDDEN
+HIDDEN
 const char *R::EncodeRaw(Rbyte x, const char *prefix)
 {
 	static char buff[10];
@@ -161,7 +156,7 @@ const char *R::EncodeRaw(Rbyte x, const char *prefix)
 	return buff;
 }
 
-RHIDDEN
+HIDDEN
 const char *R::Rf_EncodeEnvironment(SEXP x)
 {
     const void *vmax = vmaxget();
@@ -290,7 +285,7 @@ static const char *EncodeRealDrop0(double x, int w, int d, int e, const char *de
     return out;
 }
 
-RHIDDEN SEXP R::StringFromReal(double x, int &warn)
+HIDDEN SEXP R::StringFromReal(double x, int &warn)
 {
     int w, d, e;
     formatReal(&x, 1, &w, &d, &e, 0);
@@ -299,7 +294,7 @@ RHIDDEN SEXP R::StringFromReal(double x, int &warn)
 }
 
 
-RHIDDEN
+HIDDEN
 const char *R::EncodeReal2(double x, int w, int d, int e)
 {
     static char buff[NB];
@@ -393,7 +388,7 @@ const char *Rf_EncodeComplex(Rcomplex x, int wr, int dr, int er, int wi, int di,
 
    This supported embedded nuls when we had those.
  */
-RHIDDEN
+HIDDEN
 int Rstrwid(const char *str, int slen, cetype_t ienc, int quote)
 {
     const char *p = str;
@@ -525,7 +520,7 @@ int Rstrwid(const char *str, int slen, cetype_t ienc, int quote)
 }
 
 /* Match what EncodeString does with encodings */
-RHIDDEN int R::Rstrlen(SEXP s, int quote)
+HIDDEN int R::Rstrlen(SEXP s, int quote)
 {
 	cetype_t ienc = getCharCE(s);
 	if (ienc == CE_UTF8 || ienc == CE_BYTES)
@@ -547,7 +542,7 @@ RHIDDEN int R::Rstrlen(SEXP s, int quote)
    format().
  */
 
-RHIDDEN
+HIDDEN
 const char *R::EncodeString(SEXP s, int w, int quote, Rprt_adj justify)
 {
     int i, cnt;
@@ -660,10 +655,14 @@ const char *R::EncodeString(SEXP s, int w, int quote, Rprt_adj justify)
     if(quote) *q++ = (char) quote;
     if(mbcslocale || ienc == CE_UTF8) {
 	bool useUTF8 = (ienc == CE_UTF8);
+	Rboolean wchar_is_ucs_or_utf16 = TRUE;
 	mbstate_t mb_st;
 #ifndef __STDC_ISO_10646__
 	Rboolean Unicode_warning = FALSE;
 #endif
+# if !defined (__STDC_ISO_10646__) && !defined (Win32)
+	wchar_is_ucs_or_utf16 = FALSE;
+# endif
 	if(!useUTF8)  mbs_init(&mb_st);
 #ifdef _WIN32
 	else if(WinUTF8out) { memcpy(q, UTF8in, 3); q += 3; }
@@ -672,7 +671,10 @@ const char *R::EncodeString(SEXP s, int w, int quote, Rprt_adj justify)
 	    wchar_t wc;
 	    int res = (int)(useUTF8 ? utf8toucs(&wc, p):
 			    mbrtowc(&wc, p, R_MB_CUR_MAX, &mb_st));
-	    if(res >= 0) { /* res = 0 is a terminator */
+	    /* res = 0 is a terminator
+	     * some mbrtowc implementations return wc past end of UCS */
+	    if(res >= 0 &&
+	       ((0 <= wc && wc <= 0x10FFFF) || !wchar_is_ucs_or_utf16)) {
 		unsigned int k; /* not wint_t as it might be signed */
 		if (useUTF8 && IS_HIGH_SURROGATE(wc))
 		    k = utf8toucs32(wc, p);
@@ -872,7 +874,7 @@ const char *R::Rf_EncodeElement0(SEXP x, R_xlen_t indx, int quote, const char *d
    any subsequent call to EncodeChar/EncodeString may happen. Note that
    particularly it is NOT safe to pass the result of EncodeChar as 3rd
    argument to errorcall (errorcall_cpy can be used instead). */
-//RHIDDEN
+//HIDDEN
 const char *R::EncodeChar(SEXP x)
 {
     return EncodeString(x, 0, 0, Rprt_adj_left);
@@ -911,7 +913,7 @@ int vasprintf(char **strp, const char *fmt, va_list ap)
 
 constexpr int R_BUFSIZE = BUFSIZE;
 // similar to dummy_vfprintf in connections.cpp
-RHIDDEN
+HIDDEN
 void R::Rcons_vprintf(const char *format, va_list arg)
 {
     char buf[R_BUFSIZE], *p = buf;
@@ -1048,12 +1050,12 @@ void REvprintf(const char *format, va_list arg)
     }
 }
 
-RHIDDEN int Rf_IndexWidth(R_xlen_t n)
+HIDDEN int Rf_IndexWidth(R_xlen_t n)
 {
     return (int) (log10(n + 0.5) + 1);
 }
 
-RHIDDEN void Rf_VectorIndex(R_xlen_t i, int w)
+HIDDEN void Rf_VectorIndex(R_xlen_t i, int w)
 {
 	/* print index label "[`i']" , using total width `w' (left filling blanks) */
 	Rprintf("%*s[%ld]", w - IndexWidth(i) - 2, "", i);

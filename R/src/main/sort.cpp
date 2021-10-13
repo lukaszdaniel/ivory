@@ -19,10 +19,6 @@
  *  https://www.R-project.org/Licenses/
  */
 
-/** @file sort.cpp
- *
- */
-
 #ifdef HAVE_CONFIG_H
 #include <config.h>
 #endif
@@ -239,8 +235,21 @@ Rboolean Rf_isUnsorted(SEXP x, Rboolean strictly)
 								((TYPEOF(x) == INTSXP && FIRST_LAST_DIFF(x, INTEGER)) || \
 								 (TYPEOF(x) == REALSXP && FIRST_LAST_DIFF(x, REAL))))
 
-RHIDDEN SEXP do_isunsorted(SEXP call, SEXP op, SEXP args, SEXP rho)
+HIDDEN SEXP do_isunsorted(SEXP call, SEXP op, SEXP args, SEXP rho)
 {
+    if (length(args) == 2) {
+	/* This allows for old calls of the form
+	   .Internal(is.unsorted(x, strictly)) prior to adding the
+	   na.rm argument in order to match the closure signature to
+	   the signature expected by methods called in
+	   DispatchOrEval. These old calls might have been captured in
+	   closures or S4 generic definitions. This code inserts a
+	   value for the na.rm argument in the list of evaluated
+	   arguments. The first cell of args is protected when
+	   do_isunsorted is called. */
+	SEXP tmp = CONS_NR(R_FalseValue, CDR(args));
+	SETCDR(args, tmp);
+    }
     checkArity(op, args);
 
     SEXP ans, x = CAR(args);
@@ -261,9 +270,10 @@ RHIDDEN SEXP do_isunsorted(SEXP call, SEXP op, SEXP args, SEXP rho)
 	break;
     }
 
+    SEXP strictlyArg = CADDR(args);
     /* right now is.unsorted only tells you if something is sorted ascending
       hopefully someday it will work for descending too */
-    if(!asLogical(CADR(args))) { /*not strict since we don't memoize that */
+    if(!asLogical(strictlyArg)) { /*not strict since we don't memoize that */
 	if(KNOWN_INCR(sorted)) {
 	    UNPROTECT(1);
 	    return ScalarLogical(FALSE);
@@ -279,7 +289,7 @@ RHIDDEN SEXP do_isunsorted(SEXP call, SEXP op, SEXP args, SEXP rho)
 	}
     }
 
-    int strictly = asLogical(CADR(args));
+    int strictly = asLogical(strictlyArg);
     if(strictly == NA_LOGICAL)
 	error(_("invalid '%s' argument"), "strictly");
     if(isVectorAtomic(x)) {
@@ -290,7 +300,7 @@ RHIDDEN SEXP do_isunsorted(SEXP call, SEXP op, SEXP args, SEXP rho)
     if(isObject(x)) {
 	SEXP call;
 	PROTECT(call = 	// R>  .gtn(x, strictly) :
-		lang3(Symbol::obtain(".gtn"), x, CADR(args)));
+		lang3(Symbol::obtain(".gtn"), x, strictlyArg));
 	ans = eval(call, rho);
 	UNPROTECT(2);
 	return ans;
@@ -346,7 +356,7 @@ void R_csort(Rcomplex *x, int n)
 }
 
 /* used in platform.cpp */
-RHIDDEN void R::ssort(String** x, int n)
+HIDDEN void R::ssort(String** x, int n)
 {
     String* v;
     sort_body(scmp,PROTECT,UNPROTECT(1))
@@ -421,7 +431,7 @@ void Rf_revsort(double *a, int *ib, int n)
 }
 
 
-RHIDDEN SEXP do_sort(SEXP call, SEXP op, SEXP args, SEXP rho)
+HIDDEN SEXP do_sort(SEXP call, SEXP op, SEXP args, SEXP rho)
 {
     SEXP ans;
     Rboolean decreasing;
@@ -518,7 +528,7 @@ static int makeSortEnum(int decr, int nalast) {
 }
 
 /* .Internal(sorted_fpass(x, decr, nalast)) */
-RHIDDEN SEXP do_sorted_fpass(SEXP call, SEXP op, SEXP args, SEXP rho)
+HIDDEN SEXP do_sorted_fpass(SEXP call, SEXP op, SEXP args, SEXP rho)
 {
     checkArity(op, args);
 
@@ -800,7 +810,7 @@ static void Psort0(SEXP x, R_xlen_t lo, R_xlen_t hi, R_xlen_t *ind, int nind)
 
 
 /* FUNCTION psort(x, indices) */
-RHIDDEN SEXP do_psort(SEXP call, SEXP op, SEXP args, SEXP rho)
+HIDDEN SEXP do_psort(SEXP call, SEXP op, SEXP args, SEXP rho)
 {
     checkArity(op, args);
     SEXP x = CAR(args), p = CADR(args);
@@ -1183,7 +1193,7 @@ void R_orderVector1(int *indx, int n, SEXP x,
    Also used by do_options and  ../gnuwin32/extra.cpp
    Called with rho != R_NilValue only from do_rank, when NAs are not involved.
  */
-RHIDDEN void R::orderVector1(int *indx, int n, SEXP key, Rboolean nalast, Rboolean decreasing,
+HIDDEN void R::orderVector1(int *indx, int n, SEXP key, Rboolean nalast, Rboolean decreasing,
 	     SEXP rho)
 {
     int c, i, j, h, t, lo = 0, hi = n-1;
@@ -1462,7 +1472,7 @@ static void orderVector1l(R_xlen_t *indx, R_xlen_t n, SEXP key, Rboolean nalast,
 #endif
 
 /* FUNCTION order(...) */
-RHIDDEN SEXP do_order(SEXP call, SEXP op, SEXP args, SEXP rho)
+HIDDEN SEXP do_order(SEXP call, SEXP op, SEXP args, SEXP rho)
 {
     SEXP ap, ans = R_NilValue /* -Wall */;
     int narg = 0;
@@ -1533,7 +1543,7 @@ RHIDDEN SEXP do_order(SEXP call, SEXP op, SEXP args, SEXP rho)
 }
 
 /* FUNCTION: rank(x, length, ties.method) */
-RHIDDEN SEXP do_rank(SEXP call, SEXP op, SEXP args, SEXP rho)
+HIDDEN SEXP do_rank(SEXP call, SEXP op, SEXP args, SEXP rho)
 {
     SEXP rank, x;
     int *ik = nullptr /* -Wall */;
@@ -1632,7 +1642,7 @@ RHIDDEN SEXP do_rank(SEXP call, SEXP op, SEXP args, SEXP rho)
     return rank;
 }
 
-RHIDDEN SEXP do_xtfrm(SEXP call, SEXP op, SEXP args, SEXP rho)
+HIDDEN SEXP do_xtfrm(SEXP call, SEXP op, SEXP args, SEXP rho)
 {
     SEXP fn, prargs, ans;
 

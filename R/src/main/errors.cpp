@@ -243,7 +243,7 @@ void onintrNoResume() { onintrEx(FALSE); }
    These do far more processing than is allowed in a signal handler ....
 */
 
-RHIDDEN void R::onsigusr1(int dummy)
+HIDDEN void R::onsigusr1(int dummy)
 {
     if (R_interrupts_suspended) {
 	/**** ought to save signal and handle after suspend */
@@ -278,7 +278,7 @@ RHIDDEN void R::onsigusr1(int dummy)
 }
 
 
-RHIDDEN void R::onsigusr2(int dummy)
+HIDDEN void R::onsigusr2(int dummy)
 {
     inError = 1;
 
@@ -322,7 +322,7 @@ static void setupwarnings(void)
 int trio_vsnprintf(char *buffer, size_t bufferSize, const char *format,
 		   va_list args);
 
-RHIDDEN
+HIDDEN
 int R::Rvsnprintf_mbcs(char *buf, size_t size, const char *format, va_list ap)
 {
     int val;
@@ -336,7 +336,7 @@ int R::Rvsnprintf_mbcs(char *buf, size_t size, const char *format, va_list ap)
     return val;
 }
 #else
-RHIDDEN
+HIDDEN
 int R::Rvsnprintf_mbcs(char *buf, size_t size, const char *format, va_list ap)
 {
     int val;
@@ -356,7 +356,7 @@ int R::Rvsnprintf_mbcs(char *buf, size_t size, const char *format, va_list ap)
    case the buffer is untouched and thus may not be null-terminated.
 
    Dangerous pattern: `Rsnprintf_mbcs(buf, size - n, )` with maybe n >= size*/
-RHIDDEN
+HIDDEN
 int R::Rsnprintf_mbcs(char *str, size_t size, const char *format, ...)
 {
     int val;
@@ -478,7 +478,7 @@ static int wd(const char *buf)
 #else
 	nw = wcswidth(wc, 2147483647);
 #endif
-	return (nw < 1) ? nc : nw;
+	return (nw < 0) ? nc : nw;
     }
     return nc;
 }
@@ -621,7 +621,7 @@ static void cleanup_PrintWarnings(void *data)
 	inPrintWarnings = 0;
 }
 
-RHIDDEN
+HIDDEN
 void R::PrintWarnings(const char *hdr)
 {
     int i;
@@ -979,7 +979,7 @@ NORET void Rf_errorcall(SEXP call, const char *format, ...)
 
 /* Like errorcall, but copies all data for the error message into a buffer
    before doing anything else. */
-RHIDDEN NORET void R::errorcall_cpy(SEXP call, const char *format, ...)
+HIDDEN NORET void R::errorcall_cpy(SEXP call, const char *format, ...)
 {
 	char buf[BUFSIZE];
 
@@ -992,7 +992,7 @@ RHIDDEN NORET void R::errorcall_cpy(SEXP call, const char *format, ...)
 }
 
 // geterrmessage(): Return (the global) 'errbuf' as R string
-RHIDDEN SEXP do_geterrmessage(SEXP call, SEXP op, SEXP args, SEXP env)
+HIDDEN SEXP do_geterrmessage(SEXP call, SEXP op, SEXP args, SEXP env)
 {
     checkArity(op, args);
     SEXP res = PROTECT(allocVector(STRSXP, 1));
@@ -1150,45 +1150,39 @@ NORET void jump_to_toplevel()
 
 
 /* Called from do_gettext() and do_ngettext() */
-static char * determine_domain_gettext(SEXP domain_, SEXP rho)
+static char * determine_domain_gettext(SEXP domain_)
 {
     const char *domain = "";
     char *buf; // will be returned
 
-    /* The passed rho is ignored because (n)gettext is called through a
-     * helper function in stop.R. And the context is more useful anyhow */
+    /* If cptr->cloenv is not R_GlobalEnv,
+     * ENCLOS(cptr->cloenv) is CLOENV(cptr->callfun) */
+    /* R_findParentContext(cptr, 1)->cloenv == cptr->sysparent */
     if(isNull(domain_)) {
-	RCNTXT *cptr = nullptr;
-	for (cptr = R_GlobalContext; cptr != NULL && cptr->getCallFlag() != CTXT_TOPLEVEL;
-	     cptr = cptr->nextContext())
-	    if (cptr->getCallFlag() & CTXT_FUNCTION) {
-		/* stop() etc have internal call to .makeMessage */
-		const char *cfn = CHAR(STRING_ELT(deparse1s(CAR(cptr->getCall())), 0));
+	RCNTXT *cptr = RContext::R_findParentContext(R_GlobalContext, 1);
+	SEXP rho = cptr ? CLOENV(cptr->getCallFun()) : R_EmptyEnv;
 
-		if(streql(cfn, "stop") || streql(cfn, "warning") || streql(cfn, "message"))
-		    continue;
-		else
-		    break;
+	/* stop() etc have internal call to .makeMessage */
+	/* gettextf calls gettext */
+	if (rho == R_BaseNamespace) {
+	    SEXP call = getCurrentCall(), cfn = CAR(call);
+	    if (TYPEOF(cfn) == SYMSXP && !streql(CHAR(PRINTNAME(cfn)), "ngettext") &&
+		TYPEOF(CADR(call)) == SYMSXP) {
+		cptr = RContext::R_findParentContext(cptr, 1);
+		rho = cptr ? CLOENV(cptr->getCallFun()) : R_EmptyEnv;
 	    }
+	}
 
-	/* First we try to see if sysparent leads us to a namespace, because gettext
-	   might have a different environment due to being called from (in?) a closure.
-	   If that fails we try cloenv, as the original code did. */
-	/* FIXME: should we only do this search when cptr->callflag & CTXT_FUNCTION? */
 	SEXP ns = R_NilValue;
-	for(size_t attempt = 0; attempt < 2 && isNull(ns); attempt++) {
-	    rho = (cptr == nullptr) ?
-		R_EmptyEnv :
-		attempt == 0 ? cptr->getSysParent() : cptr->workingEnvironment();
 	    while(rho != R_EmptyEnv) {
 		if (rho == R_GlobalEnv) break;
 		else if (R_IsNamespaceEnv(rho)) {
 		    ns = R_NamespaceEnvSpec(rho);
 		    break;
 		}
+		if(rho == ENCLOS(rho)) break; // *does* happen
 		rho = ENCLOS(rho);
 	    }
-	}
 	if (!isNull(ns)) {
 	    PROTECT(ns);
 	    domain = translateChar(STRING_ELT(ns, 0));
@@ -1221,7 +1215,7 @@ static char * determine_domain_gettext(SEXP domain_, SEXP rho)
 
 
 /* gettext(domain, string) */
-RHIDDEN SEXP do_gettext(SEXP call, SEXP op, SEXP args, SEXP rho)
+HIDDEN SEXP do_gettext(SEXP call, SEXP op, SEXP args, SEXP rho)
 {
     checkArity(op, args);
 #ifdef ENABLE_NLS
@@ -1232,7 +1226,7 @@ RHIDDEN SEXP do_gettext(SEXP call, SEXP op, SEXP args, SEXP rho)
 
     if(!isString(string)) error(_("invalid '%s' value"), "string");
 
-    char * domain = determine_domain_gettext(CAR(args), rho);
+    char * domain = determine_domain_gettext(CAR(args));
 
     if(domain && strlen(domain)) {
 	SEXP ans = PROTECT(allocVector(STRSXP, n));
@@ -1293,7 +1287,7 @@ RHIDDEN SEXP do_gettext(SEXP call, SEXP op, SEXP args, SEXP rho)
 }
 
 /* ngettext(n, msg1, msg2, domain) */
-RHIDDEN SEXP do_ngettext(SEXP call, SEXP op, SEXP args, SEXP rho)
+HIDDEN SEXP do_ngettext(SEXP call, SEXP op, SEXP args, SEXP rho)
 {
     SEXP msg1 = CADR(args), msg2 = CADDR(args);
     int n = asInteger(CAR(args));
@@ -1306,8 +1300,7 @@ RHIDDEN SEXP do_ngettext(SEXP call, SEXP op, SEXP args, SEXP rho)
 	error(_("'%s' argument must be a character string"), "msg2");
 
 #ifdef ENABLE_NLS
-    SEXP sdom = CADDDR(args);
-    char * domain = determine_domain_gettext(sdom, rho);
+    char * domain = determine_domain_gettext(CADDDR(args));
 
     if(domain && strlen(domain)) {
 	/* libintl seems to malfunction if given a message of "" */
@@ -1325,7 +1318,7 @@ RHIDDEN SEXP do_ngettext(SEXP call, SEXP op, SEXP args, SEXP rho)
 
 
 /* bindtextdomain(domain, dirname) */
-RHIDDEN SEXP do_bindtextdomain(SEXP call, SEXP op, SEXP args, SEXP rho)
+HIDDEN SEXP do_bindtextdomain(SEXP call, SEXP op, SEXP args, SEXP rho)
 {
 #ifdef ENABLE_NLS
     char *res;
@@ -1356,7 +1349,7 @@ static SEXP findCall(void)
 	return R_NilValue;
 }
 
-RHIDDEN NORET SEXP do_stop(SEXP call, SEXP op, SEXP args, SEXP rho)
+HIDDEN NORET SEXP do_stop(SEXP call, SEXP op, SEXP args, SEXP rho)
 {
 /* error(.) : really doesn't return anything; but all do_foo() must be SEXP */
     SEXP c_call;
@@ -1380,7 +1373,7 @@ RHIDDEN NORET SEXP do_stop(SEXP call, SEXP op, SEXP args, SEXP rho)
     /* never called: */
 }
 
-RHIDDEN SEXP do_warning(SEXP call, SEXP op, SEXP args, SEXP rho)
+HIDDEN SEXP do_warning(SEXP call, SEXP op, SEXP args, SEXP rho)
 {
     SEXP c_call;
     checkArity(op, args);
@@ -1417,7 +1410,7 @@ RHIDDEN SEXP do_warning(SEXP call, SEXP op, SEXP args, SEXP rho)
 }
 
 /* Error recovery for incorrect argument count error. */
-RHIDDEN NORET void WrongArgCount(const char *s)
+HIDDEN NORET void WrongArgCount(const char *s)
 {
     error(_("incorrect number of arguments passed to '%s' function"), s);
 }
@@ -1457,7 +1450,7 @@ WarningDB[] = {
 };
 
 
-RHIDDEN NORET void R::ErrorMessage(SEXP call, int which_error, ...)
+HIDDEN NORET void R::ErrorMessage(SEXP call, int which_error, ...)
 {
     int i;
     char buf[BUFSIZE];
@@ -1476,7 +1469,7 @@ RHIDDEN NORET void R::ErrorMessage(SEXP call, int which_error, ...)
     errorcall(call, "%s", buf);
 }
 
-RHIDDEN void R::WarningMessage(SEXP call, int which_warn, ...)
+HIDDEN void R::WarningMessage(SEXP call, int which_warn, ...)
 {
     int i;
     char buf[BUFSIZE];
@@ -1509,7 +1502,7 @@ static void R_PrintDeferredWarnings(void)
 /*
  * Return the traceback without deparsing the calls
  */
-RHIDDEN
+HIDDEN
 SEXP R::R_GetTracebackOnly(int skip)
 {
     int nback = 0, ns = skip;
@@ -1552,7 +1545,7 @@ SEXP R::R_GetTracebackOnly(int skip)
 /*
  * Return the traceback with calls deparsed
  */
-RHIDDEN
+HIDDEN
 SEXP R::R_GetTraceback(int skip)
 {
     int nback = 0;
@@ -1573,7 +1566,7 @@ SEXP R::R_GetTraceback(int skip)
     return u;
 }
 
-RHIDDEN SEXP do_traceback(SEXP call, SEXP op, SEXP args, SEXP rho)
+HIDDEN SEXP do_traceback(SEXP call, SEXP op, SEXP args, SEXP rho)
 {
     int skip;
 
@@ -1750,7 +1743,7 @@ namespace
 	}
 } // namespace
 
-RHIDDEN SEXP R_UnwindHandlerStack(SEXP target)
+HIDDEN SEXP R_UnwindHandlerStack(SEXP target)
 {
     SEXP hs;
 
@@ -1776,7 +1769,7 @@ constexpr R_xlen_t RESULT_SIZE = 4;
 
 static GCRoot<> R_HandlerResultToken(nullptr);
 
-RHIDDEN void R_FixupExitingHandlerResult(SEXP result)
+HIDDEN void R_FixupExitingHandlerResult(SEXP result)
 {
     /* The internal error handling mechanism stores the error message
        in 'errbuf'.  If an on.exit() action is processed while jumping
@@ -1797,7 +1790,7 @@ RHIDDEN void R_FixupExitingHandlerResult(SEXP result)
     }
 }
 
-RHIDDEN SEXP do_addCondHands(SEXP call, SEXP op, SEXP args, SEXP rho)
+HIDDEN SEXP do_addCondHands(SEXP call, SEXP op, SEXP args, SEXP rho)
 {
     SEXP classes, handlers, parentenv, target, oldstack, newstack, result;
     int calling, i, n;
@@ -1844,7 +1837,7 @@ RHIDDEN SEXP do_addCondHands(SEXP call, SEXP op, SEXP args, SEXP rho)
     return oldstack;
 }
 
-RHIDDEN SEXP do_resetCondHands(SEXP call, SEXP op, SEXP args, SEXP rho)
+HIDDEN SEXP do_resetCondHands(SEXP call, SEXP op, SEXP args, SEXP rho)
 {
     checkArity(op, args);
     R_HandlerStack = CAR(args);
@@ -1955,7 +1948,7 @@ static SEXP findConditionHandler(SEXP cond)
 	return R_NilValue;
 }
 
-RHIDDEN SEXP do_signalCondition(SEXP call, SEXP op, SEXP args, SEXP rho)
+HIDDEN SEXP do_signalCondition(SEXP call, SEXP op, SEXP args, SEXP rho)
 {
     SEXP list, cond, msg, ecall, oldstack;
 
@@ -2045,7 +2038,7 @@ static void signalInterrupt(void)
     }
 }
 
-RHIDDEN void RCNTXT::R_InsertRestartHandlers(RCNTXT *cptr, const char *cname)
+HIDDEN void RCNTXT::R_InsertRestartHandlers(RCNTXT *cptr, const char *cname)
 {
     SEXP klass, rho, entry, name;
 
@@ -2072,7 +2065,7 @@ RHIDDEN void RCNTXT::R_InsertRestartHandlers(RCNTXT *cptr, const char *cname)
     UNPROTECT(2);
 }
 
-RHIDDEN SEXP do_dfltWarn(SEXP call, SEXP op, SEXP args, SEXP rho)
+HIDDEN SEXP do_dfltWarn(SEXP call, SEXP op, SEXP args, SEXP rho)
 {
     checkArity(op, args);
 
@@ -2085,7 +2078,7 @@ RHIDDEN SEXP do_dfltWarn(SEXP call, SEXP op, SEXP args, SEXP rho)
     return R_NilValue;
 }
 
-RHIDDEN NORET SEXP do_dfltStop(SEXP call, SEXP op, SEXP args, SEXP rho)
+HIDDEN NORET SEXP do_dfltStop(SEXP call, SEXP op, SEXP args, SEXP rho)
 {
     checkArity(op, args);
 
@@ -2102,7 +2095,7 @@ RHIDDEN NORET SEXP do_dfltStop(SEXP call, SEXP op, SEXP args, SEXP rho)
  * Restart Handling
  */
 
-RHIDDEN SEXP do_getRestart(SEXP call, SEXP op, SEXP args, SEXP rho)
+HIDDEN SEXP do_getRestart(SEXP call, SEXP op, SEXP args, SEXP rho)
 {
     int i;
     SEXP list;
@@ -2134,7 +2127,7 @@ static inline void CHECK_RESTART(SEXP r)
 		error(_("bad restart"));
 }
 
-RHIDDEN SEXP do_addRestart(SEXP call, SEXP op, SEXP args, SEXP rho)
+HIDDEN SEXP do_addRestart(SEXP call, SEXP op, SEXP args, SEXP rho)
 {
 	checkArity(op, args);
 	CHECK_RESTART(CAR(args));
@@ -2167,14 +2160,14 @@ NORET static void invokeRestart(SEXP r, SEXP arglist)
     }
 }
 
-RHIDDEN NORET SEXP do_invokeRestart(SEXP call, SEXP op, SEXP args, SEXP rho)
+HIDDEN NORET SEXP do_invokeRestart(SEXP call, SEXP op, SEXP args, SEXP rho)
 {
 	checkArity(op, args);
 	CHECK_RESTART(CAR(args));
 	invokeRestart(CAR(args), CADR(args));
 }
 
-RHIDDEN SEXP do_addTryHandlers(SEXP call, SEXP op, SEXP args, SEXP rho)
+HIDDEN SEXP do_addTryHandlers(SEXP call, SEXP op, SEXP args, SEXP rho)
 {
 	checkArity(op, args);
 	if (R_GlobalContext == R_ToplevelContext ||
@@ -2185,7 +2178,7 @@ RHIDDEN SEXP do_addTryHandlers(SEXP call, SEXP op, SEXP args, SEXP rho)
 	return R_NilValue;
 }
 
-RHIDDEN SEXP do_seterrmessage(SEXP call, SEXP op, SEXP args, SEXP env)
+HIDDEN SEXP do_seterrmessage(SEXP call, SEXP op, SEXP args, SEXP env)
 {
 	SEXP msg;
 
@@ -2197,14 +2190,14 @@ RHIDDEN SEXP do_seterrmessage(SEXP call, SEXP op, SEXP args, SEXP env)
 	return R_NilValue;
 }
 
-RHIDDEN SEXP do_printDeferredWarnings(SEXP call, SEXP op, SEXP args, SEXP env)
+HIDDEN SEXP do_printDeferredWarnings(SEXP call, SEXP op, SEXP args, SEXP env)
 {
 	checkArity(op, args);
 	R_PrintDeferredWarnings();
 	return R_NilValue;
 }
 
-RHIDDEN SEXP do_interruptsSuspended(SEXP call, SEXP op, SEXP args, SEXP env)
+HIDDEN SEXP do_interruptsSuspended(SEXP call, SEXP op, SEXP args, SEXP env)
 {
 	int orig_value = R_interrupts_suspended;
 	if (args != R_NilValue)
@@ -2212,13 +2205,13 @@ RHIDDEN SEXP do_interruptsSuspended(SEXP call, SEXP op, SEXP args, SEXP env)
 	return ScalarLogical(orig_value);
 }
 
-RHIDDEN void R::R_BadValueInRCode(SEXP value, SEXP call, SEXP rho, const char *rawmsg,
+HIDDEN void R::R_BadValueInRCode(SEXP value, SEXP call, SEXP rho, const char *rawmsg,
                   const char *errmsg, const char *warnmsg,
                   const char *varname, Rboolean warnByDefault)
 {
     /* disable GC so that use of this temporary checking code does not
        introduce new PROTECT errors e.g. in asLogical() use */
-    GCManager::GCInhibitor no_gc;
+	GCManager::GCInhibitor no_gc;
     R_CHECK_THREAD;
 
     int nprotect = 0;
@@ -2605,7 +2598,7 @@ SEXP R_withCallingErrorHandler(SEXP (*body)(void *), void *bdata,
     return val;
 }
 
-RHIDDEN SEXP do_addGlobHands(SEXP call, SEXP op,SEXP args, SEXP rho)
+HIDDEN SEXP do_addGlobHands(SEXP call, SEXP op,SEXP args, SEXP rho)
 {
     SEXP oldstk = R_ToplevelContext->getHandlerStack();
 

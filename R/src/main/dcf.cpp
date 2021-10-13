@@ -17,10 +17,6 @@
  *  https://www.R-project.org/Licenses/
  */
 
-/** @file dcf.cpp
- *
- */
-
 #ifdef HAVE_CONFIG_H
 #include <config.h>
 #endif
@@ -80,7 +76,7 @@ static char *Rconn_getline2(Rconnection con, char *buf, int bufsize)
     return buf;
 }
 
-RHIDDEN SEXP do_readDCF(SEXP call, SEXP op, SEXP args, SEXP env)
+HIDDEN SEXP do_readDCF(SEXP call, SEXP op, SEXP args, SEXP env)
 {
     int nwhat, nret, nc, nr, m, k, lastm, need, i, n_eblanklines = 0;
     bool blank_skip, field_skip = false;

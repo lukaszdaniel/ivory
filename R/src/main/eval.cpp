@@ -575,7 +575,7 @@ SEXP do_Rprof(SEXP args)
 /* NEEDED: A fixup is needed in browser, because it can trap errors,
  *	and currently does not reset the limit to the right value. */
 
-RHIDDEN void check_stack_balance(SEXP op, size_t save)
+HIDDEN void check_stack_balance(SEXP op, size_t save)
 {
 	if (save == ProtectStack::size())
 		return;
@@ -638,7 +638,7 @@ inline static void DECLNK_stack(R_bcstack_t *base)
     R_BCProtTop = base;
 }
 
-RHIDDEN void R_BCProtReset(R_bcstack_t *ptop)
+HIDDEN void R_BCProtReset(R_bcstack_t *ptop)
 {
     DECLNK_stack(ptop);
 }
@@ -829,7 +829,7 @@ SEXP Rf_eval(SEXP e, SEXP rho)
 	return evaluate(e, SEXP_downcast<Environment *>(rho));
 }
 
-RHIDDEN
+HIDDEN
 void R::SrcrefPrompt(const char *prefix, SEXP srcref)
 {
     /* If we have a valid srcref, use it */
@@ -986,7 +986,7 @@ static int MIN_JIT_SCORE = 50;
 
 static struct { unsigned long count, envcount, bdcount; } jit_info = {0, 0, 0};
 
-RHIDDEN void R::R_init_jit_enabled(void)
+HIDDEN void R::R_init_jit_enabled(void)
 {
     /* Need to force the lazy loading promise to avoid recursive
        promise evaluation when JIT is enabled. Might be better to do
@@ -1334,7 +1334,7 @@ inline static Rboolean jit_srcref_match(SEXP cmpsrcref, SEXP srcref)
     return R_compute_identical(cmpsrcref, srcref, 0);
 }
 
-RHIDDEN SEXP R::R_cmpfun1(SEXP fun)
+HIDDEN SEXP R::R_cmpfun1(SEXP fun)
 {
     bool old_visible = Evaluator::resultPrinted();
     SEXP packsym, funsym, call, fcall, val;
@@ -1461,7 +1461,7 @@ static Rboolean R_compileAndExecute(SEXP call, SEXP rho)
     return ans;
 }
 
-RHIDDEN SEXP do_enablejit(SEXP call, SEXP op, SEXP args, SEXP rho)
+HIDDEN SEXP do_enablejit(SEXP call, SEXP op, SEXP args, SEXP rho)
 {
     int old = R_jit_enabled, new_;
     checkArity(op, args);
@@ -1476,7 +1476,7 @@ RHIDDEN SEXP do_enablejit(SEXP call, SEXP op, SEXP args, SEXP rho)
     return ScalarInteger(old);
 }
 
-RHIDDEN SEXP do_compilepkgs(SEXP call, SEXP op, SEXP args, SEXP rho)
+HIDDEN SEXP do_compilepkgs(SEXP call, SEXP op, SEXP args, SEXP rho)
 {
     int old = R_compile_pkgs, new_;
     checkArity(op, args);
@@ -1669,7 +1669,7 @@ inline static void R_CleanupEnvir(SEXP rho, SEXP val)
     }
 }
 
-RHIDDEN void R::unpromiseArgs(SEXP pargs)
+HIDDEN void R::unpromiseArgs(SEXP pargs)
 {
     /* This assumes pargs will no longer be references. We could
        double check the refcounts on pargs as a sanity check. */
@@ -1934,7 +1934,7 @@ SEXP R_forceAndCall(SEXP e, int n, SEXP rho)
     return tmp;
 }
 
-RHIDDEN SEXP do_forceAndCall(SEXP call, SEXP op, SEXP args, SEXP rho)
+HIDDEN SEXP do_forceAndCall(SEXP call, SEXP op, SEXP args, SEXP rho)
 {
     int n = asInteger(eval(CADR(call), rho));
     SEXP e = CDDR(call);
@@ -2168,7 +2168,7 @@ inline static bool BodyHasBraces(SEXP body) { return (isLanguage(body) && CAR(bo
 		}                                                     \
 	} while (0)
 
-RHIDDEN SEXP do_if(SEXP call, SEXP op, SEXP args, SEXP rho)
+HIDDEN SEXP do_if(SEXP call, SEXP op, SEXP args, SEXP rho)
 {
     SEXP Cond, Stmt=R_NilValue;
     int vis=0;
@@ -2225,7 +2225,7 @@ inline static bool SET_BINDING_VALUE2(SEXP bdg__loc, SEXP value, SEXP rho)
 	return true;
 }
 
-RHIDDEN SEXP do_for(SEXP call, SEXP op, SEXP args, SEXP rho)
+HIDDEN SEXP do_for(SEXP call, SEXP op, SEXP args, SEXP rho)
 {
     /* Need to declare volatile variables whose values are relied on
        after for_next or for_break longjmps and might change between
@@ -2379,7 +2379,7 @@ RHIDDEN SEXP do_for(SEXP call, SEXP op, SEXP args, SEXP rho)
 }
 
 
-RHIDDEN SEXP do_while(SEXP call, SEXP op, SEXP args, SEXP rho)
+HIDDEN SEXP do_while(SEXP call, SEXP op, SEXP args, SEXP rho)
 {
     int dbg;
     volatile int bgn;
@@ -2444,7 +2444,7 @@ RHIDDEN SEXP do_while(SEXP call, SEXP op, SEXP args, SEXP rho)
 }
 
 
-RHIDDEN SEXP do_repeat(SEXP call, SEXP op, SEXP args, SEXP rho)
+HIDDEN SEXP do_repeat(SEXP call, SEXP op, SEXP args, SEXP rho)
 {
     int dbg;
     volatile SEXP body;
@@ -2488,20 +2488,20 @@ RHIDDEN SEXP do_repeat(SEXP call, SEXP op, SEXP args, SEXP rho)
 }
 
 
-RHIDDEN NORET SEXP do_break(SEXP call, SEXP op, SEXP args, SEXP rho)
+HIDDEN NORET SEXP do_break(SEXP call, SEXP op, SEXP args, SEXP rho)
 {
     Rf_checkArityCall(op, args, call);
     findcontext(PRIMVAL(op), rho, R_NilValue);
 }
 
 
-RHIDDEN SEXP do_paren(SEXP call, SEXP op, SEXP args, SEXP rho)
+HIDDEN SEXP do_paren(SEXP call, SEXP op, SEXP args, SEXP rho)
 {
     checkArity(op, args);
     return CAR(args);
 }
 
-RHIDDEN SEXP do_begin(SEXP call, SEXP op, SEXP args, SEXP rho)
+HIDDEN SEXP do_begin(SEXP call, SEXP op, SEXP args, SEXP rho)
 {
     SEXP s = R_NilValue;
     if (args != R_NilValue) {
@@ -2526,7 +2526,7 @@ RHIDDEN SEXP do_begin(SEXP call, SEXP op, SEXP args, SEXP rho)
 }
 
 
-RHIDDEN NORET SEXP do_return(SEXP call, SEXP op, SEXP args, SEXP rho)
+HIDDEN NORET SEXP do_return(SEXP call, SEXP op, SEXP args, SEXP rho)
 {
     SEXP v;
 
@@ -2543,7 +2543,7 @@ RHIDDEN NORET SEXP do_return(SEXP call, SEXP op, SEXP args, SEXP rho)
 }
 
 /* Declared with a variable number of args in names.cpp */
-RHIDDEN SEXP do_function(SEXP call, SEXP op, SEXP args, SEXP rho)
+HIDDEN SEXP do_function(SEXP call, SEXP op, SEXP args, SEXP rho)
 {
 	GCStackRoot<> rval;
 	SEXP srcref;
@@ -2647,7 +2647,7 @@ static GCRoot<Symbol> R_Subassign2Sym(nullptr);
 static GCRoot<Symbol> R_DollarGetsSymbol(nullptr);
 static GCRoot<Symbol> R_AssignSym(nullptr);
 
-RHIDDEN void R::R_initAssignSymbols(void)
+HIDDEN void R::R_initAssignSymbols(void)
 {
 	for (auto i = 0; i < NUM_ASYM; i++)
 		asymSymbol[i] = install(asym[i]);
@@ -2944,7 +2944,7 @@ static SEXP applydefine(SEXP call, SEXP op, SEXP args, SEXP rho)
 
 /*  Assignment in its various forms  */
 
-RHIDDEN SEXP do_set(SEXP call, SEXP op, SEXP args, SEXP rho)
+HIDDEN SEXP do_set(SEXP call, SEXP op, SEXP args, SEXP rho)
 {
     SEXP lhs, rhs;
 
@@ -2998,7 +2998,7 @@ inline static void COPY_TAG(SEXP to, SEXP from)
    'n' is the number of arguments already evaluated and hence not
    passed to evalArgs and hence to here.
  */
-RHIDDEN SEXP R::evalList(SEXP el, SEXP rho, SEXP call, int n)
+HIDDEN SEXP R::evalList(SEXP el, SEXP rho, SEXP call, int n)
 {
     SEXP head, tail, ev, h, val;
 
@@ -3086,7 +3086,7 @@ RHIDDEN SEXP R::evalList(SEXP el, SEXP rho, SEXP call, int n)
 /* A slight variation of evaluating each expression in "el" in "rho". */
 
 /* used in evalArgs, arithmetic.cpp, seq.cpp */
-RHIDDEN SEXP R::evalListKeepMissing(SEXP el, SEXP rho)
+HIDDEN SEXP R::evalListKeepMissing(SEXP el, SEXP rho)
 {
     SEXP head, tail, ev, h, val;
 
@@ -3161,7 +3161,7 @@ RHIDDEN SEXP R::evalListKeepMissing(SEXP el, SEXP rho)
 /* form below because it is does not cause growth of the pointer */
 /* protection stack, and because it is a little more efficient. */
 
-RHIDDEN SEXP R::promiseArgs(SEXP el, SEXP rho)
+HIDDEN SEXP R::promiseArgs(SEXP el, SEXP rho)
 {
     SEXP ans, h, tail;
 
@@ -3221,7 +3221,7 @@ RHIDDEN SEXP R::promiseArgs(SEXP el, SEXP rho)
 /* Check that each formal is a symbol */
 
 /* used in coerce.cpp */
-RHIDDEN void R::CheckFormals(SEXP ls)
+HIDDEN void R::CheckFormals(SEXP ls)
 {
 	if (isList(ls))
 	{
@@ -3272,7 +3272,7 @@ inline static SEXP simple_as_environment(SEXP arg)
 /* "eval": Evaluate the first argument
    in the environment specified by the second argument. */
 
-RHIDDEN SEXP do_eval(SEXP call, SEXP op, SEXP args, SEXP rho)
+HIDDEN SEXP do_eval(SEXP call, SEXP op, SEXP args, SEXP rho)
 {
     SEXP encl, x;
     volatile SEXP expr, env, tmp;
@@ -3426,7 +3426,7 @@ RHIDDEN SEXP do_eval(SEXP call, SEXP op, SEXP args, SEXP rho)
 }
 
 /* This is a special .Internal */
-RHIDDEN SEXP do_withVisible(SEXP call, SEXP op, SEXP args, SEXP rho)
+HIDDEN SEXP do_withVisible(SEXP call, SEXP op, SEXP args, SEXP rho)
 {
     SEXP x, nm, ret;
 
@@ -3446,7 +3446,7 @@ RHIDDEN SEXP do_withVisible(SEXP call, SEXP op, SEXP args, SEXP rho)
 }
 
 /* This is a special .Internal */
-RHIDDEN SEXP do_recall(SEXP call, SEXP op, SEXP args, SEXP rho)
+HIDDEN SEXP do_recall(SEXP call, SEXP op, SEXP args, SEXP rho)
 {
     RCNTXT *cptr;
     SEXP s, ans ;
@@ -3500,7 +3500,7 @@ static SEXP evalArgs(SEXP el, SEXP rho, int dropmissing, SEXP call, int n)
  * Differs in that all arguments are evaluated
  * immediately, rather than after the call to R_possible_dispatch.
  */
-RHIDDEN
+HIDDEN
 bool R::DispatchAnyOrEval(SEXP call, SEXP op, const char *generic, SEXP args,
 		      SEXP rho, SEXP *ans, int dropmissing, int argsevald)
 {
@@ -3544,7 +3544,7 @@ bool R::DispatchAnyOrEval(SEXP call, SEXP op, const char *generic, SEXP args,
  * To call this an ugly hack would be to insult all existing ugly hacks
  * at large in the world.
  */
-RHIDDEN
+HIDDEN
 bool R::DispatchOrEval(SEXP call, SEXP op, const char *generic, SEXP args,
 		   SEXP rho, SEXP *ans, int dropmissing, int argsevald)
 {
@@ -3750,7 +3750,7 @@ static SEXP classForGroupDispatch(SEXP obj)
 							 : getAttrib(obj, R_ClassSymbol);
 }
 
-RHIDDEN
+HIDDEN
 bool R::DispatchGroup(const char* group, SEXP call, SEXP op, SEXP args, SEXP rho, SEXP *ans)
 {
     /* pre-test to avoid string computations when there is nothing to
@@ -3952,7 +3952,7 @@ static GCRoot<> R_ConstantsRegistry(nullptr);
 #define THREADED_CODE
 #endif
 
-RHIDDEN void R::R_initialize_bcode(void)
+HIDDEN void R::R_initialize_bcode(void)
 {
   R_AddSym = Symbol::obtain("+");
   R_SubSym = Symbol::obtain("-");
@@ -6618,7 +6618,7 @@ static SEXP R_findBCInterpreterLocation(RCNTXT *cptr, const char *iname)
     return getLocTableElt(relpc, ltable, constants);
 }
 
-RHIDDEN SEXP R_findBCInterpreterSrcref(RCNTXT *cptr)
+HIDDEN SEXP R_findBCInterpreterSrcref(RCNTXT *cptr)
 {
 	return R_findBCInterpreterLocation(cptr, "srcrefsIndex");
 }
@@ -6628,7 +6628,7 @@ static SEXP R_findBCInterpreterExpression()
 	return R_findBCInterpreterLocation(nullptr, "expressionsIndex");
 }
 
-RHIDDEN SEXP R::R_getCurrentSrcref()
+HIDDEN SEXP R::R_getCurrentSrcref()
 {
 	if (R_Srcref != R_InBCInterpreter)
 		return R_Srcref;
@@ -6728,7 +6728,7 @@ static SEXP inflateAssignmentCall(SEXP expr) {
 }
 
 /* Get the current expression being evaluated by the byte-code interpreter. */
-RHIDDEN SEXP R::R_getBCInterpreterExpression()
+HIDDEN SEXP R::R_getBCInterpreterExpression()
 {
     SEXP exp = R_findBCInterpreterExpression();
     if (TYPEOF(exp) == PROMSXP) {
@@ -6778,7 +6778,7 @@ static SEXP markSpecialArgs(SEXP args)
 	return args;
 }
 
-RHIDDEN Rboolean R::R_BCVersionOK(SEXP s)
+HIDDEN Rboolean R::R_BCVersionOK(SEXP s)
 {
 	if (TYPEOF(s) != BCODESXP)
 		return FALSE;
@@ -8121,7 +8121,7 @@ SEXP R::R_bcDecode(SEXP x) { return duplicate(x); }
 /* Add BCODESXP bc into the constants registry, performing a deep copy of the
    bc's constants */
 #define CONST_CHECK_COUNT 1000
-RHIDDEN void R::R_registerBC(SEXP bcBytes, SEXP bcode)
+HIDDEN void R::R_registerBC(SEXP bcBytes, SEXP bcode)
 {
     if (R_check_constants <= 0)
 	return;
@@ -8288,7 +8288,7 @@ static void const_cleanup(void *data)
 
 /* Checks if constants of any registered BCODESXP have been modified.
    Returns TRUE if the constants are ok, otherwise returns false or aborts.*/
-RHIDDEN Rboolean R::R_checkConstants(Rboolean abortOnError)
+HIDDEN Rboolean R::R_checkConstants(Rboolean abortOnError)
 {
     if (R_check_constants <= 0 || R_ConstantsRegistry == nullptr)
 	return TRUE;
@@ -8326,7 +8326,7 @@ RHIDDEN Rboolean R::R_checkConstants(Rboolean abortOnError)
     return constsOK;
 }
 
-RHIDDEN SEXP do_mkcode(SEXP call, SEXP op, SEXP args, SEXP rho)
+HIDDEN SEXP do_mkcode(SEXP call, SEXP op, SEXP args, SEXP rho)
 {
 	SEXP bytes, consts, ans;
 
@@ -8340,7 +8340,7 @@ RHIDDEN SEXP do_mkcode(SEXP call, SEXP op, SEXP args, SEXP rho)
 	return ans;
 }
 
-RHIDDEN SEXP do_bcclose(SEXP call, SEXP op, SEXP args, SEXP rho)
+HIDDEN SEXP do_bcclose(SEXP call, SEXP op, SEXP args, SEXP rho)
 {
 	SEXP forms, body, env;
 
@@ -8365,7 +8365,7 @@ RHIDDEN SEXP do_bcclose(SEXP call, SEXP op, SEXP args, SEXP rho)
 	return mkCLOSXP(forms, body, env);
 }
 
-RHIDDEN SEXP do_is_builtin_internal(SEXP call, SEXP op, SEXP args, SEXP rho)
+HIDDEN SEXP do_is_builtin_internal(SEXP call, SEXP op, SEXP args, SEXP rho)
 {
 	SEXP symbol, i;
 
@@ -8410,7 +8410,7 @@ static SEXP disassemble(SEXP bc)
   return ans;
 }
 
-RHIDDEN SEXP do_disassemble(SEXP call, SEXP op, SEXP args, SEXP rho)
+HIDDEN SEXP do_disassemble(SEXP call, SEXP op, SEXP args, SEXP rho)
 {
 	SEXP code;
 
@@ -8421,7 +8421,7 @@ RHIDDEN SEXP do_disassemble(SEXP call, SEXP op, SEXP args, SEXP rho)
 	return disassemble(code);
 }
 
-RHIDDEN SEXP do_bcversion(SEXP call, SEXP op, SEXP args, SEXP rho)
+HIDDEN SEXP do_bcversion(SEXP call, SEXP op, SEXP args, SEXP rho)
 {
 	checkArity(op, args);
 	SEXP ans = allocVector(INTSXP, 1);
@@ -8480,7 +8480,7 @@ FILE *R_OpenCompiledFile(char *fname, char *buf, size_t bsize)
 }
 #endif
 
-RHIDDEN SEXP do_growconst(SEXP call, SEXP op, SEXP args, SEXP env)
+HIDDEN SEXP do_growconst(SEXP call, SEXP op, SEXP args, SEXP env)
 {
 	SEXP constBuf, ans;
 	int n;
@@ -8498,7 +8498,7 @@ RHIDDEN SEXP do_growconst(SEXP call, SEXP op, SEXP args, SEXP env)
 	return ans;
 }
 
-RHIDDEN SEXP do_putconst(SEXP call, SEXP op, SEXP args, SEXP env)
+HIDDEN SEXP do_putconst(SEXP call, SEXP op, SEXP args, SEXP env)
 {
 	SEXP constBuf, x;
 	int constCount;
@@ -8532,7 +8532,7 @@ RHIDDEN SEXP do_putconst(SEXP call, SEXP op, SEXP args, SEXP env)
 	return ScalarInteger(constCount);
 }
 
-RHIDDEN SEXP do_getconst(SEXP call, SEXP op, SEXP args, SEXP env)
+HIDDEN SEXP do_getconst(SEXP call, SEXP op, SEXP args, SEXP env)
 {
     SEXP constBuf, ans;
     int i, n;
@@ -8652,7 +8652,7 @@ NORET SEXP do_bcprofstop(SEXP call, SEXP op, SEXP args, SEXP env) {
 
 /* end of byte code section */
 
-RHIDDEN SEXP do_setnumthreads(SEXP call, SEXP op, SEXP args, SEXP rho)
+HIDDEN SEXP do_setnumthreads(SEXP call, SEXP op, SEXP args, SEXP rho)
 {
     int old = R_num_math_threads, new_;
     checkArity(op, args);
@@ -8662,7 +8662,7 @@ RHIDDEN SEXP do_setnumthreads(SEXP call, SEXP op, SEXP args, SEXP rho)
     return ScalarInteger(old);
 }
 
-RHIDDEN SEXP do_setmaxnumthreads(SEXP call, SEXP op, SEXP args, SEXP rho)
+HIDDEN SEXP do_setmaxnumthreads(SEXP call, SEXP op, SEXP args, SEXP rho)
 {
     int old = R_max_num_math_threads, new_;
     checkArity(op, args);
@@ -8675,7 +8675,7 @@ RHIDDEN SEXP do_setmaxnumthreads(SEXP call, SEXP op, SEXP args, SEXP rho)
     return ScalarInteger(old);
 }
 
-RHIDDEN SEXP do_returnValue(SEXP call, SEXP op, SEXP args, SEXP rho)
+HIDDEN SEXP do_returnValue(SEXP call, SEXP op, SEXP args, SEXP rho)
 {
     SEXP val;
     checkArity(op, args);

@@ -105,7 +105,7 @@ enum CoercionWarnings
 		}                               \
 	} while (0)
 
-RHIDDEN void R::CoercionWarning(int warn)
+HIDDEN void R::CoercionWarning(int warn)
 {
 /* FIXME: Use
    =====
@@ -121,22 +121,22 @@ RHIDDEN void R::CoercionWarning(int warn)
 		warning(_("out-of-range values treated as 0 in coercion to raw"));
 }
 
-RHIDDEN int R::LogicalFromInteger(int x, int &warn)
+HIDDEN int R::LogicalFromInteger(int x, int &warn)
 {
 	return (x == NA_INTEGER) ? NA_LOGICAL : (x != 0);
 }
 
-RHIDDEN int R::LogicalFromReal(double x, int &warn)
+HIDDEN int R::LogicalFromReal(double x, int &warn)
 {
 	return ISNAN(x) ? NA_LOGICAL : (x != 0);
 }
 
-RHIDDEN int R::LogicalFromComplex(Rcomplex x, int &warn)
+HIDDEN int R::LogicalFromComplex(Rcomplex x, int &warn)
 {
 	return (ISNAN(x.r) || ISNAN(x.i)) ? NA_LOGICAL : (x.r != 0 || x.i != 0);
 }
 
-RHIDDEN int R::LogicalFromString(SEXP x, int &warn)
+HIDDEN int R::LogicalFromString(SEXP x, int &warn)
 {
 	if (x != R_NaString)
 	{
@@ -148,12 +148,12 @@ RHIDDEN int R::LogicalFromString(SEXP x, int &warn)
 	return NA_LOGICAL;
 }
 
-RHIDDEN int R::IntegerFromLogical(int x, int &warn)
+HIDDEN int R::IntegerFromLogical(int x, int &warn)
 {
 	return (x == NA_LOGICAL) ? NA_INTEGER : x;
 }
 
-RHIDDEN int R::IntegerFromReal(double x, int &warn)
+HIDDEN int R::IntegerFromReal(double x, int &warn)
 {
 	if (ISNAN(x))
 		return NA_INTEGER;
@@ -165,7 +165,7 @@ RHIDDEN int R::IntegerFromReal(double x, int &warn)
 	return int(x);
 }
 
-RHIDDEN int R::IntegerFromComplex(Rcomplex x, int &warn)
+HIDDEN int R::IntegerFromComplex(Rcomplex x, int &warn)
 {
 	if (ISNAN(x.r) || ISNAN(x.i))
 		return NA_INTEGER;
@@ -179,7 +179,7 @@ RHIDDEN int R::IntegerFromComplex(Rcomplex x, int &warn)
 	return int(x.r);
 }
 
-RHIDDEN int R::IntegerFromString(SEXP x, int &warn)
+HIDDEN int R::IntegerFromString(SEXP x, int &warn)
 {
     if (x != R_NaString && !isBlankString(CHAR(x))) { /* ASCII */
 	char *endp;
@@ -209,17 +209,17 @@ RHIDDEN int R::IntegerFromString(SEXP x, int &warn)
     return NA_INTEGER;
 }
 
-RHIDDEN double R::RealFromLogical(int x, int &warn)
+HIDDEN double R::RealFromLogical(int x, int &warn)
 {
 	return (x == NA_LOGICAL) ? NA_REAL : x;
 }
 
-RHIDDEN double R::RealFromInteger(int x, int &warn)
+HIDDEN double R::RealFromInteger(int x, int &warn)
 {
-	return (x == NA_INTEGER) ? NA_REAL : x;
+    return (x == NA_INTEGER) ? NA_REAL : x;
 }
 
-RHIDDEN double R::RealFromComplex(Rcomplex x, int &warn)
+HIDDEN double R::RealFromComplex(Rcomplex x, int &warn)
 {
     if (ISNAN(x.r) || ISNAN(x.i))
 	return NA_REAL;
@@ -228,7 +228,7 @@ RHIDDEN double R::RealFromComplex(Rcomplex x, int &warn)
     return x.r;
 }
 
-RHIDDEN double R::RealFromString(SEXP x, int &warn)
+HIDDEN double R::RealFromString(SEXP x, int &warn)
 {
 	double xdouble;
 	char *endp;
@@ -243,7 +243,7 @@ RHIDDEN double R::RealFromString(SEXP x, int &warn)
 	return NA_REAL;
 }
 
-RHIDDEN Rcomplex R::ComplexFromLogical(int x, int &warn)
+HIDDEN Rcomplex R::ComplexFromLogical(int x, int &warn)
 {
 	Rcomplex z;
 	if (x == NA_LOGICAL)
@@ -259,7 +259,7 @@ RHIDDEN Rcomplex R::ComplexFromLogical(int x, int &warn)
 	return z;
 }
 
-RHIDDEN Rcomplex R::ComplexFromInteger(int x, int &warn)
+HIDDEN Rcomplex R::ComplexFromInteger(int x, int &warn)
 {
 	Rcomplex z;
 	if (x == NA_INTEGER)
@@ -275,7 +275,7 @@ RHIDDEN Rcomplex R::ComplexFromInteger(int x, int &warn)
 	return z;
 }
 
-RHIDDEN Rcomplex R::ComplexFromReal(double x, int &warn)
+HIDDEN Rcomplex R::ComplexFromReal(double x, int &warn)
 {
 	Rcomplex z;
 	z.r = x;
@@ -283,7 +283,7 @@ RHIDDEN Rcomplex R::ComplexFromReal(double x, int &warn)
 	return z;
 }
 
-RHIDDEN Rcomplex R::ComplexFromString(SEXP x, int &warn)
+HIDDEN Rcomplex R::ComplexFromString(SEXP x, int &warn)
 {
     double xr, xi;
     Rcomplex z;
@@ -310,7 +310,7 @@ RHIDDEN Rcomplex R::ComplexFromString(SEXP x, int &warn)
     return z;
 }
 
-RHIDDEN SEXP R::StringFromLogical(int x, int &warn)
+HIDDEN SEXP R::StringFromLogical(int x, int &warn)
 {
 	int w;
 	formatLogical(&x, 1, &w);
@@ -323,7 +323,7 @@ RHIDDEN SEXP R::StringFromLogical(int x, int &warn)
 constexpr int SFI_CACHE_SIZE = 512;
 static GCRoot<> sficache(nullptr);
 
-RHIDDEN SEXP R::StringFromInteger(int x, int &warn)
+HIDDEN SEXP R::StringFromInteger(int x, int &warn)
 {
     if (x == NA_INTEGER) return NA_STRING;
     else if (x >= 0 && x < SFI_CACHE_SIZE) {
@@ -349,7 +349,7 @@ RHIDDEN SEXP R::StringFromInteger(int x, int &warn)
 
 // dropTrailing0 and StringFromReal moved to printutils.cpp
 
-RHIDDEN SEXP R::StringFromComplex(Rcomplex x, int &warn)
+HIDDEN SEXP R::StringFromComplex(Rcomplex x, int &warn)
 {
 	int wr, dr, er, wi, di, ei;
 	formatComplex(&x, 1, &wr, &dr, &er, &wi, &di, &ei, 0);
@@ -1410,7 +1410,7 @@ static SEXP ascommon(SEXP call, SEXP u, SEXPTYPE type)
     return u;/* -Wall */
 }
 
-RHIDDEN SEXP do_asCharacterFactor(SEXP call, SEXP op, SEXP args,
+HIDDEN SEXP do_asCharacterFactor(SEXP call, SEXP op, SEXP args,
                                            SEXP rho)
 {
     SEXP x;
@@ -1446,7 +1446,7 @@ SEXP Rf_asCharacterFactor(SEXP x)
 	return ans;
 }
 
-RHIDDEN SEXP do_asatomic(SEXP call, SEXP op, SEXP args, SEXP rho)
+HIDDEN SEXP do_asatomic(SEXP call, SEXP op, SEXP args, SEXP rho)
 {
     SEXP ans, x;
 
@@ -1496,7 +1496,7 @@ RHIDDEN SEXP do_asatomic(SEXP call, SEXP op, SEXP args, SEXP rho)
 
 /* NB: as.vector is used for several other as.xxxx, including
    as.expression, as.list, as.pairlist, as.symbol, (as.single) */
-RHIDDEN SEXP do_asvector(SEXP call, SEXP op, SEXP args, SEXP rho)
+HIDDEN SEXP do_asvector(SEXP call, SEXP op, SEXP args, SEXP rho)
 {
     SEXP x, ans;
     SEXPTYPE type;
@@ -1585,7 +1585,7 @@ RHIDDEN SEXP do_asvector(SEXP call, SEXP op, SEXP args, SEXP rho)
 }
 
 
-RHIDDEN SEXP do_asfunction(SEXP call, SEXP op, SEXP args, SEXP rho)
+HIDDEN SEXP do_asfunction(SEXP call, SEXP op, SEXP args, SEXP rho)
 {
     SEXP arglist, envir;
     int i, n;
@@ -1653,7 +1653,7 @@ static void parse_cleanup(void *data)
 /* primitive,
  * op = 0 : str2lang(s)
  * op = 1 : str2expression(text) */
-RHIDDEN SEXP do_str2lang(SEXP call, SEXP op, SEXP args, SEXP rho) {
+HIDDEN SEXP do_str2lang(SEXP call, SEXP op, SEXP args, SEXP rho) {
     checkArity(op, args);
     // check1arg(args, call, "s");
     args = CAR(args);
@@ -1714,7 +1714,7 @@ RHIDDEN SEXP do_str2lang(SEXP call, SEXP op, SEXP args, SEXP rho) {
 }
 
 /* primitive */
-RHIDDEN SEXP do_ascall(SEXP call, SEXP op, SEXP args, SEXP rho)
+HIDDEN SEXP do_ascall(SEXP call, SEXP op, SEXP args, SEXP rho)
 {
     checkArity(op, args);
     check1arg(args, call, "x");
@@ -1975,7 +1975,7 @@ Rcomplex Rf_asComplex(SEXP x)
 
 
 /* return the type (= "detailed mode") of the SEXP */
-RHIDDEN SEXP do_typeof(SEXP call, SEXP op, SEXP args, SEXP rho)
+HIDDEN SEXP do_typeof(SEXP call, SEXP op, SEXP args, SEXP rho)
 {
     checkArity(op, args);
     return type2rstr(TYPEOF(CAR(args)));
@@ -1984,7 +1984,7 @@ RHIDDEN SEXP do_typeof(SEXP call, SEXP op, SEXP args, SEXP rho)
 /* Define many of the <primitive> "is.xxx" functions :
    Note that  isNull, isNumeric, etc are defined in util.cpp or ../include/Rinlinedfuns.h
 */
-RHIDDEN SEXP do_is(SEXP call, SEXP op, SEXP args, SEXP rho)
+HIDDEN SEXP do_is(SEXP call, SEXP op, SEXP args, SEXP rho)
 {
     SEXP ans;
     checkArity(op, args);
@@ -2155,7 +2155,7 @@ RHIDDEN SEXP do_is(SEXP call, SEXP op, SEXP args, SEXP rho)
  */
 
 // is.vector(x, mode) :
-RHIDDEN SEXP do_isvector(SEXP call, SEXP op, SEXP args, SEXP rho)
+HIDDEN SEXP do_isvector(SEXP call, SEXP op, SEXP args, SEXP rho)
 {
     SEXP a, x;
     const char *stype;
@@ -2229,7 +2229,7 @@ R_INLINE static void copyDimAndNames(SEXP x, SEXP ans)
     }
 }
 
-RHIDDEN SEXP do_isna(SEXP call, SEXP op, SEXP args, SEXP rho)
+HIDDEN SEXP do_isna(SEXP call, SEXP op, SEXP args, SEXP rho)
 {
     SEXP ans, x;
     R_xlen_t n;
@@ -2445,7 +2445,7 @@ static bool anyNA(SEXP call, SEXP op, SEXP args, SEXP env)
     return false;
 } // anyNA()
 
-RHIDDEN SEXP do_anyNA(SEXP call, SEXP op, SEXP args, SEXP rho)
+HIDDEN SEXP do_anyNA(SEXP call, SEXP op, SEXP args, SEXP rho)
 {
     SEXP ans;
     static GCRoot<> do_anyNA_formals(nullptr);
@@ -2476,7 +2476,7 @@ RHIDDEN SEXP do_anyNA(SEXP call, SEXP op, SEXP args, SEXP rho)
 }
 
 
-RHIDDEN SEXP do_isnan(SEXP call, SEXP op, SEXP args, SEXP rho)
+HIDDEN SEXP do_isnan(SEXP call, SEXP op, SEXP args, SEXP rho)
 {
     SEXP ans, x;
     R_xlen_t i, n;
@@ -2528,7 +2528,7 @@ RHIDDEN SEXP do_isnan(SEXP call, SEXP op, SEXP args, SEXP rho)
     return ans;
 }
 
-RHIDDEN SEXP do_isfinite(SEXP call, SEXP op, SEXP args, SEXP rho)
+HIDDEN SEXP do_isfinite(SEXP call, SEXP op, SEXP args, SEXP rho)
 {
     SEXP ans, x, names, dims;
     R_xlen_t i, n;
@@ -2599,7 +2599,7 @@ RHIDDEN SEXP do_isfinite(SEXP call, SEXP op, SEXP args, SEXP rho)
     return ans;
 }
 
-RHIDDEN SEXP do_isinfinite(SEXP call, SEXP op, SEXP args, SEXP rho)
+HIDDEN SEXP do_isinfinite(SEXP call, SEXP op, SEXP args, SEXP rho)
 {
     SEXP ans, x, names, dims;
     double xr, xi;
@@ -2679,7 +2679,7 @@ RHIDDEN SEXP do_isinfinite(SEXP call, SEXP op, SEXP args, SEXP rho)
 }
 
 /* This is a primitive SPECIALSXP */
-RHIDDEN SEXP do_call(SEXP call, SEXP op, SEXP args, SEXP rho)
+HIDDEN SEXP do_call(SEXP call, SEXP op, SEXP args, SEXP rho)
 {
     SEXP rest, evargs, rfun, tmp;
 
@@ -2708,7 +2708,7 @@ RHIDDEN SEXP do_call(SEXP call, SEXP op, SEXP args, SEXP rho)
     return (rfun);
 }
 
-RHIDDEN SEXP do_docall(SEXP call, SEXP op, SEXP args, SEXP rho)
+HIDDEN SEXP do_docall(SEXP call, SEXP op, SEXP args, SEXP rho)
 {
     SEXP c, fun, names, envir;
     int i, n;
@@ -2819,7 +2819,7 @@ SEXP Rf_substitute(SEXP lang, SEXP rho)
 /* Work through a list doing substitute on the
    elements taking particular care to handle '...' */
 
-RHIDDEN SEXP R::substituteList(SEXP el, SEXP rho)
+HIDDEN SEXP R::substituteList(SEXP el, SEXP rho)
 {
     SEXP h, p = R_NilValue, res = R_NilValue;
 
@@ -2872,7 +2872,7 @@ RHIDDEN SEXP R::substituteList(SEXP el, SEXP rho)
 
 
 /* This is a primitive SPECIALSXP */
-RHIDDEN SEXP do_substitute(SEXP call, SEXP op, SEXP args, SEXP rho)
+HIDDEN SEXP do_substitute(SEXP call, SEXP op, SEXP args, SEXP rho)
 {
     SEXP argList, env, s, t;
     static GCRoot<> do_substitute_formals(nullptr);
@@ -2906,7 +2906,7 @@ RHIDDEN SEXP do_substitute(SEXP call, SEXP op, SEXP args, SEXP rho)
 }
 
 /* This is a primitive SPECIALSXP */
-RHIDDEN SEXP do_quote(SEXP call, SEXP op, SEXP args, SEXP rho)
+HIDDEN SEXP do_quote(SEXP call, SEXP op, SEXP args, SEXP rho)
 {
     checkArity(op, args);
     check1arg(args, call, "expr");
@@ -3066,7 +3066,7 @@ static SEXP R_set_class(SEXP obj, SEXP value, SEXP call)
     return obj;
 }
 
-RHIDDEN SEXP R_do_set_class(SEXP call, SEXP op, SEXP args, SEXP env)
+HIDDEN SEXP R_do_set_class(SEXP call, SEXP op, SEXP args, SEXP env)
 {
 	SEXP ans;
 	checkArity(op, args);
@@ -3081,7 +3081,7 @@ RHIDDEN SEXP R_do_set_class(SEXP call, SEXP op, SEXP args, SEXP env)
 }
 
 /* primitive */
-RHIDDEN SEXP do_storage_mode(SEXP call, SEXP op, SEXP args, SEXP env)
+HIDDEN SEXP do_storage_mode(SEXP call, SEXP op, SEXP args, SEXP env)
 {
 /* storage.mode(obj) <- value */
     SEXP obj, value;

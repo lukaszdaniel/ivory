@@ -75,7 +75,7 @@ constexpr size_t R_BCNODESTACKSIZE = 200000;
 #include <R_ext/libextern.h>
 
 #ifdef __MAIN__
-#define extern0 RHIDDEN
+#define extern0 HIDDEN
 #else
 #define extern0 extern
 #endif

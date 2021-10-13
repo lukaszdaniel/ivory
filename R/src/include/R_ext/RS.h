@@ -44,11 +44,6 @@ extern "C" {
 
 /* S Like Error Handling */
 
-// deprecated: postpone removal to Oct 8
-#ifndef R_LEGACY_S_DEFS
-# define R_LEGACY_S_DEFS 1
-#endif
-
 #if !defined STRICT_R_HEADERS && defined R_LEGACY_S_DEFS && R_LEGACY_S_DEFS
 
 #include <R_ext/Error.h>	/* for Rf_error and Rf_warning */
@@ -57,7 +52,6 @@ extern "C" {
 /* Parentheses added for FC4 with gcc4 and -D_FORTIFY_SOURCE=2 */
 #define PROBLEM			{char R_problem_buf[R_PROBLEM_BUFSIZE];(snprintf)(R_problem_buf, R_PROBLEM_BUFSIZE,
 #define MESSAGE                 {char R_problem_buf[R_PROBLEM_BUFSIZE];(snprintf)(R_problem_buf, R_PROBLEM_BUFSIZE,
-#undef ERROR
 #define ERROR			),Rf_error(R_problem_buf);}
 #define RECOVER(x)		),Rf_error(R_problem_buf);}
 #define WARNING(x)		),Rf_warning(R_problem_buf);}

@@ -57,10 +57,6 @@
  *  do_sink moved to connections.cpp as of 1.3.0
  */
 
-/** @file print.cpp
- *
- */
-
 #ifdef HAVE_CONFIG_H
 #include <config.h>
 #endif
@@ -129,7 +125,7 @@ void R::PrintDefaults(void)
     PrintInit(R_print, R_GlobalEnv);
 }
 
-RHIDDEN SEXP do_invisible(SEXP call, SEXP op, SEXP args, SEXP rho)
+HIDDEN SEXP do_invisible(SEXP call, SEXP op, SEXP args, SEXP rho)
 {
 	switch (length(args))
 	{
@@ -145,7 +141,7 @@ RHIDDEN SEXP do_invisible(SEXP call, SEXP op, SEXP args, SEXP rho)
 }
 
 /* This is *only* called via outdated R_level prmatrix() : */
-RHIDDEN SEXP do_prmatrix(SEXP call, SEXP op, SEXP args, SEXP rho)
+HIDDEN SEXP do_prmatrix(SEXP call, SEXP op, SEXP args, SEXP rho)
 {
     int quote;
     SEXP a, x, rowlab, collab, naprint;
@@ -232,7 +228,7 @@ static void advancePrintArgs(SEXP &args, SEXP &prev,
 }
 
 /* .Internal(print.default(x, args, missings)) */
-RHIDDEN SEXP do_printdefault(SEXP call, SEXP op, SEXP args, SEXP rho)
+HIDDEN SEXP do_printdefault(SEXP call, SEXP op, SEXP args, SEXP rho)
 {
     checkArity(op, args);
 
@@ -842,7 +838,7 @@ static void print_cleanup(void *data)
 
  * This is the "dispatching" function for  print.default()
  */
-RHIDDEN void R::PrintValueRec(SEXP s, R_PrintData &data)
+HIDDEN void R::PrintValueRec(SEXP s, R_PrintData &data)
 {
     SEXP t;
 
@@ -1080,7 +1076,7 @@ static void printAttributes(SEXP s, R_PrintData &data, Rboolean useSlots)
 /* Print an S-expression using (possibly) local options.
    This is used for auto-printing from main.cpp */
 
-RHIDDEN void R::PrintValueEnv(SEXP s, SEXP env)
+HIDDEN void R::PrintValueEnv(SEXP s, SEXP env)
 {
 	PrintDefaults();
 	tagbuf[0] = '\0';
@@ -1113,7 +1109,7 @@ void R::R_PV(SEXP s)
 		PrintValueEnv(s, R_GlobalEnv);
 }
 
-RHIDDEN void R::CustomPrintValue(SEXP s, SEXP env)
+HIDDEN void R::CustomPrintValue(SEXP s, SEXP env)
 {
 	tagbuf[0] = '\0';
 
@@ -1132,7 +1128,7 @@ RHIDDEN void R::CustomPrintValue(SEXP s, SEXP env)
 #endif
 extern "C" {
 
-RHIDDEN
+HIDDEN
 #ifdef FC_LEN_T
 void F77_NAME(dblep0) (const char *label, int *nchar, double *data, int *ndata,
 		       const FC_LEN_T label_len)
@@ -1152,7 +1148,7 @@ void F77_NAME(dblep0) (const char *label, int *nchar, double *data, int *ndata)
     if(*ndata > 0) printRealVector(data, *ndata, 1);
 }
 
-RHIDDEN
+HIDDEN
 #ifdef FC_LEN_T
 void F77_NAME(intpr0) (const char *label, int *nchar, int *data, int *ndata,
 		       const FC_LEN_T label_len)
@@ -1173,7 +1169,7 @@ void F77_NAME(intpr0) (const char *label, int *nchar, int *data, int *ndata)
     if(*ndata > 0) printIntegerVector(data, *ndata, 1);
 }
 
-RHIDDEN
+HIDDEN
 #ifdef FC_LEN_T
 void F77_NAME(realp0) (const char *label, int *nchar, float *data, int *ndata,
 		      const FC_LEN_T label_len)
@@ -1231,4 +1227,4 @@ NORET void F77_NAME(xerbla)(const char *srname, int *info)
     error(_("BLAS/LAPACK routine '%6s' gave error code %d"), buf, -(*info));
 }
 
-} // extern "C"
+} //extern "C"

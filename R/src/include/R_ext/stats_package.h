@@ -43,17 +43,17 @@ enum IVPos {AI = 90, AM = 94, ALGSAV = 50, COVMAT = 25,
 	    STATPR = 22, TOOBIG = 1, VNEED = 3, VSAVE = 59,
 	    X0PRT = 23};
 
-RHIDDEN void S_Rf_divset(int alg, int iv[], int liv, int lv, double v[]);
+HIDDEN void S_Rf_divset(int alg, int iv[], int liv, int lv, double v[]);
 
-RHIDDEN void S_nlsb_iterate(double b[], double d[], double dr[], int iv[],
+HIDDEN void S_nlsb_iterate(double b[], double d[], double dr[], int iv[],
 	       int liv, int lv, int n, int nd, int p,
 	       double r[], double rd[], double v[], double x[]);
 
-RHIDDEN void S_nlminb_iterate(double b[], double d[], double fx, double g[],
+HIDDEN void S_nlminb_iterate(double b[], double d[], double fx, double g[],
 		 double h[], int iv[], int liv, int lv, int n,
 		 double v[], double x[]);
 
-RHIDDEN void S_rcont2(int nrow, int ncol, const int nrowt[], const int ncolt[],
+HIDDEN void S_rcont2(int nrow, int ncol, const int nrowt[], const int ncolt[],
 					 int ntotal, const double fact[],
 					 int jwork[], int matrix[]);
 

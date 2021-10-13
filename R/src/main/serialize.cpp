@@ -19,10 +19,6 @@
 
 /* <UTF8> byte-level access is only to compare with chars <= 0x7F */
 
-/** @file serialize.cpp
- *
- */
-
 #ifdef HAVE_CONFIG_H
 #include <config.h>
 #endif
@@ -1467,7 +1463,7 @@ void R_Serialize(SEXP s, R_outpstream_t stream)
 // used in saveload.cpp
 namespace R
 {
-	RHIDDEN int R_ReadItemDepth = 0, R_InitReadItemDepth;
+	HIDDEN int R_ReadItemDepth = 0, R_InitReadItemDepth;
 }
 
 static char lastname[8192] = "<unknown>";
@@ -2692,7 +2688,7 @@ static void con_cleanup(void *data)
    This became public in R 2.13.0, and that version added support for
    connections internally */
 extern "C"
-RHIDDEN SEXP do_serializeToConn(SEXP call, SEXP op, SEXP args, SEXP env)
+HIDDEN SEXP do_serializeToConn(SEXP call, SEXP op, SEXP args, SEXP env)
 {
     /* serializeToConn(object, conn, ascii, version, hook) */
 
@@ -2760,7 +2756,7 @@ RHIDDEN SEXP do_serializeToConn(SEXP call, SEXP op, SEXP args, SEXP env)
    It became public in R 2.13.0, and that version added support for
    connections internally */
 extern "C"
-RHIDDEN SEXP do_unserializeFromConn(SEXP call, SEXP op, SEXP args, SEXP env)
+HIDDEN SEXP do_unserializeFromConn(SEXP call, SEXP op, SEXP args, SEXP env)
 {
     /* 0 .. unserializeFromConn(conn, hook) */
     /* 1 .. serializeInfoFromConn(conn) */
@@ -3065,7 +3061,7 @@ static SEXP R_serialize(SEXP object, SEXP icon, SEXP ascii, SEXP Sversion, SEXP 
 }
 
 
-RHIDDEN SEXP R_unserialize(SEXP icon, SEXP fun)
+HIDDEN SEXP R_unserialize(SEXP icon, SEXP fun)
 {
     struct R_inpstream_st in;
     SEXP (*hook)(SEXP, SEXP);
@@ -3157,7 +3153,7 @@ static char names[NC][PATH_MAX];
 static char *ptr[NC];
 
 extern "C"
-RHIDDEN SEXP do_lazyLoadDBflush(SEXP call, SEXP op, SEXP args, SEXP env)
+HIDDEN SEXP do_lazyLoadDBflush(SEXP call, SEXP op, SEXP args, SEXP env)
 {
     checkArity(op, args);
 
@@ -3360,7 +3356,7 @@ static SEXP R_lazyLoadDBinsertValue(SEXP value, SEXP file, SEXP ascii,
    If the result is a promise, then the promise is forced. */
 
 extern "C"
-RHIDDEN SEXP do_lazyLoadDBfetch(SEXP call, SEXP op, SEXP args, SEXP env)
+HIDDEN SEXP do_lazyLoadDBfetch(SEXP call, SEXP op, SEXP args, SEXP env)
 {
     SEXP key, file, compsxp, hook;
     PROTECT_INDEX vpi;
@@ -3394,14 +3390,14 @@ RHIDDEN SEXP do_lazyLoadDBfetch(SEXP call, SEXP op, SEXP args, SEXP env)
 }
 
 extern "C"
-RHIDDEN SEXP do_getVarsFromFrame(SEXP call, SEXP op, SEXP args, SEXP env)
+HIDDEN SEXP do_getVarsFromFrame(SEXP call, SEXP op, SEXP args, SEXP env)
 {
     checkArity(op, args);
     return R_getVarsFromFrame(CAR(args), CADR(args), CADDR(args));
 }
 
 extern "C"
-RHIDDEN SEXP do_lazyLoadDBinsertValue(SEXP call, SEXP op, SEXP args, SEXP env)
+HIDDEN SEXP do_lazyLoadDBinsertValue(SEXP call, SEXP op, SEXP args, SEXP env)
 {
     checkArity(op, args);
     SEXP value, file, ascii, compsxp, hook;
@@ -3414,7 +3410,7 @@ RHIDDEN SEXP do_lazyLoadDBinsertValue(SEXP call, SEXP op, SEXP args, SEXP env)
 }
 
 extern "C"
-RHIDDEN SEXP do_serialize(SEXP call, SEXP op, SEXP args, SEXP env)
+HIDDEN SEXP do_serialize(SEXP call, SEXP op, SEXP args, SEXP env)
 {
     checkArity(op, args);
     if (PRIMVAL(op) == 2) return R_unserialize(CAR(args), CADR(args));

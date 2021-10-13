@@ -30,7 +30,7 @@
 #include <R_ext/Visibility.h>
 #include <R_ext/stats_package.h>
 
-RHIDDEN void S_Rf_divset(int alg, int iv[], int liv, int lv, double v[])
+HIDDEN void S_Rf_divset(int alg, int iv[], int liv, int lv, double v[])
 {
     static void(*fun)(int,int[],int,int,double[]) = NULL;
     if (fun == NULL)
@@ -39,7 +39,7 @@ RHIDDEN void S_Rf_divset(int alg, int iv[], int liv, int lv, double v[])
     fun(alg, iv, liv, lv, v);
 }
 
-RHIDDEN void S_nlminb_iterate(double b[], double d[], double fx, double g[], double h[],
+HIDDEN void S_nlminb_iterate(double b[], double d[], double fx, double g[], double h[],
 		 int iv[], int liv, int lv, int n, double v[], double x[])
 {
     static void(*fun)(double[],double[],double,double[],double[],
@@ -51,7 +51,7 @@ RHIDDEN void S_nlminb_iterate(double b[], double d[], double fx, double g[], dou
     fun(b, d, fx, g, h, iv, liv, lv, n, v, x);
 }
 
-RHIDDEN void S_nlsb_iterate(double b[], double d[], double dr[], int iv[], int liv,
+HIDDEN void S_nlsb_iterate(double b[], double d[], double dr[], int iv[], int liv,
 	       int lv, int n, int nd, int p, double r[], double rd[],
 	       double v[], double x[])
 {
@@ -66,7 +66,7 @@ RHIDDEN void S_nlsb_iterate(double b[], double d[], double dr[], int iv[], int l
     fun(b, d, dr, iv, liv, lv, n, nd, p, r, rd, v, x);
 }
 
-RHIDDEN void S_rcont2(int nrow, int ncol, const int nrowt[], const int ncolt[],
+HIDDEN void S_rcont2(int nrow, int ncol, const int nrowt[], const int ncolt[],
          int ntotal, const double fact[],
 	 int jwork[], int matrix[])
 {

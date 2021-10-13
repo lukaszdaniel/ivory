@@ -1486,3 +1486,9 @@ rep.difftime <- function(x, ...)
         units(value) <- units(x)
     NextMethod("[<-")
 }
+
+## Added in 4.2.0.
+
+as.vector.POSIXlt <- function(x, mode = "any")
+    as.vector(as.list(x), mode)
+    

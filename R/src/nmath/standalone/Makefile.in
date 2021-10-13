@@ -11,7 +11,6 @@ subdir = src/nmath/standalone
 include $(top_builddir)/Makeconf
 ## avoid LTO and OpenMP
 CFLAGS = @CFLAGS@
-CXXFLAGS = @CXXFLAGS@
 R_OPENMP_CFLAGS =
 
 SOURCES_NMATH = \
@@ -135,7 +134,7 @@ $(libRmath_la): $(libRmath_la_OBJECTS)
 	$(DYLIB_LINK) -o $@ $(libRmath_la_LDFLAGS) $(libRmath_la_OBJECTS) $(LIBM)
 
 test: $(srcdir)/test.cpp
-	$(CXX) -o $@ $(ALL_CXXFLAGS) $(ALL_CPPFLAGS) $(srcdir)/test.cpp \
+	$(CXX) -o $@ $(ALL_CPPFLAGS) $(ALL_CFLAGS) $(srcdir)/test.cpp \
 	  -L. -lRmath $(LIBM)
 
 install: installdirs install-header @WANT_R_FRAMEWORK_FALSE@ install-pc

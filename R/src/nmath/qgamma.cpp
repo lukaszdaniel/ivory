@@ -46,7 +46,7 @@
 #define DEBUG_q
 #endif
 
-RHIDDEN
+HIDDEN
 double Rf_qchisq_appr(double p, double nu, double g /* = log Gamma(nu/2) */,
 		   int lower_tail, int log_p, double tol /* EPS1 */)
 {
