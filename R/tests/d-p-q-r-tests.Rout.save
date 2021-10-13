@@ -1,9 +1,9 @@
 
-Ivory Under development (unstable) (2021-09-05 r1640) -- "Internationalized Version of R"
+Ivory Under development (unstable) (2021-10-13 r1646) -- "Internationalized Version of R"
 Copyright (C) 2013-2021 Lukasz Daniel (lukasz.daniel@gmail.com)
 See README-IVORY file for details.
 
-R Under development (unstable) (2021-09-05 r80859) -- "Unsuffered Consequences"
+R Under development (unstable) (2021-10-13 r81050) -- "Unsuffered Consequences"
 Copyright (C) 2021 The R Foundation for Statistical Computing
 Platform: x86_64-pc-linux-gnu (64-bit)
 
@@ -115,13 +115,13 @@ Type 'q()' to quit R.
 + }
 m= 10 ; n= 7 :
 Time    user  system elapsed 
-Time   0.023   0.000   0.023 
+Time   0.026   0.000   0.026 
 m= 15 ; n= 0 :
 Time    user  system elapsed 
 Time    0.01    0.00    0.01 
 m= 999 ; n= 0 :
 Time    user  system elapsed 
-Time   0.552   0.007   0.560 
+Time   0.521   0.008   0.529 
 > 
 > ##__ 4. Negative Binomial __
 > 
@@ -327,7 +327,7 @@ Time   0.552   0.007   0.560
 > 
 > ## Log norm
 > stopifnot(All.eq(pz, plnorm(exp(z))))
-> 
+> 
 > 
 > ###==========  p <-> q	Inversion consistency =====================
 > ok <- 1e-5 < pz & pz < 1 - 1e-5
@@ -885,5 +885,5 @@ Time   0.552   0.007   0.560
 > ## ==        ~~~                    ~~~~  ~~~               ~~~~~~~~~~~~~~~
 > 
 > cat("Time elapsed: ", proc.time() - .ptime,"\n")
-Time elapsed:  3.811 0.024 3.835 0 0 
+Time elapsed:  3.842 0.035 3.877 0 0 
 > 

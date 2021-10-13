@@ -78,7 +78,7 @@ abbreviate chartr make.names strtrim tolower toupper give error.
 
 #define R_NO_REMAP
 
-/* Used to indicate that we can safely converted marked UTF-8 strings
+/* Used to indicate that we can safely convert marked UTF-8 strings
    to wchar_t* -- not currently used.
 */
 #if defined(_WIN32) || defined(__STDC_ISO_10646__) || defined(__APPLE__) || defined(__FreeBSD__) || defined(__sun)
@@ -722,6 +722,8 @@ HIDDEN SEXP do_substrgets(SEXP call, SEXP op, SEXP args, SEXP env)
 	}
 	cbuff.R_FreeStringBufferL();
     }
+    SHALLOW_DUPLICATE_ATTRIB(s, x);
+    /* This copied the class, if any */
     UNPROTECT(1);
     return s;
 }

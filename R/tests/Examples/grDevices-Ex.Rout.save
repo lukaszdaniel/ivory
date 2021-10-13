@@ -1,9 +1,9 @@
 
-Ivory Under development (unstable) (2021-09-05 r1640) -- "Internationalized Version of R"
+Ivory Under development (unstable) (2021-10-13 r1646) -- "Internationalized Version of R"
 Copyright (C) 2013-2021 Lukasz Daniel (lukasz.daniel@gmail.com)
 See README-IVORY file for details.
 
-R Under development (unstable) (2021-09-05 r80859) -- "Unsuffered Consequences"
+R Under development (unstable) (2021-10-13 r81050) -- "Unsuffered Consequences"
 Copyright (C) 2021 The R Foundation for Statistical Computing
 Platform: x86_64-pc-linux-gnu (64-bit)
 
@@ -3542,15 +3542,15 @@ attr(,"class")
 > ## time-dependent ==> ignore diffs:
 > ## IGNORE_RDIFF_BEGIN
 > pretty(Sys.Date())
-[1] "2021-09-07" "2021-09-08" "2021-09-09" "2021-09-10" "2021-09-11"
-[6] "2021-09-12"
+[1] "2021-10-11" "2021-10-12" "2021-10-13" "2021-10-14" "2021-10-15"
+[6] "2021-10-16"
 > pretty(Sys.time(), n = 10)
- [1] "2021-09-09 19:00:13 CEST" "2021-09-09 19:00:14 CEST"
- [3] "2021-09-09 19:00:15 CEST" "2021-09-09 19:00:16 CEST"
- [5] "2021-09-09 19:00:17 CEST" "2021-09-09 19:00:18 CEST"
- [7] "2021-09-09 19:00:19 CEST" "2021-09-09 19:00:20 CEST"
- [9] "2021-09-09 19:00:21 CEST" "2021-09-09 19:00:22 CEST"
-[11] "2021-09-09 19:00:23 CEST"
+ [1] "2021-10-13 18:08:02 CEST" "2021-10-13 18:08:03 CEST"
+ [3] "2021-10-13 18:08:04 CEST" "2021-10-13 18:08:05 CEST"
+ [5] "2021-10-13 18:08:06 CEST" "2021-10-13 18:08:07 CEST"
+ [7] "2021-10-13 18:08:08 CEST" "2021-10-13 18:08:09 CEST"
+ [9] "2021-10-13 18:08:10 CEST" "2021-10-13 18:08:11 CEST"
+[11] "2021-10-13 18:08:12 CEST"
 > ## IGNORE_RDIFF_END
 > 
 > pretty(as.Date("2000-03-01")) # R 1.0.0 came in a leap year
@@ -4330,7 +4330,7 @@ $zlab
 > cleanEx()
 > options(digits = 7L)
 > base::cat(gettext("Time elapsed: ", domain = "R-base"), proc.time() - base::get("ptime", pos = 'CheckExEnv'),"\n")
-Time elapsed:  57.375 1.333 57.31 0 0 
+Time elapsed:  58.696 1.412 58.628 0 0 
 > grDevices::dev.off()
 null device 
           1 

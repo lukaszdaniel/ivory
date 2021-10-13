@@ -1,9 +1,9 @@
 
-Ivory Under development (unstable) (2021-09-05 r1640) -- "Internationalized Version of R"
+Ivory Under development (unstable) (2021-10-13 r1646) -- "Internationalized Version of R"
 Copyright (C) 2013-2021 Lukasz Daniel (lukasz.daniel@gmail.com)
 See README-IVORY file for details.
 
-R Under development (unstable) (2021-09-05 r80859) -- "Unsuffered Consequences"
+R Under development (unstable) (2021-10-13 r81050) -- "Unsuffered Consequences"
 Copyright (C) 2021 The R Foundation for Statistical Computing
 Platform: x86_64-pc-linux-gnu (64-bit)
 
@@ -1043,7 +1043,7 @@ Female Yes                89  17 202 131  94  24
 Asserted error: some 'x' not counted; maybe 'breaks' do not span range of 'x'
 > ## The default fuzz in hist.default()  "kills" this, with a "wrong" message:
 > try ( hist(brks[-13] + 1, brks, include.lowest = FALSE) )
-Error in hist.default(unclass(x), unclass(breaks), plot = FALSE, warn.unused = FALSE,  : 
+Error in command 'hist.default(unclass(x), unclass(breaks), plot = FALSE, warn.unused = FALSE, right = right, ': 
   some 'x' not counted; maybe 'breaks' do not span range of 'x'
 > ## and decreasing 'fuzz' solves the issue:
 > hb <- hist(brks[-13] + 1, brks, include.lowest = FALSE, fuzz = 1e-10)
@@ -2178,7 +2178,7 @@ N
 > points.default # to see how it calls "plot.xy(xy.coords(x, y), ...)"
 function (x, y = NULL, type = "p", ...) 
 plot.xy(xy.coords(x, y), type = type, ...)
-<bytecode: 0x5558cf267480>
+<bytecode: 0x26bbba0>
 <environment: namespace:graphics>
 > 
 > 
@@ -3048,7 +3048,7 @@ function (xy = 1, warn.log = TRUE)
     u <- par("usr")
     xy * c(u[2L] - u[1L], u[4L] - u[3L])/par("pin")
 }
-<bytecode: 0x5558d2bfb180>
+<bytecode: 0x5fe4780>
 <environment: namespace:graphics>
 > 
 > ## plot labels offset 0.12 inches to the right
@@ -3129,7 +3129,7 @@ function (xy = 1, warn.log = TRUE)
 > cleanEx()
 > options(digits = 7L)
 > base::cat(gettext("Time elapsed: ", domain = "R-base"), proc.time() - base::get("ptime", pos = 'CheckExEnv'),"\n")
-Time elapsed:  10.557 0.302 10.454 0 0 
+Time elapsed:  11.295 0.367 11.248 0 0 
 > grDevices::dev.off()
 null device 
           1 

@@ -1,9 +1,9 @@
 
-Ivory Under development (unstable) (2021-09-05 r1640) -- "Internationalized Version of R"
+Ivory Under development (unstable) (2021-10-13 r1646) -- "Internationalized Version of R"
 Copyright (C) 2013-2021 Lukasz Daniel (lukasz.daniel@gmail.com)
 See README-IVORY file for details.
 
-R Under development (unstable) (2021-09-05 r80859) -- "Unsuffered Consequences"
+R Under development (unstable) (2021-10-13 r81050) -- "Unsuffered Consequences"
 Copyright (C) 2021 The R Foundation for Statistical Computing
 Platform: x86_64-pc-linux-gnu (64-bit)
 
@@ -3987,7 +3987,7 @@ sigma^2 estimated as 0.4566:  log likelihood = -101.2,  aic = 212.4
 > 
 > asOneSidedFormula("age")
 ~age
-<environment: 0x56226e9901e0>
+<environment: 0x5c216c0>
 > asOneSidedFormula(~ age)
 ~age
 > 
@@ -5024,7 +5024,7 @@ function (V)
     r[cbind(seq_len(p), seq_len(p))] <- 1
     r
 }
-<bytecode: 0x562272b82cc0>
+<bytecode: 0xa2865a0>
 <environment: namespace:stats>
 > stopifnot(all.equal(Cl, cov2cor(cov(longley))),
 +           all.equal(cor(longley, method = "kendall"),
@@ -7541,8 +7541,8 @@ alternative hypothesis: two.sided
 > # Exactly the same p-value, as Cochran's conditions are never met:
 > fisher.test(MP6, hybrid=TRUE)
 
-	Fisher's Exact Test for Count Data hybrid using asym.chisq. iff
-	(exp=5, perc=80, Emin=1)
+	Fisher's Exact Test for Count Data hybrid using asym.chisq. iff (exp=5,
+	perc=80, Emin=1)
 
 data: MP6
 p-value = 0.03929
@@ -7649,7 +7649,7 @@ attr(,".Environment")
 > environment(as.formula("y ~ x"))
 <environment: R_GlobalEnv>
 > environment(as.formula("y ~ x", env = new.env()))
-<environment: 0x562273b25d20>
+<environment: 0xb21f420>
 > 
 > 
 > ## Create a formula for a model with a large number of variables:
@@ -11145,7 +11145,9 @@ Consider specifying 'start' or using a selfStart model
 > o2 <- options(digits = 10) # more accuracy for 'trace'
 > ## central differencing works here typically (PR#18165: not converging on *some*):
 > ctr2 <- nls.control(nDcentral=TRUE, tol = 8e-8, # <- even smaller than above
-+    warnOnly = (grepl("^aarch64.*linux", R.version$platform) && grepl("^NixOS", osVersion)
++    warnOnly =
++         TRUE || # << work around; e.g. needed on some ATLAS-Lapack setups
++         (grepl("^aarch64.*linux", R.version$platform) && grepl("^NixOS", osVersion)
 +               ))
 > (nlm2 <- update(nlmod, control = ctr2, trace = TRUE)); options(o2)
 Warning in command 'nls(formula = y ~ Const + A * exp(B * x), algorithm = "default", control = ctr2, ':
@@ -12460,14 +12462,14 @@ attr(,"class")
 $linkfun
 function (mu) 
 mu^lambda
-<bytecode: 0x56227516e480>
-<environment: 0x56227519a4e0>
+<bytecode: 0xcb8dd80>
+<environment: 0xcbbcae0>
 
 $linkinv
 function (eta) 
 pmax(eta^(1/lambda), .Machine$double.eps)
-<bytecode: 0x56227516ed20>
-<environment: 0x56227519a4e0>
+<bytecode: 0xcb8e2a0>
+<environment: 0xcbbcae0>
 
 > 
 > 
@@ -14376,8 +14378,7 @@ proportion
 > patients <- c( 86, 93, 136, 82 )
 > prop.test(smokers, patients)
 
-	4-sample test for equality of proportions without continuity
-	correction
+	4-sample test for equality of proportions without continuity correction
 
 data: smokers out of patients
 X-squared = 12.6, df = 3, p-value = 0.005585
@@ -14406,8 +14407,7 @@ sample estimates:
 > patients <- c( 86, 93, 136, 82 )
 > prop.test(smokers, patients)
 
-	4-sample test for equality of proportions without continuity
-	correction
+	4-sample test for equality of proportions without continuity correction
 
 data: smokers out of patients
 X-squared = 12.6, df = 3, p-value = 0.005585
@@ -16732,8 +16732,8 @@ Step function with continuity 'f'=0.2, 3 knots at:
 > unclass(sfun0)
 function (v) 
 .approxfun(x, y, v, method, yleft, yright, f, na.rm)
-<bytecode: 0x56226e109540>
-<environment: 0x5622730c7420>
+<bytecode: 0x58029c0>
+<environment: 0xb0ea600>
 attr(,"call")
 stepfun(1:3, y0, f = 0)
 > ls(envir = environment(sfun0))
@@ -19169,7 +19169,7 @@ Number of Fisher Scoring iterations: 6
 > cleanEx()
 > options(digits = 7L)
 > base::cat(gettext("Time elapsed: ", domain = "R-base"), proc.time() - base::get("ptime", pos = 'CheckExEnv'),"\n")
-Time elapsed:  51.686 15.431 37.272 0 0 
+Time elapsed:  55.009 15.373 40.513 0 0 
 > grDevices::dev.off()
 null device 
           1 

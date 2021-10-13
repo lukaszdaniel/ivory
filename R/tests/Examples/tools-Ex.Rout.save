@@ -1,9 +1,9 @@
 
-Ivory Under development (unstable) (2021-09-05 r1640) -- "Internationalized Version of R"
+Ivory Under development (unstable) (2021-10-13 r1646) -- "Internationalized Version of R"
 Copyright (C) 2013-2021 Lukasz Daniel (lukasz.daniel@gmail.com)
 See README-IVORY file for details.
 
-R Under development (unstable) (2021-09-05 r80859) -- "Unsuffered Consequences"
+R Under development (unstable) (2021-10-13 r81050) -- "Unsuffered Consequences"
 Copyright (C) 2021 The R Foundation for Statistical Computing
 Platform: x86_64-pc-linux-gnu (64-bit)
 
@@ -211,7 +211,7 @@ Error in command 'assertWarning(ff())':
 > bibstyle("unsorted", sortKeys = function(refs) seq_along(refs),
 +     fmtPrefix = function(paper) paste0("[", paper$.index, "]"),
 +        .init = TRUE)
-<environment: 0x55bd83ae8840>
+<environment: 0x69a69c0>
 > print(refs, .bibstyle = "unsorted")
 [1] R Core Team (2013). _R: A Language and Environment for Statistical
 Computing_. R Foundation for Statistical Computing, Vienna, Austria.
@@ -1050,7 +1050,9 @@ List of 5 components
 > 
 > ### ** Examples
 > ## Don't run: 
-> ##D ## in a source-directory build of R:
+> ##D ## in a source-directory build (not typical!) of R;
+> ##D ## otherwise, download and unpack the R sources, and replace
+> ##D ## R.home()  by  "<my_path_to_source_R>" :
 > ##D xgettext(file.path(R.home(), "src", "library", "splines"))
 > ## End (Don't run)
 > 
@@ -1060,7 +1062,7 @@ List of 5 components
 > cleanEx()
 > options(digits = 7L)
 > base::cat(gettext("Time elapsed: ", domain = "R-base"), proc.time() - base::get("ptime", pos = 'CheckExEnv'),"\n")
-Time elapsed:  1.036 0.004 1.041 0 0 
+Time elapsed:  1.221 0.027 1.251 0 0 
 > grDevices::dev.off()
 null device 
           1 
